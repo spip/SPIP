@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'D&agrave;ida&nbsp;! Aquela rubrica conten @contient_breves@ br&egrave;va@scb@&nbsp;: se la despla&ccedil;atz, vorgatz ben faire una taca dins aquela casa de confirmacion.',
 'avis_destinataire_obligatoire' => 'Dev&egrave;tz indicar un destinatari denant de mandar aqueu messatge.',
 'avis_erreur_connexion_mysql' => 'Error de conexion SQL',
-'avis_erreur_version_archive' => '<b>D&agrave;ida&nbsp;! Lo fichier @archive@ correspoande &agrave; una autra version de SPIP qu\'aquela qu\'av&egrave;tz installada.</b> Anatz v&egrave;rs de b&egrave;li dificultats&nbsp;: risca de destruccion de la voastra basa de donadas, disfoncionaments div&egrave;rs dau sit eca. Non validetz aquela demanda d\'importacion.<p /> Per mai d\'informacions, vegu&egrave;tz
+'avis_erreur_version_archive' => '<MODIF><b>D&agrave;ida&nbsp;! Lo fichier @archive@ correspoande &agrave; una autra version de SPIP qu\'aquela qu\'av&egrave;tz installada.</b> Anatz v&egrave;rs de b&egrave;li dificultats&nbsp;: risca de destruccion de la voastra basa de donadas, disfoncionaments div&egrave;rs dau sit eca. Non validetz aquela demanda d\'importacion.<p /> Per mai d\'informacions, vegu&egrave;tz
 <a href="@spipnet@">
 la documentacion de SPIP</a>.',
 'avis_espace_interdit' => '<b>Espaci pro&iuml;bit</b><div>SPIP es ja installat.</div>',
@@ -189,7 +189,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 
 // I
 'ical_info1' => 'Aquela p&agrave;gina m&ograve;stra de met&ograve;des diferents per restar en contacte emb la vida d\'aqueu sit.',
-'ical_info2' => 'Per aver mai d\'informacions sobre aquelas tecnicas, esitetz pas da consultar <a href="@spipnet@">la documentacion de SPIP</a>.',
+'ical_info2' => '<MODIF>Per aver mai d\'informacions sobre aquelas tecnicas, esitetz pas da consultar <a href="@spipnet@">la documentacion de SPIP</a>.',
 'ical_info_calendrier' => 'Li a doi calendiers &agrave; la voastra disposicion. Lo promier es un plan dau sit qu\'anon&ccedil;a toi lu articles publicats. Lo segond conten lu anoncis editoriaus en mai dei voastres darri&egrave;rs messatges privats&nbsp;: vos es reservat gra&ccedil;as &agrave; una clau personala, que la pod&egrave;tz modificar en tot moment en renovelant lo voastre m&ograve;t de santa Clara.',
 'ical_lien_rss_breves' => 'Sindicacion dei br&egrave;vas dau sit',
 'ical_methode_http' => 'Telecargament',
@@ -899,7 +899,7 @@ una color indica lo sieu estat&nbsp;:',
  incl&uacute;s <i>toi</i> lu acc&egrave;s redactors e administrators. Un c&ograve;up que l\'auretz executada, auretz de tornar lan&ccedil;ar l\'installacion de SPIP per tornar crear una basa nov&egrave;la coma pura un promi&egrave;r acc&egrave;s administrator.',
 'texte_admin_effacer_stats' => '<NEW>Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
 'texte_admin_tech_01' => 'Aquela opcion vos permete de sauvagardar lo contengut de la basa dins un fichier que ser&agrave; conservat dins lo repert&ograve;ri @dossier@. Oblidetz pas manco de recuperar l\'integralitat dau repert&ograve;ri @img@, que conten lu imatges e lu documents utilisats dins lu articles e rubricas.',
-'texte_admin_tech_02' => 'M&egrave;fi: aquela sauvagarda si podr&agrave; restaurar SOLAMENT dins un sit installat m&eacute; la mema version de SPIP. Cau sobretot pas &laquo;&nbsp;vuar la basa&nbsp;&raquo; en esperar tornar installar la sauvagarda apr&egrave;s una mesa a jorn... Consultatz la <a href="@spipnet@">la documentacion de SPIP</a>.',
+'texte_admin_tech_02' => '<MODIF>M&egrave;fi: aquela sauvagarda si podr&agrave; restaurar SOLAMENT dins un sit installat m&eacute; la mema version de SPIP. Cau sobretot pas &laquo;&nbsp;vuar la basa&nbsp;&raquo; en esperar tornar installar la sauvagarda apr&egrave;s una mesa a jorn... Consultatz la <a href="@spipnet@">la documentacion de SPIP</a>.',
 'texte_admin_tech_03' => 'Pod&egrave;tz chausir de sauvagardar lo fichier sota forma comprimida, per fin
  d\'abrivar lo sieu transferiment dau voastre &ograve; sus un servidor de sauvagardas, e per fin d\'esparnhar d\'espaci disc.',
 'texte_admin_tech_04' => '<NEW>Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ',

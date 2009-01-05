@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Peringatan! Bagian ini mengandung @contient_breves@ berita@scb@: jika anda memindahkannya, silakan cek kotak ini untuk konfirmasi.',
 'avis_destinataire_obligatoire' => 'Anda harus memilih satu orang penerima sebelum mengirimkan pesan ini.',
 'avis_erreur_connexion_mysql' => 'Kesalahan koneksi SQL',
-'avis_erreur_version_archive' => '<b>Peringatan! Berkas @archive@ berkaitan dengan
+'avis_erreur_version_archive' => '<MODIF><b>Peringatan! Berkas @archive@ berkaitan dengan
     sebuah versi SPIP yang lain dengan yang anda
     miliki.</b> Anda akan mengalami sejumlah
     kesulitan: risiko untuk merusak database anda,
@@ -183,7 +183,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Halaman ini memberikan sejumlah metode untuk mengetahui dan berhubungan dengan aktivitas situs ini.',
-'ical_info2' => 'Untuk informasi lebih lanjut, jangan segan-segan untuk mengunjungi <a href="@spipnet@">dokumentasi SPIP</a>.',
+'ical_info2' => '<MODIF>Untuk informasi lebih lanjut, jangan segan-segan untuk mengunjungi <a href="@spipnet@">dokumentasi SPIP</a>.',
 'ical_info_calendrier' => 'Dua kalender berada di tangan anda siap untuk dipakai. Yang pertama adalah peta situs yang menampilkan semua artikel yang dipublikasi. Yang kedua berisikan pengumuman editorial sekaligus pesan-pesan pribadi terbaru anda: semuanya dapat disimpan berkat kunci pribadi yang bisa anda modifikasi setiap saat dengan jalan memperbaharui kata sandi.',
 'ical_lien_rss_breves' => 'Sindikasi artikel berita situs',
 'ical_methode_http' => 'Mengunduh',
@@ -798,7 +798,7 @@ dalam warna yang menunjukkan statusnya:',
 termasuk <i>semua</i> parameter akses untuk editor dan administrator. Setelah mengeksekusinya, anda sebaiknya
 menginstal kembali SPIP untuk membuat database baru dan akses administrator pertama.',
 'texte_admin_tech_01' => 'Opsi ini mengizinkan anda untuk menyimpan isi database ke dalam sebuah berkas di direktori @dossier@. Juga, mengingatkan anda untuk mengambil seluruh direktori @img@, yang berisikan gambar-gambar dan dokumen-dokumen yang digunakan dalam artikel dan bagian.',
-'texte_admin_tech_02' => 'Peringatan: backup ini HANYA dapat dipulihkan dalam sebuah situs yang diinstal dalam versi yang sama dengan SPIP. Anda seharusnya tidak mengosongkan database dan diharapkan menginstal kembali backup setelah pembaharuan... Untuk informasi lebih lanjut silakan membaca <a href="@spipnet@">dokumentasi SPIP</a>.',
+'texte_admin_tech_02' => '<MODIF>Peringatan: backup ini HANYA dapat dipulihkan dalam sebuah situs yang diinstal dalam versi yang sama dengan SPIP. Anda seharusnya tidak mengosongkan database dan diharapkan menginstal kembali backup setelah pembaharuan... Untuk informasi lebih lanjut silakan membaca <a href="@spipnet@">dokumentasi SPIP</a>.',
 'texte_admin_tech_03' => 'Anda dapat memilih untuk menyimpan berkas dalam bentuk kompresi 
 	untuk mempercepat tranfer ke mesin anda atau server backup dan menyimpan sejumlah ruangan di disk.',
 'texte_adresse_annuaire_1' => '( Jika direktori anda diinstal di mesin yang sama dengan situs web anda, kemungkinan besar ini adalah &laquo;localhost&raquo;.)',

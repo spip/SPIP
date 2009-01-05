@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'ADI EGON!. Atal honek (@contient_breves@)breve@scb@. Mugitzen baduzu, eragin ezazu baieztapen-kutxatila hau.',
 'avis_destinataire_obligatoire' => 'Mezu hau igorri aurretik jasotzailea zehaztu behar duzu.',
 'avis_erreur_connexion_mysql' => 'SQL lokarri-errorea',
-'avis_erreur_version_archive' => '&iexcl;ADI!
+'avis_erreur_version_archive' => '<MODIF>&iexcl;ADI!
 
 @archive@ fitxategia beste SPIP bertsio bati dagokio, instalatutakoaren desberdina.
 Arazo larriak edukitzekoarriskuan zaude: Zure datu-basearen suntsiketa, lekuaren zenbait disfuntzio, eta abar.
@@ -191,7 +191,7 @@ Informazio gehiago edukitzeko ikus SPIP dokumentazioa (oraindik frantsesez) .',
 
 // I
 'ical_info1' => 'Lekuarenbizitzarekin harremanetan egoteko dauden zenbait modu orrialde honetan aurkeztendira.',
-'ical_info2' => 'Teknika guzti hauen buruzko informazio gehiago lortzeko,hurrengo SPIP dokumentazioa kontsulta dezakezu.',
+'ical_info2' => '<MODIF>Teknika guzti hauen buruzko informazio gehiago lortzeko,hurrengo SPIP dokumentazioa kontsulta dezakezu.',
 'ical_info_calendrier' => 'Bi egutegidituzu eskura. Lehena leku-planoa da, bertan argitaratutako artikulu guztiak adieraztendirelarik. Bigarrenak iragarki editorialak eta zure azken mezu pribatuak ditu: zukbakarrik ikus dezakezu gako-hitz pertsonal baten bidez, gako-hitza edozein unean aldatudaiteke zure pasahitza aldatzen baduzu.',
 'ical_lien_rss_breves' => 'Guneko laburren sindikazioa',
 'ical_methode_http' => 'Deskargatu',
@@ -892,7 +892,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'texte_admin_effacer_01' => 'Manamendu honek datu-basearen edukiera osoa ezabatzendu, eta hemen konprimituriko idazlari eta administratzaile-sarbide guztiak. Hori egikarituondoren, SPIP-en berrinstalazioa hasi beharko duzu berriro base berri bat eta lehenadministratzaile-sarbide bat sortzeko.',
 'texte_admin_effacer_stats' => '<NEW>Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
 'texte_admin_tech_01' => 'Aukera honek basearen edukia ecrire/data direktorioan bilduko den fitxategi batean gordetzen uzten dizu.Halaber ez ahaztu IMG/direktorioaren osotasuna berreskuratzea, artikuluetan eta ataletan erabilitako irudiak eta dokumentuak dituena.',
-'texte_admin_tech_02' => 'Erne: babeskopia hau SPIP-en bertsio berdinarekin instalatutakogune batean bakarrik instalatu ahal izango da. Orduan ez dago batez ere &laquo; basea hustu &raquo; beharrik babeskopia berrinstalatzeko zain egonez eguneratze baten ondoren... SPIP-endokumentazioa kontsultatu.',
+'texte_admin_tech_02' => '<MODIF>Erne: babeskopia hau SPIP-en bertsio berdinarekin instalatutakogune batean bakarrik instalatu ahal izango da. Orduan ez dago batez ere &laquo; basea hustu &raquo; beharrik babeskopia berrinstalatzeko zain egonez eguneratze baten ondoren... SPIP-endokumentazioa kontsultatu.',
 'texte_admin_tech_03' => 'Fitxategia modu konprimituan gordetzea, bere transferentzia mozteko zure ordenagailuan edo babeskopien zerbitzari batean, eta disko-lekua aurreztea aukera dezakezu.',
 'texte_admin_tech_04' => '<NEW>Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ',
 'texte_adresse_annuaire_1' => '(Zure urtekaria Web gune hau dagoen ordenagailu berdinean instalatzen bada, segur aski &laquo;localhost&raquo;-az ari gara.)',

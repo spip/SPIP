@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Aten&ccedil;&atilde;o&nbsp;! Esta rubrica cont&eacute;m @contient_breves@ informa&ccedil;&atilde;o@scb@&nbsp;: se a deslocar, favor confirm&aacute;-lo nesta caixa',
 'avis_destinataire_obligatoire' => 'Deve indicar um destinat&aacute;rio antes de mandar esta mensagem.',
 'avis_erreur_connexion_mysql' => 'Erro de liga&ccedil;&atilde;o SQL',
-'avis_erreur_version_archive' => '<b>Aten&ccedil;&atilde;o! O ficheiro @archive@ corresponde a
+'avis_erreur_version_archive' => '<MODIF><b>Aten&ccedil;&atilde;o! O ficheiro @archive@ corresponde a
     uma vers&atilde;o de SPIP diferente da que
     tem instalada.</b> Enfrentar&aacute; grandes
     dificuldades: risco de destrui&ccedil;&atilde;o da sua
@@ -185,7 +185,7 @@ ou da rede',
 
 // I
 'ical_info1' => 'Esta p&aacute;gina apresenta muitos m&eacute;todos para permanecer em contacto com a vida deste s&iacute;tio.',
-'ical_info2' => 'Para mais informa&ccedil;&otilde;es sobre estas t&eacute;cnicas, consultar  <a href="@spipnet@">a documenta&ccedil;&atilde;o de SPIP</a>.',
+'ical_info2' => '<MODIF>Para mais informa&ccedil;&otilde;es sobre estas t&eacute;cnicas, consultar  <a href="@spipnet@">a documenta&ccedil;&atilde;o de SPIP</a>.',
 'ical_info_calendrier' => 'Dois calend&aacute;rios est&atilde;o &agrave; sua disposi&ccedil;&atilde;o. O primeiro &eacute; uma planta do s&iacute;tio anunciando todos os artigos publicados. O segundo cont&eacute;m os an&uacute;ncios editoriais assim como as &uacute;ltimas mensagens privadas&nbsp;: est&aacute; reservado para si gra&ccedil;as a uma chave pessoal, que pode modificar a qualquer momento com a renova&ccedil;&atilde;o da sua palavra-passe.',
 'ical_lien_rss_breves' => '<NEW>Syndication des br&egrave;ves du site',
 'ical_methode_http' => 'Telecarregamento',
@@ -803,7 +803,7 @@ numa cor que indica o seu estado:',
 inclusive <i>todos</i> os acessos de redactores e administradores. Depois de o ter executado, dever&aacute; lan&ccedil;ar a
 reinstala&ccedil;&atilde;o de SPIP para recriar uma nova base assim como um primeiro acesso administrador.',
 'texte_admin_tech_01' => '<MODIF>Esta op&ccedil;&atilde;o permite-lhe salvaguardar o conte&uacute;do da base num ficheiro que ser&aacute; armazenado no direct&oacute;rio @dossier@.N&atilde;o esquecer tamb&eacute;m recuperar a totalidade do direct&oacute;rio <i>IMG/</i>, que cont&eacute;m as imagens e os documentos utlizados nos artigos e rubricas.',
-'texte_admin_tech_02' => 'Aten&ccedil;&atilde;o: esta salvaguarda s&oacute; poder&aacute; ser restaurada
+'texte_admin_tech_02' => '<MODIF>Aten&ccedil;&atilde;o: esta salvaguarda s&oacute; poder&aacute; ser restaurada
  num s&iacute;tio instalado sob a mesma vers&atilde;o de SPIP. Nunca apague a sua base de dados esperando que esta seja reinstalada ap&oacute;s a actualiza&ccedil;&atilde;o. Consulte <a href="@spipnet@">a documenta&ccedil;&atilde;o de SPIP</a>.',
 'texte_admin_tech_03' => 'Pode escolher a salvaguarda do ficheiro sob a forma comprimida, para
 encurtar a sua transfer&ecirc;ncia para o seu computador ou para um servidor de salvaguarda e poupar o espa&ccedil;o do disco.',

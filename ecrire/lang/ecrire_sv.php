@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Varning! Den h&auml;r avdelningen inneh&aring;ller @contient_breves@ notiser@scb@: om du flyttar den, markera i kryssrutan f&ouml;r att bekr&auml;fta.',
 'avis_destinataire_obligatoire' => 'Du m&aring;ste ange en mottagare innan du skickar meddelandet.',
 'avis_erreur_connexion_mysql' => 'Fel p&aring; SQL-f&ouml;rbindelsen',
-'avis_erreur_version_archive' => '<b>Varning! Filen @archive@ motsvarar en
+'avis_erreur_version_archive' => '<MODIF><b>Varning! Filen @archive@ motsvarar en
  annan SPIP-version &auml;n den du instellerad</b>
  Du st&aring;r inf&ouml;r stora sv&aring;righeter: risken att
 f&ouml;rst&ouml;ra din databas, tekniska fel f&ouml;r din
@@ -192,7 +192,7 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 
 // I
 'ical_info1' => 'Denna sida visar flera metoder att h&aring;lla dig informerad om aktiviteter p&aring; sajten.',
-'ical_info2' => 'F&ouml;r mer information, tveka inte om att bes&ouml;ka <a href="@spipnet@">SPIP\'s dokumentation</a>.',
+'ical_info2' => '<MODIF>F&ouml;r mer information, tveka inte om att bes&ouml;ka <a href="@spipnet@">SPIP\'s dokumentation</a>.',
 'ical_info_calendrier' => 'Du kan anv&auml;nda tv&aring; kalendrar. En &auml;r en sajtkarta med alla publicerade artiklar. Den andra inneh&aring;ller redaktionella meddelanden och dina senaste privata meddelanden: Den &auml;r personlig, tack vare en genererad nyckel som du kan f&ouml;r&auml;ndra n&auml;r som helst genom att byta l&ouml;senord.',
 'ical_lien_rss_breves' => 'Syndikering av sajtens nyheter',
 'ical_methode_http' => 'Nerladdning',
@@ -924,7 +924,7 @@ inklusive <i>alla</i> uppgifter om anv&auml;ndare. Efter att du anv&auml;nt det,
 installera om SPIP f&ouml;r att skapa en ny databas och den f&ouml;rsta administrat&ouml;ren.',
 'texte_admin_effacer_stats' => '<NEW>Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
 'texte_admin_tech_01' => '<NEW>Cette option vous permet de sauvegarder le contenu de la base dans un fichier qui sera stock&eacute; dans le r&eacute;pertoire @dossier@. N\'oubliez pas &eacute;galement de r&eacute;cup&eacute;rer l\'int&eacute;gralit&eacute; du r&eacute;pertoire @img@, qui contient les images et les documents utilis&eacute;s dans les articles et les rubriques.',
-'texte_admin_tech_02' => '<NEW>Attention: cette sauvegarde ne pourra &ecirc;tre restaur&eacute;e QUE dans un site install&eacute; sous la m&ecirc;me version de SPIP. Il ne faut donc surtout pas &laquo;&nbsp;vider la base&nbsp;&raquo; en esp&eacute;rant r&eacute;installer la sauvegarde apr&egrave;s une mise &agrave; jour... Consultez <a href="@spipnet@">la documentation de SPIP</a>.',
+'texte_admin_tech_02' => '<MODIF>Attention: cette sauvegarde ne pourra &ecirc;tre restaur&eacute;e QUE dans un site install&eacute; sous la m&ecirc;me version de SPIP. Il ne faut donc surtout pas &laquo;&nbsp;vider la base&nbsp;&raquo; en esp&eacute;rant r&eacute;installer la sauvegarde apr&egrave;s une mise &agrave; jour... Consultez <a href="@spipnet@">la documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Du kan v&auml;lja att spara filen i komprimerad form f&ouml;r att 
  snabba upp &ouml;verf&ouml;ringen till din dator eller till en backupserver och spara lite diskutrymme.',
 'texte_admin_tech_04' => '<NEW>Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ',

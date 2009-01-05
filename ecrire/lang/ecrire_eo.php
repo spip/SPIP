@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Atentu! Tiu &#265;i rubriko enhavas @contient_breves@ fulm-informon @scb@&nbsp;: se vi translokas &#285;in, bonvolu no&#265;i tiun por-konfirman no&#265;ujon. ',
 'avis_destinataire_obligatoire' => 'Vi devas indiki adresaton anta&#365; ol sendi &#265;i tiun mesa&#285;on.',
 'avis_erreur_connexion_mysql' => 'SQL-konekta eraro ',
-'avis_erreur_version_archive' => '<b>Atentu! La dosiero @archive@ kongruas kun
+'avis_erreur_version_archive' => '<MODIF><b>Atentu! La dosiero @archive@ kongruas kun
     alia versio de SPIP ol tiu, kiun vi instalis.</b>
     Vi estas alfrontonta grandegajn problemojn:
     detru-riskon de via datenbazo,
@@ -195,7 +195,7 @@ forvi&#349;i ilin poste).',
 
 // I
 'ical_info1' => 'Tiu pa&#285;o prezentas plurajn metodojn por da&#365;re ricevi informojn pri la vivo de tiu retejo.',
-'ical_info2' => 'Por pli da informoj pri &#265;i &#265;iuj teknikoj, senhezite konsultu <a href="@spipnet@">la dokumentaron de SPIP</a>.',
+'ical_info2' => '<MODIF>Por pli da informoj pri &#265;i &#265;iuj teknikoj, senhezite konsultu <a href="@spipnet@">la dokumentaron de SPIP</a>.',
 'ical_info_calendrier' => 'Du kalendaroj disponeblas. La unua estas retejo-mapo anoncanta &#265;iujn publikigitajn artikolojn. La dua enhavas la eldon-anoncojn, kaj viajn lastajn privatajn mesa&#285;ojn&nbsp;: &#285;i estas rezervita al vi, pere de persona &#349;losilo, kiun vi &#265;iumomente povas modifi &#349;an&#285;ante vian pasvorton.',
 'ical_lien_rss_breves' => 'Aboni retejajn fulm-informojn',
 'ical_methode_http' => 'El&#349;uti',
@@ -910,7 +910,7 @@ inkluzive de <i>&#265;iuj</i> alirrajtoj de redaktantoj kaj mastrumantoj. Post t
 SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 'texte_admin_effacer_stats' => '<NEW>Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
 'texte_admin_tech_01' => 'Tiu opcio ebligas al vi konservi enhavon de bazo en dosiero stokota en dosierujo @dossier@. Ne forgesu anka&#365; reakiri la tuton de la dosierujo @img@, kiu enhavas bildojn kaj dokumentojn uzatajn en artikoloj kaj rubrikoj.',
-'texte_admin_tech_02' => 'Atentu: tiu savkopio povos esti resta&#365;rita
+'texte_admin_tech_02' => '<MODIF>Atentu: tiu savkopio povos esti resta&#365;rita
 NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu la datenbazon&nbsp;" esperante poste reinstali savkopion post &#285;isdatigo... Konsultu <a href="@spipnet@">la dokumentaron de SPIP</a>.',
 'texte_admin_tech_03' => 'Vi povas elekti konservi la dosieron la&#365; densigita formo, por
  rapidigi ties &#349;uton hejmen a&#365; al konservo-servilo, kaj por &#349;pari diskospacon.',

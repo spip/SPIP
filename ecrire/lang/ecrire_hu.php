@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Vigy&aacute;zat&nbsp;! Ez a rovat @contient_breves@ h&iacute;rt tartalmaz&nbsp;: ha &aacute;t akarja helyezni, ezt a meger&#337;s&iacute;t&eacute;si jel&ouml;l&#337;kock&aacute;t kell jel&ouml;lni.',
 'avis_destinataire_obligatoire' => 'Egy c&iacute;mzettet kell jel&ouml;lni miel&#337;bb elk&uuml;ldi ezt az &uuml;zenetet.',
 'avis_erreur_connexion_mysql' => '<MODIF>SQL-es csatlakoz&aacute;si hiba',
-'avis_erreur_version_archive' => '<b>Vigy&aacute;zat! A @archive@ f&aacute;jl az itt telep&iacute;tett SPIP
+'avis_erreur_version_archive' => '<MODIF><b>Vigy&aacute;zat! A @archive@ f&aacute;jl az itt telep&iacute;tett SPIP
     egy m&aacute;sik verzi&oacute;nak felel meg
     </b> &Oacute;ri&aacute;si neh&eacute;zs&eacute;gek el&#337;tt &aacute;ll:
 az &Ouml;n adatb&aacute;zis megsemmis&iacute;t&eacute;se, honlap rossz m&#369;k&ouml;d&eacute;se, stb. Ne
@@ -198,7 +198,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 
 // I
 'ical_info1' => 'Ez az oldal t&ouml;bb m&oacute;dszert mutat ahhoz, hogy maradjon kapcsolatban e honlap &eacute;let&eacute;vel.',
-'ical_info2' => 'Azokr&oacute;l a technik&aacute;kr&oacute;l t&ouml;v&aacute;bbi inform&aacute;ci&oacute;k olvashat&oacute;k ide <a href="@spipnet@">az SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
+'ical_info2' => '<MODIF>Azokr&oacute;l a technik&aacute;kr&oacute;l t&ouml;v&aacute;bbi inform&aacute;ci&oacute;k olvashat&oacute;k ide <a href="@spipnet@">az SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'ical_info_calendrier' => 'K&eacute;t napt&aacute;r &aacute;ll rendelkez&eacute;s&eacute;re. Az els&#337; egy olyan t&eacute;rpk&eacute;p a honlapr&oacute;l, melyben szerepel az &ouml;sszes publik&aacute;lt cikk. A m&aacute;sodik pedig a tartalmi h&iacute;rdet&eacute;seket, illetve az &Ouml;n utols&oacute; priv&aacute;t &uuml;zenetei&nbsp;: egy szem&eacute;lyes kulcsnak k&ouml;sz&ouml;nhet&#337;en van fenntartva &Ouml;n r&eacute;sz&eacute;re, ami b&aacute;rmikor m&oacute;dos&iacute;that&oacute; a jelszava v&aacute;ltoztat&aacute;s&aacute;val.',
 'ical_lien_rss_breves' => '<NEW>Syndication des br&egrave;ves du site',
 'ical_methode_http' => 'Let&ouml;lt&eacute;s',
@@ -909,7 +909,7 @@ bele &eacute;rtve az <i>&ouml;sszes</i> szerz&#337;i, illetve adminisztr&aacute;
 SPIP &uacute;jrat&eacute;l&eacute;p&iacute;t&eacute;s&eacute;t egy &uacute;jabb adatb&aacute;zis l&eacute;trehoz&aacute;s&aacute;ra, valamint egy els&#337; adminisztr&aacute;tori hozz&aacute;f&eacute;r&eacute;st.',
 'texte_admin_effacer_stats' => '<NEW>Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
 'texte_admin_tech_01' => 'Ez az opci&oacute; lehet&#337;v&eacute; teszi az adatb&aacute;zis tartalm&aacute;nak a ment&eacute;s&eacute;t egy f&aacute;jlban, ami az @dossier@ mapp&aacute;ban tal&aacute;lhat&oacute;. Ne felejtse el megmenteni az @img@ mappa teljes tartalm&aacute;t, ami a cikkekben &eacute;s a rovatokban haszn&aacute;lt dokumentumokat, illetve k&eacute;peket tartalmazza.',
-'texte_admin_tech_02' => 'Vigy&aacute;zat: ezt a ment&eacute;st lehet resztaur&aacute;lni CSAK egy azonos verzi&oacute;j&#369; SPIP honlapon. Teh&aacute;t nem szabad  &laquo;&nbsp;&uuml;r&iacute;teni az adatb&aacute;zis&nbsp;&raquo; abban a rem&eacute;nyben, hogy &uacute;jratelep&iacute;theti a ment&eacute;st egy verzi&oacute;i fejleszt&eacute;s ut&aacute;n... &Eacute;rdekl&#337;dj&ouml;n <a href="@spipnet@">az SPIP dokument&aacute;ci&oacute;ja (Fr)</a>.',
+'texte_admin_tech_02' => '<MODIF>Vigy&aacute;zat: ezt a ment&eacute;st lehet resztaur&aacute;lni CSAK egy azonos verzi&oacute;j&#369; SPIP honlapon. Teh&aacute;t nem szabad  &laquo;&nbsp;&uuml;r&iacute;teni az adatb&aacute;zis&nbsp;&raquo; abban a rem&eacute;nyben, hogy &uacute;jratelep&iacute;theti a ment&eacute;st egy verzi&oacute;i fejleszt&eacute;s ut&aacute;n... &Eacute;rdekl&#337;dj&ouml;n <a href="@spipnet@">az SPIP dokument&aacute;ci&oacute;ja (Fr)</a>.',
 'texte_admin_tech_03' => 'T&ouml;m&ouml;r&iacute;tett form&aacute;ban is lehet menteni a f&aacute;jlt, a r&ouml;videbb let&ouml;lt&eacute;si id&#337; &eacute;s a kisebb foglalt hely &eacute;rdek&eacute;ben.',
 'texte_admin_tech_04' => '<NEW>Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ',
 'texte_adresse_annuaire_1' => '(Ha az &Ouml;n c&iacute;mt&aacute;ra ugyanazon a g&eacute;pen van telep&iacute;tve, mint ez a honlap, akkor val&oacute;sz&iacute;n&#369;leg &laquo;localhost&raquo;-r&oacute;l van sz&oacute;.)',

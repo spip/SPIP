@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Advarsel! Dette afsnit indeholder @contient_breves@ nyheder@scb@: Hvis du vil flytte den, s&aring; afkryds venligst her for at bekr&aelig;fte.',
 'avis_destinataire_obligatoire' => 'Du skal v&aelig;lge en modtager, f&oslash;r du kan sende meddelelsen.',
 'avis_erreur_connexion_mysql' => 'Fejl i forbindelse til SQL',
-'avis_erreur_version_archive' => ' <b>Advarsel! Filen @archive@ h&oslash;rer til 
+'avis_erreur_version_archive' => '<MODIF> <b>Advarsel! Filen @archive@ h&oslash;rer til 
     en anden version af SPIP end den du har
     installeret.</b> Du risikerer store
     vanskeligheder: risiko for at &oslash;del&aelig;gge din database, 
@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Denne side viser flere m&aring;der til at f&oslash;lge med i aktiviteter p&aring; dette websted.',
-'ical_info2' => 'For mere information, bes&oslash;g <a href="@spipnet@">SPIP dokumentation</a>.',
+'ical_info2' => '<MODIF>For mere information, bes&oslash;g <a href="@spipnet@">SPIP dokumentation</a>.',
 'ical_info_calendrier' => 'To kalendere st&aring;r til r&aring;dighed. Den f&oslash;rste er en oversigt over webstedet, der viser alle offentliggjorte artikler.Den anden indeholder b&aring;de redaktionelle annonceringer og dine seneste private meddelelser. Den er forbeholdt dig i kraft af en personlig n&oslash;gle, som du kan &aelig;ndre n&aring;r som helst ved at forny din adgangskode.',
 'ical_methode_http' => 'Filhentning',
 'ical_methode_webcal' => 'Synkronisering (webcal://)',
@@ -715,7 +715,7 @@ i en farve, der angiver deres status:',
 'texte_admin_tech_01' => 'Dette valg giver dig mulighed for at gemme databasens indhold i en fil lagret i kataloget 
  @dossier@.
  Husk ogs&aring; at medtage hele kataloget <i>IMG/</i>, som rummer de billeder og dokumenter, der bruges i artikler og afsnit.',
-'texte_admin_tech_02' => 'Advarsel: denne sikkerhedskopi kan KUN genindl&aelig;ses p&aring; et websted, der har installeret samme version af SPIP.
+'texte_admin_tech_02' => '<MODIF>Advarsel: denne sikkerhedskopi kan KUN genindl&aelig;ses p&aring; et websted, der har installeret samme version af SPIP.
  Det er en almindelig misforst&aring;else at tage sikkerhedskopi af et websted forud for opgradering af SPIP...
  For mere information henvises til <a href="@spipnet@">SPIP dokumentation</a>.',
 'texte_admin_tech_03' => 'Du kan v&aelig;lge at gemme filen i komprimeret form for hurtigere at kunne overf&oslash;re den til din maskine eller tage en sikkerhedskopi af serveren og spare diskplads.',
