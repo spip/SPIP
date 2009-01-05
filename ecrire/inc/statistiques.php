@@ -353,7 +353,7 @@ function statistiques_href($jour, $moyenne, $script, $value='')
 	$ce_jour=date("Y-m-d H:i:s", $jour);
 	$title = nom_jour($ce_jour) . ' '
 	  . ($script ? affdate_heure($ce_jour) :
-	     (affdate_court($ce_jour)  .' '.
+	     (affdate_jourcourt($ce_jour)  .' '.
 	      (" | " ._T('info_visites')." $value | " ._T('info_moyenne')." "
 	       . round($moyenne,2))));
 	return attribut_html(supprimer_tags($title));
@@ -525,12 +525,21 @@ function statistiques_par_mois($entrees, $script){
 				}
 			}
 		}
-		if ($script)
-			$res = "<a href='$script&amp;date=$key' title='$title'>$res</a>";
-		$all .= "\n<td style='width: ${largeur}px'>"
-		  . $res
-		  . http_img_rien($largeur,1,'trait_bas', $tagtitle)
-		  ."</td>\n";
+		$res .= http_img_rien($largeur,1,'trait_bas', $tagtitle);
+
+		if (!$script) {
+			$y = annee($key);
+			$m = mois($key);
+			$href = generer_url_ecrire('calendrier', "type=mois&annee=$y&mois=$m&jour=1");
+		} else $href = "$scirpt&amp;date=$key";
+
+		$all .= "\n<td style='width: ${largeur}px'><a href='"
+		.  $href
+		. '\' title="'
+		. $title
+		. '">'
+		. $res
+		. "</a></td>\n";
 	}
 
 	return
