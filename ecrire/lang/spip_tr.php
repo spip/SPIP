@@ -402,7 +402,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_contenance' => 'Site i&ccedil;eri&#287;i&nbsp;:',
 'info_contribution' => 'Forum katk&#305;lar&#305;',
 'info_copyright' => '@spip@, @lien_gpl@ GPL lisans&#305; ile da&#287;&#305;t&#305;lan serbest bir yaz&#305;l&#305;md&#305;r.',
-'info_copyright_doc' => 'Ayr&#305;nt&#305;l&#305; bilgi i&ccedil;in, bkz.  <a href="@spipnet@">http://www.spip.net/fr</a>.',
+'info_copyright_doc' => '<MODIF>Ayr&#305;nt&#305;l&#305; bilgi i&ccedil;in, bkz.  <a href="@spipnet@">http://www.spip.net/fr</a>.',
 'info_copyright_gpl' => 'GPL lisans&#305; alt&#305;nda',
 'info_cours_edition' => 'Yaz&#305;lmakta olan makaleleriniz',
 'info_creer_repertoire' => '&#350;u isimde bir dosya veya dizin olu&#351;turunuz&nbsp;:',

@@ -397,7 +397,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_contenance' => 'Aqueth sit que contien:',
 'info_contribution' => 'Contribucions de forum',
 'info_copyright' => '@spip@ qu\'ei un logiciau liure distribuit @lien_gpl@.',
-'info_copyright_doc' => 'Per mei informacions, v&eacute;der lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.',
+'info_copyright_doc' => '<MODIF>Per mei informacions, v&eacute;der lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.',
 'info_copyright_gpl' => 'devath lic&eacute;ncia GPL',
 'info_cours_edition' => 'Los v&ograve;stes articles en cors de redaccion',
 'info_creer_repertoire' => 'Volhatz crear un fichi&egrave;r o un repert&ograve;ri nomentat',

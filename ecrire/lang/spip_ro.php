@@ -403,7 +403,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_contenance' => 'Acest site con&#355;ine&nbsp;:',
 'info_contribution' => 'contribu&#355;ii la forum',
 'info_copyright' => '@spip@ este un program liber distribuit @lien_gpl@.',
-'info_copyright_doc' => 'Pentru mai multe informa&#355;ii, vizita&#355;i site-ul <a href="@spipnet@">http://www.spip.net/ro</a>.',
+'info_copyright_doc' => '<MODIF>Pentru mai multe informa&#355;ii, vizita&#355;i site-ul <a href="@spipnet@">http://www.spip.net/ro</a>.',
 'info_copyright_gpl' => 'sub licen&#355;&#259; GPL',
 'info_cours_edition' => 'Articolele dumneavoastr&#259; &icirc;n curs de redactare',
 'info_creer_repertoire' => 'V&#259; rug&#259;m s&#259; crea&#355;i un fi&#537;ier sau un director numit&nbsp;:',

@@ -399,7 +399,7 @@ Terima kasih atas partisipasi anda!
 'info_contenance' => 'Situs ini berisikan:',
 'info_contribution' => 'kontribusi forum',
 'info_copyright' => '@spip@ adalah piranti lunak bebas yang didistribusi @lien_gpl@.',
-'info_copyright_doc' => 'Untuk informasi lebih lanjut, kunjungi <a href="@spipnet@">http://www.spip.net/en</a>.',
+'info_copyright_doc' => '<MODIF>Untuk informasi lebih lanjut, kunjungi <a href="@spipnet@">http://www.spip.net/en</a>.',
 'info_copyright_gpl' => 'di bawah lisensi GPL',
 'info_cours_edition' => 'Artikel anda dalam proses',
 'info_creer_repertoire' => 'Silakan buat sebuah berkas atau direktori yang diberi nama:',

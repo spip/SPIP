@@ -346,7 +346,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contenance' => 'Ova stranica sadrzi:',
 'info_contribution' => 'Pridonos foruma',
 'info_copyright' => '@spip@ je slobodni softver distribucije @lien_gpl@.',
-'info_copyright_doc' => 'Za vise informacija pogledajte <a href="@spipnet@">http://www.spip.net/fr</a>.',
+'info_copyright_doc' => '<MODIF>Za vise informacija pogledajte <a href="@spipnet@">http://www.spip.net/fr</a>.',
 'info_copyright_gpl' => 'pod GPL licencom',
 'info_cours_edition' => 'Vasi clanci u toku uredjivanja',
 'info_creer_repertoire' => 'Kreirajte dokument ili direktorij pod imenom:',

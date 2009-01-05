@@ -403,7 +403,7 @@ Dankon pro via partopreno
 'info_contenance' => 'Tiu retejo enhavas&nbsp;:',
 'info_contribution' => 'forumaj kontribua&#309;oj',
 'info_copyright' => '@spip@ estas libera programo distribuata @lien_gpl@.',
-'info_copyright_doc' => 'Por pliaj informoj vidu la retpa&#285;on <a href="@spipnet@">http://www.spip.net/eo</a>.',
+'info_copyright_doc' => '<MODIF>Por pliaj informoj vidu la retpa&#285;on <a href="@spipnet@">http://www.spip.net/eo</a>.',
 'info_copyright_gpl' => 'sub licenco GPL',
 'info_cours_edition' => 'Viaj redaktataj artikoloj',
 'info_creer_repertoire' => 'Bonvolu krei dosieron a&#365; dosierujon kies nomo estu&nbsp;:',

@@ -396,7 +396,7 @@ Merci fir &auml;r Participatioun
 'info_contenance' => 'D&euml;se Site huet:',
 'info_contribution' => 'Beitr&auml;g an de Forum\'en',
 'info_copyright' => '@spip@ ass eng fr&auml;i Software d&eacute;i &euml;nner @lien_gpl@ verdeelt g&euml;t.',
-'info_copyright_doc' => 'Fir m&eacute;i Informatiounen, kuckt op <a href="@spipnet@">http://www.spip.net/lb</a>.',
+'info_copyright_doc' => '<MODIF>Fir m&eacute;i Informatiounen, kuckt op <a href="@spipnet@">http://www.spip.net/lb</a>.',
 'info_copyright_gpl' => '&euml;nner GPL-Lizenz',
 'info_cours_edition' => '&Auml;r Artikelen an der Aarbecht',
 'info_creer_repertoire' => 'Setzt e Fichier oder Dossier mat d&euml;sem Numm derb&auml;i:',

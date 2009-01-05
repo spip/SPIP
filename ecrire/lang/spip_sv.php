@@ -394,7 +394,7 @@ Tack f&ouml;r ditt deltagande
 'info_contenance' => 'Sajten inneh&aring;ller:',
 'info_contribution' => 'bidrag till forumen',
 'info_copyright' => '@spip@ &auml;r fri programvara och distribueras @lien_gpl@.',
-'info_copyright_doc' => 'F&ouml;r mer information, se (p&aring; engelska)<a href="@spipnet@">http://www.spip.net/en</a>.',
+'info_copyright_doc' => '<MODIF>F&ouml;r mer information, se (p&aring; engelska)<a href="@spipnet@">http://www.spip.net/en</a>.',
 'info_copyright_gpl' => 'under GPL-licensen',
 'info_cours_edition' => 'Dina artiklar under bearbetning',
 'info_creer_repertoire' => 'Var god och skapa en katalog som heter:',

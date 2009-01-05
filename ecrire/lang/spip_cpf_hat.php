@@ -400,7 +400,7 @@ M&egrave;si  w soutni petisyon-nan
 'info_contenance' => 'Kisa ap kontni nan sit-la&nbsp;:',
 'info_contribution' => 'mesaj andan fowom',
 'info_copyright' => '@spip@ se yon logisy&egrave;l lib ki done @lien_gpl@.',
-'info_copyright_doc' => 'Si w vle plis enf&ograve;masyon, ann gad sit sa-a <a href="@spipnet@">http://www.spip.net/cpf</a>.',
+'info_copyright_doc' => '<MODIF>Si w vle plis enf&ograve;masyon, ann gad sit sa-a <a href="@spipnet@">http://www.spip.net/cpf</a>.',
 'info_copyright_gpl' => 'nan lisans GPL',
 'info_cours_edition' => 'Tout atik yo w ka ekri ank&ograve;',
 'info_creer_repertoire' => 'Kreye yon fichye ousinon yon r&eacute;p&egrave;twa sak i rele&nbsp;:',
