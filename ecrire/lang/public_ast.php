@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_breve' => 'Nesta direici&oacute;n nun hai denguna breve',
 'aucune_rubrique' => 'Nesta direici&oacute;n nun hai denguna estaya',
 'autres' => 'Otros',
-'autres_breves' => 'Otres noticies curties',
+'autres_breves' => 'Otres breves',
 'autres_groupes_mots_clefs' => 'Otros grupos de pallabres-clave',
 'autres_sites' => 'Otros sitios',
 
@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dernier_ajout' => '&Uacute;ltimu a&ntilde;ad&iacute;u',
 'dernieres_breves' => '&Uacute;ltimes breves',
 'derniers_articles' => '&Uacute;ltimos art&iacute;culos',
-'derniers_commentaires' => 'Caberos bilordios',
+'derniers_commentaires' => 'Caberos comentarios',
 'derniers_messages_forum' => '&Uacute;ltimos mensaxes espublizaos nos foros',
 'documents_interdits_forum' => 'Documentos torgaos nel foru',
 
@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jours' => 'd&iacute;es',
 
 // L
-'lien_connecter' => 'Conectase',
+'lien_connecter' => 'Coneutase',
 
 // M
 'meme_auteur' => 'Del mesmu autor',
@@ -89,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'proposer_site' => 'Puedes proponer un sitiu Web pa amestar nesta seici&oacute;n:',
 
 // R
-'repondre_article' => 'Responder a esti art&iacute;culo',
+'repondre_article' => 'Responder a esti art&iacute;culu',
 'repondre_breve' => 'Responder a esta breve',
 'repondre_message' => 'Responder a esti mensaxe',
 'resultats_recherche' => 'Resultaos de la gueta',
@@ -102,7 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Sitiu fechu mand&aacute;ndose de SPIP',
 'sites_web' => 'Sitios Web',
 'sous_rubriques' => 'Sub-estayes',
-'spam' => 'Spam',
+'spam' => 'Puxarra',
 'suite' => 'sigue',
 'sur_web' => 'Na Rede',
 'syndiquer_rubrique' => 'Sindicar esta seici&oacute;n',
