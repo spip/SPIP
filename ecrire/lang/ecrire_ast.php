@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     dificult&aacute;es: peligru de destruir la base de datos,
     fallos varios nel funcionamientu del sitiu, etc.
     Nun valides esta petici&oacute;n d\'importaci&oacute;n.<p />Pa
-    mayor informaci&oacute;n, llee <a href=\'http://www.spip.net/fr_article1489.html\'>
+    mayor informaci&oacute;n, llee <a href="@spipnet@">
                                 la documentaci&oacute;n de SPIP</a>.',
 'avis_espace_interdit' => '<b>Espaciu torg&aacute;u</b><div>SPIP ya ta instalao.</div>',
 'avis_lecture_noms_bases_1' => 'El programa d\'instalaci&oacute;n nun fue a lleer los nomes de les bases de datos instal&aacute;es.',
@@ -202,7 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'N\'esta p&aacute;xina ufrense delles maneres de tar en contautu cola activid&aacute; d\'esti sitiu.',
-'ical_info2' => 'Pa saber m&aacute;s no tocante a toes estes t&eacute;cniques, puedes consultar <a href="http://www.spip.net/fr_suivi">la documentaci&oacute;n de SPIP</a>.',
+'ical_info2' => 'Pa saber m&aacute;s no tocante a toes estes t&eacute;cniques, puedes consultar <a href="@spipnet@">la documentaci&oacute;n de SPIP</a>.',
 'ical_info_calendrier' => 'Tienes dos axendes a la to disposici&oacute;n. La primera ye el plan del sitiu que anuncia tolos art&iacute;culos espublizaos. La segunda conti&eacute;n los anuncios editoriales y tambi&eacute;n los tos caberos mensaxes privaos: esta ye una axenda privada gracies a una clave personal, que pues modificar en tou momentu anovando la to contrase&ntilde;a.',
 'ical_lien_rss_breves' => 'Sindicaci&oacute;n de les breves del sitiu',
 'ical_methode_http' => 'Descarga',
@@ -935,7 +935,7 @@ incluy&iacute;os <i>tolos</i> accesos de redactores y alministradores. Tres d\'e
 reinstalaci&oacute;n de SPIP pa crear una nueva base igual que un primer accesu d\'alministrador.',
 'texte_admin_effacer_stats' => 'Esta orde esborra tolos datos tocantes a les estad&iacute;stiques de visites al sitiu, incluyendo la popularid&aacute; de los art&iacute;culos.',
 'texte_admin_tech_01' => 'Esta opci&oacute;n te permite facer copia del conten&iacute;u de la base nun archivu que va guardase nel direutoriu @dossier@. Tampoco nun escaezas recuperar ensembre el direutoriu @img@, que conti&eacute;n les imaxes y los documentos utilizaos nos art&iacute;culos y nes estayes.',
-'texte_admin_tech_02' => 'Atenci&oacute;n: esta copia S&Oacute;LO va poder restaurase nun sitiu instal&aacute;u cola mesma versi&oacute;n de SPIP. Poro, y n\'especial, nun hai que &laquo;vaciar la base&raquo; cuntando con reinstalar la copia tres d\'una actualizaci&oacute;n... Consulta <a href="http://www.spip.net/fr_article1489.html">la documentaci&oacute;n de SPIP</a>.',
+'texte_admin_tech_02' => 'Atenci&oacute;n: esta copia S&Oacute;LO va poder restaurase nun sitiu instal&aacute;u cola mesma versi&oacute;n de SPIP. Poro, y n\'especial, nun hai que &laquo;vaciar la base&raquo; cuntando con reinstalar la copia tres d\'una actualizaci&oacute;n... Consulta <a href="@spipnet@">la documentaci&oacute;n de SPIP</a>.',
 'texte_admin_tech_03' => 'Pues escoyer guardar l\'archivu en forma comprimida, col env&iacute;s
  d\'amenorgar so tresferencia al to ordenador o a un sirvidor de copies de segurid&aacute;, y d\'aforrar l\'espaciu en discu.',
 'texte_admin_tech_04' => 'Si se quier facer una fusi&oacute;n con otra base, pues llendar la copia a la estaya: ',

@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_destinataire_obligatoire' => 'Dev&egrave;tz indicar un destinatari abans de mandar aquel messatge.',
 'avis_erreur_connexion_mysql' => 'Error de connexion SQL',
 'avis_erreur_version_archive' => '<b>Atencion! Lo fichi&egrave;r @archive@ correspond a una autra version d\'SPIP que la qu\'av&egrave;tz installada.</b> Anatz cap a de dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments div&egrave;rses del sit, etc. Validetz pas aquela demanda d\'importacion.<p> Per mai d\'informacions, vejatz
-<A HREF=\'http://www.spip.net/fr_article1489.html\'>
+<a href="@spipnet@">
 la documentacion d\'SPIP</a>.',
 'avis_espace_interdit' => '<b>Espaci pro&iuml;bit</b><div>SPIP es ja installat.</div>',
 'avis_lecture_noms_bases_1' => 'Lo programa d\'installacion a pas pogut legir los noms de las basas de donadas installadas.',
@@ -188,7 +188,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 
 // I
 'ical_info1' => 'Aquela pagina m&ograve;stra de met&ograve;des diferents per demorar en contacte amb la vida d\'aquel sit.',
-'ical_info2' => 'Per t&eacute;ner mai d\'informacions subre aquelas tecnicas, esitetz pas de consultar <a href="http://www.spip.net/fr_suivi">la documentacion d\'SPIP</a>.',
+'ical_info2' => 'Per t&eacute;ner mai d\'informacions subre aquelas tecnicas, esitetz pas de consultar <a href="@spipnet@">la documentacion d\'SPIP</a>.',
 'ical_info_calendrier' => 'I a dos calendi&egrave;rs a la v&ograve;stra disposicion. Lo primi&egrave;r es un plan del sit qu\'an&oacute;ncia totes los articles publicats. Lo segond conten los anoncis editorials en mai de v&ograve;stres darri&egrave;rs messatges privats: vos es reservat gr&agrave;cias a una clau personala, que la pod&egrave;tz modificar en tot moment en renovant v&ograve;stre mot de santa Clara. ',
 'ical_lien_rss_breves' => 'Sindicacion de las br&egrave;vas del sit',
 'ical_methode_http' => 'Telecargament',
@@ -802,7 +802,7 @@ una color indica lor estat:',
 'texte_admin_effacer_01' => 'Aquela comanda escafa <i>tot</i> lo contengut de la basa de donadas,
  incluses <i>totes</i> los acc&egrave;sses redactors e administrators. Un c&ograve;p que l\'auretz executada, auretz de tornar lan&ccedil;ar l\'installacion d\'SPIP per tornar crear una basa nov&egrave;la e mai un primi&egrave;r acc&egrave;s administrator.',
 'texte_admin_tech_01' => 'Aquela opcion vos permet de salvagardar lo contengut de la basa dins un fichi&egrave;r que ser&agrave; servat dins lo repert&ograve;ri @dossier@.Oblidetz pas tanpauc de recuperar l\'integralitat del repert&ograve;ri @img@, que conten los imatges e los documents utilizats dins los articles e rubricas.',
-'texte_admin_tech_02' => 'Atencion: aquela salvagarda se poir&agrave; restaurar SONQUE dins un sit installat amb la meteissa version d\'SPIP. Donc subretot cal pas "voidar la basa" en esperar de re&iuml;nstallar la salvagarda apr&egrave;s una actualizacion. Consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
+'texte_admin_tech_02' => 'Atencion: aquela salvagarda se poir&agrave; restaurar SONQUE dins un sit installat amb la meteissa version d\'SPIP. Donc subretot cal pas "voidar la basa" en esperar de re&iuml;nstallar la salvagarda apr&egrave;s una actualizacion. Consultatz <a href="@spipnet@">la documentacion d\'SPIP</a>.',
 'texte_admin_tech_03' => 'Pod&egrave;tz causir de salvagardar lo fichi&egrave;r jos forma comprimida, per tal
  d\'abrivar son transferiment en c&ograve; v&ograve;stre o a un servidor de salvagardas, e per tal d\'estalviar d\'espaci disc.',
 'texte_adresse_annuaire_1' => '(Se v&ograve;stre annuari es installat sus la meteissa maquina qu\'aquel sit web, s\'ag&iacute;s probable de "localhost".)',

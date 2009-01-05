@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     trudno&#347;ciami: ryzykiem zniszczenia Twojej bazy danych,
     zak&#322;&oacute;ceniami funkcjonowania Twojej strony, etc. Nie
     spe&#322;niaj &#380;&#261;dania importu.<p>Wi&#281;cej
-    informacji na <A HREF=\'http://www.spip.net/fr_article1489.html\'>
+    informacji na <a href="@spipnet@">
                                  w dokumentacji SPIP</a>.',
 'avis_espace_interdit' => '<b>Dost&#281;p zabroniony</b><div>SPIP jest ju&#380; zainstalowany.</div>',
 'avis_lecture_noms_bases_1' => 'Program instalacyjny nie mo&#380;e odczyta&#263; nazw instalowanych baz danych.',
@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Na tej stronie prezentujemy r&oacute;&#380;ne metody pozostanie w kontakcie z dzia&#322;alno&#347;ci&#261; serwisu.',
-'ical_info2' => 'Aby przeczyta&#263; wi&#281;cej na ten temat, id&#378; na stron&#281;<a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
+'ical_info2' => 'Aby przeczyta&#263; wi&#281;cej na ten temat, id&#378; na stron&#281;<a href="@spipnet@">la documentation de SPIP</a>.',
 'ical_info_calendrier' => 'Do Twojej dyspozycji s&#261; dwa kalendarze. Jeden pokazuje map&#281; strony wraz ze wszystkimi opublikowanymi artyku&#322;ami. Drugi zawiera og&#322;oszenia redakcyjne oraz Twoje ostatni wiadomo&#347;ci prywatne&nbsp;: tylko Ty masz do niego dost&#281;p za has&#322;em.',
 'ical_lien_rss_breves' => 'Zapisz si&#281; do RSS news&oacute;w',
 'ical_methode_http' => '&#346;ci&#261;gnij',
@@ -932,7 +932,7 @@ zreinstalowa&#263; SPIP w celu utworzenia nowej bazy danych i dost&#281;pu pierw
 'texte_admin_effacer_stats' => '<NEW>Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
 'texte_admin_tech_01' => 'Ta opcja pozwala Ci zapisa&#263; zawarto&#347;&#263; bazy danych w pliku, kt&oacute;ry zostanie zachowany w katalogu @dossier@. Pami&#281;taj tak&#380;e o skopiowaniu ca&#322;ego katalogu @img@, kt&oacute;ry zawiera obrazki i dokumenty u&#380;ywane w artyku&#322;ach i dzia&#322;ach.',
 'texte_admin_tech_02' => 'Uwaga: t&#261; kopi&#281; bezpiecze&#324;stwa b&#281;dzie mo&#380;na odtworzy&#263;
- TYLKO I WY&#321;&#260;CZNIE w serwisie opartym na tej samej wersji SPIP. Nie wolno  "opr&oacute;znia&#263; bazy danych" s&#261;dz&#261;c, &#380;e po zaktualizowaniu SPIP b&#281;dzie mo&#380;na odtworzy&#263; baz&#281; z backupu. Wi&#281;cej informacji w <a href="http://www.spip.net/fr_article1489.html">dokumentacji SPIP</a>.',
+ TYLKO I WY&#321;&#260;CZNIE w serwisie opartym na tej samej wersji SPIP. Nie wolno  "opr&oacute;znia&#263; bazy danych" s&#261;dz&#261;c, &#380;e po zaktualizowaniu SPIP b&#281;dzie mo&#380;na odtworzy&#263; baz&#281; z backupu. Wi&#281;cej informacji w <a href="@spipnet@">dokumentacji SPIP</a>.',
 'texte_admin_tech_03' => 'Mo&#380;esz wybra&#263; wykonanie kopii bezpiecze&#324;&#347;twa pod postaci&#261; skompresowan&#261;, w celu
  przyspieszenia &#347;ci&#261;gania pliku lub zapisywania na serwerze, i zarazem oszcz&#281;dno&#347;ci przestrzeni dyskowej.',
 'texte_admin_tech_04' => '<NEW>Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ',
