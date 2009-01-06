@@ -139,9 +139,10 @@ function traiter_raccourci_lien_atts($texte) {
 			// si c'est un code de langue connu, on met un hreflang
 				if (traduire_nom_langue($m[5]) <> $m[5]) {
 					$hlang = $m[5];
-				}
-			// sinon c'est un italique
-				else {
+				} elseif (!$m[5]) {
+					$hlang = $GLOBALS['lang_objet'];
+				// sinon c'est un italique
+				} else {
 					$m[1] .= $m[4];
 				}
 			
