@@ -88,7 +88,7 @@ function nettoyer_raccourcis_typo($texte, $connect='')
 				$match = typer_raccourci($reg[count($reg)-1]);
 				@list($type,,$id,,,,) = $match;
 				$titre = traiter_raccourci_titre($id, $type, $connect);
-				if (!$titre) $titre = $match;
+				$titre = $titre ? $titre['titre'] : $match[0];
 			}
 			$titre = corriger_typo(supprimer_tags($titre));
 			$texte = str_replace($reg[0], $titre, $texte);
