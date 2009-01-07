@@ -43,6 +43,10 @@ function exec_mots_type_dist()
 	
 	echo debut_gauche('', true);
 
+	$iconifier = charger_fonction('iconifier', 'inc');
+	echo $iconifier('id_groupe', $id_groupe, 'groupes_mots', false, true);
+
+
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
