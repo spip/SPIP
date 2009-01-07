@@ -111,10 +111,16 @@ function aff_statistique_visites_par_visites($serveur='', $id_article=0, $classe
 
 // http://doc.spip.org/@http_img_rien
 function http_img_rien($width, $height, $class='', $title='') {
-	return http_img_pack('rien.gif', $title,
-		"width='$width' height='$height'"
+	if (!isset($GLOBALS['browser_name'])){
+		include_spip('inc/layer');
+	}
+	if ($GLOBALS['browser_name']=="MSIE" AND version_compare($GLOBALS['browser_version'],'7','<'))
+		$height=$height-1;
+	return 
+	"<div style='width:{$width}px;height:{$height}px;line-height:0px;font-size:0px;padding:0;margin:0;border:0;'"
 		. (!$class ? '' : (" class='$class'"))
-		. (!$title ? '' : (" title=\"$title\"")));
+		. (!$title ? '' : (" title=\"$title\""))
+		."></div>";
 }
 
 // Donne la hauteur du graphe en fonction de la valeur maximale
