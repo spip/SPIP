@@ -1,3 +1,22 @@
+2.0.2 -> 2.0.3
+- les entitee &gt; et &lt; etaint changee en < > apres une surligne (13593)
+- Accepter les - dans le nom des bases SQL (13591)
+- Bug sur changement d'auteur si le nom de l'auteur était trop court  (13590)
+- Coquille dans les vieilles defs (manque un g pour generer !) (Charly Caulet) (13586)
+- Retour des recherches de mots associés aux documents (non utilisée dans le core)   (13584)
+- Bug si erreur de frappe #URL_ MOT (espace avant MOT) (13582)
+- Pour un raccourci "[->25]" la fonction nettoyer_raccourcis_typo renvoie "Array"... (Pat). (13573)
+- Le numéro du jour manquait sur le libellé du survol conduisant au calendrier du jour. Quant au libellé du mois, il n'emmenait pas sur le calendrier du mois. (13569)
+- Une fonctionnalité de la 1.9.2 perdue: si id_rubrique est fournie à la création d'une traduction, il faut créer dans cette rubrique, pas ailleurs.  (13560)
+- ne pas ecraser le hash de la boucle avec le critere {recherche} cela empeche tout plugin de l'utiliser (13555)
+- proteger la fonction recuperer_fond quand on ecrit recuperer_fond($fond,$_GET) dans les plugins meme si il semble que la variable soit protegee en amont dans tous les cas (13551)
+- Le cryptage du mot de passe avant envoi n'était plus assuré que si le cookie dession était toujours actif.  (13544)
+- Fatal error a la suppression d'un document avec vignette.  (13539)
+- Lorsqu'on pose ou retire les .htaccess des sous-répertoires de IMG, il ne faut pas oublier celui nommé "distant" qui ne figure pas dans la table des types de documents. (13538)
+- Deux balises A pour LOGO_DOCUMENT, c'est une de trop (Eric). (13536)
+
+
+
 2.0.1 -> 2.0.2
 - deux bugs au login (13529)
 - refuser les urls avec le pseudo protocole data (13521) 
