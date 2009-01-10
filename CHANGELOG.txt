@@ -25,15 +25,12 @@
 - Unifier la mise en page dans les 3 onglets de gestion des langues (13519)
 - encore quelques retouches sur l'agenda de l'espace publique (13517) 
 - le champ type de la balise A d'un logo de document était toujours vide (13512)
-- la boucle DOCUMENTS ne donnait pas les documents attachés aux
-messages de forums (13511)
-- accepter les notes nommees <*> <+> <.> et autres caracteres
-significatifs (13510)
+- la boucle DOCUMENTS ne donnait pas les documents attachés aux messages de forums (13511)
+- accepter les notes nommees <*> <+> <.> et autres caracteres significatifs (13510)
 - un peeling pour évacuer le point noir. (13508)
 - amélioration du calcul de popularité (13506)
 - lien incorrect dans le message à un visiteur venant de s'inscrire (13504)
-- support du png8 comme format de image_format (l'extension sera bien
-'png') (13501)
+- support du png8 comme format de image_format (l'extension sera bien 'png') (13501)
 - authentification via LDAP/AD, lire le Samaccountname (13500)
 - proteger l'$id fournit a calcul_branche_in (13498)
 
