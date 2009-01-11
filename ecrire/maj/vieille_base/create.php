@@ -50,6 +50,13 @@ function maj_vieille_base_create_dist($version_cible){
 		ecrire_meta('restauration_table_prefix_source',$prefixe_source,'non');
 	
 		// noter le numero de version installee
+		//
+		// Exception lorsque la version est entre 10000 et 12000
+		// car ce qui est utilise est la base au moment du SVN 10000
+		// qui avait url_propre dans les champs de tous les objets
+		// mais un spip_version type 1.945 (et non 10000). 
+		// si on laisse 10000, les mise a jour de url_propre ne se font pas.
+		if ($version == 10000) $version = 1.945;
 		ecrire_meta('version_installee',$version,'non');
 	}
 	
