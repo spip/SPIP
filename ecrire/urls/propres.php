@@ -109,7 +109,7 @@ function creer_chaine_url($x) {
 		$mots = preg_split(",[^a-zA-Z0-9_%]+,", $url);
 		$url = '';
 		foreach ($mots as $mot) {
-			if (!$mot) continue;
+			if (!strlen($mot)) continue;
 			$url2 = $url.'-'.$mot;
 
 			// Si on depasse _URLS_PROPRES_MAX caracteres, s'arreter
