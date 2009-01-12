@@ -1,4 +1,4 @@
-<BOUCLE_principale(MOTS) {id_mot} {doublons}>
+<BOUCLE_principale(MOTS) {id_mot}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
@@ -130,7 +130,7 @@
         <div class="menu">
             <h2><:autres_groupes_mots_clefs:></h2>
             <ul>
-                <BOUCLE_groupes_freres(GROUPES_MOTS) {!id_groupe} {par titre} {doublons}>
+                <BOUCLE_groupes_freres(GROUPES_MOTS) {!id_groupe} {par titre}>
                 <BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
                 <li><a href="#URL_MOT">#TYPE</a></li>
                 </BOUCLE_mot_cousin>
