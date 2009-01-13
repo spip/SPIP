@@ -148,7 +148,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 			$items .= "<a href='".
 			  generer_url_action("logout","logout=prive") .
 			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter');\" onfocus=\"changestyle('bandeaudeconnecter');\" onblur=\"changestyle('bandeaudeconnecter');\">" .
-			  http_img_pack("deconnecter-24.gif", "$alt", "") .
+			  http_img_pack("deconnecter-24.gif", "$alt", "width='26' height='20'") .
 			  "</a>";
 	}
 	$items .= "</div></li>"

@@ -104,7 +104,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 	} else	$ajax_node = " id='imgstatut$type$id'";
 
 
-	$inser_puce = puce_statut($statut, " style='margin: 1px;'$ajax_node");
+	$inser_puce = puce_statut($statut, " width='9' height='9' style='margin: 1px;'$ajax_node");
 
 	if (!autoriser('publierdans', 'rubrique', $id_rubrique)
 	OR !_ACTIVER_PUCE_RAPIDE)
@@ -363,7 +363,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act='') 
 	$h = generer_action_auteur("instituer_$type","$id-$statut");
 	$h = "javascript:selec_statut('$id', '$type', $n, '$i', '$h');";
 	$t = supprimer_tags($titre);
-	return "<a href=\"$h\"\ntitle=\"$t\"$act><img src='$i' alt=' '/></a>";
+	return "<a href=\"$h\"\ntitle=\"$t\"$act><img src='$i' $t[3] alt=' '/></a>";
 }
 
 
