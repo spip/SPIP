@@ -198,6 +198,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 
 // http://doc.spip.org/@image_imagepng
 function image_imagepng($img,$fichier) {
+	if (!function_exists('imagepng')) return false;
 	$tmp = $fichier.".tmp";
 	$ret = imagepng($img,$tmp);
 	
@@ -211,6 +212,7 @@ function image_imagepng($img,$fichier) {
 
 // http://doc.spip.org/@image_imagegif
 function image_imagegif($img,$fichier) {
+	if  (!function_exists('imagegif')) return false;
 	$tmp = $fichier.".tmp";
 	$ret = imagegif($img,$tmp);
 
@@ -224,6 +226,7 @@ function image_imagegif($img,$fichier) {
 }
 // http://doc.spip.org/@image_imagejpg
 function image_imagejpg($img,$fichier,$qualite=_IMG_GD_QUALITE) {
+	if (!function_exists('imagejpeg')) return false;
 	$tmp = $fichier.".tmp";
 	$ret = imagejpeg($img,$tmp, $qualite);
 
