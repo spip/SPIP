@@ -786,8 +786,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	}
 	// Cas particulier : expressions de date
 	else if ($date = tester_param_date($boucle->type_requete, $col)) {
-		list($col, $table) =
-		calculer_critere_infixe_date($idb, $boucles, $date);
+		$col = calculer_critere_infixe_date($idb, $boucles, $date);
+		$table = '';
 	}
 	else if (preg_match('/^(.*)\.(.*)$/', $col, $r)) {
 		  list(,$table, $col) = $r;
@@ -1085,55 +1085,47 @@ function calculer_critere_infixe_date($idb, &$boucles, $regs)
 	      ") . '\"";
 	$date_orig = $boucle->id_table . '.' . $date_orig;
 
-	if ($col == 'date') {
+	switch ($col) {
+		case 'date':
 			$col = $date_orig;
-			$col_table = '';
-		}
-	else if ($col == 'jour') {
+			break;
+		case 'jour':
 			$col = "DAYOFMONTH($date_orig)";
-			$col_table = '';
-		}
-	else if ($col == 'mois') {
+			break;
+		case 'mois':
 			$col = "MONTH($date_orig)";
-			$col_table = '';
-		}
-	else if ($col == 'annee') {
+			break;
+		case 'annee':
 			$col = "YEAR($date_orig)";
-			$col_table = '';
-		}
-	else if ($col == 'heure') {
+			break;
+		case 'heure':
 			$col = "DATE_FORMAT($date_orig, '%H:%i')";
-			$col_table = '';
-		}
-	else if ($col == 'age') {
-			$col = calculer_param_date("now()", $date_orig);
-			$col_table = '';
-		}
-	else if ($col == 'age_relatif') {
+			break;
+		case 'age':
+			$col = calculer_param_date("NOW()", $date_orig);
+			break;
+		case 'age_relatif':
 			$col = calculer_param_date($date_compare, $date_orig);
-			$col_table = '';
-		}
-	else if ($col == 'jour_relatif') {
+			break;
+		case 'jour_relatif':
 			$col = "LEAST(TO_DAYS(" .$date_compare . ")-TO_DAYS(" .
 			$date_orig . "), DAYOFMONTH(" . $date_compare .
 			")-DAYOFMONTH(" . $date_orig . ")+30.4368*(MONTH(" .
 			$date_compare . ")-MONTH(" . $date_orig .
 			"))+365.2422*(YEAR(" . $date_compare . ")-YEAR(" .
 			$date_orig . ")))";
-			$col_table = '';
-		}
-	else if ($col == 'mois_relatif') {
+			break;
+		case 'mois_relatif':
 			$col = "MONTH(" . $date_compare . ")-MONTH(" .
 			$date_orig . ")+12*(YEAR(" . $date_compare .
 			")-YEAR(" . $date_orig . "))";
-			$col_table = '';
-		}
-	else if ($col == 'annee_relatif') {
+			break;
+		case 'annee_relatif':
 			$col = "YEAR(" . $date_compare . ")-YEAR(" .
 			$date_orig . ")";
-			$col_table = '';
-		}
-	return array($col, $col_table);
+			break;
+	}
+	return $col;
 }
 
 // http://doc.spip.org/@calculer_param_date
