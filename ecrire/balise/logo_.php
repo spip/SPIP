@@ -88,20 +88,23 @@ function balise_LOGO__dist ($p) {
 		}
 	}
 	// Fin du bloc
-
+	// mais reste a traiter les cas ou $lien est une chaine
+	// (ecriture [(#LOGO|#URL...)] 
 	if ($lien) {
-		if (!is_string($lien))
-			$lien = calculer_champ($lien);
-		elseif (preg_match(",^[^#]*#([A-Za-z_]+),", $lien, $r)) {
-			$c = new Champ();
-			$c->nom_champ = $r[1];
-			$c->id_boucle = $p->id_boucle;
-			$c->boucles = &$p->boucles;
-			$c->descr = $p->descr;
-			$lien = calculer_champ($c);
-		} else {
+		$x = is_string($lien);
+		if ($x) $x = !preg_match(",^[^#]*#([A-Za-z_]+),", $lien, $r);
+		if ($x)  {
 			include_spip('balise/url_');
 			$lien = generer_generer_url_arg($type, $p, $_id_objet);
+		} else {
+			if (is_string($lien)) {
+				$c = new Champ();
+				$c->nom_champ = $r[1];
+				$c->id_boucle = $p->id_boucle;
+				$c->boucles = &$p->boucles;
+				$c->descr = $p->descr;
+			}
+			$lien = calculer_liste(array($lien), $p->descr, &$p->boucle, $p->id_boucle);
 		}
 	}
 
