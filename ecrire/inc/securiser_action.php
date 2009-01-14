@@ -100,7 +100,7 @@ function caracteriser_auteur() {
 
 // http://doc.spip.org/@_action_auteur
 function _action_auteur($action, $id_auteur, $pass, $alea) {
-	if (!isset($GLOBALS['meta'][$alea])) {
+	if (!isset($GLOBALS['meta'][$alea]) AND _request('exec')!=='install') {
 		include_spip('base/abstract_sql');
 		$GLOBALS['meta'][$alea] = sql_getfetsel('valeur', 'spip_meta', "nom=" . sql_quote($alea));
 		if (!($GLOBALS['meta'][$alea])) {
@@ -109,9 +109,8 @@ function _action_auteur($action, $id_auteur, $pass, $alea) {
 			spip_log("$alea indisponible");
 			exit;
 		}
-
 	}
-	return md5($action.$id_auteur.$pass.$GLOBALS['meta'][$alea]);
+	return md5($action.$id_auteur.$pass.@$GLOBALS['meta'][$alea]);
 }
 
 // http://doc.spip.org/@calculer_action_auteur
