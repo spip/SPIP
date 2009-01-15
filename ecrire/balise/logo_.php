@@ -56,8 +56,8 @@ function balise_LOGO__dist ($p) {
 		}
 	}
 
-	$x = !$coord  ? 0 : intval(array_shift($coord));
-	$y = !$coord  ? 0 : intval(array_shift($coord));
+	$coord_x = !$coord  ? 0 : intval(array_shift($coord));
+	$coord_y = !$coord  ? 0 : intval(array_shift($coord));
 	
 	// Bloc de compatibilite SPIP <= 2.0
 	// Ne pas chercher a comprendre.
@@ -90,6 +90,7 @@ function balise_LOGO__dist ($p) {
 	// Fin du bloc
 	// mais reste a traiter les cas ou $lien est une chaine
 	// (ecriture [(#LOGO|#URL...)] 
+
 	if ($lien) {
 		$x = is_string($lien);
 		if ($x) $x = !preg_match(",^[^#]*#([A-Za-z_]+),", $lien, $r);
@@ -112,9 +113,10 @@ function balise_LOGO__dist ($p) {
 	$connect = $p->id_boucle ?$p->boucles[$p->id_boucle]->sql_serveur :'';
 	if ($type == 'document') {
 		$qconnect = _q($connect);
+		$doc = "quete_document($_id_objet, $qconnect)";
 		if ($fichier)
-			$code = "quete_logo_file(quete_document($_id_objet, $qconnect), $qconnect)";
-		else $code = "quete_logo_document(quete_document($_id_objet, $qconnect), " . ($lien ? $lien : "''") . ", '$align', $x, $y, $qconnect)";
+			$code = "quete_logo_file($doc, $qconnect)";
+		else $code = "quete_logo_document($doc, " . ($lien ? $lien : "''") . ", '$align', $coord_x, $coord_y, $qconnect)";
 		// (x=non-faux ? y : '') pour affecter x en retournant y
 		if ($p->descr['documents'])
 		  $code = '(($doublons["documents"] .= ",". '
