@@ -78,7 +78,7 @@ function bonhomme_statut($row) {
 
 
 // http://doc.spip.org/@puce_statut_mot_dist
-function puce_statut_mot_dist($id, $statut, $id_rubrique, $type, $ajax='') {
+function puce_statut_mot_dist($id, $statut, $id_groupe, $type, $ajax='') {
 	return "<img src='" . chemin_image('petite-cle.gif') . "' alt='' />";
 }
 
