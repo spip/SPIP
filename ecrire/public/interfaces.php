@@ -178,7 +178,6 @@ $table_des_tables['syndication']='syndic';
 $table_des_tables['syndic']='syndic';
 $table_des_tables['syndic_articles']='syndic_articles';
 $table_des_tables['hierarchie']='rubriques';
-$table_des_tables['index']='index';
 $table_des_tables['messages']='messages';
 $table_des_tables['petitions']='petitions';
 
