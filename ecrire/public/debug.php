@@ -741,7 +741,7 @@ function trace_query_end($query, $start, $result, $err, $serveur='')
 		trace_query_chrono($start, microtime(), $query, $result, $serveur);
 	if (!($err = sql_errno())) return $result;
 	$err .= ' '.sql_error();
-	if (autoriser('voirstats')) {
+	if (autoriser('debug')) {
 		include_spip('public/debug');
 		$tableau_des_erreurs[] = array(
 		_T('info_erreur_requete'). " "  .  htmlentities($query),
