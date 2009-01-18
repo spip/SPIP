@@ -262,8 +262,9 @@ function forum_insert_statut($champs, $retour, $forcer_statut=NULL)
 	else
 		$champs['statut'] = ($statut == 'non') ? 'off' : (($statut == 'pri') ? 'prop' :	'publie');
 		
-	// Antispam basique : si 'nobot' a ete renseigne, ca ne peut etre qu'un bot
-	if (strlen(_request('nobot'))) {
+	// Antispam basique : 
+	// si l'input invisible a ete renseigne, ca ne peut etre qu'un bot
+	if (strlen(_request(_request('cle_ajouter_document')))) {
 		tracer_erreur_forum('champ interdit (nobot) rempli');
 		$champs['statut']=false;
 	}

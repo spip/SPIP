@@ -81,12 +81,8 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 	$script_hidden .= "<input type='hidden' name='afficher_texte' value='$afficher_texte' />";
 	$script_hidden .= "<input type='hidden' name='retour_forum' value='$retour_forum' />";
 
-	// l'ajout de documents est-il autorise ?
-	// cf. verifier.php
-	if ($formats = forum_documents_acceptes()) {
-		include_spip('inc/securiser_action');
-		$cle_ajouter_document = calculer_cle_action('ajouter-document-'.join('-',array_map('intval',$ids)));
-	}
+	include_spip('inc/securiser_action');
+	$cle = calculer_cle_action('ajouter-document-'.join('-',array_map('intval',$ids)));
 
 	return array(
 		'modere' => (($type != 'pri') ? '' : ' '),
@@ -98,10 +94,10 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 		'action' => $script, # ce sur quoi on fait le action='...'
 		'_hidden' => $script_hidden, # pour les variables hidden
 		'url_site' => "http://",
-		'cle_ajouter_document' => $cle_ajouter_document,
-		'formats_documents_forum' => $formats,
+		'cle_ajouter_document' => $cle,
+		'formats_documents_forum' => forum_documents_acceptes(),
 		'ajouter_document' => $_FILES['ajouter_document']['name'],
-		'nobot' => _request('nobot'),
+		'nobot' => _request($cle),
 		'ajouter_groupe' => $ajouter_groupe,
 		'ajouter_mot' => (is_array($ajouter_mot) ? $ajouter_mot : array($ajouter_mot)),
 		'id_forum' => $id_forum, // passer id_forum au formulaire pour lui permettre d'afficher a quoi l'internaute repond
