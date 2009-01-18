@@ -106,7 +106,7 @@ function balise_LOGO__dist ($p) {
 				$c->descr = $p->descr;
 				$lien = $c;
 			}
-			$lien = calculer_liste(array($lien), $p->descr, &$p->boucles, $p->id_boucle);
+			$lien = calculer_liste(array($lien), $p->descr, $p->boucles, $p->id_boucle);
 		}
 	}
 
