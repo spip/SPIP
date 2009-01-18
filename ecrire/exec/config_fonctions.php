@@ -45,7 +45,6 @@ function exec_config_fonctions_dist()
 	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
 	$relayeur = charger_fonction('relayeur', 'configuration');
 	$type_urls = charger_fonction('type_urls', 'configuration');
-	$compresseur = charger_fonction('compresseur', 'configuration');
 
 	echo 
 
@@ -60,8 +59,6 @@ function exec_config_fonctions_dist()
 	  $relayeur(_request('retour_proxy')), // Proxy pour syndication & doc
 
 	  $type_urls(), // Choix de type_urls
-
-	  $compresseur(), // Compression http et compactages CSS ou JS
 
 	'';
 

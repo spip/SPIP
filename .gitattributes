@@ -85,7 +85,6 @@ ecrire/configuration/annonces.php -text
 ecrire/configuration/articles.php -text
 ecrire/configuration/avertisseur.php -text
 ecrire/configuration/breves.php -text
-ecrire/configuration/compresseur.php -text
 ecrire/configuration/contenu_forums.php -text
 ecrire/configuration/documents.php -text
 ecrire/configuration/forums_prives.php -text
@@ -337,7 +336,6 @@ ecrire/lang/spip_km.php -text
 ecrire/lang/spip_my.php -text
 ecrire/lang/spip_ru.php -text
 ecrire/lang/spip_sv.php -text
-ecrire/lib/JavaScriptPacker/class.JavaScriptPacker.php -text
 ecrire/lib/safehtml/classes/HTMLSax3.php -text
 ecrire/lib/safehtml/classes/HTMLSax3/Decorators.php -text
 ecrire/lib/safehtml/classes/HTMLSax3/States.php -text

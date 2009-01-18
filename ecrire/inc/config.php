@@ -100,8 +100,6 @@ function liste_metas()
 		'email_envoi' => '',
 		'email_webmaster' => '',
 		'auto_compress_http'=>'non',
-		'auto_compress_js'=>'non',
-		'auto_compress_css'=>'non'
 	));
 }
 

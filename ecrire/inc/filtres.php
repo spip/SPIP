@@ -16,6 +16,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/charsets');
 include_spip('inc/filtres_mini');
 
+/**
+ * Un filtre qui ne fait rien, utilisable par defaut en 3e argument de appliquer_filtre
+ *
+ * @param string $texte
+ * @return string
+ */
+function filtre_identite($texte){
+	return $texte;
+}
+
 // http://doc.spip.org/@chercher_filtre
 function chercher_filtre($fonc, $default=NULL) {
 		foreach (
@@ -1925,58 +1935,6 @@ function direction_css ($css, $voulue='') {
 	return $f;
 }
 
-// recuperere le chemin d'une css existante et :
-// cree (ou recree) dans _DIR_VAR/cache_css/ une css dont les url relatives sont passees en url absolues
-// http://doc.spip.org/@url_absolue_css
-function url_absolue_css ($css) {
-	if (!preg_match(',\.css$,i', $css, $r)) return $css;
-
-	$url_absolue_css = url_absolue($css);
-
-	$f = basename($css,'.css');
-	$f = sous_repertoire (_DIR_VAR, 'cache-css') 
-		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-urlabs-" . substr(md5("$css-urlabs"), 0,4) . "\\2",$f) 
-		. '.css';
-
-	if ((@filemtime($f) > @filemtime($css))
-	AND ($GLOBALS['var_mode'] != 'recalcul'))
-		return $f;
-
-	if ($url_absolue_css==$css){
-		if (strncmp($GLOBALS['meta']['adresse_site'],$css,$l=strlen($GLOBALS['meta']['adresse_site']))!=0
-		 OR !lire_fichier(_DIR_RACINE . substr($css,$l), $contenu)){
-		 		include_spip('inc/distant');
-		 		if (!$contenu = recuperer_page($css))
-					return $css;
-		}
-	}
-	elseif (!lire_fichier($css, $contenu))
-		return $css;
-
-	// passer les url relatives a la css d'origine en url absolues
-	$contenu = urls_absolues_css($contenu, $css);
-
-	// ecrire la css
-	if (!ecrire_fichier($f, $contenu))
-		return $css;
-
-	return $f;
-}
-
-// http://doc.spip.org/@compacte_css
-function compacte_css ($contenu) {
-	// nettoyer la css de tout ce qui sert pas
-	$contenu = preg_replace(",/\*.*\*/,Ums","",$contenu); // pas de commentaires
-	$contenu = preg_replace(",\s(?=\s),Ums","",$contenu); // pas d'espaces consecutifs
-	$contenu = preg_replace("/\s?({|;|,|:)\s?/ms","$1",$contenu); // pas d'espaces dans les declarations css
-	$contenu = preg_replace("/\s}/ms","}",$contenu); // pas d'espaces dans les declarations css
-	$contenu = preg_replace(",#([0-9a-f])(\\1)([0-9a-f])(\\3)([0-9a-f])(\\5),i","#$1$3$5",$contenu); // passser les codes couleurs en 3 car si possible
-	$contenu = preg_replace(",([^{}]*){},Ums"," ",$contenu); // supprimer les declarations vides
-	$contenu = trim($contenu);
-
-	return $contenu;
-}
-
 // filtre table_valeur
 // permet de recuperer la valeur d'un tableau pour une cle donnee
 // prend en entree un tableau serialise ou non (ce qui permet d'enchainer le filtre)
@@ -2116,69 +2074,6 @@ function charge_scripts($scripts) {
   return $flux;
 }
 
-// Compacte du javascript grace a Dean Edward's JavaScriptPacker
-// utile pour dist/jquery.js par exemple
-// http://doc.spip.org/@compacte_js
-function compacte_js($flux) {
-	if (!strlen($flux))
-		return $flux;
-	include_spip('lib/JavaScriptPacker/class.JavaScriptPacker');
-	$packer = new JavaScriptPacker($flux, 0, true, false);
-
-	// en cas d'echec (?) renvoyer l'original
-	if (strlen($t = $packer->pack()))
-		return $t;
-
-	// erreur
-	spip_log('erreur de compacte_js');
-	return $flux;
-}
-
-// Si la source est un chemin, on retourne un chemin avec le contenu compacte
-// dans _DIR_VAR/cache_$format/
-// Si c'est un flux on le renvoit compacte
-// Si on ne sait pas compacter, on renvoie ce qu'on a recu
-// http://doc.spip.org/@compacte
-function compacte($source, $format = null) {
-	if (!$format AND preg_match(',\.(js|css)$,', $source, $r))
-		$format = $r[1];
-	if (!function_exists($compacte = 'compacte_'.$format))
-		return $source;
-
-	// Si on n'importe pas, est-ce un fichier ?
-	if (!preg_match(',[\s{}],', $source)
-	AND preg_match(',\.'.$format.'$,i', $source, $r)
-	AND file_exists($source)) {
-		// si c'est une css, il faut reecrire les url en absolu
-  	if ($type=='css')
-  		$source = url_absolue_css($source);
-		
-		$f = basename($source,'.'.$format);
-		$f = sous_repertoire (_DIR_VAR, 'cache-'.$format) 
-		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-compacte-"
-		. substr(md5("$source-compacte"), 0,4) . "\\2", $f, 1)
-		. '.' . $format;
-
-		if ((@filemtime($f) > @filemtime($source))
-		AND ($GLOBALS['var_mode'] != 'recalcul'))
-			return $f;
-
-		if (!lire_fichier($source, $contenu))
-			return $source;
-
-		// traiter le contenu
-		$contenu = $compacte($contenu);
-
-		// ecrire le fichier destination, en cas d'echec renvoyer la source
-		if (ecrire_fichier($f, $contenu))
-			return $f;
-		else
-			return $source;
-	}
-
-	// Sinon simple compactage de contenu
-	return $compacte($source);
-}
 
 
 // produit une balise img avec un champ alt d'office si vide
@@ -2267,187 +2162,6 @@ function filtre_info_plugin_dist($plugin, $type_info) {
 			return $plugins_actifs[$plugin][$type_info];
 }
 
-
-// http://doc.spip.org/@filtre_cache_static
-function filtre_cache_static($scripts,$type='js'){
-	$nom = "";
-	if (!is_array($scripts) && $scripts) $scripts = array($scripts);
-	if (count($scripts)){
-		$dir = sous_repertoire(_DIR_VAR,'cache-'.$type);
-		$nom = $dir . md5(serialize($scripts)) . ".$type";
-		if (
-		  $GLOBALS['var_mode']=='calcul'
-		  OR $GLOBALS['var_mode']=='recalcul'
-		  OR !file_exists($nom)){
-		  	$fichier = "";
-		  	$comms = array();
-		  	$total = 0;
-		  	foreach($scripts as $script){
-		  		if (!is_array($script)) {
-		  			// c'est un fichier
-		  			$comm = $script;
-		  			// enlever le timestamp si besoin
-		  			$script = preg_replace(",[?].+$,",'',$script);
-				  	if ($type=='css')
-				  		$script = url_absolue_css($script);
-		  			lire_fichier($script, $contenu);
-		  		}
-		  		else {
-		  			// c'est un squelette
-		  			$comm = _SPIP_PAGE . "=$script[0]"
-		  				. (strlen($script[1])?"($script[1])":'');
-		  			parse_str($script[1],$contexte);
-		  			$contenu = recuperer_fond($script[0],$contexte);
-		  			if ($type=='css')
-						$contenu = urls_absolues_css($contenu, self('&'));
-		  		}
-				$f = 'compacte_'.$type;
-	  			$fichier .= "/* $comm */\n". $f($contenu) . "\n\n";
-				$comms[] = $comm;
-				$total += strlen($contenu);
-		  	}
-
-			// calcul du % de compactage
-			$pc = intval(1000*strlen($fichier)/$total)/10;
-			$comms = "compact [\n\t".join("\n\t", $comms)."\n] $pc%";
-			$fichier = "/* $comms */\n\n".$fichier;
-
-		  	// ecrire
-		  	ecrire_fichier($nom,$fichier);
-		  	// ecrire une version .gz pour content-negociation par apache, cf. [11539]
-		  	ecrire_fichier("$nom.gz",$fichier);
-		  }
-	}
-
-	// Le commentaire detaille n'apparait qu'au recalcul, pour debug
-	return array($nom, $comms ? "<!-- $comms -->\n" : '');
-}
-
-
-// Appelee par compacte_head() si le webmestre le desire, cette fonction
-// compacte les scripts js dans un fichier statique pose dans local/
-// en entree : un <head> html.
-// http://doc.spip.org/@compacte_head_js
-function compacte_head_js($flux) {
-	$url_base = url_de_base();
-	$url_page = substr(generer_url_public('A'), 0, -1);
-	$dir = preg_quote($url_page,',').'|'.preg_quote(preg_replace(",^$url_base,",_DIR_RACINE,$url_page),',');
-
-	$scripts = array();
-	$flux_nocomment = preg_replace(",<!--.*-->,Uims","",$flux);
-	foreach (extraire_balises($flux_nocomment,'script') as $s) {
-		if (extraire_attribut($s, 'type') === 'text/javascript'
-		AND $src = extraire_attribut($s, 'src')
-		AND !strlen(strip_tags($s))
-		AND (
-			preg_match(',^('.$dir.')(.*)$,', $src, $r)
-			OR (
-				// ou si c'est un fichier
-				$src = preg_replace(',^'.preg_quote(url_de_base(),',').',', '', $src)
-				// enlever un timestamp eventuel derriere un nom de fichier statique
-				AND $src2 = preg_replace(",[.]js[?].+$,",'.js',$src)
-				// verifier qu'il n'y a pas de ../ ni / au debut (securite)
-				AND !preg_match(',(^/|\.\.),', substr($src,strlen(_DIR_RACINE)))
-				// et si il est lisible
-				AND @is_readable($src2)
-			)
-		)) {
-			if ($r)
-				$scripts[$s] = explode('&',
-					str_replace('&amp;', '&', $r[2]), 2);
-			else
-				$scripts[$s] = $src;
-		}
-	}
-	if (list($src,$comms,$time) = filtre_cache_static($scripts,'js')){
-		$scripts = array_keys($scripts);
-		$flux = str_replace(reset($scripts),
-			$comms
-			."<script type='text/javascript' src='$src'></script>\n",$flux);
-		$flux = str_replace($scripts,"",$flux);
-	}
-
-	return $flux;
-}
-
-// Appelee par compacte_head() si le webmestre le desire, cette fonction
-// compacte les feuilles de style css dans un fichier statique pose dans local/
-// en entree : un <head> html.
-// http://doc.spip.org/@compacte_head_css
-function compacte_head_css($flux) {
-	$url_base = url_de_base();
-	$url_page = substr(generer_url_public('A'), 0, -1);
-	$dir = preg_quote($url_page,',').'|'.preg_quote(preg_replace(",^$url_base,",_DIR_RACINE,$url_page),',');
-
-	$css = array();
-	$flux_nocomment = preg_replace(",<!--.*-->,Uims","",$flux);
-	foreach (extraire_balises($flux_nocomment, 'link') as $s) {
-		if (extraire_attribut($s, 'rel') === 'stylesheet'
-		AND (!($type = extraire_attribut($s, 'type'))
-			OR $type == 'text/css')
-		AND is_null(extraire_attribut($s, 'name')) # css nommee : pas touche
-		AND is_null(extraire_attribut($s, 'id'))   # idem
-		AND !strlen(strip_tags($s))
-		AND $src = preg_replace(",^$url_base,",_DIR_RACINE,extraire_attribut($s, 'href'))
-		AND (
-			// regarder si c'est du format spip.php?page=xxx
-			preg_match(',^('.$dir.')(.*)$,', $src, $r)
-			OR (
-				// ou si c'est un fichier
-				// enlever un timestamp eventuel derriere un nom de fichier statique
-				$src2 = preg_replace(",[.]css[?].+$,",'.css',$src)
-				// verifier qu'il n'y a pas de ../ ni / au debut (securite)
-				AND !preg_match(',(^/|\.\.),', substr($src2,strlen(_DIR_RACINE)))
-				// et si il est lisible
-				AND @is_readable($src2)
-			)
-		)) {
-			$media = strval(extraire_attribut($s, 'media'));
-			if ($r)
-				$css[$media][$s] = explode('&',
-					str_replace('&amp;', '&', $r[2]), 2);
-			else
-				$css[$media][$s] = $src;
-		}
-	}
-
-	// et mettre le tout dans un cache statique
-	foreach($css as $m=>$s){
-		// si plus d'une css pour ce media ou si c'est une css dynamique
-		if (count($s)>1 OR is_array(reset($s))){
-			if (list($src,$comms) = filtre_cache_static($s,'css')){
-				$s = array_keys($s);
-				$flux = str_replace(reset($s),
-					$comms
-					."<link rel='stylesheet'".($m?" media='$m'":"")." href='$src' type='text/css' />\n",$flux);
-				$flux = str_replace($s,"",$flux);
-			}
-		}
-	}
-
-	return $flux;
-}
-
-// Cette fonction verifie les reglages du site et traite le compactage
-// des css et/ou js d'un <head>
-// un fichier .gz est cree pour chaque, qui peut etre utilise par apache
-// et lui eviter de recompresser a chaque hit, avec les directives suivantes :
-//<IfModule mod_gzip.c>
-//mod_gzip_on                   Yes
-//mod_gzip_can_negotiate        Yes
-//mod_gzip_static_suffix        .gz
-//AddEncoding              gzip .gz
-//mod_gzip_item_include         file       \.(js|css)$
-//</IfModule>
-// http://doc.spip.org/@compacte_head
-function compacte_head($flux){
-	// dans l'espace prive on compacte toujours, c'est concu pour
-	if ($GLOBALS['meta']['auto_compress_css'] == 'oui' OR (test_espace_prive() AND !defined('_INTERDIRE_COMPACTE_HEAD_ECRIRE')))
-		$flux = compacte_head_css($flux);
-	if ($GLOBALS['meta']['auto_compress_js'] == 'oui' OR (test_espace_prive() AND !defined('_INTERDIRE_COMPACTE_HEAD_ECRIRE')))
-		$flux = compacte_head_js($flux);
-	return $flux;
-}
 
 // http://doc.spip.org/@chercher_rubrique
 function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,$actionable = false, $retour_sans_cadre=false){
