@@ -40,7 +40,6 @@ function exec_config_fonctions_dist()
 	echo debut_droite('', true);
 
 	$reducteur = charger_fonction('reducteur', 'configuration');
-#	$indexeur = charger_fonction('indexeur', 'configuration');
 	$compteur = charger_fonction('compteur', 'configuration');
 	$avertisseur = charger_fonction('avertisseur', 'configuration');
 	$versionneur = charger_fonction('versionneur', 'configuration');
