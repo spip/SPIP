@@ -260,6 +260,7 @@ $spip_pipeline = array(
 	'formulaire_charger' => '',
 	'formulaire_verifier' => '',
 	'formulaire_traiter' => '',
+	'formulaire_admin' => '',
 	'header_prive' => '|f_jQuery||compacte_head',
 	'insert_head' => '|f_jQuery',
 	'jquery_plugins' => '',
