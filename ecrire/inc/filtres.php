@@ -1642,13 +1642,6 @@ function tags2dcsubject($tags) {
 	}
 	return $subjects;
 }
-// fabrique un bouton de type $t de Name $n, de Value $v et autres attributs $a
-// http://doc.spip.org/@boutonne
-function boutonne($t, $n, $v, $a='') {
-	return "\n<input type='$t'"
-	. (!$n ? '' : " name='$n'")
-	. " value=\"$v\" $a />";
-}
 
 // retourne la premiere balise du type demande
 // ex: [(#DESCRIPTIF|extraire_balise{img})]
