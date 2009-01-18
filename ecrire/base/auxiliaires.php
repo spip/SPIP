@@ -27,22 +27,6 @@ $spip_petitions = array(
 $spip_petitions_key = array(
 		"PRIMARY KEY"	=> "id_article");
 
-$spip_visites = array(
-		"date"	=> "DATE NOT NULL",
-		"visites"	=> "int UNSIGNED DEFAULT '0' NOT NULL",
-		"maj"	=> "TIMESTAMP");
-
-$spip_visites_key = array(
-		"PRIMARY KEY"	=> "date");
-
-$spip_visites_articles = array(
-		"date"	=> "DATE NOT NULL",
-		"id_article"	=> "int UNSIGNED NOT NULL",
-		"visites"	=> "int UNSIGNED DEFAULT '0' NOT NULL",
-		"maj"	=> "TIMESTAMP");
-
-$spip_visites_articles_key = array(
-		"PRIMARY KEY"	=> "date, id_article");
 
 $spip_resultats = array(
  		"recherche"	=> "char(16) not null default ''",
@@ -54,28 +38,6 @@ $spip_resultats_key = array(
 // pas de cle ni index, ca fait des insertions plus rapides et les requetes jointes utilisees en recheche ne sont pas plus lentes ...
 );
 
-$spip_referers = array(
-		"referer_md5"	=> "bigint UNSIGNED NOT NULL",
-		"date"		=> "DATE NOT NULL",
-		"referer"	=> "VARCHAR (255)",
-		"visites"	=> "int UNSIGNED NOT NULL",
-		"visites_jour"	=> "int UNSIGNED NOT NULL",
-		"visites_veille"=> "int UNSIGNED NOT NULL",
-		"maj"		=> "TIMESTAMP");
-
-$spip_referers_key = array(
-		"PRIMARY KEY"	=> "referer_md5");
-
-$spip_referers_articles = array(
-		"id_article"	=> "int UNSIGNED NOT NULL",
-		"referer_md5"	=> "bigint UNSIGNED NOT NULL",
-		"referer"	=> "VARCHAR (255) DEFAULT '' NOT NULL",
-		"visites"	=> "int UNSIGNED NOT NULL",
-		"maj"		=> "TIMESTAMP");
-
-$spip_referers_articles_key = array(
-		"PRIMARY KEY"	=> "id_article, referer_md5",
-		"KEY referer_md5"	=> "referer_md5");
 
 $spip_auteurs_articles = array(
 		"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
@@ -112,43 +74,6 @@ $spip_documents_liens_key = array(
 		"PRIMARY KEY"		=> "id_document,id_objet,objet",
 		"KEY id_document"	=> "id_document");
 
-/*
-$spip_documents_articles = array(
-		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
-
-$spip_documents_articles_key = array(
-		"PRIMARY KEY"		=> "id_article, id_document",
-		"KEY id_document"	=> "id_document");
-
-$spip_documents_rubriques = array(
-		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_rubrique"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
-
-$spip_documents_rubriques_key = array(
-		"PRIMARY KEY"		=> "id_rubrique, id_document",
-		"KEY id_document"	=> "id_document");
-
-$spip_documents_breves = array(
-		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_breve"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
-
-$spip_documents_breves_key = array(
-		"PRIMARY KEY"		=> "id_breve, id_document",
-		"KEY id_document"	=> "id_document");
-
-$spip_documents_forum = array(
-		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_forum"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
-
-$spip_documents_forum_key = array(
-		"PRIMARY KEY"		=> "id_forum, id_document",
-		"KEY id_document"	=> "id_document");
-*/
 
 $spip_mots_articles = array(
 		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
@@ -251,18 +176,7 @@ $tables_auxiliaires['spip_petitions'] = array(
 	'field' => &$spip_petitions,
 	'key' => &$spip_petitions_key
 );
-$tables_auxiliaires['spip_visites'] = array(
-	'field' => &$spip_visites,
-	'key' => &$spip_visites_key);
-$tables_auxiliaires['spip_visites_articles'] = array(
-	'field' => &$spip_visites_articles,
-	'key' => &$spip_visites_articles_key);
-$tables_auxiliaires['spip_referers'] = array(
-	'field' => &$spip_referers,
-	'key' => &$spip_referers_key);
-$tables_auxiliaires['spip_referers_articles'] = array(
-	'field' => &$spip_referers_articles,
-	'key' => &$spip_referers_articles_key);
+
 $tables_auxiliaires['spip_auteurs_articles'] = array(
 	'field' => &$spip_auteurs_articles,
 	'key' => &$spip_auteurs_articles_key);
@@ -275,20 +189,7 @@ $tables_auxiliaires['spip_auteurs_messages'] = array(
 $tables_auxiliaires['spip_documents_liens'] = array(
 	'field' => &$spip_documents_liens,
 	'key' => &$spip_documents_liens_key);
-/*
-$tables_auxiliaires['spip_documents_articles'] = array(
-	'field' => &$spip_documents_articles,
-	'key' => &$spip_documents_articles_key);
-$tables_auxiliaires['spip_documents_rubriques'] = array(
-	'field' => &$spip_documents_rubriques,
-	'key' => &$spip_documents_rubriques_key);
-$tables_auxiliaires['spip_documents_breves'] = array(
-	'field' => &$spip_documents_breves,
-	'key' => &$spip_documents_breves_key);
-$tables_auxiliaires['spip_documents_forum'] = array(
-	'field' => &$spip_documents_forum,
-	'key' => &$spip_documents_forum_key);
-*/
+
 $tables_auxiliaires['spip_mots_articles'] = array(
 	'field' => &$spip_mots_articles,
 	'key' => &$spip_mots_articles_key);

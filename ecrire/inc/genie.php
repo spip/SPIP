@@ -116,12 +116,6 @@ function taches_generales($taches_generales = array()) {
 	AND ($GLOBALS['meta']['quoi_de_neuf'] == 'oui'))
 		$taches_generales['mail']= 3600 * 24 * $GLOBALS['meta']['jours_neuf'];
 
-	// stats : toutes les 5 minutes on peut vider un panier de visites
-	if ($GLOBALS['meta']["activer_statistiques"] == "oui") {
-		$taches_generales['visites'] = 300; 
-		$taches_generales['popularites'] = 7200; # calcul lourd
-	}
-
 	// syndication
 	if ($GLOBALS['meta']["activer_syndic"] == "oui") 
 		$taches_generales['syndic'] = 90;

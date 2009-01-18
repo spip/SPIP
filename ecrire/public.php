@@ -149,13 +149,9 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	// Execution de la page calculee
 
-	// decomptage des visites, on peut forcer a oui ou non avec le header X-Spip-Visites
-	// par defaut on ne compte que les pages en html (ce qui exclue les js,css et flux rss)
-	$spip_compter_visites = $html?'oui':'non';
-	if (isset($page['entetes']['X-Spip-Visites'])){
-		$spip_compter_visites = in_array($page['entetes']['X-Spip-Visites'],array('oui','non'))?$page['entetes']['X-Spip-Visites']:$spip_compter_visites;
-		unset($page['entetes']['X-Spip-Visites']);
-	}
+	// traitements sur les entetes avant envoi
+	// peut servir pour le plugin de stats
+	$page['entetes'] = pipeline('affichage_entetes_final', $page['entetes']);
 
 	// 1. Cas d'une page contenant uniquement du HTML :
 	if ($page['process_ins'] == 'html') {
@@ -213,13 +209,6 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	if (count($tableau_des_temps) AND $affiche_boutons_admin) {
 		include_spip('public/debug');
 		echo chrono_requete($tableau_des_temps);
-	}
-
-	// Gestion des statistiques du site public
-	if (($GLOBALS['meta']["activer_statistiques"] != "non")
-	AND $spip_compter_visites!='non') {
-		$stats = charger_fonction('stats', 'public');
-		$stats();
 	}
 
 	if (isset($GLOBALS['meta']['date_prochain_postdate'])

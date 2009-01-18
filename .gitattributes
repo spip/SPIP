@@ -65,7 +65,6 @@ ecrire/base/connect_sql.php -text
 ecrire/base/convert_sql_utf8.php -text
 ecrire/base/convert_utf8.php -text
 ecrire/base/delete_all.php -text
-ecrire/base/delete_statistiques.php -text
 ecrire/base/import_all.php -text
 ecrire/base/index.php -text
 ecrire/base/trouver_table.php -text
@@ -87,7 +86,6 @@ ecrire/configuration/articles.php -text
 ecrire/configuration/avertisseur.php -text
 ecrire/configuration/breves.php -text
 ecrire/configuration/compresseur.php -text
-ecrire/configuration/compteur.php -text
 ecrire/configuration/contenu_forums.php -text
 ecrire/configuration/documents.php -text
 ecrire/configuration/forums_prives.php -text
@@ -198,17 +196,12 @@ ecrire/exec/selectionner.php -text
 ecrire/exec/selectionner_auteur.php -text
 ecrire/exec/sites_edit.php -text
 ecrire/exec/sites_tous.php -text
-ecrire/exec/statistiques_lang.php -text
-ecrire/exec/statistiques_referers.php -text
-ecrire/exec/statistiques_repartition.php -text
-ecrire/exec/statistiques_visites.php -text
 ecrire/exec/synchro.php -text
 ecrire/exec/tourner.php -text
 ecrire/exec/upgrade.php -text
 ecrire/exec/valider_xml.php -text
 ecrire/exec/virtualiser.php -text
 ecrire/genie/maintenance.php -text
-ecrire/genie/popularites.php -text
 ecrire/genie/syndic.php -text
 ecrire/inc/actions.php -text
 ecrire/inc/afficher_objets.php -text
@@ -284,7 +277,6 @@ ecrire/inc/presenter_liste.php -text
 ecrire/inc/puce_statut.php -text
 ecrire/inc/rechercher.php -text
 ecrire/inc/referencer_traduction.php -text
-ecrire/inc/referenceurs.php -text
 ecrire/inc/regler_moderation.php -text
 ecrire/inc/safehtml.php -text
 ecrire/inc/securiser_action.php -text

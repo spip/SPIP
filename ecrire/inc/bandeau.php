@@ -47,13 +47,6 @@ function definir_barre_boutons() {
 	$boutons_admin['auteurs'] = new Bouton(
 		'redacteurs-48.png', 'icone_auteurs');
 
-
-	if ($GLOBALS['meta']["activer_statistiques"] != 'non'
-	AND autoriser('voirstats')) {
-		$boutons_admin['statistiques_visites']=
-		  new Bouton('statistiques-48.png', 'icone_statistiques_visites');
-	}
-
 	// autoriser('configurer') => forcement admin complet (ou webmestre)
 	if (autoriser('configurer')) {
 		$boutons_admin['configuration']=
@@ -154,24 +147,6 @@ function definir_barre_boutons() {
 
 	$boutons_admin['auteurs']->sousmenu= $sousmenu;
 
-	// sous menu statistiques
-	if (isset($boutons_admin['statistiques_visites'])) {
-		$sousmenu=array(
-			//'espacement' => null,// les espacements debloquent si on a des icones sur 2 lignes
-			'statistiques_repartition' =>
-				new Bouton("rubrique-24.gif", "icone_repartition_visites")
-		);
-
-		if ($GLOBALS['meta']['multi_articles'] == 'oui'
-		OR $GLOBALS['meta']['multi_rubriques'] == 'oui')
-			$sousmenu['statistiques_lang']=
-				new Bouton("langues-24.gif", "onglet_repartition_lang");
-
-		$sousmenu['statistiques_referers']=
-		  new Bouton("referers-24.gif", "titre_liens_entrants");
-
-		$boutons_admin['statistiques_visites']->sousmenu= $sousmenu;
-	}
 
 	// sous menu configuration
 	$sousmenu = array();
@@ -203,6 +178,7 @@ function definir_barre_boutons() {
 	} // fin si admin
 
 	// ajouter les boutons issus des plugin via plugin.xml
+	// avant l'icone de configuration
 	if (function_exists('boutons_plugins')
 	  AND is_array($liste_boutons_plugins = boutons_plugins())){
 		foreach($liste_boutons_plugins as $id => $infos){
@@ -215,13 +191,13 @@ function definir_barre_boutons() {
 					  $infos['args']?$infos['args']:null
 					  );
 				if (!$parent) {
-					$boutons_admin = array_slice($boutons_admin,0,-3,true)
+					$boutons_admin = array_slice($boutons_admin,0,-4,true)
 					+array($id=> new Bouton(
 					  find_in_path($infos['icone']),  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null
 					  ))
-					+ array_slice($boutons_admin,-3,3,true);
+					+ array_slice($boutons_admin,-4,4,true);
 				}
 			}
 		}

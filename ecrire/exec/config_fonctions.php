@@ -40,7 +40,6 @@ function exec_config_fonctions_dist()
 	echo debut_droite('', true);
 
 	$reducteur = charger_fonction('reducteur', 'configuration');
-	$compteur = charger_fonction('compteur', 'configuration');
 	$avertisseur = charger_fonction('avertisseur', 'configuration');
 	$versionneur = charger_fonction('versionneur', 'configuration');
 	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
@@ -51,10 +50,6 @@ function exec_config_fonctions_dist()
 	echo 
 
 	  $reducteur(), // Creation automatique de vignettes
-
-#	  $indexeur(), // Indexation pour moteur de recherche
-
-	  $compteur(), // Gerant de statistique
 
 	  $avertisseur(), // Notification de modification des articles
 
@@ -75,7 +70,8 @@ function exec_config_fonctions_dist()
 //
 	$res = pipeline('affiche_milieu',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
 	if ($res)
-		echo ajax_action_post('config_fonctions', '', 'config_fonctions', '', $res);
+		echo $res;
+		#echo ajax_action_post('config_fonctions', '', 'config_fonctions', '', $res);
 
 	echo fin_gauche(), fin_page();
 	}

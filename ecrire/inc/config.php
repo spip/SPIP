@@ -13,11 +13,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-//
-// Appliquer les valeurs par defaut pour les options non initialisees
-// (pour les langues c'est fait)
-//
-
+/**
+ * Appliquer les valeurs par defaut pour les options non initialisees
+ * (pour les langues c'est fait)
+ * 
+ * @return null
+ */
 // http://doc.spip.org/@inc_config_dist
 function inc_config_dist() {
 	actualise_metas(liste_metas());
@@ -26,7 +27,7 @@ function inc_config_dist() {
 // http://doc.spip.org/@liste_metas
 function liste_metas()
 {
-	return array(
+	return pipeline('configurer_liste_metas', array(
 		'nom_site' => _T('info_mon_site_spip'),
 		'adresse_site' => preg_replace(",/$,", "", url_de_base()),
 		'descriptif_site' => '',
@@ -80,8 +81,6 @@ function liste_metas()
 		'messagerie_agenda' => 'oui',
 
 		'articles_versions' => 'non',
-		'activer_statistiques' => 'non',
-		'activer_captures_referers' => 'non',
 
 		'documents_article' => 'non',
 		'documents_rubrique' => 'non',
@@ -103,7 +102,7 @@ function liste_metas()
 		'auto_compress_http'=>'non',
 		'auto_compress_js'=>'non',
 		'auto_compress_css'=>'non'
-	);
+	));
 }
 
 // mets les meta a des valeurs conventionnelles quand elles sont vides

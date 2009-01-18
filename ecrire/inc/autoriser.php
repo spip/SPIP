@@ -337,14 +337,6 @@ function autoriser_mot_modifier_dist($faire, $type, $id, $qui, $opt) {
 		);
 }
 
-// Lire les stats ?
-// = tous les admins
-// http://doc.spip.org/@autoriser_voirstats_dist
-function autoriser_voirstats_dist($faire, $type, $id, $qui, $opt) {
-	return
-		$qui['statut'] == '0minirezo';
-}
-
 
 // Voir un objet
 // http://doc.spip.org/@autoriser_voir_dist

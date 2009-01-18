@@ -70,25 +70,6 @@ function exec_admin_effacer_dist()
 		"</div>";
 
 	echo fin_cadre_relief(true);
-	
-	echo debut_cadre_trait_couleur('',true,'',_T('texte_effacer_statistiques'));
-
-	$res = generer_form_ecrire('delete_statistiques', "", '', _T('bouton_effacer_statistiques'));
-
-	echo 
-		'<img src="' .  chemin_image('warning.gif') . '" alt="',
-	  	_T('info_avertissement'),
-		"\" style='width: 48px; height: 48px; float: right;margin: 10px;' />",
-	  _T('texte_admin_effacer_stats'),
-		"<br class='nettoyeur' />",
-		"\n<div style='text-align: center'>",
-		"\n<div class='serif'>",
-		"\n<b>"._T('avis_suppression_base')."&nbsp;!</b>",
-		$res,
-		"\n</div>",
-		"</div>";
-
-	echo fin_cadre_relief(true);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));	  
 
