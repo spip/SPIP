@@ -39,31 +39,6 @@ class Bouton {
 }
 
 
-// http://doc.spip.org/@barre_onglets_rep_depuis
-function barre_onglets_rep_depuis() {
-
-	$onglets = array();
-	$onglets['statistiques_lang']=
-		  new Bouton(null, 'icone_repartition_actuelle');
-	$onglets['debut']=
-		  new Bouton(null, 'onglet_repartition_debut',
-			generer_url_ecrire("statistiques_lang","critere=debut"));
-	return $onglets;
-}
-
-// http://doc.spip.org/@barre_onglets_stat_depuis
-function barre_onglets_stat_depuis() {
-	$onglets = array();
-	$onglets['popularite']=
-		  new Bouton(null, 'icone_repartition_actuelle',
-			generer_url_ecrire("statistiques_repartition",""));
-	$onglets['debut']=
-		  new Bouton(null, 'onglet_repartition_debut',
-			generer_url_ecrire("statistiques_repartition","critere=debut"));
-	return $onglets;
-}
-
-
 // http://doc.spip.org/@barre_onglets_administration
 function barre_onglets_administration() {
 

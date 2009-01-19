@@ -18,13 +18,11 @@
 			((#ENV{id_syndic}))</a>][
 	<a href="[(#ENV{voir_auteur})]" class="spip-admin-boutons"
 		id="voir_auteur"><:admin_modifier_auteur:>
-			((#ENV{id_auteur}))</a>][
+			((#ENV{id_auteur}))</a>]<!--extra-->[
 	<a href="(#ENV{ecrire})" class="spip-admin-boutons"
 		id="ecrire"><:espace_prive:></a>]
 	<a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]" class="spip-admin-boutons"
 		id="var_mode"><:admin_recalculer:>[(#ENV{use_cache})]</a>[
-	<a href="(#ENV{statistiques})" class="spip-admin-boutons"
-		id="statistiques">[<:info_visites:>&nbsp;(#ENV{visites})][;&nbsp;<:info_popularite_5:>&nbsp;(#ENV{popularite})]</a>][
 	<a href="(#ENV{preview})" class="spip-admin-boutons"
 		id="preview"><:previsualisation:></a>][
 	<a href="(#ENV{debug})" class="spip-admin-boutons"

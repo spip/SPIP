@@ -103,9 +103,4 @@ function generer_url_ecrire_document($id, $args='', $ancre='', $statut='', $conn
 	return generer_url_document_dist($id);
 }
 
-// http://doc.spip.org/@generer_url_ecrire_statistiques
-function generer_url_ecrire_statistiques($id_article) {
-	return generer_url_ecrire('statistiques_visites', "id_article=$id_article");
-}
-
 ?>
