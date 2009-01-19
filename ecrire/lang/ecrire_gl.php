@@ -27,10 +27,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Atenci&oacute;n! Este tema cont&eacute;n @contient_breves@ breve@scb@: se a(s) quere desprazar, conf&iacute;rmeo aqu&iacute;.',
 'avis_destinataire_obligatoire' => 'Tes que indicar o destino antes de enviar esta mensaxe.',
 'avis_erreur_connexion_mysql' => 'Erro de conexi&oacute;n SQL',
-'avis_erreur_version_archive' => '<MODIF><b>Atenci&oacute;n! O ficheiro @arquivo@ corresponde a
+'avis_erreur_version_archive' => '<b>Atenci&oacute;n! O ficheiro @arquivo@ corresponde a
   outra versi&oacute;n de SPIP que non &eacute; a que ten instalada.</b>
   Pode estar ante graves problemas: hai risco de destruci&oacute;n
-  da s&uacute;a base de datos, fallos no funcionamento do web, etc.
+  da s&uacute;a base de datos, erros no funcionamento do web, etc.
   Non valide esta solicitude de importaci&oacute;n.<p>Para m&aacute;is
   informaci&oacute;ns, consulte <a href="@spipnet@">
   a documentaci&oacute;n de SPIP</A>.',
@@ -197,7 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Esta p&aacute;xina presenta varios m&eacute;todos para establecer contactos coas novidades deste web.',
-'ical_info2' => '<MODIF>Para obter m&aacute;is detalles sobre todas estas t&eacute;cnicas, non dubide en consultar <a href="@spipnet@">a documentaci&oacute;n de SPIP</a>.',
+'ical_info2' => 'Para obter m&aacute;is detalles sobre todas estas t&eacute;cnicas, non dubide en consultar <a href="@spipnet@">a documentaci&oacute;n de SPIP</a>.',
 'ical_info_calendrier' => 'Dous calendarios est&aacute;n &aacute; s&uacute;a disposici&oacute;n. O primeiro e un mapa do web que anuncia todos os artigos publicados. O segundo cont&eacute;n os anuncios editoriais as&iacute; como as s&uacute;as &uacute;ltimas mensaxes privadas&nbsp;: estalle reservada gracias a unha chave persoal, que pode modificar en calquera momento anovando a s&uacute;a chave.',
 'ical_lien_rss_breves' => 'Afiliaci&oacute;n das breves do web',
 'ical_methode_http' => 'Descarga',
@@ -805,6 +805,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'logo_article' => 'LOGO DO ARTIGO',
 'logo_auteur' => 'LOGO DESTA PERSOA',
 'logo_breve' => 'LOGO DA BREVE',
+'logo_groupe' => 'LOGO DESTE GRUPO',
 'logo_mot_cle' => 'LOGO DA PALABRA CHAVE',
 'logo_rubrique' => 'LOGO DO TEMA',
 'logo_site' => 'LOGO DESTE WEB',
@@ -928,7 +929,7 @@ cunha cor que indica o seu estado&nbsp;:',
 		nova base e un novo acceso de administraci&oacute;n.',
 'texte_admin_effacer_stats' => 'Este comando borra todos os datos ligados &aacute;s estat&iacute;sticas de visita do web, e incl&uacute;e a popularidade dos artigos.',
 'texte_admin_tech_01' => 'Esta opci&oacute;n permite gardar o contido da base nun ficheiro que ser&aacute; almaceado no directorio @dossier@. Non esqueza tam&eacute;n gardar o directorio @img@ &iacute;ntegro, que &eacute; o que cont&eacute;n as imaxes e os documentos anexos empregados nos artigos e nas secci&oacute;ns.',
-'texte_admin_tech_02' => '<MODIF>&iexcl;Atenci&oacute;n!: esta copia de seguridade s&oacute; poder&aacute; ser restaurada  nun web que te&ntilde;a instalada a MESMA versi&oacute;n de SPIP. Daquela de ningunha maneira &eacute; conveniente &laquo;&nbsp;baleirar a base&nbsp;&raquo; coa esperanza de reinstalar a copia de seguridade logo da actualizaci&oacute;n...Consulte
+'texte_admin_tech_02' => 'Atenci&oacute;n!: esta copia de seguridade S&Oacute; poder&aacute; ser restaurada  nun web que te&ntilde;a instalada a MESMA versi&oacute;n de SPIP. Daquela de ningunha maneira &eacute; conveniente &laquo;&nbsp;baleirar a base&nbsp;&raquo; coa esperanza de reinstalar a copia de seguridade logo da actualizaci&oacute;n...Consulte
   <a href="@spipnet@">a documentaci&oacute;n de SPIP</a>.',
 'texte_admin_tech_03' => 'Pode escoller gardar o ficheiro en formato comprimido, para optimizar
   a transferencia ou a copia nun servidor de copias de seguridade, e para aforrar espazo no disco.',
