@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'D&euml;s S&auml;it nei berechnen',
 'afficher_trad' => 'Iwersetzunge weisen',
 'alerte_maj_impossible' => '<b>Alarm!</b> Den Update vun der SQL-Datekank op d\'Versioun @version@ ass onm&eacute;iglech, vill&auml;icht w&eacute;int engem Problem mat den &Auml;nnerungs-Rechter vun der Datebank. Kontakt&eacute;iert weg &auml;ren Provider.',
-'alerte_modif_info_concourante' => '<MODIF>OPGEPASST: D&euml;s Informatioun ass ge&auml;nnert ginn. D&eacute;i aktuell Valeur ass:',
+'alerte_modif_info_concourante' => 'OPGEPASST: D&euml;s Informatioun ass ge&auml;nnert ginn. D&eacute;i aktuell Valeur ass:',
 'analyse_xml' => 'XML-Analyse',
 'annuler' => 'Ofbriechen',
 'antispam_champ_vide' => 'Loosst d&euml;st Feld eidel:',
@@ -62,8 +62,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'An eng [[Foussnote]] &auml;nneren',
 'barre_paragraphe' => 'Paragraph derb&auml;i setzen',
 'barre_quote' => '<quote>Citatioun</quote> vun engem Text',
-'bouton_ajouter_document' => '<MODIF>DOKUMENT DERB&Auml;I SETZEN',
-'bouton_ajouter_image' => '<MODIF>BILD DERB&Auml;I SETZEN',
+'bouton_ajouter_document' => 'Dokument derb&auml;i setzen',
+'bouton_ajouter_image' => 'Bild derb&auml;i setzen',
+'bouton_ajouter_image_document' => 'E Bild oder en Dokument derb&auml;i setzen',
 'bouton_changer' => '&Auml;nneren',
 'bouton_chercher' => 'Sichen',
 'bouton_choisir' => 'Auswielen',
@@ -203,6 +204,7 @@ D&euml;s Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 'double_occurrence' => 'K&euml;nnt duebel fir',
 
 // E
+'en_cours' => 'am gaangen',
 'entree_dimensions' => 'Gr&eacute;issten:',
 'entree_titre_document' => 'Titel vum Dokument:',
 'entree_titre_image' => 'Titel vum Bild:',
@@ -210,6 +212,7 @@ D&euml;s Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 'erreur' => 'Fehler',
 'erreur_balise_non_fermee' => 'L&auml;schten Tag deen n&euml;t zou ass:',
 'erreur_texte' => 'Fehler(en)',
+'etape' => 'Etape',
 
 // F
 'fichier_introuvable' => 'De Fichier @fichier@ kann n&euml;t font ginn',
@@ -235,7 +238,7 @@ D&euml;s Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 'form_pet_confirmation' => 'Konfirm&eacute;iert weg &auml;r &Euml;nnerschr&euml;ft:',
 'form_pet_deja_enregistre' => 'D&euml;se Site ass schon ageschriwen',
 'form_pet_deja_signe' => 'Dir hutt d&euml;sen Text schon &euml;nnerschriwen.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Eng Konfirmatioun gouf lo grad un Iech per Email gesch&eacute;ckt. Dir musst op d&eacute;i Adress surfen d&eacute;i am Email steet fir &auml;r &Euml;nnerschr&euml;ft ze valid&eacute;ieren.',
+'form_pet_envoi_mail_confirmation' => 'E Konfirmatiouns-Email gouf lo grad un @email@ gesch&eacute;ckt. Dir musst op d&eacute;i Adress surfen d&eacute;i am Email steet fir &auml;r &Euml;nnerschr&euml;ft ze best&auml;tegen.',
 'form_pet_mail_confirmation' => 'Bonjour,
 
 Dir hutt gefroot fir d\'Petitioun:
@@ -396,7 +399,7 @@ Merci fir &auml;r Participatioun
 'info_contenance' => 'D&euml;se Site huet:',
 'info_contribution' => 'Beitr&auml;g an de Forum\'en',
 'info_copyright' => '@spip@ ass eng fr&auml;i Software d&eacute;i &euml;nner @lien_gpl@ verdeelt g&euml;t.',
-'info_copyright_doc' => '<MODIF>Fir m&eacute;i Informatiounen, kuckt op <a href="@spipnet@">http://www.spip.net/lb</a>.',
+'info_copyright_doc' => 'Fir m&eacute;i Informatiounen, kuckt op <a href="@spipnet@">http://www.spip.net/lb</a>.',
 'info_copyright_gpl' => '&euml;nner GPL-Lizenz',
 'info_cours_edition' => '&Auml;r Artikelen an der Aarbecht',
 'info_creer_repertoire' => 'Setzt e Fichier oder Dossier mat d&euml;sem Numm derb&auml;i:',
@@ -672,8 +675,8 @@ Dir k&euml;nnt do e neit Passwuert agin an Iech um Site umelden.
 D\'Bild <b>@fichier@</b> ass n&euml;t duerchgaang (Artikel @id_article@).
 Not&eacute;iert d&euml;s Referenz, prob&eacute;iert nach eng K&eacute;ier, a kontroll&eacute;iert op d\'Biller an den Artikelen gewisen ginn.',
 'texte_erreur_visiteur' => 'Dir hutt prob&eacute;iert mat engem n&euml;t erlaabten Login an de privaten Deel ze go&euml;n.',
-'texte_inc_auth_1' => '<MODIF>Dir sidd identifi&eacute;iert als <b>@auth_login@</b>, awer deen Login g&euml;t &euml;t n&euml;t m&eacute;i an der Datebank.
-Versicht',
+'texte_inc_auth_1' => 'Dir sidd identifi&eacute;iert mam Login <b>@auth_login@</b>, mais d&euml;se Login g&euml;t &euml;t n&euml;t oder net m&eacute;i an der Datebank.
+Prob&eacute;iert ',
 'texte_inc_auth_2' => 'Iech unzemelden',
 'texte_inc_auth_3' => ', eventuell nodeem der &auml;re Browser nei gestart hutt.',
 'texte_inc_config' => 'D\'&Auml;nnerungen op d&euml;se S&auml;iten beaflossen de Fonktionnement vun &auml;rem Site ganz staark. Maacht n&auml;ischt ier d&euml;r de SPIP-System richteg kennt.<br /><br /><b>Generell ass ungeroden, d&euml;s S&auml;iten dem Webmaster vun &auml;rem Site ze iwwerloossen.</b>',
@@ -708,6 +711,7 @@ Versicht',
 'titre_signatures_confirmees' => 'Confirm&eacute;iert &Euml;nnerschr&euml;ften',
 'titre_statistiques' => 'Statistik vum Site',
 'titre_titre_document' => 'Titel vum Dokument:',
+'todo' => 'k&euml;nnt nach',
 'trad_reference' => '(Referenz-Artikel)',
 
 // Z

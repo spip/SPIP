@@ -398,7 +398,7 @@ Obrigado por participar
 'info_contenance' => 'Este site cont&eacute;m:',
 'info_contribution' => 'contribui&ccedil;&otilde;es de f&oacute;rum',
 'info_copyright' => '@spip@ &eacute; um software livre distribu&iacute;do @lien_gpl@.',
-'info_copyright_doc' => '<MODIF>Para mais informa&ccedil;&otilde;es, veja o site <a href="@spipnet@">http://www.spip.net/</a>.',
+'info_copyright_doc' => 'Para mais informa&ccedil;&otilde;es, veja o site <a href="@spipnet@">http://www.spip.net/</a>.',
 'info_copyright_gpl' => 'sob licen&ccedil;a GPL',
 'info_cours_edition' => 'Suas mat&eacute;rias em fase de reda&ccedil;&atilde;o',
 'info_creer_repertoire' => 'Por favor, crie um arquivo ou diret&oacute;rio com o nome:',

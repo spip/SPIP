@@ -404,7 +404,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_contenance' => 'Este web cont&eacute;n:',
 'info_contribution' => 'contribuci&oacute;ns no foro',
 'info_copyright' => '@spip@ &eacute; un programa libre distribu&iacute;do @lien_gpl@.',
-'info_copyright_doc' => '<MODIF>Para m&aacute;is informaci&oacute;n, vaia a <a href="@spipnet@">http://www.spip.net/gl</a>.',
+'info_copyright_doc' => 'Para m&aacute;is informaci&oacute;n, vaia a <a href="@spipnet@">http://www.spip.net/gl</a>.',
 'info_copyright_gpl' => 'con licenza GPL',
 'info_cours_edition' => 'Os seus artigos en proceso de edici&oacute;n',
 'info_creer_repertoire' => 'Debe crear un ficheiro ou cartafol chamado&nbsp;:',

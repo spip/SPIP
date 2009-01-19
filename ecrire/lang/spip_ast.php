@@ -405,7 +405,7 @@ Gracies por participar
 'info_contenance' => 'Esti sitiu contien:',
 'info_contribution' => 'contribuciones del foru',
 'info_copyright' => '@spip@ ye un programa llibre distribuy&iacute;u @lien_gpl@.',
-'info_copyright_doc' => '<MODIF>Pa m&aacute;s informaci&oacute;n, dir al sitiu <a href="@spipnet@">http://www.spip.net/</a>.',
+'info_copyright_doc' => 'Pa m&aacute;s informaci&oacute;n, dir al sitiu <a href="@spipnet@">http://www.spip.net/</a>.',
 'info_copyright_gpl' => 'so llicencia GPL',
 'info_cours_edition' => 'Los tos art&iacute;culos en cursu de redaici&oacute;n',
 'info_creer_repertoire' => 'Debes crear un archivu o un direutoriu nom&aacute;u:',
