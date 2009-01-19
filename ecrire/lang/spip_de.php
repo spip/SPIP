@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces' => 'Keine Ank&uuml;ndigungen verschicken',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Keine Liste der Neuigkeiten verschicken',
 'bouton_recharger_page' => 'Seite neu laden',
-'bouton_telecharger' => 'Herunterladen',
+'bouton_telecharger' => 'Hochladen',
 'bouton_valider' => 'Best&auml;tigen',
 
 // C
