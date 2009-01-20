@@ -38,6 +38,24 @@ function exec_controle_petition_args($id_article, $type, $date, $debut, $id_sign
 	}	else controle_petition_args($id_article, $type, $date, $debut, $titre, $where, $pas);
 }
 
+function petition_navigation_trouve_date($date, $nom_date, $pas, $query)
+{
+	$debut = 0;
+	if (!is_numeric($date)) {
+		include_spip('inc/filtres');
+		list($a,$m,$j,$h,$n,$s) = recup_date($date);
+		$date = mktime($h,$n,$s,$m ? $m : 1,$j ? $j : 1,$a);
+	}
+	$q = sql_select($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUP BY'], $query['ORDER BY']);
+	while ($r = sql_fetch($q)) {
+		if ($r[$nom_date] <= $date) break;
+		$debut++;
+	}
+	$debut -= ($debut%$pas);
+	return $debut;
+}
+
+
 function controle_petition_args($id_article, $type, $date, $debut, $titre, $where, $pas)
 {
 	if (!preg_match('/^\w+$/',$type)) $type = 'public';
@@ -48,12 +66,11 @@ function controle_petition_args($id_article, $type, $date, $debut, $titre, $wher
 	$order = "date_time DESC";
 	if (!$pas) $pas = 10;
 	if ($date) {
-		include_spip('inc/forum');
 		$query = array('SELECT' => 'UNIX_TIMESTAMP(date_time) AS d',
 				'FROM' => 'spip_signatures', 
 				'WHERE' => $where,
 				'ORDER BY' => $order);
-		$debut = navigation_trouve_date($date, 'd', $pas, $query);
+		$debut = petition_navigation_trouve_date($date, 'd', $pas, $query);
 	}
 	$signatures = charger_fonction('signatures', 'inc');
 
@@ -135,8 +152,8 @@ function controle_petition_onglet($id_article, $debut, $type, $arg='')
 	}
 
 	return debut_onglet()
-	  . onglet(_T('titre_signatures_confirmees'), generer_url_ecrire('controle_petition', $argp . $arg . "type=public"), "public", $type=='public', "forum-public-24.gif")
-	.  onglet(_T('titre_signatures_attente'), generer_url_ecrire('controle_petition', $argi . $arg .  "type=interne"), "interne", $type=='interne', "forum-interne-24.gif")
+	  . onglet(_T('titre_signatures_confirmees'), generer_url_ecrire('controle_petition', $argp . $arg . "type=public"), "public", $type=='public', "petition-public-24.gif")
+	.  onglet(_T('titre_signatures_attente'), generer_url_ecrire('controle_petition', $argi . $arg .  "type=interne"), "interne", $type=='interne', "petition-interne-24.gif")
 	. fin_onglet()
 	. '<br />';
 }
