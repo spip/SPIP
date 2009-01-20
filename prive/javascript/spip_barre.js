@@ -20,56 +20,6 @@ var is_win = ((clientPC.indexOf("win")!=-1) || (clientPC.indexOf("16bit") != -1)
 var is_mac = (clientPC.indexOf("mac")!=-1);
 
 
-function barre_raccourci(debut,fin,champ) {
-	var txtarea = champ;
-
-	txtarea.focus();
-	donotinsert = false;
-	theSelection = false;
-	bblast = 0;
-
-	if ((clientVer >= 4) && is_ie && is_win)
-	{
-		theSelection = document.selection.createRange().text; // Get text selection
-		if (theSelection) {
-
-			while (theSelection.substring(theSelection.length-1, theSelection.length) == ' ')
-			{
-				theSelection = theSelection.substring(0, theSelection.length-1);
-				fin = fin + " ";
-			}
-			if (theSelection.substring(0,1) == '{' && debut.substring(0,1) == '{')
-			{
-				debut = debut + " ";
-			}
-			if (theSelection.substring(theSelection.length-1, theSelection.length) == '}' && fin.substring(0,1) == '}')
-			{
-				fin = " " + fin;
-			}
-
-			// Add tags around selection
-			document.selection.createRange().text = debut + theSelection + fin;
-			txtarea.focus();
-			theSelection = '';
-			return;
-		}
-	}
-	else if (txtarea.selectionEnd && (txtarea.selectionEnd - txtarea.selectionStart > 0))
-	{
-		mozWrap(txtarea, debut, fin);
-		return;
-	}
-}
-
-function barre_demande(debut,milieu,fin,affich,champ) {
-	var inserer = prompt(affich);
-
-	if (inserer != null) {
-		if (inserer == "") {inserer = "xxx"; }
-
-		barre_raccourci(debut, milieu+inserer+fin, champ);
-	}
-}
 
 function barre_inserer(text,champ) {
 	var txtarea = champ;
