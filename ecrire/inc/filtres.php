@@ -248,7 +248,10 @@ function image_filtrer($args){
 	// Cas du nom de fichier local
 	if ( strpos(substr($texte,strlen(_DIR_RACINE)),'..')===FALSE
 	AND !preg_match(',^/|[<>]|\s,S', $texte)
-	AND file_exists(preg_replace(',[?].*$,','',$texte))) {
+	AND (
+		file_exists(preg_replace(',[?].*$,','',$texte))
+		OR preg_match(';^(\w{3,7}://);', $texte) 
+		)) {
 		array_unshift($args,"<img src='$texte' />");
 		$res = call_user_func_array($filtre, $args);
 		statut_effacer_images_temporaires(false); // desactiver pour les appels hors compilo
