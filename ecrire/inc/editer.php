@@ -180,8 +180,7 @@ function editer_texte_recolle($texte, $att_text)
 	while (strlen($texte)>29*1024) {
 		$nombre ++;
 		list($texte1,$texte) = coupe_trop_long($texte);
-		$id = "document.getElementById('texte$nombre')";
-		$textes_supplement .= "<br />" . afficher_barre($id) .
+		$textes_supplement .= "<br />" .
 			"<textarea id='texte$nombre' name='texte_plus[$nombre]'$att_text>$texte1</textarea>\n";
 		}
 	return array($texte,$textes_supplement);
