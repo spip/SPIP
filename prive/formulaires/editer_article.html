@@ -78,8 +78,7 @@
 			<label for="text_area"><:info_texte:><em class="aide">#AIDER{arttexte}</em></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
 			][(#ENV**{_texte_trop_long,''})]
-				<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
-				(#ENV**{_browser_caret,''})]>[(#ENV**{texte})]</textarea>
+				<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'>[(#ENV**{texte})]</textarea>
 				
 				<script type='text/javascript'><!--
 				jQuery('document').ready(function(){

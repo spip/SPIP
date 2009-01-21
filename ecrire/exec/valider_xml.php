@@ -220,7 +220,7 @@ function valider_skel($transformer_xml, $file, $dir)
 // http://doc.spip.org/@valider_contexte
 function valider_contexte($code, $file)
 {
-	static $exceptions = array('action', 'browser_caret', 'doublons', 'lang');
+	static $exceptions = array('action', 'doublons', 'lang');
 	preg_match_all('/(\S*)[$]Pile[[]0[]][[].(\w+).[]]/', $code, $r, PREG_SET_ORDER);
 	$args = array();
 

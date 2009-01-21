@@ -29,8 +29,7 @@
 				<label for="text_area"><:info_texte_explicatif:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
 				][(#ENV**{_texte_trop_long,''})
-				]<textarea name='texte' id='text_area' cols='40' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]'[
-				(#ENV**{_browser_caret,''})]>[(#ENV**{texte})]</textarea>
+				]<textarea name='texte' id='text_area' cols='40' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]'>[(#ENV**{texte})]</textarea>
 	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
