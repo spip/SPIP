@@ -36,12 +36,16 @@ function action_editer_mots_post($r)
 			  // desassocier un/des mot d'un objet precis
 				sql_delete("spip_mots_$table", "$table_id=$id_objet" . (($id_mot <= 0) ? "" : " AND id_mot=$id_mot"));
 			else {
-			  // disparition complete d'un mot
-			sql_delete("spip_mots", "id_mot=$id_mot");
-			sql_delete("spip_mots_articles", "id_mot=$id_mot");
-			sql_delete("spip_mots_rubriques", "id_mot=$id_mot");
-			sql_delete("spip_mots_syndic", "id_mot=$id_mot");
-			sql_delete("spip_mots_forum", "id_mot=$id_mot");
+				// disparition complete d'un mot
+				sql_delete("spip_mots", "id_mot=$id_mot");
+				sql_delete("spip_mots_articles", "id_mot=$id_mot");
+				sql_delete("spip_mots_rubriques", "id_mot=$id_mot");
+				sql_delete("spip_mots_syndic", "id_mot=$id_mot");
+				pipeline('supprimer_objets_lies',
+					array(
+						array('type'=>'mot','id'=>$id_mot)
+					)
+				);
 			}
 	}
 	if ($nouv_mot ? $nouv_mot : ($nouv_mot = _request('nouv_mot'))) {

@@ -661,6 +661,7 @@ function plugin_get_infos($plug, $force_reload=false, $dir_plugins = _DIR_PLUGIN
 							$val = reset($val);
 							if(is_array($val)){
 								$ret[$type][$id]['parent'] = isset($bouton['parent'])?$bouton['parent']:'';
+								$ret[$type][$id]['position'] = isset($bouton['position'])?$bouton['position']:'';
 								$ret[$type][$id]['titre'] = isset($val['titre'])?trim(spip_xml_aplatit($val['titre'])):'';
 								$ret[$type][$id]['icone'] = isset($val['icone'])?trim(end($val['icone'])):'';
 								$ret[$type][$id]['url'] = isset($val['url'])?trim(end($val['url'])):'';

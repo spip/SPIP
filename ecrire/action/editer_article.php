@@ -120,15 +120,24 @@ function insert_article($id_rubrique) {
 		$lang = $lang_rub ? $lang_rub : $GLOBALS['meta']['langue_site'];
 	}
 
-	$id_article = sql_insertq("spip_articles", array(
+	$champs = array(
 		'id_rubrique' => $id_rubrique,
 		'id_secteur' =>  $id_secteur,
 		'statut' =>  'prepa',
 		'date' => 'NOW()',
-		'accepter_forum' => 
-			substr($GLOBALS['meta']['forums_publics'],0,3),
 		'lang' => $lang,
-		'langue_choisie' =>$choisie));
+		'langue_choisie' =>$choisie);
+
+	// Envoyer aux plugins
+	$champs = pipeline('pre_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_articles',
+			),
+			'data' => $champs
+		)
+	);
+	$id_article = sql_insertq("spip_articles", $champs);
 
 	// controler si le serveur n'a pas renvoye une erreur
 	if ($id_article > 0) 

@@ -1513,29 +1513,6 @@ function tester_config($id, $mode='') {
 }
 
 //
-// Un filtre qui, etant donne un #PARAMETRES_FORUM, retourne un URL de suivi rss
-// dudit forum
-// Attention applique a un #PARAMETRES_FORUM complexe (id_article=x&id_forum=y)
-// ca retourne un url de suivi du thread y (que le thread existe ou non)
-// http://doc.spip.org/@url_rss_forum
-function url_rss_forum($param) {
-	if (!preg_match(',.*(id_(\w*?))=([0-9]+),S', $param, $regs)) return '';
-	list(,$k,$t,$v) = $regs;
-	if ($t == 'forum') $k = 'id_' . ($t = 'thread');
-	return generer_url_public("rss_forum_$t", array($k => $v));
-}
-
-//
-// Un filtre applique a #PARAMETRES_FORUM, qui donne l'adresse de la page
-// de reponse
-//
-// http://doc.spip.org/@url_reponse_forum
-function url_reponse_forum($parametres) {
-	if (!$parametres) return '';
-	return generer_url_public('forum', $parametres);
-}
-
-//
 // Quelques fonctions de calcul arithmetique
 //
 // http://doc.spip.org/@plus
@@ -2283,5 +2260,10 @@ function _xor($message, $key=null){
 
 	return $message;
 }
+
+// Les vrai fonctions sont dans le plugin forum, mais on evite ici une erreur du compilateur
+// en absence du plugin
+function url_reponse_forum($texte){return $texte;}
+function url_rss_forum($texte){return $texte;}
 
 ?>

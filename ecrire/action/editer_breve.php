@@ -70,12 +70,23 @@ function insert_breve($id_rubrique) {
 	$lang = $row['lang'];
 	$id_rubrique = $row['id_secteur']; // garantir la racine
 
-	return sql_insertq("spip_breves", array(
+	$champs = array(
 		'id_rubrique' => $id_rubrique,
 		'statut' => 'prop',
 		'date_heure' => 'NOW()',
 		'lang' => $lang,
-		'langue_choisie' => 'non'));
+		'langue_choisie' => 'non');
+	
+	// Envoyer aux plugins
+	$champs = pipeline('pre_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_breves',
+			),
+			'data' => $champs
+		)
+	);
+	return sql_insertq("spip_breves", $champs);
 }
 
 

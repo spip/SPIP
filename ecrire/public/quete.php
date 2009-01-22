@@ -106,22 +106,6 @@ function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 	return $retour ? $retour : ' ';
 }
 
-# retourne le champ 'accepter_forum' d'un article
-// http://doc.spip.org/@quete_accepter_forum
-function quete_accepter_forum($id_article) {
-	// si la fonction est appelee en dehors d'une boucle
-	// article (forum de breves), $id_article est nul
-	// mais il faut neanmoins accepter l'affichage du forum
-	// d'ou le 0=>'' (et pas 0=>'non').
-	static $cache = array(0 => '');
-	
-	$id_article = intval($id_article);
-
-	if (isset($cache[$id_article]))	return $cache[$id_article];
-
-	return $cache[$id_article] = sql_getfetsel('accepter_forum','spip_articles',"id_article=$id_article");
-}
-
 // recuperer une meta sur un site distant (en local il y a plus simple)
 // http://doc.spip.org/@quete_meta
 function quete_meta($nom, $serveur) {
@@ -252,26 +236,4 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	return isset($exposer[$m][$prim]) ? isset($exposer[$m][$prim][$id]) : '';
 }
 
-
-// Ajouter "&lang=..." si la langue du forum n'est pas celle du site.
-// Si le 2e parametre n'est pas une chaine, c'est qu'on n'a pas pu
-// determiner la table a la compil, on le fait maintenant.
-// Il faudrait encore completer: on ne connait pas la langue
-// pour une boucle forum sans id_article ou id_rubrique donné par le contexte
-// et c'est signale par un message d'erreur abscons: "table inconnue forum".
-// 
-// http://doc.spip.org/@lang_parametres_forum
-function lang_parametres_forum($qs, $lang) {
-	if (is_array($lang) AND preg_match(',id_(\w+)=([0-9]+),', $qs, $r)) {
-		$id = 'id_' . $r[1];
-		if ($t = $lang[$id])
-			$lang = sql_getfetsel('lang', $t, "$id=" . $r[2]);
-	}
-  // Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
-
-	if ($lang AND $lang <> $GLOBALS['meta']['langue_site'])
-		return $qs . "&lang=" . $lang;
-
-	return $qs;
-}
 ?>

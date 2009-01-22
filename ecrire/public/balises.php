@@ -430,7 +430,6 @@ function balise_INTRODUCTION_dist($p) {
 			case 'breves':
 				$longueur = '300';
 				break;
-			case 'forums':
 			case 'rubriques':
 			default:
 				$longueur = '600';
@@ -646,90 +645,6 @@ function balise_GRAND_TOTAL_dist($p) {
 	}
 	return $p;
 }
-
-//
-// Parametres de reponse a un forum
-//
-
-// http://doc.spip.org/@balise_PARAMETRES_FORUM_dist
-function balise_PARAMETRES_FORUM_dist($p) {
-	$_id_article = champ_sql('id_article', $p);
-	$p->code = '
-		// refus des forums ?
-		(quete_accepter_forum('.$_id_article.')=="non" OR
-		($GLOBALS["meta"]["forums_publics"] == "non"
-		AND quete_accepter_forum('.$_id_article.') == ""))
-		? "" : // sinon:
-		';
-	// pas de calculs superflus si le site est monolingue
-	$lang = strpos($GLOBALS['meta']['langues_utilisees'], ',');
-
-	switch ($p->type_requete) {
-		case 'articles':
-			$c = '"id_article=".' . champ_sql('id_article', $p);
-			if ($lang) $lang = champ_sql('lang', $p);
-			break;
-		case 'breves':
-			$c = '"id_breve=".' . champ_sql('id_breve', $p);
-			if ($lang) $lang = champ_sql('lang', $p);
-			break;
-		case 'rubriques':
-			$c = '"id_rubrique=".' . champ_sql('id_rubrique', $p);
-			if ($lang) $lang = champ_sql('lang', $p);
-			break;
-		case 'syndication':
-		case 'syndic':
-			// passer par la rubrique pour avoir un champ Lang
-			// la table syndic n'en ayant pas
-			$c =  '"id_syndic=".' . champ_sql('id_syndic', $p);
-			if ($lang) $lang = 'sql_getfetsel("lang", "spip_rubriques", ("id_rubrique=" . intval("' . champ_sql('id_rubrique', $p) . '")))';
-			break;
-		case 'forums':
-		default:
-		// ATTENTION mettre 'id_rubrique' avant 'id_syndic':
-		// a l'execution  lang_parametres_forum
-		// y cherchera l'identifiant  donnant la langue
-		// et pour id_syndic c'est id_rubrique car sa table n'en a pas
-		  
-			$liste_table = array ("article","breve","rubrique","syndic","forum");
-			$c = '';
-			$tables = array();
-			foreach ($liste_table as $t) {
-				$champ = 'id_' . $t;
-				$x = champ_sql($champ, $p);
-				$c .= (($c) ? ".\n" : "") . "((!$x) ? '' : ('&$champ='.$x))";
-				if ($lang AND $t!='forum') $tables[]= 
-				  "'$champ' => '" . table_objet_sql($t) . "'";
-			}
-			$c = "substr($c,1)";
-
-			if ($lang)
-				$lang = "array(" . join(",",$tables) .")";
-			break;
-	}
-
-	if ($lang) $c = "lang_parametres_forum($c,$lang)";
-
-	// Syntaxe [(#PARAMETRES_FORUM{#SELF})] pour fixer le retour du forum
-	# note : ce bloc qui sert a recuperer des arguments calcules pourrait
-	# porter un nom et faire partie de l'API.
-	$retour = interprete_argument_balise(1,$p);
-	if ($retour===NULL)
-		$retour = "''";
-
-	// Attention un eventuel &retour=xxx dans l'URL est prioritaire
-	$c .= '.
-	(($lien = (_request("retour") ? _request("retour") : str_replace("&amp;", "&", '.$retour.'))) ? "&retour=".rawurlencode($lien) : "")';
-
-	// Ajouter le code d'invalideur specifique a cette balise
-	include_spip('inc/invalideur');
-	if (function_exists($i = 'code_invalideur_forums'))
-		$p->code .= $i($p, '('.$c.')');
-
-	$p->interdire_scripts = false;
-	return $p;
-}
-
 
 // Reference a l'URL de la page courante
 // Attention dans un INCLURE() ou une balise dynamique on n'a pas le droit de

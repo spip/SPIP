@@ -36,7 +36,7 @@ function exec_articles_args($id_article)
 		$row['titre'] = sinon($row["titre"],_T('info_sans_titre'));
 
 		$res = debut_gauche('accueil',true)
-		  .  articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('trad_err'), _request('debut'))
+		  .  articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('trad_err'))
 		  . "<br /><br /><div class='centered'>"
 		. "</div>"
 		. fin_gauche();
@@ -53,7 +53,7 @@ function exec_articles_args($id_article)
 }
 
 // http://doc.spip.org/@articles_affiche
-function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err, $debut_forum=0, $statut_forum='prive')
+function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err)
 {
 	global $spip_lang_right, $dir_lang;
 
@@ -94,7 +94,6 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$editer_mots = charger_fonction('editer_mots', 'inc');
 	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
 	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
-	$discuter = charger_fonction('discuter', 'inc');
 
 	$meme_rubrique = charger_fonction('meme_rubrique', 'inc');
 	$iconifier = charger_fonction('iconifier', 'inc');
@@ -146,30 +145,27 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$onglet_documents = articles_documents('article', $id_article);
 	$onglet_interactivite = (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"");
 
-	$onglet_discuter = !$statut_forum ? '' : ($discuter($id_article, 'articles', 'id_article', $statut_forum, $debut_forum));
-
-
 	return
 	  $navigation
 	  . $extra
-	  . "<div class='fiche_objet'>"
-	  . $haut
-	  . afficher_onglets_pages(
+	  . pipeline('afficher_fiche_objet',array('args'=>array('type'=>'article','id'=>$id_article),'data'=>
+	  	"<div class='fiche_objet'>" .
+	  	$haut	. 
+	  	afficher_onglets_pages(
 	  	array(
 	  	'voir' => _T('onglet_contenu'),
 	  	'props' => _T('onglet_proprietes'),
 	  	'docs' => _T('onglet_documents'),
 	  	'interactivite' => _T('onglet_interactivite'),
-	  	'discuter' => _T('onglet_discuter')),
+	  	),
 	  	array(
 	    'props'=>$onglet_proprietes,
 	    'voir'=>$onglet_contenu,
 	    'docs'=>$onglet_documents,
 	    'interactivite'=>$onglet_interactivite,
-	    'discuter'=>_INTERFACE_ONGLETS?$onglet_discuter:""))
-	  . "</div>"
-	  . (_INTERFACE_ONGLETS?"":$onglet_discuter)
-;
+	    )) .
+	    "</div>"
+	  ));
 }
 
 // http://doc.spip.org/@articles_documents
@@ -226,16 +222,13 @@ function articles_documents($type, $id)
 // http://doc.spip.org/@boites_de_config_articles
 function boites_de_config_articles($id_article)
 {
-	if (autoriser('modererforum', 'article', $id_article)) {
-		$regler_moderation = charger_fonction('regler_moderation', 'inc');
-		$regler = $regler_moderation($id_article,"articles","id_article=$id_article") . '<br />';
-	}
-
 	$petitionner = charger_fonction('petitionner', 'inc');
 	$petition = $petitionner($id_article,"articles","id_article=$id_article");
 
-	$masque = $regler . $petition;
+	$masque = $petition;
 
+  $masque = pipeline('afficher_config_objet',array('args'=>array('type'=>'article','id'=>$id_article),'data'=>$masque));
+ 
 	if (!$masque) return '';
 
 	$invite = "<b>"
@@ -287,14 +280,18 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 function afficher_corps_articles($id_article, $virtuel, $row)
 {
 	$res = '';
+	$message_statut = "";
 	if ($row['statut'] == 'prop') {
-		$res .= "<p class='article_prop'>"._T('text_article_propose_publication');
-
-		if ($GLOBALS['meta']['forum_prive_objets'] != 'non')
-			$res .= ' '._T('text_article_propose_publication_forum');
-
-		$res.= "</p>";
+		$message_statut .= "<p class='article_prop'>"._T('text_article_propose_publication')."</p>";
 	}
+	$res .= pipeline('afficher_message_statut_objet',
+			array(
+			'args'=>array(
+				'type'=>'article',
+				'id_objet'=>$id_article,
+				'statut'=>$row['statut']),
+			'data'=> $message_statut
+			));
 
 	if ($virtuel) {
 		$res .= debut_boite_info(true)

@@ -100,13 +100,13 @@ function recuperer_parametres_url(&$fond, $url) {
 }
 
 //
-// URLs des forums
-//
-
+// le format de definition obsolete oblige a referencer explicitement les forums
+// on prevoit leur inexistence possible par un test sur charger_fonction
 // http://doc.spip.org/@generer_url_forum
-function generer_url_forum($id_forum, $show_thread=false) {
-	include_spip('inc/forum');
-	return generer_url_forum_dist($id_forum, $show_thread);
+function generer_url_forum($id, $show_thread=false) {
+	if ($generer_url_externe = charger_fonction("generer_url_forum",'urls',true))
+		return $generer_url_externe($id, $args, $ancre);
+	return '';
 }
  }
 ?>

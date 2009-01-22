@@ -7,7 +7,7 @@
 	<link>[(#URL_BREVE|url_absolue|texte_backend)]</link>
 	<description></description>
 	<language>[(#ENV{lang}|texte_backend)]</language>
-	<BOUCLE_RSS(FORUMS){id_breve}{statut="publie"}{tout}>
+	<BOUCLE_RSS(FORUMS?){id_breve}{statut="publie"}{tout}>
 	<item>
 		<title>[(#TITRE|texte_backend)][ ((#ENV{page}|=={publie}|?{#STATUT, "publie"}|=={publie}|?{'', #STATUT}))]</title>
 		<link>[(#URL_FORUM|url_absolue|texte_backend)]</link>

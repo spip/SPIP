@@ -131,11 +131,23 @@ function insert_syndic($id_rubrique) {
 
 	$id_secteur = sql_getfetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
 
-	return sql_insertq("spip_syndic", array(
+	$champs = array(
 		'id_rubrique' => $id_rubrique,
 		'id_secteur' => $id_secteur,
 		'statut' => 'prop',
-		'date' => 'NOW()'));
+		'date' => 'NOW()');
+	
+	// Envoyer aux plugins
+	$champs = pipeline('pre_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_syndic',
+			),
+			'data' => $champs
+		)
+	);
+
+	return sql_insertq("spip_syndic", $champs);
 }
 
 

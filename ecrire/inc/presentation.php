@@ -134,9 +134,6 @@ function fin_cadre($style='') {
 	$ret = "<div class='nettoyeur'></div></div>".
 	"</div>\n";
 
-	/*if ($style != "forum" AND $style != "thread-forum")
-		$ret .= "<div style='height: 5px;'></div>\n";*/
-
 	return $ret;
 }
 
@@ -183,37 +180,6 @@ function fin_cadre_sous_rub($return = false){
 	$retour_aff = fin_cadre('sous_rub');
 	if ($return) return $retour_aff; else echo_log('fin_cadre_sous_rub',$retour_aff);
 }
-
-
-
-// http://doc.spip.org/@debut_cadre_forum
-function debut_cadre_forum($icone='', $return = false, $fonction='', $titre = '', $id="", $class=""){
-	$retour_aff = debut_cadre('forum', $icone, $fonction, $titre, $id, $class);
-
-	if ($return) return $retour_aff; else echo_log('debut_cadre_forum',$retour_aff);
-}
-
-// http://doc.spip.org/@fin_cadre_forum
-function fin_cadre_forum($return = false){
-	$retour_aff = fin_cadre('forum');
-
-	if ($return) return $retour_aff; else echo_log('fin_cadre_forum',$retour_aff);
-}
-
-// http://doc.spip.org/@debut_cadre_thread_forum
-function debut_cadre_thread_forum($icone='', $return = false, $fonction='', $titre = '', $id="", $class=""){
-	$retour_aff = debut_cadre('thread-forum', $icone, $fonction, $titre, $id, $class);
-
-	if ($return) return $retour_aff; else echo_log('debut_cadre_thread_forum',$retour_aff);
-}
-
-// http://doc.spip.org/@fin_cadre_thread_forum
-function fin_cadre_thread_forum($return = false){
-	$retour_aff = fin_cadre('thread-forum');
-
-	if ($return) return $retour_aff; else echo_log('fin_cadre_thread_forum',$retour_aff);
-}
-
 
 // http://doc.spip.org/@debut_cadre_couleur
 function debut_cadre_couleur($icone='', $return = false, $fonction='', $titre='', $id="", $class=""){
@@ -393,17 +359,6 @@ function avoir_visiteurs($past=false, $accepter=true) {
 	if (!$past) return false;
 	return sql_countsel('spip_auteurs',  "statut NOT IN ('0minirezo','1comite', 'nouveau', '5poubelle')");
 }
-
-
-// http://doc.spip.org/@forum_logo
-function forum_logo($statut)
-{
-	if ($statut == "prive") return "forum-interne-24.gif";
-	else if ($statut == "privadm") return "forum-admin-24.gif";
-	else if ($statut == "privrac") return "forum-interne-24.gif";
-	else return "forum-public-24.gif";
-}
-
 
 // Retourne les parametres de personnalisation css de l'espace prive
 // (ltr et couleurs) ce qui permet une ecriture comme :
@@ -840,12 +795,6 @@ function creer_colonne_droite($rubrique="", $return= false){
 	$res = "\n</div><div id='extra'>";
 
 	if ($return) return $res; else echo_log('creer_colonne_droite',$res);
-}
-
-// http://doc.spip.org/@formulaire_large
-function formulaire_large()
-{
-	return isset($_GET['exec'])?preg_match(',^((articles|breves|rubriques)_edit|poster_forum_prive),', $_GET['exec']):false;
 }
 
 // http://doc.spip.org/@debut_droite

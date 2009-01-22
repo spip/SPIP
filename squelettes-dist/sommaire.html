@@ -61,7 +61,7 @@
 		<div class="menu">
 			<h2><:derniers_commentaires:></h2>
 			<ul>
-				<BOUCLE_forums_liens(FORUMS) {plat} {par date}{inverse} {0,8}>
+				<BOUCLE_forums_liens(FORUMS?) {plat} {par date}{inverse} {0,8}>
 				<li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_FORUM"[ title="(#TITRE|attribut_html|couper{80})"]>[(#TEXTE|couper{80})]</a></li>
 				</BOUCLE_forums_liens>
 			</ul>

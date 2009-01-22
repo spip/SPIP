@@ -23,7 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@charger_fonction
 function charger_fonction($nom, $dossier='exec', $continue=false) {
 
-	if (substr($dossier,-1) != '/') $dossier .= '/';
+	if (strlen($dossier) AND substr($dossier,-1) != '/') $dossier .= '/';
 
 	if (function_exists($f = str_replace('/','_',$dossier) . $nom))
 		return $f;
@@ -653,12 +653,15 @@ function creer_chemin() {
 
 // Cherche une image dans les dossiers images
 // definis par _NOM_IMG_PACK et _DIR_IMG_PACK
+// peut se trouver dans un dossier plugin, donc on passe par un find_in_path si elle n'est pas
+// dans _DIR_IMG_PACK
 // http://doc.spip.org/@chemin_image
 function chemin_image($file){
-	return _DIR_IMG_PACK . $file;
-	#return find_in_path ($file, _NOM_IMG_PACK);
+	if (file_exists(_DIR_IMG_PACK . $file))
+		return _DIR_IMG_PACK . $file;
+	else
+		return find_in_path ($file, _NOM_IMG_PACK);
 }
-
 
 // Alias de find_in_path
 // http://doc.spip.org/@chemin
@@ -746,9 +749,12 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	if ($public === NULL) $public = !test_espace_prive();
 
 	if (!$public) {
+		$res = "";
 		include_spip('inc/urls');
-		$f = 'generer_url_ecrire_' . $entite;
-	        $res = !function_exists($f) ? '' : $f($id, $args, $ancre, ' ');
+		if (function_exists($f = 'generer_url_ecrire_' . $entite)
+			// ou definie par un plugin
+		  OR $f = charger_fonction($f,'urls',true));
+	    $res = $f($id, $args, $ancre, ' ');
 	} else {
 		if (is_string($public)) {
 			$id_type = ($entite !== 'site') ? "id_$entite" : 'id_syndic';

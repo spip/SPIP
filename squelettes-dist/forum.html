@@ -53,7 +53,7 @@
             <//B_contexte_breve>
             <//B_contexte_article>
     
-            <BOUCLE_contexte_forum(FORUMS) {id_forum}>
+            <BOUCLE_contexte_forum(FORUMS?) {id_forum}>
             &gt; <a href="#URL_FORUM">[(#TITRE|couper{80})]</a>
             </BOUCLE_contexte_forum>
     
@@ -68,7 +68,7 @@
         <div class="menu articles">
             <h2><:en_reponse:></h2>
         
-            <BOUCLE_forum_parent(FORUMS) {id_forum}>
+            <BOUCLE_forum_parent(FORUMS?) {id_forum}>
             <h3><a href="#URL_FORUM">#TITRE</a></h3>
             <small>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</small>
             [<div class="introduction">(#INTRODUCTION|lignes_longues)</div>]

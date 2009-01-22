@@ -232,11 +232,9 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 	if ($boucle->type_requete == 'rubriques' OR isset($exceptions_des_tables[$boucle->id_table]['id_parent'])) {
 		$boucle->where[]= array("'='", "'$mparent'", $arg);
 
-	} else if ($boucle->type_requete == 'forums') {
-			$boucle->where[]= array("'='", "'$mparent'", $arg);
-			$boucle->where[]= array("'>'", "'$mparent'", 0);
-			$boucle->modificateur['plat'] = true;
-	} else erreur_squelette(_T('zbug_info_erreur_squelette'), "{meme_parent} BOUCLE$idb");
+	}
+	// le cas FORUMS est gere dans le plugin forum, dans la fonction critere_FORUMS_meme_parent_dist()
+ 	else erreur_squelette(_T('zbug_info_erreur_squelette'), "{meme_parent} BOUCLE$idb");
 }
 
 // {branche ?}
@@ -773,8 +771,9 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	else if (($col == 'id_secteur')&&($type == 'breves')) {
 		$col = 'id_rubrique';
 	}
-	else if (($col == 'id_secteur')&& ($type == 'forums')) {
-		$table = critere_secteur_forum($idb, $boucles, $val, $crit);
+	// et possibilite de gerer un critere secteur sur des tables de plugins (ie forums)
+	else if (($col == 'id_secteur') AND ($critere_secteur = charger_fonction("critere_secteur_$type","public",true))) {
+		$table = $critere_secteur($idb, $boucles, $val, $crit);
 	}
 	
 	// cas id_article=xx qui se mappe en id_objet=xx AND objet=article
@@ -845,13 +844,6 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// garde pour compatibilite avec code des plugins anterieurs, mais redondant avec la ligne precedente
 	if ($col == 'statut') $boucles[$idb]->statut = true;
 
-	// ajout pour le cas special des forums
-	// il faut alors interdire a la fonction de boucle sur forum
-	// de selectionner uniquement les forums sans pere
-
-	elseif ($boucles[$idb]->type_requete == 'forums' AND
-		($col == 'id_parent' OR $col == 'id_forum'))
-		$boucles[$idb]->modificateur['plat'] = true;
 	// inserer le nom de la table SQL devant le nom du champ
 	if ($table) {
 		if ($col[0] == "`") 
@@ -874,25 +866,6 @@ function primary_doublee($decompose, $table)
 	$e1 = reset($decompose);
 	$e2 = "sql_quote('" . end($decompose) ."')";
 	return array("'='","'$table.". $e1 ."'",$e2);
-}
-
-// Faute de copie du champ id_secteur dans la table des forums,
-// faut le retrouver par jointure
-// Pour chaque Row il faudrait tester si le forum est 
-// d'article, de breve, de rubrique, ou de syndication.
-// Pour le moment on ne traite que les articles,
-// les 3 autres cas ne marcheront donc pas: ca ferait 4 jointures
-// qu'il faut traiter optimalement ou alors pas du tout.
-
-// http://doc.spip.org/@critere_secteur_forum
-function critere_secteur_forum($idb, &$boucles, $val, $crit)
-{
-	static $trouver_table;
-	if (!$trouver_table)
-		$trouver_table = charger_fonction('trouver_table', 'base');
-
-	$desc = $trouver_table('articles', $boucles[$idb]->sql_serveur);
-	return calculer_critere_externe_init($boucles[$idb], array($desc['table']), 'id_secteur', $desc, $crit->cond, true);
 }
 
 // Champ hors table, ca ne peut etre qu'une jointure.

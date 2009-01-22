@@ -107,14 +107,6 @@ $spip_mots_syndic_key = array(
 		"PRIMARY KEY"	=> "id_syndic, id_mot",
 		"KEY id_mot"	=> "id_mot");
 
-$spip_mots_forum = array(
-		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_forum"	=> "bigint(21) DEFAULT '0' NOT NULL");
-
-$spip_mots_forum_key = array(
-		"PRIMARY KEY"	=> "id_forum, id_mot",
-		"KEY id_mot"	=> "id_mot");
-
 $spip_mots_documents = array(
 		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL");
@@ -202,9 +194,6 @@ $tables_auxiliaires['spip_mots_rubriques'] = array(
 $tables_auxiliaires['spip_mots_syndic'] = array(
 	'field' => &$spip_mots_syndic,
 	'key' => &$spip_mots_syndic_key);
-$tables_auxiliaires['spip_mots_forum'] = array(
-	'field' => &$spip_mots_forum,
-	'key' => &$spip_mots_forum_key);
 $tables_auxiliaires['spip_mots_documents'] = array(
 	'field' => &$spip_mots_documents,
 	'key' => &$spip_mots_documents_key);

@@ -35,7 +35,6 @@ function liste_metas()
 		'activer_logos' => 'oui',
 		'activer_logos_survol' => 'non',
 		'config_precise_groupes' => 'non',
-		'mots_cles_forums' =>  'non',
 		'articles_surtitre' => 'non',
 		'articles_soustitre' => 'non',
 		'articles_descriptif' => 'non',
@@ -54,18 +53,11 @@ function liste_metas()
 		'rubriques_descriptif' => 'non',
 		'rubriques_texte' => 'oui',
 
-		'forums_titre' => 'oui',
-		'forums_texte' => 'oui',
-		'forums_urlref' => 'non',
-		'forums_afficher_barre' => 'oui',
-		'formats_documents_forum' => '',
-
 		'activer_sites' => 'non',
 		'proposer_sites' => 0,
 		'activer_syndic' => 'oui',
 		'moderation_sites' => 'non',
 
-		'forums_publics' => 'posteriori',
 		'accepter_inscriptions' => 'non',
 		'accepter_visiteurs' => 'non',
 		'prevenir_auteurs' => 'non',
@@ -75,9 +67,6 @@ function liste_metas()
 		'adresse_neuf' => '',
 		'jours_neuf' => '',
 		'quoi_de_neuf' => 'non',
-		'forum_prive' => 'oui', # forum global dans l'espace prive
-		'forum_prive_objets' => 'oui', # forum sous chaque article de l'espace prive
-		'forum_prive_admin' => 'non', # forum des administrateurs
 		'messagerie_agenda' => 'oui',
 
 		'articles_versions' => 'non',

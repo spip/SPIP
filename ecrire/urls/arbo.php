@@ -362,10 +362,8 @@ function declarer_url_arbo($type, $id_objet) {
 // http://doc.spip.org/@_generer_url_arbo
 function _generer_url_arbo($type, $id, $args='', $ancre='') {
 
-	if ($type == 'forum') {
-		include_spip('inc/forum');
-		return generer_url_forum_dist($id, $args, $ancre);
-	}
+	if ($generer_url_externe = charger_fonction("generer_url_$type",'urls',true))
+		return $generer_url_externe($id, $args, $ancre);
 
 	if ($type == 'document') {
 		include_spip('inc/documents');

@@ -6,7 +6,6 @@ ecrire/action/activer_plugins.php -text
 ecrire/action/changer_mode_document.php -text
 ecrire/action/charger_plugin.php -text
 ecrire/action/configurer.php -text
-ecrire/action/configurer_notifications_forum.php -text
 ecrire/action/configurer_previsualiseur.php -text
 ecrire/action/configurer_relayeur.php -text
 ecrire/action/converser.php -text
@@ -32,7 +31,6 @@ ecrire/action/instituer_article.php -text
 ecrire/action/instituer_auteur.php -text
 ecrire/action/instituer_breve.php -text
 ecrire/action/instituer_collaboration.php -text
-ecrire/action/instituer_forum.php -text
 ecrire/action/instituer_groupe_mots.php -text
 ecrire/action/instituer_langue_rubrique.php -text
 ecrire/action/instituer_rubrique_breves.php -text
@@ -42,12 +40,10 @@ ecrire/action/joindre.php -text
 ecrire/action/legender.php -text
 ecrire/action/logout.php -text
 ecrire/action/petitionner.php -text
-ecrire/action/poster_forum_prive.php -text
 ecrire/action/preferer.php -text
 ecrire/action/purger.php -text
 ecrire/action/redirect.php -text
 ecrire/action/referencer_traduction.php -text
-ecrire/action/regler_moderation.php -text
 ecrire/action/reorganiser.php -text
 ecrire/action/supprimer.php -text
 ecrire/action/supprimer_document.php -text
@@ -85,9 +81,7 @@ ecrire/configuration/annonces.php -text
 ecrire/configuration/articles.php -text
 ecrire/configuration/avertisseur.php -text
 ecrire/configuration/breves.php -text
-ecrire/configuration/contenu_forums.php -text
 ecrire/configuration/documents.php -text
-ecrire/configuration/forums_prives.php -text
 ecrire/configuration/futurs.php -text
 ecrire/configuration/index.php -text
 ecrire/configuration/langue.php -text
@@ -95,8 +89,6 @@ ecrire/configuration/locuteur.php -text
 ecrire/configuration/logos.php -text
 ecrire/configuration/messagerie_agenda.php -text
 ecrire/configuration/mots.php -text
-ecrire/configuration/notifications_forum.php -text
-ecrire/configuration/participants.php -text
 ecrire/configuration/previsualiseur.php -text
 ecrire/configuration/redacteurs.php -text
 ecrire/configuration/redirection.php -text
@@ -119,7 +111,6 @@ ecrire/exec/admin_vider.php -text
 ecrire/exec/aide_index.php -text
 ecrire/exec/articles.php -text
 ecrire/exec/articles_edit.php -text
-ecrire/exec/articles_forum.php -text
 ecrire/exec/articles_page.php -text
 ecrire/exec/articles_tous.php -text
 ecrire/exec/articles_versions.php -text
@@ -137,10 +128,8 @@ ecrire/exec/config_lang.php -text
 ecrire/exec/config_multilang.php -text
 ecrire/exec/configuration.php -text
 ecrire/exec/configurer.php -text
-ecrire/exec/configurer_notifications_forum.php -text
 ecrire/exec/configurer_previsualiseur.php -text
 ecrire/exec/configurer_relayeur.php -text
-ecrire/exec/controle_forum.php -text
 ecrire/exec/controle_petition.php -text
 ecrire/exec/convert_sql_utf8.php -text
 ecrire/exec/convert_utf8.php -text
@@ -156,8 +145,6 @@ ecrire/exec/documents_liste.php -text
 ecrire/exec/editer_auteurs.php -text
 ecrire/exec/editer_mots.php -text
 ecrire/exec/export_all.php -text
-ecrire/exec/forum.php -text
-ecrire/exec/forum_admin.php -text
 ecrire/exec/grouper_mots.php -text
 ecrire/exec/iconifier.php -text
 ecrire/exec/import_all.php -text
@@ -183,13 +170,11 @@ ecrire/exec/mots_type.php -text
 ecrire/exec/naviguer.php -text
 ecrire/exec/petitionner.php -text
 ecrire/exec/plonger.php -text
-ecrire/exec/poster_forum_prive.php -text
 ecrire/exec/puce_statut.php -text
 ecrire/exec/recherche.php -text
 ecrire/exec/rechercher.php -text
 ecrire/exec/rechercher_auteur.php -text
 ecrire/exec/referencer_traduction.php -text
-ecrire/exec/regler_moderation.php -text
 ecrire/exec/rubriques_edit.php -text
 ecrire/exec/selectionner.php -text
 ecrire/exec/selectionner_auteur.php -text
@@ -220,7 +205,6 @@ ecrire/inc/commencer_page.php -text
 ecrire/inc/cookie.php -text
 ecrire/inc/couleurs.php -text
 ecrire/inc/dater.php -text
-ecrire/inc/discuter.php -text
 ecrire/inc/distant.php -text
 ecrire/inc/documenter.php -text
 ecrire/inc/drapeau_edition.php -text
@@ -234,8 +218,6 @@ ecrire/inc/filtres_images_mini.php -text
 ecrire/inc/filtres_mini.php -text
 ecrire/inc/formater_article.php -text
 ecrire/inc/formater_auteur.php -text
-ecrire/inc/forum_envoi.php -text
-ecrire/inc/forum_insert.php -text
 ecrire/inc/gadgets.php -text
 ecrire/inc/grouper_mots.php -text
 ecrire/inc/headers.php -text
@@ -276,7 +258,6 @@ ecrire/inc/presenter_liste.php -text
 ecrire/inc/puce_statut.php -text
 ecrire/inc/rechercher.php -text
 ecrire/inc/referencer_traduction.php -text
-ecrire/inc/regler_moderation.php -text
 ecrire/inc/safehtml.php -text
 ecrire/inc/securiser_action.php -text
 ecrire/inc/selectionner.php -text
@@ -562,6 +543,7 @@ prive/images/heures-pm.png -text
 prive/images/heures-tout.png -text
 prive/images/historique-24.gif -text
 prive/images/image-24.gif -text
+prive/images/interactivite-24.gif -text
 prive/images/interface-display-comp.png -text
 prive/images/interface-display.png -text
 prive/images/jauge-fond.gif -text
@@ -741,12 +723,6 @@ prive/puce_prive.gif -text
 prive/puce_prive_rtl.gif -text
 prive/rss.html -text
 prive/rss/a_suivre.html -text
-prive/rss/forums.html -text
-prive/rss/forums_interne.html -text
-prive/rss/forums_prop.html -text
-prive/rss/forums_public.html -text
-prive/rss/forums_spam.html -text
-prive/rss/forums_vide.html -text
 prive/rss/messagerie.html -text
 prive/rss/revisions.html -text
 prive/rss/signatures.html -text
@@ -855,11 +831,6 @@ prive/vignettes/zip.png -text
 /spip.php -text
 squelettes-dist/feed.png -text
 squelettes-dist/formulaires/ecrire_auteur.php -text
-squelettes-dist/formulaires/forum.php -text
-squelettes-dist/formulaires/inc-choix_mots.html -text
-squelettes-dist/formulaires/inc-forum_ajouter_mot.html -text
-squelettes-dist/formulaires/inc-forum_bloc_choix_mots.html -text
-squelettes-dist/formulaires/inc-login_forum_abo.html -text
 squelettes-dist/formulaires/inscription.php -text
 squelettes-dist/formulaires/mot_de_passe.html -text
 squelettes-dist/formulaires/mot_de_passe.php -text

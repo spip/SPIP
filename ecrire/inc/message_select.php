@@ -98,17 +98,17 @@ function presenter_message_boucles($row, $afficher_auteurs)
 		$vals[] = $s;
 	}
 			
-			//
-			// Messages de forums
+	//
+	// Messages de forums
+	if (_DIR_PLUGIN_FORUM
+	  AND	$total_forum = sql_countsel('spip_forum', "id_message=$id_message")>0)
+		$vals[] = "($total_forum)";
+	else
+		$vals[] = "";
 			
-	$total_forum = sql_countsel('spip_forum', "id_message=$id_message");
-			
-	if ($total_forum > 0) $vals[] = "($total_forum)";
-	else $vals[] = "";
-			
-			//
-			// Date
-			//
+	//
+	// Date
+	//
 			
 	$s = affdate($date);
 	if ($rv == 'oui') {
