@@ -27,16 +27,27 @@ h2.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-re
 /* listes */
 .liste_items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
 .liste_items li.item {border-bottom:1px solid #ddd;padding:0.4em 0; font-size: 11px;overflow:hidden;clear:both;}
+.liste_items li.item.odd {background:#eee;}
 .liste_items li.item:hover {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
 .liste_items li.court:hover {background-color:#eee;}
 .liste_items li.item.on {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];font-weight:normal;}
 .liste_items li.item.on:hover {background-color:[#(#GET{claire}|couleur_eclaircir)];}
 .liste_items li.item h3 {margin:0;}
 
-.pagination {background:#eee;border-top:1px solid #ddd;border-bottom:1px solid #ddd; margin: 0;padding:2px 0; font-size: 11px; font-weight: bold; text-align: right; white-space: nowrap; }
-.pagination .on { background:#ccc;padding:2px 3px;color:#fff; }
-.pagination img {vertical-align:bottom;}
+
+.liste_items li.item .actions {float:none;margin:0;clear:both;text-align:#GET{right};}
+
+.tri, .pagination {background:#eee;border-top:1px solid #ddd;border-bottom:1px solid #ddd; margin: 0;padding:2px 0; font-size: 11px; font-weight: bold; text-align: #GET{right}; white-space: nowrap;margin-top:1em; }
+.tri {text-align:#GET{left};}
+.tri .on, .pagination .on { background:#ccc;padding:2px 3px;color:#fff; }
+.tri img, .pagination img {vertical-align:bottom;}
+
+.pagination + .tri, .tri + .pagination {border-top:0;margin-top:0;}
+.pagination + .liste_items, .tri + .liste_items {border-top:0;margin-top:0;}
+.liste_items + .tri, .liste_items + .pagination {margin-top:-1em;margin-bottom:1em;}
+
 #navigation .pagination,#extra .pagination {font-size:9px;}
+#navigation .tri,#extra .tri {font-size:9px;}
 
 .clicable {cursor:hand;cursor:pointer;}
 
