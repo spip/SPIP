@@ -1,13 +1,13 @@
 /*!
- * jQuery JavaScript Library v1.3.1pre
+ * jQuery JavaScript Library v1.3.1
  * http://jquery.com/
  *
  * Copyright (c) 2009 John Resig
  * Dual licensed under the MIT and GPL licenses.
  * http://docs.jquery.com/License
  *
- * Date: 
- * Revision: 
+ * Date: 2009-01-21 20:42:16 -0500 (Wed, 21 Jan 2009)
+ * Revision: 6158
  */
 (function(){
 
@@ -95,7 +95,7 @@ jQuery.fn = jQuery.prototype = {
 	selector: "",
 
 	// The current version of jQuery being used
-	jquery: "1.3.1pre",
+	jquery: "1.3.1",
 
 	// The number of elements contained in the matched element set
 	size: function() {
@@ -1395,7 +1395,7 @@ jQuery.fn.extend({
 		});
 	}
 });/*!
- * Sizzle CSS Selector Engine - v0.9.1
+ * Sizzle CSS Selector Engine - v0.9.3
  *  Copyright 2009, The Dojo Foundation
  *  Released under the MIT, BSD, and GPL Licenses.
  *  More information: http://sizzlejs.com/
@@ -1451,7 +1451,7 @@ var Sizzle = function(selector, context, results, seed) {
 	} else {
 		var ret = seed ?
 			{ expr: parts.pop(), set: makeArray(seed) } :
-			Sizzle.find( parts.pop(), parts.length === 1 && context.parentNode ? context.parentNode : context );
+			Sizzle.find( parts.pop(), parts.length === 1 && context.parentNode ? context.parentNode : context, isXML(context) );
 		set = Sizzle.filter( ret.expr, ret.set );
 
 		if ( parts.length > 0 ) {
@@ -1516,7 +1516,7 @@ Sizzle.matches = function(expr, set){
 	return Sizzle(expr, null, null, set);
 };
 
-Sizzle.find = function(expr, context){
+Sizzle.find = function(expr, context, isXML){
 	var set, match;
 
 	if ( !expr ) {
@@ -1531,7 +1531,7 @@ Sizzle.find = function(expr, context){
 
 			if ( left.substr( left.length - 1 ) !== "\\" ) {
 				match[1] = (match[1] || "").replace(/\\/g, "");
-				set = Expr.find[ type ]( match, context );
+				set = Expr.find[ type ]( match, context, isXML );
 				if ( set != null ) {
 					expr = expr.replace( Expr.match[ type ], "" );
 					break;
@@ -1711,14 +1711,16 @@ var Expr = Sizzle.selectors = {
 		}
 	},
 	find: {
-		ID: function(match, context){
-			if ( context.getElementById ) {
+		ID: function(match, context, isXML){
+			if ( typeof context.getElementById !== "undefined" && !isXML ) {
 				var m = context.getElementById(match[1]);
 				return m ? [m] : [];
 			}
 		},
-		NAME: function(match, context){
-			return context.getElementsByName ? context.getElementsByName(match[1]) : null;
+		NAME: function(match, context, isXML){
+			if ( typeof context.getElementsByName !== "undefined" && !isXML ) {
+				return context.getElementsByName(match[1]);
+			}
 		},
 		TAG: function(match, context){
 			return context.getElementsByTagName(match[1]);
@@ -1891,7 +1893,7 @@ var Expr = Sizzle.selectors = {
 		CHILD: function(elem, match){
 			var type = match[1], parent = elem.parentNode;
 
-			var doneName = "child" + parent.childNodes.length;
+			var doneName = match[0];
 			
 			if ( parent && (!parent[ doneName ] || !elem.nodeIndex) ) {
 				var count = 1;
@@ -1960,7 +1962,7 @@ var Expr = Sizzle.selectors = {
 		ATTR: function(elem, match){
 			var result = Expr.attrHandle[ match[1] ] ? Expr.attrHandle[ match[1] ]( elem ) : elem[ match[1] ] || elem.getAttribute( match[1] ), value = result + "", type = match[2], check = match[4];
 			return result == null ?
-				false :
+				type === "!=" :
 				type === "=" ?
 				value === check :
 				type === "*=" ?
@@ -2049,15 +2051,15 @@ try {
 	// The workaround has to do additional checks after a getElementById
 	// Which slows things down for other browsers (hence the branching)
 	if ( !!document.getElementById( id ) ) {
-		Expr.find.ID = function(match, context){
-			if ( context.getElementById ) {
+		Expr.find.ID = function(match, context, isXML){
+			if ( typeof context.getElementById !== "undefined" && !isXML ) {
 				var m = context.getElementById(match[1]);
-				return m ? m.id === match[1] || m.getAttributeNode && m.getAttributeNode("id").nodeValue === match[1] ? [m] : undefined : [];
+				return m ? m.id === match[1] || typeof m.getAttributeNode !== "undefined" && m.getAttributeNode("id").nodeValue === match[1] ? [m] : undefined : [];
 			}
 		};
 
 		Expr.filter.ID = function(elem, match){
-			var node = elem.getAttributeNode && elem.getAttributeNode("id");
+			var node = typeof elem.getAttributeNode !== "undefined" && elem.getAttributeNode("id");
 			return elem.nodeType === 1 && node && node.nodeValue === match;
 		};
 	}
@@ -2105,12 +2107,21 @@ try {
 })();
 
 if ( document.querySelectorAll ) (function(){
-	var oldSizzle = Sizzle;
+	var oldSizzle = Sizzle, div = document.createElement("div");
+	div.innerHTML = "<p class='TEST'></p>";
+
+	// Safari can't handle uppercase or unicode characters when
+	// in quirks mode.
+	if ( div.querySelectorAll && div.querySelectorAll(".TEST").length === 0 ) {
+		return;
+	}
 	
 	Sizzle = function(query, context, extra, seed){
 		context = context || document;
 
-		if ( !seed && context.nodeType === 9 ) {
+		// Only use querySelectorAll on non-XML documents
+		// (ID selectors don't work in non-HTML documents)
+		if ( !seed && context.nodeType === 9 && !isXML(context) ) {
 			try {
 				return makeArray( context.querySelectorAll(query), extra );
 			} catch(e){}
@@ -3473,6 +3484,9 @@ jQuery.extend({
 				// Fire the complete handlers
 				complete();
 
+				if ( isTimeout )
+					xhr.abort();
+
 				// Stop memory leaks
 				if ( s.async )
 					xhr = null;
@@ -3487,14 +3501,8 @@ jQuery.extend({
 			if ( s.timeout > 0 )
 				setTimeout(function(){
 					// Check to see if the request is still happening
-					if ( xhr ) {
-						if( !requestDone )
-							onreadystatechange( "timeout" );
-
-						// Cancel the request
-						if ( xhr )
-							xhr.abort();
-					}
+					if ( xhr && !requestDone )
+						onreadystatechange( "timeout" );
 				}, s.timeout);
 		}
 
