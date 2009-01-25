@@ -144,6 +144,7 @@ function bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
 
 // http://doc.spip.org/@afficher_choix
 function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
+	$choix = array();
 	while (list($valeur, $titre) = each($valeurs)) {
 		$choix[] = bouton_radio($nom, $valeur, $titre, $valeur == $valeur_actuelle);
 	}
