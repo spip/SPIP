@@ -2278,7 +2278,7 @@ function url_rss_forum($texte){return $texte;}
  * @param string $title
  * @return string
  */
-function lien_ou_pasclicable($url,$libelle,$on=false,$class="",$title="",$rel=""){
+function lien_ou_expose($url,$libelle,$on=false,$class="",$title="",$rel=""){
 	return 
 	($on ?"<strong class='on'>":
 		"<a href='$url'"
@@ -2319,7 +2319,7 @@ function balise_img($img,$alt="",$class=""){
  * @param int $nb
  * @return string
  */
-function affiche_un_ou_plusieurs($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
+function singulier_ou_pluriel($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
 	if (!$nb=intval($nb)) return "";
 	if ($nb>1) return _T($chaine_plusieurs, array($var => $nb));
 	else return _T($chaine_un);
