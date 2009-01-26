@@ -2339,7 +2339,7 @@ function singulier_ou_pluriel($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
  * @param string $fonction
  * @return string
  */
-function filtre_icone($lien, $texte, $fond, $align="", $fonction="", $class=""){
+function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class=""){
 	$align = $align?$align:$GLOBALS['spip_lang_left'];
 	global $spip_display;
 
