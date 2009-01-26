@@ -157,7 +157,7 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 //
 
 // http://doc.spip.org/@appliquer_modifs_config
-function appliquer_modifs_config() {
+function appliquer_modifs_config($purger_skel=false) {
 
 	if (($i = _request('adresse_site'))!==NULL){
 		if (!strlen($i)) {$GLOBALS['profondeur_url']=_DIR_RESTREINT?0:1;$i = url_de_base();}
@@ -172,27 +172,6 @@ function appliquer_modifs_config() {
 	// Purger les squelettes si un changement de meta les affecte
 	if ($i = _request('post_dates') AND ($i != $GLOBALS['meta']["post_dates"]))
 		$purger_skel = true;
-
-	if ($accepter_forum = _request('forums_publics')
-	AND ($accepter_forum != $GLOBALS['meta']["forums_publics"])) {
-		$purger_skel = true;
-		$accepter_forum = substr($accepter_forum,0,3);
-	}
-
-	// Appliquer les changements de moderation forum
-	// forums_publics_appliquer : futur, saufnon, tous
-	if (in_array($appliquer = _request('forums_publics_appliquer'),
-		array('tous', 'saufnon')
-	)) {
-		$sauf = ($appliquer == 'saufnon')
-			? "accepter_forum != 'non'"
-			: '';
-
-		sql_updateq('spip_articles', array('accepter_forum'=>$accepter_forum), $sauf);
-	}
-
-	if ($accepter_forum == 'abo')
-		ecrire_meta('accepter_visiteurs', 'oui');
 
 	if ($i = _request('langues_auth') AND is_array($i)) {
 		set_request('langues_multilingue', join($i, ","));
