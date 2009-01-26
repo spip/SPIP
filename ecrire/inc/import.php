@@ -391,7 +391,8 @@ function import_init_meta($tag, $atts, $charset, $request)
 	$version_base = $atts['version_base'];
 	$insert = $request['insertion'] ;
 
-	$old = (version_compare($version_base,$GLOBALS['spip_version_base'],'<')
+	$old = (!$insert 
+		&& version_compare($version_base,$GLOBALS['spip_version_base'],'<')
 		&& !isset($GLOBALS['meta']['restauration_table_prefix']));
 
 	if ($old) {
