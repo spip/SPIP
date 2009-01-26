@@ -136,6 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Choisissez une base suppl&eacute;mentaire',
 'connexion_ldap' => 'Connexion :',
 'copier_en_local' => 'Copier en local',
+'config_info_enregistree' => 'La nouvelle configuration a &eacute;t&eacute; enregistr&eacute;',
 
 // D
 'date_mot_heures' => 'heures',

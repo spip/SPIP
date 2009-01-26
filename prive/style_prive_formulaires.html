@@ -77,15 +77,19 @@
 
 /* Explications */
 .formulaire_spip .explication {
-	margin: 0px;
 	display: -moz-inline-box;
 	display: inline-block;
-	width: 96%;
+	margin: 0 10px;
+	width: 94%;
 	border: 1px solid #GET{claire};
 	border-bottom: 0px;
 	padding: 3px;
 	font-size:10px;
 	background-color: #dddddd;
+}
+.formulaire_spip li .explication {
+	margin: 0px;
+	width: 96%;
 }
 .formulaire_spip .explication a {color:[#(#GET{foncee}|couleur_foncer)];}
 /* Remarques importantes */
@@ -479,3 +483,7 @@ input[type="submit"] {
 	padding: 0;
 	overflow:visible;
 }
+
+/* Style des formulaires de configuration
+----------------------------------------------- */
+.formulaire_configurer {margin:2em 0;}
