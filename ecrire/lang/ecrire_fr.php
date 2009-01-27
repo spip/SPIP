@@ -125,6 +125,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP n\'a pas acc&egrave;s &agrave; la liste des bases accessibles',
 'config_info_base_sup' => 'Si vous avez d\'autres bases de donn&eacute;es &agrave; interroger &agrave; travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les d&eacute;clarer. Si vous laissez certains champs vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.',
 'config_info_base_sup_disponibles' => 'Bases suppl&eacute;mentaires d&eacute;j&agrave; interrogeables:',
+'config_info_enregistree' => 'La nouvelle configuration a &eacute;t&eacute; enregistr&eacute;e',
 'config_info_logos' => 'Chaque &eacute;l&eacute;ment du site peut avoir un logo, ainsi qu\'un &laquo;&nbsp;logo de survol&nbsp;&raquo;',
 'config_info_logos_utiliser' => 'Utiliser les logos',
 'config_info_logos_utiliser_non' => 'Ne pas utiliser les logos',
@@ -136,7 +137,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Choisissez une base suppl&eacute;mentaire',
 'connexion_ldap' => 'Connexion :',
 'copier_en_local' => 'Copier en local',
-'config_info_enregistree' => 'La nouvelle configuration a &eacute;t&eacute; enregistr&eacute;e',
 
 // D
 'date_mot_heures' => 'heures',
