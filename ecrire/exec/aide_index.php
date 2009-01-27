@@ -268,9 +268,11 @@ function help_frame($frame, $aide, $html, $lang)
 	if ($frame === 'menu') {
 		echo "<head>\n<title>",$titre,"</title>\n";
 		echo '<link rel="stylesheet" type="text/css" href="';
-		echo url_absolue(find_in_path('aide_menu.css'));
-		echo "\"/>\n", $GLOBALS['browser_layer'],
+		echo generer_url_public('aide_menu', "ltr=". $GLOBALS['spip_lang_left']);
+		echo "\"/>\n",
 		  http_script('', 'jquery.js'),
+		  "\n",
+		  $GLOBALS['browser_layer'],
 		  http_script('var curr_article;
 function activer_article(id) {
 	if (curr_article)
