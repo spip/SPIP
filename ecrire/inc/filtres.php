@@ -170,49 +170,17 @@ function version_svn_courante($dir) {
 	return 0;
 }
 
-//
-// Fonctions graphiques
-//
 // La matrice est necessaire pour ne filtrer _que_ des fonctions definies dans filtres_images
 // et laisser passer les fonctions personnelles baptisees image_...
-$GLOBALS['spip_matrice']['image_valeurs_trans'] = true;
-$GLOBALS['spip_matrice']['image_graver'] = true;
-$GLOBALS['spip_matrice']['image_reduire'] = true;
-$GLOBALS['spip_matrice']['image_reduire_par'] = true;
-$GLOBALS['spip_matrice']['image_recadre'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_alpha'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_flip_vertical'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_flip_horizontal'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_masque'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_nb'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_flou'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_RotateBicubic'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_rotation'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_distance_pixel'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_decal_couleur'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_gamma'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_decal_couleur_127'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_sepia'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_aplatir'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_format'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_couleur_extraire'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_select'] = true;
-$GLOBALS['spip_matrice']['image_renforcement'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_imagick'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['image_ramasse_miettes'] = true;
-$GLOBALS['spip_matrice']['image_passe_partout'] = true;
+$GLOBALS['spip_matrice']['image_graver'] = 'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['image_select'] = 'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['image_reduire'] = 'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['image_reduire_par'] = 'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['image_passe_partout'] = 'inc/filtres_images_mini.php';
 
-$GLOBALS['spip_matrice']['couleur_dec_to_hex'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['couleur_hex_to_dec'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['couleur_extreme'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['couleur_inverser'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['couleur_eclaircir'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['couleur_foncer'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['couleur_foncer_si_claire'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['couleur_eclaircir_si_foncee'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['couleur_saturation'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['couleur_web'] = 'inc/filtres_images.php';
-$GLOBALS['spip_matrice']['couleur_4096'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['couleur_html_to_hex'] = 'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['couleur_foncer'] = 'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['couleur_eclaircir'] = 'inc/filtres_images_mini.php';
 
 // charge les fonctions graphiques et applique celle demandee
 // http://doc.spip.org/@filtrer
@@ -300,35 +268,14 @@ function image_filtrer($args){
 }
 
 // pour les feuilles de style
-function image_bg ($img, $couleur, $pos="") {
-	if (!function_exists("imagecreatetruecolor"))
+function filtre_background_image_dist ($img, $couleur, $pos="") {
+	if (!function_exists("imagecreatetruecolor")
+	  OR !include_spip('filtres/images_transforme')
+	  OR !function_exists('image_sepia')
+	  OR !function_exists('image_aplatir')
+	  )
 		return "background-color: #$couleur;";
-	include_spip('inc/filtres_images');
 	return "background: url(".url_absolue(extraire_attribut(image_aplatir(image_sepia($img, $couleur),"gif","cccccc", 64, true), "src")).") $pos;";
-}
-
-// Pour assurer la compatibilite avec les anciens nom des filtres image_xxx
-// commencent par "image_"
-// http://doc.spip.org/@reduire_image
-function reduire_image($texte, $taille = -1, $taille_y = -1) {
-	return filtrer('image_graver',
-		filtrer('image_reduire',$texte, $taille, $taille_y)
-	);
-}
-// http://doc.spip.org/@valeurs_image_trans
-function valeurs_image_trans($img, $effet, $forcer_format = false) {
-	include_spip('inc/filtres_images');
-	return image_valeurs_trans($img, $effet, $forcer_format = false);
-}
-// http://doc.spip.org/@couleur_extraire
-function couleur_extraire($img, $x=10, $y=6) {
-	return filtrer('image_couleur_extraire',$img, $x, $y);
-}
-// http://doc.spip.org/@image_typo
-function image_typo() {
-	include_spip('inc/filtres_images');
-	$tous = func_get_args();
-	return call_user_func_array('produire_image_typo', $tous);
 }
 
 //

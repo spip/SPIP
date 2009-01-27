@@ -289,7 +289,7 @@ function afficher_objet_boucle($row, $own)
 			    OR $chercher_logo = charger_fonction_logo_if())
 			  if ($logo = $chercher_logo($id_objet, $primary, 'on')) {
 				list($fid, $dir, $nom, $format) = $logo;
-				include_spip('inc/filtres_images');
+				include_spip('inc/filtres_images_mini');
 				$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
 				if ($logo)
 					$flogo = "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";

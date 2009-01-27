@@ -264,7 +264,7 @@ function etat_base_accueil()
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		if ($r = $chercher_logo(0, 'id_syndic', 'on'))  {
 			list($fid, $dir, $nom, $format) = $r;
-			include_spip('inc/filtres_images');
+			include_spip('inc/filtres_images_mini');
 			$r = image_reduire("<img src='$fid' alt='' />", 170, 170);
 			if ($r)
 				$res ="<div style='text-align:center; margin-bottom: 5px;'>$r</div>";

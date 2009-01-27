@@ -81,7 +81,7 @@ div.table_page { margin-top: 1em; }
 	display: inline; 
 }
 #chemin li .bloc {	
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee}|couleur_foncer)], center [(#GET{left})] no-repeat })]
 	padding: 2px;	
 	padding-bottom: 4px;
 	padding-#GET{left}: 10px;	
@@ -91,12 +91,12 @@ div.table_page { margin-top: 1em; }
 	display: inline-block; 
 }
 #chemin li .bloc:hover {
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer|couleur_foncer)], center [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee}|couleur_foncer|couleur_foncer)], center [(#GET{left})] no-repeat })]
 }
 
 #chemin li li .bloc { 
 	margin-top: 2px; 
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], center [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], center [(#GET{left})] no-repeat })]
 }
 #chemin .aide {margin-top: 3px; margin-bottom: 15px;}
 
