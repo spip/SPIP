@@ -104,6 +104,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 	// et si l'index de jointure est une primary key a l'arrivee !
 	if (!$pk
 	  AND (count($boucle->from) == 2)
+	  AND isset($a[1]['key']['PRIMARY KEY'])
 	  AND ($j == $a[1]['key']['PRIMARY KEY'])
 	  )
 	  $pk = true;

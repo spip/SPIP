@@ -820,7 +820,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// forcer une conversion pour eviter un erreur au niveau SQL
 
 	if ($op == '=' OR in_array($op, $table_criteres_infixes)) {
-		if (($desc AND sql_test_int($desc['field'][$col]))
+		if (($desc AND isset($desc['field'][$col]) AND sql_test_int($desc['field'][$col]))
 		    OR ($date AND strpos($date[0], '_relatif'))) {
 			if (strpos($val[0], 'sql_quote(') === 0)
 				$val[0] = 'intval' . substr($val[0],strlen('sql_quote'));
@@ -1040,9 +1040,9 @@ function calculer_critere_infixe_date($idb, &$boucles, $regs)
 {
 	global $table_date; 
 	$boucle = $boucles[$idb];
-	list(,$col, $rel, $suite) = $regs;
+	$col = $regs[1];
 	$date_orig = $pred = isset($table_date[$boucle->type_requete])?$table_date[$boucle->type_requete]:'date';
-	if ($suite) {
+	if (isset($regs[3]) AND $suite=$regs[3]) {
 	# Recherche de l'existence du champ date_xxxx,
 	# si oui choisir ce champ, sinon choisir xxxx
 		$t = $boucle->show;
@@ -1051,7 +1051,9 @@ function calculer_critere_infixe_date($idb, &$boucles, $regs)
 		else
 			$date_orig = substr($suite, 1);
 		$pred = $date_orig;
-	} else if ($rel) $pred = 'date';
+	} 
+	else 
+	  if (isset($regs[2]) AND $rel=$regs[2]) $pred = 'date';
 
 	$date_compare = "\"' . normaliser_date(" .
 	      calculer_argument_precedent($idb, $pred, $boucles) .
