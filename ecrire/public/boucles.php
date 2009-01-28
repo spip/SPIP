@@ -173,12 +173,16 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 		$boucle->group[] = "$id_table.id_document";
 
 		if ($GLOBALS['var_preview']) {
-			array_unshift($boucle->where,"'(aa.statut IN (\"publie\",\"prop\") OR bb.statut  IN (\"publie\",\"prop\") OR rr.statut IN (\"publie\",\"prive\") OR ff.statut IN (\"publie\",\"prop\"))'");
+			array_unshift($boucle->where,"'(aa.statut IN (\"publie\",\"prop\") OR bb.statut  IN (\"publie\",\"prop\") OR rr.statut IN (\"publie\",\"prive\")"
+			.(test_plugin_actif('forum')? " OR ff.statut IN (\"publie\",\"prop\")":"")
+			.")'");
 		} else {
 			$postdates = ($GLOBALS['meta']['post_dates'] == 'non')
 				? ' AND aa.date<=\'.sql_quote(quete_date_postdates()).\''
 				: '';
-			array_unshift($boucle->where,"'((aa.statut = \"publie\"$postdates) OR bb.statut = \"publie\" OR rr.statut = \"publie\" OR ff.statut=\"publie\")'");
+			array_unshift($boucle->where,"'((aa.statut = \"publie\"$postdates) OR bb.statut = \"publie\" OR rr.statut = \"publie\""
+			.(test_plugin_actif('forum')? " OR ff.statut=\"publie\"":"")
+			.")'");
 		}
 	}
 
