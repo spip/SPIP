@@ -168,7 +168,7 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 			LEFT JOIN spip_rubriques AS rr
 				ON (l.id_objet=rr.id_rubrique AND l.objet=\"rubrique\")"
 			// test conditionne par la presence du plugin forum, en attendant le champ statut sur la table documents
-			. (_DIR_PLUGIN_FORUM?" LEFT JOIN spip_forum AS ff	ON (l.id_objet=ff.id_forum AND l.objet=\"forum\")":"");
+			. (test_plugin_actif('forum')?" LEFT JOIN spip_forum AS ff	ON (l.id_objet=ff.id_forum AND l.objet=\"forum\")":"");
 
 		$boucle->group[] = "$id_table.id_document";
 
