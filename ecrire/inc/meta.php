@@ -36,13 +36,13 @@ function inc_meta_dist()
 	// renouveller l'alea au besoin
 	if ((test_espace_prive() || isset($_GET['renouvelle_alea']))
 	AND $GLOBALS['meta']
+	AND ($GLOBALS['exec'] === 'upgrade')
 	AND (time() > _RENOUVELLE_ALEA + @$GLOBALS['meta']['alea_ephemere_date'])) {
 		// si on n'a pas l'acces en ecriture sur le cache,
 		// ne pas renouveller l'alea sinon le cache devient faux
 		if (supprimer_fichier(_FILE_META)) {
 			include_spip('inc/acces');
 			renouvelle_alea();
-spip_log('renouvelle_alea');
 			$new = false; 
 		} else spip_log("impossible d'ecrire dans " . _FILE_META);
 	}
