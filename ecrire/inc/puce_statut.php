@@ -239,7 +239,8 @@ function puce_statut_site_dist($id, $statut, $id_rubrique, $type, $ajax=''){
 			      'poubelle' => 3);
 	if ($type=='syndic') $type='site';
 
-	$lang_dir = lang_dir($lang_objet);
+	$lang = isset($GLOBALS['lang_objet'])	? $GLOBALS['lang_objet']: $GLOBALS['spip_lang'];
+	$lang_dir = lang_dir($lang);
 	$puces = array(
 		       0 => 'puce-orange-breve.gif',
 		       1 => 'puce-verte-breve.gif',

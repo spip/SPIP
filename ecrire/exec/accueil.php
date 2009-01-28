@@ -255,8 +255,7 @@ function etat_base_accueil()
 {
 	global $spip_display, $spip_lang_left, $connect_id_rubrique;
 
-	$where = count($connect_id_rubrique)
-	? sql_in('id_rubrique', $connect_id_rubrique)	: '';
+	$where = count($connect_id_rubrique) ? sql_in('id_rubrique', $connect_id_rubrique)	: '';
 
 	$res = '';
 
