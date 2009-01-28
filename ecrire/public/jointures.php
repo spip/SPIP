@@ -96,7 +96,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
   // et operateur d'egalite (http://trac.rezo.net/trac/spip/ticket/477)
 
 	if ($pk = ((count($boucle->from) == 2) && !$cond)) {
-		$pk = nogroupby_if($desc, $a[1], $id_primary, $col);
+		$pk = nogroupby_if($desc, $a[1], $col);
 	}
 	
 	// pas de group by 
@@ -125,7 +125,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 // A ameliorer, notamment voir si calculer_select ne pourrait pas la reutiliser
 // lorsqu'on sait si le critere conditionnel est finalement present
 // http://doc.spip.org/@nogroupby_if
-function nogroupby_if($depart, $arrivee, $id_primary, $col)
+function nogroupby_if($depart, $arrivee, $col)
 {
 	$pk = $arrivee['key']['PRIMARY KEY'];
 	if (!$pk) return false;
