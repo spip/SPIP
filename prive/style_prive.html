@@ -758,6 +758,16 @@ body.sites .no_onglets #contenu #wysiwyg div.contenu_nom_site {display: none;}
 	background: url(#GET{chemin_img_pack}fond-grille.gif) top left;
 }
 
+/* tables generiques de donnees */
+table.info {width: 90%; margin: 1em auto; border-collapse: collapse; border-spacing: 0; line-height: normal;border:1px solid #999;}
+table.info thead tr { background-color:#[(#GET{foncee}|couleur_foncer)];color:#fff;border: 1px solid #ddd; }
+table.info th, table.info td { padding: 0.20em 0.40em; text-align: #GET{left}; border: 1px solid #ddd; }
+table.info th.num, table.info td.num { text-align: #GET{right};}
+table.info th a {color:#[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];text-decoration:underline;}
+table.info th { vertical-align: bottom; font-weight: bold; }
+table.info td { vertical-align: top; }
+
+
 /******** Formulaires **************/
 [(#INCLURE{fond=style_prive_formulaires}{couleur_claire}{couleur_foncee}{lang}{ltr})]
 /******** Formulaires fin  **************/
