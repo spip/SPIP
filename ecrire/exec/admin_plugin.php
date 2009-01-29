@@ -324,10 +324,10 @@ function ligne_plug($plug_file, $actif, $id){
 	static $versions = array();
 
 	$erreur = false;
-	$vals = array();
+	$s = "";
 
 	$info = plugin_get_infos($plug_file);
-
+	
 	// plug pour CFG
 	if ($actif
 	AND defined('_DIR_PLUGIN_CFG')) {
