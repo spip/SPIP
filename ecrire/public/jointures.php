@@ -95,7 +95,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
   // de l'index principal et de l'index de jointure (non conditionnel! [6031])
   // et operateur d'egalite (http://trac.rezo.net/trac/spip/ticket/477)
 
-	if ($pk = ((count($boucle->from) == 2) && !$cond)) {
+	if ($pk = (isset($a[1]) && (count($boucle->from) == 2) && !$cond)) {
 		$pk = nogroupby_if($desc, $a[1], $col);
 	}
 	

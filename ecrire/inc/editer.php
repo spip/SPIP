@@ -241,7 +241,7 @@ function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') 
 	unset($c['id_secteur']);
 
 	// Gerer les champs non vides
-	if (is_array($options['nonvide']))
+	if (isset($options['nonvide']) AND is_array($options['nonvide']))
 	foreach ($options['nonvide'] as $champ => $sinon)
 		if ($c[$champ] === '')
 			$c[$champ] = $sinon;
@@ -266,7 +266,7 @@ function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') 
 				'spip_table_objet' => $spip_table_objet,
 				'type' =>$type,
 				'id_objet' => $id,
-				'champs' => $options['champs'],
+				'champs' => isset($options['champs'])?$options['champs']:array(),
 				'action' => 'controler'
 			),
 			'data' => $champs
@@ -276,7 +276,7 @@ function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') 
 	if (!$champs) return false;
 
 	// Verifier si les mises a jour sont pertinentes, datees, en conflit etc
-	$conflits = controler_md5($champs, $_POST, $type, $id, $serveur, $options['prefix']?$options['prefix']:'ctr_');
+	$conflits = controler_md5($champs, $_POST, $type, $id, $serveur, isset($options['prefix'])?$options['prefix']:'ctr_');
 
 	return $conflits;
 }
