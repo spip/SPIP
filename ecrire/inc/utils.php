@@ -675,12 +675,6 @@ function chemin_image($file){
 		return find_in_path ($file, _NOM_IMG_PACK);
 }
 
-// Alias de find_in_path
-// http://doc.spip.org/@chemin
-function chemin($file, $dirname='', $include=false){
-	return find_in_path ($file, $dirname, $include);
-}
-
 
 //
 // chercher un fichier $file dans le SPIP_PATH
