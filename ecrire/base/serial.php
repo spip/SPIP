@@ -39,7 +39,6 @@ $spip_articles = array(
 		"lang"		=> "VARCHAR(10) DEFAULT '' NOT NULL",
 		"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
 		"id_trad"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"extra"		=> "longtext NULL",
 		"id_version"	=> "int unsigned DEFAULT '0' NOT NULL",
 		"nom_site"	=> "tinytext DEFAULT '' NOT NULL",
 		"url_site"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
@@ -81,9 +80,7 @@ $spip_auteurs = array(
 		"prefs"	=> "tinytext",
 		"cookie_oubli"	=> "tinytext",
 		"source"	=> "VARCHAR(10) DEFAULT 'spip' NOT NULL",
-		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
-#		"url_propre" => "VARCHAR(255)",
-		"extra"	=> "longtext NULL");
+		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL");
 
 $spip_auteurs_key = array(
 		"PRIMARY KEY"	=> "id_auteur",
@@ -108,10 +105,7 @@ $spip_breves = array(
 		"id_rubrique"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
 		"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
-		"maj"	=> "TIMESTAMP",
-		"extra"	=> "longtext NULL",
-#		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL"
-);
+		"maj"	=> "TIMESTAMP");
 
 $spip_breves_key = array(
 		"PRIMARY KEY"	=> "id_breve",
@@ -145,8 +139,6 @@ $spip_mots = array(
 		"texte"	=> "longtext DEFAULT '' NOT NULL",
 		"id_groupe"	=> "bigint(21) DEFAULT 0 NOT NULL",
 		"type"	=> "text DEFAULT '' NOT NULL",
-		"extra"	=> "longtext NULL",
-#		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_mots_key = array(
@@ -189,8 +181,6 @@ $spip_rubriques = array(
 		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
 		"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
-		"extra"	=> "longtext NULL",
-#		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL",
 		"statut_tmp"	=> "varchar(10) DEFAULT '0' NOT NULL",
 		"date_tmp"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
 		);
@@ -254,7 +244,6 @@ $spip_syndic = array(
 		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"date_syndic"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"date_index"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"extra"			=> "longtext NULL",
 		"moderation"	=> "VARCHAR(3) DEFAULT 'non'",
 		"miroir"	=> "VARCHAR(3) DEFAULT 'non'",
 		"oubli"	=> "VARCHAR(3) DEFAULT 'non'",
