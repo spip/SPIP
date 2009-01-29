@@ -242,7 +242,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
       $res = array($fonc);
       $args = $suite ;
       // cas du filtre sans argument ou du critere /
-      if (($suite[0] != '{')  || ($fonc  && $fonc[0] == '/'))
+      if (($suite && ($suite[0] != '{'))  || ($fonc  && $fonc[0] == '/'))
 	{ 
 	  // si pas d'argument, alors il faut une fonction ou un double |
 	  if (!$match[1])

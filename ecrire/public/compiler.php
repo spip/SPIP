@@ -839,7 +839,8 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 
 				$boucles[$id]->descr = &$descr;
 				if ((!$boucles[$id]->jointures)
-				AND (is_array($x = $tables_jointures[$nom_table])))
+				AND (isset($tables_jointures[$nom_table])) 
+				AND is_array($x = $tables_jointures[$nom_table]))
 					$boucles[$id]->jointures = $x;
 			} else {
 				$boucles[$id]->type_requete = '';

@@ -51,7 +51,7 @@ function base_trouver_table_dist($nom, $serveur=''){
 	else
 		$nom_sql = $nom;
 
-	$desc = '';
+	$fdesc = $desc = '';
 	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 
 	// base sous SPIP: gerer les abreviations des noms de table

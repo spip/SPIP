@@ -135,13 +135,18 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	}
 	elseif (@file_exists($f = "$fichier.src")
 		AND lire_fichier($f,$valeurs)
-		AND $valeurs=unserialize($valeurs)) {
+		AND $valeurs=unserialize($valeurs)
+		AND isset($valeurs["hauteur_dest"])
+		AND isset($valeurs["largeur_dest"])) {
 		$ret["hauteur"] = $valeurs["hauteur_dest"];
 		$ret["largeur"] = $valeurs["largeur_dest"];
 		$date_src = $valeurs["date"];
 	}
-
 	// pas de fichier source par la
+	else
+		return false;
+
+	// pas de taille mesurable
 	if (!($ret["hauteur"] OR $ret["largeur"]))
 		return false;
 	
