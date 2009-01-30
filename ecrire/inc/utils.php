@@ -1466,7 +1466,9 @@ function verifier_visiteur() {
 		include_spip('inc/actions');
 		return verifier_php_auth();
 	}
-
+	// au moins son navigateur nous dit la langue preferee de cet inconnu
+	include_spip('inc/lang');
+	utiliser_langue_visiteur();
 	return false;
 }
 

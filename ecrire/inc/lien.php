@@ -40,8 +40,9 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 	elseif (!$class) $class = "spip_out"; # si pas spip_in|spip_glossaire
 
 	// Si l'objet n'est pas de la langue courante, on ajoute hreflang
-	if (!$hlang AND $lang!=$GLOBALS['spip_lang'])
+	if (!$hlang AND $lang!==$GLOBALS['spip_lang'])
 		$hlang = $lang;
+
 	$lang = ($hlang ? " hreflang='$hlang'" : '');
 
 	if ($title) $title = ' title="'.texte_backend($title).'"';
@@ -141,7 +142,8 @@ function traiter_raccourci_lien_atts($texte) {
 				if (traduire_nom_langue($m[5]) <> $m[5]) {
 					$hlang = $m[5];
 				} elseif (!$m[5]) {
-					$hlang = $GLOBALS['lang_objet'];
+					$hlang = test_espace_prive() ? 
+					  $GLOBALS['lang_objet'] : $GLOBALS['spip_lang'];
 				// sinon c'est un italique
 				} else {
 					$m[1] .= $m[4];
