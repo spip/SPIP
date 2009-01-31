@@ -36,7 +36,6 @@ function inc_meta_dist()
 	// renouveller l'alea au besoin
 	if ((test_espace_prive() || isset($_GET['renouvelle_alea']))
 	AND $GLOBALS['meta']
-#	AND ($GLOBALS['exec'] === 'upgrade')
 	AND (time() > _RENOUVELLE_ALEA + @$GLOBALS['meta']['alea_ephemere_date'])) {
 		// si on n'a pas l'acces en ecriture sur le cache,
 		// ne pas renouveller l'alea sinon le cache devient faux
@@ -102,11 +101,12 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 	// conserver la valeur de impt si existante
 	// et ne pas invalider le cache si affectation a l'identique
 	if ($res AND $valeur == $res['valeur']) return;
-	// cf effacer pour le double touch
+	// cf effacer pour comprendre le double touch
 	$antidate = time() - (_META_CACHE_TIME<<1);
 	if ($touch) {touch_meta($antidate);}
-  $r = array('nom' => $nom, 'valeur' => $valeur);
-  if ($importable) $r['impt'] = $importable;
+	$r = array('nom' => $nom, 'valeur' => $valeur);
+	// Gerer les vieilles versions ou impt n'existait pas
+	if ($importable AND isset($res['impt'])) $r['impt'] = $importable;
 	if ($res) {
 		sql_updateq('spip_meta', $r,"nom=" . sql_quote($nom));
 	} else {
