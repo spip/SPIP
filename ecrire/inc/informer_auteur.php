@@ -51,7 +51,7 @@ function inc_informer_auteur_dist($id)
 		}
 	}
 
-	return "<div class='informer'>"
+	return "<div class='informer-auteur'>"
 	. (!$res ? '' : $res)
 	. "<div><a href='"
 	. generer_url_ecrire('auteur_infos', "id_auteur=$id")
