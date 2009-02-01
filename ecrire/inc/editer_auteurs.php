@@ -104,7 +104,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 		. $res;
 	}
 
-	$idom = "auteurs_$type_$id";
+	$idom = "auteurs_$type" . "_$id";
 	$bouton = bouton_block_depliable($titre_boite,$flag ?($flag === 'ajax'):-1,$idom);
 	$res = debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
 	. $reponse
@@ -235,25 +235,27 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 	$cond = $determiner_non_auteurs($type, $id, $cond_les_auteurs);
 	$all = objet_auteur_select($cond);
 	if (!$all) return '';
-	$idom = "ajouter_auteur_$type_$id";
-	$js = "findObj_forcer('$idom').style.visibility='visible';";
+	$idom = "auteur_$type" . "_$id";
+	$new = $idom . '_new';
+	$menu = $idom . '_sel';
+	$js = "findObj_forcer('$menu').style.visibility='visible';";
 
-	$text = "<span class='verdana1'><label for='nouv_auteur'><b>"
+	$text = "<span class='verdana1'><label for='$new'><b>"
 	. _T('titre_cadre_ajouter_auteur')
 	. "</b></label></span>\n";
 
 	if (!is_numeric($all)) {
-		$sel = "$text<select name='nouv_auteur' id='nouv_auteur' size='1' style='width:150px;' class='fondl' onchange=\"$js\">$all</select>";
+		$sel = "$text<select name='$new' id='$new' size='1' style='width:150px;' class='fondl' onchange=\"$js\">$all</select>";
 		$clic = _T('bouton_ajouter');
 	} else if  ((_SPIP_AJAX < 1) OR ($all >= _SPIP_SELECT_MAX_AUTEURS)) {
-		  $sel = "$text <input type='text' name='cherche_auteur' id='nouv_auteur' onclick=\"$js\" class='fondl' value='' size='20' />";
+		  $sel = "$text <input type='text' name='cherche_auteur' id='$new' onclick=\"$js\" class='fondl ' value='' size='20' />";
 		  $clic = _T('bouton_chercher');
 	} else {
-	    $sel = selecteur_auteur_ajax($type, $id, $js, $text);
-	    $clic = _T('bouton_ajouter');
+		$sel = selecteur_auteur_ajax($type, $id, $js, $text, $idom);
+		$clic = _T('bouton_ajouter');
 	}
 
-	return ajax_action_post('editer_auteurs', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, "class='fondo visible_au_chargement' id='$idom'", "", $arg_ajax);
+	return ajax_action_post('editer_auteurs', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, " class='fondo visible_au_chargement' id='$menu'",'', $arg_ajax);
 }
 
 // http://doc.spip.org/@objet_auteur_select
@@ -292,10 +294,12 @@ function objet_auteur_select($cond)
 }
 
 // http://doc.spip.org/@selecteur_auteur_ajax
-function selecteur_auteur_ajax($type, $id, $js, $text)
+function selecteur_auteur_ajax($type, $id, $js, $text, $idom='')
 {
 	include_spip('inc/chercher_rubrique');
+	$idom2 = $idom . '_new';
+	$idom1 = $idom . '_div';
 	$url = generer_url_ecrire('selectionner_auteur',"id_article=$id&type=$type");
-	return $text . construire_selecteur($url, $js, 'selection_auteur', 'nouv_auteur', ' type="hidden"');
+	return $text . construire_selecteur($url, $js, $idom1, $idom2, ' type="hidden"');
 }
 ?>

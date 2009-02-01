@@ -22,9 +22,8 @@ include_spip('inc/selectionner');
 // http://doc.spip.org/@inc_selectionner_auteur_dist
 function inc_selectionner_auteur_dist($id_article, $type='article')
 {
-	static $n = 0;
-	$idom = "selectionner_auteur_$n";
-
+	$idom = "auteur_$type" . "_$id_article";
+	$new = $idom . '_new';
 	if (!$determiner_non_auteurs = charger_fonction('determiner_non_auteurs_'.$type,'inc',true))
 		$determiner_non_auteurs = 'determiner_non_auteurs';
 
@@ -33,7 +32,7 @@ function inc_selectionner_auteur_dist($id_article, $type='article')
 	// url completee par la fonction JS onkeypress_rechercher
 	$url = generer_url_ecrire('rechercher_auteur', "idom=$idom&nom=");
 
-	return construire_selectionner_hierarchie($idom, $futurs, '', $url, 'nouv_auteur');
+	return construire_selectionner_hierarchie($idom, $futurs, '', $url, $new);
 }
 
 // http://doc.spip.org/@selectionner_auteur_boucle
@@ -41,6 +40,8 @@ function selectionner_auteur_boucle($where, $idom)
 {
 	$info = generer_url_ecrire('informer_auteur', "id=");
 	$idom3 = $idom . '_selection';
+	$idom2 = $idom . '_new';
+	$idom1 = $idom . '_div';
 	$args = "'$idom3', '$info', event";
 	$res = '';
 	$all = sql_allfetsel("nom, id_auteur", "spip_auteurs", $where, '', "nom, statut");
@@ -57,17 +58,16 @@ function selectionner_auteur_boucle($where, $idom)
 
 		$res .= "<a class='highlight off'"
 		. "\nonclick=\"changerhighlight(this);"
-		. "findObj_forcer('nouv_auteur').value="
+		. "findObj_forcer('$idom2').value="
 		. $id
 		. "; aff_selection($id,$args); return false;"
 		. "\"\nondblclick=\""
 		  // incomplet: le selecteur devient indisponible. A ameliorer
 		. "findObj_forcer('$idom').parentNode.innerHTML='"
 		. attribut_html($nom)
-		. "'; findObj_forcer('$idom').value="
+		. "'; findObj_forcer('$idom2').value="
 		. $id
-		. ";findObj_forcer('selection_auteur').style.display="
-		. "'none'; return false"
+		. "; return false"
 		. "\"><b>"
 		. $nom
 		. "</b></a>";
