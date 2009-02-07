@@ -53,6 +53,7 @@ input, select, textarea { font-size: 100%; font-family: inherit; }
 .formulaire_spip fieldset.previsu { margin-bottom: 2em; padding: 1em; border: 2px dashed #F57900; }
 .formulaire_spip fieldset.previsu legend { padding: 0 0.50em; font-weight: bold; color: #F57900; }
 .formulaire_spip fieldset.previsu li { padding: 3px; border: none; }
+.formulaire_spip fieldset.previsu p { margin: 1em 0; } 
 
 /* Reponse du formulaire */
 .reponse_formulaire { font-weight: bold; color: #e86519; font-size: 1.20em; }
