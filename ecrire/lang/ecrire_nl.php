@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_version_archive' => '<MODIF><b>Opgelet! Het bestand @archive@ komt overeen met een andere
     SPIP-versie dan deze die is ge&iuml;nstalleerd.</b>Dit kan voor
  grote moeilijkheden zorgen : risico op het wissen van de databank,
- ontregeling van de website, enz. Ga niet verder met de invoer
+ ontregeling van de website, enz. Ga niet verder met het importeren
  van het bestand. <p>Meer info kan je vinden op
  <a href="@spipnet@">
                                 de documentatie van SPIP</a>.',
@@ -124,6 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP heeft geen toegang tot de lijst van de toegankelijke basis',
 'config_info_base_sup' => 'Als u andere databases hebt om door SPIP te ondervragen, met zijn server SQL of een ander, laat het formulier hieronder, u toe om ze te verklaren. Als u bepaalde lege velden laat, zullen de identificaties van aansluiten aan de hoofdbasis gebruikt worden.',
 'config_info_base_sup_disponibles' => 'De reeds navraagbare aanvullende basis:',
+'config_info_enregistree' => '<NEW>La nouvelle configuration a &eacute;t&eacute; enregistr&eacute;e',
 'config_info_logos' => 'Elk element van de site kan een logo hebben, evenals een &#132;&nbsp;overzicht logo&nbsp;&#147;',
 'config_info_logos_utiliser' => 'De logo\'s gebruiken',
 'config_info_logos_utiliser_non' => 'Niet de logo\'s gebruiken',
@@ -198,7 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Deze pagina toont de verschillende wijzen waarop je contact kan houden met het gebeuren van deze website.',
-'ical_info2' => '<MODIF>Voor meer info over de verschillende manieren kan je <a href="@spipnet@">de documentatie van SPIP</a> raadplegen.',
+'ical_info2' => '<MODIF>Voor meer info kan je <a href="@spipnet@">de documentatie van SPIP</a> raadplegen.',
 'ical_info_calendrier' => 'Twee kalenders zijn beschikbaar. De eerste geeft een overzicht van alle gepubliceerde artikels. De tweede bevat editoriale berichten en je meest recente priv&eacute;-berichten&nbsp;: deze tweede kalender is afgeschermd voor andere gebruikers door een persoonlijke sleutel die je op elk moment kan wijzigen door je paswoord te vernieuwen.',
 'ical_lien_rss_breves' => 'Syndication van kort van de site',
 'ical_methode_http' => 'Downloaden',
@@ -806,6 +807,7 @@ een kleur geeft hun status aan&nbsp;:',
 'logo_article' => 'LOGO VAN HET ARTIKEL',
 'logo_auteur' => 'LOGO VAN DE AUTEUR',
 'logo_breve' => 'LOGO VAN HET NIEUWSBERICHT',
+'logo_groupe' => '<NEW>LOGO VAN DEZE GROEP',
 'logo_mot_cle' => 'LOGO VAN HET TREFWOORD',
 'logo_rubrique' => 'LOGO VAN DE RUBRIEK',
 'logo_site' => 'LOGO VAN DE WEBSITE',

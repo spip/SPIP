@@ -127,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP nun tien accesu a la llista de les bases disponibles',
 'config_info_base_sup' => 'Si tienes otres bases de datos pa restolar al travi&eacute;s de SPIP, col so sirvidor SQL o con otru, el formulariu d\'embaxo va permitite declarales. Si dexes ciertos campos vac&iacute;os, utilizar&aacute;nse les identificaciones de conex&oacute;n a la base principal.',
 'config_info_base_sup_disponibles' => 'Bases suplementaries que ya son restolables:',
+'config_info_enregistree' => 'Guardose la nueva configuraci&oacute;n',
 'config_info_logos' => 'Cada elementu del sitiu puede tener un logo, lo mesmo qu\'un &laquo;logo de pasu\'l mur&raquo;',
 'config_info_logos_utiliser' => 'Usar los logos',
 'config_info_logos_utiliser_non' => 'Nun usar los logos',

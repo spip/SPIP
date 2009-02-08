@@ -119,6 +119,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'config_erreur_base_sup' => 'SPIP no t&eacute; acc&eacute;s a la llista de bases accesibles',
 'config_info_base_sup' => 'Si teniu altres bases de dades a interrogar per mitj&agrave; d\'SPIP, amb el seu servidor SQL o amb un altre, el formulari que hi ha m&eacute;s avall, us permet declarar-les. Si deixeu alguns camps buits, s\'utilitzaran els identificadors de connexi&oacute; a la base principal.',
 'config_info_base_sup_disponibles' => 'Bases suplement&agrave;ries ja consultables:',
+'config_info_enregistree' => 'La nova configuraci&oacute; s\'ha enregistrat',
 'config_info_logos' => 'Cada element del lloc Web p&ograve;t tenir el seu logotip, com un &laquo;logotip d\'imatge canviant&raquo;',
 'config_info_logos_utiliser' => 'Utilitzar els logotips',
 'config_info_logos_utiliser_non' => 'No utilitzar els logotips',
