@@ -767,7 +767,7 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 		// si $entite='', on veut la fonction de passage URL ==> id
 			if (!$entite) return $f; 
 		// sinon on veut effectuer le passage id ==> URL
-			$res = !$f ? '' : $f($id, $entite, $args, $ancre);
+			$res = !$f ? '' : _DIR_RACINE . $f($id, $entite, $args, $ancre);
 		}
 	}
 	if ($res) return $res;
@@ -782,7 +782,7 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 			$url .= strstr($url, '?')
 				? '&amp;'.$args
 				: '?'.$args;
-		return $url;
+		return ($public?_DIR_RACINE:'') . $url;
 	}
 	// On a ete gentil mais la ....
 	spip_log("generer_url_entite: entite $entite ($f) inconnue $type");
