@@ -60,4 +60,11 @@ ul.menu li a,ul.menu li strong.on {display:block;padding:0.4em 0;}
 ul.menu li a:hover {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
 ul.menu li .on {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
 
+/* les boutons action */
+form.bouton_action_post {display:inline;}
+form.bouton_action_post input.submit {margin:0;font-weight:normal;}
+
+form.bouton_action_post input.submit {background:none;border:0;cursor:pointer;padding:0 0 1px;}
+form.bouton_action_post input.submit:hover {border-bottom:1px solid;padding:0;}
+
 [(#INCLURE{fond=#VAL{prive/}|tous_les_fonds{/style_prive_plugin_}}{couleur_claire}{couleur_foncee}{lang}{ltr})]
