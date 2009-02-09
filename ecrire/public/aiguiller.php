@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@traiter_appels_actions
@@ -45,8 +44,10 @@ function traiter_appels_actions(){
 			if (($v=_request('var_ajax'))
 			  AND ($v!=='form')
 			  AND ($args = _request('var_ajax_env'))) {
-				$url = parametre_url($url,'var_ajax',$v,'&');   
-				$url = parametre_url($url,'var_ajax_env',$args,'&');   
+				$url = parametre_url($url,'var_ajax',$v,'&');
+				$url = parametre_url($url,'var_ajax_env',$args,'&');
+				// passer l'ancre en variable pour pouvoir la gerer cote serveur
+				$url = preg_replace(',#([^#&?]+)$,',"&var_ajax_ancre=\\1",$url);
 			}
 			$url = str_replace('&amp;','&',$url); // les redirections se font en &, pas en en &amp;
 			redirige_par_entete($url);
@@ -92,6 +93,9 @@ function traiter_appels_inclusions_ajax(){
 			$contexte = array_merge($args, $contexte);
 			$page = recuperer_fond($fond,$contexte,array('trim'=>false));
 			$texte = $page;
+			if ($ancre = _request('var_ajax_ancre')){
+				$texte = "<a href='#$ancre' name='ajax_ancre' style='display:none;'>anchor</a>".$texte;
+			}
 		}
 		else 
 			$texte = _L('signature ajax bloc incorrecte');

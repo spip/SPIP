@@ -70,7 +70,7 @@ jQuery.fn.animeajax = function(end) {
 
 // s'il n'est pas totalement visible, scroller pour positionner
 // le bloc cible en haut de l'ecran
-jQuery.fn.positionner = function() {
+jQuery.fn.positionner = function(force) {
 	var offset = jQuery(this).offset({'scroll':false});
 	var hauteur = parseInt(jQuery(this).css('height'));
 	var scrolltop = self['pageYOffset'] ||
@@ -79,7 +79,7 @@ jQuery.fn.positionner = function() {
 	var h = jQuery(window).height();
 	var scroll=0;
 
-	if (offset['top'] - 5 <= scrolltop)
+	if (force || offset['top'] - 5 <= scrolltop)
 		scroll = offset['top'] - 5;
 	else if (offset['top'] + hauteur - h + 5 > scrolltop)
 		scroll = Math.min(offset['top'] - 5, offset['top'] + hauteur - h + 15);
@@ -134,7 +134,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					jQuery(cible)
 					.removeClass('loading')
 					.html(c)
-					.positionner()
+					.positionner(false)
 					// on le refait a la main ici car onAjaxLoad intervient sur une iframe dans IE6 et non pas sur le document
 					.formulaire_dyn_ajax();
 					updateReaderBuffer();
@@ -177,8 +177,20 @@ jQuery.fn.ajaxbloc = function() {
 		var on_pagination = function(c) {
 			jQuery(blocfrag)
 			.html(c)
-			.removeClass('loading')
-			.positionner();
+			.removeClass('loading');
+			var a = jQuery('a:first',jQuery(blocfrag)).eq(0);
+			if (a.length && a.is('a[name=ajax_ancre]')
+			){
+				a = a.attr('href');
+				setTimeout(function(){
+					jQuery(a,blocfrag).positionner(true);
+					//a = a.split('#');
+					//window.location.hash = a[1];
+				},10);
+			}
+			else {
+				jQuery(blocfrag).positionner(false);				
+			}
 			updateReaderBuffer();
 		}
 	
@@ -191,6 +203,8 @@ jQuery.fn.ajaxbloc = function() {
 		jQuery(ajaxbloc_selecteur,this).not('.noajax').each(function(){
 			var url = this.href.split('#');
 			url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_ajax=1&var_ajax_env='+encodeURIComponent(ajax_env);
+			if (url[1])
+				url[0] += "&var_ajax_ancre="+url[1];
 			if (jQuery(this).is('.preload') && !preloaded_urls[url[0]]) {
 				jQuery.ajax({"url":url[0],"success":function(r){preloaded_urls[url[0]]=r;}});
 			}
@@ -223,7 +237,9 @@ jQuery.fn.ajaxbloc = function() {
 		}).addClass('noajax'); // previent qu'on ajax pas deux fois le meme lien
 		jQuery('form.bouton_action_post.ajax:not(.noajax)', this).each(function(){
 			var leform = this;
-			jQuery(this).prepend("<input type='hidden' name='var_ajax' value='1' /><input type='hidden' name='var_ajax_env' value='"+(ajax_env)+"' />")
+			var url = jQuery(this).attr('action').split('#');
+			jQuery(this)
+			.prepend("<input type='hidden' name='var_ajax' value='1' /><input type='hidden' name='var_ajax_env' value='"+(ajax_env)+"' />"+(url[1]?"<input type='hidden' name='var_ajax_ancre' value='"+url[1]+"' />":""))
 			.ajaxForm({
 				beforeSubmit: function(){
 					jQuery(blocfrag).addClass('loading').animeajax();
