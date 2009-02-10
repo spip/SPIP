@@ -2,7 +2,6 @@
 #HTTP_HEADER{"Pragma: no-cache"}
 
 <div class='formulaire_spip formulaire_login'>
-	[(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='bugajaxie' />
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{_deja_loge})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV**{message_erreur})</p>]
@@ -39,7 +38,7 @@
 			</div></li>]
 		</ul>
 	</fieldset>
-	<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
+	<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider|attribut_html:>" /></p>
 	</form>
 	]
 	[(#REM) en cas d'absence de cookie, on represente le formulaire alternatif ]
@@ -51,7 +50,7 @@
 		<:login_preferez_refuser:>
 		<input type="hidden" name="essai_auth_http" value="oui"/>
 		[<input type="hidden" name="url" value="(#ENV{url})"/>]
-		<p class="boutons"><input type="submit" class="submit" value="<:login_sans_cookiie:>"/></p>
+		<p class="boutons"><input type="submit" class="submit" value="<:login_sans_cookiie|attribut_html:>"/></p>
 	</fieldset>
 	</form>
 	]
