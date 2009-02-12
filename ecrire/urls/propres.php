@@ -337,7 +337,7 @@ function urls_propres_dist($i, $entite, $args='', $ancre='') {
 		// Decoder l'url html, page ou standard
 		$objets = 'article|breve|rubrique|mot|auteur|site|syndic';
 		if (preg_match(
-		',(?:^|/|[?&]page=)('.$objets
+		',(?:^|/|[?&](?:page=)?)('.$objets
 		.')(?:\.php3?|(?:[?&]id_(?:\1)=)?([0-9]+)(?:\.html)?)'
 		.'(?:[?&].*)?$,', $url, $regs)) {
 			$type = preg_replace(',s$,', '', table_objet($regs[1]));
