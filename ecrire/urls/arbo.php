@@ -501,7 +501,6 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 				$type = $row['type'];
 				$col_id = id_table_objet($type);
 				$contexte[$col_id] = $row['id_objet'];
-				$entite = $row['type'];
 
 				if (!isset($contexte[$col_id])) // n'affecter que la premiere fois un parent de type id_rubrique
 					$contexte[$col_id] = $row['id_objet'];
