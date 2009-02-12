@@ -128,14 +128,49 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 	// de le recreer si le locker qui nous precede l'avait supprime...)
 		if (substr($fichier, -3) == '.gz')
 			$contenu = gzencode($contenu);
-		if ($truncate)
-			@ftruncate($fp,0);
-		$s = @fputs($fp, $contenu, $a = strlen($contenu));
+		// si c'est une ecriture avec troncation , on fait plutot une ecriture complete a cote suivie unlink+rename
+		// pour etre sur d'avoir une operation atomique
+		// y compris en NFS : http://www.ietf.org/rfc/rfc1094.txt
+		// sauf sous wintruc ou ca ne marche pas
+		$ok = false;
+		if ($truncate AND _OS_SERVEUR != 'windows'){
+			include_spip('inc/acces');
+			$id = creer_uniqid();
+			// on ouvre un pointeur sur un fichier temporaire en ecriture +raz
+			if ($fp2 = spip_fopen_lock("$fichier.$id", 'w',LOCK_EX)) {
+				$s = @fputs($fp2, $contenu, $a = strlen($contenu));
+				$ok = ($s == $a);
+				spip_fclose_unlock($fp2);
+				spip_fclose_unlock($fp);
+				// unlink direct et pas spip_unlink car on avait deja le verrou
+				@unlink($fichier);
+				// le rename aussitot, atomique quand on est pas sous windows
+				// au pire on arrive en second en cas de concourance, et le rename echoue
+				// --> on a la version de l'autre process qui doit etre identique
+				@rename("$fichier.$id",$fichier);
+				// precaution en cas d'echec du rename
+				if (file_exists("$fichier.$id"))
+					@unlink("$fichier.$id");
+				if ($ok)
+					$ok = file_exists($fichier);
+			}
+			else
+				// echec mais penser a fermer ..
+				spip_fclose_unlock($fp);
+		}
+		// sinon ou si methode precedente a echoueee
+		// on se rabat sur la methode ancienne
+		if (!$ok){
+			// ici on est en ajout ou sous windows, cas desespere
+			if ($truncate)
+				@ftruncate($fp,0);
+			$s = @fputs($fp, $contenu, $a = strlen($contenu));
 
-		$ok = ($s == $a);
+			$ok = ($s == $a);
+			spip_fclose_unlock($fp);
+		}
 
 	// liberer le verrou et fermer le fichier
-		spip_fclose_unlock($fp);
 		@chmod($fichier, _SPIP_CHMOD & 0666);
 		if ($ok) return $ok;
 	}

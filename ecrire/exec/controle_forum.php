@@ -41,7 +41,7 @@ function forum_parent($id_forum) {
 	  } else {
 	    $ancre = "forum$id_forum" ;
 	    return array('pref' =>  _T('lien_reponse_article'),
-			 'url' => _DIR_RACINE . generer_url_entite($id_article,'article', '',$ancre, true),
+			 'url' => generer_url_entite($id_article,'article', '',$ancre, true),
 			 'type' => 'id_article',
 			 'valeur' => $id_article,
 			 'titre' => $titre,
@@ -53,7 +53,7 @@ function forum_parent($id_forum) {
 	  $id_rubrique = $row['id_rubrique'];
 	  $titre = $row['titre'];
 	  return array('pref' => _T('lien_reponse_rubrique'),
-		       'url' =>  _DIR_RACINE . generer_url_entite($id_rubrique,'rubrique'),
+		       'url' =>  generer_url_entite($id_rubrique,'rubrique','','',true),
 		       'type' => 'id_rubrique',
 		       'valeur' => $id_rubrique,
 		       'titre' => $titre);
@@ -64,7 +64,7 @@ function forum_parent($id_forum) {
 	  $titre = $row['nom_site'];
 	  $statut = $row['statut'];
 	  return array('pref' => _T('lien_reponse_site_reference'),
-		       'url' =>  _DIR_RACINE . generer_url_ecrire("sites","id_syndic=$id_syndic"),
+		       'url' =>  generer_url_ecrire("sites","id_syndic=$id_syndic"),
 		       'type' => 'id_syndic',
 		       'valeur' => $id_syndic,
 		       'titre' => $titre);
@@ -82,7 +82,7 @@ function forum_parent($id_forum) {
 			 'titre' => $titre);
 	  } else {
 	    return array('pref' => _T('lien_reponse_breve_2'),
-			 'url' =>  _DIR_RACINE . generer_url_entite($id_breve, 'breve'),
+			 'url' =>  generer_url_entite($id_breve, 'breve','','',true),
 			 'type' => 'id_breve',
 			 'valeur' => $id_breve,
 			 'titre' => $titre);

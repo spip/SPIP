@@ -383,11 +383,9 @@ function _generer_url_arbo($type, $id, $args='', $ancre='') {
 			. url_arbo_terminaison($type);
 	} else {
 
-	// objet connu mais sans possibilite d'URL lisible, revenir au defaut
-		if ($type == 'site')
-			$id_type = 'id_syndic';
-		else
-			$id_type = 'id_'.$type;
+		// objet connu mais sans possibilite d'URL lisible, revenir au defaut
+		include_spip('base/connect_sql');
+		$id_type = id_table_objet($type);
 		$url = get_spip_script('./')."?"._SPIP_PAGE."=$type&$id_type=$id";
 	}
 
@@ -399,7 +397,7 @@ function _generer_url_arbo($type, $id, $args='', $ancre='') {
 	if ($ancre)
 		$url .= "#$ancre";
 
-	return $url;
+	return _DIR_RACINE . $url;
 }
 
 

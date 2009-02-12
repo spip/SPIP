@@ -298,16 +298,13 @@ function _generer_url_propre($type, $id, $args='', $ancre='') {
 			. _terminaison_urls_propres;
 
 		// Repositionne l'URL par rapport a la racine du site (#GLOBALS)
-		$url = str_repeat('../', _DIR_RACINE?$GLOBALS['profondeur_url']-1:$GLOBALS['profondeur_url']).$url;
+		$url = str_repeat('../', $GLOBALS['profondeur_url']).$url;
 	} else {
 
-	// objet connu mais sans possibilite d'URL lisible, revenir au defaut
-
-		if ($type == 'site')
-			$id_type = 'id_syndic';
-		else
-			$id_type = 'id_'.$type;
-		$url = get_spip_script('./')."?"._SPIP_PAGE."=$type&$id_type=$id";
+		// objet connu mais sans possibilite d'URL lisible, revenir au defaut
+		include_spip('base/connect_sql');
+		$id_type = id_table_objet($type);
+		$url = _DIR_RACINE . get_spip_script('./')."?"._SPIP_PAGE."=$type&$id_type=$id";
 	}
 
 	// Ajouter les args
