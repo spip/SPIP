@@ -49,69 +49,51 @@ function _generer_url_page($type,$id, $args='', $ancre='') {
 // http://doc.spip.org/@urls_page_dist
 function urls_page_dist($i, &$entite, $args='', $ancre='')
 {
-	global $contexte;
+	$contexte = $GLOBALS['contexte']; // recuperer aussi les &debut_xx
 
 	if (is_numeric($i))
 		return _generer_url_page($entite, $i, $args, $ancre);
 
-	$url = $i;
 	// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
 	if ($GLOBALS['profondeur_url']>0 AND $entite=='sommaire'){
-		$entite = '404';
+		return array(array(),'404');
 	}
+	$url = $i;
 
-	// Ce bloc gere les urls page et la compatibilite avec les "urls standard"
-	if ($entite=='sommaire'){
-		if (preg_match(
-		',^[^?]*[?/](article|rubrique|breve|mot|site|auteur)(?:\.php3?)?.*?([0-9]+),',
-		$url, $regs)) {
-			$entite = $regs[1];
-			if ($regs[1] == 'site') {
-				if (!isset($contexte['id_syndic']))
-					$contexte['id_syndic'] = $regs[2];
-			} else {
-				if (!isset($contexte['id_'.$entite]))
-					$contexte['id_'.$entite] = $regs[2];
-			}
-	
-			return;
-		}
-		/* Compatibilite urls-page avec formulaire en get !!! */
-		else if (preg_match(
-			',[?/&](article|breve|rubrique|mot|auteur|site)[=]?([0-9]+),',
-			$url, $regs)) {
-			$entite = $regs[1];
-			if ($regs[1] == 'site') {
-				if (!isset($contexte['id_syndic']))
-					$contexte['id_syndic'] = $regs[2];
-			} else {
-				if (!isset($contexte['id_'.$entite]))
-					$contexte['id_'.$entite] = $regs[2];
-			}
-			return;
-		}
-		/* Fin compatibilite urls-page */
+	// Decoder l'url html, page ou standard
+	if (preg_match(
+	',(^|id_|[?])(article|breve|rubrique|mot|auteur|site|syndic)=?(\d+),iS',
+	$url, $regs)) {
+		$type = preg_replace(',s$,', '', table_objet($regs[2]));
+		$_id = id_table_objet($regs[2]);
+		$contexte[$_id] = $id = $regs[3];
+		return array($contexte, $type);
 	}
-
 
 	/*
 	 * Le bloc qui suit sert a faciliter les transitions depuis
-	 * le mode 'urls-propres' vers les modes 'urls-standard/page' et 'url-html'
+	 * le mode 'urls-propres' vers les modes 'urls-standard' et 'url-html'
 	 * Il est inutile de le recopier si vous personnalisez vos URLs
 	 * et votre .htaccess
 	 */
-	// Si on est revenu en mode page, mais c'est une ancienne url_propre
+	// Si on est revenu en mode html, mais c'est une ancienne url_propre
 	// on ne redirige pas, on assume le nouveau contexte (si possible)
-	if (
-		 (isset($_SERVER['REDIRECT_url_propre']) AND $url_propre = $_SERVER['REDIRECT_url_propre'])
-	OR (isset($_ENV['url_propre']) AND $url_propre = $_ENV['url_propre'])
-	AND preg_match(',^(article|breve|rubrique|mot|auteur|site|type_urls|404)$,', $entite)) {
+	$url_propre = isset($url)
+		? $url
+		: (isset($_SERVER['REDIRECT_url_propre'])
+			? $_SERVER['REDIRECT_url_propre']
+			: (isset($_ENV['url_propre'])
+				? $_ENV['url_propre']
+				: ''
+				));
+	if ($url_propre) {
 		if ($GLOBALS['profondeur_url']<=0)
 			$urls_anciennes = charger_fonction('propres','urls');
 		else
 			$urls_anciennes = charger_fonction('arbo','urls');
-		$urls_anciennes($url_propre,$entite);
+		return $urls_anciennes($url_propre,$entite);
 	}
 	/* Fin du bloc compatibilite url-propres */
 }
+
 ?>

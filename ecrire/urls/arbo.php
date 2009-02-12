@@ -403,10 +403,9 @@ function _generer_url_arbo($type, $id, $args='', $ancre='') {
 }
 
 
+// @return array([contexte],[fond],[url_redirect]) : url decodee
 // http://doc.spip.org/@urls_arbo_dist
-function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
-	global $contexte;
-
+function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 	if (is_numeric($i))
 		return _generer_url_arbo($entite, $i, $args, $ancre);
 
@@ -415,41 +414,33 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 		$entite = 'type_urls';
 	}
 
+	$contexte = $GLOBALS['contexte']; // recuperer aussi les &debut_xx
 	$url = $i;
 	$id_objet = $type = 0;
+	$url_redirect = null;
 
 	// Migration depuis anciennes URLs ?
-	if (
-		// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
-	  $GLOBALS['profondeur_url']<=0
-	  AND $_SERVER['REQUEST_METHOD'] != 'POST') {
+	// traiter les injections domain.tld/spip.php/n/importe/quoi/rubrique23
+	if ($GLOBALS['profondeur_url']<=0
+	AND $_SERVER['REQUEST_METHOD'] != 'POST') {
+		// Decoder l'url html, page ou standard
 		if (preg_match(
-		',(^|/)(article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+(\.html)?)'
-		.'([?&].*)?$,', $url, $regs)
-		) {
-			$type = $regs[2];
-			$id_table_objet = id_table_objet($type);
-			$id_objet = intval(_request($id_table_objet));
-		}
-
-		/* Compatibilite urls-page */
-		else if (preg_match(
-		',[?/&](article|breve|rubrique|mot|auteur|site)[=]?([0-9]+),',
+		',(^|id_|[?])(article|breve|rubrique|mot|auteur|site|syndic)=?(\d+),iS',
 		$url, $regs)) {
-			$type = $regs[1];
-			$id_objet = $regs[2];
+			$type = preg_replace(',s$,', '', table_objet($regs[2]));
+			$_id = id_table_objet($regs[2]);
+			$id_objet = $regs[3];
 		}
 	}
 	if ($id_objet) {
 		$url_propre = generer_url_entite($id_objet, $type, $args, $ancre);
+		$contexte = array($_id => $id_objet);
 		if (strlen($url_propre)
 		AND !strstr($url,$url_propre)) {
-			include_spip('inc/headers');
-			http_status(301);
-			// recuperer les arguments supplementaires (&debut_xxx=...)
 			$reste = preg_replace('/^&/','?',
 				preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
-			redirige_par_entete("$url_propre$reste");
+			$url_redirect = "$url_propre$reste";
+			return array($contexte, $type, $url_redirect);
 		}
 	}
 	/* Fin compatibilite anciennes urls */
@@ -501,28 +492,21 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 			// Compatibilite avec les anciens marqueurs d'URL propres
 			// Tester l'entree telle quelle (avec 'url_libre' des sites ont pu avoir des entrees avec marqueurs dans la table spip_urls)
 			if (is_null($type)
-			  OR !$row=sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote("$typesyn/$url_propre")))) {
-			  if (!is_null($type))
+			OR !$row=sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote("$typesyn/$url_propre")))) {
+				if (!is_null($type))
 					array_push($url_arbo,$type);
 				$row = sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote($url_propre)));
 			}
 			if ($row) {
 				$type = $row['type'];
-		
-				// Redirection 301 si l'url est vieux
-				/*if ($recent = sql_fetsel('url, date', 'spip_urls',
-				'type='.sql_quote($row['type']).' AND id_objet='.sql_quote($row['id_objet'])
-				.' AND date>'.sql_quote($row['date']), '', 'date DESC', 1)) {
-					spip_log('Redirige '.$url_propre.' vers '.$recent['url']);
-					include_spip('inc/headers');
-					redirige_par_entete($recent['url']);
-				}*/
-		
 				$col_id = id_table_objet($type);
+				$contexte[$col_id] = $row['id_objet'];
+				$entite = $row['type'];
+
 				if (!isset($contexte[$col_id])) // n'affecter que la premiere fois un parent de type id_rubrique
 					$contexte[$col_id] = $row['id_objet'];
-				if (!$entite 
-					OR !in_array($type,$types_parents))
+				if (!$entite
+				OR !in_array($type,$types_parents))
 					$entite = $type;
 	
 				if ($p = url_arbo_parent($type))
@@ -532,18 +516,16 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 				// un segment est inconnu
 				if ($entite=='type_urls') {
 					// on genere une 404 comme il faut si on ne sait pas ou aller
-					include_spip('inc/headers');
-					http_status('404');
-					$entite = '404';
+					return array(array(),'404');
 				}
-				return;
+				return; // ?
 			}
 		}
 
 		// gerer le retour depuis des urls propres
 		if ($entite=='type_urls' AND $GLOBALS['profondeur_url']<=0){
 			$urls_anciennes = charger_fonction('propres','urls');
-			$urls_anciennes($url_propre,$entite);
+			return $urls_anciennes($url_propre,$entite);
 		}
 	}
 	if ($entite=='type_urls') {
@@ -555,6 +537,8 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 		}
 	}
 	define('_SET_HTML_BASE',1);
+
+	return array($contexte, $entite);
 }
 
 ?>
