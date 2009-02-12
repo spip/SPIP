@@ -40,7 +40,7 @@ function _generer_url_page($type,$id, $args='', $ancre='') {
 	  . $id . _terminaison_urls_page;
 
 	if ($args) $args = strpos($url,'?') ? "&$args" : "?$args";
-	return $url . $args . ($ancre ? "#$ancre" : '');
+	return _DIR_RACINE . $url . $args . ($ancre ? "#$ancre" : '');
 }
 
 // retrouve le fond et les parametres d'une URL abregee

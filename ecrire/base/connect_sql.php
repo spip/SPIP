@@ -261,7 +261,7 @@ function table_objet_sql($type) {
 }
 
 // http://doc.spip.org/@id_table_objet
-function id_table_objet($type) {
+function id_table_objet($type,$serveur='') {
 	$type = preg_replace(',^spip_|s$,', '', $type);
 	if ($type == 'type')
 		return 'extension';
@@ -269,7 +269,7 @@ function id_table_objet($type) {
 		if (!$type) return;
 		$t = table_objet($type);
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		$desc = $trouver_table($t);
+		$desc = $trouver_table($t,$serveur);
 		return @$desc['key']["PRIMARY KEY"];
 	}
 }

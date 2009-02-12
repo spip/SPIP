@@ -764,8 +764,9 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	    $res = $f($id, $args, $ancre, ' ');
 	} else {
 		if (is_string($public)) {
-			$id_type = ($entite !== 'site') ? "id_$entite" : 'id_syndic';
-			return get_spip_script('./')
+			include_spip('base/connect_sql');
+			$id_type = id_table_objet($entite,$public);
+			return _DIR_RACINE . get_spip_script('./')
 			  . "?"._SPIP_PAGE."=$entite&$id_type=$id&connect=$public"
 			  . (!$args ? '' : "&$args")
 			  . (!$ancre ? '' : "#$ancre");
@@ -810,7 +811,7 @@ function generer_url_entite_absolue($id='', $entite='', $args='', $ancre='', $co
 	$h = generer_url_entite($id, $entite, $args, $ancre, $connect);
 	if (!preg_match(',^\w+:,', $h)) {
 		include_spip('inc/filtres_mini');
-		$h = url_absolue(_DIR_RACINE . $h);
+		$h = url_absolue($h);
 	}
 	return  $h;
 }

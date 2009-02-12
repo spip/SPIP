@@ -21,32 +21,32 @@ if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
 // http://doc.spip.org/@generer_url_article
 function generer_url_article($id_article) {
-	return "article.php3?id_article=$id_article";
+	return _DIR_RACINE . "article.php3?id_article=$id_article";
 }
 
 // http://doc.spip.org/@generer_url_rubrique
 function generer_url_rubrique($id_rubrique) {
-	return "rubrique.php3?id_rubrique=$id_rubrique";
+	return _DIR_RACINE . "rubrique.php3?id_rubrique=$id_rubrique";
 }
 
 // http://doc.spip.org/@generer_url_breve
 function generer_url_breve($id_breve) {
-	return "breve.php3?id_breve=$id_breve";
+	return _DIR_RACINE . "breve.php3?id_breve=$id_breve";
 }
 
 // http://doc.spip.org/@generer_url_mot
 function generer_url_mot($id_mot) {
-	return "mot.php3?id_mot=$id_mot";
+	return _DIR_RACINE . "mot.php3?id_mot=$id_mot";
 }
 
 // http://doc.spip.org/@generer_url_site
 function generer_url_site($id_syndic) {
-	return "site.php3?id_syndic=$id_syndic";
+	return _DIR_RACINE . "site.php3?id_syndic=$id_syndic";
 }
 
 // http://doc.spip.org/@generer_url_auteur
 function generer_url_auteur($id_auteur) {
-	return "auteur.php3?id_auteur=$id_auteur";
+	return _DIR_RACINE . "auteur.php3?id_auteur=$id_auteur";
 }
 
 // http://doc.spip.org/@generer_url_document
