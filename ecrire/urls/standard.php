@@ -77,7 +77,8 @@ function recuperer_parametres_url(&$fond, $url) {
 		(isset($_ENV['url_propre']) ?
 			$_ENV['url_propre'] :
 			'');
-	if ($url_propre AND preg_match(',^(article|breve|rubrique|mot|auteur|site|type_urls|404)$,', $fond)) {
+	if ($url_propre
+	AND in_array($fond, array('article','breve','rubrique','mot','auteur','site','type_urls','404'))) {
 		if ($GLOBALS['profondeur_url']<=0)
 			$urls_anciennes = charger_fonction('propres','urls');
 		else
