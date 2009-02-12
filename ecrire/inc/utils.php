@@ -746,9 +746,10 @@ function autoriser_sans_cookie($nom)
 // $entite = surnom de la table SQL (donne acces au nom de cle primaire)
 // $args = query_string a placer apres cle=$id&....
 // $ancre = ancre a mettre a la fin de l'URL a produire
-// $prive = vrai s'il faut produire l'URL d'edition, celle de lecture sinon
+// $public = produire l'URL publique ou privee (par defaut: selon espace)
 // $type = fichier dans le repertoire ecrire/urls determinant l'apparence
-
+// @return string : url codee
+// @return string : fonction de decodage
 // http://doc.spip.org/@generer_url_entite
 function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NULL, $type=NULL)
 {
@@ -775,11 +776,12 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 				?  $GLOBALS['meta']['type_urls']
 				:  $GLOBALS['type_urls']; // pour SPIP <2
 			}
+
 			$f = charger_fonction($type, 'urls', true); 
 		// si $entite='', on veut la fonction de passage URL ==> id
 			if (!$entite) return $f; 
 		// sinon on veut effectuer le passage id ==> URL
-			$res = !$f ? '' : $f($id, $entite, $args, $ancre);
+			$res = !$f ? '' : $f(intval($id), $entite, $args, $ancre);
 		}
 	}
 	if ($res) return $res;

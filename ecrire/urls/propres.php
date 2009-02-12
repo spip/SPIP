@@ -321,48 +321,55 @@ function _generer_url_propre($type, $id, $args='', $ancre='') {
 
 // retrouve le fond et les parametres d'une URL propre
 // ou produit une URL propre si on donne un parametre
+// @return array([contexte],[fond],[url_redirect]) : url decodee
 // http://doc.spip.org/@urls_propres_dist
-function urls_propres_dist($i, &$entite, $args='', $ancre='') {
-	global $contexte;
+function urls_propres_dist($i, $entite, $args='', $ancre='') {
 
 	if (is_numeric($i))
 		return _generer_url_propre($entite, $i, $args, $ancre);
 
 	$url = $i;
 	$id_objet = $type = 0;
+	$url_redirect = null;
+	$contexte = $GLOBALS['contexte']; // recuperer aussi les &debut_xx
 
 	// Migration depuis anciennes URLs ?
-	if (
-		// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
-	  $GLOBALS['profondeur_url']<=0
-	  AND $_SERVER['REQUEST_METHOD'] != 'POST') {
+	// traiter les injections domain.tld/spip.php/n/importe/quoi/rubrique23
+	if ($GLOBALS['profondeur_url']<=0
+	AND $_SERVER['REQUEST_METHOD'] != 'POST') {
+		// Decoder l'url html, page ou standard
 		if (preg_match(
-		',(^|/)(article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+(\.html)?)'
-		.'([?&].*)?$,', $url, $regs)
-		) {
-			$type = $regs[2];
-			$id_table_objet = id_table_objet($type);
-			$id_objet = intval(_request($id_table_objet));
-		}
-
-		/* Compatibilite urls-page */
-		else if (preg_match(
-		',[?/&](article|breve|rubrique|mot|auteur|site)[=]?([0-9]+),',
+		',(^|id_|[?])(article|breve|rubrique|mot|auteur|site|syndic)=?(\d+),iS',
 		$url, $regs)) {
-			$type = $regs[1];
-			$id_objet = $regs[2];
+			$type = preg_replace(',s$,', '', table_objet($regs[2]));
+			$_id = id_table_objet($regs[2]);
+			$id_objet = $regs[3];
 		}
 	}
 	if ($id_objet) {
 		$url_propre = generer_url_entite($id_objet, $type, $args, $ancre);
+		$contexte = array($_id => $id_objet);
+		if (strlen($url_propre)
+		AND !strstr($url,$url_propre)) {
+			$reste = preg_replace('/^&/','?',
+				preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
+			$url_redirect = "$url_propre$reste";
+			return array($contexte, $type, $url_redirect);
+		}
+	}
+	/* Fin compatibilite anciennes urls */
+
+	if ($id_objet) {
+		$url_propre = generer_url_entite($id_objet, $type, $args, $ancre);
+		$contexte = array($id_table_objet => $id_objet);
 		if (strlen($url_propre)
 		AND !strstr($url,$url_propre)) {
 			include_spip('inc/headers');
-			http_status(301);
 			// recuperer les arguments supplementaires (&debut_xxx=...)
 			$reste = preg_replace('/^&/','?',
 				preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
-			redirige_par_entete("$url_propre$reste");
+			$url_redirect = "$url_propre$reste";
+			return array($contexte, $type, $url_redirect);
 		}
 	}
 	/* Fin compatibilite anciennes urls */
@@ -394,8 +401,7 @@ function urls_propres_dist($i, &$entite, $args='', $ancre='') {
 	// mais si url arbo ne trouve pas, on veut une 404 par securite
 	if ($GLOBALS['profondeur_url']>0){
 		$urls_anciennes = charger_fonction('arbo','urls');
-		$urls_anciennes($url_propre,$entite);
-		return;
+		return $urls_anciennes($url_propre,$entite);
 	}
 	
 	include_spip('base/abstract_sql'); // chercher dans la table des URLS
@@ -414,8 +420,11 @@ function urls_propres_dist($i, &$entite, $args='', $ancre='') {
 
 	if ($row) {
 		$type = $row['type'];
+		$col_id = id_table_objet($type);
+		$contexte[$col_id] = $row['id_objet'];
+		$entite = $row['type'];
 
-		// Redirection 301 si l'url est vieux
+		// Si l'url est vieux, donner le nouveau
 		if ($recent = sql_fetsel('url, date', 'spip_urls',
 		'type='.sql_quote($row['type']).' AND id_objet='.sql_quote($row['id_objet'])
 		.' AND date>'.sql_quote($row['date']), '', 'date DESC', 1)) {
@@ -426,15 +435,8 @@ function urls_propres_dist($i, &$entite, $args='', $ancre='') {
 				$marqueur2 = $marqueur[$type.'2']; // fin '-+'
 			} else
 				$marqueur1 = $marqueur2 = '';
-			$recent = $marqueur1 . $recent['url'] . $marqueur2;
-			spip_log('Redirige '.$url_propre.' vers '.$recent);
-			include_spip('inc/headers');
-			redirige_par_entete($recent);
+			$url_redirect = $marqueur1 . $recent['url'] . $marqueur2;
 		}
-
-		$col_id = id_table_objet($type);
-		$contexte[$col_id] = $row['id_objet'];
-		$entite = $row['type'];
 	}
 
 	if ($entite=='type_urls') {
@@ -445,5 +447,8 @@ function urls_propres_dist($i, &$entite, $args='', $ancre='') {
 			$contexte['erreur'] = ''; // qu'afficher ici ?  l'url n'existe pas... on ne sait plus dire de quel type d'objet il s'agit
 		}
 	}
+
+	return array($contexte, $entite, $url_redirect);
 }
+
 ?>
