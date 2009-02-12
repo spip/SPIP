@@ -64,12 +64,14 @@ function urls_html_dist($i, $entite, $args='', $ancre='') {
 	$url = $i;
 
 	// Decoder l'url html, page ou standard
+	$objets = 'article|breve|rubrique|mot|auteur|site|syndic';
 	if (preg_match(
-	',(^|id_|[?])(article|breve|rubrique|mot|auteur|site|syndic)=?(\d+),iS',
-	$url, $regs)) {
-		$type = preg_replace(',s$,', '', table_objet($regs[2]));
-		$_id = id_table_objet($regs[2]);
-		$contexte[$_id] = $id = $regs[3];
+	',(?:^|/|[?&]page=)('.$objets
+	.')(?:\.php3?|(?:[?&]id_(?:\1)=)?([0-9]+)(?:\.html)?)'
+	.'(?:[?&].*)?$,', $url, $regs)) {
+		$type = preg_replace(',s$,', '', table_objet($regs[1]));
+		$_id = id_table_objet($regs[1]);
+		$contexte[$_id] = $id = $regs[2];
 		return array($contexte, $type);
 	}
 
