@@ -399,6 +399,13 @@ function balise_SPIP_CRON_dist ($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_FAVICON_dist
+function balise_FAVICON_dist ($p) {
+	if (!$fav = find_in_path('favicon.ico'))
+		$fav = find_in_path('spip.ico');
+	$p->code = _q($fav);
+	return $p;
+}
 
 // #INTRODUCTION
 // #INTRODUCTION{longueur}
@@ -570,10 +577,11 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	// s'il n'y a pas de total_parties, c'est qu'on se trouve
 	// dans un boucle recursive ou qu'on a oublie le critere {pagination}
 	if (!$p->boucles[$b]->total_parties) {
-		erreur_squelette(
-			_T('zbug_pagination_sans_critere',
-				array('champ' => '#PAGINATION')
-			), $p->id_boucle);
+		if (!$p->boucles[$b]->table_optionnelle)
+			erreur_squelette(
+				_T('zbug_pagination_sans_critere',
+					array('champ' => '#PAGINATION')
+				), $p->id_boucle);
 		$p->code = "''";
 		return $p;
 	}
