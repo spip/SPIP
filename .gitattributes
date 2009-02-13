@@ -406,6 +406,7 @@ prive/contenu/breve.html -text
 prive/contenu/item_rss_plugin.html -text
 prive/contenu/rubrique.html -text
 prive/contenu/site.html -text
+prive/contenu/syndic_article.html -text
 prive/editer/article.html -text
 prive/editer/auteur.html -text
 prive/editer/breve.html -text
