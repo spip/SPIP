@@ -119,55 +119,10 @@ function afficher_titre_auteur($row){
 
 // http://doc.spip.org/@afficher_titre_syndic_article
 function afficher_titre_syndic_article($row){
-	$titre=safehtml($row["titre"]);
-	$url=$row["url"];
-	$date=$row["date"];
-	$lesauteurs=typo($row["lesauteurs"]);
-	$statut=$row["statut"];
-	$descriptif=safehtml($row["descriptif"]);
-
-	if ($url)
-		$s = "<a href='$url'>$titre</a>";
-	else
-		$s = $titre;
-
-	$date = affdate_court($date);
-	if (strlen($lesauteurs) > 0) $date = $lesauteurs.', '.$date;
-	$s.= " ($date)";
-
-	// Tags : d'un cote les enclosures, de l'autre les liens
-	if($e = afficher_enclosures($row['tags']))
-		$s .= ' '.$e;
-
-	// descriptif
-	if (strlen($descriptif) > 0) {
-		// couper un texte vraiment tres long
-		if (strlen($descriptif) > 10000)
-			$descriptif = safehtml(spip_substr($descriptif, 0, 6000)).' (...)';
-		else
-			$descriptif = safehtml($descriptif);
-		$s .= '<div class="arial1">'
-			# 385px = largeur de la colonne ou s'affiche le texte
-			. filtrer('image_graver',filtrer('image_reduire',$descriptif, 385, 550))
-			. '</div>';
-	}
-
-	// tags
-	if ($tags = afficher_tags($row['tags']))
-		$s .= "<div style='float:$spip_lang_right;'>&nbsp;<em>"
-			. $tags . '</em></div>';
-
-	// source
-	if (strlen($row['url_source']))
-		$s .= "<div style='float:$spip_lang_right;'>"
-		. propre("[".$row['source']."->".$row['url_source']."]")
-		. "</div>";
-	else if (strlen($row['source']))
-		$s .= "<div style='float:$spip_lang_right;'>"
-		. typo($row['source'])
-		. "</div>";
-
-	return array('',$s);
+	return array('', recuperer_fond(
+		'prive/contenu/syndic_article',
+		array('id' => $row['id_syndic_article'])
+	));
 }
 
 // http://doc.spip.org/@afficher_complement_objet
