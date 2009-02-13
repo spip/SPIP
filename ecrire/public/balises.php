@@ -399,14 +399,6 @@ function balise_SPIP_CRON_dist ($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_FAVICON_dist
-function balise_FAVICON_dist ($p) {
-	if (!$fav = find_in_path('favicon.ico'))
-		$fav = find_in_path('spip.ico');
-	$p->code = _q($fav);
-	return $p;
-}
-
 // #INTRODUCTION
 // #INTRODUCTION{longueur}
 // http://www.spip.net/@introduction
