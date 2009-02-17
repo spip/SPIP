@@ -1818,8 +1818,9 @@ function rtl_mb_ord($char){
 
 // http://doc.spip.org/@rtl_reverse
 function rtl_reverse($mot, $rtl_global) {
+	$rtl_prec = $rtl_global;
 
-	$ponctuations = array("«","»", "“", "”", ",", ".", " ", ":", ";", "(", ")", "،", "؟", "?", "!", " ");
+	$ponctuations = array("/", "-", "«","»", "“", "”", ",", ".", " ", ":", ";", "(", ")", "،", "؟", "?", "!", " ");
 	foreach($ponctuations as $ponct) {
 		$ponctuation[$ponct] = true;
 	}
@@ -1844,7 +1845,7 @@ function rtl_reverse($mot, $rtl_global) {
 				 || $lettre == "٦" || $lettre == "٧" || $lettre == "٨" || $lettre == "٩") $rtl = false;
 		
 		if ($ponctuation[$lettre]) {
-			$rtl = $rtl_global;
+			$rtl = $rtl_prec;
 			
 			if ($rtl) {
 				switch ($lettre) {
@@ -1861,6 +1862,8 @@ function rtl_reverse($mot, $rtl_global) {
 		
 		if ($rtl) $res = $lettre.$res;
 		else $res = $res.$lettre;
+		
+		$rtl_prec = $rtl;
 		
 	}
 	return $res;
@@ -1879,8 +1882,19 @@ function rtl_visuel($texte, $rtl_global) {
 	// premiere passe pour determiner s'il y a du rtl
 	// de facon a placer ponctuation et mettre les mots dans l'ordre
 	
-
-
+	/*
+	if ($rtl_global) {
+		$texte = ereg_replace("([\-])", "^\\1^", $texte);
+		if (ereg("\^", $texte) {
+			$texte = explode("^", $texte);
+			foreach($texte as $part) {
+				$total .= rtl_visuel($part, $rtl_global);
+			}
+			return $total;
+		}
+	}
+	*/
+	
 
 	$arabic_letters = array(
 		array("ي", // lettre 0
@@ -2111,11 +2125,10 @@ function rtl_visuel($texte, $rtl_global) {
 
 
 		// ponctuations
-		$ponctuations = array("«","»", "“", "”", ",", ".", " ", ":", ";", "(", ")", "،", "؟", "?", "!"," ");
+		$ponctuations = array("/", "-", "«","»", "“", "”", ",", ".", " ", ":", ";", "(", ")", "،", "؟", "?", "!"," ");
 		foreach($ponctuations as $ponct) {
 			$mot = str_replace("$ponct", "^$ponct^", $mot);
 		}
-
 		// lettres forcant coupure
 		$mot = preg_replace(",ا,u", "ا^", $mot);
 		$mot = preg_replace(",د,u", "د^", $mot);
