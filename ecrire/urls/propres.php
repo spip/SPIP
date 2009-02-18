@@ -320,7 +320,7 @@ function _generer_url_propre($type, $id, $args='', $ancre='') {
 
 // retrouve le fond et les parametres d'une URL propre
 // ou produit une URL propre si on donne un parametre
-// @return array([contexte],[fond],[url_redirect]) : url decodee
+// @return array([contexte],[type],[url_redirect],[fond]) : url decodee
 // http://doc.spip.org/@urls_propres_dist
 function urls_propres_dist($i, $entite, $args='', $ancre='') {
 

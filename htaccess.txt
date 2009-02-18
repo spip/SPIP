@@ -85,7 +85,7 @@ RewriteRule ^spip_rss\.php3?$	spip.php?page=rss [QSA,L]
 ###
 # URLs "propres", "propres2", "libres", "arbo"
 
-RewriteRule ^[^\.]+(\.html)?$		spip.php?page=type_urls [QSA,E=url_propre:$0,L]
+RewriteRule ^[^\.]+(\.html)?$		spip.php [QSA,E=url_propre:$0,L]
 
 # Fin URLs "propres" et "propres2"
 ###
