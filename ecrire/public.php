@@ -62,8 +62,8 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 			erreur_upload_trop_gros();
 		}
 
-		// mais plus probablement nous sommes dans le cas
-		$fond = 'sommaire';
+		// sinon fond par defaut (cf. assembler.php)
+		$fond = '';
 	}
 
 	$tableau_des_erreurs = 	$tableau_des_temps = array();
