@@ -43,7 +43,7 @@ function traiter_raccourci_notes($letexte)
 		list($note_source, $note_texte, $ref, $nom) = $r;
 
 		// note nommee ou pas ?
-		if (isset($nom) AND strpos($note_texte, '</' . $nom .'>') === false) {
+		if (isset($nom) AND ($nom=='a' OR strpos($note_texte, '</' . $nom .'>') === false)) {
 			$note_texte = preg_replace(",^\s*".preg_quote($ref,",").",ms",'',$note_texte);
 		} 
 		else
