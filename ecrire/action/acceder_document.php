@@ -83,18 +83,28 @@ function action_acceder_document_dist() {
 		break;
 
 	default:
-		// Content-Type ; pour les images ne pas passer en attachment
 		// sinon, lorsqu'on pointe directement sur leur adresse,
 		// le navigateur les downloade au lieu de les afficher
 		header("Content-Type: ". $doc['mime_type']);
 
 		if (!preg_match(',^image/,', $doc['mime_type'])) {
-			$f = $doc['titre'] ? $doc['titre'] : basename($file);
+			// fix for IE catching or PHP bug issue
+			header("Pragma: public");
+			header("Expires: 0"); // set expiration time
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+			// browser must download file from server instead of cache		// Content-Type ; pour les images ne pas passer en attachment
+
+			// on garde le nom du fichier
+			// utiliser son titre est une mauvaise idee car en l'absence d'extension,
+			// les navigateurs sont perdus et ne reconnaissent pas le type
+			$f = basename($file);
+
+			// ce content-type est necessaire pour eviter des corruptions de zip dans ie6
 			header('Content-Type: application/octet-stream');
+
 			header("Content-Disposition: attachment; filename=\"$f\";");
 			header("Content-Transfer-Encoding: binary");
 		}
-
 		if ($cl = filesize($file))
 			header("Content-Length: ". $cl);
 
