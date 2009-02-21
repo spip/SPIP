@@ -158,15 +158,11 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	if ($vignette) 
 		$vignette = sql_fetsel("*", "spip_documents", "id_document = ".$vignette);
 	if ($vignette) {
-			if (!$portfolio OR !($GLOBALS['meta']['creer_preview'] == 'oui')) {
-				$image = image_pattern($vignette);
-			} else {
-				include_spip('inc/filtres');
-				$loc = get_spip_doc($vignette['fichier']);
-				$image = filtrer('image_reduire', $loc, 120, 110, false, true);
-				if ($loc == $image)
-					$image = image_pattern($vignette);
-			}
+		include_spip('inc/filtres');
+		$loc = get_spip_doc($vignette['fichier']);
+		$image = filtrer('image_reduire', $loc, 120, 110, false, true);
+		if ($loc == $image)
+			$image = image_pattern($vignette);
 	}
 	else if (in_array($extension,
 		explode(',', $GLOBALS['meta']['formats_graphiques']))
