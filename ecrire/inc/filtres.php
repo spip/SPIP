@@ -288,10 +288,12 @@ function image_filtrer($args){
 
 // pour les feuilles de style
 function image_bg ($img, $couleur, $pos="") {
-	if (!function_exists("imagecreatetruecolor"))
+	if (!function_exists("imagecreatetruecolor")
+		OR !($image = image_aplatir(image_sepia($img, $couleur),"gif","cccccc", 64, true))
+	)
 		return "background-color: #$couleur;";
-	include_spip('inc/filtres_images');
-	return "background: url(".url_absolue(extraire_attribut(image_aplatir(image_sepia($img, $couleur),"gif","cccccc", 64, true), "src")).") $pos;";
+	include_spip('inc/filtres_images_etendus');
+	return "background: url(".url_absolue(extraire_attribut($image, "src")).") $pos;";
 }
 
 // Pour assurer la compatibilite avec les anciens nom des filtres image_xxx
