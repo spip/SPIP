@@ -723,9 +723,13 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 	// inserer la condition (cf {lang?})
 	// traiter a part la date, elle est mise d'office par SPIP,
 	if ($crit->cond) {
-		if (tester_param_date('articles', $col))
-		  $pred = '@$Pile["env"][\'' . $col ."']";
-		else $pred = calculer_argument_precedent($idb, $col, $boucles);
+		$pred = calculer_argument_precedent($idb, $col, $boucles);
+    if ($col == "date" OR $col == "date_redac") {
+      if($pred == "\$Pile[0]['".$col."']") {
+        $pred = "(\$Pile[0]['{$col}_default']?'':$pred)";
+      }
+    }
+		
 		if ($op == '=' AND !$crit->not)
 		  $where = array("'?'", "(is_array($pred))", 
 				 critere_IN_cas ($idb, $boucles, 'COND', $arg, $op, array($pred), $col), 
@@ -947,9 +951,12 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 		$val = 'id_parent';
 	// un critere conditionnel sur date est traite a part
 	// car la date est mise d'office par SPIP, 
-	      if ($crit->cond AND tester_param_date('articles', $col))
-		  $val ='@$Pile["env"][\'' . $col ."']";
-	      else $val = calculer_argument_precedent($idb, $val, $boucles);
+	      $val = calculer_argument_precedent($idb, $val, $boucles);
+        if ($crit->cond AND ($col == "date" OR $col == "date_redac")) {
+		      if($val == "\$Pile[0]['".$col."']") {
+            $val = "(\$Pile[0]['{$col}_default']?'':$val)";
+          }
+		    }
 	      $val = array(kwote($val));
 	    }
 	  } else {
