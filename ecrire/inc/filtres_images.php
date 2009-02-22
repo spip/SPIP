@@ -1246,6 +1246,66 @@ function image_renforcement($im, $k=0.5)
 }
 
 
+// Permet de regrouper deux images l'un a cote de l'autre dans un meme fichier
+// la $dir est right, left, top ou bottom, pour le placement de l'image $masque par rapport a $im
+function image_joindre ($im, $masque, $dir="right") {
+	$masque = find_in_path($masque);
+	$pos = md5(serialize($dir).@filemtime($masque));
+
+	$fonction = array('image_joindre', func_get_args());
+	$image = image_valeurs_trans($im, "joindre-$masque-$pos", "png", $fonction);
+	if (!$image) return("");
+
+	$mask = image_valeurs_trans($masque,"");
+	if (!$mask) return("");
+
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	$x_m = $mask["largeur"];
+	$y_m = $mask["hauteur"];
+
+	if ($dir == "right" OR $dir == "left") {
+		$x_f = $x_i + $x_m;
+		$y_f = max($y_i, $y_m);
+	} else {
+		$x_f = max($x_i, $x_m);
+		$y_f = $y_i + $y_m;
+	}
+		
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+
+	if ($creer) {
+			$im_f = imagecreatetruecolor($x_f, $y_f);
+			@imagealphablending($im_f, false);
+			@imagesavealpha($im_f,true);
+			$color_t = ImageColorAllocateAlpha( $im_f, 128, 128, 128 , 127 );
+			imagefill ($im_f, 0, 0, $color_t);			
+			$im1 = $image["fonction_imagecreatefrom"]($im);
+			$im2 = $mask["fonction_imagecreatefrom"]($masque);
+
+			if ($dir == "right") {			
+				imagecopy ( $im_f, $im1, 0, 0, 0, 0, $x_i, $y_i);			
+				imagecopy ( $im_f, $im2, $x_i, 0, 0, 0, $x_m, $y_m);			
+			} else if ($dir == "left") {
+				imagecopy ( $im_f, $im1, $x_m, 0, 0, 0, $x_i, $y_i);			
+				imagecopy ( $im_f, $im2, 0, 0, 0, 0, $x_m, $y_m);			
+			} else if ($dir == "bottom") {
+				imagecopy ( $im_f, $im1, 0, 0, 0, 0, $x_i, $y_i);			
+				imagecopy ( $im_f, $im2, 0, $y_i, 0, 0, $x_m, $y_m);			
+			} else if ($dir == "top") {
+				imagecopy ( $im_f, $im1, 0, $y_m, 0, 0, $x_i, $y_i);			
+				imagecopy ( $im_f, $im2, 0, 0, 0, 0, $x_m, $y_m);			
+			}
+
+			image_gd_output($im_f,$image);
+	}
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$x_f,'height'=>$y_f));
+}
+
+
 // 1/ Aplatir une image semi-transparente (supprimer couche alpha)
 // en remplissant la transparence avec couleur choisir $coul.
 // 2/ Forcer le format de sauvegarde (jpg, png, gif)
