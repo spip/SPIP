@@ -53,11 +53,8 @@ function exec_lang_raccourcis_dist() {
 
 	echo debut_droite('', true);
 
-	echo "<br /><div style='text-align: center'>", 
-	  gros_titre(_T('module_fichier_langue').": $module",'', false),
-	  '</div><br />',
-	  barre_onglets("config_lang", "fichiers"),
-	  '<br />';
+	echo gros_titre(_T('module_fichier_langue').": $module",'', false),
+	  barre_onglets("config_lang", "fichiers");
 
 	afficher_raccourcis($module);
 

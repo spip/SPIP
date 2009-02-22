@@ -38,11 +38,8 @@ function exec_config_multilang_dist()
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
 	echo debut_droite('', true);
 
-	echo "<br /><div style='text-align: center'>", 
-	  gros_titre(_T('info_langues'),'', false),
-	  '</div><br />',
-	  barre_onglets("config_lang", "multi"),
-	  '<br />';
+	echo gros_titre(_T('info_langues'),'', false),
+	  barre_onglets("config_lang", "multi");
 
 	$referenceur = charger_fonction('referenceur', 'configuration');
 	echo $referenceur();

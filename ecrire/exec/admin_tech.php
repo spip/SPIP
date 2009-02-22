@@ -24,10 +24,7 @@ function exec_admin_tech_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_admin_tech'), "configuration", "base");
 
-	echo "<br /><br />";
-	echo "<div style='text-align: center'>",
-	  gros_titre(_T('titre_admin_tech'),'',false),
-	  '</div>';
+	echo gros_titre(_T('titre_admin_tech'),'',false);
 
 	if ($GLOBALS['connect_toutes_rubriques']) {
 

@@ -29,7 +29,6 @@ function exec_config_fonctions_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_config_fonctions'), "configuration", "configuration");
 
-	echo "<br /><br /><br />";
 	echo gros_titre(_T('titre_config_fonctions'),'', false);
 	echo barre_onglets("configuration", "fonctions");
 

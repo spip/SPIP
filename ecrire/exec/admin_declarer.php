@@ -26,7 +26,6 @@ function exec_admin_declarer_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_admin_tech'), "configuration", "base");
 
-	echo "\n<br /><br />";
 	echo gros_titre(_T('titre_admin_effacer'),'',false);
 	echo barre_onglets("administration", "declarer");
 
