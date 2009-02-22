@@ -477,7 +477,6 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 		  .implode('|',array_map('preg_quote',$t)).')$}i', '', $url_propre);
 
 	if (strlen($url_propre) AND !preg_match(',^[^/]*[.]php,',$url_propre)){
-		$synonymes_types = url_arbo_type('');
 		$types_parents = array();
 		
 		// recuperer tous les objets de larbo xxx/article/yyy/mot/zzzz
@@ -488,11 +487,10 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 				$type = array_pop($url_arbo);
 			else
 				$type=null;
-			$typesyn = isset($synonymes_types[$type])?$synonymes_types[$type]:$type;
 			// Compatibilite avec les anciens marqueurs d'URL propres
 			// Tester l'entree telle quelle (avec 'url_libre' des sites ont pu avoir des entrees avec marqueurs dans la table spip_urls)
 			if (is_null($type)
-			OR !$row=sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote("$typesyn/$url_propre")))) {
+			OR !$row=sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote("$type/$url_propre")))) {
 				if (!is_null($type))
 					array_push($url_arbo,$type);
 				$row = sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote($url_propre)));
