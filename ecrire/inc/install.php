@@ -284,7 +284,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 	. http_script('',  'jquery.js')
 	. http_script('
 		$(document).ready(function() {
-			$("input[@type=hidden][@name=server_db]").each(function(){
+			$("input[type=hidden][name=server_db]").each(function(){
 				if ($(this).attr("value").match("sqlite*")){
 					$("#install_adresse_base_hebergeur").hide();
 					$("#install_login_base_hebergeur").hide();

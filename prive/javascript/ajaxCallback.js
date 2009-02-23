@@ -88,7 +88,7 @@ jQuery.fn.positionner = function() {
 		.animate({scrollTop: scroll}, 300);
 
 	// positionner le curseur dans la premiere zone de saisie
-	jQuery(jQuery('*', this).filter('input[@type=text],textarea')[0]).focus();
+	jQuery(jQuery('*', this).filter('input[type=text],textarea')[0]).focus();
 	return this; // don't break the chain
 }
 
@@ -123,7 +123,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 				if (c=='noajax'){
 					// le serveur ne veut pas traiter ce formulaire en ajax
 					// on resubmit sans ajax
-					jQuery("input[@name=var_ajax]",leform).remove();
+					jQuery("input[name=var_ajax]",leform).remove();
 					jQuery(leform).ajaxFormUnbind().submit();
 				}
 				else {

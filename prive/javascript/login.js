@@ -26,9 +26,9 @@ function informe_auteur(c){
 
 function calcule_md5_pass(pass){
 	if (alea_actuel) {
-		jQuery('input[@name=password]').attr('value','');
-		jQuery('input[@name=session_password_md5]').attr('value',calcMD5(alea_actuel + pass));
-		jQuery('input[@name=next_session_password_md5]').attr('value',calcMD5(alea_futur + pass));
+		jQuery('input[name=password]').attr('value','');
+		jQuery('input[name=session_password_md5]').attr('value',calcMD5(alea_actuel + pass));
+		jQuery('input[name=next_session_password_md5]').attr('value',calcMD5(alea_futur + pass));
 	}
 }
 
@@ -43,7 +43,7 @@ function actualise_auteur(){
 
 function login_submit(){
 	actualise_auteur();
-	pass = jQuery('input[@name=password]').attr('value');
+	pass = jQuery('input[name=password]').attr('value');
 	// ne pas laisser le pass d'un auteur "auth=spip" circuler en clair
 	if (pass) {
 		// si l'information est en cours, retenter sa chance

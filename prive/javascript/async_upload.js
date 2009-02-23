@@ -48,7 +48,7 @@ function async_upload_before_submit(data,form) {
     form.append("<input type='hidden' name='iframe' value='iframe'>");
    //reset the redirect input
    form
-   .find("input[@name='redirect']")
+   .find("input[name='redirect']")
    .val("");
 };
 
@@ -57,16 +57,16 @@ function async_upload_article_edit(res,s,jForm){
       if(!res) return true;
       var cont;
       //verify if a new document or a customized vignette
-      var bloc = jQuery(res.find(">div:first[@id^=document]"));
+      var bloc = jQuery(res.find(">div:first[id^=document]"));
 			if(jQuery("#"+bloc.attr('id')).size()) {
 				cont = jQuery("#"+bloc.attr('id')).html(bloc.html());
 			} else {
 	      //add a class to new documents
 	      res.
-	      find(">div[@class]")
+	      find(">div[class]")
 	      .addClass("documents_added")
 	      .css("display","none");
-	      if (jForm.find("input[@name='arg']").val().search("/0/image")!=-1){
+	      if (jForm.find("input[name='arg']").val().search("/0/image")!=-1){
 	        cont = jQuery("#liste_images");
 	        // cas de l'interface document unifiee
 	        if (!cont.length)
@@ -85,7 +85,7 @@ function async_upload_article_edit(res,s,jForm){
 	            //bug explorer-opera-safari
 	            if(!jQuery.browser.mozilla)
 	              anim.css('width', jQuery(this).width()-2);
-	            a = jQuery(anim).find("img[@onclick]")
+	            a = jQuery(anim).find("img[onclick]")
 	            if (a.length) a.get(0).onclick();
 	        })
 	        .css('overflow','');
@@ -102,7 +102,7 @@ function async_upload_icon(res,s,jForm) {
     var cont = jQuery("#"+this.id);
     verifForm(cont.html(jQuery(this).html()));
     jQuery("form.form_upload_icon",cont).async_upload(async_upload_icon);
-		cont.find("img[@onclick]").each(function(){this.onclick();});
+		cont.find("img[onclick]").each(function(){this.onclick();});
   });
   return true;                     
 }

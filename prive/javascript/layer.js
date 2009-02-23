@@ -298,7 +298,7 @@ function verifForm(racine) {
 			|| (e.charCode==19 && e.keyCode==19)
 		) || (!e.charCode && e.keyCode == 119 /* F8, windows */)
 		) {
-			jQuery(this).find('input[@type=submit]')
+			jQuery(this).find('input[type=submit]')
 			.click();
 			return false;
 		}
