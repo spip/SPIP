@@ -833,6 +833,7 @@ prive/vignettes/xml.png -text
 prive/vignettes/zip.png -text
 /rien.gif -text
 /spip.php -text
+squelettes-dist/favicon.ico.html -text
 squelettes-dist/feed.png -text
 squelettes-dist/formulaires/ecrire_auteur.php -text
 squelettes-dist/formulaires/inscription.php -text
@@ -862,6 +863,7 @@ squelettes-dist/polices/dustismo_bold.ttf -text
 squelettes-dist/puce.gif -text
 squelettes-dist/puce_rtl.gif -text
 squelettes-dist/rechercher.gif -text
+squelettes-dist/robots.txt.html -text
 squelettes-dist/rss_forum_article.html -text
 squelettes-dist/rss_forum_breve.html -text
 squelettes-dist/rss_forum_rubrique.html -text
