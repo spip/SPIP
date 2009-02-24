@@ -804,6 +804,14 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	return '';
 }
 
+// Transformer les caracteres utf8 d'une URL (farsi par ex) selon la RFC 1738
+function urlencode_1738($url) {
+	return str_replace(
+		array('%2F','%3D','%3F','%26'),
+		array('/'  ,'='  ,'?'  ,'&amp;'),
+		rawurlencode($url));
+}
+
 // http://doc.spip.org/@generer_url_entite_absolue
 function generer_url_entite_absolue($id='', $entite='', $args='', $ancre='', $connect=NULL)
 {
