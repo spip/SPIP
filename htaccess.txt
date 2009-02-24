@@ -101,6 +101,7 @@ RewriteRule ^(.*/)?\.svn/ - [F]
 #
 RewriteRule ^robots[.]txt$      spip.php?page=robots.txt [QSA,L]
 RewriteRule ^favicon[.]ico$      spip.php?page=favicon.ico [QSA,L]
+RewriteRule ^sitemap[.]xml$      spip.php?page=sitemap.xml [QSA,L]
 ##
 
 # expirer les images (pour contourner gros bug MSIE sur le cache)
