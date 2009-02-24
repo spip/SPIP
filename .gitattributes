@@ -859,6 +859,7 @@ prive/vignettes/xml.png -text
 prive/vignettes/zip.png -text
 /rien.gif -text
 /spip.php -text
+squelettes-dist/favicon.ico.html -text
 squelettes-dist/feed.png -text
 squelettes-dist/formulaires/ecrire_auteur.php -text
 squelettes-dist/formulaires/forum.php -text
@@ -884,6 +885,7 @@ squelettes-dist/inc-rss-item.html -text
 squelettes-dist/inc-rubriques.html -text
 squelettes-dist/modeles/article_mots.html -text
 squelettes-dist/modeles/article_traductions.html -text
+squelettes-dist/modeles/favicon.html -text
 squelettes-dist/modeles/foreach.html -text
 squelettes-dist/modeles/lesauteurs.html -text
 squelettes-dist/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
@@ -892,11 +894,13 @@ squelettes-dist/polices/dustismo_bold.ttf -text
 squelettes-dist/puce.gif -text
 squelettes-dist/puce_rtl.gif -text
 squelettes-dist/rechercher.gif -text
+squelettes-dist/robots.txt.html -text
 squelettes-dist/rss_forum_article.html -text
 squelettes-dist/rss_forum_breve.html -text
 squelettes-dist/rss_forum_rubrique.html -text
 squelettes-dist/rss_forum_syndic.html -text
 squelettes-dist/rss_forum_thread.html -text
+squelettes-dist/sitemap.xml.html -text
 squelettes-dist/spip.ico -text
 squelettes-dist/spip.png -text
 squelettes-dist/spip_formulaires.css -text

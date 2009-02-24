@@ -792,6 +792,17 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	return '';
 }
 
+// Transformer les caracteres utf8 d'une URL (farsi par ex) selon la RFC 1738
+function urlencode_1738($url) {
+	$uri = '';
+	for ($i=0; $i < strlen($url); $i++) {
+		if (ord($a = $url[$i]) > 127)
+			$a = rawurlencode($a);
+		$uri .= $a;
+	}
+	return quote_amp($uri);
+}
+
 // http://doc.spip.org/@generer_url_entite_absolue
 function generer_url_entite_absolue($id='', $entite='', $args='', $ancre='', $connect=NULL)
 {
