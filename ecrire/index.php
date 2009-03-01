@@ -137,6 +137,9 @@ if ($var_f = _request('transformer_xml')) {
 	set_request('var_url', $exec);
 	$exec = $var_f;
 }
+elseif (find_in_path("prive/exec/$exec.html")) {
+	$exec = "fond";
+}
 
 // Trouver la fonction eventuellement surchargee
 $var_f = charger_fonction($exec);
