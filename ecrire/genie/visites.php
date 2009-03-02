@@ -12,7 +12,7 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-@define(_CRON_LOT_FICHIERS_VISITE,100);
+@define('_CRON_LOT_FICHIERS_VISITE',100);
 
 ### Pour se debarrasser du md5, comment faire ? Un index sur 'referer' ?
 ### ou alors la meme notion, mais sans passer par des fonctions HEX ?
