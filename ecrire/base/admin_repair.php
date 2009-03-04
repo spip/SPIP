@@ -62,7 +62,8 @@ function admin_repair_plat(){
 			$d = substr($d,strlen(_DIR_IMG));
 			$src = $row['fichier'];
 			$dest = $d . substr($src,strlen($d));
-			if (deplacer_fichier_upload(_DIR_IMG . $src, _DIR_IMG . $dest)) {
+			if (@copy(_DIR_IMG . $src, _DIR_IMG . $dest)
+			  AND file_exists(_DIR_IMG . $dest)) {
 				sql_updateq('spip_documents',array('fichier'=>$dest),'id_document='.intval($row['id_document']));
 				spip_unlink(_DIR_IMG . $src);
 				$out .= "$src => $dest<br />";				
