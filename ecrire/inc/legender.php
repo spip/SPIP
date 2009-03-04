@@ -59,7 +59,9 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		"\n\n" .
 		legender_suppression($id, $id_document, $ancre, $s, $script, $supp, $type);
 
-	if ($script == 'articles_edit')
+	// ne pas afficher le bouton de changement dans le portfolio ?
+	// mais tout cela n'est pas très extensible et declenchera d'autres bugs plus tard...
+	if (preg_match(",_edit,",$script))
 		$corps .= legender_image_doc($document, $id_document, $id, $type, $s, $script, $ancre);
 
 	$corps = block_parfois_visible("legender-aff-$id_document", legender_entete($document), $corps, "text-align:center;", $flag);
