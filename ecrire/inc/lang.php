@@ -184,7 +184,7 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 		## ici ce serait bien de pouvoir choisir entre "langue par defaut"
 		## et "langue heritee"
 		else
-			$ret .= "<option class='maj-debut' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
+			$ret .= "<option class='maj-debut' value='$l'$selected>".traduire_nom_langue($l)." [".$l."]</option>\n";
 	}
 	return $ret;
 }
