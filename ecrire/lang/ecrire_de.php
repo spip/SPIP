@@ -113,6 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP kann nicht auf die Liste der verf&uuml;gbaren Datenbanken zugreifen.',
 'config_info_base_sup' => 'Wenn Sie andere Datenbanken auf dem selben Server oder auf einem anderen mit SPIP abfragen m&ouml;chten, k&ouml;nnen Sie sie mit dem Formular weiter unten deklarieren. Wenn Sie Felder leer lassen, werden die Verbindungsdaten der Hauptdatenbank verwendet.',
 'config_info_base_sup_disponibles' => 'Bereits abfragbare Datenbanken:',
+'config_info_enregistree' => 'Neue Einstellungen wurden gespeichert',
 'config_info_logos' => 'Jedes Element der Website kann ein Logo und ein &laquo;mouseover-Logo&raquo; erhalten.',
 'config_info_logos_utiliser' => 'Logos verwenden',
 'config_info_logos_utiliser_non' => 'Logos nicht verwenden',
