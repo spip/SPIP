@@ -23,7 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // le compilateur produit  FROM $r['table'] AS $r['id_table']
 // Cette fonction intervient a la compilation, 
 // mais aussi pour la balise contextuelle EXPOSE.
-// l'ensemble des descriptions de table d'un serveur est stocke dans un fichier cache/sql_dec.txt
+// l'ensemble des descriptions de table d'un serveur est stocke dans un fichier cache/sql_desc.txt
 // par soucis de performance
 // un appel avec $nom vide est une demande explicite de vidange du cache des descriptions
 
