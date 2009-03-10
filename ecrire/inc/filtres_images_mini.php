@@ -162,8 +162,8 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 				$creer = false;
 	}
 	if ($creer) {
-		if (!file_exists($fichier)) {
-			if (!file_exists("$fichier.src")) {
+		if (!@file_exists($fichier)) {
+			if (!@file_exists("$fichier.src")) {
 				spip_log("Image absente : $fichier");
 				return false;
 			}
@@ -252,14 +252,14 @@ function image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 	#un flag pour reperer les images gravees
 	$lock = 
 		!statut_effacer_images_temporaires('get') // si la fonction n'a pas ete activee, on grave tout
-	  OR (file_exists($valeurs['fichier_dest']) AND !file_exists($valeurs['fichier_dest'].'.src'));
+	  OR (@file_exists($valeurs['fichier_dest']) AND !@file_exists($valeurs['fichier_dest'].'.src'));
 	if (
 	     function_exists($fonction) 
 			  && ($ret = $fonction($img,$valeurs['fichier_dest'],$qualite)) # on a reussi a creer l'image
 			  && isset($valeurs['reconstruction']) # et on sait comment la resonctruire le cas echeant
 			  && !$lock
 	  )
-		if (file_exists($valeurs['fichier_dest'])){
+		if (@file_exists($valeurs['fichier_dest'])){
 			$valeurs['date'] = @filemtime($valeurs['fichier_dest']); // pour la retrouver apres disparition
 			ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
 		}
@@ -271,7 +271,7 @@ function reconstruire_image_intermediaire($fichier_manquant){
 	$reconstruire = array();
 	$fichier = $fichier_manquant;
 	while (
-		!file_exists($fichier)
+		!@file_exists($fichier)
 		AND lire_fichier($src = "$fichier.src",$source)
 		AND $valeurs=unserialize($source)
     AND ($fichier = $valeurs['fichier']) # l'origine est connue (on ne verifie pas son existence, qu'importe ...)
@@ -316,7 +316,7 @@ function image_graver($img){
 	if (strlen($fichier) < 1)
 		$fichier = $img;
 	# si jamais le fichier final n'a pas ete calcule car suppose temporaire
-	if (!file_exists($fichier)) 
+	if (!@file_exists($fichier)) 
 		reconstruire_image_intermediaire($fichier);
 	ramasse_miettes($fichier);
 	return $img; // on ne change rien
