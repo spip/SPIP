@@ -41,12 +41,13 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
 
 	// pas de squelette : erreur !
 	if (!$squelette) {
+		// Indiquer une erreur squelette
 		include_spip('public/debug');
 		erreur_squelette(_T('info_erreur_squelette2',
-			array('fichier'=>"'$fond'")),
+			array('fichier'=>"'$fond.$ext'")),
 			$GLOBALS['dossier_squelettes']);
-		$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
-		return array(substr($f, 0, -strlen(".$ext")), $ext, $ext, $f);
+		// provoquer 404
+		return array(null, $ext, $ext, null);
 	}
 
 	return array($squelette, $ext, $ext, "$squelette.$ext");
