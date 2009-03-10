@@ -93,7 +93,7 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 			$urls_anciennes = charger_fonction('propres','urls');
 		else
 			$urls_anciennes = charger_fonction('arbo','urls');
-		return $urls_anciennes($url_propre,$entite);
+		return $urls_anciennes($url_propre, $entite);
 	}
 	/* Fin du bloc compatibilite url-propres */
 }

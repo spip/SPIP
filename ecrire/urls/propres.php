@@ -444,24 +444,28 @@ function urls_propres_dist($i, $entite, $args='', $ancre='') {
 	}
 
 	if ($entite=='' OR $entite=='type_urls' /* compat .htaccess 2.0 */) {
-		if ($type)
+		if ($type) {
 			$entite =  ($type == 'syndic') ?  'site' : $type;
-		else {
-			$entite = '404';
-			$contexte['erreur'] = '';
-			// l'url n'existe pas...
-			// on ne sait plus dire de quel type d'objet il s'agit
+		} else {
+			// Si ca ressemble a une URL d'objet, ce n'est pas la home
+			// et on provoque un 404
+			if (preg_match(',^.*/[^\.]+(\.html)?$,', $url)) {
+				$entite = '404';
+				$contexte['erreur'] = '';
 
-			// sauf si on a le marqueur. et la c'est un peu sale...
-			if (_MARQUEUR_URL) {
-				$fmarqueur = @array_flip(unserialize(_MARQUEUR_URL));
-				preg_match(',^([+][-]|[-+@_]),', $url_propre, $regs);
-				$objet = $regs ? substr($fmarqueur[$regs[1]],0,n-1) : 'article';
-				$contexte['erreur'] = _T(
-					($objet=='rubrique' OR $objet=='breve')
-						? 'public:aucune_'.$objet
-						: 'public:aucun_'.$objet
-				);
+				// l'url n'existe pas...
+				// on ne sait plus dire de quel type d'objet il s'agit
+				// sauf si on a le marqueur. et la c'est un peu sale...
+				if (_MARQUEUR_URL) {
+					$fmarqueur = @array_flip(unserialize(_MARQUEUR_URL));
+					preg_match(',^([+][-]|[-+@_]),', $url_propre, $regs);
+					$objet = $regs ? substr($fmarqueur[$regs[1]],0,n-1) : 'article';
+					$contexte['erreur'] = _T(
+						($objet=='rubrique' OR $objet=='breve')
+							? 'public:aucune_'.$objet
+							: 'public:aucun_'.$objet
+					);
+				}
 			}
 		}
 	}
