@@ -433,13 +433,18 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 		}
 	}
 	if ($id_objet) {
-		$url_propre = generer_url_entite($id_objet, $type, $args, $ancre);
 		$contexte = array($_id => $id_objet);
+		$url_propre = generer_url_entite($id_objet, $type);
 		if (strlen($url_propre)
 		AND !strstr($url,$url_propre)) {
-			$reste = preg_replace('/^&/','?',
-				preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
-			$url_redirect = "$url_propre$reste";
+			list(,$hash) = explode('#', $url_propre);
+			$args = array();
+			foreach(explode('&', $regs[2]) as $fragment) {
+				if ($fragment != "$_id=$id_objet")
+					$args[] = $fragment;
+			}
+			$url_redirect = generer_url_entite($id_objet, $type, join('&',array_filter($args)), $hash);
+
 			return array($contexte, $type, $url_redirect);
 		}
 	}

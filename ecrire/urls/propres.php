@@ -343,36 +343,27 @@ function urls_propres_dist($i, $entite, $args='', $ancre='') {
 		$objets = 'article|breve|rubrique|mot|auteur|site|syndic';
 		if (preg_match(
 		',(?:^|/|[?&](?:page=)?)('.$objets
-		.')(?:\.php3?|(?:[?&]id_(?:\1)=)?([0-9]+)(?:\.html)?)'
-		.'(?:[?&].*)?$,', $url, $regs)) {
+		.')((?:\.php3?|(?:.*[?&]id_(?:\1)=)?([0-9]+)(?:\.html)?)'
+		.'(?:[?&].*)?)$,', $url, $regs)) {
 			$type = preg_replace(',s$,', '', table_objet($regs[1]));
 			$_id = id_table_objet($regs[1]);
-			$id_objet = $regs[2];
+			$suite = $regs[2];
+			$id_objet = $regs[3];
 		}
 	}
 	if ($id_objet) {
-		$url_propre = generer_url_entite($id_objet, $type, $args, $ancre);
 		$contexte = array($_id => $id_objet);
+		$url_propre = generer_url_entite($id_objet, $type);
 		if (strlen($url_propre)
 		AND !strstr($url,$url_propre)) {
-			$reste = preg_replace('/^&/','?',
-				preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
-			$url_redirect = "$url_propre$reste";
-			return array($contexte, $type, $url_redirect);
-		}
-	}
-	/* Fin compatibilite anciennes urls */
+			list(,$hash) = explode('#', $url_propre);
+			$args = array();
+			foreach(explode('&', $regs[2]) as $fragment) {
+				if ($fragment != "$_id=$id_objet")
+					$args[] = $fragment;
+			}
+			$url_redirect = generer_url_entite($id_objet, $type, join('&',array_filter($args)), $hash);
 
-	if ($id_objet) {
-		$url_propre = generer_url_entite($id_objet, $type, $args, $ancre);
-		$contexte = array($id_table_objet => $id_objet);
-		if (strlen($url_propre)
-		AND !strstr($url,$url_propre)) {
-			include_spip('inc/headers');
-			// recuperer les arguments supplementaires (&debut_xxx=...)
-			$reste = preg_replace('/^&/','?',
-				preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
-			$url_redirect = "$url_propre$reste";
 			return array($contexte, $type, $url_redirect);
 		}
 	}
