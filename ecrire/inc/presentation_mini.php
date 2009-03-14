@@ -343,7 +343,7 @@ function fin_page()
 			. "'>"
 			.  _T("access_interface_graphique")
 			. "</a></div>")
-		: ("<div style='text-align: right; ' class='verdana1 spip_xx-small'>"
+		: ("<div id='copyright'>"
 			. info_copyright()
 			. "<br />"
 		 	. _T('info_copyright_doc',
