@@ -149,8 +149,13 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	if (is_null($logname))
 		$logname = defined('_FILE_LOG') ? _FILE_LOG : 'spip';
 	if (!isset($compteur[$logname])) $compteur[$logname] = 0;
-	if (($logname != 'maj') AND
-	    ( $compteur[$logname]++ > _MAX_LOG || !$nombre_de_logs || !$taille_des_logs))
+	if ($logname != 'maj'
+	AND defined('_MAX_LOG')
+	AND (
+		$compteur[$logname]++ > _MAX_LOG
+		OR !$nombre_de_logs
+		OR !$taille_des_logs
+	))
 		return;
 
 	$logfile = ($logdir===NULL ? _DIR_LOG : $logdir)
@@ -184,7 +189,8 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 		fclose($f);
 	}
 
-	if ($rotate-- > 0) {
+	if ($rotate-- > 0
+	AND function_exists('spip_unlink')) {
 		spip_unlink($logfile . '.' . $rotate);
 		while ($rotate--) {
 			@rename($logfile . ($rotate ? '.' . $rotate : ''), $logfile . '.' . ($rotate + 1));
@@ -192,7 +198,8 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	}
 
 	// Dupliquer les erreurs specifiques dans le log general
-	if ($logname !== _FILE_LOG)
+	if ($logname !== _FILE_LOG
+	AND defined('_FILE_LOG'))
 		spip_log($logname=='maj' ? 'cf maj.log' : $message);
 }
 
