@@ -201,4 +201,11 @@ $GLOBALS['maj'][13135] = array(array('maj_13135'));
 // Type flac: http://flac.sourceforge.net
 $GLOBALS['maj'][13333] = array(array('upgrade_types_documents'));
 
+// http://archives.rezo.net/spip-zone.mbox/200903.mbox/%3Cbfc33ad70903141606q2e4c53f2k4fef6b45e611a04f@mail.gmail.com%3E
+
+$GLOBALS['maj'][13833] = array(
+array('sql_alter',"TABLE spip_documents_liens ADD INDEX objet(id_objet,objet)"))
+;
+
+
 ?>
