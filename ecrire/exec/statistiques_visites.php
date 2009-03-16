@@ -120,7 +120,7 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 
 	$order = "date";
 
-	$where2 = $duree ? "$order > DATE_SUB(NOW(),INTERVAL $duree $type)": '';
+	$where2 = $duree ? "$order > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).",INTERVAL $duree $type)": '';
 	if ($where) $where2 = $where2 ?  "$where2 AND $where" : $where;
 	$log = statistiques_collecte_date('visites', "(CEIL(UNIX_TIMESTAMP($order) / $interval) *  $interval)", $table, $where2, $serveur);
 

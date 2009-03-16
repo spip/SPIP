@@ -55,7 +55,7 @@ function publier_branche_rubrique($id_rubrique)
 	do {
 		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques AS R', "R.id_rubrique=$id_rubrique AND  R.statut != 'publie'");
 		if (id_parent === NULL) break;
-		sql_update('spip_rubriques', array('statut'=>"'publie'", 'date'=>'NOW()'), "id_rubrique=$id_rubrique");
+		sql_updateq('spip_rubriques', array('statut'=>'publie', 'date'=>date('Y-m-d H:i:s')), "id_rubrique=$id_rubrique");
 		$id_rubrique = $id_parent;
 	} while ($id_rubrique);
 
@@ -70,7 +70,7 @@ function publier_branche_rubrique($id_rubrique)
 function depublier_branche_rubrique_if($id_rubrique)
 {
 	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
-		" AND date <= NOW()" : '';
+		" AND date <= ".sql_quote(date('Y-m-d H:i:s')) : '';
 
 #	spip_log("depublier_branche_rubrique($id_rubrique ?");
 	$id_pred = $id_rubrique;
@@ -141,7 +141,7 @@ function calculer_rubriques_publiees() {
 
 	// Afficher les articles post-dates ?
 	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
-		"AND fille.date <= NOW()" : '';
+		"AND fille.date <= ".sql_quote(date('Y-m-d H:i:s')) : '';
 
 	$r = sql_select("rub.id_rubrique AS id, max(fille.date) AS date_h", "spip_rubriques AS rub, spip_articles AS fille", "rub.id_rubrique = fille.id_rubrique AND fille.statut='publie' $postdates ", "rub.id_rubrique");
 	while ($row = sql_fetch($r))
@@ -343,13 +343,13 @@ function calculer_prochain_postdate($check= false) {
 	include_spip('base/abstract_sql');
 	if ($check) {
 		$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
-			"AND A.date <= NOW()" : '';
+			"AND A.date <= ".sql_quote(date('Y-m-d H:i:s')) : '';
 
 		$r = sql_select("DISTINCT A.id_rubrique AS id", "spip_articles AS A LEFT JOIN spip_rubriques AS R ON A.id_rubrique=R.id_rubrique", "R.statut != 'publie' AND A.statut='publie'$postdates");
 		while ($row = sql_fetch($r))
 			publier_branche_rubrique($row['id']);
 	}
-	$t = sql_fetsel("date", "spip_articles", "statut='publie' AND date > NOW()", "", "date", "1");
+	$t = sql_fetsel("date", "spip_articles", "statut='publie' AND date > ".sql_quote(date('Y-m-d H:i:s')), "", "date", "1");
 	
 	if ($t) {
 		$t =  $t['date'];

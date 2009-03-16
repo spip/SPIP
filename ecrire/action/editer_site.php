@@ -135,7 +135,7 @@ function insert_syndic($id_rubrique) {
 		'id_rubrique' => $id_rubrique,
 		'id_secteur' => $id_secteur,
 		'statut' => 'prop',
-		'date' => 'NOW()'));
+		'date' => date('Y-m-d H:i:s')));
 }
 
 
@@ -188,9 +188,7 @@ function revisions_sites ($id_syndic, $c=false) {
 			if ($d = _request('date', $c)) {
 				$champs['date'] = $d;
 			} else {
-				# on prend la date de MySQL pour eviter un decalage cf. #975
-				$d = sql_fetsel('NOW() AS d');
-				$champs['date'] = $d['d'];
+				$champs['date'] = date('Y-m-d H:i:s');
 			}
 		}
 	} else

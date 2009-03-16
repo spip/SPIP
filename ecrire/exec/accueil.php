@@ -438,7 +438,7 @@ function exec_accueil_dist()
 
 	if ($GLOBALS['meta']["post_dates"] == "non"
 	AND $connect_statut == '0minirezo')
-		echo afficher_objets('article',_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>NOW()", 'ORDER BY' => "date"));
+		echo afficher_objets('article',_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>".sql_quote(date('Y-m-d H:i:s')), 'ORDER BY' => "date"));
 
 
 	// Les articles recents
@@ -446,7 +446,7 @@ function exec_accueil_dist()
 	echo afficher_objets('article',
 	#afficher_plus(generer_url_ecrire('articles_page')) .
 	_T('articles_recents'), array("WHERE" => "statut='publie'" .($GLOBALS['meta']["post_dates"] == "non"
-		? " AND date<NOW()" : ''),
+		? " AND date<=".sql_quote(date('Y-m-d H:i:s')) : ''),
 		'ORDER BY' => "date DESC", 'LIMIT' => '0,4'));
 
 //

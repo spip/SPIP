@@ -193,7 +193,7 @@ function formulaires_signature_reponse_confirmation_dist($var_confirm = '') {
 	$site_unique = $row['site_unique']  == "oui";
 
 	sql_updateq('spip_signatures',
-		    array('statut' => 'publie', 'date_time' => 'NOW()'),
+		    array('statut' => 'publie', 'date_time' => date('Y-m-d H:i:s')),
 		    "id_signature=$id_signature");
 
 	if ($email_unique) {
@@ -250,7 +250,7 @@ function inc_controler_signature_dist($id_article, $nom, $mail, $message, $site,
 
 	$id_signature = sql_insertq('spip_signatures', array(
 		'id_article' => $id_article,
-		'date_time' => 'NOW()',
+		'date_time' => date('Y-m-d H:i:s'),
 		'statut' => $statut,
 		'ad_email' => $mail,
 		'url_site' => $url_site));

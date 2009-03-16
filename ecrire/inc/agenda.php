@@ -1549,7 +1549,7 @@ function quete_calendrier_taches_rv () {
 	$r = array();
 	if (!$connect_id_auteur) return $r;
 
-	$result = sql_select("messages.texte AS description, messages.id_message AS uid, messages.date_heure AS dtstart, messages.date_fin AS dtend, messages.titre AS summary, messages.type AS category, messages.rv AS location", "spip_messages AS messages LEFT JOIN spip_auteurs_messages AS lien ON (lien.id_message=messages.id_message)", "(lien.id_auteur=$connect_id_auteur OR messages.type='affich') AND messages.rv='oui' AND ( (messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH))	OR (messages.date_heure < NOW() AND messages.date_fin > NOW() )) AND messages.statut='publie'", "messages.id_message",  "messages.date_heure");
+	$result = sql_select("messages.texte AS description, messages.id_message AS uid, messages.date_heure AS dtstart, messages.date_fin AS dtend, messages.titre AS summary, messages.type AS category, messages.rv AS location", "spip_messages AS messages LEFT JOIN spip_auteurs_messages AS lien ON (lien.id_message=messages.id_message)", "(lien.id_auteur=$connect_id_auteur OR messages.type='affich') AND messages.rv='oui' AND ( (messages.date_heure > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 MONTH))	OR (messages.date_heure < ".sql_quote(date('Y-m-d H:i:s'))." AND messages.date_fin > ".sql_quote(date('Y-m-d H:i:s'))." )) AND messages.statut='publie'", "messages.id_message",  "messages.date_heure");
 	while ($row = sql_fetch($result)) {
 		$row['url'] = tache_redirige($row);
 		$r[] = $row;

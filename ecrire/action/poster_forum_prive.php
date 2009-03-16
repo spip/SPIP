@@ -40,7 +40,7 @@ function action_poster_forum_prive_post($r)
 			$objet => $id,
 			'titre' => $titre_message,
 			'texte' => $texte,
-			'date_heure' => 'NOW()',
+			'date_heure' => date('Y-m-d H:i:s'),
 			'nom_site' => _request('nom_site'),
 			'url_site' => _request('url_site'),
 			'statut' => $statut,
