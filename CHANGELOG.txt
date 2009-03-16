@@ -1,3 +1,23 @@
+2.0.5 -> 2.0.6 (16 mars 2009)
+
+Revision: 13834 report http://trac.rezo.net/trac/spip/changeset/13833 ajout d'un index sur spip_documents_liens
+Revision: 13830 passer l'id_auteur et l'id_article au squelette du forumlaire ecrire_auteur l'id etait calculé mais pas passé, on l'ajoute donc aussi
+Revision: 13828 report de http://trac.rezo.net/trac/spip/changeset/13827 redirections anciennes urls
+Revision: 13826 report discret de exec=fond introduit dans http://trac.rezo.net/trac/spip/changeset/13800 afin de pouvoir utiliser un meme plugin en version stable et dev etant un ajout de fonctionnalité, cela ne devrait pas poser de problème...
+Revision: 13824 report de http://trac.rezo.net/trac/spip/changeset/13822 et http://trac.rezo.net/trac/spip/changeset/13823 -- correction erreur 404 sur les urls de type spip.php  
+Revision: 13820 donner une PRIMARY KEY quand il n'y a rien (VIEW MySQL)
+Revision: 13818 toujours proteger les file_exists()
+Revision: 13812 ajout discret du pipeline styliser pour le futur 2.0.6, afin que les plugins comme SPIP Clear puissent s'appuyer dessus sans surcharger le fichier.
+Revision: 13809 coquille css (pi_r)
+Revision: 13808 Report de http://trac.rezo.net/trac/spip/changeset/13807 -- ne pas empecher le changement de mode image/document sur les images de rubriques... 
+Revision: 13801 manque de quotes (denisb)
+Revision: 13798 un lien du type {{{ [->http://www.favicon.cc/?action=icon&file_id=29805] }}} doit se transformer proprement avec un {{{ &amp; }}}
+Revision: 13797 Report de http://trac.rezo.net/trac/spip/changeset/10796 : #CHAPO doit enlever les redirections, mais pas  #CHAPO* qui doit les laisser.
+Revision: 13795 report de http://trac.rezo.net/trac/spip/changeset/13794 : charger les autorisations au moment du traitement de #FORMULAIRE_EDITER_AUTEUR appellé depuis le public
+Revision: 13793 Le début des vertèbres n'est pas la vertèbre nommée début [http://archives.rezo.net/spip-dev.mbox/200902.mbox/raw/%3C49A3FF0F.8070102@yahoo.fr%3E/ YannX].
+Revision: 13792 Ne pas tenter de réparer l'irréparable quand il faut prendre de la distance.
+Revision: 13791 Fallait savoir que {{{$x[$y]}}} convertit la chaîne {{{$y}}} en nombre quand elle est interprétable ainsi. PHP, le langage dont vous nous ne découvrirez jamais tous les pièges. Super argument publicitaire.
+
 2.0.4 -> 2.0.5
 
 - report de [13778] : l'installation sur les serveurs mysql avec un sql_mode par defaut etait cassee repare les installations sous easyphp 3.0 par defaut (13788)
