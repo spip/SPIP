@@ -101,7 +101,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			unset($a['type_image']);
 			unset($a['body']);
 
-			$a['date'] = 'NOW()';
+			$a['date'] = date('Y-m-d H:i:s');
 			$a['distant'] = 'oui';
 			$a['mode'] = 'document';
 			$a['fichier'] = set_spip_doc($source);
@@ -258,7 +258,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 				$mode = 'document';
 		}
 		$a =  array(
-			'date' => 'NOW()',
+			'date' => date('Y-m-d H:i:s'),
 			'distant' => 'non',
 			'mode' => $mode,
 			'titre'=> $titre,

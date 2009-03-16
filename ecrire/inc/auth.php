@@ -282,11 +282,14 @@ function auth_a_loger()
 }
 
 // http://doc.spip.org/@auth_trace
-function auth_trace($row, $date='NOW()')
+function auth_trace($row, $date=null)
 {
 	// Indiquer la connexion. A la minute pres ca suffit.
 	if (!is_numeric($connect_quand = $row['quand']))
 		$connect_quand = strtotime($connect_quand);
+
+	if (is_null($date))
+		$date = date('Y-m-d H:i:s');
 	
 	if ((time() - $connect_quand)  >= 60) {
 		sql_updateq("spip_auteurs", array("en_ligne" => $date), "id_auteur=" .$row['id_auteur']);
