@@ -234,7 +234,8 @@ function formulaires_forum_verifier_dist(
 
 	if (!count($erreurs) AND !_request('confirmer_previsu_forum')){
 		if ($afficher_texte != 'non') {
-			$previsu = inclure_previsu($texte, $titre, _request('url_site'), _request('nom_site'), _request('ajouter_mot'), $doc);
+			$previsu = inclure_previsu($texte, $titre, _request('url_site'), _request('nom_site'), _request('ajouter_mot'), $doc,
+				$id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic);
 			$erreurs['previsu'] = $previsu;
 		}
 	}
@@ -257,8 +258,8 @@ function forum_documents_acceptes()
 }
 
 // http://doc.spip.org/@inclure_previsu
-function inclure_previsu($texte,$titre, $url_site, $nom_site, $ajouter_mot, $doc)
-{
+function inclure_previsu($texte,$titre, $url_site, $nom_site, $ajouter_mot, $doc,
+$id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
 	$bouton = _T('forum_message_definitif');
 	include_spip('public/assembler');
 	include_spip('public/composer');
@@ -277,10 +278,14 @@ function inclure_previsu($texte,$titre, $url_site, $nom_site, $ajouter_mot, $doc
 			'ajouter_mot' => (is_array($ajouter_mot) ? $ajouter_mot : array($ajouter_mot)),
 			'ajouter_document' => $doc,
 			'erreur' => $erreur,
-			'bouton' => $bouton
+			'bouton' => $bouton,
+			'id_rubrique' => $id_rubrique,
+			'id_forum' => $id_forum,
+			'id_article' => $id_article,
+			'id_breve' => $id_breve,
+			'id_syndic' => $id_syndic
 			)
-					       ),
-					 false));
+		), false));
 }
 
 
