@@ -422,14 +422,20 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 	if ($GLOBALS['profondeur_url']<=0
 	AND $_SERVER['REQUEST_METHOD'] != 'POST') {
 		// Decoder l'url html, page ou standard
+		// /article12.html
+		// /article.php3?id_article=12
+		// /spip.php?article12
 		$objets = 'article|breve|rubrique|mot|auteur|site|syndic';
 		if (preg_match(
-		',(?:^|/|[?&](?:page=)?)('.$objets
-		.')(?:\.php3?|(?:[?&]id_(?:\1)=)?([0-9]+)(?:\.html)?)'
-		.'(?:[?&].*)?$,', $url, $regs)) {
+		',^(?:[^?]*/)?('.$objets.')([0-9]+)(?:\.html)?([?&].*)?$,', $url, $regs)
+		OR preg_match(
+		',^(?:[^?]*/)?('.$objets.')\.php3?[?]id_\1=([0-9]+)([?&].*)?$,', $url, $regs)
+		OR preg_match(
+		',^(?:[^?]*/)?(?:spip[.]php)?[?]('.$objets.')([0-9]+)(&.*)?$,', $url, $regs)) {
 			$type = preg_replace(',s$,', '', table_objet($regs[1]));
 			$_id = id_table_objet($regs[1]);
 			$id_objet = $regs[2];
+			$suite = $regs[3];
 		}
 	}
 	if ($id_objet) {
@@ -439,7 +445,7 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 		AND !strstr($url,$url_propre)) {
 			list(,$hash) = explode('#', $url_propre);
 			$args = array();
-			foreach(explode('&', $regs[2]) as $fragment) {
+			foreach(array_filter(explode('&', $suite)) as $fragment) {
 				if ($fragment != "$_id=$id_objet")
 					$args[] = $fragment;
 			}
