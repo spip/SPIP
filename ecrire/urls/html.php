@@ -66,13 +66,17 @@ function urls_html_dist($i, $entite, $args='', $ancre='') {
 	// Decoder l'url html, page ou standard
 	$objets = 'article|breve|rubrique|mot|auteur|site|syndic';
 	if (preg_match(
-	',(?:^|/|[?&](?:page=)?)('.$objets
-	.')(?:\.php3?|(?:[?&]id_(?:\1)=)?([0-9]+)(?:\.html)?)'
-	.'(?:[?&].*)?$,', $url, $regs)) {
+	',^(?:[^?]*/)?('.$objets.')([0-9]+)(?:\.html)?([?&].*)?$,', $url, $regs)
+	OR preg_match(
+	',^(?:[^?]*/)?('.$objets.')\.php3?[?]id_\1=([0-9]+)([?&].*)?$,', $url, $regs)
+	OR preg_match(
+	',^(?:[^?]*/)?(?:spip[.]php)?[?]('.$objets.')([0-9]+)(&.*)?$,', $url, $regs)) {
 		$type = preg_replace(',s$,', '', table_objet($regs[1]));
 		$_id = id_table_objet($regs[1]);
-		$contexte[$_id] = $id = $regs[2];
-		return array($contexte, $type);
+		$id_objet = $regs[2];
+		$suite = $regs[3];
+		$contexte = array($_id => $id_objet);
+		return array($contexte, $type, null, $type);
 	}
 
 	/*
