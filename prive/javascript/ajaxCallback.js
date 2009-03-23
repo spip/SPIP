@@ -12,7 +12,7 @@ if(!jQuery.load_handlers) {
 	// Call the functions that have been added to onAjaxLoad
 	//
 	function triggerAjaxLoad(root) {
-    for ( var i = 0; i < jQuery.load_handlers.length; i++ )
+		for ( var i = 0; i < jQuery.load_handlers.length; i++ )
 			jQuery.load_handlers[i].apply( root );
 	};
 
@@ -232,8 +232,9 @@ jQuery(function() {
 
 // ... et a chaque fois que le DOM change
 onAjaxLoad(function() {
-	if (jQuery){
-		jQuery('form', this).parents('div.ajax')
+	var tmp;
+	if (jQuery && (tmp=jQuery('form', this).fn) && tmp.fn.formulaire_dyn_ajax) {
+		tmp.parents('div.ajax')
 		.formulaire_dyn_ajax();
 		jQuery('div.ajaxbloc', this)
 		.ajaxbloc();
