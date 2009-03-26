@@ -280,7 +280,7 @@ function echappe_retour_modeles($letexte)
 
 	// Dans l'espace prive, securiser ici
 	if (!_DIR_RESTREINT)
-		$letexte = interdire_scripts($letexte);
+		$letexte = interdire_scripts($letexte,true);
 
 	return trim($letexte);
 }
