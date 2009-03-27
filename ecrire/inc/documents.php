@@ -44,19 +44,12 @@ function get_spip_doc($fichier) {
 	return $fichier;
 }
 
-// Filtre pour #ID_DOCUMENT ou #FICHIER
+// Filtre pour #FICHIER
 
 // http://doc.spip.org/@contenu_document
 function contenu_document($arg)
 {
-	if (is_numeric($arg)) {
-		$r = sql_fetsel("fichier,distant", "spip_documents", "id_document=".sql_quote($arg));
-		if (!$r) return '';
-		$f = $r['fichier'];
-		$f = ($r['distant'] =='oui') ? copie_locale($f) : get_spip_doc($f);
-	} else if (!$f = copie_locale($arg)) return '';
-
-	return spip_file_get_contents($f);
+	return spip_file_get_contents(get_spip_doc($arg));
 }
 
 // http://doc.spip.org/@generer_url_document_dist
