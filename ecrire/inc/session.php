@@ -56,7 +56,7 @@ function ajouter_session($auteur) {
 	OR !preg_match(',^'.$auteur['id_auteur'].'_,', $_COOKIE['spip_session']))
 		$_COOKIE['spip_session'] = $auteur['id_auteur'].'_'.md5(uniqid(rand(),true));
 
-	$fichier_session = fichier_session($_COOKIE['spip_session'], $GLOBALS['meta']['alea_ephemere']);
+	$fichier_session = fichier_session('alea_ephemere');
 
 	if (!isset($auteur['hash_env'])) $auteur['hash_env'] = hash_env();
 	if (!isset($auteur['ip_change'])) $auteur['ip_change'] = false;
@@ -166,7 +166,7 @@ function supprimer_sessions($id_auteur, $toutes=true) {
 	}
 	else {
 		verifier_session();
-		spip_unlink(fichier_session($_COOKIE['spip_session'], $GLOBALS['meta']['alea_ephemere'], true));
+		spip_unlink(fichier_session('alea_ephemere', true));
 	}
 
 	// forcer le recalcul de la session courante
@@ -182,17 +182,18 @@ function supprimer_sessions($id_auteur, $toutes=true) {
 // http://doc.spip.org/@verifier_session
 function verifier_session($change=false) {
 	// si pas de cookie, c'est fichu
+
 	if (!isset($_COOKIE['spip_session']))
 		return false;
 
 	// Tester avec alea courant
-	$fichier_session = fichier_session($_COOKIE['spip_session'], $GLOBALS['meta']['alea_ephemere'], true);
+	$fichier_session = fichier_session('alea_ephemere', true);
 
 	if ($fichier_session AND @file_exists($fichier_session)) {
 		include($fichier_session);
 	} else {
 		// Sinon, tester avec alea precedent
-		$fichier_session = fichier_session($_COOKIE['spip_session'], $GLOBALS['meta']['alea_ephemere_ancien'], true);
+		$fichier_session = fichier_session('alea_ephemere_ancien', true);
 		if (!$fichier_session OR !@file_exists($fichier_session)) return false;
 
 		// Renouveler la session avec l'alea courant
@@ -204,6 +205,7 @@ function verifier_session($change=false) {
 	// Compatibilite ascendante : auteur_session est visiteur_session si
 	// c'est un auteur SPIP authentifie (tandis qu'un visiteur_session peut
 	// n'etre qu'identifie, sans aucune authentification).
+
 	if ($GLOBALS['visiteur_session']['id_auteur'])
 		$GLOBALS['auteur_session'] = &$GLOBALS['visiteur_session'];
 
@@ -246,7 +248,18 @@ function rejouer_session()
 // Calcule le nom du fichier session
 //
 // http://doc.spip.org/@fichier_session
-function fichier_session($id_session, $alea, $tantpis=false) {
+function fichier_session($alea, $tantpis=false) {
+	if (!isset($GLOBALS['meta'][$alea])) {
+		include_spip('base/abstract_sql');
+		$GLOBALS['meta'][$alea] = sql_getfetsel('valeur', 'spip_meta', "nom=" . sql_quote($alea));
+		if ((!$GLOBALS['meta'][$alea]) AND !$tantpis) {
+			include_spip('inc/minipres');
+			echo minipres();
+			spip_log("$alea indisponible");
+			exit;
+		}
+	}
+
 	$repertoire = _DIR_SESSIONS;
 	if(!@file_exists($repertoire)) {
 		if ($tantpis) return '';
@@ -254,7 +267,8 @@ function fichier_session($id_session, $alea, $tantpis=false) {
 		include_spip('inc/flock');
 		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 	}
-	return $repertoire . intval($id_session).'_'.md5($id_session.' '.$alea). '.php';
+	$c = $_COOKIE['spip_session'];
+	return $repertoire . intval($c) .'_' . md5($c.' '.$GLOBALS['meta'][$alea]). '.php';
 }
 
 //

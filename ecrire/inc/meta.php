@@ -46,7 +46,7 @@ function inc_meta_dist()
 		} else spip_log("impossible d'ecrire dans " . _FILE_META);
 	}
 	// et refaire le cache si on a du lire en base
-	if (!$new) ecrire_fichier(_FILE_META, serialize($GLOBALS['meta']));
+	if (!$new) touch_meta();
 }
 
 // fonctions aussi appelees a l'install ==> spip_query en premiere requete 
@@ -68,10 +68,19 @@ function lire_metas() {
 	}
 	return $GLOBALS['meta'];
 }
+
+// Mettre en cache la liste des meta, sauf les valeurs sensibles 
+// pour qu'elles ne soient pas visibiles dans un fichier.souvent en 777
 // http://doc.spip.org/@touch_meta
-function touch_meta($antidate){
-	if (!@touch(_FILE_META, $antidate))
-		ecrire_fichier(_FILE_META, serialize(array_merge(array('touch'=>$antidate),$GLOBALS['meta'])));
+function touch_meta($antidate= false){
+
+	if (!$antidate OR !@touch(_FILE_META, $antidate)) {
+		$r = $GLOBALS['meta'];
+		unset($r['alea_ephemere']);
+		unset($r['alea_ephemere_ancien']);
+		if ($antidate) $r['touch']= $antidate;
+		ecrire_fichier(_FILE_META, serialize($r));
+	}
 }
 
 // http://doc.spip.org/@effacer_meta
@@ -96,10 +105,11 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 	$GLOBALS['meta'][$nom] = $valeur;
 	include_spip('base/abstract_sql');
 	$res = sql_select("*","spip_meta","nom=" . sql_quote($nom),'','','','','','continue');
+	// table pas encore installee, travailler en php seulement
 	if (!$res) return; 
 	$res = sql_fetch($res);
-	// conserver la valeur de impt si existante
-	// et ne pas invalider le cache si affectation a l'identique
+	// ne pas invalider le cache si affectation a l'identique
+	// (tant pis si impt aurait du changer)
 	if ($res AND $valeur == $res['valeur']) return;
 	// cf effacer pour comprendre le double touch
 	$antidate = time() - (_META_CACHE_TIME<<1);

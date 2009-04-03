@@ -99,8 +99,18 @@ function caracteriser_auteur() {
 }
 
 // http://doc.spip.org/@_action_auteur
-function _action_auteur($action, $id_auteur, $pass, $nom_alea) {
-	return md5($action.$id_auteur.$pass .@$GLOBALS['meta'][$nom_alea]);
+function _action_auteur($action, $id_auteur, $pass, $alea) {
+	if (!isset($GLOBALS['meta'][$alea]) AND _request('exec')!=='install') {
+		include_spip('base/abstract_sql');
+		$GLOBALS['meta'][$alea] = sql_getfetsel('valeur', 'spip_meta', "nom=" . sql_quote($alea));
+		if (!($GLOBALS['meta'][$alea])) {
+			include_spip('inc/minipres');
+			echo minipres();
+			spip_log("$alea indisponible");
+			exit;
+		}
+	}
+	return md5($action.$id_auteur.$pass.@$GLOBALS['meta'][$alea]);
 }
 
 // http://doc.spip.org/@calculer_action_auteur
@@ -147,6 +157,5 @@ function calculer_cle_action($action) {
 function verifier_cle_action($action, $cle) {
 	return ($cle == calculer_cle_action($action));
 }
-
 
 ?>
