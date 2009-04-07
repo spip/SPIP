@@ -60,8 +60,7 @@ function action_acceder_document_dist() {
 			//
 			include_spip('inc/securiser_action');
 			$cle = _request('cle');
-			$x = calculer_cle_action($doc['id_document'].','.$f);
-			if ($cle != $x) {
+			if (!verifier_cle_action($doc['id_document'].','.$f, $cle)) {
 				spip_log("acces interdit $x <> $cle");
 				$status = 403;
 			}

@@ -78,6 +78,7 @@ function touch_meta($antidate= false){
 		$r = $GLOBALS['meta'];
 		unset($r['alea_ephemere']);
 		unset($r['alea_ephemere_ancien']);
+		unset($r['secret_du_site']);
 		if ($antidate) $r['touch']= $antidate;
 		ecrire_fichier(_FILE_META, serialize($r));
 	}
