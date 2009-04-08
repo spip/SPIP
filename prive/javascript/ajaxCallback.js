@@ -269,9 +269,8 @@ jQuery(function() {
 
 // ... et a chaque fois que le DOM change
 onAjaxLoad(function() {
-	var tmp;
-	if (jQuery && (tmp=jQuery('form', this).fn) && tmp.fn.formulaire_dyn_ajax) {
-		tmp.parents('div.ajax')
+	if (jQuery){ 
+		jQuery('form', this).parents('div.ajax')
 		.formulaire_dyn_ajax();
 		jQuery('div.ajaxbloc', this)
 		.ajaxbloc();
