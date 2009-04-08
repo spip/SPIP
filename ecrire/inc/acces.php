@@ -67,9 +67,13 @@ function creer_uniqid() {
 
 // http://doc.spip.org/@renouvelle_alea
 function renouvelle_alea() {
-	$alea = md5(creer_uniqid());
+	if (!isset($GLOBALS['meta']['alea_ephemere'])){
+		include_spip('base/abstract_sql');
+		$GLOBALS['meta']['alea_ephemere'] = sql_getfetsel('valeur', 'spip_meta', "nom='alea_ephemere'");
+	}
 	ecrire_meta('alea_ephemere_ancien', @$GLOBALS['meta']['alea_ephemere'], 'non');
-	ecrire_meta('alea_ephemere', $alea, 'non');
+	$GLOBALS['meta']['alea_ephemere'] = md5(creer_uniqid());
+	ecrire_meta('alea_ephemere', $GLOBALS['meta']['alea_ephemere'], 'non');
 	ecrire_meta('alea_ephemere_date', time(), 'non');
 	spip_log("renouvellement de l'alea_ephemere");
 }
