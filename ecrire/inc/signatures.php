@@ -41,7 +41,7 @@ function inc_signatures_dist($script, $id, $debut, $pas, $where, $order, $type='
 	foreach($r as $k => $row)
 		$r[$k] = signatures_edit($script, $id, $arg, $row);
 
-	return "<br />\n" . join("<br />\n", $r);
+	return $res."<br />\n" . join("<br />\n", $r);
 }
 
 // http://doc.spip.org/@signatures_edit
