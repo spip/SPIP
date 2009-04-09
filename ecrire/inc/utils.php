@@ -1080,7 +1080,8 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_DIR_AIDE',  _DIR_CACHE . "aide/");
 	define('_DIR_TMP', $ti);
 
-	define('_FILE_META', $ti . 'meta_cache.txt');
+	# attention .php obligatoire pour ecrire_fichier_securise
+	define('_FILE_META', $ti . 'meta_cache.php');
 
 	define('_DIR_VAR', $ta);
 
