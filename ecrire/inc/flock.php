@@ -147,6 +147,33 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 	return false;
 }
 
+/**
+ * Ecrire un contenu dans un fichier encapsule en php pour en empecher l'acces en l'absence
+ * de htaccess
+ * @param string $fichier
+ * @param <type> $contenu
+ * @param <type> $ecrire_quand_meme
+ * @param <type> $truncate 
+ */
+function ecrire_fichier_securise ($fichier, $contenu, $ecrire_quand_meme = false, $truncate=true) {
+	$fichier .= ".php";
+	$contenu = "<"."?php die ('Acces interdit'); ?".">\n" . $contenu;
+	return ecrire_fichier($fichier, $contenu, $ecrire_quand_meme, $truncate);
+}
+
+/**
+ * Lire un fichier encapsule en php
+ * @param <type> $fichier
+ * @param <type> $contenu
+ * @param <type> $options 
+ */
+function lire_fichier_securise ($fichier, &$contenu, $options=false) {
+	if ($res = lire_fichier("$fichier.php",$contenu,$options)){
+		$contenu = substr($contenu,strlen("<"."?php die ('Acces interdit'); ?".">\n"));
+	}
+	return $res;
+}
+
 // http://doc.spip.org/@raler_fichier
 function raler_fichier($fichier)
 {
