@@ -120,6 +120,9 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 
 		preg_match(",^(.*)\.([^.]+)$,", $nom_envoye, $match);
 		@list(,$titre,$ext) = $match;
+		// securite : pas de . en dehors de celui separant l'extension
+		// sinon il est possible d'injecter du php dans un toto.php.txt
+		$nom_envoye = str_replace('.','-',$titre).'.'.$ext;
 		if ($titrer) {
 			$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
 		} else $titre = '';
