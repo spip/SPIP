@@ -142,8 +142,11 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 	OR (@preg_match($preg,'')===FALSE) ) {
 		$methode = 'LIKE';
 		$u = $GLOBALS['meta']['pcre_u'];
-		// eviter les parentheses qui interferent avec pcre par la suite (dans le preg_patch_all) s'il y a des reponses
-		$recherche = str_replace(array('(',')','?'),array('\(','\)', '[?]'),$recherche);
+		// eviter les parentheses qui interferent avec pcre par la suite (dans le preg_match_all) s'il y a des reponses
+		$recherche = str_replace(
+			array('(',')','?','[', ']'),
+			array('\(','\)','[?]', '\[', '\]'),
+			$recherche);
 		$recherche_mod = $recherche;
 		
 		// echapper les % et _
