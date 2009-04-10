@@ -37,6 +37,10 @@ function formulaires_ecrire_auteur_verifier_dist($id_auteur, $id_article, $mail)
 		$erreurs['email_message_auteur'] = _T("info_obligatoire");
 	elseif(!email_valide($adres))
 		$erreurs['email_message_auteur'] = _T('form_prop_indiquer_email');
+	else {
+		include_spip('inc/session');
+		session_set('email', $adres);
+	}
 
 	if (!$sujet=_request('sujet_message_auteur'))
 		$erreurs['sujet_message_auteur'] = _T("info_obligatoire");
