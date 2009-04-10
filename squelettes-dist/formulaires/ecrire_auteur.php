@@ -14,7 +14,11 @@
 function formulaires_ecrire_auteur_charger_dist($id_auteur, $id_article, $mail){
 	include_spip('inc/texte');
 	$puce = definir_puce();
-	$valeurs = array('sujet_message_auteur'=>'','texte_message_auteur'=>'','email_message_auteur'=>'');
+	$valeurs = array(
+		'sujet_message_auteur'=>'',
+		'texte_message_auteur'=>'',
+		'email_message_auteur'=>$GLOBALS['visiteur_session']['email']
+	);
 	
 	// id du formulaire (pour en avoir plusieurs sur une meme page)
 	$valeurs['id'] = ($id_auteur ? '_'.$id_auteur : '_ar'.$id_article);
