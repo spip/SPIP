@@ -145,15 +145,37 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 	OR (@preg_match($preg,'')===FALSE) ) {
 		$methode = 'LIKE';
 		$u = $GLOBALS['meta']['pcre_u'];
+		// eviter les parentheses qui interferent avec pcre par la suite (dans le preg_match_all) s'il y a des reponses
+		$recherche = str_replace(
+			array('(',')','?','[', ']'),
+			array('\(','\)','[?]', '\[', '\]'),
+			$recherche);
+		$recherche_mod = $recherche;
+		
+		// echapper les % et _
+		$q = str_replace(array('%','_'), array('\%', '\_'), trim($recherche));
+		// les expressions entre " " sont un mot a chercher tel quel
+		// -> on remplace les espaces par un _ et on enleve les guillemets
+		if (preg_match(',["][^"]+["],Uims',$q,$matches)){
+			foreach($matches as $match){
+				// corriger le like dans le $q
+				$word = preg_replace(",\s+,Uims","_",$match);
+				$word = trim($word,'"');
+				$q = str_replace($match,$word,$q);
+				// corriger la regexp
+				$word = preg_replace(",\s+,Uims","[\s]",$match);
+				$word = trim($word,'"');
+				$recherche_mod = str_replace($match,$word,$recherche_mod);		
+			}
+		}
 		$q = sql_quote(
 			"%"
-			. preg_replace(",\s+,".$u, "%", str_replace(array('%','_'), array('\%', '\_'), trim($recherche)))
+			. preg_replace(",\s+,".$u, "%", $q)
 			. "%"
 		);
-		// eviter les parentheses qui interferent avec pcre par la suite (dans le preg_patch_all) s'il y a des reponses
-		$recherche = str_replace(array('(',')','?'),array('\(','\)', '[?]'),$recherche);
 		
-		$preg = '/'.preg_replace(",\s+,".$u, ".+", trim($recherche)).'/' . $options['preg_flags'];
+		$preg = '/'.preg_replace(",\s+,".$u, ".+", trim($recherche_mod)).'/' . $options['preg_flags'];
+		
 	} else {
 		$methode = 'REGEXP';
 		$q = sql_quote($recherche);
