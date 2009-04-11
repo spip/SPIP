@@ -132,6 +132,14 @@ function cache_valide(&$page, $date) {
 		return 0;
 }
 
+function cache_sessionne($chemin_cache, $creer=false) {
+	$fs = substr(md5($chemin_cache),0,8);
+	$a = substr($fs,0,1);
+	$b = sous_repertoire(_DIR_CACHE, $a);
+	if ($creer)
+		sous_repertoire($b, $fs);
+	return $a.'/'.$fs.'/_';
+}
 
 // Creer le fichier cache
 # Passage par reference de $page par souci d'economie
@@ -139,13 +147,14 @@ function cache_valide(&$page, $date) {
 function creer_cache(&$page, &$chemin_cache) {
 
 	// Si la page c1234 a un invalideur de session 'zz', sauver dans
-	// 'tmp/cache/a/c1234-zz.gz'
+	// 'tmp/cache/MD5(chemin_cache)/_zz'
 	// en prenant soin de supprimer un eventuel cache non-sessionne
 	// si l'ajout de #SESSION dans le squelette est recent
 	if (isset($page['invalideurs'])
 	AND isset($page['invalideurs']['session'])) {
 		supprimer_fichier(_DIR_CACHE . $chemin_cache);
-		$chemin_cache .= '-'.$page['invalideurs']['session'];
+		$chemin_cache = cache_sessionne($chemin_cache, true).$page['invalideurs']['session'];
+		
 	}
 
 	// l'enregistrer, compresse ou non...
@@ -215,11 +224,10 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	}
 
 	// Controler l'existence d'un cache nous correspondant, dans les
-	// quatre versions possibles : gzip ou non, session ou non
+	// deux versions possibles : session ou non
 	$chemin_cache = generer_nom_fichier_cache($contexte, $page);
-
-	if (@file_exists(_DIR_CACHE . ($f = $g = $chemin_cache))
-	OR (@file_exists(_DIR_CACHE . ($f = $chemin_cache.'-'.spip_session())))
+	if (@file_exists(_DIR_CACHE . ($f = $chemin_cache))
+	OR $fs = @file_exists(_DIR_CACHE . ($f = cache_sessionne($f).spip_session()))
 	) {
 		$lastmodified = @filemtime(_DIR_CACHE . $f);
 	} else
@@ -249,8 +257,11 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		|| @file_exists(_ACCESS_FILE_NAME))
 	) {
 		supprimer_fichier(_DIR_CACHE . $f);
-		if (in_array($GLOBALS['var_mode'], array('calcul', 'recalcul')))
-			array_map('supprimer_fichier', preg_files(_DIR_CACHE . $g));
+		if (in_array($GLOBALS['var_mode'], array('calcul', 'recalcul'))
+		AND $fs) {
+			include_spip('inc/invalideur');
+			purger_repertoire(dirname(_DIR_CACHE.$f));
+		}
 	}
 
 	// $delais par defaut (pour toutes les pages sans #CACHE{})
