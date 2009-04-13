@@ -1,3 +1,34 @@
+2.0.6 -> 2.0.7 (13 avril 2009)
+
+Revision: 13882 patch de vincent ramos pour #1703 + report des trucs modernes de inc/rechercher dans la branche 2.0
+Revision: 13881 pas de . en dehors de celui separant l'extension, sinon il est possible d'injecter du php dans un toto.php.txt, qu'apache peut vouloir traiter comme un .php normal (attaque dite 'de vlad' )
+Revision: 13880 session_set() lorsqu'on renseigne son email (suite de [13878])
+Revision: 13879 report [13878] afficher l'email de l'auteur connecte si on le connait (session)
+Revision: 13877 report et nettoyage de ecrire_fichier_securise()
+Revision: 13876 report de ecrire_fichier_securise [13867] pour mieux masquer le contenu de tmp/meta_cache.txt(.php) en cas d'ouverture inopinee de tmp/ aux regards curieux
+Revision: 13873 retour de la pagination dans le controle des petitions (bug introduit en [13320])
+Revision: 13872 Report de [13868] corrigeant l'aléa ancien.
+Revision: 13870 revert de [13846] qui casse le fonctionnement de la pagination AJAX
+Revision: 13865 il faut securiser les appels à propre et typo hors squelette (typiquement code php de l'espace privé), mais dans les squelettes, la sécurisation est intégrée, et il ne faut pas en rajouter. On utilise donc la presence du parametre connect pour distinguer les appels des squelettes qui le comportent tous, des appels historiques hors squelettes qui ne le mentionnent jamais. Corrolairement, en cas d'appel hors squelette avec un parametre connect, il convient d'appeler en plus interdire_script
+Revision: 13862 Nouvelle méthode pour l'authentification LDAP, qui devrait résoudre le bug dans certaines config d'Active Directory. Géraud Tardif remarque qu'il est idiot de risquer des bugs avec des champs absents pour trouver le login, puisqu'on l'a déjà. Il vaut donc mieux se rabattre sur lui, mais on modifie les signatures des fonctions auxilaires pour qu'il soit facile de surcharger {{{auth_ldap}}} de sorte qu'on réclame des champs supplémentaires et qu'on en tienne compte.
+Revision: 13859 Ignorer les lignes vides dans les CSV lorsque transformés en table HTML à la volée (Cyril).
+Revision: 13858 Ne pas utiliser intval quand on fabrique une requête SQL, celui-ci ayant des grands entiers en standard, contrairement à PHP (Camille). Vu son logo on aurait dû se méfier: un PHP, ça tronque énormément.
+Revision: 13857 Les distributions RedHat, Fedora et CentOS ont maintenant une installation d'Apache par défaut qui font que le AllowOverride est à None par défaut, avec comme conséquence que les {{{deny from all}}} installés par SPIP ne sont plus effectifs sur ces distributions non modifiées. En conséquence, report immédiat dans la branche stable de [13608], qui n'écrit plus dans tmp la valeur des aleas, qui sont des informations trop sensibles. A signaler à propos des aléas que l'alea_ancien n'est pas pris en compte pour les actions dont l'URL comporte ecrire/, il faut renoncer à ces URLs. Enfin, il faudrait insister dans la doc sur le fait que tmp/ et config/ doivent être interdits à la lecture publique, idéalement en les mettant à l'extérieur du DocumentRoot.
+Revision: 13856 Bug de puce 'meme-rubrique" des sites references
+Revision: 13853 un flag manquant pour preciser que l'on est dans l'espace prive
+Revision: 13852 pas d'exe´cution en public non plus !
+Revision: 13850 il est temps de suivre la prévision des oracles proteger l'espace privé, donc...
+Revision: 13848 eviter le die intempestif "spip_urls AS U insertion sans description" lors de la creation de nouvelles urls ... (bug introduit au detour de http://zone.spip.org/trac/spip/changeset/13838#file22)
+Revision: 13846 indentation + meilleure verification sr onAjaxLoad(), pour compat crayons++
+Revision: 13845 enieme correction des urls ... je vais peut-etre finir par y arriver
+Revision: 13844 report oublie de [13765] qui reparait les urls arbo avec types renommes
+Revision: 13843 permettre a la previsu de savoir ou elle se trouve (cf. http://www.spip-blog.net/forum-spip-org-comme-base-de.html )
+Revision: 13841 log plus explicite
+Revision: 13839 erreur sql sur date
+Revision: 13838 NOW() disparait au profit de la date php (a verifier svp)
+Revision: 13836 la date d'un article c'est celle du php, pas celle du SQL
+
+
 2.0.5 -> 2.0.6 (16 mars 2009)
 
 Revision: 13834 report http://trac.rezo.net/trac/spip/changeset/13833 ajout d'un index sur spip_documents_liens
