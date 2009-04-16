@@ -556,7 +556,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_question_vignettes_referer' => 'Wanneer u de statistieken raadpleegt, kunt u korte overzichten van de plaatsen van oorsprong van de bezoeken zichtbaar maken',
 'info_question_vignettes_referer_non' => 'Niet de vangsten van de sites van oorsprong van de bezoeken te kennen geven',
 'info_question_vignettes_referer_oui' => 'De vangsten van de siten van oorsprong van de bezoeken te kennen geven',
-'info_question_visiteur_ajout_document_forum' => 'Als u de bezoekers wilt machtigen om documenten (beelden, klanken…) samen te voegen aan hun berichten van forum, de lijst van de uitbreidingen van documenten hieronder aangeven toegelaten voor de ex forums (: gif, jpg, png, mp3).',
+'info_question_visiteur_ajout_document_forum' => 'Als u de bezoekers wilt machtigen om documenten (beelden, klankenâ€¦) samen te voegen aan hun berichten van forum, de lijst van de uitbreidingen van documenten hieronder aangeven toegelaten voor de ex forums (: gif, jpg, png, mp3).',
 'info_question_visiteur_ajout_document_forum_format' => 'Als u alle soorten documenten toestaan wilt die als betrouwbaar door SPIP, een ster worden beschouwd, zetten. Om niets toe te staan, niets aangeven.',
 'info_qui_attribue_mot_cle' => 'De woorden uit deze groep kunnen toegekend worden door:',
 'info_racine_site' => 'Begin van de site',
