@@ -664,7 +664,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'taille_ko' => '@taille@&nbsp;kB',
 'taille_mo' => '@taille@&nbsp;MB',
 'taille_octets' => '@taille@&nbsp;Byte',
-'texte_actualite_site_1' => 'Wenn Sie sich mit der Oberfl&auml;che des Redaktionssystems vertraut gemacht haben, k&ouml;nnen Sie „',
+'texte_actualite_site_1' => 'Wenn Sie sich mit der Oberfl&auml;che des Redaktionssystems vertraut gemacht haben, k&ouml;nnen Sie â€ž',
 'texte_actualite_site_2' => 'den Expertenmodus aktivieren,',
 'texte_actualite_site_3' => 'um zus&auml;tzliche Funktionen zu nutzen.',
 'texte_creation_automatique_vignette' => 'Diese Website generiert automatisch Vorschaubilder. Wenn Sie Bilder in den Formaten @gd_formats@ mit diesem Formular installieren, werden Vorschaubilder mit den maximalen Diemsionen @taille_preview@ Pixel angelegt.',
