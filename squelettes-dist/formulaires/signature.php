@@ -245,6 +245,7 @@ function inc_controler_signature_dist($id_article, $nom, $mail, $message, $site,
 	if (!$row = sql_fetsel('*', 'spip_petitions', "id_article=$id_article"))
 		return _T('form_pet_probleme_technique');
 
+	$statut = "";
 	if (!$ret = signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url_site, $message, $lang, $statut))
 		return _T('form_pet_probleme_technique');
 
@@ -315,7 +316,8 @@ function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url,
 	$titre = textebrut(typo($row['titre']));
 	if ($lang) lang_select();
 
-	$statut = signature_test_pass();
+	if (!strlen($statut))
+		$statut = signature_test_pass();
 
 	if ($lang != $GLOBALS['meta']['langue_site'])
 		  $url_page = parametre_url($url_page, "lang", $lang,'&');
