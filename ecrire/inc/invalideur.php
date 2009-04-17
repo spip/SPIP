@@ -115,6 +115,7 @@ function purger_repertoire($dir, $options=array()) {
 // http://doc.spip.org/@appliquer_quota_cache
 function appliquer_quota_cache() {
 	global $quota_cache;
+	$encore = false;
 
 	$tour_quota_cache = intval(1+$GLOBALS['meta']['tour_quota_cache'])%16;
 	ecrire_meta('tour_quota_cache', $tour_quota_cache);
@@ -124,7 +125,7 @@ function appliquer_quota_cache() {
 	list($nombre,$taille) = nombre_de_fichiers_repertoire($dir);
 	$total_cache = $taille * $nombre;
 	spip_log("Taille du CACHE estimee ($l): "
-		.(intval(16*$total_cache/(1024*1024/10))/10)." Mo");
+		.(intval(16*$total_cache/(1024*1024/10))/10)." Mo","invalideur");
 
 	// Nombre max de fichiers a supprimer
 	if ($quota_cache > 0) {
@@ -137,10 +138,21 @@ function appliquer_quota_cache() {
 					'limit' => $trop
 				)
 			);
-			spip_log("$dir : $n caches supprimes");
+			spip_log("$dir : $n/$trop caches supprimes [taille moyenne $taille]","invalideur");
+			$total_cache = intval(max(0,(16*$total_cache) - $n*$taille)/(1024*1024)*10)/10;
+			spip_log("cache restant estime : $total_cache Mo, ratio ".$total_cache/$quota_cache,"invalideur");
+
+			// redemander la main pour eviter que le cache ne gonfle trop
+			// mais pas si on ne peut pas purger car les fichiers sont trops recents
+			if (
+			  $total_cache/$quota_cache>1.5
+			  AND $n*50>$trop) {
+				$encore = true;
+				spip_log("Il faut encore purger","invalideur");
+			}
 		}
 	}
-
+	return $encore;
 }
 
 
