@@ -140,10 +140,10 @@ function taches_generales($taches_generales = array()) {
 function genie_invalideur_dist($t) {
 
 	include_spip('inc/invalideur');
-	$ratio_cache = appliquer_quota_cache();
+	$encore = appliquer_quota_cache();
 
 	// si le cache est trop gonfle, redemander la main pour poursuivre
-	if ($ratio_cache>1.5)
+	if ($encore)
 		return (0 - $t);
 	return 1;
 }
