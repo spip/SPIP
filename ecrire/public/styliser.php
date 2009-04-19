@@ -19,7 +19,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // pour des raisons historiques, ce qui est trompeur
 
 // http://doc.spip.org/@public_styliser_dist
-function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='html') {
+function public_styliser_dist($fond, $contexte, $lang='', $connect='', $ext='html') {
+
+	// Choisir entre $fond-dist.html, $fond=7.html, etc?
+	$id_rubrique = 0;
+	// Chercher le fond qui va servir de squelette
+	if ($r = quete_rubrique_fond($contexte))
+		list($id_rubrique, $lang) = $r;
+
 
 	// trouver un squelette du nom demande
 	$base = find_in_path("$fond.$ext");
@@ -34,6 +41,7 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
 			'ext' => $ext,
 			'fond' => $fond,
 			'lang' => $lang,
+			'contexte' => $GLOBALS['contexte'], // le style d'un objet peut dependre de lui meme
 			'connect' => $connect
 		),
 		'data' => $squelette,
@@ -111,5 +119,44 @@ function styliser_par_langue($flux) {
 	}
 	
 	return $flux;
+}
+
+// Calcul de la rubrique associee a la requete
+// (selection de squelette specifique par id_rubrique & lang)
+
+// http://doc.spip.org/@quete_rubrique_fond
+function quete_rubrique_fond($contexte) {
+
+	if (isset($contexte['id_rubrique'])
+	AND $id = intval($contexte['id_rubrique'])
+	AND $row = quete_parent_lang('spip_rubriques',$id)) {
+		$lang = isset($row['lang']) ? $row['lang'] : '';
+		return array ($id, $lang);
+	}
+
+	if (isset($contexte['id_breve'])
+	AND $id = intval($contexte['id_breve'])
+	AND $row = quete_parent_lang('spip_breves',$id)
+	AND $id_rubrique_fond = $row['id_rubrique']) {
+		$lang = isset($row['lang']) ? $row['lang'] : '';
+		return array($id_rubrique_fond, $lang);
+	}
+
+	if (isset($contexte['id_syndic'])
+	AND $id = intval($contexte['id_syndic'])
+	AND $row = quete_parent_lang('spip_syndic',$id)
+	AND $id_rubrique_fond = $row['id_rubrique']
+	AND $row = quete_parent_lang('spip_rubriques',$id_rubrique_fond)) {
+		$lang = isset($row['lang']) ? $row['lang'] : '';
+		return array($id_rubrique_fond, $lang);
+	}
+
+	if (isset($contexte['id_article'])
+	AND $id = intval($contexte['id_article'])
+	AND $row = quete_parent_lang('spip_articles',$id)
+	AND $id_rubrique_fond = $row['id_rubrique']) {
+		$lang = isset($row['lang']) ? $row['lang'] : '';
+		return array($id_rubrique_fond, $lang);
+	}
 }
 ?>
