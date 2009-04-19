@@ -41,7 +41,7 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='', $ext='htm
 			'ext' => $ext,
 			'fond' => $fond,
 			'lang' => $lang,
-			'contexte' => $GLOBALS['contexte'], // le style d'un objet peut dependre de lui meme
+			'contexte' => $contexte, // le style d'un objet peut dependre de lui meme
 			'connect' => $connect
 		),
 		'data' => $squelette,
