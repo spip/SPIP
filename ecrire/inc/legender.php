@@ -131,7 +131,7 @@ function legender_corps($ancre, $flag, $id, $id_document, $script, $type, $docum
 
 	$corps = (!$contenu ? '' :
 		  "<div class='verdana1' style='text-align: center; margin-bottom: 10px;'>$contenu</div>") .
-	  "<div class='formulaire_spip formulaire_spip_compact'><ul><li class='editer_titre'><label for='titre_document$id_document'>$label</label>\n" .
+	  "<div class='formulaire_spip formulaire_spip_compact'><ul><li class='editer_titre'><label for='titre_document$id_document'>".entites_html($label)."</label>\n" .
 
 	  "<input type='text' name='titre_document' id='titre_document$id_document' class='text' value=\"".entites_html($document['titre']).
 	  "\" size='40'	onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /></li>\n"
