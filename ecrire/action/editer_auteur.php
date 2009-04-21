@@ -37,14 +37,15 @@ function action_editer_auteur_dist() {
 			intval(_request('id_parent')),
 			_request('restreintes'),
 			$r[0]);
+
 		if (_request('statut')){
-			instituer_auteur($id_auteur,
-			  array('statut'=>_request('statut'),'id_parent'=>intval(_request('id_parent')),'restreintes'=>_request('restreintes'))
-			  );
+			$c = array('statut'=>_request('statut'),'id_parent'=>intval(_request('id_parent')),'restreintes'=>_request('restreintes'));
+			if (_request('saisie_webmestre'))
+				$c['webmestre'] = _request('webmestre')?_request('webmestre'):'non';
+			instituer_auteur($id_auteur,$c);
 		}
 
-
-			if ($echec AND $redirect) {
+		if ($echec AND $redirect) {
 		// revenir au formulaire de saisie
 				$ret = !$redirect
 				? '' 
@@ -255,6 +256,11 @@ function instituer_auteur($id_auteur, $c) {
 		else
 			$c['restreintes'] = array($c['id_parent']);
 	}
+
+
+
+	if (isset($c['webmestre']) AND autoriser('modifier', 'auteur', $id_auteur,null, array('webmestre' => '?')))
+		$champs['webmestre'] = $c['webmestre']=='oui'?'oui':'non';
 	
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',

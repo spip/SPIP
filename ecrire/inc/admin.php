@@ -41,7 +41,7 @@ function inc_admin_dist($script, $titre, $comment='', $anonymous=false)
 // pour eviter des executions en parallele, notamment apres Time-Out.
 // Cette meta contient le nom du script et, a un hachage pres, du demandeur.
 // Le code de ecrire/index.php devie toute demande d'execution d'un script
-// vers le script d'administration indique par cette meta si elle est là.
+// vers le script d'administration indique par cette meta si elle est lï¿½.
 // Au niveau de la fonction inc_admin, on controle la meta 'admin'.
 // Si la meta n'est pas la, 
 //	c'est le debut on la cree.
@@ -71,7 +71,12 @@ function admin_verifie_session($script, $anonymous=false) {
 			}
 		}
 	}
-	spip_log("admin $pref" . ($valeur ? " (reprise)" : ' (init)'));
+	$journal = "spip";
+	if (autoriser('configurer')) // c'est une action webmestre, soit par ftp soit par statut webmestre
+		$journal = 'webmestre';
+	// on pourrait statuer automatiquement les webmestres a l'init d'une action auth par ftp ... ?
+
+	spip_log("admin $pref" . ($valeur ? " (reprise)" : ' (init)'),$journal);
 	return '';
 }
 

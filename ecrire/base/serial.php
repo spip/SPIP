@@ -69,6 +69,7 @@ $spip_auteurs = array(
 		"pass"	=> "tinytext DEFAULT '' NOT NULL",
 		"low_sec"	=> "tinytext DEFAULT '' NOT NULL",
 		"statut"	=> "varchar(255)  DEFAULT '0' NOT NULL",
+		"webmestre"	=> "varchar(3)  DEFAULT 'non' NOT NULL",
 		"maj"	=> "TIMESTAMP",
 		"pgp"	=> "TEXT DEFAULT '' NOT NULL",
 		"htpass"	=> "tinytext DEFAULT '' NOT NULL",

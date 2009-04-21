@@ -40,6 +40,11 @@ function inc_instituer_auteur_dist($auteur, $modif = true) {
 	$label = $modif?'label':'b';
 	$res = "<$label>" . _T('info_statut_auteur')."</$label> " . $menu;
 
+	if ($modif)
+		$res .= editer_choix_webmestre($auteur);
+	else
+		$res .= afficher_webmestre($auteur);
+
 	// Prepare le bloc des rubriques pour les admins eventuellement restreints ;
 	// si l'auteur n'est pas '0minirezo', on le cache, pour pouvoir le reveler
 	// en jquery lorsque le menu de statut change
@@ -55,6 +60,36 @@ function inc_instituer_auteur_dist($auteur, $modif = true) {
 			. "</div>";
 
 	return $res;
+}
+
+
+function afficher_webmestre($auteur){
+	if (autoriser('webmestre','',0,$auteur['id_auteur']))
+		return "<p>"._L("Cet administrateur est <b>webmestre</b>")."</p>";
+	return "";
+}
+
+function editer_choix_webmestre($auteur){
+	$res = "";
+	$style = "";
+	if (!autoriser('modifier', 'auteur', $auteur['id_auteur'],
+	null, array('webmestre' => '?'))){
+		$res =  afficher_webmestre($auteur);
+	}
+	else {
+		$res = "<input type='checkbox' class='checkbox' name='webmestre' id='webmestre' value='oui'"
+			. ($auteur['webmestre']=='oui'?" checked='checked'":"")
+			. " />"
+			. "<label for='webmestre'>"
+			. _L("Donner a cet administrateur les droits de webmestre")
+			. "</label>";
+
+		$res .= "<input type='hidden' name='saisie_webmestre' value='1' />";
+		// visible ou pas ?
+		if ($auteur['statut']!='0minirezo')
+			$style=" style='display:none;'";
+	}
+	return "<div class='choix' id='choix-webmestre'$style>$res</div>";
 }
 
 // http://doc.spip.org/@traduire_statut_auteur
@@ -121,7 +156,8 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 
 	$statut_rubrique = str_replace(',', '|', _STATUT_AUTEUR_RUBRIQUE);
 	return "<select class='select fondl' name='statut' id='statut' size='1'
-		onchange=\"(this.options[this.selectedIndex].value.match(/^($statut_rubrique)\$/))?jQuery('#$ancre:hidden').slideDown():jQuery('#$ancre:visible').slideUp();\">"
+		onchange=\"(this.options[this.selectedIndex].value.match(/^($statut_rubrique)\$/))?jQuery('#$ancre:hidden').slideDown():jQuery('#$ancre:visible').slideUp();"
+	. "(this.options[this.selectedIndex].value=='0minirezo')?jQuery('#choix-webmestre:hidden').slideDown():jQuery('#choix-webmestre:visible').slideUp();\">"
 	. $menu
 	. "\n<option" .
 		mySel("5poubelle",$statut) .

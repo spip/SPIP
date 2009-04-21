@@ -207,5 +207,9 @@ $GLOBALS['maj'][13833] = array(
 array('sql_alter',"TABLE spip_documents_liens ADD INDEX objet(id_objet,objet)"))
 ;
 
-
+$GLOBALS['maj'][13904] = array(
+array('sql_alter',"TABLE spip_auteurs ADD webmestre varchar(3)  DEFAULT 'non' NOT NULL"),
+array('sql_update','spip_auteurs',array('webmestre'=>"'oui'"),sql_in("id_auteur",defined('_ID_WEBMESTRES')?explode(':',_ID_WEBMESTRES):(autoriser('configurer')?array($GLOBALS['visiteur_session']['id_auteur']):array(0)))) // le webmestre est celui qui fait l'upgrade si rien de defini
+)
+;
 ?>
