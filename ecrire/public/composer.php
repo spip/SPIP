@@ -230,6 +230,8 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	foreach(array('les_notes','compt_note','marqueur_notes','notes_vues') as $k)
 		if (isset($GLOBALS[$k]))
 			$mem[$k] = $GLOBALS[$k];
+	// memoriser l'etat de la pile unique
+	$mem_unique = unique('','_spip_raz_');
 
 
 	$texte = propre($texte,$connect);
@@ -241,6 +243,8 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 			$GLOBALS[$k] = $mem[$k];
 		else 
 			unset($GLOBALS[$k]);
+	// restituer l'etat de la pile unique
+	unique($mem_unique,'_spip_set_');
 
 
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
