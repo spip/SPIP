@@ -23,7 +23,7 @@ define('sql_ABSTRACT_VERSION', 1);
 
 // Fonction principale. Elle charge l'interface au serveur de base de donnees
 // via la fonction spip_connect_version qui etablira la connexion au besoin.
-// Elle retourne la fonction produisant la requête SQL demandee
+// Elle retourne la fonction produisant la requï¿½te SQL demandee
 // Erreur fatale si la fonctionnalite est absente sauf si le 3e arg <> false
 
 // http://doc.spip.org/@sql_serveur
@@ -57,9 +57,9 @@ function sql_set_charset($charset,$serveur='', $option=true){
 
 // Fonction pour SELECT, retournant la ressource interrogeable par sql_fetch.
 // Recoit en argument:
-// - le tableau (ou chaîne) des champs a` ramener (Select)
-// - le tableau (ou chaîne) des tables a` consulter (From)
-// - le tableau (ou chaîne) des conditions a` remplir (Where)
+// - le tableau (ou chaï¿½ne) des champs a` ramener (Select)
+// - le tableau (ou chaï¿½ne) des tables a` consulter (From)
+// - le tableau (ou chaï¿½ne) des conditions a` remplir (Where)
 // - le crite`re de regroupement (Group by)
 // - le tableau de classement (Order By)
 // - le crite`re de limite (Limit)
@@ -114,6 +114,18 @@ function sql_fetch($res, $serveur='', $option=true) {
 	if (!is_string($f) OR !$f) return false;
 	return $f($res, NULL, $serveur, $option!==false);
 }
+
+function sql_fetchall($res, $serveur='', $option=true){
+	$rows = array();
+	if (!$res) return $rows;
+	$f = sql_serveur('fetch', $serveur,  $option==='continue' OR $option===false);
+	if (!is_string($f) OR !$f) return array();
+	while ($r = $f($res, NULL, $serveur, $option!==false))
+		$rows[] = $r;
+	sql_free($res, $serveur);
+	return $rows;
+}
+
 
 // http://doc.spip.org/@sql_listdbs
 function sql_listdbs($serveur='', $option=true) {
@@ -370,11 +382,7 @@ function sql_allfetsel(
 	$having = array(), $serveur='', $option=true) {
 	$q = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
 	if ($option===false) return $q;
-	if (!$q) return array();
-	$res = array();
-	while ($r = sql_fetch($q, $serveur)) $res[] = $r;
-	sql_free($q, $serveur);
-	return $res;
+	return sql_fetchall($q, $serveur, $option);
 }
 
 # Retourne l'unique champ demande dans une requete Select a resultat unique
