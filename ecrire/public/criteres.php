@@ -147,7 +147,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->mode_partie = 'p+';
 	$boucle->partie = 'substr($partie=(isset($Pile[0][\'debut\'.'.$debut.']) ? $Pile[0][\'debut\'.'.$debut.'] : _request(\'debut\'.'.$debut.')),0,1)==\'@\'?
-($Pile[0][\'debut\'.'.$debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',substr($partie,1),'.intval($pas).',calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect)))
+($Pile[0][\'debut\'.'.$debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',substr($partie,1),'.intval($pas).',$allrows))
 :intval($partie)';
 	$boucle->modificateur['debut_nom'] = $debut;
 	$boucle->total_parties = $pas;
