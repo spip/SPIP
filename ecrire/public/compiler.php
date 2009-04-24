@@ -356,7 +356,7 @@ function calculer_requete_sql(&$boucle)
 	  . "\n\t// REQUETE\n\t"
 	  . '$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect);'
 		. "\n\t"
-		. '$allrows = @sql_fetchall($result,$connect);';
+		. '$allrows = @sql_fetch_all($result,$connect);';
 }
 
 // http://doc.spip.org/@calculer_dec
