@@ -146,9 +146,16 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
 	$boucle->mode_partie = 'p+';
-	$boucle->partie = 'substr($partie=(isset($Pile[0][\'debut\'.'.$debut.']) ? $Pile[0][\'debut\'.'.$debut.'] : _request(\'debut\'.'.$debut.')),0,1)==\'@\'?
-($Pile[0][\'debut\'.'.$debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',substr($partie,1),'.intval($pas).',$allrows))
-:intval($partie)';
+	$boucle->partie =
+		// tester si le numero de page demande est de la forme '@yyy'
+		'substr($partie=(isset($Pile[0][\'debut\'.'.$debut.']) ? $Pile[0][\'debut\'.'.$debut.'] : _request(\'debut\'.'.$debut.')),0,1)==\'@\'?'
+		// dans ce cas, on retrouve la page par un appel a quete_debut_pagination,
+		// et on place dans Pile[0]['debut_xxx'] le vrai numero de page pour la balise #PAGINATION
+		// et dans Pile[0][@primary] = yyy pour permettre a la balise #EXPOSER d'exposer l'objet
+		.'($Pile[0][\'debut\'.'.$debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',$Pile[0][\'@'.$boucle->primary.'\'] = substr($partie,1),'.intval($pas).',$allrows))'
+		// sinon on fait un intval sur la valeur demandee, et c'est tout
+		.':intval($partie)';
+
 	$boucle->modificateur['debut_nom'] = $debut;
 	$boucle->total_parties = $pas;
 
