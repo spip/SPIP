@@ -245,7 +245,10 @@ function quete_debut_pagination($primary,$valeur,$pas,$res){
 	$pos = 0;
 	while ($row = sql_fetch($res) AND $row[$primary]!==$valeur)
 		$pos++;
-	sql_free($res);
+
+	// remettre le pointeur au debut des resultats
+	sql_seek($res,0);
+
 	// si on a pas trouve
 	if ($row[$primary]!==$valeur)
 		return 0;
