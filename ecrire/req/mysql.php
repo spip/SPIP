@@ -55,6 +55,7 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 		'error' => 'spip_mysql_error',
 		'explain' => 'spip_mysql_explain',
 		'fetch' => 'spip_mysql_fetch',
+		'seek' => 'spip_mysql_seek',
 		'free' => 'spip_mysql_free',
 		'hex' => 'spip_mysql_hex',
 		'in' => 'spip_mysql_in', 
@@ -484,6 +485,10 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 function spip_mysql_fetch($r, $t='', $serveur='',$requeter=true) {
 	if (!$t) $t = MYSQL_ASSOC;
 	if ($r) return mysql_fetch_array($r, $t);
+}
+
+function spip_mysql_seek($r, $row_number, $serveur='',$requeter=true) {
+	if ($r) return mysql_data_seek($r,$row_number);
 }
 
 

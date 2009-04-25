@@ -80,6 +80,7 @@ $GLOBALS['spip_pg_functions_1'] = array(
 		'error' => 'spip_pg_error',
 		'explain' => 'spip_pg_explain',
 		'fetch' => 'spip_pg_fetch',
+		'seek' => 'spip_pg_seek',
 		'free' => 'spip_pg_free',
 		'hex' => 'spip_pg_hex',
 		'in' => 'spip_pg_in',
@@ -451,7 +452,7 @@ function spip_pg_select($select, $from, $where='',
 	  . (!$limit ? '' : (" LIMIT $count" . (!$offset ? '' : " OFFSET $offset")));
 
 	// Erreur ? C'est du debug, ou une erreur du serveur
-	// il faudrait mettre ici le déclenchement du message SQL
+	// il faudrait mettre ici le dï¿½clenchement du message SQL
 	// actuellement dans erreur_requete_boucle
 
 	if ($requeter && $GLOBALS['var_mode'] == 'debug') {
@@ -705,6 +706,11 @@ function spip_pg_fetch($res, $t='', $serveur='',$requeter=true) {
 	return $res;
 }
 
+function spip_pg_seek($r, $row_number, $serveur='',$requeter=true) {
+	if ($r) return pg_result_seek($r,$row_number);
+}
+
+
 // http://doc.spip.org/@spip_pg_countsel
 function spip_pg_countsel($from = array(), $where = array(), $groupby=array(),
 			  $having = array(), $serveur='',$requeter=true) 
@@ -724,7 +730,7 @@ function spip_pg_count($res, $serveur='',$requeter=true) {
   
 // http://doc.spip.org/@spip_pg_free
 function spip_pg_free($res, $serveur='',$requeter=true) {
-  // rien à faire en postgres
+  // rien ï¿½ faire en postgres
 }
 
 // http://doc.spip.org/@spip_pg_delete

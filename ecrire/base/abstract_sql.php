@@ -126,6 +126,11 @@ function sql_fetch_all($res, $serveur='', $option=true){
 	return $rows;
 }
 
+function sql_seek($res, $row_number, $serveur='', $option=true) {
+	$f = sql_serveur('seek', $serveur,  $option==='continue' OR $option===false);
+	if (!is_string($f) OR !$f) return false;
+	return $f($res, $row_number, $serveur, $option!==false);
+}
 
 // http://doc.spip.org/@sql_listdbs
 function sql_listdbs($serveur='', $option=true) {

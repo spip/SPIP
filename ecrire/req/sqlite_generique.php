@@ -617,6 +617,27 @@ function spip_sqlite_fetch($r, $t='', $serveur='',$requeter=true) {
 }
 
 
+function spip_sqlite_seek($r, $row_number, $serveur='',$requeter=true) {
+	if ($r){
+		$link = _sqlite_link($serveur);
+		if (_sqlite_is_version(3, $link)){
+			if ($numrow==0) {
+				return $r->rewind();
+			} else {
+				return $r->seek($numrow);
+			}
+		}
+		else {
+			if ($numrow==0) {
+				return sql_rewind($result);
+			} else {
+				return sql_seek($result, $numrow);
+			}
+		}
+	}
+}
+
+
 // http://doc.spip.org/@spip_sqlite_free
 function spip_sqlite_free(&$r, $serveur='',$requeter=true) {
 	unset($r);
@@ -1363,6 +1384,7 @@ function _sqlite_ref_fonctions(){
 		'error' => 'spip_sqlite_error',
 		'explain' => 'spip_sqlite_explain',
 		'fetch' => 'spip_sqlite_fetch',
+		'seek' => 'spip_sqlite_seek',
 		'free' => 'spip_sqlite_free',
 		'hex' => 'spip_sqlite_hex',
 		'in' => 'spip_sqlite_in', 
