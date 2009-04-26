@@ -30,7 +30,7 @@ function nombre_de_fichiers_repertoire($dir,$nb_estim_taille = 20) {
 	if (!$h = @opendir($dir)) return false;
 	$total = 0;
 	while (($fichier = @readdir($h)) !== false)
-		if ($fichier[0]!='.'){
+		if ($fichier[0]!='.' AND !is_dir("$dir/$fichier")){
 			$total++;
 			if ($nb AND rand(1,10)==1){
 				$taille += filesize("$dir/$fichier");
@@ -135,7 +135,8 @@ function appliquer_quota_cache() {
 			$n = purger_repertoire($dir,
 				array(
 					'atime' => time() - _AGE_CACHE_ATIME,
-					'limit' => $trop
+					'limit' => $trop,
+					'subdir' => true
 				)
 			);
 			spip_log("$dir : $n/$trop caches supprimes [taille moyenne $taille]","invalideur");
