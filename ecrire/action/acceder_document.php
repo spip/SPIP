@@ -98,6 +98,9 @@ function action_acceder_document_dist() {
 			if (!preg_match('/\.\w+$/', $f) AND $f !== 'Makefile')
 				$f = basename($file);
 
+			// ce content-type est necessaire pour eviter des corruptions de zip dans ie6
+			header('Content-Type: application/octet-stream');
+
 			header("Content-Disposition: attachment; filename=\"$f\";");
 			header("Content-Transfer-Encoding: binary");
 
