@@ -96,7 +96,7 @@ function action_acceder_document_dist() {
 
 			$f = basename($file);
 			if (isset($doc['titre'])
-				AND (preg_match('/^\w+[.]'.$doc['extension'].'$/', $doc['titre']) OR $doc['titre'] == 'Makefile'))
+				AND (preg_match('/^\w+[.]\w+$/', $doc['titre']) OR $doc['titre'] == 'Makefile'))
 				$f = $doc['titre'];
 
 			// ce content-type est necessaire pour eviter des corruptions de zip dans ie6
