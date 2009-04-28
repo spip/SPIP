@@ -60,9 +60,8 @@ function action_acceder_document_dist() {
 			//
 			include_spip('inc/securiser_action');
 			$cle = _request('cle');
-			$x = calculer_cle_action($doc['id_document'].','.$f);
-			if ($cle != $x) {
-				spip_log("acces interdit $x <> $cle");
+			if (!verifier_cle_action($doc['id_document'].','.$f, $cle)) {
+				spip_log("acces interdit $cle erronee");
 				$status = 403;
 			}
 		}
@@ -83,28 +82,32 @@ function action_acceder_document_dist() {
 		break;
 
 	default:
-		// sinon, lorsqu'on pointe directement sur leur adresse,
-		// le navigateur les downloade au lieu de les afficher
 		header("Content-Type: ". $doc['mime_type']);
 
+		// pour les images ne pas passer en attachment
+		// sinon, lorsqu'on pointe directement sur leur adresse,
+		// le navigateur les downloade au lieu de les afficher
+
 		if ($doc['inclus']=='non') {
+
+		  // Si le fichier a un titre avec extension,
+		  // ou si c'est un nom bien connu d'Unix, le prendre
+		  // sinon l'ignorer car certains navigateurs pataugent
+
+			$f = @$doc['titre'];
+			if (!preg_match('/\.\w+$/', $f) AND $f !== 'Makefile')
+				$f = basename($file);
+
+			header("Content-Disposition: attachment; filename=\"$f\";");
+			header("Content-Transfer-Encoding: binary");
+
 			// fix for IE catching or PHP bug issue
 			header("Pragma: public");
 			header("Expires: 0"); // set expiration time
 			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-			// browser must download file from server instead of cache		// Content-Type ; pour les images ne pas passer en attachment
 
-			// on garde le nom du fichier
-			// utiliser son titre est une mauvaise idee car en l'absence d'extension,
-			// les navigateurs sont perdus et ne reconnaissent pas le type
-			$f = basename($file);
-
-			// ce content-type est necessaire pour eviter des corruptions de zip dans ie6
-			//header('Content-Type: application/octet-stream');
-
-			header("Content-Disposition: attachment; filename=\"$f\";");
-			header("Content-Transfer-Encoding: binary");
 		}
+
 		if ($cl = filesize($file))
 			header("Content-Length: ". $cl);
 
