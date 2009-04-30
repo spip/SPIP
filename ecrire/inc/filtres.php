@@ -1731,28 +1731,43 @@ function regledetrois($a,$b,$c)
 
 // Fournit la suite de Input-Hidden correspondant aux parametres de
 // l'URL donnee en argument
+// Compatible avec les type_url depuis [13939].
 // http://doc.spip.org/@form_hidden
 function form_hidden($action) {
 	$hidden = array();
-	if (false !== ($p = strpos($action, '?')))
-		foreach(preg_split('/&(amp;)?/S',substr($action,$p+1)) as $c) {
+	$contexte = array();
+	$renommer = generer_url_entite();
+	if ($renommer) {
+		$p = $renommer($action, $contexte);
+		if ($p) {
+		  	$contexte = $p[0];
+			$contexte['page'] = $p[3];
+			$action = preg_replace('/[?][^&]*/', '', $action);
+		}
+	}
+	if (false !== ($p = strpos($action, '?'))) {
+		foreach(preg_split('/&(amp;)?/S',substr($action,$p+1)) as $c){
 			list($var,$val) = explode('=', $c, 2);
-			$input = '<input name="'
-				. entites_html($var)
-				.'"'
-				. (is_null($val)
-					? ''
-					: ' value="'.entites_html(rawurldecode($val)).'"'
-					)
-				. ' type="hidden" />';
+			if ($var) $contexte[$var] = $val;
+		}
+	}
+	foreach($contexte as $var => $val) {
+		$input = '<input name="'
+			. entites_html($var)
+			.'"'
+			. (is_null($val)
+				? ''
+				: ' value="'.entites_html(rawurldecode($val)).'"'
+				)
+			. ' type="hidden" />';
 
-			// si c'est une variable de la forme a[]=2, cumuler les input
-			// sinon ne conserver que le premier
-			if (preg_match(',\[\]$,S', $var))
-				$hidden[] = $input;
-			else
-				if (!isset($hidden[$var]))
-					$hidden[$var] = $input;
+		// si c'est une variable de la forme a[]=2, cumuler les input
+		// sinon ne conserver que le premier
+		if (preg_match(',\[\]$,S', $var))
+			$hidden[] = $input;
+		else
+			if (!isset($hidden[$var]))
+				$hidden[$var] = $input;
 	}
 	return join("\n", $hidden);
 }
