@@ -1664,14 +1664,13 @@ function regledetrois($a,$b,$c)
 function form_hidden($action) {
 	$hidden = array();
 	$contexte = array();
-	$renommer = generer_url_entite();
-	if ($renommer) {
-		$p = $renommer($action, $contexte);
-		if ($p) {
-		  	$contexte = $p[0];
-			$contexte['page'] = $p[3];
-			$action = preg_replace('/[?][^&]*/', '', $action);
-		}
+	if (!strpos($action, 'page=')
+	AND $renommer = generer_url_entite()
+	AND $p = $renommer($action, $contexte)) {
+
+		$contexte = $p[0];
+		$contexte['page'] = $p[3];
+		$action = preg_replace('/[?][^&]*/', '', $action);
 	}
 	if (false !== ($p = strpos($action, '?'))) {
 		foreach(preg_split('/&(amp;)?/S',substr($action,$p+1)) as $c){
@@ -1679,6 +1678,7 @@ function form_hidden($action) {
 			if ($var) $contexte[$var] = $val;
 		}
 	}
+
 	foreach($contexte as $var => $val) {
 		$input = '<input name="'
 			. entites_html($var)
