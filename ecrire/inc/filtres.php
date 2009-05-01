@@ -2422,4 +2422,25 @@ function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class
 	return "<div$style>$icone</div>";
 }
 
+
+/**
+ * filtre explode pour les squelettes permettant d'ecrire
+ * #GET{truc}|explode{-}
+ *
+ * @param strong $a
+ * @param string $b
+ * @return array
+ */
+function filtre_explode_dist($a,$b){return explode($b,$a);}
+
+/**
+ * filtre implode pour les squelettes permettant d'ecrire
+ * #GET{truc}|implode{-}
+ *
+ * @param array $a
+ * @param string $b
+ * @return string
+ */
+function filtre_implode_dist($a,$b){return implode($b,$a);}
+
 ?>
