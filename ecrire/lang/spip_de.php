@@ -220,7 +220,7 @@ Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details da
 'form_email_non_valide' => 'Ihre E-Mail-Adresse ist ung&uuml;ltig.',
 'form_forum_access_refuse' => 'Sie haben keinen Zugang mehr zu dieser Website.',
 'form_forum_bonjour' => 'Hallo @nom@,',
-'form_forum_email_deja_enregistre' => 'Diese E-mail-adresse ist bereits eingetragen. Sie k&ouml;nnen also Ihr normals Passwort verwenden.',
+'form_forum_email_deja_enregistre' => 'Diese E-Mail-Adresse ist bereits eingetragen. Sie k&ouml;nnen also Ihr normals Passwort verwenden.',
 'form_forum_identifiant_mail' => 'Ihre neuen Zugangsdaten wurden Ihnen per Mail zugestellt.',
 'form_forum_identifiants' => 'Pers&ouml;nliche Zugangsdaten',
 'form_forum_indiquer_nom_email' => 'Tragen Sie bitte hier Ihren Namen und Ihre E-Mail-Adresse ein. Die pers&ouml;nlichen Zugangsdaten werden Ihnen dann per E-Mail zugeschickt.',
