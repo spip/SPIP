@@ -908,10 +908,13 @@ function affdate_base($numdate, $vue, $param = '') {
 	// 1er, 21st, etc.
 	$journum = $jour;
 
-	if ($jour == 0)
+	if ($jour == 0) {
 		$jour = '';
-	else if ($jourth = _T('date_jnum'.$jour))
+	} else {
+		$njour = intval($jour);
+		if ($jourth = _T('date_jnum'.$jour))
 			$jour = $jourth;
+	}
 
 	$mois = intval($mois);
 	if ($mois > 0 AND $mois < 13) {
@@ -973,9 +976,9 @@ function affdate_base($numdate, $vue, $param = '') {
 		return $journum;
 
 	case 'nom_jour':
-		if (!($mois = intval($mois)) OR !($jour = intval($jour)))
+		if (!$mois OR !$njour)
 			return '';
-		$nom = mktime(1,1,1,$mois,$jour,$annee);
+		$nom = mktime(1,1,1,$mois,$njour,$annee);
 		$nom = 1+date('w',$nom);
 		$param = $param ? '_'.$param : '';
 		return _T('date_jour_'.$nom.$param);
