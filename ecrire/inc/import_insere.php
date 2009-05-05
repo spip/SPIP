@@ -73,9 +73,6 @@ function insere_2_init($request) {
 	$t[]= 'spip_mots_syndic';
 	$t[]= 'spip_mots_forum';
 	$t[]= 'spip_mots_documents';
-	$t[]= 'spip_documents_articles';  # spip_documents_liens ??
-	$t[]= 'spip_documents_rubriques';
-	## il en manque ici (spip_documents_breves etc)
 	$t[]= 'spip_documents_liens';
 
 	return $t;
@@ -207,23 +204,29 @@ function import_translate_spip_breves($values, $table, $desc, $request, $atts) {
 	import_translate_std($values, $table, $desc, $request, $atts);
 }
 
-// Les doc importes deviennent distants.
+// Les doc importes deviennent distants, a fortiori s'ils etaient deja
 // Gerer les vieilles sauvegardes où le Path etait en dur
 // http://doc.spip.org/@import_translate_spip_documents
 function import_translate_spip_documents($values, $table, $desc, $request, $atts) {
 
-	$url = $request['url_site'];
-	if (!$url) $url = $atts['adresse_site'];
-	if (substr($url,-1) !='/') $url .='/';
-	if (!$atts['version_base'] < '1.934') // deja dans la BD a l'epoque
-		$url .= $atts['dir_img']; 
-	foreach ($values as $k => $v) {
-	  if ($k=='fichier')
-	    $v = $url .$v;
-	  else $v = importe_raccourci(importe_translate_maj($k, $v));
-	  $values[$k]= $v;
+	if ($values['distant'] === 'oui') {
+		$url = '';
+	} else {
+		$values['distant'] = 'oui';
+		$url = $request['url_site'];
+		if (!$url) $url = $atts['adresse_site'];
+		if (substr($url,-1) !='/') $url .='/';
+		// deja dans la BD avant cette epoque
+		if ($atts['version_base'] >= '1.934')
+			$url .= $atts['dir_img']; 
 	}
-	$values['distant']= 'oui';
+	$url .= $values['fichier'];
+	unset($values['fichier']);
+	foreach ($values as $k => $v) {
+		$values[$k]= importe_raccourci(importe_translate_maj($k, $v));
+
+	}
+	$values['fichier'] = $url;
 	import_inserer_translate($values, $table, $desc, $request, $atts);
 }
 
@@ -231,6 +234,7 @@ function import_translate_spip_documents_liens($values, $table, $desc, $request,
 
 	$values['id_document']= (importe_translate_maj('id_document', $values['id_document']));
 	$values['id_objet']= (importe_translate_maj('id_' .$values['objet'], $values['id_objet']));
+
 	sql_replace($table, $values);
 }
 
