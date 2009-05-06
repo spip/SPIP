@@ -277,7 +277,7 @@ function objet_auteur_select($cond)
 		if ($email)
 			$email = " ($email)";
 		if ($statut != $statut_old) {
-			$opt = "\n<optgroup class='option_separateur_statut_auteur' label='" . _T($statut) . "'>";
+			$opt = "</optgroup>\n<optgroup class='option_separateur_statut_auteur' label='" . _T($statut) . "'>";
 			$statut_old = $statut;
 		} else $opt = '';
 
