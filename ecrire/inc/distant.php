@@ -28,7 +28,7 @@ function copie_locale($source, $mode='auto') {
 	$reg = ',' . $GLOBALS['meta']['adresse_site']
 	  . "/?spip.php[?]action=acceder_document.*file=(.*)$,";
 
-	if (preg_match($reg, $source, $local)) return _DIR_IMG . urldecode($local[1]);
+	if (preg_match($reg, $source, $local)) return substr(_DIR_IMG,strlen(_DIR_RACINE)) . urldecode($local[1]);
 
 	$local = fichier_copie_locale($source);
 
