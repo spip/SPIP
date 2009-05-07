@@ -286,7 +286,7 @@ function objet_auteur_select($cond)
 		. supprimer_tags(couper(typo($row["nom"] . $email), 40))
 		. "</option>";
 	}
-	return "<optgroup><option value='0'>" 
+	return "<optgroup label=''><option value='0'>" 
 	  . _T('bouton_choisir')
 	  . '</option>'
 	  . join('', $res)
