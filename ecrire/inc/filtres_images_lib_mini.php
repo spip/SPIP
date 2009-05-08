@@ -443,6 +443,10 @@ function _image_ecrire_tag($valeurs,$surcharge){
 	$src = extraire_attribut($tag,'src');
 	if (isset($surcharge['src'])){
 		$tag = str_replace($src,$surcharge['src'],$tag);
+		// si il y a des & dans src, alors ils peuvent provenir d'un &amp
+		// pas garanti comme methode, mais mieux que rien
+		if (strpos($src,'&') !== false)
+			$tag = str_replace(str_replace("&","&amp;",$src),$surcharge['src'],$tag);
 		$src = $surcharge['src'];
 		unset($surcharge['src']);
 	}
