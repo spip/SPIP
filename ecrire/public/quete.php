@@ -135,6 +135,9 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	// en static.
 	if (!isset($exposer[$m=md5(serialize($reference))][$prim])) {
 		$principal = $reference[$type];
+		// le parent fournit en argument est le parent de $id, pas celui de $principal
+		// il n'est donc pas utile
+		$parent = 0;
 		if (!$principal) { // regarder si un enfant est dans le contexte, auquel cas il expose peut etre le parent courant
 			$enfants = array('id_rubrique'=>array('id_article'),'id_groupe'=>array('id_mot'));
 			if (isset($enfants[$type]))
@@ -142,12 +145,10 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 					if (isset($reference[$t])) {
 						$type = $t;
 						$principal = $reference[$type];
-						$parent=0;
 						continue;
 					}
 		}
 		$exposer[$m][$type] = array();
-		$parent = intval($parent);
 		if ($principal) {
 			$principaux = is_array($principal)?$principal:array($principal);
 			foreach($principaux as $principal){
@@ -280,7 +281,7 @@ function img_logo_document($fichier, $extension, $id_vignette, $mode, $x, $y, $c
 // Si le 2e parametre n'est pas une chaine, c'est qu'on n'a pas pu
 // determiner la table a la compil, on le fait maintenant.
 // Il faudrait encore completer: on ne connait pas la langue
-// pour une boucle forum sans id_article ou id_rubrique donné par le contexte
+// pour une boucle forum sans id_article ou id_rubrique donnï¿½ par le contexte
 // et c'est signale par un message d'erreur abscons: "table inconnue forum".
 // 
 // http://doc.spip.org/@lang_parametres_forum
