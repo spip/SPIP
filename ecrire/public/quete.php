@@ -241,16 +241,15 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	return isset($exposer[$m][$prim]) ? isset($exposer[$m][$prim][$id]) : '';
 }
 
-function quete_debut_pagination($primary,$valeur,$pas,$res){
+function quete_debut_pagination($primary,$valeur,$pas,$res,$serveur=''){
 	$pos = 0;
-	while ($row = sql_fetch($res) AND $row[$primary]!==$valeur)
+	while ($row = sql_fetch($res,$serveur) AND $row[$primary]!=$valeur){
 		$pos++;
-
+	}
 	// remettre le pointeur au debut des resultats
-	sql_seek($res,0);
-
+	sql_seek($res,0,$serveur);
 	// si on a pas trouve
-	if ($row[$primary]!==$valeur)
+	if ($row[$primary]!=$valeur)
 		return 0;
 	
 	// sinon, calculer le bon numero de page
