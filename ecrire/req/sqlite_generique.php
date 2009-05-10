@@ -621,18 +621,25 @@ function spip_sqlite_seek($r, $row_number, $serveur='',$requeter=true) {
 	if ($r){
 		$link = _sqlite_link($serveur);
 		if (_sqlite_is_version(3, $link)){
-			if ($numrow==0) {
-				return $r->rewind();
-			} else {
-				return $r->seek($numrow);
+			// encore un truc de bien fichu : PDO ne PEUT PAS faire de seek ou de rewind...
+			// je me demande si pour sqlite 3 il ne faudrait pas mieux utiliser
+			// les nouvelles fonctions sqlite3_xx (mais encore moins presentes...)
+
+			// 1. on refait la requete = remise a zero
+			// 2. on boucle a n-1 d'ou on souhaite aller...
+			// (oui oui, c'est beau !)
+			$requete = new sqlite_traiter_requete($r->queryString, $serveur);
+			// pas besoin de traduire, ca a deja ete fait...
+			# $requete->traduire_requete(); // mysql -> sqlite
+			# if (!$requeter) return $requete->query;
+			$requete->executer_requete();
+			while ($row_number--) {
+				$x = $r->fetch();
 			}
+			return true;
 		}
 		else {
-			if ($numrow==0) {
-				return sql_rewind($result);
-			} else {
-				return sql_seek($result, $numrow);
-			}
+			return sqlite_seek($r, $row_number);
 		}
 	}
 }
@@ -1610,6 +1617,9 @@ class sqlite_traiter_requete{
 		if ($this->link){
 			if ($this->sqlite_version == 3) {
 				$r = $this->link->query($this->query);
+				// sauvegarde de la requete (elle y est deja dans $r->queryString)
+				# $r->spipQueryString = $this->query;
+
 				// comptage : oblige de compter le nombre d'entrees retournees 
 				// par une requete SELECT
 				// aucune autre solution ne donne le nombre attendu :( !
