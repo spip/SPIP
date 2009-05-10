@@ -624,19 +624,7 @@ function spip_sqlite_seek($r, $row_number, $serveur='',$requeter=true) {
 			// encore un truc de bien fichu : PDO ne PEUT PAS faire de seek ou de rewind...
 			// je me demande si pour sqlite 3 il ne faudrait pas mieux utiliser
 			// les nouvelles fonctions sqlite3_xx (mais encore moins presentes...)
-
-			// 1. on refait la requete = remise a zero
-			// 2. on boucle a n-1 d'ou on souhaite aller...
-			// (oui oui, c'est beau !)
-			$requete = new sqlite_traiter_requete($r->queryString, $serveur);
-			// pas besoin de traduire, ca a deja ete fait...
-			# $requete->traduire_requete(); // mysql -> sqlite
-			# if (!$requeter) return $requete->query;
-			$requete->executer_requete();
-			while ($row_number--) {
-				$x = $r->fetch();
-			}
-			return true;
+			return false;
 		}
 		else {
 			return sqlite_seek($r, $row_number);
