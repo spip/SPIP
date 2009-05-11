@@ -609,7 +609,7 @@ function plugin_get_infos($plug, $force_reload=false){
 				}
 				plugin_verifie_conformite($plug,$arbre);
 				
-				$ret['nom'] = spip_xml_aplatit($arbre['nom']);
+				$ret['nom'] = charset2unicode(spip_xml_aplatit($arbre['nom']));
 				$ret['version'] = trim(end($arbre['version']));
 				if (isset($arbre['auteur']))
 					$ret['auteur'] = spip_xml_aplatit($arbre['auteur']);
