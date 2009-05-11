@@ -1,3 +1,39 @@
+2.0.7 -> 2.0.8 (11 mai 2009)
+Revision: 13974 generer_action_auteur necessite au moins 2 arguments (eric)
+Revision: 13972 améliorations du débusqueur (report de [13917], [13941] et[13944] ) 
+Revision: 13971 ne pas confondre le parent de l'id que l'on demande a #EXPOSE avec le parent du principal qui lui est extrait du contexte de reference. Le premier est passe en parametre mais ne sert en fait a rien, le second doit du coup etre trouve par une requete sql. La confusion entrainait des trous dans la liste des objets a exposer si au premier calcul le parent n'etait pas le meme (tetue)
+Revision: 13970  mise à jour de jquery.form.js pour éviter un bug sur IE8 et les formulaires ajax. ([13955], [13966] et [13967])
+Revision: 13963 l'ecriture du tag en sortie des filtres images echouait si l'url initiale contenait des &. Un patch qui ne restera pas dans les annales mais fonctionne dans le cas des documents proteges
+Revision: 13962 copie_locale renvoie toujours un chemin relatif a la racine, pas au repertoire courant (cas des documents proteges)
+Revision: 13961 les filtres image appliques sur les images protegees par spip.php?action=acceder_document provoquent un appel a taille_image qui commet l'erreur de tronquer la chaine de get avant de faire copie_locale, et d'essayer vainement de copier spip.php en local. Si par malheur, la page d'accueil servie par spip.php dans ce cas contient une ou plusieurs images protegees retraitees, la boucle et bouclee, et le serveur par terre. Probablement donc, une cause serieuse de saturation serveur pour les utilisateurs du plugin acces_restreint
+Revision: 13959 Validité XHTML Un petit complément à [13957] pour parfaire la validité (Eric) 
+Revision: 13954 Import des sauvegardes partielles: si le document est déjà distant, ne pas ajouter le _DIR_IMG local, ça ne rime à rien. Par ailleurs, pas d'état d'âme avec les vieilles tables: on ne peut insérer que des sauvegardes partielles de même constitution que la base d'accueil.
+Revision: 13952 report de [13950] date en nepalais
+Revision: 13951 correction du passage de langue dans les formulaires CVT : un formulaire dans un article différent de la langue du site (<formulaire|toto>) n'avait pas les bonnes traductions des fonctions _T() dans les fonctions verifier() et traiter(). (cerdic)
+Revision: 13946 Correction de [13939]: se protéger du bloc de compatibilité des url_propres que le nouveau form_hidden interprète de travers: autant ne pas passer par generer_url_entite si on a déjà le paramètre page, typiquement dans le cas du formulaire de recherche std (Eric).
+Revision: 13943 Correction de l'erreur de syntaxe PHP du code compilé lorsque le critère {{{par}}} contient un appel de fonction SQL. Un peu à l'arrach', mais ça permet déjà de retrouver la compatibilité avec ce que savait faire la 1.9 (Mathieu). Test {{{<ul><BOUCLE_t(RUBRIQUES){tout} {par SUBSTRING_INDEX(titre,".",-1)}> <li>#TITRE</li></BOUCLE_t></ul>}}}
+Revision: 13942 Prendre en compte un nom et un mot de passe dans une URL de page distante à récupérer (Stéphane)
+Revision: 13940 Dans le squelette des pétitions, il faut afficher le moteur de recherche s'il vient d'y avoir une recherche, le nombre de signatures est faussement réduit dans ce cas. Et en profiter pour faire du XHTML strict.
+Revision: 13939 Compatibilité du filtre {{{form_hidden}}} avec les URL symboliques: il faut qu'il demande à generer_url_entite de lui fabriquer le contexte comme pour l'assemblage de la page.  La modif de urls/page.php n'était finalement pas indispensable, mais éviter de resynthètiser les 3 RegExp à chaque appel ne fait pas de mal.
+Revision: 13938 le pipeline "styliser" n'était pas déclaré dans la stable !
+Revision: 13936 permettre que le titre d'un document ait une extension differente de celle du fichier d'origine pour que le telechargement se fasse sous un nom&type different de celui sous lequel le fichier est heberge sur le serveur (ex envoyer en .php un fichier stocke en .txt pour raison de securite).
+Revision: 13931 etre un peu plus strict dans la verification du titre du document avant de s'en servir comme nom de fichier : - il faut qu'il ait la bonne extension - il faut qu'il ressemble a un nom de fichier (en particulier compose de caracteres licites) ( [13933] aussi) 
+Revision: 13930 retablir un content-type indument supprime par [13924]
+Revision: 13928 double echappement provoquait la mort definitive des sites suspendus : ils devenaient {{{'su}}} au lieu de {{{sus}}}
+Revision: 13927 Ce n'est pas parce que certains systèmes d'exploitation que je ne nommerai pas pataugent avec certains noms de fichiers qu'il faut considérer [11243] comme une {{fausse bonne idée}} comme le dit [13760]. Je filtre le cas du titre de document n'ayant pas d'extension qui ne doit en effet pas être utilisé comme nom de fichier du {{{Content-Disposition}}} (et encore, {{{Makefile}}} est notoirement recevable), mais autrement je restaure le comportement d'avant qui est une fausse {{fausse bonne idée}}}, autrement dit une vraie bonné idée. Par contrecoup, report du renforcement de sécurité su secret du site [13866] dans la branche 2.0.
+Revision: 13924 seuls les types de document qui ne peuvent etre inclus doivent etre envoyes en "Content-Disposition : attachment". Les clip flash et autre types embed n'etais pas visualisable lorsque la protection des documents etait activee
+Revision: 13912 #1744 memoriser le bouton sumblit clique ou le x/y du bouton image clique quand on post un formulaire en ajax pour pouvoir les poster si jamais on resubmit en post classique suite a une demande du serveur refuser_traiter_formulaire_ajax()
+Revision: 13911 enlever la securite dans le message_ok au retour des formulaires, car sinon il n'est pas possible de faire la redirection apres un post ajax dans l'espace prive
+Revision: 13909 permettre au filtre |match de retourner la valeur 0 (zero) si elle est explicitement recherchee
+Revision: 13908 #1732 : bug a la verification lors de la creation d'un auteur ( plus [13910]) 
+Revision: 13905 #1687 : ne pas perturber le filtre unique avec #INTRODUCTION
+Revision: 13901 corriger la recuperation d'arguments passes en url et le faux appel de syndic.html
+Revision: 13898 Oups. Faux départ de AS U ! (mea culpa) 
+Revision: 13897 Les URLs ne se recalculaient pas dans un cas précis : changement de la casse sur une table insensible à la casse. Pour éviter cela, on réécrit aussi, en plus de la date de mise à jour de l'url son titre. Si la casse change, il sera ainsi pris en compte. Correction aussi d'un bug U.type inexistant sur les url arborescentes...
+Revision: 13893 [12134] avait casse la relance des signatures en recalculant un hash au lieu de renvoyer l'existant
+Revision: 13892 amelioration de la strategie de purge : - si le cache est trop gros on redemande la main - mais si il n'y a plus assez de vieux fichiers a purger, on la rend Ainsi, meme avec un reglage trop bas du quota, le cache se stabilisera autour du volume necessaire pour stocker une heure de traffic 
+Revision: 13889 ne pas laisser le cache deborder lorsque les robots (ou les internautes) sont tres actifs - inc/invalideur renvoie le ratio taille cache/quota - le genie redemande la main lorsque le ratio est trop grand, sans attendre le prochain coup - les operations de vidange sont logees dans invalideur.log avec les details permettant de suivre les operations 
+
 2.0.6 -> 2.0.7 (13 avril 2009)
 
 Revision: 13887 Le datage des urls reecrites echouait pour cause de requette eronnee. Le suspens continue : y aura-t-il une version stable 2.0.x avec des urls reecrites non bugguees ?
