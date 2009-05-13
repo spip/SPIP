@@ -40,19 +40,21 @@ include_spip('public/balises');
 include_spip('public/jointures');
 
 // http://doc.spip.org/@argumenter_inclure
-function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true	, $lang = ''){
+function argumenter_inclure($params, $descr, &$boucles, $id_boucle, $echap=true	, $lang = ''){
 	$l = array();
 
-	foreach($struct->param as $val) {
+	foreach($params as $val) {
 		$var = array_shift($val);
 		if ($var == 'lang') {
 			$lang = $val;
-		} else
+		} else {
+
 			$l[$var] = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")  .
 			($val
 				? calculer_liste($val[0], $descr, $boucles, $id_boucle)
 				: index_pile($id_boucle, $var, $boucles)
 			) . ($echap?") . '":" ");
+		}
 	}
 	// Cas particulier de la langue : si {lang=xx} est definie, on
 	// la passe, sinon on passe la langue courante au moment du calcul
@@ -94,7 +96,7 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 		}
 	}
 
-	$_contexte = argumenter_inclure($p, $descr, $boucles, $id_boucle);
+	$_contexte = argumenter_inclure(phraser_arguments_inclure($p->param), $descr, $boucles, $id_boucle);
 
 	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
 	if ($env = (isset($_contexte['env'])|| isset($_contexte['self']))) {

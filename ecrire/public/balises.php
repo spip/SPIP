@@ -592,11 +592,10 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	while(count($params))
 		array_unshift($p->param,array_pop($params));
 	
-	$champ = phraser_arguments_inclure($p, true);
 	// a priori true
 	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
 	// si true, les arguments simples (sans truc=chose) vont degager
-	$code_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
+	$code_contexte = argumenter_inclure(phraser_arguments_inclure($p->param, true), $p->descr, $p->boucles, $p->id_boucle, false);
 
 	$p->boucles[$b]->numrows = true;
 	$connect = $p->boucles[$b]->sql_serveur;
@@ -965,9 +964,8 @@ function balise_INCLUDE_dist($p) {
 }
 // http://doc.spip.org/@balise_INCLURE_dist
 function balise_INCLURE_dist($p) {
-	$champ = phraser_arguments_inclure($p, true);
 	$id_boucle = $p->id_boucle;
-	$_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $id_boucle, false, false);
+	$_contexte = argumenter_inclure(phraser_arguments_inclure($p->param, 'all'), $p->descr, $p->boucles, $id_boucle, false, false);
 
 	if (isset($_contexte['fond'])) {
 
@@ -1038,12 +1036,10 @@ function balise_MODELE_dist($p) {
 	if (!$nom)
 		die("erreur de compilation #MODELE{nom du modele}");
 
-	$champ = phraser_arguments_inclure($p, true); 
-
 	// a priori true
 	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
 	// si true, les arguments simples (sans truc=chose) vont degager
-	$_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
+	$_contexte = argumenter_inclure(phraser_arguments_inclure($p->param, true), $p->descr, $p->boucles, $p->id_boucle, false);
 
 	// Si le champ existe dans la pile, on le met dans le contexte
 	// (a priori c'est du code mort ; il servait pour #LESAUTEURS dans
