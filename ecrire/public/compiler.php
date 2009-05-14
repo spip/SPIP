@@ -43,17 +43,17 @@ include_spip('public/jointures');
 function argumenter_inclure($params, $descr, &$boucles, $id_boucle, $echap=true	, $lang = ''){
 	$l = array();
 
-	foreach($params as $val) {
-		$var = array_shift($val);
+	foreach($params as $couple) {
+		list($var, $val) = $couple;
 		if ($var == 'lang') {
 			$lang = $val;
 		} else {
+			$val = ($val[0]->type == 'texte' AND !$val[0]->texte) 
+			? index_pile($id_boucle, $var, $boucles)
+			: calculer_liste($val, $descr, $boucles, $id_boucle);
 
-			$l[$var] = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")  .
-			($val
-				? calculer_liste($val[0], $descr, $boucles, $id_boucle)
-				: index_pile($id_boucle, $var, $boucles)
-			) . ($echap?") . '":" ");
+			$l[$var] = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")
+			  . $val . ($echap? ") . '":" ");
 		}
 	}
 	// Cas particulier de la langue : si {lang=xx} est definie, on
