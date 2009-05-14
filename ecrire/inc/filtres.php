@@ -2043,6 +2043,7 @@ function f_jQuery ($texte) {
 		array(
 			'javascript/jquery.js',
 			'javascript/jquery.form.js',
+			'javascript/jquery.autosave.js',
 			'javascript/ajaxCallback.js'
 		)) as $script)
 			if ($script = find_in_path($script))
