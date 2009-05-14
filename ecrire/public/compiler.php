@@ -39,39 +39,41 @@ include_spip('public/balises');
 // Gestion des jointures
 include_spip('public/jointures');
 
+// Les 2 ecritures INCLURE(a,b,c} et INCLURE(a){b}{c} sont admises
+// Preferer la premiere.
+
 // http://doc.spip.org/@argumenter_inclure
 function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_boucle, $echap=true	, $lang = ''){
 	$l = array();
 
 	foreach($params as $k => $couple) {
-		$val = $couple[1];
-		$var = $val[0];
-		if ($couple[0]){
-			if ($rejet_filtres)
-				break; // on est arrive sur un filtre qui suit la balise
-		} elseif ($var->type != 'texte') {
-			if ($rejet_filtres)
-				break; // on est arrive sur un filtre sans argument qui suit la balise
-			else
+	// la liste d'arguments d'inclusion peut se terminer par un filtre
+		$filtre = array_shift($couple);
+		if ($filtre) break;
+		foreach($couple as $val) {
+			$var = $val[0];
+			if ($var->type != 'texte') {
 				erreur_squelette(_T('zbug_parametres_inclus_incorrects'),$var);
-		} else { preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
-			$var = $m[1];
-			if ($m[2]) {
-			  $v = $m[3];
-			  if (preg_match(',^[\'"](.*)[\'"]$,', $v, $m)) $v = $m[1];
-			  $val[0]->texte = $v;
-			} else $val[0]->type = 'vide';
-
-			if ($var == 'lang') {
-			  $lang = $val;
 			} else {
+				preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
+				$var = $m[1];
+				if ($m[2]) {
+				  $v = $m[3];
+				  if (preg_match(',^[\'"](.*)[\'"]$,', $v, $m)) $v = $m[1];
+				  $val[0]->texte = $v;
+				} else $val[0]->type = 'vide';
 
-			  $val = ($val[0]->type === 'vide')
-			    ? index_pile($id_boucle, $var, $boucles)
-			    : calculer_liste($val, $descr, $boucles, $id_boucle);
+				if ($var == 'lang') {
+				  $lang = $val;
+				} else {
 
-			  $l[$var] = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")
-			    . $val . ($echap? ") . '":" ");
+				  $val = ($val[0]->type === 'vide')
+				    ? index_pile($id_boucle, $var, $boucles)
+				    : calculer_liste($val, $descr, $boucles, $id_boucle);
+
+				  $l[$var] = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")
+				    . $val . ($echap? ") . '":" ");
+				}
 			}
 		}
 	}
