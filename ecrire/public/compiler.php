@@ -39,8 +39,13 @@ include_spip('public/balises');
 // Gestion des jointures
 include_spip('public/jointures');
 
-// Les 2 ecritures INCLURE{a,b,c} et INCLURE(a){b}{c} sont admises
+// Les 2 ecritures INCLURE{A1,A2,A3...} et INCLURE(A1){A2}{A3}... sont admises
 // Preferer la premiere.
+// Les Ai sont de la forme Vi=Ei ou bien Vi qui veut alors dire Vi=Vi
+// Le resultat est un tableau indexe par les Vi
+// Toutefois, si le premier argument n'est pas de la forme Vi=Ei
+// il est conventionnellement la valeur de l'index 1.
+// Voir la balise #INCLURE
 
 // http://doc.spip.org/@argumenter_inclure
 function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_boucle, $echap=true	, $lang = ''){
@@ -55,6 +60,8 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 			if ($var->type != 'texte') {
 			  if ($n OR $k)
 				erreur_squelette(_T('zbug_parametres_inclus_incorrects'), '');
+			  else $l[1] = calculer_liste($val, $descr, $boucles, $id_boucle);
+			  break;
 			} else {
 				preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
 				$var = $m[1];
@@ -62,18 +69,21 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 				  $v = $m[3];
 				  if (preg_match(',^[\'"](.*)[\'"]$,', $v, $m)) $v = $m[1];
 				  $val[0]->texte = $v;
-				} else $val[0]->type = 'vide';
-
+				} elseif ($k OR $n) {
+				    $val[0]->type = 'vide';
+				} else $var = 1;
 				if ($var == 'lang') {
 				  $lang = $val;
 				} else {
-
 				  $val = ($val[0]->type === 'vide')
 				    ? index_pile($id_boucle, $var, $boucles)
 				    : calculer_liste($val, $descr, $boucles, $id_boucle);
 
-				  $l[$var] = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")
+				  if ($var !== 1)
+				    $val = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")
 				    . $val . ($echap? ") . '":" ");
+
+				  $l[$var] = $val;
 				}
 			}
 		}
