@@ -51,19 +51,19 @@
 			Le critere {env} permet de passer d'autres arguments de la page
 			par exemple l'id_document choisi pour un affichage complet
 		]
-		[(#INCLURE{fond=inc-documents}{id_article}{env})]
+		[(#INCLURE{fond=inc-documents, id_article, env})]
 
 
 		[(#REM) Petition :
 		La petition ayant une PAGINATION il faut absolument {env}
 		et pourquoi pas ajax
-		][(#PETITION|?{' '})<INCLURE{fond=inc-petition}{id_article}{env}{ajax}>]
+		][(#PETITION|?{' '})<INCLURE{fond=inc-petition, id_article, env}{ajax}>]
 
         [<div class="notes surlignable"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
 
 		[(#REM) Forum de l'article ]
 		<a href="#forum" name="forum" id="forum"></a>
-		<INCLURE{fond=inc-forum}{id_article} />
+		<INCLURE{fond=inc-forum, id_article} />
 		[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_article:></a></p>] 
 
 	</div><!--#contenu-->
@@ -74,7 +74,7 @@
     <div id="navigation">
 
         [(#REM) Menu de navigation par rubriques ]
-        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+        <INCLURE{fond=inc-rubriques, id_rubrique}>
 	
 		#FORMULAIRE_RECHERCHE
 
@@ -101,7 +101,7 @@
     </div><!--#extra-->
 
 	[(#REM) Pied de page ]
-	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+	<INCLURE{fond=inc-pied, skel=#SQUELETTE}>
 
 </div><!--#page-->
 </body>
