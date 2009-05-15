@@ -39,20 +39,43 @@ include_spip('public/balises');
 // Gestion des jointures
 include_spip('public/jointures');
 
+// Les 2 ecritures INCLURE{a,b,c} et INCLURE(a){b}{c} sont admises
+// Preferer la premiere.
+
 // http://doc.spip.org/@argumenter_inclure
-function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true	, $lang = ''){
+function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_boucle, $echap=true	, $lang = ''){
 	$l = array();
 
-	foreach($struct->param as $val) {
-		$var = array_shift($val);
-		if ($var == 'lang') {
-			$lang = $val;
-		} else
-			$l[$var] = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")  .
-			($val
-				? calculer_liste($val[0], $descr, $boucles, $id_boucle)
-				: index_pile($id_boucle, $var, $boucles)
-			) . ($echap?") . '":" ");
+	foreach($params as $k => $couple) {
+	// la liste d'arguments d'inclusion peut se terminer par un filtre
+		$filtre = array_shift($couple);
+		if ($filtre) break;
+		foreach($couple as $val) {
+			$var = $val[0];
+			if ($var->type != 'texte') {
+				erreur_squelette(_T('zbug_parametres_inclus_incorrects'),$var);
+			} else {
+				preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
+				$var = $m[1];
+				if ($m[2]) {
+				  $v = $m[3];
+				  if (preg_match(',^[\'"](.*)[\'"]$,', $v, $m)) $v = $m[1];
+				  $val[0]->texte = $v;
+				} else $val[0]->type = 'vide';
+
+				if ($var == 'lang') {
+				  $lang = $val;
+				} else {
+
+				  $val = ($val[0]->type === 'vide')
+				    ? index_pile($id_boucle, $var, $boucles)
+				    : calculer_liste($val, $descr, $boucles, $id_boucle);
+
+				  $l[$var] = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")
+				    . $val . ($echap? ") . '":" ");
+				}
+			}
+		}
 	}
 	// Cas particulier de la langue : si {lang=xx} est definie, on
 	// la passe, sinon on passe la langue courante au moment du calcul
@@ -60,10 +83,11 @@ function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true	
 	if ($lang === false) return $l;
 
 	$l['lang'] = ($echap?"\'lang\' => ' . argumenter_squelette(":"'lang' => ")  .
-		($lang
+	  (($lang[0]->type !== 'vide')
 			? calculer_liste($lang[0], $descr, $boucles, $id_boucle)
 			: '$GLOBALS["spip_lang"]'
 			) . ($echap?") . '":" ");
+
 	return $l;
 }
 
@@ -94,7 +118,7 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 		}
 	}
 
-	$_contexte = argumenter_inclure($p, $descr, $boucles, $id_boucle);
+	$_contexte = argumenter_inclure($p->param, false, $descr, $boucles, $id_boucle);
 
 	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
 	if ($env = (isset($_contexte['env'])|| isset($_contexte['self']))) {
@@ -244,7 +268,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 		$corps .= 
 		  (($boucle->lang_select != 'oui') ? 
-			"\t\tif (!\$GLOBALS['forcer_lang'])\n\t " : '')
+			"\t\tif (isset(\$GLOBALS['forcer_lang']) AND !\$GLOBALS['forcer_lang'])\n\t " : '')
 		  . "\t\tif (\$x = "
 		  . index_pile($id_boucle, 'lang', $boucles)
 		  . ') $GLOBALS["spip_lang"] = $x;';
@@ -785,18 +809,14 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	// Pre-traitement : reperer le charset du squelette, et le convertir
 	// Bonus : supprime le BOM
 	include_spip('inc/charsets');
-	$squelette = transcoder_page($squelette);
-
-	// Informations sur le squelette
-	$descr = array('nom' => $nom, 'sourcefile' => $sourcefile,
-		'squelette' => $squelette);
-	unset($squelette);
+	$descr = array('nom' => $nom,
+		       'sourcefile' => $sourcefile,
+		       'squelette' => transcoder_page($squelette));
 
 	// Phraser le squelette, selon sa grammaire
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
 	$boucles = array();
 	spip_timer('calcul_skel');
-
 
 	$f = charger_fonction('phraser_'.$gram, 'public');
 
