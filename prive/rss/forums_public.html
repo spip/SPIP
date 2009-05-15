@@ -12,7 +12,9 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 	<item>
 		<title>[(#TITRE|texte_backend)][ ((#STATUT|=={publie}|?{'', #STATUT}))]</title>
 		<link>[(#URL_FORUM|url_absolue|texte_backend)]</link>
-		<guid isPermaLink="true">[(#URL_ECRIRE{controle_forum, type=prop&amp;debut_id_forum=#ID_FORUM}|url_absolue|texte_backend)]</guid>
+		<guid isPermaLink="true">[(#ENV{id_article}|?{
+			[(#URL_ECRIRE{articles_forum, id_article=#ID_ARTICLE})],
+			[(#URL_ECRIRE{controle_forum, type=prop&amp;debut_id_forum=#ID_FORUM})]}|url_absolue|texte_backend)]</guid>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
 		[<dc:language>(#LANG|texte_backend)</dc:language>]
