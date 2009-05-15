@@ -1071,6 +1071,16 @@ function afficher_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_se
  	    "&nbsp;<a href='#' onclick=\"$(this).prev().prev().toggle('fast');return false;\" class='verdana2'>"
  	    . _T('bouton_changer') ."</a>"
  	    :"");
+
+	$out = pipeline('affiche_hierarchie',array('args'=>array(
+			'id_parent'=>$id_parent,
+			'message'=>$message,
+			'id_objet'=>$id_objet,
+			'objet'=>$type,
+			'id_secteur'=>$id_secteur,
+			'restreint'=>$restreint),
+			'data'=>$out));
+
  	return $out;
 }
 
