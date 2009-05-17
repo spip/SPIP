@@ -244,6 +244,7 @@ $spip_pipeline = array(
 	'affiche_droite' => '',
 	'affiche_gauche' => '',
 	'affiche_milieu' => '',
+	'affiche_enfants' => '',
 	'affiche_hierarchie' => '',
 	'boite_infos' => 'f_boite_infos',
 	'ajouter_boutons' => '',
