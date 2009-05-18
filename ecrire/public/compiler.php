@@ -72,6 +72,7 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 				} elseif ($k OR $n) {
 				    $val[0]->type = 'vide';
 				} else $var = 1;
+
 				if ($var == 'lang') {
 				  $lang = $val;
 				} else {
@@ -82,7 +83,7 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 				  if ($var !== 1)
 				    $val = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")
 				    . $val . ($echap? ") . '":" ");
-
+				  else $val = $echap ? "'.$val.'" : $val;
 				  $l[$var] = $val;
 				}
 			}
