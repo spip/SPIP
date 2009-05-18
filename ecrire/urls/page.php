@@ -78,10 +78,10 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 				));
 	if ($url_propre) {
 		if ($GLOBALS['profondeur_url']<=0)
-			$urls_anciennes = charger_fonction('propres','urls');
+			$urls_anciennes = charger_fonction('propres','urls',true);
 		else
-			$urls_anciennes = charger_fonction('arbo','urls');
-		return $urls_anciennes($url_propre, $entite);
+			$urls_anciennes = charger_fonction('arbo','urls',true);
+		return $urls_anciennes?$urls_anciennes($url_propre, $entite):'';
 	}
 	/* Fin du bloc compatibilite url-propres */
 }

@@ -721,7 +721,16 @@ function find_in_path ($file, $dirname='', $include=false) {
 	}
 }
 
-
+/**
+ * Trouve tous les fichiers du path correspondants a un pattern
+ * pour un nom de fichier donne, ne retourne que le premier qui sera trouve
+ * par un find_in_path
+ *
+ * @param string $dir
+ * @param string $pattern
+ * @param bool $recurs
+ * @return array
+ */
 // http://doc.spip.org/@find_all_in_path
 function find_all_in_path($dir,$pattern, $recurs=false){
 	$liste_fichiers=array();
@@ -793,9 +802,12 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 			}
 
 			$f = charger_fonction($type, 'urls', true); 
-		// si $entite='', on veut la fonction de passage URL ==> id
+			// se rabatre sur les urls page si les urls perso non dispo
+			if (!$f)
+				$f = charger_fonction('page', 'urls', true);
+			// si $entite='', on veut la fonction de passage URL ==> id
 			if (!$entite) return $f; 
-		// sinon on veut effectuer le passage id ==> URL
+			// sinon on veut effectuer le passage id ==> URL
 			$res = !$f ? '' : $f(intval($id), $entite, $args, $ancre);
 		}
 	}

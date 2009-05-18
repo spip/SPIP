@@ -43,7 +43,6 @@ function exec_config_fonctions_dist()
 	$versionneur = charger_fonction('versionneur', 'configuration');
 	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
 	$relayeur = charger_fonction('relayeur', 'configuration');
-	$type_urls = charger_fonction('type_urls', 'configuration');
 
 	echo 
 
@@ -57,7 +56,6 @@ function exec_config_fonctions_dist()
 
 	  $relayeur(_request('retour_proxy')), // Proxy pour syndication & doc
 
-	  $type_urls(), // Choix de type_urls
 
 	'';
 
