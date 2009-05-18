@@ -12,6 +12,30 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Rechercher tous les lang/file dans le path
+ * qui seront ensuite charges dans l'ordre du path
+ * version dediee et optimisee pour cet usage de find_in_path
+ *
+ * @staticvar <type> $dirs
+ * @param <type> $file
+ * @param <type> $dirname
+ * @return <type>
+ */
+function find_langs_in_path ($file, $dirname='lang') {
+	static $dirs=array();
+	$liste = array();
+	foreach(creer_chemin() as $dir) {
+		if (!isset($dirs[$a = $dir . $dirname]))
+			$dirs[$a] = (is_dir($a) || !$a) ;
+		if ($dirs[$a]) {
+			if (is_readable($a .= $file)) {
+				$liste[] = $a;
+			}
+		}
+	}
+	return $liste;
+}
 //
 // Charger un fichier langue
 //
@@ -21,32 +45,36 @@ function chercher_module_lang($module, $lang = '') {
 		$lang = '_'.$lang;
 
 	// 1) dans un repertoire nomme lang/ se trouvant sur le chemin
-	if ($f = find_in_path($module.$lang.'.php', 'lang/'))
-		return $f;
+	if ($f = ($module == 'local'
+		? find_in_path($module.$lang.'.php', 'lang/')
+		: find_langs_in_path($module.$lang.'.php', 'lang/')))
+		return is_array($f)?$f:array($f);
 
 	// 2) directement dans le chemin (old style, uniquement pour local)
 	return ($module == 'local')
-		? find_in_path('local'.$lang. '.php')
-		: '';
+		? (($f = find_in_path('local'.$lang. '.php')) ? array($f):false)
+		: false;
 }
 
 // http://doc.spip.org/@charger_langue
 function charger_langue($lang, $module = 'spip') {
-	if ($lang AND $fichier_lang = chercher_module_lang($module, $lang)) {
+	if ($lang AND $fichiers_lang = chercher_module_lang($module, $lang)) {
 		$GLOBALS['idx_lang']='i18n_'.$module.'_'.$lang;
-		include($fichier_lang);
+		include(array_shift($fichiers_lang));
+		surcharger_langue($fichiers_lang);
 	} else {
 		// si le fichier de langue du module n'existe pas, on se rabat sur
 		// la langue par defaut du site -- et au pire sur le francais, qui
 		// *par definition* doit exister, et on copie le tableau dans la
 		// var liee a la langue
 		$l = $GLOBALS['meta']['langue_site'];
-		if (!$fichier_lang = chercher_module_lang($module, $l))
-			$fichier_lang = chercher_module_lang($module, 'fr');
+		if (!$fichiers_lang = chercher_module_lang($module, $l))
+			$fichiers_lang = chercher_module_lang($module, 'fr');
 
-		if ($fichier_lang) {
+		if ($fichiers_lang) {
 			$GLOBALS['idx_lang']='i18n_'.$module.'_' .$l;
-			include($fichier_lang);
+			include(array_shift($fichiers_lang));
+			surcharger_langue($fichiers_lang);
 			$GLOBALS['i18n_'.$module.'_'.$lang]
 				= &$GLOBALS['i18n_'.$module.'_'.$l];
 			#spip_log("module de langue : ${module}_$l.php");
@@ -55,22 +83,27 @@ function charger_langue($lang, $module = 'spip') {
 }
 
 //
-// Surcharger le fichier de langue courant avec un autre (tordu, hein...)
+// Surcharger le fichier de langue courant avec un ou plusieurs autre (tordu, hein...)
 //
 // http://doc.spip.org/@surcharger_langue
-function surcharger_langue($fichier) {
+function surcharger_langue($fichiers) {
 	if (!isset($GLOBALS['idx_lang'])) return;
+	if (!is_array($fichiers)) $fichiers = array($fichiers);
+	if (!count($fichiers)) return;
+	
 	$idx_lang_normal = $GLOBALS['idx_lang'];
 	$idx_lang_surcharge = $GLOBALS['idx_lang'].'_temporaire';
 	$GLOBALS['idx_lang'] = $idx_lang_surcharge;
-	include($fichier);
-	if (is_array($GLOBALS[$idx_lang_surcharge])) {
-		$GLOBALS[$idx_lang_normal] = array_merge(
-			$GLOBALS[$idx_lang_normal],
-			$GLOBALS[$idx_lang_surcharge]
-		);
+	foreach($fichiers as $fichier){
+		include($fichier);
+		if (is_array($GLOBALS[$idx_lang_surcharge])) {
+			$GLOBALS[$idx_lang_normal] = array_merge(
+				$GLOBALS[$idx_lang_normal],
+				$GLOBALS[$idx_lang_surcharge]
+			);
+		}
+		unset ($GLOBALS[$idx_lang_surcharge]);
 	}
-	unset ($GLOBALS[$idx_lang_surcharge]);
 	$GLOBALS['idx_lang'] = $idx_lang_normal;
 }
 
