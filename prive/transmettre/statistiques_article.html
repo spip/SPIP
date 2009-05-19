@@ -1,6 +1,6 @@
 <BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}{lang_select}><?php
 if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},transmettre,#ENV{op}, #ENV{args}}|?{1,0})]) {
-?><BOUCLE1(VISITES_ARTICLES){id_article ?}{par date}>#DATE;#VISITES
+?><BOUCLE1(VISITES_ARTICLES){id_article ?}{par date}>[(#DATE|affdate{Y-m-d})],#VISITES
 </BOUCLE1>
 <?php
 } else {
