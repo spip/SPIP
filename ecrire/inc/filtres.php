@@ -74,7 +74,35 @@ function filtre_text_csv_dist($t)
 	}
 	// si premiere colonne vide, le raccourci doit quand meme produire <th...
 	if ($entete[0] == $sep) $entete = ' ' . $entete;
-	if ($corps[strlen($corps)-1] <> "\n") $corps .= "\n";
+
+	$lignes = split("\n", $corps);
+	// retrait des lignes vides finales
+	while(preg_match("/^$sep*$/", $lignes[count($lignes)-1]))
+	  unset($lignes[count($lignes)-1]);
+	//  calcul du  nombre de colonne a chaque ligne
+	$nbcols = array();
+	$max = $mil = substr_count($entete, $sep);
+	foreach($lignes as $k=>$v) {
+	  if ($max <> ($nbcols[$k]= substr_count($v, $sep))) {
+	    if ($max > $nbcols[$k])
+	      $mil = $nbcols[$k];
+	    else { $mil = $max; $max = $nbcols[$k];}
+	  }
+	}
+	// Si pas le meme nombre, cadrer au nombre max
+	if ($mil <> $max)
+	  foreach($nbcols as $k=>$v) {
+	    if ($v < $max) $lignes[$k].= str_repeat($sep, $max-$v);
+	    }
+	// et retirer les colonnes integralement vides
+	while(true) {
+	  $nbcols =  ($entete[strlen($entete)-1]===$sep);
+	  foreach($lignes as $v) $nbcols &= ($v[strlen($v)-1]===$sep);
+	  if (!$nbcols) break;
+	  $entete = substr($entete,0,-1);
+	  foreach($lignes as $k=>$v) $lignes[$k] = substr($v,0,-1);
+	}
+	$corps = join("\n", $lignes) . "\n";
 	return propre($caption .
 		"\n|{{" .
 		str_replace($sep,'}}|{{',$entete) .
