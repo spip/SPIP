@@ -61,7 +61,7 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	else $ze_logo = "rubrique-24.gif";
 
 	echo debut_grand_cadre(true);
-	echo afficher_hierarchie($id_parent);
+	echo afficher_hierarchie($id_parent,'',$id_rubrique,'rubrique');
 	echo fin_grand_cadre(true);
 
 	echo debut_gauche('', true);
