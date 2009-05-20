@@ -88,16 +88,25 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 			}
 		}
 	}
+	// si pas de connect explicite, on transmet celui de la boucle courante
+	//
+	if (!isset($l['connect'])
+		AND $connect = (!$id_boucle ? '' : $boucles[$id_boucle]->sql_serveur)
+	  AND !in_array($connect,$GLOBALS['exception_des_connect'])){
+		$l['connect'] = ($echap?"\'connect\' => ' . argumenter_squelette(":"'connect' => ")
+			. "'$connect'" . ($echap? ") . '":" ");
+	}
+
 	// Cas particulier de la langue : si {lang=xx} est definie, on
 	// la passe, sinon on passe la langue courante au moment du calcul
 	// sauf si on n'en veut pas 
-	if ($lang === false) return $l;
-
-	$l['lang'] = ($echap?"\'lang\' => ' . argumenter_squelette(":"'lang' => ")  .
-	  (($lang[0]->type !== 'vide')
-			? calculer_liste($lang[0], $descr, $boucles, $id_boucle)
-			: '$GLOBALS["spip_lang"]'
-			) . ($echap?") . '":" ");
+	if ($lang !== false) {
+			$l['lang'] = ($echap?"\'lang\' => ' . argumenter_squelette(":"'lang' => ")  .
+				(($lang[0]->type !== 'vide')
+					? calculer_liste($lang[0], $descr, $boucles, $id_boucle)
+					: '$GLOBALS["spip_lang"]'
+					) . ($echap?") . '":" ");
+	}
 
 	return $l;
 }

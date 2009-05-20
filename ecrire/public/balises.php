@@ -1071,14 +1071,12 @@ function balise_INCLURE_dist($p) {
 		$_l = 'array(' . join(",\n\t", $_contexte) .')';
 		if ($flag_env) $_l = "array_merge(\$Pile[0],$_l)";
 
-		$_connect = _q(!$id_boucle ? '' : $p->boucles[$id_boucle]->sql_serveur);
-
 		$_options = array();
 		if (isset($_contexte['ajax'])) $_options[] = "'ajax'=>true";
 		if ($p->etoile) $_options[] = "'etoile'=>true";
 		$_options = "array(" . join(',',$_options) . ")";
 		
-		$p->code = "recuperer_fond('',\$l =  $_l, $_options, $_connect)";
+		$p->code = "recuperer_fond('',\$l =  $_l, $_options)";
 
 	} elseif (!isset($_contexte[1])) {
 			erreur_squelette(_T('zbug_balise_sans_argument', 
