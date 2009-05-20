@@ -44,7 +44,12 @@ function get_spip_doc($fichier) {
 	return $fichier;
 }
 
-// Filtre pour #FICHIER
+// Constante indiquant le charset probable des documents non utf-8 joints
+
+@define('CHARSET_JOINT', 'iso-8859-1');
+
+// Filtre pour #FICHIER permettant d'incruster le contenu d'un document
+// Si 2e arg fourni, conversion dans le charset du site si possible
 
 // http://doc.spip.org/@contenu_document
 function contenu_document($arg, $charset='')
@@ -64,9 +69,13 @@ function contenu_document($arg, $charset='')
 	}
 
 	$r = spip_file_get_contents($f);
+	
 	if ($charset) {
-	  include_spip('inc/charset');
-	  $r = importer_charset($r, $charset);
+		include_spip('inc/charset');
+		if ($charset !== 'auto') {
+			$r = importer_charset($r, $charset);
+		} elseif ($GLOBALS['meta']['charset'] == 'utf-8' AND !is_utf8($r))
+			$r = importer_charset($r, CHARSET_JOINT);
 	}
 	return $r;
 }
