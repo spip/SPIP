@@ -78,7 +78,7 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 	// si id_auteur est hors table, c'est une creation sinon une modif
 	//
 	if ($id_auteur) {
-		$auteur = sql_fetsel("nom, login, bio, email, nom_site, url_site, pgp, extra, id_auteur, source, imessage", "spip_auteurs", "id_auteur=$id_auteur");
+		$auteur = sql_fetsel("nom, login, bio, email, nom_site, url_site, pgp, id_auteur, source, imessage", "spip_auteurs", "id_auteur=$id_auteur");
 		$source = $auteur['source'];
 	}
 	if (!$auteur) {
