@@ -75,10 +75,8 @@ function action_charger_plugin_dist() {
 	$fichier = $tmp.basename($zip);
 	if (!@file_exists($fichier)) {
 		include_spip('inc/distant');
-		$contenu = recuperer_page($zip, false, false,
-			8000000 /* taille max */);
-		if (!$contenu
-		OR !ecrire_fichier($fichier, $contenu)) {
+		$contenu = recuperer_page($zip, $fichier, false,_COPIE_LOCALE_MAX_SIZE);
+		if (!$contenu) {
 			spip_log('charger_decompresser impossible de charger '.$zip);
 			$status = -1;
 		}
