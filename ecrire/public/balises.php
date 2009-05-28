@@ -1006,60 +1006,40 @@ function balise_INCLURE_dist($p) {
 // Inclure un modele : #MODELE{modele, params}
 // http://doc.spip.org/@balise_MODELE_dist
 function balise_MODELE_dist($p) {
-	$contexte = array();
-
-	// recupere le premier argument, qui est obligatoirement le nom du modele
-	if (!is_array($p->param))
-		die("erreur de compilation #MODELE{nom du modele}");
-
-	// Transforme l'ecriture du deuxieme param {truc=chose,machin=chouette} en
-	// {truc=chose}{machin=chouette}... histoire de simplifier l'ecriture pour
-	// le webmestre : #MODELE{emb}{autostart=true,truc=1,chose=chouette}
-	if ($p->param[0]) {
-		$params = $p->param[0];
-		unset($p->param[0]);
-		while (count($params)>2){
-			array_unshift($p->param,array(0=>NULL,1=>array_pop($params)));
-			//$p->param[]=array(0=>NULL,1=>array_pop($p->param[0]));
-		}
-		array_unshift($p->param,$params);
-	}
-	$modele = array_shift($p->param);
-	$nom = strtolower($modele[1][0]->texte);
-	if (!$nom)
-		die("erreur de compilation #MODELE{nom du modele}");
-
-	// a priori true
-	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
-	// si true, les arguments simples (sans truc=chose) vont degager
 
 	$_contexte = argumenter_inclure($p->param, true, $p->descr, $p->boucles, $p->id_boucle, false);
 
-	// Si le champ existe dans la pile, on le met dans le contexte
-	// (a priori c'est du code mort ; il servait pour #LESAUTEURS dans
-	// le cas spip_syndic_articles)
-	#$_contexte[] = "'$nom='.".champ_sql($nom, $p);
+	if (!isset($_contexte[1])) {
+			erreur_squelette(_T('zbug_balise_sans_argument', 
+					array('balise' => ' MODELE')),
+			$p->id_boucle);
+			$p->code = "''";
+	} else {
+		$nom = $_contexte[1];
+		unset($_contexte[1]);
 
-	// Reserver la cle primaire de la boucle courante si elle existe
-	if ($idb = $p->id_boucle) {
-		if ($primary = $p->boucles[$idb]->primary) {
-			$id = champ_sql($primary, $p);
-			$_contexte[] = "'$primary='.".$id;
-			$_contexte[] = "'id='.".$id;
+		// Incoherence dans la syntaxe du contexte. A revoir.
+		// Reserver la cle primaire de la boucle courante si elle existe
+		if ($idb = $p->id_boucle) {
+			if ($primary = $p->boucles[$idb]->primary) {
+				$id = champ_sql($primary, $p);
+				$_contexte[] = "'$primary='.".$id;
+				$_contexte[] = "'id='.".$id;
+			}
 		}
-	}
 
-	$connect = '';
-	if (isset($p->boucles[$p->id_boucle]))
-		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+		$connect = '';
+		if (isset($p->boucles[$p->id_boucle]))
+			$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 
-	$page = "\$p = recuperer_fond('modeles/$nom', \$l = array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']), array('trim'=>true, 'modele'=>true"
+		$page = "\$p = recuperer_fond('modeles/' . $nom, \$l = array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']), array('trim'=>true, 'modele'=>true"
 	. (isset($_contexte['ajax'])?", 'ajax'=>true":'')
 	. "), " . _q($connect) . ")";
 
-	$p->code = "\n\t(((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))>=5)? '' :\n\t$page)\n";
+		$p->code = "\n\t(((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))>=5)? '' :\n\t$page)\n";
 
-	$p->interdire_scripts = false; // securite assuree par le squelette
+		$p->interdire_scripts = false; // securite assuree par le squelette
+	}
 
 	return $p;
 }
