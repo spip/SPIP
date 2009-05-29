@@ -252,7 +252,8 @@ function img_logo_document($fichier, $extension, $id_vignette, $mode, $x, $y, $c
 	}
 	else {
 		// Pas de vignette, mais un fichier image -- creer la vignette
-		if (strpos($GLOBALS['meta']['formats_graphiques'], $extension)!==false) {
+		if (strpos($GLOBALS['meta']['formats_graphiques'], $extension)!==false
+		AND (!test_espace_prive() OR $GLOBALS['meta']['creer_preview']=='oui')) {
 		  if ($img = _DIR_RACINE.copie_locale(get_spip_doc($fichier))
 			AND @file_exists($img)) {
 				if (!$x AND !$y) {
