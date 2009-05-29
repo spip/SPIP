@@ -123,7 +123,7 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 		  '"]) . ",' .
 		  $deux .
 		  '"' ;
-	} else calculer_critere_DEFAUT($idb, $boucls, $crit);
+	} else calculer_critere_DEFAUT_dist($idb, $boucls, $crit);
 }
 
 // {pagination}
@@ -628,9 +628,11 @@ function calculer_critere_parties_aux($idb, &$boucles, $param) {
 // http://doc.spip.org/@calculer_criteres
 function calculer_criteres ($idb, &$boucles) {
 
+	$defaut = charger_fonction('DEFAUT', 'calculer_critere');
 	foreach($boucles[$idb]->criteres as $crit) {
 		$critere = $crit->op;
 		// critere personnalise ?
+
 		if (
 		  (!function_exists($f="critere_".strtoupper($boucles[$idb]->id_table)."_".$critere))
 		AND (!function_exists($f=$f."_dist"))
@@ -640,7 +642,7 @@ function calculer_criteres ($idb, &$boucles) {
 		  // double cas particulier repere a l'analyse lexicale
 		  if (($critere == ",") OR ($critere == '/'))
 		    $f = 'calculer_critere_parties';
-		  else	$f = 'calculer_critere_DEFAUT';
+		  else	$f = $defaut;
 		}
 		// Applique le critere
 		$res = $f($idb, $boucles, $crit);
@@ -666,8 +668,13 @@ function kwote($lisp)
 // http://doc.spip.org/@critere_IN_dist
 function critere_IN_dist ($idb, &$boucles, $crit)
 {
+	$r = calculer_critere_infixe($idb, $boucles, $crit);
+	if (!$r)
+		erreur_squelette(_T('zbug_info_erreur_squelette') . ' IN',
+			       "BOUCLE$idb");
 
-	list($arg, $op, $val, $col, $where_complement)= calculer_critere_infixe($idb, $boucles, $crit);
+	list($arg, $op, $val, $col, $where_complement) = $r;
+
 	$in = critere_IN_cas($idb, $boucles, $crit->not ? 'NOT' : '', $arg, $op, $val, $col);
 //	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
 	$where = $in;
@@ -728,9 +735,22 @@ function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 # Criteres de comparaison
 
 // http://doc.spip.org/@calculer_critere_DEFAUT
-function calculer_critere_DEFAUT($idb, &$boucles, $crit)
+function calculer_critere_DEFAUT_dist($idb, &$boucles, $crit)
 {
-	list($arg, $op, $val, $col, $where_complement)= calculer_critere_infixe($idb, $boucles, $crit);
+	$r = calculer_critere_infixe($idb, $boucles, $crit);
+
+	if (!$r) {
+		erreur_squelette(_T('zbug_info_erreur_squelette'),
+			_T('zbug_boucle') .
+			" $idb " .
+			_T('zbug_critere_inconnu', 
+			   array('critere' => $crit->op)));
+	} else calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $r);
+}
+
+function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args)
+{
+	list($arg, $op, $val, $col, $where_complement) = $args;
 
 	$where = array("'$op'", "'$arg'", $val[0]);
 
@@ -782,6 +802,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	list($fct, $col, $op, $val, $args_sql) =
 	  calculer_critere_infixe_ops($idb, $boucles, $crit);
+
 	$col_alias = $col;
 	$where_complement =false;
 
@@ -820,10 +841,11 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		  list(,$table, $col) = $r;
 		  $col_alias = $col;
 		  $table = calculer_critere_externe_init($boucle, array($table), $col, $desc, ($crit->cond OR $op !='='), true);
+		  if (!$table) return '';
 	}
 	else {
 		if (@!array_key_exists($col, $desc['field'])) {
-	  	$calculer_critere_externe = 'calculer_critere_externe_init';
+			$calculer_critere_externe = 'calculer_critere_externe_init';
 			// gestion par les plugins des jointures tordues pas automatiques mais necessaires
 			if (isset($exceptions_des_jointures[$table][$col])){
 				if (count($exceptions_des_jointures[$table][$col])==3)
@@ -835,6 +857,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 				list($t, $col) = $exceptions_des_jointures[$col];
 			else $t =''; // jointure non declaree. La trouver.
 			$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
+			if (!$table) return '';
 			list($nom, $desc) = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
 			if (count(trouver_champs_decomposes($col,$desc))>1){
 				$col_alias = $col; // id_article devient juste le nom d'origine
@@ -906,11 +929,11 @@ function primary_doublee($decompose, $table)
 function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $eg, $checkarrivee = false)
 {
 	$cle = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
-	if ($cle) {
-		$t = array_search($cle[0], $boucle->from);
-		// transformer eventuellement id_xx en (id_objet,objet)
-		$cols = trouver_champs_decomposes($col,$cle[1]); 
-		if ($t) {
+	if (!$cle) return '';
+	$t = array_search($cle[0], $boucle->from);
+	// transformer eventuellement id_xx en (id_objet,objet)
+	$cols = trouver_champs_decomposes($col,$cle[1]); 
+	if ($t) {
 			$joindre = false;
 			foreach($cols as $col){
 			  $c = '/\b' . $t  . ".$col" . '\b/';
@@ -922,16 +945,9 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $eg, $che
 			  }
 			}
 		  if (!$joindre) return $t;
-		}
-		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $cols, $eg);
-		if ($cle) return $cle;
 	}
+	return calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $cols, $eg);
 
-	erreur_squelette(_T('zbug_info_erreur_squelette'),
-			_T('zbug_boucle') .
-			" $idb " .
-			_T('zbug_critere_inconnu', 
-			    array('critere' => $col)));
 }
 
 // http://doc.spip.org/@trouver_champ
