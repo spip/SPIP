@@ -127,17 +127,13 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 		}
 		if ($fichier == 'page.php') {
 			$fichier = '';
-		} else {
-			$path = find_in_path($fichier);
-			if (!$path) {
-			spip_log("ERREUR: <INCLURE($fichier)> impossible");
-			erreur_squelette(_T('zbug_info_erreur_squelette'),
-				 "&lt;INCLURE($fichier)&gt; - "
-				 ._T('fichier_introuvable', array('fichier' => $fichier)));
-			return "'<!-- Erreur INCLURE(".texte_script($fichier).") -->'";
-			}
 		}
+		// si inexistant, on essaiera a l'execution
+		if ($path = find_in_path($fichier))
+			$path = "\"$path\"";
+		else $path = "find_in_path(\"$fichier\")";
 	}
+
 	$_contexte = argumenter_inclure($p->param, false, $descr, $boucles, $id_boucle);
 
 	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
@@ -159,9 +155,14 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 		$contexte = "array_merge('.var_export(\$Pile[0],1).',$contexte)";
 	}
 
-	$code = "\tinclude " .
-		($fichier ? "\\'$path\\'" : ('_DIR_RESTREINT . "public.php"')).
-		";";
+	$code = !$fichier
+	? ('include _DIR_RESTREINT . "public.php";')
+	  : "if (is_readable(\$path = $path))
+ 		include \$path;
+	else { include_spip(\"public/debug\");
+			erreur_squelette(_T(\"zbug_info_erreur_squelette\"),
+				 _T(\"fichier_introuvable\", array(\"fichier\" => \"$fichier\")));}";
+
 
 	// Gerer ajax
 	if ($ajax) {
@@ -175,7 +176,7 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 	}
 
 	return "\n'<".
-		"?php\n\t".'$contexte_inclus = '.$contexte.";\n"
+		"?php\n".'$contexte_inclus = '.$contexte.";\n"
 		. $code
 		. "\n?'." . "'>'";
 }
