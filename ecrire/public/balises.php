@@ -965,6 +965,9 @@ function balise_INCLUDE_dist($p) {
 // http://doc.spip.org/@balise_INCLURE_dist
 function balise_INCLURE_dist($p) {
 	$id_boucle = $p->id_boucle;
+	// la lang n'est pas passe de facon automatique par argumenter
+	// mais le sera pas recuperer_fond, sauf si etoile=>true est passe
+	// en option
 	$_contexte = argumenter_inclure($p->param, true, $p->descr, $p->boucles, $id_boucle, false, false);
 
 	if (isset($_contexte['fond'])) {
@@ -990,7 +993,7 @@ function balise_INCLURE_dist($p) {
 		if ($p->etoile) $_options[] = "'etoile'=>true";
 		$_options = "array(" . join(',',$_options) . ")";
 		
-		$p->code = "recuperer_fond('',\$l =  $_l, $_options)";
+		$p->code = "recuperer_fond('', $_l, $_options)";
 
 	} elseif (!isset($_contexte[1])) {
 			erreur_squelette(_T('zbug_balise_sans_argument', 
@@ -1021,10 +1024,11 @@ function balise_MODELE_dist($p) {
 		// Incoherence dans la syntaxe du contexte. A revoir.
 		// Reserver la cle primaire de la boucle courante si elle existe
 		if ($idb = $p->id_boucle) {
-			if ($primary = $p->boucles[$idb]->primary) {
+			if ($primary = $p->boucles[$idb]->primary
+			AND !strpos($primary,',')) {
 				$id = champ_sql($primary, $p);
-				$_contexte[] = "'$primary='.".$id;
-				$_contexte[] = "'id='.".$id;
+				$_contexte[] = "'$primary'=>".$id;
+				$_contexte[] = "'id'=>".$id;
 			}
 		}
 
@@ -1032,7 +1036,7 @@ function balise_MODELE_dist($p) {
 		if (isset($p->boucles[$p->id_boucle]))
 			$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 
-		$page = "\$p = recuperer_fond('modeles/' . $nom, \$l = array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']), array('trim'=>true, 'modele'=>true"
+		$page = "recuperer_fond('modeles/' . $nom, array(".join(',', $_contexte).",'recurs'=>(++\$recurs)), array('trim'=>true, 'modele'=>true"
 	. (isset($_contexte['ajax'])?", 'ajax'=>true":'')
 	. "), " . _q($connect) . ")";
 
