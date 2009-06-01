@@ -669,10 +669,11 @@ function kwote($lisp)
 function critere_IN_dist ($idb, &$boucles, $crit)
 {
 	$r = calculer_critere_infixe($idb, $boucles, $crit);
-	if (!$r)
+	if (!$r) {
 		erreur_squelette(_T('zbug_info_erreur_squelette') . ' IN',
 			       "BOUCLE$idb");
-
+		return;
+	}
 	list($arg, $op, $val, $col, $where_complement) = $r;
 
 	$in = critere_IN_cas($idb, $boucles, $crit->not ? 'NOT' : '', $arg, $op, $val, $col);
