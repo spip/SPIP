@@ -845,6 +845,8 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 			'sourcefile' => $sourcefile,
 			'squelette' => transcoder_page($squelette));
 
+	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug')
+		squelette_debug_compile($nom, $sourcefile, $descr['squelette']);
 	// Phraser le squelette, selon sa grammaire
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
 	$boucles = array();
@@ -854,6 +856,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 
 	$squelette = $f($descr['squelette'], '', $boucles, $nom);
 	$descr['documents'] = compile_inclure_doublons($squelette);
+
 
 	// Demander la description des tables une fois pour toutes
 	// et reperer si les doublons sont demandes
@@ -1027,8 +1030,6 @@ function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0)
 
 ?".">";
 
-	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug')
-		squelette_debug_compile($nom, $sourcefile, $code, $descr['squelette']);
 	return $code;
 
 }
