@@ -288,13 +288,16 @@ function echappe_retour_modeles($letexte, $interdire_scripts=false)
 
 // http://doc.spip.org/@couper
 function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
-	if (!strlen($texte) OR $taille <= 0) return '';
+	if (!($length=strlen($texte)) OR $taille <= 0) return '';
 	$offset = 400 + 2*$taille;
-	if (	$offset<strlen($texte)
+	while ($offset<$length
+		AND strlen(preg_replace(",<[^>]+>,Uims","",substr($texte,0,$offset)))<$taille)
+		$offset = 2*$offset;
+	if (	$offset<$length
 			&& ($p_tag_ouvrant = strpos($texte,'<',$offset))!==NULL){
 		$p_tag_fermant = strpos($texte,'>',$offset);
 		if ($p_tag_fermant<$p_tag_ouvrant)
-			$offset += $p_tag_fermant; // prolonger la coupe jusqu'au tag fermant suivant eventuel
+			$offset = $p_tag_fermant+1; // prolonger la coupe jusqu'au tag fermant suivant eventuel
 	}
 	$texte = substr($texte, 0, $offset); /* eviter de travailler sur 10ko pour extraire 150 caracteres */
 
