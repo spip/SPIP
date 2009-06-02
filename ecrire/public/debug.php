@@ -447,7 +447,7 @@ function debug_dumpfile ($texte, $fonc, $type, $corps='') {
 	global $debug_objets, $spip_lang_right;
 	$var_mode_objet = _request('var_mode_objet');
 	$var_mode_affiche = _request('var_mode_affiche');
-
+	include_spip('inc/autoriser');
 	if (autoriser('debug')) {
 
 		$debug_objets[$type][$fonc . 'tout'] = $texte;
