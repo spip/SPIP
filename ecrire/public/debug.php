@@ -211,7 +211,7 @@ function erreur_squelette($message='', $lieu='') {
 	global $tableau_des_erreurs;
 
 	if (is_array($message)) list($message, $lieu) = $message;
-
+#	debug_print_backtrace();exit;
 	spip_log("Debug: $message | $lieu (" . $GLOBALS['fond'] .")" );
 	$GLOBALS['bouton_admin_debug'] = true;
 	$tableau_des_erreurs[] = array($message, $lieu);
