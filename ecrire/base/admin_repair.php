@@ -66,7 +66,7 @@ function admin_repair_plat(){
 			  AND file_exists(_DIR_IMG . $dest)) {
 				sql_updateq('spip_documents',array('fichier'=>$dest),'id_document='.intval($row['id_document']));
 				spip_unlink(_DIR_IMG . $src);
-				$out .= "$src => $dest<br />";				
+				$out .= "$src => $dest<br />";
 			}
 		}
 	}
@@ -87,6 +87,9 @@ function admin_repair_tables() {
 	
 			$res .= "<br /><b>$tab</b> ";
 			spip_log("Repare $tab");
+			// supprimer la meta avant de lancer la reparation
+			// car le repair peut etre long ; on ne veut pas boucler
+			effacer_meta('admin_repair');
 			$result_repair = sql_repair($tab);
 			if (!$result_repair) return false;
 	
