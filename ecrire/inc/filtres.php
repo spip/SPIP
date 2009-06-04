@@ -1691,6 +1691,7 @@ function regledetrois($a,$b,$c)
 // Fournit la suite de Input-Hidden correspondant aux parametres de
 // l'URL donnee en argument
 // Compatible avec les type_url depuis [13939].
+// cf. tests/filtres/form_hidden.html
 // http://doc.spip.org/@form_hidden
 function form_hidden($action) {
 	$contexte = array();
