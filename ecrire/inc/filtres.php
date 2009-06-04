@@ -1763,9 +1763,9 @@ function regledetrois($a,$b,$c)
 // Fournit la suite de Input-Hidden correspondant aux parametres de
 // l'URL donnee en argument
 // Compatible avec les type_url depuis [13939].
+// cf. tests/filtres/form_hidden.html
 // http://doc.spip.org/@form_hidden
 function form_hidden($action) {
-	$hidden = array();
 	$contexte = array();
 	if (!strpos($action, 'page=')
 	AND $renommer = generer_url_entite()
@@ -1775,32 +1775,48 @@ function form_hidden($action) {
 		$contexte['page'] = $p[3];
 		$action = preg_replace('/[?][^&]*/', '', $action);
 	}
+
+	// on va remplir un tableau de valeurs en prenant bien soin de ne pas
+	// ecraser les elements de la forme mots[]=1&mots[]=2
+	$values = array();
+
+	// d'abord avec celles de l'url
 	if (false !== ($p = strpos($action, '?'))) {
 		foreach(preg_split('/&(amp;)?/S',substr($action,$p+1)) as $c){
 			list($var,$val) = explode('=', $c, 2);
-			if ($var) $contexte[$var] = $val;
+			if ($var) {
+				$val =  rawurldecode($val);
+				if (preg_match(',\[\]$,S', $var))
+					$values[] = array($var, $val);
+				else if (!isset($values[$var]))
+					$values[$var] = array($var, $val);
+			}
 		}
 	}
-	foreach($contexte as $var => $val) {
-		$input = '<input name="'
+
+	// ensuite avec celles du contexte, sans doublonner !
+	foreach($contexte as $var=>$val)
+		if (preg_match(',\[\]$,S', $var))
+			$values[] = array($var, $val);
+		else if (!isset($values[$var]))
+			$values[$var] = array($var, $val);
+
+	// puis on rassemble le tout
+	$hidden = array();
+	foreach($values as $value) {
+		list($var,$val) = $value;
+		$hidden[] = '<input name="'
 			. entites_html($var)
 			.'"'
 			. (is_null($val)
 				? ''
-				: ' value="'.entites_html(rawurldecode($val)).'"'
+				: ' value="'.entites_html($val).'"'
 				)
 			. ' type="hidden" />';
-
-		// si c'est une variable de la forme a[]=2, cumuler les input
-		// sinon ne conserver que le premier
-		if (preg_match(',\[\]$,S', $var))
-			$hidden[] = $input;
-		else
-			if (!isset($hidden[$var]))
-				$hidden[$var] = $input;
 	}
 	return join("\n", $hidden);
 }
+
 
 // http://doc.spip.org/@filtre_bornes_pagination_dist
 function filtre_bornes_pagination_dist($courante, $nombre, $max = 10) {
