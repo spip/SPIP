@@ -1697,11 +1697,11 @@ function form_hidden($action) {
 	$contexte = array();
 	if (!strpos($action, 'page=')
 	AND $renommer = generer_url_entite()
-	AND $p = $renommer($action, $contexte)) {
-
+	AND $p = $renommer($action, $contexte)
+	AND $p[3]) {
 		$contexte = $p[0];
 		$contexte['page'] = $p[3];
-		$action = preg_replace('/[?][^&]*/', '', $action);
+		$action = preg_replace('/^([^?]*)[?][^&]*/', '\1', $action);
 	}
 
 	// on va remplir un tableau de valeurs en prenant bien soin de ne pas
