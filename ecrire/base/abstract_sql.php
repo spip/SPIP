@@ -23,7 +23,7 @@ define('sql_ABSTRACT_VERSION', 1);
 
 // Fonction principale. Elle charge l'interface au serveur de base de donnees
 // via la fonction spip_connect_version qui etablira la connexion au besoin.
-// Elle retourne la fonction produisant la requête SQL demandee
+// Elle retourne la fonction produisant la requï¿½te SQL demandee
 // Erreur fatale si la fonctionnalite est absente sauf si le 3e arg <> false
 
 // http://doc.spip.org/@sql_serveur
@@ -57,9 +57,9 @@ function sql_set_charset($charset,$serveur='', $option=true){
 
 // Fonction pour SELECT, retournant la ressource interrogeable par sql_fetch.
 // Recoit en argument:
-// - le tableau (ou chaîne) des champs a` ramener (Select)
-// - le tableau (ou chaîne) des tables a` consulter (From)
-// - le tableau (ou chaîne) des conditions a` remplir (Where)
+// - le tableau (ou chaï¿½ne) des champs a` ramener (Select)
+// - le tableau (ou chaï¿½ne) des tables a` consulter (From)
+// - le tableau (ou chaï¿½ne) des conditions a` remplir (Where)
 // - le crite`re de regroupement (Group by)
 // - le tableau de classement (Order By)
 // - le crite`re de limite (Limit)
@@ -478,5 +478,12 @@ function description_table($nom){
 	if (!$f) $f = charger_fonction('trouver_table', 'base');
 	return $f($nom);
 }
+
+
+if(!function_exists("ctype_xdigit")){
+    function ctype_xdigit($string = ""){
+        return !strlen(  trim( $string,  "1234567890abcdefABCDEF" )  );
+    }/* endfunction ctype_xdigit */
+}/* endif not function_exists ctype_xdigit */
 
 ?>
