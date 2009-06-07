@@ -143,8 +143,9 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 
 	$onglet_enfants = pipeline('affiche_enfants',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>$onglet_enfants));
 
+	$documenter_objet = charger_fonction('documenter_objet','inc');
 	$onglet_documents =
-		($id_rubrique > 0 ? naviguer_doc($id_rubrique, "rubrique", 'naviguer', $flag_editable) :"" )
+		($id_rubrique > 0 ? $documenter_objet($id_rubrique, "rubrique", 'naviguer', $flag_editable) :"" )
 	;
 
 	if ($n_forums)
@@ -393,46 +394,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	return $res;
 }
 
-// http://doc.spip.org/@naviguer_doc
-function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
-	global $spip_lang_left;
 
-	if ($GLOBALS['meta']["documents_$type"]!='non' AND $flag_editable) {
-		$joindre = charger_fonction('joindre', 'inc');
-		$res = $joindre(array(
-			'cadre' => 'relief',
-			'icone' => 'image-24.gif',
-			'fonction' => 'creer.gif',
-			'titre' => _T('titre_joindre_document'),
-			'script' => $script,
-			'args' => "id_$type=$id",
-			'id' => $id,
-			'intitule' => _T('info_telecharger_ordinateur'),
-			'mode' => 'document',
-			'type' => $type,
-			'ancre' => '',
-			'id_document' => 0,
-			'iframe_script' => generer_url_ecrire("documenter","id_rubrique=$id&type=$type",true)
-		));
-
-	// eviter le formulaire upload qui se promene sur la page
-	// a cause des position:relative incompris de MSIE
-
-	  if ($GLOBALS['browser_name']!="MSIE") {
-		$res = "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td>&nbsp;</td><td style='text-align: $spip_lang_left;width: 50%;'>\n$res</td></tr></table>";
-	  }
-
-	  $res .= http_script('',"async_upload.js")
-	 . http_script('$("form.form_upload").async_upload(async_upload_portfolio_documents);');
-
-	} else $res ='';
-
-	$documenter = charger_fonction('documenter', 'inc');
-
-	return "<div id='portfolio'>".$documenter($id, $type, 'portfolio', $flag_editable)."</div><br />"
-	."<div id='documents'>". $documenter($id, $type, 'documents', $flag_editable)."</div>"
-	. $res;
-}
 
 // http://doc.spip.org/@montre_naviguer
 function montre_naviguer($id_rubrique, $titre, $id_parent, $ze_logo, $flag_editable)

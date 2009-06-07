@@ -143,7 +143,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
 	  ;
 
-	$onglet_documents = articles_documents('article', $id_article);
+	$documenter_objet = charger_fonction('documenter_objet','inc');
+	$onglet_documents = $documenter_objet($id_article,'article','articles',$flag_editable);
 	$onglet_interactivite = (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"");
 
 	$onglet_discuter = !$statut_forum ? '' : ($discuter($id_article, 'articles', 'id_article', $statut_forum, $debut_forum));
@@ -170,53 +171,6 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	  . "</div>"
 	  . (_INTERFACE_ONGLETS?"":$onglet_discuter)
 ;
-}
-
-// http://doc.spip.org/@articles_documents
-function articles_documents($type, $id)
-{
-	global $spip_lang_left, $spip_lang_right;
-
-	// Joindre ?
-	if  ($GLOBALS['meta']["documents_$type"]=='non'
-	OR !autoriser('joindredocument', $type, $id))
-		$res = '';
-	else {
-		$joindre = charger_fonction('joindre', 'inc');
-
-		$res = $joindre(array(
-			'cadre' => 'relief',
-			'icone' => 'image-24.gif',
-			'fonction' => 'creer.gif',
-			'titre' => _T('titre_joindre_document'),
-			'script' => 'articles',
-			'args' => "id_article=$id",
-			'id' => $id,
-			'intitule' => _T('info_telecharger_ordinateur'),
-			'mode' => 'document',
-			'type' => 'article',
-			'ancre' => '',
-			'id_document' => 0,
-			'iframe_script' => generer_url_ecrire("documenter","id_article=$id&type=$type",true)
-		));
-
-		// eviter le formulaire upload qui se promene sur la page
-		// a cause des position:relative incompris de MSIE
-		if ($GLOBALS['browser_name']!='MSIE') {
-			$res = "\n<table style='float: $spip_lang_right' width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
-		}
-
-		$res .= http_script('',"async_upload.js")
-		  . http_script('$("form.form_upload").async_upload(async_upload_portfolio_documents);');
-	}
-
-	$documenter = charger_fonction('documenter', 'inc');
-
-	$flag_editable = autoriser('modifier', $type, $id);
-
-	return "<div id='portfolio'>" . $documenter($id, $type, 'portfolio') . "</div><br />"
-	. "<div id='documents'>" . $documenter($id, $type, 'documents') . "</div>"
-	. $res;
 }
 
 //
