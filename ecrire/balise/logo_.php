@@ -61,7 +61,7 @@ function balise_LOGO__dist ($p) {
 	
 	// Bloc de compatibilite SPIP <= 2.0
 	// Ne pas chercher a comprendre.
-	foreach($p->fonctions as $couple) {
+	foreach($p->param as $couple) {
 		$nom = trim($couple[0]);
 		if ($nom == '')  break;
 		$r = logo_faux_filtres($nom);
