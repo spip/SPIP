@@ -160,9 +160,16 @@ function quete_logo_file($row, $connect=NULL) {
 	return get_spip_doc($logo);
 }
 
-function quete_logo_document($row, $lien, $align, $x, $y, $connect=NULL) {
+function quete_logo_document($row, $lien, $align, $mode_logo, $x, $y, $connect=NULL) {
 	include_spip('inc/documents');
-	$logo = vignette_logo_document($row, $connect);
+	$logo = '';
+	if (!in_array($mode_logo,array('icone','apercu')))
+		$logo = vignette_logo_document($row, $connect);
+	// si on veut explicitement la vignette, ne rien renvoyer si il n'y en a pas
+	if ($mode_logo == 'vignette' AND !$logo)
+		return '';
+	if ($mode_logo == 'icone')
+		$row['fichier'] = '';
 	return vignette_automatique($logo, $row, $lien, $x, $y, $align);
 }
 

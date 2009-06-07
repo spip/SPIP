@@ -196,11 +196,19 @@ function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='
 	include_spip('inc/filtres_images_mini');
 	$e = $doc['extension'];
 	if (!$img) {
-		if (!$img = image_du_document($doc)) {
-			$img = vignette_par_defaut($e, false);
-			$x = $y = 0;
-			$class = '';
+		if ($img = image_du_document($doc)) {
+			if (!$x AND !$y) // eviter une double reduction
+				$img = image_reduire($img);
 		}
+		else{
+			$img = vignette_par_defaut($e, false);
+			$size = @getimagesize($img);
+			$img = "<img src='$img' ".$size[3]." />";
+		}
+	}
+	else{
+		$size = @getimagesize($img);
+		$img = "<img src='$img' ".$size[3]." />";
 	}
 	// on appelle image_reduire independamment de la presence ou non
 	// des librairies graphiques
@@ -208,9 +216,7 @@ function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='
 	if ($x OR $y) {
 		$img = image_reduire($img, $x, $y);
 	}
-	else
-		$img = image_reduire($img);
-//	$img = inserer_attribut($img, 'alt', '');
+	$img = inserer_attribut($img, 'alt', '');
 	$img = inserer_attribut($img, 'class', $class);
 	if ($align) $img = inserer_attribut($img, 'align', $align);
 
@@ -238,7 +244,8 @@ function image_du_document($document)
 {
 	$e = $document['extension'];
 	if ((strpos($GLOBALS['meta']['formats_graphiques'], $e) !== false)
-	  AND (!test_espace_prive() OR $GLOBALS['meta']['creer_preview']=='oui')) {
+	  AND (!test_espace_prive() OR $GLOBALS['meta']['creer_preview']=='oui')
+	  AND $document['fichier']) {
 		if ($document['distant'] == 'oui') {
 			$image = _DIR_RACINE.copie_locale($document['fichier']);
 		} 
