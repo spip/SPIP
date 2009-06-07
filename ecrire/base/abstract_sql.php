@@ -492,4 +492,11 @@ function description_table($nom){
 	return $f($nom);
 }
 
+
+if(!function_exists("ctype_xdigit")){
+    function ctype_xdigit($string = ""){
+        return !strlen(  trim( $string,  "1234567890abcdefABCDEF" )  );
+    }/* endfunction ctype_xdigit */
+}/* endif not function_exists ctype_xdigit */
+
 ?>
