@@ -200,12 +200,36 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	$mode = $row['mode'];
 
 	// taille maximum [(#LOGO_DOCUMENT{300,52})]
-	if (preg_match('/{\s*(\d+),\s*(\d+)\s*}/', $params, $r)) {
-		$x = intval($r[1]);
-		$y = intval($r[2]);
-	} else $x = $y = 0;
+	// et/ou type de la vignette [(#LOGO_DOCUMENT{icone,300,52})]
+	// parmi :
+	// icone -> icone du type de document
+	// apercu -> image reduite si possible (mais pas la vignette telechargee) ou logo_type sinon
+	// vignette -> vignette telechargee uniquement, sinon rien
+	// auto -> mode par defaut si pas indique : vignette, sinon image reduite, sinon logo_type
 
-	$logo = img_logo_document($fichier, $extension, $id_vignette, $mode, $x, $y, $connect);
+	$mode_logo = 'auto';
+	$params = explode(',',rtrim(ltrim($params,'{'),'}'));
+	$params = array_map('trim',$params);
+	if (in_array(reset($params),array('icone','apercu','auto','vignette')))
+		$mode_logo = array_shift($params);
+	// ignorer un mode errone
+	elseif (count($params)==3 AND !is_numeric($params[0]))
+		array_shift($params);
+	if (is_numeric($params[0]) AND is_numeric($params[1])){
+		$x = intval($params[0]);
+		$y = intval($params[1]);
+	}
+	else $x = $y = 0;
+
+	if ($mode_logo == 'vignette' AND !$id_vignette)
+		return '';
+
+	if ($mode_logo == 'icone')
+		$logo = img_logo_document($fichier, $extension, 0, 'icone', $x, $y, $connect);
+	elseif ($mode_logo == 'apercu')
+		$logo = img_logo_document($fichier, $extension, 0, $mode, $x, $y, $connect);
+	else
+		$logo = img_logo_document($fichier, $extension, $id_vignette, $mode, $x, $y, $connect);
 
 	// flag_fichier : seul le fichier est demande
 	if ($flag_fichier)
@@ -238,7 +262,8 @@ function img_logo_document($fichier, $extension, $id_vignette, $mode, $x, $y, $c
 		}
 		elseif (@file_exists(get_spip_doc($vignette)))
 			$logo = generer_url_entite($id_vignette, 'document');
-	} else if ($mode == 'vignette') {
+	}
+	else if ($mode == 'vignette') {
 		$logo = generer_url_entite($id_vignette, 'document');
 		if (!@file_exists($logo)) $logo = '';
 	} else $logo = '';
@@ -252,8 +277,10 @@ function img_logo_document($fichier, $extension, $id_vignette, $mode, $x, $y, $c
 	}
 	else {
 		// Pas de vignette, mais un fichier image -- creer la vignette
+		// sauf si icone demandee explicitement
 		if (strpos($GLOBALS['meta']['formats_graphiques'], $extension)!==false
-		AND (!test_espace_prive() OR $GLOBALS['meta']['creer_preview']=='oui')) {
+		AND (!test_espace_prive() OR $GLOBALS['meta']['creer_preview']=='oui')
+	  AND $mode!=='icone') {
 		  if ($img = _DIR_RACINE.copie_locale(get_spip_doc($fichier))
 			AND @file_exists($img)) {
 				if (!$x AND !$y) {
