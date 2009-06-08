@@ -72,7 +72,7 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
                                            += $points[$id_forum]['score'];
                    }
                    else{
-                           $p2[$id_forum]['score'] = points[$id_forum]['score'];
+                           $p2[$id_forum]['score'] = $points[$id_forum]['score'];
                    }
             }			
 			$points = $p2;
