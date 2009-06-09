@@ -590,6 +590,7 @@ function calculer_critere_parties($idb, &$boucles, $crit) {
 	$a1 = $crit->param[0];
 	$a2 = $crit->param[1];
 	$op = $crit->op;
+
 	list($a11,$a12) = calculer_critere_parties_aux($idb, $boucles, $a1);
 	list($a21,$a22) = calculer_critere_parties_aux($idb, $boucles, $a2);
 	if (($op== ',')&&(is_numeric($a11) && (is_numeric($a21))))
@@ -632,17 +633,13 @@ function calculer_criteres ($idb, &$boucles) {
 	foreach($boucles[$idb]->criteres as $crit) {
 		$critere = $crit->op;
 		// critere personnalise ?
-
 		if (
 		  (!function_exists($f="critere_".strtoupper($boucles[$idb]->id_table)."_".$critere))
 		AND (!function_exists($f=$f."_dist"))
 		AND (!function_exists($f="critere_".$critere))
 		AND (!function_exists($f=$f."_dist"))	) {
-		  // fonction critere standard ?
-		  // double cas particulier repere a l'analyse lexicale
-		  if (($critere == ",") OR ($critere == '/'))
-		    $f = 'calculer_critere_parties';
-		  else	$f = $defaut;
+			// fonction critere standard ?
+			$f = $defaut;
 		}
 		// Applique le critere
 		$res = $f($idb, $boucles, $crit);
@@ -738,6 +735,10 @@ function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 // http://doc.spip.org/@calculer_critere_DEFAUT
 function calculer_critere_DEFAUT_dist($idb, &$boucles, $crit)
 {
+	// double cas particulier {0,1} et {1/2} repere a l'analyse lexicale
+	if (($crit->op == ",") OR ($crit->op == '/'))
+		return calculer_critere_parties($idb, $boucles, $crit);
+
 	$r = calculer_critere_infixe($idb, $boucles, $crit);
 
 	if (!$r) {
