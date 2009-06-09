@@ -1990,7 +1990,7 @@ function table_valeur($table,$cle,$defaut=''){
 // filtre match pour faire des tests avec expression reguliere
 // [(#TEXTE|match{^ceci$,Uims})]
 // retourne le fragment de chaine qui "matche"
-// il est possible de passer en 3eme argument optionnel le numero de paranthese capturante
+// il est possible de passer en 3eme argument optionnel le numero de parenthese capturante
 // accepte egalement la syntaxe #TRUC|match{truc(...)$,1} ou le modificateur n'est pas passe en second argument
 // http://doc.spip.org/@match
 function match($texte, $expression, $modif="UimsS",$capte=0) {
@@ -2000,8 +2000,14 @@ function match($texte, $expression, $modif="UimsS",$capte=0) {
 	}
 	$expression=str_replace("\/","/",$expression);
 	$expression=str_replace("/","\/",$expression);
-	return preg_match('/' . $expression . '/' . $modif,$texte, $r)
-		? (isset($r[$capte])?$r[$capte]:true) : false;
+
+	if (preg_match('/' . $expression . '/' . $modif,$texte, $r)) {
+		if (isset($r[$capte]))
+			return $r[$capte];
+		else
+			return true;
+	}
+	return false;
 }
 
 // filtre replace pour faire des operations avec expression reguliere
