@@ -20,6 +20,16 @@ include_spip('inc/cookie');
 // http://doc.spip.org/@action_converser_dist
 function action_converser_dist()
 {
+
+	action_converser_changer_langue();
+	$redirect = rawurldecode(_request('redirect'));
+
+	if (!$redirect) $redirect = _DIR_RESTREINT_ABS;
+	$redirect = parametre_url($redirect,'lang',$lang,'&');
+	redirige_par_entete($redirect, true);
+}
+
+function action_converser_changer_langue(){
 	if ($lang = _request('var_lang'))
 		action_converser_post($lang);
 	elseif ($lang = _request('var_lang_ecrire')) {
@@ -39,13 +49,8 @@ function action_converser_dist()
 			}
 		}
 		action_converser_post($lang, 'spip_lang_ecrire');
-	} 
+	}
 
-	$redirect = rawurldecode(_request('redirect'));
-
-	if (!$redirect) $redirect = _DIR_RESTREINT_ABS;
-	$redirect = parametre_url($redirect,'lang',$lang,'&');
-	redirige_par_entete($redirect, true);
 }
 
 // http://doc.spip.org/@action_converser_post

@@ -18,7 +18,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@inc_commencer_page_dist
 function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "",$menu=true,$minipres=false, $alertes = true) {
-	global $spip_ecran;
 	global $connect_id_auteur;
 
 	include_spip('inc/headers');
@@ -27,7 +26,7 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 
 	return init_entete($titre, $id_rubrique, $minipres)
 	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
-	. "<div id='page' class='$spip_ecran'>"
+	. "<div id='page'>"
 	. ($alertes?alertes_auteur($connect_id_auteur):'')
 	. auteurs_recemment_connectes($connect_id_auteur);
 }
@@ -49,19 +48,10 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 		. "' />\n"
 		. envoi_link($nom_site_spip,$minipres);
 
-	// anciennement verifForm
-	$head .= '
-	<script type="text/javascript"><!--
-	$(document).ready(function(){
-		verifForm();
-		$("#page,#bandeau-principal")
-		.mouseover(function(){
-			if (typeof(window["changestyle"])!=="undefined") window.changestyle("garder-recherche");
-		});
-	'
-	.
-	repercuter_gadgets($id_rubrique)
-	.'
+	$head .= "
+	<script type='text/javascript'><!--
+	jQuery(document).ready(function(){
+	" .	repercuter_gadgets($id_rubrique) . '
 	});
 	// --></script>
 	';
@@ -77,88 +67,27 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 // http://doc.spip.org/@init_body
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='',$menu=true) {
 	global $connect_id_auteur, $auth_can_disconnect;
-	global $spip_display, $spip_ecran;
 
-	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
+	$GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
+		? $GLOBALS['visiteur_session']['prefs']['display']
+		: 0;
+	$spip_display_navigation = isset($GLOBALS['visiteur_session']['prefs']['display_navigation'])
+		? $GLOBALS['visiteur_session']['prefs']['display_navigation']
+		: 'navigation_avec_icones';
+	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
-
-	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique "._request('exec')."'"
+	$res = pipeline('body_prive',"<body class='"
+			. $GLOBALS['spip_ecran'] . " $spip_display_navigation $rubrique $sous_rubrique "._request('exec')."'"
 			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
 			.'>');
 
 	if (!$menu) return $res;
 
 
-	$items = "<div class='h-list centered vcentered' style='width:{$largeur}px'><ul>"
-		. "<li id='bandeau_couleur1' class='bandeau_couleur'><div class='menu-item'>"
-		.  installer_gadgets($id_rubrique)
-		. "</div></li>"
-		. "<li id='bandeau_couleur2' class='bandeau_couleur' style='width:"
-
-	// Redacteur connecte
-	// overflow pour masquer les noms tres longs
-	// (et eviter debords, notamment en ecran etroit)
-
-		//. "<div style='width: "
-		. (($spip_ecran == "large") ? 300 : 110)
-		. "px;'><div class='menu-item' style='width:"
-    . (($spip_ecran == "large") ? 300 : 110)
-    . "px; overflow: hidden;'>"
-		. "<a href='"
-		. generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur")
-		. "' class='icone26' title=\""
-		. entites_html(_T('icone_informations_personnelles'))
-		. '">'
-		. typo($GLOBALS['visiteur_session']['nom'])
-		. "</a></div></li>" 
-	  	. "<li id='bandeau_couleur4' class='bandeau_couleur'><div class='menu-item'>";
-
-		// couleurs
-	$couleurs = charger_fonction('couleurs', 'inc');
-	$items .= "<div id='preferences_couleurs' title='" . attribut_html(_T('titre_changer_couleur_interface')) . "'>";
-	$items .= $couleurs() . "</div>";
-
-	$items .= "</div></li>";
-
-	// choix de la langue
-	if ($i = menu_langues('var_lang_ecrire')) {
-			$items .= "<li id='bandeau_couleur5' class='bandeau_couleur'><div class='menu-item'>"
-			. (_request('lang')?$i:"<a href='".parametre_url(self(),'lang',$GLOBALS['spip_lang'])
-			."' title='".attribut_html(_T('info_langues'))."'>"
-			. traduire_nom_langue($GLOBALS['spip_lang'])
-			."</a>")
-			. "</div></li>";
-	}
-
-	$items .= "<li id='bandeau_couleur6' class='bandeau_couleur'><div class='menu-item'>";
-
-	if ($auth_can_disconnect) {
-			$alt=_T('icone_deconnecter');
-			$items .= "<a href='".
-			  generer_url_action("logout","logout=prive") .
-			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter');\" onfocus=\"changestyle('bandeaudeconnecter');\" onblur=\"changestyle('bandeaudeconnecter');\">" .
-			  http_img_pack("deconnecter-24.gif", "$alt", "width='26' height='20'") .
-			  "</a>";
-	}
-	$items .= "</div></li>"
-	  . "</ul></div>";
-
-	// <div> pour la barre des gadgets
-	// (elements invisibles qui s'ouvrent sous la barre precedente)
-
-	$items .= bandeau_gadgets($largeur, true, $id_rubrique);
-
 	$bandeau = charger_fonction('bandeau', 'inc');
 
-	return $res 
-		. "<div class='invisible_au_chargement' style='position: absolute; height: 0px; visibility: hidden;'><a href='oo'>"
-		._T("access_mode_texte")
-		."</a></div>"
-		. "<div id='haut-page'>\n"
-		.  $bandeau($rubrique, $sous_rubrique, $largeur)
-		. "\n<div id='bandeau_couleur'>"
-		.  $items
-	  	.  "</div></div>\n";
+	return $res
+	 . $bandeau($rubrique, $sous_rubrique, $largeur);
 }
 
 // http://doc.spip.org/@avertissement_messagerie

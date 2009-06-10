@@ -647,29 +647,10 @@ function plugin_get_infos($plug, $force_reload=false, $dir_plugins = _DIR_PLUGIN
 				if (isset($arbre['noisette']))
 					$ret['noisette'] = $arbre['noisette'];
 
-				// recuperer les boutons et onglets si necessaire
-				spip_xml_match_nodes(",^(bouton|onglet)\s,",$arbre,$les_boutons);
-				if (is_array($les_boutons) && count($les_boutons)){
-					$ret['bouton'] = array();
-					$ret['onglet'] = array();
-					foreach($les_boutons as $bouton => $val) {
-						$bouton = spip_xml_decompose_tag($bouton);
-						$type = reset($bouton);
-						$bouton = end($bouton);
-						if (isset($bouton['id'])){
-							$id = $bouton['id'];
-							$val = reset($val);
-							if(is_array($val)){
-								$ret[$type][$id]['parent'] = isset($bouton['parent'])?$bouton['parent']:'';
-								$ret[$type][$id]['position'] = isset($bouton['position'])?$bouton['position']:'';
-								$ret[$type][$id]['titre'] = isset($val['titre'])?trim(spip_xml_aplatit($val['titre'])):'';
-								$ret[$type][$id]['icone'] = isset($val['icone'])?trim(end($val['icone'])):'';
-								$ret[$type][$id]['url'] = isset($val['url'])?trim(end($val['url'])):'';
-								$ret[$type][$id]['args'] = isset($val['args'])?trim(end($val['args'])):'';
-							}
-						}
-					}
-				}
+				include_spip('inc/bandeau');
+				$les_boutons = boutons_parse($arbre);
+				$ret['bouton'] = $les_boutons['bouton'];
+				$ret['onglet'] = $les_boutons['onglet'];
 
 				if ($t=@filemtime($f)){
 					$ret['filemtime'] = $t;

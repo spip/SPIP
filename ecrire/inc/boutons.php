@@ -110,20 +110,25 @@ function definir_barre_onglets($script) {
 		$onglets = $f();
 	else  $onglets=array();
 
+	// les onglets du core, issus de prive/navigation.xml
+	include_spip('inc/bandeau');
+	$liste_onglets = boutons_core('onglet');
+
 	// ajouter les onglets issus des plugin via plugin.xml
 	if (function_exists('onglets_plugins')){
 		$liste_onglets_plugins = onglets_plugins();
+		$liste_onglets = $liste_onglets + $liste_onglets_plugins;
+	}
 
-		foreach($liste_onglets_plugins as $id => $infos){
-			if (($parent = $infos['parent'])
-				&& $parent == $script
-				&& autoriser('onglet',$id)) {
-					$onglets[$id] = new Bouton(
-					  find_in_path($infos['icone']),  // icone
-					  $infos['titre'],	// titre
-					  $infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null
-					  );
-			}
+	foreach($liste_onglets as $id => $infos){
+		if (($parent = $infos['parent'])
+			&& $parent == $script
+			&& autoriser('onglet',$id)) {
+				$onglets[$id] = new Bouton(
+					find_in_path($infos['icone']),  // icone
+					$infos['titre'],	// titre
+					$infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null
+					);
 		}
 	}
 

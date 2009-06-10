@@ -2409,6 +2409,9 @@ function singulier_ou_pluriel($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
  * @return string
  */
 function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class=""){
+	if ($icone_renommer = charger_fonction('icone_renommer','inc',true))
+		list($fond,$fonction) = $icone_renommer($fond,$fonction);
+
 	$align = $align?$align:$GLOBALS['spip_lang_left'];
 	global $spip_display;
 
@@ -2494,5 +2497,39 @@ function filtre_explode_dist($a,$b){return explode($b,$a);}
  * @return string
  */
 function filtre_implode_dist($a,$b){return implode($b,$a);}
+
+/**
+ * Produire les styles prives qui associent item de menu avec icone en background
+ * @return string
+ */
+function bando_images_background(){
+	include_spip('inc/bandeau');
+	// recuperer tous les boutons et leurs images
+	$boutons = definir_barre_boutons(definir_barre_contexte(),true,false);
+
+	$res = "";
+	foreach($boutons as $page => $detail){
+		if ($detail->icone AND strlen(trim($detail->icone)))
+			$res .="\n.navigation_avec_icones #bando1_$page {background-image:url(".$detail->icone.");}";
+		$selecteur = ($page=='outils_rapides'?"":".navigation_avec_icones ");
+		if (is_array($detail->sousmenu))
+			foreach($detail->sousmenu as $souspage=>$sousdetail)
+				if ($sousdetail->icone AND strlen(trim($sousdetail->icone)))
+					$res .="\n$selecteur#bando2_$souspage {background-image:url(".$sousdetail->icone.");}";
+	}
+	return $res;
+}
+
+/**
+ * Trouver une eventuelle css de surcharge dans la skin
+ * a inclure dans les styles prives
+ * 
+ * @return <type>
+ */
+function bando_style_prive_skin() {
+	if ($f = find_in_skin('style_prive_skin.html'))
+		return preg_replace(',[.]html$,Ui','',$f);
+	return '';
+}
 
 ?>
