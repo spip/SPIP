@@ -57,15 +57,9 @@ echo fin_cadre_relief(true);
 
 
 # Affiche l'encadre "lien iCal"
-
  echo
     debut_cadre_enfonce('',true) .
-    "<div class='verdana1'>"._T("calendrier_synchro") .
-    "<table  class='cellule-h-table' cellpadding='0'><tr>\n" .
-    "<td><a href='" . generer_url_ecrire("synchro") . "' class='ical'>&nbsp;</a></td>\n"
-    . "<td class='cellule-h-lien'><br /><a href='" . generer_url_ecrire("synchro") . "' class='cellule-h'>" 
-    . _T("icone_suivi_activite")
-    . "</a></td>\n</tr></table>\n" ."</div>" .
+		icone_horizontale(_T('icone_suivi_activite'),generer_url_ecrire("synchro"), "synchro.gif", "", false) .
     fin_cadre_enfonce(true);
 
 
@@ -73,13 +67,13 @@ echo fin_cadre_relief(true);
 
  $messages_vus = array();
 
- echo afficher_ses_messages('<b>' . _T('infos_vos_pense_bete') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_fin > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 DAY) OR rv != 'oui')", $messages_vus, false, true);
+ echo afficher_ses_messages('<b>' . _T('infos_vos_pense_bete') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_fin > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 DAY) OR rv != 'oui')", $messages_vus, false, true,'pense-bete');
 
 
- echo afficher_ses_messages('<b>' . _T('info_nouveaux_message') . '</b>', ", spip_auteurs_messages AS lien", "lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND lien.id_message=messages.id_message", $messages_vus,  true, true);
+ echo afficher_ses_messages('<b>' . _T('info_nouveaux_message') . '</b>', ", spip_auteurs_messages AS lien", "lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND lien.id_message=messages.id_message", $messages_vus,  true, true,'message');
 
 
- echo afficher_ses_messages('<b>' . _T('info_discussion_cours') . '</b>', ", spip_auteurs_messages AS lien", "lien.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message AND (date_fin > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, true, false);
+ echo afficher_ses_messages('<b>' . _T('info_discussion_cours') . '</b>', ", spip_auteurs_messages AS lien", "lien.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message AND (date_fin > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, true, false,'message');
 
 
 // Afficher le lien RSS
@@ -88,7 +82,7 @@ echo bouton_spip_rss('messagerie', array('id_auteur' => $connect_id_auteur));
 
 
 
- echo afficher_ses_messages('<b>' . _T('info_message_en_redaction') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='redac'",  $messages_vus, true, false);
+ echo afficher_ses_messages('<b>' . _T('info_message_en_redaction') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='redac'",  $messages_vus, true, false,'message');
 
 
  $result = sql_select('auteurs.id_auteur, auteurs.nom, COUNT(*) AS total', 'spip_auteurs AS auteurs,  spip_auteurs_messages AS lien2, spip_messages AS messages, spip_auteurs_messages AS lien', "(lien.id_auteur = $connect_id_auteur AND lien.id_message = messages.id_message AND messages.statut = 'publie' AND (messages.rv != 'oui' OR messages.date_fin > ".sql_quote(date('Y-m-d H:i:s'))." )) AND (lien2.id_auteur = lien2.id_auteur AND lien2.id_message = messages.id_message AND lien2.id_auteur != $connect_id_auteur AND auteurs.id_auteur = lien2.id_auteur)", "auteurs.id_auteur", 'total DESC', 10);
