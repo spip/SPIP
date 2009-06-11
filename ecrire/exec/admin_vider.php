@@ -73,7 +73,7 @@ function exec_admin_vider_dist()
 
 		echo debut_droite("",true);
 
-		echo debut_cadre_trait_couleur("cache-24.gif", true, "", _T('texte_vider_cache'));
+		echo debut_cadre_trait_couleur("cache-24.png", true, "", _T('texte_vider_cache'));
 
 		echo "\n<p style='text-align: justify;'>"._T('texte_suppression_fichiers')."</p>",
 		  "<p style='text-align: justify;'>"._T('texte_recalcul_page')."</p>";

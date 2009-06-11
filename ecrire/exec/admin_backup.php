@@ -60,8 +60,8 @@ function exec_admin_backup_dist()
 
 		$res =
 		 "\n<p>" .
-		 http_img_pack('warning.gif', _T('info_avertissement'),
-			 "style='width: 48px; height: 48px; float: right;margin: 10px;'") .
+		 http_img_pack(chemin_image("warning-48.png"), _T('info_avertissement'),
+			 "style=' float: right;margin: 10px;'") .
 		 _T('texte_admin_tech_01',
 		   array('dossier' => '<i>'.$dir_dump.'</i>', 'img'=>'<i>'.$dir_img.'</i>')) .
 		 '&nbsp;' .

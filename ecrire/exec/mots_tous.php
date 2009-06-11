@@ -44,7 +44,7 @@ function exec_mots_tous_dist()
 			<ul class='raccourcis_rapides'>".$out."</ul>
 			<a href='#' onclick='$(\"div.mots_tous\").show();return false;'>"._T('icone_voir_tous_mots_cles')."</a>";
 
-		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
+		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.png", "creer.gif",false);
 		echo bloc_des_raccourcis($res . $out);
 	}
 
@@ -80,7 +80,7 @@ function exec_mots_tous_dist()
 		// Afficher le titre du groupe
 		echo "<div id='mots_tous-$id_groupe' class='mots_tous'>";
 
-		echo debut_cadre_enfonce("groupe-mot-24.gif", true, '', $titre_groupe);
+		echo debut_cadre_enfonce("groupe-mot-24.png", true, '', $titre_groupe);
 		// Affichage des options du groupe (types d'elements, permissions...)
 		$res = '';
 		$tables_liees = explode(',',$tables_liees);
@@ -134,15 +134,15 @@ function exec_mots_tous_dist()
 			echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 			echo "<tr>";
 			echo "<td>";
-			echo icone_inline(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif", $spip_lang_left);
+			echo icone_inline(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.png", "edit.gif", $spip_lang_left);
 			echo "</td>";
 			echo "\n<td id='editer_mots-$id_groupe-supprimer'",
 			  (!$groupe ? '' : " style='visibility: hidden'"),
 			  ">";
-			echo icone_inline(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), "groupe-mot-24.gif", "supprimer.gif", $spip_lang_left);
+			echo icone_inline(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), "groupe-mot-24.png", "supprimer.gif", $spip_lang_left);
 			echo "</td>";
 			echo "<td>";
-			echo icone_inline(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous', "#mots_tous-$id_groupe")), "mot-cle-24.gif", "creer.gif", $spip_lang_right);
+			echo icone_inline(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous', "#mots_tous-$id_groupe")), "mot-24.png", "creer.gif", $spip_lang_right);
 			echo "</td></tr></table>";
 		}	
 

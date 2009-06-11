@@ -95,7 +95,7 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 		));
 
 	$contexte = array(
-	'icone_retour'=>icone_inline(_T('icone_retour'), $oups, "article-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
+	'icone_retour'=>icone_inline(_T('icone_retour'), $oups, "article-24.png", "",$GLOBALS['spip_lang_left']),
 	'redirect'=>generer_url_ecrire("articles"),
 	'titre'=>$titre,
 	'new'=>$new?$new:$row['id_article'],

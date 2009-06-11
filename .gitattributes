@@ -904,6 +904,8 @@ prive/skins/spip/images/image-new-16.png -text
 prive/skins/spip/images/image-new-24.png -text
 prive/skins/spip/images/information-16.png -text
 prive/skins/spip/images/information-24.png -text
+prive/skins/spip/images/information-perso-16.png -text
+prive/skins/spip/images/information-perso-24.png -text
 prive/skins/spip/images/langue-16.png -text
 prive/skins/spip/images/langue-24.png -text
 prive/skins/spip/images/langues.png -text
@@ -947,6 +949,8 @@ prive/skins/spip/images/petition-new-16.png -text
 prive/skins/spip/images/petition-new-24.png -text
 prive/skins/spip/images/plugin-16.png -text
 prive/skins/spip/images/plugin-24.png -text
+prive/skins/spip/images/plus-16.png -text
+prive/skins/spip/images/plus-info-16.png -text
 prive/skins/spip/images/poubelle-16.png -text
 prive/skins/spip/images/poubelle-24.png -text
 prive/skins/spip/images/publication-48.png -text
@@ -954,6 +958,8 @@ prive/skins/spip/images/racine-16.png -text
 prive/skins/spip/images/racine-24.png -text
 prive/skins/spip/images/referer-16.png -text
 prive/skins/spip/images/referer-24.png -text
+prive/skins/spip/images/reseau-16.png -text
+prive/skins/spip/images/reseau-24.png -text
 prive/skins/spip/images/revision-16.png -text
 prive/skins/spip/images/revision-24.png -text
 prive/skins/spip/images/rss-16.png -text
@@ -987,6 +993,9 @@ prive/skins/spip/images/statistique-16.png -text
 prive/skins/spip/images/statistique-24.png -text
 prive/skins/spip/images/suivi-16.png -text
 prive/skins/spip/images/suivi-24.png -text
+prive/skins/spip/images/supprimer-16.png -text
+prive/skins/spip/images/supprimer-24.png -text
+prive/skins/spip/images/supprimer-8.png -text
 prive/skins/spip/images/synchro-16.png -text
 prive/skins/spip/images/synchro-24.png -text
 prive/skins/spip/images/traduction-16.png -text
@@ -1001,6 +1010,7 @@ prive/skins/spip/images/traduction-new-16.png -text
 prive/skins/spip/images/traduction-new-24.png -text
 prive/skins/spip/images/warning-16.png -text
 prive/skins/spip/images/warning-24.png -text
+prive/skins/spip/images/warning-48.png -text
 prive/skins/spip/images/xml-16.png -text
 prive/skins/spip/images/xml-24.png -text
 prive/skins/spip/style_prive_skin.html -text

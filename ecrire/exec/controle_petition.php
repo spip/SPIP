@@ -100,7 +100,7 @@ function controle_petition_page($id_article, $titre,  $ong, $corps)
 	if ($id_article) {
 		$a =  generer_url_ecrire("statistiques_visites","id_article=$id_article");
 		$rac = "<br /><br /><br /><br /><br />" .
-		bloc_des_raccourcis(icone_horizontale(_T('icone_statistiques_visites'),$a, "statistiques-24.gif","rien.gif", false));
+		bloc_des_raccourcis(icone_horizontale(_T('icone_statistiques_visites'),$a, "statistique-24.png","", false));
 
 		$titre = "<a href='" .
 			generer_url_entite($id_article,'article') .
@@ -152,8 +152,8 @@ function controle_petition_onglet($id_article, $debut, $type, $arg='')
 	}
 
 	return debut_onglet()
-	  . onglet(_T('titre_signatures_confirmees'), generer_url_ecrire('controle_petition', $argp . $arg . "type=public"), "public", $type=='public', "petition-public-24.gif")
-	.  onglet(_T('titre_signatures_attente'), generer_url_ecrire('controle_petition', $argi . $arg .  "type=interne"), "interne", $type=='interne', "petition-interne-24.gif")
+	  . onglet(_T('titre_signatures_confirmees'), generer_url_ecrire('controle_petition', $argp . $arg . "type=public"), "public", $type=='public', "petition-24.png")
+	.  onglet(_T('titre_signatures_attente'), generer_url_ecrire('controle_petition', $argi . $arg .  "type=interne"), "interne", $type=='interne', "petition-24.png")
 	. fin_onglet()
 	. '<br />';
 }

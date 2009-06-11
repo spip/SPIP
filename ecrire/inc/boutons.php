@@ -39,46 +39,20 @@ class Bouton {
 }
 
 
-// http://doc.spip.org/@barre_onglets_administration
-function barre_onglets_administration() {
-
-	$onglets = array();
-	if (autoriser('sauvegarder')) {
-			$onglets['sauver']=
-			  new Bouton('spip-pack-24.png', 'onglet_save_restaur_base',
-				generer_url_ecrire("admin_tech"));
-	}
-	if (autoriser('detruire')) {
-			$onglets['effacer']=
-			  new Bouton('supprimer.gif', 'onglet_affacer_base',
-				generer_url_ecrire("admin_effacer"));
-
-			$onglets['declarer']=
-			  new Bouton('base-24.gif', 'onglet_declarer_une_autre_base',
-				generer_url_ecrire("admin_declarer"));
-		}
-	return $onglets;
-}
-
 // http://doc.spip.org/@barre_onglets_configuration
 function barre_onglets_configuration() {
 
 	$onglets = array();
 	$onglets['contenu']=
-		  new Bouton('racine-site-24.gif', 'onglet_contenu_site',
+		  new Bouton('racine-24.png', 'onglet_contenu_site',
 			generer_url_ecrire("configuration"));
 	$onglets['interactivite']=
-		  new Bouton('interactivite-24.gif', 'onglet_interactivite',
+		  new Bouton('auteur-6forum-24.png', 'onglet_interactivite',
 			generer_url_ecrire("config_contenu"));
 	$onglets['fonctions']=
-		  new Bouton('image-24.gif', 'onglet_fonctions_avances',
+		  new Bouton('image-24.png', 'onglet_fonctions_avances',
 			generer_url_ecrire("config_fonctions"));
-/*
-		if (true)
-		$onglets['plugins']=
-		  new Bouton('plugin-24.gif', 'onglet_plugins',
-			generer_url_ecrire("config_plugins"));
-*/
+
 	return $onglets;
 }
 
@@ -88,13 +62,13 @@ function barre_onglets_config_lang() {
 
 	$onglets=array();
 	$onglets['langues']=
-		  new Bouton('langues-24.gif', 'info_langue_principale',
+		  new Bouton('langue-24.png', 'info_langue_principale',
 			generer_url_ecrire("config_lang"));
 	$onglets['multi']=
-		  new Bouton('traductions-24.gif', 'info_multilinguisme',
+		  new Bouton('traduction-24.png', 'info_multilinguisme',
 			generer_url_ecrire("config_multilang"));
 		$onglets['fichiers']=
-		  new Bouton('traductions-24.gif', 'module_fichiers_langues',
+		  new Bouton('traduction-24.png', 'module_fichiers_langues',
 			generer_url_ecrire("lang_raccourcis"));
 	return $onglets;
 }
@@ -125,7 +99,7 @@ function definir_barre_onglets($script) {
 			&& $parent == $script
 			&& autoriser('onglet',$id)) {
 				$onglets[$id] = new Bouton(
-					find_in_path($infos['icone']),  // icone
+					find_in_skin($infos['icone']),  // icone
 					$infos['titre'],	// titre
 					$infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null
 					);

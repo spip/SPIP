@@ -53,7 +53,7 @@ function exec_mots_type_dist()
 	echo debut_droite('', true);
 	
 	$contexte = array(
-		'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous") . "#mots_tous-$id_groupe", "groupe-mot-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
+		'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous") . "#mots_tous-$id_groupe", "groupe-mot-24.png", "",$GLOBALS['spip_lang_left']),
 		'titre'=>$type,
 		'redirect'=>generer_url_ecrire("mots_tous",""),
 		'new'=>_request('new') == "oui"?"oui":$id_groupe,

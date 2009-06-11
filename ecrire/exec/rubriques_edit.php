@@ -57,8 +57,8 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	pipeline('exec_init',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));
 	echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", $id_rubrique);
 
-	if ($id_parent == 0) $ze_logo = "secteur-24.gif";
-	else $ze_logo = "rubrique-24.gif";
+	if ($id_parent == 0) $ze_logo = "secteur-24.png";
+	else $ze_logo = "rubrique-24.png";
 
 	echo debut_grand_cadre(true);
 	echo afficher_hierarchie($id_parent,'',$id_rubrique,'rubrique');
@@ -81,7 +81,7 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	echo debut_droite('', true);
 
 	$contexte = array(
-	'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif",$GLOBALS['spip_lang_left']),
+	'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "",$GLOBALS['spip_lang_left']),
 	'redirect'=>generer_url_ecrire("naviguer"),
 	'titre'=>$titre,
 	'new'=>$new == "oui"?$new:$id_rubrique,

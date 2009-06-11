@@ -85,7 +85,7 @@ function petitionner_decompte($id_article, $petition)
 		. icone_horizontale(
 			$signatures.'&nbsp;'. _T('info_signatures'),
 			generer_url_ecrire("controle_petition", "id_article=$id_article",'', false),
-			"suivi-petition-24.gif",
+			"petition-24.png",
 			"",
 			false
 		);

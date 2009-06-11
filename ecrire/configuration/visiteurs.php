@@ -36,7 +36,7 @@ function configuration_visiteurs_dist()
 		$res = _T('info_forums_abo_invites');
 	}
 
-	$res = debut_cadre_trait_couleur("redacteurs-24.gif", true, "", _T('info_visiteurs'))
+	$res = debut_cadre_trait_couleur("auteur-6forum-24.png", true, "", _T('info_visiteurs'))
 	. $res
 	. fin_cadre_trait_couleur(true);
 

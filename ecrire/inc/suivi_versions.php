@@ -161,7 +161,7 @@ function revisions_entete_boite($court, $debut, $id_secteur, $lang, $nb_aff, $re
 	if ($total >= 150) $total = 149;
 	$id_liste = 't'.substr(md5("$req_where 149"),0,8);
 	$bouton = bouton_block_depliable($titre_table,true,$id_liste);
-	$revisions = debut_cadre('liste',"historique-24.gif",'',$bouton)
+	$revisions = debut_cadre('liste',"revision-24.png",'',$bouton)
 	. debut_block_depliable(true,$id_liste);
 		
 	if ($total > $nb_aff) {

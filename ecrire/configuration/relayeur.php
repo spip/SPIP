@@ -62,7 +62,7 @@ function configuration_relayeur_dist($retour_proxy='')
 	  . $res
 	  . "</div>";
 
-	$res = debut_cadre_trait_couleur("base-24.gif", true, "", _T('info_sites_proxy').aide ("confhttpproxy"))
+	$res = debut_cadre_trait_couleur("reseau-24.png", true, "", _T('info_sites_proxy').aide ("confhttpproxy"))
 	.  ajax_action_post('configurer_relayeur', 0, 'config_fonctions', '', $res, $submit)
 	.  fin_cadre_trait_couleur(true);
 

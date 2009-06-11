@@ -68,8 +68,8 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 
 	echo debut_gauche('', true);
 
-	echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false) .
-				 icone_horizontale(_T('icone_suivi_revisions'), generer_url_ecrire("suivi_revisions",""), "historique-24.gif","rien.gif", false));
+	echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.png","", false) .
+				 icone_horizontale(_T('icone_suivi_revisions'), generer_url_ecrire("suivi_revisions",""), "revision-24.png","", false));
 
 
 
@@ -146,7 +146,7 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 		_T('icone_modifier_article').'<br />('._T('version')." $id_version)",
 		generer_url_ecrire("articles_edit",
 			"id_article=$id_article".((!$last_version)?"&id_version=$id_version":"")),
-		"article-24.gif",
+		"article-24.png",
 		"edit.gif",
 		$spip_lang_right
 		);

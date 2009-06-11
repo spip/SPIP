@@ -99,8 +99,8 @@ function presenter_groupe_mots_boucle($row, $own)
 		$clic =  '<small>'
 		._T('info_supprimer_mot')
 		. "&nbsp;<img style='vertical-align: bottom;' src='"
-		. chemin_image('croix-rouge.gif')
-		. "' alt='X' width='7' height='7' />"
+		. chemin_image('supprimer-8.png')
+		. "' alt='X' />"
 		. '</small>';
 
 		if ($nr OR $na OR $ns OR $nb)

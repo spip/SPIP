@@ -27,7 +27,7 @@ function inc_aider_dist($aide='') {
 	. "'spip_aide', "
 	. "'scrollbars=yes, resizable=yes, width=740, height=580'); "
 	. "return false;\">"
-	. http_img_pack(chemin_image("aide".aide_lang_dir($spip_lang,$spip_lang_rtl).".gif"),
+	. http_img_pack(chemin_image("aide".aide_lang_dir($spip_lang,$spip_lang_rtl)."-16.png"),
 			_T('info_image_aide'),
 			" title=\"$t\" class='aide'")
 	. "</a>";

@@ -46,12 +46,12 @@ echo fin_boite_info(true);
 
 echo creer_colonne_droite('', true);
 
-echo debut_cadre_relief("messagerie-24.gif", true);
-echo icone_horizontale(_T('lien_nouvea_pense_bete'),generer_action_auteur("editer_message","pb"), "pense-bete.gif", "", false);
-echo icone_horizontale(_T('lien_nouveau_message'),generer_action_auteur("editer_message","normal"), "message.gif", "", false);
+echo debut_cadre_relief("messagerie-24.png", true);
+echo icone_horizontale(_T('lien_nouvea_pense_bete'),generer_action_auteur("editer_message","pb"), "pense-bete-24.png", "", false);
+echo icone_horizontale(_T('lien_nouveau_message'),generer_action_auteur("editer_message","normal"), "message-24.png", "", false);
 		
 		if ($connect_statut == "0minirezo") {
-			echo icone_horizontale(_T('lien_nouvelle_annonce'),generer_action_auteur("editer_message","affich"), "annonce.gif", "", false);
+			echo icone_horizontale(_T('lien_nouvelle_annonce'),generer_action_auteur("editer_message","affich"), "annonce-24.png", "", false);
 		}
 echo fin_cadre_relief(true);
 
@@ -59,7 +59,7 @@ echo fin_cadre_relief(true);
 # Affiche l'encadre "lien iCal"
  echo
     debut_cadre_enfonce('',true) .
-		icone_horizontale(_T('icone_suivi_activite'),generer_url_ecrire("synchro"), "synchro.gif", "", false) .
+		icone_horizontale(_T('icone_suivi_activite'),generer_url_ecrire("synchro"), "synchro-24.png", "", false) .
     fin_cadre_enfonce(true);
 
 
@@ -92,14 +92,14 @@ echo bouton_spip_rss('messagerie', array('id_auteur' => $connect_id_auteur));
 		$id_auteur = $row['id_auteur'];
 		$nom = typo($row["nom"]);
 		$total = $row["total"];
-		$cor[]= "<div class='tr_liste'\nonmouseover=\"changeclass(this,'tr_liste_over');\"\nonmouseout=\"changeclass(this,'tr_liste');\"\nstyle='padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . chemin_image('redac-12.gif') . "'\nstyle='border: 0px' alt=' ' /> <a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur") . "'>$nom,</a> ($total)</div></div>";
+		$cor[]= "<div class='tr_liste'\nonmouseover=\"changeclass(this,'tr_liste_over');\"\nonmouseout=\"changeclass(this,'tr_liste');\"\nstyle='padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . chemin_image('auteur-16.png') . "'\nstyle='border: 0px' alt=' ' /> <a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur") . "'>$nom,</a> ($total)</div></div>";
  }
 
  if ($cor) {
 
 	echo "<div style='height: 12px;'></div>";
 	$bouton = bouton_block_depliable(_T('info_principaux_correspondants'),true,'principaux');
-	echo debut_cadre('liste',"redacteurs-24.gif",'',$bouton);
+	echo debut_cadre('liste',"auteur-24.png",'',$bouton);
 	echo debut_block_depliable(true,'principaux');
 	echo "<table width='100%' cellpadding='0' cellspacing='0'>";
 	echo "<tr><td valign='top' style='width: 50%'>";

@@ -123,15 +123,15 @@ function exec_brouteur_frame_dist() {
 			$titre = typo($row['titre']);
 			$id_parent=$row['id_parent'];
 			
-			if ($id_parent == 0) $icone = "secteur-24.gif";
-			else $icone = "rubrique-24.gif";
+			if ($id_parent == 0) $icone = "secteur-24.png";
+			else $icone = "rubrique-24.png";
 			
 			echo "\n<div style='background-color: #cccccc; border: 1px solid #444444;'>";
 			echo icone_horizontale($titre, "javascript:window.parent.location=\"" . generer_url_ecrire('naviguer',"id_rubrique=$id_rubrique") .'"', $icone, "", false);
 			echo "</div>";
 		}  else if ($frame == 0) {
 			echo "\n<div style='background-color: #cccccc; border: 1px solid #444444;'>";
-			echo icone_horizontale(_T('info_racine_site'), "javascript:window.parent.location=\"" . generer_url_ecrire('naviguer') . '"', "racine-site-24.gif","", false);
+			echo icone_horizontale(_T('info_racine_site'), "javascript:window.parent.location=\"" . generer_url_ecrire('naviguer') . '"', "racine-24.png","", false);
 			echo "</div>";
 		}
 
@@ -148,18 +148,18 @@ function exec_brouteur_frame_dist() {
 	onmouseout=\"changeclass(this, 'brouteur_rubrique');\">";
 	
 				if ($id_parent == '0') 	{
-				  echo "\n<div style='", frame_background_image("secteur-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='", ($frame+1), "'>",
+				  echo "\n<div style='", frame_background_image("secteur-24.png"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='", ($frame+1), "'>",
 				    $titre,
 				    "</a></div>";
 				}
 				else {
 					if ($frame+1 < $nb_col)
 					  echo "\n<div style='",
-					    frame_background_image("rubrique-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='",
+					    frame_background_image("rubrique-24.png"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='",
 					    ($frame+1),
 					    "'>$titre</a></div>";
 					else  echo "\n<div style='",
-					  frame_background_image("rubrique-24.gif"), ";'><a href='javascript:window.parent.location=\"" . generer_url_ecrire('brouteur',"id_rubrique=$ze_rubrique$profile")."\"'>",$titre,"</a></div>";
+					  frame_background_image("rubrique-24.png"), ";'><a href='javascript:window.parent.location=\"" . generer_url_ecrire('brouteur',"id_rubrique=$ze_rubrique$profile")."\"'>",$titre,"</a></div>";
 				}
 				echo "</div>\n";
 			}

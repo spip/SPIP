@@ -58,7 +58,7 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 		$bouton = bouton_block_depliable($bouton, $visible,"lesmots");
 	}
 
-	$res = debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton)
+	$res = debut_cadre_enfonce("mot-24.png", true, "", $bouton)
 	  . $reponse
 	  . $liste
 	  . fin_cadre_enfonce(true);
@@ -192,7 +192,7 @@ function editer_mots_un($row, $own)
 			$unseul = ($r[0]['unseul'] == 'oui');
 			$r =  _T('info_retirer_mot')
 			  . "&nbsp;"
-			  . http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
+			  . http_img_pack(chemin_image('supprimer-8.png'), "X", " class='puce' style='vertical-align: bottom;'");
 
 			$retire = ajax_action_auteur('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($r,''),"&id_objet=$id_objet&objet=$objet");
 		}
@@ -319,7 +319,7 @@ function creer_mot($table, $id_objet, $table_id, $url_base, $mot='', $id_groupe=
 	. (!$id_groupe ? '' : ("&id_groupe=".intval($id_groupe)))
 	. "&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet");
 
-	return icone_horizontale_display($legende, generer_url_ecrire("mots_edit", $args), "mot-cle-24.gif", "creer.gif", false);
+	return icone_horizontale_display($legende, generer_url_ecrire("mots_edit", $args), "mot-24.png", "creer.gif", false);
 }
 
 // http://doc.spip.org/@menu_mots

@@ -42,7 +42,7 @@ function exec_configuration_dist(){
 	echo debut_droite('', true);
 
 
-	echo debut_cadre_trait_couleur("article-24.gif", true, "", _T('titre_les_articles'));
+	echo debut_cadre_trait_couleur("article-24.png", true, "", _T('titre_les_articles'));
 	$articles = charger_fonction('articles', 'configuration');
 	echo $articles();
 	$futurs = charger_fonction('futurs', 'configuration');

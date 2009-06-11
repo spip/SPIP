@@ -58,7 +58,7 @@ function configuration_referenceur_dist()
 	} else
 		$res .= "<input type='hidden' name='gerer_trad' id='gerer_trad' value='".$GLOBALS['meta']['gerer_trad']."' />";
 
-	$res = debut_cadre_couleur("traductions-24.gif", true, "", _T('info_multilinguisme'))
+	$res = debut_cadre_couleur("traduction-24.png", true, "", _T('info_multilinguisme'))
 	. ajax_action_post('configurer', 'referenceur', 'config_multilang', '', $res)
 	. fin_cadre_couleur(true);
 

@@ -117,7 +117,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	if ($langue_article)
 		$bouton .= "&nbsp; (".traduire_nom_langue($langue_article).")";
 
-	$res = debut_cadre_enfonce('langues-24.gif', true, "", 
+	$res = debut_cadre_enfonce('langue-24.png', true, "",
 			bouton_block_depliable($bouton,$flag === 'ajax','languearticle,lier_traductions'))
 		. debut_block_depliable($flag === 'ajax','languearticle')
 		. $reponse
@@ -152,7 +152,7 @@ function articles_traduction($row, $id_article)
 	$vals[] = $puce_statut($id_article_trad, $statut_trad, $id_rubrique_trad, 'article');
 		
 	if ($id_article_trad == $id_trad) {
-			$vals[] = http_img_pack('langues-12.gif', "", " class='lang'");
+			$vals[] = http_img_pack('langue-16.png', "", " class='lang'");
 			$titre_trad = "<b>$titre_trad</b>";
 	} else {
 		if (!$connect_toutes_rubriques)

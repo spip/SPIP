@@ -36,7 +36,7 @@ echo debut_droite('', true);
 
 if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 	echo  "<div style='float:$spip_lang_right'>",
-	  icone_inline(_T('icone_referencer_nouveau_site'), generer_url_ecrire('sites_edit'), "site-24.gif", "creer.gif", 'right'),
+	  icone_inline(_T('icone_referencer_nouveau_site'), generer_url_ecrire('sites_edit'), "site-24.png", "creer.gif", 'right'),
 	  "</div><br class='nettoyeur' />";
 }
 
