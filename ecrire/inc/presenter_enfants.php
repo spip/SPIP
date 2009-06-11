@@ -139,8 +139,8 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 	. ";position:relative;'>"
 	. (!$bouton ? ''
 		 : (!$id_rubrique
-		    ? icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.png", "creer.gif",$spip_lang_right, false)
-		    : icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.png", "creer.gif",$spip_lang_right,false)))
+		    ? icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.png", "new",$spip_lang_right, false)
+		    : icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.png", "new",$spip_lang_right,false)))
 	. "</div>";
 
 	if ($return) return $res; else echo_log('afficher_enfant_rub',$res);

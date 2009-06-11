@@ -84,24 +84,24 @@ function exec_menu_navigation_dist() {
 		if (autoriser('creerrubriquedans', 'rubrique', $id_rubrique)) {	
 #			$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
 			if ($id_rubrique > 0)
-				$gadget .= icone_horizontale_display(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui$dans_parent"), "rubrique-24.png", "creer.gif", false);
+				$gadget .= icone_horizontale_display(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui$dans_parent"), "rubrique-24.png", "new", false);
 			else 
-				$gadget .= icone_horizontale_display(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.png", "creer.gif", false);
+				$gadget .= icone_horizontale_display(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.png", "new", false);
 #			$gadget .= "</div>";
 		}		
 #		$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-		$gadget .= icone_horizontale_display(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui$dans_rub"), "article-24.png","creer.gif", false);
+		$gadget .= icone_horizontale_display(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui$dans_rub"), "article-24.png","new", false);
 #		$gadget .= "</div>";
 			
 		if ($GLOBALS['meta']["activer_breves"] != "non") {
 #			$gadget .= "<div style='width: 140px;  float: $spip_lang_left;'>";
-			$gadget .= icone_horizontale_display(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui$dans_rub"), "breve-24.png","creer.gif", false);
+			$gadget .= icone_horizontale_display(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui$dans_rub"), "breve-24.png","new", false);
 #			$gadget .= "</div>";
 		}
 			
 		if (autoriser('creersitedans', 'rubrique', $une_rubrique)) {
 			$gadget .= # "<div style='width: 140px; float: $spip_lang_left;'>" .
-			 icone_horizontale_display(_T('info_sites_referencer'), generer_url_ecrire("sites_edit","new=oui$dans_rub"), "site-24.png","creer.gif", false)
+			 icone_horizontale_display(_T('info_sites_referencer'), generer_url_ecrire("sites_edit","new=oui$dans_rub"), "site-24.png","new", false)
 			#. "</div>"
 ;
 		}

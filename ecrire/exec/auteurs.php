@@ -101,7 +101,7 @@ function bandeau_auteurs($tri, $visiteurs)
 	if ($connect_statut == '0minirezo') {
 
 		if ($connect_toutes_rubriques) 
-			$res = icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos", 'new=oui'), "auteur-24.png", "creer.gif", false);
+			$res = icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos", 'new=oui'), "auteur-24.png", "new", false);
 		else $res = '';
 
 		$res .= icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur"), "information-perso-24.png","", false);

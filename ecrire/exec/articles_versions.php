@@ -147,7 +147,7 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 		generer_url_ecrire("articles_edit",
 			"id_article=$id_article".((!$last_version)?"&id_version=$id_version":"")),
 		"article-24.png",
-		"edit.gif",
+		"edit",
 		$spip_lang_right
 		);
 

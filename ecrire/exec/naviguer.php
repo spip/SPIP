@@ -129,8 +129,8 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $in
 	  .(_INTERFACE_ONGLETS?"":
 	   (autoriser('creerrubriquedans','rubrique',$id_rubrique)?"<div style='clear:$spip_lang_right;'>" .
 	    (!$id_rubrique
-		    ? icone_inline(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.png", "creer.gif",$spip_lang_right)
-		    : icone_inline(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.png", "creer.gif",$spip_lang_right))
+		    ? icone_inline(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.png", "new",$spip_lang_right)
+		    : icone_inline(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.png", "new",$spip_lang_right))
 	    ."</div>":""))
 	  . "<br class='nettoyeur' />"
 	  . $boucles;
@@ -208,11 +208,11 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 	$n = sql_countsel('spip_rubriques');
 	if ($n) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
-		  $res .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","creer.gif", false);
+		  $res .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","new", false);
 
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent))) {
-		  $res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.png","creer.gif", false);
+		  $res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.png","new", false);
 		}
 	}
 	else {
@@ -243,7 +243,7 @@ function langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 		if (!$langue_rubrique)
 			$langue_rubrique = $langue_parent;
 
-		$res .= debut_cadre_enfonce('langues-24.gif', true);
+		$res .= debut_cadre_enfonce('langue-24.png', true);
 		#$res .= bouton_block_depliable(_T('titre_langue_rubrique')."&nbsp; (".traduire_nom_langue($langue_rubrique).")",false,'languesrubrique');
 
 		#$res .= debut_block_depliable(false,'languesrubrique');
@@ -343,16 +343,16 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	$bouton_article = $bouton_breves = $bouton_sites = "";
 	if ($n && !_INTERFACE_ONGLETS) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
-		  $bouton_article .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","creer.gif", $spip_lang_right)
+		  $bouton_article .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","new", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
 
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent)))
-		  $bouton_breves .= icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.png","creer.gif", $spip_lang_right)
+		  $bouton_breves .= icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.png","new", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
 
 		if (autoriser('creersitedans','rubrique',$id_rubrique))
-			$bouton_sites .= icone_inline(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.png", "creer.gif", $spip_lang_right)
+			$bouton_sites .= icone_inline(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.png", "new", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
 	}
 
@@ -392,7 +392,7 @@ function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 		$res = $joindre(array(
 			'cadre' => 'relief',
 			'icone' => 'image-24.gif',
-			'fonction' => 'creer.gif',
+			'fonction' => 'new',
 			'titre' => _T('titre_joindre_document'),
 			'script' => $script,
 			'args' => "id_$type=$id",
@@ -433,12 +433,12 @@ function montre_naviguer($id_rubrique, $titre, $id_parent, $ze_logo, $flag_edita
 	AND $id_rubrique > 0) {
 		$actions = icone_inline(_T('icone_modifier_rubrique'),
 			generer_url_ecrire("rubriques_edit",
-				"id_rubrique=$id_rubrique&retour=nav"), $ze_logo, "edit.gif", $spip_lang_right);
+				"id_rubrique=$id_rubrique&retour=nav"), $ze_logo, "edit", $spip_lang_right);
 
 		// Supprimer cette rubrique (si vide)
 		if (tester_rubrique_vide($id_rubrique))
 			$actions .= icone_inline(_T('icone_supprimer_rubrique'),
-				redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "supprimer.gif", $spip_lang_right);
+				redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "del", $spip_lang_right);
 	}
 	else
 		$actions = ''; // rubrique non editable
@@ -476,7 +476,7 @@ function tester_rubrique_vide($id_rubrique) {
 function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable)
 {
 	if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable)
-	  return icone_inline(_T('icone_supprimer_rubrique'), redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "supprimer.gif") . "</div>";
+	  return icone_inline(_T('icone_supprimer_rubrique'), redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "del") . "</div>";
 	return "";
 }
 

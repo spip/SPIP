@@ -2424,7 +2424,7 @@ function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class
 	$align = $align?$align:$GLOBALS['spip_lang_left'];
 	global $spip_display;
 
-	if ($fonction == "supprimer.gif") {
+	if ($fonction == "del") {
 		$style = 'icone36 danger';
 	} else {
 		$style = 'icone36';

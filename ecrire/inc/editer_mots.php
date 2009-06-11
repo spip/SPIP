@@ -319,7 +319,7 @@ function creer_mot($table, $id_objet, $table_id, $url_base, $mot='', $id_groupe=
 	. (!$id_groupe ? '' : ("&id_groupe=".intval($id_groupe)))
 	. "&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet");
 
-	return icone_horizontale_display($legende, generer_url_ecrire("mots_edit", $args), "mot-24.png", "creer.gif", false);
+	return icone_horizontale_display($legende, generer_url_ecrire("mots_edit", $args), "mot-24.png", "new", false);
 }
 
 // http://doc.spip.org/@menu_mots
