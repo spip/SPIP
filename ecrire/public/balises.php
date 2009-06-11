@@ -1095,6 +1095,33 @@ function balise_GET_dist($p) {
 		return balise_ENV_dist($p, '$Pile["vars"]');
 }
 
+
+// #DOUBLONS{mots} ou #DOUBLONS{mots,famille}
+// donne l'etat des doublons (MOTS) a cet endroit
+// sous forme de tableau d'id_mot  array(1,2,3,...)
+// #DOUBLONS tout seul donne la liste brute de tous les doublons
+// #DOUBLONS*{mots} donne la chaine brute ",1,2,3,..."
+// (changera si la gestion des doublons evolue)
+//
+// http://doc.spip.org/@balise_DOUBLONS_dist
+function balise_DOUBLONS_dist($p) {
+	if ($type = interprete_argument_balise(1,$p)) {
+		if ($famille = interprete_argument_balise(2,$p))
+			$type .= '.' . $famille;
+		$p->code = '$doublons['.$type.']';
+		if (!$p->etoile)
+			$p->code = 'array_filter(array_map("intval",explode(",",'
+				. $p->code . ')))';
+	}
+	else
+		$p->code = '$doublons';
+
+	$p->interdire_scripts = false;
+
+	return $p;
+}
+
+
 //
 // #PIPELINE
 // pour permettre aux plugins d'inserer des sorties de pipeline dans un squelette
