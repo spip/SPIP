@@ -324,6 +324,7 @@ foreach(array('TITRE','DESCRIPTIF','SOURCE') as $balise)
 			'table_des_tables'=>$table_des_tables,
 			'exceptions_des_tables'=>$exceptions_des_tables,
 			'table_date'=>$table_date,
+			'table_titre'=>$table_titre,
 			'tables_jointures'=>$tables_jointures,
 			'exceptions_des_jointures'=>$exceptions_des_jointures,
 			'table_des_traitements'=>$table_des_traitements,
@@ -332,6 +333,7 @@ foreach(array('TITRE','DESCRIPTIF','SOURCE') as $balise)
 			$table_des_tables = $interfaces['table_des_tables'];
 			$exceptions_des_tables = $interfaces['exceptions_des_tables'];
 			$table_date = $interfaces['table_date'];
+			$table_titre = $interfaces['table_titre'];
 			$tables_jointures = $interfaces['tables_jointures'];
 			$exceptions_des_jointures = $interfaces['exceptions_des_jointures'];
 			$table_des_traitements = $interfaces['table_des_traitements'];
