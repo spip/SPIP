@@ -101,16 +101,16 @@ function bandeau_auteurs($tri, $visiteurs)
 	if ($connect_statut == '0minirezo') {
 
 		if ($connect_toutes_rubriques) 
-			$res = icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos", 'new=oui'), "auteur-24.gif", "creer.gif", false);
+			$res = icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos", 'new=oui'), "auteur-24.png", "creer.gif", false);
 		else $res = '';
 
-		$res .= icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif", false);
+		$res .= icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur"), "information-perso-24.png","", false);
 
 		if (avoir_visiteurs(true)) {
                         if ($visiteurs)
-				$res .= icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs", "statut=" . AUTEURS_MIN_REDAC), "auteur-24.gif", "", false);
+				$res .= icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs", "statut=" . AUTEURS_MIN_REDAC), "auteur-24.png", "", false);
 			else
-				$res .= icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","statut=!" . AUTEURS_MIN_REDAC), "auteur-24.gif", "", false);
+				$res .= icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","statut=!" . AUTEURS_MIN_REDAC), "auteur-6forum-24.png", "", false);
 		}
 		$ret .= bloc_des_raccourcis($res);
 	}
@@ -172,10 +172,10 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	. "\n<th style='width: 20px'>";
 
 	if ($tri=='statut')
-  		$res .= http_img_pack('admin-12.gif','', " class='lang'");
+  		$res .= http_img_pack(chemin_image('auteur-0minirezo-16.png'),'', "");
 	else {
 	  $t =  _T('lien_trier_statut');
-	  $res .= auteurs_href(http_img_pack('admin-12.gif', $t, "class='lang'"),"tri=statut$arg", " title=\"$t\"");
+	  $res .= auteurs_href(http_img_pack(chemin_image('auteur-0minirezo-16.png'), $t, ""),"tri=statut$arg", " title=\"$t\"");
 	}
 
 	$res .= "</th><th style='width: 20px'></th><th>";

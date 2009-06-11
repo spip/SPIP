@@ -2161,6 +2161,15 @@ function http_wrapper($img){
 // http://doc.spip.org/@http_img_pack
 function http_img_pack($img, $alt, $atts='', $title='') {
 
+	if (strpos($atts, 'width')===FALSE){
+		// utiliser directement l'info de taille presente dans le nom
+		if (preg_match(',-([0-9]+)[.]png$,',$img,$regs)){
+				$size = array(intval($regs[1]),intval($regs[1]));
+		}
+		else
+			$size = @getimagesize($img);
+		$atts.=" width='".$size[0]."' height='".$size[1]."'";
+	}
 	return  "<img src='" . http_wrapper($img)
 	  . ("'\nalt=\"" .
 	     str_replace('"','', textebrut($alt ? $alt : ($title ? $title : '')))
