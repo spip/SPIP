@@ -307,6 +307,7 @@ $spip_pipeline = array(
 	'recuperer_fond' => '',
 	'styliser' => '||styliser_par_rubrique|styliser_par_langue',
 	'trig_propager_les_secteurs' => '',
+	'url_objets' => 'article|breve|rubrique|mot|auteur|site|syndic',
 );
 
 # pour activer #INSERT_HEAD sur tous les squelettes, qu'ils aient ou non
