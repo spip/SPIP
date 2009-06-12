@@ -12,6 +12,33 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
+function urls_liste_objets(){
+	$url_objets = pipeline('declarer_url_objets',array('article','breve','rubrique','mot','auteur','site','syndic'));
+	$url_objets = implode('|',array_map('preg_quote',$url_objets));
+	return $url_objets;
+}
+
+function nettoyer_url_page($url, $contexte=array())
+{
+	$url_objets = urls_liste_objets();
+	$raccourci_url_page_html = ',^(?:[^?]*/)?('. $url_objets . ')([0-9]+)(?:\.html)?([?&].*)?$,';
+	$raccourci_url_page_id = ',^(?:[^?]*/)?('. $url_objets .')\.php3?[?]id_\1=([0-9]+)([?&].*)?$,';
+	$raccourci_url_page_spip = ',^(?:[^?]*/)?(?:spip[.]php)?[?]('. $url_objets .')([0-9]+)(&.*)?$,';
+
+	if (preg_match($raccourci_url_page_html, $url, $regs)
+	OR preg_match($raccourci_url_page_id, $url, $regs)
+	OR preg_match($raccourci_url_page_spip, $url, $regs)) {
+		$type = preg_replace(',s$,', '', table_objet($regs[1]));
+		if ($type == 'syndic') $type = 'site';
+		$_id = id_table_objet($regs[1]);
+		$contexte[$_id] = $regs[2];
+		return array($contexte, $type, null, $type);
+	}
+	return array();
+}
+
+
 // fonction produisant les URL d'acces en lecture ou en ecriture 
 // des items des tables SQL principales, selon le statut de publication
 
