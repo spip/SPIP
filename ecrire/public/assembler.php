@@ -450,8 +450,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 		}
 
 		if (preg_match(',^[a-z0-9_]+$,', $soustype)) {
-			$fond = $type.'_'.$soustype;
-			if (!find_in_path('modeles/'. $fond.'.html')) {
+			if (!trouve_modele($fond = ($type.'_'.$soustype))) {
 				$fond = '';
 				$class = $soustype;
 			}
@@ -459,8 +458,9 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 			$params = array_diff($params,array($soustype));
 		}
 	}
+
 	// Si ca marche pas en precisant le sous-type, prendre le type
-	if (!$fond AND !find_in_path('modeles/'. ($fond = $type).'.html'))
+	if (!$fond AND trouve_modele($fond = $type))
 		return false;
 
 	// Creer le contexte

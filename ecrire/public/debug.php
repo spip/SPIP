@@ -187,7 +187,7 @@ function erreur_requete_boucle($query, $errno, $erreur) {
 		    . "<blink>&lt;/BOUCLE".$id."&gt;</blink>\n";
 		}
 		$retour .= "<tt>$err</tt>" . aide('erreur_mysql');
-		spip_log("Erreur requete $id (".$GLOBALS['fond'].".html)");
+		spip_log("Erreur requete $id ".$GLOBALS['fond']);
 	}
 
 	erreur_squelette($retour);
@@ -349,7 +349,7 @@ function trouve_squelette_inclus($script)
       // a defaut on cherche le param 'page'
       if (!preg_match("/'param' => '([^']*)'/", $script, $reg))
 	$reg[1] = "inconnu";
-  $incl = $reg[1] . '.html$';
+  $incl = $reg[1] . '.' .  _EXTENSION_SQUELETTES . '$';
 
   foreach($debug_objets['sourcefile'] as $k => $v) {
     if (preg_match(",$incl,",$v)) return $k;

@@ -1329,6 +1329,8 @@ function spip_initialisation_suite() {
 	define('_CACHE_RUBRIQUES', _DIR_TMP.'menu-rubriques-cache.txt');
 	define('_CACHE_RUBRIQUES_MAX', 500);
 
+	define('_EXTENSION_SQUELETTES', 'html');
+
 	define('_DOCTYPE_ECRIRE',
 		// "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
 		//"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n");
@@ -1718,6 +1720,11 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		return is_array($fond)?$pages:reset($pages);
 	else
 		return $options['trim'] ? ltrim($texte) : $texte;
+}
+
+function trouve_modele($nom)
+{
+	return find_in_path($nom.'.'. _EXTENSION_SQUELETTES, 'modeles');
 }
 
 // Charger dynamiquement une extension php

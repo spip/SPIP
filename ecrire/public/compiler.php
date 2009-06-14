@@ -992,9 +992,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	}
 
 	$secondes = spip_timer('calcul_skel');
-	spip_log("COMPIL ($secondes) ["
-		.preg_replace(',\.html$,', '', $sourcefile)
-		."] $nom.php");
+	spip_log("COMPIL ($secondes) [$sourcefile] $nom.php");
 
 	if (!CODE_COMMENTE)
 		$head = '';
