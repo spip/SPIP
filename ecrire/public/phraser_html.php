@@ -205,10 +205,11 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
       $res = array($fonc);
       // cas du filtre sans argument ou du critere /
       if (($suite && ($suite[0] != '{')) || ($fonc  && $fonc[0] == '/')) { 
-	  // si pas d'argument, alors il faut une fonction ou un double |
-	  if (!$match[1])
+	// si pas d'argument, alors il faut une fonction ou un double |
+	if (!$match[1]) {
 	    erreur_squelette(_T('zbug_info_erreur_squelette'), $texte);
-	  $texte = $suite;
+	    $texte = '';
+	} else 	$texte = $suite;
 	  if ($fonc) $pointeur_champ->param[] = $res;
 	  // pour les balises avec faux filtres qui boudent ce dur larbeur
 	  $pointeur_champ->fonctions[] = array($fonc, '');
@@ -570,7 +571,7 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		  $soustype = strtolower($type);
 
 		if ($soustype == 'sites') $soustype = 'syndication' ; # alias
-		      
+
 		phraser_args($milieu,"/>","",$all_res,$result);
 
 		$params = substr($milieu,0,@strpos($milieu,$result->apres));
