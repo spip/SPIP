@@ -1268,7 +1268,9 @@ function balise_AIDER_dist($p) {
 function balise_ACTION_FORMULAIRE($p){
 	$_url = interprete_argument_balise(1,$p);
 	if (!$_form = interprete_argument_balise(2,$p)){
-		$_form = "'".addslashes(basename($p->descr['sourcefile'],'.'  . EXTENSION_SQUELETTES))."'";
+		$f = $p->descr['sourcefile'];
+		$f = basename($f, '.'  . _EXTENSION_SQUELETTES);
+		$_form = "'".addslashes($f)."'";
 	}
 	$p->code = "";
 
