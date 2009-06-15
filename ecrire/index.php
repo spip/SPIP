@@ -137,7 +137,7 @@ if ($var_f = _request('transformer_xml')) {
 	set_request('var_url', $exec);
 	$exec = $var_f;
 }
-elseif (find_in_path("prive/exec/$exec.html")) {
+elseif (find_in_path("prive/exec/$exec", _EXTENSION_SQUELETTES)) {
 	$exec = "fond";
 }
 
