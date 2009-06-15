@@ -65,7 +65,7 @@ function balise_FORMULAIRE__dyn($form)
 	AND $post_args = _request('formulaire_action_args')) {
 		$post_args = decoder_contexte_ajax($post_args,$post_form);
 		// enlever le faux attribut de langue masque
-		array_shift($post_args);
+		@array_shift($post_args);
 		if ($args === $post_args){
 			$je_suis_poste = true;
 		}
