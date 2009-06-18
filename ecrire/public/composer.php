@@ -259,24 +259,20 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 
 // elles sont traitees comme des inclusions
 // http://doc.spip.org/@synthetiser_balise_dynamique
-function synthetiser_balise_dynamique($nom, $args, $file, $lang, $ligne) {
-	return
-		('<'.'?php 
-$lang_select = lang_select("'.$lang.'");
-include_once(_DIR_RACINE . "'
-		. $file
-		. '");
-inclure_balise_dynamique(balise_'
-		. $nom
-		. '_dyn('
-		. join(", ", array_map('argumenter_squelette', $args))
-		. '),1, '
-		. $ligne
-		. ');
+
+define('CODE_INCLURE_BALISE', '<' . '?php 
+$lang_select = lang_select("%s");
+include_once(_DIR_RACINE . "%s");
+inclure_balise_dynamique(balise_%s_dyn(%s), 1, %s);
 if ($lang_select) lang_select();
 ?'
-		.">");
+       .'>');
+
+function synthetiser_balise_dynamique($nom, $args, $file, $lang, $ligne) {
+	$r = sprintf(CODE_INCLURE_BALISE, $lang, $file, $nom, join(", ", array_map('argumenter_squelette', $args)), $ligne);
+	return $r;
 }
+
 // http://doc.spip.org/@argumenter_squelette
 function argumenter_squelette($v) {
 
