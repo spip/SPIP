@@ -28,7 +28,7 @@ class Texte {
 class Inclure {
 	var $type = 'include';
 	var $texte;
-	var $avant, $apres; // inutilises mais generiques
+	var $avant, $apres = ''; // inutilises mais generiques
 	var $ligne = 0;
 	var $param = array();  //  valeurs des params
 }
@@ -41,7 +41,7 @@ class Boucle {
 	var $type = 'boucle';
 	var $id_boucle;
 	var $id_parent ='';
-	var $avant, $milieu, $apres, $altern;
+	var $avant, $milieu, $apres, $altern = '';
 	var $lang_select;
 	var $type_requete;
 	var $table_optionnelle = false; # si ? dans <BOUCLE_x(table ?)>
