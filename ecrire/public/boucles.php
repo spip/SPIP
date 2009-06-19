@@ -162,26 +162,26 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 		$boucle->from[$id_table] = "spip_documents LEFT JOIN spip_documents_liens AS l
 			ON $id_table.id_document=l.id_document
 			LEFT JOIN spip_articles AS aa
-				ON (l.id_objet=aa.id_article AND l.objet=\"article\")
+				ON (l.id_objet=aa.id_article AND l.objet=\'article\')
 			LEFT JOIN spip_breves AS bb
-				ON (l.id_objet=bb.id_breve AND l.objet=\"breve\")
+				ON (l.id_objet=bb.id_breve AND l.objet=\'breve\')
 			LEFT JOIN spip_rubriques AS rr
-				ON (l.id_objet=rr.id_rubrique AND l.objet=\"rubrique\")"
+				ON (l.id_objet=rr.id_rubrique AND l.objet=\'rubrique\')"
 			// test conditionne par la presence du plugin forum, en attendant le champ statut sur la table documents
-			. (test_plugin_actif('forum')?" LEFT JOIN spip_forum AS ff	ON (l.id_objet=ff.id_forum AND l.objet=\"forum\")":"");
+			. (test_plugin_actif('forum')?" LEFT JOIN spip_forum AS ff	ON (l.id_objet=ff.id_forum AND l.objet=\'forum\')":"");
 
 		$boucle->group[] = "$id_table.id_document";
 
 		if ($GLOBALS['var_preview']) {
-			array_unshift($boucle->where,"'(aa.statut IN (\"publie\",\"prop\") OR bb.statut  IN (\"publie\",\"prop\") OR rr.statut IN (\"publie\",\"prive\")"
-			.(test_plugin_actif('forum')? " OR ff.statut IN (\"publie\",\"prop\")":"")
+			array_unshift($boucle->where,"'(aa.statut IN (\'publie\',\'prop\') OR bb.statut  IN (\'publie\',\'prop\') OR rr.statut IN (\'publie\',\'prive\')"
+			.(test_plugin_actif('forum')? " OR ff.statut IN (\'publie\',\'prop\')":"")
 			.")'");
 		} else {
 			$postdates = ($GLOBALS['meta']['post_dates'] == 'non')
 				? ' AND aa.date<=\'.sql_quote(quete_date_postdates()).\''
 				: '';
-			array_unshift($boucle->where,"'((aa.statut = \"publie\"$postdates) OR bb.statut = \"publie\" OR rr.statut = \"publie\""
-			.(test_plugin_actif('forum')? " OR ff.statut=\"publie\"":"")
+			array_unshift($boucle->where,"'((aa.statut = \'publie\'$postdates) OR bb.statut = \'publie\' OR rr.statut = \'publie\'"
+			.(test_plugin_actif('forum')? " OR ff.statut=\'publie\'":"")
 			.")'");
 		}
 	}
