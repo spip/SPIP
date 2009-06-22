@@ -28,7 +28,7 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 				[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
 					[(#MODELE{emb}|image_reduire{300})]
 				,
-					[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+					#LOGO_DOCUMENT{#URL_DOCUMENT}
 				})]
 				</BOUCLE_doc>
 
