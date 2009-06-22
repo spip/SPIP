@@ -53,8 +53,10 @@ function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0, $id_
 
 	// id_article non numerique, c'est une demande de creation.
 	// Si c'est une demande de nouvelle traduction, init specifique
-	if ($lier_trad)
+	if ($lier_trad){
 		$row = article_select_trad($lier_trad, $id_rubrique);
+		$row['statut'] = ''; // le nouvel article n'a pas encore de statut !
+	}
 	else {
 		$row['titre'] = '';//filtrer_entites(_T('info_nouvel_article'));
 		//$row['onfocus'] = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
