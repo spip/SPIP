@@ -578,7 +578,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'login_retour_public' => 'Zur&uuml;ck zur &ouml;ffentlichen Website',
 'login_retour_site' => 'Zur&uuml;ck zur &ouml;ffentlichen Website',
 'login_retoursitepublic' => 'Zur&uuml;ck&nbsp;zur&nbsp;&ouml;ffentlichen&nbsp;Website',
-'login_sans_cookiie' => 'Anmeldung ohne Coockies',
+'login_sans_cookiie' => 'Anmeldung ohne Cookies',
 'login_sinscrire' => 'anmelden',
 'login_test_navigateur' => 'Test Webbrowser/Verbindung',
 'login_verifiez_navigateur' => '(&Uuml;berpr&uuml;fen Sie, dass Ihr Webbrowser Ihr Passwort nicht gespeichert hat ...)',
