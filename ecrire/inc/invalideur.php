@@ -166,12 +166,12 @@ function appliquer_quota_cache() {
 function retire_cache($cache) {
 
 	if (preg_match(
-	"|^([0-9a-f]/)?([0-9]+/)?[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
+	"|^([0-9a-f]/)?([0-9]+/)?[^.][\-_\%0-9a-z]+--[0-9a-f]+(\.gz)?$|i",
 	$cache)) {
 		// supprimer le fichier (de facon propre)
 		supprimer_fichier(_DIR_CACHE . $cache);
 	} else
-		spip_log("Impossible de retirer $cache");
+		spip_log("Nom de fichier cache incorrect : $cache");
 }
 
 #######################################################################
