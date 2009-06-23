@@ -27,12 +27,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Dikkat&nbsp;! Bu b&ouml;l&uuml;m @contient_breves@ k&#305;sa haber @scb@&nbsp; i&ccedil;eriyor: e&#287;er yerini de&#287;i&#351;tiriyorsan&#305;z (ta&#351;&#305;yorsan&#305;z) l&uuml;tfen bu onay kutucu&#287;unu i&#351;aretleyin.',
 'avis_destinataire_obligatoire' => 'Bu iletiyi yollamadan &ouml;nce kime yollamak istedi&#287;inizi belirmelisiniz.',
 'avis_erreur_connexion_mysql' => 'SQL ba&#287;lant&#305;s&#305; hatas&#305;',
-'avis_erreur_version_archive' => '<MODIF><b>Dikkat! @archive@ dosyas&#305; kulland&#305;&#287;&#305;n&#305;z
+'avis_erreur_version_archive' => '<b>Dikkat! @archive@ dosyas&#305; kulland&#305;&#287;&#305;n&#305;z
 SPIP s&uuml;r&uuml;m&uuml;ne uymuyor.</b> B&uuml;y&uuml;k zorluklarla
  kar&#351;&#305;la&#351;abilirsiniz: veritaban&#305;n&#305;z&#305;n kayb&#305;,
- sitenin d&uuml;zg&uuml;n &ccedil;al&#305;&#351;mamas&#305;, vb.
+ sitenin d&uuml;zg&uuml;n &ccedil;al&#305;&#351;mamas&#305; vb.
 Bu ithal istemini onaylamay&#305;n.
-<p>Daha fazla bilgi i&ccedil;in <a href="@spipnet@">SPIP kullanma k&#305;lavuzuna bak&#305;n.</A> (ge&ccedil;ici bir s&uuml;re frans&#305;zca)',
+<p>Daha fazla bilgi i&ccedil;in <a href="@spipnet@">SPIP kullanma k&#305;lavuzuna bak&#305;n.</a>',
 'avis_espace_interdit' => '<b>Yasak alan</b><div>SPIP zaten kurulu.</div>',
 'avis_lecture_noms_bases_1' => 'Kurulum yaz&#305;l&#305;m&#305; mevcut veritabanlar&#305;n&#305;n isimlerini okuyamad&#305;.',
 'avis_lecture_noms_bases_2' => 'Ya mevcut veritaban&#305; yok, ya da veritabanlar&#305;n&#305;n listesini almaya yarayan komut g&uuml;venlik nedeniyle kullan&#305;ma kapat&#305;lm&#305;&#351; (bir &ccedil;ok bar&#305;nd&#305;rma &#351;irketinde al&#305;nan bir tedbir).',
@@ -120,6 +120,7 @@ sonradan yok edebilir).',
 'config_erreur_base_sup' => 'SPIP eri&#351;ilebilir veri taban&#305;lar&#305; listesine eri&#351;emiyor',
 'config_info_base_sup' => 'SPIP &uuml;zerinden, SQL veya bir ba&#351;ka sunucu ile sorgulayaca&#287;&#305;n&#305;z ba&#351;ka veri tabanlar&#305; varsa, a&#351;a&#287;&#305;daki form bunlar&#305; tan&#305;mlaman&#305;z&#305; sa&#287;lar. Baz&#305; alanlar&#305; bo&#351; b&#305;rak&#305;rsan&#305;z ana veri taban&#305;na ba&#287;lanmak i&ccedil;in kullan&#305;lan ba&#287;lant&#305; tan&#305;mlay&#305;c&#305;lar&#305; kullan&#305;lacakt&#305;r.',
 'config_info_base_sup_disponibles' => '&#350;u anda sorgulanabilir ek veri tabanlar&#305;:',
+'config_info_enregistree' => 'Yeni konfig&uuml;rasyon kaydedildi',
 'config_info_logos' => 'Sitenin her eleman&#305; &laquo;&nbsp;&uuml;zerinden ge&ccedil;i&#351; logosu da dahil olmak &uuml;zere&nbsp;&raquo; bir logoya sahip olabilir ',
 'config_info_logos_utiliser' => 'Logolar&#305; kullan',
 'config_info_logos_utiliser_non' => 'Logolar&#305; kullanma',
@@ -193,7 +194,7 @@ sonradan yok edebilir).',
 
 // I
 'ical_info1' => 'Bu sayfa bu sitenin ya&#351;am&#305; ile temas halinde kalmak i&ccedil;in bir ka&ccedil; y&ouml;ntem sunmaktad&#305;r. ',
-'ical_info2' => '<MODIF>Bu teknikler hakk&#305;nda daha ayr&#305;nt&#305;l&#305; bilgi i&ccedil;in,  SPIP dok&uuml;manlar&#305;na bakmaktan &ccedil;ekinmeyiniz.',
+'ical_info2' => 'Bu teknikler hakk&#305;nda daha ayr&#305;nt&#305;l&#305; bilgi i&ccedil;in,  <a href="@spipnet@">SPIP dok&uuml;manlar&#305;na</a> bakmaktan &ccedil;ekinmeyiniz.',
 'ical_info_calendrier' => 'Kullan&#305;m&#305;n&#305;za iki takvim sunulmu&#351;tur. Birincisi yay&#305;nlanm&#305;&#351; t&uuml;m makaleleri duyuran bir site plan&#305;d&#305;r. &#304;kincisi ise edit&ouml;r ilanlar&#305; ile son olarak ald&#305;&#287;&#305;n&#305;z &ouml;zel iletilerinizi i&ccedil;erir&nbsp;: ki&#351;isel bir anahtar ile size ayr&#305;lm&#305;&#351;t&#305;r ve buradaki bilgileri &#351;ifrenizi yenileyerek her an  de&#287;i&#351;tirebilirsiniz.',
 'ical_lien_rss_breves' => 'Sitenin k&#305;sa haberlerinin payla&#351;&#305;m&#305;',
 'ical_methode_http' => 'Y&uuml;kleme',
@@ -434,7 +435,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_meme_rubrique' => 'Ayn&#305; b&ouml;l&uuml;mde',
 'info_message' => '&#304;letiyi g&ouml;nderen',
 'info_message_efface' => '&#304;LET&#304; S&#304;L&#304;ND&#304;',
-'info_message_en_redaction' => 'Yaz&#305;lmakta olan iletileriniz',
+'info_message_en_redaction' => 'Yaz&#305;lmakta olan mesajlar&#305;n&#305;z',
 'info_message_technique' => 'Teknik ileti :',
 'info_messagerie_interne' => '&#304;&ccedil; mesajla&#351;ma',
 'info_mise_a_niveau_base' => 'SQL veri taban&#305;n&#305;z&#305;n seviye y&uuml;kseltmesi',
@@ -795,6 +796,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'logo_article' => 'MAKALE LOGOSU',
 'logo_auteur' => 'YAZAR LOGOSU',
 'logo_breve' => 'KISA HABER LOGOSU',
+'logo_groupe' => 'BU GRUBUN LOGOSU',
 'logo_mot_cle' => 'ANAHTAR S&Ouml;ZC&Uuml;K LOGOSU',
 'logo_rubrique' => 'B&Ouml;L&Uuml;M LOGOSU',
 'logo_site' => 'S&#304;TE LOGOSU',
@@ -919,7 +921,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
   yeniden y&uuml;klemelisiniz. ',
 'texte_admin_effacer_stats' => 'Bu komut, site ziyareti istatistiklerine ba&#287;l&#305; t&uuml;m bilgileri siler (makalelerin pop&uuml;lerlikleri de dahil).',
 'texte_admin_tech_01' => 'Bu se&ccedil;enek, veritaban&#305;n&#305;n i&ccedil;eri&#287;ini, @dossier@ dizininde depolanacak bir dosyaya yedeklemenizi sa&#287;lar. Makale ve b&ouml;l&uuml;mlerde kullan&#305;lan resim ve dok&uuml;manlar&#305; i&ccedil;eren @img@ dizininin tamam&#305;n&#305; almay&#305; da unutmay&#305;n&#305;z. ',
-'texte_admin_tech_02' => '<MODIF>Dikkat : bu yedekleme ANCAK, SPIP\'in ayn&#305; uyarlamas&#305;yla kurulabilecek bir sitede eski haline getirilebilir. Dolay&#305;s&#305;yla, sak&#305;n yedekleneni g&uuml;ncelleme i&#351;leminden sonra yeniden kurmay&#305; umarak  &laquo;&nbsp;veritaban&#305;n&#305;n bo&#351;alt&#305;lmas&#305;&nbsp;&raquo; i&#351;lemini yapmay&#305;n&#305;z...  SPIP dok&uuml;manlar&#305;na ba&#351;vurunuz.',
+'texte_admin_tech_02' => 'Dikkat : bu yedekleme ANCAK, SPIP\'in ayn&#305; s&uuml;r&uuml;m&uuml;yle kurulacak bir sitede eski haline getirilebilir. Dolay&#305;s&#305;yla, sak&#305;n yedekleneni g&uuml;ncelleme i&#351;leminden sonra yeniden kurmay&#305; umarak  &laquo;&nbsp;veritaban&#305;n&#305;n bo&#351;alt&#305;lmas&#305;&nbsp;&raquo; i&#351;lemini yapmay&#305;n&#305;z...  <a href="@spipnet@">SPIP dok&uuml;manlar&#305;na</a> ba&#351;vurunuz.',
 'texte_admin_tech_03' => 'Sizin sunucunuza ya da bir yedekleme sunucusuna transferini h&#305;zland&#305;rmak,
     ve disk alan&#305;n&#305; bo&#351;a harcamamak i&ccedil;in, isterseniz dosyay&#305; s&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; bi&ccedil;imde saklamay&#305; se&ccedil;ebilirsiniz. ',
 'texte_admin_tech_04' => 'Bir ba&#351;ka veri taban&#305; ile birle&#351;tirme amac&#305;yla yedeklemeyi &#351;u ba&#351;l&#305;kla s&#305;n&#305;rland&#305;rabilirsiniz: ',
