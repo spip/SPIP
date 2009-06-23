@@ -747,7 +747,7 @@ function calculer_critere_DEFAUT_dist($idb, &$boucles, $crit)
 			" $idb " .
 			_T('zbug_critere_inconnu', 
 			   array('critere' => $crit->op)));
-	} else calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $r);
+	} else calculer_critere_DEFAUT_args($idb, $boucles, $crit, $r);
 }
 
 function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args)
