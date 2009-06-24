@@ -158,16 +158,17 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
 
-	$row = sql_fetsel("statut, id_rubrique", "spip_articles", "id_article=$id_article");
+	$row = sql_fetsel("statut, date, id_rubrique", "spip_articles", "id_article=$id_article");
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
+	$date_ancienne = $date = $row['date'];
 	$champs = array();
-	$date = $c['date'];
 
-	$s = $c['statut'];
+	$d = isset($c['date'])?$c['date']:null;
+	$s = isset($c['statut'])?$c['statut']:$statut;
 
 	// cf autorisations dans inc/instituer_article
-	if ($s AND $s != $statut) {
+	if ($s != $statut OR ($d AND $d != $date)) {
 		if (autoriser('publierdans', 'rubrique', $id_rubrique))
 			$statut = $champs['statut'] = $s;
 		else if (autoriser('modifier', 'article', $id_article) AND $s != 'publie')
@@ -177,15 +178,15 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 
 		// En cas de publication, fixer la date a "maintenant"
 		// sauf si $c commande autre chose
+		// ou si l'article est deja date dans le futur
 		// En cas de proposition d'un article (mais pas depublication), idem
 		if ($champs['statut'] == 'publie'
-		OR ($champs['statut'] == 'prop'
-			AND !in_array($statut_ancien, array('publie', 'prop'))
-		)) {
-			if (!is_null($date))
-				$champs['date'] = $date;
+		 OR ($champs['statut'] == 'prop' AND !in_array($statut_ancien, array('publie', 'prop')))
+		) {
+			if ($d OR strtotime($d=$date)>time())
+				$champs['date'] = $date = $d;
 			else
-				$champs['date'] = date('Y-m-d H:i:s');
+				$champs['date'] = $date = date('Y-m-d H:i:s');
 		}
 	}
 
@@ -282,7 +283,8 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 
 	if ($cond) {
 		include_spip('inc/rubriques');
-		calculer_rubriques_if($id_rubrique, $champs, $statut);
+		$postdate = ($GLOBALS['meta']["post_dates"] == "non" AND isset($champs['date']))?$champs['date']:false;
+		calculer_rubriques_if($id_rubrique, $champs, $statut, $postdate);
 	}
 }
 
