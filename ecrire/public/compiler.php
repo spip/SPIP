@@ -845,6 +845,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	include_spip('inc/charsets');
 	$descr = array('nom' => $nom,
 			'sourcefile' => $sourcefile,
+			'gram' => $gram,
 			'squelette' => transcoder_page($squelette));
 
 	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug')

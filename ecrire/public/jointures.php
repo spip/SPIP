@@ -66,7 +66,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 {
 	static $num=array();
 	$id_table = "";
-	$cpt = &$num[$boucle->descr['nom']][$boucle->id_boucle];
+	$cpt = &$num[$boucle->descr['nom']][$boucle->descr['gram']][$boucle->id_boucle];
 	foreach($res as $cle=>$r) {
 		list($d, $a, $j) = $r;
 		if (!$id_table) $id_table = $d;

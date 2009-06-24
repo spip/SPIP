@@ -697,7 +697,9 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 // http://doc.spip.org/@critere_IN_cas
 function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 {
-	static $cpt = 0;
+	static $cpt = array();
+	$cpt = &$num[$boucle->descr['nom']][$boucle->descr['gram']][$boucle->id_boucle];
+
 	$var = '$in' . $cpt++;
 	$x= "\n\t$var = array();";
 	foreach ($val as $k => $v) {
