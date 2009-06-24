@@ -74,8 +74,8 @@ function action_editer_site_dist() {
 			OR !$t) {
 				if ($auto = vider_url(_request('url_auto'))) {
 					$auto = analyser_site($auto);
-					revisions_sites($id_syndic,
-					array('descriptif' => $auto['descriptif']));
+					if (!strlen($t) AND strlen($auto['descriptif']))
+						revisions_sites($id_syndic, array('descriptif' => $auto['descriptif']));
 				}
 				if (!$logo
 				AND $auto['logo'] AND $auto['format_logo'])

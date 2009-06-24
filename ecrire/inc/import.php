@@ -30,6 +30,12 @@ if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
 
 global $IMPORT_tables_noerase;
 $IMPORT_tables_noerase[]='spip_meta';
+// par defaut on ne vide pas les stats, car elles ne figurent pas dans les dump
+// et le cas echeant, un bouton dans l'admin permet de les vider a la main...
+$IMPORT_tables_noerase[]='spip_referers';
+$IMPORT_tables_noerase[]='spip_referers_articles';
+$IMPORT_tables_noerase[]='spip_visites';
+$IMPORT_tables_noerase[]='spip_visites_articles';
 
 // Retourne la premiere balise XML figurant dans le buffet de la sauvegarde 
 // et avance dans ce buffet jusqu'au '>' de cette balise.
@@ -146,9 +152,11 @@ function import_init_tables($request)
 	// grand menage
 	// on vide toutes les tables dont la restauration est demandee
 	$tables = import_table_choix($request);
+	$tables = array_diff($tables,$IMPORT_tables_noerase);
+
 	foreach($tables as $table){
 		// regarder si il y a au moins un champ impt='non'
-		if (($table!='spip_auteurs')&&(!in_array($table,$IMPORT_tables_noerase))){
+		if (($table!='spip_auteurs')){
 			$desc = description_table($table);
 			if (isset($desc['field']['impt']))
 				sql_delete($table, "impt='oui'");

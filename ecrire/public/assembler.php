@@ -546,11 +546,6 @@ function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 
 	$page = inclure_page($fond, $contexte, $connect);
 
-	// Lever un drapeau (global) si le fond utilise #SESSION
-	// a destination de public/parametrer
-	if (isset($page['invalideurs'])
-	AND isset($page['invalideurs']['session']))
-		$GLOBALS['cache_utilise_session'] = $page['invalideurs']['session'];
 	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
 		ob_start();
 		xml_hack($page, true);
@@ -561,6 +556,15 @@ function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 		ob_end_clean();
 	}
 	page_base_href($page['texte']);
+
+	// Lever un drapeau (global) si le fond utilise #SESSION
+	// a destination de public/parametrer
+	// pour remonter vers les inclusions appelantes
+	// il faut bien lever ce drapeau apres avoir evalue le fond
+	// pour ne pas faire descendre le flag vers les inclusions appelees
+	if (isset($page['invalideurs'])
+	AND isset($page['invalideurs']['session']))
+		$GLOBALS['cache_utilise_session'] = $page['invalideurs']['session'];
 
 	return $page;
 }

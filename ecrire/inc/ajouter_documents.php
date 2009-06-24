@@ -430,7 +430,7 @@ function traite_svg($file)
 // mysql> SELECT * FROM spip_types_documents WHERE extension="pdf ";
 // http://doc.spip.org/@corriger_extension
 function corriger_extension($ext) {
-	$ext = preg_replace(',[^a-z0-9],', '', $ext);
+	$ext = preg_replace(',[^a-z0-9],i', '', $ext);
 	switch ($ext) {
 	case 'docx':
 		return 'doc';
