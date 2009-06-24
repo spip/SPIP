@@ -503,10 +503,11 @@ function desinstalle_un_plugin($plug,$infos){
 			include_once(_DIR_PLUGINS."$plug/$file");
 		}
 	}
+	$version_cible = isset($infos['version_base'])?$infos['version_base']:'';
 	$prefix_install = $infos['prefix']."_install";
 	if (function_exists($prefix_install)){
-		$prefix_install('uninstall');
-		$ok = $prefix_install('test');
+		$prefix_install('uninstall',$infos['prefix'],$version_cible);
+		$ok = $prefix_install('test',$infos['prefix'],$version_cible);
 		return $ok;
 	}
 	if (isset($infos['version_base'])){
@@ -527,14 +528,15 @@ function installe_un_plugin($plug,$infos,$dir_plugins = _DIR_PLUGINS){
 			include_once($f);
 		}
 	}
+	$version_cible = isset($infos['version_base'])?$infos['version_base']:'';
 	$prefix_install = $infos['prefix']."_install";
 	// cas de la fonction install fournie par le plugin
 	if (function_exists($prefix_install)){
 		// voir si on a besoin de faire l'install
-		$ok = $prefix_install('test');
+		$ok = $prefix_install('test',$infos['prefix'],$version_cible);
 		if (!$ok) {
-			$prefix_install('install');
-			$ok = $prefix_install('test');
+			$prefix_install('install',$infos['prefix'],$version_cible);
+			$ok = $prefix_install('test',$infos['prefix'],$version_cible);
 		}
 		return $ok; // le plugin est deja installe et ok
 	}

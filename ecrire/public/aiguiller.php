@@ -144,6 +144,7 @@ function traiter_formulaires_dynamiques($get=false){
 					);
 		if ((count($post["erreurs_$form"])==0)){
 			$rev = "";
+			$retour = "";
 			if ($traiter = charger_fonction("traiter","formulaires/$form/",true))
 				$rev = call_user_func_array($traiter,$args);
 
@@ -189,7 +190,9 @@ function traiter_formulaires_dynamiques($get=false){
 					// le bon mode de redirection (302 et on ne revient pas ici, ou javascript et on continue)
 					if (isset($rev['redirect']) AND $rev['redirect']){
 						include_spip('inc/headers');
-						$post["message_ok_$form"] .= redirige_formulaire($rev['redirect']);
+						list($masque,$message) = redirige_formulaire($rev['redirect'], '','ajaxform');
+						$post["message_ok_$form"] .= $message;
+						$retour .= $masque;
 					}
 				}
 			}
@@ -200,7 +203,7 @@ function traiter_formulaires_dynamiques($get=false){
 				include_spip('inc/actions');
 				include_spip('public/assembler');
 				array_unshift($args,$form);
-				$retour = inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false);
+				$retour .= inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false);
 				// on ajoute un br en display none en tete du retour ajax pour regler un bug dans IE6/7
 				// sans cela le formulaire n'est pas actif apres le hit ajax
 				$retour = "<br class='bugajaxie' style='display:none;'/>".$retour;

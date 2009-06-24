@@ -70,6 +70,7 @@ jQuery.fn.animeajax = function(end) {
 
 // s'il n'est pas totalement visible, scroller pour positionner
 // le bloc cible en haut de l'ecran
+// si force = true, scroller dans tous les cas
 jQuery.fn.positionner = function(force) {
 	var offset = jQuery(this).offset({'scroll':false});
 	var hauteur = parseInt(jQuery(this).css('height'));
@@ -150,17 +151,35 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					jQuery(leform).ajaxFormUnbind().submit();
 				}
 				else {
-					var d = jQuery('div.ajax',
-						jQuery('<div><\/div>').html(c));
+					var recu = jQuery('<div><\/div>').html(c);
+					var d = jQuery('div.ajax',recu);
 					if (d.length)
 						c = d.html();
 					jQuery(cible)
 					.removeClass('loading')
-					.html(c)
-					.positionner(false)
+					.html(c);
+					var a = jQuery('a:first',recu).eq(0);
+					if (a.length && a.is('a[name=ajax_ancre]')){
+						a = a.attr('href');
+						setTimeout(function(){
+							jQuery(a,cible).positionner(true);
+							//a = a.split('#');
+							//window.location.hash = a[1];
+						},10);
+					}
+					else{
+						jQuery(cible).positionner(false);
+						if (a.length && a.is('a[name=ajax_redirect]')){
+							a = a.attr('href');
+							jQuery(cible).addClass('loading').animeajax();
+							setTimeout(function(){
+								document.location.replace(a);
+							},10);
+						}
+					}
 					// on le refait a la main ici car onAjaxLoad intervient sur une iframe dans IE6 et non pas sur le document
-					.formulaire_dyn_ajax()
-					.find('div.ajaxbloc').ajaxbloc();
+					triggerAjaxLoad(cible);
+					// mettre a jour le buffer du navigateur pour aider jaws et autres readers
 					updateReaderBuffer();
 				}
 			},
