@@ -26,6 +26,8 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 	# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
 	if ($url[0]=='?')
 		$url = url_de_base().$url;
+	if ($url[0]=='#')
+		$url = self('&').$url;
 
 	if ($x = _request('transformer_xml'))
 		$url = parametre_url($url, 'transformer_xml', $x, '&');
