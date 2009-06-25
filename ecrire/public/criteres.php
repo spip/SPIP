@@ -833,11 +833,15 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// Ne pas utiliser intval, PHP tronquant les Bigint de SQL
 
 	if (($op == '=' OR in_array($op, $table_criteres_infixes))
-	AND preg_match("/^\"'(-?\d+)'\"$/", $val[0], $r)
 	AND (($desc AND isset($desc['field'][$col]) AND sql_test_int($desc['field'][$col]))
-	     OR ($date AND strpos($date[0], '_relatif'))))
-			  $val[0] = $r[1];
-
+	     OR ($date AND strpos($date[0], '_relatif')))) {
+		if (preg_match("/^\"'(-?\d+)'\"$/", $val[0], $r))
+			$val[0] = $r[1];
+		elseif (preg_match('/^sql_quote[(](.*?)(,.*)?[)]\s*$/', $val[0], $r)) {
+		  $r = $r[1] . ($r[2] ? $r[2] : ",''") . ",'int'";
+		  $val[0] = "sql_quote($r)";
+		}
+	}
 	// Indicateur pour permettre aux fonctionx boucle_X de modifier 
 	// leurs requetes par defaut, notamment le champ statut
 	// Ne pas confondre champs de la table principale et des jointures

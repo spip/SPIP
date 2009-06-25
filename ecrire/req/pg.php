@@ -997,10 +997,10 @@ function spip_pg_hex($v)
 	return "CAST(x'" . $v . "' as bigint)";
 }
 
-// http://doc.spip.org/@spip_pg_quote
-function spip_pg_quote($v)
+
+function spip_pg_quote($v, $type='')
 {
-	return _q($v);
+	return ($type === 'int' AND !$v) ? '0' :  _q($v);
 }
 
 // http://doc.spip.org/@spip_pg_in
