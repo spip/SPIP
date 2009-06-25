@@ -91,7 +91,7 @@ function liens_absolus($texte, $base='') {
 	$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
 			$abs = url_absolue($lien[3], $base);
-			if ($abs <> $lien[3])
+			if ($abs <> $lien[3] and !preg_match('/^#/',$lien[3]))
 				$texte = str_replace($lien[0], $lien[1].$abs.$lien[4], $texte);
 		}
 	}
