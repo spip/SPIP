@@ -78,7 +78,10 @@ function touch_meta($antidate= false){
 		$r = $GLOBALS['meta'];
 		unset($r['alea_ephemere']);
 		unset($r['alea_ephemere_ancien']);
-		unset($r['secret_du_site']);
+		// le secret du site est utilise pour encoder les contextes ajax que l'on considere fiables
+		// mais le sortir deu cache meta implique une requete sql des qu'on a un form dynamique
+		// meme si son squelette est en cache
+		//unset($r['secret_du_site']);
 		if ($antidate) $r['touch']= $antidate;
 		ecrire_fichier_securise(_FILE_META, serialize($r));
 	}
