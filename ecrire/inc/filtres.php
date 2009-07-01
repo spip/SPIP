@@ -319,7 +319,7 @@ function image_bg ($img, $couleur, $pos="") {
 	if (!function_exists("imagecreatetruecolor")
 		OR !($image = image_aplatir(image_sepia($img, $couleur),"gif","cccccc", 64, true))
 	)
-		return "background-color: #$couleur;";
+		return $couleur ? "background-color: #$couleur;" : '';
 	include_spip('inc/filtres_images_etendus');
 	return "background: url(".url_absolue(extraire_attribut($image, "src")).") $pos;";
 }
