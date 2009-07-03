@@ -173,20 +173,19 @@ function erreur_requete_boucle($query, $errno, $erreur) {
 	}
 	// Requete erronee
 	else {
-		$err =  "<b>"._T('avis_erreur_mysql')."</b><br />\n"
+		$err =  "<b>"._T('avis_erreur_mysql')."</b><br /><tt>\n"
 		. htmlspecialchars($query)
 		. "\n<br /><span style='color: red'><b>"
 		. htmlspecialchars($erreur)
-		. "</b></span><br />";
+		. "</b></span></tt><br />";
 		
 		if (isset($GLOBALS['debug']['aucasou'])) {
 		  list($table, $id, $serveur) = $GLOBALS['debug']['aucasou'];
-		  $err = "<blink>&lt;BOUCLE".$id."&gt;($able)</blink>"
+		  $err = _T('zbug_boucle') . " $id $serveur $table"
 		    .   "<br />\n"
-		    . $err
-		    . "<blink>&lt;/BOUCLE".$id."&gt;</blink>\n";
+		    . $err;
 		}
-		$retour .= "<tt>$err</tt>" . aide('erreur_mysql');
+		$retour .=  $err . aide('erreur_mysql');
 		spip_log("Erreur requete $id ".$GLOBALS['fond']);
 	}
 
