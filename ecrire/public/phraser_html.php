@@ -189,6 +189,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   $texte = ltrim($texte);
   while (($texte!=="") && strpos($fin, $texte[0]) === false) {
 	$result = phraser_arg($texte, $sep, $result, $pointeur_champ);
+	$texte = ltrim($texte);
   }
 # mettre ici la suite du texte, 
 # notamment pour que l'appelant vire le caractere fermant si besoin
@@ -280,9 +281,8 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		}
       }
       if ($collecte) {$res[] = $collecte; $collecte = array();}
-      $suite = substr($args,1);
-      $source = substr($suite, 0, strlen($suite) - strlen($args));
-      $texte = ltrim($suite);
+      $texte = substr($args,1);
+      $source = substr($texte, 0, strlen($texte) - strlen($args));
       if ($fonc || count($res) > 1) $pointeur_champ->param[] = $res;
       // pour les balises avec faux filtres qui boudent ce dur larbeur
       $pointeur_champ->fonctions[] = array($fonc, $source);
@@ -390,7 +390,7 @@ function phraser_criteres($params, &$result) {
 			$crit = new Critere;
 			$crit->op = $op;
 			$crit->not = $not;
-      $crit->exclus ="";
+			$crit->exclus ="";
 			$crit->param = $v;
 			$args[] = $crit;
 		  } else {
