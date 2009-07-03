@@ -279,23 +279,18 @@ function squelette_debug_compile($nom, $sourcefile, $squelette) {
 		$debug_objets['principal'] = $nom;
 }
 
-// appelee a chaque analyse syntaxique de squelette
+// appelee a chaque analyse syntaxique des boucles d'un squelette
 // http://doc.spip.org/@boucle_debug
-function boucle_debug ($nom, $id_parent, $id, $type, $crit, $avant, $milieu, $apres, $altern) {
+function boucle_debug ($skel, $boucle, $corps)
+{
 	global $debug_objets;
 
-	$debug_objets['parent'][$nom.$id] = $id_parent;
-	$debug_objets['pretty'][$nom.$id] = 
-		"BOUCLE$id($type)" . htmlspecialchars(
-			preg_replace(",[\r\n],", "\\n", $crit));
-	// on synthetise avec la syntaxe standard, mais "<//" pose pb 
-	$debug_objets['boucle'][$nom.$id] = 
-	  (!$avant ? "" : "<B$id>$avant") . 
-	  "<BOUCLE$id($type)$crit>" .
-	  $milieu .
-	  "</BOUCLE$id>" .
-	  (!$apres ? "" : "$apres</B$id>") . 
-	  (!$altern ? "" : "$altern<//B$id>");
+	$nom = $boucle->id_boucle;
+	$debug_objets['parent'][$skel.$nom] = $boucle->id_parent;
+	$debug_objets['boucle'][$skel.$nom] = $corps; 
+	$debug_objets['pretty'][$skel.$nom] = 
+	   $nom . ' ' . $boucle->type_requete  . " "
+	  . htmlspecialchars(preg_replace(",[\r\n],", "\\n", $boucle->criteres));
 }
 
 // http://doc.spip.org/@trouve_boucle_debug
@@ -462,9 +457,11 @@ function debug_dumpfile ($texte, $fonc, $type, $corps='') {
 		$self = str_replace("\\'", '&#39;', self());
 		$self = parametre_url($self,'var_mode', 'debug');
 		echo debug_debut($fonc, $corps);
-
 		if ($var_mode_affiche !== 'validation') {
-			affiche_debug_validation($fonc, $self);
+			echo "<div id='spip-boucles'>\n"; 
+			debug_affiche_tables_des_boucles($self);
+			echo "</div>";
+			echo debug_affiche($fonc, $debug_objets);
 		}
 		if ($texte) {
 			$err = "";
@@ -498,15 +495,13 @@ function debug_dumpfile ($texte, $fonc, $type, $corps='') {
 	exit;
 }
 
-function affiche_debug_validation($fonc, $self)
+function debug_affiche_tables_des_boucles($self)
 {
 	global $debug_objets, $spip_lang_right;
-	$var_mode_objet = _request('var_mode_objet');
-	$var_mode_affiche = _request('var_mode_affiche');
 
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		$self2 = parametre_url($self,'var_mode_objet', $nom_skel);
-		echo "<fieldset><legend>",$sourcefile,"&nbsp;: ";
+		echo "<fieldset><legend>",_T('squelette'), ' ' , $sourcefile,"&nbsp;: ";
 		echo "\n<a href='$self2&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
 		echo "\n<a href='$self2&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
 		echo "\n<a href='$self2&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a>";
@@ -518,57 +513,62 @@ function affiche_debug_validation($fonc, $self)
 		if (is_array($contexte = $debug_objets['contexte'][$sourcefile]))
 			echo afficher_debug_contexte($contexte);
 
-		$i = 0;
-		$res = "";
 		if (isset($debug_objets['pretty']) AND is_array($debug_objets['pretty']))
-		  foreach ($debug_objets['pretty'] as $nom => $pretty)
-			if (substr($nom, 0, strlen($nom_skel)) == $nom_skel) {
-				$i++;
-				$aff = "&lt;".$pretty."&gt;";
-				if ($var_mode_objet == $nom)
-					$aff = "<b>$aff</b>";
-				$color = $i%2 ? '#e0e0f0' : '#f8f8ff';
-				$res .= debug_affiche_navig($aff, $nom_skel, $color, $self .  "&amp;var_mode_objet=" .  $nom, $i);
-			}
-		if ($res) echo "<table width='100%'>\n",$res,"</table>\n";
+			echo "<table width='100%'>\n",
+				debug_affiche_boucles($debug_objets['pretty'], $nom_skel, $self),
+				"</table>\n";
 		echo "</fieldset>\n";
 	  }
-	  echo "</div>\n<a id='$fonc'></a>\n"; 
-	  echo debug_affiche($fonc, $debug_objets, $var_mode_objet, $var_mode_affiche);
 }
-// http://doc.spip.org/@debug_affiche_navig
-function debug_affiche_navig($aff, $nom_skel, $color, $self, $i)
+
+function debug_affiche_boucles($boucles, $nom_skel, $self)
 {
-	return "\n<tr style='background-color: " .
-	  $color .
-	  "'><td  align='right'>$i</td><td>\n" .
-	  "<a  class='debug_link_boucle' href='" .
-	  $self .
-	  "&amp;var_mode_affiche=boucle#$nom_skel'>" .
-	  _T('zbug_boucle') .
-	  "</a></td><td>\n<a class='debug_link_boucle' href='" .
-	  $self .
-	  "&amp;var_mode_affiche=resultat#$nom_skel'>" .
-	  _T('zbug_resultat') .
-	  "</a></td><td>\n<a class='debug_link_resultat' href='" .
-	  $self .
-	  "&amp;var_mode_affiche=code#$nom_skel'>" .
-	  _T('zbug_code') .
-	  "</a></td><td>\n<a class='debug_link_resultat' href='" .
-	  str_replace('var_mode=','var_profile=', $self) .
-	  "'>" .
-	  _T('zbug_calcul') .
-	  "</a></td><td>\n" .
-	  $aff .
-	  "</td></tr>";
+	$i = 0;
+	$res = '';
+	$var_mode_objet = _request('var_mode_objet');
+	foreach ($boucles as $objet => $pretty) {
+		if (substr($objet, 0, strlen($nom_skel)) == $nom_skel) {
+			$i++;
+			list($nom, $req)  = explode(' ', $pretty, 2);
+			$self2 = $self .  "&amp;var_mode_objet=" .  $objet;
+
+			$res .= "\n<tr style='background-color: " .
+			  ($i%2 ? '#e0e0f0' : '#f8f8ff') .
+			  "'><td  align='right'>$i</td><td>\n" .
+			  "<a  class='debug_link_boucle' href='" .
+			  $self2 .
+			  "&amp;var_mode_affiche=boucle#$nom_skel'>" .
+			  _T('zbug_boucle') .
+			  "</a></td><td>\n<a class='debug_link_boucle' href='" .
+			  $self2 .
+			  "&amp;var_mode_affiche=resultat#$nom_skel'>" .
+			  _T('zbug_resultat') .
+			  "</a></td><td>\n<a class='debug_link_resultat' href='" .
+			  $self2 .
+			  "&amp;var_mode_affiche=code#$nom_skel'>" .
+			  _T('zbug_code') .
+			  "</a></td><td>\n<a class='debug_link_resultat' href='" .
+			  str_replace('var_mode=','var_profile=', $self2) .
+			  "'>" .
+			  _T('zbug_calcul') .
+			  "</a></td><td>\n" .
+			  (($var_mode_objet == $objet) ? "<b>$nom</b>" : $nom) .
+			  "</td><td>\n" .
+			  $req .
+			  "</td></tr>";
+		}
+	}
+	return $res;
 }
 
 // http://doc.spip.org/@debug_affiche
-function debug_affiche($fonc, $tout, $objet, $affiche)
+function debug_affiche($fonc, $tout)
 {
+	$objet = _request('var_mode_objet');
+	$affiche = _request('var_mode_affiche');
 	if (!$objet) {if ($affiche == 'squelette') $objet = $fonc;}
-	if (!$objet OR !isset($tout[$affiche][$objet]) OR !$quoi = $tout[$affiche][$objet]) return;
-	$res = "<div id=\"debug_boucle\"><fieldset>";
+	if (!$objet OR !isset($tout[$affiche][$objet]) OR !$quoi = $tout[$affiche][$objet]) return '';
+
 	if ($affiche == 'resultat') {
 		$res .= "<legend>" .$tout['pretty'][$objet] ."</legend>";
 		$req = $tout['requete'][$objet];
@@ -609,14 +609,14 @@ function debug_affiche($fonc, $tout, $objet, $affiche)
 		$res .=  "<legend>" .$tout['pretty'][$objet] ."</legend>";
 		$res .= ancre_texte("<"."?php\n".$quoi."\n?".">");
 	} else if ($affiche == 'boucle') {
-		$res .=  "<legend>" .$tout['pretty'][$objet] ."</legend>";
+	  $res .=  "<legend>" . _T('boucle') . ' ' . $tout['pretty'][$objet] ."</legend>";
 		$res .= ancre_texte($quoi);
 	} else if ($affiche == 'squelette') {
 		$res .=  "<legend>" .$tout['sourcefile'][$objet] ."</legend>";
 		$res .= ancre_texte($tout['squelette'][$objet]);
 	}
-	$res .= "</fieldset></div>";
-	return $res;
+
+	return "<div id='debug_boucle'><fieldset id='$fonc'>$res</fieldset></div>";
 }
 
 // http://doc.spip.org/@debug_debut
@@ -645,8 +645,7 @@ function debug_debut($titre, $erreurs='')
 	  . "' type='text/css' />" .
 	  "</head>\n<body style='margin:0 10px;'>" .
 	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'>" .
-	  $erreurs .
-	  "<div id='spip-boucles'>\n"; 
+	  $erreurs;
 }
 
 // http://doc.spip.org/@debug_fin

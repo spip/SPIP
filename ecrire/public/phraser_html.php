@@ -507,7 +507,7 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 
 	$all_res = array();
 
-	while (($p = strpos($texte, BALISE_BOUCLE)) !== false) {
+	while (($pos_boucle = strpos($texte, BALISE_BOUCLE)) !== false) {
 
 		$result = new Boucle;
 		$result->id_parent = $id_parent;
@@ -516,9 +516,9 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 
 		if (!preg_match(",".BALISE_PRE_BOUCLE . '[0-9_],', $texte, $r)
 			OR ($n = strpos($texte, $r[0]))===false
-			OR ($n > $p) ) {
-		  $debut = substr($texte, 0, $p);
-		  $milieu = substr($texte, $p);
+			OR ($n > $pos_boucle) ) {
+		  $debut = substr($texte, 0, $pos_boucle);
+		  $milieu = substr($texte, $pos_boucle);
 		  $k = strpos($milieu, '(');
 		  $id_boucle = trim(substr($milieu,
 					   strlen(BALISE_BOUCLE),
@@ -542,13 +542,15 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 
 		  if (!preg_match(",".BALISE_BOUCLE . $id_boucle . "[[:space:]]*\(,", $milieu, $r))
 		    erreur_squelette((_T('zbug_erreur_boucle_syntaxe')), $id_boucle);
-		  $p = strpos($milieu, $r[0]);
-		  $result->avant = substr($milieu, $k+1, $p-$k-1);
-		  $milieu = substr($milieu, $p+strlen($id_boucle)+strlen(BALISE_BOUCLE));
+		  $pos_boucle = $n;
+		  $n = strpos($milieu, $r[0]);
+		  $result->avant = substr($milieu, $k+1, $n-$k-1);
+		  $milieu = substr($milieu, $n+strlen($id_boucle)+strlen(BALISE_BOUCLE));
 		}
 		$result->id_boucle = $id_boucle;
 
 		preg_match(SPEC_BOUCLE, $milieu, $match);
+		$result->type_requete = $match[0];
                 $milieu = substr($milieu, strlen($match[0]));
 		$type = $match[1];
 		$jointures = trim($match[2]);
@@ -562,36 +564,11 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 			$result->table_optionnelle = true;	
 		}
 		
-		if ($p = strpos($type, ':'))
-		  {
-		    $result->sql_serveur = substr($type,0,$p);
-		    $soustype = strtolower(substr($type,$p+1));
-		  }
-		else
-		  $soustype = strtolower($type);
-
-		if ($soustype == 'sites') $soustype = 'syndication' ; # alias
-
 		phraser_args($milieu,"/>","",$all_res,$result);
 
-		$params = substr($milieu,0,@strpos($milieu,$result->apres));
+		$result->criteres =  substr($milieu,0,@strpos($milieu,$result->apres));
 		$milieu = $result->apres;
 		$result->apres = "";
-
-		//
-		// analyser les criteres et distinguer la boucle recursive
-		//
-		if (strncmp($soustype, TYPE_RECURSIF, strlen(TYPE_RECURSIF)) == 0) {
-			$result->type_requete = TYPE_RECURSIF;
-			phraser_criteres($result->param, $result);
-			$args = $result->param;
-			array_unshift($args,
-				      substr($type, strlen(TYPE_RECURSIF)));
-			$result->param = $args;
-		} else {
-			$result->type_requete = $soustype;
-			phraser_criteres($result->param, $result);
-		}
 
 		//
 		// Recuperer la fin :
@@ -612,6 +589,9 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 			$suite = substr($milieu, $p + strlen($s));
 			$milieu = substr($milieu, 0, $p);
 		}
+
+		$result->milieu = $milieu;
+
 		//
 		// 1. Recuperer la partie conditionnelle apres
 		//
@@ -636,15 +616,35 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		$b = substr_count($result->avant, "\n");
 		$a = substr_count($result->apres, "\n");
 
-		// envoyer la boucle au debugueur
+		// envoyer maintenant au debusqueur la structure de donnees:
+		// en gros c'est la fin de l'analyse lexicale, 
+		// l'analyse syntaxique ne commence vraiment qu'ensuite
+		// et le debusqueur ne doit pas compter sur elle,
+		// justement parce qu'elle peut echouer.
+
 		if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode']== 'debug') {
-		  boucle_debug ($nom, $id_parent, $id_boucle, 
-				$type . ($jointures ? ' '.$jointures : ''),
-				$params,
-				$result->avant,
-				$milieu,
-				$result->apres,
-				$result->altern);
+		  boucle_debug ($nom, $result, substr($texte, $pos_boucle, strlen($texte) - strlen($suite) -$pos_boucle));
+		}
+
+		if ($p = strpos($type, ':'))
+		  {
+		    $result->sql_serveur = substr($type,0,$p);
+		    $soustype = strtolower(substr($type,$p+1));
+		  }
+		else
+		  $soustype = strtolower($type);
+
+		if ($soustype == 'sites') $soustype = 'syndication' ; # alias
+
+		$result->type_requete = $soustype;
+		phraser_criteres($result->param, $result);
+
+		if (strncmp($soustype, TYPE_RECURSIF, strlen(TYPE_RECURSIF)) == 0) {
+			$result->type_requete = TYPE_RECURSIF;
+			$args = $result->param;
+			array_unshift($args,
+				      substr($type, strlen(TYPE_RECURSIF)));
+			$result->param = $args;
 		}
 
 		$result->avant = public_phraser_html($result->avant, $id_parent,$boucles, $nom, $result->ligne);
@@ -652,6 +652,9 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		$result->altern = public_phraser_html($result->altern,$id_parent,$boucles, $nom, $result->ligne+$a+$m+$b);
 		$result->milieu = public_phraser_html($milieu, $id_boucle,$boucles, $nom, $result->ligne+$b);
 
+		// Verifier qu'il n'y a pas double definition
+		// apres analyse des sous-parties (pas avant).
+		
 		if (isset($boucles[$id_boucle])) {
 			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
 					 _T('zbug_erreur_boucle_double',
