@@ -504,7 +504,8 @@ function phraser_critere_infixe($arg1, $arg2, $args, $op, $not, $cond)
 	$args[0] = new Texte;
 	$args[0]->texte = $arg1;
 	$args[0] = array($args[0]);
-	$args[1][0]->texte = $arg2;
+	$args[1][0] = new Texte;
+	$args[1][0]->texte  = $arg2;
 	$crit = new Critere;
 	$crit->op = $op;
 	$crit->not = $not;
