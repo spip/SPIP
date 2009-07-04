@@ -373,20 +373,28 @@ function phraser_criteres($params, &$result) {
 		  {
 // plus d'un argument et pas le critere IN:
 // detecter comme on peut si c'est le critere implicite LIMIT debut, fin
-
+			array_shift($v); // $v[O] est vide
 			if (($var->type != 'texte') ||
 			    (strpos("0123456789-", $param[strlen($param)-1])
 			     !== false)) {
 			  $op = ',';
 			  $not = "";
 			} else {
+			  // Le debut du premier argument est l'operateur
 			  preg_match("/^([!]?)([a-zA-Z][a-zA-Z0-9]*)[[:space:]]*(.*)$/ms", $param, $m);
-
 			  $op = $m[2];
 			  $not = $m[1];
-			  if ($m[3]) $v[1][0]->texte = $m[3]; else array_shift($v[1]);
+			  // virer le premier argument,
+			  // et mettre son reliquat eventuel
+			  // Recopier pour ne pas alterer le texte source
+			  // utile au debusqueur
+			  array_shift($v);
+			  if ($m[3]) {
+			    $texte = new Texte;
+			    $texte->texte = $m[3]; 
+			    array_unshift($v, $texte);
+			  }
 			}
-			array_shift($v);
 			$crit = new Critere;
 			$crit->op = $op;
 			$crit->not = $not;
@@ -454,11 +462,13 @@ function phraser_criteres($params, &$result) {
 					       CHAMP_SQL_PLUS_FONC .
 					       ")\s*(\??)(.*)$/is", $param, $m)) {
 		  // contient aussi les comparaisons implicites !
-
+			    // Comme ci-dessus: 
+			    // le premier arg contient l'operateur
 			    array_shift($v);
-			    if ($m[6])
+			    if ($m[6]) {
+			      $v[0][0] = new Texte;
 			      $v[0][0]->texte = $m[6];
-			    else {
+			    } else {
 			      array_shift($v[0]);
 			      if (!$v[0]) array_shift($v);
 			    }
