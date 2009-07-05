@@ -75,13 +75,6 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 
 	echo cadre_auteur_infos($id_auteur, $auteur);
 
-	echo pipeline('affiche_gauche',
-			array('args' => array (
-				'exec'=>'auteur_infos',
-				'id_auteur'=>$id_auteur),
-			'data'=>'')
-		      );
-
 	// Interface de logo
 	$iconifier = charger_fonction('iconifier', 'inc');
 
@@ -92,6 +85,13 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 		echo $iconifier('id_auteur',
 			0 - $GLOBALS['visiteur_session']['id_auteur'],
 			'auteur_infos');
+
+	echo pipeline('affiche_gauche',
+			array('args' => array (
+				'exec'=>'auteur_infos',
+				'id_auteur'=>$id_auteur),
+			'data'=>'')
+		      );
 
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',
