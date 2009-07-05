@@ -71,6 +71,7 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 				if ($m[2]) {
 				  $v = $m[3];
 				  if (preg_match(',^[\'"](.*)[\'"]$,', $v, $m)) $v = $m[1];
+				  $val[0] = new Texte;
 				  $val[0]->texte = $v;
 				} elseif ($k OR $n) {
 				  $auto = true;
