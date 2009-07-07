@@ -136,9 +136,6 @@ function balise_URL_PAGE_dist($p) {
 	if ($args != "''" && $args!==NULL)
 		$p->code .= ','.$args;
 
-	// autres filtres (???)
-	array_shift($p->param);
-
 	if ($p->id_boucle
 	AND $s = $p->boucles[$p->id_boucle]->sql_serveur) {
 
@@ -176,11 +173,7 @@ function balise_URL_ECRIRE_dist($p) {
 	if ($args != "''" && $args!==NULL)
 		$p->code .= ','.$args;
 
-	// autres filtres (???)
-	array_shift($p->param);
-
 	$p->code = 'generer_url_ecrire(' . $p->code .')';
-
 	#$p->interdire_scripts = true;
 	return $p;
 }

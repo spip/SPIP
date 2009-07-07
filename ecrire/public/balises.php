@@ -266,8 +266,6 @@ function balise_EXPOSE_dist($p) {
 		if (($v = interprete_argument_balise(2,$p))!==NULL)
 			$off = $v;
 	
-		// autres filtres
-		array_shift($p->param);
 	}
 	return calculer_balise_expose($p, $on, $off);
 }
@@ -284,8 +282,6 @@ function balise_EXPOSER_dist($p)
 		preg_match("#([^,]*)(,(.*))?#", $onoff[0], $regs);
 		$on = "" . sql_quote($regs[1]);
 		$off = "" . sql_quote($regs[3]) ;
-		// autres filtres
-		array_shift($p->param);
 	}
 	return calculer_balise_expose($p, $on, $off);
 }
@@ -577,25 +573,15 @@ function balise_PAGINATION_dist($p, $liste='true') {
 		$p->code = "''";
 		return $p;
 	}
-	// Transforme l'ecriture du deuxieme param {truc=chose,machin=chouette} en
-	// {truc=chose}{machin=chouette}... histoire de simplifier l'ecriture pour
-	// le webmestre : #MODELE{emb}{autostart=true,truc=1,chose=chouette}
-	$params = array();
-	if (isset($p->param[0]) AND $p->param[0]) {
-		while (count($p->param[0])>2){
-			array_unshift($params,array(0=>NULL,1=>array_pop($p->param[0])));
-		}
-	}
+
 	$__modele = interprete_argument_balise(1,$p);
 	$__modele = $__modele?", $__modele":", ''";
-	array_shift($p->param);
-	while(count($params))
-		array_unshift($p->param,array_pop($params));
-
+	$params = $p->param;
+	array_shift($params);
 	// a priori true
 	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
 	// si true, les arguments simples (sans truc=chose) vont degager
-	$code_contexte = argumenter_inclure($p->param, true, $p->descr, $p->boucles, $p->id_boucle, false);
+	$code_contexte = argumenter_inclure($params, true, $p->descr, $p->boucles, $p->id_boucle, false);
 
 	$p->boucles[$b]->numrows = true;
 	$connect = $p->boucles[$b]->sql_serveur;
