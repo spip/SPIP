@@ -414,6 +414,8 @@ function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 
 // http://doc.spip.org/@spip_pg_listdbs
 function spip_pg_listdbs() {
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$link = $connexion['link'];
 	return spip_pg_query_simple("select * from pg_database");
 }
 
