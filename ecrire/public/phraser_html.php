@@ -152,7 +152,9 @@ function phraser_champs($texte,$ligne,$result) {
 		if ($suite[0] == '{') {
 		  phraser_arg($suite, '', array(), $champ);
 		}
-		$texte = $suite;
+		// ce ltrim est une ereur de conception
+		// mais on le conserve par souci de compatibilité
+		$texte = ltrim($suite);
 		$result[] = $champ;
 	  } else {
 	    // faux champ
