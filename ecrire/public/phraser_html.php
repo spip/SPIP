@@ -331,6 +331,10 @@ function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 			$champ->etoile = $match[6];
 			// phraser_args indiquera ou commence apres
 			$result = phraser_args($match[7], ")", $sep, $result, $champ);
+			if (preg_match(",^LOGO_[A-Z]+,", $match[4])
+			AND $champ->param) {
+				phraser_vieux_logos($champ);
+			}
 			$champ->avant =
 				phraser_champs_exterieurs($match[1],$n,$sep,$result);
 			$debut = substr($champ->apres,1);
@@ -357,6 +361,66 @@ function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 			$texte = $x;
 		else
 			return phraser_champs_exterieurs($x, $ligne, $sep, $result);
+	}
+}
+
+// Remplacement des syntaxes derogatoires SPIP <= 2.0 des l'analyse syntaxique
+// pour alleger le code du compilateur
+// Il s'agit des pseudos filtres |fichier et |lien qui  donnent
+// le chemin du fichier et son URL, remplaces par ** et *: LOGO_XXX** et LOGO_XXX*
+// Il y a aussi le futur attribut align et l'ecriture #LOGO|#URL
+// qui passent en arguments de la balise: #LOGO{left,#URL...}
+// -> http://www.spip.net/fr_article901.html
+
+function phraser_vieux_logos($p)
+{
+	if ($p->param[0][0])
+		$args = array('');
+	else {
+		$args = array_shift($p->param);
+	}
+
+	foreach($p->param as $couple) {
+		$nom = trim($couple[0]);
+		if ($nom == '')  {array_shift($p->param); break;}
+		$r = phraser_logo_faux_filtres($nom);
+		if ($r === 0) {
+			$c = new Texte;
+			$c->texte = $nom;
+			$args[] = array($c);
+			array_shift($p->param);
+			spip_log('filtre de logo obsolete', 'vieilles_defs');
+		} elseif ($r === 2) {
+				$p->etoile = '**';
+				array_shift($p->param);
+				spip_log('filtre de logo obsolete', 'vieilles_defs');
+		} elseif ($r === 1) {
+				array_shift($p->param);
+				$p->etoile = '*';
+				spip_log('filtre de logo obsolete', 'vieilles_defs');
+		} elseif (ltrim($nom[0])=='#') {
+				$c = new Champ();
+				$c->nom_champ = substr($nom,1);
+				$args[]= array($c);
+				array_shift($p->param);
+				spip_log('filtre de logo obsolete', 'vieilles_defs');
+		} // le cas else est la seule incompatibilite
+
+	}
+	array_unshift($p->param, $args);
+}
+
+function phraser_logo_faux_filtres($nom)
+{
+	switch($nom) {
+	case 'top':
+	case 'left':
+	case 'right':
+	case 'center':
+	case 'bottom':  return 0;
+	case 'lien':    return 1;
+	case 'fichier': return 2;
+	default: return $nom;
 	}
 }
 
