@@ -316,51 +316,6 @@ function calculer_balise_expose($p, $on, $off)
 	return $p;
 }
 
-//
-// Inserer directement un document dans le squelette
-// devient un alias de #MODELE{emb}
-//
-// On insere simplement un argument {emb} en debut de liste
-//
-// Attention la syntaxe est derogatoire : il faut donc attraper
-// tous les faux-filtres "|autostart=true" et les transformer
-// en arguments "{autostart=true}"
-//
-// On s'arrete au premier filtre ne contenant pas de =, afin de
-// pouvoir filtrer le resultat
-//
-// http://doc.spip.org/@balise_EMBED_DOCUMENT_dist
-function balise_EMBED_DOCUMENT_dist($p) {
-
-	if (!is_array($p->param))
-		$p->param=array();
-
-	// Produire le premier argument {emb}
-	$texte = new Texte;
-	$texte->type='texte';
-	$texte->texte='emb';
-	$param = array(0=>NULL, 1=>array(0=>$texte));
-	array_unshift($p->param, $param);
-
-	// Transformer les filtres en arguments
-	for ($i=1; $i<count($p->param); $i++) {
-		if ($p->param[$i][0]) {
-			if (!strstr($p->param[$i][0], '='))
-				break;# on a rencontre un vrai filtre, c'est fini
-			$texte = new Texte;
-			$texte->type='texte';
-			$texte->texte=$p->param[$i][0];
-			$param = array(0=>$texte);
-			$p->param[$i][1] = $param;
-			$p->param[$i][0] = NULL;
-		}
-	}
-
-	// Appeler la balise #MODELE{emb}{arguments}
-	if (!function_exists($f = 'balise_modele'))
-		$f = 'balise_modele_dist';
-	return $f($p);
-}
 
 // Debut et fin de surlignage auto des mots de la recherche
 // on insere une balise Span avec une classe sans spec:
