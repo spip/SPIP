@@ -415,6 +415,8 @@ function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 
 // http://doc.spip.org/@spip_pg_listdbs
 function spip_pg_listdbs() {
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$link = $connexion['link'];
 	return spip_pg_query_simple("select * from pg_database");
 }
 
@@ -452,7 +454,7 @@ function spip_pg_select($select, $from, $where='',
 	  . (!$limit ? '' : (" LIMIT $count" . (!$offset ? '' : " OFFSET $offset")));
 
 	// Erreur ? C'est du debug, ou une erreur du serveur
-	// il faudrait mettre ici le d�clenchement du message SQL
+	// il faudrait mettre ici le declenchement du message SQL
 	// actuellement dans erreur_requete_boucle
 
 	if ($requeter && $GLOBALS['var_mode'] == 'debug') {
@@ -730,7 +732,7 @@ function spip_pg_count($res, $serveur='',$requeter=true) {
   
 // http://doc.spip.org/@spip_pg_free
 function spip_pg_free($res, $serveur='',$requeter=true) {
-  // rien � faire en postgres
+  // rien a faire en postgres
 }
 
 // http://doc.spip.org/@spip_pg_delete
