@@ -49,11 +49,26 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	if (!$nom = typo($row['nom']))
 		$nom = "<span style='color: red'>" . _T('texte_vide') . '</span>';
 
+
+	$chercher_logo = ($spip_display != 1
+		AND $spip_display != 4
+		AND $GLOBALS['meta']['image_process'] != "non")
+			? charger_fonction('chercher_logo', 'inc')
+			: false;
+
+	if ($chercher_logo
+	AND $logo = $chercher_logo($id_auteur, 'id_auteur', 'on')) {
+		list($fid) = $logo;
+		include_spip('inc/filtres_images_mini');
+		$logo = image_reduire("<img src='$fid' alt='' style='float:right;' />", 26, 20);
+	}
+	else $logo ='';
+
 	$vals[] = "<a href='"
 	. generer_url_ecrire('auteur_infos', "id_auteur=$id_auteur")
 	. "'"
 	. (!$row['bio'] ? '' : (" title=\"" . attribut_html(couper(textebrut($row["bio"]), 200)) ."\""))
-	. ">$nom</a>";
+	. ">$nom</a>" . $logo;
 
 	$url = traiter_lien_explicite($row["url_site"]);
 
