@@ -49,7 +49,13 @@ function phraser_inclure($texte, $ligne, $result) {
 		$champ = new Inclure;
 		$champ->ligne = $ligne;
 		$ligne += substr_count($match[0], "\n");
-		$champ->texte = @$match[2];
+		$fichier = @$match[2];
+		# assurer ici la migration .php3 => .php
+		# et de l'ancienne syntaxe INCLURE(page.php3) devenue surperflue
+		if (preg_match(',^(.*[.]php)3$,', $fichier, $r)) {
+			$fichier = $r[1];
+		}
+		$champ->texte = ($fichier !== 'page.php') ? $fichier : '';
 		$texte = substr($texte, $p+strlen($match[0]));
 		// on assimile {var=val} a une liste de un argument sans fonction
 		phraser_args($texte,"/>","",$result,$champ);
