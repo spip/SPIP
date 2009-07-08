@@ -22,13 +22,25 @@ define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 include_spip('inc/texte');
 
 // lecture des sous repertoire plugin existants
+// $dir_plugins pour forcer un repertoire (ex: _DIR_EXTENSIONS)
+// _DIR_PLUGINS_SUPPL pour aller en chercher ailleurs (separes par des ":")
 // http://doc.spip.org/@liste_plugin_files
-function liste_plugin_files($dir_plugins=_DIR_PLUGINS){
+function liste_plugin_files($dir_plugins = null){
 	static $plugin_files=array();
-	if (!isset($plugin_files[$dir_plugins]) OR !count($plugin_files[$dir_plugins])){
+
+	if (is_null($dir_plugins)) {
+		if (defined('_DIR_PLUGINS_SUPPL')) {
+			$dir_plugins = _DIR_PLUGINS_SUPPL.':'._DIR_PLUGINS;
+		} else
+			$dir_plugins = _DIR_PLUGINS;
+	}
+
+	if (!isset($plugin_files[$dir_plugins])
+	OR count($plugin_files[$dir_plugins]) == 0){
 		$plugin_files[$dir_plugins] = array();
-		foreach (preg_files($dir_plugins, '/plugin[.]xml$') as $plugin) {
-			$plugin_files[$dir_plugins][]=substr(dirname($plugin), strlen($dir_plugins));
+		foreach(array_filter(explode(':', $dir_plugins)) as $dir)
+			foreach (preg_files($dir, '/plugin[.]xml$') as $plugin) {
+				$plugin_files[$dir_plugins][]= str_replace(_DIR_PLUGINS,'',dirname($plugin));
 		}
 		sort($plugin_files[$dir_plugins]);
 	}
@@ -141,10 +153,15 @@ function liste_plugin_valides($liste_plug, $force = false){
 	// lister les extensions qui sont automatiquement actives
 	$liste_extensions = liste_plugin_files(_DIR_EXTENSIONS);
 
+	$listes = array(
+		'_DIR_EXTENSIONS'=>$liste_extensions,
+		'_DIR_PLUGINS'=>$liste_plug
+	);
+
 	// creer une premiere liste non ordonnee mais qui ne retient
 	// que les plugins valides, et dans leur derniere version en cas de doublon
 	$liste_non_classee = array();
-	foreach(array('_DIR_EXTENSIONS'=>$liste_extensions,'_DIR_PLUGINS'=>$liste_plug) as $dir_type=>$l){
+	foreach($listes as $dir_type=>$l){
 		foreach($l as $k=>$plug) {
 			// renseigner ce plugin
 			$infos[$dir_type][$plug] = plugin_get_infos($plug,$force,constant($dir_type));
