@@ -407,10 +407,18 @@ function phraser_vieux_logos($p)
 				array_shift($p->param);
 				$p->etoile = '*';
 				spip_log('filtre de logo obsolete', 'vieilles_defs');
-		} elseif (ltrim($nom[0])=='#') {
-				$c = new Champ();
-				$c->nom_champ = substr($nom,1);
-				$args[]= array($c);
+		} elseif (preg_match("/^".NOM_DE_CHAMP.'(.*)$/sS', $nom, $m)) {
+				$champ = new Champ();
+				$champ->nom_boucle = $m[2];
+				$champ->nom_champ = $m[3];
+				$champ->etoile = $m[5];
+				$champ = array($champ);
+				if ($m[6]) {
+				  $r = new Texte;
+				  $r->texte = $m[6];
+				  $champ[]= $r;
+				}
+				$args[]= $champ;
 				array_shift($p->param);
 				spip_log('filtre de logo obsolete', 'vieilles_defs');
 		} // le cas else est la seule incompatibilite
