@@ -203,7 +203,7 @@ function traiter_echap_script_dist($regs) {
 define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script)(\s[^>]*)?>(.*)</\1>,UimsS');
 
 // - pour $source voir commentaire infra (echappe_retour)
-// - pour $no_transform voir le filtre post_autobr dans inc_filtres.php3
+// - pour $no_transform voir le filtre post_autobr dans inc/filtres
 // http://doc.spip.org/@echappe_html
 function echappe_html($letexte, $source='', $no_transform=false,
 $preg='') {
