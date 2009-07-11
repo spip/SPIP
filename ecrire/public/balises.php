@@ -260,28 +260,11 @@ function balise_POPULARITE_MAX_dist($p) {
 function balise_EXPOSE_dist($p) {
 	$on = "'on'";
 	$off= "''";
-
 	if (($v = interprete_argument_balise(1,$p))!==NULL){
 		$on = $v;
 		if (($v = interprete_argument_balise(2,$p))!==NULL)
 			$off = $v;
 	
-	}
-	return calculer_balise_expose($p, $on, $off);
-}
-
-// #EXPOSER est obsolete. utiliser #EXPOSE ci-dessus
-// http://doc.spip.org/@balise_EXPOSER_dist
-function balise_EXPOSER_dist($p)
-{
-	$on = "'on'";
-	$off= "''";
-	if ($a = ($p->fonctions)) {
-		// Gerer la notation [(#EXPOSER|on,off)]
-		$onoff = array_shift($a);
-		preg_match("#([^,]*)(,(.*))?#", $onoff[0], $regs);
-		$on = "" . sql_quote($regs[1]);
-		$off = "" . sql_quote($regs[3]) ;
 	}
 	return calculer_balise_expose($p, $on, $off);
 }

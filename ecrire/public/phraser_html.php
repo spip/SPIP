@@ -354,6 +354,8 @@ function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 			} elseif ($nom == 'FORMULAIRE_RECHERCHE'
 				AND $champ->param) {
 				phraser_vieux_recherche($champ);
+			} elseif ($nom == 'EXPOSER') {
+				phraser_vieux_exposer($champ);
 			}
 			$champ->avant =
 				phraser_champs_exterieurs($match[1],$n,$sep,$result);
@@ -473,6 +475,28 @@ function phraser_vieux_recherche($p)
 		$p->param[0][0] = '';
 		$p->fonctions = array();
 		spip_log('FORMULAIRE_RECHERCHE avec filtre ' . $c->texte, 'vieilles_defs');
+	}
+}
+
+// Gerer la notation [(#EXPOSER|on,off)]
+function phraser_vieux_exposer($p)
+{
+	if ($a = $p->fonctions) {
+		preg_match("#([^,]*)(,(.*))?#", $a[0][0], $regs);
+		$args = array();
+		if ($regs[1]) {
+			$a = new Texte;
+			$a->texte = $regs[1];
+			$args = array('', array($a));
+			if ($regs[3]) {
+				$a = new Texte;
+				$a->texte = $regs[3];
+				$args[] = array($a);
+			}
+		}
+		$p->param[0] = $args;
+		$p->fonctions = array();
+		$p->nom_champ = 'EXPOSE';
 	}
 }
 
