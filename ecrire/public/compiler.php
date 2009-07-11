@@ -762,46 +762,6 @@ function compile_retour($code, $avant, $apres, $altern, $tab, $n)
 }
 
 
-// affichage du code produit
-
-// http://doc.spip.org/@code_boucle
-function code_boucle(&$boucles, $id, $nom)
-{
-	$boucle = &$boucles[$id];
-
-	// Indiquer la boucle en commentaire
-	$pretty = '';
-
-	if ($boucle->type_requete != 'boucle')
-	  {
-	    // Resynthetiser les criteres
-	    foreach ($boucle->param as $param) {
-	      $s = "";
-	      $sep = "";
-	      foreach ($param as $t) {
-		if (is_array($t)) { // toujours vrai normalement
-		  $s .= $sep;
-		  $c = $t[0];
-		  if ($c->apres)
-		    $s .= ($c->apres . $c->texte . $c->apres);
-		  else {
-		// faudrait decompiler aussi les balises...
-		    foreach ($t as $c)
-		      $s .=  ($c->type == 'texte') ? $c->texte : '#...';
-		  }
-		  $sep = ", ";
-		}
-	      }
-	      $pretty .= ' {' . $s . '}';
-	    }
-	  }
-
-	$pretty = "BOUCLE$id(".strtoupper($boucle->type_requete) . ")" .
-		strtr($pretty,"\r\n", "  ");
-
-	return $pretty;
-}
-
 function compile_inclure_doublons($lexemes)
 {
 	foreach($lexemes as $v)
@@ -953,7 +913,12 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	// idem pour la racine
 	$descr['id_mere'] = '';
 	$corps = calculer_liste($squelette, $descr, $boucles);
+	$debug = (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode']=='debug');
 
+	if ($debug) {
+		include_spip('public/decompile');
+		include_spip('public/format_' . _EXTENSION_SQUELETTES);
+	}
 	// Calcul du corps de toutes les fonctions PHP,
 	// en particulier les requetes SQL et TOTAL_BOUCLE
 	// de'terminables seulement maintenant
@@ -981,24 +946,34 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			$req .
 			"\n}\n\n";
 
-		if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug')
+		if ($debug)
 			boucle_debug_compile ($id, $nom, $boucles[$id]->return);
 	}
 
 	$code = "";
 	foreach($boucles as $id => $boucle) {
-		$code .= "\n//\n// <BOUCLE " .
-#		  code_boucle($boucles, $id, $nom). # pas au point
+		$code .= "\n\n/* BOUCLE " .
 		  $boucle->type_requete .
-		  ">\n//\n" .
+		  " " .
+		  (!$debug ? '' : 
+			decompile_criteres($boucle->param, $boucle->criteres)) .
+		  " */\n\n" .
 		  $boucle->return;
 	}
 
 	$secondes = spip_timer('calcul_skel');
 	spip_log("COMPIL ($secondes) [$sourcefile] $nom.php");
 
+	$head = '';
+	if (is_array($tableau_des_erreurs))  {
+		foreach ($tableau_des_erreurs as $err) {
+			$head .= "\n// "
+			. str_replace("\n", ' ', join(" ", $err));
+		}
+	}
+
 	if (!CODE_COMMENTE)
-		$head = '';
+		$head .= '';
 	else $head = "
 /*
  * Squelette : $sourcefile
