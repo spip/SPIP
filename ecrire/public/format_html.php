@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function format_boucle_html($avant, $nom, $type, $crit, $corps, $apres, $altern, $prof)
 {
-	$avant = $avant ? "<B$nom>avant" : "";
+	$avant = $avant ? "<B$nom>$avant" : "";
 	$apres = $apres ? "$apres</B$nom>" : "";
 	$altern = $altern ? "$altern<//B$nom>" : "";
 	if (!$corps) $corps = " />"; else $corps = ">$corps</BOUCLE$nom>";
@@ -31,12 +31,22 @@ function format_include_html($file, $fond, $args, $prof)
 
 function format_polyglotte_html($args, $prof)
 {
+	$contenu = array(); 
+	foreach($args as $l=>$t)
+		$contenu[]= ($l ? "[$l]" : '') . $t;
 	return "<multi>" . join(" ", $args) . "</multi>";
 }
 
-function format_idiome_html($nom, $module, $args, $s, $prof)
+function format_idiome_html($nom, $module, $args, $filtres, $next, $prof)
 {
-	return "<:"  . ($module ? "$module:" : "") . $nom . $args . ":>";
+	foreach ($args as $k => $v) $args[$k] = "$k=$v";
+	$args = (!$args ? '' : ('{' . join(',', $args) . '}'));
+	$s = (!$args AND !$filtres
+		AND  $next
+		AND ($next->type == 'texte')
+		AND preg_match(',^[\w\d|{*],', $next->texte));
+
+	return "<:" . ($module ? "$module:" : "") . $nom . $args . $filtres . ":>";
 }
 
 function format_champ_html($nom, $boucle, $etoile, $avant, $apres, $args, $filtres, $next, $prof)
