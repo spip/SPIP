@@ -916,7 +916,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	$debug = (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode']=='debug');
 
 	if ($debug) {
-		include_spip('public/decompile');
+		include_spip('public/decompiler');
 		include_spip('public/format_' . _EXTENSION_SQUELETTES);
 	}
 	// Calcul du corps de toutes les fonctions PHP,
@@ -950,13 +950,16 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			boucle_debug_compile ($id, $nom, $boucles[$id]->return);
 	}
 
-	$code = "";
+	if ($debug)
+		$code .= "\n\n/*\n" . public_decompiler($squelette) . "\n*/\n";
+	else $code = "";
+
 	foreach($boucles as $id => $boucle) {
 		$code .= "\n\n/* BOUCLE " .
 		  $boucle->type_requete .
 		  " " .
 		  (!$debug ? '' : 
-			decompile_criteres($boucle->param, $boucle->criteres)) .
+			decompiler_criteres($boucle->param, $boucle->criteres)) .
 		  " */\n\n" .
 		  $boucle->return;
 	}
