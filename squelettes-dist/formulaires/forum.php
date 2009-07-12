@@ -272,8 +272,6 @@ $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
 		? $table_des_traitements['TEXTE']['forums']
 		: $table_des_traitements['TEXTE'][0];
 	$evaltexte = '$tmptexte = '.str_replace('%s', '$texte', $evaltexte).';';
-spip_log($table_des_traitements,'debug');
-spip_log($evaltexte, 'debug');
 	eval($evaltexte);
 
 	// supprimer les <form> de la previsualisation
