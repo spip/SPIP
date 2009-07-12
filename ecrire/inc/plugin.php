@@ -29,21 +29,30 @@ function liste_plugin_files($dir_plugins = null){
 	static $plugin_files=array();
 
 	if (is_null($dir_plugins)) {
-		if (defined('_DIR_PLUGINS_SUPPL')) {
-			$dir_plugins = _DIR_PLUGINS_SUPPL.':'._DIR_PLUGINS;
-		} else
-			$dir_plugins = _DIR_PLUGINS;
+		$dir_plugins = _DIR_PLUGINS;
+		if (defined('_DIR_PLUGINS_SUPPL'))
+			$dir_plugins_suppl = array_filter(explode(':',_DIR_PLUGINS_SUPPL));
 	}
 
 	if (!isset($plugin_files[$dir_plugins])
 	OR count($plugin_files[$dir_plugins]) == 0){
 		$plugin_files[$dir_plugins] = array();
-		foreach(array_filter(explode(':', $dir_plugins)) as $dir)
-			foreach (preg_files($dir, '/plugin[.]xml$') as $plugin) {
-				$plugin_files[$dir_plugins][]= str_replace(_DIR_PLUGINS,'',dirname($plugin));
+		foreach (preg_files($dir_plugins, '/plugin[.]xml$') as $plugin) {
+			$plugin_files[$dir_plugins][] = str_replace($dir_plugins,'',dirname($plugin));
 		}
 		sort($plugin_files[$dir_plugins]);
+
+		// hack affreux pour avoir le bon chemin pour les repertoires
+		// supplementaires ; chemin calcule par rapport a _DIR_PLUGINS.
+		if (isset($dir_plugins_suppl)) {
+			foreach($dir_plugins_suppl as $suppl) {
+				foreach (preg_files($suppl, '/plugin[.]xml$') as $plugin) {
+					$plugin_files[$dir_plugins][] = (_DIR_RACINE ?'': '../') .dirname($plugin);
+				}
+			}
+		}
 	}
+
 	return $plugin_files[$dir_plugins];
 }
 
@@ -152,12 +161,10 @@ function liste_plugin_valides($liste_plug, $force = false){
 	
 	// lister les extensions qui sont automatiquement actives
 	$liste_extensions = liste_plugin_files(_DIR_EXTENSIONS);
-
 	$listes = array(
 		'_DIR_EXTENSIONS'=>$liste_extensions,
 		'_DIR_PLUGINS'=>$liste_plug
 	);
-
 	// creer une premiere liste non ordonnee mais qui ne retient
 	// que les plugins valides, et dans leur derniere version en cas de doublon
 	$liste_non_classee = array();
