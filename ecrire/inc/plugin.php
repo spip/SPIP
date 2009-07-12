@@ -336,12 +336,15 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 			foreach($ordre as $p){
 				$dir_type = $plugin_valides[$p]['dir_type'];
 				$plug = $plugin_valides[$p]['dir'];
+				$dir = $dir_type.".'"
+					. str_replace(constant($dir_type), '', $plug)
+					."'";
 				$info = $infos[$dir_type][$plug];
 				// definir le plugin, donc le path avant l'include du fichier options
 				// permet de faire des include_spip pour attraper un inc_ du plugin
 				if ($charge=='options'){
 					$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
-					$splugs .= "define('_DIR_PLUGIN_$prefix',$dir_type.'$plug/'); ";
+					$splugs .= "define('_DIR_PLUGIN_$prefix',$dir); ";
 					foreach($info['path'] as $chemin){
 						if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'])){
 							if (isset($chemin['type']))
@@ -457,6 +460,7 @@ function pipeline_precompile(){
 				if (preg_match(",(_DIR_[A-Z_]+):,Ums",$file,$regs)){
 					$file = str_replace($regs[0],"'.".$regs[1].".'",$file);
 					$file = str_replace("''.","",$file);
+					$file = str_replace(constant($regs[1]), '', $file);
 				}
 				$s_inc .= $file . ')){include_once($f);}'."\n";
 			}
