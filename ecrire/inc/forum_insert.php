@@ -129,8 +129,11 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	// Cela assure aussi qu'on retrouve son message dans le thread
 	// dans le cas des forums moderes a posteriori, ce qui n'est
 	// pas plus mal.
-
-	return array(generer_url_entite($id_message, 'forum'),$id_message);
+	$url = function_exists('generer_url_forum')
+		? generer_url_forum($id_message)
+		: generer_url_entite($id_message, 'forum');
+	
+	return array($url,$id_message);
 }
 
 // http://doc.spip.org/@forum_insert_base
@@ -155,7 +158,11 @@ function forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $i
 	}
 
 	// Entrer le message dans la base
-	$id_message = sql_insertq('spip_forum', array('date_heure'=> date('Y-m-d H:i:s')));
+	$id_message = sql_insertq('spip_forum', array(
+		'date_heure'=> date('Y-m-d H:i:s'),
+		'ip' => $GLOBALS['ip'],
+		'id_auteur' => $GLOBALS['visiteur_session']['id_auteur']
+	));
 
 	if ($id_forum>0) {
 		$id_thread = sql_getfetsel("id_thread", "spip_forum", "id_forum = $id_forum");

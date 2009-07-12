@@ -260,6 +260,8 @@ function forum_documents_acceptes()
 // http://doc.spip.org/@inclure_previsu
 function inclure_previsu($texte,$titre, $url_site, $nom_site, $ajouter_mot, $doc,
 $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
+	global $table_des_traitements;
+
 	$bouton = _T('forum_message_definitif');
 	include_spip('public/assembler');
 	include_spip('public/composer');
@@ -270,6 +272,8 @@ $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
 		? $table_des_traitements['TEXTE']['forums']
 		: $table_des_traitements['TEXTE'][0];
 	$evaltexte = '$tmptexte = '.str_replace('%s', '$texte', $evaltexte).';';
+spip_log($table_des_traitements,'debug');
+spip_log($evaltexte, 'debug');
 	eval($evaltexte);
 
 	// supprimer les <form> de la previsualisation
