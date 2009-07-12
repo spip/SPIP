@@ -225,7 +225,7 @@ function critere_statut_controle_forum($type, $id_rubrique=0, $recherche='') {
    
 	switch ($type) {
 	case 'public':
-		$and .= "F.statut IN ('publie', 'off', 'spam') AND F.texte!=''";
+		$and .= "F.statut IN ('publie', 'off', 'prop', 'spam') AND F.texte!=''";
 		break;
 	case 'prop':
 		$and .= "F.statut='prop'";
