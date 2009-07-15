@@ -16,8 +16,9 @@ include_spip('inc/headers');
 include_spip('inc/texte');
 include_spip('inc/layer');
 
-// Pour relocaliser les imgages au bon endroit ...
-define('_REPLACE_IMG_PACK', "@(<img([^<>]* +)?\s*src=['\"])img_pack\/@ims");
+// Les sections d'un fichier aide sont reperees ainsi:
+
+define('_SECTIONS_AIDE', ',<h([12])(?:\s+class="spip")?'. '>([^/]+?)(?:/(.+?))?</h\1>,ism');
 
 // Les appels a soi-meme (notamment les images)
 // doivent etre en relatif pour pouvoir creer un cache local
@@ -30,7 +31,6 @@ function generer_url_aide($args)
 // Trouver l'aide correspondant a la langue demandee. 
 // On gere un cache fonde sur la date du fichier indiquant la version
 // (approximatif, mais c'est deja qqch)
-// 
 
 function help_fichier($lang_aide, $path, $help_server) {
 
@@ -42,25 +42,46 @@ function help_fichier($lang_aide, $path, $help_server) {
 
 	if ($here) {
 		lire_fichier($fichier_aide, $contenu);
-	} elseif ($help_server) {
-		include_spip('inc/distant');
-		$contenu = recuperer_page("$help_server/$path");
+		return array($contenu, help_lastmodified($lastm));
 	}
 
-	if (strlen($contenu) <= 500) return array(false, false);
+	$contenu = array();
+	include_spip('inc/distant');
+	foreach ($help_server as $k => $server) {
+		// Remplacer les liens aux images par leur gestionnaire de cache
+		$page = help_replace_img(recuperer_page("$server/$path"),$k);
+		preg_match_all(_SECTIONS_AIDE, $page, $sections, PREG_SET_ORDER);
+		// Fusionner les aides
+		foreach ($sections as $section) {
+		    list($tout,$prof, $sujet,) = $section;
+		    $corps = help_section($sujet, $page, $prof);
+		    foreach ($contenu as $k => $s) {
+		      if ($sujet == $k) {
+			$contenu[$k] .= $corps;
+			$corps = '';
+			break;
+		      }
+		    }
+		    if ($corps) $contenu[$sujet] = $tout . "\n" . $corps;
+		}
+	}
 
-	// Il faut que la langue de typo() soit celle de l'aide en ligne
+	$contenu = '<div>' . join('',$contenu) . '</div>';
+
+	// Neutraliser les liens externes pour ne pas perturber le frame
+	$contenu = preg_replace('@<a href="(http://[^"]+)"([^>]*)>@',
+				'<a href="\\1"\\2 target="_blank">',
+				$contenu);
+
+	// Correction typo dans la langue demandee
 	changer_typo($lang_aide);
+	$contenu = justifier($contenu);
 
-	if (!$here) {
-		// mettre en cache (tant pis si on peut pas)
-		sous_repertoire(_DIR_AIDE,'','',true);
-		$contenu = help_replace_img(justifier($contenu));
-		ecrire_fichier ($fichier_aide, $contenu);
-		$lastm = time();
-	}
-
-	return array($contenu, help_lastmodified($lastm));
+	if (strlen($contenu) <= 100) return array(false, false);
+	// mettre en cache (tant pis si echec)
+	sous_repertoire(_DIR_AIDE,'','',true);
+	ecrire_fichier ($fichier_aide, $contenu);
+	return array($contenu, help_lastmodified(time()));
 }
 
 // http://doc.spip.org/@help_lastmodified
@@ -83,26 +104,30 @@ function help_lastmodified($lastmodified)
 	return false;
 }
 
-// Recherche des images de l'aide
+// Les aides non mises a jour ont un vieux Path a remplacer
+// (mais ce serait bien de le faire en SQL une bonne fois)
+define('_REPLACE_IMG_PACK', "@(<img([^<>]* +)?\s*src=['\"])img_pack\/@ims");
 
-function help_replace_img($contenu)
+// Remplacer les URL des images par l'URL du gestionnaire de cache local
+
+function help_replace_img($contenu, $server=0)
 {
 	$html = "";
 	$re = "@(<img([^<>]* +)?\s*src=['\"])((AIDE|IMG|local)/([-_a-zA-Z0-9]*/?)([^'\"<>]*))@imsS";
 	while (preg_match($re, $contenu, $r)) {
 		$p = strpos($contenu, $r[0]);
-		$h = generer_url_aide("img=" . str_replace('/', '-', $r[3]));
+		$i = $server . ':' . str_replace('/', '-', $r[3]);
+		$h = generer_url_aide("img=" . $i);
 		$html .= substr($contenu, 0, $p) .  $r[1] . $h;
 		$contenu = substr($contenu, $p + strlen($r[0]));
 	}
 	$html .= $contenu;
 
-	// relocaliser img_pack au bon endroit ...
-	$html = preg_replace(_REPLACE_IMG_PACK,"\\1"._DIR_IMG_PACK, $html);
-
-	// Remplacer les liens externes par des liens ouvrants (a cause des frames)
-	return preg_replace('@<a href="(http://[^"]+)"([^>]*)>@', '<a href="\\1"\\2 target="_blank">', $html);
+	// traiter les vieilles doc
+	return  preg_replace(_REPLACE_IMG_PACK,"\\1"._DIR_IMG_PACK, $html);
 }
+
+// un bout de squelette qu'il serait bon d'evacuer un jour.
 
 define('_HELP_PANNEAU', "<img src='" .
        chemin_image('logo-spip.gif') .
@@ -112,6 +137,8 @@ define('_HELP_PANNEAU', "<img src='" .
 	Syst&egrave;me de publication pour l'Internet
 	</div></div>
 	<div style='position:absolute; bottom: 10px; right:20px; font-size: 12px; '>");
+
+// Autre squelette qui ne s'avoue pas comme tel
 
 // http://doc.spip.org/@help_body
 function help_body($aide) {
@@ -138,42 +165,46 @@ function help_body($aide) {
 
 // Extraire la seule section demandee,
 // qui commence par son nom entouree d'une balise h2
-// et se termine par la prochaine balise h2 ou h1
+// et se termine par la prochaine balise h2 ou h1 ou le /body final.
 
-function help_section($aide, $contenu)
+function help_section($aide, $contenu, $prof=2)
 {
-	$r = ',<h2( class="spip")?' . '>' . $aide ."/(.+?)</h2>(.*?)<h[12],ism";
-	preg_match($r, $contenu, $m);
-	return $m[3];
+	$r = "@<h$prof" . '(?: class="spip")?' . '>\s*' . $aide 
+	  ."\s*(?:/.+?)?</h$prof>(.*?)<(?:(?:h[12])|/body)@ism";
+
+	if (preg_match($r, $contenu, $m))
+	  return $m[1];
+	spip_log("aide inconnue $r");
+	return '';
 }
 
-define('_SECTIONS_AIDE', ',<h([12])( class="spip")?'. '>([^/]+?)(/(.+?))?</h\1>,ism');
+
 
 // Affichage du menu de gauche avec analyse de la section demandee
 // afin d'ouvrir le sous-menu correspondant a l'affichage a droite
 // http://doc.spip.org/@help_menu_rubrique
-function help_menu_rubrique($aide, $html)
+function help_menu_rubrique($aide, $contenu)
 {
 	global $spip_lang;
 
-	preg_match_all(_SECTIONS_AIDE, $html, $sections, PREG_SET_ORDER);
 	$afficher = false;
-	$ligne = 0;
-	$res = '';
+	$ligne = $numrub = 0;
+	$texte = $res = '';
+	preg_match_all(_SECTIONS_AIDE, $contenu, $sections, PREG_SET_ORDER);
 	foreach ($sections as $section) {
-		if ($section[1] == '1') {
+		list(,$prof, $sujet, $bloc) = $section;
+		if ($prof == '1') {
 			if ($afficher && $texte)
-				$res .= fin_rubrique($titre, $texte, $numrub, $ouvrir);
-			$afficher = $section[5] ? ($section[5] == 'redac') : true;
+				$res .= block_parfois_visible("block$numrub", "<div class='rubrique'>$titre</div>", "\n$texte",'', $ouvrir);
+			$afficher = $bloc ? ($bloc == 'redac') : true;
 			$texte = '';
 			if ($afficher) {
 				$numrub++;
 				$ouvrir = 0;
-				$titre = $section[3];
+				$titre = $sujet;
 			}
 		} else {
 			++$ligne;
-			$sujet = $section[3];
 			$id = "ligne$ligne";
 
 			if ($aide == $sujet) {
@@ -184,26 +215,13 @@ function help_menu_rubrique($aide, $html)
 
 			$h = generer_url_aide("aide=$sujet&frame=body&var_lang=$spip_lang");
 			$texte .= "<a class='$class' target='droite' id='$id' href='$h' onclick=\"activer_article('$id');return true;\">"
-			  . $section[5]
+			  . $bloc
 			  . "</a><br style='clear:both;' />\n";
 		}
 	}
 	if ($afficher && $texte)
-		$res .= fin_rubrique($titre, $texte, $numrub, $ouvrir);
+		$res .= block_parfois_visible("block$numrub", "<div class='rubrique'>$titre</div>", "\n$texte",'', $ouvrir);
 	return $res;
-}
-
-// http://doc.spip.org/@fin_rubrique
-function fin_rubrique($titre, $texte, $numrub, $ouvrir) {
-
-	$block_rubrique = "block$numrub";
-	return  "<div class='rubrique'>"
-		. bouton_block_depliable($titre, $ouvrir, $block_rubrique)
-		. "</div>\n"
-		. debut_block_depliable($ouvrir, $block_rubrique)
-		. "\n"
-		.  $texte
-		. fin_block(). "\n\n";
 }
 
 function help_frame_menu($titre, $contenu, $lang)
@@ -272,26 +290,26 @@ function help_img_cache($img, $ext)
 	readfile($img);
 }
 
-//
-// Tester d'abord si c'est un image qui est demandee, et sinon deleguer.
-// Pour les images du repertoire de www.spip.net,
-// on les remplace par les copies locales, qu'on cree si ce n'est fait
-//
+// Regexp reperant le travail fait par help_replace_img
+define('_HELP_PLACE_IMG',',^(\d+:)?(([^-.]*)-([^-.]*)-([^\.]*\.(gif|jpg|png)))$,');
+
+// Distinguer la demande d'une image et la demande d'un texte.
+// Si c'est une URL d'image deguisee, on la cherche dans le cache ou on l'y met.
+// Voir les differentes localisations possibles dans help_replace_img
 //
 // http://doc.spip.org/@exec_aide_index_dist
 function exec_aide_index_dist()
 {
 	global $help_server;
-	if (!preg_match(',^([^-.]*)-([^-.]*)-([^\.]*\.(gif|jpg|png))$,', 
-			_request('img'),
-			$r)) {
+	if (!is_array($help_server)) $help_server = array($help_server);
+	if (!preg_match(_HELP_PLACE_IMG,  _request('img'), $r)) {
 		aide_index_frame(_request('var_lang_r'),
 				 _request('lang_r'),
 				 _request('frame'),
 				 _request('aide'),
 				 $help_server);
 	} else {
-		list ($cache, $rep, $lang, $file, $ext) = $r;
+		list (,$server, $cache, $rep, $lang, $file, $ext) = $r;
 		if ($rep=="IMG" AND $lang=="cache"
 		AND @file_exists($img = _DIR_VAR.'cache-TeX/'.preg_replace(',^TeX-,', '', $file))) {
 			help_img_cache($img, $ext);
@@ -299,19 +317,22 @@ function exec_aide_index_dist()
 			help_img_cache($img, $ext);
 		} else if (@file_exists($img = _DIR_RACINE . 'AIDE/aide-'.$cache)) {
 			help_img_cache($img, $ext);
-		} else if ($help_server) {
-			include_spip('inc/distant');
-			sous_repertoire(_DIR_AIDE,'','',true);
-			$img = "$help_server/$rep/$lang/$file";
-			if (ecrire_fichier(_DIR_AIDE . "test")
-			AND ($contenu = recuperer_page($img))) {
-			  ecrire_fichier ($img = _DIR_AIDE . $cache, $contenu);
-			// Bug de certains OS: 
-			// le contenu n'est pas compris au premier envoi
-			// Donc ne pas mettre d'Expire
-			  header("Content-Type: image/$ext");
-			  echo $contenu;
-			} else redirige_par_entete($img);
+		} else { 
+			$server = intval(substr($server, 0, -1));
+			if ($server = $help_server[$server]) {
+				include_spip('inc/distant');
+				sous_repertoire(_DIR_AIDE,'','',true);
+				$img = "$server/$rep/$lang/$file";
+				if (ecrire_fichier(_DIR_AIDE . "test")
+				    AND ($contenu = recuperer_page($img))) {
+				  ecrire_fichier ($img = _DIR_AIDE . $cache, $contenu);
+				  // Bug de certains OS:
+				  // le contenu est incompris au premier envoi
+				  // Donc ne pas mettre d'Expire
+				  header("Content-Type: image/$ext");
+				  echo $contenu;
+				} else redirige_par_entete($img);
+			} else redirige_par_entete(generer_url_public('404'));
 		}
 	}
 }
@@ -349,10 +370,10 @@ function aide_index_frame($var_lang_r, $lang_r, $frame, $aide, $help_server)
 			"<div><a href='" .
 			$GLOBALS['home_server'] .
 			"'>" .
-			$help_server .
-			"</a>&nbsp;: ".
+			$help_server[0] . 
+			"</a> $aide&nbsp;: ".
 			_T('aide_non_disponible').
-			"</div><div align='right'>".
+			"</div><br /><div align='right'>".
 			menu_langues('var_lang_ecrire').
 			"</div>");
 		// Si pas de not-modified-since, envoyer tout
