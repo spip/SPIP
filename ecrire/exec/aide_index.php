@@ -49,7 +49,7 @@ function help_fichier($lang_aide, $path, $help_server) {
 	include_spip('inc/distant');
 	foreach ($help_server as $k => $server) {
 		// Remplacer les liens aux images par leur gestionnaire de cache
-		$page = help_replace_img(recuperer_page("$server/$path"),$k);
+		$page = help_replace_img(translitteration(recuperer_page("$server/$path")),$k);
 		preg_match_all(_SECTIONS_AIDE, $page, $sections, PREG_SET_ORDER);
 		// Fusionner les aides
 		foreach ($sections as $section) {
@@ -75,7 +75,7 @@ function help_fichier($lang_aide, $path, $help_server) {
 
 	// Correction typo dans la langue demandee
 	changer_typo($lang_aide);
-	$contenu = justifier($contenu);
+	$contenu = '<body>' . justifier($contenu) . '</body>';
 
 	if (strlen($contenu) <= 100) return array(false, false);
 	// mettre en cache (tant pis si echec)
