@@ -49,12 +49,21 @@ function help_fichier($lang_aide, $path, $help_server) {
 	include_spip('inc/distant');
 	foreach ($help_server as $k => $server) {
 		// Remplacer les liens aux images par leur gestionnaire de cache
-		$page = help_replace_img(translitteration(recuperer_page("$server/$path")),$k);
+		$url = "$server/$path";
+		$page = help_replace_img(translitteration(recuperer_page($url)),$k);
+		// les liens internes ne doivent pas etre deguises en externes
+		$url = parse_url($url);
+		$re = '@(<a\b[^>]*\s+href=["\'])' .
+		  '(?:' . $url['scheme'] . '://' . $url['host'] . ')?' .
+		  $url['path'] . '([^"\']*)@ims';
+		$page = preg_replace($re,'\\1\\2', $page);
+
 		preg_match_all(_SECTIONS_AIDE, $page, $sections, PREG_SET_ORDER);
 		// Fusionner les aides
 		foreach ($sections as $section) {
 		    list($tout,$prof, $sujet,) = $section;
 		    $corps = help_section($sujet, $page, $prof);
+
 		    foreach ($contenu as $k => $s) {
 		      if ($sujet == $k) {
 			$contenu[$k] .= $corps;
@@ -68,7 +77,7 @@ function help_fichier($lang_aide, $path, $help_server) {
 
 	$contenu = '<div>' . join('',$contenu) . '</div>';
 
-	// Neutraliser les liens externes pour ne pas perturber le frame
+	// Renvoyer les liens vraiment externes dans une autre fenetre
 	$contenu = preg_replace('@<a href="(http://[^"]+)"([^>]*)>@',
 				'<a href="\\1"\\2 target="_blank">',
 				$contenu);
