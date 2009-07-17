@@ -227,7 +227,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 	    erreur_squelette(_T('zbug_info_erreur_squelette'), $texte);
 	    $texte = '';
 	} else 	$texte = $suite;
-	  if ($fonc) $pointeur_champ->param[] = $res;
+	  if ($fonc!=='') $pointeur_champ->param[] = $res;
 	  // pour les balises avec faux filtres qui boudent ce dur larbeur
 	  $pointeur_champ->fonctions[] = array($fonc, '');
 	  return $result;
@@ -257,7 +257,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 			$collecte[] = $champ;
 			$args = ltrim($regs[count($regs)-1]);
 		} else {
-		  if (!preg_match("/".NOM_DE_CHAMP ."[{|]/", $arg, $r)) {
+		  if (!preg_match("/".NOM_DE_CHAMP ."([{|])/", $arg, $r)) {
 		    // 0 est un aveu d'impuissance. A completer
 		    $arg = phraser_champs_exterieurs($arg, 0, $sep, $result);
 
@@ -283,9 +283,17 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		    $champ->nom_boucle = $r[2];
 		    $champ->nom_champ = $r[3];
 		    $champ->etoile = $r[5];
-		    phraser_args($rec, $par, $sep, array(), $champ);
-		    $args = $champ->apres ;
-		    $champ->apres = '';
+		    if ($r[6]=='{') {
+		      phraser_arg($rec, $sep, array(), $champ);
+		      $args = ltrim($rec) ;
+		      $r[6] = $args[0];
+		    }
+		    if ($r[6]=='|') {
+		      phraser_args($rec, $par, $sep, array(), $champ);
+		      $args = $champ->apres ;
+		      $champ->apres = '';
+		    }
+
 		    if ($par==')') $args = substr($args,1);
 		    $collecte[] = $champ;
 		    $result[] = $champ;
@@ -299,7 +307,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
       if ($collecte) {$res[] = $collecte; $collecte = array();}
       $texte = substr($args,1);
       $source = substr($texte, 0, strlen($texte) - strlen($args));
-      if ($fonc || count($res) > 1) $pointeur_champ->param[] = $res;
+      if ($fonc!=='' || count($res) > 1) $pointeur_champ->param[] = $res;
       // pour les balises avec faux filtres qui boudent ce dur larbeur
       $pointeur_champ->fonctions[] = array($fonc, $source);
       return $result;

@@ -71,7 +71,7 @@ function format_champ_html($nom, $boucle, $etoile, $avant, $apres, $args, $filtr
 
 function format_liste_html($fonc, $args, $prof)
 {
-  return ($fonc ? "|$fonc" : $fonc)
+  return (($fonc!=='') ? "|$fonc" : $fonc)
 	. (!$args ? "" : ("{" . join(",", $args) . "}"));
 }
 
