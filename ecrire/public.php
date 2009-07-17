@@ -40,7 +40,11 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		$fond = $_GET[_SPIP_PAGE];
 
 		// Securite
-		if (strstr($fond, '/')) {
+		if (strstr($fond, '/')
+			AND !(
+				isset($GLOBALS['visiteur_session']) // pour eviter d'evaluer la suite pour les anonymes
+				AND include_spip('inc/autoriser')
+				AND autoriser('webmestre'))) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
