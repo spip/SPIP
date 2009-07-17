@@ -31,6 +31,7 @@ function decompiler_boucle($struct, $fmt, $prof=0, $next='')
 	if ($struct->table_optionnelle)
 	  $type .= "?";
 	// Revoir le cas de la boucle recursive
+
 	$crit = $struct->param;
 	if ($crit AND !is_array($crit[0])) {
 		$type = strtolower($type) . array_shift($crit);
@@ -139,24 +140,19 @@ function decompiler_criteres($sources, $comp, $fmt='', $prof=0) {
 		  if ((count($v) == 1) 
 		      AND $v[0]->type=='texte'
 		      AND $v[0]->apres)
-		    $args[]= ( $v[0]->apres . $v[0]->texte . $v[0]->apres);
+		    $args[]= array(array('texte', ( $v[0]->apres . $v[0]->texte . $v[0]->apres)));
 		  else {
-		    $res2 = '';
+		    $res2 = array();
 		    foreach($v as $k => $p) {
 		      if (!isset($p->type)) continue; #??????
 		      $d = 'decompiler_' . $p->type;
 		      $r = $d($p, $fmt, (0-$prof), @$v[$k+1]);
-		      if ($p->type == 'champ' AND $r[0]=='[') {
-			$r = substr($r,1,-1);
-			if (preg_match(',^[(](#[^|]*)[)]$,sS', $r))
-			  $r = substr($r,1,-1);
-		      }
-		      $res2 .= $r;
+		      $res2[]= array($p->type, $r);
 		    }
 		    $args[]= $res2;
 		  }
 		}
-		$res .= $f($args, $prof);
+		$res .= $f($args);
 	}
 	return $res;
 }

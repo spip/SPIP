@@ -75,8 +75,21 @@ function format_liste_html($fonc, $args, $prof)
 	. (!$args ? "" : ("{" . join(",", $args) . "}"));
 }
 
-function format_critere_html($args, $prof)
+function format_critere_html($criteres)
 {
-  return (!$args ? "" : ("{" . join(",", $args) . "}"));
+	foreach ($criteres as $k => $crit) {
+		$crit_s = '';
+		foreach ($crit as $operande) {
+			list($type, $valeur) = $operande;
+			if ($type == 'champ' AND $valeur[0]=='[') {
+			  $valeur = substr($valeur,1,-1);
+			  if (preg_match(',^[(](#[^|]*)[)]$,sS', $valeur))
+			    $valeur = substr($valeur,1,-1);
+			}
+			$crit_s .= $valeur;
+		}
+		$criteres[$k] = $crit_s;
+	}
+	return (!$criteres ? "" : ("{" . join(",", $criteres) . "}"));
 }
 
