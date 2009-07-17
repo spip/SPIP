@@ -200,35 +200,35 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 		$out .= http_label_img('prepa',
 				    in_array('prepa', $aff_art),
 				    'aff_art',
-				    'puce-blanche-breve.gif',
+				    'puce-preparer-8.png',
 				    _T('texte_statut_en_cours_redaction'));
 	
 	if (isset($aff_statut['prop']) && $aff_statut['prop'])
 		$out .= http_label_img('prop',
 				    in_array('prop', $aff_art),
 				    'aff_art',
-				    'puce-orange-breve.gif',
+				    'puce-proposer-8.png',
 				    _T('texte_statut_attente_validation'));
 		
 	if (isset($aff_statut['publie']) && $aff_statut['publie'])
 		$out .= http_label_img('publie',
 				    in_array('publie', $aff_art),
 				    'aff_art',
-				    'puce-verte-breve.gif',
+				    'puce-publier-8.png',
 				    _T('texte_statut_publies'));
 	
 	if (isset($aff_statut['refuse']) && $aff_statut['refuse'])
 		$out .= http_label_img('refuse',
 				    in_array('refuse', $aff_art),
 				    'aff_art',
-				    'puce-rouge-breve.gif',
+				    'puce-refuser-8.png',
 				    _T('texte_statut_refuses'));
 	
 	if (isset($aff_statut['poubelle']) && $aff_statut['poubelle'])
 		$out .= http_label_img('poubelle',
 				    in_array('poubelle', $aff_art),
 				    'aff_art',
-				    'puce-poubelle-breve.gif',
+				    'puce-supprimer-8.png',
 				    _T('texte_statut_poubelle'));
 	
 	$out .= "\n<div style='text-align: $spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
