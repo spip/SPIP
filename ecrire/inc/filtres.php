@@ -2524,7 +2524,6 @@ function bando_images_background(){
 	include_spip('inc/bandeau');
 	// recuperer tous les boutons et leurs images
 	$boutons = definir_barre_boutons(definir_barre_contexte(),true,false);
-
 	$res = "";
 	foreach($boutons as $page => $detail){
 		if ($detail->icone AND strlen(trim($detail->icone)))
@@ -2532,8 +2531,10 @@ function bando_images_background(){
 		$selecteur = ($page=='outils_rapides'?"":".navigation_avec_icones ");
 		if (is_array($detail->sousmenu))
 			foreach($detail->sousmenu as $souspage=>$sousdetail)
-				if ($sousdetail->icone AND strlen(trim($sousdetail->icone)))
+				if ($sousdetail->icone AND strlen(trim($sousdetail->icone))) {
+					$souspage = preg_replace(',\W,', '_', $souspage); # cas cfg&cfg=xx
 					$res .="\n$selecteur#bando2_$souspage {background-image:url(".$sousdetail->icone.");}";
+				}
 	}
 	return $res;
 }
