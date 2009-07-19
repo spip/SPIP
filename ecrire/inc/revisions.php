@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS['agregation_versions'] = 10;
+define('_INTERVALLE_REVISIONS', 3600); // intervalle de temps separant deux revisions par un meme auteur
 
 // http://doc.spip.org/@separer_paras
 function separer_paras($texte, $paras = "") {
@@ -380,8 +381,10 @@ function reconstuire_version($champs, $fragments, $res=array()) {
 	foreach ($champs as $nom => $code) {
 		if (!isset($res[$nom])) {
 			$t = '';
-			foreach (explode(' ', $code) as $id) {
-				$t .= isset($fragments[$id])?$fragments[$id]:"[$msg$id]";
+			foreach (array_filter(explode(' ', $code)) as $id) {
+				$t .= isset($fragments[$id])
+					? $fragments[$id]
+					: "[$msg$id]";
 			}
 			$res[$nom] = $t;
 		}
@@ -411,9 +414,9 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 
 	// Detruire les tentatives d'archivages non abouties en 1 heure
 
-	sql_delete('spip_versions', "id_article=$id_article AND id_version <= 0 AND date < DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 HOUR)");
+	sql_delete('spip_versions', "id_article=$id_article AND id_version <= 0 AND date < DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL "._INTERVALLE_REVISIONS." SECOND)");
 
-        // Signaler qu'on opere en mettant un numero de version négatif
+        // Signaler qu'on opere en mettant un numero de version negatif
         // distinctif (pour eviter la violation d'unicite)
         // et un titre contenant en fait le moment de l'insertion
 	
@@ -461,7 +464,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 		$champs_old = $row['champs'];
 		if ($row['id_auteur']!= $str_auteur
 		OR $row['permanent']=='oui'
-		OR strtotime($row['date']) < (time()-3600)) {
+		OR strtotime($row['date']) < (time()-_INTERVALLE_REVISIONS)) {
 			$id_version++;
 
 	  // version precedente recente, on va la mettre a jour 
@@ -499,7 +502,8 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	}
 	foreach ($champs as $nom => $t) {
 		$codes[$nom] = join(' ', $codes[$nom]);
-		if (!strlen($codes[$nom])) unset($codes[$nom]);
+		# avec la ligne qui suit, un champ qu'on vide ne s'enregistre pas
+		# if (!strlen($codes[$nom])) unset($codes[$nom]);
 	}
 
 	// Enregistrer les modifications
@@ -589,15 +593,25 @@ function propre_diff($texte) {
 // liste les champs versionnes d'un objet
 // http://doc.spip.org/@liste_champs_versionnes
 function liste_champs_versionnes($table) {
+	$champs = array();
 	switch ($table) {
 		case 'spip_articles':
-			return array('surtitre', 'titre', 'soustitre', 'descriptif',
-		'nom_site', 'url_site', 'chapo', 'texte', 'ps', 'id_rubrique');
+			$champs += array('id_rubrique', 'surtitre', 'titre', 'soustitre', 'j_mots', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
+
+			// prendre en compte les champs extras2
+			if (function_exists($f = 'cextras_get_extras_match')
+			AND is_array($g = $f($table)))
+			foreach($g as $c)
+				$champs[] = $c->champ;
+
+			break;
 #		case 'spip_rubriques':
-#			return array('titre', 'descriptif', 'texte');
+#			$champs += array('titre', 'descriptif', 'texte');
+#			break;
 		default:
-			return array();
+			break;
 	}
+	return $champs;
 }
 
 // http://doc.spip.org/@enregistrer_premiere_revision
@@ -644,6 +658,20 @@ function enregistrer_nouvelle_revision($x) {
 	foreach (liste_champs_versionnes($x['args']['table']) as $key)
 		if (isset($x['data'][$key]))
 			$champs[$key] = $x['data'][$key];
+
+	// A moins qu'il ne s'agisse d'operation (ajout/suppr) sur les mots-cles?
+	if ($x['args']['operation'] == 'editer_mots'
+	AND $x['args']['table'] == 'spip_articles') {
+		include_spip('inc/texte');
+		$mots = array();
+		foreach(
+			sql_allfetsel('id_mot', 'spip_mots_articles',
+			'id_article='.sql_quote($x['args']['id_objet']))
+		as $mot)
+			$mots[] = "[->mot".$mot['id_mot']."]";
+		$champs['j_mots'] = join(' ', $mots);
+	}
+
 	if (count($champs))
 		ajouter_version($x['args']['id_objet'], $champs, '', $GLOBALS['visiteur_session']['id_auteur']);
 
