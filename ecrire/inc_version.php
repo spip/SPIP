@@ -245,7 +245,7 @@ $spip_pipeline = array(
 	'afficher_fiche_objet'=>'',
 	'afficher_config_objet' => '',
 	'afficher_contenu_objet' => '',
-	'afficher_revision_objet'=>'',
+	#'afficher_revision_objet'=>'',
 	'affiche_droite' => '',
 	'affiche_gauche' => '',
 	'affiche_milieu' => '',
@@ -288,8 +288,8 @@ $spip_pipeline = array(
 	'post_propre' => '',
 	'pre_typo' => '|extraire_multi',
 	'post_typo' => '|quote_amp',
-	'pre_edition' => '|premiere_revision',
-	'post_edition' => '|nouvelle_revision',
+	'pre_edition' => '|enregistrer_premiere_revision',
+	'post_edition' => '|enregistrer_nouvelle_revision',
 	'pre_insertion' => '',
 	'pre_syndication' => '',
 	'post_syndication' => '',
@@ -311,12 +311,12 @@ $spip_pipeline = array(
 	'trig_propager_les_secteurs' => '',
 );
 
-# pour activer #INSERT_HEAD sur tous les squelettes, qu'ils aient ou non
-# la balise, decommenter la ligne ci-dessous (+ supprimer tmp/charger_pipelines)
-# $spip_pipeline['affichage_final'] .= '|f_insert_head';
-
 # la matrice standard (fichiers definissant les fonctions a inclure)
-$spip_matrice = array ();
+$spip_matrice = array (
+	# temporaire pour corriger les revisions, avant de les passer en plugin
+	'enregistrer_premiere_revision' => '_DIR_RESTREINT:inc/revisions.php',
+	'enregistrer_nouvelle_revision' => '_DIR_RESTREINT:inc/revisions.php'
+);
 # les plugins a activer
 $plugins = array();  // voir le contenu du repertoire /plugins/
 # les surcharges de include_spip()
@@ -335,31 +335,31 @@ $tables_jointures = array();
 
 // Liste des statuts. 
 $liste_des_statuts = array(
-			"info_administrateurs" => '0minirezo',
-			"info_redacteurs" =>'1comite',
-			"info_visiteurs" => '6forum',
-			"info_statut_site_4" => '5poubelle'
-			);
+	"info_administrateurs" => '0minirezo',
+	"info_redacteurs" =>'1comite',
+	"info_visiteurs" => '6forum',
+	"info_statut_site_4" => '5poubelle'
+);
 
 $liste_des_etats = array(
-			'texte_statut_en_cours_redaction' => 'prepa',
-			'texte_statut_propose_evaluation' => 'prop',
-			'texte_statut_publie' => 'publie',
-			'texte_statut_poubelle' => 'poubelle',
-			'texte_statut_refuse' => 'refuse' 
-			);
+	'texte_statut_en_cours_redaction' => 'prepa',
+	'texte_statut_propose_evaluation' => 'prop',
+	'texte_statut_publie' => 'publie',
+	'texte_statut_poubelle' => 'poubelle',
+	'texte_statut_refuse' => 'refuse' 
+);
 
 $liste_des_forums = array(
-			'bouton_radio_modere_posteriori' => 'pos',
-			'bouton_radio_modere_priori' => 'pri',
-			'bouton_radio_modere_abonnement' => 'abo',
-			'info_pas_de_forum' => 'non'
+	'bouton_radio_modere_posteriori' => 'pos',
+	'bouton_radio_modere_priori' => 'pri',
+	'bouton_radio_modere_abonnement' => 'abo',
+	'info_pas_de_forum' => 'non'
 );
 
 // liste des methodes d'authentifications
 $liste_des_authentifications = array(
-			'spip'=>'spip',
-			'ldap'=>'ldap'
+	'spip'=>'spip',
+	'ldap'=>'ldap'
 );
 
 // Experimental : pour supprimer systematiquement l'affichage des numeros
@@ -475,45 +475,17 @@ OR _request('action') == 'test_dirs')) {
 	// autrement c'est une install ad hoc (spikini...), on sait pas faire
 }
 
-//
-// Reglage de l'output buffering : si possible, generer une sortie
-// compressee pour economiser de la bande passante ; sauf dans l'espace
-// prive car sinon ca rame a l'affichage (a revoir...)
-//
-
-@header("Vary: Cookie, Accept-Encoding");
-// si un buffer est deja ouvert, stop
-if (!test_espace_prive()
-AND $flag_ob
-AND strlen(ob_get_contents())==0
-AND !headers_sent()) {
-	if (
-	$GLOBALS['meta']['auto_compress_http'] == 'oui'
-	// special bug de proxy
-	AND !(isset($_SERVER['HTTP_VIA']) AND preg_match(",NetCache|Hasd_proxy,i", $_SERVER['HTTP_VIA']))
-	// special bug Netscape Win 4.0x
-	AND (strpos($_SERVER['HTTP_USER_AGENT'], 'Mozilla/4.0') === false)
-	// special bug Apache2x
-	#&& !preg_match(",Apache(-[^ ]+)?/2,i", $_SERVER['SERVER_SOFTWARE'])
-	// test suspendu: http://article.gmane.org/gmane.comp.web.spip.devel/32038/
-	#&& !($GLOBALS['flag_sapi_name'] AND preg_match(",^apache2,", @php_sapi_name()))
-	// si la compression est deja commencee, stop
-	# && !@ini_get("zlib.output_compression")
-	AND !@ini_get("output_handler")
-	AND !isset($_GET['var_mode']) # bug avec le debugueur qui appelle ob_end_clean()
-	)
-		ob_start('ob_gzhandler');
-}
 
 // Vanter notre art de la composition typographique
 // La globale $spip_header_silencieux permet de rendre le header minimal pour raisons de securite
 define('_HEADER_COMPOSED_BY', "Composed-By: SPIP");
-
-if (!headers_sent())
+if (!headers_sent()) {
+	header("Vary: Cookie, Accept-Encoding");
 	if (!isset($GLOBALS['spip_header_silencieux']) OR !$GLOBALS['spip_header_silencieux'])
-		@header(_HEADER_COMPOSED_BY . " $spip_version_affichee @ www.spip.net" . (isset($GLOBALS['meta']['plugin_header'])?(" + ".$GLOBALS['meta']['plugin_header']):""));
+		header(_HEADER_COMPOSED_BY . " $spip_version_affichee @ www.spip.net" . (isset($GLOBALS['meta']['plugin_header'])?(" + ".$GLOBALS['meta']['plugin_header']):""));
 	else // header minimal
-		@header(_HEADER_COMPOSED_BY . " @ www.spip.net");
+		header(_HEADER_COMPOSED_BY . " @ www.spip.net");
+}
 
 # spip_log($_SERVER['REQUEST_METHOD'].' '.self() . ' - '._FILE_CONNECT);
 
