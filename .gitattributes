@@ -391,6 +391,7 @@ ecrire/public/decompiler.php -text
 ecrire/public/format_html.php -text
 ecrire/public/index.php -text
 ecrire/public/jointures.php -text
+ecrire/public/normaliser.php -text
 ecrire/public/quete.php -text
 ecrire/req/pg.php -text
 ecrire/req/sqlite2.php -text
