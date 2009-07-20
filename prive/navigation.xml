@@ -5,6 +5,10 @@
 		<titre>icone_accueil</titre>
 		<url>accueil</url>
 	</bouton>
+	<bouton id='table_de_bord_accueil' parent="bando_accueil">
+		<titre>Tableau de bord «Accueil»</titre>		
+		<url>accueil</url>
+	</bouton>
 	<bouton id='infos_perso' parent="bando_accueil">
 		<icone>images/infos_perso-16.png</icone>
 		<titre>icone_mes_infos</titre>		
@@ -29,6 +33,11 @@
 	<bouton id="bando_edition">
 		<icone>images/edition-48.png</icone>
 		<titre>icone_edition</titre>
+		<url>navigation</url>
+		<args>menu=bando_edition</args>
+	</bouton>
+	<bouton id='table_de_bord_edition' parent="bando_edition">
+		<titre>Tableau de bord «Edition»</titre>		
 		<url>navigation</url>
 		<args>menu=bando_edition</args>
 	</bouton>
@@ -59,6 +68,11 @@
 	<bouton id="bando_publication">
 		<icone>images/publication-48.png</icone>
 		<titre>icone_publication</titre>
+		<url>navigation</url>
+		<args>menu=bando_publication</args>
+	</bouton>
+	<bouton id='table_de_bord_publication' parent="bando_publication">
+		<titre>Tableau de bord «Publication»</titre>		
 		<url>navigation</url>
 		<args>menu=bando_publication</args>
 	</bouton>
@@ -100,6 +114,11 @@
 		<url>navigation</url>
 		<args>menu=bando_administration</args>
 	</bouton>
+	<bouton id='table_de_bord_administration' parent="bando_administration">
+		<titre>Tableau de bord «Administration»</titre>		
+		<url>navigation</url>
+		<args>menu=bando_administration</args>
+	</bouton>
 	<bouton id='admin_vider' parent='bando_administration'>
 		<icone>images/cache-empty-16.png</icone>
 		<titre>onglet_vider_cache</titre>
@@ -125,6 +144,11 @@
 	<bouton id="bando_configuration">
 		<icone>images/configuration-48.png</icone>
 		<titre>icone_configuration</titre>		
+		<url>navigation</url>
+		<args>menu=bando_configuration</args>
+	</bouton>
+	<bouton id='table_de_bord_configuration' parent="bando_configuration">
+		<titre>Tableau de bord «Configuration»</titre>		
 		<url>navigation</url>
 		<args>menu=bando_configuration</args>
 	</bouton>
