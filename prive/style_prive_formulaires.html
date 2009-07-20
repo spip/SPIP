@@ -185,7 +185,7 @@ c'est le par defaut des formulaires de Spip */
 	position:relative;
 	display:inline;
 
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire,3874b0})], center [(#GET{right})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire,3874b0}|couleur_eclaircir)], center [(#GET{right})] no-repeat })]
 
 	color: #[(#GET{foncee}|couleur_foncer)];
 	line-height: 11px;
@@ -204,8 +204,8 @@ c'est le par defaut des formulaires de Spip */
 
 .formulaire_spip li.obligatoire label,
 .formulaire_spip li.obligatoire.gauche label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee}|couleur_foncer)], center [(#GET{right})] no-repeat })]
-	color: white;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], center [(#GET{right})] no-repeat })]
+	color: black;
 	font-weight: bold;
 }
 
@@ -243,7 +243,7 @@ padding-top:10px;
 	font-weight: bold;
 	font-size: 95%;
 	line-height: 11px;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire})], bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], bottom [(#GET{left})] no-repeat })]
 }
 
 .formulaire_spip li.editer_parent textarea,
@@ -269,6 +269,7 @@ padding-top:10px;
 /* Formulaires obligatoires */
 .formulaire_spip li.obligatoire input {
 	font-weight: bold;
+	font-size: 110%;
 }
 
 
@@ -305,12 +306,22 @@ padding-top:10px;
 	padding-#GET{left}: 5px;
 	padding-#GET{right}: 5px;
 	font-family: verdana, arial, helvetica, sans;
-	color: white;
+	color: #[(#GET{foncee}|couleur_foncer)];
 	font-weight: bold;
 	font-size: 95%;
 	line-height: 11px;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
+
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], bottom [(#GET{left})] no-repeat })]
 }
+
+.formulaire_spip fieldset li label {
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{dddddd, center [(#GET{right})] no-repeat })]
+	color: #444444;
+}
+.formulaire_spip fieldset li input.text, .formulaire_spip fieldset li textarea.textarea {
+	border: 1px solid #aaaaaa;
+}
+
 
 .formulaire_spip li.fieldset.editer_liens_sites {
 	border-bottom: 1px solid [(#GET{foncee})];
@@ -370,7 +381,7 @@ padding-top:10px;
 .formulaire_editer_auteur li.editer_statut {
 	margin-top: 10px;
 	margin-bottom: 10px;
-	background-color: [#(#GET{claire}|couleur_eclaircir)];
+	background-color: #ddd;
 }
 .formulaire_spip li.editer_parent .rubrique_actuelle {clear:#GET{left};}
 
@@ -409,8 +420,8 @@ padding-top:10px;
 
 .formulaire_spip li.editer_parent label, 
 .formulaire_spip li.editer_groupe_mot label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
-	color: white;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{bbbbbb, bottom [(#GET{left})] no-repeat })]
+	color: black;
 }
 
 
@@ -429,7 +440,10 @@ padding-top:10px;
 .formulaire_spip .choix input.radio,
 .formulaire_spip .choix input.checkbox {width:auto;}
 
-
+input[type="file"] {
+	border: none;
+	background-color: transparent;
+}
 
 
 /* Formulaire compact */
@@ -478,8 +492,9 @@ padding-top:10px;
 
 /* Bouton de validation */
 input[type="submit"] {
-	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|background_image{[(#ENV{couleur_foncee}|couleur_foncer)], center center })]
-	border: 1px outset [(#GET{foncee})];
+	background-color: #[(#ENV{couleur_foncee})];
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|background_image{[(#ENV{couleur_foncee})], center center })]
+	border: 1px outset [(#GET{claire})];
 	padding: 3px;
 	font-weight: bold;
 	color: white;
