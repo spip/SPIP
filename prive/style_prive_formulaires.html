@@ -179,15 +179,13 @@ c'est le par defaut des formulaires de Spip */
 	width: 114px;
 	float:#GET{left};
 	margin-#GET{left}:-130px; 
-	text-align: #GET{left};
+	text-align: #GET{right};
 	/*vertical-align: top;*/
 	/* for IE 6*/
 	position:relative;
 	display:inline;
 
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire,3874b0}|couleur_eclaircir)], center [(#GET{right})] no-repeat })]
-
-	color: #[(#GET{foncee}|couleur_foncer)];
+	color: #444444;
 	line-height: 11px;
 	font-family: verdana, arial, helvetica, sans;
 
@@ -204,7 +202,6 @@ c'est le par defaut des formulaires de Spip */
 
 .formulaire_spip li.obligatoire label,
 .formulaire_spip li.obligatoire.gauche label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], center [(#GET{right})] no-repeat })]
 	color: black;
 	font-weight: bold;
 }
@@ -234,16 +231,14 @@ padding-top:10px;
 	float: #GET{left};
 	width:auto;
 	margin: 0px;
+	padding: 0px;
 	padding-top: 5px;
-	padding-bottom: 10px;
-	padding-#GET{left}: 5px;
-	padding-#GET{right}: 5px;
+	padding-bottom: 5px;
 	font-family: verdana, arial, helvetica, sans;
-	color: #[(#GET{foncee}|couleur_foncer)];
+	color: #444444;
 	font-weight: bold;
 	font-size: 95%;
 	line-height: 11px;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], bottom [(#GET{left})] no-repeat })]
 }
 
 .formulaire_spip li.editer_parent textarea,
@@ -273,15 +268,6 @@ padding-top:10px;
 }
 
 
-/*
-.formulaire_spip li.editer_descriptif.obligatoire label,
-.formulaire_spip li.editer_chapo.obligatoire label,
-.formulaire_spip li.editer_texte.obligatoire label,
-.formulaire_spip li.editer_ps.obligatoire label,
-.formulaire_spip li.obligatoire.haut label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
-	color: white;
-}*/
 
 /* Fieldset */
 
@@ -311,11 +297,9 @@ padding-top:10px;
 	font-size: 95%;
 	line-height: 11px;
 
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], bottom [(#GET{left})] no-repeat })]
 }
 
 .formulaire_spip fieldset li label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{dddddd, center [(#GET{right})] no-repeat })]
 	color: #444444;
 }
 .formulaire_spip fieldset li input.text, .formulaire_spip fieldset li textarea.textarea {
@@ -420,7 +404,6 @@ padding-top:10px;
 
 .formulaire_spip li.editer_parent label, 
 .formulaire_spip li.editer_groupe_mot label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{bbbbbb, bottom [(#GET{left})] no-repeat })]
 	color: black;
 }
 
@@ -493,7 +476,6 @@ input[type="file"] {
 /* Bouton de validation */
 input[type="submit"] {
 	background-color: #[(#ENV{couleur_foncee})];
-	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|background_image{[(#ENV{couleur_foncee})], center center })]
 	border: 1px outset [(#GET{claire})];
 	padding: 3px;
 	font-weight: bold;

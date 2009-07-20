@@ -29,4 +29,228 @@
 
 .navigation_avec_icones #bando_navigation ul li a {background-position:center top;background-repeat:no-repeat;padding-top:57px;}
 .navigation_avec_icones #bando_navigation ul li ul li a {margin-#GET{left}:7px;background-position:[(#GET{left})] center;margin-top:0;padding-#GET{left}:24px;padding-top:0.8em;}
+
+
 [(#REM)</style>]
+
+
+/* Chemin */
+
+#chemin { 
+	font-size: 0.85em; 
+	overflow: hidden; 
+	margin: 0; 
+	padding: 0; 
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
+}
+#chemin li em { display: none; }
+#chemin li a { color: black;  }
+#chemin ul, #chemin li, #chemin li .bloc {  
+	margin: 0; 
+	padding: 0; 
+	margin-top: 0; 
+	padding-top: 0; 
+	list-style-type: none;
+	display: inline; 
+}
+
+#chemin li .bloc {	
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire})], center [(#GET{left})] no-repeat })]
+	padding: 2px;	
+	padding-bottom: 4px;
+	padding-#GET{left}: 10px;	
+	padding-#GET{right}: 12px;	
+	margin-#GET{left}: -5px;
+	display: -moz-inline-box; 
+	display: inline-block; 
+	font-weight: bold;
+}
+#chemin li .bloc:hover {
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], center [(#GET{left})] no-repeat })]
+}
+
+#chemin li li .bloc { 
+	margin-top: 2px; 
+	font-weight: normal;
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], center [(#GET{left})] no-repeat })]
+}
+#chemin li li .bloc a {
+	color: #[(#GET{foncee}|couleur_foncer)];
+}
+
+#chemin .aide {margin-top: 5px; margin-bottom: 15px;}
+
+
+
+
+/* Formulaires */
+
+.formulaire_spip li label,
+.formulaire_spip li.gauche label {
+	width: 114px;
+	float:#GET{left};
+	margin-#GET{left}:-130px; 
+	text-align: #GET{left};
+	/*vertical-align: top;*/
+	/* for IE 6*/
+	position:relative;
+	display:inline;
+
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire,3874b0}|couleur_eclaircir)], center [(#GET{right})] no-repeat })]
+
+	color: #[(#GET{foncee}|couleur_foncer)];
+	line-height: 11px;
+	font-family: verdana, arial, helvetica, sans;
+
+	padding-top: 4px;
+	padding-bottom: 6px;
+	padding-#GET{left}: 5px;
+	padding-#GET{right}: 10px;
+}
+.formulaire_spip ul>li label,
+.formulaire_spip ul>li.gauche label {
+	display:block;
+	position:static;
+}
+
+.formulaire_spip li.obligatoire label,
+.formulaire_spip li.obligatoire.gauche label {
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], center [(#GET{right})] no-repeat })]
+	color: black;
+	font-weight: bold;
+}
+
+
+/* Formulaires avec label en haut */
+/* les cas particuliers des edition pleines largeur */
+.formulaire_spip li.editer_parent,
+.formulaire_spip li.editer_groupe_mot,
+.formulaire_spip li.editer_descriptif,
+.formulaire_spip li.editer_chapo,
+.formulaire_spip li.editer_texte,
+.formulaire_spip li.editer_ps,
+.formulaire_spip li.haut {
+padding-#GET{left}:10px;
+padding-top:10px;
+}
+
+.formulaire_spip li.editer_parent label,
+.formulaire_spip li.editer_groupe_mot label,
+.formulaire_spip li.editer_descriptif label,
+.formulaire_spip li.editer_chapo label,
+.formulaire_spip li.editer_texte label,
+.formulaire_spip li.editer_ps label,
+.formulaire_spip li.haut label {
+	display: block;
+	float: #GET{left};
+	width:auto;
+	margin: 0px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	padding-#GET{left}: 5px;
+	padding-#GET{right}: 5px;
+	font-family: verdana, arial, helvetica, sans;
+	color: #[(#GET{foncee}|couleur_foncer)];
+	font-weight: bold;
+	font-size: 95%;
+	line-height: 11px;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], bottom [(#GET{left})] no-repeat })]
+}
+
+.formulaire_spip li.editer_parent textarea,
+.formulaire_spip li.editer_parent select,
+.formulaire_spip li.editer_groupe_mot select,
+.formulaire_spip li.editer_descriptif textarea,
+.formulaire_spip li.editer_chapo textarea,
+.formulaire_spip li.editer_texte textarea,
+.formulaire_spip li.editer_ps textarea,
+.formulaire_spip li.haut textarea,
+.formulaire_spip li.haut select,
+.formulaire_spip li.haut input,
+.formulaire_spip li.editer_descriptif .erreur_message,
+.formulaire_spip li.editer_chapo .erreur_message,
+.formulaire_spip li.editer_texte .erreur_message,
+.formulaire_spip li.editer_ps .erreur_message,
+.formulaire_spip li.haut .erreur_message {
+	clear:#GET{left};
+}
+ 
+
+
+/* Formulaires obligatoires */
+.formulaire_spip li.obligatoire input {
+	font-weight: bold;
+	font-size: 110%;
+}
+
+
+/*
+.formulaire_spip li.editer_descriptif.obligatoire label,
+.formulaire_spip li.editer_chapo.obligatoire label,
+.formulaire_spip li.editer_texte.obligatoire label,
+.formulaire_spip li.editer_ps.obligatoire label,
+.formulaire_spip li.obligatoire.haut label {
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
+	color: white;
+}*/
+
+/* Fieldset */
+
+.formulaire_spip li.fieldset {padding:0;}
+.formulaire_spip fieldset {
+	margin: 0px;
+	padding: 10px 0px;
+	border: 0;
+	border-top: 1px solid [(#GET{foncee})];
+	width:auto;
+}
+
+.formulaire_spip h3.legend,
+.formulaire_spip legend
+ {
+	display: block;
+	float: [(#GET{left})];
+	margin: 0px;
+	margin-#GET{left}: 10px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	padding-#GET{left}: 5px;
+	padding-#GET{right}: 5px;
+	font-family: verdana, arial, helvetica, sans;
+	color: #[(#GET{foncee}|couleur_foncer)];
+	font-weight: bold;
+	font-size: 95%;
+	line-height: 11px;
+
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], bottom [(#GET{left})] no-repeat })]
+}
+
+.formulaire_spip fieldset li label {
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{dddddd, center [(#GET{right})] no-repeat })]
+	color: #444444;
+}
+.formulaire_spip fieldset li input.text, .formulaire_spip fieldset li textarea.textarea {
+	border: 1px solid #aaaaaa;
+}
+
+
+.formulaire_spip li.fieldset.editer_liens_sites {
+	border-bottom: 1px solid [(#GET{foncee})];
+}
+
+
+
+
+.formulaire_spip li.editer_parent label, 
+.formulaire_spip li.editer_groupe_mot label {
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{bbbbbb, bottom [(#GET{left})] no-repeat })]
+	color: black;
+}
+
+
+
+/* Bouton de validation */
+input[type="submit"] {
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|background_image{[(#ENV{couleur_foncee})], center center })]
+}
