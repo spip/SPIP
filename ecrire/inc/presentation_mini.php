@@ -264,7 +264,7 @@ function debut_droite($rubrique="", $return= false) {
 	$res .= creer_colonne_droite($rubrique, true)
 	. "</div>";
 
-	$res .= "\n<div id='contenu' class='serif'>";
+	$res .= "\n<div id='contenu'>";
 
 	// touche d'acces rapide au debut du contenu : z
 	// Attention avant c'etait 's' mais c'est incompatible avec
