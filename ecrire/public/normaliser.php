@@ -148,4 +148,23 @@ function phraser_vieux_exposer($p)
 	}
 }
 
+function phraser_vieux_modele($p)  {normaliser_args_inclumodel($p);}
+function phraser_vieux_inclu($p) {normaliser_args_inclumodel($p);}
+
+function normaliser_args_inclumodel($p)
+{
+	$params = $p->param;
+	if (!$params) return;
+	$args = $params[0];
+	if ($args[0]) return; // filtre immediat
+	array_shift($p->param);
+	foreach ($p->param as $l) {
+		if (!array_shift($l))  {
+			$args = array_merge($args, $l);
+			array_shift($p->param);
+		} else  break; // filtre
+	}
+	array_unshift($p->param, $args);
+}
+
 ?>
