@@ -909,9 +909,15 @@ prive/skins/spip/images/information-16.png -text
 prive/skins/spip/images/information-24.png -text
 prive/skins/spip/images/information-perso-16.png -text
 prive/skins/spip/images/information-perso-24.png -text
+prive/skins/spip/images/infos_perso-16.png -text
+prive/skins/spip/images/infos_perso-24.png -text
 prive/skins/spip/images/langue-16.png -text
 prive/skins/spip/images/langue-24.png -text
 prive/skins/spip/images/langues.png -text
+prive/skins/spip/images/ma_langue-16.png -text
+prive/skins/spip/images/ma_langue-24.png -text
+prive/skins/spip/images/mes_preferences-16.png -text
+prive/skins/spip/images/mes_preferences-24.png -text
 prive/skins/spip/images/message-16.png -text
 prive/skins/spip/images/message-24.png -text
 prive/skins/spip/images/message-add-16.png -text
