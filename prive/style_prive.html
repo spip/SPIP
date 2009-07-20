@@ -688,16 +688,16 @@ table.info td { vertical-align: top; }
 [(#INCLURE{fond=style_prive_formulaires}{env}{couleur_claire}{couleur_foncee}{lang}{ltr})]
 /******** Formulaires fin  **************/
 
-/*** Plugins ***/
-[(#INCLURE{fond=style_prive_plugins}{env}{couleur_claire}{couleur_foncee}{lang}{ltr})]
-/**** Plugins fin ***/
-
 /*** Placer la skin tout a la fin ***/
 #SET{style_prive_skin,#REM|bando_style_prive_skin}
 [(#GET{style_prive_skin}|oui)
 [(#INCLURE{fond=#GET{style_prive_skin}}{env})]
 ]
 
+
+/*** Plugins ***/
+[(#INCLURE{fond=style_prive_plugins}{env}{couleur_claire}{couleur_foncee}{lang}{ltr})]
+/**** Plugins fin ***/
 
 
 [(#REM)</style>]
