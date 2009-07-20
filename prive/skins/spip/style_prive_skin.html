@@ -34,6 +34,15 @@
 [(#REM)</style>]
 
 
+/* Modifications des intitules */
+
+.accueil #navigation .titrem { 
+	background-color: white;
+	padding-bottom: 10px;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#GET{claire})], bottom [(#GET{left})] no-repeat })]
+}
+
+
 .configuration #contenu .cadre .titrem { background-color:#eee; }
 .configuration #contenu .titrem.hover { background-color: #GET{claire}; }
 .configuration #contenu .cadre-trait-couleur { border: 1px solid #bbb; }
