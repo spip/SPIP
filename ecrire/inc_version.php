@@ -278,8 +278,8 @@ $spip_pipeline = array(
 	'post_propre' => '',
 	'pre_typo' => '|extraire_multi',
 	'post_typo' => '|quote_amp',
-	'pre_edition' => '|premiere_revision',
-	'post_edition' => '|nouvelle_revision',
+	'pre_edition' => '|enregistrer_premiere_revision',
+	'post_edition' => '|enregistrer_nouvelle_revision',
 	'pre_syndication' => '',
 	'post_syndication' => '',
 	'pre_indexation' => '',
@@ -301,12 +301,12 @@ $spip_pipeline = array(
 	'trig_propager_les_secteurs' => '',
 );
 
-# pour activer #INSERT_HEAD sur tous les squelettes, qu'ils aient ou non
-# la balise, decommenter la ligne ci-dessous (+ supprimer tmp/charger_pipelines)
-# $spip_pipeline['affichage_final'] .= '|f_insert_head';
-
 # la matrice standard (fichiers definissant les fonctions a inclure)
-$spip_matrice = array ();
+$spip_matrice = array (
+	# temporaire pour corriger les revisions, avant de les passer en plugin
+	'enregistrer_premiere_revision' => '../'._DIR_RESTREINT_ABS.'inc/revisions.php',
+	'enregistrer_nouvelle_revision' => '../'._DIR_RESTREINT_ABS.'inc/revisions.php'
+);
 # les plugins a activer
 $plugins = array();  // voir le contenu du repertoire /plugins/
 # les surcharges de include_spip()

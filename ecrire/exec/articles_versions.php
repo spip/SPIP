@@ -23,7 +23,7 @@ function exec_articles_versions_dist()
 // http://doc.spip.org/@exec_articles_versions_args
 function exec_articles_versions_args($id_article, $id_version, $id_diff)
 {
-	global $les_notes, $spip_lang_left, $spip_lang_right;
+	global $spip_lang_left, $spip_lang_right;
 
 	if (!autoriser('voirrevisions', 'article', $id_article) 
 	OR !$row = sql_fetsel("*", "spip_articles", "id_article=".sql_quote($id_article))){
@@ -40,14 +40,6 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 	$id_article = $row["id_article"];
 	$id_rubrique = $row["id_rubrique"];
 	$titre = $row["titre"];
-	$surtitre = $row["surtitre"];
-	$soustitre = $row["soustitre"];
-	$descriptif = $row["descriptif"];
-	$chapo = $row["chapo"];
-	$texte = $row["texte"];
-	$ps = $row["ps"];
-	$nom_site = $row["nom_site"];
-	$url_site = $row["url_site"];
 	$statut_article = $row["statut"];
 	$lang = $row["lang"];
 
@@ -81,7 +73,6 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 
 	$lang_dir = lang_dir(changer_typo($lang));
 
-	echo debut_cadre_relief('', true);
 
 
 //
@@ -96,48 +87,63 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 
 	unset($id_rubrique); # on n'en n'aura besoin que si on affiche un diff
 
-	if (is_array($textes)) foreach ($textes as $var => $t) 
-	  { 
-	    //	cles de $textes = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
-	    // defini dans suivi_versions.
-	    // Suicidaire. A reerire.
-	    $$var = $t;
-	  }
-
-
-
 
 //
 // Titre, surtitre, sous-titre
 //
 
+	$debut = $corps = '';
+
+	if (is_array($textes))
+	foreach ($textes as $var => $t) {
+		switch ($var) {
+			case 'id_rubrique':
+				$debut .= "<div dir='$lang_dir' class='arial1 spip_x-small'>"
+					. $t
+					. "</div>\n";
+				break;
+
+			case 'surtitre':
+			case 'soustitre':
+				$debut .= "<div  dir='$lang_dir' class='arial1 spip_medium'><b>" . propre_diff($t) . "</b></div>\n";
+				break;
+
+			case 'titre':
+				$debut .= gros_titre(propre_diff($t),
+					puce_statut($statut_article, " style='vertical-align: center'"), false);
+				break;
+
+			// trois champs a affichage combine
+			case 'descriptif':
+			case 'url_site':
+			case 'nom_site':
+				if (!$vudesc++) {
+					$debut .= "<div style='text-align: $spip_lang_left; padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'  dir='$lang_dir'>";
+					$texte_case = ($textes['descriptif']) ? "{{"._T('info_descriptif')."}} ".$textes['descriptif']."\n\n" : '';
+					$texte_case .= ($textes['nom_site'].$textes['url_site']) ? "{{"._T('info_urlref')."}} [".$textes['nom_site']."->".$textes['url_site']."]" : '';
+					$debut .= "<span class='verdana1 spip_small'>"
+					. propre($texte_case). "</span>";
+					$debut .= "</div>";
+				}
+				break;
+
+			default:
+				$corps .= "<div dir='$lang_dir' class='champ contenu_$var'>"
+					. "<div class='label'>$var</div>"
+					. "<div class='$var'>"
+					. propre_diff($t)
+					. "</div></div>\n";
+				break;
+		}
+	}
+
+	echo '<div id="contenu">';
+
+	echo debut_cadre_relief('', true);
+
 	echo "\n<table id='diff' cellpadding='0' cellspacing='0' border='0' width='100%'>";
 	echo "<tr><td style='width: 100%' valign='top'>";
-
-	if (isset($id_rubrique)) {
-		echo "<div dir='$lang_dir' class='arial1 spip_x-small'>",
-		$id_rubrique,
-		"</div>\n";
-	}
-
-	if ($surtitre) {
-		echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($surtitre), "</b></span></span>\n";
-	}
-	echo gros_titre(propre_diff($titre), puce_statut($statut_article, " style='vertical-align: center'") . " &nbsp; ", false);
-
-	if ($soustitre) {
-		echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($soustitre), "</b></span></span>\n";
-}
-
-
-	if ($descriptif OR $url_site OR $nom_site) {
-		echo "<div style='text-align: $spip_lang_left; padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'  dir='$lang_dir'>";
-		$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
-		$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
-		echo "<span class='verdana1 spip_small'>", propre($texte_case), "</span>";
-		echo "</div>";
-	}
-
+	echo $debut;
 	echo "</td><td>";
 
 // Icone de modification
@@ -157,10 +163,10 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 
 	echo fin_cadre_relief(true);
 
-//////////////////////////////////////////////////////
-// Affichage des versions
-//
 
+	//////////////////////////////////////////////////////
+	// Affichage des versions
+	//
 	$result = sql_select("id_version, titre_version, date, id_auteur",
 		"spip_versions",
 		"id_article=".sql_quote($id_article)." AND  id_version>0",
@@ -226,69 +232,27 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 		echo "</li></ul>\n";
 	}
 
-//////////////////////////////////////////////////////
-// Corps de la version affichee
-//
+	//////////////////////////////////////////////////////
+	// Corps de la version affichee
+	//
+	echo "\n\n<div id='wysiwyg' style='text-align: justify;'>$corps";
 
-if ($id_version) {
-	
-	$revision = "";
+	// notes de bas de page
+	if (strlen($GLOBALS['les_notes']))
+		echo "<div class='champ contenu_notes'>
+			<div class='label'>"._T('info_notes')."</div>
+			<div class='notes' dir='$lang_dir'>"
+			.$GLOBALS['les_notes']
+			."</div></div>\n";
 
-	// pour l'affichage du virtuel
+	echo "</div>\n";
 
-	if (substr($chapo, 0, 1) == '=') {
-		$virtuel = substr($chapo, 1);
-	}
-	
-	if ($virtuel) {
-		$revision .= debut_boite_info(true);
-		$revision .= _T('info_renvoi_article').
-			propre("<span style='text-align: center'> [->$virtuel]</span>");
-		$revision .= fin_boite_info(true);
-	}
-	else {
-		$revision .= "<div  dir='$lang_dir'><b>";
-		$revision .= justifier(propre_diff($chapo));
-		$revision .= "</b></div>\n\n";
-	
-		$revision .= "<div  dir='$lang_dir'>";
-		$revision .= justifier(propre_diff($texte));
-		$revision .= "</div>";
-	
-		if ($ps) {
-			$revision .= debut_cadre_enfonce('',true);
-			$revision .= "<div  dir='$lang_dir' class='verdana1 spip_small'>" . justifier("<b>"._T('info_ps')."</b> ".propre_diff($ps)) ."</div>";
-			$revision .= fin_cadre_enfonce(true);
-		}
-	
-		if ($les_notes) {
-			$revision .= debut_cadre_relief('', true);
-			$revision .= "<div  dir='$lang_dir'><span class='spip_xx-small'>" . justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes) . "</span></div>";
-			$revision .= fin_cadre_relief(true);
-		}
-		
-		$contexte = array('id'=>$id_article,'id_rubrique'=>$id_rubrique);
-		// permettre aux plugin de faire des modifs ou des ajouts
-		$revision = pipeline('afficher_revision_objet',
-			array(
-				'args'=>array(
-					'type'=>'article',
-					'id_objet'=>$id_article,
-					'contexte'=>$contexte,
-					'id_version'=>$id_version
-				),
-				'data'=> $revision
-			)
-		);
-		
-	}
-	echo "\n\n<div style='text-align: justify;'>$revision</div>";
-}
+	echo fin_cadre_relief(true);
 
-echo fin_cadre_relief(true);
+	echo '</div>'; // /#contenu
 
 
-echo  fin_gauche(), fin_page();
+	echo  fin_gauche(), fin_page();
 
 }
 
