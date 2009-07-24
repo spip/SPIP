@@ -269,7 +269,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 */
 
 	// le cacher si l'installation est predefinie avec un serveur particulier
-	if ($predef[0]) {
+	if (is_string($predef[0])) {
 		$server_db = $predef[0];
 	}
 
