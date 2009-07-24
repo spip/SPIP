@@ -50,7 +50,8 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
 		AND autoriser('webmestre')
 		) {
 				$fond = $r[1];
-				$base = _DIR_TMP . 'table_'.$fond . ".$ext";
+				$squelette = _DIR_TMP . 'table_'.$fond;
+				$base = $squelette . ".$ext";
 				if (!file_exists($base)
 				OR  $GLOBALS['var_mode']) {
 					$vertebrer = charger_fonction('vertebrer', 'public');
