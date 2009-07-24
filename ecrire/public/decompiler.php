@@ -45,18 +45,16 @@ function decompiler_boucle($struct, $fmt, $prof=0)
 function decompiler_include($struct, $fmt, $prof=0)
 {
 	$res = array();
-	$fond = '';
 	foreach($struct->param as $couple) {
 		array_shift($couple);
 		foreach($couple as $v) {
-			$a = public_decompiler($v, $fmt, $prof);
-			if (preg_match(',^fond=(.*)$,sS', $a, $r))
-			    $fond = $r[1];
-			else $res[]= $a;
+			$res[]= public_decompiler($v, $fmt, $prof);
 		}
 	}
+	$file = is_string($struct->texte) ? $struct->texte :
+		public_decompiler($struct->texte, $fmt, $prof);
 	$f = 'format_inclure_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
-	return $f($struct->texte, $fond, $res, $prof);
+	return $f($file, $res, $prof);
 }
 
 function decompiler_texte($struct, $fmt, $prof=0)
