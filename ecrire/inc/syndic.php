@@ -172,7 +172,7 @@ function analyser_backend($rss, $url_syndic='') {
 
 		// Description
 		if (preg_match(',<(description|summary)\b.*'
-		.'>(.*)</\1b,Uims',$item,$match)) {
+		.'>(.*)</\1\b,Uims',$item,$match)) {
 			$data['descriptif'] = trim($match[2]);
 		}
 		if (preg_match(',<(content)\b.*'
