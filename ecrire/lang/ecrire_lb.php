@@ -654,7 +654,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'install_select_langue' => 'Wielt eng Sprooch a klickt op de Kn&auml;ppchen "Weider" fir d\'Installatioun ze starten.',
 'install_select_type_db' => 'Gidd den Typ vun der Datebank un:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Datebankserver vum Hosting zougewisen',

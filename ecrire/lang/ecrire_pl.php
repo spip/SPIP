@@ -699,7 +699,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'install_select_langue' => 'Wybierz j&#281;zyk i kliknij na przycisk "next" aby rozpocz&#261;&#263; procedur&#281; instalacji.',
 'install_select_type_db' => '<NEW>Indiquer le type de base de donn&eacute;es&nbsp;:',
 'install_select_type_mysql' => '<NEW>MySQL',
-'install_select_type_pgsql' => '<NEW>PostgreSQL',
+'install_select_type_pg' => '<NEW>PostgreSQL',
 'install_select_type_sqlite2' => '<NEW>SQLite 2',
 'install_select_type_sqlite3' => '<NEW>SQLite 3',
 'install_serveur_hebergeur' => '<NEW>Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur',

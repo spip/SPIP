@@ -686,7 +686,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'install_select_langue' => 'Bir dil se&ccedil;iniz, sonra &laquo;&nbsp;bir sonraki&nbsp;&raquo; d&uuml;&#287;mesini t&#305;klay&#305;p y&uuml;kleme i&#351;lemini ba&#351;lat&#305;n&#305;z.',
 'install_select_type_db' => 'Veri taban&#305;n&#305;n tipini belirtiniz&nbsp;:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Servis sa&#287;lay&#305;c&#305; taraf&#305;ndan sa&#287;lanan veri taban&#305; sunucusu',

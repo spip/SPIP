@@ -681,7 +681,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'install_select_langue' => 'Elektu lingvon kaj poste musklaku la butonon &laquo;&nbsp;sekvanta&nbsp;&raquo; por lan&#265;i la instal-proceduron.',
 'install_select_type_db' => 'Indiku la datumbazan tipon&nbsp;:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Servilo de datumbazo atribuita de la retgastiganto',

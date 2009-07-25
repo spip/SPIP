@@ -648,7 +648,7 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'install_select_langue' => 'Izaberite jezik, a zatim kliknite na dugme &laquo;&nbsp;sljedece&nbsp;&raquo; da bi pokrenuli proces instalacije.',
 'install_select_type_db' => '<NEW>Indiquer le type de base de donn&eacute;es&nbsp;:',
 'install_select_type_mysql' => '<NEW>MySQL',
-'install_select_type_pgsql' => '<NEW>PostgreSQL',
+'install_select_type_pg' => '<NEW>PostgreSQL',
 'install_select_type_sqlite2' => '<NEW>SQLite 2',
 'install_select_type_sqlite3' => '<NEW>SQLite 3',
 'install_serveur_hebergeur' => '<NEW>Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur',
