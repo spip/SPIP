@@ -234,41 +234,33 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 	return $fieldset;
 }
 
+function install_select_serveur()
+{
+	$options = array();
+	$dir = _DIR_RESTREINT . 'req/';
+	$d = @opendir($dir);
+	if (!$d) return array();
+	while ($f = readdir($d)) {
+		if ((preg_match('/^(.*)[.]php$/', $f, $s))
+		AND is_readable($f = $dir . $f)) {
+			require_once($f);
+			$s = $s[1];
+			$v = 'spip_versions_' . $s;
+			if (function_exists($v) AND $v()) {
+			  $titre = _T("install_select_type_$s");
+			  $options[$s] =  "<option value='$s'>"
+			    . ($titre ? $titre : $s)
+			    ."</option>";
+			} else spip_log("$s: portage indisponible");
+		}
+	}
+	sort($options);
+	return $options;
+}
+
 // http://doc.spip.org/@install_connexion_form
 function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 {
-
-	// demander les version dispo de postgres
-	if (include_spip('req/pg')) {
-		$versions = spip_versions_pg();
-		$pg = !!$versions;
-	}
-
-	// demander les version dispo de mysql
-	if (include_spip('req/mysql')) {
-		$versions = spip_versions_mysql();
-		$mysql = !!$versions;
-	}
-
-	// demander les version dispo de sqlite
-	if (include_spip('req/sqlite_generique')) {
-		$versions = spip_versions_sqlite();
-		$sqlite2 = in_array(2, $versions);
-		$sqlite3 = in_array(3, $versions);
-	}
-
-	// ne pas cacher le formulaire s'il n'a qu'un serveur :
-	// ca permet de se rendre compte de ce qu'on fait !
-/*
-	if (($pg + $mysql + $sqlite2 + $sqlite3) == 1){
-		if ($mysql) 	$server_db = 'mysql';
-		if ($pg) 		$server_db = 'pg';
-		if ($sqlite2) 	$server_db = 'sqlite2';
-		if ($sqlite3) 	$server_db = 'sqlite3';
-	} else
-*/
-
-	// le cacher si l'installation est predefinie avec un serveur particulier
 	if (is_string($predef[0])) {
 		$server_db = $predef[0];
 	}
@@ -317,20 +309,9 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 			// Passer l'avertissement SQLIte en  commentaire, on pourra facilement le supprimer par la suite sans changer les traductions.
 			. "<br /><small>(". _T('install_types_db_connus_avertissement') .')</small>'
 			.'</label>'		
-		. "\n<div style='text-align: center;'><select name='server_db' id='sql_serveur_db' >"
-		. ($mysql
-			? "\n<option value='mysql'>"._T('install_select_type_mysql')."</option>"
-			: '')
-		. ($pg
-			? "\n<option value='pg'>"._T('install_select_type_pgsql')."</option>"
-			: '')
-		. (($sqlite2)
-			? "\n<option value='sqlite2'>"._T('install_select_type_sqlite2')."</option>"
-			: '')
-		. (($sqlite3)
-			? "\n<option value='sqlite3'>"._T('install_select_type_sqlite3')."</option>"
-			: '')
-		   . "\n</select></div></fieldset>")
+		. "\n<div style='text-align: center;'><select name='server_db' id='sql_serveur_db' >\n"
+		.   join("\n", install_select_serveur())
+		. "\n</select></div></fieldset>")
 	)
 	. '<div id="install_adresse_base_hebergeur">'
 	. ($predef[1]
