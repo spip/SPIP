@@ -74,11 +74,12 @@ function calendrier_args_date($script, $annee, $mois, $jour, $type, $finurl) {
 // http://doc.spip.org/@calendrier_href
 function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $img, $titre, $class='', $alt='', $clic='', $style='', $evt='')
 {
-	$c = ($class ? " class=\"$class\"" : '');
 	$h = calendrier_args_date($script, $annee, $mois, $jour, $type, $fin);
+	$evt .= " rel='nofollow'";
 	$a = ($ancre ? "#$ancre" : '');
 	$t = ($titre ? " title=\"$titre\"" : '');
 	$s = ($style ? " style=\"$style\"" : '');
+	$c = ($class ? " class=\"$class\"" : '');
 
 	$moi = preg_match("/exec=" . _request('exec') .'$/', $script);
 	if ($img) $clic =  http_img_pack($img, ($alt ? $alt : $titre), $c);
@@ -88,7 +89,7 @@ function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $im
 		return http_href("$h$a", $clic, $titre, $style, $class, $evt);
 	else {
 		$evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);
-		return "<a$c$s\nhref='$h$a'$evt>$clic</a>";
+		return "<a$c$s$t\nhref='$h$a'$evt>$clic</a>";
 	}
 }
 
