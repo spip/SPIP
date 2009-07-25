@@ -44,9 +44,9 @@ function analyser_backend($rss, $url_syndic='') {
 	$rss = preg_replace(',<(/?)(dc):,i', '<\1', $rss);
 
 	// chercher auteur/lang dans le fil au cas ou les items n'en auraient pas
-	list($header) = preg_split(',<(item|entry)[\:[:space:]>],', $rss, 2);
+	list($header) = preg_split(',<(item|entry)\b,', $rss, 2);
 	if (preg_match_all(
-	',<(author|creator)>(.*)</\1>,Uims',
+	',<(author|creator)\b(.*)</\1>,Uims',
 	$header, $regs, PREG_SET_ORDER)) {
 		$les_auteurs_du_site = array();
 		foreach ($regs as $reg) {
@@ -171,13 +171,13 @@ function analyser_backend($rss, $url_syndic='') {
 			$data['lesauteurs'] = $les_auteurs_du_site;
 
 		// Description
-		if (preg_match(',<((description|summary)([\:[:space:]][^>]*)?)'
-		.'>(.*)</\2[>[:space:]:],Uims',$item,$match)) {
-			$data['descriptif'] = trim($match[4]);
+		if (preg_match(',<(description|summary)\b.*?'
+		.'>(.*)</\1b,Uims',$item,$match)) {
+			$data['descriptif'] = trim($match[2]);
 		}
-		if (preg_match(',<((content)([\:[:space:]][^>]*)?)'
-		.'>(.*)</\2[>[:space:]:],Uims',$item,$match)) {
-			$data['content'] = trim($match[4]);
+		if (preg_match(',<(content)\b.*?'
+		.'>(.*)</\1\b,Uims',$item,$match)) {
+			$data['content'] = trim($match[2]);
 		}
 
 		// lang
