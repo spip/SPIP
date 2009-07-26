@@ -23,7 +23,7 @@ function decompiler_boucle($struct, $fmt, $prof=0)
 	$milieu = public_decompiler($struct->milieu, $fmt, $prof);
 
 	$type = $struct->sql_serveur ? "$struct->sql_serveur:" : '';
-	$type .= strtoupper($struct->type_requete ? $struct->type_requete :
+	$type .= ($struct->type_requete ? $struct->type_requete :
 			    $struct->table_optionnelle);
 
 	if ($struct->jointures_explicites)
