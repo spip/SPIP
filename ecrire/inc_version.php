@@ -304,8 +304,8 @@ $spip_pipeline = array(
 # la matrice standard (fichiers definissant les fonctions a inclure)
 $spip_matrice = array (
 	# temporaire pour corriger les revisions, avant de les passer en plugin
-	'enregistrer_premiere_revision' => '../'._DIR_RESTREINT_ABS.'inc/revisions.php',
-	'enregistrer_nouvelle_revision' => '../'._DIR_RESTREINT_ABS.'inc/revisions.php'
+	'enregistrer_premiere_revision' => "_DIR_PLUGINS../"._DIR_RESTREINT_ABS.'inc/revisions.php',
+	'enregistrer_nouvelle_revision' => "_DIR_PLUGINS../"._DIR_RESTREINT_ABS.'inc/revisions.php'
 );
 # les plugins a activer
 $plugins = array();  // voir le contenu du repertoire /plugins/
