@@ -205,11 +205,16 @@ function calculer_boucle($id_boucle, &$boucles) {
 		. calculer_requete_sql($boucles[$id_boucle]);
 	}
 
-	$notrace = (_request('var_mode_affiche') != 'resultat');
-	return $req . $corps 
-	. ($notrace ? "" : "
-		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);")
-	.  "\n	return \$t0;";
+	// en mode debug memoriser les premiers passages dans la boucle,
+	// mais pas tous, sinon ca pete.
+	if  (_request('var_mode_affiche') != 'resultat') 
+		$trace = '';
+	else {
+		$trace = $id_boucle . $boucles[$id_boucle]->descr['nom'];
+		$trace = "if (count(\$GLOBALS['debug_objets']['resultat']['$trace'])<3)
+	    \$GLOBALS['debug_objets']['resultat']['$trace'][] = \$t0;";
+	}
+	return $req . $corps . $trace . "\n\treturn \$t0;";
 }
 
 // compil d'une boucle recursive. 

@@ -222,17 +222,6 @@ function erreur_squelette($message='', $lieu='') {
 	}
 }
 
-// appelee a chaque sortie de boucle
-// http://doc.spip.org/@boucle_debug_resultat
-function boucle_debug_resultat ($id, $type, $resultat) {
-	global $debug_objets;
-
-	$nom = $debug_objets['courant'];
-	  // ne pas memoriser plus de 3 tours d'une meme boucle
-	if (count($debug_objets['resultat']["$nom$id"]) < 3)
-	    $debug_objets['resultat']["$nom$id"][] = $resultat;
-}
-
 // appelee a chaque requete
 // on n'a pas le nom du squelette, d'ailleurs ca n'en vient peut-etre pas
 
