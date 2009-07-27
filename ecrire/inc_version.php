@@ -77,6 +77,13 @@ OR (@file_exists($f = _DIR_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG 
 
 // *** Fin des define *** //
 
+
+// Inclure l'ecran de securite
+if (!defined('_ECRAN_SECURITE')
+AND @file_exists($f = _DIR_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php'))
+	include $f;
+
+
 //
 // *** Parametrage par defaut de SPIP ***
 //
