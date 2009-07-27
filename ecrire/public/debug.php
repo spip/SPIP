@@ -13,6 +13,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('public/decompiler');
+
 // http://doc.spip.org/@afficher_debug_contexte
 function afficher_debug_contexte($env) {
 
@@ -281,16 +283,13 @@ function squelette_debug_compile($nom, $sourcefile, $squelette) {
 
 // appelee a chaque analyse syntaxique des boucles d'un squelette
 // http://doc.spip.org/@boucle_debug
-function boucle_debug ($skel, $boucle, $corps)
+function boucle_debug ($skel, $boucle)
 {
 	global $debug_objets;
 
 	$nom = $boucle->id_boucle;
-	$debug_objets['parent'][$skel.$nom] = $boucle->id_parent;
-	$debug_objets['boucle'][$skel.$nom] = $corps; 
-	$debug_objets['pretty'][$skel.$nom] = 
-	   $nom . ' ' . $boucle->type_requete  . " "
-	  . htmlspecialchars(preg_replace(",[\r\n],", "\\n", $boucle->criteres));
+	$debug_objets['boucle'][$skel.$nom] = decompiler_boucle($boucle);
+	$debug_objets['pretty'][$skel.$nom] = $nom . ' ' . $boucle->type_requete;
 }
 
 // http://doc.spip.org/@trouve_boucle_debug

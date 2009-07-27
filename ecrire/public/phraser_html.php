@@ -681,16 +681,6 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $nom, $ligne=1)
 		$b = substr_count($result->avant, "\n");
 		$a = substr_count($result->apres, "\n");
 
-		// envoyer maintenant au debusqueur la structure de donnees:
-		// en gros c'est la fin de l'analyse lexicale, 
-		// l'analyse syntaxique ne commence vraiment qu'ensuite
-		// et le debusqueur ne doit pas compter sur elle,
-		// justement parce qu'elle peut echouer.
-
-		if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode']== 'debug') {
-		  boucle_debug ($nom, $result, substr($texte, $pos_boucle, strlen($texte) - strlen($suite) -$pos_boucle));
-		}
-
 		if ($p = strpos($type, ':')) {
 			$result->sql_serveur = substr($type,0,$p);
 			$type = substr($type,$p+1);

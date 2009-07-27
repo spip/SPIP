@@ -805,9 +805,6 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	include_spip('inc/charsets');
 	$squelette = transcoder_page($squelette);
 
-	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug')
-		squelette_debug_compile($nom, $sourcefile, $squelette);
-
 	$descr = array('nom' => $nom,
 			'gram' => $gram,
 			'sourcefile' => $sourcefile,
@@ -829,6 +826,11 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	global $tables_jointures;
 	static $trouver_table;
 	spip_timer('calcul_skel');
+
+	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug')
+		squelette_debug_compile($nom, $sourcefile, $descr['squelette']);
+
+	foreach ($boucles as $boucle) boucle_debug($nom, $boucle);
 
 	$descr['documents'] = compile_inclure_doublons($squelette);
 
