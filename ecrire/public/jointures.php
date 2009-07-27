@@ -280,7 +280,7 @@ function trouver_cles_table($keys)
     if (!strpos($v,","))
       $res[$v]=1; 
     else {
-      foreach (preg_split("\s*,\s*", $v) as $k) {
+      foreach (preg_split("/\s*,\s*/", $v) as $k) {
 	$res[$k]=1;
       }
     }
