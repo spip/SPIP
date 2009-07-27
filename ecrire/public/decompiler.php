@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Decompilation de l'arbre de syntaxe abstraite d'un squelette SPIP
 
-function decompiler_boucle($struct, $fmt, $prof=0)
+function decompiler_boucle($struct, $fmt='', $prof=0)
 {
 	$nom = $struct->id_boucle;
 	$avant = public_decompiler($struct->avant, $fmt, $prof);
@@ -42,7 +42,7 @@ function decompiler_boucle($struct, $fmt, $prof=0)
 	return $f($avant, $nom, $type, $crit, $milieu, $apres, $altern, $prof);
 }
 	
-function decompiler_include($struct, $fmt, $prof=0)
+function decompiler_include($struct, $fmt='', $prof=0)
 {
 	$res = array();
 	foreach($struct->param as $couple) {
@@ -57,19 +57,19 @@ function decompiler_include($struct, $fmt, $prof=0)
 	return $f($file, $res, $prof);
 }
 
-function decompiler_texte($struct, $fmt, $prof=0)
+function decompiler_texte($struct, $fmt='', $prof=0)
 {
 	$f = 'format_texte_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
 	return strlen($struct->texte) ? $f($struct->texte, $prof) : '';
 }
 
-function decompiler_polyglotte($struct, $fmt, $prof=0)
+function decompiler_polyglotte($struct, $fmt='', $prof=0)
 {
 	$f = 'format_polyglotte_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
 	return $f($struct->traductions, $prof);
 }
 
-function decompiler_idiome($struct, $fmt, $prof=0)
+function decompiler_idiome($struct, $fmt='', $prof=0)
 {
 	$module = ($struct->module == 'public/spip/ecrire')? ''
 	  : $struct->module;
@@ -85,7 +85,7 @@ function decompiler_idiome($struct, $fmt, $prof=0)
 	return $f($struct->nom_champ, $module, $args, $filtres, $prof);
 }
 
-function decompiler_champ($struct, $fmt, $prof=0)
+function decompiler_champ($struct, $fmt='', $prof=0)
 {
 	$avant = public_decompiler($struct->avant, $fmt, $prof);
 	$apres = public_decompiler($struct->apres, $fmt, $prof);
@@ -99,7 +99,7 @@ function decompiler_champ($struct, $fmt, $prof=0)
 	return $f($struct->nom_champ, $struct->nom_boucle, $struct->etoile, $avant, $apres, $args, $filtres, $prof);
 }
 
-function decompiler_liste($sources, $fmt, $prof=0) {
+function decompiler_liste($sources, $fmt='', $prof=0) {
 	if (!is_array($sources)) return '';
 	$f = 'format_liste_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
 	$res = '';
@@ -144,7 +144,7 @@ function decompiler_criteres($sources, $comp, $fmt='', $prof=0) {
 		    foreach($v as $k => $p) {
 		      if (!isset($p->type)) continue; #??????
 		      $d = 'decompiler_' . $p->type;
-		      $r = $d($p, $fmt, (0-$prof), @$v[$k+1]);
+		      $r = $d($p, $fmt='', (0-$prof), @$v[$k+1]);
 		      $res2[]= array($p->type, $r);
 		    }
 		    $args[]= $res2;
@@ -156,7 +156,7 @@ function decompiler_criteres($sources, $comp, $fmt='', $prof=0) {
 }
 
 
-function public_decompiler($liste, $fmt='', $prof=0, $suite=' ')
+function public_decompiler($liste, $fmt='', $prof=0)
 {
 	if (!is_array($liste))  return '';
 	include_spip('public/format_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES));
