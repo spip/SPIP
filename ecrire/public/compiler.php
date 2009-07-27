@@ -210,8 +210,9 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if  (_request('var_mode_affiche') != 'resultat') 
 		$trace = '';
 	else {
-		$trace = $id_boucle . $boucles[$id_boucle]->descr['nom'];
-		$trace = "if (count(\$GLOBALS['debug_objets']['resultat']['$trace'])<3)
+		$trace = $boucles[$id_boucle]->descr['nom'] . $id_boucle;
+		$trace = "if (count(@\$GLOBALS['debug_objets']['resultat']['$trace'])<3)
+spip_log('trace  $trace');
 	    \$GLOBALS['debug_objets']['resultat']['$trace'][] = \$t0;";
 	}
 	return $req . $corps . $trace . "\n\treturn \$t0;";
@@ -975,7 +976,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	}
 
 	if ($debug)
-		$code .= "\n\n/*\n" . public_decompiler($squelette) . "\n*/\n";
+		$code = "\n\n/*\n" . public_decompiler($squelette) . "\n*/\n";
 	else $code = "";
 
 	foreach($boucles as $id => $boucle) {

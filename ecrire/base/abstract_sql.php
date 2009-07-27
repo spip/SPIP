@@ -77,7 +77,20 @@ function sql_select (
 	$serveur='', $option=true) {
 	$f = sql_serveur('select', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, $option!==false);
+
+	$debug = (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug' );
+	if (($option !== false) AND !$debug) {
+		return $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, $option);
+	}
+	$query = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
+	if (!$option) return $query;
+	// le debug, c'est pour ce qui a ete produit par le compilateur
+	if (isset($GLOBALS['debug']['aucasou'])) {
+		list($table, $id,) = $GLOBALS['debug']['aucasou'];
+		$nom = $GLOBALS['debug_objets']['courant'] . $id;
+		$GLOBALS['debug_objets']['requete'][$nom] = $query;
+	}
+	return $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, true);
 }
 
 // Recupere la syntaxe de la requete select sans l'executer

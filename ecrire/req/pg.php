@@ -457,13 +457,8 @@ function spip_pg_select($select, $from, $where='',
 	// il faudrait mettre ici le declenchement du message SQL
 	// actuellement dans erreur_requete_boucle
 
-	if ($requeter && $GLOBALS['var_mode'] == 'debug') {
-		include_spip('public/debug');
-		boucle_debug_requete($query);
-	}
-
 	// renvoyer la requete inerte si demandee
-	if (!$requeter) return $query;
+	if ($requeter === false) return $query;
 	
 	if (!($res = spip_pg_trace_query($query, $serveur))) {
 	  include_spip('public/debug');
