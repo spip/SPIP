@@ -1101,7 +1101,7 @@ function calculer_vieux_in($params)
 		    if ($v[0]->type != 'texte')
 		      $newp[] = $v;
 		    else {
-		      foreach(split(',', $v[0]->texte) as $x) {
+		      foreach(explode(',', $v[0]->texte) as $x) {
 			$t = new Texte;
 			$t->texte = $x;
 			$newp[] = array($t);

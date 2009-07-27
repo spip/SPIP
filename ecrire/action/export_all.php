@@ -21,7 +21,7 @@ function action_export_all_dist()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	@list($quoi, $gz, $archive, $rub, $version) = split(',', $arg);
+	@list($quoi, $gz, $archive, $rub, $version) = explode(',', $arg);
 	$meta = "status_dump_$rub_"  . $GLOBALS['visiteur_session']['id_auteur'];
 	$tables = _request('export');
 	// determine upload va aussi initialiser l'index "restreint"

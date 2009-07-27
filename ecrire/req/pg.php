@@ -32,7 +32,7 @@ function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='')
 			$$a = $last_connect[$a];
 		}
 	}
-	@list($host, $p) = split(';', $addr);
+	@list($host, $p) = explode(';', $addr);
 	if ($p >0) $port = " port=$p" ; else $port = '';
 	if ($db) {
 		@$link = pg_connect("host=$host$port dbname=$db user=$login password=$pass", PGSQL_CONNECT_FORCE_NEW);
