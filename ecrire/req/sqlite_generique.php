@@ -850,10 +850,9 @@ function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='',
 	if ($requeter === false) return $query;
 
 	if (!($res = spip_sqlite_query($query, $serveur, $requeter))) {
-		include_spip('public/debug');
-		erreur_requete_boucle(substr($query, 7),
-				      spip_sqlite_errno($serveur),
-				      spip_sqlite_error($query, $serveur) );
+		$res = array(substr($query, 7),
+			spip_sqlite_errno($serveur),
+			spip_sqlite_error($query, $serveur) );
 	}
 
 	return $res;

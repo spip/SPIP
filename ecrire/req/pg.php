@@ -461,8 +461,7 @@ function spip_pg_select($select, $from, $where='',
 	if ($requeter === false) return $query;
 	
 	if (!($res = spip_pg_trace_query($query, $serveur))) {
-	  include_spip('public/debug');
-	  erreur_requete_boucle($query, 0, 0);
+		$res = array($query, 0, 0);
 	}
 
 	return $res;

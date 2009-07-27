@@ -188,10 +188,7 @@ function erreur_requete_boucle($query, $errno, $erreur) {
 		    . $err;
 		}
 		$retour .=  $err . aide('erreur_mysql');
-		spip_log("Erreur requete $id ".$GLOBALS['fond']);
 	}
-
-	erreur_squelette($retour);
 }
 
 /**
@@ -208,10 +205,11 @@ define('_DEBUG_MAX_SQUELETTE_ERREURS', 4);
 // Erreur de syntaxe des squelettes : memoriser le code fautif
 //
 // http://doc.spip.org/@erreur_squelette
-function erreur_squelette($message='', $lieu='') {
+function erreur_squelette($message='', $lieu='', $quoi='') {
 	global $tableau_des_erreurs;
 
 	if (is_array($message)) list($message, $lieu) = $message;
+	elseif ($quoi) $message = erreur_requete_boucle($message, $lieu, $quoi);
 #	debug_print_backtrace();exit;
 	spip_log("Debug: $message | $lieu (" . $GLOBALS['fond'] .")" );
 	$GLOBALS['bouton_admin_debug'] = true;
