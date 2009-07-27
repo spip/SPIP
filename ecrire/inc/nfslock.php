@@ -247,7 +247,7 @@ function spip_nfsunlock($fichier, $birth, $max_age=0, $test = false) {
 	 *    tries to relock the file.
 	 */
 
-  if ( ($old_stat=lstat($lock_file))	/* stat succeeds so file is there */
+  if ( ($old_stat=@lstat($lock_file))	/* stat succeeds so file is there */
 	  && ($old_stat['ctime'] == $birth)) {	/* hasn't been modified since birth */
 	  if (!$test)
     	spip_unlink($lock_file);			/* so the lock is ours to remove */
