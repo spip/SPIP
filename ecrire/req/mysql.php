@@ -665,24 +665,28 @@ function spip_mysql_replace_multi($table, $tab_couples, $desc=array(), $serveur=
 
 // http://doc.spip.org/@spip_mysql_multi
 function spip_mysql_multi ($objet, $lang) {
-	$retour = "(TRIM(IF(INSTR(".$objet.", '<multi>') = 0 , ".
+	$lengthlang = strlen("[$lang]");
+	$posmulti = "INSTR(".$objet.", '<multi>')";
+	$posfinmulti = "INSTR(".$objet.", '</multi>')";
+	$debutchaine = "LEFT(".$objet.", $posmulti-1)";
+	$finchaine = "RIGHT(".$objet.", CHAR_LENGTH(".$objet.") -(7+$posfinmulti))";
+	$chainemulti = "TRIM(SUBSTRING(".$objet.", $posmulti+7, $posfinmulti -(7+$posmulti)))";
+	$poslang = "INSTR($chainemulti,'[".$lang."]')";
+	$poslang = "IF($poslang=0,INSTR($chainemulti,']')+1,$poslang+$lengthlang)";
+	$chainelang = "TRIM(SUBSTRING(".$objet.", $posmulti+7+$poslang-1,$posfinmulti -($posmulti+7+$poslang-1) ))";
+	$posfinlang = "INSTR(".$chainelang.", '[')";
+	$chainelang = "IF($posfinlang>0,LEFT($chainelang,$posfinlang-1),$chainelang)";
+	//$chainelang = "LEFT($chainelang,$posfinlang-1)";
+	$retour = "(TRIM(IF($posmulti = 0 , ".
 		"     TRIM(".$objet."), ".
 		"     CONCAT( ".
-		"          LEFT(".$objet.", INSTR(".$objet.", '<multi>')-1), ".
+		"          $debutchaine, ".
 		"          IF( ".
-		"               INSTR(TRIM(RIGHT(".$objet.", CHAR_LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))),'[".$lang."]') = 0, ".
-		"               IF( ".
-		"                     TRIM(RIGHT(".$objet.", CHAR_LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) REGEXP '^\\[[a-z\_]{2,}\\]', ".
-		"                     INSERT( ".
-		"                          TRIM(RIGHT(".$objet.", CHAR_LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ".
-		"                          1, ".
-		"                          INSTR(TRIM(RIGHT(".$objet.", CHAR_LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ']'), ".
-		"                          '' ".
-		"                     ), ".
-		"                     TRIM(RIGHT(".$objet.", CHAR_LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) ".
-		"                ), ".
-		"               TRIM(RIGHT(".$objet.", ( CHAR_LENGTH(".$objet.") - (INSTR(".$objet.", '[".$lang."]')+ CHAR_LENGTH('[".$lang."]')-1) ) )) ".
-		"          ) ".
+		"               $poslang = 0, ".
+		"                     $chainemulti, ".
+		"               $chainelang".
+		"          ), ". 
+		"          $finchaine".
 		"     ) ".
 		"))) AS multi";
 
