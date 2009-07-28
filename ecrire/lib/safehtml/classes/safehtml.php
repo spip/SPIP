@@ -345,7 +345,7 @@ class SafeHTML
     $doc = $this->repackUTF7($doc);
 
     // Instantiate the parser
-    $parser=& new XML_HTMLSax3();
+    $parser= new XML_HTMLSax3();
 
     // Set up the parser
     $parser->set_object($this);
