@@ -212,7 +212,6 @@ function calculer_boucle($id_boucle, &$boucles) {
 	else {
 		$trace = $boucles[$id_boucle]->descr['nom'] . $id_boucle;
 		$trace = "if (count(@\$GLOBALS['debug_objets']['resultat']['$trace'])<3)
-spip_log('trace  $trace');
 	    \$GLOBALS['debug_objets']['resultat']['$trace'][] = \$t0;";
 	}
 	return $req . $corps . $trace . "\n\treturn \$t0;";
@@ -837,8 +836,8 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		$GLOBALS['debug_objets']['squelette'][$nom] = $descr['squelette'];
 		$GLOBALS['debug_objets']['sourcefile'][$nom] = $sourcefile;
 
-		if (!isset($debug_objets['principal']))
-			$debug_objets['principal'] = $nom;
+		if (!isset($GLOBALS['debug_objets']['principal']))
+			$GLOBALS['debug_objets']['principal'] = $nom;
 	}
 	foreach ($boucles as $id => $boucle) {
 		$GLOBALS['debug_objets']['boucle'][$nom.$id] = $boucle;
