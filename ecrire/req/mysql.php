@@ -124,7 +124,11 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 	// renvoyer la requete inerte si demandee
 	if (!$requeter) return $query;
 
-	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
+	if (isset($_GET['var_profile'])) {
+		include_spip('public/tracer');
+		$t = trace_query_start();
+	} else $t = 0 ;
+ 
 	$r = $link ? mysql_query($query, $link) : mysql_query($query);
 
 	if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
@@ -548,7 +552,11 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$req
 
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 
-	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
+	if (isset($_GET['var_profile'])) {
+		include_spip('public/tracer');
+		$t = trace_query_start();
+	} else $t = 0 ;
+ 
 	$query="INSERT INTO $table $champs VALUES $valeurs";
 #	spip_log($query);
 	if (mysql_query($query, $link))

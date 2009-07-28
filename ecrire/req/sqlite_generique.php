@@ -685,8 +685,11 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 
 
-	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
-
+	if (isset($_GET['var_profile'])) {
+		include_spip('public/tracer');
+		$t = trace_query_start();
+	} else $t = 0 ;
+ 
 	$query="INSERT OR REPLACE INTO $table $champs VALUES $valeurs";
 	if (!$requeter) return $query;
 	
@@ -1596,7 +1599,11 @@ class sqlite_traiter_requete{
 	// faire le tracage si demande 
 // http://doc.spip.org/@executer_requete
 	function executer_requete(){
-		$t = $this->tracer ? trace_query_start(): 0;
+		if ($this->tracer) {
+			include_spip('public/tracer');
+			$t = trace_query_start();
+		} else $t = 0 ;
+ 
 # spip_log("requete: $this->serveur >> $this->query",'query'); // boum ? pourquoi ?
 		if ($this->link){
 			if ($this->sqlite_version == 3) {
