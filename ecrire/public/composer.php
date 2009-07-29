@@ -61,10 +61,9 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 		$skel_code = $compiler($skel, $nom, $gram, $source, $connect);
 	}
 
-	// Tester si le compilateur renvoie une erreur
-	if (is_array($skel_code))
-		erreur_squelette($skel_code[0], $skel_code[1]);
-	else {
+	// Ne plus rien faire si le compilateur renvoie une erreur
+	if (!is_array($skel_code)) {
+
 		// si c'est ce que demande le debusqueur, lui passer la main
 		if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
 			$GLOBALS['debug_objets']['code'][$nom . 'tout'] = $skel_code;

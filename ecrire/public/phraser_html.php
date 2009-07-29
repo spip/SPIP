@@ -461,7 +461,8 @@ function phraser_criteres($params, &$result) {
 		    // cas 1 seul arg ne commencant pas par du texte brut: 
 		    // erreur ou critere infixe "/"
 		    if (($v[1][1]->type != 'texte') || (trim($v[1][1]->texte) !='/'))
-		      erreur_squelette('criteres',$var->nom_champ);
+		    	erreur_squelette(_T('zbug_critere_inconnu', 
+					  array('critere' => $var->nom_champ)));
 		    else {
 		      $crit = new Critere;
 		      $crit->op = '/';
@@ -606,7 +607,7 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $nom, $ligne=1)
 				       $k - strlen(BALISE_PRE_BOUCLE));
 
 		  if (!preg_match(",".BALISE_BOUCLE . $id_boucle . "[[:space:]]*\(,", $milieu, $r))
-		    erreur_squelette((_T('zbug_erreur_boucle_syntaxe')), $id_boucle);
+			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'), $id_boucle);
 		  $pos_boucle = $n;
 		  $n = strpos($milieu, $r[0]);
 		  $result->avant = substr($milieu, $k+1, $n-$k-1);

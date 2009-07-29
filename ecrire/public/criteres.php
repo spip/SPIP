@@ -28,7 +28,7 @@ function critere_racine_dist($idb, &$boucles, $crit) {
 		'id_parent';
 
 	if ($not)
-		erreur_squelette(_T('zbug_info_erreur_squelette'), $crit->op);
+		return array(_T('zbug_info_erreur_squelette'), $crit->op);
 
 	$boucle->where[]= array("'='", "'$boucle->id_table." . "$id_parent'", 0);
 }
@@ -43,7 +43,7 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 	$id = $boucle->primary;
 
 	if ($not OR !$id)
-		erreur_squelette(_T('zbug_info_erreur_squelette'), $param);
+		return array(_T('zbug_info_erreur_squelette'), $param);
 
 	$arg = kwote(calculer_argument_precedent($idb, $id, $boucles));
 	$boucle->where[]= array("'!='", "'$boucle->id_table." . "$id'", $arg);
@@ -58,8 +58,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	$primary = $boucle->primary;
 
 	if (!$primary OR strpos($primary,',')) {
-		erreur_squelette(_T('zbug_doublon_sur_table_sans_cle_primaire'), _T('zbug_boucle') . ' ' . $idb);
-		return;
+		return array(_T('zbug_doublon_sur_table_sans_cle_primaire'), _T('zbug_boucle') . ' ' . $idb);
 	}
 
 	$not = ($crit->not ? '' : 'NOT');
@@ -260,8 +259,10 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 
 	}
 	// le cas FORUMS est gere dans le plugin forum, dans la fonction critere_FORUMS_meme_parent_dist()
- 	else erreur_squelette(_T('zbug_info_erreur_squelette'), 
-		"{meme_parent} " . _T('zbug_boucle') . ' ' . $idb);
+ 	else { 
+		$lieu = "{meme_parent} " . _T('zbug_boucle') . ' ' . $idb;
+		return array(_T('zbug_info_erreur_squelette'), $lieu);
+	}
 }
 
 // {branche ?}
@@ -327,8 +328,7 @@ function critere_fusion_dist($idb,&$boucles, $crit) {
 		if (!in_array($t, $boucles[$idb]->select))
 		    $boucles[$idb]->select[] = $t;
 	} else 
-		erreur_squelette(_T('zbug_info_erreur_squelette'),
-			"{groupby ?} " . _T('zbug_boucle') . ' ' . $idb);
+		return array(_T('zbug_info_erreur_squelette'),	"{groupby ?} " . _T('zbug_boucle') . ' ' . $idb);
 }
 
 // c'est la commande SQL "COLLATE"
@@ -343,8 +343,7 @@ function critere_collecte_dist($idb,&$boucles, $crit) {
     if ($n && (strpos($boucle->order[$n-1],'COLLATE')===false))
     	$boucle->order[$n-1] .= " . " . $boucle->modificateur['collate'];
 	} else
-		erreur_squelette(_T('zbug_info_erreur_squelette'),
-			"{collecte ?} " . _T('zbug_boucle') . ' ' . $idb);
+		return array(_T('zbug_info_erreur_squelette'), "{collecte ?} " . _T('zbug_boucle') . ' ' . $idb);
 }
 
 // http://doc.spip.org/@calculer_critere_arg_dynamique
@@ -367,7 +366,7 @@ function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix='')
 // http://www.spip.net/@par
 // http://doc.spip.org/@critere_par_dist
 function critere_par_dist($idb, &$boucles, $crit) {
-	critere_parinverse($idb, $boucles, $crit) ;
+	return critere_parinverse($idb, $boucles, $crit) ;
 }
 
 // http://doc.spip.org/@critere_parinverse
@@ -408,10 +407,10 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 		  $boucle->select[] = $texte . " AS $as";
 		  $order = "'$as'";
 	      } else {
-	      if (!preg_match(",^" . CHAMP_SQL_PLUS_FONC . '$,is', $par, $match)) 
-		erreur_squelette(_T('zbug_info_erreur_squelette'), 
-			"{par $par} " . _T('zbug_boucle') . ' ' . $idb);
-	      else {
+		if (!preg_match(",^" . CHAMP_SQL_PLUS_FONC . '$,is', $par, $match)) {
+			$lieu = "{par $par} " . _T('zbug_boucle') . ' ' . $idb;
+			return array(_T('zbug_info_erreur_squelette'), $lieu);
+		} else {
 		if (count($match)>2) { $par = substr($match[2],1,-1); $fct = $match[1]; }
 	// par hasard
 		if ($par == 'hasard') {
@@ -423,6 +422,8 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 		else if (isset($exceptions_des_jointures[$par])) {
 			list($table, $champ) =  $exceptions_des_jointures[$par];
 			$order = critere_par_joint($table, $champ, $boucle, $idb);
+			if (!$order)
+				return array(_T('zbug_info_erreur_squelette'),  "{par ?} " . _T('zbug_boucle') . ' ' . $idb);
 		}
 		else if ($par == 'date'
 		AND isset($GLOBALS['table_date'][$boucle->type_requete])) {
@@ -438,8 +439,8 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 				$t = array_search(@$t[0], $boucle->from);
 			}
 			if (!$t) {
-				erreur_squelette(_T('zbug_info_erreur_squelette'),  "{par $par } " . _T('zbug_boucle') . ' ' . $idb);
-				$order = '';
+				$lieu = "{par $par } " . _T('zbug_boucle') . ' ' . $idb;
+				return array(_T('zbug_info_erreur_squelette'), $lieu);  
 			} else 	$order = "'" . $t . '.' . $r[2] . "'";
 		} else {
 			$desc = $boucle->show;
@@ -475,8 +476,7 @@ function critere_par_joint($table, $champ, &$boucle, $idb)
 {
 	$t = array_search($table, $boucle->from);
 	if (!$t) $t = trouver_jointure_champ($champ, $boucle);
-	if (!$t) erreur_squelette(_T('zbug_info_erreur_squelette'),  "{par ?} " . _T('zbug_boucle') . ' ' . $idb);
-	return "'" . $t . '.' . $champ . "'";
+	return !$t ? '' : ("'" . $t . '.' . $champ . "'");
 }
 
 // {inverse}
@@ -516,8 +516,7 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 	$params = $crit->param;
 
 	if (count($params) < 1)
-	      erreur_squelette(_T('zbug_info_erreur_squelette'),
-			       "{agenda ?} " . _T('zbug_boucle') . ' ' . $idb);
+	      return array (_T('zbug_info_erreur_squelette'), "{agenda ?} " . _T('zbug_boucle') . ' ' . $idb);
 
 	$parent = $boucles[$idb]->id_parent;
 
@@ -625,13 +624,16 @@ function calculer_critere_parties_aux($idb, &$boucles, $param) {
 }
 
 //
-// La fonction d'aiguillage sur le nom du critere
-//
+// La fonction d'aiguillage sur le nom du critere dans leur liste
+// Si l'une au moins des fonctions associees retourne une erreur 
+// (i.e. un tableau), on propage l'information
+// Sinon, ne retourne rien (affectation directe dans l'arbre)
 
 // http://doc.spip.org/@calculer_criteres
 function calculer_criteres ($idb, &$boucles) {
 
 	$defaut = charger_fonction('DEFAUT', 'calculer_critere');
+	$err = '';
 	foreach($boucles[$idb]->criteres as $crit) {
 		$critere = $crit->op;
 		// critere personnalise ?
@@ -640,15 +642,16 @@ function calculer_criteres ($idb, &$boucles) {
 		AND (!function_exists($f=$f."_dist"))
 		AND (!function_exists($f="critere_".$critere))
 		AND (!function_exists($f=$f."_dist"))	) {
-			// fonction critere standard ?
+			// fonction critere standard 
 			$f = $defaut;
 		}
-		// Applique le critere
+		// compile le critere
 		$res = $f($idb, $boucles, $crit);
 
-		// Gestion d'erreur
-		if (is_array($res)) erreur_squelette($res);
+		// Gestion centralisee des erreurs pour pouvoir propager
+		if (is_array($res)) erreur_squelette($err = $res);
 	}
+	return $err;
 }
 
 // Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989
@@ -669,9 +672,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 {
 	$r = calculer_critere_infixe($idb, $boucles, $crit);
 	if (!$r) {
-		erreur_squelette(_T('zbug_info_erreur_squelette') . ' IN ',
-			       _T('zbug_boucle') . ' ' . $idb);
-		return;
+		return array(_T('zbug_info_erreur_squelette') . ' IN ', _T('zbug_boucle') . ' ' . $idb);
 	}
 	list($arg, $op, $val, $col, $where_complement) = $r;
 
@@ -733,7 +734,6 @@ function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 	return "sql_in('$arg',sql_quote($var)".($crit2=='NOT'?",'NOT'":"").")";
 }
 
-
 # Criteres de comparaison
 
 // http://doc.spip.org/@calculer_critere_DEFAUT
@@ -746,11 +746,10 @@ function calculer_critere_DEFAUT_dist($idb, &$boucles, $crit)
 	$r = calculer_critere_infixe($idb, $boucles, $crit);
 
 	if (!$r) {
-		erreur_squelette(_T('zbug_info_erreur_squelette'),
-			_T('zbug_boucle') .
-			" $idb " .
+		$lieu = _T('zbug_boucle') . " $idb " .
 			_T('zbug_critere_inconnu', 
-			   array('critere' => $crit->op)));
+			   array('critere' => $crit->op));
+		return array(_T('zbug_info_erreur_squelette'), $lieu);
 	} else calculer_critere_DEFAUT_args($idb, $boucles, $crit, $r);
 }
 
