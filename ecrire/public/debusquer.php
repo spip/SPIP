@@ -14,8 +14,57 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('public/decompiler');
 
-// http://doc.spip.org/@afficher_debug_contexte
-function afficher_debug_contexte($env) {
+// Le debusqueur repose sur la globale debug_objets,
+// affectee par le compilateur et le code produit par celui-ci.
+// Cette globale est un tableau avec comme index:
+// 'boucle' : tableau des arbres de syntaxe abstraite des boucles
+// 'contexte' : tableau des contextes des squelettes assembles
+// 'principal' : nom du squelette principal
+// 'profile' : tableau des temps de calcul des squelettes
+// 'resultat' : tableau des resultats envoyes (tableau de tableaux pour les boucles)
+// 'sequence' : tableau de sous-tableaux resultat/source/numero-de-ligne
+// 'sourcefile' : tableau des noms des squelettes inclus
+// 'squelette' : tableau des sources de squelettes
+// 'validation' : resultat final a passer a l'analyseur XML au besoin
+
+/**
+ * Definir le nombre maximal d'erreur possible dans les squelettes
+ * au dela, l'affichage est arrete et les erreurs sont affichees.
+ * Definir a zero permet de ne jamais bloquer, 
+ * mais il faut etre tres prudent avec cette utilisation
+ * 
+ * Sert pour les tests unitaires
+ */
+define('_DEBUG_MAX_SQUELETTE_ERREURS', 4);
+
+//
+// Point d'entree general, 
+// pour les appels involontaires ($message non vide => erreur)
+// et volontaires.
+//
+
+function public_debusquer_dist($message='', $lieu='', $quoi='') {
+	global $tableau_des_erreurs;
+
+	if ($message) {
+		if (is_array($message)) list($message, $lieu) = $message;
+		elseif ($quoi) $message = debusquer_requete($message, $lieu, $quoi);
+		spip_log("Debug: $message | $lieu (" . $GLOBALS['fond'] .")" );
+		$GLOBALS['bouton_admin_debug'] = true;
+		$tableau_des_erreurs[] = array($message, $lieu);
+		// Eviter les boucles infernales
+		if (!_DEBUG_MAX_SQUELETTE_ERREURS OR count($tableau_des_erreurs) <= _DEBUG_MAX_SQUELETTE_ERREURS) return;
+		$lieu = $quoi = '';
+	}
+	include_spip('inc/autoriser');
+	if (autoriser('debug')) {
+		if ($tableau_des_erreurs) $lieu = $quoi = '';
+		debusquer_squelette($lieu, $quoi);
+		exit;
+	}
+}
+
+function debusquer_contexte($env) {
 
 	if (is_array($env_tab = @unserialize($env)))
 		$env = $env_tab;
@@ -74,13 +123,12 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 	. "</table>";
 }
 
-
 //
 // Si une boucle cree des soucis, on peut afficher la requete fautive
 // avec son code d'erreur
 //
-// http://doc.spip.org/@erreur_requete_boucle
-function erreur_requete_boucle($query, $errno, $erreur) {
+
+function debusquer_requete($query, $errno, $erreur) {
 
 	if (preg_match(',err(no|code):?[[:space:]]*([0-9]+),i', $erreur, $regs))
 	  {
@@ -115,43 +163,6 @@ function erreur_requete_boucle($query, $errno, $erreur) {
 		    . $err;
 		}
 		$retour .=  $err . aide('erreur_mysql');
-	}
-}
-
-/**
- * Definir le nombre maximal d'erreur possible dans les squelettes
- * au dela, l'affichage est arrete et les erreurs sont affichees.
- * Definir a zero permet de ne jamais bloquer, 
- * mais il faut etre tres prudent avec cette utilisation
- * 
- * Sert pour les tests unitaires
- */
-define('_DEBUG_MAX_SQUELETTE_ERREURS', 4);
-
-//
-// Point d'entree general, 
-// pour les appels involontaires ($message non vide => erreur)
-// et volontaires.
-//
-
-function public_debusquer_dist($message='', $lieu='', $quoi='') {
-	global $tableau_des_erreurs;
-
-	if ($message) {
-		if (is_array($message)) list($message, $lieu) = $message;
-		elseif ($quoi) $message = erreur_requete_boucle($message, $lieu, $quoi);
-		spip_log("Debug: $message | $lieu (" . $GLOBALS['fond'] .")" );
-		$GLOBALS['bouton_admin_debug'] = true;
-		$tableau_des_erreurs[] = array($message, $lieu);
-		// Eviter les boucles infernales
-		if (!_DEBUG_MAX_SQUELETTE_ERREURS OR count($tableau_des_erreurs) <= _DEBUG_MAX_SQUELETTE_ERREURS) return;
-		$lieu = $quoi = '';
-	}
-	include_spip('inc/autoriser');
-	if (autoriser('debug')) {
-		if ($tableau_des_erreurs) $lieu = $quoi = '';
-		debug_dumpfile($lieu, $quoi);
-		exit;
 	}
 }
 
@@ -298,8 +309,8 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 
 // l'environnement graphique du debuggueur 
 // fin de course pour unhappy-few.
-// http://doc.spip.org/@debug_dumpfile
-function debug_dumpfile ($texte, $fonc) {
+
+function debusquer_squelette ($texte, $fonc) {
 	global $debug_objets ;
 
 	// en cas de squelette inclus,  virer le code de l'incluant:
@@ -308,8 +319,8 @@ function debug_dumpfile ($texte, $fonc) {
 	if (ob_get_length()) ob_end_clean();
 	$self = str_replace("\\'", '&#39;', self());
 	$self = parametre_url($self,'var_mode', 'debug');
-	echo debug_debut($fonc ? $fonc : $debug_objets['principal']);
-	echo "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'>";
+	echo debusquer_entete($fonc ? $fonc : $debug_objets['principal']);
+	echo "<body style='margin:0 10px;'>\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'>";
 	if (!$texte AND !$fonc)
 		echo affiche_erreurs_page($tableau_des_erreurs);
 	$titre = _request('var_mode_affiche');
@@ -317,9 +328,9 @@ function debug_dumpfile ($texte, $fonc) {
 
 	if (!$validation) {
 		echo "<div id='spip-boucles'>\n"; 
-		echo debug_affiche_tables_des_boucles($self);
+		echo debusquer_navigation($self);
 		echo "</div>";
-		echo debug_affiche(($fonc ? $fonc : $debug_objets['principal']), $debug_objets);
+		echo debusquer_source(($fonc ? $fonc : $debug_objets['principal']), $debug_objets);
 		if ($texte) {
 				$err = "";
 				$titre = 'zbug_' . $titre;
@@ -353,7 +364,7 @@ function debug_dumpfile ($texte, $fonc) {
 	echo '</body></html>';
 }
 
-function debug_affiche_tables_des_boucles($self)
+function debusquer_navigation($self)
 {
 	global $debug_objets, $spip_lang_right;
 
@@ -370,18 +381,18 @@ function debug_affiche_tables_des_boucles($self)
 		$res .= "\n<span style='display:block;float:$spip_lang_right'>"._T('zbug_profile',array('time'=>isset($debug_objets['profile'][$sourcefile])?$debug_objets['profile'][$sourcefile]:0))."</span>";
 
 		if (is_array($contexte = $debug_objets['contexte'][$sourcefile]))
-			$res .= afficher_debug_contexte($contexte);
+			$res .= debusquer_contexte($contexte);
 
 		if (isset($debug_objets['boucle']) AND is_array($debug_objets['boucle']))
 			$res .= "<table width='100%'>\n" .
-				debug_affiche_boucles($debug_objets['boucle'], $nom_skel, $self) .
+				debusquer_boucles($debug_objets['boucle'], $nom_skel, $self) .
 				"</table>\n";
 		$res .= "</fieldset>\n";
 	}
 	return $res;
 }
 
-function debug_affiche_boucles($boucles, $nom_skel, $self)
+function debusquer_boucles($boucles, $nom_skel, $self)
 {
 	$i = 0;
 	$res = '';
@@ -422,8 +433,7 @@ function debug_affiche_boucles($boucles, $nom_skel, $self)
 	return $res;
 }
 
-// http://doc.spip.org/@debug_affiche
-function debug_affiche($fonc, $tout)
+function debusquer_source($fonc, $tout)
 {
 	$objet = _request('var_mode_objet');
 	$affiche = _request('var_mode_affiche');
@@ -483,8 +493,8 @@ function debug_affiche($fonc, $tout)
 	return "<div id='debug_boucle'><fieldset id='$fonc'>$res</fieldset></div>";
 }
 
-// http://doc.spip.org/@debug_debut
-function debug_debut($titre, $erreurs='')
+// http://doc.spip.org/@debusquer_entete
+function debusquer_entete($titre, $erreurs='')
 {
 	global $visiteur_session;
 	include_spip('inc/headers');
@@ -507,7 +517,7 @@ function debug_debut($titre, $erreurs='')
 	  http_script('', 'jquery.js')
 	  . "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))
 	  . "' type='text/css' />" .
-	  "</head>\n<body style='margin:0 10px;'>";
+	  "</head>\n";
 }
 
 ?>
