@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
-include_spip('public/debug');
 
 // http://doc.spip.org/@exec_valider_xml_dist
 function exec_valider_xml_dist()
@@ -33,7 +32,6 @@ function valider_xml_ok($url, $req_ext)
 		$onfocus = "this.value='';";
 		$texte = $bandeau = $err = '';
 	} else {
-		include_spip('public/debug');
 		include_spip('inc/distant');
 		if (is_dir($url)) {
 			$dir = (substr($url,-1,1) === '/') ? $url : "$url/";

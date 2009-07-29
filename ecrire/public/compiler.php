@@ -140,8 +140,7 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 		else $path = "find_in_path(\"$fichier\")";
 		$code = "if (is_readable(\$path = $path))
  		include \$path;
-	else { include_spip(\"public/debug\");
-			erreur_squelette(_T(\"zbug_info_erreur_squelette\"),
+	else { 	erreur_squelette(_T(\"zbug_info_erreur_squelette\"),
 				 _T(\"fichier_introuvable\", array(\"fichier\" => \"$fichier\")));}";
 	} else 	{
 		$_contexte['fond'] = "\'fond\' => ' . argumenter_squelette(" . $code  . ") . '";
@@ -592,12 +591,10 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 			}
 			return '(' . substr($res,2+$descr['niv']) . ')';
 		}
-	} else return "@debug_sequence('$id_boucle', '" .
-	  ($descr['nom']) .
-	  "', " .
-	  $descr['niv'] .
-	  ",  array(" .
-	  join(" ,\n$tab", $codes) . "))";
+	} else {
+	  $nom = $descr['nom'] . $id_boucle .  ($descr['niv']?$descr['niv']:'');
+	  return "join('', array_map('array_shift', \$GLOBALS['debug_objets']['sequence']['$nom'] = array(" .  join(" ,\n$tab", $codes) . ")))";
+	}
 }
 
 define('_REGEXP_COND_VIDE_NONVIDE',"/^[(](.*)[?]\s*''\s*:\s*('[^']+')\s*[)]$/");
@@ -736,7 +733,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 		if ($code != "''") {
 			$code = compile_retour($code, $avant, $apres, $altern, $tab, $descr['niv']);
 			$codes[]= (($mode == 'validation') ?
-				"array(" . $p->ligne . ", '$commentaire', $code)"
+				"array($code, '$commentaire', " . $p->ligne . ")"
 				: (($mode == 'code') ?
 				"\n// $commentaire\n$code" :
 				$code));
@@ -975,7 +972,9 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	}
 
 	if ($debug)
-		$code = "\n\n/*\n" . public_decompiler($squelette) . "\n*/\n";
+		$code = "\n\n/*\n" . 
+			str_replace('*/', '* /', public_decompiler($squelette)) 
+			. "\n*/\n";
 	else $code = "";
 
 	foreach($boucles as $id => $boucle) {
@@ -983,7 +982,8 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		  $boucle->type_requete .
 		  " " .
 		  (!$debug ? '' : 
-			decompiler_criteres($boucle->param, $boucle->criteres)) .
+		   str_replace('*/', '* /', 
+			       decompiler_criteres($boucle->param, $boucle->criteres))) .
 		  " */\n\n" .
 		  $boucle->return;
 	}

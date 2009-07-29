@@ -49,8 +49,6 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='', $ext='htm
 
 	// pas de squelette : erreur !
 	if (!$squelette) {
-		// Indiquer une erreur squelette
-		include_spip('public/debug');
 		erreur_squelette(_T('info_erreur_squelette2',
 			array('fichier'=>"'$fond.$ext'")),
 			$GLOBALS['dossier_squelettes']);

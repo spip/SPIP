@@ -133,8 +133,8 @@ define('_DEBUG_MAX_SQUELETTE_ERREURS', 4);
 // pour les appels involontaires ($message non vide => erreur)
 // et volontaires.
 //
-// http://doc.spip.org/@erreur_squelette
-function erreur_squelette($message='', $lieu='', $quoi='') {
+
+function public_debusquer_dist($message='', $lieu='', $quoi='') {
 	global $tableau_des_erreurs;
 
 	if ($message) {
@@ -155,20 +155,6 @@ function erreur_squelette($message='', $lieu='', $quoi='') {
 	}
 }
 
-// appelee a chaque sortie de sequence (compilo.php)
-// http://doc.spip.org/@debug_sequence
-function debug_sequence($id, $nom, $niv, $sequence) {
-	global $debug_objets;
-
-	if (!$niv)
-	  {
-	    $debug_objets['sequence'][$nom.$id] = $sequence;
-	  }
-	$res = "";
-	foreach($sequence as $v) if (is_array($v)) $res .= $v[2];
-	return $res;	
-}
-
 // http://doc.spip.org/@trouve_boucle_debug
 function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 {
@@ -178,15 +164,15 @@ function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 	if (is_array($debug_objets['sequence'][$id])) {
 	 foreach($debug_objets['sequence'][$id] as $v) {
 
-	  if (!preg_match('/^(.*)(<\?.*\?>)(.*)$/s', $v[2],$r))
-	    $y = substr_count($v[2], "\n");
+	  if (!preg_match('/^(.*)(<\?.*\?>)(.*)$/s', $v[0],$r))
+	    $y = substr_count($v[0], "\n");
 	  else {
 	    if ($v[1][0] == '#')
 	      // balise dynamique
-	      $incl = $debug_objets['resultat'][$v[0]];
+	      $incl = $debug_objets['resultat'][$v[2]];
 	    else
 	      // inclusion
-	      $incl = $debug_objets['squelette'][trouve_squelette_inclus($v[2])];
+	      $incl = $debug_objets['squelette'][trouve_squelette_inclus($v[0])];
 	    $y = substr_count($incl, "\n")
 	      + substr_count($r[1], "\n") 
 	      + substr_count($r[3], "\n");
@@ -198,7 +184,7 @@ function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 	      if ($incl = trouve_squelette_inclus($v[1]))
 		return trouve_boucle_debug($n, $incl, $debut);
 	    }
-	    return array($nom, $boucle, $v[0] -1 + $n - $debut );
+	    return array($nom, $boucle, $v[2] -1 + $n - $debut );
 	  }
 	  $debut += $y;
 	 }
@@ -357,7 +343,7 @@ function debug_dumpfile ($texte, $fonc) {
 				_T($titre),	       
 				' ',
 				$err,
-				"</legend>";
+				"</legend>"; 
 		echo $texte;
 		echo "</fieldset></div>";
 		echo "\n</div>";

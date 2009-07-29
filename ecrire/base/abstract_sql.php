@@ -95,7 +95,6 @@ function sql_select (
 
 	if (!is_array($res)) return $res;
 	list($query, $num, $msg) = $res;
-	include_spip('public/debug');
 	erreur_squelette($msg, $num, $query);
 	return false;
 }

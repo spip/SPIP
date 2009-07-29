@@ -2090,7 +2090,7 @@ function env_to_attributs ($texte, $ignore_params=array()) {
 function f_jQuery ($texte) {
 	static $doublon=0;
 	if ($doublon++) {
-		include_spip('public/debug');
+		include_spip('public/debusquer');
 		$texte = affiche_erreurs_page(array(
 			array("#INSERT_HEAD",_T('double_occurrence')))
 		) . $texte;
