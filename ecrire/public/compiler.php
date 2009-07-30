@@ -995,7 +995,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	if (is_array($tableau_des_erreurs))  {
 		foreach ($tableau_des_erreurs as $err) {
 			$head .= "\n// "
-			. str_replace("\n", ' ', join(" ", $err));
+			. str_replace("\n", ' ', $err[0]);
 		}
 	}
 

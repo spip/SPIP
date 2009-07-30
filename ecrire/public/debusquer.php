@@ -47,21 +47,14 @@ function public_debusquer_dist($message='', $lieu='', $quoi='') {
 	global $tableau_des_erreurs;
 
 	if ($message) {
-		if (is_array($message)) list($message, $lieu) = $message;
-		elseif ($quoi) 
-			list($message, $lieu) = debusquer_requete($message, $lieu, $quoi);
-		elseif (is_object($lieu))
-			$lieu = _T('squelette') 
-			. ' <b> ' . $lieu->descr['sourcefile'] . '</b> '
-			. (!$lieu->id_boucle ? '' :
-				(' ' . _T('zbug_boucle') . ' <b>' . $lieu->id_boucle . '</b>'))
-			. ' ' . _T('ligne') . ' <b>' . $lieu->ligne . '</b>';
-			       
-		spip_log("Debug: $message | $lieu (" . $GLOBALS['fond'] .")" );
+		$quoi = $quoi
+		? debusquer_requete($message, $lieu, $quoi)
+		: array($message, $lieu);
+		$tableau_des_erreurs[] = $quoi;
+		spip_log("Debug: " . $quoi[0] . " (" . $GLOBALS['fond'] .")" );
 		$GLOBALS['bouton_admin_debug'] = true;
-		$tableau_des_erreurs[] = array($message, $lieu);
 		// Eviter les boucles infernales
-		if (!_DEBUG_MAX_SQUELETTE_ERREURS OR count($tableau_des_erreurs) <= _DEBUG_MAX_SQUELETTE_ERREURS) return;
+		if (!_DEBUG_MAX_SQUELETTE_ERREURS OR count($tableau_des_erreurs) <= _DEBUG_MAX_SQUELETTE_ERREURS) return ;
 		$lieu = $quoi = '';
 	}
 	include_spip('inc/autoriser');
@@ -97,9 +90,10 @@ function debusquer_contexte($env) {
 }
 
 // Si le code php produit des erreurs, on les affiche en surimpression
-// sauf pour un visiteur non admin (lui ne voit rien de special)
-// et en mode validation (fausse erreur "double occurrence insert_head")
-// ajouter &var_mode=debug pour voir les erreurs et en parler sur spip@rezo.net
+// pour les administrateurs (les autres ne voient rien de plus).
+// Le mode validation est traite a part (sinon "double occurrence insert_head")
+// Cliquer sur un numero d'erreur permet d'appeler le debusqueur.
+// Si l'erreur vient de SPIP,  en parler sur spip@rezo.net
 // http://doc.spip.org/@affiche_erreurs_page
 function affiche_erreurs_page($tableau_des_erreurs, $message='', $style='') {
 
@@ -107,28 +101,58 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='', $style='') {
 		return '';
 	$GLOBALS['bouton_admin_debug'] = true;
 	$res = '';
-	$anc = '';
-	$i = 1;
-	foreach ($tableau_des_erreurs as $err) {
-		$res .= "<tr id='req$i'><td style='text-align: right'><a href='".quote_amp($GLOBALS['REQUEST_URI'])."#spip-debug'><b>"
-		  . $i
-		  ."&nbsp;</b></a>\n</td><td>"
-		  .join("</td>\n<td>",$err)
-		  ."</td></tr>\n";
+	$href = quote_amp(parametre_url($GLOBALS['REQUEST_URI'], 'var_mode', 'debug'));
+	foreach ($tableau_des_erreurs as $i => $err) {
+		$boucle = $ligne = $skel = "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;";
+		list($msg, $lieu) = $err;
+		if (is_object($lieu)) {
+			$ligne = $lieu->ligne;
+			$nom_code = $lieu->descr['nom'];
+			$skel = $lieu->descr['sourcefile'];
+			if ($lieu->id_boucle) $boucle =  $lieu->id_boucle;
+			$h = parametre_url($href, 'var_mode_affiche', 'squelette');
+			$h = parametre_url($h, 'var_mode_objet', $nom_code);
+			$h .= '#L' . $ligne;
+		} else $h = $href . "#spip-debug";
 
-		$i++;
+		$res .= "<tr id='req$i'><td style='text-align: right'><a href='"
+		. $h
+		. "'><b>"
+		. ($i+1)
+		. "&nbsp;</b></a>\n</td><td style='text-align: left'>"
+		. $msg
+		. "</td><td style='text-align: left'>"
+		. $skel
+		. "</td><td style='text-align: left'>"
+		. $boucle
+		. "</td><td style='text-align: left'>"
+		. $ligne
+		.  "</td></tr>\n";
+
 	}
-	$cols = 1+count($err);
+
 	if (_DIR_RESTREINT AND headers_sent())
-		$style = "z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" 
-		  . ($style ? $style : " position: absolute; top: 90px; left: 10px; width: 200px;");
+		$style = " width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" 
+		  . ($style ? $style : " position: absolute; top: 90px; left: 10px;");
 
 	return "\n<table id='spip-debug' cellpadding='2'  border='1'
-	style='text-align: left;$style'><tr><th style='text-align: center' colspan='$cols'>"
-	. ($message ? $message : _T('zbug_erreur_squelette'))
+	style='text-align: left;$style'><caption style='text-align: center'>"
+	  . ($message ? $message :
+	     (count($tableau_des_erreurs) . ' ' . _T('zbug_erreur_squelette')))
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
-	. "<p style='text-align: left'>$anc</p></th></tr>"
+	. "<br /><br /></caption>"
+	. "<tr><th>" 
+	. _T('numero')
+	. "</th><th>" 
+	  . _T('message')
+	. "</th><th>"
+	. _T('squelette')
+	. "</th><th>"
+	. _T('boucle')
+	.  "</th><th>"
+	. _T('ligne')
+	. "</th></tr>"
 	. $res
 	. "</table>";
 }
