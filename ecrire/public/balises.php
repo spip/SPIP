@@ -726,8 +726,10 @@ function balise_EVAL_dist($p) {
 			$p->code = /* $r[1]. */'('.$r[2].')';
 		else
 			$p->code = "eval('return '.$php.';')";
-	} else
-		$p->code = '';
+	} else {
+		$msg = _T('zbug_balise_sans_argument', array('balise' => ' EVAL'));
+		erreur_squelette($msg, $p);
+	}
 
 	#$p->interdire_scripts = true;
 
