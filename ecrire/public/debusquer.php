@@ -48,7 +48,8 @@ function public_debusquer_dist($message='', $lieu='', $quoi='') {
 
 	if ($message) {
 		if (is_array($message)) list($message, $lieu) = $message;
-		elseif ($quoi) $message = debusquer_requete($message, $lieu, $quoi);
+		elseif ($quoi) 
+			list($message, $lieu) = debusquer_requete($message, $lieu, $quoi);
 		elseif (is_object($lieu))
 			$lieu = _T('squelette') 
 			. ' <b> ' . $lieu->descr['sourcefile'] . '</b> '
@@ -145,34 +146,33 @@ function debusquer_requete($query, $errno, $erreur) {
 
 	  } else if (($errno == 1030 OR $errno <= 1026)
 		AND preg_match(',[^[:alnum:]]([0-9]+)[^[:alnum:]],', $erreur, $regs))
-	$errno = $regs[1];
+		  $errno = $regs[1];
 
 	// Erreur systeme
 	if ($errno > 0 AND $errno < 200) {
-		$retour .= "<tt><br /><br /><blink>"
+		$retour = "<tt><br /><br /><blink>"
 		. _T('info_erreur_systeme', array('errsys'=>$errno))
 		. "</blink><br />\n<b>"
 		. _T('info_erreur_systeme2',
 			array('script' => generer_url_ecrire('admin_repair'))) 
 		. '</b><br />';
 		spip_log("Erreur systeme $errno");
+		return array($retour,'');
 	}
 	// Requete erronee
-	else {
-		$err =  "<b>"._T('avis_erreur_mysql')."</b><br /><tt>\n"
+
+	$err =  "<b>"._T('avis_erreur_mysql')." $errno</b><br /><tt>\n"
 		. htmlspecialchars($query)
 		. "\n<br /><span style='color: red'><b>"
 		. htmlspecialchars($erreur)
-		. "</b></span></tt><br />";
-		
-		if (isset($GLOBALS['debug']['aucasou'])) {
+		. "</b></span></tt><br />"
+		. aide('erreur_mysql');
+
+	if (isset($GLOBALS['debug']['aucasou'])) {
 		  list($table, $id, $serveur) = $GLOBALS['debug']['aucasou'];
-		  $err = _T('zbug_boucle') . " $id $serveur $table"
-		    .   "<br />\n"
-		    . $err;
-		}
-		$retour .=  $err . aide('erreur_mysql');
-	}
+		  $lieu = _T('zbug_boucle') . " $id $serveur $table";
+	} else $lieu = '';
+	return array($err, $lieu);
 }
 
 // http://doc.spip.org/@trouve_boucle_debug
