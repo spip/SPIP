@@ -130,6 +130,7 @@ function decompiler_criteres($sources, $comp, $fmt='', $prof=0) {
 	if (!is_array($sources)) return '';
 	$res = '';
 	$f = 'format_critere_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
+	include_spip('public/format_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES));
 	foreach($sources as $crit) {
 		if (!is_array($crit)) continue; // boucle recursive
 		array_shift($crit);
