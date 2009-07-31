@@ -747,7 +747,7 @@ et vous reconnecter au site.
 'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas',
 'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@',
 'zbug_boucle' => 'boucle',
-'zbug_boucle_recursive_undef' => 'boucle r&eacute;cursive non d&eacute;finie',
+'zbug_boucle_recursive_undef' => 'Boucle r&eacute;cursive non d&eacute;finie&nbsp;: @nom@',
 'zbug_calcul' => 'calcul',
 'zbug_champ_hors_boucle' => 'Champ @champ@ hors boucle',
 'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'une boucle de motif @motif@',
