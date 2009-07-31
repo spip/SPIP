@@ -461,9 +461,10 @@ function compose_filtres(&$p, $code) {
 						$code = "$f($code$arglist)";
 					}
 
-					// le filtre n'existe pas, on provoque une erreur
+					// le filtre n'existe pas,
+					// on le notifie
 					else {
-						erreur_squelette(_T('zbug_erreur_filtre', array('filtre'=>  texte_script($fonc))), $p->id_boucle );
+						erreur_squelette(_T('zbug_erreur_filtre', array('filtre'=>  texte_script($fonc))), $p);
 					}
 
 			}
