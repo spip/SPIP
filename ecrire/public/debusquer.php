@@ -54,7 +54,7 @@ function public_debusquer_dist($message='', $lieu='', $quoi='') {
 		spip_log("Debug: " . $quoi[0] . " (" . $GLOBALS['fond'] .")" );
 		$GLOBALS['bouton_admin_debug'] = true;
 		// Permettre a la compil de continuer
-		if (is_object($lieu) AND !$lieu->code)
+		if (is_object($lieu) AND property_exists($lieu, 'code') AND !$lieu->code)
 			$lieu->code = "''";
 		// Eviter les boucles infernales
 		if (!_DEBUG_MAX_SQUELETTE_ERREURS OR count($tableau_des_erreurs) <= _DEBUG_MAX_SQUELETTE_ERREURS) return ;

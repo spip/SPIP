@@ -752,7 +752,7 @@ et vous reconnecter au site.
 'zbug_champ_hors_boucle' => 'Champ @champ@ hors boucle',
 'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'une boucle de motif @motif@',
 'zbug_code' => 'code',
-'zbug_critere_inconnu' => 'crit&egrave;re inconnu @critere@',
+'zbug_critere_inconnu' => 'Crit&egrave;re inconnu @critere@',
 'zbug_distant_interdit' => 'externe interdit', # Contexte : une base de donn&eacute;es "externe", pas g&eacute;r&eacute;e par SPIP, mais que SPIP 1.8 sait utiliser dans ses boucles -- seul probl&egrave;mes certaines manipulations sont interdites sur ces bases-l&agrave;.
 'zbug_doublon_table_sans_cle_primaire' => 'doublons sur une table sans clef primaire atomique',
 'zbug_doublon_table_sans_index' => 'doublons sur une table sans index',
