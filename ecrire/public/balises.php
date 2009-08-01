@@ -197,7 +197,7 @@ function balise_RECHERCHE_dist($p) {
 function balise_COMPTEUR_BOUCLE_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '') {
-		$msg = _T('zbug_champ_hors_boucle',
+		$msg = array('zbug_champ_hors_boucle',
 				array('champ' => '#COMPTEUR_BOUCLE')
 			  );
 		erreur_squelette($msg, $p);
@@ -213,7 +213,7 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 function balise_TOTAL_BOUCLE_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '' || !isset($p->boucles[$b])) {
-		$msg = _T('zbug_champ_hors_boucle',
+		$msg = array('zbug_champ_hors_boucle',
 				array('champ' => "#$b" . 'TOTAL_BOUCLE')
 			  );
 		erreur_squelette($msg, $p);
@@ -277,7 +277,7 @@ function calculer_balise_expose($p, $on, $off)
 	$connect = sql_quote($p->boucles[$b]->sql_serveur);
 
 	if (!$key) {
-		$msg = _T('zbug_champ_hors_boucle', array('champ' => '#EXPOSER'));
+		$msg = array('zbug_champ_hors_boucle', array('champ' => '#EXPOSER'));
 		erreur_squelette($msg, $p);
 	}
 
@@ -491,7 +491,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 
 	// s'il n'y a pas de nom de boucle, on ne peut pas paginer
 	if ($b === '') {
-		$msg = _T('zbug_champ_hors_boucle',
+		$msg = array('zbug_champ_hors_boucle',
 				array('champ' => '#PAGINATION')
 			  );
 		erreur_squelette($msg, $p);
@@ -502,7 +502,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	// dans un boucle recursive ou qu'on a oublie le critere {pagination}
 	if (!$p->boucles[$b]->total_parties) {
 		if (!$p->boucles[$b]->table_optionnelle) {
-			$msg = _T('zbug_pagination_sans_critere',
+			$msg = array('zbug_pagination_sans_critere',
 					array('champ' => '#PAGINATION')
 				  );
 			erreur_squelette($msg, $p);
@@ -553,7 +553,7 @@ function balise_ANCRE_PAGINATION_dist($p) {
 function balise_GRAND_TOTAL_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '' || !isset($p->boucles[$b])) {
-		$msg =	_T('zbug_champ_hors_boucle',
+		$msg = array('zbug_champ_hors_boucle',
 				array('champ' => "#$b" . 'TOTAL_BOUCLE')
 			   );
 		erreur_squelette($msg, $p);
@@ -585,7 +585,7 @@ function balise_SELF_dist($p) {
 function balise_CHEMIN_dist($p) {
 	$arg = interprete_argument_balise(1,$p);
 	if (!$arg) {
-		$msg =  _T('zbug_balise_sans_argument',	array('balise' => ' CHEMIN'));
+		$msg = array('zbug_balise_sans_argument',	array('balise' => ' CHEMIN'));
 		erreur_squelette($msg, $p);
 	} else 
 	  $p->code = 'find_in_path(' . $arg .')';
@@ -597,7 +597,7 @@ function balise_CHEMIN_dist($p) {
 function balise_CHEMIN_IMAGE_dist($p) {
 	$arg = interprete_argument_balise(1,$p);
 	if (!$arg) {
-		$msg = _T('zbug_balise_sans_argument', array('balise' => ' CHEMIN_IMAGE'));
+		$msg = array('zbug_balise_sans_argument', array('balise' => ' CHEMIN_IMAGE'));
 		erreur_squelette($msg, $p);
 	} else $p->code = 'chemin_image(' . $arg .')';
 
@@ -727,7 +727,7 @@ function balise_EVAL_dist($p) {
 		else
 			$p->code = "eval('return '.$php.';')";
 	} else {
-		$msg = _T('zbug_balise_sans_argument', array('balise' => ' EVAL'));
+		$msg = array('zbug_balise_sans_argument', array('balise' => ' EVAL'));
 		erreur_squelette($msg, $p);
 	}
 
@@ -927,7 +927,7 @@ function balise_INCLURE_dist($p) {
 		$p->code = "recuperer_fond('', $_l, $_options)";
 
 	} elseif (!isset($_contexte[1])) {
-			$msg = _T('zbug_balise_sans_argument', array('balise' => ' INCLURE'));
+			$msg = array('zbug_balise_sans_argument', array('balise' => ' INCLURE'));
 			erreur_squelette($msg, $p);
 	} else 		$p->code = '(($c = find_in_path(' . $_contexte[1] . ')) ? spip_file_get_contents($c) : "")';
 
@@ -942,7 +942,7 @@ function balise_MODELE_dist($p) {
 	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $p->id_boucle, false);
 
 	if (!isset($_contexte[1])) {
-		$msg = _T('zbug_balise_sans_argument', array('balise' => ' MODELE'));
+		$msg = array('zbug_balise_sans_argument', array('balise' => ' MODELE'));
 		erreur_squelette($msg, $p);
 	} else {
 		$nom = $_contexte[1];
@@ -1126,7 +1126,7 @@ function balise_FOREACH_dist($p) {
 	}
 	//On a pas trouve la balise correspondant au tableau a traiter
 	else {
-		$msg = _T('zbug_balise_inexistante',array('from'=>'#FOREACH','balise'=>$_tableau));
+		$msg = array('zbug_balise_inexistante',array('from'=>'#FOREACH','balise'=>$_tableau));
 		erreur_squelette($msg, $p);
 	}
 	return $p;

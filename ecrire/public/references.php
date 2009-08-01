@@ -464,7 +464,7 @@ function compose_filtres(&$p, $code) {
 					// le filtre n'existe pas,
 					// on le notifie
 					else {
-						erreur_squelette(_T('zbug_erreur_filtre', array('filtre'=>  texte_script($fonc))), $p);
+						erreur_squelette(array('zbug_erreur_filtre', array('filtre'=>  texte_script($fonc))), $p);
 					}
 
 			}

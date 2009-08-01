@@ -28,7 +28,7 @@ function critere_racine_dist($idb, &$boucles, $crit) {
 		'id_parent';
 
 	if ($not)
-		return array(_T('zbug_critere_inconnu', array('critere' => $not . $crit->op)));
+		return (array('zbug_critere_inconnu', array('critere' => $not . $crit->op)));
 
 	$boucle->where[]= array("'='", "'$boucle->id_table." . "$id_parent'", 0);
 }
@@ -42,7 +42,7 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 	$id = $boucle->primary;
 
 	if ($not OR !$id)
-		return array(_T('zbug_critere_inconnu', array('critere' => $not . $crit->op)));
+		return (array('zbug_critere_inconnu', array('critere' => $not . $crit->op)));
 	$arg = kwote(calculer_argument_precedent($idb, $id, $boucles));
 	$boucle->where[]= array("'!='", "'$boucle->id_table." . "$id'", $arg);
 }
@@ -56,7 +56,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	$primary = $boucle->primary;
 
 	if (!$primary OR strpos($primary,',')) {
-		return array(_T('zbug_doublon_sur_table_sans_cle_primaire'));
+		return (array('zbug_doublon_sur_table_sans_cle_primaire'));
 	}
 
 	$not = ($crit->not ? '' : 'NOT');
@@ -258,7 +258,7 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 	}
 	// le cas FORUMS est gere dans le plugin forum, dans la fonction critere_FORUMS_meme_parent_dist()
  	else { 
-		return array(_T('zbug_critere_inconnu', array('critere' =>  $crit->op . ' ' . $boucle->type_requete)));
+		return (array('zbug_critere_inconnu', array('critere' =>  $crit->op . ' ' . $boucle->type_requete)));
 	}
 }
 
@@ -325,7 +325,7 @@ function critere_fusion_dist($idb,&$boucles, $crit) {
 		if (!in_array($t, $boucles[$idb]->select))
 		    $boucles[$idb]->select[] = $t;
 	} else 
-		return array(_T('zbug_critere_inconnu', array('critere' => $crit->op . ' ?')));
+		return (array('zbug_critere_inconnu', array('critere' => $crit->op . ' ?')));
 }
 
 // c'est la commande SQL "COLLATE"
@@ -340,7 +340,7 @@ function critere_collecte_dist($idb,&$boucles, $crit) {
     if ($n && (strpos($boucle->order[$n-1],'COLLATE')===false))
     	$boucle->order[$n-1] .= " . " . $boucle->modificateur['collate'];
 	} else
-		return array(_T('zbug_critere_inconnu', array('critere' => $crit->op . " $n")));
+		return (array('zbug_critere_inconnu', array('critere' => $crit->op . " $n")));
 }
 
 // http://doc.spip.org/@calculer_critere_arg_dynamique
@@ -405,7 +405,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 		  $order = "'$as'";
 	      } else {
 		if (!preg_match(",^" . CHAMP_SQL_PLUS_FONC . '$,is', $par, $match)) {
-			return array(_T('zbug_critere_inconnu', array('critere' => $crit->op . " $par")));
+			return (array('zbug_critere_inconnu', array('critere' => $crit->op . " $par")));
 		} else {
 		if (count($match)>2) { $par = substr($match[2],1,-1); $fct = $match[1]; }
 	// par hasard
@@ -419,7 +419,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 			list($table, $champ) =  $exceptions_des_jointures[$par];
 			$order = critere_par_joint($table, $champ, $boucle, $idb);
 			if (!$order)
-				return array(_T('zbug_critere_inconnu', array('critere' => $crit->op . " $par")));
+				return (array('zbug_critere_inconnu', array('critere' => $crit->op . " $par")));
 		}
 		else if ($par == 'date'
 		AND isset($GLOBALS['table_date'][$boucle->type_requete])) {
@@ -435,7 +435,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 				$t = array_search(@$t[0], $boucle->from);
 			}
 			if (!$t) {
-				return array(_T('zbug_critere_inconnu', array('critere' => $crit->op . " $par")));
+				return (array('zbug_critere_inconnu', array('critere' => $crit->op . " $par")));
 			} else 	$order = "'" . $t . '.' . $r[2] . "'";
 		} else {
 			$desc = $boucle->show;
@@ -511,7 +511,7 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 	$params = $crit->param;
 
 	if (count($params) < 1)
-		return array(_T('zbug_critere_inconnu', array('critere' => $crit->op . " ?")));
+		return (array('zbug_critere_inconnu', array('critere' => $crit->op . " ?")));
 
 	$parent = $boucles[$idb]->id_parent;
 
@@ -670,7 +670,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 {
 	$r = calculer_critere_infixe($idb, $boucles, $crit);
 	if (!$r) {
-		return array(_T('zbug_critere_inconnu', array('critere' => $crit->op . " ?")));
+		return (array('zbug_critere_inconnu', array('critere' => $crit->op . " ?")));
 	}
 	list($arg, $op, $val, $col, $where_complement) = $r;
 
@@ -744,7 +744,7 @@ function calculer_critere_DEFAUT_dist($idb, &$boucles, $crit)
 	$r = calculer_critere_infixe($idb, $boucles, $crit);
 
 	if (!$r) {
-		return array(_T('zbug_critere_inconnu', array('critere' => $crit->op )));
+		return (array('zbug_critere_inconnu', array('critere' => $crit->op )));
 	} else calculer_critere_DEFAUT_args($idb, $boucles, $crit, $r);
 }
 

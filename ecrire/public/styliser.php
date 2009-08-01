@@ -49,7 +49,7 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='', $ext='htm
 
 	// pas de squelette : erreur !
 	if (!$squelette) {
-		erreur_squelette(_T('info_erreur_squelette2',
+		erreur_squelette(array('info_erreur_squelette2',
 			array('fichier'=>"'$fond.$ext'")),
 			$GLOBALS['dossier_squelettes']);
 		// provoquer 404

@@ -50,6 +50,8 @@ function public_debusquer_dist($message='', $lieu='', $quoi='') {
 		$quoi = $quoi
 		? debusquer_requete($message, $lieu, $quoi)
 		: array($message, $lieu);
+		if (is_array($quoi[0]))
+		  $quoi[0] = _T($quoi[0][0], $quoi[0][1], 'font-weight: bold');
 		$tableau_des_erreurs[] = $quoi;
 		spip_log("Debug: " . $quoi[0] . " (" . $GLOBALS['fond'] .")" );
 		$GLOBALS['bouton_admin_debug'] = true;

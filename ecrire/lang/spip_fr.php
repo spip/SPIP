@@ -744,7 +744,7 @@ et vous reconnecter au site.
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
-'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas',
+'zbug_balise_inexistante' => 'erreur @from@: la balise @balise@ n\'existe pas',
 'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@',
 'zbug_boucle' => 'boucle',
 'zbug_boucle_recursive_undef' => 'Boucle r&eacute;cursive non d&eacute;finie&nbsp;: @nom@',
@@ -756,12 +756,12 @@ et vous reconnecter au site.
 'zbug_distant_interdit' => 'Externe interdit', # Contexte : une base de donn&eacute;es "externe", pas g&eacute;r&eacute;e par SPIP, mais que SPIP 1.8 sait utiliser dans ses boucles -- seul probl&egrave;mes certaines manipulations sont interdites sur ces bases-l&agrave;.
 'zbug_doublon_table_sans_cle_primaire' => 'Doublons sur une table sans clef primaire atomique',
 'zbug_doublon_table_sans_index' => 'Doublons sur une table sans index',
-'zbug_erreur_boucle_double' => 'Double d&eacute;finition de la boucle <b>@id@<b>',
-'zbug_erreur_boucle_fermant' => 'Boucle <b>@id@</b> non ferm&eacute;e',
-'zbug_erreur_boucle_syntaxe' => 'Syntaxe de la boucle <b>@id@</b> incorrecte',
+'zbug_erreur_boucle_double' => 'Double d&eacute;finition de la boucle @id@',
+'zbug_erreur_boucle_fermant' => 'Boucle @id@ non ferm&eacute;e',
+'zbug_erreur_boucle_syntaxe' => 'Syntaxe de la boucle @id@ incorrecte',
 'zbug_erreur_compilation' => 'Erreur de compilation',
 'zbug_erreur_execution_page' => 'Erreur d\'ex&eacute;cution',
-'zbug_erreur_filtre' => 'Filtre &laquo; <b>@filtre@</b> &raquo; non d&eacute;fini',
+'zbug_erreur_filtre' => 'Filtre @filtre@ non d&eacute;fini',
 'zbug_erreur_meme_parent' => 'Le crit&egrave;re {meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Erreur(s) dans le squelette',
 'zbug_hors_compilation' => 'Hors Compilation',
