@@ -164,9 +164,10 @@ function calculer_champ($p) {
 // Pour une balise nommmee NOM, elle demande a charger_fonction de chercher
 // s'il existe une fonction balise_NOM ou balise_NOM_dist
 // eventuellement en chargeant le fichier balise/NOM.php.
-// Si ce n'est pas le cas, hormis le cas historique des balise LOGO_*,
-// elle estime que c'est une reference a une colonne de table connue.
-// Les surcharges via charger_fonction sont donc possibles.
+// Si la balise est de la forme PREFIXE_SUFFIXE (cf LOGO_* et URL_*)
+// elle fait de meme avec juste le PREFIXE.
+// Si pas de fonction, c'est une reference a une colonne de table SQL connue.
+// Les surcharges des colonnes SQL via charger_fonction sont donc possibles.
 
 // http://doc.spip.org/@calculer_balise
 function calculer_balise($nom, $p) {
@@ -231,13 +232,11 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 // On leur adjoint les arguments explicites de la balise (cf #LOGIN{url})
 // et d'eventuelles valeurs transmises d'autorite par la balise.
 // (cf http://trac.rezo.net/trac/spip/ticket/1728)
-// La fonction nomme ci-dessous recevra a l'execution la valeur de tout ca.
+// La fonction nommee ci-dessous recevra a l'execution la valeur de tout ca.
 
 define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
 	array(%s%s),
-	array(%s),
-	\$GLOBALS['spip_lang'],
-	%s)");
+	array(%s))");
 
 // http://doc.spip.org/@calculer_balise_dynamique
 function calculer_balise_dynamique($p, $nom, $l, $supp=array()) {
@@ -254,11 +253,18 @@ function calculer_balise_dynamique($p, $nom, $l, $supp=array()) {
 		$param = compose_filtres_args($p, $c, ',');
 	} else	$param = "";
 	$collecte = join(',', collecter_balise_dynamique($l, $p, $nom));
+	$supp = array_merge(array(
+				  _q($p->descr['sourcefile']),
+				  _q($p->descr['nom']),
+				  _q($p->id_boucle),
+				  intval($p->ligne),
+				  _q($GLOBALS['spip_lang'])),
+			    $supp);
+
 	$p->code = sprintf(CODE_EXECUTER_BALISE, $nom,
 		$collecte,
 		($collecte ? $param : substr($param,1)), # virer la virgule
-		join(',', $supp),
-		$p->ligne);
+			   join(',', $supp));
 
 	$p->interdire_scripts = false;
 	return $p;

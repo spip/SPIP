@@ -24,17 +24,23 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR ($p) {
 }
 
 // http://doc.spip.org/@balise_FORMULAIRE_ECRIRE_AUTEUR_stat
-function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $filtres) {
+function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $context_compil) {
 	include_spip('inc/filtres');
-
 	// Pas d'id_auteur ni d'id_article ? Erreur de squelette
 	$id = intval($args[1]);
-	if (!$args[0] AND !$id)
-		return erreur_squelette(
-			_T('zbug_champ_hors_motif',
-				array ('champ' => '#FORMULAIRE_ECRIRE_AUTEUR',
-					'motif' => 'AUTEURS/ARTICLES')), '');
-
+	if (!$args[0] AND !$id) {
+		include_spip('public/interfaces');
+		$p = new Contexte;
+		$p->descr = array('sourcefile' => $context_compil[0],
+				  'nom' => $context_compil[1]);
+		$p->id_boucle = $context_compil[2];
+		$p->ligne = $context_compil[3];
+		$p->lang = $context_compil[4];
+		$msg = array('zbug_champ_hors_motif',
+				array ('champ' => 'FORMULAIRE_ECRIRE_AUTEUR',
+					'motif' => 'AUTEURS/ARTICLES'));
+		return erreur_squelette($msg, $p);
+	}
 	// Si on est dans un contexte article, 
 	// sortir tous les mails des auteurs de l'article
 	if (!$args[0] AND $id) {

@@ -272,8 +272,16 @@ if ($lang_select) lang_select();
 ?'
        .'>');
 
-function synthetiser_balise_dynamique($nom, $args, $file, $lang, $ligne) {
-	$r = sprintf(CODE_INCLURE_BALISE, $lang, $file, $nom, join(", ", array_map('argumenter_squelette', $args)), $ligne);
+// Cette fonction fabrique l'appel d'une balise dynamique a l'aide du contexte
+// de compilation prepare par calculer_balise_dynamique dans references.php:
+// 0: sourcefile
+// 1: codefile
+// 2: id_boucle
+// 3: ligne
+// 4: langue
+
+function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
+	$r = sprintf(CODE_INCLURE_BALISE, $context_compil[4], $file, $nom, join(", ", array_map('argumenter_squelette', $args)), $context_compil[3]);
 	return $r;
 }
 
@@ -292,7 +300,7 @@ function argumenter_squelette($v) {
 
 // verifier leurs arguments et filtres, et calculer le code a inclure
 // http://doc.spip.org/@executer_balise_dynamique
-function executer_balise_dynamique($nom, $args, $autres, $lang, $ligne) {
+function executer_balise_dynamique($nom, $args, $context_compil) {
 	if (!$file = find_in_path(strtolower($nom) .'.php', 'balise/', true)) {
 		// regarder si une fonction generique n'existe pas
 		if (($p = strpos($nom,"_"))
@@ -307,7 +315,7 @@ function executer_balise_dynamique($nom, $args, $autres, $lang, $ligne) {
 	// Y a-t-il une fonction de traitement des arguments ?
 	$f = 'balise_' . $nom . '_stat';
 	if (function_exists($f))
-		$r = $f($args, $autres); 
+		$r = $f($args, $context_compil); 
 	else
 		$r = $args;
 	if (!is_array($r))
@@ -327,11 +335,9 @@ function executer_balise_dynamique($nom, $args, $autres, $lang, $ligne) {
 		}
 		if (!_DIR_RESTREINT) 
 			$file = _DIR_RESTREINT_ABS . $file;
-		return synthetiser_balise_dynamique($nom, $r, $file, $lang, $ligne);
+		return synthetiser_balise_dynamique($nom, $r, $file, $context_compil);
 	}
 }
-
-
 
 // http://doc.spip.org/@lister_objets_avec_logos
 function lister_objets_avec_logos ($type) {
