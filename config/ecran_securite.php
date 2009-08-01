@@ -50,14 +50,14 @@ define('_ECRAN_SECURITE', '0.6'); // 27 juillet 2009
  *       (sauf pour id_table, qui n'est pas numerique jusqu'a [5743])
  */
 foreach ($_GET as $var => $val)
-	if (substr($var, 0,3) == 'id_' AND $var!='id_table')
-		$_GET[$var] = intval($_GET[$var]);
+	if (strncmp($var,"id_",3)==0 AND $var!='id_table')
+		$_GET[$var] = is_array($_GET[$var])?array_map('intval',$_GET[$var]):intval($_GET[$var]);
 foreach ($_POST as $var => $val)
-	if (substr($var, 0,3) == 'id_' AND $var!='id_table')
-		$_POST[$var] = intval($_POST[$var]);
+	if (strncmp($var,"id_",3)==0 AND $var!='id_table')
+		$_POST[$var] = is_array($_POST[$var])?array_map('intval',$_POST[$var]):intval($_POST[$var]);
 foreach ($GLOBALS as $var => $val)
-	if (substr($var, 0,3) == 'id_' AND $var!='id_table')
-		$GLOBALS[$var] = intval($GLOBALS[$var]);
+	if (strncmp($var,"id_",3)==0 AND $var!='id_table')
+		$GLOBALS[$var] = is_array($GLOBALS[$var])?array_map('intval',$GLOBALS[$var]):intval($GLOBALS[$var]);
 
 
 /*     - interdit la variable $cjpeg_command, qui etait utilisee sans
@@ -151,19 +151,21 @@ if (isset($_POST['tmp_lkojfghx3'])){	die();}
  * Bloque les bots quand le load deborde
  *
  */
-define('_ECRAN_SECURITE_LOAD', 4);
+if (!defined('_ECRAN_SECURITE_LOAD'))
+	define('_ECRAN_SECURITE_LOAD', 4);
+
 if (
-defined('_ECRAN_SECURITE_LOAD')
-AND _ECRAN_SECURITE_LOAD>0
-AND $_SERVER['REQUEST_METHOD'] === 'GET'
-AND strpos($_SERVER['HTTP_USER_AGENT'], 'bot')
-AND (
-  (function_exists('sys_getloadavg') AND $load = array_shift(sys_getloadavg()))
-  OR (@is_readable('/proc/loadavg') AND $load = floatval(file_get_contents('/proc/loadavg')))
-)
-AND rand(0, $load*$load) > _ECRAN_SECURITE_LOAD*_ECRAN_SECURITE_LOAD
-)
-{
+  defined('_ECRAN_SECURITE_LOAD')
+  AND _ECRAN_SECURITE_LOAD>0
+  AND $_SERVER['REQUEST_METHOD'] === 'GET'
+  AND strpos($_SERVER['HTTP_USER_AGENT'], 'bot')!==FALSE
+  AND (
+    (function_exists('sys_getloadavg') AND $load = array_shift(sys_getloadavg()))
+    OR (@is_readable('/proc/loadavg') AND $load = floatval(file_get_contents('/proc/loadavg')))
+  )
+  AND $load > _ECRAN_SECURITE_LOAD // eviter l'evaluation suivante si de toute facon le load est inferieur a la limite
+  AND rand(0, $load*$load) > _ECRAN_SECURITE_LOAD*_ECRAN_SECURITE_LOAD
+  ) {
 	header("HTTP/1.0 503 Service Unavailable");
 	header("Retry-After: 300");
 	header("Expires: 0");
