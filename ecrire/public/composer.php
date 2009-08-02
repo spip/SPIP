@@ -303,16 +303,16 @@ function argumenter_squelette($v) {
 function executer_balise_dynamique($nom, $args, $context_compil) {
 
 	$p = strpos($nom,"_");
-	$nom2 = substr($nom,0,$p+1);
-	if ($file = include_spip("balise/". strtolower($nom))) {
-		$f = 'balise_' . $nom . '_stat';
-	} else {
+	$nomfonction = $nom;
+	$nomfonction_generique = substr($nom,0,$p+1);
+	if (!$file = include_spip("balise/". strtolower($nomfonction))) {
 		// pas de fichier associe, passer au traitement generique
-		$file = include_spip("balise/" .strtolower($nom2));
+		$file = include_spip("balise/" .strtolower($nomfonction_generique));
 		if ($file) {
 			// et injecter en premier arg le nom de la balise 
 			array_unshift($args,$nom);
-			$f = 'balise_' . $nom2 . '_stat';
+			// et passer sur la fonction generique pour la suite
+			$nomfonction = $nomfonction_generique;
 		}
 		else {
 			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
@@ -321,6 +321,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 		}
 	}
 	// Y a-t-il une fonction de traitement des arguments ?
+	$f = 'balise_' . $nomfonction . '_stat';
 
 	$r = !function_exists($f) ? $args : $f($args, $context_compil); 
 
@@ -328,13 +329,12 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 
 	// verifier que la fonction dyn est la, 
 	// sinon se replier sur la generique si elle existe
-
-	if (!function_exists('balise_' . $nom . '_dyn')) {
-		$file = include_spip("balise/" .strtolower($nom2));
-		if (function_exists('balise_' . $nom2 . '_dyn')) {
+	if (!function_exists('balise_' . $nomfonction . '_dyn')) {
+		$file = include_spip("balise/" .strtolower($nomfonction_generique));
+		if (function_exists('balise_' . $nomfonction_generique . '_dyn')) {
 			// et lui injecter en premier arg le nom de la balise 
 			array_unshift($r,$nom);
-			$nom = $nom2;
+			$nomfonction = $nomfonction_generique;
 		} else {
 
 			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
@@ -345,7 +345,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 
 	if (!_DIR_RESTREINT) 
 		$file = _DIR_RESTREINT_ABS . $file;
-	return synthetiser_balise_dynamique($nom, $r, $file, $context_compil);
+	return synthetiser_balise_dynamique($nomfonction, $r, $file, $context_compil);
 }
 
 function denoncer_balise_dynamique($msg, $context_compil)
