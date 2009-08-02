@@ -33,19 +33,12 @@ function balise_FORMULAIRE_SIGNATURE ($p) {
 // http://doc.spip.org/@balise_FORMULAIRE_SIGNATURE_stat
 function balise_FORMULAIRE_SIGNATURE_stat($args, $context_compil) {
 
-	// pas d'id_article => erreur de squelette
+	// pas d'id_article => erreur de contexte
 	if (!$args[0]) {
-		include_spip('public/interfaces');
-		$p = new Contexte;
-		$p->descr = array('sourcefile' => $context_compil[0],
-				  'nom' => $context_compil[1]);
-		$p->id_boucle = $context_compil[2];
-		$p->ligne = $context_compil[3];
-		$p->lang = $context_compil[4];
 		$msg = array('zbug_champ_hors_motif',
 				array ('champ' => 'FORMULAIRE_SIGNATURE',
 				       'motif' => 'ARTICLES'));
-		return erreur_squelette($msg, $p);
+		return denoncer_balise_dynamique($msg, $context_compil);
 	}
 	// article sans petition => pas de balise
 	else if (!$args[1])

@@ -23,19 +23,12 @@ function balise_FORMULAIRE_SITE ($p) {
 // http://doc.spip.org/@balise_FORMULAIRE_SITE_stat
 function balise_FORMULAIRE_SITE_stat($args, $context_compil) {
 
-	// Pas d'id_rubrique ? Erreur de squelette
+	// Pas d'id_rubrique ? Erreur de contexte
 	if (!$args[0]) {
-		include_spip('public/interfaces');
-		$p = new Contexte;
-		$p->descr = array('sourcefile' => $context_compil[0],
-				  'nom' => $context_compil[1]);
-		$p->id_boucle = $context_compil[2];
-		$p->ligne = $context_compil[3];
-		$p->lang = $context_compil[4];
 		$msg = array('zbug_champ_hors_motif',
 				array ('champ' => 'FORMULAIRE_SITE',
 					'motif' => 'RUBRIQUES'));
-		return erreur_squelette($msg, $p);
+		return denoncer_balise_dynamique($msg, $context_compil);
 	}
 	// Verifier que les visisteurs sont autorises a proposer un site
 
