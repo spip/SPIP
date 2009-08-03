@@ -130,14 +130,19 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 		if ($path = find_in_path($fichier))
 			$path = "\"$path\"";
 		else $path = "find_in_path(\"$fichier\")";
+
+		$code = str_replace(array("\\","'"),
+				    array("\\\\","\\'"), 
+				    join(',', fliquer_inclure_dynamique($p)));
 		$code = "if (is_readable(\$path = $path))
  		include \$path;
-	else { 	erreur_squelette(_T(\"zbug_info_erreur_squelette\"),
-				 _T(\"fichier_introuvable\", array(\"fichier\" => \"$fichier\")));}";
+	else  denoncer_inclure_dynamique(array(\"fichier_introuvable\", array(\"fichier\" => \"$fichier\")),
+ 			array($code));";
 	} else 	{
 		$_contexte['fond'] = "\'fond\' => ' . argumenter_squelette(" . $code  . ") . '";
 		$code = 'include _DIR_RESTREINT . "public.php";';
 	}
+
 	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
 	if ($env = (isset($_contexte['env'])|| isset($_contexte['self']))) {
 		unset($_contexte['env']);
@@ -167,10 +172,12 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 			.'	echo "</div><!-- ajaxbloc -->\\n";';
 	}
 
-	return "\n'<".
+	$code = "\n'<".
 		"?php\n".'$contexte_inclus = '.$contexte.";\n"
 		. $code
 		. "\n?'." . "'>'";
+
+	return $code;
 }
 
 //
