@@ -327,7 +327,8 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 		else {
 			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
 			  _T('zxml_inconnu_balise');
-			return denoncer_inclure_dynamique($msg, $context_compil);
+			denoncer_inclure_dynamique($msg, $context_compil);
+			return '';
 		}
 	}
 	// Y a-t-il une fonction de traitement des arguments ?
@@ -349,7 +350,8 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 
 			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
 			  _T('zxml_inconnu_balise');
-			return denoncer_inclure_dynamique($msg, $context_compil);
+			denoncer_inclure_dynamique($msg, $context_compil);
+			return '';
 		}
 	}
 
@@ -367,7 +369,7 @@ function denoncer_inclure_dynamique($msg, $context_compil)
 	$p->id_boucle = $context_compil[2];
 	$p->ligne = $context_compil[3];
 	$p->lang = $context_compil[4];
-	return erreur_squelette($msg, $p);
+	erreur_squelette($msg, $p);
 }
 
 // http://doc.spip.org/@lister_objets_avec_logos
