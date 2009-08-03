@@ -266,4 +266,15 @@ function quete_debut_pagination($primary,$valeur,$pas,$res,$serveur=''){
 	return floor($pos/$pas)*$pas;
 }
 
+function denoncer_inclure_dynamique($msg, $context_compil)
+{
+	include_spip('public/interfaces');
+	$p = new Contexte;
+	$p->descr = array('sourcefile' => $context_compil[0],
+				  'nom' => $context_compil[1]);
+	$p->id_boucle = $context_compil[2];
+	$p->ligne = $context_compil[3];
+	$p->lang = $context_compil[4];
+	erreur_squelette($msg, $p);
+}
 ?>
