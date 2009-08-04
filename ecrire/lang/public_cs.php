@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Na t&eacute;to adrese nen&iacute; &#382;&aacute;dn&yacute; odkaz',
 'aucune_breve' => 'Na t&eacute;to adrese nen&iacute; &#382;&aacute;dn&aacute; novinka',
 'aucune_rubrique' => 'Na t&eacute;to adrese nen&iacute; &#382;&aacute;dn&aacute; rubrika',
+'autres' => 'Ostatn&iacute;',
 'autres_breves' => 'Dal&#353;&iacute; novinky',
 'autres_groupes_mots_clefs' => 'Dal&#353;&iacute; skupiny kl&iacute;&#269;ov&yacute;ch slov',
 'autres_sites' => 'Dal&#353;&iacute; odkazy',
@@ -28,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Koment&aacute;&#345; k tomuto odkazu',
+'copie_document_impossible' => 'Dokument nen&iacute; mo&#382;n&eacute; kop&iacute;rovat',
 
 // D
 'date' => 'Datum',
@@ -36,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Posledn&iacute; &#269;l&aacute;nky',
 'derniers_commentaires' => 'Posledn&iacute; koment&aacute;&#345;e',
 'derniers_messages_forum' => 'Posledn&iacute; p&#345;&iacute;sp&#283;vky v diskusn&iacute;ch f&oacute;rech',
+'documents_interdits_forum' => 'Dokumenty jsou ve f&oacute;ru zak&aacute;zan&eacute;',
 
 // E
 'edition_mode_texte' => 'Textov&yacute; re&#382;im',
@@ -45,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Vstup pro autory',
 
 // F
+'formats_acceptes' => 'Povolen&eacute; form&aacute;ty: @formats@.',
 'forum' => 'F&oacute;rum',
 
 // H
@@ -52,6 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // J
 'jours' => 'dn&#367;',
+
+// L
+'lien_connecter' => 'P&#345;ihl&aacute;&#353;en&iacute;',
 
 // M
 'meme_auteur' => 'Od stejn&eacute;ho autora',
@@ -95,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Str&aacute;nky vytvo&#345;eny pomoc&iacute; SPIP',
 'sites_web' => 'Odkazy',
 'sous_rubriques' => 'Podrubriky',
+'spam' => 'Spam',
 'suite' => 'pokra&#269;ov&aacute;n&iacute;',
 'sur_web' => 'Na webu',
 'syndiquer_rubrique' => 'Zahrnout tuto rubriku',
