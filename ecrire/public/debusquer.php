@@ -43,16 +43,23 @@ define('_DEBUG_MAX_SQUELETTE_ERREURS', 9);
 // et volontaires.
 //
 
-function public_debusquer_dist($message='', $lieu='', $quoi='') {
+function public_debusquer_dist($message='', $lieu='') {
 	global $tableau_des_erreurs;
 
+	// Erreur ou appel final ?
 	if ($message) {
-		$quoi = $quoi
-		? debusquer_requete($message, $lieu, $quoi)
-		: array($message, $lieu);
-		if (is_array($quoi[0]))
-		  $quoi[0] = _T($quoi[0][0], $quoi[0][1], 'spip-debug-arg');
-		$tableau_des_erreurs[] = $quoi;
+	  // Message a composer ?
+		if (is_array($message)) {
+			if (!is_numeric($message[0]))
+			  // message avec argument: instancier
+			  $message = _T($message[0], $message[1], 'spip-debug-arg');
+			else {
+			  // message SQL: interpreter
+			  $message = debusquer_requete($message);
+			}
+		}
+
+		$tableau_des_erreurs[] = array($message, $lieu);
 		spip_log("Debug: " . $quoi[0] . " (" . $GLOBALS['fond'] .")" );
 		$GLOBALS['bouton_admin_debug'] = true;
 		// Permettre a la compil de continuer
@@ -167,14 +174,15 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='', $style='') {
 // avec son code d'erreur
 //
 
-function debusquer_requete($query, $errno, $erreur) {
+function debusquer_requete($message) {
 
-	if (preg_match(',err(no|code):?[[:space:]]*([0-9]+),i', $erreur, $regs))
+	list($errno, $msg, $query) = $message;
+	if (preg_match(',err(no|code):?[[:space:]]*([0-9]+),i', $msg, $regs))
 	  {
 		$errno = $regs[2];
 
 	  } else if (($errno == 1030 OR $errno <= 1026)
-		AND preg_match(',[^[:alnum:]]([0-9]+)[^[:alnum:]],', $erreur, $regs))
+		AND preg_match(',[^[:alnum:]]([0-9]+)[^[:alnum:]],', $msg, $regs))
 		  $errno = $regs[1];
 
 	// Erreur systeme
@@ -191,17 +199,13 @@ function debusquer_requete($query, $errno, $erreur) {
 	// Requete erronee
 
 	$err =  "<b>"._T('avis_erreur_mysql')." $errno</b><br /><tt>\n"
-		. htmlspecialchars($query)
+		. htmlspecialchars($msg)
 		. "\n<br /><span style='color: red'><b>"
-		. htmlspecialchars($erreur)
+		. htmlspecialchars($query)
 		. "</b></span></tt><br />"
 		. aide('erreur_mysql');
 
-	if (isset($GLOBALS['debug']['aucasou'])) {
-		  list($table, $id, $serveur) = $GLOBALS['debug']['aucasou'];
-		  $lieu = _T('zbug_boucle') . " $id $serveur $table";
-	} else $lieu = '';
-	return array($err, $lieu);
+	return $err;
 }
 
 // http://doc.spip.org/@trouve_boucle_debug

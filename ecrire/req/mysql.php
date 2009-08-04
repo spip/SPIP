@@ -182,13 +182,8 @@ function spip_mysql_select($select, $from, $where='',
 
 	// renvoyer la requete inerte si demandee
 	if ($requeter === false) return $query;
-	if (!($res = spip_mysql_query($query, $serveur, $requeter))) {
-		$res = array(substr($query, 7),
-			spip_mysql_errno(),
-			spip_mysql_error($query) );
-	}
-
-	return $res;
+	$r = spip_mysql_query($query, $serveur, $requeter);
+	return $r ? $r : $query;
 }
 
 // 0+x avec un champ x commencant par des chiffres est converti par MySQL
@@ -505,7 +500,7 @@ function spip_mysql_countsel($from = array(), $where = array(),
 	$r = spip_mysql_select("COUNT($c)", $from, $where,'', '', '', $having, $serveur, $requeter);
 
 	if (!$requeter) return $r;
-	if (!$r) return 0;
+	if (!is_resource($r)) return 0;
 	list($c) = mysql_fetch_array($r, MYSQL_NUM);
 	mysql_free_result($r);
 	return $c;

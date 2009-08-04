@@ -412,7 +412,11 @@ function calculer_requete_sql($boucle)
 				    $boucle->limit))
 	  . calculer_dec('$having', calculer_dump_array($boucle->having))
 	  . "\n\t// REQUETE\n\t"
-	  . '$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect);';
+	  . '$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect,'
+	  . "\n\t\t\tarray("
+	  . join(',', fliquer_inclure_dynamique($boucle))
+	  . "));\n\t"
+	  . 'if (!$result) return "";'; // erreur: ne pas executer sql_fetch
 }
 
 // http://doc.spip.org/@calculer_dec
