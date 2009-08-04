@@ -154,8 +154,7 @@ $var_f = charger_fonction($exec);
 $var_f();
 
 if ($GLOBALS['var_mode'] == 'debug') {
-	$var_mode_objet = _request('var_mode_objet');
-	erreur_squelette("", "", $var_mode_objet);
+	erreur_squelette("", "");
 }
 if (isset($tableau_des_erreurs) AND count($tableau_des_erreurs) AND $affiche_boutons_admin) {
 	include_spip('public/debusquer');
