@@ -27,13 +27,15 @@ include_spip('inc/cookie');
 $exec = _request('exec');
 $reinstall = _request('reinstall')?_request('reinstall'):($exec=='install'?'oui':NULL);
 //
-// Authentification, redefinissable
+// Les scripts d'insallation n'authentifient pas, forcement,
+// alors il faut blinder les variables d'URL
 //
 if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
+	set_request('transformer_xml');
 	$var_auth = true;
 } else {
-	// cette variable es reutilisee en fin de script
+	// Authentification, redefinissable
 	$auth = charger_fonction('auth', 'inc');
 	$var_auth = $auth();
 	if ($var_auth) { 
@@ -141,7 +143,7 @@ if (!$var_auth AND isset($_COOKIE['spip_lang_ecrire'])
 
 // Passer la main aux outils XML a la demande (meme les redac s'ils veulent).
 // mais seulement si on a bien ete auhentifie
-if ($var_f = _request('transformer_xml') AND isset($auth)) {
+if ($var_f = _request('transformer_xml')) {
 	set_request('var_url', $exec);
 	$exec = $var_f;
 }
