@@ -47,10 +47,12 @@ include_spip('public/jointures');
 // Le resultat est un tableau indexe par les Vi
 // Toutefois, si le premier argument n'est pas de la forme Vi=Ei
 // il est conventionnellement la valeur de l'index 1.
-// Voir la balise #INCLURE
+// pour la balise #INCLURE
+// mais pas pour <INCLURE> dont le fond est defini explicitement.
+
 
 // http://doc.spip.org/@argumenter_inclure
-function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, $echap=true	, $lang = ''){
+function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, $echap=true, $lang = '', $fond1=false){
 	$l = array();
 
 	foreach($params as $k => $couple) {
@@ -76,10 +78,9 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 				  if (preg_match(',^[\'"](.*)[\'"]$,', $v, $m)) $v = $m[1];
 				  $val[0] = new Texte;
 				  $val[0]->texte = $v;
-				} elseif ($k OR $n) {
+				} elseif ($k OR $n OR $fond1) {
 				  $auto = true;
 				} else $var = 1;
-
 
 				if ($var == 'lang') {
 				  $lang = !$auto 
@@ -116,10 +117,7 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 // http://doc.spip.org/@calculer_inclure
 function calculer_inclure($p, &$boucles, $id_boucle) {
 
-	$_contexte = argumenter_inclure($p->param, false, $p, $boucles, $id_boucle);
-	// Eliminer le hack pour #INCLURE, 
-	// (s'il est la, c'est une erreur, mais ce n'est pas a  PHP de le dire)
-	if (isset($_contexte[1])) unset($_contexte[1]);
+	$_contexte = argumenter_inclure($p->param, false, $p, $boucles, $id_boucle, true, '', true);
 	if (is_string($p->texte)) {
 		$fichier = $p->texte;
 		$code = "'$fichier'";
