@@ -79,7 +79,7 @@ function exec_export_all_args($rub, $gz)
 	$nom = $gz 
 	?  _request('znom_sauvegarde') 
 	:  _request('nom_sauvegarde');
-	if ($nom === '') $nom = 'dump';
+	if (!preg_match(',^[\w_][\w_.]*$,', $nom)) $nom = 'dump';
 	$archive = $nom . '.xml' . $gz;
 	list($tables,) = export_all_list_tables();
 	$clic =  _T('bouton_valider');
