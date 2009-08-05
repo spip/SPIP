@@ -33,6 +33,7 @@ if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
 	$var_auth = true;
 } else {
+	// cette variable es reutilisee en fin de script
 	$auth = charger_fonction('auth', 'inc');
 	$var_auth = $auth();
 	if ($var_auth) { 
@@ -139,7 +140,8 @@ if (!$var_auth AND isset($_COOKIE['spip_lang_ecrire'])
 
 
 // Passer la main aux outils XML a la demande (meme les redac s'ils veulent).
-if ($var_f = _request('transformer_xml')) {
+// mais seulement si on a bien ete auhentifie
+if ($var_f = _request('transformer_xml') AND isset($auth)) {
 	set_request('var_url', $exec);
 	$exec = $var_f;
 }
