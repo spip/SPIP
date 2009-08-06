@@ -383,10 +383,16 @@ function info_copyright() {
 		. abs($svn_revision) . "</a>]";
 	}
 
+	// et la version de l'ecran de securite
+	$secu = defined('_ECRAN_SECURITE')
+		? "<br />"._L(' + ecran_securite v&nbsp;')._ECRAN_SECURITE
+		: '';
+
 	return _T('info_copyright',
 		   array('spip' => "<b>SPIP $version</b> ",
 			 'lien_gpl' =>
-			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' onclick=\"window.open(this.href, 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
+			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' onclick=\"window.open(this.href, 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"))
+			. $secu;
 
 }
 

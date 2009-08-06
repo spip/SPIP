@@ -5,9 +5,11 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '0.6'); // 27 juillet 2009
+define('_ECRAN_SECURITE', '0.7'); // 5 aout 2009
 
 /*
+ * Documentation : http://www.spip.net/fr_article4200.html
+ *
  * Ce petit script est inclus automatiquement par SPIP s'il est present
  * dans le repertoire config/ ; il peut aussi etre inclus pour tous les
  * codes php, avec la commande auto_prepend_file dans php.ini
