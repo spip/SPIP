@@ -2688,4 +2688,18 @@ function filtre_explode_dist($a,$b){return explode($b,$a);}
  */
 function filtre_implode_dist($a,$b){return implode($b,$a);}
 
+/*
+ * Deux verrues pour que le pipeline de revisions soit correct
+ * elles vont sauter quand ca passera en plugin
+ */
+function premiere_revision($x) {
+	include_spip('inc/revisions');
+	return enregistrer_premiere_revision($x);
+}
+function nouvelle_revision($x) {
+	include_spip('inc/revisions');
+	return enregistrer_nouvelle_revision($x);
+}
+
+
 ?>

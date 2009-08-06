@@ -285,8 +285,8 @@ $spip_pipeline = array(
 	'post_propre' => '',
 	'pre_typo' => '|extraire_multi',
 	'post_typo' => '|quote_amp',
-	'pre_edition' => '|enregistrer_premiere_revision',
-	'post_edition' => '|enregistrer_nouvelle_revision',
+	'pre_edition' => '|premiere_revision',
+	'post_edition' => '|nouvelle_revision',
 	'pre_syndication' => '',
 	'post_syndication' => '',
 	'pre_indexation' => '',
@@ -309,11 +309,7 @@ $spip_pipeline = array(
 );
 
 # la matrice standard (fichiers definissant les fonctions a inclure)
-$spip_matrice = array (
-	# temporaire pour corriger les revisions, avant de les passer en plugin
-	'enregistrer_premiere_revision' => "_DIR_PLUGINS../"._DIR_RESTREINT_ABS.'inc/revisions.php',
-	'enregistrer_nouvelle_revision' => "_DIR_PLUGINS../"._DIR_RESTREINT_ABS.'inc/revisions.php'
-);
+$spip_matrice = array ();
 # les plugins a activer
 $plugins = array();  // voir le contenu du repertoire /plugins/
 # les surcharges de include_spip()
@@ -369,7 +365,7 @@ $liste_des_authentifications = array(
 // numero de branche, utilise par les plugins 
 // pour specifier les versions de SPIP necessaire
 // il faut s'en tenir a un nombre de decimales fixe ex : 2.0.0, 2.0.0-dev, 2.0.0-beta, 2.0.0-beta2 
-$spip_version_branche = "2.0.8";
+$spip_version_branche = "2.0.9";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
 $spip_version_code = 12691;
