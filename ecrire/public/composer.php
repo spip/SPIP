@@ -61,26 +61,74 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 		$skel_code = $compiler($skel, $nom, $gram, $source, $connect);
 	}
 
-	// Ne plus rien faire si le compilateur renvoie une erreur
-	if (!is_array($skel_code)) {
+	// Ne plus rien faire si le compilateur n'a pas pu operer.
+	if (!$skel_code) return false;
 
-		// si c'est ce que demande le debusqueur, lui passer la main
-		if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
-			$GLOBALS['debug_objets']['code'][$nom . 'tout'] = $skel_code;
-			if ($GLOBALS['debug_objets']['sourcefile']
-			AND (_request('var_mode_objet') == $nom)
-			AND (_request('var_mode_affiche') == 'code')
-)
-				erreur_squelette('', $skel_code);
-		}
-		eval('?'.'>'.$skel_code);
-		if (function_exists($nom)) {
-			ecrire_fichier ($phpfile, $skel_code);
-			return array($nom, $skel_code);
-		} else {
-			erreur_squelette(_T('zbug_erreur_compilation'), $source);
+	foreach($skel_code as $id => $boucle) {
+		$f = $boucle->return;
+		if (@eval("return true; $f ;") ===  false) {
+		// Code syntaxiquement faux (critere etc mal programme')
+			erreur_squelette(_T('zbug_erreur_compilation'), $boucle); 
+			// continuer pour trouver d'autres fautes eventuelles
+			// mais prevenir que c'est mort
+			$nom = '';
+		} 
+		// Contexte de compil inutile a present
+		// (mais la derniere valeur de $boucle est utilisee ci-dessous)
+		$skel_code[$id] = $f;
+	}
+
+	if ($nom) {
+		// Si le code est bon, concatener et mettre en cache
+		if (function_exists($nom))
+			$code = squelette_traduit($skel, $source, $phpfile, $skel_code);
+		else {
+			// code semantiquement faux: bug du compilateur
+			erreur_squelette(_T('zbug_erreur_compilation'), $boucle);
+			$nom = '';
 		}
 	}
+
+	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
+
+		// Tracer ce qui vient d'etre compile
+		$GLOBALS['debug_objets']['code'][$nom . 'tout'] = $skel_code;
+
+		// si c'est ce que demande le debusqueur, lui passer la main
+		if ($GLOBALS['debug_objets']['sourcefile']
+		AND (_request('var_mode_objet') == $nom)
+		AND (_request('var_mode_affiche') == 'code')  )
+			erreur_squelette('', $code);
+	}
+	return $nom ? array($nom, $code) : false;
+}
+
+function squelette_traduit($squelette, $sourcefile, $phpfile, $boucles)
+{
+	global $tableau_des_erreurs;
+
+	$code = '';
+	if (is_array($tableau_des_erreurs))  {
+		foreach ($tableau_des_erreurs as $err) {
+			$code .= "\n// "
+			. str_replace("\n", ' ', $err[0]);
+		}
+	}
+
+	// Le dernier index est '' (fonction principale)
+	$noms = substr(join (', ', array_keys($boucles)), 0, -2);
+	if (CODE_COMMENTE)
+	$code = "
+/*
+ * Squelette : $sourcefile
+ * Date :      ".gmdate("D, d M Y H:i:s", @filemtime($sourcefile))." GMT
+ * Compile :   ".gmdate("D, d M Y H:i:s", time())." GMT
+ * " . (!$boucles ?  "Pas de boucle" :	("Boucles :   " . $noms)) ."
+ */ " ;
+
+	$code = '<'. "?php\n" . $code . join('', $boucles)  . "\n" .'>';
+	ecrire_fichier($phpfile, $code);
+	return $code;
 }
 
 // Le squelette compile est-il trop vieux ?

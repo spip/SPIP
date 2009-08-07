@@ -796,19 +796,20 @@ function compile_inclure_doublons($lexemes)
 	return false;
 }
 
-// Prend en argument le texte d'un squelette (et son fichier d'origine)
-// sa grammaire et un nom.
-// Retourne une fonction PHP/SQL portant ce nom et calculant une page.
+// Prend en argument le texte d'un squelette, le nom de son fichier d'origine,
+// sa grammaire et un nom. Retourne False en cas d'erreur,
+// sinon retourne un tableau de fonctions PHP compilees a evaluer,
+// notamment une fonction portant ce nom et calculant une page.
 // Pour appeler la fonction produite, lui fournir 2 tableaux de 1 e'le'ment:
 // - 1er: element 'cache' => nom (du fichier ou` mettre la page)
 // - 2e: element 0 contenant un environnement ('id_article => $id_article, etc)
-// Elle retourne alors un tableau de 5 e'le'ments:
+// Elle retournera alors un tableau de 5 e'le'ments:
 // - 'texte' => page HTML, application du squelette a` l'environnement;
 // - 'squelette' => le nom du squelette
 // - 'process_ins' => 'html' ou 'php' selon la pre'sence de PHP dynamique
 // - 'invalideurs' =>  de'pendances de cette page, pour invalider son cache.
 // - 'entetes' => tableau des entetes http
-// En cas d'erreur, elle retourne un tableau des 2 premiers elements seulement
+// En cas d'erreur, elle retournera un tableau des 2 premiers elements seulement
 
 // http://doc.spip.org/@public_compiler_dist
 function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect=''){
@@ -832,7 +833,8 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	return compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect);
 }
 
-// Point d'entree pour arbre de syntaxe abstraite fourni
+// Point d'entree pour arbre de syntaxe abstraite fourni en premier argument
+// Autres specifications comme ci-dessus
 
 function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect=''){
 	global $tables_jointures;
@@ -930,7 +932,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		if ($type AND $type != 'boucle') {
 			if ($boucle->param) {
 				$res = calculer_criteres($id, $boucles);
-				if (is_array($res)) return $res; # erreur
+				if (is_array($res)) return false; # erreur
 			}
 			$descr['id_mere'] = $id;
 			$boucles[$id]->return =
@@ -981,51 +983,35 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			$GLOBALS['debug_objets']['code'][$nom.$id] = $boucles[$id]->return;
 	}
 
-	if ($debug)
-		$code = "\n\n/*\n" . 
-			str_replace('*/', '* /', public_decompiler($squelette)) 
-			. "\n*/\n";
-	else $code = "";
-
 	foreach($boucles as $id => $boucle) {
-		$code .= "\n\n/* BOUCLE " .
-		  $boucle->type_requete .
-		  " " .
-		  (!$debug ? '' : 
-		   str_replace('*/', '* /', 
-			       decompiler_criteres($boucle->param, $boucle->criteres))) .
-		  " */\n\n" .
-		  $boucle->return;
+		$boucle->return = "\n\n/* BOUCLE " .
+			$boucle->type_requete .
+			" " .
+			(!$debug ? '' : 
+			str_replace('*/', '* /', 
+				decompiler_criteres($boucle->param, 
+						$boucle->criteres))) .
+			" */\n\n " .
+			$boucle->return;
 	}
 
 	$secondes = spip_timer('calcul_skel');
 	spip_log("COMPIL ($secondes) [$sourcefile] $nom.php");
 
-	$head = '';
-	if (is_array($tableau_des_erreurs))  {
-		foreach ($tableau_des_erreurs as $err) {
-			$head .= "\n// "
-			. str_replace("\n", ' ', $err[0]);
-		}
-	}
-
-	if (!CODE_COMMENTE)
-		$head .= '';
-	else $head = "
-/*
- * Squelette : $sourcefile
- * Date :      ".gmdate("D, d M Y H:i:s", @filemtime($sourcefile))." GMT
- * Compile :   ".gmdate("D, d M Y H:i:s", time())." GMT ($secondes)
- * " . (!$boucles ?  "Pas de boucle" :
-	("Boucles :   " . join (', ', array_keys($boucles)))) ."
- */ " ;
-
-	$code = '<'.'?php' . $head .  $code . '
-
+	// Assimiler la fct principale a une boucle anonyme, c'est plus simple
+	$code = new Boucle;
+	$code->descr = $descr;
+	$code->return = '
 //
-// Fonction principale du squelette ' . $sourcefile . 
-	  ($connect ? " pour $connect" : '') . ".
-//
+// Fonction principale du squelette ' . 
+	$sourcefile . 
+	($connect ? " pour $connect" : '') . 
+	(!CODE_COMMENTE ? '' : "\n// Temps de compilation total: $secondes") .
+	"\n//" .
+	(!$debug ? '' : ("\n/*\n" . 
+			str_replace('*/', '* /', public_decompiler($squelette)) 
+				      . "\n*/")) . "
+
 function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0) {
 
 '
@@ -1044,12 +1030,10 @@ function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0)
 
 	return analyse_resultat_skel(".var_export($nom,true)
 		.", \$Cache, \$page, ".var_export($sourcefile,true).");
-}
+}";
 
-?".">";
-
-	return $code;
-
+	$boucles[''] = $code;
+	return $boucles;
 }
 
 ?>
