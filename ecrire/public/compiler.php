@@ -113,7 +113,15 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 
 //
 // Calculer un <INCLURE()>
-//
+// La constante ci-dessous donne le code general quand il s'agit d'un script.
+// Pour un squelette, c'est plus simple.
+
+define('CODE_INCLURE_SCRIPT', 'if (is_readable($path = %s))
+	include $path;
+else  denoncer_inclure_dynamique(array("fichier_introuvable", array("fichier" => "%s")),
+		array(%s));'
+);
+
 // http://doc.spip.org/@calculer_inclure
 function calculer_inclure($p, &$boucles, $id_boucle) {
 
@@ -137,11 +145,8 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 
 		$code = str_replace(array("\\","'"),
 				    array("\\\\","\\'"), 
-				    join(',', fliquer_inclure_dynamique($p)));
-		$code = "if (is_readable(\$path = $path))
- 		include \$path;
-	else  denoncer_inclure_dynamique(array(\"fichier_introuvable\", array(\"fichier\" => \"$fichier\")),
- 			array($code));";
+				    memoriser_contexte_compil($p));
+		$code = sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $code);
 	} else 	{
 		$_contexte['fond'] = "\'fond\' => ' . argumenter_squelette(" . $code  . ") . '";
 		$code = 'include _DIR_RESTREINT . "public.php";';
@@ -195,18 +200,6 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 	$boucles[$id_boucle] = pipeline('post_boucle', $boucles[$id_boucle]);
 
-	if ($boucles[$id_boucle]->type_requete == 'boucle')  {
-		$corps = calculer_boucle_rec($id_boucle, $boucles);
-		$req = "";
-	} else {
-		$corps = calculer_boucle_nonrec($id_boucle, $boucles);
-		// attention, ne calculer la requete que maintenant
-		// car la fonction precedente appelle index_pile qui influe dessus
-		$req = (($init = $boucles[$id_boucle]->doublons)
-			? ("\n\t$init = array();") : '')
-		. calculer_requete_sql($boucles[$id_boucle]);
-	}
-
 	// en mode debug memoriser les premiers passages dans la boucle,
 	// mais pas tous, sinon ca pete.
 	if  (_request('var_mode_affiche') != 'resultat') 
@@ -216,7 +209,9 @@ function calculer_boucle($id_boucle, &$boucles) {
 		$trace = "if (count(@\$GLOBALS['debug_objets']['resultat']['$trace'])<3)
 	    \$GLOBALS['debug_objets']['resultat']['$trace'][] = \$t0;";
 	}
-	return $req . $corps . $trace . "\n\treturn \$t0;";
+	return ($boucles[$id_boucle]->type_requete == 'boucle')
+	? calculer_boucle_rec($id_boucle, $boucles, $trace) 
+	: calculer_boucle_nonrec($id_boucle, $boucles, $trace);
 }
 
 // compil d'une boucle recursive. 
@@ -224,19 +219,35 @@ function calculer_boucle($id_boucle, &$boucles) {
 // reference, car par definition un tel passage ne les sauvegarde pas
 
 // http://doc.spip.org/@calculer_boucle_rec
-function calculer_boucle_rec($id_boucle, &$boucles) {
+function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
 	$nom = $boucles[$id_boucle]->param[0];
 	return "\n\t\$save_numrows = (\$Numrows['$nom']);"
 	. "\n\t\$t0 = " . $boucles[$id_boucle]->return . ";"
-	. "\n\t\$Numrows['$nom'] = (\$save_numrows);";
+	. "\n\t\$Numrows['$nom'] = (\$save_numrows);"
+	. $trace
+	. "\n\treturn \$t0;";
 }
 
-// compil d'une boucle non recursive. 
-// c'est un "while (fetch_sql)" dans le cas general,
-// qu'on essaye d'optimiser un max.
+// Compilation d'une boucle non recursive. 
+// Ci-dessous la constante donnant le cadre systematique du code:
+// %s1: initialisation des arguments de calculer_select
+// %s2: appel de calculer_select en donnant un contexte pour les cas d'erreur
+// %s3: boucle sql_fetch ou equivalent, sauf si requete fausse
+// %s4: liberation de la ressource, en tenant compte du serveur SQL 
+// %s4: code de trace eventuel avant le retour
+
+define('CODE_CORPS_BOUCLE', '%s
+	$t0 = "";
+	// REQUETE
+	$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect,
+		 array(%s));
+	if ($result) {%s@sql_free($result%s);}
+	%s
+	return $t0;'
+);
 
 // http://doc.spip.org/@calculer_boucle_nonrec
-function calculer_boucle_nonrec($id_boucle, &$boucles) {
+function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	$boucle = &$boucles[$id_boucle];
 	$return = $boucle->return;
@@ -272,7 +283,6 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		$corps .= "\n\t\t\tforeach(" . $boucle->doublons . ' as $k) $doublons[$k] .= "," . ' .
 		index_pile($id_boucle, $primary, $boucles)
 		. "; // doublons\n";
-
 
 	if (count($boucle->separateur))
 	  $code_sep = ("'" . str_replace("'","\'",join('',$boucle->separateur)) . "'");
@@ -333,7 +343,8 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	// Fin de parties
 	if ($boucle->mode_partie) $corps .= "\n		}\n";
 
-	$sql_args = '$result, ' . _q($boucle->sql_serveur);
+	$serveur = !$boucle->sql_serveur ? ''
+		: (', ' . _q($boucle->sql_serveur));
 
 	// si le corps est une constante, ne pas appeler le serveur N fois!
 	if (preg_match(CODE_MONOTONE,str_replace("\\'",'',$corps), $r)) {
@@ -353,8 +364,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	$SP++;
 
 	// RESULTATS
-	while ($Pile[$SP] = @sql_fetch(' .
-		  $sql_args .
+	while ($Pile[$SP] = @sql_fetch($result' . $serveur .
 		  ")) {\n$corps\n	}\n" .
 		  $fin ;
 	}
@@ -369,32 +379,40 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 	if ($boucle->numrows OR $boucle->mode_partie) {
 		if ($count == 'count(*)')
-			$count = "array_shift(sql_fetch($sql_args))";
-		else $count = "sql_count($sql_args)";
+			$count = "array_shift(sql_fetch(\$result$serveur))";
+		else $count = "sql_count(\$result$serveur)";
 		$count = !$boucle->mode_partie
 		  ? "\n\t\$Numrows['$id_boucle']['total'] = @intval($count);"
 		  : calculer_parties($boucles, $id_boucle, $count);
 	} else $count = '';
 	
-	return  $count .
-		(!$flag_cpt  ? "" :
+	$corps = $count
+	. (!$flag_cpt  ? "" :
 			"\n\t\$Numrows['$id_boucle']['compteur_boucle'] = 0;"
-		 .(($boucle->mode_partie)?"\n\tif (isset(\$debut_boucle) AND \$debut_boucle>0 AND sql_seek(\$result,\$debut_boucle,"._q($boucle->sql_serveur).",'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle']=\$debut_boucle;":"")
-			)
-		. '
-	$t0 = "";' .
-		$corps .
-		"\n\t@sql_free($sql_args);";
+	   . (($boucle->mode_partie)?"\n\tif (isset(\$debut_boucle) AND \$debut_boucle>0 AND sql_seek(\$result,\$debut_boucle,"._q($boucle->sql_serveur).",'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle']=\$debut_boucle;":""))
+	  . $corps
+	  . "\n\t";
+
+	// Ne calculer la requete que maintenant
+	// car ce qui precede appelle index_pile qui influe dessus
+
+	$init = (($init = $boucles[$id_boucle]->doublons)
+			 ? ("\n\t$init = array();") : '')
+	. calculer_requete_sql($boucles[$id_boucle]);
+
+	$contexte = memoriser_contexte_compil($boucle);
+
+	return sprintf(CODE_CORPS_BOUCLE, $init, $contexte, $corps, $serveur, $trace);
 }
 
 
 // http://doc.spip.org/@calculer_requete_sql
 function calculer_requete_sql($boucle)
 {
-	if (!$boucle->select) return ""; // l'optimiseur a fait fort
+
 	return ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
-		. $boucle->in 
-		. $boucle->hash 
+	  . $boucle->in 
+	  . $boucle->hash 
 	  . calculer_dec('$table',  "'" . $boucle->id_table ."'")
 	  . calculer_dec('$id', "'" . $boucle->id_boucle ."'")
 		# En absence de champ c'est un decompte : 
@@ -408,14 +426,18 @@ function calculer_requete_sql($boucle)
 	  . calculer_dec('$limit', (strpos($boucle->limit, 'intval') === false ?
 				    "'".$boucle->limit."'" :
 				    $boucle->limit))
-	  . calculer_dec('$having', calculer_dump_array($boucle->having))
-	  . "\n\t// REQUETE\n\t"
-	  . '$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect,'
-	  . "\n\t\t\tarray("
-	  . join(',', fliquer_inclure_dynamique($boucle))
-	  . "));\n\t"
-	  . 'if (!$result) return "";'; // erreur: ne pas executer sql_fetch
+	  . calculer_dec('$having', calculer_dump_array($boucle->having));
 }
+
+function memoriser_contexte_compil($p) {
+	return join(',', array(
+		_q($p->descr['sourcefile']),
+		_q($p->descr['nom']),
+		_q($p->id_boucle),
+		intval($p->ligne),
+		_q($GLOBALS['spip_lang'])));
+}
+
 
 // http://doc.spip.org/@calculer_dec
 function calculer_dec($nom, $val)

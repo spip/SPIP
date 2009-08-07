@@ -321,7 +321,7 @@ if ($lang_select) lang_select();
        .'>');
 
 // Cette fonction fabrique l'appel d'une balise dynamique a l'aide du contexte
-// de compilation prepare par fliquer_inclure_dynamique ci-dessous
+// de compilation prepare par memoriser_contexte_compil
 // elle-meme appelee par calculer_balise_dynamique dans references.php:
 // 0: sourcefile
 // 1: codefile
@@ -332,15 +332,6 @@ if ($lang_select) lang_select();
 function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 	$r = sprintf(CODE_INCLURE_BALISE, $context_compil[4], $file, $nom, join(", ", array_map('argumenter_squelette', $args)), $context_compil[3]);
 	return $r;
-}
-
-function fliquer_inclure_dynamique($p) {
-	return array(
-		_q($p->descr['sourcefile']),
-		_q($p->descr['nom']),
-		_q($p->id_boucle),
-		intval($p->ligne),
-		_q($GLOBALS['spip_lang']));
 }
 
 // http://doc.spip.org/@argumenter_squelette
