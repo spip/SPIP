@@ -99,15 +99,8 @@ function sql_select (
 	}
 
 	if (is_resource($res)) return $res;
-	$errno = sql_errno();
-	$error = sql_error();
-	$msg = array($errno, $error, $query);
-	if (!is_array($option))
-		erreur_squelette($msg);
-	else {
-		include_spip('quete.php');
-		denoncer_inclure_dynamique($msg, $option);
-	}
+	include_spip('public/compiler');
+	erreur_squelette(array(sql_errno(), sql_error(), $query), reconstruire_contexte_compil($context_compil));
 	return false;
 }
 
