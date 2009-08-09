@@ -232,17 +232,24 @@ function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
 // Ci-dessous la constante donnant le cadre systematique du code:
 // %s1: initialisation des arguments de calculer_select
 // %s2: appel de calculer_select en donnant un contexte pour les cas d'erreur
-// %s3: boucle sql_fetch ou equivalent, sauf si requete fausse
-// %s4: liberation de la ressource, en tenant compte du serveur SQL 
-// %s4: code de trace eventuel avant le retour
+// %s3: initialisation du sous-tableau Numrows[id_boucle]
+// %s4: sauvegarde de la langue et calcul des invariants de boucle sur elle
+// %s5: boucle while sql_fetch ou str_repeat si corps monotone
+// %s6: restauration de la langue
+// %s7: liberation de la ressource, en tenant compte du serveur SQL 
+// %s8: code de trace eventuel avant le retour
 
 define('CODE_CORPS_BOUCLE', '%s
 	$t0 = "";
 	// REQUETE
 	$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect,
 		 array(%s));
-	if ($result) {%s@sql_free($result%s);}
+	if ($result) {
+	%s%s$SP++;
+	// RESULTATS
 	%s
+	%s@sql_free($result%s);
+	}%s
 	return $t0;'
 );
 
@@ -254,28 +261,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	$type_boucle = $boucle->type_requete;
 	$primary = $boucle->primary;
 	$constant = preg_match(CODE_MONOTONE, str_replace("\\'",'', $return));
-
-	// Cas {1/3} {1,4} {n-2,1}...
-
-	$flag_cpt = $boucle->mode_partie ||$boucle->cptrows;
-
-	//
-	// Creer le debut du corps de la boucle :
-	//
-	$corps = !$flag_cpt ? '' : "\n		\$Numrows['$id_boucle']['compteur_boucle']++;";
-
-	if ($boucle->mode_partie)
-		$corps .= "
-		if (\$Numrows['$id_boucle']['compteur_boucle'] > \$debut_boucle) {
-		if (\$Numrows['$id_boucle']['compteur_boucle']-1 > \$fin_boucle) break;\n";
-
-	// Calculer les invalideurs si c'est une boucle non constante et si on
-	// souhaite invalider ces elements
-	if (!$constant AND $primary) {
-		include_spip('inc/invalideur');
-		if (function_exists($i = 'calcul_invalideurs'))
-			$corps = $i($corps, $primary, $boucles, $id_boucle);
-	}
+	$corps = '';
 
 	// faudrait expanser le foreach a la compil, car y en a souvent qu'un 
 	// et puis faire un [] plutot qu'un "','."
@@ -283,9 +269,6 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		$corps .= "\n\t\t\tforeach(" . $boucle->doublons . ' as $k) $doublons[$k] .= "," . ' .
 		index_pile($id_boucle, $primary, $boucles)
 		. "; // doublons\n";
-
-	if (count($boucle->separateur))
-	  $code_sep = ("'" . str_replace("'","\'",join('',$boucle->separateur)) . "'");
 
 	// La boucle doit-elle selectionner la langue ?
 	// -. par defaut, les boucles suivantes le font
@@ -302,8 +285,8 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	  {
 		// Memoriser la langue avant la boucle et la restituer apres
 	        // afin que le corps de boucle affecte la globale directement
-		$init = "\n	lang_select(\$GLOBALS['spip_lang']);";
-		$fin = "\n	lang_select();";
+		$ìnit_lang = "lang_select(\$GLOBALS['spip_lang']);\n\t";
+		$fin_lang = "lang_select();\n\t";
 
 		$corps .= 
 		  (($boucle->lang_select != 'oui') ? 
@@ -313,14 +296,14 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		  . ') $GLOBALS["spip_lang"] = $x;';
 	  }
 	else {
-		$init = '';
-		$fin = '';
+		$ìnit_lang = '';
+		$fin_lang = '';
 		// sortir les appels au traducteur (invariants de boucle)
 		if (strpos($return, '?php') === false
 		AND preg_match_all("/\W(_T[(]'[^']*'[)])/", $return, $r)) {
 			$i = 1;
 			foreach($r[1] as $t) {
-				$init .= "\n\t\$l$i = $t;";
+				$ìnit_lang .= "\n\t\$l$i = $t;";
 				$return = str_replace($t, "\$l$i", $return);
 				$i++;
 			}
@@ -328,6 +311,9 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	}
 
 	// gestion optimale des separateurs et des boucles constantes
+	if (count($boucle->separateur))
+	  $code_sep = ("'" . str_replace("'","\'",join('',$boucle->separateur)) . "'");
+
 	$corps .= 
 		((!$boucle->separateur) ? 
 			(($constant && !$corps) ? $return :
@@ -340,13 +326,32 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		  ";\n\t\t" .
 		  '$t0 .= (($t1 && $t0) ? ' . $code_sep . " : '') . \$t1;"));
      
-	// Fin de parties
-	if ($boucle->mode_partie) $corps .= "\n		}\n";
+	// Calculer les invalideurs si c'est une boucle non constante et si on
+	// souhaite invalider ces elements
+	if (!$constant AND $primary) {
+		include_spip('inc/invalideur');
+		if (function_exists($i = 'calcul_invalideurs'))
+			$corps = $i($corps, $primary, $boucles, $id_boucle);
+	}
+
+	// gerer le compteur de boucle 
+	// avec ou sans son utilisation par les criteres {1/3} {1,4} {n-2,1}...
+
+	if ($boucle->mode_partie)
+		$corps = 
+		"\n\t\t\$Numrows['$id_boucle']['compteur_boucle']++;
+		if (\$Numrows['$id_boucle']['compteur_boucle'] > \$debut_boucle) {
+		if (\$Numrows['$id_boucle']['compteur_boucle']-1 > \$fin_boucle) break;\n$corps\n		}\n";
+
+	elseif ($boucle->cptrows)
+
+		$corps = "\n\t\t\$Numrows['$id_boucle']['compteur_boucle']++;$corps";
 
 	$serveur = !$boucle->sql_serveur ? ''
 		: (', ' . _q($boucle->sql_serveur));
 
 	// si le corps est une constante, ne pas appeler le serveur N fois!
+
 	if (preg_match(CODE_MONOTONE,str_replace("\\'",'',$corps), $r)) {
 		if (!isset($r[2]) OR (!$r[2])) {
 			if (!$boucle->numrows)
@@ -355,19 +360,9 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 				$corps = "";
 		} else {
 			$boucle->numrows = true;
-			$corps = "\n	".'for($x=$Numrows["'.$id_boucle.'"]["total"];$x>0;$x--)
-			$t0 .= ' . $corps .';';
+			$corps = "\n\t\$t0 = str_repeat($corps, \$Numrows['$id_boucle']['total']);";
 		}
-	} else {
-
-		$corps = $init . '
-	$SP++;
-
-	// RESULTATS
-	while ($Pile[$SP] = @sql_fetch($result' . $serveur .
-		  ")) {\n$corps\n	}\n" .
-		  $fin ;
-	}
+	} else $corps = "while (\$Pile[\$SP] = @sql_fetch(\$result$serveur)) {\n$corps\n	}"; 
 
 	$count = '';
 	if (!$boucle->select) {
@@ -381,17 +376,17 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		if ($count == 'count(*)')
 			$count = "array_shift(sql_fetch(\$result$serveur))";
 		else $count = "sql_count(\$result$serveur)";
-		$count = !$boucle->mode_partie
-		  ? "\n\t\$Numrows['$id_boucle']['total'] = @intval($count);"
-		  : calculer_parties($boucles, $id_boucle, $count);
+		$count = (!$boucle->mode_partie
+		  ? "\$Numrows['$id_boucle']['total'] = @intval($count);"
+		  : calculer_parties($boucles[$id_boucle], $id_boucle, $count))
+		. "\n\t";
 	} else $count = '';
 	
-	$corps = $count
-	. (!$flag_cpt  ? "" :
-			"\n\t\$Numrows['$id_boucle']['compteur_boucle'] = 0;"
-	   . (($boucle->mode_partie)?"\n\tif (isset(\$debut_boucle) AND \$debut_boucle>0 AND sql_seek(\$result,\$debut_boucle,"._q($boucle->sql_serveur).",'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle']=\$debut_boucle;":""))
-	  . $corps
-	  . "\n\t";
+	if ($boucle->mode_partie || $boucle->cptrows)
+		$count .= "\$Numrows['$id_boucle']['compteur_boucle'] = 0;\n\t";
+
+	if ($boucle->mode_partie)
+		$count .= "if (isset(\$debut_boucle) AND \$debut_boucle>0 AND sql_seek(\$result,\$debut_boucle,"._q($boucle->sql_serveur).",'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle']=\$debut_boucle;\n\t";
 
 	// Ne calculer la requete que maintenant
 	// car ce qui precede appelle index_pile qui influe dessus
@@ -402,14 +397,13 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	$contexte = memoriser_contexte_compil($boucle);
 
-	return sprintf(CODE_CORPS_BOUCLE, $init, $contexte, $corps, $serveur, $trace);
+	return sprintf(CODE_CORPS_BOUCLE, $init, $contexte, $count, $ìnit_lang, $corps, $fin_lang, $serveur, $trace);
 }
 
 
 // http://doc.spip.org/@calculer_requete_sql
 function calculer_requete_sql($boucle)
 {
-
 	return ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
 	  . $boucle->in 
 	  . $boucle->hash 
@@ -531,9 +525,8 @@ function calculer_order(&$boucle)
 // Code specifique aux criteres {1,n} {n/m} etc
 //
 // http://doc.spip.org/@calculer_parties
-function calculer_parties($boucles, $id_boucle, $count) {
+function calculer_parties($boucle, $id_boucle, $count) {
 
-	$boucle = &$boucles[$id_boucle];
 	$partie = $boucle->partie;
 	$mode_partie = $boucle->mode_partie;
 	$total_parties = $boucle->total_parties;
