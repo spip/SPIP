@@ -137,7 +137,7 @@ function assembler($fond, $connect='') {
 				AND $GLOBALS['var_mode'] != 'debug'
 				AND !isset($page['entetes']['Location']) // cette page realise une redirection, donc pas d'erreur
 				) {
-					$page = message_erreur_404();
+					$page = message_erreur_404(assembler_erreur_404 ($contexte));
 				}
 				// pas de cache client en mode 'observation'
 				if ($GLOBALS['var_mode']) {
@@ -380,18 +380,6 @@ function message_erreur_404 ($erreur= "") {
 	static $deja = false;
 	if ($deja) return "erreur";
 	$deja = true;
-	if (!$erreur) {
-		if (isset($GLOBALS['id_article']))
-		$erreur = 'public:aucun_article';
-		else if (isset($GLOBALS['id_rubrique']))
-		$erreur = 'public:aucune_rubrique';
-		else if (isset($GLOBALS['id_breve']))
-		$erreur = 'public:aucune_breve';
-		else if (isset($GLOBALS['id_auteur']))
-		$erreur = 'public:aucun_auteur';
-		else if (isset($GLOBALS['id_syndic']))
-		$erreur = 'public:aucun_site';
-	}
 	$contexte_inclus = array(
 		'erreur' => _T($erreur),
 		'lang' => $GLOBALS['spip_lang']
@@ -401,6 +389,19 @@ function message_erreur_404 ($erreur= "") {
 	return $page;
 }
 
+function assembler_erreur_404 ($contexte)
+{
+	if (isset($contexte['id_article']))
+	return'public:aucun_article';
+	else if (isset($contexte['id_rubrique']))
+	return'public:aucune_rubrique';
+	else if (isset($contexte['id_breve']))
+	return'public:aucune_breve';
+	else if (isset($contexte['id_auteur']))
+	return'public:aucun_auteur';
+	else if (isset($contexte['id_syndic']))
+	return'public:aucun_site';
+}
 
 // temporairement ici : a mettre dans le futur inc/modeles
 // creer_contexte_de_modele('left', 'autostart=true', ...) renvoie un array()
