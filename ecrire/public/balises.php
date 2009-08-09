@@ -922,6 +922,7 @@ function balise_INCLURE_dist($p) {
 		$_options = array();
 		if (isset($_contexte['ajax'])) $_options[] = "'ajax'=>true";
 		if ($p->etoile) $_options[] = "'etoile'=>true";
+		$_options[] = "'compil'=>array(" . memoriser_contexte_compil($p) .")";
 		$_options = "array(" . join(',',$_options) . ")";
 		
 		$p->code = "recuperer_fond('', $_l, $_options)";

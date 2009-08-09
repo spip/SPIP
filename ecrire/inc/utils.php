@@ -1708,6 +1708,15 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
 		$page = evaluer_fond($f, $contexte, $connect);
+		if ($page === '') {
+			if (isset($options['compil'])) {
+			  include_spip('public/compiler');
+			  $c = reconstruire_contexte_compil($options['compil']);
+			} else $c = '';
+			$msg = array('info_erreur_squelette2',
+				       array('fichier'=>"'$fond'"));
+			erreur_squelette($msg, $c);
+		}
 		if (isset($options['ajax'])AND $options['ajax'])
 			$page['texte'] = encoder_contexte_ajax(array_merge($contexte,array('fond'=>$f)),'',$page['texte']);
 			

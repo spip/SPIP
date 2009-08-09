@@ -119,11 +119,11 @@ function assembler($fond, $connect='') {
 			$page = $parametrer($fond, $GLOBALS['contexte'], $chemin_cache, $connect);
 
 			// Stocker le cache sur le disque
-			if ($chemin_cache)
+			if ($page AND $chemin_cache)
 				$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
 		}
 
-		if ($chemin_cache) $page['cache'] = $chemin_cache;
+		if ($page AND $chemin_cache) $page['cache'] = $chemin_cache;
 
 		auto_content_type($page);
 
@@ -183,7 +183,7 @@ function calculer_contexte() {
 }
 
 //
-// 2 fonctions pour compatibilite arriere. Sont probablement superflues
+// fonction pour compatibilite arriere, probablement superflue
 //
 
 // http://doc.spip.org/@auto_content_type
@@ -192,7 +192,7 @@ function auto_content_type($page)
 	global $flag_preserver;
 	if (!isset($flag_preserver))
 	  {
-		$flag_preserver = preg_match("/header\s*\(\s*.content\-type:/isx",$page['texte']) || (isset($page['entetes']['Content-Type']));
+	    $flag_preserver = ($page && preg_match("/header\s*\(\s*.content\-type:/isx",$page['texte']) || (isset($page['entetes']['Content-Type'])));
 	  }
 }
 
@@ -207,7 +207,7 @@ function inclure_page($fond, $contexte, $connect='') {
 	// mais le donner pour le calcul du cache
 	$page = $fond; 
 	$cacher = charger_fonction('cacher', 'public');
-	// Les quatre derniers parametres sont modifes par la fonction:
+	// Les quatre derniers parametres sont modifies par la fonction:
 	// emplacement, validite, et, s'il est valide, contenu & age
 	$res = $cacher($contexte, $use_cache, $chemin_cache, $page, $lastinclude);
 	if ($res) {return array('texte' => $res);}
@@ -220,7 +220,7 @@ function inclure_page($fond, $contexte, $connect='') {
 		$page = $parametrer($fond, $contexte, $chemin_cache, $connect);
 		$lastmodified = time();
 		// et on l'enregistre sur le disque
-		if ($chemin_cache
+		if ($page AND $chemin_cache
 		AND $page['entetes']['X-Spip-Cache'] > 0)
 			$cacher($contexte, $use_cache, $chemin_cache, $page,
 				$lastmodified);
@@ -543,8 +543,9 @@ function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 	if (isset($contexte['fond'])
 	AND $fond === '')
 		$fond = $contexte['fond'];
-
 	$page = inclure_page($fond, $contexte, $connect);
+
+	if (!$page) return $page;
 
 	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
 		ob_start();
