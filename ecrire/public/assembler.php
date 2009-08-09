@@ -137,7 +137,10 @@ function assembler($fond, $connect='') {
 				AND $GLOBALS['var_mode'] != 'debug'
 				AND !isset($page['entetes']['Location']) // cette page realise une redirection, donc pas d'erreur
 				) {
-					$page = message_erreur_404(assembler_erreur_404 ($contexte));
+				  $code = ($page !== false) ?
+				    '404 Not Found' : '503 Service Unavailable';
+				  $msg = assembler_erreur_404 ($contexte);
+				  $page = message_erreur_404($msg, $code);
 				}
 				// pas de cache client en mode 'observation'
 				if ($GLOBALS['var_mode']) {
@@ -376,16 +379,17 @@ function f_msie ($texte) {
 
 
 // http://doc.spip.org/@message_erreur_404
-function message_erreur_404 ($erreur= "") {
+function message_erreur_404 ($erreur= "", $code='404 Not Found') {
 	static $deja = false;
 	if ($deja) return "erreur";
 	$deja = true;
 	$contexte_inclus = array(
 		'erreur' => _T($erreur),
+		'code' => $code,
 		'lang' => $GLOBALS['spip_lang']
 	);
 	$page = inclure_page('404', $contexte_inclus);
-	$page['status'] = 404;
+	$page['status'] = intval($code);
 	return $page;
 }
 
