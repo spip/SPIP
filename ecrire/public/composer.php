@@ -68,7 +68,8 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 		$f = $boucle->return;
 		if (@eval("return true; $f ;") ===  false) {
 		// Code syntaxiquement faux (critere etc mal programme')
-			erreur_squelette(_T('zbug_erreur_compilation'), $boucle);
+			$msg = array('zbug_erreur_compilation');
+			erreur_squelette($msg, $boucle);
 			// continuer pour trouver d'autres fautes eventuelles
 			// mais prevenir que c'est mort
 			$nom = '';
@@ -83,8 +84,10 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 		if (function_exists($nom))
 			$code = squelette_traduit($skel, $source, $phpfile, $skel_code);
 		else {
-			// code semantiquement faux: bug du compilateur
-			erreur_squelette(_T('zbug_erreur_compilation'), $boucle);
+		// code semantiquement faux: bug du compilateur
+		// $boucle est en fait ici la fct principale du squelette
+			$msg = array('zbug_erreur_compilation');
+			erreur_squelette($msg, $boucle);
 			$nom = '';
 		}
 	}

@@ -181,7 +181,8 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		// la memoriser dans le tableau des erreurs
 		// On ne revient pas ici si le nb d'erreurs > 4
 		if ($res === false AND $affiche_boutons_admin) {
-			erreur_squelette(_T('zbug_erreur_execution_page'));
+			$msg = array('zbug_erreur_execution_page');
+			erreur_squelette($msg);
 		}
 	}
 
