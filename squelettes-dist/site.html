@@ -1,6 +1,3 @@
-[(#REM)
-	Un cache plus court, pour la boucle syndic_articles
-]#CACHE{3600}
 <BOUCLE_principale(SITES){id_syndic}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 [(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". ]
@@ -106,4 +103,5 @@
 </div><!--#page-->
 </body>
 </html>
-</BOUCLE_principale>
+</BOUCLE_principale>[(#INCLURE{fond=404, erreur=<:aucun_site:>})]
+<//B_principale>
