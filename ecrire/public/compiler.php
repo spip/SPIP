@@ -62,12 +62,11 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 		foreach($couple as $n => $val) {
 			$var = $val[0];
 			if ($var->type != 'texte') {
-			  if ($n OR $k) {
+			  if ($n OR $k OR $fond1) {
 				$msg = array('zbug_parametres_inclus_incorrects',
 					 array('param' => $var->nom_champ));
 				erreur_squelette($msg, $p);
-			  } 
-			  $l[1] = calculer_liste($val, $p->descr, $boucles, $id_boucle);
+			  } else $l[1] = calculer_liste($val, $p->descr, $boucles, $id_boucle);
 			  break;
 			} else {
 				preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
@@ -90,7 +89,6 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 				  $val = $auto
 				    ? index_pile($id_boucle, $var, $boucles)
 				    : calculer_liste($val, $p->descr, $boucles, $id_boucle);
-
 				  if ($var !== 1)
 				    $val = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")
 				    . $val . ($echap? ") . '":" ");
@@ -128,13 +126,16 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 	$_contexte = argumenter_inclure($p->param, false, $p, $boucles, $id_boucle, true, '', true);
 	if (is_string($p->texte)) {
 		$fichier = $p->texte;
-		$code = "'$fichier'";
+		$code = "\"$fichier\"";
+
 	} else {
 		$code = calculer_liste($p->texte, $p->descr, $boucles, $id_boucle);
 		if (preg_match("/^'([^']*)'/s", $code, $r))
 			$fichier = $r[1];
 		else $fichier = '';
 	}
+
+	$compil = texte_script(memoriser_contexte_compil($p));
 
 	// s'il y a une extension .php, ce n'est pas un squelette
 	if (preg_match('/^.+[.]php$/s', $fichier)) {
@@ -143,13 +144,10 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 			$path = "\"$path\"";
 		else $path = "find_in_path(\"$fichier\")";
 
-		$code = str_replace(array("\\","'"),
-				    array("\\\\","\\'"), 
-				    memoriser_contexte_compil($p));
-		$code = sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $code);
+		$code = sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $compil);
 	} else 	{
-		$_contexte['fond'] = "\'fond\' => ' . argumenter_squelette(" . $code  . ") . '";
-		$code = 'include _DIR_RESTREINT . "public.php";';
+		$code = texte_script($code);
+		$code = "echo recuperer_fond($code, \$contexte_inclus, array(\"compil\"=>array($compil)), _request(\"connect\"));";
 	}
 
 	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
