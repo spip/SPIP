@@ -21,7 +21,7 @@
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:pass_erreur:></strong></div>
 
         <div class="cartouche">
-        <h1><:pass_erreur:> [(#ENV{code}|intval)]</h1>
+        <h1><:pass_erreur:> [(#ENV{code, 404}|intval)]</h1>
         </div>
         [<div class="chapo">(#ENV*{erreur}|propre)</div>]
 
