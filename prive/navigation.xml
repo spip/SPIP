@@ -66,10 +66,6 @@
 		<icone>images/suivi-16.png</icone>
 		<titre>icone_suivi_publication</titre>
 	</bouton>
-	<bouton id='suivi_revisions' parent="bando_publication">
-		<icone>images/revision-16.png</icone>
-		<titre>info_historique_titre</titre>
-	</bouton>
 	<bouton id='synchro' parent="bando_publication">
 		<icone>images/rss-16.png</icone>
 		<titre>icone_suivi_activite</titre>

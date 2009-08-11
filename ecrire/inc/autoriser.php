@@ -354,14 +354,6 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 		OR auteurs_article($id, "id_auteur=".$qui['id_auteur']);
 }
 
-// Voir les revisions ?
-// = voir l'objet
-// http://doc.spip.org/@autoriser_voirrevisions_dist
-function autoriser_voirrevisions_dist($faire, $type, $id, $qui, $opt) {
-	return
-		autoriser('voir', $type, $id, $qui, $opt);
-}
-
 // Modifier une signature ?
 // = jamais !
 // http://doc.spip.org/@autoriser_signature_modifier_dist
@@ -665,9 +657,6 @@ function autoriser_synchro_bouton_dist($faire, $type='', $id=0, $qui = NULL, $op
 }
 function autoriser_forum_admin_suivi_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
 	return $GLOBALS['visiteur_session']['statut']=='0minirezo';
-}
-function autoriser_suivi_revisions_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
 }
 function autoriser_messagerie_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
 	return true;
