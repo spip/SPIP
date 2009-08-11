@@ -16,21 +16,35 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Notes de bas de page
 //
 
+// argument = true: empiler l'etat courant, initialiser un nouvel etat
+// argument = false: restaurer l'etat precedent, denonce un etat courant perdu
 // argument chaine, on y recherche les notes et on les renvoie en tableau
-// argument tableau,c'est les notes qu'on met en page dans $GLOBALS[les_notes]
+// argument tableau, texte de notes a rajouter dans ce qu'on a deja
+// le dernier cas retourne la composition totale
+// en particulier, envoyer un tableau vide permet de tout recuperer
+// C'est stocke dans la globale $les_notes, mais pas besoin de le savoir
 
 function inc_notes_dist($arg)
-{
-	if (is_string($arg))
-		return traiter_raccourci_notes($arg);
-	else return traiter_les_notes($arg);
+{	  
+	static $pile = array();
+	global $les_notes, $compt_note, $notes_vues;
+	if (is_string($arg)) return traiter_raccourci_notes($arg, count($pile));
+	elseif (is_array($arg)) return traiter_les_notes($arg);
+	elseif ($arg === true) {
+	  array_push($pile, array(@$les_notes, @$compt_note, $notes_vues));
+		$les_notes = '';
+		$compt_note = 0;
+	} elseif ($arg === false) {
+		if ($les_notes) spip_log("notes perdues");
+		list($les_notes, $compt_note, $notes_vues) = array_pop($pile);
+	}
 }
 
 define('_RACCOURCI_NOTES', ', *\[\[(\s*(<([^>\'"]*)>)?(.*?))\]\],msS');
 
-function traiter_raccourci_notes($letexte)
+function traiter_raccourci_notes($letexte, $marqueur_notes)
 {
-	global $compt_note,  $marqueur_notes, $les_notes, $notes_vues;
+	global $compt_note,   $les_notes, $notes_vues;
 	global $ouvre_ref, $ferme_ref;
 
 	if (!preg_match_all(_RACCOURCI_NOTES, $letexte, $m, PREG_SET_ORDER))
@@ -87,21 +101,22 @@ function traiter_raccourci_notes($letexte)
 function traiter_les_notes($notes) {
 	global $ouvre_note, $ferme_note;
 
-	$mes_notes = '<p>';
-	$title =  _T('info_notes');
-	foreach ($notes as $r) {
-		list($ancre, $nom, $texte) = $r;
-		$atts = " href='#nh$ancre' id='nb$ancre' class='spip_note' title='$title $ancre' rev='footnote'";
-		$mes_notes .= "\n\n"
-		. code_echappement($nom
-			? "$ouvre_note<a$atts>$nom</a>$ferme_note"
-			: '')
-		. $texte;
+	$mes_notes = '';
+	if ($notes) {
+		$title =  _T('info_notes');
+		foreach ($notes as $r) {
+			list($ancre, $nom, $texte) = $r;
+			$atts = " href='#nh$ancre' id='nb$ancre' class='spip_note' title='$title $ancre' rev='footnote'";
+			$mes_notes .= "\n\n"
+			. code_echappement($nom
+				? "$ouvre_note<a$atts>$nom</a>$ferme_note"
+				: '')
+			. $texte;
+		}
+		$mes_notes = propre('<p>' . $mes_notes);
+		if ($GLOBALS['class_spip'])
+			$mes_notes = str_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
 	}
-	$mes_notes= propre($mes_notes);
-	if ($GLOBALS['class_spip'])
-		$mes_notes = str_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
-
 	return ($GLOBALS['les_notes'] .= $mes_notes);
 }
 
