@@ -11,6 +11,8 @@
 \***************************************************************************/
 
 // Distinguer une inclusion d'un appel initial
+// (cette distinction est obsolete a present, on la garde provisoirement
+// par souci de compatiilite).
 
 if (isset($GLOBALS['_INC_PUBLIC'])) {
 
@@ -31,9 +33,8 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 
 	// $fond defini dans le fichier d'appel ?
-	// note : securise anti-injection par inc/utils.php
 
-	else if (isset($fond)) { }
+	else if (isset($fond) AND !_request('fond')) { }
 
 	// fond demande dans l'url par page=xxxx ?
 	else if (isset($_GET[_SPIP_PAGE])) {

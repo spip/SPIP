@@ -1687,12 +1687,6 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 
 	$texte = "";
 	$pages = array();
-	if (isset($contexte['fond'])
-	 // securite anti injection pour permettre aux plugins de faire 
-	 // des interfaces avec simplement recuperer_fond($fond,$_GET);
-	 AND $contexte['fond']!==_request('fond'))
-		$fond = $contexte['fond'];
-
 	$lang_select = '';
 	if (!isset($options['etoile']) OR !$options['etoile']){
 		// Si on a inclus sans fixer le critere de lang, on prend la langue courante

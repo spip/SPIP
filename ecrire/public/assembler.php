@@ -397,7 +397,6 @@ function message_erreur_404 ($erreur= "", $code='404 Not Found') {
 // http://doc.spip.org/@creer_contexte_de_modele
 function creer_contexte_de_modele($args) {
 	$contexte = array();
-	$params = array();
 	foreach ($args as $var=>$val) {
 		if (is_int($var)){ // argument pas formate
 			if (in_array($val, array('left', 'right', 'center'))) {
@@ -452,11 +451,9 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	// Si ca marche pas en precisant le sous-type, prendre le type
 	if (!$fond AND !trouve_modele($fond = $type))
 		return false;
-
+	$fond = 'modeles/'.$fond;
 	// Creer le contexte
 	$contexte = array( 
-		'lang' => $GLOBALS['spip_lang'], 
-		'fond' => 'modeles/'.$fond,
 		'dir_racine' => _DIR_RACINE # eviter de mixer un cache racine et un cache ecrire (meme si pour l'instant les modeles ne sont pas caches, le resultat etant different il faut que le contexte en tienne compte 
 	); 
 	// Le numero du modele est mis dans l'environnement
@@ -530,9 +527,6 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 // http://doc.spip.org/@evaluer_fond
 function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 
-	if (isset($contexte['fond'])
-	AND $fond === '')
-		$fond = $contexte['fond'];
 	$page = inclure_page($fond, $contexte, $connect);
 
 	if (!$page) return $page;
