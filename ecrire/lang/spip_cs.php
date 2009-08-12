@@ -24,10 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Zm&#283;nit sekci',
 'admin_recalculer' => 'Obnovit str&aacute;nku',
 'afficher_trad' => 'vyv&#283;sit p&#345;eklady',
-'alerte_maj_impossible' => '<b>Varov&aacute;n&iacute;!</b> Aktualizace datab&aacute;ze SQL na verzi @version@ se nezda&#345;ilo. Je mo&#382;n&eacute;, &#382;e je to kv&#367;li probl&eacute;m&#367;m s p&#345;&iacute;stupov&yacute;mi pr&aacute;vy k datab&aacute;zi. Kontaktujte sv&eacute;ho poskytovatele p&#345;ipojen&iacute; k internetu (ISP).',
-'alerte_modif_info_concourante' => '<NEW>WARNING: This information has been modified elsewhere. The current value is&nbsp;:',
+'alerte_maj_impossible' => '<b>Varov&aacute;n&iacute;!</b> Aktualizace datab&aacute;ze SQL na verzi @version@ se nezda&#345;ila. Je mo&#382;n&eacute;, &#382;e je to kv&#367;li probl&eacute;m&#367;m s p&#345;&iacute;stupov&yacute;mi pr&aacute;vy k datab&aacute;zi. Kontaktujte sv&eacute;ho poskytovatele p&#345;ipojen&iacute; k internetu (ISP).',
+'alerte_modif_info_concourante' => 'VAROV&Aacute;N&Iacute;: Tato informace byla zm&#283;n&#283;na na jin&eacute;m m&iacute;st&#283;. Sou&#269;asn&aacute; hodnota je&nbsp;:',
 'analyse_xml' => 'XML parsov&aacute;n&iacute;',
-'annuler' => '<NEW>Cancel',
+'annuler' => 'Storno',
 'antispam_champ_vide' => 'Tuto polo&#382;ku nechte pros&iacute;m pr&aacute;zdnou:',
 'articles_recents' => 'Ned&aacute;vn&eacute; &#269;l&aacute;nky',
 'avis_archive_incorrect' => 'soubor nen&iacute; platn&yacute;m SPIP archivem',
@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Program&aacute;torsk&aacute; chyba. Funkce by nem&#283;la b&yacute;t v tomto kontextu vol&aacute;na.',
 'avis_erreur_mysql' => 'Chyba SQL',
 'avis_erreur_sauvegarde' => 'Chyba v z&aacute;lohov&aacute;n&iacute; (@type@ @id_objet@)!',
-'avis_erreur_visiteur' => '<NEW>Problem entering the private area',
+'avis_erreur_visiteur' => 'Probl&eacute;m p&#345;i vstupu do priv&aacute;tn&iacute; z&oacute;ny',
 
 // B
 'barre_a_accent_grave' => 'Zadejte velk&eacute; A s obr&aacute;cenou &#269;&aacute;rkou (`)',
@@ -60,15 +60,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Zm&#283;nit na [hypertextov&yacute; odkaz->http://...]',
 'barre_lien_input' => 'Zadejte c&iacute;l hypertextov&eacute;ho odkazu (adresu URL ve form&aacute;tu http://www.mysite.com nebo &#269;&iacute;slo &#269;l&aacute;nku na t&#283;chto str&aacute;nk&aacute;ch).',
 'barre_note' => 'Zm&#283;nit na [[pozn&aacute;mku pod &#269;arou]]',
-'barre_paragraphe' => '<NEW>Create a paragraph',
+'barre_paragraphe' => 'Vytvo&#345;it odstavec',
 'barre_quote' => '<quote>Citovat zpr&aacute;vu</quote>',
-'bouton_ajouter_document' => '<MODIF>P&#344;IDAT DOKUMENT',
-'bouton_ajouter_image' => '<MODIF>P&#344;IDAT OBR&Aacute;ZEK',
-'bouton_ajouter_image_document' => '<NEW>Add an image or a document',
+'bouton_ajouter_document' => 'P&#344;IDAT DOKUMENT',
+'bouton_ajouter_image' => 'P&#344;IDAT OBR&Aacute;ZEK',
+'bouton_ajouter_image_document' => 'P&#345;idat obr&aacute;zek nebo dokument',
 'bouton_changer' => 'Zm&#283;nit',
 'bouton_chercher' => 'Naj&iacute;t',
 'bouton_choisir' => 'Vybrat',
-'bouton_download' => '<NEW>Download',
+'bouton_download' => 'Download',
 'bouton_enregistrer' => 'Ulo&#382;it',
 'bouton_radio_desactiver_messagerie_interne' => 'Vypnout intern&iacute; hl&aacute;&#353;en&iacute;',
 'bouton_radio_envoi_annonces' => 'Zaslat editorsk&aacute; ozn&aacute;men&iacute;',
@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'zobrazen&iacute; cel&yacute;ch t&yacute;dn&#367;',
 'choix_couleur_interface' => 'barva',
 'choix_interface' => 'volba rozhran&iacute;',
-'colonne' => '<NEW>Column',
+'colonne' => 'Sloupec',
 'confirm_changer_statut' => 'Je nutn&eacute; potvrzen&iacute; akce: Po&#382;&aacute;dali jste o zm&#283;nu stavu &#269;l&aacute;nku. Chcete pokra&#269;ovat?',
 'correcte' => 'spr&aacute;vn&#283;',
 
@@ -198,14 +198,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   co je uvedeno v&yacute;&#353;e. Pokud ne, p&#345;ejmenujte adres&aacute;&#345;e pomoc&iacute; klienta programu FTP. T&iacute;m chybu oprav&iacute;te.</p>
   <p>Pot&eacute; m&#367;&#382;ete',
 'dirs_repertoires_suivants' => '<p><b>K n&aacute;sleduj&iacute;c&iacute;mu adres&aacute;&#345;i, resp. adres&aacute;&#345;&#367;m chyb&iacute; pr&aacute;vo z&aacute;pisu:</b></p><ul>@bad_dirs@.</ul>
-
-  <p>Zm&#283;&#328;te tato pr&aacute;va pomoc&iacute; klienta FTP a nastavte pr&aacute;va p&#345;&iacute;stupu jednotliv&yacute;ch adres&aacute;&#345;&#367;
+<p>Zm&#283;&#328;te tato pr&aacute;va pomoc&iacute; klienta FTP a nastavte pr&aacute;va p&#345;&iacute;stupu jednotliv&yacute;ch adres&aacute;&#345;&#367;
   Podrobn&yacute; popis je v n&aacute;vodu k instalaci.</p>
   <p>Pot&eacute; m&#367;&#382;ete ',
-'double_occurrence' => '<NEW>Two instances',
+'double_occurrence' => 'Dv&#283; instance',
 
 // E
-'en_cours' => '<NEW>processing',
+'en_cours' => 'prob&iacute;h&aacute; zpracov&aacute;n&iacute;',
 'entree_dimensions' => 'Velikost:',
 'entree_titre_document' => 'N&aacute;zev dokumentu:',
 'entree_titre_image' => 'N&aacute;zev obr&aacute;zku:',
@@ -471,7 +470,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_mois_courant' => 'V m&#283;s&iacute;ci:',
 'info_mot_cle_ajoute' => 'Bylo p&#345;id&aacute;no toto kl&iacute;&#269;ov&eacute; slovo',
 'info_multi_herit' => 'V&yacute;choz&iacute; jazyk',
-'info_multi_langues_soulignees' => 'Jazyky <u>zobrazen&eacute; podtr&#382;en&#283;</u> maj&iacute; p&#345;elo&#382;eno cel&eacute; rozhran&iacute;. Pokue je zvol&iacute;te, bude automaticky p&#345;elo&#382;ena cel&aacute; &#345;ada polo&#382;ek ve&#345;ejn&yacute;ch str&aacute;neki(data, formul&aacute;&#345;e). U jazyk&#367;, kter&eacute; nejsou podtr&#382;eny, budou tyto polo&#382;ky zobrazeny v hlavn&iacute;m jazyce str&aacute;nek.',
+'info_multi_langues_soulignees' => '<MODIF>Jazyky <u>zobrazen&eacute; podtr&#382;en&#283;</u> maj&iacute; p&#345;elo&#382;eno cel&eacute; rozhran&iacute;. Pokue je zvol&iacute;te, bude automaticky p&#345;elo&#382;ena cel&aacute; &#345;ada polo&#382;ek ve&#345;ejn&yacute;ch str&aacute;neki(data, formul&aacute;&#345;e). U jazyk&#367;, kter&eacute; nejsou podtr&#382;eny, budou tyto polo&#382;ky zobrazeny v hlavn&iacute;m jazyce str&aacute;nek.',
 'info_multilinguisme' => 'V&iacute;cejazy&#269;n&eacute;',
 'info_nom_non_utilisateurs_connectes' => 'Va&#353;e jm&eacute;no nen&iacute; uvedeno na seznamu p&#345;ipojen&yacute;ch u&#382;ivatel&#367;.',
 'info_nom_utilisateurs_connectes' => 'Va&#353;e jm&eacute;no je uvedeno na seznamu p&#345;ipojen&yacute;ch u&#382;ivatel&#367;.',
@@ -735,7 +734,7 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'titre_joindre_document' => 'P&#344;IPOJIT DOKUMENT',
 'titre_liens_entrants' => 'P&#345;&iacute;choz&iacute; odkazy',
 'titre_mots_cles' => 'KL&Iacute;&#268;OV&Aacute; SLOVA',
-'titre_probleme_technique' => 'Varov&aacute;n&iacute;: Z technick&yacute;ch d&#367;vod&#367; (server SQL) je tato &#269;&aacute;st webu nep&#345;&iacute;stupn&aacute;.<p>D&#283;kujeme v&aacute;m za pochopen&iacute;.',
+'titre_probleme_technique' => '<MODIF>Varov&aacute;n&iacute;: Z technick&yacute;ch d&#367;vod&#367; (server SQL) je tato &#269;&aacute;st webu nep&#345;&iacute;stupn&aacute;.<p>D&#283;kujeme v&aacute;m za pochopen&iacute;.',
 'titre_publier_document' => 'ZVE&#344;EJNIT DOKUMENT V T&Eacute;TO &#268;&Aacute;STI',
 'titre_signatures_attente' => '<NEW>Signatures awaiting validation',
 'titre_signatures_confirmees' => '<NEW>Confirmed signatures',
