@@ -359,7 +359,8 @@ function debusquer_squelette ($texte) {
 	// - ca fait 2 headers !
 	if (ob_get_length()) ob_end_clean();
 	$fonc = _request('var_mode_objet');
-	echo debusquer_entete($fonc ? $fonc : $debug_objets['principal']);
+	if (!$fonc) $fonc = $debug_objets['principal'];
+	echo debusquer_entete($debug_objets['sourcefile'][$fonc]);
 	echo "<body style='margin:0 10px;'>\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'>";
 	echo affiche_erreurs_page($GLOBALS['tableau_des_erreurs'], '', 'text-align: center;');
 	$titre = _request('var_mode_affiche');
