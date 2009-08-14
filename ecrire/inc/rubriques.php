@@ -66,12 +66,12 @@ function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='', $postd
 function publier_branche_rubrique($id_rubrique)
 {
 	$id_pred = $id_rubrique;
-	do {
-		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques AS R', "R.id_rubrique=$id_rubrique");
+	while (true) {
 		sql_updateq('spip_rubriques', array('statut'=>'publie', 'date'=>date('Y-m-d H:i:s')), "id_rubrique=$id_rubrique");
+		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques AS R', "R.id_rubrique=$id_rubrique");
+		if (!$id_parent) break;
 		$id_rubrique = $id_parent;
-	} while ($id_rubrique);
-
+	} 
 #	spip_log(" publier_branche_rubrique($id_rubrique $id_pred");
 	return $id_pred != $id_rubrique;
 }
