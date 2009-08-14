@@ -59,7 +59,7 @@ function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='', $postd
 }
 
 // Si premiere publication dans une rubrique, la passer en statut "publie"
-// avec consequence sur ses parentes.
+// ainsi que ses parentes, sans oublier les dates
 // Retourne Vrai si le statut a change
 
 // http://doc.spip.org/@publier_branche_rubrique
@@ -67,8 +67,7 @@ function publier_branche_rubrique($id_rubrique)
 {
 	$id_pred = $id_rubrique;
 	do {
-		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques AS R', "R.id_rubrique=$id_rubrique AND  R.statut != 'publie'");
-		if (id_parent === NULL) break;
+		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques AS R', "R.id_rubrique=$id_rubrique");
 		sql_updateq('spip_rubriques', array('statut'=>'publie', 'date'=>date('Y-m-d H:i:s')), "id_rubrique=$id_rubrique");
 		$id_rubrique = $id_parent;
 	} while ($id_rubrique);
