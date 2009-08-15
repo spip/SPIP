@@ -54,6 +54,7 @@ include_spip('public/jointures');
 // http://doc.spip.org/@argumenter_inclure
 function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, $echap=true, $lang = '', $fond1=false){
 	$l = array();
+	$erreur_p_i_i = '';
 	if (!is_array($params)) return $l;
 	foreach($params as $k => $couple) {
 	// la liste d'arguments d'inclusion peut se terminer par un filtre
@@ -63,9 +64,9 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 			$var = $val[0];
 			if ($var->type != 'texte') {
 			  if ($n OR $k OR $fond1) {
-				$msg = array('zbug_parametres_inclus_incorrects',
+				$erreur_p_i_i = array('zbug_parametres_inclus_incorrects',
 					 array('param' => $var->nom_champ));
-				erreur_squelette($msg, $p);
+				erreur_squelette($erreur_p_i_i, $p);
 			  } else $l[1] = calculer_liste($val, $p->descr, $boucles, $id_boucle);
 			  break;
 			} else {
@@ -112,13 +113,16 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 //
 // Calculer un <INCLURE()>
 // La constante ci-dessous donne le code general quand il s'agit d'un script.
-// Pour un squelette, c'est plus simple.
 
 define('CODE_INCLURE_SCRIPT', 'if (is_readable($path = %s))
 	include $path;
 else { include_spip("public/compiler");
 	erreur_squelette(array("fichier_introuvable", array("fichier" => "%s")), reconstruire_contexte_compil(array(%s)));}'
 );
+
+// // et celle-ci pour un squelette (aussi pour #INCLURE, #MODELE #LES_AUTEURS)
+
+define('CODE_RECUPERER_FOND', 'recuperer_fond(%s, %s, array(%s), %s)');
 
 // http://doc.spip.org/@calculer_inclure
 function calculer_inclure($p, &$boucles, $id_boucle) {
@@ -148,23 +152,28 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 		$code = sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $compil);
 	} else 	{
 		$code = " ' . argumenter_squelette($code) . '"; 
-		$code = "echo recuperer_fond($code, \$contexte_inclus, array(\"compil\"=>array($compil)), _request(\"connect\"));";
+		$code = "echo " . sprintf(CODE_RECUPERER_FOND, $code, '$contexte_inclus', "\"compil\"=>array($compil)", "_request(\"connect\")") . ';';
 	}
 
-	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
-	if ($env = (isset($_contexte['env'])|| isset($_contexte['self']))) {
-		unset($_contexte['env']);
-	}
+	if (is_array($_contexte)) {
+		// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
+		if ($env = (isset($_contexte['env'])|| isset($_contexte['self']))) {
+			unset($_contexte['env']);
+		}
 
-	// noter les doublons dans l'appel a public.php
-	if (isset($_contexte['doublons'])) {
-		$_contexte['doublons'] = "\\'doublons\\' => '.var_export(\$doublons,true).'";
-	}
+		// noter les doublons dans l'appel a public.php
+		if (isset($_contexte['doublons'])) {
+			$_contexte['doublons'] = "\\'doublons\\' => '.var_export(\$doublons,true).'";
+		}
 
-	if ($ajax = isset($_contexte['ajax']))
-		unset($_contexte['ajax']);
+		if ($ajax = isset($_contexte['ajax']))
+			unset($_contexte['ajax']);
 
-	$contexte = 'array(' . join(",\n\t", $_contexte) .')';
+		$_contexte = join(",\n\t", $_contexte);
+	} else  $_contexte = ''; // vide (array()) ou erreur (false)
+
+	$contexte = 'array(' . $_contexte  .')';
+		
 	if ($env) {
 		$contexte = "array_merge('.var_export(\$Pile[0],1).',$contexte)";
 	}
@@ -426,7 +435,7 @@ function memoriser_contexte_compil($p) {
 	return join(',', array(
 		_q($p->descr['sourcefile']),
 		_q($p->descr['nom']),
-		_q($p->id_boucle),
+		@_q($p->id_boucle),
 		intval($p->ligne),
 		_q($GLOBALS['spip_lang'])));
 }
@@ -971,7 +980,8 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 					 $boucles,
 					 $id);
 			// Si les criteres se sont mal compiles
-			// laisser tomber la suite
+			// ne pas tenter d'assembler le code final
+			// (mais compiler le corps pour detection d'erreurs)
 			if (is_array($res))
 				$boucles[$id]->type_requete = false;
 		}
