@@ -45,7 +45,7 @@ function decompiler_boucle($struct, $fmt='', $prof=0)
 function decompiler_include($struct, $fmt='', $prof=0)
 {
 	$res = array();
-	foreach($struct->param as $couple) {
+	foreach($struct->param ? $struct->param : array() as $couple) {
 		array_shift($couple);
 		foreach($couple as $v) {
 			$res[]= public_decompiler($v, $fmt, $prof);
