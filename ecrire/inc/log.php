@@ -71,7 +71,7 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	// Dupliquer les erreurs specifiques dans le log general
 	if ($logname !== _FILE_LOG
 	AND defined('_FILE_LOG'))
-		spip_log($logname=='maj' ? 'cf maj.log' : $message);
+		inc_log_dist($logname=='maj' ? 'cf maj.log' : $message);
 }
 
 ?>
