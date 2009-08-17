@@ -183,7 +183,7 @@ function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, 
 	. "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>"
 	. "\n<td style='background-color: black'>" . http_img_rien(1, 200) . "</td>"
 	. $res
-	  . (!$liste ? '' : // prevision que pour les visites
+	  . (!is_array($liste) ? '' : // prevision que pour les visites
 	     statistiques_prevision($id_article, $largeur, $moyenne, $rapport, $popularite, $last))
 	. "\n<td style='background-color: black'>"
 	. http_img_rien(1, 1) ."</td>"
@@ -199,7 +199,7 @@ function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, 
 
 	$total = "<b>" .  _T('info_total') ." " . $total."</b>";
 
-	if  ($liste) {
+	if  (is_array($liste)) {
 		$liste = statistiques_classement($id_article, $classement, $liste);
 		$legend = statistiques_nom_des_mois($date_debut, $date_fin, $largeur, $interval,$agreg)
 		  . "<span class='arial1 spip_x-small'>"
