@@ -701,7 +701,10 @@ function balise_SESSION_dist($p) {
 function balise_SESSION_SET_dist($p) {
 	$_nom = interprete_argument_balise(1,$p);
 	$_val = interprete_argument_balise(2,$p);
-	$p->code = '(include_spip("inc/session") AND session_set('.$_nom.','.$_val.'))';
+	if (!$_nom OR !$_val) {
+		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'SESSION_SET'));
+		erreur_squelette($err_b_s_a, $p);
+	} else 	$p->code = '(include_spip("inc/session") AND session_set('.$_nom.','.$_val.'))';
 
 	$p->interdire_scripts = false;
 
@@ -797,7 +800,10 @@ function balise_REM_dist($p) {
 function balise_HTTP_HEADER_dist($p) {
 
 	$header = interprete_argument_balise(1,$p);
-	$p->code = "'<'.'?php header(\"' . "
+	if (!$header) {
+		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'HTTP_HEADER'));
+		erreur_squelette($err_b_s_a, $p);
+	} else 	$p->code = "'<'.'?php header(\"' . "
 		. $header
 		. " . '\"); ?'.'>'";
 	$p->interdire_scripts = false;
@@ -1014,12 +1020,12 @@ function balise_MODELE_dist($p) {
 // http://doc.spip.org/@balise_SET_dist
 function balise_SET_dist($p){
 	$_nom = interprete_argument_balise(1,$p);
-	$_valeur = interprete_argument_balise(2,$p);
+	$_val = interprete_argument_balise(2,$p);
 
-	if ($_nom AND $_valeur)
-		$p->code = "vide(\$Pile['vars'][$_nom] = $_valeur)";
-	else
-		$p->code = "''";
+	if (!$_nom OR !$_val) {
+		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'SET'));
+		erreur_squelette($err_b_s_a, $p);
+	} else 	$p->code = "vide(\$Pile['vars'][$_nom] = $_val)";
 
 	$p->interdire_scripts = false; // la balise ne renvoie rien
 	return $p;
@@ -1075,10 +1081,15 @@ function balise_DOUBLONS_dist($p) {
 // http://doc.spip.org/@balise_PIPELINE_dist
 function balise_PIPELINE_dist($p) {
 	$_pipe = interprete_argument_balise(1,$p);
-	$_flux = interprete_argument_balise(2,$p);
-	$_flux = $_flux?$_flux:"''";
-	$p->code = "pipeline( $_pipe , $_flux )";
-	$p->interdire_scripts = false;
+	if (!$_pipe) {
+		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'PIPELINE'));
+		erreur_squelette($err_b_s_a, $p);
+	} else {
+		$_flux = interprete_argument_balise(2,$p);
+		$_flux = $_flux?$_flux:"''";
+		$p->code = "pipeline( $_pipe , $_flux )";
+		$p->interdire_scripts = false;
+	}
 	return $p;
 }
 
