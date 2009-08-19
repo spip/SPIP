@@ -152,7 +152,7 @@ function debusquer_navigation($tableau, $caption='') {
 	if (_DIR_RESTREINT AND headers_sent())
 		 $style .= " position: absolute; top: 90px; left: 10px;";
 
-	return "\n<table id='spip-debug' cellpadding='2'  border='1' style='$style'>"
+	return "\n<table cellpadding='2'  border='1' style='$style'>"
 	. "<caption style='text-align: center'>"
 	. $caption
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
@@ -357,10 +357,11 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 // fin de course pour unhappy-few.
 
 function debusquer_squelette ($texte) {
-	global $debug_objets ;
+	global $debug_objets, $visiteur_session;
 
 	include_spip('inc/headers');
 	include_spip('inc/filtres');
+	lang_select($visiteur_session['lang']);
 
 	// en cas de squelette inclus,  virer le code de l'incluant:
 	// - il contient souvent une Div restreignant la largeur a 3 fois rien
@@ -368,22 +369,7 @@ function debusquer_squelette ($texte) {
 	if (ob_get_length()) ob_end_clean();
 	$fonc = _request('var_mode_objet');
 	$mode = _request('var_mode_affiche');
-	if (isset($_GET['var_profile'])) {
-		$titre = parametre_url($_SERVER['REQUEST_URI'], 'var_profile', '');
-		$titre = parametre_url($titre, 'var_mode', '');
-	} else {
-		$f = $fonc ? $fonc : (isset($debug_objets['principal']) ? $debug_objets['principal'] : '');
-		$titre = $mode . ' ' . $debug_objets['sourcefile'][$f];
-	}
 	$res = '';
-
-	// Si on maitrise bien la situation
-	// ce test est equivalent a espace public / espace prive
-	$headers = headers_sent();
-	if (!$headers) {
-		$res .= debusquer_entete($titre);
-		$res .= "<body style='margin:0 10px;'>\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'>";
-	}
 	if (!empty($GLOBALS['tableau_des_erreurs'])) {
 		$n = count($GLOBALS['tableau_des_erreurs']) . ' ' . _T('zbug_erreur_squelette');
 		$res .= debusquer_navigation($GLOBALS['tableau_des_erreurs'], $n);
@@ -431,13 +417,22 @@ function debusquer_squelette ($texte) {
 		. $err
 		. "</legend>"
 		. $texte
-		. "</fieldset></div>"
-		. "\n</div>";
+		. "</fieldset></div>";
 	}
+	// Si on maitrise bien la situation
+	// ce test est equivalent a espace public / espace prive
+	$headers = headers_sent();
 	if (!$headers) {
-		include_spip('balise/formulaire_admin');
-		$res .= inclure_balise_dynamique(balise_FORMULAIRE_ADMIN_dyn('spip-admin-float', $debug_objets));
-		$res .= '</body></html>';
+		http_status(503);
+		http_no_cache();
+		if (isset($_GET['var_profile'])) {
+			$titre = parametre_url($_SERVER['REQUEST_URI'], 'var_profile', '');
+			$titre = parametre_url($titre, 'var_mode', '');
+		} else {
+			$f = $fonc ? $fonc : (isset($debug_objets['principal']) ? $debug_objets['principal'] : '');
+			$titre = $mode . ' ' . $debug_objets['sourcefile'][$f];
+		}
+		$res = debusquer_entete($titre, $res);
 	}
 	return $res;
 }
@@ -577,12 +572,11 @@ function debusquer_source($fonc, $tout)
 }
 
 // http://doc.spip.org/@debusquer_entete
-function debusquer_entete($titre, $erreurs='')
+function debusquer_entete($titre, $corps)
 {
-	global $visiteur_session;
-	http_status(503);
-	http_no_cache();
-	lang_select($visiteur_session['lang']);
+	global $debug_objets;
+	include_spip('balise/formulaire_admin');
+
 	return _DOCTYPE_ECRIRE .
 	  html_lang_attributes() .
 	  "<head>\n<title>" .
@@ -596,7 +590,12 @@ function debusquer_entete($titre, $erreurs='')
 	  http_script('', 'jquery.js')
 	  . "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))
 	  . "' type='text/css' />" .
-	  "</head>\n";
+	  "</head>\n" .
+	  "<body style='margin:0 10px;'>\n" .
+	  "<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'>" .
+	  $corps .
+	  inclure_balise_dynamique(balise_FORMULAIRE_ADMIN_dyn('spip-admin-float', $debug_objets), false) .
+	  '</div></body></html>';
 }
 
 ?>
