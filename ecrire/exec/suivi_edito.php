@@ -133,7 +133,7 @@ function etat_base_suivi()
 	}
 
 	$res .= "<div class='accueil_informations auteurs verdana1'>";
-	$res .= accueil_liste_participants();
+	$res .= suivi_liste_participants();
 	$res .= "</div>";
 
 	return pipeline('accueil_informations',$res) ;
@@ -141,7 +141,7 @@ function etat_base_suivi()
 
 
 // http://doc.spip.org/@accueil_liste_participants
-function accueil_liste_participants()
+function suivi_liste_participants()
 {
 	global $spip_lang_left;
 

@@ -26,47 +26,47 @@ function exec_fond_dist(){
 	if (!$fond) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
-	$titre = "exec_$exec";
-	$navigation = "";
-	$extra = "";
+		$titre = "exec_$exec";
+		$navigation = "";
+		$extra = "";
 
 	// recuperer le titre dans le premier hn de la page
-	if (preg_match(",<h[1-6][^>]*>(.+)</h[1-6]>,Uims",$fond,$match)){
-		$titre = $match[1];
-	}
+		if (preg_match(",<h[1-6][^>]*>(.+)</h[1-6]>,Uims",$fond,$match)){
+			$titre = $match[1];
+		}
 
 	// recuperer la navigation (colonne de gauche)
-	if (preg_match(",<!--#navigation-->.+<!--/#navigation-->,Uims",$fond,$match)){
-		$navigation = $match[0];
-		$fond = str_replace($navigation,"",$fond);
-	}
+		if (preg_match(",<!--#navigation-->.+<!--/#navigation-->,Uims",$fond,$match)){
+			$navigation = $match[0];
+			$fond = str_replace($navigation,"",$fond);
+		}
 
 	// recuperer les extras (colonne de droite)
-	if (preg_match(",<!--#extra-->.+<!--/#extra-->,Uims",$fond,$match)){
-		$extra = $match[0];
-		$fond = str_replace($extra,"",$fond);
+		if (preg_match(",<!--#extra-->.+<!--/#extra-->,Uims",$fond,$match)){
+			$extra = $match[0];
+			$fond = str_replace($extra,"",$fond);
+		}
+
+		include_spip('inc/presentation_mini'); // alleger les inclusions avec un inc/presentation_mini
+		$commencer_page = charger_fonction('commencer_page','inc');
+		echo $commencer_page($titre);
+
+		echo debut_gauche("exec_$exec",true);
+		echo $navigation;
+		echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
+
+		echo creer_colonne_droite("exec_$exec",true);
+		echo $extra;
+		echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
+
+		echo debut_droite("exec_$exec",true);
+		echo $fond;
+		echo pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>''));
+
+		echo fin_gauche(),fin_page();
 	}
-
-	include_spip('inc/presentation_mini'); // alleger les inclusions avec un inc/presentation_mini
-	$commencer_page = charger_fonction('commencer_page','inc');
-	echo $commencer_page($titre);
-
-	echo debut_gauche("exec_$exec",true);
-	echo $navigation;
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
-
-	echo creer_colonne_droite("exec_$exec",true);
-	echo $extra;
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
-
-	echo debut_droite("exec_$exec",true);
-	echo $fond;
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>''));
-
-	echo fin_gauche(),fin_page();
 }
 
 ?>
