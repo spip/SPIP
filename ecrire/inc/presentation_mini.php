@@ -320,12 +320,14 @@ function liste_articles_bloques()
 // http://doc.spip.org/@fin_page
 function fin_page()
 {
-	global $spip_display;
+
+	global $spip_display, $tableau_des_erreurs, $tableau_des_temps;
+
+	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_erreurs OR $tableau_des_temps AND isset($_COOKIE['spip_admin']));
 
 	// avec &var_profile=1 on a le tableau de mesures SQL
-	if (@count($GLOBALS['tableau_des_temps'])) {
-		include_spip('public/tracer');
-		$chrono = chrono_requete($GLOBALS['tableau_des_temps']);
+	if ($debug) {
+		$chrono = erreur_squelette();
 	} else $chrono = '';
 
 	// cf. public/assembler, fonction f_msie()

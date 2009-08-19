@@ -40,11 +40,13 @@ define('_DEBUG_MAX_SQUELETTE_ERREURS', 9);
 //
 // Point d'entree general, 
 // pour les appels involontaires ($message non vide => erreur)
-// et volontaires.
-//
+// et volontaires (var_mode et var_profile) 
+// Si pas d'autorisation, les erreurs ne sont pas affichees
+// (mais seront dans les logs)
+// Si l'erreur vient de SPIP,  en parler sur spip@rezo.net
 
 function public_debusquer_dist($message='', $lieu='') {
-	global $tableau_des_erreurs;
+	global $tableau_des_erreurs, $tableau_des_temps;
 
 	// Erreur ou appel final ?
 	if ($message) {
@@ -65,15 +67,19 @@ function public_debusquer_dist($message='', $lieu='') {
 		// Permettre a la compil de continuer
 		if (is_object($lieu) AND property_exists($lieu, 'code') AND !$lieu->code)
 			$lieu->code = "''";
-		// Eviter les boucles infernales
-		if (!_DEBUG_MAX_SQUELETTE_ERREURS OR count($tableau_des_erreurs) <= _DEBUG_MAX_SQUELETTE_ERREURS) return ;
+		// forcer l'appel au debusqueur en cas de boucles infernales
+		$urgence = (_DEBUG_MAX_SQUELETTE_ERREURS AND count($tableau_des_erreurs) > _DEBUG_MAX_SQUELETTE_ERREURS);
+		if (!$urgence) return;
 		$lieu = '';
 	}
+
 	include_spip('inc/autoriser');
-	if (autoriser('debug')) {
-		debusquer_squelette($tableau_des_erreurs ? '' : $lieu);
-		exit;
-	}
+
+	$res = !autoriser('debug') ? '' :  debusquer_squelette($tableau_des_erreurs ? '' : $lieu);
+
+	if (!_DIR_RESTREINT) return $res;
+	echo $res;
+	exit;
 }
 
 function debusquer_contexte($env) {
@@ -100,36 +106,35 @@ function debusquer_contexte($env) {
 	return $env_texte;
 }
 
-// Si le code php produit des erreurs, on les affiche en surimpression
-// pour les administrateurs (les autres ne voient rien de plus).
-// Le mode validation est traite a part (sinon "double occurrence insert_head")
-// Cliquer sur un numero d'erreur permet d'appeler le debusqueur.
-// Si l'erreur vient de SPIP,  en parler sur spip@rezo.net
-// http://doc.spip.org/@affiche_erreurs_page
-function affiche_erreurs_page($tableau_des_erreurs, $message='', $style='') {
+// Affichage du tableau des erreurs ou des temps de calcul
+// Cliquer sur les numeros en premiere colonne permet de voir le code
 
-	if (_request('exec')=='valider_xml' OR !$tableau_des_erreurs)
-		return '';
+function debusquer_navigation($tableau, $caption='') {
+
+	if (_request('exec')=='valider_xml') return '';
 	$GLOBALS['bouton_admin_debug'] = true;
 	$res = '';
 	$href = quote_amp(parametre_url($GLOBALS['REQUEST_URI'], 'var_mode', 'debug'));
-	foreach ($tableau_des_erreurs as $i => $err) {
+	foreach ($tableau as $i => $err) {
 		$boucle = $ligne = $skel = "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;";
 		list($msg, $lieu) = $err;
 		if (is_object($lieu)) {
 			$ligne = $lieu->ligne;
-			$nom_code = $lieu->descr['nom'];
-			$skel = $lieu->descr['sourcefile'];
 			if ($lieu->id_boucle) $boucle =  $lieu->id_boucle;
+			if (isset($lieu->descr['nom'])) {
+				$nom_code = $lieu->descr['nom'];
+				$skel = $lieu->descr['sourcefile'];
+			} else $skel = $nom_code = '';
 			$h = parametre_url($href, 'var_mode_affiche', 'squelette');
 			$h = parametre_url($h, 'var_mode_objet', $nom_code);
 			$h .= '#L' . $ligne;
-		} else $h = $href . "#spip-debug";
+		} else 	{$h = $href . "#spip-debug"; $boucle = $lieu;}
 
-		$res .= "<tr id='req$i'><td style='text-align: right'><a href='"
+		$j = ($i+1); 
+		$res .= "<tr id='req$j'><td style='text-align: right'><a href='"
 		. $h
 		. "'><b>"
-		. ($i+1)
+		. $j
 		. "&nbsp;</b></a>\n</td><td style='text-align: left'>"
 		. $msg
 		. "</td><td style='text-align: left'>"
@@ -142,14 +147,14 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='', $style='') {
 
 	}
 
-	if (_DIR_RESTREINT AND headers_sent())
-		$style = " width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" 
-		  . ($style ? $style : " position: absolute; top: 90px; left: 10px;");
+	$style = "text-align: left; width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" ;
 
-	return "\n<table id='spip-debug' cellpadding='2'  border='1'
-	style='text-align: left;$style'><caption style='text-align: center'>"
-	  . ($message ? $message :
-	     (count($tableau_des_erreurs) . ' ' . _T('zbug_erreur_squelette')))
+	if (_DIR_RESTREINT AND headers_sent())
+		 $style .= " position: absolute; top: 90px; left: 10px;";
+
+	return "\n<table id='spip-debug' cellpadding='2'  border='1' style='$style'>"
+	. "<caption style='text-align: center'>"
+	. $caption
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
 	. "<br /><br /></caption>"
@@ -354,37 +359,64 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 function debusquer_squelette ($texte) {
 	global $debug_objets ;
 
+	include_spip('inc/headers');
+	include_spip('inc/filtres');
+
 	// en cas de squelette inclus,  virer le code de l'incluant:
 	// - il contient souvent une Div restreignant la largeur a 3 fois rien
 	// - ca fait 2 headers !
 	if (ob_get_length()) ob_end_clean();
 	$fonc = _request('var_mode_objet');
 	$mode = _request('var_mode_affiche');
-	$f = $fonc ? $fonc : $debug_objets['principal'];
-	echo debusquer_entete($mode . ' ' . $debug_objets['sourcefile'][$f]);
-	echo "<body style='margin:0 10px;'>\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'>";
-	echo affiche_erreurs_page($GLOBALS['tableau_des_erreurs'], '', 'text-align: center;');
-	$titre = _request('var_mode_affiche');
-	$validation = ($titre == 'validation');
+	if (isset($_GET['var_profile'])) {
+		$titre = parametre_url($_SERVER['REQUEST_URI'], 'var_profile', '');
+		$titre = parametre_url($titre, 'var_mode', '');
+	} else {
+		$f = $fonc ? $fonc : (isset($debug_objets['principal']) ? $debug_objets['principal'] : '');
+		$titre = $mode . ' ' . $debug_objets['sourcefile'][$f];
+	}
+	$res = '';
+
+	// Si on maitrise bien la situation
+	// ce test est equivalent a espace public / espace prive
+	$headers = headers_sent();
+	if (!$headers) {
+		$res .= debusquer_entete($titre);
+		$res .= "<body style='margin:0 10px;'>\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'>";
+	}
+	if (!empty($GLOBALS['tableau_des_erreurs'])) {
+		$n = count($GLOBALS['tableau_des_erreurs']) . ' ' . _T('zbug_erreur_squelette');
+		$res .= debusquer_navigation($GLOBALS['tableau_des_erreurs'], $n);
+	} else {
+		if (!empty($GLOBALS['tableau_des_temps'])) {
+			include_spip('public/tracer');
+			list($temps, $nav) = chrono_requete($GLOBALS['tableau_des_temps']);
+			$res .= debusquer_navigation($temps, $nav);
+		}
+	}
+
+	$validation = ($mode == 'validation');
 	$self = str_replace("\\'", '&#39;', self());
 	$self = parametre_url($self,'var_mode', 'debug');
 
 	if (!$validation) {
-		echo "<div id='spip-boucles'>\n"; 
-		echo debusquer_navigation($self);
-		echo "</div>";
-		echo debusquer_source($f, $debug_objets);
+		if ($debug_objets['sourcefile']) {
+			$res .= "<div id='spip-boucles'>\n" 
+			. debusquer_navigation_squelettes($self)
+			. "</div>";
+		}
+		$res .= debusquer_source($f, $debug_objets);
 		if ($texte) {
-				$err = "";
-				$titre = 'zbug_' . $titre;
-				$texte = ancre_texte($texte, array('',''));
+			$err = "";
+			$mode = 'zbug_' . $mode;
+			$texte = ancre_texte($texte, array('',''));
 		} 
 	} else {
 		$valider = charger_fonction('valider', 'xml');
-		$res = $valider($debug_objets['validation'][$fonc . 'tout']);
+		$val = $valider($debug_objets['validation'][$fonc . 'tout']);
 		// Si erreur, signaler leur nombre dans le formulaire admin
-		$debug_objets['validation'] = $res[1] ? count($res[1]):'';
-		list($texte, $err) = emboite_texte($res, $fonc, $self);
+		$debug_objets['validation'] = $val[1] ? count($val[1]):'';
+		list($texte, $err) = emboite_texte($val, $fonc, $self);
 		if ($err === false)
 			$err = _T('impossible');
 		elseif ($err === true)
@@ -393,50 +425,54 @@ function debusquer_squelette ($texte) {
 	}
 
 	if ($texte) {
-		echo "<div id=\"debug_boucle\"><fieldset><legend>",
-				_T($titre),	       
-				' ',
-				$err,
-				"</legend>"; 
-		echo $texte;
-		echo "</fieldset></div>";
-		echo "\n</div>";
+		$res .= "<div id=\"debug_boucle\"><fieldset><legend>"
+		.  _T($mode)
+		. ' '
+		. $err
+		. "</legend>"
+		. $texte
+		. "</fieldset></div>"
+		. "\n</div>";
 	}
-	include_spip('balise/formulaire_admin');
-	echo inclure_balise_dynamique(balise_FORMULAIRE_ADMIN_dyn('spip-admin-float', $debug_objets));
-	echo '</body></html>';
+	if (!$headers) {
+		include_spip('balise/formulaire_admin');
+		$res .= inclure_balise_dynamique(balise_FORMULAIRE_ADMIN_dyn('spip-admin-float', $debug_objets));
+		$res .= '</body></html>';
+	}
+	return $res;
 }
 
-function debusquer_navigation($self)
+function debusquer_navigation_squelettes($self)
 {
 	global $debug_objets, $spip_lang_right;
 
 	$res = '';
-	if (!$debug_objets['sourcefile']) return '';
+	$boucles = !empty($debug_objets['boucle']) ? $debug_objets['boucle']:'';
+	$contexte = $debug_objets['contexte'];
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		$self2 = parametre_url($self,'var_mode_objet', $nom_skel);
 		$res .= "<fieldset><legend>" ._T('squelette') . ' '  . $sourcefile ."&nbsp;: ";
 		$res .= "\n<a href='$self2&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
 		$res .= "\n<a href='$self2&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
 		$res .= "\n<a href='$self2&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a>";
-		$res .= "\n<a href='" . 
-		  str_replace('var_mode=','var_profile=', $self) . "'>" .
+		$res .= "\n<a href='" . str_replace('var_mode=debug', 'var_profile=1&amp;var_mode=recalcul', $self)
+		  . "'>" .
 		  _T('zbug_calcul')."</a></legend>";
 		$res .= "\n<span style='display:block;float:$spip_lang_right'>"._T('zbug_profile',array('time'=>isset($debug_objets['profile'][$sourcefile])?$debug_objets['profile'][$sourcefile]:0))."</span>";
 
-		if (is_array($contexte = $debug_objets['contexte'][$sourcefile]))
-			$res .= debusquer_contexte($contexte);
+		if (is_array($contexte[$sourcefile]))
+			$res .= debusquer_contexte($contexte[$sourcefile]);
 
-		if (isset($debug_objets['boucle']) AND is_array($debug_objets['boucle']))
+		if ($boucles)
 			$res .= "<table width='100%'>\n" .
-				debusquer_boucles($debug_objets['boucle'], $nom_skel, $self) .
+				debusquer_navigation_boucles($boucles, $nom_skel, $self) .
 				"</table>\n";
 		$res .= "</fieldset>\n";
 	}
 	return $res;
 }
 
-function debusquer_boucles($boucles, $nom_skel, $self)
+function debusquer_navigation_boucles($boucles, $nom_skel, $self)
 {
 	$i = 0;
 	$res = '';
@@ -544,12 +580,8 @@ function debusquer_source($fonc, $tout)
 function debusquer_entete($titre, $erreurs='')
 {
 	global $visiteur_session;
-	include_spip('inc/headers');
-	include_spip('inc/filtres');
-	if (!headers_sent()) {
-		http_status(503);
-		http_no_cache();
-	}
+	http_status(503);
+	http_no_cache();
 	lang_select($visiteur_session['lang']);
 	return _DOCTYPE_ECRIRE .
 	  html_lang_attributes() .

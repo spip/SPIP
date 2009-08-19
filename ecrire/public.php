@@ -144,13 +144,23 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		$page['texte'] = substr_replace($page['texte'], $x, $pos, 0);
 	}
 
-	// est-on admin ?
-	if ($affiche_boutons_admin = (
-	isset($_COOKIE['spip_admin']) 
-	AND !$flag_preserver
-	AND ($html OR ($var_mode == 'debug') OR count($tableau_des_erreurs))
-	))
+	// Tester si on est admin et il y a des choses supplementaires a dire
+
+	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_erreurs OR $tableau_des_temps);
+
+	$affiche_boutons_admin = (isset($_COOKIE['spip_admin'])  AND !$flag_preserver AND ($html OR $debug));
+
+	if ($affiche_boutons_admin)
 		include_spip('balise/formulaire_admin');
+
+	// Appeler ici le debusqueur en cas de demande explicite,
+	// pour qu'il ait toute latitude dans la presentation
+
+	if ($debug AND $affiche_boutons_admin) {
+			$var_mode_affiche = _request('var_mode_affiche');
+			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
+			erreur_squelette('', '');
+	}
 
 	// Execution de la page calculee
 
@@ -180,26 +190,12 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		envoyer_entetes($page['entetes']);
 		// en cas d'erreur lors du eval,
 		// la memoriser dans le tableau des erreurs
-		// On ne revient pas ici si le nb d'erreurs > 4
-		if ($res === false AND $affiche_boutons_admin) {
+
+		if ($res === false) {
 			$msg = array('zbug_erreur_execution_page');
 			erreur_squelette($msg);
 		}
 	}
-
-	// Passer la main au debuggueur le cas echeant
-
-	if ($var_mode == 'debug') {
-		$var_mode_affiche = _request('var_mode_affiche');
-		$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
-		if ($GLOBALS['debug_objets']['sourcefile']) {
-			erreur_squelette('', '');
-		}
-	} 
-
-	if (count($tableau_des_erreurs) AND $affiche_boutons_admin)
-		$page['texte'] = affiche_erreurs_page($tableau_des_erreurs)
-			. $page['texte'];
 
 	//
 	// Post-traitements et affichage final
@@ -210,24 +206,31 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	// cf. public/assembler.php)
 	echo pipeline('affichage_final', $page['texte']);
 
-	if (count($tableau_des_temps) AND $affiche_boutons_admin) {
-		include_spip('public/tracer');
-		echo chrono_requete($tableau_des_temps);
-	}
+	// Appel au debusqueur en cas d'erreurs ou de demande de trace
 
-	if (isset($GLOBALS['meta']['date_prochain_postdate'])
-	AND $GLOBALS['meta']['date_prochain_postdate'] <= time()) {
-		include_spip('inc/rubriques');
-		calculer_prochain_postdate(true);
-	}
+	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_erreurs OR $tableau_des_temps AND isset($_COOKIE['spip_admin'])  AND !$flag_preserver);
+
+	if ($debug) {
+		if ($affiche_boutons_admin) {
+			$var_mode_affiche = _request('var_mode_affiche');
+			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
+			erreur_squelette();
+		}
+	} else {
+		if (isset($GLOBALS['meta']['date_prochain_postdate'])
+		AND $GLOBALS['meta']['date_prochain_postdate'] <= time()) {
+			include_spip('inc/rubriques');
+			calculer_prochain_postdate(true);
+		}
 
 	// Effectuer une tache de fond ?
 	// si #SPIP_CRON est present, on ne le tente que pour les navigateurs
 	// en mode texte (par exemple), et seulement sur les pages web
-	if ($html
-	AND !strstr($page['texte'], '<!-- SPIP-CRON -->')
-	AND !preg_match(',msie|mozilla|opera|konqueror,i', $_SERVER['HTTP_USER_AGENT']))
-		cron();
+		if ($html
+		AND !strstr($page['texte'], '<!-- SPIP-CRON -->')
+		AND !preg_match(',msie|mozilla|opera|konqueror,i', $_SERVER['HTTP_USER_AGENT']))
+			cron();
+	}
 }
 
 ?>
