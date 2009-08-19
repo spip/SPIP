@@ -274,6 +274,7 @@ ecrire/inc/securiser_action.php -text
 ecrire/inc/selectionner.php -text
 ecrire/inc/selectionner_auteur.php -text
 ecrire/inc/site.php -text
+ecrire/inc/suivi_versions.php -text
 ecrire/inc/syndic.php -text
 ecrire/inc/tourner.php -text
 ecrire/inc/traduire.php -text
