@@ -298,7 +298,7 @@ function bando_outils_rapides($boutons, $contexte = array()){
 
 	// le navigateur de rubriques
 	$img = find_in_skin('images/boussole-24.png');
-	$url = generer_url_ecrire("articles_tous");
+	$url = generer_url_ecrire("brouteur");
 	$res .= "<ul class='bandeau_rubriques deroulant'><li class='boussole'>";
 	$res .= "<a href='$url' id='boutonbandeautoutsite'><img src='$img' width='24' height='24' alt='' /></a>";
 	include_spip('exec/menu_rubriques');
