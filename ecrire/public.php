@@ -160,7 +160,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	if ($debug AND $affiche_boutons_admin) {
 			$var_mode_affiche = _request('var_mode_affiche');
 			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
-			erreur_squelette('', '');
+			erreur_squelette();
 	}
 
 	// Execution de la page calculee

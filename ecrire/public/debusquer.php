@@ -393,11 +393,12 @@ function debusquer_squelette ($texte, $erreurs) {
 			. debusquer_navigation_squelettes($self)
 			. "</div>";
 		}
-		$res .= debusquer_source($f, $debug_objets);
-		if ($texte) {
-			$err = "";
-			$mode = 'zbug_' . $mode;
-			$texte = ancre_texte($texte, array('',''));
+		if ($fonc AND !empty($GLOBALS['debug_objets'][$mode][$fonc])) {
+			list($legend, $texte, $res2) = debusquer_source($fonc, $mode);
+			$texte .= $res2;
+		} else {
+			$legend = _T('zbug_' . $mode);
+			$texte = ancre_texte($GLOBALS['debug_objets'][$mode][$fonc . 'tout'], array('',''));
 		} 
 	} else {
 		$valider = charger_fonction('valider', 'xml');
@@ -410,17 +411,15 @@ function debusquer_squelette ($texte, $erreurs) {
 		elseif ($err === true)
 		  $err = _T('correcte');
 		else $err = ": $err";
+		$legend = _T('validation') . ' ' . $err;
 	}
-
-	if ($texte) {
-		$res .= "<div id=\"debug_boucle\"><fieldset><legend>"
-		.  _T($mode)
-		. ' '
-		. $err
+	$id = $fonc ? " id='$fonc'" : '';
+	$res .= "<div id=\"debug_boucle\"><fieldset$id><legend>"
+		. $legend
 		. "</legend>"
 		. $texte
 		. "</fieldset></div>";
-	}
+
 	// Si on maitrise bien la situation
 	// ce test est equivalent a espace public / espace prive
 	$headers = headers_sent();
@@ -513,25 +512,21 @@ function debusquer_navigation_boucles($boucles, $nom_skel, $self)
 	return $res;
 }
 
-function debusquer_source($fonc, $tout)
+function debusquer_source($objet, $affiche)
 {
-	$objet = _request('var_mode_objet');
-	$affiche = _request('var_mode_affiche');
-
-	if (!$objet) {if ($affiche == 'squelette') $objet = $fonc;}
-	if (!$objet OR !isset($tout[$affiche][$objet]) OR !$quoi = $tout[$affiche][$objet]) return '';
-
-	$nom = $tout['boucle'][$objet]->id_boucle;
+	$quoi = $GLOBALS['debug_objets'][$affiche][$objet];
+	$nom =  $GLOBALS['debug_objets']['boucle'][$objet]->id_boucle;
+	$res2 = "";
 
 	if ($affiche == 'resultat') {
-		$res = "<legend>" .$nom ."</legend>";
-		$req = $tout['requete'][$objet];
+		$legend = $nom;
+		$req = $GLOBALS['debug_objets']['requete'][$objet];
 		if (function_exists('traite_query')) {
 		  $c = _request('connect');
 		  $c = $GLOBALS['connexions'][$c ? $c : 0]['prefixe'];
 		  $req = traite_query($req,'', $c);
 		}
-		$res .= ancre_texte($req, array(), true);
+		$res = ancre_texte($req, array(), true);
 		//  formatage et affichage des resultats bruts de la requete
 		$ress_req = spip_query($req);
 		$brut_sql = '';
@@ -550,27 +545,27 @@ function debusquer_source($fonc, $tout)
 			}
 			$num++;
 		}
-		$res .= interdire_scripts($brut_sql);
+		$res2 = interdire_scripts($brut_sql);
 		foreach ($quoi as $view) {
 			//  ne pas afficher les $contexte_inclus
 			$view = preg_replace(",<\?php.+\?[>],Uims", "", $view);
 			if ($view) {
-				$res .= "\n<br /><fieldset>" .interdire_scripts($view). "</fieldset>";
+				$res2 .= "\n<br /><fieldset>" .interdire_scripts($view). "</fieldset>";
 			}
 		}
 
 	} else if ($affiche == 'code') {
-		$res =  "<legend>" .$nom ."</legend>";
-		$res .= ancre_texte("<"."?php\n".$quoi."\n?".">");
+		$legend = $nom;
+		$res = ancre_texte("<"."?php\n".$quoi."\n?".">");
 	} else if ($affiche == 'boucle') {
-		$res =  "<legend>" . _T('boucle') . ' ' .  $nom ."</legend>"
-		. ancre_texte(decompiler_boucle($quoi));
+		$legend = _T('boucle') . ' ' .  $nom;
+		$res = ancre_texte(decompiler_boucle($quoi));
 	} else if ($affiche == 'squelette') {
-		$res .=  "<legend>" .$tout['sourcefile'][$objet] ."</legend>";
-		$res .= ancre_texte($tout['squelette'][$objet]);
+		$legend = $GLOBALS['debug_objets']['sourcefile'][$objet];
+		$res = ancre_texte($GLOBALS['debug_objets']['squelette'][$objet]);
 	}
 
-	return "<div id='debug_boucle'><fieldset id='$fonc'>$res</fieldset></div>";
+	return array($legend, $res, $res2);
 }
 
 // http://doc.spip.org/@debusquer_entete

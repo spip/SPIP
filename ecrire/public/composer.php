@@ -95,13 +95,13 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
 
 		// Tracer ce qui vient d'etre compile
-		$GLOBALS['debug_objets']['code'][$nom . 'tout'] = $skel_code;
+		$GLOBALS['debug_objets']['code'][$nom . 'tout'] = $code;
 
 		// si c'est ce que demande le debusqueur, lui passer la main
 		if ($GLOBALS['debug_objets']['sourcefile']
 		AND (_request('var_mode_objet') == $nom)
 		AND (_request('var_mode_affiche') == 'code')  )
-			erreur_squelette('', $code);
+			erreur_squelette();
 	}
 	return $nom ? array($nom, $code) : false;
 }

@@ -135,7 +135,7 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 			if ($GLOBALS['debug_objets']['sourcefile']
 			AND (_request('var_mode_objet') == $fonc)
 			AND (_request('var_mode_affiche') == 'resultat')) {
-				erreur_squelette('', $t);
+				erreur_squelette();
 			}
 		}
 		// Si #CACHE{} n'etait pas la, le mettre a $delais
