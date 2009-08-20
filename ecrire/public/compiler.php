@@ -1030,7 +1030,8 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			if (!function_exists($f)) $f = 'boucle_DEFAUT';
 			if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
 			$req = $f($id, $boucles);
-			if ($boucle->return !== false) {
+		}
+		if ($boucle->return !== false) {
 				$boucles[$id]->return = 
 				"function BOUCLE" . strtr($id,"-","_") . $nom .
 				'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
@@ -1039,7 +1040,6 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 				";" .
 				$req .
 				"\n}\n\n";
-			}
 		}
 		if ($debug)
 			$GLOBALS['debug_objets']['code'][$nom.$id] = $boucles[$id]->return;
@@ -1049,7 +1049,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	// retourner False, sinon inserer leur decompilation
 	if (is_bool($corps)) return false;
 	foreach($boucles as $id => $boucle) {
-		if ($boucle->type_requete === false) return false;
+		if ($boucle->return === false) return false;
 		$boucle->return = "\n\n/* BOUCLE " .
 			$boucle->type_requete .
 			" " .
