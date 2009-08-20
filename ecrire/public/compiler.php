@@ -138,7 +138,7 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 			$fichier = $r[1];
 		else $fichier = '';
 	}
-	if (!$fichier) {
+	if (!$code OR $code === '""') {
 		$erreur_p_i_i = array('zbug_parametres_inclus_incorrects',
 					 array('param' => $code));
 		erreur_squelette($erreur_p_i_i, $p);
