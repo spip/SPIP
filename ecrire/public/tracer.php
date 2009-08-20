@@ -31,11 +31,9 @@ function trace_query_end($query, $start, $result, $serveur='')
 	global $tableau_des_erreurs;
 	if ($start)
 		trace_query_chrono($start, microtime(), $query, $result, $serveur);
-	if (!($err = sql_errno())) return $result;
-	$err .= ' '.sql_error();
-	$tableau_des_erreurs[] = array(
-		_T('info_erreur_requete'). " "  .  htmlentities($query),
-		"&laquo; " .  htmlentities($err)," &raquo;");
+	// tracer les erreurs, sauf pour select, c'est fait dans abstract_sql
+	if ($err = sql_errno() AND !preg_match('/^select\b/i', $query))
+		erreur_squelette(array(sql_errno(), sql_error(), $query));
 	return $result;
 }
 
