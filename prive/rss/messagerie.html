@@ -9,7 +9,7 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss, #ENV{op}, #ENV{args}}|?{1,0})]) 
 	<description></description>
 	<language>#LANG</language>
 <BOUCLE_A(messages auteurs_messages){doublons M}{auteurs_messages.id_auteur}
-	><BOUCLE_B(FORUMS){id_message}{doublons F}{tout}{statut=perso} /></BOUCLE_A>
+	><BOUCLE_B(FORUMS ?){id_message}{doublons F}{tout}{statut=perso} /></BOUCLE_A>
 <?php $rss = array();
 <BOUCLE_RSS(messages auteurs){!par date_heure}{!doublons M}{0,10}>
 $rss['[(#DATE_HEURE|date_ical)]'] .= '
@@ -24,7 +24,7 @@ $rss['[(#DATE_HEURE|date_ical)]'] .= '
 		<description>[(#TEXTE|texte_backendq)]</description>
 	</item>';
 </BOUCLE_RSS>
-<BOUCLE_RSS2(FORUMS){!par date_heure}{!doublons F}{tout}{statut=perso} >
+<BOUCLE_RSS2(FORUMS ?){!par date_heure}{!doublons F}{tout}{statut=perso} >
 $rss['[(#DATE_HEURE|date_ical)]'] .= '
 	<item>
 		<title>[(#TITRE|texte_backendq)]</title>

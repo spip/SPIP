@@ -2,7 +2,7 @@
 if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},transmettre,#ENV{op}, #ENV{args}}|?{1,0})]) {
 ?><BOUCLE2(ARTICLES){id_article}><B1>#TOTAL_BOUCLE <:messages:>  [(#TITRE|supprimer_numero|textebrut|filtrer_entites)];
 <:date:>;<:titre:>;<:nom:>
-<BOUCLE1(FORUMS){id_article}{!par date_heure}{statut!=''}>[(#DATE_HEURE|affdate_heure|textebrut|filtrer_entites)];#TITRE;#NOM
+<BOUCLE1(FORUMS ?){id_article}{!par date_heure}{statut!=''}>[(#DATE_HEURE|affdate_heure|textebrut|filtrer_entites)];#TITRE;#NOM
 </BOUCLE1></BOUCLE2>
 <?php
 } else {

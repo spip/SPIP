@@ -77,11 +77,11 @@ URL:[(#URL_ECRIRE{message, id_message=#ID_MESSAGE})]
 END:VTODO</BOUCLE_message_pb>
 <BOUCLE_message_n(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv!=oui}{vu=non}{type=normal}{auteurs_messages.id_auteur=#ID_AUTEUR}>
 BEGIN:VTODO
-SUMMARY:<BOUCLE_message_n_f(FORUMS){lang_select=non}
+SUMMARY:<BOUCLE_message_n_f(FORUMS ?){lang_select=non}
 	{id_message}{statut=perso}{plat}{!par date}{0,1}
 	><BOUCLE_message_n_f_a(AUTEURS){id_auteur}
 	 >[(#NOM|filtrer_ical)] -  [(#TITRE|filtrer_ical)]</BOUCLE_message_n_f_a></BOUCLE_message_n_f>[(#TITRE|filtrer_ical)]<//B_message_n_f>
-DESCRIPTION:<BOUCLE_message2_n_f(FORUMS){lang_select=non}
+DESCRIPTION:<BOUCLE_message2_n_f(FORUMS ?){lang_select=non}
 	{id_message}{statut=perso}{plat}{!par date}{0,1}
 	>[(#TEXTE|filtrer_ical)]</BOUCLE_message2_n_f>[(#TEXTE|filtrer_ical)]<//B_message2_n_f>
 UID:message#ID_MESSAGE @ [(#URL_SITE_SPIP|filtrer_ical)]
@@ -94,7 +94,7 @@ URL:[(#URL_ECRIRE{message, id_message=#ID_MESSAGE})]
 </BOUCLE_message_n_a>END:VTODO</BOUCLE_message_n>
 <?php
 	if ('#0:STATUT' == '0minirezo') {
-?><BOUCLE_forum(FORUMS){par date}{inverse}{tout}{statut="prop"}>
+?><BOUCLE_forum(FORUMS ?){par date}{inverse}{tout}{statut="prop"}>
 BEGIN:VEVENT
 SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]] <:icone_forum_suivi|filtrer_ical:>
 DESCRIPTION:[(#TEXTE|filtrer_ical)] #AUTEUR [<(#EMAIL_AUTEUR)>]
