@@ -320,9 +320,9 @@ function liste_articles_bloques()
 // http://doc.spip.org/@fin_page
 function fin_page()
 {
-	global $spip_display, $tableau_des_erreurs, $tableau_des_temps;
+	global $spip_display, $tableau_des_temps;
 
-	$debug = ((_request('exec') !== 'valider_xml')  AND ((_request('var_mode') == 'debug') OR $tableau_des_erreurs OR $tableau_des_temps AND isset($_COOKIE['spip_admin'])));
+	$debug = ((_request('exec') !== 'valider_xml')  AND ((_request('var_mode') == 'debug') OR $tableau_des_temps AND isset($_COOKIE['spip_admin'])));
 
 	// avec &var_profile=1 on a le tableau de mesures SQL
 	if ($debug) {

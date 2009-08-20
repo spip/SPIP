@@ -197,7 +197,7 @@ function ajax_action_greffe($fonction, $id, $corps)
 function ajax_retour($corps,$xml = true)
 {
 	if (isset($_COOKIE['spip_admin'])
-	AND (!empty($GLOBALS['tableau_des_erreurs']) OR !empty($GLOBALS['tableau_des_temps'])))
+	AND ((_request('var_mode') == 'debug') OR !empty($GLOBALS['tableau_des_temps'])))
 		erreur_squelette('', $corps);
 	else {
 		if (isset($GLOBALS['transformer_xml']) OR $GLOBALS['exec'] == 'valider_xml') {

@@ -71,7 +71,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		$fond = '';
 	}
 
-	$tableau_des_erreurs = 	$tableau_des_temps = array();
+	$tableau_des_temps = array();
 
 	// Particularites de certains squelettes
 	if ($fond == 'login')
@@ -145,8 +145,9 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	}
 
 	// Tester si on est admin et il y a des choses supplementaires a dire
+	// (en cas d'erreur, var_mode a ete force a "debug").
 
-	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_erreurs OR $tableau_des_temps);
+	$debug = ((_request('var_mode') == 'debug')  OR $tableau_des_temps);
 
 	$affiche_boutons_admin = (isset($_COOKIE['spip_admin'])  AND !$flag_preserver AND ($html OR $debug));
 
@@ -208,7 +209,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	// Appel au debusqueur en cas d'erreurs ou de demande de trace
 
-	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_erreurs OR $tableau_des_temps AND isset($_COOKIE['spip_admin'])  AND !$flag_preserver);
+	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps AND isset($_COOKIE['spip_admin'])  AND !$flag_preserver);
 
 	if ($debug) {
 		if ($affiche_boutons_admin) {

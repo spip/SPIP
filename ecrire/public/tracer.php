@@ -28,7 +28,6 @@ function trace_query_start()
 // http://doc.spip.org/@trace_query_end
 function trace_query_end($query, $start, $result, $serveur='')
 {
-	global $tableau_des_erreurs;
 	if ($start)
 		trace_query_chrono($start, microtime(), $query, $result, $serveur);
 	// tracer les erreurs, sauf pour select, c'est fait dans abstract_sql
