@@ -696,16 +696,8 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 	if ($r = spip_sqlite_query($query, $serveur)) {
 		if (_sqlite_is_version(3, $sqlite)) $nb = $sqlite->lastInsertId();
 		else $nb = sqlite_last_insert_rowid($sqlite);
-	} else {
-		if (spip_sqlite_errno($serveur)) {
-			// Log de l'erreur eventuelle
-			$e = spip_sqlite_error($this->serveur)
-			  // et du fautif
-			.  spip_sqlite_error($this->query, $this->serveur);
-		}
-
-	}
-	return $t ? trace_query_end($query, $t, $nb, $e, $serveur) : $nb;
+	} else $nb = 0;
+	return $t ? trace_query_end($query, $t, $nb, $serveur) : $nb;
 
 }
 
@@ -1630,16 +1622,9 @@ class sqlite_traiter_requete{
 		} else {
 			$r = false;	
 		}
-		if (!$r AND spip_sqlite_errno($this->serveur)) {
-			// Log de l'erreur eventuelle
-			$e = spip_sqlite_error($this->serveur)
-			  // et du fautif
-			.  spip_sqlite_error($this->query, $this->serveur);
-		}
-	
-		return $t ? trace_query_end($this->query, $t, $r, $e, $serveur) : $r;
+
+		return $t ? trace_query_end($this->query, $t, $r, $serveur) : $r;
 	}
-	
 		
 	// transformer la requete pour sqlite 
 	// enleve les textes, transforme la requete pour quelle soit

@@ -131,8 +131,6 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
  
 	$r = $link ? mysql_query($query, $link) : mysql_query($query);
 
-	if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
-		$e .= spip_mysql_error($query); // et du fautif
 	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
 }
 
@@ -556,11 +554,9 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$req
 #	spip_log($query);
 	if (mysql_query($query, $link))
 		$r = mysql_insert_id($link);
-	else {
-	  if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
-		$e .= spip_mysql_error($query); // et du fautif
-	}
-	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
+	else $r = 0;
+
+	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
 
 	// return $r ? $r : (($r===0) ? -1 : 0); pb avec le multi-base.
 }
