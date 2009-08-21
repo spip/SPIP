@@ -1596,7 +1596,6 @@ function exec_info_dist() {
 
 function erreur_squelette($message='', $lieu='') {
 	$debusquer = charger_fonction('debusquer', 'public');
-	spip_log("erreur " . $message);
 	if (is_array($lieu)) {
 		include_spip('public/compiler');
 		$lieu = reconstruire_contexte_compil($lieu);

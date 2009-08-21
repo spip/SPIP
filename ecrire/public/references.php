@@ -396,79 +396,45 @@ function applique_filtres($p) {
 // Cf. function pipeline dans ecrire/inc_utils.php
 // http://doc.spip.org/@compose_filtres
 function compose_filtres(&$p, $code) {
-	global $table_criteres_infixes;
 
 	$image_miette = false;
 	foreach($p->param as $filtre) {
 		$fonc = array_shift($filtre);
-		if ($fonc) {
-			$is_filtre_image = ((substr($fonc,0,6)=='image_') AND $fonc!='image_graver');
-			if ($image_miette AND !$is_filtre_image){
+		if (!$fonc) continue; // normalement qu'au premier tour.
+		$is_filtre_image = ((substr($fonc,0,6)=='image_') AND $fonc!='image_graver');
+		if ($image_miette AND !$is_filtre_image){
 	// il faut graver maintenant car apres le filtre en cours
 	// on est pas sur d'avoir encore le nom du fichier dans le pipe
-				$code = "filtrer('image_graver', $code)";
-				$image_miette = false;
+			$code = "filtrer('image_graver', $code)";
+			$image_miette = false;
+		}
+		// recuperer les arguments du filtre, 
+		// a separer par "," ou ":" dans le cas du filtre "?{a,b}"
+		if ($fonc !== '?') {
+			$sep = ',';
+		} else {$sep = ':';
+			// |?{a,b} *doit* avoir exactement 2 arguments ; on les force
+			if (count($filtre) != 2)
+				$filtre = array(isset($filtre[0])?$filtre[0]:"", isset($filtre[1])?$filtre[1]:"");
+		}
+		$arglist = compose_filtres_args($p, $filtre, $sep);
+		$logique = filtre_logique($fonc, $code, substr($arglist,1));
+		if ($logique)
+			$code = $logique;
+		else {
+			if (isset($GLOBALS['spip_matrice'][$fonc])) {
+				$code = "filtrer('$fonc',$code$arglist)";
+				if ($is_filtre_image) $image_miette = true;
 			}
 
-			// recuperer les arguments du filtre, les separer par des virgules
-			// dans le cas du filtre "?{a,b}", on demande un ":"
-			if ($fonc == '?') {
-				// |?{a,b} *doit* avoir exactement 2 arguments ; on les force
-				if (count($filtre) != 2)
-					$filtre = array(isset($filtre[0])?$filtre[0]:"", isset($filtre[1])?$filtre[1]:"");
-				$arglist = compose_filtres_args($p, $filtre, ':');
-			} else
-				$arglist = compose_filtres_args($p, $filtre, ',');
-
-			$arg = substr($arglist,1);
-
-			// compiler le filtre
-			switch (true) {
-				// est-ce un test ?
-				case in_array($fonc, $table_criteres_infixes):
-					$code = "($code $fonc $arg)";
-					break;
-
-				// cas de et,ou,oui,non,sinon,xou,xor,and,or,not,yes
-				case ($fonc == 'and') OR ($fonc == 'et'):
-					$code = "((($code) AND ($arg)) ?' ' :'')";
-					break;
-				case ($fonc == 'or') OR ($fonc == 'ou'):
-					$code = "((($code) OR ($arg)) ?' ' :'')";
-					break;
-				case ($fonc == 'xor') OR ($fonc == 'xou'):
-					$code = "((($code) XOR ($arg)) ?' ' :'')";
-					break;
-				case ($fonc == 'sinon'):
-					$code = "(strlen(\$a = $code) ? \$a : $arg)";
-					break;
-				case ($fonc == 'not') OR ($fonc == 'non'):
-					$code = "(($code) ?'' :' ')";
-					break;
-				case ($fonc == 'yes') OR ($fonc == 'oui'):
-					$code = "(($code) ?' ' :'')";
-					break;
-
-				default:
-					if (isset($GLOBALS['spip_matrice'][$fonc])) {
-						$code = "filtrer('$fonc',$code$arglist)";
-						if ($is_filtre_image) $image_miette = true;
-					}
-
-					// le filtre est defini sous forme de fonction ou de methode
-					// par ex. dans inc_texte, inc_filtres ou mes_fonctions
-					else if ($f = chercher_filtre($fonc)) {
-						$code = "$f($code$arglist)";
-					}
-
-					// le filtre n'existe pas,
-					// on le notifie
-					else {
-						erreur_squelette(array('zbug_erreur_filtre', array('filtre'=>  texte_script($fonc))), $p);
-					}
-
+			// le filtre est defini sous forme de fonction ou de methode
+			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
+			elseif ($f = chercher_filtre($fonc)) {
+				$code = "$f($code$arglist)";
 			}
-
+			// le filtre n'existe pas,
+			// on le notifie
+			else erreur_squelette(array('zbug_erreur_filtre', array('filtre'=>  texte_script($fonc))), $p);
 		}
 	}
 	// ramasser les images intermediaires inutiles et graver l'image finale
@@ -476,6 +442,30 @@ function compose_filtres(&$p, $code) {
 		$code = "filtrer('image_graver',$code)";
 
 	return $code;
+}
+
+// Filtres et,ou,oui,non,sinon,xou,xor,and,or,not,yes
+// et comparateurs
+function filtre_logique($fonc, $code, $arg)
+{
+	global $table_criteres_infixes;
+	switch (true) {
+		case in_array($fonc, $table_criteres_infixes):
+			return "($code $fonc $arg)";
+		case ($fonc == 'and') OR ($fonc == 'et'):
+			return "((($code) AND ($arg)) ?' ' :'')";
+		case ($fonc == 'or') OR ($fonc == 'ou'):
+			return "((($code) OR ($arg)) ?' ' :'')";
+		case ($fonc == 'xor') OR ($fonc == 'xou'):
+			return "((($code) XOR ($arg)) ?' ' :'')";
+		case ($fonc == 'sinon'):
+			return "(strlen(\$a = $code) ? \$a : $arg)";
+		case ($fonc == 'not') OR ($fonc == 'non'):
+			return "(($code) ?'' :' ')";
+		case ($fonc == 'yes') OR ($fonc == 'oui'):
+			return "(($code) ?' ' :'')";
+	}
+	return '';
 }
 
 // http://doc.spip.org/@compose_filtres_args
