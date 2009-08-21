@@ -114,10 +114,9 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 // Calculer un <INCLURE()>
 // La constante ci-dessous donne le code general quand il s'agit d'un script.
 
-define('CODE_INCLURE_SCRIPT', 'if (is_readable($path = %s))
+define('CODE_INCLURE_SCRIPT', 'if (($path = %s) AND is_readable($path))
 	include $path;
-else { include_spip("public/compiler");
-	erreur_squelette(array("fichier_introuvable", array("fichier" => "%s")), reconstruire_contexte_compil(array(%s)));}'
+else erreur_squelette(array("fichier_introuvable", array("fichier" => "%s")), array(%s));'
 );
 
 // // et celle-ci pour un squelette (aussi pour #INCLURE, #MODELE #LES_AUTEURS)

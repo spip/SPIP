@@ -28,8 +28,7 @@ function balise_FORMULAIRE_SITE_stat($args, $context_compil) {
 		$msg = array('zbug_champ_hors_motif',
 				array ('champ' => 'FORMULAIRE_SITE',
 					'motif' => 'RUBRIQUES'));
-		include_spip('public/compiler');
-		erreur_squelette($msg, reconstruire_contexte_compil($context_compil));
+		erreur_squelette($msg, $context_compil);
 		return '';
 	}
 	// Verifier que les visisteurs sont autorises a proposer un site

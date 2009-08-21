@@ -38,8 +38,7 @@ function balise_FORMULAIRE_SIGNATURE_stat($args, $context_compil) {
 		$msg = array('zbug_champ_hors_motif',
 				array ('champ' => 'FORMULAIRE_SIGNATURE',
 				       'motif' => 'ARTICLES'));
-		include_spip('public/compiler');
-		erreur_squelette($msg, reconstruire_contexte_compil($context_compil));
+		erreur_squelette($msg, $context_compil);
 		return '';
 	}
 	// article sans petition => pas de balise

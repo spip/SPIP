@@ -33,8 +33,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $context_compil) {
 				array ('champ' => 'FORMULAIRE_ECRIRE_AUTEUR',
 					'motif' => 'AUTEURS/ARTICLES'));
 
-		include_spip('public/compiler');
-		erreur_squelette($msg, reconstruire_contexte_compil($context_compil));
+		erreur_squelette($msg, $context_compil);
 		return '';
 	}
 	// Si on est dans un contexte article, 

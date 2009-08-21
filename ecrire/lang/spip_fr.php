@@ -744,7 +744,7 @@ et vous reconnecter au site.
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
-'zbug_balise_inexistante' => 'erreur @from@: la balise @balise@ n\'existe pas',
+'zbug_balise_inexistante' => 'Balise @balise@ mal d&eacute;clar&eacute;e pour @from@',
 'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@',
 'zbug_boucle' => 'boucle',
 'zbug_boucle_recursive_undef' => 'Boucle r&eacute;cursive non d&eacute;finie&nbsp;: @nom@',
