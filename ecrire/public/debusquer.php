@@ -47,6 +47,7 @@ define('_DEBUG_MAX_SQUELETTE_ERREURS', 9);
 
 function public_debusquer_dist($message='', $lieu='') {
 	global $visiteur_session;
+	global $debug_objets;
 	static $tableau_des_erreurs = array();
 
 	// Erreur ou appel final ?
@@ -73,6 +74,8 @@ function public_debusquer_dist($message='', $lieu='') {
 		$urgence = (_DEBUG_MAX_SQUELETTE_ERREURS AND count($tableau_des_erreurs) > _DEBUG_MAX_SQUELETTE_ERREURS);
 		if (!$urgence) return;
 	}
+	if (empty($debug_objets['principal'])) 
+		$debug_objets['principal'] = $GLOBALS['fond'];
 
 	include_spip('inc/autoriser');
 	if (!autoriser('debug'))
@@ -90,7 +93,8 @@ function public_debusquer_dist($message='', $lieu='') {
 		$self = str_replace("\\'", '&#39;', self());
 		$self = parametre_url($self,'var_mode', 'debug');
 
-		$res = debusquer_bandeau($erreurs) 
+		$res = debusquer_bandeau($tableau_des_erreurs) 
+		  . '<br />'
 		  . debusquer_squelette($fonc, $mode, $self);
 	}
 	if (!_DIR_RESTREINT OR headers_sent()) return $res;
@@ -101,8 +105,8 @@ function public_debusquer_dist($message='', $lieu='') {
 		$titre = parametre_url($GLOBALS['REQUEST_URI'], 'var_profile', '');
 		$titre = parametre_url($titre, 'var_mode', '');
 	} else {
-		$f = $fonc ? $fonc : (isset($debug_objets['principal']) ? $debug_objets['principal'] : '');
-		$titre = $mode . ' ' . $debug_objets['sourcefile'][$f];
+		if (!$fonc) $fonc = $debug_objets['principal'];
+		$titre = !$mode ? $fonc : ($mode . ' ' . $debug_objets['sourcefile'][$fonc]);
 	}
 	echo debusquer_entete($titre, $res);
 	exit;
@@ -391,18 +395,21 @@ function debusquer_squelette ($fonc, $mode, $self) {
 
 	if ($mode !== 'validation') {
 		if ($debug_objets['sourcefile']) {
-			$res .= "<div id='spip-boucles'>\n" 
+			$res = "<div id='spip-boucles'>\n" 
 			. debusquer_navigation_squelettes($self)
 			. "</div>";
-		}
-		if ($fonc AND !empty($GLOBALS['debug_objets'][$mode][$fonc])) {
-			list($legend, $texte, $res2) = debusquer_source($fonc, $mode);
-			$texte .= $res2;
-		} else {
-			$legend = _T('zbug_' . $mode);
-			$texte = ancre_texte($GLOBALS['debug_objets'][$mode][$fonc . 'tout'], array('',''));
-		} 
-		$id = $fonc ? " id='$fonc'" : '';
+		} else $res = '';
+		if ($fonc) {
+			$id = " id='$fonc'";
+			if (!empty($GLOBALS['debug_objets'][$mode][$fonc])) {
+				list($legend, $texte, $res2) = debusquer_source($fonc, $mode);
+				$texte .= $res2;
+			} elseif (!empty($debug_objets[$mode][$fonc . 'tout'])) {
+			  $legend = _T('zbug_' . $mode);
+			  $texte = $debug_objets[$mode][$fonc . 'tout'];
+			  $texte = ancre_texte($texte, array('',''));
+			}
+		} else return $res;
 	} else {
 		$valider = charger_fonction('valider', 'xml');
 		$val = $valider($debug_objets['validation'][$fonc . 'tout']);
@@ -423,8 +430,6 @@ function debusquer_squelette ($fonc, $mode, $self) {
 		. "</legend>"
 		. $texte
 		. "</fieldset></div>";
-
-
 }
 
 function debusquer_navigation_squelettes($self)
