@@ -198,7 +198,7 @@ function ajax_retour($corps,$xml = true)
 {
 	if (isset($_COOKIE['spip_admin'])
 	AND ((_request('var_mode') == 'debug') OR !empty($GLOBALS['tableau_des_temps'])))
-		erreur_squelette('', $corps);
+		erreur_squelette();
 	else {
 		if (isset($GLOBALS['transformer_xml']) OR $GLOBALS['exec'] == 'valider_xml') {
 	 	$debut = _DOCTYPE_ECRIRE
