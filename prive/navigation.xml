@@ -75,7 +75,7 @@
 		<icone>images/activite-48.png</icone>
 		<titre>icone_activite</titre>
 		<url>navigation</url>
-		<args>menu=bando_reactions</args>
+		<args>menu=bando_activite</args>
 	</bouton>
 	<bouton id='petitions_reactions' parent='bando_activite'>
 		<icone>images/petition-16.png</icone>
