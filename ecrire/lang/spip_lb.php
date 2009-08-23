@@ -201,7 +201,7 @@ wann dat n&euml;t de Fall ass, &auml;nnert de Numm vun den Dossier\'en mat &auml
 <p>Fir dat ze verbesseren, benotzt &auml;ren FTP-Client fir d\'Zougangsrechter vun jidfer Dossier anzestellen.
 D&euml;s Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 <p>Wann dat gemaach ass, da k&euml;nnt dier ',
-'double_occurrence' => 'K&euml;nnt duebel fir',
+'double_occurrence' => '<MODIF>K&euml;nnt duebel fir',
 
 // E
 'en_cours' => 'am gaangen',

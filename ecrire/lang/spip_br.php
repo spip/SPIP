@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Implijit ar meziant FTP a-benn kemm ar gwirio&ugrave; evit pep teul.
   Displeget eo an hentenn en diell-stalia&ntilde;.</p>
   <p>Ur wech graet se e c\'helloc\'h ',
-'double_occurrence' => 'Kavet div wech',
+'double_occurrence' => '<MODIF>Kavet div wech',
 
 // E
 'en_cours' => 'war ober',

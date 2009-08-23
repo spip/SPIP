@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Para arranxalo, empregue o seu cliente de FTP e cambie os permisos de acceso de cada un
   deles. O procedemento est&aacute; explicado polo mi&uacute;do na gu&iacute;a de instalaci&oacute;n.</p>
   <p>Unha vez feito isto, poder&aacute; ',
-'double_occurrence' => 'Dobre ocorrencia',
+'double_occurrence' => '<MODIF>Dobre ocorrencia',
 
 // E
 'en_cours' => 'en curso',

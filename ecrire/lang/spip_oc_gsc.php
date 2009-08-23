@@ -197,7 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Ent&agrave; adobar aqu&ograve;, utilizatz lo v&ograve;ste client FTP ent&agrave; reglar los drets d\'acc&egrave;s de cadun
   d\'aqueths repert&ograve;ris. La guida d\'installacion qu\'explica en detalh quin cau procedir.
   <p>Tanl&egrave;u qu\'auratz h&egrave;ita aquera manipulacion, que poiratz ',
-'double_occurrence' => '<NEW>Double occurrence',
+'double_occurrence' => '<MODIF>Double occurrence',
 
 // E
 'entree_dimensions' => 'Dimensions:',

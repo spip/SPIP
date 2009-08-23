@@ -194,7 +194,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_probleme_droits' => 'Problem med &aring;tkomst-r&auml;ttigheter',
 'dirs_repertoires_absents' => '<b>F&ouml;ljande kataloger har inte hittats: <ul>@bad_dirs@.</ul> </b><p>Det beror antagligen p&aring; d&aring;ligt anv&auml;ndande av gemena och VERSALER i namngivandet. Var god kontrollera att de gemena och VERSALA bokst&auml;verna i namnet p&aring; katalogerna motsvarar det som visas ovan; om s&aring; inte &auml;r fallet, &auml;ndra namnen med hj&auml;lp av dini FTP-klient f&ouml;r att &aring;tg&auml;rda felet.</p><p>N&auml;r det &auml;r gjort, kan du ',
 'dirs_repertoires_suivants' => '<b>F&ouml;ljande kataloger saknar skriv-r&auml;ttigheter: <ul>@bad_dirs@.</ul> </b><p>F&ouml;r att &auml;ndra det, anv&auml;nd din FTP-klient f&ouml;r att s&auml;tta korrekta &aring;tkomstr&auml;ttigheter f&ouml;r katalogerna. Proceduren beskrivs i installationsguiden.</p><p>N&auml;r det &auml;r avklarat, kan du ',
-'double_occurrence' => 'Tv&aring; instanser',
+'double_occurrence' => '<MODIF>Tv&aring; instanser',
 
 // E
 'en_cours' => 'arbetar',

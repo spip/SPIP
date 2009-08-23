@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   direktori tersebut. Prosedur secara rinci dapat dilihat di manual instalasi.
 
   <p />Setelah anda selesai melakukannya, anda dapat ',
-'double_occurrence' => 'Entri ganda',
+'double_occurrence' => '<MODIF>Entri ganda',
 
 // E
 'entree_dimensions' => 'Ukuran:',

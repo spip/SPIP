@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p />Por solvi tion, uzu vian FTP-klienton por reguligi la alir-rajtojn de &#265;iu
  el tiuj dosierujoj. La proceduron oni detale klarigas en la instalgvidlibro.
 <p />Post tio, vi povos ',
-'double_occurrence' => 'Duobla trafo',
+'double_occurrence' => '<MODIF>Duobla trafo',
 
 // E
 'en_cours' => 'okazanta',

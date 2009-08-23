@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   for hvert katalog. Fremgangsm&aring;den er vist i brugerh&aring;ndbogen.
 
   <p>N&aring;r du har fuldf&oslash;rt dette, kan du ',
-'double_occurrence' => '<NEW>Double occurrence',
+'double_occurrence' => '<MODIF>Double occurrence',
 
 // E
 'entree_dimensions' => 'St&oslash;rrelse:',

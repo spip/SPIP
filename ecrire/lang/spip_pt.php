@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Para corrigir, utilize o seu programa de FTP para configurar os direitos de acesso de cada um
   destes direct&oacute;rios. O procedimento est&aacute; explicado em detalhe no manual de instala&ccedil;&atilde;o.
   <p>Uma vez efectuada esta altera&ccedil;&atilde;o, poder&aacute;',
-'double_occurrence' => '<NEW>Double occurrence',
+'double_occurrence' => '<MODIF>Double occurrence',
 
 // E
 'entree_dimensions' => 'Dimens&otilde;es&nbsp;:',

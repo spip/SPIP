@@ -201,7 +201,7 @@ Eragiketa hori egin eta gero, gauza izango zara',
   <p />Arazoa konpontzeko FTP bezero bat erabili beharko duzu lehen aipatu diren direktorioen sarbide
  eskubideak arautzeko helburuz.
  <p />Prozedura xehetasunez azaltzen da instalazio gidan. Behin prozedura bukatu ezkero, ahal duzu ',
-'double_occurrence' => 'Okurenzi bikoitza',
+'double_occurrence' => '<MODIF>Okurenzi bikoitza',
 
 // E
 'en_cours' => 'Unekoan',

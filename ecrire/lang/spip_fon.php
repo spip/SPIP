@@ -191,7 +191,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_probleme_droits' => '<MODIF>X&oacute; &#598;&ograve; ac&#603; y&iacute;y&iacute; w&uacute;',
 'dirs_repertoires_absents' => '<MODIF>Mi&#772; m&#596; &#598;i&#768;&#598;&egrave;m&#603; &eacute; l&#603; &aacute;E siw&uacute; ny&iacute; &#598;&#596; w&egrave;kw&iacute;n &#598;&aacute;x&oacute; kp&oacute;do kp&#603;vi y&eacute; m&agrave; wlan ganji &agrave; w&#603; z&#596;nmi&#772; kp&#596;n &#598;&#596; w&egrave;kw&iacute;n &#598;&aacute;x&oacute; kp&oacute;do kp&#603;vi &eacute;  lo &#598;i&#768;&#598;&egrave;m&#603; &#596; &eacute; s&#596;gb&egrave; kp&oacute; &eacute; xl&#603; &agrave;n&uacute; &eacute; m&aacute; ny&iacute; m&#596; a mi&#772; l&#603; n&aacute; nyik&#596; FTP &#596; b&oacute; g&#596;n af&#596; kl&#603;nmi&#772; k&ograve; bl&oacute; &eacute; n&#603; fo &#596;',
 'dirs_repertoires_suivants' => '<MODIF>y&eacute; siw&uacute; wl&aacute;n n&uacute; &#598;&oacute; &#598;i&#768;&#598;&egrave;m&#603; &eacute; l&#596; l&#603; &aacute;n&uacute; &eacute; n&aacute;  &#598;&oacute; kp&#596;n t&eacute; &#596;, mi&#772; z&eacute; FTP b&ograve; n&aacute; X&oacute; &#598;&ograve; ac&#603; m&#603;&#598;&oacute;kp&oacute; &#598;&oacute;kp&oacute; t&#596;n &#598;&oacute; &#598;i&#768;&#598;&egrave;m&#603;mi&#772; tim&#603; af&#596; &#598;i&#768;&#598;&egrave; &#596; &#598;&oacute; ',
-'double_occurrence' => '<NEW>Double occurrence',
+'double_occurrence' => '<MODIF>Double occurrence',
 
 // E
 'entree_dimensions' => 'jl&#603;jl&#603;',

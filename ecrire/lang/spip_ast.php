@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Pa igualo, usa el to cliente FTP pa reglar los permisos d\'accesu de ca&uacute;n
   d\'estos direutorios. El procesu espl&iacute;case en detalle na gu&iacute;a d\'asitiamientu.</p>
   <p>De magar fechu el camb&eacute;u, vas poder ',
-'double_occurrence' => 'Doble ocurrencia',
+'double_occurrence' => '<MODIF>Doble ocurrencia',
 
 // E
 'en_cours' => 'en cursu',

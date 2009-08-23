@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p />Pou swen bagay-la, ann itilize logisy&egrave;l FTP ou pou don drwa laks&eacute; chak
  rep&egrave;twa. Guid lenstalasyon ap di kouman w ke kapab f&egrave; bagay-la.
   <p />Kan w ke fini w ke kapab',
-'double_occurrence' => '<NEW>Double occurrence',
+'double_occurrence' => '<MODIF>Double occurrence',
 
 // E
 'en_cours' => '<NEW>en cours',

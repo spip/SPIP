@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>Per risolvere il problema, utilizzare un client FTP per impostare i diritti di accesso
 di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida d\'installazione.</p>
 <p>Una volta attribuiti i permessi, si potr&agrave; ',
-'double_occurrence' => 'Doppia occorrenza',
+'double_occurrence' => '<MODIF>Doppia occorrenza',
 
 // E
 'en_cours' => 'in corso',

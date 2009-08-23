@@ -199,7 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_repertoires_suivants' => '<MODIF><b>Sljedeci direktoriji ne dozvoljavaju pisanje: <ul>@bad_dirs@.</ul> </b>
   <p /Da bi ste to promijenili, koristite svog FTP klijenta i postavite dozvole pristupa za svaki od direktorija. Procedura je detaljno opisana u uputama za instalaciju.
   <p />Kada izvrsite ovu operaciju, mozete ',
-'double_occurrence' => '<NEW>Double occurrence',
+'double_occurrence' => '<MODIF>Double occurrence',
 
 // E
 'en_cours' => '<NEW>en cours',

@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>To change this, use your FTP client to set access permissions for each
  of these directories. The procedure is detailed in the installation guide.</p>
   <p>Once you have done this, you can ',
-'double_occurrence' => 'Two instances',
+'double_occurrence' => '<MODIF>Two instances',
 
 // E
 'en_cours' => 'processing',
@@ -743,7 +743,7 @@ and connect again to the site.
 
 // Z
 'zbug_balise_b_aval' => ': B tag too late in loop',
-'zbug_balise_inexistante' => 'error @from@: the tag @balise@ does not exist',
+'zbug_balise_inexistante' => '<MODIF>error @from@: the tag @balise@ does not exist',
 'zbug_balise_sans_argument' => 'Missing argument in the @balise@ tag',
 'zbug_boucle' => 'loop',
 'zbug_boucle_recursive_undef' => 'undefined recursive loop: @nom@',
@@ -767,7 +767,7 @@ and connect again to the site.
 'zbug_info_erreur_squelette' => '&#1615;Error in the site',
 'zbug_inversion_ordre_inexistant' => 'Reversion of non-existent order',
 'zbug_pagination_sans_critere' => '#PAGINATION tag without {pagination} criterion, or used in a recursive loop',
-'zbug_parametres_inclus_incorrects' => 'Wrong inclusion parameters: @param@',
+'zbug_parametres_inclus_incorrects' => '<MODIF>Wrong inclusion parameters: @param@',
 'zbug_profile' => 'Calculation time: @time@',
 'zbug_resultat' => 'result',
 'zbug_serveur_indefini' => 'Undefined SQL server',

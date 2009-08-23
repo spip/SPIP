@@ -199,7 +199,7 @@ Uk lurasinsti jutir ima&ntilde; q\'ipinaka jikitawa.&lt;/p&gt;
 'dirs_repertoires_suivants' => '&lt;p&gt;&lt;b&gt;Jutir ima&ntilde; q\'ipinakax janiw qillqa&ntilde;atakikiti:&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;@bad_dirs@.&lt;/ul&gt;
 &lt;p&gt;Aka jan wali askicha&ntilde;atakix apnaqa&ntilde;amaw m&auml; FTP apnaqiri mantawx iyawsa turka&ntilde;atakix sapa mayn ima&ntilde; q\'ipinakaru aytata. Kunamti lura&ntilde;a ukax qhana&ntilde;chatawa uchantaw qillqat irpirina.&lt;/p&gt;
 &lt;p&gt;Una vez terminado este proceso, podr&aacute;s ',
-'double_occurrence' => 'P&auml; lurawi',
+'double_occurrence' => '<MODIF>P&auml; lurawi',
 
 // E
 'en_cours' => '<NEW>en curso',

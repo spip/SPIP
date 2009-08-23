@@ -199,7 +199,7 @@ Verifique se as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios 
 'dirs_repertoires_suivants' => '<p><b>Os diret&oacute;rios a seguir n&atilde;o est&atilde;o acessiveis para leitura:</b></p><ul>@bad_dirs@.</ul>
 <p>Para corrigir, utilize o seu programa de FTP para configurar os direitos de acesso de cada um destes diret&oacute;rios. O procedimento est&aacute; explicado em detalhes no guia de instala&ccedil;&atilde;o.</p>
 <p>Uma v&ecirc;z feita esta altera&ccedil;&atilde;o, voc&ecirc; poder&aacute; ',
-'double_occurrence' => 'Duplica&ccedil;&atilde;o',
+'double_occurrence' => '<MODIF>Duplica&ccedil;&atilde;o',
 
 // E
 'en_cours' => 'em curso',

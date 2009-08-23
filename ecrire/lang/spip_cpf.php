@@ -211,7 +211,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 <p>Kank ou lora fini,i sra kav',
-'double_occurrence' => 'D&eacute; lokirans',
+'double_occurrence' => '<MODIF>D&eacute; lokirans',
 
 // E
 'en_cours' => '<NEW>en cours',
