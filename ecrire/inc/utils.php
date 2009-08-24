@@ -395,15 +395,15 @@ function _L($text, $args=array(), $class=NULL) {
 		foreach ($args as $name => $value) {
 			if ($class)
 				$value = "<span class='$class'>$value</span>";
-			$text = str_replace ("@$name@", $value, $text, $n);
-			if ($n) unset($args[$name]);
+			$t = str_replace ("@$name@", $value, $text);
+			if ($text !== $t) {unset($args[$name]); $text = $t;}
 		}
 		// Si des variables n'ont pas ete inserees, le signaler
 		// (chaines de langues pas a jour)
 		if ($args) spip_log("$text:  variables inutilisées " . join(', ', $args));
 	}
 
-	if ($GLOBALS['test_i18n'] And ($class===NULL OR $args))
+	if ($GLOBALS['test_i18n'] AND $class===NULL)
 		return "<span style='color:red;'>$text</span>";
 	else
 		return $text;
