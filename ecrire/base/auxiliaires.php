@@ -163,9 +163,6 @@ $tables_auxiliaires['spip_meta'] = array(
 $tables_auxiliaires['spip_resultats'] = array(
 	'field' => &$spip_resultats,
 	'key' => &$spip_resultats_key);
-$tables_auxiliaires['spip_versions_fragments'] = array(
-	'field' => &$spip_versions_fragments,
-	'key' => &$spip_versions_fragments_key);
 	
 	$tables_auxiliaires = pipeline('declarer_tables_auxiliaires',$tables_auxiliaires);
 }
