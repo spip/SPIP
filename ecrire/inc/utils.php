@@ -1637,9 +1637,6 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		unset($contexte['connect']);
 	}
 
-	if (isset($options['modele']))
-		$contexte = creer_contexte_de_modele($contexte);
-
 	$texte = "";
 	$pages = array();
 	$lang_select = '';
