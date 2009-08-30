@@ -983,11 +983,15 @@ function balise_MODELE_dist($p) {
 		$nom = $_contexte[1];
 		unset($_contexte[1]);
 
+		if (preg_match("/^\s*'[^']*'/s", $nom))
+			$nom = "'modeles/" . substr($nom,1);
+		else $nom = "'modeles/' . $nom";
+
 		// Incoherence dans la syntaxe du contexte. A revoir.
 		// Reserver la cle primaire de la boucle courante si elle existe
-		if ($idb = $p->id_boucle) {
-			if ($primary = $p->boucles[$idb]->primary
-			AND !strpos($primary,',')) {
+		if (isset($p->boucles[$p->id_boucle]->primary)) {
+			$primary = $p->boucles[$p->id_boucle]->primary;
+			if (!strpos($primary,',')) {
 				$id = champ_sql($primary, $p);
 				$_contexte[] = "'$primary'=>".$id;
 				$_contexte[] = "'id'=>".$id;
@@ -1002,7 +1006,7 @@ function balise_MODELE_dist($p) {
 		$_options = "'compil'=>array($_options), 'trim'=>true"
 		  . (isset($_contexte['ajax'])?", 'ajax'=>true":'');
 
-		$page = sprintf(CODE_RECUPERER_FOND, "'modeles/' . $nom", 'array(' . join(',', $_contexte) .')', $_options, _q($connect));
+		$page = sprintf(CODE_RECUPERER_FOND, $nom, 'array(' . join(',', $_contexte) .')', $_options, _q($connect));
 
 		$p->code = "\n\t(((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))>=5)? '' :\n\t$page)\n";
 
