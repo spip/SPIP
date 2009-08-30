@@ -98,7 +98,7 @@ function sql_select (
 		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, true);
 	}
 
-	if (is_resource($res)) return $res;
+	if (!is_string($res)) return $res;
 	erreur_squelette(array(sql_errno(), sql_error(), $query), $option);
 	return false;
 }
