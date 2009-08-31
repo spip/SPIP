@@ -947,13 +947,16 @@ function balise_INCLURE_dist($p) {
 			unset($_contexte['env']);
 		} else $flag_env = false;
 
-		$_l = 'array(' . join(",\n\t", $_contexte) .')';
-		if ($flag_env) $_l = "array_merge(\$Pile[0],$_l)";
-
 		$_options = array();
-		if (isset($_contexte['ajax'])) $_options[] = "'ajax'=>true";
+		if (isset($_contexte['ajax'])) {
+			$_options[] = "'ajax'=>true";
+			unset($_contexte['ajax']);
+		}
 		if ($p->etoile) $_options[] = "'etoile'=>true";
 		$_options[] = "'compil'=>array(" . memoriser_contexte_compil($p) .")";
+
+		$_l = 'array(' . join(",\n\t", $_contexte) .')';
+		if ($flag_env) $_l = "array_merge(\$Pile[0],$_l)";
 
 		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',',$_options),"''");
 

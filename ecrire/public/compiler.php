@@ -145,19 +145,6 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 	}
 	$compil = texte_script(memoriser_contexte_compil($p));
 
-	// s'il y a une extension .php, ce n'est pas un squelette
-	if (preg_match('/^.+[.]php$/s', $fichier)) {
-		// si inexistant, on essaiera a l'execution
-		if ($path = find_in_path($fichier))
-			$path = "\"$path\"";
-		else $path = "find_in_path(\"$fichier\")";
-
-		$code = sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $compil);
-	} else 	{
-		$code = " ' . argumenter_squelette($code) . '"; 
-		$code = "echo " . sprintf(CODE_RECUPERER_FOND, $code, '$contexte_inclus', "\"compil\"=>array($compil)", "_request(\"connect\")") . ';';
-	}
-
 	if (is_array($_contexte)) {
 		// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
 		if ($env = (isset($_contexte['env'])|| isset($_contexte['self']))) {
@@ -173,24 +160,32 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 			unset($_contexte['ajax']);
 
 		$_contexte = join(",\n\t", $_contexte);
-	} else  return false; // j'aurais voulu toucher le fond ...
-
-	$contexte = 'array(' . $_contexte  .')';
+	}
+	else
+		return false; // j'aurais voulu toucher le fond ...
 		
+	$contexte = 'array(' . $_contexte  .')';
+
 	if ($env) {
 		$contexte = "array_merge('.var_export(\$Pile[0],1).',$contexte)";
 	}
 
-	// Gerer ajax
-	if ($ajax) {
-		$code = '	echo "<div class=\\\'ajaxbloc env-\'
-			. eval(\'return encoder_contexte_ajax('.$contexte.');\')
-			. \'\\\'>\\n";'
-			."\n"
-			.$code
-			."\n"
-			.'	echo "</div><!-- ajaxbloc -->\\n";';
+	// s'il y a une extension .php, ce n'est pas un squelette
+	if (preg_match('/^.+[.]php$/s', $fichier)) {
+		// si inexistant, on essaiera a l'execution
+		if ($path = find_in_path($fichier))
+			$path = "\"$path\"";
+		else $path = "find_in_path(\"$fichier\")";
+
+		$code = sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $compil);
+	} else 	{
+		$_options[] = "\"compil\"=>array($compil)";
+		if ($ajax)
+			$_options[] = "\"ajax\"=>true";
+		$code = " ' . argumenter_squelette($code) . '"; 
+		$code = "echo " . sprintf(CODE_RECUPERER_FOND, $code, '$contexte_inclus', implode(',',$_options), "_request(\"connect\")") . ';';
 	}
+
 
 	$code = "\n'<".
 		"?php\n".'$contexte_inclus = '.$contexte.";\n"
@@ -296,7 +291,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	  {
 		// Memoriser la langue avant la boucle et la restituer apres
 	        // afin que le corps de boucle affecte la globale directement
-		$ìnit_lang = "lang_select(\$GLOBALS['spip_lang']);\n\t";
+		$ï¿½nit_lang = "lang_select(\$GLOBALS['spip_lang']);\n\t";
 		$fin_lang = "lang_select();\n\t";
 
 		$corps .= 
@@ -307,14 +302,14 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		  . ') $GLOBALS["spip_lang"] = $x;';
 	  }
 	else {
-		$ìnit_lang = '';
+		$ï¿½nit_lang = '';
 		$fin_lang = '';
 		// sortir les appels au traducteur (invariants de boucle)
 		if (strpos($return, '?php') === false
 		AND preg_match_all("/\W(_T[(]'[^']*'[)])/", $return, $r)) {
 			$i = 1;
 			foreach($r[1] as $t) {
-				$ìnit_lang .= "\n\t\$l$i = $t;";
+				$ï¿½nit_lang .= "\n\t\$l$i = $t;";
 				$return = str_replace($t, "\$l$i", $return);
 				$i++;
 			}
@@ -408,7 +403,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	$contexte = memoriser_contexte_compil($boucle);
 
-	return sprintf(CODE_CORPS_BOUCLE, $init, $contexte, $count, $ìnit_lang, $corps, $fin_lang, $serveur, $trace);
+	return sprintf(CODE_CORPS_BOUCLE, $init, $contexte, $count, $ï¿½nit_lang, $corps, $fin_lang, $serveur, $trace);
 }
 
 
