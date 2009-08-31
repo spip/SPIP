@@ -291,7 +291,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	  {
 		// Memoriser la langue avant la boucle et la restituer apres
 	        // afin que le corps de boucle affecte la globale directement
-		$�nit_lang = "lang_select(\$GLOBALS['spip_lang']);\n\t";
+		$init_lang = "lang_select(\$GLOBALS['spip_lang']);\n\t";
 		$fin_lang = "lang_select();\n\t";
 
 		$corps .= 
@@ -302,14 +302,14 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		  . ') $GLOBALS["spip_lang"] = $x;';
 	  }
 	else {
-		$�nit_lang = '';
+		$init_lang = '';
 		$fin_lang = '';
 		// sortir les appels au traducteur (invariants de boucle)
 		if (strpos($return, '?php') === false
 		AND preg_match_all("/\W(_T[(]'[^']*'[)])/", $return, $r)) {
 			$i = 1;
 			foreach($r[1] as $t) {
-				$�nit_lang .= "\n\t\$l$i = $t;";
+				$init_lang .= "\n\t\$l$i = $t;";
 				$return = str_replace($t, "\$l$i", $return);
 				$i++;
 			}
@@ -403,7 +403,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	$contexte = memoriser_contexte_compil($boucle);
 
-	return sprintf(CODE_CORPS_BOUCLE, $init, $contexte, $count, $�nit_lang, $corps, $fin_lang, $serveur, $trace);
+	return sprintf(CODE_CORPS_BOUCLE, $init, $contexte, $count, $init_lang, $corps, $fin_lang, $serveur, $trace);
 }
 
 
