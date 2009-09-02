@@ -63,7 +63,7 @@ function generer_nom_fichier_cache($contexte, $page) {
 // pour l'afficher)
 // http://doc.spip.org/@gzip_page
 function gzip_page($page) {
-	if ($GLOBALS['flag_gz'] AND strlen($page['texte']) > 16*1024) {
+	if (function_exists('gzcompress') AND strlen($page['texte']) > 16*1024) {
 		$page['gz'] = true;
 		$page['texte'] = gzcompress($page['texte']);
 	} else {

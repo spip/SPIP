@@ -1206,7 +1206,6 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	//
 	// Capacites php (en fonction de la version)
 	//
-	$GLOBALS['flag_gz'] = function_exists("gzencode"); #php 4.0.4
 	$GLOBALS['flag_ob'] = (function_exists("ob_start")
 		&& function_exists("ini_get")
 		&& !strstr(@ini_get('disable_functions'), 'ob_'));
