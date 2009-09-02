@@ -63,7 +63,10 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 		parse_str($args,$contexte);
 	include_spip('inc/urls');
 	$r = nettoyer_url_page($i, $contexte);
-	if ($r) return $r;
+	if ($r) {
+		array_pop($r); // nettoyer_url_page renvoie un argument de plus inutile ici
+		return $r;
+	}
 
 	/*
 	 * Le bloc qui suit sert a faciliter les transitions depuis
