@@ -387,9 +387,14 @@ function applique_filtres($p) {
 
 	// Securite
 	if ($p->interdire_scripts
-	AND $p->etoile != '**')
-		$code = "interdire_scripts($code)";
-
+	AND $p->etoile != '**') {
+		if (!preg_match("/^sinon[(](.*),'([^']*)'[)]$/", $code, $r))
+			$code = "interdire_scripts($code)";
+		else {
+		  $code = interdire_scripts($r[2]);
+		  $code = "sinon(interdire_scripts($r[1]),'$code')";
+		}
+	}
 	return $code;
 }
 
