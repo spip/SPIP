@@ -688,10 +688,10 @@ table.info td { vertical-align: top; }
 [(#INCLURE{fond=style_prive_formulaires}{env}{couleur_claire}{couleur_foncee}{lang}{ltr})]
 /******** Formulaires fin  **************/
 
-/*** Placer la skin tout a la fin ***/
-#SET{style_prive_skin,#REM|bando_style_prive_skin}
-[(#GET{style_prive_skin}|oui)
-[(#INCLURE{fond=#GET{style_prive_skin}}{env})]
+/*** Placer le theme tout a la fin ***/
+#SET{style_prive_theme,#REM|bando_style_prive_theme}
+[(#GET{style_prive_theme}|oui)
+[(#INCLURE{fond=#GET{style_prive_theme}}{env})]
 ]
 
 
