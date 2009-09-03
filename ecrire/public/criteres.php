@@ -14,6 +14,12 @@
 // Definition des {criteres} d'une boucle
 //
 
+// Une Regexp reperant une chaine produite par le compilateur,
+// souvent utilisee pour faire de la concatenation lors de la compilation
+// plutot qu'a l'execution, i.e. pour remplacer 'x'.'y' par 'xy'
+
+define('_CODE_QUOTE', ",^(\n//[^\n]*\n)? *'(.*)' *$,");
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // {racine}
@@ -131,22 +137,26 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 // http://doc.spip.org/@critere_pagination_dist
 function critere_pagination_dist($idb, &$boucles, $crit) {
 
+	$boucle = &$boucles[$idb];
 	// definition de la taille de la page
-	$pas = !isset($crit->param[0][0]) ? "''" : calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucles[$idb]->id_parent);
-	if (!preg_match("/^'([^']*)'$/", $pas, $r)) {
+	$pas = !isset($crit->param[0][0]) ? "''" : calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucle->id_parent);
+
+	if (!preg_match(_CODE_QUOTE, $pas, $r)) {
 		$pas = "((\$a = intval($pas)) ? \$a : 10)";
 	} else {
 		$r = intval($r[1]);
 		$pas = strval($r ? $r : 10);
 	}
-	$debut = !isset($crit->param[0][1]) ? "'$idb'" : calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucles[$idb]->id_parent);
+	$type = !isset($crit->param[0][1]) ? "'$idb'" : calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucle->id_parent);
+	$debut = ($type[0]!=="'") ? "'debut'.$type" 
+	  : ("'debut" .substr($type,1));
 
-	$boucle = &$boucles[$idb];
+	$boucle->modificateur['debut_nom'] = $debut;
 	$partie =
 		 // tester si le numero de page demande est de la forme '@yyy'
-		 'isset($Pile[0][\'debut\'.'.$debut.']) ? $Pile[0][\'debut\'.'.$debut.'] : _request(\'debut\'.'.$debut.");\n"
+		 'isset($Pile[0]['.$debut.']) ? $Pile[0]['.$debut.'] : _request('.$debut.");\n"
 		."\tif(substr(\$debut_boucle,0,1)=='@'){\n"
-		."\t\t".'$debut_boucle = $Pile[0][\'debut\'.'.$debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',$Pile[0][\'@'.$boucle->primary.'\'] = substr($debut_boucle,1),'.intval($pas).',$result,'._q($boucle->sql_serveur).');'."\n"
+		."\t\t".'$debut_boucle = $Pile[0]['. $debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',$Pile[0][\'@'.$boucle->primary.'\'] = substr($debut_boucle,1),'.intval($pas).',$result,'._q($boucle->sql_serveur).');'."\n"
 		."\t\t".'if (!sql_seek($result,0,'._q($boucle->sql_serveur).")){\n"
 		."\t\t\t".'@sql_free($result,'._q($boucle->sql_serveur).");\n"
 		."\t\t\t".'$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect);'."\n"
@@ -154,7 +164,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 		."\t}\n"
 		."\t".'$debut_boucle = intval($debut_boucle)';
 
-	$boucle->modificateur['debut_nom'] = $debut;
+
 	$boucle->total_parties = $pas;
 	calculer_parties($boucles, $idb, $partie, 'p+');
 	// ajouter la cle primaire dans le select pour pouvoir gerer la pagination referencee par @id
@@ -163,7 +173,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	$t = $boucle->id_table . '.' . $boucle->primary;
 	if ($boucle->primary
 		AND !preg_match('/[,\s]/',$boucle->primary)
-		AND !in_array($t, $boucles[$idb]->select))
+		AND !in_array($t, $boucle->select))
 	  $boucle->select[]= $t;
 }
 
@@ -713,7 +723,7 @@ function calculer_criteres ($idb, &$boucles)
 // http://doc.spip.org/@kwote
 function kwote($lisp)
 {
-	if (preg_match(",^(\n//[^\n]*\n)? *'(.*)' *$,", $lisp, $r))
+	if (preg_match(_CODE_QUOTE, $lisp, $r))
 		return $r[1] . "\"" . sql_quote(str_replace(array("\\'","\\\\"),array("'","\\"),$r[2])) . "\"" ;
 	else
 		return "sql_quote($lisp)"; 
