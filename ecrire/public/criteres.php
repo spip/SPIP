@@ -151,7 +151,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	$debut = ($type[0]!=="'") ? "'debut'.$type" 
 	  : ("'debut" .substr($type,1));
 
-	$boucle->modificateur['debut_nom'] = $debut;
+	$boucle->modificateur['debut_nom'] = $type;
 	$partie =
 		 // tester si le numero de page demande est de la forme '@yyy'
 		 'isset($Pile[0]['.$debut.']) ? $Pile[0]['.$debut.'] : _request('.$debut.");\n"
