@@ -29,23 +29,4 @@ function inc_journal_dist($phrase, $opt = array()) {
 	spip_log($phrase, 'journal');
 }
 
-/* Lire le journal de bord en appliquant les criteres de choix
- * et le renvoyer sous forme de tableau horodate ; attention a
- * limiter a un nombre raisonnable d'items : l'API ne definit
- * pas de limite
- * 
- * @param array $criteres
- */
-function lire_journal($criteres = null) {
-	$journal = array();
-	foreach (array(_DIR_TMP.'prive_journal.log', _DIR_TMP.'journal.log') as $f)
-	if (@is_readable($f))
-	foreach(file($f) as $l) {
-		if ($time = strtotime(join(' ', array_slice(explode(' ',$l),0,3))))
-			$journal[$time] = join(' ', array_slice(explode(' ',$l),6));
-	}
-	krsort($journal);
-	return $journal;
-}
-
 ?>
