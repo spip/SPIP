@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $journal
  * @param array $opt
  */
-function journal($phrase, $opt = array()) {
+function inc_journal_dist($phrase, $opt = array()) {
 	if (!strlen($phrase))
 		return;
 	if ($opt)
