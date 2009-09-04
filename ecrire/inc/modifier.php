@@ -157,6 +157,17 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 		exit;
 	}
 
+	// journaliser l'affaire
+	// message a affiner :-)
+	include_spip('inc/journal');
+	include_spip('inc/filtres_mini');
+	$qui = sinon($GLOBALS['visiteur_session']['nom'], $GLOBALS['ip']);
+	journal(_L($qui.' a &#233;dit&#233; l&#8217;'.$type.' '.$id.' ('.join('+',array_diff(array_keys($champs), array('date_modif'))).')'), array(
+		'faire' => 'modifier',
+		'quoi' => $type,
+		'id' => $id
+	));
+
 	return true;
 }
 

@@ -244,6 +244,7 @@ ecrire/inc/instituer_auteur.php -text
 ecrire/inc/instituer_breve.php -text
 ecrire/inc/instituer_site.php -text
 ecrire/inc/joindre.php -text
+ecrire/inc/journal.php -text
 ecrire/inc/json.php -text
 ecrire/inc/lang_liste.php -text
 ecrire/inc/legender.php -text
