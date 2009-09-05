@@ -52,7 +52,7 @@ a.spip_ancre {} /* liens internes a la page */
 a.spip_in {} /* liens internes */
 a.spip_mail { color: #900; }
 a.spip_mail:before { content: "\002709"; } /* liens vers un email */
-a.spip_out { color: #009; } /* liens sortants */
+a.spip_out,a[rel=external] { color: #009; } /* liens sortants */
 a.spip_url { color: #009; } /* liens url sortants */
 a.spip_glossaire { color: #060; } /* liens vers encyclopedie */
 a.spip_glossaire:hover { text-decoration: underline overline; }

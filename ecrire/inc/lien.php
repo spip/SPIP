@@ -36,11 +36,8 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 	elseif (preg_match('/^\s*mailto:/',$lien)) # pseudo URL de mail
 		$class = "spip_mail";
 	elseif (preg_match('/^<html>/',$lien)) # cf traiter_lien_explicite
-		$class = "spip_url";
-
-	// spip_out sur tous les liens externes
-	if (preg_match(',^https?://,S', $lien))
-		$class = trim("$class spip_out");
+		$class = "spip_url spip_out";
+	elseif (!$class) $class = "spip_out"; # si pas spip_in|spip_glossaire
 
 	// Si l'objet n'est pas de la langue courante, on ajoute hreflang
 	if (!$hlang AND $lang!==$GLOBALS['spip_lang'])
@@ -49,7 +46,12 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 	$lang = ($hlang ? " hreflang='$hlang'" : '');
 
 	if ($title) $title = ' title="'.texte_backend($title).'"';
+
+	// rel=external pour les liens externes
+	if (preg_match(',^https?://,S', $lien))
+		$rel = trim("$rel external");
 	if ($rel) $rel = " rel='$rel'";
+
 	$lien = "<a href='$lien' class='$class'$lang$title$rel>$texte</a>";
 
 	# ceci s'execute heureusement avant les tableaux et leur "|".
