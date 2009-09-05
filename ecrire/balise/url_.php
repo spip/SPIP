@@ -80,7 +80,8 @@ function balise_URL__dist($p) {
 			$code = generer_generer_url($nom, $p);
 			if ($code === NULL) return NULL;
 		}
-		$p->code = "vider_url($code)";
+		if (!$p->etoile)
+			$p->code = "vider_url($code)";
 		$p->interdire_scripts = false;
 		return $p;
 	}
@@ -106,7 +107,10 @@ function balise_URL_SITE_dist($p)
 	if (strpos($code, '@$Pile[0]') !== false) {
 		$code = generer_generer_url('site', $p);
 		if ($code === NULL) return NULL;
-	} else $code = "calculer_url($code,'','url', \$connect)";
+	} else {
+		if (!$p->etoile)
+			$code = "calculer_url($code,'','url', \$connect)";
+	}
 	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
