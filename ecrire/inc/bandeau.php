@@ -145,9 +145,11 @@ function definir_barre_boutons() {
 
 	$sousmenu=array();
 
-	if (avoir_visiteurs(true))
+	if (avoir_visiteurs(true)) {
+		include_spip('inc/auteurs');
 		$sousmenu['auteurs'] =
-			new Bouton("fiche-perso.png", 'icone_afficher_visiteurs', null, "statut=!1comite,0minirezo,nouveau");
+			new Bouton("fiche-perso.png", 'icone_afficher_visiteurs', null, "statut=!".AUTEURS_MIN_REDAC);
+	}
 
 	$sousmenu['auteur_infos']=
 		new Bouton("auteur-24.gif", "icone_creer_nouvel_auteur", null, 'new=oui');
