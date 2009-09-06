@@ -1801,8 +1801,7 @@ function filtre_find($array, $val) {
 
 //
 // fonction standard de calcul de la balise #PAGINATION
-// on peut la surcharger en definissant dans mes_fonctions :
-// function pagination($total, $nom, $pas, $liste) {...}
+// on peut la surcharger en definissant filtre_pagination dans mes_fonctions
 //
 
 // http://doc.spip.org/@filtre_pagination_dist
@@ -1819,14 +1818,6 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 	// liste = false : on ne veut que l'ancre
 	if (!$liste)
 		return $ancres[$ancre];
-
-	// Si le contexte ne contient pas de debut_xx, on regarde les globales
-	// (de facon a permettre la pagination dans les modeles) ; c'est une
-	// legere entorse au schema de base (squelette+contexte => page), mais
-	// sinon il faut une usine a gaz pour passer debut_xx dans propre()...
-
-	if ($position === NULL)
-		$position = _request($debut);
 
 	$pagination = array(
 		'debut' => $debut,

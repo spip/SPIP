@@ -10,14 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-//
 // Ce fichier regroupe la quasi totalite des definitions de #BALISES de spip
 // Pour chaque balise, il est possible de surcharger, dans mes_fonctions,
 // la fonction balise_TOTO_dist par une fonction balise_TOTO() respectant la
 // meme API : 
 // elle recoit en entree un objet de classe CHAMP, le modifie et le retourne.
 // Cette classe est definie dans public/interfaces
-
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -485,7 +483,17 @@ function balise_POPULARITE_dist ($p) {
 }
 
 // #PAGINATION
-// http://www.spip.net/fr_articleXXXX.html
+// Le code produit est trompeur, car les modeles ne fournissent pas Pile[0].
+// On produit un appel a _request si on ne l'a pas, mais c'est inexact:
+// l'absence peut etre due a une faute de frappe dans le contexte inclus.
+
+define('CODE_PAGINATION', 
+	'%s($Numrows["%s"]["grand_total"],
+ 		%s,
+		isset($Pile[0][%4$s])?$Pile[0][%4$s]:intval(_request(%4$s)),
+		%5$s, %6$s, %7$s, %8$s, array(%9$s))');
+
+// http://www.spip.net/fr_article3367.html
 // http://doc.spip.org/@balise_PAGINATION_dist
 function balise_PAGINATION_dist($p, $liste='true') {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
@@ -522,32 +530,28 @@ function balise_PAGINATION_dist($p, $liste='true') {
 		$code_contexte = implode(',',$code_contexte);
 	} else $code_contexte = '';
 
-	$p->boucles[$b]->numrows = true;
 	$connect = $p->boucles[$b]->sql_serveur;
+	$pas = $p->boucles[$b]->total_parties;
 	$f_pagination = chercher_filtre('pagination');
 	$type = $p->boucles[$b]->modificateur['debut_nom'];
 	$modif = ($type[0]!=="'") ? "'debut'.$type" 
 	  : ("'debut" .substr($type,1));
 
-	$p->code = $f_pagination."(\$Numrows['$b']['grand_total'], $type,
-		isset(\$Pile[0][$modif])?\$Pile[0][$modif]:0,"
-	. $p->boucles[$b]->total_parties
-	. ", $liste, "
-	. ($__modele ? $__modele : "''")
-	. "," . _q($connect) 
-	. ", array($code_contexte)" 
-	. ")";
+	$p->code = sprintf(CODE_PAGINATION, $f_pagination,$b, $type, $modif, $pas, $liste, ($__modele ? $__modele : "''"), _q($connect), $code_contexte);
 
+	$p->boucles[$b]->numrows = true;
 	$p->interdire_scripts = false;
 	return $p;
 }
+
 
 // N'afficher que l'ancre de la pagination (au-dessus, par exemple, alors
 // qu'on mettra les liens en-dessous de la liste paginee)
 // http://doc.spip.org/@balise_ANCRE_PAGINATION_dist
 function balise_ANCRE_PAGINATION_dist($p) {
-	$p = balise_PAGINATION_dist($p, $liste='false');
-	return $p;
+	if ($f = charger_fonction('PAGINATION', 'balise', true))
+		return $f($p, $liste='false');
+	else return NULL; // ou une erreur ?
 }
 
 // equivalent a #TOTAL_BOUCLE sauf pour les boucles paginees, ou elle
