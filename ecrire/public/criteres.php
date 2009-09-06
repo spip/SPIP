@@ -655,7 +655,7 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode) {
 	. '$fin_boucle = min(' . $fin . ", \$Numrows['$id_boucle']['total'] - 1);\n	"
 	. '$Numrows[\''.$id_boucle. "']['grand_total'] = \$Numrows['$id_boucle']['total'];\n	"
 	. '$Numrows[\''.$id_boucle.'\']["total"] = max(0,$fin_boucle - $debut_boucle + 1);'
-	. "\n\tif (\$debut_boucle>0 AND sql_seek(\$result,\$debut_boucle,"._q($boucles[$id_boucle]->sql_serveur).",'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle'] = \$debut_boucle;\n\t";
+	. "\n\tif (\$debut_boucle>0 AND \$debut_boucle <= \$Numrows['$id_boucle']['grand_total'] AND sql_seek(\$result,\$debut_boucle,"._q($boucles[$id_boucle]->sql_serveur).",'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle'] = \$debut_boucle;\n\t";
 
 	$boucles[$id_boucle]->partie = "
 		if (\$Numrows['$id_boucle']['compteur_boucle'] <= \$debut_boucle) continue;
