@@ -43,40 +43,6 @@ function barre_inserer(text,champ) {
 }
 
 
-// D'apres Nicolas Hoizey 
-function barre_tableau(toolbarfield)
-{
-	var txtarea = toolbarfield;
-	txtarea.focus();
-	var cols = prompt("Nombre de colonnes du tableau :", "");
-	var rows = prompt("Nombre de lignes du tableau :", "");
-	if (cols != null && rows != null) {
-		var tbl = '';
-		var ligne = '|';
-		var entete = '|';
-		for(i = 0; i < cols; i++) {
-			ligne = ligne + ' valeur |';
-			entete = entete + ' {{entete}} |';
-		}
-		for (i = 0; i < rows; i++) {
-			tbl = tbl + ligne + '\n';
-		}
-		if (confirm('Voulez vous ajouter une ligne d\'en-tête ?')) {
-			tbl = entete + '\n' + tbl;
-		}
-		if ((clientVer >= 4) && is_ie && is_win) {
-			var str = document.selection.createRange().text;
-			var sel = document.selection.createRange();
-			sel.text = str + '\n\n' + tbl + '\n\n';
-		} else {
-			mozWrap(txtarea, '', "\n\n" + tbl + "\n\n");
-		}
-	}
-	return;
-}
-
-
-
 // Shows the help messages in the helpline window
 function helpline(help, champ) {
 	champ.value = help;
