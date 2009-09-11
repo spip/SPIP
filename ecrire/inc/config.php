@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Appliquer les valeurs par defaut pour les options non initialisees
  * (pour les langues c'est fait)
- * 
+ *
  * @return null
  */
 // http://doc.spip.org/@inc_config_dist
@@ -68,8 +68,6 @@ function liste_metas()
 		'jours_neuf' => '',
 		'quoi_de_neuf' => 'non',
 		'messagerie_agenda' => 'oui',
-
-		'articles_versions' => 'non',
 
 		'documents_article' => 'non',
 		'documents_rubrique' => 'non',
@@ -129,7 +127,7 @@ function avertissement_config() {
 // http://doc.spip.org/@bouton_radio
 function bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
 	static $id_label = 0;
-	
+
 	if (strlen($onClick) > 0) $onClick = " onclick=\"$onClick\"";
 	$texte = "<input type='radio' name='$nom' value='$valeur' id='label_${nom}_${id_label}'$onClick";
 	if ($actif) {
@@ -199,7 +197,7 @@ function appliquer_modifs_config($purger_skel=false) {
 			ecrire_meta('langue_site', $lang);
 		}
 		// le test a defait ca:
-		utiliser_langue_visiteur(); 
+		utiliser_langue_visiteur();
 	}
 
 	if ($purger_skel) {
