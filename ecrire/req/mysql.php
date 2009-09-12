@@ -507,10 +507,12 @@ function spip_mysql_countsel($from = array(), $where = array(),
 	return $c;
 }
 
+// Bien specifier le serveur auquel on s'adresse,
+// mais a l'install la globale n'est pas encore completement definie
 // http://doc.spip.org/@spip_mysql_error
 function spip_mysql_error($query='', $serveur='',$requeter=true) {
 	$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
-	$s = mysql_error($link);
+	$s = $link ? mysql_error($link) : mysql_error();
 	if ($s) spip_log("$s - $query", 'mysql');
 	return $s;
 }
@@ -519,7 +521,7 @@ function spip_mysql_error($query='', $serveur='',$requeter=true) {
 // http://doc.spip.org/@spip_mysql_errno
 function spip_mysql_errno($serveur='',$requeter=true) {
 	$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
-	$s = mysql_errno($link);
+	$s = $link ? mysql_errno($link) : mysql_errno();
 	// 2006 MySQL server has gone away
 	// 2013 Lost connection to MySQL server during query
 	if (in_array($s, array(2006,2013)))
