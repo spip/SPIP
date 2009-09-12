@@ -23,7 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@charger_fonction
 function charger_fonction($nom, $dossier='exec', $continue=false) {
 
-	if (substr($dossier,-1) != '/') $dossier .= '/';
+	if (strlen($dossier) AND substr($dossier,-1) != '/') $dossier .= '/';
 
 	if (function_exists($f = str_replace('/','_',$dossier) . $nom))
 		return $f;
