@@ -241,7 +241,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications('instituerarticle', $id_article,
-			array('statut' => $statut, 'statut_ancien' => $statut_ancien)
+			array('statut' => $statut, 'statut_ancien' => $statut_ancien, 'date'=>$date)
 		);
 	}
 
