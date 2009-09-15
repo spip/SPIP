@@ -643,10 +643,16 @@ function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur=
 
 // http://doc.spip.org/@spip_mysql_delete
 function spip_mysql_delete($table, $where='', $serveur='',$requeter=true) {
-	return spip_mysql_query(
+	$res = spip_mysql_query(
 			  calculer_mysql_expression('DELETE FROM', $table, ',')
 			. calculer_mysql_expression('WHERE', $where),
 			$serveur, $requeter);
+	if ($res){
+		$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+		return $link ? mysql_affected_rows($link) : mysql_affected_rows();
+	}
+	else
+		return false;
 }
 
 // http://doc.spip.org/@spip_mysql_replace
