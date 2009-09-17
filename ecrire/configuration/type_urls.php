@@ -26,7 +26,7 @@ function configuration_type_urls_dist()
 	foreach (find_all_in_path('urls/', '\w+\.php$', array()) as $f) {
 		$r = basename($f, '.php');
 		if ($r == 'index') continue;
-		include $f;
+		include_once $f;
 		$exemple = 'URLS_' . strtoupper($r) . '_EXEMPLE';
 		$exemple = defined($exemple) ? constant($exemple) : '?';
 		$dispo[$r] = "<em>$r</em> &mdash; <tt>" . $exemple . '</tt>';
