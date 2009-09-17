@@ -342,7 +342,8 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 	$jscript1 = "findObj_forcer('$ancre').style.visibility='visible';";
 	$jscript2 = "if(!antifocus_mots['$rand-$id_groupe']){this.value='';antifocus_mots['$rand-$id_groupe']=true;}";
 
-	if ($n > 50) {
+	if (!defined('_MAX_MOTS_LISTE')) define('_MAX_MOTS_LISTE', '50');
+	if ($n > _MAX_MOTS_LISTE) {
 		$jscript = "onfocus=\"$jscript1 $jscript2\"";
 
 		if ($obligatoire)
