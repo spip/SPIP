@@ -81,6 +81,9 @@ function autres_bases()
 		// Dire que rien n'est predefini
 		$predef = array(false, false, false, false);
 
+		if (!autoriser('webmestre')){
+			$login_db = $pass_db = "";
+		}
 		$form = install_connexion_form(array($adresse_db), array($login_db), array($pass_db), $predef, $name_db, 'sup1');
 	}
 
