@@ -282,6 +282,18 @@ function afficher_plus($lien) {
 	}
 }
 
+// Afficher un petit "i" pour lien vers autre page
+
+// http://doc.spip.org/@afficher_plus
+function afficher_plus_info($lien) {
+	global $spip_lang_right, $spip_display;
+
+	if ($spip_display != 4) {
+			return "\n<a href='$lien' style='float:$spip_lang_right; padding-right: 10px;'>" .
+			  http_img_pack(chemin_image("information-16.png"), "+", "") ."</a>";
+	}
+}
+
 //
 // Fonctions d'affichage
 //

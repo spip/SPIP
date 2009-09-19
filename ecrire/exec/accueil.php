@@ -239,7 +239,7 @@ function personnel_accueil($coockcookie)
 			icone_horizontale(_T('icone_activer_cookie'), $lien,"cookie-24.png", "", false);
 	}
 	
-	$titre_cadre = afficher_plus(generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur"));
+	$titre_cadre = afficher_plus_info(generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur"));
 	$titre_cadre .= majuscules(typo($GLOBALS['visiteur_session']['nom']));
 	
 	return debut_cadre_relief("information-perso-24.png",true, '',$titre_cadre)
@@ -289,7 +289,7 @@ function etat_base_accueil()
 			}
 		}
 		$res .= "<div class='accueil_informations articles verdana1'>";
-		$res .= afficher_plus(generer_url_ecrire("articles_page",""))."<b>"._T('info_articles')."</b>";
+		$res .= afficher_plus_info(generer_url_ecrire("articles_page",""))."<b>"._T('info_articles')."</b>";
 		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		if (isset($cpt['prepa'])) $res .= "<li>"._T("texte_statut_en_cours_redaction").": ".$cpt2['prepa'] . $cpt['prepa'] .'</li>';
 		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'] . $cpt['prop'] . '</li>';
@@ -317,7 +317,7 @@ function etat_base_accueil()
 			}
 		}
 		$res .= "<div class='accueil_informations breves verdana1'>";
-		$res .= afficher_plus(generer_url_ecrire("breves",""))."<b>"._T('info_breves_02')."</b>";
+		$res .= afficher_plus_info(generer_url_ecrire("breves",""))."<b>"._T('info_breves_02')."</b>";
 		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'].$cpt['prop'] . '</li>';
 		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt2['publie'] .$cpt['publie'] . "</b>" .'</li>';
@@ -346,7 +346,7 @@ function accueil_liste_participants()
 	if (!$cpt) return '';
 
 	       
-	$res = afficher_plus(generer_url_ecrire("auteurs"))."<b>"._T('icone_auteurs')."</b>"
+	$res = afficher_plus_info(generer_url_ecrire("auteurs"))."<b>"._T('icone_auteurs')."</b>"
 	. "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		
 	foreach($GLOBALS['liste_des_statuts'] as $k => $v) {
