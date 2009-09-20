@@ -624,7 +624,7 @@ function afficher_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_se
 		$parents = "<ul><li><span class='bloc'><em> &gt; </em><$tag class='$class$on'"
 		. ($tag=='a'?" href='". generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")."'":"")
 		. ">"
-		. supprimer_numero(typo(sinon($res['titre'], _T('ecrire:info_sans_titre'))))
+		. textebrut(supprimer_numero(typo(sinon($res['titre'], _T('ecrire:info_sans_titre')))))
 		. "</$tag></span>"
 		. $parents
 		. "</li></ul>";
