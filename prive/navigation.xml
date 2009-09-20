@@ -5,26 +5,6 @@
 		<titre>icone_accueil</titre>
 		<url>accueil</url>
 	</bouton>
-	<bouton id='infos_perso' parent="bando_accueil">
-		<icone>images/infos_perso-16.png</icone>
-		<titre>icone_mes_infos</titre>		
-		<url>infos_perso</url>
-	</bouton>
-	<bouton id='ma_langue' parent="bando_accueil">
-		<icone>images/ma_langue-16.png</icone>
-		<titre>icone_ma_langue</titre>		
-		<url>config_langage</url>
-	</bouton>
-	<bouton id='mes_preferences' parent="bando_accueil">
-		<icone>images/mes_preferences-16.png</icone>
-		<titre>icone_mes_preferences</titre>		
-		<url>config_preferences</url>
-	</bouton>
-	<bouton id='articles' parent="bando_accueil">
-		<icone>images/article-16.png</icone>
-		<titre>icone_tous_articles</titre>		
-		<url>articles_page</url>
-	</bouton>
 	
 	<bouton id="bando_edition">
 		<icone>images/edition-48.png</icone>
@@ -61,6 +41,11 @@
 		<titre>icone_publication</titre>
 		<url>navigation</url>
 		<args>menu=bando_publication</args>
+	</bouton>
+	<bouton id='articles' parent="bando_publication">
+		<icone>images/article-16.png</icone>
+		<titre>icone_tous_articles</titre>		
+		<url>articles_page</url>
 	</bouton>
 	<bouton id='suivi_edito' parent="bando_publication">
 		<icone>images/suivi-16.png</icone>
