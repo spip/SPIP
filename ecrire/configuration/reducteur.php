@@ -118,18 +118,14 @@ function configuration_reducteur_dist()
 	}
 
 	return ajax_action_greffe("configurer-reducteur", '', 
-	  debut_cadre_trait_couleur("image-24.gif", true)
-	. debut_cadre_relief("", true, "", _T("info_image_process_titre"))
+	  debut_cadre_trait_couleur("image-24.gif", true, "", _T("info_image_process_titre"))
 	.  "<p class='verdana2'>"
 	. _T('info_image_process')
 	. "</p>"
 	. $res
 	. "<br class='nettoyeur' />"
-	. "<p class='verdana2'>"
 	. _T('info_image_process2')
-	. "</p>"
 	. $test_out
-	. fin_cadre_relief(true)
 	. (!$formats_graphiques ? '' : format_choisi())
 	. fin_cadre_trait_couleur(true));
 }
@@ -161,11 +157,11 @@ function format_choisi()
 	$res .= '<br /><br />';
 	$res .= "</div>";
 	$res .= bouton_radio("creer_preview", "non", _T('item_choix_non_generation_miniature'), $creer_preview != "oui", "changeVisible(this.checked, 'config-preview', 'none', 'block');");
-
+	
 	return 
-	  debut_cadre_trait_couleur("", true, "", _T('info_generation_miniatures_images'))
+	  debut_cadre_relief("", true, "", _T('info_generation_miniatures_images'))
 	.  ajax_action_post('configurer', 'reducteur', 'config_fonctions', '', $res)
-	. fin_cadre_trait_couleur(true);
+	. fin_cadre_relief(true);
 }
 
 // http://doc.spip.org/@afficher_choix_vignette
