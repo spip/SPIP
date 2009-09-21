@@ -274,7 +274,7 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 
 	if ($cond) {
 		include_spip('inc/rubriques');
-		$postdate = ($GLOBALS['meta']["post_dates"] == "non" AND isset($champs['date']))?$champs['date']:false;
+		$postdate = ($GLOBALS['meta']["post_dates"] == "non" AND isset($champs['date']) AND (strtotime($champs['date']) < time()))?$champs['date']:false;
 		calculer_rubriques_if($id_rubrique, $champs, $statut, $postdate);
 	}
 }
