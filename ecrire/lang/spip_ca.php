@@ -198,7 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_repertoires_suivants' => '<p><b>Els seg&uuml;ents directoris no s&oacute;n accessibles a l\'escriptura:</b></p> <ul>@bad_dirs@</ul>
   <p>Per solucionar-ho, feu servir el vostre client FTP per tal de regular els drets d\'acc&eacute;s de cadascun d\'aquests directoris. El procediment s\'explica detalladament a la guia d\'instal&middot;laci&oacute;.</p>
   <p>Un cop feta aquesta manipulaci&oacute;, podreu ',
-'double_occurrence' => '<MODIF>Doble inst&agrave;ncia',
+'double_occurrence' => 'Doble inst&agrave;ncia de @balise@ ',
 
 // E
 'en_cours' => 'en curs',
@@ -724,7 +724,7 @@ i tornar-vos a connectar al lloc.
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: l\'etiqueta B ha d\'anar abans',
-'zbug_balise_inexistante' => '<MODIF>error @from@: l\'etiqueta @balise@ no existeix',
+'zbug_balise_inexistante' => 'etiqueta @balise@ mal declarada per a @from@ ',
 'zbug_balise_sans_argument' => 'Argument que falta a l\'etiqueta @balise@',
 'zbug_boucle' => 'bucle',
 'zbug_boucle_recursive_undef' => 'Bucle recurrent no definit: @nom@',
@@ -748,7 +748,7 @@ i tornar-vos a connectar al lloc.
 'zbug_info_erreur_squelette' => 'Error en el lloc Web',
 'zbug_inversion_ordre_inexistant' => 'Inversi&oacute; d\'un ordre inexistent',
 'zbug_pagination_sans_critere' => 'Etiqueta #PAGINATION sense criteri {pagination} o  fet servir a dins d\'un bucle recursiu.',
-'zbug_parametres_inclus_incorrects' => '<MODIF>Par&agrave;metres d\'inclusi&oacute; incorrectes: @param@',
+'zbug_parametres_inclus_incorrects' => 'Par&agrave;metre d\'inclusi&oacute; incorrecte: @param@',
 'zbug_profile' => 'Temps de c&agrave;lcul&nbsp;: @time@',
 'zbug_resultat' => 'resultat',
 'zbug_serveur_indefini' => 'Servidor SQL sense definir',
