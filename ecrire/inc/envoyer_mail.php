@@ -12,58 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-//
-// Infos de mails sur l'hebergeur (tout ca est assez sale)
-//
-global $hebergeur;
-global $HTTP_X_HOST, $SERVER_NAME;
-$hebergeur = '';
-
-// Lycos (ex-Multimachin)
-if ($HTTP_X_HOST == 'membres.lycos.fr') {
-	$hebergeur = 'lycos';
-}
-// Altern
-else if (preg_match(',altern\.com$,', $SERVER_NAME)) {
-	$hebergeur = 'altern';
-}
-// NexenServices
-else if ($_SERVER['SERVER_ADMIN'] == 'www@nexenservices.com') {
-	if (!function_exists('email'))
-		include ('mail.inc');
-	$hebergeur = 'nexenservices';
-}
-// Online
-else if (function_exists('email')) {
-	$hebergeur = 'online';
-}
-
-
-//
-// Chez lyconiania, envoyer un mail coupe la connection MySQL (sic)
-//
-
-$GLOBALS['queue_mails'] = '';
-
-// http://doc.spip.org/@envoyer_queue_mails
-function envoyer_queue_mails() {
-	global $queue_mails;
-	if (!$queue_mails) return;
-	reset($queue_mails);
-	while (list(, $val) = each($queue_mails)) {
-		$email = $val['email'];
-		$sujet = $val['sujet'];
-		$texte = $val['texte'];
-		$headers = $val['headers'];
-		@mail($email, $sujet, $texte, $headers);
-	}
-}
-
-if ($GLOBALS['hebergeur'] == 'lycos') {
-	register_shutdown_function(envoyer_queue_mails);
-}
-
-
 // http://doc.spip.org/@nettoyer_titre_email
 function nettoyer_titre_email($titre) {
 	return str_replace("\n", ' ', supprimer_tags(extraire_multi($titre)));
@@ -91,7 +39,6 @@ function nettoyer_caracteres_mail($t) {
 
 // http://doc.spip.org/@inc_envoyer_mail_dist
 function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = "") {
-	global $hebergeur, $queue_mails;
 	include_spip('inc/charsets');
 	include_spip('inc/filtres');
 
@@ -166,19 +113,7 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 		$sujet = preg_replace ("@\r*\n@","\r\n", $sujet);
 	}
 
-	switch($hebergeur) {
-	case 'lycos':
-		$queue_mails[] = array(
-			'email' => $email,
-			'sujet' => $sujet,
-			'texte' => $texte,
-			'headers' => $headers);
-		return true;
-	case 'free':
-		return false;
-	default:
-		return @mail($email, $sujet, $texte, $headers);
-	}
+	return @mail($email, $sujet, $texte, $headers);
 }
 
 ?>
