@@ -268,6 +268,7 @@ ecrire/inc/presentation_mini.php -text
 ecrire/inc/presenter_enfants.php -text
 ecrire/inc/presenter_liste.php -text
 ecrire/inc/puce_statut.php -text
+ecrire/inc/queue.php -text
 ecrire/inc/rechercher.php -text
 ecrire/inc/referencer_traduction.php -text
 ecrire/inc/safehtml.php -text
