@@ -116,10 +116,10 @@ function spip_sql_erreur($serveur='')
 {
 	$connexion = spip_connect($serveur);
 	$e = sql_errno($serveur);
-	$m = sql_error($serveur) . ' (' . $e . ') ' . $connexion['last'];
-	$f = (isset($connexion['type']) ? $connexion['type'] : 'sql') . $serveur;
+	$t = (isset($connexion['type']) ? $connexion['type'] : 'sql');
+	$m = "Erreur $e de $t: " . sql_error($serveur) . "\n" . $connexion['last'];
+	$f = $t . $serveur;
 	spip_log($m, $f);
-	spip_log("Erreur $e de $f, voir ses Log");
 }
 
 // Cette fonction ne doit etre appelee qu'a travers la fonction sql_serveur

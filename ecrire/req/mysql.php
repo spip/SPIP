@@ -630,8 +630,7 @@ function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur=
 
 	if (!$champs) return;
 	if (!$desc) $desc = description_table($table);
-	if (!$desc) die("$table insertion sans description");
-	$fields =  $desc['field'];
+	if (!$desc) $champs = array(); else $fields =  $desc['field'];
 	$set = array();
 	foreach ($champs as $champ => $val) {
 		$set[] = $champ . '=' . spip_mysql_cite($val, $fields[$champ]);

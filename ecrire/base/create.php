@@ -21,12 +21,9 @@ include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@creer_ou_upgrader_table
 function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='') {
-	static $fcreate = null;
-	if (!$fcreate) $fcreate = sql_serveur('create', $serveur);
-
 	$sql_desc = sql_showtable($table,true,$serveur);
 	if (!$upgrade OR !$sql_desc)
-		$fcreate($table, $desc['field'], $desc['key'], $autoinc, false, $serveur);
+		sql_create($table, $desc['field'], $desc['key'], $autoinc, false, $serveur);
 	else {
 		// ajouter les champs manquants
 		$last = '';
@@ -69,9 +66,7 @@ function maj_tables($upgrade_tables=array(),$serveur=''){
 // http://doc.spip.org/@creer_base_types_doc
 function creer_base_types_doc($serveur='') {
 	global $tables_images, $tables_sequences, $tables_documents, $tables_mime;
-	// Init ou Re-init ==> replace pas insert
 
-	$freplace = sql_serveur('replace', $serveur);
 	foreach ($tables_mime as $extension => $type_mime) {
 		if (isset($tables_images[$extension])) {
 			$titre = $tables_images[$extension];
@@ -88,8 +83,8 @@ function creer_base_types_doc($serveur='') {
 			else
 				$titre = '';
 		}
-
-		$freplace('spip_types_documents',
+		// Init ou Re-init ==> replace pas insert
+		sql_replace('spip_types_documents',
 			array('mime_type' => $type_mime,
 				'titre' => $titre,
 				'inclus' => $inclus,

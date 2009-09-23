@@ -14,11 +14,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $serveur_vieille_base =0;
 
-function	spip_create_vieille_table($table,$fields,$keys,$autoinc){
-	static $fcreate = null;
+function spip_create_vieille_table($table,$fields,$keys,$autoinc){
 	$serveur = $GLOBALS['serveur_vieille_base'];
-	if (!$fcreate) $fcreate = sql_serveur('create', $serveur);
-	$fcreate($table,$fields,$keys,$autoinc,false,$serveur);
+	sql_create($table,$fields,$keys,$autoinc,false,$serveur);
 }
 
 function maj_vieille_base_create_dist($version_cible){

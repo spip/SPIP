@@ -41,11 +41,10 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
 	= $GLOBALS['spip_' . $server_db .'_functions_' . $GLOBALS['spip_sql_version']];
 
-	$fquery = sql_serveur('query', $server_db);
 	if ($choix_db == "new_spip") {
 		$re = ',^[a-z_][a-z_0-9-]*$,i';
 		if (preg_match($re, $sel_db))
-			$fquery("CREATE DATABASE `$sel_db`", $server_db);
+			sql_query("CREATE DATABASE `$sel_db`", $server_db);
 		else {
 		  $re = "Le nom de la base doit correspondre a $re";
 		  spip_log($re);
@@ -121,26 +120,24 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	  // pour recreer les tables disparues au besoin
 	  spip_log("Table des Meta deja la. Verification des autres.");
 	  creer_base($server_db); 
-	  $fupdateq = sql_serveur('updateq', $server_db);
 
-	  $r = $fquery("SELECT valeur FROM spip_meta WHERE nom='version_installee'", $server_db);
+	  $r = sql_getfetsel('valeur',  'spip_meta', "nom='version_installee'", '','','','', $server_db);
 
-	  if ($r) $r = sql_fetch($r, $server_db);
-	  $version_installee = !$r ? 0 : (double) $r['valeur'];
+	  $version_installee = !$r ? 0 : (double) $r;
 	  if (!$version_installee OR ($spip_version_base < $version_installee)) {
-	    $fupdateq('spip_meta', array('valeur'=>$spip_version_base, 'impt'=>'non'), "nom='version_installee'", $server_db);
+	    sql_updateq('spip_meta', array('valeur'=>$spip_version_base, 'impt'=>'non'), "nom='version_installee'", $server_db);
 	    spip_log("nouvelle version installee: $spip_version_base");
 	  }
 	  // eliminer la derniere operation d'admin mal terminee
 	  // notamment la mise a jour 
-	  @$fquery("DELETE FROM spip_meta WHERE nom='import_all' OR  nom='admin'", $server_db);
+	  sql_query("DELETE FROM spip_meta WHERE nom='import_all' OR  nom='admin'", $server_db);
 	}
 
 	$ligne_rappel = ($server_db != 'mysql') ? ''
 	: (test_rappel_nom_base_mysql($server_db)
 	  .test_sql_mode_mysql($server_db)	);
 
-	$result_ok = @$fquery("SELECT COUNT(*) FROM spip_meta", $server_db);
+	$result_ok = sql_query("SELECT COUNT(*) FROM spip_meta", $server_db);
 	if (!$result_ok) return "<!--\nvielle = $old rappel= $ligne_rappel\n-->";
 
 	if ($chmod_db) {
