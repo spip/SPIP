@@ -30,12 +30,13 @@ function exec_config_lang_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "langues");
 
+	echo gros_titre(_T('info_langues'), '', false),
+	  barre_onglets("config_lang", "langues");
+
 	echo debut_gauche('', true);
 
 	echo debut_droite('', true);
 
-	echo gros_titre(_T('info_langues'), '', false),
-	  barre_onglets("config_lang", "langues");
  
 	$langue = charger_fonction('langue', 'configuration');
 	echo $langue();

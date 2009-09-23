@@ -369,6 +369,9 @@ function exec_accueil_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_index'), "accueil", "accueil");
 
+
+	echo gros_titre(_T("icone_accueil"), '', false);
+
 	echo debut_gauche("",true);
 
 	if ($spip_display != 4) {
