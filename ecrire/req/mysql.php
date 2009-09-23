@@ -20,7 +20,7 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap=
 	if ($port > 0) $host = "$host:$port";
 	$link = @mysql_connect($host, $login, $pass, true);
 	if (!$link) return false;
-
+	$last = '';
 	if (!$db) {
 		$ok = $link;
 		$db = 'spip';
@@ -29,16 +29,17 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap=
 		if (defined('_MYSQL_SET_SQL_MODE') 
 		  OR defined('_MYSQL_SQL_MODE_TEXT_NOT_NULL') // compatibilite
 		  )
-			mysql_query("set sql_mode=''");
+			mysql_query($last = "set sql_mode=''");
 	}
 #	spip_log("Connexion vers $host, base $db, prefixe $prefixe "
 #		 . ($ok ? "operationnelle sur $link" : 'impossible'));
 
 	return !$ok ? false : array(
 		'db' => $db,
+		'last' => $last,
+		'ldap' => $ldap,
 		'prefixe' => $prefixe ? $prefixe : $db,
 		'link' => $GLOBALS['mysql_rappel_connexion'] ? $link : false,
-		'ldap' => $ldap,
 		);
 }
 
@@ -93,14 +94,18 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 
 // http://doc.spip.org/@spip_mysql_set_charset
 function spip_mysql_set_charset($charset, $serveur='',$requeter=true,$requeter=true){
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	#spip_log("changement de charset sql : "."SET NAMES "._q($charset));
-	return mysql_query("SET NAMES "._q($charset));
+	return mysql_query($connexion['last'] = "SET NAMES "._q($charset));
 }
 
 // http://doc.spip.org/@spip_mysql_get_charset
 function spip_mysql_get_charset($charset=array(), $serveur='',$requeter=true){
-	$c = !$charset ? '' : (" LIKE "._q($charset['charset']));
-	return spip_mysql_fetch(mysql_query("SHOW CHARACTER SET$c"), NULL, $serveur);
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion['last'] = $c = "SHOW CHARACTER SET"
+	. (!$charset ? '' : (" LIKE "._q($charset['charset'])));
+
+	return spip_mysql_fetch(mysql_query($c), NULL, $serveur);
 }
 
 // obsolete, ne plus utiliser
@@ -114,7 +119,7 @@ function spip_query_db($query, $serveur='',$requeter=true) {
 // http://doc.spip.org/@spip_mysql_query
 function spip_mysql_query($query, $serveur='',$requeter=true) {
 
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -129,6 +134,7 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 		$t = trace_query_start();
 	} else $t = 0 ;
  
+	$connexion['last'] = $query;
 	$r = $link ? mysql_query($query, $link) : mysql_query($query);
 
 	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
@@ -148,7 +154,7 @@ function spip_mysql_optimize($table, $serveur='',$requeter=true){
 // http://doc.spip.org/@spip_mysql_explain
 function spip_mysql_explain($query, $serveur='',$requeter=true){
 	if (strpos(ltrim($query), 'SELECT') !== 0) return array();
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -505,23 +511,22 @@ function spip_mysql_countsel($from = array(), $where = array(),
 }
 
 // http://doc.spip.org/@spip_mysql_error
-function spip_mysql_error($query='', $serveur='',$requeter=true) {
-	$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
-	$s = $link ? mysql_error($link) : mysql_error();
-	if ($s) spip_log("$s - $query", 'mysql');
-	return $s;
+function spip_mysql_error($serveur='') {
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$link = $connexion['link'];
+	return ($link ? mysql_error($link) : mysql_error()) . $connexion['last'];
 }
 
 // A transposer dans les portages
 // http://doc.spip.org/@spip_mysql_errno
-function spip_mysql_errno($serveur='',$requeter=true) {
-	$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+function spip_mysql_errno($serveur='') {
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$link = $connexion['link'];
 	$s = $link ? mysql_errno($link) : mysql_errno();
 	// 2006 MySQL server has gone away
 	// 2013 Lost connection to MySQL server during query
 	if (in_array($s, array(2006,2013)))
 		define('spip_interdire_cache', true);
-	if ($s) spip_log("Erreur mysql $s");
 	return $s;
 }
 
@@ -540,7 +545,7 @@ function spip_mysql_free($r, $serveur='',$requeter=true) {
 // http://doc.spip.org/@spip_mysql_insert
 function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$requeter=true) {
 
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -552,11 +557,11 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$req
 		$t = trace_query_start();
 	} else $t = 0 ;
  
-	$query="INSERT INTO $table $champs VALUES $valeurs";
+	$connexion['last'] = $query ="INSERT INTO $table $champs VALUES $valeurs";
 #	spip_log($query);
 	if (mysql_query($query, $link))
 		$r = mysql_insert_id($link);
-	else $r = 0;
+	else $r = false;
 
 	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
 
@@ -567,7 +572,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$req
 function spip_mysql_insertq($table, $couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$desc) $desc = description_table($table);
-	if (!$desc) die("$table insertion sans description");
+	if (!$desc) $couples = array();
 	$fields =  isset($desc['field'])?$desc['field']:array();
 
 	foreach ($couples as $champ => $val) {
@@ -582,7 +587,7 @@ function spip_mysql_insertq($table, $couples=array(), $desc=array(), $serveur=''
 function spip_mysql_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$desc) $desc = description_table($table);
-	if (!$desc) die("$table insertion sans description");
+	if (!$desc) $tab_couples = array();
 	$fields =  isset($desc['field'])?$desc['field']:array();
 	
 	$cles = "(" . join(',',array_keys($tab_couples[0])) . ')';
@@ -766,13 +771,12 @@ function spip_get_lock($nom, $timeout = 0) {
 
 	define('_LOCK_TIME', intval(time()/3600-316982));
 
-	$connexion = $GLOBALS['connexions'][0];
+	$connexion = &$GLOBALS['connexions'][0];
 	$prefixe = $connexion['prefixe'];
-	$db = $connexion['db'];
 	$nom = "$bd:$prefix:$nom" .  _LOCK_TIME;
 
-	$q = mysql_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n");
-	$q = @sql_fetch($q);
+	$connexion['last'] = $q = "SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n";
+	$q = @sql_fetch(mysql_query($q));
 	if (!$q) spip_log("pas de lock sql pour $nom");
 	return $q['n'];
 }
@@ -780,12 +784,12 @@ function spip_get_lock($nom, $timeout = 0) {
 // http://doc.spip.org/@spip_release_lock
 function spip_release_lock($nom) {
 
-	$connexion = $GLOBALS['connexions'][0];
+	$connexion = &$GLOBALS['connexions'][0];
 	$prefixe = $connexion['prefixe'];
-	$db = $connexion['db'];
 	$nom = "$bd:$prefix:$nom" . _LOCK_TIME;
 
-	@mysql_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
+	$connexion['last'] = $q = "SELECT RELEASE_LOCK(" . _q($nom) . ")";
+	@mysql_query($q);
 }
 
 // Renvoie false si on n'a pas les fonctions mysql (pour l'install)
