@@ -20,6 +20,9 @@ function exec_config_identite(){
 		$commencer_page = charger_fonction('commencer_page','inc');
 		echo $commencer_page(_T('titre_identite_site'));
 
+
+		echo gros_titre(_T("titre_identite_site"), "", false);
+
 		echo debut_gauche("configurer_identite",true);
 
 	//
