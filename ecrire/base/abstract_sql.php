@@ -346,6 +346,14 @@ function sql_create($nom, $champs, $cles=array(), $autoinc=false, $temporary=fal
 	return $r;
 }
 
+function sql_create_base($nom, $serveur='', $option=true)
+{
+	$f = sql_serveur('create_base', $serveur,  $option==='continue' OR $option===false);
+	if (!is_string($f) OR !$f) return false;
+	$r = $f($nom, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
+}
 
 // Fonction pour creer une vue 
 // nom : nom de la vue,
