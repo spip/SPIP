@@ -949,7 +949,7 @@ function traiter_raccourcis($letexte) {
 	// Retablir les caracteres proteges
 	$letexte = strtr($letexte, _RACCOURCI_PROTECTEUR, _RACCOURCI_PROTEGER);
 
-	// Fermer les paragraphes ; mais ne pas en creer si un seul
+	// Fermer les paragraphes ; mais ne pas forcement en creer si un seul
 	$letexte = paragrapher($letexte, $GLOBALS['toujours_paragrapher']);
 
 	// Appeler les fonctions de post-traitement
