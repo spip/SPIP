@@ -204,7 +204,7 @@ $GLOBALS['spip_matrice']['image_graver'] = 'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['image_select'] = 'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['image_reduire'] = 'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['image_reduire_par'] = 'inc/filtres_images_mini.php';
-$GLOBALS['spip_matrice']['image_passe_partout'] = 'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['image_passe_partout'] = 'inc/filtres_imgs_mini.php';
 
 $GLOBALS['spip_matrice']['couleur_html_to_hex'] = 'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['couleur_foncer'] = 'inc/filtres_images_mini.php';
@@ -831,20 +831,24 @@ function date_relative($date, $decalage_maxi=0) {
 		$retour = _T($il_y_a, array("delai"=>"$minutes "._T("date_minutes"))); 
 	}
 	else if ($decal < (3600 * 24) ) {
-		$heures = ceil ($decal / 3600);
-		$retour = _T($il_y_a, array("delai"=>"$heures "._T("date_heures"))); 
+		$heures = floor ($decal / 3600);
+		if ($heures < 2) $retour = _T($il_y_a, array("delai"=>"$heures "._T("date_une_heure"))); 
+		else $retour = _T($il_y_a, array("delai"=>"$heures "._T("date_heures"))); 
 	}
 	else if ($decal < (3600 * 24 * 7)) {
-		$jours = ceil ($decal / (3600 * 24));
-		$retour = _T($il_y_a, array("delai"=>"$jours "._T("date_jours"))); 
+		$jours = floor ($decal / (3600 * 24));
+		if ($jours < 2) $retour = _T("date_hier"); 
+		else $retour = _T($il_y_a, array("delai"=>"$jours "._T("date_jours"))); 
 	}
 	else if ($decal < (3600 * 24 * 7 * 4)) {
-		$semaines = ceil ($decal / (3600 * 24 * 7));
-		$retour = _T($il_y_a, array("delai"=>"$semaines "._T("date_semaines"))); 
+		$semaines = floor ($decal / (3600 * 24 * 7));
+		if ($semaines < 2) $retour = _T($il_y_a, array("delai"=>"$semaines "._T("date_une_semaine"))); 
+		else $retour = _T($il_y_a, array("delai"=>"$semaines "._T("date_semaines"))); 
 	}
 	else if ($decal < (3600 * 24 * 30 * 6)) {
-		$mois = ceil ($decal / (3600 * 24 * 30));
-		$retour = _T($il_y_a, array("delai"=>"$mois "._T("date_mois"))); 
+		$mois = floor ($decal / (3600 * 24 * 30));
+		if ($mois < 2) $retour = _T($il_y_a, array("delai"=>"$mois "._T("date_un_mois"))); 
+		else $retour = _T($il_y_a, array("delai"=>"$mois "._T("date_mois"))); 
 	}
 	else {
 		$retour = affdate_court($date);
