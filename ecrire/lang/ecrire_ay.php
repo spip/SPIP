@@ -276,7 +276,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_changer_nom_groupe' => 'Aka qututx sut mayxt\'ayam',
 'info_chapeau' => 'Qalltawi',
 'info_chapeau_2' => 'Qalltawi:',
-'info_chemin_acces_1' => 'Ajlli&ntilde;atakiwa:  <b></b>manta&ntilde; thakhita jach\'a q\'ipina</b>',
+'info_chemin_acces_1' => 'Ajlli&ntilde;atakiwa:  <b>manta&ntilde; thakhita jach\'a q\'ipina</b>',
 'info_chemin_acces_annuaire' => 'Ajlla&ntilde;atakiwa:  <b>Manta&ntilde; thakhi jach\'a q\'ipina</b>',
 'info_choix_base' => 'Kimsir sarawi:',
 'info_classement_1' => '&deg; ukjaru @liste@',
@@ -330,7 +330,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_forum_ouvert' => 'Qamawit ch\'usawj jark\'atapanx Taqpach qillqatanakatakikiw m&auml; aruskipa&ntilde;awiw utji. Ukxarux, M&auml; aruskipa&ntilde;aw apxatat apnaqirinakatakikiw naktaya&ntilde;a.',
 'info_forum_statistiques' => 'Tumpatanakat tantiyirinaka',
 'info_forums_abo_invites' => 'Qamawimax aruskipa&ntilde;awinakaniw qullqimp qillqatanakatakikiwa; Aka jach\'a uta qamawinxa tumpirinakaru qillqayasi&ntilde;ataki jawthapiyi.',
-'info_gauche_admin_effacer' => '<b>Aka Web qamawix qamawit apnaqirinakatakikiwa.</b><p> Mantayiwa kunayman u&ntilde;jawinakar  askicha&ntilde;ataki. Yaqhipanakax',
+'info_gauche_admin_effacer' => '<b>Aka Web qamawix qamawit apnaqirinakatakikiwa.</b><p> Mantayiwa kunayman u&ntilde;jawinakar  askicha&ntilde;ataki. Yaqhipanakax</p>',
 'info_gauche_auteurs' => 'Akanxa taqpach qamawit qillqirinakaw u&ntilde;sti. Kunjamaskis ukxa jisk\'a saltan kulurapampiw   u&ntilde;acht\'ayi (apnaqiri = ch\'ux&ntilde;a, qillqiri = q\'illu).',
 'info_gauche_auteurs_exterieurs' => 'Anqajankir qillqirinakax, qamawir jan manta&ntilde;aniwa, m&auml; laram jisk\'a saltampiw u&ntilde;acht\'ayataski; m&auml; wayaqamp chhaqayatakis.',
 'info_gauche_messagerie' => 'Yatiyawirix yatiyasiwa, amtayirinak u&ntilde;stya&ntilde;a yatiyaw tantaru kuns apani&ntilde;apataki jan ukjax yatiyawinak yatiya&ntilde;a ( apnaqir qutu ukar mayachatakis ukjax)
