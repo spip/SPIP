@@ -623,7 +623,7 @@ function enregistrer_premiere_revision($x) {
 		$id_article = $x['args']['id_objet'];
 
 		if (!sql_countsel('spip_versions',"id_article=$id_article")) {
-			$originaux = sql_fetsel("*", 'spip_articles', "$id_table_objet=$id_objet");
+			$originaux = sql_fetsel("*", 'spip_articles', "id_article=$id_article");
 			foreach($champs as $v)
 				if (isset($originaux[$v]))
 					$champs_originaux[$v] = $originaux[$v];
