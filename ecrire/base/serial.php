@@ -222,8 +222,8 @@ $spip_types_documents = array(
 		"titre"	=> "text DEFAULT '' NOT NULL",
 		"descriptif"	=> "text DEFAULT '' NOT NULL",
 		"mime_type"	=> "varchar(100) DEFAULT '' NOT NULL",
-		"inclus"	=> "ENUM('non', 'image', 'embed') NOT NULL DEFAULT 'non'",
-		"upload"	=> "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
+		"inclus"	=> "ENUM('non', 'image', 'embed') DEFAULT 'non'  NOT NULL",
+		"upload"	=> "ENUM('oui', 'non') DEFAULT 'oui'  NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_types_documents_key = array(

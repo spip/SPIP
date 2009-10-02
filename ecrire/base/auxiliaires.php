@@ -29,7 +29,7 @@ $spip_petitions_key = array(
 
 
 $spip_resultats = array(
- 		"recherche"	=> "char(16) not null default ''",
+ 		"recherche"	=> "char(16) DEFAULT '' NOT NULL",
 		"id"	=> "INT UNSIGNED NOT NULL",
  		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
 		"maj"	=> "TIMESTAMP" );
