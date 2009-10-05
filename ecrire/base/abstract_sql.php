@@ -240,7 +240,9 @@ function sql_update($table, $exp, $where='', $desc=array(), $serveur='', $option
 {
 	$f = sql_serveur('update', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $exp, $where, $desc, $serveur, $option!==false);
+	$r = $f($table, $exp, $where, $desc, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // Update est presque toujours appelee sur des constantes ou des dates
@@ -251,7 +253,9 @@ function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='', $optio
 {
 	$f = sql_serveur('updateq', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $exp, $where, $desc, $serveur, $option!==false);
+	$r = $f($table, $exp, $where, $desc, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_delete
@@ -259,7 +263,9 @@ function sql_delete($table, $where='', $serveur='', $option=true)
 {
 	$f = sql_serveur('delete', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $where, $serveur, $option!==false);
+	$r = $f($table, $where, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_replace
@@ -267,7 +273,9 @@ function sql_replace($table, $couples, $desc=array(), $serveur='', $option=true)
 {
 	$f = sql_serveur('replace', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $couples, $desc, $serveur, $option!==false);
+	$r = $f($table, $couples, $desc, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 
@@ -276,7 +284,9 @@ function sql_replace_multi($table, $tab_couples, $desc=array(), $serveur='', $op
 {
 	$f = sql_serveur('replace_multi', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $tab_couples, $desc, $serveur, $option!==false);
+	$r = $f($table, $tab_couples, $desc, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_drop_table
@@ -284,7 +294,9 @@ function sql_drop_table($table, $exist='', $serveur='', $option=true)
 {
 	$f = sql_serveur('drop_table', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $exist, $serveur, $option!==false);
+	$r = $f($table, $exist, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // supprimer une vue sql
@@ -293,7 +305,9 @@ function sql_drop_view($table, $exist='', $serveur='', $option=true)
 {
 	$f = sql_serveur('drop_view', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($table, $exist, $serveur, $option!==false);
+	$r = $f($table, $exist, $serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
 }
 
 // http://doc.spip.org/@sql_showbase
@@ -436,6 +450,7 @@ function sql_fetsel(
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
 	$q = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
+	spip_log("fetsel $select $from $where '$option' $q");
 	if ($option===false) return $q;
 	if (!$q) return array();
 	$r = sql_fetch($q, $serveur, $option);
