@@ -98,13 +98,14 @@ function install_etape_4_dist()
 		if ($email)
 			ecrire_meta('email_webmaster', $email);
 
-		// Ici on va connecter directement celui qui vient de creer son login
-		// on ne lui met ni cookie d'admin ni connexion longue
-		if ($auth_spip = charger_fonction('auth_spip', 'inc', true)
-		AND $row_auteur = $auth_spip($login, $pass)
+		// Connecter directement celui qui vient de (re)donner son login
+		// mais sans cookie d'admin ni connexion longue
+		if ($auth_spip = charger_fonction('spip', 'auth', true)
+		AND $row = $auth_spip($login, $pass)
 		AND $session = charger_fonction('session', 'inc')
-		AND $cookie_session = $session($row_auteur))
+		AND $cookie_session = $session($row))
 			spip_setcookie('spip_session', $cookie_session);
+		else spip_log("login automatique impossible $auth_spip $session" . count($row));
 	}
 
 	$config = charger_fonction('config', 'inc');
