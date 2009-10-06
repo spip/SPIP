@@ -135,14 +135,14 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	  }
 	  // eliminer la derniere operation d'admin mal terminee
 	  // notamment la mise a jour 
-	  sql_query("DELETE FROM spip_meta WHERE nom='import_all' OR  nom='admin'", $server_db);
+	  sql_delete('spip_meta', "nom='import_all' OR  nom='admin'", $server_db);
 	}
 
 	$ligne_rappel = ($server_db != 'mysql') ? ''
 	: (test_rappel_nom_base_mysql($server_db)
 	  .test_sql_mode_mysql($server_db)	);
 
-	$result_ok = sql_query("SELECT COUNT(*) FROM spip_meta", $server_db);
+	$result_ok = sql_countsel('spip_meta', '','','',$server_db);
 	if (!$result_ok) return "<!--\nvielle = $old rappel= $ligne_rappel\n-->";
 
 	if ($chmod_db) {
