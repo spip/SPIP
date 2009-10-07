@@ -295,4 +295,119 @@ function auth_trace($row, $date=null)
 		sql_updateq("spip_auteurs", array("en_ligne" => $date), "id_auteur=" .$row['id_auteur']);
 	}
 }
+
+
+/**
+ * Fonction aiguillage, privee
+ * @param string $fonction
+ * @param array $args
+ * @param mixed $defaut
+ * @return mixed
+ */
+function auth_administrer($fonction,$args,$defaut=false){
+	$auth_methode = array_shift($args);
+	if ($auth = charger_fonction($auth_methode,'inc',false)
+		AND function_exists($f="auth_{$auth_methode}_$fonction")
+	)
+		return call_user_func_array($f, $args);
+	else
+		return $defaut;
+}
+
+/**
+ * API Authentification, gestion des identites centralisees
+ */
+
+/**
+ * Tester la possibilite de modifier le login d'authentification
+ * pour la methode donnee
+ *
+ * @param string $auth_methode
+ * @return bool
+ */
+function auth_autoriser_modifier_login($auth_methode){
+	return auth_administrer('autoriser_modifier_login',func_get_args());
+}
+
+/**
+ * Verifier la validite d'un nouveau login pour modification
+ * pour la methode donnee
+ *
+ * @param string $auth_methode
+ * @param string $new_login
+ * @param int $id_auteur
+ * @return string
+ *  message d'erreur ou chaine vide si pas d'erreur
+ */
+function auth_verifier_login($auth_methode, $new_login, $id_auteur=0){
+	return auth_administrer('verifier_login',func_get_args(),'');
+}
+
+/**
+ * Modifier le login d'un auteur pour la methode donnee
+ *
+ * @param string $auth_methode
+ * @param string $new_login
+ * @param int $id_auteur
+ * @return bool
+ */
+function auth_modifier_login($auth_methode, $new_login, $id_auteur){
+	return auth_administrer('modifier_login',func_get_args());
+}
+
+/**
+ * Tester la possibilite de modifier le pass
+ * pour la methode donnee
+ *
+ * @param string $auth_methode
+ * @return bool
+ *	succes ou echec
+ */
+function auth_autoriser_modifier_pass($auth_methode){
+	return auth_administrer('autoriser_modifier_pass',func_get_args());
+}
+
+/**
+ * Verifier la validite d'un pass propose pour modification
+ * pour la methode donnee
+ *
+ * @param string $auth_methode
+ * @param string $login
+ * @param string $new_pass
+ * @param int $id_auteur
+ * @return string
+ *	message d'erreur ou chaine vide si pas d'erreur
+ */
+function auth_verifier_pass($auth_methode, $login, $new_pass, $id_auteur=0){
+	return auth_administrer('verifier_pass',func_get_args(),'');
+}
+
+/**
+ * Modifier le mot de passe d'un auteur
+ * pour la methode donnee
+ *
+ * @param string $auth_methode
+ * @param string $login
+ * @param string $new_pass
+ * @param int $id_auteur
+ * @return bool
+ *	succes ou echec
+ */
+function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur){
+	return auth_administrer('modifier_pass',func_get_args());
+}
+
+/**
+ * Synchroniser un compte sur une base distante pour la methode
+ * donnee lorsque des modifications sont faites dans la base auteur
+ *
+ * @param string $auth_methode
+ * @param int $id_auteur
+ * @param array $champs
+ * @return bool
+ */
+function auth_synchroniser_distant($auth_methode, $id_auteur, $champs){
+	return auth_administrer('synchroniser_distant',func_get_args());
+}
+
 ?>
