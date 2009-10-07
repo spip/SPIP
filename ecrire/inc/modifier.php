@@ -260,6 +260,11 @@ function revision_auteur($id_auteur, $c=false) {
 		),
 		$c);
 
+	// synchroniser l'eventuel annuaire d'authentification distant
+	$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
+	include_spip('inc/auth');
+	auth_synchroniser_distant($auth_methode, $id_auteur, $c);
+
 	// .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
 	if (isset($c['login'])
 	OR isset($c['pass'])
@@ -268,11 +273,20 @@ function revision_auteur($id_auteur, $c=false) {
 		include_spip('inc/acces');
 		ecrire_acces();
 	}
-
-	// .. mettre a jour les sessions de cet auteur
-	include_spip('inc/session');
-	$c['id_auteur'] = $id_auteur;
-	actualiser_sessions($c);
+	
+	// Si on change login ou mot de passe, deconnecter cet auteur,
+	// sauf si c'est nous-meme !
+	if ((isset($c['login']) OR isset($c['pass']))
+	  AND $id_auteur != $GLOBALS['visiteur_session']['id_auteur']){
+		$session = charger_fonction('session', 'inc');
+		$session($auteur['id_auteur']);
+	}
+	else {
+		// .. mettre a jour les sessions de cet auteur
+		include_spip('inc/session');
+		$c['id_auteur'] = $id_auteur;
+		actualiser_sessions($c);
+	}
 }
 
 
