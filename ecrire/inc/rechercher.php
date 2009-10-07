@@ -276,9 +276,9 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 		) {
 			foreach ($joints as $jtable => $jj) {
 				$it = id_table_objet($table);
-				$ij =  id_table_objet($jtable);
+				$ij = id_table_objet($jtable);
 				if ($jtable == 'document')
-					$s = sql_select("id_objet as $it, $ij", "spip_documents_liens", array("objet='$table'",sql_in('id_'.${jtable}, array_keys($jj))), '','','','',$serveur);
+					$s = sql_select("id_objet AS $it, $ij", "spip_documents_liens", array("objet='$table'",sql_in('id_'.${jtable}, array_keys($jj))), '','','','',$serveur);
 				else
 					$s = sql_select("$it,$ij", "spip_${jtable}s_${table}s", sql_in('id_'.${jtable}, array_keys($jj)), '','','','',$serveur);
 				while ($t = sql_fetch($s)) {

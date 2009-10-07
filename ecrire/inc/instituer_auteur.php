@@ -173,7 +173,7 @@ function afficher_rubriques_admin_restreintes($auteur, $modif = true){
 
 	$id_auteur = intval($auteur['id_auteur']);
 
-	$result = sql_select("rubriques.id_rubrique, " . sql_multi ("titre", $spip_lang) . "", "spip_auteurs_rubriques AS lien LEFT JOIN spip_rubriques AS rubriques ON lien.id_rubrique=rubriques.id_rubrique", "lien.id_auteur=$id_auteur", "", "multi");
+	$result = sql_select("R.id_rubrique, " . sql_multi ("titre", $spip_lang), "spip_auteurs_rubriques AS L LEFT JOIN spip_rubriques AS R ON L.id_rubrique=R.id_rubrique", "L.id_auteur=$id_auteur", "", "multi");
 
 	$menu = $restreint = '';
 	// L'autorisation de modifier les rubriques restreintes

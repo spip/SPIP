@@ -63,7 +63,7 @@ function exec_brouteur_frame_dist() {
 	echo "\n<div class='arial2'>";
 
 	if ($special == "redac") {
-		$result=sql_select("articles.id_article, articles.id_rubrique, articles.titre, articles.statut", "spip_articles AS articles LEFT JOIN spip_auteurs_articles AS lien ON articles.id_article=lien.id_article", "articles.statut = 'prepa' AND lien.id_auteur = $connect_id_auteur ", " id_article ", " articles.date DESC");
+		$result=sql_select("A.id_article, A.id_rubrique, A.titre, A.statut", "spip_articles AS A LEFT JOIN spip_auteurs_articles AS L ON A.id_article=L.id_article", "A.statut = 'prepa' AND L.id_auteur = $connect_id_auteur ", " id_article ", " A.date DESC");
 		$res = '';
 		while($row=sql_fetch($result)){
 			$id_article=$row['id_article'];
@@ -170,7 +170,7 @@ function exec_brouteur_frame_dist() {
 			if ($peutpub)
 				$result = sql_select("id_article, id_rubrique, titre, statut", "spip_articles", "id_rubrique=$id_rubrique", "", "date DESC");
 			else 
-				$result = sql_select("articles.id_article, articles.id_rubrique, articles.titre, articles.statut", "spip_articles AS articles, spip_auteurs_articles AS lien", "articles.id_rubrique=$id_rubrique AND (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) ", " id_article ", " articles.date DESC");
+				$result = sql_select("A.id_article, A.id_rubrique, A.titre, A.statut", "spip_articles AS A, spip_auteurs_articles AS L", "A.id_rubrique=$id_rubrique AND (A.statut = 'publie' OR A.statut = 'prop' OR (A.statut = 'prepa' AND A.id_article = L.id_article AND L.id_auteur = $connect_id_auteur)) ", " id_article ", " A.date DESC");
 			$res = '';
 			while($row=sql_fetch($result)){
 					$id_article=$row['id_article'];
@@ -229,7 +229,7 @@ function exec_brouteur_frame_dist() {
 				_T("info_cours_edition"),"</a></b></div>";
 			}
 			
-			$cpt = sql_countsel("spip_articles AS articles", "articles.statut = 'prop'");
+			$cpt = sql_countsel("spip_articles", "statut = 'prop'");
 			if (!$cpt)
 				$cpt = sql_countsel("spip_breves", "statut = 'prop'");
 			if ($cpt)

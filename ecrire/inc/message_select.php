@@ -15,9 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // $messages_vus en reference pour interdire l'affichage de message en double
 
 
-function afficher_ses_messages($titre, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false, $type='messagerie') {
+function afficher_ses_messages($titre, $join, $where, &$messages_vus, $afficher_auteurs = true, $important = false, $type='messagerie') {
 
-	$requete = array('SELECT' => 'messages.id_message, messages.date_heure, messages.date_fin, messages.titre, messages.type, messages.rv', 'FROM' => "spip_messages AS messages$from", 'WHERE' => $where .(!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')'), 'ORDER BY'=> 'date_heure DESC');
+	$requete = array('SELECT' => 'M.id_message, M.date_heure, M.date_fin, M.titre, M.type, M.rv', 'FROM' => "spip_messages AS M$join", 'WHERE' => $where .(!$messages_vus ? '' : ' AND M.id_message NOT IN ('.join(',', $messages_vus).')'), 'ORDER BY'=> 'date_heure DESC');
 
 	if ($afficher_auteurs) {
 		$styles = array(array('arial2'), array('arial1', 130), array('arial1', 20), array('arial1', 120));
@@ -84,12 +84,11 @@ function presenter_message_boucles($row, $afficher_auteurs)
 			// Auteurs
 
 	if ($afficher_auteurs) {
-		$result_auteurs = sql_select("auteurs.id_auteur, auteurs.nom", "spip_auteurs AS auteurs, spip_auteurs_messages AS lien", "lien.id_message=$id_message AND lien.id_auteur!=$connect_id_auteur AND lien.id_auteur=auteurs.id_auteur");
+		$auteurs = sql_allfetsel("A.id_auteur, A.nom", "spip_auteurs AS A, spip_auteurs_messages AS L", "L.id_message=$id_message AND L.id_auteur!=$connect_id_auteur AND L.id_auteur=A.id_auteur");
 
-		$auteurs = '';
-		while ($row_auteurs = sql_fetch($result_auteurs)) {
+		foreach ($auteurs as $k => $row_auteurs) {
 			$id_auteur = $row_auteurs['id_auteur'];
-			$auteurs[] = "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur") . "'>".typo($row_auteurs['nom'])."</a>";
+			$auteurs[$k] = "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur") . "'>".typo($row_auteurs['nom'])."</a>";
 		}
 
 		if ($auteurs AND $type == 'normal') {

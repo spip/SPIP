@@ -70,10 +70,10 @@ echo fin_cadre_relief(true);
  echo afficher_ses_messages('<b>' . _T('infos_vos_pense_bete') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_fin > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 DAY) OR rv != 'oui')", $messages_vus, false, true,'pense-bete');
 
 
- echo afficher_ses_messages('<b>' . _T('info_nouveaux_message') . '</b>', ", spip_auteurs_messages AS lien", "lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND lien.id_message=messages.id_message", $messages_vus,  true, true,'message');
+ echo afficher_ses_messages('<b>' . _T('info_nouveaux_message') . '</b>', ", spip_auteurs_messages AS A", "A.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND A.id_message=M.id_message", $messages_vus,  true, true,'message');
 
 
- echo afficher_ses_messages('<b>' . _T('info_discussion_cours') . '</b>', ", spip_auteurs_messages AS lien", "lien.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message AND (date_fin > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, true, false,'message');
+ echo afficher_ses_messages('<b>' . _T('info_discussion_cours') . '</b>', ", spip_auteurs_messages AS A", "A.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND A.id_message=M.id_message AND (date_fin > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, true, false,'message');
 
 
 // Afficher le lien RSS
@@ -85,7 +85,7 @@ echo bouton_spip_rss('messagerie', array('id_auteur' => $connect_id_auteur));
  echo afficher_ses_messages('<b>' . _T('info_message_en_redaction') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='redac'",  $messages_vus, true, false,'message');
 
 
- $result = sql_select('auteurs.id_auteur, auteurs.nom, COUNT(*) AS total', 'spip_auteurs AS auteurs,  spip_auteurs_messages AS lien2, spip_messages AS messages, spip_auteurs_messages AS lien', "(lien.id_auteur = $connect_id_auteur AND lien.id_message = messages.id_message AND messages.statut = 'publie' AND (messages.rv != 'oui' OR messages.date_fin > ".sql_quote(date('Y-m-d H:i:s'))." )) AND (lien2.id_auteur = lien2.id_auteur AND lien2.id_message = messages.id_message AND lien2.id_auteur != $connect_id_auteur AND auteurs.id_auteur = lien2.id_auteur)", "auteurs.id_auteur", 'total DESC', 10);
+ $result = sql_select('A.id_auteur, A.nom, COUNT(*) AS total', 'spip_auteurs AS A LEFT JOIN spip_auteurs_messages AS D ON A.id_auteur=D.id_auteur LEFT JOIN spip_messages AS M ON D.id_message=M.id_message LEFT JOIN spip_auteurs_messages AS S ON S.id_message=M.id_message', "(S.id_auteur = $connect_id_auteur AND M.statut = 'publie' AND (M.rv != 'oui' OR M.date_fin > ".sql_quote(date('Y-m-d H:i:s'))." ))  AND D.id_auteur != $connect_id_auteur", "A.id_auteur", 'total DESC', 10);
 
  $cor = array();
  while($row = sql_fetch($result)) {

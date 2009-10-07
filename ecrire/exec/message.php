@@ -77,8 +77,7 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
   else if (count($resultat) == 1) {
     // action/editer_message a du prendre en compte ce cas
     list(, $nouv_auteur) = each($resultat);
-    $row = sql_fetsel("nom", "spip_auteurs", "id_auteur=$nouv_auteur");
-    $nom_auteur = $row['nom'];
+    $nom_auteur = sql_getfetsel("nom", "spip_auteurs", "id_auteur=$nouv_auteur");
     return "<b>"._T('info_ajout_participant')."</b><br />" .
       "<ul><li><span class='verdana1 spip_small'><b><span class='spip_medium'>$nom_auteur</span></b></span></li>\n</ul>";
   }
@@ -150,7 +149,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 	// Liste des participants
 	//
 
-	$result = sql_allfetsel("auteurs.id_auteur,auteurs.nom,auteurs.bio,auteurs.email,auteurs.nom_site,auteurs.url_site,auteurs.login,auteurs.pass,auteurs.low_sec,auteurs.statut,auteurs.maj,auteurs.pgp,auteurs.htpass,auteurs.en_ligne,auteurs.imessage,auteurs.messagerie,auteurs.alea_actuel,auteurs.alea_futur,auteurs.prefs,auteurs.cookie_oubli,auteurs.source,auteurs.lang, auteurs.extra", "spip_auteurs AS auteurs, spip_auteurs_messages AS lien", "lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur");
+	$result = sql_allfetsel("A.id_auteur,A.nom,A.bio,A.email,A.nom_site,A.url_site,A.login,A.pass,A.low_sec,A.statut,A.maj,A.pgp,A.htpass,A.en_ligne,A.imessage,A.messagerie,A.alea_actuel,A.alea_futur,A.prefs,A.cookie_oubli,A.source,A.lang, A.extra", "spip_auteurs AS A, spip_auteurs_messages AS L", "L.id_message=$id_message AND L.id_auteur=A.id_auteur");
 
 	$total_dest = count($result);
 
@@ -356,8 +355,8 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 
 	// reponses et bouton poster message
 
-	$discuter = charger_fonction('discuter', 'inc');
-	echo $discuter($id_message, 'message', 'id_message', "perso");
+	$discuter = charger_fonction('discuter', 'inc', true);
+	if ($discuter) echo $discuter($id_message, 'message', 'id_message', "perso");
   }
 
   echo fin_gauche(), fin_page();

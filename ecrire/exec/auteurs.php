@@ -298,12 +298,12 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 		} else $not = '';
 		$visit = !statut_min_redac($statut);
 		$statut = preg_split('/\W+/', $statut); 
-		$sql_visible = sql_in("aut.statut", $statut, $not);
+		$sql_visible = sql_in("A.statut", $statut, $not);
 	} else {
 		$sql_visible = "(
-			aut.statut = '0minirezo'
-			OR aut.id_auteur=$connect_id_auteur
-			OR " . sql_in('art.statut', array('prop', 'publie'))
+			A.statut = '0minirezo'
+			OR A.id_auteur=$connect_id_auteur
+			OR " . sql_in('P.statut', array('prop', 'publie'))
 		. ')';
 		$visit = false;
 	}
@@ -312,18 +312,18 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	$join = $visit ?
 	 ""
 	 : 
-	 (strpos($sql_visible,'art.statut')?("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur" . " LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)"):"");
+	 (strpos($sql_visible,'P.statut')?("LEFT JOIN spip_auteurs_articles AS L ON A.id_auteur=L.id_auteur" . " LEFT JOIN spip_articles AS P ON (L.id_article = P.id_article)"):"");
 	
 	// tri
 	switch ($tri) {
 	case 'nombre':
 		if (!$visit OR test_plugin_actif('forum')){
-			$sql_sel = "COUNT(lien.id_article) AS compteur";
+			$sql_sel = "COUNT(L.id_article) AS compteur";
 			$sql_order = 'compteur DESC, unom';
 			$join = $visit ?
-			 "LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur"
-			 : ("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur" 
-			. (strpos($sql_visible,'art.statut')?" LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)":""));
+			 "LEFT JOIN spip_forum AS L ON A.id_auteur=L.id_auteur"
+			 : ("LEFT JOIN spip_auteurs_articles AS L ON A.id_auteur=L.id_auteur" 
+			. (strpos($sql_visible,'P.statut')?" LEFT JOIN spip_articles AS P ON (L.id_article = P.id_article)":""));
 		}
 		break;
 	
@@ -346,17 +346,17 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	return array('SELECT' =>
 			array_diff(
 			array(
-				"aut.id_auteur AS id_auteur",
-				"aut.statut AS statut", 
-				"aut.nom_site AS site", 
-				"aut.nom AS nom", 
-				"UPPER(aut.nom) AS unom", 
+				"A.id_auteur AS id_auteur",
+				"A.statut AS statut", 
+				"A.nom_site AS site", 
+				"A.nom AS nom", 
+				"UPPER(A.nom) AS unom", 
 				$sql_sel),array('',null)),
-		     'FROM' => "spip_auteurs AS aut $join",
+		     'FROM' => "spip_auteurs AS A $join",
 		     'WHERE' => $sql_visible . ($recherche 
 				? " AND $recherche" 
 				: ''),
-		     'GROUP BY' => "aut.statut, aut.nom_site, aut.nom, aut.id_auteur", 
+		     'GROUP BY' => "A.statut, A.nom_site, A.nom, A.id_auteur", 
 		     'ORDER BY' => $sql_order);
 }
 

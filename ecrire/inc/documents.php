@@ -405,7 +405,7 @@ function est_inclus($id_document) {
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
 	global $spip_lang_right;
 	
-	$document = sql_fetsel("docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, L.vu", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document", "L.id_objet=".intval($id)." AND objet=".sql_quote($type)." AND L.id_document=".sql_quote($id_document));
+	$document = sql_fetsel("D.id_document, D.id_vignette,D.extension,D.titre,D.descriptif,D.fichier,D.largeur,D.hauteur,D.taille,D.mode,D.distant, D.date, L.vu", "spip_documents AS D INNER JOIN spip_documents_liens AS L ON L.id_document=D.id_document", "L.id_objet=".intval($id)." AND objet=".sql_quote($type)." AND L.id_document=".intval($id_document));
 
 	if (!$document) return "";
 
@@ -510,9 +510,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 // sinon eventuellement appeler avant une fonction nettoyer_liens_documents
 // http://doc.spip.org/@lister_les_documents_orphelins
 function lister_les_documents_orphelins() {
-	$s = sql_select("d.id_document, d.id_vignette",
-	"spip_documents AS d LEFT JOIN spip_documents_liens AS l ON d.id_document=l.id_document",
-	"(l.id_objet IS NULL)");
+	$s = sql_select("D.id_document, D.id_vignette", "spip_documents AS D LEFT JOIN spip_documents_liens AS L ON D.id_document=L.id_document", "(L.id_objet IS NULL)");
 
 	$orphelins = array();
 	while ($t = sql_fetch($s)) {
@@ -524,9 +522,7 @@ function lister_les_documents_orphelins() {
 	}
 
 	// les vignettes qui n'appartiennent a aucun document sont aussi orphelines
-	$s = sql_select("v.id_document",
-	"spip_documents AS v LEFT JOIN spip_documents AS d ON v.id_document=d.id_vignette",
-	"v.mode='vignette' AND d.id_document IS NULL");
+	$s = sql_select("V.id_document", "spip_documents AS V LEFT JOIN spip_documents AS D ON V.id_document=D.id_vignette", "V.mode='vignette' AND D.id_document IS NULL");
 	while ($t = sql_fetch($s))
 		$orphelins[$t['id_document']] = true;
 
