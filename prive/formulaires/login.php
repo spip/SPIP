@@ -240,19 +240,20 @@ function retrouver_login($login)
 		exit;
 	}
 	$l = sql_quote($login);
-	if ($r = sql_fetsel('id_auteur,login,alea_actuel,alea_futur,prefs,source,login', 'spip_auteurs',
-			"statut<>'5poubelle' AND (" .
-			"pass<>'' OR source<>'spip') AND (" . 
-			"login=$l)"))
+	$sel = 'id_auteur,login,alea_actuel,alea_futur,prefs,source,login';
+	if ($r = sql_fetsel($sel, 'spip_auteurs',
+			"statut<>'5poubelle'" .
+			" AND (length(pass)>0 OR source<>'spip')" .
+			" AND (login=$l)"))
 		return $r;
 	// Si pas d'auteur avec ce login
 	// regarder s'il a saisi son nom ou son mail.
 	// Ne pas fusionner avec la requete precedente
 	// car un nom peut etre homonyme d'un autre login
-	else return sql_fetsel('id_auteur,login,alea_actuel,alea_futur,prefs,source,login', 'spip_auteurs',
-			"statut<>'5poubelle' AND (" .
-			"pass<>'' OR source<>'spip') AND (" . 
-			"login<>'' AND (nom=$l OR email=$l))");
+	else return sql_fetsel($sel, 'spip_auteurs',
+			"statut<>'5poubelle'" .
+			" AND (length(pass)>0 OR source<>'spip')" .
+			" AND (login<>'' AND (nom=$l OR email=$l))");
 }
 
 // Essayer les differentes sources d'authenfication dans l'ordre specifie.
