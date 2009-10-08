@@ -389,7 +389,7 @@ function sql_multi($sel, $lang, $serveur='', $option=true)
 }
 
 // http://doc.spip.org/@sql_error
-function sql_error($serveur) {
+function sql_error($serveur='') {
 	$f = sql_serveur('error', $serveur);
 	if (!is_string($f) OR !$f) return false;
 	return $f($serveur);
