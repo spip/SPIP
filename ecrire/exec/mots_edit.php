@@ -184,14 +184,13 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		else
 			$aff_articles = "'prop','publie'";
 
-		$out .= afficher_objets('rubrique','<b>' . _T('info_rubriques_liees_mot') . '</b>', array("FROM" => 'spip_rubriques AS rubrique LEFT JOIN spip_mots_rubriques AS lien ON lien.id_rubrique=rubrique.id_rubrique', 'WHERE' => "lien.id_mot=$id_mot", 'ORDER BY' => "rubrique.titre"));
+		$out .= afficher_objets('rubrique','<b>' . _T('info_rubriques_liees_mot') . '</b>', array("FROM" => 'spip_rubriques AS R LEFT JOIN spip_mots_rubriques AS L ON L.id_rubrique=R.id_rubrique', 'WHERE' => "L.id_mot=$id_mot", 'ORDER BY' => "R.titre"));
 
-		$out .= afficher_objets('article',_T('info_articles_lies_mot'), array('FROM' => "spip_articles AS articles LEFT JOIN spip_mots_articles AS lien ON lien.id_article=articles.id_article", 'WHERE' => "lien.id_mot=$id_mot AND articles.statut IN ($aff_articles)", 'ORDER BY' => "articles.date DESC"));
+		$out .= afficher_objets('article',_T('info_articles_lies_mot'), array('FROM' => "spip_articles AS A LEFT JOIN spip_mots_articles AS L ON L.id_article=A.id_article", 'WHERE' => "L.id_mot=$id_mot AND A.statut IN ($aff_articles)", 'ORDER BY' => "A.date DESC"));
 
-		$out .= afficher_objets('breve','<b>' . _T('info_breves_liees_mot') . '</b>', array("FROM" => 'spip_breves AS breves LEFT JOIN spip_mots_breves AS lien ON lien.id_breve=breves.id_breve', 'WHERE' => "lien.id_mot=$id_mot", 'ORDER BY' => "breves.date_heure DESC"));
+		$out .= afficher_objets('breve','<b>' . _T('info_breves_liees_mot') . '</b>', array("FROM" => 'spip_breves AS B LEFT JOIN spip_mots_breves AS L ON L.id_breve=B.id_breve', 'WHERE' => "L.id_mot=$id_mot", 'ORDER BY' => "B.date_heure DESC"));
 
-		$out .= afficher_objets('site','<b>' . _T('info_sites_lies_mot') . '</b>', array("FROM" => 'spip_syndic AS syndic LEFT JOIN spip_mots_syndic AS lien ON lien.id_syndic=syndic.id_syndic', 'WHERE' => "lien.id_mot=$id_mot", 'ORDER BY' => "syndic.nom_site DESC"));
-		
+		$out .= afficher_objets('site','<b>' . _T('info_sites_lies_mot') . '</b>', array("FROM" => 'spip_syndic AS S LEFT JOIN spip_mots_syndic AS L ON L.id_syndic=S.id_syndic', 'WHERE' => "L.id_mot=$id_mot", 'ORDER BY' => "S.nom_site DESC"));
 	}
 
 	$out .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''))

@@ -306,10 +306,10 @@ function afficher_objet_boucle($row, $own)
 // http://doc.spip.org/@inc_afficher_articles_dist
 function inc_afficher_articles_dist($titre, $requete, $formater='') {
 
-	if (!isset($requete['FROM'])) $requete['FROM'] = 'spip_articles AS articles';
+	if (!isset($requete['FROM'])) $requete['FROM'] = 'spip_articles AS A';
 
 	if (!isset($requete['SELECT'])) {
-		$requete['SELECT'] = "articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date, articles.lang, articles.id_trad, articles.descriptif";
+		$requete['SELECT'] = "A.id_article, A.titre, A.id_rubrique, A.statut, A.date, A.lang, A.id_trad, A.descriptif";
 	}
 
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
@@ -318,9 +318,9 @@ function inc_afficher_articles_dist($titre, $requete, $formater='') {
 
 	if (!$cpt) return '' ;
 
-	$requete['FROM'] = preg_replace("/(spip_articles(\s+AS\s+\w+)?)/i", "\\1 LEFT JOIN spip_petitions AS petitions ON articles.id_article=petitions.id_article", $requete['FROM']);
+	$requete['FROM'] = preg_replace("/(spip_articles\s+AS\s+(\w+))/i", "\\1 LEFT JOIN spip_petitions AS P ON \\2.id_article=P.id_article", $requete['FROM']);
 
-	$requete['SELECT'] .= ", petitions.id_article AS petition ";
+	$requete['SELECT'] .= ", P.id_article AS petition ";
 
 	// memorisation des arguments pour gerer l'affichage par tranche
 	// et/ou par langues.
