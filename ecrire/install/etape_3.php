@@ -108,10 +108,10 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 				'valeur' => $spip_version_base,
 				'impt' => 'non');
 
-		if (!sql_select('valeur', 'spip_meta', "nom='version_installee'", '','','','',$server_db)) {
+		if (!sql_fetsel('valeur', 'spip_meta', "nom='version_installee'", '','','','',$server_db)) {
 			sql_insertq('spip_meta', $t, '', $server_db);
 		}
-		if (!sql_select('valeur', 'spip_meta', "nom='nouvelle_install'", '','','','',$server_db)) {
+		if (!sql_fetsel('valeur', 'spip_meta', "nom='nouvelle_install'", '','','','',$server_db)) {
 			$t['nom'] = 'nouvelle_install';
 			$t['valeur'] = 1;
 			sql_insertq('spip_meta', $t, '', $server_db);
