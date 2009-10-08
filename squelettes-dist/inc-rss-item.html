@@ -46,7 +46,7 @@
 [(#REM)
 	Le bloc qui suit diffuse l'adresse des documents associes aux articles ;
 	ajouter par ex. {extension=mp3} pour limiter a un certain type de document.
-]		<BOUCLE_documents(DOCUMENTS){id_article}{mode=document}{doublons}>[
+]		<BOUCLE_documents(DOCUMENTS){id_article}{genre=document}{doublons}>[
 		<enclosure url="(#URL_DOCUMENT|url_absolue|unique)"[ length="(#TAILLE)"][ type="(#MIME_TYPE)"] />]
 		</BOUCLE_documents>
 

@@ -293,7 +293,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 			'args' => "id_$type=$id",
 			'id' => $id,
 			'intitule' => _T('info_telecharger'),
-			'mode' => 'image',
+			'mode' => 'image', // mode = genre
 			'type' => $type,
 			'ancre' => '',
 			'id_document' => 0,
@@ -303,7 +303,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 
 	if (!_INTERFACE_DOCUMENTS) {
 		//// Images sans documents
-		$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type) . " AND D.mode='image'", "", "D.id_document");
+		$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type) . " AND D.genre='image'", "", "D.id_document");
 
 		$ret .= "\n<div id='liste_images'>";
 
@@ -347,9 +347,9 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	//// Documents associes
 	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type)
 	. ((!_INTERFACE_DOCUMENTS)
-		? " AND D.mode='document'"	
-    	: " AND D.mode IN ('image','document')"
-	), "", "D.mode, D.id_document");
+		? " AND D.genre='document'"	
+    	: " AND D.genre IN ('image','document')"
+	), "", "D.genre, D.id_document");
 
 	while($row = sql_fetch($res))
 		$ret .= afficher_case_document($row['id_document'], $id, $script, $type, ($id_document_actif==$row['id_document']));
@@ -405,7 +405,7 @@ function est_inclus($id_document) {
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
 	global $spip_lang_right;
 	
-	$document = sql_fetsel("D.id_document, D.id_vignette,D.extension,D.titre,D.descriptif,D.fichier,D.largeur,D.hauteur,D.taille,D.mode,D.distant, D.date, L.vu", "spip_documents AS D INNER JOIN spip_documents_liens AS L ON L.id_document=D.id_document", "L.id_objet=".intval($id)." AND objet=".sql_quote($type)." AND L.id_document=".intval($id_document));
+	$document = sql_fetsel("D.id_document, D.id_vignette,D.extension,D.titre,D.descriptif,D.fichier,D.largeur,D.hauteur,D.taille,D.genre,D.distant, D.date, L.vu", "spip_documents AS D INNER JOIN spip_documents_liens AS L ON L.id_document=D.id_document", "L.id_objet=".intval($id)." AND objet=".sql_quote($type)." AND L.id_document=".intval($id_document));
 
 	if (!$document) return "";
 
@@ -415,7 +415,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	$fichier = $document['fichier'];
 	$largeur = $document['largeur'];
 	$hauteur = $document['hauteur'];
-	$mode = $document['mode'];
+	$mode = $document['genre'];
 	$distant = $document['distant'];
 	$titre = $document['titre'];
 	$legender = charger_fonction('legender', 'inc');
@@ -522,7 +522,7 @@ function lister_les_documents_orphelins() {
 	}
 
 	// les vignettes qui n'appartiennent a aucun document sont aussi orphelines
-	$s = sql_select("V.id_document", "spip_documents AS V LEFT JOIN spip_documents AS D ON V.id_document=D.id_vignette", "V.mode='vignette' AND D.id_document IS NULL");
+	$s = sql_select("V.id_document", "spip_documents AS V LEFT JOIN spip_documents AS D ON V.id_document=D.id_vignette", "V.genre='vignette' AND D.id_document IS NULL");
 	while ($t = sql_fetch($s))
 		$orphelins[$t['id_document']] = true;
 

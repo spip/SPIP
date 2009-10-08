@@ -289,6 +289,8 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 	// note : la fonction peut "mettre a jour un document" si on lui
 	// passe "mode=document" et "id_document=.." (pas utilise)
 
+	// "mode" est interdit en Oracle. Cf svn 14588)
+	  if (isset($a['mode'])) {$a['genre'] = $a['mode']; unset($a['mode']);}
 		$id = sql_insertq("spip_documents", $a);
 
 		spip_log ("ajout du document $source $nom_envoye  (M '$mode' T '$type_lien' L '$id_lien' D '$id')");
@@ -303,7 +305,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		} else spip_log("Pb d'insertion $id_lien $type_lien");
 
 		if ($id_document) {
-			sql_updateq("spip_documents", array("id_vignette" => $id, "mode" => 'document'), "id_document=$id_document");
+			sql_updateq("spip_documents", array("id_vignette" => $id, "genre" => 'document'), "id_document=$id_document");
 
 		} else  $id_document = $id;
 

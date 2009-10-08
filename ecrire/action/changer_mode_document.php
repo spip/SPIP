@@ -34,7 +34,7 @@ function action_changer_mode_document_post($r)
 	list(, $id_document, $mode) = $r;
 	if ($id_document = intval($id_document)
 	AND in_array($mode, array('vignette', 'image', 'document'))) {
-		sql_updateq('spip_documents', array('mode'=>$mode), 'id_document='.$id_document);
+		sql_updateq('spip_documents', array('genre'=>$mode), 'id_document='.$id_document);
 	}
 	if ($case = _request('afficher_case')){
 		$case = explode('-',$case);

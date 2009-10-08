@@ -204,14 +204,14 @@ $spip_documents = array(
 		"taille"	=> "integer",
 		"largeur"	=> "integer",
 		"hauteur"	=> "integer",
-		"mode"	=> "ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL",
+		"genre"	=> "ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL",
 		"distant"	=> "VARCHAR(3) DEFAULT 'non'",
 		"maj"	=> "TIMESTAMP");
 
 $spip_documents_key = array(
 		"PRIMARY KEY"	=> "id_document",
 		"KEY id_vignette"	=> "id_vignette",
-		"KEY mode"	=> "mode",
+		"KEY genre"	=> "genre",
 		"KEY extension"	=> "extension");
 $spip_documents_join = array(
 		"id_document"=>"id_document",
