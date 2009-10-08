@@ -2244,7 +2244,7 @@ function compacte($source, $format = null) {
 	AND preg_match(',\.'.$format.'$,i', $source, $r)
 	AND file_exists($source)) {
 		// si c'est une css, il faut reecrire les url en absolu
-  	if ($type=='css')
+  	if ($format=='css')
   		$source = url_absolue_css($source);
 		
 		$f = basename($source,'.'.$format);
