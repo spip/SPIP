@@ -16,54 +16,52 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_editer_auteur_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	$redirect = _request('redirect');
-	// ni id, ni nouveau ?
-	if (!preg_match(",^\d+$,", $arg, $r) AND $arg!='oui') {
-		spip_log("action_editer_auteur_dist $arg pas compris");
-	} else {
-		list($id_auteur, $echec) = action_legender_auteur_post(
-			_request('statut'),
-			_request('nom'),
-			_request('email'),
-			_request('bio'),
-			_request('nom_site_auteur'),
-			_request('url_site'),
-			_request('new_login'),
-			_request('new_pass'),
-			_request('new_pass2'),
-			_request('perso_activer_imessage'),
-			_request('pgp'),
-			_request('lier_id_article'),
-			intval(_request('id_parent')),
-			_request('restreintes'),
-			$r[0]);
 
-		if (_request('statut')){
-			$c = array('statut'=>_request('statut'),'id_parent'=>intval(_request('id_parent')),'restreintes'=>_request('restreintes'));
-			if (_request('saisie_webmestre'))
-				$c['webmestre'] = _request('webmestre')?_request('webmestre'):'non';
-			instituer_auteur($id_auteur,$c);
+
+	// si id_auteur n'est pas un nombre, c'est une creation
+	if (!$id_auteur = intval($arg)) {
+
+		if (($id_auteur = insert_auteur()) > 0){
+
+			# cf. GROS HACK
+			# recuperer l'eventuel logo charge avant la creation
+			# ils ont un id = 0-id_auteur de la session
+			$id_hack = 0 - $GLOBALS['visiteur_session']['id_auteur'];
+			$chercher_logo = charger_fonction('chercher_logo', 'inc');
+			if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'on'))
+				rename($logo, str_replace($id_hack, $id_auteur, $logo));
+			if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'off'))
+				rename($logo, str_replace($id_hack, $id_auteur, $logo));
 		}
-
-		if ($echec AND $redirect) {
-		// revenir au formulaire de saisie
-				$ret = !$redirect
-				? '' 
-				: ('&redirect=' . $redirect);
-				spip_log("echec editeur auteur: " . join(' ',$echec));
-				$echec = '&echec=' . join('@@@', $echec);
-				$redirect = generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur$echec$ret",'&');
-			}
 	}
-	if ($redirect) {
+
+	// Enregistre l'envoi dans la BD
+	if ($id_auteur > 0)
+		$err = auteurs_set($id_auteur);
+
+	if ($redirect = _request('redirect')) {
+		if ($err){
+			$ret = ('&redirect=' . $redirect);
+			spip_log("echec editeur auteur: " . join(' ',$echec));
+			$echec = '&echec=' . join('@@@', $echec);
+			$redirect = generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur$echec$ret",'&');
+		}
+		else
+			$redirect = urldecode($redirect);
+
+		$redirect = parametre_url($redirect,'id_auteur', $id_auteur, '&');
+
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
-	} else {
-		return array($id_auteur,'');
 	}
+	else
+		return array($id_auteur,$err);
+
+	$redirect = _request('redirect');
+
 }
 
-
+/*
 // http://doc.spip.org/@action_legender_auteur_post
 function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_auteur, $url_site, $new_login, $new_pass, $new_pass2, $perso_activer_imessage, $pgp, $lier_id_article=0, $id_parent=0, $restreintes= NULL, $id_auteur=0) {
 	global $visiteur_session;
@@ -236,7 +234,7 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 	
 	return array($id_auteur, $echec);
 }
-
+*/
 
 
 function insert_auteur($source='spip') {
@@ -258,34 +256,21 @@ function insert_auteur($source='spip') {
 			'data' => $champs
 		)
 	);
-	$id_auteur = sql_insertq("spip_auteurs", $c);
-
-	// recuperer l'eventuel logo charge avant la creation
-	if ($id_auteur) {
-		$id_hack = 0 - $GLOBALS['visiteur_session']['id_auteur'];
-		$chercher_logo = charger_fonction('chercher_logo', 'inc');
-		if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'on'))
-			rename($logo, str_replace($id_hack, $id_auteur, $logo));
-		if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'off'))
-			rename($logo, str_replace($id_hack, $id_auteur, $logo));
-	}
+	$id_auteur = sql_insertq("spip_auteurs", $champs);
 
 	return $id_auteur;
 }
 
 
 // Appelle toutes les fonctions de modification d'un auteur
-function auteur_set($id_auteur) {
+function auteurs_set($id_auteur) {
 	$err = '';
-
-	// unifier $texte en cas de texte trop long
-	trop_longs_articles();
 
 	$c = array();
 	foreach (array(
 		'nom','email','bio',
-		'nom_site_auteur','url_site',
-		'perso_activer_imessage','pgp',
+		'nom_site','url_site',
+		'imessage','pgp',
 	) as $champ)
 		$c[$champ] = _request($champ);
 
@@ -295,9 +280,10 @@ function auteur_set($id_auteur) {
 	// Modification de statut, changement de rubrique ?
 	$c = array();
 	foreach (array(
-		'statut', 'new_login','new_pass','new_pass2'
+		'statut', 'new_login','new_pass','webmestre','restreintes','id_parent'
 	) as $champ)
 		$c[preg_replace(',^new_,','',$champ)] = _request($champ);
+
 	$err .= instituer_auteur($id_auteur, $c);
 
 	// Un lien auteur a prendre en compte ?

@@ -58,9 +58,9 @@
 			<h3 class="legend"><:info_site_web:></h3>
 			<ul>
 				<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site_auteur}|oui)erreur]">
-					<label for="nom_site_auteur"><:entree_nom_site:></label>[
+					<label for="nom_site"><:entree_nom_site:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site_auteur})</span>
-					]<input type='text' class='text' name='nom_site_auteur' id='nom_site_auteur' value="[(#ENV**{nom_site})]" />
+					]<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV**{nom_site})]" />
 				</li>
 				<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
 						<label for="url_site"><:entree_url:></label>[
@@ -153,13 +153,13 @@
 				<h3 class="legend"><:info_liste_redacteurs_connectes:></h3>
 				<p class='explication'><:texte_auteur_messagerie:></p>
 				<ul>
-					<li class="editer_perso_activer_imessage">
+					<li class="editer_imessage">
 						<div class="choix">
-							<input type='radio' class='radio' name='perso_activer_imessage' value='oui' [(#ENV{imessage}|!={non}|oui) checked='checked'] id='perso_activer_imessage_on' #GET{disable}/>
+							<input type='radio' class='radio' name='imessage' value='oui' [(#ENV{imessage}|!={non}|oui) checked='checked'] id='perso_activer_imessage_on' #GET{disable}/>
 							<label for='perso_activer_imessage_on'><:bouton_radio_apparaitre_liste_redacteurs_connectes:></label>
 						</div>
 						<div class="choix">
-							<input type='radio' class='radio' name='perso_activer_imessage' value='non' [(#ENV{imessage}|=={non}|oui) checked='checked'] id='perso_activer_imessage_off' #GET{disable}/>
+							<input type='radio' class='radio' name='imessage' value='non' [(#ENV{imessage}|=={non}|oui) checked='checked'] id='perso_activer_imessage_off' #GET{disable}/>
 							<label for='perso_activer_imessage_off'><:bouton_radio_non_apparaitre_liste_redacteurs_connectes:></label>
 						</div>
 					</li>

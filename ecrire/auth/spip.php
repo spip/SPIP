@@ -73,7 +73,7 @@ function auth_spip_verifier_login($new_login,$id_auteur=0){
 		else {
 			$n = sql_countsel('spip_auteurs', "login=" . sql_quote($new_login) . " AND id_auteur!=".intval($id_auteur)." AND statut!='5poubelle'");
 			if ($n)
-				return 'info_login_existant';
+				return _T('info_login_existant');
 		}
 	}
 	return '';
@@ -87,10 +87,10 @@ function auth_spip_verifier_login($new_login,$id_auteur=0){
  * @return bool
  */
 function auth_spip_modifier_login($new_login,$id_auteur){
-	if (is_null($new_login) OR !auth_spip_verifier_login($new_login,$id_auteur))
+	if (is_null($new_login) OR auth_spip_verifier_login($new_login,$id_auteur)!='')
 		return false;
 	if (!$id_auteur = intval($id_auteur)
-		OR !$auteur = sql_fetsel('login','spip_auteurs','auteur='.intval($id_auteur)))
+		OR !$auteur = sql_fetsel('login','spip_auteurs','id_auteur='.intval($id_auteur)))
 		return false;
 	if ($new_login == $auteur['login'])
 		return true; // on a rien fait mais c'est bon !
@@ -136,17 +136,17 @@ function auth_spip_autoriser_modifier_pass(){
 function auth_spip_verifier_pass($login, $new_pass, $id_auteur=0){
 	// login et mot de passe
 	if (strlen($new_pass) < 6)
-		return 'info_passe_trop_court';
+		return _T('info_passe_trop_court');
 	
 	return '';
 }
 
 function auth_spip_modifier_pass($login, $new_pass, $id_auteur){
-	if (is_null($new_pass) OR !auth_spip_verifier_pass($login, $new_pass,$id_auteur))
+	if (is_null($new_pass) OR auth_spip_verifier_pass($login, $new_pass,$id_auteur)!='')
 		return false;
 
 	if (!$id_auteur = intval($id_auteur)
-		OR !$auteur = sql_fetsel('login','spip_auteurs','auteur='.intval($id_auteur)))
+		OR !$auteur = sql_fetsel('login','spip_auteurs','id_auteur='.intval($id_auteur)))
 		return false;
 
 	$c = array();
