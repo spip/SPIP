@@ -773,4 +773,14 @@ function autoriser_breve_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL,
 	return autoriser('creerbrevedans','rubrique',$id_rubrique);
 }
 
+
+function autoriser_infos_perso_onglet_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	return true;
+}
+function autoriser_config_langage_onglet_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	return true;
+}
+function autoriser_config_preferences_onglet_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	return true;
+}
 ?>
