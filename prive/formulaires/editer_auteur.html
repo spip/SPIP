@@ -53,78 +53,52 @@
 		[(#REM)
 				Site ouaib : nom et url
 		]
-	  	<li class='editer_liens_sites fieldset'>
-			<fieldset>
-			<h3 class="legend"><:info_site_web:></h3>
-			<ul>
-				<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site_auteur}|oui)erreur]">
-					<label for="nom_site"><:entree_nom_site:></label>[
-					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site_auteur})</span>
-					]<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV**{nom_site})]" />
-				</li>
-				<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
-						<label for="url_site"><:entree_url:></label>[
-						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>
-						]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
-				</li>
-			</ul>
-			</fieldset>
-	    </li>
+		<li class='editer_liens_sites fieldset'>
+		<fieldset>
+		<h3 class="legend"><:info_site_web:></h3>
+		<ul>
+			<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site_auteur}|oui)erreur]">
+				<label for="nom_site"><:entree_nom_site:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site_auteur})</span>
+				]<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV**{nom_site})]" />
+			</li>
+			<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
+					<label for="url_site"><:entree_url:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>
+					]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
+			</li>
+		</ul>
+		</fieldset>
+		</li>
 
-	    [(#REM)
+		[(#REM)
 			Identifiants (nom, passe)
-		]
-		
-		[(#REM) accessibles seulement aux admins non restreints et l'auteur lui-meme ]
-		#SET{ok,0}
-		[(#SET{connecte,[(#SESSION{id_auteur}|=={#ENV{id_auteur}}|oui)]})]
-		[(#ENV{source}|!={spip}|et{#VAL|spip_connect_ldap})
-				#SET{edit_login,0}
-				#SET{edit_pass,0}
-				#SET{ok,1}
-		]
-		[(#GET{ok}|non)
-			[(#AUTORISER{modifier,auteur,#ENV{id_auteur},#NULL,#ARRAY{restreintes,1}})
-				#SET{edit_login,1}
-				#SET{edit_pass,1}
-				#SET{ok,1}
-			]
-		]
-		[(#GET{ok}|non)
-			[(#GET{connecte})
-				#SET{edit_login,0}
-				#SET{edit_pass,1}
-				#SET{ok,1}
-			]
-		]
-		[(#GET{ok}|non)
-				#SET{edit_login,0}
-				#SET{edit_pass,0}
-				#SET{ok,1}
 		]
 		<li class='editer_identification fieldset'>
 			<fieldset>
 				<h3 class="legend"><:entree_identifiants_connexion:></h3>
 				[(#REM) Avertissement en cas de modifs de ses propres donnees ]
-				[(#GET{edit_login}|or{#GET{edit_pass}}|and{#GET{connecte}}|oui)
+				[(#ENV{config}|table_valeur{edit_login}
+				  |or{#ENV{config}|table_valeur{edit_pass}}
+					|and{#SESSION{id_auteur}|=={#ENV{id_auteur}}}|oui)
 					<em class='attention'><:texte_login_precaution:></em>
 				]
 				<ul>
 				[(#REM) Un redacteur n'a pas le droit de modifier son login ! ]
 				<li class='editer_new_login[ (#ENV**{erreurs}|table_valeur{login}|oui)erreur]'>
-					[(#GET{edit_login}|oui)
+					[(#ENV{config}|table_valeur{edit_login}|oui)
 							<label for='new_login'><:item_login:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{login})</span>
 							]<p class='explication'>(<:texte_plus_trois_car:>)</p>
 							<input autocomplete="off" type='text' class='text' name='new_login' id='new_login' value="[(#ENV**{login})]" />
 					]
-					[(#GET{edit_login}|non)
+					[(#ENV{config}|table_valeur{edit_login}|non)
 							<label for='login'><:item_login:>
 							</label><p class='explication'>(<:info_non_modifiable:>)</p>
 							<input type='text' class='text' disabled='disabled' name='login' id='login' value="[(#ENV**{login})]" />
 					]				
 				</li>
-				[(#GET{edit_pass}|oui)
+				[(#ENV{config}|table_valeur{edit_pass}|oui)
 					<li class='editer_new_pass[ (#ENV**{erreurs}|table_valeur{new_pass}|oui)erreur]'>
 							<label for='new_pass'><:entree_nouveau_passe:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass})</span>

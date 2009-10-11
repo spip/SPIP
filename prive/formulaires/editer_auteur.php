@@ -29,6 +29,17 @@ function auteurs_edit_config($row)
 	$config['auteur'] = $row;
 	
 	//$config['restreint'] = ($row['statut'] == 'publie');
+	$auth_methode = $row['source'];
+	include_spip('inc/auth');
+	$autoriser = autoriser('modifier','auteur',$row['id_auteur'],null, array('restreintes'=>true));
+	$config['edit_login'] =
+		(auth_autoriser_modifier_login($auth_methode) AND $autoriser);
+	$config['edit_pass'] =
+		(auth_autoriser_modifier_pass($auth_methode)
+		AND
+			($GLOBALS['visiteur_session']['id_auteur'] == $row['id_auteur'] OR $autoriser)
+		);
+
 	return $config;
 }
 
