@@ -318,6 +318,20 @@ function auth_administrer($fonction,$args,$defaut=false){
  * API Authentification, gestion des identites centralisees
  */
 
+// Essayer les differentes sources d'authenfication dans l'ordre specifie.
+// S'en souvenir dans visiteur_session['auth']
+function auth_identifier_login($login, $password, $md5pass="", $md5next=""){
+	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
+		if ($auth = charger_fonction($methode, 'auth')
+		AND $auteur = $auth($login, $password, $md5pass, $md5next)) {
+			spip_log("connexion de $login par methode $methode");
+			$auteur['auth'] = $methode;
+			return $auteur;
+		}
+	}
+	return false;
+}
+
 /**
  * Tester la possibilite de modifier le login d'authentification
  * pour la methode donnee
