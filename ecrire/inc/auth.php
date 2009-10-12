@@ -306,7 +306,8 @@ function auth_trace($row, $date=null)
  */
 function auth_administrer($fonction,$args,$defaut=false){
 	$auth_methode = array_shift($args);
-	if ($auth = charger_fonction($auth_methode,'auth',false)
+	$auth_methode = $auth_methode ? $auth_methode : 'spip'; // valeur par defaut au cas ou
+	if ($auth = charger_fonction($auth_methode,'auth',true)
 		AND function_exists($f="auth_{$auth_methode}_$fonction")
 	)
 		return call_user_func_array($f, $args);
