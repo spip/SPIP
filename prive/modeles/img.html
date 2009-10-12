@@ -1,4 +1,4 @@
-<BOUCLE_document (DOCUMENTS) {id_document} {genre?} {tout}>
+<BOUCLE_document (DOCUMENTS) {id_document} {mode?} {tout}>
 [(#REM)
 
 	Modele pour <img>
@@ -12,7 +12,7 @@
 ]
 [(#SET{
 	image,
-		#GENRE|match{'image|vignette'}
+		#MODE|match{'image|vignette'}
 		|sinon{#ENV{embed}}
 		|?{' '}
 })][

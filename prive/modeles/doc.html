@@ -10,13 +10,13 @@
 	Dans le cas d'une simple image (mode=image), on affiche
 	le document lui-meme, sans lien de telechargement
 ]
-[(#GENRE|=={image}|oui)
+[(#MODE|=={image}|oui)
 	#SET{fichier,#URL_DOCUMENT}
 	#SET{width,#LARGEUR}
 	#SET{height,#HAUTEUR}
 	#SET{url,#ENV{lien}}
 ]
-[(#GENRE|=={image}|non)
+[(#MODE|=={image}|non)
 	[(#SET{fichier,[(#LOGO_DOCUMENT||extraire_attribut{src})]})]
 	[(#SET{width,[(#LOGO_DOCUMENT||extraire_attribut{width})]})]
 	[(#SET{height,[(#LOGO_DOCUMENT||extraire_attribut{height})]})]
