@@ -319,11 +319,76 @@ function auth_administrer($fonction,$args,$defaut=false){
  * API Authentification, gestion des identites centralisees
  */
 
-// Essayer les differentes sources d'authenfication dans l'ordre specifie.
-// S'en souvenir dans visiteur_session['auth']
+/**
+ * Retrouver le login interne lie a une info login saisie
+ * la saisie peut correspondre a un login delegue
+ * qui sera alors converti en login interne apres verification
+ *
+ * @param string $login
+ * @return string/bool
+ */
+function auth_retrouver_login($login){
+	if (!spip_connect()) {
+		include_spip('inc/minipres');
+		echo minipres(_T('info_travaux_titre'),
+			      _T('titre_probleme_technique'));
+		exit;
+	}
+
+	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
+		if ($auteur = auth_administrer('retrouver_login',array($methode,$login))) {
+			return $auteur;
+		}
+	}
+	return false;
+}
+
+
+/**
+ * informer sur un login
+ * Ce dernier transmet le tableau ci-dessous a la fonction JS informer_auteur
+ * Il est invoque par la fonction JS actualise_auteur via la globale JS
+ * page_auteur=#URL_PAGE{informer_auteur} dans le squelette login
+ * N'y aurait-il pas plus simple ?
+ *
+ * @param string $login
+ * @return array
+ */
+function auth_informer_login($login){
+	if (!$login
+		OR !$login = auth_retrouver_login($login)
+		OR !$row = sql_fetsel('id_auteur,login,alea_actuel,alea_futur,prefs,source,login','spip_auteurs','login='.sql_quote($login))
+		)
+		return array();
+
+	// desactiver le hash md5 si pas auteur spip ?
+	if ($row['source']!=='spip'){
+		$row['alea_actuel']= '';
+		$row['alea_futur']= '';
+	}
+	$prefs = unserialize($row['prefs']);
+	$row['cnx'] = ($prefs['cnx'] == 'perma') ? '1' : '0';
+	$row['logo'] = recuperer_fond('formulaires/inc-logo_auteur', $row);
+	unset($row['prefs']);
+	unset($row['source']);
+	verifier_visiteur();
+	return $row;
+}
+
+
+/**
+ * Essayer les differentes sources d'authenfication dans l'ordre specifie.
+ * S'en souvenir dans visiteur_session['auth']
+ *
+ * @param string $login
+ * @param string $password
+ * @param string $md5pass
+ * @param string $md5next
+ * @return mixed
+ */
 function auth_identifier_login($login, $password, $md5pass="", $md5next=""){
 	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
-		if ($auth = charger_fonction($methode, 'auth')
+		if ($auth = charger_fonction($methode, 'auth',true)
 		AND $auteur = $auth($login, $password, $md5pass, $md5next)) {
 			spip_log("connexion de $login par methode $methode");
 			$auteur['auth'] = $methode;

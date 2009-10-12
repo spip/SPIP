@@ -28,9 +28,10 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 		if (isset($_COOKIE['spip_admin'])
 		AND preg_match(",^@(.*)$,", $_COOKIE['spip_admin'], $regs))
 			$login = $regs[1];
-	} 
+	}
 
-	$row = informer_login($login);
+	include_spip('inc/auth');
+	$row = auth_informer_login($login);
 
 	// Construire l'environnement du squelette
 	// Ne pas proposer de "rester connecte quelques jours"
@@ -79,30 +80,6 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 	return $valeurs;
 }
 
-// Cette fonction sert a 2 squelettes: login et informer_auteur
-// Ce dernier transmet le tableau ci-dessous a la fonction JS informer_auteur
-// Il est invoque par la fonction JS actualise_auteur via la globale JS
-// page_auteur=#URL_PAGE{informer_auteur} dans le squelette login
-// N'y aurait-il pas plus simple ?
-
-// http://doc.spip.org/@informer_login
-function informer_login($login){
-	if (!$login) return array();
-	$row = retrouver_login($login);
-	if (!$row) return array();
-	// desactiver le hash md5 si pas auteur spip ?
-	if ($row['source']!=='spip'){
-		$row['alea_actuel']= '';
-		$row['alea_futur']= '';
-	}
-	$prefs = unserialize($row['prefs']);
-	$row['cnx'] = ($prefs['cnx'] == 'perma') ? '1' : '0';
-	$row['logo'] = recuperer_fond('formulaires/inc-logo_auteur', $row);
-	unset($row['prefs']);
-	unset($row['source']);		
-	verifier_visiteur();
-	return $row;
-}
 
 // Gerer le cas ou un utilisateur ne souhaite pas de cookie
 // on propose alors un formulaire pour s'authentifier via http
@@ -136,21 +113,12 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 			_T('login_identifiant_inconnu',
 				array('login' => htmlspecialchars($login))));
 	}
-	$row = retrouver_login($session_login);
-	if ($row) 
-		$login = $row['login'];
-	elseif (spip_connect_ldap()) 
-		$login = $session_login;  // laisser une chance
-	else {
+
+	include_spip('inc/auth');
+	$auteur = auth_identifier_login($session_login, $session_password, $session_md5pass, $session_md5next);
+	if (!$auteur) {
 		include_spip('inc/cookie');
 		spip_setcookie("spip_admin", "", time() - 3600);
-		return array('message_erreur' =>
-			_T('login_identifiant_inconnu',
-			array('login' => htmlspecialchars($session_login))));
-	}
-	include_spip('inc/auth');
-	$auteur = auth_identifier_login($login, $session_password, $session_md5pass, $session_md5next);
-	if (!$auteur) {
 		if (strlen($session_password) OR strlen($session_md5pass))
 			return array('password' => _T('login_erreur_pass'));
 		// sinon c'est un login en deux passe old style (ou js en panne)
@@ -227,34 +195,6 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 		}
 	}
 	return $res;
-}
-
-
-// Reconnaitre aussi ceux qui donnent leur nom ou email au lieu du login
-
-function retrouver_login($login)
-{
-	if (!spip_connect()) {
-		include_spip('inc/minipres');
-		echo minipres(_T('info_travaux_titre'),
-			      _T('titre_probleme_technique'));
-		exit;
-	}
-	$l = sql_quote($login);
-	$sel = 'id_auteur,login,alea_actuel,alea_futur,prefs,source,login';
-	if ($r = sql_fetsel($sel, 'spip_auteurs',
-			"statut<>'5poubelle'" .
-			" AND (length(pass)>0 OR source<>'spip')" .
-			" AND (login=$l)"))
-		return $r;
-	// Si pas d'auteur avec ce login
-	// regarder s'il a saisi son nom ou son mail.
-	// Ne pas fusionner avec la requete precedente
-	// car un nom peut etre homonyme d'un autre login
-	else return sql_fetsel($sel, 'spip_auteurs',
-			"statut<>'5poubelle'" .
-			" AND (length(pass)>0 OR source<>'spip')" .
-			" AND (login<>'' AND (nom=$l OR email=$l))");
 }
 
 ?>

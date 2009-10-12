@@ -15,6 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Authentifie et retourne la ligne SQL decrivant l'utilisateur si ok
 function auth_spip_dist ($login, $pass, $md5pass="", $md5next="") {
 
+	// retrouver le login
+	$login = auth_spip_retrouver_login($login);
+
   // si envoi non crypte, crypter maintenant
 	if (!$md5pass AND $pass) {
 		$row = sql_fetsel("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login));
@@ -108,6 +111,31 @@ function auth_spip_modifier_login($new_login,$id_auteur){
 
 	return true;
 }
+
+/**
+ * Retrouver le login de quelqu'un qui cherche a se loger
+ * Reconnaitre aussi ceux qui donnent leur nom ou email au lieu du login
+ *
+ * @param string $login
+ * @return string
+ */
+function auth_spip_retrouver_login($login){
+	$l = sql_quote($login);
+	if ($r = sql_getfetsel('login', 'spip_auteurs',
+			"statut<>'5poubelle'" .
+			" AND (length(pass)>0)" .
+			" AND (login=$l)"))
+		return $r;
+	// Si pas d'auteur avec ce login
+	// regarder s'il a saisi son nom ou son mail.
+	// Ne pas fusionner avec la requete precedente
+	// car un nom peut etre homonyme d'un autre login
+	else return sql_getfetsel('login', 'spip_auteurs',
+			"statut<>'5poubelle'" .
+			" AND (length(pass)>0)" .
+			" AND (login<>'' AND (nom=$l OR email=$l))");
+}
+
 
 /**
  * Informer du droit de modifier ou non le pass
