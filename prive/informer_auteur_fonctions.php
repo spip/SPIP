@@ -15,12 +15,21 @@
 // il faut aller le chercher a la main
 function informer_auteur($bof)
 {
-  	include_spip('inc/json');
+	include_spip('inc/json');
 	include_spip('formulaires/login');
-	$row = informer_login(_request('var_login'));
-	if (is_array($row))
+	include_spip('inc/auth');
+	$row = auth_informer_login(_request('var_login'));
+	if ($row AND is_array($row))
 		unset($row['id_auteur']);
-	else $row = array();
+	else
+		$row = array(
+			'login'=>_request('var_login'),
+			'alea_actuel'=>'',
+			'alea_futur'=>'',
+			'cnx'=>0,
+			'logo'=>'',
+		);
+
 	return json_export($row);
 }
 
