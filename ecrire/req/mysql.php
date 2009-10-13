@@ -418,15 +418,12 @@ function spip_mysql_repair($table, $serveur='',$requeter=true)
 // http://doc.spip.org/@spip_mysql_showtable
 function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 {
-	$a = spip_mysql_query("SHOW TABLES LIKE '$nom_table'", $serveur, $requeter);
-	if (!$a) return "";
-	if (!$requeter) return $a;
-	if (!mysql_fetch_array($a)) return "";
-   	
-	$mysqlres = spip_mysql_query("SHOW CREATE TABLE $nom_table", $serveur);
-	if($mysqlres) {
-	  list(,$a) = mysql_fetch_array($mysqlres ,MYSQL_NUM);
-	  if (preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r)) {
+	$s = spip_mysql_query("SHOW CREATE TABLE $nom_table", $serveur, $requeter);
+	if (!$s) return '';
+	if (!$requeter) return $s;
+
+	list(,$a) = mysql_fetch_array($s ,MYSQL_NUM);
+	if (preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r)){
 		$dec = $r[1];
 		if (preg_match("/^(.*?),([^,]*KEY.*)$/s", $dec, $r)) {
 		  $namedkeys = $r[2];
@@ -449,11 +446,11 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 			if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
 		  }
 		}
-		spip_mysql_free($mysqlres);
+		spip_mysql_free($s);
 		return array('field' => $fields, 'key' => $keys);
-	  }
 	}
-	$res = spip_mysql_query("SHOW COLUMNS FROM $nom_table", $serveur, $requeter);
+
+	$res = spip_mysql_query("SHOW COLUMNS FROM $nom_table", $serveur);
 	if($res) {
 	  $nfields = array();
 	  $nkeys = array();
