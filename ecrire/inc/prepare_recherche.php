@@ -67,7 +67,7 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 
 		// supprimer les anciens resultats de cette recherche
 		// et les resultats trop vieux avec une marge
-		sql_delete('spip_resultats','(maj<DATE_SUB(NOW(), INTERVAL '.($delai_fraicheur+100)." SECOND)) OR (recherche='$hash')",$serveur);
+		sql_delete('spip_resultats', 'NOT(' .sql_date_proche('maj', (0-($delai_fraicheur+100)), " SECOND") . ") OR (recherche='$hash')",$serveur);
 
 		// inserer les resultats dans la table de cache des resultats
 		if (count($points)){

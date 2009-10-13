@@ -50,6 +50,7 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 		'create' => 'spip_mysql_create',
 		'create_base' => 'spip_mysql_create_base',
 		'create_view' => 'spip_mysql_create_view',
+		'date_proche' => 'spip_mysql_date_proche',
 		'delete' => 'spip_mysql_delete',
 		'drop_table' => 'spip_mysql_drop_table',
 		'drop_view' => 'spip_mysql_drop_view',
@@ -717,6 +718,21 @@ function spip_mysql_hex($v)
 function spip_mysql_quote($v, $type='')
 {
 	return ($type === 'int' AND !$v) ? '0' :  _q($v);
+}
+
+function spip_mysql_date_proche($champ, $interval, $unite)
+{
+	return '('
+	. $champ
+        . (($interval <= 0) ? '>' : '<')
+        . (($interval <= 0) ? 'DATE_SUB' : 'DATE_ADD')
+	. '('
+	. sql_quote(date('Y-m-d H:i:s'))
+	. ', INTERVAL '
+	. (($interval > 0) ? $interval : (0-$interval))
+	. ' '
+	. $unite
+	. '))';
 }
 
 //

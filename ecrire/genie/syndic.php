@@ -36,8 +36,7 @@ function executer_une_syndication() {
 	// s'il echoue
 	$where = sql_in("syndication", array('sus','off')) . "
 	AND statut='publie'
-	AND date_syndic < DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL
-	"._PERIODE_SYNDICATION_SUSPENDUE." MINUTE)";
+	AND NOT(" . sql_date_proche('date_syndic', (0 - _PERIODE_SYNDICATION_SUSPENDUE) , "MINUTE") . ')';
 	$id_syndic = sql_getfetsel("id_syndic", "spip_syndic", $where, '', "date_syndic", "1");
 	if ($id_syndic) {
 		$res1 = syndic_a_jour($id_syndic, 'off');
@@ -46,7 +45,7 @@ function executer_une_syndication() {
 	// Et un site 'oui' de plus de 2 heures, qui passe en 'sus' s'il echoue
 	$where = "syndication='oui'
 	AND statut='publie'
-	AND date_syndic < DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL "._PERIODE_SYNDICATION." MINUTE)";
+	AND NOT(" . sql_date_proche('date_syndic', (0 - _PERIODE_SYNDICATION) , "MINUTE") . ')';
 	$id_syndic = sql_getfetsel("id_syndic", "spip_syndic", $where, '', "date_syndic", "1");
 
 	if ($id_syndic) {
@@ -112,7 +111,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	// suppression apres 2 mois des liens qui sont sortis du feed
 		if ($row['oubli'] == 'oui') {
 
-			sql_delete('spip_syndic_articles', "id_syndic=$now_id_syndic AND maj < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND date < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND $faits");
+		  sql_delete('spip_syndic_articles', "id_syndic=$now_id_syndic AND NOT(" . sqL_date_proche('maj', -2, 'MONTH') . ') AND NOT(' . sql_date_proche('date', -2, 'MONTH') . ") AND $faits");
 		}
 	}
 

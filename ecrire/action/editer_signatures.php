@@ -62,6 +62,6 @@ function action_editer_signatures_post($r)
 	}
 
 	# cette requete devrait figurer dans l'optimisation
-	sql_delete("spip_signatures", "NOT (statut='publie' OR statut='poubelle') AND date_time<DATE_SUB(NOW(),INTERVAL 10 DAY)");
+	sql_delete("spip_signatures", "NOT (statut='publie' OR statut='poubelle') AND NOT(" . sql_date_proche('date_time', -10, ' DAY') . ')');
 }
 ?>

@@ -1539,7 +1539,7 @@ function quete_calendrier_taches_rv () {
 
 	if (!$connect_id_auteur) return array();
 
-	$r = sql_allfetsel("M.texte AS description, M.id_message AS uid, M.date_heure AS dtstart, M.date_fin AS dtend, M.titre AS summary, M.type AS category, M.rv AS location", "spip_messages AS M LEFT JOIN spip_auteurs_messages AS L ON (L.id_message=M.id_message)", "(L.id_auteur=$connect_id_auteur OR M.type='affich') AND M.rv='oui' AND ( (M.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND M.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH))	OR (M.date_heure < NOW() AND M.date_fin > NOW() )) AND M.statut='publie'", "M.id_message",  "M.date_heure");
+	$r = sql_allfetsel("M.texte AS description, M.id_message AS uid, M.date_heure AS dtstart, M.date_fin AS dtend, M.titre AS summary, M.type AS category, M.rv AS location", "spip_messages AS M LEFT JOIN spip_auteurs_messages AS L ON (L.id_message=M.id_message)", "(L.id_auteur=$connect_id_auteur OR M.type='affich') AND M.rv='oui' AND (( " . sql_date_proche('M.date_heure', -1, 'DAY') . ' AND ' .  sql_date_proche('M.date_heure', 1,  'MONTH') . ") OR (M.date_heure < NOW() AND M.date_fin > NOW() )) AND M.statut='publie'", "M.id_message",  "M.date_heure");
 	foreach ($r as $k => $row) $r[$k]['url'] = tache_redirige($row);
 	return  $r;
 }

@@ -500,6 +500,12 @@ function sql_quote($val, $serveur='', $type='')
 	return $f($val, $type);
 }
 
+function sql_date_proche($champ, $interval, $unite, $serveur='', $option=true)
+{
+	$f = sql_serveur('date_proche', $serveur, true);
+	if (!is_string($f) OR !$f) return false;
+	return $f($champ, $interval, $unite);
+}
 
 function sql_in($val, $valeurs, $not='', $serveur='', $option=true) {
 	if (is_array($valeurs)) {
@@ -543,6 +549,7 @@ function sql_test_date($type, $serveur='', $option=true)
   return (preg_match('/^datetime/i',$type)
 	  OR preg_match('/^timestamp/i',$type));
 }
+
 
 // Cette fonction devrait disparaitre
 

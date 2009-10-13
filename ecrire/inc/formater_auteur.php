@@ -35,14 +35,14 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	$id_auteur = intval($id_auteur);
 
 	if ($row===NULL)
-	  $row = sql_fetsel("*, (en_ligne<DATE_SUB(NOW(),INTERVAL 15 DAY)) AS parti", "spip_auteurs", "id_auteur=$id_auteur");
+		$row = sql_fetsel("*, " . sql_date_proche('en_ligne', -15, 'DAY') . " AS ici", "spip_auteurs", "id_auteur=$id_auteur");
 
 	$vals = array();
 	$statut = $row['statut'];
 	$href = generer_url_ecrire("auteurs","statut=$statut");
 	$vals[] = "<a href='$href'>" . bonhomme_statut($row) . '</a>';
 
-	if (($id_auteur == $connect_id_auteur) OR $row['parti'])
+	if (($id_auteur == $connect_id_auteur) OR !$row['ici'])
 		$vals[]= '&nbsp;';
 	else	$vals[]= formater_auteur_mail($row, $id_auteur);
 
