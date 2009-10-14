@@ -65,17 +65,15 @@ function boutons_parse($arbre){
  *
  */
 function boutons_core($type='bouton'){
+	static $ret=null;
 	if (!in_array($type,array('bouton','onglet')))
 		return array();
-	if (!is_array($GLOBALS['meta']['bando_navigation'])
-		OR !$ret = unserialize($GLOBALS['meta']['bando_navigation'])
-	  OR !isset($ret[$type])
-		OR $GLOBALS['var_mode']='recalcul'){
+	if (
+		!is_array($ret)
+		/*OR $GLOBALS['var_mode']='recalcul'*/){
 		include_spip('inc/xml');
 		$xml = spip_xml_load(find_in_path("prive/navigation.xml"));
 		$ret = boutons_parse($xml);
-		include_spip('inc/meta');
-		ecrire_meta('bando_navigation',serialize($ret),'non');
 	}
 
 	return $ret[$type];
