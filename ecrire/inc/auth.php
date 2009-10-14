@@ -158,7 +158,7 @@ function auth_mode()
 		if (isset($_SERVER['PHP_AUTH_USER'])
 		AND isset($_SERVER['PHP_AUTH_PW'])) {
 			include_spip('inc/actions');
-			if ($r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
+			if ($r = auth_identifier_login($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
 				if (!$id_auteur) {
 					$_SERVER['PHP_AUTH_PW'] = '';
 					$auth_can_disconnect = true;
