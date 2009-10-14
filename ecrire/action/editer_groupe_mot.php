@@ -54,4 +54,25 @@ function action_editer_groupe_mot_dist()
 		return array($id_groupe,'');
 }
 
+/**
+ * Creer un groupe de mots
+ *
+ * @param string $table
+ * @return int 
+ */
+function insert_groupe_mot($table) {
+	$titre = _T('info_mot_sans_groupe');
+	$id_groupe = sql_insertq("spip_groupes_mots", array(
+		'titre' => $titre,
+		'unseul' => 'non',
+		'obligatoire' => 'non',
+		'tables_liees'=>$table,
+		'minirezo' =>  'oui',
+		'comite' =>  'non',
+		'forum' => 'non')) ;
+
+
+	return $id_groupe;
+}
+
 ?>

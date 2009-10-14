@@ -40,15 +40,8 @@ function action_instituer_groupe_mots_post($id_groupe)
 // http://doc.spip.org/@action_instituer_groupe_mots_get
 function action_instituer_groupe_mots_get($table)
 {
-	$titre = _T('info_mot_sans_groupe');
-	$id_groupe = sql_insertq("spip_groupes_mots", array(
-		'titre' => $titre,
-		'unseul' => 'non',
-		'obligatoire' => 'non',
-		'tables_liees'=>$table,
-		'minirezo' =>  'oui',
-		'comite' =>  'non',
-		'forum' => 'non')) ;
+	include_spip('action/editer_groupe_mot');
+	$id_groupe = insert_groupe_mot($table);
 
   redirige_par_entete(parametre_url(urldecode(_request('redirect')),
 		  'id_groupe', $id_groupe, '&'));
