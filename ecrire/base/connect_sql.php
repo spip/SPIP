@@ -168,7 +168,7 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 	if ($g = $h($host, $port, $login, $pass, $db, $prefixe)) {
 
 		if (!is_array($auth)) {
-			// compatibilité version 0.7 initiale
+			// compatibilite version 0.7 initiale
 			$g['ldap'] = $auth;
 			$auth = array('ldap' => $auth);
 		}
@@ -214,20 +214,10 @@ function spip_connect_main($connexion)
 	return ($r['valeur'] ? $r['valeur'] : -1);
 }
 
-// http://doc.spip.org/@spip_connect_ldap
+// compatibilite
 function spip_connect_ldap($serveur='') {
-	$connexion = spip_connect($serveur);
-	if (!is_array($connexion['ldap'])) {
-		if ($connexion['authentification']['ldap']) {
-			$f =  _DIR_CONNECT . $connexion['authentification']['ldap'];
-			unset($GLOBALS['ldap_link']);
-			if (is_readable($f)) include_once($f);
-			if (isset($GLOBALS['ldap_link']))
-				$connexion['ldap'] = array('link' => $GLOBALS['ldap_link'],
-					'base' => $GLOBALS['ldap_base']);
-		}
-	}
-	return $connexion['ldap'];
+	include_spip('auth/ldap');
+	return auth_ldap_connect($serveur);
 }
 
 // 1 interface de abstract_sql a demenager dans base/abstract_sql a terme
