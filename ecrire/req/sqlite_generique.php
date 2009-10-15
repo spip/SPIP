@@ -25,13 +25,13 @@
  * 
  */
 // http://doc.spip.org/@req_sqlite_dist
-function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='', $sqlite_version=''){
+function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $sqlite_version=''){
 	static $last_connect = array();
 
 	// si provient de selectdb
 	// un code pour etre sur que l'on vient de select_db()
 	if (strpos($db, $code = '@selectdb@')!==false) {
-		foreach (array('addr','port','login','pass','prefixe','ldap') as $a){
+		foreach (array('addr','port','login','pass','prefixe') as $a){
 			$$a = $last_connect[$a];
 		}
 		$db = str_replace($code, '', $db);
@@ -97,7 +97,6 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap
 			'pass' => $pass,
 			'db' => $db,
 			'prefixe' => $prefixe,
-			'ldap' => $ldap
 		);
 	}
 
@@ -105,7 +104,6 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap
 		'db' => $db,
 		'prefixe' => $prefixe ? $prefixe : $db,
 		'link' => $link,
-		'ldap' => $ldap,
 		);	
 }
 

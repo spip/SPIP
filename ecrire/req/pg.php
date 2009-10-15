@@ -22,13 +22,13 @@ define('_DEFAULT_DB', 'spip');
 // si ca ne marche toujours pas, echec.
 
 // http://doc.spip.org/@req_pg_dist
-function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
+function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 	static $last_connect = array();
 	charger_php_extension('pgsql');
 	
 	// si provient de selectdb
 	if (empty($addr) && empty($port) && empty($login) && empty($pass)){
-		foreach (array('addr','port','login','pass','prefixe','ldap') as $a){
+		foreach (array('addr','port','login','pass','prefixe') as $a){
 			$$a = $last_connect[$a];
 		}
 	}
@@ -53,7 +53,6 @@ function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='')
 			'pass' => $pass,
 			'db' => $db,
 			'prefixe' => $prefixe,
-			'ldap' => $ldap
 		);
 		
 #	spip_log("Connexion vers $host, base $db, prefixe $prefixe "
@@ -63,7 +62,6 @@ function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='')
 		'db' => $db,
 		'prefixe' => $prefixe ? $prefixe : $db,
 		'link' => $link,
-		'ldap' => $ldap
 		);
 }
 
