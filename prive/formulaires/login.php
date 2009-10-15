@@ -76,6 +76,12 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 	// s'il est la, c'est probablement un bookmark sur bonjour=oui,
 	// et pas un echec cookie.
 	if ($erreur == 'cookie') $valeurs['echec_cookie'] = ' ';
+	elseif ($erreur){
+		// une erreur d'un SSO indique dans la redirection vers ici
+		// mais il faut se proteger de toute tentative d'injection malveilante
+		include_spip('inc/texte');
+		$valeurs['message_erreur'] = safehtml($erreur);
+	}
 
 	return $valeurs;
 }
