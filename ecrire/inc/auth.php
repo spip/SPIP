@@ -157,8 +157,7 @@ function auth_mode()
 	if (!$ignore_auth_http) {
 		if (isset($_SERVER['PHP_AUTH_USER'])
 		AND isset($_SERVER['PHP_AUTH_PW'])) {
-			include_spip('inc/actions');
-			if ($r = auth_identifier_login($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
+			if ($r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
 				if (!$id_auteur) {
 					$_SERVER['PHP_AUTH_PW'] = '';
 					$auth_can_disconnect = true;
@@ -497,4 +496,33 @@ function auth_synchroniser_distant($auth_methode, $id_auteur, $champs){
 	return auth_administrer('synchroniser_distant',$args);
 }
 
+
+function lire_php_auth($login, $pw)
+{
+	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login));
+	if (!$row) return false;
+	if (!$row['source'])
+                return ($row['pass'] == md5($row['alea_actuel'] . $pw)) ? $row : false;
+	$auth = charger_fonction($row['source'], 'auth', true);
+	if ($auth) return $auth($login, $pw);
+        return false;
+}
+
+//
+// entete php_auth (est-encore utilise ?)
+//
+// http://doc.spip.org/@ask_php_auth
+function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
+	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
+	@Header("HTTP/1.0 401 Unauthorized");
+	$ici = generer_url_ecrire();
+	echo "<b>$pb</b><p>$raison</p>[<a href='$ici'>$retour</a>] ";
+	if ($url) {
+		echo "[<a href='", generer_url_action('cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";
+	}
+	
+	if ($lien)
+		echo " [<a href='$ici'>"._T('login_espace_prive')."</a>]";
+	exit;
+}
 ?>

@@ -218,7 +218,7 @@ function spip_connect_main($connexion)
 function spip_connect_ldap($serveur='') {
 	$connexion = spip_connect($serveur);
 	if (!is_array($connexion['ldap'])) {
-		if (isset($connexion['authentification']['ldap'])) {
+		if ($connexion['authentification']['ldap']) {
 			$f =  _DIR_CONNECT . $connexion['authentification']['ldap'];
 			unset($GLOBALS['ldap_link']);
 			if (is_readable($f)) include_once($f);

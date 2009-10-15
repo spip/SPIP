@@ -40,8 +40,17 @@ function action_cookie_dist() {
 
 	// tentative de connexion en auth_http
 	if (_request('essai_auth_http') AND !$GLOBALS['ignore_auth_http']) {
-		auth_http($redirect);
-		return;
+		include_spip('inc/auth');
+		if (@$_SERVER['PHP_AUTH_USER']
+		AND @$_SERVER['PHP_AUTH_PW']
+		AND lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']))
+			redirige_par_entete($redirect);
+		else ask_php_auth(_T('info_connexion_refusee'),
+			     _T('login_login_pass_incorrect'),
+			     _T('login_retour_site'),
+			     "url=".rawurlencode($redirect),
+			     _T('login_nouvelle_tentative'),
+			     (strpos($url,_DIR_RESTREINT_ABS)!==false));
 	}
 
 	// en cas de login sur bonjour=oui, on tente de poser un cookie
