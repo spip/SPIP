@@ -25,7 +25,7 @@ function informe_auteur(c){
 }
 
 function calcule_md5_pass(pass){
-	if (alea_actuel) {
+	if (alea_actuel && !pass.match(/^\{([0-9a-f]{32});([0-9a-f]{32})\}$/i)) {
 
 		var md5p = calcMD5(alea_actuel + pass);
 		var md5n = calcMD5(alea_futur + pass);
