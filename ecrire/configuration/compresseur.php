@@ -30,7 +30,7 @@ function configuration_compresseur_dist()
 			. _T('texte_compresseur_page')
 			. "</p>"
 			. "<p class='verdana2'>"
-			. _T('info_compresseur_gzip', array('testgzip' => propre('[->http://www.gidnetwork.com/tools/gzip-test.php]'))
+			. _T('info_compresseur_gzip', array('testgzip' => propre('[->'.parametre_url('http://redbot.org/', 'uri',$GLOBALS['meta']['adresse_site']).']'))
 			)
 			. "</p>"
 
