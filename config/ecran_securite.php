@@ -144,7 +144,7 @@ AND strstr($_REQUEST['znom_sauvegarde'], '/'))
  */
 if (isset($ecran_securite_raison)) {
 	header("HTTP/1.0 403 Forbidden");
-	header("Expires: 0");
+	header("Expires: Wed, 11 Jan 1984 05:00:00 GMT");
 	header("Cache-Control: no-cache, must-revalidate");
 	header("Pragma: no-cache");
 	header("Content-Type: text/html");
@@ -177,7 +177,7 @@ if (
 ) {
 	header("HTTP/1.0 503 Service Unavailable");
 	header("Retry-After: 300");
-	header("Expires: 0");
+	header("Expires: Wed, 11 Jan 1984 05:00:00 GMT");
 	header("Cache-Control: no-cache, must-revalidate");
 	header("Pragma: no-cache");
 	header("Content-Type: text/html");
