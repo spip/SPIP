@@ -26,9 +26,11 @@ function informe_auteur(c){
 
 function calcule_md5_pass(pass){
 	if (alea_actuel) {
-		jQuery('input[name=password]').attr('value','');
-		jQuery('input[name=session_password_md5]').attr('value',calcMD5(alea_actuel + pass));
-		jQuery('input[name=next_session_password_md5]').attr('value',calcMD5(alea_futur + pass));
+
+		var md5p = calcMD5(alea_actuel + pass);
+		var md5n = calcMD5(alea_futur + pass);
+
+		jQuery('input[name=password]').attr('value','{'+md5p+';'+md5n+'}');
 	}
 }
 
@@ -50,7 +52,7 @@ function login_submit(){
 		// pas plus de 5 fois (si profondeur_url fausse, la requete d'information echoue et ne repond jamais)
 		if (informe_auteur_en_cours && (attente_informe<5)) { 
 			attente_informe++;
-			jQuery('form#formulaire_login').animeajax().find('p.boutons input').before(attente_informe); // montrer qu'il se passe quelque chose
+			jQuery('form#formulaire_login').animeajax().find('p.boutons input').before('.'); // montrer qu'il se passe quelque chose
 			setTimeout(function(){
 				jQuery('form#formulaire_login').submit();
 			}, 1000);
@@ -61,6 +63,9 @@ function login_submit(){
 		if (alea_actuel) {
 			calcule_md5_pass(pass);
 		}
+		// si on arrive pas a avoir une reponse, vider le pass pour forcer un passage en 2 fois
+		else if(informe_auteur_en_cours)
+			jQuery('input[name=password]').attr('value','');
 		// sinon c'est que l'auteur n'existe pas
 		// OU qu'il sera accepte par LDAP ou autre auth
 	}

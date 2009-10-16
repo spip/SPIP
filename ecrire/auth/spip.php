@@ -13,13 +13,19 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Authentifie et retourne la ligne SQL decrivant l'utilisateur si ok
-function auth_spip_dist ($login, $pass, $md5pass="", $md5next="") {
+function auth_spip_dist ($login, $pass) {
 
 	// retrouver le login
 	$login = auth_spip_retrouver_login($login);
 
+	$md5pass = $md5next = "";
+	if (preg_match(",^\{([0-9a-f]{32});([0-9a-f]{32})\},i",$pass,$regs)){
+		$md5pass = $regs[1];
+		$md5next = $regs[2];
+		$pass="";
+	}
   // si envoi non crypte, crypter maintenant
-	if (!$md5pass AND $pass) {
+	elseif ($pass) {
 		$row = sql_fetsel("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login));
 
 		if ($row) {
@@ -56,9 +62,9 @@ function auth_spip_formulaire_login($flux){
 		'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'md5.js"></script>'
 		.'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'login.js"></script>'
 		.'<script type="text/javascript">/*<![CDATA[*/'
-		."var alea_actuel='".$flux['args']['_alea_actuel']."';"
-		."var alea_futur='".$flux['args']['_alea_futur']."';"
-		."var login='".$flux['args']['var_login']."';"
+		."var alea_actuel='".$flux['args']['contexte']['_alea_actuel']."';"
+		."var alea_futur='".$flux['args']['contexte']['_alea_futur']."';"
+		."var login='".$flux['args']['contexte']['var_login']."';"
 		."var page_auteur = '".generer_url_public('informer_auteur')."';"
 		."var informe_auteur_en_cours = false;"
 		."var attente_informe = 0;"

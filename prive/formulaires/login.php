@@ -46,7 +46,6 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 		'_logo' => $row['logo'],
 		'_alea_actuel' => isset($row['alea_actuel'])?$row['alea_actuel']:'',
 		'_alea_futur' => isset($row['alea_futur'])?$row['alea_futur']:'',
-		'_hidden' => '<input type="hidden" name="session_password_md5" value="" /><input type="hidden" name="next_session_password_md5" value="" />',
 		'_pipeline' => 'affiche_formulaire_login', // faire passer le formulaire dans un pipe dedie pour les methodes auth
 		);
 
@@ -105,8 +104,6 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	
 	$session_login = _request('var_login');
 	$session_password = _request('password');
-	$session_md5pass = _request('session_password_md5');
-	$session_md5next = _request('next_session_password_md5');
 	$session_remember = _request('session_remember');
 
 	if (!$session_login) {
@@ -117,11 +114,11 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	}
 
 	include_spip('inc/auth');
-	$auteur = auth_identifier_login($session_login, $session_password, $session_md5pass, $session_md5next);
+	$auteur = auth_identifier_login($session_login, $session_password);
 	if (!$auteur) {
 		include_spip('inc/cookie');
 		spip_setcookie("spip_admin", "", time() - 3600);
-		if (strlen($session_password) OR strlen($session_md5pass))
+		if (strlen($session_password))
 			return array('password' => _T('login_erreur_pass'));
 		// sinon c'est un login en deux passe old style (ou js en panne)
 		// pas de message d'erreur
