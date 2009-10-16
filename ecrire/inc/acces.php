@@ -147,47 +147,6 @@ function initialiser_sel() {
 	else return "";
 }
 
-// Cette fonction ne sert qu'a la connexion en mode http_auth.non LDAP
-// Son role est de creer le fichier htpasswd
-// Voir le plugin "acces restreint"
-// http://doc.spip.org/@ecrire_acces
-function ecrire_acces() {
-	$htaccess = _DIR_RESTREINT . _ACCESS_FILE_NAME;
-	$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
-
-	// Cette variable de configuration peut etre posee par un plugin
-	// par exemple acces_restreint ;
-	// si .htaccess existe, outrepasser spip_meta
-	if (($GLOBALS['meta']['creer_htpasswd'] != 'oui')
-	AND !@file_exists($htaccess)) {
-		spip_unlink($htpasswd);
-		spip_unlink($htpasswd."-admin");
-		return;
-	}
-
-	# remarque : ici on laisse passer les "nouveau" de maniere a leur permettre
-	# de devenir redacteur le cas echeant (auth http)... a nettoyer
-	// attention, il faut au prealable se connecter a la base (necessaire car utilise par install)
-
-	if (spip_connect_ldap()) return; // hum, il faudrait generaliser cela
-	$p1 = ''; // login:htpass pour tous
-	$p2 = ''; // login:htpass pour les admins
-	$s = sql_select("login, htpass, statut", "spip_auteurs", sql_in("statut",  array('1comite','0minirezo','nouveau')));
-	while ($t = sql_fetch($s)) {
-		if (strlen($t['login']) AND strlen($t['htpass'])) {
-			$p1 .= $t['login'].':'.$t['htpass']."\n";
-			if ($t['statut'] == '0minirezo')
-				$p2 .= $t['login'].':'.$t['htpass']."\n";
-		}
-	}
-	if ($p1) {
-	  ecrire_fichier($htpasswd, $p1);
-	  ecrire_fichier($htpasswd.'-admin', $p2);
-	  spip_log("Ecriture de $htpasswd et $htpasswd-admin");
-	}
-}
-
-
 // http://doc.spip.org/@generer_htpass
 function generer_htpass($pass) {
 	global $htsalt;

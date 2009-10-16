@@ -82,7 +82,10 @@ function base_import_all_dist($titre='', $reprise=false)
 	import_all_fin($request);
 	include_spip('inc/rubriques');
 	calculer_rubriques();
-	if (!$res) ecrire_acces();	// Mise a jour du fichier htpasswd
+	if (!$res){
+		include_spip('inc/auth');
+		auth_synchroniser_distant(); // Mise a jour du fichier htpasswd
+	}
 	// revenir a l'accueil pour finir
 	affiche_progression_javascript('100 %', 0);
 }
