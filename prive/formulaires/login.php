@@ -46,7 +46,8 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 		'_logo' => $row['logo'],
 		'_alea_actuel' => isset($row['alea_actuel'])?$row['alea_actuel']:'',
 		'_alea_futur' => isset($row['alea_futur'])?$row['alea_futur']:'',
-		'_hidden' => '<input type="hidden" name="session_password_md5" value="" /><input type="hidden" name="next_session_password_md5" value="" />'
+		'_hidden' => '<input type="hidden" name="session_password_md5" value="" /><input type="hidden" name="next_session_password_md5" value="" />',
+		'_pipeline' => 'affiche_formulaire_login', // faire passer le formulaire dans un pipe dedie pour les methodes auth
 		);
 
 	if ($erreur OR !$GLOBALS['visiteur_session']['id_auteur'])
