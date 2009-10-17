@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Authentifie et retourne la ligne SQL decrivant l'utilisateur si ok
-function auth_spip_dist ($login, $pass) {
+function auth_spip_dist ($login, $pass, $serveur='') {
 
 	// retrouver le login
 	$login = auth_spip_retrouver_login($login);
@@ -26,7 +26,7 @@ function auth_spip_dist ($login, $pass) {
 	}
   // si envoi non crypte, crypter maintenant
 	elseif ($pass) {
-		$row = sql_fetsel("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login));
+		$row = sql_fetsel("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login),'','','','',$serveur);
 
 		if ($row) {
 			$md5pass = md5($row['alea_actuel'] . $pass);
@@ -36,7 +36,7 @@ function auth_spip_dist ($login, $pass) {
 	// login inexistant ou mot de passe vide
 	if (!$md5pass) return array();
 
-	$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND pass=" . sql_quote($md5pass) . " AND statut<>'5poubelle'");
+	$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND pass=" . sql_quote($md5pass) . " AND statut<>'5poubelle'",'','','','',$serveur);
 
 	// login/mot de passe incorrect
 	if (!$row) return array(); 
@@ -49,7 +49,7 @@ function auth_spip_dist ($login, $pass) {
 	// fait tourner le codage du pass dans la base
 	if ($md5next) {
 		include_spip('inc/acces'); // pour creer_uniqid
-		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($md5next), 'alea_futur' => sql_quote(creer_uniqid())), "id_auteur=" . $row['id_auteur']);
+		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($md5next), 'alea_futur' => sql_quote(creer_uniqid())), "id_auteur=" . $row['id_auteur'],'',$serveur);
 		// En profiter pour verifier la securite de tmp/
 		verifier_htaccess(_DIR_TMP);
 	}
@@ -86,7 +86,9 @@ function auth_spip_formulaire_login($flux){
  * @return bool
  *	toujours true pour un auteur cree dans SPIP
  */
-function auth_spip_autoriser_modifier_login(){
+function auth_spip_autoriser_modifier_login($serveur=''){
+	if (strlen($serveur))
+		return false; // les fonctions d'ecriture sur base distante sont encore incompletes
 	return true;
 }
 
@@ -99,13 +101,13 @@ function auth_spip_autoriser_modifier_login(){
  * @return string
  *	message d'erreur si login non valide, chaine vide sinon
  */
-function auth_spip_verifier_login($new_login,$id_auteur=0){
+function auth_spip_verifier_login($new_login, $id_auteur=0, $serveur=''){
 	// login et mot de passe
 	if (strlen($login)){
 		if (strlen($new_login) < _LOGIN_TROP_COURT)
 			return 'info_login_trop_court';
 		else {
-			$n = sql_countsel('spip_auteurs', "login=" . sql_quote($new_login) . " AND id_auteur!=".intval($id_auteur)." AND statut!='5poubelle'");
+			$n = sql_countsel('spip_auteurs', "login=" . sql_quote($new_login) . " AND id_auteur!=".intval($id_auteur)." AND statut!='5poubelle'",'','',$serveur);
 			if ($n)
 				return _T('info_login_existant');
 		}
@@ -120,25 +122,27 @@ function auth_spip_verifier_login($new_login,$id_auteur=0){
  * @param int $id_auteur
  * @return bool
  */
-function auth_spip_modifier_login($new_login,$id_auteur){
-	if (is_null($new_login) OR auth_spip_verifier_login($new_login,$id_auteur)!='')
+function auth_spip_modifier_login($new_login, $id_auteur, $serveur=''){
+	if (is_null($new_login) OR auth_spip_verifier_login($new_login,$id_auteur,$serveur)!='')
 		return false;
 	if (!$id_auteur = intval($id_auteur)
-		OR !$auteur = sql_fetsel('login','spip_auteurs','id_auteur='.intval($id_auteur)))
+		OR !$auteur = sql_fetsel('login','spip_auteurs','id_auteur='.intval($id_auteur),'','','','',$serveur))
 		return false;
 	if ($new_login == $auteur['login'])
 		return true; // on a rien fait mais c'est bon !
 
+	include_spip('inc/modifier');
+
 	// vider le login des auteurs a la poubelle qui avaient ce meme login
 	if (strlen($new_login)){
-		$anciens = sql_select('id_auteur','spip_auteurs','login='.sql_quote($new_login)." AND statut='5poubelle'");
+		$anciens = sql_select('id_auteur','spip_auteurs','login='.sql_quote($new_login)." AND statut='5poubelle'",'','','','',$serveur);
 		while ($row = sql_fetch($anciens)){
-			auth_spip_login_changer('',$row['id_auteur']);
+			revision_auteur($row['id_auteur'], array('login'=>'')); // manque la gestion de $serveur
 		}
 	}
 
 	include_spip('inc/modifier');
-	revision_auteur($id_auteur, array('login'=>$new_login));
+	revision_auteur($id_auteur, array('login'=>$new_login)); // manque la gestion de $serveur
 
 	return true;
 }
@@ -150,12 +154,12 @@ function auth_spip_modifier_login($new_login,$id_auteur){
  * @param string $login
  * @return string
  */
-function auth_spip_retrouver_login($login){
+function auth_spip_retrouver_login($login, $serveur=''){
 	$l = sql_quote($login);
 	if ($r = sql_getfetsel('login', 'spip_auteurs',
 			"statut<>'5poubelle'" .
 			" AND (length(pass)>0)" .
-			" AND (login=$l)"))
+			" AND (login=$l)",'','','','',$serveur))
 		return $r;
 	// Si pas d'auteur avec ce login
 	// regarder s'il a saisi son nom ou son mail.
@@ -164,16 +168,39 @@ function auth_spip_retrouver_login($login){
 	else return sql_getfetsel('login', 'spip_auteurs',
 			"statut<>'5poubelle'" .
 			" AND (length(pass)>0)" .
-			" AND (login<>'' AND (nom=$l OR email=$l))");
+			" AND (login<>'' AND (nom=$l OR email=$l))",'','','','',$serveur);
 }
 
+
+/**
+ * informer sur un login
+ * Ce dernier transmet le tableau ci-dessous a la fonction JS informer_auteur
+ * Il est invoque par la fonction JS actualise_auteur via la globale JS
+ * page_auteur=#URL_PAGE{informer_auteur} dans le squelette login
+ * N'y aurait-il pas plus simple ?
+ *
+ * @param array $infos
+ * @param array $row
+ * @param string $serveur
+ * @return array
+ */
+function auth_spip_informer_login($infos, $row, $serveur=''){
+
+	// pour la methode SPIP on a besoin des alea en plus pour encoder le pass avec
+	$infos['alea_actuel'] = $row['alea_actuel'];
+	$infos['alea_futur'] = $row['alea_futur'];
+
+	return $infos;
+}
 
 /**
  * Informer du droit de modifier ou non le pass
  * @return bool
  *	toujours true pour un auteur cree dans SPIP
  */
-function auth_spip_autoriser_modifier_pass(){
+function auth_spip_autoriser_modifier_pass($serveur=''){
+	if (strlen($serveur))
+		return false; // les fonctions d'ecriture sur base distante sont encore incompletes
 	return true;
 }
 
@@ -192,7 +219,7 @@ function auth_spip_autoriser_modifier_pass(){
  * @return string
  *	message d'erreur si login non valide, chaine vide sinon
  */
-function auth_spip_verifier_pass($login, $new_pass, $id_auteur=0){
+function auth_spip_verifier_pass($login, $new_pass, $id_auteur=0, $serveur=''){
 	// login et mot de passe
 	if (strlen($new_pass) < 6)
 		return _T('info_passe_trop_court');
@@ -200,12 +227,12 @@ function auth_spip_verifier_pass($login, $new_pass, $id_auteur=0){
 	return '';
 }
 
-function auth_spip_modifier_pass($login, $new_pass, $id_auteur){
-	if (is_null($new_pass) OR auth_spip_verifier_pass($login, $new_pass,$id_auteur)!='')
+function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur=''){
+	if (is_null($new_pass) OR auth_spip_verifier_pass($login, $new_pass,$id_auteur,$serveur)!='')
 		return false;
 
 	if (!$id_auteur = intval($id_auteur)
-		OR !$auteur = sql_fetsel('login','spip_auteurs','id_auteur='.intval($id_auteur)))
+		OR !$auteur = sql_fetsel('login','spip_auteurs','id_auteur='.intval($id_auteur),'','','','',$serveur))
 		return false;
 
 	$c = array();
@@ -221,7 +248,7 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur){
 	$c['low_sec'] = '';
 
 	include_spip('inc/modifier');
-	revision_auteur($id_auteur, $c);
+	revision_auteur($id_auteur, $c); // manque la gestion de $serveur
 
 }
 
@@ -234,7 +261,10 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur){
  *	all=>true permet de demander la regeneration complete des acces apres operation en base (import, upgrade)
  * @return void 
  */
-function auth_spip_synchroniser_distant($id_auteur, $champs, $options = array()){
+function auth_spip_synchroniser_distant($id_auteur, $champs, $options = array(), $serveur=''){
+	// ne rien faire pour une base distante : on ne sait pas regenerer les htaccess
+	if (strlen($serveur))
+		return;
 	// si un login, pass ou statut a ete modifie
 	// regenerer les fichier htpass
 	if (isset($champs['login'])
