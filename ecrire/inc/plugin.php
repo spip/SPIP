@@ -706,12 +706,27 @@ function plugin_get_infos($plug, $force_reload=false, $dir_plugins = _DIR_PLUGIN
 // http://doc.spip.org/@plugin_verifie_conformite
 function plugin_verifie_conformite($plug, &$arbre, $dir_plugins = _DIR_PLUGINS){
 	$silence = false;
-	if (isset($arbre['plugin']) AND is_array($arbre['plugin']))
-		$arbre = end($arbre['plugin']); // derniere def plugin
-	else{
+	$p = null;
+	// chercher la declaration <plugin spip='...'> a prendre pour cette version de SPIP
+	if ($n = spip_xml_match_nodes(",^plugin(\s|$),", $arbre, $matches)){
+		// version de SPIP
+		$vspip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
+		foreach($matches as $tag=>$sous){
+			list($tagname,$atts) = spip_xml_decompose_tag($tag);
+			if ($tagname=='plugin' AND is_array($sous)){
+				if (!isset($atts['spip'])
+					OR plugin_version_compatible($atts['spip'],$vspip))
+					// on prend la derniere declaration avec ce nom
+					$p = end($sous);
+			}
+		}
+	}
+	if (is_null($p)){
 		$arbre = array('erreur' => array(_T('erreur_plugin_tag_plugin_absent')." : $plug/plugin.xml"));
 		$silence = true;
 	}
+	else
+		$arbre = $p;
 	if (!is_array($arbre)) $arbre = array();
   // verification de la conformite du plugin avec quelques
   // precautions elementaires
