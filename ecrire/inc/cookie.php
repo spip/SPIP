@@ -33,6 +33,15 @@ function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='
 		@setcookie ($name, $value, $expire);
 	else
 		@setcookie ($name, $value);
+	
+	spip_cookie_envoye(true);
+}
+
+function spip_cookie_envoye($set = '') {
+  static $envoye = false;
+  if($set)
+    $envoye = true;
+  return $envoye;
 }
 
 // http://doc.spip.org/@recuperer_cookies_spip
