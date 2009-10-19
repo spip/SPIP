@@ -24,7 +24,6 @@ function enregistre_modif_plugin(){
 	$plugin=array();
 
 	foreach($_POST as $choix=>$val){
-		spip_log("test de $choix $val");
 		if (isset($test[$choix])&&$val=='O')
 			$plugin[]=$test[$choix];
 	}
