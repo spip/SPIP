@@ -190,7 +190,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'veranu',
 'date_saison_3' => 'estate',
 'date_saison_4' => 'auturnu',
+'date_secondes' => 'seconde',
 'date_semaines' => 'settimane',
+'date_un_mois' => 'mese',
+'date_une_heure' => 'ora',
+'date_une_minute' => 'minutu',
+'date_une_seconde' => 'seconda',
+'date_une_semaine' => 'settimana',
 'dirs_commencer' => ' di modu &agrave; principi&agrave; veramente a stallazione',
 'dirs_preliminaire' => 'Prima di tuttu : <b>Scioglie i diritti d\'accessu</b>',
 'dirs_probleme_droits' => 'Problemu di diritti d\'accessu',
@@ -253,7 +259,7 @@ Avete furnitu e seguenti infurmazioni :
     @message@
 
 IMPURTANTE ...
-Per cunvalid&agrave; a vostra zifra, basta &agrave; cunnett&agrave; vi &agrave; 
+Per cunvalid&agrave; a vostra zifra, basta &agrave; cunnette vi &agrave; 
 l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra dumanda) :
 
     @url@
@@ -335,7 +341,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'icone_creer_nouvel_auteur' => 'Cre&agrave; un nuvellu autore',
 'icone_creer_rubrique' => 'Cre&agrave; una r&ugrave;bbrica',
 'icone_creer_sous_rubrique' => 'Cre&agrave; una sottur&ugrave;bbrica',
-'icone_deconnecter' => 'Scunnett&agrave;&nbsp;si',
+'icone_deconnecter' => 'Scunnette&nbsp;si',
 'icone_discussions' => 'Ragiunate',
 'icone_doc_rubrique' => 'Ducumenti di e r&ugrave;bbriche',
 'icone_ecrire_article' => 'Scrive un nuvellu art&igrave;culu',
@@ -437,7 +443,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'info_fini' => 'H&egrave; fatta !',
 'info_format_image' => 'Forme d\'im&agrave;gini ch&igrave; ponu esse usate da cre&agrave; figurette&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'forma indefinita',
-'info_grand_ecran' => 'Schernu mai&ograve;',
+'info_grand_ecran' => 'Screnu mai&ograve;',
 'info_image_aide' => 'AIUTU',
 'info_image_process_titre' => 'M&egrave;tudu di f&agrave;bbrica di e figurette',
 'info_impossible_lire_page' => '<b>Errore !</b> Impuss&igrave;bule di leghje a p&agrave;gina <tt><html>@test_proxy@</html></tt> &agrave; traversu u proxy ',
@@ -475,8 +481,8 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 		S&egrave; vo sceglite ste lingue, seranu tradutti in autum&agrave;ticu assai elementi di u situ p&ugrave;bblicu (date, furmulari, ...). 
 		Per e lingue micca sottufrisgiate, st\'elementi cumparisceranu in a lingua principale di u situ.',
 'info_multilinguisme' => 'Multilingu&igrave;simu',
-'info_nom_non_utilisateurs_connectes' => 'U vostru nome &ugrave;n cumparisce micca in a lista di l\'utilizatori cunnettati.',
-'info_nom_utilisateurs_connectes' => 'U vostru nome cumparisce in a lista di l\'utilizatori cunnettati.',
+'info_nom_non_utilisateurs_connectes' => 'U vostru nome &ugrave;n cumparisce micca in a lista di l\'utilizatori cunnessi.',
+'info_nom_utilisateurs_connectes' => 'U vostru nome cumparisce in a lista di l\'utilizatori cunnessi.',
 'info_nombre_en_ligne' => 'Attualmente in ligna&nbsp;:',
 'info_non_resultat' => 'Nisunu risultatu per "@cherche_mot@"',
 'info_non_utilisation_messagerie' => '&ugrave;n usate micca a messageria interna di stu situ.',
@@ -486,7 +492,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'info_obligatoire' => 'H&egrave; ubbligatoria st\'infurmazione',
 'info_panne_site_syndique' => 'Situ sindicatu for\'d\'adopru',
 'info_pense_bete' => 'MEMENTU',
-'info_petit_ecran' => 'P&igrave;cculu schernu',
+'info_petit_ecran' => 'P&igrave;cculu screnu',
 'info_petition_close' => 'Petizione chjosa',
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Parechje parulle chjave trove per "@cherche_mot@":',
@@ -556,7 +562,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'lien_nouvea_pense_bete' => 'NUVELLU MEMENTU',
 'lien_nouveau_message' => 'NUVELLU MESSAGIU',
 'lien_nouvelle_annonce' => 'NUVELLU ANNUNCIU',
-'lien_petitions' => 'P&Egrave;TIZIONE',
+'lien_petitions' => 'PETIZIONE',
 'lien_popularite' => 'pupularit&agrave;&nbsp;: @popularite@%',
 'lien_racine_site' => 'R&Agrave;DICA DI U SITU',
 'lien_reessayer' => 'pruv&agrave; torna',
@@ -569,7 +575,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'ligne' => 'Ligna',
 'login' => 'Cunnessione',
 'login_acces_prive' => 'accessu &agrave; u spaziu privatu',
-'login_autre_identifiant' => 'cunnett&agrave; si c&ugrave; un altru c&ograve;dice',
+'login_autre_identifiant' => 'cunnette si c&ugrave; un altru c&ograve;dice',
 'login_cookie_accepte' => 'Parametrate puru u vostru navigatore di manera ch\'ellu l\'accetti (omancu per u situ).',
 'login_cookie_oblige' => 'Duvite accett&agrave; i cookies da pud&egrave; identific&agrave; vi di modu sicuru nant\'&agrave; stu situ.',
 'login_deconnexion_ok' => 'Scunnessione compia.',
@@ -588,7 +594,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'login_pass2' => 'Password&nbsp;:',
 'login_preferez_refuser' => '<b>S&egrave; vo preferite rifiut&agrave; i cookies</b>, v\'h&egrave; dispostu un altru m&egrave;tudu di cunnessione (sicurizata di menu)&nbsp;:',
 'login_recharger' => 'ricaric&agrave; sta p&agrave;gina',
-'login_rester_identifie' => 'Firm&agrave; cunnettatu qualch&igrave; ghjornu',
+'login_rester_identifie' => 'Firm&agrave; cunnessi qualch&igrave; ghjornu',
 'login_retour_public' => 'Ritornu &agrave; u situ p&ugrave;bblicu',
 'login_retour_site' => 'Ritornu &agrave; u situ p&ugrave;bblicu',
 'login_retoursitepublic' => 'ritornu&nbsp;&agrave;&nbsp;u&nbsp;situ&nbsp;p&ugrave;bblicu',
@@ -649,7 +655,7 @@ Andate puru &agrave; l\'indirizzu  :
     @sendcookie@
 
 Puderete tandu inserisce un nuvellu password 
-&egrave; cus&igrave; cunnett&agrave; vi torna &agrave; u situ.
+&egrave; cus&igrave; cunnette vi torna &agrave; u situ.
 
 ',
 'pass_mot_oublie' => 'Password dimenticatu',
@@ -699,7 +705,7 @@ Puderete tandu inserisce un nuvellu password
 'texte_erreur_visiteur' => 'Avete pruvatu d\'accede &agrave; u spaziu privatu c&ugrave; un login ch&igrave; &ugrave;n a permette micca.',
 'texte_inc_auth_1' => 'Site identificatu c&ugrave; u login <b>@auth_login@</b>, ma questu &ugrave;n esiste micca/pi&ugrave; in a basa.
 		Pruvate &agrave;',
-'texte_inc_auth_2' => 'cunnett&agrave;&nbsp;vi torna',
+'texte_inc_auth_2' => 'cunnette&nbsp;vi torna',
 'texte_inc_auth_3' => ', dopu esse esciutu; poi aprite torna u navigatore.',
 'texte_inc_config' => 'E mud&igrave;fiche fatte in ste p&agrave;gine pesanu assai nant\'&agrave; u funziunamentu di u vostru situ. 
 		Vi cunsigliemu d\'&ugrave;n f&agrave; ci interventi fintantu ch&igrave; &ugrave;n serete abbastanza pr&agrave;ticu c&ugrave; u funziunamentu di u sistema SPIP. <br /><br />
