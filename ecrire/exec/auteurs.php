@@ -84,11 +84,7 @@ function bandeau_auteurs($tri, $visiteurs)
 {
 	global $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
 
-
-	$ret .= gros_titre($visiteurs ? _T('info_visiteurs') :  _T('info_auteurs'),'',false);
-
-
-	$ret .= debut_gauche("auteurs",true) . debut_boite_info(true);
+	$ret = gros_titre($visiteurs ? _T('info_visiteurs') :  _T('info_auteurs'),'',false) . debut_gauche("auteurs",true) . debut_boite_info(true);
 
 	if ($visiteurs) 
 		$ret .= "\n<p class='arial1'>"._T('info_gauche_visiteurs_enregistres'). '</p>';

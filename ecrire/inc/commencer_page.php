@@ -76,6 +76,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		: 'navigation_avec_icones';
 	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
+	if ($GLOBALS['spip_ecran'] == "large") $largeur = 974; else $largeur = 750;
 	$res = pipeline('body_prive',"<body class='"
 			. $GLOBALS['spip_ecran'] . " $spip_display_navigation $rubrique $sous_rubrique "._request('exec')."'"
 			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
@@ -83,11 +84,9 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	if (!$menu) return $res;
 
-
 	$bandeau = charger_fonction('bandeau', 'inc');
 
-	return $res
-	 . $bandeau($rubrique, $sous_rubrique, $largeur);
+	return $res . $bandeau($rubrique, $sous_rubrique, $largeur);
 }
 
 // http://doc.spip.org/@avertissement_messagerie

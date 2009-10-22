@@ -671,7 +671,7 @@ function find_in_theme($file, $subdir='', $include=false){
 		if ($f = find_in_path($file,"prive/themes/$theme/$subdir",$include))
 			return $f;
 	}
-	spip_log("$dirname/$file introuvable dans le theme prive ".reset($themes),'theme');
+	spip_log("$file introuvable dans le theme prive ".reset($themes),'theme');
 	return "";
 }
 
