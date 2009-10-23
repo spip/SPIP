@@ -765,7 +765,8 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 {
 	static $num = array();
-	$cpt = &$num[$boucle->descr['nom']][$boucle->descr['gram']][$boucle->id_boucle];
+	$descr = $boucles[$idb]->descr;
+	$cpt = &$num[$descr['nom']][$descr['gram']][$idb];
 
 	$var = '$in' . $cpt++;
 	$x= "\n\t$var = array();";
