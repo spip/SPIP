@@ -21,14 +21,14 @@
 		<span id="spip_logo_auteur">#ENV*{_logo,''}</span>
 		<ul>
 			<li class="editer_login obligatoire">
-				<label for="var_login"><:login_login2:></label>
-				<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{var_login})</span>]
+				<label for="var_login"><:login_login2:></label>[
+				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{var_login})</span>
+				]<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
 			</li>
 			<li class="editer_password obligatoire">
-				<label for="password"><:login_pass2:></label>
-				<input type='password' class='password' name='password' id='password' value="" size='40' />
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{password})</span>]
+				<label for="password"><:login_pass2:></label>[
+				<span class="erreur_message">(#ENV**{erreurs}|table_valeur{password})</span>
+				]<input type='password' class='password' name='password' id='password' value="" size='40' />
 				<span class='details'>&#91;<a href="#URL_PAGE{spip_pass}" id='spip_pass'><:login_motpasseoublie:></a>&#93;</span>
 			</li>
 			[(#ENV{rester_connecte})

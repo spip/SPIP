@@ -130,7 +130,7 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	if (!is_array($auteur)) {
 		$erreurs = array();
 		if (is_string($auteur))
-			$erreurs['message_erreur'] = $auteur;
+			$erreurs['var_login'] = $auteur;
 		include_spip('inc/cookie');
 		spip_setcookie("spip_admin", "", time() - 3600);
 		if (strlen($session_password))
