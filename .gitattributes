@@ -4,6 +4,7 @@ config/ecran_securite.php -text
 config/remove.txt -text
 ecrire/action/acceder_document.php -text
 ecrire/action/activer_plugins.php -text
+ecrire/action/auth.php -text
 ecrire/action/changer_mode_document.php -text
 ecrire/action/charger_plugin.php -text
 ecrire/action/configurer.php -text
