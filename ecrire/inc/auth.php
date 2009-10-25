@@ -49,7 +49,10 @@ function acces_statut($id_auteur, $statut, $bio)
 	if ($statut != 'nouveau') return $statut;
 	include_spip('inc/filtres');
 	if (!($s = tester_config('', $bio))) return $statut;
-		sql_updateq('spip_auteurs', array('bio'=>'', 'statut'=> $s), "id_auteur=$id_auteur");
+	include_spip('action/editer_auteur');
+	instituer_auteur($id_auteur,array('statut'=> $s));
+	include_spip('inc/modifier');
+	revision_auteur($id_auteur, array('bio'=>''));
 	return $s;
 }
 
@@ -457,11 +460,19 @@ function auth_terminer_identifier_login($auth_methode, $login, $serveur=''){
 	$p = array('prefs' => serialize($p));
 	sql_updateq('spip_auteurs', $p, "id_auteur=" . $auteur['id_auteur']);
 
+	if ($auteur['statut'] == 'nouveau') {
+		$auteur['statut'] = acces_statut($auteur['id_auteur'], $auteur['statut'], $auteur['bio']);
+	}
+
 	// Si on est admin, poser le cookie de correspondance
+	include_spip('inc/cookie');
 	if ($auteur['statut'] == '0minirezo') {
-		include_spip('inc/cookie');
 		spip_setcookie('spip_admin', '@'.$auteur['login'],
 		time() + 7 * 24 * 3600);
+	}
+	// sinon le supprimer ...
+	else {
+		spip_setcookie('spip_admin', '',1);
 	}
 
 	//  bloquer ici le visiteur qui tente d'abuser de ses droits

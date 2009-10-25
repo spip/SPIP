@@ -39,12 +39,7 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 	$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND pass=" . sql_quote($md5pass) . " AND statut<>'5poubelle'",'','','','',$serveur);
 
 	// login/mot de passe incorrect
-	if (!$row) return array(); 
-
-	if ($row['statut'] == 'nouveau') {
-		include_spip('inc/auth');
-		$row['statut'] = acces_statut($row['id_auteur'], $row['statut'], $row['bio']);
-	}
+	if (!$row) return array();
 
 	// fait tourner le codage du pass dans la base
 	if ($md5next) {
