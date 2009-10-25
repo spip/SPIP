@@ -130,12 +130,17 @@ function inscription_nouveau($desc)
 		$desc['login'] = test_login($desc['nom'], $desc['email']);
 
 	$desc['statut'] = 'nouveau';
+	include_spip('action/editer_auteur');
+	$id_auteur = insert_auteur();
 
-	$n = sql_insertq('spip_auteurs', $desc);
+	if (!$id_auteur) return _T('titre_probleme_technique');
 
-	if (!$n) return _T('titre_probleme_technique');
+	include_spip('inc/modifier');
+	revision_auteur($id_auteur, $desc);
 
-	$desc['id_auteur'] = $n;
+	instituer_auteur($id_auteur, $desc);
+
+	$desc['id_auteur'] = $$id_auteur;
 
 	return $desc;
 }
@@ -202,10 +207,9 @@ function test_login($nom, $mail) {
 function creer_pass_pour_auteur($id_auteur) {
 	include_spip('inc/acces');
 	$pass = creer_pass_aleatoire(8, $id_auteur);
-	$mdpass = md5($pass);
-	$htpass = generer_htpass($pass);
-	sql_updateq('spip_auteurs', array('pass'=>$mdpass, 'htpass'=>$htpass),"id_auteur = ".intval($id_auteur));
-	ecrire_acces();
+
+	include_spip('action/editer_auteur');
+	instituer_auteur($id_auteur, array('pass'=>$pass));
 	
 	return $pass;
 }
