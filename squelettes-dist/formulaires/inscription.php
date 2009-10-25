@@ -140,7 +140,7 @@ function inscription_nouveau($desc)
 
 	instituer_auteur($id_auteur, $desc);
 
-	$desc['id_auteur'] = $$id_auteur;
+	$desc['id_auteur'] = $id_auteur;
 
 	return $desc;
 }
