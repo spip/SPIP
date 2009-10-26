@@ -41,8 +41,8 @@ function spip_connect($serveur='', $version='') {
 		? '' // nom de serveur mal ecrit
 		: ($serveur ?
 		   ( _DIR_CONNECT. $serveur . '.php') // serveur externe
-		   : ($install ? _FILE_CONNECT_TMP // init du serveur principal
-		      : (_FILE_CONNECT ? _FILE_CONNECT // serveur principal ok
+		    : (_FILE_CONNECT ? _FILE_CONNECT // serveur principal ok
+		       : ($install ? _FILE_CONNECT_TMP // init du serveur principal
 			 : ''))); // installation pas faite
 
 		unset($GLOBALS['db_ok']);
