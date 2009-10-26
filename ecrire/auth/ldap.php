@@ -66,6 +66,8 @@ function auth_ldap_dist ($login, $pass, $serveur='') {
  */
 function auth_ldap_connect($serveur='') {
 	include_spip('base/connect_sql');
+	static $connexions_ldap = array();
+	if (isset($connexions_ldap[$serveur])) return $connexions_ldap[$serveur]; 
 	$connexion = spip_connect($serveur);
 	if (!is_array($connexion['ldap'])) {
 		if ($connexion['authentification']['ldap']) {
@@ -75,9 +77,10 @@ function auth_ldap_connect($serveur='') {
 			if (isset($GLOBALS['ldap_link']))
 				$connexion['ldap'] = array('link' => $GLOBALS['ldap_link'],
 					'base' => $GLOBALS['ldap_base']);
-		}
+			else spip_log("connection LDAP $serveur mal definie dans $f");
+		} else spip_log("connection LDAP $serveur inconnue");
 	}
-	return $connexion['ldap'];
+	return $connexions_ldap[$serveur]=$connexion['ldap'];
 }
 
 /**
