@@ -47,10 +47,12 @@ function action_dater_post($r)
 		}
 
 		$date = format_mysql_date($annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac);
-		sql_updateq("spip_articles", array("date_redac" => $date), "id_article=$r[1]");
-
+		include_spip('inc/modifier');
+		revision_article($r[1],array("date_redac" => $date));
 	}
 
+	// a priori fait doublon avec instituer_xx utilise dans dater_table()
+	// mais on laisse pour ne pas introduire de bug dans cette branche
 	if (($type == 'article')
 	AND $GLOBALS['meta']["post_dates"] == "non") {
 		$t = sql_fetsel("statut, id_rubrique", "spip_articles", "id_article=$id");
@@ -80,7 +82,12 @@ function dater_table($id, $type)
 	$champ = @$GLOBALS['table_date'][$nom];
 	if (!$champ) $champ = 'date';
 	$date = format_mysql_date(_request('annee'), _request('mois'), _request('jour'), _request('heure'), _request('minute'));
-	sql_updateq($table, array($champ => $date), "$col_id=$id");
+	// utiliser instituer_xx si dispo
+	if (include_spip('action/editer_'.$type) AND function_exists($f='instituer_'.$type)){
+		$f($id,array($champ => $date));
+	}
+	else
+		sql_updateq($table, array($champ => $date), "$col_id=$id");
 	return $date;
 }
 ?>
