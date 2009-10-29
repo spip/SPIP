@@ -207,9 +207,18 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 
 
 // http://doc.spip.org/@fieldset
-function fieldset($legend, $champs = array(), $horchamps='') {
-	$fieldset = "<fieldset>\n" .
-	($legend ? "<legend>".$legend."</legend>\n" : '');
+function fieldset($legend,  $champs = array(), $apres='', $avant='') {
+	return "<fieldset>\n" .
+	  $avant .
+	  ($legend ? "<legend>".$legend."</legend>\n" : '') .
+	  fieldset_champs($champs) .
+	  $apres .
+	  "</fieldset>\n";
+}
+
+function fieldset_champs($champs = array())
+  {
+	$fieldset = '';
 	foreach ($champs as $nom => $contenu) {
 		$type = isset($contenu['hidden']) ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
 		$class = isset($contenu['hidden']) ? '' : "class='formo' size='40' ";
@@ -230,7 +239,6 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 							  .(preg_match(',^(pass|login),', $nom)?" autocomplete='off'":'') .	" />\n";
 		}
 	}
-	$fieldset .= "$horchamps</fieldset>\n";
 	return $fieldset;
 }
 
@@ -428,5 +436,15 @@ function install_etape_liste_bases($server_db, $disabled=array())
 	if ($checked) {array_unshift($bases, $checked); $checked = true;}
 
 	return array($checked, $bases);
+}
+
+function install_propager($hidden)
+{
+	$res = '';
+	foreach($hidden as $k) {
+		$v = htmlentities(_request($k));
+		$res .= "<input type='hidden' name='$k' value='$v' />";
+	}
+	return $res;
 }
 ?>
