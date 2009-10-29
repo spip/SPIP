@@ -893,7 +893,7 @@ function generer_url_ecrire($script='', $args="", $no_entities=false, $rel=false
 		$rel = _DIR_RESTREINT ? _DIR_RESTREINT :
 			('./'  . _SPIP_ECRIRE_SCRIPT);
 
-	@list($script, $ancre) = split('#', $script);
+	@list($script, $ancre) = explode('#', $script);
 	if ($script AND ($script<>'accueil' OR $rel))
 		$args = "?exec=$script" . (!$args ? '' : "&$args");
 	elseif ($args)
