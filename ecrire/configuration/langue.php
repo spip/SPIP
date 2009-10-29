@@ -25,7 +25,7 @@ function configuration_langue_dist()
 
  $res = "<option value='$l_site' selected='selected'>$langue_site</option>\n";
  
- foreach (split(",",$GLOBALS['meta']['langues_proposees']) as $l) {
+ foreach (explode(",",$GLOBALS['meta']['langues_proposees']) as $l) {
 	if ($l <> $l_site)
 		$res .= "<option value='$l'>".traduire_nom_langue($l)."</option>\n";
  }
