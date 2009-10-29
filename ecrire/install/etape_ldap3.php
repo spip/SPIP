@@ -27,14 +27,16 @@ function install_etape_ldap3_dist()
 
 	echo install_debut_html();
 
-	echo info_etape(_T('info_chemin_acces_1'),info_progression_etape(3,'etape_ldap','install/'),_T('info_chemin_acces_2'));
+	echo info_etape(_T('info_chemin_acces_1'),info_progression_etape(3,'etape_ldap','install/')),_T('info_chemin_acces_2');
 
 	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
-	@ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");
-
-	$result = @ldap_read($ldap_link, "", "objectclass=*", array("namingContexts"));
-	$info = @ldap_get_entries($ldap_link, $result);
-
+	if ($ldap_link) {
+		@ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");
+		$result = @ldap_read($ldap_link, "", "objectclass=*", array("namingContexts"));
+		$info = @ldap_get_entries($ldap_link, $result);
+		@ldap_close($ldap_link);
+	}
+	
 	$checked = false;
 	$res = '';
 	if (is_array($info) AND $info["count"] > 0) {
