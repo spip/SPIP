@@ -78,11 +78,11 @@ function install_etape_ldap1_dist()
 		array(
 			'login_ldap' => array(
 				'label' => _T('texte_login_ldap_1'),
-				'valeur' => ''
+				'valeur' => $login_ldap
 			),
 			'pass_ldap' => array(
 				'label' => _T('entree_passe_ldap'),
-				'valeur' => ''
+				'valeur' => $pass_ldap
 			)
 		)
 	)
