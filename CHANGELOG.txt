@@ -1,3 +1,78 @@
+2.0.9 -> 2.0.10 
+Revision: 14695 report de [14694]
+Revision: 14690 remplacement de la fonction ereg (obsolète à partir de php 5.3.0).
+Revision: 14680 correction inserer_attribut : support des tags fermés sans espace avant />
+Revision: 14678 Correction: les constantes {{{_INSTALL_USER_LDAP}}} et  {{{_INSTALL_PASS_LDAP}}} n'étaient jamais pris en compte à l'installation, et les messages signalant que l'étape courante a été franchie avec succès n'apparaissaient pas. Plus un Log oublié et un meilleur contrôle d'erreur.
+Revision: 14677 eviter les cookie enregistrant des forums vides, report de http://zone.spip.org/trac/spip-zone/changeset/32429
+Revision: 14676 [14673] avait introduit l'impossibilite de postdater avant publication, on retablit
+Revision: 14673 utiliser les api pour que les plugins puissent faire leur travail
+Revision: 14671 Heureusement que les utilisateurs de PHP complètent sa doc: la connexion LDAP cryptée sur un autre port que le 389 ne doit pas utiliser la fonction {{{ldap_start_tls}}}, mais utiliser l'écriture {{{ldaps://}}}{{serveur}}} comme premier argument de {{{ldap_connect}}}.
+Revision: 14670 Les bases externes ne pouvaient plus être déclarées car le paramètre {{{install}}} dans l'URL ne veut plus forcément dire qu'on est en train d'installer SPIP depuis le début depuis que ces déclarations de bases externes ne sont plus faites à l'installation initiale. Il faudrait terminer plus proprement la migration de ces scripts (Christian).
+Revision: 14669 eviter de faire des sql_delete a tout va sur un calcul de page (pour une meta qui ne sert a rien qui plus est) 
+Revision: 14668 report de [14666]
+Revision: 14663 report partiel mais suffisant de [14659]
+Revision: 14660 les messages d'erreur avant les input
+Revision: 14647 et les notes n'etaient pas echappees
+Revision: 14646 boucle infernale sur forum.spip.org, ou un article peut avoir qqs dizaines de milliers de forums ;-)
+Revision: 14645 La suppression de vignette de document ne marchait pas dans ce cas là : action pas comprise car avait un /$id_document en trop qui ne sert pas dans l'action
+Revision: 14640 Ce spip_log n'a plus de raison d'être il me semble
+Revision: 14635 reparer  <BOUCLE_art(ARTICLES){!id_mot IN (5,7)}>
+Revision: 14628 utiliser redbot.org comme interface de test des entetes : merci @karlpro
+Revision: 14626 permettre a un SSO de revenir sur le login avec un message d'erreur dans var_erreur
+Revision: 14622 La possibilité de surcharge des attributs à demander à LDAP, introduite par [14608], n'a pas de raison de se limiter à ce qui concerne la champ {{{login}}}, il faut pouvoir indiquer tous les champs à lui demander. Tant qu'à faire, on écrit un code prêt à recevoir cette indication via la déclaration faite à l'installation, mais pour l'instant ça ne sert pas encore, c'est toujours la globale qui est utilisée. Je reporte en stable pour que la globale introduite précédemment pour aider à résoudre [http://comments.gmane.org/gmane.comp.web.spip.user/149473 ce problème sur la liste spip-user] n'y perdure pas plus.
+Revision: 14614 Ok ([14605] et [14610]), pour chercher un mot dans plusieurs groupes, mais autant utiliser l'interface SPIP-SQL à fond, du moment qu'on sécurise en amont, sécurisation qui révèle une drôle de chose: si le mot est créé, c'est forcément dans le premier groupe donné. C'est bien l'intention ?
+Revision: 14612 gestion de la redirection lorsqu'on arrive sur le formulaire de login deja loge (ie retour d'une identification SSO) deleguer a traiter() le soin de calculer la redirection et appliquer eventuellement
+Revision: 14608 Plutôt que de dupliquer une fonction ([14601]), généraliser une fonction existante pour éviter que les éventuelles surcharges ne voient plus rien passer. Je profite de cette occasion d'intervention sur l'authentification LDAP pour passer en globale le tableau des noms des attributs potentiellement porteurs du login afin de répondre à [http://comments.gmane.org/gmane.comp.web.spip.user/149473 ce message de la liste spip-user], et reporte en stable pour qu'ils puissent résoudre leur problème. Mais revoir le formulaire de déclaration du LDAP pour y indiquer les correspondances entre champs du LDAP et champs de la table auteurs sera à faire tôt ou tard.
+Revision: 14605 accepter plusieurs groupes possibles de recherche de mots-cles (avec les remerciements du selecteur generique)
+Revision: 14599 La clause GROUP BY pléthorique de cette requête avait été introduite manuellement par [9841] au début du portage PG, alors que depuis c'est fait automatiquement dans le fichier reg/pg.php. Retour au GROUP BY simple, beaucoup plus performant en MYSQL, et qui évite à Oracle de râler car on ne peut y faire de GROUP BY sur un BLOB. / J'en profite pour resyncrhoniser les 2 branches 2.0 et 2.1 sur ce fichier, différenciées superficiellement par [14576].
+Revision: 14592 le bidule d'ajax de config_fonctions provoquait une erreur 'config_fonctions n'existe pas'
+Revision: 14589 réparer la conversion des urls en urls absolues dans les fichiers css compactés.
+Revision: 14572 Correction: retour du login automatique en fin d'installation, flingué par l'introduction du répertoire {{{auth/}}} par [13435].
+Revision: 14567 Autre rel='nofollow' en complément de [14270] sur les calendriers.
+Revision: 14566 Première revision: [14487] avait remplacé une erreur SQL par une autre
+Revision: 14561 report de [14560]
+Revision: 14558 support des formatx open xml de cro$oft : renommer docx en doc n'etait pas satisfaisant car les vieilles version de word se plantaient dessus, et par ailleurs il manquait toutes les declinaisons et les mime type
+Revision: 14551 mise au carre des mots : il en manquait
+Revision: 14550 mise au carre des controles sur les mots-cles -- report (adapte pour la branche 2.0) de [14549]
+Revision: 14521 Erreurs SQL en multi-serveurs, suite: [14492] corrigeait dans la branche dev pendant que [14484] et [14489] corrigeaient dans la branche stable. Avec ça, la stable est bien corrigée pour MySQL et PG, mais dans la dev il y a de toutes façons le chantier en cours de l'abstraction des erreurs SQL, c'est encore incomplet.
+Revision: 14519 report de [14504]
+Revision: 14517 permettre la modification du choix d'apparaître dans la liste des connectés au seul concerné.
+Revision: 14508 ne pas divulguer le login et pass a la base de donnees aux non webmestre qui n'y ont a priori pas acces
+Revision: 14499 suite de [14495] concernant postgre
+Revision: 14498 eviter une erreur fatale pour cause de double inclusion de url/propres via qs ou propres2
+Revision: 14497 ajout d'un define pour indiquer à partir de quel nombre de mots-clefs on abandonne la sélection dans une liste au profit d'une recherche.
+Revision: 14495 complement a sql_delete : renvoyer le nombre de lignes affectees ou false en cas d'erreur.
+Revision: 14491 report de [14452] sur l'unzip des pages distantes, qu'on a vu planter aussi sur spip.net
+Revision: 14490 Correction de charger_fonction: ne pas ajouter de tiret si le dossier est vide, comme cela avait été fait pour la version de dev inopinément en [13645] (Rasta).
+Revision: 14489 Correction de la correction de [14484]: la globale décrivant la connexion n'est pas encore entièrement définie à l'étape 3 de l'installation.
+Revision: 14488 envoyer la date (de publication) avec le statut dans le pipeline notification lorsque l'on institue
+Revision: 14487 petite erreur sql dans le pipeline premiere_revision ; report de http://zone.spip.org/trac/spip-zone/changeset/31517
+Revision: 14484 bug dans l'API sql_* : le mysql_error() est en effet lie a la derniere connexion ouverte, il faut donc passer systematiquement la variable serveur si on veut pouvoir parler a deux connexions en meme temps (sinon, seule la derniere connexion ouverte parle) ; cf. http://php.net/mysql_error j'imagine qu'il va falloir etendre aux autres portages
+Revision: 14483 Profiter de la table PHP des titres aussi dans les URL arbos (Rastapapoulos).
+Revision: 14482 [14481] sans le commentaire !
+Revision: 14481 En attendant mieux ? on remet le find_in_path() sur connect/$serveur.php qui permet le hack des boucles POUR et consœurs.
+Revision: 14479 Correction: lorsqu'une surcharge de l'installation comporte un appel à un serveur externe, SPIP redonnait le serveur principal.
+Revision: 14476 Correction de la pagination modifiée par [13993]#file0 car il fallait comprendre que l'index indéfini était volontaire, charge étant donnée au filtre de pagination de gérer cet indéfini. On évite de ballader cet indéfini en confiant cette gestion au code compilé, mais ça ne fait que cacher un peu mieux l'entorse signalée: pourquoi les modèles ne fournissent pas les paramètres d'URL si c'est cela qu'on veut ? Par ailleurs, amélioration de #ANCRE_PAGINATION, qui doit tenir compte d'une éventuelle surcharge de la balise #PAGINATION.
+Revision: 14471 choix des statuts pour le menu 'afficher les visiteurs' (#1802, paladin) ; a noter en branche dev le code n'a plus grand chose a voir
+Revision: 14470 suppression des repertoires .plat, report de [14041] et resoud #1819
+Revision: 14462 c'était bien une fausse bonne idée. retour à l'état antérieur.
+Revision: 14459 corrige l'affichage systématique (même si l'on n'est pas loggué) des parties conditionnelles de la balise [aff_cond (#URL_LOGOUT) aff_cond] (mais ça me semble plus une rustine qu'une réparation véritable...)
+Revision: 14451 suppression de flag_gz, remplace par une detection 'just in time' de la fonction , cf http://forum.spip.org/fr_216909.html pour la motivation
+Revision: 14445 Correction du filtre {{{form_hidden}}} qui injectait le contexte d'URL trop systématiquement (report de [14444]).
+Revision: 14442 Report de [14113] et de [13716] mais surtout de [13570] qui rend le #MENU_LANG propre pour le xhtml strict
+Revision: 14433 une erreur dans ce test qui n'ajoutait jamais les [] lorsque l'élément à passer était un array...
+Revision: 14413 Correction de l'appel à la version PostGres de listdbs.
+Revision: 14409 Correction de la conversion en un entier de l'argument de sql_quote dans le critère de comparaison: ce bug provoquait une tentative incompréhensible de se connecter à i, serveur nommé ''int'' (Aurélien).
+Revision: 14400 prevoir le cas ou minipres() est appele avant spip_initialisation_suite()
+Revision: 14399 Cas rare ou $liste=array() affichait Array (Thomas Sutton)
+Revision: 14394 [14393] en mieux.
+Revision: 14393 Lors de la publication d'un article sur une branche de rubriques mettre à jour toutes les dates de la branche.
+Revision: 14392 report de [14096] a la demande generale de rastapopoulos
+Revision: 14368 [14367] mais sans bug
+Revision: 14367 charger mes_fonctions avant d'appliquer la table des traitements sur la previsu (patfr, report de http://zone.spip.org/trac/spip-zone/changeset/30736 )
+
+2.0.8 -> 2.0.9 : changelog passé à la trappe 
+
 2.0.7 -> 2.0.8 (11 mai 2009)
 Revision: 13974 generer_action_auteur necessite au moins 2 arguments (eric)
 Revision: 13972 améliorations du débusqueur (report de [13917], [13941] et[13944] ) 
