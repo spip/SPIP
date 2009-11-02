@@ -261,7 +261,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 function spip_gzinflate_body($gzData){
 	// on dezippe via un fichier temporaire
 	// sinon la memoire explose pour les gros flux
-	$tmp = _DIR_TMP.md5(uniqid()).'.tmp';
+	$tmp = _DIR_TMP.md5(uniqid(mt_rand())).'.tmp';
 	ecrire_fichier($tmp, $gzData);
 	rename($tmp,$tmp.'.gz');
 	lire_fichier($tmp.'.gz', $gzData);
