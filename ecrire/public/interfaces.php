@@ -310,6 +310,7 @@ $table_des_traitements['MESSAGE'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['NOM_SITE_SPIP'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['NOM_SITE'][]=  _TRAITEMENT_TYPO;
 $table_des_traitements['NOM'][]= _TRAITEMENT_TYPO;
+$table_des_traitements['AUTEUR'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['PS'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['SOURCE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['SOUSTITRE'][]= _TRAITEMENT_TYPO;
