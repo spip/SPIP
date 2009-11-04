@@ -11,6 +11,11 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+@define('_INC_DISTANT_VERSION_HTTP', "HTTP/1.0");
+@define('_INC_DISTANT_CONTENT_ENCODING', "gzip");
+@define('_INC_DISTANT_USER_AGENT', 'SPIP-'. $GLOBALS['spip_version_affichee']." (" . $GLOBALS['home_server'] . ")");
+
 //@define('_COPIE_LOCALE_MAX_SIZE',2097152); // poids (inc/utils l'a fait)
 //
 // Cree au besoin la copie locale d'un fichier distant
@@ -213,7 +218,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 		$refuser_gz = true;
 
 	// ouvrir la connexion et envoyer la requete et ses en-tetes
-	list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer, $datas);
+	list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer, $datas, _INC_DISTANT_VERSION_HTTP);
 	if (!$f) {
 		spip_log("ECHEC init_http $url");
 		return false;
@@ -226,9 +231,15 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 	else {
 		$headers = recuperer_entetes($f, $date_verif);
 		if (is_numeric($headers)) {
-			spip_log("HTTP status $headers pour $url");
 			fclose($f);
-			return false;
+			// Chinoisierie inexplicable pour contrer 
+			// les actions liberticides de l'empire du milieu
+			if ($headers) {
+				spip_log("HTTP status $headers pour $url");
+				return false;
+			} elseif ($result = @file_get_contents($url))
+			    return array('', $result);
+			else return false;
 		}
 		if (!is_array($headers)) { // cas Location
 			fclose($f);
@@ -238,15 +249,23 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 		$headers = join('', $headers);
 	}
 
-#	spip_log("recup  $headers" );
 	if ($trans === NULL) return array($headers, '');
-	$result = recuperer_body($f, $taille_max, $copy ? $trans : '');
+
+	// s'il faut deballer, le faire via un fichier temporaire
+	// sinon la memoire explose pour les gros flux
+
+	$gz = preg_match(",\bContent-Encoding: .*gzip,is", $headers) ?
+		(_DIR_TMP.md5(uniqid(mt_rand())).'.tmp.gz') : '';
+	  
+#	spip_log("entete ($trans $copy $gz)\n$headers"); 
+	$result = recuperer_body($f, $taille_max, $gz ? $gz : ($copy ? $trans : ''));
 	fclose($f);
 	if (!$result) return array($headers, $result);
 
 	// Decompresser au besoin
-	if (preg_match(",\bContent-Encoding: .*gzip,i", $headers)) {
-		$result = spip_gzinflate_body($result);
+	if ($gz) {
+		$result = join('', gzfile($gz));
+		supprimer_fichier($gz);
 	}
 	// Faut-il l'importer dans notre charset local ?
 	if ($trans === true) {
@@ -256,19 +275,6 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 
 	return array($headers, $result);
 }
-
-// http://doc.spip.org/@spip_gzinflate_body
-function spip_gzinflate_body($gzData){
-	// on dezippe via un fichier temporaire
-	// sinon la memoire explose pour les gros flux
-	$tmp = _DIR_TMP.md5(uniqid(mt_rand())).'.tmp';
-	ecrire_fichier($tmp, $gzData);
-	rename($tmp,$tmp.'.gz');
-	lire_fichier($tmp.'.gz', $gzData);
-	supprimer_fichier($tmp.'.gz');
-	return $gzData;
-}
-
 
 // http://doc.spip.org/@recuperer_body
 function recuperer_body($f, $taille_max=1048576, $fichier='')
@@ -310,7 +316,7 @@ function recuperer_entetes($f, $date_verif='')
 	}
 	$status = intval($r[1]);
 	$headers = array();
-	$not_modif = false;
+	$not_modif = $location = false;
 	while ($s = trim(fgets($f, 16384))) {
 		$headers[]= $s."\n";
 		preg_match(',^([^:]*): *(.*)$,i', $s, $r);
@@ -526,8 +532,8 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 // http://doc.spip.org/@need_proxy
 function need_proxy($host)
 {
-	$http_proxy = $GLOBALS['meta']["http_proxy"];
-	$http_noproxy = $GLOBALS['meta']["http_noproxy"];
+	$http_proxy = @$GLOBALS['meta']["http_proxy"];
+	$http_noproxy = @$GLOBALS['meta']["http_noproxy"];
 
 	$domain = substr($host,strpos($host,'.'));
 
@@ -543,7 +549,8 @@ function need_proxy($host)
 //
 // http://doc.spip.org/@init_http
 function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
-	$via_proxy = ''; $proxy_user = ''; $fopen = false;
+	$user = $via_proxy = $proxy_user = ''; 
+	$fopen = false;
 
 	$t = @parse_url($url);
 	$host = $t['host'];
@@ -561,7 +568,7 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 
 	if (!isset($t['port']) || !($port = $t['port'])) $port = 80;
 	if (!isset($t['path']) || !($path = $t['path'])) $path = "/";
-	if ($t['query']) $path .= "?" .$t['query'];
+	if (@$t['query']) $path .= "?" .$t['query'];
 
 	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers);
 	if (!$f) {
@@ -579,18 +586,19 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 // http://doc.spip.org/@lance_requete
 function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
 
+	$proxy_user = '';
 	$http_proxy = need_proxy($host);
+	if ($user) $user = urlencode($user[0]).":".urlencode($user[1]);
 
 	if ($http_proxy) {
 		$path = "$scheme://"
-			. (!$user ? '' : urlencode($user[0]).":".urlencode($user[1])."@")
+			. (!$user ? '' : "$user@")
 			. "$host" . (($port != 80) ? ":$port" : "") . $path;
 		$t2 = @parse_url($http_proxy);
-		$proxy_user = $t2['user'];
-		$proxy_pass = $t2['pass'];
 		$first_host = $t2['host'];
 		if (!($port = $t2['port'])) $port = 80;
-
+		if ($t2['user'])
+			$proxy_user = base64_encode($t2['user'] . ":" . $t2['pass']);
 	} else $first_host = $noproxy.$host;
 
 	$f = @fsockopen($first_host, $port);
@@ -601,14 +609,12 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 
 	$req = "$method $path $vers\r\n"
 	. "Host: $host\r\n"
-	. "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n"
-	. ($refuse_gz ? '' : "Accept-Encoding: gzip\r\n")
+	. "User-Agent: " . _INC_DISTANT_USER_AGENT . "\r\n"
+	. ($refuse_gz ? '' : ("Accept-Encoding: " . _INC_DISTANT_CONTENT_ENCODING . "\r\n"))
 	. (!$site ? '' : "Referer: $site/$referer\r\n")
-	. (!$user ? '' : "Authorization: Basic "
-	     . base64_encode(urlencode($user[0]).":".urlencode($user[1])) ."\r\n")
-	. (!$proxy_user ? '' :
-	    ("Proxy-Authorization: Basic "
-	     . base64_encode($proxy_user . ":" . $proxy_pass) . "\r\n"));
+	. (!$user ? '' : ("Authorization: Basic " . base64_encode($user) ."\r\n"))
+	. (!$proxy_user ? '' : "Proxy-Authorization: Basic $proxy_user\r\n")
+	. (!strpos($vers, '1.1') ? '' : "Keep-Alive: 300\r\nConnection: keep-alive\r\n");
 
 #	spip_log("Requete\n$req");
 	fputs($f, $req);
