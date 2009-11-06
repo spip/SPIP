@@ -584,7 +584,7 @@ function debusquer_entete($titre, $corps)
 	  "<head>\n<title>" .
 	  ('SPIP ' . $GLOBALS['spip_version_affichee'] . ' ' .
 	   _T('admin_debug') . ' ' . $titre . ' (' .
-	   supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))) . 
+	   supprimer_tags(corriger_typo($GLOBALS['meta']['nom_site']))) . 
 	  ")</title>\n" .
 	  "<meta http-equiv='Content-Type' content='text/html" .
 	  (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : '') .

@@ -528,6 +528,9 @@ function typo($letexte, $echapper=true, $connect=null) {
 }
 
 // Correcteur typographique
+// avec reperage des blocs multi dans le texte 
+
+define('_EXTRAIRE_MULTI', "@<multi>(.*?)</multi>@sS");
 
 // http://doc.spip.org/@corriger_typo
 function corriger_typo($letexte, $lang='') {
@@ -566,7 +569,7 @@ function corriger_typo($letexte, $lang='') {
 			foreach ($regs as $reg) {
 				// chercher la version de la langue courante
 				$trads = extraire_trads($reg[1]);
-				$l = multi_trads($trads, $lang);
+				$l = approcher_langue($trads, $lang);
 				if ($l)
 					$trad = $trads[$l];
 				else {
@@ -600,7 +603,23 @@ function corriger_typo($letexte, $lang='') {
 	return $letexte;
 }
 
+// convertit le contenu d'une balise multi en un tableau
+// http://doc.spip.org/@extraire_trad
+function extraire_trads($bloc) {
+	$lang = '';
+// ce reg fait planter l'analyse multi s'il y a de l'{italique} dans le champ
+//	while (preg_match("/^(.*?)[{\[]([a-z_]+)[}\]]/siS", $bloc, $regs)) {
+	while (preg_match("/^(.*?)[\[]([a-z_]+)[\]]/siS", $bloc, $regs)) {
+		$texte = trim($regs[1]);
+		if ($texte OR $lang)
+			$trads[$lang] = $texte;
+		$bloc = substr($bloc, strlen($regs[0]));
+		$lang = $regs[2];
+	}
+	$trads[$lang] = $bloc;
 
+	return $trads;
+}
 
 //
 // Tableaux

@@ -237,9 +237,6 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	if (strlen($descriptif))
 		return propre($descriptif,$connect);
 
-	// Prendre un extrait dans la bonne langue
-	$texte = extraire_multi($texte);
-
 	// De preference ce qui est marque <intro>...</intro>
 	$intro = '';
 	$texte = preg_replace(",(</?)intro>,i", "\\1intro>", $texte); // minuscules

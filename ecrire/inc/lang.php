@@ -41,7 +41,37 @@ function changer_langue($lang) {
 		return $GLOBALS['spip_lang'] = $lang;
 	} else
 		return false;
+}
 
+//
+// Gestion des blocs multilingues
+// Selection dans un tableau dont les index sont des noms de langues
+// de la valeur associee a la langue en cours
+// si absente, retourne le premier
+// remarque : on pourrait aussi appeler un service de traduction externe
+// ou permettre de choisir une langue "plus proche",
+// par exemple le francais pour l'espagnol, l'anglais pour l'allemand, etc.
+
+function choisir_traduction ($trads, $lang='') {
+	$k = approcher_langue($trads, $lang);
+	return $k ? $trads[$k] : array_shift($trads);
+}
+
+// retourne son 2e argument si c'est un index du premier
+// ou un index approchant sinon et si possible, 
+// la langue X etant consideree comme une approche de X_Y
+function approcher_langue ($trads, $lang='') {
+
+	if (!$lang) $lang = $GLOBALS['spip_lang']; 
+
+	if (isset($trads[$lang])) {
+		return $lang;
+
+	}	// cas des langues xx_yy
+	else if (preg_match(',^([a-z]+)_,', $lang, $regs) AND isset($trads[$regs[1]])) {
+		return $regs[1];
+	}	
+	else  return '';
 }
 
 // http://doc.spip.org/@traduire_nom_langue
