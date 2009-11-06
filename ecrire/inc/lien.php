@@ -29,6 +29,7 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 		$texte = $lien['titre'];
 		if (!$class AND isset($lien['class'])) $class = $lien['class'];
 		$lang = isset($lien['lang']) ?$lien['lang'] : '';
+		$mime = isset($lien['mime']) ? " type='".$lien['mime']."'" : "";
 		$lien = $lien['url'];
 	}
 	if (substr($lien,0,1) == '#')  # ancres pures (internes a la page)
@@ -48,11 +49,12 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 	if ($title) $title = ' title="'.texte_backend($title).'"';
 
 	// rel=external pour les liens externes
-	if (preg_match(',^https?://,S', $lien))
+	if (preg_match(',^https?://,S', $lien)
+	AND false === strpos("$lien/", url_de_base()))
 		$rel = trim("$rel external");
 	if ($rel) $rel = " rel='$rel'";
 
-	$lien = "<a href='$lien' class='$class'$lang$title$rel>$texte</a>";
+	$lien = "<a href='$lien' class='$class'$lang$title$rel$mime>$texte</a>";
 
 	# ceci s'execute heureusement avant les tableaux et leur "|".
 	# Attention, le texte initial est deja echappe mais pas forcement
@@ -303,6 +305,15 @@ function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 	if (!@$r['titre']) $r['titre'] =  _T($type) . " $id";
 	if ($pour=='titre') return $r['titre'];
 	$r['url'] = $url;
+
+	// dans le cas d'un lien vers un doc, ajouter le type='mime/type'
+	if ($type == 'document'
+	AND $mime = sql_getfetsel('mime_type', 'spip_types_documents',
+			"extension IN (SELECT extension FROM spip_documents where id_document =".sql_quote($id).")",
+			'','','','',$connect)
+	)
+		$r['mime'] = $mime;
+
 	return $r;
 }
 
