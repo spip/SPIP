@@ -109,7 +109,7 @@ define('_BALISES_BLOCS',
 	.'d[ltd]|script|noscript|map|button|fieldset');
 
 //
-// Echapper les les elements perilleux en les passant en base64
+// Echapper les elements perilleux en les passant en base64
 //
 
 // Creer un bloc base64 correspondant a $rempl ; au besoin en marquant
@@ -127,10 +127,10 @@ function code_echappement($rempl, $source='', $no_transform=false) {
 	// Decouper en morceaux, base64 a des probleme selon la taille de la pile
 	$taille = 30000;
 	for($i = 0; $i < strlen($rempl); $i += $taille) {
-		// Convertir en base64
+		// Convertir en base64 et cacher dans un attribut
+		// utiliser les " pour eviter le re-encodage de ' et &#8217
 		$base64 = base64_encode(substr($rempl, $i, $taille));
-		$return .= inserer_attribut("<$mode class=\"base64$source\">",
-				'title', $base64) ."</$mode>";
+		$return .= "<$mode class=\"base64$source\" title=\"$base64\"></$mode>";
 	}
 
 	return $return
@@ -253,8 +253,7 @@ $preg='') {
 //
 // Traitement final des echappements
 // Rq: $source sert a faire des echappements "a soi" qui ne sont pas nettoyes
-// par propre() : exemple dans ecrire/inc_articles_ortho.php, $source='ORTHO'
-// ou encore dans typo()
+// par propre() : exemple dans multi et dans typo()
 // http://doc.spip.org/@echappe_retour
 function echappe_retour($letexte, $source='', $filtre = "") {
 	if (strpos($letexte,"base64$source")) {
@@ -509,7 +508,7 @@ function typo($letexte, $echapper=true, $connect=null) {
 // Correcteur typographique
 
 // http://doc.spip.org/@corriger_typo
-function corriger_typo($letexte) {
+function corriger_typo($letexte, $lang='') {
 
 	// Plus vite !
 	if (!$letexte) return $letexte;
@@ -519,9 +518,12 @@ function corriger_typo($letexte) {
 	// Caracteres de controle "illegaux"
 	$letexte = corriger_caracteres($letexte);
 
-	// Charger & appliquer la fonction de typographie
+	// Charger & appliquer les fonctions de typographie
 
-	if ($typographie = charger_fonction(lang_typo(), 'typographie')) {
+	if (!$lang) $lang = lang_typo();
+	$typo2 = '';
+
+	if ($typographie = charger_fonction($lang, 'typographie')) {
 
 		// Proteger les caracteres typographiques a l'interieur des tags html
 		$protege = "!':;?~%-";
@@ -537,11 +539,35 @@ function corriger_typo($letexte) {
 			}
 		}
 
+		// trouver les blocs multi
+		if (preg_match_all(_EXTRAIRE_MULTI, $letexte, $regs, PREG_SET_ORDER)) {
+			foreach ($regs as $reg) {
+				// chercher la version de la langue courante
+				$trads = extraire_trads($reg[1]);
+				$l = multi_trads($trads, $lang);
+				if ($l)
+					$trad = $trads[$l];
+				else {
+				  // langue absente, prendre la premiere dispo
+				  // mais typographier le texte 
+				  // selon les regles de celle-ci si definies
+					$l = key($trads);
+					$trad = $trads[$l];
+					if ($typo2 = charger_fonction($l, 'typographie', true)) {
+						$trad = $typo2($trad);
+						$trad = code_echappement($trad, 'multi');
+					}
+				}
+				$letexte = str_replace($reg[0], $trad, $letexte);
+			}
+		}
+
 		$letexte = $typographie($letexte);
 
 		// Retablir les caracteres proteges
 		$letexte = strtr($letexte, $illegal, $protege);
-
+		// et les citations en un autre langue
+		if ($typo2!=='') $letexte = echappe_retour($letexte, 'multi');
 	}
 
 	$letexte = pipeline('post_typo', $letexte);

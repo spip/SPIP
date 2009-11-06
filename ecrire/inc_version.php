@@ -279,11 +279,11 @@ $spip_pipeline = array(
 	'nettoyer_raccourcis_typo' => '',
 	'pre_boucle' => '',
 	'post_boucle' => '',
-	'pre_propre' => '|extraire_multi|traiter_poesie|traiter_retours_chariots',
+	'pre_propre' => '|traiter_poesie|traiter_retours_chariots',
 	'pre_liens' => '|traiter_raccourci_liens|traiter_raccourci_glossaire
 		|traiter_raccourci_ancre',
 	'post_propre' => '',
-	'pre_typo' => '|extraire_multi',
+	'pre_typo' => '',
 	'post_typo' => '|quote_amp',
 	'pre_edition' => '|premiere_revision',
 	'post_edition' => '|nouvelle_revision',
