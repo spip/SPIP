@@ -150,7 +150,8 @@ function traiter_echap_html_dist($regs) {
 // Echapper les <code>...</ code>
 // http://doc.spip.org/@traiter_echap_code_dist
 function traiter_echap_code_dist($regs) {
-	$echap = htmlspecialchars($regs[3]); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code ! 
+	list(,,$att,$corps) = $regs;
+	$echap = htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code ! 
 
 	// ne pas mettre le <div...> s'il n'y a qu'une ligne
 	if (is_int(strpos($echap,"\n"))) {
@@ -159,15 +160,13 @@ function traiter_echap_code_dist($regs) {
 		$echap = preg_replace("/^[\n\r]+|[\n\r]+$/s", "", $echap);
 		$echap = nl2br($echap);
 		$echap = "<div style='text-align: left;' "
-		. "class='spip_code' dir='ltr'><code>"
+		. "class='spip_code' dir='ltr'><code$att>"
 		.$echap."</code></div>";
 	} else {
-		$echap = "<code class='spip_code' "
-		."dir='ltr'>".$echap."</code>";
+		$echap = "<code$att class='spip_code' dir='ltr'>".$echap."</code>";
 	}
 
-	$echap = str_replace("\t",
-		"&nbsp; &nbsp; &nbsp; &nbsp; ", $echap);
+	$echap = str_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $echap);
 	$echap = str_replace("  ", " &nbsp;", $echap);
 	return $echap;
 }
