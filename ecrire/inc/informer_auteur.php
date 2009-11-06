@@ -24,7 +24,7 @@ function inc_informer_auteur_dist($id)
 
 	$row = sql_fetsel("*", "spip_auteurs", "id_auteur = $id");
 	if ($row) {
-		$nom = typo(extraire_multi($row["nom"]));
+		$nom = typo($row["nom"]);
 		$bio = propre($row["bio"]);
 		$mail = formater_auteur_mail($row, $id);
 		$nb = sql_countsel("spip_auteurs_articles", "id_auteur=$id");
