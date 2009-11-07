@@ -878,7 +878,7 @@ function paragrapher($letexte, $forcer=true) {
 
 		// Ajouter un espace aux <p> et un "STOP P"
 		// transformer aussi les </p> existants en <p>, nettoyes ensuite
-		$letexte = preg_replace(',</?p\b.*>,UiS', '<STOP P><p \2>',
+		$letexte = preg_replace(',</?p\b\s?(.*?)>,iS', '<STOP P><p \1>',
 			'<p>'.$letexte.'<STOP P>');
 
 		// Fermer les paragraphes (y compris sur "STOP P")
