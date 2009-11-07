@@ -149,6 +149,7 @@ function traiter_echap_html_dist($regs) {
 
 // Echapper les <code>...</ code>
 // http://doc.spip.org/@traiter_echap_code_dist
+function traiter_echap_code_dist($regs) {
 	list(,,$att,$corps) = $regs;
 	$echap = htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code ! 
 
