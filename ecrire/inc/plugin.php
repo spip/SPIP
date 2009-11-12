@@ -445,7 +445,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 			$f = str_replace($regs[0],(_DIR_RACINE?"":"../").constant($regs[1]),$f);
 		$liste_fichier_verif[$k] = $f;
 	}
-	ecrire_fichier(_DIR_TMP.'verifier_plugins.txt',
+	ecrire_fichier(_CACHE_PLUGINS_VERIF,
 		serialize($liste_fichier_verif));
 }
 
@@ -486,8 +486,7 @@ function pipeline_precompile(){
 		$content .= $s_call;
 		$content .= "return \$val;\n}\n\n";
 	}
-	ecrire_fichier(_DIR_TMP."charger_pipelines.php",
-		$start_file . $content . $end_file);
+	ecrire_fichier(_CACHE_PIPELINES, $start_file . $content . $end_file);
 	return $liste_fichier_verif;
 }
 
@@ -879,7 +878,7 @@ function verifie_include_plugins() {
 // http://doc.spip.org/@message_crash_plugins
 function message_crash_plugins() {
 	if (autoriser('configurer')
-	AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)
+	AND lire_fichier(_CACHE_PLUGINS_VERIF,$l)
 	AND $l = @unserialize($l)) {
 		$err = array();
 		foreach ($l as $fichier) {
