@@ -26,7 +26,11 @@ function action_purger_dist()
 
 	case 'cache': 
 		supprime_invalideurs();
-		spip_unlink(_CACHE_RUBRIQUES);
+		@spip_unlink(_CACHE_RUBRIQUES);
+		@spip_unlink(_CACHE_PIPELINES);
+		@spip_unlink(_CACHE_PLUGINS_OPT);
+		@spip_unlink(_CACHE_PLUGINS_FCT);
+		@spip_unlink(_CACHE_PLUGINS_VERIF);
 		purger_repertoire(_DIR_CACHE);
 		purger_repertoire(_DIR_AIDE);
 		purger_repertoire(_DIR_VAR.'cache-css');

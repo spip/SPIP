@@ -422,17 +422,17 @@ error_reporting(SPIP_ERREUR_REPORT);
 // qui ne sera pas execute car _ECRIRE_INC_VERSION est defini
 // donc il faut avoir tout fini ici avant de charger les plugins
 
-if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
+if (@is_readable(_CACHE_PLUGINS_OPT)){
 	// chargement optimise precompile
-	include_once(_DIR_TMP."charger_plugins_options.php");
+	include_once(_CACHE_PLUGINS_OPT);
 } else {
 	@spip_initialisation_suite();
 	include_spip('inc/plugin');
 	// generer les fichiers php precompiles
 	// de chargement des plugins et des pipelines
 	if (verif_plugin()) {
-		if (@is_readable(_DIR_TMP."charger_plugins_options.php"))
-			include_once(_DIR_TMP."charger_plugins_options.php");
+		if (@is_readable(_CACHE_PLUGINS_OPT))
+			include_once(_CACHE_PLUGINS_OPT);
 		else
 			spip_log("generation de charger_plugins_options.php impossible; pipeline desactives");
 	}

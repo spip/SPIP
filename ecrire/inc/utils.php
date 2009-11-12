@@ -101,7 +101,7 @@ function pipeline($action, $val=null) {
 
 	// chargement initial des fonctions mises en cache, ou generation du cache
 	if (!$charger) {
-		if (!($ok = @is_readable($charger = _DIR_TMP."charger_pipelines.php"))) {
+		if (!($ok = @is_readable($charger = _CACHE_PIPELINES))) {
 			include_spip('inc/plugin');
 			// generer les fichiers php precompiles
 			// de chargement des plugins et des pipelines
@@ -1244,6 +1244,10 @@ function spip_initialisation_suite() {
 	define('_ACCESS_FILE_NAME', '.htaccess');
 	define('_AUTH_USER_FILE', '.htpasswd');
 	define('_SPIP_DUMP', 'dump@nom_site@@stamp@.xml');
+	define('_CACHE_PLUGINS_OPT', _DIR_TMP . "charger_plugins_options.php");
+	define('_CACHE_PLUGINS_FCT', _DIR_TMP . "charger_plugins_fonctions.php");
+	define('_CACHE_PLUGINS_VERIF', _DIR_TMP . "verifier_plugins.txt");
+	define('_CACHE_PIPELINES',  _DIR_TMP."charger_pipelines.php");
 	define('_CACHE_RUBRIQUES', _DIR_TMP.'menu-rubriques-cache.txt');
 	define('_CACHE_RUBRIQUES_MAX', 500);
 
