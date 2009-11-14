@@ -433,8 +433,7 @@ if (@is_readable(_CACHE_PLUGINS_OPT)){
 	if (verif_plugin()) {
 		if (@is_readable(_CACHE_PLUGINS_OPT))
 			include_once(_CACHE_PLUGINS_OPT);
-		else
-			spip_log("generation de charger_plugins_options.php impossible; pipeline desactives");
+		else spip_log("pipelines desactives: impossible de produire " . _CACHE_PLUGINS_OPT); 
 	}
 }
 // Initialisations non critiques surchargeables par les plugins
