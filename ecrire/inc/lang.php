@@ -66,12 +66,14 @@ function approcher_langue ($trads, $lang='') {
 
 	if (isset($trads[$lang])) {
 		return $lang;
-
-	}	// cas des langues xx_yy
-	else if (preg_match(',^([a-z]+)_,', $lang, $regs) AND isset($trads[$regs[1]])) {
-		return $regs[1];
-	}	
-	else  return '';
+	}
+	// cas des langues xx_yy
+	else {
+		$r = explode('_', $lang);
+		if (isset($trads[$r[0]]))
+			return $r[0];
+	}
+	return '';
 }
 
 // http://doc.spip.org/@traduire_nom_langue
@@ -84,7 +86,6 @@ function traduire_nom_langue($lang) {
 //
 // Filtres de langue
 //
-
 
 // Donne la direction d'ecriture a partir de la langue. Retourne 'gaucher' si
 // la langue est arabe, persan, kurde, pachto, ourdou (langues ecrites en
