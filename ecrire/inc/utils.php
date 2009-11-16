@@ -683,7 +683,7 @@ define('_ROOT_CWD', getcwd().'/');
 // http://doc.spip.org/@find_in_path
 function find_in_path ($file, $dirname='', $include=false) {
 	static $files=array(), $dirs=array();
-	static $inc = array();
+	static $inc = array(); # cf http://trac.rezo.net/trac/spip/changeset/14743
 #if ($include) $GLOBALS['cpt_include']++;
 #spip_timer('include');
 	if (isset($files[$dirname][$file])) {
