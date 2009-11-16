@@ -646,18 +646,12 @@ function calculer_pg_expression($expression, $v, $join = 'AND'){
 	
 	$exp = "\n$expression ";
 	
-	if (!is_array($v)) 
-		$v = array($v);
+	if (!is_array($v)) $v = array($v);
 	
-	if (strtoupper($expression) === 'WHERE')
-		$v = array_map('spip_pg_frommysql', $v);
-	
-	if (!empty($v)) {
-		if (strtoupper($join) === 'AND')
+	if (strtoupper($join) === 'AND')
 			return $exp . join("\n\t$join ", array_map('calculer_pg_where', $v));
 		else
 			return $exp . join($join, $v);
-	}
 }
 
 // http://doc.spip.org/@spip_pg_select_as
