@@ -384,6 +384,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		$liste_fichier_verif[$k] = (_DIR_RACINE?"":"../") . _DIR_PLUGINS . preg_replace(",(_(DIR|ROOT)_PLUGINS\.)?',", "", $f);
 	ecrire_fichier(_CACHE_PLUGINS_VERIF,
 		serialize($liste_fichier_verif));
+	@spip_unlink(_CACHE_CHEMIN);
 }
 
 // precompilation des pipelines
