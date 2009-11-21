@@ -80,7 +80,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 	$contenu = '';
 	// inutile car si le fichier n'existe pas, le lock va renvoyer false juste apres
 	// economisons donc les acces disque
-	// if (!@spip_file_exists($fichier))
+	// if (!@file_exists($fichier))
 	//	return false;
 
 	#spip_timer('lire_fichier');
@@ -94,7 +94,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 		// on ne verifie que si la tentative de lecture a echoue
 		// pour discriminer un contenu vide d'un fichier absent
 		// et eviter un acces disque
-		if (!$contenu AND !@spip_file_exists($fichier)) {
+		if (!$contenu AND !@file_exists($fichier)) {
 			spip_fclose_unlock($fl);
 			return false;
 		}
