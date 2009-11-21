@@ -727,7 +727,9 @@ function load_path_cache(){
 	// on ne recharge pas le cache pour forcer sa mise a jour
 	// le cache de chemin n'est utilise que dans le public
 	if (_DIR_RESTREINT 
-		AND (!isset($GLOBALS['visiteur_statut']) OR $GLOBALS['visiteur_statut']!='0minirezo')){
+		//AND (!isset($GLOBALS['visiteur_session']['statut']) OR $GLOBALS['visiteur_session']['statut']!='0minirezo')
+		AND !isset($_COOKIE[$GLOBALS['cookie_prefix'].'_admin'])
+		){
 		lire_fichier(_CACHE_CHEMIN,$contenu);
 		if (!$GLOBALS['path_files']=unserialize($contenu))
 			$GLOBALS['path_files'] = array();
