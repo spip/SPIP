@@ -607,6 +607,7 @@ function _chemin($dir_path=NULL){
 		if (strlen($GLOBALS['dossier_squelettes']))
 			foreach (array_reverse(explode(':', $GLOBALS['dossier_squelettes'])) as $d)
 				array_unshift($path_full, ($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
+		$GLOBALS['path_sig'] = md5(serialize($path_full));
 	}
 	if ($dir_path===NULL) return $path_full;
 
@@ -631,6 +632,7 @@ function _chemin($dir_path=NULL){
 		foreach (array_reverse(explode(':', $GLOBALS['dossier_squelettes'])) as $d)
 			array_unshift($path_full, ($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
 
+	$GLOBALS['path_sig'] = md5(serialize($path_full));
 	return $path_full;
 }
 
@@ -679,20 +681,21 @@ function chemin($file, $dirname='', $include=false){
 // si on donne un sous-repertoire en 2e arg optionnel, il FAUT le / final
 // si 3e arg vrai, on inclut si ce n'est fait.
 define('_ROOT_CWD', getcwd().'/');
+$GLOBALS['path_sig'] = '';
 $GLOBALS['path_files'] = null;
 
 // http://doc.spip.org/@find_in_path
 function find_in_path ($file, $dirname='', $include=false) {
 	static $dirs=array();
 	static $inc = array(); # cf http://trac.rezo.net/trac/spip/changeset/14743
-	if (isset($GLOBALS['path_files'][$dirname][$file])) {
-		if (!$GLOBALS['path_files'][$dirname][$file])
+	if (isset($GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file])) {
+		if (!$GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file])
 			return false;
 		if ($include AND !isset($inc[$dirname][$file])) {
-			include_once _ROOT_CWD . $GLOBALS['path_files'][$dirname][$file];
+			include_once _ROOT_CWD . $GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file];
 			$inc[$dirname][$file] = $inc[''][$dirname . $file] = true;
 		}
-		return $GLOBALS['path_files'][$dirname][$file];
+		return $GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file];
 	}
 
 	$a = strrpos($file,'/');
@@ -712,13 +715,13 @@ function find_in_path ($file, $dirname='', $include=false) {
 				}
 				if (!defined('_SAUVER_CHEMIN'))
 					define('_SAUVER_CHEMIN',true);
-				return $GLOBALS['path_files'][$dirname][$file] = $GLOBALS['path_files'][''][$dirname . $file] = $a;
+				return $GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file] = $GLOBALS['path_files'][$GLOBALS['path_sig']][''][$dirname . $file] = $a;
 			}
 		}
 	}
 	if (!defined('_SAUVER_CHEMIN'))
 		define('_SAUVER_CHEMIN',true);
-	return $GLOBALS['path_files'][$dirname][$file] = $GLOBALS['path_files'][''][$dirname . $file] = false;
+	return $GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file] = $GLOBALS['path_files'][$GLOBALS['path_sig']][''][$dirname . $file] = false;
 }
 
 function load_path_cache(){
