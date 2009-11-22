@@ -641,14 +641,6 @@ function creer_chemin() {
 	$path_a = _chemin();
 	static $c = '';
 
-	// provisoire, a remplacer par un spip_unlink sur les fichiers compiles lors d'un prochain upgrade
-	if (isset($GLOBALS['plugins'])){
-		$c = '';
-		foreach($GLOBALS['plugins'] as $dir) {
-			$path_base = _chemin(_DIR_PLUGINS.$dir);
-		}
-		unset($GLOBALS['plugins']);
-	}
 	// on calcule le chemin si le dossier skel a change
 	if ($c != $GLOBALS['dossier_squelettes']) {
 		// assurer le non plantage lors de la montee de version :
