@@ -680,6 +680,15 @@ $GLOBALS['path_files'] = null;
 function find_in_path ($file, $dirname='', $include=false) {
 	static $dirs=array();
 	static $inc = array(); # cf http://trac.rezo.net/trac/spip/changeset/14743
+	static $c = '';
+
+	// on calcule le chemin si le dossier skel a change
+	if ($c != $GLOBALS['dossier_squelettes']){
+		// assurer le non plantage lors de la montee de version :
+		$c = $GLOBALS['dossier_squelettes'];
+		creer_chemin(); // forcer un recalcul du chemin et la mise a jour de path_sig
+	}
+
 	if (isset($GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file])) {
 		if (!$GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file])
 			return false;
