@@ -65,6 +65,16 @@ define('_NOM_PERMANENTS_INACCESSIBLES', "config/");
 # le nom du repertoire des fichiers Permanents Accessibles par http://
 define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
 
+/*
+ * detecteur de robot d'indexation
+ * utilise en divers endroits, centralise ici
+ */
+if (!defined('_IS_BOT'))
+	define('_IS_BOT',
+		isset($_SERVER['HTTP_USER_AGENT'])
+		AND strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'bot') !== false
+	);
+
 
 // Le nom du fichier de personnalisation
 define('_NOM_CONFIG', 'mes_options');

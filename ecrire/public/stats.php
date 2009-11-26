@@ -19,7 +19,7 @@ function public_stats_dist() {
 	else if (isset($GLOBALS["HTTP_SERVER_VARS"]["HTTP_REFERER"])) $referer = $GLOBALS["HTTP_SERVER_VARS"]["HTTP_REFERER"];
 	
 	// Rejet des robots (qui sont pourtant des humains comme les autres)
-	if (strpos($_SERVER['HTTP_USER_AGENT'],'bot')) return;
+	if (_IS_BOT) return;
 
 	// Ne pas tenir compte des tentatives de spam des forums
 	if ($_SERVER['REQUEST_METHOD'] !== 'GET'
