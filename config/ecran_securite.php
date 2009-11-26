@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '0.8'); // 8 aout 2009
+define('_ECRAN_SECURITE', '0.9'); // 26 nov 2009
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -18,6 +18,14 @@ define('_ECRAN_SECURITE', '0.8'); // 8 aout 2009
 if (isset($_GET['test_ecran_securite']))
 	$ecran_securite_raison = 'test '._ECRAN_SECURITE;
 
+/*
+ * detecteur de robot d'indexation
+ */
+if (!defined('_IS_BOT'))
+	define('_IS_BOT',
+		isset($_SERVER['HTTP_USER_AGENT'])
+		AND strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'bot') !== false
+	);
 
 /*     - interdit de passer une variable id_article (ou id_xxx) qui ne
  *       soit pas numerique (ce qui bloque l'exploitation de divers trous
@@ -93,8 +101,7 @@ if (isset($_REQUEST['GLOBALS']))
  *       les agenda
  *       les paginations entremelees
  */
-if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'bot')
-AND (
+if (_IS_BOT AND (
 	(isset($_REQUEST['echelle']) AND isset($_REQUEST['partie_cal']) AND isset($_REQUEST['type']))
 	OR (strpos($_SERVER['REQUEST_URI'],'debut_') AND preg_match(',[?&]debut_.*&debut_,', $_SERVER['REQUEST_URI']))
 )
@@ -166,8 +173,8 @@ if (!defined('_ECRAN_SECURITE_LOAD'))
 if (
 	defined('_ECRAN_SECURITE_LOAD')
 	AND _ECRAN_SECURITE_LOAD>0
+	AND _IS_BOT
 	AND $_SERVER['REQUEST_METHOD'] === 'GET'
-	AND strpos($_SERVER['HTTP_USER_AGENT'], 'bot')!==FALSE
 	AND (
 		(function_exists('sys_getloadavg') AND $load = array_shift(sys_getloadavg()))
 		OR (@is_readable('/proc/loadavg') AND $load = floatval(file_get_contents('/proc/loadavg')))
