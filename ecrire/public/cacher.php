@@ -104,7 +104,9 @@ function cache_valide(&$page, $date) {
 	if (!isset($page['entetes']['X-Spip-Statique']) OR $page['entetes']['X-Spip-Statique'] !== 'oui') {
 
 		// Cache invalide par la meta 'derniere_modif'
-		if ($GLOBALS['derniere_modif_invalide']
+		// sauf pour les bots, qui utilisent toujours le cache
+		if (!_IS_BOT
+		AND $GLOBALS['derniere_modif_invalide']
 		AND $date < $GLOBALS['meta']['derniere_modif'])
 			return 1;
 
