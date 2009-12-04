@@ -72,7 +72,8 @@ define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
 if (!defined('_IS_BOT'))
 	define('_IS_BOT',
 		isset($_SERVER['HTTP_USER_AGENT'])
-		AND strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'bot') !== false
+		AND preg_match(', bot|slurp|crawler|spider|webvac|yandex,i',
+			$_SERVER['HTTP_USER_AGENT'])
 	);
 
 
