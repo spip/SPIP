@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '0.9'); // 26 nov 2009
+define('_ECRAN_SECURITE', '0.9.1'); // 4 dec 2009
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -24,7 +24,8 @@ if (isset($_GET['test_ecran_securite']))
 if (!defined('_IS_BOT'))
 	define('_IS_BOT',
 		isset($_SERVER['HTTP_USER_AGENT'])
-		AND strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'bot') !== false
+		AND preg_match(', bot|slurp|crawler|spider|webvac|yandex,i',
+			$_SERVER['HTTP_USER_AGENT'])
 	);
 
 /*     - interdit de passer une variable id_article (ou id_xxx) qui ne
