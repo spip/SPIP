@@ -61,9 +61,31 @@ function taille_du_cache() {
 // ici on se contente de noter la date de mise a jour dans les metas
 // http://doc.spip.org/@suivre_invalideur
 function suivre_invalideur($cond, $modif=true) {
-	if ($modif) {
-		ecrire_meta('derniere_modif', time());
+	if (!$modif)
+		return;
+
+	// determiner l'objet modifie : forum, article, etc
+	if (preg_match(',id_([a-z]+),', $cond, $r))
+		$objet = $r[1];
+	// cas particulier des signatures
+	else if (strpos($cond, 'varia/pet'))
+		$objet = 'signature';
+
+	// stocker la date_modif_$objet (ne sert a rien pour le moment)
+	if (isset($objet))
+		ecrire_meta('derniere_modif_'.$objet, time());
+
+	// si $derniere_modif_invalide est un array('forum', 'signature')
+	// n'affecter la meta que si un de ces objets est modifie
+	if (is_array($GLOBALS['derniere_modif_invalide'])) {
+		if (in_array($objet, $GLOBALS['derniere_modif_invalide']))
+			ecrire_meta('derniere_modif', time());
 	}
+	// sinon, cas standard, toujours affecter la meta
+	else
+		ecrire_meta('derniere_modif', time());
+
+
 }
 
 
