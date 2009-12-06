@@ -55,6 +55,7 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 		'error' => 'spip_mysql_error',
 		'explain' => 'spip_mysql_explain',
 		'fetch' => 'spip_mysql_fetch',
+		'seek' => 'spip_mysql_seek',
 		'free' => 'spip_mysql_free',
 		'hex' => 'spip_mysql_hex',
 		'in' => 'spip_mysql_in', 
@@ -491,6 +492,9 @@ function spip_mysql_fetch($r, $t='', $serveur='',$requeter=true) {
 	if ($r) return mysql_fetch_array($r, $t);
 }
 
+function spip_mysql_seek($r, $row_number, $serveur='',$requeter=true) {
+	if ($r) return mysql_data_seek($r,$row_number);
+}
 
 // http://doc.spip.org/@spip_mysql_countsel
 function spip_mysql_countsel($from = array(), $where = array(),

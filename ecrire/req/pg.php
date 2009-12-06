@@ -80,6 +80,7 @@ $GLOBALS['spip_pg_functions_1'] = array(
 		'error' => 'spip_pg_error',
 		'explain' => 'spip_pg_explain',
 		'fetch' => 'spip_pg_fetch',
+		'seek' => 'spip_pg_seek',
 		'free' => 'spip_pg_free',
 		'hex' => 'spip_pg_hex',
 		'in' => 'spip_pg_in',
@@ -700,6 +701,11 @@ function spip_pg_fetch($res, $t='', $serveur='',$requeter=true) {
 	if ($res) $res = pg_fetch_array($res, NULL, PGSQL_ASSOC);
 	return $res;
 }
+
+function spip_pg_seek($r, $row_number, $serveur='',$requeter=true) {
+	if ($r) return pg_result_seek($r,$row_number);
+}
+
 
 // http://doc.spip.org/@spip_pg_countsel
 function spip_pg_countsel($from = array(), $where = array(), $groupby=array(),
