@@ -524,7 +524,7 @@ function calculer_parties($boucles, $id_boucle, $count) {
 		$retour .= "\n	"
 			. '$debut_boucle = ' . $partie . ';'
 			. "\n\t".'if ($tout=($debut_boucle == -1)) $debut_boucle = 0;';
-		$total_parties = "(\$tout ? \$nombre_boucle - 1 : $total_parties)";
+		$total_parties = "(\$tout ? \$nombre_boucle : $total_parties)";
 	}
 
 	// {x,1}
