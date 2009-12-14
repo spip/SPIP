@@ -94,6 +94,22 @@ function action_tourner_post($r)
 			spip_log("j'efface $effacer");
 			spip_unlink($effacer);
 		}
+		// pipeline pour les plugins
+		pipeline('post_edition',
+			array(
+				'args' => array(
+					'table' => 'spip_documents',
+					'table_objet' => 'documents',
+					'spip_table_objet' => 'spip_documents',
+					'type' =>'document',
+					'id_objet' => $arg,
+					'champs' => array('rotation'=>$var_rot,'fichier'=>$row),
+					'serveur' => $serveur,
+					'action'=>'tourner',
+				),
+				'data' => array('fichier'=>$row)
+			)
+		);
 	}
 
 }
