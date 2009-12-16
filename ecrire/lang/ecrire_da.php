@@ -451,7 +451,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_publies' => 'Dine offentliggjorte artikler',
 'info_question_accepter_visiteurs' => '<NEW>If your site\'s templates allow visitors to register without entering the private area, please activate the following option:',
 'info_question_gerer_statistiques' => 'Skal dit websted danne bes&oslash;gsstatistik?',
-'info_question_inscription_nouveaux_redacteurs' => 'Vil du tillade, at nye redakt&oslash;rer tilmelder sig
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Vil du tillade, at nye redakt&oslash;rer tilmelder sig
 		p&aring; det offentligt tilg&aelig;ngelige websted? Ja betyder, at bes&oslash;gende kan tilmelde sig p&aring; en automatisk dannet formular,
 		og derefter f&aring; adgang til det private omr&aring;de, hvor de kan vedligeholde deres egne artikler.
 		<blockquote><i>Under tilmeldingen modtager brugerne en automatisk dannet e-mail med deres adgangskode til det

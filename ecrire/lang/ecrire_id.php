@@ -497,7 +497,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publies' => 'Artikel anda dipublikasi secara online',
 'info_question_accepter_visiteurs' => 'Jika templat situs anda mengizinkan pengunjung untuk mendaftar tanpa perlu memasuki area pribadi, silakan aktifkan opsi berikut:',
 'info_question_gerer_statistiques' => 'Apakah situs anda ingin mengelola statistik kunjungan?',
-'info_question_inscription_nouveaux_redacteurs' => 'Apakah anda mengizinkan registrasi editor baru dari
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Apakah anda mengizinkan registrasi editor baru dari
   situs yang dipublikasi? Jika anda setuju, pengunjung dapat mendaftar
   melalui formulir terotomasi, dan akan mengakses area pribadi untuk
   melihat artikel-artikel mereka. <blockquote><i>Selama proses registrasi,

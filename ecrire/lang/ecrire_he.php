@@ -550,7 +550,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_question_activer_compactage_js' => '<NEW>Souhaitez-vous activer le compactage des scripts (javascript) ?',
 'info_question_activer_compresseur' => '<NEW>Voulez-vous activer la compression du flux HTTP ?',
 'info_question_gerer_statistiques' => '?&#1492;&#1488;&#1501; &#1488;&#1514;&#1512;&#1498; &#1497;&#1499;&#1493;&#1500; &#1500;&#1504;&#1492;&#1500; &#1505;&#1496;&#1496;&#1497;&#1505;&#1496;&#1497;&#1511;&#1493;&#1514; &#1489;&#1497;&#1511;&#1493;&#1512;&#1497;&#1501;',
-'info_question_inscription_nouveaux_redacteurs' => '<NEW>Acceptez-vous les inscriptions de nouveaux r&eacute;dacteurs &agrave;
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Acceptez-vous les inscriptions de nouveaux r&eacute;dacteurs &agrave;
   partir du site public&nbsp;? Si vous acceptez, les visiteurs pourront s\'inscrire
   depuis un formulaire automatis&eacute; et acc&eacute;deront alors &agrave; l\'espace priv&eacute; pour
   proposer leurs propres articles. <blockquote><i>Lors de la phase d\'inscription,

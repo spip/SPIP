@@ -507,7 +507,7 @@ versyon SPIP.',
 'info_publies' => 'Out bann zartik an liyn',
 'info_question_accepter_visiteurs' => 'Si out bann l&eacute;k&egrave;let i perm&eacute; out bann vizit&egrave;r inskri azot si lo sitw&egrave;b,     anon f&eacute; zw&eacute; lopsyon anba-terla&nbsp;:',
 'info_question_gerer_statistiques' => 'Di anou t&egrave;rla, si ou v&eacute; out sit i z&egrave;r bann sifkl&eacute; pou bann vizit&nbsp;:',
-'info_question_inscription_nouveaux_redacteurs' => 'Indik si ou laks&egrave;p linskrisyon bann nouvo lot&egrave;r dopwi lo sit piblik&nbsp;? Si
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Indik si ou laks&egrave;p linskrisyon bann nouvo lot&egrave;r dopwi lo sit piblik&nbsp;? Si
  ou v&eacute;, bann lot&egrave;r i poura inskri azot &egrave;k lo formul&egrave;r otomatik. Zot i poura akost&eacute;
 sir figirw&egrave;b priv&eacute; &eacute; propoz zot prop zartik minm.
 <blockquote><i>Dan moman linskrisyon, bann zitilizat&egrave;r i giny inn lim&egrave;l otomatikman. Lim&egrave;l-la i donn azot bann kod lakostaz sir figirw&egrave;b priv&eacute;. Nana d&eacute;sertin z&eacute;berz&egrave;r

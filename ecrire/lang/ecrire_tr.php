@@ -531,7 +531,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_question_activer_compactage_js' => 'Skriptlerin (javascript) s&#305;k&#305;&#351;t&#305;r&#305;lmas&#305;n&#305; aktive etmek ister misiniz ?',
 'info_question_activer_compresseur' => 'HTTP ak&#305;&#351;&#305;n&#305;n s&#305;k&#305;&#351;t&#305;r&#305;lmas&#305;n&#305; aktive etmek ister misiniz ?',
 'info_question_gerer_statistiques' => 'Siteniz ziyaret istatisti&#287;ini y&ouml;netmeli mi ?',
-'info_question_inscription_nouveaux_redacteurs' => 'Kamu sitesinden yeni edit&ouml;rlerin kaydolmas&#305;n&#305; kabul ediyor musunuz ?
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Kamu sitesinden yeni edit&ouml;rlerin kaydolmas&#305;n&#305; kabul ediyor musunuz ?
     E&#287;er kabul ediyorsan&#305;z, ziyaret&ccedil;iler otomatik
     bir form ile kaydolabilecek ve kendi makalelerini
     &ouml;nermek &uuml;zere &ouml;zel alana eri&#351;eceklerdir. 

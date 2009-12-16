@@ -550,7 +550,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_question_activer_compactage_js' => 'Wilt u de verdichting van de scripts activeren (javascript) ?',
 'info_question_activer_compresseur' => 'Wilt u de samendrukking van de stroom activeren HTTP ?',
 'info_question_gerer_statistiques' => 'Dient je site bezoekersstatiestieken aan te maken ?',
-'info_question_inscription_nouveaux_redacteurs' => 'Aanvaard je inschrijvingen van nieuwe redacteuren vanop
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Aanvaard je inschrijvingen van nieuwe redacteuren vanop
  de publieke site? Indien wel, dan kunnen bezoekers
  zich via een geautomatiseerd formulier inschrijven en
  toegang krijgen tot de priv&eacute;-ruimte om zelf artikels

@@ -522,7 +522,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_activer_compactage_js' => 'Dori&#355;i s&#259; activa&#355;i compactarea scripturilor (javascript) ?',
 'info_question_activer_compresseur' => 'Dori&#355;i s&#259; activa&#355;i compresia fluxului HTTP ?',
 'info_question_gerer_statistiques' => 'Site-ul dumneavoastr&#259; trebuie s&#259; gestioneze statisticile vizitelor&nbsp;?',
-'info_question_inscription_nouveaux_redacteurs' => 'Accepta&#355;i &icirc;nscrierea de noi redactori
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Accepta&#355;i &icirc;nscrierea de noi redactori
   &icirc;n partea public&#259; a site-ului&nbsp;? Dac&#259; accepta&#355;i, vizitatorii vor putea s&#259; se &icirc;nscrie
   cu ajutorul unui formular automatizat &#351;i vor putea avea acces la spa&#355;iul privat pentru a propune
   propriile lor articole. <blockquote><i>Ca urmare a procesului de &icirc;nscriere,

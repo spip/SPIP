@@ -512,7 +512,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_question_activer_compactage_js' => '<NEW>Souhaitez-vous activer le compactage des scripts (javascript) ?',
 'info_question_activer_compresseur' => '<NEW>Voulez-vous activer la compression du flux HTTP ?',
 'info_question_gerer_statistiques' => 'Lo voastre site deu gerar li estadisticas dei visitas&nbsp;?',
-'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz li inscripcions de nov&egrave;us redactors &agrave;
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Acceptatz li inscripcions de nov&egrave;us redactors &agrave;
  partir dau sit public&nbsp;? Se l\'acceptatz, lu visitaires si podr&agrave;n inscriure
  desp&iacute; un formulari automatisat e accedir&agrave;n alora &agrave; l\'espaci privat per
  prepauar lu sieus articles pr&ograve;pis.<blockquote><i>Durant la fasa d\'inscripcion,

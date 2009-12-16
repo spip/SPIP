@@ -521,7 +521,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_question_activer_compactage_js' => 'Javascript script-en trinkotzea aktibatu al nahi duzu ?',
 'info_question_activer_compresseur' => 'HTTP korrontearen konprimitzea aktibatu al nahi duzu ?',
 'info_question_gerer_statistiques' => 'Zure tokiakbisiten estatistikak kudeatzea nahi duzu?',
-'info_question_inscription_nouveaux_redacteurs' => 'Gune publikotik idazlari berrien inskripzioak onartzen dituzu ?
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Gune publikotik idazlari berrien inskripzioak onartzen dituzu ?
 Onartzen badituzu, bisitariak inprimaki automatizatu batetik harpidetu ahal izango dira eta orduan eremu pribatuan sartuko dira beren artikuluak proposatzeko.
 
 Inskribatzean, erabiltzaileek mezu elektroniko automatiko bat jasotzen dute gune pribaturako sarbide-kodeak emanez.

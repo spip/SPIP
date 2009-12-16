@@ -543,7 +543,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_activer_compactage_js' => '<NEW>Souhaitez-vous activer le compactage des scripts (javascript) ?',
 'info_question_activer_compresseur' => '<NEW>Voulez-vous activer la compression du flux HTTP ?',
 'info_question_gerer_statistiques' => 'Czy Twoja strona ma prowadzi&#263; statystyk&#281; odwiedzin?',
-'info_question_inscription_nouveaux_redacteurs' => 'Czy akceptujesz mo&#380;liwo&#347;&#263; dodawania nowych redaktor&oacute;w
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Czy akceptujesz mo&#380;liwo&#347;&#263; dodawania nowych redaktor&oacute;w
   za po&#347;rednictwem stron publicznych&nbsp;? Je&#347;li tak, odwiedz&#261;cy b&#281;d&#281; mogli si&#281; zapisa&#263;
   za pomoc&#261; zautomatyzowanego formularza i b&#281;d&#261; mieli dost&#281;p do strefy prywatnej, gdzie
   b&#281;d&#261; proponowa&#263; w&#322;asne artyku&#322;y. <blockquote><i>W trakcie procesu zapisywania,
