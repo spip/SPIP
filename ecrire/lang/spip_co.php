@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_article' => 'Mudific&agrave; st\'art&igrave;culu',
 'admin_modifier_auteur' => 'Mudific&agrave; st\'autore',
 'admin_modifier_breve' => 'Mudific&agrave; stu dispacciu',
-'admin_modifier_mot' => 'Mudific&agrave; sta parulla chjave',
+'admin_modifier_mot' => 'Mudific&agrave; stu segnu',
 'admin_modifier_rubrique' => 'Mudific&agrave; sta r&ugrave;bbrica',
 'admin_recalculer' => 'Ricaric&agrave; sta p&agrave;gina',
 'afficher_trad' => 'f&agrave; cumparisce e traduzzioni',
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'An&agrave;lisi XML',
 'annuler' => 'Annull&agrave;',
 'antispam_champ_vide' => 'Lasciate puru stu campu viotu&nbsp;:',
-'articles_recents' => 'Art&igrave;culi i pi&ugrave; recenti',
+'articles_recents' => 'L\'&ugrave;ltimi art&igrave;culi',
 'avis_archive_incorrect' => 'u schedariu d\'archiviu &ugrave;n h&egrave; micca un schedariu SPIP',
 'avis_archive_invalide' => 'u schedariu d\'archiviu &ugrave;n h&egrave; micca v&agrave;lidu',
 'avis_attention' => 'ATTENTI&nbsp;!',
@@ -354,7 +354,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'icone_interface_simple' => 'Interfaccia simplificata',
 'icone_maintenance_site' => 'Mantenimentu di u situ',
 'icone_messagerie_personnelle' => 'Messageria persunale',
-'icone_mots_cles' => 'Parulle chjave',
+'icone_mots_cles' => 'Segni',
 'icone_nouvelle_breve' => 'Scrive un nuvellu dispacciu',
 'icone_repartition_actuelle' => 'Vede u spartimentu attuale',
 'icone_repartition_debut' => 'Vede u spartimentu da u principiu',
@@ -475,7 +475,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'info_mise_en_ligne' => 'Data di messa in ligna&nbsp;:',
 'info_modification_parametres_securite' => 'mudificazione di i par&agrave;metri di sicurezza',
 'info_mois_courant' => 'In stu mese :',
-'info_mot_cle_ajoute' => 'A parulla chjave h&egrave; stata aghjunta &agrave;',
+'info_mot_cle_ajoute' => 'U segnu h&egrave; statu aghjuntu &agrave;',
 'info_multi_herit' => 'Lingua predefinita',
 'info_multi_langues_soulignees' => 'E <u>lingue sottufrisgiate</u> godenu d\'una traduzzione di tutti i testi di l\'interfaccia. 
 		S&egrave; vo sceglite ste lingue, seranu tradutti in autum&agrave;ticu assai elementi di u situ p&ugrave;bblicu (date, furmulari, ...). 
@@ -495,7 +495,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'info_petit_ecran' => 'P&igrave;cculu screnu',
 'info_petition_close' => 'Petizione chjosa',
 'info_pixels' => 'pixels',
-'info_plusieurs_mots_trouves' => 'Parechje parulle chjave trove per "@cherche_mot@":',
+'info_plusieurs_mots_trouves' => 'Parechji segni trovi per "@cherche_mot@":',
 'info_popularite_5' => 'pupularit&agrave;&nbsp;:',
 'info_portfolio' => 'Purtafogliu',
 'info_portfolio_automatique' => 'Purtafogliu autum&agrave;ticu&nbsp;:',
@@ -708,8 +708,8 @@ Puderete tandu inserisce un nuvellu password
 'texte_inc_auth_2' => 'cunnette&nbsp;vi torna',
 'texte_inc_auth_3' => ', dopu esse esciutu; poi aprite torna u navigatore.',
 'texte_inc_config' => 'E mud&igrave;fiche fatte in ste p&agrave;gine pesanu assai nant\'&agrave; u funziunamentu di u vostru situ. 
-		Vi cunsigliemu d\'&ugrave;n f&agrave; ci interventi fintantu ch&igrave; &ugrave;n serete abbastanza pr&agrave;ticu c&ugrave; u funziunamentu di u sistema SPIP. <br /><br />
-		<b>In ogni manera, h&egrave; arricumandatu assai di lasci&agrave; a gestione di ste p&agrave;gine &agrave; u webmaestru di u vostru situ.</b>',
+  Vi cunsigliemu d\'&ugrave;n f&agrave; ci interventi fintantu ch&igrave; &ugrave;n serete abbastanza pr&agrave;ticu c&ugrave; u funziunamentu di u sistema SPIP. <br /><br />
+  <b>sia cum\'ella sia, h&egrave; arricumandatu assai di lasci&agrave; a gestione di ste p&agrave;gine &agrave; u webmaestru di u vostru situ.</b>',
 'texte_inc_meta_1' => 'U sistema h&agrave; scontru un errore mentre a scrittura di u schedariu <code>@fichier@</code>. 
 			Intantu ch&egrave; amministratore di u situ,',
 'texte_inc_meta_2' => 'verificate puru i diritti di scrittura',
@@ -719,7 +719,7 @@ Puderete tandu inserisce un nuvellu password
 'texte_statut_propose_evaluation' => 'prupostu &agrave; a valutazione',
 'texte_statut_publie' => 'pubblicatu in ligna',
 'texte_statut_refuse' => 'rifiutatu',
-'titre_ajouter_mot_cle' => 'AGHJUNGHJE UNA PARULLA CHJAVE :',
+'titre_ajouter_mot_cle' => 'AGHJUNGHJE UN SEGNU :',
 'titre_breve_proposee' => 'Dispacciu prupostu',
 'titre_breve_publiee' => 'Dispacciu pubblicatu',
 'titre_breve_refusee' => 'Dispacciu rifiutatu',
@@ -735,7 +735,7 @@ Puderete tandu inserisce un nuvellu password
 'titre_image_visiteur' => 'Visitore',
 'titre_joindre_document' => 'ALLE&agrave; UN DUCUMENTU',
 'titre_liens_entrants' => 'Lee versu u situ',
-'titre_mots_cles' => 'PARULLE&nbsp;CHJAVE',
+'titre_mots_cles' => 'SEGNI',
 'titre_probleme_technique' => 'Attenti&nbsp;: un prublemu t&egrave;cnicu (servore SQL) impedisce l\'accessu &agrave; sta parte di u situ.',
 'titre_publier_document' => 'PUBBLIC&agrave; UN DUCUMENTU IN STA R&Ugrave;BBRICA',
 'titre_signatures_attente' => 'Zifre in attesa di cunvalidazione',
