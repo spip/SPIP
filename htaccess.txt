@@ -104,6 +104,9 @@ RewriteRule ^favicon[.]ico$      spip.php?page=favicon.ico [QSA,L]
 RewriteRule ^sitemap[.]xml$      spip.php?page=sitemap.xml [QSA,L]
 ##
 
+## ping http://site/1234 => article1234
+RewriteRule ^([1-9][0-9]*)$     spip.php?action=redirect&type=article&id=$1 [QSA,L]
+
 # expirer les images (pour contourner gros bug MSIE sur le cache)
 # note : a decommenter si vous voulez tester
 #<IfModule mod_expires.c>
