@@ -526,7 +526,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	$GLOBALS['compt_note'] = 0;
 
 	// Appliquer le modele avec le contexte
-	$retour = recuperer_fond($fond, $contexte);
+	$retour = recuperer_fond($fond, $contexte, array(), $connect);
 
 	// On restitue les globales de notes telles qu'elles etaient avant l'appel
 	// du modele. Si le modele n'a pas affiche ses notes, tant pis (elles *doivent*
