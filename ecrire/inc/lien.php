@@ -410,7 +410,7 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='') {
 				$texte .= preg_replace(',[|][^|=]*,s',' ',$params);
 			# version normale
 			else {
-				$modele = inclure_modele($type, $id, $params, $lien);
+				$modele = inclure_modele($type, $id, $params, $lien, $connect);
 				// en cas d'echec, 
 				// si l'objet demande a une url, 
 				// creer un petit encadre vers elle
