@@ -98,11 +98,10 @@ function balise_FORMULAIRE__dyn($form)
 			'data'=>$valeurs)
 	);
 	
-	// si $valeurs===false, alors le formulaire n'est pas applicable
-	// on n'affiche rien. C'est plus fort qu'editable qui est geree
-	// par le squelette du forumaire lui meme
-	if ($valeurs===false) return '';
-	
+	// si $valeurs n'est pas un tableau, le formulaire n'est pas applicable
+	// C'est plus fort qu'editable qui est gere par le squelette 
+	// Idealement $valeur doit etre alors un message explicatif.
+	if (!is_array($valeurs)) return is_string($valeurs) ? $valeurs : '';
 	
 	// reperer les valeurs particulieres editable, message_ok et message_erreur
 	if (isset($valeurs['editable'])){
