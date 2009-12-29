@@ -553,7 +553,7 @@ requiring an FTP access to the Web site.',
 'info_question_activer_compactage_js' => 'Do you wish to activate compression for Javascript files?',
 'info_question_activer_compresseur' => 'Do you wish to activate compression for the HTTP data?',
 'info_question_gerer_statistiques' => 'Should your site manage visits statistics?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Do you wish to allow the new editors to register
+'info_question_inscription_nouveaux_redacteurs' => 'Do you wish to allow the new editors to register
  from the public site? If you agree to this, visitors will be able to  register
   using an automatic form, and then access the private area to
   tender their own articles. <blockquote><i>During the registration process,
@@ -561,7 +561,7 @@ requiring an FTP access to the Web site.',
   giving them their access code to the private area. Some
   service providers disallow the sending of email from their
   servers: in that case, automated registration cannot be
-  implemented.',
+  implemented.</i></blockquote>',
 'info_question_mots_cles' => 'Do you wish to use keywords in your site?',
 'info_question_proposer_site' => 'Who can propose referenced sites?',
 'info_question_utilisation_moteur_recherche' => 'Do you wish to use the search engine integrated to SPIP?
@@ -798,6 +798,9 @@ in a colour indicating their status:',
 'label_taille_ecran' => 'Screen width',
 'label_texte_et_icones_navigation' => 'Navigation menu',
 'label_texte_et_icones_page' => 'Page display',
+'ldap_correspondance' => 'inherit field @champ@',
+'ldap_correspondance_1' => 'Inherit LDAP fields',
+'ldap_correspondance_2' => 'For each of the following SPIP fields, enter the name of the corresponding LDAP field. Leave it blank if you don\'t wanted it filled, separate with spaces or commas to try several LDAP fields.',
 'lien_ajout_destinataire' => 'Add this recipient',
 'lien_ajouter_auteur' => 'Add this author',
 'lien_ajouter_participant' => 'Add a participant',

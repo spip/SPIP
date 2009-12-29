@@ -532,8 +532,9 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_question_activer_compactage_js' => 'Voleu activat la compressi&oacute; dels scripts (javascript)?',
 'info_question_activer_compresseur' => 'Voleu activar la compressi&oacute; del flux HTTP?',
 'info_question_gerer_statistiques' => 'El vostre lloc ha de gestionar les estad&iacute;stiques de les visites?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Accepteu les inscripcions denous redactors a partir del lloc p&uacute;blic? Si ho accepteu, els visitants es podran inscriure mitjan&ccedil;ant un formulari automatitzat i llavors accediran a l\'espai privat per proposar els seus propis articles.<blockquote><i>Durant el proc&eacute;s d\'inscripci&oacute;, els usuaris reben un correu electr&ograve;nic autom&agrave;tic en el que se\'ls d&oacute;na els seus codis d\'acc&eacute;s al lloc privat. Alguns prove&iuml;dors d\'hostatge desactiven l\'enviament de correus electr&ograve;nics des dels seus servidors: en aquest
- cas, la inscripci&oacute; autom&agrave;tica &eacute;s impossible.',
+'info_question_inscription_nouveaux_redacteurs' => 'Accepteu les inscripcions de nous redactors a partir del lloc p&uacute;blic? Si ho accepteu, els visitants es podran inscriure
+ mitjan&ccedil;ant un formulari  automatitzat i llavors accediran a l\'espai privat per proposar els seus propis articles.<blockquote><i>Durant el proc&eacute;s d\'inscripci&oacute;, els usuaris reben un correu electr&ograve;nic autom&agrave;tic en el que se\'ls d&oacute;na els seus codis d\'acc&eacute;s al lloc privat. Alguns prove&iuml;dors d\'hostatge desactiven l\'enviament de correus electr&ograve;nics des dels seus servidors: en aquest
+ cas, la inscripci&oacute; autom&agrave;tica &eacute;s impossible.</i></blockquote>',
 'info_question_mots_cles' => 'Voleu utilitzar les paraules clau en la vostra web&nbsp;?',
 'info_question_proposer_site' => 'Qui pot proposar llocs referenciats?',
 'info_question_utilisation_moteur_recherche' => 'Voleu fer servir el motor de cerca integrat a l\'SPIP?
@@ -770,6 +771,9 @@ amb un color que indica el seu estat:',
 'label_taille_ecran' => 'Amplada de la pantalla',
 'label_texte_et_icones_navigation' => 'Men&uacute; de navegaci&oacute;',
 'label_texte_et_icones_page' => 'Visualitzaci&oacute; a la p&agrave;gina',
+'ldap_correspondance' => 'her&egrave;ncia del camp @champ@',
+'ldap_correspondance_1' => 'Her&egrave;ncia dels camps LDAP',
+'ldap_correspondance_2' => 'Per cadascun dels camps seg&uuml;ents d\'SPIP, indiqueu el nom del camp LDAP corresponent. Deixeu-lo buit per no omplir-lo, separeu-lo amb espais o comes per assajar diversos camps LDAP.',
 'lien_ajout_destinataire' => 'Afegir aquest destinatari',
 'lien_ajouter_auteur' => 'Afegir aquest autor',
 'lien_ajouter_participant' => 'Afegir un participant',
