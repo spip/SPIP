@@ -27,6 +27,9 @@ function analyser_backend($rss, $url_syndic='') {
 
 	$rss = pipeline('pre_syndication', $rss);
 
+	// si true, les URLs de type feedburner sont dereferencees
+	define('_SYNDICATION_DEREFERENCER_URL', false);
+
 	// Echapper les CDATA
 	$echappe_cdata = array();
 	if (preg_match_all(',<!\[CDATA\[(.*)]]>,Uims', $rss,
@@ -87,7 +90,11 @@ function analyser_backend($rss, $url_syndic='') {
 		$item, $regs) AND preg_match(',^(true|1)?$,i',
 		extraire_attribut($regs[0], 'ispermalink')))
 			$data['url'] = $regs[1];
-
+		// contourner les redirections feedburner
+		else if (_SYNDICATION_DEREFERENCER_URL
+		AND preg_match(',<feedburner:origLink>(.*)<,Uims',
+		$item, $regs))
+			$data['url'] = $regs[1];
 		// <link>, plus classique
 		else if (preg_match(
 		',<link[^>]*[[:space:]]rel=["\']?alternate[^>]*>(.*)</link>,Uims',
