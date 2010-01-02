@@ -4,9 +4,9 @@
  * Thanks to Scott Yang <http://scott.yang.id.au/>
  * for the original idea and some code
  *    
- * @author Renato Formato <renatoformato@virgilio.it> 
+ * @author Renato Formato <rformato@gmail.com> 
  *  
- * @version 0.36 (9/1/2009)
+ * @version 0.37 (9/1/2009)
  *
  *  Options
  *  - exact (string, default:"exact") 
@@ -129,6 +129,7 @@ if (window.jQuery)
       [/[\xC7\u0106-\u010D]/ig,'c'],
       [/[\xC8-\xCB]/ig,'e'],
       [/[\xCC-\xCF]/ig,'i'],
+      [/[\u0141]/ig,'l'],
       [/\xD1/ig,'n'],
       [/[\xD2-\xD6\xD8]/ig,'o'],
       [/[\u015A-\u0161]/ig,'s'],
@@ -137,7 +138,7 @@ if (window.jQuery)
       [/\xFF/ig,'y'],
       [/[\x91\x92\u2018\u2019]/ig,'\'']
     ],
-    matchAccent : /[\x91\x92\xC0-\xC5\xC7-\xCF\xD1-\xD6\xD8-\xDC\xFF\u0100-\u010D\u015A-\u0167\u2018\u2019]/ig,  
+    matchAccent : /[\x91\x92\xC0-\xC5\xC7-\xCF\xD1-\xD6\xD8-\xDC\xFF\u0100-\u010D\u0141\u015A-\u0167\u2018\u2019]/ig,  
 		replaceAccent: function(q) {
 		  SearchHighlight.matchAccent.lastIndex = 0;
       if(SearchHighlight.matchAccent.test(q)) {
