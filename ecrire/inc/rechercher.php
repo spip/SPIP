@@ -276,16 +276,10 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 				$jointures[$table],
 				array_merge($options, array('jointures' => false))
 			)
+		AND $rechercher_lister_joints = charger_fonction("rechercher_lister_joints","inc",true)
 		) {
 			foreach ($joints as $table_liee => $ids_trouves) {
-				$cle_depart = id_table_objet($table);
-				$cle_arrivee =  id_table_objet($table_liee);
-				$table_sql = preg_replace('/^spip_/', '', table_objet_sql($table));
-				$table_liee_sql = preg_replace('/^spip_/', '', table_objet_sql($table_liee));
-				if ($table_liee == 'document')
-					$s = sql_select("id_objet as $cle_depart, $cle_arrivee", "spip_documents_liens", array("objet='$table'",sql_in('id_'.${table_liee}, array_keys($ids_trouves))), '','','','',$serveur);
-				else
-					$s = sql_select("$cle_depart,$cle_arrivee", "spip_${table_liee_sql}_${table_sql}", sql_in('id_'.${table_liee}, array_keys($ids_trouves)), '','','','',$serveur);
+				list($cle_depart,$cle_arrivee,$s) = $rechercher_lister_joints($table,$table_liee,$ids_trouves, $serveur);
 				while ($t = sql_fetch($s)) {
 					$id = $t[$cle_depart];
 					$joint = $ids_trouves[$t[$cle_arrivee]];

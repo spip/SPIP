@@ -287,6 +287,7 @@ ecrire/inc/presenter_enfants.php -text
 ecrire/inc/presenter_liste.php -text
 ecrire/inc/puce_statut.php -text
 ecrire/inc/rechercher.php -text
+ecrire/inc/rechercher_lister_joints.php -text
 ecrire/inc/referencer_traduction.php -text
 ecrire/inc/referenceurs.php -text
 ecrire/inc/regler_moderation.php -text
