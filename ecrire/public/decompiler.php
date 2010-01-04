@@ -179,8 +179,11 @@ function public_decompiler($liste, $fmt='', $prof=0)
 		AND $p->fonctions) {
 	      $n = strlen($next->texte) - strlen(ltrim($next->texte));
 	      if ($n)  {
-		$p->apres = substr($next->texte, 0, $n);
-		$next->texte = substr($next->texte, $n);
+			$champ = new Texte;
+			$champ->texte = substr($next->texte, 0, $n);
+			$champ->ligne = $p->ligne;
+			$p->apres = array($champ);
+			$next->texte = substr($next->texte, $n);
 	      }
 	    }
 	    $contenu[] = array($d($p, $fmt, $prof2), $p->type);
