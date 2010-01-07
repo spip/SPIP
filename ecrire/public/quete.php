@@ -358,7 +358,7 @@ function quete_debut_pagination($primary,$valeur,$pas,$res,$serveur=''){
 		return 0;
 
 	// sinon, calculer le bon numero de page
-	return floor($pos/$pas)*$pas;
+	return $pas?(floor($pos/$pas)*$pas):0; // en mode debug, il semble qu'on passe ici avec un mauvais pas
 }
 
 ?>
