@@ -563,13 +563,17 @@ function installe_plugins(){
  	// -> cela suivra si le plugin demenage
 
 	$liste = liste_chemin_plugin_actifs();
+	$install = array();
 	foreach($liste as $k => $plug) {
 		$infos = plugin_get_infos($plug);
-		if (isset($infos['install']) AND !installe_un_plugin($plug, $infos))
-			unset($liste[$k]);
+		if (isset($infos['install'])) {
+			if (installe_un_plugin($plug, $infos))
+			  $install[] = $plug;
+			else unset($liste);
+		}
 	}
 
-	ecrire_meta('plugin_installes', serialize($liste), 'non');
+	ecrire_meta('plugin_installes', serialize($install), 'non');
 	return $liste;
 }
 
