@@ -20,9 +20,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@balise_LOGO__dist
 function balise_LOGO__dist ($p) {
 
-	preg_match(",^LOGO_([A-Z]+)(_.*)?$,i", $p->nom_champ, $regs);
+	preg_match(",^LOGO_([A-Z_]+?)(|_NORMAL|_SURVOL|_RUBRIQUE)$,i", $p->nom_champ, $regs);
 	$type_objet = $regs[1];
-	$suite_logo = @$regs[2];	
+	$suite_logo = $regs[2];
 
 	// cas de #LOGO_SITE_SPIP
 	if (preg_match(",^_SPIP(.*)$,", $suite_logo, $regs)) {
@@ -31,12 +31,8 @@ function balise_LOGO__dist ($p) {
 		$_id_objet = "\"'0'\"";
 		$id_objet = 'id_syndic'; # parait faux mais donne bien "siteNN"
 	} else {
-		if (in_array($suite_logo, array('', '_NORMAL', '_SURVOL', '_RUBRIQUE'))) {
-			$id_objet = "id_".strtolower($type_objet);
-			if ($id_objet == 'id_site') $id_objet = "id_syndic"; # correction
-		}
-		else
-			$id_objet = "id_".strtolower($type_objet.$suite_logo);
+		$id_objet = "id_".strtolower($type_objet);
+		if ($id_objet == 'id_site') $id_objet = "id_syndic"; # correction
 		$_id_objet = champ_sql($id_objet, $p);
 	}
 
