@@ -467,7 +467,7 @@ function safehtml($t) {
 	$t = echappe_js($t);
 
 	if (!isset($safehtml))
-		$safehtml = charger_fonction('safehtml', 'inc');
+		$safehtml = charger_fonction('safehtml', 'inc', true);
 	if ($safehtml)
 		$t = $safehtml($t);
 
