@@ -106,7 +106,7 @@ define('_BALISES_BLOCS',
 	'div|pre|ul|ol|li|blockquote|h[1-6r]|'
 	.'t(able|[rdh]|body|foot|extarea)|'
 	.'form|object|center|marquee|address|'
-	.'d[ltd]|script|noscript|map|button|fieldset');
+	.'d[ltd]|script|noscript|map|button|fieldset|style');
 
 //
 // Echapper les elements perilleux en les passant en base64
