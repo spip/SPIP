@@ -40,16 +40,18 @@ if(!jQuery.load_handlers) {
 	jQuery._ACBajax = jQuery.ajax;
 
 	jQuery.ajax = function(type) {
+		var s = jQuery.extend(true, {}, jQuery.ajaxSettings, type);
+		var callbackContext = s.context || s;
 		//If called by _load exit now because the callback has already been set
 		if (jQuery.ajax.caller==jQuery.fn._load) return jQuery._ACBajax( type);
-			var orig_complete = type.complete || function() {};
+			var orig_complete = s.complete || function() {};
 			type.complete = function(res,status) {
 				// Do not fire OnAjaxLoad if the dataType is not html
 				var dataType = type.dataType;
 				var ct = (res && (typeof res.getResponseHeader == 'function'))
 					? res.getResponseHeader("content-type"): '';
 				var xml = !dataType && ct && ct.indexOf("xml") >= 0;
-				orig_complete(res,status);
+				orig_complete.call( callbackContext, res, status);
 				if(!dataType && !xml || dataType == "html") triggerAjaxLoad(document);
 		};
 		return jQuery._ACBajax(type);
