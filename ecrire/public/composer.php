@@ -14,11 +14,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/texte');
 include_spip('inc/documents');
-include_spip('inc/forum');
 include_spip('inc/distant');
 include_spip('inc/rubriques'); # pour calcul_branche (cf critere branche)
 include_spip('inc/acces'); // Gestion des acces pour ical
-include_spip('public/debug'); # toujours prevoir le pire
 include_spip('public/interfaces');
 include_spip('public/quete');
 
@@ -63,42 +61,83 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 		$skel_code = $compiler($skel, $nom, $gram, $source, $connect);
 	}
 
-	// Tester si le compilateur renvoie une erreur
-	if (is_array($skel_code))
-		erreur_squelette($skel_code[0], $skel_code[1]);
-	else {
-		if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
-			debug_dumpfile ($skel_code, $nom, 'code');
-		}
-		eval('?'.'>'.$skel_code);
-		if (function_exists($nom)) {
-			ecrire_fichier ($phpfile, $skel_code);
-			return array($nom, $skel_code);
-		} else {
-			erreur_squelette(_T('zbug_erreur_compilation'), $source);
+	// Ne plus rien faire si le compilateur n'a pas pu operer.
+	if (!$skel_code) return false;
+
+	foreach($skel_code as $id => $boucle) {
+		$f = $boucle->return;
+		if (@eval("return true; $f ;") ===  false) {
+		// Code syntaxiquement faux (critere etc mal programme')
+			$msg = array('zbug_erreur_compilation');
+			erreur_squelette($msg, $boucle);
+			// continuer pour trouver d'autres fautes eventuelles
+			// mais prevenir que c'est mort
+			$nom = '';
+		} 
+		// Contexte de compil inutile a present
+		// (mais la derniere valeur de $boucle est utilisee ci-dessous)
+		$skel_code[$id] = $f;
+	}
+
+	if ($nom) {
+		// Si le code est bon, concatener et mettre en cache
+		if (function_exists($nom))
+			$code = squelette_traduit($skel, $source, $phpfile, $skel_code);
+		else {
+		// code semantiquement faux: bug du compilateur
+		// $boucle est en fait ici la fct principale du squelette
+			$msg = array('zbug_erreur_compilation');
+			erreur_squelette($msg, $boucle);
+			$nom = '';
 		}
 	}
+
+	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
+
+		// Tracer ce qui vient d'etre compile
+		$GLOBALS['debug_objets']['code'][$nom . 'tout'] = $code;
+
+		// si c'est ce que demande le debusqueur, lui passer la main
+		if ($GLOBALS['debug_objets']['sourcefile']
+		AND (_request('var_mode_objet') == $nom)
+		AND (_request('var_mode_affiche') == 'code')  )
+			erreur_squelette();
+	}
+	return $nom ? array($nom, $code) : false;
+}
+
+function squelette_traduit($squelette, $sourcefile, $phpfile, $boucles)
+{
+
+	// Le dernier index est '' (fonction principale)
+	$noms = substr(join (', ', array_keys($boucles)), 0, -2);
+	if (CODE_COMMENTE)
+	$code = "
+/*
+ * Squelette : $sourcefile
+ * Date :      ".gmdate("D, d M Y H:i:s", @filemtime($sourcefile))." GMT
+ * Compile :   ".gmdate("D, d M Y H:i:s", time())." GMT
+ * " . (!$boucles ?  "Pas de boucle" :	("Boucles :   " . $noms)) ."
+ */ " ;
+
+	$code = '<'. "?php\n" . $code . join('', $boucles)  . "\n?" .'>';
+	ecrire_fichier($phpfile, $code);
+	return $code;
 }
 
 // Le squelette compile est-il trop vieux ?
 // http://doc.spip.org/@squelette_obsolete
 function squelette_obsolete($skel, $squelette) {
-	static $date_change = null;
-	// ne verifier la date de mes_fonctions et mes_options qu'une seule fois
-	// par hit
-	if (is_null($date_change)){
-		if (@file_exists($fonc = 'mes_fonctions.php')
-			OR @file_exists($fonc = 'mes_fonctions.php3'))
-			$date_change = @filemtime($fonc); # compatibilite
-		if (defined('_FILE_OPTIONS'))
-			$date_change = max($date_change,@filemtime(_FILE_OPTIONS));
-	}
 	return (
 		(isset($GLOBALS['var_mode']) AND in_array($GLOBALS['var_mode'], array('recalcul','preview','debug')))
 		OR !@file_exists($skel)
 		OR ((@file_exists($squelette)?@filemtime($squelette):0)
 			> ($date = @filemtime($skel)))
-		OR ($date_change > $date)
+		OR (
+			(@file_exists($fonc = 'mes_fonctions.php')
+			OR @file_exists($fonc = 'mes_fonctions.php3'))
+			AND @filemtime($fonc) > $date) # compatibilite
+		OR (defined('_FILE_OPTIONS') AND @filemtime(_FILE_OPTIONS) > $date)
 	);
 }
 
@@ -169,7 +208,7 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 			$corps = preg_replace_callback(',<[?](\s|php|=).*[?]>,UimsS',
 				'echapper_php_callback', $corps);
 		foreach (explode('|', $headers['X-Spip-Filtre']) as $filtre) {
-			$corps = appliquer_filtre($corps, $filtre);
+			$corps = appliquer_filtre($corps, $filtre,'filtre_identite');
 		}
 		// restaurer les echappements
 		$corps = echapper_php_callback($corps);
@@ -186,75 +225,6 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 	);
 }
 
-// Pour les documents comme pour les logos, le filtre |fichier donne
-// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
-// remarquable, mais a conserver pour compatibilite ascendante.
-// -> http://www.spip.net/fr_article901.html
-
-
-// Renvoie le code html pour afficher un logo, avec ou sans survol, lien, etc.
-
-// http://doc.spip.org/@affiche_logos
-function affiche_logos($logos, $lien, $align) {
-
-	list ($arton, $artoff) = $logos;
-
-	if (!$arton) return $artoff;
-
-	if ($taille = @getimagesize($arton)) {
-		$taille = " ".$taille[3];
-	}
-
-	if ($artoff)
-		$artoff = " onmouseover=\"this.src='$artoff'\" "
-			."onmouseout=\"this.src='$arton'\"";
-
-	$milieu = "<img src=\"$arton\" alt=\"\""
-		. ($align ? " align=\"$align\"" : '') 
-		. $taille
-		. $artoff
-		. ' class="spip_logos" />';
-
-	return (!$lien ? $milieu :
-		('<a href="' .
-		 quote_amp($lien) .
-		'">' .
-		$milieu .
-		'</a>'));
-}
-
-//
-// Retrouver le logo d'un objet (et son survol)
-//
-
-// http://doc.spip.org/@calcule_logo
-function calcule_logo($type, $onoff, $id, $id_rubrique, $flag_fichier) {
-	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$nom = strtolower($onoff);
-
-	while (1) {
-		$on = $chercher_logo($id, $type, $nom);
-		if ($on) {
-			if ($flag_fichier)
-				return (array('', "$on[2].$on[3]"));
-			else {
-				$off = ($onoff != 'ON') ? '' :
-					$chercher_logo($id, $type, 'off');
-				// on retourne une url du type IMG/artonXX?timestamp
-				// qui permet de distinguer le changement de logo
-				// et placer un expire sur le dossier IMG/
-				return array ($on[0] , ($off ? $off[0] : ''));
-			}
-		}
-		else if ($id_rubrique) {
-			$type = 'id_rubrique';
-			$id = $id_rubrique;
-			$id_rubrique = 0;
-		} else if ($id AND $type == 'id_rubrique')
-			$id = quete_parent($id);
-		else return array('','');
-	}
-}
 
 //
 // fonction standard de calcul de la balise #INTRODUCTION
@@ -277,30 +247,31 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 			$zone = substr($zone, $deb + 7);
 		$intro .= $zone;
 	}
-	$texte = $intro ? $intro : $texte;
-	
-	// On ne *PEUT* pas couper simplement ici car c'est du texte brut, qui inclus raccourcis et modeles
+
+	// [12025] On ne *PEUT* pas couper simplement ici car c'est du texte brut,
+	// qui inclus raccourcis et modeles
 	// un simple <articlexx> peut etre ensuite transforme en 1000 lignes ...
-	// par ailleurs le nettoyage des raccourcis ne tient pas compte des surcharges
-	// et enrichissement de propre
+	// par ailleurs le nettoyage des raccourcis ne tient pas compte
+	// des surcharges et enrichissement de propre
 	// couper doit se faire apres propre
-	//$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte, $connect);	
+	//$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte, $connect);
 
-	// ne pas tenir compte des notes ;
-	// bug introduit en http://trac.rezo.net/trac/spip/changeset/12025
-	$mem = array($GLOBALS['les_notes'], $GLOBALS['compt_note'], $GLOBALS['marqueur_notes'], $GLOBALS['notes_vues']);
-	// memoriser l'etat de la pile unique
-	$mem_unique = unique('','_spip_raz_');
+	// Cependant pour des questions de perfs on coupe quand meme, en prenant
+	// large et en se mefiant des tableaux #1323
 
+	if (strlen($intro))
+		$texte = $intro;
 
+	else
+	if (strpos("\n".$texte, "\n|")===false
+	AND strlen($texte) > 2.5*$longueur)
+		$texte = couper($texte, 2*$longueur);
+
+	// ne pas tenir compte des notes
+	$notes = charger_fonction('notes', 'inc');
+	$notes(true);
 	$texte = propre($texte,$connect);
-
-
-	// restituer les notes comme elles etaient avant d'appeler propre()
-	list($GLOBALS['les_notes'], $GLOBALS['compt_note'], $GLOBALS['marqueur_notes'], $GLOBALS['notes_vues']) = $mem;
-	// restituer l'etat de la pile unique
-	unique($mem_unique,'_spip_set_');
-
+	$notes(false);
 
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
@@ -314,25 +285,21 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 
 // elles sont traitees comme des inclusions
 // http://doc.spip.org/@synthetiser_balise_dynamique
-function synthetiser_balise_dynamique($nom, $args, $file, $lang, $ligne) {
-	// prefixer le include_once par "./" pour eviter la recherche dans le path par php
-	return
-		('<'.'?php 
-$lang_select = lang_select("'.$lang.'");
-include_once("./" . _DIR_RACINE . "'
-		. $file
-		. '");
-inclure_balise_dynamique(balise_'
-		. $nom
-		. '_dyn('
-		. join(", ", array_map('argumenter_squelette', $args))
-		. '),1, '
-		. $ligne
-		. ');
-if ($lang_select) lang_select();
+
+define('CODE_INCLURE_BALISE', '<' . '?php 
+include_once(_DIR_RACINE . "%s");
+inserer_balise_dynamique(balise_%s_dyn(%s), array(%s));
 ?'
-		.">");
+       .'>');
+
+
+function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
+	$r = sprintf(CODE_INCLURE_BALISE, $file, $nom,
+	       join(', ', array_map('argumenter_squelette', $args)),
+	       join(', ', array_map('_q', $context_compil)));
+	return $r;
 }
+
 // http://doc.spip.org/@argumenter_squelette
 function argumenter_squelette($v) {
 
@@ -348,46 +315,52 @@ function argumenter_squelette($v) {
 
 // verifier leurs arguments et filtres, et calculer le code a inclure
 // http://doc.spip.org/@executer_balise_dynamique
-function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
-	if (!$file = find_in_path(strtolower($nom) .'.php', 'balise/', true)) {
-		// regarder si une fonction generique n'existe pas
-		if (($p = strpos($nom,"_"))
-		&& ($file = find_in_path(strtolower(substr($nom,0,$p+1)) .'.php', 'balise/', true))) {
-			// dans ce cas, on lui injecte en premier arg le nom de la balise qu'on doit traiter
+function executer_balise_dynamique($nom, $args, $context_compil) {
+
+	$p = strpos($nom,"_");
+	$nomfonction = $nom;
+	$nomfonction_generique = substr($nom,0,$p+1);
+	if (!$file = include_spip("balise/". strtolower($nomfonction))) {
+		// pas de fichier associe, passer au traitement generique
+		$file = include_spip("balise/" .strtolower($nomfonction_generique));
+		if ($file) {
+			// et injecter en premier arg le nom de la balise 
 			array_unshift($args,$nom);
-			$nom = substr($nom,0,$p+1);
+			// et passer sur la fonction generique pour la suite
+			$nomfonction = $nomfonction_generique;
 		}
-		else
-			die ("pas de balise dynamique pour #". strtolower($nom)." !");
-	}
-	// Y a-t-il une fonction de traitement filtres-arguments ?
-	$f = 'balise_' . $nom . '_stat';
-	if (function_exists($f))
-		$r = $f($args, $filtres);
-	else
-		$r = $args;
-	if (!is_array($r))
-		return $r;
-	else {
-		// verifier que la fonction dyn est la, sinon se replier sur la generique si elle existe
-		if (!function_exists('balise_' . $nom . '_dyn')){
-			// regarder si une fonction generique n'existe pas
-			if (($p = strpos($nom,"_"))
-			&& ($file = find_in_path(strtolower(substr($nom,0,$p+1)) .'.php', 'balise/', true))) {
-				// dans ce cas, on lui injecte en premier arg le nom de la balise qu'on doit traiter
-				array_unshift($r,$nom);
-				$nom = substr($nom,0,$p+1);
-			}
-			else
-				die ("pas de balise dynamique pour #". strtolower($nom)." !");
+		else {
+			$msg = array('zbug_balise_inexistante',array('from'=>'CVT','balise'=>$nom));
+			erreur_squelette($msg, $context_compil);
+			return '';
 		}
-		if (!_DIR_RESTREINT) 
-			$file = _DIR_RESTREINT_ABS . $file;
-		return synthetiser_balise_dynamique($nom, $r, $file, $lang, $ligne);
 	}
+	// Y a-t-il une fonction de traitement des arguments ?
+	$f = 'balise_' . $nomfonction . '_stat';
+
+	$r = !function_exists($f) ? $args : $f($args, $context_compil); 
+
+	if (!is_array($r)) return $r;
+
+	// verifier que la fonction dyn est la, 
+	// sinon se replier sur la generique si elle existe
+	if (!function_exists('balise_' . $nomfonction . '_dyn')) {
+		$file = include_spip("balise/" .strtolower($nomfonction_generique));
+		if (function_exists('balise_' . $nomfonction_generique . '_dyn')) {
+			// et lui injecter en premier arg le nom de la balise 
+			array_unshift($r,$nom);
+			$nomfonction = $nomfonction_generique;
+		} else {
+			$msg = array('zbug_balise_inexistante',array('from'=>'CVT','balise'=>$nom));
+			erreur_squelette($msg, $context_compil);
+			return '';
+		}
+	}
+
+	if (!_DIR_RESTREINT) 
+		$file = _DIR_RESTREINT_ABS . $file;
+	return synthetiser_balise_dynamique($nomfonction, $r, $file, $context_compil);
 }
-
-
 
 // http://doc.spip.org/@lister_objets_avec_logos
 function lister_objets_avec_logos ($type) {
@@ -411,14 +384,13 @@ function lister_objets_avec_logos ($type) {
 }
 
 // fonction appelee par la balise #NOTES
+// Renvoyer l'etat courant des notes, le purger et en preparer un nouveau
 // http://doc.spip.org/@calculer_notes
 function calculer_notes() {
-	if (!isset($GLOBALS["les_notes"])) return '';
-	if ($r = $GLOBALS["les_notes"]) {
-		$GLOBALS["les_notes"] = "";
-		$GLOBALS["compt_note"] = 0;
-		$GLOBALS["marqueur_notes"] ++;
-	}
+	$notes = charger_fonction('notes', 'inc');
+	$r = $notes(array());
+	$notes(false);
+	$notes(true);
 	return $r;
 }
 
@@ -469,7 +441,7 @@ function nettoyer_env_doublons($envd) {
 function match_self($w){
 	if (is_string($w)) return false;
 	if (is_array($w)) {
-		if (reset($w)=="SELF") return $w;
+		if (in_array(reset($w),array("SELF","SUBSELECT"))) return $w;
 		foreach($w as $sw)
 			if ($m=match_self($sw)) return $m;
 	}
@@ -478,7 +450,7 @@ function match_self($w){
 // http://doc.spip.org/@remplace_sous_requete
 function remplace_sous_requete($w,$sousrequete){
 	if (is_array($w)) {
-		if (reset($w)=="SELF") return $sousrequete;
+		if (in_array(reset($w),array("SELF","SUBSELECT"))) return $sousrequete;
 		foreach($w as $k=>$sw)
 			$w[$k] = remplace_sous_requete($sw,$sousrequete);
 	}
@@ -528,11 +500,36 @@ function calculer_select ($select = array(), $from = array(),
 		$menage = true;
 		// on recupere la sous requete 
 		$sous = match_self($w);
-		array_push($where_simples,$sous[2]);
-		$where[$k] = remplace_sous_requete($w,"(".calculer_select($sous[1],$from,$from_type,array($sous[2],'0=0'),$join,array(),array(),'',$having,$table,$id,$serveur,false).")");
+		if ($sous[0]=='SELF') {
+			// c'est une sous requete identique a elle meme sous la forme (SELF,$select,$where)
+			array_push($where_simples,$sous[2]);
+			$where[$k] = remplace_sous_requete($w,"(".calculer_select(
+			$sous[1],
+			$from,
+			$from_type,
+			array($sous[2],'0=0'), // pour accepter une string et forcer a faire le menage car on a surement simplifie select et where
+			$join,
+			array(),array(),'',
+			$having,$table,$id,$serveur,false).")");
+		}
+		if ($sous[0]=='SUBSELECT') {
+			// c'est une sous requete explicite sous la forme identique a sql_select : (SUBSELECT,$select,$from,$where,$groupby,$orderby,$limit,$having)
+			array_push($where_simples,$sous[3]); // est-ce utile dans ce cas ?
+			$where[$k] = remplace_sous_requete($w,"(".calculer_select(
+			$sous[1], # select
+			$sous[2], #from
+			array(), #from_type
+			$sous[3]?(is_array($sous[3])?$sous[3]:array($sous[3])):array(), #where, qui peut etre de la forme string comme dans sql_select
+			array(), #join
+			$sous[4]?$sous[4]:array(), #groupby
+			$sous[5]?$sous[5]:array(), #orderby
+			$sous[6], #limit
+			$sous[7]?$sous[7]:array(), #having
+			$table,$id,$serveur,false
+			).")");
+		}
 		array_pop($where_simples);
 	}
-	//var_dump($where);
 
 	foreach($having as $k => $v) { 
 		if ((!$v) OR ($v==1) OR ($v=='0=0')) {
@@ -552,8 +549,9 @@ function calculer_select ($select = array(), $from = array(),
 		$cle = $cledef;
 		// le format de join est :
 		// array(table depart, cle depart [,cle arrivee[,condition optionnelle and ...]])
+		if (count($join[$cle])==2) $join[$cle][] = $join[$cle][1];
+		if (count($join[$cle])==3) $join[$cle][] = '';
 		list($t,$c,$carr,$and) = $join[$cle];
-		if (!$carr) $carr = $c;
 		// si le nom de la jointure n'a pas ete specifiee, on prend Lx avec x sont rang dans la liste
 		// pour compat avec ancienne convention
 		if (is_numeric($cle))

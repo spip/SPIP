@@ -31,15 +31,16 @@ function balise_FORMULAIRE_SIGNATURE ($p) {
 
 // Verification des arguments (contexte + filtres)
 // http://doc.spip.org/@balise_FORMULAIRE_SIGNATURE_stat
-function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres) {
+function balise_FORMULAIRE_SIGNATURE_stat($args, $context_compil) {
 
-	// pas d'id_article => erreur de squelette
-	if (!$args[0])
-		return erreur_squelette(
-			_T('zbug_champ_hors_motif',
-				array ('champ' => '#FORMULAIRE_SIGNATURE',
-					'motif' => 'ARTICLES')), '');
-
+	// pas d'id_article => erreur de contexte
+	if (!$args[0]) {
+		$msg = array('zbug_champ_hors_motif',
+				array ('champ' => 'FORMULAIRE_SIGNATURE',
+				       'motif' => 'ARTICLES'));
+		erreur_squelette($msg, $context_compil);
+		return '';
+	}
 	// article sans petition => pas de balise
 	else if (!$args[1])
 		return '';

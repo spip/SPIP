@@ -67,8 +67,8 @@ function balise_URL__dist($p) {
 
 	$nom = $p->nom_champ;
 	if ($nom === 'URL_') {
-		erreur_squelette(_T('zbug_info_erreur_squelette'), $nom);
-		$p->code = "''";
+		$msg = array('zbug_balise_sans_argument', array('balise' => ' URL_'));
+		erreur_squelette($msg, $p);
 		$p->interdire_scripts = false;
 		return $p;
 	} elseif ($f = charger_fonction($nom, 'balise', true)) {
@@ -80,7 +80,8 @@ function balise_URL__dist($p) {
 			$code = generer_generer_url($nom, $p);
 			if ($code === NULL) return NULL;
 		}
-		$p->code = "vider_url($code)";
+		if (!$p->etoile)
+			$p->code = "vider_url($code)";
 		$p->interdire_scripts = false;
 		return $p;
 	}
@@ -106,7 +107,10 @@ function balise_URL_SITE_dist($p)
 	if (strpos($code, '@$Pile[0]') !== false) {
 		$code = generer_generer_url('site', $p);
 		if ($code === NULL) return NULL;
-	} else $code = "calculer_url($code,'','url', \$connect)";
+	} else {
+		if (!$p->etoile)
+			$code = "calculer_url($code,'','url', \$connect)";
+	}
 	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
@@ -135,9 +139,6 @@ function balise_URL_PAGE_dist($p) {
 	$args = interprete_argument_balise(2,$p);
 	if ($args != "''" && $args!==NULL)
 		$p->code .= ','.$args;
-
-	// autres filtres (???)
-	array_shift($p->param);
 
 	if ($p->id_boucle
 	AND $s = $p->boucles[$p->id_boucle]->sql_serveur) {
@@ -176,11 +177,7 @@ function balise_URL_ECRIRE_dist($p) {
 	if ($args != "''" && $args!==NULL)
 		$p->code .= ','.$args;
 
-	// autres filtres (???)
-	array_shift($p->param);
-
 	$p->code = 'generer_url_ecrire(' . $p->code .')';
-
 	#$p->interdire_scripts = true;
 	return $p;
 }
@@ -199,9 +196,8 @@ function balise_URL_ACTION_AUTEUR_dist($p) {
 
 	$p->code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
-	if (!$args)
-		$args = "''";
-	$p->code .= ",".$args;
+	if ($args != "''" && $args!==NULL)
+		$p->code .= ",".$args;
 	$redirect = interprete_argument_balise(3,$p);
 	if ($redirect != "''" && $redirect!==NULL)
 		$p->code .= ",".$redirect;

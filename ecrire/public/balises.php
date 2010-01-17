@@ -10,14 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-//
 // Ce fichier regroupe la quasi totalite des definitions de #BALISES de spip
 // Pour chaque balise, il est possible de surcharger, dans mes_fonctions,
 // la fonction balise_TOTO_dist par une fonction balise_TOTO() respectant la
 // meme API : 
 // elle recoit en entree un objet de classe CHAMP, le modifie et le retourne.
-// Cette classe est definie dans inc-compilo-index
-//
+// Cette classe est definie dans public/interfaces
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -197,11 +195,10 @@ function balise_RECHERCHE_dist($p) {
 function balise_COMPTEUR_BOUCLE_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '') {
-		erreur_squelette(
-			_T('zbug_champ_hors_boucle',
+		$msg = array('zbug_champ_hors_boucle',
 				array('champ' => '#COMPTEUR_BOUCLE')
-			), $p->id_boucle);
-		$p->code = "''";
+			  );
+		erreur_squelette($msg, $p);
 	} else {
 		$p->code = "\$Numrows['$b']['compteur_boucle']";
 		$p->boucles[$b]->cptrows = true;
@@ -214,11 +211,10 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 function balise_TOTAL_BOUCLE_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '' || !isset($p->boucles[$b])) {
-		erreur_squelette(
-			_T('zbug_champ_hors_boucle',
+		$msg = array('zbug_champ_hors_boucle',
 				array('champ' => "#$b" . 'TOTAL_BOUCLE')
-			), $p->id_boucle);
-		$p->code = "''";
+			  );
+		erreur_squelette($msg, $p);
 	} else {
 		$p->code = "\$Numrows['$b']['total']";
 		$p->boucles[$b]->numrows = true;
@@ -260,32 +256,11 @@ function balise_POPULARITE_MAX_dist($p) {
 function balise_EXPOSE_dist($p) {
 	$on = "'on'";
 	$off= "''";
-
 	if (($v = interprete_argument_balise(1,$p))!==NULL){
 		$on = $v;
 		if (($v = interprete_argument_balise(2,$p))!==NULL)
 			$off = $v;
 	
-		// autres filtres
-		array_shift($p->param);
-	}
-	return calculer_balise_expose($p, $on, $off);
-}
-
-// #EXPOSER est obsolete. utiliser #EXPOSE ci-dessus
-// http://doc.spip.org/@balise_EXPOSER_dist
-function balise_EXPOSER_dist($p)
-{
-	$on = "'on'";
-	$off= "''";
-	if ($a = ($p->fonctions)) {
-		// Gerer la notation [(#EXPOSER|on,off)]
-		$onoff = array_shift($a);
-		preg_match("#([^,]*)(,(.*))?#", $onoff[0], $regs);
-		$on = "" . sql_quote($regs[1]);
-		$off = "" . sql_quote($regs[3]) ;
-		// autres filtres
-		array_shift($p->param);
 	}
 	return calculer_balise_expose($p, $on, $off);
 }
@@ -300,7 +275,8 @@ function calculer_balise_expose($p, $on, $off)
 	$connect = sql_quote($p->boucles[$b]->sql_serveur);
 
 	if (!$key) {
-		erreur_squelette(_T('zbug_champ_hors_boucle', array('champ' => '#EXPOSER')), $b);
+		$msg = array('zbug_champ_hors_boucle', array('champ' => '#EXPOSER'));
+		erreur_squelette($msg, $p);
 	}
 
 	// Ne pas utiliser champ_sql, on jongle avec le nom boucle explicite
@@ -320,51 +296,6 @@ function calculer_balise_expose($p, $on, $off)
 	return $p;
 }
 
-//
-// Inserer directement un document dans le squelette
-// devient un alias de #MODELE{emb}
-//
-// On insere simplement un argument {emb} en debut de liste
-//
-// Attention la syntaxe est derogatoire : il faut donc attraper
-// tous les faux-filtres "|autostart=true" et les transformer
-// en arguments "{autostart=true}"
-//
-// On s'arrete au premier filtre ne contenant pas de =, afin de
-// pouvoir filtrer le resultat
-//
-// http://doc.spip.org/@balise_EMBED_DOCUMENT_dist
-function balise_EMBED_DOCUMENT_dist($p) {
-
-	if (!is_array($p->param))
-		$p->param=array();
-
-	// Produire le premier argument {emb}
-	$texte = new Texte;
-	$texte->type='texte';
-	$texte->texte='emb';
-	$param = array(0=>NULL, 1=>array(0=>$texte));
-	array_unshift($p->param, $param);
-
-	// Transformer les filtres en arguments
-	for ($i=1; $i<count($p->param); $i++) {
-		if ($p->param[$i][0]) {
-			if (!strstr($p->param[$i][0], '='))
-				break;# on a rencontre un vrai filtre, c'est fini
-			$texte = new Texte;
-			$texte->type='texte';
-			$texte->texte=$p->param[$i][0];
-			$param = array(0=>$texte);
-			$p->param[$i][1] = $param;
-			$p->param[$i][0] = NULL;
-		}
-	}
-
-	// Appeler la balise #MODELE{emb}{arguments}
-	if (!function_exists($f = 'balise_modele'))
-		$f = 'balise_modele_dist';
-	return $f($p);
-}
 
 // Debut et fin de surlignage auto des mots de la recherche
 // on insere une balise Span avec une classe sans spec:
@@ -399,7 +330,6 @@ function balise_SPIP_CRON_dist ($p) {
 	return $p;
 }
 
-
 // #INTRODUCTION
 // #INTRODUCTION{longueur}
 // http://www.spip.net/@introduction
@@ -430,7 +360,6 @@ function balise_INTRODUCTION_dist($p) {
 			case 'breves':
 				$longueur = '300';
 				break;
-			case 'forums':
 			case 'rubriques':
 			default:
 				$longueur = '600';
@@ -493,11 +422,12 @@ function balise_LESAUTEURS_dist ($p) {
 		$connect = !$p->id_boucle ? '' 
 		  : $p->boucles[$p->id_boucle]->sql_serveur;
 
-		$p->code = "recuperer_fond('modeles/lesauteurs',
-			array('id_article' => ".champ_sql('id_article', $p)
-			."), array('trim'=>true), "
-			. _q($connect)
-			.")";
+		$c = memoriser_contexte_compil($p);
+
+		$p->code = sprintf(CODE_RECUPERER_FOND, "'modeles/lesauteurs'",
+				   "array('id_article' => ".champ_sql('id_article', $p) .")",
+				   "'trim'=>true, 'compil'=>array($c)",
+				   _q($connect));
 		$p->interdire_scripts = false; // securite apposee par recuperer_fond()
 	}
 
@@ -553,77 +483,75 @@ function balise_POPULARITE_dist ($p) {
 }
 
 // #PAGINATION
-// http://www.spip.net/fr_articleXXXX.html
+// Le code produit est trompeur, car les modeles ne fournissent pas Pile[0].
+// On produit un appel a _request si on ne l'a pas, mais c'est inexact:
+// l'absence peut etre due a une faute de frappe dans le contexte inclus.
+
+define('CODE_PAGINATION', 
+	'%s($Numrows["%s"]["grand_total"],
+ 		%s,
+		isset($Pile[0][%4$s])?$Pile[0][%4$s]:intval(_request(%4$s)),
+		%5$s, %6$s, %7$s, %8$s, array(%9$s))');
+
+// http://www.spip.net/fr_article3367.html
 // http://doc.spip.org/@balise_PAGINATION_dist
 function balise_PAGINATION_dist($p, $liste='true') {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 
 	// s'il n'y a pas de nom de boucle, on ne peut pas paginer
 	if ($b === '') {
-		erreur_squelette(
-			_T('zbug_champ_hors_boucle',
-				array('champ' => '#PAGINATION')
-			), $p->id_boucle);
-		$p->code = "''";
+		$msg = array('zbug_champ_hors_boucle',
+			array('champ' => $liste ? 'PAGINATION' : 'ANCRE_PAINATION')
+			  );
+		erreur_squelette($msg, $p);
 		return $p;
 	}
 
-	// s'il n'y a pas de total_parties, c'est qu'on se trouve
+	// s'il n'y a pas de mode_partie, c'est qu'on se trouve
 	// dans un boucle recursive ou qu'on a oublie le critere {pagination}
-	if (!$p->boucles[$b]->total_parties) {
-		erreur_squelette(
-			_T('zbug_pagination_sans_critere',
-				array('champ' => '#PAGINATION')
-			), $p->id_boucle);
-		$p->code = "''";
+	if (!$p->boucles[$b]->mode_partie) {
+		if (!$p->boucles[$b]->table_optionnelle) {
+			$msg = array('zbug_pagination_sans_critere',
+					array('champ' => '#PAGINATION')
+				  );
+			erreur_squelette($msg, $p);
+		}
 		return $p;
 	}
-	// Transforme l'ecriture du deuxieme param {truc=chose,machin=chouette} en
-	// {truc=chose}{machin=chouette}... histoire de simplifier l'ecriture pour
-	// le webmestre : #MODELE{emb}{autostart=true,truc=1,chose=chouette}
-	$params = array();
-	if (isset($p->param[0]) AND $p->param[0]) {
-		while (count($p->param[0])>2){
-			array_unshift($params,array(0=>NULL,1=>array_pop($p->param[0])));
-		}
-	}
-	$__modele = interprete_argument_balise(1,$p);
-	$__modele = $__modele?", $__modele":", ''";
-	array_shift($p->param);
-	while(count($params))
-		array_unshift($p->param,array_pop($params));
-	
-	// a priori true
-	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
-	// si true, les arguments simples (sans truc=chose) vont degager
-	$code_contexte = argumenter_inclure($p->param, true, $p->descr, $p->boucles, $p->id_boucle, false);
 
-	$p->boucles[$b]->numrows = true;
+	$__modele = interprete_argument_balise(1,$p);
+	if ($p->param) {
+		$params = $p->param;
+		array_shift($params);
+		// a priori true
+		// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
+		// si true, les arguments simples (sans truc=chose) vont degager
+		$code_contexte = argumenter_inclure($params, true, $p, $p->boucles, $p->id_boucle, false);
+		$code_contexte = implode(',',$code_contexte);
+	} else $code_contexte = '';
+
 	$connect = $p->boucles[$b]->sql_serveur;
+	$pas = $p->boucles[$b]->total_parties;
 	$f_pagination = chercher_filtre('pagination');
 	$type = $p->boucles[$b]->modificateur['debut_nom'];
 	$modif = ($type[0]!=="'") ? "'debut'.$type" 
 	  : ("'debut" .substr($type,1));
-	$p->code = $f_pagination."(
-	(isset(\$Numrows['$b']['grand_total']) ?
-		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
-	), $type,
-		isset(\$Pile[0][$modif])?\$Pile[0][$modif]:intval(_request($modif)),"
-	. $p->boucles[$b]->total_parties
-	  . ", $liste$__modele," . _q($connect) 
-	  . ", array(" . implode(',',$code_contexte) . ")" 
-	  . ")";
 
+	$p->code = sprintf(CODE_PAGINATION, $f_pagination,$b, $type, $modif, $pas, $liste, ($__modele ? $__modele : "''"), _q($connect), $code_contexte);
+
+	$p->boucles[$b]->numrows = true;
 	$p->interdire_scripts = false;
 	return $p;
 }
+
 
 // N'afficher que l'ancre de la pagination (au-dessus, par exemple, alors
 // qu'on mettra les liens en-dessous de la liste paginee)
 // http://doc.spip.org/@balise_ANCRE_PAGINATION_dist
 function balise_ANCRE_PAGINATION_dist($p) {
-	$p = balise_PAGINATION_dist($p, $liste='false');
-	return $p;
+	if ($f = charger_fonction('PAGINATION', 'balise', true))
+		return $f($p, $liste='false');
+	else return NULL; // ou une erreur ?
 }
 
 // equivalent a #TOTAL_BOUCLE sauf pour les boucles paginees, ou elle
@@ -632,11 +560,10 @@ function balise_ANCRE_PAGINATION_dist($p) {
 function balise_GRAND_TOTAL_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '' || !isset($p->boucles[$b])) {
-		erreur_squelette(
-			_T('zbug_champ_hors_boucle',
+		$msg = array('zbug_champ_hors_boucle',
 				array('champ' => "#$b" . 'TOTAL_BOUCLE')
-			), $p->id_boucle);
-		$p->code = "''";
+			   );
+		erreur_squelette($msg, $p);
 	} else {
 		$p->code = "(isset(\$Numrows['$b']['grand_total'])
 			? \$Numrows['$b']['grand_total'] : \$Numrows['$b']['total'])";
@@ -645,90 +572,6 @@ function balise_GRAND_TOTAL_dist($p) {
 	}
 	return $p;
 }
-
-//
-// Parametres de reponse a un forum
-//
-
-// http://doc.spip.org/@balise_PARAMETRES_FORUM_dist
-function balise_PARAMETRES_FORUM_dist($p) {
-	$_id_article = champ_sql('id_article', $p);
-	$p->code = '
-		// refus des forums ?
-		(quete_accepter_forum('.$_id_article.')=="non" OR
-		($GLOBALS["meta"]["forums_publics"] == "non"
-		AND quete_accepter_forum('.$_id_article.') == ""))
-		? "" : // sinon:
-		';
-	// pas de calculs superflus si le site est monolingue
-	$lang = strpos($GLOBALS['meta']['langues_utilisees'], ',');
-
-	switch ($p->type_requete) {
-		case 'articles':
-			$c = '"id_article=".' . champ_sql('id_article', $p);
-			if ($lang) $lang = champ_sql('lang', $p);
-			break;
-		case 'breves':
-			$c = '"id_breve=".' . champ_sql('id_breve', $p);
-			if ($lang) $lang = champ_sql('lang', $p);
-			break;
-		case 'rubriques':
-			$c = '"id_rubrique=".' . champ_sql('id_rubrique', $p);
-			if ($lang) $lang = champ_sql('lang', $p);
-			break;
-		case 'syndication':
-		case 'syndic':
-			// passer par la rubrique pour avoir un champ Lang
-			// la table syndic n'en ayant pas
-			$c =  '"id_syndic=".' . champ_sql('id_syndic', $p);
-			if ($lang) $lang = 'sql_getfetsel("lang", "spip_rubriques", ("id_rubrique=" . intval("' . champ_sql('id_rubrique', $p) . '")))';
-			break;
-		case 'forums':
-		default:
-		// ATTENTION mettre 'id_rubrique' avant 'id_syndic':
-		// a l'execution  lang_parametres_forum
-		// y cherchera l'identifiant  donnant la langue
-		// et pour id_syndic c'est id_rubrique car sa table n'en a pas
-		  
-			$liste_table = array ("article","breve","rubrique","syndic","forum");
-			$c = '';
-			$tables = array();
-			foreach ($liste_table as $t) {
-				$champ = 'id_' . $t;
-				$x = champ_sql($champ, $p);
-				$c .= (($c) ? ".\n" : "") . "((!$x) ? '' : ('&$champ='.$x))";
-				if ($lang AND $t!='forum') $tables[]= 
-				  "'$champ' => '" . table_objet_sql($t) . "'";
-			}
-			$c = "substr($c,1)";
-
-			if ($lang)
-				$lang = "array(" . join(",",$tables) .")";
-			break;
-	}
-
-	if ($lang) $c = "lang_parametres_forum($c,$lang)";
-
-	// Syntaxe [(#PARAMETRES_FORUM{#SELF})] pour fixer le retour du forum
-	# note : ce bloc qui sert a recuperer des arguments calcules pourrait
-	# porter un nom et faire partie de l'API.
-	$retour = interprete_argument_balise(1,$p);
-	if ($retour===NULL)
-		$retour = "''";
-
-	// Attention un eventuel &retour=xxx dans l'URL est prioritaire
-	$c .= '.
-	(($lien = (_request("retour") ? _request("retour") : str_replace("&amp;", "&", '.$retour.'))) ? "&retour=".rawurlencode($lien) : "")';
-
-	// Ajouter le code d'invalideur specifique a cette balise
-	include_spip('inc/invalideur');
-	if (function_exists($i = 'code_invalideur_forums'))
-		$p->code .= $i($p, '('.$c.')');
-
-	$p->interdire_scripts = false;
-	return $p;
-}
-
 
 // Reference a l'URL de la page courante
 // Attention dans un INCLURE() ou une balise dynamique on n'a pas le droit de
@@ -742,7 +585,6 @@ function balise_SELF_dist($p) {
 	return $p;
 }
 
-
 //
 // #CHEMIN{fichier} -> find_in_path(fichier)
 //
@@ -750,12 +592,21 @@ function balise_SELF_dist($p) {
 function balise_CHEMIN_dist($p) {
 	$arg = interprete_argument_balise(1,$p);
 	if (!$arg) {
-		erreur_squelette(_T('zbug_balise_sans_argument', 
-					array('balise' => ' CHEMIN')),
-			$p->id_boucle);
-		$p->code = "''";
+		$msg = array('zbug_balise_sans_argument',	array('balise' => ' CHEMIN'));
+		erreur_squelette($msg, $p);
 	} else 
 	  $p->code = 'find_in_path(' . $arg .')';
+
+	#$p->interdire_scripts = true;
+	return $p;
+}
+
+function balise_CHEMIN_IMAGE_dist($p) {
+	$arg = interprete_argument_balise(1,$p);
+	if (!$arg) {
+		$msg = array('zbug_balise_sans_argument', array('balise' => ' CHEMIN_IMAGE'));
+		erreur_squelette($msg, $p);
+	} else $p->code = 'chemin_image(' . $arg .')';
 
 	#$p->interdire_scripts = true;
 	return $p;
@@ -851,7 +702,10 @@ function balise_SESSION_dist($p) {
 function balise_SESSION_SET_dist($p) {
 	$_nom = interprete_argument_balise(1,$p);
 	$_val = interprete_argument_balise(2,$p);
-	$p->code = '(include_spip("inc/session") AND session_set('.$_nom.','.$_val.'))';
+	if (!$_nom OR !$_val) {
+		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'SESSION_SET'));
+		erreur_squelette($err_b_s_a, $p);
+	} else 	$p->code = '(include_spip("inc/session") AND session_set('.$_nom.','.$_val.'))';
 
 	$p->interdire_scripts = false;
 
@@ -882,8 +736,10 @@ function balise_EVAL_dist($p) {
 			$p->code = /* $r[1]. */'('.$r[2].')';
 		else
 			$p->code = "eval('return '.$php.';')";
-	} else
-		$p->code = '';
+	} else {
+		$msg = array('zbug_balise_sans_argument', array('balise' => ' EVAL'));
+		erreur_squelette($msg, $p);
+	}
 
 	#$p->interdire_scripts = true;
 
@@ -896,11 +752,15 @@ function balise_EVAL_dist($p) {
 // ne permet pas de passer une expression pour x qui ne peut etre qu'un texte statique !
 // http://doc.spip.org/@balise_CHAMP_SQL_dist
 function balise_CHAMP_SQL_dist($p){
-	$p->code = '';
-	if (isset($p->param[0][1][0])
+
+	if ($p->param
+	AND isset($p->param[0][1][0])
 	AND $champ = ($p->param[0][1][0]->texte))
 		$p->code = champ_sql($champ, $p);
-
+	else {
+		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => ' URL_'));
+		erreur_squelette($err_b_s_a, $p);
+	}
 	#$p->interdire_scripts = true;
 	return $p;
 }
@@ -941,7 +801,10 @@ function balise_REM_dist($p) {
 function balise_HTTP_HEADER_dist($p) {
 
 	$header = interprete_argument_balise(1,$p);
-	$p->code = "'<'.'?php header(\"' . "
+	if (!$header) {
+		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'HTTP_HEADER'));
+		erreur_squelette($err_b_s_a, $p);
+	} else 	$p->code = "'<'.'?php header(\"' . "
 		. $header
 		. " . '\"); ?'.'>'";
 	$p->interdire_scripts = false;
@@ -978,42 +841,45 @@ function balise_FILTRE_dist($p) {
 //  cf. ecrire/public/cacher.php
 // http://doc.spip.org/@balise_CACHE_dist
 function balise_CACHE_dist($p) {
-	$duree = valeur_numerique($p->param[0][1][0]->texte);
 
-	// noter la duree du cache dans un entete proprietaire
-	$p->code .= '\'<'.'?php header("X-Spip-Cache: '
+	if ($p->param) {
+		$duree = valeur_numerique($p->param[0][1][0]->texte);
+
+		// noter la duree du cache dans un entete proprietaire
+
+		$code = '\'<'.'?php header("X-Spip-Cache: '
 		. $duree
 		. '"); ?'.'>\'';
 
-	// Remplir le header Cache-Control
-	// cas #CACHE{0}
-	if ($duree == 0)
-		$p->code .= '.\'<'
-		.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
-		.'><'
-		.'?php header("Pragma: no-cache"); ?'
-		.'>\'';
+		// Remplir le header Cache-Control
+		// cas #CACHE{0}
+		if ($duree == 0)
+			$code .= '.\'<'
+			.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
+			.'><'
+			.'?php header("Pragma: no-cache"); ?'
+			.'>\'';
 
-	// recuperer les parametres suivants
-	$i = 1;
-	while (isset($p->param[0][++$i])) {
-		$pa = ($p->param[0][$i][0]->texte);
+		// recuperer les parametres suivants
+		$i = 1;
+		while (isset($p->param[0][++$i])) {
+			$pa = ($p->param[0][$i][0]->texte);
 
-		if ($pa == 'cache-client'
-		AND $duree > 0) {
-			$p->code .= '.\'<'.'?php header("Cache-Control: max-age='
+			if ($pa == 'cache-client'
+			AND $duree > 0) {
+				$code .= '.\'<'.'?php header("Cache-Control: max-age='
 				. $duree
 				. '"); ?'.'>\'';
 			// il semble logique, si on cache-client, de ne pas invalider
-			$pa = 'statique';
+				$pa = 'statique';
+			}
+
+			if ($pa == 'statique'
+			AND $duree > 0)
+				$code .= '.\'<'.'?php header("X-Spip-Statique: oui"); ?'.'>\'';
 		}
-
-		if ($pa == 'statique'
-		AND $duree > 0)
-			$p->code .= '.\'<'.'?php header("X-Spip-Statique: oui"); ?'.'>\'';
-
-	}
-
+	} else $code = "''";
+	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -1047,16 +913,27 @@ function balise_INCLUDE_dist($p) {
 	else
 		return balise_INCLURE_dist($p);
 }
-
 // http://doc.spip.org/@balise_INCLURE_dist
 function balise_INCLURE_dist($p) {
 	$id_boucle = $p->id_boucle;
 	// la lang n'est pas passe de facon automatique par argumenter
 	// mais le sera pas recuperer_fond, sauf si etoile=>true est passe
 	// en option
-	$_contexte = argumenter_inclure($p->param, true, $p->descr, $p->boucles, $id_boucle, false, false);
+
+	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $id_boucle, false, false);
+
+	// erreur de syntaxe = fond absent 
+	// (2 messages d'erreur SPIP pour le prix d'un, mais pas d'erreur PHP
+	if (!$_contexte) $contexte = array(); 
 
 	if (isset($_contexte['fond'])) {
+
+		$f = $_contexte['fond'];
+		// toujours vrai :
+		if (preg_match('/^.fond.\s*=>(.*)$/s', $f, $r)) {
+			$f = $r[1];
+			unset($_contexte['fond']);
+		} else spip_log("compilation de #INCLURE a revoir");
 
 		// #INCLURE{doublons}
 		if (isset($_contexte['doublons'])) {
@@ -1071,21 +948,22 @@ function balise_INCLURE_dist($p) {
 			unset($_contexte['env']);
 		} else $flag_env = false;
 
+		$_options = array();
+		if (isset($_contexte['ajax'])) {
+			$_options[] = "'ajax'=>true";
+			unset($_contexte['ajax']);
+		}
+		if ($p->etoile) $_options[] = "'etoile'=>true";
+		$_options[] = "'compil'=>array(" . memoriser_contexte_compil($p) .")";
+
 		$_l = 'array(' . join(",\n\t", $_contexte) .')';
 		if ($flag_env) $_l = "array_merge(\$Pile[0],$_l)";
 
-		$_options = array();
-		if (isset($_contexte['ajax'])) $_options[] = "'ajax'=>true";
-		if ($p->etoile) $_options[] = "'etoile'=>true";
-		$_options = "array(" . join(',',$_options) . ")";
-		
-		$p->code = "recuperer_fond('', $_l, $_options)";
+		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',',$_options),"''");
 
 	} elseif (!isset($_contexte[1])) {
-			erreur_squelette(_T('zbug_balise_sans_argument', 
-					array('balise' => ' INCLURE')),
-			$p->id_boucle);
-			$p->code = "''";
+			$msg = array('zbug_balise_sans_argument', array('balise' => ' INCLURE'));
+			erreur_squelette($msg, $p);
 	} else 		$p->code = '(($c = find_in_path(' . $_contexte[1] . ')) ? spip_file_get_contents($c) : "")';
 
 	$p->interdire_scripts = false; // la securite est assuree par recuperer_fond
@@ -1095,35 +973,44 @@ function balise_INCLURE_dist($p) {
 // Inclure un modele : #MODELE{modele, params}
 // http://doc.spip.org/@balise_MODELE_dist
 function balise_MODELE_dist($p) {
-	$_contexte = argumenter_inclure($p->param, true, $p->descr, $p->boucles, $p->id_boucle, false);
+
+	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $p->id_boucle, false);
+
+	// erreur de syntaxe = fond absent 
+	// (2 messages d'erreur SPIP pour le prix d'un, mais pas d'erreur PHP
+	if (!$_contexte) $contexte = array(); 
 
 	if (!isset($_contexte[1])) {
-			erreur_squelette(_T('zbug_balise_sans_argument',
-					array('balise' => ' MODELE')),
-			$p->id_boucle);
-			$p->code = "''";
+		$msg = array('zbug_balise_sans_argument', array('balise' => ' MODELE'));
+		erreur_squelette($msg, $p);
 	} else {
 		$nom = $_contexte[1];
 		unset($_contexte[1]);
 
+		if (preg_match("/^\s*'[^']*'/s", $nom))
+			$nom = "'modeles/" . substr($nom,1);
+		else $nom = "'modeles/' . $nom";
+
 		// Incoherence dans la syntaxe du contexte. A revoir.
 		// Reserver la cle primaire de la boucle courante si elle existe
-		if ($idb = $p->id_boucle) {
-			if ($primary = $p->boucles[$idb]->primary
-			AND !strpos($primary,',')) {
+		if (isset($p->boucles[$p->id_boucle]->primary)) {
+			$primary = $p->boucles[$p->id_boucle]->primary;
+			if (!strpos($primary,',')) {
 				$id = champ_sql($primary, $p);
 				$_contexte[] = "'$primary'=>".$id;
 				$_contexte[] = "'id'=>".$id;
 			}
 		}
-
+		$_contexte[] = "'recurs'=>(++\$recurs)";
 		$connect = '';
 		if (isset($p->boucles[$p->id_boucle]))
 			$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 
-		$page = "recuperer_fond('modeles/' . $nom, array(".join(',', $_contexte).",'recurs'=>(++\$recurs)), array('trim'=>true, 'modele'=>true"
-	. (isset($_contexte['ajax'])?", 'ajax'=>true":'')
-	. "), " . _q($connect) . ")";
+		$_options = memoriser_contexte_compil($p);
+		$_options = "'compil'=>array($_options), 'trim'=>true"
+		  . (isset($_contexte['ajax'])?", 'ajax'=>true":'');
+
+		$page = sprintf(CODE_RECUPERER_FOND, $nom, 'array(' . join(',', $_contexte) .')', $_options, _q($connect));
 
 		$p->code = "\n\t(((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))>=5)? '' :\n\t$page)\n";
 
@@ -1141,12 +1028,12 @@ function balise_MODELE_dist($p) {
 // http://doc.spip.org/@balise_SET_dist
 function balise_SET_dist($p){
 	$_nom = interprete_argument_balise(1,$p);
-	$_valeur = interprete_argument_balise(2,$p);
+	$_val = interprete_argument_balise(2,$p);
 
-	if ($_nom AND $_valeur)
-		$p->code = "vide(\$Pile['vars'][$_nom] = $_valeur)";
-	else
-		$p->code = "''";
+	if (!$_nom OR !$_val) {
+		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'SET'));
+		erreur_squelette($err_b_s_a, $p);
+	} else 	$p->code = "vide(\$Pile['vars'][$_nom] = $_val)";
 
 	$p->interdire_scripts = false; // la balise ne renvoie rien
 	return $p;
@@ -1166,6 +1053,33 @@ function balise_GET_dist($p) {
 		return balise_ENV_dist($p, '$Pile["vars"]');
 }
 
+
+// #DOUBLONS{mots} ou #DOUBLONS{mots,famille}
+// donne l'etat des doublons (MOTS) a cet endroit
+// sous forme de tableau d'id_mot  array(1,2,3,...)
+// #DOUBLONS tout seul donne la liste brute de tous les doublons
+// #DOUBLONS*{mots} donne la chaine brute ",1,2,3,..."
+// (changera si la gestion des doublons evolue)
+//
+// http://doc.spip.org/@balise_DOUBLONS_dist
+function balise_DOUBLONS_dist($p) {
+	if ($type = interprete_argument_balise(1,$p)) {
+		if ($famille = interprete_argument_balise(2,$p))
+			$type .= '.' . $famille;
+		$p->code = '$doublons['.$type.']';
+		if (!$p->etoile)
+			$p->code = 'array_filter(array_map("intval",explode(",",'
+				. $p->code . ')))';
+	}
+	else
+		$p->code = '$doublons';
+
+	$p->interdire_scripts = false;
+
+	return $p;
+}
+
+
 //
 // #PIPELINE
 // pour permettre aux plugins d'inserer des sorties de pipeline dans un squelette
@@ -1175,10 +1089,15 @@ function balise_GET_dist($p) {
 // http://doc.spip.org/@balise_PIPELINE_dist
 function balise_PIPELINE_dist($p) {
 	$_pipe = interprete_argument_balise(1,$p);
-	$_flux = interprete_argument_balise(2,$p);
-	$_flux = $_flux?$_flux:"''";
-	$p->code = "pipeline( $_pipe , $_flux )";
-	$p->interdire_scripts = false;
+	if (!$_pipe) {
+		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'PIPELINE'));
+		erreur_squelette($err_b_s_a, $p);
+	} else {
+		$_flux = interprete_argument_balise(2,$p);
+		$_flux = $_flux?$_flux:"''";
+		$p->code = "pipeline( $_pipe , $_flux )";
+		$p->interdire_scripts = false;
+	}
 	return $p;
 }
 
@@ -1213,7 +1132,7 @@ function balise_TOTAL_UNIQUE_dist($p) {
 //
 // #ARRAY
 // pour creer un array php a partir d'arguments calcules
-// #ARRAY{key1,val1,key2,val2 ...} returne array(key1=>val1,...)
+// #ARRAY{key1,val1,key2,val2 ...} retourne array(key1=>val1,...)
 //
 // http://doc.spip.org/@balise_ARRAY_dist
 function balise_ARRAY_dist($p) {
@@ -1243,7 +1162,7 @@ function balise_FOREACH_dist($p) {
 		$_modele = interprete_argument_balise(2,$p);
 		$_modele = str_replace("'", "", strtolower($_modele));
 		$__modele = 'foreach_'.strtolower($_tableau);
-		$_modele = (!$_modele AND find_in_path('modeles/'.$__modele.'.html')) ?
+		$_modele = (!$_modele AND trouve_modele($__modele)) ?
 			$__modele : 
 			($_modele ? $_modele : 'foreach');
 
@@ -1257,11 +1176,8 @@ function balise_FOREACH_dist($p) {
 	}
 	//On a pas trouve la balise correspondant au tableau a traiter
 	else {
-		erreur_squelette(
-						 _T('zbug_balise_inexistante',array('from'=>'#FOREACH','balise'=>$_tableau)),
-			$p->id_boucle
-		);
-		$p->code = "''";
+		$msg = array('zbug_balise_inexistante',array('from'=>'#FOREACH','balise'=>$_tableau));
+		erreur_squelette($msg, $p);
 	}
 	return $p;
 }
@@ -1301,8 +1217,9 @@ function balise_PLUGIN_dist($p) {
 // http://doc.spip.org/@balise_AIDER_dist
 function balise_AIDER_dist($p) {
 	$_motif = interprete_argument_balise(1,$p);
+	$s = "'" . addslashes($p->descr['sourcefile']) . "'";
 	$aider = charger_fonction('aider','inc');
-	$p->code = "((\$aider=charger_fonction('aider','inc'))?\$aider($_motif):'')";
+	$p->code = "((\$aider=charger_fonction('aider','inc'))?\$aider($_motif,$s, \$Pile[0]):'')";
 	return $p;
 }
 
@@ -1312,7 +1229,9 @@ function balise_AIDER_dist($p) {
 function balise_ACTION_FORMULAIRE($p){
 	$_url = interprete_argument_balise(1,$p);
 	if (!$_form = interprete_argument_balise(2,$p)){
-		$_form = "'".addslashes(basename($p->descr['sourcefile'],'.html'))."'";
+		$f = $p->descr['sourcefile'];
+		$f = basename($f, '.'  . _EXTENSION_SQUELETTES);
+		$_form = "'".addslashes($f)."'";
 	}
 	$p->code = "";
 
@@ -1329,6 +1248,38 @@ function balise_ACTION_FORMULAIRE($p){
 	if (strlen($p->code))
 		$p->code = "'<div>'" . $p->code . " . '</div>'";
 	$p->interdire_scripts = false;
+	return $p;
+}
+
+/**
+ * Generer un bouton d'action en post, ajaxable
+ * a utiliser a la place des liens action_auteur, sous la forme
+ * #BOUTON_ACTION{libelle,url}
+ * ou
+ * #BOUTON_ACTION{libelle,url,ajax} pour que l'action soit ajax comme un lien class='ajax'
+ *
+ * @param unknown_type $p
+ * @return unknown
+ */
+function balise_BOUTON_ACTION_dist($p){
+	
+	$_label = interprete_argument_balise(1,$p);
+	if (!$_label) $_label="''";
+	$_url = interprete_argument_balise(2,$p);
+	if (!$_url) $_url="''";
+
+	$_class = interprete_argument_balise(3,$p);
+	if (!$_class) $_class="''";
+
+	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.$_url.'\'><span>'.form_hidden($_url).'<input type=\'submit\' class=\'submit\' value=\''.$_label.'\' /></span></form>'";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+
+function balise_SLOGAN_SITE_SPIP_dist($p) {
+	$p->code = "\$GLOBALS['meta']['slogan_site']";
+	#$p->interdire_scripts = true;
 	return $p;
 }
 

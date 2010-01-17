@@ -21,15 +21,16 @@ function balise_FORMULAIRE_SITE ($p) {
 }
 
 // http://doc.spip.org/@balise_FORMULAIRE_SITE_stat
-function balise_FORMULAIRE_SITE_stat($args, $filtres) {
+function balise_FORMULAIRE_SITE_stat($args, $context_compil) {
 
-	// Pas d'id_rubrique ? Erreur de squelette
-	if (!$args[0])
-		return erreur_squelette(
-			_T('zbug_champ_hors_motif',
-				array ('champ' => '#FORMULAIRE_SITE',
-					'motif' => 'RUBRIQUES')), '');
-
+	// Pas d'id_rubrique ? Erreur de contexte
+	if (!$args[0]) {
+		$msg = array('zbug_champ_hors_motif',
+				array ('champ' => 'FORMULAIRE_SITE',
+					'motif' => 'RUBRIQUES'));
+		erreur_squelette($msg, $context_compil);
+		return '';
+	}
 	// Verifier que les visisteurs sont autorises a proposer un site
 
 	return (($GLOBALS['meta']["proposer_sites"] != 2) ? '' : $args);

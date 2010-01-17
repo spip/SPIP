@@ -394,6 +394,17 @@ function test_espace_prive() {
 	return defined('_ESPACE_PRIVE') ? _ESPACE_PRIVE : false;
 }
 
+/**
+ * Verifie la presence d'un plugin active, identifie par son prefix
+ *
+ *
+ * @param string $plugin
+ * @return bool
+ */
+function test_plugin_actif($plugin){
+	return ($plugin AND defined('_DIR_PLUGIN_'.strtoupper($plugin)))? true:false;
+}
+
 //
 // Traduction des textes de SPIP
 //
@@ -1307,6 +1318,8 @@ function spip_initialisation_suite() {
 	define('_CACHE_RUBRIQUES', _DIR_TMP.'menu-rubriques-cache.txt');
 	define('_CACHE_RUBRIQUES_MAX', 500);
 
+	define('_EXTENSION_SQUELETTES', 'html');
+
 	define('_DOCTYPE_ECRIRE',
 		// "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
 		//"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n");
@@ -1620,6 +1633,14 @@ function exec_info_dist() {
 		echo "pas admin";
 }
 
+function erreur_squelette($message='', $lieu='') {
+	$debusquer = charger_fonction('debusquer', 'public');
+	if (is_array($lieu)) {
+		include_spip('public/compiler');
+		$lieu = reconstruire_contexte_compil($lieu);
+	}
+	return $debusquer($message, $lieu);
+}
 
 /**
  * La fonction de base de SPIP : un squelette + un contexte => une page.
@@ -1698,6 +1719,11 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		return is_array($fond)?$pages:reset($pages);
 	else
 		return $options['trim'] ? ltrim($texte) : $texte;
+}
+
+function trouve_modele($nom)
+{
+	return find_in_path( 'modeles/' . $nom.'.'. _EXTENSION_SQUELETTES);
 }
 
 // Charger dynamiquement une extension php

@@ -164,9 +164,10 @@ function calculer_champ($p) {
 // Pour une balise nommmee NOM, elle demande a charger_fonction de chercher
 // s'il existe une fonction balise_NOM ou balise_NOM_dist
 // eventuellement en chargeant le fichier balise/NOM.php.
-// Si ce n'est pas le cas, hormis le cas historique des balise LOGO_*,
-// elle estime que c'est une reference a une colonne de table connue.
-// Les surcharges via charger_fonction sont donc possibles.
+// Si la balise est de la forme PREFIXE_SUFFIXE (cf LOGO_* et URL_*)
+// elle fait de meme avec juste le PREFIXE.
+// Si pas de fonction, c'est une reference a une colonne de table SQL connue.
+// Les surcharges des colonnes SQL via charger_fonction sont donc possibles.
 
 // http://doc.spip.org/@calculer_balise
 function calculer_balise($nom, $p) {
@@ -185,6 +186,13 @@ function calculer_balise($nom, $p) {
 		if ($res !== NULL)
 			return $res;
 	}
+
+	$f = charger_fonction('DEFAUT', 'calculer_balise');
+
+	return $f($nom, $p);
+}
+
+function calculer_balise_DEFAUT_dist($nom, $p) {
 
 	// ca pourrait etre un champ SQL homonyme,
 	$p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
@@ -219,61 +227,48 @@ function calculer_balise($nom, $p) {
 
 //
 // Traduction des balises dynamiques, notamment les "formulaire_*"
-// Inclusion du fichier associe a son nom.
-// Ca donne les arguments a chercher dans la pile,on compile leur localisation
-// Ensuite on delegue a une fonction generale definie dans executer_squelette
-// qui recevra a l'execution la valeur des arguments, 
-// ainsi que les pseudo filtres qui ne sont donc pas traites a la compil
-// mais on traite le vrai parametre si present.
+// Inclusion du fichier associe a son nom, qui contient la fonction homonyme
+// donnant les arguments a chercher dans la pile, et qui sont donc compiles.
+// On leur adjoint les arguments explicites de la balise (cf #LOGIN{url})
+// et d'eventuelles valeurs transmises d'autorite par la balise.
+// (cf http://trac.rezo.net/trac/spip/ticket/1728)
+// La fonction nommee ci-dessous recevra a l'execution la valeur de tout ca.
+
+define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
+	array(%s%s),
+	array(%s%s))");
 
 // http://doc.spip.org/@calculer_balise_dynamique
-function calculer_balise_dynamique($p, $nom, $l) {
+function calculer_balise_dynamique($p, $nom, $l, $supp=array()) {
 
 	if (!balise_distante_interdite($p)) {
 		$p->code = "''";
 		return $p;
 	}
-	$param = "";
-	if ($a = $p->param) {
-		$c = array_shift($a);
-		if  (!array_shift($c)) {
-		  $p->fonctions = $a;
-		  array_shift( $p->param );
-		  $param = compose_filtres_args($p, $c, ',');
-		}
-	}
-	$collecte = join(',',collecter_balise_dynamique($l, $p, $nom));
-	$p->code = "executer_balise_dynamique('" . $nom . "',\n\tarray("
-	  . $collecte
-	  . ($collecte ? $param : substr($param,1)) # virer la virgule
-	  . "),\n\tarray("
-	  . argumenter_balise($p->param, "', '")
-	  . "), \$GLOBALS['spip_lang'],"
-	  . $p->ligne
-	  . ')';
+
+	if ($p->param AND ($c = $p->param[0])) {
+		// liste d'arguments commence toujours par la chaine vide
+		array_shift($c);
+		// construire la liste d'arguments comme pour un filtre
+		$param = compose_filtres_args($p, $c, ',');
+	} else	$param = "";
+	$collecte = collecter_balise_dynamique($l, $p, $nom);
+
+	$p->code = sprintf(CODE_EXECUTER_BALISE, $nom,
+		join(',', $collecte),
+		($collecte ? $param : substr($param,1)), # virer la virgule
+		memoriser_contexte_compil($p),
+		(!$supp ? '' : (', ' . join(',', $supp))));
+
 	$p->interdire_scripts = false;
-	$p->fonctions = array();
-	$p->param = array();
-
 	return $p;
-}
-
-// les balises dynamiques et EMBED ont des filtres sans arguments
-// car en fait ce sont des arguments pas des filtres.
-// Si le besoin s'en fait sentir, il faudra recuperer la 2e moitie du tableau
-
-// http://doc.spip.org/@argumenter_balise
-function argumenter_balise($fonctions, $sep) {
-	$res = array();
-	if ($fonctions)
-		foreach ($fonctions as $f)
-			$res[] = str_replace('\'', '\\\'', str_replace('\\', '\\\\',$f[0]));
-	return ("'" . join($sep, $res) . "'");
 }
 
 // Construction du tableau des arguments d'une balise dynamique.
 // Ces arguments peuvent etre eux-meme des balises (cf FORMULAIRE_SIGNATURE)
 // mais gare au bouclage (on peut s'aider de $nom pour le reperer au besoin)
+// En revanche ils n'ont pas de filtres, donc on appelle calculer_balise qui
+// ne s'occupe pas de ce qu'il y a dans $p (mais qui va y ecrire le code)
 
 // http://doc.spip.org/@collecter_balise_dynamique
 function collecter_balise_dynamique($l, &$p, $nom) {
@@ -306,7 +301,6 @@ function balise_distante_interdite($p) {
 // http://doc.spip.org/@champs_traitements
 function champs_traitements ($p) {
 	global $table_des_traitements;
-	static $test_doublons = array();
 
 	if (!isset($table_des_traitements[$p->nom_champ]))
 		return $p->code;
@@ -318,29 +312,25 @@ function champs_traitements ($p) {
 			$type = $p->boucles[$p->nom_boucle]->type_requete;
 		else
 			$type = $p->type_requete;
-		$ps = $ps[isset($ps[$type]) ? $type : 0];
+		// le traitement peut n'etre defini que pour une table en particulier
+		if (isset($ps[$type]))
+			$ps = $ps[$type];
+		elseif(isset($ps[0]))
+			$ps = $ps[0];
+		else $ps=false;
 	}
 
 	if (!$ps) return $p->code;
-
 
 	// Si une boucle DOCUMENTS{doublons} est presente dans le squelette,
 	// ou si in INCLURE contient {doublons}
 	// on insere une fonction de remplissage du tableau des doublons 
 	// dans les filtres propre() ou typo()
 	// (qui traitent les raccourcis <docXX> referencant les docs)
-	// NB: le test permet d'eviter ce calcul quand on sait qu'il ne servira pas
-	// un test plus complexe que la simple presence de {doublons ne peut etre realise par preg_match
-	// mais necessite de parser le squelette
-	// ex : <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {extension IN jpg,gif,png}{largeur>=200}{hauteur>120} {par num titre, date} {doublons}>
-	// peut etre faut il inserer ici la fonction betement, dans le compilateur lever un flag si elle est effectivement necessaire
-	// et in fine, remplacer dansle squelette calcule 'traiter_doublons_documents' par 'ne_pas_traiter_doublons_documents' si elle n'est pas utile ?
-	if (!isset($test_doublons[$p->descr['sourcefile']]))
-		$test_doublons[$p->descr['sourcefile']]
-			= (strpos($p->descr['squelette'],'{doublons')!==false);
-			#preg_match(',([<#]INCLU[RD]E|DOCUMENTS)([^<>]*?{[^}]*})*{doublons,',$p->descr['squelette']);
 
-	if ($test_doublons[$p->descr['sourcefile']]
+	if (isset($p->descr['documents']) 
+	AND 
+	  $p->descr['documents']
 	AND (
 		(strpos($ps,'propre') !== false)
 		OR
@@ -348,16 +338,16 @@ function champs_traitements ($p) {
 	))
 		$ps = 'traiter_doublons_documents($doublons, '.$ps.')';
 
-
 	// Passer |safehtml sur les boucles "sensibles"
 	// sauf sur les champs dont on est surs
+	// ces exceptions doivent etre ventilees dans les plugins fonctionnels concernes
+	// dans la globale table_des_traitements
 	switch ($p->type_requete) {
-		case 'forums':
 		case 'signatures':
 		case 'syndic_articles':
 			$champs_surs = array(
-			'date', 'date_heure', 'statut', 'ip', 'url_article', 'maj', 'idx',
-			'parametres_forum');
+			'date', 'date_heure', 'statut', 'ip', 'url_article', 'maj', 'idx'
+			);
 			if (!in_array(strtolower($p->nom_champ), $champs_surs)
 			AND !preg_match(',^ID_,', $p->nom_champ))
 				$ps = 'safehtml('.$ps.')';
@@ -397,89 +387,59 @@ function applique_filtres($p) {
 
 	// Securite
 	if ($p->interdire_scripts
-	AND $p->etoile != '**')
-		$code = "interdire_scripts($code)";
-
+	AND $p->etoile != '**') {
+		if (!preg_match("/^sinon[(](.*),'([^']*)'[)]$/", $code, $r))
+			$code = "interdire_scripts($code)";
+		else {
+		  $code = interdire_scripts($r[2]);
+		  $code = "sinon(interdire_scripts($r[1]),'$code')";
+		}
+	}
 	return $code;
 }
 
 // Cf. function pipeline dans ecrire/inc_utils.php
 // http://doc.spip.org/@compose_filtres
 function compose_filtres(&$p, $code) {
-	global $table_criteres_infixes;
 
 	$image_miette = false;
 	foreach($p->param as $filtre) {
 		$fonc = array_shift($filtre);
-		if ($fonc) {
-			$is_filtre_image = ((substr($fonc,0,6)=='image_') AND $fonc!='image_graver');
-			if ($image_miette AND !$is_filtre_image){
+		if (!$fonc) continue; // normalement qu'au premier tour.
+		$is_filtre_image = ((substr($fonc,0,6)=='image_') AND $fonc!='image_graver');
+		if ($image_miette AND !$is_filtre_image){
 	// il faut graver maintenant car apres le filtre en cours
 	// on est pas sur d'avoir encore le nom du fichier dans le pipe
-				$code = "filtrer('image_graver', $code)";
-				$image_miette = false;
+			$code = "filtrer('image_graver', $code)";
+			$image_miette = false;
+		}
+		// recuperer les arguments du filtre, 
+		// a separer par "," ou ":" dans le cas du filtre "?{a,b}"
+		if ($fonc !== '?') {
+			$sep = ',';
+		} else {$sep = ':';
+			// |?{a,b} *doit* avoir exactement 2 arguments ; on les force
+			if (count($filtre) != 2)
+				$filtre = array(isset($filtre[0])?$filtre[0]:"", isset($filtre[1])?$filtre[1]:"");
+		}
+		$arglist = compose_filtres_args($p, $filtre, $sep);
+		$logique = filtre_logique($fonc, $code, substr($arglist,1));
+		if ($logique)
+			$code = $logique;
+		else {
+			if (isset($GLOBALS['spip_matrice'][$fonc])) {
+				$code = "filtrer('$fonc',$code$arglist)";
+				if ($is_filtre_image) $image_miette = true;
 			}
 
-			// recuperer les arguments du filtre, les separer par des virgules
-			// dans le cas du filtre "?{a,b}", on demande un ":"
-			if ($fonc == '?') {
-				// |?{a,b} *doit* avoir exactement 2 arguments ; on les force
-				if (count($filtre) != 2)
-					$filtre = array(isset($filtre[0])?$filtre[0]:"", isset($filtre[1])?$filtre[1]:"");
-				$arglist = compose_filtres_args($p, $filtre, ':');
-			} else
-				$arglist = compose_filtres_args($p, $filtre, ',');
-
-			$arg = substr($arglist,1);
-
-			// compiler le filtre
-			switch (true) {
-				// est-ce un test ?
-				case in_array($fonc, $table_criteres_infixes):
-					$code = "($code $fonc $arg)";
-					break;
-
-				// cas de et,ou,oui,non,sinon,xou,xor,and,or,not,yes
-				case ($fonc == 'and') OR ($fonc == 'et'):
-					$code = "((($code) AND ($arg)) ?' ' :'')";
-					break;
-				case ($fonc == 'or') OR ($fonc == 'ou'):
-					$code = "((($code) OR ($arg)) ?' ' :'')";
-					break;
-				case ($fonc == 'xor') OR ($fonc == 'xou'):
-					$code = "((($code) XOR ($arg)) ?' ' :'')";
-					break;
-				case ($fonc == 'sinon'):
-					$code = "(strlen(\$a = $code) ? \$a : $arg)";
-					break;
-				case ($fonc == 'not') OR ($fonc == 'non'):
-					$code = "(($code) ?'' :' ')";
-					break;
-				case ($fonc == 'yes') OR ($fonc == 'oui'):
-					$code = "(($code) ?' ' :'')";
-					break;
-
-				default:
-					if (isset($GLOBALS['spip_matrice'][$fonc])) {
-						$code = "filtrer('$fonc',$code$arglist)";
-						if ($is_filtre_image) $image_miette = true;
-					}
-
-					// le filtre est defini sous forme de fonction ou de methode
-					// par ex. dans inc_texte, inc_filtres ou mes_fonctions
-					else if ($f = chercher_filtre($fonc)) {
-						$code = "$f($code$arglist)";
-					}
-
-					// le filtre n'existe pas, on provoque une erreur
-					else {
-						$code .= ".erreur_squelette('"
-						.texte_script(_T('zbug_erreur_filtre', array('filtre'=>$fonc)))
-				."','" . $p->id_boucle . "')";
-					}
-
+			// le filtre est defini sous forme de fonction ou de methode
+			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
+			elseif ($f = chercher_filtre($fonc)) {
+				$code = "$f($code$arglist)";
 			}
-
+			// le filtre n'existe pas,
+			// on le notifie
+			else erreur_squelette(array('zbug_erreur_filtre', array('filtre'=>  texte_script($fonc))), $p);
 		}
 	}
 	// ramasser les images intermediaires inutiles et graver l'image finale
@@ -487,6 +447,30 @@ function compose_filtres(&$p, $code) {
 		$code = "filtrer('image_graver',$code)";
 
 	return $code;
+}
+
+// Filtres et,ou,oui,non,sinon,xou,xor,and,or,not,yes
+// et comparateurs
+function filtre_logique($fonc, $code, $arg)
+{
+	global $table_criteres_infixes;
+	switch (true) {
+		case in_array($fonc, $table_criteres_infixes):
+			return "($code $fonc $arg)";
+		case ($fonc == 'and') OR ($fonc == 'et'):
+			return "((($code) AND ($arg)) ?' ' :'')";
+		case ($fonc == 'or') OR ($fonc == 'ou'):
+			return "((($code) OR ($arg)) ?' ' :'')";
+		case ($fonc == 'xor') OR ($fonc == 'xou'):
+			return "((($code) XOR ($arg)) ?' ' :'')";
+		case ($fonc == 'sinon'):
+			return "(strlen(\$a = $code) ? \$a : $arg)";
+		case ($fonc == 'not') OR ($fonc == 'non'):
+			return "(($code) ?'' :' ')";
+		case ($fonc == 'yes') OR ($fonc == 'oui'):
+			return "(($code) ?' ' :'')";
+	}
+	return '';
 }
 
 // http://doc.spip.org/@compose_filtres_args
