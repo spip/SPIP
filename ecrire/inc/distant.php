@@ -95,7 +95,7 @@ function prepare_donnees_post($donnees, $boundary = '') {
   else {
 	  /* boundary automatique */
 	  // Si on a plus de 500 octects de donnees, on "boundarise"
-	  if($boundary == '') {
+	  if($boundary === '') {
 	    $taille = 0;
 	    foreach ($donnees as $cle => $valeur) {
 	  		if (is_array($valeur)) {
@@ -112,7 +112,7 @@ function prepare_donnees_post($donnees, $boundary = '') {
 	    }
 	  }
 
-		if($boundary) {
+		if(is_string($boundary) and strlen($boundary)) {
 			// fabrique une chaine HTTP pour un POST avec boundary
 			$entete = "Content-Type: multipart/form-data; boundary=$boundary\r\n";
 			$chaine = '';
@@ -187,13 +187,13 @@ function recuperer_page($url, $trans=false, $get_headers=false,
 
 	if (!empty($datas)) {
 		$get = 'POST';
-		list($type, $postdata) = prepare_donnees_post($datas);
+		list($type, $postdata) = prepare_donnees_post($datas, $boundary);
 		$datas = $type . 'Content-Length: '.strlen($postdata)."\r\n\r\n".$postdata;
 	}
 
 	// dix tentatives maximum en cas d'entetes 301...
 	for ($i=0;$i<10;$i++) {
-		$url = recuperer_lapage($url, $trans, $get, $taille_max, $datas, $boundary, $refuser_gz, $date_verif, $uri_referer);
+		$url = recuperer_lapage($url, $trans, $get, $taille_max, $datas, $refuser_gz, $date_verif, $uri_referer);
 		if (!$url) return false;
 		if (is_array($url)) {
 			list($headers, $result) = $url;
@@ -207,7 +207,7 @@ function recuperer_page($url, $trans=false, $get_headers=false,
 // si $trans est null -> on ne veut que les headers
 // si $trans est une chaine, c'est un nom de fichier pour ecrire directement dedans
 // http://doc.spip.org/@recuperer_lapage
-function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576, $datas='', $boundary='', $refuser_gz = false, $date_verif = '', $uri_referer = '')
+function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576, $datas='', $refuser_gz = false, $date_verif = '', $uri_referer = '')
 {
 	// $copy = copier le fichier ?
 	$copy = (is_string($trans) AND strlen($trans) > 5); // eviter "false" :-)
