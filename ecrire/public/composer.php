@@ -120,7 +120,7 @@ function squelette_traduit($squelette, $sourcefile, $phpfile, $boucles)
  * " . (!$boucles ?  "Pas de boucle" :	("Boucles :   " . $noms)) ."
  */ " ;
 
-	$code = '<'. "?php\n" . $code . join('', $boucles)  . "\n" .'>';
+	$code = '<'. "?php\n" . $code . join('', $boucles)  . "\n?" .'>';
 	ecrire_fichier($phpfile, $code);
 	return $code;
 }
