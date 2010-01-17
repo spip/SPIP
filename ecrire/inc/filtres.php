@@ -2380,8 +2380,8 @@ function filtre_cache_static($scripts,$type='js'){
 	if (count($scripts)){
 		$dir = sous_repertoire(_DIR_VAR,'cache-'.$type);
 		$nom = $dir . md5(serialize($scripts)) . ".$type";
-		if (
-		  $GLOBALS['var_mode']=='calcul'
+		if (false
+		  #OR $GLOBALS['var_mode']=='calcul'
 		  OR $GLOBALS['var_mode']=='recalcul'
 		  OR !file_exists($nom)){
 		  	$fichier = "";
