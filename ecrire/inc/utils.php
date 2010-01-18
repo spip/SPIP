@@ -699,15 +699,12 @@ define('_ROOT_CWD', getcwd().'/');
 // http://doc.spip.org/@find_in_path
 function find_in_path ($file, $dirname='', $include=false) {
 	static $files=array(), $dirs=array();
-	static $inc = array();
-#if ($include) $GLOBALS['cpt_include']++;
-#spip_timer('include');
+	static $inc = array(); # cf http://trac.rezo.net/trac/spip/changeset/14743
 	if (isset($files[$dirname][$file])) {
-		if ($include) {
+		if ($include AND !isset($inc[$dirname][$file])) {
 			include_once _ROOT_CWD . $files[$dirname][$file];
 			$inc[$dirname][$file] = $inc[''][$dirname . $file] = true;
 		}
-#$GLOBALS['time_include']+=spip_timer('include',true);
 		return  $files[$dirname][$file];
 	}
 
@@ -722,11 +719,10 @@ function find_in_path ($file, $dirname='', $include=false) {
 			$dirs[$a] = (is_dir(_ROOT_CWD . $a) || !$a) ;
 		if ($dirs[$a]) {
 			if (file_exists(_ROOT_CWD . ($a .= $file))) {
-				if ($include) {
+				if ($include AND !isset($inc[$dirname][$file])) {
 					include_once _ROOT_CWD . $a;
 					$inc[$dirname][$file] = $inc[''][$dirname . $file] = true;
 				}
-#$GLOBALS['time_include']+=spip_timer('include',true);
 				return $files[$dirname][$file] = $files[''][$dirname . $file] = $a;
 			}
 		}
