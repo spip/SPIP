@@ -24,6 +24,8 @@ define('_EXTENSION_PHP', '.php3');
 #mettre a true pour compatibilite PHP3 
 define('_FEED_GLOBALS', false);
 
+define('_ROOT_RACINE', dirname(dirname(__FILE__)).'/');
+
 # le nom du repertoire ecrire/
 define('_DIR_RESTREINT_ABS', 'ecrire/');
 # sommes-nous dans ecrire/ ?

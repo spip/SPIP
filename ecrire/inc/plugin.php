@@ -343,6 +343,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		if (is_array($infos)){
 			foreach($ordre as $p){
 				$dir_type = $plugin_valides[$p]['dir_type'];
+				$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
 				$plug = $plugin_valides[$p]['dir'];
 				$dir = $dir_type.".'"
 					. str_replace(constant($dir_type), '', $plug)
@@ -369,12 +370,12 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 						$file = trim($file);
 
 						if (strpos($plug, constant($dir_type)) === 0) {
-							$dir = str_replace("'".constant($dir_type), $dir_type.".'", "'$plug/'");
+							$dir = str_replace("'".constant($dir_type), $root_dir_type.".'", "'$plug/'");
 						}
 						else
-							$dir = $dir_type.".'$plug/'";
+							$dir = $root_dir_type.".'$plug/'";
 						$s .= "if (file_exists(\$f=$dir.'".trim($file)."')){ include_once \$f;}\n";
-						$liste_fichier_verif[] = "$dir_type:$plug/".trim($file);
+						$liste_fichier_verif[] = "$root_dir_type:$plug/".trim($file);
 					}
 				}
 			}
@@ -394,6 +395,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		$liste_boutons = array();
 		foreach($ordre as $p){
 			$dir_type = $plugin_valides[$p]['dir_type'];
+			$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
 			$plug = $plugin_valides[$p]['dir'];
 			$info = $infos[$dir_type][$plug];
 			$prefix = "";
@@ -419,7 +421,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 						$GLOBALS['spip_pipeline'][$nom] = preg_replace(",(\|\||$),","|$prefix$action\\1",$GLOBALS['spip_pipeline'][$nom],1);
 					if (isset($pipe['inclure'])){
 						$GLOBALS['spip_matrice']["$prefix$action"] =
-							"$dir_type:$plug/".$pipe['inclure'];
+							"$root_dir_type:$plug/".$pipe['inclure'];
 					}
 				}
 			}
@@ -441,8 +443,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// hackons donc avec un "../" en dur dans ce cas, qui ne manquera pas de nous embeter un jour...
 	foreach ($liste_fichier_verif as $k => $f){
 		// si un _DIR_XXX: est dans la chaine, on extrait la constante
-		if (preg_match(",(_DIR_[A-Z_]+):,Ums",$f,$regs))
-			$f = str_replace($regs[0],(_DIR_RACINE?"":"../").constant($regs[1]),$f);
+		if (preg_match(",(_(DIR|ROOT)_[A-Z_]+):,Ums",$f,$regs))
+			$f = str_replace($regs[0],$regs[2]=="ROOT"?constant($regs[1]):(_DIR_RACINE?"":"../").constant($regs[1]),$f);
 		$liste_fichier_verif[$k] = $f;
 	}
 	ecrire_fichier(_CACHE_PLUGINS_VERIF,
@@ -472,10 +474,14 @@ function pipeline_precompile(){
 				$s_inc .= 'if (file_exists($f=';
 				$file = "'$file'";
 				// si un _DIR_XXX: est dans la chaine, on extrait la constante
-				if (preg_match(",(_DIR_[A-Z_]+):,Ums",$file,$regs)){
-					$file = str_replace($regs[0],"'.".$regs[1].".'",$file);
+				if (preg_match(",(_(DIR|ROOT)_[A-Z_]+):,Ums",$file,$regs)){
+					$dir = $regs[1];
+					$root_dir = str_replace('_DIR_','_ROOT_',$dir);
+					if (defined($root_dir))
+						$dir = $root_dir;
+					$file = str_replace($regs[0],"'.".$dir.".'",$file);
 					$file = str_replace("''.","",$file);
-					$file = str_replace(constant($regs[1]), '', $file);
+					$file = str_replace(constant($dir), '', $file);
 				}
 				$s_inc .= $file . ')){include_once($f);}'."\n";
 			}
@@ -534,8 +540,8 @@ function desinstalle_un_plugin($plug,$infos){
 	// faire les include qui vont bien
 	foreach($infos['install'] as $file){
 		$file = trim($file);
-		if (file_exists(_DIR_PLUGINS."$plug/$file")){
-			include_once(_DIR_PLUGINS."$plug/$file");
+		if (file_exists($f = _ROOT_PLUGINS."$plug/$file")){
+			include_once($f);
 		}
 	}
 	$version_cible = isset($infos['version_base'])?$infos['version_base']:'';
@@ -556,10 +562,15 @@ function desinstalle_un_plugin($plug,$infos){
 
 // http://doc.spip.org/@installe_un_plugin
 function installe_un_plugin($plug,$infos,$dir_plugins = _DIR_PLUGINS){
+	// passer en chemin absolu si possible
+	$dir = str_replace('_DIR_','_ROOT_',$dir_plugins);
+	if (!defined($dir))
+		$dir = $dir_plugins;
+	
 	// faire les include qui vont bien
 	foreach($infos['install'] as $file){
 		$file = trim($file);
-		if (file_exists($f=$dir_plugins."$plug/$file")){
+		if (file_exists($f=constant($dir)."$plug/$file")){
 			include_once($f);
 		}
 	}
