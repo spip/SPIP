@@ -259,7 +259,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		|| isset($_COOKIE['spip_admin'])
 		|| @file_exists(_ACCESS_FILE_NAME))
 	) {
-		supprimer_fichier(_DIR_CACHE . $f);
+		$page = array(); // ignorer le cache deja lu
+		supprimer_fichier(_DIR_CACHE . $f); // pas necessaire ?
 		if (in_array($GLOBALS['var_mode'], array('calcul', 'recalcul'))
 		AND $fs) {
 			include_spip('inc/invalideur');

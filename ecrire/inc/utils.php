@@ -596,6 +596,7 @@ function _chemin($dir_path=NULL){
 		if (strlen($GLOBALS['dossier_squelettes']))
 			foreach (array_reverse(explode(':', $GLOBALS['dossier_squelettes'])) as $d)
 				array_unshift($path_full, ($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
+		$GLOBALS['path_sig'] = md5(serialize($path_full));
 	}
 	if ($dir_path===NULL) return $path_full;
 
@@ -620,6 +621,7 @@ function _chemin($dir_path=NULL){
 		foreach (array_reverse(explode(':', $GLOBALS['dossier_squelettes'])) as $d)
 			array_unshift($path_full, ($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
 
+	$GLOBALS['path_sig'] = md5(serialize($path_full));
 	return $path_full;
 }
 
@@ -628,14 +630,6 @@ function creer_chemin() {
 	$path_a = _chemin();
 	static $c = '';
 
-	// provisoire, a remplacer par un spip_unlink sur les fichiers compiles lors d'un prochain upgrade
-	if (isset($GLOBALS['plugins'])){
-		$c = '';
-		foreach($GLOBALS['plugins'] as $dir) {
-			$path_base = _chemin(_DIR_PLUGINS.$dir);
-		}
-		unset($GLOBALS['plugins']);
-	}
 	// on calcule le chemin si le dossier skel a change
 	if ($c != $GLOBALS['dossier_squelettes']) {
 		// assurer le non plantage lors de la montee de version :
@@ -695,20 +689,30 @@ function chemin_image($icone){
 // si on donne un sous-repertoire en 2e arg optionnel, il FAUT le / final
 // si 3e arg vrai, on inclut si ce n'est fait.
 define('_ROOT_CWD', getcwd().'/');
+$GLOBALS['path_sig'] = '';
 $GLOBALS['path_files'] = null;
 
 // http://doc.spip.org/@find_in_path
 function find_in_path ($file, $dirname='', $include=false) {
 	static $dirs=array();
 	static $inc = array(); # cf http://trac.rezo.net/trac/spip/changeset/14743
-	if (isset($GLOBALS['path_files'][$dirname][$file])) {
-		if (!$GLOBALS['path_files'][$dirname][$file])
+	static $c = '';
+
+	// on calcule le chemin si le dossier skel a change
+	if ($c != $GLOBALS['dossier_squelettes']){
+		// assurer le non plantage lors de la montee de version :
+		$c = $GLOBALS['dossier_squelettes'];
+		creer_chemin(); // forcer un recalcul du chemin et la mise a jour de path_sig
+	}
+
+	if (isset($GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file])) {
+		if (!$GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file])
 			return false;
 		if ($include AND !isset($inc[$dirname][$file])) {
-			include_once _ROOT_CWD . $GLOBALS['path_files'][$dirname][$file];
+			include_once _ROOT_CWD . $GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file];
 			$inc[$dirname][$file] = $inc[''][$dirname . $file] = true;
 		}
-		return $GLOBALS['path_files'][$dirname][$file];
+		return $GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file];
 	}
 
 	$a = strrpos($file,'/');
@@ -728,7 +732,7 @@ function find_in_path ($file, $dirname='', $include=false) {
 				}
 				if (!defined('_SAUVER_CHEMIN'))
 					define('_SAUVER_CHEMIN',true);
-				return $GLOBALS['path_files'][$dirname][$file] = $GLOBALS['path_files'][''][$dirname . $file] = $a;
+				return $GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file] = $GLOBALS['path_files'][$GLOBALS['path_sig']][''][$dirname . $file] = $a;
 			}
 		}
 	}
@@ -747,7 +751,7 @@ function find_in_path ($file, $dirname='', $include=false) {
 
 	if (!defined('_SAUVER_CHEMIN'))
 		define('_SAUVER_CHEMIN',true);
-	return $GLOBALS['path_files'][$dirname][$file] = $GLOBALS['path_files'][''][$dirname . $file] = false;
+	return $GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file] = $GLOBALS['path_files'][$GLOBALS['path_sig']][''][$dirname . $file] = false;
 }
 
 function load_path_cache(){
@@ -756,7 +760,9 @@ function load_path_cache(){
 	// on ne recharge pas le cache pour forcer sa mise a jour
 	// le cache de chemin n'est utilise que dans le public
 	if (_DIR_RESTREINT
-		AND (!isset($GLOBALS['visiteur_statut']) OR $GLOBALS['visiteur_statut']!='0minirezo')){
+		//AND (!isset($GLOBALS['visiteur_session']['statut']) OR $GLOBALS['visiteur_session']['statut']!='0minirezo')
+		AND !isset($_COOKIE[$GLOBALS['cookie_prefix'].'_admin'])
+		){
 		lire_fichier(_CACHE_CHEMIN,$contenu);
 		if (!$GLOBALS['path_files']=unserialize($contenu))
 			$GLOBALS['path_files'] = array();
