@@ -107,8 +107,12 @@ function verifier_sauvegarde ($archive) {
 	AND import_charge_version($regs[2]) )
 		return ''; // c'est bon
 
+	$r = $regs[1] . ' ' . $regs[2];
 	return _T('avis_erreur_version_archive', 
-		  array('archive' => str_replace('/', ' / ', $archive)));
+		array('archive' => str_replace('/', ' / ', $archive) . " ($r)",
+			'spipnet' => $GLOBALS['home_server']
+			. '/' .  $GLOBALS['spip_lang'] . '_article1489.html'
+			));
 }
 
 // http://doc.spip.org/@import_charge_version
