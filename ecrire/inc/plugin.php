@@ -562,7 +562,7 @@ function desinstalle_un_plugin($plug,$infos){
 }
 
 // http://doc.spip.org/@installe_un_plugin
-function installe_un_plugin($plug,$infos,$dir_plugins = _DIR_PLUGINS){
+function installe_un_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
 	// passer en chemin absolu si possible
 	$dir = str_replace('_DIR_','_ROOT_',$dir_plugins);
 	if (!defined($dir))
@@ -615,7 +615,7 @@ function installe_plugins(){
 		$dir_type = $resume['dir_type'];		
 		$infos = plugin_get_infos($plug,false,constant($dir_type));
 		if (isset($infos['install'])){
-			$ok = installe_un_plugin($plug,$infos,constant($dir_type));
+			$ok = installe_un_plugin($plug,$infos,$dir_type);
 			// on peut enregistrer le chemin ici car il est mis a jour juste avant l'affichage
 			// du panneau -> cela suivra si le plugin demenage
 			if ($ok)
