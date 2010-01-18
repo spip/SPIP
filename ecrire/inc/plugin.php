@@ -449,6 +449,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	}
 	ecrire_fichier(_CACHE_PLUGINS_VERIF,
 		serialize($liste_fichier_verif));
+	@spip_unlink(_CACHE_CHEMIN);
 }
 
 // precompilation des pipelines

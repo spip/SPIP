@@ -225,17 +225,20 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 			calculer_prochain_postdate(true);
 		}
 
-	// Effectuer une tache de fond ?
-	// si #SPIP_CRON est present, on ne le tente que pour les navigateurs
-	// en mode texte (par exemple), et seulement sur les pages web
-	if (defined('_DIRECT_CRON_FORCE')
-		OR (
-	  !defined('_DIRECT_CRON_INHIBE')
-	  AND $html
-	  AND !strstr($page['texte'], '<!-- SPIP-CRON -->')
-	  AND !preg_match(',msie|mozilla|opera|konqueror,i', $_SERVER['HTTP_USER_AGENT']))
-	  )
-		cron();
+		// Effectuer une tache de fond ?
+		// si #SPIP_CRON est present, on ne le tente que pour les navigateurs
+		// en mode texte (par exemple), et seulement sur les pages web
+		if (defined('_DIRECT_CRON_FORCE')
+			OR (
+			!defined('_DIRECT_CRON_INHIBE')
+			AND $html
+			AND !strstr($page['texte'], '<!-- SPIP-CRON -->')
+			AND !preg_match(',msie|mozilla|opera|konqueror,i', $_SERVER['HTTP_USER_AGENT']))
+			)
+			cron();
+
+		// sauver le cache chemin si necessaire
+		save_path_cache();
 	}
 
 }
