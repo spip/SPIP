@@ -870,19 +870,8 @@ $GLOBALS[\'all_langs\'] = @$GLOBALS[\'meta\'][\'langues_proposees\'];
 	include_spip("inc/layer"); // definit browser_barre
 
 	$texte = entites_html($texte);
-	if (!$GLOBALS["browser_barre"])
-		return "<textarea name=\'texte\' rows=\'$rows\' class=\'forml\' cols=\'$cols\'>$texte</textarea>";
+	return "<textarea name=\'texte\' rows=\'$rows\' class=\'forml\' cols=\'$cols\'>$texte</textarea>";
 
-	$num_textarea++;
-	include_spip("inc/barre");
-	return afficher_barre("document.getElementById(\'textarea_$num_textarea\')", true, $lang) .
-	  "
-<textarea name=\'texte\' rows=\'$rows\' class=\'forml\' cols=\'$cols\'
-id=\'textarea_$num_textarea\'
-onselect=\'storeCaret(this);\'
-onclick=\'storeCaret(this);\'
-onkeyup=\'storeCaret(this);\'
-ondblclick=\'storeCaret(this);\'>$texte</textarea>";
 }',
 
  'generer_url_article' => '($id, $args="", $ancre="")
@@ -908,7 +897,14 @@ ondblclick=\'storeCaret(this);\'>$texte</textarea>";
 
  'tester_variable' => '($n, $v) {
 	if (!isset($GLOBALS[$n])) $GLOBALS[$n] = $v;
-	return $GLOBALS[$n];}'
+	return $GLOBALS[$n];}',
+	
+	// SPIP < 2.1
+ 'barre_typo' => '($id,$lang=\'\',$forum=false){
+	return \'\';}',
+
+ 'afficher_barre' => '(){
+	 return \'\';}',
 
 ) as $f => $def) {
 	if (!function_exists($f)) {

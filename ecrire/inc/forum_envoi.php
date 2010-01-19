@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/barre');
 
 // http://doc.spip.org/@inc_forum_envoi_dist
 function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message, $texte, $modif_forum, $nom_site, $url_site) {
@@ -205,8 +204,10 @@ function forum_envoi_formulaire($id, $retour, $statut, $texte, $titre, $nom_site
 		."<li class='haut'><label for='texte' >"
 	  	. _T('info_texte_message')
 	  	."</label>"
-	  	.  afficher_textarea_barre($texte, true)
-		."<input type='hidden' name='modif_forum' value='oui' />\n"
+			."<textarea name='texte' id='texte' class='textarea'>\n"
+			. $texte
+			. "</textarea>"
+			."<input type='hidden' name='modif_forum' value='oui' />\n"
 	  	."</li>"		
 	  . (!($statut != 'perso')
 		   ? ''
