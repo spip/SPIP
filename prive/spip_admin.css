@@ -27,3 +27,4 @@ a:active.spip-admin-boutons { background-color: #ccc; border-bottom: 2px solid #
 fieldset.blocs {
 border:1px dashed blue !important;
 }
+.spip-debug-arg {font-family: Courier, "Courier New", monospace; font-size: 16px; font-weight: bold }

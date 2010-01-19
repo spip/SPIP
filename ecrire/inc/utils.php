@@ -360,7 +360,7 @@ function test_plugin_actif($plugin){
 // Traduction des textes de SPIP
 //
 // http://doc.spip.org/@_T
-function _T($texte, $args=array()) {
+function _T($texte, $args=array(), $class='') {
 
 	static $traduire=false ;
 
@@ -371,27 +371,33 @@ function _T($texte, $args=array()) {
 	$text = $traduire($texte,$GLOBALS['spip_lang']);
 
 	if (!strlen($text))
-		// pour les chaines non traduites
+		// pour les chaines non traduites, assurer un service minimum
 		$text = str_replace('_', ' ',
 			 (($n = strpos($texte,':')) === false ? $texte :
 				substr($texte, $n+1)));
 
-	if (is_array($args))
-	foreach ($args as $name => $value)
-		$text = str_replace ("@$name@", $value, $text);
-
-	return $text;
+	return _L($text, $args, $class);
 
 }
 
-// chaines en cours de traduction
+// Remplacer les variables @....@ par leur valeur dans une chaine de langue.
+// Aussi appelee quand une chaine n'est pas encore dans les fichiers de langue
 // http://doc.spip.org/@_L
-function _L($text, $args=array()) {
-	if (is_array($args))
-	foreach ($args as $name => $value)
-		$text = str_replace ("@$name@", $value, $text);
+function _L($text, $args=array(), $class=NULL) {
 
-	if ($GLOBALS['test_i18n'])
+	if (is_array($args)) {
+		foreach ($args as $name => $value) {
+			if ($class)
+				$value = "<span class='$class'>$value</span>";
+			$t = str_replace ("@$name@", $value, $text);
+			if ($text !== $t) {unset($args[$name]); $text = $t;}
+		}
+		// Si des variables n'ont pas ete inserees, le signaler
+		// (chaines de langues pas a jour)
+		if ($args) spip_log("$text:  variables inutilis�es " . join(', ', $args));
+	}
+
+	if ($GLOBALS['test_i18n'] AND $class===NULL)
 		return "<span style='color:red;'>$text</span>";
 	else
 		return $text;
