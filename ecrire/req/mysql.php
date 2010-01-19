@@ -15,12 +15,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // fonction pour la premiere connexion a un serveur MySQL
 
 // http://doc.spip.org/@req_mysql_dist
-function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
+function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 	charger_php_extension('mysql');
 	if ($port > 0) $host = "$host:$port";
 	$link = @mysql_connect($host, $login, $pass, true);
 	if (!$link) return false;
-
+	$last = '';
 	if (!$db) {
 		$ok = $link;
 		$db = 'spip';
@@ -29,16 +29,16 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap=
 		if (defined('_MYSQL_SET_SQL_MODE') 
 		  OR defined('_MYSQL_SQL_MODE_TEXT_NOT_NULL') // compatibilite
 		  )
-			mysql_query("set sql_mode=''");
+			mysql_query($last = "set sql_mode=''");
 	}
 #	spip_log("Connexion vers $host, base $db, prefixe $prefixe "
 #		 . ($ok ? "operationnelle sur $link" : 'impossible'));
 
 	return !$ok ? false : array(
 		'db' => $db,
+		'last' => $last,
 		'prefixe' => $prefixe ? $prefixe : $db,
 		'link' => $GLOBALS['mysql_rappel_connexion'] ? $link : false,
-		'ldap' => $ldap,
 		);
 }
 

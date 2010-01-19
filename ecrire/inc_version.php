@@ -266,6 +266,7 @@ $spip_pipeline = array(
 	'affiche_milieu' => '',
 	'affiche_enfants' => '',
 	'affiche_hierarchie' => '',
+	'affiche_formulaire_login' => '|auth_formulaire_login',
 	'boite_infos' => 'f_boite_infos',
 	'ajouter_boutons' => '',
 	'ajouter_onglets' => '',

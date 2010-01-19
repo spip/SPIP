@@ -22,34 +22,67 @@ $GLOBALS['ldap_attributes'] = array(
 	'bio' => "description");
 
 // http://doc.spip.org/@inc_auth_ldap_dist
-function auth_ldap_dist ($login, $pass) {
+function auth_ldap_dist ($login, $pass, $serveur='') {
 
 	#spip_log("ldap $login " . ($pass ? "mdp fourni" : "mdp absent"));
 
 	// Utilisateur connu ?
-	if (!($dn = auth_ldap_search($login, $pass))) return array();
+	if (!($dn = auth_ldap_search($login, $pass, true, $serveur))) return array();
 
 	// Si l'utilisateur figure deja dans la base, y recuperer les infos
-	$r = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='ldap'");
+	$r = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='ldap'",'','','','',$serveur);
 
 	if ($r) return $r;
 
 	// sinon importer les infos depuis LDAP, 
 
 	if ($GLOBALS['meta']["ldap_statut_import"]
-	AND $desc = auth_ldap_retrouver($dn)) {
+	AND $desc = auth_ldap_retrouver($dn, array(), $serveur)) {
 	  // rajouter le statut indique  a l'install
 		$desc['statut'] = $GLOBALS['meta']["ldap_statut_import"];
 		$desc['login'] = $login;
 		$desc['source'] = 'ldap';
 		$desc['pass'] = '';
 
-		$r = sql_insertq('spip_auteurs', $desc);
+		$r = sql_insertq('spip_auteurs', $desc,'',$serveur);
 	}				
 
-	if ($r)	return sql_fetsel("*", "spip_auteurs", "id_auteur=$r");
+	if ($r)
+		return sql_fetsel("*", "spip_auteurs", "id_auteur=".intval($r),'','','','',$serveur);
+
+	// sinon echec
 	spip_log("Creation de l'auteur '$login' impossible");
 	return array();
+}
+
+/**
+ * Connexion a l'annuaire LDAP
+ * Il faut passer par spip_connect() pour avoir les info
+ * donc potentiellement indiquer un serveur
+ * meme si dans les fait cet argument est toujours vide
+ *
+ * @param string $serveur
+ * @return string
+ */
+function auth_ldap_connect($serveur='') {
+	include_spip('base/connect_sql');
+	static $connexions_ldap = array();
+	if (isset($connexions_ldap[$serveur])) return $connexions_ldap[$serveur]; 
+	$connexion = spip_connect($serveur);
+	if (!is_array($connexion['ldap'])) {
+		if ($connexion['authentification']['ldap']) {
+			$f =  _DIR_CONNECT . $connexion['authentification']['ldap'];
+			unset($GLOBALS['ldap_link']);
+			if (is_readable($f)) include_once($f);
+			if (isset($GLOBALS['ldap_link']))
+				$connexion['ldap'] = array('link' => $GLOBALS['ldap_link'],
+					'base' => $GLOBALS['ldap_base']);
+			else spip_log("connection LDAP $serveur mal definie dans $f");
+			if (isset($GLOBALS['ldap_champs']))
+				$connexion['ldap']['attributes'] = $GLOBALS['ldap_champs'];
+		} else spip_log("connection LDAP $serveur inconnue");
+	}
+	return $connexions_ldap[$serveur]=$connexion['ldap'];
 }
 
 /**
@@ -61,13 +94,15 @@ function auth_ldap_dist ($login, $pass) {
  * @return string
  *	le login trouve ou chaine vide si non trouve
  */
-function auth_ldap_search($login, $pass, $checkpass=true){
+function auth_ldap_search($login, $pass, $checkpass=true, $serveur=''){
 	// Securite anti-injection et contre un serveur LDAP laxiste
 	$login_search = preg_replace("/[^-@._\s\d\w]/", "", $login); 
 	if (!strlen($login_search) OR ($checkpass AND !strlen($pass)) )
 		return '';
 
-	if (!$ldap = spip_connect_ldap()) return '';
+	// verifier la connexion
+	if (!$ldap = auth_ldap_connect($serveur))
+		return '';
 
 	$ldap_link = $ldap['link'];
 	$ldap_base = $ldap['base'];
@@ -100,28 +135,23 @@ function auth_ldap_search($login, $pass, $checkpass=true){
 	return '';
 }
 
-function auth_ldap_retrouver($dn, $desc=array())
+function auth_ldap_retrouver($dn, $desc=array(), $serveur='')
 {
 	// Lire les infos sur l'utilisateur a partir de son DN depuis LDAP
 
-	$ldap = spip_connect_ldap();
+	$ldap = auth_ldap_connect($serveur);
 	$ldap_link = $ldap['link'];
 	if (!$desc) {
 		$desc = $ldap['attributes'] ? $ldap['attributes'] : $GLOBALS['ldap_attributes'] ;
 		unset($desc['login']);
 	}
-	$result = ldap_read($ldap_link, $dn, "objectClass=*", array_values($desc));
+	$result = @ldap_read($ldap_link, $dn, "objectClass=*", array_values($desc));
 
-	if (!$result) {
-		spip_log("dn $dn inconnu pour " . join(',', $desc));
-		return array();
-	}
+	if (!$result) return array();
+
 	// Recuperer les donnees du premier (unique?) compte de l'auteur
-	$val = ldap_get_entries($ldap_link, $result);
-	if (!is_array($val) OR !is_array($val[0])) {
-		spip_log("dn $dn connu mais vide: $val");
-		return array();
-	}
+	$val = @ldap_get_entries($ldap_link, $result);
+	if (!is_array($val) OR !is_array($val[0])) return array();
 	$val = $val[0];
 
 	// Convertir depuis UTF-8 (jeu de caracteres par defaut)
@@ -139,9 +169,9 @@ function auth_ldap_retrouver($dn, $desc=array())
  * @param string $login
  * @return string
  */
-function auth_ldap_retrouver_login($login)
+function auth_ldap_retrouver_login($login, $serveur='')
 {
-	return auth_ldap_search($login,'',false) ? $login : '';
+	return auth_ldap_search($login, '', false, $serveur) ? $login : '';
 }
 
 ?>

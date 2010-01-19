@@ -49,7 +49,10 @@ function acces_statut($id_auteur, $statut, $bio)
 	if ($statut != 'nouveau') return $statut;
 	include_spip('inc/filtres');
 	if (!($s = tester_config('', $bio))) return $statut;
-		sql_updateq('spip_auteurs', array('bio'=>'', 'statut'=> $s), "id_auteur=$id_auteur");
+	include_spip('action/editer_auteur');
+	instituer_auteur($id_auteur,array('statut'=> $s));
+	include_spip('inc/modifier');
+	revision_auteur($id_auteur, array('bio'=>''));
 	return $s;
 }
 
@@ -157,7 +160,6 @@ function auth_mode()
 	if (!$ignore_auth_http) {
 		if (isset($_SERVER['PHP_AUTH_USER'])
 		AND isset($_SERVER['PHP_AUTH_PW'])) {
-			include_spip('inc/actions');
 			if ($r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
 				if (!$id_auteur) {
 					$_SERVER['PHP_AUTH_PW'] = '';
@@ -294,5 +296,359 @@ function auth_trace($row, $date=null)
 	if ((time() - $connect_quand)  >= 60) {
 		sql_updateq("spip_auteurs", array("en_ligne" => $date), "id_auteur=" .$row['id_auteur']);
 	}
+}
+
+
+/** ----------------------------------------------------------------------------
+ * API Authentification, gestion des identites centralisees
+ */
+
+/**
+ * Fonction aiguillage, privee
+ * @param string $fonction
+ * @param array $args
+ * @param mixed $defaut
+ * @return mixed
+ */
+function auth_administrer($fonction,$args,$defaut=false){
+	$auth_methode = array_shift($args);
+	$auth_methode = $auth_methode ? $auth_methode : 'spip'; // valeur par defaut au cas ou
+	if ($auth = charger_fonction($auth_methode,'auth',true)
+		AND function_exists($f="auth_{$auth_methode}_$fonction")
+	)
+		return call_user_func_array($f, $args);
+	else
+		return $defaut;
+}
+
+/**
+ * Pipeline pour inserer du contenu dans le formulaire de login
+ *
+ * @param array $flux
+ * @return array
+ */
+function auth_formulaire_login($flux){
+	foreach ($GLOBALS['liste_des_authentifications'] as $methode)
+		$flux = auth_administrer('formulaire_login',array($methode,$flux),$flux);
+	return $flux;
+}
+
+
+
+/**
+ * Retrouver le login interne lie a une info login saisie
+ * la saisie peut correspondre a un login delegue
+ * qui sera alors converti en login interne apres verification
+ *
+ * @param string $login
+ * @param string $serveur
+ * @return string/bool
+ */
+function auth_retrouver_login($login, $serveur=''){
+	if (!spip_connect($serveur)) {
+		include_spip('inc/minipres');
+		echo minipres(_T('info_travaux_titre'),
+			      _T('titre_probleme_technique'));
+		exit;
+	}
+
+	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
+		if ($auteur = auth_administrer('retrouver_login',array($methode, $login, $serveur))) {
+			return $auteur;
+		}
+	}
+	return false;
+}
+
+
+/**
+ * informer sur un login
+ * Ce dernier transmet le tableau ci-dessous a la fonction JS informer_auteur
+ * Il est invoque par la fonction JS actualise_auteur via la globale JS
+ * page_auteur=#URL_PAGE{informer_auteur} dans le squelette login
+ * N'y aurait-il pas plus simple ?
+ *
+ * @param string $login
+ * @param string $serveur
+ * @return array
+ */
+function auth_informer_login($login, $serveur=''){
+	if (!$login
+		OR !$login = auth_retrouver_login($login, $serveur)
+		OR !$row = sql_fetsel('*','spip_auteurs','login='.sql_quote($login),'','','','',$serveur)
+		)
+		return array();
+
+	$prefs = unserialize($row['prefs']);
+	$infos = array(
+		'id_auteur'=>$row['id_auteur'],
+		'login'=>$row['login'],
+		'cnx' => ($prefs['cnx'] == 'perma') ? '1' : '0',
+		'logo' => recuperer_fond('formulaires/inc-logo_auteur', $row),
+	);
+
+	// desactiver le hash md5 si pas auteur spip ?
+	if ($row['source']!=='spip'){
+		$row['alea_actuel']= '';
+		$row['alea_futur']= '';
+	}
+	verifier_visiteur();
+
+	return auth_administrer('informer_login',array($row['source'],$infos, $row, $serveur),$infos);
+}
+
+
+/**
+ * Essayer les differentes sources d'authenfication dans l'ordre specifie.
+ * S'en souvenir dans visiteur_session['auth']
+ *
+ * @param string $login
+ * @param string $password
+ * @param string $serveur
+ * @return mixed
+ */
+function auth_identifier_login($login, $password, $serveur=''){
+	$erreur = "";
+	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
+		if ($auth = charger_fonction($methode, 'auth',true)){
+			$auteur = $auth($login, $password, $serveur);
+			if (is_array($auteur) AND count($auteur)) {
+				spip_log("connexion de $login par methode $methode");
+				$auteur['auth'] = $methode;
+				return $auteur;
+			}
+			elseif (is_string($auteur))
+				$erreur .= "$auteur ";
+		}
+	}
+	return $erreur;
+}
+
+/**
+ * Fournir une url de retour apres login par un SSO
+ * pour finir l'authentification
+ *
+ * @param string $auth_methode
+ * @param string $login
+ * @param string $serveur
+ * @return string
+ */
+function auth_url_retour_login($auth_methode, $login, $redirect='', $serveur=''){
+	$securiser_action = charger_fonction('securiser_action','inc');
+	return $securiser_action('auth', "$auth_methode/$login", $redirect, true);
+}
+
+function auth_terminer_identifier_login($auth_methode, $login, $serveur=''){
+	$args = func_get_args();
+	$auteur = auth_administrer('terminer_identifier_login',$args);
+	return $auteur;
+}
+
+ /**
+  * Loger un auteur suite a son identification
+  *
+  * @param array $auteur
+  */
+ function auth_loger($auteur){
+	if (!is_array($auteur) OR !count($auteur))
+		return false;
+
+	$session = charger_fonction('session', 'inc');
+	$session($auteur);
+	$p = ($auteur['prefs']) ? unserialize($auteur['prefs']) : array();
+	$p['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
+	$p = array('prefs' => serialize($p));
+	sql_updateq('spip_auteurs', $p, "id_auteur=" . $auteur['id_auteur']);
+
+	if ($auteur['statut'] == 'nouveau') {
+		$auteur['statut'] = acces_statut($auteur['id_auteur'], $auteur['statut'], $auteur['bio']);
+	}
+
+	// Si on est admin, poser le cookie de correspondance
+	include_spip('inc/cookie');
+	if ($auteur['statut'] == '0minirezo') {
+		spip_setcookie('spip_admin', '@'.$auteur['login'],
+		time() + 7 * 24 * 3600);
+	}
+	// sinon le supprimer ...
+	else {
+		spip_setcookie('spip_admin', '',1);
+	}
+
+	//  bloquer ici le visiteur qui tente d'abuser de ses droits
+	verifier_visiteur();
+	return true;
+}
+
+
+/**
+ * Tester la possibilite de modifier le login d'authentification
+ * pour la methode donnee
+ *
+ * @param string $auth_methode
+ * @param string $serveur
+ * @return bool
+ */
+function auth_autoriser_modifier_login($auth_methode, $serveur=''){
+	$args = func_get_args();
+	return auth_administrer('autoriser_modifier_login',$args);
+}
+
+/**
+ * Verifier la validite d'un nouveau login pour modification
+ * pour la methode donnee
+ *
+ * @param string $auth_methode
+ * @param string $new_login
+ * @param int $id_auteur
+ * @param string $serveur
+ * @return string
+ *  message d'erreur ou chaine vide si pas d'erreur
+ */
+function auth_verifier_login($auth_methode, $new_login, $id_auteur=0, $serveur=''){
+	$args = func_get_args();
+	return auth_administrer('verifier_login',$args,'');
+}
+
+/**
+ * Modifier le login d'un auteur pour la methode donnee
+ *
+ * @param string $auth_methode
+ * @param string $new_login
+ * @param int $id_auteur
+ * @param string $serveur
+ * @return bool
+ */
+function auth_modifier_login($auth_methode, $new_login, $id_auteur, $serveur=''){
+	$args = func_get_args();
+	return auth_administrer('modifier_login',$args);
+}
+
+/**
+ * Tester la possibilite de modifier le pass
+ * pour la methode donnee
+ *
+ * @param string $auth_methode
+ * @param string $serveur
+ * @return bool
+ *	succes ou echec
+ */
+function auth_autoriser_modifier_pass($auth_methode, $serveur=''){
+	$args = func_get_args();
+	return auth_administrer('autoriser_modifier_pass',$args);
+}
+
+/**
+ * Verifier la validite d'un pass propose pour modification
+ * pour la methode donnee
+ *
+ * @param string $auth_methode
+ * @param string $login
+ * @param string $new_pass
+ * @param int $id_auteur
+ * @param string $serveur
+ * @return string
+ *	message d'erreur ou chaine vide si pas d'erreur
+ */
+function auth_verifier_pass($auth_methode, $login, $new_pass, $id_auteur=0, $serveur=''){
+	$args = func_get_args();
+	return auth_administrer('verifier_pass',$args,'');
+}
+
+/**
+ * Modifier le mot de passe d'un auteur
+ * pour la methode donnee
+ *
+ * @param string $auth_methode
+ * @param string $login
+ * @param string $new_pass
+ * @param int $id_auteur
+ * @param string $serveur
+ * @return bool
+ *	succes ou echec
+ */
+function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur, $serveur=''){
+	$args = func_get_args();
+	return auth_administrer('modifier_pass',$args);
+}
+
+/**
+ * Synchroniser un compte sur une base distante pour la methode
+ * donnee lorsque des modifications sont faites dans la base auteur
+ *
+ * @param string $auth_methode
+ *   ici true permet de forcer la synchronisation de tous les acces pour toutes les methodes
+ * @param int $id_auteur
+ * @param array $champs
+ * @param array $options
+ * @param string $serveur
+ * @return void
+ */
+function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=array(), $options = array(), $serveur=''){
+	$args = func_get_args();
+	if ($auth_methode===true OR (isset($options['all']) AND $options['all']==true)){
+		$options['all'] = true; // ajouter une option all=>true pour chaque auth
+		$args = array(true, $id_auteur, $champs, $options, $serveur); 
+		foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
+			array_shift($args);
+			array_unshift($args,$methode);
+			auth_administrer('synchroniser_distant',$args);
+		}
+	}
+	else
+		auth_administrer('synchroniser_distant',$args);
+}
+
+
+/**
+ *
+ * @param string $login
+ * @param string $pw
+ * @param string $serveur
+ * @return array
+ */
+function lire_php_auth($login, $pw, $serveur=''){
+	// en auth php, le login est forcement celui en base
+	// pas la peine de passer par la methode auth/xxx pour identifier le login
+	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login),'','','','',$serveur);
+	if (!$row) return false; // n'existe pas
+
+	// su pas de source definie
+	// ou auth/xxx introuvable, utiliser 'spip'
+	if (!$auth_methode = $row['source']
+		OR !$auth = charger_fonction($auth_methode, 'auth', true))
+		$auth = charger_fonction('spip', 'auth', true);
+
+	$auteur='';
+	if ($auth)
+		$auteur = $auth($login, $pw, $serveur);
+	// verifier que ce n'est pas un message d'erreur
+	if (is_array($auteur) AND count($auteur))
+		return $auteur;
+	return false;
+}
+
+/**
+ * entete php_auth (est-encore utilise ?)
+ *
+ * @param <type> $pb
+ * @param <type> $raison
+ * @param <type> $retour
+ * @param <type> $url
+ * @param <type> $re
+ * @param <type> $lien
+ */
+function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
+	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
+	@Header("HTTP/1.0 401 Unauthorized");
+	$ici = generer_url_ecrire();
+	echo "<b>$pb</b><p>$raison</p>[<a href='$ici'>$retour</a>] ";
+	if ($url) {
+		echo "[<a href='", generer_url_action('cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";
+	}
+	
+	if ($lien)
+		echo " [<a href='$ici'>"._T('login_espace_prive')."</a>]";
+	exit;
 }
 ?>

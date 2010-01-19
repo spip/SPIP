@@ -37,7 +37,6 @@ function action_logout_dist()
 		// si authentification http, et que la personne est loge,
 		// pour se deconnecter, il faut proposer un nouveau formulaire de connexion http
 		if (isset($_SERVER['PHP_AUTH_USER']) AND !$ignore_auth_http AND $GLOBALS['auth_can_disconnect']) {
-			include_spip('inc/actions');
 			  ask_php_auth(_T('login_deconnexion_ok'),
 				       _T('login_verifiez_navigateur'),
 				       _T('login_retour_public'),
