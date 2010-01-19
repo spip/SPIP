@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('sql_ABSTRACT_VERSION', 1);
+include_spip('base/connect_sql');
 
 // Ce fichier definit la couche d'abstraction entre SPIP et ses serveurs SQL.
 // Cette version 1 est un ensemble de fonctions ecrites rapidement

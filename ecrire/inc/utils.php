@@ -426,14 +426,21 @@ function spip_timer($t='rien', $raw = false) {
 	$b=explode(' ',$b);
 	if (count($b)==2) $a = end($b); // plus precis !
 	$b = reset($b);
-	if (isset($time[$t])) {
-		$p = $a + $b - $time[$t];
-		unset($time[$t]);
-		if ($raw) return $p;
-		if ($p>0.01)	return sprintf("%.3fs", $p);
-		else					return sprintf("%.1fms", $p*1000);
-	} else
+	if (!isset($time[$t])) {
 		$time[$t] = $a + $b;
+	} else {
+		$p = ($a + $b - $time[$t]) * 1000;
+		unset($time[$t]);
+#			echo "'$p'";exit;
+		if ($raw) return $p;
+		if ($p < 1000)
+			$s = '';
+		else {
+			$s = sprintf("%d ", $x = floor($p/1000));
+			$p -= ($x*1000);
+		}
+		return $s . sprintf("%.3f ms", $p);
+	}
 }
 
 
@@ -688,6 +695,7 @@ function find_in_path ($file, $dirname='', $include=false) {
 			}
 		}
 	}
+
 	if (!defined('_SAUVER_CHEMIN'))
 		define('_SAUVER_CHEMIN',true);
 	return $GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file] = $GLOBALS['path_files'][$GLOBALS['path_sig']][''][$dirname . $file] = false;
@@ -698,7 +706,7 @@ function load_path_cache(){
 	// si le visiteur est admin,
 	// on ne recharge pas le cache pour forcer sa mise a jour
 	// le cache de chemin n'est utilise que dans le public
-	if (_DIR_RESTREINT 
+	if (_DIR_RESTREINT
 		//AND (!isset($GLOBALS['visiteur_session']['statut']) OR $GLOBALS['visiteur_session']['statut']!='0minirezo')
 		AND !isset($_COOKIE[$GLOBALS['cookie_prefix'].'_admin'])
 		){
@@ -717,6 +725,17 @@ function save_path_cache(){
 		ecrire_fichier(_CACHE_CHEMIN,serialize($GLOBALS['path_files']));
 }
 
+
+/**
+ * Trouve tous les fichiers du path correspondants a un pattern
+ * pour un nom de fichier donne, ne retourne que le premier qui sera trouve
+ * par un find_in_path
+ *
+ * @param string $dir
+ * @param string $pattern
+ * @param bool $recurs
+ * @return array
+ */
 // http://doc.spip.org/@find_all_in_path
 function find_all_in_path($dir,$pattern, $recurs=false){
 	$liste_fichiers=array();
@@ -1133,7 +1152,9 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Le charset par defaut lors de l'installation
 	define('_DEFAULT_CHARSET', 'utf-8');
+
 	define('_ROOT_PLUGINS', _ROOT_RACINE . "plugins/");
+	define('_ROOT_EXTENSIONS', _ROOT_RACINE . "extensions/");
 
 	// La taille des Log
 	define('_MAX_LOG', 100);
