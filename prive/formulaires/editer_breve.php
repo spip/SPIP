@@ -33,7 +33,6 @@ function breves_edit_config($row)
 
 	$config = $GLOBALS['meta'];
 	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
-	$config['afficher_barre'] = $spip_display != 4;
 	$config['langue'] = $spip_lang;
 
 	$config['restreint'] = ($row['statut'] == 'publie');
