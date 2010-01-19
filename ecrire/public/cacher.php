@@ -133,7 +133,6 @@ function cache_valide(&$page, $date) {
 		return 0;
 }
 
-
 function cache_sessionne($chemin_cache, $creer=false) {
 	$fs = substr(md5($chemin_cache),0,8);
 	$a = substr($fs,0,1);
@@ -149,13 +148,14 @@ function cache_sessionne($chemin_cache, $creer=false) {
 function creer_cache(&$page, &$chemin_cache) {
 
 	// Si la page c1234 a un invalideur de session 'zz', sauver dans
-	// 'tmp/cache/a/c1234-zz.gz'
+	// 'tmp/cache/MD5(chemin_cache)/_zz'
 	// en prenant soin de supprimer un eventuel cache non-sessionne
 	// si l'ajout de #SESSION dans le squelette est recent
 	if (isset($page['invalideurs'])
 	AND isset($page['invalideurs']['session'])) {
 		supprimer_fichier(_DIR_CACHE . $chemin_cache);
-		$chemin_cache .= '-'.$page['invalideurs']['session'];
+		$chemin_cache = cache_sessionne($chemin_cache, true).$page['invalideurs']['session'];
+		
 	}
 
 	// ajouter la date de production dans le cache lui meme
@@ -178,7 +178,7 @@ function creer_cache(&$page, &$chemin_cache) {
 
 
 // purger un petit cache (tidy ou recherche) qui ne doit pas contenir de
-// vieux fichiers
+// vieux fichiers ; (cette fonction ne sert que dans des plugins obsoletes)
 // http://doc.spip.org/@nettoyer_petit_cache
 function nettoyer_petit_cache($prefix, $duree = 300) {
 	// determiner le repertoire a purger : 'tmp/CACHE/rech/'
@@ -230,9 +230,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	}
 
 	// Controler l'existence d'un cache nous correspondant, dans les
-	// quatre versions possibles : gzip ou non, session ou non
+	// deux versions possibles : session ou non
 	$chemin_cache = generer_nom_fichier_cache($contexte, $page);
-
 	$lastmodified = 0;
 	if (!lire_fichier(_DIR_CACHE . ($f = $chemin_cache), $page))
 		$fs = lire_fichier(_DIR_CACHE . ($f = cache_sessionne($f).spip_session()), $page);
