@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Authentifie et retourne la ligne SQL decrivant l'utilisateur si ok
 function auth_spip_dist ($login, $pass, $serveur='') {
-	spip_log("authspip $login $pass");
+
 	// retrouver le login
 	$login = auth_spip_retrouver_login($login);
 
@@ -151,13 +151,11 @@ function auth_spip_modifier_login($new_login, $id_auteur, $serveur=''){
  */
 function auth_spip_retrouver_login($login, $serveur=''){
 	$l = sql_quote($login);
-	spip_log("retourve $login");
 	if ($r = sql_getfetsel('login', 'spip_auteurs',
 			"statut<>'5poubelle'" .
 			" AND (length(pass)>0)" .
 			" AND (login=$l)",'','','','',$serveur))
-	  {	spip_log("retourve $login");
-	    return $r;}
+		return $r;
 	// Si pas d'auteur avec ce login
 	// regarder s'il a saisi son nom ou son mail.
 	// Ne pas fusionner avec la requete precedente
