@@ -12,7 +12,8 @@ function exec_info_plugin_dist() {
 		echo minipres();
 	} else {
 		$plug = _request('plugin');
-		$info = plugin_get_infos($plug);
+		$get_infos = charger_fonction('get_infos','plugins');
+		$info = $get_infos($plug);
 		ajax_retour(affiche_bloc_plugin($plug, $info));
 	}
 }

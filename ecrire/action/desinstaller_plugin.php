@@ -18,7 +18,8 @@ function action_desinstaller_plugin_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$plug_file = $securiser_action();
-	$infos = plugin_get_infos($plug_file);
+	$get_infos = charger_fonction('get_infos','plugins');
+	$infos = $get_infos($plug_file);
 	if (isset($infos['install'])){
 		// desinstaller
 		$etat = desinstalle_un_plugin($plug_file,$infos);

@@ -36,7 +36,7 @@ function plugins_extraire_pipelines_dist(&$arbre){
 		}
 		unset($arbre[$tag]);
 	}
-	
+
 	return $pipeline;
 }
 

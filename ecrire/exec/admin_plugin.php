@@ -170,13 +170,14 @@ function exec_admin_plugin_dist($retour='') {
 
 // http://doc.spip.org/@affiche_les_plugins
 function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arbre'){
+	$get_infos = charger_fonction('get_infos','plugins');
 
 #	(spip_timer('cachexml'));
 
 	if ($format=='liste'){
 		$liste_plugins = array_flip($liste_plugins);
 		foreach(array_keys($liste_plugins) as $chemin) {
-			$info = plugin_get_infos($chemin);
+			$info = $get_infos($chemin);
 			$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($info['nom']))))));
 		}
 		asort($liste_plugins);
@@ -361,7 +362,8 @@ function ligne_plug($plug_file, $actif, $id){
 	$erreur = false;
 	$s = "";
 
-	$info = plugin_get_infos($plug_file);
+	$get_infos = charger_fonction('get_infos','plugins');
+	$info = $get_infos($plug_file);
 	
 	// plug pour CFG
 	if ($actif
