@@ -145,6 +145,7 @@ function action_charger_plugin_dist() {
 					. $retour;
 
 			if (_request('extract')) {
+				$afficher = charger_fonction('afficher_plugin','plugins'); // pour plugin_propre
 				$texte = plugin_propre(
 				spip_xml_aplatit($arbre['plugin'][0]['description']));
 				$texte .= '<p>'._T('plugin_zip_installe_finie',array('zip'=>$zip)).'</p>';
@@ -192,7 +193,7 @@ function action_charger_plugin_dist() {
 	// par defaut on revient sur la page admin_plugin
 	if($redirect == _DIR_RESTREINT OR $redirect == "./"){
 		$redirect_annul = generer_url_ecrire('admin_plugin');
-		$redirect_form = 'admin_plugin&'.$type.'='.preg_replace(',^[^/]+/|/$,', '', $status['dirname']);
+		$redirect_form = 'admin_plugin&voir=recents&'.$type.'='.preg_replace(',^[^/]+/|/$,', '', $status['dirname']);
 		$redirect_action = '';
 	}
 	else{
