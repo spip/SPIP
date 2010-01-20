@@ -1264,7 +1264,7 @@ function balise_ACTION_FORMULAIRE($p){
  * @param unknown_type $p
  * @return unknown
  */
-function balise_BOUTON_ACTION($p){
+function balise_BOUTON_ACTION_dist($p){
 
 	$_label = interprete_argument_balise(1,$p);
 	if (!$_label) $_label="''";
