@@ -27,6 +27,7 @@ ecrire/action/editer_mots.php -text
 ecrire/action/editer_rubrique.php -text
 ecrire/action/editer_signatures.php -text
 ecrire/action/editer_site.php -text
+ecrire/action/editer_url.php -text
 ecrire/action/export_all.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/index.php -text
@@ -433,6 +434,7 @@ ecrire/typographie/en.php -text
 ecrire/typographie/fr.php -text
 ecrire/typographie/index.php -text
 ecrire/urls/arbo.php -text
+ecrire/urls/generer_url_forum.php -text
 ecrire/urls/index.php -text
 ecrire/urls/page.php -text
 ecrire/urls/propres_qs.php -text

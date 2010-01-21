@@ -10,22 +10,26 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
-
-/*
-Ce jeu d'URLs est une variation de inc-urls-propres, qui ajoute
-le suffixe '.html' aux adresses ;
-*/
-
-define('URLS_PROPRES2_EXEMPLE', 'Titre-de-l-article.html -Rubrique-.html');
-
-if (!defined('_terminaison_urls_propres'))
-	define ('_terminaison_urls_propres', '.html');
-
-// http://doc.spip.org/@urls_propres2_dist
-function urls_propres2_dist($i, &$entite, $args='', $ancre='') {
-	$f = charger_fonction('propres', 'urls');
-	return $f($i, $entite, $args, $ancre);
+/**
+ * Duplicata de la fonction disponible dans _core_/forum/urls
+ * pour permettre l'utilisation du plugin urls_etendues avec spip 2.0
+ * A retirer a la release 2.1
+ *
+ * @param <type> $id_forum
+ * @param <type> $args
+ * @param <type> $ancre
+ * @return <type>
+ */
+function urls_generer_url_forum_dist($id_forum, $args='', $ancre='') {
+	if ($id_forum = intval($id_forum)) {
+		include_spip('inc/forum');
+		list($type, $id,) = racine_forum($id_forum);
+		if ($type) {
+			if (!$ancre) $ancre = "forum$id_forum";
+			return generer_url_entite($id, $type, $args, $ancre);
+		}
+	}
+	return '';
 }
 
 ?>

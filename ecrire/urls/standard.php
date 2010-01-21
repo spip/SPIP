@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2009                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -77,20 +77,24 @@ function recuperer_parametres_url(&$fond, $url) {
 		(isset($_ENV['url_propre']) ?
 			$_ENV['url_propre'] :
 			'');
+	
+	include_spip('inc/urls');
+	$objets = urls_liste_objets();
 	if ($url_propre
-	AND in_array($fond, array('article','breve','rubrique','mot','auteur','site','type_urls','404'))) {
+	AND preg_match(",^($objets|type_urls|404)$,",$fond)) {
 		if ($GLOBALS['profondeur_url']<=0)
 			$urls_anciennes = charger_fonction('propres','urls');
 		else
 			$urls_anciennes = charger_fonction('arbo','urls');
-		$urls_anciennes($url_propre,$fond);
+		$p = $urls_anciennes($url_propre,$fond,$contexte);
+		$contexte = $p[0];
 	}
 	/* Fin du bloc compatibilite url-propres */
 
 	/* Compatibilite urls-page */
 	else if ($GLOBALS['profondeur_url']<=0
 	AND preg_match(
-	',[?/&](article|breve|rubrique|mot|auteur|site)[=]?([0-9]+),',
+	',[?/&]('.$objets.')[=]?([0-9]+),',
 	$url, $r)) {
 		$fond = $r[1];
 		$contexte[id_table_objet($r[1])] = $r[2];
@@ -101,13 +105,13 @@ function recuperer_parametres_url(&$fond, $url) {
 }
 
 //
-// URLs des forums
-//
-
+// le format de definition obsolete oblige a referencer explicitement les forums
+// on prevoit leur inexistence possible par un test sur charger_fonction
 // http://doc.spip.org/@generer_url_forum
-function generer_url_forum($id_forum, $show_thread=false) {
-	include_spip('inc/forum');
-	return generer_url_forum_dist($id_forum, $show_thread);
+function generer_url_forum($id, $show_thread=false) {
+	if ($generer_url_externe = charger_fonction("generer_url_forum",'urls',true))
+		return $generer_url_externe($id, $args, $ancre);
+	return '';
 }
  }
 ?>

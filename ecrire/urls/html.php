@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2009                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -37,11 +37,8 @@ define('URLS_HTML_EXEMPLE', 'article12.html');
 
 // http://doc.spip.org/@_generer_url_html
 function _generer_url_html($type, $id, $args='', $ancre='') {
-
-	if ($type == 'forum') {
-		include_spip('inc/forum');
-		return generer_url_forum_dist($id, $args, $ancre);
-	}
+	if ($generer_url_externe = charger_fonction("generer_url_$type",'urls',true))
+		return $generer_url_externe($id, $args, $ancre);
 
 	if ($type == 'document') {
 		include_spip('inc/documents');
@@ -54,10 +51,16 @@ function _generer_url_html($type, $id, $args='', $ancre='') {
 // retrouver les parametres d'une URL dite "html"
 // http://doc.spip.org/@urls_html_dist
 function urls_html_dist($i, $entite, $args='', $ancre='') {
-	$contexte = $GLOBALS['contexte']; // recuperer aussi les &debut_xx
 
 	if (is_numeric($i))
 		return _generer_url_html($entite, $i, $args, $ancre);
+
+	// recuperer les &debut_xx;
+	if (is_array($args))
+		$contexte = $args;
+	else
+		parse_str($args,$contexte);
+
 
 	// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
 	if ($GLOBALS['profondeur_url']>0 AND $entite=='sommaire'){
@@ -65,21 +68,13 @@ function urls_html_dist($i, $entite, $args='', $ancre='') {
 	}
 	$url = $i;
 
-	// Decoder l'url html, page ou standard
-	$objets = 'article|breve|rubrique|mot|auteur|site|syndic';
-	if (preg_match(
-	',^(?:[^?]*/)?('.$objets.')([0-9]+)(?:\.html)?([?&].*)?$,', $url, $regs)
-	OR preg_match(
-	',^(?:[^?]*/)?('.$objets.')\.php3?[?]id_\1=([0-9]+)([?&].*)?$,', $url, $regs)
-	OR preg_match(
-	',^(?:[^?]*/)?(?:spip[.]php)?[?]('.$objets.')([0-9]+)(&.*)?$,', $url, $regs)) {
-		$type = preg_replace(',s$,', '', table_objet($regs[1]));
-		$_id = id_table_objet($regs[1]);
-		$id_objet = $regs[2];
-		$suite = $regs[3];
-		$contexte[$_id] = $id_objet;
-		if ($type == 'syndic') $type = 'site';
-		return array($contexte, $type, null, $type);
+	// voir s'il faut recuperer le id_* implicite et les &debut_xx;
+	include_spip('inc/urls');
+	$r = nettoyer_url_page($i, $contexte);
+	if ($r) {
+		array_pop($r); // nettoyer_url_page renvoie un argument de plus inutile ici
+		array_pop($r); // il n'est pas necessaire de forcer le fond en 4eme arg car l'url n'est pas query string
+		return $r;
 	}
 
 	/*
@@ -103,7 +98,7 @@ function urls_html_dist($i, $entite, $args='', $ancre='') {
 			$urls_anciennes = charger_fonction('propres','urls');
 		else
 			$urls_anciennes = charger_fonction('arbo','urls');
-		return $urls_anciennes($url_propre,$entite);
+		return $urls_anciennes($url_propre, $entite, $contexte);
 	}
 	/* Fin du bloc compatibilite url-propres */
 }
