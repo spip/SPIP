@@ -29,7 +29,7 @@ function exec_admin_plugin_dist($retour='') {
 
 	$format = '';
 	if (_request('format')!==NULL)
-		$format = _request('format');
+		$format = _request('format'); // liste ou repertoires
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
@@ -37,6 +37,7 @@ function exec_admin_plugin_dist($retour='') {
 	echo "<br />\n";
 
 	echo gros_titre(_T('icone_admin_plugin'),'',false);
+	echo barre_onglets("plugins", "admin_plugin");
 
 	echo debut_gauche('plugin',true);
 	echo debut_boite_info(true);
@@ -45,10 +46,10 @@ function exec_admin_plugin_dist($retour='') {
 	echo $s;
 	echo fin_boite_info(true);
 
-	// on fait l'installation ici,
-	// cela permet aux scripts d'install de faire des affichages (moches...)
+	// on fait la verif du path ici,
+	// et l'installation des qu'on est dans la colonne principale
 	verif_plugin();
-	installe_plugins();
+
 	// la valeur de retour de la fonction ci-dessus n'est pas compatible
 	// avec ce que fait verif_plugin, il faut recalculer. A revoir.
 	$lcpa = liste_chemin_plugin_actifs();
@@ -63,6 +64,12 @@ function exec_admin_plugin_dist($retour='') {
 	echo afficher_librairies();
 
 	echo debut_droite('plugin', true);
+
+	// on fait l'installation ici,
+	// cela permet aux scripts d'install de faire des affichages (moches...)
+	echo "<div 'install-plugins'>";
+	installe_plugins();
+	echo "</div>";
 
 	$lpf = liste_plugin_files();
 	$plugins_interessants = @array_keys(unserialize($GLOBALS['meta']['plugins_interessants']));
@@ -122,13 +129,6 @@ function exec_admin_plugin_dist($retour='') {
 			echo fin_cadre_trait_couleur(true);
 			echo affiche_les_extensions($liste_plugins_actifs);
 		}
-		else {
-			include_spip('inc/charger_plugin');
-			echo formulaire_charger_plugin($retour);
-			echo fin_cadre_trait_couleur(true);
-		}
-		echo lien_ou_expose(parametre_url(self(),'voir','distants'), _T('plugin_titre_automatique_ajouter'), $quoi=='distants');
-
 
 	}
 
