@@ -119,7 +119,8 @@ function boucle_FORUMS_dist($id_boucle, &$boucles) {
 	$mstatut = $id_table .'.statut';
 	// Par defaut, selectionner uniquement les forums sans mere
 	// Les criteres {tout} et {plat} inversent ce choix
-	if (!isset($boucle->modificateur['tout']) AND !isset($boucle->modificateur['plat'])) {
+	if (!isset($boucle->modificateur['tout']) AND !isset($boucle->modificateur['plat'])
+	AND !$boucle->modificateur['criteres']['id_parent']) {
 		array_unshift($boucle->where,array("'='", "'$id_table." ."id_parent'", 0));
 	}
 	// Restreindre aux elements publies
