@@ -124,7 +124,7 @@ function debusquer_bandeau($erreurs) {
 	} elseif (!empty($GLOBALS['tableau_des_temps'])) {
 			include_spip('public/tracer');
 			list($temps, $nav) = chrono_requete($GLOBALS['tableau_des_temps']);
-			return debusquer_navigation($temps, $nav);
+			return debusquer_navigation($temps, $nav, 'debug-profile');
 	} else return '';
  }
 
@@ -148,7 +148,7 @@ function debusquer_contexte($env) {
 // Affichage du tableau des erreurs ou des temps de calcul
 // Cliquer sur les numeros en premiere colonne permet de voir le code
 
-function debusquer_navigation($tableau, $caption='') {
+function debusquer_navigation($tableau, $caption='', $id='debug-nav') {
 
 	if (_request('exec')=='valider_xml') return '';
 	$GLOBALS['bouton_admin_debug'] = true;
@@ -186,13 +186,8 @@ function debusquer_navigation($tableau, $caption='') {
 
 	}
 
-	$style = "width: 200px;" ;
-
-	if (_DIR_RESTREINT AND headers_sent())
-		 $style .= " position: absolute; top: 90px; left: 10px;";
-
-	return "\n<table id='debug-nav' cellpadding='2'  border='1' style='$style'>"
-	. "<caption style='text-align: center'>"
+	return "\n<table id='$id'>"
+	. "<caption>"
 	. $caption
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
