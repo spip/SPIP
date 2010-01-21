@@ -95,9 +95,10 @@ function exec_admin_plugin_dist($retour='') {
 
 		if ($quoi!='distants'){
 			// la liste
-			if ($quoi=='actifs')
-				$corps .= sinon(affiche_les_plugins($lcpa, $lcpa, $format),$no_button = "<h3>"._T('plugins_actif_aucun')."</h3>");
-			elseif ($quoi=='tous')
+			if ($quoi=='actifs'){
+				$aff = affiche_les_plugins($lcpa, $lcpa, $format);
+				$corps .= ($aff ? $aff : ($no_button = "<h3>"._T('plugins_actif_aucun')."</h3>"));
+			} elseif ($quoi=='tous')
 				$corps .= affiche_les_plugins($lpf, $lcpa, $format);
 			else {
 				$dir_auto = substr(_DIR_PLUGINS_AUTO, strlen(_DIR_PLUGINS));
