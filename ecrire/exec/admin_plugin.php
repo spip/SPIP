@@ -126,7 +126,7 @@ function exec_admin_plugin_dist($retour='') {
 			echo formulaire_charger_plugin($retour);
 			echo fin_cadre_trait_couleur(true);
 		}
-		echo lien_ou_expose(parametre_url(self(),'voir','distants'), _T('plugin_titre_automatique_ajouter'), $quoi=='distants')
+		echo lien_ou_expose(parametre_url(self(),'voir','distants'), _T('plugin_titre_automatique_ajouter'), $quoi=='distants');
 
 
 	}
@@ -167,7 +167,7 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='lis
 #	var_dump(spip_timer('cachexml'));
 
 
-	return 
+	return
 	http_script("
 	jQuery(function(){
 		jQuery('.plugins li.item a[rel=info]').click(function(){
