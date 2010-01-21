@@ -117,65 +117,60 @@ function interface_plugins_auto($retour) {
 	
 	if ($liste) {
 	  $res .= '<p>'._T('plugin_info_automatique_select',array('rep'=>joli_repertoire(_DIR_PLUGINS_AUTO))).'</p>';
+		$res .= afficher_liste_plugins_distants($liste);
 
 		$menu = array();
 		$compte = 0;
 
-		foreach ($liste as $url => $info) {
-			$compte += 1;
-			$titre = $info[0];
-			$url_doc = $info[1];
-			$titre = typo('<multi>'.$titre.'</multi>'); // recuperer les blocs multi du flux de la zone (temporaire?)
-
-			if ($url_doc)
-				$titre = "<a href='$url_doc' title='$url_doc'>$titre</a>";
-
-
-			$nick = strtolower(basename($url, '.zip'));
-			$menu[$nick] = '<div class="desc_plug"><label><input type="radio" name="url_zip_plugin" id="url_zip_plugin_n'.$compte.'" value="'.entites_html($url).'" />'."<b title='$url'>$nick</b></label> | ".$titre."</div>\n";
-		}
-		ksort($menu);
-
-		$form = "<div id='liste_plug' class='cadre-trait-couleur'>\n";
-		$form .= join("\n",$menu);
-		$form .= "</div>\n";
-
-		$form .= "\n<div id='desc'></div>\n";
-	
-		$form .=	"<div id='bouton_charger_plugin' class='boutons'><input type='submit' value='"
-			. _T('bouton_valider')
-			.  "' class='fondo' "
-			.  "/>\n"
-			.  "</div>\n";
-		
-		$res .= 
-				"<h3>"._T('plugins_compte',array('count' => count($menu)))."</h3>"
-				. "<div class='formulaire_spip'>"
-				
-				//debut_cadre_enfonce('', true, '', '')
-				. redirige_action_post('charger_plugin',
-					'', // arg = 'plugins' / 'lib', a priori
-					'',
-					'',
-					$form)
-				// . fin_cadre_enfonce(true)
-				//	. "<div class='nettoyeur'></div>";
-				. "</div>";
-
-		$res .= http_script("
-		// charger en ajax le descriptif si on click une div
-		jQuery('#bouton_charger_plugin').hide();
-		jQuery('#liste_plug .desc_plug').click(function(e) {
-			jQuery('#desc').animeajax().load('".generer_url_ecrire('charger_plugin_descr', 'url=', '\\x26')."'+jQuery('input', this).attr('value'),function(){
-			jQuery('#bouton_charger_plugin').show();
-			});
+		$res .=
+		http_script("
+	jQuery(function(){
+		jQuery('.plugins li.item a[rel=info]').click(function(){
+			var li = jQuery(this).parents('li').eq(0);
+			if (!jQuery('div.details',li).html()) {
+				jQuery('div.details',li).prepend(ajax_image_searching).load(
+					jQuery(this).attr('href').replace(/admin_plugin|plugins/, 'info_plugin_distant'), {}, function(){
+						li.addClass('on');
+					}
+				);
+			}
+			else {
+				if (jQuery('div.details',li).toggle().is(':visible'))
+					li.addClass('on');
+				else
+					li.removeClass('on');
+			}
+			return false;
 		});
-		");
+	});
+	");
 			
 	}
 	return $res;
 }
 
+function afficher_liste_plugins_distants($liste){
+	$res = "";
+	if (!$liste) return "";
+	
+	$menu = array();
+	$compte = 0;
+
+	$afficher_plugin_distant = charger_fonction('afficher_plugin_distant','plugins');
+	$url_page = self();
+	foreach ($liste as $url => $info) {
+		$titre = $info[0];
+		$titre = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($titre))))));
+		$menu[$titre] = $afficher_plugin_distant($url_page, $url, $info, _request('plugin')==$url);
+	}
+	ksort($menu);
+
+	$res .=
+		"<strong>"._T('plugins_compte',array('count' => count($menu)))."</strong>"
+		. "<ul class='liste-items plugins distants'>".join("\n",$menu)."</ul>";
+
+	return $res;
+}
 
 // http://doc.spip.org/@chargeur_charger_zip
 function chargeur_charger_zip($quoi = array())
@@ -447,9 +442,13 @@ function essaie_ajouter_liste_plugins($url) {
 function chercher_enclosures_zip($rss, $desc = '') {
 	$liste = array();
 	include_spip('inc/syndic');
-	foreach(analyser_backend($rss) as $item)
+	foreach(analyser_backend($rss) as $item){
 		if ($item['enclosures']
-		AND $zips = extraire_balises($item['enclosures'], 'a'))
+		AND $zips = extraire_balises($item['enclosures'], 'a')){
+			if ($img = extraire_balise($item['descriptif'], 'img')
+			  AND $src = extraire_attribut($img, 'src')) {
+				$item['icon'] = $src;
+			}
 			foreach ($zips as $zip)
 				if (extraire_attribut($zip, 'type') == 'application/zip') {
 					if ($url = extraire_attribut($zip, 'href')) {
@@ -458,6 +457,8 @@ function chercher_enclosures_zip($rss, $desc = '') {
 							$liste[$url][] = $item;
 					}
 				}
+		}
+	}
 	spip_log(count($liste).' enclosures au format zip');
 	return $liste;
 }

@@ -43,17 +43,16 @@ function action_charger_plugin_dist() {
 		if (is_array($syndic_plug = @unserialize($GLOBALS['meta']['syndic_plug'])))
 			foreach ($syndic_plug as $url => $c)
 				essaie_ajouter_liste_plugins($url);
-	} else if ($arg == 'supprimer_flux'
-	AND $url = _request('supprimer_flux')) {
+	} 
+	elseif ($arg == 'supprimer_flux' AND $url = _request('supprimer_flux')) {
 		$syndic_plug = @unserialize($GLOBALS['meta']['syndic_plug']);
 		unset($syndic_plug[$url]);
 		ecrire_meta('syndic_plug', serialize($syndic_plug));
 	}
 
-	if (!preg_match(',^(https?|ftp)://.*\.zip,',
-		$zip = _request('url_zip_plugin'))
-	AND !preg_match(',^(https?|ftp)://.*\.zip,',
-		$zip = _request('url_zip_plugin2')))
+	if (!preg_match(',^(https?|ftp)://.*\.zip,', $zip = $arg)
+		AND !preg_match(',^(https?|ftp)://.*\.zip,', $zip = _request('url_zip_plugin'))
+	  AND !preg_match(',^(https?|ftp)://.*\.zip,', $zip = _request('url_zip_plugin2')))
 	{
 		essaie_ajouter_liste_plugins($zip);
 		include_spip('inc/headers');
@@ -61,7 +60,7 @@ function action_charger_plugin_dist() {
 	}
 
 	## si ici on n'est pas en POST c'est qu'il y a un loup
-	if (!$_POST) die('pas en POST ?');
+	//if (!$_POST) die('pas en POST ?');
 
 	# Si definie a '', le chargeur est interdit ; mais on n'aurait de toutes
 	# facons jamais pu venir ici avec toutes les securisations faites :^)
