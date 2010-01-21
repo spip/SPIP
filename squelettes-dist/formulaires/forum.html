@@ -66,7 +66,6 @@
 		<label for='texte'><:forum_texte|typo:></label>
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 		<p class='explication'><:info_creation_paragraphe:></p>
-		[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{texte}|barre_typo{#LANG,1}})]
 		<textarea name="texte" id="texte" rows="12" cols="60">[(#ENV{texte})]</textarea>
 	</li>
 })]
