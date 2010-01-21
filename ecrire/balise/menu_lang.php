@@ -24,9 +24,9 @@ function balise_MENU_LANG ($p) {
 
 // s'il n'y a qu'une langue eviter definitivement la balise ?php 
 // http://doc.spip.org/@balise_MENU_LANG_stat
-function balise_MENU_LANG_stat ($args, $filtres) {
+function balise_MENU_LANG_stat ($args, $context_compil) {
 	if (strpos($GLOBALS['meta']['langues_multilingue'],',') === false) return '';
-	return $filtres ? $filtres : $args;
+	return $args;
 }
 
 // normalement $opt sera toujours non vide suite au test ci-dessus

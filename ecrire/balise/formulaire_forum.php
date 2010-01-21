@@ -40,17 +40,12 @@ function balise_FORMULAIRE_FORUM ($p) {
 }
 
 //
-// Chercher le titre et la configuration d'un forum 
+// Chercher le titre et la configuration d'un forum
 // valeurs possibles : 'pos'teriori, 'pri'ori, 'abo'nnement
 // Donner aussi la table de reference pour afficher_groupes[]
 
 // http://doc.spip.org/@balise_FORMULAIRE_FORUM_stat
-function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
-
-	// Note : ceci n'est pas documente !!
-	// $filtres[0] peut contenir l'url sur lequel faire tourner le formulaire
-	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM|forum)]
-	// ou encore [(#FORMULAIRE_FORUM|forumspip.php)]
+function balise_FORMULAIRE_FORUM_stat($args, $context_compil) {
 
 	// le denier arg peut contenir l'url sur lequel faire le retour
 	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM{#SELF})]
@@ -101,11 +96,7 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 
 	// Sur quelle adresse va-t-on "boucler" pour la previsualisation ?
 	// si vide : self()
-	if ($script = $filtres[0])
-		$script = preg_match(',[.]php3?$,', $script) ?
-			$script : generer_url_public($script);
-	else
-		$script = ''; # sur soi-meme
+	$script = '';
 
 	return
 		array($titre, $table, $type, $script,

@@ -25,7 +25,7 @@ function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
 #    <boucle(AUTEURS)>[(#LOGIN_PUBLIC{#SELF, #LOGIN})]
 
 // http://doc.spip.org/@balise_LOGIN_PUBLIC_stat
-function balise_LOGIN_PUBLIC_stat ($args, $filtres) {
+function balise_LOGIN_PUBLIC_stat ($args, $context_compil) {
 	return array(isset($args[1]) ? $args[1] : $args[0], (isset($args[2]) ? $args[2] : ''));
 }
 
