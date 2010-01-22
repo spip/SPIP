@@ -258,7 +258,7 @@ $spip_pipeline = array(
 	'accueil_gadgets' => '',
 	'accueil_informations' => '',
 	 # cf. public/assembler
-	'affichage_final' => '|f_surligne|f_tidy|f_admin|f_msie',
+	'affichage_final' => '|f_surligne|f_tidy|f_admin',
 	'affiche_droite' => '',
 	'affiche_gauche' => '',
 	'affiche_milieu' => '',

@@ -278,7 +278,6 @@ ecrire/inc/meme_rubrique.php -text
 ecrire/inc/message_select.php -text
 ecrire/inc/minipres.php -text
 ecrire/inc/modifier.php -text
-ecrire/inc/msiefix.php -text
 ecrire/inc/nfslock.php -text
 ecrire/inc/notes.php -text
 ecrire/inc/notifications.php -text
@@ -726,7 +725,6 @@ prive/javascript/gadgets.js -text
 prive/javascript/jquery.autosave.js -text
 prive/javascript/jquery.cookie.js -text
 prive/javascript/jquery.form.js -text
-prive/javascript/jquery.ifixpng.js -text
 prive/javascript/jquery.js -text
 prive/javascript/login.js -text
 prive/javascript/multilang.js -text

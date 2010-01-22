@@ -406,26 +406,6 @@ function f_admin ($texte) {
 	return $texte;
 }
 
-// Ajoute ce qu'il faut pour les clients MSIE et leurs debilites notoires
-// * gestion du PNG transparent
-// * images background (TODO)
-// Cf. aussi inc/presentation, fonction fin_page();
-// http://doc.spip.org/@f_msie
-function f_msie ($texte) {
-	if (!$GLOBALS['html']) return $texte;
-	if ($GLOBALS['flag_preserver']) return $texte;
-	
-	// test si MSIE et sinon quitte
-	if (
-		strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
-		AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT'])
-		AND $msiefix = charger_fonction('msiefix', 'inc')
-	)
-		return $msiefix($texte);
-	else
-		return $texte;
-}
-
 
 // http://doc.spip.org/@message_erreur_404
 function message_erreur_404 ($erreur= "", $code='404 Not Found') {
