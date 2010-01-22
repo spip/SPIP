@@ -13,7 +13,7 @@
 // Ce fichier regroupe la quasi totalite des definitions de #BALISES de spip
 // Pour chaque balise, il est possible de surcharger, dans mes_fonctions,
 // la fonction balise_TOTO_dist par une fonction balise_TOTO() respectant la
-// meme API : 
+// meme API :
 // elle recoit en entree un objet de classe CHAMP, le modifie et le retourne.
 // Cette classe est definie dans public/interfaces
 
@@ -25,8 +25,8 @@ function interprete_argument_balise($n,$p) {
 		return calculer_liste($p->param[0][$n],
 			$p->descr,
 			$p->boucles,
-			$p->id_boucle);	
-	else 
+			$p->id_boucle);
+	else
 		return NULL;
 }
 //
@@ -140,7 +140,7 @@ function balise_DATE_NOUVEAUTES_dist($p) {
 // http://doc.spip.org/@balise_DOSSIER_SQUELETTE_dist
 function balise_DOSSIER_SQUELETTE_dist($p) {
 	$code = substr(addslashes(dirname($p->descr['sourcefile'])), strlen(_DIR_RACINE));
-	$p->code = "_DIR_RACINE . '$code'" . 
+	$p->code = "_DIR_RACINE . '$code'" .
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -148,7 +148,7 @@ function balise_DOSSIER_SQUELETTE_dist($p) {
 // http://doc.spip.org/@balise_SQUELETTE_dist
 function balise_SQUELETTE_dist($p) {
 	$code = addslashes($p->descr['sourcefile']);
-	$p->code = "'$code'" . 
+	$p->code = "'$code'" .
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -167,7 +167,7 @@ function balise_NOM_SITE_dist($p) {
 	if (!$p->etoile) {
 		$p->code = "supprimer_numero(calculer_url(" .
 		champ_sql('url_site',$p) ."," .
-		champ_sql('nom_site',$p) . 
+		champ_sql('nom_site',$p) .
 		", 'titre', \$connect))";
 	} else
 		$p->code = champ_sql('nom_site',$p);
@@ -260,7 +260,7 @@ function balise_EXPOSE_dist($p) {
 		$on = $v;
 		if (($v = interprete_argument_balise(2,$p))!==NULL)
 			$off = $v;
-	
+
 	}
 	return calculer_balise_expose($p, $on, $off);
 }
@@ -269,8 +269,8 @@ function balise_EXPOSE_dist($p) {
 function calculer_balise_expose($p, $on, $off)
 {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
-	$key = $p->boucles[$b]->primary; 
-	$type = $p->boucles[$p->id_boucle]->primary; 
+	$key = $p->boucles[$b]->primary;
+	$type = $p->boucles[$p->id_boucle]->primary;
 	$desc = $p->boucles[$b]->show;
 	$connect = sql_quote($p->boucles[$b]->sql_serveur);
 
@@ -289,7 +289,7 @@ function calculer_balise_expose($p, $on, $off)
 	} elseif  (isset($desc['field']['id_groupe'])) {
 		$parent = index_pile($p->id_boucle, 'id_groupe', $p->boucles, $b);
 	} else $parent = "''";
-		  
+
 	$p->code = "(calcul_exposer($c, '$type', \$Pile[0], $parent, '$key', $connect) ? $on : $off)";
 
 	$p->interdire_scripts = false;
@@ -323,7 +323,7 @@ function balise_FIN_SURLIGNE_dist($p) {
 // quasiment jamais se trouver ralenti par des taches de fond un peu lentes
 // http://doc.spip.org/@balise_SPIP_CRON_dist
 function balise_SPIP_CRON_dist ($p) {
-	$p->code = '"<!-- SPIP-CRON --><div style=\"background-image: url(\'' . 
+	$p->code = '"<!-- SPIP-CRON --><div style=\"background-image: url(\'' .
 		generer_url_action('cron') .
 		'\');\"></div>"';
 	$p->interdire_scripts = false;
@@ -408,7 +408,7 @@ function balise_CHAPO_dist ($p) {
 // http://doc.spip.org/@balise_LESAUTEURS_dist
 function balise_LESAUTEURS_dist ($p) {
 	// Cherche le champ 'lesauteurs' dans la pile
-	$_lesauteurs = champ_sql('lesauteurs', $p); 
+	$_lesauteurs = champ_sql('lesauteurs', $p);
 
 	// Si le champ n'existe pas (cas de spip_articles), on applique
 	// le modele lesauteurs.html en passant id_article dans le contexte;
@@ -419,7 +419,7 @@ function balise_LESAUTEURS_dist ($p) {
 		$p->code = "safehtml($_lesauteurs)";
 		// $p->interdire_scripts = true;
 	} else {
-		$connect = !$p->id_boucle ? '' 
+		$connect = !$p->id_boucle ? ''
 		  : $p->boucles[$p->id_boucle]->sql_serveur;
 
 		$c = memoriser_contexte_compil($p);
@@ -449,8 +449,8 @@ function balise_RANG_dist ($p) {
 }
 
 
-// #PETITION 
-// retourne '' si l'article courant n'a pas de petition 
+// #PETITION
+// retourne '' si l'article courant n'a pas de petition
 // le texte de celle-ci sinon (et ' ' si il est vide)
 // cf FORMULAIRE_PETITION
 
@@ -487,7 +487,7 @@ function balise_POPULARITE_dist ($p) {
 // On produit un appel a _request si on ne l'a pas, mais c'est inexact:
 // l'absence peut etre due a une faute de frappe dans le contexte inclus.
 
-define('CODE_PAGINATION', 
+define('CODE_PAGINATION',
 	'%s($Numrows["%s"]["grand_total"],
  		%s,
 		isset($Pile[0][%4$s])?$Pile[0][%4$s]:intval(_request(%4$s)),
@@ -534,7 +534,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	$pas = $p->boucles[$b]->total_parties;
 	$f_pagination = chercher_filtre('pagination');
 	$type = $p->boucles[$b]->modificateur['debut_nom'];
-	$modif = ($type[0]!=="'") ? "'debut'.$type" 
+	$modif = ($type[0]!=="'") ? "'debut'.$type"
 	  : ("'debut" .substr($type,1));
 
 	$p->code = sprintf(CODE_PAGINATION, $f_pagination,$b, $type, $modif, $pas, $liste, ($__modele ? $__modele : "''"), _q($connect), $code_contexte);
@@ -594,7 +594,7 @@ function balise_CHEMIN_dist($p) {
 	if (!$arg) {
 		$msg = array('zbug_balise_sans_argument',	array('balise' => ' CHEMIN'));
 		erreur_squelette($msg, $p);
-	} else 
+	} else
 	  $p->code = 'find_in_path(' . $arg .')';
 
 	#$p->interdire_scripts = true;
@@ -634,16 +634,16 @@ function balise_ENV_dist($p, $src = NULL) {
 	if (!$_nom) {
 		// cas de #ENV sans argument : on retourne le serialize() du tableau
 		// une belle fonction [(#ENV|affiche_env)] serait pratique
-		$p->code = $src 
+		$p->code = $src
 		? ('(is_array($a = ('.$src.')) ? serialize($a) : "")')
 		: '@serialize($Pile[0])';
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
-		$p->code = $src 
+		$p->code = $src
 		? ('is_array($a = ('.$src.')) ? $a['.$_nom.'] : ""')
 		: ('@$Pile[0][' . $_nom . ']');
 		if ($_sinon)
-			$p->code = 'sinon('. 
+			$p->code = 'sinon('.
 				$p->code.",$_sinon)";
 		else
 			$p->code = '('.$p->code.')';
@@ -922,9 +922,9 @@ function balise_INCLURE_dist($p) {
 
 	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $id_boucle, false, false);
 
-	// erreur de syntaxe = fond absent 
+	// erreur de syntaxe = fond absent
 	// (2 messages d'erreur SPIP pour le prix d'un, mais pas d'erreur PHP
-	if (!$_contexte) $contexte = array(); 
+	if (!$_contexte) $contexte = array();
 
 	if (isset($_contexte['fond'])) {
 
@@ -976,9 +976,9 @@ function balise_MODELE_dist($p) {
 
 	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $p->id_boucle, false);
 
-	// erreur de syntaxe = fond absent 
+	// erreur de syntaxe = fond absent
 	// (2 messages d'erreur SPIP pour le prix d'un, mais pas d'erreur PHP
-	if (!$_contexte) $contexte = array(); 
+	if (!$_contexte) $contexte = array();
 
 	if (!isset($_contexte[1])) {
 		$msg = array('zbug_balise_sans_argument', array('balise' => ' MODELE'));
@@ -1163,7 +1163,7 @@ function balise_FOREACH_dist($p) {
 		$_modele = str_replace("'", "", strtolower($_modele));
 		$__modele = 'foreach_'.strtolower($_tableau);
 		$_modele = (!$_modele AND trouve_modele($__modele)) ?
-			$__modele : 
+			$__modele :
 			($_modele ? $_modele : 'foreach');
 
 		// on passe a la balise seulement les parametres
@@ -1189,11 +1189,11 @@ function balise_FOREACH_dist($p) {
 function balise_AUTORISER_dist($p) {
 	$_code = array();
 	$p->descr['session'] = true; // faire un cache par session
-	
+
 	$n=1;
 	while ($_v = interprete_argument_balise($n++,$p))
 		$_code[] = $_v;
-	
+
 	$p->code = '(include_spip("inc/autoriser")&&autoriser(' . join(', ',$_code).')?" ":"")';
 	$p->interdire_scripts = false;
 	return $p;
@@ -1238,13 +1238,13 @@ function balise_ACTION_FORMULAIRE($p){
 	if (strlen($_url))
 		$p->code .= " . (form_hidden($_url))";
 	if (strlen($_form))
-		$p->code .= 
+		$p->code .=
 		// envoyer le nom du formulaire que l'on traite
 		". '<input type=\'hidden\' name=\'formulaire_action\' value=\'' . $_form . '\' />'"
 		// transmettre les eventuels args de la balise formulaire
 		. ". '<input type=\'hidden\' name=\'formulaire_action_args\' value=\'' . @\$Pile[0]['formulaire_args']. '\' />'"
 		. ". (@\$Pile[0]['_hidden']?@\$Pile[0]['_hidden']:'')";
-	
+
 	if (strlen($p->code))
 		$p->code = "'<div>'" . $p->code . " . '</div>'";
 	$p->interdire_scripts = false;
@@ -1279,9 +1279,9 @@ function balise_BOUTON_ACTION_dist($p){
 	if (!$_confirm){ $_confirm="''"; $_onclick=''; }
 	else $_onclick = " onclick=\'return confirm(\"' . attribut_html($_confirm) . '\");\'";
 
-	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.(\$u=$_url).'\'><span>'.form_hidden(\$u)
+	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.(\$u=$_url).'\'><div>'.form_hidden(\$u)
 .'<button type=\'submit\' class=\'submit\' $_onclick>' . $_label . '</button>'
-.'</span></form>'";
+.'</div></form>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
