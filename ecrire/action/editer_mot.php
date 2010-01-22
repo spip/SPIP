@@ -16,10 +16,13 @@ include_spip('inc/filtres');
 
 // Editer (modification) d'un mot-cle
 // http://doc.spip.org/@action_editer_mot_dist
-function action_editer_mot_dist()
+function action_editer_mot_dist($arg=null)
 {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$id_mot = intval($securiser_action());
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
+	$id_mot = intval($arg);
 
 	$id_groupe = intval(_request('id_groupe'));
 	if (!$id_mot AND $id_groupe) {

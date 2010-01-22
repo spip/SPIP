@@ -18,7 +18,7 @@ function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_
 
 	$res = array();
 	$action_editer = charger_fonction("editer_$type",'action');
-	list($id,$err) = $action_editer();
+	list($id,$err) = $action_editer($id);
 	$id_table_objet = id_table_objet($type);
 	$res[$id_table_objet] = $id;
 	if ($err){
@@ -116,7 +116,10 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		$contexte['extra'] = unserialize($contexte['extra']);
 	// preciser que le formulaire doit passer dans un pipeline
 	$contexte['_pipeline'] = array('editer_contenu_objet',array('type'=>$type,'id'=>$id));
+
 	// preciser que le formulaire doit etre securise auteur/action
+	// n'est plus utile lorsque l'action accepte l'id en argument direct
+	// on le garde pour compat 
 	$contexte['_action'] = array("editer_$type",$id);
 
 	return $contexte;
