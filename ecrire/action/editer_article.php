@@ -13,10 +13,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@action_editer_article_dist
-function action_editer_article_dist() {
+function action_editer_article_dist($arg=null) {
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
 
 	// si id_article n'est pas un nombre, c'est une creation 
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
