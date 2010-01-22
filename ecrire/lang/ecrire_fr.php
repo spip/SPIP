@@ -262,6 +262,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	de mod&eacute;ration par d&eacute;faut:</i>',
 'info_admin_gere_rubriques' => 'Cet administrateur g&egrave;re les rubriques suivantes :',
 'info_admin_gere_toutes_rubriques' => 'Cet administrateur g&egrave;re <b>toutes les rubriques</b>.',
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre',
 'info_administrateur' => 'Administrateur',
 'info_administrateur_1' => 'Administrateur',
 'info_administrateur_2' => 'du site (<i>utilisez avec pr&eacute;caution</i>)',

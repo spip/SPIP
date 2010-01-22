@@ -65,7 +65,7 @@ function inc_instituer_auteur_dist($auteur, $modif = true) {
 
 function afficher_webmestre($auteur){
 	if (autoriser('webmestre','',0,$auteur['id_auteur']))
-		return "<p>"._L("Cet administrateur est <b>webmestre</b>")."</p>";
+		return "<p>"._T("info_admin_webmestre")."</p>";
 	return "";
 }
 
@@ -81,7 +81,7 @@ function editer_choix_webmestre($auteur){
 			. ($auteur['webmestre']=='oui'?" checked='checked'":"")
 			. " />"
 			. "<label for='webmestre'>"
-			. _L("Donner a cet administrateur les droits de webmestre")
+			. _T("info_admin_statuer_webmestre")
 			. "</label>";
 
 		$res .= "<input type='hidden' name='saisie_webmestre' value='1' />";
