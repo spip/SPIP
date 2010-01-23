@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://trac.rezo.net/spip/spip/ecrire/lang/
+// Fichier source, a modifier dans svn://trac.rezo.net/spip/branches/spip-2.1/ecrire/lang/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -914,9 +914,9 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'plugins_actifs' => '@count@ plugins activ&#233;s.',
 'plugins_compte' => '@count@ plugins',
 'plugins_disponibles' => '@count@ plugins disponibles.',
-'plugins_recents' => 'Plugins r&eacute;cents.',
 'plugins_erreur' => 'Erreur dans les plugins : @plugins@',
 'plugins_liste' => 'Liste des plugins',
+'plugins_recents' => 'Plugins r&eacute;cents.',
 'plugins_vue_hierarchie' => 'Hi&eacute;rarchie',
 'plugins_vue_liste' => 'Liste',
 'protocole_ldap' => 'Version du protocole :',
