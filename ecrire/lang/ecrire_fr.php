@@ -151,6 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 'email' => 'email',
 'email_2' => 'email :',
+'en_savoir_plus' => 'En savoir plus',
 'entree_adresse_annuaire' => 'Adresse de l\'annuaire',
 'entree_adresse_email' => 'Votre adresse email',
 'entree_adresse_fichier_syndication' => 'Adresse du fichier de syndication&nbsp;:',

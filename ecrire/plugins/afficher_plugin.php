@@ -62,7 +62,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$s .= "<div class='short'>".couper($desc,60)."</div>";
 	if (isset($info['icon'])) {
 		include_spip("inc/filtres_images_mini");
-		$s.= "<div class='icon'>".image_reduire($dir_plugins.$plug_file.'/'.trim($info['icon']), 32)."</div>";
+		$s.= "<div class='icon'><a href='$url_stat' rel='info'>".image_reduire($dir_plugins.$plug_file.'/'.trim($info['icon']), 32)."</a></div>";
 	}
 	$s .= "</div>";
 
@@ -135,18 +135,18 @@ function affiche_bloc_plugin($plug_file, $info, $dir_plugins=null) {
 	// TODO: le traiter_multi ici n'est pas beau
 	// cf. description du plugin/_stable_/ortho/plugin.xml
 	if (isset($info['description']))
-		$s .= "<div class='desc'>".plugin_propre($info['description']) . "</div>";
+		$s .= "<div class='desc'>".plugin_propre($info['description']) . "</div>\n";
 
 	if (isset($info['auteur']) AND trim($info['auteur']))
-		$s .= "<div class='auteurs'>" . _T('public:par_auteur') .' '. plugin_propre($info['auteur']) . "</div>";
+		$s .= "<div class='auteurs'>" . _T('public:par_auteur') .' '. plugin_propre($info['auteur']) . "</div>\n";
 	if (isset($info['licence']))
-		$s .= "<div class='licence'>" . _T('intitule_licence') .' '. plugin_propre($info['licence']) . "</div>";
+		$s .= "<div class='licence'> - " . _T('intitule_licence') .' '. plugin_propre($info['licence']) . "</div>\n";
 
 	if (trim($info['lien'])) {
 		$lien = $info['lien'];
-		if (preg_match(',^https?://,iS', $lien))
-			$lien = "[->$lien]";
-		$s .= "<div class='site'>" . _T('en_savoir_plus') .' '. plugin_propre($lien) . "</div>";
+		if (!preg_match(',^https?://,iS', $lien))
+			$lien = extraire_attribut(extraire_balise($lien,'a'),'href');
+		$s .= "<div class='site'><a href='$lien' class='spip_out'>" . _T('en_savoir_plus') .'</a></div>';
 	}
 
 	//
