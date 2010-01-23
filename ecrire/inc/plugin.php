@@ -588,11 +588,15 @@ function installe_un_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
 		// voir si on a besoin de faire l'install
 		$ok = $prefix_install('test',$infos['prefix'],$version_cible);
 		if (!$ok) {
+			echo "<div class='install-plugins'>";
+			echo _T('plugin_titre_installation',array('plugin'=>typo($infos['nom'])))."<br />";
 			$prefix_install('install',$infos['prefix'],$version_cible);
 			$ok = $prefix_install('test',$infos['prefix'],$version_cible);
 			// vider le cache des definitions des tables
 			$trouver_table = charger_fonction('trouver_table','base');
 			$trouver_table(false);
+			echo $ok ? _L("OK"):_L("Echec");
+			echo "</div>";
 		}
 		return $ok; // le plugin est deja installe et ok
 	}
@@ -601,11 +605,15 @@ function installe_un_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
 	if (isset($infos['version_base'])){
 		$ok = spip_plugin_install('test',$infos['prefix'],$infos['version_base']);
 		if (!$ok) {
+			echo "<div class='install-plugins'>";
+			echo _T('plugin_titre_installation',array('plugin'=>typo($infos['nom'])))."<br />";
 			spip_plugin_install('install',$infos['prefix'],$infos['version_base']);
 			$ok = spip_plugin_install('test',$infos['prefix'],$infos['version_base']);
 			// vider le cache des definitions des tables
 			$trouver_table = charger_fonction('trouver_table','base');
 			$trouver_table(false);
+			echo "<span class='".($ok?'ok':'erreur')."'>".($ok ? _L("OK"):_L("Echec"))."</span>";
+			echo "</div>";
 		}
 		return $ok; // le plugin est deja installe et ok
 	}
