@@ -938,8 +938,7 @@ function fin_page()
 			. "<br />"
 			. _T('info_copyright_doc',
 				array('spipnet' => $GLOBALS['home_server']
-					. '/' .    $GLOBALS['spip_lang']
-					. '_'))
+					. '/' .    $GLOBALS['spip_lang']))
 			. '</div>'))
 
 	. fin_grand_cadre(true)
