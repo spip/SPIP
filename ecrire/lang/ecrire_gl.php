@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Pode estar ante graves problemas: hai risco de destruci&oacute;n
   da s&uacute;a base de datos, fallos no funcionamento do web, etc.
   Non valide esta solicitude de importaci&oacute;n.<p>Para m&aacute;is
-  informaci&oacute;ns, consulte <A HREF=\'http://www.spip.net/fr_article1489.html\'>
+  informaci&oacute;ns, consulte <a href="@spipnet@">
   a documentaci&oacute;n de SPIP</A>.',
 'avis_espace_interdit' => '<b>Espazo prohibido</b><div>SPIP xa est&aacute; instalado.</div>',
 'avis_lecture_noms_bases_1' => 'O programa de instalaci&oacute;n non puido ler os nomes das bases de datos instaladas.',
@@ -197,7 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Esta p&aacute;xina presenta varios m&eacute;todos para establecer contactos coas novidades deste web.',
-'ical_info2' => 'Para obter m&aacute;is detalles sobre todas estas t&eacute;cnicas, non dubide en consultar <a href="http://www.spip.net/fr_suivi">a documentaci&oacute;n de SPIP</a>.',
+'ical_info2' => 'Para obter m&aacute;is detalles sobre todas estas t&eacute;cnicas, non dubide en consultar <a href="@spipnet@">a documentaci&oacute;n de SPIP</a>.',
 'ical_info_calendrier' => 'Dous calendarios est&aacute;n &aacute; s&uacute;a disposici&oacute;n. O primeiro e un mapa do web que anuncia todos os artigos publicados. O segundo cont&eacute;n os anuncios editoriais as&iacute; como as s&uacute;as &uacute;ltimas mensaxes privadas&nbsp;: estalle reservada gracias a unha chave persoal, que pode modificar en calquera momento anovando a s&uacute;a chave.',
 'ical_lien_rss_breves' => 'Afiliaci&oacute;n das breves do web',
 'ical_methode_http' => 'Descarga',
@@ -929,7 +929,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'texte_admin_effacer_stats' => 'Este comando borra todos os datos ligados &aacute;s estat&iacute;sticas de visita do web, e incl&uacute;e a popularidade dos artigos.',
 'texte_admin_tech_01' => 'Esta opci&oacute;n permite gardar o contido da base nun ficheiro que ser&aacute; almaceado no directorio @dossier@. Non esqueza tam&eacute;n gardar o directorio @img@ &iacute;ntegro, que &eacute; o que cont&eacute;n as imaxes e os documentos anexos empregados nos artigos e nas secci&oacute;ns.',
 'texte_admin_tech_02' => '&iexcl;Atenci&oacute;n!: esta copia de seguridade s&oacute; poder&aacute; ser restaurada  nun web que te&ntilde;a instalada a MESMA versi&oacute;n de SPIP. Daquela de ningunha maneira &eacute; conveniente &laquo;&nbsp;baleirar a base&nbsp;&raquo; coa esperanza de reinstalar a copia de seguridade logo da actualizaci&oacute;n...Consulte
-  <a href="http://www.spip.net/fr_article1489.html">a documentaci&oacute;n de SPIP</a>.',
+  <a href="@spipnet@">a documentaci&oacute;n de SPIP</a>.',
 'texte_admin_tech_03' => 'Pode escoller gardar o ficheiro en formato comprimido, para optimizar
   a transferencia ou a copia nun servidor de copias de seguridade, e para aforrar espazo no disco.',
 'texte_admin_tech_04' => 'Nun intento de fusi&oacute;n con outra base, pode limitar a copia de seguridade &aacute; secci&oacute;n:',

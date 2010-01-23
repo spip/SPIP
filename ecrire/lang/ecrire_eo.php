@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     detru-riskon de via datenbazo,
     diversajn retejajn misfunkciojn, ktp.
     Ne validigu tiun peton pri importo.<p />Por pli
-    da informoj, vidu <a HREF=\'http://www.spip.net/fr_article1489.html\'>
+    da informoj, vidu <a href="@spipnet@">
                                 la dokumentaron pri SPIP</a>.',
 'avis_espace_interdit' => '<b>Malpermesata aliro</b><div>SPIP jam estas instalita.</div>',
 'avis_lecture_noms_bases_1' => 'Instalprogramo ne sukcesis legi la nomojn de la instalitaj datenbazoj.',
@@ -195,7 +195,7 @@ forvi&#349;i ilin poste).',
 
 // I
 'ical_info1' => 'Tiu pa&#285;o prezentas plurajn metodojn por da&#365;re ricevi informojn pri la vivo de tiu retejo.',
-'ical_info2' => 'Por pli da informoj pri &#265;i &#265;iuj teknikoj, senhezite konsultu <a href="http://www.spip.net/fr_suivi">la dokumentaron de SPIP</a>.',
+'ical_info2' => 'Por pli da informoj pri &#265;i &#265;iuj teknikoj, senhezite konsultu <a href="@spipnet@">la dokumentaron de SPIP</a>.',
 'ical_info_calendrier' => 'Du kalendaroj disponeblas. La unua estas retejo-mapo anoncanta &#265;iujn publikigitajn artikolojn. La dua enhavas la eldon-anoncojn, kaj viajn lastajn privatajn mesa&#285;ojn&nbsp;: &#285;i estas rezervita al vi, pere de persona &#349;losilo, kiun vi &#265;iumomente povas modifi &#349;an&#285;ante vian pasvorton.',
 'ical_lien_rss_breves' => 'Aboni retejajn fulm-informojn',
 'ical_methode_http' => 'El&#349;uti',
@@ -911,7 +911,7 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 'texte_admin_effacer_stats' => '<NEW>Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
 'texte_admin_tech_01' => 'Tiu opcio ebligas al vi konservi enhavon de bazo en dosiero stokota en dosierujo @dossier@. Ne forgesu anka&#365; reakiri la tuton de la dosierujo @img@, kiu enhavas bildojn kaj dokumentojn uzatajn en artikoloj kaj rubrikoj.',
 'texte_admin_tech_02' => 'Atentu: tiu savkopio povos esti resta&#365;rita
-NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu la datenbazon&nbsp;" esperante poste reinstali savkopion post &#285;isdatigo... Konsultu <a href="http://www.spip.net/fr_article1489.html">la dokumentaron de SPIP</a>.',
+NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu la datenbazon&nbsp;" esperante poste reinstali savkopion post &#285;isdatigo... Konsultu <a href="@spipnet@">la dokumentaron de SPIP</a>.',
 'texte_admin_tech_03' => 'Vi povas elekti konservi la dosieron la&#365; densigita formo, por
  rapidigi ties &#349;uton hejmen a&#365; al konservo-servilo, kaj por &#349;pari diskospacon.',
 'texte_admin_tech_04' => '<NEW>Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ',

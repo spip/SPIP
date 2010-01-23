@@ -32,7 +32,7 @@ SPIP s&uuml;r&uuml;m&uuml;ne uymuyor.</b> B&uuml;y&uuml;k zorluklarla
  kar&#351;&#305;la&#351;abilirsiniz: veritaban&#305;n&#305;z&#305;n kayb&#305;,
  sitenin d&uuml;zg&uuml;n &ccedil;al&#305;&#351;mamas&#305;, vb.
 Bu ithal istemini onaylamay&#305;n.
-<p>Daha fazla bilgi i&ccedil;in <A HREF=\'http://www.spip.net/fr_article1489.html\'>SPIP kullanma k&#305;lavuzuna bak&#305;n.</A> (ge&ccedil;ici bir s&uuml;re frans&#305;zca)',
+<p>Daha fazla bilgi i&ccedil;in <a href="@spipnet@">SPIP kullanma k&#305;lavuzuna bak&#305;n.</A> (ge&ccedil;ici bir s&uuml;re frans&#305;zca)',
 'avis_espace_interdit' => '<b>Yasak alan</b><div>SPIP zaten kurulu.</div>',
 'avis_lecture_noms_bases_1' => 'Kurulum yaz&#305;l&#305;m&#305; mevcut veritabanlar&#305;n&#305;n isimlerini okuyamad&#305;.',
 'avis_lecture_noms_bases_2' => 'Ya mevcut veritaban&#305; yok, ya da veritabanlar&#305;n&#305;n listesini almaya yarayan komut g&uuml;venlik nedeniyle kullan&#305;ma kapat&#305;lm&#305;&#351; (bir &ccedil;ok bar&#305;nd&#305;rma &#351;irketinde al&#305;nan bir tedbir).',

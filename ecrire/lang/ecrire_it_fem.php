@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 una versione di SPIP diversa da quella installata.</b> Potranno sorgere dei problemi:
 rischio di distruzione del database, malfunzionamenti diversi del sito ecc.
 Non confermare questa richiesta d\'importazione!
-<p />Per ulteriori informazioni, vedere <A HREF=\'http://www.spip.net/it_article2827.html\'>
+<p />Per ulteriori informazioni, vedere <a href="@spipnet@">
 la documentazione di SPIP</a>.',
 'avis_espace_interdit' => '<b>Area vietata</b><div>SPIP &egrave; gi&agrave; installato.</div>',
 'avis_lecture_noms_bases_1' => 'Il programma di installazione non ha potuto leggere i nomi dei database installati nel server.',
@@ -200,7 +200,7 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 
 // I
 'ical_info1' => 'Questa pagina elenca diversi metodi per rimanere in contatto con le varie attivit&agrave; del sito.',
-'ical_info2' => 'Per ulteriori informazioni su queste tecniche, consultare <a href="http://www.spip.net/it_article2870.html">la documentazione di SPIP</a>.',
+'ical_info2' => 'Per ulteriori informazioni su queste tecniche, consultare <a href="@spipnet@">la documentazione di SPIP</a>.',
 'ical_info_calendrier' => 'Sono disponibili due calendari. Il primo &egrave; una mappa del sito che annuncia tutti gli articoli pubblicati. Il secondo contiene gli annunci editoriali e gli ultimi messaggi privati: &egrave; un\'area riservata, mediante identificativo personale, che &egrave; possibile modificare in qualsiasi momento rinnovando la password personale.',
 'ical_lien_rss_breves' => 'Syndication delle brevi del sito',
 'ical_methode_http' => 'Download',
@@ -928,7 +928,7 @@ Le traduzioni sono associate all\'originale,
 Non dimenticare di recuperare integralmente anche la cartella @img@, che contiene le immagini e i documenti utilizzati negli articoli e nelle rubriche.',
 'texte_admin_tech_02' => 'Attenzione: questo salvaggio potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.
 In particolare &egrave; sbagliato cancellare il database pensando di ripristinare questo salvataggio su una nuova versione di SPIP...
-Per maggiori informazioni consulta <a href="http://www.spip.net/it_article2827.html">la documentazione di SPIP</a>.',
+Per maggiori informazioni consulta <a href="@spipnet@">la documentazione di SPIP</a>.',
 'texte_admin_tech_03' => 'Puoi scegliere di salvare il file in forma compressa, al fine di ridurre
 i tempi di trasferimento in rete e di risparmiare dello spazio su disco.',
 'texte_admin_tech_04' => 'Al fine di una fusione con un altro database, &egrave; possibile limitare il salvataggio alla rubrica: ',
