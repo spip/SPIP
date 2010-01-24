@@ -26,7 +26,7 @@ function exec_fond_dist(){
 	if (!$fond) {
 		include_spip('inc/minipres');
 		echo minipres();
-	}
+	} else {
 
 	$titre = "exec_$exec";
 	$navigation = "";
@@ -66,6 +66,7 @@ function exec_fond_dist(){
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>''));
 
 	echo fin_gauche(),fin_page();
+	}
 }
 
 ?>
