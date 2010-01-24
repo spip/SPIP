@@ -26,7 +26,6 @@ function exec_fond_dist(){
 	if (!$fond) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
 	}
 
 	$titre = "exec_$exec";
