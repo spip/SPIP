@@ -79,7 +79,7 @@ function install_etape_4_dist()
 		$alea = creer_uniqid();
 		$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "login=" . sql_quote($login));
 		if ($id_auteur !== NULL) {
-			sql_updateq('spip_auteurs', array("nom"=> $nom, 'email'=> $email, 'login'=>$login, 'pass'=>$mdpass, 'alea_actuel'=>'', 'alea_futur'=> $alea, 'htpass'=>$htpass, 'statut'=>'0minirezo'), "id_auteur=$id_auteur");
+			sql_updateq('spip_auteurs', array("nom"=> $nom, 'email'=> $email, 'login'=>$login, 'pass'=>$mdpass, 'alea_actuel'=>'', 'alea_futur'=> $alea, 'htpass'=>$htpass, 'statut'=>'0minirezo','webmestre'=>'oui'), "id_auteur=$id_auteur");
 		}
 		else {
 			sql_insertq('spip_auteurs', array(
@@ -89,7 +89,8 @@ function install_etape_4_dist()
 				'pass' => $mdpass,
 				'htpass' => $htpass,
 				'alea_futur' => $alea,
-				'statut' =>'0minirezo'));
+				'statut' =>'0minirezo',
+				'webmestre' => 'oui'));
 		}
 
 		// inserer email comme email webmaster principal
