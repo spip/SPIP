@@ -23,7 +23,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$s = "";
 
 	$get_infos = charger_fonction('get_infos','plugins');
-	$info = $get_infos($plug_file);
+	$info = $get_infos($plug_file, false, $dir_plugins);
 
 	// numerotons les occurences d'un meme prefix
 	$versions[$info['prefix']] = isset($versions[$info['prefix']]) ? $versions[$info['prefix']] + 1 : '';
@@ -39,8 +39,8 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 
 
 	// checkbox pour activer ou desactiver
-	// si $actif vaut -1, c'est actif, et ce n'est pas desactivable (extension)
-	if (!$erreur AND $actif>=0){
+	// si ce n'est pas une extension
+	if (!$erreur AND $dir_plugins!==_DIR_EXTENSIONS){
 		$name = 's' . substr(md5("statusplug_$plug_file"),0,16);
 		$id_input++;
 		$check = "\n<input type='checkbox' name='$name' id='label_$id_input' value='O'";
@@ -54,7 +54,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$s .= "<div class='resume'>";
 
 	$desc = plugin_propre($info['description']);
-	$url_stat = parametre_url($url_page, "plugin",$plug_file);
+	$url_stat = parametre_url($url_page, "plugin",$dir_plugins.$plug_file);
 
 	$s .= "<h3 class='nom'><a href='$url_stat' rel='info'>".typo($info['nom'])."</a></h3>";
 	$s .= " <span class='version'>".$info['version']."</span>";
@@ -82,7 +82,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	}
 
 	// bouton de desinstallation
-	if (plugin_est_installe($plug_file)){
+	if ($dir_plugins!==_DIR_EXTENSIONS AND plugin_est_installe($plug_file)){
 		$action = redirige_action_auteur('desinstaller_plugin',$plug_file,'admin_plugin');
 		$s .= "<div class='actions'>[".
 		"<a href='$action'

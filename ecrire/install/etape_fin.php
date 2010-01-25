@@ -40,12 +40,13 @@ function install_etape_fin_dist()
 	}
 
 	// creer le repertoire cache, qui sert partout !
+	// deja fait en etape 4 en principe, on garde au cas ou
 	if(!@file_exists(_DIR_CACHE)) {
 		$rep = preg_replace(','._DIR_TMP.',', '', _DIR_CACHE);
 		$rep = sous_repertoire(_DIR_TMP, $rep, true,true);
 	}
 
 	// on l'envoie dans l'espace prive
-	redirige_url_ecrire('accueil');	
+	redirige_url_ecrire('accueil');
 }
 ?>

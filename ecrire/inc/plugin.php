@@ -296,6 +296,9 @@ function liste_chemin_plugin_actifs($dir_plugins=_DIR_PLUGINS){
 function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	static $liste_pipe_manquants=array();
 
+	// creer le repertoire cache/ si necessaire ! (installation notamment)
+	sous_repertoire(_DIR_CACHE, '', false,true);
+
 	$liste_fichier_verif = array();
 	if (($pipe_recherche)&&(!in_array($pipe_recherche,$liste_pipe_manquants)))
 		$liste_pipe_manquants[]=$pipe_recherche;
@@ -455,7 +458,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	}
 	ecrire_fichier(_CACHE_PLUGINS_VERIF,
 		serialize($liste_fichier_verif));
-	@spip_unlink(_CACHE_CHEMIN);
+	clear_path_cache();
 }
 
 // precompilation des pipelines
@@ -513,14 +516,15 @@ function liste_plugin_inactifs(){
 // Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide
 // si elle n'existe pas
 // risque de pb en php5 a cause du typage ou de null (verifier dans la doc php)
-// http://doc.spip.org/@verif_plugin
-function verif_plugin($pipe_recherche = false){
+function actualise_plugins_actifs($pipe_recherche = false){
 	if (!spip_connect()) return false;
 	$plugin_actifs = liste_chemin_plugin_actifs();
 	$plugin_liste = liste_plugin_files();
 	$plugin_new = array_intersect($plugin_actifs,$plugin_liste);
+	$actifs_avant = $GLOBALS['meta']['plugin'];
 	ecrire_plugin_actifs($plugin_new,$pipe_recherche);
-	return true;
+	// retourner -1 si la liste des plugins actifs a change
+	return strcmp($GLOBALS['meta']['plugin'],$actifs_avant)==0 ? 1 : -1;
 }
 
 // http://doc.spip.org/@spip_plugin_install
@@ -595,7 +599,7 @@ function installe_un_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
 			// vider le cache des definitions des tables
 			$trouver_table = charger_fonction('trouver_table','base');
 			$trouver_table(false);
-			echo $ok ? _L("OK"):_L("Echec");
+			echo "<span class='".($ok?'ok':'erreur')."'>".($ok ? _L("OK"):_L("Echec"))."</span>";
 			echo "</div>";
 		}
 		return $ok; // le plugin est deja installe et ok
@@ -621,7 +625,7 @@ function installe_un_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
 }
 
 // http://doc.spip.org/@installe_plugins
-function installe_plugins(){
+function installe_plugins($test = false){
 	$meta_plug_installes = array();
 
 	// vider le cache des descriptions de tables avant installation
@@ -636,6 +640,7 @@ function installe_plugins(){
 		$dir_type = $resume['dir_type'];		
 		$infos = $get_infos($plug,false,constant($dir_type));
 		if (isset($infos['install'])){
+			if ($test) return true; // il y a des installations a faire
 			$ok = installe_un_plugin($plug,$infos,$dir_type);
 			// on peut enregistrer le chemin ici car il est mis a jour juste avant l'affichage
 			// du panneau -> cela suivra si le plugin demenage
@@ -646,6 +651,8 @@ function installe_plugins(){
 		}
 	}
 	ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
+	if ($test) return false; // il n'y a pas d'installations a faire
+	return true; // succes
 }
 
 // http://doc.spip.org/@plugin_est_installe
@@ -669,7 +676,7 @@ function verifie_include_plugins() {
 		// on fait une mise a jour silencieuse
 		// generer les fichiers php precompiles
 		// de chargement des plugins et des pipelines
-		verif_plugin();
+		actualise_plugins_actifs();
 		spip_log("desactivation des plugins suite a suppression du repertoire");
 	}
 */

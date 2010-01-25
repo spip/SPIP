@@ -26,6 +26,14 @@ function exec_admin_plugin_dist($retour='') {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+	// on fait la verif du path avant tout,
+	// et l'installation des qu'on est dans la colonne principale
+	// si jamais la liste des plugins actifs change, il faut faire un refresh du hit
+	// pour etre sur que les bons fichiers seront charges lors de l'install
+	if (actualise_plugins_actifs()==-1){
+		include_spip('inc/headers');
+		redirige_par_entete(self());
+	}
 
 	$format = '';
 	if (_request('format')!==NULL)
@@ -46,12 +54,8 @@ function exec_admin_plugin_dist($retour='') {
 	echo $s;
 	echo fin_boite_info(true);
 
-	// on fait la verif du path ici,
-	// et l'installation des qu'on est dans la colonne principale
-	verif_plugin();
-
 	// la valeur de retour de la fonction ci-dessus n'est pas compatible
-	// avec ce que fait verif_plugin, il faut recalculer. A revoir.
+	// avec ce que fait actualise_plugins_actifs, il faut recalculer. A revoir.
 	$lcpa = liste_chemin_plugin_actifs();
 
 	// Si on a CFG, ajoute un lien (oui c'est mal)
@@ -87,8 +91,11 @@ function exec_admin_plugin_dist($retour='') {
 
 
 		$sub = "\n<div class='boutons'>"
-		.  "<input type='submit' class='submit' value='"._T('bouton_enregistrer')
-		."' />" . "</div>";
+		.  "<input type='submit' class='submit save' style='display:none;' value='"._T('bouton_enregistrer')
+		."' />"
+		.  "<input type='submit' class='submit update' value='"._T('lien_mise_a_jour_syndication')
+		."' />"
+		. "</div>";
 
 
 		$quoi = _request('voir');
@@ -130,7 +137,7 @@ function exec_admin_plugin_dist($retour='') {
 			echo redirige_action_post('activer_plugins','activer','admin_plugin','', $corps);
 
 			echo fin_cadre_trait_couleur(true);
-			echo affiche_les_extensions($liste_plugins_actifs);
+			echo affiche_les_extensions(liste_chemin_plugin_actifs(_DIR_EXTENSIONS));
 		}
 
 	}
@@ -146,10 +153,14 @@ function affiche_les_extensions($liste_plugins_actifs){
 		$res .= "<div id='extensions'>";
 		$res .= debut_cadre_trait_couleur('plugin-24.png',true,'',_L('Extensions'),
 		'liste_extensions');
-		$res .= "<p>"._L('Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@. Elles ne sont pas d&#233;sactivables.', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))."</p>";
+		$res .= "<p>"
+			._L('Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))
+			. '<br />'. _L('Elles ne sont pas d&#233;sactivables.')
+			."</p>";
 
+		$format = 'liste';
 		$afficher = charger_fonction("afficher_$format",'plugins');
-		$res .= $afficher(self(), $liste_extensions,$liste_plugins_actifs);
+		$res .= $afficher(self(), $liste_extensions,$liste_plugins_actifs, _DIR_EXTENSIONS);
 
 		$res .= fin_cadre_trait_couleur(true);
 		$res .= "</div>\n";
@@ -191,6 +202,9 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='lis
 					li.removeClass('on');
 			}
 			return false;
+		});
+		jQuery('.plugins li.item input.checkbox').change(function(){
+			jQuery(this).parents('form').eq(0).find('.boutons .save').show().siblings('.update').hide();
 		});
 	});
 	") .

@@ -192,7 +192,7 @@ function install_premier_auteur($email, $login, $nom, $pass, $hidden)
 			     _T('info_laisser_champs_vides')
 			     )
 	. generer_form_ecrire('install', (
-			  "\n<input type='hidden' name='etape' value='4' />"
+			  "\n<input type='hidden' name='etape' value='3b' />"
 			  . $hidden
 			  . fieldset(_T('info_identification_publique'),
 				    array(
