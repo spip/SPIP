@@ -138,6 +138,32 @@ function exec_admin_plugin_dist($retour='') {
 
 			echo fin_cadre_trait_couleur(true);
 			echo affiche_les_extensions(liste_chemin_plugin_actifs(_DIR_EXTENSIONS));
+
+			echo 	http_script("
+	jQuery(function(){
+		jQuery('.plugins li.item a[rel=info]').click(function(){
+			var li = jQuery(this).parents('li').eq(0);
+			var prefix = li.find('input.checkbox').attr('name');
+			if (!jQuery('div.details',li).html()) {
+				jQuery('div.details',li).prepend(ajax_image_searching).load(
+					jQuery(this).attr('href').replace(/admin_plugin|plugins/, 'info_plugin'), {}, function(){
+						li.addClass('on');
+					}
+				);
+			}
+			else {
+				if (jQuery('div.details',li).toggle().is(':visible'))
+					li.addClass('on');
+				else
+					li.removeClass('on');
+			}
+			return false;
+		});
+		jQuery('.plugins li.item input.checkbox').change(function(){
+			jQuery(this).parents('form').eq(0).find('.boutons .save').show().siblings('.update').hide();
+		});
+	});
+	");
 		}
 
 	}
@@ -182,33 +208,7 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='lis
 #	var_dump(spip_timer('cachexml'));
 
 
-	return
-	http_script("
-	jQuery(function(){
-		jQuery('.plugins li.item a[rel=info]').click(function(){
-			var li = jQuery(this).parents('li').eq(0);
-			var prefix = li.find('input.checkbox').attr('name');
-			if (!jQuery('div.details',li).html()) {
-				jQuery('div.details',li).prepend(ajax_image_searching).load(
-					jQuery(this).attr('href').replace(/admin_plugin|plugins/, 'info_plugin'), {}, function(){
-						li.addClass('on');
-					}
-				);
-			}
-			else {
-				if (jQuery('div.details',li).toggle().is(':visible'))
-					li.addClass('on');
-				else
-					li.removeClass('on');
-			}
-			return false;
-		});
-		jQuery('.plugins li.item input.checkbox').change(function(){
-			jQuery(this).parents('form').eq(0).find('.boutons .save').show().siblings('.update').hide();
-		});
-	});
-	") .
-	$res;
+	return	$res;
 }
 
 /**
