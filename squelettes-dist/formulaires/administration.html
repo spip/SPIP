@@ -27,10 +27,10 @@
 			[((#ENV{id_mot}))]</a>][(#ENV{id_syndic}|oui)[(#AUTORISER{modifier,site,#ENV{id_syndic}}|oui)
 	<a href="[(#URL_ECRIRE{sites_edit,id_syndic=#ENV{id_syndic}})]" class="spip-admin-boutons modifier"
 		id="modifier_site"><:icone_modifier_site:>
-			[((#ENV{id_syndic}))]</a>]][(#ENV{id_syndic}|oui)
+			[((#ENV{id_syndic}))]</a>
 	<a href="[(#ENV{voir_site})]" class="spip-admin-boutons voir"
 		id="voir_site"><:info_site:>
-			[((#ENV{id_syndic}))]</a>][(#ENV{id_auteur}|oui)[(#AUTORISER{modifier,auteur,#ENV{id_auteur}}|oui)
+			[((#ENV{id_syndic}))]</a>]][(#ENV{id_auteur}|oui)[(#AUTORISER{modifier,auteur,#ENV{id_auteur}}|oui)
 	<a href="[(#URL_ECRIRE{auteur_infos,id_auteur=#ENV{id_auteur}}|parametre_url{edit,oui})]" class="spip-admin-boutons modifier"
 		id="modifier_auteur"><:admin_modifier_auteur:>
 			[((#ENV{id_auteur}))]</a>]][(#ENV{id_auteur}|oui)
