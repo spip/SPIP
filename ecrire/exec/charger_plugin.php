@@ -43,6 +43,9 @@ function exec_charger_plugin_dist($retour='') {
 		echo fin_boite_info(true);
 
 		echo debut_droite('plugin', true);
+		// voire si on peut creer le repertoure auto/ sans rien demander
+		sous_repertoire(_DIR_PLUGINS_AUTO, '', true, true);
+		
 		echo "<div class='liste-plugins formulaire_spip'>";
 		include_spip('inc/charger_plugin');
 		echo formulaire_charger_plugin($retour);
