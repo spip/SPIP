@@ -41,7 +41,7 @@ function action_editer_mots_post($r)
 				sql_delete("spip_mots_articles", "id_mot=$id_mot");
 				sql_delete("spip_mots_rubriques", "id_mot=$id_mot");
 				sql_delete("spip_mots_syndic", "id_mot=$id_mot");
-				pipeline('supprimer_objets_lies',
+				pipeline('trig_supprimer_objets_lies',
 					array(
 						array('type'=>'mot','id'=>$id_mot)
 					)

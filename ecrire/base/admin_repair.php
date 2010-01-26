@@ -34,7 +34,7 @@ function base_admin_repair_dist($titre='', $reprise='') {
 	include_spip('inc/minipres');
 	$res .= pipeline('base_admin_repair',$res);
 	echo minipres(_T('texte_tentative_recuperation'),
-			$res . generer_form_ecrire('accueil', '','',_T('public:accueil_site')));
+	$res . generer_form_ecrire('accueil', '','',_T('public:accueil_site')));
 }
 
 // http://doc.spip.org/@admin_repair_plat
