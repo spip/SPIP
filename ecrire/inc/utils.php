@@ -1358,7 +1358,7 @@ function spip_initialisation_suite() {
 	define('_IMG_GD_MAX_PIXELS', (isset($GLOBALS['meta']['max_taille_vignettes'])&&$GLOBALS['meta']['max_taille_vignettes']<5500000)?$GLOBALS['meta']['max_taille_vignettes']:0);
 	define('_IMG_GD_QUALITE', 85);
 
-	@define('_MEMORY_LIMIT_MIN',10); // en Mo
+	@define('_MEMORY_LIMIT_MIN',16); // en Mo
 	// si on est dans l'espace prive et si le besoin est superieur a 8Mo (qui est vraiment le standard)
 	// on verifie que la memoire est suffisante pour le compactage css+js pour eviter la page blanche
 	// il y aura d'autres problemes et l'utilisateur n'ira pas tres loin, mais ce sera plus comprehensible qu'une page blanche
