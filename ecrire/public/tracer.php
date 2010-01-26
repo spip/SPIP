@@ -123,7 +123,7 @@ function chrono_requete($temps)
 	unset($d['']);
 	// Fabriquer le tableau des liens de navigation dans le grand tableau
 	foreach ($d as $k => $v) {
-		$d[$k] =  $n[$k] . "</td><td>$k</td><td class='time'>$v</td><td>"
+		$d[$k] =  $n[$k] . "</td><td>$k</td><td class='time'>$v</td><td class='liste-reqs'>"
 		  . join('',$t[$k]);
 	}
 
