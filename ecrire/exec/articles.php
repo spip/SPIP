@@ -153,7 +153,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	return
 	  $navigation
 	  . $extra
-	  . "<div class='fiche_objet'>"
+	  . pipeline('afficher_fiche_objet',array('args'=>array('type'=>'article','id'=>$id_article),'data'=>
+	   "<div class='fiche_objet'>"
 	  . $haut
 	  . afficher_onglets_pages(
 	  	array(
@@ -170,7 +171,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	    'discuter'=>_INTERFACE_ONGLETS?$onglet_discuter:""))
 	  . "</div>"
 	  . (_INTERFACE_ONGLETS?"":$onglet_discuter)
-;
+			));
 }
 
 //
@@ -189,6 +190,7 @@ function boites_de_config_articles($id_article)
 	$petition = $petitionner($id_article,"articles","id_article=$id_article");
 
 	$masque = $regler . $petition;
+  $masque = pipeline('afficher_config_objet',array('args'=>array('type'=>'article','id'=>$id_article),'data'=>$masque));
 
 	if (!$masque) return '';
 

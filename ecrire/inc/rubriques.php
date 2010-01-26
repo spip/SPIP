@@ -14,14 +14,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Fonction a appeler lorsque le statut d'un objet change dans une rubrique
-// ou que la rubrique est d�placee.
+// ou que la rubrique est deplacee.
 // Le 2e arg est un tableau ayant un index "statut" (indiquant le nouveau)
 // et eventuellement un index "id_rubrique" (indiquant le deplacement)
 
 // Si le statut passe a "publie", la rubrique et ses parents y passent aussi
-// et les langues utilis�es sont recalcul�es. 
-// Cons�quences sym�triques s'il est depublie'.
-// S'il est deplace' alors qu'il etait publie�, double consequence.
+// et les langues utilisees sont recalculees.
+// Consequences symetriques s'il est depublie'.
+// S'il est deplace' alors qu'il etait publiee, double consequence.
 // Tout cela devrait passer en SQL, sous forme de Cascade SQL.
 
 // http://doc.spip.org/@calculer_rubriques_if
@@ -104,6 +104,11 @@ function depublier_branche_rubrique_if($id_rubrique)
 		if (sql_countsel("spip_documents_liens",  "id_objet=$id_pred AND objet='rubrique'"))
 			return $id_pred != $id_rubrique;;
 
+		$compte = pipeline('objet_compte_enfants_publies',array('args'=>array('objet'=>'rubrique','id_objet'=>$id_pred),'data'=>array()));
+		foreach($compte as $objet => $n)
+			if ($n)
+				return $id_pred != $id_rubrique;
+
 		sql_updateq("spip_rubriques", array("statut" => '0'), "id_rubrique=$id_pred");
 #		spip_log("depublier_rubrique $id_pred");
 
@@ -118,7 +123,7 @@ function depublier_branche_rubrique_if($id_rubrique)
 //
 // Fonction appelee apres importation:
 // calculer les meta-donnes resultantes,
-// remettre de la coh�rence au cas o� la base importee en manquait
+// remettre de la coherence au cas ou la base importee en manquait
 // Cette fonction doit etre invoque sans processus concurrent potentiel.
 // http://doc.spip.org/@calculer_rubriques
 function calculer_rubriques() {

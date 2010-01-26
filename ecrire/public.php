@@ -169,6 +169,12 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	// Execution de la page calculee
 
+
+	// traitements sur les entetes avant envoi
+	// peut servir pour le plugin de stats
+	$page['entetes'] = pipeline('affichage_entetes_final', $page['entetes']);
+
+
 	// 1. Cas d'une page contenant uniquement du HTML :
 	if ($page['process_ins'] == 'html') {
 		envoyer_entetes($page['entetes']);

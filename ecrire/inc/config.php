@@ -26,7 +26,7 @@ function inc_config_dist() {
 // http://doc.spip.org/@liste_metas
 function liste_metas()
 {
-	return array(
+	return pipeline('configurer_liste_metas', array(
 		'nom_site' => _T('info_mon_site_spip'),
 		'adresse_site' => preg_replace(",/$,", "", url_de_base()),
 		'descriptif_site' => '',
@@ -103,7 +103,7 @@ function liste_metas()
 		'auto_compress_http'=>'non',
 		'auto_compress_js'=>'non',
 		'auto_compress_css'=>'non'
-	);
+	));
 }
 
 // mets les meta a des valeurs conventionnelles quand elles sont vides
