@@ -18,8 +18,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Gestion du raccourci <math>...</math> en client-serveur
 //
 
-// http://doc.spip.org/@image_math
-function image_math($tex) {
+// http://doc.spip.org/@produire_image_math
+function produire_image_math($tex) {
 	global $traiter_math;
 	switch ($traiter_math) {
 		// Attention: mathml desactiv'e pour l'instant
@@ -91,7 +91,7 @@ function traiter_math($letexte, $source='') {
 
 		// Les doubles $$x^2$$ en mode 'div'
 		while((preg_match(",[$][$]([^$]+)[$][$],",$texte_milieu, $regs))) {
-			$echap = "\n<p class=\"spip\" style=\"text-align: center;\">".image_math($regs[1])."</p>\n";
+			$echap = "\n<p class=\"spip\" style=\"text-align: center;\">".produire_image_math($regs[1])."</p>\n";
 			$pos = strpos($texte_milieu, $regs[0]);
 			$texte_milieu = substr($texte_milieu,0,$pos)
 				. code_echappement($echap, $source)
@@ -100,7 +100,7 @@ function traiter_math($letexte, $source='') {
 
 		// Les simples $x^2$ en mode 'span'
 		while((preg_match(",[$]([^$]+)[$],",$texte_milieu, $regs))) {
-			$echap = image_math($regs[1]);
+			$echap = produire_image_math($regs[1]);
 			$pos = strpos($texte_milieu, $regs[0]);
 			$texte_milieu = substr($texte_milieu,0,$pos)
 				. code_echappement($echap, $source)
