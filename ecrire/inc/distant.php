@@ -21,6 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Cree au besoin la copie locale d'un fichier distant
 // mode = 'test' - ne faire que tester
 // mode = 'auto' - charger au besoin
+// mode = 'modif' - Si deja present, ne charger que si If-Modified-Since
 // mode = 'force' - charger toujours (mettre a jour)
 //
 // Prend en argument un chemin relatif au rep racine, ou une URL
@@ -36,27 +37,28 @@ function copie_locale($source, $mode='auto') {
 	if (preg_match($reg, $source, $local)) return substr(_DIR_IMG,strlen(_DIR_RACINE)) . urldecode($local[1]);
 
 	$local = fichier_copie_locale($source);
+	$localrac = _DIR_RACINE.$local;
+	$t = ($mode=='force') ? false  : @file_exists($localrac);
 
 	// test d'existence du fichier
-	if ($mode == 'test')
-		return @file_exists(_DIR_RACINE.$local) ? $local : '';
+	if ($mode == 'test') return $t ? $local : '';
 
 	// si $local = '' c'est un fichier refuse par fichier_copie_locale(),
 	// par exemple un fichier qui ne figure pas dans nos documents ;
 	// dans ce cas on n'essaie pas de le telecharger pour ensuite echouer
 	if (!$local) return false;
 
-	// sinon voir si on doit le telecharger
-	if ($local != $source
-	AND preg_match(',^\w+://,', $source)) {
-		if (($mode=='auto' AND !@file_exists(_DIR_RACINE.$local))
-		OR $mode=='force') {
-			$res = recuperer_page($source,_DIR_RACINE.$local,false,_COPIE_LOCALE_MAX_SIZE);
-			if (!$res) return false;
-			spip_log ('ecrire copie locale '._DIR_RACINE.$local." taille $res");
+	// sinon voir si on doit/peut le telecharger
+	if ($local == $source OR !preg_match(',^\w+://,', $source)) 
+		return $local;
+
+	if ($mode=='modif' OR !$t) {
+		$res = recuperer_page($source, $localrac,false,_COPIE_LOCALE_MAX_SIZE, '','',false, $t ? filemtime($localrac) : '');
+		if (!$res) return $t ? $local : false;
+#		spip_log ('ecrire copie locale '.$localrac." taille $res");
 			
-			// pour une eventuelle indexation
-			pipeline('post_edition',
+		// pour une eventuelle indexation
+		pipeline('post_edition',
 				array(
 					'args' => array(
 						'operation' => 'copie_locale',
@@ -66,7 +68,6 @@ function copie_locale($source, $mode='auto') {
 					'data' => null
 				)
 			);
-		}
 	}
 
 	return $local;
@@ -218,7 +219,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 		$refuser_gz = true;
 
 	// ouvrir la connexion et envoyer la requete et ses en-tetes
-	list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer, $datas, _INC_DISTANT_VERSION_HTTP);
+	list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer, $datas, _INC_DISTANT_VERSION_HTTP, $date_verif);
 	if (!$f) {
 		spip_log("ECHEC init_http $url");
 		return false;
@@ -548,7 +549,7 @@ function need_proxy($host)
 // retourne le descripteur sur lequel lire la reponse
 //
 // http://doc.spip.org/@init_http
-function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
+function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0", $date='') {
 	$user = $via_proxy = $proxy_user = ''; 
 	$fopen = false;
 
@@ -570,7 +571,7 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 	if (!isset($t['path']) || !($path = $t['path'])) $path = "/";
 	if (@$t['query']) $path .= "?" .$t['query'];
 
-	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers);
+	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers, $date);
 	if (!$f) {
 	  // fallback : fopen
 		if (!$GLOBALS['tester_proxy']) {
@@ -584,7 +585,7 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 }
 
 // http://doc.spip.org/@lance_requete
-function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
+function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0", $date='') {
 
 	$proxy_user = '';
 	$http_proxy = need_proxy($host);
@@ -612,6 +613,7 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 	. "User-Agent: " . _INC_DISTANT_USER_AGENT . "\r\n"
 	. ($refuse_gz ? '' : ("Accept-Encoding: " . _INC_DISTANT_CONTENT_ENCODING . "\r\n"))
 	. (!$site ? '' : "Referer: $site/$referer\r\n")
+	. (!$date ? '' : "If-Modified-Since: " . (gmdate("D, d M Y H:i:s", $date)  ." GMT\r\n"))
 	. (!$user ? '' : ("Authorization: Basic " . base64_encode($user) ."\r\n"))
 	. (!$proxy_user ? '' : "Proxy-Authorization: Basic $proxy_user\r\n")
 	. (!strpos($vers, '1.1') ? '' : "Keep-Alive: 300\r\nConnection: keep-alive\r\n");
