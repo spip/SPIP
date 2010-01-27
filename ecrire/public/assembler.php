@@ -148,6 +148,15 @@ function assembler($fond, $connect='') {
 					// passer le type d'objet recherche au contexte de la page d'erreur
 					$contexte['type'] = (isset($type)?$type:$fond);
 				  $page = message_page_indisponible($page, $contexte);
+					// cacher la page d'erreur car celle ci est contextuelle
+					if ($chemin_cache
+					AND is_array($page)
+					AND count($page)
+					AND $page['entetes']['X-Spip-Cache'] > 0){
+						$cacher = charger_fonction('cacher', 'public');
+						$lastinclude = time();
+						$cacher($contexte_cache, $use_cache, $chemin_cache, $page, $lastinclude);
+					}
 				}
 				// pas de cache client en mode 'observation'
 				if ($GLOBALS['var_mode']) {
