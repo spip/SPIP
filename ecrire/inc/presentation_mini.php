@@ -399,32 +399,41 @@ function info_copyright() {
 
 }
 
-define('_VERSIONS_SERVEUR', 'http://files.spip.org/spip/archives/');
+define('_VERSIONS_SERVEUR', 'http://files.spip.org/');
+define('_VERSIONS_LISTE', 'spip/archives.xml');
 
 function info_maj ()
 {
 	global $spip_version_branche;
 	if (!autoriser('webmestre')) return '';
-	include_spip('inc/distant');
-	if (!$page = recuperer_page(_VERSIONS_SERVEUR)) return '';
 	list($maj,$min,$rev) = preg_split('/\D+/', $spip_version_branche);
 #	list($maj,$min,$rev) = preg_split('/\D+/', '1.9.2i'); # pour test
+	include_spip('inc/distant');
+	$liste = _VERSIONS_SERVEUR . _VERSIONS_LISTE;
+	if (!$page = recuperer_page($liste)) return '';
+
 	// reperer toutes les versions de numero majeur superieur ou egal
 	// (a revoir quand on arrivera a SPIP V10 ...)
 	$p = substr("0123456789", intval($maj));
-	$re = ',' . _VERSIONS_SERVEUR . 'SPIP\D+([' . $p . ']+)\D+(\d+)(\D+(\d+))?[\w.-]*,';
+	$re = ',archives/SPIP\D+([' . $p . ']+)\D+(\d+)(\D+(\d+))?[\w.-]*,';
 	preg_match_all($re, $page, $m,  PREG_SET_ORDER);
+	$new = '';
 	foreach ($m as $v) {
-		list(, $maj2, $min2,, $rev2) = $v;
-		if (($maj2 > $maj)
-		OR (($maj2 == $maj)
-			AND (($min2 > $min)
-				OR (($min2 == $min) AND ($rev2 > $rev)))))
-	    return "<br /><a style='color: red' href='" . _VERSIONS_SERVEUR . "'>" . 
+			list(, $maj2, $min2,, $rev2) = $v;
+			if (($maj2 > $maj)
+			OR (($maj2 == $maj)
+				AND (($min2 > $min)
+					OR (($min2 == $min)
+						AND ($rev2 > $rev))))) {
+				$new = $v[0];
+				break;
+		}
+	}
+
+	if (!$new) return "";
+	return "<br /><a style='color: red' href='" . _VERSIONS_SERVEUR . "'>" . 
 	    _L('De nouvelles_versions_de_SPIP_sont_disponibles') .
 	    '</a><br />';
-	}
-	  return "";
 }
 
 // http://doc.spip.org/@debloquer_article
