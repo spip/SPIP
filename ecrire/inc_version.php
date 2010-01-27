@@ -301,6 +301,7 @@ $spip_pipeline = array(
 	'nettoyer_raccourcis_typo' => '',
 	'objet_compte_enfants_publies' => '',
 	'optimiser_base_disparus' => '',
+	'page_indisponible' => '',
 	'pre_boucle' => '',
 	'post_boucle' => '',
 	'post_image_filtrer' => '',
