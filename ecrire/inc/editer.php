@@ -85,7 +85,8 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 
 	if ($config_fonc)
 		$contexte['config'] = $config = $config_fonc($contexte);
-	$att_text = " rows='"
+	$att_text = " class='textarea' "
+	. " rows='"
 	. ($config['lignes'] +15)
 	. "' cols='40'";
 	list($contexte['texte'],$contexte['_texte_trop_long']) = editer_texte_recolle($contexte['texte'],$att_text);
