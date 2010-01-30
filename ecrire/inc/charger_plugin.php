@@ -116,7 +116,6 @@ function interface_plugins_auto($retour) {
 	$res .= afficher_liste_listes_plugins();
 	
 	if ($liste) {
-	  $res .= '<p>'._T('plugin_info_automatique_select',array('rep'=>joli_repertoire(_DIR_PLUGINS_AUTO))).'</p>';
 		$res .= afficher_liste_plugins_distants($liste);
 
 		$menu = array();
@@ -166,7 +165,8 @@ function afficher_liste_plugins_distants($liste){
 	ksort($menu);
 
 	$res .=
-		"<strong>"._T('plugins_compte',array('count' => count($menu)))."</strong>"
+		"<h3>"._T('plugins_compte',array('count' => count($menu)))."</h3>"
+	  . '<p>'._T('plugin_info_automatique_select',array('rep'=>joli_repertoire(_DIR_PLUGINS_AUTO))).'</p>'
 		. "<ul class='liste-items plugins distants'>".join("\n",$menu)."</ul>";
 
 	return $res;
@@ -490,12 +490,15 @@ function afficher_liste_listes_plugins() {
 		return '';
 
 	if (count($flux)){
-		$ret = '<h3>'._T('plugin_info_automatique_liste').'</h3><ul class="spip">';
+		$ret = '<h3>'._T('plugin_info_automatique_liste').'</h3><ul class="liste-items">';
 			//$ret .= '<li>'._T('plugin_info_automatique_liste_officielle').'</li>';
 		foreach ($flux as $url => $c) {
-			$a = '[<a href="'.parametre_url(
-				generer_action_auteur('charger_plugin', 'supprimer_flux'),'supprimer_flux', $url).'">'._T('lien_supprimer').'</a>]';
-			$ret .= '<li>'.inserer_attribut(PtoBR(propre("[->$url]")),'title',$url).' ('._T('plugins_compte',array('count' => $c)).') '.$a.'</li>';
+			$a = '<div class="actions">[<a href="'.parametre_url(
+				generer_action_auteur('charger_plugin', 'supprimer_flux'),'supprimer_flux', $url).'">'._T('lien_supprimer').'</a>]</div>';
+			$time = @filemtime(_DIR_TMP.'syndic_plug_'.md5($url).'.txt');
+			$ret .= '<li class="item">'.inserer_attribut(PtoBR(propre("[->$url]")),'title',$url).' ('._T('plugins_compte',array('count' => $c)).') '
+							.($time?"<div class='small'>" . _T('info_derniere_syndication').' '.affdate(date('Y-m-d H:i:s',$time)) ."</div>":'')
+							. $a .'</li>';
 		}
 		$ret .= '</ul>';
 	
