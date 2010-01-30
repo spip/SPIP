@@ -41,11 +41,13 @@ function exec_convert_utf8_dist() {
 
 		// ne pas convertir si deja utf8 
 		// ou si l'interface du serveur ne comprend rien
-		else if (($charset_orig == 'utf-8')
-			 OR !sql_get_charset('utf-8'))
+		else if (($charset_orig == 'utf-8'))
 			convert_utf8_non($action,
 					  _T('utf8_convert_erreur_deja',
 					     array('charset' => $charset_orig)));
+		else if(!sql_get_charset('utf-8'))
+			convert_utf8_non($action,
+					  _L('Votre version du serveur SQL ne gere pas les charset'));
 		else {
 		$commentaire = _T('utf8_convert_avertissement',
 			array('orig' => $charset_orig,'charset' => 'utf-8'));
