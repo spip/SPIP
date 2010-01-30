@@ -93,7 +93,7 @@ function exec_admin_plugin_dist($retour='') {
 		$sub = "\n<div class='boutons'>"
 		.  "<input type='submit' class='submit save' style='display:none;' value='"._T('bouton_enregistrer')
 		."' />"
-		.  "<input type='submit' class='submit update' value='"._T('lien_mise_a_jour_syndication')
+		.  "<input type='submit' class='submit update' value='".singulier_ou_pluriel(count($lcpa), 'plugins_actif_un', 'plugins_actifs', 'count')
 		."' />"
 		. "</div>";
 
