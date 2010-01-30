@@ -99,11 +99,8 @@ function public_debusquer_dist($message='', $lieu='') {
 		. debusquer_squelette($fonc, $mode, $self);
 
 	if (!_DIR_RESTREINT OR headers_sent()) return $res;
+	if ($tableau_des_erreurs) http_status(503);
 
-	if ($tableau_des_erreurs) {
-		http_status(503);
-		return;
-	}
 	http_no_cache();
 	if (isset($_GET['var_profile'])) {
 		$titre = parametre_url($GLOBALS['REQUEST_URI'], 'var_profile', '');
