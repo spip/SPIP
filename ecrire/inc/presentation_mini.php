@@ -419,7 +419,7 @@ function info_maj ($dir, $file, $version)
 	}
 
 	if (!$new) return "";
-	return "<br /><a style='color: red' href='$dir'>" . $new .
+	return "<br /><a style='color: red' href='$dir'>" . 
 	    _L('De nouvelles_versions_de_SPIP_sont_disponibles') .
 	    '</a><br />';
 }
