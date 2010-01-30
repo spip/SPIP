@@ -27,7 +27,10 @@ function auth_ldap_dist ($login, $pass, $serveur='') {
 	#spip_log("ldap $login " . ($pass ? "mdp fourni" : "mdp absent"));
 
 	// Utilisateur connu ?
-	if (!($dn = auth_ldap_search($login, $pass, true, $serveur))) return array();
+	// si http auth, inutile de reauthentifier: cela
+ 	// ne marchera pas avec auth http autre que basic.
+	$checkpass = isset($_SERVER["REMOTE_USER"])?false:true;
+	if (!($dn = auth_ldap_search($login, $pass, $checkpass, $serveur))) return array();
 
 	// Si l'utilisateur figure deja dans la base, y recuperer les infos
 	$r = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='ldap'",'','','','',$serveur);
