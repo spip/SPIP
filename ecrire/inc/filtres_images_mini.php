@@ -25,7 +25,6 @@ function couleur_html_to_hex($couleur){
 
 // http://doc.spip.org/@couleur_foncer
 function couleur_foncer ($couleur) {
-	include_spip('inc/filtres_images_mini'); // par precaution
 	
 	$couleurs = _couleur_hex_to_dec($couleur);
 
