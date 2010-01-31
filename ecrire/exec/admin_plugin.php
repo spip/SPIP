@@ -35,6 +35,13 @@ function exec_admin_plugin_dist($retour='') {
 		redirige_par_entete(self());
 	}
 
+	if (isset($GLOBALS['meta']['plugin_erreur_activation'])){
+		$erreur_activation = $GLOBALS['meta']['plugin_erreur_activation'];
+		// l'effacement reel de la meta se fera au moment de l'affichage
+		// mais on la vide pour ne pas l'afficher dans le bandeau haut
+		unset($GLOBALS['meta']['plugin_erreur_activation']);
+	}
+
 	$format = '';
 	if (_request('format')!==NULL)
 		$format = _request('format'); // liste ou repertoires
@@ -73,6 +80,11 @@ function exec_admin_plugin_dist($retour='') {
 	if (_request('erreur')){
 		echo "<div class='erreur_message-plugins'>" . _T(_request('erreur')) . "</div>";
 	}
+	if ($erreur_activation){
+		echo "<div class='erreur_message-plugins'>" . $erreur_activation . "</div>";
+		effacer_meta('plugin_erreur_activation');
+	}
+
 
 	// on fait l'installation ici,
 	// cela permet aux scripts d'install de faire des affichages (moches...)

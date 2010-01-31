@@ -513,6 +513,10 @@ function afficher_liste_listes_plugins() {
 // sinon on donne l'url du zip
 // http://doc.spip.org/@bouton_telechargement_plugin
 function bouton_telechargement_plugin($url, $rep) {
+	// essayer de creer le repertoire lib/ si on en a le droit
+	if (($rep == 'lib') AND !is_dir(_DIR_RACINE . 'lib'))
+		sous_repertoire(_DIR_RACINE . 'lib','',false,true);
+
 	if (($rep == 'lib')?
 			is_dir(_DIR_RACINE . 'lib'):
 			(_DIR_PLUGINS_AUTO AND @is_dir(_DIR_PLUGINS_AUTO))
@@ -524,6 +528,11 @@ function bouton_telechargement_plugin($url, $rep) {
 			"<input type='hidden' name='url_zip_plugin' value='$url' />"
 			."<input type='submit' name='ok' value='"._T('bouton_telecharger')."' />",
 			'class="noajax"');
+	else if ($rep == 'lib'){
+		$bouton = "<div class='info_todo'>"._T('plugin_info_automatique1_lib')."\n"
+		.'<ol><li>'._T('plugin_info_automatique2',array('rep'=>joli_repertoire(_DIR_RACINE . 'lib/'))).'</li>'
+		.'<li>'._T('plugin_info_automatique3').aide("install0")."</li></ol></div>";
+	}
 
 	return _T('plugin_info_telecharger',array('url'=>$url,'rep'=>$rep.'/')).$bouton;
 
