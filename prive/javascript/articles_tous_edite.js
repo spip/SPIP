@@ -88,13 +88,13 @@ jQuery.fn.insertion = function(dropped_id,origine_id){
 }
 
 jQuery.fn.set_droppables = function(){
-	jQuery('span.holder',jQuery(this)).Droppable(
+	jQuery('span.holder',jQuery(this)).droppable(
 		{
-			accept			: 'treeItem',
-			hoverclass		: 'none',
-			activeclass		: 'fakeClass',
-			tollerance		: 'intersect',
-			onhover			: function(dragged)
+			accept			: '.treeItem',
+			hoverClass		: 'none',
+			activeClass		: 'fakeClass',
+			tolerance		: 'pointer',
+			over			: function(event,ui)
 			{
 				jQuery(this).parent().addClass('selected');
 				if (!this.expanded) {
@@ -105,7 +105,7 @@ jQuery.fn.set_droppables = function(){
 					}
 				}
 			},
-			onout			: function()
+			out			: function(event,ui)
 			{
 				jQuery(this).parent().removeClass('selected');
 				if (this.expanded){
@@ -117,29 +117,29 @@ jQuery.fn.set_droppables = function(){
 				}
 				this.expanded = false;
 			},
-			ondrop			: function(dropped)
+			drop			: function(event,ui)
 			{
 				jQuery(this).parent().removeClass('selected');
 				subbranch = jQuery(this).siblings('ul').eq(0);
 				if (this.expanded)
 					subbranch.unpause();
 				var target=jQuery(this).parent().attr('id');
-				var quoi=jQuery(dropped).attr('id');
-				var source=jQuery(dropped).parent().parent().attr('id'); // il faut stocker l'id du li car le ul peut avoir disparu au moment du cancel
+				var quoi=jQuery(ui.draggable).attr('id');
+				var source=jQuery(ui.draggable).parent().parent().attr('id'); // il faut stocker l'id du li car le ul peut avoir disparu au moment du cancel
 				action=quoi+":"+target+":"+source;
 				var dep = jQuery("#deplacements");
 				dep.html(dep.text()+"\n"+action);
 				jQuery("#apply").show();
 				jQuery("#cancel").show();
-				jQuery(this).parent().insertion(quoi,jQuery(dropped).parent().attr('id'));
+				jQuery(this).parent().insertion(quoi,jQuery(ui.draggable).css('position','static').parent().attr('id'));
 			}
 		}
 	);
-	jQuery('li.treeItem',jQuery(this)).Draggable(
+	jQuery('li.treeItem',jQuery(this)).draggable(
 		{
-			revert		: true,
+			revert		: true/*,
 			ghosting : true,
-			autoSize : true
+			autoSize : true*/
 		}
 	);
 }
