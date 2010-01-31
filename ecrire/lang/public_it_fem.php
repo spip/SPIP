@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Commenta questo sito',
+'copie_document_impossible' => 'Impossibile copiare il documento',
 
 // D
 'date' => 'Data',
@@ -37,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Ultimi articoli',
 'derniers_commentaires' => 'Ultimi commenti',
 'derniers_messages_forum' => 'Ultimi messaggi pubblicati nei forum',
+'documents_interdits_forum' => 'Documenti vietati nel forum',
 
 // E
 'edition_mode_texte' => 'Versione solo testo di',
@@ -46,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Area riservata',
 
 // F
+'formats_acceptes' => 'Formati accettati: @formats@.',
 'forum' => 'Forum',
 
 // H
@@ -53,6 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // J
 'jours' => 'giorni',
+
+// L
+'lien_connecter' => 'Connettersi',
 
 // M
 'meme_auteur' => 'Della stessa autrice',
