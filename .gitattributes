@@ -706,8 +706,8 @@ prive/javascript/ajaxCallback.js -text
 prive/javascript/articles_tous_edite.js -text
 prive/javascript/async_upload.js -text
 prive/javascript/bgiframe.js -text
-prive/javascript/dragdrop_interface.js -text
 prive/javascript/gadgets.js -text
+prive/javascript/jquery-ui-1.8-drag-drop.min.js -text
 prive/javascript/jquery.autosave.js -text
 prive/javascript/jquery.cookie.js -text
 prive/javascript/jquery.form.js -text
