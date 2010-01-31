@@ -135,10 +135,17 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 	include_spip('inc/charsets');
 	$recherche = translitteration($recherche);
 
-	$preg = '/'.str_replace('/', '\\/', $recherche).'/' . $options['preg_flags'];
+	$is_preg = false;
+	if (substr($recherche,0,1)=='/' AND substr($recherche,-1,1)=='/'){
+		// c'est une preg
+		$preg = $recherche.$options['preg_flags'];
+		$is_preg = true;
+	}
+	else
+		$preg = '/'.str_replace('/', '\\/', $recherche).'/' . $options['preg_flags'];
 	// Si la chaine est inactive, on va utiliser LIKE pour aller plus vite
 	// ou si l'expression reguliere est invalide
-	if (preg_quote($recherche, '/') == $recherche
+	if (!$is_preg
 	OR (@preg_match($preg,'')===FALSE) ) {
 		$methode = 'LIKE';
 		$u = $GLOBALS['meta']['pcre_u'];
@@ -175,7 +182,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 		
 	} else {
 		$methode = 'REGEXP';
-		$q = sql_quote($recherche);
+		$q = sql_quote(substr($recherche,1,-1));
 	}
 
 	$jointures = $options['jointures']
