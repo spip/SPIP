@@ -55,6 +55,9 @@ function _couleur_hex_to_dec($couleur) {
 
 function statut_effacer_images_temporaires($stat){
 	static $statut = false; // par defaut on grave toute les images
+	// une constante a utiliser lorsqu'on a des filtres image_xxx qui ne produisent pas des images
+	if (defined('_CONSERVER_IMAGES_TEMPORAIRES'))
+		$statut = false;
 	if ($stat==='get') return $statut;
 	$statut = $stat?true:false;
 }
