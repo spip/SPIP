@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_version_archive' => '<b>Atenci&oacute;n! O ficheiro @arquivo@ corresponde a
   outra versi&oacute;n de SPIP que non &eacute; a que ten instalada.</b>
   Pode estar ante graves problemas: hai risco de destruci&oacute;n
-  da s&uacute;a base de datos, fallos no funcionamento do web, etc.
+  da s&uacute;a base de datos, erros no funcionamento do web, etc.
   Non valide esta solicitude de importaci&oacute;n.<p>Para m&aacute;is
   informaci&oacute;ns, consulte <a href="@spipnet@">
   a documentaci&oacute;n de SPIP</A>.',
@@ -123,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP non ten acceso &aacute; lista de bases de datos accesibles',
 'config_info_base_sup' => 'Se ten outras bases de datos para consultas a trav&eacute;s de SPIP, co seu servidor SQL ou con outro, o formulario seguinte permitiralle declaralas. Se deixa certos campos baleiros, os identificadores de conexi&oacute;n &aacute; base de datos principal ser&aacute;n os utilizados.',
 'config_info_base_sup_disponibles' => 'Bases suplementarias xa consultables-interrogables:',
+'config_info_enregistree' => 'A nova configuraci&oacute;n foi gardada',
 'config_info_logos' => 'Cada elemento do web pode ter un logo, as&iacute; como un &laquo;&nbsp;logo de substitucion&nbsp;&raquo;',
 'config_info_logos_utiliser' => 'Utilizar os logos',
 'config_info_logos_utiliser_non' => 'Non utilizar os logos',
@@ -539,7 +540,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_activer_compactage_js' => 'Quere activar a compactaci&oacute;n de scripts (javascript) ?',
 'info_question_activer_compresseur' => 'Quere activar a compactaci&oacute;n do fluxo  HTTP ?',
 'info_question_gerer_statistiques' => 'O seu web ten que xerar as estat&iacute;sticas das visitas?',
-'info_question_inscription_nouveaux_redacteurs' => 'Aceptar&aacute; as inscrici&oacute;ns de novos redactores
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Aceptar&aacute; as inscrici&oacute;ns de novos redactores
   dende o web p&uacute;blico? De aceptalos, os visitantes poderanse rexistrar cun
   formulario automatizado e acceder&aacute;n ao espazo privado para
   propor os seus propios artigos.<blockquote> <i>Trala fase de inscrici&oacute;n,
@@ -695,7 +696,6 @@ cunha cor que indica o seu estado&nbsp;:',
 'install_select_langue' => 'Selecciona un idioma e preme o bot&oacute;n &laquo;seguinte&raquo; para comezar co proceso de instalaci&oacute;n.',
 'install_select_type_db' => 'Indique o tipo de base de datos&nbsp;:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Servidor da base de datos atribu&iacute;da polo aloxador',
@@ -928,7 +928,7 @@ cunha cor que indica o seu estado&nbsp;:',
 		nova base e un novo acceso de administraci&oacute;n.',
 'texte_admin_effacer_stats' => 'Este comando borra todos os datos ligados &aacute;s estat&iacute;sticas de visita do web, e incl&uacute;e a popularidade dos artigos.',
 'texte_admin_tech_01' => 'Esta opci&oacute;n permite gardar o contido da base nun ficheiro que ser&aacute; almaceado no directorio @dossier@. Non esqueza tam&eacute;n gardar o directorio @img@ &iacute;ntegro, que &eacute; o que cont&eacute;n as imaxes e os documentos anexos empregados nos artigos e nas secci&oacute;ns.',
-'texte_admin_tech_02' => '&iexcl;Atenci&oacute;n!: esta copia de seguridade s&oacute; poder&aacute; ser restaurada  nun web que te&ntilde;a instalada a MESMA versi&oacute;n de SPIP. Daquela de ningunha maneira &eacute; conveniente &laquo;&nbsp;baleirar a base&nbsp;&raquo; coa esperanza de reinstalar a copia de seguridade logo da actualizaci&oacute;n...Consulte
+'texte_admin_tech_02' => 'Atenci&oacute;n!: esta copia de seguridade S&Oacute; poder&aacute; ser restaurada  nun web que te&ntilde;a instalada a MESMA versi&oacute;n de SPIP. Daquela de ningunha maneira &eacute; conveniente &laquo;&nbsp;baleirar a base&nbsp;&raquo; coa esperanza de reinstalar a copia de seguridade logo da actualizaci&oacute;n...Consulte
   <a href="@spipnet@">a documentaci&oacute;n de SPIP</a>.',
 'texte_admin_tech_03' => 'Pode escoller gardar o ficheiro en formato comprimido, para optimizar
   a transferencia ou a copia nun servidor de copias de seguridade, e para aforrar espazo no disco.',

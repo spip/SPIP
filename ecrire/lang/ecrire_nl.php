@@ -28,10 +28,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_destinataire_obligatoire' => 'Je dient een bestemmeling op te geven vooraleer dit bericht te verzenden.',
 'avis_erreur_connexion_mysql' => 'Verbinding met de SQL connectie mislukt',
 'avis_erreur_version_archive' => '<b>Opgelet! Het bestand @archive@ komt overeen met een andere
-    SPIP-versie dan deze die is ge&iuml;nstalleerd.</b>Dit kan voor
+    SPIP-versie dan deze die is ge&iuml;nstalleerd.</b> Dit kan voor
  grote moeilijkheden zorgen : risico op het wissen van de databank,
- ontregeling van de website, enz. Ga niet verder met de invoer
- van het bestand. <p>Meer info kan je vinden op
+ ontregeling van de website, enz. Ga niet verder met het importeren
+ van het bestand. <p />Meer info kan je vinden op
  <a href="@spipnet@">
                                 de documentatie van SPIP</a>.',
 'avis_espace_interdit' => '<b>Toegang Verboden</b><div>SPIP is reeds ge&iuml;nstalleerd.',
@@ -124,6 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP heeft geen toegang tot de lijst van de toegankelijke basis',
 'config_info_base_sup' => 'Als u andere databases hebt om door SPIP te ondervragen, met zijn server SQL of een ander, laat het formulier hieronder, u toe om ze te verklaren. Als u bepaalde lege velden laat, zullen de identificaties van aansluiten aan de hoofdbasis gebruikt worden.',
 'config_info_base_sup_disponibles' => 'De reeds navraagbare aanvullende basis:',
+'config_info_enregistree' => 'De nieuwe configuratie werd geregistreerd',
 'config_info_logos' => 'Elk element van de site kan een logo hebben, evenals een &#132;&nbsp;overzicht logo&nbsp;&#147;',
 'config_info_logos_utiliser' => 'De logo\'s gebruiken',
 'config_info_logos_utiliser_non' => 'Niet de logo\'s gebruiken',
@@ -198,7 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Deze pagina toont de verschillende wijzen waarop je contact kan houden met het gebeuren van deze website.',
-'ical_info2' => 'Voor meer info over de verschillende manieren kan je <a href="@spipnet@">de documentatie van SPIP</a> raadplegen.',
+'ical_info2' => 'Voor meer inlichtingen over al deze technieken, aarzelt niet om <a href=" @spipnet@" te raadplegen >de documentatie van SPIP</a>.',
 'ical_info_calendrier' => 'Twee kalenders zijn beschikbaar. De eerste geeft een overzicht van alle gepubliceerde artikels. De tweede bevat editoriale berichten en je meest recente priv&eacute;-berichten&nbsp;: deze tweede kalender is afgeschermd voor andere gebruikers door een persoonlijke sleutel die je op elk moment kan wijzigen door je paswoord te vernieuwen.',
 'ical_lien_rss_breves' => 'Syndication van kort van de site',
 'ical_methode_http' => 'Downloaden',
@@ -547,7 +548,7 @@ De publieke forums kunnen per artikel toegestaan worden
  de toeganscode voor de site. Sommige hostingproviders
  blokkeren echter het versturen van e-mail vanaf hun
  servers : in dat geval is een automatische inschrijving
- niet mogelijk.',
+ niet mogelijk.</i></blockquote>',
 'info_question_mots_cles' => 'Wil je gebruik maken van trefwoorden op je site?',
 'info_question_proposer_site' => 'Wie kan referentiesites voorstellen?',
 'info_question_utilisation_moteur_recherche' => 'Wil je gebruik maken van de geintegreerde zoekmachine van SPIP ?
@@ -555,7 +556,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_question_vignettes_referer' => 'Wanneer u de statistieken raadpleegt, kunt u korte overzichten van de plaatsen van oorsprong van de bezoeken zichtbaar maken',
 'info_question_vignettes_referer_non' => 'Niet de vangsten van de sites van oorsprong van de bezoeken te kennen geven',
 'info_question_vignettes_referer_oui' => 'De vangsten van de siten van oorsprong van de bezoeken te kennen geven',
-'info_question_visiteur_ajout_document_forum' => 'Als u de bezoekers wilt machtigen om documenten (beelden, klanken�) samen te voegen aan hun berichten van forum, de lijst van de uitbreidingen van documenten hieronder aangeven toegelaten voor de ex forums (: gif, jpg, png, mp3).',
+'info_question_visiteur_ajout_document_forum' => 'Als u de bezoekers wilt machtigen om documenten (beelden, klanken…) samen te voegen aan hun berichten van forum, de lijst van de uitbreidingen van documenten hieronder aangeven toegelaten voor de ex forums (: gif, jpg, png, mp3).',
 'info_question_visiteur_ajout_document_forum_format' => 'Als u alle soorten documenten toestaan wilt die als betrouwbaar door SPIP, een ster worden beschouwd, zetten. Om niets toe te staan, niets aangeven.',
 'info_qui_attribue_mot_cle' => 'De woorden uit deze groep kunnen toegekend worden door:',
 'info_racine_site' => 'Begin van de site',
@@ -696,7 +697,6 @@ een kleur geeft hun status aan&nbsp;:',
 'install_select_langue' => 'Kies een taal en klik vervolgens op de knop  &laquo;volgende&raquo; om de installatie te beginnen.',
 'install_select_type_db' => 'Het basissoort gegevens aangeven:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Basisserver van gegevens die door de leverancier wordt toegekend',
@@ -927,7 +927,7 @@ een kleur geeft hun status aan&nbsp;:',
 inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je dit uitgevoerd hebt, dien je de herinstallatie van SPIP te starten om een volledig nieuwe database aan te maken en toegangsrechten voor een eerste beheerder.',
 'texte_admin_effacer_stats' => 'Deze bestelling wist alle gegevens in verband met de statistieken van bezoek van de plaats uit, met inbegrip van de populariteit van de artikelen.',
 'texte_admin_tech_01' => 'Deze optie laat je toe de inhoud van de databank te bewaren in een bestand dat bewaard zal worden in de map @dossier@. Vergeet ook niet de volledige map @img@ te bewaren. Zij bevat alle afbeeldingen en bijlagen bij de artikels en rubrieken.',
-'texte_admin_tech_02' => 'Opgelet: deze reservekopie kan ENKEL worden teruggezet op een site met dezelfde SPIP-versie. Maak vooral de databank niet leeg in de hoop dat je ze kan terugzetten na het upgraden van SPIP... Voor meer info, kan je de <a href="@spipnet@">de documentatie van SPIP</a> er op naslaan.',
+'texte_admin_tech_02' => 'Opgelet: deze bescherming zal SLECHTS in een plaats kunnen hersteld worden die onder dezelfde versie van SPIP wordt geplaatst. Men heeft dus vooral geen &laquo;&nbsp;nodig de basis&nbsp;&raquo; te legen door de bescherming te hopen opnieuw te installeren na een update… Raadpleegt <a href= " @spipnet@ " > de documentatie van SPIP </a>.',
 'texte_admin_tech_03' => 'Je kan de reservekopie ook als een gecomprimeerd bestand opslaan, dit om de overzettijd van de server naar je computer sterk in te korten en om schijfruimte te besparen.',
 'texte_admin_tech_04' => 'Met het oog op fusie met een andere basis, kunt u de bescherming beperken tot de rubriek:',
 'texte_adresse_annuaire_1' => '(Als de map is ge&iuml;nstalleerd is op dezelfde computer als je website, is het waarschijnlijk &laquo;localhost&raquo;.)',

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://trac.rezo.net/spip/spip/ecrire/lang/
+// Fichier source, a modifier dans svn://trac.rezo.net/spip/branches/spip-2.1/ecrire/lang/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -23,8 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_3' => 'Alternativement, n\'utilisez pas le support LDAP pour importer des utilisateurs.',
 'avis_conseil_selection_mot_cle' => '<b>Groupe important&nbsp;:</b> il est fortement conseill&eacute; de s&eacute;lectionner un mot-cl&eacute; dans ce groupe.',
 'avis_deplacement_rubrique' => 'Attention&nbsp;! Cette rubrique contient @contient_breves@ br&egrave;ve@scb@&nbsp;: si vous la d&eacute;placez, veuillez cocher cette case de confirmation.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?',
 'avis_destinataire_obligatoire' => 'Vous devez indiquer un destinataire avant d\'envoyer ce message.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?',
 'avis_erreur_connexion_mysql' => 'Erreur de connexion SQL',
 'avis_erreur_version_archive' => '<b>Attention! Le fichier @archive@ correspond &agrave;
     une autre version de SPIP que celle que vous avez
@@ -126,6 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP n\'a pas acc&egrave;s &agrave; la liste des bases accessibles',
 'config_info_base_sup' => 'Si vous avez d\'autres bases de donn&eacute;es &agrave; interroger &agrave; travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les d&eacute;clarer. Si vous laissez certains champs vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.',
 'config_info_base_sup_disponibles' => 'Bases suppl&eacute;mentaires d&eacute;j&agrave; interrogeables:',
+'config_info_enregistree' => 'La nouvelle configuration a &eacute;t&eacute; enregistr&eacute;e',
 'config_info_logos' => 'Chaque &eacute;l&eacute;ment du site peut avoir un logo, ainsi qu\'un &laquo;&nbsp;logo de survol&nbsp;&raquo;',
 'config_info_logos_utiliser' => 'Utiliser les logos',
 'config_info_logos_utiliser_non' => 'Ne pas utiliser les logos',
@@ -137,7 +138,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Choisissez une base suppl&eacute;mentaire',
 'connexion_ldap' => 'Connexion :',
 'copier_en_local' => 'Copier en local',
-'config_info_enregistree' => 'La nouvelle configuration a &eacute;t&eacute; enregistr&eacute;e',
 
 // D
 'date_mot_heures' => 'heures',
@@ -190,6 +190,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Texte de la br&egrave;ve',
 'entree_titre_obligatoire' => '<b>Titre</b> [Obligatoire]<br />',
 'entree_url' => 'L\'adresse (URL) de votre site',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.',
 'erreur_plugin_fichier_absent' => 'Fichier absent',
 'erreur_plugin_fichier_def_absent' => 'Fichier de d&eacute;finition absent',
 'erreur_plugin_nom_fonction_interdit' => 'Nom de fonction interdit',
@@ -197,7 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non d&eacute;fini',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; manquant dans le fichier de d&eacute;finition',
 'erreur_plugin_version_manquant' => 'Version du plugin manquante',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.',
+
 // F
 'forum_info_original' => 'original',
 
@@ -264,8 +265,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	de mod&eacute;ration par d&eacute;faut:</i>',
 'info_admin_gere_rubriques' => 'Cet administrateur g&egrave;re les rubriques suivantes :',
 'info_admin_gere_toutes_rubriques' => 'Cet administrateur g&egrave;re <b>toutes les rubriques</b>.',
-'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>',
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre',
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>',
 'info_administrateur' => 'Administrateur',
 'info_administrateur_1' => 'Administrateur',
 'info_administrateur_2' => 'du site (<i>utilisez avec pr&eacute;caution</i>)',
@@ -858,8 +859,8 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 // P
 'page_pas_proxy' => 'Cette page ne doit pas passer par le proxy',
 'pas_de_proxy_pour' => 'Au besoin, indiquez les machines ou domaines pour lesquels ce proxy ne doit pas s\'appliquer (par exemple&nbsp;: @exemple@)',
-'plugin_charger' => 'T&#233;l&#233;charger',
 'plugin_charge_paquet' => 'Chargement du paquet @name@',
+'plugin_charger' => 'T&#233;l&#233;charger',
 'plugin_erreur_charger' => 'erreur&nbsp;: impossible de charger @zip@',
 'plugin_erreur_droit1' => 'Le r&#233;pertoire <code>@dest@</code> n\'est pas accessible en &#233;criture.',
 'plugin_erreur_droit2' => 'Veuillez v&#233;rifier les droits sur ce r&#233;pertoire (et le cr&#233;er le cas &#233;ch&#233;ant), ou installer les fichiers par FTP.',
@@ -888,9 +889,9 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'plugin_necessite_plugin' => 'N&eacute;cessite le plugin @plugin@ en version @version@ minimum.',
 'plugin_necessite_spip' => 'N&eacute;cessite SPIP en version @version@ minimum.',
 'plugin_source' => 'source:&nbsp;',
-'plugin_titre_installation' => 'Installation du plugin @plugin@',
 'plugin_titre_automatique' => 'Installation automatique',
 'plugin_titre_automatique_ajouter' => 'Ajouter des plugins',
+'plugin_titre_installation' => 'Installation du plugin @plugin@',
 'plugin_zip_active' => 'Continuez pour l\'activer',
 'plugin_zip_adresse' => 'indiquez ci-dessous l\'adresse d\'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l\'adresse d\'une liste de plugins.',
 'plugin_zip_adresse_champ' => 'Adresse du plugin ou de la liste&nbsp;',
@@ -903,11 +904,11 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'plugins_actif_un' => 'Un plugin activ&#233;.',
 'plugins_actifs' => '@count@ plugins activ&#233;s.',
 'plugins_compte' => '@count@ plugins',
-'plugins_disponibles' => '@count@ plugins disponibles.',
 'plugins_disponible_un' => 'Un plugin disponible.',
-'plugins_recents' => 'Plugins r&eacute;cents.',
+'plugins_disponibles' => '@count@ plugins disponibles.',
 'plugins_erreur' => 'Erreur dans les plugins : @plugins@',
 'plugins_liste' => 'Liste des plugins',
+'plugins_recents' => 'Plugins r&eacute;cents.',
 'plugins_vue_hierarchie' => 'Hi&eacute;rarchie',
 'plugins_vue_liste' => 'Liste',
 'protocole_ldap' => 'Version du protocole :',

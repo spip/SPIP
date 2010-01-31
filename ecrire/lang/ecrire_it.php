@@ -28,10 +28,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_destinataire_obligatoire' => 'Devi indicare un destinatario prima di mandare questo messaggio.',
 'avis_erreur_connexion_mysql' => 'Errore di connessione SQL',
 'avis_erreur_version_archive' => '<b>Attenzione! Il file @archive@ corrisponde a
-una versione di SPIP diversa da quella installata.</b> Potranno sorgere dei problemi:
+una versione di SPIP diversa da quella installata.</b> Potranno sorgere notevoli problemi:
 rischio di distruzione del database, malfunzionamenti diversi del sito ecc.
-Non confermare questa richiesta d\'importazione!
-<p />Per ulteriori informazioni, vedere <a href="@spipnet@">
+Non confermare questa richiesta d\'importazione.<p />Per ulteriori
+ informazioni, vedere <a href="@spipnet@">
 la documentazione di SPIP</a>.',
 'avis_espace_interdit' => '<b>Area vietata</b><div>SPIP &egrave; gi&agrave; installato.</div>',
 'avis_lecture_noms_bases_1' => 'Il programma di installazione non ha potuto leggere i nomi dei database installati nel server.',
@@ -125,6 +125,7 @@ cancellarli successivamente).',
 'config_erreur_base_sup' => 'SPIP non ha accesso all\'elenco dei database accessibili ',
 'config_info_base_sup' => 'Se si hanno altri database da interrogare attraverso SPIP, con il proprio server SQL o altro, il form sottostante permette di dichiararli. Se si lasciano alcuni campi vuoti verranno utilizzati i dati della connessione al database principale.',
 'config_info_base_sup_disponibles' => 'Database supplementari gi&agrave; dichiarati:',
+'config_info_enregistree' => 'La nuova configurazione &egrave; stata registrata',
 'config_info_logos' => 'Ogni elemento del sito pu&ograve; avere un logo, come pure un &laquo;&nbsp;logo per il roll-over&nbsp;&raquo;',
 'config_info_logos_utiliser' => 'Utilizza i logo',
 'config_info_logos_utiliser_non' => 'Non utilizzare i logo',
@@ -199,7 +200,7 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 
 // I
 'ical_info1' => 'Questa pagina elenca diversi metodi per rimanere in contatto con le varie attivit&agrave; del sito.',
-'ical_info2' => 'Per ulteriori informazioni su queste tecniche, consultare <a href="@spipnet@">la documentazione di SPIP</a>.',
+'ical_info2' => 'Per ulteriori informazioni su tutte queste tecniche, non esitate a consultare <a href="@spipnet@">la documentazione di SPIP</a>.',
 'ical_info_calendrier' => 'Sono disponibili due calendari. Il primo &egrave; una mappa del sito che annuncia tutti gli articoli pubblicati. Il secondo contiene gli annunci editoriali e gli ultimi messaggi privati: &egrave; un\'area riservata, mediante identificativo personale, che &egrave; possibile modificare in qualsiasi momento rinnovando la password personale.',
 'ical_lien_rss_breves' => 'Syndication delle brevi del sito',
 'ical_methode_http' => 'Download',
@@ -536,7 +537,7 @@ il database alla nuova versione di SPIP.',
 'info_question_activer_compactage_js' => 'Si desidera attivare la compressione degli script (javascript)?',
 'info_question_activer_compresseur' => 'Si desidera attivare la compressione del flusso HTTP?',
 'info_question_gerer_statistiques' => 'Il sito deve gestire le statistiche delle visite?',
-'info_question_inscription_nouveaux_redacteurs' => 'Accettate le iscrizioni di nuovi redattori
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Accettate le iscrizioni di nuovi redattori
 direttamente  dal sito pubblico? In caso affermativo, i visitatori potranno iscriversi
 grazie ad un modulo automatizzato e accedere all\'area riservata per proporre
 i propri articoli. <blockquote><i>Durante la fase d\'iscrizione,
@@ -692,7 +693,6 @@ Le traduzioni sono associate all\'originale,
 'install_select_langue' => 'Seleziona una lingua e poi clicca sul bottone &laquo;&nbsp;Avanti&nbsp;&raquo; per lanciare la procedura di installazione.',
 'install_select_type_db' => 'Indicare il tipo di database:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Server del database attribuito dall\'hoster',
@@ -729,7 +729,7 @@ Le traduzioni sono associate all\'originale,
 'item_gerer_statistiques' => 'Gestisci le statistiche',
 'item_limiter_recherche' => 'Limita la ricerca alle informazioni contenute nel tuo sito',
 'item_login' => 'Login',
-'item_messagerie_agenda' => 'Attiva la messaggistica e l\'agenda',
+'item_messagerie_agenda' => 'Attiva la messaggistica e l’agenda',
 'item_mots_cles_association_articles' => 'agli articoli',
 'item_mots_cles_association_breves' => 'alle brevi',
 'item_mots_cles_association_rubriques' => 'alle rubriche',
@@ -751,7 +751,7 @@ Le traduzioni sono associate all\'originale,
 'item_non_gerer_annuaire_site_web' => 'Disattiva il repertorio di siti Web',
 'item_non_gerer_statistiques' => 'Non gestire le statistiche',
 'item_non_limiter_recherche' => 'Estendi la ricerca al contenuto dei siti in syndication',
-'item_non_messagerie_agenda' => 'Disattiva la messaggistica e l�agenda',
+'item_non_messagerie_agenda' => 'Disattiva la messaggistica e l’agenda',
 'item_non_publier_articles' => 'Non pubblicare gli articoli prima della data impostata.',
 'item_non_utiliser_breves' => 'Non utilizzare le brevi',
 'item_non_utiliser_config_groupe_mots_cles' => 'Non utilizzare la configurazione avanzata dei gruppi di parole chiave',
@@ -894,6 +894,7 @@ Le traduzioni sono associate all\'originale,
 'repertoire_plugins' => 'Cartella:',
 
 // S
+'sans_heure' => 'ora mancante',
 'sauvegarde_fusionner' => 'Unire il database attuale con la copia di backup',
 'sauvegarde_fusionner_depublier' => 'Depubblicare gli oggetti fusi',
 'sauvegarde_url_origine' => 'Eventualmente, URL del sito di origine:',
@@ -923,8 +924,7 @@ Le traduzioni sono associate all\'originale,
 'texte_admin_effacer_stats' => 'Questo comando cancella tutti i dati collegati alle statistiche delle visite al sito, comprese la popolarit&agrave; degli articoli.',
 'texte_admin_tech_01' => 'Questa opzione permette di salvare il contenuto del database in un file che sar&agrave; conservato nella cartella @dossier@.
 Non dimenticare di recuperare integralmente anche la cartella @img@, che contiene le immagini e i documenti utilizzati negli articoli e nelle rubriche.',
-'texte_admin_tech_02' => 'Attenzione: questo salvaggio potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.
-In particolare &egrave; sbagliato cancellare il database pensando di ripristinare questo salvataggio su una nuova versione di SPIP...
+'texte_admin_tech_02' => 'Attenzione: questo backup potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.Soprattutto, &egrave; sbagliato &laquo;&nbsp;svuotare il database&nbsp;&raquo; pensando di ripristinare questo backup dopo aver aggiornato la versione di SPIP...
 Per maggiori informazioni consulta <a href="@spipnet@">la documentazione di SPIP</a>.',
 'texte_admin_tech_03' => 'Puoi scegliere di salvare il file in forma compressa, al fine di ridurre
 i tempi di trasferimento in rete e di risparmiare dello spazio su disco.',

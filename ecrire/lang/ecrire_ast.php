@@ -27,11 +27,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => '&iexcl;Atenci&oacute;n! Esta estaya conti&eacute;n @contient_breves@ breve@scb@: si la mueves, ties que marcar esti cuadru de confirmaci&oacute;n.',
 'avis_destinataire_obligatoire' => 'Ties qu\'indicar un destinatariu enantes d\'unviar esti mensaxe.',
 'avis_erreur_connexion_mysql' => 'Fallu de conex&oacute;n SQL',
-'avis_erreur_version_archive' => '&iexcl;Atenci&oacute;n! L\'archivu @archive@ corresponde a
+'avis_erreur_version_archive' => '<b>&iexcl;Atenci&oacute;n! L\'archivu @archive@ concasa con
     otra versi&oacute;n de SPIP distinta de la que ta
-    instalada.</b> Te enfrentes con bien de
-    dificult&aacute;es: peligru de destruir la base de datos,
-    fallos varios nel funcionamientu del sitiu, etc.
+    instalada.</b> Enfrenteste con dificult&aacute;es
+    enforma: peligru de destruir la base de datos,
+    fallos variaos nel funcionamientu del sitiu, etc.
     Nun valides esta petici&oacute;n d\'importaci&oacute;n.<p />Pa
     mayor informaci&oacute;n, llee <a href="@spipnet@">
                                 la documentaci&oacute;n de SPIP</a>.',
@@ -127,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP nun tien accesu a la llista de les bases disponibles',
 'config_info_base_sup' => 'Si tienes otres bases de datos pa restolar al travi&eacute;s de SPIP, col so sirvidor SQL o con otru, el formulariu d\'embaxo va permitite declarales. Si dexes ciertos campos vac&iacute;os, utilizar&aacute;nse les identificaciones de conex&oacute;n a la base principal.',
 'config_info_base_sup_disponibles' => 'Bases suplementaries que ya son restolables:',
+'config_info_enregistree' => 'Guardose la nueva configuraci&oacute;n',
 'config_info_logos' => 'Cada elementu del sitiu puede tener un logo, lo mesmo qu\'un &laquo;logo de pasu\'l mur&raquo;',
 'config_info_logos_utiliser' => 'Usar los logos',
 'config_info_logos_utiliser_non' => 'Nun usar los logos',
@@ -202,7 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'N\'esta p&aacute;xina ufrense delles maneres de tar en contautu cola activid&aacute; d\'esti sitiu.',
-'ical_info2' => 'Pa saber m&aacute;s no tocante a toes estes t&eacute;cniques, puedes consultar <a href="@spipnet@">la documentaci&oacute;n de SPIP</a>.',
+'ical_info2' => 'Pa m&aacute;s informaci&oacute;n tocante a toes estes t&eacute;cniques, pues consultar <a href="@spipnet@">la documentaci&oacute;n de SPIP</a>.',
 'ical_info_calendrier' => 'Tienes dos axendes a la to disposici&oacute;n. La primera ye el plan del sitiu que anuncia tolos art&iacute;culos espublizaos. La segunda conti&eacute;n los anuncios editoriales y tambi&eacute;n los tos caberos mensaxes privaos: esta ye una axenda privada gracies a una clave personal, que pues modificar en tou momentu anovando la to contrase&ntilde;a.',
 'ical_lien_rss_breves' => 'Sindicaci&oacute;n de les breves del sitiu',
 'ical_methode_http' => 'Descarga',
@@ -547,14 +548,14 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.',
 'info_question_activer_compresseur' => '&iquest;Quies activar la compresi&oacute;n del tr&aacute;ficu HTTP?',
 'info_question_gerer_statistiques' => '&iquest;El sitiu tien que xestionar les estad&iacute;stiques de les visites?',
 'info_question_inscription_nouveaux_redacteurs' => '&iquest;Aceutes les inscripciones de nuevos redactores dende\'l
-  sitiu p&uacute;blicu? Si aceptes, los visitantes podr&aacute;n inscribise
+  sitiu p&uacute;blicu? Si aceutes, los visitantes podr&aacute;n inscribise
   dende un formulariu automatiz&aacute;u y tendr&aacute;n accesu a l\'espaciu priv&aacute;u pa
   proponer art&iacute;culos propios. <blockquote><i>Tres de la fase d\'inscripci&oacute;n,
   los usuarios reciben un corr&eacute;u electr&oacute;nicu autom&aacute;ticu
   que-yos da los c&oacute;digos d\'accesu al sitiu priv&aacute;u. Dellos
   agospiadores desactiven l\'unv&iacute;u d\'e-mails dende los sos
   sirvidores: nesti casu, la inscripci&oacute;n autom&aacute;tica ye
-  imposible.',
+  imposible.</i></blockquote>',
 'info_question_mots_cles' => '&iquest;Quies utilizar les pallabres-clave nesti sitiu?',
 'info_question_proposer_site' => '&iquest;Qui&eacute;n pue proponer sitios referenciaos?',
 'info_question_utilisation_moteur_recherche' => '&iquest;Quies utilizar el motor de restolar integr&aacute;u con SPIP?
@@ -703,7 +704,6 @@ con una color que indica el est&aacute;u:',
 'install_select_langue' => 'Escueye una ll&iacute;ngua y calca nel bot&oacute;n &laquo;siguiente&raquo; pa llanzar el procesu d\'instalaci&oacute;n.',
 'install_select_type_db' => 'Indicar el tipu de base de datos:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Sirvidor de base de datos conse&ntilde;&aacute;u pol agospiador web',
@@ -740,7 +740,7 @@ con una color que indica el est&aacute;u:',
 'item_gerer_statistiques' => 'Xestionar les estad&iacute;stiques',
 'item_limiter_recherche' => 'Llendar la gueta a les informaciones conten&iacute;es nesti sitiu',
 'item_login' => 'Login',
-'item_messagerie_agenda' => 'Activar la mensaxer&iacute;a y l’axenda',
+'item_messagerie_agenda' => 'Activar la mensaxer&iacute;a y lâ€™axenda',
 'item_mots_cles_association_articles' => 'a los art&iacute;culos',
 'item_mots_cles_association_breves' => 'a les breves',
 'item_mots_cles_association_rubriques' => 'a les estayes',
@@ -762,7 +762,7 @@ con una color que indica el est&aacute;u:',
 'item_non_gerer_annuaire_site_web' => 'Desactivar l\'anuariu de sitios Web',
 'item_non_gerer_statistiques' => 'Nun xestionar les estad&iacute;stiques',
 'item_non_limiter_recherche' => 'Estender la gueta al conten&iacute;u de los sitios referenciaos',
-'item_non_messagerie_agenda' => 'Desactivar la mensaxeria y l’axenda',
+'item_non_messagerie_agenda' => 'Desactivar la mensaxeria y lâ€™axenda',
 'item_non_publier_articles' => 'Nun espublizar los art&iacute;culos enantes de la fecha d\'espublizamientu conse&ntilde;ada.',
 'item_non_utiliser_breves' => 'Nun utilizar les breves',
 'item_non_utiliser_config_groupe_mots_cles' => 'Nun utilizar la configuraci&oacute;n avanzada de los grupos de pallabres-clave',
@@ -1173,7 +1173,7 @@ vienes de facer camb&eacute;os importantes nel grafismu o na estructura del siti
 'titre_config_contenu_prive' => 'Nel espaciu priv&aacute;u',
 'titre_config_contenu_public' => 'Nel sitiu p&uacute;blicu',
 'titre_config_fonctions' => 'Configuraci&oacute;n del sitiu',
-'titre_config_forums_prive' => 'Foros de l’espaciu priv&aacute;u',
+'titre_config_forums_prive' => 'Foros de lâ€™espaciu priv&aacute;u',
 'titre_config_groupe_mots_cles' => 'Configuraci&oacute;n de los grupos de pallabres-clave',
 'titre_configuration' => 'Configuraci&oacute;n del sitiu',
 'titre_conflit_edition' => 'Conflictu durante la edici&oacute;n',
@@ -1256,7 +1256,7 @@ vienes de facer camb&eacute;os importantes nel grafismu o na estructura del siti
 'upload_info_mode_document' => 'Dexar esta imaxe nel maletu',
 'upload_info_mode_image' => 'Desaniciar esta imaxe del maletu',
 'upload_limit' => 'Esti archivu ye demasiao grande pal sirvidor; el mayor tama&ntilde;u de <i>subida</i> autorizao ye de @max@.',
-'upload_zip_conserver' => 'Conservar l’archivu tres de la estraici&oacute;n',
+'upload_zip_conserver' => 'Conservar lâ€™archivu tres de la estraici&oacute;n',
 'upload_zip_decompacter' => 'descomprim&iacute;u y ca&uacute;n de los elementos que contien instalarase nel sitiu. Los archivos que van instalase nel sitiu son:',
 'upload_zip_telquel' => 'instal&aacute;u tal cual, como archivu Zip comprim&iacute;u;',
 'upload_zip_titrer' => 'Titular seg&uacute;n el nome de los archivos',

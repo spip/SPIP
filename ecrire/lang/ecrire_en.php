@@ -27,12 +27,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Warning! This section contains @contient_breves@ news item@scb@: if you move it , please check this box to confirm.',
 'avis_destinataire_obligatoire' => 'You must select a recipient before sending this message.',
 'avis_erreur_connexion_mysql' => 'SQL connection error',
-'avis_erreur_version_archive' => '<b>Warning! The file @archive@ corresponds to
+'avis_erreur_version_archive' => '<b>Warning! The file @archive@ was created by
     a version of SPIP other than the one you have
     installed.</b> You are facing great
     difficulties: the risk of destroying your database,
     various malfunctions of your site, etc. Do not
-    submit this import request.<p>For more
+    submit this import request.<p />For more
     information, please see <a href="@spipnet@">
                                 the SPIP documentation</a>.',
 'avis_espace_interdit' => '<b>Forbidden area</b><div>SPIP is already installed.</div>',
@@ -127,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP does not have access to the available databases',
 'config_info_base_sup' => 'If you need to query other databases using SPIP, whether on the same SQL server or elsewhere, use the form below to declare them. If you leave some fields empty, then the connection details to the main database will be used.',
 'config_info_base_sup_disponibles' => 'Additional databases to which queries may be sent:',
+'config_info_enregistree' => 'The new configuration has been saved',
 'config_info_logos' => 'Each element of the site can have its logo and also a "mouseover" logo',
 'config_info_logos_utiliser' => 'Use logos',
 'config_info_logos_utiliser_non' => 'Do not use logos',
@@ -549,7 +550,7 @@ requiring an FTP access to the Web site.',
   giving them their access code to the private area. Some
   service providers disallow the sending of email from their
   servers: in that case, automated registration cannot be
-  implemented.',
+  implemented.</i></blockquote>',
 'info_question_mots_cles' => 'Do you wish to use keywords in your site?',
 'info_question_proposer_site' => 'Who can propose referenced sites?',
 'info_question_utilisation_moteur_recherche' => 'Do you wish to use the search engine integrated to SPIP?
@@ -698,7 +699,6 @@ in a colour indicating their status:',
 'install_select_langue' => 'Select a language then click on the button "next" to start the installation procedure.',
 'install_select_type_db' => 'Indicate the type of database:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Database server attributed by the service provider',
@@ -930,7 +930,7 @@ including <i>all</i> the access parameters for editors and administrators. After
 reinstall SPIP in order to recreate a new database and the first administrator\'s access.',
 'texte_admin_effacer_stats' => 'This command deletes all data linked to the statistics of visits to the site, including the relative popularity of articles.',
 'texte_admin_tech_01' => 'This option allows you to save the content of the database in a file stored in the directory @dossier@. Also, remember to retrieve the whole @img@, directory, which contains the images and the documents used in the articles and sections.',
-'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored in a site installed under the same version of SPIP. You should certainly not "empty the database" and expect to re-install the backup after the upgrade... For more information refer to <a href="@spipnet@">SPIP documentation</a>.',
+'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored by the same version of SPIP that created it. You should not "empty the database" and expect to re-install the backup after the upgrade... For more information refer to <a href="@spipnet@">SPIP documentation</a>.',
 'texte_admin_tech_03' => 'You can choose to save the file in a compressed form, to 
 	speed up its transfer to your machine or to a backup server and save some disk space.',
 'texte_admin_tech_04' => 'In order to merge with another database, you can restrict the backup to one section: ',

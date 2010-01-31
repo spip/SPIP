@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'D&agrave;ida&nbsp;! Aquela rubrica conten @contient_breves@ br&egrave;va@scb@&nbsp;: se la despla&ccedil;atz, vorgatz ben faire una taca dins aquela casa de confirmacion.',
 'avis_destinataire_obligatoire' => 'Dev&egrave;tz indicar un destinatari denant de mandar aqueu messatge.',
 'avis_erreur_connexion_mysql' => 'Error de conexion SQL',
-'avis_erreur_version_archive' => '<b>D&agrave;ida&nbsp;! Lo fichier @archive@ correspoande &agrave; una autra version de SPIP qu\'aquela qu\'av&egrave;tz installada.</b> Anatz v&egrave;rs de b&egrave;li dificultats&nbsp;: risca de destruccion de la voastra basa de donadas, disfoncionaments div&egrave;rs dau sit eca. Non validetz aquela demanda d\'importacion.<p /> Per mai d\'informacions, vegu&egrave;tz
+'avis_erreur_version_archive' => '<MODIF><b>D&agrave;ida&nbsp;! Lo fichier @archive@ correspoande &agrave; una autra version de SPIP qu\'aquela qu\'av&egrave;tz installada.</b> Anatz v&egrave;rs de b&egrave;li dificultats&nbsp;: risca de destruccion de la voastra basa de donadas, disfoncionaments div&egrave;rs dau sit eca. Non validetz aquela demanda d\'importacion.<p /> Per mai d\'informacions, vegu&egrave;tz
 <a href="@spipnet@">
 la documentacion de SPIP</a>.',
 'avis_espace_interdit' => '<b>Espaci pro&iuml;bit</b><div>SPIP es ja installat.</div>',
@@ -189,7 +189,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 
 // I
 'ical_info1' => 'Aquela p&agrave;gina m&ograve;stra de met&ograve;des diferents per restar en contacte emb la vida d\'aqueu sit.',
-'ical_info2' => 'Per aver mai d\'informacions sobre aquelas tecnicas, esitetz pas da consultar <a href="@spipnet@">la documentacion de SPIP</a>.',
+'ical_info2' => '<MODIF>Per aver mai d\'informacions sobre aquelas tecnicas, esitetz pas da consultar <a href="@spipnet@">la documentacion de SPIP</a>.',
 'ical_info_calendrier' => 'Li a doi calendiers &agrave; la voastra disposicion. Lo promier es un plan dau sit qu\'anon&ccedil;a toi lu articles publicats. Lo segond conten lu anoncis editoriaus en mai dei voastres darri&egrave;rs messatges privats&nbsp;: vos es reservat gra&ccedil;as &agrave; una clau personala, que la pod&egrave;tz modificar en tot moment en renovelant lo voastre m&ograve;t de santa Clara.',
 'ical_lien_rss_breves' => 'Sindicacion dei br&egrave;vas dau sit',
 'ical_methode_http' => 'Telecargament',
@@ -512,7 +512,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_question_activer_compactage_js' => '<NEW>Souhaitez-vous activer le compactage des scripts (javascript) ?',
 'info_question_activer_compresseur' => '<NEW>Voulez-vous activer la compression du flux HTTP ?',
 'info_question_gerer_statistiques' => 'Lo voastre site deu gerar li estadisticas dei visitas&nbsp;?',
-'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz li inscripcions de nov&egrave;us redactors &agrave;
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Acceptatz li inscripcions de nov&egrave;us redactors &agrave;
  partir dau sit public&nbsp;? Se l\'acceptatz, lu visitaires si podr&agrave;n inscriure
  desp&iacute; un formulari automatisat e accedir&agrave;n alora &agrave; l\'espaci privat per
  prepauar lu sieus articles pr&ograve;pis.<blockquote><i>Durant la fasa d\'inscripcion,
@@ -668,7 +668,6 @@ una color indica lo sieu estat&nbsp;:',
 'install_select_langue' => 'Seleccionatz una lenga pi clicatz sus lo boton &laquo;&nbsp;seguent&nbsp;&raquo; per amodar la procedura d\'installacion.',
 'install_select_type_db' => '<NEW>Indiquer le type de base de donn&eacute;es&nbsp;:',
 'install_select_type_mysql' => '<NEW>MySQL',
-'install_select_type_pgsql' => '<NEW>PostgreSQL',
 'install_select_type_sqlite2' => '<NEW>SQLite 2',
 'install_select_type_sqlite3' => '<NEW>SQLite 3',
 'install_serveur_hebergeur' => '<NEW>Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur',
@@ -705,7 +704,7 @@ una color indica lo sieu estat&nbsp;:',
 'item_gerer_statistiques' => 'Pas gerar li estadisticas',
 'item_limiter_recherche' => 'Limitar la recerca ai informacions contengudi dins lo voastre sit',
 'item_login' => 'Login',
-'item_messagerie_agenda' => '<NEW>Activer la messagerie et l’agenda',
+'item_messagerie_agenda' => '<NEW>Activer la messagerie et lâ€™agenda',
 'item_mots_cles_association_articles' => 'ai articles',
 'item_mots_cles_association_breves' => 'ai br&egrave;vas',
 'item_mots_cles_association_rubriques' => 'ai rubricas',
@@ -727,7 +726,7 @@ una color indica lo sieu estat&nbsp;:',
 'item_non_gerer_annuaire_site_web' => 'Desactivar l\'annuari de sits web',
 'item_non_gerer_statistiques' => 'Pas gerar li estadisticas',
 'item_non_limiter_recherche' => 'Alargar la recerca au contengut dei sits referen&ccedil;ats',
-'item_non_messagerie_agenda' => '<NEW>D&eacute;sactiver la messagerie et l’agenda',
+'item_non_messagerie_agenda' => '<NEW>D&eacute;sactiver la messagerie et lâ€™agenda',
 'item_non_publier_articles' => 'Publicar pas lus articles avans la data de publicacion prevista.',
 'item_non_utiliser_breves' => 'Utilisar pas li br&egrave;vas',
 'item_non_utiliser_config_groupe_mots_cles' => 'Utilisar pas la configuracion avan&ccedil;ada dei grops de m&ograve;ts claus',
@@ -899,7 +898,7 @@ una color indica lo sieu estat&nbsp;:',
  incl&uacute;s <i>toi</i> lu acc&egrave;s redactors e administrators. Un c&ograve;up que l\'auretz executada, auretz de tornar lan&ccedil;ar l\'installacion de SPIP per tornar crear una basa nov&egrave;la coma pura un promi&egrave;r acc&egrave;s administrator.',
 'texte_admin_effacer_stats' => '<NEW>Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
 'texte_admin_tech_01' => 'Aquela opcion vos permete de sauvagardar lo contengut de la basa dins un fichier que ser&agrave; conservat dins lo repert&ograve;ri @dossier@. Oblidetz pas manco de recuperar l\'integralitat dau repert&ograve;ri @img@, que conten lu imatges e lu documents utilisats dins lu articles e rubricas.',
-'texte_admin_tech_02' => 'M&egrave;fi: aquela sauvagarda si podr&agrave; restaurar SOLAMENT dins un sit installat m&eacute; la mema version de SPIP. Cau sobretot pas &laquo;&nbsp;vuar la basa&nbsp;&raquo; en esperar tornar installar la sauvagarda apr&egrave;s una mesa a jorn... Consultatz la <a href="@spipnet@">la documentacion de SPIP</a>.',
+'texte_admin_tech_02' => '<MODIF>M&egrave;fi: aquela sauvagarda si podr&agrave; restaurar SOLAMENT dins un sit installat m&eacute; la mema version de SPIP. Cau sobretot pas &laquo;&nbsp;vuar la basa&nbsp;&raquo; en esperar tornar installar la sauvagarda apr&egrave;s una mesa a jorn... Consultatz la <a href="@spipnet@">la documentacion de SPIP</a>.',
 'texte_admin_tech_03' => 'Pod&egrave;tz chausir de sauvagardar lo fichier sota forma comprimida, per fin
  d\'abrivar lo sieu transferiment dau voastre &ograve; sus un servidor de sauvagardas, e per fin d\'esparnhar d\'espaci disc.',
 'texte_admin_tech_04' => '<NEW>Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ',

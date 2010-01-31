@@ -27,14 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Atenci&oacute;&nbsp;! Aquesta secci&oacute; cont&eacute; @contient_breves@ breu@scb@&nbsp;: si la moveu, assenyaleu-ho en aquesta casella de confirmaci&oacute;.',
 'avis_destinataire_obligatoire' => 'Ha d\'escriure un destinatari abans d\'enviar el missatge.',
 'avis_erreur_connexion_mysql' => 'Error de connexi&oacute; SQL',
-'avis_erreur_version_archive' => '<b>Atenci&oacute;! El fitxer @archive@ correspon a una
-    versi&oacute; diferent d\'SPIP de la instal&middot;lada.</b> Us
-    podeu trobar amb grans dificultats: risc de
-      destrucci&oacute; de la base de dades, mal funcionament
-    del lloc, etc. Cal que no valideu aquesta sol&middot;licitud
-    d\'importaci&oacute;.<p>Si voleu m&eacute;s informaci&oacute;, consulteu
-    <a href="@spipnet@">
-                                la documentaci&oacute; d\'SPIP</A>.',
+'avis_erreur_version_archive' => '<b>Atenci&oacute;! El fitxer @archive@ correspon a una versi&oacute; diferent d\'SPIP de la instal&middot;lada.</b> Us podeu trobar amb grans dificultats: risc de destrucci&oacute; de la base de dades, mal funcionament del lloc, etc. Cal que no valideu aquesta sol&middot;licitud d\'importaci&oacute;.<p> Si voleu m&eacute;s informaci&oacute;, consulteu <a href="@spipnet@"> la documentaci&oacute; d\'SPIP</a>.',
 'avis_espace_interdit' => '<b>Zona prohibida</b><div>SPIP ja est&agrave; instal&middot;lat.</div>',
 'avis_lecture_noms_bases_1' => 'El programa d\'instal&middot;laci&oacute; no ha pogut llegir els noms de les bases de dades instal&middot;lades.',
 'avis_lecture_noms_bases_2' => 'O b&eacute; cap base de dades no est&agrave; disponible, o b&eacute; la funci&oacute; que permet de llistar les bases ha estat
@@ -126,6 +119,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'config_erreur_base_sup' => 'SPIP no t&eacute; acc&eacute;s a la llista de bases accesibles',
 'config_info_base_sup' => 'Si teniu altres bases de dades a interrogar per mitj&agrave; d\'SPIP, amb el seu servidor SQL o amb un altre, el formulari que hi ha m&eacute;s avall, us permet declarar-les. Si deixeu alguns camps buits, s\'utilitzaran els identificadors de connexi&oacute; a la base principal.',
 'config_info_base_sup_disponibles' => 'Bases suplement&agrave;ries ja consultables:',
+'config_info_enregistree' => 'La nova configuraci&oacute; s\'ha enregistrat',
 'config_info_logos' => 'Cada element del lloc Web p&ograve;t tenir el seu logotip, com un &laquo;logotip d\'imatge canviant&raquo;',
 'config_info_logos_utiliser' => 'Utilitzar els logotips',
 'config_info_logos_utiliser_non' => 'No utilitzar els logotips',
@@ -201,7 +195,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 
 // I
 'ical_info1' => 'Aquesta p&agrave;gina mostra diferents maneres per estar en contacte amb la vida d\'aquest lloc.',
-'ical_info2' => 'Per tenir m&eacute;s informacions sobre aquestes t&egrave;cniques, no dubteu a consultar <a href="@spipnet@">la documentation de SPIP</a>.',
+'ical_info2' => 'Per tenir m&eacute;s informacions sobre aquestes t&egrave;cniques, no dubteu a consultar <a href="@spipnet@">la documentaci&oacute; d\'SPIP</a>.',
 'ical_info_calendrier' => 'Hi ha dos calendaris a la vostra disposici&oacute;. El primer &eacute;s un mapa del lloc que mostra tots els articles publicats. El segon cont&eacute; els anuncis editorials a m&eacute;s dels vostres darrers missatges privats: est&agrave; reservat per vosaltres gr&agrave;cies a una clau personal, que podeu modificar en tot moment renovant la vostra contrasenya. ',
 'ical_lien_rss_breves' => 'Sindicaci&oacute; de les breus del lloc',
 'ical_methode_http' => 'Desc&agrave;rrega',
@@ -527,8 +521,9 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_question_activer_compactage_js' => 'Voleu activat la compressi&oacute; dels scripts (javascript)?',
 'info_question_activer_compresseur' => 'Voleu activar la compressi&oacute; del flux HTTP?',
 'info_question_gerer_statistiques' => 'El vostre lloc ha de gestionar les estad&iacute;stiques de les visites?',
-'info_question_inscription_nouveaux_redacteurs' => 'Accepteu les inscripcions denous redactors a partir del lloc p&uacute;blic? Si ho accepteu, els visitants es podran inscriure mitjan&ccedil;ant un formulari automatitzat i llavors accediran a l\'espai privat per proposar els seus propis articles.<blockquote><i>Durant el proc&eacute;s d\'inscripci&oacute;, els usuaris reben un correu electr&ograve;nic autom&agrave;tic en el que se\'ls d&oacute;na els seus codis d\'acc&eacute;s al lloc privat. Alguns prove&iuml;dors d\'hostatge desactiven l\'enviament de correus electr&ograve;nics des dels seus servidors: en aquest
- cas, la inscripci&oacute; autom&agrave;tica &eacute;s impossible.',
+'info_question_inscription_nouveaux_redacteurs' => 'Accepteu les inscripcions de nous redactors a partir del lloc p&uacute;blic? Si ho accepteu, els visitants es podran inscriure
+ mitjan&ccedil;ant un formulari  automatitzat i llavors accediran a l\'espai privat per proposar els seus propis articles.<blockquote><i>Durant el proc&eacute;s d\'inscripci&oacute;, els usuaris reben un correu electr&ograve;nic autom&agrave;tic en el que se\'ls d&oacute;na els seus codis d\'acc&eacute;s al lloc privat. Alguns prove&iuml;dors d\'hostatge desactiven l\'enviament de correus electr&ograve;nics des dels seus servidors: en aquest
+ cas, la inscripci&oacute; autom&agrave;tica &eacute;s impossible.</i></blockquote>',
 'info_question_mots_cles' => 'Voleu utilitzar les paraules clau en la vostra web&nbsp;?',
 'info_question_proposer_site' => 'Qui pot proposar llocs referenciats?',
 'info_question_utilisation_moteur_recherche' => 'Voleu fer servir el motor de cerca integrat a l\'SPIP?
@@ -677,7 +672,6 @@ amb un color que indica el seu estat:',
 'install_select_langue' => 'Seleccioneu un idioma i despr&eacute;s feu un clic en el bot&oacute; &laquo;&nbsp;seg&uuml;ent&nbsp;&raquo; per iniciar el proc&eacute;s d\'instal&middot;laci&oacute;.',
 'install_select_type_db' => 'Indicar el tipus de base de dades:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Servidor de base de dades atribu&iuml;t per l\'hostatjador',
@@ -726,7 +720,7 @@ amb un color que indica el seu estat:',
 'item_non_ajout_mots_cles' => 'Prohibir la utilitzaci&oacute; de les paraules clau en els f&ograve;rums',
 'item_non_autoriser_documents_joints' => 'Impedir la inclusi&oacute; de documents en els articles',
 'item_non_autoriser_documents_joints_rubriques' => 'Impedir la inclusi&oacute; de documents en les seccions',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La fecha de los documentos es la de su puesta en el sitio',
+'item_non_autoriser_selectionner_date_en_ligne' => 'La data dels documents &eacute;s la de quan han estat afegits al lloc',
 'item_non_autoriser_syndication_integrale' => 'Nom&eacute;s difondre un resum',
 'item_non_bloquer_liens_syndiques' => 'No bloquejar els enlla&ccedil;os sortits de la sindicaci&oacute;',
 'item_non_compresseur' => 'Desactivar la compressi&oacute;',

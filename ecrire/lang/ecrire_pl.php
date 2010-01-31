@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Uwaga! Ten dzia&#322; zawiera @contient_breves@ news@scb@: je&#347;li chcesz go przenie&#347;&#263;, prosz&#281; zaznacz to okienko.',
 'avis_destinataire_obligatoire' => 'Aby wys&#322;a&#263; t&#281; wiadomo&#347;&#263;, musisz wybra&#263; odbiorc&#281;.',
 'avis_erreur_connexion_mysql' => '<MODIF>B&#322;&#261;d po&#322;&#261;czenia z SQL',
-'avis_erreur_version_archive' => '<b>Ostrze&#380;enie! Plik @archive@ odpowiada
+'avis_erreur_version_archive' => '<MODIF><b>Ostrze&#380;enie! Plik @archive@ odpowiada
     wersji SPIP innej, ni&#380;
     zainstalowana przez Ciebie.</b> Wi&#261;&#380;e si&#281; to z powa&#380;nymi
     trudno&#347;ciami: ryzykiem zniszczenia Twojej bazy danych,
@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Na tej stronie prezentujemy r&oacute;&#380;ne metody pozostanie w kontakcie z dzia&#322;alno&#347;ci&#261; serwisu.',
-'ical_info2' => 'Aby przeczyta&#263; wi&#281;cej na ten temat, id&#378; na stron&#281;<a href="@spipnet@">la documentation de SPIP</a>.',
+'ical_info2' => '<MODIF>Aby przeczyta&#263; wi&#281;cej na ten temat, id&#378; na stron&#281;<a href="@spipnet@">la documentation de SPIP</a>.',
 'ical_info_calendrier' => 'Do Twojej dyspozycji s&#261; dwa kalendarze. Jeden pokazuje map&#281; strony wraz ze wszystkimi opublikowanymi artyku&#322;ami. Drugi zawiera og&#322;oszenia redakcyjne oraz Twoje ostatni wiadomo&#347;ci prywatne&nbsp;: tylko Ty masz do niego dost&#281;p za has&#322;em.',
 'ical_lien_rss_breves' => 'Zapisz si&#281; do RSS news&oacute;w',
 'ical_methode_http' => '&#346;ci&#261;gnij',
@@ -543,7 +543,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_activer_compactage_js' => '<NEW>Souhaitez-vous activer le compactage des scripts (javascript) ?',
 'info_question_activer_compresseur' => '<NEW>Voulez-vous activer la compression du flux HTTP ?',
 'info_question_gerer_statistiques' => 'Czy Twoja strona ma prowadzi&#263; statystyk&#281; odwiedzin?',
-'info_question_inscription_nouveaux_redacteurs' => 'Czy akceptujesz mo&#380;liwo&#347;&#263; dodawania nowych redaktor&oacute;w
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Czy akceptujesz mo&#380;liwo&#347;&#263; dodawania nowych redaktor&oacute;w
   za po&#347;rednictwem stron publicznych&nbsp;? Je&#347;li tak, odwiedz&#261;cy b&#281;d&#281; mogli si&#281; zapisa&#263;
   za pomoc&#261; zautomatyzowanego formularza i b&#281;d&#261; mieli dost&#281;p do strefy prywatnej, gdzie
   b&#281;d&#261; proponowa&#263; w&#322;asne artyku&#322;y. <blockquote><i>W trakcie procesu zapisywania,
@@ -699,7 +699,6 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'install_select_langue' => 'Wybierz j&#281;zyk i kliknij na przycisk "next" aby rozpocz&#261;&#263; procedur&#281; instalacji.',
 'install_select_type_db' => '<NEW>Indiquer le type de base de donn&eacute;es&nbsp;:',
 'install_select_type_mysql' => '<NEW>MySQL',
-'install_select_type_pgsql' => '<NEW>PostgreSQL',
 'install_select_type_sqlite2' => '<NEW>SQLite 2',
 'install_select_type_sqlite3' => '<NEW>SQLite 3',
 'install_serveur_hebergeur' => '<NEW>Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur',
@@ -931,7 +930,7 @@ w&#322;&#261;cznie z <i>wszystkimi</i> parametrami dost&#281;pu dla redaktor&oac
 zreinstalowa&#263; SPIP w celu utworzenia nowej bazy danych i dost&#281;pu pierwszego administratora.',
 'texte_admin_effacer_stats' => '<NEW>Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
 'texte_admin_tech_01' => 'Ta opcja pozwala Ci zapisa&#263; zawarto&#347;&#263; bazy danych w pliku, kt&oacute;ry zostanie zachowany w katalogu @dossier@. Pami&#281;taj tak&#380;e o skopiowaniu ca&#322;ego katalogu @img@, kt&oacute;ry zawiera obrazki i dokumenty u&#380;ywane w artyku&#322;ach i dzia&#322;ach.',
-'texte_admin_tech_02' => 'Uwaga: t&#261; kopi&#281; bezpiecze&#324;stwa b&#281;dzie mo&#380;na odtworzy&#263;
+'texte_admin_tech_02' => '<MODIF>Uwaga: t&#261; kopi&#281; bezpiecze&#324;stwa b&#281;dzie mo&#380;na odtworzy&#263;
  TYLKO I WY&#321;&#260;CZNIE w serwisie opartym na tej samej wersji SPIP. Nie wolno  "opr&oacute;znia&#263; bazy danych" s&#261;dz&#261;c, &#380;e po zaktualizowaniu SPIP b&#281;dzie mo&#380;na odtworzy&#263; baz&#281; z backupu. Wi&#281;cej informacji w <a href="@spipnet@">dokumentacji SPIP</a>.',
 'texte_admin_tech_03' => 'Mo&#380;esz wybra&#263; wykonanie kopii bezpiecze&#324;&#347;twa pod postaci&#261; skompresowan&#261;, w celu
  przyspieszenia &#347;ci&#261;gania pliku lub zapisywania na serwerze, i zarazem oszcz&#281;dno&#347;ci przestrzeni dyskowej.',
