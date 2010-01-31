@@ -25,7 +25,10 @@ function configuration_mots_dist(){
 	$articles_mots = $GLOBALS['meta']["articles_mots"];
 	$config_precise_groupes = $GLOBALS['meta']["config_precise_groupes"];
 	$mots_cles_forums = $GLOBALS['meta']["mots_cles_forums"];
-	$forums_publics = $GLOBALS['meta']["forums_publics"];
+	$forums_publics = $GLOBALS['meta']["forums_publics"]!='non';
+	if (!$forums_public){
+		$forums_public = sql_countsel('spip_forums', "statut='publie'");
+	}
 
 	$res .= "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
 	. "<tr><td class='verdana2'>"
