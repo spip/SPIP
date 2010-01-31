@@ -51,11 +51,11 @@ function formulaires_editer_mot_verifier_dist($id_mot='new', $id_groupe=0, $reto
 	// la comparaison accepte un numero absent ou different
 	// sinon avertir
 	if (!count($erreurs) AND !_request('confirm_titre_mot')){
-		if (sql_countsel("spip_mots", "id_groupe=".intval(_request('id_groupe'))
-						." AND titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero(_request('titre')))."$")
+		if (sql_countsel("spip_mots", 
+						"titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero(_request('titre')))."$")
 						." AND id_mot<>".intval($id_mot)))
 			$erreurs['titre'] =
-						_L('Un mot existe deja avec ce titre dans ce groupe. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?')
+						_T('avis_doublon_mot_cle')
 						." <input type='hidden' name='confirm_titre_mot' value='1' />";
 	}
 	return $erreurs;
