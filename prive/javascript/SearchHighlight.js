@@ -112,7 +112,7 @@ if (window.jQuery)
             var regex = new RegExp(m[i]);
             query = query.replace(regex,'@@@'+i+'@@@');
           }
-        query = query.split(/[\s,\+\.]+/);
+        query = query.split(/[\s,\+]+/);
         if(m)
           for(var i=0,l = query.length;i<l;i++) {
             for(var j=0, ml=m.length;j<ml;j++) {
