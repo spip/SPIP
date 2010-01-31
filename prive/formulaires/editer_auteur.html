@@ -22,14 +22,9 @@
 	    	Modification de l'email
 			ou message disant que seuls les admins peuvent le modifier
 		]
-		#SET{disable,''}
-		[(#AUTORISER{modifier,auteur,#ENV{id_auteur},#NULL,#ARRAY{email,?}}|non)
-		  #SET{disable,disabled='disabled'}
-		]
 	    <li class="editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
 				<label for="email"><:entree_adresse_email:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
-				][(#GET{disable}|oui)<p class='explication'><:info_reserve_admin:></p>
 				]<input type='text' class='text[ (#GET{disable}|oui)disabled]' name='email' id='email' value="[(#ENV**{email})]" #GET{disable}/>
 	    </li>
 	    <li class="editer_bio[ (#ENV**{erreurs}|table_valeur{bio}|oui)erreur]">

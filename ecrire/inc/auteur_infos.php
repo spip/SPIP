@@ -185,6 +185,14 @@ function legender_auteur_voir($auteur) {
 		$contenu_auteur .= "<div>"._T('email_2')
 			." <b><a href='mailto:".htmlspecialchars($auteur['email'])."'>"
 			.$auteur['email']."</a></b></div>";
+	// message d'information d'envoi d'email pour modif et de confirmation
+	// on ne fait ici qu'informer, sans aucune action
+	if ($email = _request('email_confirm')){
+		$contenu_auteur .= "<p><strong>"._T('form_auteur_envoi_mail_confirmation',array('email'=>$email))."</strong></p>";
+	}
+	elseif (_request('email_modif')==='ok'){
+		$contenu_auteur .= "<p><strong>"._T('form_auteur_email_modifie')."</strong></p>";
+	}
 
 	if ($auteur['url_site']) {
 		if (!$auteur['nom_site'])

@@ -90,7 +90,7 @@ function insert_auteur($source='spip') {
 
 
 // Appelle toutes les fonctions de modification d'un auteur
-function auteurs_set($id_auteur) {
+function auteurs_set($id_auteur, $set = null) {
 	$err = '';
 
 	$c = array();
@@ -99,7 +99,7 @@ function auteurs_set($id_auteur) {
 		'nom_site','url_site',
 		'imessage','pgp',
 	) as $champ)
-		$c[$champ] = _request($champ);
+		$c[$champ] = _request($champ,$set);
 
 	include_spip('inc/modifier');
 	revision_auteur($id_auteur, $c);
