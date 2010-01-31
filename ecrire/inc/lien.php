@@ -73,21 +73,34 @@ define('_RACCOURCI_LIEN', "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS");
 function expanser_liens($texte, $connect='')
 {
 	$texte = pipeline('pre_liens', $texte);
-	$inserts = $regs = array();
+	$sources = $inserts = $regs = array();
 	if (preg_match_all(_RACCOURCI_LIEN, $texte, $regs, PREG_SET_ORDER)) {
 		$lien = charger_fonction('lien', 'inc');
 		foreach ($regs as $k => $reg) {
 
 			$inserts[$k] = '@@SPIP_ECHAPPE_LIEN_' . $k . '@@';
-			$texte = str_replace($reg[0], $inserts[$k], $texte);
+			$sources[$k] = $reg[0];
+			$texte = str_replace($sources[$k], $inserts[$k], $texte);
 
 			list($titre, $bulle, $hlang) = traiter_raccourci_lien_atts($reg[1]);
 			$r = $reg[count($reg)-1];
+			// la mise en lien automatique est passee par la a tort !
+			// corrigeons pour eviter d'avoir un <a...> dans un href...
+			if (strncmp($r,'<a',2)==0){
+				$href = extraire_attribut($r, 'href');
+				// remplacons dans la source qui peut etre reinjectee dans les arguments
+				// d'un modele
+				$sources[$k] = str_replace($r,$href,$sources[$k]);
+				// et prenons le href comme la vraie url a linker
+				$r = $href;
+			}
 			$regs[$k] = $lien($r, $titre, '', $bulle, $hlang, '', $connect);
 		}
 	}
 
-	$texte = traiter_modeles($texte, false, false, $connect);
+	// on passe a traiter_modeles la liste des liens reperes pour lui permettre
+	// de remettre le texte d'origine dans les parametres du modele
+	$texte = traiter_modeles($texte, false, false, $connect, array($inserts, $sources));
  	$texte = corriger_typo($texte);
 	$texte = str_replace($inserts, $regs, $texte);
 	return $texte;
@@ -373,7 +386,7 @@ define('_RACCOURCI_MODELE',
 define('_RACCOURCI_MODELE_DEBUT', '@^' . _RACCOURCI_MODELE .'@is');
 
 // http://doc.spip.org/@traiter_modeles
-function traiter_modeles($texte, $doublons=false, $echap='', $connect='') {
+function traiter_modeles($texte, $doublons=false, $echap='', $connect='', $liens = null) {
 	// preserver la compatibilite : true = recherche des documents
 	if ($doublons===true)
 		$doublons = array('documents'=>array('doc','emb','img'));
@@ -410,7 +423,11 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='') {
 				$texte .= preg_replace(',[|][^|=]*,s',' ',$params);
 			# version normale
 			else {
-				$modele = inclure_modele($type, $id, $params, $lien, $connect);
+				// si un tableau de liens a ete passe, reinjecter le contenu d'origine
+				// dans les parametres, plutot que les liens echappes
+				if (!is_null($liens))
+					$params = str_replace($liens[0], $liens[1], $params);
+			  $modele = inclure_modele($type, $id, $params, $lien, $connect);
 				// en cas d'echec, 
 				// si l'objet demande a une url, 
 				// creer un petit encadre vers elle
@@ -424,8 +441,15 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='') {
 						  . '">'
 						  .sinon($lien['titre'], _T('ecrire:info_sans_titre'))
 						  ."</a>";
+					else {
+						$modele = "";
+						if (test_espace_prive()) {
+							$modele = entites_html(substr($texte,$a,$cherche));
+							if (!is_null($liens))
+								$modele = "<pre>".str_replace($liens[0], $liens[1], $modele)."</pre>";
+						}
+					}
 				}
-
 				// le remplacer dans le texte
 				if ($modele !== false) {
 					$modele = protege_js_modeles($modele);
