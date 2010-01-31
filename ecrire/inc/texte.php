@@ -632,7 +632,7 @@ function traiter_tableau($bloc) {
 				$ligne = traiter_listes($ligne);
 
 			// Pas de paragraphes dans les cellules
-			$ligne = preg_replace("/\n{2,}/", "<br />\n", $ligne);
+			$ligne = preg_replace("/\n{2,}/", "<br /><br />\n", $ligne);
 
 			// tout mettre dans un tableau 2d
 			preg_match_all('/\|([^|]*)/S', $ligne, $cols);
