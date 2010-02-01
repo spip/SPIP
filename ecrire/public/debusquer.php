@@ -483,15 +483,15 @@ function debusquer_navigation_boucles($boucles, $nom_skel, $self)
 			  "'><td  align='right'>$i</td><td>\n" .
 			  "<a  class='debug_link_boucle' href='" .
 			  $self2 .
-			  "&amp;var_mode_affiche=boucle#$nom_skel'>" .
+			  "&amp;var_mode_affiche=boucle#$nom_skel$nom'>" .
 			  _T('zbug_boucle') .
 			  "</a></td><td>\n<a class='debug_link_boucle' href='" .
 			  $self2 .
-			  "&amp;var_mode_affiche=resultat#$nom_skel'>" .
+			  "&amp;var_mode_affiche=resultat#$nom_skel$nom'>" .
 			  _T('zbug_resultat') .
 			  "</a></td><td>\n<a class='debug_link_resultat' href='" .
 			  $self2 .
-			  "&amp;var_mode_affiche=code#$nom_skel'>" .
+			  "&amp;var_mode_affiche=code#$nom_skel$nom'>" .
 			  _T('zbug_code') .
 			  "</a></td><td>\n<a class='debug_link_resultat' href='" .
 			  str_replace('var_mode=','var_profile=', $self2) .
