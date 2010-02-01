@@ -34,7 +34,7 @@ function exec_admin_tech_dist()
 
 		echo debut_droite('',true);
 
-		//
+	//
 		// Lien vers la reparation
 		//
 

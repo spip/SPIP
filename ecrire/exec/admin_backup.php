@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('base/dump');
 
 function exec_admin_backup_dist()
 {
@@ -101,6 +102,7 @@ function exec_admin_backup_dist()
 		  "</b>$nom<b>.xml</b></li></ul>\n"
 		  . "\n<input type='hidden' name='reinstall' value='non' />";
 
+		$res .= options_avancees_dump();
 		echo
 			generer_form_ecrire('export_all', $res, '', _T('texte_sauvegarde_base')),
 			fin_cadre_trait_couleur(true);
@@ -131,4 +133,47 @@ function nom_fichier_dump()
 	}
 	return $nom;
 }
+
+
+function options_avancees_dump(){
+	list($tables,) = base_liste_table_for_dump($GLOBALS['EXPORT_tables_noexport']);
+	$plie = _T('info_options_avancees');
+	$res = controle_tables_en_base('export', $tables);
+	$res = "<h3>"._T('install_tables_base')."</h3>"
+	 . "\n<ol style='spip'><li>\n" .
+			join("</li>\n<li>", $res) .
+			"</li></ol>\n";
+
+	$res = block_parfois_visible('export_tables', $plie, $res, '', false);
+ 	return $res;
+}
+
+
+// Fabrique la liste a cocher des tables presentes
+function controle_tables_en_base($name, $check)
+{
+	$p = '/^' . $GLOBALS['table_prefix'] . '/';
+	$res = $check;
+	foreach(sql_alltable() as $t) {
+		$t = preg_replace($p, 'spip', $t);
+		if (!in_array($t, $check)) $res[]= $t;
+	}
+	sort($res);
+
+	foreach ($res as $k => $t) {
+
+		$c = "type='checkbox'"
+		. (in_array($t, $check) ? " checked='checked'" : '')
+		. " onclick='manuel=false'";
+
+		$res[$k] = "<input $c value='$t' id='$name_$t' name='$name"
+			. "[]' />\n"
+			. $t
+			. " ("
+			.  sql_countsel($t)
+	  		. ")";
+	}
+	return $res;
+}
+
 ?>
