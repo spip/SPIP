@@ -32,29 +32,7 @@ function action_export_all_dist()
 	$file = $dir . $archive;
 
 	utiliser_langue_visiteur();
-	if ($quoi =='start'){
-	// en mode partiel, commencer par les articles et les rubriques
-	// pour savoir quelles parties des autres tables sont a sauver
-		if ($rub) {
-			if ($t = array_search('spip_rubriques', $tables)) {
-				unset($tables[$t]);
-				array_unshift($tables, 'spip_rubriques');
-			}
-			if ($t = array_search('spip_articles', $tables)) {
-				unset($tables[$t]);
-				array_unshift($tables, 'spip_articles');
-			}
-		}
-		// creer l'en tete du fichier et retourner dans l'espace prive
-		ecrire_fichier($file, export_entete($version),false);
-		$v = serialize(array($gz, $archive, $rub, $tables, 1, 0));
-		ecrire_meta($meta, $v, 'non');
-		include_spip('inc/headers');
-		  // rub=$rub sert AUSSI a distinguer cette redirection
-		  // d'avec l'appel initial sinon FireFox croit malin
-		  // d'optimiser la redirection
-		redirige_url_ecrire('export_all',"rub=$rub");
-	} elseif ($quoi=='end') export_all_fin($file, $meta, $rub);
+	if ($quoi=='end') export_all_fin($file, $meta, $rub);
 }
 
 // http://doc.spip.org/@export_all_fin
@@ -131,21 +109,6 @@ function export_all_fin($file, $meta, $rub)
 	exit;
 }
 
-// http://doc.spip.org/@export_entete
-function export_entete($version_archive)
-{
-	return
-"<" . "?xml version=\"1.0\" encoding=\"".
-$GLOBALS['meta']['charset']."\"?".">\n" .
-"<SPIP 
-	version=\"" . $GLOBALS['spip_version_affichee'] . "\" 
-	version_base=\"" . $GLOBALS['spip_version_base'] . "\" 
-	version_archive=\"" . $version_archive . "\"
-	adresse_site=\"" .  $GLOBALS['meta']["adresse_site"] . "\"
-	dir_img=\"" . _DIR_IMG . "\"
-	dir_logos=\"" . _DIR_LOGOS . "\"
->\n";
-}
 
 // production de l'entete du fichier d'archive
 // http://doc.spip.org/@export_enpied
