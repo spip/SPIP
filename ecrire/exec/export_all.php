@@ -18,9 +18,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * - le premier coup on initialise par exec_export_all_args puis export_all_start
  * - ensuite on enchaine sur inc/export, qui remplit le dump et renvoie ici a chaque timeout
  * - a chaque coup on relance inc/export
- * - lorsque inc/export a fini, il retourne $arg que l'on renvoie
- *   vers action=export_all avec un end
- * - action=export_all clos le fichier et affiche le resume
+ * - lorsque inc/export a fini, il retourne $arg
+ * - on l'utilise pour clore le fichier
+ * - on renvoie
+ *   vers action=export_all pour afficher le resume
  * 
  */
 
