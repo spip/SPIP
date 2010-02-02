@@ -14,6 +14,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/headers');
 
+/**
+ * On arrive ici le premier coup depuis admin_tech
+ *	-> dans ce cas on verifie si le dump est lisible et dans une version connu
+ *  -> on affiche un message qui va bien
+ *  -> on passe la main a inc/admin qui va verifier les droits a executer
+ *     base/import_all (fichier ftp ou webmestres) et lancer ce dernier
+ *
+ * Lorsqu'un timeout se produit, on rerentre par ici :
+ *	-> on lit la meta import_all pour voir si on est bien en cours de restauration
+ *  -> dans ce cas on passe la main a inc/admin qui verifie les droits et relance
+ *     base/import_all
+ *
+ */
+
+
 // Restauration d'une base. Comme ca peut etre interrompu pour cause
 // de Timeout, un javascript relance automatiquement (cf inc/import.php)
 // Comme il peut relancer une action qui vient de se terminer,
@@ -27,12 +42,20 @@ function exec_import_all_dist()
 	if (!strlen($archive)) {
 		$_POST['archive'] = $archive = _request('archive_perso');
 	}
+
+	// si on arrive ici en debut d'operation
 	if ($archive) {
 		$dir = import_queldir();
 		$_POST['dir'] = $dir;
+		// voir si un message d'avertissement est necessaire
 		$commentaire = verifier_sauvegarde($dir . $archive);
-		$insert = _request('insertion');
-	} elseif (isset($GLOBALS['meta']['import_all'])) {
+
+		// est-ce une fusion de base au lieu d'un ecrasement ?
+		$insert = _request('insertion'); 
+	}
+	// sinon, si on a bien la meta qui donne l'etat d'avancement
+	// on est en cours d'operation
+	elseif (isset($GLOBALS['meta']['import_all'])) {
 		$request = @unserialize($GLOBALS['meta']['import_all']);
 		// Tester si l'archive est toujous la:
 		// ca sert pour forcer a sortir d'une restauration inachevee
@@ -88,7 +111,15 @@ function import_queldir()
 }
 
 
-// http://doc.spip.org/@verifier_sauvegarde
+/**
+ * Verifier que le dump qu'on essaye d'importer est bien compatible avec la
+ * version en cours, ou alerter des risques et perils
+ *
+ * @global string $spip_version_base
+ * @param string $archive
+ * @return string
+ *   message d'avertissement ou d'erreur si necessaire
+ */
 function verifier_sauvegarde ($archive) {
 	global $spip_version_base;
 
@@ -115,12 +146,20 @@ function verifier_sauvegarde ($archive) {
 			));
 }
 
-// http://doc.spip.org/@import_charge_version
+/**
+ * Verifier qu'on a bien le script qui sait lire la version d'archive
+ *
+ * @param string $version_archive
+ * @return string
+ */
 function import_charge_version($version_archive)
 {
+	// si c'est une archive xml par phpmyadmin, on sait la lire avec le script import_1_3
 	if (preg_match("{^phpmyadmin::}is",$version_archive)){
 		$fimport = 'import_1_3'; 
-	} else 	$fimport = 'import_' . str_replace('.','_',$version_archive);
+	} 
+	else
+		$fimport = 'import_' . str_replace('.','_',$version_archive);
 
 	return  charger_fonction($fimport, 'inc', true);
 }
