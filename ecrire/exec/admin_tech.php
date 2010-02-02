@@ -268,7 +268,7 @@ function nom_fichier_dump()
 
 
 function options_avancees_dump(){
-	list($tables,) = base_liste_table_for_dump($GLOBALS['EXPORT_tables_noexport']);
+	list($tables,) = base_liste_table_for_dump(lister_tables_noexport());
 	$plie = _T('info_options_avancees');
 	$res = controle_tables_en_base('export', $tables);
 	$res = "<h3>"._T('install_tables_base')."</h3>"

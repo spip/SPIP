@@ -30,7 +30,7 @@ include_spip('base/dump');
 // http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist(){
 	$rub = intval(_request('id_parent'));
-	$meta = "status_dump_$rub_"  . $GLOBALS['visiteur_session']['id_auteur'];
+	$meta = base_dump_meta_name($rub);
 
 	if (!isset($GLOBALS['meta'][$meta])){
 		// c'est un demarrage en arrivee directe depuis exec=admin_tech
@@ -40,6 +40,10 @@ function exec_export_all_dist(){
 
 	$export = charger_fonction('export', 'inc');
 	$arg = $export($meta);
+	@list(, $gz, $archive, $rub, $version) = explode(',', $arg);
+
+	// quand on sort de $export c'est qu'on a fini
+	export_all_end($meta,$archive);
 
 	include_spip('inc/headers');
 	redirige_par_entete(generer_action_auteur("export_all",$arg,'',true, true));
@@ -62,7 +66,7 @@ function exec_export_all_args($meta, $rub, $gz){
 
 	// si pas de tables listees en post, utiliser la liste par defaut
 	if (!$tables = _request('export'))
-		list($tables,) = base_liste_table_for_dump($GLOBALS['EXPORT_tables_noexport']);
+		list($tables,) = base_liste_table_for_dump(lister_tables_noexport());
 
 	export_all_start($meta, $gz, $archive, $rub, _VERSION_ARCHIVE, $tables);
 	
@@ -105,6 +109,12 @@ function export_all_start($meta, $gz, $archive, $rub, $version, $tables){
 
 }
 
+function export_all_end($meta, $archive){
+	$dir = base_dump_dir($meta);
+	$file = $dir . $archive;
+	ecrire_fichier($file, export_enpied(),false,false);
+}
+
 // http://doc.spip.org/@export_entete
 function export_entete($version_archive)
 {
@@ -120,4 +130,10 @@ $GLOBALS['meta']['charset']."\"?".">\n" .
 	dir_logos=\"" . _DIR_LOGOS . "\"
 >\n";
 }
+
+
+// production de l'entete du fichier d'archive
+// http://doc.spip.org/@export_enpied
+function export_enpied () { return  "</SPIP>\n";}
+
 ?>
