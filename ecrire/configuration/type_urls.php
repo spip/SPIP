@@ -43,7 +43,7 @@ function configuration_type_urls_dist()
 		. "</em></p>";
 
 
-	$res = '<br />'.debut_cadre_trait_couleur("", true, "",  _T('titre_type_urls'))
+	$res = '<br />'.debut_cadre_trait_couleur("", true, "",  _T('titre_type_urls').aide("confurl"))
 	.  ajax_action_post('configurer', 'type_urls', 'config_fonctions', '', $res)
 	.  fin_cadre_trait_couleur(true);
 
