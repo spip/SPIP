@@ -132,6 +132,12 @@ $tables_trans = array(
 // http://doc.spip.org/@import_init_tables
 function import_init_tables($request){
   global $connect_id_auteur;
+
+	// commencer par verifier les meta et le champ impt=non
+	$config = charger_fonction('config','inc');
+	$config();
+
+
 	// grand menage
 	// on vide toutes les tables dont la restauration est demandee
 	list($tables,) = base_liste_table_for_dump(lister_tables_noerase());
