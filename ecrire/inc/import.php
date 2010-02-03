@@ -153,7 +153,8 @@ function import_init_tables($request){
 	sql_updateq('spip_auteurs', array('id_auteur'=>0, 'extra'=>$connect_id_auteur), "id_auteur=$connect_id_auteur");
 	sql_delete("spip_auteurs", "id_auteur!=0");
 
-	return $tables;
+	// retourner la liste des tables a importer, pas celle des tables videes !
+	return import_table_choix($request);
 }
 
 // Effacement de la bidouille ci-dessus
@@ -329,11 +330,12 @@ function import_tables($request, $archive) {
 
 		if (!$initialisation_copie) {
 			// vide les tables qui le necessitent
-			import_init_tables($request);
+			$tables = import_init_tables($request);
 			ecrire_meta("restauration_status_copie", "ok",'non');
 		}
-		// la liste des tables a recopier
-		$tables = import_table_choix($request);
+		else
+			// la liste des tables a recopier
+			$tables = import_table_choix($request);
 		#		var_dump($tables);die();
 		spip_log("tables a copier :".implode(", ",$tables),'dbdump');
 		if (in_array('spip_auteurs',$tables)){
@@ -373,6 +375,9 @@ function import_tables($request, $archive) {
 			}
 		}
 	}
+
+	// recharger les metas
+	lire_metas();
 	#die();
 	return '' ;
 }
