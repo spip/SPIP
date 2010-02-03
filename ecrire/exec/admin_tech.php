@@ -207,8 +207,9 @@ function admin_sauvegardes($dir_dump, $tri)
 		. '</table>';
 
 
+	$plie = _T('info_options_avancees');
 	// restauration partielle / fusion
-	$res .= debut_cadre_enfonce('',true) .
+	$opt = debut_cadre_enfonce('',true) .
 		"\n<div>" .
 		 "<input name='insertion' id='insertion' type='checkbox' />&nbsp; <label for='insertion'>". 
 		  _T('sauvegarde_fusionner') .
@@ -222,6 +223,8 @@ function admin_sauvegardes($dir_dump, $tri)
 		  " &nbsp;\n<input name='url_site' id='url_site' type='text' size='25' />" .
 		  '</div>' .
 		  fin_cadre_enfonce(true);
+
+	$res .= block_parfois_visible('import_tables', $plie, $opt, '', false);
 
 	return generer_form_ecrire('import_all', $res, '', _T('bouton_restaurer_base'));
 }
