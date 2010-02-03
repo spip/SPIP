@@ -1360,12 +1360,9 @@ function balise_BOUTON_ACTION_dist($p){
 	if (!$_class) $_class="''";
 
 	$_confirm = interprete_argument_balise(4,$p);
-	if (!$_confirm){ $_confirm="''"; $_onclick=''; }
-	else $_onclick = " onclick=\'return confirm(\"' . attribut_html($_confirm) . '\");\'";
+	if (!$_confirm) $_confirm="''";
 
-	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.(\$u=$_url).'\'><div>'.form_hidden(\$u)
-.'<button type=\'submit\' class=\'submit\' $_onclick>' . $_label . '</button>'
-.'</div></form>'";
+	$p->code = "bouton_action($_label, $_url, $_class, $_confirm)";
 	$p->interdire_scripts = false;
 	return $p;
 }

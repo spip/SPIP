@@ -2589,5 +2589,22 @@ function nouvelle_revision($x) {
 	return enregistrer_nouvelle_revision($x);
 }
 
+/**
+ * Generer un bouton_action
+ * utilise par #BOUTON_ACTION
+ *
+ * @param string $libelle
+ * @param string $url
+ * @param string $class
+ * @param string $confirm
+ * @return string
+ */
+function bouton_action($libelle, $url, $class="", $confirm=""){
+	$onclick = $confirm?" onclick='return confirm(\"" . attribut_html($confirm) . "\");'":"";
+
+	return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
+		."<button type='submit' class='submit'$onclick>$libelle</button></div></form>";
+}
+
 
 ?>
