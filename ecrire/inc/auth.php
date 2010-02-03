@@ -488,6 +488,11 @@ function auth_terminer_identifier_login($auth_methode, $login, $serveur=''){
 }
 
 
+function auth_deloger(){
+	$logout = charger_fonction('logout','action');
+	$logout();
+}
+
 /**
  * Tester la possibilite de modifier le login d'authentification
  * pour la methode donnee
