@@ -65,14 +65,12 @@ function exec_admin_plugin_dist($retour='') {
 	// avec ce que fait actualise_plugins_actifs, il faut recalculer. A revoir.
 	$lcpa = liste_chemin_plugin_actifs();
 
-	// Si on a CFG, ajoute un lien (oui c'est mal)
-	if (defined('_DIR_PLUGIN_CFG')) {
-		echo debut_cadre_enfonce('',true);
-		echo icone_horizontale('CFG &ndash; '._T('configuration'), generer_url_ecrire('cfg'), _DIR_PLUGIN_CFG.'cfg-22.png', '', false);
-		echo fin_cadre_enfonce(true);
-	}
-
-	echo afficher_librairies();
+	echo pipeline('affiche_gauche',
+		array(
+		'args'=>array('exec'=>'admin_plugin'),
+		'data'=>afficher_librairies()
+		)
+	);
 
 	echo debut_droite('plugin', true);
 
@@ -95,9 +93,9 @@ function exec_admin_plugin_dist($retour='') {
 	if (!is_array($plugins_interessants))
 		$plugins_interessants = array();
 
+	echo "<div class='liste-plugins formulaire_spip'>";
 	if ($lpf) {
-		echo "<div class='liste-plugins formulaire_spip'>";
-		echo debut_cadre_trait_couleur('plugin-24.png',true,'',_T('plugins_liste'),
+		echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'),
 		'liste_plugins');
 		echo "<p>"._T('texte_presente_plugin')."</p>";
 
@@ -122,7 +120,6 @@ function exec_admin_plugin_dist($retour='') {
 		 . lien_ou_expose(parametre_url(self(),'voir','tous'), singulier_ou_pluriel(count($lpf),'plugins_disponible_un','plugins_disponibles','count'), $quoi=='tous')
 		 . "</div>";
 
-		if ($quoi!='distants'){
 			// la liste
 			if ($quoi=='actifs'){
 				$aff = affiche_les_plugins($lcpa, $lcpa, $format);
@@ -149,9 +146,17 @@ function exec_admin_plugin_dist($retour='') {
 			echo redirige_action_post('activer_plugins','activer','admin_plugin','', $corps);
 
 			echo fin_cadre_trait_couleur(true);
-			echo affiche_les_extensions(liste_chemin_plugin_actifs(_DIR_EXTENSIONS));
+	}
+	else {
+		if (!@is_dir(_DIR_PLUGINS))
+			echo  "<p>"._T('plugin_info_automatique_ftp',array('rep'=>joli_repertoire(_DIR_PLUGINS)))
+						. " &mdash; "._T('plugin_info_automatique_creer')."</p>";
+	}
 
-			echo 	http_script("
+	echo affiche_les_extensions(liste_chemin_plugin_actifs(_DIR_EXTENSIONS));
+	echo "</div>";
+	
+	echo 	http_script("
 	jQuery(function(){
 		jQuery('.plugins li.item a[rel=info]').click(function(){
 			var li = jQuery(this).parents('li').eq(0);
@@ -176,10 +181,13 @@ function exec_admin_plugin_dist($retour='') {
 		});
 	});
 	");
-		}
 
-	}
-
+	echo pipeline('affiche_milieu',
+		array(
+		'args'=>array('exec'=>'admin_plugin'),
+		'data'=>''
+		)
+	);
 
 	echo fin_gauche(), fin_page();
 	}
@@ -189,7 +197,7 @@ function affiche_les_extensions($liste_plugins_actifs){
 	$res = "";
 	if ($liste_extensions = liste_plugin_files(_DIR_EXTENSIONS)) {
 		$res .= "<div id='extensions'>";
-		$res .= debut_cadre_trait_couleur('plugin-24.png',true,'',_L('Extensions'),
+		$res .= debut_cadre_trait_couleur('plugin-24.gif',true,'',_L('Extensions'),
 		'liste_extensions');
 		$res .= "<p>"
 			._L('Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))
