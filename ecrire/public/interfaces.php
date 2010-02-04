@@ -155,11 +155,14 @@ class Polyglotte {
 	var $ligne = 0;
 }
 
+// Une structure necessaire au traitement d'erreur a l'execution
+// Le champ code est inutilise, mais harmonise le traitement d'erreurs.
 class Contexte {
 	var $descr = array();
 	var $id_boucle = '';
 	var $ligne = 0;
 	var $lang = '';
+	var $code = '';
 }
 
 global $table_criteres_infixes;
