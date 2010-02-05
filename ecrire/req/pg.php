@@ -441,6 +441,13 @@ function spip_pg_select($select, $from, $where='',
 
 	$select = spip_pg_frommysql($select);
 
+	// si pas de tri explicitement demande, le GROUP BY ne
+	// contient que la clef primaire.
+	// lui ajouter alors le champ de tri par defaut
+	if (preg_match("/FIELD\(([a-z]+\.[a-z]+),/i", $orderby[0], $groupbyplus)) {
+		$groupby[] = $groupbyplus[1];
+	}
+
 	$orderby = spip_pg_orderby($orderby, $select);
 
 	if ($having) {
