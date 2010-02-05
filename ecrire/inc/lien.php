@@ -119,7 +119,7 @@ function nettoyer_raccourcis_typo($texte, $connect='')
 			if (!$titre) {
 				$match = typer_raccourci($reg[count($reg)-1]);
 				@list($type,,$id,,,,) = $match;
-				$titre = traiter_raccourci_titre($id, $type, $connect);
+				if ($type) $titre = traiter_raccourci_titre($id, $type, $connect);
 				$titre = $titre ? $titre['titre'] : $match[0];
 			}
 			$titre = corriger_typo(supprimer_tags($titre));
