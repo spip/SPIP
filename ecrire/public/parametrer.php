@@ -144,8 +144,16 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 
 		$page['contexte'] = $contexte;
 		// faire remonter le fichier source
-		if ($GLOBALS['var_inclure'])
+		//if ($GLOBALS['var_inclure'])
+
+		static $var_inclure = false;
+		if ($GLOBALS['var_inclure']){
 			$page['sourcefile'] = $sourcefile;
+			$page['texte'] =
+				"<div class='inclure_blocs'><h6>".$page['sourcefile']."</h6>".$page['texte']."</div>"
+				. ($var_inclure?"":"<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs > h6:first-child').hover(function(){jQuery(this).parent().addClass('hover')},function(){jQuery(this).parent().removeClass('hover')})});</script>");
+			$var_inclure = true;
+		}
 
 		// Si un modele contenait #SESSION, on note l'info dans $page
 		if (isset($GLOBALS['cache_utilise_session'])) {
