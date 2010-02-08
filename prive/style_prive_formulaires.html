@@ -215,6 +215,7 @@ c'est le par defaut des formulaires de Spip */
 .formulaire_spip li.editer_chapo,
 .formulaire_spip li.editer_texte,
 .formulaire_spip li.editer_ps,
+.formulaire_spip li.editer_url_zip_plugin2,
 .formulaire_spip li.haut {
 padding-#GET{left}:10px;
 padding-top:10px;
@@ -226,6 +227,7 @@ padding-top:10px;
 .formulaire_spip li.editer_chapo label,
 .formulaire_spip li.editer_texte label,
 .formulaire_spip li.editer_ps label,
+.formulaire_spip li.editer_url_zip_plugin2 label,
 .formulaire_spip li.haut label {
 	display: block;
 	float: #GET{left};
@@ -502,13 +504,13 @@ padding-top:10px;
 /* Bouton de validation */
 input[type="submit"] {
 	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|background_image{[(#ENV{couleur_claire})], center center })]
-	border: 1px outset [(#GET{claire})];
+	border: 1px solid [(#GET{claire})];
 	padding: 3px;
 	font-weight: bold;
 	color: [#(#GET{foncee}|couleur_foncer)];
 }
 input[type="submit"]:hover {
-	border: 1px outset [(#GET{foncee})];
+	border: 1px solid [(#GET{foncee})];
 	color: black;
 }
 
