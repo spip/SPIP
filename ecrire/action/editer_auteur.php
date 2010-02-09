@@ -64,11 +64,11 @@ function action_editer_auteur_dist($arg=null) {
 
 }
 
-function insert_auteur($source='spip') {
+function insert_auteur($source=null) {
 
 	// Ce qu'on va demander comme modifications
 	$champs = array();
-	$champs['source'] = $source;
+	$champs['source'] = $source?$source:'spip';
 
 	$champs['login'] = '';
 	$champs['statut'] = '5poubelle';  // inutilisable tant qu'il n'a pas ete renseigne et institue
@@ -109,12 +109,12 @@ function auteurs_set($id_auteur, $set = null) {
 	foreach (array(
 		'statut', 'new_login','new_pass','webmestre','restreintes','id_parent'
 	) as $champ)
-		$c[preg_replace(',^new_,','',$champ)] = _request($champ);
+		$c[preg_replace(',^new_,','',$champ)] = _request($champ,$set);
 
 	$err .= instituer_auteur($id_auteur, $c);
 
 	// Un lien auteur a prendre en compte ?
-	$err .= auteur_referent($id_auteur, array('article' => _request('lier_id_article')));
+	$err .= auteur_referent($id_auteur, array('article' => _request('lier_id_article',$set)));
 
 	return $err;
 }
