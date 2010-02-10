@@ -55,7 +55,7 @@ function action_editer_article_dist($arg=null) {
 // Appelle toutes les fonctions de modification d'un article
 // $err est de la forme '&trad_err=1'
 // http://doc.spip.org/@articles_set
-function articles_set($id_article) {
+function articles_set($id_article, $set=null) {
 	$err = '';
 
 	// unifier $texte en cas de texte trop long
@@ -66,10 +66,10 @@ function articles_set($id_article) {
 		'surtitre', 'titre', 'soustitre', 'descriptif',
 		'nom_site', 'url_site', 'chapo', 'texte', 'ps'
 	) as $champ)
-		$c[$champ] = _request($champ);
+		$c[$champ] = _request($champ,$set);
 
-	if (_request('changer_virtuel') == 'oui') {
-		$r = _request('virtuel');
+	if (_request('changer_virtuel',$set) == 'oui') {
+		$r = _request('virtuel',$set);
 		$c['chapo'] = (strlen($r) ? '='.$r : '');
 	}
 
@@ -81,11 +81,11 @@ function articles_set($id_article) {
 	foreach (array(
 		'date', 'statut', 'id_parent'
 	) as $champ)
-		$c[$champ] = _request($champ);
+		$c[$champ] = _request($champ,$set);
 	$err .= instituer_article($id_article, $c);
 
 	// Un lien de trad a prendre en compte
-	$err .= article_referent($id_article, array('lier_trad' => _request('lier_trad')));
+	$err .= article_referent($id_article, array('lier_trad' => _request('lier_trad',$set)));
 
 	return $err;
 }
