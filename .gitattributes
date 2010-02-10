@@ -118,6 +118,7 @@ ecrire/configuration/transcodeur.php -text
 ecrire/configuration/type_urls.php -text
 ecrire/configuration/versionneur.php -text
 ecrire/configuration/visiteurs.php -text
+ecrire/exec/404.php -text
 ecrire/exec/accueil.php -text
 ecrire/exec/admin_declarer.php -text
 ecrire/exec/admin_effacer.php -text
