@@ -411,7 +411,8 @@ function debusquer_squelette ($fonc, $mode, $self) {
 			  $texte = $debug_objets[$mode][$fonc . 'tout'];
 			  $texte = ancre_texte($texte, array('',''));
 			}
-		} else return "<div id='spip-debug'>$res</div>";
+		} else 
+			return strlen(trim($res))?"<div id='spip-debug'>$res</div>":"";
 	} else {
 		$valider = charger_fonction('valider', 'xml');
 		$val = $valider($debug_objets['validation'][$fonc . 'tout']);

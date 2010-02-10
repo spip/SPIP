@@ -201,10 +201,10 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	// (c'est ici qu'on fait var_recherche, validation, boutons d'admin,
 	// cf. public/assembler.php)
-	$page['texte'] = pipeline('affichage_final', $page['texte']);
+	echo pipeline('affichage_final', $page['texte']);
 
 	// Appel au debusqueur en cas d'erreurs ou de demande de trace
-
+	// at last
 	if ($debug) {
 		if ($affiche_boutons_admin) {
 			$var_mode_affiche = _request('var_mode_affiche');
@@ -212,8 +212,6 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 			echo erreur_squelette();
 		}
 	} else {
-		// at last
-		echo $page['texte'];
 
 		if (isset($GLOBALS['meta']['date_prochain_postdate'])
 		AND $GLOBALS['meta']['date_prochain_postdate'] <= time()) {

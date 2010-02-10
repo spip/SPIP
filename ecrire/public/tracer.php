@@ -81,6 +81,8 @@ function chrono_requete($temps)
 		$d[$boucle]+= $dt;
 		if  ($boucle) @++$n[$boucle];
 
+		if (!is_array($explain))
+			$explain = array();
 		foreach($explain as $k => $v) {
 			$explain[$k] = "<tr><td>$k</td><td>"
 			  . str_replace(';','<br />',$v)
