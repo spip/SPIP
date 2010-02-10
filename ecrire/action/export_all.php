@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/lang');
 include_spip('inc/actions');
+include_spip('base/dump');
 
 // http://doc.spip.org/@action_export_all_dist
 function action_export_all_dist()
@@ -21,18 +22,13 @@ function action_export_all_dist()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	@list($quoi, $gz, $archive, $rub, $version) = explode(',', $arg);
-	$meta = "status_dump_$rub_"  . $GLOBALS['visiteur_session']['id_auteur'];
-	$tables = _request('export');
-	// determine upload va aussi initialiser l'index "restreint"
-	$maindir = determine_upload();
-	if (!$GLOBALS['visiteur_session']['restreint'])
-		$maindir = _DIR_DUMP;
-	$dir = sous_repertoire($maindir, $meta);
+	@list(, $gz, $archive, $rub, $version) = explode(',', $arg);
+	$meta = base_dump_meta_name($rub);
+	$dir = base_dump_dir($meta);
 	$file = $dir . $archive;
 
 	utiliser_langue_visiteur();
-	if ($quoi=='end') export_all_fin($file, $meta, $rub);
+	export_all_fin($file, $meta, $rub);
 }
 
 // http://doc.spip.org/@export_all_fin
@@ -51,7 +47,6 @@ function export_all_fin($file, $meta, $rub)
 		$corps = _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
 	
 	} else {
-		ecrire_fichier($file, export_enpied(),false,false);
 		$subdir = dirname($file);
 		$dir = dirname($subdir);
 		$nom = basename($file);
@@ -109,9 +104,5 @@ function export_all_fin($file, $meta, $rub)
 	exit;
 }
 
-
-// production de l'entete du fichier d'archive
-// http://doc.spip.org/@export_enpied
-function export_enpied () { return  "</SPIP>\n";}
 
 ?>

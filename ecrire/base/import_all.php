@@ -12,32 +12,22 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('base/serial');
-include_spip('base/auxiliaires');
+include_spip('base/dump');
 
-// par defaut tout est importe sauf les tables ci-dessous
-// possibiliter de definir cela tables via la meta
-global $IMPORT_tables_noimport;
-if (isset($GLOBALS['meta']['IMPORT_tables_noimport'])){
-	$IMPORT_tables_noimport = unserialize($GLOBALS['meta']['IMPORT_tables_noimport']);
-	if (!is_array($IMPORT_tables_noimport)){
-		ecrire_meta('IMPORT_tables_noimport',serialize(array()),'non');
-		$IMPORT_tables_noimport = unserialize($GLOBALS['meta']['IMPORT_tables_noimport']);
-	}
-}
-else{
-	ecrire_meta('IMPORT_tables_noimport',
-		serialize($IMPORT_tables_noimport),'non');
-}
-
-// NB: Ce fichier peut ajouter des tables (old-style)
-// donc il faut l'inclure "en globals"
-if ($f = find_in_path('mes_fonctions.php')) {
-	global $dossier_squelettes;
-	@include_once ($f); 
-}
-
-// http://doc.spip.org/@base_import_all_dist
+/**
+ * On arrive ici depuis inc/admin
+ * - au lancement
+ * - puis apres chaque timeout avec dans ce cas $reprise=true
+ *
+ * import_all_debut() est appele la premiere fois et initialise le dump
+ * import_all_milieu() est appele a chaque retour ici
+ * quand on en sort,
+ *	- soit on relance pour la seconde etape de fusion
+ *  - soit on finit
+ *
+ * @param string $titre
+ * @param bool $reprise
+ */
 function base_import_all_dist($titre='', $reprise=false)
 {
 	if (!$titre) return; // anti-testeur automatique
@@ -62,14 +52,16 @@ function base_import_all_dist($titre='', $reprise=false)
 	
 	$res = import_all_milieu($request, $archive);
 
+	// Cas particulier de la fusion/insertion :
+	// a la fin de la premiere passe on relance pour l'etape suivante
 	if (!$res AND $request['insertion'] == 'on') {
-			$request['insertion'] = 'passe2';
-			if ($request['url_site']
-			AND substr($request['url_site'],-1) != '/')
-				$request['url_site'] .= '/';
-			ecrire_meta("import_all", serialize($request),'non');
-			import_all_debut();
-			$res = import_all_milieu($request, $archive);
+		$request['insertion'] = 'passe2';
+		if ($request['url_site']
+		AND substr($request['url_site'],-1) != '/')
+			$request['url_site'] .= '/';
+		ecrire_meta("import_all", serialize($request),'non');
+		import_all_debut();
+		$res = import_all_milieu($request, $archive);
 	}
 
 	echo $res, "</body></html>\n";
@@ -97,7 +89,9 @@ function import_all_milieu($request, $archive)
 	if ($request['insertion'] == 'passe2') {
 		include_spip('inc/import_insere');
 		$trans = translate_init($request);
-	} else $trans = array();
+	} 
+	else
+		$trans = array();
 
 	return import_tables($request, $archive);
 }

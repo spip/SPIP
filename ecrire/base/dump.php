@@ -30,27 +30,105 @@ if (@is_readable(_CACHE_PLUGINS_FCT)){
 	include_once(_CACHE_PLUGINS_FCT);
 }
 
-// par defaut tout est exporte sauf les tables ci-dessous
-global $EXPORT_tables_noexport;
-
-$EXPORT_tables_noexport= array(
-	'spip_caches', // plugin invalideur
-	'spip_resultats', // resultats de recherche ... c'est un cache !
-	'spip_referers',
-	'spip_referers_articles',
-	'spip_visites',
-	'spip_visites_articles',
-	'spip_versions', // le dump des fragments n'est pas robuste
-	'spip_versions_fragments' // le dump des fragments n'est pas robuste
-	);
-
-if (!$GLOBALS['connect_toutes_rubriques']){
-	$EXPORT_tables_noexport[]='spip_messages';
-	$EXPORT_tables_noexport[]='spip_auteurs_messages';
+function base_dump_meta_name($rub){
+	return $meta = "status_dump_$rub_"  . $GLOBALS['visiteur_session']['id_auteur'];
+}
+function base_dump_dir($meta){
+	// determine upload va aussi initialiser l'index "restreint"
+	$maindir = determine_upload();
+	if (!$GLOBALS['visiteur_session']['restreint'])
+		$maindir = _DIR_DUMP;
+	$dir = sous_repertoire($maindir, $meta);
+	return $dir;
 }
 
-//var_dump($EXPORT_tables_noexport);
-$EXPORT_tables_noexport = pipeline('lister_tables_noexport',$EXPORT_tables_noexport);
+/**
+ * Lister les tables non exportables par defaut
+ * (liste completable par le pipeline lister_tables_noexport
+ *
+ * @staticvar array $EXPORT_tables_noexport
+ * @return array
+ */
+function lister_tables_noexport(){
+	// par defaut tout est exporte sauf les tables ci-dessous
+	static $EXPORT_tables_noexport = null;
+	if (!is_null($EXPORT_tables_noexport))
+		return $EXPORT_tables_noexport;
+
+	$EXPORT_tables_noexport= array(
+		'spip_caches', // plugin invalideur
+		'spip_resultats', // resultats de recherche ... c'est un cache !
+		'spip_referers',
+		'spip_referers_articles',
+		'spip_visites',
+		'spip_visites_articles',
+		'spip_versions', // le dump des fragments n'est pas robuste
+		'spip_versions_fragments' // le dump des fragments n'est pas robuste
+		);
+
+	if (!$GLOBALS['connect_toutes_rubriques']){
+		$EXPORT_tables_noexport[]='spip_messages';
+		$EXPORT_tables_noexport[]='spip_auteurs_messages';
+	}
+
+	//var_dump($EXPORT_tables_noexport);
+	$EXPORT_tables_noexport = pipeline('lister_tables_noexport',$EXPORT_tables_noexport);
+
+	return $EXPORT_tables_noexport;
+}
+
+/**
+ * Lister les tables non importables par defaut
+ * (liste completable par le pipeline lister_tables_noexport
+ *
+ * @staticvar array $IMPORT_tables_noimport
+ * @return array
+ */
+function lister_tables_noimport(){
+	static $IMPORT_tables_noimport=null;
+	if (!is_null($EXPORT_tables_noexport))
+		return $EXPORT_tables_noexport;
+
+	$IMPORT_tables_noimport = array();
+	// par defaut tout est importe sauf les tables ci-dessous
+	// possibiliter de definir cela tables via la meta
+	// compatibilite
+	if (isset($GLOBALS['meta']['IMPORT_tables_noimport'])){
+		$IMPORT_tables_noimport = unserialize($GLOBALS['meta']['IMPORT_tables_noimport']);
+		if (!is_array($IMPORT_tables_noimport)){
+			include_spip('inc/meta');
+			effacer_meta('IMPORT_tables_noimport');
+		}
+	}
+	$IMPORT_tables_noimport = pipeline('lister_tables_noimport',$IMPORT_tables_noimport);
+	return $IMPORT_tables_noimport;
+}
+
+
+/**
+ * Lister les tables a ne pas effacer
+ * (liste completable par le pipeline lister_tables_noerase
+ *
+ * @staticvar array $IMPORT_tables_noerase
+ * @return array
+ */
+function lister_tables_noerase(){
+	static $IMPORT_tables_noerase=null;
+	if (!is_null($IMPORT_tables_noerase))
+		return $IMPORT_tables_noerase;
+
+	$IMPORT_tables_noerase = array(
+		'spip_meta',
+		// par defaut on ne vide pas les stats, car elles ne figurent pas dans les dump
+		// et le cas echeant, un bouton dans l'admin permet de les vider a la main...
+		'spip_referers',
+		'spip_referers_articles',
+		'spip_visites',
+		'spip_visites_articles'
+	);
+	$IMPORT_tables_noerase = pipeline('lister_tables_noerase',$IMPORT_tables_noerase);
+	return $IMPORT_tables_noerase;
+}
 
 
 /**

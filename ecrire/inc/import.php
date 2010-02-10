@@ -16,27 +16,6 @@ include_spip('inc/presentation');
 include_spip('inc/acces');
 include_spip('base/abstract_sql');
 
-// NB: Ce fichier peut ajouter des tables (old-style)
-// donc il faut l'inclure "en globals"
-if ($f = find_in_path('mes_fonctions.php')) {
-	global $dossier_squelettes;
-	@include_once ($f); 
-}
-
-if (@is_readable(_CACHE_PLUGINS_FCT)){
-	// chargement optimise precompile
-	include_once(_CACHE_PLUGINS_FCT);
-}
-
-global $IMPORT_tables_noerase;
-$IMPORT_tables_noerase[]='spip_meta';
-// par defaut on ne vide pas les stats, car elles ne figurent pas dans les dump
-// et le cas echeant, un bouton dans l'admin permet de les vider a la main...
-$IMPORT_tables_noerase[]='spip_referers';
-$IMPORT_tables_noerase[]='spip_referers_articles';
-$IMPORT_tables_noerase[]='spip_visites';
-$IMPORT_tables_noerase[]='spip_visites_articles';
-
 // Retourne la premiere balise XML figurant dans le buffet de la sauvegarde 
 // et avance dans ce buffet jusqu'au '>' de cette balise.
 // Si le 2e argument (passe par reference) est non vide
@@ -109,10 +88,15 @@ function xml_parse_tag($t) {
 	return $res;
 }
 
-// Balise ouvrante:
-// 'SPIP' si fait par spip, nom de la base source si fait par  phpmyadmin
-
-// http://doc.spip.org/@import_debut
+/**
+ * Lire l'entete du fichier importe
+ * Balise ouvrante:
+ * 'SPIP' si fait par spip, nom de la base source si fait par  phpmyadmin
+ *
+ * @param resource $f
+ * @param string $gz
+ * @return array
+ */
 function import_debut($f, $gz='fread') {
 
 //  Pour les anciennes archives, indiquer le charset par defaut:
@@ -146,13 +130,18 @@ $tables_trans = array(
 
 
 // http://doc.spip.org/@import_init_tables
-function import_init_tables($request)
-{
-  global $IMPORT_tables_noerase, $connect_id_auteur;
+function import_init_tables($request){
+  global $connect_id_auteur;
+
+	// commencer par verifier les meta et le champ impt=non
+	$config = charger_fonction('config','inc');
+	$config();
+
+
 	// grand menage
 	// on vide toutes les tables dont la restauration est demandee
-	$tables = import_table_choix($request);
-	$tables = array_diff($tables,$IMPORT_tables_noerase);
+	list($tables,) = base_liste_table_for_dump(lister_tables_noerase());
+	spip_log(count($tables) . " tables effacees " . join(', ', $tables),'import');
 
 	foreach($tables as $table){
 		// regarder si il y a au moins un champ impt='non'
@@ -170,7 +159,8 @@ function import_init_tables($request)
 	sql_updateq('spip_auteurs', array('id_auteur'=>0, 'webmestre'=>$connect_id_auteur), "id_auteur=$connect_id_auteur");
 	sql_delete("spip_auteurs", "id_auteur!=0");
 
-	return $tables;
+	// retourner la liste des tables a importer, pas celle des tables videes !
+	return import_table_choix($request);
 }
 
 // Effacement de la bidouille ci-dessus
@@ -243,7 +233,7 @@ function import_tables($request, $archive) {
 	
 	if ($abs_pos==0) {
 		list($tag, $atts, $charset) = import_debut($file, $gz);
-	// improbable: fichier correct avant debut_admin et plus apres
+		// improbable: fichier correct avant debut_admin et plus apres
 		if (!$tag) return !($import_ok = true);
 		$version_archive = import_init_meta($tag, $atts, $charset, $request);
 	} else {
@@ -273,6 +263,7 @@ function import_tables($request, $archive) {
 	$cpt = 0;
 	$pos = $abs_pos;
 
+	// BOUCLE principale qui tourne en rond jusqu'a le fin du fichier
 	while ($table = $fimport($file, $request, $gz, $atts)) {
 	  // memoriser pour pouvoir reprendre en cas d'interrupt,
 	  // mais pas d'ecriture sur fichier, ca ralentit trop
@@ -281,22 +272,22 @@ function import_tables($request, $archive) {
 			if (_DEBUG_IMPORT){
 				ecrire_fichier(_DIR_TMP."debug_import.log","----\n".$GLOBALS['debug_import_avant']."\n<<<<\n$table\n>>>>\n".$GLOBALS['debug_import_apres']."\n----\n",false,false);
 			}
-			if ($oldtable) spip_log("$cpt entrees");
-			spip_log("Analyse de $table (commence en $pos)");
+			if ($oldtable) spip_log("$cpt entrees","import");
+			spip_log("Analyse de $table (commence en $pos)","import");
 			affiche_progression_javascript($abs_pos,$size,$table);
 			$oldtable = $table;
 			$cpt = 0;
 			$pos = $abs_pos;
-		} 
+		}
 		$cpt++;
 	}
-	spip_log("$cpt entrees");
-	spip_log("fin de l'archive, statut: " .($import_ok ? 'ok' : 'alert'));
+	spip_log("$cpt entrees","import");
+	spip_log("fin de l'archive, statut: " .($import_ok ? 'ok' : 'alert'),"import");
 
 	if (!$import_ok) 
 	  return  _T('avis_archive_invalide') . ' ' .
 	    _T('taille_octets', array('taille' => $pos)) ;
-	
+
 	if ($GLOBALS['spip_version_base'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))){
 		// il FAUT recharger les bonnes desc serial/aux avant ...
 		include_spip('base/serial');
@@ -344,13 +335,15 @@ function import_tables($request, $archive) {
 			$GLOBALS['meta']["restauration_status_copie"];
 
 		if (!$initialisation_copie) {
-			// vide et liste les tables
+			// vide les tables qui le necessitent
 			$tables = import_init_tables($request);
 			ecrire_meta("restauration_status_copie", "ok",'non');
-		} else
+		}
+		else
+			// la liste des tables a recopier
 			$tables = import_table_choix($request);
-#		var_dump($tables);die();
-
+		#		var_dump($tables);die();
+		spip_log("tables a copier :".implode(", ",$tables),'dbdump');
 		if (in_array('spip_auteurs',$tables)){
 			$tables = array_diff($tables,array('spip_auteurs'));
 			$tables[] = 'spip_auteurs';
@@ -388,6 +381,9 @@ function import_tables($request, $archive) {
 			}
 		}
 	}
+
+	// recharger les metas
+	lire_metas();
 	#die();
 	return '' ;
 }
@@ -411,7 +407,7 @@ function import_init_meta($tag, $atts, $charset, $request)
 	}
 	if ($old OR $insert) {
 		$init = $request['init'];
-		spip_log("import_init_meta lance $init");
+		spip_log("import_init_meta lance $init","import");
 		$init($request);
 	}
 
@@ -496,65 +492,10 @@ function affiche_progression_javascript($abs_pos,$size, $table="") {
 
 
 // http://doc.spip.org/@import_table_choix
-function import_table_choix($request)
-{
-	// construction de la liste des tables pour le dump :
-	// toutes les tables principales
-	// + toutes les tables auxiliaires hors relations
-	// + les tables relations dont les deux tables liees sont dans la liste
-	$tables_for_dump = array();
-	$tables_pointees = array();
-	global $IMPORT_tables_noimport;
-	global $tables_principales;
-	global $tables_auxiliaires;
-	global $tables_jointures;
-
-	if (!isset($IMPORT_tables_noimport)) $IMPORT_tables_noimport=array();
-
-	// on construit un index des tables de liens
-	// pour les ajouter SI les deux tables qu'ils connectent sont sauvegardees
-	$tables_for_link = array();
-	foreach($tables_jointures as $table=>$liste_relations)
-		if (is_array($liste_relations))
-		{
-			$nom = $table;
-			if (!isset($tables_auxiliaires[$nom])&&!isset($tables_principales[$nom]))
-				$nom = "spip_$table";
-			if (isset($tables_auxiliaires[$nom])||isset($tables_principales[$nom])){
-				foreach($liste_relations as $link_table){
-					if (isset($tables_auxiliaires[$link_table])/*||isset($tables_principales[$link_table])*/){
-						$tables_for_link[$link_table][] = $nom;
-					}
-					else if (isset($tables_auxiliaires["spip_$link_table"])/*||isset($tables_principales["spip_$link_table"])*/){
-						$tables_for_link["spip_$link_table"][] = $nom;
-					}
-				}
-			}
-		}
-	
-	$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires));
-	foreach($liste_tables as $table){
-		$name = preg_replace("{^spip_}","",$table);
-		if (		!isset($tables_pointees[$table]) 
-				&&	!in_array($table,$IMPORT_tables_noimport)
-				&&	!isset($tables_for_link[$table])){
-			$tables_for_dump[] = $table;
-			$tables_pointees[$table] = 1;
-		}
-	}
-	foreach ($tables_for_link as $link_table =>$liste){
-		$connecte = true;
-		foreach($liste as $connect_table)
-			if (!in_array($connect_table,$tables_for_dump))
-				$connecte = false;
-		if ($connecte)
-			# on ajoute les liaisons en premier
-			# si une restauration est interrompue, cela se verra mieux si il manque des objets
-			# que des liens
-			array_unshift($tables_for_dump,$link_table);
-	}
-	spip_log(count($tables_for_dump) 
-		 . " tables importees " . join(', ', $tables_for_dump));
-	return $tables_for_dump;
+function import_table_choix($request){
+	spip_log("noimport:".implode(',',lister_tables_noimport()),'noimport');
+	list($tables,) = base_liste_table_for_dump(lister_tables_noimport());
+	spip_log("liste:".implode(',',$tables),'noimport');
+	return $tables;
 }	
 ?>
