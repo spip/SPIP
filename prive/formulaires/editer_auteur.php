@@ -55,7 +55,15 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 
 	if ($email = _request('email')){
 		include_spip('inc/filtres');
-		if (!email_valide($email)){
+		// un redacteur qui modifie son email n'a pas le droit de le vider si il y en avait un
+		if (!autoriser('modifier','auteur',$id_auteur,null,array('statut'=>'?'))
+			AND $GLOBALS['visiteur_session']['id_auteur']==$id_auteur
+			AND !strlen(trim($email))
+			AND $email!=($email_ancien=sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur)))
+			){
+			$erreurs['email'] = _T('form_email_non_valide');
+		}
+		else if (!email_valide($email)){
 			$erreurs['email'] = _T('form_email_non_valide');
 		}
 	}
@@ -94,15 +102,14 @@ function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $l
 		// son clic sur l'url du message permettre de confirmer le changement
 		// et de revenir sur son profil
 		if ($GLOBALS['visiteur_session']['id_auteur']==$id_auteur
-			AND $email_nouveau!=sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur))){
+			AND $email_nouveau!=($email_ancien=sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur)))){
 			$envoyer_mail = charger_fonction('envoyer_mail','inc');
-			$envoyer_mail(
-							$email_nouveau,
-							_T('form_auteur_confirmation'),
-							_T('form_auteur_mail_confirmation',
-											array('url'=>generer_action_auteur('confirmer_email', $email_nouveau,parametre_url($retour, 'email_modif','ok'))))
-			);
+			$texte = _T('form_auteur_mail_confirmation',
+											array('url'=>generer_action_auteur('confirmer_email', $email_nouveau,parametre_url($retour, 'email_modif','ok'))));
+			$envoyer_mail($email_nouveau,_T('form_auteur_confirmation'),$texte);
 			set_request('email_confirm',$email_nouveau);
+			if ($email_ancien)
+				$envoyer_mail($email_ancien,_T('form_auteur_confirmation'),_T('form_auteur_envoi_mail_confirmation',array('email'=>$email_nouveau)));
 			$retour = parametre_url($retour, 'email_confirm',$email_nouveau);
 		}
 	}

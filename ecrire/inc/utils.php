@@ -1700,7 +1700,6 @@ function erreur_squelette($message='', $lieu='') {
  */
 // http://doc.spip.org/@recuperer_fond
 function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='') {
-	static $var_inclure=false;
 	include_spip('public/assembler');
 	// assurer la compat avec l'ancienne syntaxe
 	// (trim etait le 3eme argument, par defaut a true)
@@ -1736,13 +1735,6 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		}
 		if (isset($options['ajax'])AND $options['ajax'])
 			$page['texte'] = encoder_contexte_ajax(array_merge($contexte,array('fond'=>$f)),'',$page['texte']);
-
-		if ($GLOBALS['var_inclure']){
-			$page['texte'] = 
-				"<div class='inclure_blocs'><h6>".$page['sourcefile']."</h6>".$page['texte']."</div>"
-				. ($var_inclure?"":"<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs > h6:first-child').hover(function(){jQuery(this).parent().addClass('hover')},function(){jQuery(this).parent().removeClass('hover')})});</script>");
-			$var_inclure = true;
-		}
 
 		$page = pipeline('recuperer_fond',array(
 			'args'=>array('fond'=>$fond,'contexte'=>$contexte,'options'=>$options,'connect'=>$connect),
