@@ -56,6 +56,7 @@ ecrire/action/tester.php -text
 ecrire/action/tester_taille.php -text
 ecrire/action/tourner.php -text
 ecrire/action/virtualiser.php -text
+ecrire/auth/sha256.inc.php -text
 ecrire/balise/formulaire_.php -text
 ecrire/balise/index.php -text
 ecrire/balise/logo_.php -text
@@ -726,6 +727,7 @@ prive/javascript/jquery.js -text
 prive/javascript/login.js -text
 prive/javascript/multilang.js -text
 prive/javascript/pause.js -text
+prive/javascript/sha256.js -text
 prive/minipres.css -text
 prive/modeles/application.html -text
 prive/modeles/audio.html -text
