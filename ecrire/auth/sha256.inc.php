@@ -202,14 +202,14 @@ if (!class_exists('nanoSha2'))
          * @param $ig_func Option param to ignore checking for php > 5.1.2
          * @return string Hexadecimal representation of the message digest
          */
-        function hash($str, $ig_func = false)
+        function hash($str, $ig_func = true)
         {
             unset($binStr);     // binary representation of input string
             unset($hexStr);     // 256-bit message digest in readable hex format
 
             // check for php's internal sha256 function, ignore if ig_func==true
             if ($ig_func == false) {
-                if (version_compare(PHP_VERSION,'5.1.2','>=')) {
+                if (version_compare(PHP_VERSION,'5.1.2','>=') AND !defined('_NO_HASH_DEFINED')) {
                     return hash("sha256", $str, false);
                 } else if (function_exists('mhash') && defined('MHASH_SHA256')) {
                     return base64_encode(bin2hex(mhash(MHASH_SHA256, $str)));
@@ -385,12 +385,12 @@ if (!function_exists('str_split'))
  */
 // 2009-07-23: Added check for function as the Suhosin plugin adds this routine.
 if (!function_exists('sha256')) {
-    function sha256($str, $ig_func = false) {
+    function sha256($str, $ig_func = true) {
         $obj = new nanoSha2((defined('_NANO_SHA2_UPPER')) ? true : false);
         return $obj->hash($str, $ig_func);
     }
 } else {
-    function _nano_sha256($str, $ig_func = false) {
+    function _nano_sha256($str, $ig_func = true) {
         $obj = new nanoSha2((defined('_NANO_SHA2_UPPER')) ? true : false);
         return $obj->hash($str, $ig_func);
     }
@@ -399,6 +399,7 @@ if (!function_exists('sha256')) {
 // support to give php4 the hash() routine which abstracts this code.
 if (!function_exists('hash'))
 {
+    define('_NO_HASH_DEFINED',true);
     function hash($algo, $data)
     {
         if (empty($algo) || !is_string($algo) || !is_string($data)) {
