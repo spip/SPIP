@@ -22,8 +22,10 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$erreur = false;
 	$s = "";
 
+	$force_reload = (_request('var_mode')=='recalcul'?true:false);
+
 	$get_infos = charger_fonction('get_infos','plugins');
-	$info = $get_infos($plug_file, false, $dir_plugins);
+	$info = $get_infos($plug_file, $force_reload, $dir_plugins);
 
 	// numerotons les occurences d'un meme prefix
 	$versions[$info['prefix']] = isset($versions[$info['prefix']]) ? $versions[$info['prefix']] + 1 : '';
