@@ -24,13 +24,23 @@ function informe_auteur(c){
 	affiche_login_secure();
 }
 
-function calcule_md5_pass(pass){
-	if (alea_actuel && !pass.match(/^\{([0-9a-f]{32});([0-9a-f]{32})\}$/i)) {
+function calcule_hash_pass(pass){
+	if (alea_actuel 
+		&& !pass.match(/^\{([0-9a-f]{32});([0-9a-f]{32})\}$/i)
+		&& !pass.match(/^\{([0-9a-f]{64});([0-9a-f]{64});([0-9a-f]{32});([0-9a-f]{32})\}$/i)
+		&& sha256_self_test() // verifions que le hash sha est operationnel
+	) {
+		var hash = "";
+		hash = hex_sha256(alea_actuel + pass);
 
-		var md5p = calcMD5(alea_actuel + pass);
-		var md5n = calcMD5(alea_futur + pass);
+		hash = hash+';'+hex_sha256(alea_futur + pass);
+		// envoyer aussi le md5 si demande (compatibilite)
+		if (window.calcMD5){
+			hash = hash+';'+calcMD5(alea_actuel + pass);
+			hash = hash+';'+calcMD5(alea_futur + pass);
+		}
 
-		jQuery('input[name=password]').attr('value','{'+md5p+';'+md5n+'}');
+		jQuery('input[name=password]').attr('value','{'+hash+'}');
 	}
 }
 
@@ -61,7 +71,7 @@ function login_submit(){
 
 		// Si on a l'alea, on peut lancer le submit apres avoir hashe le pass
 		if (alea_actuel) {
-			calcule_md5_pass(pass);
+			calcule_hash_pass(pass);
 		}
 		// si on arrive pas a avoir une reponse, vider le pass pour forcer un passage en 2 fois
 		else if(informe_auteur_en_cours)
