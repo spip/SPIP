@@ -66,6 +66,7 @@ function install_etape_4_dist()
 	# (les donnees arrivent de toute facon postees en _DEFAULT_CHARSET)
 
 	lire_metas();
+	$suite = '';
 	if ($login) {
 		include_spip('inc/charsets');
 
@@ -74,7 +75,8 @@ function install_etape_4_dist()
 		$email = (importer_charset($email, _DEFAULT_CHARSET));
 		# pour le passwd, bizarrement il faut le convertir comme s'il avait
 		# ete tape en iso-8859-1 ; car c'est en fait ce que voit md5.js
-		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');		$mdpass = md5($pass);
+		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');	
+		$mdpass = md5($pass);
 		$htpass = generer_htpass($pass);
 		$alea = creer_uniqid();
 		$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "login=" . sql_quote($login));
@@ -100,18 +102,25 @@ function install_etape_4_dist()
 
 		// Connecter directement celui qui vient de (re)donner son login
 		// mais sans cookie d'admin ni connexion longue
-		if ($auth_spip = charger_fonction('spip', 'auth', true)
-		AND $row = $auth_spip($login, $pass)
-		AND $session = charger_fonction('session', 'inc')
-		AND $cookie_session = $session($row))
+		$spip = charger_fonction('spip', 'auth', true);
+		$session = charger_fonction('session', 'inc', true);
+		$row = ($spip AND $session) ?  $spip($login, $pass) : ''; 
+		if ($row AND $cookie_session = $session($row)) {
 			spip_setcookie('spip_session', $cookie_session);
-		else spip_log("login automatique impossible $auth_spip $session" . count($row));
+		} elseif ($row == false) {
+			$suite = "<span style='color: red'>"
+			  . _L('Attention: htaccess inoperant')
+			  . '</span>';
+		}
+		    
+		if (!$row)
+			spip_log("login automatique impossible $spip $session");
 	}
 
 	$config = charger_fonction('config', 'inc');
 	$config();
 
-	$suite =  "\n<input type='hidden' name='etape' value='fin' />" 
+	$suite .=  "\n<input type='hidden' name='etape' value='fin' />" 
 	  . bouton_suivant(_T('login_espace_prive'));
 
 	echo generer_form_ecrire('install', $suite);
