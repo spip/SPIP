@@ -146,7 +146,7 @@ function definir_barre_boutons() {
 	$sousmenu=array();
 
 	if (avoir_visiteurs(true)) {
-		include_spip('inc/auteurs');
+		include_spip('exec/auteurs');
 		$sousmenu['auteurs'] =
 			new Bouton("fiche-perso.png", 'icone_afficher_visiteurs', null, "statut=!".AUTEURS_MIN_REDAC);
 	}
