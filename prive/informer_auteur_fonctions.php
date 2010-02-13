@@ -15,12 +15,23 @@
 // il faut aller le chercher a la main
 function informer_auteur($bof)
 {
-  	include_spip('inc/json');
+	include_spip('inc/json');
 	include_spip('formulaires/login');
-	$row = informer_login(_request('var_login'));
-	if (is_array($row))
+	include_spip('inc/auth');
+	$row = auth_informer_login(_request('var_login'));
+	if ($row AND is_array($row))
 		unset($row['id_auteur']);
-	else $row = array();
+	else {
+		// piocher les infos sur un autre login
+		$n = sql_countsel('spip_auteurs',"login<>''");
+		$n = (abs(crc32(_request('var_login')))%$n);
+		$row = auth_informer_login(sql_getfetsel('login','spip_auteurs',"login<>''",'','',"$n,1"));
+		if ($row AND is_array($row)){
+			unset($row['id_auteur']);
+			$row['login'] = _request('var_login');
+		}
+	}
+
 	return json_export($row);
 }
 
