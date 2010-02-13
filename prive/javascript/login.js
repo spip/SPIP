@@ -25,7 +25,7 @@ function informe_auteur(c){
 }
 
 function calcule_hash_pass(pass){
-	if (alea_actuel 
+	if ((alea_actuel || alea_futur)
 		&& !pass.match(/^\{([0-9a-f]{32});([0-9a-f]{32})\}$/i)
 		&& !pass.match(/^\{([0-9a-f]{64});([0-9a-f]{64});([0-9a-f]{32});([0-9a-f]{32})\}$/i)
 		&& sha256_self_test() // verifions que le hash sha est operationnel
@@ -70,7 +70,7 @@ function login_submit(){
 		}
 
 		// Si on a l'alea, on peut lancer le submit apres avoir hashe le pass
-		if (alea_actuel) {
+		if (alea_actuel || alea_futur) {
 			calcule_hash_pass(pass);
 		}
 		// si on arrive pas a avoir une reponse, vider le pass pour forcer un passage en 2 fois

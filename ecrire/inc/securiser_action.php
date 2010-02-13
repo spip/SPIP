@@ -110,7 +110,8 @@ function _action_auteur($action, $id_auteur, $pass, $alea) {
 			exit;
 		}
 	}
-	return md5($action.$id_auteur.$pass.@$GLOBALS['meta'][$alea]);
+	include_spip('auth/sha256.inc');
+	return sha256($action.$id_auteur.$pass.@$GLOBALS['meta'][$alea]);
 }
 
 // http://doc.spip.org/@calculer_action_auteur
@@ -154,7 +155,8 @@ function secret_du_site() {
 
 // http://doc.spip.org/@calculer_cle_action
 function calculer_cle_action($action) {
-	return md5($action . secret_du_site());
+	include_spip('auth/sha256.inc');
+	return sha256($action . secret_du_site());
 }
 
 // http://doc.spip.org/@verifier_cle_action
