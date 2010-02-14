@@ -2192,6 +2192,19 @@ function f_jQuery ($texte) {
 	return $texte;
 }
 
+/**
+ * fonction appelee par #INSERT_HEAD_CSS et #INSERT_HEAD pour la compatibilite
+ * @staticvar <type> $done
+ * @return <type>
+ */
+function insert_head_css(){
+	static $done = false;
+	if ($done) return '';
+	$done = true;
+	return pipeline('insert_head_css','');
+}
+
+
 // Concatener des chaines
 // #TEXTE|concat{texte1,texte2,...}
 // http://doc.spip.org/@concat

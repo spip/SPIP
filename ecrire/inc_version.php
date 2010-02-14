@@ -292,6 +292,7 @@ $spip_pipeline = array(
 	'formulaire_admin' => '',
 	'header_prive' => '|f_jQuery',
 	'insert_head' => '|f_jQuery',
+	'insert_head_css' => '',
 	'jquery_plugins' => '',
 #	'insert_js' => '',
 	'lister_tables_noerase' => '',
