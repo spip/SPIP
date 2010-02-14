@@ -76,7 +76,7 @@ function plugins_afficher_plugin_distant_dist($url_page, $zip_file, $info, $expo
 	$s .= "<div class='short'>".couper($desc,60)."</div>";
 	if (isset($info['icon']) and $info['icon']) {
 		include_spip("inc/filtres_images_mini");
-		$s.= "<div class='icon'><a href='$url_stat' rel='info'><img src='".$info['icon']."' width='32' height='32' /></a></div>";
+		$s.= "<div class='icon'><a href='$url_stat' rel='info'><img src='".$info['icon']."' width='32' height='auto' /></a></div>";
 	}
 	$s .= "</div>";
 
