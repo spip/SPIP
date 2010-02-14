@@ -148,11 +148,10 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	// type tableau pour y mettre des choses au besoin.
 	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
 
-	$affiche_boutons_admin = ((
+	$affiche_boutons_admin = ($html AND ((
 		isset($_COOKIE['spip_admin'])
 		AND !$flag_preserver
-		AND $html
-				   ) OR $debug);
+				   ) OR $debug));
 
 	if ($affiche_boutons_admin)
 		include_spip('balise/formulaire_admin');
