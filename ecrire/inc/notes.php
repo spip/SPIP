@@ -28,7 +28,7 @@ function inc_notes_dist($arg)
 {	  
 	static $pile = array();
 	global $les_notes, $compt_note, $notes_vues;
-	if (is_string($arg)) return traiter_raccourci_notes($arg, count($pile));
+	if (is_string($arg)) return traiter_raccourci_notes($arg, count($pile)>1?count($pile):'');
 	elseif (is_array($arg)) return traiter_les_notes($arg);
 	elseif ($arg === true) {
 	  array_push($pile, array(@$les_notes, @$compt_note, $notes_vues));
