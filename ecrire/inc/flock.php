@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // ajouter define('_CREER_DIR_PLAT', true); dans mes_options pour restaurer
 // le fonctionnement des faux repertoires en .plat
 define('_CREER_DIR_PLAT', false);
+@define('_TEST_FILE_EXISTS',preg_match(',(online|free)[.]fr$,',$_ENV["HTTP_HOST"]));
 
 #define('_SPIP_LOCK_MODE',0); // ne pas utiliser de lock (deconseille)
 #define('_SPIP_LOCK_MODE',1); // utiliser le flock php
@@ -79,9 +80,9 @@ function spip_file_get_contents ($fichier) {
 function lire_fichier ($fichier, &$contenu, $options=false) {
 	$contenu = '';
 	// inutile car si le fichier n'existe pas, le lock va renvoyer false juste apres
-	// economisons donc les acces disque
-	// if (!@file_exists($fichier))
-	//	return false;
+	// economisons donc les acces disque, sauf chez free qui rale pour un rien
+	if (_TEST_FILE_EXISTS AND !@file_exists($fichier))
+		return false;
 
 	#spip_timer('lire_fichier');
 
@@ -162,7 +163,8 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 				// --> on a la version de l'autre process qui doit etre identique
 				@rename("$fichier.$id",$fichier);
 				// precaution en cas d'echec du rename
-				@unlink("$fichier.$id");
+				if (!_TEST_FILE_EXISTS OR @file_exists("$fichier.$id"))
+					@unlink("$fichier.$id");
 				if ($ok)
 					$ok = file_exists($fichier);
 			}
