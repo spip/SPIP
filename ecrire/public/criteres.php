@@ -632,7 +632,7 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode) {
 
 		// cas {x,n-1}
 		if ($op2 == '-') {
-			$fin = '$debut_boucle + $nombre_boucle - '
+			$fin = '$debut_boucle + '.$nombre_boucle.' - '
 			. (is_numeric($total_parties) ? ($total_parties+1) :
 			   ($total_parties . ' - 1'));
 		} else {
