@@ -70,19 +70,18 @@ function formulaires_inscription_verifier_dist($mode, $focus, $id=0) {
 function formulaires_inscription_traiter_dist($mode, $focus, $id=0) {
 
 	$nom = _request('nom_inscription');
-	$mail = _request('mail_inscription');
+	$mail_complet = _request('mail_inscription');
 	
 	if (function_exists('test_inscription'))
 		$f = 'test_inscription';
 	else 	$f = 'test_inscription_dist';
-	$desc = $f($mode, $mail, $nom, $id);
+	$desc = $f($mode, $mail_complet, $nom, $id);
 
 	if (!is_array($desc)) {
 		$desc = _T($desc);
 	} else {
-		$mail = $desc['email'];
 		include_spip('base/abstract_sql');
-		$res = sql_select("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($mail));
+		$res = sql_select("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($desc['email']));
 		if (!$res) 
 			$desc = _T('titre_probleme_technique');
 		else {
@@ -101,7 +100,7 @@ function formulaires_inscription_traiter_dist($mode, $focus, $id=0) {
 			$f = 'envoyer_inscription';
 		else 	$f = 'envoyer_inscription_dist';
 		list($sujet,$msg,$from,$head) = $f($desc, $nom, $mode, $id);
-		if (!$envoyer_mail($mail, $sujet, $msg, $from, $head))
+		if (!$envoyer_mail($mail_complet, $sujet, $msg, $from, $head))
 			$desc = _T('form_forum_probleme_mail');
 	}
 
