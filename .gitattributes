@@ -687,9 +687,9 @@ prive/images/test.jpg -text
 prive/images/test.png -text
 prive/images/test_image.jpg -text
 prive/images/tirets-separation.gif -text
-prive/images/tourner-180.gif -text
-prive/images/tourner-droite.gif -text
-prive/images/tourner-gauche.gif -text
+prive/images/tourner-demitour-10.gif -text
+prive/images/tourner-droite-10.gif -text
+prive/images/tourner-gauche-10.gif -text
 prive/images/tout-site-24.gif -text
 prive/images/tout-site.png -text
 prive/images/traductions-24.gif -text
