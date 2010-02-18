@@ -78,7 +78,7 @@ function interface_plugins_auto($retour) {
 	$message .= '<div class="explication">'._T('plugin_zip_adresse')
   . '<br />'._T('plugin_info_automatique_exemples').'<ul class="spip">';
 	
-	$les_urls = array('http://plugins.spip.net/rss-+-selection-2-+','http://www.spip-contrib.net/spip.php?page=rss_plugins_spip_2');
+	$les_urls = array('http://plugins.spip.net/rss-+-selection-2-1-+','http://www.spip-contrib.net/spip.php?page=rss_plugins_spip_2');
 	if (isset($GLOBALS['chargeur_urls_rss']) AND is_array($GLOBALS['chargeur_urls_rss']))
 		$les_urls = array_merge($les_urls,$GLOBALS['chargeur_urls_rss']);
 	foreach($les_urls as $url)
