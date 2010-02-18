@@ -95,17 +95,17 @@ div.table_page { margin-top: 1em; }
 	display: inline-block; 
 }
 #chemin li .bloc:hover {
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], center [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{aaaaaa, center [(#GET{left})] no-repeat })]
 }
 
 #chemin li li .bloc { 
 	margin-top: 2px; 
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], center [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{e0e0e0, center [(#GET{left})] no-repeat })]
 }
 #chemin li li .bloc a  {
-	color: [#(#ENV{couleur_foncee}|couleur_foncer)];
+	color: #444;
 }
-#chemin .aide {margin-top: 3px; margin-bottom: 15px;}
+#chemin .aide {padding-top: 0px; }
 
 h1 { color: #GET{foncee}; font-size:large; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
 h2 { color: #000; font-size: medium; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
@@ -254,7 +254,7 @@ a.icone36.suivi-forum-24 { width: 100px; }
 .cellule36 a:hover span, .cellule48 a:hover span { color: #000; display: block; margin: 1px; width: 100%; }
 .cellule36 a.selection span, .cellule48 a.selection span { color: #000; display: block; margin: 1px; width: 100%; }
 
-img.aide { width: 12px; height: 12px; vertical-align: top; }
+img.aide { width: 12px; height: 12px; vertical-align: middle; margin-bottom: -1px; margin-top: -1px; }
 
 .cellule36 a.aide, .cellule36 a.aide:hover { display: inline; background: none; margin: 0; padding: 0; }
 .cellule36 a.aide img { margin: 0; padding: 0; }
@@ -552,7 +552,7 @@ div.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left
 	background-color: white;
 	padding-bottom: 11px;
 	color: #444444;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{eeeeee, bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{e0e0e0, bottom [(#GET{left})] no-repeat })]
 }
 .configuration #contenu .cadre-couleur .titrem { background-color: #GET{claire}; }
 

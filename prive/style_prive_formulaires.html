@@ -132,7 +132,7 @@
 
 	border: 1px solid #GET{foncee};
 	color: #333;
-	background-color: #f0f0f0;
+	background-color: #f8f8f8;
 }
 
 .formulaire_spip form {
@@ -182,9 +182,9 @@ c'est le par defaut des formulaires de Spip */
 	position:relative;
 	display:inline;
 
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire,3874b0}|couleur_eclaircir)], center [(#GET{right})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{e0e0e0, center [(#GET{right})] no-repeat })]
 
-	color: #[(#GET{foncee}|couleur_foncer)];
+	color: #4444;
 	line-height: 11px;
 	font-family: verdana, arial, helvetica, sans;
 
@@ -201,7 +201,7 @@ c'est le par defaut des formulaires de Spip */
 
 .formulaire_spip li.obligatoire label,
 .formulaire_spip li.obligatoire.gauche label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], center [(#GET{right})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire})], center [(#GET{right})] no-repeat })]
 	color: black;
 	font-weight: bold;
 }
@@ -238,11 +238,22 @@ padding-top:10px;
 	padding-#GET{left}: 5px;
 	padding-#GET{right}: 5px;
 	font-family: verdana, arial, helvetica, sans;
-	color: #[(#GET{foncee}|couleur_foncer)];
-	font-weight: bold;
+	color: #444444;
 	font-size: 95%;
 	line-height: 11px;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{e0e0e0, bottom [(#GET{left})] no-repeat })]
+}
+
+.formulaire_spip li.editer_parent.obligatoire label,
+.formulaire_spip li.editer_groupe_mot.obligatoire label,
+.formulaire_spip li.editer_descriptif.obligatoire label,
+.formulaire_spip li.editer_chapo.obligatoire label,
+.formulaire_spip li.editer_texte.obligatoire label,
+.formulaire_spip li.editer_ps.obligatoire label,
+.formulaire_spip li.editer_url_zip_plugin2.obligatoire label,
+.formulaire_spip li.haut.obligatoire label {
+	color: black;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#GET{claire})], bottom [(#GET{left})] no-repeat })]
 }
 
 .formulaire_spip li.editer_parent textarea,
@@ -280,7 +291,6 @@ padding-top:10px;
 	font-size: 110%;
 }
 
-
 /*
 .formulaire_spip li.editer_descriptif.obligatoire label,
 .formulaire_spip li.editer_chapo.obligatoire label,
@@ -314,16 +324,16 @@ padding-top:10px;
 	padding-#GET{left}: 5px;
 	padding-#GET{right}: 5px;
 	font-family: verdana, arial, helvetica, sans;
-	color: #[(#GET{foncee}|couleur_foncer)];
-	font-weight: bold;
+	color: black;
+	font-weight: normal;
 	font-size: 95%;
 	line-height: 11px;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire})], bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{e0e0e0, bottom [(#GET{left})] no-repeat })]
 }
 
 .formulaire_spip fieldset li label {
 	color: #444444;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{bbbbbb, center [(#GET{right})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|background_image{e0e0e0, center [(#GET{right})] no-repeat })]
 }
 .formulaire_spip fieldset li input.text, .formulaire_spip fieldset li textarea.textarea {
 	border: 1px solid #aaaaaa;
@@ -387,7 +397,7 @@ padding-top:10px;
 .formulaire_editer_auteur li.editer_statut {
 	margin-top: 10px;
 	margin-bottom: 10px;
-	background-color: #ddd;
+	background-color: [#(#ENV{couleur_claire}|couleur_eclaircir)];
 }
 .formulaire_spip li.editer_parent .rubrique_actuelle {clear:#GET{left};}
 
@@ -426,8 +436,9 @@ padding-top:10px;
 
 .formulaire_spip li.editer_parent label, 
 .formulaire_spip li.editer_groupe_mot label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{bbbbbb, bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#GET{claire})], bottom [(#GET{left})] no-repeat })]
 	color: black;
+	font-weight: bold;
 }
 
 
