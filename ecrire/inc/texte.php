@@ -412,12 +412,17 @@ function protege_js_modeles($t) {
 // il ne faut pas desactiver globalement la fonction dans l'espace prive car elle protege
 // aussi les balises des squelettes qui ne passent pas forcement par propre ou typo apres
 // http://doc.spip.org/@interdire_scripts
-function interdire_scripts($t) {
-	// rien ?
-	if (!$t OR is_array($t) OR !strstr($t, '<')) return $t;
+function interdire_scripts($arg) {
+	// on memorise le resultat sur les arguments non triviaux
+	static $dejavu = array();
+
+	// Attention, si ce n'est pas une chaine, laisser intact
+	if (!$arg OR !is_string($arg) OR !strstr($arg, '<')) return $arg;
+
+	if (isset($dejavu[$arg])) return $dejavu[$arg];
 
 	// echapper les tags asp/php
-	$t = str_replace('<'.'%', '&lt;%', $t);
+	$t = str_replace('<'.'%', '&lt;%', $arg);
 
 	// echapper le php
 	$t = str_replace('<'.'?', '&lt;?', $t);
@@ -445,7 +450,7 @@ function interdire_scripts($t) {
 	if (defined('_PROTEGE_PHP_MODELES'))
 		$t = echappe_retour($t,"php"._PROTEGE_PHP_MODELES);
 
-	return $t;
+	return $dejavu[$arg] = $t;
 }
 
 // Securite : utiliser SafeHTML s'il est present dans ecrire/safehtml/
