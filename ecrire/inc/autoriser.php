@@ -400,7 +400,9 @@ function autoriser_modererpetition_dist($faire, $type, $id, $qui, $opt) {
 // http://doc.spip.org/@autoriser_webmestre_dist
 function autoriser_webmestre_dist($faire, $type, $id, $qui, $opt) {
 	return
-		$qui['webmestre']=='oui'
+		(defined('_ID_WEBMESTRES')?
+			in_array($qui['id_auteur'], explode(':', _ID_WEBMESTRES))
+			:$qui['webmestre']=='oui')
 		AND $qui['statut'] == '0minirezo'
 		AND !$qui['restreint']
 		;
@@ -500,7 +502,8 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	if ($id == $qui['id_auteur'] && $opt['statut'])
 		return false;
 	// et toucher au statut webmestre si il ne l'est pas lui meme
-	elseif ($opt['webmestre'] AND !autoriser('webmestre'))
+	// ou si les webmestres sont fixes par constante (securite)
+	elseif ($opt['webmestre'] AND (defined('_ID_WEBMESTRES') OR !autoriser('webmestre')))
 		return false;
 	// et toucher au statut d'un webmestre si il ne l'est pas lui meme
 	elseif ($opt['statut'] AND autoriser('webmestre','',0,$id) AND !autoriser('webmestre'))

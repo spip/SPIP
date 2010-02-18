@@ -15,6 +15,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@exec_demande_mise_a_jour_dist
 function exec_demande_mise_a_jour_dist() {
+	// on fait la verif du path avant tout,
+	// et l'installation des qu'on est dans la colonne principale
+	// si jamais la liste des plugins actifs change, il faut faire un refresh du hit
+	// pour etre sur que les bons fichiers seront charges lors de l'install
+	include_spip('inc/plugin');
+	if (actualise_plugins_actifs()==-1){
+		include_spip('inc/headers');
+		redirige_par_entete(self());
+	}
+
 	include_spip('inc/presentation');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page('','','','',true,false,false);
