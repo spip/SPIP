@@ -13,8 +13,8 @@ ul.spip {}
 ol.spip { list-style: decimal; }
 
 /* Citations, code et poesie */
-blockquote.spip { margin: 2em 0; padding-left: 1em; border-left: 0.30em solid; }
-blockquote.spip_poesie { margin: 2em 0; padding-left: 1em; border-left: 1px solid; font-family: Garamond, Georgia, Times, serif; }
+blockquote.spip { margin: 2em 0; margin-left: 1em; padding-left: 1em; border-left: 1px dotted #aaa; }
+blockquote.spip_poesie { margin: 2em 0; margin-left: 1em; padding-left: 1em;  border-left: 1px solid #aaa; }
 blockquote.spip_poesie div { text-indent: -3em; margin-left: 3em; }
 
 .spip_code, .spip_cadre { font-family: Courier, "Courier New", monospace; color: #036; }
