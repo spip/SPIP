@@ -132,7 +132,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 	$fichier_dest = $nom_fichier;
-	
+
 	if (@file_exists($f = $fichier)){
 		list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
 		$date_src = @filemtime($f);
@@ -153,6 +153,10 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	// pas de taille mesurable
 	if (!($ret["hauteur"] OR $ret["largeur"]))
 		return false;
+	
+	// par defaut la taile de la destination est la taille initiale
+	$ret['hauteur_dest'] = $ret["hauteur"];
+	$ret['largeur_dest'] = $ret["largeur"];
 	
 	// cas general :
 	// on a un dossier cache commun et un nom de fichier qui varie avec l'effet
