@@ -451,7 +451,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	$a_href = "<a$accesskey href=\"$lien\"$class_select>";
 
 	if ($spip_display != 1) {
-		$res = "<li class='cellule36' style='width: ".$largeur."px;'>";
+		$res = "<li class='cellule36 display$spip_display'>";
 		$res .= $a_href .
 		  http_img_pack("$fond", $alt, "$title");
 		if ($aide AND $spip_display != 3) $res .= aide($aide)." ";
