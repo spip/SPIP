@@ -27,6 +27,9 @@ function configuration_reducteur_dist()
 				case 'gd1':
 				case 'gd2':
 					$formats_graphiques = $GLOBALS['meta']['gd_formats_read'];
+					effacer_meta('max_taille_vignettes');
+					effacer_meta('max_taille_vignettes_echec');
+					effacer_meta('max_taille_vignettes_test');
 					break;
 				case 'netpbm':
 					$formats_graphiques = $GLOBALS['meta']['netpbm_formats'];
