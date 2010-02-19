@@ -143,7 +143,6 @@
 .formulaire_spip ul {
 	margin: 0;
 	padding: 0;
-	padding-bottom: 10px;
 	list-style: none;
 }
 .formulaire_spip ul li ul {
@@ -306,22 +305,24 @@ padding-top:10px;
 .formulaire_spip li.fieldset {padding:0;}
 .formulaire_spip fieldset {
 	margin: 0px;
-	padding: 10px 0px;
+	padding: 0 0 10px 0;
 	border: 0;
-	border-top: 1px solid [(#GET{foncee})];
 	width:auto;
+	border-top: 1px solid #ccc;
+}
+
+.formulaire_editer_article li.editer_liens_sites {
+	border-bottom: 1px solid #ccc;
 }
 
 .formulaire_spip h3.legend,
 .formulaire_spip legend
  {
 	display: block;
-	float: [(#GET{left})];
 	margin: 0px;
-	margin-#GET{left}: 10px;
-	padding-top: 5px;
-	padding-bottom: 10px;
-	padding-#GET{left}: 5px;
+	padding-top: 7px;
+	padding-bottom: 13px;
+	padding-#GET{left}: 10px;
 	padding-#GET{right}: 5px;
 	font-family: verdana, arial, helvetica, sans;
 	color: black;
@@ -337,11 +338,6 @@ padding-top:10px;
 }
 .formulaire_spip fieldset li input.text, .formulaire_spip fieldset li textarea.textarea {
 	border: 1px solid #aaaaaa;
-}
-
-
-.formulaire_spip li.fieldset.editer_liens_sites {
-	border-bottom: 1px solid [(#GET{foncee})];
 }
 
 
@@ -377,7 +373,7 @@ padding-top:10px;
 
 
 .formulaire_spip li.editer_identification fieldset{
-	[background-color: #(#GET{claire}|couleur_eclaircir);]
+	[background-color: #(#GET{claire}|couleur_eclaircir|couleur_eclaircir);]
 }
 
 .formulaire_spip li.editer_identification em.attention {
@@ -395,8 +391,6 @@ padding-top:10px;
 .formulaire_spip li.editer_parent, 
 .formulaire_spip li.editer_groupe_mot,
 .formulaire_editer_auteur li.editer_statut {
-	margin-top: 10px;
-	margin-bottom: 10px;
 	background-color: [#(#ENV{couleur_claire}|couleur_eclaircir)];
 }
 .formulaire_spip li.editer_parent .rubrique_actuelle {clear:#GET{left};}
