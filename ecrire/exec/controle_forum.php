@@ -174,7 +174,7 @@ function controle_forum_boucle($row, $args) {
 		$suite .= "\n<div style='text-align: left' class='serif'><b><a href='$forum_url_site'>$forum_nom_site</a></b></div>";
 
 	return 	"\n<div><br /><a id='forum$id_forum'></a></div>" .
-	  debut_cadre_thread_forum("", true, "", typo($forum_titre)) .
+	  debut_cadre_forum("", true, "", typo($forum_titre)) .
 	  "<div$style>" .
 	  date_interface($forum_date_heure) .
 	  safehtml("<span class='arial2'> / <b>$forum_auteur</b></span>") .
@@ -183,7 +183,7 @@ function controle_forum_boucle($row, $args) {
 	  afficher_forum_mots($id_forum) .
 	  join(', ', $documents) .
 	  "<div class='nettoyeur'></div></div>".
-	  fin_cadre_thread_forum(true);
+	  fin_cadre_forum(true);
 }
 
 //
