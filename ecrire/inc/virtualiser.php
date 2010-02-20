@@ -29,7 +29,7 @@ function inc_virtualiser_dist($id_article, $virtuel, $script, $args){
 	. ")</span><br />";
 
 	$res = ajax_action_post('virtualiser', $id_article, $script, $args, $res, _T('bouton_changer'), " class='fondo spip_xx-small' style='float: $spip_lang_right'")
-	  . "<br class='nettoyeur' />";
+	  . "<div class='nettoyeur' /></div>";
 
 	return ajax_action_greffe("virtualiser", $id_article, $res);
 }

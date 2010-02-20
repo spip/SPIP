@@ -48,7 +48,7 @@ function exec_breves_dist()
 		if ($editable) {
 		  echo "<div style='float:$spip_lang_right'>"
 		  . icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif", "creer.gif", $spip_lang_right)
-		  . "</div><br class='nettoyeur' />";
+		  . "</div><div class='nettoyeur' /></div>";
 		}
 
 	}
