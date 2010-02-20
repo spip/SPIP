@@ -158,7 +158,7 @@ function legender_corps($ancre, $flag, $id, $id_document, $script, $type, $docum
 
 	if (test_espace_prive())
 		return ajax_action_post("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, _T('bouton_enregistrer'), $att_bouton, $att_span, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
-		  . "<div class='nettoyeur' /></div>";
+		  . "<div class='nettoyeur'></div>";
 	else {
 		$corps = "<div class='boutons'>"
 		       . $corps 

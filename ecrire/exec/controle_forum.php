@@ -289,7 +289,7 @@ function exec_controle_forum_args($id_rubrique, $type, $debut, $pas, $enplus, $r
 		echo debut_droite('', true);
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 
-		echo $formulaire_recherche . "<div class='nettoyeur' /></div>";
+		echo $formulaire_recherche . "<div class='nettoyeur'></div>";
 		echo $res; 
 		echo fin_gauche(), fin_page();
 	}
