@@ -58,11 +58,11 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 		var hauteur_max = 0;
 		var hauteur_bouton = 0;
 	
-		$(".boutons_admin a.boutons_admin").each(function(){
+		$(".boutons_admin a.boutons_admin .icon_texte").each(function(){
 			hauteur_bouton = parseInt($(this).height());
 			if (hauteur_bouton > hauteur_max) hauteur_max = hauteur_bouton;
 		});
-		$(".boutons_admin a.boutons_admin").height(hauteur_max);
+		$(".boutons_admin a.boutons_admin .icon_texte").height(hauteur_max);
 	}	
 
 	$(document).ready(function(){
