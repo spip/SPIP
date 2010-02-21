@@ -64,7 +64,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do='aff')
 	. "<p><b>".safehtml($titre)."</b></p>"
 	. (!$descriptif ? '' : "<div>".safehtml($descriptif)."</div>")
 	. "<div style='text-align: $spip_lang_right;'>"
-	. "<input type='submit' class='fondo' value='"
+	. "<input type='submit' value='"
 	. _T('bouton_choisir')
 	. "'\nonclick=\"$js_func('$titre',$id,'selection_rubrique','id_parent'); return false;\" />"
 	.  "</div>"

@@ -2342,7 +2342,7 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 	if ($actionable){
 		if (strpos($form,'<select')!==false) {
 			$form .= "<div style='text-align: $spip_lang_right;'>"
-				. '<input class="fondo" type="submit" value="'._T('bouton_choisir').'"/>'
+				. '<input type="submit" value="'._T('bouton_choisir').'"/>'
 				. "</div>";
 		}
 		$form = "<input type='hidden' name='editer_$type' value='oui' />\n" . $form;

@@ -46,8 +46,7 @@ function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac=
 	if ($statut == 'publie'
 	 OR ($statut == 'prop' AND $type=='article' AND $GLOBALS['meta']["post_dates"] == "non")) {
 
-		$js = "class='fondl'
-onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
+		$js = " onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 
 		$invite =  "<b><span class='verdana1'>"
 		. _T('texte_date_publication_article')
@@ -74,7 +73,7 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 					"id_$type=$id",
 					$masque,
 					_T('bouton_changer'),
-				       " class='fondo visible_au_chargement' id='valider_date'", "",
+				       " class='visible_au_chargement' id='valider_date'", "",
 					"&id=$id&type=$type")
 		.  "</div>";
 
@@ -125,12 +124,12 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
  " onclick=$js /> <label for='avec_redac_off'>" .
  _T('bouton_radio_afficher').
  ' :</label> ' .
- afficher_jour($jour_redac, "name='jour_redac' id='jour_redac' class='fondl' onchange=$js", true) .
- afficher_mois($mois_redac, "name='mois_redac' id='mois_redac' class='fondl' onchange=$js", true) .
- "<input type='text' name='annee_redac' id='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onclick=$js />" .
+ afficher_jour($jour_redac, "name='jour_redac' id='jour_redac' onchange=$js", true) .
+ afficher_mois($mois_redac, "name='mois_redac' id='mois_redac' onchange=$js", true) .
+ "<input type='text' name='annee_redac' id='annee_redac' value='".$annee_redac."' size='5' maxlength='4' onclick=$js />" .
  '<div style="text-align: center; width: 80%;">' .
- afficher_heure($heure_redac, "name='heure_redac' id='heure_redac' class='fondl' onchange=$js", true) .
- afficher_minute($minute_redac, "name='minute_redac' id='minute_redac' class='fondl' onchange=$js", true) .
+ afficher_heure($heure_redac, "name='heure_redac' id='heure_redac' onchange=$js", true) .
+ afficher_minute($minute_redac, "name='minute_redac' id='minute_redac' onchange=$js", true) .
  "</div></div>";
 
 
@@ -141,7 +140,7 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 				   "id_$type=$id",
 				   $masque,
 				   _T('bouton_changer'),
-				   " style='float:$spip_lang_right;margin-top:-2em;position:relative;' class='fondo visible_au_chargement' id='valider_date_redac'", "",
+				   " style='float:$spip_lang_right;margin-top:-2em;position:relative;' class='visible_au_chargement' id='valider_date_redac'", "",
 				   "&id=$id&type=$type")
 				   ."<div class='nettoyeur'></div>"
 		. '</div>';

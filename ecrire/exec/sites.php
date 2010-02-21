@@ -147,7 +147,7 @@ $spip_lang_right;
 			    "<input type='hidden' name='reload' value='oui' />
 			    <input type='submit' value=\""
 				  . attribut_html(_T('lien_nouvelle_recuperation'))
-				  . "\" class='fondo spip_xx-small' />")
+				  . "\" class='spip_xx-small' />")
 				. "</div>"
 			  : "")
 
@@ -159,7 +159,7 @@ $spip_lang_right;
 				"<input type='hidden' name='reload' value='oui' />
 				<input type='submit' value=\""
 				. attribut_html(_T('lien_mise_a_jour_syndication'))
-				. "\" class='fondo spip_xx-small' />")
+				. "\" class='spip_xx-small' />")
 			. "</div>"
 
 			: choix_feed($id_syndic, $id_rubrique, $nom_site, $row))
@@ -265,7 +265,7 @@ function options_moderation($row) {
 	  . "</div></div>\n";
 
 	// Bouton "Valider"
-	$res .= "\n<div style='text-align:".$GLOBALS['spip_lang_right'].";'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
+	$res .= "\n<div style='text-align:".$GLOBALS['spip_lang_right'].";'><input type='submit' value='"._T('bouton_valider')."' /></div>\n";
 
 	return
 	  debut_cadre_relief('feed.png', true, "", _T('syndic_options').aide('artsyn'))
@@ -310,7 +310,7 @@ function choix_feed($id_syndic, $id_rubrique, $nom_site, $row) {
 	}
 	$res .= "</select>\n";
 	$res .= aide("rubsyn");
-	$res .= "<div style='text-align: $spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
+	$res .= "<div style='text-align: $spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' /></div>\n";
 	$res .= "</div>\n";
 
 	$res = redirige_action_post('editer_site', $id_syndic, 'sites','', $res);
@@ -330,7 +330,7 @@ function afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)
 	$form = $chercher_rubrique($id_rubrique, 'site', false);
 	if (strpos($form,'<select')!==false) {
 		$form .= "<div style='text-align: $spip_lang_right;'>"
-			. '<input class="fondo" type="submit" value="'._T('bouton_choisir').'"/>'
+			. '<input type="submit" value="'._T('bouton_choisir').'"/>'
 			. "</div>";
 	}
 

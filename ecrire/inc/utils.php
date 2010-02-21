@@ -1005,7 +1005,7 @@ function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 	. "<input type='hidden' name='exec' value='$script' />"
 	. $corps
 	. (!$submit ? '' :
-	     ("<div style='text-align: $spip_lang_right'><input class='fondo' type='submit' value='$submit' /></div>"))
+	     ("<div style='text-align: $spip_lang_right'><input type='submit' value='$submit' /></div>"))
 	. "</div></form>\n";
 }
 

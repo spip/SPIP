@@ -36,9 +36,8 @@ function configuration_langue_dist()
 			 "<label for='changer_langue_site'>" .
 			 _T('info_langue_principale') .
 			 "</label>" .
-			 " : <select name='changer_langue_site' id='changer_langue_site' class='fondl'>\n$res</select>\n",
-			 '',
-			 " class='fondo'");
+			 " : <select name='changer_langue_site' id='changer_langue_site'>\n$res</select>\n",
+			 '');
 
  $res =  debut_cadre_couleur("langues-24.gif", true, "", _T('info_langue_principale') . "&nbsp;:&nbsp;" . $langue_site) .
 	   _T('texte_selection_langue_principale') .

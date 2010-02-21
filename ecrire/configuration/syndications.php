@@ -52,7 +52,7 @@ function configuration_syndications_dist()
 	$res .= "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 	$res .= "\n<tr><td style='color: #000000' class='verdana1 spip_x-small'>";
 	$res .= "<label for='proposer_sites'>" . _T('info_question_proposer_site') ."</label>";
-	$res .= "\n<div style='text-align: center'><select name='proposer_sites' id='proposer_sites' class='fondo' size='1'>\n";
+	$res .= "\n<div style='text-align: center'><select name='proposer_sites' id='proposer_sites' size='1'>\n";
 	$res .= "<option".mySel('0',$proposer_sites).">"._T('item_choix_administrateurs')."</option>\n";
 	$res .= "<option".mySel('1',$proposer_sites).">"._T('item_choix_redacteurs')."</option>\n";
 	$res .= "<option".mySel('2',$proposer_sites).">"._T('item_choix_visiteurs')."</option>\n";
