@@ -246,10 +246,10 @@ a.icone36.suivi-forum-24 { width: 100px; }
 .cellule36 a, .cellule48 a { display: block; text-align: center; }
 .cellule48 a img { display: inline; background-color: #GET{claire}; margin: 4px; padding: 0; border: 0; }
 .cellule48 a.selection img { display: inline; margin: 4px; padding: 0; border: 0; background-color: #999; }
-.cellule48 a:hover img { display: inline; margin: 4px; padding: 0; border: 0; background: url(#GET{chemin_img_pack}fond-gris-anim.gif); }
+.cellule48 a:hover img { display: inline; margin: 4px; padding: 0; border: 0; background-color: #[(#ENV{couleur_claire}|couleur_eclaircir)]; }
 .cellule36 a img { margin: 0; display: inline; padding: 3px; border: 0; border: 1px solid #fff; background-color: transparent; }
 .cellule36 a.selection img{ margin: 0; display: inline; padding: 3px; background-color: #fff; border: 1px solid #ccc; }
-.cellule36 a:hover img { margin: 0; display: inline; padding: 3px; background-color: #e4e4e4; background: url(#GET{chemin_img_pack}fond-gris-anim.gif); border: 1px solid #GET{foncee}; }
+.cellule36 a:hover img { margin: 0; display: inline; padding: 3px; background-color: #e4e4e4; background-color: #[(#ENV{couleur_claire}|couleur_eclaircir)]; border: 1px solid #GET{foncee}; }
 .cellule36 a span, .cellule48 a span { color: #666; display: block; margin: 1px; width: 100%; }
 .cellule36 a:hover span, .cellule48 a:hover span { color: #000; display: block; margin: 1px; width: 100%; }
 .cellule36 a.selection span, .cellule48 a.selection span { color: #000; display: block; margin: 1px; width: 100%; }
@@ -274,7 +274,7 @@ a.cellule-h { display: block; }
 a.cellule-h { font-size: 10px; font-weight: bold; text-align: #GET{left}; text-decoration: none; color: #666; }
 a.cellule-h:hover, a.cellule-h:hover a.cellule-h, a.cellule-h a.cellule-h:hover { font-size: 10px; font-weight: bold; text-align: #GET{left}; text-decoration: none; color: #000; }
 a.cellule-h div.cell-i { padding: 0; border: 1px solid #fff; margin: 0; margin-#GET{right}: 3px; }
-a.cellule-h:hover div.cell-i { background: url(#GET{chemin_img_pack}fond-gris-anim.gif); margin: 0; margin-#GET{right}: 3px; padding: 0; border: 1px solid #GET{foncee}; }
+a.cellule-h:hover div.cell-i { background-color: #[(#ENV{couleur_claire}|couleur_eclaircir)]; margin: 0; margin-#GET{right}: 3px; padding: 0; border: 1px solid #GET{foncee}; }
 table.cellule-h-table { margin: 0; padding: 0; border: 0; }
 a.cellule-h img { width: 24px; height: 24px; border: 0; margin: 3px; background-repeat: no-repeat; background-position: center center; }
 a.cellule-h a.aide img { width: 12px; height: 12px; }
