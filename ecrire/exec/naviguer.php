@@ -298,12 +298,6 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	if ($relief) {
 
 		$encours = "";
-		$encours .= "<div class='verdana2' style='color: black;'><b>"._T('texte_en_cours_validation')
-		. (($GLOBALS['meta']['forum_prive_objets'] != 'non')
-			? ' '._T('texte_en_cours_validation_forum')
-			: '' )
-		. "</b></div>";
-
 		//
 		// Les articles a valider
 		//
@@ -347,7 +341,11 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 					"</a></small>";
 		}
 
-		$res .= debut_cadre_couleur('',true)
+		$res .= debut_cadre_couleur_foncee("",true, "", _T('texte_en_cours_validation')
+				. (($GLOBALS['meta']['forum_prive_objets'] != 'non')
+					? ' '._T('texte_en_cours_validation_forum')
+					: '' )
+				)
 			. pipeline('rubrique_encours',array('args'=>array('type'=>'rubrique','id_objet'=>$id_rubrique),'data'=>$encours))
 			. fin_cadre_couleur(true);
 	}
