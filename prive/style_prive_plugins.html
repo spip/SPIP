@@ -10,6 +10,7 @@
 
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
+	<style>
 ]
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
@@ -21,14 +22,16 @@
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
 
-h2.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat;padding-[(#GET{left})]:16px;background-color: #GET{claire};font-size:14px;}
+h2.titrem,h3.titrem { display: block; position:relative; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat;padding-[(#GET{left})]:16px;background-color: #GET{claire};color: [#(#GET{foncee}|couleur_foncer)];font-size:14px;margin-top:0;}
+.formulaire_spip h3.titrem,#navigation .formulaire_spip h3.titrem,#extra .formulaire_spip h3.titrem {background-color: #GET{claire};color: [#(#GET{foncee}|couleur_foncer)];}
 
 
 /* listes */
 .liste_items,.liste-items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
 .liste_items .item,.liste-items .item  {border-bottom:1px solid #ddd;padding:0.4em 0; font-size: 11px;overflow:hidden;clear:both;}
 .liste_items .item.odd,.liste-items .item.odd  {background:#eee;}
-.liste_items .item:hover,.liste-items .item:hover  {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
+.liste_items .item:hover,.liste-items .item:hover,
+.liste_items .item.odd:hover,.liste-items .item.odd:hover {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
 .liste_items .court:hover,.liste-items .court:hover  {background-color:#eee;}
 .liste_items .item.on,.liste-items .item.on  {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];font-weight:normal;}
 .liste_items .item.on:hover,.liste-items .item.on:hover  {background-color:[#(#GET{claire}|couleur_eclaircir)];}
@@ -47,13 +50,14 @@ h2.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-re
 .liste_items + .tri, .liste_items + .pagination {margin-top:-1em;margin-bottom:1em;}
 
 #navigation .pagination,#extra .pagination {font-size:9px;}
+#navigation .tri,#extra .tri {font-size:9px;}
 
 .clicable {cursor:hand;cursor:pointer;}
 
 /* menus */
 /* listes */
 ul.menu {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
-ul.menu li {border-bottom:1px solid #ddd; padding:0; font-size: 10px;overflow:hidden;clear:both;}
+ul.menu li {border-bottom:1px solid #ddd;padding:0; font-size: 10px;overflow:hidden;clear:both;}
 ul.menu li ul {margin:0;padding:0;margin-#GET{left}:11px;}
 ul.menu li a,ul.menu li strong.on {display:block;padding:0.4em 0;}
 ul.menu li a:hover {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
@@ -67,4 +71,4 @@ form.bouton_action_post button.submit, .formulaire_spip .boutons input.link,.for
 form.bouton_action_post button.submit, .formulaire_spip .boutons input.link,.formulaire_spip .boutons button.link {background:none;border:0;cursor:pointer;padding:0 0 1px;}
 form.bouton_action_post button.submit:hover, .formulaire_spip .boutons input.link:hover,.formulaire_spip .boutons button.link:hover {border-bottom:1px solid;padding:0;}
 
-[(#INCLURE{fond=#VAL{prive/}|tous_les_fonds{/style_prive_plugin_}}{couleur_claire}{couleur_foncee}{lang}{ltr})]
+[(#INCLURE{fond=#VAL{prive/}|tous_les_fonds{/style_prive_plugin_}}{env}{couleur_claire}{couleur_foncee}{lang}{ltr})]
