@@ -23,6 +23,7 @@ function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_ac
 		$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($info['nom']))))));
 	}
 	asort($liste_plugins);
+	$exposed = urldecode(_request('plugin'));
 
 	$block_par_lettre = false;//count($liste_plugins)>10;
 	$fast_liste_plugins_actifs = array_flip($liste_plugins_actifs);
@@ -40,7 +41,7 @@ function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_ac
 		// le rep suivant
 		$actif = @isset($fast_liste_plugins_actifs[$plug]);
 		$block_actif = $block_actif | $actif;
-		$expose = (urldecode(_request('plugin'))==$plug OR urldecode(_request('plugin'))==$dir_plugins . $plug);
+		$expose = ($exposed AND ($exposed==$plug OR $exposed==$dir_plugins . $plug OR $exposed==substr($dir_plugins,strlen(_DIR_RACINE)) . $plug));
 		$block .= $ligne_plug($url_page, $plug, $actif, $expose, "item", $dir_plugins)."\n";
 	}
 	$res .= $block_par_lettre ? affiche_block_initiale($initiale,$block,$block_actif): $block;

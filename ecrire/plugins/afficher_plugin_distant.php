@@ -18,6 +18,7 @@ include_spip('inc/texte');
 function plugins_afficher_plugin_distant_dist($url_page, $zip_file, $info, $expose=false, $class_li="item"){
 	static $id_input=0;
 	static $versions = array();
+	static $charger_plugin = null;
 
 	$erreur = false;
 	$s = "";
@@ -58,7 +59,9 @@ function plugins_afficher_plugin_distant_dist($url_page, $zip_file, $info, $expo
 
 	if (!$erreur){
 		// bouton de telechargement
-		$action = generer_action_auteur('charger_plugin',$plug_file,generer_url_ecrire('admin_plugin','voir=recents',true));
+		if (!$charger_plugin)
+			$charger_plugin = generer_action_auteur('charger_plugin',"charger_zip","./");
+		$action = parametre_url($charger_plugin,'url_zip_plugin',$plug_file);
 		$s .= "<div class='download'>".
 		"<a href='$action' title='"._T('plugin_charger')."'>"
 		. balise_img(find_in_path("images/telecharger-16.png"),_T('plugin_charger'))
