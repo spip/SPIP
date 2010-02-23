@@ -338,6 +338,20 @@ $table_des_traitements['TYPE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['DESCRIPTIF_SITE_SPIP'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['ENV'][]= 'entites_html(%s,true)';
 
+$table_des_traitements['TEXTE']['forums']= "safehtml("._TRAITEMENT_RACCOURCIS.")";
+$table_des_traitements['TITRE']['forums']= "safehtml("._TRAITEMENT_TYPO.")";
+$table_des_traitements['NOTES']['forums']= "safehtml("._TRAITEMENT_RACCOURCIS.")";
+$table_des_traitements['NOM_SITE']['forums']=  "safehtml("._TRAITEMENT_TYPO.")";
+$table_des_traitements['URL_SITE']['forums']= 'safehtml(vider_url(%s))';
+$table_des_traitements['AUTEUR']['forums']= 'safehtml(vider_url(%s))';
+$table_des_traitements['EMAIL_AUTEUR']['forums']= 'safehtml(vider_url(%s))';
+
+// gerer les sauts de ligne dans les textes des forums
+$table_des_traitements['TEXTE']['forums'] =
+	str_replace('%s', 'post_autobr(%s)',
+	$table_des_traitements['TEXTE']['forums']
+);
+
 
 // Articles syndiques : passage des donnees telles quelles, sans traitement typo
 // A noter, dans applique_filtres la securite et conformite XHTML de ces champs
@@ -364,7 +378,7 @@ foreach(array('TITRE','DESCRIPTIF','SOURCE') as $balise)
 			$table_titre = $interfaces['table_titre'];
 			$tables_jointures = $interfaces['tables_jointures'];
 			$exceptions_des_jointures = $interfaces['exceptions_des_jointures'];
-			$table_des_traitements = $interfaces['table_des_traitements'];
+			$table_des_traitements = $table_des_traitements;
 	}
 }
 
