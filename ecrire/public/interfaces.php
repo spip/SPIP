@@ -378,7 +378,7 @@ foreach(array('TITRE','DESCRIPTIF','SOURCE') as $balise)
 			$table_titre = $interfaces['table_titre'];
 			$tables_jointures = $interfaces['tables_jointures'];
 			$exceptions_des_jointures = $interfaces['exceptions_des_jointures'];
-			$table_des_traitements = $table_des_traitements;
+			$table_des_traitements = $interfaces['table_des_traitements'];
 	}
 }
 
