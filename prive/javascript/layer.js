@@ -269,22 +269,17 @@ function onkey_rechercher(valeur, rac, url, img, nid, init) {
 // * retailler les input
 // * utiliser ctrl-s, F8 etc comme touches de sauvegarde
 function verifForm(racine) {
-	if(!jQuery.browser.mozilla) return;
-	jQuery("input.forml,input.formo,textarea.forml,textarea.formo", racine||document)
+	jQuery(".formulaire_spip input.text, .formulaire_spip input.password, .formulaire_spip textarea", racine||document)
 	.each(function() {
 		var jField = jQuery(this);
-		var w = jField.css('width');
-		if (!w || w == '100%') {
-			jField.css('width','95%');
-		} else {
-			w = parseInt(w) -
-			(parseInt(jField.css("borderLeftWidth")) +
-				parseInt(jField.css("borderRightWidth")) +
-				parseInt(jField.css("paddingLeft")) +
-				parseInt(jField.css("paddingRight")
-			));
-			jField.width(w+'px');
-		}
+		var w = jField.parent().css('width');
+		w = parseInt(w) -
+		(parseInt(jField.css("borderLeftWidth")) +
+			parseInt(jField.css("borderRightWidth")) +
+			parseInt(jField.css("paddingLeft")) +
+			parseInt(jField.css("paddingRight")
+		));
+		jField.width(w+'px');
 	});
 
 	// Clavier pour sauver (cf. crayons)
