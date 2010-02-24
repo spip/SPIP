@@ -1,0 +1,11 @@
+<plugin>
+	<nom>Test Builder</nom>
+	<auteur>Cedric [->http://www.yterium.com]</auteur>
+	<version>0.1.0</version>
+	<etat>test</etat>
+	<description>Construite des tests systematiques</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>tb</prefix>
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<categorie>outils</categorie>
+</plugin>
