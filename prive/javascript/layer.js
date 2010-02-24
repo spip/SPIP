@@ -290,23 +290,21 @@ function verifForm(racine) {
 	// vieux fonctionnement verifForm, desormais uniquement sur MSIE < 8:
 	// forcer la largeur des elements de formulaires a 100%
 	// (desormais, on utilise la CSS box-sizing pour brouteurs recents).
-	jQuery.each(jQuery.browser, function(i, val) {
-		if((i=="msie" && jQuery.browser.version.substr(0,3) < 8) ) {			
-			jQuery(".formulaire_spip input.text, .formulaire_spip input.password, .formulaire_spip textarea", racine||document)
-			.each(function() {
-				var jField = jQuery(this);
-				var w = jField.parent().width();
-				w = parseInt(w) -
-				(parseInt(jField.css("borderLeftWidth")) +
-					parseInt(jField.css("borderRightWidth")) +
-					parseInt(jField.css("paddingLeft")) +
-					parseInt(jField.css("paddingRight")
-				));
-				jField.width(w+'px');
-			});
-		
-		}
-	});
+	if(jQuery.browser.msie && jQuery.browser.version.substr(0,3) < 8)) {			
+		jQuery(".formulaire_spip input.text, .formulaire_spip input.password, .formulaire_spip textarea", racine||document)
+		.each(function() {
+			var jField = jQuery(this);
+			var w = jField.parent().width();
+			w = parseInt(w) -
+			(parseInt(jField.css("borderLeftWidth")) +
+				parseInt(jField.css("borderRightWidth")) +
+				parseInt(jField.css("paddingLeft")) +
+				parseInt(jField.css("paddingRight")
+			));
+			jField.width(w+'px');
+		});
+	
+	}
 	
 
 }
