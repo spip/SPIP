@@ -82,7 +82,9 @@ function inc_couleurs_dist($choix=NULL, $ajouter=false)
 	} else {
 		if (is_array($choix)) {
 			if ($ajouter) {
-				return $couleurs_spip = array_merge($couleurs_spip, $choix);
+				foreach($choix as $c)
+					$couleurs_spip[] = $c;
+				return $couleurs_spip;
 			} else {
 				return $couleurs_spip = $choix;
 			}
