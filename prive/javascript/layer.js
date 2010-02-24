@@ -269,7 +269,7 @@ function onkey_rechercher(valeur, rac, url, img, nid, init) {
 // * retailler les input
 // * utiliser ctrl-s, F8 etc comme touches de sauvegarde
 function verifForm(racine) {
-	jQuery(".formulaire_spip input.text, .formulaire_spip input.password, .formulaire_spip textarea", racine||document)
+	jQuery(".formulaire_spip input.text, .formulaire_spip input.password, .formulaire_spip textarea, .formulaire_spip select", racine||document)
 	.each(function() {
 		var jField = jQuery(this);
 		var w = jField.parent().css('width');
