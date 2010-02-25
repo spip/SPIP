@@ -27,7 +27,7 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 
 	return init_entete($titre, $id_rubrique, $minipres)
 	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
-	. "<div id='page' class='$spip_ecran'>"
+	. "<div id='page'>"
 	. ($alertes?alertes_auteur($connect_id_auteur):'')
 	. auteurs_recemment_connectes($connect_id_auteur);
 }
@@ -95,8 +95,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
 
-
-	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique "._request('exec')."'"
+	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique $spip_ecran "._request('exec')."'"
 			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
 			.'>');
 
