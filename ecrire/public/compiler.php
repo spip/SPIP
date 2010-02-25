@@ -833,8 +833,8 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			// si la table n'existe pas avec le connecteur par defaut, 
 			// c'est peut etre une table qui necessite son connecteur dedie fourni
 			// permet une ecriture allegee (GEO) -> (geo:GEO)
-			if (!$show AND $show=$trouver_table($type, $type))
-				$boucles[$id]->sql_serveur = $type;
+			if (!$show AND $show=$trouver_table($type, strtolower($type)))
+				$boucles[$id]->sql_serveur = strtolower($type);
 			if ($show) {
 				$boucles[$id]->show = $show;
 				// recopie les infos les plus importantes
