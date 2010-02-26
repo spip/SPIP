@@ -46,7 +46,7 @@ body.minipres fieldset, body.minipres .fieldset  { border: 1px solid #ccc; paddi
 .formo, input.text, input.password { width: 50%; display: block; background-color: #f8f8f9; background-position: center bottom; margin-bottom: 1em; padding: 3px; border: 1px inset #333; behavior: url(win_width.htc); }
 .formo, input.text, input.password, select { font-size: 1.1em; }
 
-p.resultat { background-color: #fcaf3e; padding: 0.20em 0.10em; text-align: center; color: #fff; font-weight: bold; }
+p.resultat { background-color: #fcaf3e; padding: 0.40em 0.10em; text-align: center; color: #fff; font-weight: bold; }
 p.resultat.ok { background-color: #73d216; }
 p.resultat.echec { background-color: #d60c0c; }
 
