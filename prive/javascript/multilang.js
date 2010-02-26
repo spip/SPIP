@@ -1,18 +1,35 @@
 /*
- * multilang_mot_cles
+ * multilang
  *
- * Copyright (c) 2006 Renato Formato (renatoformato@virgilio.it)
+ * Copyright (c) 2006-2010 Renato Formato (rformato@gmail.com)
  * Licensed under the GPL License:
  *   http://www.gnu.org/licenses/gpl.html
  *
  */
  
-var multilang_containers={},forms_fields={},multilang_forms,multilang_menu_lang;
-var match_multi = /(?:\[([a-z_]+)\]|^[\s\n]*)((?:.|\n)*?)(?=\[[a-z_]+\]|$)/ig;
-var multilang_css_link,multilang_css_cur_link={},multilang_root,multilang_fields_selector,multilang_menu_selector,multilang_forms_selector;
+var multilang_containers={}, //menu containers
+    forms_fields={},
+    multilang_forms, //forms to be processed (jQuery object)
+    multilang_menu_lang; //template of the menu (jQuery object)
+/*
+(?:\[([a-z_]+)\]|^[\s\n]*)
+[lang] or white space
+
+((?:.|\n)*?)
+all chars not greedy
+
+(?=\[[a-z_]+\]|$)
+[lang] or end string
+*/
+var match_multi = /(?:\[([a-z_]+)\]|^[\s\n]*)((?:.|\n|\s)*?)(?=\[[a-z_]+\]|$)/ig;
+var multilang_css_link,
+    multilang_css_cur_link={},
+    multilang_root, //root of the search (jQuery object)
+    multilang_fields_selector,
+    multilang_menu_selector,
+    multilang_forms_selector; //selector of the forms to be processed (string)
 multilang_css_link = {"cursor":"pointer","margin":"2px 5px","float":"left"};
-$.extend(multilang_css_cur_link,multilang_css_link);
-$.extend(multilang_css_cur_link,{fontWeight:"bold"});
+$.extend(multilang_css_cur_link,multilang_css_link,{fontWeight:"bold"});
 
 /* options is a hash having the following values:
  * - fields (mandatory): a jQuery selector to set the fields that have to be internationalized.
@@ -29,7 +46,7 @@ function multilang_init_lang(options) {
 	var root = options.root || document;
 	multilang_root = $(root);
 	//set the main menu element
-	multilang_containers = options.main_menu ? $(options.main_menu,multilang_root) : $("empty");
+	multilang_containers = options.main_menu ? $(options.main_menu,multilang_root) : $([]);
 	//create menu lang template 
 	multilang_menu_lang =$("<div>");
 	$.each(multilang_avail_langs,function() {
@@ -61,16 +78,16 @@ function forms_change_lang(el,container,target) {
 	}).end();
 	lang = lang.slice(1,-1);
 	//store the fields inputs for later use (usefull for select)
-	var target_name = target!=multilang_forms?target[0].hash.value:"undefined";
-	if(!forms_fields[target_name]) forms_fields[target_name] = $(multilang_fields_selector,target);
+	var target_id = target!=multilang_forms?jQuery.data(target[0]):"undefined";
+	if(!forms_fields[target_id]) forms_fields[target_id] = $(multilang_fields_selector,target);
 	//save the current values
-	forms_fields[target_name].each(function(){
+	forms_fields[target_id].each(function(){
 		forms_save_lang(this,this.form.form_lang);
 	});
 	//change current lang	
 	target.each(function(){this.form_lang = lang});
 	//reinit fields to current lang
-	forms_fields[target_name].each(function(){forms_set_lang(this,lang)});
+	forms_fields[target_id].each(function(){forms_set_lang(this,lang)});
 }
 
 function forms_init_multi(options) {
@@ -124,14 +141,23 @@ function forms_init_field(el,lang) {
 	//if already inited just return
 	if(el.field_lang) return;
 	var langs;
-	var m = el.value.match(/<multi>((?:.|\n)*?)<\/multi>/);
+	var m = el.value.match(/(\d+\.\s+)?<multi>((?:.|\n|\s)*?)<\/multi>/);
 	el.field_lang = {};
+	el.field_pre_lang = ""; //this is the 01. part of the string, the will be put outside the <multi>
 	el.titre_el = $("#titre_"+el.id);
 	if(m!=null) {
+	  el.field_pre_lang = m[1] || "";
 		el.multi = true;
 		match_multi.lastIndex=0;
-		while((langs=match_multi.exec(m[1]))!=null) {
-			el.field_lang[langs[1]||multilang_def_lang] = langs[2]; 
+		while((langs=match_multi.exec(m[2]))!=null) {
+			var text = langs[2].match(/^(\d+\.\s+)((?:.|\n|\s)*)/), value;
+      if(text!=null) {
+        value = text[2];
+        el.field_pre_lang = text[1] || "";
+      } else {
+        value = langs[2];
+      }
+      el.field_lang[langs[1]||multilang_def_lang] = value; 
 		}
 		//Put the current lang string only in the field
 		forms_set_lang(el,lang);
@@ -145,13 +171,18 @@ function forms_set_lang(el,lang) {
 	//if current lang is not setted use default lang value
 	if(el.field_lang[lang]==undefined)
 			el.field_lang[lang] = el.field_lang[multilang_def_lang];
-	el.value = el.field_lang[lang];
+	el.value = el.field_pre_lang+(el.field_lang[lang]==undefined?"":el.field_lang[lang]); //show the common part (01. ) before the value
 	el.titre_el.html(el.value);
 }
 
 function forms_save_lang(el,lang) {
 	//if the lang value is equal to the def lang do nothing
 	//else save value but if the field is not empty, delete lang value
+	var m = el.value.match(/^(\d+\.\s+)((?:.|\n|\s)*)/);
+	if(m!=null) {
+    el.field_pre_lang = m[1];
+    el.value = m[2];
+  }
 	if(el.field_lang[multilang_def_lang]!=el.value) { 
 		if(!el.value) {
 			delete el.field_lang[lang];
@@ -176,7 +207,7 @@ function forms_multi_submit(params) {
 		forms_save_lang(this,form.form_lang || multilang_def_lang);
 		//build the string value
 		var def_value = this.field_lang[multilang_def_lang];
-		if(!this.multi) this.value = def_value;
+		if(!this.multi) this.value = this.field_pre_lang+(def_value==undefined?"":def_value);
 		else {
 			var value="",count=0;
 			$.each(this.field_lang,function(name){
@@ -187,7 +218,7 @@ function forms_multi_submit(params) {
 					count++;
 				}
 			});
-			this.value = count!=1?"<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,'');
+			this.value = this.field_pre_lang+(count!=1?"<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,''));
 		} 
 	});
 	//save back the params
