@@ -549,6 +549,7 @@ function PtoBR($texte){
 // Couper les "mots" de plus de $l caracteres (souvent des URLs)
 // http://doc.spip.org/@lignes_longues
 function lignes_longues($texte, $l = 70) {
+	if ($l<1) return $texte;
 	// Passer en utf-8 pour ne pas avoir de coupes trop courtes avec les &#xxxx;
 	// qui prennent 7 caracteres
 	#include_spip('inc/charsets');
@@ -557,10 +558,10 @@ function lignes_longues($texte, $l = 70) {
 
 	// echapper les tags (on ne veut pas casser les a href=...)
 	$tags = array();
-	if (preg_match_all('/<.*>/UumsS', $texte, $t, PREG_SET_ORDER)) {
+	if (preg_match_all('/<.+>/UumsS', $texte, $t, PREG_SET_ORDER)) {
 		foreach ($t as $n => $tag) {
 			$tags[$n] = $tag[0];
-			$texte = str_replace($tag[0], " @@SPIPTAG$n@@ ", $texte);
+			$texte = str_replace($tag[0], " <---$n---> ", $texte);
 		}
 	}
 	// casser les mots longs qui restent
@@ -572,8 +573,11 @@ function lignes_longues($texte, $l = 70) {
 	}
 
 	// retablir les tags
-	foreach ($tags as $n=>$tag) {
-		$texte = str_replace(" @@SPIPTAG$n@@ ", $tag, $texte);
+	if (preg_match_all('/<---[\s0-9]+--->/UumsS', $texte, $t, PREG_SET_ORDER)) {
+		foreach ($t as $tag) {
+			$n = intval(preg_replace(',[^0-9]+,U','',$tag[0]));
+			$texte = str_replace($tag[0], $tags[$n], $texte);
+		}
 	}
 
 	return importer_charset($texte, 'utf-8');
