@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Strollad pouezus&nbsp;:</b> kuzuliet start eo dibab ur ger-stur e diabarzh ar strollad-ma&ntilde;.',
 'avis_deplacement_rubrique' => 'Diwallit&nbsp;! Er rubrikenn-ma&ntilde; ez eus @contient_breves@ berrskrid@scb@&nbsp;: askit al logell ama&ntilde; dindan ma tibabit dilec\'hia&ntilde; anezhi.',
 'avis_destinataire_obligatoire' => 'Un degemerour a rankit diskl&ecirc;ria&ntilde; a-benn gellout kas ar gemennadenn-ma&ntilde;.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Fazi kevrea&ntilde; SQL',
 'avis_erreur_version_archive' => '<b>Diwallit! Klota&ntilde; a ra ar restr @archive@
 gant ur stumm all eus SPIP dishe&ntilde;vel eus an hini staliet ganeoc\'h.</b>
@@ -143,6 +144,7 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 // E
 'email' => 'postel',
 'email_2' => 'postel :',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Chomlec\'h ar rollad tud',
 'entree_adresse_email' => 'Ho postel',
 'entree_adresse_fichier_syndication' => 'Chomlec\'h ar restr evit ar sindikadur&nbsp;:',
@@ -179,6 +181,7 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 'entree_texte_breve' => 'Testenn ar berrskrid',
 'entree_titre_obligatoire' => '<b>Titl</b> [Rekis]<br />',
 'entree_url' => 'Chomlec\'h (URL) ho lec\'hienn',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Restr ezvezant',
 'erreur_plugin_fichier_def_absent' => 'Restr termeni&ntilde; ezvezant',
 'erreur_plugin_nom_fonction_interdit' => 'Berzet eo anv ar fonksion',
@@ -251,6 +254,8 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 'info_activer_forum_public' => '<i>Evit enaoui&ntilde; ar foromo&ugrave; foran, dibabit un doare da habaskaat dre ziouer:</i>',
 'info_admin_gere_rubriques' => 'Ar rubrikenno&ugrave; da-heul a vez meret gant ar merour-ma&ntilde; :',
 'info_admin_gere_toutes_rubriques' => 'An <b>holl rubrikenno&ugrave;</b> zo meret gant ar merour-ma&ntilde;.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Merour',
 'info_administrateur_1' => 'Merour',
 'info_administrateur_2' => 'al lec\'hienn (<i>diwallit en ur implijout se</i>)',
@@ -637,6 +642,7 @@ Risklo&ugrave; zo e vefe distrujet ho tiaz titouro&ugrave; pe ne\'z afe ket en-d
 'info_total' => 'hollad :',
 'info_tous_articles_en_redaction' => 'An holl bennado&ugrave; emeur o skridaoza&ntilde;',
 'info_tous_articles_presents' => 'An holl pennado&ugrave; bet embannet er rubrikenn-ma&ntilde;',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'an holl :',
 'info_tous_redacteurs' => 'Kemenn d\'an holl skridaozerien',
 'info_tout_site' => 'Al lec\'hienn a-bezh',
@@ -677,7 +683,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'install_select_langue' => 'Diuzit ur yezh, ha klikit war &laquo;&nbsp;War-lerc\'h&nbsp;&raquo; evit kregi&ntilde; gant ar stalia&ntilde;.',
 'install_select_type_db' => 'Merkit ar seurt diaz titouro&ugrave;&nbsp;:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL', # NEW
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Servijer diaz titouro&ugrave; lakaet gant an herberc\'hier',
@@ -829,6 +835,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'page_pas_proxy' => 'Arabat d\'ar bajenn-ma&ntilde; tremen dre ar proksi',
 'pas_de_proxy_pour' => 'Ma vez ezhomm merkit ar mekaniko&ugrave; pe domanio&ugrave; na zle ket ar proksi-ma&ntilde; mont en-dro evito (da skouer&nbsp;: @exemple@)',
 'plugin_charge_paquet' => 'Karga&ntilde; ar pakad @name@',
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
 'plugin_erreur_charger' => 'fazi&nbsp;: dibosupl eo karga&ntilde; @zip@',
 'plugin_erreur_droit1' => 'N\'haller ket skriva&ntilde; war ar c\'havlec\'h <code>@dest@</code>.',
 'plugin_erreur_droit2' => 'Gwiriit an aotreo&ugrave; war ar c\'havlec\'h-ma&ntilde; (ha kempennit anezho diouzh ret), pe stailhit ar restro&ugrave; dre FTP.',
@@ -839,6 +846,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'plugin_etat_test' => 'o veza&ntilde; amprouet',
 'plugin_impossible_activer' => 'Dibosupl eo gweredekaat an adveziant @plugin@',
 'plugin_info_automatique1' => 'Mar fell deoc\'h aotren staliadur emgefre an advezianto&ugrave;, setu penaos&nbsp;:',
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
 'plugin_info_automatique2' => 'krouit ur c\'havlec\'h <code>@rep@</code>&nbsp;;',
 'plugin_info_automatique3' => 'Gwiriit eo aotreet-mat ar servijer da skriva&ntilde; er c\'havlec\'h-se.',
 'plugin_info_automatique_creer' => 'da groui&ntilde; e gwrizienn al lec\'hienn.',
@@ -850,6 +858,8 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'plugin_info_automatique_liste_update' => 'Hizivaat ar rollo&ugrave;',
 'plugin_info_automatique_ou' => 'pe...',
 'plugin_info_automatique_select' => 'Diuzit un adveziant ama&ntilde; a-is&nbsp;: pellgarget e vo gant SPIP ha staliet er c\'havlec\'h <code>@rep@</code>&nbsp;; ma\'z eus eus an adveziant-ma&ntilde; c\'hoazh e vo hizivaet.',
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
 'plugin_info_telecharger' => 'da bellgarga&ntilde; adal @url@ ha da stalia&ntilde; e @rep@',
 'plugin_librairies_installees' => 'Levraouego&ugrave; bet staliet',
 'plugin_necessite_lib' => 'Ezhomm en deus an adveziant-ma&ntilde; eus al levraoueg @lib@',
@@ -858,6 +868,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'plugin_source' => 'orin:&nbsp;',
 'plugin_titre_automatique' => 'Staliadur emgefre',
 'plugin_titre_automatique_ajouter' => 'Ouzhpenna&ntilde; advezianto&ugrave;',
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
 'plugin_zip_active' => 'Kendalc\'hit evit e weredekaat',
 'plugin_zip_adresse' => 'merkit ama&ntilde; a-is chomlec\'h restr zip un adveziant da bellgarga&ntilde;, pe hini ul rollad advezianto&ugrave;.',
 'plugin_zip_adresse_champ' => 'Chomlec\'h an adveziant pe hini ar roll&nbsp;',
@@ -866,11 +877,17 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'plugin_zip_installe_rep_finie' => 'Diwasket eo bet ar restr @zip@ ha staliet er c\'havlec\'h @rep@',
 'plugin_zip_installer' => 'Brema&ntilde; e c\'hellit stalia&ntilde; anezha&ntilde;.',
 'plugin_zip_telecharge' => 'Pellgarget eo bet ar restr @zip@',
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
 'plugins_actifs' => '@count@ adveziant gweredekaet.',
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
 'plugins_compte' => '@count@ adveziant',
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ adveziant hegerz.',
 'plugins_erreur' => 'Fazi en advezianto&ugrave; : @plugins@',
 'plugins_liste' => 'Roll an advezianto&ugrave;',
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
 'plugins_vue_hierarchie' => 'Urzhaz',
 'plugins_vue_liste' => 'Roll',
 'protocole_ldap' => 'Stumm ar protokol :',

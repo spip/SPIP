@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Grupo importante:</b>&eacute; moi aconsellable seleccionar unha palabra chave neste grupo.',
 'avis_deplacement_rubrique' => 'Atenci&oacute;n! Este tema cont&eacute;n @contient_breves@ breve@scb@: se a(s) quere desprazar, conf&iacute;rmeo aqu&iacute;.',
 'avis_destinataire_obligatoire' => 'Tes que indicar o destino antes de enviar esta mensaxe.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Erro de conexi&oacute;n SQL',
 'avis_erreur_version_archive' => '<b>Atenci&oacute;n! O ficheiro @arquivo@ corresponde a
   outra versi&oacute;n de SPIP que non &eacute; a que ten instalada.</b>
@@ -149,6 +150,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 'email' => 'correo electr&oacute;nico',
 'email_2' => 'correo electr&oacute;nico:',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Enderezo da gu&iacute;a',
 'entree_adresse_email' => 'O seu enderezo de correo-e',
 'entree_adresse_fichier_syndication' => 'Enderezo do ficheiro de afiliaci&oacute;n&nbsp;:',
@@ -185,6 +187,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Texto da breve',
 'entree_titre_obligatoire' => '<b>T&amp;iacute;tulo</b> [Obrigado]<br />',
 'entree_url' => 'O enderezo (URL) do teu web',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Ficheiro ausente',
 'erreur_plugin_fichier_def_absent' => 'Ficheiro de definici&oacute;n ausente',
 'erreur_plugin_nom_fonction_interdit' => 'Nome de funci&oacute;n prohibido',
@@ -258,6 +261,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   de moderaci&amp;oacute;n predeterminado:</i>',
 'info_admin_gere_rubriques' => 'Esta persoa xestiona os seguintes temas:',
 'info_admin_gere_toutes_rubriques' => 'Esta persoa xestiona <b>todos os temas</b>.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Xesti&oacute;n',
 'info_administrateur_1' => 'Xesti&oacute;n',
 'info_administrateur_2' => 'do web (<i>&uacute;sese con sentidi&ntilde;o</i>)',
@@ -540,14 +545,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_activer_compactage_js' => 'Quere activar a compactaci&oacute;n de scripts (javascript) ?',
 'info_question_activer_compresseur' => 'Quere activar a compactaci&oacute;n do fluxo  HTTP ?',
 'info_question_gerer_statistiques' => 'O seu web ten que xerar as estat&iacute;sticas das visitas?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Aceptar&aacute; as inscrici&oacute;ns de novos redactores
+'info_question_inscription_nouveaux_redacteurs' => 'Aceptar&aacute; as inscrici&oacute;ns de novos redactores
   dende o web p&uacute;blico? De aceptalos, os visitantes poderanse rexistrar cun
   formulario automatizado e acceder&aacute;n ao espazo privado para
   propor os seus propios artigos.<blockquote> <i>Trala fase de inscrici&oacute;n,
   han recibir un correo electr&oacute;nico autom&aacute;tico
   cos seus c&oacute;digos de acceso ao web privado. Alg&uacute;ns
   provedores desactivan o env&iacute;o autom&aacute;tico desde os seus servidores:
-  nese caso, a inscrici&oacute;n autom&aacute;tica &eacute; imposible.',
+  nese caso, a inscrici&oacute;n autom&aacute;tica &eacute; imposible.', # MODIF
 'info_question_mots_cles' => 'Quere empregar as palabras chave neste seu web?',
 'info_question_proposer_site' => 'Quen pode propor os webs referidos?',
 'info_question_utilisation_moteur_recherche' => 'Quere empregar o motor de procura integrado en SPIP?
@@ -656,6 +661,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_total' => 'total:',
 'info_tous_articles_en_redaction' => 'Todo os artigos en proceso de redacci&oacute;n',
 'info_tous_articles_presents' => 'Todos os artigos publicados neste tema',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'todos os:',
 'info_tous_redacteurs' => 'Anuncios a toda a redacci&oacute;n',
 'info_tout_site' => 'Todo o web',
@@ -696,7 +702,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'install_select_langue' => 'Selecciona un idioma e preme o bot&oacute;n &laquo;seguinte&raquo; para comezar co proceso de instalaci&oacute;n.',
 'install_select_type_db' => 'Indique o tipo de base de datos&nbsp;:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL', # NEW
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Servidor da base de datos atribu&iacute;da polo aloxador',
@@ -848,6 +854,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'page_pas_proxy' => 'Esta p&aacute;xina non debe pasar por un proxy',
 'pas_de_proxy_pour' => 'Segundo a s&uacute;a necesidade, indique as m&aacute;quinas ou dominios para os cales este proxy non debe ser aplicado (por exemplo&nbsp;: @exemple@)',
 'plugin_charge_paquet' => 'Carga do paquete @name@',
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
 'plugin_erreur_charger' => 'erro&nbsp;: resulta imposible cargar @zip@',
 'plugin_erreur_droit1' => 'O cartafol <code>@dest@</code> non &eacute; accesible para escritura.',
 'plugin_erreur_droit2' => 'Verifique os dereitos deste cartafol (e crealos (no caso de ser necesario), ou instalar o ficheiros por FTP.',
@@ -858,6 +865,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'plugin_etat_test' => 'en test',
 'plugin_impossible_activer' => 'Resulta imposible activar o plugin @plugin@',
 'plugin_info_automatique1' => 'Se quere autorizar a instalaci&oacute;n autom&aacute;tica de m&oacute;dulos (plugins)&nbsp;:',
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
 'plugin_info_automatique2' => 'Crear un cartafol <code>@rep@</code>&nbsp;;',
 'plugin_info_automatique3' => 'verificar que o servidor ten permisos para escribir neste cartafol.',
 'plugin_info_automatique_creer' => 'crear na ra&iacute;z do web.',
@@ -869,6 +877,8 @@ cunha cor que indica o seu estado&nbsp;:',
 'plugin_info_automatique_liste_update' => 'Actualizar as listaxes',
 'plugin_info_automatique_ou' => 'ou...',
 'plugin_info_automatique_select' => 'Seleccione a seguir un m&oacute;dulo&nbsp;: SPIP  descargarao e instalarao no cartafol <code>@rep@</code>&nbsp;; si o m&oacute;dulo xa existe ser&aacute; actualizado.',
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
 'plugin_info_telecharger' => 'descargar desde @url@ e instalalo no cartafol @rep@',
 'plugin_librairies_installees' => 'Librar&iacute;as instaladas',
 'plugin_necessite_lib' => 'Este m&oacute;dulo necesita a librar&iacute;a @lib@',
@@ -877,6 +887,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'plugin_source' => 'fonte:&nbsp;',
 'plugin_titre_automatique' => 'Instalaci&oacute;n autom&aacute;tica',
 'plugin_titre_automatique_ajouter' => 'Engadir m&oacute;dulos',
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
 'plugin_zip_active' => 'Contin&uacute;e para activalo',
 'plugin_zip_adresse' => 'indique seguidamente o enderezo dun ficheiro zip de m&oacute;dulo para descargar, ou mesmo o enderezo dunha lista de m&oacute;dulos (plugins).',
 'plugin_zip_adresse_champ' => 'Enderezo do m&oacute;dulo ou da listaxe&nbsp;',
@@ -885,11 +896,17 @@ cunha cor que indica o seu estado&nbsp;:',
 'plugin_zip_installe_rep_finie' => 'O ficheiro @zip@ foi descomprimido e instalado no cartafol @rep@',
 'plugin_zip_installer' => 'Agora p&oacute;deo instalar.',
 'plugin_zip_telecharge' => 'O ficheiro @zip@ foi descargado',
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
 'plugins_actifs' => '@count@ m&oacute;dulos activados.',
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
 'plugins_compte' => '@count@ m&oacute;dulos',
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ m&oacute;dulos dispo&ntilde;ibles.',
 'plugins_erreur' => 'Erro nos m&oacute;dulos : @plugins@',
 'plugins_liste' => 'Lista de m&oacute;dulos',
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
 'plugins_vue_hierarchie' => 'Xerarqu&iacute;a',
 'plugins_vue_liste' => 'Listaxe',
 'protocole_ldap' => 'Versi&amp;oacute;n do protocolo :',
