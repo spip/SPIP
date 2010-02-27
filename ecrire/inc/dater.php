@@ -56,8 +56,8 @@ function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac=
 		. aide('artdate');
 
 		$masque = 
-		  afficher_jour($jour, "name='jour' id='jour' $js", true) 
-		. afficher_mois($mois, "name='mois' id='mois' $js", true)
+		  afficher_jour($jour, "name='jour' id='jour' $js", false) 
+		. afficher_mois($mois, "name='mois' id='mois' $js", false)
 		. afficher_annee($annee, "name='annee' id='annee' $js", $debut_date_publication)
 		. (($type != 'article')
 		   ? ''
