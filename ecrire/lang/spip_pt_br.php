@@ -188,7 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'primavera',
 'date_saison_3' => 'ver&atilde;o',
 'date_saison_4' => 'outono',
+'date_secondes' => 'secondes', # NEW
 'date_semaines' => 'semanas',
+'date_un_mois' => 'mois', # NEW
+'date_une_heure' => 'heure', # NEW
+'date_une_minute' => 'minute', # NEW
+'date_une_seconde' => 'seconde', # NEW
+'date_une_semaine' => 'semaine', # NEW
 'dirs_commencer' => 'Para come&ccedil;ar realmente a instala&ccedil;&atilde;o',
 'dirs_preliminaire' => 'Preliminar: <b>Configurar os direitos de acesso</b>',
 'dirs_probleme_droits' => 'Problema com as permiss&otilde;es de acesso',
@@ -199,7 +205,7 @@ Verifique se as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios 
 'dirs_repertoires_suivants' => '<p><b>Os diret&oacute;rios a seguir n&atilde;o est&atilde;o acessiveis para leitura:</b></p><ul>@bad_dirs@.</ul>
 <p>Para corrigir, utilize o seu programa de FTP para configurar os direitos de acesso de cada um destes diret&oacute;rios. O procedimento est&aacute; explicado em detalhes no guia de instala&ccedil;&atilde;o.</p>
 <p>Uma v&ecirc;z feita esta altera&ccedil;&atilde;o, voc&ecirc; poder&aacute; ',
-'double_occurrence' => '<MODIF>Duplica&ccedil;&atilde;o',
+'double_occurrence' => 'Duplica&ccedil;&atilde;o', # MODIF
 
 // E
 'en_cours' => 'em curso',
@@ -214,6 +220,18 @@ Verifique se as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios 
 
 // F
 'fichier_introuvable' => 'Arquivo @fichier@ n&atilde;o encontrado',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Voc&ecirc; j&aacute; est&aacute; inscrito.',
 'form_email_non_valide' => 'Seu endere&ccedil;o de e-mail n&atilde;o &eacute; v&aacute;lido.',
 'form_forum_access_refuse' => 'Voc&ecirc; n&atilde;o tem mais acesso a este site.',
@@ -386,12 +404,16 @@ Obrigado por participar
 'info_article_supprime' => 'Mat&eacute;ria suprimida',
 'info_articles' => 'Mat&eacute;rias',
 'info_articles_a_valider' => 'As mat&eacute;rias para validar',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Mat&eacute;rias propostas',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'autor(es):',
 'info_authentification_ftp' => 'Autentica&ccedil;&atilde;o (por FTP).',
 'info_bloquer_lien' => 'bloquear este link',
 'info_breves_02' => 'Notas',
 'info_breves_2' => 'notas',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Notas para validar',
 'info_connexion_refusee' => 'Conex&atilde;o recusada',
 'info_contact_developpeur' => 'Por favor, contate um desenvolvedor.',
@@ -412,6 +434,8 @@ Obrigado por participar
 'info_document' => 'Documento',
 'info_document_indisponible' => 'Este documento n&atilde;o est&aacute; dispon&iacute;vel',
 'info_documents' => 'Documentos',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'O SPIP permite a troca de mensagens e a forma&ccedil;&atilde;o de f&oacute;runs de discuss&atilde;o privados entre os participantes do site. Voc&ecirc; pode ativar ou desativar esta funcionalidade.',
 'info_ecire_message_prive' => 'Escrever uma mensagem privada',
 'info_email_invalide' => 'Endere&ccedil;o de e-mail inv&aacute;lido.',
@@ -456,6 +480,8 @@ Obrigado por participar
 'info_mail_fournisseur' => 'voce@seudominio.com.br',
 'info_message_2' => 'MENSAGEM',
 'info_message_supprime' => 'MENSAGEM EXCLU&Iacute;DA',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Data de publica&ccedil;&atilde;o online:',
 'info_modification_parametres_securite' => 'modifica&ccedil;&otilde;es dos par&acirc;metros de seguran&ccedil;a',
 'info_mois_courant' => 'No m&ecirc;s corrente:',
@@ -500,6 +526,8 @@ Obrigado por participar
 'info_retablir_lien' => 'reabilitar este link',
 'info_retirer_mot' => 'Retirar esta palavra-chave',
 'info_retirer_mots' => 'Retirar todas as palavras-chave',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'sem t&iacute;tulo',
 'info_selectionner_fichier' => 'Voc&ecirc; pode escolher um arquivo do diret&oacute;rio @upload@',
 'info_selectionner_fichier_2' => 'Selecionar um arquivo:',
@@ -508,7 +536,9 @@ Obrigado por participar
 'info_site_attente' => 'Website aguardando valida&ccedil;&atilde;o',
 'info_site_reference' => 'Site referenciado online',
 'info_site_refuse' => 'Website recusado',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Referenciar um site',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'excluir o &iacute;cone',
 'info_symbole_bleu' => 'O &iacute;cone <b>azul</b> indica um <b>lembrete</b>: ou seja, uma mensagem para seu uso pessoal.',
 'info_symbole_jaune' => 'O &iacute;cone <b>amarelo</b> indica um  <b>an&uacute;ncio para todos os redatores</b>: modific&aacute;vel por todos os administradores, e vis&iacute;vel por todos os redatores.',
@@ -718,34 +748,34 @@ Tente se',
 
 // Z
 'zbug_balise_b_aval' => ': tag B colocada ap&oacute;s BOUCLE',
-'zbug_balise_inexistante' => '<MODIF>erro @from@: a tag #@balise@ n&atilde;o existe',
+'zbug_balise_inexistante' => 'erro @from@: a tag #@balise@ n&atilde;o existe', # MODIF
 'zbug_balise_sans_argument' => 'Falta um arqumento na tag @balise@',
 'zbug_boucle' => 'la&ccedil;o',
-'zbug_boucle_recursive_undef' => '<MODIF>la&ccedil;o recursivo n&atilde;o definido',
+'zbug_boucle_recursive_undef' => 'la&ccedil;o recursivo n&atilde;o definido', # MODIF
 'zbug_calcul' => 'c&aacute;lculo',
 'zbug_champ_hors_boucle' => 'Campo @champ@ fora do la&ccedil;o',
-'zbug_champ_hors_motif' => '<MODIF>Campo @champ@ fora de um la&ccedil;o de motivo @motif@',
+'zbug_champ_hors_motif' => 'Campo @champ@ fora de um la&ccedil;o de motivo @motif@', # MODIF
 'zbug_code' => 'c&oacute;digo',
-'zbug_critere_inconnu' => '<MODIF>crit&eacute;rio @critere@ desconhecido',
-'zbug_distant_interdit' => '<MODIF>externa interditada',
-'zbug_doublon_table_sans_cle_primaire' => '<MODIF>duplica&ccedil;&atilde;o em tabela sem chave prim&aacute;ria at&ocirc;mica',
-'zbug_doublon_table_sans_index' => '<MODIF>doublons em uma tabela sem index',
-'zbug_erreur_boucle_double' => '<MODIF>BOUCLE@id@: dupla defini&ccedil;&atilde;o',
-'zbug_erreur_boucle_fermant' => '<MODIF>BOUCLE@id@: falta a tag de fechamento',
-'zbug_erreur_boucle_syntaxe' => '<MODIF>Sintaxe do la&ccedil;o est&aacute; incorreta',
+'zbug_critere_inconnu' => 'crit&eacute;rio @critere@ desconhecido', # MODIF
+'zbug_distant_interdit' => 'externa interditada', # MODIF
+'zbug_doublon_table_sans_cle_primaire' => 'duplica&ccedil;&atilde;o em tabela sem chave prim&aacute;ria at&ocirc;mica', # MODIF
+'zbug_doublon_table_sans_index' => 'doublons em uma tabela sem index', # MODIF
+'zbug_erreur_boucle_double' => 'BOUCLE@id@: dupla defini&ccedil;&atilde;o', # MODIF
+'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: falta a tag de fechamento', # MODIF
+'zbug_erreur_boucle_syntaxe' => 'Sintaxe do la&ccedil;o est&aacute; incorreta', # MODIF
 'zbug_erreur_compilation' => 'Erro de compila&ccedil;&atilde;o',
-'zbug_erreur_execution_page' => '<MODIF>erro de execu&ccedil;&atilde;o da p&aacute;gina',
-'zbug_erreur_filtre' => '<MODIF>Erro: filtro <b>&laquo; @filtre@ &raquo;</b> n&atilde;o definido',
-'zbug_erreur_meme_parent' => '<MODIF>{meme_parent} aplica-se exclusivamente aos la&ccedil;os (FORUMS) ou (RUBRIQUES)',
+'zbug_erreur_execution_page' => 'erro de execu&ccedil;&atilde;o da p&aacute;gina', # MODIF
+'zbug_erreur_filtre' => 'Erro: filtro <b>&laquo; @filtre@ &raquo;</b> n&atilde;o definido', # MODIF
+'zbug_erreur_meme_parent' => '{meme_parent} aplica-se exclusivamente aos la&ccedil;os (FORUMS) ou (RUBRIQUES)', # MODIF
 'zbug_erreur_squelette' => 'Erro(s) no gabarito',
 'zbug_hors_compilation' => 'Fora de Compila&ccedil;&atilde;o',
 'zbug_info_erreur_squelette' => 'Erro no site',
-'zbug_inversion_ordre_inexistant' => '<MODIF>invers&atilde;o de uma ordem inexistente',
-'zbug_pagination_sans_critere' => '<MODIF>#PAGINATION sem crit&eacute;rio {pagination} ou usada dentro de uma boucle recursiva',
-'zbug_parametres_inclus_incorrects' => '<MODIF>Par&acirc;metros de inclus&atilde;o incorretos',
+'zbug_inversion_ordre_inexistant' => 'invers&atilde;o de uma ordem inexistente', # MODIF
+'zbug_pagination_sans_critere' => '#PAGINATION sem crit&eacute;rio {pagination} ou usada dentro de uma boucle recursiva', # MODIF
+'zbug_parametres_inclus_incorrects' => 'Par&acirc;metros de inclus&atilde;o incorretos', # MODIF
 'zbug_profile' => 'Tempo de processamento: @time@',
 'zbug_resultat' => 'resultado',
-'zbug_serveur_indefini' => '<MODIF>sevidor SQL n&atilde;o definido',
+'zbug_serveur_indefini' => 'sevidor SQL n&atilde;o definido', # MODIF
 'zbug_statistiques' => 'Estat&iacute;sticas das requisi&ccedil;&otilde;es SQL classificadas por dura&ccedil;&atilde;o',
 'zbug_table_inconnue' => 'Tabela SQL &laquo;@table@&raquo; desconhecida',
 'zxml_connus_attributs' => 'atributos conhecidos',

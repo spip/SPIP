@@ -222,6 +222,18 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 
 // F
 'fichier_introuvable' => 'File @fichier@ non trovato',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Sei gi&agrave; iscritto.',
 'form_email_non_valide' => 'L\'indirizzo email non &egrave; valido.',
 'form_forum_access_refuse' => 'Non hai pi&ugrave; accesso a questo sito.',
@@ -396,12 +408,16 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'info_article_supprime' => 'Articolo eliminato',
 'info_articles' => 'Articoli',
 'info_articles_a_valider' => 'Articoli da convalidare',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Articoli proposti',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'autore(i):',
 'info_authentification_ftp' => 'Autenticazione (via FTP).',
 'info_bloquer_lien' => 'bloccare questo link',
 'info_breves_02' => 'Brevi',
 'info_breves_2' => 'brevi',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Brevi da convalidare',
 'info_connexion_refusee' => 'Connessione rifiutata',
 'info_contact_developpeur' => 'Contatta un programmatore.',
@@ -422,6 +438,8 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'info_document' => 'Documento',
 'info_document_indisponible' => 'Questo documento non &egrave; disponibile',
 'info_documents' => 'Documenti',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP permette lo scambio di messaggi e la costituzione di forum di discussione
 privati tra i membri del sito. Puoi attivare o disattivare questa funzionalit&agrave;.',
 'info_ecire_message_prive' => 'Scrivi un messaggio privato',
@@ -467,6 +485,8 @@ o contatta il tuo hoster.</font>',
 'info_mail_fournisseur' => 'tuo@provider.com',
 'info_message_2' => 'MESSAGGIO',
 'info_message_supprime' => 'MESSAGGIO ELIMINATO',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Data di pubblicazione on line:',
 'info_modification_parametres_securite' => 'modifiche dei parametri di sicurezza',
 'info_mois_courant' => 'Durante il mese:',
@@ -513,6 +533,8 @@ o contatta il tuo hoster.</font>',
 'info_retablir_lien' => 'ripristinare questo link',
 'info_retirer_mot' => 'Rimuovere questa parola',
 'info_retirer_mots' => 'Rimuovere tutte le parole',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'senza titolo',
 'info_selectionner_fichier' => 'Puoi selezionare un file della cartella @upload@',
 'info_selectionner_fichier_2' => 'Seleziona un file:',
@@ -521,7 +543,9 @@ o contatta il tuo hoster.</font>',
 'info_site_attente' => 'Sito Web in attesa di convalida',
 'info_site_reference' => 'Sito repertoriato in linea',
 'info_site_refuse' => 'Sito Web rifiutato',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Inserisci un sito in repertorio',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'Cancella l\'immagine',
 'info_symbole_bleu' => 'Il simbolo <b>blu</b> indica un <b>memo</b>: cio&egrave; un messaggio ad uso personale.',
 'info_symbole_jaune' => 'Il simbolo <b>giallo</b> indica un <b>annuncio a tutti i redattori</b>: modificabile da tutti gli amministratori e visibile da tutti i redattori.',

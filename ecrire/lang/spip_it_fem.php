@@ -188,7 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'primavera',
 'date_saison_3' => 'estate',
 'date_saison_4' => 'autunno',
+'date_secondes' => 'secondes', # NEW
 'date_semaines' => 'settimane',
+'date_un_mois' => 'mois', # NEW
+'date_une_heure' => 'heure', # NEW
+'date_une_minute' => 'minute', # NEW
+'date_une_seconde' => 'seconde', # NEW
+'date_une_semaine' => 'semaine', # NEW
 'dirs_commencer' => ' per iniziare realmente l\'installazione',
 'dirs_preliminaire' => 'Prima di iniziare: <b>impostare i diritti di accesso</b>',
 'dirs_probleme_droits' => 'Problema nei diritti di accesso',
@@ -201,7 +207,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>Per risolvere il problema, utilizzare un client FTP per impostare i diritti di accesso
 di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida d\'installazione.</p>
 <p>Una volta attribuiti i permessi, si potr&agrave; ',
-'double_occurrence' => '<MODIF>Doppia occorrenza',
+'double_occurrence' => 'Doppia occorrenza', # MODIF
 
 // E
 'en_cours' => 'in corso',
@@ -216,6 +222,18 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 
 // F
 'fichier_introuvable' => 'File @fichier@ non trovato',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Sei gi&agrave; iscritta.',
 'form_email_non_valide' => 'L\'indirizzo email non &egrave; valido.',
 'form_forum_access_refuse' => 'Non hai pi&ugrave; accesso a questo sito.',
@@ -390,12 +408,16 @@ che ti &egrave; stato fornito.  Se non sei registrata, devi',
 'info_article_supprime' => 'Articolo eliminato',
 'info_articles' => 'Articoli',
 'info_articles_a_valider' => 'Articoli da convalidare',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Articoli proposti',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'autrice(i):',
 'info_authentification_ftp' => 'Autenticazione (via FTP).',
 'info_bloquer_lien' => 'bloccare questo link',
 'info_breves_02' => 'Brevi',
 'info_breves_2' => 'brevi',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Brevi da convalidare',
 'info_connexion_refusee' => 'Connessione rifiutata',
 'info_contact_developpeur' => 'Contatta un programmatore.',
@@ -416,6 +438,8 @@ che ti &egrave; stato fornito.  Se non sei registrata, devi',
 'info_document' => 'Documento',
 'info_document_indisponible' => 'Questo documento non &egrave; disponibile',
 'info_documents' => 'Documenti',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP permette lo scambio di messaggi e la costituzione di forum di discussione
 privati tra i membri del sito. Puoi attivare o disattivare questa funzionalit&agrave;.',
 'info_ecire_message_prive' => 'Scrivi un messaggio privato',
@@ -461,6 +485,8 @@ o contatta il tuo hoster.</font>',
 'info_mail_fournisseur' => 'tuo@provider.com',
 'info_message_2' => 'MESSAGGIO',
 'info_message_supprime' => 'MESSAGGIO ELIMINATO',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Data di pubblicazione on line:',
 'info_modification_parametres_securite' => 'modifiche dei parametri di sicurezza',
 'info_mois_courant' => 'Durante il mese:',
@@ -507,6 +533,8 @@ o contatta il tuo hoster.</font>',
 'info_retablir_lien' => 'ripristinare questo link',
 'info_retirer_mot' => 'Rimuovere questa parola',
 'info_retirer_mots' => 'Rimuovere tutte le parole',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'senza titolo',
 'info_selectionner_fichier' => 'Puoi selezionare un file della cartella @upload@',
 'info_selectionner_fichier_2' => 'Seleziona un file:',
@@ -515,7 +543,9 @@ o contatta il tuo hoster.</font>',
 'info_site_attente' => 'Sito Web in attesa di convalida',
 'info_site_reference' => 'Sito repertoriato in linea',
 'info_site_refuse' => 'Sito Web rifiutato',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Inserisci un sito in repertorio',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'Cancella l\'immagine',
 'info_symbole_bleu' => 'Il simbolo <b>blu</b> indica un <b>memo</b>: cio&egrave; un messaggio ad uso personale.',
 'info_symbole_jaune' => 'Il simbolo <b>giallo</b> indica un <b>annuncio a tutte le redattrici</b>: modificabile da tutte le amministratrici e visibile da tutte le redattrici.',
@@ -737,34 +767,34 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 
 // Z
 'zbug_balise_b_aval' => ': ciclo B deve precedere ciclo BOUCLE',
-'zbug_balise_inexistante' => '<MODIF>errore @from@: il tag #@balise@ non esiste ',
+'zbug_balise_inexistante' => 'errore @from@: il tag #@balise@ non esiste ', # MODIF
 'zbug_balise_sans_argument' => 'Argomento mancante nel tag @balise@',
 'zbug_boucle' => 'ciclo',
-'zbug_boucle_recursive_undef' => '<MODIF>ciclo ricorsivo non definito',
+'zbug_boucle_recursive_undef' => 'ciclo ricorsivo non definito', # MODIF
 'zbug_calcul' => 'calcolo',
 'zbug_champ_hors_boucle' => 'Campo @champ@ fuori dal ciclo',
-'zbug_champ_hors_motif' => '<MODIF>Campo @champ@ fuori da un ciclo di motivo @motif@',
+'zbug_champ_hors_motif' => 'Campo @champ@ fuori da un ciclo di motivo @motif@', # MODIF
 'zbug_code' => 'codice',
-'zbug_critere_inconnu' => '<MODIF>criterio sconosciuto @critere@',
-'zbug_distant_interdit' => '<MODIF>esterno non accessibile',
-'zbug_doublon_table_sans_cle_primaire' => '<MODIF>doppioni su una tabella senza chiave primaria atomica',
-'zbug_doublon_table_sans_index' => '<MODIF>doppioni su una tabella senza indice',
-'zbug_erreur_boucle_double' => '<MODIF>BOUCLE@id@: doppia definizione',
-'zbug_erreur_boucle_fermant' => '<MODIF>BOUCLE@id@: chiusura tag mancante',
-'zbug_erreur_boucle_syntaxe' => '<MODIF>Sintassi del ciclo errata',
+'zbug_critere_inconnu' => 'criterio sconosciuto @critere@', # MODIF
+'zbug_distant_interdit' => 'esterno non accessibile', # MODIF
+'zbug_doublon_table_sans_cle_primaire' => 'doppioni su una tabella senza chiave primaria atomica', # MODIF
+'zbug_doublon_table_sans_index' => 'doppioni su una tabella senza indice', # MODIF
+'zbug_erreur_boucle_double' => 'BOUCLE@id@: doppia definizione', # MODIF
+'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: chiusura tag mancante', # MODIF
+'zbug_erreur_boucle_syntaxe' => 'Sintassi del ciclo errata', # MODIF
 'zbug_erreur_compilation' => 'Errore di compilazione',
-'zbug_erreur_execution_page' => '<MODIF>errore di esecuzione della pagina',
-'zbug_erreur_filtre' => '<MODIF>Errore: filtro <b>&laquo; @filtre@ &raquo;</b> non esistente',
-'zbug_erreur_meme_parent' => '<MODIF>{meme_parent} si applica unicamente ai cicli (FORUMS) o (RUBRIQUES)',
+'zbug_erreur_execution_page' => 'errore di esecuzione della pagina', # MODIF
+'zbug_erreur_filtre' => 'Errore: filtro <b>&laquo; @filtre@ &raquo;</b> non esistente', # MODIF
+'zbug_erreur_meme_parent' => '{meme_parent} si applica unicamente ai cicli (FORUMS) o (RUBRIQUES)', # MODIF
 'zbug_erreur_squelette' => 'Errore/i nel modello di layout',
 'zbug_hors_compilation' => 'Fuori Compilazione',
 'zbug_info_erreur_squelette' => 'Errore sul sito',
-'zbug_inversion_ordre_inexistant' => '<MODIF>inversione di un ordine non esistente',
-'zbug_pagination_sans_critere' => '<MODIF>#PAGINATION senza criterio {pagination} oppure usato in un ciclo ricorsivo',
-'zbug_parametres_inclus_incorrects' => '<MODIF>Parametri di inclusione non corretti',
+'zbug_inversion_ordre_inexistant' => 'inversione di un ordine non esistente', # MODIF
+'zbug_pagination_sans_critere' => '#PAGINATION senza criterio {pagination} oppure usato in un ciclo ricorsivo', # MODIF
+'zbug_parametres_inclus_incorrects' => 'Parametri di inclusione non corretti', # MODIF
 'zbug_profile' => 'Tempo di elaborazione: @time@',
 'zbug_resultat' => 'risultato',
-'zbug_serveur_indefini' => '<MODIF>server SQL non definito',
+'zbug_serveur_indefini' => 'server SQL non definito', # MODIF
 'zbug_statistiques' => 'Statistiche delle query SQL in ordine di durata',
 'zbug_table_inconnue' => 'Tabella SQL &laquo; @table@ &raquo; sconosciuta',
 'zxml_connus_attributs' => 'attributi conosciuti',
