@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Acu&egrave;lh dau sit',
+'article' => 'Article', # NEW
 'articles' => 'Articles',
 'articles_auteur' => 'Articles d\'aquel autor',
 'articles_populaires' => 'Lu articles mai populars',
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Li a minga de sit &agrave;-n-aquela adre&ccedil;a ',
 'aucune_breve' => 'Li a minga de br&egrave;va &agrave;-n-aquela adre&ccedil;a ',
 'aucune_rubrique' => 'Li a minga de rubrica &agrave;-n-aquela adre&ccedil;a ',
+'auteur' => 'Auteur', # NEW
 'autres' => 'Autres',
 'autres_breves' => 'Autri br&egrave;vas',
 'autres_groupes_mots_clefs' => 'Autres grops de m&ograve;ts claus',
@@ -25,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Boanjorn',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Br&egrave;vas',
 
 // C
@@ -67,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Messatge',
 'messages_forum' => 'Messatges de f&ograve;ro',
 'messages_recents' => 'Lu messatges de f&ograve;ros mai recents',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'M&ograve;ts claus',
 'mots_clefs_meme_groupe' => 'M&ograve;ts claus dins lo meme grop',
 

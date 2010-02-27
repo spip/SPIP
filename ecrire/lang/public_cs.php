@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Hlavn&iacute; strana',
+'article' => 'Article', # NEW
 'articles' => '&#268;l&aacute;nky',
 'articles_auteur' => '&#268;l&aacute;nky tohoto autora',
 'articles_populaires' => 'Nej&#269;ten&#283;j&#353;&iacute; &#269;l&aacute;nky',
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Na t&eacute;to adrese nen&iacute; &#382;&aacute;dn&yacute; odkaz',
 'aucune_breve' => 'Na t&eacute;to adrese nen&iacute; &#382;&aacute;dn&aacute; novinka',
 'aucune_rubrique' => 'Na t&eacute;to adrese nen&iacute; &#382;&aacute;dn&aacute; rubrika',
+'auteur' => 'Auteur', # NEW
 'autres' => 'Ostatn&iacute;',
 'autres_breves' => 'Dal&#353;&iacute; novinky',
 'autres_groupes_mots_clefs' => 'Dal&#353;&iacute; skupiny kl&iacute;&#269;ov&yacute;ch slov',
@@ -25,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Dobr&yacute; den',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Novinky',
 
 // C
@@ -67,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Zpr&aacute;va',
 'messages_forum' => 'Zpr&aacute;vy v diskusn&iacute;m f&oacute;ru',
 'messages_recents' => 'Posledn&iacute; zpr&aacute;vy v diskusn&iacute;ch f&oacute;rech',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Kl&iacute;&#269;ov&aacute; slova',
 'mots_clefs_meme_groupe' => 'Kl&iacute;&#269;ov&aacute; slova ve stejn&eacute; skupin&#283;',
 

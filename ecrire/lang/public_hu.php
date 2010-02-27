@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'F&#337;oldal',
+'article' => 'Article', # NEW
 'articles' => 'Cikkek',
 'articles_auteur' => 'E szerz&#337; cikkei',
 'articles_populaires' => 'Legn&eacute;pszer&#369;bb cikkek',
@@ -18,16 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Nincs honlap ezen a c&iacute;men',
 'aucune_breve' => 'Nincs h&iacute;r ezen a c&iacute;men',
 'aucune_rubrique' => 'Nincs rovat ezen a c&iacute;men',
+'auteur' => 'Auteur', # NEW
+'autres' => 'Autres', # NEW
 'autres_breves' => 'Egy&eacute;b h&iacute;rek',
 'autres_groupes_mots_clefs' => 'Egy&eacute;b kulcssz&oacute; csoportok',
 'autres_sites' => 'Egy&eacute;b honlapok',
 
 // B
 'bonjour' => 'J&oacute; napot',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'H&iacute;rek',
 
 // C
 'commenter_site' => 'Hozz&aacute;sz&oacute;l&aacute;s a honlapr&oacute;l',
+'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
 'date' => 'D&aacute;tum',
@@ -36,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Utols&oacute; cikkek',
 'derniers_commentaires' => 'Utols&oacute; hozz&aacute;sz&oacute;l&aacute;sok',
 'derniers_messages_forum' => 'A f&oacute;rumokba k&uuml;ld&ouml;tt legutols&oacute; &uuml;zenetek',
+'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Sz&ouml;veges m&oacute;dban szerkeszt&eacute;s',
@@ -45,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Priv&aacute;t r&eacute;sz',
 
 // F
+'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
 'forum' => 'F&oacute;rum',
 
 // H
@@ -53,6 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // J
 'jours' => 'napok',
 
+// L
+'lien_connecter' => 'Se connecter', # NEW
+
 // M
 'meme_auteur' => 'Ugyanett&#337;l a szerz&#337;t&#337;l',
 'meme_rubrique' => 'Ugyanabban a rovatban',
@@ -60,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => '&Uuml;zenet',
 'messages_forum' => 'F&oacute;rum &uuml;zenetei',
 'messages_recents' => 'A f&oacute;rumok legfr&iacute;ssebb &uuml;zenetei',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Kulcsszavak',
 'mots_clefs_meme_groupe' => 'Kulcsszavak ugyanabban a csoportban',
 
@@ -95,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'A honlap SPIP seg&iacute;ts&eacute;g&eacute;vel k&eacute;sz&uuml;lt',
 'sites_web' => 'Honlapok',
 'sous_rubriques' => 'Als&oacute;bb rovatok',
+'spam' => 'Spam', # NEW
 'suite' => 'folytat&aacute;s',
 'sur_web' => 'Valahol a Weben',
 'syndiquer_rubrique' => 'A rovat szindik&aacute;l&aacute;sa',
@@ -107,7 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // V
 'ver_imprimer' => 'Nyomtathat&oacute; v&aacute;ltozat',
 'voir_en_ligne' => 'L&aacute;tni &eacute;l&#337;ben',
-'voir_squelette' => '<NEW>t&eacute;l&eacute;charger le squelette de cette page'
+'voir_squelette' => 't&eacute;l&eacute;charger le squelette de cette page', # NE
 );
 
 ?>
