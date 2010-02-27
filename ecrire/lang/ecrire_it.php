@@ -189,7 +189,7 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'entree_texte_breve' => 'Testo della breve',
 'entree_titre_obligatoire' => '<b>Titolo</b> [Obbligatorio]<br />',
 'entree_url' => 'Indirizzo (URL) del sito',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'File non presente',
 'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
 'erreur_plugin_nom_fonction_interdit' => 'Nome di funzione non possibile',

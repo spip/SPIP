@@ -185,7 +185,7 @@ forvi&#349;i ilin poste).',
 'entree_texte_breve' => 'Teksto de la fulm-informo',
 'entree_titre_obligatoire' => '<b>Titolo</b> [Deviga]<br />',
 'entree_url' => 'Retadreso de via retejo',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Foresta dosiero',
 'erreur_plugin_fichier_def_absent' => 'Difina dosiero forestas',
 'erreur_plugin_nom_fonction_interdit' => 'Malpermesata funkcio-nomo',

@@ -217,7 +217,7 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 'entree_texte_breve' => 'Lo t&egrave;ks pou tit-nouv&egrave;l',
 'entree_titre_obligatoire' => '<b>Titr</b> [N&eacute;s&eacute;s&egrave;r]<br />',
 'entree_url' => 'Ladr&egrave;s (URL) out sitw&egrave;b',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Okin fisy&eacute; ',
 'erreur_plugin_fichier_def_absent' => 'Nena pa okinn fisy&eacute; po d&eacute;finisyon',
 'erreur_plugin_nom_fonction_interdit' => 'Lonon fonksyon la l&eacute; int&egrave;di',

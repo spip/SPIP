@@ -184,7 +184,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'entree_texte_breve' => 'Text de la breu',
 'entree_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligatori]<br />',
 'entree_url' => 'L\'adre&ccedil;a (URL) del vostre lloc',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fitxer absent',
 'erreur_plugin_fichier_def_absent' => 'Fitxer de definici&oacute; absent',
 'erreur_plugin_nom_fonction_interdit' => 'Nom de funci&oacute; prohibit',

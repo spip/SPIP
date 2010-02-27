@@ -192,7 +192,7 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'entree_texte_breve' => 'T&egrave;ks pou tinouv&egrave;l-la',
 'entree_titre_obligatoire' => '<b>Kouman bagay la rele</b> [Neses&egrave;]<br />',
 'entree_url' => 'Ladr&egrave;s (URL) sit-w',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Oken fichye',
 'erreur_plugin_fichier_def_absent' => 'Oken fichye pou definisyon an',
 'erreur_plugin_nom_fonction_interdit' => 'Kouman fichiye a rele se entedi  ',

@@ -183,7 +183,7 @@ sonradan yok edebilir).',
 'entree_texte_breve' => 'K&#305;sa haber &ouml;zeti',
 'entree_titre_obligatoire' => '<b>Ba&#351;l&#305;k</b>  [Zorunlu]',
 'entree_url' => 'Sitenizin adresi (URL)',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Dosya eksik',
 'erreur_plugin_fichier_def_absent' => 'Tan&#305;mlama dosyas&#305; eksik',
 'erreur_plugin_nom_fonction_interdit' => 'Yasaklanm&#305;&#351; i&#351;lev ismi',

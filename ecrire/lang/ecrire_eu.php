@@ -181,7 +181,7 @@ Ez balidatu inportazio galdera hau.
 'entree_texte_breve' => 'Berri laburraren testua',
 'entree_titre_obligatoire' => '<b>Izenburua</b> [Derrigorrezko]<br />',
 'entree_url' => 'Zure lekuaren (URL) helbidea',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fitxategia ez dago',
 'erreur_plugin_fichier_def_absent' => 'Definizio fitxategia ez dago',
 'erreur_plugin_nom_fonction_interdit' => 'Funtzio izena debekatuta',
