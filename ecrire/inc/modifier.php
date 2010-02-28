@@ -44,7 +44,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	}
 
 	// Securite : certaines variables ne sont jamais acceptees ici
-	// car elles ne relevent pas de autoriser(article, modifier) ;
+	// car elles ne relevent pas de autoriser(xxx, modifier) ;
 	// il faut passer par instituer_XX()
 	// TODO: faut-il passer ces variables interdites
 	// dans un fichier de description separe ?
