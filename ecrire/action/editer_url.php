@@ -22,9 +22,13 @@ function action_editer_url_dist() {
 
 
 function url_nettoyer($titre,$longueur_maxi,$longueur_min=0,$separateur='-',$filtre=''){
-
+	if (!defined("_TRANSLITTERER_URL")) define('_TRANSLITTERER_URL', true);
+	
 	$titre = supprimer_tags(supprimer_numero(extraire_multi($titre)));
-	$url = translitteration(corriger_caracteres($titre));
+	$url = corriger_caracteres($titre);
+	
+	
+	if (_TRANSLITTERER_URL) $url = translitteration($url);
 
 	if ($filtre)
 		$url = $filtre($url);
@@ -37,7 +41,7 @@ function url_nettoyer($titre,$longueur_maxi,$longueur_min=0,$separateur='-',$fil
 
 	// S'il reste trop de caracteres non latins, les gerer comme wikipedia
 	// avec rawurlencode :
-	if (preg_match_all(",[^a-zA-Z0-9 _]+,", $url, $r, PREG_SET_ORDER)) {
+	if (_TRANSLITTERER_URL && preg_match_all(",[^a-zA-Z0-9 _]+,", $url, $r, PREG_SET_ORDER)) {
 		foreach ($r as $regs) {
 			$url = substr_replace($url, rawurlencode($regs[0]),
 				strpos($url, $regs[0]), strlen($regs[0]));
@@ -49,7 +53,7 @@ function url_nettoyer($titre,$longueur_maxi,$longueur_min=0,$separateur='-',$fil
 		return '';
 
 	// Sinon couper les mots et les relier par des $separateur
-	$mots = preg_split(",[^a-zA-Z0-9_%]+,", $url);
+	$mots = preg_split(",[\s]+,", $url);
 	$url = '';
 	foreach ($mots as $mot) {
 		if (!strlen($mot)) continue;
