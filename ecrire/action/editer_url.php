@@ -53,7 +53,8 @@ function url_nettoyer($titre,$longueur_maxi,$longueur_min=0,$separateur='-',$fil
 		return '';
 
 	// Sinon couper les mots et les relier par des $separateur
-	$mots = preg_split(",[\s]+,", $url);
+	if (_TRANSLITTERER_URL) $mots = preg_split(",[^a-zA-Z0-9_%]+,", $url); 
+	else $mots = preg_split(",[\s]+,", $url);
 	$url = '';
 	foreach ($mots as $mot) {
 		if (!strlen($mot)) continue;
