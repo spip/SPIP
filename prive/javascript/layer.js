@@ -286,6 +286,24 @@ function verifForm(racine) {
 			return false;
 		}
 	});
+	
+	
+	$(".markItUpEditor").each(function() {
+		var hauteur_min = 300;
+		var hauteur_max = parseInt($(window).height()) - 200;
+		var hauteur = hauteur_min;
+
+		
+		var signes = $(this).val().length;
+		/* en gros: 400 signes donne 100 pixels de haut */
+		var hauteur_signes = Math.round(signes / 4) + 50;
+		if (hauteur_signes > hauteur_min && hauteur_signes < hauteur_max) hauteur = hauteur_signes;
+		else if (hauteur_signes > hauteur_max) hauteur = hauteur_max;
+		
+		$(this).height(hauteur);
+		
+	});
+	
 	// vieux fonctionnement verifForm, desormais uniquement sur MSIE < 8:
 	// forcer la largeur des elements de formulaires a 100%
 	// (desormais, on utilise la CSS box-sizing pour brouteurs recents).
