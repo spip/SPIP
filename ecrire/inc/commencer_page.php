@@ -95,7 +95,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
 
-	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique $spip_ecran "._request('exec')."'"
+	$res = pipeline('body_prive',"<body class='ecrire $rubrique $sous_rubrique $spip_ecran "._request('exec')."'"
 			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
 			.'>');
 
