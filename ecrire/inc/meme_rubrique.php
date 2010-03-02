@@ -25,7 +25,8 @@ function inc_meme_rubrique_dist($id_rubrique, $id, $type, $order='date', $limit=
 		$table = 'spip_articles';
 	}
 	$prim = 'id_' . $type;
-	if (!$limit) $limit = 10;
+	if (!$limit)
+		$limit = defined("_MAX_ART_AFFICHES") ? _MAX_ART_AFFICHES : 10;
 
 	$titre = ($type!='syndic'?'titre':'nom_site');
 	$exec = array('article'=>'articles','breve'=>'breves_voir','syndic'=>'sites');
