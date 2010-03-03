@@ -333,7 +333,7 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'F&ouml;rs&ouml;ker att ansluta till databasen',
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'Din f&ouml;rbindelse till LDAP-servern lyckades.</b><p /> Du kan g&aring; vidare till n&auml;sta steg.',
+'info_connexion_ldap_ok' => 'Din f&ouml;rbindelse till LDAP-servern lyckades.</b><p> Du kan g&aring; vidare till n&auml;sta steg.</p>',
 'info_connexion_mysql' => 'Din databasf&ouml;rbindelse',
 'info_connexion_ok' => 'F&ouml;rbindelsen lyckades.',
 'info_contact' => 'Kontakt',
@@ -385,13 +385,13 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
   extra forum reserverat f&ouml;r administrat&ouml;rerna.',
 'info_forum_statistiques' => 'Bes&ouml;ksstatistik',
 'info_forums_abo_invites' => 'Votre site comporte des forums sur abonnement&nbsp;; les visiteurs sont donc invit&eacute;s &agrave; s\'enregistrer sur le site public.', # NEW
-'info_gauche_admin_effacer' => '<b>Endast administrat&ouml;rer har tillg&aring;ng till denna sida.</b><p /> Den ger tillg&aring;ng till tekniska underh&aring;llsrutiner av olika slag. En del av dem kommer, om de anv&auml;nds, att kr&auml;va FTP-tillg&aring;ng till Webservern f&ouml;r autentifiering.',
-'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle donne acc&egrave;s aux diff&eacute;rentes
+'info_gauche_admin_effacer' => '<b>Endast administrat&ouml;rer har tillg&aring;ng till denna sida.</b><p> Den ger tillg&aring;ng till tekniska underh&aring;llsrutiner av olika slag. En del av dem kommer, om de anv&auml;nds, att kr&auml;va FTP-tillg&aring;ng till Webservern f&ouml;r autentifiering.</p>',
+'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne acc&egrave;s aux diff&eacute;rentes
 fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui
-exige d\'avoir un acc&egrave;s FTP au site Web.', # NEW
-'info_gauche_admin_vider' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle donne acc&egrave;s aux diff&eacute;rentes
+exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # NEW
+'info_gauche_admin_vider' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne acc&egrave;s aux diff&eacute;rentes
 fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui
-exige d\'avoir un acc&egrave;s FTP au site Web.', # NEW
+exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # NEW
 'info_gauche_auteurs' => 'H&auml;r hittar du alla redakt&ouml;rer p&aring; sajten.
  Status p&aring; var och en av dem visas av f&auml;rgen p&aring; ikonen (administrat&ouml;r = gr&ouml;n; redakt&ouml;r = gul).',
 'info_gauche_auteurs_exterieurs' => 'Externa redakt&ouml;rer utan beh&ouml;righet p&aring; sajten, visas med en bl&aring; ikon; raderade redakt&ouml;rer med en soptunna.',
@@ -1004,7 +1004,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_documents_joints' => 'Vous pouvez autoriser l\'ajout de documents (fichiers bureautiques, images,
  multim&eacute;dia, etc.) aux articles et/ou aux rubriques. Ces fichiers
  peuvent ensuite &ecirc;tre r&eacute;f&eacute;renc&eacute;s dans
- l\'article, ou affich&eacute;s s&eacute;par&eacute;ment.<p />', # NEW
+ l\'article, ou affich&eacute;s s&eacute;par&eacute;ment.', # NEW
 'texte_documents_joints_2' => 'Ce r&eacute;glage n\'emp&ecirc;che pas l\'insertion d\'images directement dans les articles.', # NEW
 'texte_effacer_base' => 'Effacer la base de donn&eacute;es SPIP', # NEW
 'texte_effacer_donnees_indexation' => 'Effacer les donn&eacute;es d\'indexation', # NEW
@@ -1013,13 +1013,13 @@ demande plus de puissance au serveur.', # NEW
 'texte_en_cours_validation_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.', # NEW
 'texte_enrichir_mise_a_jour' => 'Vous pouvez enrichir la mise en page de votre texte en utilisant des &laquo;&nbsp;raccourcis typographiques&nbsp;&raquo;.', # NEW
 'texte_fichier_authent' => '<b>Should SPIP create the <tt>.htpasswd</tt>
-  and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p />
+  and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p>
   These files can be used to restrict access to authors
   and administrators in other parts of your site
-  (for instance, external statistical programme).<p />
+  (for instance, external statistical programme).</p><p>
   If you have no need of such files, you can leave this option
   with its default value (no files 
-  creation).', # MODIF
+  creation).</p>', # MODIF
 'texte_informations_personnelles_1' => 'Le syst&egrave;me va maintenant vous cr&eacute;er un acc&egrave;s personnalis&eacute; au site.', # NEW
 'texte_informations_personnelles_2' => '(Note : s\'il s\'agit d\'une r&eacute;installation, et que votre acc&egrave;s marche toujours, vous pouvez', # NEW
 'texte_introductif_article' => '(Texte introductif de l\'article.)', # NEW
@@ -1064,7 +1064,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_nouveau_message' => 'Nytt meddelande',
 'texte_nouveau_mot' => 'Nytt nyckelord',
 'texte_nouvelle_version_spip_1' => 'Du har installerat en ny version av SPIP.',
-'texte_nouvelle_version_spip_2' => 'Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus compl&egrave;te qu\'&agrave; l\'accoutum&eacute;e. Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre &agrave; jour vos param&egrave;tres de connexion &agrave; la base de donn&eacute;es.<p /> (NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres de connexion, jetez un &#339;il au fichier @connect@ avant de le supprimer...)', # NEW
+'texte_nouvelle_version_spip_2' => 'Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus compl&egrave;te qu\'&agrave; l\'accoutum&eacute;e. Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre &agrave; jour vos param&egrave;tres de connexion &agrave; la base de donn&eacute;es.<p> (NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres de connexion, jetez un &#339;il au fichier @connect@ avant de le supprimer...)</p>', # NEW
 'texte_operation_echec' => 'Retournez &agrave; la page pr&eacute;c&eacute;dente, s&eacute;lectionnez une autre base ou cr&eacute;ez-en une nouvelle. V&eacute;rifiez les informations fournies par votre h&eacute;bergeur.', # NEW
 'texte_plus_trois_car' => 'mer &auml;n tre tecken',
 'texte_plusieurs_articles' => 'Flera redakt&ouml;rer hittades f&ouml;r  "@cherche_auteur@":',
@@ -1086,14 +1086,14 @@ enbart en sida, &auml;r det b&auml;st att g&ouml;ra det fr&aring;n den publika d
 'texte_requetes_echouent' => '<b>Lorsque certaines requ&ecirc;tes SQL &eacute;chouent
   syst&eacute;matiquement et sans raison apparente, il est possible
   que ce soit &agrave; cause de la base de donn&eacute;es
-  elle-m&ecirc;me.</b><p />
+  elle-m&ecirc;me.</b><p>
   Votre serveur SQL dispose d\'une facult&eacute; de r&eacute;paration de ses
   tables lorsqu\'elles ont &eacute;t&eacute; endommag&eacute;es par
   accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;; en
   cas d\'&eacute;chec, conservez une copie de l\'affichage, qui contient
-  peut-&ecirc;tre des indices de ce qui ne va pas...<p />
+  peut-&ecirc;tre des indices de ce qui ne va pas...</p><p>
   Si le probl&egrave;me persiste, prenez contact avec votre
-  h&eacute;bergeur.<p />', # NEW
+  h&eacute;bergeur.</p>', # NEW
 'texte_restaurer_base' => '&Aring;terst&auml;ll inneh&aring;llet i databasens backup',
 'texte_restaurer_sauvegarde' => 'Cette option vous permet de restaurer une sauvegarde pr&eacute;c&eacute;demment
 		effectu&eacute;e de la base. A cet effet, le fichier contenant la sauvegarde doit avoir &eacute;t&eacute;

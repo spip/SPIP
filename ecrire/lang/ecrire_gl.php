@@ -338,7 +338,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'A s&uacute;a versi&oacute;n&nbsp;:',
 'info_connexion_base' => 'Proba de conexi&oacute;n coa base de datos',
 'info_connexion_base_donnee' => 'Conexi&oacute;n &aacute;s s&uacute;a base de datos',
-'info_connexion_ldap_ok' => 'Conexi&oacute;n LDAP conquerida.</b><p/> Pode pasar &aacute; etapa seguinte.',
+'info_connexion_ldap_ok' => 'Conexi&oacute;n LDAP conquerida.</b><p> Pode pasar &aacute; etapa seguinte.</p>',
 'info_connexion_mysql' => 'A s&uacute;a conexi&oacute;n SQL',
 'info_connexion_ok' => 'Conexi&oacute;n feita.',
 'info_contact' => 'Contacto',
@@ -391,9 +391,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   complementar, reservado ao equipo de xesti&oacute;n.',
 'info_forum_statistiques' => 'Estat&iacute;sticas das visitas',
 'info_forums_abo_invites' => 'O seu web disp&oacute;n de foros para se aboar&nbsp;; os visitantes est&aacute;n invitados a se rexistrar neles na parte p&uacute;blica do web.',
-'info_gauche_admin_effacer' => '<b>Esta p&aacute;xina &eacute; &uacute;nicamente accessible para o equipo de xesti&oacute;n do web.</b><p/> D&aacute; acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, o cal esixe ter un acceso por FTP ao web.',
-'info_gauche_admin_tech' => '<b>Esta p&aacute;xina &eacute; unicamente accessible para o equipo de xesti&oacute;n do web.</b><p/> D&aacute; acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, o cal esixe ter un acceso por FTP ao web.',
-'info_gauche_admin_vider' => '<b>Esta p&aacute;xina &eacute; unicamente accesible para o equipo de xesti&oacute;n do web.</b><p/> D&aacute; acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, que esixe ter un acceso por FTP ao web.',
+'info_gauche_admin_effacer' => '<b>Esta p&aacute;xina &eacute; &uacute;nicamente accessible para o equipo de xesti&oacute;n do web.</b><p> D&aacute; acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, o cal esixe ter un acceso por FTP ao web.</p>',
+'info_gauche_admin_tech' => '<b>Esta p&aacute;xina &eacute; unicamente accessible para o equipo de xesti&oacute;n do web.</b><p> D&aacute; acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, o cal esixe ter un acceso por FTP ao web.</p>',
+'info_gauche_admin_vider' => '<b>Esta p&aacute;xina &eacute; unicamente accesible para o equipo de xesti&oacute;n do web.</b><p> D&aacute; acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, que esixe ter un acceso por FTP ao web.</p>',
 'info_gauche_auteurs' => 'Aqu&iacute; atopar&aacute;s a todos os autores do web.
   O seu status ind&iacute;case coa cor da s&uacute;a &iacute;cona (xestor = verde; redactor = amarela).',
 'info_gauche_auteurs_exterieurs' => 'Os colaboradores exteriores, sen acceso ao web, ind&iacute;canse por unha &iacute;cona azul;
@@ -1017,13 +1017,13 @@ demanda m&aacute;is potencia do servidor.',
 'texte_en_cours_validation_forum' => 'Non dubide avisar a trav&eacute;s dos foros que levan engadidos.',
 'texte_enrichir_mise_a_jour' => 'P&oacute;dese mellorar a presentaci&oacute;n do texto empregando os &laquo;atallos tipogr&aacute;ficos&raquo;.',
 'texte_fichier_authent' => '<b>SPIP ten que crear os ficheiros especiais <tt>.htpasswd</tt>
-  e <tt>.htpasswd-admin</tt> no cartafol @dossier@?</b><p />
+  e <tt>.htpasswd-admin</tt> no cartafol @dossier@?</b><p>
   Estes ficheiros p&oacute;denlle servir para restrinxir o acceso, tanto aos autores
   coma aos administradores a outras partes do seu web (ao programa
-  externo de estat&iacute;sticas, por exemplo).<p />
+  externo de estat&iacute;sticas, por exemplo).</p><p>
   Se non o utiliza, pode deixar esta opci&oacute;n
  co seu valor predeterminado (non crear
-estes ficheiros).',
+estes ficheiros).</p>',
 'texte_informations_personnelles_1' => 'O sistema vaiche crear agora un acceso personalizado ao web',
 'texte_informations_personnelles_2' => '(Nota: se se trata dunha reinstalaci&oacute;n, e o teu acceso vai sen atrancos, podes',
 'texte_introductif_article' => '(Texto introdutorio do artigo.)',
@@ -1069,7 +1069,7 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
 'texte_nouveau_message' => 'Nova mensaxe',
 'texte_nouveau_mot' => 'Nova palabra',
 'texte_nouvelle_version_spip_1' => 'Instalaches unha nova versi&oacute;n de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Esta nova versi&oacute;n precisa unha posta ao d&iacute;a m&aacute;is completa que a habitual. De seres webmestra/e do web, elimine o ficheiro @connect@ e retome a instalaci&oacute;n para po&ntilde;er ao d&iacute;a os par&aacute;metros de conexi&oacute;n &aacute; base de datos.<p/> (NB.&nbsp;: se esqueceu os par&aacute;metros de conexi&oacute;n, b&oacute;telle un ollo ao ficheiro  @connect@ antes de borralo...)',
+'texte_nouvelle_version_spip_2' => 'Esta nova versi&oacute;n precisa unha posta ao d&iacute;a m&aacute;is completa que a habitual. De seres webmestra/e do web, elimine o ficheiro @connect@ e retome a instalaci&oacute;n para po&ntilde;er ao d&iacute;a os par&aacute;metros de conexi&oacute;n &aacute; base de datos.<p> (NB.&nbsp;: se esqueceu os par&aacute;metros de conexi&oacute;n, b&oacute;telle un ollo ao ficheiro  @connect@ antes de borralo...)</p>',
 'texte_operation_echec' => 'Volve &aacute; p&aacute;xina anterior, selecciona outra base ou crea unha nova. Verifica a informaci&oacute;n que che dera o teu aloxador.',
 'texte_plus_trois_car' => 'm&aacute;is de 3 caracteres',
 'texte_plusieurs_articles' => 'Atop&aacute;ron.se varias entradas para "@cherche_auteur@":',

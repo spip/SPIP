@@ -956,8 +956,8 @@ jedoch zus&auml;tzliche Serverleistung.',
 'texte_en_cours_validation' => 'Die folgenden Artikel und Meldungen sind zur Ver&ouml;ffentlichung vorgeschlagen.',
 'texte_en_cours_validation_forum' => 'Bitte schreiben Sie Ihre Kommentare in die entsprechenden Foren.',
 'texte_enrichir_mise_a_jour' => 'Sie k&ouml;nnen Ihren Text ansprechend gestalten, indem Sie die &#132;typografischen Abk&uuml;rzungen&#147; verwenden.',
-'texte_fichier_authent' => '<b>Soll SPIP die Dateien <tt>.htpasswd</tt> und <tt>.htpasswd-admin</tt> im Verzeichnis @dossier@ anlegen?</b><p />
- Mit diesen Dateien k&ouml;nnen Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschr&auml;nken.<p />Wenn Sie diese M&ouml;glickeit nicht nutzen, k&ouml;nnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.',
+'texte_fichier_authent' => '<b>Soll SPIP die Dateien <tt>.htpasswd</tt> und <tt>.htpasswd-admin</tt> im Verzeichnis @dossier@ anlegen?</b><p>
+ Mit diesen Dateien k&ouml;nnen Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschr&auml;nken.</p><p>Wenn Sie diese M&ouml;glickeit nicht nutzen, k&ouml;nnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.</p>',
 'texte_informations_personnelles_1' => 'Das System nun pers&ouml;nliche Zugangsdaten f&uuml;r Sie anlegen.',
 'texte_informations_personnelles_2' => '(Wenn Sie die Site erneut installieren, und Ihre Zugangsdaten funktionieren, k&ouml;nnen Sie',
 'texte_introductif_article' => '(Einleitender Text des Artikels.)',

@@ -32,9 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     SPIP-versie dan deze die is ge&iuml;nstalleerd.</b> Dit kan voor
  grote moeilijkheden zorgen : risico op het wissen van de databank,
  ontregeling van de website, enz. Ga niet verder met het importeren
- van het bestand. <p />Meer info kan je vinden op
+ van het bestand. <p>Meer info kan je vinden op
  <a href="@spipnet@">
-                                de documentatie van SPIP</a>.',
+                                de documentatie van SPIP</a>.</p>',
 'avis_espace_interdit' => '<b>Toegang Verboden</b><div>SPIP is reeds ge&iuml;nstalleerd.',
 'avis_lecture_noms_bases_1' => 'Het installatieprogramma heeft de namen van de ge&iuml;nstalleerde databanken niet kunnen lezen.',
 'avis_lecture_noms_bases_2' => 'Geen enkele database is beschikbaar, ofwel is de functie die de databases zou moeten tonen, niet geactiveerd
@@ -340,7 +340,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Uw versie&nbsp;:',
 'info_connexion_base' => 'Proef van aansluiten aan de basis',
 'info_connexion_base_donnee' => 'Aansluiten aan uw database',
-'info_connexion_ldap_ok' => 'De LDAP-verbinding is gelukt.</b><p /> Je kan de volgende stap zetten.',
+'info_connexion_ldap_ok' => 'De LDAP-verbinding is gelukt.</b><p> Je kan de volgende stap zetten.</p>',
 'info_connexion_mysql' => 'Uw aansluiten SQL',
 'info_connexion_ok' => 'De verbinding is geslaagd.',
 'info_contact' => 'Contact',
@@ -392,11 +392,11 @@ De publieke forums kunnen per artikel toegestaan worden
   extra forum aanmaken dat alleen bestemd is voor de beheerders.',
 'info_forum_statistiques' => 'Statistieken van de bezoeken',
 'info_forums_abo_invites' => 'Je site bevat forums met abonnement; bezoekers worden dus op de publieke site verzocht zich in te schrijven.',
-'info_gauche_admin_effacer' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p /> Ze geeft toegang tot verschillende onderhoudstaken. Voor sommige taken is een afzonderlijke aanmelding tot de site via FTP vereist.',
-'info_gauche_admin_tech' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p /> Ze geeft toegang tot allerlei technische onderhoudstaken.
- Voor het uitvoeren van sommige taken zijn een afzonderlijke aanmelding en toegang tot je site via FTP nodig.',
-'info_gauche_admin_vider' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p /> Ze geeft toegang tot allerlei technische onderhoudstaken.
- Voor het uitvoeren van sommige taken zijn een afzonderlijke aanmelding en toegang tot je site via FTP vereist.',
+'info_gauche_admin_effacer' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p> Ze geeft toegang tot verschillende onderhoudstaken. Voor sommige taken is een afzonderlijke aanmelding tot de site via FTP vereist.</p>',
+'info_gauche_admin_tech' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p> Ze geeft toegang tot allerlei technische onderhoudstaken.
+ Voor het uitvoeren van sommige taken zijn een afzonderlijke aanmelding en toegang tot je site via FTP nodig.</p>',
+'info_gauche_admin_vider' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p> Ze geeft toegang tot allerlei technische onderhoudstaken.
+ Voor het uitvoeren van sommige taken zijn een afzonderlijke aanmelding en toegang tot je site via FTP vereist.</p>',
 'info_gauche_auteurs' => 'Je vindt hier alle auteurs van de site.
  Hun status is te herkennen aan de kleur van het icoontje (beheerder = groen; redacteur = geel).',
 'info_gauche_auteurs_exterieurs' => 'Externe auteurs, zonder toegang tot de site, zijn aangeduid met een blauw icoontje;
@@ -1005,7 +1005,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_descriptif_rapide' => 'Korte beschrijving.',
 'texte_documents_joints' => 'Je kan het toevoegen van documenten (teksten, afbeeldingen, multimedia, ...) bij artikels of rubrieken toelaten. De bijgevoegde bestanden 
 kunnen vervolgens gekoppeld worden in het 
-artikel of afzonderlijk getoond worden.<p />',
+artikel of afzonderlijk getoond worden.',
 'texte_documents_joints_2' => 'Deze instelling verhindert de directe opname van beelden in artikels niet.',
 'texte_effacer_base' => 'Verwijder de SPIP databank',
 'texte_effacer_donnees_indexation' => 'Verwijder de ge&iuml;ndexeerde gegevens',
@@ -1014,14 +1014,14 @@ artikel of afzonderlijk getoond worden.<p />',
 'texte_en_cours_validation_forum' => 'Aarzelt niet om uw advies te geven dank zij de forums die hun worden vastgemaakt.',
 'texte_enrichir_mise_a_jour' => 'De opmaak van een tekst kan gebeuren met behulp van de zogeheten &laquo;typografische snelkoppelingen&raquo;.',
 'texte_fichier_authent' => '<b>SPIP moet hij de speciale  <tt>.htpasswd</tt>
-  en <tt>.htpasswd-admin</tt> bestanden aanmaken in de map @dossier@ ?</b><p />
+  en <tt>.htpasswd-admin</tt> bestanden aanmaken in de map @dossier@ ?</b><p>
  Deze bestanden zijn nuttig om de toegang tot andere delen
  van je website (zoals een extern programma voor
  statistieken, bijvoorbeeld) te beperken voor de auteurs en
- beheerders.<p />
+ beheerders.</p><p>
 Als u geen nut ervan hebt, kunt u deze keuze
  laten  aan zijn waarde per gebrek (niet een oprichting
-  bestanden).',
+  bestanden).</p>',
 'texte_informations_personnelles_1' => 'Nu zal het systeem een persoonlijke toegang tot de site voor u cre&euml;ren.',
 'texte_informations_personnelles_2' => '(Nota : als het herinstallatie betreft,  en je toegangscode blijkt nog steeds te werken, kan je',
 'texte_introductif_article' => '(Inleidende tekst op het artikel.)',
@@ -1061,7 +1061,7 @@ Als u geen nut ervan hebt, kunt u deze keuze
 'texte_nouveau_message' => 'Nieuw bericht',
 'texte_nouveau_mot' => 'Nieuw trefwoord',
 'texte_nouvelle_version_spip_1' => 'Je hebt een nieuwe versie van SPIP ge&iuml;nstalleerd.',
-'texte_nouvelle_version_spip_2' => 'Deze nieuwe SPIP-versie vereist een  grondiger update dan gewoonlijk. Als je webmaster bent van deze site, verwijder dan het bestand @connect@ en herneem de installatie om de verbindingsgegevens met de databank te vernieuwen.<p /> (NB.&nbsp;: als je je verbindingsgegevens niet meer kent, kan je best eerst een blik werpen op het bestand @connect@ alvorens het te verwijderen...)',
+'texte_nouvelle_version_spip_2' => 'Deze nieuwe SPIP-versie vereist een  grondiger update dan gewoonlijk. Als je webmaster bent van deze site, verwijder dan het bestand @connect@ en herneem de installatie om de verbindingsgegevens met de databank te vernieuwen.<p> (NB.&nbsp;: als je je verbindingsgegevens niet meer kent, kan je best eerst een blik werpen op het bestand @connect@ alvorens het te verwijderen...)</p>',
 'texte_operation_echec' => 'Ga terug naar de vorige pagina, selecteer een andere gegevensbank of maak een nieuwe aan. Kijk nog eens alle gegevens na die je van je provider hebt ontvangen.',
 'texte_plus_trois_car' => 'meer dan 3 karakters',
 'texte_plusieurs_articles' => 'Meerdere auteurs gevonden voor "@cherche_auteur@":',
@@ -1082,14 +1082,14 @@ Als u geen nut ervan hebt, kunt u deze keuze
 'texte_referencement_automatique_verifier' => 'Gelieve de inlichtingen te controleren die per <tt>@url@</tt> worden verstrekt, alvorens te registreren.',
 'texte_requetes_echouent' => 'b>Wanneer SQL verbindingen systematisch en zonder
  aanwijsbare redenen mislukken is het mogelijk dat het
- probleem bij de databank ligt. </b><p />
+ probleem bij de databank ligt. </b><p>
  SQL kan zelf een hersteloperatie uitvoeren op de
  tabellen in de databank die mogelijk beschadigd kunnen
  zijn. Je kan hier zo\'n hersteloperatie proberen. Als dit
  mislukt, kopieer dan het foutbericht wat aanwijzingen
  zal bevatten over de aard van het probleem...
  Is het probleem niet opgelost, wend je dan tot je
- hostingprovider.<p />',
+ hostingprovider.</p>',
 'texte_restaurer_base' => 'De inhoud van de reservekopie van de databank terugzetten',
 'texte_restaurer_sauvegarde' => 'Deze optie laat je toe een eerder genomen reservekopie van de databank
  terug te plaatsen. Hiertoe dien je het bestand met de reservekopie

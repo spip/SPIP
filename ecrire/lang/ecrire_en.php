@@ -33,9 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     installed.</b> You are facing great
     difficulties: the risk of destroying your database,
     various malfunctions of your site, etc. Do not
-    submit this import request.<p />For more
+    submit this import request.<p>For more
     information, please see <a href="@spipnet@">
-                                the SPIP documentation</a>.',
+                                the SPIP documentation</a>.</p>',
 'avis_espace_interdit' => '<b>Forbidden area</b><div>SPIP is already installed.</div>',
 'avis_lecture_noms_bases_1' => 'The installer could not read the names of the installed databases.',
 'avis_lecture_noms_bases_2' => 'Either no database is available, or the feature allowing the listing of the databases was disabled
@@ -190,7 +190,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Text of news item',
 'entree_titre_obligatoire' => '<b>Title</b> [Required]<br />',
 'entree_url' => 'Your site\'s URL',
-'erreur_plugin_desinstalation_echouee' => 'The uninstallation of the plugin failed. You may, however, deactivate it.', # MODIF
+'erreur_plugin_desinstalation_echouee' => 'The uninstallation of the plugin failed. You may, however, deactivate it.',
 'erreur_plugin_fichier_absent' => 'File missing',
 'erreur_plugin_fichier_def_absent' => 'Definition file missing',
 'erreur_plugin_nom_fonction_interdit' => 'Prohibited function name',
@@ -341,7 +341,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Your version:',
 'info_connexion_base' => 'Trying to connect to database',
 'info_connexion_base_donnee' => 'Connection to your database',
-'info_connexion_ldap_ok' => 'Your LDAP connection succeeded.</b><p /> You can go to the next step.',
+'info_connexion_ldap_ok' => 'Your LDAP connection succeeded.</b><p> You can go to the next step.</p>',
 'info_connexion_mysql' => 'Your SQL connection',
 'info_connexion_ok' => 'Connection succeeded.',
 'info_contact' => 'Contact',
@@ -393,13 +393,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		extra forum reserved for the administrators.',
 'info_forum_statistiques' => 'Visits statistics',
 'info_forums_abo_invites' => 'Your site contains forums by subscription; visitors may register for them on the public site.',
-'info_gauche_admin_effacer' => '<b>Only administrators have access to this page.</b><p /> It provides access to various technical maintenance tasks. Some of them give rise to a specific authentication process requiring an FTP access to the Web site.',
-'info_gauche_admin_tech' => '<b>Only administrators have access to this page.</b><p /> It provides access to various
+'info_gauche_admin_effacer' => '<b>Only administrators have access to this page.</b><p> It provides access to various technical maintenance tasks. Some of them give rise to a specific authentication process requiring an FTP access to the Web site.</p>',
+'info_gauche_admin_tech' => '<b>Only administrators have access to this page.</b><p> It provides access to various
 maintenance tasks. Some of them give rise to a specific authentication process
-requiring an FTP access to the Web site.',
-'info_gauche_admin_vider' => '<b>Only administrators have access to this page.</b><p /> It provides access to various
+requiring an FTP access to the Web site.</p>',
+'info_gauche_admin_vider' => '<b>Only administrators have access to this page.</b><p> It provides access to various
 maintenance tasks. Some of them give rise to a specific authentication process
-requiring an FTP access to the Web site.',
+requiring an FTP access to the Web site.</p>',
 'info_gauche_auteurs' => 'You will find here all the site\'s authors.
  The status of each one is indicated by the colour of there icon (administrator = green; editor = yellow).',
 'info_gauche_auteurs_exterieurs' => 'External authors, without any access to the site, are indicated by a blue icon; deleted authors by a dustbin.',
@@ -705,7 +705,7 @@ in a colour indicating their status:',
 'install_select_langue' => 'Select a language then click on the button "next" to start the installation procedure.',
 'install_select_type_db' => 'Indicate the type of database:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL', # NEW
+'install_select_type_pg' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Database server attributed by the service provider',
@@ -880,8 +880,8 @@ in a colour indicating their status:',
 'plugin_info_automatique_liste_update' => 'Update the lists',
 'plugin_info_automatique_ou' => 'or...',
 'plugin_info_automatique_select' => 'Select a plugin below: SPIP will load it and will install it in the <code>@rep@</code> directory. If the plugin already exists, it will be updated.',
-'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
-'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
+'plugin_info_extension_1' => 'The extensions below are loaded and active in the @extensions@ directory.',
+'plugin_info_extension_2' => 'They cannot be uninstalled.',
 'plugin_info_telecharger' => 'load from @url@ and install to @rep@',
 'plugin_librairies_installees' => 'Installed libraries',
 'plugin_necessite_lib' => 'This plugin requires the library @lib@',
@@ -902,7 +902,7 @@ in a colour indicating their status:',
 'plugins_actif_aucun' => 'No plugin is active.',
 'plugins_actif_un' => 'One plugin active',
 'plugins_actifs' => '@count@ active plugins.',
-'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_actifs_liste' => 'Active plugins',
 'plugins_compte' => '@count@ plugins',
 'plugins_disponible_un' => 'One plugin available',
 'plugins_disponibles' => '@count@ available plugins.',
@@ -1007,7 +1007,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_documents_joints' => 'You can allow the addition of documents (office files, images,
  multimedia, etc.) to articles and/or sections. These files
  could then be referenced in
- the article or displayed separately.<p />',
+ the article or displayed separately.',
 'texte_documents_joints_2' => 'This setting does not stop the insertion of images directly in the articles.',
 'texte_effacer_base' => 'Delete the SPIP database',
 'texte_effacer_donnees_indexation' => 'Delete indexing data',
@@ -1016,13 +1016,13 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_en_cours_validation_forum' => 'You can give your comments by using the forums which are attached to them.',
 'texte_enrichir_mise_a_jour' => 'You can enrich the layout of your text by using &laquo;typographical shortcuts&raquo;.',
 'texte_fichier_authent' => '<b>Should SPIP create the <tt>.htpasswd</tt>
-  and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p />
+  and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p>
   These files can be used to restrict access to authors
   and administrators in other parts of your site
-  (for instance, external statistical programme).<p />
+  (for instance, external statistical programme).</p><p>
   If you have no need of such files, you can leave this option
   with its default value (no files 
-  creation).',
+  creation).</p>',
 'texte_informations_personnelles_1' => 'The system will provide you now with a custom access to the site.',
 'texte_informations_personnelles_2' => '(Note: if it is a reinstallation, and your access is still working, you can',
 'texte_introductif_article' => '(Introductory Text to the article.)',
@@ -1068,7 +1068,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_nouveau_message' => 'New message',
 'texte_nouveau_mot' => 'New keyword',
 'texte_nouvelle_version_spip_1' => 'You have just installed a new version of SPIP.',
-'texte_nouvelle_version_spip_2' => 'This new version requires a more thorough update than usual. If you are the webmaster of this site, please delete the file @connect@ and restart the installation in order to update your database connection parameters. <p />(NB.: if you have forgotten your connection parameters, take a look at the file @connect@ before deleting it!)',
+'texte_nouvelle_version_spip_2' => 'This new version requires a more thorough update than usual. If you are the webmaster of this site, please delete the file @connect@ and restart the installation in order to update your database connection parameters. <p>(NB.: if you have forgotten your connection parameters, take a look at the file @connect@ before deleting it!)</p>',
 'texte_operation_echec' => 'Go back to the previous page, select another database or create a new one. Verify the information provided by your host.',
 'texte_plus_trois_car' => 'more than 3 characters',
 'texte_plusieurs_articles' => 'Several authors were found for "@cherche_auteur@":',
@@ -1090,14 +1090,14 @@ to refresh only one page, you would rather do it from the public area and use th
 'texte_requetes_echouent' => '<b>When some SQL queries fail
   systematically, without apparent reason, it is possible
   that the database itself
-  is the culprit.</b><p />
+  is the culprit.</b><p>
   SQL has a feature for repairing tables
   which have been accidentally corrupted.
   Here, you can try to execute this repair; in
   the event of failure, you should keep a copy of the display, which might contain
-  clues to where the problem lies.<p />
+  clues to where the problem lies.</p><p>
   If the problem persists, contact your 
-  service provider.<p />',
+  service provider.</p>',
 'texte_restaurer_base' => 'Restore the content of the database backup',
 'texte_restaurer_sauvegarde' => 'This option allows you to restore a previous
 backup of the database. To achieve this, the file containing the backup should have been

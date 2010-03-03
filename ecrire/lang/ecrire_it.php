@@ -31,9 +31,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_version_archive' => '<b>Attenzione! Il file @archive@ corrisponde a
 una versione di SPIP diversa da quella installata.</b> Potranno sorgere notevoli problemi:
 rischio di distruzione del database, malfunzionamenti diversi del sito ecc.
-Non confermare questa richiesta d\'importazione.<p />Per ulteriori
+Non confermare questa richiesta d\'importazione.<p>Per ulteriori
  informazioni, vedere <a href="@spipnet@">
-la documentazione di SPIP</a>.',
+la documentazione di SPIP</a>.</p>',
 'avis_espace_interdit' => '<b>Area vietata</b><div>SPIP &egrave; gi&agrave; installato.</div>',
 'avis_lecture_noms_bases_1' => 'Il programma di installazione non ha potuto leggere i nomi dei database installati nel server.',
 'avis_lecture_noms_bases_2' => 'Nessun database &egrave; disponibile, o la funzione che permette di accedere alla lista database &egrave;
@@ -340,7 +340,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_conflit_edition_votre_version' => 'La tua versione:',
 'info_connexion_base' => 'Prova di connessione al database',
 'info_connexion_base_donnee' => 'Connessione al proprio database',
-'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</b><p /> &Egrave; possibile passare alla fase successiva.',
+'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</b><p> &Egrave; possibile passare alla fase successiva.</p>',
 'info_connexion_mysql' => 'La connessione a SQL',
 'info_connexion_ok' => 'La connessione &egrave; riuscita.',
 'info_contact' => 'Contatti',
@@ -394,9 +394,9 @@ tutti i redattori registrati. &Egrave; anche possibile attivare un
 secondo forum riservato ai soli amministratori.',
 'info_forum_statistiques' => 'Statistiche delle visite',
 'info_forums_abo_invites' => 'Il sito comprende dei forum accessibili solo a utenti registrati. Nel sito pubblico &egrave; quindi presente una pagina d\'iscrizione.',
-'info_gauche_admin_effacer' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p /> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.',
-'info_gauche_admin_tech' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p /> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.',
-'info_gauche_admin_vider' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p /> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.',
+'info_gauche_admin_effacer' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>',
+'info_gauche_admin_tech' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>',
+'info_gauche_admin_vider' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.</p>',
 'info_gauche_auteurs' => 'Elenco di tutti gli autori del sito.
 Il loro status &egrave; indicato dal colore dell\'icona (redattore = giallo; amministratore = verde).',
 'info_gauche_auteurs_exterieurs' => 'Gli autori esterni, senza accesso al sito, sono indicati da un\'icona blu;
@@ -999,7 +999,7 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 'texte_date_publication_article' => 'DATA DI PUBBLICAZIONE:',
 'texte_descriptif_petition' => 'Descrizione della petizione',
 'texte_descriptif_rapide' => 'Descrizione rapida',
-'texte_documents_joints' => '&Egrave; possibile autorizzare l\'aggiunta di documenti (file di testo, fogli elettronici, immagini, file multimediali, ecc.) agli articoli e/o alle rubriche. Questi file possono poi essere richiamati nel testo dell\'articolo, o visualizzati separatamente.<p />',
+'texte_documents_joints' => '&Egrave; possibile autorizzare l\'aggiunta di documenti (file di testo, fogli elettronici, immagini, file multimediali, ecc.) agli articoli e/o alle rubriche. Questi file possono poi essere richiamati nel testo dell\'articolo, o visualizzati separatamente.',
 'texte_documents_joints_2' => 'Questa impostazione non impedisce l\'inserimento diretto di immagini negli articoli.',
 'texte_effacer_base' => 'Cancella il database SPIP',
 'texte_effacer_donnees_indexation' => 'Cancella i dati d\'indicizzazione',
@@ -1008,13 +1008,13 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 'texte_en_cours_validation_forum' => 'Non esitare ad esprimere il tuo punto di vista utilizzando i forum ad essi dedicati.',
 'texte_enrichir_mise_a_jour' => 'Puoi arricchire la formattazione del testo utilizzando le &laquo;scorciatoie tipografiche&raquo;',
 'texte_fichier_authent' => '<b>SPIP deve creare i file speciali <tt>.htpasswd</tt>
-e <tt>.htpasswd-admin</tt> nella cartella @dossier@?</b><p />
+e <tt>.htpasswd-admin</tt> nella cartella @dossier@?</b><p>
  Questi file possono servire a limitare l\'accesso agli autori
 e agli amministratori in particolari aree del sito
-(per esempio, per un programma esterno di statistiche).<p />
+(per esempio, per un programma esterno di statistiche).</p><p>
 Se ci&ograve; non &egrave; necessario, lasciare quest\'opzione
 al suo valore predefinito (nessuna creazione 
-di file).',
+di file).</p>',
 'texte_informations_personnelles_1' => 'Il sistema creer&agrave; un tuo accesso personalizzato al sito.',
 'texte_informations_personnelles_2' => '(Nota: se si tratta di una reinstallazione, e il tuo accesso funziona ancora, puoi ',
 'texte_introductif_article' => 'Testo introduttivo dell\'articolo',
@@ -1055,7 +1055,7 @@ per personalizzare la presentazione degli articoli nei tuoi modelli di layout.',
 'texte_nouveau_message' => 'Nuovo messaggio',
 'texte_nouveau_mot' => 'Nuova parola',
 'texte_nouvelle_version_spip_1' => 'Hai installato una nuova versione di SPIP.',
-'texte_nouvelle_version_spip_2' => 'Questa nuova versione necessita un aggiornamento pi&ugrave; radicale del solito. Se sei il webmaster del sito, cancella il file @connect@ e riprendi l\'installazione al fine di aggiornare i parametri di connessione al database.<p /> (NB: se hai dimenticato i parametri di connessione, rileggi il file @connect@ prima di cancellarlo...)',
+'texte_nouvelle_version_spip_2' => 'Questa nuova versione necessita un aggiornamento pi&ugrave; radicale del solito. Se sei il webmaster del sito, cancella il file @connect@ e riprendi l\'installazione al fine di aggiornare i parametri di connessione al database.<p> (NB: se hai dimenticato i parametri di connessione, rileggi il file @connect@ prima di cancellarlo...)</p>',
 'texte_operation_echec' => 'Torna alla pagina precedente, seleziona un altro database o creane uno nuovo. Verifica le informazioni fornite dal tuo hoster.',
 'texte_plus_trois_car' => 'pi&ugrave; di tre caratteri',
 'texte_plusieurs_articles' => 'Diversi autori trovati per "@cherche_auteur@":',
@@ -1075,12 +1075,12 @@ una sola pagina, utilizza piuttosto lo spazio pubblico e clicca sul pulsante &la
 'texte_referencement_automatique_verifier' => 'Controllare le informazioni fornite da <tt>@url@</tt> prima di registrare.',
 'texte_requetes_echouent' => '<b>Quando alcune query SQL falliscono
 ripetutamente e senza un chiaro motivo, &egrave; possibile
-che sia per colpa del database stesso.</b><p />
+che sia per colpa del database stesso.</b><p>
 Il server SQL dispone di una funzione di ripristino delle tabelle
 danneggiate inavvertitamente. &Egrave; possibile tentare il ripristino;
 in caso di errore, conservare una copia del messaggio visualizzato,
-contenente forse delle informazioni preziose...<p />
-Se il problema persiste, contattare il proprio fornitore di hosting.<p />',
+contenente forse delle informazioni preziose...</p><p>
+Se il problema persiste, contattare il proprio fornitore di hosting.</p>',
 'texte_restaurer_base' => 'Ripristina un backup del database',
 'texte_restaurer_sauvegarde' => 'Quest\'opzione permette il ripristino di un backup del database.
 Il file di salvataggio deve trovarsi nella cartella @dossier@.

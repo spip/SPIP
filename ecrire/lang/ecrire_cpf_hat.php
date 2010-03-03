@@ -32,9 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  l&ograve;t v&egrave;syon SPIP 
 .</b> W ke genyen gwo pwobl&egrave;m sa-yo m&egrave;m
  : bazdone ke pet&egrave;t kraze, ouswa sit w ke pa mache. Ann
- pa konfime domann lenp&ograve;tasyon-nan    .<p />W ke trouve k&egrave;k enf&ograve;masyon sou paj 
+ pa konfime domann lenp&ograve;tasyon-nan    .<p>W ke trouve k&egrave;k enf&ograve;masyon sou paj 
  <a href="@spipnet@">
-                                 dokimantasyon SPIP la</a>.', # MODIF
+                                 dokimantasyon SPIP la</a>.</p>', # MODIF
 'avis_espace_interdit' => '<b>Espas ent&egrave;di</b><div>SPIP se d&eacute;ja instal&eacute;.</div>',
 'avis_lecture_noms_bases_1' => 'Pwogwam pou enstalasyon, li te pa kap f&egrave; lekti kouman ki rele bazdone yo, yo ki deja enstale.',
 'avis_lecture_noms_bases_2' => 'Ouswa okenn bazdone se disponib, oswa fonksyon-nan ki p&egrave;m&egrave; f&eacute; lan lis tout bazdone te kraze ak&ograve;z sekirite
@@ -344,7 +344,7 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Dezyem etap : <b>Esey f&egrave; yon koneksyon sou labaz</b>', # MODIF
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'Koneksyon LDAP te mache.</b><p /> Ann gen w etap swivan.',
+'info_connexion_ldap_ok' => 'Koneksyon LDAP te mache.</b><p> Ann gen w etap swivan.</p>',
 'info_connexion_mysql' => 'Premye etap : <b>Ou koneksyon SQL</b>', # MODIF
 'info_connexion_ok' => 'Koneksyon nan te fin mache.',
 'info_contact' => 'Kontak',
@@ -395,9 +395,9 @@ anba atik yo ; y ke ent&egrave;di pou tout ribrik yo, &eacute; tinouv&egrave;l y
  anplis, ki r&eacute;s&egrave;v&eacute; pou komand&eacute; yo s&egrave;lman.',
 'info_forum_statistiques' => 'Estatistik tout vizit',
 'info_forums_abo_invites' => 'Sit w genyen fowom sou abonman&nbsp;; vizit&egrave;   se invite enskri ali sou sit piblik.',
-'info_gauche_admin_effacer' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p /> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.',
-'info_gauche_admin_tech' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p /> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.',
-'info_gauche_admin_vider' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p /> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.',
+'info_gauche_admin_effacer' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.</p>',
+'info_gauche_admin_tech' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.</p>',
+'info_gauche_admin_vider' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.</p>',
 'info_gauche_auteurs' => 'Isit, genyen tout zot&egrave; sit sa-a.
 Koul&egrave; imaj rannkont stati yo (komand&egrave; = v&egrave;r; redakt&egrave; = jon).',
 'info_gauche_auteurs_exterieurs' => 'Tout l&ograve;t&egrave; and&egrave;y&ograve;, ki genyen pa aks&egrave; sit-la, se afiche pa yon ik&ograve;n bl&egrave;&nbsp;;
@@ -1008,7 +1008,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_documents_joints' => 'Ou kapab perm&egrave; ajoute tou dokiman (fichye birotik, limaj,
  miltim&eacute;dia, etousa.) nan atik ak ribrik yo. Fichye sa-yo
  se posib r&eacute;f&eacute;rans azot apr&egrave; nan latik
- osnon afiche azot tou s&egrave;l.<p />',
+ osnon afiche azot tou s&egrave;l.',
 'texte_documents_joints_2' => 'R&egrave;glaj-la ka pa enpeche bay zot limaj nan atik dir&eacute;kman.',
 'texte_effacer_base' => 'Efase labazdon&eacute; SPIP',
 'texte_effacer_donnees_indexation' => 'Efase tout don&eacute; pou lendeksasyon',
@@ -1017,10 +1017,10 @@ demande plus de puissance au serveur.', # NEW
 'texte_en_cours_validation_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.', # NEW
 'texte_enrichir_mise_a_jour' => 'W kapab rann lasp&eacute; lapaj pli rich ak &laquo;&nbsp;tichemen tipografik&nbsp;&raquo;.',
 'texte_fichier_authent' => '<b>F&ograve;k SPIP kreye fichye yo espesyal <tt>.htpasswd</tt>
-  ak <tt>.htpasswd-admin</tt> nan rep&egrave;twar @dossier@ ?</b><p />
+  ak <tt>.htpasswd-admin</tt> nan rep&egrave;twar @dossier@ ?</b><p>
   Fichye sa-yo p&egrave;m&egrave; w limite laks&eacute; lot&egrave; ak komand&egrave; nan k&egrave;k l&ograve;t katye sit-la
-  (pwogwam lestatistik, pa egsanp).<p />
-  W kapab sere lopsyon an nan val&egrave; otomatik (pou pa kreye tou fichye la), si li pa itil aw.  ', # MODIF
+  (pwogwam lestatistik, pa egsanp).</p><p>
+  W kapab sere lopsyon an nan val&egrave; otomatik (pou pa kreye tou fichye la), si li pa itil aw.  </p>', # MODIF
 'texte_informations_personnelles_1' => 'Sist&egrave;m ke jodiya kreye yon laks&eacute; p&egrave;sonaliz&eacute; pou w.',
 'texte_informations_personnelles_2' => '(Gad : si genyen yon l&ograve;t enstalasyon ak laks&eacute; aw ka mache ank&ograve;, w kapab',
 'texte_introductif_article' => '(T&egrave;ks lentwodiksyon latik.)',
@@ -1068,7 +1068,7 @@ posib blok azot dab&ograve;&nbsp;; r&eacute;glaj isit
 'texte_nouveau_message' => 'Nouvo mesaj',
 'texte_nouveau_mot' => 'Nouvo mo',
 'texte_nouvelle_version_spip_1' => 'W te enstal&eacute; yon nouvo v&eacute;syon SPIP.',
-'texte_nouvelle_version_spip_2' => 'F&ograve;k w f&egrave; yon arnouv&egrave;lman pli konple pou monte nivo nouvo v&egrave;syon an. Si w se webm&egrave;t sit-la, m&egrave;si efase fichye-a <tt>inc_connect.php3</tt> nan repetwar <tt>ecrire</tt> ak ropran lenstalasyon pou m&egrave;t param&egrave;t koneksyon sou bazdone nan nivo.<p /> (Gad.&nbsp;: si w te oubliye param&egrave;t koneksyon aw, gad fichye <tt>inc_connect.php3</tt> avan efase ali...)', # MODIF
+'texte_nouvelle_version_spip_2' => 'F&ograve;k w f&egrave; yon arnouv&egrave;lman pli konple pou monte nivo nouvo v&egrave;syon an. Si w se webm&egrave;t sit-la, m&egrave;si efase fichye-a <tt>inc_connect.php3</tt> nan repetwar <tt>ecrire</tt> ak ropran lenstalasyon pou m&egrave;t param&egrave;t koneksyon sou bazdone nan nivo.<p> (Gad.&nbsp;: si w te oubliye param&egrave;t koneksyon aw, gad fichye <tt>inc_connect.php3</tt> avan efase ali...)</p>', # MODIF
 'texte_operation_echec' => 'M&egrave;si tounyen dey&egrave; sou paj davan, chwazi yon l&ograve;t baz osnon kreye w yon nouvo baz. Gad byin tout lenf&ograve;masyon l&eacute;bj&egrave;je w te bay aw.',
 'texte_plus_trois_car' => 'plisk 3 karakt&egrave; limprimi',
 'texte_plusieurs_articles' => 'Genyen k&egrave;k lot&egrave; pou "@cherche_auteur@":',
@@ -1092,12 +1092,12 @@ kalkil ank&ograve; yon sel paj selman, itilize plito lespas piblik ak bouton &la
 'texte_referencement_automatique_verifier' => 'Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>kank k&egrave;k rek&egrave;t SQL ki pa mache
   sist&eacute;matikman ak ki pa r&eacute;zon vizib, se posib bagay la ki ako bazdon&eacute;-la  li m&egrave;m
-.</b><p />
+.</b><p>
   Tounyen a kapasit&eacute; SQL pou aranje tout tab ali kank zot se abime pa aksidan.
 W kapab esey issit yon aranjman&nbsp;;
- Si bagay-la ki pa mache, kenbe ou yon kopi lafichaj, ki sere p&egrave;t&egrave;t indis pou rannkont ki pa mache...<p />
+ Si bagay-la ki pa mache, kenbe ou yon kopi lafichaj, ki sere p&egrave;t&egrave;t indis pou rannkont ki pa mache...</p><p>
   Si pwobl&egrave;m la ki kenbe, m&egrave;si kontak l&eacute;b&eacute;rj&egrave;
-.<p />', # MODIF
+.</p>', # MODIF
 'texte_restaurer_base' => 'Restore kontni yon sovgad baz-la',
 'texte_restaurer_sauvegarde' => 'Opsyon-nan ki p&eacute;m&egrave; w restore yon sovgad  ki w t&eacute; f&eacute; avan sou baz-la.
  Akoz, fok w plas&eacute; fichye an ki kembe sovgad-la nan r&eacute;pertwar 
