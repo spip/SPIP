@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => '&Auml;ndern',
 'bouton_chercher' => 'Suchen',
 'bouton_choisir' => 'Ausw&auml;hlen',
-'bouton_download' => 'Herunterladen',
+'bouton_download' => '&Uuml;bertragen',
 'bouton_enregistrer' => 'Speichern',
 'bouton_radio_desactiver_messagerie_interne' => 'Interne Nachrichten abschalten',
 'bouton_radio_envoi_annonces' => 'Editorische Ank&uuml;ndigungen verschicken',
@@ -222,18 +222,17 @@ Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details da
 
 // F
 'fichier_introuvable' => 'Datei @fichier@ unauffindbar',
-'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
-'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
-'form_auteur_mail_confirmation' => 'Bonjour,
+'form_auteur_confirmation' => 'Best&auml;tigen Sie Ihre Mailadresse',
+'form_auteur_email_modifie' => 'Ihre Mailadresse wurde ge&auml;ndert.',
+'form_auteur_envoi_mail_confirmation' => 'Eine Mail wurde an @email@ gesendet. Sie m&uuml;ssen auf den in ihr angegebenen Link klicken, um die Korrektheit Ihrer Adresse zu best&auml;tigen.',
+'form_auteur_mail_confirmation' => 'Hallo,
 
-Vous avez demand&eacute; &agrave; changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignor&eacute;e) :
+Sie m&ouml;chten Ihre Mail-Adresse &auml;ndern.Um Ihre neue Adresse zu best&auml;tigen,
+ brauchen Sie nur diesen Link zu &ouml;ffnen (wenn Sie darauf verzichten,
+wird Ihre Adresse beibehalten):
 
     @url@
-', # NEW
+',
 'form_deja_inscrit' => 'Sie sind bereits eingetragen.',
 'form_email_non_valide' => 'Ihre E-Mail-Adresse ist ung&uuml;ltig.',
 'form_forum_access_refuse' => 'Sie haben keinen Zugang mehr zu dieser Website.',
@@ -404,16 +403,16 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_article_supprime' => 'Gel&ouml;schter Artikel',
 'info_articles' => 'Artikel',
 'info_articles_a_valider' => 'Zur Ver&ouml;ffentlichung vorgeschlagenen Artikel',
-'info_articles_nb' => '@nb@ articles', # NEW
+'info_articles_nb' => '@nb@ Artikel',
 'info_articles_proposes' => 'Vorgeschlagene Artikel',
-'info_articles_un' => '1 article', # NEW
+'info_articles_un' => '1 Artikel',
 'info_auteurs_nombre' => 'Autor(en):',
 'info_authentification_ftp' => 'Authentifizierung per FTP.',
 'info_bloquer_lien' => 'Link sperren',
 'info_breves_02' => 'Meldungen',
 'info_breves_2' => 'Meldungen',
-'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
-'info_breves_un' => '1 br&egrave;ve', # NEW
+'info_breves_nb' => '@nb@ Meldungen',
+'info_breves_un' => '1 Meldung',
 'info_breves_valider' => 'Zur Ver&ouml;ffentlichung vorgeschlagene Meldungen',
 'info_connexion_refusee' => 'Die Verbindung wurde verweigert.',
 'info_contact_developpeur' => 'Bitte kontaktieren Sie einen der Entwickler.',
@@ -434,8 +433,8 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_document' => 'Dokument',
 'info_document_indisponible' => 'Dokument nicht verf&uuml;gbar',
 'info_documents' => 'Dokumente',
-'info_documents_nb' => '@nb@ documents', # NEW
-'info_documents_un' => '1 document', # NEW
+'info_documents_nb' => '@nb@ Dokumente',
+'info_documents_un' => '1 Dokument',
 'info_echange_message' => 'In SPIP k&ouml;nnen Sie interne Nachrichten austauschen und interne Foren f&uuml;r Teilnehmer der Website anlegen. Diese Funktionen k&ouml;nnen Sie abschalten.',
 'info_ecire_message_prive' => 'Neue private Nachricht schreiben',
 'info_email_invalide' => 'Ung&uuml;ltige E-Mail Adresse.',
@@ -480,8 +479,8 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_mail_fournisseur' => 'IhrName@Server.de',
 'info_message_2' => 'NACHRICHT',
 'info_message_supprime' => 'NACHRICHT GEL&Ouml;SCHT',
-'info_messages_nb' => '@nb@ messages', # NEW
-'info_messages_un' => '1 message', # NEW
+'info_messages_nb' => '@nb@ Nachrichten',
+'info_messages_un' => '1 Nachricht',
 'info_mise_en_ligne' => 'Online seit:',
 'info_modification_parametres_securite' => '&Auml;nderung der Sicherheitseinstellungen',
 'info_mois_courant' => 'Im Lauf des Monats:',
@@ -526,8 +525,8 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_retablir_lien' => 'Link wieder freigeben',
 'info_retirer_mot' => 'Wort entfernen',
 'info_retirer_mots' => 'Alle Worte entfernen',
-'info_rubriques_nb' => '@nb@ rubriques', # NEW
-'info_rubriques_un' => '1 rubrique', # NEW
+'info_rubriques_nb' => '@nb@ Rubriken',
+'info_rubriques_un' => '1 Rubrik',
 'info_sans_titre_2' => 'ohne Titel',
 'info_selectionner_fichier' => 'Sie k&ouml;nnen eine Datei aus dem Verzeichnis @upload@ ausw&auml;hlen.',
 'info_selectionner_fichier_2' => 'W&auml;hlen Sie eine Datei:',
@@ -536,9 +535,9 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_site_attente' => 'Websites, die auf Freigabe warten',
 'info_site_reference' => 'Verlinkte Website online',
 'info_site_refuse' => 'Abgelehnte Website',
-'info_sites_nb' => '@nb@ sites', # NEW
+'info_sites_nb' => '@nb@ Websites',
 'info_sites_referencer' => 'Website verlinken',
-'info_sites_un' => '1 site', # NEW
+'info_sites_un' => '1 Website',
 'info_supprimer_vignette' => 'Icon l&ouml;schen',
 'info_symbole_bleu' => 'Das <b>blaue</b> Symbol bedeutet <b>Merkzettel</b>, d.h. eine Nachricht nur zu Ihrer eigenen Verwendung.',
 'info_symbole_jaune' => 'Das <b>gelbe</b> Symbol bedeutet <b>Ank&uuml;ndigung an alle Redakteure</b> (f&uuml;r alle Redakteure sichtbar, &Auml;nderung nur durch Administratoren)',

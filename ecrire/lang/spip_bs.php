@@ -199,12 +199,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_preliminaire' => 'Uvod: <b>Podesavanje dozvola za pristup</b>',
 'dirs_probleme_droits' => '<b>Problem sa dozvolama za pristup</b>',
 'dirs_repertoires_absents' => '<b>Sljedeci direktoriji nisu nadjeni: <ul>@bad_dirs@.</ul> </b>
-  <p />Problem je vjerovatno u pisanju velikih i malih slova.
+  <p>Problem je vjerovatno u pisanju velikih i malih slova.
   Provjerite da li velika i mala slova ovih direktorija odgovaraju onom sto je prikazano nize; ako to nije slucaj, promijenite imena direktorija pomocu vaseg FTP klijenta, da biste ispravili gresku.
-  <p />Kada to uradite, mozete ', # MODIF
+  </p><p>Kada to uradite, mozete </p>', # MODIF
 'dirs_repertoires_suivants' => '<b>Sljedeci direktoriji ne dozvoljavaju pisanje: <ul>@bad_dirs@.</ul> </b>
-  <p /Da bi ste to promijenili, koristite svog FTP klijenta i postavite dozvole pristupa za svaki od direktorija. Procedura je detaljno opisana u uputama za instalaciju.
-  <p />Kada izvrsite ovu operaciju, mozete ', # MODIF
+  <p>Da bi ste to promijenili, koristite svog FTP klijenta i postavite dozvole pristupa za svaki od direktorija. Procedura je detaljno opisana u uputama za instalaciju.
+  </p><p>Kada izvrsite ovu operaciju, mozete </p>', # MODIF
 'double_occurrence' => 'Double occurrence', # MODIF
 
 // E

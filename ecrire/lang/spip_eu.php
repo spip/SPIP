@@ -204,9 +204,9 @@ Egiazta ezazu karpeta hauen izenen letra larri eta xeheak aurrekoarekin bat dato
 hala ez bada, karpeten izena alda ezazu, zure FTP softwarea erabiliz.
 Eragiketa hori egin eta gero, gauza izango zara',
 'dirs_repertoires_suivants' => '<b>Hurrengo direktorioak ez dituzte idazteko eskubiderik&nbsp;:<ul>@bad_dirs@.</ul></b>
-  <p />Arazoa konpontzeko FTP bezero bat erabili beharko duzu lehen aipatu diren direktorioen sarbide
+  <p>Arazoa konpontzeko FTP bezero bat erabili beharko duzu lehen aipatu diren direktorioen sarbide
  eskubideak arautzeko helburuz.
- <p />Prozedura xehetasunez azaltzen da instalazio gidan. Behin prozedura bukatu ezkero, ahal duzu ',
+ </p><p>Prozedura xehetasunez azaltzen da instalazio gidan. Behin prozedura bukatu ezkero, ahal duzu </p>',
 'double_occurrence' => 'Okurenzi bikoitza',
 
 // E

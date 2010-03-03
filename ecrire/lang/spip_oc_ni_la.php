@@ -204,9 +204,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   &ccedil;ai subre; se non es lo cas, tornatz nommar lu repert&ograve;ris embau v&ograve;stre logiciau FTP en corregissent l\'error.
   <p>Un c&ograve;up qu\'auretz fach aqu&ograve;, porretz ',
 'dirs_repertoires_suivants' => '<b>Lu repert&ograve;ris seguents non son accessibles en escritura: <ul>@bad_dirs@.</ul> </b>
-  <p />Per adobar aqu&ograve;, utilizatz lo v&ograve;stre client FTP per fin de reglar lu drechs d\'acc&egrave;s de cadun
+  <p>Per adobar aqu&ograve;, utilizatz lo v&ograve;stre client FTP per fin de reglar lu drechs d\'acc&egrave;s de cadun
   d\'aquelu repert&ograve;ris. La guida d\'installacion explica en detalh coma cau procedir.
-  <p>Tre qu\'auretz facha aquela manipulacion, porretz ',
+  <p>Tre qu\'auretz facha aquela manipulacion, porretz </p>',
 'double_occurrence' => 'Double occurrence de @balise@', # NEW
 
 // E
