@@ -17,19 +17,17 @@ include_spip('inc/filtres_mini');
 
 // http://doc.spip.org/@chercher_filtre
 function chercher_filtre($fonc, $default=NULL) {
-	if (!$fonc) return $default;
-	// Cas des types mime, sans confondre avec les appels de fonction de classe
-	// Foo::Bar
+	// Cas MIME = type/subtype
+	// sans confondre avec les appels de fonction de classe Foo::Bar
 	// qui peuvent etre avec un namespace : space\Foo::Bar
-	if (preg_match(',^[\w]+/,',$fonc)){
-		$nom = preg_replace(',\W,','_', $fonc);
-		$f = chercher_filtre($nom);
+	if (strpos($fonc, '/')){
+		$f = preg_replace(',\W,','_', $fonc);
+		if ($f = chercher_filtre($f)) return $f;
 		// cas du sous-type MIME sans filtre associe, passer au type:
 		// si filtre_text_plain pas defini, passe a filtre_text
-		if (!$f AND $nom!==$fonc)
-			$f = chercher_filtre(preg_replace(',\W.*$,','', $fonc));
-		return $f;
+		$fonc = preg_replace(',\W.*$,','', $fonc);
 	}
+	if (!$fonc) return $default;
 	foreach (
 	array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f){
 		if (is_string($g = $GLOBALS['spip_matrice'][$f]))
