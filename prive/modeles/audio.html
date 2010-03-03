@@ -6,7 +6,7 @@
 	width='#ENV{largeur, #LARGEUR}'
 	height='#ENV{hauteur, #HAUTEUR}' >
 	<param name='src' value='#URL_DOCUMENT' />
-	[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
+	[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE|chercher_filtre_mime})]
 	[(#ENV*|env_to_params)]
 </object>
 [<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>]
