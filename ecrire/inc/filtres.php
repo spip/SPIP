@@ -2297,10 +2297,20 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL) {
 	include_spip("inc/securiser_action");
 	$cle = calculer_cle_action($form.(is_array($c)?serialize($c):$c));
 	$c = serialize(array($c,$cle));
-	if (function_exists('gzdeflate') && function_exists('gzinflate'))
-		$c = gzdeflate($c);
-	$c = _xor($c);
-	$c = base64_encode($c);
+
+	if ((defined('_CACHE_CONTEXTES_AJAX') AND _CACHE_CONTEXTES_AJAX)
+		AND $dir = sous_repertoire(_DIR_CACHE, 'contextes')) {
+		// stocker les contextes sur disque et ne passer qu'un hash dans l'url
+		$md5 = md5($c);
+		ecrire_fichier("$dir/c$md5",$c);
+		$c = $md5;
+	} else {
+		if (function_exists('gzdeflate') && function_exists('gzinflate'))
+			$c = gzdeflate($c);
+		$c = _xor($c);
+		$c = base64_encode($c);
+	}
+	
 	if ($emboite === NULL) return $c;
 	return !trim($emboite) ? '' :
 	"<div class='ajaxbloc env-$c'>\n$emboite</div><!-- ajaxbloc -->\n";
@@ -2310,11 +2320,16 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL) {
 // http://doc.spip.org/@decoder_contexte_ajax
 function decoder_contexte_ajax($c,$form='') {
 	include_spip("inc/securiser_action");
-
-	$c = @base64_decode($c);
-	$c = _xor($c);
-	if (function_exists('gzdeflate') && function_exists('gzinflate'))
-		$c = @gzinflate($c);
+	if (( (defined('_CACHE_CONTEXTES_AJAX') AND _CACHE_CONTEXTES_AJAX) OR strlen($c)==32)
+		AND $dir = sous_repertoire(_DIR_CACHE, 'contextes')
+		AND lire_fichier("$dir/c$c",$contexte)) {
+			$c = $contexte;
+	} else {
+		$c = @base64_decode($c);
+		$c = _xor($c);
+		if (function_exists('gzdeflate') && function_exists('gzinflate'))
+			$c = @gzinflate($c);
+	}
 	list($env, $cle) = @unserialize($c);
 
 	if ($cle == calculer_cle_action($form.(is_array($env)?serialize($env):$env)))
