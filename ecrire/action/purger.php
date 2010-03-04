@@ -28,6 +28,7 @@ function action_purger_dist()
 		supprime_invalideurs();
 		@spip_unlink(_CACHE_RUBRIQUES);
 		@spip_unlink(_CACHE_PIPELINES);
+		@spip_unlink(_CACHE_PLUGINS_PATH);
 		@spip_unlink(_CACHE_PLUGINS_OPT);
 		@spip_unlink(_CACHE_PLUGINS_FCT);
 		@spip_unlink(_CACHE_PLUGINS_VERIF);
