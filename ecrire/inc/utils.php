@@ -629,10 +629,14 @@ function creer_chemin() {
 
 // Cherche une image dans les dossiers images
 // definis par _NOM_IMG_PACK et _DIR_IMG_PACK
+// peut se trouver dans un dossier plugin, donc on passe par un find_in_path si elle n'est pas
+// dans _DIR_IMG_PACK
 // http://doc.spip.org/@chemin_image
-function chemin_image($file){
-	return _DIR_IMG_PACK . $file;
-	#return find_in_path ($file, _NOM_IMG_PACK);
+function chemin_image($icone){
+	if (file_exists(_DIR_IMG_PACK . $icone))
+		return _DIR_IMG_PACK . $icone;
+	else
+		return find_in_path ($icone, _NOM_IMG_PACK);
 }
 
 
@@ -1083,7 +1087,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	static $too_late = 0;
 	if ($too_late++) return;
-	
+
 	// Declaration des repertoires
 
 	// le nom du repertoire plugins/ activables/desactivables
