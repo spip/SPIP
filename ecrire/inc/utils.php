@@ -630,8 +630,8 @@ function creer_chemin() {
 // Cherche une image dans les dossiers images
 // definis par _NOM_IMG_PACK et _DIR_IMG_PACK
 // http://doc.spip.org/@chemin_image
-function chemin_image($icone){
-	return _DIR_IMG_PACK . $file; 
+function chemin_image($file){
+	return _DIR_IMG_PACK . $file;
 	#return find_in_path ($file, _NOM_IMG_PACK);
 }
 
