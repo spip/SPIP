@@ -419,7 +419,7 @@ function interdire_scripts($arg) {
 	// Attention, si ce n'est pas une chaine, laisser intact
 	if (!$arg OR !is_string($arg) OR !strstr($arg, '<')) return $arg; 
 
-	if (isset($dejavu[$arg])) return $dejavu[$arg];
+	if (isset($dejavu[$GLOBALS['filtrer_javascript']][$arg])) return $dejavu[$GLOBALS['filtrer_javascript']][$arg];
 
 	// echapper les tags asp/php
 	$t = str_replace('<'.'%', '&lt;%', $arg);
@@ -450,7 +450,7 @@ function interdire_scripts($arg) {
 	if (defined('_PROTEGE_PHP_MODELES'))
 		$t = echappe_retour($t,"php"._PROTEGE_PHP_MODELES);
 
-	return $dejavu[$arg] = $t;
+	return $dejavu[$GLOBALS['filtrer_javascript']][$arg] = $t;
 }
 
 // Securite : utiliser SafeHTML s'il est present dans ecrire/safehtml/

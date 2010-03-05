@@ -86,7 +86,7 @@ function exec_admin_vider_dist()
 		echo debut_cadre_relief("", true, "", _T('taille_repertoire_cache'));
 
 		include_spip('inc/invalideur');
-		if ($n = taille_du_cache())
+		if (($n = taille_du_cache())>250*1024)
 		  $info = _T('taille_cache_octets', array('octets' => taille_en_octets($n)));
 		else
 		  $info = _T('taille_cache_vide');
