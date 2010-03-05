@@ -77,7 +77,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
 	if ($GLOBALS['spip_ecran'] == "large") $largeur = 974; else $largeur = 750;
-	$res = pipeline('body_prive',"<body class='"
+	$res = pipeline('body_prive',"<body class='ecrire "
 			. $GLOBALS['spip_ecran'] . " $spip_display_navigation $rubrique $sous_rubrique "._request('exec')."'"
 			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
 			.'>');

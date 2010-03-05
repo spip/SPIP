@@ -93,13 +93,21 @@ function insert_auteur($source=null) {
 function auteurs_set($id_auteur, $set = null) {
 	$err = '';
 
-	$c = array();
-	foreach (array(
-		'nom','email','bio',
-		'nom_site','url_site',
-		'imessage','pgp',
-	) as $champ)
-		$c[$champ] = _request($champ,$set);
+	if (is_null($set)){
+		$c = array();
+		foreach (array(
+			'nom','email','bio',
+			'nom_site','url_site',
+			'imessage','pgp',
+		) as $champ)
+			$c[$champ] = _request($champ,$set);
+	}
+	else{
+		$c = $set;
+		unset($c['webmestre']);
+		unset($c['pass']);
+		unset($c['login']);
+	}
 
 	include_spip('inc/modifier');
 	revision_auteur($id_auteur, $c);
