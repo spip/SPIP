@@ -106,7 +106,7 @@ function logo_survol($id_objet, $_id_objet, $type, $align, $fichier, $lien, $p, 
 	$code = "\n((!is_array(\$l = $code)) ? '':\n (" .
 		     '"<img class=\"spip_logos\" alt=\"\"' .
 		    ($align ? " align=\\\"$align\\\"" : '')
-		    . ' src=\"$l[0]\"" . $l[3] .  ($l[1] ? " onmouseover=\"this.src=\'$l[1]\'\" onmouseout=\"this.src=\'$l[0]\'\"" : "") . \' />\'))';
+		    . ' src=\"$l[0]\"" . $l[2] .  ($l[1] ? " onmouseover=\"this.src=\'$l[1]\'\" onmouseout=\"this.src=\'$l[0]\'\"" : "") . \' />\'))';
 
 	if (!$lien) return $code;
 

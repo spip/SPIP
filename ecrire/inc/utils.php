@@ -755,6 +755,10 @@ function find_in_path ($file, $dirname='', $include=false) {
 }
 
 function load_path_cache(){
+	// charger le path des plugins
+	if (@is_readable(_CACHE_PLUGINS_PATH)){
+		include_once(_CACHE_PLUGINS_PATH);
+	}
 	$GLOBALS['path_files'] = array();
 	// si le visiteur est admin,
 	// on ne recharge pas le cache pour forcer sa mise a jour
@@ -1169,6 +1173,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Declaration des fichiers
 
+	define('_CACHE_PLUGINS_PATH', _DIR_CACHE . "charger_plugins_chemins.php");
 	define('_CACHE_PLUGINS_OPT', _DIR_CACHE . "charger_plugins_options.php");
 	define('_CACHE_PLUGINS_FCT', _DIR_CACHE . "charger_plugins_fonctions.php");
 	define('_CACHE_PLUGINS_VERIF', _DIR_CACHE . "verifier_plugins.txt");
@@ -1236,7 +1241,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// systematique du noyau ou une baisse de perfs => a etudier)
 	include_once _DIR_RESTREINT . 'inc/flock.php';
 
-	// charger tout de suite le cache path
+	// charger tout de suite le path et son cache
 	load_path_cache();
 
 	// *********** traiter les variables ************

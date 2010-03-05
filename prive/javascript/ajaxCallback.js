@@ -74,7 +74,7 @@ jQuery.fn.animeajax = function(end) {
 // le bloc cible en haut de l'ecran
 // si force = true, scroller dans tous les cas
 jQuery.fn.positionner = function(force) {
-	var offset = jQuery(this).offset({'scroll':false});
+	var offset = jQuery(this).offset();
 	var hauteur = parseInt(jQuery(this).css('height'));
 	var scrolltop = self['pageYOffset'] ||
 		jQuery.boxModel && document.documentElement[ 'scrollTop' ] ||
