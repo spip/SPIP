@@ -1252,7 +1252,9 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	spip_desinfecte($_POST);
 	spip_desinfecte($_COOKIE);
 	spip_desinfecte($_REQUEST);
-	spip_desinfecte($GLOBALS);
+	// ne pas desinfecter les globales en profondeur car elle contient aussi les
+	// precedentes, qui seraient desinfectees 2 fois.
+	spip_desinfecte($GLOBALS,false);
 
 	// Par ailleurs on ne veut pas de magic_quotes au cours de l'execution
 	@set_magic_quotes_runtime(0);
@@ -1521,7 +1523,7 @@ function init_var_mode(){
 // supprimer aussi les eventuels caracteres nuls %00, qui peuvent tromper
 // la commande is_readable('chemin/vers/fichier/interdit%00truc_normal')
 // http://doc.spip.org/@spip_desinfecte
-function spip_desinfecte(&$t) {
+function spip_desinfecte(&$t,$deep = true) {
 	static $magic_quotes;
 	if (!isset($magic_quotes))
 		$magic_quotes = @get_magic_quotes_gpc();
@@ -1533,8 +1535,8 @@ function spip_desinfecte(&$t) {
 			$t[$key] = str_replace(chr(0), '-', $t[$key]);
 		}
 		// traiter aussi les "texte_plus" de articles_edit
-		else if ($key == 'texte_plus' AND is_array($t[$key]))
-			spip_desinfecte($t[$key]);
+		else if ($deep AND is_array($t[$key]) AND $key!=='GLOBALS')
+			spip_desinfecte($t[$key],$deep);
 	}
 }
 
