@@ -130,7 +130,11 @@ function balise_FORMULAIRE__dyn($form)
 	// charger peut passer une action si le formulaire ne tourne pas sur self()
 	// ou une action vide si elle ne sert pas
 	$action = isset($valeurs['action'])?$valeurs['action']:self();
-	
+	// bug IEx : si action finit par / 
+	// IE croit que le <form ... action=../ > est autoferme
+	if (substr($action,-1)=='/')
+		$action .= (_SPIP_SCRIPT?_SPIP_SCRIPT:"index.php");
+
 	// recuperer la saisie en cours si erreurs
 	// seulement si c'est ce formulaire qui est poste
 	// ou si on le demande explicitement par le parametre _forcer_request = true
