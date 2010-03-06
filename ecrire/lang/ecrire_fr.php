@@ -837,6 +837,9 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'module_texte_traduction' => 'Le fichier de langue &laquo;&nbsp;@module@&nbsp;&raquo; est disponible en&nbsp;:',
 'mois_non_connu' => 'non connu',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles',
+
 // O
 'onglet_contenu' => 'Contenu',
 'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base',
