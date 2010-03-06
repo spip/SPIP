@@ -1430,9 +1430,9 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 
 // modifier (ou inserer) un attribut html dans une balise
 // http://doc.spip.org/@inserer_attribut
-function inserer_attribut($balise, $attribut, $val, $texte_backend=true, $vider=false) {
+function inserer_attribut($balise, $attribut, $val, $proteger=true, $vider=false) {
 	// preparer l'attribut
-	if ($texte_backend) $val = texte_backend($val); # supprimer les &nbsp; etc
+	if ($proteger) $val = attribut_html($val); # supprimer les &nbsp; etc
 
 	// echapper les ' pour eviter tout bug
 	$val = str_replace("'", "&#39;", $val);
