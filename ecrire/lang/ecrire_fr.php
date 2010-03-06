@@ -204,7 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // H
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', 
-'htaccess_a_simuler' => "Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@, ce qui ne permet pas d'assurer une bonne s&eacute;curit&eacute;. Modifier sa configuration si vous le pouvez; sinon, dans le fichier mes_options.php donner comme valeur aux constantes @constantes@ des r&eacute;pertoires en dehors de @document_root@.",
+'htaccess_a_simuler' => "Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.", 
 
 // I
 'ical_info1' => 'Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
