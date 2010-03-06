@@ -530,9 +530,11 @@ function taille_en_octets ($taille) {
 
 // Rend une chaine utilisable sans dommage comme attribut HTML
 // http://doc.spip.org/@attribut_html
-function attribut_html($texte,$striptags = true) {
+function attribut_html($texte,$textebrut = true) {
 	$u = $GLOBALS['meta']['pcre_u'];
-	$texte = texte_backend(preg_replace(array(",\n,",",\s(?=\s),msS".$u),array(" ",""),$striptags?textebrut($texte):$texte));
+	if ($textebrut)
+		$texte = preg_replace(array(",\n,",",\s(?=\s),msS".$u),array(" ",""),textebrut($texte));
+	$texte = texte_backend($texte);
 	$texte = str_replace(array("'",'"'),array('&#39;', '&#34;'), $texte);
 
 	return preg_replace(array("/&(amp;|#38;)/","/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/"),array("&","&#38;") , $texte);
