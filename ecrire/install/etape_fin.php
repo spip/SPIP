@@ -46,7 +46,20 @@ function install_etape_fin_dist()
 		$rep = sous_repertoire(_DIR_TMP, $rep, true,true);
 	}
 
-	// on l'envoie dans l'espace prive
-	redirige_url_ecrire('accueil');
+	// Verifier la securite des htaccess
+	// Si elle ne fonctionne pas, prevenir
+	if (!verifier_htaccess(_DIR_TMP, true) OR !verifier_htaccess(_DIR_CONNECT, true)) {
+		$h = generer_form_ecrire('accueil', '','',_T('public:accueil_site'));
+		$titre = _T('htaccess_inoperant');
+		$averti = _T('htaccess_a_simuler', 
+			array('htaccess' => '<tt>' . _ACCESS_FILE_NAME . '</tt>',
+				'constantes' =>  '<tt>_DIR_TMP &amp; _DIR_CONNECT</tt>',
+				'document_root' => '<tt>' . $_SERVER['DOCUMENT_ROOT'] . '</tt>'));
+		echo minipres(
+			'AUTO',
+			"<p class='resultat echec'>$titre</p><p>$averti</p>$h"
+			      );
+	// ok, deboucher dans l'espace prive
+	} else redirige_url_ecrire('accueil');
 }
 ?>
