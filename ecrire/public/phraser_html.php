@@ -161,7 +161,7 @@ function phraser_champs($texte,$ligne,$result) {
 		if ($suite[0] == '{') {
 			phraser_arg($suite, '', array(), $champ);
 			// ce ltrim est une ereur de conception
-			// mais on le conserve par souci de compatibilité
+			// mais on le conserve par souci de compatibilitï¿½
 			// On le normalise dans l'arbre de syntaxe abstraite
 			// pour faire sauter ce cas particulier a la decompil
 			$texte = ltrim($suite);
@@ -637,7 +637,8 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 		$jointures = trim($match[2]);
 		$table_optionnelle = ($match[3]);
 		if ($jointures) {
-			$result->jointures = preg_split("/\s+/",$jointures);
+			// on affecte pas ici les jointures explicites, mais dans la compilation
+			// ou elles seront completees des jointures declarees
 			$result->jointures_explicites = $jointures;
 		}
 		
