@@ -619,6 +619,7 @@ Merci de votre participation
 'login_retour_site' => 'Retour au site public',
 'login_retoursitepublic' => 'retour&nbsp;au&nbsp;site&nbsp;public',
 'login_sans_cookiie' => 'Identification sans cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;',
 'login_sinscrire' => 's\'inscrire',
 'login_test_navigateur' => 'test navigateur/reconnexion',
 'login_verifiez_navigateur' => '(V&eacute;rifiez toutefois que votre navigateur n\'a pas m&eacute;moris&eacute; votre mot de passe...)',
