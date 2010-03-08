@@ -670,7 +670,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 function _image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 	$ratioWidth = $srcWidth/$maxWidth;
 	$ratioHeight = $srcHeight/$maxHeight;
-
+	
 	if ($ratioWidth <=1 AND $ratioHeight <=1) {
 		$destWidth = $srcWidth;
 		$destHeight = $srcHeight;
@@ -703,7 +703,7 @@ function ratio_passe_partout ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 		$destWidth = $maxWidth;
 		$destHeight = $srcHeight/$ratioWidth;
 	}
-	return array (floor($destWidth), floor($destHeight),
+	return array (ceil($destWidth), ceil($destHeight),
 		min($ratioWidth,$ratioHeight));
 }
 
@@ -717,6 +717,7 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 	if ($process == "netpbm") $format_sortie = "jpg";
 	else if ($process == 'gd1' OR $process == 'gd2') {
 		$image = _image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}",$format_sortie,$fonction);
+
 		// on verifie que l'extension choisie est bonne (en principe oui)
 		$gd_formats = explode(',',$GLOBALS['meta']["gd_formats"]);
 		if (!in_array($image['format_dest'],$gd_formats)
