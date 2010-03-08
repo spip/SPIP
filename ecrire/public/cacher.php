@@ -20,7 +20,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@generer_nom_fichier_cache
 function generer_nom_fichier_cache($contexte, $page) {
 
-	$cache = $page . '-';
+	$cache = $page['contexte_implicite']['cache'] . '-';
+
 	foreach ($contexte as $var=>$val) {
 		$val = is_array($val) ? var_export($val,true) : strval($val);
 		$cache .= str_replace('-', '_', $val) . '-' ;
@@ -38,11 +39,9 @@ function generer_nom_fichier_cache($contexte, $page) {
 	// donc, par exemple, de gerer differents dossiers de squelettes
 	// en parallele, ou de la "personnalisation" via un marqueur (dont la
 	// composition est totalement libre...)
-	$md_cache = md5($page . ' '
+	$md_cache = md5(
+		var_export($page['contexte_implicite'],true) . ' '
 		. var_export($contexte,true)
-		. $_SERVER['HTTP_HOST'] . ' '
-		. $GLOBALS['dossier_squelettes'] . ' '
-		. (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : '')
 	);
 
 	$cache .= '-'.substr($md_cache, 1, 32-strlen($cache));
@@ -97,7 +96,7 @@ function cache_valide(&$page, $date) {
 
 	if (isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache']) return -1;
 	if (defined('_NO_CACHE')) return (_NO_CACHE==0 AND !$page)?1:_NO_CACHE;
-	if (!$page) return 1;
+	if (!$page OR !isset($page['entetes']['X-Spip-Cache'])) return 1;
 
 	// #CACHE{n,statique} => on n'invalide pas avec derniere_modif
 	// cf. ecrire/public/balises.php, balise_CACHE_dist()
@@ -240,6 +239,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	// Controler l'existence d'un cache nous correspondant, dans les
 	// deux versions possibles : session ou non
 	$chemin_cache = generer_nom_fichier_cache($contexte, $page);
+	$contexte_implicite = $page['contexte_implicite'];
 	$lastmodified = 0;
 	if (!lire_fichier(_DIR_CACHE . ($f = $chemin_cache), $page))
 		$fs = lire_fichier(_DIR_CACHE . ($f = cache_sessionne($f, spip_session())), $page);
@@ -247,7 +247,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	// HEAD : cas sans jamais de calcul pour raisons de performance
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
 		$use_cache = 0;
-		$page = array();
+		$page = array('contexte_implicite'=>$contexte_implicite);
 		return;
 	}
 
@@ -267,7 +267,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		|| isset($_COOKIE['spip_admin'])
 		|| @file_exists(_ACCESS_FILE_NAME))
 	) {
-		$page = array(); // ignorer le cache deja lu
+		$page = array('contexte_implicite'=>$contexte_implicite); // ignorer le cache deja lu
 		supprimer_fichier(_DIR_CACHE . $f); // pas necessaire ?
 		if (in_array($GLOBALS['var_mode'], array('calcul', 'recalcul'))
 		AND $fs) {
@@ -286,19 +286,22 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	if ($page AND
 		$page = @unserialize($page)) {
 		$use_cache = cache_valide($page, $page['lastmodified']);
+		// le contexte implicite n'est pas stocke dans le cache, mais il y a equivalence
+		// par le nom du cache. On le reinjecte donc ici pour utilisation eventuelle au calcul
+		$page['contexte_implicite'] = $contexte_implicite;
 		if (!$use_cache) {
 			// $page est un cache utilisable
 			gunzip_page($page);
 			return;
 		}
 	} else {
-		$page = array();
+		$page = array('contexte_implicite'=>$contexte_implicite);
 		$use_cache = cache_valide($page,0); // fichier cache absent : provoque le calcul
 	}
 
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
 	if (!spip_connect()) {
-		if ($page)
+		if (isset($page['texte']))
 			$use_cache = 0;
 		else {
 			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");
