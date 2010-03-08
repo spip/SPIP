@@ -154,6 +154,14 @@ function cache_sessionne($chemin_cache, $session, $creer=false) {
 // http://doc.spip.org/@creer_cache
 function creer_cache(&$page, &$chemin_cache) {
 
+	// Ne rien faire si on est en preview, debug, ou si une erreur
+	// grave s'est presentee (compilation du squelette, MySQL, etc)
+	// le cas var_nocache ne devrait jamais arriver ici (securite)
+	// le cas spip_interdire_cache correspond a une ereur SQL grave non anticipable
+	if ((isset($GLOBALS['var_nocache'])&&$GLOBALS['var_nocache'])
+		OR defined('spip_interdire_cache'))
+		return;
+
 	// Si la page c1234 a un invalideur de session 'zz', sauver dans
 	// 'tmp/cache/MD5(chemin_cache)/_zz'
 	// en prenant soin de supprimer un eventuel cache non-sessionne

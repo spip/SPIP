@@ -1445,6 +1445,11 @@ function init_var_mode(){
 							// indiquer qu'on doit recalculer les images
 							$GLOBALS['var_images'] = true;
 							break;
+						case 'debug':
+							$GLOBALS['var_mode'] = 'calcul';
+							// et ne pas enregistrer de cache
+							$GLOBALS['var_nocache'] = true;
+							break;
 						default :
 							$GLOBALS['var_mode'] = $_GET['var_mode'];
 							break;
