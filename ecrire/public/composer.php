@@ -195,7 +195,11 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 		$corps = str_replace($r[0], '', $corps);
 		# $j = Content-Type, et pas content-TYPE.
 		$j = join('-', array_map('ucwords', explode('-', strtolower($r[2]))));
-		$headers[$j] = $r[3];
+
+		if ($j=='X-Spip-Filtre' AND isset($headers[$j]))
+			$headers[$j].="|".$r[3];
+		else
+			$headers[$j] = $r[3];
 	}
 
 	// S'agit-il d'un resultat constant ou contenant du code php
