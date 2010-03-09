@@ -250,7 +250,7 @@ function liste_plugin_valides($liste_plug, $force = false){
 					// dependance circulaire, ou utilise qu'on peut ignorer ?
 					// dans le doute on fait une erreur quand meme
 					// plutot que d'inserer silencieusement et de risquer un bug sournois latent
-					$necessite = erreur_necessite($infos[$plug]['utilise'], $liste);
+					$necessite = erreur_necessite($infos[$dir_type][$plug]['utilise'], $liste);
 					$erreurs .= "<li>" . _T('plugin_impossible_activer',
 						array('plugin' => constant($dir_type). $plug)
 					) . "<ul><li>" . implode("</li><li>", $necessite) . "</li></ul></li>";
