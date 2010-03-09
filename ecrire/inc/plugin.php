@@ -448,7 +448,17 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 			}
 		}
 	}
-
+	
+	// on charge les fichiers d'options qui peuvent completer 
+	// la globale spip_pipeline egalement
+	if (@is_readable(_CACHE_PLUGINS_PATH))
+		include_once(_CACHE_PLUGINS_PATH); // avait peut etre deja ete fait
+	if (@is_readable(_CACHE_PLUGINS_OPT)) {
+		include_once(_CACHE_PLUGINS_OPT);
+	} else {
+		spip_log("pipelines desactives: impossible de produire " . _CACHE_PLUGINS_OPT);
+	}
+	
 	// on ajoute les pipe qui ont ete recenses manquants
 	foreach($liste_pipe_manquants as $add_pipe)
 		if (!isset($GLOBALS['spip_pipeline'][$add_pipe]))
