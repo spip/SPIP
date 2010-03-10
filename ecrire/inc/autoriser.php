@@ -29,7 +29,7 @@ define('_STATUT_AUTEUR_RUBRIQUE', _ADMINS_RESTREINTS ? '0minirezo' : '');
 // mes_fonctions peut aussi declarer des autorisations, donc il faut donc le charger
 if ($f = find_in_path('mes_fonctions.php')) {
 	global $dossier_squelettes;
-	include_once($f);
+	include_once(_ROOT_CWD . $f);
 }
 
 
