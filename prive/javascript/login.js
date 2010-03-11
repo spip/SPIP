@@ -55,7 +55,8 @@ function actualise_auteur(){
 
 function login_submit(){
 	actualise_auteur();
-	pass = jQuery('input[name=password]').attr('value');
+	var inputpass = jQuery('input[name=password]');
+	pass = inputpass.attr('value');
 	// ne pas laisser le pass d'un auteur "auth=spip" circuler en clair
 	if (pass) {
 		// si l'information est en cours, retenter sa chance
@@ -69,13 +70,21 @@ function login_submit(){
 			return false;
 		}
 
+		// il ne faut pas injecter le pass hashe directement dans l'input password visible car
+		// - cela est perturbant
+		// - certains navigateurs memorisent le hash au lieu du pass ...
+		// on cree un input hidden a cote, on lui met le name="password"
+		// et on vide le champ visible
+		inputpass.after('<input name="password" type="hidden" value="" />');
+		inputpass.attr('name','nothing').attr('value','');
+
 		// Si on a l'alea, on peut lancer le submit apres avoir hashe le pass
 		if (alea_actuel || alea_futur) {
 			calcule_hash_pass(pass);
 		}
 		// si on arrive pas a avoir une reponse, vider le pass pour forcer un passage en 2 fois
-		else if(informe_auteur_en_cours)
-			jQuery('input[name=password]').attr('value','');
+		//else if(informe_auteur_en_cours)
+		//	jQuery('input[name=password]').attr('value','');
 		// sinon c'est que l'auteur n'existe pas
 		// OU qu'il sera accepte par LDAP ou autre auth
 	}
