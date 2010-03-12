@@ -717,7 +717,7 @@ function load_path_cache(){
 		AND !isset($_COOKIE[$GLOBALS['cookie_prefix'].'_admin'])
 		){
 		// on essaye de lire directement sans verrou pour aller plus vite
-		if ($contenu = spip_file_get_contents($fichier)){
+		if ($contenu = spip_file_get_contents(_CACHE_CHEMIN)){
 			// mais si semble corrompu on relit avec un verrou
 			if (!$GLOBALS['path_files']=unserialize($contenu)){
 				lire_fichier(_CACHE_CHEMIN,$contenu);
