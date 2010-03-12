@@ -389,7 +389,7 @@ $liste_des_authentifications = array(
 
 // Experimental : pour supprimer systematiquement l'affichage des numeros
 // de classement des titres, recopier la ligne suivante dans mes_options :
-# $table_des_traitements['TITRE'][]= 'typo(supprimer_numero(%s))';
+# $table_des_traitements['TITRE'][]= 'typo(supprimer_numero(%s), "TYPO", $connect)';
 
 // Droits d'acces maximum par defaut
 @umask(0);
