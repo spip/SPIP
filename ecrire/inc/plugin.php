@@ -361,6 +361,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	foreach(array('chemins'=>_CACHE_PLUGINS_PATH,'options'=>_CACHE_PLUGINS_OPT,'fonctions'=>_CACHE_PLUGINS_FCT) as $charge=>$fileconf){
 		$s = "";
 		$splugs = "";
+		$chemins = array();
 		if (is_array($infos)){
 			foreach($ordre as $p){
 				$dir_type = $plugin_valides[$p]['dir_type'];
@@ -374,14 +375,17 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				// permet de faire des include_spip pour attraper un inc_ du plugin
 				if ($charge=='chemins'){
 					$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
-					$splugs .= "define('_DIR_PLUGIN_$prefix',$dir); ";
+					$splugs .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
 					foreach($info['path'] as $chemin){
 						if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
-							if (isset($chemin['type']))
-								$splugs .= "if (".(($chemin['type']=='public')?"":"!")."_DIR_RESTREINT) ";
 							$dir = $chemin['dir'];
 							if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
-							$splugs .= "_chemin(_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"").");\n";
+							if (!isset($chemin['type']) OR $chemin['type']=='public')
+								$chemins['public'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+							if (!isset($chemin['type']) OR $chemin['type']=='prive')
+								$chemins['prive'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+							#$splugs .= "if (".(($chemin['type']=='public')?"":"!")."_DIR_RESTREINT) ";
+							#$splugs .= "_chemin(_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"").");\n";
 						}
 					}
 				}
@@ -400,6 +404,12 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 						$liste_fichier_verif[] = "$root_dir_type:$plug/".trim($file);
 					}
 				}
+			}
+		}
+		if ($charge=='chemins'){
+			if (count($chemins)){
+				$splugs .= "if (_DIR_RESTREINT) _chemin(implode(':',array(".implode(',',array_reverse($chemins['public'])).")));\n";
+				$splugs .= "else _chemin(implode(':',array(".implode(',',array_reverse($chemins['prive'])).")));\n";
 			}
 		}
 		if ($charge=='options'){
