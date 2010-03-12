@@ -86,17 +86,19 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	// Charger l'aiguilleur des traitements derogatoires
 	// (action en base SQL, formulaires CVT, AJax)
-	include_spip('public/aiguiller');
-	if (
-		// cas des appels actions ?action=xxx
-		traiter_appels_actions()
-	OR
-		// cas des hits ajax sur les inclusions ajax
-		traiter_appels_inclusions_ajax()
-	 OR 
-	 	// cas des formulaires charger/verifier/traiter
-	  traiter_formulaires_dynamiques())
-	  exit; // le hit est fini !
+	if (_request('action') OR _request('var_ajax') OR _request('formulaire_action')){
+		include_spip('public/aiguiller');
+		if (
+			// cas des appels actions ?action=xxx
+			traiter_appels_actions()
+		OR
+			// cas des hits ajax sur les inclusions ajax
+			traiter_appels_inclusions_ajax()
+		 OR
+			// cas des formulaires charger/verifier/traiter
+			traiter_formulaires_dynamiques())
+			exit; // le hit est fini !
+	}
 
 	// si signature de petition, l'enregistrer avant d'afficher la page
 	// afin que celle-ci contienne la signature
