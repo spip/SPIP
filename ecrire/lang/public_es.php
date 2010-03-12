@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouvelles_breves' => 'Nuevas breves',
 
 // P
-'page_precedente' => 'P&aacute;gina precedente',
+'page_precedente' => 'P&aacute;gina anterior',
 'page_suivante' => 'P&aacute;gina siguiente',
 'par_auteur' => 'por ',
 'participer_site' => 'Puedes participar en la vida de este sitio y proponer art&iacute;culos inscribi&eacute;ndote aqui. De inmediato recibir&aacute;s un correo electr&oacute;nico con tus claves de acceso al espacio privado del sitio.',
