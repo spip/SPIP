@@ -319,7 +319,7 @@ function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 	}
 	if ($pour === 'url') return $url;
 	$r = traiter_raccourci_titre($id, $type, $connect);
-	if ($r) $r['class'] =  'spip_in';
+	if ($r) $r['class'] =  ($type == 'site')?'spip_out':'spip_in';
 	if ($texte = trim($texte)) $r['titre'] = $texte;
 	if (!@$r['titre']) $r['titre'] =  _T($type) . " $id";
 	if ($pour=='titre') return $r['titre'];
