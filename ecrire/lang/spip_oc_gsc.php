@@ -617,6 +617,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'login_retour_site' => 'Tornar au sit public',
 'login_retoursitepublic' => 'tornar&nbsp;au&nbsp;sit&nbsp;public',
 'login_sans_cookiie' => 'Identificacion shens cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'inscrive\'s',
 'login_test_navigateur' => 'Ensai navigader/tornar&nbsp;connectar',
 'login_verifiez_navigateur' => '(totun verificatz que lo v&ograve;ste navigader n\'aja pas servat lo v&ograve;ste mot de santa Clara en mem&ograve;ria...)',

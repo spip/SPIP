@@ -610,6 +610,7 @@ Tack f&ouml;r ditt deltagande
 'login_retour_site' => 'Tillbaka till den publika delen',
 'login_retoursitepublic' => 'Tillbaka till den publika delen',
 'login_sans_cookiie' => 'Logga in utan cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'registrera dig',
 'login_test_navigateur' => 'testar webbl&auml;sare/&aring;teruppkoppling',
 'login_verifiez_navigateur' => '(Kontrollera att din webbl&auml;sare inte sparade l&ouml;senordet...)',

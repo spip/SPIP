@@ -614,6 +614,7 @@ Trugarez da gemer perzh
 'login_retour_site' => 'Distrei&ntilde; d\'al lodenn foran',
 'login_retoursitepublic' => 'distrei&ntilde;&nbsp;d\'al&nbsp;lodenn&nbsp;foran',
 'login_sans_cookiie' => 'Kevrea&ntilde; hep toupino&ugrave;',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'en em enskriva&ntilde;',
 'login_test_navigateur' => 'taol-arnod merdeer/adkevrea&ntilde;',
 'login_verifiez_navigateur' => '(Gwiriit memes tra n\'eo ket bet memoret ho ker-tremen gant ar merdeer...)',

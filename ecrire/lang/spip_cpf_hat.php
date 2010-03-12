@@ -615,6 +615,7 @@ M&egrave;si  w soutni petisyon-nan
 'login_retour_site' => 'Tounyen sou sit piblik',
 'login_retoursitepublic' => 'tounyen&nbsp;d&egrave;y&egrave;&nbsp;sou&nbsp;sit&nbsp;piblik',
 'login_sans_cookiie' => 'Idantifikasyon ki gen pa pa oken gatomakro',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'enskri w',
 'login_test_navigateur' => 'test navigat&egrave;/rekoneksyon',
 'login_verifiez_navigateur' => '(Gad pou si navigat&egrave; ou li te pa raple modpas ou...)',

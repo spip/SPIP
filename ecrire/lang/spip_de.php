@@ -198,10 +198,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'um die Installation wirklich zu starten',
 'dirs_preliminaire' => 'Vorbereitung: <b>Berechtigungen einstellen</b>',
 'dirs_probleme_droits' => 'Problem mit den Berechtigungen',
-'dirs_repertoires_absents' => '<p><b>Folgende Verzeichnisse wurden nicht gefunden:</b><(p><ul>@bad_dirs@</ul> 
+'dirs_repertoires_absents' => '<p><b>Folgende Verzeichnisse wurden nicht gefunden:</b></p><ul>@bad_dirs@</ul>
   <p>Das liegt wahrscheinlich an unzutreffender Gross- und Kleinschreibung.
   &Uuml;berpr&uuml;fen Sie bitte die genaue Schreibweise der oben stehenden Verzeichnisse,
-  sollten Sie Abweichungen feststellen, benennen Sie bitte mit Ihrem FTP-Programm die betreffenden Verzeichnisse um.
+  sollten Sie Abweichungen feststellen, benennen Sie bitte mit Ihrem FTP-Programm die betreffenden Verzeichnisse um.</p>
   <p>Danach k&ouml;nnen Sie ',
 'dirs_repertoires_suivants' => '<p><b>In die folgenden Verzeichnisse kann nicht geschrieben werden:</b></p><ul>@bad_dirs@</ul>
 <p>Um das Problem zu l&ouml;sen, verwenden Sie bitte Ihren FTP-Client, um die Zugriffsrechte f&uuml;r diese
@@ -608,6 +608,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'login_retour_site' => 'Zur&uuml;ck zur &ouml;ffentlichen Website',
 'login_retoursitepublic' => 'Zur&uuml;ck&nbsp;zur&nbsp;&ouml;ffentlichen&nbsp;Website',
 'login_sans_cookiie' => 'Anmeldung ohne Cookies',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'anmelden',
 'login_test_navigateur' => 'Test Webbrowser/Verbindung',
 'login_verifiez_navigateur' => '(&Uuml;berpr&uuml;fen Sie, dass Ihr Webbrowser Ihr Passwort nicht gespeichert hat ...)',

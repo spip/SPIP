@@ -619,6 +619,7 @@ Merc&eacute; de la voastra participacion
 'login_retour_site' => 'Tornar au sit public',
 'login_retoursitepublic' => 'tornar&nbsp;au&nbsp;sit&nbsp;public',
 'login_sans_cookiie' => 'Identificacion sensa cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 's\'inscriure',
 'login_test_navigateur' => 'test navigador/tornar&nbsp;connectar',
 'login_verifiez_navigateur' => '(verificatz pura que lo voastre navigador a pas conservat lo m&ograve;t de santa Clara en mem&ograve;ria...)',

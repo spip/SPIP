@@ -619,6 +619,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'login_retour_site' => 'Volver ao web p&uacute;blico',
 'login_retoursitepublic' => 'volver ao web p&uacute;blico',
 'login_sans_cookiie' => 'Identificaci&oacute;n sen cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'Inscribirse',
 'login_test_navigateur' => 'proba navegador/reconexi&oacute;n',
 'login_verifiez_navigateur' => '(De todos os xeitos, comprobe que o seu navegador non memorizou a s&uacute;a chave...)',

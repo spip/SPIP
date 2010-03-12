@@ -621,6 +621,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'login_retour_site' => 'Zp&#283;t na ve&#345;ejn&eacute; str&aacute;nky',
 'login_retoursitepublic' => 'zp&#283;t na ve&#345;ejn&eacute; str&aacute;nky',
 'login_sans_cookiie' => 'Identifikace bez pou&#382;it&iacute; cookies',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'registrovat',
 'login_test_navigateur' => 'test prohl&iacute;&#382;e&#269;e/opakovan&eacute; p&#345;ipojen&iacute;',
 'login_verifiez_navigateur' => '(P&#345;esv&#283;d&#269;te se v&#353;ak, zda si prohl&iacute;&#382;e&#269; nezapamatoval va&#353;e heslo...)',

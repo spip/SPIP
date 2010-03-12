@@ -617,6 +617,7 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'login_retour_site' => 'Vissza a nyilv&aacute;nos honlapra',
 'login_retoursitepublic' => 'vissza&nbsp;a&nbsp;nyilv&aacute;nos&nbsp;honlapra',
 'login_sans_cookiie' => 'S&uuml;ti (cookie) n&eacute;lk&uuml;li azonos&iacute;t&aacute;s',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'be&iacute;ratkoz&aacute;s',
 'login_test_navigateur' => 'b&ouml;ng&eacute;sz&#337; teszt/&uacute;jracsatlakoz&aacute;s',
 'login_verifiez_navigateur' => '(Azonban ellen&#337;rizze, hogy a bong&eacute;sz&oacute; nem memoriz&aacute;lta-e a jelsz&oacute;t...)',

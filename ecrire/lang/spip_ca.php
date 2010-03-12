@@ -612,6 +612,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'login_retour_site' => 'Tornar al lloc p&uacute;blic',
 'login_retoursitepublic' => 'tornar al lloc p&uacute;blic',
 'login_sans_cookiie' => 'Identificaci&oacute; sense galeta',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'inscriure\'s',
 'login_test_navigateur' => 'prova de navegador/tornar a connectar',
 'login_verifiez_navigateur' => '(Verifiqueu no obstant que el vostre navegador no ha memoritzat la contrasenya...)',

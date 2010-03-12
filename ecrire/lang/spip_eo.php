@@ -620,6 +620,7 @@ Dankon pro via partopreno
 'login_retour_site' => 'Reen al la publika spaco',
 'login_retoursitepublic' => 'reen&nbsp;al&nbsp;la&nbsp;publika&nbsp;spaco',
 'login_sans_cookiie' => 'Ensaluto sen kuketo',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'registri&#285;i',
 'login_test_navigateur' => 'testo retumilo/rekonekti&#285;o',
 'login_verifiez_navigateur' => '(Kontrolu tamen ke via retumilo ne memoras pri via pasvorto...)',

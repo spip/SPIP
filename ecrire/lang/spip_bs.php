@@ -590,6 +590,7 @@ sera ignor&eacute;e) :
 'login_retour_site' => 'Nazad na javnu stranicu',
 'login_retoursitepublic' => 'nazad na javnu stranicu',
 'login_sans_cookiie' => 'Identifikacija bez cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'registruj se',
 'login_test_navigateur' => 'test navigatora/ponovna konekcija',
 'login_verifiez_navigateur' => '(Svakako se uvjerite da vas navigator nije zapamtio vasu lozinku...)',

@@ -608,6 +608,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.', # MODIF
 'login_retour_site' => 'Tr&#7903; l&#7841;i trang web c&ocirc;ng c&#7897;ng',
 'login_retoursitepublic' => 'tr&#7903; l&#7841;i trang web c&ocirc;ng c&#7897;ng',
 'login_sans_cookiie' => 'Nh&#7853;n di&#7879;n kh&ocirc;ng c&#7847;n cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'ghi danh',
 'login_test_navigateur' => 'th&#7917; browser/n&#7889;i l&#7841;i',
 'login_verifiez_navigateur' => '(Tuy nhi&ecirc;n, ki&#7875;m l&#7841;i &#273;&#7875; bi&#7871;t l&agrave; browser kh&ocirc;ng c&oacute; nh&#7899; m&#7853;t m&atilde; c&#7911;a b&#7841;n...)',
