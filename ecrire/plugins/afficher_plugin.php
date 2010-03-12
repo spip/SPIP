@@ -56,12 +56,14 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$s .= "<div class='resume'>";
 
 	$desc = plugin_propre($info['description']);
+	if (($p=strpos($desc, "<br />"))!==FALSE)
+		$desc = substr($desc, 0,$p);
 	$url_stat = parametre_url($url_page, "plugin",$dir_plugins.$plug_file);
 
 	$s .= "<h3 class='nom'><a href='$url_stat' rel='info'>".typo($info['nom'])."</a></h3>";
 	$s .= " <span class='version'>".$info['version']."</span>";
 	$s .= " <span class='etat'> - ".plugin_etat_en_clair($info['etat'])."</span>";
-	$s .= "<div class='short'>".couper($desc,60)."</div>";
+	$s .= "<div class='short'>".couper($desc,70)."</div>";
 	if (isset($info['icon']) and $info['icon']) {
 		include_spip("inc/filtres_images_mini");
 		$s.= "<div class='icon'><a href='$url_stat' rel='info'>".image_reduire($dir_plugins.$plug_file.'/'.trim($info['icon']), 32)."</a></div>";
@@ -147,7 +149,7 @@ function affiche_bloc_plugin($plug_file, $info, $dir_plugins=null) {
 	if (trim($info['lien'])) {
 		$lien = $info['lien'];
 		if (!preg_match(',^https?://,iS', $lien))
-			$lien = extraire_attribut(extraire_balise($lien,'a'),'href');
+			$lien = extraire_attribut(extraire_balise(propre($lien),'a'),'href');
 		$s .= "<div class='site'><a href='$lien' class='spip_out'>" . _T('en_savoir_plus') .'</a></div>';
 	}
 
