@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Aten&ccedil;&atilde;o&nbsp;! Esta rubrica cont&eacute;m @contient_breves@ informa&ccedil;&atilde;o@scb@&nbsp;: se a deslocar, favor confirm&aacute;-lo nesta caixa',
 'avis_destinataire_obligatoire' => 'Deve indicar um destinat&aacute;rio antes de mandar esta mensagem.',
 'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
-'avis_erreur_connexion_mysql' => 'Erro de liga&ccedil;&atilde;o SQL',
+'avis_erreur_connexion_mysql' => 'Erro de liga&ccedil;&atilde;o SQL', # MODIF
 'avis_erreur_version_archive' => '<b>Aten&ccedil;&atilde;o! O ficheiro @archive@ corresponde a
     uma vers&atilde;o de SPIP diferente da que
     tem instalada.</b> Enfrentar&aacute; grandes
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Estes s&iacute;tios tiveram um problema de liga&ccedil;&atilde;o  ',
 'avis_sites_syndiques_probleme' => 'Estes s&iacute;tios provocaram um problema  ',
 'avis_suppression_base' => 'Aten&ccedil;&atilde;o, a supress&atilde;o dos dados &eacute; irrevers&iacute;vel',
-'avis_version_mysql' => 'A sua vers&atilde;o de SQL (@version_mysql@) n&atilde;o permite a auto-repara&ccedil;&atilde;o das tabelas da base.',
+'avis_version_mysql' => 'A sua vers&atilde;o de SQL (@version_mysql@) n&atilde;o permite a auto-repara&ccedil;&atilde;o das tabelas da base.', # MODIF
 
 // B
 'bouton_acces_ldap' => 'Acrescentar o acesso a LDAP >>', # MODIF
@@ -204,6 +204,10 @@ ou da rede',
 // F
 'forum_info_original' => 'original', # NEW
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Esta p&aacute;gina apresenta muitos m&eacute;todos para permanecer em contacto com a vida deste s&iacute;tio.',
 'ical_info2' => 'Para mais informa&ccedil;&otilde;es sobre estas t&eacute;cnicas, consultar  <a href="@spipnet@">a documenta&ccedil;&atilde;o de SPIP</a>.', # MODIF
@@ -344,7 +348,7 @@ ou da rede',
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Segunda etapa: <b>Teste de liga&ccedil;&atilde;o &agrave; base</b>', # MODIF
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'A liga&ccedil;&atilde;o LDAP foi bem sucedida.</b><p> Pode passar para a etapa seguinte.</p>',
+'info_connexion_ldap_ok' => 'A liga&ccedil;&atilde;o LDAP foi bem sucedida.</b><p> Pode passar para a etapa seguinte.</p>', # MODIF
 'info_connexion_mysql' => 'Primeira etapa : <b>A sua liga&ccedil;&atilde;o SQL<b>', # MODIF
 'info_connexion_ok' => 'A liga&ccedil;&atilde;o foi bem sucedida.',
 'info_contact' => 'Contacto',
@@ -397,9 +401,9 @@ ou da rede',
  f&oacute;rum suplementar, reservado apenas aos administradores',
 'info_forum_statistiques' => 'Estat&iacute;sticas das visitas',
 'info_forums_abo_invites' => 'O seu site cont&eacute;m f&oacute;runs por assinatura; os visitantes s&atilde;o convidados a registar-se no site p&uacute;blico.',
-'info_gauche_admin_effacer' => '<b>Esta p&aacute;gina &eacute; acess&iacute;vel apenas aos respons&aacute;veis pelo site.</b><p> Ela d&aacute; acesso &agrave;s diferentes fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica. Algumas dessas fun&ccedil;&otilde;es possuem um processo espec&iacute;fico de autentica&ccedil;&atilde;o que exige acesso FTP ao website.</p>',
-'info_gauche_admin_tech' => '<b>Esta p&aacute;gina est&aacute; acess&iacute;vel apenas aos respons&aacute;veis pelo site.</b><p> Ela d&aacute; acesso &agrave;s diferentes fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica. Algumas dessas fun&ccedil;&otilde;es possuem um processo espec&iacute;fico de autentica&ccedil;&atilde;o que exige acesso FTP ao website.</p>',
-'info_gauche_admin_vider' => '<b>Esta p&aacute;gina &eacute; acess&iacute;vel apenas aos respons&aacute;veis pelo site.</b><p> Ela d&aacute; acesso &agrave;s diferentes fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica. Algumas dessas fun&ccedil;&otilde;es possuem um processo espec&iacute;fico de autentica&ccedil;&atilde;o que exige acesso FTP ao website</p>',
+'info_gauche_admin_effacer' => '<b>Esta p&aacute;gina &eacute; acess&iacute;vel apenas aos respons&aacute;veis pelo site.</b><p> Ela d&aacute; acesso &agrave;s diferentes fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica. Algumas dessas fun&ccedil;&otilde;es possuem um processo espec&iacute;fico de autentica&ccedil;&atilde;o que exige acesso FTP ao website.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>Esta p&aacute;gina est&aacute; acess&iacute;vel apenas aos respons&aacute;veis pelo site.</b><p> Ela d&aacute; acesso &agrave;s diferentes fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica. Algumas dessas fun&ccedil;&otilde;es possuem um processo espec&iacute;fico de autentica&ccedil;&atilde;o que exige acesso FTP ao website.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>Esta p&aacute;gina &eacute; acess&iacute;vel apenas aos respons&aacute;veis pelo site.</b><p> Ela d&aacute; acesso &agrave;s diferentes fun&ccedil;&otilde;es de manuten&ccedil;&atilde;o t&eacute;cnica. Algumas dessas fun&ccedil;&otilde;es possuem um processo espec&iacute;fico de autentica&ccedil;&atilde;o que exige acesso FTP ao website</p>', # MODIF
 'info_gauche_auteurs' => 'Encontrar&aacute; aqui todos os autores do site.
 Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administrador = verde; redactor = amarelo).',
 'info_gauche_auteurs_exterieurs' => 'Os autores externos, sem acesso ao s&iacute;tio, s&atilde;o indicados por um &iacute;cone azul&nbsp;;
@@ -457,7 +461,7 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_message_en_redaction' => 'As suas mensagens em curso de redac&ccedil;&atilde;o',
 'info_message_technique' => 'Mensagem t&eacute;cnica:',
 'info_messagerie_interne' => 'Correio interno',
-'info_mise_a_niveau_base' => 'nivela&ccedil;&atilde;o da sua base SQL',
+'info_mise_a_niveau_base' => 'nivela&ccedil;&atilde;o da sua base SQL', # MODIF
 'info_mise_a_niveau_base_2' => '{{Aten&ccedil;&atilde;o!}} Instalou uma vers&atilde;o
  dos ficheiros SPIP {anterior} &agrave; que se encontrava
  antes neste s&iacute;tio: a sua base de dados corre o risco de se perder
@@ -833,6 +837,9 @@ numa cor que indica o seu estado:',
 'module_texte_traduction' => 'O ficheiro de l&iacute;ngua &laquo;&nbsp;@module@&nbsp;&raquo; est&aacute; dispon&iacute;vel em&nbsp;:',
 'mois_non_connu' => 'n&atilde;o conhecido',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contenu', # NEW
 'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
@@ -970,7 +977,7 @@ encurtar a sua transfer&ecirc;ncia para o seu computador ou para um servidor de 
  p&ocirc;r rapidamente em linha informa&ccedil;&otilde;es concisas, gerir
 uma revista de imprensa, um calend&aacute;rio dos acontecimentos...',
 'texte_choix_base_1' => 'Escolher a sua base',
-'texte_choix_base_2' => 'O servidor SQL contem muitas bases de dados.',
+'texte_choix_base_2' => 'O servidor SQL contem muitas bases de dados.', # MODIF
 'texte_choix_base_3' => '<b>Seleccione</b> a seguir a que lhe foi atribuida pelo seu servi&ccedil;o de hospedagem.', # MODIF
 'texte_choix_table_prefix' => 'Pr&eacute;fixe des tables&nbsp;:', # NEW
 'texte_commande_vider_tables_indexation' => 'Utilize este comando para esvaziar as tabelas de indexa&ccedil;&atilde;o utilizadas
@@ -1009,7 +1016,7 @@ que alguns elementos dos artigos n&atilde;o s&atilde;o utilizados.
 'texte_date_publication_article' => 'DATA DE PUBLICA&Ccedil;&Atilde;O ONLINE:',
 'texte_descriptif_petition' => 'Descri&ccedil;&atilde;o do abaixo-assinado',
 'texte_descriptif_rapide' => 'Descri&ccedil;&atilde;o r&aacute;pida',
-'texte_documents_joints' => 'Pode autorizar a inclus&atilde;o de documentos (ficheiros, imagens,  multim&eacute;dia etc.) nos artigos e/ou nas sec&ccedil;&otilde;es. Estes ficheiros podem, em seguida, ser referenciados no artigo, ou exibidos separadamente.',
+'texte_documents_joints' => 'Pode autorizar a inclus&atilde;o de documentos (ficheiros, imagens,  multim&eacute;dia etc.) nos artigos e/ou nas sec&ccedil;&otilde;es. Estes ficheiros podem, em seguida, ser referenciados no artigo, ou exibidos separadamente.', # MODIF
 'texte_documents_joints_2' => 'Esta combina&ccedil;&atilde;o n&atilde;o impede a inser&ccedil;&atilde;o de imagens directamente nos artigos.',
 'texte_effacer_base' => 'Apagar a base de dados SPIP',
 'texte_effacer_donnees_indexation' => 'Apagar os dados de indexa&ccedil;&atilde;o',
@@ -1067,7 +1074,7 @@ de uma salvaguarda por exemplo). Note que os documentos modificados de
  independentemente da sua coloca&ccedil;&atilde;o nas rubricas. Pode assim
  enriquecer a navega&ccedil;&atilde;o do seu s&iacute;tio, e at&eacute; utilizar essas propriedades
  para personalizar a apresenta&ccedil;&atilde;o dos artigos nos esqueletos.',
-'texte_mots_cles_dans_forum' => 'Deseja permitir a utiliza&ccedil;&atilde;o das palvras-chave seleccion&aacute;veis pelos visitadores, nos f&oacute;runs do s&iacute;tio p&uacute;blico&nbsp;? (Aten&ccedil;&atilde;o&nbsp;: esta op&ccedil;&atilde;o &eacute; relativamente complexa de utilizar correctamente.)',
+'texte_mots_cles_dans_forum' => 'Deseja permitir a utiliza&ccedil;&atilde;o das palvras-chave seleccion&aacute;veis pelos visitadores, nos f&oacute;runs do s&iacute;tio p&uacute;blico&nbsp;? (Aten&ccedil;&atilde;o&nbsp;: esta op&ccedil;&atilde;o &eacute; relativamente complexa de utilizar correctamente.)', # MODIF
 'texte_multilinguisme' => 'Se desejar gerir artigos em muitas l&iacute;nguas, com uma navega&ccedil;&atilde;o complexa, pode acrescentar um menu de l&iacute;ngua aos artigos e/ou nas rubricas, em fun&ccedil;&atilde;o da organiza&ccedil;&atilde;o do seu s&iacute;tio.',
 'texte_multilinguisme_trad' => 'Pode tamb&eacute;m activar um sistema de gest&atilde;o de la&ccedil;os entre as diferentes tradu&ccedil;&otilde;es de um artigo.',
 'texte_non_compresse' => '<i>n&atilde;o comprimido</i> ( o seu sezrvidor n&atilde;o suporta esta funcionalidade)',
@@ -1104,7 +1111,7 @@ recompor uma &uacute;nica p&aacute;gina, passe pelo espa&ccedil;o p&uacute;blico
  SQL disp&otilde;e de uma funcionalidade de repara&ccedil;&atilde;o das suas tabelas quando foram acidententalmente
  danificadas. Pode tentar aqui essa repara&ccedil;&atilde;o&nbsp;: se falhar, conserve uma c&oacute;pia da exibi&ccedil;&atilde;o que talvez contenha
  ind&iacute;cios daquilo que n&atilde;o funciona...<p>
- Se o problema persistir, contacte com o seu servi&ccedil;o de hospedagem.',
+ Se o problema persistir, contacte com o seu servi&ccedil;o de hospedagem.', # MODIF
 'texte_restaurer_base' => 'Restaurar o conte&uacute;do de uma salvaguarda da base',
 'texte_restaurer_sauvegarde' => 'Esta op&ccedil;&atilde;o permite restaurar uma salvaguarda da base anteriormente
   efectuada. Para esse efeito, o ficheiro que cont&eacute;m a salvaguarda deve ter sido

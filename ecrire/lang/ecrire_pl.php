@@ -202,6 +202,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'forum_info_original' => 'oryginalny',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Na tej stronie prezentujemy r&oacute;&#380;ne metody pozostanie w kontakcie z dzia&#322;alno&#347;ci&#261; serwisu.',
 'ical_info2' => 'Aby przeczyta&#263; wi&#281;cej na ten temat, id&#378; na stron&#281;<a href="@spipnet@">la documentation de SPIP</a>.', # MODIF
@@ -341,7 +345,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Pr&oacute;ba po&#322;&#261;czenia z baz&#261; danych',
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => '<b>Po&#322;&#261;czenie LDAP powiod&#322;o si&#281;.<b><p> Id&#378; do nast&#281;pnego etapu.</p>',
+'info_connexion_ldap_ok' => '<b>Po&#322;&#261;czenie LDAP powiod&#322;o si&#281;.<b><p> Id&#378; do nast&#281;pnego etapu.</p>', # MODIF
 'info_connexion_mysql' => 'Po&#322;&#261;czenie z baz&#261; SQL', # MODIF
 'info_connexion_ok' => 'Po&#322;&#261;czenie powiod&#322;o si&#281;.',
 'info_contact' => 'Kontakt',
@@ -394,11 +398,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   dodatkowe forum, zarezerwowane jedynie dla admin&oacute;w.',
 'info_forum_statistiques' => 'Odwied&#378; statystyki',
 'info_forums_abo_invites' => 'Twoja strona zawiera formu dost&#281;pne po zalogowaniu, zatem odwiedzaj&#261;cy powinni si&#281; zarejestrowa&#263; na stronie publicznej.',
-'info_gauche_admin_effacer' => '<b>Ta strona jest dost&#281;pna jedynie dla administrator&oacute;w.<b><p> Daje ona dost&#281;p do funkcji technicznych serwisu. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; wymagaj&#261; po&#322;&#261;czenia   z serwerem przez FTP.',
+'info_gauche_admin_effacer' => '<b>Ta strona jest dost&#281;pna jedynie dla administrator&oacute;w.<b><p> Daje ona dost&#281;p do funkcji technicznych serwisu. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; wymagaj&#261; po&#322;&#261;czenia   z serwerem przez FTP.', # MODIF
 'info_gauche_admin_tech' => '<b>Ta strona jest dost&#281;pna jedynie dla jej w&#322;a&#347;cicieli.</b><p> Daje dost&#281;p do fukcji typowo technicznych. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego uwierzytelnienia
-, kt&oacute;re mo&#380;na uzyska&#263; jedynie poprzez FTP.',
+, kt&oacute;re mo&#380;na uzyska&#263; jedynie poprzez FTP.', # MODIF
 'info_gauche_admin_vider' => '<b>Ta strona jest dost&#281;pna jedynie dla g&#322;&oacute;wnych administrator&oacute;w.</b><p> Daje dost&#281;p do funkcji typowo technicznych. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego uwierzytelnienia
-, kt&oacute;re mo&#380;na uzyska&#263; jedynie poprzez FTP.',
+, kt&oacute;re mo&#380;na uzyska&#263; jedynie poprzez FTP.', # MODIF
 'info_gauche_auteurs' => 'Znajdziesz tutaj informacje o wszystkich autorach serwisu.
  Ich kompetencje s&#261; zaznaczone kolorem ikony (redaktor = zielonym; administrator = &#380;&oacute;&#322;tym).',
 'info_gauche_auteurs_exterieurs' => 'Autorzy zewn&#281;trzni, bez dost&#281;pu do strefy publicznej s&#261; zaznaczeni ikon&#261; niebiesk&#261;&nbsp;;
@@ -831,6 +835,9 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'module_texte_traduction' => 'Plik j&#281;zykowy &laquo;&nbsp;@module@&nbsp;&raquo; jest dost&#281;pny w&nbsp;:',
 'mois_non_connu' => 'nieznany',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contenu', # NEW
 'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
@@ -1009,7 +1016,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_documents_joints' => 'Mo&#380;esz autoryzowa&#263; dodawanie dokument&oacute;w tekstowych, obrazk&oacute;w,
 multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oacute;w. Te pliki
  mog&#261; zosta&#263; do&#322;&#261;czone do artyku&#322;u
- lub mog&#261; by&#263; u&#380;yte niezale&#380;nie.<p>',
+ lub mog&#261; by&#263; u&#380;yte niezale&#380;nie.<p>', # MODIF
 'texte_documents_joints_2' => 'Te ustawienia nie przeszkadzaj&#261; we wstawianiu obrazk&oacute;w bezpo&#347;rednio do artyku&#322;&oacute;w.',
 'texte_effacer_base' => 'Usu&#324; baz&#281; danych SPIP',
 'texte_effacer_donnees_indexation' => 'Wyma&#380; dane pochodz&#261;ce z indeksowania',
@@ -1066,7 +1073,7 @@ multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oac
 'texte_nouveau_message' => 'Nowa wiadomo&#347;&#263;',
 'texte_nouveau_mot' => 'Nowe s&#322;owo kluczowe',
 'texte_nouvelle_version_spip_1' => 'Nowa wersja SPIP zosta&#322;a zainstalowana.',
-'texte_nouvelle_version_spip_2' => 'Nowa wersja wymaga bardziej kompletnego dostosowania ni&#380; zwykle. Je&#347;li jeste&#347; administratorem strony wykasuj plik @connect@ z katalogu <tt>ecrire</tt> i powt&oacute;rz instalacj&#281; w celu uaktualnienia Twoich parametr&oacute;w po&#322;&#261;czenia z baz&#261; danych .<p> (NB.&nbsp;: je&#347;li zapomnia&#322;e&#347; parametry po&#322;&#261;czenia, rzu&#263; okiem do pliku @connect@ zanim go skasujesz...)',
+'texte_nouvelle_version_spip_2' => 'Nowa wersja wymaga bardziej kompletnego dostosowania ni&#380; zwykle. Je&#347;li jeste&#347; administratorem strony wykasuj plik @connect@ z katalogu <tt>ecrire</tt> i powt&oacute;rz instalacj&#281; w celu uaktualnienia Twoich parametr&oacute;w po&#322;&#261;czenia z baz&#261; danych .<p> (NB.&nbsp;: je&#347;li zapomnia&#322;e&#347; parametry po&#322;&#261;czenia, rzu&#263; okiem do pliku @connect@ zanim go skasujesz...)', # MODIF
 'texte_operation_echec' => 'Powr&oacute;&#263; do poprzedniej strony, wybierz inn&#261; baz&#281; danych lub stw&oacute;rz now&#261;. Sprawd&#378; informacje podane przez tw&oacute;j serwis hostingowy.',
 'texte_plus_trois_car' => 'wi&#281;cej ni&#380; 3 znaki',
 'texte_plusieurs_articles' => 'Kilku autor&oacute;w zosta&#322;o znalezionych dla "@cherche_auteur@":',

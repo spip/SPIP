@@ -202,6 +202,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'forum_info_original' => 'original', # NEW
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Tato str&aacute;nka umo&#382;&#328;uje z&#367;stat v kontaktu s d&#283;n&iacute;m na tomto webu n&#283;kolika zp&#367;soby.',
 'ical_info2' => 'Bli&#382;&#353;&iacute; informace naleznete v <a href="@spipnet@">dokumentaci k syst&eacute;mu SPIP</a>.', # MODIF
@@ -342,7 +346,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Your version:', # NEW
 'info_connexion_base' => 'Druh&yacute; krok : <b>Pokus o p&#345;ipojen&iacute; k datab&aacute;zi</b>', # MODIF
 'info_connexion_base_donnee' => 'Connection to your database', # NEW
-'info_connexion_ldap_ok' => 'P&#345;ipojen&iacute; k LDAP bylo &uacute;sp&#283;&#353;n&eacute;.</b><p> M&#367;&#382;ete p&#345;istoupit k dal&#353;&iacute;mu kroku.</p>',
+'info_connexion_ldap_ok' => 'P&#345;ipojen&iacute; k LDAP bylo &uacute;sp&#283;&#353;n&eacute;.</b><p> M&#367;&#382;ete p&#345;istoupit k dal&#353;&iacute;mu kroku.</p>', # MODIF
 'info_connexion_mysql' => 'Prvn&iacute; krok: <b>P&#345;ipojen&iacute; k datab&aacute;zi SQL</b>', # MODIF
 'info_connexion_ok' => 'Spojen&iacute; bylo &uacute;sp&#283;&#353;n&eacute;.',
 'info_contact' => 'Kontakt',
@@ -395,11 +399,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   skupinu vyhrazenou pouze pro spr&aacute;vce.',
 'info_forum_statistiques' => 'Statistiky n&aacute;v&#353;t&#283;vnosti',
 'info_forums_abo_invites' => 'Na va&#353;em webu existuj&iacute; diskusn&iacute; skupiny vyhrazen&eacute; p&#345;ihl&aacute;&#353;en&yacute;m &uacute;&#269;astn&iacute;k&#367;m; n&aacute;v&#353;t&#283;vn&iacute;ci se mus&iacute; tedy zaregistrovat na ve&#345;ejn&eacute; &#269;&aacute;sti webu.',
-'info_gauche_admin_effacer' => '<b>Tato str&aacute;nka je p&#345;&iacute;stupn&aacute; pouze t&#283;m, kdo za web odpov&iacute;daj&iacute;.</b><p> Umo&#382;&#328;uje p&#345;&iacute;stup k funkc&iacute;m ur&#269;en&yacute;m pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute; autentifikaci, je&#382; vy&#382;aduje FTP p&#345;&iacute;stup k webu.</p>',
+'info_gauche_admin_effacer' => '<b>Tato str&aacute;nka je p&#345;&iacute;stupn&aacute; pouze t&#283;m, kdo za web odpov&iacute;daj&iacute;.</b><p> Umo&#382;&#328;uje p&#345;&iacute;stup k funkc&iacute;m ur&#269;en&yacute;m pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute; autentifikaci, je&#382; vy&#382;aduje FTP p&#345;&iacute;stup k webu.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Tato str&aacute;nka je vyhrazena t&#283;m, kdo za web odpov&iacute;daj&iacute;.</b><p> Umo&#382;&#328;uje p&#345;&iacute;stup k funkc&iacute;m
-pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute; autentifikaci, je&#382; vy&#382;aduje FTP p&#345;&iacute;stup k webu.</p>',
+pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute; autentifikaci, je&#382; vy&#382;aduje FTP p&#345;&iacute;stup k webu.</p>', # MODIF
 'info_gauche_admin_vider' => '<b>Tato str&aacute;nka je vyhrazena t&#283;m, kdo za web odpov&iacute;daj&iacute;.</b><p> Umo&#382;&#328;uje p&#345;&iacute;stup k funkc&iacute;m
-pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute; autentifikaci, je&#382; vy&#382;aduje FTP p&#345;&iacute;stup k webu.</p>',
+pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute; autentifikaci, je&#382; vy&#382;aduje FTP p&#345;&iacute;stup k webu.</p>', # MODIF
 'info_gauche_auteurs' => 'Zde jsou uvedeni v&#353;ichni auto&#345;i webu.
  Jsou rozli&#353;eni barvou ikony (spr&aacute;vce = zelen&aacute;; redaktor = &#382;lut&aacute;).',
 'info_gauche_auteurs_exterieurs' => 'Extern&iacute; auto&#345;i bez p&#345;&iacute;stupu k webu jsou ozna&#269;eni modrou ikonou;
@@ -832,6 +836,9 @@ ukazuje jejich stav:',
 'module_texte_traduction' => 'Jazykov&yacute; soubor "&nbsp;@module@&nbsp;" existuje v t&#283;chto verz&iacute;ch:',
 'mois_non_connu' => 'nen&iacute; zn&aacute;mo',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contents', # NEW
 'onglet_declarer_une_autre_base' => 'Declare another database', # NEW
@@ -1006,7 +1013,7 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
 'texte_descriptif_rapide' => 'Stru&#269;n&yacute; popis',
 'texte_documents_joints' => 'M&#367;&#382;ete povolit p&#345;id&aacute;v&aacute;n&iacute; dokument&#367; (textov&yacute;ch a jin&yacute;ch soubor&#367;, obr&aacute;zk&#367;, multim&eacute;dii atd.),
  a to jak k &#269;l&aacute;nk&#367;m tak i k sekc&iacute;m. Na tyto soubory pak m&#367;&#382;ete v &#269;l&aacute;nc&iacute;ch
- odkazovat, p&#345;&iacute;padn&#283; je m&#367;&#382;ete zobrazovat samostatn&#283;.',
+ odkazovat, p&#345;&iacute;padn&#283; je m&#367;&#382;ete zobrazovat samostatn&#283;.', # MODIF
 'texte_documents_joints_2' => 'I p&#345;i tomto nastaven&iacute; m&#367;&#382;ete vkl&aacute;dat obr&aacute;zky p&#345;&iacute;mo do &#269;l&aacute;nk&#367;.',
 'texte_effacer_base' => 'Odstranit datab&aacute;zi SPIP',
 'texte_effacer_donnees_indexation' => 'Odstranit indexy',
@@ -1062,7 +1069,7 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
 'texte_nouveau_message' => 'Nov&aacute; zpr&aacute;va',
 'texte_nouveau_mot' => 'Nov&eacute; slovo',
 'texte_nouvelle_version_spip_1' => 'Nainstalovali jste novou verzi syst&eacute;mu SPIP.',
-'texte_nouvelle_version_spip_2' => 'Tato verze vy&#382;aduje rozs&aacute;hlej&#353;&iacute; aktualizaci ne&#382; je obvykl&eacute;. Jste-li spr&aacute;vcem tohoto webu, odstra&#328;te soubor @connect@ a spus&#357;te instalaci. T&iacute;m dojde k aktualizaci parametr&#367; pro p&#345;ipojen&iacute; k datab&aacute;zi.<p> (Pozn.: Pokud jste parametry pro p&#345;ipojen&iacute; zapomn&#283;li, pod&iacute;vejte se nejprve do souboru @connect@, a teprve pot&eacute; jej odstra&#328;te...)</p>',
+'texte_nouvelle_version_spip_2' => 'Tato verze vy&#382;aduje rozs&aacute;hlej&#353;&iacute; aktualizaci ne&#382; je obvykl&eacute;. Jste-li spr&aacute;vcem tohoto webu, odstra&#328;te soubor @connect@ a spus&#357;te instalaci. T&iacute;m dojde k aktualizaci parametr&#367; pro p&#345;ipojen&iacute; k datab&aacute;zi.<p> (Pozn.: Pokud jste parametry pro p&#345;ipojen&iacute; zapomn&#283;li, pod&iacute;vejte se nejprve do souboru @connect@, a teprve pot&eacute; jej odstra&#328;te...)</p>', # MODIF
 'texte_operation_echec' => 'Vra&#357;te se na p&#345;edchoz&iacute; str&aacute;nku a zvolte jinou datab&aacute;zi nebo vytvo&#345;te novou. Zkontrolujte informace od sv&eacute;ho poskytovatele prostoru pro web.',
 'texte_plus_trois_car' => 'v&iacute;ce ne&#382; 3 znaky',
 'texte_plusieurs_articles' => 'Pro "@cherche_auteur@" bylo nalezeno n&#283;kolik autor&#367;:',

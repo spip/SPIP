@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_destinataire_obligatoire' => 'Ha d\'escriure un destinatari abans d\'enviar el missatge.',
 'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Error de connexi&oacute; SQL',
-'avis_erreur_version_archive' => '<b>Atenci&oacute;! El fitxer @archive@ correspon a una versi&oacute; diferent d\'SPIP de la instal&middot;lada.</b> Us podeu trobar amb grans dificultats: risc de destrucci&oacute; de la base de dades, mal funcionament del lloc, etc. Cal que no valideu aquesta sol&middot;licitud d\'importaci&oacute;.<p> Si voleu m&eacute;s informaci&oacute;, consulteu <a href="@spipnet@"> la documentaci&oacute; d\'SPIP</a>.',
+'avis_erreur_version_archive' => '<b>Atenci&oacute;! El fitxer @archive@ correspon a una versi&oacute; diferent d\'SPIP de la instal&middot;lada.</b> Us podeu trobar amb grans dificultats: risc de destrucci&oacute; de la base de dades, mal funcionament del lloc, etc. Cal que no valideu aquesta sol&middot;licitud d\'importaci&oacute;.<p> Si voleu m&eacute;s informaci&oacute;, consulteu <a href="@spipnet@"> la documentaci&oacute; d\'SPIP</a>.', # MODIF
 'avis_espace_interdit' => '<b>Zona prohibida</b><div>SPIP ja est&agrave; instal&middot;lat.</div>',
 'avis_lecture_noms_bases_1' => 'El programa d\'instal&middot;laci&oacute; no ha pogut llegir els noms de les bases de dades instal&middot;lades.',
 'avis_lecture_noms_bases_2' => 'O b&eacute; cap base de dades no est&agrave; disponible, o b&eacute; la funci&oacute; que permet de llistar les bases ha estat
@@ -196,6 +196,10 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 // F
 'forum_info_original' => 'original',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Aquesta p&agrave;gina mostra diferents maneres per estar en contacte amb la vida d\'aquest lloc.',
 'ical_info2' => 'Per tenir m&eacute;s informacions sobre aquestes t&egrave;cniques, no dubteu a consultar <a href="@spipnet@">la documentaci&oacute; d\'SPIP</a>.',
@@ -332,7 +336,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_conflit_edition_votre_version' => 'La vostra versi&oacute;:',
 'info_connexion_base' => 'Intent de connexi&oacute; a la base de dades',
 'info_connexion_base_donnee' => 'Connexi&oacute; amb la vostra base de dades',
-'info_connexion_ldap_ok' => 'La connexio LDAP ha reexit.</b><p> Podeu passar al seg&uuml;ent pas.',
+'info_connexion_ldap_ok' => 'La connexio LDAP ha reexit.</b><p> Podeu passar al seg&uuml;ent pas.', # MODIF
 'info_connexion_mysql' => 'La vostra connexi&oacute; SQL',
 'info_connexion_ok' => 'La connexi&oacute; ha reexit.',
 'info_contact' => 'Contacte',
@@ -382,9 +386,9 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
   reservat nom&eacute;s als adminsitradors. ',
 'info_forum_statistiques' => 'Estad&iacute;stiques de les visites',
 'info_forums_abo_invites' => 'El seu lloc Web proporciona f&ograve;rums pels abonats; en el lloc p&uacute;blic els visitants s&oacute;n convidats a enregistrar-se.',
-'info_gauche_admin_effacer' => '<b>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</b><p> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
-'info_gauche_admin_tech' => '<b>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</b><p> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
-'info_gauche_admin_vider' => '<b>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</b><p> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
+'info_gauche_admin_effacer' => '<b>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</b><p> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.', # MODIF
+'info_gauche_admin_tech' => '<b>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</b><p> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.', # MODIF
+'info_gauche_admin_vider' => '<b>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</b><p> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.', # MODIF
 'info_gauche_auteurs' => 'Aqu&iacute; hi trobareu tots els autors del lloc.
  El seu estat s\'indica pel color de la seva icona (administrador = verd; redactor = groc).',
 'info_gauche_auteurs_exterieurs' => 'Els autors externs, sense acc&eacute;s al lloc, estan indicats amb una icona blava;
@@ -803,6 +807,9 @@ amb un color que indica el seu estat:',
 'module_texte_traduction' => 'El fitxer de llengua &laquo;&nbsp;@module@&nbsp;&raquo; es troba disponible a:',
 'mois_non_connu' => 'desconegut',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contingut',
 'onglet_declarer_une_autre_base' => 'Declarar una altre base',
@@ -968,7 +975,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_date_publication_article' => 'DATA DE PUBLICACI&Oacute; EN L&Iacute;NIA&nbsp;:',
 'texte_descriptif_petition' => 'Descripci&oacute; de la petici&oacute;',
 'texte_descriptif_rapide' => 'Descripci&oacute; r&agrave;pida',
-'texte_documents_joints' => 'Es pot permetre afegir documents (fitxers ofim&agrave;tics, imatges, multim&egrave;dia, etc.) als articles i/o a les seccions. Aquests fitxers poden estar referenciats dins l\'article, o mostrats separadament.<p>',
+'texte_documents_joints' => 'Es pot permetre afegir documents (fitxers ofim&agrave;tics, imatges, multim&egrave;dia, etc.) als articles i/o a les seccions. Aquests fitxers poden estar referenciats dins l\'article, o mostrats separadament.<p>', # MODIF
 'texte_documents_joints_2' => 'Aquesta regla no impideix pas l\'inserci&oacute; d\'imatges directament als articles.',
 'texte_effacer_base' => 'Esborrar la base de dades SPIP',
 'texte_effacer_donnees_indexation' => 'Borrar les dades d\'indexaci&oacute;',
@@ -978,7 +985,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_enrichir_mise_a_jour' => 'Podeu enriquir la compaginaci&oacute; del text emprant "dreceres tipogr&agrave;fiques".',
 'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el directori @dossier@ ?</b><p>
  Aquests fitxers us poden servir per restringir l\'acc&eacute;s als autors i als administradors a altres llocs de la vostra Web (programa extern d\'estad&iacute;stiques, per exemple).<p>
- Si no li veieu cap utilitat, podeu deixar aquesta opci&oacute; en el seu valor per defecte (no crear fitxers).</p>',
+ Si no li veieu cap utilitat, podeu deixar aquesta opci&oacute; en el seu valor per defecte (no crear fitxers).</p>', # MODIF
 'texte_informations_personnelles_1' => ' El sistema va ara a fer-vos un acc&eacute;s personalitzat al web.',
 'texte_informations_personnelles_2' => ' (Nota: si es tracta d\'una reinstal.laci&oacute; mantenint el vostre acc&eacute;s pot',
 'texte_introductif_article' => ' (Texte introductiu de l\'article.)',
@@ -1019,7 +1026,7 @@ enriquir la navegaci&oacute; del vostre lloc, incl&uacute;s utilitzar aquestes p
 'texte_nouveau_message' => 'Missatge nou',
 'texte_nouveau_mot' => 'Nova paraula',
 'texte_nouvelle_version_spip_1' => 'Heu instal.lat una nova versi&oacute; d\'SPIP.',
-'texte_nouvelle_version_spip_2' => 'Aquesta nova versi&oacute; necessita una actualitzaci&oacute; m&eacute;s complerta que la normal. Si sou el webmestre del lloc, vulgueu esborrar el fitxer @connect@ i reprendre la instal&middot;laci&oacute; per tal d\'actualitzar els par&agrave;metres de connexi&oacute; a la base de dades.<p>(NB.: si heu oblidat els vostres par&agrave;metres de connexi&oacute;, doneu un cop d\'ull al fitxer @connect@ abans de suprimir-lo...)</p>',
+'texte_nouvelle_version_spip_2' => 'Aquesta nova versi&oacute; necessita una actualitzaci&oacute; m&eacute;s complerta que la normal. Si sou el webmestre del lloc, vulgueu esborrar el fitxer @connect@ i reprendre la instal&middot;laci&oacute; per tal d\'actualitzar els par&agrave;metres de connexi&oacute; a la base de dades.<p>(NB.: si heu oblidat els vostres par&agrave;metres de connexi&oacute;, doneu un cop d\'ull al fitxer @connect@ abans de suprimir-lo...)</p>', # MODIF
 'texte_operation_echec' => 'Torneu a la p&agrave;gina anterior, seleccioneu una altra base o creeu-ne una de nova. Verifiqueu les dades donades pel vostre prove&iuml;dor d\'hostatge.',
 'texte_plus_trois_car' => 'm&eacute;s de 3 car&agrave;cters',
 'texte_plusieurs_articles' => 'Diversos autors trobats per  "@cherche_auteur@":',
@@ -1037,7 +1044,7 @@ enriquir la navegaci&oacute; del vostre lloc, incl&uacute;s utilitzar aquestes p
 'texte_referencement_automatique_verifier' => 'Verifiqueu les informacions subministrades per <tt>@url@</tt> abans d\'enregistrar. ',
 'texte_requetes_echouent' => '<b>Quan algunes peticions SQL fracassen sistem&agrave;ticament i sense tenir una ra&oacute; aparent, &eacute;s possible que sigui per culpa de la pr&ograve;pia base de dades.</b><p>
   El vostre servidor SQL disposa d\'una facultat de reparaci&oacute; de les seves taules quan aquestes han estat deteriorades per accident. Aqu&iacute; podeu intentar aquesta reparaci&oacute;; en cas de frac&agrave;s, conserveu una c&ograve;pia del resultat ja que possiblement cont&eacute; indicis de quines coses no funcionen...<p>
-  Si el problema persisteix, poseu-vos en contacte amb el vostre prove&iuml;dor d\'hostatge.<p>',
+  Si el problema persisteix, poseu-vos en contacte amb el vostre prove&iuml;dor d\'hostatge.<p>', # MODIF
 'texte_restaurer_base' => 'Restaurar el contingut d\'una c&ograve;pia de seguretat de la base',
 'texte_restaurer_sauvegarde' => 'Aquesta opci&oacute; permet restaurar una c&ograve;pia de seguretat de la base de dades realitzada anteriorment. Per tal que aix&iacute; sigui, el fitxer que cont&eacute; la c&ograve;pia de seguretat s\'ha d\'haver situat dins del directori @dossier@.
 Sigueu prudents amb aquesta funcionalitat: <b>les modificacions o p&egrave;rdues eventuals s&oacute;n irreversibles.</b>',

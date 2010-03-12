@@ -200,6 +200,10 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 // F
 'forum_info_original' => 'original', # NEW
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Ez az oldal t&ouml;bb m&oacute;dszert mutat ahhoz, hogy maradjon kapcsolatban e honlap &eacute;let&eacute;vel.',
 'ical_info2' => 'Azokr&oacute;l a technik&aacute;kr&oacute;l t&ouml;v&aacute;bbi inform&aacute;ci&oacute;k olvashat&oacute;k ide <a href="@spipnet@">az SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
@@ -338,7 +342,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'M&aacute;sodik l&eacute;p&eacute;s : <b>Adatb&aacute;zishoz val&oacute; csatlakoz&aacute;si pr&oacute;ba</b>', # MODIF
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'Az LDAP csatlakoz&aacute;s sikeres lett.</b><p> L&eacute;phet tov&aacute;bb a k&ouml;vetkez&#337;re.</p>',
+'info_connexion_ldap_ok' => 'Az LDAP csatlakoz&aacute;s sikeres lett.</b><p> L&eacute;phet tov&aacute;bb a k&ouml;vetkez&#337;re.</p>', # MODIF
 'info_connexion_mysql' => 'Els&#337; l&eacute;p&eacute;s : <b>Az &Ouml;n SQL csatlakoz&aacute;sa</b>', # MODIF
 'info_connexion_ok' => 'A csatlakoz&aacute;s sikeres.',
 'info_contact' => 'Kontakt',
@@ -386,9 +390,9 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'info_forum_ouvert' => 'Minden regisztr&aacute;lt szerz&#337; r&eacute;sz&eacute;re van f&oacute;rum a honlap priv&aacute;t r&eacute;sz&eacute;ben.Lejjebb aktiv&aacute;lhat egy &uacute;jabb f&oacute;rumot, ami csak az adminisztr&aacute;toroknak lesz el&eacute;rhet&#337;.',
 'info_forum_statistiques' => 'Statisztik&aacute;k a l&aacute;t&oacute;gat&aacute;sokr&oacute;l',
 'info_forums_abo_invites' => 'A honlapja beiratkoz&aacute;sos f&oacute;rumokat tartalmaz&nbsp;; teh&aacute;t a l&aacute;togat&oacute;k be&iacute;ratkozhatnak a nyilv&aacute;nos r&eacute;szen.',
-'info_gauche_admin_effacer' => '<b>Ez az oldal csak a honlap gazdai r&eacute;sz&eacute;re el&eacute;rhet&#337;.</b><p> A k&uuml;l&ouml;nb&ouml;z&#337; m&#369;szaki karbantart&aacute;si feladatokra ad lehet&#337;s&eacute;get. Ezek k&ouml;z&uuml;l n&eacute;hany ig&eacute;nyel olyan specifikus azonos&iacute;t&aacute;si elj&aacute;r&aacute;st, ami a honlaphoz FTP el&eacute;r&eacute;st k&ouml;vetel.</p>',
-'info_gauche_admin_tech' => '<b>Ez az oldal csak a honlap gazdai r&eacute;sz&eacute;re el&eacute;rhet&#337;.</b><p> A k&uuml;l&ouml;nb&ouml;z&#337; m&#369;szaki karbantart&aacute;si feladatokra ad lehet&#337;s&eacute;get. Ezek k&ouml;z&uuml;l n&eacute;hany ig&eacute;nyel olyan specifikus azonos&iacute;t&aacute;si elj&aacute;r&aacute;st, ami a honlaphoz FTP el&eacute;r&eacute;st k&ouml;vetel.</p>',
-'info_gauche_admin_vider' => '<b>Ez az oldal csak a honlap gazdai r&eacute;sz&eacute;re el&eacute;rhet&#337;.</b><p> A k&uuml;l&ouml;nb&ouml;z&#337; m&#369;szaki karbantart&aacute;si feladatokra ad lehet&#337;s&eacute;get. Ezek k&ouml;z&uuml;l n&eacute;hany ig&eacute;nyel olyan specifikus azonos&iacute;t&aacute;si elj&aacute;r&aacute;st, ami a honlaphoz FTP el&eacute;r&eacute;st k&ouml;vetel.</p>',
+'info_gauche_admin_effacer' => '<b>Ez az oldal csak a honlap gazdai r&eacute;sz&eacute;re el&eacute;rhet&#337;.</b><p> A k&uuml;l&ouml;nb&ouml;z&#337; m&#369;szaki karbantart&aacute;si feladatokra ad lehet&#337;s&eacute;get. Ezek k&ouml;z&uuml;l n&eacute;hany ig&eacute;nyel olyan specifikus azonos&iacute;t&aacute;si elj&aacute;r&aacute;st, ami a honlaphoz FTP el&eacute;r&eacute;st k&ouml;vetel.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>Ez az oldal csak a honlap gazdai r&eacute;sz&eacute;re el&eacute;rhet&#337;.</b><p> A k&uuml;l&ouml;nb&ouml;z&#337; m&#369;szaki karbantart&aacute;si feladatokra ad lehet&#337;s&eacute;get. Ezek k&ouml;z&uuml;l n&eacute;hany ig&eacute;nyel olyan specifikus azonos&iacute;t&aacute;si elj&aacute;r&aacute;st, ami a honlaphoz FTP el&eacute;r&eacute;st k&ouml;vetel.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>Ez az oldal csak a honlap gazdai r&eacute;sz&eacute;re el&eacute;rhet&#337;.</b><p> A k&uuml;l&ouml;nb&ouml;z&#337; m&#369;szaki karbantart&aacute;si feladatokra ad lehet&#337;s&eacute;get. Ezek k&ouml;z&uuml;l n&eacute;hany ig&eacute;nyel olyan specifikus azonos&iacute;t&aacute;si elj&aacute;r&aacute;st, ami a honlaphoz FTP el&eacute;r&eacute;st k&ouml;vetel.</p>', # MODIF
 'info_gauche_auteurs' => 'Itt tal&aacute;lhat&oacute; a honlap &ouml;sszes szerz&#337;je.
  Saj&aacute;t st&aacute;tuszuk az ikon sz&iacute;ne szerint van jel&ouml;lve ( adminisztr&aacute;tor = z&ouml;ld; szerz&#337; = s&aacute;rga).',
 'info_gauche_auteurs_exterieurs' => 'A k&uuml;ls&#337; szerz&#337;k, melyek nem f&eacute;rhetnek a honlaphoz, k&eacute;k ikonnal vannak jel&ouml;lve&nbsp;;
@@ -810,6 +814,9 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'module_texte_traduction' => 'A &laquo;&nbsp;@module@&nbsp;&raquo; nyelvi f&aacute;jl l&eacute;tezik&nbsp;:',
 'mois_non_connu' => 'ismeretlen',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contenu', # NEW
 'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
@@ -981,7 +988,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_documents_joints' => 'Engedely&eacute;zheti a dokumentumok hozz&aacute;ad&aacute;s&aacute;t (irodai f&aacute;jlok, k&eacute;pek,
  multim&eacute;dia, stb.) a cikkekhez &eacute;s/vagy a rovatokhoz. Ezekre a f&aacute;jlokra
  lehet majd hivatkozni a
- cikken bel&uuml;l, vagy k&uuml;l&ouml;n megjelen&iacute;teni.',
+ cikken bel&uuml;l, vagy k&uuml;l&ouml;n megjelen&iacute;teni.', # MODIF
 'texte_documents_joints_2' => 'Ez a be&aacute;ll&iacute;t&aacute;s nem akad&aacute;lyozza a k&ouml;zvetlen k&eacute;pbesz&#369;r&aacute;st a cikkekbe.',
 'texte_effacer_base' => 'Az SPIP adatb&aacute;zisa t&ouml;rl&eacute;se',
 'texte_effacer_donnees_indexation' => 'Az index&aacute;l&aacute;si adatok t&ouml;rl&eacute;se',
@@ -1031,7 +1038,7 @@ Egy&eacute;bkent minden linket lehet ut&oacute;lag enged&eacute;lyezni egyenk&ea
 'texte_nouveau_message' => '&Uacute;j &uuml;zenet',
 'texte_nouveau_mot' => '&Uacute;j sz&oacute;',
 'texte_nouvelle_version_spip_1' => 'Az SPIP egyik &uacute;jabb verzi&oacute;j&aacute;t telep&iacute;tette.',
-'texte_nouvelle_version_spip_2' => 'Ez az &uacute;j verzi&oacute; a szok&aacute;sosn&aacute;l teljesebb friss&iacute;t&eacute;st ig&eacute;nyel. Ha &Ouml;n a honlap gazd&aacute;ja, akkor t&ouml;r&ouml;lje a @connect@ nev&#369; f&aacute;jlt, folytassa a telep&iacute;t&eacute;st ahhoz, hogy az adatb&aacute;zis csatlakoz&aacute;si param&eacute;tereit m&oacute;dos&iacute;thassa.<p> (Megjegyz&eacute;s.&nbsp;: amennyiben elfelejtette a csatlakoz&aacute;si param&eacute;tereit, tekintse &aacute;t a @connect@ nev&#369; f&aacute;jlt, miel&#337;bb kit&ouml;r&ouml;lne...)</p>',
+'texte_nouvelle_version_spip_2' => 'Ez az &uacute;j verzi&oacute; a szok&aacute;sosn&aacute;l teljesebb friss&iacute;t&eacute;st ig&eacute;nyel. Ha &Ouml;n a honlap gazd&aacute;ja, akkor t&ouml;r&ouml;lje a @connect@ nev&#369; f&aacute;jlt, folytassa a telep&iacute;t&eacute;st ahhoz, hogy az adatb&aacute;zis csatlakoz&aacute;si param&eacute;tereit m&oacute;dos&iacute;thassa.<p> (Megjegyz&eacute;s.&nbsp;: amennyiben elfelejtette a csatlakoz&aacute;si param&eacute;tereit, tekintse &aacute;t a @connect@ nev&#369; f&aacute;jlt, miel&#337;bb kit&ouml;r&ouml;lne...)</p>', # MODIF
 'texte_operation_echec' => 'Menjen az el&ouml;z&#337; oldalra, jel&ouml;lj&ouml;n ki egy m&aacute;sik adatb&aacute;zist, vagy hozzon l&eacute;tre egy ujat. Ellen&#337;rizze az &Ouml;n szolg&aacute;ltat&oacute;ja &aacute;ltal adott inform&aacute;ci&oacute;kat.',
 'texte_plus_trois_car' => 't&ouml;bb, mint 3 karakter',
 'texte_plusieurs_articles' => 'T&ouml;bb szerz&#337; tal&aacute;lt "@cherche_auteur@" szerint:',

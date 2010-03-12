@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     fallos variaos nel funcionamientu del sitiu, etc.
     Nun valides esta petici&oacute;n d\'importaci&oacute;n.<p>Pa
     mayor informaci&oacute;n, llee <a href="@spipnet@">
-                                la documentaci&oacute;n de SPIP</a>.</p>',
+                                la documentaci&oacute;n de SPIP</a>.</p>', # MODIF
 'avis_espace_interdit' => '<b>Espaciu torg&aacute;u</b><div>SPIP ya ta instalao.</div>',
 'avis_lecture_noms_bases_1' => 'El programa d\'instalaci&oacute;n nun fue a lleer los nomes de les bases de datos instal&aacute;es.',
 'avis_lecture_noms_bases_2' => 'Puede ser que denguna base nun te disponible, o que la funci&oacute;n que permite llistar les bases te desactivada
@@ -204,6 +204,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'forum_info_original' => 'orixinal',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'N\'esta p&aacute;xina ufrense delles maneres de tar en contautu cola activid&aacute; d\'esti sitiu.',
 'ical_info2' => 'Pa m&aacute;s informaci&oacute;n tocante a toes estes t&eacute;cniques, pues consultar <a href="@spipnet@">la documentaci&oacute;n de SPIP</a>.',
@@ -344,7 +348,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'La to versi&oacute;n:',
 'info_connexion_base' => 'Preba de conex&oacute;n a la base',
 'info_connexion_base_donnee' => 'Conex&oacute;n cola to base de datos',
-'info_connexion_ldap_ok' => 'La conex&oacute;n LDAP funcion&oacute;.</b><p> Puedes pasar a la etapa siguiente.</p>',
+'info_connexion_ldap_ok' => 'La conex&oacute;n LDAP funcion&oacute;.</b><p> Puedes pasar a la etapa siguiente.</p>', # MODIF
 'info_connexion_mysql' => 'La to conex&oacute;n SQL',
 'info_connexion_ok' => 'La conex&oacute;n funcion&oacute;.',
 'info_contact' => 'Contautu',
@@ -397,13 +401,13 @@ con <b>@texte_lie@</b> debes confirmar esta decisi&oacute;n:',
   foru suplementariu, acut&aacute;u s&oacute;lo pa los alministradores.',
 'info_forum_statistiques' => 'Estad&iacute;stiques de les visites',
 'info_forums_abo_invites' => 'Esti sitiu tien foros pa abonaos; poro a los visiteurs se-yos encamienta que se rexistren nel sitiu p&uacute;blicu.',
-'info_gauche_admin_effacer' => '<b>Esta p&aacute;xina nam&aacute;i ye accesible pa los responsables del sitiu.</b><p> Equ&iacute; ta l\'accesu a les diferentes funciones de mantenimientu t&eacute;unicu. Delles llancen un procesu d\'autentificaci&oacute;n espec&iacute;ficu, pal que fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
+'info_gauche_admin_effacer' => '<b>Esta p&aacute;xina nam&aacute;i ye accesible pa los responsables del sitiu.</b><p> Equ&iacute; ta l\'accesu a les diferentes funciones de mantenimientu t&eacute;unicu. Delles llancen un procesu d\'autentificaci&oacute;n espec&iacute;ficu, pal que fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Esta p&aacute;xina nam&aacute;i ye accesible pa los responsables del sitiu.</b><p> Equ&iacute; ta l\'accesu a les diferentes
 funciones de mantenimientu t&eacute;unicu. Delles llancen un procesu d\'autentificaci&oacute;n espec&iacute;ficu, pal que
-fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
+fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>', # MODIF
 'info_gauche_admin_vider' => '<b>Esta p&aacute;xina nam&aacute;i ye accesible pa los responsables del sitiu.</b><p> Equ&iacute; ta l\'accesu a les diferentes
 funciones de mantenimientu t&eacute;unicu. Delles llancen un procesu d\'autentificaci&oacute;n espec&iacute;ficu, pal que
-fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
+fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>', # MODIF
 'info_gauche_auteurs' => 'Equ&iacute; s\'alcuentren tolos autores del sitiu.
  El so estatutu vien indic&aacute;u pola color de l\'iconu (alministrador = verde; redactor = mariellu).',
 'info_gauche_auteurs_exterieurs' => 'Los autores esternos, ensin accesu al sitiu, vienen indicaos con un iconu azul;
@@ -835,6 +839,9 @@ con una color que indica el est&aacute;u:',
 'module_texte_traduction' => 'L\'archivu de llingua &laquo;&nbsp;@module@&nbsp;&raquo; ta disponible en:',
 'mois_non_connu' => 'desconoc&iacute;u',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Conten&iacute;u',
 'onglet_declarer_une_autre_base' => 'Declarar otra base',
@@ -1015,7 +1022,7 @@ requier m&aacute;s potencia del sirvidor.',
 'texte_documents_joints' => 'Pues autorizar l\'amiestu de documentos (archivos d\'oficina, imaxes,
  multimedia, etc.) a los art&iacute;culos y/o a les estayes. Estos archivos
  puen referenciase llu&eacute;u nel
- art&iacute;culu, o amosase aparte.',
+ art&iacute;culu, o amosase aparte.', # MODIF
 'texte_documents_joints_2' => 'Esti axuste nun torga l\'inxertu d\'imaxes direutamente nos art&iacute;culos.',
 'texte_effacer_base' => 'Desaniciar la base de datos SPIP',
 'texte_effacer_donnees_indexation' => 'Desaniciar los datos d\'indexaci&oacute;n',
@@ -1030,7 +1037,7 @@ requier m&aacute;s potencia del sirvidor.',
   (al programa esternu d\'estad&iacute;stiques, por exemplu).</p><p>
   Si nun vas utilizalo, puedes dexar esta opci&oacute;n
  col so valor predetermin&aacute;u (nun crear
- esos ficheros).</p>',
+ esos ficheros).</p>', # MODIF
 'texte_informations_personnelles_1' => 'Agora el sistema va create un accesu personaliz&aacute;u al sitiu.',
 'texte_informations_personnelles_2' => '(Nota: si esto ye una reinstalaci&oacute;n, y el to accesu siempre funciona, pues',
 'texte_introductif_article' => '(Testu d\'introducci&oacute;n de l\'art&iacute;culu.)',
@@ -1076,7 +1083,7 @@ requier m&aacute;s potencia del sirvidor.',
 'texte_nouveau_message' => 'Mensaxe nuevu',
 'texte_nouveau_mot' => 'Pallabra nueva',
 'texte_nouvelle_version_spip_1' => 'Vienes d\'instalar una versi&oacute;n nueva de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Esta nueva versi&oacute;n necesita una actualizaci&oacute;n m&aacute;s completa que la de vezu. Si yes el webmaster del sitiu, has d\'esborrar l\'archivu @connect@ y reentamar la instalaci&oacute;n pa actualizar los tos par&aacute;metros de conex&oacute;n a la base de datos.<p> (NB.: si escaeciste los tos par&aacute;metros de conex&oacute;n, echa-y una g&uuml;eyada a l\'archivu @connect@ enantes de desanicialu...)</p>',
+'texte_nouvelle_version_spip_2' => 'Esta nueva versi&oacute;n necesita una actualizaci&oacute;n m&aacute;s completa que la de vezu. Si yes el webmaster del sitiu, has d\'esborrar l\'archivu @connect@ y reentamar la instalaci&oacute;n pa actualizar los tos par&aacute;metros de conex&oacute;n a la base de datos.<p> (NB.: si escaeciste los tos par&aacute;metros de conex&oacute;n, echa-y una g&uuml;eyada a l\'archivu @connect@ enantes de desanicialu...)</p>', # MODIF
 'texte_operation_echec' => 'Torna a la p&aacute;xina precedente, seleiciona otra base o crea una nueva. Compreba la informaci&oacute;n ufrida pol to agospiamientu web.',
 'texte_plus_trois_car' => 'm&aacute;s de 3 carauteres',
 'texte_plusieurs_articles' => 'Alcontr&aacute;ronse dellos autores pa "@cherche_auteur@":',
@@ -1105,7 +1112,7 @@ recalcular una sola p&aacute;xina, pasa meyor pel espaciu p&uacute;blicu y calca
   casu de fallu, guarda una copia del mensaxe, que tendr&aacute;,
   seique, indices de lo que nun funciona...</p><p>
   Si el problema persistiere, ponte en contautu col to
-  agospiador.</p>',
+  agospiador.</p>', # MODIF
 'texte_restaurer_base' => 'Restaurar el conten&iacute;u d\'una copia de segurid&aacute; de la base',
 'texte_restaurer_sauvegarde' => 'Esta opci&oacute;n te permite restaurar una copia de segurid&aacute; de la base
   fecha anteriormente. Pa facer esto, l\'archivu que conti&eacute;n la copia de segurid&aacute; ti&eacute;n que tar

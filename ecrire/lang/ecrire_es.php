@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Error de conexi&oacute;n SQL',
 'avis_erreur_version_archive' => '<b>&iexcl;ATENCI&Oacute;N! El archivo @archive@ corresponde a otra versi&oacute;n de SPIP, diferente a la instalada.</b> Te arriesgas a tener grandes problemas: destrucci&oacute;n de tu base de datos, disfuncionamientos varios del sitio, etc. No valides esta importaci&oacute;n.<p>Para mayor informaci&oacute;n, ver
- <a href="@spipnet@">la documentaci&oacute;n de SPIP</a>.',
+ <a href="@spipnet@">la documentaci&oacute;n de SPIP</a>.', # MODIF
 'avis_espace_interdit' => '<b>Espacio prohibido</b><div>SPIP ya est&aacute; instalado.</div>',
 'avis_lecture_noms_bases_1' => 'El programa de instalaci&oacute;n no logr&oacute; leer los nombres de las bases de datos instaladas.',
 'avis_lecture_noms_bases_2' => 'Dos posibilidades: o no hay ninguna base disponible o la funci&oacute;n de listado de las bases fue desactivada por razones de seguridad (caso frecuente en muchos hospedajes).',
@@ -189,6 +189,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'forum_info_original' => 'original',
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'En esta p&aacute;gina se presentan diferentes maneras de quedar en contacto con la vida del sitio.',
 'ical_info2' => 'Para mayor informaci&oacute;n sobre todas estas t&eacute;cnicas, no dudes en consultar <a href="@spipnet@">la documentaci&oacute;n de SPIP</a>.',
@@ -324,7 +328,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Su versi&oacute;n&nbsp;:',
 'info_connexion_base' => 'Intento de conexi&oacute;n a la base',
 'info_connexion_base_donnee' => 'Conexi&oacute;n a tu base de datos',
-'info_connexion_ldap_ok' => 'La conexi&oacute;n LDAP ha funcionado.</b><p> Puedes pasar a la siguiente fase.',
+'info_connexion_ldap_ok' => 'La conexi&oacute;n LDAP ha funcionado.</b><p> Puedes pasar a la siguiente fase.', # MODIF
 'info_connexion_mysql' => 'Tu conexi&oacute;n SQL',
 'info_connexion_ok' => 'La conexi&oacute;n ha funcionado.',
 'info_contact' => 'Contacto',
@@ -370,9 +374,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_forum_ouvert' => 'En el espacio privado del sitio hay un foro abierto a todas las personas inscritas. A continuaci&oacute;n, puedes activar un foro suplementario reservado a los administradores y administradoras.',
 'info_forum_statistiques' => 'Estad&iacute;sticas de las visitas',
 'info_forums_abo_invites' => 'Tu sitio tiene foros para abonados; en el sitio p&uacute;blico se invita a los visitantes a que se registren.',
-'info_gauche_admin_effacer' => '<b>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><p> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
-'info_gauche_admin_tech' => '<b>S&oacute;lo los y las responsables del sitio acceden a esta p&aacute;gina.</b><p> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas requieren un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
-'info_gauche_admin_vider' => '<b>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><p> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
+'info_gauche_admin_effacer' => '<b>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><p> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.', # MODIF
+'info_gauche_admin_tech' => '<b>S&oacute;lo los y las responsables del sitio acceden a esta p&aacute;gina.</b><p> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas requieren un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.', # MODIF
+'info_gauche_admin_vider' => '<b>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><p> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.', # MODIF
 'info_gauche_auteurs' => 'Aqu&iacute; figuran todos los autores y autoras del sitio.
  Su estado se indica con el color de su icono (administrador/a = verde; redactor/a = amarillo).',
 'info_gauche_auteurs_exterieurs' => 'Los autores y autoras exteriores, sin acceso al sitio, est&aacute;n indicados con un icono azul; los que est&aacute;n borrados con una papelera.',
@@ -785,6 +789,9 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'module_texte_traduction' => 'El archivo de idioma &laquo;&nbsp;@module@&nbsp;&raquo; est&aacute; disponible en:',
 'mois_non_connu' => 'desconocido',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contenido',
 'onglet_declarer_une_autre_base' => 'Declarar otra base',
@@ -946,7 +953,7 @@ requiere m&aacute;s potencia del servidor.',
 'texte_documents_joints' => 'Puedes autorizar el a&ntilde;adir documentos (archivos de ofim&aacute;tica, im&aacute;genes,
  multimedia, etc.) a los art&iacute;culos y/o las secciones. Despu&eacute;s, estos archivos
  pueden referenciarse en el art&iacute;culo,
- o mostrarse por separado.<p>',
+ o mostrarse por separado.<p>', # MODIF
 'texte_documents_joints_2' => 'Este ajuste no impide la inserci&oacute;n de im&aacute;genes directamente en los art&iacute;culos.',
 'texte_effacer_base' => 'Borrar la base de datos SPIP',
 'texte_effacer_donnees_indexation' => 'Borrar los datos de indexaci&oacute;n',
@@ -957,7 +964,7 @@ requiere m&aacute;s potencia del servidor.',
 'texte_fichier_authent' => '<b>&iquest;Debe SPIP crear los archivos especiales <tt>.htpasswd</tt>
  y <tt>.htpasswd-admin</tt> en la carpeta @dossier@?</b><p>
 Estos archivos pueden servir para restringir el acceso a las autoras y administradores en otros lugares de tu sitio (programa externo de estad&iacute;sticas, por ejemplo).<p>
-Si no le ves utilidad, puedes dejar esta opci&oacute;n con su valor por omisi&oacute;n (no crear los archivos).</p>',
+Si no le ves utilidad, puedes dejar esta opci&oacute;n con su valor por omisi&oacute;n (no crear los archivos).</p>', # MODIF
 'texte_informations_personnelles_1' => 'El sistema va a crear ahora un acceso personalizado al sitio.',
 'texte_informations_personnelles_2' => '(Nota: si se trata de una reinstalaci&oacute;n, y tu acceso todav&iacute;a funciona, puedes ',
 'texte_introductif_article' => '(Introducci&oacute;n del art&iacute;culo.)',
@@ -995,7 +1002,7 @@ Utiliza este formulario con precauci&oacute;n...',
 'texte_nouveau_message' => 'Nuevo mensaje',
 'texte_nouveau_mot' => 'Nueva palabra',
 'texte_nouvelle_version_spip_1' => 'Has instalado una versi&oacute;n nueva de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Esta nueva versi&oacute;n necesita una actualizaci&oacute;n m&aacute;s completa que de costumbre. Si eres webmaster del sitio, borra el archivo @connect@ y retoma la instalaci&oacute;n con el fin de actualizar los par&aacute;metros de conexi&oacute;n a la base de datos.<p> (NB.: si has olvidado los par&aacute;metros de conexi&oacute;n, echale una mirada al archivo  @connect@ antes de suprimirlo...)</p>',
+'texte_nouvelle_version_spip_2' => 'Esta nueva versi&oacute;n necesita una actualizaci&oacute;n m&aacute;s completa que de costumbre. Si eres webmaster del sitio, borra el archivo @connect@ y retoma la instalaci&oacute;n con el fin de actualizar los par&aacute;metros de conexi&oacute;n a la base de datos.<p> (NB.: si has olvidado los par&aacute;metros de conexi&oacute;n, echale una mirada al archivo  @connect@ antes de suprimirlo...)</p>', # MODIF
 'texte_operation_echec' => 'Regresa a la p&aacute;gina anterior, selecciona otra base o crea una nueva. Verifica las informaciones facilitadas por tu proveedor de hospedaje.',
 'texte_plus_trois_car' => 'm&aacute;s de 3 caracteres',
 'texte_plusieurs_articles' => 'Se han encontrado varios autores o autoras para "@cherche_auteur@":',
@@ -1013,7 +1020,7 @@ Utiliza este formulario con precauci&oacute;n...',
 'texte_referencement_automatique_verifier' => 'Deber&iacute;as verificar la informaci&oacute;n facilitada por <tt>@url@</tt> antes de guardar.',
 'texte_requetes_echouent' => '<b>Cuando algunas peticiones SQL fallan sistem&aacute;ticamente y sin raz&oacute;n aparente, es posible que sea debido a la base de datos en s&iacute;.</b><p>
 Tu servidor SQL es capaz de reparar sus tablas cuando fueron da&ntilde;adas por accidente.  Puedes intentar aqu&iacute; esta reparaci&oacute;n: si falla, conserva una copia del resultado, que posiblemente contenga indicios de lo que no funciona...</p><p>
-Si el problema persiste, contacta a tu hospedaje.</p>',
+Si el problema persiste, contacta a tu hospedaje.</p>', # MODIF
 'texte_restaurer_base' => 'Restaurar el contenido de una copia de respaldo',
 'texte_restaurer_sauvegarde' => 'Esta opci&oacute;n te permite restaurar una copia de respaldo de la base efectuada anteriormente. A tal efecto, se debe haber puesto el archivo que contiene la copia de respaldo en la carpeta  @dossier@.
 Prudencia con esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eventuales son irreversibles.</b>',

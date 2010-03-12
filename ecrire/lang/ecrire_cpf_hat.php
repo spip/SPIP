@@ -204,6 +204,10 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 // F
 'forum_info_original' => 'original', # NEW
 
+// H
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+
 // I
 'ical_info1' => 'Paj-la ka donn a w kouman w kap gen lyen ak lavi sit-la.',
 'ical_info2' => 'Si w vle dot ranseyman sou tout teknik anl&egrave;r, ezit pa gad <a href="@spipnet@">tout paj dokimantasyon pou SPIP</a>.', # MODIF
@@ -344,7 +348,7 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Dezyem etap : <b>Esey f&egrave; yon koneksyon sou labaz</b>', # MODIF
 'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
-'info_connexion_ldap_ok' => 'Koneksyon LDAP te mache.</b><p> Ann gen w etap swivan.</p>',
+'info_connexion_ldap_ok' => 'Koneksyon LDAP te mache.</b><p> Ann gen w etap swivan.</p>', # MODIF
 'info_connexion_mysql' => 'Premye etap : <b>Ou koneksyon SQL</b>', # MODIF
 'info_connexion_ok' => 'Koneksyon nan te fin mache.',
 'info_contact' => 'Kontak',
@@ -395,9 +399,9 @@ anba atik yo ; y ke ent&egrave;di pou tout ribrik yo, &eacute; tinouv&egrave;l y
  anplis, ki r&eacute;s&egrave;v&eacute; pou komand&eacute; yo s&egrave;lman.',
 'info_forum_statistiques' => 'Estatistik tout vizit',
 'info_forums_abo_invites' => 'Sit w genyen fowom sou abonman&nbsp;; vizit&egrave;   se invite enskri ali sou sit piblik.',
-'info_gauche_admin_effacer' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.</p>',
-'info_gauche_admin_tech' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.</p>',
-'info_gauche_admin_vider' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.</p>',
+'info_gauche_admin_effacer' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.</p>', # MODIF
+'info_gauche_admin_vider' => '<b>Responsab sit-la selman kapab f&egrave; lekti paj-la.</b><p> Li p&egrave;rm&egrave; laks&eacute; pou dif&eacute;ran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laks&eacute; FTP pou sitweb-la.</p>', # MODIF
 'info_gauche_auteurs' => 'Isit, genyen tout zot&egrave; sit sa-a.
 Koul&egrave; imaj rannkont stati yo (komand&egrave; = v&egrave;r; redakt&egrave; = jon).',
 'info_gauche_auteurs_exterieurs' => 'Tout l&ograve;t&egrave; and&egrave;y&ograve;, ki genyen pa aks&egrave; sit-la, se afiche pa yon ik&ograve;n bl&egrave;&nbsp;;
@@ -831,6 +835,9 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'module_texte_traduction' => 'fichye-lanng la &laquo;&nbsp;@module@&nbsp;&raquo; se disponib nan&nbsp;:',
 'mois_non_connu' => 'ki pa koni',
 
+// N
+'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+
 // O
 'onglet_contenu' => 'Contenu', # NEW
 'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
@@ -1008,7 +1015,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_documents_joints' => 'Ou kapab perm&egrave; ajoute tou dokiman (fichye birotik, limaj,
  miltim&eacute;dia, etousa.) nan atik ak ribrik yo. Fichye sa-yo
  se posib r&eacute;f&eacute;rans azot apr&egrave; nan latik
- osnon afiche azot tou s&egrave;l.',
+ osnon afiche azot tou s&egrave;l.', # MODIF
 'texte_documents_joints_2' => 'R&egrave;glaj-la ka pa enpeche bay zot limaj nan atik dir&eacute;kman.',
 'texte_effacer_base' => 'Efase labazdon&eacute; SPIP',
 'texte_effacer_donnees_indexation' => 'Efase tout don&eacute; pou lendeksasyon',
