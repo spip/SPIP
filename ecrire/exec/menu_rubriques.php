@@ -65,6 +65,7 @@ function exec_menu_rubriques_dist() {
 			  . "\n</div></td></tr></table>\n";
 		}
 
+		include_spip('inc/actions');
 		ajax_retour("<div>&nbsp;</div>" . $ret);
 	}
 }

@@ -23,6 +23,7 @@ function exec_discuter_dist()
 	$id = intval(_request($objet));
 	$id_parent = intval(_request('id_parent'));
 	$discuter = charger_fonction('discuter', 'inc');
+	include_spip('inc/actions');
 	ajax_retour($discuter($id, $script, $objet, $statut, $debut, $pas, $id_parent));
 }
 ?>
