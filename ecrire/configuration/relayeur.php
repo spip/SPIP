@@ -75,7 +75,7 @@ function configuration_relayeur_post ($http_proxy, $http_noproxy, $test_proxy, $
 	if (preg_match(',:\*\*\*\*@,', $http_proxy))
 		$http_proxy = $GLOBALS['meta']['http_proxy'];
 
-	$retour = '';
+	$retour = $page = '';
 
 	if ($tester_proxy AND preg_match(",https?://,", $http_proxy)) {
 		include_spip('inc/distant');
@@ -83,24 +83,28 @@ function configuration_relayeur_post ($http_proxy, $http_noproxy, $test_proxy, $
 
 		if (!@$t['host']) {
 			$retour = _T('info_adresse_non_indiquee');
-		} else {
+		} elseif (!need_proxy($t['host'])) {
+
+			$retour = "<p>"._T('page_pas_proxy')."</p>\n";
+		} elseif ($page = recuperer_page($test_proxy, true)) {
 			include_spip('inc/texte'); // pour aide, couper, lang
-			if (!need_proxy($t['host']))
-			  $page = "<p>"._T('page_pas_proxy')."</p>\n";
-			$page = recuperer_page($test_proxy, true);
-			if ($page)
-				$retour = "<p>"._T('info_proxy_ok')."</p>\n<tt>".couper(entites_html($page),300)."</tt>";
-			  else
-				$retour = _T('info_impossible_lire_page', array('test_proxy' => $test_proxy))
-				. " <tt>".no_password_proxy_url($http_proxy)."</tt>."
-				. aide('confhttpproxy');
-		}
+			$retour = "<p>"._T('info_proxy_ok')."</p>\n<tt>"
+			. couper(entites_html($page),300)."</tt>";
+		} else	$retour = _T('info_impossible_lire_page',
+					array('test_proxy' => $test_proxy))
+			. " <tt>".no_password_proxy_url($http_proxy)."</tt>."
+			. aide('confhttpproxy');
 	}
+
 	if ($http_proxy !== NULL) {
 		ecrire_meta('http_proxy', $http_proxy);
 	}
 	if ($http_noproxy !== NULL) {
 		ecrire_meta('http_noproxy', $http_noproxy);
+	}
+	if ($page) {
+		include_spip('install/etape_fin');
+		$retour .= install_verifier_htaccess();
 	}
 	return $retour;
 }

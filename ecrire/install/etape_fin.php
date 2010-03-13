@@ -48,18 +48,28 @@ function install_etape_fin_dist()
 
 	// Verifier la securite des htaccess
 	// Si elle ne fonctionne pas, prevenir
-	if (!verifier_htaccess(_DIR_TMP, true) OR !verifier_htaccess(_DIR_CONNECT, true)) {
-		$h = generer_form_ecrire('accueil', '','',_T('public:accueil_site'));
-		$titre = _T('htaccess_inoperant');
-		$averti = _T('htaccess_a_simuler', 
-			array('htaccess' => '<tt>' . _ACCESS_FILE_NAME . '</tt>',
-				'constantes' =>  '<tt>_DIR_TMP &amp; _DIR_CONNECT</tt>',
-				'document_root' => '<tt>' . $_SERVER['DOCUMENT_ROOT'] . '</tt>'));
-		echo minipres(
-			'AUTO',
-			"<p class='resultat echec'>$titre</p><p>$averti</p>$h"
-			      );
+	$msg = install_verifier_htaccess();
+	if ($msg) {
+		$cible = _T('public:accueil_site');
+		$cible = generer_form_ecrire('accueil', '','', $cible);
+		echo minipres('AUTO', $msg . $cible);
 	// ok, deboucher dans l'espace prive
 	} else redirige_url_ecrire('accueil');
+}
+
+function install_verifier_htaccess()
+{
+	if (verifier_htaccess(_DIR_TMP, true)
+	AND verifier_htaccess(_DIR_CONNECT, true))
+		return '';
+
+	$titre = _T('htaccess_inoperant');
+
+	$averti = _T('htaccess_a_simuler', 
+		array('htaccess' => '<tt>' . _ACCESS_FILE_NAME . '</tt>',
+			'constantes' =>  '<tt>_DIR_TMP &amp; _DIR_CONNECT</tt>',
+			'document_root' => '<tt>' . $_SERVER['DOCUMENT_ROOT'] . '</tt>'));
+
+	return "<p class='resultat echec'>$titre</p><p>$averti</p>";
 }
 ?>
