@@ -754,6 +754,10 @@ function find_in_path ($file, $dirname='', $include=false) {
 	return $GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file] = $GLOBALS['path_files'][$GLOBALS['path_sig']][''][$dirname . $file] = false;
 }
 
+function clear_path_cache(){
+	$GLOBALS['path_files'] = array();
+	spip_unlink(_CACHE_CHEMIN);
+}
 function load_path_cache(){
 	// charger le path des plugins
 	if (@is_readable(_CACHE_PLUGINS_PATH)){
