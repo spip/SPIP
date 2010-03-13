@@ -94,7 +94,7 @@ OR (_EXTENSION_PHP AND @file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . _EXTENS
 
 // Inclure l'ecran de securite
 if (!defined('_ECRAN_SECURITE')
-AND @file_exists($f = _DIR_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php'))
+AND @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php'))
 	include $f;
 
 
