@@ -574,7 +574,7 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers, $date);
 	if (!$f) {
 	  // fallback : fopen
-		if (!$GLOBALS['tester_proxy']) {
+		if (!_request('tester_proxy')) {
 			$f = @fopen($url, "rb");
 			spip_log("connexion vers $url par simple fopen");
 			$fopen = true;
