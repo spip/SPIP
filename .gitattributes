@@ -6,6 +6,7 @@ ecrire/action/acceder_document.php -text
 ecrire/action/activer_plugins.php -text
 ecrire/action/auth.php -text
 ecrire/action/changer_mode_document.php -text
+ecrire/action/charger_plugin.php -text
 ecrire/action/configurer.php -text
 ecrire/action/configurer_previsualiseur.php -text
 ecrire/action/configurer_relayeur.php -text
@@ -109,6 +110,7 @@ ecrire/exec/accueil.php -text
 ecrire/exec/admin_backup.php -text
 ecrire/exec/admin_declarer.php -text
 ecrire/exec/admin_effacer.php -text
+ecrire/exec/admin_plugin.php -text
 ecrire/exec/admin_repair.php -text
 ecrire/exec/admin_restore.php -text
 ecrire/exec/admin_tech.php -text
@@ -125,6 +127,7 @@ ecrire/exec/breves_edit.php -text
 ecrire/exec/breves_voir.php -text
 ecrire/exec/brouteur.php -text
 ecrire/exec/brouteur_frame.php -text
+ecrire/exec/charger_plugin.php -text
 ecrire/exec/charger_plugin_descr.php -text
 ecrire/exec/config_contenu.php -text
 ecrire/exec/config_fonctions.php -text
@@ -210,6 +213,7 @@ ecrire/inc/autoriser.php -text
 ecrire/inc/bandeau.php -text
 ecrire/inc/boutons.php -text
 ecrire/inc/charger_php_extension.php -text
+ecrire/inc/charger_plugin.php -text
 ecrire/inc/chercher_logo.php -text
 ecrire/inc/chercher_rubrique.php -text
 ecrire/inc/commencer_page.php -text
@@ -266,6 +270,7 @@ ecrire/inc/notifications.php -text
 ecrire/inc/petitionner.php -text
 ecrire/inc/php3.php -text
 ecrire/inc/plonger.php -text
+ecrire/inc/plugin.php -text
 ecrire/inc/prepare_recherche.php -text
 ecrire/inc/presentation_mini.php -text
 ecrire/inc/presenter_enfants.php -text
@@ -390,9 +395,14 @@ ecrire/notifications/forum_poste.html -text
 ecrire/notifications/forumposte.php -text
 ecrire/notifications/forumvalide.php -text
 ecrire/notifications/instituerarticle.php -text
+ecrire/plugins/afficher_liste.php -text
+ecrire/plugins/afficher_nom_plugin.php -text
+ecrire/plugins/afficher_plugin.php -text
+ecrire/plugins/afficher_plugin_distant.php -text
 ecrire/plugins/afficher_repertoires.php -text
 ecrire/plugins/extraire_boutons.php -text
 ecrire/plugins/extraire_pipelines.php -text
+ecrire/plugins/get_infos.php -text
 ecrire/plugins/verifie_conformite.php -text
 ecrire/prive.php -text
 ecrire/public/aiguiller.php -text
