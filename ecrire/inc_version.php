@@ -24,8 +24,6 @@ define('_EXTENSION_PHP', '.php3');
 #mettre a true pour compatibilite PHP3 
 define('_FEED_GLOBALS', false);
 
-define('_ROOT_RACINE', dirname(dirname(__FILE__)).'/');
-
 # le nom du repertoire ecrire/
 define('_DIR_RESTREINT_ABS', 'ecrire/');
 # sommes-nous dans ecrire/ ?
@@ -33,6 +31,11 @@ define('_DIR_RESTREINT',
  (!is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
 # ou inversement ?
 define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
+
+# chemins absolus
+define('_ROOT_RACINE', dirname(dirname(__FILE__)).'/');
+define('_ROOT_CWD', getcwd().'/');
+define('_ROOT_RESTREINT', _ROOT_CWD . _DIR_RESTREINT);
 
 // Icones
 # nom du dossier images
@@ -79,10 +82,9 @@ if (!defined('_IS_BOT'))
 define('_NOM_CONFIG', 'mes_options');
 
 // Son emplacement absolu si on le trouve
-if (@file_exists($f = _DIR_RESTREINT . _NOM_CONFIG . '.php')
-OR (_EXTENSION_PHP
-	AND @file_exists($f = _DIR_RESTREINT . _NOM_CONFIG . _EXTENSION_PHP))
-OR (@file_exists($f = _DIR_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php'))) {
+if (@file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php')
+OR (@file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . '.php'))
+OR (_EXTENSION_PHP AND @file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . _EXTENSION_PHP))) {
 	define('_FILE_OPTIONS', $f);
 } else define('_FILE_OPTIONS', '');
 
@@ -91,7 +93,7 @@ OR (@file_exists($f = _DIR_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG 
 
 // Inclure l'ecran de securite
 if (!defined('_ECRAN_SECURITE')
-AND @file_exists($f = _DIR_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php'))
+AND @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php'))
 	include $f;
 
 
@@ -416,8 +418,8 @@ $meta = $connect_id_rubrique = array();
 //
 // Charger les fonctions liees aux serveurs Http et Sql.
 //
-require_once _DIR_RESTREINT . 'inc/utils.php';
-require_once _DIR_RESTREINT . 'base/connect_sql.php';
+require_once _ROOT_RESTREINT . 'inc/utils.php';
+require_once _ROOT_RESTREINT . 'base/connect_sql.php';
 
 // Definition personnelles eventuelles
 
