@@ -25,18 +25,41 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // C'est stocke dans la globale $les_notes, mais pas besoin de le savoir
 
 function inc_notes_dist($arg)
-{	  
+{
 	static $pile = array();
+	static $next_marqueur = 1;
+	static $marqueur = 1;
 	global $les_notes, $compt_note, $notes_vues;
-	if (is_string($arg)) return traiter_raccourci_notes($arg, count($pile)>1?count($pile):'');
+	if (is_string($arg)) return traiter_raccourci_notes($arg, $marqueur>1?$marqueur:'');
 	elseif (is_array($arg)) return traiter_les_notes($arg);
 	elseif ($arg === true) {
-	  array_push($pile, array(@$les_notes, @$compt_note, $notes_vues));
+		#var_dump(">$compt_note:$marqueur");
+		if ($compt_note==0)
+			// si le marqueur n'a pas encore ete utilise, on le recycle dans la pile courante
+			array_push($pile, array(@$les_notes, @$compt_note, $notes_vues,0));
+		else {
+			// sinon on le stocke au chaud, et on en cree un nouveau
+			array_push($pile, array(@$les_notes, @$compt_note, $notes_vues,$marqueur));
+			$next_marqueur++; // chaque fois qu'on rempile on incremente le marqueur general
+			$marqueur = $next_marqueur; // et on le prend comme marqueur courant
+		}
 		$les_notes = '';
 		$compt_note = 0;
 	} elseif ($arg === false) {
-		if ($les_notes) spip_log("notes perdues");
-		list($les_notes, $compt_note, $notes_vues) = array_pop($pile);
+		#$prev_notes = $les_notes;
+		if (strlen($les_notes)) spip_log("notes perdues");
+		// si le marqueur n'a pas servi, le liberer
+		if (!strlen($les_notes) AND $marqueur==$next_marqueur)
+			$next_marqueur--;
+		// on redepile tout suite a une fin d'inclusion ou d'un affichage des notes
+		list($les_notes, $compt_note, $notes_vues, $marqueur) = array_pop($pile);
+		#$les_notes .= $prev_notes;
+		#var_dump("<$compt_note:$marqueur");
+		// si pas de marqueur attribue, on le fait
+		if (!$marqueur){
+			$next_marqueur++; // chaque fois qu'on rempile on incremente le marqueur general
+			$marqueur = $next_marqueur; // et on le prend comme marqueur courant
+		}
 	}
 }
 
@@ -57,7 +80,7 @@ function traiter_raccourci_notes($letexte, $marqueur_notes)
 		list($note_source, $note_all, $ref, $nom, $note_texte) = $r;
 
 		// reperer une note nommee, i.e. entre chevrons
-		// On leve la Confusion avec une balise en regardant 
+		// On leve la Confusion avec une balise en regardant
 		// si la balise fermante correspondante existe
 		// Cas pathologique:   [[ <a> <a href="x">x</a>]]
 

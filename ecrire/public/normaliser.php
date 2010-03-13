@@ -171,7 +171,7 @@ function normaliser_inclure($champ)
 {
 	normaliser_args_inclumodel($champ);
 	$l = $champ->param[0];
-	if (!$l[0]) foreach ($l as $k => $p) {
+	if (is_array($l) AND !$l[0]) foreach ($l as $k => $p) {
 		if (!$p OR $p[0]->type != 'texte' OR 
 		    !preg_match('/^fond\s*=\s*(.*)$/',$p[0]->texte, $r))
 			continue;
