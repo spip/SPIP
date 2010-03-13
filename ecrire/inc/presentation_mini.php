@@ -338,7 +338,7 @@ function fin_page()
 			. "</a></div>")
 		: ("<div id='copyright'>"
 
-			. info_maj ('spip', 'SPIP', $GLOBALS['spip_version_branche'])
+			. info_maj_spip()
 			. info_copyright()
 			. "<br />"
 		 	. _T('info_copyright_doc',
@@ -356,6 +356,26 @@ function fin_page()
 	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '')
 	. $chrono
 	. "</body></html>\n";
+}
+
+function info_maj_spip(){
+
+	$maj = $GLOBALS['meta']['info_maj_spip'];
+	if (!$maj)
+		return "";
+
+	$maj = explode('|',$maj);
+	// c'est une ancienne notif, on a fait la maj depuis !
+	if ($GLOBALS['spip_version_branche']!==reset($maj))
+		return "";
+
+	if (!autoriser('webmestre'))
+		return "";
+
+	array_shift($maj);
+	$maj = implode('|',$maj);
+
+	return "<br />$maj</br>";
 }
 
 // http://doc.spip.org/@info_copyright
@@ -385,43 +405,6 @@ function info_copyright() {
 			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' onclick=\"window.open(this.href, 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"))
 		. $secu;
 
-}
-
-define('_VERSIONS_SERVEUR', 'http://files.spip.org/');
-define('_VERSIONS_LISTE', 'archives.xml');
-
-function info_maj ($dir, $file, $version)
-{
-	if (!autoriser('webmestre')) return '';
-	list($maj,$min,$rev) = preg_split('/\D+/', $version);
-#	list($maj,$min,$rev) = preg_split('/\D+/', '1.9.2i'); # pour test
-	include_spip('inc/distant');
-	$dir = _VERSIONS_SERVEUR . $dir . '/';
-	$liste = $dir . _VERSIONS_LISTE;
-	if (!$page = copie_locale($liste, 'modif')) return '';
-	$page = file_get_contents(_DIR_RACINE . $page);
-	// reperer toutes les versions de numero majeur superieur ou egal
-	// (a revoir quand on arrivera a SPIP V10 ...)
-	$p = substr("0123456789", intval($maj));
-	$re = ',/' . $file . '\D+([' . $p . ']+)\D+(\d+)(\D+(\d+))?.*?[.]zip",i';
-	preg_match_all($re, $page, $m,  PREG_SET_ORDER);
-	$new = '';
-	foreach ($m as $v) {
-			list(, $maj2, $min2,, $rev2) = $v;
-			if (($maj2 > $maj)
-			OR (($maj2 == $maj)
-				AND (($min2 > $min)
-					OR (($min2 == $min)
-						AND ($rev2 > $rev))))) {
-				$new = $v[0];
-				break;
-		}
-	}
-
-	if (!$new) return "";
-	return "<br /><a style='color: red' href='$dir'>" . 
-	    _L('De nouvelles_versions_de_SPIP_sont_disponibles') .
-	    '</a><br />';
 }
 
 // http://doc.spip.org/@debloquer_article
