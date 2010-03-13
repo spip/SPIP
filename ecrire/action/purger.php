@@ -33,7 +33,7 @@ function action_purger_dist()
 		@spip_unlink(_CACHE_PLUGINS_FCT);
 		@spip_unlink(_CACHE_PLUGINS_VERIF);
 		@spip_unlink(_CACHE_CHEMIN);
-		purger_repertoire(_DIR_CACHE);
+		purger_repertoire(_DIR_CACHE,array('subdir'=>true));
 		purger_repertoire(_DIR_AIDE);
 		purger_repertoire(_DIR_VAR.'cache-css');
 		purger_repertoire(_DIR_VAR.'cache-js');
