@@ -1722,7 +1722,7 @@ function form_hidden($action) {
 	AND $p[3]) {
 		$contexte = $p[0];
 		$contexte['page'] = $p[3];
-		$action = preg_replace('/^([^?]*)[?][^&]*/', '\1', $action);
+		$action = preg_replace('/^([^?]*)[?][^&]*/', '\1?', $action);
 	}
 
 	// on va remplir un tableau de valeurs en prenant bien soin de ne pas
