@@ -168,6 +168,7 @@ function verifier_htaccess($rep) {
 	if ($ht = @fopen($htaccess, "w")) {
 		fputs($ht, "deny from all\n");
 		fclose($ht);
+		@chmod($htaccess, _SPIP_CHMOD & 0666);
 		$t = rtrim($rep,"/") . "/.ok";
 		if ($ht = @fopen($t, "w")) {
 			@fclose($ht);
