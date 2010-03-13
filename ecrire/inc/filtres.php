@@ -532,9 +532,9 @@ function taille_en_octets ($taille) {
 
 // Rend une chaine utilisable sans dommage comme attribut HTML
 // http://doc.spip.org/@attribut_html
-function attribut_html($texte) {
+function attribut_html($texte,$striptags = true) {
 	$u = $GLOBALS['meta']['pcre_u'];
-	$texte = texte_backend(preg_replace(array(",\n,",",\s(?=\s),msS".$u),array(" ",""),textebrut($texte)));
+	$texte = texte_backend(preg_replace(array(",\n,",",\s(?=\s),msS".$u),array(" ",""),$striptags?textebrut($texte):$texte));
 	$texte = str_replace(array("'",'"'),array('&#39;', '&#34;'), $texte);
 	
 	return preg_replace(array("/&(amp;|#38;)/","/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/"),array("&","&#38;") , $texte);
@@ -1380,9 +1380,11 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 
 // modifier (ou inserer) un attribut html dans une balise
 // http://doc.spip.org/@inserer_attribut
-function inserer_attribut($balise, $attribut, $val, $texte_backend=true, $vider=false) {
+function inserer_attribut($balise, $attribut, $val, $proteger=true, $vider=false) {
 	// preparer l'attribut
-	if ($texte_backend) $val = texte_backend($val); # supprimer les &nbsp; etc
+	// supprimer les &nbsp; etc mais pas les balises html
+	// qui ont un sens dans un attribut value d'un input
+	if ($proteger) $val = attribut_html($val,false);
 
 	// echapper les ' pour eviter tout bug
 	$val = str_replace("'", "&#39;", $val);
