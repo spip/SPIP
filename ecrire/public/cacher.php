@@ -95,8 +95,8 @@ function gunzip_page(&$page) {
 function cache_valide(&$page, $date) {
 
 	if (isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache']) return -1;
-	if (defined('_NO_CACHE')) return (_NO_CACHE==0 AND !$page)?1:_NO_CACHE;
-	if (!$page OR !isset($page['entetes']['X-Spip-Cache'])) return 1;
+	if (defined('_NO_CACHE')) return (_NO_CACHE==0 AND !isset($page['texte']))?1:_NO_CACHE;
+	if (!$page OR !isset($page['texte']) OR !isset($page['entetes']['X-Spip-Cache'])) return 1;
 
 	// #CACHE{n,statique} => on n'invalide pas avec derniere_modif
 	// cf. ecrire/public/balises.php, balise_CACHE_dist()
@@ -153,6 +153,14 @@ function cache_sessionne($chemin_cache, $session, $creer=false) {
 # Passage par reference de $page par souci d'economie
 // http://doc.spip.org/@creer_cache
 function creer_cache(&$page, &$chemin_cache) {
+
+	// Ne rien faire si on est en preview, debug, ou si une erreur
+	// grave s'est presentee (compilation du squelette, MySQL, etc)
+	// le cas var_nocache ne devrait jamais arriver ici (securite)
+	// le cas spip_interdire_cache correspond a une ereur SQL grave non anticipable
+	if ((isset($GLOBALS['var_nocache'])&&$GLOBALS['var_nocache'])
+		OR defined('spip_interdire_cache'))
+		return;
 
 	// Si la page c1234 a un invalideur de session 'zz', sauver dans
 	// 'tmp/cache/MD5(chemin_cache)/_zz'

@@ -119,19 +119,11 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 
 //
 // Ecrire un fichier de maniere un peu sure
-//
+// $ecrire_quand_meme ne sert plus mais est conservee dans l'appel pour compatibilite
+// 
 // zippe les fichiers .gz
 // http://doc.spip.org/@ecrire_fichier
 function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $truncate=true) {
-
-	// Ne rien faire si on est en preview, debug, ou si une erreur
-	// grave s'est presentee (compilation du squelette, MySQL, etc)
-	if ((
-		(isset($GLOBALS['var_preview'])&&$GLOBALS['var_preview'])
-		OR (_request('var_mode') == 'debug')
-		OR defined('spip_interdire_cache'))
-	AND !$ecrire_quand_meme)
-		return;
 
 	#spip_timer('ecrire_fichier');
 
