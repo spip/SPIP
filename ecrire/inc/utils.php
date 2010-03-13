@@ -648,7 +648,6 @@ function chemin($file, $dirname='', $include=false){
 // chercher un fichier $file dans le SPIP_PATH
 // si on donne un sous-repertoire en 2e arg optionnel, il FAUT le / final
 // si 3e arg vrai, on inclut si ce n'est fait.
-define('_ROOT_CWD', getcwd().'/');
 $GLOBALS['path_sig'] = '';
 $GLOBALS['path_files'] = null;
 
@@ -1192,7 +1191,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// (non surchargeable en l'etat ; attention si on utilise include_spip()
 	// pour le rendre surchargeable, on va provoquer un reecriture
 	// systematique du noyau ou une baisse de perfs => a etudier)
-	include_once _DIR_RESTREINT . 'inc/flock.php';
+	include_once  _ROOT_RESTREINT . 'inc/flock.php';
 
 	// charger tout de suite le path et son cache
 	load_path_cache();
