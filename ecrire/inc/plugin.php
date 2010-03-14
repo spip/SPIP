@@ -21,6 +21,21 @@ define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 // besoin de inc_meta
 include_spip('inc/texte');
 
+function spip_version_compare($v1,$v2,$op){
+	$v1 = preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|#|pl|p),','\\1.\\2',$v1);
+	$v2 = preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|#|pl|p),','\\1.\\2',$v2);
+	$v1 = explode('.',$v1);
+	$v2 = explode('.',$v2);
+	while (count($v1)<count($v2))
+		$v1[] = '0';
+	while (count($v2)<count($v1))
+		$v2[] = '0';
+	$v1 = implode('.',$v1);
+	$v2 = implode('.',$v2);
+
+	return version_compare($v1, $v2,$op);
+}
+
 // lecture des sous repertoire plugin existants
 // $dir_plugins pour forcer un repertoire (ex: _DIR_EXTENSIONS)
 // _DIR_PLUGINS_SUPPL pour aller en chercher ailleurs (separes par des ":")
@@ -66,14 +81,14 @@ function plugin_version_compatible($intervalle,$version){
 	$minimum_inc = $intervalle{0}=="[";
 	$maximum_inc = substr($intervalle,-1)=="]";
 	#var_dump("$version::$minimum_inc::$minimum::$maximum::$maximum_inc");
-	#var_dump(version_compare($version,$minimum,'<'));
+	#var_dump(spip_version_compare($version,$minimum,'<'));
 	if (strlen($minimum)){
-		if ($minimum_inc AND version_compare($version,$minimum,'<')) return false;
-		if (!$minimum_inc AND version_compare($version,$minimum,'<=')) return false;
+		if ($minimum_inc AND spip_version_compare($version,$minimum,'<')) return false;
+		if (!$minimum_inc AND spip_version_compare($version,$minimum,'<=')) return false;
 	}
 	if (strlen($maximum)){
-		if ($maximum_inc AND version_compare($version,$maximum,'>')) return false;
-		if (!$maximum_inc AND version_compare($version,$maximum,'>=')) return false;
+		if ($maximum_inc AND spip_version_compare($version,$maximum,'>')) return false;
+		if (!$maximum_inc AND spip_version_compare($version,$maximum,'>=')) return false;
 	}
 	return true;
 }
@@ -181,7 +196,7 @@ function liste_plugin_valides($liste_plug, $force = false){
 				$version = isset($infos[$dir_type][$plug]['version'])?$infos[$dir_type][$plug]['version']:NULL;
 				if (isset($liste_non_classee[$p=strtoupper($infos[$dir_type][$plug]['prefix'])])){
 					// prendre le plus recent
-					if (version_compare($version,$liste_non_classee[$p]['version'],'>'))
+					if (spip_version_compare($version,$liste_non_classee[$p]['version'],'>'))
 						unset($liste_non_classee[$p]);
 					else{
 						continue;
@@ -565,7 +580,7 @@ function spip_plugin_install($action,$prefix,$version_cible){
 	switch ($action){
 		case 'test':
 			return (isset($GLOBALS['meta'][$nom_meta_base_version]) 
-			  AND version_compare($GLOBALS['meta'][$nom_meta_base_version],$version_cible,'>='));
+			  AND spip_version_compare($GLOBALS['meta'][$nom_meta_base_version],$version_cible,'>='));
 			break;
 		case 'install':
 			if (function_exists($upgrade = $prefix."_upgrade"))
