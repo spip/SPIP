@@ -86,7 +86,13 @@ function public_debusquer_dist($message='', $lieu='') {
 	// en cas de squelette inclus,  virer le code de l'incluant:
 	// - il contient souvent une Div restreignant la largeur a 3 fois rien
 	// - ca fait 2 headers !
-	if (ob_get_length()) ob_end_clean();
+	// sauf si l'on se trouve deja dans un flux compresse (plugin compresseur
+	// actif par exemple)
+	if (ob_get_length()
+	    AND
+	    !in_array('ob_gzhandler', ob_get_status())) {
+      ob_end_clean();
+    }
 
 	lang_select($visiteur_session['lang']);
 	$fonc = _request('var_mode_objet');
