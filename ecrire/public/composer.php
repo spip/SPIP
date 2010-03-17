@@ -121,7 +121,8 @@ function squelette_traduit($squelette, $sourcefile, $phpfile, $boucles)
  */ " ;
 
 	$code = '<'. "?php\n" . $code . join('', $boucles)  . "\n?" .'>';
-	ecrire_fichier($phpfile, $code);
+	if (!isset($GLOBALS['var_nocache']) OR !$GLOBALS['var_nocache'])
+		ecrire_fichier($phpfile, $code);
 	return $code;
 }
 
@@ -299,13 +300,18 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 
 define('CODE_INCLURE_BALISE', '<' . '?php 
 include_once("./" . _DIR_RACINE . "%s");
+if ($lang_select = "%s") $lang_select = lang_select($lang_select);
 inserer_balise_dynamique(balise_%s_dyn(%s), array(%s));
+if ($lang_select) lang_select();
 ?'
        .'>');
 
 
 function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
-	$r = sprintf(CODE_INCLURE_BALISE, $file, $nom,
+	$r = sprintf(CODE_INCLURE_BALISE,
+	       $file,
+	       $context_compil[4]?$context_compil[4]:'',
+	       $nom,
 	       join(', ', array_map('argumenter_squelette', $args)),
 	       join(', ', array_map('_q', $context_compil)));
 	return $r;
@@ -327,7 +333,6 @@ function argumenter_squelette($v) {
 // verifier leurs arguments et filtres, et calculer le code a inclure
 // http://doc.spip.org/@executer_balise_dynamique
 function executer_balise_dynamique($nom, $args, $context_compil) {
-
 	$p = strpos($nom,"_");
 	$nomfonction = $nom;
 	$nomfonction_generique = substr($nom,0,$p+1);
