@@ -245,6 +245,11 @@ function calculer_balise_dynamique($p, $nom, $l, $supp=array()) {
 		$p->code = "''";
 		return $p;
 	}
+	// compatibilite: depuis qu'on accepte #BALISE{ses_args} sans [(...)] autour
+	// il faut recracher {...} quand ce n'est finalement pas des args
+	if ($p->fonctions AND (!$p->fonctions[0][0]) AND $p->fonctions[0][1]) {
+		$p->fonctions = null;
+	}
 
 	if ($p->param AND ($c = $p->param[0])) {
 		// liste d'arguments commence toujours par la chaine vide
