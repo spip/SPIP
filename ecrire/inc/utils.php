@@ -909,15 +909,29 @@ function url_de_base() {
 				$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
 		}
 	}
-	$myself = $http.'://'.$_SERVER['HTTP_HOST'].$GLOBALS['REQUEST_URI'];
 
-	# supprimer la chaine de GET
-	list($myself) = explode('?', $myself);
-
-	# supprimer n sous-repertoires
-	$url[$GLOBALS['profondeur_url']] = join('/', array_slice(explode('/', $myself), 0, -1-$GLOBALS['profondeur_url'])).'/';
+	$url[$GLOBALS['profondeur_url']] = url_de_($http,$_SERVER['HTTP_HOST'],$GLOBALS['REQUEST_URI'],$GLOBALS['profondeur_url']);
 
 	return $url[$GLOBALS['profondeur_url']];
+}
+/**
+ * fonction testable de construction d'une url appelee par url_de_base()
+ * @param string $http
+ * @param string $host
+ * @param string $request
+ * @param int $prof
+ * @return string
+ */
+function url_de_($http,$host,$request,$prof=0){
+	$prof = max($prof,0);
+
+	$myself = ltrim($request,'/');
+	# supprimer la chaine de GET
+	list($myself) = explode('?', $myself);
+	$url = join('/', array_slice(explode('/', $myself), 0, -1-$prof)).'/';
+
+	$url = $http.'://'.rtrim($host,'/').'/'.ltrim($url,'/');
+	return $url;
 }
 
 
