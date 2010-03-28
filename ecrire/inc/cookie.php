@@ -19,7 +19,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='', $secure='') {
 	$name = preg_replace ('/^spip_/', $GLOBALS['cookie_prefix'].'_', $name);
 	if ($path == 'AUTO')
-		$path = preg_replace(',^\w+://[^/]*,', '', url_de_base());
+		$path = defined('_COOKIE_PATH')?_COOKIE_PATH:preg_replace(',^\w+://[^/]*,', '', url_de_base());
+	if (!$domain AND defined('_COOKIE_DOMAIN'))
+		$domain = _COOKIE_DOMAIN;
 
 	#spip_log("cookie('$name', '$value', '$expire', '$path', '$domain', '$secure'");
 
