@@ -64,12 +64,13 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $sqli
 		// si installation -> base temporaire tant qu'on ne connait pas son vrai nom
 		if (defined('_ECRIRE_INSTALL') && _ECRIRE_INSTALL){
 			// creation d'une base temporaire pour le debut d'install
-			$tmp = _DIR_DB . "_sqlite".$sqlite_version."_install.sqlite";
-			if ($sqlite_version == 3)
-				$ok = $link = new PDO("sqlite:$tmp");
-			else
-				$ok = $link = sqlite_open($tmp, _SQLITE_CHMOD, $err);
 			$db = "_sqlite".$sqlite_version."_install";	
+			$tmp = _DIR_DB . $db . ".sqlite";
+			if ($sqlite_version == 3) {
+				$ok = $link = new PDO("sqlite:$tmp");
+			} else {
+				$ok = $link = sqlite_open($tmp, _SQLITE_CHMOD, $err);
+			}
 		// sinon, on arrete finalement
 		} else {
 			return false;
@@ -361,6 +362,31 @@ function spip_sqlite_create($nom, $champs, $cles, $autoinc=false, $temporary=fal
 	}
 	return $ok ? true : false;
 }
+
+/**
+ * Fonction pour creer une base de donnees SQLite
+ *
+ * @param string $nom le nom de la base (sans l'extension de fichier)
+ * @param string $serveur le nom de la connexion
+ * @param string $option options
+ * 
+ * @return bool true si la base est creee.
+**/
+function spip_sqlite_create_base($nom, $serveur='', $option=true) {
+	$f = _DIR_DB . $nom . '.sqlite';
+	if (_sqlite_is_version(2, '', $serveur)) {
+		$ok = new sqlite_open($f, _SQLITE_CHMOD, $err);
+	} else {
+		$ok = new PDO("sqlite:$f");
+	}
+	if ($ok) {
+		unset($ok);
+		return true;
+	}
+	unset($ok);
+	return false;
+}
+
 
 // Fonction de creation d'une vue SQL nommee $nom
 // http://doc.spip.org/@spip_sqlite_create_view
@@ -1354,6 +1380,7 @@ function _sqlite_ref_fonctions(){
 		'count' => 'spip_sqlite_count',
 		'countsel' => 'spip_sqlite_countsel',
 		'create' => 'spip_sqlite_create',
+		'create_base' => 'spip_sqlite_create_base',
 		'create_view' => 'spip_sqlite_create_view',
 		'delete' => 'spip_sqlite_delete',
 		'drop_table' => 'spip_sqlite_drop_table',
