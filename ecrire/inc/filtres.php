@@ -469,7 +469,7 @@ function lignes_longues($texte, $l = 70) {
 
 	// echapper les tags (on ne veut pas casser les a href=...)
 	$tags = array();
-	if (preg_match_all('/<.+>/UumsS', $texte, $t, PREG_SET_ORDER)) {
+	if (preg_match_all('/<.+>|&[^;\s]+;/UumsS', $texte, $t, PREG_SET_ORDER)) {
 		foreach ($t as $n => $tag) {
 			$tags[$n] = $tag[0];
 			$texte = str_replace($tag[0], " <---$n---> ", $texte);
