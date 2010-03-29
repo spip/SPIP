@@ -191,18 +191,18 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 	// "a la main" dans les squelettes, mais evidemment sans exhaustivite
 	if (preg_match_all(
 	'/(<[?]php\s+)@?header\s*\(\s*.([^:]*):\s*([^)]*)[^)]\s*\)\s*[;]?\s*[?]>/ims',
-	$corps, $regs, PREG_SET_ORDER))
-	foreach ($regs as $r) {
-		$corps = str_replace($r[0], '', $corps);
-		# $j = Content-Type, et pas content-TYPE.
-		$j = join('-', array_map('ucwords', explode('-', strtolower($r[2]))));
+	$corps, $regs, PREG_SET_ORDER)){
+		foreach ($regs as $r) {
+			$corps = str_replace($r[0], '', $corps);
+			# $j = Content-Type, et pas content-TYPE.
+			$j = join('-', array_map('ucwords', explode('-', strtolower($r[2]))));
 
-		if ($j=='X-Spip-Filtre' AND isset($headers[$j]))
-			$headers[$j].="|".$r[3];
-		else
-			$headers[$j] = $r[3];
+			if ($j=='X-Spip-Filtre' AND isset($headers[$j]))
+				$headers[$j].="|".$r[3];
+			else
+				$headers[$j] = $r[3];
+		}
 	}
-
 	// S'agit-il d'un resultat constant ou contenant du code php
 	$process_ins = (
 		strpos($corps,'<'.'?') === false

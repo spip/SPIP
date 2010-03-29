@@ -33,9 +33,9 @@ function existe_formulaire($form)
 	else 
 		$form = strtolower($form);
 
-	if (!$form) return '';
+	if (!$form) return ''; // on ne sait pas, le nom du formulaire n'est pas fourni ici
 
-	return find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/') ? $form : '';
+	return find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/') ? $form : false;
 }
 
 
@@ -44,7 +44,8 @@ function existe_formulaire($form)
 function balise_FORMULAIRE__dist($p) {
 
 	// Cas d'un #FORMULAIRE_TOTO inexistant : renvoyer la chaine vide.
-	if (!existe_formulaire($p->nom_champ)) {
+	// mais si #FORMULAIRE_{toto} on ne peut pas savoir a la compilation, continuer
+	if (existe_formulaire($p->nom_champ)===FALSE) {
 		    $p->code = "''";
 		    $p->interdire_scripts = false;
 		    return $p;
