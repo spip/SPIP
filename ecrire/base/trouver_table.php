@@ -110,10 +110,10 @@ function base_trouver_table_dist($nom, $serveur=''){
 			$desc['key']['PRIMARY KEY'] = array_shift(array_keys($desc['field']));
 
 		$desc['table']= $nom_sql;
-		$desc['id_table']= $nom;
 		$desc['connexion']= $serveur;
-		$desc['titre'] = isset($GLOBALS['table_titre'][$nom])
-		? $GLOBALS['table_titre'][$nom] : '';
+		$table = table_objet(objet_type($nom));
+		$desc['titre'] =
+		  isset($GLOBALS['table_titre'][$table]) ? $GLOBALS['table_titre'][$table] : '';
 		$connexion['tables'][$nom_sql] = $desc;
 		// une nouvelle table a ete descrite
 		// mettons donc a jour le cache des descriptions de ce serveur
@@ -121,6 +121,7 @@ function base_trouver_table_dist($nom, $serveur=''){
 			ecrire_fichier($nom_cache_desc_sql[$serveur],serialize($connexion['tables']));
 	}
 
+	$connexion['tables'][$nom_sql]['id_table']=$nom;
 	return $connexion['tables'][$nom_sql];
 }
 ?>
