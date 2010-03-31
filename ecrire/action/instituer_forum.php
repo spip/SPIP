@@ -22,23 +22,17 @@ function action_instituer_forum_dist() {
 	$id_forum = intval($id_forum);
 	$row = sql_fetsel("*", "spip_forum", "id_forum=$id_forum");
 	if (!$row) return;
-
-	// invalider les pages comportant ce forum
-	include_spip('inc/invalideur');
-	include_spip('inc/forum');
-	$index_forum = calcul_index_forum($row['id_article'], $row['id_breve'], $row['id_rubrique'], $row['id_syndic']);
-	suivre_invalideur("id='id_forum/$index_forum'");
+	$old = $row['statut'];
+ // rien a faire si pas de changement de statut
+ 	if ($old==$statut)
+		return;
 
 	// changer le statut de toute l'arborescence dependant de ce message
 	$id_messages = array($id_forum);
-	$old = $row['statut'];
 	while ($id_messages) {
 		sql_updateq("spip_forum", array("statut" => $statut), sql_in("id_forum", $id_messages) ." AND statut = '$old'");
 
-		$result_forum = sql_select("id_forum", "spip_forum", sql_in("id_parent", $id_messages));
-		$id_messages = array();
-		while ($row = sql_fetch($result_forum))
-			$id_messages[] = $row['id_forum'];
+		$id_messages = array_map('reset',sql_allfetsel("id_forum", "spip_forum", sql_in("id_parent", $id_messages)));
 	}
 
 	// Notifier de la publication du message, s'il etait 'prop'
@@ -48,12 +42,32 @@ function action_instituer_forum_dist() {
 		}
 	}
 
+	// mettre a jour la date du thread
+	// si publie, ou que tout le thread est prive,
+	// mettre la date du thread a 'maintenant' (date de publi du message)
+	// sinon prendre la date_heure du dernier message public
+	// c'est imparfait dans le cas ou les crayons ont ete utilises pour modifier ce message entre temps
+	// car la date_thread aurait cette derniere date alors que pas le message
+	// mais c'est au mieux de ce que l'on peut faire quand on depublie un SPAM ou supprime un message
+	if ($statut=='publie'
+		OR !($date_thread = sql_getfetsel("date_heure", "spip_forum", "statut='publie' AND id_thread=".$row['id_thread'], "", "date_heure DESC","0,1"))){
+		$date_thread = date('Y-m-d H:i:s');
+	}
+	sql_updateq("spip_forum", array("date_thread" => $date_thread), "id_thread=".$row['id_thread']);
+	
+	// invalider les pages comportant ce forum
+	include_spip('inc/invalideur');
+	include_spip('inc/forum');
+	$index_forum = calcul_index_forum($row['id_article'], $row['id_breve'], $row['id_rubrique'], $row['id_syndic']);
+	suivre_invalideur("id='id_forum/$index_forum'");
+
 	// Reindexation du thread (par exemple)
 	pipeline('post_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_forum',
-				'id_objet' => $id_forum
+				'id_objet' => $id_forum,
+				'action' => 'instituer',
 			),
 			'data' => null
 		)
