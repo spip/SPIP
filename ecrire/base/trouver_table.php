@@ -111,6 +111,10 @@ function base_trouver_table_dist($nom, $serveur=''){
 
 		$desc['table']= $nom_sql;
 		$desc['connexion']= $serveur;
+		// objet_type peut provoquer un appel reentrant ici.
+		// pour ne pas faire de boucle infinie, on stocke ce qu'on a deja trouve
+		$connexion['tables'][$nom_sql] = $desc;
+
 		$table = table_objet(objet_type($nom));
 		$desc['titre'] =
 		  isset($GLOBALS['table_titre'][$table]) ? $GLOBALS['table_titre'][$table] : '';
