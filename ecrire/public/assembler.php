@@ -108,6 +108,8 @@ function assembler($fond, $connect='') {
 						$fond = ($type === 'syndic') ? 'site' : $type;
 					if (isset($ncontexte))
 						$contexte = $ncontexte;
+					if (defined('_DEFINIR_CONTEXTE_TYPE') AND _DEFINIR_CONTEXTE_TYPE)
+						$contexte['type'] = ($type === 'syndic') ? 'site' : $type;
 				}
 			}
 			// compatibilite <= 1.9.2
