@@ -295,7 +295,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 				else
 					list($cle_depart,$cle_arrivee,$s) = $rechercher_joints($table,$table_liee,array_keys($ids_trouves), $serveur);
 
-				while ($t = sql_fetch($s)) {
+				while ($t = is_array($s)?array_shift($s):sql_fetch($s)) {
 					$id = $t[$cle_depart];
 					$joint = $ids_trouves[$t[$cle_arrivee]];
 					if (!isset($results[$table]))
