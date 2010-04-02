@@ -89,6 +89,7 @@ $GLOBALS['spip_pg_functions_1'] = array(
 		'insertq_multi' => 'spip_pg_insertq_multi',
 		'listdbs' => 'spip_pg_listdbs',
 		'multi' => 'spip_pg_multi',
+		'optimize' => 'spip_pg_optimize',
 		'query' => 'spip_pg_query',
 		'quote' => 'spip_pg_quote',
 		'replace' => 'spip_pg_replace',
@@ -440,6 +441,13 @@ function spip_pg_select($select, $from, $where='',
 	}
 
 	$select = spip_pg_frommysql($select);
+
+	// si pas de tri explicitement demande, le GROUP BY ne
+	// contient que la clef primaire.
+	// lui ajouter alors le champ de tri par defaut
+	if (preg_match("/FIELD\(([a-z]+\.[a-z]+),/i", $orderby[0], $groupbyplus)) {
+		$groupby[] = $groupbyplus[1];
+	}
 
 	$orderby = spip_pg_orderby($orderby, $select);
 
@@ -1200,6 +1208,20 @@ function spip_pg_create_view($nom, $query_select, $serveur='',$requeter=true) {
 // http://doc.spip.org/@spip_pg_set_connect_charset
 function spip_pg_set_connect_charset($charset, $serveur='',$requeter=true){
 	spip_log("changement de charset sql a ecrire en PG");
+}
+
+
+/**
+ * Optimise une table SQL
+ *
+ * @param $table nom de la table a optimiser
+ * @param $serveur nom de la connexion
+ * @param $requeter effectuer la requete ? sinon retourner son code
+ * @return bool|string true / false / requete
+**/
+// http://doc.spip.org/@spip_sqlite_optimize
+function spip_pg_optimize($table, $serveur='',$requeter=true){
+	return spip_pg_query("VACUUM ". $table, $serveur, $requeter);
 }
 
 // Selectionner la sous-chaine dans $objet

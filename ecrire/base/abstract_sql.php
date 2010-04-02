@@ -413,19 +413,19 @@ function sql_explain($q, $serveur='', $option=true) {
 }
 
 // http://doc.spip.org/@sql_optimize
-function sql_optimize($q, $serveur='', $option=true) {
+function sql_optimize($table, $serveur='', $option=true) {
 	$f = sql_serveur('optimize', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	$r = $f($q, $serveur, $option!==false);
+	$r = $f($table, $serveur, $option!==false);
 	if ($r === false) spip_sql_erreur($serveur);
 	return $r;
 }
 
 // http://doc.spip.org/@sql_repair
-function sql_repair($q, $serveur='', $option=true) {
+function sql_repair($table, $serveur='', $option=true) {
 	$f = sql_serveur('repair', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	$r = $f($q, $serveur, $option!==false);
+	$r = $f($table, $serveur, $option!==false);
 	if ($r === false) spip_sql_erreur($serveur);
 	return $r;
 }

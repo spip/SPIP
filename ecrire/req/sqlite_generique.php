@@ -15,7 +15,6 @@
 // idem, il ne faut pas de $obj->toto()->toto sinon php4 se tue !
 
 # todo : get/set_caracteres ?
-# todo : REPAIR TABLE ?
 
 
 /*
@@ -66,10 +65,11 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $sqli
 			// creation d'une base temporaire pour le debut d'install
 			$db = "_sqlite".$sqlite_version."_install";	
 			$tmp = _DIR_DB . $db . ".sqlite";
-			if ($sqlite_version == 3)
+			if ($sqlite_version == 3) {
 				$ok = $link = new PDO("sqlite:$tmp");
-			else
+			} else {
 				$ok = $link = sqlite_open($tmp, _SQLITE_CHMOD, $err);
+			}
 		// sinon, on arrete finalement
 		} else {
 			return false;
@@ -547,17 +547,22 @@ function spip_sqlite_drop_index($nom, $table, $serveur='', $requeter=true) {
 	return spip_sqlite_query($query, $serveur, $requeter);
 }
 
+/**
+ * Retourne la derniere erreur generee
+ *
+ * @param $serveur nom de la connexion
+ * @return string erreur eventuelle
+**/
 // http://doc.spip.org/@spip_sqlite_error
-function spip_sqlite_error($query='', $serveur='',$requeter=true) {
+function spip_sqlite_error($serveur='') {
 	$link  = _sqlite_link($serveur);
 	
-	if (_sqlite_is_version(3, $link)){
+	if (_sqlite_is_version(3, $link)) {
 		$errs = $link->errorInfo();
 		$s = '';
 		foreach($errs as $n=>$e){
 			$s .= "\n$n : $e";
 		}
-		
 	} elseif ($link) {
 		$s = sqlite_error_string(sqlite_last_error($link));
 	} else {
@@ -567,9 +572,15 @@ function spip_sqlite_error($query='', $serveur='',$requeter=true) {
 	return $s;
 }
 
-
+/**
+ * Retourne le numero de la derniere erreur SQL
+ * (sauf que SQLite semble ne connaitre que 0 ou 1)
+ *
+ * @param $serveur nom de la connexion
+ * @return int 0 pas d'erreur / 1 une erreur
+**/
 // http://doc.spip.org/@spip_sqlite_errno
-function spip_sqlite_errno($serveur='',$requeter=true) {
+function spip_sqlite_errno($serveur='') {
 	$link  = _sqlite_link($serveur);
 	
 	if (_sqlite_is_version(3, $link)){
@@ -713,9 +724,11 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 	} else $t = 0 ;
  
 	$query="INSERT OR REPLACE INTO $table $champs VALUES $valeurs";
-	if (!$requeter) return $query;
+	
 	
 	if ($r = spip_sqlite_query($query, $serveur)) {
+		if (!$requeter) return $query;
+		
 		if (_sqlite_is_version(3, $sqlite)) $nb = $sqlite->lastInsertId();
 		else $nb = sqlite_last_insert_rowid($sqlite);
 	} else $nb = 0;
@@ -788,10 +801,22 @@ function spip_sqlite_multi ($objet, $lang) {
 }
 
 
+/**
+ * Optimise une table SQL
+ * Note: Sqlite optimise TOUTE un fichier sinon rien.
+ * On evite donc 2 traitements sur la meme base dans un hit.
+ * 
+ * @param $table nom de la table a optimiser
+ * @param $serveur nom de la connexion
+ * @param $requeter effectuer la requete ? sinon retourner son code
+ * @return bool|string true / false / requete
+**/
 // http://doc.spip.org/@spip_sqlite_optimize
-function spip_sqlite_optimize($table, $serveur='',$requeter=true){
-	spip_sqlite_query("OPTIMIZE TABLE ". $table, $serveur); // <- a verifier mais ca doit pas etre ca !
-	return true;
+function spip_sqlite_optimize($table, $serveur='', $requeter=true) {
+	static $do = false;
+	if ($requeter and $do) {return true;}
+	if ($requeter) { $do = true; }
+	return spip_sqlite_query("VACUUM", $serveur, $requeter);
 }
 
 
@@ -814,9 +839,18 @@ function spip_sqlite_quote($v, $type=''){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_repair
-function spip_sqlite_repair($table, $serveur='',$requeter=true){
-	return spip_sqlite_query("REPAIR TABLE $table", $serveur, $requeter); // <- ca m'ettonerait aussi ca !
+/**
+ * Tester si une date est proche de la valeur d'un champ
+ *
+ * @param string $champ le nom du champ a tester
+ * @param int $interval valeur de l'interval : -1, 4, ...
+ * @param string $unite utite utilisee (DAY, MONTH, YEAR, ...)
+ * @return string expression SQL
+**/
+function spip_sqlite_date_proche($champ, $interval, $unite)
+{
+	$op = $interval > 0 ? '>' : '<';
+	return "($champ $op datetime('" . date("Y-m-d H:i:s") . "', '$interval $unite'))";
 }
 
 
@@ -868,11 +902,7 @@ function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='',
 		. ($orderby ? ("\nORDER BY " . _sqlite_calculer_order($orderby)) :'')
 		. ($limit ? "\nLIMIT $limit" : '');
 
-	// renvoyer la requete inerte si demandee
-	if ($requeter === false) return $query;
-
-	$r = spip_sqlite_query($query, $serveur, $requeter);
-	return $r ? $r : $query;
+	return spip_sqlite_query($query, $serveur, $requeter);
 }
 
 
@@ -916,7 +946,7 @@ function spip_sqlite_showbase($match, $serveur='',$requeter=true){
 
 // http://doc.spip.org/@spip_sqlite_showtable
 function spip_sqlite_showtable($nom_table, $serveur='',$requeter=true){
-		
+	
 	$query = 
 			'SELECT sql, type FROM'
    			. ' (SELECT * FROM sqlite_master UNION ALL'
@@ -1206,7 +1236,7 @@ function _sqlite_charger_version($version=''){
 
 
 
-/*
+/**
  * Gestion des requetes ALTER non reconnues de SQLite :
  * ALTER TABLE table DROP column
  * ALTER TABLE table CHANGE [COLUMN] columnA columnB definition
@@ -1379,7 +1409,9 @@ function _sqlite_ref_fonctions(){
 		'count' => 'spip_sqlite_count',
 		'countsel' => 'spip_sqlite_countsel',
 		'create' => 'spip_sqlite_create',
+		'create_base' => 'spip_sqlite_create_base',
 		'create_view' => 'spip_sqlite_create_view',
+		'date_proche' => 'spip_sqlite_date_proche',
 		'delete' => 'spip_sqlite_delete',
 		'drop_table' => 'spip_sqlite_drop_table',
 		'drop_view' => 'spip_sqlite_drop_view',
@@ -1401,7 +1433,6 @@ function _sqlite_ref_fonctions(){
 		'quote' => 'spip_sqlite_quote',
 		'replace' => 'spip_sqlite_replace',
 		'replace_multi' => 'spip_sqlite_replace_multi',
-		'repair' => 'spip_sqlite_repair',
 		'select' => 'spip_sqlite_select',
 		'selectdb' => 'spip_sqlite_selectdb',
 		'set_charset' => 'spip_sqlite_set_charset',
@@ -1615,6 +1646,9 @@ class sqlite_traiter_requete{
  
 # spip_log("requete: $this->serveur >> $this->query",'query'); // boum ? pourquoi ?
 		if ($this->link){
+			// sauver la derniere requete
+			$GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['last'] = $this->query;
+			
 			if ($this->sqlite_version == 3) {
 				$r = $this->link->query($this->query);
 				// sauvegarde de la requete (elle y est deja dans $r->queryString)
@@ -1676,6 +1710,7 @@ class sqlite_traiter_requete{
 		}
 		
 		// Correction des dates avec INTERVAL
+		// utiliser sql_date_proche() de preference
 		if (strpos($this->query, 'INTERVAL')!==false){
 			$this->query = preg_replace_callback("/DATE_(ADD|SUB).*INTERVAL\s+(\d+)\s+([a-zA-Z]+)\)/U", 
 							array(&$this, '_remplacerDateParTime'), 
@@ -1771,7 +1806,7 @@ class sqlite_traiter_requete{
 // http://doc.spip.org/@_remplacerDateParTime
 	function _remplacerDateParTime($matches){
 		$op = strtoupper($matches[1] == 'ADD')?'+':'-';	
-		return "'".date("Y-m-d H:i:s", strtotime(" $op$matches[2] ".strtolower($matches[3])))."'";
+		return "datetime('" . date("Y-m-d H:i:s") . "', '$op$matches[2] $matches[3]')";
 	}
 
 	// callback ou l'on remplace FIELD(table,i,j,k...) par CASE WHEN table=i THEN n ... ELSE 0 END
