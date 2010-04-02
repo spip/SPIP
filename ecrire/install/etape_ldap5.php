@@ -31,21 +31,21 @@ function install_etape_ldap5_dist()
 				       . substr($conn, $p+1));
 	}
 
-	$adresse_ldap = _request('adresse_ldap');
-	$login_ldap = _request('login_ldap');
-	$pass_ldap = _request('pass_ldap');
-	$port_ldap = _request('port_ldap');
-	$tls_ldap = _request('tls_ldap');
-	$protocole_ldap = _request('protocole_ldap');
-	$base_ldap = _request('base_ldap');
-	$base_ldap_text = _request('base_ldap_text');
+	$adresse_ldap = addslashes(_request('adresse_ldap'));
+	$login_ldap = addslashes(_request('login_ldap'));
+	$pass_ldap = addslashes(_request('pass_ldap'));
+	$port_ldap = addslashes(_request('port_ldap'));
+	$tls_ldap = addslashes(_request('tls_ldap'));
+	$protocole_ldap = addslashes(_request('protocole_ldap'));
+	$base_ldap = addslashes(_request('base_ldap'));
+	$base_ldap_text = addslashes(_request('base_ldap_text'));
 
-	$conn = "\$GLOBALS['ldap_base'] = \"$base_ldap\";\n"
-		. "\$GLOBALS['ldap_link'] = @ldap_connect(\"$adresse_ldap\",\"$port_ldap\");\n"
-		. "@ldap_set_option(\$GLOBALS['ldap_link'],LDAP_OPT_PROTOCOL_VERSION,\"$protocole_ldap\");\n"
+	$conn = "\$GLOBALS['ldap_base'] = '$base_ldap';\n"
+		. "\$GLOBALS['ldap_link'] = @ldap_connect('$adresse_ldap','$port_ldap');\n"
+		. "@ldap_set_option(\$GLOBALS['ldap_link'],LDAP_OPT_PROTOCOL_VERSION,'$protocole_ldap');\n"
 		. (($tls_ldap != 'oui') ? '' :
 		   "@ldap_start_tls(\$GLOBALS['ldap_link']);\n")
-		. "@ldap_bind(\$GLOBALS['ldap_link'],\"$login_ldap\",\"$pass_ldap\");\n";
+		. "@ldap_bind(\$GLOBALS['ldap_link'],'$login_ldap','$pass_ldap');\n";
 
 	$champs = is_array($GLOBALS['ldap_attributes']) ? $GLOBALS['ldap_attributes'] : array();
 	$res = '';
