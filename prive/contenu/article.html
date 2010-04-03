@@ -21,7 +21,7 @@
 </div>
 <div class="champ contenu_nom_site[ (#NOM_SITE*|sinon{#URL_SITE*}|strlen|?{'',vide})]">
 <div class='label'><:lien_voir_en_ligne:></div>
-<div dir='#LANG_DIR' class='#EDIT{hyperlien} nom_site'>[<a href='(#URL_SITE)'>]#NOM_SITE[(#URL_SITE)|oui)</a>]</div>
+<div dir='#LANG_DIR' class='#EDIT{hyperlien} nom_site'>[<a href='(#URL_SITE)'>]#NOM_SITE[(#URL_SITE|oui)</a>]</div>
 </div>
 <div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
 <div class='label'><:info_texte:></div>
