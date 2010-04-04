@@ -43,8 +43,8 @@ function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac=
 
   if ($flag) {
 
-		if ($statut == 'publie'
-		 OR ($statut == 'prop' AND $type=='article' AND $GLOBALS['meta']["post_dates"] == "non")) {
+		include_spip('inc/autoriser');
+		if (autoriser('dater',$type,$id,null,array('statut'=>$statut))) {
 
 			$js = " onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 
