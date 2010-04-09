@@ -652,6 +652,8 @@ function traiter_tableau($bloc) {
 						$attr= " colspan='$colspan'";
 						$colspan=1;
 					  }
+					  // inutile de garder le strong qui n'a servi que de marqueur 
+					  $cols[$c] = str_replace(array('{','}'), '', $cols[$c]);
 					  $ligne= "<th scope='col'$attr>$cols[$c]</th>$ligne";
 					}
 				}
