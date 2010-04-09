@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@inc_meme_rubrique_dist
-function inc_meme_rubrique_dist($id_rubrique, $id, $type, $order='date', $limit=NULL, $ajax=false)
+function inc_meme_rubrique_dist($id_rubrique, $id, $type, $order='', $limit=NULL, $ajax=false)
 {
 	global $spip_lang_right, $spip_lang_left;
 	include_spip('inc/presentation');
@@ -42,7 +42,9 @@ function inc_meme_rubrique_dist($id_rubrique, $id, $type, $order='date', $limit=
 
 	if (!$n) return '';
 
-	$voss = sql_select($select, $table, $where, '', "$order DESC", $limit);
+	if (!defined('_TRI_ARTICLES_RUBRIQUE')) define('_TRI_ARTICLES_RUBRIQUE', 'date DESC'); // surcharge possible dans mes_options.php
+	$order = ($order == '') ? _TRI_ARTICLES_RUBRIQUE : "$order DESC";
+	$voss = sql_select($select, $table, $where, '', "$order", $limit);
 
 	$limit = $n - $limit;
 	$retour = '';
