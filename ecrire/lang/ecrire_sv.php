@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Viktig grupp:</b> Det &auml;r verkligen rekomenderat att v&auml;lja ett nyckelord ur den h&auml;r gruppen.',
 'avis_deplacement_rubrique' => 'Varning! Den h&auml;r avdelningen inneh&aring;ller @contient_breves@ notiser@scb@: om du flyttar den, markera i kryssrutan f&ouml;r att bekr&auml;fta.',
 'avis_destinataire_obligatoire' => 'Du m&aring;ste ange en mottagare innan du skickar meddelandet.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'Fel p&aring; SQL-f&ouml;rbindelsen',
 'avis_erreur_version_archive' => '<b>Varning! Filen @archive@ motsvarar en
  annan SPIP-version &auml;n den du instellerad</b>

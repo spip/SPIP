@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Grup important:</b>  e foarte indicat s&#259; selec&#355;iona&#355;i un cuv&acirc;nt cheie &icirc;n acest grup.',
 'avis_deplacement_rubrique' => 'Aten&#355;ie! &Icirc;n aceast&#259; rubric&#259; se g&#259;sesc @contient_breves@ &#351;tiri@scb@: dac&#259; o deplasa&#355;i, bifa&#355;i aceast&#259; caset&#259; de confirmare.',
 'avis_destinataire_obligatoire' => 'Trebuie sa indica&#355;i un destinatar &icirc;nainte de a trimite mesajul',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'Eroare de conexiune SQL',
 'avis_erreur_version_archive' => '<b>Aten&#355;ie! Fi&#351;ierul @archive@ corespunde unei versiuni SPIP anterioare celei pe care a&#355;i instalat-o.</b> Ve&#355;i &icirc;nt&acirc;mpina dificult&#259;&#355;i serioase: risc de distrugere a bazei de date, defecte &icirc;n func&#355;ionarea site-ului, &#351;.a.m.d. Nu valida&#355;i importarea. Pentru informa&#355;ii suplimentare, consulta&#355;i <a href="@spipnet@">                                documenta&#355;ia SPIP.</a>.', # MODIF
 'avis_espace_interdit' => '<b>Spa&#355;iu interzis</b><div>SPIP este d&eacute;j&agrave; instalat</div>.',

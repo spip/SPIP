@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>&#37325;&#35201;&#32452;:</b> &#24378;&#28872;&#24314;&#35758;&#20174;&#32452;&#20013;&#36873;&#25321;&#19968;&#20010;&#20851;&#38190;&#35789;.',
 'avis_deplacement_rubrique' => '&#27880;&#24847;! &#35813;&#19987;&#26639;&#21253;&#21547; @contient_breves@ &#31616;&#35201;@scb@: &#22914;&#26524;&#24744;&#35201;&#31227;&#21160;&#23427;,&#35831;&#36873;&#25321;&#35813;&#30830;&#35748;&#26694;.',
 'avis_destinataire_obligatoire' => '&#21457;&#36865;&#28040;&#24687;&#21069;&#35831;&#36873;&#25321;&#25509;&#25910;&#32773;.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'SQL&#36830;&#25509;&#22833;&#36133;',
 'avis_erreur_version_archive' => '<b>&#27880;&#24847;! &#25991;&#20214; @archive@ &#19982;&#24744;&#24050;&#23433;&#35013;&#30340;SPIP&#29256;&#26412;&#19981;&#19968;&#33268;
     </b> &#24744;&#38754;&#20020;&#19968;&#20010;&#22823;&#38382;&#39064;: &#26497;&#26377;&#21487;&#33021;&#30772;&#22351;&#25968;&#25454;&#24211;,

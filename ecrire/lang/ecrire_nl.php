@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Belangrijke groep:</b> het is erg aan te bevelen een trefwoord uit deze groep te kiezen.',
 'avis_deplacement_rubrique' => 'Opgelet! Deze rubiek bevat @contient_breves@ br&egrave;ve@scb@: als je haar verplaatst, gelieve dit te bevestigen door hier het vakje aan te vinken.',
 'avis_destinataire_obligatoire' => 'Je dient een bestemmeling op te geven vooraleer dit bericht te verzenden.',
-'avis_doublon_mot_cle' => 'Er bestaat al een sleutelwoord met dat titel. Wilt U echt dit sleutelwoord op te slaan ?',
+'avis_doublon_mot_cle' => 'Er bestaat al een sleutelwoord met dat titel. Wilt U echt dit sleutelwoord op te slaan ?', # MODIF
 'avis_erreur_connexion_mysql' => 'Verbinding met de SQL connectie mislukt',
 'avis_erreur_version_archive' => '<b>Opgelet! Het bestand @archive@ komt overeen met een andere
     SPIP-versie dan deze die is ge&iuml;nstalleerd.</b> Dit kan voor

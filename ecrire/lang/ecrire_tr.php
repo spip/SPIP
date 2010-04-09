@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>&Ouml;nemli grup&nbsp;:</b> bu grupta anahtar s&ouml;zc&uuml;k se&ccedil;meniz &#351;iddetle &ouml;nerilir.',
 'avis_deplacement_rubrique' => 'Dikkat&nbsp;! Bu b&ouml;l&uuml;m @contient_breves@ k&#305;sa haber @scb@&nbsp; i&ccedil;eriyor: e&#287;er yerini de&#287;i&#351;tiriyorsan&#305;z (ta&#351;&#305;yorsan&#305;z) l&uuml;tfen bu onay kutucu&#287;unu i&#351;aretleyin.',
 'avis_destinataire_obligatoire' => 'Bu iletiyi yollamadan &ouml;nce kime yollamak istedi&#287;inizi belirmelisiniz.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'SQL ba&#287;lant&#305;s&#305; hatas&#305;',
 'avis_erreur_version_archive' => '<b>Dikkat! @archive@ dosyas&#305; kulland&#305;&#287;&#305;n&#305;z
 SPIP s&uuml;r&uuml;m&uuml;ne uymuyor.</b> B&uuml;y&uuml;k zorluklarla

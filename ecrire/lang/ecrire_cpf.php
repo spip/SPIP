@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 'avis_deplacement_rubrique' => 'Pangar &nbsp;! Dann rubrik-la n&eacute;na @contient_breves@ br&egrave;ve@scb@&nbsp;: si ou d&eacute;kal ali, m&egrave;t inn krwa pou kofirm&eacute;.',
 'avis_destinataire_obligatoire' => 'Ast&egrave;r ou dwa kadr inn destinat&egrave;r pou anvway&eacute; out mod&eacute;kri.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'Ast&egrave;r n&eacute;na inn kanard &egrave;k lakostaz SQL',
 'avis_erreur_version_archive' => '<b>Pangar! Fisy&eacute; @archive@-la i apartyin
 

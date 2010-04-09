@@ -26,9 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Wichtige Kategorie:</b> Bitte w&auml;hlen Sie ein Schl&uuml;sselwort dieser Gruppe.',
 'avis_deplacement_rubrique' => 'Achtung! diese Rubrik enth&auml;lt @contient_breves@ Meldungen@scb@: wenn Sie Rubrik verschieben wollen, markieren Sie bitte zur Best&auml;tigung dieses K&auml;stchen.',
 'avis_destinataire_obligatoire' => 'Sie m&uuml;ssen einen Empf&auml;nger angeben, bevor Sie die Nachricht abschicken.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Dieses Schlagwort gibt es bereits. Wollen sie es wirklich anlegen?', # MODIF
 'avis_erreur_connexion_mysql' => 'Verbindungsfehler (SQL)',
-'avis_erreur_version_archive' => '<b>Achtung! Die Datei @archive@ entspricht nicht der von Ihnen installierten Version von SPIP.</b> Bitte brechen Sie den Import jetzt ab. Sie riskieren anderenfalls die Funktionalit&auml;t Ihrer Website zu beeintr&auml;chtigen oder sogar die Datenbank zu zerst&ouml;ren. Bitte brechen Sie den Vorgang jetzt ab.<p> Mehr dazu finden Sie in der <a href="@spipnet@"> franz&ouml;sischen SPIP-Dokumentation</a>.', # MODIF
+'avis_erreur_version_archive' => '<b>Achtung! Die Datei @archive@ entspricht nicht der von Ihnen installierten Version von SPIP.</b> Sie riskieren die Funktionalit&auml;t Ihrer Website zu beeintr&auml;chtigen oder sogar die Datenbank zu zerst&ouml;ren. Bitte brechen Sie den Vorgang jetzt ab.<p> Mehr dazu finden Sie in der <a href="@spipnet@"> franz&ouml;sischen SPIP-Dokumentation</a>.',
 'avis_espace_interdit' => '<b>Gesperrter Bereich</b><div>SPIP ist bereits installiert.</div>',
 'avis_lecture_noms_bases_1' => 'Das Installationsprogramm konnte die Namen der vorhandenen Datenbanken nicht lesen.',
 'avis_lecture_noms_bases_2' => 'Entweder ist keine Datenbank vorhanden oder die Funktion zum Auflisten der Datenbanken ist abgeschaltet (Das ist bei vielen Webhostern der Fall).',
@@ -140,7 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 'email' => 'E-Mail',
 'email_2' => 'E-Mail:',
-'en_savoir_plus' => 'En savoir plus', # NEW
+'en_savoir_plus' => 'Weitere Informationen',
 'entree_adresse_annuaire' => 'Adresse des Verzeichnisses',
 'entree_adresse_email' => 'Ihre E-Mail Adresse',
 'entree_adresse_fichier_syndication' => 'Adresse der &#132;backend&#147;-Datei:',
@@ -176,7 +176,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Text der Meldung',
 'entree_titre_obligatoire' => '<b>Titel</b> [Pflichtfeld]<br />',
 'entree_url' => 'Adresse (URL) Ihrer Website',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'Das Plugin konnte nicht deinstalliert werden. Sie m&uuml;ssen es auf jeden Fall deaktivieren.',
 'erreur_plugin_fichier_absent' => 'Datei nicht vorhanden',
 'erreur_plugin_fichier_def_absent' => 'Definitionsdatei nicht vorhanden',
 'erreur_plugin_nom_fonction_interdit' => 'Unzul&auml;ssiger Funktionsname',
@@ -189,8 +189,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'Original',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
-'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+'htaccess_a_simuler' => 'Achtung: Ihr HTTP-Server ist so konfiguriert, da&szlig; er @htaccess@ Dateien ignoriert. Eine sichere Konfiguration des Servers erzielen sie, indem sie diese Einstellung &auml;ndern, oder indem sie die @Konstanten@ in der Datei mes_options.php so setzen, da&szlig; die Verzeichnisse au&szlig;erhalb des @document_root@ liegen.',
+'htaccess_inoperant' => 'htaccess unwirksam',
 
 // I
 'ical_info1' => 'Diese Seite erm&ouml;glicht auf mehrere Arten an der Entwicklung der Website teilzunehmen.',
@@ -254,8 +254,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  die Moderation im Standardmodus:</i>',
 'info_admin_gere_rubriques' => 'Dieser Administrator verwaltet die folgenden Rubriken:',
 'info_admin_gere_toutes_rubriques' => 'Dieser Administrator verwaltet <b>alle Rubriken</b>.',
-'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
-'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
+'info_admin_statuer_webmestre' => 'Diesem Administrator Webmaster-Rechte geben',
+'info_admin_webmestre' => 'Dieser Administrator ist <b>Webmaster</b>',
 'info_administrateur' => 'Administrator',
 'info_administrateur_1' => 'Administrator',
 'info_administrateur_2' => 'der Website (<i>vorsichtig einsetzen</i>)',
@@ -328,7 +328,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Ihre Fassung:',
 'info_connexion_base' => 'Test der Verbindung zur Datenbank',
 'info_connexion_base_donnee' => 'Verbindung mit Ihrer Datenbank',
-'info_connexion_ldap_ok' => 'Die Verbindung zum LDAP-Verzeichnis wurde hergestellt.</b><p> Sie k&ouml;nnen mit dem n&auml;chsten Schritt fortfahren.', # MODIF
+'info_connexion_ldap_ok' => 'Die LDAP-Verbindung wurde hergestellt.</b><p> Sie k&ouml;nnen mit dem n&auml;chsten Schritt fortfahren.',
 'info_connexion_mysql' => 'Verbindung zur SQL-Datenbank',
 'info_connexion_ok' => 'Die Verbindung wurde hergestellt.',
 'info_contact' => 'Kontakt',
@@ -372,9 +372,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_forum_ouvert' => 'Im Redaktionssystem der Website gibt es ein Forum f&uuml;r alle Redakteure. Sie k&ouml;nnen hier ein Forum <i>nur f&uuml;r Administratoren</i> einschalten.',
 'info_forum_statistiques' => 'Besucherstatistiken',
 'info_forums_abo_invites' => 'Ihre Website hat Foren f&uuml;r eingetragene Teilnehmer. Ihre Leser werden aus diesem Gund aufgefordert, sich bei Ihrer Website anzumelden.',
-'info_gauche_admin_effacer' => '<b>Diese Seite ist nur f&uuml;r den Verantwortlichen der Website zug&auml;nglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorg&auml;nge auszul&ouml;sen. F&uuml;r manche Funktionen ist die Authentifizierung per FTP Voraussetzung.', # MODIF
-'info_gauche_admin_tech' => '<b>Diese Seite ist nur f&uuml;r den Verantwortlichen der Website zug&auml;nglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorg&auml;nge auszul&ouml;sen. F&uuml;r manche Funktionen ist die Authentifizierung per FTP Voraussetzung.', # MODIF
-'info_gauche_admin_vider' => '<b>Diese Seite ist nur f&uuml;r den Verantwortlichen der Website zug&auml;nglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorg&auml;nge auszul&ouml;sen. F&uuml;r manche Funktionen ist die Authentifizierung per FTP Voraussetzung.', # MODIF
+'info_gauche_admin_effacer' => '<b>Diese Seite ist nur f&uuml;r den Verantwortlichen der Website zug&auml;nglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorg&auml;nge auszul&ouml;sen. F&uuml;r manche Funktionen ist die Authentifizierung per FTP Voraussetzung.',
+'info_gauche_admin_tech' => '<b>Diese Seite ist nur f&uuml;r den Verantwortlichen der Website zug&auml;nglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorg&auml;nge auszul&ouml;sen. F&uuml;r manche Funktionen ist die Authentifizierung per FTP Voraussetzung.',
+'info_gauche_admin_vider' => '<b>Diese Seite ist nur f&uuml;r den Verantwortlichen der Website zug&auml;nglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorg&auml;nge auszul&ouml;sen. F&uuml;r manche Funktionen ist die Authentifizierung per FTP Voraussetzung.',
 'info_gauche_auteurs' => 'Hier sehen Sie alle Autoren der Website.
 Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Administrator = gr&uuml;n). ',
 'info_gauche_auteurs_exterieurs' => 'Externe Autoren ohne Zugang zum Redaktionssystem werden mit einem blauen Symbol gekennzeichnet, gel&ouml;schte Autoren haben eine M&uuml;lltonne als Symbol.',
@@ -626,7 +626,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_total' => 'Gesamt: ',
 'info_tous_articles_en_redaction' => 'Alle Artikel in Bearbeitung',
 'info_tous_articles_presents' => 'Alle ver&ouml;ffentlichten Artikel dieser Rubrik',
-'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
+'info_tous_articles_refuses' => 'Alle abgelehnten Artikel',
 'info_tous_les' => 'alle',
 'info_tous_redacteurs' => 'Ank&uuml;ndigung f&uuml;r alle Redakteure',
 'info_tout_site' => 'Ganze Website',
@@ -667,7 +667,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'install_select_langue' => 'W&auml;hlen Sie eine Sprache aus und klicken Sie auf &laquo;Weiter&raquo;, um die Installation zu starten.',
 'install_select_type_db' => 'Geben Sie den Typ der Datenbank an:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL', # NEW
+'install_select_type_pg' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Vom Provider bereitgestellter Datenbankserver',
@@ -793,7 +793,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'mois_non_connu' => 'unbekannt',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelles_versions' => 'Neue Versionen von SPIP sind verf&uuml;gbar',
 
 // O
 'onglet_contenu' => 'Inhalt',
@@ -822,7 +822,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'page_pas_proxy' => 'Diese Seite darf nicht durch den Proxy &uuml;bertragen werden.',
 'pas_de_proxy_pour' => 'Falls erforderlich, k&ouml;nne Sie die Rechner und Domainen angeben, die nicht &uuml;ber den Proxy angesprochen werden (z.B. @exemple@)',
 'plugin_charge_paquet' => 'Paket @name@ wird geladen',
-'plugin_charger' => 'T&#233;l&#233;charger', # NEW
+'plugin_charger' => '&Uuml;bertragen',
 'plugin_erreur_charger' => 'Fehler: @zip@ kann nicht geladen werden',
 'plugin_erreur_droit1' => 'In das Verzeichnis <code>@dest@</code> kann nicht geschrieben werden.',
 'plugin_erreur_droit2' => 'Bitte &uuml;berpr&uuml;fen Sie die Schreibrechte f&uuml;r dieses Verzeichnis oder legen Sie es an, falls es noch nicht existiert, oder installieren Sie die Dateien per FTP.',
@@ -833,9 +833,9 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'plugin_etat_test' => 'Im Test',
 'plugin_impossible_activer' => 'Das Plugin @plugin@ kann nicht aktiviert werden.',
 'plugin_info_automatique1' => 'Wenn Sie die automatische Installation von Plugins nutzen m&ouml;chten, f&uuml;hren Sie bitte folgende Schritte aus:',
-'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
+'plugin_info_automatique1_lib' => 'Wenn diese Bibliothek automatisch installiert werden soll, f&uuml;hren sie bitte diese Schritte aus:',
 'plugin_info_automatique2' => 'Anlegen des Verzeichnis <code>@rep@</code>&nbsp;;',
-'plugin_info_automatique3' => '&uuml;berpr&uuml;fen, ob der Server in das Verzeuichnis schreiben kann.',
+'plugin_info_automatique3' => '&uuml;berpr&uuml;fen, ob der Server in das Verzeichnis schreiben kann.',
 'plugin_info_automatique_creer' => 'im Wurzelverzeichnis der Website.',
 'plugin_info_automatique_exemples' => 'Beispiele:',
 'plugin_info_automatique_ftp' => 'Sie k&ouml;nnen Plugins per FTP in dem Vezeichnis <tt>@rep@</tt> installieren',
@@ -845,8 +845,8 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'plugin_info_automatique_liste_update' => 'Listen aktualisieren',
 'plugin_info_automatique_ou' => 'oder...',
 'plugin_info_automatique_select' => 'W&auml;hlen Sie ein Plugin aus. SPIP wird es herunterladen und im Verzeichnis <code>@rep@</code> installieren. Falls das Plugin bereits installiert ist, wird es auf den neuesten Stand gebracht.',
-'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
-'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
+'plugin_info_extension_1' => 'Diese Erweiterungen liegen im Verzeichnis @extensions@ und sind aktiviert.',
+'plugin_info_extension_2' => 'Man kann sie nicht deaktivieren.',
 'plugin_info_telecharger' => 'herunterladen von @url@ und in @rep@ installieren',
 'plugin_librairies_installees' => 'Installierte Bibliotheken',
 'plugin_necessite_lib' => 'Dieses Plugin ben&ouml;tigt die Bibliothek @lib@',
@@ -855,7 +855,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'plugin_source' => 'Quelle:&nbsp;',
 'plugin_titre_automatique' => 'Automatische Installation',
 'plugin_titre_automatique_ajouter' => 'Plugins hinzuf&uuml;gen',
-'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_titre_installation' => 'Installation des Plugins @plugin@',
 'plugin_zip_active' => 'Weiter zum Aktivieren',
 'plugin_zip_adresse' => 'Geben Sie hier die Adresse einer ZIP-Datei, die das Plugin enth&auml;lt, oder die Adresse einer Plugin-Liste an.',
 'plugin_zip_adresse_champ' => 'Adresse des Plugins oder der Liste&nbsp;',
@@ -864,16 +864,16 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'plugin_zip_installe_rep_finie' => 'Die Datei @zip@ wurde entpackt und in das Verzeichnis @rep@ installiert.',
 'plugin_zip_installer' => 'Sie k&ouml;nnen es jetzt installieren.',
 'plugin_zip_telecharge' => 'Die Datei @zip@ wurde heruntergeladen',
-'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
-'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
+'plugins_actif_aucun' => 'Kein aktives Plugin.',
+'plugins_actif_un' => 'Ein aktives Plugin.',
 'plugins_actifs' => '@count@ aktive Plugins.',
-'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_actifs_liste' => 'Aktive Plugins',
 'plugins_compte' => '@count@ Plugins',
-'plugins_disponible_un' => 'Un plugin disponible.', # NEW
+'plugins_disponible_un' => 'Ein Plugin verf&uuml;gbar.',
 'plugins_disponibles' => '@count@ verf&uuml;gbare Plugins.',
 'plugins_erreur' => 'Fehler in den Plugins: @plugins@',
 'plugins_liste' => 'Liste der Plugins',
-'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_liste_extensions' => 'Erweiterungen',
 'plugins_recents' => 'Neueste Plugins.',
 'plugins_vue_hierarchie' => 'Hierarchie',
 'plugins_vue_liste' => 'Liste',
@@ -955,7 +955,7 @@ jedoch zus&auml;tzliche Serverleistung.',
 'texte_date_publication_article' => 'ONLINE VER&Ouml;FFENTLICHT AM:',
 'texte_descriptif_petition' => 'Beschreibung der Petition',
 'texte_descriptif_rapide' => 'Kurzbeschreibung',
-'texte_documents_joints' => 'Sie k&ouml;nnen die Zuordnung von Dokumenten (Office-Dokumente, Bilder, Multimedia-Dateien, etc.) zu Artikeln und/oder Rubriken erlauben. Diese Dokumente k&ouml;nnen anschliessend innerhalb von Artikeln verlinkt oder separat angezeigt werden.<p>', # MODIF
+'texte_documents_joints' => 'Sie k&ouml;nnen die Zuordnung von Dokumenten (Office-Dokumente, Bilder, Multimedia-Dateien, etc.) zu Artikeln und/oder Rubriken erlauben. Diese Dokumente k&ouml;nnen anschliessend innerhalb von Artikeln verlinkt oder separat angezeigt werden.<p>',
 'texte_documents_joints_2' => 'Diese Einstellung widerspricht nicht dem Einf&uuml;gen von Bildern in Artikel.',
 'texte_effacer_base' => 'SPIP-Datenbank l&ouml;schen',
 'texte_effacer_donnees_indexation' => 'Indexe l&ouml;schen',
@@ -964,7 +964,7 @@ jedoch zus&auml;tzliche Serverleistung.',
 'texte_en_cours_validation_forum' => 'Bitte schreiben Sie Ihre Kommentare in die entsprechenden Foren.',
 'texte_enrichir_mise_a_jour' => 'Sie k&ouml;nnen Ihren Text ansprechend gestalten, indem Sie die &#132;typografischen Abk&uuml;rzungen&#147; verwenden.',
 'texte_fichier_authent' => '<b>Soll SPIP die Dateien <tt>.htpasswd</tt> und <tt>.htpasswd-admin</tt> im Verzeichnis @dossier@ anlegen?</b><p>
- Mit diesen Dateien k&ouml;nnen Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschr&auml;nken.</p><p>Wenn Sie diese M&ouml;glickeit nicht nutzen, k&ouml;nnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.</p>', # MODIF
+ Mit diesen Dateien k&ouml;nnen Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschr&auml;nken.</p><p>Wenn Sie diese M&ouml;glickeit nicht nutzen, k&ouml;nnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.</p>',
 'texte_informations_personnelles_1' => 'Das System nun pers&ouml;nliche Zugangsdaten f&uuml;r Sie anlegen.',
 'texte_informations_personnelles_2' => '(Wenn Sie die Site erneut installieren, und Ihre Zugangsdaten funktionieren, k&ouml;nnen Sie',
 'texte_introductif_article' => '(Einleitender Text des Artikels.)',
@@ -993,13 +993,7 @@ jedoch zus&auml;tzliche Serverleistung.',
 'texte_nouveau_message' => 'Neue Nachricht',
 'texte_nouveau_mot' => 'Neues Wort',
 'texte_nouvelle_version_spip_1' => 'Sie haben eine neue Version von SPIP installiert.',
-'texte_nouvelle_version_spip_2' => 'Diese neue Version erfordert eine weiter gehende Aktualisierung Ihres Systems als g.
-ew&ouml;hnlich.        Wenn Sie Webmaster dieser Site sind, l&ouml;schen Sie bitte die Datei
-       @connect@         und nehmen Sie die Installation wieder auf, indem Sie
-        die Verbindungsdaten zur Datenbank neu eingeben.
-        <p>(Tipp: Sollten Sie Ihre Verbindungsdaten vergessen haben,
-        schauen Sie in der Datei @connect@ nach,
-        bevor Sie sie l&ouml;schen ...)', # MODIF
+'texte_nouvelle_version_spip_2' => 'Diese neue Version erfordert eine weiter gehende Aktualisierung Ihres Systems als gew&ouml;hnlich. Wenn Sie Webmaster dieser Site sind, l&ouml;schen Sie bitte die Datei @connect@ und setzen Sie die Installation fort, indem Sie die Verbindungsdaten zur Datenbank neu eingeben.<p>(Tipp: Sollten Sie Ihre Verbindungsdaten vergessen haben, schauen Sie in der Datei @connect@ nach, bevor Sie sie l&ouml;schen ...)</p>',
 'texte_operation_echec' => 'Gehen Sie zur vorigen Seite zur&uuml;ck und w&auml;hlen Sie eine andere Datenbank aus bzw. legen Sie eine neue an. &Uuml;berpr&uuml;fen Sie die Angaben Ihres Providers.',
 'texte_plus_trois_car' => 'mehr als 3 Zeichen',
 'texte_plusieurs_articles' => 'Mehrere Autoren f&uuml;r &bdquo;@cherche_auteur@&ldquo; gefunden:',
@@ -1020,8 +1014,8 @@ Meistens kann dieses Feld aber leer bleiben.',
 'texte_referencement_automatique' => '<b>Automatische Verlinkung einer Website</b><br />Sie k&ouml;nnen eine Website im Schnellverfahren verlinken, indem Sie seinen URL oder den seiner Backend-Datei angeben. SPIP wird dann die Daten der Website selbst&auml;ndig einlesen (Titel, Beschreibung ...).',
 'texte_referencement_automatique_verifier' => 'Bitte &uuml;berpr&uuml;fen Sie die Informationen von <tt>@url@</tt> vor dem Speichern.',
 'texte_requetes_echouent' => '<b>Wenn manche SQL-Befehle ohne ersichtlichen Grund systematisch fehlschlagen, kann es an einer besch&auml;digten Datenbank liegen.</b><p>
-SQL kann Tabellen reparieren, die besch&auml;digt worden sind. Starten Sie hier einen Reparaturversuch. Sollte das fehlschlagen, notieren Sie bitte die Fehlermeldung, die u.U. einen Hinweis auf den Grund des Problems gibt ...<p>
-Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf.<p>', # MODIF
+SQL kann Tabellen reparieren, die besch&auml;digt worden sind. Starten Sie hier einen Reparaturversuch. Sollte das fehlschlagen, notieren Sie bitte die Fehlermeldung, die u.U. einen Hinweis auf die Ursache des Problems gibt ...<p>
+Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf.<p>',
 'texte_restaurer_base' => 'Wiederherstellung des Inhalts der Datenbank',
 'texte_restaurer_sauvegarde' => 'Mit dieser Funktion k&ouml;nnen Sie eine Sicherungskopie Ihrer Datenbank wieder einspielen. Dazu muss die Sicherungsdatei in das Verzeichnis @dossier@ kopiert werden. Verwenden Sie diese Funktion mit der n&ouml;tigen Vorsicht. <b>Die &Auml;nderungen k&ouml;nnen nicht wieder r&uuml;ckg&auml;ngig gemacht werden.</b>',
 'texte_sauvegarde' => 'Inhalt der Datenbank sichern',

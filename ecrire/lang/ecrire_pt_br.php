@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Grupo importante:</b> &eacute; fortemente aconselh&aacute;vel selecionar uma palavra-chave deste grupo.',
 'avis_deplacement_rubrique' => 'Aten&ccedil;&atilde;o! Esta se&ccedil;&atilde;o cont&eacute;m @contient_breves@ nota@scb@: se voc&ecirc; a transferir, por favor, marque este quadrado.',
 'avis_destinataire_obligatoire' => 'Voc&ecirc; deve informar um destinat&aacute;rio antes de enviar esta mensagem.',
-'avis_doublon_mot_cle' => 'J&aacute; existe uma palavra com esse t&iacute;tulo. Voc&ecirc; quer realmente cri&aacute;-la assim mesmo?',
+'avis_doublon_mot_cle' => 'J&aacute; existe uma palavra com esse t&iacute;tulo. Voc&ecirc; quer realmente cri&aacute;-la assim mesmo?', # MODIF
 'avis_erreur_connexion_mysql' => 'Erro de conex&atilde;o SQL',
 'avis_erreur_version_archive' => '<b>Aten&ccedil;&atilde;o! O arquivo @archive@ corresponde a uma vers&atilde;o de SPIP diferente da que voc&ecirc; tem instalada.</b> Voc&ecirc; enfrentar&aacute; grandes dificuldades:
 risco de destrui&ccedil;&atilde;o da sua base de dados, mal funcionamento generalizado do site etc. N&atilde;o valide este pedido de importa&ccedil;&atilde;o.    <p>Para mais informa&ccedil;&otilde;es, leia

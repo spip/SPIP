@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>D&#367;le&#382;it&aacute; skupina:</b> Doporu&#269;ujeme, abyste k t&eacute;to skupin&#283; vybrali kl&iacute;&#269;ov&eacute; slovo.',
 'avis_deplacement_rubrique' => 'Upozorn&#283;n&iacute;! V t&eacute;to sekci je celkem @contient_breves@ vlo&#382;en&yacute;ch novinek: potvr&#271;te jejich p&#345;esun za&#353;krtnut&iacute;m tohoto pol&iacute;&#269;ka.',
 'avis_destinataire_obligatoire' => 'P&#345;ed odesl&aacute;n&iacute;m zpr&aacute;vy mus&iacute;te vybrat adres&aacute;ta.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'Chyba p&#345;ipojen&iacute; SQL', # MODIF
 'avis_erreur_version_archive' => '<b>Varov&aacute;n&iacute;! Soubor @archive@ odpov&iacute;d&aacute; jin&eacute; verzi
     syst&eacute;mu SPIP, ne&#382; je ta, kterou m&aacute;te

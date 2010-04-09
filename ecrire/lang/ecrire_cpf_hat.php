@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Gwoup-la se enp&ograve;tan&nbsp;:</b> nou kons&egrave;y w chwazi yon mokle andan gwoup-la.',
 'avis_deplacement_rubrique' => 'Atansyon&nbsp;! Ribwik la @contient_breves@ br&egrave;ve@scb@&nbsp;: si w d&eacute;plas ali, m&eacute;si ekri yon krwa po konfirmasyon.',
 'avis_destinataire_obligatoire' => 'F&ograve;k w enskri yon destinat&egrave; avan voye mesaj la.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'Er&egrave; ak koneksyon SQL', # MODIF
 'avis_erreur_version_archive' => '<b>Atansyon! Fichye @archive@ ka koresponn
  l&ograve;t v&egrave;syon SPIP 
