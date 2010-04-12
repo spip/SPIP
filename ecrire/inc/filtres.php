@@ -459,10 +459,14 @@ function PtoBR($texte){
 // http://doc.spip.org/@lignes_longues
 function lignes_longues($texte, $l = 70) {
 	if ($l<1) return $texte;
+	if (!preg_match("/[\w,\/.]{".$l."}/UmsS", $texte))
+		return $texte;
 	// Passer en utf-8 pour ne pas avoir de coupes trop courtes avec les &#xxxx;
 	// qui prennent 7 caracteres
 	#include_spip('inc/charsets');
+	$texte = str_replace("&nbsp;","<&nbsp>",$texte);
 	$texte = html2unicode($texte, true);
+	$texte = str_replace("<&nbsp>","&nbsp;",$texte);
 	$texte = unicode_to_utf_8(charset2unicode(
 		$texte, $GLOBALS['meta']['charset'], true));
 
