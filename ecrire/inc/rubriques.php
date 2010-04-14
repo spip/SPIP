@@ -267,6 +267,9 @@ function calculer_langues_rubriques() {
 		$langues = calculer_langues_utilisees();
 		ecrire_meta('langues_utilisees', $langues);
 	}
+	
+	// avertir les plugins qui peuvent faire leur mises a jour egalement
+	pipeline('trig_calculer_langues_rubriques','');
 }
 
 // Cette fonction calcule la liste des langues reellement utilisees dans le
