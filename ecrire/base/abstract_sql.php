@@ -472,7 +472,8 @@ function sql_getfetsel($select, $from = array(), $where = array(), $groupby = ar
 	if (preg_match('/\s+as\s+(\w+)$/i', $select, $c)) $id = $c[1];
 	elseif (!preg_match('/\W/', $select)) $id = $select;
 	else {$id = 'n'; $select .= ' AS n';}
-	$r = sql_fetsel($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false);
+	$r = sql_fetsel($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
+	if ($option===false) return $r;
 	if (!$r) return NULL;
 	return $r[$id]; 
 }
