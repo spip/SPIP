@@ -42,9 +42,9 @@ function action_editer_site_dist($arg=null) {
 		)
 			set_request('reload', 'oui');
 		revisions_sites($id_syndic);
-	
+
 	// Envoi normal depuis le formulaire de creation d'un site
-	} 
+	}
 	elseif (strlen(vider_url(_request('url_site')))
 		AND strlen(_request('nom_site'))) {
 			set_request('reload', 'oui');
@@ -103,7 +103,7 @@ function action_editer_site_dist($arg=null) {
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
 	}
-	else 
+	else
 		return array($id_syndic,'');
 }
 
@@ -159,6 +159,7 @@ function insert_syndic($id_rubrique) {
 function revisions_sites ($id_syndic, $c=false) {
 
 	include_spip('inc/rubriques');
+	include_spip('inc/autoriser');
 
 	// champs normaux
 	if ($c === false) {
