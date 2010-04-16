@@ -9,12 +9,12 @@ a:active.spip-admin-boutons,.spip-admin-boutons a:active { background-color: #cc
 /* Style pour le mode debug */
 #spip-debug { background-color: #f0f0f0; font-family: Verdana, Geneva, Helvetica, sans-serif; position:absolute;top:20px;left:0;width:100%;height:100%;z-index:10000; font-size:1em; text-align:left; }
 #spip-debug ul table { font-size: 80%; }
-#spip-debug fieldset { background-color: #fff; font-family: Courier, "Courier New", monospace; font-size: 12px; margin-bottom: 1em; }
+#spip-debug fieldset { background-color: #fff; font-family: Courier, "Courier New", monospace; font-size: 12px; margin-bottom: 1em; display: block; }
 #spip-debug fieldset fieldset { background-color: #ccf; font-family: Verdana, Geneva, Helvetica, sans-serif; font-size: 80%; }
-#spip-debug legend { background-color: #fff; border: solid 1px #f00; padding: 1px 1em; font-family: Verdana, Geneva, Helvetica, sans-serif; font-weight: bold; }
+#spip-debug legend { background-color: #fff; border: solid 1px #f00; padding: 1px 1em; font-family: Verdana, Geneva, Helvetica, sans-serif; font-weight: bold; display: block; text-transform: none; }
 #spip-debug fieldset fieldset legend { border: solid 1px #00F; font-weight: normal; }
-#spip-debug a { text-decoration: none; }
-#spip-debug a:hover { text-decoration: underline; }
+#spip-debug a { text-decoration: none; color: blue; }
+#spip-debug a:hover { text-decoration: underline; color: red; }
 #spip-debug fieldset table {font-size: inherit;}
 
 #debug_boucle fieldset { background-color: #ccf; }
