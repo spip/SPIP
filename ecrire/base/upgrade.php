@@ -12,6 +12,15 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Programme de mise a jour des tables SQL lors d'un chgt de version.
+// Marche aussi pour les plugins en appelant directement la fonction maj_while.
+// Pour que ceux-ci profitent aussi de la reprise sur interruption,
+// ils doivent indiquer leur numero de version installee dans une meta.
+// Le nom de cette meta doit aussi etre un tableau global
+// dont l'index "maj" est le sous-tableau des mises a jours
+// et l'index "cible" la version a atteindre
+// A tester.
+
 // http://doc.spip.org/@base_upgrade_dist
 function base_upgrade_dist($titre='', $reprise='')
 {
@@ -22,7 +31,14 @@ function base_upgrade_dist($titre='', $reprise='')
 			spip_log("recree les tables eventuellement disparues");
 			creer_base();
 		}
-		maj_base();
+		$meta = _request('meta');
+		if (!$meta)
+			maj_base();
+		// reprise sur demande de mise a jour interrompue pour plugin 
+		else 	maj_while($GLOBALS['meta'][$meta],
+				  $GLOBALS[$meta]['cible'],
+				  $GLOBALS[$meta]['maj'],
+				  $meta);
 	}
 	spip_log("Fin de mise a jour SQL. Debut m-a-j acces et config");
 	
@@ -88,40 +104,46 @@ function maj_base($version_cible = 0) {
 	if ($cible < 2)
 		$cible = $cible*1000;
 
-	maj_while($version_installee, $cible);
+	include_spip('maj/svn10000');
+	maj_while($version_installee, $cible, $GLOBALS['maj'], 'version_installee');
 }
-
 
 // A partir des > 1.926 (i.e SPIP > 1.9.2), cette fonction gere les MAJ.
 // Se relancer soi-meme pour eviter l'interruption pendant une operation SQL
 // (qu'on espere pas trop longue chacune)
 // evidemment en ecrivant dans la meta a quel numero on en est.
+// Cette fonction peut servir aux plugins qui doivent donner comme arguments:
+// 1. le numero de version courant (nombre entier; ex: numero de commit)
+// 2. le numero de version a atteindre (idem)
+// 3. le tableau des instructions de mise a jour a executer
+// Pour profiter du mecanisme de reprise sur interruption
+// il faut donner comme 4e arg le nom de la meta permettant de retrouver tout ca
+// (cf debut de fichier)
 
 define('_UPGRADE_TIME_OUT', 20);
 
 // http://doc.spip.org/@maj_while
-function maj_while($installee, $cible)
+function maj_while($installee, $cible, $maj, $meta='')
 {
-	include_spip('maj/svn10000');
-
 	$n = 0;
 	$time = time();
 
 	while ($installee < $cible) {
 		$installee++;
-		if (isset($GLOBALS['maj'][$installee])) {
-			serie_alter($installee, $GLOBALS['maj'][$installee]);
+		if (isset($maj[$installee])) {
+			serie_alter($installee, $maj[$installee]);
 			$n = time() - $time;
-			spip_log("MAJ vers $installee en $n secondes",'maj');
-			ecrire_meta('version_installee', $installee,'non');
+			spip_log("$meta: $installee en $n secondes",'maj');
+			if ($meta) ecrire_meta($meta, $installee,'non');
 		} // rien pour SQL
 		if ($n >= _UPGRADE_TIME_OUT) {
-			redirige_url_ecrire('upgrade', "reinstall=$installee");
+			redirige_url_ecrire('upgrade', "reinstall=$installee&meta=$meta");
 		}
 	}
 	// indispensable pour les chgt de versions qui n'ecrivent pas en base
 	// tant pis pour la redondance eventuelle avec ci-dessus
-	ecrire_meta('version_installee', $installee,'non');
+	if ($meta) ecrire_meta($meta, $installee,'non');
+	spip_log("MAJ terminee. $meta: $installee",'maj');
 }
 
 // Appliquer une serie de chgt qui risquent de partir en timeout
