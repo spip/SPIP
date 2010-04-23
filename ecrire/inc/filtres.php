@@ -472,11 +472,10 @@ function lignes_longues($texte, $l = 70) {
 
 	// echapper les tags (on ne veut pas casser les a href=...)
 	$tags = array();
-	if (preg_match_all('/<.+>|&(amp;)?#[0-9]+;|&(amp;)?[a-zA-Z1-4]{2,6};/UumsS', $texte, $t, PREG_SET_ORDER)) {
+	if (preg_match_all('/<.+>|&(?:amp;)?#x?[0-9]+;|&(?:amp;)?[a-zA-Z1-4]{2,6};/UumsS', $texte, $t, PREG_SET_ORDER)) {
 		foreach ($t as $n => $tag) {
-			$space = substr($tag[0],0,1)=='&'?'':' ';
 			$tags[$n] = $tag[0];
-			$texte = str_replace($tag[0], "$space<---$n--->$space", $texte);
+			$texte = str_replace($tag[0], "<---$n--->", $texte);
 		}
 	}
 	// casser les mots longs qui restent
