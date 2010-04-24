@@ -23,7 +23,7 @@ define('_INTERFACE_ONGLETS', false);
 
 // http://doc.spip.org/@echo_log
 function echo_log($f, $ret) {
-	spip_log("Page " . self() . " function $res: echo ".substr($ret,0,50)."...",'echo');
+	spip_log("Page " . self() . " function $f: echo ".substr($ret,0,50)."...",'echo');
 	echo
 	(_SIGNALER_ECHOS?"#Echo par $f#" :"")
 		. $ret;
