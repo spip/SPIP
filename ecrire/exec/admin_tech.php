@@ -75,8 +75,7 @@ function exec_admin_tech_dist()
 	   array('dossier' => '<i>'.$dir_dump.'</i>', 'img'=>'<i>'.$dir_img.'</i>')) .
 	 '&nbsp;' .
 	 _T('texte_admin_tech_02',
-		array('archive' => str_replace('/', ' / ', $archive),
-		      'spipnet' => $GLOBALS['home_server']
+		array('spipnet' => $GLOBALS['home_server']
 		      . '/' .  $GLOBALS['spip_lang'] . '_article1489.html'
 		      )) .
 	"</p>";
@@ -297,12 +296,10 @@ function controle_tables_en_base($name, $check)
 
 	foreach ($res as $k => $t) {
 
-		$c = "type='checkbox'"
-		. (in_array($t, $check) ? " checked='checked'" : '')
-		. " onclick='manuel=false'";
-
-		$res[$k] = "<input $c value='$t' id='$name_$t' name='$name"
-			. "[]' />\n"
+		$res[$k] = "<input type='checkbox' value='$t' name='$name"
+			. "[]'"
+			. (in_array($t, $check) ? " checked='checked'" : '') 
+			. "/>\n"
 			. $t
 			. " ("
 			.  sql_countsel($t)
