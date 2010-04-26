@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Grup important&nbsp;:</b> &eacute;s molt aconssellable seleccionar una contrasenya a aquest grup. ',
 'avis_deplacement_rubrique' => 'Atenci&oacute;&nbsp;! Aquesta secci&oacute; cont&eacute; @contient_breves@ breu@scb@&nbsp;: si la moveu, assenyaleu-ho en aquesta casella de confirmaci&oacute;.',
 'avis_destinataire_obligatoire' => 'Ha d\'escriure un destinatari abans d\'enviar el missatge.',
-'avis_doublon_mot_cle' => 'Ja hi ha una paraula amb aquest t&iacute;tol. Esteu segurs de voler crear la mateixa?', # MODIF
+'avis_doublon_mot_cle' => 'Ja hi ha una paraula amb aquest t&iacute;tol. Esteu segurs de voler crear la mateixa?',
 'avis_erreur_connexion_mysql' => 'Error de connexi&oacute; SQL',
 'avis_erreur_version_archive' => '<b>Alerta! El fitxer @archive@ correspon a una versi&oacute; d\'SPIP diferent a la que teniu instal&middot;lada.</b> Us podeu trobar amb grans dificultats: risc de destrucci&oacute; de la base de dades, mal funcionament del lloc, etc. No valideu aquesta sol&middot;licitud d\'importaci&oacute;.<p> Si voleu m&eacute;s informaci&oacute;, consulteu <a href="@spipnet@"> la documentaci&oacute; d\'SPIP</a>.</p>',
 'avis_espace_interdit' => '<b>Zona prohibida</b><div>SPIP ja est&agrave; instal&middot;lat.</div>',
