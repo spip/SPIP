@@ -105,7 +105,7 @@ function install_etape_sup2_dist()
 
 		else {
 			$res =  "<p class='resultat'><b>"
-			  . _T('base_reconnue', 
+			  . _T('install_base_ok', 
 			       array('base' => $choix_db))
 			  . "</b></p>"
 			  . $res;
