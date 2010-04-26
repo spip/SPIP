@@ -222,17 +222,16 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 
 // F
 'fichier_introuvable' => 'File @fichier@ non trovato',
-'form_auteur_confirmation' => 'Confirma tu direcci&oacute;n de correo', # NEW
-'form_auteur_email_modifie' => 'Tu direcci&oacute;n de correo fue modificada', # NEW
-'form_auteur_envoi_mail_confirmation' => 'Se te acaba de enviar un mensaje de confirmaci&oacute;n a @email@. Tienes que visitar la p&aacute;gina web indicada en ese mensaje para validar tu direcci&oacute;n de correo.', # NEW
-'form_auteur_mail_confirmation' => 'Hola,
+'form_auteur_confirmation' => 'Please confirm your email address', # NEW
+'form_auteur_email_modifie' => 'Your email address has been changed.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'A confirmation email has been sent to @email@. You need to visit the URL mentioned in this message in order to validate your email address.', # NEW
+'form_auteur_mail_confirmation' => 'Hello,
 
-Has solicitado cambiar tu direcci&oacute;n de correo.
-Para confirmar tu nueva direcci&oacute;n, alcanza con visitar la p&aacute;gina
-siguiente:
+You have asked to change your email address.
+To confirm your new address, you need to connect to
+the address below. (Otherwise your request will be ignored.):
 
     @url@
-Caso contrario, la solicitud ser&aacute; simplemente ignorada.
 ', # NEW
 'form_deja_inscrit' => 'Sei gi&agrave; iscritto.',
 'form_email_non_valide' => 'L\'indirizzo email non &egrave; valido.',
@@ -408,16 +407,16 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'info_article_supprime' => 'Articolo eliminato',
 'info_articles' => 'Articoli',
 'info_articles_a_valider' => 'Articoli da convalidare',
-'info_articles_nb' => '@nb@ art&iacute;culos', # NEW
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Articoli proposti',
-'info_articles_un' => '<NEW>1 article',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'autore(i):',
 'info_authentification_ftp' => 'Autenticazione (via FTP).',
 'info_bloquer_lien' => 'bloccare questo link',
 'info_breves_02' => 'Brevi',
 'info_breves_2' => 'brevi',
-'info_breves_nb' => '@nb@ breves', # NEW
-'info_breves_un' => '1 breve', # NEW
+'info_breves_nb' => '@nb@ news items', # NEW
+'info_breves_un' => '1 news item', # NEW
 'info_breves_valider' => 'Brevi da convalidare',
 'info_connexion_refusee' => 'Connessione rifiutata',
 'info_contact_developpeur' => 'Contatta un programmatore.',
@@ -438,8 +437,8 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'info_document' => 'Documento',
 'info_document_indisponible' => 'Questo documento non &egrave; disponibile',
 'info_documents' => 'Documenti',
-'info_documents_nb' => '@nb@ documentos', # NEW
-'info_documents_un' => '1 documento', # NEW
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP permette lo scambio di messaggi e la costituzione di forum di discussione
 privati tra i membri del sito. Puoi attivare o disattivare questa funzionalit&agrave;.',
 'info_ecire_message_prive' => 'Scrivi un messaggio privato',
@@ -485,8 +484,8 @@ o contatta il tuo hoster.</font>',
 'info_mail_fournisseur' => 'tuo@provider.com',
 'info_message_2' => 'MESSAGGIO',
 'info_message_supprime' => 'MESSAGGIO ELIMINATO',
-'info_messages_nb' => '@nb@ mensajes', # NEW
-'info_messages_un' => '1 mensaje', # NEW
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Data di pubblicazione on line:',
 'info_modification_parametres_securite' => 'modifiche dei parametri di sicurezza',
 'info_mois_courant' => 'Durante il mese:',
@@ -533,8 +532,8 @@ o contatta il tuo hoster.</font>',
 'info_retablir_lien' => 'ripristinare questo link',
 'info_retirer_mot' => 'Rimuovere questa parola',
 'info_retirer_mots' => 'Rimuovere tutte le parole',
-'info_rubriques_nb' => '@nb@ secciones', # NEW
-'info_rubriques_un' => '1 secci&oacute;n', # NEW
+'info_rubriques_nb' => '@nb@ sections', # NEW
+'info_rubriques_un' => '1 section', # NEW
 'info_sans_titre_2' => 'senza titolo',
 'info_selectionner_fichier' => 'Puoi selezionare un file della cartella @upload@',
 'info_selectionner_fichier_2' => 'Seleziona un file:',
@@ -543,9 +542,9 @@ o contatta il tuo hoster.</font>',
 'info_site_attente' => 'Sito Web in attesa di convalida',
 'info_site_reference' => 'Sito repertoriato in linea',
 'info_site_refuse' => 'Sito Web rifiutato',
-'info_sites_nb' => '@nb@ sitios', # NEW
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Inserisci un sito in repertorio',
-'info_sites_un' => '1 sitio', # NEW
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'Cancella l\'immagine',
 'info_symbole_bleu' => 'Il simbolo <b>blu</b> indica un <b>memo</b>: cio&egrave; un messaggio ad uso personale.',
 'info_symbole_jaune' => 'Il simbolo <b>giallo</b> indica un <b>annuncio a tutti i redattori</b>: modificabile da tutti gli amministratori e visibile da tutti i redattori.',
@@ -618,7 +617,7 @@ devi attivare Javascript nel tuo browser e',
 'login_retour_site' => 'Ritorna al sito pubblico',
 'login_retoursitepublic' => 'ritorna&nbsp;al&nbsp;sito&nbsp;pubblico',
 'login_sans_cookiie' => 'Identificazione senza cookie',
-'login_securise' => 'Conexi&oacute;n segura', # NEW
+'login_securise' => 'Secured login', # NEW
 'login_sinscrire' => 'registrati',
 'login_test_navigateur' => 'test browser/riconnessione',
 'login_verifiez_navigateur' => '(Verifica comunque se il tuo browser ha memorizzato la password...)',
