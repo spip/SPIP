@@ -919,13 +919,6 @@ function fin_page()
 {
 	global $spip_display;
 
-	// avec &var_profile=1 on a le tableau de mesures SQL
-	if (@count($GLOBALS['tableau_des_temps'])) {
-		include_spip('public/debug');
-		$chrono = chrono_requete($GLOBALS['tableau_des_temps']);
-	} else $chrono = '';
-
-
 	return debut_grand_cadre(true)
 	. (($spip_display == 4)
 		? ("<div><a href='"
@@ -949,7 +942,6 @@ function fin_page()
 	. generer_url_action('cron')
 	. '\');"></div>'
 	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '')
-	. $chrono
 	. "</body></html>\n";
 }
 
