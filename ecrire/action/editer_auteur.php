@@ -78,13 +78,21 @@ function insert_auteur($source=null) {
 	$champs = pipeline('pre_insertion',
 		array(
 			'args' => array(
-				'table' => 'spip_articles',
+				'table' => 'spip_auteurs',
 			),
 			'data' => $champs
 		)
 	);
 	$id_auteur = sql_insertq("spip_auteurs", $champs);
-
+	pipeline('post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_auteurs',
+				'id_objet' => $id_auteur
+			),
+			'data' => $champs
+		)
+	);
 	return $id_auteur;
 }
 

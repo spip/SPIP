@@ -88,7 +88,17 @@ function insert_breve($id_rubrique) {
 			'data' => $champs
 		)
 	);
-	return sql_insertq("spip_breves", $champs);
+	$id_breve = sql_insertq("spip_breves", $champs);
+	pipeline('post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_breves',
+				'id_objet' => $id_breve
+			),
+			'data' => $champs
+		)
+	);
+	return $id_breve;
 }
 
 
