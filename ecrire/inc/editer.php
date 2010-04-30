@@ -21,8 +21,8 @@ function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_
 	list($id,$err) = $action_editer($id);
 	$id_table_objet = id_table_objet($type);
 	$res[$id_table_objet] = $id;
-	if ($err){
-		$res['message_erreur'] =$err;
+	if ($err OR !$id){
+		$res['message_erreur'] = ($err?$err:_T('erreur'));
 	}
 	else{
 		$res['message_ok'] = ""; // il faudrait faire mieux que cela !
