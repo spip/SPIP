@@ -349,6 +349,20 @@ function inclure_balise_dynamique($texte, $echo=true, $contexte_compil=array())
 				  'data'=>$texte,
 				  'args'=>$args));
 		}
+		// Le parametre _pipeline devient deprecie, remplace par _pipelines au pluriel avec une syntaxe permettant plusieurs pipelines
+		if (isset($page['contexte']['_pipelines']) and is_array($page['contexte']['_pipelines'])) {
+			foreach($page['contexte']['_pipelines'] as $pipe=>$args){
+				if (isset($GLOBALS['spip_pipeline'][$pipe])){
+					$texte = pipeline(
+						$pipe,
+						array(
+							'data'=>$texte,
+							'args'=>$args
+						)
+					);
+				}
+			}
+		}
 	}
 
 	if ($GLOBALS['var_mode'] == 'debug') {
