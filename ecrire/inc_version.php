@@ -21,7 +21,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 # ne concerne que le fichier mes_options.php3
 define('_EXTENSION_PHP', '.php3');
 #define('_EXTENSION_PHP', '');
-#mettre a true pour compatibilite PHP3 
+#mettre a true pour compatibilite PHP3
 define('_FEED_GLOBALS', false);
 
 # le nom du repertoire ecrire/
@@ -225,7 +225,7 @@ $controler_dates_rss = true;
 // class_spip : savoir si on veut class="spip" sur p i strong & li
 // class_spip_plus : class="spip" sur les ul ol h3 hr quote table...
 // la difference c'est que des css specifiques existent pour les seconds
-// 
+//
 $class_spip =  '';  /*' class="spip"'*/
 $class_spip_plus =  ' class="spip"';
 $toujours_paragrapher =  true;
@@ -355,7 +355,7 @@ $table_date = array();
 $table_titre = array();
 $tables_jointures = array();
 
-// Liste des statuts. 
+// Liste des statuts.
 $liste_des_statuts = array(
 	"info_administrateurs" => '0minirezo',
 	"info_redacteurs" =>'1comite',
@@ -368,7 +368,7 @@ $liste_des_etats = array(
 	'texte_statut_propose_evaluation' => 'prop',
 	'texte_statut_publie' => 'publie',
 	'texte_statut_poubelle' => 'poubelle',
-	'texte_statut_refuse' => 'refuse' 
+	'texte_statut_refuse' => 'refuse'
 );
 
 $liste_des_forums = array(
@@ -391,16 +391,16 @@ $liste_des_authentifications = array(
 // Droits d'acces maximum par defaut
 @umask(0);
 
-// numero de branche, utilise par les plugins 
+// numero de branche, utilise par les plugins
 // pour specifier les versions de SPIP necessaires
 // il faut s'en tenir a un nombre de decimales fixe
-// ex : 2.0.0, 2.0.0-dev, 2.0.0-beta, 2.0.0-beta2 
+// ex : 2.0.0, 2.0.0-dev, 2.0.0-beta, 2.0.0-beta2
 $spip_version_branche = "2.2.0-dev";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
 $spip_version_code = 14720;
 // version de la base SQL (= numero SVN de sa derniere modif)
-$spip_version_base = 14598;
+$spip_version_base = 15676;
 
 // version de l'interface a la base
 $spip_sql_version = 1;
