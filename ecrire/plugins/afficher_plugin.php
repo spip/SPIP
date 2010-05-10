@@ -30,7 +30,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	// numerotons les occurences d'un meme prefix
 	$versions[$info['prefix']] = isset($versions[$info['prefix']]) ? $versions[$info['prefix']] + 1 : '';
 	$id = $info['prefix'] . $versions[$info['prefix']];
-	
+
 	$class = $class_li;
 	$class .= $actif?" actif":"";
 	$class .= $expose?" on":"";
@@ -66,7 +66,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$s .= "<div class='short'>".couper($desc,70)."</div>";
 	if (isset($info['icon']) and $info['icon']) {
 		include_spip("inc/filtres_images_mini");
-		$s.= "<div class='icon'><a href='$url_stat' rel='info'>".image_reduire($dir_plugins.$plug_file.'/'.trim($info['icon']), 32)."</a></div>";
+		$s.= "<div class='icon'><a href='$url_stat' rel='info'>".inserer_attribut(image_reduire($dir_plugins.$plug_file.'/'.trim($info['icon']), 32),'alt','')."</a></div>";
 	}
 	$s .= "</div>";
 
