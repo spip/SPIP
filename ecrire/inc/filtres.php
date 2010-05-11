@@ -1874,11 +1874,18 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 function urls_absolues_css($contenu, $source) {
 	$path = suivre_lien(url_absolue($source),'./');
 
-	return preg_replace_callback(
+	$contenu = preg_replace_callback(
 		",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims",
 		create_function('$x',
 			'return "url(\"".suivre_lien("'.$path.'",$x[1])."\")";'
 		), $contenu);
+	// pour les progid:DXImageTransform.Microsoft.AlphaImageLoader(src=...,..)
+	$contenu = preg_replace_callback(
+		";\(\s*src=['\"]?([^'\"/][^:]*)['\"]?\s*(,|\));Uims",
+		create_function('$x',
+			'return "(src=\"".suivre_lien("'.$path.'",$x[1])."\"".$x[2];'
+		), $contenu);
+	return $contenu;
 }
 
 // recuperere le chemin d'une css existante et :
