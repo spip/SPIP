@@ -19,7 +19,7 @@ function enregistre_modif_plugin(){
   // recuperer les plugins dans l'ordre des $_POST
 	$test = array();
 	foreach(liste_plugin_files() as $file){
-	  $test['s'.substr(md5("statusplug_$file"),0,16)] = $file;
+	  $test['s'.substr(md5($file),0,16)] = $file;
 	}
 	$plugin=array();
 
