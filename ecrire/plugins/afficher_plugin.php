@@ -20,7 +20,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	static $id_input = 0;
 	static $versions = array();
 
-	$cfg = !$actif ? $cfg : plugin_bouton_cfg();
+	$cfg = !$actif ? $cfg : plugin_bouton_cfg($dir_plugins, $plug_file);
 	$force_reload = (_request('var_mode')=='recalcul');
 	$get_infos = charger_fonction('get_infos','plugins');
 	$info = $get_infos($plug_file, $force_reload, $dir_plugins);
@@ -47,13 +47,14 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	."</li>";
 }
 
-function plugin_bouton_cfg()
+function plugin_bouton_cfg($dir_plugins, $plug_file)
 {
-	if  (!defined('_DIR_PLUGIN_CFG')) {
+	if  (defined('_DIR_PLUGIN_CFG')) {
 		if (include_spip('inc/cfg')) // test CFG version >= 1.0.5
 			if ($cfg = icone_lien_cfg($dir_plugins.$plug_file))
-				$cfg = "<div class='cfg_link'>$cfg</div>";
+				return "<div class='cfg_link'>$cfg</div>";
 	}
+	return '';
 }
 
 // checkbox pour activer ou desactiver
