@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/charsets');
 include_spip('inc/texte');
+include_spip('inc/plugin'); // pour charge_instal_plugin
 
 // http://doc.spip.org/@ligne_plug
 function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=false, $class_li="item", $dir_plugins=_DIR_PLUGINS) {
@@ -24,11 +25,11 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$get_infos = charger_fonction('get_infos','plugins');
 	$info = $get_infos($plug_file, $force_reload, $dir_plugins);
 	$prefix = $info['prefix'];
-	$config = !empty($info['config']) ? $info['config'] : 'cfg';
+	$config = !empty($info['config']) ? $info['config'] : 'plugin_bouton_cfg';
 	$erreur = (!isset($info['erreur']) ? ''
 	: ("<div class='erreur'>" . join('<br >', $info['erreur']) . "</div>"));
 
-	$cfg = !$actif ? '' : plugin_bouton_cfg($dir_plugins.$plug_file, $config);
+	$cfg = !$actif ? '' : $config($dir_plugins.$plug_file);
 
 	// numerotons les occurrences d'un meme prefix
 	$versions[$prefix] = $id = isset($versions[$prefix]) ? $versions[$prefix] + 1 : '';
@@ -49,7 +50,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	."</li>";
 }
 
-function plugin_bouton_cfg($file, $cfg)
+function plugin_bouton_cfg($file, $cfg='cfg')
 {
 	if  (defined('_DIR_PLUGIN_CFG')) {
 		if (include_spip('inc/cfg')) // test CFG version >= 1.0.5
