@@ -606,12 +606,7 @@ function spip_plugin_install($action, $infos){
 // http://doc.spip.org/@desinstalle_un_plugin
 function desinstalle_un_plugin($plug,$infos){
 	// faire les include qui vont bien
-	foreach($infos['install'] as $file){
-		$file = trim($file);
-		if (file_exists($f = _ROOT_PLUGINS."$plug/$file")){
-			include_once($f);
-		}
-	}
+	charge_instal_plugin($plug, $infos, $dir_plugins);
 	$version_cible = isset($infos['version_base'])?$infos['version_base']:'';
 	$prefix_install = $infos['prefix']."_install";
 	if (function_exists($prefix_install)){
@@ -628,8 +623,7 @@ function desinstalle_un_plugin($plug,$infos){
 	return false;
 }
 
-// http://doc.spip.org/@installe_un_plugin
-function installe_un_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
+function charge_instal_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
 	// passer en chemin absolu si possible
 	$dir = str_replace('_DIR_','_ROOT_',$dir_plugins);
 	if (!defined($dir))
@@ -642,6 +636,12 @@ function installe_un_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
 			include_once($f);
 		}
 	}
+}
+
+function installe_un_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
+
+	charge_instal_plugin($plug, $infos, $dir_plugins);
+
 	$version_cible = isset($infos['version_base'])?$infos['version_base']:'';
 	$prefix_install = $infos['prefix']."_install";
 	// cas de la fonction install fournie par le plugin
