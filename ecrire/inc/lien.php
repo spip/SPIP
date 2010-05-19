@@ -412,8 +412,9 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='', $liens
 			preg_match('/<a\s[^<>]*>\s*$/i',
 					substr($texte, 0, $a), $r)) {
 				$lien = array(
-					extraire_attribut($r[0],'href'),
-					extraire_attribut($r[0],'class')
+					'href' => extraire_attribut($r[0],'href'),
+					'class' => extraire_attribut($r[0],'class'),
+					'mime' => extraire_attribut($r[0],'type')
 				);
 				$n = strlen($r[0]);
 				$a -= $n;
