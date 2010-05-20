@@ -156,6 +156,14 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 
 	spip_log("mail $email\n$sujet\n$headers",'mails');
 
+	// mode TEST : forcer l'email
+	if (defined('_TEST_EMAIL_DEST')) {
+		if (!_TEST_EMAIL_DEST)
+			return false;
+		else
+			$email = _TEST_EMAIL_DEST;
+	}
+
 	// Ajouter le \n final
 	if ($headers = trim($headers)) $headers .= "\n";
 	if (function_exists('wordwrap') && (preg_match('/multipart\/mixed/',$headers) == 0))
