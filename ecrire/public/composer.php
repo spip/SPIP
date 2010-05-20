@@ -190,7 +190,7 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 	// note: on essaie d'attrapper aussi certains de ces entetes codes
 	// "a la main" dans les squelettes, mais evidemment sans exhaustivite
 	if (preg_match_all(
-	'/(<[?]php\s+)@?header\s*\(\s*.([^:]*):\s*([^)]*)[^)]\s*\)\s*[;]?\s*[?]>/ims',
+	'/(<[?]php\s+)@?header\s*\(\s*.([^:\']*):?\s*([^)]*)[^)]\s*\)\s*[;]?\s*[?]>/ims',
 	$corps, $regs, PREG_SET_ORDER)){
 		foreach ($regs as $r) {
 			$corps = str_replace($r[0], '', $corps);
