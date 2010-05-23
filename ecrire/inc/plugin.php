@@ -606,7 +606,7 @@ function spip_plugin_install($action, $infos){
 // http://doc.spip.org/@desinstalle_un_plugin
 function desinstalle_un_plugin($plug,$infos){
 	// faire les include qui vont bien
-	charge_instal_plugin($plug, $infos, $dir_plugins);
+	charge_instal_plugin($plug, $infos);
 	$version_cible = isset($infos['version_base'])?$infos['version_base']:'';
 	$prefix_install = $infos['prefix']."_install";
 	if (function_exists($prefix_install)){
