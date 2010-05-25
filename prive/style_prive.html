@@ -852,6 +852,13 @@ body.sites .no_onglets #contenu #wysiwyg div.contenu_nom_site {display: none;}
 }
 
 /* controle des forums : afficher les liens */
+.controle a {
+	position: relative !important;
+	left:0 !important;
+	right:0 !important;
+	top:0 !important;
+	bottom: 0 !important;
+}
 .controle a:after {
 	display: inline; content: " [\27a0" attr(href) "]";
 }
