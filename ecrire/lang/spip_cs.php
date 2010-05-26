@@ -188,13 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'jaro',
 'date_saison_3' => 'l&eacute;to',
 'date_saison_4' => 'podzim',
-'date_secondes' => 'secondes', # NEW
+'date_secondes' => 'seconds', # NEW
 'date_semaines' => 't&yacute;dn&#367;',
-'date_un_mois' => 'mois', # NEW
-'date_une_heure' => 'heure', # NEW
+'date_un_mois' => 'month', # NEW
+'date_une_heure' => 'hour', # NEW
 'date_une_minute' => 'minute', # NEW
-'date_une_seconde' => 'seconde', # NEW
-'date_une_semaine' => 'semaine', # NEW
+'date_une_seconde' => 'second', # NEW
+'date_une_semaine' => 'week', # NEW
 'dirs_commencer' => 'pro vlastn&iacute; zah&aacute;jen&iacute; instalace',
 'dirs_preliminaire' => 'P&#345;edb&#283;&#382;n&aacute; akce: <b>Nastaven&iacute; p&#345;&iacute;stupov&yacute;ch pr&aacute;v</b>',
 'dirs_probleme_droits' => 'Probl&eacute;m s p&#345;&iacute;stupov&yacute;mi pr&aacute;vy',
@@ -215,22 +215,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'N&aacute;zev dokumentu:',
 'entree_titre_image' => 'N&aacute;zev obr&aacute;zku:',
 'envoi_via_le_site' => 'Odeslat pomoc&iacute; webu',
-'erreur' => 'Erreur', # NEW
-'erreur_balise_non_fermee' => 'derni&egrave;re balise non referm&eacute;e :', # NEW
-'erreur_texte' => 'erreur(s)', # NEW
-'etape' => '&Eacute;tape', # NEW
+'erreur' => 'Error', # NEW
+'erreur_balise_non_fermee' => 'last tag not closed:', # NEW
+'erreur_texte' => 'error(s)', # NEW
+'etape' => 'Stage', # NEW
 
 // F
 'fichier_introuvable' => 'Nalezen nov&yacute; soubor: @fichier@',
-'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
-'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
-'form_auteur_mail_confirmation' => 'Bonjour,
+'form_auteur_confirmation' => 'Please confirm your email address', # NEW
+'form_auteur_email_modifie' => 'Your email address has been changed.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'A confirmation email has been sent to @email@. You need to visit the URL mentioned in this message in order to validate your email address.', # NEW
+'form_auteur_mail_confirmation' => 'Hello,
 
-Vous avez demand&eacute; &agrave; changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignor&eacute;e) :
+You have asked to change your email address.
+To confirm your new address, you need to connect to
+the address below. (Otherwise your request will be ignored.):
 
     @url@
 ', # NEW
@@ -281,7 +280,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 ',
 'form_pet_message_commentaire' => 'Chcete n&aacute;m n&#283;co sd&#283;lit nebo m&aacute;te n&#283;jak&eacute; p&#345;ipom&iacute;nky?',
 'form_pet_nom_site2' => 'N&aacute;zev va&#353;eho webu',
-'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
+'form_pet_probleme_liens' => 'Please edit your message, taking out all hyperlinks.', # NEW
 'form_pet_probleme_technique' => 'Z technick&yacute;ch d&#367;vod&#367; nelze moment&aacute;ln&#283; podepisovat.',
 'form_pet_signature_pasprise' => 'V&aacute;&#353; podpis nebyl zohledn&#283;n.',
 'form_pet_signature_validee' => 'V&aacute;&#353; podpis je platn&yacute;. D&#283;kujeme v&aacute;m!',
@@ -419,8 +418,8 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_bloquer_lien' => 'zablokovat tento odkaz',
 'info_breves_02' => 'Novinky',
 'info_breves_2' => 'novinky',
-'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
-'info_breves_un' => '1 br&egrave;ve', # NEW
+'info_breves_nb' => '@nb@ news items', # NEW
+'info_breves_un' => '1 news item', # NEW
 'info_breves_valider' => 'Novinky ke schv&aacute;len&iacute;',
 'info_connexion_refusee' => 'Spojen&iacute; bylo odep&#345;eno',
 'info_contact_developpeur' => 'Kontaktujte v&yacute;voj&aacute;&#345;e.',
@@ -439,7 +438,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_description_2' => 'Popis:',
 'info_dimension' => 'Velikost:',
 'info_document' => 'Dokument',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
+'info_document_indisponible' => 'This document is unavailable', # NEW
 'info_documents' => 'Dokumenty',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
@@ -506,11 +505,11 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_nouveau_message' => 'M&Aacute;TE NOVOU ZPR&Aacute;VU',
 'info_nouveaux_messages' => 'M&Aacute;TE CELKEM @total_messages@ NOV&Yacute;CH ZPR&Aacute;V',
 'info_numero_abbreviation' => '&#269;.',
-'info_obligatoire' => 'Cette information est obligatoire', # NEW
+'info_obligatoire' => 'This information is required', # NEW
 'info_panne_site_syndique' => 'Syndikovan&yacute; web nefunguje',
 'info_pense_bete' => 'POZN&Aacute;MKA',
 'info_petit_ecran' => 'Mal&yacute; displej',
-'info_petition_close' => 'P&eacute;tition close', # NEW
+'info_petition_close' => 'Petition closed', # NEW
 'info_pixels' => 'pixel&#367;',
 'info_plusieurs_mots_trouves' => 'Pro "@cherche_mot@" bylo nalezeno n&#283;kolik kl&iacute;&#269;ov&yacute;ch slov:',
 'info_popularite_5' => 'obl&iacute;benost:',
@@ -535,13 +534,13 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_retablir_lien' => 'obnovit tento odkaz',
 'info_retirer_mot' => 'Odstranit toto kl&iacute;&#269;ov&eacute; slovo',
 'info_retirer_mots' => 'Odstranit v&#353;echna kl&iacute;&#269;ov&aacute; slova',
-'info_rubriques_nb' => '@nb@ rubriques', # NEW
-'info_rubriques_un' => '1 rubrique', # NEW
+'info_rubriques_nb' => '@nb@ sections', # NEW
+'info_rubriques_un' => '1 section', # NEW
 'info_sans_titre_2' => 'bez n&aacute;zvu',
 'info_selectionner_fichier' => 'M&#367;&#382;ete vybrat soubor ze slo&#382;ky @upload@',
 'info_selectionner_fichier_2' => 'Vybrat soubor:',
-'info_signature_supprimee' => 'Signature supprim&eacute;e', # NEW
-'info_signature_supprimee_erreur' => 'Erreur&nbsp;: ce code de suppression ne correspond a aucune signature', # NEW
+'info_signature_supprimee' => 'Signature deleted', # NEW
+'info_signature_supprimee_erreur' => 'Error: this deletion code does not correspond to any signature', # NEW
 'info_site_attente' => 'Web &#269;ek&aacute; na schv&aacute;len&iacute;',
 'info_site_reference' => 'Web odkazovan&yacute; online',
 'info_site_refuse' => 'Web byl odm&iacute;tnut',
@@ -593,8 +592,8 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'lien_visite_site' => 'nav&#353;t&iacute;vit tyto str&aacute;nky',
 'lien_visites' => '@visites@ n&aacute;v&#353;t&#283;v',
 'lien_voir_auteur' => 'Zobrazit autora',
-'ligne' => 'Ligne', # NEW
-'login' => 'Connexion', # NEW
+'ligne' => 'Line', # NEW
+'login' => 'Connection', # NEW
 'login_acces_prive' => 'p&#345;&iacute;stup do neve&#345;ejn&eacute; oblasti',
 'login_autre_identifiant' => 'pou&#382;&iacute;t jin&eacute; ID',
 'login_cookie_accepte' => 'Nastavte prohl&iacute;&#382;e&#269; tak, aby je p&#345;ij&iacute;mal (alespo&#328; pro tento web).',
@@ -621,22 +620,22 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'login_retour_site' => 'Zp&#283;t na ve&#345;ejn&eacute; str&aacute;nky',
 'login_retoursitepublic' => 'zp&#283;t na ve&#345;ejn&eacute; str&aacute;nky',
 'login_sans_cookiie' => 'Identifikace bez pou&#382;it&iacute; cookies',
-'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
+'login_securise' => 'Secured login', # NEW
 'login_sinscrire' => 'registrovat',
 'login_test_navigateur' => 'test prohl&iacute;&#382;e&#269;e/opakovan&eacute; p&#345;ipojen&iacute;',
 'login_verifiez_navigateur' => '(P&#345;esv&#283;d&#269;te se v&#353;ak, zda si prohl&iacute;&#382;e&#269; nezapamatoval va&#353;e heslo...)',
 
 // M
-'masquer_colonne' => 'Masquer cette colonne', # NEW
+'masquer_colonne' => 'Hide this column', # NEW
 'masquer_trad' => 'skr&yacute;t p&#345;eklady',
 'module_fichiers_langues' => 'Jazykov&eacute; soubory',
 
 // N
 'navigateur_pas_redirige' => 'Nedojde-li k p&#345;esm&#283;rov&aacute;n&iacute; prohl&iacute;&#382;e&#269;e, klepn&#283;te sem.',
-'numero' => 'Num&eacute;ro', # NEW
+'numero' => 'Number', # NEW
 
 // O
-'occurence' => 'Occurrence', # NEW
+'occurence' => 'Instance', # NEW
 'onglet_affacer_base' => 'Odstranit datab&aacute;zi',
 'onglet_auteur' => 'Autor',
 'onglet_contenu_site' => 'Obsah webu',
@@ -702,10 +701,10 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'previsualiser' => 'N&aacute;hled',
 
 // R
-'retour' => 'Retour', # NEW
+'retour' => 'Return', # NEW
 
 // S
-'spip_conforme_dtd' => 'SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :', # NEW
+'spip_conforme_dtd' => 'SPIP finds this page to be in compliance with its DOCTYPE:', # NEW
 'squelette' => '&#353;ablona',
 'squelette_inclus_ligne' => 'vlo&#382;en&aacute; &#353;ablona, &#345;&aacute;dek',
 'squelette_ligne' => '&#353;ablona, &#345;&aacute;dek',
@@ -729,7 +728,7 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
       Pe&#269;liv&#283; si poznamenejte toto &#269;&iacute;slo, zkuste aktualizaci
       a p&#345;esv&#283;d&#269;te se, &#382;e obr&aacute;zky jsou i nad&aacute;le v &#269;l&aacute;nc&iacute;ch
       zobrazeny.', # MODIF
-'texte_erreur_visiteur' => 'Vous avez tent&eacute; d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.', # NEW
+'texte_erreur_visiteur' => 'You have tried to enter the private area using a login which does not permit this.', # NEW
 'texte_inc_auth_1' => 'P&#345;ihl&aacute;sili jsgte se jako
   <b>@auth_login@</b>, ale toto u&#382;ivatelsk&eacute; jm&eacute;no (ji&#382;) v datab&aacute;zi neexistuje. 
   Zkuste', # MODIF
@@ -767,20 +766,20 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'titre_mots_cles' => 'KL&Iacute;&#268;OV&Aacute; SLOVA',
 'titre_probleme_technique' => 'Varov&aacute;n&iacute;: Z technick&yacute;ch d&#367;vod&#367; (server SQL) je tato &#269;&aacute;st webu nep&#345;&iacute;stupn&aacute;.<p>D&#283;kujeme v&aacute;m za pochopen&iacute;.', # MODIF
 'titre_publier_document' => 'ZVE&#344;EJNIT DOKUMENT V T&Eacute;TO &#268;&Aacute;STI',
-'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-'titre_signatures_confirmees' => 'Signatures confirm&eacute;es', # NEW
+'titre_signatures_attente' => 'Signatures awaiting validation', # NEW
+'titre_signatures_confirmees' => 'Confirmed signatures', # NEW
 'titre_statistiques' => 'Statistiky str&aacute;nek',
 'titre_titre_document' => 'N&aacute;zev dokumentu:',
-'todo' => '&agrave; venir', # NEW
+'todo' => 'to come', # NEW
 'trad_reference' => '(referen&#269;n&iacute; &#269;l&aacute;nek)',
 
 // Z
 'zbug_balise_b_aval' => ': tag B je p&#345;&iacute;li&#353; pozd&#283; ve smy&#269;ce',
 'zbug_balise_inexistante' => 'error @from@: the #@balise@ tag does not exist', # MODIF
-'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
+'zbug_balise_sans_argument' => 'Missing argument in the @balise@ tag', # NEW
 'zbug_boucle' => 'smy&#269;ka',
 'zbug_boucle_recursive_undef' => 'nedefinovan&aacute; rekurzivn&iacute; smy&#269;ka', # MODIF
-'zbug_calcul' => 'calcul', # NEW
+'zbug_calcul' => 'calculation', # NEW
 'zbug_champ_hors_boucle' => 'Pole @champ@ je mimo smy&#269;ku',
 'zbug_champ_hors_motif' => 'Pole @champ@ je mimo smy&#269;ku a m&aacute; tag @motif@', # MODIF
 'zbug_code' => 'k&oacute;d',
@@ -791,37 +790,37 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'zbug_erreur_boucle_double' => 'SMY&#268;KA@id@: dvoj&iacute; definice', # MODIF
 'zbug_erreur_boucle_fermant' => 'SMY&#268;KA@id@: chyb&iacute; uzav&iacute;rac&iacute; tag', # MODIF
 'zbug_erreur_boucle_syntaxe' => 'Nespr&aacute;vn&aacute; syntax (BOUCLE)', # MODIF
-'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
+'zbug_erreur_compilation' => 'Compilation error', # NEW
 'zbug_erreur_execution_page' => 'chyba p&#345;i v&yacute;po&#269;tu str&aacute;nky', # MODIF
 'zbug_erreur_filtre' => 'Chyba - nedefinovan&yacute; filtr: <b>"@filtre@"</b>', # MODIF
 'zbug_erreur_meme_parent' => '{meme_parent} t&yacute;k&aacute; se jenom smy&#269;ek (FORUMS) a (RUBRIQUES)', # MODIF
 'zbug_erreur_squelette' => 'Chyba &#269;i chyby v &#353;ablon&#283;',
-'zbug_hors_compilation' => 'Hors Compilation', # NEW
+'zbug_hors_compilation' => 'Uncompiled', # NEW
 'zbug_info_erreur_squelette' => 'Na webu do&#353;lo k chyb&#283;',
 'zbug_inversion_ordre_inexistant' => 'obr&aacute;cen&eacute; nebo neexistuj&iacute;c&iacute; po&#345;ad&iacute;', # MODIF
 'zbug_pagination_sans_critere' => '#PAGINATION tag without {pagination} criterion, or used in a recursive loop', # MODIF
 'zbug_parametres_inclus_incorrects' => 'Nespr&aacute;vn&eacute; parametry inkluze', # MODIF
-'zbug_profile' => 'Temps de calcul&nbsp;: @time@', # NEW
+'zbug_profile' => 'Calculation time: @time@', # NEW
 'zbug_resultat' => 'v&yacute;sledky',
 'zbug_serveur_indefini' => 'Nedefinovan&yacute; server SQL', # MODIF
-'zbug_statistiques' => 'Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e', # NEW
+'zbug_statistiques' => 'SQL query statistics in order of duration', # NEW
 'zbug_table_inconnue' => 'Nezn&aacute;m&aacute; tabulka SQL "@table@"',
-'zxml_connus_attributs' => 'attributs connus', # NEW
-'zxml_de' => 'de', # NEW
-'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
-'zxml_inconnu_balise' => 'balise inconnue', # NEW
-'zxml_inconnu_entite' => 'entit&eacute; inconnue', # NEW
-'zxml_inconnu_id' => 'ID inconnu', # NEW
-'zxml_mais_de' => 'mais de', # NEW
-'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
-'zxml_non_fils' => 'n\'est pas un fils de', # NEW
-'zxml_nonvide_balise' => 'balise non vide', # NEW
-'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans', # NEW
-'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
-'zxml_survoler' => 'survoler pour voir les corrects', # NEW
-'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
-'zxml_vide_balise' => 'balise vide', # NEW
-'zxml_vu' => 'vu auparavant', # NE
+'zxml_connus_attributs' => 'known attributes', # NEW
+'zxml_de' => 'from', # NEW
+'zxml_inconnu_attribut' => 'unknown attribute', # NEW
+'zxml_inconnu_balise' => 'unknown tag', # NEW
+'zxml_inconnu_entite' => 'unknown entity', # NEW
+'zxml_inconnu_id' => 'unknown ID', # NEW
+'zxml_mais_de' => 'but from', # NEW
+'zxml_non_conforme' => 'not true to the principle', # NEW
+'zxml_non_fils' => 'is not a child of', # NEW
+'zxml_nonvide_balise' => 'tag not empty', # NEW
+'zxml_obligatoire_attribut' => 'required attribute absent in', # NEW
+'zxml_succession_fils_incorrecte' => 'incorrect child inheritance', # NEW
+'zxml_survoler' => 'to see the correct ones, hover with the cursor', # NEW
+'zxml_valeur_attribut' => 'attribute value', # NEW
+'zxml_vide_balise' => 'empty tag', # NEW
+'zxml_vu' => 'seen before', # NE
 );
 
 ?>
