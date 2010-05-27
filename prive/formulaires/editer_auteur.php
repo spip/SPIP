@@ -34,6 +34,7 @@ function auteurs_edit_config($row)
 	//$config['restreint'] = ($row['statut'] == 'publie');
 	$auth_methode = $row['source'];
 	include_spip('inc/auth');
+	include_spip('inc/autoriser');
 	$autoriser = autoriser('modifier','auteur',$row['id_auteur'],null, array('restreintes'=>true));
 	$config['edit_login'] =
 		(auth_autoriser_modifier_login($auth_methode) AND $autoriser);
