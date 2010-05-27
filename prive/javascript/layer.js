@@ -19,7 +19,10 @@ function findObj_test_forcer(n, forcer) {
 		x = d.all[n]; 
 	}
 	for (i = 0; !x && i<d.forms.length; i++) {
-		x = d.forms[i][n];
+		if (d.forms[i][n]){
+			if (d.forms[i][n].id==n)
+				x = d.forms[i][n];
+		}
 	}
 	for(i=0; !x && d.layers && i<d.layers.length; i++) x = findObj(n,d.layers[i].document);
 	if(!x && document.getElementById) x = document.getElementById(n); 
