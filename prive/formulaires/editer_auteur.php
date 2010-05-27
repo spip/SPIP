@@ -52,10 +52,10 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 	$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
 	$auth_methode = ($auth_methode ? $auth_methode : 'spip');
 	include_spip('inc/auth');
+	include_spip('inc/autoriser');
 
 	if ($email = _request('email')){
 		include_spip('inc/filtres');
-		include_spip('inc/autoriser');
 		// un redacteur qui modifie son email n'a pas le droit de le vider si il y en avait un
 		if (!autoriser('modifier','auteur',$id_auteur,null,array('statut'=>'?'))
 			AND $GLOBALS['visiteur_session']['id_auteur']==$id_auteur
