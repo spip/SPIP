@@ -320,7 +320,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 	}
 	if ($collecte) {$res[] = $collecte; $collecte = array();}
 	$texte = substr($args,1);
-	$source = substr($texte, 0, strlen($texte) - strlen($args));
+	$source = substr($suite, 0, strlen($suite) - strlen($texte));
 	// propager les erreurs, et ignorer les param vides
 	if ($pointeur_champ->param !== false) {
 		if ($err_f)
