@@ -158,17 +158,20 @@ function phraser_champs($texte,$ligne,$result) {
 		$champ->nom_boucle = $match[2];
 		$champ->nom_champ = $match[3];
 		$champ->etoile = $match[5];
+
 		if ($suite[0] == '{') {
 			phraser_arg($suite, '', array(), $champ);
-			// ce ltrim est une ereur de conception
-			// mais on le conserve par souci de compatibilit�
-			// On le normalise dans l'arbre de syntaxe abstraite
-			// pour faire sauter ce cas particulier a la decompil
+		// ce ltrim est une ereur de conception
+		// mais on le conserve par souci de compatibilite
 			$texte = ltrim($suite);
+		// Il faudrait le normaliser dans l'arbre de syntaxe abstraite
+		// pour faire sauter ce cas particulier a la decompilation.
+		/* Ce qui suit est malheureusement incomplet pour cela:
 			if ($n = (strlen($suite) - strlen($texte))) {
 				$champ->apres = array(new Texte);
 				$champ->apres[0]->texte = substr($suite,0,$n);
 			}
+		*/
 		} else $texte = $suite;
 		phraser_vieux($champ);
 		$result[] = $champ;
@@ -317,7 +320,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 	}
 	if ($collecte) {$res[] = $collecte; $collecte = array();}
 	$texte = substr($args,1);
-	$source = substr($texte, 0, strlen($texte) - strlen($args));
+	$source = substr($suite, 0, strlen($suite) - strlen($texte));
 	// propager les erreurs, et ignorer les param vides
 	if ($pointeur_champ->param !== false) {
 		if ($err_f)
