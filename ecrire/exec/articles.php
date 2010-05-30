@@ -224,10 +224,6 @@ function articles_documents($type, $id)
 // http://doc.spip.org/@boites_de_config_articles
 function boites_de_config_articles($id_article)
 {
-	$petitionner = charger_fonction('petitionner', 'inc');
-	$petition = $petitionner($id_article,"articles","id_article=$id_article");
-
-	$masque = $petition;
 
   $masque = pipeline('afficher_config_objet',array('args'=>array('type'=>'article','id'=>$id_article),'data'=>$masque));
  

@@ -62,11 +62,6 @@
 		<url>navigation</url>
 		<args>menu=bando_activite</args>
 	</bouton>
-	<bouton id='petitions_reactions' parent='bando_activite'>
-		<icone>images/petition-16.png</icone>
-		<titre>icone_suivi_pettions</titre>
-		<url>controle_petition</url>
-	</bouton>
 	<bouton id='visiteurs' parent="bando_activite">
 		<icone>images/auteur-6forum-16.png</icone>
 		<titre>icone_afficher_visiteurs</titre>
