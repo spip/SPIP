@@ -28,7 +28,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$erreur = (!isset($info['erreur']) ? ''
 	: ("<div class='erreur'>" . join('<br >', $info['erreur']) . "</div>"));
 
-	$cfg = !$actif ? '' : plugin_bouton_config($dir_plugins.$plug_file,$info['config']);
+	$cfg = !$actif ? '' : plugin_bouton_config($plug_file,$info,$dir_plugins);
 
 	// numerotons les occurrences d'un meme prefix
 	$versions[$prefix] = $id = isset($versions[$prefix]) ? $versions[$prefix] + 1 : '';
@@ -49,32 +49,25 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	."</li>";
 }
 
-function plugin_bouton_config($dir, $config, $cfg='cfg')
+function plugin_bouton_config($nom, $infos, $dir)
 {
-	// si <config> definie dans plugin.xml
-	if ($config) {
-		// si un exec existe avec ce nom, le lier directement
-		if (find_in_path("$dir/exec/$config.php") OR find_in_path("$dir/prive/exec/$config.html")){
-			$ret .= '<a href="'.generer_url_ecrire($config).'">'
-				.'<img src="'._DIR_IMG_PACK.'cfg-16.png"
-					width="16" height="16"
-					alt="'._T('icone_configuration_site').' '.$config.'"
-					title="'._T('icone_configuration_site').' '.$config.'"
-				/></a>';
-			return "<div class='cfg_link'>$ret</div>";
-		}
-		// sinon ce peut etre une fonction perso, qui va renvoyer son html ...
-		elseif(function_exists($config)){
-			return $config($dir,$cfg);
-		}
-	}
-	// sinon passer la main au plugin CFG si il est la
-	else if  (defined('_DIR_PLUGIN_CFG')) {
+	// si plugin.xml fournit un squelette, le prendre
+	if ($infos['config'])
+		return recuperer_fond("$dir$nom/" . $infos['config'],
+				array('script' => 'configurer_' . $infos['prefix'],
+					'nom' => $nom));
+
+	// si le plugin CFG est la, l'essayer
+	if  (defined('_DIR_PLUGIN_CFG')) {
 		if (include_spip('inc/cfg')) // test CFG version >= 1.0.5
-			if ($cfg = icone_lien_cfg($dir, $cfg))
+			if ($cfg = icone_lien_cfg("$dir$nom", $cfg))
 				return "<div class='cfg_link'>$cfg</div>";
 	}
-	return '';
+
+	// sinon prendre le squelette std sur le nom std
+	return recuperer_fond("prive/cfg",
+			array('script' => 'configurer_' . $infos['prefix'],
+				'nom' => $nom));
 }
 
 // checkbox pour activer ou desactiver
@@ -92,26 +85,34 @@ function plugin_checkbox($id_input, $file, $actif)
 	. "</div>";
 }
 
+// Cartouche Resume
+
 function plugin_resume($info, $dir_plugins, $plug_file, $url_page)
 {
 	$desc = plugin_propre($info['description']);
+	$dir = $dir_plugins.$plug_file;
 	if (($p=strpos($desc, "<br />"))!==FALSE)
 		$desc = substr($desc, 0,$p);
-	$url_stat = parametre_url($url_page, "plugin",$dir_plugins.$plug_file);
+	$url = parametre_url($url_page, "plugin", $dir);
 
-	// Cartouche Resume
-	$s = "<div class='resume'>";
-	$s .= "<h3 class='nom'><a href='$url_stat' rel='info'>".typo($info['nom'])."</a></h3>";
-	$s .= " <span class='version'>".$info['version']."</span>";
-	$s .= " <span class='etat'> - ".plugin_etat_en_clair($info['etat'])."</span>";
-	$s .= "<div class='short'>".couper($desc,70)."</div>";
-
-	if (isset($info['icon']) and $info['icon']) {
+	if (isset($info['icon']) and $i = trim($info['icon'])) {
 		include_spip("inc/filtres_images_mini");
-		$s.= "<div class='icon'><a href='$url_stat' rel='info'>".inserer_attribut(image_reduire($dir_plugins.$plug_file.'/'.trim($info['icon']), 32),'alt','')."</a></div>";
-	}
-	$s .= "</div>";
-	return $s;
+		$i = inserer_attribut(image_reduire("$dir/$i", 32),'alt','');
+		$i = "<div class='icon'><a href='$url' rel='info'>$i</a></div>";
+	} else $i = '';
+
+	return "<div class='resume'>"
+	. "<h3 class='nom'><a href='$url' rel='info'>"
+	. typo($info['nom'])
+	. "</a></h3>"
+	. " <span class='version'>".$info['version']."</span>"
+	. " <span class='etat'> - "
+	. plugin_etat_en_clair($info['etat'])
+	. "</span>"
+	. "<div class='short'>".couper($desc,70)."</div>"
+	. $i
+	. "</div>";
+
 }
 
 function plugin_desintalle($plug_file){
