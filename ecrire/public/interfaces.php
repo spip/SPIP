@@ -183,7 +183,6 @@ function declarer_interfaces(){
 $table_des_tables['articles']='articles';
 $table_des_tables['auteurs']='auteurs';
 $table_des_tables['breves']='breves';
-$table_des_tables['signatures']='signatures';
 $table_des_tables['documents']='documents';
 $table_des_tables['types_documents']='types_documents';
 $table_des_tables['mots']='mots';
@@ -194,16 +193,11 @@ $table_des_tables['syndic']='syndic';
 $table_des_tables['syndic_articles']='syndic_articles';
 $table_des_tables['hierarchie']='rubriques';
 $table_des_tables['messages']='messages';
-$table_des_tables['petitions']='petitions';
 
 $exceptions_des_tables['breves']['id_secteur']='id_rubrique';
 $exceptions_des_tables['breves']['date']='date_heure';
 $exceptions_des_tables['breves']['nom_site']='lien_titre';
 $exceptions_des_tables['breves']['url_site']='lien_url';
-
-$exceptions_des_tables['signatures']['date']='date_time';
-$exceptions_des_tables['signatures']['nom']='nom_email';
-$exceptions_des_tables['signatures']['email']='ad_email';
 
 $exceptions_des_tables['documents']['type_document']=array('types_documents'
 , 'titre');
@@ -231,7 +225,6 @@ $table_titre['documents']= "titre, fichier AS surnom, '' AS lang";
 $table_date['articles']='date';
 $table_date['auteurs']='date';
 $table_date['breves']='date_heure';
-$table_date['signatures']='date_time';
 $table_date['documents']='date';
 $table_date['types_documents']='date';
 $table_date['groupes_mots']='date';
@@ -250,8 +243,6 @@ $tables_jointures['spip_articles'][]= 'mots_articles';
 $tables_jointures['spip_articles']['id_auteur']= 'auteurs_articles';
 $tables_jointures['spip_articles'][]= 'documents_liens';
 $tables_jointures['spip_articles'][]= 'mots';
-$tables_jointures['spip_articles'][]= 'signatures';
-$tables_jointures['spip_articles'][]= 'petitions';
 
 $tables_jointures['spip_auteurs'][]= 'auteurs_articles';
 
@@ -290,8 +281,6 @@ $exceptions_des_jointures['type_mot'] = array('spip_mots', 'type');
 $exceptions_des_jointures['id_mot_syndic']= array('spip_mots_syndic','id_mot');
 $exceptions_des_jointures['titre_mot_syndic']= array('spip_mots','titre');
 $exceptions_des_jointures['type_mot_syndic']= array('spip_mots','type');
-$exceptions_des_jointures['petition'] = array('spip_petitions', 'texte');
-$exceptions_des_jointures['id_signature']= array('spip_signatures', 'id_signature');
 
 global  $table_des_traitements;
 
