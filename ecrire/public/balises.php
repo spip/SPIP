@@ -449,28 +449,6 @@ function balise_RANG_dist ($p) {
 }
 
 
-// #PETITION
-// retourne '' si l'article courant n'a pas de petition
-// le texte de celle-ci sinon (et ' ' si il est vide)
-// cf FORMULAIRE_PETITION
-
-// http://doc.spip.org/@balise_PETITION_dist
-function balise_PETITION_dist ($p) {
-	$nom = $p->id_boucle;
-	$p->code = "quete_petitions(" .
-			champ_sql('id_article', $p) .
-			",'" .
-			$p->boucles[$nom]->type_requete .
-			"','" .
-			$nom .
-			"','" .
-			$p->boucles[$nom]->sql_serveur .
-			"', \$Cache)";
-	$p->interdire_scripts = false;
-	return $p;
-}
-
-
 // #POPULARITE
 // http://www.spip.net/fr_article1846.html
 // http://doc.spip.org/@balise_POPULARITE_dist

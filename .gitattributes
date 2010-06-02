@@ -25,7 +25,6 @@ ecrire/action/editer_message.php -text
 ecrire/action/editer_mot.php -text
 ecrire/action/editer_mots.php -text
 ecrire/action/editer_rubrique.php -text
-ecrire/action/editer_signatures.php -text
 ecrire/action/editer_site.php -text
 ecrire/action/export_all.php -text
 ecrire/action/iconifier.php -text
@@ -179,7 +178,6 @@ ecrire/exec/mots_tous.php -text
 ecrire/exec/mots_type.php -text
 ecrire/exec/navigation.php -text
 ecrire/exec/naviguer.php -text
-ecrire/exec/petitionner.php -text
 ecrire/exec/plonger.php -text
 ecrire/exec/puce_statut.php -text
 ecrire/exec/recherche.php -text
