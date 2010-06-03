@@ -149,7 +149,7 @@ function avertissement_config() {
 // http://doc.spip.org/@bouton_radio
 function bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
 	static $id_label = 0;
-	
+
 	if (strlen($onClick) > 0) $onClick = " onclick=\"$onClick\"";
 	$texte = "<input type='radio' name='$nom' value='$valeur' id='label_${nom}_${id_label}'$onClick";
 	if ($actif) {
@@ -220,8 +220,10 @@ function appliquer_modifs_config($purger_skel=false) {
 
 	// Modification du reglage accepter_inscriptions => vider le cache
 	// (pour repercuter la modif sur le panneau de login)
-	if ($i = _request('accepter_inscriptions')
-	AND $i != $GLOBALS['meta']['accepter_inscriptions']) {
+	if (($i = _request('accepter_inscriptions')
+		AND $i != $GLOBALS['meta']['accepter_inscriptions'])
+		OR ($i = _request('accepter_visiteurs')
+		AND $i != $GLOBALS['meta']['accepter_visiteurs'])) {
 		include_spip('inc/invalideur');
 		suivre_invalideur("1"); # tout effacer
 	}
@@ -240,7 +242,7 @@ function appliquer_modifs_config($purger_skel=false) {
 			ecrire_meta('langue_site', $lang);
 		}
 		// le test a defait ca:
-		utiliser_langue_visiteur(); 
+		utiliser_langue_visiteur();
 	}
 
 	if ($purger_skel) {
