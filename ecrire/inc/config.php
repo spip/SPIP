@@ -183,8 +183,10 @@ function appliquer_modifs_config($purger_skel=false) {
 
 	// Modification du reglage accepter_inscriptions => vider le cache
 	// (pour repercuter la modif sur le panneau de login)
-	if ($i = _request('accepter_inscriptions')
-	AND $i != $GLOBALS['meta']['accepter_inscriptions']) {
+	if (($i = _request('accepter_inscriptions')
+		AND $i != $GLOBALS['meta']['accepter_inscriptions'])
+		OR ($i = _request('accepter_visiteurs')
+		AND $i != $GLOBALS['meta']['accepter_visiteurs'])) {
 		include_spip('inc/invalideur');
 		suivre_invalideur("1"); # tout effacer
 	}
