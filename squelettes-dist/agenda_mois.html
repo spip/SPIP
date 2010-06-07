@@ -1,9 +1,0 @@
-<BOUCLE_mois(ARTICLES)
-	{agenda date, mois, #ENV{annee}, #ENV{mois}}
->[(#DATE|agenda_memo{#DESCRIPTIF,
-		#TITRE,
-		#URL_ARTICLE,
-		calendrier-couleur[(#ID_SECTEUR|
-			modulo{14,1})]})]</BOUCLE_mois>[(#DATE|
-	agenda_affiche{<:aucun_article:>, 'mois'}
-)]<//B_mois>
