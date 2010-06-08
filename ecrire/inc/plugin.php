@@ -289,8 +289,10 @@ function liste_plugin_actifs(){
   	if (is_array($t=unserialize($meta_plugin)))
   		return $t;
   	else{ // compatibilite pre 1.9.2, mettre a jour la meta
+			spip_log("MAJ meta plugin vieille version : $meta_plugin","plugin");
   		$t = explode(",",$meta_plugin);
   		list($liste,,) = liste_plugin_valides($t);
+			include_spip('inc/meta');
 			ecrire_meta('plugin',serialize($liste));
 			return $liste;
   	}
@@ -346,6 +348,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	list($plugin_valides,$ordre,$infos) = liste_plugin_valides($plugin,true);
 
 	ecrire_meta('plugin',serialize($plugin_valides));
+	effacer_meta('message_crash_plugins'); // baisser ce flag !
 	$plugin_header_info = array();
 	foreach($plugin_valides as $p=>$resume){
 		$plugin_header_info[]= $p.($resume['version']?"(".$resume['version'].")":"");
@@ -721,6 +724,7 @@ function plugin_est_installe($plug_path){
 
 // http://doc.spip.org/@verifie_include_plugins
 function verifie_include_plugins() {
+	include_spip('inc/meta');
 	ecrire_meta('message_crash_plugins', 1);
 
 /*	if (_request('exec')!="admin_plugin"
