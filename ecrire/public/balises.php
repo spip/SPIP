@@ -339,11 +339,10 @@ function balise_INTRODUCTION_dist($p) {
 	$type = $p->type_requete;
 
 	$_texte = champ_sql('texte', $p);
-	$_descriptif = "''";
+	$_descriptif = ($type == 'articles' OR $type == 'rubriques') ? champ_sql('descriptif', $p) : "''";
 
 	if ($type == 'articles') {
 		$_chapo = champ_sql('chapo', $p);
-		$_descriptif =  champ_sql('descriptif', $p);
 		$_texte = "(strlen($_descriptif) OR chapo_redirigetil($_chapo))
 		? ''
 		: $_chapo . \"\\n\\n\" . $_texte";
