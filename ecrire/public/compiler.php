@@ -261,6 +261,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	$type_boucle = $boucle->type_requete;
 	$primary = $boucle->primary;
 	$constant = preg_match(CODE_MONOTONE, str_replace("\\'",'', $return));
+	$flag_cpt = $boucle->mode_partie ||$boucle->cptrows;
 	$corps = '';
 
 	// faudrait expanser le foreach a la compil, car y en a souvent qu'un 
@@ -315,7 +316,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	$corps .= 
 		((!$boucle->separateur) ? 
-			(($constant && !$corps) ? $return :
+			(($constant && !$corps && !$flag_cpt) ? $return :
 			 (($return==="''") ? '' :
 			  ("\n\t\t" . '$t0 .= ' . $return . ";"))) :
 		 ("\n\t\t\$t1 " .
@@ -366,7 +367,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		$boucles[$id_boucle]->select[]= $count; 
 	}
 
-	if ($boucle->mode_partie || $boucle->cptrows)
+	if ($flag_cpt)
 		$nums = "\n\t// COMPTEUR\n\t"
 		. "\$Numrows['$id_boucle']['compteur_boucle'] = 0;\n\t";
 	else $nums = '';
