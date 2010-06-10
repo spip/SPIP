@@ -47,6 +47,8 @@
  * 2009-08-01: Added ability to attempt to use mhash() prior to running pure
  *             php code.
  *
+ * 2010-06-10: Added support for 16bytes char and utf8 in string
+ *
  * NOTE: Some sporadic versions of PHP do not handle integer overflows the
  *       same as the majority of builds.  If you get hash results of:
  *        7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff7fffffff
@@ -71,6 +73,7 @@ if (!class_exists('nanoSha2'))
         // php 4 - 5 compatable class properties
         var     $toUpper;
         var     $platform;
+				var		  $bytesString = 16;
 
         // Php 4 - 6 compatable constructor
         function nanoSha2($toUpper = false) {
@@ -82,32 +85,6 @@ if (!class_exists('nanoSha2'))
             // Deteremine if the system is 32 or 64 bit.
             $tmpInt = (int)4294967295;
             $this->platform = ($tmpInt > 0) ? 64 : 32;
-        }
-
-        // Do the SHA-256 Padding routine (make input a multiple of 512 bits)
-        function char_pad($str)
-        {
-            $tmpStr = $str;
-
-            $l = strlen($tmpStr)*8;     // # of bits from input string
-
-            $tmpStr .= "\x80";          // append the "1" bit followed by 7 0's
-
-            $k = (512 - (($l + 8 + 64) % 512)) / 8;   // # of 0 bytes to append
-            $k += 4;    // PHP Strings will never exceed (2^31)-1, 1st 32bits of
-                        // the 64-bit value representing $l can be all 0's
-
-            for ($x = 0; $x < $k; $x++) {
-                $tmpStr .= "\0";
-            }
-
-            // append the 32-bits representing # of bits from input string ($l)
-            $tmpStr .= chr((($l>>24) & 0xFF));
-            $tmpStr .= chr((($l>>16) & 0xFF));
-            $tmpStr .= chr((($l>>8) & 0xFF));
-            $tmpStr .= chr(($l & 0xFF));
-
-            return $tmpStr;
         }
 
         // Here are the bitwise and functions as defined in FIPS180-2 Standard
@@ -166,34 +143,80 @@ if (!class_exists('nanoSha2'))
         function sigma_0($x) { return (int) ($this->ROTR($x, 7)^$this->ROTR($x, 18)^$this->SHR($x, 3)); }
         function sigma_1($x) { return (int) ($this->ROTR($x, 17)^$this->ROTR($x, 19)^$this->SHR($x, 10)); }
 
-        /*
-         * Custom functions to provide PHP support
-         */
-        // split a byte-string into integer array values
-        function int_split($input)
-        {
-            $l = strlen($input);
 
-            if ($l <= 0) {
-                return (int)0;
-            }
+				function string2ordUTF8($s){
+					$chars = array();
+					$i = 0;
+					while ($i<strlen($s)){
+						$chars[] = $this->ordUTF8($s, $i, $bytes);
+						$i+=$bytes;
+					}
+					return $chars;
+				}
 
-            if (($l % 4) != 0) { // invalid input
-                return false;
-            }
+				function ordUTF8($c, $index = 0, &$bytes = null)
+				{
+					$len = strlen($c);
+					$bytes = 0;
 
-            for ($i = 0; $i < $l; $i += 4)
-            {
-                $int_build  = (ord($input[$i]) << 24);
-                $int_build += (ord($input[$i+1]) << 16);
-                $int_build += (ord($input[$i+2]) << 8);
-                $int_build += (ord($input[$i+3]));
+					if ($index >= $len)
+						return false;
 
-                $result[] = $int_build;
-            }
+					$h = ord($c{$index});
 
-            return $result;
-        }
+					if ($h <= 0x7F) {
+						$bytes = 1;
+						return $h;
+					}
+					else if ($h < 0xC2)
+						return false;
+					else if ($h <= 0xDF && $index < $len - 1) {
+						$bytes = 2;
+						return ($h & 0x1F) <<  6 | (ord($c{$index + 1}) & 0x3F);
+					}
+					else if ($h <= 0xEF && $index < $len - 2) {
+						$bytes = 3;
+						return ($h & 0x0F) << 12 | (ord($c{$index + 1}) & 0x3F) << 6
+																		 | (ord($c{$index + 2}) & 0x3F);
+					}
+					else if ($h <= 0xF4 && $index < $len - 3) {
+						$bytes = 4;
+						return ($h & 0x0F) << 18 | (ord($c{$index + 1}) & 0x3F) << 12
+																		 | (ord($c{$index + 2}) & 0x3F) << 6
+																		 | (ord($c{$index + 3}) & 0x3F);
+					}
+					else
+						return false;
+				}
+
+				function string2binint ($str,$npad=512) {
+					$npad = $npad/$this->bytesString;
+					$bin = array();
+					$ords = $this->string2ordUTF8($str);
+					$length = count($ords);
+					$ords[] = 0x80; // append the "1" bit followed by 7 0's
+					$ords = array_pad($ords,ceil(($length+2)/$npad)*$npad-2,0);
+					$mask = (1 << $this->bytesString) - 1;
+					for($i = 0; $i < count($ords) * $this->bytesString; $i += $this->bytesString)
+						$bin[$i>>5] |= ($ords[$i / $this->bytesString] & $mask) << (24 - $i%32);
+					$bin[] = $length*$this->bytesString;
+					return $bin;
+				}
+
+				function array_split($a, $n) {
+					$split = array();
+					while (count($a)>$n) {
+						$s = array();
+						for($i = 0;$i<$n;$i++)
+							$s[] = array_shift($a);
+						$split[] = $s;
+					}
+					if (count($a)){
+						$a = array_pad($a,$n,0);
+						$split[] = $a;
+					}
+					return $split;
+				}
 
         /**
          * Process and return the hash.
@@ -246,10 +269,10 @@ if (!class_exists('nanoSha2'))
                        (int)0xc67178f2);
 
             // Pre-processing: Padding the string
-            $binStr = $this->char_pad($str);
+            $binStr = $this->string2binint($str,512);
 
             // Parsing the Padded Message (Break into N 512-bit blocks)
-            $M = str_split($binStr, 64);
+            $M = $this->array_split($binStr, 16);
 
             // Set the initial hash values
             $h[0] = (int)0x6a09e667;
@@ -266,7 +289,7 @@ if (!class_exists('nanoSha2'))
             for ($i = 0; $i < $N; $i++)
             {
                 // Break input block into 16 32bit words (message schedule prep)
-                $MI = $this->int_split($M[$i]);
+                $MI = $M[$i];
 
                 // Initialize working variables
                 $_a = (int)$h[0];
