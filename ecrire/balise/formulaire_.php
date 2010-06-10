@@ -72,7 +72,11 @@ function balise_FORMULAIRE__dyn($form)
 
 	$args = func_get_args();
 	array_shift($args);
+	return array("formulaires/$form", 3600, balise_FORMULAIRE__contexte($form, $args));
+}
 
+function balise_FORMULAIRE__contexte($form, $args)
+{
 	// tester si ce formulaire vient d'etre poste (memes arguments)
 	// pour ne pas confondre 2 #FORMULAIRES_XX identiques sur une meme page
 	$je_suis_poste = false;
@@ -175,11 +179,9 @@ function balise_FORMULAIRE__dyn($form)
 	// pour permettre de la restaurer au moment du Verifier et du Traiter
 	array_unshift($args, $GLOBALS['spip_lang']);
 
-	return array("formulaires/$form",
-		3600,
-		array_merge(
-			$valeurs,
-			array(
+	return array_merge(
+		$valeurs,
+		array(
 			'form' => $form,
 			'action' => $action,
 			'formulaire_args' => encoder_contexte_ajax($args,$form),
@@ -187,10 +189,8 @@ function balise_FORMULAIRE__dyn($form)
 			'erreurs' => $erreurs,
 			'message_ok' => $message_ok,
 			'message_erreur' => $message_erreur,
-			'editable' => $editable?' ':'',
-			)
-		)
-	);
+			'editable' => $editable?' ':''
+		      ));
 }
 
 ?>
