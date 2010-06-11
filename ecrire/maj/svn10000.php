@@ -243,7 +243,7 @@ if (@$GLOBALS['meta']['version_installee'] >= 14588) {
 	array('sql_alter',"TABLE spip_documents  CHANGE mode genre ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL"),
 	array('sql_alter',"TABLE spip_documents  ADD INDEX genre(genre)")
 			       );
-	// solution moins intrusive au pb de mot-cl� d'Oracle, retour avant 14588
+	// solution moins intrusive au pb de mot-cle d'Oracle, retour avant 14588
 	$GLOBALS['maj'][14598] = array(
 	array('sql_alter',"TABLE spip_documents  DROP INDEX genre"),
 	array('sql_alter',"TABLE spip_documents  CHANGE genre mode ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL"),
