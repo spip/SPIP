@@ -1,0 +1,49 @@
+<div class="formulaire_spip formulaire_inscription ajax" id="formulaire_inscription">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form method="post" action="#ENV{action}">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+		[(#REM) on affiche plus ce message en cas d'erreur pour eviter d'allonger trop le formulaire]
+		[(#ENV*{message_erreur}|non)
+		[<legend><:pass_vousinscrire:></legend>
+		<p class='explication'>(#ENV*{_commentaire})</p>]
+		]<legend><:form_forum_identifiants:></legend>
+		<p class='explication'><:form_forum_indiquer_nom_email:></p>
+		<ul>
+			<li class='saisie_nom_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{nom_inscription}|oui)erreur]'>
+				<label for="nom_inscription"><:form_pet_votre_nom:></label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{nom_inscription})</span>]
+				<input type="text" class="text" name="nom_inscription" id="nom_inscription" value="#ENV{nom_inscription}" size="30" />
+			</li>
+			<li class='saisie_mail_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{mail_inscription}|oui)erreur]'>
+				<label for="mail_inscription"><:form_pet_votre_email:></label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{mail_inscription})</span>]
+				<input type="text" class="text" name="mail_inscription" id="mail_inscription" value="#ENV{mail_inscription}" size="30" />
+			</li>
+		</ul>
+	</fieldset>
+	[(#REM) Piege a robots spammeurs ]
+	<p style="display: none;">
+		<label for="nobot"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+	</p>
+	<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
+ </form>
+[<script type="text/javascript"><!--
+document.getElementById('(#ENV{focus})').focus();
+--></script>]
+]
+</div>
+[(#ENV{focus,''}|?{' '})
+<div style="text-align: #LANG_RIGHT;">
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+document.write("<a style='color: #e86519' href='")
+document.write((window.opener) ? "javascript:close()" : "./")
+document.write("'><:pass_quitter_fenetre:><" + "/a>");
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
+<noscript>
+	&#91;<a href='./'><:pass_retour_public:></a>&#93;
+</noscript>
+</div>]
