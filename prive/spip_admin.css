@@ -65,3 +65,8 @@ a:active.spip-admin-boutons,.spip-admin-boutons a:active { background-color: #cc
 
 .spip-debug-arg {font-family: Courier, "Courier New", monospace; font-weight: bold;}
 .liste-reqs .spip-debug-arg {display:block;float:left;width:3em;text-align:right;}
+
+/* Couleurs et design de la previsu */
+.spip-previsu { background-color: #111111; color: #eeeeee; font-size: 18px; position: absolute; padding-right: 5px; padding-top: 2px; padding-bottom: 5px;top: 0px; left: 0px;}
+.spip-previsu img {display:inline;}
+
