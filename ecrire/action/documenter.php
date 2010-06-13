@@ -43,7 +43,7 @@ function supprimer_lien_document($id_document, $objet, $id_objet) {
 			'args' => array(
 				'operation' => 'delier_document',
 				'table' => 'spip_documents',
-				'id_objet' => $id_document
+				'id_objet' => $id_document,
 				'objet' => $objet,
 				'id' => $id_objet
 			),
