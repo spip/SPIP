@@ -33,7 +33,7 @@ function balise_FORMULAIRE_CONFIGURER_PLUGIN_dyn($plugin='', $form='') {
 	if (!isset($infos['prefix'])) return ''; // plugin in{connu|actif}
 	if (!$form) $form = 'configurer_' . $infos['prefix'];
 	include_spip("balise/formulaire_");
-	return array(_DIR_PLUGINS . $plugin . '/formulaires/' . $form,
+	return array('formulaires/' . $form,
 		     3600, 
 		     balise_FORMULAIRE__contexte("configurer_plugin", func_get_args()));
 }
