@@ -1206,16 +1206,14 @@ function balise_AIDER_dist($p) {
 function balise_ACTION_FORMULAIRE($p){
 	$_url = interprete_argument_balise(1,$p);
 	if (!$_form = interprete_argument_balise(2,$p)){
-		$f = $p->descr['sourcefile'];
-		$f = basename($f, '.'  . _EXTENSION_SQUELETTES);
-		$_form = "'".addslashes($f)."'";
+		$_form = "@\$Pile[0]['form']";
 	}
 	$p->code = "";
 
 	if (strlen($_url))
 		$p->code .= " . (form_hidden($_url))";
-	if (strlen($_form))
-		$p->code .=
+
+	$p->code .=
 		// envoyer le nom du formulaire que l'on traite
 		". '<input type=\'hidden\' name=\'formulaire_action\' value=\'' . $_form . '\' />'"
 		// transmettre les eventuels args de la balise formulaire
