@@ -29,7 +29,7 @@ function quete_chapo($id_article, $connect) {
 
 function quete_parent_lang($table,$id,$connect=''){
 	static $cache_quete = array();
-	
+
 	if (!isset($cache_quete[$connect][$table][$id])
 	AND in_array($table,array('spip_rubriques','spip_articles','spip_syndic','spip_breves'))){
 		$select = ($table=='spip_rubriques'?'id_parent':'id_rubrique');
@@ -76,7 +76,7 @@ function quete_profondeur($id, $connect='') {
 // http://doc.spip.org/@quete_date_postdates
 function quete_date_postdates() {
 	return
-	  date('Y-m-d H:i:s', 
+	  date('Y-m-d H:i:s',
 	       ($GLOBALS['meta']['date_prochain_postdate'] > time())
 			? $GLOBALS['meta']['date_prochain_postdate']
 	       : (time()+(3600*24*10000))) ;
@@ -115,7 +115,7 @@ function quete_accepter_forum($id_article) {
 	// mais il faut neanmoins accepter l'affichage du forum
 	// d'ou le 0=>'' (et pas 0=>'non').
 	static $cache = array(0 => '');
-	
+
 	$id_article = intval($id_article);
 
 	if (isset($cache[$id_article]))	return $cache[$id_article];
@@ -173,7 +173,10 @@ function quete_logo_file($row, $connect=NULL) {
 	include_spip('inc/documents');
 	$logo = vignette_logo_document($row, $connect);
 	if (!$logo) $logo = image_du_document($row);
-	if (!$logo) $logo = vignette_par_defaut($row['extension'], false);
+	if (!$logo){
+		$f = charger_fonction('vignette','inc');
+		$logo = $f($row['extension'], false);
+	}
 	return get_spip_doc($logo);
 }
 
@@ -271,7 +274,7 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 // Il faudrait encore completer: on ne connait pas la langue
 // pour une boucle forum sans id_article ou id_rubrique issu du contexte,
 // ce qui provoque un Log abscons ("table inconnue forum")
-// voire une erreur SQL dans le cas de id_syndic, qu'on neutralise 
+// voire une erreur SQL dans le cas de id_syndic, qu'on neutralise
 // in extremis mais ce n'est pas satisfaisant
 // http://doc.spip.org/@lang_parametres_forum
 function lang_parametres_forum($qs, $lang) {
@@ -302,7 +305,7 @@ function quete_debut_pagination($primary,$valeur,$pas,$res,$serveur=''){
 	// si on a pas trouve
 	if ($row[$primary]!=$valeur)
 		return 0;
-	
+
 	// sinon, calculer le bon numero de page
 	return floor($pos/$pas)*$pas;
 }
