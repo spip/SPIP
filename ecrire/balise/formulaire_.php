@@ -60,12 +60,13 @@ function balise_FORMULAIRE__dist($p) {
 // http://doc.spip.org/@balise_FORMULAIRE__dyn
 function balise_FORMULAIRE__dyn($form)
 {
-	if (!existe_formulaire($form)) return '';
+	if (!($path = existe_formulaire($form))) return '';
 
 	// deux moyen d'arriver ici : 
 	// soit #FORMULAIRE_XX reroute avec 'FORMULAIRE_XX' ajoute en premier arg
 	// soit #FORMULAIRE_{xx}
-		
+	$form = basename($path, '.' . _EXTENSION_SQUELETTES);
+
 	// recuperer les arguments passes a la balise
 	// on enleve le premier qui est le nom de la balise 
 	// deja recupere ci-dessus
