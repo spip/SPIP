@@ -26,7 +26,7 @@ function formulaires_configurer_plugin_charger_dist($form)
 
 function formulaires_configurer_plugin_verifier_dist($form)
 {
-#	$f = charger_fonction('verifier', "formulaires/$form", true);
+	$f = charger_fonction('verifier', "formulaires/$form", true);
 	return $f ? $f($form) : array();
 }
 
@@ -41,7 +41,7 @@ function formulaires_configurer_plugin_traiter_dist($form)
 		$vars = formulaires_configurer_plugin_recense($infos['path']);
 		$meta = $infos['meta'];
 		foreach ($vars as $regs) {
-			$k = $regs[3];
+			$k = $regs[2];
 			ecrire_meta($k, _request($k), 'oui', $meta);
 		}
 		return !isset($infos['prefix']) ? array()
@@ -51,7 +51,7 @@ function formulaires_configurer_plugin_traiter_dist($form)
 
 // version amelioree de la RegExp de cfg_formulaire.
 define('_EXTRAIRE_SAISIES', 
-	'#<(?:(select|textarea)|input type=["\'](text|password|checkbox|radio|hidden|file)["\']) name=["\'](\w+)(\[\w*\])?["\'](?: class=["\']([^\'"]*)["\'])?( multiple=)?[^>]*?>#ims');
+	'#<(select|textarea|input)[^>]*\sname=["\'](\w+)(\[\w*\])?["\'](?: class=["\']([^\'"]*)["\'])?( multiple=)?[^>]*?>#ims');
 
 // determiner la liste des noms des saisies d'un formulaire
 // (a refaire avec SAX)
@@ -60,9 +60,9 @@ function formulaires_configurer_plugin_recense($form)
 	$f = file_get_contents($form);
 	if (preg_match_all(_EXTRAIRE_SAISIES, $f, $r, PREG_SET_ORDER))
 		return $r;
-	return array();
-
 }
+
+define('_EXTRAIRE_PLUGIN', '@(?:' . _DIR_PLUGINS . '|' . _DIR_EXTENSIONS .')/?([^/]+)/@');
 
 // Recuperer la version compilee de plugin.xml et normaliser
 // Si ce n'est pas un plugin, dire qu'il faut prendre la table std des meta.
@@ -71,7 +71,7 @@ function formulaires_configurer_plugin_infos($form){
 	include_spip("balise/formulaire_");
 	$path = existe_formulaire($form);
 	if (!$path) return ''; // cas traite en amont normalement.
-	if (!preg_match('@' . _DIR_PLUGINS . '/?([^/]+)/@', $path, $plugin))
+	if (!preg_match(_EXTRAIRE_PLUGIN, $path, $plugin))
 		return array('path' => $path, 'meta' => 'meta');
 	$plugin = $plugin[1];
 	$get_infos = charger_fonction('get_infos','plugins');
