@@ -42,7 +42,6 @@ function formulaires_remplir_traiter_dist($form)
 		$meta = $infos['meta'];
 		foreach ($vars as $regs) {
 			$k = $regs[2];
-			spip_log("ecrirt dans $meta $k vaut " . _request($k));
 			ecrire_meta($k, _request($k), 'oui', $meta);
 		}
 		return !isset($infos['prefix']) ? array()
