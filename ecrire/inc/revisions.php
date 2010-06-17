@@ -421,7 +421,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
         // et un titre contenant en fait le moment de l'insertion
 	
 	list($ms, $sec) = explode(' ', microtime());
-	$date = $sec . substr($ms,1);
+	$date = $sec . substr($ms,1,4); // SQL ne ramene que 4 chiffres significatifs apres la virgule pour 0.0+titre_version
 	$datediff = ($sec - mktime(0,0,0,9,1,2007)) * 1000000 + substr($ms,2, strlen($ms)-4);
 
 	$valeurs = array('id_article' => $id_article,
