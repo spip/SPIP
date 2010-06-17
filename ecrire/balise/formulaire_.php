@@ -35,8 +35,7 @@ function existe_formulaire($form)
 
 	if (!$form) return ''; // on ne sait pas, le nom du formulaire n'est pas fourni ici
 
-	$path = find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/');
-	return $path ? $path : false;
+	return find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/') ? $form : false;
 }
 
 
@@ -60,12 +59,12 @@ function balise_FORMULAIRE__dist($p) {
 // http://doc.spip.org/@balise_FORMULAIRE__dyn
 function balise_FORMULAIRE__dyn($form)
 {
-	if (!($path = existe_formulaire($form))) return '';
+	$form = existe_formulaire($form);
+	if (!$form) return '';
 
 	// deux moyen d'arriver ici : 
 	// soit #FORMULAIRE_XX reroute avec 'FORMULAIRE_XX' ajoute en premier arg
 	// soit #FORMULAIRE_{xx}
-	$form = basename($path, '.' . _EXTENSION_SQUELETTES);
 
 	// recuperer les arguments passes a la balise
 	// on enleve le premier qui est le nom de la balise 
@@ -162,7 +161,7 @@ function balise_FORMULAIRE__contexte($form, $args)
 
 	if (!isset($valeurs['id'])) $valeurs['id'] = 'new';
 
-	if ($editable) $valeurs['editable'] = $editable;
+	if ($editable) $valeurs['editable'] = ' ';
 
 	if (isset($erreurs['message_erreur']))
 		$valeurs['message_erreur'] = $erreurs['message_erreur'];
@@ -177,7 +176,7 @@ function balise_FORMULAIRE__contexte($form, $args)
 
 function formulaire__charger($form, $args, $poste)
 {
-	if ($charger_valeurs = charger_fonction("charger","formulaires/$form/",true))
+	if ($charger_valeurs = charger_fonction("charger","formulaires/$form",true))
 		$valeurs = call_user_func_array($charger_valeurs,$args);
 	else $valeurs = array();
 
