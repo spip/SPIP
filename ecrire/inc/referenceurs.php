@@ -23,7 +23,8 @@ function inc_referenceurs_dist ($id_article, $select, $table, $where, $groupby, 
 			$lesurls[$numero] = $buff["host"];
 			if (!isset($nbvisites[$numero]))
 				$nbvisites[$numero] = $visites;
-			$nbvisites[$numero] += $visites;
+			else
+				$nbvisites[$numero] += $visites;
 			if (!isset($lesreferers[$numero]))
 				$lesreferers[$numero] = array();
 			if (!isset($lesliensracine[$numero]))
