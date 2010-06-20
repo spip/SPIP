@@ -374,7 +374,7 @@ function avoir_visiteurs($past=false, $accepter=true) {
 function debut_onglet(){
 
 	return "
-\n<div style='padding: 7px;'><table cellpadding='0' cellspacing='0' border='0' class='centered'><tr>
+\n<div style='padding: 7px;'><table border='0' class='centered'><tr>
 ";
 }
 
@@ -502,7 +502,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 	if ($spip_display != 4) {
 
 		if ($spip_display != 1) {
-			$retour .= "\n<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>"
+			$retour .= "\n<table class='cellule-h-table' style='vertical-align: middle'>"
 			. "\n<tr><td><a $javascript$lien class='cellule-h'>"
 			. "<span class='cell-i'>" ;
 			if ($fonction){

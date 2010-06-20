@@ -68,7 +68,7 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $style
 		  }
 		}
 		if (!$th) $head= '';
-		$tranches .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'>$head$table</table>";
+		$tranches .= "<table width='100%' cellpadding='2' border='0'>$head$table</table>";
 	} else {
 		foreach ($result as $r) {
 			if ($prim) $prims[]= $r[$prim];

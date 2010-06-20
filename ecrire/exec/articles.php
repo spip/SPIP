@@ -201,7 +201,7 @@ function articles_documents($type, $id)
 		// eviter le formulaire upload qui se promene sur la page
 		// a cause des position:relative incompris de MSIE
 		if ($GLOBALS['browser_name']!='MSIE') {
-			$res = "\n<table style='float: $spip_lang_right' width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
+			$res = "\n<table style='float: $spip_lang_right' width='50%' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
 		}
 
 		$res .= http_script('',"async_upload.js")

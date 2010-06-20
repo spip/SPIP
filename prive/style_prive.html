@@ -63,6 +63,13 @@ body { font-size:0.625em; font-family: Verdana, Geneva, Sans, sans-serif; }
 .breves_edit .large #extra,
 .rubriques_edit .large #extra {width:140px;}
 
+/* style par defaut sur les tables. selecteur generique pour avoir une faible priorite */
+table {
+	border-collpase: collpase; /* equivalent a cellspacing=0 */
+}
+td {
+	padding: 0; /* equivalent a cellpadding=0 */
+}
 
 div.table_page { margin-top: 1em; }
 #contenu { font-size: small; }

@@ -132,7 +132,7 @@ function exec_mots_tous_dist()
 			echo "</div>";
 
 			if (autoriser('modifier','groupemots',$id_groupe)){
-				echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
+				echo "\n<table border='0' width='100%'>";
 				echo "<tr>";
 				echo "<td>";
 				echo icone_inline(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.png", "edit", $spip_lang_left);
