@@ -14,8 +14,11 @@
  *    "whole" : find partial matches but highlight whole words
  *    "partial": find and highlight partial matches
  *     
+ *  - tag_name (string, default:'span')
+ *    The tag that is used to wrap the matched words
+ *
  *  - style_name (string, default:'hilite')
- *    The class given to the span wrapping the matched words.
+ *    The class given to the tag wrapping the matched words.
  *     
  *  - style_name_suffix (boolean, default:true)
  *    If true a different number is added to style_name for every different matched word.
@@ -51,7 +54,7 @@ if (window.jQuery)
     var ref = options.debug_referrer || document.referrer;
     if(!ref && options.keys==undefined) return this;
     
-    SearchHighlight.options = $.extend({exact:"exact",style_name:'hilite',style_name_suffix:true},options);
+    SearchHighlight.options = $.extend({exact:"exact",tag_name:'span',style_name:'hilite',style_name_suffix:true},options);
     
     if(options.engines) SearchHighlight.engines.unshift(options.engines);  
     var q = SearchHighlight.splitKeywords(options.keys!=undefined?options.keys.toLowerCase():SearchHighlight.decodeURL(ref,SearchHighlight.engines));
@@ -196,14 +199,14 @@ if (window.jQuery)
               var newtext="",match,index=0;
               SearchHighlight.regex.lastIndex = 0;
               while(match = SearchHighlight.regex.exec(textNoAcc)) {
-                newtext += SearchHighlight.fixTags(text.substr(index,match.index-index))+'<span class="'+
-                SearchHighlight.subs[match[matchIndex].toLowerCase()]+'">'+SearchHighlight.fixTags(text.substr(match.index,match[0].length))+"</span>";
+                newtext += SearchHighlight.fixTags(text.substr(index,match.index-index))+'<'+SearchHighlight.options.tag_name+' class="'+
+                SearchHighlight.subs[match[matchIndex].toLowerCase()]+'">'+SearchHighlight.fixTags(text.substr(match.index,match[0].length))+"</"+SearchHighlight.options.tag_name+">";
                 index = match.index+match[0].length;
               }
               if(newtext) {
                 //add the last part of the text
                 newtext += SearchHighlight.fixTags(text.substring(index));
-                var repl = $.merge([],$("<span>"+newtext+"</span>")[0].childNodes);
+                var repl = $.merge([],$("<"+SearchHighlight.options.tag_name+">"+newtext+"</"+SearchHighlight.options.tag_name+">")[0].childNodes);
                 endIndex += repl.length-1;
                 startIndex += repl.length-1;
                 $(item).before(repl).remove();
