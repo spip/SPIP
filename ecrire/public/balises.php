@@ -1267,4 +1267,14 @@ function balise_SLOGAN_SITE_SPIP_dist($p) {
 	return $p;
 }
 
+// #HTML5
+// Renvoie ' ' si le webmestre souhaite que SPIP genere du code (X)HTML5 sur
+// le site public, et '' si le code doit etre strictement compatible HTML4
+// http://doc.spip.org/@balise_HTML5_dist
+function balise_HTML5_dist($p) {
+	$p->code = "(html5_permis() ? ' ' : '')";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 ?>

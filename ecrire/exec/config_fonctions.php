@@ -42,6 +42,7 @@ function exec_config_fonctions_dist()
 	$avertisseur = charger_fonction('avertisseur', 'configuration');
 	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
 	$relayeur = charger_fonction('relayeur', 'configuration');
+	$moderniseur_html = charger_fonction('moderniseur_html', 'configuration');
 
 	echo 
 
@@ -53,6 +54,7 @@ function exec_config_fonctions_dist()
 
 	  $relayeur(_request('retour_proxy')), // Proxy pour syndication & doc
 
+	  $moderniseur_html(), // Selection de la version max de HTML (4 ou 5)
 
 	'';
 
