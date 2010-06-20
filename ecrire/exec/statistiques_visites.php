@@ -166,9 +166,7 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 		$n =  count($res);
 		$plus = generer_url_ecrire('statistiques_visites', $args);
 		if ($plus) {
-			$plus = ($limit == $n)
-			? "<div style='text-align:right;'><b><a href='$plus'>+++</a></b></div>"
-			: '';
+			$plus = "<div style='text-align:right;'><b><a href='$plus'>+++</a></b></div>";
 		}
 		$titre = _T("onglet_origine_visites")
 		. " ($n " 
