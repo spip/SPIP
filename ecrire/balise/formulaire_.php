@@ -125,7 +125,7 @@ function balise_FORMULAIRE__contexte($form, $args)
 	// ou si on le demande explicitement par le parametre _forcer_request = true
 	$dispo = ($je_suis_poste || (isset($valeurs['_forcer_request']) && $valeurs['_forcer_request']));
 	foreach(array_keys($valeurs) as $champ){
-		if ($champ[0]!=='_') {
+		if ($champ[0]!=='_' AND !in_array($champ, array('message_ok','message_erreur','editable'))) {
 			if ($dispo AND (($v = _request($champ))!==NULL))
 				$valeurs[$champ] = $v;
 			if ($action)
