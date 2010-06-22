@@ -81,15 +81,19 @@ function balise_FORMULAIRE__contexte($form, $args)
 	// pour ne pas confondre 2 #FORMULAIRES_XX identiques sur une meme page
 	// si poste, on recupere les erreurs
 
-	$p = _request('formulaire_action_args');
-
-	if ($p) {
-		$p = decoder_contexte_ajax($p, _request('formulaire_action'));
+	$je_suis_poste = false;
+	if ($post_form = _request('formulaire_action')
+	 AND $p = _request('formulaire_action_args')
+	 AND is_array($p = decoder_contexte_ajax($p, $post_form))) {
 		// enlever le faux attribut de langue masque
-		if (is_array($p)) array_shift($p);
+		array_shift($p);
+		if ($args === $p)
+			$je_suis_poste = true;
 	}
-	if ($args === $p) {
-		$je_suis_poste = true;
+
+	$editable = true;
+	$erreurs = $post = array();
+	if ($je_suis_poste) {
 		$post = traiter_formulaires_dynamiques(true);
 		$e = "erreurs_$form";
 		$erreurs = isset($post[$e]) ? $post[$e] : array();
@@ -97,10 +101,6 @@ function balise_FORMULAIRE__contexte($form, $args)
 		$editable = (!isset($post[$e]))
 			  || count($erreurs)
 			  || (isset($post[$editable]) && $post[$editable]);
-	} else  {
-		$editable = true;
-		$je_suis_poste = false;
-		$erreurs = $post = array();
 	}
 
 	$valeurs = formulaire__charger($form, $args, $je_suis_poste);
@@ -160,16 +160,19 @@ function balise_FORMULAIRE__contexte($form, $args)
 	$valeurs['form'] = $form;
 
 	if (!isset($valeurs['id'])) $valeurs['id'] = 'new';
+	if (!isset($valeurs['editable'])) $valeurs['editable'] = ($editable?' ':'');
 
-	if ($editable) $valeurs['editable'] = ' ';
+	if ($je_suis_poste) {
+		$valeurs['message_erreur'] = "";
+		if (isset($erreurs['message_erreur']))
+			$valeurs['message_erreur'] = $erreurs['message_erreur'];
 
-	if (isset($erreurs['message_erreur']))
-		$valeurs['message_erreur'] = $erreurs['message_erreur'];
-
-	if (isset($post["message_ok_$form"]))
-		$valeurs['message_ok'] = $post["message_ok_$form"];
-	elseif (isset($erreurs['message_ok']))
-		$valeurs['message_ok'] = $erreurs["message_ok"];
+		$valeurs['message_ok'] = "";
+		if (isset($post["message_ok_$form"]))
+			$valeurs['message_ok'] = $post["message_ok_$form"];
+		elseif (isset($erreurs['message_ok']))
+			$valeurs['message_ok'] = $erreurs["message_ok"];
+	}
 	
 	return $valeurs;
 }
