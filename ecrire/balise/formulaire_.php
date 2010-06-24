@@ -160,7 +160,10 @@ function balise_FORMULAIRE__contexte($form, $args)
 	$valeurs['form'] = $form;
 
 	if (!isset($valeurs['id'])) $valeurs['id'] = 'new';
-	if (!isset($valeurs['editable'])) $valeurs['editable'] = ($editable?' ':'');
+	// editable peut venir de charger() ou de traiter() sinon
+	if (!isset($valeurs['editable'])) $valeurs['editable'] = $editable;
+	// dans tous les cas, renvoyer un espace ou vide (et pas un booleen)
+	$valeurs['editable'] = ($valeurs['editable']?' ':'');
 
 	if ($je_suis_poste) {
 		$valeurs['message_erreur'] = "";
