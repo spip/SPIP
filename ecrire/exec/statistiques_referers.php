@@ -33,13 +33,11 @@ function exec_statistiques_referers_dist()
 	$res = $referenceurs (0, "SUM(visites_$jour)", 'spip_referers', "visites_$jour>0", "referer", $limit);
 
 	$n =  count($res);
-	$args = "jour=$jour@limit=" . strval($limit+200);
-	$plus = generer_url_ecrire('statistiques_visites', $args);
+	$args = "jour=$jour&limit=" . strval($limit+200);
+	$plus = generer_url_ecrire('statistiques_referers', $args);
 
 	if ($plus) {
-		$plus = ($limit == $n)
-		? "<div style='text-align:right;'><b><a href='$plus'>+++</a></b></div>"
-		: '';
+		$plus = "<div style='text-align:right;'><b><a href='$plus'>+++</a></b></div>";
 	}
 
 	$titre = _T('titre_liens_entrants')
