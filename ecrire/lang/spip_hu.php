@@ -64,11 +64,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_quote' => '<quote>&Uuml;zenet id&eacute;z&eacute;se</quote>',
 'bouton_ajouter_document' => '&Uacute;J DOKUMENTUM', # MODIF
 'bouton_ajouter_image' => '&Uacute;J K&Eacute;P', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou&nbsp;un&nbsp;document', # NEW
+'bouton_ajouter_image_document' => 'Add an image or a document', # NEW
 'bouton_changer' => 'M&oacute;dos&iacute;t&aacute;s',
 'bouton_chercher' => 'Keres&eacute;s',
 'bouton_choisir' => 'Kiv&aacute;laszt&aacute;s',
-'bouton_download' => 'T&eacute;l&eacute;charger', # NEW
+'bouton_download' => 'Download', # NEW
 'bouton_enregistrer' => 'Ment&eacute;s',
 'bouton_radio_desactiver_messagerie_interne' => 'Bels&#337; &uuml;zenetek letilt&aacute;sa',
 'bouton_radio_envoi_annonces' => 'Szerkeszt&#337;i k&ouml;zlem&eacute;ny k&uuml;ld&eacute;se',
@@ -188,13 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'tavasz',
 'date_saison_3' => 'ny&aacute;r',
 'date_saison_4' => '&#337;sz',
-'date_secondes' => 'secondes', # NEW
+'date_secondes' => 'seconds', # NEW
 'date_semaines' => 'h&eacute;t',
-'date_un_mois' => 'mois', # NEW
-'date_une_heure' => 'heure', # NEW
+'date_un_mois' => 'month', # NEW
+'date_une_heure' => 'hour', # NEW
 'date_une_minute' => 'minute', # NEW
-'date_une_seconde' => 'seconde', # NEW
-'date_une_semaine' => 'semaine', # NEW
+'date_une_seconde' => 'second', # NEW
+'date_une_semaine' => 'week', # NEW
 'dirs_commencer' => ' ahhoz, hogy val&oacute;ban kezdhesse a telep&iacute;t&eacute;st',
 'dirs_preliminaire' => 'Bevezet&eacute;s: <b>Hozz&aacute;f&eacute;r&eacute;si jogok be&aacute;ll&iacute;t&aacute;sa</b>',
 'dirs_probleme_droits' => 'Jogosults&aacute;gi hiba',
@@ -210,7 +210,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => 'K&eacute;t el&#337;fordul&aacute;s', # MODIF
 
 // E
-'en_cours' => 'en cours', # NEW
+'en_cours' => 'processing', # NEW
 'entree_dimensions' => 'M&eacute;ret&nbsp;:',
 'entree_titre_document' => 'Dokumentum c&iacute;me&nbsp;:',
 'entree_titre_image' => 'K&eacute;p c&iacute;me&nbsp;:',
@@ -218,19 +218,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Hiba',
 'erreur_balise_non_fermee' => 'az utols&oacute; tag nincs lez&aacute;rva:',
 'erreur_texte' => 'hiba',
-'etape' => '&Eacute;tape', # NEW
+'etape' => 'Stage', # NEW
 
 // F
 'fichier_introuvable' => 'A(z) @fichier@ f&aacute;jl nem tal&aacute;lhat&oacute;',
-'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
-'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
-'form_auteur_mail_confirmation' => 'Bonjour,
+'form_auteur_confirmation' => 'Please confirm your email address', # NEW
+'form_auteur_email_modifie' => 'Your email address has been changed.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'A confirmation email has been sent to @email@. You need to visit the URL mentioned in this message in order to validate your email address.', # NEW
+'form_auteur_mail_confirmation' => 'Hello,
 
-Vous avez demand&eacute; &agrave; changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignor&eacute;e) :
+You have asked to change your email address.
+To confirm your new address, you need to connect to
+the address below. (Otherwise your request will be ignored.):
 
     @url@
 ', # NEW
@@ -417,8 +416,8 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'info_bloquer_lien' => 'blokkolni a linket',
 'info_breves_02' => 'H&iacute;rek',
 'info_breves_2' => 'h&iacute;rek',
-'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
-'info_breves_un' => '1 br&egrave;ve', # NEW
+'info_breves_nb' => '@nb@ news items', # NEW
+'info_breves_un' => '1 news item', # NEW
 'info_breves_valider' => 'J&oacute;v&aacute;hagyand&oacute; h&iacute;rek',
 'info_connexion_refusee' => 'Csatlakoz&aacute;s tagadva',
 'info_contact_developpeur' => 'Keressen egy fejleszt&#337;t.',
@@ -503,7 +502,7 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'info_nouveau_message' => '&Ouml;NNEK &Uacute;J &Uuml;ZENETE VAN',
 'info_nouveaux_messages' => '&Ouml;NNEK @total_messages@ &Uacute;J &Uuml;ZENETE VAN',
 'info_numero_abbreviation' => 'sz.&nbsp;',
-'info_obligatoire' => 'Cette information est obligatoire', # NEW
+'info_obligatoire' => 'This information is required', # NEW
 'info_panne_site_syndique' => 'Hib&aacute;s szindik&aacute;lt honlap',
 'info_pense_bete' => 'EML&Eacute;KEZTET?',
 'info_petit_ecran' => 'Kisebb k&eacute;perny?',
@@ -532,8 +531,8 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'info_retablir_lien' => 'vissza&aacute;ll&iacute;tani ezt a linket',
 'info_retirer_mot' => 'A sz&oacute; t&ouml;rl&eacute;se',
 'info_retirer_mots' => 'Az &ouml;sszes sz&oacute; t&ouml;rl&eacute;se',
-'info_rubriques_nb' => '@nb@ rubriques', # NEW
-'info_rubriques_un' => '1 rubrique', # NEW
+'info_rubriques_nb' => '@nb@ sections', # NEW
+'info_rubriques_un' => '1 section', # NEW
 'info_sans_titre_2' => 'c&iacute;m n&eacute;lk&uuml;l',
 'info_selectionner_fichier' => 'Kijel&ouml;lhet egy f&aacute;jlt az @upload@ mapp&aacute;b&oacute;l',
 'info_selectionner_fichier_2' => 'V&aacute;lasszon egy f&aacute;jlt&nbsp;:',
@@ -617,7 +616,7 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'login_retour_site' => 'Vissza a nyilv&aacute;nos honlapra',
 'login_retoursitepublic' => 'vissza&nbsp;a&nbsp;nyilv&aacute;nos&nbsp;honlapra',
 'login_sans_cookiie' => 'S&uuml;ti (cookie) n&eacute;lk&uuml;li azonos&iacute;t&aacute;s',
-'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
+'login_securise' => 'Secured login', # NEW
 'login_sinscrire' => 'be&iacute;ratkoz&aacute;s',
 'login_test_navigateur' => 'b&ouml;ng&eacute;sz&#337; teszt/&uacute;jracsatlakoz&aacute;s',
 'login_verifiez_navigateur' => '(Azonban ellen&#337;rizze, hogy a bong&eacute;sz&oacute; nem memoriz&aacute;lta-e a jelsz&oacute;t...)',
@@ -761,7 +760,7 @@ Pr&oacute;b&aacute;ljon', # MODIF
 'titre_signatures_confirmees' => '&Eacute;rv&eacute;nyes&iacute;tett al&aacute;&iacute;r&aacute;sok',
 'titre_statistiques' => 'A honlap statisztikai',
 'titre_titre_document' => 'Dokumentum c&iacute;me&nbsp;:',
-'todo' => '&agrave; venir', # NEW
+'todo' => 'to come', # NEW
 'trad_reference' => '(eredeti cikk)',
 
 // Z

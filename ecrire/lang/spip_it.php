@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-it',
-'0_langue' => 'Francese (Fr)',
+'0_langue' => 'Italiano [it]',
 '0_liste' => 'spip-it@rezo.net',
 '0_mainteneur' => 'ebottaro@hce.it',
 

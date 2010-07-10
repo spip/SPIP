@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Od&#347;wie&#380; ',
 'afficher_trad' => 'poka&#380; przek&#322;ady',
 'alerte_maj_impossible' => '<MODIF><b>Uwaga!</b> Uaktualnienie bazy danych SQL do wersji @version@ jest nie mo&#380;liwe. Powodem jest prawdopodobnie brak mo&#380;liwo&#347;ci modyfikacji bazy danych. Skontaktuj si&#281; z administratorem.',
-'alerte_modif_info_concourante' => 'WARNING: This information has been modified elsewhere. The current value is&nbsp;:', # NEW
+'alerte_modif_info_concourante' => 'ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute;e par ailleurs. La valeur actuelle est&nbsp;:', # NEW
 'analyse_xml' => 'Analiza XML',
 'annuler' => 'Anuluj',
 'antispam_champ_vide' => 'Pozostaw puste:',
@@ -60,11 +60,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Zmie&#324; w [hiper&#322;&#261;cze->http://...]',
 'barre_lien_input' => 'Prosz&#281; wpisa&#263; cel hiper&#322;&#261;cza (mo&#380;e to by&#263; URL internetowy w formie http://www.mysite.com lub po prostu numer artyku&#322;u na tej stronie).',
 'barre_note' => 'Zmie&#324; w [[Przypis]]',
-'barre_paragraphe' => 'Create a paragraph', # NEW
+'barre_paragraphe' => 'Cr&#233;er un paragraphe', # NEW
 'barre_quote' => '<quote>Zacytuj wiadomo&#347;&#263;</quote>',
 'bouton_ajouter_document' => 'DODAJ DOKUMENT', # MODIF
 'bouton_ajouter_image' => 'DODAJ OBRAZEK', # MODIF
-'bouton_ajouter_image_document' => 'Add an image or a document', # NEW
+'bouton_ajouter_image_document' => 'Ajouter une image ou&nbsp;un&nbsp;document', # NEW
 'bouton_changer' => 'Zatwierd&#378;',
 'bouton_chercher' => 'Szukaj',
 'bouton_choisir' => 'Wybierz',
@@ -188,13 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'wiosna',
 'date_saison_3' => 'lato',
 'date_saison_4' => 'jesie&#324;',
-'date_secondes' => 'seconds', # NEW
+'date_secondes' => 'secondes', # NEW
 'date_semaines' => 'tygodnie',
-'date_un_mois' => 'month', # NEW
-'date_une_heure' => 'hour', # NEW
+'date_un_mois' => 'mois', # NEW
+'date_une_heure' => 'heure', # NEW
 'date_une_minute' => 'minute', # NEW
-'date_une_seconde' => 'second', # NEW
-'date_une_semaine' => 'week', # NEW
+'date_une_seconde' => 'seconde', # NEW
+'date_une_semaine' => 'semaine', # NEW
 'dirs_commencer' => ' w celu rzeczywistego rozpocz&#281;cia instalacji',
 'dirs_preliminaire' => 'Wst&#281;p: <b>Ustawienia pozwole&#324; dost&#281;pu</b>',
 'dirs_probleme_droits' => 'Problem z prawami dost&#281;pu',
@@ -210,7 +210,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => 'Podw&oacute;jne wyst&#261;pienie', # MODIF
 
 // E
-'en_cours' => 'processing', # NEW
+'en_cours' => 'en cours', # NEW
 'entree_dimensions' => 'Rozmiar:',
 'entree_titre_document' => 'Tytu&#322; dokumentu:',
 'entree_titre_image' => 'Tytu&#322; obrazka:',
@@ -218,18 +218,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'B&#322;&#261;d',
 'erreur_balise_non_fermee' => 'ostatni znacznik nie jest zamkni&#281;ty :',
 'erreur_texte' => 'b&#322;&#261;d/b&#322;&#281;dy',
-'etape' => 'Stage', # NEW
+'etape' => '&Eacute;tape', # NEW
 
 // F
 'fichier_introuvable' => 'Plik @fichier@ nie odnaleziony',
-'form_auteur_confirmation' => 'Please confirm your email address', # NEW
-'form_auteur_email_modifie' => 'Your email address has been changed.', # NEW
-'form_auteur_envoi_mail_confirmation' => 'A confirmation email has been sent to @email@. You need to visit the URL mentioned in this message in order to validate your email address.', # NEW
-'form_auteur_mail_confirmation' => 'Hello,
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
 
-You have asked to change your email address.
-To confirm your new address, you need to connect to
-the address below. (Otherwise your request will be ignored.):
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
 
     @url@
 ', # NEW
@@ -418,8 +419,8 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_bloquer_lien' => 'zablokuj ten link',
 'info_breves_02' => 'Newsy',
 'info_breves_2' => 'newsy',
-'info_breves_nb' => '@nb@ news items', # NEW
-'info_breves_un' => '1 news item', # NEW
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Newsy do zatwierdzenia',
 'info_connexion_refusee' => 'Brak po&#322;&#261;czenia',
 'info_contact_developpeur' => 'Prosz&#281; skontaktowa&#263; si&#281; z deweloperem.',
@@ -505,11 +506,11 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_nouveau_message' => 'MASZ NOW&#260; WIADOMO&#346;&#262;',
 'info_nouveaux_messages' => 'MASZ @total_messages@ NOWYCH WIADOMO&#346;CI',
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
-'info_obligatoire' => 'This information is required', # NEW
+'info_obligatoire' => 'Cette information est obligatoire', # NEW
 'info_panne_site_syndique' => 'Strona syndykowana nie dzia&#322;a',
 'info_pense_bete' => 'NOTATKA',
 'info_petit_ecran' => 'Ma&#322;e okno',
-'info_petition_close' => 'Petition closed', # NEW
+'info_petition_close' => 'P&eacute;tition close', # NEW
 'info_pixels' => 'piksele',
 'info_plusieurs_mots_trouves' => 'Kilkana&#347;cie s&#322;&oacute;w kluczowych zosta&#322;o znalezionych dla "@cherche_mot@":',
 'info_popularite_5' => 'popularno&#347;&#263;:',
@@ -534,8 +535,8 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_retablir_lien' => 'przywr&oacute;c link',
 'info_retirer_mot' => 'Usu&#324; to s&#322;owo kluczowe',
 'info_retirer_mots' => 'Usu&#324; wszystkie s&#322;owa kluczowe',
-'info_rubriques_nb' => '@nb@ sections', # NEW
-'info_rubriques_un' => '1 section', # NEW
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'bez tytu&#322;u',
 'info_selectionner_fichier' => 'Mo&#380;esz wybra&#263; plik z folderu @upload@',
 'info_selectionner_fichier_2' => 'Wybierz plik:',
@@ -619,13 +620,13 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'login_retour_site' => 'Powr&oacute;t do strony publicznej',
 'login_retoursitepublic' => 'Powr&oacute;t do strony publicznej',
 'login_sans_cookiie' => 'Identyfikacja bez cookie',
-'login_securise' => 'Secured login', # NEW
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'rejestracja',
 'login_test_navigateur' => 'test przegl&#261;darki/&#322;&#261;cz ponownie',
 'login_verifiez_navigateur' => '(Sprawd&#378; czy Twoja przegl&#261;darka nie zapami&#281;ta&#322;a has&#322;a...)',
 
 // M
-'masquer_colonne' => 'Hide this column', # NEW
+'masquer_colonne' => 'Masquer cette colonne', # NEW
 'masquer_trad' => 'ukryj tlumaczenia',
 'module_fichiers_langues' => 'Pliki j&#281;zykowe',
 
@@ -764,20 +765,20 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'titre_mots_cles' => 'S&#321;OWA KLUCZOWE',
 'titre_probleme_technique' => 'Uwaga: problem techniczny (serwer SQL) blokuje dost&#281;p do tej cz&#281;&#347;ci strony. Dzi&#281;kujemy za zrozumienie.',
 'titre_publier_document' => 'PUBLIKUJ DOKUMENT W TYM DZIALE',
-'titre_signatures_attente' => 'Signatures awaiting validation', # NEW
-'titre_signatures_confirmees' => 'Confirmed signatures', # NEW
+'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
+'titre_signatures_confirmees' => 'Signatures confirm&eacute;es', # NEW
 'titre_statistiques' => 'Statystyki strony',
 'titre_titre_document' => 'Tytu&#322; dokumentu:',
-'todo' => 'to come', # NEW
+'todo' => '&agrave; venir', # NEW
 'trad_reference' => '(artyku&#322; wzorcowy)',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
 'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
-'zbug_balise_sans_argument' => 'Missing argument in the @balise@ tag', # NEW
+'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 'zbug_boucle' => 'p&#281;tla',
 'zbug_boucle_recursive_undef' => 'p&#281;tla rekursywna nie zosta&#322;a zdefiniowana', # MODIF
-'zbug_calcul' => 'calculation', # NEW
+'zbug_calcul' => 'calcul', # NEW
 'zbug_champ_hors_boucle' => 'Pole @champ@ jest bez p&#281;tli',
 'zbug_champ_hors_motif' => 'Pole @champ@ jest poza p&#281;tl&#261; @motif@', # MODIF
 'zbug_code' => 'kod',
@@ -793,7 +794,7 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'zbug_erreur_filtre' => 'B&#322;&#261;d : filtr <b>&laquo; @filtre@ &raquo;</b> nie zdefiniowany', # MODIF
 'zbug_erreur_meme_parent' => '{meme_parent} stosuje si&#281; wy&#322;&#261;cznie do p&#281;tli (FORUMS) i (RUBRIQUES)', # MODIF
 'zbug_erreur_squelette' => 'B&#322;&#261;d (b&#322;&#281;dy) w szkielecie',
-'zbug_hors_compilation' => 'Uncompiled', # NEW
+'zbug_hors_compilation' => 'Hors Compilation', # NEW
 'zbug_info_erreur_squelette' => 'B&#322;&#261;d na stronie',
 'zbug_inversion_ordre_inexistant' => 'odwr&oacute;cenie nieistniej&#261;cego uporz&#261;dkowania', # MODIF
 'zbug_pagination_sans_critere' => '#PAGINATION bez kryterium {pagination} lub u&#380;yta w p&#281;tli rekursywnej', # MODIF
@@ -801,7 +802,7 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'zbug_profile' => 'Czas przeliczania: @time@',
 'zbug_resultat' => 'wynik',
 'zbug_serveur_indefini' => 'serwer SQL niezdefiniowany', # MODIF
-'zbug_statistiques' => 'SQL query statistics in order of duration', # NEW
+'zbug_statistiques' => 'Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e', # NEW
 'zbug_table_inconnue' => 'Tabela SQL &laquo; @table@ &raquo; nieznana',
 'zxml_connus_attributs' => 'znane atrybuty',
 'zxml_de' => 'z',
