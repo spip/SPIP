@@ -26,14 +26,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Gruppo importante:</b> &egrave; consigliato selezionare una parola chiave in questo gruppo.',
 'avis_deplacement_rubrique' => 'Attenzione! Questa rubrica contiene @contient_breves@ breve/i: se vuoi spostarla, spunta questa casella per confermare.',
 'avis_destinataire_obligatoire' => 'Devi indicare un destinatario prima di mandare questo messaggio.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
+'avis_doublon_mot_cle' => 'Una parola esiste gi&agrave; con questo titolo. Sei sicuro di volerne creare una uguale?',
 'avis_erreur_connexion_mysql' => 'Errore di connessione SQL',
-'avis_erreur_version_archive' => '<b>Attenzione! Il file @archive@ corrisponde a
-una versione di SPIP diversa da quella installata.</b> Potranno sorgere notevoli problemi:
-rischio di distruzione del database, malfunzionamenti diversi del sito ecc.
-Non confermare questa richiesta d\'importazione.<p>Per ulteriori
- informazioni, vedere <a href="@spipnet@">
-la documentazione di SPIP</a>.</p>', # MODIF
+'avis_erreur_version_archive' => '<b>Attenzione! Il file @archive@ &egrave; stato creato
+    con una versione di SPIP diversa da quella 
+    installata.</b> Potranno sorgere notevoli problemi:
+    rischio di distruzione del database, vari malfunzionamenti del sito ecc.
+    Non confermare questa richiesta d\'importazione.<p>Per ulteriori
+    informazioni, vedere <a href="@spipnet@">
+    la documentazione di SPIP</a>.</p>',
 'avis_espace_interdit' => '<b>Area vietata</b><div>SPIP &egrave; gi&agrave; installato.</div>',
 'avis_lecture_noms_bases_1' => 'Il programma di installazione non ha potuto leggere i nomi dei database installati nel server.',
 'avis_lecture_noms_bases_2' => 'Nessun database &egrave; disponibile, o la funzione che permette di accedere alla lista database &egrave;
@@ -152,7 +153,7 @@ cancellarli successivamente).',
 // E
 'email' => 'email',
 'email_2' => 'email:',
-'en_savoir_plus' => 'En savoir plus', # NEW
+'en_savoir_plus' => 'Per saperne di pi&ugrave;',
 'entree_adresse_annuaire' => 'Indirizzo della rubrica',
 'entree_adresse_email' => 'Il tuo indirizzo email',
 'entree_adresse_fichier_syndication' => 'Indirizzo del file di syndication:',
@@ -189,7 +190,7 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'entree_texte_breve' => 'Testo della breve',
 'entree_titre_obligatoire' => '<b>Titolo</b> [Obbligatorio]<br />',
 'entree_url' => 'Indirizzo (URL) del sito',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La disinstallazione del plugin &egrave; fallita. In ogni caso potete disattivarlo.',
 'erreur_plugin_fichier_absent' => 'File non presente',
 'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
 'erreur_plugin_nom_fonction_interdit' => 'Nome di funzione non possibile',
@@ -202,8 +203,8 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'forum_info_original' => 'originale',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
-'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+'htaccess_a_simuler' => 'Attenzione: la configurazione del tuo HTTP server ignora il file @htaccess@. Per garantire un buon livello di sicurezza devi modificare la configurazione del server per questa impostazione, oppure devi assicurarti che la costante @constantes@ (che potrebbe essere definita nel file mes_options.php) sia valorizzata con una valore di directory al di fuori di @document_root@.',
+'htaccess_inoperant' => 'htaccess non attivo',
 
 // I
 'ical_info1' => 'Questa pagina elenca diversi metodi per rimanere in contatto con le varie attivit&agrave; del sito.',
@@ -268,8 +269,8 @@ di passare facilmente dal sito pubblico all\'interfaccia privata.',
 di moderazione predefinito:</i>',
 'info_admin_gere_rubriques' => 'Questo amministratore gestisce le seguenti rubriche:',
 'info_admin_gere_toutes_rubriques' => 'Questo amministratore gestisce <b>tutte le rubriche</b>.',
-'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
-'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
+'info_admin_statuer_webmestre' => 'Dai a questo amministratore i privilegi di webmaster',
+'info_admin_webmestre' => 'Questo amministratore &egrave; un <b>webmaster</b>',
 'info_administrateur' => 'Amministratore',
 'info_administrateur_1' => 'Amministratore',
 'info_administrateur_2' => 'del sito (<i>da utilizzare con prudenza</i>)',
@@ -344,7 +345,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_conflit_edition_votre_version' => 'La tua versione:',
 'info_connexion_base' => 'Prova di connessione al database',
 'info_connexion_base_donnee' => 'Connessione al proprio database',
-'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</b><p> &Egrave; possibile passare alla fase successiva.</p>', # MODIF
+'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</b><p> &Egrave; possibile passare alla fase successiva.</p>',
 'info_connexion_mysql' => 'La connessione a SQL',
 'info_connexion_ok' => 'La connessione &egrave; riuscita.',
 'info_contact' => 'Contatti',
@@ -662,7 +663,7 @@ impossibile.', # MODIF
 'info_total' => 'totale: ',
 'info_tous_articles_en_redaction' => 'Tutti gli articoli in corso di redazione',
 'info_tous_articles_presents' => 'Tutti gli articoli pubblicati in questa rubrica',
-'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
+'info_tous_articles_refuses' => 'Tutti gli articoli rifiutati',
 'info_tous_les' => 'tutti i:',
 'info_tous_redacteurs' => 'Annunci a tutti i redattori',
 'info_tout_site' => 'Tutto il sito',
@@ -703,7 +704,7 @@ Le traduzioni sono associate all\'originale,
 'install_select_langue' => 'Seleziona una lingua e poi clicca sul bottone &laquo;&nbsp;Avanti&nbsp;&raquo; per lanciare la procedura di installazione.',
 'install_select_type_db' => 'Indicare il tipo di database:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL', # NEW
+'install_select_type_pg' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Server del database attribuito dall\'hoster',
@@ -829,7 +830,7 @@ Le traduzioni sono associate all\'originale,
 'mois_non_connu' => 'sconosciuto',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelles_versions' => 'Una nuova versione di SPIP &egrave; disponibile',
 
 // O
 'onglet_contenu' => 'Contenuto',
@@ -858,7 +859,7 @@ Le traduzioni sono associate all\'originale,
 'page_pas_proxy' => 'Questa pagina non deve passare attraverso il proxy',
 'pas_de_proxy_pour' => 'Se necessario, indicare i server o i domini per i quali non si deve applicare questo proxy (per esempio: @exemple@)',
 'plugin_charge_paquet' => 'Caricamento del pacchetto @name@',
-'plugin_charger' => 'T&#233;l&#233;charger', # NEW
+'plugin_charger' => 'Download',
 'plugin_erreur_charger' => 'errore: impossibile caricare @zip@',
 'plugin_erreur_droit1' => 'La cartella <code>@dest@</code> non ha i permessi di scrittura.',
 'plugin_erreur_droit2' => 'Verificare i diritti su questa cartella (e, se necessario, crearla), o installare i file tramite FTP.',
