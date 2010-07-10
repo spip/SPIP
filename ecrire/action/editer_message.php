@@ -68,6 +68,7 @@ function action_editer_message_post_retirer($id_message, $id_auteur) {
 
 // http://doc.spip.org/@action_editer_message_post_ajouter
 function action_editer_message_post_ajouter($id_message, $id_auteur) {
+
 	sql_delete("spip_auteurs_messages", "id_auteur=$id_auteur AND id_message=$id_message");
 	sql_insertq('spip_auteurs_messages',
 		   array('id_auteur' => $id_auteur,
@@ -88,7 +89,7 @@ function action_editer_message_post_choisir($id_message) {
 		include_spip('inc/charsets'); // pour tranlitteration
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 		$cherche_auteur= _request('cherche_auteur');
-		$query = sql_select("id_auteur, nom", "spip_auteurs", "messagerie<>'non' AND id_auteur<>'$id_auteur' AND pass<>'' AND login<>''");
+		$query = sql_select("id_auteur, nom", "spip_auteurs", "messagerie<>'non' AND pass<>'' AND login<>'' AND id_auteur<>" . sql_quote($id_auteur));
 		$table_auteurs = array();
 		$table_ids = array();
 		while ($row = sql_fetch($query)) {
@@ -170,6 +171,7 @@ function action_editer_message_post_vieux($id_message)
 
 	if (_request('jour'))
 		change_date_message($id_message, _request('heures'),_request('minutes'),_request('mois'), _request('jour'), _request('annee'), _request('heures_fin'),_request('minutes_fin'),_request('mois_fin'), _request('jour_fin'), _request('annee_fin'));
+	action_editer_message_post_choisir($id_message);
 }
 
 
