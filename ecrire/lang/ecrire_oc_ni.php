@@ -495,7 +495,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_pas_de_forum' => 'Minga de f&ograve;ro',
 'info_passe_trop_court' => 'M&ograve;t de santa Clara tr&ograve;up cort.',
 'info_passes_identiques' => 'Li doi m&ograve;ts de santa Clara son pas identics.',
-'info_pense_bete_ancien' => 'Li voastri anciani n&ograve;tas de renembran&ccedil;a',
+'info_pense_bete_ancien' => 'Li voastri anciani n&ograve;tas de renembran&ccedil;a', # MODIF
 'info_plus_cinq_car' => 'mai de 5 caract&egrave;rs',
 'info_plus_cinq_car_2' => '(mai de 5 caract&egrave;rs)',
 'info_plus_trois_car' => '(mai de 3 caract&egrave;rs)',

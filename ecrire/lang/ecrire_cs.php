@@ -525,7 +525,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_pas_de_forum' => 'bez diskusn&iacute; skupiny',
 'info_passe_trop_court' => 'Heslo je p&#345;&iacute;li&#353; kr&aacute;tk&eacute;.',
 'info_passes_identiques' => 'Zadan&aacute; hesla nesouhlas&iacute;.',
-'info_pense_bete_ancien' => 'Star&eacute; intern&iacute; pozn&aacute;mky',
+'info_pense_bete_ancien' => 'Star&eacute; intern&iacute; pozn&aacute;mky', # MODIF
 'info_plus_cinq_car' => 'vice ne&#382; 5 znak&#367;',
 'info_plus_cinq_car_2' => '(V&iacute;ce ne&#382; 5 znak&#367;)',
 'info_plus_trois_car' => '(v&iacute;ce ne&#382; 3 znaky)',

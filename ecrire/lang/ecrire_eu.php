@@ -492,7 +492,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_pas_de_forum' => 'fororik ez',
 'info_passe_trop_court' => 'Pasahitz laburregia.',
 'info_passes_identiques' => 'Pasahitzak ezberdinak dira',
-'info_pense_bete_ancien' => 'Zure ohartarapen zaharrak',
+'info_pense_bete_ancien' => 'Zure ohartarapen zaharrak', # MODIF
 'info_plus_cinq_car' => '5 karaktere baino gehiago',
 'info_plus_cinq_car_2' => '(5 karaktere baino gehiago)',
 'info_plus_trois_car' => '(3karaktere baino gehiago)',

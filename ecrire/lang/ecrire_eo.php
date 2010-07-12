@@ -508,7 +508,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_pas_de_forum' => 'neniu forumo',
 'info_passe_trop_court' => 'Pasvorto tro mallonga.',
 'info_passes_identiques' => 'Amba&#365; pasvortoj ne samas.',
-'info_pense_bete_ancien' => 'Viaj malnovaj memorigiloj',
+'info_pense_bete_ancien' => 'Viaj malnovaj memorigiloj', # MODIF
 'info_plus_cinq_car' => 'pli ol 5 signoj',
 'info_plus_cinq_car_2' => '(Pli ol 5 signoj)',
 'info_plus_trois_car' => '(Pli ol 3 signoj)',

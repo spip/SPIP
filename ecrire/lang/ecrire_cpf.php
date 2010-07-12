@@ -543,7 +543,7 @@ sanm inn lim&egrave;l. Indik t&egrave;rla si ou v&eacute; anserv lopsyon-la&nbsp
 'info_pas_de_forum' => 'n&eacute;na pwinn forom',
 'info_passe_trop_court' => 'Out modpas l&eacute; tro takini.',
 'info_passes_identiques' => 'Bann d&eacute; modpass-la l&eacute; pa par&egrave;y.',
-'info_pense_bete_ancien' => 'Out bann vy&eacute; gardant&egrave;t',
+'info_pense_bete_ancien' => 'Out bann vy&eacute; gardant&egrave;t', # MODIF
 'info_plus_cinq_car' => 'pli d&eacute; 5 karakt&egrave;r-limprimri',
 'info_plus_cinq_car_2' => '(Pli d&eacute; 5 karakt&egrave;r-limprimri)',
 'info_plus_trois_car' => '(Pli d&eacute; 3 karakt&egrave;r-limprimri)',

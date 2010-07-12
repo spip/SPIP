@@ -526,7 +526,7 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_pas_de_forum' => 'n&atilde;o h&aacute; f&oacute;rum',
 'info_passe_trop_court' => 'Palavra-passe demasiado curta',
 'info_passes_identiques' => 'As duas palavras-passe n&atilde;o s&atilde;o id&ecirc;nticas.',
-'info_pense_bete_ancien' => 'Os seus antigos memorandos',
+'info_pense_bete_ancien' => 'Os seus antigos memorandos', # MODIF
 'info_plus_cinq_car' => 'mais de 5 car&aacute;cteres',
 'info_plus_cinq_car_2' => '(Mais de 5 car&aacute;cteres)',
 'info_plus_trois_car' => '(Mais de 3 car&aacute;cteres)',

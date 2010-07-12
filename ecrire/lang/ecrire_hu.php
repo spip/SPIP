@@ -507,7 +507,7 @@ a t&ouml;r&ouml;lt szerz&#337;k pedig kuk&aacute;val vannak jel&ouml;lve.',
 'info_pas_de_forum' => 'Nincs f&oacute;rum',
 'info_passe_trop_court' => 'A jelsz&oacute; t&uacute;l r&ouml;vid.',
 'info_passes_identiques' => 'A k&eacute;t jelsz&oacute; nem egyforma.',
-'info_pense_bete_ancien' => 'Az &Ouml;n r&eacute;gebbi eml&eacute;keztet?i',
+'info_pense_bete_ancien' => 'Az &Ouml;n r&eacute;gebbi eml&eacute;keztet?i', # MODIF
 'info_plus_cinq_car' => 't&ouml;bb, mint 5 karakter',
 'info_plus_cinq_car_2' => '(t&ouml;bb, mint 5 karakter)',
 'info_plus_trois_car' => '(t&ouml;bb, mint 3 karakter)',

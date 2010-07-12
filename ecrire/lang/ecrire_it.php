@@ -399,7 +399,7 @@ tutti i redattori registrati. &Egrave; anche possibile attivare un
 secondo forum riservato ai soli amministratori.',
 'info_forum_statistiques' => 'Statistiche delle visite',
 'info_forums_abo_invites' => 'Il sito comprende dei forum accessibili solo a utenti registrati. Nel sito pubblico &egrave; quindi presente una pagina d\'iscrizione.',
-'info_gauche_admin_effacer' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>', # MODIF
+'info_gauche_admin_effacer' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>',
 'info_gauche_admin_tech' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>', # MODIF
 'info_gauche_admin_vider' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.</p>', # MODIF
 'info_gauche_auteurs' => 'Elenco di tutti gli autori del sito.
@@ -519,7 +519,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 'info_pas_de_forum' => 'nessun forum',
 'info_passe_trop_court' => 'Password troppo corta.',
 'info_passes_identiques' => 'Le due password non sono uguali.',
-'info_pense_bete_ancien' => 'I vecchi memo',
+'info_pense_bete_ancien' => 'I vecchi memo', # MODIF
 'info_plus_cinq_car' => 'pi&ugrave; di 5 caratteri',
 'info_plus_cinq_car_2' => '(Pi&ugrave; di 5 caratteri)',
 'info_plus_trois_car' => '(Pi&ugrave; di 3 caratteri)',
@@ -870,7 +870,7 @@ Le traduzioni sono associate all\'originale,
 'plugin_etat_test' => 'in prova',
 'plugin_impossible_activer' => 'Impossibile attivare il plug-in @plugin@',
 'plugin_info_automatique1' => 'Se si desidera autorizzare l\'installazione automatica dei plug-in &egrave; necessario: ',
-'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
+'plugin_info_automatique1_lib' => 'If you wish to authorise the automatic installation of this library, please:', # NEW
 'plugin_info_automatique2' => 'creare una cartella <code>@rep@</code>;',
 'plugin_info_automatique3' => 'verificare che il server sia autorizzato a scrivere in questa cartella.',
 'plugin_info_automatique_creer' => 'da creare alla radice del sito.',
@@ -882,8 +882,8 @@ Le traduzioni sono associate all\'originale,
 'plugin_info_automatique_liste_update' => 'Aggiornare gli elenchi',
 'plugin_info_automatique_ou' => 'oppure...',
 'plugin_info_automatique_select' => 'Selezionata un plug-in qui sotto: SPIP lo scaricher&agrave; e lo installer&agrave; nella cartella <code>@rep@</code>; se questo plug-in &egrave; gi&agrave; presente verr&agrave; aggiornato.',
-'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
-'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
+'plugin_info_extension_1' => 'The extensions below are loaded and active in the @extensions@ directory.', # NEW
+'plugin_info_extension_2' => 'They cannot be uninstalled.', # NEW
 'plugin_info_telecharger' => 'da scaricare da @url@ e da installare in @rep@',
 'plugin_librairies_installees' => 'Librerie installate',
 'plugin_necessite_lib' => 'Questo plug-in richiede la libreria @lib@',
@@ -892,7 +892,7 @@ Le traduzioni sono associate all\'originale,
 'plugin_source' => 'origine:&nbsp;',
 'plugin_titre_automatique' => 'Installazione automatica',
 'plugin_titre_automatique_ajouter' => 'Aggiungere dei plug-in',
-'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_titre_installation' => 'Installation of the @plugin@ plugin', # NEW
 'plugin_zip_active' => 'Continuare per attivarlo',
 'plugin_zip_adresse' => 'indicate qui sotto l\'indirizzo di un file zip del plug-in da scaricare, oppure l\'indirizzo di un elenco di plug-in.',
 'plugin_zip_adresse_champ' => 'Indirizzo del plug-in o dell\'elenco&nbsp;',
@@ -901,17 +901,17 @@ Le traduzioni sono associate all\'originale,
 'plugin_zip_installe_rep_finie' => 'Il file @zip@ &egrave; stato decompresso e installato nella cartella @rep@',
 'plugin_zip_installer' => 'Ora &egrave; possibile installarlo.',
 'plugin_zip_telecharge' => 'Il file @zip@ &egrave; stato scaricato',
-'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
-'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
+'plugins_actif_aucun' => 'No plugin is active.', # NEW
+'plugins_actif_un' => 'One plugin active', # NEW
 'plugins_actifs' => '@count@ plug-in attivati.',
-'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_actifs_liste' => 'Active plugins', # NEW
 'plugins_compte' => '@count@ plug-in',
-'plugins_disponible_un' => 'Un plugin disponible.', # NEW
+'plugins_disponible_un' => 'One plugin available', # NEW
 'plugins_disponibles' => '@count@ plug-in disponibili.',
 'plugins_erreur' => 'Errore nei plug-in: @plugins@',
 'plugins_liste' => 'Elenco dei plugin',
 'plugins_liste_extensions' => 'Extensions', # NEW
-'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
+'plugins_recents' => 'Recent plugins', # NEW
 'plugins_vue_hierarchie' => 'Struttura gerarchica',
 'plugins_vue_liste' => 'Elenco',
 'protocole_ldap' => 'Versione del protocollo:',

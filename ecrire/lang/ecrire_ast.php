@@ -528,7 +528,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>', # MODIF
 'info_pas_de_forum' => 'ensin foru',
 'info_passe_trop_court' => 'La contrase&ntilde;a ye mui curtia.',
 'info_passes_identiques' => 'Les dos contrase&ntilde;es nun concasen.',
-'info_pense_bete_ancien' => 'Recordatorios antiguos',
+'info_pense_bete_ancien' => 'Recordatorios antiguos', # MODIF
 'info_plus_cinq_car' => 'm&aacute;s de 5 carauteres',
 'info_plus_cinq_car_2' => '(M&aacute;s de 5 carauteres)',
 'info_plus_trois_car' => '(M&aacute;s de 3 carauteres)',

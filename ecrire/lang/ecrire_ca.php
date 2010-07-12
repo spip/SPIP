@@ -503,7 +503,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_pas_de_forum' => 'sense f&ograve;rum',
 'info_passe_trop_court' => 'Contrasenya massa curta.',
 'info_passes_identiques' => 'Les dues contrasenyes no s&oacute;n id&egrave;ntiques.',
-'info_pense_bete_ancien' => 'Els vostres antics recordatoris',
+'info_pense_bete_ancien' => 'Els vostres antics recordatoris', # MODIF
 'info_plus_cinq_car' => 'm&eacute;s de 5 car&agrave;cters',
 'info_plus_cinq_car_2' => '(M&eacute;s de 5 car&agrave;cters)',
 'info_plus_trois_car' => '(M&eacute;s de 3 car&agrave;cters)',

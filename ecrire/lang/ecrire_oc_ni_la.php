@@ -506,7 +506,7 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'info_pas_de_forum' => 'Minga de forum',
 'info_passe_trop_court' => 'Mot de santa Clara tr&ograve;p cort.',
 'info_passes_identiques' => 'Lu doi mots de santa Clara non son identics.',
-'info_pense_bete_ancien' => 'Lu v&ograve;stres mementos ancians',
+'info_pense_bete_ancien' => 'Lu v&ograve;stres mementos ancians', # MODIF
 'info_plus_cinq_car' => 'mai de 5 caract&egrave;rs',
 'info_plus_cinq_car_2' => '(mai de 5 caract&egrave;rs)',
 'info_plus_trois_car' => '(mai de 3 caract&egrave;rs)',
