@@ -569,7 +569,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_visites' => 'visitas :',
 'info_vos_rendez_vous' => 'Os seus futuros encontros',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Os seus memorandos',
+'infos_vos_pense_bete' => 'Os seus memorandos', # MODIF
 'item_breve_proposee' => 'Not&iacute;cia proposta',
 
 // L

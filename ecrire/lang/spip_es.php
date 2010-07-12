@@ -570,7 +570,7 @@ se puede activar o desactivar .',
 'info_visites' => 'visitas:',
 'info_vos_rendez_vous' => 'Tus citas',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Tus  recordatorios',
+'infos_vos_pense_bete' => 'Tus  recordatorios', # MODIF
 'item_breve_proposee' => 'Breve propuesta',
 
 // L

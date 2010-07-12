@@ -566,7 +566,7 @@ M&egrave;si  w soutni petisyon-nan
 'info_visites' => 'vizit yo :',
 'info_vos_rendez_vous' => 'W ke rannkont',
 'info_zoom' => 'gwoplan',
-'infos_vos_pense_bete' => 'Mesaj yo pou w raple-w',
+'infos_vos_pense_bete' => 'Mesaj yo pou w raple-w', # MODIF
 'item_breve_proposee' => 'Tinouv&egrave;l pwopoze pou par&egrave;t ',
 
 // L

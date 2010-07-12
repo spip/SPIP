@@ -568,7 +568,7 @@ Merc&eacute; per v&ograve;stra participacion
 'info_visites' => 'vesitas:',
 'info_vos_rendez_vous' => 'V&ograve;stres rend&egrave;tz-vos venents',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'V&ograve;stres mementos',
+'infos_vos_pense_bete' => 'V&ograve;stres mementos', # MODIF
 'item_breve_proposee' => 'Br&egrave;va prepausaa',
 
 // L

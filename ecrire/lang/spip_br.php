@@ -565,7 +565,7 @@ Trugarez da gemer perzh
 'info_visites' => 'gweladenn :',
 'info_vos_rendez_vous' => 'Hoc\'h emgavio&ugrave; da zont',
 'info_zoom' => 'zoum',
-'infos_vos_pense_bete' => 'Ho notennigo&ugrave;-e&ntilde;vor',
+'infos_vos_pense_bete' => 'Ho notennigo&ugrave;-e&ntilde;vor', # MODIF
 'item_breve_proposee' => 'Berrskrid bet kinniget',
 
 // L

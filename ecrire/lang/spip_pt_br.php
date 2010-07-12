@@ -560,7 +560,7 @@ Obrigado por participar
 'info_visites' => 'visitas:',
 'info_vos_rendez_vous' => 'Seus encontros futuros',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Seus lembretes',
+'infos_vos_pense_bete' => 'Seus lembretes', # MODIF
 'item_breve_proposee' => 'Nota proposta',
 
 // L

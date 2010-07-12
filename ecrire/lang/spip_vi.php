@@ -559,7 +559,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.', # MODIF
 'info_visites' => ' th&#259;m vi&#7871;ng:',
 'info_vos_rendez_vous' => 'Nh&#7919;ng l&#7847;n h&#7865;n s&#7855;p t&#7899;i',
 'info_zoom' => 'ph&oacute;ng l&#7899;n',
-'infos_vos_pense_bete' => 'B&#7843;n ghi nh&#7899; c&#7911;a b&#7841;n',
+'infos_vos_pense_bete' => 'B&#7843;n ghi nh&#7899; c&#7911;a b&#7841;n', # MODIF
 'item_breve_proposee' => 'N&#7897;p v&agrave;o',
 
 // L

@@ -570,7 +570,7 @@ Dankon pro via partopreno
 'info_visites' => 'vizitoj :',
 'info_vos_rendez_vous' => 'Viaj estontaj rendevuoj',
 'info_zoom' => 'zomo',
-'infos_vos_pense_bete' => 'Viaj memorigiloj',
+'infos_vos_pense_bete' => 'Viaj memorigiloj', # MODIF
 'item_breve_proposee' => 'Proponita fulm-informo',
 
 // L

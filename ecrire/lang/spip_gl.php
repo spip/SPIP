@@ -570,7 +570,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_visites' => 'visitas:',
 'info_vos_rendez_vous' => 'As t&uacute;as citas pendentes',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'As t&uacute;as notas',
+'infos_vos_pense_bete' => 'As t&uacute;as notas', # MODIF
 'item_breve_proposee' => 'Breve proposta',
 
 // L

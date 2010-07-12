@@ -571,7 +571,7 @@ Terima kasih atas partisipasi anda!
 'info_visites' => 'kunjungan:',
 'info_vos_rendez_vous' => 'Janji-janji anda yang akan datang',
 'info_zoom' => 'perbesar',
-'infos_vos_pense_bete' => 'Memo anda',
+'infos_vos_pense_bete' => 'Memo anda', # MODIF
 'item_breve_proposee' => 'Artikel berita dikirim',
 
 // L

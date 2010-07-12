@@ -563,7 +563,7 @@ oder kontakt&eacute;iert &auml;re Provider.</span>',
 'info_visites' => 'Visiten:',
 'info_vos_rendez_vous' => '&Auml;r Rendez-vous\'en',
 'info_zoom' => 'Zoom',
-'infos_vos_pense_bete' => '&Auml;r Notizen',
+'infos_vos_pense_bete' => '&Auml;r Notizen', # MODIF
 'item_breve_proposee' => 'Propos&eacute;iert Kuerzmeldung',
 
 // L

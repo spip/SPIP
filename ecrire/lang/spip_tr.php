@@ -568,7 +568,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_visites' => 'Ziyaret :',
 'info_vos_rendez_vous' => '&#304;lerideki randevular&#305;n&#305;z',
 'info_zoom' => 'yak&#305;nla&#351;t&#305;r',
-'infos_vos_pense_bete' => 'Hat&#305;rlatmalar&#305;n&#305;z',
+'infos_vos_pense_bete' => 'Hat&#305;rlatmalar&#305;n&#305;z', # MODIF
 'item_breve_proposee' => '&Ouml;nerilen k&#305;sa haber',
 
 // L
