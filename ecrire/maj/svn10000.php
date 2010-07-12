@@ -239,4 +239,7 @@ $GLOBALS['maj'][14559] = $GLOBALS['maj'][13904]+$GLOBALS['maj'][13929]+$GLOBALS[
 // + Types de fichiers : f4a/f4b/f4p/f4v/mpc http://en.wikipedia.org/wiki/Flv#File_formats
 $GLOBALS['maj'][15676] = array(array('upgrade_types_documents'));
 
+// Type de fichiers : webm http://en.wikipedia.org/wiki/Flv#File_formats
+$GLOBALS['maj'][15827] = array(array('upgrade_types_documents'));
+
 ?>
