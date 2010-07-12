@@ -576,7 +576,7 @@ function actualise_plugins_actifs($pipe_recherche = false){
 	$actifs_avant = $GLOBALS['meta']['plugin'];
 	ecrire_plugin_actifs($plugin_new,$pipe_recherche);
 	// retourner -1 si la liste des plugins actifs a change
-	return strcmp($GLOBALS['meta']['plugin'],$actifs_avant)==0 ? 1 : -1;
+	return (strcmp($GLOBALS['meta']['plugin'],$actifs_avant)==0) ? 1 : -1;
 }
 
 // http://doc.spip.org/@spip_plugin_install
