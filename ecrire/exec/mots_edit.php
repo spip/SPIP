@@ -110,7 +110,7 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 			// Logos du mot-clef
 			$flag_editable = autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe));
 			$iconifier = charger_fonction('iconifier', 'inc');
-			$out .= $iconifier('id_mot', $id_mot, 'mots_edit', $flag_editable);
+			$out .= $iconifier('id_mot', $id_mot, 'mots_edit', false, $flag_editable);
 		} else $flag_editable = false;
 
 		//
