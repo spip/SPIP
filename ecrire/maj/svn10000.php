@@ -257,4 +257,7 @@ if (@$GLOBALS['meta']['version_installee'] >= 14588) {
 // + Report du commit oublié : http://trac.rezo.net/trac/spip/changeset/14272
 $GLOBALS['maj'][15676] = array(array('upgrade_types_documents'));
 
+// Type de fichiers : webm http://en.wikipedia.org/wiki/Flv#File_formats
+$GLOBALS['maj'][15827] = array(array('upgrade_types_documents'));
+
 ?>
