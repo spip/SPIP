@@ -159,14 +159,18 @@ function exec_mots_tous_dist()
 }
 
 // http://doc.spip.org/@confirmer_mot
-function confirmer_mot ($conf_mot, $son_groupe, $total)
+function confirmer_mot ($id_mot, $row_groupe, $total)
 {
-	$row = sql_fetsel("*", "spip_mots", "id_mot=$conf_mot");
+	$row = sql_fetsel("titre", "spip_mots", "id_mot=$id_mot");
 	if (!$row) return ""; // deja detruit (acces concurrent etc)
 
-	$id_mot = $row['id_mot'];
+	if (!autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $row_groupe['id_groupe'])))
+		return ''; // usurpateur
+
+	include_spip('inc/grouper_mots');
 	$titre_mot = typo($row['titre']);
-	$type_mot = typo($row['type']);
+	$type_mot = typo($row_groupe['titre']);
+	$son_groupe = $row_groupe['id_groupe'];
 
 	if (($na = intval(_request('na'))) == 1) {
 		$texte_lie = _T('info_un_article')." ";
