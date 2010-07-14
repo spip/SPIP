@@ -86,7 +86,7 @@ function urls_propres_creer_chaine_url($x) {
 
 	include_spip('action/editer_url');
 	if (!$url = url_nettoyer($objet['titre'],_URLS_PROPRES_MAX,_URLS_PROPRES_MIN,'-',_url_minuscules?'strtolower':''))
-		$url = $objet['type'].','.$objet['id_objet'];
+		$url = $objet['type'].$objet['id_objet'];
 
 	$x['data'] = $url;
 
@@ -249,10 +249,11 @@ function urls_propres_dist($i, $entite, $args='', $ancre='') {
 	if ($GLOBALS['profondeur_url']<=0
 	AND $_SERVER['REQUEST_METHOD'] != 'POST') {
 		include_spip('inc/urls');
-		$r = nettoyer_url_page($i, array());
+		$r = nettoyer_url_page($i, $contexte);
 		if ($r) {
 			list($contexte, $type,,, $suite) = $r;
-			list($_id,$id_objet) = each($contexte);
+			$_id = id_table_objet($type);
+			$id_objet = $contexte[$_id];
 			$url_propre = generer_url_entite($id_objet, $type);
 			if (strlen($url_propre)
 			AND !strstr($url,$url_propre)) {
