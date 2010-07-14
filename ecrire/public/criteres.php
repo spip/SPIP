@@ -503,9 +503,12 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 		}
 
 		$n = count($boucle->order);
-		if (!$n)
-			$boucle->default_order[] =  ' DESC';
-		else {
+		if (!$n) {
+			if (isset($boucle->default_order[0]))
+				$boucle->default_order[0] .=  ' . " DESC"';
+			else
+				$boucle->default_order[] =  ' DESC';
+		} else {
 			$t = $boucle->order[$n-1] . " . $order";
 			if (preg_match("/^(.*)'\s*\.\s*'([^']*')$/", $t, $r))
 				$t = $r[1] . $r[2];
