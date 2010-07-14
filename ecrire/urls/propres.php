@@ -47,6 +47,10 @@ define ('_debut_urls_propres', '');
 // option pour tout passer en minuscules
 define ('_url_minuscules',0);
 
+// pour choisir le caractere de separation titre-id en cas de doublon
+// (ne pas utiliser '/')
+define ('_url_propres_sep_id',',');
+
 // Ces chaines servaient de marqueurs a l'epoque ou les URL propres devaient
 // indiquer la table ou les chercher (articles, auteurs etc),
 // et elles etaient retirees par les preg_match dans la fonction ci-dessous.
@@ -140,7 +144,7 @@ function declarer_url_propre($type, $id_objet) {
 	$objets = urls_liste_objets();
 	if (preg_match(',^('.$objets.')[0-9]+$,', $url, $r)
 	AND $r[1] != $type)
-		$url = $url.','.$id_objet;
+		$url = $url._url_propres_sep_id.$id_objet;
 
 	// Pas de changement d'url
 	if ($url == $url_propre)
@@ -167,7 +171,7 @@ function declarer_url_propre($type, $id_objet) {
 
 	$set = array('url' => $url, 'type' => $type, 'id_objet' => $id_objet);
 	include_spip('action/editer_url');
-	if (!url_insert($set,$confirmer,","))
+	if (!url_insert($set,$confirmer,_url_propres_sep_id))
 		return $url_propre; //serveur out ? retourner au mieux
 
 	return $set['url'];
