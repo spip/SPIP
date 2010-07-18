@@ -85,6 +85,12 @@ function balise_LOGO__dist ($p) {
 	} else {
 		$code = logo_survol($id_objet, $_id_objet, $type, $align, $fichier, $lien, $p, $suite_logo);
 	}
+
+	// demande de reduction sur logo avec ecriture spip 2.1 : #LOGO_xxx{200, 0}
+	if ($coord_x OR $coord_y) {
+		$code = "filtrer('image_graver',filtrer('image_reduire',".$code.", '$coord_x', '$coord_y'))";
+	}
+
 	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
