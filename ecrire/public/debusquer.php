@@ -91,8 +91,8 @@ function public_debusquer_dist($message='', $lieu='') {
 	if (ob_get_length()
 	    AND
 	    !in_array('ob_gzhandler', ob_get_status())) {
-      ob_end_clean();
-    }
+		ob_end_clean();
+	}
 
 	lang_select($visiteur_session['lang']);
 	$fonc = _request('var_mode_objet');
@@ -414,8 +414,10 @@ function debusquer_squelette ($fonc, $mode, $self) {
 			  $texte = $debug_objets[$mode][$fonc . 'tout'];
 			  $texte = ancre_texte($texte, array('',''));
 			}
-		} else 
-			return strlen(trim($res))?"<div id='spip-debug'>$res</div>":"";
+		} else return strlen(trim($res))
+				? "<div id='spip-debug'>$res</div>"
+			 // cas de l'appel sur erreur: montre la page
+				: $GLOBALS['debug_objets']['resultat']['tout'];
 	} else {
 		$valider = charger_fonction('valider', 'xml');
 		$val = $valider($debug_objets['validation'][$fonc . 'tout']);
