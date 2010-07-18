@@ -38,11 +38,11 @@ function formulaires_remplir_traiter_dist($form)
 	else {
 		$infos = formulaires_remplir_infos($form);
 		if (!is_array($infos)) return $infos; // fait ci-dessus en fait
-		$vars = formulaires_remplir_recense($infos['path']);
+		$vars = formulaires_remplir_recense($infos['path'], PREG_PATTERN_ORDER);
 		$meta = $infos['meta'];
-		foreach ($vars as $regs) {
-			$k = $regs[2];
-			ecrire_meta($k, _request($k), 'oui', $meta);
+		foreach (array_unique($vars[2]) as $k) {
+			$v = _request($k);
+			ecrire_meta($k, is_array($v) ? serialise($v) : $v, 'oui', $meta);
 		}
 		return !isset($infos['prefix']) ? array()
 		: array('redirect' => generer_url_ecrire($infos['prefix']));
@@ -55,11 +55,13 @@ define('_EXTRAIRE_SAISIES',
 
 // determiner la liste des noms des saisies d'un formulaire
 // (a refaire avec SAX)
-function formulaires_remplir_recense($form)
+function formulaires_remplir_recense($form, $opt='')
 {
+	if (!$opt) $opt = PREG_SET_ORDER;
 	$f = file_get_contents($form);
-	if (preg_match_all(_EXTRAIRE_SAISIES, $f, $r, PREG_SET_ORDER))
+	if ($f AND preg_match_all(_EXTRAIRE_SAISIES, $f, $r, $opt))
 		return $r;
+	else return array();
 }
 
 define('_EXTRAIRE_PLUGIN', '@(?:' . _DIR_PLUGINS . '|' . _DIR_EXTENSIONS .')/?([^/]+)/@');
