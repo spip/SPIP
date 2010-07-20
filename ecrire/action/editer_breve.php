@@ -186,6 +186,13 @@ function revisions_breves ($id_breve, $c=false) {
 	include_spip('inc/rubriques');
 	calculer_rubriques_if($id_rubrique, $champs, $statut_ancien);
 
+	// Notifications
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications('instituerbreve', $id_breve,
+			array('statut' => $statut, 'statut_ancien' => $statut_ancien)
+		);
+	}
+
 }
 
 // http://doc.spip.org/@revisions_breves_langue
