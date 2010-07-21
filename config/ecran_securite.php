@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '0.9.2'); // 20 dec 2009
+define('_ECRAN_SECURITE', '0.9.3'); // 21 juil 2010
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -115,6 +115,12 @@ if (_IS_BOT AND (
 if (isset($_REQUEST['page']) AND $_REQUEST['page']=='test_cfg')
 	$ecran_securite_raison = "test_cfg";
 
+/*
+ * XSS par array
+ */
+foreach (array('var_login') as $ecran_securite_i)
+if (isset($_REQUEST[ $ecran_securite_i]) AND is_array($_REQUEST[$ecran_securite_i]))
+	$ecran_securite_raison = "xss ".$ecran_securite_i;
 
 /* Parade antivirale contre un cheval de troie */
 if(!function_exists('tmp_lkojfghx')){
