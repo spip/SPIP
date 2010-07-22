@@ -209,7 +209,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	// (c'est ici qu'on fait var_recherche, validation, boutons d'admin,
 	// cf. public/assembler.php)
-	$res = pipeline('affichage_final', $page['texte']);
+	echo pipeline('affichage_final', $page['texte']);
 	// l'affichage de la page a pu lever des erreurs (inclusion manquante)
 	// il faut tester a nouveau
 	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
@@ -223,13 +223,10 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 				set_request('var_mode_affiche', 'resultat');
 			$var_mode_affiche = _request('var_mode_affiche');
 			$var_mode_objet = _request('var_mode_objet');
-			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = #($var_mode_affiche== 'validation' ? 
-$page['texte'] #:"")
-;
+			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
 			echo erreur_squelette(false);
 		}
 	} else {
-		echo $res;
 		if (isset($GLOBALS['meta']['date_prochain_postdate'])
 		AND $GLOBALS['meta']['date_prochain_postdate'] <= time()) {
 			include_spip('inc/rubriques');
