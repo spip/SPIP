@@ -23,7 +23,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 {
 	$erreur = _request('var_erreur');
 
-	if (!$login) $login = _request('var_login');
+	if (!$login) $login = strval(_request('var_login'));
 	// si on est deja identifie
 	if (!$login AND isset($GLOBALS['visiteur_session']['login'])) {
 		$login = $GLOBALS['visiteur_session']['login'];

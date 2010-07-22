@@ -18,17 +18,18 @@ function informer_auteur($bof)
 	include_spip('inc/json');
 	include_spip('formulaires/login');
 	include_spip('inc/auth');
-	$row = auth_informer_login(_request('var_login'));
+	$login = strval(_request('var_login'));
+	$row = auth_informer_login($login);
 	if ($row AND is_array($row))
 		unset($row['id_auteur']);
 	else {
 		// piocher les infos sur un autre login
 		$n = sql_countsel('spip_auteurs',"login<>''");
-		$n = (abs(crc32(strval(_request('var_login'))))%$n);
+		$n = (abs(crc32($login))%$n);
 		$row = auth_informer_login(sql_getfetsel('login','spip_auteurs',"login<>''",'','',"$n,1"));
 		if ($row AND is_array($row)){
 			unset($row['id_auteur']);
-			$row['login'] = _request('var_login');
+			$row['login'] = $login;
 		}
 	}
 
