@@ -159,7 +159,7 @@ function appliquer_quota_cache() {
 				array(
 					'atime' => time() - _AGE_CACHE_ATIME,
 					'limit' => $trop,
-					'subdir' => true // supprimer les sous repertoire de session aussi
+					'subdir' => true // supprimer les vieux sous repertoire de session (avant [15851])
 				)
 			);
 			spip_log("$dir : $n/$trop caches supprimes [taille moyenne $taille]","invalideur");
