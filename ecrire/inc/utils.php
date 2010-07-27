@@ -860,12 +860,13 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	if ($public === NULL) $public = !test_espace_prive();
 
 	if (!$public) {
-		$res = "";
+		if (!$entite) return '';
 		include_spip('inc/urls');
 		if (function_exists($f = 'generer_url_ecrire_' . $entite)
 			// ou definie par un plugin
 		  OR $f = charger_fonction($f,'urls',true))
 			$res = $f($id, $args, $ancre, ' ');
+		else $res = "";
 	} else {
 		if (is_string($public)) {
 			include_spip('base/connect_sql');
@@ -907,7 +908,7 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 		return $url;
 	}
 	// On a ete gentil mais la ....
-	spip_log("generer_url_entite: entite $entite ($f) inconnue $type");
+	spip_log("generer_url_entite: entite $entite ($f) inconnue $type $public");
 	return '';
 }
 
