@@ -20,7 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // on ne peut rien dire sur l'existence du squelette lors de la compil
 // On pourrait toutefois traiter le cas de l'argument qui est une constante.
 
-function balise_REMPLIR_dist($p) {
+function balise_CONFIGURER_METAS_dist($p) {
 
 	return calculer_balise_dynamique($p, $p->nom_champ, array());
 }
@@ -28,13 +28,13 @@ function balise_REMPLIR_dist($p) {
 // A l'execution on dispose du nom du squelette, on verifie qu'il existe.
 // Pour le calcul du contexte, c'est comme la balise #FORMULAIRE_.
 
-function balise_REMPLIR_dyn($form) {
+function balise_CONFIGURER_METAS_dyn($form) {
 
 	include_spip("balise/formulaire_");
 	if (!existe_formulaire($form)) return '';
 	return array('formulaires/' . $form,
 		     3600, 
-		     balise_FORMULAIRE__contexte("remplir", func_get_args()));
+		     balise_FORMULAIRE__contexte("configurer_metas", func_get_args()));
 }
 
 ?>
