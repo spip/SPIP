@@ -250,10 +250,10 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	if (isset($page['invalideurs'])
 	AND isset($page['invalideurs']['session'])) {
 		$chemin_cache_session = $chemin_cache . '_' . spip_session();
-		$d = $page['lastmodified'];
-		if (lire_fichier(_DIR_CACHE . $chemin_cache_session, $page)
-		AND @filemtime(_DIR_CACHE . $chemin_cache_session) >= $d)
-			$page = @unserialize($page);
+		if (lire_fichier(_DIR_CACHE . $chemin_cache_session, $page_session)
+		AND $page_session = @unserialize($page_session)
+		AND $page_session['lastmodified'] >= $page['lastmodified'])
+			$page = $page_session;
 		else
 			$page = array();
 	}
