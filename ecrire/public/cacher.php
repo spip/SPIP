@@ -132,23 +132,6 @@ function cache_valide(&$page, $date) {
 		return 0;
 }
 
-function cache_sessionne($chemin_cache, $session, $creer=false) {
-	$fs = substr(md5($chemin_cache),0,8);
-	$a = substr($fs,0,1);
-	$b = sous_repertoire(_DIR_CACHE, $a);
-	// si la session n'est pas anonyme, creer un sous dossier
-	// car spip est susceptible de generer auant de caches que de visiteur identifie
-	if ($session){
-		if ($creer)
-			sous_repertoire($b, $fs);
-		return $a.'/'.$fs.'/_'.$session;
-	}
-	// sinon un simple fichier suffixe par _anonyme
-	else {
-		return $a.'/'.$fs.'_anonyme';
-	}
-}
-
 // Creer le fichier cache
 # Passage par reference de $page par souci d'economie
 // http://doc.spip.org/@creer_cache
@@ -163,14 +146,22 @@ function creer_cache(&$page, &$chemin_cache) {
 		return;
 
 	// Si la page c1234 a un invalideur de session 'zz', sauver dans
-	// 'tmp/cache/MD5(chemin_cache)/_zz'
-	// en prenant soin de supprimer un eventuel cache non-sessionne
-	// si l'ajout de #SESSION dans le squelette est recent
+	// 'tmp/cache/MD5(chemin_cache)_zz'
 	if (isset($page['invalideurs'])
 	AND isset($page['invalideurs']['session'])) {
-		supprimer_fichier(_DIR_CACHE . $chemin_cache);
-		$chemin_cache = cache_sessionne($chemin_cache,$page['invalideurs']['session'], true);
-		
+		// on verifie que le contenu du chemin cache indique seulement
+		// "cache sessionne" ; sa date indique la date de validite
+		// des caches sessionnes
+		if (!lire_fichier(_DIR_CACHE . $chemin_cache, $tmp)
+		OR !$tmp = @unserialize($tmp)) {
+			spip_log('Creation cache sessionne '.$chemin_cache);
+			$tmp = array(
+				'invalideurs' => array('session' => ''),
+				'lastmodified' => time()
+			);
+			ecrire_fichier(_DIR_CACHE . $chemin_cache, serialize($tmp));
+		}
+		$chemin_cache .= '_'.$page['invalideurs']['session'];
 	}
 
 	// ajouter la date de production dans le cache lui meme
@@ -228,7 +219,6 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	if (isset($chemin_cache)) return creer_cache($page, $chemin_cache);
 
 	// Toute la suite correspond au premier appel
-
 	$contexte_implicite = $page['contexte_implicite'];
 
 	// Cas ignorant le cache car completement dynamique
@@ -246,12 +236,27 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		return;
 	}
 
-	// Controler l'existence d'un cache nous correspondant, dans les
-	// deux versions possibles : session ou non
+	// Controler l'existence d'un cache nous correspondant
 	$chemin_cache = generer_nom_fichier_cache($contexte, $page);
 	$lastmodified = 0;
-	if (!lire_fichier(_DIR_CACHE . ($f = $chemin_cache), $page))
-		$fs = lire_fichier(_DIR_CACHE . ($f = cache_sessionne($f, spip_session())), $page);
+
+	// charger le cache s'il existe
+	if (lire_fichier(_DIR_CACHE . $chemin_cache, $page))
+		$page = @unserialize($page);
+	else
+		$page = array();
+
+	// s'il est sessionne, charger celui correspondant a notre session
+	if (isset($page['invalideurs'])
+	AND isset($page['invalideurs']['session'])) {
+		$chemin_cache_session = $chemin_cache . '_' . spip_session();
+		$d = $page['lastmodified'];
+		if (lire_fichier(_DIR_CACHE . $chemin_cache_session, $page)
+		AND @filemtime(_DIR_CACHE . $chemin_cache_session) >= $d)
+			$page = @unserialize($page);
+		else
+			$page = array();
+	}
 
 	// HEAD : cas sans jamais de calcul pour raisons de performance
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
@@ -265,24 +270,26 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		// ne le faire que si la base est disponible
 		if (spip_connect()) {
 			include_spip('inc/invalideur');
-			retire_caches($f);
+			retire_caches($chemin_cache); # API invalideur inutile
+			supprimer_fichier(_DIR_CACHE.$chemin_cache);
+			if ($chemin_cache_session)
+				supprimer_fichier(_DIR_CACHE.$chemin_cache_session);
 		}
 	}
 
 	// Si un calcul, recalcul [ou preview, mais c'est recalcul] est demande,
-	// on supprime le cache, et ses voisins dans le cas des sessions
+	// on supprime le cache
 	if ($GLOBALS['var_mode'] &&
 		(isset($_COOKIE['spip_session'])
 		|| isset($_COOKIE['spip_admin'])
 		|| @file_exists(_ACCESS_FILE_NAME))
 	) {
 		$page = array('contexte_implicite'=>$contexte_implicite); // ignorer le cache deja lu
-		supprimer_fichier(_DIR_CACHE . $f); // pas necessaire ?
-		if (in_array($GLOBALS['var_mode'], array('calcul', 'recalcul'))
-		AND $fs) {
-			include_spip('inc/invalideur');
-			purger_repertoire(dirname(_DIR_CACHE.$f));
-		}
+		include_spip('inc/invalideur');
+		retire_caches($chemin_cache); # API invalideur inutile
+		supprimer_fichier(_DIR_CACHE.$chemin_cache);
+		if ($chemin_cache_session)
+			supprimer_fichier(_DIR_CACHE.$chemin_cache_session);
 	}
 
 	// $delais par defaut (pour toutes les pages sans #CACHE{})
@@ -291,9 +298,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		$GLOBALS['delais'] = _DUREE_CACHE_DEFAUT;
 	}
 
-	// decoder le cache et determiner sa validite
-	if ($page AND
-		$page = @unserialize($page)) {
+	// determiner la validite de la page
+	if ($page) {
 		$use_cache = cache_valide($page, $page['lastmodified']);
 		// le contexte implicite n'est pas stocke dans le cache, mais il y a equivalence
 		// par le nom du cache. On le reinjecte donc ici pour utilisation eventuelle au calcul
