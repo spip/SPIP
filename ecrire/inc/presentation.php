@@ -962,7 +962,7 @@ function info_maj_spip(){
 	array_shift($maj);
 	$maj = implode('|',$maj);
 
-	return "<br />$maj</br>";
+	return "$maj<br />";
 }
 
 // http://doc.spip.org/@info_copyright
