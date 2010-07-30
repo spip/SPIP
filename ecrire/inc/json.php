@@ -28,11 +28,11 @@ function var2js($var) {
 		case is_null($var) :
 			return 'null';
 		case is_string($var) :
-			return '"' . str_replace('&', '\x26', addcslashes($var, "\"\\\n\r")) . '"';
+			return '"' . str_replace('&', '&'/*'\x26'*/, addcslashes($var, "\"\\\n\r/")) . '"';
 		case is_bool($var) :
 			return $var ? 'true' : 'false';
 		case is_scalar($var) :
-			return $var;
+			return (string)$var;
 		case is_object( $var) :
 			$var = get_object_vars($var);
 			$asso = true;
@@ -49,14 +49,14 @@ function var2js($var) {
 					$ret .= $sep . '"' . $key . '":' . var2js($elt);
 					$sep = ',';
 				}
-				return $ret ."}\n";
+				return $ret ."}";
 			} else {
 				$ret = '[';
 				foreach ($var as $elt) {
 					$ret .= $sep . var2js($elt);
 					$sep = ',';
 				}
-				return $ret ."]\n";
+				return $ret ."]";
 			}
 	}
 	return false;
