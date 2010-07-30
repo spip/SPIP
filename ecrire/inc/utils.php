@@ -398,7 +398,7 @@ function _T($texte, $args=array(), $class='') {
 // Aussi appelee quand une chaine n'est pas encore dans les fichiers de langue
 // http://doc.spip.org/@_L
 function _L($text, $args=array(), $class=NULL) {
-
+	$f = $text;
 	if (is_array($args)) {
 		foreach ($args as $name => $value) {
 			if ($class)
@@ -408,7 +408,7 @@ function _L($text, $args=array(), $class=NULL) {
 		}
 		// Si des variables n'ont pas ete inserees, le signaler
 		// (chaines de langues pas a jour)
-		if ($args) spip_log("$text:  variables inutilisees " . join(', ', $args));
+		if ($args) spip_log("$f:  variables inutilisees " . join(', ', array_keys($args)));
 	}
 
 	if ($GLOBALS['test_i18n'] AND $class===NULL)
