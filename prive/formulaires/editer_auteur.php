@@ -56,7 +56,7 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 	if ($email = _request('email')){
 		include_spip('inc/filtres');
 		// un redacteur qui modifie son email n'a pas le droit de le vider si il y en avait un
-		if (!autoriser('modifier','auteur',$id_auteur,null,array('statut'=>'?'))
+		if (!autoriser('modifier','auteur',$id_auteur,null,array('email'=>'?'))
 			AND $GLOBALS['visiteur_session']['id_auteur']==$id_auteur
 			AND !strlen(trim($email))
 			AND $email!=($email_ancien=sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur)))
@@ -94,7 +94,7 @@ function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $l
 		set_request('webmestre',_request('webmestre')?_request('webmestre'):'non');
 	$retour = parametre_url($retour, 'email_confirm','');
 
-	if (!autoriser('modifier','auteur',$id_auteur,null,array('statut'=>'?'))){
+	if (!autoriser('modifier','auteur',$id_auteur,null,array('email'=>'?'))){
 		$email_nouveau = _request('email');
 		set_request('email'); // vider la saisie car l'auteur n'a pas le droit de modifier cet email
 		// mais si c'est son propre profil on lui envoie un email à l'adresse qu'il a indique
