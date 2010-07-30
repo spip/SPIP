@@ -30,9 +30,9 @@ function exec_admin_plugin_dist($retour='') {
 	// et l'installation des qu'on est dans la colonne principale
 	// si jamais la liste des plugins actifs change, il faut faire un refresh du hit
 	// pour etre sur que les bons fichiers seront charges lors de l'install
-	if (actualise_plugins_actifs()==-1){
+	if (actualise_plugins_actifs()==-1 AND _request('actualise')<2){
 		include_spip('inc/headers');
-		redirige_par_entete(self());
+		redirige_par_entete(parametre_url(self(),'actualise',_request('actualise')+1,'&'));
 	}
 
 	if ($erreur_activation = isset($GLOBALS['meta']['plugin_erreur_activation'])){
