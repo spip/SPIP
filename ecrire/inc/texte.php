@@ -375,7 +375,7 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 
 // afficher joliment les <script>
 // http://doc.spip.org/@echappe_js
-function echappe_js($t,$class='') {
+function echappe_js($t,$class=' class="echappe-js"') {
 	if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER))
 	foreach ($r as $regs)
 		$t = str_replace($regs[0],
@@ -434,7 +434,7 @@ function interdire_scripts($arg) {
 	switch($GLOBALS['filtrer_javascript']) {
 		case 0:
 			if (!_DIR_RESTREINT)
-				$t = echappe_js($t,' style="color:red"');
+				$t = echappe_js($t);
 			break;
 		case -1:
 			$t = echappe_js($t);
