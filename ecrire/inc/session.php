@@ -68,9 +68,9 @@ function ajouter_session($auteur) {
 	} else {
 		include_spip('inc/cookie');
 		$duree = _RENOUVELLE_ALEA *
-		  (!isset($auth['cookie'])
-		  	? 20 : (is_numeric($auth['cookie'])
-				? $auth['cookie'] : 2));
+		  (!isset($auteur['cookie'])
+		  	? 20 : (is_numeric($auteur['cookie'])
+				? $auteur['cookie'] : 2));
 		spip_setcookie(
 			'spip_session',
 			$_COOKIE['spip_session'],
