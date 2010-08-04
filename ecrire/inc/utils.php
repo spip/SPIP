@@ -1349,18 +1349,22 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	$inc_meta();
 
 	// nombre de repertoires depuis la racine
-	// on compare a l'adresse donnee en meta ; si celle-ci est fausse
-	// le calcul est faux. Meilleure idee ??
+	// on compare a l'adresse de spip.php : $_SERVER["SCRIPT_NAME"]
+	// ou a defaut celle donnee en meta ; (mais si celle-ci est fausse
+	// le calcul est faux)
 	if (!_DIR_RESTREINT)
 		$GLOBALS['profondeur_url'] = 1;
 	else {
 		$uri = isset($_SERVER['REQUEST_URI']) ? explode('?', $_SERVER['REQUEST_URI']) : '';
-		if (!$uri OR  !isset($GLOBALS['meta']['adresse_site']))
+		$uri_ref = (isset($_SERVER["SCRIPT_NAME"])?$_SERVER["SCRIPT_NAME"]:
+						(isset($GLOBALS['meta']['adresse_site'])?parse_url($GLOBALS['meta']['adresse_site'],PHP_URL_PATH).'/':'')
+						);
+		if (!$uri OR  !$uri_ref)
 			$GLOBALS['profondeur_url'] = 0;
 		else {
-			$GLOBALS['profondeur_url'] = max(0, 1+
+			$GLOBALS['profondeur_url'] = max(0,
 				substr_count($uri[0], '/')
-				- substr_count($GLOBALS['meta']['adresse_site'],'/'));
+				- substr_count($uri_ref,'/'));
 		}
 	}
 	// s'il y a un cookie ou PHP_AUTH, initialiser visiteur_session
