@@ -42,10 +42,10 @@ function login_explicite($login, $cible) {
 	$action = $link->getUrl();
 
 	if ($cible) {
-	  $cible = ereg_replace("[?&]var_erreur=[^&]*", '', $cible);
-	  $cible = ereg_replace("[?&]var_login=[^&]*", '', $cible);
+	  $cible = preg_replace(",[?&]var_erreur=[^&]*,", '', $cible);
+	  $cible = preg_replace(",[?&]var_login=[^&]*,", '', $cible);
 	} else {
-	  if (ereg("[?&]url=([^&]*)", $action, $m))
+	  if (preg_match(",[?&]url=([^&]*),", $action, $m))
 	    $cible = urldecode($m[1]);
 	  else
 	    $cible = _DIR_RESTREINT ;

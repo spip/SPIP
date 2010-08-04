@@ -82,7 +82,7 @@ function changer_langue($lang) {
 
 	$liste_langues = $all_langs.','.lire_meta('langues_multilingue');
 
-	if ($lang && ereg(",$lang,", ",$liste_langues,")) {
+	if ($lang && preg_match("/,$lang,/", ",$liste_langues,")) {
 		$GLOBALS['spip_lang'] = $lang;
 
 		$spip_lang_rtl =   lang_dir($lang, '', '_rtl');
@@ -106,7 +106,7 @@ function regler_langue_navigateur() {
 	$accept_langs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 	if (is_array($accept_langs)) {
 		while(list(, $s) = each($accept_langs)) {
-			if (eregi('^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$', trim($s), $r)) {
+			if (preg_match('/^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$/i', trim($s), $r)) {
 				$lang = strtolower($r[1]);
 				if (changer_langue($lang)) return $lang;
 			}
@@ -568,7 +568,7 @@ function init_langues() {
 	if (!$all_langs || !$langue_site || !_DIR_RESTREINT) {
 		if (!$d = @opendir(_DIR_LANG)) return;
 		while ($f = readdir($d)) {
-			if (ereg('^spip_([a-z_]+)\.php3?$', $f, $regs))
+			if (preg_match('/^spip_([a-z_]+)\.php3?$/', $f, $regs))
 				$toutes_langs[] = $regs[1];
 		}
 		closedir($d);
@@ -580,7 +580,7 @@ function init_langues() {
 			$all_langs = $all_langs2;
 			if (!$langue_site) {
 				// Initialisation : le francais par defaut, sinon la premiere langue trouvee
-				if (ereg(',fr,', ",$all_langs,")) $langue_site = 'fr';
+				if (preg_match('/,fr,/', ",$all_langs,")) $langue_site = 'fr';
 				else list(, $langue_site) = each($toutes_langs);
 				if (defined("_ECRIRE_INC_META"))
 					ecrire_meta('langue_site', $langue_site);

@@ -23,8 +23,8 @@ define("_INC_CACHE", "1");
 
 function nettoyer_uri() {
 	$fichier_requete = $GLOBALS['REQUEST_URI'];
-	$fichier_requete = eregi_replace
-		('[?&](PHPSESSID|(var_[^=&]*))=[^&]*',
+	$fichier_requete = preg_replace
+		(',[?&](PHPSESSID|(var_[^=&]*))=[^&]*,i',
 		'', $fichier_requete);
 	return $fichier_requete;
 }
@@ -45,12 +45,12 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 			$fichier_requete .= "&$var=$val";
 	}
 
-	$fichier_cache = ereg_replace('^/+', '', $fichier_requete);
-	$fichier_cache = ereg_replace('\.[a-zA-Z0-9]*', '', $fichier_cache);
-	$fichier_cache = ereg_replace('&[^&]+=([^&]+)', '&\1', $fichier_cache);
+	$fichier_cache = preg_replace(',^/+,', '', $fichier_requete);
+	$fichier_cache = preg_replace(',\.[a-zA-Z0-9]*,', '', $fichier_cache);
+	$fichier_cache = preg_replace(',&[^&]+=([^&]+),', '&\1', $fichier_cache);
 	$fichier_cache = rawurlencode(strtr($fichier_cache, '/&-', '--_'));
 	if (strlen($fichier_cache) > 24)
-		$fichier_cache = substr(ereg_replace('([a-zA-Z]{1,3})[^-]*-',
+		$fichier_cache = substr(preg_replace('/([a-zA-Z]{1,3})[^-]*-/',
 		'\1-', $fichier_cache), -22);
 
 	// Pour la page d'accueil

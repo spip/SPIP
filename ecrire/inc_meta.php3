@@ -55,7 +55,7 @@ function ecrire_metas() {
 		reset($meta);
 		while (list($key, $val) = each($meta)) {
 			$key = addslashes($key);
-			$val = ereg_replace("([\\\\'])", "\\\\1", $val);
+			$val = preg_replace(",([\\\\']),", "\\\\1", $val);
 			$s .= "\$GLOBALS['meta']['$key'] = '$val';\n";
 		}
 		$s .= "\n";

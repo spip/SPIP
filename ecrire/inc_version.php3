@@ -450,7 +450,7 @@ $flag_ini_get = (function_exists("ini_get")
 	&& (@ini_get('max_execution_time') > 0));	// verifier pas desactivee
 $flag_gz = function_exists("gzencode"); #php 4.0.4
 $flag_ob = ($flag_ini_get
-	&& !ereg("ob_", ini_get('disable_functions'))
+	&& !preg_match("/ob_/", ini_get('disable_functions'))
 	&& function_exists("ob_start")); 
 $flag_crypt = function_exists("crypt");
 $flag_wordwrap = function_exists("wordwrap");
@@ -473,7 +473,7 @@ $flag_revisions = function_exists("gzcompress");
 // Appliquer le prefixe cookie
 //
 function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='', $secure='') {
-	$name = ereg_replace ('^spip_', $GLOBALS['cookie_prefix'].'_', $name);
+	$name = preg_replace ('/^spip_/', $GLOBALS['cookie_prefix'].'_', $name);
 	if ($path == 'AUTO') $path=$GLOBALS['cookie_path'];
 
 	if ($secure)
@@ -490,14 +490,14 @@ function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='
 
 if ($cookie_prefix != 'spip') {
 	foreach ($_COOKIE as $name => $value) {
-		if (ereg('^spip_', $name)) {
+		if (preg_match('/^spip_/', $name)) {
 			unset($_COOKIE[$name]);
 			unset($$name);
 		}
 	}
 	foreach ($_COOKIE as $name => $value) {
-		if (ereg('^'.$cookie_prefix.'_', $name)) {
-			$spipname = ereg_replace ('^'.$cookie_prefix.'_', 'spip_', $name);
+		if (preg_match('/^'.$cookie_prefix.'_/', $name)) {
+			$spipname = preg_replace ('/^'.$cookie_prefix.'_/', 'spip_', $name);
 			$_COOKIE[$spipname] = $INSECURE[$spipname] = $value;
 			$$spipname = $value;
 		}
@@ -528,7 +528,7 @@ function spip_log($message, $logname='spip') {
 	if (!$ip = $GLOBALS['REMOTE_ADDR']) $ip = '-';
 
 	$message = date("M d H:i:s")." $ip $pid "
-		.ereg_replace("\n*$", "\n", $message);
+		.preg_replace("/\n*$/", "\n", $message);
 
 	$logfile = _DIR_SESSIONS . $logname . '.log';
 	if (@file_exists($logfile) && (@filesize($logfile) > 10*1024)) {
@@ -573,7 +573,7 @@ if (!$PATH_TRANSLATED) {
 # obsoletes: utiliser les constantes ci-dessus.
 # Conserver pour compatibilite vieilles contrib uniquement
 $flag_ecrire = !@file_exists(_DIR_RESTREINT_ABS . 'inc_version.php3');
-$dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
+$dir_ecrire = (preg_match(",/ecrire/,", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
 
 // API d'appel a la base de donnees
 function spip_query($query) {
@@ -609,9 +609,9 @@ function spip_query($query) {
 //
 
 // cf. liste des sapi_name - http://fr.php.net/php_sapi_name
-$php_module = (($flag_sapi_name AND eregi("apache", @php_sapi_name())) OR
-	ereg("^Apache.* PHP", $SERVER_SOFTWARE));
-$php_cgi = ($flag_sapi_name AND eregi("cgi", @php_sapi_name()));
+$php_module = (($flag_sapi_name AND preg_match("/apache/i", @php_sapi_name())) OR
+	preg_match("/^Apache.* PHP/", $SERVER_SOFTWARE));
+$php_cgi = ($flag_sapi_name AND preg_match("/cgi/i", @php_sapi_name()));
 
 function http_status($status) {
 	global $php_cgi, $REDIRECT_STATUS;
@@ -638,7 +638,7 @@ function http_last_modified($lastmodified, $expire = 0) {
 	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE']
 	AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) # MSoft IIS is dumb
 	{
-		$if_modified_since = ereg_replace(';.*$', '', $GLOBALS['HTTP_IF_MODIFIED_SINCE']);
+		$if_modified_since = preg_replace('/;.*$/', '', $GLOBALS['HTTP_IF_MODIFIED_SINCE']);
 		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
 		if ($if_modified_since == $gmoddate) {
 			http_status(304);
@@ -669,12 +669,12 @@ function test_obgz () {
 	&& (phpversion()<>'4.0.4')
 	&& function_exists("ob_gzhandler")
 	// special bug de proxy
-	&& !eregi("NetCache|Hasd_proxy", $GLOBALS['HTTP_VIA'])
+	&& !preg_match("/NetCache|Hasd_proxy/i", $GLOBALS['HTTP_VIA'])
 	// special bug Netscape Win 4.0x
-	&& !eregi("Mozilla/4\.0[^ ].*Win", $GLOBALS['HTTP_USER_AGENT'])
+	&& !preg_match(",Mozilla/4\.0[^ ].*Win,i", $GLOBALS['HTTP_USER_AGENT'])
 	// special bug Apache2x
-	&& !eregi("Apache(-[^ ]+)?/2", $GLOBALS['SERVER_SOFTWARE'])
-	&& !($GLOBALS['flag_sapi_name'] AND ereg("^apache2", @php_sapi_name()))
+	&& !preg_match(",Apache(-[^ ]+)?/2,i", $GLOBALS['SERVER_SOFTWARE'])
+	&& !($GLOBALS['flag_sapi_name'] AND preg_match("/^apache2/", @php_sapi_name()))
 	// si la compression est deja commencee, stop
 	&& !@ini_get("zlib.output_compression")
 	&& !@ini_get("output_handler")
@@ -711,13 +711,13 @@ class Link {
 		// Normal case
 		if ($link) {
 			if ($url) {
-				$v = split('[\?\&]', $url);
+				$v = preg_split('/[\?\&]/', $url);
 				list(, $this->file) = each($v);
 				while (list(, $var) = each($v)) {
-					list($name, $value) = split('=', $var, 2);
+					list($name, $value) = preg_split(',=,', $var, 2);
 					$name = urldecode($name);
 					$value = urldecode($value);
-					if (ereg('^(.*)\[\]$', $name, $regs)) {
+					if (preg_match('/^(.*)\[\]$/', $name, $regs)) {
 						$this->arrays[$regs[1]][] = $value;
 					}
 					else {
@@ -757,14 +757,14 @@ class Link {
 						$vars[$var] = $val;
 			}
 		}
-		$v = split('[\?\&]', $url);
+		$v = preg_split(',[\?\&],', $url);
 		list(, $this->file) = each($v);
 		if (!$vars) {
 			while (list(,$var) = each($v)) {
-				list($name, $value) = split('=', $var, 2);
+				list($name, $value) = preg_split(',=,', $var, 2);
 				$name = urldecode($name);
 				$value = urldecode($value);
-				if (ereg('^(.*)\[\]$', $name, $regs))
+				if (preg_match('/^(.*)\[\]$/', $name, $regs))
 					$vars[$regs[1]][] = $value;
 				else
 					$vars[$name] = $value;
@@ -1167,7 +1167,7 @@ function find_in_path ($filename, $path='AUTO') {
 	$racine = (_DIR_RESTREINT ? '' : '../');
 
 	// Parcourir le chemin
-	foreach (split(':', $path) as $dir) {
+	foreach (preg_split(',:,', $path) as $dir) {
 		if (substr($dir, 0,1)<>'/') $dir = "$racine$dir";
 		if (substr($dir, -1,1)<>'/') $dir .= "/";
 		$f = "$dir$filename";
