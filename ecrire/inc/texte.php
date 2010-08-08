@@ -209,24 +209,24 @@ $preg='') {
 	if (!is_string($letexte) or !strlen($letexte))
 		return $letexte;
 
-	if (preg_match_all($preg ? $preg : _PROTEGE_BLOCS,
-	$letexte, $matches, PREG_SET_ORDER))
-	foreach ($matches as $regs) {
-		// echappements tels quels ?
-		if ($no_transform) {
-			$echap = $regs[0];
+	if (($preg OR strpos($letexte,"<")!==false) 
+	  AND preg_match_all($preg ? $preg : _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER))
+		foreach ($matches as $regs) {
+			// echappements tels quels ?
+			if ($no_transform) {
+				$echap = $regs[0];
+			}
+
+			// sinon les traiter selon le cas
+			else if (function_exists($f = 'traiter_echap_'.strtolower($regs[1])))
+				$echap = $f($regs);
+			else if (function_exists($f = $f.'_dist'))
+				$echap = $f($regs);
+
+			$letexte = str_replace($regs[0],
+				code_echappement($echap, $source, $no_transform),
+				$letexte);
 		}
-
-		// sinon les traiter selon le cas
-		else if (function_exists($f = 'traiter_echap_'.strtolower($regs[1])))
-			$echap = $f($regs);
-		else if (function_exists($f = $f.'_dist'))
-			$echap = $f($regs);
-
-		$letexte = str_replace($regs[0],
-			code_echappement($echap, $source, $no_transform),
-			$letexte);
-	}
 
 	if ($no_transform)
 		return $letexte;
@@ -238,7 +238,7 @@ $preg='') {
 	}
 
 	// Echapper le php pour faire joli (ici, c'est pas pour la securite)
-	if (preg_match_all(',<[?].*($|[?]>),UisS',
+	if (strpos($letexte,"<"."?")!==false AND preg_match_all(',<[?].*($|[?]>),UisS',
 	$letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
 		$letexte = str_replace($regs[0],
@@ -257,7 +257,8 @@ $preg='') {
 function echappe_retour($letexte, $source='', $filtre = "") {
 	if (strpos($letexte,"base64$source")) {
 		# spip_log(htmlspecialchars($letexte));  ## pour les curieux
-		if (preg_match_all(',<(span|div) class=[\'"]base64'.$source.'[\'"]\s(.*)>\s*</\1>,UmsS',
+		if (strpos($letexte,"<")!==false AND
+		  preg_match_all(',<(span|div) class=[\'"]base64'.$source.'[\'"]\s(.*)>\s*</\1>,UmsS',
 		$letexte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
 				$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
@@ -502,7 +503,6 @@ function typo($letexte, $echapper=true, $connect=null) {
 	//
 	// NOTE : propre() ne passe pas par ici mais directement par corriger_typo
 	// cf. inc/lien
-
 	$letexte = traiter_modeles($mem = $letexte, false, $echapper ? 'TYPO' : '', $connect);
 	if ($letexte != $mem) $echapper = true;
 	unset($mem);
@@ -529,7 +529,7 @@ define('_TYPO_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_TYPO_PROTEGER)."][^<>]*>,
 
 // http://doc.spip.org/@corriger_typo
 function corriger_typo($letexte, $lang='') {
-
+	static $typographie = array();
 	// Plus vite !
 	if (!$letexte) return $letexte;
 
@@ -554,8 +554,9 @@ function corriger_typo($letexte, $lang='') {
 	$e = ($e === $letexte);
 
 	// Charger & appliquer les fonctions de typographie
-	$typographie = charger_fonction(lang_typo($lang), 'typographie');
-	$letexte = $typographie($letexte);
+	if (!isset($typographie[$lang]))
+		$typographie[$lang] = charger_fonction(lang_typo($lang), 'typographie');
+	$letexte = $typographie[$lang]($letexte);
 
 	// Les citations en une autre langue, s'il y a lieu
 	if (!$e) $letexte = echappe_retour($letexte, 'multi');
