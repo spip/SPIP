@@ -36,7 +36,7 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 		$class = 'spip_ancre';
 	elseif (preg_match('/^\s*mailto:/',$lien)) # pseudo URL de mail
 		$class = "spip_mail";
-	elseif (preg_match('/^<html>/',$lien)) # cf traiter_lien_explicite
+	elseif (preg_match('/^<html>/',$texte)) # cf traiter_lien_explicite
 		$class = "spip_url spip_out";
 	elseif (!$class) $class = "spip_out"; # si pas spip_in|spip_glossaire
 
