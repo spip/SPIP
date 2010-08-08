@@ -397,8 +397,8 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='', $liens
 	if ($doublons===true)
 		$doublons = array('documents'=>array('doc','emb','img'));
 	// detecter les modeles (rapide)
-	if (preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS',
-	$texte, $matches, PREG_SET_ORDER)) {
+	if (strpos($texte,"<")!==false AND
+	  preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS', $texte, $matches, PREG_SET_ORDER)) {
 		include_spip('public/assembler');
 		foreach ($matches as $match) {
 			// Recuperer l'appel complet (y compris un eventuel lien)
