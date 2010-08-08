@@ -730,6 +730,7 @@ function traiter_listes ($texte) {
 	// chaque paragraphe est traite a part
 	while (list(,$para) = each($parags)) {
 		$niveau = 0;
+		$pile_li = $pile_type = array();
 		$lignes = explode("\n-", "\n" . $para);
 
 		// ne pas toucher a la premiere ligne
@@ -769,6 +770,10 @@ function traiter_listes ($texte) {
 				// puis les montees (y compris apres une descente un cran trop bas)
 				while ($niveau < $profond) {
 					if ($niveau == 0) $ajout .= "\n\n";
+					elseif (!isset($pile_li[$niveau])) {
+						$ajout .= "<li$class_spip>";
+						$pile_li[$niveau] = "</li>";
+					}
 					$niveau ++;
 					$ajout .= "<$type$class_spip_plus>";
 					$pile_type[$niveau] = "</$type>";
