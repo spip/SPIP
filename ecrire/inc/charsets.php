@@ -149,6 +149,7 @@ function corriger_caracteres_windows($texte, $charset='AUTO', $charset_cible='un
 	if ($charset=='AUTO') $charset = $GLOBALS['meta']['charset'];
 	if ($charset == 'utf-8') {
 		$p = chr(194);
+		if (strpos($texte,$p)===false) return $texte;
 	} else if ($charset == 'iso-8859-1') {
 		$p = '';
 	} else
