@@ -927,9 +927,9 @@ function fin_page()
 			.  _T("access_interface_graphique")
 			. "</a></div>")
 		: ("<div style='text-align: right; ' class='verdana1 spip_xx-small'>"
-			. info_maj_spip()
 			. info_copyright()
 			. "<br />"
+			. info_maj_spip()
 			. _T('info_copyright_doc',
 				array('spipnet' => $GLOBALS['home_server']
 					. '/' .    $GLOBALS['spip_lang']))
@@ -953,14 +953,18 @@ function info_maj_spip(){
 
 	$maj = explode('|',$maj);
 	// c'est une ancienne notif, on a fait la maj depuis !
-	if ($GLOBALS['spip_version_branche']!==reset($maj))
+	if ($GLOBALS['spip_version_branche']!==array_shift($maj))
 		return "";
 
 	if (!autoriser('webmestre'))
 		return "";
 
-	array_shift($maj);
 	$maj = implode('|',$maj);
+	if (strncmp($maj,"<a",2)==0) $maj = extraire_attribut ($maj, 'title');
+	$lien = "http://www.spip.net/".$GLOBALS['spip_lang']."_download";
+	$maj = "<a class='info_maj_spip' href='$lien'><strong>" .
+	    _T('nouvelle_version_spip',array('version'=>$maj)) .
+	    '</strong></a>.';
 
 	return "$maj<br />";
 }

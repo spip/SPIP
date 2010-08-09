@@ -838,7 +838,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'mois_non_connu' => 'non connu',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles',
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible',
 
 // O
 'onglet_contenu' => 'Contenu',

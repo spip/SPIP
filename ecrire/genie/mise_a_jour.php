@@ -61,9 +61,8 @@ function info_maj ($dir, $file, $version){
 	}
 
 	if (!$page) return "";
-	return "<a class='info_maj_spip' href='"._VERSIONS_SERVEUR."$dir' title='$page'>" .
-	    _T('nouvelles_versions') .
-	    '</a>';
+
+	return $page;
 }
 
 // Verifie que la liste $page des versions dans le fichier $nom est a jour
