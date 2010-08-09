@@ -808,7 +808,7 @@ amb un color que indica el seu estat:',
 'mois_non_connu' => 'desconegut',
 
 // N
-'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
+'nouvelle_version_spip' => 'Est&agrave; disponible la versi&oacute; @version@ d\'SPIP',
 
 // O
 'onglet_contenu' => 'Contingut',
