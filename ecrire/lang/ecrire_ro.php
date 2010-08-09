@@ -816,7 +816,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'mois_non_connu' => 'necunoscut',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Con&#355;inut',

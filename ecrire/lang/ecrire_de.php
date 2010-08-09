@@ -485,7 +485,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_pas_de_forum' => 'kein Forum',
 'info_passe_trop_court' => 'Passwort zu kurz.',
 'info_passes_identiques' => 'Die zwei Passworte stimmen nicht &uuml;berein.',
-'info_pense_bete_ancien' => 'Ihre alten Merkzettel', # MODIF
+'info_pense_bete_ancien' => 'Ihre alten Merkzettel',
 'info_plus_cinq_car' => 'mehr als 5 Zeichen',
 'info_plus_cinq_car_2' => '(mehr als 5 Zeichen)',
 'info_plus_trois_car' => '(mehr als 3 Zeichen)',
@@ -793,7 +793,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'mois_non_connu' => 'unbekannt',
 
 // N
-'nouvelles_versions' => 'Neue Versionen von SPIP sind verf&uuml;gbar',
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Inhalt',

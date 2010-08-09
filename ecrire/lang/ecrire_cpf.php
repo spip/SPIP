@@ -851,7 +851,7 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'mois_non_connu' => 'l&eacute; pa konu',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Contenu', # NEW

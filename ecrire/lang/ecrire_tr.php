@@ -822,7 +822,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'mois_non_connu' => 'Bilinmiyor ',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => '&#304;&ccedil;erik',

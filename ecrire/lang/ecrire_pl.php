@@ -836,7 +836,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'mois_non_connu' => 'nieznany',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Contenu', # NEW

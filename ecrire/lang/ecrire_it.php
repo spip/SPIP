@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
-'activer_plugin' => 'Attiva il plugin',
+'activer_plugin' => 'Attiva l\'estensione',
 'affichage' => 'Visualizzazione',
 'aide_non_disponible' => 'Questa parte della guida in linea non &egrave; ancora disponibile in italiano.',
 'auteur' => 'Autore:',
@@ -400,8 +400,11 @@ secondo forum riservato ai soli amministratori.',
 'info_forum_statistiques' => 'Statistiche delle visite',
 'info_forums_abo_invites' => 'Il sito comprende dei forum accessibili solo a utenti registrati. Nel sito pubblico &egrave; quindi presente una pagina d\'iscrizione.',
 'info_gauche_admin_effacer' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>',
-'info_gauche_admin_tech' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>', # MODIF
-'info_gauche_admin_vider' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.</p>', # MODIF
+'info_gauche_admin_tech' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni
+ di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, 
+eseguibile grazie a un accesso FTP.</p>',
+'info_gauche_admin_vider' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica.
+ Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.</p>',
 'info_gauche_auteurs' => 'Elenco di tutti gli autori del sito.
 Il loro status &egrave; indicato dal colore dell\'icona (redattore = giallo; amministratore = verde).',
 'info_gauche_auteurs_exterieurs' => 'Gli autori esterni, senza accesso al sito, sono indicati da un\'icona blu;
@@ -519,7 +522,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 'info_pas_de_forum' => 'nessun forum',
 'info_passe_trop_court' => 'Password troppo corta.',
 'info_passes_identiques' => 'Le due password non sono uguali.',
-'info_pense_bete_ancien' => 'I vecchi memo', # MODIF
+'info_pense_bete_ancien' => 'I tuoi vecchi memo',
 'info_plus_cinq_car' => 'pi&ugrave; di 5 caratteri',
 'info_plus_cinq_car_2' => '(Pi&ugrave; di 5 caratteri)',
 'info_plus_trois_car' => '(Pi&ugrave; di 3 caratteri)',
@@ -553,8 +556,8 @@ grazie ad un modulo automatizzato e accedere all\'area riservata per proporre
 i propri articoli. <blockquote><i>Durante la fase d\'iscrizione,
 gli utenti ricevono automaticamente un email
 che fornisce loro i codici d\'accesso al sito privato. Alcuni
-hoster disattivano l\'invio di email dai propri server: in questo caso, l\'iscrizione automatica &egrave;
-impossibile.', # MODIF
+servizi di hostiong disattivano l\'invio di email dai propri server: in questo caso l\'iscrizione automatica &egrave;
+impossibile.</i></blockquote>',
 'info_question_mots_cles' => 'Vuoi utilizzare le parole chiave nel sito?',
 'info_question_proposer_site' => 'Chi pu&ograve; proporre i siti da citare?',
 'info_question_utilisation_moteur_recherche' => 'Desideri utilizzare il motore di ricerca integrato di SPIP?
@@ -830,7 +833,7 @@ Le traduzioni sono associate all\'originale,
 'mois_non_connu' => 'sconosciuto',
 
 // N
-'nouvelles_versions' => 'Una nuova versione di SPIP &egrave; disponibile',
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Contenuto',
@@ -861,38 +864,38 @@ Le traduzioni sono associate all\'originale,
 'plugin_charge_paquet' => 'Caricamento del pacchetto @name@',
 'plugin_charger' => 'Download',
 'plugin_erreur_charger' => 'errore: impossibile caricare @zip@',
-'plugin_erreur_droit1' => 'La cartella <code>@dest@</code> non ha i permessi di scrittura.',
-'plugin_erreur_droit2' => 'Verificare i diritti su questa cartella (e, se necessario, crearla), o installare i file tramite FTP.',
+'plugin_erreur_droit1' => 'La directory <code>@dest@</code> non ha i permessi di scrittura.',
+'plugin_erreur_droit2' => 'Verificare i diritti su questa directory (se necessario crearla), o installare i file tramite FTP.',
 'plugin_erreur_zip' => 'fallimento pclzip: errore @status@',
 'plugin_etat_developpement' => 'in corso di sviluppo',
 'plugin_etat_experimental' => 'sperimentale',
 'plugin_etat_stable' => 'stabile',
 'plugin_etat_test' => 'in prova',
-'plugin_impossible_activer' => 'Impossibile attivare il plug-in @plugin@',
-'plugin_info_automatique1' => 'Se si desidera autorizzare l\'installazione automatica dei plug-in &egrave; necessario: ',
-'plugin_info_automatique1_lib' => 'If you wish to authorise the automatic installation of this library, please:', # NEW
-'plugin_info_automatique2' => 'creare una cartella <code>@rep@</code>;',
-'plugin_info_automatique3' => 'verificare che il server sia autorizzato a scrivere in questa cartella.',
+'plugin_impossible_activer' => 'Impossibile attivare l\'estensione @plugin@',
+'plugin_info_automatique1' => 'Se si desidera autorizzare l\'installazione automatica dell\'estensione &egrave; necessario: ',
+'plugin_info_automatique1_lib' => 'Se vuoi autorizzare l\'installazione automatica di questa libreria:',
+'plugin_info_automatique2' => 'creare una directory <code>@rep@</code>;',
+'plugin_info_automatique3' => 'verificare che il server sia autorizzato a scrivere in questa directory.',
 'plugin_info_automatique_creer' => 'da creare alla radice del sito.',
 'plugin_info_automatique_exemples' => 'esempi:',
 'plugin_info_automatique_ftp' => '&Egrave; possibile installare plug-in tramite FTP, nella cartella <tt>@rep@</tt>',
-'plugin_info_automatique_lib' => 'Alcuni plug-in richiedono anche di poter trasferire dei file nella cartella <code>lib/</code>, da creare (se necessario) alla radice del sito.',
-'plugin_info_automatique_liste' => 'Gli elenchi dei plug-in:',
-'plugin_info_automatique_liste_officielle' => 'i plug-in ufficiali',
+'plugin_info_automatique_lib' => 'Alcune estensioni richiedono anche di poter trasferire dei file nella cartella <code>lib/</code>, da creare (se necessario) alla radice del sito.',
+'plugin_info_automatique_liste' => 'Gli elenchi delle estensioni:',
+'plugin_info_automatique_liste_officielle' => 'le estensioni ufficiali',
 'plugin_info_automatique_liste_update' => 'Aggiornare gli elenchi',
 'plugin_info_automatique_ou' => 'oppure...',
-'plugin_info_automatique_select' => 'Selezionata un plug-in qui sotto: SPIP lo scaricher&agrave; e lo installer&agrave; nella cartella <code>@rep@</code>; se questo plug-in &egrave; gi&agrave; presente verr&agrave; aggiornato.',
-'plugin_info_extension_1' => 'The extensions below are loaded and active in the @extensions@ directory.', # NEW
-'plugin_info_extension_2' => 'They cannot be uninstalled.', # NEW
+'plugin_info_automatique_select' => 'Selezionata un\'estensione qui sotto: SPIP la scaricher&agrave; e la installer&agrave; nella cartella <code>@rep@</code>; se questo estensione &egrave; gi&agrave; presente verr&agrave; aggiornata.',
+'plugin_info_extension_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @extensions@.',
+'plugin_info_extension_2' => 'Questo non pu&amp;ugrave; essere disinstallato.',
 'plugin_info_telecharger' => 'da scaricare da @url@ e da installare in @rep@',
 'plugin_librairies_installees' => 'Librerie installate',
-'plugin_necessite_lib' => 'Questo plug-in richiede la libreria @lib@',
-'plugin_necessite_plugin' => 'Necessita il plug-in @plugin@ con almeno la versione @version@.',
+'plugin_necessite_lib' => 'Questa estensione richiede la libreria @lib@',
+'plugin_necessite_plugin' => 'Necessita l\'estensione @plugin@ con almeno la versione @version@.',
 'plugin_necessite_spip' => 'Necessita SPIP con almeno la versione @version@.',
 'plugin_source' => 'origine:&nbsp;',
 'plugin_titre_automatique' => 'Installazione automatica',
-'plugin_titre_automatique_ajouter' => 'Aggiungere dei plug-in',
-'plugin_titre_installation' => 'Installation of the @plugin@ plugin', # NEW
+'plugin_titre_automatique_ajouter' => 'Aggiungere delle estensioni',
+'plugin_titre_installation' => 'Installazione del plugin @plugin@',
 'plugin_zip_active' => 'Continuare per attivarlo',
 'plugin_zip_adresse' => 'indicate qui sotto l\'indirizzo di un file zip del plug-in da scaricare, oppure l\'indirizzo di un elenco di plug-in.',
 'plugin_zip_adresse_champ' => 'Indirizzo del plug-in o dell\'elenco&nbsp;',
@@ -901,17 +904,17 @@ Le traduzioni sono associate all\'originale,
 'plugin_zip_installe_rep_finie' => 'Il file @zip@ &egrave; stato decompresso e installato nella cartella @rep@',
 'plugin_zip_installer' => 'Ora &egrave; possibile installarlo.',
 'plugin_zip_telecharge' => 'Il file @zip@ &egrave; stato scaricato',
-'plugins_actif_aucun' => 'No plugin is active.', # NEW
-'plugins_actif_un' => 'One plugin active', # NEW
+'plugins_actif_aucun' => 'Nessun plugin attivo',
+'plugins_actif_un' => 'Un plugin attivo',
 'plugins_actifs' => '@count@ plug-in attivati.',
-'plugins_actifs_liste' => 'Active plugins', # NEW
+'plugins_actifs_liste' => 'Plugin attivi',
 'plugins_compte' => '@count@ plug-in',
-'plugins_disponible_un' => 'One plugin available', # NEW
+'plugins_disponible_un' => 'Un plugin disponibile',
 'plugins_disponibles' => '@count@ plug-in disponibili.',
 'plugins_erreur' => 'Errore nei plug-in: @plugins@',
 'plugins_liste' => 'Elenco dei plugin',
-'plugins_liste_extensions' => 'Extensions', # NEW
-'plugins_recents' => 'Recent plugins', # NEW
+'plugins_liste_extensions' => 'Estensioni',
+'plugins_recents' => 'Plugin aggiunti recentemente',
 'plugins_vue_hierarchie' => 'Struttura gerarchica',
 'plugins_vue_liste' => 'Elenco',
 'protocole_ldap' => 'Versione del protocollo:',
@@ -1007,7 +1010,7 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 'texte_date_publication_article' => 'DATA DI PUBBLICAZIONE:',
 'texte_descriptif_petition' => 'Descrizione della petizione',
 'texte_descriptif_rapide' => 'Descrizione rapida',
-'texte_documents_joints' => '&Egrave; possibile autorizzare l\'aggiunta di documenti (file di testo, fogli elettronici, immagini, file multimediali, ecc.) agli articoli e/o alle rubriche. Questi file possono poi essere richiamati nel testo dell\'articolo, o visualizzati separatamente.', # MODIF
+'texte_documents_joints' => 'Puoi autorizzare l\'aggiunta di documenti (file di testo, fogli elettronici, immagini, file multimediali, ecc.) agli articoli e/o alle rubriche. Questi file possono poi essere richiamati nel testo dell\'articolo, o visualizzati separatamente.',
 'texte_documents_joints_2' => 'Questa impostazione non impedisce l\'inserimento diretto di immagini negli articoli.',
 'texte_effacer_base' => 'Cancella il database SPIP',
 'texte_effacer_donnees_indexation' => 'Cancella i dati d\'indicizzazione',
@@ -1022,7 +1025,7 @@ e agli amministratori in particolari aree del sito
 (per esempio, per un programma esterno di statistiche).</p><p>
 Se ci&ograve; non &egrave; necessario, lasciare quest\'opzione
 al suo valore predefinito (nessuna creazione 
-di file).</p>', # MODIF
+di file).</p>',
 'texte_informations_personnelles_1' => 'Il sistema creer&agrave; un tuo accesso personalizzato al sito.',
 'texte_informations_personnelles_2' => '(Nota: se si tratta di una reinstallazione, e il tuo accesso funziona ancora, puoi ',
 'texte_introductif_article' => 'Testo introduttivo dell\'articolo',
@@ -1063,7 +1066,7 @@ per personalizzare la presentazione degli articoli nei tuoi modelli di layout.',
 'texte_nouveau_message' => 'Nuovo messaggio',
 'texte_nouveau_mot' => 'Nuova parola',
 'texte_nouvelle_version_spip_1' => 'Hai installato una nuova versione di SPIP.',
-'texte_nouvelle_version_spip_2' => 'Questa nuova versione necessita un aggiornamento pi&ugrave; radicale del solito. Se sei il webmaster del sito, cancella il file @connect@ e riprendi l\'installazione al fine di aggiornare i parametri di connessione al database.<p> (NB: se hai dimenticato i parametri di connessione, rileggi il file @connect@ prima di cancellarlo...)</p>', # MODIF
+'texte_nouvelle_version_spip_2' => 'Questa nuova versione necessita un aggiornamento pi&ugrave; radicale del solito. Se sei il webmaster del sito, cancella il file @connect@ e riprendi l\'installazione al fine di aggiornare i parametri di connessione al database.<p> (NB: se hai dimenticato i parametri di connessione, rileggi il file @connect@ prima di cancellarlo!)</p>',
 'texte_operation_echec' => 'Torna alla pagina precedente, seleziona un altro database o creane uno nuovo. Verifica le informazioni fornite dal tuo hoster.',
 'texte_plus_trois_car' => 'pi&ugrave; di tre caratteri',
 'texte_plusieurs_articles' => 'Diversi autori trovati per "@cherche_auteur@":',
@@ -1086,9 +1089,9 @@ ripetutamente e senza un chiaro motivo, &egrave; possibile
 che sia per colpa del database stesso.</b><p>
 Il server SQL dispone di una funzione di ripristino delle tabelle
 danneggiate inavvertitamente. &Egrave; possibile tentare il ripristino;
-in caso di errore, conservare una copia del messaggio visualizzato,
-contenente forse delle informazioni preziose...</p><p>
-Se il problema persiste, contattare il proprio fornitore di hosting.</p>', # MODIF
+in caso di errore, conservare una copia del messaggio visualizzato che potrebbe contenere 
+delle informazioni utili per identificare il problema.</p><p>
+Se il problema persiste, contattare il proprio fornitore di hosting.</p>',
 'texte_restaurer_base' => 'Ripristina un backup del database',
 'texte_restaurer_sauvegarde' => 'Quest\'opzione permette il ripristino di un backup del database.
 Il file di salvataggio deve trovarsi nella cartella @dossier@.

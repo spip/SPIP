@@ -793,7 +793,7 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'mois_non_connu' => 'kh&ocirc;ng nh&#7853;n ra th&aacute;ng n&agrave;y &#273;&#432;&#7907;c',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Contenu', # NEW

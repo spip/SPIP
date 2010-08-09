@@ -834,7 +834,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mois_non_connu' => '&#19981;&#30693;&#36947;',
 
 // N
-'nouvelles_versions' => 'De nouvelles versions de SPIP sont disponibles', # NEW
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Contenu', # NEW

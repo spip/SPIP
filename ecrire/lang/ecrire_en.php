@@ -835,7 +835,7 @@ in a colour indicating their status:',
 'mois_non_connu' => 'unknown',
 
 // N
-'nouvelles_versions' => 'New versions of SPIP are available',
+'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
 
 // O
 'onglet_contenu' => 'Contents',
