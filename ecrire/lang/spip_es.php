@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces' => 'No enviar anuncios',
 'bouton_radio_non_envoi_liste_nouveautes' => 'No enviar la lista de novedades',
 'bouton_recharger_page' => 'Actualizar esta p&aacute;gina',
-'bouton_telecharger' => 'Subir',
+'bouton_telecharger' => 'Descargar',
 'bouton_valider' => 'Validar',
 
 // C
@@ -553,7 +553,7 @@ se puede activar o desactivar .',
 'info_symbole_vert' => 'El s&iacute;mbolo <b>verde</b> indica los  <b>mensajes intercambiados con otras personas</b> del sitio.',
 'info_syndication' => 'sindicaci&oacute;n:',
 'info_syndication_articles' => 'art&iacute;culo(s)',
-'info_telecharger' => 'Subir desde tu ordenador:',
+'info_telecharger' => 'Subir desde tu equipo:',
 'info_telecharger_nouveau_logo' => 'Subir un nuevo logotipo:',
 'info_telecharger_ordinateur' => 'Subir desde tu ordenador:',
 'info_tous_resultats_enregistres' => '[todos los resultados son registrados]',

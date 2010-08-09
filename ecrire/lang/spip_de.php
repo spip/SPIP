@@ -561,7 +561,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_visites' => 'Besuche:',
 'info_vos_rendez_vous' => 'Ihre kommenden Termine',
 'info_zoom' => 'Zoom',
-'infos_vos_pense_bete' => 'Ihre Merkzettel', # MODIF
+'infos_vos_pense_bete' => 'Ihre Merkzettel',
 'item_breve_proposee' => 'Vorgeschlagene Meldung',
 
 // L
