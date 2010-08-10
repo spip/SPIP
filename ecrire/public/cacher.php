@@ -265,18 +265,6 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		return;
 	}
 
-	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
-	if (isset($GLOBALS['meta']['invalider'])) {
-		// ne le faire que si la base est disponible
-		if (spip_connect()) {
-			include_spip('inc/invalideur');
-			retire_caches($chemin_cache); # API invalideur inutile
-			supprimer_fichier(_DIR_CACHE.$chemin_cache);
-			if ($chemin_cache_session)
-				supprimer_fichier(_DIR_CACHE.$chemin_cache_session);
-		}
-	}
-
 	// Si un calcul, recalcul [ou preview, mais c'est recalcul] est demande,
 	// on supprime le cache
 	if ($GLOBALS['var_mode'] &&
