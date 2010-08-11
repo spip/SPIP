@@ -403,6 +403,31 @@ function optimiser_base_disparus($attente = 86400) {
 			'data'=>$n
 	));
 
+
+	//
+	// CNIL -- Informatique et libertes
+	//
+	// masquer le numero IP des vieux forums
+	//
+	## date de reference = 4 mois
+	## definir a 0 pour desactiver
+	define('_CNIL_PERIODE', 3600*24*31*4);
+
+	if (_CNIL_PERIODE) {
+		$critere_cnil = 'date_heure<"'.date('Y-m-d', time()-_CNIL_PERIODE).'"'
+			. ' AND statut != "spam"'
+			. ' AND (ip LIKE "%.%" OR ip LIKE "%:%")'; # ipv4 ou ipv6
+
+		$c = sql_countsel('spip_forum', $critere_cnil);
+
+		if ($c>0) {
+			spip_log("CNIL: masquer IP de $c forums anciens");
+			sql_update('spip_forum', array('ip' => 'MD5(ip)'), $critere_cnil);
+		}
+	}
+
+
 	if (!$n) spip_log("Optimisation des tables: aucun lien mort");
 }
+
 ?>
