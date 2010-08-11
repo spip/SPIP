@@ -125,22 +125,30 @@ function depublier_rubrique_if($id_rubrique,$date=null){
 	if (!$r OR $r['statut']!=='publie')
 		return false;
 
-	if (sql_countsel("spip_articles",  "id_rubrique=$id_rubrique AND statut='publie'$postdates"))
-		return false;
-
-	if (sql_countsel("spip_breves",  "id_rubrique=$id_rubrique AND statut='publie'"))
-		return false;
-
-	if (sql_countsel("spip_syndic",  "id_rubrique=$id_rubrique AND statut='publie'"))
-		return false;
-
-	if (sql_countsel("spip_rubriques",  "id_parent=$id_rubrique AND statut='publie'"))
-		return false;
-
-	if (sql_countsel("spip_documents_liens",  "id_objet=$id_rubrique AND objet='rubrique'"))
-		return false;
-
-	$compte = pipeline('objet_compte_enfants',array('args'=>array('objet'=>'rubrique','id_objet'=>$id_rubrique,'statut'=>'publie','date'=>$date),'data'=>array()));
+	// On met le nombre de chaque type d'enfants dans un tableau
+	// Le type de l'objet est au pluriel
+	$compte = array(
+		'articles' => sql_countsel("spip_articles",  "id_rubrique=$id_rubrique AND statut='publie'$postdates"),
+		'breves' => sql_countsel("spip_breves",  "id_rubrique=$id_rubrique AND statut='publie'"),
+		'sites' => sql_countsel("spip_syndic",  "id_rubrique=$id_rubrique AND statut='publie'"),
+		'rubriques' => sql_countsel("spip_rubriques",  "id_parent=$id_rubrique AND statut='publie'"),
+		'documents' => sql_countsel("spip_documents_liens",  "id_objet=$id_rubrique AND objet='rubrique'")
+	);
+	
+	// On passe le tableau des comptes dans un pipeline pour que les plugins puissent ajouter (ou retirer) des enfants
+	$compte = pipeline('objet_compte_enfants',
+		array(
+			'args' => array(
+				'objet' => 'rubrique',
+				'id_objet' => $id_rubrique,
+				'statut' => 'publie',
+				'date' => $date
+			),
+			'data' => $compte
+		)
+	);
+	
+	// S'il y a au moins un enfant de n'importe quoi, on ne dépublie pas
 	foreach($compte as $objet => $n)
 		if ($n)
 			return false;
