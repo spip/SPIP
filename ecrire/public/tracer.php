@@ -107,7 +107,7 @@ function chrono_requete($temps)
 	$t = array();
 	// Fabriquer les liens de navigations dans le tableau des temps
 	foreach($temps as $k => $v) {
-		$titre = textebrut(preg_replace(',</tr>,', "\n",$v[0]));
+		$titre = strip_tags($v[1]);
 		$href = quote_amp($GLOBALS['REQUEST_URI'])."#req$i";
 
 		$t[$v[1]][]= "<span class='spip-debug-arg'> "
