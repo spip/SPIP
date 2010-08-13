@@ -77,6 +77,7 @@ function chrono_requete($temps)
 		list($dt, $nb, $boucle, $query, $explain, $res, $contexte) = $v;
 		if (is_array($contexte)) {
 			$k = ($contexte[0] . " $boucle");
+			include_spip('public/compiler');
 			$env = reconstruire_contexte_compil($contexte);
 		} else $k = $env = $boucle;
 
