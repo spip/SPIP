@@ -173,19 +173,18 @@ function debusquer_navigation($tableau, $caption='', $id='debug-nav') {
 			$h = parametre_url($href, 'var_mode_affiche', 'squelette');
 			$h = parametre_url($h, 'var_mode_objet', $nom_code);
 			$h .= '#L' . $ligne;
-		} else 	{$h = $href . "#spip-debug"; $boucle = $lieu;}
+			$lieu = "<a href='$h'><b>$boucle</b></a>";
+		}
 
 		$j = ($i+1); 
-		$res .= "<tr id='req$j'><td style='text-align: right'><a href='"
-		. $h
-		. "'><b>"
+		$res .= "<tr id='req$j'><td style='text-align: right'>"
 		. $j
-		. "&nbsp;</b></a>\n</td><td style='text-align: left'>"
+		. "&nbsp;</td><td style='text-align: left'>"
 		. $msg
 		. "</td><td style='text-align: left'>"
 		. $skel
 		. "</td><td class='spip-debug-arg' style='text-align: left'>"
-		. $boucle
+		. $lieu
 		. "</td><td style='text-align: right'>"
 		. $ligne
 		.  "</td></tr>\n";

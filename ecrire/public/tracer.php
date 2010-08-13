@@ -44,14 +44,14 @@ function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 
 	$x = _request('var_mode_objet');
 	if (isset($GLOBALS['debug']['aucasou'])) {
-		list(, $boucle, $serveur) = $GLOBALS['debug']['aucasou'];
+		list(, $boucle, $serveur, $contexte) = $GLOBALS['debug']['aucasou'];
 		if ($x AND !preg_match("/$boucle\$/", $x))
 			return;
 		if ($serveur) $boucle .= " ($serveur)";
 		$boucle = "<b>$boucle</b>";
 	} else {
 		if ($x) return;
-		$boucle = '';
+		$boucle = $contexte = '';
 	}
 
 	list($usec, $sec) = explode(" ", $m1);
@@ -63,7 +63,7 @@ function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 	$q = preg_replace('/([a-z)`])\s+([A-Z])/', "$1\n<br />$2",htmlentities($query));
 	$e =  sql_explain($query, $serveur);
 	$r = str_replace('Resource id ','',(is_object($result)?get_class($result):$result));
-	$tableau_des_temps[] = array($dt, $nb, $boucle, $q, $e, $r);
+	$tableau_des_temps[] = array($dt, $nb, $boucle, $q, $e, $r, $contexte);
 }
 
 
@@ -73,13 +73,18 @@ function chrono_requete($temps)
 	$hors = "<i>" . _T('zbug_hors_compilation') . "</i>";
 	$t = $q = $n = $d = array();
 	// Totaliser les temps et completer le Explain
-	foreach ($temps as $key => $row) {
-		list($dt, $nb, $boucle, $query, $explain, $res) = $row;
+	foreach ($temps as $key => $v) {
+		list($dt, $nb, $boucle, $query, $explain, $res, $contexte) = $v;
+		if (is_array($contexte)) {
+			$k = ($contexte[0] . " $boucle");
+			$env = reconstruire_contexte_compil($contexte);
+		} else $k = $env = $boucle;
+
 		$total += $dt;
 		$t[$key] = $dt;
 		$q[$key] = $nb;
-		$d[$boucle]+= $dt;
-		if  ($boucle) @++$n[$boucle];
+		$d[$k]+= $dt;
+		if ($k) @++$n[$k];
 
 		if (!is_array($explain))
 			$explain = array();
@@ -98,7 +103,7 @@ function chrono_requete($temps)
 		. join('', $explain)
 		. "</table>";
 
-		$temps[$key] = array($e, $boucle);
+		$temps[$key] = array($e, $env);
 	}
 	// Trier par temps d'execution decroissant
 	array_multisort($t, SORT_DESC, $q, $temps);

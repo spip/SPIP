@@ -655,8 +655,7 @@ function calculer_select ($select = array(), $from = array(),
 	  }
 	  $from = reinjecte_joint($afrom, $from);
 	}
-
-	$GLOBALS['debug']['aucasou'] = array ($table, $id, $serveur);
+	$GLOBALS['debug']['aucasou'] = array ($table, $id, $serveur, $requeter);
 	$r = sql_select($select, $from, $where,
 		$groupby, array_filter($orderby), $limit, $having, $serveur, $requeter);
 	unset($GLOBALS['debug']['aucasou']);
