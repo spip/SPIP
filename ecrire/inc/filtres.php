@@ -1185,9 +1185,8 @@ function agenda_affiche($i)
 	$nb = array_shift($args);
 	$evt = array_shift($args);
 	$type = array_shift($args);
-		spip_log("evt $nb");
 	if (!$nb) {
-		$d = array(time());
+		$d = array(date("Ymd", time()));
 	} else {
 		$agenda = agenda_memo(0);
 		$evt = array();
@@ -1199,15 +1198,10 @@ function agenda_affiche($i)
 		}
 		$d = array_keys($evt);
 	}
-	if (count($d)){
-		$mindate = min($d);
-		$start = strtotime($mindate);
-	} else {
-		$mindate = ($j=_request('jour')) * ($m=_request('mois')) * ($a=_request('annee'));
-  		if ($mindate)
-			$start = mktime(0,0,0, $m, $j, $a);
-  		else $start = mktime(0,0,0);
-	}
+	$start = http_calendrier_controle_date(_request('jour'), _request('mois'), _request('annee'));
+	if ($start<0) $start = time();
+	$mindate = date("Ymd", $start);
+
 	if ($type != 'periode')
 		$evt = array('', $evt);
 	else {

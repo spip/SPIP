@@ -74,16 +74,28 @@ function calendrier_args_date($script, $annee, $mois, $jour, $type, $finurl) {
 // http://doc.spip.org/@calendrier_href
 function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $img, $titre, $class='', $alt='', $clic='', $style='', $evt='')
 {
-	$h = calendrier_args_date($script, $annee, $mois, $jour, $type, $fin);
-	$a = ($ancre ? "#$ancre" : '');
-	$c = ($class ? " class=\"$class\"" : '');
+	static $moi = NULL;
+	// pas d'Ajax pour l'espace public pour le moment ou si indispo
+	// sinon preparer la RegExp qui l'empeche aussi pour la page elle-meme
+	if ($moi === NULL)  {
+		$moi = (test_espace_prive() AND (_SPIP_AJAX === 1 ))
+		? ("/exec=" . _request('exec') .'$/')
+		: '';
+	}
+	$d = mktime (1,1,1, $mois, $jour, $annee);
+	$jour = date("d",$d);
+	$mois = date("m",$d);
+	$annee = date("Y",$d);
 
-	$moi = preg_match("/exec=" . _request('exec') .'$/', $script);
+	$h = calendrier_args_date($script, $annee, $mois, $jour, $type, $fin);
+	$url = $h . ($ancre ? "#$ancre" : '');
+	$c = ($class ? " class=\"$class\"" : '');
+	
 	if ($img) $clic =  http_img_pack($img, ($alt ? $alt : $titre), $c);
-	  // pas d'Ajax pour l'espace public pour le moment ou si indispo
-	if (test_espace_prive() AND $moi AND (_SPIP_AJAX === 1 ))
+
+	if ($moi AND preg_match($moi, $script))
 		$evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);
-	return http_href("$h$a", $clic, $titre, $style, $class, $evt);
+	return http_href($url, $clic, $titre, $style, $class, $evt);
 }
 
 // Fabrique une balise A, avec tous les attributs possibles
@@ -149,6 +161,17 @@ function calendrier_height ($heure, $heurefin, $debut, $fin, $dimheure, $dimjour
 	return $height;	
 }
 
+// Controle la coherence des 3 nombres d'une date et retourne le temps Unix,
+// sinon retourne un code d'erreur, toujours negatif
+function http_calendrier_controle_date($jour, $mois, $annee)
+{
+	if (!($jour||$mois||$anne)) return -1;
+	if (!$d = mktime(0,0,0, $mois, $jour, $annee)) return -2;
+	if ($jour != date("d", $d)) return -3;
+	if ($mois != date("m", $d)) return -4;
+	if ($annee != date("Y", $d)) return -5;
+	return $d;
+}
 //
 // init: calcul generique des evenements a partir des tables SQL
 //
@@ -246,7 +269,7 @@ function http_calendrier_mois_navigation($annee, $mois, $premier_jour, $dernier_
 	  "\n<tr><td colspan='7'>" .
 	  http_calendrier_navigation($annee,
 				   $mois,
-				   0,
+				   1,
 				   $echelle,
 				   $partie_cal,
 				   $periode,

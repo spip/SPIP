@@ -17,34 +17,23 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_calendrier_dist
 function exec_calendrier_dist()
 {
-	if ($date = _request('date')){
-		$time = explode('-', $date);
-		if (count($time) <= 2) $time[]=1;
-		if (count($time) <= 2) $time[]=1;
-		$time = array_reverse($time);
+	if ($date = recup_date(_request('date'))) {
+		list($annee, $mois, $jour ) = $date;
 	} else {
-		$time = array(_request('jour'), _request('mois'), _request('annee'));
-		if ($time[1] AND $time[0] AND $time[2])
-			$date = mktime(1,1,1, $time[1], $time[0], $time[2]);
-		else 	$date = date("Y-m-d", $timem = time()); 
+		$jour = _request('jour');
+		$mois = _request('mois');
+		$annee = _request('annee');
 	}
 
-	$type = _request('type');
+	$time = http_calendrier_controle_date($jour, $mois, $annee);
+	if ($time < 0) $time = time();
 
-	if ($type == 'semaine') {
+	if (!($type = _request('type')))
+		$type = 'mois';
 
+	elseif ($type == 'semaine')
 		$GLOBALS['afficher_bandeau_calendrier_semaine'] = true;
 
-		$titre = _T('titre_page_calendrier',
-		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
-	  }
-	elseif ($type == 'jour') {
-		$titre = nom_jour($date)." ". affdate_jourcourt($date);
-	}  else {
-		$titre = _T('titre_page_calendrier',
-		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
-		$type = 'mois';
-	}
 	$ancre = 'calendrier-1';
 	$r = generer_url_ecrire('calendrier', "type=$type") . "#$ancre";
 	$r = http_calendrier_init($time, $type, _request('echelle'), _request('partie_cal'), $r);
@@ -52,6 +41,15 @@ function exec_calendrier_dist()
 	if (_AJAX) {
 		ajax_retour($r);
 	} else {
+		$date = date("Y-m-d", $time);
+		if ($type == 'jour') {
+			$titre = nom_jour($date)." ". affdate_jourcourt($date);
+		}  else {
+			$titre = _T('titre_page_calendrier',
+					array('nom_mois' => nom_mois($date),
+						'annee' => annee($date)));
+		}
+
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page($titre, "accueil", "calendrier");
 // ne produit rien par defaut, mais est utilisee par le plugin agenda
