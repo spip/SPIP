@@ -161,17 +161,6 @@ function calendrier_height ($heure, $heurefin, $debut, $fin, $dimheure, $dimjour
 	return $height;	
 }
 
-// Controle la coherence des 3 nombres d'une date et retourne le temps Unix,
-// sinon retourne un code d'erreur, toujours negatif
-function http_calendrier_controle_date($jour, $mois, $annee)
-{
-	if (!($jour||$mois||$anne)) return -1;
-	if (!$d = mktime(0,0,0, $mois, $jour, $annee)) return -2;
-	if ($jour != date("d", $d)) return -3;
-	if ($mois != date("m", $d)) return -4;
-	if ($annee != date("Y", $d)) return -5;
-	return $d;
-}
 //
 // init: calcul generique des evenements a partir des tables SQL
 //
