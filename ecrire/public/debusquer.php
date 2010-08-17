@@ -161,19 +161,22 @@ function debusquer_navigation($tableau, $caption='', $id='debug-nav') {
 	$res = '';
 	$href = quote_amp(parametre_url($GLOBALS['REQUEST_URI'], 'var_mode', 'debug'));
 	foreach ($tableau as $i => $err) {
-		$boucle = $ligne = $skel = "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;";
+		$boucle = $ligne = $skel = '';
 		list($msg, $lieu) = $err;
 		if (is_object($lieu)) {
 			$ligne = $lieu->ligne;
-			if ($lieu->id_boucle) $boucle =  $lieu->id_boucle;
+			$boucle = $lieu->id_boucle ? $lieu->id_boucle : '';
 			if (isset($lieu->descr['nom'])) {
 				$nom_code = $lieu->descr['nom'];
 				$skel = $lieu->descr['sourcefile'];
-			} else $skel = $nom_code = '';
-			$h = parametre_url($href, 'var_mode_affiche', 'squelette');
-			$h = parametre_url($h, 'var_mode_objet', $nom_code);
-			$h .= '#L' . $ligne;
-			$lieu = "<a href='$h'><b>$boucle</b></a>";
+				$h2 = parametre_url($href, 'var_mode_objet', $nom_code);
+				$h3 = parametre_url($h2, 'var_mode_affiche', 'squelette') . '#L' . $ligne;
+				$skel = "<a href='$h3'><b>$skel</b></a>";
+				if ($boucle) {
+					$h3 = parametre_url($h2.$boucle, 'var_mode_affiche', 'boucle');
+					$boucle = "<a href='$h3'><b>$boucle</b></a>";
+				}
+			}
 		}
 
 		$j = ($i+1); 
@@ -182,9 +185,9 @@ function debusquer_navigation($tableau, $caption='', $id='debug-nav') {
 		. "&nbsp;</td><td style='text-align: left'>"
 		. $msg
 		. "</td><td style='text-align: left'>"
-		. $skel
+		. ($skel ? $skel : "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;")
 		. "</td><td class='spip-debug-arg' style='text-align: left'>"
-		. $lieu
+		. ($boucle ? $boucle : "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;")
 		. "</td><td style='text-align: right'>"
 		. $ligne
 		.  "</td></tr>\n";
