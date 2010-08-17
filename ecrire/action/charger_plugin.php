@@ -50,14 +50,46 @@ function action_charger_plugin_dist() {
 		ecrire_meta('syndic_plug', serialize($syndic_plug));
 	}
 
-	if (!preg_match(',^(https?|ftp)://.*\.zip,', $zip = $arg)
-		AND !preg_match(',^(https?|ftp)://.*\.zip,', $zip = _request('url_zip_plugin'))
-	  AND !preg_match(',^(https?|ftp)://.*\.zip,', $zip = _request('url_zip_plugin2')))
-	{
-		essaie_ajouter_liste_plugins($zip);
-		include_spip('inc/headers');
-		redirige_url_ecrire('charger_plugin');
+	# Obtenir les urls possible non vide
+	$liste_url_possible = array_filter(
+				array(
+					$arg,
+					_request('url_zip_plugin'),
+					_request('url_zpip_plugin2')
+				)
+	);
+		
+	//initialiser les tableaux
+	$locations = $liste_url_redirection = array();
+
+	//Extraire les url finales (redirection)
+	foreach ($liste_url_possible as $url_possible) {
+		// Si on est dans une url http
+		if (is_numeric(strpos($url_possible,'http'))) {
+			$cible = file_get_contents($url_possible,false,null,0,0);
+			//obtenir la liste des redirections
+			array_walk($http_response_header,"extraire_location",&$liste_url_redirection);
+			//ne conserver que la derniere redirection ou autrement l'url initiale
+			$locations[]= $liste_url_redirection ? array_pop($liste_url_redirection) : $url_possible;
+		// Autrement on retourne la valeur initiale, on sait pas quoi en faire pour le moment
+		} else {
+			$locations[]= $url_possible;
+		}
 	}
+
+	$liste_url_zip = array_filter($locations,'lister_zip');
+
+	//Si ce n'est pas une lib c'est peut etre une liste zippée de plugins
+	if (_request('arg')!='lib') {
+		foreach ($liste_url_zip as $zip) {
+			essaie_ajouter_liste_plugins($zip);
+			include_spip('inc/headers');
+			redirige_url_ecrire('charger_plugin');
+		}
+	}
+	
+	//on extrait le dernier zip de la liste
+	$zip = array_pop($liste_url_zip);
 
 	## si ici on n'est pas en POST c'est qu'il y a un loup
 	//if (!$_POST) die('pas en POST ?');
