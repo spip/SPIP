@@ -9,7 +9,7 @@ function inc_referenceurs_dist ($id_article, $select, $table, $where, $groupby, 
 
 	$nbvisites = $lescriteres = array();
 
-	$result = sql_select("referer_md5, referer, $select AS vis", $table, $where, $groupby, "maj DESC", $limit,'',$serveur);
+	$result = sql_select("maj, referer_md5, referer, $select AS vis", $table, $where, $groupby, "maj DESC", $limit,'',$serveur);
 	while ($row = sql_fetch($result,$serveur)) {
 		$referer = interdire_scripts($row['referer']);
 		$buff = stats_show_keywords($referer, $referer);
