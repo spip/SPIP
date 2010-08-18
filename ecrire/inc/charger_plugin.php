@@ -537,23 +537,4 @@ function bouton_telechargement_plugin($url, $rep) {
 
 }
 
-
-// Retourne une url d'une ligne d'entete HTTP
-// Normalement utilisé par un parcours d'un tableau
-function extraire_location($value,$key,&$liste) {
-	if (preg_match(',^[L|l]ocation\s?:\s?(.*),',$value,$matches)) {
-		$liste[] = $matches[1];
-	} 
-
-}
-
-// Confirme si la valeur fournie est une url ciblant un zip
-function lister_zip($value) {
-	if (preg_match(',^(https?|ftp)://.*\.zip,',$value)) {
-		return true;
-	}
-
-}
-
-
 ?>
