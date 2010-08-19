@@ -29,13 +29,15 @@ function exec_valider_xml_dist()
 	if (!autoriser('sauvegarder')) {
 		include_spip('inc/minipres');
 		echo minipres();
-	} else valider_xml_ok(_request('var_url'), _request('ext'));
+	} else valider_xml_ok(_request('var_url'), _request('ext'), intval(_request('limit')), _request('recur'));
 }
 
 // http://doc.spip.org/@valider_xml_ok
-function valider_xml_ok($url, $req_ext)
+function valider_xml_ok($url, $req_ext, $limit, $rec)
 {
 	$url = urldecode($url);
+	$rec = !$rec ? false : array();
+	if (!$limit) $limit = 200;
 	$titre = _T('analyse_xml');
 	if (!$url) {
 		$url_aff = 'http://';
@@ -46,11 +48,11 @@ function valider_xml_ok($url, $req_ext)
 
 		if (is_dir($url)) {
 			$dir = (substr($url,-1,1) === '/') ? $url : "$url/";
-			$ext = (!$req_ext) ? 'php' : $req_ext;
-			$files = preg_files($dir,  $ext . '$',200,false);
-			if (!$files AND !$req_ext) {
+			$ext = !preg_match('/^\w+$/', $req_ext) ? 'php' : $req_ext;
+			$files = preg_files($dir,  $ext . '$', $limit, $rec);
+			if (!$files AND $ext!=='html') {
 				$ext = 'html';
-				$files = preg_files($dir, "$ext$", 200,false);
+				$files = preg_files($dir, "$ext$", $limit, $rec);
 			}
 			if ($files)
 				$res = valider_dir($files, $ext, $url);
@@ -272,7 +274,7 @@ function valider_dir($files, $ext, $dir)
 {
 	$res = array();
 	$transformer_xml = charger_fonction('valider', 'xml');
-	$valideur = $ext=='html' ? 'valider_skel' : 'valider_script';
+	$valideur = $ext=='php' ? 'valider_script' : 'valider_skel' ;
 	foreach($files as $f) {
 		spip_timer($f);
 		$val = $valideur($transformer_xml, $f, $dir);
