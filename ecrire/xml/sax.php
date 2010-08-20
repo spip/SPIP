@@ -213,12 +213,14 @@ function sax_bug($data)
 	if (isset($dtd[$file]))
 		$dtc = $dtd[$file];
 	else {
-		if (lire_fichier($file, $r)) {
+		if (lire_fichier($file, $r)
+		AND (($avail == 'PUBLIC')
+			OR filemtime($file) > filemtime($grammaire))) {
 			$dtc = unserialize($r);
 		} else {
 			include_spip('xml/analyser_dtd');
 			$dtc = charger_dtd($grammaire, $avail);
-			if (($avail == 'PUBLIC' ) AND $dtc)
+			if ($dtc)
 				ecrire_fichier($file, serialize($dtc), true);
 		}
 		$dtd[$file] = $dtc;
@@ -251,14 +253,24 @@ function sax_bug($data)
 function analyser_doctype($data)
 {
 	if (!preg_match(_REGEXP_DOCTYPE, $data, $page)) {
-		if (!preg_match(_REGEXP_XML_RSS, $data, $page))
-			return array();
-		else return array('',
-				  'rss',
-				  'PUBLIC', 
-				  _DOCTYPE_RSS,
-				  'rss-0.91.dtd',
-				  strlen($page[1]));
+		if (preg_match(_REGEXP_XML, $data, $page)) {
+			list(,$pico, $topelement) = $page;
+			$pico = strlen($pico);
+			if ($topelement == 'rss')
+				return array('',
+					     'rss',
+					     'PUBLIC', 
+					     _DOCTYPE_RSS,
+					     'rss-0.91.dtd',
+					     $pico);
+			else {
+				$dtd = $topelement . '.dtd';
+				$f = _DIR_RACINE . 'prive/' . $dtd;
+				if (file_exists($f))
+					return array('', $topelement, 'SYSTEM', $f, $dtd, $pico);
+			}
+		}
+		return array();
 	}
 	list($doctype,$pi,$co,$pico, $topelement, $avail,$suite) = $page;
 
