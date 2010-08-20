@@ -31,6 +31,8 @@ function inc_instituer_article_dist($id_article, $statut, $id_rubrique)
 	$etats = $GLOBALS['liste_des_etats'];
 
 	if (!autoriser('publierdans', 'rubrique', $id_rubrique)) {
+		if ($statut == 'publie')
+			return '';
 		unset($etats[array_search('publie', $etats)]);
 		unset($etats[array_search('refuse', $etats)]);
 		if ($statut == 'prepa')

@@ -417,14 +417,11 @@ function autoriser_sauvegarder_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // Effacer la base de donnees ?
-// admins seulement (+auth ftp)
-// a transformer en webmestre quand la notion sera fixee
+// webmestres seulement
 // http://doc.spip.org/@autoriser_detruire_dist
 function autoriser_detruire_dist($faire, $type, $id, $qui, $opt) {
 	return
-		$qui['statut'] == '0minirezo'
-		AND !$qui['restreint']
-		;
+		autoriser('webmestre', null, null, $qui, $opt);
 }
 
 //
