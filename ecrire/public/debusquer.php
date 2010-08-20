@@ -434,15 +434,14 @@ function debusquer_squelette ($fonc, $mode, $self) {
 		$legend = _T('validation') . ' ' . $err;
 		$res = $id = '';
 	}
-	return strlen(trim($res)) > 1 ?
+	return !trim($texte) ? '' : (
 		"<div id='spip-debug'>$res"
 		. "<div id='debug_boucle'><fieldset$id><legend>"
 		. $legend
 		. "</legend>"
 		. $texte
 		. "</fieldset></div>"
-		. "</div>"
-		: "";
+		. "</div>");
 }
 
 function debusquer_navigation_squelettes($self)
