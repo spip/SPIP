@@ -105,10 +105,9 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 }
 
 // http://doc.spip.org/@valider_resultats
-function valider_resultats($res, $ext)
+function valider_resultats($res, $mode)
 {
 	$i = 0;
-	$mode = (strpos($ext,'php') ===false);
 	$table = '';
 	rsort($res);
 	foreach($res as $l) {
@@ -151,11 +150,11 @@ function valider_resultats($res, $ext)
 }
 
 // http://doc.spip.org/@valider_script
-function valider_script($transformer_xml, $f, $dir)
+function valider_script($transformer_xml, $f, $dir, $ext)
 {
 // ne pas se controler soi-meme ni l'index du repertoire
 
-	$script = basename($f, '.php');
+	$script = basename($f, '.' . $ext);
 	if ($script == _request('exec') OR $script=='index')
 		return array('/', 0, '', $script,''); 
 
@@ -197,33 +196,39 @@ function valider_pseudo_url($dir, $script, $args='')
 	: ("./?$dir=$script" . ($args ? "&$args" : ''));
 }
 
-// On essaye de valider tout squelette meme sans Doctype
+// On essaye de valider un texte meme sans Doctype
 // a moins qu'un Content-Type dise clairement que ce n'est pas du XML
 // http://doc.spip.org/@valider_skel
-function valider_skel($transformer_xml, $file, $dir)
+function valider_skel($transformer_xml, $file, $dir, $ext)
 {
-	if (!lire_fichier ($file, $skel)) return array('/', '/', $file,''); 
-	if (!strpos($skel, 'DOCTYPE')) {
-		preg_match(",Content[-]Type: *\w+/(\S)+,", $skel, $r);
+	if (!lire_fichier ($file, $text)) return array('/', '/', $file,''); 
+	if (!strpos($text, 'DOCTYPE')) {
+		preg_match(",Content[-]Type: *\w+/(\S)+,", $text, $r);
 		if ($r[1] === 'css' OR $r[1] === 'plain')
 			return array('/', 'DOCTYPE?', $file,'');
 	}
 
-	$composer = charger_fonction('composer', 'public');
-	list($skel_nom, $skel_code) = $composer($skel, 'html', 'html', $file);
+	if ($ext != 'html') {
+		// validation d'un non squelette
+		$page = array('texte' => $text);
+		$url = url_de_base() . _DIR_RESTREINT_ABS . $file;
+		$script = $file;
+	} else {
+		$script = basename($file,'.html');
+		// pas de validation solitaire pour les squelettes internes, a revoir.
+		if (substr_count($dir, '/') <= 1) {
+			$url = generer_url_public($script, $contexte);
+		} else 	$url = '';
+		$composer = charger_fonction('composer', 'public');
+		list($skel_nom, $skel_code) = $composer($text, 'html', 'html', $file);
 
-	spip_log("compilation de $file en " . strlen($skel_code) .  " octets de nom $skel_nom");
-	$url = '';
-	if (!$skel_nom) return array('/', '/', $file,''); 
-	$contexte = valider_contexte($skel_code, $file);
-	$page = $skel_nom(array('cache'=>''), array($contexte));
+		spip_log("compilation de $file en " . strlen($skel_code) .  " octets de nom $skel_nom");
+		if (!$skel_nom) return array('/', '/', $file,''); 
+		$contexte = valider_contexte($skel_code, $file);
+		$page = $skel_nom(array('cache'=>''), array($contexte));
+	}
 	list($texte, $err) = $transformer_xml($page['texte']);
 	$res = strlen($texte);
-	$script = basename($file,'.html');
-	// pas de validation solitaire pour les squelettes internes, a revoir.
-	if (substr_count($dir, '/') <= 1) {
-			$url = generer_url_public($script, $contexte);
-	}
 	return array(count($err), $res, $err, $script, $url);
 }
 
@@ -277,12 +282,12 @@ function valider_dir($files, $ext, $dir)
 	$valideur = $ext=='php' ? 'valider_script' : 'valider_skel' ;
 	foreach($files as $f) {
 		spip_timer($f);
-		$val = $valideur($transformer_xml, $f, $dir);
+		$val = $valideur($transformer_xml, $f, $dir, $ext);
 		$n = spip_timer($f); 
 		$val[]= $n;
 		spip_log("validation de $f en $n secondes");
 		$res[]= $val;
 	}
-	return valider_resultats($res, $ext);
+	return valider_resultats($res, 	$ext === 'html');
 }
 ?>
