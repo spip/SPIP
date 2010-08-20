@@ -35,7 +35,8 @@ function exec_export_all_dist(){
 
 	if (!isset($GLOBALS['meta'][$meta])){
 		// c'est un demarrage en arrivee directe depuis exec=admin_tech
-		// on initialise
+		// on initialise  (mais si c'est le validateur, ne rien faire)
+		if ($GLOBALS['exec'] == 'valider_xml') return;
 		exec_export_all_args($meta, $rub, _request('gz'));
 	}
 
