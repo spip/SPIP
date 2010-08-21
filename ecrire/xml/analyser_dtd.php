@@ -15,22 +15,45 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('xml/interfaces');
 
 // http://doc.spip.org/@charger_dtd
-function charger_dtd($grammaire, $avail)
+function charger_dtd($grammaire, $avail, $rotlvl)
 {
-	spip_timer('dtd');
-	$dtc = new DTC;
-	// L'analyseur retourne un booleen de reussite et modifie $dtc.
-	// Retourner vide en cas d'echec
-	if (!analyser_dtd($grammaire, $avail, $dtc)) return array();
+	static $dtd = array(); # cache bien utile pour le validateur en boucle
 
-	// tri final pour presenter les suggestions de corrections
-	foreach ($dtc->peres as $k => $v) {
-		asort($v);
-		$dtc->peres[$k] = $v;
-	  } 
+	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
+	if (isset($dtd[$file]))
+		return $dtd[$file];
+
+	if (lire_fichier($file, $r)) {
+		if ($avail == 'SYSTEM') {
+			$src = find_in_path($grammaire);
+			if (!$src OR filemtime($file) < filemtime($src))
+				$r = false;
+		}
+	}
+
+	if ($r) {
+		$dtc = unserialize($r);
+	} else {
+		spip_timer('dtd');
+		$dtc = new DTC;
+		// L'analyseur retourne un booleen de reussite et modifie $dtc.
+		// Retourner vide en cas d'echec
+		if (!analyser_dtd($grammaire, $avail, $dtc)) 
+			$dtc = array();
+		else {
+		// tri final pour presenter les suggestions de corrections
+			foreach ($dtc->peres as $k => $v) {
+				asort($v);
+				$dtc->peres[$k] = $v;
+			} 
 	  
-	spip_log("Analyser DTD $avail $grammaire (" . spip_timer('dtd') . ") " . count($dtc->macros)  . ' macros, ' . count($dtc->elements)  . ' elements, ' . count($dtc->attributs) . " listes d'attributs, " . count($dtc->entites) . " entites");
-#	$r = $dtc->regles; ksort($r);foreach($r as $l => $v) {$t=array_keys($dtc->attributs[$l]);echo "<b>$l</b> '$v' ", count($t), " attributs: ", join (', ',$t);$t=$dtc->peres[$l];echo "<br />",count($t), " peres: ", @join (', ',$t), "<br />\n";}exit;
+			spip_log("Analyser DTD $avail $grammaire (" . spip_timer('dtd') . ") " . count($dtc->macros)  . ' macros, ' . count($dtc->elements)  . ' elements, ' . count($dtc->attributs) . " listes d'attributs, " . count($dtc->entites) . " entites");
+			#	$r = $dtc->regles; ksort($r);foreach($r as $l => $v) {$t=array_keys($dtc->attributs[$l]);echo "<b>$l</b> '$v' ", count($t), " attributs: ", join (', ',$t);$t=$dtc->peres[$l];echo "<br />",count($t), " peres: ", @join (', ',$t), "<br />\n";}exit;
+			ecrire_fichier($file, serialize($dtc), true);
+		}
+		
+	}
+	$dtd[$file] = $dtc;
 	return $dtc;
 }
 
