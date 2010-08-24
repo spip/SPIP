@@ -102,8 +102,13 @@ function action_charger_plugin_dist() {
 	// le fichier .zip est la et bien forme
 	if (is_array($status)) {
 
-		// Reconnaitre un plugin par son plugin.xml
-		if (@file_exists($status['tmpname'].'/plugin.xml')) {
+		// Reconnaitre un plugin par son fichier xml
+		$get_infos = charger_fonction('get_infos','plugins');
+		$infos = $get_infos($status['tmpname'], true, '');
+		if ($infos) {
+			$nom = spip_xml_aplatit($infos['nom']);
+			$image = trim($infos['icon']);
+			$description = spip_xml_aplatit($infos['description']);
 			$type = 'plugin';
 			$dest = _DIR_PLUGINS_AUTO;
 		} else {
@@ -111,7 +116,7 @@ function action_charger_plugin_dist() {
 			$dest = _DIR_RACINE.'lib/';
 		}
 
-		// Fixer son emplacement d&#233;finitif
+		// Fixer son emplacement final
 		$status['dirname'] = $dest
 			. basename($status['tmpname']) . '/';
 
@@ -126,15 +131,12 @@ function action_charger_plugin_dist() {
 
 		// C'est un plugin ?
 		if ($type == 'plugin') {
-			lire_fichier($xml=$status['tmpname'].'/plugin.xml', $pluginxml);
 
-			include_spip('inc/xml');
-			$arbre = spip_xml_load($xml);
-			$retour = typo(spip_xml_aplatit($arbre['plugin'][0]['nom']));
+			$retour = typo($nom);
 
 			// l'icone ne peut pas etre dans tmp/ (lecture http oblige)
 			// on la copie donc dans local/chargeur/
-			if ($image = trim($arbre['plugin'][0]['icon'][0])) {
+			if ($image) {
 				$dir = sous_repertoire(_DIR_VAR,'chargeur');
 				@copy($status['tmpname'].'/'.$image, $image2 = $dir.basename($image));
 				$retour = "<img src='".$image2."' style='float:right;' />"
@@ -145,10 +147,9 @@ function action_charger_plugin_dist() {
 
 			if (_request('extract')) {
 				$afficher = charger_fonction('afficher_plugin','plugins'); // pour plugin_propre
-				$texte = plugin_propre(
-				spip_xml_aplatit($arbre['plugin'][0]['description']));
-				$texte .= '<p>'._T('plugin_zip_installe_finie',array('zip'=>$zip)).'</p>';
-				$texte .= "<h2 style='text-align:center;'>"._T('plugin_zip_active')."</h2>";
+				$texte = plugin_propre($description)
+				. '<p>'._T('plugin_zip_installe_finie',array('zip'=>$zip)).'</p>'
+				. "<h2 style='text-align:center;'>"._T('plugin_zip_active')."</h2>";
 			} else {
                 $texte = '<p>'._T('plugin_zip_telecharge',array('zip'=>$zip)).'</p>';
 				$texte .= liste_fichiers_pclzip($status);
