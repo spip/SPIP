@@ -23,6 +23,22 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@traiter_raccourci_lien_lang
 function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='', $connect='')
 {
+	// Si une langue est demandee sur un raccourci d'article, chercher
+	// la traduction ;
+	// - [{en}->art2] => traduction anglaise de l'article 2, sinon art 2
+	// - [{}->art2] => traduction en langue courante de l'art 2, sinon art 2
+	if ($hlang
+	AND $match = typer_raccourci($lien)) { 
+		@list($type,,$id,,$args,,$ancre) = $match; 
+		if ($id_trad = sql_getfetsel('id_trad', 'spip_articles', "id_article=$id")
+		AND $id_dest = sql_getfetsel('id_article', 'spip_articles',
+			"id_trad=$id_trad AND lang=" . sql_quote($hlang))
+		)
+			$lien = "$type$id_dest";
+		else
+			$hlang = '';
+	}
+
 	$mode = ($texte AND $class) ? 'url' : 'tout';
 	$lien = calculer_url($lien, $texte, $mode, $connect);
 	if ($mode === 'tout') {
