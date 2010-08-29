@@ -81,8 +81,7 @@ function xml_textElement($phraseur, $data)
 	  : entites_html($data);
 }
 
-// http://doc.spip.org/@xml_PiElement
-function xml_PiElement($phraseur, $target, $data)
+function xml_piElement($phraseur, $target, $data)
 {
 	$depth = $phraseur->depth;
 
@@ -99,7 +98,7 @@ function xml_PiElement($phraseur, $target, $data)
 
 
 // http://doc.spip.org/@xml_defautElement
-function xml_defautElement($phraseur, $data)
+function xml_defaultElement($phraseur, $data)
 {
 	$depth = $phraseur->depth;
 
@@ -157,10 +156,10 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL)
 				       array($phraseur, "textElement"));
 
 	xml_set_processing_instruction_handler($xml_parser,
-				       array($phraseur, 'PiElement'));
+				       array($phraseur, 'piElement'));
 
 	xml_set_default_handler($xml_parser,
-				array($phraseur, "defautElement"));
+				array($phraseur, "defaultElement"));
 
 	xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
 

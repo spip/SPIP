@@ -26,13 +26,12 @@ function finElement($phraseur, $name)
 function textElement($phraseur, $data)
 { xml_textElement($this, $data);}
 
-// http://doc.spip.org/@PiElement
-function PiElement($phraseur, $target, $data)
+function piElement($phraseur, $target, $data)
 { xml_PiElement($this, $target, $data);}
 
 // http://doc.spip.org/@defautElement
-function defautElement($phraseur, $data)
-{  xml_defautElement($this, $data);}
+function defaultElement($phraseur, $data)
+{  xml_defaultElement($this, $data);}
 
 // http://doc.spip.org/@phraserTout
 function phraserTout($phraseur, $data)
