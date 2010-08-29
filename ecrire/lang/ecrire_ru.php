@@ -845,19 +845,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'onglet_proprietes' => '&#1057;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072;',
 'onglet_repartition_actuelle' => '&#1089;&#1077;&#1081;&#1095;&#1072;&#1089;',
 'onglet_sous_rubriques' => '&#1055;&#1086;&#1076;&#1088;&#1072;&#1079;&#1076;&#1077;&#1083;&#1099;',
-'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
-'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
-'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
-'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
-'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
-'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
-'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
-'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
-'ortho_orthographe' => 'Orthographe', # NEW
-'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
-'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
-'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
-'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => '&#1069;&#1090;&#1072; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1072; &#1085;&#1077; &#1076;&#1086;&#1083;&#1078;&#1085;&#1072; &#1087;&#1088;&#1086;&#1093;&#1086;&#1076;&#1080;&#1090;&#1100; &#1095;&#1077;&#1088;&#1077;&#1079; &#1087;&#1088;&#1086;&#1082;&#1089;&#1080;',
