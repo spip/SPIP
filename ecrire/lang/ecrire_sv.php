@@ -840,10 +840,10 @@ med en f&auml;rg som visar deras status:',
 'onglet_proprietes' => 'Egenskaper',
 'onglet_repartition_actuelle' => 'nu',
 'onglet_sous_rubriques' => 'Sous-rubriques', # NEW
-'ortho_ajouter_ce_mot' => 'L&auml;gg till ordet i ordlistan',
-'ortho_aucune_suggestion' => 'Inget annat f&ouml;rslag finns f&ouml;r det h&auml;r ordet.',
-'ortho_avis_privacy' => 'Spip inneh&aring;ller en r&auml;ttstavningsfunktion. Innan du anv&auml;nder den skall du l&auml;sa f&ouml;ljande mening noggrant:',
-'ortho_avis_privacy2' => 'F&ouml;r att kontrollera stavningen av en text, kommer Spip att skicka en lista med orden till en extern "r&auml;ttstavningsserver", som personer i Spip-gemenskapen st&auml;llt till ditt f&ouml;rfogande. Orden blandas om innan de skickas f&ouml;r att skydda inneh&aring;llet till viss del. Om du &auml;r orolig &ouml;ver detta, aktivera inte r&auml;ttstavningen (och ta bort din information fr&aring;n webben).',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
 'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
 'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
 'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW

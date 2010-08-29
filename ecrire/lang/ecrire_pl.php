@@ -847,19 +847,19 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'onglet_proprietes' => 'Propri&eacute;t&eacute;s', # NEW
 'onglet_repartition_actuelle' => 'teraz',
 'onglet_sous_rubriques' => 'Sous-rubriques', # NEW
-'ortho_ajouter_ce_mot' => 'Dodaj to s&#322;owo do s&#322;ownika',
-'ortho_aucune_suggestion' => 'Nie znaleziono &#380;adnej podpowiedzi dla tego s&#322;owa.',
-'ortho_avis_privacy' => 'SPIP posiada zintegrowany korektor ortografii. Jednak zanim go w&#322;&#261;czysz, przeczytaj uwa&#380;nie nast&#281;pny paragraf&nbsp;:',
-'ortho_avis_privacy2' => 'Aby sprawdzi&#263; ortografi&#281; tekstu system wy&#347;le list&#281; s&#322;&oacute;w do sprawdzenia na jeden z "serwer&oacute;w ortograficznych" oddanych do dyspozycji przez cz&#322;onk&oacute;w spo&#322;eczno&#347;ci SPIP. S&#322;owa s&#261; wysy&#322;ane jako nieuporz&#261;dkowana lista s&#322;&oacute;w aby zagwarantowa&#263; poufno&#347;&#263;. Je&#347;li masz obawy o poufno&#347;&#263; danych nie w&#322;&#261;czaj tej opcji (i usu&#324; informacje z internetu).  ',
-'ortho_ce_mot_connu' => 'S&#322;owo jest w s&#322;owniku stronu.',
-'ortho_dico_absent' => 'Dle tego j&#281;zyka nie zosta&#322; znaleziony &#380;aden s&#322;ownik',
-'ortho_mode_demploi' => 'Nierozpoznane s&#322;owa s&#261; podkre&#347;lone na czerwono. Kliknij na ka&#380;dym s&#322;owie aby wy&#347;wietli&#263; podpowiedzi korekt.',
-'ortho_mots_a_corriger' => 's&#322;owa do poprawienia',
-'ortho_orthographe' => 'Ortografia',
-'ortho_supprimer_ce_mot' => 'Usu&#324; s&#322;owo ze s&#322;ownika',
-'ortho_trop_de_fautes' => 'Uwaga&nbsp;: tw&oacute;j tekst zawiera za du&#380;o b&#322;&#281;d&oacute;w. &#379;adne korekty nie b&#281;d&#261; sugerowane aby nie przeci&#261;&#380;a&#263; systemu.',
-'ortho_verif_impossible' => 'System nie mo&#380;e sprawdzi&#263; ortografii w tym tek&#347;cie.',
-'ortho_verifier' => 'Sprawd&#378; ortografi&#281;',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Cette page ne doit pas passer par le proxy', # NEW

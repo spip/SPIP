@@ -827,19 +827,19 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'onglet_proprietes' => 'Propriet&#259;&#355;i',
 'onglet_repartition_actuelle' => 'actual&#259;',
 'onglet_sous_rubriques' => 'Sub-rubrici',
-'ortho_ajouter_ce_mot' => 'Ad&#259;uga&#355;i acest cuv&acirc;nt &icirc;n dic&#355;ionar',
-'ortho_aucune_suggestion' => 'Nici o sugestie nu a fost g&#259;sit&#259; pentru acest cuv&acirc;nt.',
-'ortho_avis_privacy' => 'Un verificator de ortografie este integrat &icirc;n SPIP. V&#259; rug&#259;m, totu&#351;i, ca &icirc;nainte s&#259; activa&#355;i aceast&#259; func&#355;ie s&#259; citi&#355;i paragraful urm&#259;tor&nbsp;:',
-'ortho_avis_privacy2' => 'Pentru verificarea ortografiei unui text, site-ul va trimite lista de cuvinte c&#259;tre unul dintre &laquo;&nbsp;server-ele de ortografie&nbsp;&raquo; externe pus la dispozi&#355;ie de c&#259;tre diferi&#355;ii membrii ai comunit&#259;&#355;ii SPIP. Cuvintele sunt trimise &icirc;n dezordine &icirc;n scopul de a asigura un minim de confiden&#355;ialitate. Dac&#259; ave&#355;i totu&#537;i temeri pentru confiden&#355;ialitatea datelor dumneavoastr&#259; nu activa&#355;i aceast&#259; op&#355;iune (&#351;i retrage&#355;i-v&#259; imediat toate informa&#355;iile de pe Web).',
-'ortho_ce_mot_connu' => 'Acest cuv&acirc;nt face parte din dic&#355;ionarul site-ului.',
-'ortho_dico_absent' => 'Nici un dic&#355;ionar nu a fost g&#259;sit pentru aceast&#259; limb&#259;',
-'ortho_mode_demploi' => 'Cuvintele care nu au fost recunoscute sunt subliniate &icirc;n ro&#351;u. Pute&#355;i face click pe fiecare cuv&acirc;nt pentru a afi&#351;a sugestiile de corec&#355;ie.',
-'ortho_mots_a_corriger' => 'cuvinte de corectat',
-'ortho_orthographe' => 'Ortografie',
-'ortho_supprimer_ce_mot' => '&#350;terge&#355;i acest cuv&acirc;nt din dic&#355;ionar',
-'ortho_trop_de_fautes' => 'Aten&#355;ie&nbsp;: textul dumneavoastr&#259; con&#355;ine prea multe gre&#351;eli, nici o corec&#355;ie nu a fost sugerat&#259; pentru a nu supra-&icirc;nc&#259;rca sistemul.',
-'ortho_verif_impossible' => 'Sistemul nu poate verifica ortografie acestui text.',
-'ortho_verifier' => 'Verifica&#355;i ortografia',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Aceast&#259; pagin&#259; nu trebuie s&#259; treac&#259; prin proxy',

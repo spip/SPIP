@@ -826,19 +826,19 @@ ua color qu\'indica lo lor estat:',
 'onglet_proprietes' => 'Propri&eacute;t&eacute;s', # NEW
 'onglet_repartition_actuelle' => 'uei lo dia',
 'onglet_sous_rubriques' => 'Sous-rubriques', # NEW
-'ortho_ajouter_ce_mot' => 'Ajustar aqueste mot au diccionari',
-'ortho_aucune_suggestion' => 'Non s\'ei pas trobat nada suggestion per aqueste mot.',
-'ortho_avis_privacy' => 'Un verificader d\'ortografia qu\'ei integrat a SPIP. Totun, abans d\'activar aquera foncionalitat, volhatz legir dab atencion lo paragraf seguent:',
-'ortho_avis_privacy2' => 'Ent&agrave; verificar l\'ortografia d\'un t&egrave;xt, lo sit que mandar&agrave; la lista deus mots de contrarotlar v&egrave;rs un deus "serviders d\'ortografia" ext&egrave;rnes que los diferents s&ograve;cis de la comunitat SPIP e\'us an botats a la v&ograve;sta disposicion. Que\'s manda los mots dens lo des&ograve;rdre per fin de garentir un minim de confidencialitat. Se\'vs h&egrave;tz  lagui ent&agrave; las dadas v&ograve;stas, n\'activetz pas aquera opcion (e tiratz suu pic las v&ograve;stas informacions deu web).',
-'ortho_ce_mot_connu' => 'Aqueste mot que h&egrave; partida deu diccionari deu sit.',
-'ortho_dico_absent' => 'Non s\'ei pas trobat nat diccionari per aquesta lenga',
-'ortho_mode_demploi' => 'Los mots non reconeguts que son suberlinhats de roge. Que podetz clicar sus cada mot ent&agrave; afichar suggestions de correccion.',
-'ortho_mots_a_corriger' => 'mots de corregir',
-'ortho_orthographe' => 'Ortografia',
-'ortho_supprimer_ce_mot' => 'Tirar aqueth mot deu diccionari',
-'ortho_trop_de_fautes' => 'Atencion: lo v&ograve;ste t&egrave;xt que tien tr&ograve;p d\'errors, non s\'i suggereish pas nada correccion per fin de non subercargar pas lo sist&egrave;ma.',
-'ortho_verif_impossible' => 'Lo sist&egrave;ma non p&ograve;t pas verificar l\'ortografia d\'aqueste t&egrave;xt.',
-'ortho_verifier' => 'Verificar l\'ortografia',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Cette page ne doit pas passer par le proxy', # NEW

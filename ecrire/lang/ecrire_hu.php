@@ -826,19 +826,19 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'onglet_proprietes' => 'Propri&eacute;t&eacute;s', # NEW
 'onglet_repartition_actuelle' => 'jelenleg',
 'onglet_sous_rubriques' => 'Sous-rubriques', # NEW
-'ortho_ajouter_ce_mot' => 'Hozz&aacute;adni ezt a sz&oacute;t a sz&oacute;t&aacute;rban',
-'ortho_aucune_suggestion' => 'Nincs tipp tal&aacute;lva arra a sz&oacute;ra.',
-'ortho_avis_privacy' => 'Az SPIP egy helyes&iacute;r&aacute;s ellen&#337;rz&#337;t tartalmaz. Azonban miel&#337;bb aktiv&aacute;lna ezt a lehet&#337;s&eacute;get, figyelemmel olvassa a k&ouml;vetkez&#337; sz&ouml;veget&nbsp;:',
-'ortho_avis_privacy2' => 'Egy sz&ouml;veg helyes&iacute;r&aacute;s&aacute;nak ellen&#337;rz&eacute;s&eacute;re, a honlap fogja k&uuml;ldeni az ellen&#337;rizend&#337; szavak list&aacute;j&aacute;t az egyik k&uuml;ls&#337; "helyes&iacute;r&aacute;si szerver" fel&eacute;, melyet az SPIP k&ouml;z&ouml;ns&eacute;g egyes tagjai rendelkez&eacute;sre bocs&aacute;jtanak. A szavak m&aacute;s sorrendben vannak k&uuml;ldve, minim&aacute;lis bizalmass&aacute;g &eacute;rdek&eacute;ben. Ha f&eacute;lti adatait, tiltsa ezt az opci&oacute;t (&eacute;s azonnal vonja vissza informaci&oacute;it a webr&#337;l).',
-'ortho_ce_mot_connu' => 'Ez a sz&oacute; szerepel a honlap sz&oacute;t&aacute;r&aacute;ban.',
-'ortho_dico_absent' => 'Nincs sz&oacute;t&aacute;r erre a nyelvre',
-'ortho_mode_demploi' => 'A fel nem ismert szavak pirosban vannak jel&ouml;lve. Minden sz&oacute;ra lehet kattintani jav&iacute;tasi javaslatok megjelen&iacute;t&eacute;s&eacute;re.',
-'ortho_mots_a_corriger' => 'jav&iacute;tand&oacute; szavak',
-'ortho_orthographe' => 'Helyes&iacute;r&aacute;s',
-'ortho_supprimer_ce_mot' => 'Kivonni a sz&oacute;t a sz&oacute;t&aacute;rb&oacute;l',
-'ortho_trop_de_fautes' => 'Vigy&aacute;zat&nbsp;: A sz&ouml;vege t&uacute;l sok hib&aacute;t tartalmaz, nincs javaslat jav&iacute;t&aacute;sra az&eacute;rt, hogy a rendszer ne legyen t&uacute;lterhelve.',
-'ortho_verif_impossible' => 'A rendszer nem tudja ellen&#337;rizni e sz&ouml;veg helyes&iacute;r&aacute;s&aacute;t.',
-'ortho_verifier' => 'Helyes&iacute;r&aacute;s ellen&#337;rz&eacute;s ind&iacute;t&aacute;sa',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Cette page ne doit pas passer par le proxy', # NEW

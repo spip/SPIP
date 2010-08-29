@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Grupo importante:</b> Se aconseja seleccionar una palabra clave de este grupo.',
 'avis_deplacement_rubrique' => '&iexcl;ATENCI&Oacute;N! Esta secci&oacute;n contiene @contient_breves@ breve@scb@. Si la desplazas, activa esta casilla de confirmaci&oacute;n.',
 'avis_destinataire_obligatoire' => 'Debes indicar un destinatario antes de enviar este mensaje.',
-'avis_doublon_mot_cle' => 'Ya existe una palabra clave con ese t&iacute;tulo. &iquest;Est&aacute;s seguro que quieres crear otra con el mismo?', # MODIF
+'avis_doublon_mot_cle' => 'Ya existe una palabra con ese t&iacute;tulo. &iquest;Est&aacute;s seguro que quieres crear otra con el mismo?',
 'avis_erreur_connexion_mysql' => 'Error de conexi&oacute;n SQL',
 'avis_erreur_version_archive' => '<b>&iexcl;OjO! El archivo @archive@ corresponde a
  otra versi&oacute;n de SPIP, diferente a la instalada.</b> Si sigues podr&aacute;s encontrar grandes
@@ -493,7 +493,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_pas_de_forum' => 'sin foro',
 'info_passe_trop_court' => 'Contrase&ntilde;a demasiado corta',
 'info_passes_identiques' => 'Hay diferencias entre las dos contrase&ntilde;as',
-'info_pense_bete_ancien' => 'Tus antiguos recordatorios', # MODIF
+'info_pense_bete_ancien' => 'Tus antiguos recordatorios',
 'info_plus_cinq_car' => 'm&aacute;s de 5 caracteres',
 'info_plus_cinq_car_2' => '(M&aacute;s de 5 caracteres)',
 'info_plus_trois_car' => '(M&aacute;s de tres caracteres)',
@@ -794,7 +794,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'mois_non_connu' => 'desconocido',
 
 // N
-'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
+'nouvelle_version_spip' => 'La versi&oacute;n @version@ de SPIP est&aacute; disponible',
 
 // O
 'onglet_contenu' => 'Contenido',
@@ -805,19 +805,19 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'onglet_proprietes' => 'Propriedades',
 'onglet_repartition_actuelle' => 'actualmente',
 'onglet_sous_rubriques' => 'Sub-secciones',
-'ortho_ajouter_ce_mot' => 'A&ntilde;adir esta palabra al diccionario',
-'ortho_aucune_suggestion' => 'No se han encontrado sugerencias para esta palabra.',
-'ortho_avis_privacy' => 'En SPIP se integra un corrector ortogr&aacute;fico. Sin embargo, antes de activar esta caracter&iacute;stica, deber&iacute;as leer atentamente el siguiente p&aacute;rrafo:',
-'ortho_avis_privacy2' => 'Para comprobar la ortograf&iacute;a de un texto, el sitio web enviar&aacute; la lista de palabras a revisar a uno de los &laquo;&nbsp;servidores ortogr&aacute;ficos&nbsp;&raquo; externos puestos a disposici&oacute;n por distintos miembros de la comunidad SPIP. Las palabras se env&iacute;an desordenadas para asegurar un m&iacute;nimo de confidencialidad. Si sientes preocupaci&oacute;n por tus datos, no actives esta opci&oacute;n (y retira enseguida tu informaci&oacute;n de la Red).',
-'ortho_ce_mot_connu' => 'Esta palabra est&aacute; en el diccionario del sitio.',
-'ortho_dico_absent' => 'No se ha encontrado ning&uacute;n diccionario para este idioma',
-'ortho_mode_demploi' => 'Se han subrayado en rojo las palabras no reconocidas. Puedes pulsar sobre cada palabra para mostrar sugerencias para su correcci&oacute;n.',
-'ortho_mots_a_corriger' => 'palabras por corregir',
-'ortho_orthographe' => 'Ortograf&iacute;a',
-'ortho_supprimer_ce_mot' => 'Suprimir esta palabra del diccionario',
-'ortho_trop_de_fautes' => 'Atenci&oacute;n: tu texto contiene demasiadas faltas de ortograf&iacute;a, no se ha sugerido ninguna correcci&oacute;n para no sobrecargar el sistema.',
-'ortho_verif_impossible' => 'El sistema no puede comprobar la ortograf&iacute;a de este texto.',
-'ortho_verifier' => 'Revisar la ortograf&iacute;a',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'Esta p&aacute;gina no debe pasar por el proxy',

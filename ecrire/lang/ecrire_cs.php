@@ -848,19 +848,19 @@ ukazuje jejich stav:',
 'onglet_proprietes' => 'Properties', # NEW
 'onglet_repartition_actuelle' => 'nyn&iacute;',
 'onglet_sous_rubriques' => 'Sub-sections', # NEW
-'ortho_ajouter_ce_mot' => 'P&#345;idat slovo do slovn&iacute;ku',
-'ortho_aucune_suggestion' => 'K tomuto slovu nebyl nalezen &#382;&aacute;dn&yacute; n&aacute;vrh.',
-'ortho_avis_privacy' => 'Sou&#269;&aacute;st&iacute; syst&eacute;mu SPIP je program pro kontrolu p&#345;eklep&#367;. Ne&#382; ho v&#353;ak zapnete, p&#345;e&#269;t&#283;te si pe&#269;liv&#283; n&aacute;sleduj&iacute;c&iacute; informaci:',
-'ortho_avis_privacy2' => 'P&#345;i kontrole pravopisu syst&eacute;m vyu&#382;&iacute;v&aacute; seznamy slov na extern&iacute;ch "&nbsp;pravopisn&yacute;ch serverech&nbsp;" je&#382; d&aacute;vaj&iacute; k dispozici &#269;lenov&eacute; komunity SPIP. Pro zaji&#353;t&#283;n&iacute; alespo&#328; minim&aacute;ln&iacute; ochrany &uacute;daj&#367; jsou slova na tyto servry zas&iacute;l&aacute;na v p&#345;eh&aacute;zen&eacute;m po&#345;ad&iacute;. M&aacute;te-li obavy o sv&aacute; data, tuto funkci nezap&iacute;nejte (a neprodlen&#283; odstra&#328;te sv&aacute; data z webu).',
-'ortho_ce_mot_connu' => 'Toto slovo je ve slovn&iacute;ku na webu.',
-'ortho_dico_absent' => 'Pro tento jazyk nebyl nalezen &#382;&aacute;dn&yacute; slovn&iacute;k',
-'ortho_mode_demploi' => 'Nezn&aacute;m&aacute; slova jsou ozna&#269;ena &#269;erven&#283;. Navrhovan&eacute; opravy zobraz&iacute;te klepnut&iacute;m na takto ozna&#269;en&aacute; slova.',
-'ortho_mots_a_corriger' => 'slovo k oprav&#283;',
-'ortho_orthographe' => 'Pravopis',
-'ortho_supprimer_ce_mot' => 'Odstranit slovo ze slovn&iacute;ku',
-'ortho_trop_de_fautes' => 'Pozor!: v textu je p&#345;&iacute;l&#353; mnoho chyb. Aby nedo&#353;lo k p&#345;et&iacute;&#382;en&iacute; syst&eacute;mu, nejsou navrhov&aacute;ny &#382;&aacute;dn&eacute; opravy.',
-'ortho_verif_impossible' => 'Syst&eacute;m nem&#367;&#382;e zkontrolavat p&#345;eklepy v tomto textu.',
-'ortho_verifier' => 'Zkontrolovat p&#345;eklepy',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire', # NEW
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.', # NEW
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:', # NEW
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).', # NEW
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.', # NEW
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue', # NEW
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.', # NEW
+'ortho_mots_a_corriger' => 'mots &agrave; corriger', # NEW
+'ortho_orthographe' => 'Orthographe', # NEW
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire', # NEW
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.', # NEW
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.', # NEW
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe', # NEW
 
 // P
 'page_pas_proxy' => 'This page shouldn\'t go through the proxy', # NEW
