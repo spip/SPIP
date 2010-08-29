@@ -652,7 +652,6 @@ Merci de votre participation
 'onglet_repartition_rubrique' => 'R&eacute;partition par rubriques',
 'onglet_save_restaur_base' => 'Sauvegarder/restaurer la base',
 'onglet_vider_cache' => 'Vider le cache',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.',
 
 // P
 'pass_choix_pass' => 'Veuillez choisir votre nouveau mot de passe :',

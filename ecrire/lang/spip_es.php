@@ -651,7 +651,6 @@ se puede activar o desactivar .',
 'onglet_repartition_rubrique' => 'Reparto por secciones',
 'onglet_save_restaur_base' => 'Copia de respaldo y restauraci&oacute;n de la base',
 'onglet_vider_cache' => 'Vaciar la cach&eacute;',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Elije tu nueva contrase&ntilde;a:',

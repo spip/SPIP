@@ -654,7 +654,6 @@ Gracies por participar
 'onglet_repartition_rubrique' => 'Repart&iacute;o por estayes',
 'onglet_save_restaur_base' => 'Sofitar/restaurar la base',
 'onglet_vider_cache' => 'Vaciar la cach&eacute;',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Escueye la nueva contrase&ntilde;a:',
