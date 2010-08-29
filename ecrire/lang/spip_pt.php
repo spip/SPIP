@@ -652,7 +652,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'onglet_repartition_rubrique' => 'Distribui&ccedil;&atilde;o das rubricas',
 'onglet_save_restaur_base' => 'Salvaguardar/restaurar a base',
 'onglet_vider_cache' => 'Esvaziar a cache',
-'ortho_trop_de_fautes2' => 'Comece por corrigir os erros mais &oacute;bvios e tente novamente.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Favor escolher a sua nova palavra-passe',

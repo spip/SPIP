@@ -650,7 +650,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'onglet_repartition_rubrique' => 'Reparticion per rubricas',
 'onglet_save_restaur_base' => 'Sauvagardar/restaurar la basa',
 'onglet_vider_cache' => 'Vueidar l\'esconeder',
-'ortho_trop_de_fautes2' => 'Comen&ccedil;atz per corregir las errors mei evidentas e tornatz ensajar puish.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Volhatz causir lo v&ograve;ste mot de santa Clara nav&egrave;th:',

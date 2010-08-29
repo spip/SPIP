@@ -647,7 +647,7 @@ Trugarez da gemer perzh
 'onglet_repartition_rubrique' => 'Dasparzh diouzh ar rummad',
 'onglet_save_restaur_base' => 'Savetei&ntilde;/Assevel an diaz',
 'onglet_vider_cache' => 'Goullonderi&ntilde; ar grubuilh',
-'ortho_trop_de_fautes2' => 'Klaskit reizha&ntilde; ar fazio&ugrave; brasa&ntilde; ha klaskit en-dro da c\'houde.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Dibabit ho ker-tremen nevez :',

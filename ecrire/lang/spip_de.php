@@ -641,7 +641,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'onglet_repartition_rubrique' => 'Verteilung auf Rubriken',
 'onglet_save_restaur_base' => 'Datenbank sichern/wieder herstellen',
 'onglet_vider_cache' => 'Sitecache l&ouml;schen',
-'ortho_trop_de_fautes2' => 'Korrigieren sie zun&auml;chst die offensichtlichen Fehler und starten dann einen neuen Versuch.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Bitte geben Sie Ihr neues Passwort ein:',

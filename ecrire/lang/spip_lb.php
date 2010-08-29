@@ -644,7 +644,7 @@ Wann dir n&euml;t w&euml;llt dat &auml;rt Passwuert ka um Internet ofgefaangen g
 'onglet_repartition_rubrique' => 'Verdeelung no Rubrik',
 'onglet_save_restaur_base' => 'Datebank sp&auml;icheren/restaur&eacute;ieren',
 'onglet_vider_cache' => 'Cache l&auml;schen',
-'ortho_trop_de_fautes2' => 'Verbessert d&eacute;i einfachst Fehler a prob&eacute;iert nach eng K&eacute;ier.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Wielt &auml;rt neit Passwuert:',

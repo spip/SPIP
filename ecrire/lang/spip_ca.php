@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Canviar',
 'bouton_chercher' => 'Buscar',
 'bouton_choisir' => 'Escollir',
-'bouton_download' => 'Baixar',
+'bouton_download' => 'Descarregar',
 'bouton_enregistrer' => 'Enregistrar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar la missatgeria interna',
 'bouton_radio_envoi_annonces' => 'Enviar els anuncis editorials',
@@ -643,7 +643,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'onglet_repartition_rubrique' => 'Distribuci&oacute; per seccions',
 'onglet_save_restaur_base' => 'C&ograve;pia de seguretat/restaurar base de dades',
 'onglet_vider_cache' => 'Buidar la mem&ograve;ria cau',
-'ortho_trop_de_fautes2' => 'Comenceu per corregir les errades m&eacute;s evidents i torneu-ho a provar.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Escolliu la vostra nova contrasenya:',

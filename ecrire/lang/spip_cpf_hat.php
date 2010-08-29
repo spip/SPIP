@@ -648,7 +648,7 @@ M&egrave;si  w soutni petisyon-nan
 'onglet_repartition_rubrique' => 'Repatisyon ant ribrik',
 'onglet_save_restaur_base' => 'S&ograve;vgad/aranje labaz',
 'onglet_vider_cache' => 'Vide kach-la',
-'ortho_trop_de_fautes2' => 'Komans korije pli gwo f&ograve;t lotogwaf ek es&egrave;y apr&egrave; yon lot fwa.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'M&egrave;si chwazi nouvo modpas ou :',

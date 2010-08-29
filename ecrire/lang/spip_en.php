@@ -576,7 +576,7 @@ Thank you for your participation!
 'lien_afficher_texte_icones' => 'Show icons and text',
 'lien_afficher_texte_seul' => 'Show text only',
 'lien_liberer' => 'release',
-'lien_liberer_tous' => 'free these articles',
+'lien_liberer_tous' => 'release these articles',
 'lien_nouvea_pense_bete' => 'NEW MEMO',
 'lien_nouveau_message' => 'NEW MESSAGE',
 'lien_nouvelle_annonce' => 'NEW ANNOUNCEMENT',
@@ -651,7 +651,7 @@ Thank you for your participation!
 'onglet_repartition_rubrique' => 'Distribution by section',
 'onglet_save_restaur_base' => 'Backup/restore the database',
 'onglet_vider_cache' => 'Empty the cache',
-'ortho_trop_de_fautes2' => 'Start by correcting the most obvious mistakes, then try again.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Please choose your new password:',
