@@ -90,8 +90,8 @@ function plugin_checkbox($id_input, $file, $actif)
 function plugin_resume($info, $dir_plugins, $plug_file, $url_page)
 {
 	$prefix = $info['prefix'];
-	$dir = "$dir_plugins$plug_file/lang/$prefix";
-	$desc = plugin_propre($info['description'], $dir);
+	$dir = "$dir_plugins$plug_file";
+	$desc = plugin_propre($info['description'], "$dir/lang/$prefix");
 	if (($p=strpos($desc, "<br />"))!==FALSE)
 		$desc = substr($desc, 0,$p);
 	$url = parametre_url($url_page, "plugin", $dir);
