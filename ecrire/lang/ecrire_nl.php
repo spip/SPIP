@@ -790,6 +790,9 @@ een kleur geeft hun status aan&nbsp;:',
 'jour_non_connu_nc' => 'onbekend',
 
 // L
+'ldap_correspondance' => 'erfenis van het veld @champ@',
+'ldap_correspondance_1' => 'Erfenis van de velden LDAP',
+'ldap_correspondance_2' => 'Voor elk volgend SPIP veld, de naam van het overeenkomstige veld LDAP aangeven. Leegte laten om niet het te vullen, door ruimtes of komma\'s te scheiden om verschillende LDAP velden te proberen.',
 'lien_ajout_destinataire' => 'Voeg deze bestemmeling toe',
 'lien_ajouter_auteur' => 'Voeg deze auteur toe',
 'lien_ajouter_participant' => 'Voeg nieuwe deelnemer toe',

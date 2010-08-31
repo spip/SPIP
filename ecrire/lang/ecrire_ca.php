@@ -765,6 +765,9 @@ amb un color que indica el seu estat:',
 'jour_non_connu_nc' => 'n.c.',
 
 // L
+'ldap_correspondance' => 'her&egrave;ncia del camp @champ@',
+'ldap_correspondance_1' => 'Her&egrave;ncia dels camps LDAP',
+'ldap_correspondance_2' => 'Per cadascun dels camps seg&uuml;ents d\'SPIP, indiqueu el nom del camp LDAP corresponent. Deixeu-lo buit per no omplir-lo, separeu-lo amb espais o comes per assajar diversos camps LDAP.',
 'lien_ajout_destinataire' => 'Afegir aquest destinatari',
 'lien_ajouter_auteur' => 'Afegir aquest autor',
 'lien_ajouter_participant' => 'Afegir un participant',

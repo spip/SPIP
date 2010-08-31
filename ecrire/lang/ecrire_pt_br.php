@@ -749,6 +749,9 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'jour_non_connu_nc' => 'n.c.',
 
 // L
+'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
+'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
+'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Incluir este destinat&aacute;rio',
 'lien_ajouter_auteur' => 'Incluir este autor',
 'lien_ajouter_participant' => 'Incluir um participante',

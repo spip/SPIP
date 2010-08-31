@@ -772,6 +772,9 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'jour_non_connu_nc' => 'n&eacute;vtelen',
 
 // L
+'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
+'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
+'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'A c&iacute;mzett hozz&aacute;ad&aacute;sa',
 'lien_ajouter_auteur' => 'A szerz&#337; hozz&aacute;ad&aacute;sa',
 'lien_ajouter_participant' => 'Egy r&eacute;sztvev&#337; hozz&aacute;ad&aacute;sa',

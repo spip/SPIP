@@ -750,6 +750,9 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'jour_non_connu_nc' => 'unbekannt',
 
 // L
+'ldap_correspondance' => 'Vererbung von Feld @champ@',
+'ldap_correspondance_1' => 'Vererbung des LDAP Felds',
+'ldap_correspondance_2' => 'Geben sie bitte f&uuml;r jedes der folgenden SPIP-Felder das entsprechende LDAP-Feld an. Leere Felder werden nicht genutzt, LDAP-Felder mit Leerzeichen oder Kommata trennen, um mehrere zu probieren. ',
 'lien_ajout_destinataire' => 'Empf&auml;nger hinzuf&uuml;gen',
 'lien_ajouter_auteur' => 'Autor hinzuf&uuml;gen',
 'lien_ajouter_participant' => 'Teilnehmer hinzuf&uuml;gen',
