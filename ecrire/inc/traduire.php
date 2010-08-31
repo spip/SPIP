@@ -86,7 +86,7 @@ function inc_traduire_dist($ori, $lang) {
 	if (isset($deja_vu[$lang][$ori]))
 		return $deja_vu[$lang][$ori];
 
-	// modules demandes explicitement <xxx/yyy/zzz:code>
+	// modules demandes explicitement <xxx|yyy|zzz:code> cf MODULES_IDIOMES
 	if (strpos($ori,':')) {
 		list($modules,$code) = explode(':',$ori,2);
 		$modules = explode('|', $modules);
