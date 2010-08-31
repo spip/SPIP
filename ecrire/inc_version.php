@@ -89,12 +89,6 @@ OR (_EXTENSION_PHP AND @file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . _EXTENS
 	define('_FILE_OPTIONS', $f);
 } else define('_FILE_OPTIONS', '');
 
-// les modules par defaut pour la traduction.
-// Constante utilisee par le compilateur et le decompilateur
-// sa valeur etant traitee par inc_traduire_dist
-
-define('MODULES_IDIOMES', 'public|spip|ecrire');
-
 // *** Fin des define *** //
 
 

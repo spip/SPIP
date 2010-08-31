@@ -148,12 +148,10 @@ function action_charger_plugin_dist() {
 
 		// Reconnaitre un plugin par son fichier xml
 		$get_infos = charger_fonction('get_infos','plugins');
-		$dir = $status['tmpname'];
-		$infos = $get_infos($dir, true, '');
+		$infos = $get_infos($status['tmpname'], true, '');
 		if ($infos) {
 			$nom = $infos['nom'];
 			$image = $infos['icon'];
-			$prefix = $infos['prefix'];
 			$description = $infos['description'];
 			$type = 'plugin';
 			$dest = _DIR_PLUGINS_AUTO;
@@ -183,8 +181,8 @@ function action_charger_plugin_dist() {
 			// l'icone ne peut pas etre dans tmp/ (lecture http oblige)
 			// on la copie donc dans local/chargeur/
 			if ($image) {
-				$dir2 = sous_repertoire(_DIR_VAR,'chargeur');
-				@copy("$dir/$image", $image2 = $dir2.basename($image));
+				$dir = sous_repertoire(_DIR_VAR,'chargeur');
+				@copy($status['tmpname'].'/'.$image, $image2 = $dir.basename($image));
 				$retour = "<img src='".$image2."' style='float:right;' />"
 					. $retour;
 			} else 
@@ -193,7 +191,7 @@ function action_charger_plugin_dist() {
 
 			if (_request('extract')) {
 				$afficher = charger_fonction('afficher_plugin','plugins'); // pour plugin_propre
-				$texte = plugin_propre($description, "$dir/lang/$prefix")
+				$texte = plugin_propre($description)
 				. '<p>'._T('plugin_zip_installe_finie',array('zip'=>$zip)).'</p>'
 				. "<h2 style='text-align:center;'>"._T('plugin_zip_active')."</h2>";
 			} else {

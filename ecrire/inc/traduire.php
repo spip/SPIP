@@ -24,9 +24,9 @@ function chercher_module_lang($module, $lang = '') {
 	if ($f = find_in_path($module.$lang.'.php', 'lang/'))
 		return $f;
 
-	// 2) directement dans le chemin 
-	return (($module == 'local') OR strpos($module, '/'))
-		? find_in_path($module.$lang. '.php')
+	// 2) directement dans le chemin (old style, uniquement pour local)
+	return ($module == 'local')
+		? find_in_path('local'.$lang. '.php')
 		: '';
 }
 
@@ -46,7 +46,6 @@ function charger_langue($lang, $module = 'spip') {
 
 		if ($fichier_lang) {
 			$GLOBALS['idx_lang']='i18n_'.$module.'_' .$l;
-
 			include($fichier_lang);
 			$GLOBALS['i18n_'.$module.'_'.$lang]
 				= &$GLOBALS['i18n_'.$module.'_'.$l];
@@ -82,14 +81,14 @@ function surcharger_langue($fichier) {
 function inc_traduire_dist($ori, $lang) {
 
 	static $deja_vu = array();
-
+  
 	if (isset($deja_vu[$lang][$ori]))
 		return $deja_vu[$lang][$ori];
 
-	// modules demandes explicitement <xxx|yyy|zzz:code> cf MODULES_IDIOMES
+	// modules demandes explicitement <xxx/yyy/zzz:code>
 	if (strpos($ori,':')) {
 		list($modules,$code) = explode(':',$ori,2);
-		$modules = explode('|', $modules);
+		$modules = explode('/', $modules);
 	} else {
 		$modules = array('spip', 'ecrire');
 		$code = $ori;
