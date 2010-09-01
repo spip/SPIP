@@ -139,11 +139,21 @@ function plugin_etat_en_clair($etat){
 function plugin_propre($texte) {
 	$mem = $GLOBALS['toujours_paragrapher'];
 	$GLOBALS['toujours_paragrapher'] = false;
-	$regexp = "|\[:([^>]*):\]|";
-	if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
-	foreach ($matches as $regs)
-		$texte = str_replace($regs[0],
-		_T('spip/ecrire/public:'.$regs[1]), $texte);
+	// Hack specifique au Plugin Ortho dont la desc est une chaine de langue
+	// on simule inc_traduire en lisant le bon fichier sans rien affecter
+	if (preg_match('|^(\w+)_[\w_]+$|', $texte, $r)) {
+		$module = _DIR_PLUGINS . $r[1] . '/lang/' . $r[1];
+		$lang =  '_' . $GLOBALS['spip_lang'];
+		$f = find_in_path($module . $lang . '.php');
+		if ($f) {
+			$x = $GLOBALS['idx_lang'];
+			$GLOBALS['idx_lang'] = 'i18n_' . $module . $lang;
+			include($f);
+			$f = @$GLOBALS[$GLOBALS['idx_lang']][$texte];
+			if ($f) $texte = $f;
+			$GLOBALS['idx_lang']= $x;
+		}
+	}
 	$texte = propre($texte);
 	$GLOBALS['toujours_paragrapher'] = $mem;
 	return $texte;
