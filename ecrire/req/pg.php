@@ -767,7 +767,12 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='',$r
 	$ins = (strlen($champs)<3)
 	  ? " DEFAULT VALUES"
 	  : "$champs VALUES $valeurs";
-	$connexion['last'] = $q ="INSERT INTO $table $ins $ret";
+	  
+	$q ="INSERT INTO $table $ins $ret";
+	if (!$requeter) return $q;
+	$connexion['last'] = $q;
+	
+	
 	$r = spip_pg_query_simple($link, $q);
 #	spip_log($q);
 	if ($r) {
