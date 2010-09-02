@@ -725,9 +725,8 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
  
 	$query="INSERT OR REPLACE INTO $table $champs VALUES $valeurs";
 	
-	
-	if ($r = spip_sqlite_query($query, $serveur)) {
-		if (!$requeter) return $query;
+	if ($r = spip_sqlite_query($query, $serveur, $requeter)) {
+		if (!$requeter) return $r;	
 		
 		if (_sqlite_is_version(3, $sqlite)) $nb = $sqlite->lastInsertId();
 		else $nb = sqlite_last_insert_rowid($sqlite);
