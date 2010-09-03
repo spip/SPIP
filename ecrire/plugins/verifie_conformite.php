@@ -17,6 +17,9 @@ include_spip('inc/plugin');
 
 // http://doc.spip.org/@plugin_verifie_conformite
 function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLUGINS){
+	static $etats = array('dev','experimental','test', 'stable');
+
+	$matches = array();
 	$silence = false;
 	$p = null;
 	// chercher la declaration <plugin spip='...'> a prendre pour cette version de SPIP
@@ -34,7 +37,7 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		}
 	}
 	if (is_null($p)){
-		$arbre = array('erreur' => array(_T('erreur_plugin_tag_plugin_absent')." : $plug/plugin.xml"));
+		$arbre = array('erreur' => array(_T('erreur_plugin_tag_plugin_absent')." : $plug"));
 		$silence = true;
 	}
 	else
@@ -42,31 +45,29 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 	if (!is_array($arbre)) $arbre = array();
   // verification de la conformite du plugin avec quelques
   // precautions elementaires
-  if (!isset($arbre['nom'])){
-  	if (!$silence)
+	if (!isset($arbre['nom'])){
+		if (!$silence)
 			$arbre['erreur'][] = _T('erreur_plugin_nom_manquant');
 		$arbre['nom'] = array("");
 	}
-  if (!isset($arbre['version'])){
-  	if (!$silence)
+	if (!isset($arbre['version'])){
+	  	if (!$silence)
 			$arbre['erreur'][] = _T('erreur_plugin_version_manquant');
 		$arbre['version'] = array("");
 	}
-  if (!isset($arbre['prefix'])){
-  	if (!$silence)
+	if (!isset($arbre['prefix'])){
+	  	if (!$silence)
 			$arbre['erreur'][] = _T('erreur_plugin_prefix_manquant');
 		$arbre['prefix'] = array("");
-	}
-	else{
-		$prefix = "";
+	} else{
 		$prefix = trim(end($arbre['prefix']));
 		if (strtoupper($prefix)=='SPIP'){
 			$arbre['erreur'][] = _T('erreur_plugin_prefix_interdit');
 		}
 		if (isset($arbre['etat'])){
 			$etat = trim(end($arbre['etat']));
-			if (!in_array($etat,array('dev','experimental','test','stable')))
-				$arbre['erreur'][] = _T('erreur_plugin_etat_inconnu')." : $etat";
+			if (!in_array($etat, $etats))
+				$arbre['erreur'][] = _T('erreur_plugin_etat_inconnu')." : '$etat'";
 		}
 		if (isset($arbre['options'])){
 			foreach($arbre['options'] as $optfile){
