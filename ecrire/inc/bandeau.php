@@ -250,7 +250,7 @@ function bando_identite(){
 	  //. "<img alt='Informations sur ".textebrut($nom_site)."' src='$img_info' />"
 	  ."</a>"
 	  . "| "
-	  . "<a class='voir' href='"._DIR_RACINE."'>"._T('icone_visiter_site')."</a>"
+	  . "<a class='voir' href='"._DIR_RACINE."'>"._T('ecrire:icone_visiter_site')."</a>"
 	  . "</p>";
 
 
