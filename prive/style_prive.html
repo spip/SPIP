@@ -138,9 +138,9 @@ td { text-align: #GET{left}; }
 #bando_haut ul.deroulant li:hover, #bando_haut ul.deroulant li.actif,#bando_haut ul.deroulant li.actif_tempo { background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 #bando_haut ul.deroulant li ul {border: 1px solid #aaaaaa; border-top: 0; text-align:#GET{left}; height: auto; width: auto; display: block; position:absolute; #GET{left}:-3000em; z-index: 99; }
 #bando_haut ul.deroulant li:hover ul, #bando_haut ul.deroulant li.actif ul, #bando_haut ul.deroulant li.actif_tempo ul { #GET{left}:auto;}
-#bando_haut ul.deroulant li a { display: block; }
+#bando_haut ul.deroulant li a { display: block;  color:#444; font-weight:bold;}
 #bando_haut ul.deroulant li ul li { background-color: #fff; }
-#bando_haut ul.deroulant li ul li a { font-weight: normal; }
+#bando_haut ul.deroulant li ul li a {  }
 #bando_haut ul.deroulant li ul li a:hover,
 #bando_haut ul.deroulant li ul li a:focus { background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 
@@ -212,8 +212,8 @@ td { text-align: #GET{left}; }
 #bando_outils #rapides .spip_recherche .recherche {margin-bottom:0;margin-top:1px;}
 #bando_outils #rapides .spip_recherche .submit {vertical-align:bottom;}
 
-#bando_navigation ul li {width:105px; text-align: center; }
-#bando_navigation ul li ul li {width: auto; min-width: 80px; float:none;text-align:#GET{left};position:static;}
+#bando_navigation ul li {min-width:85px; max-width:115px; text-align:center;border-#GET{right}: 1px solid #eee; }
+#bando_navigation ul li ul li {width: auto; min-width: 85px; max-width:250px; float:none;text-align:#GET{left};position:static;}
 
 #bando_navigation { position: relative; }
 #bando_navigation { clear:both; background: #fff; padding-top: 3px; border-bottom: 1px solid #aaa; }
@@ -221,7 +221,8 @@ td { text-align: #GET{left}; }
 #bando_navigation ul li a:hover,
 #bando_navigation ul li a:focus { text-decoration: underline; }
 
-#bando_navigation ul.deroulant > li > a { color:#333;}
+#bando_navigation ul li.first { border-#GET{left}: 1px solid #eee;}
+#bando_navigation ul.deroulant > li > a { color:#333; }
 
 
 /* pour les icones pochoir de diala */

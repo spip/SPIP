@@ -20,8 +20,14 @@ include_spip('inc/cookie');
 // http://doc.spip.org/@action_converser_dist
 function action_converser_dist()
 {
+	$update_session = false;
+	if ( _request('arg') AND spip_connect()) {
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$securiser_action();
+		$update_session = true;
+	}
 
-	$lang = action_converser_changer_langue();
+	$lang = action_converser_changer_langue($update_session);
 	$redirect = rawurldecode(_request('redirect'));
 
 	if (!$redirect) $redirect = _DIR_RESTREINT_ABS;
@@ -29,14 +35,11 @@ function action_converser_dist()
 	redirige_par_entete($redirect, true);
 }
 
-function action_converser_changer_langue(){
+function action_converser_changer_langue($update_session){
 	if ($lang = _request('var_lang'))
 		action_converser_post($lang);
 	elseif ($lang = _request('var_lang_ecrire')) {
-		if ( _request('arg') AND spip_connect()) {
-			$securiser_action = charger_fonction('securiser_action', 'inc');
-			$securiser_action();
-
+		if ($update_session) {
 			sql_updateq("spip_auteurs", array("lang" => $lang), "id_auteur = " . $GLOBALS['visiteur_session']['id_auteur']);
 			$GLOBALS['visiteur_session']['lang'] = $lang;
 			$session = charger_fonction('session', 'inc');
