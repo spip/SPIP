@@ -290,7 +290,14 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 	static $dirs = array();
 
 	$base = str_replace("//", "/", $base);
-	if (preg_match(',[/_]$,', $base)) $base = substr($base,0,-1);
+
+	# suppr le dernier caractere si c'est un / ou un _
+	switch(substr($base,-1)) {
+		case '/':
+		case '_':
+			$base = substr($base,0,-1);
+	}
+
 	if (!strlen($subdir)) {
 		$n = strrpos($base, "/");
 		if ($n === false) return $nobase ? '' : ($base .'/');
@@ -298,7 +305,7 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 		$base = substr($base, 0, $n+1);
 	} else {
 		$base .= '/';
-		$subdir = str_replace("/", "", "$subdir");
+		$subdir = str_replace("/", "", $subdir);
 	}
 
 	$baseaff = $nobase ? '' : $base;
