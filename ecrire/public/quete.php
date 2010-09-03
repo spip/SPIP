@@ -79,7 +79,7 @@ function quete_date_postdates() {
 	  date('Y-m-d H:i:s',
 	       ($GLOBALS['meta']['date_prochain_postdate'] > time())
 			? $GLOBALS['meta']['date_prochain_postdate']
-	       : (time()+(3600*24*10000))) ;
+	       : (time()+(3600*24*365*2))) ;
 }
 
 
