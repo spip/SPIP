@@ -216,7 +216,7 @@ td { text-align: #GET{left}; }
 #bando_navigation ul li ul li {width: auto; min-width: 85px; max-width:250px; float:none;text-align:#GET{left};position:static;}
 
 #bando_navigation { position: relative; }
-#bando_navigation { clear:both; background: #fff; padding-top: 3px; border-bottom: 1px solid #aaa; }
+#bando_navigation { clear:both; background: #fff; border-bottom: 1px solid #aaa; }
 #bando_navigation ul li a { display: block; padding: .8em 0.5em; font-weight: bold; }
 #bando_navigation ul li a:hover,
 #bando_navigation ul li a:focus { text-decoration: underline; }
@@ -225,15 +225,16 @@ td { text-align: #GET{left}; }
 #bando_navigation ul.deroulant > li > a { color:#333; }
 
 
-/* pour les icones pochoir de diala */
+/* par defaut on style pour des icones standards en 48px
+Les styles pour les icones pochoir de diala sont dans themes/spip/style_prive_theme
+*/
 
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a { background-color: #[(#GET{claire}|couleur_eclaircir)];}
+.navigation_avec_icones #bando_navigation ul.deroulant > li > a { }
 .navigation_avec_icones #bando_navigation ul.deroulant > li > a:hover,
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:focus { background-color: #GET{claire}; }
+.navigation_avec_icones #bando_navigation ul.deroulant > li > a:focus { background-color: #[(#GET{claire}|couleur_eclaircir)]; }
 
-.navigation_avec_icones #bando_navigation ul li a {background-position:center top;background-repeat:no-repeat;padding-top:57px;}
-.navigation_avec_icones #bando_navigation ul li ul li a {margin-#GET{left}:7px; margin-#GET{right}: 1.2em; background-position:[(#GET{left})] center;margin-top:0;padding-#GET{left}:24px;padding-top:0.8em;}
-
+.navigation_avec_icones #bando_navigation ul li a {background-position:center 5px;background-repeat:no-repeat;padding-top:60px;}
+.navigation_avec_icones #bando_navigation ul li ul li a {margin-#GET{left}:7px; margin-#GET{right}: 1.0em; background-position:[(#GET{left})] center;margin-top:0;padding-#GET{left}:24px;padding-top:0.8em;}
 
 .navigation .sous_navigation .item a {display:block;background-position:left center;margin-left:7px;padding-left:24px;background-repeat:no-repeat;}
 
