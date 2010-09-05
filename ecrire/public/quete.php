@@ -72,14 +72,16 @@ function quete_profondeur($id, $connect='') {
 }
 
 
-# retourne la date a laquelle comparer lorsqu'il y a des post-dates
-// http://doc.spip.org/@quete_date_postdates
-function quete_date_postdates() {
+/**
+ * retourne la condition sur la date lorsqu'il y a des post-dates
+ * @param string $champ_date
+ * @return string
+ */
+function quete_condition_postdates($champ_date) {
 	return
-	  date('Y-m-d H:i:s',
-	       ($GLOBALS['meta']['date_prochain_postdate'] > time())
-			? $GLOBALS['meta']['date_prochain_postdate']
-	       : (time()+(3600*24*365*2))) ;
+	  ($GLOBALS['meta']['date_prochain_postdate'] > time())
+			? "$champ_date<".sql_quote(date('Y-m-d H:i:s',$GLOBALS['meta']['date_prochain_postdate']))
+	    : "1=1" ;
 }
 
 
