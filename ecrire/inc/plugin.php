@@ -196,7 +196,7 @@ function liste_plugin_valides($liste_plug, $force = false){
 			// renseigner ce plugin
 			$infos[$dir_type][$plug] = $get_infos($plug,$force,constant($dir_type));
 			// si il n'y a pas d'erreur
-			if (!isset($infos[$dir_type][$plug]['erreur'])) {
+			if ($infos[$dir_type][$plug] AND !isset($infos[$dir_type][$plug]['erreur'])) {
 				// regarder si on a pas deja selectionne le meme plugin dans une autre version
 				$version = isset($infos[$dir_type][$plug]['version'])?$infos[$dir_type][$plug]['version']:NULL;
 				if (isset($liste_non_classee[$p=strtoupper($infos[$dir_type][$plug]['prefix'])])){
@@ -709,7 +709,7 @@ function installe_plugins($test = false){
 		$plug = $resume['dir'];
 		$dir_type = $resume['dir_type'];		
 		$infos = $get_infos($plug,false,constant($dir_type));
-		if (isset($infos['install'])){
+		if ($infos AND isset($infos['install'])){
 			if ($test) return true; // il y a des installations a faire
 			$ok = installe_un_plugin($plug,$infos,$dir_type);
 			// on peut enregistrer le chemin ici car il est mis a jour juste avant l'affichage
