@@ -177,13 +177,12 @@ function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $art
 	$gadget = pipeline('accueil_gadgets',$gadget);
 
 	if (strlen($gadget) > 0) {
-	  $gadget = "<div>&nbsp;</div>"
-	    . debut_cadre_trait_couleur('', true)
+	  $gadget = 
+	    debut_cadre_trait_couleur('', true)
 	    . $gadget
 	    . fin_cadre_trait_couleur(true);
 	}
 
-	$gadget .= "<div>&nbsp;</div>";
 	return $gadget;
 }
 
@@ -368,9 +367,6 @@ function exec_accueil_dist()
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_index'), "accueil", "accueil");
-
-
-	echo gros_titre(_T("icone_accueil"), '', false);
 
 	echo debut_gauche("",true);
 
