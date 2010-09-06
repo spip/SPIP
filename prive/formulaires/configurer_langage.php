@@ -19,19 +19,20 @@ function formulaires_configurer_langage_charger_dist(){
 	init_langues();
 	$langues = explode(',', $GLOBALS['meta']['langues_proposees']);
 
-	
+
 	$valeurs = array(
 		'var_lang_ecrire'=>$GLOBALS['spip_lang'],
 		'_langues'=>$langues
 	);
-		
+
 	return $valeurs;
 }
 
 
 function formulaires_configurer_langage_traiter_dist(){
 	include_spip('action/converser');
-	action_converser_changer_langue();
+	action_converser_changer_langue(true);
+	refuser_traiter_formulaire_ajax();
 
 	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
 }
@@ -43,7 +44,7 @@ function afficher_langues_choix($langues,$name,$id,$selected){
 	foreach ($langues as $l) {
 		$checked = ($l == $selected) ? ' checked=\'checked\'' : '';
 		$ret .= "<div class='choix'>"
-		 . "<input type='radio' name='$name' id='{$id}_$l' value='$l'$checked>"
+		 . "<input type='radio' name='$name' id='{$id}_$l' value='$l'$checked />"
 		 . "<label for='{$id}_$l'>" . traduire_nom_langue($l)."</label>"
 		 . "</div>";
 	}
