@@ -286,26 +286,6 @@ $spip_syndic_articles_join = array(
 		"id_syndic_article"=>"id_syndic_article",
 		"id_syndic"=>"id_syndic");
 
-$spip_signatures = array(
-		"id_signature"	=> "bigint(21) NOT NULL",
-		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"date_time"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"nom_email"	=> "text DEFAULT '' NOT NULL",
-		"ad_email"	=> "text DEFAULT '' NOT NULL",
-		"nom_site"	=> "text DEFAULT '' NOT NULL",
-		"url_site"	=> "text DEFAULT '' NOT NULL",
-		"message"	=> "mediumtext DEFAULT '' NOT NULL",
-		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
-		"maj"	=> "TIMESTAMP");
-
-$spip_signatures_key = array(
-		"PRIMARY KEY"	=> "id_signature",
-		"KEY id_article"	=> "id_article",
-		"KEY statut" => "statut");
-$spip_signatures_join = array(
-		"id_signature"=>"id_signature",
-		"id_article"=>"id_article");
-
 /// Attention: mes_fonctions peut avoir deja defini cette variable
 /// il faut donc rajouter, mais pas reinitialiser
 
@@ -331,8 +311,6 @@ $tables_principales['spip_syndic'] =
 	array('field' => &$spip_syndic, 'key' => &$spip_syndic_key, 'join' => &$spip_syndic_join);
 $tables_principales['spip_syndic_articles']	=
 	array('field' => &$spip_syndic_articles, 'key' => &$spip_syndic_articles_key, 'join' => &$spip_syndic_articles_join);
-$tables_principales['spip_signatures'] =
-	array('field' => &$spip_signatures, 'key' => &$spip_signatures_key, 'join' => &$spip_signatures_join);
 	
 	$tables_principales = pipeline('declarer_tables_principales',$tables_principales);
 }
