@@ -2081,7 +2081,8 @@ function f_jQuery ($texte) {
 			'javascript/jquery.js',
 			'javascript/jquery.form.js',
 			'javascript/jquery.autosave.js',
-			'javascript/ajaxCallback.js'
+			'javascript/ajaxCallback.js',
+			'javascript/jquery.cookie.js'
 		))) as $script)
 			if ($script = find_in_path($script))
 				$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
