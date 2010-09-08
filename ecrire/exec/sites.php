@@ -47,8 +47,7 @@ function exec_sites_args($id_syndic)
 // http://doc.spip.org/@afficher_site
 function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
-	global $spip_lang_left,  
-$spip_lang_right;
+	global $spip_lang_left, $spip_lang_right;
 
 	$cherche_mot = _request('cherche_mot');
 	$select_groupe = _request('select_groupe');
@@ -73,6 +72,8 @@ $spip_lang_right;
 	$editer_mots = charger_fonction('editer_mots', 'inc');
 	if ($flag_administrable)
 		$instituer_site = charger_fonction('instituer_site','inc');
+
+	$lister_objets = charger_fonction('lister_objets','inc');
 
 	echo debut_grand_cadre(true);
 	echo afficher_hierarchie($id_rubrique);
@@ -151,7 +152,7 @@ $spip_lang_right;
 				. "</div>"
 			  : "")
 
-			. afficher_objets('syndic_article',_T('titre_articles_syndiques'), array('FROM' => 'spip_syndic_articles', 'WHERE' => "id_syndic=$id_syndic", 'ORDER BY' => "date DESC"), $id_syndic)
+			. $lister_objets('syndic_articles',array('titre'=>_T('titre_articles_syndiques'),'id_syndic'=>$id_syndic,'par'=>'date'))
 
 			. ($date_syndic ? "<div class='date_syndic'>" . _T('info_derniere_syndication').' '.affdate_heure($date_syndic) .".</div>" : "")
 			. "<div class='mise_a_jour_syndic'>"

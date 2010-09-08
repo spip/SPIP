@@ -15,34 +15,32 @@ include_spip('inc/presentation');
 
 function encours_suivi()
 {
-	global $connect_statut;
-
-
+	$lister_objets = charger_fonction('lister_objets','inc');
 	$res = '';
 
 	// Les articles a valider
 	//
 
-	$res .=  afficher_objets('article',_T('info_articles_proposes'), array("WHERE" => "statut='prop'", 'ORDER BY' => "date DESC"));
+	$res .=  $lister_objets('articles',array('titre'=>_T('info_articles_proposes'),'statut'=>'prop', 'par'=>'date'));
 
 	//
 	// Les breves a valider
 	//
-	$res .= afficher_objets('breve',afficher_plus(generer_url_ecrire('breves'))._T('info_breves_valider'), array("FROM" => 'spip_breves', 'WHERE' => "statut='prepa' OR statut='prop'", 'ORDER BY' => "date_heure DESC"), true);
+	$res .= $lister_objets('breves',array('titre'=>afficher_plus_info(generer_url_ecrire('breves'))._T('info_breves_valider'),'statut'=>array('prepa','prop'), 'par'=>'date_heure'));
 
 	//
 	// Les sites references a valider
 	//
 	if ($GLOBALS['meta']['activer_sites'] != 'non') {
-		$res .= afficher_objets('site',afficher_plus(generer_url_ecrire('sites_tous')).'<b>' . _T('info_site_valider') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY'=> "nom_site"));
+		$res .= $lister_objets('sites',array('titre'=>afficher_plus_info(generer_url_ecrire('sites_tous')). _T('info_site_valider') ,'statut'=>'prop', 'par'=>'nom_site'));
 	}
 
-	if ($connect_statut == '0minirezo') {
-	//
-	// Les sites a probleme
-	//
-	  if ($GLOBALS['meta']['activer_sites'] != 'non') {
-		$res .= afficher_objets('site',afficher_plus(generer_url_ecrire('sites_tous')). '<b>' . _T('avis_sites_syndiques_probleme') . '</b>', array('FROM' => 'spip_syndic', 'WHERE' => "(syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => 'nom_site'));
+	if ($GLOBALS['visiteur_session']['statut'] == '0minirezo') {
+		//
+		// Les sites a probleme
+		//
+		if ($GLOBALS['meta']['activer_sites'] != 'non') {
+		$res .= $lister_objets('sites',array('titre'=>afficher_plus_info(generer_url_ecrire('sites_tous')). _T('avis_sites_syndiques_probleme') ,'statut'=>'publie', 'syndication'=>array('off','sus'), 'par'=>'nom_site'));
 	}
 
 	// Les articles syndiques en attente de validation
@@ -59,14 +57,9 @@ function encours_suivi()
 			. "</a></small>";
 
 	}
-	
-	$res = pipeline('accueil_encours',$res);
 
-	if (!$res) return '';
+	return pipeline('accueil_encours',$res);
 
-	return 
-	"<h2>"._T('texte_en_cours_validation')."</h2>"
-	. $res;
 }
 
 // http://doc.spip.org/@etat_base_accueil
@@ -169,6 +162,7 @@ function suivi_liste_participants()
 function exec_suivi_edito_dist()
 {
   global $id_rubrique, $connect_statut, $connect_id_auteur, $spip_display, $connect_id_rubrique;
+	$lister_objets = charger_fonction('lister_objets','inc');
 
 	$id_rubrique =  intval($id_rubrique);
  	pipeline('exec_init',array('args'=>array('exec'=>'suivi_edito','id_rubrique'=>$id_rubrique),'data'=>''));
@@ -189,21 +183,23 @@ function exec_suivi_edito_dist()
 
 	echo debut_droite("", true);
 
+	$date_now = date('Y-m-d H:i:s');
 	if ($GLOBALS['meta']["post_dates"] == "non"
 	AND $connect_statut == '0minirezo')
-		echo afficher_objets('article',_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>".sql_quote(date('Y-m-d H:i:s')), 'ORDER BY' => "date"));
+		echo $lister_objets('articles',array('titre'=>_T('info_article_a_paraitre'),'statut'=>'publie', 'par'=>'date', 'where'=>'date>'.sql_quote($date_now), 'date_sens'=>1));
 
 
-	echo encours_suivi();
+	$s = encours_suivi();
+	if ($s)
+		echo "<h2>"._T('texte_en_cours_validation')."</h2>" . $s;
 
 	// Les articles recents
 	//
 	echo "<h2>"._T('articles_recents')."</h2>";
-	echo afficher_objets('article',
-	#afficher_plus(generer_url_ecrire('articles_page')) .
-	_T('articles_recents'), array("WHERE" => "statut='publie'" .($GLOBALS['meta']["post_dates"] == "non"
-		? " AND date<".sql_quote(date('Y-m-d H:i:s')) : ''),
-		'ORDER BY' => "date DESC", 'LIMIT' => '0,4'));
+	$contexte = array('titre'=>_T('articles_recents'),'statut'=>'publie', 'par'=>'date','nb'=>5);
+	if ($GLOBALS['meta']["post_dates"] == "non")
+		$contexte['where']='date<='.sql_quote($date_now);
+	echo $lister_objets('articles',$contexte);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'suivi_edito'),'data'=>''));
 

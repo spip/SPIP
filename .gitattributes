@@ -36,7 +36,6 @@ ecrire/action/instituer_breve.php -text
 ecrire/action/instituer_collaboration.php -text
 ecrire/action/instituer_groupe_mots.php -text
 ecrire/action/instituer_langue_rubrique.php -text
-ecrire/action/instituer_rubrique_breves.php -text
 ecrire/action/instituer_site.php -text
 ecrire/action/instituer_syndic.php -text
 ecrire/action/joindre.php -text
@@ -169,7 +168,6 @@ ecrire/exec/install.php -text
 ecrire/exec/instituer_auteur.php -text
 ecrire/exec/lang_raccourcis.php -text
 ecrire/exec/legender.php -text
-ecrire/exec/meme_rubrique.php -text
 ecrire/exec/memoriser.php -text
 ecrire/exec/menu_agenda.php -text
 ecrire/exec/menu_navigation.php -text
@@ -199,6 +197,7 @@ ecrire/exec/tourner.php -text
 ecrire/exec/upgrade.php -text
 ecrire/exec/valider_xml.php -text
 ecrire/exec/virtualiser.php -text
+ecrire/exec/visiteurs.php -text
 ecrire/genie/maintenance.php -text
 ecrire/genie/mise_a_jour.php -text
 ecrire/genie/syndic.php -text
@@ -258,6 +257,7 @@ ecrire/inc/json.php -text
 ecrire/inc/lang_liste.php -text
 ecrire/inc/legender.php -text
 ecrire/inc/lien.php -text
+ecrire/inc/lister_objets.php -text
 ecrire/inc/log.php -text
 ecrire/inc/mail.php -text
 ecrire/inc/meme_rubrique.php -text
@@ -736,6 +736,17 @@ prive/javascript/login.js -text
 prive/javascript/multilang.js -text
 prive/javascript/pause.js -text
 prive/javascript/sha256.js -text
+prive/listes/articles.html -text
+prive/listes/auteurs.html -text
+prive/listes/auteurs_fonctions.php -text
+prive/listes/breves.html -text
+prive/listes/mots.html -text
+prive/listes/rubriques.html -text
+prive/listes/syndic.html -text
+prive/listes/syndic_articles.html -text
+prive/listes/syndic_articles_fonctions.php -text
+prive/listes/visiteurs.html -text
+prive/listes/visiteurs_fonctions.php -text
 prive/minipres.css -text
 prive/modeles/application.html -text
 prive/modeles/audio.html -text

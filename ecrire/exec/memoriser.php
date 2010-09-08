@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Recupere et affiche (en ajax) une fonction memorisee dans inc/presentation
+// obsolete : utilise uniquement par afficher_objets
 // http://doc.spip.org/@exec_memoriser_dist
 function exec_memoriser_dist()
 {

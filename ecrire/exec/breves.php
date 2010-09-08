@@ -30,6 +30,7 @@ function exec_breves_dist()
 	echo debut_droite('', true);
 
  	$result = sql_select('*', "spip_rubriques", "id_parent=0",'', '0+titre,titre');
+	$lister_objets = charger_fonction('lister_objets','inc');
 
  	while($row=sql_fetch($result)){
 		$id_rubrique=$row['id_rubrique'];
@@ -39,9 +40,11 @@ function exec_breves_dist()
 		$texte=$row['texte'];
 		$editable = autoriser('publierdans','rubrique',$id_rubrique);
 
-		$statuts = "'prop', 'publie'" . ($editable ? ", 'refuse'": "");
+		$statuts = array('prop', 'publie');
+		if ($editable)
+			$statuts[] = 'refuse';
 
-		$res = afficher_objets('breve',$titre.aide ("breves"), array("SELECT" => 'id_rubrique, id_breve, date_heure, titre, statut', "FROM" => 'spip_breves', 'WHERE' => "id_rubrique=$id_rubrique AND statut IN ($statuts)", 'ORDER BY' => "date_heure DESC"),'',true);
+		$res = $lister_objets('breves',array('titre'=>$titre.aide ("breves"),'statut'=>$statuts, 'id_rubrique'=>$id_rubrique, 'par'=>'date_heure'), true);
 
 		echo $res ;
 

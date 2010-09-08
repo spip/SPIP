@@ -262,78 +262,59 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 	global  $spip_lang_right;
 
-	//
-	// Verifier les boucles a mettre en relief
-	//
-
-	$relief = sql_countsel('spip_articles', "id_rubrique=$id_rubrique AND statut='prop'");
-
-	if (!$relief) {
-		$relief = sql_countsel('spip_breves', "id_rubrique=$id_rubrique AND (statut='prepa' OR statut='prop')");
-	}
-
-	if (!$relief AND $GLOBALS['meta']['activer_sites'] != 'non') {
-		$relief = sql_countsel('spip_syndic', "id_rubrique=$id_rubrique AND statut='prop'");
-	}
-
-	if (!$relief AND $GLOBALS['meta']['activer_syndic'] != 'non'
-	AND autoriser('publierdans','rubrique',$id_rubrique)) {
-		$relief = sql_countsel('spip_syndic', "id_rubrique=$id_rubrique AND (syndication='off' OR syndication='sus') AND statut='publie'");
-	}
-
 	$res = '';
+	$lister_objets = charger_fonction('lister_objets','inc');
 
-	if ($relief) {
+	$encours = "";
+	//
+	// Les articles a valider
+	//
+	$encours .=  $lister_objets('articles',array('titre'=>_T('info_articles_proposes'),'statut'=>'prop', 'id_rubrique'=>$id_rubrique,'par'=>'date'));
 
-		$encours = "";
-		//
-		// Les articles a valider
-		//
-		$encours .= afficher_objets('article',_T('info_articles_proposes'),	array('WHERE' => "id_rubrique=$id_rubrique AND statut='prop'", 'ORDER BY' => "date DESC"));
+	//
+	// Les breves a valider
+	//
+	$encours .= $lister_objets('breves',array('titre'=>_T('info_breves_valider'),'statut'=>array('prepa','prop'),'id_rubrique'=>$id_rubrique, 'par'=>'date_heure'));
 
-		//
-		// Les breves a valider
-		//
-		$encours .= afficher_objets('breve','<b>' . _T('info_breves_valider') . '</b>', array("FROM" => 'spip_breves', 'WHERE' => "id_rubrique=$id_rubrique AND (statut='prepa' OR statut='prop')", 'ORDER BY' => "date_heure DESC"), true);
+	//
+	// Les sites references a valider
+	//
+	if ($GLOBALS['meta']['activer_sites'] != 'non') {
+		$encours .= $lister_objets('sites',array('titre'=> _T('info_site_valider') ,'statut'=>'prop','id_rubrique'=>$id_rubrique, 'par'=>'nom_site'));
+	}
 
-		//
-		// Les sites references a valider
-		//
-		if ($GLOBALS['meta']['activer_sites'] != 'non') {
-			$encours .= afficher_objets('site','<b>' . _T('info_site_valider') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique=$id_rubrique AND statut='prop'", 'ORDER BY' => "nom_site"));
-		}
+	//
+	// Les sites a probleme
+	//
+	if ($GLOBALS['meta']['activer_sites'] != 'non'
+	AND autoriser('publierdans','rubrique',$id_rubrique)) {
+		$encours .= $lister_objets('sites',array('titre'=> _T('avis_sites_syndiques_probleme') ,'statut'=>'publie', 'syndication'=>array('off','sus'),'id_rubrique'=>$id_rubrique, 'par'=>'nom_site'));
+	}
 
-		//
-		// Les sites a probleme
-		//
-		if ($GLOBALS['meta']['activer_sites'] != 'non'
-		AND autoriser('publierdans','rubrique',$id_rubrique)) {
+	// Les articles syndiques en attente de validation
+	if ($id_rubrique == 0
+	AND autoriser('publierdans','rubrique',$id_rubrique)) {
 
-			$encours .= afficher_objets('site','<b>' . _T('avis_sites_syndiques_probleme') . '</b>', array('FROM' => 'spip_syndic', 'WHERE' => "id_rubrique=$id_rubrique AND (syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => "nom_site"));
-		}
+		$cpt = sql_countsel("spip_syndic_articles", "statut='dispo'");
+		if ($cpt)
+			$encours .= "<br /><small><a href='" .
+				generer_url_ecrire("sites_tous") .
+				"' style='color: black;'>" .
+				$cpt .
+				" " .
+				_T('info_liens_syndiques_1') .
+				" " .
+				_T('info_liens_syndiques_2') .
+				"</a></small>";
+	}
 
-		// Les articles syndiques en attente de validation
-		if ($id_rubrique == 0
-		AND autoriser('publierdans','rubrique',$id_rubrique)) {
+	$encours = pipeline('rubrique_encours',array('args'=>array('type'=>'rubrique','id_objet'=>$id_rubrique),'data'=>$encours));
 
-			$cpt = sql_countsel("spip_syndic_articles", "statut='dispo'");
-			if ($cpt)
-				$encours .= "<br /><small><a href='" .
-					generer_url_ecrire("sites_tous") .
-					"' style='color: black;'>" .
-					$cpt .
-					" " .
-					_T('info_liens_syndiques_1') .
-					" " .
-					_T('info_liens_syndiques_2') .
-					"</a></small>";
-		}
-
+	if (strlen(trim($encours)))
 		$res .= 
 			debut_cadre_couleur_foncee("",true, "", _T('texte_en_cours_validation'))
-			. pipeline('rubrique_encours',array('args'=>array('type'=>'rubrique','id_objet'=>$id_rubrique),'data'=>$encours))
+			. $encours
 			. fin_cadre_couleur_foncee(true);
-	}
 
 	$n = sql_countsel('spip_rubriques');
 	$bouton_article = $bouton_breves = $bouton_sites = "";
@@ -355,31 +336,31 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	//////////  Les articles en cours de redaction
 	/////////////////////////
 
-  $res .= afficher_objets('article',_T('info_tous_articles_en_redaction'), array("WHERE" => "statut='prepa' AND id_rubrique=$id_rubrique", 'ORDER BY' => "date DESC"));
+	$res .=  $lister_objets('articles',array('titre'=>_T('info_tous_articles_en_redaction'),'statut'=>'prepa', 'id_rubrique'=>$id_rubrique,'par'=>'date'));
 
 
 	//////////  Les articles publies
 	/////////////////////////
 
-	define('_TRI_ARTICLES_RUBRIQUE', 'date DESC');  # 0+titre,titre
-	$res .= afficher_objets('article',_T('info_tous_articles_presents'), array("WHERE" => "statut='publie' AND id_rubrique=$id_rubrique", 'ORDER BY' => _TRI_ARTICLES_RUBRIQUE));
+	@define('_TRI_ARTICLES_RUBRIQUE', 'date');  # 'num titre'
+	$res .=  $lister_objets('articles',array('titre'=>_T('info_tous_articles_presents'),'statut'=>'publie', 'id_rubrique'=>$id_rubrique,'par'=>_TRI_ARTICLES_RUBRIQUE));
 
 	// si une rubrique n'a pas/plus d'article publie, afficher les eventuels articles refuses
 	// pour permettre de la vider et la supprimer eventuellement
 	if (sql_countsel("spip_articles", "statut='publie' AND id_rubrique=".intval($id_rubrique), $groupby, $having)==0)
-		$res .= afficher_objets('article',_T('info_tous_articles_refuses'), array("WHERE" => "statut='refuse' AND id_rubrique=$id_rubrique", 'ORDER BY' => _TRI_ARTICLES_RUBRIQUE));
+		$res .=  $lister_objets('articles',array('titre'=>_T('info_tous_articles_refuses'),'statut'=>'refuse', 'id_rubrique'=>$id_rubrique,'par'=>_TRI_ARTICLES_RUBRIQUE));
 
   $res .= $bouton_article;
 
 	//// Les breves
 
-	$res .= afficher_objets('breve','<b>' . _T('icone_ecrire_nouvel_article') . '</b>', array("FROM" => 'spip_breves', 'WHERE' => "id_rubrique=$id_rubrique AND statut != 'prop' AND statut != 'prepa'", 'ORDER BY' => "date_heure DESC"));
+	$res .= $lister_objets('breves',array('titre'=>_T('icone_ecrire_nouvel_article'),'where'=>"statut != 'prop' AND statut != 'prepa'", 'id_rubrique'=>$id_rubrique,'par'=>'date_heure'));
   $res .= $bouton_breves;
 
 	//// Les sites references
 
 	if ($GLOBALS['meta']["activer_sites"] == 'oui') {
-		$res .= afficher_objets('site','<b>' . _T('titre_sites_references_rubrique') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique=$id_rubrique AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'ORDER BY' => 'nom_site'));
+		$res .= $lister_objets('sites',array('titre'=>_T('titre_sites_references_rubrique') ,'where'=>"statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'id_rubrique'=>$id_rubrique,'par'=>'nom_site'));
  		$res .= $bouton_sites;
 	}
 	return $res;

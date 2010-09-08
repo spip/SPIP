@@ -65,8 +65,7 @@
 	<bouton id='visiteurs' parent="bando_activite">
 		<icone>images/auteur-6forum-16.png</icone>
 		<titre>icone_afficher_visiteurs</titre>
-		<url>auteurs</url>
-		<args>statut=!1comite,0minirezo,nouveau</args>
+		<url>visiteurs</url>
 	</bouton>
 	
 	<bouton id="bando_squelette">

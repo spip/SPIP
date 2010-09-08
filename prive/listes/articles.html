@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	titre,1,
+	id_article,1
+}})
+]<B_liste_art>
+#ANCRE_PAGINATION
+<div class="liste-objets articles">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_article,info_nb_articles}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre principale'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='auteur'><:auteur:></th>
+			<th class='date secondaire'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id'>[(#TRI{id_article,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_art(ARTICLES){id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
+			<td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]">[(#RANG). ]#TITRE</a></td>
+			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
+				<a href="[(#URL_ECRIRE{articles_edit,id_article=#ID_ARTICLE})]">#ID_ARTICLE</a>,
+				#ID_ARTICLE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_art>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_art>[
+<div class="liste-objets articles"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_art>
