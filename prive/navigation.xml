@@ -12,14 +12,14 @@
 		<url>navigation</url>
 		<args>menu=bando_edition</args>
 	</bouton>
+	<bouton id='auteurs' parent="bando_edition">
+		<icone>images/auteur-16.png</icone>
+		<titre>icone_auteurs</titre>
+	</bouton>
 	<bouton id='rubriques' parent="bando_edition">
 		<icone>images/rubrique-16.png</icone>
 		<titre>info_rubriques</titre>		
 		<url>naviguer</url>
-	</bouton>
-	<bouton id='auteurs' parent="bando_edition">
-		<icone>images/auteur-16.png</icone>
-		<titre>icone_auteurs</titre>
 	</bouton>
 	<bouton id='breves' parent="bando_edition">
 		<icone>images/breve-16.png</icone>
