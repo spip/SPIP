@@ -1338,4 +1338,38 @@ function balise_TRI_dist($p, $liste='true') {
 	$p->interdire_scripts = false;
 	return $p;
 }
+
+
+/**
+ * #SAUTER{n} permet de sauter en avant n resultats dans une boucle
+ * La balise modifie le compteur courant de la boucle, mais pas les autres
+ * champs qui restent les valeurs de la boucle avant le saut. Il est donc
+ * preferable d'utiliser la balise juste avant la fermeture </BOUCLE>
+ *
+ * L'argument n doit etre superieur a zero sinon la balise ne fait rien
+ *
+ * @param <type> $p
+ * @return <type>
+ */
+function balise_SAUTER_dist($p){
+	$id_boucle = $p->id_boucle;
+	$boucle = $p->boucles[$id_boucle];
+
+	if (!$boucle) {
+		$msg = array('zbug_champ_hors_boucle', array('champ' => '#SAUTER'));
+		erreur_squelette($msg, $p);
+	}
+	else {
+		$_connect = sql_quote($boucle->sql_serveur);
+
+		$_saut = interprete_argument_balise(1,$p);
+		$_compteur = "\$Numrows['$id_boucle']['compteur_boucle']";
+		$_total = "\$Numrows['$id_boucle']['total']";
+
+		$p->code = "vide($_compteur=sql_skip(\$result,$_compteur,$_saut,$_total,$_connect))";
+	}
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 ?>
