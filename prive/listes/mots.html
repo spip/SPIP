@@ -1,5 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
-	date,#ENV{date_sens,-1},
+	multi titre,1,
 	titre,1,
 	id_mot,1
 }})
@@ -17,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_mot(MOTS){id_mot?}{id_rubrique?}{id_article?}{where?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_mot(MOTS){id_mot?}{id_groupe?}{id_rubrique?}{id_article?}{where?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='icone'>[(#CHEMIN_IMAGE{mot-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_MOT|image_reduire{20,26})]<a href="[(#ID_MOT|generer_url_entite{mot})]">[(#RANG). ]#TITRE</a></td>

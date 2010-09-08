@@ -49,6 +49,7 @@ ecrire/action/reorganiser.php -text
 ecrire/action/session.php -text
 ecrire/action/supprimer.php -text
 ecrire/action/supprimer_document.php -text
+ecrire/action/supprimer_mot.php -text
 ecrire/action/supprimer_traduction.php -text
 ecrire/action/tester.php -text
 ecrire/action/tester_taille.php -text
@@ -156,7 +157,6 @@ ecrire/exec/editer_auteurs.php -text
 ecrire/exec/editer_mots.php -text
 ecrire/exec/export_all.php -text
 ecrire/exec/fond.php -text
-ecrire/exec/grouper_mots.php -text
 ecrire/exec/iconifier.php -text
 ecrire/exec/import_all.php -text
 ecrire/exec/index.php -text
@@ -235,7 +235,6 @@ ecrire/inc/filtres_mini.php -text
 ecrire/inc/formater_article.php -text
 ecrire/inc/formater_auteur.php -text
 ecrire/inc/gadgets.php -text
-ecrire/inc/grouper_mots.php -text
 ecrire/inc/headers.php -text
 ecrire/inc/icone_renommer.php -text
 ecrire/inc/iconifier.php -text
@@ -740,6 +739,8 @@ prive/listes/articles.html -text
 prive/listes/auteurs.html -text
 prive/listes/auteurs_fonctions.php -text
 prive/listes/breves.html -text
+prive/listes/mots-admin.html -text
+prive/listes/mots-admin_fonctions.php -text
 prive/listes/mots.html -text
 prive/listes/rubriques.html -text
 prive/listes/syndic.html -text
