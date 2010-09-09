@@ -36,7 +36,7 @@ function inc_iconifier_dist($objet, $id,  $script, $visible=false, $flag_modif=t
 	$texteon = $logo_libelles[($id OR $objet != 'rubrique') ? $objet : 'racine'];
 
 	$img = balise_img(chemin_image('image-24.png'), "", 'cadre-icone');
-	return recuperer_fond('prive/editer/logo',array('objet'=>$objet,'id_objet'=>$id, 'titre'=>$img.$texteon));
+	return recuperer_fond('prive/editer/logo',array('objet'=>$objet,'id_objet'=>$id, 'titre'=>$img.$texteon, 'editable'=>$flag_modif));
 
 }
 

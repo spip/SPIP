@@ -89,7 +89,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 			)
 	));
 	echo fin_boite_info(true);
-	echo $iconifier('id_syndic', $id_syndic, 'sites', false, $flag_administrable);
+	echo $iconifier('syndic', $id_syndic, 'sites', false, $flag_administrable);
 
 	echo pipeline('afficher_config_objet',array('args'=>array('type'=>'site','id'=>$id_syndic),'data'=>''));
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));

@@ -97,7 +97,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	$meme_rubrique = charger_fonction('meme_rubrique', 'inc');
 	$iconifier = charger_fonction('iconifier', 'inc');
-	$icone = $iconifier('id_article', $id_article,'articles', false, $flag_editable);
+	$icone = $iconifier('article', $id_article,'articles', false, $flag_editable);
 
 	$boite = pipeline ('boite_infos', array('data' => '',
 		'args' => array(

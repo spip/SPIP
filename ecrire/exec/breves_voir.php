@@ -89,7 +89,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 		'data'=>''
 		)
 	);
-	echo $iconifier('id_breve', $id_breve, 'breves_voir', false, autoriser('publierdans','rubrique',$id_rubrique));
+	echo $iconifier('breve', $id_breve, 'breves_voir', false, autoriser('publierdans','rubrique',$id_rubrique));
 
 	echo pipeline('afficher_config_objet',array('args'=>array('type'=>'breve','id'=>$id_breve),'data'=>''));
 

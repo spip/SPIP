@@ -39,7 +39,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 	if (!is_array($options))
 		$options = unserialize($options);
 	$res = array(
-		'editable'=>($GLOBALS['meta']['activer_logos'] == 'oui' ? ' ' : ''),
+		'editable'=>($GLOBALS['meta']['activer_logos'] == 'oui' ? ' ' : '')&&(!isset($options['editable']) OR $options['editable']),
 		'logo_survol'=>($GLOBALS['meta']['activer_logos_survol'] == 'oui' ? ' ' : ''),
 		'objet'=>$objet,
 		'id_objet'=>$id_objet,
@@ -67,7 +67,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 	// pas de logo_on -> pas de formulaire pour le survol
 	if (!isset($res['logo_on']))
 		$res['logo_survol']='';
-		
+
 	return $res;
 }
 
