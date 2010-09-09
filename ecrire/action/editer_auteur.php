@@ -152,7 +152,7 @@ function auteur_referent($id_auteur,$c){
 }
 
 // http://doc.spip.org/@instituer_auteur
-function instituer_auteur($id_auteur, $c) {
+function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
 	if (!$id_auteur=intval($id_auteur))
 		return false;
 	// commencer par traiter les cas particuliers des logins et pass
@@ -184,7 +184,7 @@ function instituer_auteur($id_auteur, $c) {
 			$c['restreintes'] = array($c['id_parent']);
 	}
 
-	if (isset($c['webmestre']) AND autoriser('modifier', 'auteur', $id_auteur,null, array('webmestre' => '?')))
+	if (isset($c['webmestre']) AND ($force_webmestre OR autoriser('modifier', 'auteur', $id_auteur,null, array('webmestre' => '?'))))
 		$champs['webmestre'] = $c['webmestre']=='oui'?'oui':'non';
 	
 	// Envoyer aux plugins
