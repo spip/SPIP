@@ -501,8 +501,8 @@ padding-top:10px;
  * Formulaires compactes
  */
 
-.formulaire_spip_compact{
-	font-size: 100%;
+.formulaire_spip_compact, #navigation .formulaire_spip,#extra .formulaire_spip{
+	margin-top: 20px;
 }
 .formulaire_spip_compact ul li,
 #navigation .formulaire_spip li,#extra .formulaire_spip li {
@@ -523,7 +523,6 @@ padding-top:10px;
 	padding-top: 3px;
 	padding-bottom: 3px;
 	margin-#GET{left}:0;
-
 }
 
 .formulaire_spip_compact select,#navigation .formulaire_spip select,#extra .formulaire_spip select { font-size: 0.95em; width:auto;padding:1px 0;}
@@ -563,3 +562,9 @@ input[type="submit"] {
 	padding: 0;
 	overflow:visible;
 }
+
+/* Cas particuliers */
+.formulaire_editer_logo {}
+.formulaire_editer_logo .titrem {font-size: 1.1em;}
+.formulaire_editer_logo .apercu,.formulaire_editer_logo .ajouter_survol {text-align: center;}
+.formulaire_editer_logo .taille {font-size: 0.9em;}
