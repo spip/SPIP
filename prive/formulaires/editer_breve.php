@@ -26,6 +26,15 @@ function formulaires_editer_breve_charger_dist($id_breve='new', $id_rubrique=0, 
 	return $valeurs;
 }
 
+/**
+ * Identifier le formulaire en faisant abstraction des parametres qui
+ * ne representent pas l'objet edite
+ */
+function formulaires_editer_breve_identifier_dist($id_breve='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='breves_edit_config', $row=array(), $hidden=''){
+	return serialize(array($id_breve,$lier_trad,$row));
+}
+
+
 // Choix par defaut des options de presentation
 function breves_edit_config($row)
 {
