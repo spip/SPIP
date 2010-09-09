@@ -385,7 +385,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'icone_tous_articles' => 'Totei v&ograve;streis articles ',
 'icone_tous_auteur' => 'Totei leis autors ',
 'icone_valider_message' => 'Validar aqueu messatge',
-'icone_visiter_site' => 'Vesitar',
+'icone_visiter_site' => 'Vesitar', # MODIF
 'icone_voir_en_ligne' => 'Veire en linha',
 'image_tourner_180' => 'Rotacion 180&deg;',
 'image_tourner_droite' => 'Rotacion 90&deg; cap a drecha',

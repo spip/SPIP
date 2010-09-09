@@ -386,7 +386,7 @@ Gracies por participar
 'icone_tous_articles' => 'Tolos art&iacute;culos de to',
 'icone_tous_auteur' => 'Tolos autores',
 'icone_valider_message' => 'Validar esti mensaxe',
-'icone_visiter_site' => 'Visitar',
+'icone_visiter_site' => 'Visitar', # MODIF
 'icone_voir_en_ligne' => 'Ver en llinia',
 'image_tourner_180' => 'Voltiar 180&deg;',
 'image_tourner_droite' => 'Voltiar 90&deg; a la derecha',

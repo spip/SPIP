@@ -385,7 +385,7 @@ Dankon pro via partopreno
 'icone_tous_articles' => '&#264;iuj viaj artikoloj',
 'icone_tous_auteur' => '&#264;iuj a&#365;toroj',
 'icone_valider_message' => 'Validigi tiun mesa&#285;on',
-'icone_visiter_site' => 'Viziti',
+'icone_visiter_site' => 'Viziti', # MODIF
 'icone_voir_en_ligne' => 'Vidi &#265;eretigite',
 'image_tourner_180' => 'Rotacio 180&deg;',
 'image_tourner_droite' => '90&deg; rotacio dekstren',

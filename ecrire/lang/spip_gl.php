@@ -385,7 +385,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'icone_tous_articles' => 'Os teus artigos',
 'icone_tous_auteur' => 'Todo o equipo de redacci&oacute;n',
 'icone_valider_message' => 'Validar a mensaxe',
-'icone_visiter_site' => 'Ver o web',
+'icone_visiter_site' => 'Ver o web', # MODIF
 'icone_voir_en_ligne' => 'Ver en li&ntilde;a',
 'image_tourner_180' => 'Rotaci&oacute;n 180&deg;',
 'image_tourner_droite' => 'Rotaci&oacute;n 90&deg; &aacute; dereita',

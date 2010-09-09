@@ -380,7 +380,7 @@ Merci fir &auml;r Participatioun
 'icone_tous_articles' => 'All &auml;r Artikelen',
 'icone_tous_auteur' => 'All d\'Auteuren',
 'icone_valider_message' => 'D&euml;se Message valid&eacute;ieren',
-'icone_visiter_site' => 'Ukucken',
+'icone_visiter_site' => 'Ukucken', # MODIF
 'icone_voir_en_ligne' => 'Online weisen',
 'image_tourner_180' => '180&deg; dr&eacute;ien',
 'image_tourner_droite' => '90&deg; no riets dr&eacute;ien',

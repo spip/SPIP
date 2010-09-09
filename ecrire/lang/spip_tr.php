@@ -383,7 +383,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'icone_tous_articles' => 'T&uuml;m makaleleriniz',
 'icone_tous_auteur' => 'T&uuml;m yazarlar',
 'icone_valider_message' => '&#304;letiyi onayla',
-'icone_visiter_site' => 'Ziyaret et',
+'icone_visiter_site' => 'Ziyaret et', # MODIF
 'icone_voir_en_ligne' => '&Ccedil;evrimi&ccedil;i g&ouml;ster',
 'image_tourner_180' => '180&deg; d&ouml;nd&uuml;r',
 'image_tourner_droite' => '90&deg; sa&#287;a d&ouml;nd&uuml;r',

@@ -360,7 +360,7 @@ sera ignor&eacute;e) :
 'icone_tous_articles' => 'Svi vasi clanci',
 'icone_tous_auteur' => 'Svi autori',
 'icone_valider_message' => 'Ovjeri ovu poruku',
-'icone_visiter_site' => 'Posjeti',
+'icone_visiter_site' => 'Posjeti', # MODIF
 'icone_voir_en_ligne' => 'Pogledaj online',
 'image_tourner_180' => 'Okreni za 180°',
 'image_tourner_droite' => 'Okreni 90° na desnu stranu',

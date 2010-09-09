@@ -382,7 +382,7 @@ Trugarez da gemer perzh
 'icone_tous_articles' => 'Ho holl bennado&ugrave;',
 'icone_tous_auteur' => 'An holl skridaozerien',
 'icone_valider_message' => 'Asanti&ntilde; d\'ar gemennadenn-ma&ntilde;',
-'icone_visiter_site' => 'Gweladenni&ntilde;',
+'icone_visiter_site' => 'Gweladenni&ntilde;', # MODIF
 'icone_voir_en_ligne' => 'Gwelet enlinenn',
 'image_tourner_180' => 'Trei&ntilde; da 180 derez',
 'image_tourner_droite' => 'Trei&ntilde; da 90 derez war an tu dehou',

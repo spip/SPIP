@@ -385,7 +385,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'icone_tous_articles' => 'Todos tus art&iacute;culos',
 'icone_tous_auteur' => 'Todos los autores y autoras',
 'icone_valider_message' => 'Validar este mensaje',
-'icone_visiter_site' => 'Visitar el sitio',
+'icone_visiter_site' => 'Visitar el sitio', # MODIF
 'icone_voir_en_ligne' => 'Ver en l&iacute;nea',
 'image_tourner_180' => 'Rotaci&oacute;n de 180&deg;',
 'image_tourner_droite' => 'Rotaci&oacute;n de 90&deg; a la derecha',

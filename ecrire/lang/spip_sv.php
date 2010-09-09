@@ -374,7 +374,7 @@ Tack f&ouml;r ditt deltagande
 'icone_tous_articles' => 'Alla dina artiklar',
 'icone_tous_auteur' => 'Alla f&ouml;rfattare',
 'icone_valider_message' => 'Godk&auml;nn meddelandet',
-'icone_visiter_site' => 'Bes&ouml;k sajten',
+'icone_visiter_site' => 'Bes&ouml;k sajten', # MODIF
 'icone_voir_en_ligne' => 'Se online',
 'image_tourner_180' => 'Rotera 180&deg;',
 'image_tourner_droite' => 'Rotera 90&deg; &aring;t h&ouml;ger',

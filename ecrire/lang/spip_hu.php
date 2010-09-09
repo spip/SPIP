@@ -383,7 +383,7 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'icone_tous_articles' => 'Az &ouml;sszes cikkei',
 'icone_tous_auteur' => 'Az &ouml;sszes szerz&#337;',
 'icone_valider_message' => 'Az &uuml;zenet &eacute;rv&eacute;nyes&iacute;t&eacute;se',
-'icone_visiter_site' => 'L&aacute;togat&aacute;s',
+'icone_visiter_site' => 'L&aacute;togat&aacute;s', # MODIF
 'icone_voir_en_ligne' => 'N&eacute;zni &eacute;l&#337;ben',
 'image_tourner_180' => '180&deg; fordul&aacute;s',
 'image_tourner_droite' => 'Fordul&aacute;s 90&deg; jobbra',
