@@ -863,6 +863,7 @@ function tester_url_ecrire($nom)
 function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NULL, $type=NULL)
 {
 	if ($public === NULL) $public = !test_espace_prive();
+	if ($entite=='syndic') $entite='site'; // cas particulier d'appels sur objet/id_objet...
 
 	if (!$public) {
 		if (!$entite) return '';
@@ -873,7 +874,7 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 			$res = $f($id, $args, $ancre, ' ');
 		else $res = "";
 	} else {
-		if (is_string($public)) {
+		if (is_string($public) AND !is_numeric($public)) {
 			include_spip('base/connect_sql');
 			$id_type = id_table_objet($entite,$public);
 			return _DIR_RACINE . get_spip_script('./')
