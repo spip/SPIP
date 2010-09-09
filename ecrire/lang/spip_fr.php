@@ -220,9 +220,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => 'Fichier @fichier@ introuvable',
-'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.',
-'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.',
 'form_auteur_confirmation' => 'Confirmez votre adresse email',
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.',
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.',
 'form_auteur_mail_confirmation' => 'Bonjour,
 
 Vous avez demand&eacute; &agrave; changer votre adresse email.
@@ -384,7 +384,7 @@ Merci de votre participation
 'icone_tous_articles' => 'Tous vos articles',
 'icone_tous_auteur' => 'Tous les auteurs',
 'icone_valider_message' => 'Valider ce message',
-'icone_visiter_site' => 'Visiter',
+'icone_visiter_site' => 'Voir le site public',
 'icone_voir_en_ligne' => 'Voir en ligne',
 'image_tourner_180' => 'Rotation 180&deg;',
 'image_tourner_droite' => 'Rotation 90&deg; &agrave; droite',
@@ -569,7 +569,7 @@ Merci de votre participation
 'info_visites' => 'visites :',
 'info_vos_rendez_vous' => 'Vos rendez-vous &agrave; venir',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Vos pense-b&ecirc;te',
+'infos_vos_pense_bete' => 'Vos pense-b&ecirc;tes',
 'item_breve_proposee' => 'Br&egrave;ve propos&eacute;e',
 
 // L
@@ -652,7 +652,6 @@ Merci de votre participation
 'onglet_repartition_rubrique' => 'R&eacute;partition par rubriques',
 'onglet_save_restaur_base' => 'Sauvegarder/restaurer la base',
 'onglet_vider_cache' => 'Vider le cache',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.',
 
 // P
 'pass_choix_pass' => 'Veuillez choisir votre nouveau mot de passe :',
