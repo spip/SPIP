@@ -188,7 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'Fr&eacute;ijor',
 'date_saison_3' => 'Summer',
 'date_saison_4' => 'Hierscht',
+'date_secondes' => 'secondes', # NEW
 'date_semaines' => 'Wochen',
+'date_un_mois' => 'mois', # NEW
+'date_une_heure' => 'heure', # NEW
+'date_une_minute' => 'minute', # NEW
+'date_une_seconde' => 'seconde', # NEW
+'date_une_semaine' => 'semaine', # NEW
 'dirs_commencer' => ' fir d\'Installatioun richteg unzef&auml;nken',
 'dirs_preliminaire' => 'Fir d\'&eacute;ischt: <b>R&eacute;gl&eacute;iert d\'Zougangs-Rechter</b>',
 'dirs_probleme_droits' => 'Problem mat den Zougangs-Rechter',
@@ -201,7 +207,7 @@ wann dat n&euml;t de Fall ass, &auml;nnert de Numm vun den Dossier\'en mat &auml
 <p>Fir dat ze verbesseren, benotzt &auml;ren FTP-Client fir d\'Zougangsrechter vun jidfer Dossier anzestellen.
 D&euml;s Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 <p>Wann dat gemaach ass, da k&euml;nnt dier ',
-'double_occurrence' => '<MODIF>K&euml;nnt duebel fir',
+'double_occurrence' => 'K&euml;nnt duebel fir', # MODIF
 
 // E
 'en_cours' => 'am gaangen',
@@ -216,6 +222,18 @@ D&euml;s Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 
 // F
 'fichier_introuvable' => 'De Fichier @fichier@ kann n&euml;t font ginn',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Dir sidd schon ugemelt.',
 'form_email_non_valide' => '&Auml;r Email-Adress ass n&euml;t richteg.',
 'form_forum_access_refuse' => 'Dir hutt keen Zougang m&eacute;i zu d&euml;sem Site.',
@@ -387,12 +405,16 @@ Merci fir &auml;r Participatioun
 'info_article_supprime' => 'Gel&auml;schten Artikel',
 'info_articles' => 'Artikelen',
 'info_articles_a_valider' => 'Artikelen fir ze valid&eacute;ieren',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Propos&eacute;iert Artikelen',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'Auteur(en):',
 'info_authentification_ftp' => 'Umeldung (per FTP).',
 'info_bloquer_lien' => 'Link block&eacute;ieren',
 'info_breves_02' => 'Kuerzmeldungen',
 'info_breves_2' => 'Kuerzmeldungen',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Kuerzmeldungen fir ze valid&eacute;ieren',
 'info_connexion_refusee' => 'D\'Verbindung gouf refus&eacute;iert.',
 'info_contact_developpeur' => 'Kontakt&eacute;iert w.e.g. en D&eacute;veloppeur.',
@@ -413,6 +435,8 @@ Merci fir &auml;r Participatioun
 'info_document' => 'Dokument',
 'info_document_indisponible' => 'D&euml;st Dokument g&euml;tt &euml;t n&euml;t',
 'info_documents' => 'Dokumenter',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP erlaabt d\'Sch&eacute;cken vu Messagen a privat Forum\'en t&euml;schent den Mataarbechter vum Site. Dir k&euml;nnt d&euml;s Fonktionnalit&eacute;it an- oder ausschalten.',
 'info_ecire_message_prive' => 'E privaten Message sch&eacute;cken',
 'info_email_invalide' => 'Falsch Email-Adress.',
@@ -457,6 +481,8 @@ oder kontakt&eacute;iert &auml;re Provider.</span>',
 'info_mail_fournisseur' => 'numm@provider.lu',
 'info_message_2' => 'MESSAGE',
 'info_message_supprime' => 'MESSAGE GEL&Auml;SCHT',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Publikatiouns-Datum:',
 'info_modification_parametres_securite' => '&Auml;nnerung vun de S&euml;cherheets-Parameteren',
 'info_mois_courant' => 'An d&euml;sem Mount:',
@@ -501,6 +527,8 @@ oder kontakt&eacute;iert &auml;re Provider.</span>',
 'info_retablir_lien' => 'D&euml;se Link zer&euml;cksetzen',
 'info_retirer_mot' => 'D&euml;st Wuert l&auml;schen',
 'info_retirer_mots' => 'D\'Wierder all l&auml;schen',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'ouni Titel',
 'info_selectionner_fichier' => 'Dir k&euml;nnt e Fichier aus dem Dossier @upload@ wielen',
 'info_selectionner_fichier_2' => 'Wielt e Fichier:',
@@ -509,7 +537,9 @@ oder kontakt&eacute;iert &auml;re Provider.</span>',
 'info_site_attente' => 'Site waard op d\'Validatioun',
 'info_site_reference' => 'Referenz&eacute;ierten Site, publiz&eacute;iert',
 'info_site_refuse' => 'Refus&eacute;ierten Site',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'E Site referenz&eacute;ieren',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'Vignette l&auml;schen',
 'info_symbole_bleu' => 'Dat <b>blot</b> Symbol weist eng <b>Notiz</b>: also e pers&eacute;inlechen Message.',
 'info_symbole_jaune' => 'Dat <b>gielt</b> Symbol weist eng <b>Annonce un all d\'Redakteren</b>, &auml;nnerbar duerch d\'Administrateuren, a sichtbar vun allen Redakteren.',
@@ -533,7 +563,7 @@ oder kontakt&eacute;iert &auml;re Provider.</span>',
 'info_visites' => 'Visiten:',
 'info_vos_rendez_vous' => '&Auml;r Rendez-vous\'en',
 'info_zoom' => 'Zoom',
-'infos_vos_pense_bete' => '&Auml;r Notizen',
+'infos_vos_pense_bete' => '&Auml;r Notizen', # MODIF
 'item_breve_proposee' => 'Propos&eacute;iert Kuerzmeldung',
 
 // L
@@ -581,6 +611,7 @@ Wann dir n&euml;t w&euml;llt dat &auml;rt Passwuert ka um Internet ofgefaangen g
 'login_retour_site' => 'Zer&euml;ck op den &ouml;ffentl&euml;che Site',
 'login_retoursitepublic' => 'zer&euml;ck&nbsp;op&nbsp;den&nbsp;&ouml;ffentl&euml;che&nbsp;Site',
 'login_sans_cookiie' => 'Umeldung ouni Cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 's&euml;ch aschreiwen',
 'login_test_navigateur' => 'Browser/Login-Test',
 'login_verifiez_navigateur' => '(Kontroll&eacute;iert op &auml;re Browser d\'Passwuert n&euml;t gesp&auml;ichert huet...)',
@@ -613,7 +644,6 @@ Wann dir n&euml;t w&euml;llt dat &auml;rt Passwuert ka um Internet ofgefaangen g
 'onglet_repartition_rubrique' => 'Verdeelung no Rubrik',
 'onglet_save_restaur_base' => 'Datebank sp&auml;icheren/restaur&eacute;ieren',
 'onglet_vider_cache' => 'Cache l&auml;schen',
-'ortho_trop_de_fautes2' => 'Verbessert d&eacute;i einfachst Fehler a prob&eacute;iert nach eng K&eacute;ier.',
 
 // P
 'pass_choix_pass' => 'Wielt &auml;rt neit Passwuert:',
@@ -716,34 +746,34 @@ Prob&eacute;iert ',
 
 // Z
 'zbug_balise_b_aval' => ': B-Tag dr&euml;nner',
-'zbug_balise_inexistante' => '<MODIF>Feeler @from@: den Tag #@balise@ g&euml;tt et net',
+'zbug_balise_inexistante' => 'Feeler @from@: den Tag #@balise@ g&euml;tt et net', # MODIF
 'zbug_balise_sans_argument' => 'Argument feelt am Tag @balise@',
 'zbug_boucle' => '-eidel-',
-'zbug_boucle_recursive_undef' => '<MODIF>Rekursiv Boucle n&euml;t defin&eacute;iert',
+'zbug_boucle_recursive_undef' => 'Rekursiv Boucle n&euml;t defin&eacute;iert', # MODIF
 'zbug_calcul' => 'Berechnung',
 'zbug_champ_hors_boucle' => 'Feld @champ@ ausserhalb vun der Boucle',
-'zbug_champ_hors_motif' => '<MODIF>Feld @champ@ ausserhalb vun enger Boucle mam Motiv @motif@',
+'zbug_champ_hors_motif' => 'Feld @champ@ ausserhalb vun enger Boucle mam Motiv @motif@', # MODIF
 'zbug_code' => '-Code-',
-'zbug_critere_inconnu' => '<MODIF>Onbekannten Crit&egrave;re @critere@',
-'zbug_distant_interdit' => '<MODIF>extern verbueden',
-'zbug_doublon_table_sans_cle_primaire' => '<MODIF>Duebel Valeuren an enger Tabell ouni atomaren primairen Schl&euml;ssel',
-'zbug_doublon_table_sans_index' => '<MODIF>Verduebelung an enger Tabell ouni Index',
-'zbug_erreur_boucle_double' => '<MODIF>BOUCLE@id@: duebel Definitioun',
-'zbug_erreur_boucle_fermant' => '<MODIF>BOUCLE@id@: Schluss-Tag fehlt',
-'zbug_erreur_boucle_syntaxe' => '<MODIF>Falsch Syntax vun der Schleef',
+'zbug_critere_inconnu' => 'Onbekannten Crit&egrave;re @critere@', # MODIF
+'zbug_distant_interdit' => 'extern verbueden', # MODIF
+'zbug_doublon_table_sans_cle_primaire' => 'Duebel Valeuren an enger Tabell ouni atomaren primairen Schl&euml;ssel', # MODIF
+'zbug_doublon_table_sans_index' => 'Verduebelung an enger Tabell ouni Index', # MODIF
+'zbug_erreur_boucle_double' => 'BOUCLE@id@: duebel Definitioun', # MODIF
+'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: Schluss-Tag fehlt', # MODIF
+'zbug_erreur_boucle_syntaxe' => 'Falsch Syntax vun der Schleef', # MODIF
 'zbug_erreur_compilation' => 'Kompilatiouns-Fehler',
-'zbug_erreur_execution_page' => '<MODIF>Fehler beim Berechnen vun der S&auml;it',
-'zbug_erreur_filtre' => '<MODIF>Fehler: Filter <b>"@filtre@"</b> n&euml;t defin&eacute;iert',
-'zbug_erreur_meme_parent' => '<MODIF>{meme_parent} ass just fir d\'Bouclen (FORUMS) oder (RUBRIQUES)',
+'zbug_erreur_execution_page' => 'Fehler beim Berechnen vun der S&auml;it', # MODIF
+'zbug_erreur_filtre' => 'Fehler: Filter <b>"@filtre@"</b> n&euml;t defin&eacute;iert', # MODIF
+'zbug_erreur_meme_parent' => '{meme_parent} ass just fir d\'Bouclen (FORUMS) oder (RUBRIQUES)', # MODIF
 'zbug_erreur_squelette' => 'Fehler am Skelett',
 'zbug_hors_compilation' => 'Ausserhalb vun der Compilatioun',
 'zbug_info_erreur_squelette' => 'Fehler um Site',
-'zbug_inversion_ordre_inexistant' => '<MODIF>Inversioun vun enger Uerdnung d&eacute;i &euml;t n&euml;t g&euml;tt',
-'zbug_pagination_sans_critere' => '<MODIF>#PAGINATION ouni {pagination}-Crit&egrave;re oder an &euml;nger rekursiver Schl&auml;if gebraucht',
-'zbug_parametres_inclus_incorrects' => '<MODIF>Falsch Parameteren fir d\'Inclusioun',
+'zbug_inversion_ordre_inexistant' => 'Inversioun vun enger Uerdnung d&eacute;i &euml;t n&euml;t g&euml;tt', # MODIF
+'zbug_pagination_sans_critere' => '#PAGINATION ouni {pagination}-Crit&egrave;re oder an &euml;nger rekursiver Schl&auml;if gebraucht', # MODIF
+'zbug_parametres_inclus_incorrects' => 'Falsch Parameteren fir d\'Inclusioun', # MODIF
 'zbug_profile' => 'Rechenz&auml;it: @time@',
 'zbug_resultat' => '-eidel-',
-'zbug_serveur_indefini' => '<MODIF>SQL-Server n&euml;t defin&eacute;iert',
+'zbug_serveur_indefini' => 'SQL-Server n&euml;t defin&eacute;iert', # MODIF
 'zbug_statistiques' => 'Statistik vun den SQL-Query\'en, klass&eacute;iert no der L&auml;ngt',
 'zbug_table_inconnue' => 'Onbekannten SQL-Tabell "@table@"',
 'zxml_connus_attributs' => 'Bekannten Attributer',

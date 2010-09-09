@@ -222,6 +222,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => 'Nun s\'alcuentra el ficheru @fichier@',
+'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_mail_confirmation' => 'Bonjour,
+
+Vous avez demand&eacute; &agrave; changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+l\'adresse ci-dessous (dans le cas contraire, votre demande
+sera ignor&eacute;e) :
+
+    @url@
+', # NEW
 'form_deja_inscrit' => 'Ya tas apunt&aacute;u.',
 'form_email_non_valide' => 'Les se&ntilde;es de corr&eacute;u electr&oacute;nicu nun son v&aacute;lides.',
 'form_forum_access_refuse' => 'Ya nun ties accesu a esti sitiu.',
@@ -399,12 +411,16 @@ Gracies por participar
 'info_article_supprime' => 'Art&iacute;culu desanici&aacute;u',
 'info_articles' => 'Art&iacute;culos',
 'info_articles_a_valider' => 'Los art&iacute;culos por validar',
+'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Art&iacute;culos propuestos',
+'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'autor(es):',
 'info_authentification_ftp' => 'Autentificaci&oacute;n (per FTP).',
 'info_bloquer_lien' => 'bloquiar esti enllace',
 'info_breves_02' => 'Breves',
 'info_breves_2' => 'breves',
+'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
+'info_breves_un' => '1 br&egrave;ve', # NEW
 'info_breves_valider' => 'Curties por validar',
 'info_connexion_refusee' => 'Conex&oacute;n refugada',
 'info_contact_developpeur' => 'Ponte en contautu con un desendolcador.',
@@ -425,6 +441,8 @@ Gracies por participar
 'info_document' => 'Documentu',
 'info_document_indisponible' => 'Esti documentu nun ta disponible',
 'info_documents' => 'Documentos',
+'info_documents_nb' => '@nb@ documents', # NEW
+'info_documents_un' => '1 document', # NEW
 'info_echange_message' => 'SPIP permite l\'intercamb&eacute;u de mensaxes y la creaci&oacute;n de foros de discutiniu
   privaos ente los participantes nel sitiu. Pues activar o
   desactivar esta carauter&iacute;stica.',
@@ -471,6 +489,8 @@ Gracies por participar
 'info_mail_fournisseur' => 'el_to_nome@de.correu.ast',
 'info_message_2' => 'MENSAXE',
 'info_message_supprime' => 'MENSAXE DESANICI&Aacute;U',
+'info_messages_nb' => '@nb@ messages', # NEW
+'info_messages_un' => '1 message', # NEW
 'info_mise_en_ligne' => 'Fecha d\'espublizamientu:',
 'info_modification_parametres_securite' => 'camb&eacute;os de los par&aacute;metros de segurid&aacute;',
 'info_mois_courant' => 'A lo llargo d\'esti mes:',
@@ -515,6 +535,8 @@ Gracies por participar
 'info_retablir_lien' => 'reestablecer esti enllaz',
 'info_retirer_mot' => 'Retirar esta pallabra',
 'info_retirer_mots' => 'Retirar toles pallabres',
+'info_rubriques_nb' => '@nb@ rubriques', # NEW
+'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'ensin t&iacute;tulu',
 'info_selectionner_fichier' => 'Puedes escoyer un ficheru del direutoriu @upload@',
 'info_selectionner_fichier_2' => 'Escueye un ficheru:',
@@ -523,7 +545,9 @@ Gracies por participar
 'info_site_attente' => 'Sitiu Web esperando validaci&oacute;n',
 'info_site_reference' => 'Sitiu referenci&aacute;u en llinia',
 'info_site_refuse' => 'Sitiu Web refug&aacute;u',
+'info_sites_nb' => '@nb@ sites', # NEW
 'info_sites_referencer' => 'Referenciar un sitiu Web',
+'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'desaniciar la vi&ntilde;eta',
 'info_symbole_bleu' => 'La marca <b>azul</b> indica un <b>recordatoriu</b>: ye un mensaxe pal to usu personal.',
 'info_symbole_jaune' => 'La marca <b>mariella</b> indica una <b>anuncia pa tolos redactores</b>: puede modificase por tolos alministradores, y ye visible por tolos redactores.',
@@ -547,7 +571,7 @@ Gracies por participar
 'info_visites' => 'visites:',
 'info_vos_rendez_vous' => 'Aconceyamientos pendientes',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Los tos recordatorios',
+'infos_vos_pense_bete' => 'Los tos recordatorios', # MODIF
 'item_breve_proposee' => 'Breve propuesta',
 
 // L
@@ -597,6 +621,7 @@ Gracies por participar
 'login_retour_site' => 'Tornar pal sitiu p&uacute;blicu',
 'login_retoursitepublic' => 'tornar&nbsp;pal&nbsp;sitiu&nbsp;p&uacute;blicu',
 'login_sans_cookiie' => 'Identificaci&oacute;n ensin cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'inscribise',
 'login_test_navigateur' => 'preba de &ntilde;avegador/reconex&oacute;n',
 'login_verifiez_navigateur' => '(Verifica dafechu que\'l &ntilde;avegador nun s\'alcuerde de la to contrase&ntilde;a...)',
@@ -629,7 +654,6 @@ Gracies por participar
 'onglet_repartition_rubrique' => 'Repart&iacute;o por estayes',
 'onglet_save_restaur_base' => 'Sofitar/restaurar la base',
 'onglet_vider_cache' => 'Vaciar la cach&eacute;',
-'ortho_trop_de_fautes2' => 'Entama por iguar les faltes m&aacute;s evidentes y llu&eacute;u torna a intentalo.',
 
 // P
 'pass_choix_pass' => 'Escueye la nueva contrase&ntilde;a:',

@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Trang nh&agrave;',
+'article' => 'Article', # NEW
 'articles' => 'B&agrave;i',
 'articles_auteur' => 'B&agrave;i v&#7903; c&#7911;a t&aacute;c gi&#7843; n&agrave;y',
 'articles_populaires' => 'Nh&#7919;ng b&agrave;i &#273;&#432;&#7907;c chu&#7897;ng nh&#7845;t',
@@ -18,18 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Kh&ocirc;ng c&oacute; trang Web t&#7841;i &#273;&#7883;a ch&igrave; n&agrave;y ',
 'aucune_breve' => 'Kh&ocirc;ng c&oacute; tin ng&#7855;n t&#7841;i &#273;&#7883;a ch&igrave; n&agrave;y',
 'aucune_rubrique' => 'Kh&ocirc;ng c&oacute; &#273;&#7873; m&#7909;c t&#7841;i &#273;&#7883;a ch&igrave; n&agrave;y',
-'autres' => '<NEW>Autres',
+'auteur' => 'Auteur', # NEW
+'autres' => 'Autres', # NEW
 'autres_breves' => 'Nh&#7919;ng tin ng&#7857;n kh&aacute;c ',
 'autres_groupes_mots_clefs' => 'Nh&#7919;ng nh&oacute;m t&#7915; then ch&#7889;t kh&aacute;c ',
 'autres_sites' => 'Nh&#7919;ng trang Web kh&aacute;c',
 
 // B
 'bonjour' => 'Th&acirc;n ch&agrave;o',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Tin ng&#7855;n',
 
 // C
 'commenter_site' => 'Ph&ecirc; b&igrave;nh trang Web n&agrave;y',
-'copie_document_impossible' => '<NEW>Impossible de copier le document',
+'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
 'date' => 'Ng&agrave;y',
@@ -38,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Nh&#7919;ng b&agrave;i m&#7899;i nh&#7845;t ',
 'derniers_commentaires' => 'C&aacute;c g&oacute;p &yacute; m&#7899;i nh&#7845;t',
 'derniers_messages_forum' => 'Trao &#273;&#7893;i m&#7899;i nh&#7845;t hi&#7879;n trong di&#7877;n &#273;&agrave;n',
-'documents_interdits_forum' => '<NEW>Documents interdits dans le forum',
+'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'v&#259;n b&#7843;n th&#432;&#7901;ng',
@@ -48,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'M&#7841;ng c&aacute; nh&acirc;n',
 
 // F
-'formats_acceptes' => '<NEW>Formats accept&#233;s : @formats@.',
+'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
 'forum' => 'Di&#7877;n &#273;&agrave;n',
 
 // H
@@ -58,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jours' => 'ng&agrave;y',
 
 // L
-'lien_connecter' => '<NEW>Se connecter',
+'lien_connecter' => 'Se connecter', # NEW
 
 // M
 'meme_auteur' => 'C&ugrave;ng t&aacute;c gi&#7843;',
@@ -67,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Th&#432; t&iacute;n',
 'messages_forum' => 'Th&#432; t&iacute;n di&#7877;n &#273;&agrave;n',
 'messages_recents' => 'Tin m&#7899;i nh&#7845;t trong di&#7877;n &#273;&agrave;n',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'T&#7915; then ch&#7889;t',
 'mots_clefs_meme_groupe' => 'T&#7915; then ch&#7889;t c&ugrave;ng nh&ograve;m  ',
 
@@ -102,7 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Trang web &#273;&#432;&#7907;c so&#7841;n b&#7857;ng SPIP',
 'sites_web' => 'Trang web',
 'sous_rubriques' => '&#272;&#7873; m&#7909;c ph&#7909;',
-'spam' => '<NEW>Spam',
+'spam' => 'Spam', # NEW
 'suite' => 'ti&#7871;p t&#7909;c',
 'sur_web' => 'Tr&ecirc;n trang web',
 'syndiquer_rubrique' => 'Ph&#7893; bi&#7871;n &#273;&#7873; m&#7909;c n&agrave;y',
@@ -115,7 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // V
 'ver_imprimer' => 'Ki&#7875;u d&#7875; in',
 'voir_en_ligne' => 'Xem online',
-'voir_squelette' => '<NEW>voir le squelette de cette page'
+'voir_squelette' => 'voir le squelette de cette page', # NE
 );
 
 ?>

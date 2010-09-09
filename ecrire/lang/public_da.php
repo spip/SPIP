@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Hjemmeside',
+'article' => 'Article', # NEW
 'articles' => 'Artikler',
 'articles_auteur' => 'Denne forfatters artikler',
 'articles_populaires' => 'De mest l&aelig;ste artikler',
@@ -18,16 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Der er intet websted p&aring; denne adresse',
 'aucune_breve' => 'Der er ingen nyhed p&aring; denne adresse',
 'aucune_rubrique' => 'Der er ikke noget afsnit p&aring; denne adresse',
+'auteur' => 'Auteur', # NEW
+'autres' => 'Autres', # NEW
 'autres_breves' => 'Andre nyheder',
 'autres_groupes_mots_clefs' => 'Andre grupper af n&oslash;gleord',
 'autres_sites' => 'Andre websteder',
 
 // B
 'bonjour' => 'Hej',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Nyheder',
 
 // C
 'commenter_site' => 'Kommentar til dette websted',
+'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
 'date' => 'Dato',
@@ -36,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Seneste artikler',
 'derniers_commentaires' => 'Seneste kommentarer',
 'derniers_messages_forum' => 'Seneste indl&aelig;g offentliggjort i forummer',
+'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Tekstudgave',
@@ -45,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Privat omr&aring;de',
 
 // F
+'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
 'forum' => 'Forum',
 
 // H
@@ -53,6 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // J
 'jours' => 'dage',
 
+// L
+'lien_connecter' => 'Se connecter', # NEW
+
 // M
 'meme_auteur' => 'Af samme forfatter',
 'meme_rubrique' => 'I samme afsnit',
@@ -60,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Indl&aelig;g',
 'messages_forum' => 'Forumindl&aelig;g',
 'messages_recents' => 'Seneste forumindl&aelig;g',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'N&oslash;gleord',
 'mots_clefs_meme_groupe' => 'N&oslash;gleord i samme gruppe',
 
@@ -79,6 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'plan_site' => 'Indholdsoversigt',
 'popularite' => 'Popularitet',
 'poster_message' => 'Indl&aelig;g',
+'proposer_site' => 'Vous pouvez proposer un site &agrave; ajouter dans cette rubrique&nbsp;:', # NEW
 
 // R
 'repondre_article' => 'Lav et svar til denne artikel',
@@ -94,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Websted lavet med SPIP',
 'sites_web' => 'Websteder',
 'sous_rubriques' => 'Underafsnit',
+'spam' => 'Spam', # NEW
 'suite' => 'forts&aelig;t',
 'sur_web' => 'P&aring; Internettet',
 'syndiquer_rubrique' => 'Syndiker dette afsnit',

@@ -68,14 +68,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => '&Auml;ndern',
 'bouton_chercher' => 'Suchen',
 'bouton_choisir' => 'Ausw&auml;hlen',
-'bouton_download' => 'Herunterladen',
+'bouton_download' => '&Uuml;bertragen',
 'bouton_enregistrer' => 'Speichern',
 'bouton_radio_desactiver_messagerie_interne' => 'Interne Nachrichten abschalten',
 'bouton_radio_envoi_annonces' => 'Editorische Ank&uuml;ndigungen verschicken',
 'bouton_radio_non_envoi_annonces' => 'Keine Ank&uuml;ndigungen verschicken',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Keine Liste der Neuigkeiten verschicken',
 'bouton_recharger_page' => 'Seite neu laden',
-'bouton_telecharger' => 'Hochladen',
+'bouton_telecharger' => 'Herunterladen',
 'bouton_valider' => 'Best&auml;tigen',
 
 // C
@@ -198,10 +198,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'um die Installation wirklich zu starten',
 'dirs_preliminaire' => 'Vorbereitung: <b>Berechtigungen einstellen</b>',
 'dirs_probleme_droits' => 'Problem mit den Berechtigungen',
-'dirs_repertoires_absents' => '<p><b>Folgende Verzeichnisse wurden nicht gefunden:</b><(p><ul>@bad_dirs@</ul> 
+'dirs_repertoires_absents' => '<p><b>Folgende Verzeichnisse wurden nicht gefunden:</b></p><ul>@bad_dirs@</ul>
   <p>Das liegt wahrscheinlich an unzutreffender Gross- und Kleinschreibung.
   &Uuml;berpr&uuml;fen Sie bitte die genaue Schreibweise der oben stehenden Verzeichnisse,
-  sollten Sie Abweichungen feststellen, benennen Sie bitte mit Ihrem FTP-Programm die betreffenden Verzeichnisse um.
+  sollten Sie Abweichungen feststellen, benennen Sie bitte mit Ihrem FTP-Programm die betreffenden Verzeichnisse um.</p>
   <p>Danach k&ouml;nnen Sie ',
 'dirs_repertoires_suivants' => '<p><b>In die folgenden Verzeichnisse kann nicht geschrieben werden:</b></p><ul>@bad_dirs@</ul>
 <p>Um das Problem zu l&ouml;sen, verwenden Sie bitte Ihren FTP-Client, um die Zugriffsrechte f&uuml;r diese
@@ -222,6 +222,17 @@ Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details da
 
 // F
 'fichier_introuvable' => 'Datei @fichier@ unauffindbar',
+'form_auteur_confirmation' => 'Best&auml;tigen Sie Ihre Mailadresse',
+'form_auteur_email_modifie' => 'Ihre Mailadresse wurde ge&auml;ndert.',
+'form_auteur_envoi_mail_confirmation' => 'Eine Mail wurde an @email@ gesendet. Sie m&uuml;ssen auf den in ihr angegebenen Link klicken, um die Korrektheit Ihrer Adresse zu best&auml;tigen.',
+'form_auteur_mail_confirmation' => 'Hallo,
+
+Sie m&ouml;chten Ihre Mail-Adresse &auml;ndern.Um Ihre neue Adresse zu best&auml;tigen,
+ brauchen Sie nur diesen Link zu &ouml;ffnen (wenn Sie darauf verzichten,
+wird Ihre Adresse beibehalten):
+
+    @url@
+',
 'form_deja_inscrit' => 'Sie sind bereits eingetragen.',
 'form_email_non_valide' => 'Ihre E-Mail-Adresse ist ung&uuml;ltig.',
 'form_forum_access_refuse' => 'Sie haben keinen Zugang mehr zu dieser Website.',
@@ -392,12 +403,16 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_article_supprime' => 'Gel&ouml;schter Artikel',
 'info_articles' => 'Artikel',
 'info_articles_a_valider' => 'Zur Ver&ouml;ffentlichung vorgeschlagenen Artikel',
+'info_articles_nb' => '@nb@ Artikel',
 'info_articles_proposes' => 'Vorgeschlagene Artikel',
+'info_articles_un' => '1 Artikel',
 'info_auteurs_nombre' => 'Autor(en):',
 'info_authentification_ftp' => 'Authentifizierung per FTP.',
 'info_bloquer_lien' => 'Link sperren',
 'info_breves_02' => 'Meldungen',
 'info_breves_2' => 'Meldungen',
+'info_breves_nb' => '@nb@ Meldungen',
+'info_breves_un' => '1 Meldung',
 'info_breves_valider' => 'Zur Ver&ouml;ffentlichung vorgeschlagene Meldungen',
 'info_connexion_refusee' => 'Die Verbindung wurde verweigert.',
 'info_contact_developpeur' => 'Bitte kontaktieren Sie einen der Entwickler.',
@@ -418,6 +433,8 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_document' => 'Dokument',
 'info_document_indisponible' => 'Dokument nicht verf&uuml;gbar',
 'info_documents' => 'Dokumente',
+'info_documents_nb' => '@nb@ Dokumente',
+'info_documents_un' => '1 Dokument',
 'info_echange_message' => 'In SPIP k&ouml;nnen Sie interne Nachrichten austauschen und interne Foren f&uuml;r Teilnehmer der Website anlegen. Diese Funktionen k&ouml;nnen Sie abschalten.',
 'info_ecire_message_prive' => 'Neue private Nachricht schreiben',
 'info_email_invalide' => 'Ung&uuml;ltige E-Mail Adresse.',
@@ -462,6 +479,8 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_mail_fournisseur' => 'IhrName@Server.de',
 'info_message_2' => 'NACHRICHT',
 'info_message_supprime' => 'NACHRICHT GEL&Ouml;SCHT',
+'info_messages_nb' => '@nb@ Nachrichten',
+'info_messages_un' => '1 Nachricht',
 'info_mise_en_ligne' => 'Online seit:',
 'info_modification_parametres_securite' => '&Auml;nderung der Sicherheitseinstellungen',
 'info_mois_courant' => 'Im Lauf des Monats:',
@@ -506,6 +525,8 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_retablir_lien' => 'Link wieder freigeben',
 'info_retirer_mot' => 'Wort entfernen',
 'info_retirer_mots' => 'Alle Worte entfernen',
+'info_rubriques_nb' => '@nb@ Rubriken',
+'info_rubriques_un' => '1 Rubrik',
 'info_sans_titre_2' => 'ohne Titel',
 'info_selectionner_fichier' => 'Sie k&ouml;nnen eine Datei aus dem Verzeichnis @upload@ ausw&auml;hlen.',
 'info_selectionner_fichier_2' => 'W&auml;hlen Sie eine Datei:',
@@ -514,7 +535,9 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_site_attente' => 'Websites, die auf Freigabe warten',
 'info_site_reference' => 'Verlinkte Website online',
 'info_site_refuse' => 'Abgelehnte Website',
+'info_sites_nb' => '@nb@ Websites',
 'info_sites_referencer' => 'Website verlinken',
+'info_sites_un' => '1 Website',
 'info_supprimer_vignette' => 'Icon l&ouml;schen',
 'info_symbole_bleu' => 'Das <b>blaue</b> Symbol bedeutet <b>Merkzettel</b>, d.h. eine Nachricht nur zu Ihrer eigenen Verwendung.',
 'info_symbole_jaune' => 'Das <b>gelbe</b> Symbol bedeutet <b>Ank&uuml;ndigung an alle Redakteure</b> (f&uuml;r alle Redakteure sichtbar, &Auml;nderung nur durch Administratoren)',
@@ -567,7 +590,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'login_cookie_accepte' => 'Bitte stellen Sie Ihren Webbrowser so ein, dass er sie akzeptiert (zumindest f&uuml;r diese Website).',
 'login_cookie_oblige' => 'Zu Ihrer Sicherheit muss Ihr Browser Cookies akzeptieren, wenn Sie sich bei der Website anmelden.',
 'login_deconnexion_ok' => 'Abmeldung erfolgreich.',
-'login_erreur_pass' => 'Falsches Passwort.',
+'login_erreur_pass' => 'Passwort oder Benutzername falsch.',
 'login_espace_prive' => 'Redaktionssystem',
 'login_identifiant_inconnu' => 'Benutzer &laquo;@login@&raquo; unbekannt.',
 'login_login' => 'Login:',
@@ -585,6 +608,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'login_retour_site' => 'Zur&uuml;ck zur &ouml;ffentlichen Website',
 'login_retoursitepublic' => 'Zur&uuml;ck&nbsp;zur&nbsp;&ouml;ffentlichen&nbsp;Website',
 'login_sans_cookiie' => 'Anmeldung ohne Cookies',
+'login_securise' => 'Sicheres Login',
 'login_sinscrire' => 'anmelden',
 'login_test_navigateur' => 'Test Webbrowser/Verbindung',
 'login_verifiez_navigateur' => '(&Uuml;berpr&uuml;fen Sie, dass Ihr Webbrowser Ihr Passwort nicht gespeichert hat ...)',
@@ -617,7 +641,6 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'onglet_repartition_rubrique' => 'Verteilung auf Rubriken',
 'onglet_save_restaur_base' => 'Datenbank sichern/wieder herstellen',
 'onglet_vider_cache' => 'Sitecache l&ouml;schen',
-'ortho_trop_de_fautes2' => 'Korrigieren sie zun&auml;chst die offensichtlichen Fehler und starten dann einen neuen Versuch.',
 
 // P
 'pass_choix_pass' => 'Bitte geben Sie Ihr neues Passwort ein:',

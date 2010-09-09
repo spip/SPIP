@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Arcuelh deu sit',
+'article' => 'Article', # NEW
 'articles' => 'Articles',
 'articles_auteur' => 'Articles d\'aqueth autor',
 'articles_populaires' => 'Los articles mei populars',
@@ -18,16 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'N\'i a pas nat sit a aquera adre&ccedil;a ',
 'aucune_breve' => 'N\'i a pas nada br&egrave;va a aquera adre&ccedil;a ',
 'aucune_rubrique' => 'N\'i a pas nada rubrica a aquera adre&ccedil;a ',
+'auteur' => 'Auteur', # NEW
+'autres' => 'Autres', # NEW
 'autres_breves' => 'Autas br&egrave;vas',
 'autres_groupes_mots_clefs' => 'Autes grops de mots clau',
 'autres_sites' => 'Autes sits',
 
 // B
 'bonjour' => 'Adishatz',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Br&egrave;vas',
 
 // C
 'commenter_site' => 'Comentar aqueth sit',
+'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
 'date' => 'Data',
@@ -36,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Darr&egrave;rs articles',
 'derniers_commentaires' => 'Darr&egrave;rs comentaris',
 'derniers_messages_forum' => 'Darr&egrave;rs messatges publicats dens los forums',
+'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Edicion en m&ograve;de t&egrave;xt de',
@@ -45,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Espaci privat',
 
 // F
+'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
 'forum' => 'Forum',
 
 // H
@@ -53,6 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // J
 'jours' => 'dias',
 
+// L
+'lien_connecter' => 'Se connecter', # NEW
+
 // M
 'meme_auteur' => 'Deu medish autor',
 'meme_rubrique' => 'Dens la medisha rubrica',
@@ -60,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Messatge',
 'messages_forum' => 'Messatges de forum',
 'messages_recents' => 'Los messatges de forums mei recents',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'Mots clau',
 'mots_clefs_meme_groupe' => 'Mots clau dens lo medish grop',
 
@@ -95,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Sit realizat dab SPIP',
 'sites_web' => 'Sits web',
 'sous_rubriques' => 'Sosrubricas',
+'spam' => 'Spam', # NEW
 'suite' => 'seguida',
 'sur_web' => 'Suber lo web',
 'syndiquer_rubrique' => 'Sindicar aquera rubrica',

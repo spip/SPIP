@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'P&aacute;gina inicial',
+'article' => 'Mat&eacute;ria',
 'articles' => 'Mat&eacute;rias',
 'articles_auteur' => 'Mat&eacute;rias deste autor',
 'articles_populaires' => 'Mat&eacute;rias mais populares',
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'N&atilde;o h&aacute; nenhum site neste endere&ccedil;o',
 'aucune_breve' => 'N&atilde;o h&aacute; nenhuma nota neste endere&ccedil;o',
 'aucune_rubrique' => 'N&atilde;o h&aacute; nenhuma se&ccedil;&atilde;o neste endere&ccedil;o',
+'auteur' => 'Autor',
 'autres' => 'Outros',
 'autres_breves' => 'Outras notas',
 'autres_groupes_mots_clefs' => 'Outros grupos de palavras-chave',
@@ -25,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Bom dia',
+'breve' => 'Nota',
 'breves' => 'Notas',
 
 // C
@@ -67,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Mensagem',
 'messages_forum' => 'Mensagens de f&oacute;rum',
 'messages_recents' => 'Mensagens de f&oacute;rum mais recentes',
+'mots_clef' => 'Palavra-chave',
 'mots_clefs' => 'Palavras-chave',
 'mots_clefs_meme_groupe' => 'Palavras-chave no mesmo grupo',
 

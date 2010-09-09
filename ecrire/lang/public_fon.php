@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'H&#596;ntogbo',
+'article' => 'Article', # NEW
 'articles' => 'Wekpa l&#603;&#770;',
 'articles_auteur' => 'Ny&#596;wlant&#596; &eacute; l&#596; sin wekpa l&#603;&#770;',
 'articles_populaires' => 'wekpa l&#603;&#770;  &ecirc; to bi t&ugrave;n y&eacute;',
@@ -18,16 +19,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Gblogbloji &#598;e&#772;&#772;  do  gesi &eacute; l&#596; ji a',
 'aucune_breve' => 'Xogb&egrave; kl&eacute;wun &#598;e&#772;&#772;  do  gesi &eacute; l&#596; ji a',
 'aucune_rubrique' => '&#598;i&#598;&#603; &#598;e&#772;&#772; do gesi &eacute; l&#596; ji a ',
+'auteur' => 'Auteur', # NEW
+'autres' => 'Autres', # NEW
 'autres_breves' => 'Xogb&egrave; kl&eacute;wun de vo',
 'autres_groupes_mots_clefs' => 'Xota b&#603; dokp&#596; l&#603;&#770; ',
 'autres_sites' => 'Gblogbloji &#598;e&#772;&#772; vo l&#603;&#770;',
 
 // B
 'bonjour' => 'kwab&#596;   ',
+'breve' => 'Br&egrave;ve', # NEW
 'breves' => 'Xogb&egrave; kl&eacute;wun',
 
 // C
 'commenter_site' => 'wl&#596;k&agrave;nn&uacute; xo l&#603;&#770;',
+'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
 'date' => 'Azan',
@@ -36,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Wekpa g&ugrave;dog&ugrave;dot&#596;n',
 'derniers_commentaires' => '&#598;&#603;tit&#603; g&ugrave;dog&ugrave;dot&#596;n',
 'derniers_messages_forum' => 'wh&#603;n g&ugrave;dog&ugrave;dot&#596;n ye&#772; &#598;&#596;dotoji',
+'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'winwlanm&#603;',
@@ -45,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 't&#603;nkandovo',
 
 // F
+'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
 'forum' => 'Kpl&eacute;kpl&eacute; ',
 
 // H
@@ -53,6 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // J
 'jours' => 'Azan l&#603;&#770;',
 
+// L
+'lien_connecter' => 'Se connecter', # NEW
+
 // M
 'meme_auteur' => 'Ny&#596;wlant&#596; &#598;okpo &#596;',
 'meme_rubrique' => '&#598;o akpaxw&eacute; &#598;okpo &#596; m&#603;',
@@ -60,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'W&#603;n',
 'messages_forum' => 'w&#603;n pk&eacute;kpl&eacute; &#596; t&#596;n l&ecirc;',
 'messages_recents' => 'w&#603;n g&ugrave;do&#769;g&ugrave;dot&#596;n pk&eacute;kpl&eacute; &#596; t&#596;n l&ecirc;',
+'mots_clef' => 'Mot-cl&eacute;', # NEW
 'mots_clefs' => 'xo&#769;ta&#769; l&#603;&#770;',
 'mots_clefs_meme_groupe' => 'xo&#769;ta&#769; akpa &#598;okpo&#769; &#596; l&#603;&#770; t&#596;n',
 
@@ -95,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Kpo al&#596;g&#596; Supipu t&#596;n kpo&#769; w&#603; gblogbloji&#769; &#596; nyi&#769; wiwa',
 'sites_web' => 'At&#603; l&#603;&#770;',
 'sous_rubriques' => 'Akpa xw&eacute;',
+'spam' => 'Spam', # NEW
 'suite' => 'B&#596; &#598;&eacute; wu t&#596;n',
 'sur_web' => '&#598;o&#768; at&#603; &#596;  ji&#768;',
 'syndiquer_rubrique' => 'Ze&#770; aceji do akpa &eacute; l&#596; ji&#769;',

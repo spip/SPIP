@@ -1,5 +1,4 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
@@ -76,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces' => 'No enviar anuncios',
 'bouton_radio_non_envoi_liste_nouveautes' => 'No enviar la lista de novedades',
 'bouton_recharger_page' => 'Actualizar esta p&aacute;gina',
-'bouton_telecharger' => 'Subir',
+'bouton_telecharger' => 'Descargar',
 'bouton_valider' => 'Validar',
 
 // C
@@ -222,6 +221,18 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 
 // F
 'fichier_introuvable' => 'No se encuentra el archivo @fichier@',
+'form_auteur_confirmation' => 'Confirma tu direcci&oacute;n de correo',
+'form_auteur_email_modifie' => 'Tu direcci&oacute;n de correo fue modificada',
+'form_auteur_envoi_mail_confirmation' => 'Se te acaba de enviar un mensaje de confirmaci&oacute;n a @email@. Tienes que visitar la p&aacute;gina web indicada en ese mensaje para validar tu direcci&oacute;n de correo.',
+'form_auteur_mail_confirmation' => 'Hola,
+
+Has solicitado cambiar tu direcci&oacute;n de correo.
+Para confirmar tu nueva direcci&oacute;n, alcanza con visitar la p&aacute;gina
+siguiente:
+
+    @url@
+Caso contrario, la solicitud ser&aacute; simplemente ignorada.
+',
 'form_deja_inscrit' => 'Ya est&aacute;s inscrito.',
 'form_email_non_valide' => 'La direcci&oacute;n de correo electr&oacute;nico no es v&aacute;lida.',
 'form_forum_access_refuse' => 'Ya no tienes acceso a este sitio.',
@@ -399,12 +410,16 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_article_supprime' => 'Art&iacute;culo suprimido',
 'info_articles' => 'Art&iacute;culos',
 'info_articles_a_valider' => 'Los art&iacute;culos a validar',
+'info_articles_nb' => '@nb@ art&iacute;culos',
 'info_articles_proposes' => 'Art&iacute;culos propuestos',
+'info_articles_un' => '1 art&iacute;culo',
 'info_auteurs_nombre' => 'Autora(s) y autor(es):',
 'info_authentification_ftp' => 'Autentificaci&oacute;n (por FTP).',
 'info_bloquer_lien' => 'bloquear este enlace',
 'info_breves_02' => 'Breves',
 'info_breves_2' => 'breves',
+'info_breves_nb' => '@nb@ breves',
+'info_breves_un' => '1 breve',
 'info_breves_valider' => 'Breves a validar',
 'info_connexion_refusee' => 'Conexi&oacute;n rechazada',
 'info_contact_developpeur' => 'Debes contactar con un programador.',
@@ -425,6 +440,8 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_document' => 'Documento',
 'info_document_indisponible' => 'Este documento no est&aacute; disponible',
 'info_documents' => 'Documentos',
+'info_documents_nb' => '@nb@ documentos',
+'info_documents_un' => '1 documento',
 'info_echange_message' => 'En funci&oacute;n de las preferencias, SPIP permite el intercambio de mensajes y la existencia de foros internos
  privados entre los participantes del sitio. Esta funcionalidad
 se puede activar o desactivar .',
@@ -471,6 +488,8 @@ se puede activar o desactivar .',
 'info_mail_fournisseur' => 'tu@proveedor.com',
 'info_message_2' => 'MENSAJE',
 'info_message_supprime' => 'Mensaje suprimido',
+'info_messages_nb' => '@nb@ mensajes',
+'info_messages_un' => '1 mensaje',
 'info_mise_en_ligne' => 'Fecha de puesta en l&iacute;nea',
 'info_modification_parametres_securite' => 'modificaciones de los par&aacute;metros de seguridad',
 'info_mois_courant' => 'En el mes actual de: ',
@@ -515,6 +534,8 @@ se puede activar o desactivar .',
 'info_retablir_lien' => 'restablecer el enlace',
 'info_retirer_mot' => 'Retirar la palabra',
 'info_retirer_mots' => 'Retirar todas las palabras',
+'info_rubriques_nb' => '@nb@ secciones',
+'info_rubriques_un' => '1 secci&oacute;n',
 'info_sans_titre_2' => 'sin t&iacute;tulo',
 'info_selectionner_fichier' => 'Puedes seleccionar un documento del directorio @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un documento...',
@@ -523,14 +544,16 @@ se puede activar o desactivar .',
 'info_site_attente' => 'Sitio Web en espera de validaci&oacute;n',
 'info_site_reference' => 'Sitio referenciado en l&iacute;nea',
 'info_site_refuse' => 'Sitio Web rechazado',
+'info_sites_nb' => '@nb@ sitios',
 'info_sites_referencer' => 'Referenciar un sitio',
+'info_sites_un' => '1 sitio',
 'info_supprimer_vignette' => 'Suprimir este icono',
 'info_symbole_bleu' => 'El s&iacute;mbolo <b>azul</b> representa un <b>recordatorio personal</b>, o sea una manera de recordar algo.',
 'info_symbole_jaune' => 'El s&iacute;mbolo <b>amarillo</b> representa un <b>anuncio para todos</b>: s&oacute;lo es modificable por las/os administradoras/es del sitio, y es visible por todos los redactores.',
 'info_symbole_vert' => 'El s&iacute;mbolo <b>verde</b> indica los  <b>mensajes intercambiados con otras personas</b> del sitio.',
 'info_syndication' => 'sindicaci&oacute;n:',
 'info_syndication_articles' => 'art&iacute;culo(s)',
-'info_telecharger' => 'Subir desde tu ordenador:',
+'info_telecharger' => 'Subir desde tu equipo:',
 'info_telecharger_nouveau_logo' => 'Subir un nuevo logotipo:',
 'info_telecharger_ordinateur' => 'Subir desde tu ordenador:',
 'info_tous_resultats_enregistres' => '[todos los resultados son registrados]',
@@ -547,7 +570,7 @@ se puede activar o desactivar .',
 'info_visites' => 'visitas:',
 'info_vos_rendez_vous' => 'Tus citas',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Tus  recordatorios',
+'infos_vos_pense_bete' => 'Tus recordatorios',
 'item_breve_proposee' => 'Breve propuesta',
 
 // L
@@ -595,6 +618,7 @@ se puede activar o desactivar .',
 'login_retour_site' => 'Volver al sitio p&uacute;blico',
 'login_retoursitepublic' => 'volver&nbsp;al&nbsp;sitio&nbsp;p&uacute;blico',
 'login_sans_cookiie' => 'Identificaci&oacute;n sin "cookie"',
+'login_securise' => 'Conexi&oacute;n segura',
 'login_sinscrire' => 'inscribirse',
 'login_test_navigateur' => 'prueba de navegador/reconexi&oacute;n',
 'login_verifiez_navigateur' => '(No obstante, comprueba que tu navegador no memoriz&oacute; tu contrase&ntilde;a...)',
@@ -627,7 +651,6 @@ se puede activar o desactivar .',
 'onglet_repartition_rubrique' => 'Reparto por secciones',
 'onglet_save_restaur_base' => 'Copia de respaldo y restauraci&oacute;n de la base',
 'onglet_vider_cache' => 'Vaciar la cach&eacute;',
-'ortho_trop_de_fautes2' => 'Comienza por corregir las faltas m&aacute;s evidentes y vuelve a intentarlo.',
 
 // P
 'pass_choix_pass' => 'Elije tu nueva contrase&ntilde;a:',
