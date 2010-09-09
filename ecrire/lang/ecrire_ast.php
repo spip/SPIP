@@ -222,12 +222,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Llista de corr&eacute;u',
 'ical_titre_rss' => 'Archivos de sindicaci&oacute;n',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'Activar la cookie de correspondencia',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Xesti&oacute;n de los plugins',
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Amosar los autores',
 'icone_afficher_visiteurs' => 'Amosar les visites',
 'icone_arret_discussion' => 'Nun participar ya nesta discusi&oacute;n',
 'icone_calendrier' => 'Calendariu',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'Crear un nuevu grupu de pallabres',
 'icone_creation_mots_cles' => 'Crear una nueva pallabra-clave',
 'icone_creer_auteur' => 'Crear un nuevu autor y asocialu con esti art&iacute;culu',
@@ -237,8 +241,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_mot_cle_site' => 'Crear una nueva pallabra-clave y enllazala con esti sitiu',
 'icone_creer_rubrique_2' => 'Facer una estaya nueva',
 'icone_ecrire_nouvel_article' => 'Les breves conten&iacute;es nesta estaya',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'Unviar esti mensaxe',
 'icone_evolution_visites' => 'Evoluci&oacute;n de les visites<br />@visites@ visites',
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'Cambear esti grupu de pallabres',
 'icone_modifier_article' => 'Iguar esti art&iacute;culu',
 'icone_modifier_breve' => 'Iguar esta breve',
@@ -247,13 +255,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_rubrique' => 'Iguar esta estaya',
 'icone_modifier_site' => 'Iguar esti sitiu',
 'icone_poster_message' => 'Unviar un mensaxe',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'Espublizar esta breve',
 'icone_referencer_nouveau_site' => 'Referenciar un nuevu sitiu',
 'icone_refuser_breve' => 'Refugar esta breve',
 'icone_relancer_signataire' => 'Rellanzar el roblador',
 'icone_retour' => 'Tornar',
 'icone_retour_article' => 'Tornar a l\'art&iacute;culu',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'Siguimientu del foru p&uacute;blicu: @nb_forums@&nbsp;contribuci&oacute;n(es)',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Desaniciar la cookie de correspondencia',
 'icone_supprimer_groupe_mots' => 'Desaniciar esti grupu',
 'icone_supprimer_rubrique' => 'Desaniciar esta estaya',
@@ -263,8 +274,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_voir_tous_mots_cles' => 'Ver toles pallabres-clave',
 'image_administrer_rubrique' => 'Puedes alministrar esta estaya',
 'info_1_article' => '1 art&iacute;culu',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 breve',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 sitiu web',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Puedes activar una <b>cookie de correspondencia</b>, que va
  permitite que pases f&aacute;cilmente del sitiu p&uacute;blicu al sitiu privau.',
 'info_activer_forum_public' => '<i>Pa activar los foros p&uacute;blicos, has d\'escoyer el tipu
@@ -332,6 +349,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>u</sup> en @liste@',
 'info_code_acces' => '&iexcl;Nun escaezas los tos c&oacute;digos d\'accesu!',
 'info_comment_lire_tableau' => 'C&oacute;mo lleer esti cuadru',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>Nota:</b> Recomi&eacute;ndase verificar de mano si l\'agospiador ya comprime autom&aacute;ticamente los scripts php&nbsp;; pa esto, puedes utilizar por exemplu el serviciu siguiente: @testgzip@',
 'info_compresseur_texte' => 'Si el to sirvidor nun comprime autom&aacute;ticamente les p&aacute;xines html par unviales a los internautes, puedes tentar de forzar esta compresi&oacute;n pa amenorgar el pesu de les p&aacute;xines descarg&aacute;es. <b>Atenci&oacute;n</b>: esto puede ralentizar enforma dellos sirvidores.',
 'info_compresseur_titre' => 'Ig&uuml;es y compresi&oacute;n',
@@ -353,6 +371,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_connexion_ok' => 'La conex&oacute;n funcion&oacute;.',
 'info_contact' => 'Contautu',
 'info_contenu_articles' => 'Conten&iacute;u de los art&iacute;culos',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Crear ya iguar les pallabres clave del sitiu',
 'info_creation_paragraphe' => '(Pa crear p&aacute;rrafos, dexa ll&iacute;nies vac&iacute;es ente ellos.)',
 'info_creation_rubrique' => 'Enantes que puedas escribir art&iacute;culos<br />debes crear polo menos una estaya.<br />',
@@ -489,6 +508,15 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>', # MODIF
   Les lling&uuml;es que ya tan us&aacute;ndose nel sitiu (amosaes en primer llugar) nun puen desactivase.',
 'info_multi_rubriques' => '&iquest;Activar el men&uacute; de lling&uuml;es pa les estayes?',
 'info_multi_secteurs' => '... &iquest;s&oacute;lamente pa les estayes allug&aacute;es na raiz?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'Nome',
 'info_nom_destinataire' => 'Nome del destinatariu',
 'info_nom_site' => 'Nome del to sitiu',
@@ -504,6 +532,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>', # MODIF
 'info_non_envoi_liste_nouveautes' => 'Nun mandar la llista de les noved&aacute;es',
 'info_non_modifiable' => 'nun pue camudase',
 'info_non_suppression_mot_cle' => 'nun quiero desaniciar esta pallabra-clave.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Notes',
 'info_nouveaux_message' => 'Mensaxes nuevos',
 'info_nouvel_article' => 'Art&iacute;culu nuevu',
@@ -791,12 +820,19 @@ con una color que indica el est&aacute;u:',
 'item_utiliser_moteur_recherche' => 'Utilizar el motor de gueta',
 'item_utiliser_mots_cles' => 'Utilizar les pallabres-clave',
 'item_utiliser_syndication' => 'Utilizar la sindicaci&oacute;n autom&aacute;tica',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'visitante',
 
 // J
 'jour_non_connu_nc' => 'n.c.',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'herencia del campu @champ@',
 'ldap_correspondance_1' => 'Herencia de campos LDAP',
 'ldap_correspondance_2' => 'Pa ca&uacute;n de los campos SPIP siguientes, conse&ntilde;ar el nome del campu LDAP correspondiente. Dexar balero pa nun llenalu, separtar con espacios o comes pa tentar dellos campos LDAP.',
@@ -827,6 +863,7 @@ con una color que indica el est&aacute;u:',
 'logo_article' => 'LOGO DE L\'ART&Iacute;CULU',
 'logo_auteur' => 'LOGO DE L\'AUTOR O AUTORA',
 'logo_breve' => 'LOGO DE LA BREVE',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'LOGO DE LA PALLABRA-CLAVE',
 'logo_rubrique' => 'LOGO DE LA ESTAYA',
 'logo_site' => 'LOGO D\'ESTI SITIU',
@@ -983,6 +1020,8 @@ reinstalaci&oacute;n de SPIP pa crear una nueva base igual que un primer accesu 
   que apaez al pasar el mur pol t&iacute;tulu.',
 'texte_compacter_avertissement' => 'Cuida de nun activar estes opciones durante el desarrollo del sitiu: los elementos compactaos dexen dafechu de ser lleibles.',
 'texte_compacter_script_css' => 'SPIP pue compautar los scripts JavaScript y les fueyes d\'estilu CSS, pa guardalos como archivos est&aacute;ticos; esto acelera l\'amosamientu del sitiu.',
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(esti pue tar comprim&iacute;u o non)',
 'texte_compresseur_page' => 'SPIP pue comprimir autom&aacute;ticamente toles p&aacute;xines qu\'unv&iacute;a a los
 visitantes del sitiu. Esti axuste permite optimizar l\'anchu de banda (el
@@ -1190,7 +1229,9 @@ vienes de facer camb&eacute;os importantes nel grafismu o na estructura del siti
 'titre_config_fonctions' => 'Configuraci&oacute;n del sitiu',
 'titre_config_forums_prive' => 'Foros de l’espaciu priv&aacute;u',
 'titre_config_groupe_mots_cles' => 'Configuraci&oacute;n de los grupos de pallabres-clave',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configuraci&oacute;n del sitiu',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Conflictu durante la edici&oacute;n',
 'titre_connexion_ldap' => 'Axustes: <b>La to conex&oacute;n LDAP</b>',
 'titre_dernier_article_syndique' => 'Caberos art&iacute;culos sindicaos',
@@ -1199,6 +1240,7 @@ vienes de facer camb&eacute;os importantes nel grafismu o na estructura del siti
 'titre_forum_suivi' => 'Siguir foros',
 'titre_gauche_mots_edit' => 'PALLABRA N&Uacute;MBERU:',
 'titre_groupe_mots' => 'GRUPU DE PALLABRES:',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'LLINGUA DE L\'ARTICULU',
 'titre_langue_breve' => 'LLINGUA DE LA BREVE',
 'titre_langue_rubrique' => 'LLINGUA DE LA ESTAYA',

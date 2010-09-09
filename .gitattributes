@@ -305,9 +305,12 @@ ecrire/install/etape_sup1.php -text
 ecrire/install/etape_sup2.php -text
 ecrire/install/index.php -text
 ecrire/lang/ecrire_ast.php -text
+ecrire/lang/ecrire_ay.php -text
 ecrire/lang/ecrire_br.php -text
 ecrire/lang/ecrire_bs.php -text
+ecrire/lang/ecrire_co.php -text
 ecrire/lang/ecrire_cs.php -text
+ecrire/lang/ecrire_he.php -text
 ecrire/lang/ecrire_id.php -text
 ecrire/lang/ecrire_it_fem.php -text
 ecrire/lang/ecrire_km.php -text

@@ -216,12 +216,16 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Lista de corrier',
 'ical_titre_rss' => 'Fichiers &laquo;backend&raquo;',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'Activar lo cookie de correspond&eacute;ncia',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Gestion des plugins', # NEW
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Afichar los autors',
 'icone_afficher_visiteurs' => 'Afichar los vesitaires',
 'icone_arret_discussion' => 'Quitar quela discussion',
 'icone_calendrier' => 'Chalendier',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'Crear un noveu grop de mots',
 'icone_creation_mots_cles' => 'Crear un mot clau nu&ograve;u',
 'icone_creer_auteur' => 'Crear un autor nu&ograve;u e l\'associar a quel article',
@@ -231,8 +235,12 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'icone_creer_mot_cle_site' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; ce site', # NEW
 'icone_creer_rubrique_2' => 'Crear una rubrica nu&ograve;va',
 'icone_ecrire_nouvel_article' => 'Las brevas contengudas dins quela rubrica',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'Mandar queu messatge',
 'icone_evolution_visites' => 'Evolucion de las vesitas<br />@visites@ vesitas',
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'Modificar queu grop de mots',
 'icone_modifier_article' => 'Modificar quel article',
 'icone_modifier_breve' => 'Modificar quela breva',
@@ -241,13 +249,16 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'icone_modifier_rubrique' => 'Modificar quela rubrica',
 'icone_modifier_site' => 'Modificar queu sit',
 'icone_poster_message' => 'Postar un messatge',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'Publicar quela breva',
 'icone_referencer_nouveau_site' => 'Referenciar un sit nu&ograve;u',
 'icone_refuser_breve' => 'Refusar quela breva',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Tornar',
 'icone_retour_article' => 'Tornar a l\'article',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'Segut dau forum public: @nb_forums@&nbsp;contribucion(s)',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Suprimir lo cookie de correspond&eacute;ncia',
 'icone_supprimer_groupe_mots' => 'Suprimir queu document',
 'icone_supprimer_rubrique' => 'Suprimir quela rubrica',
@@ -257,8 +268,14 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'icone_voir_tous_mots_cles' => 'Veire tots los mots clau ',
 'image_administrer_rubrique' => 'Podetz administrar quela rubrica',
 'info_1_article' => '1 article',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 breva',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 sit',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Podetz activar un <b>cookie de correspond&eacute;ncia</b>; qu&ograve; lai vos permetr&aacute; de passar aisat dau sit public au sit privat.',
 'info_activer_forum_public' => '<i>Per activar los forums publics, volhatz chausir lor m&ograve;de de moderacion predefinit:</i>',
 'info_admin_gere_rubriques' => 'Quel administrator ger&iacute;s las rubricas seguentas:',
@@ -321,6 +338,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_classement_2' => '<sup>nd</sup> de @liste@',
 'info_code_acces' => 'Oblidetz pas v&ograve;stres c&ograve;des d\'acc&egrave;s pr&ograve;pris!',
 'info_comment_lire_tableau' => 'Coma legir queu tableu',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l\'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages t&eacute;l&eacute;charg&eacute;es. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_compresseur_titre' => 'Optimisations et compression', # NEW
@@ -342,6 +360,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_connexion_ok' => 'La connexion a abotit.',
 'info_contact' => 'Contacte',
 'info_contenu_articles' => 'Contengut daus articles',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Creatz e configuratz aic&iacute; los mots clau dau sit',
 'info_creation_paragraphe' => '(Per crear daus paragrafs, suf&iacute;s que laissetz de las linhas voidas.)',
 'info_creation_rubrique' => 'Avans de poder escriure daus articles,<br /> devetz crear aumens una rubrica.<br />',
@@ -465,6 +484,15 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
   Las lengas ja emplejadas dins v&ograve;stre sit (afichadas primieras) se p&ograve;den pas desactivar.',
 'info_multi_rubriques' => 'Activar lo menut de lenga per las rubricas?',
 'info_multi_secteurs' => '... nonm&agrave;s per las rubricas a la rai&ccedil; dau sit?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'Nom',
 'info_nom_destinataire' => 'Nom dau destinatari',
 'info_nom_site' => 'Nom de v&ograve;stre sit',
@@ -480,6 +508,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_non_envoi_liste_nouveautes' => 'Pas mandar la tiera de las novetats',
 'info_non_modifiable' => 'se p&ograve;t pas modificar',
 'info_non_suppression_mot_cle' => 'v&ograve;le pas suprimir queu mot clau.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'N&ograve;tas',
 'info_nouveaux_message' => 'Messatges nu&ograve;us',
 'info_nouvel_article' => 'Article nu&ograve;u',
@@ -766,12 +795,19 @@ una color indica lor estat:',
 'item_utiliser_moteur_recherche' => 'Utilizar lo cerchador',
 'item_utiliser_mots_cles' => 'Utilizar los mots clau',
 'item_utiliser_syndication' => 'Utilizar la sindicacion automatica',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'vesitaire',
 
 // J
 'jour_non_connu_nc' => 'n.c.',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
 'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
@@ -802,6 +838,7 @@ una color indica lor estat:',
 'logo_article' => 'L&Ograve;GO DE L\'ARTICLE',
 'logo_auteur' => 'L&Ograve;GO DE L\'AUTOR',
 'logo_breve' => 'L&Ograve;GO DE LA BREVA',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'L&Ograve;GO DAU MOT CLAU',
 'logo_rubrique' => 'L&Ograve;GO DE LA RUBRICA',
 'logo_site' => 'L&Ograve;GO DE QUEU SIT',
@@ -955,6 +992,8 @@ dempuei lo comen&ccedil;ament s\'afichan dins la bofi&ograve;la
 qu\'apareis quand la murja passa sus lo t&iacute;tol.',
 'texte_compacter_avertissement' => 'Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.', # NEW
 'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.', # NEW
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(Queste se p&ograve;t comprimir o non)',
 'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
 visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
@@ -1171,7 +1210,9 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_config_fonctions' => 'Configuracion dau sit',
 'titre_config_forums_prive' => 'Forums de l&#8217;espace priv&#233;', # NEW
 'titre_config_groupe_mots_cles' => 'Configuracion daus grops de mots clau',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configuracion dau sit',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
 'titre_connexion_ldap' => 'Opcions: <b>V&ograve;stra connexion LDAP</b>',
 'titre_dernier_article_syndique' => 'Darriers articles sindicats',
@@ -1180,6 +1221,7 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_forum_suivi' => 'Segut daus forums',
 'titre_gauche_mots_edit' => 'MOT NUMERO:',
 'titre_groupe_mots' => 'GROP DE MOTS:',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'LENGA DE L\'ARTICLE',
 'titre_langue_breve' => 'LENGA DE LA BREVA',
 'titre_langue_rubrique' => 'LENGA DE LA RUBRICA',

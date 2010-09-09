@@ -213,12 +213,16 @@ sonradan yok edebilir).',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'E-posta listesi',
 'ical_titre_rss' => 'Payla&#351;&#305;m dosyalar&#305;',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'Yaz&#305;&#351;ma &ccedil;erezini etkinle&#351;tir',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Plugin\'lerin y&ouml;netimi',
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Yazarlar&#305; g&ouml;ster',
 'icone_afficher_visiteurs' => 'Ziyaret&ccedil;ileri g&ouml;r&uuml;nt&uuml;le',
 'icone_arret_discussion' => 'Art&#305;k bu sohbete kat&#305;lma',
 'icone_calendrier' => 'Takvim',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'Yeni bir s&ouml;zc&uuml;k grubu olu&#351;tur',
 'icone_creation_mots_cles' => 'Yeni bir anahtar s&ouml;zc&uuml;k olu&#351;tur',
 'icone_creer_auteur' => 'Yeni bir yazar olu&#351;tur ve bu makaleye ba&#287;la',
@@ -228,8 +232,12 @@ sonradan yok edebilir).',
 'icone_creer_mot_cle_site' => 'Yeni bir anahtar s&ouml;zc&uuml;k olu&#351;tur ve bu siteye ba&#287;la',
 'icone_creer_rubrique_2' => 'Yeni bir b&ouml;l&uuml;m olu&#351;tur',
 'icone_ecrire_nouvel_article' => 'Bu b&ouml;l&uuml;mdeki k&#305;sa haberler',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'Bu iletiyi g&ouml;nder',
 'icone_evolution_visites' => 'Ziyaretlerin geli&#351;imi<br /> @visites@ ziyaret',
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'Bu s&ouml;zc&uuml;k gurubunu de&#287;i&#351;tir',
 'icone_modifier_article' => 'Bu makaleyi de&#287;i&#351;tir',
 'icone_modifier_breve' => 'Bu k&#305;sa haberi de&#287;i&#351;tir',
@@ -238,13 +246,16 @@ sonradan yok edebilir).',
 'icone_modifier_rubrique' => 'Bu b&ouml;l&uuml;m&uuml; de&#287;i&#351;tir',
 'icone_modifier_site' => 'Bu siteyi de&#287;i&#351;tir',
 'icone_poster_message' => 'Bir ileti yolla',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'Bu k&#305;sa haberi yay&#305;nla',
 'icone_referencer_nouveau_site' => 'Yeni bir siteye at&#305;fta bulun',
 'icone_refuser_breve' => 'Bu haberi reddet',
 'icone_relancer_signataire' => '&#304;mzalayan&#305; tekrar ba&#351;lat',
 'icone_retour' => 'Geri d&ouml;n',
 'icone_retour_article' => 'Makaleye geri d&ouml;n',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'Kamu forumunun izlenmesi&nbsp;:@nb_forums@&nbsp;kat&#305;l&#305;m',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Yaz&#305;&#351;ma &ccedil;erezini sil',
 'icone_supprimer_groupe_mots' => 'Bu grubu sil',
 'icone_supprimer_rubrique' => 'Bu b&ouml;l&uuml;m&uuml; sil',
@@ -254,8 +265,14 @@ sonradan yok edebilir).',
 'icone_voir_tous_mots_cles' => 'T&uuml;m anahtar s&ouml;zc&uuml;kleri g&ouml;ster',
 'image_administrer_rubrique' => 'Bu b&ouml;l&uuml;m&uuml; y&ouml;netebilirsiniz',
 'info_1_article' => '1 makale',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 k&#305;sa haber',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 site',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Bir <b>yaz&#305;&#351;ma kurabiyesi</b> &ccedil;al&#305;&#351;t&#305;rabilirsiniz,
  bu sizin kolayca kamu sitesinden &ouml;zel siteye ge&ccedil;menizi sa&#287;lar.',
 'info_activer_forum_public' => 'Kamu forumlar&#305;n&#305; &ccedil;al&#305;&#351;t&#305;rmak i&ccedil;in, l&uuml;tfen varsay&#305;lan bir y&ouml;netim kipi se&ccedil;iniz :',
@@ -322,6 +339,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_classement_2' => '@liste@\'den     inci',
 'info_code_acces' => 'Kendi eri&#351;im &#351;ifrelerinizi unutmay&#305;n&#305;z&nbsp;!',
 'info_comment_lire_tableau' => 'Bu tabloyu nas&#305;l okumal&#305; ?',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> &Ouml;nce, bar&#305;nd&#305;rma servisinin php skriptlerini sistematik olarak s&#305;k&#305;&#351;t&#305;r&#305;p s&#305;k&#305;&#351;t&#305;rmad&#305;&#287;&#305;n&#305;n kontrol edilmesi &ouml;nerilir&nbsp;; bunun i&ccedil;in, &ouml;rne&#287;in &#351;u hizmeti kullanabilirsiniz&nbsp;: @testgzip@',
 'info_compresseur_texte' => 'E&#287;er sunucunuz html sayfalar&#305; otomatik olarak s&#305;k&#305;&#351;t&#305;rm&#305;yorsa, y&uuml;klenen sayfa a&#287;&#305;rl&#305;klar&#305;n&#305; d&uuml;&#351;&uuml;rmek i&ccedil;in bu i&#351;lemi yapmaya zorlayabilirsiniz. <b>Dikkat</b> : bu i&#351;lem baz&#305; sunucular&#305; g&ouml;zle g&ouml;r&uuml;l&uuml;r &#351;ekilde yava&#351;latabilir.',
 'info_compresseur_titre' => 'Optimizasyon ve s&#305;k&#305;&#351;t&#305;rma',
@@ -343,6 +361,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_connexion_ok' => 'Ba&#287;lant&#305; ba&#351;ar&#305;l&#305;. ',
 'info_contact' => '&#304;leti&#351;im',
 'info_contenu_articles' => 'Makalelerin i&ccedil;eri&#287;i',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Burada sitenin anahtar s&ouml;zc&uuml;klerini yarat&#305;n&#305;z ve konfig&uuml;rasyonunu yap&#305;n&#305;z.',
 'info_creation_paragraphe' => '(Paragraf yaratmak i&ccedil;in sadece bo&#351; bir ka&ccedil; sat&#305;r b&#305;rak&#305;n&#305;z.)',
 'info_creation_rubrique' => 'Makale yazmadan &ouml;nce en az bir b&ouml;l&uuml;m yaratman&#305;z gerekir.',
@@ -471,6 +490,15 @@ yaratabilir. Bu da otomatik olarak bir galeri
     Sitenizde daha &ouml;nce kullan&#305;lan (ve g&ouml;r&uuml;nt&uuml;lenen) diller iptal edilemez. ',
 'info_multi_rubriques' => 'B&ouml;l&uuml;mlerde dil m&ouml;n&uuml;s&uuml; &ccedil;al&#305;&#351;s&#305;n m&#305; ?',
 'info_multi_secteurs' => 'Sadece k&ouml;k dizinde yer alan b&ouml;l&uuml;mler i&ccedil;in mi&nbsp;?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => '&#304;sim',
 'info_nom_destinataire' => 'Al&#305;c&#305;n&#305;n ismi',
 'info_nom_site' => 'Sitenizin ismi',
@@ -486,6 +514,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_non_envoi_liste_nouveautes' => 'Yenilikler listesini g&ouml;nderme',
 'info_non_modifiable' => 'De&#287;i&#351;tirilemez',
 'info_non_suppression_mot_cle' => 'Bu anahtar s&ouml;zc&uuml;&#287;&uuml;n silinmesini istemiyorum.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Notlar',
 'info_nouveaux_message' => 'Yeni iletiler',
 'info_nouvel_article' => 'Yeni makale',
@@ -773,12 +802,19 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_utiliser_moteur_recherche' => 'Arama motorunu kullan',
 'item_utiliser_mots_cles' => 'Anahtar s&ouml;zc&uuml;kleri kullan',
 'item_utiliser_syndication' => 'Otomatik payla&#351;&#305;m&#305; kullan',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'Ziyaret&ccedil;i ',
 
 // J
 'jour_non_connu_nc' => 'Bilinmeyen ',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
 'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
@@ -809,6 +845,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'logo_article' => 'MAKALE LOGOSU',
 'logo_auteur' => 'YAZAR LOGOSU',
 'logo_breve' => 'KISA HABER LOGOSU',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'ANAHTAR S&Ouml;ZC&Uuml;K LOGOSU',
 'logo_rubrique' => 'B&Ouml;L&Uuml;M LOGOSU',
 'logo_site' => 'S&#304;TE LOGOSU',
@@ -965,6 +1002,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
    ortaya &ccedil;&#305;kan konu&#351;ma balonunun i&ccedil;inde g&ouml;r&uuml;nt&uuml;lenir. ',
 'texte_compacter_avertissement' => 'Sitenizin geli&#351;tirilmesi esnas&#305;nda bu se&ccedil;enekleri aktive etmeyin : s&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; elemanlar t&uuml;m okunabilirliklerini kaybederler.',
 'texte_compacter_script_css' => 'SPIP javascript sktripleri ve CSSleri s&#305;k&#305;&#351;t&#305;rabilir ve bunlar&#305; statik dosyalara kaydedebilir ; b&ouml;ylece sitenin g&ouml;sterilmesi h&#305;zlan&#305;r.',
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(bu, s&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; ya da s&#305;k&#305;&#351;t&#305;r&#305;lmam&#305;&#351; olabilir)',
 'texte_compresseur_page' => 'SPIP site ziyaret&ccedil;ilerine g&ouml;nderdi&#287;i her sayfay&#305; s&#305;k&#305;&#351;t&#305;rabilir. Bu ayar band&#305; optimize eder. (site d&uuml;&#351;&uuml;k debili bir ba&#287;lant&#305;da h&#305;zlanm&#305;&#351; olur) ama hizmet biriminden &ccedil;ok fazla g&uuml;&ccedil; ister.',
 'texte_compte_element' => '@count@ eleman',
@@ -1103,7 +1142,9 @@ SQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; onarma yetene&#287;i var
 'titre_config_fonctions' => 'Site konfig&uuml;rasyonu',
 'titre_config_forums_prive' => '&Ouml;zel alan forumlar&#305;',
 'titre_config_groupe_mots_cles' => 'Anahtar s&ouml;zc&uuml;k guruplar&#305;n&#305;n konfig&uuml;rasyonu',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Site konfig&uuml;rasyonu',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'D&uuml;zenleme esnas&#305;nda &ccedil;ak&#305;&#351;ma',
 'titre_connexion_ldap' => 'Se&ccedil;enekler : <b>LDAP ba&#287;lant&#305;lar&#305;n&#305;z</b>',
 'titre_dernier_article_syndique' => 'Son yay&#305;nlanan payla&#351;&#305;ml&#305; makaleler',
@@ -1112,6 +1153,7 @@ SQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; onarma yetene&#287;i var
 'titre_forum_suivi' => 'Forumlar&#305;n izlenmesi ',
 'titre_gauche_mots_edit' => 'ANAHTAR S&Ouml;ZC&Uuml;K NO:',
 'titre_groupe_mots' => 'S&Ouml;ZC&Uuml;K GRUBU:',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'MAKALEN&#304;N D&#304;L&#304; ',
 'titre_langue_breve' => 'KISA HABER&#304;N D&#304;L&#304;',
 'titre_langue_rubrique' => 'B&Ouml;L&Uuml;M&Uuml;N D&#304;L&#304;',

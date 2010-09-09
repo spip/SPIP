@@ -218,12 +218,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailinglijst',
 'ical_titre_rss' => 'Syndicatiebestanden',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'De toegangskoekie activeren',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Plugin beheer',
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Auteurs tonen',
 'icone_afficher_visiteurs' => 'Bezoekers tonen',
 'icone_arret_discussion' => 'Niet langer deelnemen aan deze discussie',
 'icone_calendrier' => 'Kalender',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'Een nieuwe groep van trefwoorden aanmaken',
 'icone_creation_mots_cles' => 'Een nieuw trefwoord aanmaken',
 'icone_creer_auteur' => 'Een nieuwe auteur aanmaken en koppelen aan dit artikel',
@@ -233,8 +237,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_mot_cle_site' => 'Een nieuw sleutelwoord cre&euml;ren en het binden aan deze site',
 'icone_creer_rubrique_2' => 'Een nieuwe rubriek aanmaken',
 'icone_ecrire_nouvel_article' => 'De berichten van deze rubriek',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'Bericht verzenden',
 'icone_evolution_visites' => 'Evolutie van de bezoeken<br />@visites@ bezoeken',
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'Deze groep van trefwoorden wijzigen',
 'icone_modifier_article' => 'Dit artikel wijzigen',
 'icone_modifier_breve' => 'Dit bericht wijzigen',
@@ -243,13 +251,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_rubrique' => 'Deze rubriek wijzigen',
 'icone_modifier_site' => 'Deze site wijzigen',
 'icone_poster_message' => 'Een bericht versturen',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'Dit nieuwsbericht publiceren',
 'icone_referencer_nouveau_site' => 'Een nieuwe site koppelen',
 'icone_refuser_breve' => 'Dit nieuwsbericht weigeren',
 'icone_relancer_signataire' => 'De ondertekenaar weer op gang brengen',
 'icone_retour' => 'Terug',
 'icone_retour_article' => 'Terug naar artikel',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'Opvolging van het publieke forum: @nb_forums@&nbsp;bijdrage(n)',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'De toegangskoekie verwijderen',
 'icone_supprimer_groupe_mots' => 'Deze groep wissen',
 'icone_supprimer_rubrique' => 'Deze rubriek wissen',
@@ -259,8 +270,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_voir_tous_mots_cles' => 'Alle trefwoorden bekijken',
 'image_administrer_rubrique' => 'Je kan deze rubriek beheren',
 'info_1_article' => '1 artikel',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 bericht',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 site',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Je kan een <b>toegangskoekie</b> activeren,  waardoor je makkelijk kan wisselen
  tussen de het publieke en het private deel van de website.',
 'info_activer_forum_public' => '<i>Om de openbare forums te activeren, dien je een standaardinstelling
@@ -328,6 +345,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>de</sup> @liste@',
 'info_code_acces' => 'Vergeet je eigen toegangscode niet!',
 'info_comment_lire_tableau' => 'Hoe lees je deze tabel',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Hij wordt aanbevolen om eerst te controleren of leverancier de scripts php&nbsp; reeds systematisch samenperst; daarvoor, kunt u bijvoorbeeld de volgende dienst gebruiken&nbsp;: @testgzip@',
 'info_compresseur_texte' => 'Als uw server de bladzijdes HTML niet automatisch samendrukt om ze te verzenden naar de internauten, kunt u deze samendrukking proberen te forceren om het gewicht van de gedownloade bladzijdes te verminderen. <b>Aandacht</b>: dat kan bepaalde servers aanzienlijk vertragen.',
 'info_compresseur_titre' => 'Optimaliseringen en samendrukking',
@@ -349,6 +367,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_connexion_ok' => 'De verbinding is geslaagd.',
 'info_contact' => 'Contact',
 'info_contenu_articles' => 'Inhoud van de artikels',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Cre&euml;er en configureer hier de trefwoorden van de site',
 'info_creation_paragraphe' => '(Om een nieuwe paragraaf aan te maken, laat je gewoon enkele lijnen blanco.)',
 'info_creation_rubrique' => 'Alvorens artikelen te kunnen schrijven,<br /> u moet een rubriek minstens cre&euml;ren.<br />',
@@ -481,6 +500,15 @@ De publieke forums kunnen per artikel toegestaan worden
 ',
 'info_multi_rubriques' => 'Taalmenu toepassen op de rubrieken?',
 'info_multi_secteurs' => '... enkel voor de rubrieken in de hoofdmap?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'Naam',
 'info_nom_destinataire' => 'Naam van de bestemmeling',
 'info_nom_site' => 'naam van je site',
@@ -496,6 +524,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_non_envoi_liste_nouveautes' => 'De lijst met nieuwigheden niet versturen',
 'info_non_modifiable' => 'kan niet gewijzigd worden',
 'info_non_suppression_mot_cle' => 'Ik wil dit trefwoord niet verwijderen.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Opmerkingen',
 'info_nouveaux_message' => 'Nieuwe berichten',
 'info_nouvel_article' => 'Nieuw artikel',
@@ -784,12 +813,19 @@ een kleur geeft hun status aan&nbsp;:',
 'item_utiliser_moteur_recherche' => 'De zoekmachine gebruiken',
 'item_utiliser_mots_cles' => 'Trefwoorden gebruiken',
 'item_utiliser_syndication' => 'Automatische syndicatie gebruiken',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'bezoeker',
 
 // J
 'jour_non_connu_nc' => 'onbekend',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'erfenis van het veld @champ@',
 'ldap_correspondance_1' => 'Erfenis van de velden LDAP',
 'ldap_correspondance_2' => 'Voor elk volgend SPIP veld, de naam van het overeenkomstige veld LDAP aangeven. Leegte laten om niet het te vullen, door ruimtes of komma\'s te scheiden om verschillende LDAP velden te proberen.',
@@ -820,6 +856,7 @@ een kleur geeft hun status aan&nbsp;:',
 'logo_article' => 'LOGO VAN HET ARTIKEL',
 'logo_auteur' => 'LOGO VAN DE AUTEUR',
 'logo_breve' => 'LOGO VAN HET NIEUWSBERICHT',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'LOGO VAN HET TREFWOORD',
 'logo_rubrique' => 'LOGO VAN DE RUBRIEK',
 'logo_site' => 'LOGO VAN DE WEBSITE',
@@ -975,6 +1012,8 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
  aangehouden.',
 'texte_compacter_avertissement' => 'De aandacht om niet deze opties tijdens de ontwikkeling van uw site te activeren: de compact elementen verliezen elke leesbaarheid.',
 'texte_compacter_script_css' => 'SPIP kan compact de javascript scripts en de CSS stijl bladen, om ze te registreren in statische bestanden; dat versnelt de display van de site.',
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(deze kan gecomprimeerd worden of niet)',
 'texte_compresseur_page' => 'SPIP kan elke bladzijde automatisch samenpersen die hij naar
  bezoekers van de site verzendt. Dit regelen maakt het mogelijk om de drukke reep te optimaliseren (de
@@ -1173,7 +1212,9 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_config_fonctions' => 'Configuratie van de site',
 'titre_config_forums_prive' => 'Forums van de particuliere ruimte',
 'titre_config_groupe_mots_cles' => 'Configuratie van de groepen trefwoorden',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configuratie van de site',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Conflict bij de uitgave',
 'titre_connexion_ldap' => 'Opties: <b>Je LDAP-verbinding</b>',
 'titre_dernier_article_syndique' => 'Meest recente gesyndiceerde artikels',
@@ -1182,6 +1223,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_forum_suivi' => 'Vervolg van de forums',
 'titre_gauche_mots_edit' => 'WOORD NUMMER:',
 'titre_groupe_mots' => 'WOORDENGROEP:',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'TAAL VAN HET ATIKEL',
 'titre_langue_breve' => 'TAAL VAN HET NIEUWSBERICHT',
 'titre_langue_rubrique' => 'TAAL VAN DE RUBRIEK',

@@ -222,12 +222,16 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Lis-lim&egrave;l',
 'ical_titre_rss' => 'Fichye yo pou sendikasyon',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'M&egrave;t yon gatomakro ',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Jere tout plegin yo',
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Afiche lot&egrave; yo',
 'icone_afficher_visiteurs' => 'Afiche vizit&egrave; yo',
 'icone_arret_discussion' => 'Rete sotni kozman-nan',
 'icone_calendrier' => 'Kalandrye',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'Kreye yon nouvo gwoup mo',
 'icone_creation_mots_cles' => 'Kreye yon nouvo mokle',
 'icone_creer_auteur' => 'Kreye yon nouvo lot&egrave; ek m&egrave;t ali ak atik la',
@@ -237,8 +241,12 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'icone_creer_mot_cle_site' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; ce site', # NEW
 'icone_creer_rubrique_2' => 'Kreye yon nouvo ribrik',
 'icone_ecrire_nouvel_article' => 'Tinouv&egrave;l yo andan ribrik la',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'Voye mesaj la',
 'icone_evolution_visites' => 'Evolisyon vizit yo<br />@visites@ vizit yo',
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'Chanje gwoup mokle a',
 'icone_modifier_article' => 'Chanje atik la',
 'icone_modifier_breve' => 'Chanje tinouv&egrave;l',
@@ -247,13 +255,16 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'icone_modifier_rubrique' => 'Chanje ribrik la',
 'icone_modifier_site' => 'Chanje sit la',
 'icone_poster_message' => 'Poste yon mesaj',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'Pibliye tinouv&egrave;l',
 'icone_referencer_nouveau_site' => 'Referans yon nouvo sit',
 'icone_refuser_breve' => 'Refize tinouv&egrave;l',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Tounyen dey&eacute;',
 'icone_retour_article' => 'Tounyen dey&eacute; sou atik a',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'Swiv fowom piblik la&nbsp;: @nb_forums@&nbsp;mesaj',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Kraze gatomakro ',
 'icone_supprimer_groupe_mots' => 'Kraze gwoup la',
 'icone_supprimer_rubrique' => 'Kraze ribrik la',
@@ -263,8 +274,14 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'icone_voir_tous_mots_cles' => 'Gad tout mokle yo',
 'image_administrer_rubrique' => 'Ou kapab g&egrave;r ribrik la',
 'info_1_article' => '1 atik',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 tinouv&egrave;l',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 sitw&egrave;b',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Ou kapab m&egrave;t <b> yon gatomakro ki rokon&egrave;t a w</b>, ki ke p&egrave;m&egrave; 
  f&egrave; yon vir&eacute; ant sit piblik ek sit priv&eacute;.',
 'info_activer_forum_public' => '<i>Pou fowom piblik mache, m&eacute;si chwazi manyir mod&egrave;r a y otomatikman
@@ -332,6 +349,7 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'info_classement_2' => '<sup>em</sup> sou @liste@',
 'info_code_acces' => 'Oubliy pa kod laks&egrave; w-a, pou w m&egrave;m&nbsp;!',
 'info_comment_lire_tableau' => 'Kouman f&egrave; lekti tablo-a',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l\'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages t&eacute;l&eacute;charg&eacute;es. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_compresseur_titre' => 'Optimisations et compression', # NEW
@@ -353,6 +371,7 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'info_connexion_ok' => 'Koneksyon nan te fin mache.',
 'info_contact' => 'Kontak',
 'info_contenu_articles' => 'Kisa ap kontni nan atik yo',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Kreye ak konfigire mokle yo pou sit la isit m&egrave;m',
 'info_creation_paragraphe' => '(Pou kreye k&egrave;k pawagwaf, ann l&egrave;s k&egrave;k liy vid senpman.)',
 'info_creation_rubrique' => 'Avan w kapab ekri k&egrave;k atik,<br /> f&ograve;k w te fin kreye yon ribrik omwen.<br />',
@@ -483,6 +502,15 @@ pa mache m&egrave;m.<br />{{F&ograve;k w instal ank&ograve;
   genyen inposib kraze lang sa-yo ki deja itilize sou sit-la (yo afiche premy&eacute;).',
 'info_multi_rubriques' => 'Eske gen bezwen m&egrave;t meni lalanng sou ribrik yo &nbsp;?',
 'info_multi_secteurs' => '... s&egrave;lman sou ribrik andan rasin sit la&nbsp;?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'Kouman i rele',
 'info_nom_destinataire' => 'Kouman destinat&egrave; i rele',
 'info_nom_site' => 'Kouman sit la li rele',
@@ -498,6 +526,7 @@ pa mache m&egrave;m.<br />{{F&ograve;k w instal ank&ograve;
 'info_non_envoi_liste_nouveautes' => 'Voye pa lis nouvelt&eacute;.',
 'info_non_modifiable' => 'ki pa posib chanje',
 'info_non_suppression_mot_cle' => 'mwen vle pa kraze mokle-a.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Not yo',
 'info_nouveaux_message' => 'Nouvo mesaj yo',
 'info_nouvel_article' => 'Nouvo atik',
@@ -787,12 +816,19 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'item_utiliser_moteur_recherche' => 'Itilize mot&egrave;-rech&egrave;che',
 'item_utiliser_mots_cles' => 'Itilize mokle yo',
 'item_utiliser_syndication' => 'Itilize sendikasyon otomatik',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'vizit&egrave;',
 
 // J
 'jour_non_connu_nc' => 'ki pa koni',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
 'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
@@ -823,6 +859,7 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'logo_article' => 'LOGO ATIK LA',
 'logo_auteur' => 'LOGO LOT&Egrave;',
 'logo_breve' => 'LOGO TINOUV&Egrave;L',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'LOGO MOKL&Eacute;',
 'logo_rubrique' => 'LOGO RIBRIK',
 'logo_site' => 'LOGO SIT LA',
@@ -977,6 +1014,8 @@ lenstalasyon SPIP pou w kreye yon l&ograve;t nouvo baz ak son promy&eacute; laks
   nan yon bil ki par&egrave;t kank w vole sou titr-la.',
 'texte_compacter_avertissement' => 'Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.', # NEW
 'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.', # NEW
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(li m&egrave;m se pet&egrave;t konprese, pet&egrave;t non)',
 'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
 visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
@@ -1181,7 +1220,9 @@ ou nan d&eacute;kripsyon atik sa-yo
 'titre_config_fonctions' => 'Konfigire sit-la',
 'titre_config_forums_prive' => 'Forums de l&#8217;espace priv&#233;', # NEW
 'titre_config_groupe_mots_cles' => 'Konfigire gwoup mokle yo',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Konfigire sit-la',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
 'titre_connexion_ldap' => 'Opsyon sa-yo : <b>ou kon&egrave;ksyon LDAP</b>',
 'titre_dernier_article_syndique' => 'Tout denye atik sendike',
@@ -1190,6 +1231,7 @@ ou nan d&eacute;kripsyon atik sa-yo
 'titre_forum_suivi' => 'Swivi fowom yo',
 'titre_gauche_mots_edit' => 'MOKLE NIMEWO :',
 'titre_groupe_mots' => 'GWOUP MOKLE :',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'LALANNG ATIK-LA',
 'titre_langue_breve' => 'LALANNG TINOUV&Egrave;L-LA',
 'titre_langue_rubrique' => 'LALANNG RIBRIK-LA',
