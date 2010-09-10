@@ -312,6 +312,15 @@ function accueil_liste_participants()
 	return $res; 
 }
 
+function exec_accueil_navigation(){
+	$nom = typo($GLOBALS['meta']["nom_site"]);
+	if (!$nom) $nom=  _T('info_mon_site_spip');
+	return personnel_accueil(@$_COOKIE['spip_admin'])
+		. debut_cadre_relief("racine-24.png", true, "", $nom)
+		. etat_base_accueil()
+		. fin_cadre_relief(true);
+}
+
 // http://doc.spip.org/@exec_accueil_dist
 function exec_accueil_dist()
 {
@@ -326,13 +335,9 @@ function exec_accueil_dist()
 	echo debut_gauche("",true);
 
 	if ($spip_display != 4) {
-		echo personnel_accueil(@$_COOKIE['spip_admin']);
-		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
-		$nom = typo($GLOBALS['meta']["nom_site"]);
-		if (!$nom) $nom=  _T('info_mon_site_spip');
-		echo debut_cadre_relief("racine-24.png", true, "", $nom),
-		  etat_base_accueil(),
-		  fin_cadre_relief(true);
+		echo pipeline('affiche_gauche',
+						array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),
+								'data'=>exec_accueil_navigation()));
 	}
 
 	echo creer_colonne_droite("", true);

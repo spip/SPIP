@@ -33,7 +33,16 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 
 // envoi du doctype et du <head><title>...</head>
 // http://doc.spip.org/@init_entete
-function init_entete($titre='', $id_rubrique=0, $minipres=false) {
+function init_entete($titre='', $dummy=0, $minipres=false) {
+
+	return _DOCTYPE_ECRIRE
+	. html_lang_attributes()
+	. "<head>\n"
+	. init_head($titre, $dummy, $minipres)
+	. "</head>\n";
+}
+
+function init_head($titre='', $dummy=0, $minipres=false) {
 	include_spip('inc/gadgets');
 
 	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
@@ -51,16 +60,11 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 	$head .= "
 	<script type='text/javascript'><!--
 	jQuery(document).ready(function(){
-	" .	repercuter_gadgets($id_rubrique) . '
+	" .	repercuter_gadgets() . '
 	});
 	// --></script>
 	';
-
-	return _DOCTYPE_ECRIRE
-	. html_lang_attributes()
-	. "<head>\n"
-	. pipeline('header_prive', $head)
-	. "</head>\n";
+	return pipeline('header_prive', $head);
 }
 
 // fonction envoyant la double serie d'icones de redac
@@ -68,16 +72,8 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='',$menu=true) {
 	global $connect_id_auteur, $auth_can_disconnect;
 
-	$GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
-		? $GLOBALS['visiteur_session']['prefs']['display']
-		: 0;
-	$spip_display_navigation = isset($GLOBALS['visiteur_session']['prefs']['display_navigation'])
-		? $GLOBALS['visiteur_session']['prefs']['display_navigation']
-		: 'navigation_avec_icones';
-	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
-
 	$res = pipeline('body_prive',"<body class='"
-			. $GLOBALS['spip_ecran'] . " $spip_display_navigation $rubrique $sous_rubrique "._request('exec')."'"
+			. init_body_class()." "._request('exec')."'"
 			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
 			.'>');
 
@@ -87,7 +83,18 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	$bandeau = charger_fonction('bandeau', 'inc');
 
 	return $res
-	 . $bandeau($rubrique, $sous_rubrique, $largeur);
+	 . $bandeau();
+}
+
+function init_body_class() {
+	$GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
+		? $GLOBALS['visiteur_session']['prefs']['display']
+		: 0;
+	$spip_display_navigation = isset($GLOBALS['visiteur_session']['prefs']['display_navigation'])
+		? $GLOBALS['visiteur_session']['prefs']['display_navigation']
+		: 'navigation_avec_icones';
+	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
+	return $GLOBALS['spip_ecran'] . " $spip_display_navigation";
 }
 
 // http://doc.spip.org/@avertissement_messagerie

@@ -159,6 +159,7 @@ ecrire/exec/editer_auteurs.php -text
 ecrire/exec/editer_mots.php -text
 ecrire/exec/export_all.php -text
 ecrire/exec/fond.php -text
+ecrire/exec/fond_monobloc.php -text
 ecrire/exec/iconifier.php -text
 ecrire/exec/import_all.php -text
 ecrire/exec/index.php -text
@@ -767,6 +768,7 @@ prive/modeles/pagination_precedent_suivant.html -text
 prive/modeles/pagination_prive.html -text
 prive/modeles/paginationitem.html -text
 prive/modeles/text.html -text
+prive/modeles/typo.html -text
 prive/modeles/video.html -text
 prive/navigation.xml -text
 prive/puce_prive.gif -text
@@ -777,6 +779,18 @@ prive/rss/messagerie.html -text
 prive/rss/signatures.html -text
 prive/spip_pass.html -text
 prive/spip_style.css -text
+prive/squelettes/body.html -text
+prive/squelettes/contenu/page-typo.html -text
+prive/squelettes/extra/dist.html -text
+prive/squelettes/head/dist.html -text
+prive/squelettes/hierarchie/dist.html -text
+prive/squelettes/inclure/barre-nav.html -text
+prive/squelettes/inclure/head.html -text
+prive/squelettes/inclure/pied.html -text
+prive/squelettes/navigation/dist.html -text
+prive/squelettes/objet.html -text
+prive/squelettes/page.html -text
+prive/squelettes/structure.html -text
 prive/stats/echelle.html -text
 prive/style_prive.html -text
 prive/style_prive_defaut.css -text

@@ -45,16 +45,18 @@ body { font-size:0.625em; font-family: Verdana, Geneva, Sans, sans-serif; }
 
 #page { font-size: small; }
 /* ecran etroit*/
+.largeur { width: 780px; margin: auto; text-align:#GET{left}; }
 #conteneur,.table_page,div.messages { clear: both; margin-#GET{right}: auto; margin-#GET{left}: auto; text-align: #GET{left}; width: 780px; margin-top:0.5em;}
 #navigation { float: #GET{left}; width: 200px; min-height: 100px; }
-#contenu { float: #GET{left} ; margin-#GET{left}: 30px; width: 550px; }
-#extra { float: #GET{left}; width: 200px; }
+#extra { float: #GET{left}; clear:#GET{left}; width: 200px; }
+#contenu { float: #GET{right} ; margin-#GET{left}: 30px; width: 550px; }
 
 /* ecran large*/
-.large #conteneur,.large .table_page,.large div.messages { margin-#GET{right}: auto; margin-#GET{left}: auto; text-align: #GET{left}; width: 974px; }
-.large #navigation { float: #GET{left}; width: 200px; }
+.large .largeur {width:974px;}
+.large #conteneur,.large .table_page,.large div.messages { width: 974px; }
+.large #navigation {  }
+.large #extra { float: #GET{right}; clear:none; width: 200px; }
 .large #contenu { float: #GET{left}; margin-#GET{left}: 17px; width: 540px; }
-.large #extra { float: #GET{right}; width: 200px; }
 
 /* les formulaires sont en 600px en config large */
 .articles_edit .large #contenu,
@@ -121,8 +123,6 @@ td { text-align: #GET{left}; }
 
 #bando_haut { font-size: 110%; position:relative;}
 #bando_haut a { text-decoration: none; }
-#bando_haut .largeur { width: 780px; margin: auto; text-align:#GET{left}; }
-.large #bando_haut .largeur {width:974px;}
 
 
 #bando_haut #bando_liens_rapides {position:absolute;top:0;z-index:0;width:100%;}

@@ -315,8 +315,7 @@ function bando_liens_acces_rapide(){
  * @param unknown_type $largeur
  * @return unknown
  */
-function inc_bandeau_dist($rubrique, $sous_rubrique, $largeur)
-{
+function inc_bandeau_dist() {
 	$contexte = definir_barre_contexte();
 	$boutons = definir_barre_boutons($contexte, false);
 	return "<div id='bando_haut'>"
