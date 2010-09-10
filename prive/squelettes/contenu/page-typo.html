@@ -6,3 +6,97 @@
 
 ]
 #MODELE{typo}
+
+<h1>Boites</h1>
+	#BOITE_OUVRIR
+		<p>"box" est le conteneur de <b>base</b> des boites.
+		Tous les autres conteneurs sont herites de celui la.</p>
+	#BOITE_FERMER
+
+<div class="line">
+	<h2>Habillage des boites</h2>
+	<h3>Contour</h3>
+	#BOITE_OUVRIR{'<h3>simple</h3>','simple'}
+		<p>Contenu</p>
+	#BOITE_FERMER
+
+	#BOITE_OUVRIR{'<h3>info</h3>','info'}
+		<p>Contenu</p>
+	#BOITE_FERMER
+
+	#BOITE_OUVRIR{'<h3>note</h3>','note'}
+		<p>Contenu</p>
+	#BOITE_FERMER
+
+	#BOITE_OUVRIR{'<h3>raccourcis</h3>','raccourcis'}
+		<p>Contenu</p>
+	#BOITE_FERMER
+
+	#BOITE_OUVRIR{'<h3>important</h3>','important'}
+		<p>Contenu</p>
+	#BOITE_FERMER
+
+	<h3>Fonds</h3>
+	#BOITE_OUVRIR{'<h3>basic highlight</h3>','basic highlight'}
+		<p>Combiner la classe basic avec une classe de fond</p>
+	#BOITE_FERMER
+
+	#BOITE_OUVRIR{'<h3>basic inverse</h3>','basic inverse'}
+		<p>Combiner la classe basic avec une classe de fond</p>
+	#BOITE_FERMER
+
+	<h3>Erreurs, succes, avertissement</h3>
+
+	#BOITE_OUVRIR{'<h3>success</h3>','success'}
+		<p>Contenu</p>
+	#BOITE_FERMER
+	#BOITE_OUVRIR{'','success'}
+		<p>Contenu</p>
+	#BOITE_FERMER
+
+	#BOITE_OUVRIR{'<h3>notice</h3>','notice'}
+		<p>Contenu</p>
+	#BOITE_FERMER
+	#BOITE_OUVRIR{'','notice'}
+		<p>Contenu</p>
+	#BOITE_FERMER
+
+	#BOITE_OUVRIR{'<h3>error</h3>','error'}
+		<p>Contenu</p>
+	#BOITE_FERMER
+	#BOITE_OUVRIR{'','error'}
+		<p>Contenu</p>
+	#BOITE_FERMER
+
+</div>
+
+<div class="line">
+	<h2>Header de boite</h2>
+	#BOITE_OUVRIR{#CHEMIN_IMAGE{article-24.png}|balise_img{'',cadre-icone}|concat{simple/titrem},'simple','titrem'}
+		<p>Body</p>
+	#BOITE_FERMER
+	#BOITE_OUVRIR{'<h2>simple/titrem</h2>','simple','titrem'}
+		<p>Body</p>
+	#BOITE_FERMER
+	#BOITE_OUVRIR{#CHEMIN_IMAGE{article-24.png}|balise_img{'',cadre-icone}|concat{simple/titrem},'simple','titrem'}
+		<p>Body</p>
+	#BOITE_FERMER
+
+	#BOITE_OUVRIR{'simple/section','simple','section'}
+		<p>Body</p>
+	#BOITE_FERMER
+	#BOITE_OUVRIR{'simple/bam','simple','bam'}
+		<p>Body</p>
+	#BOITE_FERMER
+	#BOITE_OUVRIR{'basic/topper','basic inverse','topper'}
+		<p>Body</p>
+	#BOITE_FERMER
+
+	<h2>Pied de boite</h2>
+	#BOITE_OUVRIR{'simple/titrem','simple','titrem'}
+		<p>Body</p>
+	#BOITE_PIED
+		#BOUTON_ACTION{demo,#SELF}
+	#BOITE_FERMER
+
+</div>

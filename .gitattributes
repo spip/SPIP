@@ -434,6 +434,8 @@ ecrire/xml/valider.php -text
 local/remove.txt -text
 prive/aide_body.css -text
 prive/aide_menu.html -text
+prive/box.css -text
+prive/box_skins.css.html -text
 prive/cfg.html -text
 prive/configurer/identite.html -text
 prive/configurer/langage.html -text
@@ -784,6 +786,7 @@ prive/squelettes/contenu/page-typo.html -text
 prive/squelettes/extra/dist.html -text
 prive/squelettes/head/dist.html -text
 prive/squelettes/hierarchie/dist.html -text
+prive/squelettes/hierarchie/page-typo.html -text
 prive/squelettes/inclure/barre-nav.html -text
 prive/squelettes/inclure/head.html -text
 prive/squelettes/inclure/pied.html -text

@@ -847,7 +847,11 @@ body.sites .no_onglets #contenu #wysiwyg div.contenu_nom_site {display: none;}
 
 /******** Formulaires **************/
 [(#INCLURE{fond=style_prive_formulaires}{env}{couleur_claire}{couleur_foncee}{lang}{ltr})]
-/******** Formulaires fin  **************/
+/******** Formulaires fin  *********/
+
+/******** Boites *******************/
+[(#INCLURE{fond=prive/box_skins.css}{env}{couleur_claire}{couleur_foncee}{lang}{ltr})]
+/******** Boites fin ***************/
 
 /*** Placer le theme tout a la fin ***/
 #SET{style_prive_theme,#REM|bando_style_prive_theme}
