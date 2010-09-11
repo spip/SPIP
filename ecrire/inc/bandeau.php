@@ -217,7 +217,7 @@ function bando_identite(){
 
 	$nom_site = typo($GLOBALS['meta']['nom_site']);
 	$img_info = find_in_theme('images/information-24.png');
-	$url_config_identite = generer_url_ecrire('config_identite');
+	$url_config_identite = generer_url_ecrire('configurer_identite');
 
 	$res = "";
 
