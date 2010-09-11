@@ -46,6 +46,12 @@ function exec_fond_dist(){
  * A deplacer
  */
 
+function interdire_acces($ok=false) {
+	if ($ok) return '';
+	include_spip('inc/headers');
+	redirige_formulaire(generer_url_ecrire('403','acces='._request('exec')));
+	exit;
+}
 
 function f_title_auto($texte){
 	if (strpos($texte,'<title>')===false

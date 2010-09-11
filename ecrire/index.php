@@ -104,7 +104,8 @@ elseif (isset($GLOBALS['meta']["admin"])) {
 	}
 }
 // si nom pas plausible, prendre le script par defaut
-elseif (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) $exec = "accueil";
+// attention aux deux cas 404/403 qui commencent par un 4 !
+elseif (!preg_match(',^[a-z4_][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 
 // Verification des plugins
 // (ne pas interrompre une restauration ou un upgrade)
@@ -152,8 +153,8 @@ if ($var_f = tester_url_ecrire($exec))
 
 	$var_f(); // at last
 else {
-// Rien de connu: rerouter vers exec=404 au lieu d'echouer
-// ce qui permet de laisser la main a un plugin
+	// Rien de connu: rerouter vers exec=404 au lieu d'echouer
+	// ce qui permet de laisser la main a un plugin
 	$var_f = charger_fonction('404');
 	$var_f($exec);
 }

@@ -782,6 +782,7 @@ prive/rss/signatures.html -text
 prive/spip_pass.html -text
 prive/spip_style.css -text
 prive/squelettes/body.html -text
+prive/squelettes/contenu/page-403.html -text
 prive/squelettes/contenu/page-typo.html -text
 prive/squelettes/extra/dist.html -text
 prive/squelettes/head/dist.html -text
