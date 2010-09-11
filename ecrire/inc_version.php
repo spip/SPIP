@@ -24,6 +24,9 @@ define('_EXTENSION_PHP', '.php3');
 #mettre a true pour compatibilite PHP3
 define('_FEED_GLOBALS', false);
 
+# version PHP minimum exigee (cf. inc/utils)
+define ('_PHP_MIN', '4.4.11');
+
 # le nom du repertoire ecrire/
 define('_DIR_RESTREINT_ABS', 'ecrire/');
 # sommes-nous dans ecrire/ ?
