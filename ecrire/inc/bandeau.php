@@ -224,7 +224,7 @@ function bando_identite(){
 	$moi = typo($GLOBALS['visiteur_session']['nom']);
 	$img_langue = find_in_theme('images/langues.png');
 	$url_aide = generer_url_ecrire('aide_index',"var_lang=".$GLOBALS['spip_lang']);
-	$url_lang = generer_url_ecrire('config_langage');
+	$url_lang = generer_url_ecrire('configurer_langage');
 
 	$res .= "<p class='session'>"
 	  . "<a title='"._T('icone_informations_personnelles')."' href='".
