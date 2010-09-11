@@ -134,7 +134,6 @@ ecrire/exec/charger_plugin.php -text
 ecrire/exec/charger_plugin_descr.php -text
 ecrire/exec/config_contenu.php -text
 ecrire/exec/config_fonctions.php -text
-ecrire/exec/config_identite.php -text
 ecrire/exec/config_lang.php -text
 ecrire/exec/config_langage.php -text
 ecrire/exec/config_multilang.php -text
@@ -437,7 +436,6 @@ prive/aide_menu.html -text
 prive/box.css -text
 prive/box_skins.css.html -text
 prive/cfg.html -text
-prive/configurer/identite.html -text
 prive/configurer/langage.html -text
 prive/configurer/preferences.html -text
 prive/contenu/article.html -text
@@ -783,15 +781,18 @@ prive/spip_pass.html -text
 prive/spip_style.css -text
 prive/squelettes/body.html -text
 prive/squelettes/contenu/page-403.html -text
+prive/squelettes/contenu/page-configurer_identite.html -text
 prive/squelettes/contenu/page-typo.html -text
 prive/squelettes/extra/dist.html -text
 prive/squelettes/head/dist.html -text
 prive/squelettes/hierarchie/dist.html -text
+prive/squelettes/hierarchie/page-configurer_identite.html -text
 prive/squelettes/hierarchie/page-typo.html -text
 prive/squelettes/inclure/barre-nav.html -text
 prive/squelettes/inclure/head.html -text
 prive/squelettes/inclure/pied.html -text
 prive/squelettes/navigation/dist.html -text
+prive/squelettes/navigation/page-configurer_identite.html -text
 prive/squelettes/objet.html -text
 prive/squelettes/page.html -text
 prive/squelettes/structure.html -text

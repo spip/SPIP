@@ -112,7 +112,7 @@
 	<bouton id='config_identite' parent="bando_configuration">
 		<icone>images/identite-16.png</icone>
 		<titre>titre_identite_site</titre>		
-		<url>config_identite</url>
+		<url>configurer_identite</url>
 	</bouton>
 	<bouton id='config_lang' parent="bando_configuration">
 		<icone>images/langue-16.png</icone>
