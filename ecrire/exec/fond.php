@@ -42,6 +42,32 @@ function exec_fond_dist(){
 }
 
 /**
+ * Fonctions utilises au calcul des squelette du prive.
+ * A deplacer
+ */
+
+
+function f_title_auto($texte){
+	if (strpos($texte,'<title>')===false
+	  AND 
+			(preg_match(",<h1>(.+)</h1>,Uims", $texte, $match)
+		   OR preg_match(",<h[23]>(.+)</h[23]>,Uims", $texte, $match))
+		AND $match = trim($match[1])
+		AND ($p = strpos($texte,'<head>'))!==FALSE) {
+		if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
+			$nom_site_spip=  _T('info_mon_site_spip');
+
+		$titre = "<title>["
+			. $nom_site_spip
+			. "] ". $match
+		  ."</title>";
+
+		$texte = substr_replace($texte, $titre, $p+6,0);
+	}
+	return $texte;
+}
+
+/**
  * #BOITE_OUVRIR{titre[,type]}
  * Racourci pour ouvrir une boite (info, simple, pour noisette ...)
  *
