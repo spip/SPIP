@@ -265,6 +265,7 @@ function bando_identite(){
  * @return string
  */
 function bando_outils_rapides($boutons, $contexte = array()){
+	include_spip('inc/presentation_mini');
     $res = "";
 
 

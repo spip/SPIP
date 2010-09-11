@@ -129,6 +129,7 @@ function definir_barre_onglets($script) {
 
 // http://doc.spip.org/@barre_onglets
 function barre_onglets($rubrique, $ongletCourant){
+	include_spip('inc/presentation');
 
 	$res = '';
 
