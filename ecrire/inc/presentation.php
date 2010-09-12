@@ -435,7 +435,6 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 		list($x,$lien,$atts,$texte)= $r;
 		$javascript .= $atts;
 	}
-	$lien = "\nhref='$lien'$atts";
 
 	$retour = icone_base($lien, $texte, $fond, $fonction,"horizontale",$javascript);
 	if ($af) echo_log('icone_horizontale',$retour); else return $retour;
