@@ -622,11 +622,15 @@ function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=arr
  * @return array
  */
 function lire_php_auth($login, $pw, $serveur=''){
-	// en auth php, le login est forcement celui en base
-	// pas la peine de passer par la methode auth/xxx pour identifier le login
-	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login),'','','','',$serveur);
-	if (!$row) return false; // n'existe pas
 
+	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login),'','','','',$serveur);
+
+	if (!$row) {
+		if (spip_connect_ldap($serveur)
+		AND $auth_ldap = charger_fonction('ldap', 'auth', true))
+			return $auth_ldap($login, $pw, $serveur);
+		return false;
+	}
 	// su pas de source definie
 	// ou auth/xxx introuvable, utiliser 'spip'
 	if (!$auth_methode = $row['source']
