@@ -410,12 +410,6 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	return $res;
 }
 
-// http://doc.spip.org/@icone
-function icone($texte, $lien, $fond, $fonction="", $align="", $echo=false){
-	$retour = "<div style='padding-top: 20px;width:100px' class='icone36'>" . icone_inline($texte, $lien, $fond, $fonction, $align) . "</div>";
-	if ($echo) echo_log('icone',$retour); else return $retour;
-}
-
 // http://doc.spip.org/@icone_inline
 function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false, $javascript=''){
 	global $spip_display;

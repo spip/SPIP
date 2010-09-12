@@ -916,6 +916,13 @@ ondblclick=\'storeCaret(this);\'>$texte</textarea>";
 	
  'afficher_barre' => '(){
 	 return \'\';}',
+
+// SPIP < 2.3
+
+  'icone'=> '($texte, $lien, $fond, $fonction="", $align="", $echo=false){
+	$retour = "<div style=\'padding-top: 20px;width:100px\' class=\'icone36\'>" . icone_inline($texte, $lien, $fond, $fonction, $align) . "</div>";
+	if ($echo) echo_log(\'icone\',$retour); else return $retour;}',
+
 	 	
 ) as $f => $def) {
 	if (!function_exists($f)) {
