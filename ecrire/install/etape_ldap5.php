@@ -17,6 +17,12 @@ include_spip('auth/ldap');
 // http://doc.spip.org/@install_etape_ldap5_dist
 function install_etape_ldap5_dist()
 {
+	etape_ldap5_save();
+	etape_ldap5_suite();
+}
+
+function etape_ldap5_save()
+{
 	if (!@file_exists(_FILE_CONNECT_TMP))
 		redirige_url_ecrire('install');
 
@@ -60,7 +66,10 @@ function install_etape_ldap5_dist()
 	$conn .= "\$GLOBALS['ldap_champs'] = array($res);\n";
 	  
 	install_fichier_connexion(_DIR_CONNECT . _FILE_LDAP, $conn);
+}
 
+function etape_ldap5_suite()
+{
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_ldap_ok'), info_progression_etape(5,'etape_ldap','install/'), _T('info_terminer_installation'));

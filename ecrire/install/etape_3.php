@@ -55,7 +55,7 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 
 	// on rejoue la connexion apres avoir teste si il faut lui indiquer
 	// un sql_mode
-	test_sql_mode_mysql($server_db);
+	install_mode_appel($server_db, false);
 	$GLOBALS['connexions'][$server_db]
 	= spip_connect_db($adresse_db, $sel_db, $login_db, $pass_db, $sel_db, $server_db);
 
