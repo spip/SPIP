@@ -51,6 +51,7 @@ function v019_pre193($version_installee, $version_cible)
 	if (upgrade_vers(1.905, $version_installee, $version_cible)) {
 		// agrandir le champ "valeur" de spip_meta pour pouvoir y stocker
 		// des choses plus sympa
+		spip_query("ALTER TABLE spip_meta DROP INDEX `valeur`");
 		spip_query("ALTER TABLE spip_meta CHANGE `valeur` `valeur` TEXT");
 		// table des correspondances table->id_table
 		$liste_tables = array();
@@ -184,6 +185,7 @@ function v019_pre193($version_installee, $version_cible)
 	if (upgrade_vers(1.916, $version_installee, $version_cible)) {
 		// agrandir le champ "valeur" de spip_meta pour pouvoir y stocker
 		// des choses plus sympa
+		spip_query("ALTER TABLE spip_meta DROP INDEX `valeur`");
 		spip_query("ALTER TABLE spip_meta CHANGE `valeur` `valeur` TEXT");
 #8/08/07  plus d'indexation dans le core
 		//include_spip('inc/indexation'); 
