@@ -117,10 +117,13 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 		$moof = sql_fetsel(array_keys($champs), $spip_table_objet, "$id_table_objet=$id", array(), array(), '', array(), $serveur);
 		if ($moof != $champs) {
 			foreach($moof as $k=>$v)
-			if ($v !== $champs[$k]) {
-				$conflits[$k]['post'] = $champs[$k];
-				$conflits[$k]['save'] = $v;
-			}
+				if ($v !== $champs[$k] 
+					// ne pas alerter si le champ est numerique est que les valeurs sont equivalentes
+					AND (!is_numeric($v) OR intval($v)!=intval($champs[$k]))
+					) {
+					$conflits[$k]['post'] = $champs[$k];
+					$conflits[$k]['save'] = $v;
+				}
 		}
 
 
@@ -159,7 +162,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 			)
 		);
 	}
-
+var_dump($conflits);
 	// S'il y a un conflit, prevenir l'auteur de faire un copier/coller
 	if ($conflits) {
 		$redirect = url_absolue(
