@@ -98,7 +98,9 @@ function init_body_class() {
 		? $GLOBALS['visiteur_session']['prefs']['display_navigation']
 		: 'navigation_avec_icones';
 	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
-	return $GLOBALS['spip_ecran'] . " $spip_display_navigation";
+
+	$display_class=array(1=>'icones_texte',2=>'icones_img_texte',3=>'icones_img');
+	return $GLOBALS['spip_ecran'] . " $spip_display_navigation ".$display_class[$GLOBALS['spip_display']];
 }
 
 // http://doc.spip.org/@avertissement_messagerie
