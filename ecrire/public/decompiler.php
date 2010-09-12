@@ -71,7 +71,7 @@ function decompiler_polyglotte($struct, $fmt='', $prof=0)
 
 function decompiler_idiome($struct, $fmt='', $prof=0)
 {
-	$module = ($struct->module == 'public/spip/ecrire')? ''
+	$module = ($struct->module == MODULES_IDIOMES)? ''
 	  : $struct->module;
 
 	$args = array();
