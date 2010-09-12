@@ -412,123 +412,33 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 
 // http://doc.spip.org/@icone_inline
 function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false, $javascript=''){
-	global $spip_display;
-	if ($icone_renommer = charger_fonction('icone_renommer','inc',true))
-		list($fond,$fonction) = $icone_renommer($fond,$fonction);
-
-	if ($fonction == "del") {
-		$style = 'icone36 danger';
-	} else {
-		$style = 'icone36';
-		if (strlen($fonction) < 3) $fonction = "rien.gif";
-	}
-	$style .= " " . substr(basename($fond),0,-4);
-
-	if ($spip_display == 1){
-		$hauteur = 20;
-		$largeur = 100;
-		$title = $alt = "";
-	}
-	else if ($spip_display == 3){
-		$hauteur = 30;
-		$largeur = 30;
-		$title = "\ntitle=\"$texte\"";
-		$alt = $texte;
-	}
-	else {
-		$hauteur = 70;
-		$largeur = 100;
-		$title = '';
-		$alt = $texte;
-	}
-
-	$size = 24;
-	if (preg_match("/-([0-9]{1,3})[.](gif|png)$/i",$fond,$match))
-		$size = $match[1];
-	if ($spip_display != 1 AND $spip_display != 4){
-		if ($fonction != "rien.gif"){
-		  $icone = http_img_pack($fonction, $alt, "$title width='$size' height='$size'\n" .
-					  http_style_background($fond, "no-repeat center center"));
-		}
-		else {
-			$icone = http_img_pack($fond, $alt, "$title width='$size' height='$size'");
-		}
-	} else $icone = '';
-
 	// cas d'ajax_action_auteur: faut defaire le boulot
 	// (il faudrait fusionner avec le cas $javascript)
-	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
+	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r)) {
 		list($x,$lien,$atts,$texte)= $r;
-	else $atts = '';
+		$javascript .= $atts;
+	}
 
-	if ($align && $align!='center') $align = "float: $align; ";
+	// l'ajax de l'espace prive made in php
+	if ($ajax)
+		$javascript .= ' onclick=' . ajax_action_declencheur($lien,$ajax);
 
-	$icone = "<a style='$align' class='$style'"
-	. $atts
-	. (!$ajax ? '' : (' onclick=' . ajax_action_declencheur($lien,$ajax)))
-	. $javascript
-	. "\nhref='"
-	. $lien
-	. "'>"
-	. $icone
-	. (($spip_display == 3)	? '' : "<span>$texte</span>")
-	  . "</a>\n";
-
-	if ($align <> 'center') return $icone;
-	$style = " style='text-align:center;'";
-	return "<div$style>$icone</div>";
+	return icone_base($lien, $texte, $fond, $fonction,"verticale $align",$javascript);
 }
 
 // http://doc.spip.org/@icone_horizontale
 function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true, $javascript='') {
-	global $spip_display;
-	if ($icone_renommer = charger_fonction('icone_renommer','inc',true))
-		list($fond,$fonction) = $icone_renommer($fond,$fonction);
-
 	$retour = '';
 	// cas d'ajax_action_auteur: faut defaire le boulot
 	// (il faudrait fusionner avec le cas $javascript)
-	if (preg_match(",^<a href='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
-	  list($x,$lien,$atts,$texte)= $r;
-	else $atts = '';
+	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r)) {
+		list($x,$lien,$atts,$texte)= $r;
+		$javascript .= $atts;
+	}
 	$lien = "\nhref='$lien'$atts";
 
-	if ($spip_display != 4) {
-
-		if ($spip_display != 1) {
-			$retour .= "\n<table class='cellule-h-table' style='vertical-align: middle'>"
-			. "\n<tr><td><a $javascript$lien class='cellule-h'>"
-			. "<span class='cell-i'>" ;
-			if ($fonction){
-				$retour .= http_img_pack($fonction, $texte, http_style_background($fond, "center center no-repeat"));
-			}
-			else {
-				$retour .= http_img_pack($fond, $texte, "");
-			}
-			$retour .= "</span></a></td>"
-			. "\n<td class='cellule-h-lien'><a $javascript$lien class='cellule-h'>"
-			. $texte
-			. "</a></td></tr></table>\n";
-		}
-		else {
-			$retour .= "\n<div><a class='cellule-h-texte' $javascript$lien>$texte</a></div>\n";
-		}
-		if ($fonction == "del")
-			$retour = "\n<div class='danger'>$retour</div>";
-	} else {
-		$retour = "\n<li><a$lien>$texte</a></li>";
-	}
-
+	$retour = icone_base($lien, $texte, $fond, $fonction,"horizontale",$javascript);
 	if ($af) echo_log('icone_horizontale',$retour); else return $retour;
-}
-
-// http://doc.spip.org/@icone_horizontale_display
-function icone_horizontale_display($texte, $lien, $fond = "", $fonction = "", $af = true, $js='') {
-	global $spip_display, $spip_lang_left;
-	$img = icone_horizontale($texte, $lien, $fond, $fonction, $af, $js);
-	if ($spip_display != 4)
-		return "<div style='float: $spip_lang_left; width:140px;'>$img</div>\n";
-	else return "<ul>$img</ul>";
 }
 
 

@@ -5,6 +5,31 @@
   Distribue sous licence GPL
 
 ]
+<h1>Icones</h1>
+
+[(#SELF|icone_verticale{<:icone_modifier_article:>,article,new})]
+<hr style="clear:both;" />
+[(#SELF|icone_verticale{<:icone_modifier_article:>,article,new,left})]
+<hr style="clear:both;" />
+[(#SELF|icone_verticale{<:icone_modifier_article:>,article,new,right})]
+<hr style="clear:both;" />
+[(#SELF|icone_verticale{<:icone_modifier_article:>,article,new,center})]
+<hr style="clear:both;" />
+[(#SELF|icone_verticale{<:icone_modifier_article:>,article,del,right})]
+<hr style="clear:both;" />
+
+#BOITE_OUVRIR{'<h3>Icones horizontales</h3>','info'}
+	<table><tr>
+		<td>[(#SELF|icone_horizontale{<:icone_modifier_article:>,article,new})]</td>
+		<td>[(#SELF|icone_horizontale{texte super long pour voir si l'icone se centre bien verticalement,rubrique,edit})]</td>
+		<td>[(#SELF|icone_horizontale{<:icone_modifier_article:>,site,del})]</td>
+		<td>[(#SELF|icone_horizontale{<:icone_modifier_article:>,mot})]</td>
+	</tr></table>
+#BOITE_FERMER
+
+
+<br class="nettoyeur" />
+
 #MODELE{typo}
 
 <h1>Boites</h1>
@@ -13,7 +38,6 @@
 		Tous les autres conteneurs sont herites de celui la.</p>
 	#BOITE_FERMER
 
-<div class="line">
 	<h2>Habillage des boites</h2>
 	<h3>Contour</h3>
 	#BOITE_OUVRIR{'<h3>simple</h3>','simple'}
@@ -68,9 +92,6 @@
 		<p>Contenu</p>
 	#BOITE_FERMER
 
-</div>
-
-<div class="line">
 	<h2>Header de boite</h2>
 	#BOITE_OUVRIR{#CHEMIN_IMAGE{article-24.png}|balise_img{'',cadre-icone}|concat{simple/titrem},'simple','titrem'}
 		<p>Body</p>
@@ -99,4 +120,3 @@
 		#BOUTON_ACTION{demo,#SELF}
 	#BOITE_FERMER
 
-</div>

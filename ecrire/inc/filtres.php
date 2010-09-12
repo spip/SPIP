@@ -2398,85 +2398,79 @@ function singulier_ou_pluriel($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
 
 
 /**
- * un filtre icone mappe sur icone_inline, qui cree une icone a gauche par defaut
- * le code de icone_inline est grandement reproduit ici car les liens ajax portent simplement une class ajax
- * lorsque les interfaces sont en squelette, alors que l'implementation d'ajax de des scripts php
- * est plus complexe
+ * Fonction de base pour une icone dans un squelette
+ * structure html : <span><a><img><b>texte</b></span>
  *
- * @param string $lien
- * @param string $texte
- * @param string $fond
- * @param string $align
+ * @param <type> $lien
+ *  url
+ * @param <type> $texte
+ *  texte du lien / alt de l'image
+ * @param <type> $fond
+ *  objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
  * @param string $fonction
- * @return string
+ *  new/del/edit
+ * @param <type> $class
+ *  classe supplementaire (horizontale, verticale, ajax ...)
+ * @param <type> $javascript
+ *  "onclick='...'" par exemple
+ * @return string 
  */
-function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class="",$javascript=""){
+function icone_base($lien, $texte, $fond, $fonction="", $class="",$javascript=""){
+	if (in_array($fonction,array("del","supprimer.gif")))
+		$class .= ' danger';
+	elseif ($fonction == "rien.gif")
+		$fonction = "";
+
+	// remappage des icone : article-24.png+new => article-new-24.png
 	if ($icone_renommer = charger_fonction('icone_renommer','inc',true))
 		list($fond,$fonction) = $icone_renommer($fond,$fonction);
 
-	$align = $align?$align:$GLOBALS['spip_lang_left'];
-	global $spip_display;
+	// ajouter le type d'objet dans la class de l'icone
+	$class .= " " . substr(basename($fond),0,-4);
 
-	if ($fonction == "del") {
-		$style = 'icone36 danger';
-	} else {
-		$style = 'icone36';
-		if (strlen($fonction) < 3) $fonction = "rien.gif";
-	}
-	$style .= " " . substr(basename($fond),0,-4);
+	$alt = attribut_html($texte);
+	$title = " title=\"$alt\""; // est-ce pertinent de doubler le alt par un title ?
 
-	if ($spip_display == 1){
-		$hauteur = 20;
-		$largeur = 100;
-		$title = $alt = "";
-	}
-	else if ($spip_display == 3){
-		$hauteur = 30;
-		$largeur = 30;
-		$title = "\ntitle=\"$texte\"";
-		$alt = $texte;
-	}
-	else {
-		$hauteur = 70;
-		$largeur = 100;
-		$title = '';
-		$alt = $texte;
-	}
+	$ajax = "";
+	if (strpos($class,"ajax")!==false)
+		$ajax=" class='ajax'";
 
 	$size = 24;
 	if (preg_match("/-([0-9]{1,3})[.](gif|png)$/i",$fond,$match))
 		$size = $match[1];
-	if ($spip_display != 1 AND $spip_display != 4){
-		if ($fonction != "rien.gif"){
-		  $icone = http_img_pack($fonction, $alt, "$title width='$size' height='$size'\n" .
-					  http_style_background($fond, "no-repeat center center"));
-		}
-		else {
-			$icone = http_img_pack($fond, $alt, "$title width='$size' height='$size'");
-		}
-	} else $icone = '';
 
-	// cas d'ajax_action_auteur: faut defaire le boulot
-	// (il faudrait fusionner avec le cas $javascript)
-	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
-		list($x,$lien,$atts,$texte)= $r;
-	else $atts = '';
+	if ($fonction){
+		// 2 images pour composer l'icone : le fond (article) en background,
+		// la fonction (new) en image
+		$icone = http_img_pack($fonction, $alt, "width='$size' height='$size'\n" .
+					http_style_background($fond, "no-repeat center center"));
+	}
+	else {
+		$icone = http_img_pack($fond, $alt, "width='$size' height='$size'");
+	}
 
-	if ($align && $align!='center') $align = "float: $align; ";
-
-	$icone = "<a style='$align' class='$style $class'"
-	. $atts
-	. $javascript
-	. "\nhref='"
-	. $lien
-	. "'>"
+	$icone = "<span class='icone s$size $class'>"
+	. "<a href='$lien'$title$ajax$javascript>"
 	. $icone
-	. (($spip_display == 3)	? '' : "<span>$texte</span>")
-	  . "</a>\n";
+	. "<b>$texte</b>"
+	. "</a></span>\n";
 
-	if ($align <> 'center') return $icone;
-	$style = " style='text-align:center;'";
-	return "<div$style>$icone</div>";
+	return $icone;
+}
+
+function filtre_icone_verticale_dist($lien, $texte, $fond, $fonction="", $class="",$javascript=""){
+	return icone_base($lien,$texte,$fond,$fonction,"verticale $class",$javascript);
+}
+function filtre_icone_horizontale_dist($lien, $texte, $fond, $fonction="", $class="",$javascript=""){
+	return icone_base($lien,$texte,$fond,$fonction,"horizontale $class",$javascript);
+}
+
+/**
+ * Filtre icone pour compatibilite
+ * mappe sur icone_base
+ */
+function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class="",$javascript=""){
+	return icone_base($lien,$texte,$fond,$fonction,"verticale $align $class",$javascript);
 }
 
 
