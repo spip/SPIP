@@ -32,7 +32,6 @@ include_spip('public/quete');
 function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='') {
 
 	$nom = calculer_nom_fonction_squel($squelette, $mime_type, $connect);
-	if (strpos($squelette, '404')) $nom = 'html_url';
 
 	//  si deja en memoire (INCLURE  a repetition) c'est bon.
 
@@ -44,16 +43,16 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 	$phpfile = sous_repertoire(_DIR_SKELS,'',false,true) . $nom . '.php';
 
 	// si squelette est deja compile et perenne, le charger
-	if (true #!squelette_obsolete($phpfile, $source)
+	if (!squelette_obsolete($phpfile, $source)
 	AND lire_fichier ($phpfile, $skel_code,
 	array('critique' => 'oui', 'phpcheck' => 'oui')))
 		eval('?'.'>'.$skel_code);
-	spip_log($phpfile . $nom . $skel_code, 'comp');
+#	spip_log($skel_code, 'comp')
 	if (@file_exists($lib = $squelette . '_fonctions'.'.php'))
 		include_once $lib;
 
 	// tester si le eval ci-dessus a mis le squelette en memoire
-	
+
 	if (function_exists($nom)) return array($nom, $skel_code);
 
 	// charger le source, si possible, et compiler 
