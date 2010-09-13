@@ -159,7 +159,7 @@ function cache_meta($table='meta')
 function installer_table_meta($table) {
 	$trouver_table = charger_fonction('trouver_table','base');
 	if (!$trouver_table("spip_$table")) {
-		include_spip('base/aux');
+		include_spip('base/auxiliaires');
 		include_spip('base/create');
 		creer_ou_upgrader_table("spip_$table", $GLOBALS['tables_auxiliaires']['spip_meta'], false, false);
 		$trouver_table('');
