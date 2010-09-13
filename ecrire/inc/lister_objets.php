@@ -41,7 +41,7 @@ function inc_lister_objets_dist($vue, $contexte=array(), $force=false){
 
 	$res = recuperer_fond($fond,$contexte,array('ajax'=>true));
 	if (_request('var_liste'))
-		var_dump($contexte);
+		echo var_export($contexte, true);
 		
 	return $res;
 }
