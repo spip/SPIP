@@ -516,7 +516,6 @@ function calculer_select ($select = array(), $from = array(),
 	}
 	// remplacer les sous requetes recursives au calcul
 	list($where_simples,$where_sous) = trouver_sous_requetes($where);
-	//var_dump($where_sous);
 	foreach($where_sous as $k=>$w) {
 		$menage = true;
 		// on recupere la sous requete 

@@ -271,6 +271,13 @@ function effacer_config($cfg){
 	return true;
 }
 
+
+function lister_configurer(){
+	// trouver toutes les page-configurer_xxx de l'espace prive
+	$pages = find_all_in_path("prive/squelettes/contenu/", "page-configurer_.*[.]"._EXTENSION_SQUELETTES);
+	return $pages;
+}
+
 // http://doc.spip.org/@liste_metas
 function liste_metas()
 {

@@ -269,7 +269,6 @@ function inclure_page($fond, $contexte, $connect='') {
  * @return array
  */
 function public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, &$page, &$lastinclude, $connect=''){
-	#var_dump($page);
 	$parametrer = charger_fonction('parametrer', 'public');
 	$page = $parametrer($fond, $contexte, $chemin_cache, $connect);
 	// et on l'enregistre sur le disque

@@ -37,7 +37,6 @@ function inc_notes_dist($arg,$operation='traiter')
 				return traiter_raccourci_notes($arg, $marqueur>1?$marqueur:'');
 			break;
 		case 'empiler':
-			#var_dump(">$compt_note:$marqueur");
 			if ($compt_note==0)
 				// si le marqueur n'a pas encore ete utilise, on le recycle dans la pile courante
 				array_push($pile, array(@$les_notes, @$compt_note, $notes_vues,0));
@@ -59,7 +58,6 @@ function inc_notes_dist($arg,$operation='traiter')
 			// on redepile tout suite a une fin d'inclusion ou d'un affichage des notes
 			list($les_notes, $compt_note, $notes_vues, $marqueur) = array_pop($pile);
 			#$les_notes .= $prev_notes;
-			#var_dump("<$compt_note:$marqueur");
 			// si pas de marqueur attribue, on le fait
 			if (!$marqueur){
 				$next_marqueur++; // chaque fois qu'on rempile on incremente le marqueur general
