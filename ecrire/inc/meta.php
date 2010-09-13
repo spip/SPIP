@@ -69,6 +69,17 @@ function lire_metas($table='meta') {
 		  OR $GLOBALS[$table]['charset']=='_DEFAULT_CHARSET' // hum, correction d'un bug ayant abime quelques install
 		)
 			ecrire_meta('charset', _DEFAULT_CHARSET, NULL, $table);
+
+		// noter cette table de configuration dans les meta de SPIP
+		if ($table!=='meta') {
+			$liste = unserialize($GLOBALS['meta']['tables_config']);
+			if (!$liste)
+				$liste = array();
+			if (!in_array($table, $liste)) {
+				$liste[] = $table;
+				ecrire_meta('tables_config', serialize($liste));
+			}
+		}
 	}
 	return $GLOBALS[$table];
 }
@@ -139,5 +150,39 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 function cache_meta($table='meta')
 {
 	return ($table=='meta') ? _FILE_META : (_DIR_CACHE . $table . '.php');
+}
+
+/**
+ * Une fonction pour installer une table de configuration supplementaire
+ * @param string $table
+ */
+function installer_table_meta($table) {
+	$trouver_table = charger_fonction('trouver_table','base');
+	if (!$trouver_table("spip_$table")) {
+		include_spip('base/aux');
+		include_spip('base/create');
+		creer_ou_upgrader_table("spip_$table", $GLOBALS['tables_auxiliaires']['spip_meta'], false, false);
+		$trouver_table('');
+	}
+	lire_metas($table);
+}
+
+/**
+ * Une fonction pour supprimer une table de configuration supplementaire
+ * si $force=true, on ne verifie pas qu'elle est bien vide
+ * 
+ * @param string $table
+ * @param bool $force
+ */
+function supprimer_table_meta($table, $force=false) {
+	if ($table=='meta') return; // interdit !
+
+	if ($force OR !sql_countsel("spip_$table")) {
+		unset($GLOBALS[$table]);
+		sql_drop_table("spip_$table");
+		// vider le cache des tables
+		$trouver_table = charger_fonction('trouver_table','base');
+		$trouver_table('');
+	}
 }
 ?>
