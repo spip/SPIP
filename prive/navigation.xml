@@ -109,7 +109,7 @@
 		<url>navigation</url>
 		<args>menu=bando_configuration</args>
 	</bouton>
-	<bouton id='config_identite' parent="bando_configuration">
+	<bouton id='configurer_identite' parent="bando_configuration">
 		<icone>images/identite-16.png</icone>
 		<titre>titre_identite_site</titre>		
 		<url>configurer_identite</url>
@@ -121,7 +121,7 @@
 	<bouton id='config_contenu' parent="bando_configuration">
 		<icone>images/config-contenu-16.png</icone>
 		<titre>onglet_contenu_site</titre>		
-		<url>configuration</url>
+		<url>configurer_contenu</url>
 	</bouton>
 	<bouton id='config_interactivite' parent="bando_configuration">
 		<icone>images/config-interaction-16.png</icone>

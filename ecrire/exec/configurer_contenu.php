@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 
 // http://doc.spip.org/@exec_configuration_dist
-function exec_configuration_dist(){
+function exec_configurer_contenu_dist(){
 
 	if (!autoriser('configurer', 'configuration')) {
 		include_spip('inc/minipres');
