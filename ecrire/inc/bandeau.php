@@ -49,7 +49,7 @@ function boutons_core($type='bouton'){
 	}
 
 	return $ret[$type];
-}
+	}
 
 /**
  * definir la liste des boutons du haut et de ses sous-menus

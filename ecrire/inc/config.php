@@ -272,10 +272,70 @@ function effacer_config($cfg){
 }
 
 
-function lister_configurer(){
+function lister_configurer($exclure = array()){
+	// lister les pages de config deja dans les menus
+	$deja = array();
+	foreach($exclure as $id=>$b) {
+		if ($b['url']!==$id AND !isset($exclure[$b['url']])) {
+			if(strncmp($b['url'],'configurer_',11)==0)
+				$deja[$b['url']] = $b;
+			elseif($b['url']=='configurer' AND preg_match(',cfg=([a-z0-9_]+),i',$b['args'],$match)) {
+				$deja["configurer_".$match[1]] = $b;
+			}
+		}
+	}
+	$exclure = $exclure + $deja;
+
+	$icone_defaut = "images/configuration-16.png";
+	$liste = array();
+	$skels = array();
+	$forms = array();
+
 	// trouver toutes les page-configurer_xxx de l'espace prive
-	$pages = find_all_in_path("prive/squelettes/contenu/", "page-configurer_.*[.]"._EXTENSION_SQUELETTES);
-	return $pages;
+	// et construire un tableau des entrees qui ne sont pas dans $deja
+	$pages = find_all_in_path("prive/squelettes/contenu/", "page-configurer_.*[.]"._EXTENSION_SQUELETTES.'$');
+	
+	foreach($pages as $page) {
+		$configurer = substr(basename($page,"."._EXTENSION_SQUELETTES),5);
+		if (!isset($exclure[$configurer]))
+			$liste[$configurer] = array(
+					'parent' => 'bando_configuration',
+					'url' => $configurer,
+					'titre' => _T("configurer:{$configurer}_titre"),
+					'icone' => find_in_theme($i="images/{$configurer}-16.png")?$i:$icone_defaut,
+			);
+		$skels[$configurer] = $page;
+	}
+
+	// analyser la liste des $skels pour voir les #FORMULAIRE_CONFIGURER_ inclus
+	foreach($skels as $file) {
+		lire_fichier($file, $skel);
+		if (preg_match_all(",#FORMULAIRE_(CONFIGURER_[A-Z0-9_]*),", $skel, $matches,PREG_SET_ORDER)) {
+			$matches = array_map('end',$matches);
+			$matches = array_map('strtolower',$matches);
+			$forms = array_merge($forms,$matches);
+		}
+	}
+
+	// trouver tous les formulaires/configurer_
+	// et construire un tableau des entrees
+	$pages = find_all_in_path("formulaires/", "configurer_.*[.]"._EXTENSION_SQUELETTES.'$');
+	foreach($pages as $page) {
+		$configurer = basename($page,"."._EXTENSION_SQUELETTES);
+		if (!isset($forms[$configurer])
+		  AND !isset($liste[$configurer])
+			AND !isset($exclure[$configurer]))
+			$liste[$configurer] = array(
+					'parent' => 'bando_configuration',
+					'url' => 'configurer',
+					'args' => 'cfg='.substr($configurer,11),
+					'titre' => _T("configurer:{$configurer}_titre"),
+					'icone' => find_in_theme($i="images/{$configurer}-16.png")?$i:$icone_defaut,
+			);
+	}
+
+
+	return $liste;
 }
 
 // http://doc.spip.org/@liste_metas
