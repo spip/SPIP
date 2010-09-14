@@ -40,10 +40,10 @@ function configuration_transcodeur_dist()
 			array('url' => generer_url_ecrire('convert_utf8'))
 		);
 
-	$res = ajax_action_post('configurer',
+	$res = ajax_action_post('configuration',
 				'transcodeur',
 				'config_lang',
-				'',
+				'#configurer-transcodeur',
 				$res);
 
 	$res = debut_cadre_relief("breve-24.png", true, "", _T('info_jeu_caractere')) .

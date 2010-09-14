@@ -36,7 +36,7 @@ function configuration_redirection_dist()
 	. "</table>\n";
 
 	$res = debut_cadre_relief("", true, "", _T('config_redirection').aide ("artvirt"))
-	. ajax_action_post('configurer', 'redirection', 'configuration','',$res)
+	. ajax_action_post('configuration', 'redirection', 'configuration','#configurer-redirection',$res)
  	. fin_cadre_relief(true);
 
 	return ajax_action_greffe('configurer-redirection', '', $res);

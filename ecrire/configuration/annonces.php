@@ -117,7 +117,7 @@ function configuration_annonces_dist()
 	. fin_cadre_relief(true);
 
 	$res = debut_cadre_trait_couleur("annonce-24.png", true, "", _T('info_envoi_email_automatique').aide ("confmails"))
-	. ajax_action_post('configurer', 'annonces', 'config_contenu','',$res) 
+	. ajax_action_post('configuration', 'annonces', 'config_contenu','#configurer-annonces',$res)
 	. fin_cadre_trait_couleur(true);
 
 	return ajax_action_greffe('configurer-annonces', '', $res);

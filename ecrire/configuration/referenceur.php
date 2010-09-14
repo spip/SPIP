@@ -59,7 +59,7 @@ function configuration_referenceur_dist()
 		$res .= "<input type='hidden' name='gerer_trad' id='gerer_trad' value='".$GLOBALS['meta']['gerer_trad']."' />";
 
 	$res = debut_cadre_couleur("traduction-24.png", true, "", _T('info_multilinguisme'))
-	. ajax_action_post('configurer', 'referenceur', 'config_multilang', '', $res)
+	. ajax_action_post('configuration', 'referenceur', 'config_multilang', '#configurer-referenceur', $res)
 	. fin_cadre_couleur(true);
 
 	return ajax_action_greffe("configurer-referenceur", '', $res);

@@ -7,7 +7,7 @@ ecrire/action/activer_plugins.php -text
 ecrire/action/auth.php -text
 ecrire/action/changer_mode_document.php -text
 ecrire/action/charger_plugin.php -text
-ecrire/action/configurer.php -text
+ecrire/action/configuration.php -text
 ecrire/action/configurer_moderniseur_html.php -text
 ecrire/action/configurer_previsualiseur.php -text
 ecrire/action/configurer_relayeur.php -text
@@ -136,7 +136,7 @@ ecrire/exec/config_contenu.php -text
 ecrire/exec/config_fonctions.php -text
 ecrire/exec/config_lang.php -text
 ecrire/exec/config_multilang.php -text
-ecrire/exec/configurer.php -text
+ecrire/exec/configuration.php -text
 ecrire/exec/configurer_contenu.php -text
 ecrire/exec/configurer_moderniseur_html.php -text
 ecrire/exec/configurer_previsualiseur.php -text

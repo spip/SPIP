@@ -113,7 +113,7 @@ function configuration_articles_dist(){
 	. "</table>";
 
 	$res = debut_cadre_relief("", true, "", _T('info_contenu_articles').aide ("confart"))
-	. ajax_action_post('configurer', 'articles', 'configuration','',$res)
+	. ajax_action_post('configuration', 'articles', 'configuration','#configurer-articles',$res)
 	. fin_cadre_relief(true);
 
 	return ajax_action_greffe('configurer-articles', '', $res);

@@ -36,7 +36,7 @@ function configuration_futurs_dist()
 	. "</table>\n";
 
 	$res = debut_cadre_relief("", true, "", _T('titre_publication_articles_post_dates').aide ("confdates"))
-	. ajax_action_post('configurer', 'futurs', 'configuration','',$res)
+	. ajax_action_post('configuration', 'futurs', 'configuration','#configurer-futurs',$res)
  	. fin_cadre_relief(true);
 
 	return ajax_action_greffe('configurer-futurs', '', $res);

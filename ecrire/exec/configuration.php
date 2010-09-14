@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // redirigeant ici.
 
 // http://doc.spip.org/@exec_configurer_dist
-function exec_configurer_dist()
+function exec_configuration_dist()
 {
 	include_spip('inc/actions');
 	$configuration = charger_fonction(_request('configuration'), 'configuration', true);
