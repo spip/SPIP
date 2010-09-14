@@ -278,8 +278,10 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Que podetz activar un <b>cookie de correspond&eacute;ncia</b>; aqu&ograve; que\'vs permeter&agrave; de passar aisit deu sit public au sit privat.',
 'info_activer_forum_public' => '<i>T&agrave; activar los forums publics, volhatz causir lo lor m&ograve;de de moderacion predefinit:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Aqueth administrator que gereish las rubricas seguentas:',
 'info_admin_gere_toutes_rubriques' => 'Aqueth administrator que gereish <b>totas las rubricas</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrator',
@@ -705,6 +707,7 @@ ua color qu\'indica lo lor estat:',
 'info_visiteur_2' => 'deu sit public',
 'info_visiteurs' => 'Vesitaires',
 'info_visiteurs_02' => 'Vesitaires deu sit public',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de donn&eacute;es attribu&eacute;e par l\'h&eacute;bergeur', # NEW
 'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'L\'installacion que s\'i mauescair&agrave;, o qu\'abotir&agrave; a un sit non foncionau...',

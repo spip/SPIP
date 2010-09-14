@@ -286,8 +286,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  permitite que pases f&aacute;cilmente del sitiu p&uacute;blicu al sitiu privau.',
 'info_activer_forum_public' => '<i>Pa activar los foros p&uacute;blicos, has d\'escoyer el tipu
  de moderaci&oacute;n por omisi&oacute;n:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Esti alministrador xestiona les estayes siguientes:',
 'info_admin_gere_toutes_rubriques' => 'Esti alministrador xestiona <b>toles estayes</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Xesti&oacute;n',
@@ -730,6 +732,7 @@ con una color que indica el est&aacute;u:',
 'info_visiteur_2' => 'del sitiu p&uacute;blicu',
 'info_visiteurs' => 'Visitantes',
 'info_visiteurs_02' => 'Visitantes del sitiu p&uacute;blicu',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Direici&oacute;n de la base datos asitiada pol agospiador web',
 'install_base_ok' => 'Reconoci&oacute;se la base @base@',
 'install_echec_annonce' => 'La instalaci&oacute;n probablemente va fallar, o va producir un sitiu que nun funcione...',

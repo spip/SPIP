@@ -284,8 +284,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  snadno p&#345;ech&aacute;zet mezi prohl&iacute;&#382;en&iacute;m webu a jeho editac&iacute;.',
 'info_activer_forum_public' => '<i>Chcete-li zapnout ve&#345;ejn&eacute; diskusn&iacute; skupiny mus&iacute;te zvolit jejich 
  standardn&iacute; zp&#367;sob moderov&aacute;n&iacute;:</i>', # MODIF
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Tento spr&aacute;vce ospov&iacute;d&aacute; za n&aacute;sleduj&iacute;c&iacute; sekce:',
 'info_admin_gere_toutes_rubriques' => 'Tento spr&aacute;vce odpov&iacute;d&aacute; ua <b>v&#353;echny sekce</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Spr&aacute;vce',
@@ -727,6 +729,7 @@ ukazuje jejich stav:',
 'info_visiteur_2' => 'z ve&#345;ejn&eacute;ho webu',
 'info_visiteurs' => 'N&aacute;v&#353;t&#283;vn&iacute;ci',
 'info_visiteurs_02' => 'N&aacute;v&#353;t&#283;vn&iacute;ci z ve&#345;ejn&eacute;ho webu',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Database address attributed by the service provider', # NEW
 'install_base_ok' => 'The base @base@ was identified', # NEW
 'install_echec_annonce' => 'Instalace se nejsp&iacute;&#353; nezda&#345;&iacute;, resp. jej&iacute;m v&yacute;sledkem bude nefunk&#269;n&iacute; web...',

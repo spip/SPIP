@@ -286,8 +286,10 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
  f&egrave; yon vir&eacute; ant sit piblik ek sit priv&eacute;.',
 'info_activer_forum_public' => '<i>Pou fowom piblik mache, m&eacute;si chwazi manyir mod&egrave;r a y otomatikman
 :</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Komand&egrave;-a g&egrave; ribrik yo isit kote m&egrave;m :',
 'info_admin_gere_toutes_rubriques' => 'Komand&egrave;-a kapab g&egrave;re <b>tout ribrik yo</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Komand&egrave;',
@@ -726,6 +728,7 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'info_visiteur_2' => 'd sit piblik',
 'info_visiteurs' => 'Vizit&egrave; yo',
 'info_visiteurs_02' => 'Vizit&egrave; yo d sit piblik',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de donn&eacute;es attribu&eacute;e par l\'h&eacute;bergeur', # NEW
 'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'Lenstalasyon-an ka p&eacute;t&egrave;t branlan, osnon p&eacute;t&egrave;t li don yon sit ki pa kav mache...',

@@ -287,8 +287,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	di pass&agrave; senza straziu da u situ p&ugrave;bblicu &agrave; u situ privatu.',
 'info_activer_forum_public' => '<i>Per attiv&agrave; i fori p&ugrave;bblichi, sceglite puru u tippu 
 	di muderazione predefinitu&nbsp;:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'St\'amministratore gestisce e seguenti r&ugrave;bbriche&nbsp;:',
 'info_admin_gere_toutes_rubriques' => 'St\'amministratore gestisce <b>tutte e r&ugrave;bbriche</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Amministratore',
@@ -743,6 +745,7 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 'info_visiteur_2' => 'di u situ p&ugrave;bblicu',
 'info_visiteurs' => 'Visitori',
 'info_visiteurs_02' => 'Visitori di u situ p&ugrave;bblicu',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Indirizzu di a basa di dati attribuitu da l\'&ograve;spite',
 'install_base_ok' => 'A basa di dati @base@ h&egrave; stata ricunnisciuta',
 'install_echec_annonce' => 'A stallazione h&agrave; da fiasc&agrave; o compie cagiunendu &agrave; u situ prublemi di funziunamenti ...',

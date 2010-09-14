@@ -284,8 +284,10 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 di passare facilmente dal sito pubblico all\'interfaccia privata.',
 'info_activer_forum_public' => '<i>Per attivare i forum pubblici, scegli il tipo
 di moderazione predefinito:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Questo amministratore gestisce le seguenti rubriche:',
 'info_admin_gere_toutes_rubriques' => 'Questo amministratore gestisce <b>tutte le rubriche</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Dai a questo amministratore i privilegi di webmaster',
 'info_admin_webmestre' => 'Questo amministratore &egrave; un <b>webmaster</b>',
 'info_administrateur' => 'Amministratore',
@@ -723,6 +725,7 @@ Le traduzioni sono associate all\'originale,
 'info_visiteur_2' => 'del sito pubblico',
 'info_visiteurs' => 'Visitatori',
 'info_visiteurs_02' => 'Visitatori del sito pubblico',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Indirizzo del database attribuito dal provider',
 'install_base_ok' => 'Il database @base@ &egrave; stato riconosciuto',
 'install_echec_annonce' => 'L\'installazione potrebbe fallire oppure causare problemi di funzionalit&agrave; al sito...',

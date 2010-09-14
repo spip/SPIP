@@ -309,8 +309,10 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'I p&eacute; f&eacute; zw&eacute; inn <b>gatomakro drokon&eacute;sans </b>. Kom sa ou sra kav pas fasilman dopwi lafigirw&egrave;b piblik sir lo sit priv&eacute;.',
 'info_activer_forum_public' => '<i>Swazi inn manyir lamod&eacute;rasyon otomatik pou bann forom piblik :</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Komand&egrave;r-la l&eacute; responsab si bann rubrik anba:',
 'info_admin_gere_toutes_rubriques' => 'Komand&egrave;r-la l&eacute; responsab pou <b>TOUT bann rubrik</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Komand&egrave;r',
@@ -741,6 +743,7 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'info_visiteur_2' => 'lo figirw&egrave;b',
 'info_visiteurs' => 'Bann vizit&egrave;r',
 'info_visiteurs_02' => 'Bann vizit&egrave;r sir figirw&egrave;b',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de donn&eacute;es attribu&eacute;e par l\'h&eacute;bergeur', # NEW
 'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'Instalasyon-la li p&egrave; sirman d&egrave;grn ali ou sar don ou in sit sat l&eacute; pa kav roul&eacute;...',

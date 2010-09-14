@@ -278,8 +278,10 @@ forvi&#349;i ilin poste).',
 'info_activer_cookie' => 'Vi povas aktivigi <b>por-korespondan kuketon</b>. Tio ebligos al vi facile iri de la publika spaco al la privata.',
 'info_activer_forum_public' => '<i>Por aktivigi la publikajn forumojn, bonvolu elekti ilian
  defa&#365;ltan moderig-re&#285;imon:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Tiu mastrumanto mastrumas la jenajn rubrikojn:',
 'info_admin_gere_toutes_rubriques' => 'Tiu mastrumanto mastrumas <b>&#265;iujn rubrikojn</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Mastrumanto',
@@ -708,6 +710,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'info_visiteur_2' => 'de la publika spaco',
 'info_visiteurs' => 'Vizitantoj',
 'info_visiteurs_02' => 'Vizitantoj de la publika spaco',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adreso de la datenbazo atribuita de la retejgastiganto',
 'install_base_ok' => 'La datumbazo @base@ estis rekonita',
 'install_echec_annonce' => 'Certe la instalado estas malsukcesonta, a&#365; naskos ne funkciivan retejon...',

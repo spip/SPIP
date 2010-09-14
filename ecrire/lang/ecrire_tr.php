@@ -276,8 +276,10 @@ sonradan yok edebilir).',
 'info_activer_cookie' => 'Bir <b>yaz&#305;&#351;ma kurabiyesi</b> &ccedil;al&#305;&#351;t&#305;rabilirsiniz,
  bu sizin kolayca kamu sitesinden &ouml;zel siteye ge&ccedil;menizi sa&#287;lar.',
 'info_activer_forum_public' => 'Kamu forumlar&#305;n&#305; &ccedil;al&#305;&#351;t&#305;rmak i&ccedil;in, l&uuml;tfen varsay&#305;lan bir y&ouml;netim kipi se&ccedil;iniz :',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Bu y&ouml;netici &#351;u b&ouml;l&uuml;mleri y&ouml;netiyor :',
 'info_admin_gere_toutes_rubriques' => 'Bu y&ouml;netici <b>t&uuml;m b&ouml;l&uuml;mleri</b> y&ouml;netiyor.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Y&ouml;netici',
@@ -712,6 +714,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_visiteur_2' => 'ziyaret&ccedil;isi',
 'info_visiteurs' => 'Ziyaret&ccedil;iler',
 'info_visiteurs_02' => 'Kamu sitesi ziyaret&ccedil;ileri ',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Bar&#305;nd&#305;rma firmas&#305; taraf&#305;ndan atanm&#305;&#351; veritaban&#305;n&#305;n adresi',
 'install_base_ok' => '@base@ veri taban&#305; tan&#305;nd&#305;',
 'install_echec_annonce' => 'Kurulum b&uuml;y&uuml;k olas&#305;l&#305;kla ba&#351;ar&#305;s&#305;z olacak veya site &ccedil;al&#305;&#351;mayacak...',

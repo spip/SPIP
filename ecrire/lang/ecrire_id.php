@@ -283,8 +283,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_activer_cookie' => 'Anda apat mengaktifkan <b>cookie administrasi</b>, yang memperbolehkan anda
  untuk berpindah-pindah dengan mudah antara situs umum dan area pribadi.',
 'info_activer_forum_public' => '<i>Untuk mengaktifkan forum-forum umum, silakan pilih mode moderasi standar forum-forum tersebut:</I>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Administrator ini mengelola bagian-bagian berikut:',
 'info_admin_gere_toutes_rubriques' => 'Administrator ini mengelola <b>semua bagian</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrator',
@@ -723,6 +725,7 @@ dalam warna yang menunjukkan statusnya:',
 'info_visiteur_2' => 'situs umum',
 'info_visiteurs' => 'Pengunjung',
 'info_visiteurs_02' => 'Pengunjung situs umum',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de donn&eacute;es attribu&eacute;e par l\'h&eacute;bergeur', # NEW
 'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'Instalasi ini tidak akan bekerja, atau akan menghasilkan situs yang tidak berfungsi sebagaimana mestinya...',

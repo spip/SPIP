@@ -272,8 +272,10 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Dir k&euml;nnt e <b>Korrespondenz-Cookie</b> aktiv&eacute;ieren, dien Iech erlaabt einfach vum &ouml;ffentl&euml;chen op de privaten Site ze wiesselen.',
 'info_activer_forum_public' => '<i>Fir d&eacute;i &ouml;ffentl&euml;ch Forum\'en anzeschalten, wielt d\'Default-Moderatiouns-Method:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'D&euml;sen Administrateur k&euml;nmert s&euml;ch &euml;m folgend Rubriken:',
 'info_admin_gere_toutes_rubriques' => 'D&euml;sen Administrateur k&euml;mmert s&euml;ch &euml;m <b>all Rubriken</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrateur',
@@ -681,6 +683,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_visiteur_2' => 'vum &ouml;ffentl&euml;che Site',
 'info_visiteurs' => 'Visiteuren',
 'info_visiteurs_02' => 'Visiteuren vum &ouml;ffentl&euml;che Site',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adress vun der Datebank d&eacute;i dir vum Hosting krut',
 'install_base_ok' => 'D\'Datebank @base@ ass erkannt ginn',
 'install_echec_annonce' => 'D\'Installatioun w&auml;rt warscheinlech n&euml;t fonktionn&eacute;ieren oder zu engem fehlerhaften Site f&eacute;ieren...',
