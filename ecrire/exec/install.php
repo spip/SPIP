@@ -23,10 +23,24 @@ define('_FILE_TMP', '_install');
 function exec_install_dist()
 {
 	$etape = _request('etape');
-	if (_FILE_CONNECT  AND (!in_array($etape, array('chmod', 'sup1', 'sup2')) OR !autoriser('configurer'))) {
-  // L'etape chmod peut etre reexecutee n'importe quand apres l'install,
-  // pour verification des chmod. Sinon, install deja faite => refus.
-		echo minipres();
+	$deja = (_FILE_CONNECT AND analyse_fichier_connection(_FILE_CONNECT));
+
+	// Si deja installe, on n'a plus le droit qu'a l'etape chmod
+	// pour chgt post-install ou aux etapes supplementaires 
+	// de declaration de base externes.
+	// Mais alors il faut authentifier car ecrire/index.php l'a omis
+
+	if ($deja AND in_array($etape, array('chmod', 'sup1', 'sup2'))) {
+
+		$auth = charger_fonction('auth', 'inc');
+		if (!$auth()) {
+			verifier_visiteur();
+			$deja = (!autoriser('configurer'));
+		}
+	}
+	if ($deja) {
+		// Rien a faire ici
+	  	echo minipres();
 	} else {
 		include_spip('base/create');
 		$fonc = charger_fonction("etape_$etape", 'install');
