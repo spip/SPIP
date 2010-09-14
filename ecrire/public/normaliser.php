@@ -88,7 +88,7 @@ function phraser_logo_faux_filtres($nom)
 
 // La balise embed_document est a present le modele emb
 
-function phraser_vieux_emb($p)
+function phraser_vieux_emb(&$p)
 {
 	if (!is_array($p->param))
 		$p->param=array();
