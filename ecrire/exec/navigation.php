@@ -21,6 +21,7 @@ function exec_navigation_dist()
 
 	$menu = _request('menu');
 	include_spip('inc/bandeau');
+	include_spip('inc/presentation');
 	
 	$contexte = definir_barre_contexte();
 	$boutons = definir_barre_boutons($contexte);
