@@ -553,7 +553,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$req
 	$db = $connexion['db'];
 
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
-
+	
 	$query ="INSERT INTO $table $champs VALUES $valeurs";
 	if (!$requeter) return $query;
 	
@@ -561,7 +561,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$req
 		include_spip('public/tracer');
 		$t = trace_query_start();
 	} else $t = 0 ;
- 
+
 	$connexion['last'] = $query;
 #	spip_log($query);
 	if (mysql_query($query, $link))
@@ -819,5 +819,34 @@ function spip_versions_mysql() {
 	return function_exists('mysql_query');
 }
 
+// Tester si mysql ne veut pas du nom de la base dans les requetes
+
+// http://doc.spip.org/@test_rappel_nom_base_mysql
+function test_rappel_nom_base_mysql($server_db)
+{
+	$GLOBALS['mysql_rappel_nom_base'] = true;
+	sql_delete('spip_meta', "nom='mysql_rappel_nom_base'", $server_db);
+	$ok = spip_query("INSERT INTO spip_meta (nom,valeur) VALUES ('mysql_rappel_nom_base', 'test')", $server_db);
+
+	if ($ok) {
+		sql_delete('spip_meta', "nom='mysql_rappel_nom_base'", $server_db);
+		return '';
+	} else {
+		$GLOBALS['mysql_rappel_nom_base'] = false;
+		return "\$GLOBALS['mysql_rappel_nom_base'] = false; ".
+		"/* echec de test_rappel_nom_base_mysql a l'installation. */\n";
+	}
+}
+
+// http://doc.spip.org/@test_sql_mode_mysql
+function test_sql_mode_mysql($server_db){
+	$res = sql_select("version() as v",'','','','','','',$server_db);
+	$row = sql_fetch($res,$server_db);
+	if (version_compare($row['v'],'5.0.0','>=')){
+		define('_MYSQL_SET_SQL_MODE',true);
+		return "define('_MYSQL_SET_SQL_MODE',true);\n";
+	}
+	return '';
+}
 
 ?>

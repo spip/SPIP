@@ -131,12 +131,13 @@ function install_etape_chmod_dist()
 	$t = (!$test_dir ? "" : 
 		 "<input type='hidden' name='test_dir' value='$test_dir' />")
 	. "<input type='hidden' name='etape' value='chmod' />"
-	. "<div style='text-align: right'><input type='submit' class='fondl' value='$t' /></div>"; 
+	. "<div style='text-align: right'><input type='submit' value='$t' /></div>"; 
 
 	echo minipres($titre, $res . generer_form_ecrire('install',  $t));
 
 	} else {
-		if (!_FILE_CONNECT)
+		$deja = (_FILE_CONNECT AND analyse_fichier_connection(_FILE_CONNECT));
+		if (!$deja)
 			redirige_url_ecrire("install", "etape=1&chmod=".$chmod);
 		else	redirige_url_ecrire();
 	}

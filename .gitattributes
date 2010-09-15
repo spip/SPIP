@@ -291,6 +291,7 @@ ecrire/install/etape_.php -text
 ecrire/install/etape_1.php -text
 ecrire/install/etape_2.php -text
 ecrire/install/etape_3.php -text
+ecrire/install/etape_3b.php -text
 ecrire/install/etape_4.php -text
 ecrire/install/etape_chmod.php -text
 ecrire/install/etape_fin.php -text
