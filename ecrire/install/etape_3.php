@@ -149,6 +149,13 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 		list(,$adresse_db, $port) = $r;
 	else $port = '';
 
+	// si ce fichier existe a cette etape c'est qu'il provient
+	// d'une installation qui ne l'a pas cree correctement.
+	// Le supprimer pour que _FILE_CONNECT_TMP prime.
+
+	if (_FILE_CONNECT AND file_exists(_FILE_CONNECT))
+		spip_unlink(_FILE_CONNECT);
+
 	install_fichier_connexion(_FILE_CONNECT_TMP, 
 				  $ligne_rappel
 				  . install_connexion($adresse_db,
