@@ -2524,7 +2524,7 @@ function bando_images_background(){
  */
 function bando_style_prive_theme() {
 	if ($f = find_in_theme('style_prive_theme.html'))
-		return preg_replace(',[.]html$,Ui','',$f);
+		return substr(preg_replace(',[.]html$,Ui','',$f),strlen(_DIR_RACINE));
 	return '';
 }
 
