@@ -653,7 +653,7 @@ function balise_CONFIG_dist($p) {
 	$_sinon = interprete_argument_balise(2,$p);
 	$_unserialize = sinon(interprete_argument_balise(3,$p),"false");
 
-	$p->code = 'vide(include_spip(\'inc/config\').lire_config(' . $arg . ',' .
+	$p->code = 'vide(include_spip(\'inc/config\')).lire_config(' . $arg . ',' .
 		($_sinon && $_sinon != "''" ? $_sinon : 'null') . ',' . $_unserialize . ')';
 
 	return $p;
