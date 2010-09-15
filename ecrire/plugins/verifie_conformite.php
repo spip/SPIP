@@ -16,7 +16,7 @@ include_spip('inc/xml');
 include_spip('inc/plugin');
 
 // http://doc.spip.org/@plugin_verifie_conformite
-function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLUGINS){
+function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLUGINS, $filename='plugin.xml'){
 	static $etats = array('dev','experimental','test', 'stable');
 
 	$matches = array();
@@ -61,7 +61,7 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		$arbre['prefix'] = array("");
 	} else{
 		$prefix = trim(end($arbre['prefix']));
-		if (strtoupper($prefix)=='SPIP'){
+		if (strtoupper($prefix)=='SPIP' AND $filename!=='core.xml'){
 			$arbre['erreur'][] = _T('erreur_plugin_prefix_interdit');
 		}
 		if (isset($arbre['etat'])){

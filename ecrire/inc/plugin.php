@@ -129,18 +129,8 @@ function erreur_necessite($n, $liste) {
 	foreach($n as $need){
 		$id = strtoupper($need['id']);
 
-		// Necessite SPIP version x ?
-		if ($id=='SPIP') {
-			if (!plugin_version_compatible($need['version'],
-			$GLOBALS['spip_version_branche'])) {
-				$msg[] = _T('plugin_necessite_spip', array(
-					'version' => $need['version']
-				));
-			}
-		}
-
 		// Necessite une librairie ?
-		else if (preg_match(',^(lib):(.*),i', $need['id'], $r)) {
+		if (preg_match(',^(lib):(.*),i', $need['id'], $r)) {
 			$lib = trim($r[2]);
 			if (!find_in_path('lib/'.$lib)) {
 				$lien_download = '';
@@ -158,9 +148,11 @@ function erreur_necessite($n, $liste) {
 		else if (!isset($liste[$id])
 		OR !plugin_version_compatible($need['version'],$liste[$id]['version'])
 		) {
-			$msg[] =  _T('plugin_necessite_plugin', array(
+			$msg[] =  ($id=='SPIP'?_T('plugin_necessite_spip', array(
+					'version' => $need['version']))
+							:_T('plugin_necessite_plugin', array(
 				'plugin' => $id,
-				'version' => $need['version']));
+				'version' => $need['version'])));
 		}
 	}
 
@@ -183,11 +175,21 @@ function liste_plugin_valides($liste_plug, $force = false){
 		'_DIR_EXTENSIONS'=>$liste_extensions,
 		'_DIR_PLUGINS'=>$liste_plug
 	);
+
 	// creer une premiere liste non ordonnee mais qui ne retient
 	// que les plugins valides, et dans leur derniere version en cas de doublon
-	$liste_non_classee = array();
-
 	$get_infos = charger_fonction('get_infos','plugins');
+	$infos['_DIR_RESTREINT'][''] = $get_infos($plug,$force,_DIR_RACINE.'prive/','core.xml');
+	$infos['_DIR_RESTREINT']['SPIP']['version'] = $GLOBALS['spip_version_branche'];
+	$infos['_DIR_RESTREINT']['SPIP']['path'] = array();
+	$liste_non_classee = array('SPIP'=>array(
+		'nom' => 'SPIP',
+		'etat' => 'stable',
+		'version' => $GLOBALS['spip_version_branche'],
+		'dir_type' => '_DIR_RESTREINT',
+		'dir'=> '',
+	)
+	);
 
 	foreach($listes as $dir_type=>$l){
 		foreach($l as $k=>$plug) {
@@ -382,10 +384,9 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		}
 
 		// ajouter les boutons automatiques de configuration
-		include_spip('inc/bandeau');
 		include_spip('inc/config');
 		// on passe la liste des boutons existants pour eviter double entree
-		$liste_boutons = $liste_boutons+lister_configurer(boutons_core('bouton')+boutons_core('onglet')+$liste_boutons);
+		$liste_boutons = $liste_boutons+lister_configurer($liste_boutons+$liste_onglets);
 	}
 
 	// generer les fichier
@@ -409,18 +410,19 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				if ($charge=='chemins'){
 					$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 					$splugs .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
-					foreach($info['path'] as $chemin){
-						if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
-							$dir = $chemin['dir'];
-							if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
-							if (!isset($chemin['type']) OR $chemin['type']=='public')
-								$chemins['public'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
-							if (!isset($chemin['type']) OR $chemin['type']=='prive')
-								$chemins['prive'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
-							#$splugs .= "if (".(($chemin['type']=='public')?"":"!")."_DIR_RESTREINT) ";
-							#$splugs .= "_chemin(_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"").");\n";
+					if (count($info['path']))
+						foreach($info['path'] as $chemin){
+							if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
+								$dir = $chemin['dir'];
+								if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
+								if (!isset($chemin['type']) OR $chemin['type']=='public')
+									$chemins['public'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+								if (!isset($chemin['type']) OR $chemin['type']=='prive')
+									$chemins['prive'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+								#$splugs .= "if (".(($chemin['type']=='public')?"":"!")."_DIR_RESTREINT) ";
+								#$splugs .= "_chemin(_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"").");\n";
+							}
 						}
-					}
 				}
 				// concerne uniquement options et fonctions
 				if (isset($info[$charge])){
