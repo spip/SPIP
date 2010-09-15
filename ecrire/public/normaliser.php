@@ -62,7 +62,6 @@ function phraser_vieux_logos(&$p)
 				}
 				$args[]= $champ;
 				array_shift($p->param);
-				var_dump($p);
 				spip_log("filtre de logo obsolete $nom", 'vieilles_defs');
 
 		} // le cas else est la seule incompatibilite
