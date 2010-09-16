@@ -142,23 +142,8 @@ function import_init_tables($request){
 	// on vide toutes les tables dont la restauration est demandee
 	list($tables,) = base_liste_table_for_dump(lister_tables_noerase());
 	spip_log(count($tables) . " tables effacees " . join(', ', $tables),'import');
-
-	foreach($tables as $table){
-		// regarder si il y a au moins un champ impt='non'
-		if (($table!='spip_auteurs')){
-			$desc = description_table($table);
-			if (isset($desc['field']['impt']))
-				sql_delete($table, "impt='oui'");
-			else
-				sql_delete($table);
-		}
-	}
-
-	// Bidouille pour garder l'acces admin actuel pendant toute la restauration
-	sql_delete("spip_auteurs", "id_auteur=0");
-	sql_updateq('spip_auteurs', array('id_auteur'=>0, 'webmestre'=>$connect_id_auteur), "id_auteur=$connect_id_auteur");
-	sql_delete("spip_auteurs", "id_auteur!=0");
-
+	base_vider_tables_destination_copie($tables);
+	
 	// retourner la liste des tables a importer, pas celle des tables videes !
 	return import_table_choix($request);
 }
@@ -171,11 +156,7 @@ function import_init_tables($request){
 // http://doc.spip.org/@detruit_restaurateur
 function detruit_restaurateur()
 {
-	if (sql_countsel("spip_auteurs", "id_auteur<>0"))
-		sql_delete("spip_auteurs", "id_auteur=0");
-	else {
-		sql_update('spip_auteurs', array('id_auteur'=>'webmestre', 'webmestre'=>"'oui'"), "id_auteur=0");
-	}
+	base_detruire_copieur_si_besoin();
 }
 
 // http://doc.spip.org/@import_tables
