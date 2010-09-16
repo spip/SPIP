@@ -28,7 +28,6 @@ ecrire/action/editer_mots.php -text
 ecrire/action/editer_rubrique.php -text
 ecrire/action/editer_site.php -text
 ecrire/action/etre_webmestre.php -text
-ecrire/action/export_all.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/index.php -text
 ecrire/action/instituer_article.php -text
@@ -69,7 +68,6 @@ ecrire/base/convert_sql_utf8.php -text
 ecrire/base/convert_utf8.php -text
 ecrire/base/delete_all.php -text
 ecrire/base/dump.php -text
-ecrire/base/import_all.php -text
 ecrire/base/index.php -text
 ecrire/base/trouver_table.php -text
 ecrire/charsets/cp1250.php -text
@@ -110,12 +108,10 @@ ecrire/configuration/visiteurs.php -text
 ecrire/exec/403.php -text
 ecrire/exec/404.php -text
 ecrire/exec/accueil.php -text
-ecrire/exec/admin_backup.php -text
 ecrire/exec/admin_declarer.php -text
 ecrire/exec/admin_effacer.php -text
 ecrire/exec/admin_plugin.php -text
 ecrire/exec/admin_repair.php -text
-ecrire/exec/admin_restore.php -text
 ecrire/exec/admin_tech.php -text
 ecrire/exec/admin_vider.php -text
 ecrire/exec/aide_index.php -text
@@ -154,11 +150,9 @@ ecrire/exec/documents_colonne.php -text
 ecrire/exec/documents_liste.php -text
 ecrire/exec/editer_auteurs.php -text
 ecrire/exec/editer_mots.php -text
-ecrire/exec/export_all.php -text
 ecrire/exec/fond.php -text
 ecrire/exec/fond_monobloc.php -text
 ecrire/exec/iconifier.php -text
-ecrire/exec/import_all.php -text
 ecrire/exec/index.php -text
 ecrire/exec/info_plugin.php -text
 ecrire/exec/informer.php -text
@@ -226,7 +220,6 @@ ecrire/inc/editer.php -text
 ecrire/inc/editer_auteurs.php -text
 ecrire/inc/editer_mots.php -text
 ecrire/inc/envoyer_mail.php -text
-ecrire/inc/export.php -text
 ecrire/inc/filtres_images_lib_mini.php -text
 ecrire/inc/filtres_images_mini.php -text
 ecrire/inc/filtres_mime.php -text
@@ -237,10 +230,6 @@ ecrire/inc/gadgets.php -text
 ecrire/inc/headers.php -text
 ecrire/inc/icone_renommer.php -text
 ecrire/inc/iconifier.php -text
-ecrire/inc/import_0_0.php -text
-ecrire/inc/import_1_2.php -text
-ecrire/inc/import_1_3.php -text
-ecrire/inc/import_insere.php -text
 ecrire/inc/index.php -text
 ecrire/inc/informer.php -text
 ecrire/inc/informer_auteur.php -text

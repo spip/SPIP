@@ -88,16 +88,6 @@
 		<icone>images/cache-empty-16.png</icone>
 		<titre>onglet_vider_cache</titre>
 	</bouton>
-	<bouton id='admin_sauvegarder' parent='bando_administration'>
-		<icone>images/base-backup-16.png</icone>
-		<titre>texte_sauvegarde_base</titre>
-		<url>admin_backup</url>
-	</bouton>
-	<bouton id='admin_restaurer' parent='bando_administration'>
-		<icone>images/base-restore-16.png</icone>
-		<titre>bouton_restaurer_base</titre>
-		<url>admin_restore</url>
-	</bouton>
 	<bouton id='admin_maintenir' parent='bando_administration'>
 		<icone>images/base-maintenance-16.png</icone>
 		<titre>titre_admin_tech</titre>
