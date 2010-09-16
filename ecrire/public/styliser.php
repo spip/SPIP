@@ -206,7 +206,7 @@ function echaffaudable($type){
 	  AND $trouver_table = charger_fonction('trouver_table','base')
 	  AND
 		($desc = $trouver_table($table)
-		OR $desc = $trouver_table($table_sql = $GLOBALS['table_prefix']."_$table"))
+		OR $desc = $trouver_table($table_sql = "spip_$table"))
 		)
 		return $echaffaudable[$type] = array($table,$desc['table'],$desc);
 	else
