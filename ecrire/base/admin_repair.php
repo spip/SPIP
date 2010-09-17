@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@base_admin_repair_dist
 function base_admin_repair_dist($titre='', $reprise='') {
 
-	$f = sql_repair('repair', NULL, true);
+	$f = sql_repair('repair', NULL, 'continue');
 	if ($f) {
 		$res = admin_repair_tables();
 	} else {
