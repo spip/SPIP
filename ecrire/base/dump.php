@@ -326,12 +326,11 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 	if (!lire_fichier($status_file, $status)
 		OR !$status = unserialize($status))
 		$status = array();
+	$status['etape'] = 'copie';
 
 	// puis relister les tables a importer
 	// et les vider si besoin, au moment du premier passage ici
-	// (et seulement si ce n'est pas une fusion, comment le dit-on ?)
-	$initialisation_copie = (!isset($status["dump_status_copie"])) ? 0 :
-		$status["dump_status_copie"];
+	$initialisation_copie = (!isset($status["dump_status_copie"])) ? 0 : $status["dump_status_copie"];
 
 	// si init pas encore faite, vider les tables du serveur destination
 	if (!$initialisation_copie) {
