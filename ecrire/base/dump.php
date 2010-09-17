@@ -58,12 +58,12 @@ function lister_tables_noexport(){
 	$EXPORT_tables_noexport= array(
 		'spip_caches', // plugin invalideur
 		'spip_resultats', // resultats de recherche ... c'est un cache !
-		'spip_referers',
-		'spip_referers_articles',
-		'spip_visites',
-		'spip_visites_articles',
-		'spip_versions', // le dump des fragments n'est pas robuste
-		'spip_versions_fragments' // le dump des fragments n'est pas robuste
+		#'spip_referers',
+		#'spip_referers_articles',
+		#'spip_visites',
+		#'spip_visites_articles',
+		#'spip_versions', 
+		#'spip_versions_fragments' 
 		);
 
 	if (!$GLOBALS['connect_toutes_rubriques']){
@@ -362,7 +362,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 			if ($status['tables_copiees'][$table]>=0
 				AND $desc_dest = base_preparer_table_dest($table, $desc_source, $serveur_dest, $status['tables_copiees'][$table] == 0)){
 				if ($callback_progression)
-					$callback_progression(0,0,$table);
+					$callback_progression($status['tables_copiees'][$table],0,$table);
 				while (true) {
 					$n = intval($status['tables_copiees'][$table]);
 					// on copie par lot de 400
