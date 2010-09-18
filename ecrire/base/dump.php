@@ -58,6 +58,7 @@ function lister_tables_noexport(){
 	$EXPORT_tables_noexport= array(
 		'spip_caches', // plugin invalideur
 		'spip_resultats', // resultats de recherche ... c'est un cache !
+		'spip_test', // c'est un test !
 		#'spip_referers',
 		#'spip_referers_articles',
 		#'spip_visites',
@@ -390,6 +391,8 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 				$status['tables_copiees'][$table]=-max($status['tables_copiees'][$table],1);
 				ecrire_fichier($status_file,serialize($status));
 				spip_log("tables_recopiees ".implode(',',$status['tables_copiees']),'dump');
+				if ($callback_progression)
+					$callback_progression($status['tables_copiees'][$table],$status['tables_copiees'][$table],$table);
 			}
 			else {
 				if ($callback_progression)
