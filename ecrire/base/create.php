@@ -21,9 +21,23 @@ include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@creer_ou_upgrader_table
 function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='') {
+	global $tables_principales;
 	$sql_desc = sql_showtable($table,true,$serveur);
-	if (!$upgrade OR !$sql_desc)
+	if (!$upgrade OR !$sql_desc) {
+		if ($autoinc==='auto') {
+			if (isset($tables_principales[$table]))
+				$autoinc = true;
+			elseif (isset($tables_principales[$table]))
+				$autoinc = false;
+			else {
+				// essayer de faire au mieux !
+				$autoinc = (isset($desc['key']['PRIMARY KEY']) 
+								AND strpos($desc['key']['PRIMARY KEY'],',')===false
+								AND strpos($desc['field'][$desc['key']['PRIMARY KEY']],'default')===false);
+			}
+		}
 		sql_create($table, $desc['field'], $desc['key'], $autoinc, false, $serveur);
+	}
 	else {
 		// ajouter les champs manquants
 		$last = '';

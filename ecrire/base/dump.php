@@ -292,8 +292,7 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
 	if (!$desc_dest) {
 		spip_log("creation '$table' sur serveur '$serveur_dest'",'dump');
 		include_spip('base/create');
-		$autoinc = (isset($desc['key']['PRIMARY KEY']) AND strpos($desc['key']['PRIMARY KEY'],',')===false);
-		creer_ou_upgrader_table($table, $desc, $autoinc, $upgrade,$serveur_dest);
+		creer_ou_upgrader_table($table, $desc, 'auto', $upgrade,$serveur_dest);
 		$desc_dest = sql_showtable($table,false,$serveur_dest);
 	}
 	
