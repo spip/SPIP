@@ -574,16 +574,13 @@ function sql_skip($res, $pos, $saut, $count, $serveur='', $option=true){
 // http://doc.spip.org/@sql_test_int
 function sql_test_int($type, $serveur='', $option=true)
 {
-  return (preg_match('/^bigint/i',$type)
-	  OR preg_match('/^int/i',$type)
-	  OR preg_match('/^tinyint/i',$type));
+  return preg_match('/^(TINYINT|SMALLINT|MEDIUMINT|INT|INTEGER|BIGINT)/i',trim($type));
 }
 
 // http://doc.spip.org/@sql_test_date
 function sql_test_date($type, $serveur='', $option=true)
 {
-  return (preg_match('/^datetime/i',$type)
-	  OR preg_match('/^timestamp/i',$type));
+  return preg_match('/^(DATE|DATETIME|TIMESTAMP|TIME)/i',trim($type));
 }
 
 
