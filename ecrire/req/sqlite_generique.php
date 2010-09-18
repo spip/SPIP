@@ -947,7 +947,9 @@ function spip_sqlite_set_charset($charset, $serveur='',$requeter=true){
 
 // http://doc.spip.org/@spip_sqlite_showbase
 function spip_sqlite_showbase($match, $serveur='',$requeter=true){
-	return spip_sqlite_query('SELECT name FROM sqlite_master WHERE type LIKE "'.$match.'"', $serveur, $requeter);
+	// type est le type d'entrée : table / index / view
+	// on ne retourne que les tables (?) et non les vues...
+	return spip_sqlite_query("SELECT name FROM sqlite_master WHERE type='table' AND tbl_name LIKE '$match'", $serveur, $requeter);
 }
 
 
@@ -995,7 +997,7 @@ function spip_sqlite_showtable($nom_table, $serveur='',$requeter=true){
 			foreach(preg_split('/\)\s*,?/',$namedkeys) as $v) {
 				if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
 					$k = str_replace("`", '', trim($r[1]));
-					$t = strtolower(str_replace("`", '', $r[2]));
+					$t = trim(strtolower(str_replace("`", '', $r[2])), '"');
 					if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
 				}
 			}
