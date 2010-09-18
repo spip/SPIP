@@ -319,11 +319,18 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
  *   liste des tables a ne pas vider systematiquement (ne seront videes que si existent dans la base source)
  * @param array $where
  *   liste optionnelle de condition where de selection des donnees pour chaque table
+ * @param array $fonction_base_inserer
+ *   fonction d'insertion en base. Par defaut "base_inserer_copie" qui fait un insertq a l'identique
+ *   peut etre personalisee pour filtrer, renumeroter....
  * @return <type>
  */
-function base_copier_tables($status_file, $tables, $serveur_source, $serveur_dest, $callback_progression = '', $max_time=0, $drop_source = false, $no_erase_dest = array(), $where=array()) {
+function base_copier_tables($status_file, $tables, $serveur_source, $serveur_dest, $callback_progression = '', $max_time=0, $drop_source = false, $no_erase_dest = array(), $where=array(), $fonction_base_inserer = 'base_inserer_copie') {
 	spip_log("Copier ".count($tables)." tables de '$serveur_source' vers '$serveur_dest'",'dump');
 
+	if (!function_exists($fonction_base_inserer)) {
+		spip_log("Fonction '$fonction_base_inserer' inconnue. Abandon",'dump');
+		return true; // echec mais on a fini, donc true
+	}
 	if (!lire_fichier($status_file, $status)
 		OR !$status = unserialize($status))
 		$status = array();
@@ -370,7 +377,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 					$res = sql_select('*',$table,isset($where[$table])?$where[$table]:'','','',"$n,400",'',$serveur_source);
 					while ($row = sql_fetch($res,$serveur_source)){
 						// si l'enregistrement est deja en base, ca fera un echec ou un doublon
-						sql_insertq($table,$row,$desc_dest,$serveur_dest);
+						$fonction_base_inserer($table,$row,$desc_dest,$serveur_dest);
 						$status['tables_copiees'][$table]++;
 						if ($max_time AND time()>$max_time)
 							break;
@@ -404,5 +411,19 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 	base_detruire_copieur_si_besoin($serveur_dest);
 	// OK, copie complete
 	return true;
+}
+
+/**
+ * fonction d'insertion en base lors de la copie de base a base
+ *
+ * @param string $table
+ * @param array $row
+ * @param array $desc_dest
+ * @param string $serveur_dest
+ * @return int/bool
+ */
+function base_inserer_copie($table,$row,$desc_dest,$serveur_dest){
+	// si l'enregistrement est deja en base, ca fera un echec ou un doublon
+	return sql_insertq($table,$row,$desc_dest,$serveur_dest);
 }
 ?>
