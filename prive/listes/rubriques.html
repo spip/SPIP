@@ -10,7 +10,7 @@
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_rubrique,info_nb_rubriques}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='icone'></th>
+			<th class='picto'></th>
 			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
 			<th class='langue'></th>
 			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
@@ -20,7 +20,7 @@
 	<tbody>
 	<BOUCLE_liste_rub(RUBRIQUES){id_rubrique?}{id_parent?}{id_mot?}{id_auteur?}{where?}{statut?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='icone'>[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img)]</td>
+			<td class='picto'>[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_RUBRIQUE|image_reduire{20,26})]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">[(#RANG). ]#TITRE</a></td>
 			<td class='langue'></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>

@@ -10,7 +10,7 @@
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_mot_cle,info_nb_mots_cles}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='icone'></th>
+			<th class='picto'></th>
 			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
 			<th class='type'>[(#TRI{type,<:info_dans_groupe:>,ajax})]</th>
 			<th class='id'>[(#TRI{id_mot,<:info_numero_abbreviation:>,ajax})]</th>
@@ -19,7 +19,7 @@
 	<tbody>
 	<BOUCLE_liste_mot(MOTS){id_mot?}{id_groupe?}{id_rubrique?}{id_article?}{where?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='icone'>[(#CHEMIN_IMAGE{mot-16.png}|balise_img)]</td>
+			<td class='picto'>[(#CHEMIN_IMAGE{mot-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_MOT|image_reduire{20,26})]<a href="[(#ID_MOT|generer_url_entite{mot})]">[(#RANG). ]#TITRE</a></td>
 			<td class='type secondaire'>#TYPE</td>
 			<td class='id'>[(#AUTORISER{modifier,mot,#ID_MOT}|?{
