@@ -43,6 +43,15 @@ function forum_affiche($debut, $admin=false)
   	echo debut_gauche('', true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'forum'),'data'=>''));
 	echo creer_colonne_droite('', true);
+
+
+	if ($admin)
+		echo icone_horizontale(_T('titre_cadre_forum_interne'), generer_url_ecrire("forum",""), "forum-interne-24.gif","rien.gif", false);
+
+	else if (!$admin AND $GLOBALS['meta']['forum_prive_admin'] == 'oui'
+	AND autoriser('forum_admin'))
+		echo icone_horizontale(_T('titre_cadre_forum_administrateur'), generer_url_ecrire("forum_admin",""), "forum-admin-24.gif","rien.gif", false);
+
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'forum'),'data'=>''));
 
 	echo debut_droite('', true), $titre;
