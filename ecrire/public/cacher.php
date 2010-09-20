@@ -95,6 +95,7 @@ function gunzip_page(&$page) {
 function cache_valide(&$page, $date) {
 
 	if (isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache']) return -1;
+	if (isset($GLOBALS['meta']['cache_inhib']) AND $_SERVER['REQUEST_TIME']<$GLOBALS['meta']['cache_inhib']) return -1;
 	if (defined('_NO_CACHE')) return (_NO_CACHE==0 AND !isset($page['texte']))?1:_NO_CACHE;
 	if (!$page OR !isset($page['texte']) OR !isset($page['entetes']['X-Spip-Cache'])) return 1;
 
