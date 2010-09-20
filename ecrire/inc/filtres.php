@@ -2067,27 +2067,6 @@ function env_to_attributs ($texte, $ignore_params=array()) {
 	return $texte;
 }
 
-// Inserer jQuery
-// ne pas verifier ici qu'on ne doublonne pas #INSERT_HEAD
-// car cela empeche un double appel (multi calcul en cache cool, 
-// ou erreur de l'espace prive)
-// http://doc.spip.org/@f_jQuery
-function f_jQuery ($texte) {
-	$x = '';
-	foreach (array_unique(pipeline('jquery_plugins',
-	array(
-		'javascript/jquery.js',
-		'javascript/jquery.form.js',
-		'javascript/jquery.autosave.js',
-		'javascript/ajaxCallback.js',
-		'javascript/jquery.cookie.js'
-	))) as $script)
-		if ($script = find_in_path($script))
-			$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
-	$texte = $x.$texte;
-	return $texte;
-}
-
 // Concatener des chaines
 // #TEXTE|concat{texte1,texte2,...}
 // http://doc.spip.org/@concat

@@ -179,7 +179,7 @@ function liste_plugin_valides($liste_plug, $force = false){
 	// creer une premiere liste non ordonnee mais qui ne retient
 	// que les plugins valides, et dans leur derniere version en cas de doublon
 	$get_infos = charger_fonction('get_infos','plugins');
-	$infos['_DIR_RESTREINT'][''] = $get_infos($plug,$force,_DIR_RACINE.'prive/','core.xml');
+	$infos['_DIR_RESTREINT'][''] = $get_infos('./',$force,_DIR_RESTREINT,'core.xml');
 	$infos['_DIR_RESTREINT']['SPIP']['version'] = $GLOBALS['spip_version_branche'];
 	$infos['_DIR_RESTREINT']['SPIP']['path'] = array();
 	$liste_non_classee = array('SPIP'=>array(
@@ -465,7 +465,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 			$plug = $plugin_valides[$p]['dir'];
 			$info = $infos[$dir_type][$plug];
 			$prefix = "";
-			$prefix = $info['prefix']."_";
+			$prefix = ($info['prefix']=='spip'?'':$info['prefix']."_");
 			if (isset($info['pipeline']) AND is_array($info['pipeline'])){
 				foreach($info['pipeline'] as $pipe){
 					$nom = $pipe['nom'];
@@ -483,11 +483,13 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 					$nom = $nomlower;
 					if (!isset($GLOBALS['spip_pipeline'][$nom])) // creer le pipeline eventuel
 						$GLOBALS['spip_pipeline'][$nom]="";
-					if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
-						$GLOBALS['spip_pipeline'][$nom] = preg_replace(",(\|\||$),","|$prefix$action\\1",$GLOBALS['spip_pipeline'][$nom],1);
-					if (isset($pipe['inclure'])){
-						$GLOBALS['spip_matrice']["$prefix$action"] =
-							"$root_dir_type:$plug/".$pipe['inclure'];
+					if ($action) {
+						if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
+							$GLOBALS['spip_pipeline'][$nom] = preg_replace(",(\|\||$),","|$prefix$action\\1",$GLOBALS['spip_pipeline'][$nom],1);
+						if (isset($pipe['inclure'])){
+							$GLOBALS['spip_matrice']["$prefix$action"] =
+								"$root_dir_type:$plug/".$pipe['inclure'];
+						}
 					}
 				}
 			}
