@@ -2649,4 +2649,22 @@ function generer_info_entite($id_objet, $type_objet, $info){
 
 	return $info_generee;
 }
+
+/**
+ * Wrap un texte avec des balises
+ * wrap('mot','<b>') => '<b>mot</b>'
+ * @param string $texte
+ * @param string $wrap
+ * @return string
+ */
+function wrap($texte,$wrap) {
+	$balises = extraire_balises($wrap);
+	if (preg_match_all(",<([a-z]\w*)\b[^>]*>,UimsS",$wrap, $regs, PREG_PATTERN_ORDER)) {
+		$texte = $wrap . $texte;
+		$regs = array_reverse($regs[1]);
+		$wrap = "</".implode("></",$regs).">";
+		$texte = $texte . $wrap;
+	}
+	return $texte;
+}
 ?>
