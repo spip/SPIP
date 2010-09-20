@@ -101,7 +101,7 @@ function f_admin ($texte) {
 
 function f_recuperer_fond($flux) {
 	if (!test_espace_prive()) return $flux;
-	#include_spip('inc/pipelines_ecrire');
+	include_spip('inc/pipelines_ecrire');
 	return f_afficher_blocs_ecrire($flux);
 }
 ?>
