@@ -692,4 +692,16 @@ function autoriser_ok_dist($faire, $type, $id, $qui, $opt) { return true; }
 // http://doc.spip.org/@autoriser_niet_dist
 function autoriser_niet_dist($faire, $type, $id, $qui, $opt) { return false; }
 
+
+function autoriser_base_reparer($faire, $type, $id, $qui, $opts) {
+	if (!autoriser('detruire') OR _request('reinstall'))
+		return false;
+
+	include_spip('inc/abstract_sql');
+	include_spip('inc/plugin');
+	if (spip_version_compare(sql_version(),'3.23.14','<'))
+		return false;
+
+	return true;
+}
 ?>
