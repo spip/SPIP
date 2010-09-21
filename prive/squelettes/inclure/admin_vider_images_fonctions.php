@@ -12,8 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/invalideur');
-
 // http://doc.spip.org/@calculer_taille_dossier
 function calculer_taille_dossier ($dir) {
 	$handle = @opendir($dir);

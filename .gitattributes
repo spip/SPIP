@@ -737,7 +737,6 @@ prive/spip_pass.html -text
 prive/spip_style.css -text
 prive/squelettes/body.html -text
 prive/squelettes/contenu/page-admin_vider.html -text
-prive/squelettes/contenu/page-admin_vider_fonctions.php -text
 prive/squelettes/contenu/page-breves.html -text
 prive/squelettes/contenu/page-charte.html -text
 prive/squelettes/contenu/page-configurer.html -text
@@ -751,6 +750,10 @@ prive/squelettes/hierarchie/page-configurer_identite.html -text
 prive/squelettes/hierarchie/page-configurer_langage.html -text
 prive/squelettes/hierarchie/page-configurer_preferences.html -text
 prive/squelettes/hierarchie/page-typo.html -text
+prive/squelettes/inclure/admin_vider_cache.html -text
+prive/squelettes/inclure/admin_vider_cache_fonctions.php -text
+prive/squelettes/inclure/admin_vider_images.html -text
+prive/squelettes/inclure/admin_vider_images_fonctions.php -text
 prive/squelettes/inclure/barre-nav.html -text
 prive/squelettes/inclure/head.html -text
 prive/squelettes/inclure/pied.html -text
