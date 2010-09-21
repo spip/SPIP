@@ -20,12 +20,14 @@ function exec_delete_all_dist()
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$res = liste_tables_en_base('delete');
+		include_spip('base/dump');
+		$res = base_lister_toutes_tables();
 		if (!$res) {
 		  	include_spip('inc/minipres');
 			spip_log("Erreur base de donnees");
 			echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
 		} else {
+			$res = base_saisie_tables('delete', $res);
 			include_spip('inc/headers');
 			$res = "\n<ol style='text-align:left'><li>\n" .
 			  join("</li>\n<li>", $res) .
@@ -39,18 +41,4 @@ function exec_delete_all_dist()
 	}
 }
 
-function liste_tables_en_base($name)
-{
-	$res = sql_alltable();
-	$c = "type='checkbox' checked='checked'";
-	foreach ($res as $k => $t) {
-		$res[$k] = "<input $c value='$t' id='$name_$t' name='$name"
-			. "[]' />\n"
-			. $t
-			. " ("
-			.  sql_countsel($t)
-	  		. ")";
-	}
-	return $res;
-}
 ?>
