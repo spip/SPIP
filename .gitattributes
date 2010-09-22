@@ -411,9 +411,13 @@ prive/formulaires/configurer_identite.html -text
 prive/formulaires/configurer_identite.php -text
 prive/formulaires/configurer_langage.html -text
 prive/formulaires/configurer_langage.php -text
+prive/formulaires/configurer_langue.html -text
+prive/formulaires/configurer_langue.php -text
 prive/formulaires/configurer_metas.php -text
 prive/formulaires/configurer_preferences.html -text
 prive/formulaires/configurer_preferences.php -text
+prive/formulaires/configurer_transcodeur.html -text
+prive/formulaires/configurer_transcodeur.php -text
 prive/formulaires/editer_article.html -text
 prive/formulaires/editer_article.php -text
 prive/formulaires/editer_auteur.html -text
@@ -741,6 +745,7 @@ prive/squelettes/contenu/page-charte.html -text
 prive/squelettes/contenu/page-configurer.html -text
 prive/squelettes/contenu/page-configurer_identite.html -text
 prive/squelettes/contenu/page-configurer_langage.html -text
+prive/squelettes/contenu/page-configurer_langue.html -text
 prive/squelettes/contenu/page-configurer_preferences.html -text
 prive/squelettes/extra/dist.html -text
 prive/squelettes/head/dist.html -text
