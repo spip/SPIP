@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@exec_delete_all_dist
-function exec_delete_all_dist()
+function exec_base_delete_all_dist()
 {
 	include_spip('inc/autoriser');
 	if (!autoriser('detruire')) {

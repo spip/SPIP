@@ -237,7 +237,7 @@ function debusquer_requete($message) {
 		. _T('info_erreur_systeme', array('errsys'=>$errno))
 		. "</blink><br />\n<b>"
 		. _T('info_erreur_systeme2',
-			array('script' => generer_url_ecrire('admin_repair'))) 
+			array('script' => generer_url_ecrire('base_repair')))
 		. '</b><br />';
 		spip_log("Erreur systeme $errno");
 		return array($retour,'');

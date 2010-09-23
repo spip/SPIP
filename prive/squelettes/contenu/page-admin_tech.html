@@ -7,7 +7,7 @@
 	#BOITE_OUVRIR{#VAL{texte_recuperer_base}|_T|wrap{'<h3>'},'simple','titrem'}
 		<p><:texte_crash_base:></p>
 	#BOITE_PIED
-		[(#BOUTON_ACTION{<:bouton_tenter_recuperation:>,#URL_ECRIRE{admin_repair}})]
+		[(#BOUTON_ACTION{<:bouton_tenter_recuperation:>,#URL_ECRIRE{base_repair}})]
 	#BOITE_FERMER
 ]
 
@@ -18,5 +18,5 @@
 	<p><:texte_admin_effacer_01:></p>
 	<p><strong><:avis_suppression_base:></strong></p>
 #BOITE_PIED
-	[(#BOUTON_ACTION{<:bouton_effacer_tout:>,#URL_ECRIRE{delete_all,reinstall=non}})]
+	[(#BOUTON_ACTION{<:bouton_effacer_tout:>,#URL_ECRIRE{base_delete_all,reinstall=non}})]
 #BOITE_FERMER

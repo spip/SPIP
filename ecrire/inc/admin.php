@@ -117,7 +117,7 @@ function debut_admin($script, $action='', $corps='') {
 
 	// Si on est un super-admin, un bouton de validation suffit
 	// sauf dans les cas destroy
-		if ((autoriser('webmestre') OR $script === 'admin_repair')
+		if ((autoriser('webmestre') OR $script === 'repair')
 		AND $script != 'delete_all') {
 			if (_request('validation_admin') == $signal) {
 				spip_log ("Action super-admin: $action");
@@ -150,8 +150,13 @@ function debut_admin($script, $action='', $corps='') {
 
 		}
 
+		// admin/xxx correspond
+		// a exec/base_xxx de preference
+		// et exec/xxx sinon (compat)
+		if (tester_url_ecrire("base_$script"))
+			$script = "base_$script";
 		$form = copy_request($script, $corps, $suivant);
-		$info_action = _T('info_action', array('action' => $action));
+		$info_action = _T('info_action', array('action' => "$action"));
 		return minipres($info_action, $form, $js);
 	}
 }
