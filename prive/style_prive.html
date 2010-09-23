@@ -46,7 +46,7 @@ body { font-size:0.625em; font-family: Verdana, Geneva, Sans, sans-serif; }
 /* Layout */
 #page { font-size: small; }
 /* ecran etroit*/
-#haut {text-align:center;}
+#haut {text-align:center;margin-top:10px;}
 .largeur { width: 780px; margin: auto; text-align:#GET{left}; }
 #conteneur,.table_page,div.messages { clear: both; margin-#GET{right}: auto; margin-#GET{left}: auto; text-align: #GET{left}; width: 780px; margin-top:0.5em;}
 #navigation { float: #GET{left}; width: 200px; min-height: 100px; }
@@ -83,41 +83,13 @@ div.table_page { margin-top: 1em; }
 
 #copyright {text-align:right;font-size:x-small;padding-top:1em;border-top:1px solid #eee;}
 
-#chemin { 
-	font-size: 0.85em; 
-	overflow: hidden; 
-	margin: 0; 
-	padding: 0; 
-}
-#chemin li a { color: black;  }
-#chemin li a:hover { text-decoration: underline;  }
+#chemin { font-size: 0.85em; overflow: hidden; margin: 0; padding: 0;	text-align:#GET{left};}
+#chemin > a  { color: #444; }
+#chemin > a:hover { text-decoration: underline;  }
 
 #chemin .bouton_deplacer {display:block;float:#GET{right};position:relative;padding:3px;padding-#GET{left}:20px;}
 #chemin .bouton_deplacer .image_loading {position:absolute;top:0;#GET{left}:0;}
 
-#chemin ul, #chemin li, #chemin li .bloc {  
-	margin: 0; 
-	padding: 0; 
-	margin-top: 0; 
-	padding-top: 0; 
-	list-style-type: none;
-	display: inline; 
-}
-#chemin li .bloc {	
-	padding: 2px;	
-	padding-bottom: 4px;
-	display: -moz-inline-box; 
-	display: inline-block; 
-}
-#chemin li .bloc:hover {
-}
-
-#chemin li li .bloc { 
-	margin-top: 2px; 
-}
-#chemin li li .bloc a  {
-	color: #444;
-}
 #chemin .aide {padding-top: 0px; }
 
 h1 { color: #GET{foncee}; font-size:large; font-family: Arial, Sans, sans-serif; margin: 16px 0 0.25em 0; }
