@@ -86,7 +86,7 @@ function breves_edit_ok($row, $id_breve, $id_rubrique, $new)
 	echo $commencer_page(_T('titre_page_breves_edit', array('titre' => $titre)), "naviguer", "breves", $id_rubrique);
 
 	echo debut_grand_cadre(true);
-	echo afficher_hierarchie($id_rubrique);
+	echo afficher_hierarchie($id_rubrique,'',$id_breve,'breve',$row['id_secteur'],($row['statut'] == 'publie'));
 
 	echo fin_grand_cadre(true);
 	echo debut_gauche('', true);

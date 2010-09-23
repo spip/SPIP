@@ -69,7 +69,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 	echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
 
 	echo debut_grand_cadre(true);
-	echo afficher_hierarchie($id_rubrique);
+	echo afficher_hierarchie($id_rubrique,'',$id_breve,'breve',$row['id_secteur'],($row['statut'] == 'publie'));
 	echo fin_grand_cadre(true);
 
 	echo debut_gauche('', true);
