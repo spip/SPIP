@@ -502,10 +502,9 @@ function afficher_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_se
 			break;
 		}
 
-		$id_parent = $res['id_parent'];
 		changer_typo($res['lang']);
 
-		$class = (!$id_parent) ? "secteur"
+		$class = (!$res['id_parent']) ? "secteur"
 		: (acces_restreint_rubrique($id_rubrique)
 		? "admin" : "rubrique");
 
@@ -517,7 +516,7 @@ function afficher_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_se
 		. $parents
 		. "</li></ul>";
 
-		$id_rubrique = $id_parent;
+		$id_rubrique = $res['id_parent'];
 		$tag = 'a';
 		$on = '';
 	}
@@ -546,7 +545,7 @@ function afficher_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_se
 			'restreint'=>$restreint),
 			'data'=>$out));
 
- 	return $out;
+ 	return $out;//."<hr />".recuperer_fond('prive/squelettes/hierarchie/dist',array('id_rubrique'=>$id_parent,'objet'=>$type,'id_objet'=>$id_objet));
 }
 
 // Pour construire des menu avec SELECTED
