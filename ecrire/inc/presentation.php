@@ -476,7 +476,7 @@ function fin_cadre_formulaire($return=false){
 
 // http://doc.spip.org/@afficher_hierarchie
 function afficher_hierarchie($id_parent, $editable=true,$id_objet=0,$type='',$id_secteur=0,$restreint='') {
-	$out = recuperer_fond('prive/squelettes/hierarchie/dist',
+	$out = recuperer_fond('prive/squelettes/hierarchie/objet',
 					array(
 						'id_parent'=>$id_parent,
 						'objet'=>$type,
