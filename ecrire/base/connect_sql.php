@@ -245,11 +245,7 @@ function table_objet($type) {
 				'doc' => 'documents', # pour les modeles
 				'img' => 'documents',
 				'emb' => 'documents',
-				'groupe_mots' => 'groupes_mots', # hum
-				'groupe_mot' => 'groupes_mots', # hum
-				'groupe' => 'groupes_mots', # hum (EXPOSE)
 				'message' => 'messages',
-				'mot' => 'mots',
 				'petition' => 'petitions',
 				'rubrique' => 'rubriques',
 				'signature' => 'signatures',
