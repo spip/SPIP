@@ -91,7 +91,6 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
  // chargement prealable des fonctions produisant des formulaires
 
 	$dater = charger_fonction('dater', 'inc');
-	$editer_mots = charger_fonction('editer_mots', 'inc');
 	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
 	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
 
@@ -138,7 +137,6 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$onglet_proprietes = ((!_INTERFACE_ONGLETS) ? "" :"")
 	  . $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 	  . $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
-	  . (!$editer_mots ? '' : $editer_mots('article', $id_article, $cherche_mot, $select_groupe, $flag_editable, false, 'articles'))
 	  . (!$referencer_traduction ? '' : $referencer_traduction($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err))
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
 		. bouton_proposer_article($id_article,$statut_article)

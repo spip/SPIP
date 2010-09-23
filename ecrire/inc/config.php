@@ -348,7 +348,6 @@ function liste_metas()
 		'activer_breves' => 'non',
 		'activer_logos' => 'oui',
 		'activer_logos_survol' => 'non',
-		'config_precise_groupes' => 'non',
 		'articles_surtitre' => 'non',
 		'articles_soustitre' => 'non',
 		'articles_descriptif' => 'non',

@@ -69,7 +69,6 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	$iconifier = charger_fonction('iconifier', 'inc');
 	if ($flag_editable AND ($statut == 'publie'))
 		$dater = charger_fonction('dater', 'inc');
-	$editer_mots = charger_fonction('editer_mots', 'inc');
 	if ($flag_administrable)
 		$instituer_site = charger_fonction('instituer_site','inc');
 
@@ -176,7 +175,6 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 		)
 		. afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)
 		. ($dater ? $dater($id_syndic, $flag_editable, $statut, 'syndic', 'sites', $date_heure) : "")
-	  . $editer_mots('syndic', $id_syndic,  $cherche_mot,  $select_groupe, $flag_editable, true, 'sites')
 	  . (_INTERFACE_ONGLETS?($flag_administrable ? options_moderation($row) : ""):"")
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''))
 	  ;
