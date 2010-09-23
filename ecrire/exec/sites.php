@@ -75,7 +75,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	$lister_objets = charger_fonction('lister_objets','inc');
 
 	echo debut_grand_cadre(true);
-	echo afficher_hierarchie($id_rubrique,'',$id_syndic,'site',$row['id_secteur'],($row['statut'] == 'publie'));
+	echo afficher_hierarchie($id_rubrique,true,$id_syndic,'site',$row['id_secteur'],($row['statut'] == 'publie'));
 	echo fin_grand_cadre(true);
 
 	echo debut_gauche('', true);

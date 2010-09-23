@@ -475,7 +475,7 @@ function fin_cadre_formulaire($return=false){
 //
 
 // http://doc.spip.org/@afficher_hierarchie
-function afficher_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_secteur=0,$restreint='') {
+function afficher_hierarchie($id_parent, $editable=true,$id_objet=0,$type='',$id_secteur=0,$restreint='') {
 	$out = recuperer_fond('prive/squelettes/hierarchie/dist',
 					array(
 						'id_parent'=>$id_parent,
@@ -484,6 +484,7 @@ function afficher_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_se
 						'deplacer'=>_request('deplacer')?'oui':'',
 						'id_secteur'=>$id_secteur,
 						'restreint'=>$restreint,
+						'editable'=>$editable?' ':'',
 					),array('ajax'=>true));
 	$out = pipeline('affiche_hierarchie',array('args'=>array(
 			'id_parent'=>$id_parent,
@@ -491,7 +492,9 @@ function afficher_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_se
 			'id_objet'=>$id_objet,
 			'objet'=>$type,
 			'id_secteur'=>$id_secteur,
-			'restreint'=>$restreint),
+			'restreint'=>$restreint,
+			'editable'=>$editable?' ':'',
+			),
 			'data'=>$out));
 
  	return $out;
