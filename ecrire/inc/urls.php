@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function urls_liste_objets(){
-	$url_objets = pipeline('declarer_url_objets',array('article','breve','rubrique','mot','auteur','site','syndic'));
+	$url_objets = pipeline('declarer_url_objets',array('article','breve','rubrique','auteur','site','syndic'));
 	$url_objets = implode('|',array_map('preg_quote',$url_objets));
 	return $url_objets;
 }
@@ -82,15 +82,6 @@ function generer_url_ecrire_breve($id, $args='', $ancre='', $statut='', $connect
 	return $h;
 }
 
-// http://doc.spip.org/@generer_url_ecrire_mot
-function generer_url_ecrire_mot($id, $args='', $ancre='', $statut='', $connect='') {
-	$a = "id_mot=" . intval($id);
-	$h = (!$statut OR $connect)
-	?  generer_url_entite_absolue($id, 'mot', $args, $ancre, $connect)
-	: (generer_url_ecrire('mots_edit',$a . ($args ? "&$args" : ''))
-		. ($ancre ? "#$ancre" : ''));
-	return $h;
-}
 
 // http://doc.spip.org/@generer_url_ecrire_site
 function generer_url_ecrire_site($id, $args='', $ancre='', $statut='', $connect='') {

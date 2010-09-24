@@ -595,10 +595,7 @@ function autoriser_auteur_iconifier_dist($faire,$quoi,$id,$qui,$opts){
  return (($id == $qui['id_auteur']) OR
  		(($qui['statut'] == '0minirezo') AND !$qui['restreint']));
 }
-// http://doc.spip.org/@autoriser_mot_iconifier_dist
-function autoriser_mot_iconifier_dist($faire,$quoi,$id,$qui,$opts){
- return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
-}
+
 // http://doc.spip.org/@autoriser_article_iconifier_dist
 function autoriser_iconifier_dist($faire,$quoi,$id,$qui,$opts){
 	// On reprend le code de l'ancien iconifier pour definir les autorisations pour les autres
