@@ -207,7 +207,7 @@
 		<icone>images/langue-24.png</icone>
 		<titre>info_langue_principale</titre>
 	</onglet>
-	<onglet id='config_multilang' parent="config_lang">
+	<onglet id='configurer_multilang' parent="config_lang">
 		<icone>images/traduction-24.png</icone>
 		<titre>info_multilinguisme</titre>
 	</onglet>
