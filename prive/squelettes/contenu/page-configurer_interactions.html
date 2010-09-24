@@ -1,5 +1,14 @@
 [(#AUTORISER{configurer,interactions}|interdire_acces)]
 <h1><:onglet_interactivite:></h1>
+<div class='contenu_public'>
+	
+	<h3><:titre_config_contenu_public:></h3>
+
+	<div class="ajax">
+		#FORMULAIRE_CONFIGURER_REDACTEURS
+	</div>
+
+</div>
 
 <?php
 	include_spip('inc/presentation');
@@ -11,23 +20,17 @@
 
 	$annonces = charger_fonction('annonces', 'configuration');
 
-	$res = "<div class='contenu_public'>";
+	$res = "";
 
 
-	$res.= "<h3>"._T('titre_config_contenu_public')."</h3>\n";
-
-
-
-	$res.= "</div>";
-
-	$res.= "<div class='contenu_prive'>";
 
 	/*
 	 * Inscriptions de redacteurs et visiteurs depuis le site public
 	 * (la balise FORMULAIRE_INSCRIPTION sert au deux)
 	 */
-	$res.=  $redacteurs() .  $visiteurs() . "<br />";
+	$res.=  $visiteurs() . "<br />";
 
+	$res.= "<div class='contenu_prive'>";
 
 
 	$res.= "<h3>"._T('titre_config_contenu_prive')."</h3>\n";
