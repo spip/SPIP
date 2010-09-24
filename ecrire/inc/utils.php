@@ -848,10 +848,10 @@ function tester_url_ecrire($nom){
 	// tester si c'est une page en squelette
 	if (find_in_path('prive/squelettes/contenu/' . $nom . '.html')
 		OR find_in_path('prive/squelettes/contenu/page-' . $nom . '.html'))
-		$nom = 'fond';
+		return true; // ne pas essayer de le charger !
 	elseif (find_in_path('prive/exec/' . $nom . '.html'))
 		// compat version precedente
-		$nom = 'fond_monobloc';
+		return true; // ne pas essayer de le charger !
 	return charger_fonction($nom,'exec',true);
 }
 
