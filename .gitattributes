@@ -743,10 +743,7 @@ prive/squelettes/page.html -text
 prive/squelettes/structure.html -text
 prive/squelettes/top/dist.html -text
 prive/squelettes/top/page-charte.html -text
-prive/squelettes/top/page-configurer_identite.html -text
 prive/squelettes/top/page-configurer_langage.html -text
-prive/squelettes/top/page-configurer_langue.html -text
-prive/squelettes/top/page-configurer_multilang.html -text
 prive/squelettes/top/page-configurer_preferences.html -text
 prive/stats/echelle.html -text
 prive/style_prive.html -text
