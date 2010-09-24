@@ -84,7 +84,6 @@ ecrire/configuration/breves.php -text
 ecrire/configuration/documents.php -text
 ecrire/configuration/futurs.php -text
 ecrire/configuration/index.php -text
-ecrire/configuration/langue.php -text
 ecrire/configuration/locuteur.php -text
 ecrire/configuration/logos.php -text
 ecrire/configuration/messagerie_agenda.php -text
@@ -97,7 +96,6 @@ ecrire/configuration/referenceur.php -text
 ecrire/configuration/relayeur.php -text
 ecrire/configuration/rubriques.php -text
 ecrire/configuration/syndications.php -text
-ecrire/configuration/transcodeur.php -text
 ecrire/configuration/visiteurs.php -text
 ecrire/core.xml -text
 ecrire/exec/403.php -text
@@ -121,7 +119,6 @@ ecrire/exec/charger_plugin.php -text
 ecrire/exec/charger_plugin_descr.php -text
 ecrire/exec/config_contenu.php -text
 ecrire/exec/config_fonctions.php -text
-ecrire/exec/config_lang.php -text
 ecrire/exec/config_multilang.php -text
 ecrire/exec/configuration.php -text
 ecrire/exec/configurer_contenu.php -text
@@ -750,6 +747,7 @@ prive/squelettes/top/dist.html -text
 prive/squelettes/top/page-charte.html -text
 prive/squelettes/top/page-configurer_identite.html -text
 prive/squelettes/top/page-configurer_langage.html -text
+prive/squelettes/top/page-configurer_langue.html -text
 prive/squelettes/top/page-configurer_preferences.html -text
 prive/stats/echelle.html -text
 prive/style_prive.html -text
