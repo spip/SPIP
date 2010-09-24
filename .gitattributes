@@ -78,18 +78,15 @@ ecrire/charsets/mathml.php -text
 ecrire/charsets/translit.php -text
 ecrire/charsets/translitcomplexe.php -text
 ecrire/configuration/annonces.php -text
-ecrire/configuration/articles.php -text
 ecrire/configuration/avertisseur.php -text
 ecrire/configuration/breves.php -text
 ecrire/configuration/documents.php -text
-ecrire/configuration/futurs.php -text
 ecrire/configuration/index.php -text
 ecrire/configuration/logos.php -text
 ecrire/configuration/messagerie_agenda.php -text
 ecrire/configuration/moderniseur_html.php -text
 ecrire/configuration/previsualiseur.php -text
 ecrire/configuration/redacteurs.php -text
-ecrire/configuration/redirection.php -text
 ecrire/configuration/reducteur.php -text
 ecrire/configuration/relayeur.php -text
 ecrire/configuration/rubriques.php -text
@@ -383,6 +380,8 @@ prive/editer/breve.html -text
 prive/editer/logo.html -text
 prive/editer/rubrique.html -text
 prive/editer/site.html -text
+prive/formulaires/configurer_articles.html -text
+prive/formulaires/configurer_articles.php -text
 prive/formulaires/configurer_identite.html -text
 prive/formulaires/configurer_identite.php -text
 prive/formulaires/configurer_langage.html -text

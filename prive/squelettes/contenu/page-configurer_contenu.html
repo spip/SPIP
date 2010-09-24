@@ -1,15 +1,11 @@
 [(#AUTORISER{configurer,contenu}|interdire_acces)]
 <h1><:onglet_contenu_site:></h1>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_ARTICLES
+</div>
+
 <?php
 include_spip('inc/presentation');
-	echo debut_cadre_trait_couleur("article-24.png", true, "", _T('titre_les_articles'));
-	$articles = charger_fonction('articles', 'configuration');
-	echo $articles();
-	$futurs = charger_fonction('futurs', 'configuration');
-	echo $futurs();
-	$redirection = charger_fonction('redirection', 'configuration');
-	echo $redirection();
-	echo fin_cadre_trait_couleur(true);
 
 	$rubriques = charger_fonction('rubriques', 'configuration');
 	echo $rubriques();
