@@ -116,10 +116,6 @@ function taches_generales($taches_generales = array()) {
 	AND ($GLOBALS['meta']['quoi_de_neuf'] == 'oui'))
 		$taches_generales['mail']= 3600 * 24 * $GLOBALS['meta']['jours_neuf'];
 
-	// syndication
-	if ($GLOBALS['meta']["activer_syndic"] == "oui") 
-		$taches_generales['syndic'] = 90;
-
 	// maintenance (ajax, verifications diverses)
 	$taches_generales['maintenance'] = 3600 * 2;
 
