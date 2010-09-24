@@ -20,9 +20,10 @@
 	#FORMULAIRE_CONFIGURER_DOCUMENTS
 </div>
 
-<?php
-include_spip('inc/presentation');
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_SITES
+</div>
 
-	$syndications = charger_fonction('syndications', 'configuration');
-	echo $syndications();
-?>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_FLUX
+</div>
