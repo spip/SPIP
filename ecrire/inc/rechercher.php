@@ -64,19 +64,13 @@ function liste_des_jointures() {
 			array(
 			'article' => array(
 				'auteur' => array('nom' => 10),
-				'mot' => array('titre' => 3),
 				'document' => array('titre' => 2, 'descriptif' => 1)
 			),
 			'breve' => array(
-				'mot' => array('titre' => 3),
 				'document' => array('titre' => 2, 'descriptif' => 1)
 			),
 			'rubrique' => array(
-				'mot' => array('titre' => 3),
 				'document' => array('titre' => 2, 'descriptif' => 1)
-			),
-			'document' => array(
-				'mot' => array('titre' => 3)
 			)
 		)
 	);
