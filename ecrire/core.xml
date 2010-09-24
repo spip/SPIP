@@ -208,7 +208,6 @@
 
 
 	<pipeline><nom>accueil_encours</nom><action></action></pipeline>
-	<pipeline><nom>accueil_gadgets</nom><action></action></pipeline>
 	<pipeline><nom>accueil_informations</nom><action></action></pipeline>
 	<pipeline><nom>affichage_final</nom>
 		<action>f_surligne</action>

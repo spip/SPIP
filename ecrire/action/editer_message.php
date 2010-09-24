@@ -83,7 +83,7 @@ function action_editer_message_post_choisir($id_message) {
 	if ($id_auteur = _request('nouv_auteur'))
 		action_editer_message_post_ajouter($id_message, $id_auteur);
 	else {
-		include_spip('inc/mots');
+		include_spip('inc/ressembler');
 		include_spip('inc/charsets'); // pour tranlitteration
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 		$cherche_auteur= _request('cherche_auteur');
