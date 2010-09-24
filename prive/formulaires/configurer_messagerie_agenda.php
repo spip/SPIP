@@ -12,23 +12,25 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/config');
+function formulaires_configurer_messagerie_agenda_charger_dist(){
+	foreach(array(
+		"messagerie_agenda",
+		) as $m)
+		$valeurs[$m] = $GLOBALS['meta'][$m];
 
-function configuration_messagerie_agenda_dist()
-{
-	$res = "<div class='verdana2'>"
-	. _T('texte_messagerie_agenda')
-	. "<br />\n"
-	. afficher_choix('messagerie_agenda', $GLOBALS['meta']['messagerie_agenda'],
-		array('oui' => _T('item_messagerie_agenda'),
-			'non' => _T('item_non_messagerie_agenda')))
-	. "</div>";
-
-	$res = debut_cadre_trait_couleur("messagerie-24.png", true, "", _T('titre_messagerie_agenda'))
-	. ajax_action_post('configuration', 'messagerie_agenda', 'config_contenu','#configurer-messagerie_agenda',$res)
-	 . fin_cadre_trait_couleur(true);
-
-	return ajax_action_greffe('configurer-messagerie_agenda', '', $res);
+	return $valeurs;
 }
-?>
+
+
+function formulaires_configurer_messagerie_agenda_traiter_dist(){
+	$res = array('editable'=>true);
+	foreach(array(
+		"messagerie_agenda",
+		) as $m)
+		if (!is_null($v=_request($m)))
+			ecrire_meta($m, $v=='oui'?'oui':'non');
+
+	$res['message_ok'] = _T('config_info_enregistree');
+	return $res;
+}
+

@@ -1,7 +1,6 @@
 [(#AUTORISER{configurer,interactions}|interdire_acces)]
 <h1><:onglet_interactivite:></h1>
 <div class='contenu_public'>
-	
 	<h3><:titre_config_contenu_public:></h3>
 
 	<div class="ajax">
@@ -14,41 +13,24 @@
 
 </div>
 
+<div class='contenu_prive'>
+	<h3><:titre_config_contenu_prive:></h3>
+
+	<div class="ajax">
+		#FORMULAIRE_CONFIGURER_MESSAGERIE_AGENDA
+	</div>
+
+</div>
+
+<div class='contenu_notifications'>
+	<h3><:titre_config_contenu_notifications:></h3>
 <?php
 	include_spip('inc/presentation');
 
-	$messagerie_agenda = charger_fonction('messagerie_agenda', 'configuration');
-
 	$annonces = charger_fonction('annonces', 'configuration');
-
-	$res = "";
-
-
-
-	/*
-	 * Inscriptions de redacteurs et visiteurs depuis le site public
-	 * (la balise FORMULAIRE_INSCRIPTION sert au deux)
-	 */
-
-	$res.= "<div class='contenu_prive'>";
-
-
-	$res.= "<h3>"._T('titre_config_contenu_prive')."</h3>\n";
-
-	$res.= $messagerie_agenda();
-
-	$res.= "</div>";
-
-	$res.= "<div class='contenu_notifications'>";
-
-	/*
-	 * mails automatiques
-	 *
-	 */
-	$res.= "<h3>"._T('titre_config_contenu_notifications')."</h3>\n";
-
+	$res.= "";
 	$res.=  $annonces();
 
-	$res.= "</div>";
 	echo $res;
 ?>
+</div>
