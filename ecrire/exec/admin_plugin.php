@@ -52,15 +52,8 @@ function exec_admin_plugin_dist($retour='') {
 	$quoi = _request('voir');
 	$quoi = $quoi ? $quoi : 'actifs';
 
-	echo gros_titre(_T('icone_admin_plugin'),'',false);
-	echo barre_onglets("plugins", $quoi=='actifs'?"plugins_actifs":"admin_plugin");
-
 	echo debut_gauche('plugin',true);
-	echo debut_boite_info(true);
-	$s = "";
-	$s .= _T('info_gauche_admin_tech');
-	echo $s;
-	echo fin_boite_info(true);
+	echo recuperer_fond('prive/squelettes/navigation/page-configurer',array());
 
 	// la valeur de retour de la fonction ci-dessus n'est pas compatible
 	// avec ce que fait actualise_plugins_actifs, il faut recalculer. A revoir.
@@ -74,6 +67,8 @@ function exec_admin_plugin_dist($retour='') {
 	);
 
 	echo debut_droite('plugin', true);
+	echo gros_titre(_T('icone_admin_plugin'),'',false);
+	echo barre_onglets("plugins", $quoi=='actifs'?"plugins_actifs":"admin_plugin");
 
 	// message d'erreur au retour d'un operation
 	if (_request('erreur')){

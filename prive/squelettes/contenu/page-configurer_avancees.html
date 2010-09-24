@@ -1,0 +1,28 @@
+[(#AUTORISER{configurer,interactions}|interdire_acces)]
+<h1><:onglet_fonctions_avances:></h1>
+
+<?php
+	include_spip('inc/presentation');
+
+	$reducteur = charger_fonction('reducteur', 'configuration');
+	$avertisseur = charger_fonction('avertisseur', 'configuration');
+	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
+	$relayeur = charger_fonction('relayeur', 'configuration');
+	$moderniseur_html = charger_fonction('moderniseur_html', 'configuration');
+
+	echo
+
+	  $reducteur(), // Creation automatique de vignettes
+
+	  $avertisseur(), // Notification de modification des articles
+
+	  $previsualiseur(), // Previsualisation sur le site public
+
+	  $relayeur(_request('retour_proxy')), // Proxy pour syndication & doc
+
+	  $moderniseur_html(), // Selection de la version max de HTML (4 ou 5)
+
+	'';
+
+
+?>

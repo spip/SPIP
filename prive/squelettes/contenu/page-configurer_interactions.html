@@ -1,0 +1,51 @@
+[(#AUTORISER{configurer,interactions}|interdire_acces)]
+<h1><:onglet_interactivite:></h1>
+
+<?php
+	include_spip('inc/presentation');
+
+	$redacteurs = charger_fonction('redacteurs', 'configuration');
+	$visiteurs = charger_fonction('visiteurs', 'configuration');
+
+	$messagerie_agenda = charger_fonction('messagerie_agenda', 'configuration');
+
+	$annonces = charger_fonction('annonces', 'configuration');
+
+	$res = "<div class='contenu_public'>";
+
+
+	$res.= "<h3>"._T('titre_config_contenu_public')."</h3>\n";
+
+
+
+	$res.= "</div>";
+
+	$res.= "<div class='contenu_prive'>";
+
+	/*
+	 * Inscriptions de redacteurs et visiteurs depuis le site public
+	 * (la balise FORMULAIRE_INSCRIPTION sert au deux)
+	 */
+	$res.=  $redacteurs() .  $visiteurs() . "<br />";
+
+
+
+	$res.= "<h3>"._T('titre_config_contenu_prive')."</h3>\n";
+
+	$res.= $messagerie_agenda();
+
+	$res.= "</div>";
+
+	$res.= "<div class='contenu_notifications'>";
+
+	/*
+	 * mails automatiques
+	 *
+	 */
+	$res.= "<h3>"._T('titre_config_contenu_notifications')."</h3>\n";
+
+	$res.=  $annonces();
+
+	$res.= "</div>";
+	echo $res;
+?>

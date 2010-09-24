@@ -115,10 +115,8 @@ ecrire/exec/brouteur.php -text
 ecrire/exec/brouteur_frame.php -text
 ecrire/exec/charger_plugin.php -text
 ecrire/exec/charger_plugin_descr.php -text
-ecrire/exec/config_contenu.php -text
 ecrire/exec/config_fonctions.php -text
 ecrire/exec/configuration.php -text
-ecrire/exec/configurer_contenu.php -text
 ecrire/exec/configurer_moderniseur_html.php -text
 ecrire/exec/configurer_previsualiseur.php -text
 ecrire/exec/configurer_relayeur.php -text
@@ -715,7 +713,10 @@ prive/squelettes/contenu/page-admin_vider.html -text
 prive/squelettes/contenu/page-breves.html -text
 prive/squelettes/contenu/page-charte.html -text
 prive/squelettes/contenu/page-configurer.html -text
+prive/squelettes/contenu/page-configurer_avancees.html -text
+prive/squelettes/contenu/page-configurer_contenu.html -text
 prive/squelettes/contenu/page-configurer_identite.html -text
+prive/squelettes/contenu/page-configurer_interactions.html -text
 prive/squelettes/contenu/page-configurer_langage.html -text
 prive/squelettes/contenu/page-configurer_langue.html -text
 prive/squelettes/contenu/page-configurer_multilang.html -text
