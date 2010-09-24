@@ -12,11 +12,12 @@
 	#FORMULAIRE_CONFIGURER_BREVES
 </div>
 
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_LOGOS
+</div>
+
 <?php
 include_spip('inc/presentation');
-
-	$logos = charger_fonction('logos', 'configuration');
-	echo $logos();
 
 	$documents = charger_fonction('documents', 'configuration');
 	echo $documents();
