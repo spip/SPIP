@@ -153,7 +153,7 @@ function exec_admin_plugin_dist($retour='') {
 	if ($quoi=='actifs')
 		echo affiche_les_extensions(liste_chemin_plugin_actifs(_DIR_EXTENSIONS));
 	echo "</div>";
-	
+
 	echo 	http_script("
 	jQuery(function(){
 		jQuery('.plugins li.item a[rel=info]').click(function(){
