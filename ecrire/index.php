@@ -47,6 +47,9 @@ if (autoriser_sans_cookie($exec)) {
 // initialiser a la langue par defaut
 include_spip('inc/lang');
 utiliser_langue_visiteur();
+// forcer la langue de l'utilisateur pour les squelettes
+$forcer_lang = true;
+
 
 if (_request('action') OR _request('var_ajax') OR _request('formulaire_action')){
 	// Charger l'aiguilleur qui va mettre sur la bonne voie les traitements derogatoires
