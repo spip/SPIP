@@ -179,12 +179,11 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''))
 	  ;
 
-	$discuter = charger_fonction('discuter', 'inc');
-	$onglet_discuter = $discuter($id_syndic, 'sites', 'id_syndic');
 	$onglet_documents = "" ;
 	$onglet_interactivite = "";
 
 	echo
+	  pipeline('afficher_fiche_objet',array('args'=>array('type'=>'site','id'=>$id_syndic),'data'=>
 	  "<div class='fiche_objet'>"
 	  . $haut
 	  . afficher_onglets_pages(array(
@@ -192,20 +191,19 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	  	'props' => _T('onglet_proprietes'),
 	  	'docs' => _T('onglet_documents'),
 	  	'interactivite' => _T('onglet_interactivite'),
-	  	'discuter' => _T('onglet_discuter')),
+			),
 	  _INTERFACE_ONGLETS?
 	  array(
 	    'voir'=>$onglet_contenu,
 	    'props'=>$onglet_proprietes,
 	    'docs'=>$onglet_documents,
 	    'interactivite'=>$onglet_interactivite,
-	    'discuter'=>$onglet_discuter)
+			)
 	  :array(
 	    'props'=>$onglet_proprietes,
 	    'voir'=>$onglet_contenu	    )
 	   )
-	  . "</div>"
-	  . (_INTERFACE_ONGLETS?"":$onglet_discuter);
+	  . "</div>"));
 }
 
 // http://doc.spip.org/@options_moderation

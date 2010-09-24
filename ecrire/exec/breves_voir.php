@@ -151,34 +151,31 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 
 	$onglet_interactivite = "";
 
-	$discuter = charger_fonction('discuter', 'inc');
-	$onglet_discuter = $discuter($id_breve, 'breves_voir', 'id_breve');
-
 	echo debut_droite('', true)
-	  . "<div class='fiche_objet'>"
-	  . $haut
-	  . afficher_onglets_pages(array(
-	  	'voir' => _T('onglet_contenu'),
-	  	'props' => _T('onglet_proprietes'),
-	  	'docs' => _T('onglet_documents'),
-	  	'interactivite' => _T('onglet_interactivite'),
-	  	'discuter' => _T('onglet_discuter')),
-	  _INTERFACE_ONGLETS?
-	  array(
-	    'props'=>$onglet_proprietes,
-	    'voir'=>$onglet_contenu,
-	    'docs'=>$onglet_documents,
-	    'interactivite'=>$onglet_interactivite,
-	    'discuter'=>$onglet_discuter)
-	    :
-	  array(
-	    'props'=>$onglet_proprietes,
-	    'voir'=>$onglet_contenu)
-	  )
-	  . "</div>"
-	  . (_INTERFACE_ONGLETS?"":$onglet_discuter)
-	  . fin_gauche()
-	  . fin_page();
+	  . pipeline('afficher_fiche_objet',array('args'=>array('type'=>'breve','id'=>$id_breve),'data'=>
+			"<div class='fiche_objet'>"
+			. $haut
+			. afficher_onglets_pages(array(
+				'voir' => _T('onglet_contenu'),
+				'props' => _T('onglet_proprietes'),
+				'docs' => _T('onglet_documents'),
+				'interactivite' => _T('onglet_interactivite'),
+				),
+			_INTERFACE_ONGLETS?
+			array(
+				'props'=>$onglet_proprietes,
+				'voir'=>$onglet_contenu,
+				'docs'=>$onglet_documents,
+				'interactivite'=>$onglet_interactivite,
+				)
+				:
+			array(
+				'props'=>$onglet_proprietes,
+				'voir'=>$onglet_contenu)
+			)
+			. "</div>"))
+		. fin_gauche()
+		. fin_page();
 	}
 }
 
