@@ -848,11 +848,11 @@ function tester_url_ecrire($nom){
 	// tester si c'est une page en squelette
 	if (find_in_path('prive/squelettes/contenu/' . $nom . '.html')
 		OR find_in_path('prive/squelettes/contenu/page-' . $nom . '.html'))
-		return true; // ne pas essayer de le charger !
+		return 'fond';
 	elseif (find_in_path('prive/exec/' . $nom . '.html'))
 		// compat version precedente
-		return true; // ne pas essayer de le charger !
-	return charger_fonction($nom,'exec',true);
+		return 'fond_monobloc';
+	return charger_fonction($nom,'exec',true)?$nom:'';
 }
 
 // Fonction codant et decodant les URLS des objets SQL mis en page par SPIP
