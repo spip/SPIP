@@ -709,7 +709,6 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 			$type = substr($type,$p+1);
 		}
 		$soustype = strtolower($type);
-		if ($soustype == 'sites') $soustype = 'syndication' ; # alias
 
 		if (!isset($GLOBALS["table_des_tables"][$soustype]))
 			$soustype = $type;
