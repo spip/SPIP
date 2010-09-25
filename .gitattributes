@@ -355,14 +355,11 @@ prive/contenu/article.html -text
 prive/contenu/breve.html -text
 prive/contenu/item_rss_plugin.html -text
 prive/contenu/rubrique.html -text
-prive/contenu/site.html -text
-prive/contenu/syndic_article.html -text
 prive/editer/article.html -text
 prive/editer/auteur.html -text
 prive/editer/breve.html -text
 prive/editer/logo.html -text
 prive/editer/rubrique.html -text
-prive/editer/site.html -text
 prive/formulaires/configurer_articles.html -text
 prive/formulaires/configurer_articles.php -text
 prive/formulaires/configurer_breves.html -text
@@ -390,8 +387,6 @@ prive/formulaires/configurer_redacteurs.html -text
 prive/formulaires/configurer_redacteurs.php -text
 prive/formulaires/configurer_rubriques.html -text
 prive/formulaires/configurer_rubriques.php -text
-prive/formulaires/configurer_sites.html -text
-prive/formulaires/configurer_sites.php -text
 prive/formulaires/configurer_transcodeur.html -text
 prive/formulaires/configurer_transcodeur.php -text
 prive/formulaires/configurer_visiteurs.html -text
@@ -406,9 +401,6 @@ prive/formulaires/editer_logo.html -text
 prive/formulaires/editer_logo.php -text
 prive/formulaires/editer_rubrique.html -text
 prive/formulaires/editer_rubrique.php -text
-prive/formulaires/editer_site.html -text
-prive/formulaires/editer_site.php -text
-prive/formulaires/editer_site_fonctions.php -text
 prive/formulaires/inc-logo_auteur.html -text
 prive/formulaires/login.php -text
 prive/formulaires/selecteur_groupe_mot.html -text
@@ -655,8 +647,6 @@ prive/infos/auteur.html -text
 prive/infos/breve.html -text
 prive/infos/breve_fonctions.php -text
 prive/infos/rubrique.html -text
-prive/infos/site.html -text
-prive/infos/site_fonctions.php -text
 prive/javascript/SearchHighlight.js -text
 prive/javascript/ajaxCallback.js -text
 prive/javascript/articles_tous_edite.js -text
@@ -678,9 +668,6 @@ prive/listes/auteurs.html -text
 prive/listes/auteurs_fonctions.php -text
 prive/listes/breves.html -text
 prive/listes/rubriques.html -text
-prive/listes/syndic.html -text
-prive/listes/syndic_articles.html -text
-prive/listes/syndic_articles_fonctions.php -text
 prive/listes/visiteurs.html -text
 prive/listes/visiteurs_fonctions.php -text
 prive/minipres.css -text
