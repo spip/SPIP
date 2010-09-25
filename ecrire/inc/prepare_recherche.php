@@ -47,8 +47,7 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 	// si on n'a pas encore traite les donnees dans une boucle precedente
 	if ($rechercher) {
 		//$tables = liste_des_champs();
-		$x = preg_replace(',s$,', '', $table); // eurk
-		if ($x == 'syndic') $x = 'site';
+		$x = objet_type($table);
 		$points = recherche_en_base($recherche,
 			$x,
 			array(
