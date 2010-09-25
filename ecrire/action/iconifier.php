@@ -12,7 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_iconifier_dist
+/**
+ * L'entree par l'action ne sert plus qu'a une retro compat eventuelle
+ * le #FORMULAIRE_EDITER_LOGO utilise action_spip_image_ajouter_dist
+ */
 function action_iconifier_dist()
 {
 	include_spip('inc/actions');

@@ -278,6 +278,7 @@
 	<pipeline><nom>lister_tables_noerase</nom><action></action></pipeline>
 	<pipeline><nom>lister_tables_noexport</nom><action></action></pipeline>
 	<pipeline><nom>lister_tables_noimport</nom><action></action></pipeline>
+	<pipeline><nom>libeller_logo</nom><action></action></pipeline>
 	<pipeline><nom>nettoyer_raccourcis_typo</nom><action></action></pipeline>
 	<pipeline><nom>notifications</nom><action></action></pipeline>
 	<pipeline><nom>objet_compte_enfants</nom><action></action></pipeline>

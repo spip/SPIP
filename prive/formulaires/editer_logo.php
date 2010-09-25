@@ -16,9 +16,8 @@ global $logo_libelles;
 $logo_libelles['article'] = _T('logo_article').aide ("logoart");
 $logo_libelles['auteur'] = _T('logo_auteur').aide ("logoart");
 $logo_libelles['breve'] = _T('logo_breve').aide ("breveslogo");
-$logo_libelles['syndic'] = _T('logo_site')." ".aide ("rublogo");
-$logo_libelles['mot'] = _T('logo_mot_cle').aide("breveslogo");
-$logo_libelles['groupe'] = _T('logo_groupe').aide("breveslogo");
+// utilise pour le logo du site, donc doit rester ici
+$logo_libelles['site'] = _T('logo_site')." ".aide ("rublogo");
 $logo_libelles['rubrique'] = _T('logo_rubrique')." ".aide ("rublogo");
 $logo_libelles['racine'] = _T('logo_standard_rubrique')." ".aide ("rublogo");
 
@@ -48,21 +47,20 @@ $logo_libelles['racine'] = _T('logo_standard_rubrique')." ".aide ("rublogo");
 function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $options=array()){
 	// pas dans une boucle ? formulaire pour le logo du site
 	// dans ce cas, il faut chercher un 'siteon0.ext'
-	if (!$objet) {
-		$objet = 'syndic';
-		$_id_objet = 'site';
-	}
-	else {
-		if ($objet=='site') $objet = 'syndic';
-		$_id_objet = id_table_objet($objet);
-	}
+	if (!$objet) $objet = 'site';
+
+	$objet = objet_type($objet);
+	$_id_objet = id_table_objet($objet);
 
 	if (!is_array($options))
 		$options = unserialize($options);
 
 	if (!isset ($options['titre'])) {
 		$img = balise_img(chemin_image('image-24.png'), "", 'cadre-icone');
-		$options['titre'] = $img . $GLOBALS['logo_libelles'][($id_objet OR $objet != 'rubrique') ? $objet : 'racine'];
+		$libelles = pipeline('libeller_logo',$GLOBALS['logo_libelles']);
+		$libelle = (($id_objet OR $objet != 'rubrique') ? $objet : 'racine');
+		$libelle = (isset($libelles[$libelle])?$libelles[$libelle]:$libelles['site']);
+		$options['titre'] = $img . $libelle;
 	}
 	if (!isset ($options['editable']))
 		$options['editable'] = autoriser('iconifier',$objet,$id_objet);
@@ -143,10 +141,10 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour=''){
 	
 	// pas dans une boucle ? formulaire pour le logo du site
 	// dans ce cas, il faut chercher un 'siteon0.ext'	
-	if (!$objet)
-		$_id_objet = 'site';
-	else
-		$_id_objet = id_table_objet($objet);
+	if (!$objet) $objet = 'site';
+
+	$objet = objet_type($objet);
+	$_id_objet = id_table_objet($objet);
 
 	// supprimer l'ancien logo puis copier le nouveau
 	include_spip('inc/chercher_logo');
