@@ -206,12 +206,7 @@ function calculer_rubriques_publiees() {
 	$r = sql_select("R.id_rubrique AS id, max(A.date_heure) AS date_h", "spip_rubriques AS R, spip_breves AS A", "R.id_rubrique = A.id_rubrique AND R.date_tmp <= A.date_heure AND A.statut='publie' ", "R.id_rubrique");
 	while ($row = sql_fetch($r))
 	  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']), "id_rubrique=".$row['id']);
-	
-	// Publier et dater les rubriques qui ont un site publie
-	$r = sql_select("R.id_rubrique AS id, max(A.date) AS date_h", "spip_rubriques AS R, spip_syndic AS A", "R.id_rubrique = A.id_rubrique AND R.date_tmp <= A.date AND A.statut='publie' ", "R.id_rubrique");
-	while ($row = sql_fetch($r))
-		sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']),"id_rubrique=".$row['id']);
-	
+		
 	// point d'entree pour permettre a des plugins de gerer le statut
 	// autrement (par ex: toute rubrique est publiee des sa creation)
 	// Ce pipeline fait ce qu'il veut, mais s'il touche aux statuts/dates
