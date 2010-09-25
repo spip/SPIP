@@ -246,9 +246,7 @@ function table_objet($type) {
 				'img' => 'documents',
 				'emb' => 'documents',
 				'message' => 'messages',
-				'petition' => 'petitions',
 				'rubrique' => 'rubriques',
-				'signature' => 'signatures',
 				'type_document' => 'types_documents', # hum
 				'extension' => 'types_documents' # hum
 			));
