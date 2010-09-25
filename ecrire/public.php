@@ -100,14 +100,6 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 			exit; // le hit est fini !
 	}
 
-	// si signature de petition, l'enregistrer avant d'afficher la page
-	// afin que celle-ci contienne la signature
-
-	if (isset($_GET['var_confirm'])) {
-		$reponse_confirmation = charger_fonction('reponse_confirmation','formulaires/signature');
-		$reponse_confirmation($_GET['var_confirm']);
-	}
-
 	// Il y a du texte a produire, charger le metteur en page
 	include_spip('public/assembler');
 	$page = assembler($fond, _request('connect'));
