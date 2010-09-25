@@ -130,7 +130,6 @@ function depublier_rubrique_if($id_rubrique,$date=null){
 	$compte = array(
 		'articles' => sql_countsel("spip_articles",  "id_rubrique=$id_rubrique AND statut='publie'$postdates"),
 		'breves' => sql_countsel("spip_breves",  "id_rubrique=$id_rubrique AND statut='publie'"),
-		'sites' => sql_countsel("spip_syndic",  "id_rubrique=$id_rubrique AND statut='publie'"),
 		'rubriques' => sql_countsel("spip_rubriques",  "id_parent=$id_rubrique AND statut='publie'"),
 		'documents' => sql_countsel("spip_documents_liens",  "id_objet=$id_rubrique AND objet='rubrique'")
 	);
