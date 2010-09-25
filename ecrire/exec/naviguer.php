@@ -282,7 +282,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 			. fin_cadre_couleur_foncee(true);
 
 	$n = sql_countsel('spip_rubriques');
-	$bouton_article = $bouton_breves = $bouton_sites = "";
+	$bouton_article = $bouton_breves = "";
 	if ($n && !_INTERFACE_ONGLETS) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
 		  $bouton_article .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","new", $spip_lang_right)
@@ -291,10 +291,6 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent)))
 		  $bouton_breves .= icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.png","new", $spip_lang_right)
-		  . "<br class='nettoyeur' />";
-
-		if (autoriser('creersitedans','rubrique',$id_rubrique))
-			$bouton_sites .= icone_inline(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.png", "new", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
 	}
 
@@ -322,12 +318,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	$res .= $lister_objets('breves',array('titre'=>_T('icone_ecrire_nouvel_article'),'where'=>"statut != 'prop' AND statut != 'prepa'", 'id_rubrique'=>$id_rubrique,'par'=>'date_heure'));
   $res .= $bouton_breves;
 
-	//// Les sites references
 
-	if ($GLOBALS['meta']["activer_sites"] == 'oui') {
-		$res .= $lister_objets('sites',array('titre'=>_T('titre_sites_references_rubrique') ,'where'=>"statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'id_rubrique'=>$id_rubrique,'par'=>'nom_site'));
- 		$res .= $bouton_sites;
-	}
 	return $res;
 }
 
