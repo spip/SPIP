@@ -456,12 +456,10 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	); 
 	// Le numero du modele est mis dans l'environnement
 	// d'une part sous l'identifiant "id"
-	// et d'autre part sous l'identifiant de la cle primaire supposee
-	// par la fonction table_objet, 
-	// qui ne marche vraiment que pour les tables std de SPIP
-	// (<site1> =>> site =>> id_syndic =>> id_syndic=1)
-	$_id = 'id_' . table_objet($type);
-	if (preg_match('/s$/',$_id)) $_id = substr($_id,0,-1);
+	// et d'autre part sous l'identifiant de la cle primaire
+	// par la fonction id_table_objet,
+	// (<article1> =>> article =>> id_article =>> id_article=1)
+	$_id = id_table_objet($type);
 	$contexte['id'] = $contexte[$_id] = $id;
 
 	if (isset($class))
