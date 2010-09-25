@@ -411,8 +411,8 @@ function balise_LESAUTEURS_dist ($p) {
 
 	// Si le champ n'existe pas (cas de spip_articles), on applique
 	// le modele lesauteurs.html en passant id_article dans le contexte;
-	// dans le cas contraire on prend le champ 'lesauteurs' (cas de
-	// spip_syndic_articles)
+	// dans le cas contraire on prend le champ 'lesauteurs'
+	// (cf extension sites/)
 	if ($_lesauteurs
 	AND $_lesauteurs != '@$Pile[0][\'lesauteurs\']') {
 		$p->code = "safehtml($_lesauteurs)";
