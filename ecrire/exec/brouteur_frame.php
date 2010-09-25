@@ -202,20 +202,22 @@ function exec_brouteur_frame_dist() {
 				echo "\n<div class='plan-articles'>", $res, "</div>";
 
 			}
-	
-			$result=sql_select("*", "spip_syndic", "id_rubrique=$id_rubrique AND statut!='refuse'", "", "nom_site");
-			$res = '';
-			while($row=sql_fetch($result)){
-				$id_syndic=$row['id_syndic'];
-				if (autoriser('voir','site',$id_syndic)){
-					$titre = typo($row['nom_site']);
-					$statut = $row['statut'];
-					$h = generer_url_ecrire('sites',"id_syndic=$id_syndic");
-					$res .= "\n<div class='brouteur_icone_site'><b><a href='javascript:window.parent.location=\"$h\"'>$titre</a></b></div>";
+
+			if (test_plugin_actif('sites')) {
+				$result=sql_select("*", "spip_syndic", "id_rubrique=$id_rubrique AND statut!='refuse'", "", "nom_site");
+				$res = '';
+				while($row=sql_fetch($result)){
+					$id_syndic=$row['id_syndic'];
+					if (autoriser('voir','site',$id_syndic)){
+						$titre = typo($row['nom_site']);
+						$statut = $row['statut'];
+						$h = generer_url_ecrire('sites',"id_syndic=$id_syndic");
+						$res .= "\n<div class='brouteur_icone_site'><b><a href='javascript:window.parent.location=\"$h\"'>$titre</a></b></div>";
+					}
 				}
+				if ($res)
+					echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('icone_sites_references')."</b></div>", $res;
 			}
-			if ($res)
-				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('icone_sites_references')."</b></div>", $res;
 		}
 
 		// en derniere colonne, afficher articles et breves
