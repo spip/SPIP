@@ -105,7 +105,7 @@ function assembler($fond, $connect='') {
 					else if ($fond == ''
 					OR $fond == 'type_urls' /* compat avec htaccess 2.0.0 */
 					)
-						$fond = ($type === 'syndic') ? 'site' : $type;
+						$fond = $type;
 					if (isset($ncontexte))
 						$contexte = $ncontexte;
 				}
