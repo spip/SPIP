@@ -233,27 +233,22 @@ function _q ($a) {
 // http://doc.spip.org/@table_objet
 function table_objet($type) {
 	static $surnoms = null;
+	$type = preg_replace(',^spip_|^id_|s$,', '', $type);
 	if (!$type) return;
 	if (!$surnoms){
 		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
 		$surnoms = pipeline('declarer_tables_objets_surnoms',
 			array(
-				'article' => 'articles',
-				'auteur' => 'auteurs',
-				'breve' => 'breves',
-				'document' => 'documents',
 				'doc' => 'documents', # pour les modeles
 				'img' => 'documents',
 				'emb' => 'documents',
-				'message' => 'messages',
-				'rubrique' => 'rubriques',
 				'type_document' => 'types_documents', # hum
 				'extension' => 'types_documents' # hum
 			));
 	}
 	return isset($surnoms[$type])
 		? $surnoms[$type]
-		: preg_replace(',ss$,', 's', $type."s");
+		: rtrim($type,'s')."s";
 }
 
 // http://doc.spip.org/@table_objet_sql
@@ -270,7 +265,7 @@ function table_objet_sql($type) {
 
 // http://doc.spip.org/@id_table_objet
 function id_table_objet($type,$serveur='') {
-	$type = preg_replace(',^spip_|s$,', '', $type);
+	$type = objet_type($type);
 	if ($type == 'type')
 		return 'extension';
 	else {
@@ -284,12 +279,22 @@ function id_table_objet($type,$serveur='') {
 
 // http://doc.spip.org/@objet_type
 function objet_type($table_objet){
+	static $surnoms = null;
+	if (!$table_objet) return;
+	if (!$surnoms)
+		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
+		$surnoms = pipeline('declarer_type_surnoms', array());
+
 	// scenario de base
 	// le type est decline a partir du nom de la table en enlevant le prefixe eventuel
 	// et la marque du pluriel
-	$type = preg_replace(',^spip_|s$,', '', $table_objet);
+	// on accepte id_xx en entree aussi
+	$type = preg_replace(',^spip_|^id_|s$,', '', $table_objet);
+	if (isset($surnoms[$type]))
+		$type = $surnoms[$type];
 	// si le type redonne bien la table c'est bon
-	if ( (table_objet($type)==$table_objet)
+	if ( $type==$table_objet
+		OR (table_objet($type)==$table_objet)
 	  OR (table_objet_sql($type)==$table_objet))
 	  return $type;
 
@@ -300,13 +305,19 @@ function objet_type($table_objet){
 	// une declaration jeu => jeux, journal => journaux
 	// dans le pipeline declarer_tables_objets_surnoms
 	$trouver_table = charger_fonction('trouver_table', 'base');
-	if ($desc = $trouver_table($table_objet)
+	if (
+		($desc = $trouver_table($table_objet)
+		 OR $desc = $trouver_table(table_objet($type)))
+					
 	  AND isset($desc['key']["PRIMARY KEY"])){
 		$primary = $desc['key']["PRIMARY KEY"];
 		$primary = explode(',',$primary);
 		$primary = reset($primary);
 		$type = preg_replace(',^id_,', '', $primary);
+		$type = preg_replace(',^spip_|^id_|s$,', '', table_objet($type));
 	}
+	if (isset($surnoms[$type]))
+		$type = $surnoms[$type];
 	// on a fait ce qu'on a pu
 	return $type;
 }
