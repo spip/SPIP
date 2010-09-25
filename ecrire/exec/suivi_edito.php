@@ -28,35 +28,6 @@ function encours_suivi()
 	//
 	$res .= $lister_objets('breves',array('titre'=>afficher_plus_info(generer_url_ecrire('breves'))._T('info_breves_valider'),'statut'=>array('prepa','prop'), 'par'=>'date_heure'));
 
-	//
-	// Les sites references a valider
-	//
-	if ($GLOBALS['meta']['activer_sites'] != 'non') {
-		$res .= $lister_objets('sites',array('titre'=>afficher_plus_info(generer_url_ecrire('sites_tous')). _T('info_site_valider') ,'statut'=>'prop', 'par'=>'nom_site'));
-	}
-
-	if ($GLOBALS['visiteur_session']['statut'] == '0minirezo') {
-		//
-		// Les sites a probleme
-		//
-		if ($GLOBALS['meta']['activer_sites'] != 'non') {
-		$res .= $lister_objets('sites',array('titre'=>afficher_plus_info(generer_url_ecrire('sites_tous')). _T('avis_sites_syndiques_probleme') ,'statut'=>'publie', 'syndication'=>array('off','sus'), 'par'=>'nom_site'));
-	}
-
-	// Les articles syndiques en attente de validation
-		$cpt = sql_countsel("spip_syndic_articles", "statut='dispo'");
-		if ($cpt)
-			$res .= "\n<br /><small><a href='"
-			. generer_url_ecrire("sites_tous","")
-			. "' style='color: black;'>"
-			. $cpt
-			. " "
-			. _T('info_liens_syndiques_1')
-			. " "
-			. _T('info_liens_syndiques_2')
-			. "</a></small>";
-
-	}
 
 	return pipeline('accueil_encours',$res);
 
