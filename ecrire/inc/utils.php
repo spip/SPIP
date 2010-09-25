@@ -868,7 +868,7 @@ function tester_url_ecrire($nom){
 function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NULL, $type=NULL)
 {
 	if ($public === NULL) $public = !test_espace_prive();
-	if ($entite=='syndic') $entite='site'; // cas particulier d'appels sur objet/id_objet...
+	$entite = objet_type($entite); // cas particulier d'appels sur objet/id_objet...
 
 	if (!$public) {
 		if (!$entite) return '';
