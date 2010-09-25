@@ -41,9 +41,6 @@ function liste_des_champs() {
 			'document' => array(
 				'titre' => 3, 'descriptif' => 1, 'fichier' => 1
 			),
-			'syndic_article' => array(
-				'titre' => 5, 'descriptif' => 1
-			),
 			'signature' => array(
 				'nom_email' => 2, 'ad_email' => 4,
 				'nom_site' => 2, 'url_site' => 4,

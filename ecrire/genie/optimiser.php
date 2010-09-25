@@ -152,21 +152,6 @@ function optimiser_base_disparus($attente = 86400) {
 	sql_delete("spip_breves", "statut='refuse' AND maj < $mydate");
 
 
-	//
-	// Sites
-	//
-
-	sql_delete("spip_syndic", "maj < $mydate AND statut = 'refuse'");
-
-
-	# les articles syndiques appartenant a des sites effaces
-	$res = sql_select("S.id_syndic AS id",
-		      "spip_syndic_articles AS S
-		        LEFT JOIN spip_syndic AS syndic
-		          ON S.id_syndic=syndic.id_syndic",
-			"syndic.id_syndic IS NULL");
-
-	$n+= optimiser_sansref('spip_syndic_articles', 'id_syndic', $res);
 
 
 	//

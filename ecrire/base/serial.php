@@ -195,62 +195,6 @@ $spip_types_documents_key = array(
 		"PRIMARY KEY"	=> "extension",
 		"KEY inclus"	=> "inclus");
 
-$spip_syndic = array(
-		"id_syndic"	=> "bigint(21) NOT NULL",
-		"id_rubrique"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_secteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"nom_site"	=> "text DEFAULT '' NOT NULL",
-		"url_site"	=> "text DEFAULT '' NOT NULL",
-		"url_syndic"	=> "text DEFAULT '' NOT NULL",
-		"descriptif"	=> "text DEFAULT '' NOT NULL",
-#		"url_propre"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
-		"maj"	=> "TIMESTAMP",
-		"syndication"	=> "VARCHAR(3) DEFAULT '' NOT NULL",
-		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
-		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"date_syndic"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"date_index"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"moderation"	=> "VARCHAR(3) DEFAULT 'non'",
-		"miroir"	=> "VARCHAR(3) DEFAULT 'non'",
-		"oubli"	=> "VARCHAR(3) DEFAULT 'non'",
-		"resume"	=> "VARCHAR(3) DEFAULT 'oui'"
-);
-
-$spip_syndic_key = array(
-		"PRIMARY KEY"	=> "id_syndic",
-		"KEY id_rubrique"	=> "id_rubrique",
-		"KEY id_secteur"	=> "id_secteur",
-		"KEY statut"	=> "statut, date_syndic",
-#		"KEY url_propre"	=> "url_propre"
-);
-$spip_syndic_join = array(
-		"id_syndic"=>"id_syndic",
-		"id_rubrique"=>"id_rubrique");
-		
-$spip_syndic_articles = array(
-		"id_syndic_article"	=> "bigint(21) NOT NULL",
-		"id_syndic"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"titre"	=> "text DEFAULT '' NOT NULL",
-		"url"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
-		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"lesauteurs"	=> "text DEFAULT '' NOT NULL",
-		"maj"	=> "TIMESTAMP",
-		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
-		"descriptif"	=> "text DEFAULT '' NOT NULL",
-		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
-		"url_source" => "TINYTEXT DEFAULT '' NOT NULL",
-		"source" => "TINYTEXT DEFAULT '' NOT NULL",
-		"tags" => "TEXT DEFAULT '' NOT NULL");
-
-$spip_syndic_articles_key = array(
-		"PRIMARY KEY"	=> "id_syndic_article",
-		"KEY id_syndic"	=> "id_syndic",
-		"KEY statut"	=> "statut",
-		"KEY url"	=> "url");
-$spip_syndic_articles_join = array(
-		"id_syndic_article"=>"id_syndic_article",
-		"id_syndic"=>"id_syndic");
-
 /// Attention: mes_fonctions peut avoir deja defini cette variable
 /// il faut donc rajouter, mais pas reinitialiser
 
@@ -268,11 +212,7 @@ $tables_principales['spip_documents'] =
 	array('field' => &$spip_documents,  'key' => &$spip_documents_key, 'join' => &$spip_documents_join);
 $tables_principales['spip_types_documents']	=
 	array('field' => &$spip_types_documents, 'key' => &$spip_types_documents_key);
-$tables_principales['spip_syndic'] =
-	array('field' => &$spip_syndic, 'key' => &$spip_syndic_key, 'join' => &$spip_syndic_join);
-$tables_principales['spip_syndic_articles']	=
-	array('field' => &$spip_syndic_articles, 'key' => &$spip_syndic_articles_key, 'join' => &$spip_syndic_articles_join);
-	
+
 	$tables_principales = pipeline('declarer_tables_principales',$tables_principales);
 }
 
