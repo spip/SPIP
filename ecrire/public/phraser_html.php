@@ -501,15 +501,13 @@ function phraser_criteres($params, &$result) {
 			elseif ($param == 'plat') 
 				$result->modificateur['plat'] = true;
 
-	// Boucle hierarchie, analyser le critere id_article - id_rubrique
-	// - id_syndic, afin, dans les cas autres que {id_rubrique}, de
-	// forcer {tout} pour avoir la rubrique mere...
-
-			elseif (!strcasecmp($type, 'hierarchie') AND
-				($param == 'id_article' OR $param == 'id_syndic'))
-				$result->modificateur['tout'] = true;
-			elseif (!strcasecmp($type, 'hierarchie') AND ($param == 'id_rubrique'))
-				{;}
+			// Boucle hierarchie, analyser le critere id_rubrique ou non
+			// afin, dans les cas autres que {id_rubrique}, de
+			// forcer {tout} pour avoir la rubrique mere...
+			elseif (strcasecmp($type, 'hierarchie')==0) {
+				if ($param != 'id_rubrique')
+					$result->modificateur['tout'] = true;
+			}
 			else {
 			  // pas d'emplacement statique, faut un dynamique
 			  /// mais il y a 2 cas qui ont les 2 !
