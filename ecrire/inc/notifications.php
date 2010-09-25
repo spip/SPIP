@@ -147,12 +147,8 @@ function email_notification_forum ($t, $email) {
 
 		if ($t['statut'] == 'prive') # forum prive
 		{
-			if ($t['id_article'])
-				$url = generer_url_ecrire('articles', 'id_article='.$t['id_article']).'#id'.$id_forum;
-			else if ($t['id_breve'])
-				$url = generer_url_ecrire('breves_voir', 'id_breve='.$t['id_breve']).'#id'.$id_forum;
-			else if ($t['id_syndic'])
-				$url = generer_url_ecrire('sites', 'id_syndic='.$t['id_syndic']).'#id'.$id_forum;
+			if ($t['id_objet'])
+				$url = generer_url_entite($t['id_objet'], $t['objet'], '', '#id'.$id_forum, false);
 		}
 		else if ($t['statut'] == 'privrac') # forum general
 		{
@@ -175,14 +171,9 @@ function email_notification_forum ($t, $email) {
 			spip_log("forum $id_forum sans referent",'notifications');
 			$url = './';
 		}
-		if ($t['id_article']) {
-			$titre = sql_getfetsel("titre", "spip_articles", "id_article=".sql_quote($t['id_article']));
-		}
-		if ($t['id_message']) {
-			$titre = sql_getfetsel("titre", "spip_messages", "id_message=".sql_quote($t['id_message']));
-		}
+		if ($t['id_objet'])
+			$t['titre_source'] = generer_info_entite($t['id_objet'], $t['objet'], 'titre');
 
-		$t['titre_source'] = $titre;
 		$t['url'] = $url;
 
 		// detecter les url des liens du forum
