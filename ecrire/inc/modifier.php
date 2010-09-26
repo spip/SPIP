@@ -264,16 +264,6 @@ function revision_document($id_document, $c=false) {
 		$c);
 }
 
-// http://doc.spip.org/@revision_signature
-function revision_signature($id_signature, $c=false) {
-
-	return modifier_contenu('signature', $id_signature,
-		array(
-			'nonvide' => array('nom_email' => _T('info_sans_titre'))
-		),
-		$c);
-}
-
 
 // http://doc.spip.org/@revision_auteur
 function revision_auteur($id_auteur, $c=false) {
