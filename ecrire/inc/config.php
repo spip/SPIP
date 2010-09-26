@@ -473,11 +473,6 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 // http://doc.spip.org/@appliquer_modifs_config
 function appliquer_modifs_config($purger_skel=false) {
 
-	if (($i = _request('adresse_site'))!==NULL){
-		if (!strlen($i)) {$GLOBALS['profondeur_url']=_DIR_RESTREINT?0:1;$i = url_de_base();}
-		$_POST['adresse_site'] = preg_replace(",/?\s*$,", "", $i);
-	}
-
 	foreach(liste_metas() as $i => $v) {
 		if (($x =_request($i))!==NULL)
 			ecrire_meta($i, $x);
