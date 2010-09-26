@@ -74,7 +74,7 @@ function suivre_invalideur($cond, $modif=true) {
 	if (isset($objet))
 		ecrire_meta('derniere_modif_'.$objet, time());
 
-	// si $derniere_modif_invalide est un array('forum', 'signature')
+	// si $derniere_modif_invalide est un array('article', 'rubrique')
 	// n'affecter la meta que si un de ces objets est modifie
 	if (is_array($GLOBALS['derniere_modif_invalide'])) {
 		if (in_array($objet, $GLOBALS['derniere_modif_invalide']))
