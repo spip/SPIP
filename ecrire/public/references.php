@@ -346,22 +346,8 @@ function champs_traitements ($p) {
 	))
 		$ps = 'traiter_doublons_documents($doublons, '.$ps.')';
 
-	// Passer |safehtml sur les boucles "sensibles"
-	// sauf sur les champs dont on est surs
-	// ces exceptions doivent etre ventilees dans les plugins fonctionnels concernes
-	// dans la globale table_des_traitements
-	switch ($p->type_requete) {
-		case 'signatures':
-			$champs_surs = array(
-			'date', 'date_heure', 'statut', 'ip', 'url_article', 'maj', 'idx'
-			);
-			if (!in_array(strtolower($p->nom_champ), $champs_surs)
-			AND !preg_match(',^ID_,', $p->nom_champ))
-				$ps = 'safehtml('.$ps.')';
-			break;
-		default:
-			break;
-	}
+	// La protection des champs par |safehtml est assuree par les extensions
+	// dans la declaration des traitements des champs sensibles
 
 	// Remplacer enfin le placeholder %s par le vrai code de la balise
 	return str_replace('%s', $p->code, $ps);
