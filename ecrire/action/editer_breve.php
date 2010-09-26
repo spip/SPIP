@@ -121,7 +121,7 @@ function revisions_breves ($id_breve, $c=false) {
 	// Si la breve est publiee, invalider les caches et demander sa reindexation
 	$t = sql_getfetsel("statut", "spip_breves", "id_breve=$id_breve");
 	if ($t == 'publie') {
-		$invalideur = "id='id_breve/$id_breve'";
+		$invalideur = "id='breve/$id_breve'";
 		$indexation = true;
 	}
 
@@ -180,7 +180,7 @@ function revisions_breves ($id_breve, $c=false) {
 
 	// Invalider les caches
 	include_spip('inc/invalideur');
-	suivre_invalideur("id='id_breve/$id_breve'");
+	suivre_invalideur("id='breve/$id_breve'");
 
 	// Au besoin, changer le statut des rubriques concernees 
 	include_spip('inc/rubriques');

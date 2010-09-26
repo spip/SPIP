@@ -58,6 +58,8 @@ function taille_du_cache() {
 }
 
 // Invalider les caches lies a telle condition
+// les invalideurs sont de la forme 'objet/id_objet'
+// la condition est generalement "id='objet/id_objet'"
 // ici on se contente de noter la date de mise a jour dans les metas
 // http://doc.spip.org/@suivre_invalideur
 function suivre_invalideur($cond, $modif=true) {
@@ -65,11 +67,8 @@ function suivre_invalideur($cond, $modif=true) {
 		return;
 
 	// determiner l'objet modifie : forum, article, etc
-	if (preg_match(',id_([a-z]+),', $cond, $r))
-		$objet = $r[1];
-	// cas particulier des signatures
-	else if (strpos($cond, 'varia/pet'))
-		$objet = 'signature';
+	if (preg_match(',["\']([a-z_]+)[/"\'],', $cond, $r))
+		$objet = objet_type($r[1]);
 
 	// stocker la date_modif_$objet (ne sert a rien pour le moment)
 	if (isset($objet))
@@ -84,7 +83,6 @@ function suivre_invalideur($cond, $modif=true) {
 	// sinon, cas standard, toujours affecter la meta
 	else
 		ecrire_meta('derniere_modif', time());
-
 
 }
 
@@ -234,9 +232,7 @@ function supprime_invalideurs() { }
 // http://doc.spip.org/@maj_invalideurs
 function maj_invalideurs ($fichier, &$page) { }
 
-// pour les forums l'invalideur est : 'id_forum/a23'
-// pour les petitions et autres, l'invalideur est par exemple :
-// 'varia/pet60'
+// les invalideurs sont de la forme "objet/id_objet"
 // http://doc.spip.org/@insere_invalideur
 function insere_invalideur($inval, $fichier) { }
 
