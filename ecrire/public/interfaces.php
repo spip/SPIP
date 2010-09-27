@@ -182,17 +182,12 @@ function declarer_interfaces(){
 
 $table_des_tables['articles']='articles';
 $table_des_tables['auteurs']='auteurs';
-$table_des_tables['breves']='breves';
 $table_des_tables['documents']='documents';
 $table_des_tables['types_documents']='types_documents';
 $table_des_tables['rubriques']='rubriques';
 $table_des_tables['hierarchie']='rubriques';
 $table_des_tables['messages']='messages';
 
-$exceptions_des_tables['breves']['id_secteur']='id_rubrique';
-$exceptions_des_tables['breves']['date']='date_heure';
-$exceptions_des_tables['breves']['nom_site']='lien_titre';
-$exceptions_des_tables['breves']['url_site']='lien_url';
 
 $exceptions_des_tables['documents']['type_document']=array('types_documents'
 , 'titre');
@@ -201,7 +196,6 @@ $exceptions_des_tables['documents']['mime_type']=array('types_documents'
 , 'mime_type');
 
 
-$table_titre['breves']= 'titre , lang';
 $table_titre['articles']= 'titre, lang';
 $table_titre['rubriques']= 'titre, lang';
 $table_titre['messages']= "titre, '' AS lang";
@@ -210,7 +204,6 @@ $table_titre['documents']= "titre, fichier AS surnom, '' AS lang";
 
 $table_date['articles']='date';
 $table_date['auteurs']='date';
-$table_date['breves']='date_heure';
 $table_date['documents']='date';
 $table_date['types_documents']='date';
 $table_date['rubriques']='date';
@@ -225,8 +218,6 @@ $tables_jointures['spip_articles']['id_auteur']= 'auteurs_articles';
 $tables_jointures['spip_articles'][]= 'documents_liens';
 
 $tables_jointures['spip_auteurs'][]= 'auteurs_articles';
-
-$tables_jointures['spip_breves'][]= 'documents_liens';
 
 $tables_jointures['spip_documents'][]= 'documents_liens';
 $tables_jointures['spip_documents'][]= 'types_documents';
@@ -253,8 +244,6 @@ $table_des_traitements['DATE_NOUVEAUTES'][]= 'normaliser_date(%s)';
 $table_des_traitements['DESCRIPTIF'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['FICHIER']['documents']= 'get_spip_doc(%s)';
 $table_des_traitements['INTRODUCTION'][]= 'PtoBR('. _TRAITEMENT_RACCOURCIS .')';
-$table_des_traitements['LIEN_TITRE'][]= _TRAITEMENT_TYPO;
-$table_des_traitements['LIEN_URL'][]= 'vider_url(%s)';
 $table_des_traitements['MESSAGE'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['NOM_SITE_SPIP'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['NOM'][]= _TRAITEMENT_TYPO;

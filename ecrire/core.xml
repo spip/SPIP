@@ -24,10 +24,7 @@
 		<titre>info_rubriques</titre>		
 		<url>naviguer</url>
 	</bouton>
-	<bouton id='breves' parent="bando_edition">
-		<icone>images/breve-16.png</icone>
-		<titre>icone_breves</titre>
-	</bouton>
+
 	<bouton id='sites' parent="bando_edition">
 		<icone>images/site-16.png</icone>
 		<titre>icone_sites_references</titre>
@@ -166,12 +163,6 @@
 		<icone>images/site-new-16.png</icone>
 		<titre>icone_referencer_nouveau_site</titre>
 		<url>sites_edit</url>
-		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
-	</bouton>
-	<bouton id='breve_creer' parent="outils_rapides">
-		<icone>images/breve-new-16.png</icone>
-		<titre>icone_nouvelle_breve</titre>
-		<url>breves_edit</url>
 		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
 	</bouton>
 
