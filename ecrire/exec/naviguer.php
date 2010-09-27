@@ -267,11 +267,6 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	//
 	$encours .=  $lister_objets('articles',array('titre'=>_T('info_articles_proposes'),'statut'=>'prop', 'id_rubrique'=>$id_rubrique,'par'=>'date'));
 
-	//
-	// Les breves a valider
-	//
-	$encours .= $lister_objets('breves',array('titre'=>_T('info_breves_valider'),'statut'=>array('prepa','prop'),'id_rubrique'=>$id_rubrique, 'par'=>'date_heure'));
-
 
 	$encours = pipeline('rubrique_encours',array('args'=>array('type'=>'rubrique','id_objet'=>$id_rubrique),'data'=>$encours));
 
@@ -282,16 +277,12 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 			. fin_cadre_couleur_foncee(true);
 
 	$n = sql_countsel('spip_rubriques');
-	$bouton_article = $bouton_breves = "";
+	$bouton_article = "";
 	if ($n && !_INTERFACE_ONGLETS) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
 		  $bouton_article .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","new", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
 
-		$activer_breves = $GLOBALS['meta']["activer_breves"];
-		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent)))
-		  $bouton_breves .= icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.png","new", $spip_lang_right)
-		  . "<br class='nettoyeur' />";
 	}
 
 	//////////  Les articles en cours de redaction
@@ -312,11 +303,6 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		$res .=  $lister_objets('articles',array('titre'=>_T('info_tous_articles_refuses'),'statut'=>'refuse', 'id_rubrique'=>$id_rubrique,'par'=>_TRI_ARTICLES_RUBRIQUE));
 
   $res .= $bouton_article;
-
-	//// Les breves
-
-	$res .= $lister_objets('breves',array('titre'=>_T('icone_ecrire_nouvel_article'),'where'=>"statut != 'prop' AND statut != 'prepa'", 'id_rubrique'=>$id_rubrique,'par'=>'date_heure'));
-  $res .= $bouton_breves;
 
 
 	return $res;
