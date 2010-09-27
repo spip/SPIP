@@ -64,6 +64,9 @@ function menu_rubriques($complet = true){
 		  . $ret
 		  . "\n</ul>\n";
 	}
+	else
+		$ret = "<ul class='cols_1'>$ret\n</ul>\n";
+	
 	return $ret;
 }
 
