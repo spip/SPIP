@@ -92,7 +92,7 @@ function personnel_accueil($coockcookie)
 	. fin_cadre_relief(true);
 }
 
-// Cartouche du site, avec le nombre d'articles, breves et autres objets ajoutes par les plugins
+// Cartouche du site, avec le nombre d'articles et autres objets ajoutes par les plugins
 
 // http://doc.spip.org/@etat_base_accueil
 function etat_base_accueil()
@@ -142,32 +142,6 @@ function etat_base_accueil()
 		$res .= "</div>";
 	}
 
-	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_breves', '', 'statut', '','', "COUNT(*)<>0");
-
-	$cpt = array();
-	$cpt2 = array();
-	$defaut = $where ? '0/' : '';
-	while($row = sql_fetch($q)) {
-	  $cpt[$row['statut']] = $row['cnt'];
-	  $cpt2[$row['statut']] = $defaut;
-	}
- 
-	if ($cpt) {
-		if ($where) {
-			$q = sql_select("COUNT(*) AS cnt, statut", 'spip_breves', $where, "statut");
-			while($row = sql_fetch($q)) {
-				$r = $row['statut'];
-				$cpt2[$r] = intval($row['cnt']) . '/';
-			}
-		}
-		$res .= "<div class='accueil_informations breves verdana1'>";
-		$res .= afficher_plus_info(generer_url_ecrire("breves",""))."<b>"._T('info_breves_02')."</b>";
-		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'].$cpt['prop'] . '</li>';
-		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt2['publie'] .$cpt['publie'] . "</b>" .'</li>';
-		$res .= "</ul>";
-		$res .= "</div>";
-	}
 
 	$res .= "<div class='accueil_informations auteurs verdana1'>";
 	$res .= accueil_liste_participants();
