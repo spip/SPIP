@@ -746,9 +746,19 @@ function spip_sqlite_insertq($table, $couples=array(), $desc=array(), $serveur='
 	foreach ($couples as $champ => $val) {
 		$couples[$champ]= _sqlite_calculer_cite($val, $fields[$champ]);
 	}
-	
+
 	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
 	$couples = _sqlite_ajouter_champs_timestamp($table, $couples, $desc, $serveur);
+
+	// si aucun champ donne pour l'insertion, on en cherche un avec un DEFAULT
+	// sinon sqlite3 ne veut pas inserer
+	if (!count($couples)) {
+		foreach($fields as $champ=>$d)
+			if (preg_match(",default\s*([^\s]*)(\s|$),i",$d,$match)){
+				$couples[$champ] = $match[1];
+				break;
+			}
+	}
 	
 	return spip_sqlite_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur, $requeter);
 }
