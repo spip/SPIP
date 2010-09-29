@@ -129,7 +129,6 @@ function depublier_rubrique_if($id_rubrique,$date=null){
 	// Le type de l'objet est au pluriel
 	$compte = array(
 		'articles' => sql_countsel("spip_articles",  "id_rubrique=$id_rubrique AND statut='publie'$postdates"),
-		'breves' => sql_countsel("spip_breves",  "id_rubrique=$id_rubrique AND statut='publie'"),
 		'rubriques' => sql_countsel("spip_rubriques",  "id_parent=$id_rubrique AND statut='publie'"),
 		'documents' => sql_countsel("spip_documents_liens",  "id_objet=$id_rubrique AND objet='rubrique'")
 	);
@@ -201,16 +200,12 @@ function calculer_rubriques_publiees() {
 	$r = sql_select("R.id_rubrique AS id, max(A.date) AS date_h", "spip_rubriques AS R, spip_articles AS A", "R.id_rubrique = A.id_rubrique AND A.statut='publie' $postdates ", "R.id_rubrique");
 	while ($row = sql_fetch($r))
 		sql_updateq("spip_rubriques", array("statut_tmp" => 'publie', "date_tmp" => $row['date_h']), "id_rubrique=".$row['id']);
-	
-	// Publier et dater les rubriques qui ont une breve publie
-	$r = sql_select("R.id_rubrique AS id, max(A.date_heure) AS date_h", "spip_rubriques AS R, spip_breves AS A", "R.id_rubrique = A.id_rubrique AND R.date_tmp <= A.date_heure AND A.statut='publie' ", "R.id_rubrique");
-	while ($row = sql_fetch($r))
-	  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']), "id_rubrique=".$row['id']);
-		
+
 	// point d'entree pour permettre a des plugins de gerer le statut
 	// autrement (par ex: toute rubrique est publiee des sa creation)
 	// Ce pipeline fait ce qu'il veut, mais s'il touche aux statuts/dates
 	// c'est statut_tmp/date_tmp qu'il doit modifier
+	// [C'est un trigger... a renommer en trig_calculer_rubriques ?]
 	pipeline('calculer_rubriques', null);
 	
 
@@ -283,13 +278,6 @@ function calculer_langues_rubriques() {
 	while ($row = sql_fetch($s)) {
 		$id_article = $row['id_article'];
 		sql_updateq('spip_articles', array("lang"=> $row['lang'], 'langue_choisie'=>'non'), "id_article=$id_article");
-	}
-
-	// breves
-	$s = sql_select("A.id_breve AS id_breve, R.lang AS lang", "spip_breves AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.langue_choisie != 'oui' AND (A.lang='' OR R.lang<>'') AND R.lang<>A.lang");
-	while ($row = sql_fetch($s)) {
-		$id_breve = $row['id_breve'];
-		sql_updateq('spip_breves', array("lang"=>$row['lang'], 'langue_choisie'=>'non'), "id_breve=$id_breve");
 	}
 
 	if ($GLOBALS['meta']['multi_rubriques'] == 'oui') {

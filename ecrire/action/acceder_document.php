@@ -17,7 +17,7 @@ include_spip('inc/headers');
 // acces aux documents joints securise
 // verifie soit que le demandeur est authentifie
 // soit que le document est publie, c'est-a-dire
-// joint a au moins 1 article, breve ou rubrique publie
+// joint a au moins 1 article ou rubrique publie
 
 // http://doc.spip.org/@action_acceder_document_dist
 function action_acceder_document_dist() {

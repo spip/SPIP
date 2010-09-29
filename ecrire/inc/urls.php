@@ -69,19 +69,6 @@ function generer_url_ecrire_rubrique($id, $args='', $ancre='', $statut='', $conn
 	return $h;
 }
 
-// http://doc.spip.org/@generer_url_ecrire_breve
-function generer_url_ecrire_breve($id, $args='', $ancre='', $statut='', $connect='') {
-	$a = "id_breve=" . intval($id);
-	if (!$statut) {
-		$statut = sql_getfetsel('statut', 'spip_breves', $a,'','','','',$connect);
-	}
-	$h = ($statut == 'publie' OR $connect)
-	?  generer_url_entite_absolue($id, 'breve', $args, $ancre, $connect)
-	: (generer_url_ecrire('breves_voir',$a . ($args ? "&$args" : ''))
-		. ($ancre ? "#$ancre" : ''));
-	return $h;
-}
-
 
 // http://doc.spip.org/@generer_url_ecrire_auteur
 function generer_url_ecrire_auteur($id, $args='', $ancre='', $statut='', $connect='') {

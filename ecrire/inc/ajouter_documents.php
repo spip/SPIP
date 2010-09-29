@@ -33,6 +33,7 @@ function inc_ajouter_documents_dist ($sources, $file, $type, $id, $mode, $id_doc
  * fonction surchargeable
  *
  * @param unknown_type $fichier
+ * @param string $type_lien Le type de l'objet sur lequel lier le document (article, rubrique, ...)
  * @param unknown_type $type_image
  * @param unknown_type $largeur
  * @param unknown_type $hauteur
@@ -67,19 +68,35 @@ function inc_choisir_mode_document_dist($fichier, $type_lien, $type_image, $larg
 		return 'document';
 }
 
-//
-// Ajouter un document (au format $_FILES)
-//
-# $source,	# le fichier sur le serveur (/var/tmp/xyz34)
-# $nom_envoye,	# son nom chez le client (portequoi.pdf)
-# $type_lien,	# lie a un article, une breve ou une rubrique ?
-# $id_lien,	# identifiant de l'article (ou rubrique) lie
-# $mode,	# 'image' => image en mode image
-#			# 'vignette' => personnalisee liee a un document
-			# 'document' => doc ou image en mode document
-			# 'distant' => lien internet
-# $id_document,	# pour une vignette, l'id_document de maman
-# $actifs	# les documents dont il faudra ouvrir la boite de dialogue
+
+/**
+ * Ajouter un document (au format $_FILES)
+ *
+ * @param string $source
+ * 		le fichier sur le serveur (/var/tmp/xyz34)
+ * @param string $nom_envoye
+ * 		son nom chez le client (portequoi.pdf)
+ * @param string $type_lien
+ * 		lie a un article, une rubrique ou un autre objet ?
+ * @param int $id_lien
+ * 		identifiant de l'article (ou rubrique ou objet) lie
+ * @param string $mode
+ * 		- 'image'    => image en mode image
+ * 		- 'vignette' => personnalisee liee a un document
+ * 		- 'document' => doc ou image en mode document
+ * 		- 'distant'  => lien internet
+ * @param int $id_document
+ * 		pour une vignette, l'id_document de maman
+ * 
+ * @param unknown $documents_actifs
+ * 		 les documents dont il faudra ouvrir la boite de dialogue
+ * @param unknown $titrer
+ *
+ * 
+ * @return mixed
+ * 		int : Identifiant du nouveau document insere
+ * 		NULL : echec
+**/
 
 // http://doc.spip.org/@ajouter_un_document
 function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs, $titrer=false) {
