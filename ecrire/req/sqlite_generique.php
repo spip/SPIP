@@ -723,7 +723,7 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 		$t = trace_query_start();
 	} else $t = 0 ;
  
-	$query="INSERT OR REPLACE INTO $table $champs VALUES $valeurs";
+	$query="INSERT OR REPLACE INTO $table ".($champs?"$champs VALUES $valeurs":"DEFAULT VALUES");
 	
 	
 	if ($r = spip_sqlite_query($query, $serveur, $requeter)) {
@@ -752,15 +752,13 @@ function spip_sqlite_insertq($table, $couples=array(), $desc=array(), $serveur='
 
 	// si aucun champ donne pour l'insertion, on en cherche un avec un DEFAULT
 	// sinon sqlite3 ne veut pas inserer
-	if (!count($couples)) {
-		foreach($fields as $champ=>$d)
-			if (preg_match(",default\s*([^\s]*)(\s|$),i",$d,$match)){
-				$couples[$champ] = $match[1];
-				break;
-			}
+	$cles = $valeurs = "";
+	if (count($couples)) {
+		$cles = "(".join(',',array_keys($couples)).")";
+		$valeurs = "(".join(',', $couples).")";
 	}
 	
-	return spip_sqlite_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur, $requeter);
+	return spip_sqlite_insert($table, $cles , $valeurs , $desc, $serveur, $requeter);
 }
 
 
