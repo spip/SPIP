@@ -953,7 +953,8 @@ function url_de_($http,$host,$request,$prof=0){
 
 function tester_url_ecrire($nom)
 {
-	if (find_in_path('prive/exec/' . $nom . '.html')) $nom = 'fond';
+	if (find_in_path('prive/exec/' . $nom . '.' . _EXTENSION_SQUELETTES))
+		$nom = 'fond';
 	return charger_fonction($nom,'exec',true);
 }
 
