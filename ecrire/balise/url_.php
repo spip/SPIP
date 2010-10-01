@@ -137,6 +137,8 @@ function balise_URL_PAGE_dist($p) {
 
 	$p->code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
+	if ($args == NULL)
+		$args = "''";
 
 	if ($p->id_boucle
 	AND $s = $p->boucles[$p->id_boucle]->sql_serveur) {
@@ -147,13 +149,13 @@ function balise_URL_PAGE_dist($p) {
 			// si une fonction de generation des url a ete definie pour ce connect l'utiliser
 			// elle devra aussi traiter le cas derogatoire type=page
 			if (function_exists($f = 'generer_generer_url_'.$s)){
-				$p->code = $f('page', $p->code, $s);
+				$p->code = $f('page', $p->code . ", $args", $s);
 				return $p;
 			}
 			$connect = addslashes($s);
 		}
 	}
-	if ($args != "''" && $args!==NULL) {
+	if ($args != "''") {
 		if (isset($connect)) {
 			$args .= " . '&connect=$connect'";
 		} // sinon $args reste tel quel
