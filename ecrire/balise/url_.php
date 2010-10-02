@@ -44,7 +44,7 @@ function generer_generer_url_arg($type, $p, $_id)
 		if (function_exists($f = 'generer_generer_url_'.$s)){
 			return $f($type, $_id, $s);
 		}
-		if (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
+		if ($GLOBALS['connexions'][strtolower($s)]['spip_connect_version']) {
 			return NULL;
 		}
 		$s = _q($s);
@@ -137,26 +137,27 @@ function balise_URL_PAGE_dist($p) {
 
 	$p->code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
-	if ($args != "''" && $args!==NULL)
-		$p->code .= ','.$args;
 
-	if ($p->id_boucle
-	AND $s = $p->boucles[$p->id_boucle]->sql_serveur) {
+	$s = !$p->id_boucle ? '' :  $p->boucles[$p->id_boucle]->sql_serveur;
 
-		if (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
+	if ($s) {
+		if (!$GLOBALS['connexions'][strtolower($s)]['spip_connect_version']) {
 			$p->code = "404";
 		} else {
 			// si une fonction de generation des url a ete definie pour ce connect l'utiliser
 			// elle devra aussi traiter le cas derogatoire type=page
 			if (function_exists($f = 'generer_generer_url_'.$s)){
+				if ($args) $p->code .= ", $args";
 				$p->code = $f('page', $p->code, $s);
 				return $p;
 			}
-			$p->code .=  ", 'connect=" .  addslashes($s) . "'";
+			$s = 'connect=' .  addslashes($s);
+			$args = $args ? "$args . '&$s'" : "'$s'";
 		}
 	}
-
-	$p->code = 'generer_url_public(' . $p->code .')';
+spip_log("connect vaut $s ça donne " .  $p->code . " args $args");
+	if (!$args) $args = "''";
+	$p->code = 'generer_url_public(' . $p->code . ", $args)";
 	#$p->interdire_scripts = true;
 	return $p;
 }
