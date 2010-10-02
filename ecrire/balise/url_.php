@@ -36,9 +36,7 @@ function generer_generer_url($type, $p)
 	
 function generer_generer_url_arg($type, $p, $_id)
 {
-	$s = $p->id_boucle;
-
-	if ($s !== '' AND $s = $p->boucles[$s]->sql_serveur) {
+	if ($s = trouver_nom_serveur_distant($p)) {
 
 // si une fonction de generation des url a ete definie pour ce connect l'utiliser
 		if (function_exists($f = 'generer_generer_url_'.$s)){

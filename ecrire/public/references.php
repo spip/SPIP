@@ -296,7 +296,7 @@ function trouver_nom_serveur_distant($p) {
 		if (strlen($s)
 			AND strlen($serveur = strtolower($s))
 			AND !in_array($serveur,$GLOBALS['exception_des_connect'])) {
-				return $s;
+				return $serveur;
 		}
 	}
 	return "";
