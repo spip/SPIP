@@ -44,7 +44,7 @@ function generer_generer_url_arg($type, $p, $_id)
 		if (function_exists($f = 'generer_generer_url_'.$s)){
 			return $f($type, $_id, $s);
 		}
-		if ($GLOBALS['connexions'][strtolower($s)]['spip_connect_version']) {
+		if (!$GLOBALS['connexions'][strtolower($s)]['spip_connect_version']) {
 			return NULL;
 		}
 		$s = _q($s);
@@ -155,7 +155,6 @@ function balise_URL_PAGE_dist($p) {
 			$args = $args ? "$args . '&$s'" : "'$s'";
 		}
 	}
-spip_log("connect vaut $s ça donne " .  $p->code . " args $args");
 	if (!$args) $args = "''";
 	$p->code = 'generer_url_public(' . $p->code . ", $args)";
 	#$p->interdire_scripts = true;
