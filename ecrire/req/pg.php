@@ -107,7 +107,7 @@ $GLOBALS['spip_pg_functions_1'] = array(
 // http://doc.spip.org/@spip_pg_trace_query
 function spip_pg_trace_query($query, $serveur='')
 {
-	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -129,7 +129,7 @@ function spip_pg_trace_query($query, $serveur='')
 // http://doc.spip.org/@spip_pg_query
 function spip_pg_query($query, $serveur='',$requeter=true)
 {
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -388,7 +388,7 @@ function spip_pg_create_index($nom, $table, $champs, $serveur='', $requeter=true
 // http://doc.spip.org/@spip_pg_explain
 function spip_pg_explain($query, $serveur='',$requeter=true){
 	if (strpos(ltrim($query), 'SELECT') !== 0) return array();
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $query, $regs)) {
@@ -406,7 +406,7 @@ function spip_pg_explain($query, $serveur='',$requeter=true){
 function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 	// se connecter a la base indiquee
 	// avec les identifiants connus
-	$index = $serveur ? $serveur : 0;
+	$index = $serveur ? strtolower($serveur) : 0;
 
 	if ($link = spip_connect_db('', '', '', '', $db, 'pg', '', '')){
 		if (($db==$link['db']) && $GLOBALS['connexions'][$index] = $link)
@@ -419,7 +419,7 @@ function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 
 // http://doc.spip.org/@spip_pg_listdbs
 function spip_pg_listdbs($serveur) {
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$link = $connexion['link'];
 	return spip_pg_query_simple($link, "select * From pg_database");
 }
@@ -429,7 +429,7 @@ function spip_pg_select($select, $from, $where='',
 			$groupby=array(), $orderby='', $limit='',
                            $having='', $serveur='',$requeter=true){
 
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -730,7 +730,7 @@ function spip_pg_free($res, $serveur='',$requeter=true) {
 // http://doc.spip.org/@spip_pg_delete
 function spip_pg_delete($table, $where='', $serveur='',$requeter=true) {
 
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -751,7 +751,7 @@ function spip_pg_delete($table, $where='', $serveur='',$requeter=true) {
 
 // http://doc.spip.org/@spip_pg_insert
 function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='',$requeter=true) {
-	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -831,7 +831,7 @@ function spip_pg_insertq_multi($table, $tab_couples=array(), $desc=array(), $ser
 function spip_pg_update($table, $couples, $where='', $desc='', $serveur='',$requeter=true) {
 
 	if (!$couples) return;
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -873,7 +873,7 @@ function spip_pg_updateq($table, $couples, $where='', $desc=array(), $serveur=''
 // http://doc.spip.org/@spip_pg_replace
 function spip_pg_replace($table, $values, $desc, $serveur='',$requeter=true) {
 	if (!$values) {spip_log("replace vide $table"); return 0;}
-	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -1043,7 +1043,8 @@ function spip_pg_in($val, $valeurs, $not='', $serveur) {
 
 // http://doc.spip.org/@spip_pg_error
 function spip_pg_error($serveur) {
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+
+	$connexion = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$link = $connexion['link'];
 	$s = $link ? pg_last_error($link) : pg_last_error();
 	return str_replace('ERROR', 'errcode: 1000 ', $s);
@@ -1075,7 +1076,7 @@ function spip_pg_drop_view($view, $exist='', $serveur='',$requeter=true) {
 // http://doc.spip.org/@spip_pg_showbase
 function spip_pg_showbase($match, $serveur='',$requeter=true)
 {
-	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$link = $connexion['link'];
 	$connexion['last'] = $q = "SELECT tablename FROM pg_tables WHERE tablename ILIKE '$match'";
 	return spip_pg_query_simple($link, $q);
@@ -1084,7 +1085,7 @@ function spip_pg_showbase($match, $serveur='',$requeter=true)
 // http://doc.spip.org/@spip_pg_showtable
 function spip_pg_showtable($nom_table, $serveur='',$requeter=true)
 {
-	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$link = $connexion['link'];
 	$connexion['last'] = $q = "SELECT column_name, column_default, data_type FROM information_schema.columns WHERE table_name ILIKE " . _q($nom_table);
 
@@ -1119,7 +1120,7 @@ function spip_pg_showtable($nom_table, $serveur='',$requeter=true)
 // http://doc.spip.org/@spip_pg_create
 function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='',$requeter=true) {
 
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];

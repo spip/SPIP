@@ -42,7 +42,7 @@ function generer_generer_url_arg($type, $p, $_id)
 		if (function_exists($f = 'generer_generer_url_'.$s)){
 			return $f($type, $_id, $s);
 		}
-		if (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
+		if (!$GLOBALS['connexions'][strtolower($s)]['spip_connect_version']) {
 			return NULL;
 		}
 		$s = _q($s);
@@ -139,29 +139,25 @@ function balise_URL_PAGE_dist($p) {
 		$args = "''";
 
 	if ($s = trouver_nom_serveur_distant($p)) {
-
-		if (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
+		if (!$GLOBALS['connexions'][strtolower($s)]['spip_connect_version']) {
 			$p->code = "404";
 		} else {
 			// si une fonction de generation des url a ete definie pour ce connect l'utiliser
 			// elle devra aussi traiter le cas derogatoire type=page
 			if (function_exists($f = 'generer_generer_url_'.$s)){
-				$p->code = $f('page', $p->code . ", $args", $s);
+				if ($args AND $args!=="''") $p->code .= ", $args";
+				$p->code = $f('page', $p->code, $s);
 				return $p;
 			}
-			$connect = addslashes($s);
+			$s = 'connect=' .  addslashes($s);
+			$args = (($args AND $args!=="''") ? "$args . '&$s'" : "'$s'");
 		}
 	}
-	if ($args != "''") {
-		if (isset($connect)) {
-			$args .= " . '&connect=$connect'";
-		} // sinon $args reste tel quel
-	} else { // si pas d'arguments
-		if (isset($connect)) {
-			$args = ($connect ? "'connect=$connect'" : "''");
-		}
-	}
+
+	spip_log("connect vaut $s ca donne " .  $p->code . " args $args");
+	if (!$args) $args = "''";
 	$p->code = 'generer_url_public(' . $p->code . ", $args)";
+
 	#$p->interdire_scripts = true;
 	return $p;
 }
