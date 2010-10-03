@@ -1062,7 +1062,7 @@ function get_spip_script($default='') {
 }
 
 // http://doc.spip.org/@generer_url_public
-function generer_url_public($script='', $args="", $no_entities=false, $rel=false, $action='') {
+function generer_url_public($script='', $args="", $no_entities=false, $rel=true, $action='') {
 	// si le script est une action (spip_pass, spip_inscription),
 	// standardiser vers la nouvelle API
 
