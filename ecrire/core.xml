@@ -318,5 +318,6 @@
 	<pipeline><nom>trig_calculer_langues_rubriques</nom><action></action></pipeline>
 	<pipeline><nom>trig_propager_les_secteurs</nom><action></action></pipeline>
 	<pipeline><nom>trig_supprimer_objets_lies</nom><action></action></pipeline>
+	<pipeline><nom>_image_valeurs_trans</nom><action></action></pipeline>
 
 </plugin>
