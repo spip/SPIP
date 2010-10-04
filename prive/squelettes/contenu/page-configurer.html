@@ -1,5 +1,3 @@
 #SET{configurer,#VAL{configurer_}|concat{#ENV{cfg}}
 [(#AUTORISER{bouton,#GET{configurer}}|interdire_acces)]
-<div class="ajax">
-	#FORMULAIRE_{#GET{configurer}}
-</div>
+<INCLURE{fond=prive/squelettes/inclure/configurer,configurer=#GET{configurer},env}>

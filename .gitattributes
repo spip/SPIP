@@ -705,6 +705,7 @@ prive/squelettes/inclure/admin_vider_cache_fonctions.php -text
 prive/squelettes/inclure/admin_vider_images.html -text
 prive/squelettes/inclure/admin_vider_images_fonctions.php -text
 prive/squelettes/inclure/barre-nav.html -text
+prive/squelettes/inclure/configurer.html -text
 prive/squelettes/inclure/head.html -text
 prive/squelettes/inclure/pied.html -text
 prive/squelettes/navigation/dist.html -text
