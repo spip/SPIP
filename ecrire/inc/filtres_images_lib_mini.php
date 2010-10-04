@@ -236,7 +236,16 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		#ecrire_fichier($ret['fichier_dest'].'.src',serialize($ret),true);
 	}
 
-	$ret = pipeline('_image_valeurs_trans',array('args'=>func_get_args(),'data'=>$ret));
+	$ret = pipeline('image_preparer_filtre',array(
+			'args'=>array(
+				'img'=>$img,
+				'effet'=>$effet,
+				'forcer_format'=>$forcer_format,
+				'fonction_creation'=>$fonction_creation,
+				'find_in_path'=>$find_in_path,
+			),
+			'data'=>$ret)
+	);
 	if (!function_exists($ret["fonction_imagecreatefrom"])) return false;
 	return $ret;
 }
