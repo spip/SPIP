@@ -11,28 +11,27 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
 include_spip('inc/presentation');
-include_spip('inc/config');
 
-function configuration_avertisseur_dist()
-{
-	global $spip_lang_right;
+function formulaires_configurer_avertisseur_charger_dist(){
+	foreach(array(
+		"articles_modif",
+		) as $m)
+		$valeurs[$m] = $GLOBALS['meta'][$m];
 
-	$res = "<div class='verdana2'>"
-	. _T('texte_travail_collaboratif')
-	. "</div>"
-	. "<div class='verdana2'>"
-	. afficher_choix('articles_modif',$GLOBALS['meta']["articles_modif"] ,
-		array('oui' => _T('item_activer_messages_avertissement'),
-			'non' => _T('item_non_activer_messages_avertissement')))
-	  . "</div>";
-
-
-	$res = debut_cadre_trait_couleur("article-24.png", true, "", _T('info_travail_colaboratif').aide("artmodif"))
-	.  ajax_action_post('configuration', 'avertisseur', 'config_fonctions', '#configurer-avertisseur', $res)
-	.  fin_cadre_trait_couleur(true);
-
-	return ajax_action_greffe("configurer-avertisseur", '', $res);
+	return $valeurs;
 }
-?>
+
+
+function formulaires_configurer_avertisseur_traiter_dist(){
+	$res = array('editable'=>true);
+	foreach(array(
+		"articles_modif",
+		) as $m)
+		if (!is_null($v=_request($m)))
+			ecrire_meta($m, $v=='oui'?'oui':'non');
+
+	$res['message_ok'] = _T('config_info_enregistree');
+	return $res;
+}
+

@@ -5,17 +5,18 @@
 	#FORMULAIRE_CONFIGURER_REDUCTEUR
 </div>
 
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_AVERTISSEUR
+</div>
+
 <?php
 	include_spip('inc/presentation');
 
-	$avertisseur = charger_fonction('avertisseur', 'configuration');
 	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
 	$relayeur = charger_fonction('relayeur', 'configuration');
 	$moderniseur_html = charger_fonction('moderniseur_html', 'configuration');
 
 	echo
-
-	  $avertisseur(), // Notification de modification des articles
 
 	  $previsualiseur(), // Previsualisation sur le site public
 
