@@ -9,7 +9,6 @@ ecrire/action/changer_mode_document.php -text
 ecrire/action/charger_plugin.php -text
 ecrire/action/configuration.php -text
 ecrire/action/configurer_moderniseur_html.php -text
-ecrire/action/configurer_relayeur.php -text
 ecrire/action/confirmer_email.php -text
 ecrire/action/converser.php -text
 ecrire/action/copier_local.php -text
@@ -73,7 +72,6 @@ ecrire/charsets/translit.php -text
 ecrire/charsets/translitcomplexe.php -text
 ecrire/configuration/index.php -text
 ecrire/configuration/moderniseur_html.php -text
-ecrire/configuration/relayeur.php -text
 ecrire/core.xml -text
 ecrire/exec/403.php -text
 ecrire/exec/404.php -text
@@ -375,6 +373,8 @@ prive/formulaires/configurer_redacteurs.html -text
 prive/formulaires/configurer_redacteurs.php -text
 prive/formulaires/configurer_reducteur.html -text
 prive/formulaires/configurer_reducteur.php -text
+prive/formulaires/configurer_relayeur.html -text
+prive/formulaires/configurer_relayeur.php -text
 prive/formulaires/configurer_rubriques.html -text
 prive/formulaires/configurer_rubriques.php -text
 prive/formulaires/configurer_transcodeur.html -text

@@ -13,15 +13,17 @@
 	#FORMULAIRE_CONFIGURER_PREVISUALISEUR
 </div>
 
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_RELAYEUR
+</div>
+
 <?php
 	include_spip('inc/presentation');
 
-	$relayeur = charger_fonction('relayeur', 'configuration');
 	$moderniseur_html = charger_fonction('moderniseur_html', 'configuration');
 
 	echo
 
-	  $relayeur(_request('retour_proxy')), // Proxy pour syndication & doc
 
 	  $moderniseur_html(), // Selection de la version max de HTML (4 ou 5)
 
