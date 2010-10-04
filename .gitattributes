@@ -9,7 +9,6 @@ ecrire/action/changer_mode_document.php -text
 ecrire/action/charger_plugin.php -text
 ecrire/action/configuration.php -text
 ecrire/action/configurer_moderniseur_html.php -text
-ecrire/action/configurer_previsualiseur.php -text
 ecrire/action/configurer_relayeur.php -text
 ecrire/action/confirmer_email.php -text
 ecrire/action/converser.php -text
@@ -74,7 +73,6 @@ ecrire/charsets/translit.php -text
 ecrire/charsets/translitcomplexe.php -text
 ecrire/configuration/index.php -text
 ecrire/configuration/moderniseur_html.php -text
-ecrire/configuration/previsualiseur.php -text
 ecrire/configuration/relayeur.php -text
 ecrire/core.xml -text
 ecrire/exec/403.php -text
@@ -371,6 +369,8 @@ prive/formulaires/configurer_multilinguisme.html -text
 prive/formulaires/configurer_multilinguisme.php -text
 prive/formulaires/configurer_preferences.html -text
 prive/formulaires/configurer_preferences.php -text
+prive/formulaires/configurer_previsualiseur.html -text
+prive/formulaires/configurer_previsualiseur.php -text
 prive/formulaires/configurer_redacteurs.html -text
 prive/formulaires/configurer_redacteurs.php -text
 prive/formulaires/configurer_reducteur.html -text
@@ -937,6 +937,7 @@ prive/themes/spip/images/plus-16.png -text
 prive/themes/spip/images/plus-info-16.png -text
 prive/themes/spip/images/poubelle-16.png -text
 prive/themes/spip/images/poubelle-24.png -text
+prive/themes/spip/images/preview-24.png -text
 prive/themes/spip/images/publication-48.png -text
 prive/themes/spip/images/puce-preparer-8.png -text
 prive/themes/spip/images/puce-proposer-8.png -text

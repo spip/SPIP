@@ -11,17 +11,24 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/presentation');
+
+function formulaires_configurer_previsualiseur_charger_dist(){
+	$valeurs['preview'] = explode(',',$GLOBALS['meta']['preview']);
+
+	return $valeurs;
+}
 
 
-// http://doc.spip.org/@action_configurer_previsualiseur_dist
-function action_configurer_previsualiseur_dist() {
-
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+function formulaires_configurer_previsualiseur_traiter_dist(){
+	$res = array('editable'=>true);
 
 	if ($i = _request('preview') AND is_array($i))
-		$i = ',' . join($i, ",") . ',';
+		$i = ',' . implode(",",$i) . ',';
 
 	ecrire_meta('preview', $i);
+
+	$res['message_ok'] = _T('config_info_enregistree');
+	return $res;
 }
-?>
+
