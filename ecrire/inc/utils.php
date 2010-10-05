@@ -848,11 +848,10 @@ function autoriser_sans_cookie($nom)
 
 function tester_url_ecrire($nom){
 	// tester si c'est une page en squelette
-	if (find_in_path('prive/squelettes/contenu/' . $nom . '.html')
-		OR find_in_path('prive/squelettes/contenu/page-' . $nom . '.html'))
+	if (find_in_path('prive/squelettes/contenu/' . $nom . '.html'))
 		return 'fond';
+	// compat skels orthogonaux version precedente
 	elseif (find_in_path('prive/exec/' . $nom . '.html'))
-		// compat version precedente
 		return 'fond_monobloc';
 	return charger_fonction($nom,'exec',true)?$nom:'';
 }

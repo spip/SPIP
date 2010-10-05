@@ -291,12 +291,12 @@ function lister_configurer($exclure = array()){
 	$skels = array();
 	$forms = array();
 
-	// trouver toutes les page-configurer_xxx de l'espace prive
+	// trouver toutes les pages configurer_xxx de l'espace prive
 	// et construire un tableau des entrees qui ne sont pas dans $deja
-	$pages = find_all_in_path("prive/squelettes/contenu/", "page-configurer_.*[.]"._EXTENSION_SQUELETTES.'$');
+	$pages = find_all_in_path("prive/squelettes/contenu/", "configurer_.*[.]"._EXTENSION_SQUELETTES.'$');
 	
 	foreach($pages as $page) {
-		$configurer = substr(basename($page,"."._EXTENSION_SQUELETTES),5);
+		$configurer = basename($page,"."._EXTENSION_SQUELETTES);
 		if (!isset($exclure[$configurer]))
 			$liste[$configurer] = array(
 					'parent' => 'bando_configuration',
@@ -319,7 +319,7 @@ function lister_configurer($exclure = array()){
 		// evaluer le fond en lui passant un exec coherent pour que les pipelines le reconnaissent
 		// et reperer les formulaires CVT configurer_xx insereres par les plugins via pipeline
 		$config = basename(substr($file,0,-strlen("."._EXTENSION_SQUELETTES)));
-		$fond = recuperer_fond("prive/squelettes/contenu/$config",array("exec"=>preg_replace(",^page-,i","",$config)));
+		$fond = recuperer_fond("prive/squelettes/contenu/$config",array("exec"=>$config));
 		if (is_array($inputs = extraire_balises($fond,"input")))
 			foreach($inputs as $i)
 				if (extraire_attribut($i,'name')=='formulaire_action') {

@@ -59,7 +59,7 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='', $ext='htm
 
 
 /**
- * Fonction Page automatique a partir de contenu/page-xx
+ * Fonction Page automatique a partir de contenu/xx
  *
  * @param array $flux
  * @return array
@@ -117,17 +117,16 @@ function styliser_par_z_dist($flux){
 
 			// si on est sur un ?page=XX non trouve
 			if ($flux['args']['contexte'][$page] == $fond OR $flux['args']['contexte']['type'] == $fond) {
-				// si c'est un objet spip, associe a une table, utiliser le fond homonyme
-				if (echaffaudable($fond)){
-					$flux['data'] = substr(find_in_path($prefix_path."objet.$ext"), 0, - strlen(".$ext"));
-				}
-				// sinon, brancher sur contenu/page-xx si elle existe
+				// se brancher sur contenu/xx si il existe
 				// si on est sur un ?page=XX non trouve
-				elseif ($flux['args']['contexte'][$page] == $fond) {
-					$base = "$prefix_path$z_contenu/page-".$fond.".".$ext;
-					if ($base = find_in_path($base)){
-						$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
-					}
+				$base = "$prefix_path$z_contenu/".$fond.".".$ext;
+				if ($base = find_in_path($base)){
+					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
+				}
+				// si c'est un objet spip, associe a une table, utiliser le fond homonyme
+				// objet.html et page.html sont a priori equivalent
+				elseif (echaffaudable($fond)){
+					$flux['data'] = substr(find_in_path($prefix_path."objet.$ext"), 0, - strlen(".$ext"));
 				}
 			}
 
@@ -160,7 +159,7 @@ function styliser_par_z_dist($flux){
 		}
 		// layout specifiques par type et compositions :
 		// body-article.html
-		// body-page-sommaire.html
+		// body-sommaire.html
 		// pour des raisons de perfo, les declinaisons doivent etre dans le
 		// meme dossier que body.html
 		if ($fond=='body' AND substr($squelette,-strlen($fond))==$fond){
@@ -176,7 +175,8 @@ function styliser_par_z_dist($flux){
 		// chercher le fond correspondant a la composition
 		elseif (isset($flux['args']['contexte']['composition'])
 			AND (basename($fond)=='page' OR ($squelette AND substr($squelette,-strlen($fond))==$fond))
-			AND $dir = explode('/',$fond)
+			AND $dir = substr($fond,$prefix_length)
+			AND $dir = explode('/',$dir)
 			AND $dir = reset($dir)
 			AND in_array($dir,$z_blocs)
 			AND $f=find_in_path($prefix_path.$fond."-".$flux['args']['contexte']['composition'].".$ext")){
