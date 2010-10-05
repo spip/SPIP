@@ -408,6 +408,7 @@ con <b>@texte_lie@</b> debes confirmar esta decisi&oacute;n:',
 'info_etape_suivante' => 'Pasar a la etapa siguiente',
 'info_etape_suivante_1' => 'Puedes pasar a la etapa siguiente.',
 'info_etape_suivante_2' => 'Puedes pasar a la etapa siguiente.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'esportaci&oacute;n de la base a @archive@',
 'info_facilite_suivi_activite' => 'Col env&iacute;s de facilitar el siguimientu de l\'activid&aacute;
   editorial del sitiu, SPIP pue comunicar por e-mail, por exemplu
@@ -723,7 +724,9 @@ con una color que indica el est&aacute;u:',
 'info_une_rubrique' => 'una estaya,',
 'info_une_rubrique_02' => '1 estaya',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL del sitiu:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Enllace d\'hipertestu:',
 'info_utilisation_spip' => 'Agora puedes entamar a utilizar el sistema d\'espublizamientu asist&iacute;u...',
 'info_visites_par_mois' => 'Amosar por meses:',

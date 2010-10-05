@@ -399,6 +399,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_etape_suivante' => 'G&aring; til n&aelig;ste trin',
 'info_etape_suivante_1' => 'Du kan g&aring; til n&aelig;ste trin.',
 'info_etape_suivante_2' => 'Du kan g&aring; til n&aelig;ste trin.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'eksporter database til @archive@',
 'info_facilite_suivi_activite' => 'For at lette opf&oslash;lgning p&aring; webstedets redaktionelle aktiviteter sender SPIP e-mails med anmodning om offentligg&oslash;relse og godkendelse til f.eks. redakt&oslash;rens adresseliste.',
 'info_fichiers_authent' => 'Adgangskontrolfil ".htpasswd"',
@@ -694,7 +695,9 @@ i en farve, der angiver deres status:',
 'info_une_rubrique' => 'et afsnit,',
 'info_une_rubrique_02' => '1 afsnit',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'WEBSTEDETS URL:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Hyperlink:',
 'info_utilisation_spip' => 'SPIP er nu klar til brug...',
 'info_visites_par_mois' => 'Bes&oslash;g pr. m&aring;ned:',

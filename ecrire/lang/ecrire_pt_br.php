@@ -388,6 +388,7 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'info_etape_suivante' => 'Avan&ccedil;ar para a pr&oacute;xima etapa',
 'info_etape_suivante_1' => 'Voc&ecirc; pode passar para a pr&oacute;xima etapa.',
 'info_etape_suivante_2' => 'Voc&ecirc; pode passar para a pr&oacute;xima etapa.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'exporta&ccedil;&atilde;o da base para @archive@',
 'info_facilite_suivi_activite' => 'Para facilitar o acompanhamento da atividade editorial do site, o SPIP pode enviar por e-mail, por exemplo a uma mailing-list de redatores, avisos dos pedidos de publica&ccedil;&atilde;o e das valida&ccedil;&otilde;es das mat&eacute;rias.',
 'info_fichiers_authent' => 'Arquivos de autentica&ccedil;&atilde;o &laquo;.htpasswd&raquo;',
@@ -675,7 +676,9 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'info_une_rubrique' => 'uma se&ccedil;&atilde;o,',
 'info_une_rubrique_02' => '1 se&ccedil;&atilde;o',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL DO SITE:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Link hipertexto:',
 'info_utilisation_spip' => 'Voc&ecirc; pode agora come&ccedil;ar a utilizar o sistema de publica&ccedil;&atilde;o assistida...',
 'info_visites_par_mois' => 'Exibir por m&ecirc;s:',

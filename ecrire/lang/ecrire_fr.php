@@ -406,8 +406,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => 'Passer &agrave; l\'&eacute;tape suivante',
 'info_etape_suivante_1' => 'Vous pouvez passer &agrave; l\'&eacute;tape suivante.',
 'info_etape_suivante_2' => 'Vous pouvez passer &agrave; l\'&eacute;tape suivante.',
-'info_exportation_base' => 'exportation de la base vers @archive@',
 'info_exceptions_proxy' => 'Exceptions pour le proxy',
+'info_exportation_base' => 'exportation de la base vers @archive@',
 'info_facilite_suivi_activite' => 'Afin de faciliter le suivi de l\'activit&eacute;
 		&eacute;ditoriale du site, SPIP peut faire parvenir par mail, par exemple
 		&agrave; une mailing-list des r&eacute;dacteurs, l\'annonce des demandes de

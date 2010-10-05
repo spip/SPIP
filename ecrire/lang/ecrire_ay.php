@@ -409,6 +409,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => 'Arkir sarawir saranta&ntilde;a',
 'info_etape_suivante_1' => 'Arkir sarawir sarantasmawa',
 'info_etape_suivante_2' => 'Arkir sarawir sarantasmawa',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'base ukax apsusispaw @archive@ uka tuqiru',
 'info_facilite_suivi_activite' => 'Qillqa lurawit u&ntilde;ch\'ukiw jasacha&ntilde;atakix, SPIP ukax aruskipayirit apayaspa, m&auml; tanta qillqirinakar ukhama yatiyatawinakataki yatiyawinaka ukatak mayiwinaka, ukhamarak qillqatanakat iyaw sawi.',
 'info_fichiers_authent' => 'Chiqpach sirit q\'ipinaka &laquo;.htpasswd&raquo; ',
@@ -717,7 +718,9 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:', # NEW
 'info_une_rubrique' => 'une rubrique,', # NEW
 'info_une_rubrique_02' => '1 rubrique', # NEW
 'info_url' => 'URL&nbsp;:', # NEW
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL DU SITE&nbsp;:', # NEW
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Lien hypertexte&nbsp;:', # NEW
 'info_utilisation_spip' => 'Vous pouvez maintenant commencer &agrave; utiliser le syst&egrave;me de publication assist&eacute;e...', # NEW
 'info_visites_par_mois' => 'Affichage par mois :', # NEW

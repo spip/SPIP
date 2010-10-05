@@ -407,6 +407,7 @@ anba atik yo ; y ke ent&egrave;di pou tout ribrik yo, &eacute; tinouv&egrave;l y
 'info_etape_suivante' => 'Mach etap swivan',
 'info_etape_suivante_1' => 'Ou kapab mach etap swivan.',
 'info_etape_suivante_2' => 'Ou kapab mach etap swivan.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'esp&ograve;tasyon labaz sou  @archive@',
 'info_facilite_suivi_activite' => 'Pou yon swivi fasil lakivit&eacute; sit-la
 , SPIP kapab
@@ -719,7 +720,9 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'info_une_rubrique' => 'yon ribrik,',
 'info_une_rubrique_02' => '1 ribrik',
 'info_url' => 'Ladres URL :',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL SIT SA-A :',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Lyen ip&egrave;t&egrave;ks&nbsp;:',
 'info_utilisation_spip' => 'Kounyen-a,ou kapab koumanse itilize sist&egrave;m pou piblikasyon ki &eacute;d&eacute;...',
 'info_visites_par_mois' => 'F&egrave; par&egrave;t pa mwa :',

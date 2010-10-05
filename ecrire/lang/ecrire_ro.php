@@ -390,6 +390,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => 'Trece&#355;i la etapa urm&#259;toare',
 'info_etape_suivante_1' => 'Nu pute&#355;i trece la etapa urm&#259;toare.',
 'info_etape_suivante_2' => 'Pute&#355;i trece la etapa urm&#259;toare.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'exportul bazei de date c&#259;tre @archive@',
 'info_facilite_suivi_activite' => 'Pentru a u&#351;ura urm&#259;rirea activit&#259;&#355;ii editoriale a site-ului, SPIP poate trimite prin email cererile de publicare &#351;i de validare a articolelor. De exemplu, destinatarul poate fi o list&#259; de distribu&#355;ie a redac&#355;iei.',
 'info_fichiers_authent' => 'Fi&#351;iere de autentificare &laquo;&nbsp;.htpasswd&nbsp;&raquo;',
@@ -699,7 +700,9 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'info_une_rubrique' => 'o rubric&#259;,',
 'info_une_rubrique_02' => '1 rubric&#259;',
 'info_url' => 'URL&nbsp;:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL SITE&nbsp;:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Leg&#259;tur&#259; hipertext&nbsp;:',
 'info_utilisation_spip' => 'Pute&#355;i &icirc;ncepe acum s&#259; folosi&#355;i sistemul de publicare asistat&#259;...',
 'info_visites_par_mois' => 'Afi&#351;are pe lun&#259; :',

@@ -397,6 +397,7 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'info_etape_suivante' => 'G&aring; till n&auml;sta steg',
 'info_etape_suivante_1' => 'Du kan forts&auml;tta till n&auml;sta steg.',
 'info_etape_suivante_2' => 'Du kan forts&auml;tta till n&auml;sta steg.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'Exportera databasen till @archive@',
 'info_facilite_suivi_activite' => 'F&ouml;r att underl&auml;tta att f&ouml;lja de redaktionella;
   aktiviteterna, kan SPIP skicka medddelanden via e-post, exempelvis till en maillista f&ouml;r redakt&ouml;rer,
@@ -712,7 +713,9 @@ med en f&auml;rg som visar deras status:',
 'info_une_rubrique' => 'en avdelning,',
 'info_une_rubrique_02' => '1 avdelning',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'SAJTEN\'S URL:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Hyperl&auml;nk:',
 'info_utilisation_spip' => 'SPIP &auml;r nu f&auml;rdig att anv&auml;ndas..',
 'info_visites_par_mois' => 'Bes&ouml;kare per m&aring;nad:',

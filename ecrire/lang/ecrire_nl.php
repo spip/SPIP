@@ -404,6 +404,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_etape_suivante' => 'Naar de volgende stap ',
 'info_etape_suivante_1' => 'Je kan de volgende stap zetten.',
 'info_etape_suivante_2' => 'Je kan de volgende stap zetten.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'Uitvoer van de databank naar @archive@',
 'info_facilite_suivi_activite' => 'Om de opvolging en redactie van artikels te
  vergemakkelijken, kan SPIP mails versturen -bijvoorbeeld naar een mailinglist van redacteurs-
@@ -716,7 +717,9 @@ een kleur geeft hun status aan&nbsp;:',
 'info_une_rubrique' => 'een Rubriek, ',
 'info_une_rubrique_02' => '1 Rubriek',
 'info_url' => 'URL&nbsp;:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'WEBSITE URL&nbsp;:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Adres van de koppeling&nbsp;:',
 'info_utilisation_spip' => 'Je kan het publicatiesysteem nu gebruiken...',
 'info_visites_par_mois' => 'Tonen per maand :',

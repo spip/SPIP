@@ -397,6 +397,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_etape_suivante' => 'Bir sonraki a&#351;amaya ge&ccedil;',
 'info_etape_suivante_1' => 'Bir sonraki a&#351;amaya ge&ccedil;ebilirsiniz',
 'info_etape_suivante_2' => 'Bir sonraki a&#351;amaya ge&ccedil;ebilirsiniz',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'taban&#305;n @archive@\'e do&#287;ru ihrac&#305;',
 'info_facilite_suivi_activite' => 'Sitenin edit&ouml;r etkinli&#287;inin izlenmesini kolayla&#351;t&#305;rmak &uuml;zere,
                                    SPIP, e-posta ile, &ouml;rne&#287;in, yay&#305;nlama taleplerinin  ve makale
@@ -705,7 +706,9 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_une_rubrique' => 'bir b&ouml;l&uuml;m,',
 'info_une_rubrique_02' => '1 b&ouml;l&uuml;m',
 'info_url' => 'URL&nbsp;:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'S&#304;TE\'nin URL\'si :',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Hipermetin ba&#287;&#305;&nbsp;:',
 'info_utilisation_spip' => 'SPIP art&#305;k kullan&#305;lmaya haz&#305;rd&#305;r...',
 'info_visites_par_mois' => 'Ay olarak g&ouml;r&uuml;nt&uuml;leme :',

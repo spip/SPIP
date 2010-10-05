@@ -402,6 +402,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'info_etape_suivante' => 'K&ouml;vetkez&#337; l&eacute;p&eacute;s',
 'info_etape_suivante_1' => 'L&eacute;phet a k&ouml;vetkez&#337;re.',
 'info_etape_suivante_2' => 'L&eacute;phet a k&ouml;vetkez&#337;re.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'Adatb&aacute;zis export&aacute;l&aacute;sa @archive@ fel&eacute;',
 'info_facilite_suivi_activite' => 'Ahhoz, hogy k&ouml;nnyebben lehessen figyelemmel k&ouml;vetni a honlap szerkeszt&#337;i tev&eacute;kenys&eacute;g&eacute;t, SPIP emailen k&uuml;ldheti p&eacute;ld&aacute;ul a publik&aacute;l&aacute;si, ill. cikkj&oacute;v&aacute;hagy&aacute;si k&eacute;r&eacute;seket egy szerz&#337;i levelez&#337;list&aacute;ra.',
 'info_fichiers_authent' => 'Azonos&iacute;t&aacute;si f&aacute;jlok &laquo;&nbsp;.htpasswd&nbsp;&raquo;',
@@ -698,7 +699,9 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'info_une_rubrique' => 'egy rovat,',
 'info_une_rubrique_02' => '1 rovat',
 'info_url' => 'URL :',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'HONLAP URL-JE :',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Hiperhivatkoz&aacute;s&nbsp;:',
 'info_utilisation_spip' => 'Mostant&oacute;l kezdheti haszn&aacute;lni a publik&aacute;l&aacute;si rendszert...',
 'info_visites_par_mois' => 'Megjelen&iacute;t&eacute;s havonta :',

@@ -401,6 +401,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => '&#21040;&#19979;&#19968;&#27493;',
 'info_etape_suivante_1' => '&#20320;&#21487;&#31227;&#21160;&#21040;&#19979;&#19968;&#27493;.',
 'info_etape_suivante_2' => '&#20320;&#21487;&#31227;&#21160;&#21040;&#19979;&#19968;&#27493;.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => '&#23548;&#20986;&#25968;&#25454;&#24211;&#21040; @archive@',
 'info_facilite_suivi_activite' => '&#20026;&#20943;&#36731;&#31449;&#28857;&#32534;&#36753;&#30340;&#36319;&#36394;;
   &#27963;&#21160;, SPIP &#36890;&#36807;&#30005;&#23376;&#37038;&#20214;&#21457;&#36865;&#32473;&#32534;&#36753;&#30340;&#37038;&#20214;&#21015;&#34920;&#20316;&#20026;&#23454;&#20363;,
@@ -717,7 +718,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_une_rubrique' => '&#19968;&#20010;&#19987;&#26639;,',
 'info_une_rubrique_02' => '1&#20010;&#19987;&#26639;',
 'info_url' => 'URL:', # MODIF
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => '&#31449;&#28857; URL:', # MODIF
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => '&#36229;&#38142;&#25509;:',
 'info_utilisation_spip' => 'SPIP &#20934;&#22791;&#20351;&#29992;...',
 'info_visites_par_mois' => '&#27599;&#26376;&#26174;&#31034;:',

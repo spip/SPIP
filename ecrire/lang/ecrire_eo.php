@@ -399,6 +399,7 @@ La publikaj forumoj estos la&#365;kaze unu post la alia permesitaj
 'info_etape_suivante' => 'Ek al posta etapo',
 'info_etape_suivante_1' => 'Vi povas pa&#349;i al posta etapo.',
 'info_etape_suivante_2' => 'Vi povas pa&#349;i al posta etapo.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'Eksporto de la datenbazo al @archive@',
 'info_facilite_suivi_activite' => 'Por faciligi la kontrolon de la reteja &#265;efartikola aktiveco, SPIP povas transdoni per retmesa&#285;oj - ekzemple al dissendlisto de redaktantoj - la anoncon pri publikig-petoj kaj validig-petoj de artikoloj.',
 'info_fichiers_authent' => 'A&#365;tentokontrolaj dosieroj &laquo;&nbsp;.htpasswd&nbsp;&raquo;',
@@ -701,7 +702,9 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'info_une_rubrique' => 'unu rubriko,',
 'info_une_rubrique_02' => '1 rubriko',
 'info_url' => 'URL&nbsp;:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'RETEJO-URL&nbsp;:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Hiperligilo&nbsp;:',
 'info_utilisation_spip' => 'Vi povas nun ekuzi la asistatan publikigilon...',
 'info_visites_par_mois' => 'Afi&#349;ado la&#365; monato :',
