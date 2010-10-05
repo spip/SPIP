@@ -136,8 +136,11 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 		}
 
 		// marquer les documents vus dans le texte si il y a lieu
-		include_spip('base/auxiliaires');
-		marquer_doublons_documents($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc, $serveur);
+		include_spip('inc/autoriser');
+		if (autoriser('autoassocierdocument',$type,$id)){
+			include_spip('base/auxiliaires');
+			marquer_doublons_documents($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc, $serveur);
+		}
 
 		// Notifications, gestion des revisions...
 		// en standard, appelle |nouvelle_revision ci-dessous
