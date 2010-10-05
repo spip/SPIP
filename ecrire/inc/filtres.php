@@ -2273,22 +2273,30 @@ function url_rss_forum($texte){return $texte;}
  *
  * @param string $url
  * @param string $libelle
+ *   le texte du lien
  * @param bool $on
+ *   etat expose (genere un strong) ou non (genere un lien)
  * @param string $class
  * @param string $title
+ * @param string $rel
+ * @param string $evt
+ *   complement a la balise a pour gerer un evenement javascript, de la forme " onclick='...'"
  * @return string
  */
-function lien_ou_expose($url,$libelle=NULL,$on=false,$class="",$title="",$rel=""){
-	return 
-	($on ?"<strong class='on'>":
-		"<a href='$url'"
+function lien_ou_expose($url,$libelle,$on=false,$class="",$title="",$rel="", $evt=''){
+	if ($on) {
+		$bal = "strong";
+		$att = "class='on'";
+	} else {
+		$bal = 'a';
+		$att = "href='$url'"
 	  	.($title?" title='".attribut_html($title)."'":'')
 	  	.($class?" class='".attribut_html($class)."'":'')
 	  	.($rel?" rel='".attribut_html($rel)."'":'')
-	  	.">"
-	)
-	. $libelle != NULL ? $libelle : $url
-	. ($on ? "</strong>":"</a>");
+		.$evt;
+	}
+
+	return "<$bal $att>$libelle</$bal>";
 }
 
 
