@@ -86,57 +86,6 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	return $corps;
 }
 
-// http://doc.spip.org/@afficher_erreurs_auteur
-function afficher_erreurs_auteur($echec) {
-	foreach (explode('@@@',$echec) as $e)
-		$corps .= '<p>' . _T($e) . "</p>\n";
-
-	$corps = debut_cadre_relief('', true)
-	.  "<span style='color: red; left-margin: 5px'>"
-	.  http_img_pack("warning-24.png", _T('info_avertissement'), "style='width: 48px; height: 48px; float: left; margin: 5px;'")
-	. $corps
-	.  _T('info_recommencer')
-	.  "</span>\n"
-	. fin_cadre_relief(true);
-
-	return $corps;
-}
-
-
-// http://doc.spip.org/@legender_auteur_saisir
-//
-// Apparaitre dans la liste des redacteurs connectes
-//
-
-// http://doc.spip.org/@apparait_auteur_infos
-function apparait_auteur_infos($id_auteur, $auteur) {
-
-	if ($auteur['imessage']=="non"){
-		$res = "<input type='radio' name='perso_activer_imessage' value='oui' id='perso_activer_imessage_on'>"
-		. " <label for='perso_activer_imessage_on'>"._T('bouton_radio_apparaitre_liste_redacteurs_connectes')."</label> "
-		. "<br />\n<input type='radio' name='perso_activer_imessage' value='non' checked='checked' id='perso_activer_imessage_off'>"
-		. " <b><label for='perso_activer_imessage_off'>"._T('bouton_radio_non_apparaitre_liste_redacteurs_connectes')."</label></b> ";
-	} else {
-		$res = "<input type='radio' name='perso_activer_imessage' value='oui' id='perso_activer_imessage_on' checked='checked'>"
-		. " <b><label for='perso_activer_imessage_on'>"
-		. _T('bouton_radio_apparaitre_liste_redacteurs_connectes')
-		. "</label></b> "
-		. "<br />\n<input type='radio' name='perso_activer_imessage' value='non' id='perso_activer_imessage_off'>"
-		. " <label for='perso_activer_imessage_off'>"
-		. _T('bouton_radio_non_apparaitre_liste_redacteurs_connectes')
-		. "</label> ";
-	}
-
-	return 
-		debut_cadre_enfonce("messagerie-24.png", true, "", _T('info_liste_redacteurs_connectes'))
-		. "\n<div>"
-		. _T('texte_auteur_messagerie')
-		. "</div>"
-		. $res
-		. fin_cadre_enfonce(true)
-		. "<br />\n";
-}
-
 
 // http://doc.spip.org/@legender_auteur_voir
 function legender_auteur_voir($auteur) {

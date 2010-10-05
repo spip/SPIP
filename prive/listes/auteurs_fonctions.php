@@ -80,7 +80,8 @@ function afficher_initiale($url,$initiale,$compteur,$debut,$pas){
 		OR ($initiale!==$memo['initiale'])
 		){
 		$newcompt = intval(floor(($compteur-1)/$pas)*$pas);
-		#var_dump("$initiale:$newcompt");
+		// si fin de la pagination et une seule entree, ne pas l'afficher, ca ne sert a rien
+		if (!$initiale AND !$url AND !$memo['entree']) return "";
 		if ($memo){
 			$on = (($memo['compteur']<=$debut)
 				AND (
@@ -89,7 +90,7 @@ function afficher_initiale($url,$initiale,$compteur,$debut,$pas){
 			$res = lien_ou_expose($memo['url'],$memo['initiale'],$on,'lien_pagination');
 		}
 		if ($initiale)
-			$memo = array('initiale'=>$initiale,'url'=>parametre_url($url,'i',$initiale),'compteur'=>$newcompt);
+			$memo = array('entree'=>isset($memo['entree'])?$memo['entree']+1:0,'initiale'=>$initiale,'url'=>parametre_url($url,'i',$initiale),'compteur'=>$newcompt);
 	}
 	return $res;
 }
@@ -109,7 +110,7 @@ function afficher_initiale($url,$initiale,$compteur,$debut,$pas){
  * @param string $email
  * @return string
  */
-function auteur_lien_messagerie($id_auteur,$en_ligne,$statut,$imessage,$email){
+function auteur_lien_messagerie($id_auteur,$en_ligne,$statut,$imessage,$email=''){
 	static $time = null;
 	if (!in_array($statut, array('0minirezo', '1comite')))
 		return '';
@@ -127,9 +128,6 @@ function auteur_lien_messagerie($id_auteur,$en_ligne,$statut,$imessage,$email){
 	else
 		return '';
 
-	return "<a href='$href' title=\""
-	  .  _T('info_envoyer_message_prive')
-	  . "\" class='message'>&nbsp;</a>";
 }
 
 ?>

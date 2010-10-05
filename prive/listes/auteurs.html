@@ -24,9 +24,9 @@
 		[<tr><td colspan="5"><p class='pagination'>(#PAGINATION{prive})</p></td></tr>]
 		<tr class='first_row'>
 			<th class='statut'>[(#TRI{statut,#CHEMIN{images/admin-12.gif}|balise_img{<:afficher_objets:info_statut|attribut_html:>},ajax})]</th>
-			<th class='email'></th>
+			<th class='messagerie'></th>
 			<th class='nom'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
-			<th class='site'>[(#TRI{url_site,<:info_site:>,ajax})]</th>
+			<th class='email'>[(#TRI{email,<:email:>,ajax})]</th>
 			<th class='nombre'>[(#TRI{compteur_articles,<:info_articles:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -34,9 +34,9 @@
 	<BOUCLE_liste_aut(AUTEURS){tout}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} aut}{!compteur_articles_filtres #ENV{filtre_statut_articles,poubelle}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class='statut'>[(#ID_AUTEUR|puce_changement_statut{#STATUT,0,auteur})]</td>
-			<td class="mail">[<a href="(#ID_AUTEUR|auteur_lien_messagerie{#EN_LIGNE,#STATUT,#IMESSAGE,#EMAIL})">[(#CHEMIN{images/m_envoi.gif}|balise_img{<:info_envoyer_message_prive:>})]</a>]</td>
+			<td class="messagerie">[<a href="(#ID_AUTEUR|auteur_lien_messagerie{#EN_LIGNE,#STATUT,#IMESSAGE})">[(#CHEMIN{images/m_envoi.gif}|balise_img{<:info_envoyer_message_prive:>})]</a>]</td>
 			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,26})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
-			<td class='site'>[<a href='(#URL_SITE|traiter_lien_explicite)'>[(#NOM_SITE|sinon{#URL_SITE|traiter_lien_explicite|couper{30}})]</a>]</td>
+			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
 			<td class='nombre'>[(#COMPTEUR_ARTICLES|singulier_ou_pluriel{info_1_article,info_nb_articles})][<br /><span>(#PIPELINE{'compter_contributions_auteur',#ARRAY{args,#ARRAY{id_auteur,#ID_AUTEUR},data,#ARRAY{}}}|implode{'<br />'})</span>]</td>
 		</tr>
 	</BOUCLE_liste_aut>
