@@ -72,10 +72,10 @@ function generer_url_ecrire_rubrique($id, $args='', $ancre='', $statut='', $conn
 
 // http://doc.spip.org/@generer_url_ecrire_auteur
 function generer_url_ecrire_auteur($id, $args='', $ancre='', $statut='', $connect='') {
-	$a = "id_auteur=" . intval($id);
+	$a = (intval($id)?"id_auteur=" . intval($id):'');
 	$h = (!$statut OR $connect)
 	?  generer_url_entite_absolue($id, 'auteur', $args, $ancre, $connect)
-	: (generer_url_ecrire('auteur_infos',$a . ($args ? "&$args" : ''))
+	: (generer_url_ecrire('auteur_infos',$a . ($args ? ($a?"&":"").$args : ''))
 		. ($ancre ? "#$ancre" : ''));
 	return $h;
 }
