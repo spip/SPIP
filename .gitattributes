@@ -11,7 +11,6 @@ ecrire/action/configuration.php -text
 ecrire/action/confirmer_email.php -text
 ecrire/action/converser.php -text
 ecrire/action/copier_local.php -text
-ecrire/action/dater.php -text
 ecrire/action/desinstaller_plugin.php -text
 ecrire/action/documenter.php -text
 ecrire/action/editer_article.php -text
@@ -94,7 +93,6 @@ ecrire/exec/configurer_relayeur.php -text
 ecrire/exec/convert_sql_utf8.php -text
 ecrire/exec/convert_utf8.php -text
 ecrire/exec/copier_local.php -text
-ecrire/exec/dater.php -text
 ecrire/exec/demande_mise_a_jour.php -text
 ecrire/exec/documenter.php -text
 ecrire/exec/documents_colonne.php -text
@@ -335,6 +333,7 @@ prive/contenu/item_rss_plugin.html -text
 prive/contenu/rubrique.html -text
 prive/editer/article.html -text
 prive/editer/auteur.html -text
+prive/editer/dater.html -text
 prive/editer/logo.html -text
 prive/editer/rubrique.html -text
 prive/formulaires/configurer_annonces.html -text
@@ -378,6 +377,8 @@ prive/formulaires/configurer_transcodeur.html -text
 prive/formulaires/configurer_transcodeur.php -text
 prive/formulaires/configurer_visiteurs.html -text
 prive/formulaires/configurer_visiteurs.php -text
+prive/formulaires/dater.html -text
+prive/formulaires/dater.php -text
 prive/formulaires/editer_article.html -text
 prive/formulaires/editer_article.php -text
 prive/formulaires/editer_auteur.html -text

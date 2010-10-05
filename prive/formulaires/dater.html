@@ -1,0 +1,51 @@
+<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{objet}-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{name,date}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#ENV{_label_date})] #AIDER{artdate}</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>[(#ENV*{afficher_#GET{name}}|affdate)]</span>
+				<span[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>&#91;<a href="#"
+						onclick="var f=jQuery(this).parents('form').eq(0);f.find('li .input').show('fast').siblings('span').hide('fast');f.find('.boutons').show('fast');f.find('input.date').eq(0).focus();return false;"
+						><:bouton_changer:></a>&#93;</span>
+				<span class="input"[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
+					<input type="text" class="date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10"/>
+					<input type="text" class="time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5"/>
+				</span>
+			</li>
+			[(#ENV{_editer_date_anterieure}|oui)
+				#SET{name,date_redac}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:texte_date_publication_anterieure:> #AIDER{artdate_redac}</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]
+					<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>[(#ENV*{afficher_#GET{name}}|affdate|sinon{<:jour_non_connu_nc:>})]</span>
+					<span class="input"[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
+						<span class="saisie_redac"[(#ENV{sans_redac}|oui)style="display:none;"]>
+							<input type="text" class="date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10"/>
+							<input type="text" class="time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5"/>
+							<br />
+						</span>
+						<span class="choix">
+							<input type="checkbox" name="sans_redac" value="1"[(#ENV{sans_redac}|oui)checked="checked"] id="sans_redac"
+							onchange="if (jQuery(this).attr('checked')) jQuery(this).parent().siblings().hide('fast'); else jQuery(this).parent().siblings().show('fast');"
+							/><label for="sans_redac"><:texte_date_publication_anterieure_nonaffichee:></label>
+						</span>
+					</div>
+				</li>
+			]
+		</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'[(#ENV{_saisie_en_cours}|non)style="display:none;"]><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_changer:>' /></p>
+	</div></form>
+	]
+</div>
