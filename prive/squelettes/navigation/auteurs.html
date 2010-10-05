@@ -1,0 +1,18 @@
+
+#BOITE_OUVRIR{'','info'}
+<p><:info_gauche_auteurs:></p>
+[(#SESSION{statut}|=={0minirezo}|oui)
+<p><:info_gauche_auteurs_exterieurs:></p>
+]
+#BOITE_FERMER
+
+[(#BOITE_OUVRIR{<:titre_cadre_raccourcis:>,'raccourcis'})]
+	[(#AUTORISER{creer,auteur})
+		[(#REM|generer_url_entite{auteur,new=oui}|icone_horizontale{<:icone_creer_nouvel_auteur:>,auteur,new})]
+	]
+	[(#SESSION{id_auteur}|generer_url_entite{auteur}|icone_horizontale{<:icone_informations_personnelles:>,fiche-perso})]
+
+	[(#VAL{1}|avoir_visiteurs|oui)
+	[(#URL_ECRIRE{#ENV{is_visiteur,''}|?{auteurs,visiteurs}}|icone_horizontale{#ENV{is_visiteur,''}|?{<:icone_afficher_auteurs:>,<:icone_afficher_visiteurs:>},auteur})]
+	]
+#BOITE_FERMER

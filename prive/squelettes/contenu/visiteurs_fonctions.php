@@ -11,16 +11,8 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-include_spip('inc/presentation');
-
-
-// afficher les nons redacteurs !
+// Constante pour le nombre d'auteurs par page.
 @define('AUTEURS_DEFAUT', '!');
-function exec_visiteurs_dist(){
-
-	$auteurs = charger_fonction('auteurs','exec');
-	return $auteurs('visiteurs');
-}
+include_spip('prive/squelettes/contenu/auteurs_fonctions');
 
 ?>

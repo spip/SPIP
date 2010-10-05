@@ -17,6 +17,7 @@ include_spip('inc/agenda'); // inclut inc/layer, inc/texte, inc/filtre
 include_spip('inc/boutons');
 include_spip('inc/actions');
 include_spip('inc/puce_statut');
+include_spip('inc/filtre_ecrire');
 
 define('_ACTIVER_PUCE_RAPIDE', true);
 define('_SIGNALER_ECHOS', true);
@@ -356,15 +357,6 @@ function generer_onclic_ajax($url, $idom, $val)
 	  . "','"
 	  . $idom
 	  . '\');"';
-}
-
-// http://doc.spip.org/@avoir_visiteurs
-function avoir_visiteurs($past=false, $accepter=true) {
-	if ($GLOBALS['meta']["forums_publics"] == 'abo') return true;
-	if ($accepter AND $GLOBALS['meta']["accepter_visiteurs"] <> 'non') return true;
-	if (sql_countsel('spip_articles', "accepter_forum='abo'"))return true;
-	if (!$past) return false;
-	return sql_countsel('spip_auteurs',  "statut NOT IN ('0minirezo','1comite', 'nouveau', '5poubelle')");
 }
 
 // Fonctions onglets
