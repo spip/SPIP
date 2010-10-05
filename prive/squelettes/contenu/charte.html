@@ -8,6 +8,7 @@
 <h1>Icones</h1>
 
 #BOITE_OUVRIR{'<h3>|icone_verticale</h3>','info'}
+<tt>[(#</tt><tt>URL_ECRIRE{accueil}|icone_verticale{<:</tt><tt>icone_modifier_article:>,article,new})]</tt>
 [(#URL_ECRIRE{accueil}|icone_verticale{<:icone_modifier_article:>,article,new})]
 <hr style="clear:both;" />
 [(#SELF|icone_verticale{<:icone_modifier_article:>,article,new,left})]
@@ -20,6 +21,7 @@
 #BOITE_FERMER
 
 #BOITE_OUVRIR{'<h3>|icone_horizontale</h3>','info'}
+	<tt>[(#</tt><tt>SELF|icone_horizontale{<:</tt><tt>icone_modifier_article:>,article,new})]</tt>
 	<table><tr>
 		<td>[(#SELF|icone_horizontale{<:icone_modifier_article:>,article,new})]</td>
 		<td>[(#SELF|icone_horizontale{texte sur plusieurs<br />lignes pour voir si l'icone<br /> se centre bien <br />verticalement,rubrique,edit})]</td>
@@ -28,6 +30,7 @@
 	</tr></table>
 #BOITE_FERMER
 #BOITE_OUVRIR{'<h3>|icone_horizontale</h3>','info'}
+		<tt>[(#</tt><tt>SELF|icone_horizontale{<:</tt><tt>icone_modifier_article:>,article,new})]</tt>
 		[(#SELF|icone_horizontale{<:icone_modifier_article:>,article,new})]
 		[(#SELF|icone_horizontale{texte sur plusieurs<br />lignes pour voir si l'icone<br /> se centre bien <br />verticalement,rubrique,edit})]
 		[(#SELF|icone_horizontale{'deux<br />lignes',site,del})]
