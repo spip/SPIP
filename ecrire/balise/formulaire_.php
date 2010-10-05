@@ -85,6 +85,7 @@ function balise_FORMULAIRE__contexte($form, $args)
 
 	$je_suis_poste = false;
 	if ($post_form = _request('formulaire_action')
+	 AND $post_form == $form
 	 AND $p = _request('formulaire_action_args')
 	 AND is_array($p = decoder_contexte_ajax($p, $post_form))) {
 		// enlever le faux attribut de langue masque
