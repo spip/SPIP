@@ -202,7 +202,9 @@ function marquer_doublons_documents($champs,$id,$type,$id_table_objet,$table_obj
 	include_spip('inc/texte');
 	include_spip('base/abstract_sql');
 	$GLOBALS['doublons_documents_inclus'] = array();
-	traiter_modeles($champs['chapo'].$champs['texte'],true); // detecter les doublons
+	// echapper le html
+	// et detecter les modeles de document dans le texte restant
+	traiter_modeles(echappe_html($champs['chapo'].$champs['texte']),true);
 	sql_updateq("spip_documents_liens", array("vu" => 'non'), "id_objet=$id AND objet=".sql_quote($type));
 	if (count($GLOBALS['doublons_documents_inclus'])){
 		// on repasse par une requete sur spip_documents pour verifier que les documents existent bien !
