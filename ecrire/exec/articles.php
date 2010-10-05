@@ -227,24 +227,9 @@ function boites_de_config_articles($id_article)
 }
 
 // http://doc.spip.org/@boite_article_virtuel
-function boite_article_virtuel($id_article, $virtuel)
-{
-	if (!$virtuel
-	AND $GLOBALS['meta']['articles_redirection'] != 'oui')
-		return '';
-
-	$invite = '<b>'
-	._T('bouton_redirection')
-	. '</b>'
-	. aide ("artvirt");
-
-	$virtualiser = charger_fonction('virtualiser', 'inc');
-
-	return cadre_depliable("site-24.png",
-		$invite,
-		$virtuel,
-		$virtualiser($id_article, $virtuel, "articles", "id_article=$id_article"),
-		'redirection');
+function boite_article_virtuel($id_article, $virtuel){
+	return
+		recuperer_fond('prive/editer/virtualiser',array('id_article'=>$id_article));
 }
 
 // http://doc.spip.org/@bouton_modifier_articles

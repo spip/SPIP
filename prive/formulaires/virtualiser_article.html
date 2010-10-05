@@ -1,0 +1,25 @@
+<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id}" id="formulaire_#FORM-#ENV{id}">
+	[<h3 class="titrem">[(#CHEMIN_IMAGE{site-24.png}|balise_img{'','cadre-icone'})]<:texte_article_virtuel:><br />(#ENV**{_afficher_url}|PtoBR)</h3>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{name,virtuel}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}-#ENV{id}"><:bouton_redirection:> #AIDER{artvirt}</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" class="text" name="#GET{name}" id="#GET{name}-#ENV{id}" value="#ENV{#GET{name},'http://'}"
+				onkeypress="jQuery(this).parents('ul').siblings('.boutons:hidden').show('fast');"/>
+				<p class="explication"><:texte_reference_mais_redirige:></p>
+			</li>
+		</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons' style="display:none;"><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_changer:>' /></p>
+	</div></form>
+	]
+</div>
