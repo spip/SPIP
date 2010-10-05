@@ -583,7 +583,7 @@ function autoriser_ok_dist($faire, $type, $id, $qui, $opt) { return true; }
 function autoriser_niet_dist($faire, $type, $id, $qui, $opt) { return false; }
 
 
-function autoriser_base_reparer($faire, $type, $id, $qui, $opts) {
+function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opts) {
 	if (!autoriser('detruire') OR _request('reinstall'))
 		return false;
 
@@ -599,7 +599,7 @@ function autoriser_base_reparer($faire, $type, $id, $qui, $opts) {
  * Auto-association de documents a du contenu editorial qui le reference
  * par defaut true pour tous les objets
  */
-function autoriser_autoassocierdocument($faire, $type, $id, $qui, $opts) {
+function autoriser_autoassocierdocument_dist($faire, $type, $id, $qui, $opts) {
 	return true;
 }
 ?>
