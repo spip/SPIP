@@ -408,9 +408,15 @@ div.brouteur_rubrique_on div a { color: #000; }
 #wysiwyg a { /*color: #604A7F;*/ text-decoration: underline; }
 #wysiwyg a:hover { /*color: #f57900;*/ text-decoration: underline; }
 
-.spip_recherche { width: 240px; float: [(#GET{right})]; }
-.spip_recherche .recherche{ padding: 3px; width: 200px; font-size: 10px; border: 1px solid #fff; background-color: #GET{foncee}; color: #fff; margin: 0 3px 6px 0; }
+/* version old style */
+.spip_recherche { width: 240px; float: [(#GET{right})]; border:0;background:none;}
+.spip_recherche .recherche { padding: 3px; width: 200px; font-size: 10px; border: 1px solid #fff; background-color: #GET{foncee}; color: #fff; margin: 0 3px 6px 0; }
 .spip_recherche .submit {vertical-align:middle;}
+/* version moderne */
+.formulaire_spip.formulaire_recherche { width: 240px; float: [(#GET{right})]; border:0;background:none;}
+.formulaire_spip.formulaire_recherche .text{ padding: 3px; width: 200px; font-size: 10px; border: 1px solid #fff; background-color: #GET{foncee}; color: #fff; margin: 0 3px 6px 0; }
+.formulaire_spip.formulaire_recherche label {display:none;}
+.formulaire_spip.formulaire_recherche .submit,.formulaire_spip.formulaire_recherche .image {vertical-align:middle;}
 
 .boutonlien { font-weight: bold; font-size: 9px; }
 a.boutonlien:hover { color: #454545; text-decoration: none; }
