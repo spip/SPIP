@@ -12,30 +12,30 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_virtualiser_article_charger_dist($id_article,$retour=''){
+function formulaires_rediriger_article_charger_dist($id_article,$retour=''){
 
 	$row = sql_fetsel('id_article,chapo','spip_articles','id_article='.intval($id_article));
 	if (!$row['id_article'])
 		return false;
 
-	$virtuel = (strncmp($row["chapo"],'=',1)!==0) ? '' : chapo_redirige(substr($row["chapo"], 1));
+	$redirection = (strncmp($row["chapo"],'=',1)!==0) ? '' : chapo_redirige(substr($row["chapo"], 1));
 
-	if (!$virtuel
+	if (!$redirection
 		AND $GLOBALS['meta']['articles_redirection'] != 'oui')
 		return false;
 
 
 	$valeurs = array(
-		'virtuel'=>$virtuel,
+		'redirection'=>$redirection,
 		'id'=>$id_article,
-		'_afficher_url' => ($virtuel?propre("[->$virtuel]"):''),
+		'_afficher_url' => ($redirection?propre("[->$redirection]"):''),
 		);
 	return $valeurs;
 }
 
-function formulaires_virtualiser_article_traiter_dist($id_article,$retour=''){
+function formulaires_rediriger_article_traiter_dist($id_article,$retour=''){
 
-	$url = preg_replace(",^\s*https?://$,i", "", rtrim(_request('virtuel')));
+	$url = preg_replace(",^\s*https?://$,i", "", rtrim(_request('redirection')));
 	if ($url) $url = corriger_caracteres("=$url");
 
 	include_spip('action/editer_article');

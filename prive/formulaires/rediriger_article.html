@@ -3,12 +3,12 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	<form method='post' action='#ENV{action}#formulaire_#FORM-#ENV{id}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			#SET{name,virtuel}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{name,redirection}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}-#ENV{id}"><:bouton_redirection:> #AIDER{artvirt}</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>

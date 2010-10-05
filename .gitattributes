@@ -332,8 +332,8 @@ prive/editer/article.html -text
 prive/editer/auteur.html -text
 prive/editer/dater.html -text
 prive/editer/logo.html -text
+prive/editer/rediriger_article.html -text
 prive/editer/rubrique.html -text
-prive/editer/virtualiser.html -text
 prive/formulaires/configurer_annonces.html -text
 prive/formulaires/configurer_annonces.php -text
 prive/formulaires/configurer_articles.html -text
@@ -389,10 +389,10 @@ prive/formulaires/inc-logo_auteur.html -text
 prive/formulaires/login.php -text
 prive/formulaires/recherche_ecrire.html -text
 prive/formulaires/recherche_ecrire.php -text
+prive/formulaires/rediriger_article.html -text
+prive/formulaires/rediriger_article.php -text
 prive/formulaires/selecteur_groupe_mot.html -text
 prive/formulaires/selecteur_groupe_mot_fonctions.php -text
-prive/formulaires/virtualiser_article.html -text
-prive/formulaires/virtualiser_article.php -text
 prive/ical_prive.html -text
 prive/images/admin-12.gif -text
 prive/images/administration-24.gif -text
