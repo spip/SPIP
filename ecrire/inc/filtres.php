@@ -2295,8 +2295,9 @@ function lien_ou_expose($url,$libelle=NULL,$on=false,$class="",$title="",$rel=""
 	  	.($rel?" rel='".attribut_html($rel)."'":'')
 		.$evt;
 	}
-
-	return "<$bal $att>($libelle!=NULL?$libelle:$url)</$bal>";
+	if (NULL == $libelle)
+		$libelle = $url;
+	return "<$bal $att>$libelle</$bal>";
 }
 
 
