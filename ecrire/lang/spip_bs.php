@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Izmijeni',
 'bouton_chercher' => 'Pretraga',
 'bouton_choisir' => 'Izaberi',
+'bouton_deplacer' => 'D&eacute;placer', # NEW
 'bouton_download' => 'T&eacute;l&eacute;charger', # NEW
 'bouton_enregistrer' => 'Snimi',
 'bouton_radio_desactiver_messagerie_interne' => 'Dezaktiviraj interni servis poruka',

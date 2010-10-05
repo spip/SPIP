@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Turka&ntilde;a',
 'bouton_chercher' => 'Thaqha&ntilde;a',
 'bouton_choisir' => 'Chijlla&ntilde;a',
+'bouton_deplacer' => 'D&eacute;placer', # NEW
 'bouton_download' => 'T&eacute;l&eacute;charger', # NEW
 'bouton_enregistrer' => 'Ima&ntilde;a',
 'bouton_radio_desactiver_messagerie_interne' => 'Manqhax yatiyawirir suyt\'aya&ntilde;a',
