@@ -242,7 +242,7 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
  * @param array $objets
  * @param array $qualif
  */
-function auteur_qualifier($objet_source,$primary,$table_lien,$id,$objets,$qualif){
+function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 	if (preg_match(',[^\w],',$primary) OR preg_match(',[^\w],',$table_lien))
 		return false;
 	foreach($objets as $objet => $id_objets){
