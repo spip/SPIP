@@ -358,8 +358,11 @@ function calcul_branche_in($id) {
 
 	// On ajoute une generation (les filles de la generation precedente)
 	// jusqu'a epuisement
-	while ($filles = sql_allfetsel('id_rubrique', 'spip_rubriques',
-	sql_in('id_parent', $id))) {
+	while ($filles = sql_allfetsel(
+					'id_rubrique',
+					'spip_rubriques',
+					sql_in('id_parent', $id)." AND ". sql_in('id_rubrique', $id, 'NOT')
+					)) {
 		$id = join(',', array_map('array_shift', $filles));
 		$branche .= ',' . $id;
 	}
