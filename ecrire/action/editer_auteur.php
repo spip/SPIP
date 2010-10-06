@@ -138,7 +138,8 @@ function auteurs_set($id_auteur, $set = null) {
 
 /**
  * Associer un auteur a des objets listes sous forme
- * array('objet'=>$id_objet,...)
+ * array($objet=>$id_objets,...)
+ * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
  *
  * on peut passer optionnellement une qualification du (des) lien(s) qui sera
  * alors appliquee dans la foulee.
@@ -150,14 +151,17 @@ function auteurs_set($id_auteur, $set = null) {
  * @return string
  */
 function auteur_associer($id_auteur,$objets, $qualif = null){
-	foreach($objets as $objet => $id_objet){
-		if ($id_objet=intval($id_objet)
-			AND !sql_getfetsel(
-							'id_auteur',
-							"spip_auteurs_liens",
-							array('id_objet='.intval($id_objet), 'objet='.sql_quote($objet), 'id_auteur='.intval($id_auteur))))
-		{
-				sql_insertq("spip_auteurs_liens", array('id_objet' => $id_objet, 'objet'=>$objet, 'id_auteur' =>$id_auteur));
+	foreach($objets as $objet => $id_objets){
+		if (!is_array($id_objets)) $id_objets = array($id_objets);
+		foreach($id_objets as $id_objet) {
+			if ($id_objet=intval($id_objet)
+				AND !sql_getfetsel(
+								'id_auteur',
+								"spip_auteurs_liens",
+								array('id_objet='.intval($id_objet), 'objet='.sql_quote($objet), 'id_auteur='.intval($id_auteur))))
+			{
+					sql_insertq("spip_auteurs_liens", array('id_objet' => $id_objet, 'objet'=>$objet, 'id_auteur' =>$id_auteur));
+			}
 		}
 	}
 	if ($qualif)
@@ -179,7 +183,8 @@ function auteur_referent($id_auteur,$c){
 
 /**
  * Dossocier un auteur des objets listes sous forme
- * array($objet=>$id_objet,...)
+ * array($objet=>$id_objets,...)
+ * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
  *
  * un * pour $id_auteur,$objet,$id_objet permet de traiter par lot
  *
@@ -189,16 +194,19 @@ function auteur_referent($id_auteur,$c){
  */
 function auteur_dissocier($id_auteur,$objets){
 	$retire = array();
-	foreach($objets as $objet => $id_objet){
-		$where = array();
-		if ($id_auteur AND $id_auteur!=='*')
-			$where[] = "id_auteur=".intval($id_auteur);
-		if ($objet AND $objet!=='*')
-			$where[] = "objet=".sql_quote($objet);
-		if ($id_objet AND $id_objet!=='*')
-			$where[] = "id_objet=".intval($id_objet);
-		sql_delete("spip_auteurs_liens", $where);
-		$retire[] = array('source'=>array('auteur'=>$id_auteur),'lien'=>array($objet=>$id_objet),'type'=>$objet,'id'=>$id_objet);
+	foreach($objets as $objet => $id_objets){
+		if (!is_array($id_objets)) $id_objets = array($id_objets);
+		foreach($id_objets as $id_objet) {
+			$where = array();
+			if ($id_auteur AND $id_auteur!=='*')
+				$where[] = "id_auteur=".intval($id_auteur);
+			if ($objet AND $objet!=='*')
+				$where[] = "objet=".sql_quote($objet);
+			if ($id_objet AND $id_objet!=='*')
+				$where[] = "id_objet=".intval($id_objet);
+			sql_delete("spip_auteurs_liens", $where);
+			$retire[] = array('source'=>array('auteur'=>$id_auteur),'lien'=>array($objet=>$id_objet),'type'=>$objet,'id'=>$id_objet);
+		}
 	}
 	pipeline('trig_supprimer_objets_lies',$retire);
 
@@ -206,7 +214,9 @@ function auteur_dissocier($id_auteur,$objets){
 }
 
 /**
- * Qualifier le lien d'un auteur avec un objet
+ * Qualifier le lien d'un auteur avec les objets listes
+ * array($objet=>$id_objets,...)
+ * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
  * exemple :
  * $c = array('vu'=>'oui');
  * un * pour $id_auteur,$objet,$id_objet permet de traiter par lot
@@ -216,16 +226,19 @@ function auteur_dissocier($id_auteur,$objets){
  * @param array $qualif
  */
 function auteur_qualifier($id_auteur,$objets,$qualif){
-	foreach($objets as $objet => $id_objet){
-		$where = array();
-		if ($id_auteur AND $id_auteur!=='*')
-			$where[] = "id_auteur=".intval($id_auteur);
-		if ($objet AND $objet!=='*')
-			$where[] = "objet=".sql_quote($objet);
-		if ($id_objet AND $id_objet!=='*')
-			$where[] = "id_objet=".intval($id_objet);
-		if ($c)
-			sql_updateq("spip_auteurs_liens",$qualif,$where);
+	foreach($objets as $objet => $id_objets){
+		if (!is_array($id_objets)) $id_objets = array($id_objets);
+		foreach($id_objets as $id_objet) {
+			$where = array();
+			if ($id_auteur AND $id_auteur!=='*')
+				$where[] = "id_auteur=".intval($id_auteur);
+			if ($objet AND $objet!=='*')
+				$where[] = "objet=".sql_quote($objet);
+			if ($id_objet AND $id_objet!=='*')
+				$where[] = "id_objet=".intval($id_objet);
+			if ($c)
+				sql_updateq("spip_auteurs_liens",$qualif,$where);
+		}
 	}
 }
 
@@ -280,10 +293,11 @@ function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
 	
 	if (is_array($c['restreintes'])
 	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$c['restreintes']))) {
-		sql_delete("spip_auteurs_liens", "objet='rubrique' AND id_auteur=".sql_quote($id_auteur));
-		foreach (array_unique($c['restreintes']) as $id_rub)
-			if ($id_rub = intval($id_rub)) // si '0' on ignore
-				sql_insertq('spip_auteurs_liens', array('id_auteur' => $id_auteur, 'objet'=>'rubrique', 'id_objet'=>$id_rub));
+		$rubriques = array_map('intval',$c['restreintes']);
+		$rubriques = array_unique($rubriques);
+		$rubriques = array_diff($rubriques,array(0));
+		auteur_dissocier($id_auteur, array('rubrique'=>'*'));
+		auteur_associer($id_auteur,array('rubrique'=>$rubriques));
 	}
 
 	if (!count($champs)) return;
