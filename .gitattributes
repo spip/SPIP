@@ -334,6 +334,7 @@ prive/contenu/rubrique.html -text
 prive/editer/article.html -text
 prive/editer/auteur.html -text
 prive/editer/dater.html -text
+prive/editer/liens.html -text
 prive/editer/logo.html -text
 prive/editer/rediriger_article.html -text
 prive/editer/rubrique.html -text
@@ -384,6 +385,8 @@ prive/formulaires/editer_article.html -text
 prive/formulaires/editer_article.php -text
 prive/formulaires/editer_auteur.html -text
 prive/formulaires/editer_auteur.php -text
+prive/formulaires/editer_liens.html -text
+prive/formulaires/editer_liens.php -text
 prive/formulaires/editer_logo.html -text
 prive/formulaires/editer_logo.php -text
 prive/formulaires/editer_rubrique.html -text
@@ -654,7 +657,11 @@ prive/javascript/pause.js -text
 prive/javascript/sha256.js -text
 prive/listes/articles.html -text
 prive/listes/auteurs.html -text
+prive/listes/auteurs_associer.html -text
+prive/listes/auteurs_associer_fonctions.php -text
 prive/listes/auteurs_fonctions.php -text
+prive/listes/auteurs_lies.html -text
+prive/listes/auteurs_lies_fonctions.php -text
 prive/listes/rubriques.html -text
 prive/listes/visiteurs.html -text
 prive/listes/visiteurs_fonctions.php -text

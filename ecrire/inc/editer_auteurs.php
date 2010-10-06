@@ -35,7 +35,11 @@ function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titr
 		$futurs = ajouter_auteurs_objet($type, $id, '',$script_edit_objet, $arg_ajax);
 	} else $futurs = '';
 
-	return editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $aff_les_auteurs, $futurs, $dummy,$titre_boite,$script_edit_objet, $arg_ajax);
+	return
+	#recuperer_fond('prive/editer/liens',array('table_source'=>'auteurs','objet'=>$type,'id_objet'=>$id))
+	#.
+	editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $aff_les_auteurs, $futurs, $dummy,$titre_boite,$script_edit_objet, $arg_ajax)
+	;
 }
 
 // http://doc.spip.org/@editer_auteurs_objet

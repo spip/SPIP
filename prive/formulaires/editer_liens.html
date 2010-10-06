@@ -1,0 +1,44 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="visible" value="#ENV{visible,0}" id="visible-#ENV{id}"/>
+	  <p class='boutons'[(#ENV{_saisie_en_cours}|non)style="display:none;"]><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_changer:>' /></p>
+		<INCLURE{fond=prive/listes/#ENV{_vue_liee},env,ajax}>
+
+		[(#ENV{visible,0}|oui)
+			<div class="opened">
+				<h3 class="titrem">[(#VAL{titre_ajouter_un_}|concat{#ENV{objet_source}}|_T)]</h3>
+				<INCLURE{fond=prive/listes/#ENV{_vue_ajout},env,ajax}>
+				[(#AUTORISER{creer,#ENV{objet_source}}|oui)
+				[(#REM|generer_url_entite{#ENV{objet_source}}
+							|parametre_url{new,oui}
+							|parametre_url{associer,#ENV{objet}|concat{'|',#ENV{id_objet}}}
+							|icone_horizontale{<:creer_et_associer:>,#ENV{objet_source},new})]
+				]
+				<div class="changer">
+					&#91;<a href="#"
+						onclick="jQuery(this).parents('div.opened').hide('fast').siblings('.changer').show();jQuery('#visible-#ENV{id}').attr('value',0);return false;"
+						><:bouton_fermer:></a>&#93;
+				</div>
+			</div>
+			<div class="changer" style="display:none;">
+					&#91;<a href="#"
+						onclick="jQuery(this).parents('div.changer').hide('fast').siblings('.opened').show('fast');jQuery('#visible-#ENV{id}').attr('value',1);return false;"
+						><:bouton_changer:></a>&#93;
+			</div>
+		]
+		[(#ENV{visible,0}|non)
+		<div class="changer">
+			&#91;<button class="link" name="visible" value="1"><:bouton_changer:></button>&#93;
+		</div>
+		]
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	</div></form>
+	]
+</div>
