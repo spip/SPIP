@@ -41,12 +41,12 @@ function action_supprimer_rubrique($r)
 	// deviennent redacteurs
 	// (il y a sans doute moyen de faire ca avec un having)
 
-	$q = sql_select("id_auteur", "spip_auteurs_rubriques", "id_rubrique=$id_rubrique");
+	$q = sql_select("id_auteur", "spip_auteurs_liens", "objet='rubrique' AND id_objet=$id_rubrique");
 
 	while ($r = sql_fetch($q)) {
 		$id_auteur = $r['id_auteur'];
-		sql_delete("spip_auteurs_rubriques", "id_rubrique=$id_rubrique AND id_auteur=$id_auteur");
-		$n = sql_countsel("spip_auteurs_rubriques", "id_auteur=$id_auteur");
+		sql_delete("spip_auteurs_liens", "objet='rubrique' AND id_objet=$id_rubrique AND id_auteur=$id_auteur");
+		$n = sql_countsel("spip_auteurs_liens", "objet='rubrique' AND id_auteur=$id_auteur");
 		if (!$n)
 			sql_updateq("spip_auteurs", array("statut" => '1comite'), "id_auteur=$id_auteur");
 	}

@@ -65,14 +65,14 @@ function optimiser_base_une_table() {
 // L'index du SELECT doit s'appeler "id"
 
 // http://doc.spip.org/@optimiser_sansref
-function optimiser_sansref($table, $id, $sel)
+function optimiser_sansref($table, $id, $sel, $and="")
 {
 	$in = array();
 	while ($row = sql_fetch($sel)) $in[$row['id']]=true;
 
 	if ($in) {
 		$in = join(',', array_keys($in));
-		sql_delete($table,  sql_in($id,$in));
+		sql_delete($table,  sql_in($id,$in) . ($and?" AND $and":""));
 		spip_log("Numeros des entrees $id supprimees dans la table $table: $in");
 	}
 	return count($in);
@@ -112,13 +112,13 @@ function optimiser_base_disparus($attente = 86400) {
 
 	# les droits d'auteurs sur une id_rubrique inexistante
 	# (plusieurs entrees seront eventuellement detruites pour chaque rub)
-	$res = sql_select("A.id_rubrique AS id",
-	 	        "spip_auteurs_rubriques AS A
+	$res = sql_select("A.id_objet AS id",
+	 	        "spip_auteurs_liens AS A
 		        LEFT JOIN spip_rubriques AS R
-		          ON A.id_rubrique=R.id_rubrique",
-			"R.id_rubrique IS NULL");
+		          ON A.id_objet=R.id_rubrique",
+			"A.objet='rubrique' AND R.id_rubrique IS NULL");
 
-	$n+= optimiser_sansref('spip_auteurs_rubriques', 'id_rubrique', $res);
+	$n+= optimiser_sansref('spip_auteurs_liens', 'id_objet', $res, "objet='rubrique'");
 
 	//
 	// Articles
@@ -127,13 +127,13 @@ function optimiser_base_disparus($attente = 86400) {
 	sql_delete("spip_articles", "statut='poubelle' AND maj < $mydate");
 
 	# les liens d'auteurs d'articles effaces
-	$res = sql_select("L.id_article AS id",
-		      "spip_auteurs_articles AS L
+	$res = sql_select("L.id_objet AS id",
+		      "spip_auteurs_liens AS L
 		        LEFT JOIN spip_articles AS A
-		          ON L.id_article=A.id_article",
-			"A.id_article IS NULL");
+		          ON L.id_objet=A.id_article",
+			"L.objet='article' AND A.id_article IS NULL");
 
-	$n+= optimiser_sansref('spip_auteurs_articles', 'id_article', $res);
+	$n+= optimiser_sansref('spip_auteurs_liens', 'id_objet', $res, "objet='article'");
 
 
 
@@ -143,35 +143,35 @@ function optimiser_base_disparus($attente = 86400) {
 
 	# les liens d'articles sur des auteurs effaces
 	$res = sql_select("L.id_auteur AS id",
-		      "spip_auteurs_articles AS L
+		      "spip_auteurs_liens AS L
 		        LEFT JOIN spip_auteurs AS A
 		          ON L.id_auteur=A.id_auteur",
-			"A.id_auteur IS NULL");
+			"L.objet='article' AND A.id_auteur IS NULL");
 
-	$n+= optimiser_sansref('spip_auteurs_articles', 'id_auteur', $res);
+	$n+= optimiser_sansref('spip_auteurs_liens', 'id_auteur', $res, "objet='article'");
 
 	# les liens de messages sur des auteurs effaces
 	$res = sql_select("M.id_auteur AS id",
-		      "spip_auteurs_messages AS M
+		      "spip_auteurs_liens AS M
 		        LEFT JOIN spip_auteurs AS A
 		          ON M.id_auteur=A.id_auteur",
-			"A.id_auteur IS NULL");
+			"M.objet='message' AND A.id_auteur IS NULL");
 
-	$n+= optimiser_sansref('spip_auteurs_messages', 'id_auteur', $res);
+	$n+= optimiser_sansref('spip_auteurs_liens', 'id_auteur', $res, "objet='message'");
 
 	# les liens de rubriques sur des auteurs effaces
-	$res = sql_select("A.id_rubrique AS id",
-		      "spip_auteurs_rubriques AS A
+	$res = sql_select("A.id_objet AS id",
+		      "spip_auteurs_liens AS A
 		        LEFT JOIN spip_rubriques AS R
-		          ON A.id_rubrique=R.id_rubrique",
-			"R.id_rubrique IS NULL");
+		          ON A.id_objet=R.id_rubrique",
+			"A.objet='rubrique' AND R.id_rubrique IS NULL");
 
-	$n+= optimiser_sansref('spip_auteurs_rubriques', 'id_rubrique', $res);
+	$n+= optimiser_sansref('spip_auteurs_liens', 'id_objet', $res, "objet='rubrique'");
 
-	# effacer les auteurs poubelle qui ne sont lies a aucun article
+	# effacer les auteurs poubelle qui ne sont lies a rien
 	$res = sql_select("A.id_auteur AS id",
 		      	"spip_auteurs AS A
-		      	LEFT JOIN spip_auteurs_articles AS L
+		      	LEFT JOIN spip_auteurs_liens AS L
 		          ON L.id_auteur=A.id_auteur",
 			"L.id_auteur IS NULL
 		       	AND A.statut='5poubelle' AND A.maj < $mydate");

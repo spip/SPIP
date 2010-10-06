@@ -27,7 +27,7 @@ function inc_informer_auteur_dist($id)
 		$nom = typo($row["nom"]);
 		$bio = propre($row["bio"]);
 		$mail = formater_auteur_mail($row, $id);
-		$nb = sql_countsel("spip_auteurs_articles", "id_auteur=$id");
+		$nb = sql_countsel("spip_auteurs_liens", "objet='article' AND id_auteur=$id");
 		if ($nb > 1)
 		  $nb = $nb . "&nbsp;" . _T('info_article_2');
 		else if($nb == 1)

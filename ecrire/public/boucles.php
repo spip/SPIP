@@ -72,8 +72,9 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 		if (!$GLOBALS['var_preview'])
 		if (!isset($boucle->modificateur['lien']) AND !isset($boucle->modificateur['tout'])) {
 			fabrique_jointures($boucle, array(
-				array($id_table, array('spip_auteurs_articles'), 'id_auteur'),
-							  array('', array('spip_articles'), 'id_article')), true, $boucle->show, $id_table);
+					array($id_table, array('spip_auteurs_liens'), 'id_auteur'),
+					array('', array('spip_articles'), array('id_objet','id_article','objet','article'))
+				), true, $boucle->show, $id_table);
 			$t = array_search('spip_articles', $boucle->from);
 			array_unshift($boucle->where,
 				array("'='", "'$t.statut'", "'\\'publie\\''"));

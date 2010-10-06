@@ -349,7 +349,7 @@ $GLOBALS[\'all_langs\'] = @$GLOBALS[\'meta\'][\'langues_proposees\'];
 
 	if ($statut != \'0minirezo\') return $statut;
 
-	$result = sql_select("id_rubrique", "spip_auteurs_rubriques", "id_auteur=$id_auteur AND id_rubrique!=\'0\'");
+	$result = sql_select("id_objet as id_rubrique", "spip_auteurs_liens", "objet=\'rubrique\' AND id_auteur=$id_auteur AND id_objet!=\'0\'");
 	if (!sql_count($result)) {
 		return 0;
 	}

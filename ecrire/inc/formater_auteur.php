@@ -81,7 +81,7 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 			($connect_statut == "0minirezo"
 			? array('prepa', 'prop', 'publie', 'refuse')
 			: array('prop', 'publie')));
-		if ($cpt = sql_countsel("spip_auteurs_articles AS L LEFT JOIN spip_articles AS A ON A.id_article=L.id_article", "L.id_auteur=$id_auteur AND $in")){
+		if ($cpt = sql_countsel("spip_auteurs_liens AS L LEFT JOIN spip_articles AS A ON (A.id_article=L.id_objet AND objet='article')", "L.id_auteur=$id_auteur AND $in")){
 			$contributions[] = ($cpt>1?$cpt.' '._T('info_article_2'):_T('info_1_article'));
 		}
 	}

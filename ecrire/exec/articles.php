@@ -298,7 +298,7 @@ function bouton_proposer_article($id_article,$statut_article){
 		AND $id_auteur = $GLOBALS["visiteur_session"]["id_auteur"]
 		AND $GLOBALS["visiteur_session"]["statut"] == "1comite"
 		AND autoriser('modifier', 'article', $id_article)
-		AND sql_fetsel("id_article", "spip_auteurs_articles", "id_article=".intval($id_article)." AND id_auteur=".intval($id_auteur))) {
+		AND sql_fetsel("id_article", "spip_auteurs_liens", "objet='article' AND id_objet=".intval($id_article)." AND id_auteur=".intval($id_auteur))) {
 			$ret .= debut_cadre_relief("", true);
 			$ret .= "<div class='verdana3' style='text-align: center;'>";
 			$ret .= "<div>"._T("texte_proposer_publication")."</div>";

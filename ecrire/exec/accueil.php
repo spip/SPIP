@@ -42,7 +42,7 @@ function personnel_accueil($coockcookie)
 
 	if (count($connect_id_rubrique)) {
 
-		$res = sql_allfetsel("R.id_rubrique, R.titre, R.descriptif", "spip_auteurs_rubriques AS A LEFT JOIN spip_rubriques AS R ON A.id_rubrique=R.id_rubrique", "A.id_auteur=$connect_id_auteur", "", "titre");
+		$res = sql_allfetsel("R.id_rubrique, R.titre, R.descriptif", "spip_auteurs_liens AS A LEFT JOIN spip_rubriques AS R ON A.id_objet=R.id_rubrique", "A.objet='rubrique' AND A.id_auteur=$connect_id_auteur", "", "titre");
 
 		foreach ($res as $k => $r) {
 			$res[$k] = "<a title='" .
