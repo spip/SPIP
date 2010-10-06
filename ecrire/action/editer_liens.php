@@ -185,7 +185,22 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 	return $ins;
 }
 
+function lien_where($id,$objet,$id_objet){
+	if (!strlen($id) 
+	  OR !strlen($objet)
+	  OR (!is_array($id_objet) AND !strlen($id_objet)))
+		return "0=1"; // securite
 
+	$where = array();
+	if ($id!=='*')
+		$where[] = "$primary=".intval($id);
+	if ($objet!=='*')
+		$where[] = "objet=".sql_quote($objet);
+	if ($id_objet!=='*')
+		$where[] = (is_array($id_objet)?sql_in('id_objet',array_map('intval',$id_objet)):"id_objet=".intval($id_objet));
+
+	return $where;
+}
 
 /**
  * Sous fonction suppression
@@ -210,13 +225,7 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 	foreach($objets as $objet => $id_objets){
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
-			$where = array();
-			if ($id AND $id!=='*')
-				$where[] = "$primary=".intval($id);
-			if ($objet AND $objet!=='*')
-				$where[] = "objet=".sql_quote($objet);
-			if ($id_objet AND $id_objet!=='*')
-				$where[] = "id_objet=".intval($id_objet);
+			$where = lien_where($id,$objet,$id_objet);
 			sql_delete($table_lien, $where);
 			$retire[] = array('source'=>array($objet_source=>$id),'lien'=>array($objet=>$id_objet),'type'=>$objet,'id'=>$id_objet);
 		}
@@ -251,13 +260,7 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 	foreach($objets as $objet => $id_objets){
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
-			$where = array();
-			if ($id AND $id!=='*')
-				$where[] = "$primary=".intval($id);
-			if ($objet AND $objet!=='*')
-				$where[] = "objet=".sql_quote($objet);
-			if ($id_objet AND $id_objet!=='*')
-				$where[] = "id_objet=".intval($id_objet);
+			$where = lien_where($id,$objet,$id_objet);
 			if ($c)
 				sql_updateq($table_lien,$qualif,$where);
 		}
