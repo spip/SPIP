@@ -122,7 +122,7 @@ function determiner_auteurs_objet($type, $id, $cond='', $limit=200)
 	if (!preg_match(',^[a-z]*$,',$type)) return array();
 
 	$jointure = 'spip_' . table_jointure('auteur', $type);
-	$cond = "id_{$type}=".sql_quote($id) . ($cond ? " AND $cond" : '');
+	$cond = "objet='{$type}' AND id_objet=".sql_quote($id) . ($cond ? " AND $cond" : '');
 	if (sql_countsel($jointure, $cond) > $limit)
 	  return array();
 	else return array_map('array_shift', sql_allfetsel("id_auteur", $jointure, $cond));
@@ -186,7 +186,7 @@ function afficher_auteurs_objet($type, $id, $edit, $cond, $script, $arg_ajax)
 	$from = table_jointure('auteur', $type);
 	if (!$from) return '' ; // securite
 	$from = "spip_{$from}";
-	$where = "id_{$type}=".sql_quote($id) . ($cond ? " AND $cond" : '');
+	$where = "objet='{$type}' AND id_objet=".sql_quote($id) . ($cond ? " AND $cond" : '');
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 
