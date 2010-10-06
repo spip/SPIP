@@ -28,13 +28,13 @@ function critere_compteur_articles_filtres_dist($idb, &$boucles, $crit, $left=fa
 	$not="";
 	if ($crit->not)
 		$not=", 'NOT'";
-	$boucle->from['auteurs_articles'] = 'spip_auteurs_liens';
-	$boucle->from_type['auteurs_articles'] = 'left';
-	$boucle->join['auteurs_articles'] = array("'auteurs'","'id_auteur'","'id_objet'","'auteurs_articles.objet=\'article\''");
+	$boucle->from['LAA'] = 'spip_auteurs_liens';
+	$boucle->from_type['LAA'] = 'left';
+	$boucle->join['LAA'] = array("'auteurs'","'id_auteur'","'id_auteur'","'LAA.objet=\'article\''");
 
 	$boucle->from['articles'] = 'spip_articles';
 	$boucle->from_type['articles'] = 'left';
-	$boucle->join['articles'] = array("'auteurs_liens'","'id_objet'","'id_article'","'auteurs_articles.objet=\'article\' AND (articles.statut IS NULL OR '.sql_in('articles.statut',$_statut$not).')'");
+	$boucle->join['articles'] = array("'LAA'","'id_article'","'id_objet'","'(articles.statut IS NULL OR '.sql_in('articles.statut',$_statut$not).')'");
 
 	$boucle->select[]= "COUNT(articles.id_article) AS compteur_articles";
 	$boucle->group[] = 'auteurs.id_auteur';
