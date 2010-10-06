@@ -198,6 +198,30 @@ function auteur_dissocier($id_auteur,$c){
 	return ''; // pas d'erreur
 }
 
+/**
+ * Qualifier le lien d'un auteur avec un objet
+ * exemple :
+ * $c = array('vu'=>'oui');
+ * un * pour $id_auteur,$objet,$id_objet permet de traiter par lot
+ *
+ * @param int $id_auteur
+ * @param string $objet
+ * @param int $id_objet
+ * @param array $c
+ */
+function auteur_qualifier($id_auteur,$objet,$id_objet,$c){
+	$where = array();
+	if ($id_auteur AND $id_auteur!=='*')
+		$where[] = "id_auteur=".intval($id_auteur);
+	if ($objet AND $objet!=='*')
+		$where[] = "objet=".sql_quote($objet);
+	if ($id_objet AND $id_objet!=='*')
+		$where[] = "id_objet=".intval($id_objet);
+	if ($c)
+		sql_updateq("spip_auteurs_liens",$c,$where);
+}
+
+
 // http://doc.spip.org/@instituer_auteur
 function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
 	if (!$id_auteur=intval($id_auteur))
