@@ -72,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_effacer_tout' => 'Effacer TOUT',
 'bouton_envoi_message_02' => 'ENVOYER UN MESSAGE',
 'bouton_envoyer_message' => 'Message d&eacute;finitif : envoyer',
+'bouton_fermer' => 'Fermer',
 'bouton_forum_petition' => 'FORUM &amp; P&Eacute;TITION',
 'bouton_modifier' => 'Modifier',
 'bouton_pense_bete' => 'PENSE-B&Ecirc;TE &Agrave; USAGE PERSONNEL',
