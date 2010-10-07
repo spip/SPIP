@@ -4,9 +4,11 @@
 	site,1,
 	compteur_articles,-1
 }})
-]<B_liste_aut>
-#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
+]
 #SET{debut,#ENV{debutautl,#EVAL{_request("debutautl");}}}
+<input type="hidden" name="debutautl" value="#GET{debut}" />
+<B_liste_aut>
+#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies auteurs">
 <table class='spip liste'>

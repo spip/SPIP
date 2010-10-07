@@ -6,9 +6,10 @@
 }})
 ]
 <BOUCLE_exclus(AUTEURS){tout}{id_objet}{objet}{doublons 1}{doublons 2} />
+#SET{debut,#ENV{debutauta,#EVAL{_request("debutauta");}}}
+<input type="hidden" name="debutauta" value="#GET{debut}" />
 <B_liste_aut>
 #SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
-#SET{debut,#ENV{debutauta,#EVAL{_request("debutauta");}}}
 #ANCRE_PAGINATION
 [<h3><:info_resultat_recherche:> &laquo;(#ENV{recherche})&raquo;</h3>]
 <div class="liste-objets liste-objets-associer auteurs">
@@ -36,14 +37,6 @@
 			}
 		})]</B_lettre>
 		[<tr><td colspan="5"><p class='pagination'>(#GET{p})</p></td></tr>]
-
-
-		<B_lettre><tr><td colspan="5"><p class='pagination'><BOUCLE_lettre(AUTEURS){doublons 1}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
-		(#NOM**|extraire_multi|initiale|unique|oui)
-		[(#SELF|parametre_url{debutaut,@#ID_AUTEUR}|ancre_url{paginationaut}|afficher_initiale{[(#NOM**|extraire_multi|initiale)],#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}})]
-		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
-		(#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}})
-		]</p></td></tr></B_lettre>
 		[<tr><td colspan="5"><p class='pagination'>(#PAGINATION{prive})</p></td></tr>]
 		<tr class='first_row'>
 			<th class='statut'>[(#TRI{statut,#CHEMIN{images/admin-12.gif}|balise_img{<:afficher_objets:info_statut|attribut_html:>},ajax})]</th>
@@ -67,7 +60,8 @@
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
-</B_liste_aut>[(#ENV{recherche}|oui)
+</B_liste_aut>
+[(#ENV{recherche}|oui)
 <div class="liste-objets liste-objets-associer auteurs">
 <span class="caption"><strong>[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</strong>
 <span class="recherche">
