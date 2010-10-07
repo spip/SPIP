@@ -50,6 +50,9 @@ function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet){
 
 function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet){
 
+	if (_request('tout_voir'))
+		set_request('recherche','');
+	#var_dump($_REQUEST);
 	if ($ajouter = _request('ajouter_lien')){
 		$ajouter_lien = charger_fonction('ajouter_lien','action');
 		foreach($ajouter as $lien=>$dummy)

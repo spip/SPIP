@@ -36,9 +36,9 @@ function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titr
 	} else $futurs = '';
 
 	return
-	#recuperer_fond('prive/editer/liens',array('table_source'=>'auteurs','objet'=>$type,'id_objet'=>$id))
+	recuperer_fond('prive/editer/liens',array('table_source'=>'auteurs','objet'=>$type,'id_objet'=>$id))
 	#.
-	editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $aff_les_auteurs, $futurs, $dummy,$titre_boite,$script_edit_objet, $arg_ajax)
+	#editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $aff_les_auteurs, $futurs, $dummy,$titre_boite,$script_edit_objet, $arg_ajax)
 	;
 }
 

@@ -11,29 +11,29 @@
 		<INCLURE{fond=prive/listes/#ENV{_vue_liee},env,ajax}>
 
 		[(#ENV{visible,0}|oui)
-			<div class="opened">
+			<div class="selecteur[(#ENV{recherche}|oui)filtre]">
 				<h3 class="titrem">[(#VAL{titre_ajouter_un_}|concat{#ENV{objet_source}}|_T)]</h3>
 				<INCLURE{fond=prive/listes/#ENV{_vue_ajout},env,ajax}>
 				[(#AUTORISER{creer,#ENV{objet_source}}|oui)
 				[(#REM|generer_url_entite{#ENV{objet_source}}
 							|parametre_url{new,oui}
 							|parametre_url{associer,#ENV{objet}|concat{'|',#ENV{id_objet}}}
-							|icone_horizontale{<:creer_et_associer:>,#ENV{objet_source},new})]
+							|icone_horizontale{[(#VAL{creer_et_associer_un_}|concat{#ENV{objet_source}}|_T)],#ENV{objet_source},new})]
 				]
-				<div class="changer">
+				<div class="toggle">
 					&#91;<a href="#"
-						onclick="jQuery(this).parents('div.opened').hide('fast').siblings('.changer').show();jQuery('#visible-#ENV{id}').attr('value',0);return false;"
+						onclick="jQuery(this).parents('div.selecteur').hide('fast').siblings('.toggle').show();jQuery('#visible-#ENV{id}').attr('value',0);return false;"
 						><:bouton_fermer:></a>&#93;
 				</div>
 			</div>
-			<div class="changer" style="display:none;">
+			<div class="toggle" style="display:none;">
 					&#91;<a href="#"
-						onclick="jQuery(this).parents('div.changer').hide('fast').siblings('.opened').show('fast');jQuery('#visible-#ENV{id}').attr('value',1);return false;"
+						onclick="jQuery(this).parents('div.toggle').hide('fast').siblings('.selecteur').show('fast');jQuery('#visible-#ENV{id}').attr('value',1);return false;"
 						><:bouton_changer:></a>&#93;
 			</div>
 		]
 		[(#ENV{visible,0}|non)
-		<div class="changer">
+		<div class="toggle">
 			&#91;<button class="link" name="visible" value="1"><:bouton_changer:></button>&#93;
 		</div>
 		]
