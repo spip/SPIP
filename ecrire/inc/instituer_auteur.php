@@ -143,8 +143,10 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 		       null, array('statut' => '0minirezo')))
 		unset($droits["info_administrateurs"]);
 
-	if (!avoir_visiteurs() AND $statut!==$droits['info_visiteurs'])
-		unset($droits['info_visiteurs']);
+	// on a toujours le droit de mettre un auteur en visiteur
+	// car ce statut n'est plus limite aux forums de puis longtemps
+	#if (!avoir_visiteurs() AND $statut!==$droits['info_visiteurs'])
+	#	unset($droits['info_visiteurs']);
 
 	$menu = '';
 	foreach($droits as $k => $v) {
