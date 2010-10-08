@@ -294,7 +294,7 @@ function objet_type($table_objet){
 		return $surnoms[$type];
 
 	// securite : eliminer les caracteres non \w
-	$type = preg_replace(',[^\w],','',$type);
+	$type = preg_replace(',[^\w-],','',$type);
 	
 	// si le type redonne bien la table c'est bon
 	// oui si table_objet ressemblait deja a un type
