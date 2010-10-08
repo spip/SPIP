@@ -44,6 +44,7 @@ function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet){
 		'recherche'=>'',
 		'visible'=>0,
 		'editable'=>autoriser('modifier',$objet,$id_objet),
+		'_oups' => _request('_oups'),
 	);
 
 	return $valeurs;
@@ -53,17 +54,41 @@ function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet){
 
 	if (_request('tout_voir'))
 		set_request('recherche','');
-	#var_dump($_REQUEST);
-	if ($ajouter = _request('ajouter_lien')){
-		$ajouter_lien = charger_fonction('ajouter_lien','action');
-		foreach($ajouter as $lien=>$dummy)
-			$ajouter_lien($lien);
-	}
 
-	if ($supprimer = _request('supprimer_lien')){
-		$supprimer_lien = charger_fonction('supprimer_lien','action');
-		foreach($supprimer as $lien=>$dummy)
-			$supprimer_lien($lien);
+
+	if (autoriser('modifier',$objet,$id_objet)) {
+		// annuler les suppressions du coup d'avant !
+		if (_request('annuler_oups')
+			AND $oups = _request('_oups')
+			AND $oups = unserialize($oups)){
+			$objet_source = objet_type($table_source);
+			include_spip('action/editer_liens');
+			foreach($oups as $oup) {
+				objet_associer(array($objet_source=>$oup[$objet_source]), array($objet=>$oup[$objet]),$oup);
+			}
+			# oups ne persiste que pour la derniere action, si suppression
+			set_request('_oups');
+		}
+		
+		if ($ajouter = _request('ajouter_lien')){
+			$ajouter_lien = charger_fonction('ajouter_lien','action');
+			foreach($ajouter as $lien=>$dummy)
+				$ajouter_lien($lien);
+			# oups ne persiste que pour la derniere action, si suppression
+			set_request('_oups');
+		}
+
+		if ($supprimer = _request('supprimer_lien')){
+			include_spip('action/editer_liens');
+			$oups = array();
+			foreach($supprimer as $lien=>$dummy) {
+				$lien = explode("-",$lien);
+				list($objet_source,$ids,$objet_lie,$idl) = $lien;
+				$oups = array_merge($oups,  objet_trouver_liens(array($objet_source=>$ids), array($objet_lie=>$idl)));
+				objet_dissocier(array($objet_source=>$ids), array($objet_lie=>$idl));
+			}
+			set_request('_oups',$oups?serialize($oups):null);
+		}
 	}
 
 	$res = array('editable'=>true);
