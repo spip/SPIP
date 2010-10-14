@@ -390,15 +390,15 @@ function sql_multi($sel, $lang, $serveur='', $option=true)
 }
 
 // http://doc.spip.org/@sql_error
-function sql_error($serveur='') {
-	$f = sql_serveur('error', $serveur);
+function sql_error($query='requete inconnue', $serveur='', $option=true) {
+	$f = sql_serveur('error', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($serveur);
+	return $f($query, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_errno
 function sql_errno($serveur='', $option=true) {
-	$f = sql_serveur('errno', $serveur);
+	$f = sql_serveur('errno', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
 	return $f($serveur);
 }
