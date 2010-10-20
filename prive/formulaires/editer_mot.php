@@ -30,6 +30,14 @@ function formulaires_editer_mot_charger_dist($id_mot='new', $id_groupe=0, $retou
 	return $valeurs;
 }
 
+/**
+ * Identifier le formulaire en faisant abstraction des parametres qui
+ * ne representent pas l'objet edite
+ */
+function formulaires_editer_mot_identifier_dist($id_mot='new', $id_groupe=0, $retour='', $ajouter_id_article=0, $table='', $table_id=0, $config_fonc='mots_edit_config', $row=array(), $hidden=''){
+	return serialize(array($id_mot,$ajouter_id_article,$row));
+}
+
 // Choix par defaut des options de presentation
 // http://doc.spip.org/@articles_edit_config
 function mots_edit_config($row)
