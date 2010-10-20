@@ -90,7 +90,7 @@ function balise_FORMULAIRE__contexte($form, $args)
 	 AND is_array($p = decoder_contexte_ajax($p, $post_form))) {
 		// enlever le faux attribut de langue masque
 		array_shift($p);
-		if ($args === $p)
+		if (formulaire__identifier($form, $args, $p))
 			$je_suis_poste = true;
 	}
 
@@ -183,6 +183,14 @@ function balise_FORMULAIRE__contexte($form, $args)
 	return $valeurs;
 }
 
+/**
+ * Charger les valeurs de saisie du formulaire
+ *
+ * @param string $form
+ * @param array $args
+ * @param bool $poste
+ * @return array
+ */
 function formulaire__charger($form, $args, $poste)
 {
 	if ($charger_valeurs = charger_fonction("charger","formulaires/$form",true))
@@ -196,5 +204,26 @@ function formulaire__charger($form, $args, $poste)
 			'data'=>$valeurs)
 	);
 	return $valeurs;
+}
+
+/**
+ * Verifier que le formulaire en cours est celui qui est poste
+ * on se base sur la fonction identifier (si elle existe) qui fournit
+ * une signature identifiant le formulaire a partir de ses arguments
+ * significatifs
+ *
+ * En l'absence de fonction identifier, on se base sur l'egalite des
+ * arguments, ce qui fonctionne dans les cas simples
+ *
+ * @param string $form
+ * @param array $args
+ * @param array $p
+ * @return bool
+ */
+function formulaire__identifier($form, $args, $p) {
+	if ($identifier_args = charger_fonction("identifier","formulaires/$form",true)) {
+		return call_user_func_array($identifier_args,$args)===call_user_func_array($identifier_args,$p);
+	}
+	return $args===$p;
 }
 ?>

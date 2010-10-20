@@ -18,6 +18,15 @@ function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $l
 	return $valeurs;
 }
 
+/**
+ * Identifier le formulaire en faisant abstraction des parametres qui
+ * ne representent pas l'objet edite
+ */
+function formulaires_editer_auteur_identifier_dist($id_auteur='new', $retour='', $lier_id_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
+	return serialize(array($id_auteur,$lier_id_article,$row));
+}
+
+
 // Choix par defaut des options de presentation
 // http://doc.spip.org/@articles_edit_config
 function auteurs_edit_config($row)
