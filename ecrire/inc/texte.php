@@ -20,6 +20,20 @@ include_spip('inc/lien');
 
 global $spip_raccourcis_typo, $class_spip_plus, $debut_intertitre, $fin_intertitre, $debut_gras, $fin_gras, $debut_italique, $fin_italique;
 
+
+if (is_null($ligne_horizontale)) $ligne_horizontale =  "\n<hr$class_spip_plus />\n";
+if (is_null($debut_intertitre)) $debut_intertitre =  "\n<h3$class_spip_plus>";
+if (is_null($fin_intertitre)) $fin_intertitre =  "</h3>\n";
+if (is_null($debut_gras)) $debut_gras =  "<strong$class_spip>";
+if (is_null($fin_gras)) $fin_gras =  '</strong>';
+if (is_null($debut_italique)) $debut_italique =  "<i$class_spip>";
+if (is_null($fin_italique)) $fin_italique =  '</i>';
+if (is_null($ouvre_ref)) $ouvre_ref =  '&nbsp;[';
+if (is_null($ferme_ref)) $ferme_ref =  ']';
+if (is_null($ouvre_note)) $ouvre_note =  '[';
+if (is_null($ferme_note)) $ferme_note =  '] ';
+
+
 $spip_raccourcis_typo = array(
 			      array(
 		/* 4 */		"/(^|[^{])[{][{][{]/S",
