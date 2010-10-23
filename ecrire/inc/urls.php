@@ -12,7 +12,108 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Decoder une url en utilisant les fonctions inverse
+ * gestion des URLs transformee par le htaccess
+ * $renommer = 'urls_propres_dist';
+ * renvoie array($contexte, $type, $url_redirect, $nfond)
+ * $nfond n'est retourne que si l'url est definie apres le ?
+ * et risque d'etre effacee par un form en get
+ * elle est utilisee par form_hidden exclusivement
+ * Compat ascendante si le retour est null en gerant une sauvegarde/restauration
+ * des globales modifiees par les anciennes fonctions
+ *
+ * @param string $url
+ *  url a decoder
+ * @param string $fond
+ *  fond initial par defaut
+ * @param array $contexte
+ *  contexte initial a prendre en compte
+ * @param bool $assembler
+ *	true si l'url correspond a l'url principale de la page qu'on est en train d'assembler
+ *  dans ce cas la fonction redirigera automatiquement si besoin
+ *  et utilisera les eventuelles globales $_SERVER['REDIRECT_url_propre'] et $_ENV['url_propre']
+ *  provenant du htaccess
+ * @return array
+ *  ($fond,$contexte,$url_redirect)
+ *  si l'url n'est pas valide, $fond restera a la valeur initiale passee
+ *  il suffit d'appeler la fonction sans $fond et de verifier qu'a son retour celui-ci
+ *  est non vide pour verifier une url
+ *
+ */
+function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
+	// les anciennes fonctions modifient directement les globales
+	// on les sauve avant l'appel, et on les retablit apres !
+	$save = array(@$GLOBALS['fond'],@$GLOBALS['contexte'],@$_SERVER['REDIRECT_url_propre'],@$_ENV['url_propre']);
 
+	// si on est pas en train d'assembler la page principale,
+	// vider les globales url propres qui ne doivent pas etre utilisees en cas
+	// d'inversion url => objet
+	if (!$assembler) {
+		unset($_SERVER['REDIRECT_url_propre']);
+		unset($_ENV['url_propre']);
+	}
+
+	
+	$url_redirect = "";
+	$renommer = generer_url_entite();
+	if (!$renommer AND !function_exists('recuperer_parametres_url'))
+		$renommer = charger_fonction('page','urls'); // fallback pour decoder l'url
+	if ($renommer) {
+		$a = $renommer($url, $fond, $contexte);
+		if (is_array($a)) {
+			list($ncontexte, $type, $url_redirect, $nfond) = $a;
+			if ($url_redirect == $url)
+				$url_redirect = ""; // securite pour eviter une redirection infinie
+			if ($assembler AND strlen($url_redirect)) {
+				spip_log("Redirige $url vers $url_redirect");
+				include_spip('inc/headers');
+				http_status(301);
+				redirige_par_entete($url_redirect);
+			}
+			if (isset($nfond))
+				$fond = $nfond;
+			else if ($fond == ''
+			OR $fond == 'type_urls' /* compat avec htaccess 2.0.0 */
+			)
+				$fond = $type;
+			if (isset($ncontexte))
+				$contexte = $ncontexte;
+		}
+	}
+	// compatibilite <= 1.9.2
+	elseif (function_exists('recuperer_parametres_url')) {
+		$GLOBALS['fond'] = $fond;
+		$GLOBALS['contexte'] = $contexte;
+		recuperer_parametres_url($fond, nettoyer_uri());
+		// fond est en principe modifiee directement
+		$contexte = $GLOBALS['contexte'];
+	}
+
+	// retablir les globales
+	list($GLOBALS['fond'],$GLOBALS['contexte'],$_SERVER['REDIRECT_url_propre'],$_ENV['url_propre']) = $save;
+	
+	// vider les globales url propres qui ne doivent plus etre utilisees en cas
+	// d'inversion url => objet
+	// maintenir pour compat ?
+	#if ($assembler) {
+	#	unset($_SERVER['REDIRECT_url_propre']);
+	#	unset($_ENV['url_propre']);
+	#}
+
+	return array($fond,$contexte,$url_redirect);
+}
+
+
+/**
+ * Lister les objets pris en compte dans les urls
+ * c'est a dire suceptibles d'avoir une url propre
+ *
+ * @param bool $preg
+ *  permet de definir si la fonction retourne une chaine avec | comme separateur
+ *  pour utiliser en preg, ou un array()
+ * @return string/array
+ */
 function urls_liste_objets($preg = true){
 	$url_objets = pipeline('declarer_url_objets',array('article','rubrique','auteur'));
 	if (!$preg) return $url_objets;
@@ -20,6 +121,15 @@ function urls_liste_objets($preg = true){
 	return $url_objets;
 }
 
+/**
+ * Nettoyer une url, en reperant notamment les raccourcis d'entites
+ * comme ?article13, ?rubrique21 ...
+ * et en les traduisant pour completer le contexte fourni en entree
+ *
+ * @param string $url
+ * @param array $contexte
+ * @return array
+ */
 function nettoyer_url_page($url, $contexte=array())
 {
 	$url_objets = urls_liste_objets();
@@ -40,10 +150,19 @@ function nettoyer_url_page($url, $contexte=array())
 }
 
 
-// fonction produisant les URL d'acces en lecture ou en ecriture 
-// des items des tables SQL principales, selon le statut de publication
-
-// http://doc.spip.org/@generer_url_ecrire_article
+/**
+ * Generer l'url d'un article dans l'espace prive,
+ * fonction du statut de l'a rubrique'article
+ *
+ * @param int $id
+ * @param string $args
+ * @param string $ancre
+ * @param string $statut
+ * @param string $connect
+ * @return string
+ *
+ * http://doc.spip.org/@generer_url_ecrire_article
+ */
 function generer_url_ecrire_article($id, $args='', $ancre='', $statut='', $connect='') {
 	$a = "id_article=" . intval($id);
 	if (!$statut) {
@@ -56,7 +175,19 @@ function generer_url_ecrire_article($id, $args='', $ancre='', $statut='', $conne
 	return $h;
 }
 
-// http://doc.spip.org/@generer_url_ecrire_rubrique
+/**
+ * Generer l'url d'une rubrique dans l'espace prive,
+ * fonction du statut de la rubrique
+ *
+ * @param int $id
+ * @param string $args
+ * @param string $ancre
+ * @param string $statut
+ * @param string $connect
+ * @return string
+ *
+ * http://doc.spip.org/@generer_url_ecrire_rubrique
+ */
 function generer_url_ecrire_rubrique($id, $args='', $ancre='', $statut='', $connect='') {
 	$a = "id_rubrique=" . intval($id);
 	if (!$statut) {
@@ -70,7 +201,19 @@ function generer_url_ecrire_rubrique($id, $args='', $ancre='', $statut='', $conn
 }
 
 
-// http://doc.spip.org/@generer_url_ecrire_auteur
+/**
+ * Generer l'url d'un auteur dans l'espace prive,
+ * fonction du statut de l'auteur
+ *
+ * @param int $id
+ * @param string $args
+ * @param string $ancre
+ * @param string $statut
+ * @param string $connect
+ * @return string
+ *
+ * http://doc.spip.org/@generer_url_ecrire_auteur
+ */
 function generer_url_ecrire_auteur($id, $args='', $ancre='', $statut='', $connect='') {
 	$a = (intval($id)?"id_auteur=" . intval($id):'');
 	$h = (!$statut OR $connect)
@@ -80,7 +223,19 @@ function generer_url_ecrire_auteur($id, $args='', $ancre='', $statut='', $connec
 	return $h;
 }
 
-// http://doc.spip.org/@generer_url_ecrire_document
+/**
+ * Generer l'url d'un document dans l'espace prive,
+ * fonction du statut du document
+ * 
+ * @param int $id
+ * @param string $args
+ * @param string $ancre
+ * @param string $statut
+ * @param string $connect
+ * @return string
+ *
+ * http://doc.spip.org/@generer_url_ecrire_document
+ */
 function generer_url_ecrire_document($id, $args='', $ancre='', $statut='', $connect='') {
 	include_spip('inc/documents');
 	return generer_url_document_dist($id);

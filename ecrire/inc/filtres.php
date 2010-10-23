@@ -1680,15 +1680,14 @@ function regledetrois($a,$b,$c)
 // http://doc.spip.org/@form_hidden
 function form_hidden($action) {
 
-	$fond = ''; // inutilise mais necessaire
 	$contexte = array();
-	if (
-			($renommer = generer_url_entite() OR $renommer = charger_fonction('page','urls'))
-	AND $p = $renommer($action, $fond, $contexte)
-	AND $p[3]) {
-		$contexte = $p[0];
-		$contexte['page'] = $p[3];
-		$action = preg_replace('/([?]'.$p[3].'[^&=]*[0-9]+)(&|$)/', '?&', $action);
+	include_spip('inc/urls');
+	if ($p = urls_decoder_url($action, '')
+		AND reset($p)) {
+		$fond = array_shift($p);
+		$contexte = array_shift($p);
+		$contexte['page'] = $fond;
+		$action = preg_replace('/([?]'.preg_quote($fond).'[^&=]*[0-9]+)(&|$)/', '?&', $action);
 	}
 
 	// on va remplir un tableau de valeurs en prenant bien soin de ne pas
