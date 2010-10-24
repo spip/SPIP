@@ -17,6 +17,8 @@ include_spip('base/abstract_sql');
 function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden=''){
 
 	$res = array();
+	// eviter la redirection forcee par l'action...
+	set_request('redirect');
 	$action_editer = charger_fonction("editer_$type",'action');
 	list($id,$err) = $action_editer($id);
 	$id_table_objet = id_table_objet($type);
