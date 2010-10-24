@@ -38,6 +38,7 @@ function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet){
 		'id'=>"$table_source-$objet-$id_objet", // identifiant unique pour les id du form
 		'_vue_liee' => $table_source."_lies",
 		'_vue_ajout' => $table_source."_associer",
+		'id_new'=>0,
 		'objet'=>$objet,
 		'id_objet'=>$id_objet,
 		'objet_source'=>$objet_source,
@@ -113,7 +114,7 @@ function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet){
 				}
 			}
 		}
-		
+
 		if ($supprimer){
 			include_spip('action/editer_liens');
 			$oups = array();
@@ -130,16 +131,22 @@ function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet){
 		}
 		
 		if ($ajouter){
+			$ajout_ok = false;
 			$ajouter_lien = charger_fonction('ajouter_lien','action');
 			foreach($ajouter as $k=>$v){
 				if ($lien = lien_verifier_action($k,$v)){
+					$ajout_ok = true;
 					$ajouter_lien($lien);
+					$lien = explode("-",$lien);
+					list(,$id_new,,) = $lien;
+					set_request('id_new',$id_new);
 				}
 			}
 			# oups ne persiste que pour la derniere action, si suppression
 			# une suppression suivie d'un ajout dans le meme hit est un remplacement
 			# non annulable !
-			set_request('_oups');
+			if ($ajout_ok)
+				set_request('_oups');
 		}
 	}
 
