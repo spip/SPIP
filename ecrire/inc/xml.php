@@ -66,7 +66,7 @@ function spip_xml_parse(&$texte, $strict=true, $clean=true, $profondeur = -1){
 			$out[$tag][]="";
 		}
 		else{
-			$closing_tag = explode(" ",trim($tag));
+			$closing_tag = preg_split(",\s|\t|\n|\r,",trim($tag));
 			$closing_tag=reset($closing_tag);
 			// tag fermant
 			$ncclos = strlen("</$closing_tag>");
