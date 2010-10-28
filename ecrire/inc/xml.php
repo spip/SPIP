@@ -128,7 +128,8 @@ function spip_xml_aplatit($arbre,$separateur = " "){
 			else
 				$s.="$feuille$separateur";
 		}
-	return strlen($separateur)?substr($s,0,-strlen($separateur)):$s;
+	return strlen($separateur) ?
+				trim(substr($s, 0, -strlen($separateur))) : trim($s);
 }
 
 // http://doc.spip.org/@spip_xml_tagname
