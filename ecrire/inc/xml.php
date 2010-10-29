@@ -91,8 +91,7 @@ function spip_xml_parse(&$texte, $strict=true, $clean=true, $profondeur = -1){
 				}
 				else return importer_charset($texte,$charset);//$texte // un tag qui constitue du texte a reporter dans $before
 			}
-			// un trim pour les tag indentes et/ou ecrits sur plusieurs lignes
-			$content = trim(substr($txt,0,$p));
+			$content = substr($txt,0,$p);
 			$txt = substr($txt,$p+$ncclos);
 			if ($profondeur==0 OR strpos($content,"<")===FALSE) // eviter une recursion si pas utile
 				$out[$tag][] = importer_charset($content,$charset);//$content;
