@@ -94,11 +94,11 @@ function editer_choix_webmestre($auteur){
 
 // http://doc.spip.org/@traduire_statut_auteur
 function traduire_statut_auteur($statut){
-	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
+	$recom = pipeline('traduire_statut_auteur',array("info_administrateurs" => _T('item_administrateur_2'),
 		       "info_redacteurs" =>  _T('intem_redacteur'),
 		       "info_visiteurs" => _T('item_visiteur'),
 		       '5poubelle' => _T('texte_statut_poubelle'), // bouh
-		       );
+		       ));
 	if (isset($recom[$statut]))
 		return $recom[$statut];
 	
