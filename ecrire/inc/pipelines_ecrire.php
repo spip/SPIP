@@ -22,6 +22,7 @@ function f_jQuery_prive ($texte) {
 		'javascript/jquery.form.js',
 		'javascript/jquery.autosave.js',
 		'javascript/ajaxCallback.js',
+		'javascript/jquery.colors.js',
 		'javascript/jquery.cookie.js'
 	))) as $script)
 		if ($script = find_in_path($script))
