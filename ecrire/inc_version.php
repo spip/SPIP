@@ -338,6 +338,7 @@ $spip_pipeline = array(
 	'calculer_rubriques' => '',
 	'autoriser' => '',
 	'notifications' => '',
+	'notifications_envoyer_mails' => '',
 	'editer_contenu_objet' => '',
 	'arbo_creer_chaine_url' => '|urls_arbo_creer_chaine_url',
 	'propres_creer_chaine_url' => '|urls_propres_creer_chaine_url',
