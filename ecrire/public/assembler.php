@@ -315,8 +315,6 @@ function inserer_balise_dynamique($contexte_exec, $contexte_compil)
 	if (!is_array($contexte_exec))
 		echo $contexte_exec; // message d'erreur etc
 	else {
-		if ($contexte_compil[4] AND empty($contexte_exec[2]['lang']))
-			$contexte_exec[2]['lang'] = $contexte_compil[4];
 		inclure_balise_dynamique($contexte_exec, true, $contexte_compil);
 	}
 }
