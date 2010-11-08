@@ -20,7 +20,7 @@
 			<li class='saisie_mail_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{mail_inscription}|oui)erreur]'>
 				<label for="mail_inscription"><:form_pet_votre_email:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{mail_inscription})</span>]
-				<input[ (#HTML5|?{required="required" type="email" class="text email",class="text"})] name="mail_inscription" id="mail_inscription" value="#ENV{mail_inscription}" size="30"[(#ENV{focus}|=={mail_inscription}|et{#HTML5}|oui) autofocus="autofocus"] />
+				<input[ (#HTML5|?{required="required" type="email" class="text email",type="text" class="text"})] name="mail_inscription" id="mail_inscription" value="#ENV{mail_inscription}" size="30"[(#ENV{focus}|=={mail_inscription}|et{#HTML5}|oui) autofocus="autofocus"] />
 			</li>
 		</ul>
 	</fieldset>
