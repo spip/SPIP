@@ -470,6 +470,7 @@ function auth_terminer_identifier_login($auth_methode, $login, $serveur=''){
 	sql_updateq('spip_auteurs', $p, "id_auteur=" . $auteur['id_auteur']);
 
 	if ($auteur['statut'] == 'nouveau') {
+		$session(); // charger la session car on va la modifier
 		$auteur['statut'] = acces_statut($auteur['id_auteur'], $auteur['statut'], $auteur['bio']);
 	}
 
