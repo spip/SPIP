@@ -80,10 +80,13 @@ function compilerRegle($val)
 // http://doc.spip.org/@analyser_dtd
 function analyser_dtd($loc, $avail, &$dtc)
 {
+	// creer le repertoire de cache si ce n'est fait
+	// (utile aussi pour le resultat de la compil)
+	$file = sous_repertoire(_DIR_CACHE_XML);
+	// si DTD locale, ignorer ce repertoire pour le moment
 	if ($avail == 'SYSTEM')
 	  $file = find_in_path($loc);
 	else {
-	  $file = sous_repertoire(_DIR_CACHE_XML);
 	  $file .= preg_replace('/[^\w.]/','_', $loc);
 	}
 
