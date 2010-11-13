@@ -314,7 +314,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'forum_lien_hyper' => '<b>Ligam ipert&egrave;xt</b> (opcional)',
 'forum_message_definitif' => ' Messatge definitiu : mandar al sit',
 'forum_message_trop_long' => 'V&ograve;stre messatge es tr&ograve;p long. La longor maximala es de 20&nbsp;000 caract&egrave;rs.',
-'forum_ne_repondez_pas' => 'Respondatz pas a aquel e-mail mas pel forum a l\'adrei&ccedil;a seguenta: ',
+'forum_ne_repondez_pas' => 'Respondatz pas a aquel e-mail mas pel forum a l\'adrei&ccedil;a seguenta: ', # MODIF
 'forum_non_inscrit' => 'Si&aacute; s&egrave;tz pas inscrich(a), si&aacute; av&egrave;tz fach una error d\'adrei&ccedil;a o de mot de santa Clara. ',
 'forum_page_url' => '(se v&ograve;stre messatge se refer&iacute;s a un article publicat pel web, o a una pagina que baile mai d\'informacions, pod&egrave;tz marcar &ccedil;ai sota lo t&iacute;tol de la pagina e son adrei&ccedil;a URL.)',
 'forum_par_auteur' => 'per @auteur@',

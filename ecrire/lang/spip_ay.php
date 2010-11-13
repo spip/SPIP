@@ -313,7 +313,7 @@ Arsusiwitamatxa yuspagara
 'forum_lien_hyper' => '&lt;b&gt;Jach\'a sawuta chinu mayachawi&lt;/b&gt; (ajlli&ntilde;atakiwa)',
 'forum_message_definitif' => 'Yatiyawi: qamawir apaya&ntilde;a',
 'forum_message_trop_long' => 'Yatiyawimax sinti jach\'awa. P&auml; tunk waranq qillqanakani&ntilde;apawa',
-'forum_ne_repondez_pas' => 'Aka aruskipayirirux jan jaysamti, jan ukjax aruskipa&ntilde;ar jaysam aka utjawiru:',
+'forum_ne_repondez_pas' => 'Aka aruskipayirirux jan jaysamti, jan ukjax aruskipa&ntilde;ar jaysam aka utjawiru:', # MODIF
 'forum_non_inscrit' => 'Janiw qillqataktati, utjawich imt\'atach pantjatawa.',
 'forum_page_url' => '(Sitix yatiyawimax m&auml; qillqat yatiyatar aytata internetan, jan ukjax kawkintix m&auml; laphi u&ntilde;naqan kunantix juk\'amp yatiyawinak utjkisa, ukjarux laphi u&ntilde;naqan sutinchap ukhamarak URL utjawip u&ntilde;achayam)',
 'forum_par_auteur' => 'lurata @auteur@',

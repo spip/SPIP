@@ -314,7 +314,7 @@ Terima kasih atas partisipasi anda!
 'forum_lien_hyper' => '<b>Tautan web</b> (opsional)',
 'forum_message_definitif' => 'Pesan akhir: kirim ke situs',
 'forum_message_trop_long' => 'Pesan anda terlalu panjang. Panjang maksimum adalah 20000 karakter.',
-'forum_ne_repondez_pas' => 'Jangan balas ke e-mail ini tapi ke forum yang terdapat di alamat berikut:',
+'forum_ne_repondez_pas' => 'Jangan balas ke e-mail ini tapi ke forum yang terdapat di alamat berikut:', # MODIF
 'forum_non_inscrit' => 'Anda belum terdaftar atau alamat atau kata sandi yang salah.',
 'forum_page_url' => '(Jika pesan anda merujuk pada sebuah artikel yang dipublikasi di web atau halaman yang memberikan informasi lebih lanjut, silakan masukkan judul halaman dan URL-nya di bawah).',
 'forum_par_auteur' => 'oleh @auteur@',

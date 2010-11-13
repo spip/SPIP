@@ -315,7 +315,7 @@ l\'indirizzu qu&igrave; sottu (o sinn&ograve;, ser&agrave; rifiutata a vostra du
 'forum_lien_hyper' => '<b>Lea ipertestu</b> (micca ubbligatoria)',
 'forum_message_definitif' => 'Messagiu definitivu : mand&agrave; &agrave; u situ',
 'forum_message_trop_long' => 'U vostru messagiu h&egrave; troppu longu. A taglia m&agrave;sima h&egrave; di 20 000 car&agrave;tteri.',
-'forum_ne_repondez_pas' => '&Ugrave;n rispundite micca &agrave; stu mail ma piuttostu nant\'&agrave; u foru, &agrave; st\'indirizzu :',
+'forum_ne_repondez_pas' => '&Ugrave;n rispundite micca &agrave; stu mail ma piuttostu nant\'&agrave; u foru, &agrave; st\'indirizzu :', # MODIF
 'forum_non_inscrit' => '&Ugrave;n site micca iscrittu, o l\'indirizzu o u password s&ograve; sbagliati.',
 'forum_page_url' => '(S&igrave; u vostru messagiu siriferisce &agrave; un art&igrave;culu pubblicatu nant\'&agrave; u web, o &agrave; una p&agrave;gina 
 	ch&igrave; furnisce di pi&ugrave; infurmazioni, pudete puru rinsign&agrave; cust&igrave; u t&igrave;tulu di a p&agrave;gina c&ugrave; u so indirizzu.)',

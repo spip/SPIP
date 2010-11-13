@@ -314,7 +314,7 @@ Merc&eacute; de la voastra participacion
 'forum_lien_hyper' => '<b>Ligam ipert&egrave;xt</b> (opcionau)',
 'forum_message_definitif' => 'Messatge definitieu: mandar au sit',
 'forum_message_trop_long' => 'Lo voastre messatge es tr&ograve;up l&ograve;ng. La talha maximala es de 20000 caract&egrave;rs.',
-'forum_ne_repondez_pas' => 'Respondatz pas &agrave;-n-aquel e-mail ma sus lo f&ograve;ro &agrave; l\'adre&ccedil;a seguenta&nbsp;: ',
+'forum_ne_repondez_pas' => 'Respondatz pas &agrave;-n-aquel e-mail ma sus lo f&ograve;ro &agrave; l\'adre&ccedil;a seguenta&nbsp;: ', # MODIF
 'forum_non_inscrit' => 'Si&egrave;tz pas inscrich(a), &ograve; l\'adre&ccedil;a &ograve; lo m&ograve;t de santa Clara son erron&egrave;us.',
 'forum_page_url' => '(se lo voastre messatge si referisse &agrave; un article publicat sus lo web, &ograve; &agrave; una p&agrave;gina que fornisse mai d\'informacions, podetz marcar &ccedil;ai sota lo titre de la p&agrave;gina e la sieu adre&ccedil;a.)',
 'forum_par_auteur' => 'da @auteur@',

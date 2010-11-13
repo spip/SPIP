@@ -311,7 +311,7 @@ Merci fir &auml;r Participatioun
 'forum_lien_hyper' => '<b>Link</b> (optionnel)',
 'forum_message_definitif' => 'Definitive Message: op de Site sch&eacute;cken',
 'forum_message_trop_long' => '&Auml;re Message ass ze laang. D\'maximal Gr&eacute;isst sin 20.000 Buchstawen.',
-'forum_ne_repondez_pas' => '&Auml;ntwert n&euml;t op d&euml;sen Email, mais um Forum op d&euml;ser Adress:',
+'forum_ne_repondez_pas' => '&Auml;ntwert n&euml;t op d&euml;sen Email, mais um Forum op d&euml;ser Adress:', # MODIF
 'forum_non_inscrit' => 'Dir sidd n&euml;t ugemellt, oder d\'Adress oder d\'Passwuert si falsch.',
 'forum_page_url' => '(Wann &auml;re Message sech op en Artikel vum Internet bezitt oder op eng S&auml;it d&eacute;i m&eacute;i Informatiounen g&euml;t, k&euml;nnt dir hei den Titel an d\'Adress vun der S&auml;it uginn.)',
 'forum_par_auteur' => 'No @auteur@',

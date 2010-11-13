@@ -313,7 +313,7 @@ Dankon pro via partopreno
 'forum_lien_hyper' => '<b>Hiperligo</b> (nedeviga)',
 'forum_message_definitif' => 'Definitiva mesa&#285;o: sendu al la forumo',
 'forum_message_trop_long' => 'Via mesa&#285;o estas tro longa. La maksimuma longeco estas 20.000 signojn.',
-'forum_ne_repondez_pas' => 'Ne respondu al tiu &#265;i retletero, sed en la forumo &#265;e la jena adreso:',
+'forum_ne_repondez_pas' => 'Ne respondu al tiu &#265;i retletero, sed en la forumo &#265;e la jena adreso:', # MODIF
 'forum_non_inscrit' => 'Vi ne estas registrita, a&#365; la adreso a&#365; la pasvorto ne &#285;ustas.',
 'forum_page_url' => '(Se via mesa&#285;o rilatas al artikolo publikigita &#265;e la reto, a&#365; al pa&#285;o donanta pli da informoj, bonvolu indiki &#265;i-poste la titolon de la pa&#285;o kaj ties ret-adreson.)',
 'forum_par_auteur' => 'de @auteur@',

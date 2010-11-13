@@ -286,7 +286,7 @@ sera ignor&eacute;e) :
 'forum_lien_hyper' => 'c&aacute;c&aacute;d&oacute;',
 'forum_message_definitif' => 'w&#603;n g&ugrave;&#598;&oacute;g&ugrave;&#598;&oacute; t&#596;n, s&#603;&#598;&oacute; gblogblo &#596; j&iacute;',
 'forum_message_trop_long' => 'w&#603;n m&igrave; t&#596;n &#598;&igrave;ga &#598;&iacute;n. kp&igrave;nkp&#603;n t&#596;n &#598;&oacute; n&aacute; z&#603; we&#780;kwin c&agrave;k&igrave;k&ograve; w&uacute; &aacute; ',
-'forum_ne_repondez_pas' => 'm&igrave; m&agrave; y&iacute;gb&egrave; n&uacute; e-mail&ugrave; &eacute; l&#596; &oacute;, &agrave;m&#596; &#598;&ograve; kpl&eacute;kpl&eacute; &#596; m&#603; &#596; m&igrave; kp&#596;n n&#596;t&#603;n &eacute; l&#596; ',
+'forum_ne_repondez_pas' => 'm&igrave; m&agrave; y&iacute;gb&egrave; n&uacute; e-mail&ugrave; &eacute; l&#596; &oacute;, &agrave;m&#596; &#598;&ograve; kpl&eacute;kpl&eacute; &#596; m&#603; &#596; m&igrave; kp&#596;n n&#596;t&#603;n &eacute; l&#596; ', # MODIF
 'forum_non_inscrit' => 'm&igrave; n&aacute; ny&iacute;k&#596; , k&agrave;b&iacute; n&#596;t&#603;n, c&aacute;v&igrave; l&#603; ny&#596; &aacute;.',
 'forum_page_url' => '(n&uacute; &eacute; ny&iacute;  &#598;&#596; w&#603;n m&igrave; t&#596;n t&#603;&#598;&oacute; w&eacute;kp&aacute; &eacute; xl&#603; &#598;&ograve; &agrave;t&#603; &#596; j&iacute; &#596;, k&agrave;b&iacute; we&#780;m&aacute; &eacute; n&#596; xl&#603; x&oacute; gege &#596;, m&igrave; s&igrave;w&uacute; &#598;&egrave; x&oacute;t&aacute; &agrave;l&oacute; n&#596;t&#603;n we&#780;kp&aacute; t&#596;n &#598;&ograve; f&iacute;.)',
 'forum_par_auteur' => '@ny&#596;wl&aacute;nt&#596; &#598;&oacute;kp&oacute;&#598;&oacute;kp&oacute;@',

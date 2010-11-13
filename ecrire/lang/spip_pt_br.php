@@ -308,7 +308,7 @@ Obrigado por participar
 'forum_lien_hyper' => '<b>Link hipertexto</b> (opcional)',
 'forum_message_definitif' => 'Mensagem definitiva: enviar para o site',
 'forum_message_trop_long' => 'Sua mensagem &eacute; muito longa. O tamanho m&aacute;imo &eacute; de 20000 caracteres.',
-'forum_ne_repondez_pas' => 'N&atilde;o responda a esta mensagem e sim no f&oacute;rum com o endere&ccedil;o a seguir:',
+'forum_ne_repondez_pas' => 'N&atilde;o responda a esta mensagem e sim no f&oacute;rum com o endere&ccedil;o a seguir:', # MODIF
 'forum_non_inscrit' => 'Voc&ecirc; n&atilde;o est&aacute; inscrito, ou o endere&ccedil;o ou a senha est&atilde;o errados.',
 'forum_page_url' => '(Se a sua mensagem se refere a uma mat&eacute;ria pubicada na Web, ou a uma p&aacute;gina fornecendo mais informa&ccedil;&otilde;es, por favor informe abaixo o t&iacute;tulo da p&aacute;gina e o seu endere&ccedil;o.)',
 'forum_par_auteur' => 'por @auteur@',

@@ -311,7 +311,7 @@ Trugarez da gemer perzh
 'forum_lien_hyper' => '<b>liamm gourskrid</b> (Diret)',
 'forum_message_definitif' => 'Kemennadenn echu : kas d\'al lec\'hienn',
 'forum_message_trop_long' => 'Re hir eo ho kemennadenn. 20000 arouezenn a c\'heller lakaat d\'ar muia&ntilde;.',
-'forum_ne_repondez_pas' => 'Na respontit ket d\'ar postel-ma&ntilde;, met war ar forom, d\'ar chomlec\'h da-heul :',
+'forum_ne_repondez_pas' => 'Na respontit ket d\'ar postel-ma&ntilde;, met war ar forom, d\'ar chomlec\'h da-heul :', # MODIF
 'forum_non_inscrit' => 'N\'oc\'h ket enskrivet, pe direizh eo ar ger-tremen pe ar chomlec\'h.',
 'forum_page_url' => '(Ma ra ho kemmennadenn anv eus ur pennad all war Internet pe eus ur bajenn warni muioc\'h a ditouro&ugrave; e c\'hellit skriva&ntilde; ama&ntilde; goude titl ar bajenn hag ar chomlec\'h anezhi.)',
 'forum_par_auteur' => 'gant @auteur@',

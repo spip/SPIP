@@ -312,7 +312,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'forum_lien_hyper' => '<b>Leg&#259;tur&#259; hipertext</b> (op&#355;ional&#259;)',
 'forum_message_definitif' => 'Mesaj definitiv : trimite&#355;i c&#259;tre site',
 'forum_message_trop_long' => 'Mesajul dumneavoastr&#259; este prea lung. Pute&#539;i folosi maxim 20.000 caractere.',
-'forum_ne_repondez_pas' => 'Nu r&#259;spunde&#355;i acestui email, ci direct pe forum la adresa urm&#259;toare :',
+'forum_ne_repondez_pas' => 'Nu r&#259;spunde&#355;i acestui email, ci direct pe forum la adresa urm&#259;toare :', # MODIF
 'forum_non_inscrit' => 'Nu sunte&#355;i &icirc;nscris, sau adresa ori parola dumneavoastr&#259; nu sunt corecte.',
 'forum_page_url' => '(Dac&#259; mesajul se refer&#259; la un articol publicat pe Web sau la o pagin&#259; cu informa&#355;ii suplimentare, indica&#355;i mai jos titlul &#351;i adresa URL a paginii.)',
 'forum_par_auteur' => 'de @auteur@',

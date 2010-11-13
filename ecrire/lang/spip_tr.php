@@ -311,7 +311,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'forum_lien_hyper' => '<b>Hipermetin ba&#287;&#305;</b> (se&ccedil;imlik)',
 'forum_message_definitif' => '&#304;letinin son hali : siteye g&ouml;nder',
 'forum_message_trop_long' => '&#304;letiniz &ccedil;ok uzun. Bir ileti en fazla 20000 karakter i&ccedil;erebilir.',
-'forum_ne_repondez_pas' => 'Bu e-postaya yan&#305;t vermeyin, yan&#305;t i&ccedil;in forumu kullan&#305;n :',
+'forum_ne_repondez_pas' => 'Bu e-postaya yan&#305;t vermeyin, yan&#305;t i&ccedil;in forumu kullan&#305;n :', # MODIF
 'forum_non_inscrit' => 'Kay&#305;tl&#305; de&#287;ilsiniz veya adresiniz veya &#351;ifreniz hatal&#305;.',
 'forum_page_url' => '(E&#287;er mesaj&#305;n&#305;z Web\'de yay&#305;nlanan bir makaleye, ya da daha fazla bilgi i&ccedil;eren bir sayfaya at&#305;fta bulunuyorsa, l&uuml;tfen buraya sayfan&#305;n ba&#351;l&#305;&#287;&#305;n&#305; ve URL adresini belirtiniz.)',
 'forum_par_auteur' => 'yazan @auteur@ ',
