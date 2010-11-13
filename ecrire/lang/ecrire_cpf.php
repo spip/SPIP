@@ -84,6 +84,7 @@ Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bez
 'bouton_effacer_tout' => 'D&eacute;gr&egrave;n a TOUT',
 'bouton_envoi_message_02' => 'ANVWA INN MOD&Eacute;KRI',
 'bouton_envoyer_message' => 'Mod&eacute;kri-la l&eacute; fini : anvwa ali',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FOROM &amp; FILSINYATIR',
 'bouton_modifier' => 'Sanz',
 'bouton_pense_bete' => 'OUT PROP GARDANT&Egrave;T
@@ -347,6 +348,15 @@ inn liv-zimaz (s&eacute;dir inn galri).',
 'info_articles_trouves' => 'Bann zartik la finn d&egrave;t trouv&eacute;',
 'info_articles_trouves_dans_texte' => 'Bann zartik la finn d&egrave;t trouv&eacute; (dann lo t&egrave;ks)',
 'info_attente_validation' => 'Out bann zartik sak i esp&egrave;r lakonfirmasyon',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'Zordi&nbsp;:',
 'info_auteur_message' => 'LOT&Egrave;R MOD&Eacute;KRI :',
 'info_auteurs' => 'Bann lot&egrave;r',
@@ -632,6 +642,7 @@ sak i d&eacute;gr&egrave;n lanvwa bann lim&egrave;l sir zot bann serv&egrave;r&n
 'info_referencer_doc_distant' => 'Pou r&eacute;f&eacute;rans&eacute; in dokiman-d&eacute;or si lint&egrave;n&egrave;t&nbsp;:',
 'info_refuses' => 'Out bann zartik l&eacute; afront&eacute;',
 'info_reglage_ldap' => 'Bann lopsyon : <b>R&eacute;glaz linportasyon LDAP</b>',
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Tourn&eacute;-vir&eacute;.</b> Lartik-la i batavan sir pazw&egrave;b-la :',
 'info_reserve_admin' => 'Bann komand&egrave;r s&eacute;lman i p&eacute; sanz ladr&egrave;s-la.',
 'info_restauration_sauvegarde' => 'rosarz l&eacute;ta lasovgard @archive@', # MODIF
@@ -855,6 +866,7 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Azout kor&egrave;spondan-la',
 'lien_ajouter_auteur' => 'Azout lot&egrave;r-la',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Azout inn dalon',
 'lien_email' => 'lim&egrave;l',
 'lien_forum_public' => 'Z&egrave;r lo forom piblik dann zartik-la',
@@ -867,6 +879,7 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'lien_reponse_rubrique' => 'R&eacute;pons pou rubrik-la',
 'lien_reponse_site_reference' => 'R&eacute;pons pou sit-la:',
 'lien_retirer_auteur' => 'Artir lot&egrave;r-la',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Artir dalon-la',
 'lien_site' => 'sitw&egrave;b',
 'lien_supprimer_rubrique' => 'd&eacute;gr&egrave;n rubrik-la',
@@ -1181,6 +1194,8 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'titre_admin_effacer' => 'Lantrotyin t&egrave;knik',
 'titre_admin_tech' => 'Lantrotyin t&egrave;knik',
 'titre_admin_vider' => 'Lantrotyin t&egrave;knik',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Bann zartik sindik&eacute; i sort lo sit-la',
 'titre_breves' => 'Bann tit-nouv&egrave;l',
 'titre_cadre_afficher_article' => 'Afis bann zartik',

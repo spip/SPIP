@@ -69,6 +69,7 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'bouton_effacer_tout' => 'ALLES l&auml;schen',
 'bouton_envoi_message_02' => 'MESSAGE SCH&Eacute;CKEN',
 'bouton_envoyer_message' => 'Definitiven Message: sch&eacute;cken',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FORUM &amp; PETITIOUN',
 'bouton_modifier' => '&Auml;nneren',
 'bouton_pense_bete' => 'PERS&Eacute;INLECH NOTIZ',
@@ -307,6 +308,15 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_articles_trouves' => 'Artikelen fonnt',
 'info_articles_trouves_dans_texte' => 'Artikelen fonnt (am Text)',
 'info_attente_validation' => '&Auml;r Artikelen d&eacute;i op d\'Validatioun waarden',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'Haut:',
 'info_auteur_message' => 'AUTEUR VUM MESSAGE:',
 'info_auteurs' => 'D\'Auteuren',
@@ -574,6 +584,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_referencer_doc_distant' => 'En Dokument vum Internet referenz&eacute;ieren:',
 'info_refuses' => '&Auml;r refus&eacute;iert Artikelen',
 'info_reglage_ldap' => 'Optiounen: <b>Astellen vum LDAP-Import</b>',
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>&Euml;mledung.</b> D&euml;sen Artikel weist op d\'S&auml;it:',
 'info_reserve_admin' => 'N&euml;mmen d\'Administrateuren k&euml;nnen d&euml;s Adress &auml;nneren.',
 'info_restauration_sauvegarde' => 'Restauratioun vum Backup @archive@',
@@ -795,6 +806,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Destinataire derb&auml;i setzen',
 'lien_ajouter_auteur' => 'D&euml;sen Auteur derb&auml;i setzen',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'E Mataarbechter derb&auml;i setzen',
 'lien_email' => 'Email',
 'lien_forum_public' => '&Ouml;ffentl&euml;che Forum vum Artikel aschalten',
@@ -807,6 +819,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'lien_reponse_rubrique' => '&Auml;ntwert op d\'Rubrik',
 'lien_reponse_site_reference' => '&Auml;ntwert op de referenz&eacute;ierten Site:',
 'lien_retirer_auteur' => 'Auteur l&auml;schen',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Mataarbechter l&auml;schen',
 'lien_site' => 'Site',
 'lien_supprimer_rubrique' => 'd&euml;s Rubrik l&auml;schen',
@@ -1084,6 +1097,8 @@ D&euml;s Optioun ass par d&eacute;faut ausgeschalt fir n&euml;t andauernd Warnun
 'titre_admin_effacer' => 'Maintenance',
 'titre_admin_tech' => 'Maintenance',
 'titre_admin_vider' => 'Maintenance',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Syndiqu&eacute;iert Artikelen vun d&euml;sem Site',
 'titre_breves' => 'D\'Kuerzmeldungen',
 'titre_cadre_afficher_article' => 'D\'Artikelen weisen',

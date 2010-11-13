@@ -73,6 +73,7 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'bouton_effacer_tout' => 'Cancella TUTTO',
 'bouton_envoi_message_02' => 'INVIA UN MESSAGGIO',
 'bouton_envoyer_message' => 'Messaggio definitivo: Invia',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FORUM E PETIZIONE',
 'bouton_modifier' => 'Modifica',
 'bouton_pense_bete' => 'PROMEMORIA AD USO PERSONALE',
@@ -321,6 +322,15 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_articles_trouves' => 'Articoli trovati',
 'info_articles_trouves_dans_texte' => 'Articoli trovati (ricerca nel testo)',
 'info_attente_validation' => 'I tuoi articoli in attesa di convalida',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'oggi: ',
 'info_auteur_message' => 'AUTRICE DEL MESSAGGIO:',
 'info_auteurs' => 'Le autrici',
@@ -613,6 +623,7 @@ impossibile.', # MODIF
 'info_referencer_doc_distant' => 'Mettere in repertorio un documento su Internet:',
 'info_refuses' => 'I tuoi articoli rifiutati',
 'info_reglage_ldap' => 'Opzioni: <b>Parametri per l\'importazione LDAP</b>',
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Reindirizzamento.</b> Quest\'articolo rimanda alla pagina:',
 'info_reserve_admin' => 'Solo le amministratrici possono modificare quest\'indirizzo.',
 'info_restauration_sauvegarde' => 'ripristino del salvataggio @archive@',
@@ -836,6 +847,7 @@ Le traduzioni sono associate all\'originale,
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Aggiungi il destinatario',
 'lien_ajouter_auteur' => 'Aggiungi questa autrice',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Aggiungi una partecipante',
 'lien_email' => 'email',
 'lien_forum_public' => 'Gestisci il forum pubblico di quest\'articolo',
@@ -848,6 +860,7 @@ Le traduzioni sono associate all\'originale,
 'lien_reponse_rubrique' => 'Risposta alla rubrica',
 'lien_reponse_site_reference' => 'Risposta al sito repertoriato:',
 'lien_retirer_auteur' => 'Rimuovere l\'autrice',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'rimuovere questa partecipante',
 'lien_site' => 'sito',
 'lien_supprimer_rubrique' => 'elimina la rubrica',
@@ -1187,6 +1200,8 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_admin_effacer' => 'Manutenzione tecnica',
 'titre_admin_tech' => 'Manutenzione tecnica',
 'titre_admin_vider' => 'Manutenzione tecnica',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Articoli in syndication raccolti da questo sito',
 'titre_breves' => 'Le brevi',
 'titre_cadre_afficher_article' => 'Visualizza gli articoli',

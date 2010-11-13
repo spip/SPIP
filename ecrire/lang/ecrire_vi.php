@@ -69,6 +69,7 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'bouton_effacer_tout' => 'Xo&aacute; T&#7844;T C&#7842;',
 'bouton_envoi_message_02' => 'G&#7916;I TH&#431; T&Iacute;N',
 'bouton_envoyer_message' => 'Tin th&#432; &#273;&#7847;y &#273;&#7911;: G&#7917;i &#273;i ',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'DI&#7876;N &#272;&Agrave;N &amp; TH&#7880;NH NGUY&#7878;N TH&#431;',
 'bouton_modifier' => 'Thay &#273;&#7893;i',
 'bouton_pense_bete' => 'GHI NH&#7898; C&Aacute; NH&Acirc;N',
@@ -308,6 +309,15 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'info_articles_trouves' => 'Nh&#7919;ng b&agrave;i t&igrave;m th&#7845;y',
 'info_articles_trouves_dans_texte' => 'Nh&#7919;ng b&agrave;i t&igrave;m th&#7845;y (trong v&#259;n b&#7843;n)',
 'info_attente_validation' => 'B&agrave;i v&#7903; c&#7911;a b&#7841;n &#273;ang ch&#7901; th&ocirc;ng qua',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'h&ocirc;m nay:',
 'info_auteur_message' => 'NG&#431;&#7900;I G&#7916;I:',
 'info_auteurs' => 'T&aacute;c gi&#7843;',
@@ -574,6 +584,7 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'info_referencer_doc_distant' => 'N&#7889;i k&#7871;t v&#7899;i m&#7897;t t&agrave;i li&#7879;u tr&ecirc;n internet:',
 'info_refuses' => 'B&#224;i c&#7911;a b&#7841;n b&#7883; t&#7915; ch&#7889;i',
 'info_reglage_ldap' => 'Ch&#7885;n l&#7921;a: <b>&#272;i&#7873;u ch&#7881;nh vi&#7879;c nh&#7853;p LDAP</b>',
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Chuy&#7875;n h&#432;&#7899;ng.</b> B&#224;i n&#224;y n&#7889;i &#273;&#7871;n trang: ',
 'info_reserve_admin' => 'Ch&#7881; c&#243; qu&#7843;n tr&#7883; vi&#234;n m&#7899;i c&#243; th&#7875; s&#7917;a &#273;&#7893;i &#273;&#7883;a ch&#7881; n&#224;y.',
 'info_restauration_sauvegarde' => 'Ph&#7909;c h&#7891;i h&#7891; s&#417; d&#7921; tr&#7919; @archive@', # MODIF
@@ -797,6 +808,7 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Th&#234;m ng&#432;&#7901;i nh&#7853;n n&#224;y',
 'lien_ajouter_auteur' => 'Th&#234;m t&#225;c gi&#7843; n&#224;y',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Th&#234;m m&#7897;t tham d&#7921; vi&#234;n',
 'lien_email' => 'email',
 'lien_forum_public' => 'Qu&#7843;n tr&#7883; di&#7877;n &#273;&#224;n c&#244;ng c&#7911;a b&#224;i n&#224;y',
@@ -809,6 +821,7 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'lien_reponse_rubrique' => 'H&#7891;i &#226;m &#273;&#7873; m&#7909;c n&#224;y',
 'lien_reponse_site_reference' => 'H&#7891;i &#226;m website n&#7889;i k&#7871;t:',
 'lien_retirer_auteur' => 'Lo&#7841;i b&#7887; t&#225;c gi&#7843;',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Lo&#7841;i b&#7887; tham d&#7921; vi&#234;n n&#224;y',
 'lien_site' => 'website',
 'lien_supprimer_rubrique' => 'x&#243;a &#273;&#7873; m&#7909;c n&#224;y',
@@ -1096,6 +1109,8 @@ B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc
 'titre_admin_effacer' => 'B&#7843;o tr&igrave; k&#7929; thu&#7853;t',
 'titre_admin_tech' => 'B&#7843;o tr&igrave; k&#7929; thu&#7853;t',
 'titre_admin_vider' => 'B&#7843;o tr&igrave; k&#7929; thu&#7853;t',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Nh&#7919;ng b&agrave;i v&#7905; t&#7915;ng xu&#7845;t b&#7843;n b&#7883; thu h&#7891;i ra kh&#7887;i trang web.',
 'titre_breves' => 'Tin ng&#7855;n',
 'titre_cadre_afficher_article' => 'Li&#7879;t k&ecirc; nh&#7919;ng b&agrave;i',

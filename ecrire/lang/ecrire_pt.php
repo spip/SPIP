@@ -75,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_effacer_tout' => 'Apagar TUDO',
 'bouton_envoi_message_02' => 'MANDAR UMA MENSAGEM',
 'bouton_envoyer_message' => 'Mensagem definitiva: mandar',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'F&Oacute;RUM &amp; ABAIXO-ASSINADO', # MODIF
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'MEMORANDO DE USO PESSOAL',
@@ -324,6 +325,15 @@ ou da rede',
 'info_articles_trouves' => 'Artigos encontrados',
 'info_articles_trouves_dans_texte' => 'Artigos encontrados (no texto)',
 'info_attente_validation' => 'Os seus artigos &agrave; espera de valida&ccedil;&atilde;o',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'hoje&nbsp;:',
 'info_auteur_message' => 'AUTOR DA MENSAGEM',
 'info_auteurs' => 'Os autores',
@@ -619,6 +629,7 @@ servi&ccedil;os de hospedagem desactivam o envio de mails a partir dos seus
 'info_referencer_doc_distant' => 'Referenciar um documento na internet&nbsp;:',
 'info_refuses' => 'Os seus artigos recusados',
 'info_reglage_ldap' => 'Op&ccedil;&otilde;es : <b>Acerto da importa&ccedil;&atilde;o LDAP</b>', # MODIF
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redirigir.</b> Este artigo remete para a p&aacute;gina:', # MODIF
 'info_reserve_admin' => 'S&oacute; os administradores podem modificar este endere&ccedil;o.',
 'info_restauration_sauvegarde' => 'restauro da salvaguarda @archive@', # MODIF
@@ -842,6 +853,7 @@ numa cor que indica o seu estado:',
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Acrescentar este destinat&aacute;rio',
 'lien_ajouter_auteur' => 'Acrescentar este autor',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Acrescentar um participante',
 'lien_email' => 'email',
 'lien_forum_public' => 'Gerir o f&oacute;rum p&uacute;blico deste artigo',
@@ -854,6 +866,7 @@ numa cor que indica o seu estado:',
 'lien_reponse_rubrique' => 'Resposta &agrave; rubrica ',
 'lien_reponse_site_reference' => 'Resposta ao s&iacute;tio referenciado',
 'lien_retirer_auteur' => 'Tirar o autor',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'tirar este participante',
 'lien_site' => 's&iacute;tio',
 'lien_supprimer_rubrique' => 'suprimir esta rubrica',
@@ -1214,6 +1227,8 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_admin_effacer' => 'Manuten&ccedil;&atilde;o t&eacute;cnica',
 'titre_admin_tech' => 'Manuten&ccedil;&atilde;o t&eacute;cnica',
 'titre_admin_vider' => 'Manuten&ccedil;&atilde;o t&eacute;cnica',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Artigos vinculados tirados deste s&iacute;tio',
 'titre_breves' => 'As not&iacute;cias',
 'titre_cadre_afficher_article' => 'Exibir os artigos',
