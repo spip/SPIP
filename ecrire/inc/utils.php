@@ -1409,6 +1409,13 @@ function spip_initialisation_suite() {
 	define('_IMG_MAX_WIDTH', 0); # largeur en pixels
 	define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
 
+	// Qualite des images calculees automatiquement. C'est un nombre entre 0 et 100, meme pour imagick (on ramene a 0..1 par la suite)
+        if (!defined('_IMG_QUALITE')) define('_IMG_QUALITE', 85); # valeur par defaut
+        if (!defined('_IMG_GD_QUALITE')) define('_IMG_GD_QUALITE', _IMG_QUALITE); # surcharge pour la lib GD
+        if (!defined('_IMG_CONVERT_QUALITE')) define('_IMG_CONVERT_QUALITE', _IMG_QUALITE); # surcharge pour imagick en ligne de commande
+	// Historiquement la valeur pour imagick semble differente. Si ca n'est pas necessaire, il serait preferable de garder _IMG_QUALITE
+        if (!defined('_IMG_IMAGICK_QUALITE')) define('_IMG_IMAGICK_QUALITE', 75); # surcharge pour imagick en PHP
+
 	define('_COPIE_LOCALE_MAX_SIZE',16777216); // poids en octet
 
 	// qq chaines standard
@@ -1476,7 +1483,6 @@ function spip_initialisation_suite() {
 	# au dela de 5500000 on considere que php n'est pas limite en memoire pour cette operation
 	# les configurations limitees en memoire ont un seuil plutot vers 1MPixel
 	define('_IMG_GD_MAX_PIXELS', (isset($GLOBALS['meta']['max_taille_vignettes'])&&$GLOBALS['meta']['max_taille_vignettes']<5500000)?$GLOBALS['meta']['max_taille_vignettes']:0);
-	define('_IMG_GD_QUALITE', 85);
 
 	@define('_MEMORY_LIMIT_MIN',10); // en Mo
 	// si on est dans l'espace prive et si le besoin est superieur a 8Mo (qui est vraiment le standard)
