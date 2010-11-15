@@ -46,7 +46,7 @@ function get_spip_doc($fichier) {
 
 // Constante indiquant le charset probable des documents non utf-8 joints
 
-@define('CHARSET_JOINT', 'iso-8859-1');
+if (!defined("CHARSET_JOINT")) define('CHARSET_JOINT', 'iso-8859-1');
 
 // Filtre pour #FICHIER permettant d'incruster le contenu d'un document
 // Si 2e arg fourni, conversion dans le charset du site si possible

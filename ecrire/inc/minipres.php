@@ -36,7 +36,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 		header('Content-Type: text/html; charset=utf-8');
 
 	// au cas ou minipres() est appele avant spip_initialisation_suite()
-	@define('_DOCTYPE_ECRIRE', '');
+	if (!defined("_DOCTYPE_ECRIRE")) define('_DOCTYPE_ECRIRE', '');
 	return  _DOCTYPE_ECRIRE.
 		html_lang_attributes().
 		"<head>\n".
@@ -64,7 +64,7 @@ function install_fin_html() {
 // http://doc.spip.org/@minipres
 function minipres($titre='', $corps="", $onload='')
 {
-	@define('_AJAX',false); // par securite
+	if (!defined("_AJAX")) define('_AJAX', false); // par securite
 	if (!$titre) {
 		if (!_AJAX)
 			http_status(403);

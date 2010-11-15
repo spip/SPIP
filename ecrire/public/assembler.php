@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-@define('_CONTEXTE_IGNORE_VARIABLES',"/(^var_|^PHPSESSID$)/");
+if (!defined("_CONTEXTE_IGNORE_VARIABLES")) define('_CONTEXTE_IGNORE_VARIABLES', "/(^var_|^PHPSESSID$)/");
 //
 // calcule la page et les entetes
 // determine le contexte donne par l'URL (en tenant compte des reecritures) 
