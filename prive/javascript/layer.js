@@ -57,7 +57,7 @@ jQuery.fn.showother = function(cible) {
 				.removeClass('blocreplie')
 				.removeClass('togglewait');
 			}
-		);
+		).trigger('deplie');
 	}
 	return this;
 }
@@ -75,7 +75,7 @@ jQuery.fn.hideother = function(cible) {
 				.removeClass('blocdeplie')
 				.removeClass('togglewait');
 			}
-		);
+		).trigger('replie');
 }
 	return this;
 }
