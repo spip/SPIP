@@ -56,7 +56,7 @@ function inc_choisir_mode_document_dist($fichier, $type_lien, $type_image, $larg
 	// il suffit de faire dans mes_options
 	// define('_LARGEUR_MODE_IMAGE', 450);
 	// pour beneficier de cette detection auto
-	@define('_LARGEUR_MODE_IMAGE', 0);
+	if (!defined('_LARGEUR_MODE_IMAGE')) define('_LARGEUR_MODE_IMAGE', 0);
 	
 	if (!_LARGEUR_MODE_IMAGE)
 		return 'image';

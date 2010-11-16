@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-@define('_INC_DISTANT_VERSION_HTTP', "HTTP/1.0");
-@define('_INC_DISTANT_CONTENT_ENCODING', "gzip");
-@define('_INC_DISTANT_USER_AGENT', 'SPIP-'. $GLOBALS['spip_version_affichee']." (" . $GLOBALS['home_server'] . ")");
+if (!defined('_INC_DISTANT_VERSION_HTTP')) define('_INC_DISTANT_VERSION_HTTP', "HTTP/1.0");
+if (!defined('_INC_DISTANT_CONTENT_ENCODING')) define('_INC_DISTANT_CONTENT_ENCODING', "gzip");
+if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP-' .$GLOBALS['spip_version_affichee']. " (" .$GLOBALS['home_server']. ")");
 
 //@define('_COPIE_LOCALE_MAX_SIZE',2097152); // poids (inc/utils l'a fait)
 //

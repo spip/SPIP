@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 // Constante pour le nombre d'auteurs par page.
-@define('AUTEURS_MIN_REDAC', "0minirezo,1comite,5poubelle");
-@define('AUTEURS_DEFAUT', '');
+if (!defined('AUTEURS_MIN_REDAC')) define('AUTEURS_MIN_REDAC', "0minirezo,1comite,5poubelle");
+if (!defined('AUTEURS_DEFAUT')) define('AUTEURS_DEFAUT', '');
 include_spip('inc/presentation');
 
 function auteurs_lister_statuts() {

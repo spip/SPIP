@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 // Constante pour le nombre d'auteurs par page.
-@define('AUTEURS_DEFAUT', '!');
+if (!defined('AUTEURS_DEFAUT')) define('AUTEURS_DEFAUT', '!');
 include_spip('prive/squelettes/contenu/auteurs_fonctions');
 
 ?>

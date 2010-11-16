@@ -285,7 +285,7 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	$texte = propre($texte,$connect);
 	$notes('','depiler');
 
-	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
+	if (!defined('_INTRODUCTION_SUITE')) define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
 
 	// et reparagrapher si necessaire (coherence avec le cas descriptif)
