@@ -61,6 +61,8 @@ function ajouter_session($auteur) {
 	if (!isset($auteur['hash_env'])) $auteur['hash_env'] = hash_env();
 	if (!isset($auteur['ip_change'])) $auteur['ip_change'] = false;
 
+	if (!isset($auteur['date_session'])) $auteur['date_session'] = time();
+
 	if (!ecrire_fichier_session($fichier_session, $auteur)) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -210,6 +212,7 @@ function verifier_session($change=false) {
 	if ($GLOBALS['visiteur_session']['id_auteur'])
 		$GLOBALS['auteur_session'] = &$GLOBALS['visiteur_session'];
 
+
 	// Si l'adresse IP change, inc/presentation mettra une balise image
 	// avec un URL de rappel demandant a changer le nom de la session.
 	// Seul celui qui a l'IP d'origine est rejoue
@@ -231,7 +234,16 @@ function verifier_session($change=false) {
 		ajouter_session($GLOBALS['visiteur_session']);
 	}
 
-	return is_numeric($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:null;
+	// Si la session a ete initiee il y a trop longtemps, elle est annulee
+	if (isset($GLOBALS['visiteur_session'])
+	AND defined('_AGE_SESSION_MAX')
+	AND _AGE_SESSION_MAX > 0
+	AND time() - @$GLOBALS['visiteur_session']['date_session'] > _AGE_SESSION_MAX)
+		return false;
+
+	return is_numeric($GLOBALS['visiteur_session']['id_auteur'])
+		? $GLOBALS['visiteur_session']['id_auteur']
+		: null;
 }
 
 // Code a inserer par inc/presentation pour rejouer la session
