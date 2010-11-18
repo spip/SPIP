@@ -192,6 +192,8 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	// (c'est ici qu'on fait var_recherche, validation, boutons d'admin,
 	// cf. public/assembler.php)
 	echo pipeline('affichage_final'._PIPELINE_SUFFIX, $page['texte']);
+
+	if ($lang) lang_select();
 	// l'affichage de la page a pu lever des erreurs (inclusion manquante)
 	// il faut tester a nouveau
 	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
