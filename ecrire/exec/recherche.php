@@ -110,9 +110,9 @@ function exec_recherche_dist() {
 			echo afficher_objets($table,$titre,
 				array(
 					// gasp: la requete spip_articles exige AS articles...
-					'FROM' => table_objet_sql($table).' AS '.$table.'s',
+					'FROM' => table_objet_sql($table).' AS '.table_objet($table),
 					'WHERE' => sql_in(
-						$table.'s.'.id_table_objet($table),
+						table_objet($table).'.'.id_table_objet($table),
 						array_keys($r)
 					),
 					'ORDER BY' => $order
