@@ -354,7 +354,7 @@ function import_tables($request, $archive) {
 		}
 		sql_drop_table('spip_test','','-1');
 		foreach ($tables as $table){
-			if (sql_showtable($table,false,-1)){
+			if (sql_showtable($table,true,-1)){
 				if (!isset($tables_recopiees[$table])) $tables_recopiees[$table] = 0;
 				if ($tables_recopiees[$table]!==-1){
 					affiche_progression_javascript(0,0,$table);
