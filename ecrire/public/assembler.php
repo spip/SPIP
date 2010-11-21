@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (!defined("_CONTEXTE_IGNORE_VARIABLES")) define('_CONTEXTE_IGNORE_VARIABLES', "/(^var_|^PHPSESSID$)/");
+if (!defined('_CONTEXTE_IGNORE_VARIABLES')) define('_CONTEXTE_IGNORE_VARIABLES', "/(^var_|^PHPSESSID$)/");
 //
 // calcule la page et les entetes
 // determine le contexte donne par l'URL (en tenant compte des reecritures) 
@@ -217,6 +217,7 @@ function calculer_contexte_implicite(){
 	$contexte_implicite = array(
 		'squelettes' => $GLOBALS['dossier_squelettes'], // devrait etre 'chemin' => $GLOBALS['path_sig'], ?
 		'host' => $_SERVER['HTTP_HOST'],
+		'profondeur_url' => $GLOBALS['profondeur_url'],
 		'marqueur' => (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : ''),
 		'notes' => $notes('','contexter_cache'),
 	);
