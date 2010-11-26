@@ -130,7 +130,7 @@ function info_copyright() {
 	//
 	if ($svn_revision = version_svn_courante(_DIR_RACINE)) {
 		$version .= ' ' . (($svn_revision < 0) ? 'SVN ':'')
-		. "[<a href='http://trac.rezo.net/trac/spip/changeset/"
+		. "[<a href='http://core.spip.org/trac/spip/changeset/"
 		. abs($svn_revision) . "' target='_blank'>"
 		. abs($svn_revision) . "</a>]";
 	}
