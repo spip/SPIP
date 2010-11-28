@@ -14,12 +14,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/rechercher');
-if (!defined("_DELAI_CACHE_resultats")) define('_DELAI_CACHE_resultats', 600);
+@define('_DELAI_CACHE_resultats',600);
 
 // Preparer les listes id_article IN (...) pour les parties WHERE
 // et points =  des requetes du moteur de recherche
 // http://doc.spip.org/@inc_prepare_recherche_dist
-function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, $serveur='') {
+function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, $serveur='',$plat=false) {
 	static $cache = array();
 	$delai_fraicheur = min(_DELAI_CACHE_resultats,time()-$GLOBALS['meta']['derniere_modif']);
 
@@ -58,9 +58,9 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 				),
 					    $serveur);
 		$points = $points[$x];
-
-		# Pour les forums, unifier par id_thread et forcer statut='publie'
-		if ($x == 'forum' AND $points) {
+		
+		# Pour les forums, unifier par id_thread et forcer statut='publie', sauf si le crière {plat} ou {tout} est présent
+		if ($x == 'forum' AND $points AND $plat != "true") {
 			$p2 = array();
             $s = sql_select("id_thread, id_forum, statut", "spip_forum", sql_in('id_forum', array_keys($points)), '','','','', $serveur);
             while ($t = sql_fetch($s, $serveur)){

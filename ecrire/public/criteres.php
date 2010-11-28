@@ -190,10 +190,16 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	else
 		$quoi = '@$Pile[0]["recherche"]';
 
+	// indiquer si l'on est dans une boucle forum avec le critère {plat} ou {tout}
+	$plat = "false" ;
+	if (isset($boucle->modificateur['tout']) OR isset($boucle->modificateur['plat'])) {
+		$plat = "true" ;
+	}	
+		
 	$boucle->hash .= '
 	// RECHERCHE
 	$prepare_recherche = charger_fonction(\'prepare_recherche\', \'inc\');
-	list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'","' . $boucle->sql_serveur . '");
+	list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'","' . $boucle->sql_serveur . '", "'.$plat.'");
 	';
 
 	$t = $boucle->id_table . '.' . $boucle->primary;
