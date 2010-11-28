@@ -35,7 +35,7 @@ function existe_formulaire($form)
 
 	if (!$form) return ''; // on ne sait pas, le nom du formulaire n'est pas fourni ici
 
-	return find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/') ? $form : false;
+	return trouve_modele($form, 'formulaires/') ? $form : false;
 }
 
 

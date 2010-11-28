@@ -951,13 +951,6 @@ function url_de_($http,$host,$request,$prof=0){
 }
 
 
-function tester_url_ecrire($nom)
-{
-	if (find_in_path('prive/exec/' . $nom . '.' . _EXTENSION_SQUELETTES))
-		$nom = 'fond';
-	return charger_fonction($nom,'exec',true);
-}
-
 // Pour une redirection, la liste des arguments doit etre separee par "&"
 // Pour du code XHTML, ca doit etre &amp;
 // Bravo au W3C qui n'a pas ete capable de nous eviter ca
@@ -1750,7 +1743,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		$page = evaluer_fond($f, $contexte, $connect);
 		if ($page === '') {
 			$c = isset($options['compil']) ? $options['compil'] :'';
-			$a = array('fichier'=>$fond.'.'._EXTENSION_SQUELETTES);
+			$a = array('fichier'=>$fond);
 			erreur_squelette(_T('info_erreur_squelette2', $a), $c);
 		}
 					 
@@ -1778,9 +1771,18 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		return $options['trim'] ? ltrim($texte) : $texte;
 }
 
-function trouve_modele($nom)
+// Trouve un squelette, par defaut dans le repertoire modeles/
+// Attention, si le 2arg fourni, il doit avoir le / final 
+function trouve_modele($nom, $dir='modeles/')
 {
-	return find_in_path( 'modeles/' . $nom.'.'. _EXTENSION_SQUELETTES);
+	return find_in_path($nom.'.'. _EXTENSION_SQUELETTES, $dir);
+}
+
+function tester_url_ecrire($nom)
+{
+	if (trouve_modele($nom, 'prive/exec/'))
+		$nom = 'fond';
+	return charger_fonction($nom,'exec',true);
 }
 
 // Charger dynamiquement une extension php
