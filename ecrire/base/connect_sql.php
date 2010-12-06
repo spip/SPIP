@@ -251,9 +251,12 @@ function table_objet($type,$serveur='') {
 		return $surnoms[$type];
 
 	$trouver_table = charger_fonction('trouver_table', 'base');
-	if ($desc = $trouver_table($type,$serveur))
-		return $desc['table'];
+	if ($desc = $trouver_table(rtrim($type,'s')."s",$serveur))
+		return $desc['id_table'];
+	elseif ($desc = $trouver_table($type,$serveur))
+		return $desc['id_table'];
 
+	spip_log('table_objet('.$type.') calculee sans verification');
 	return rtrim($type,'s')."s"; # cas historique ne devant plus servir
 }
 
