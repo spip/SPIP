@@ -31,9 +31,9 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 
 	include_spip('inc/filtres');
 
-	$table_objet = table_objet($type);
-	$spip_table_objet = table_objet_sql($type);
-	$id_table_objet = id_table_objet($type);
+	$table_objet = table_objet($type,$serveur);
+	$spip_table_objet = table_objet_sql($type,$serveur);
+	$id_table_objet = id_table_objet($type,$serveur);
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($spip_table_objet, $serveur);
 

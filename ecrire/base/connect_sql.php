@@ -220,8 +220,9 @@ function spip_connect_ldap($serveur='') {
 	return auth_ldap_connect($serveur);
 }
 
-// 1 interface de abstract_sql a demenager dans base/abstract_sql a terme
-
+// Echappement d'une valeur (num, string, array) sous forme de chaine PHP
+// pour un array(1,'a',"a'") renvoie la chaine "'1','a','a\''"
+// Usage sql un peu deprecie, a remplacer par sql_quote()
 // http://doc.spip.org/@_q
 function _q ($a) {
 	return (is_numeric($a)) ? strval($a) :
@@ -231,7 +232,7 @@ function _q ($a) {
 
 // Nommage bizarre des tables d'objets
 // http://doc.spip.org/@table_objet
-function table_objet($type) {
+function table_objet($type,$serveur='') {
 	static $surnoms = null;
 	$type = preg_replace(',^spip_|^id_|s$,', '', $type);
 	if (!$type) return;
@@ -246,15 +247,20 @@ function table_objet($type) {
 				'extension' => 'types_documents' # hum
 			));
 	}
-	return isset($surnoms[$type])
-		? $surnoms[$type]
-		: rtrim($type,'s')."s";
+	if (isset($surnoms[$type]))
+		return $surnoms[$type];
+
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	if ($desc = $trouver_table($type,$serveur))
+		return $desc['table'];
+
+	return rtrim($type,'s')."s"; # cas historique ne devant plus servir
 }
 
 // http://doc.spip.org/@table_objet_sql
-function table_objet_sql($type) {
+function table_objet_sql($type,$serveur='') {
 	global $table_des_tables;
-	$nom = table_objet($type);
+	$nom = table_objet($type, $serveur);
 	include_spip('public/interfaces');
 	if (isset($table_des_tables[$nom])) {
 		$t = $table_des_tables[$nom];
@@ -265,7 +271,7 @@ function table_objet_sql($type) {
 
 // http://doc.spip.org/@id_table_objet
 function id_table_objet($type,$serveur='') {
-	$type = objet_type($type);
+	$type = objet_type($type,$serveur);
 	if ($type == 'type')
 		return 'extension';
 	else {
