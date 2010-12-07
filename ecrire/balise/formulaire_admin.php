@@ -110,7 +110,8 @@ function admin_objet()
 				$env[$_id_type] = $id;
 				$env['objet'] = $type;
 				$env['id_objet'] = $id;
-				$g = 'generer_url_ecrire_'.$obj;
+				if (!function_exists($g = 'generer_url_ecrire_'.$obj))
+					$g = charger_fonction($g, 'urls');
 				$env['voir_'.$obj] = 
 				  str_replace('&amp;', '&', $g($id, '','', 'prop'));
 				if ($desc = $trouver_table(table_objet_sql($type))
