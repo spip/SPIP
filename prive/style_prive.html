@@ -98,7 +98,7 @@ h3 { color: #666; font-size: medium; font-family: Arial, Sans, sans-serif; margi
 
 td { text-align: #GET{left}; }
 
-#bando_haut { font-size: 110%; position:relative;}
+#bando_haut { font-size: 110%; position: relative; z-index: 99;}
 #bando_haut a { text-decoration: none; }
 
 
@@ -111,7 +111,7 @@ td { text-align: #GET{left}; }
 #bando_haut ul.deroulant li { /*position:relative; */float:#GET{left}; display: block; }
 #bando_haut ul.deroulant li ul li {float:none;position:static;}
 #bando_haut ul.deroulant li.actif,#bando_haut ul.deroulant li.actif_tempo { background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
-#bando_haut ul.deroulant li ul {border: 1px solid #aaaaaa; border-top: 0; text-align:#GET{left}; height: auto; width: auto; display: block; position:absolute; #GET{left}:-3000em; z-index: 99; }
+#bando_haut ul.deroulant li ul {border: 1px solid #aaaaaa; border-top: 0; text-align:#GET{left}; height: auto; width: auto; display: block; position:absolute; #GET{left}:-3000em; }
 #bando_haut ul.deroulant li.actif ul, #bando_haut ul.deroulant li.actif_tempo ul { #GET{left}:auto;}
 #bando_haut ul.deroulant li a { display: block;  color:#444; font-weight:bold;}
 #bando_haut ul.deroulant li ul li { background-color: #fff; }
@@ -187,8 +187,9 @@ td { text-align: #GET{left}; }
 #bando_outils #rapides .spip_recherche .recherche {margin-bottom:0;margin-top:1px;}
 #bando_outils #rapides .spip_recherche .submit {vertical-align:bottom;}
 
-#bando_navigation ul li {min-width:85px; max-width:115px; text-align:center;border-#GET{right}: 1px solid #eee; }
-#bando_navigation ul li ul li {width: auto; min-width: 85px; max-width:250px; float:none;text-align:#GET{left};position:static;}
+#bando_navigation ul.deroulant > li {min-width:85px; max-width:115px; text-align:center;border-#GET{right}: 1px solid #eee; }
+#bando_navigation ul li ul {min-width: 85px; max-width:250px;}
+#bando_navigation ul li ul li {width: auto;float:none;text-align:#GET{left};position:static;}
 
 #bando_navigation { position: relative; }
 #bando_navigation { clear:both; background: #fff; border-bottom: 1px solid #aaa; }
