@@ -248,7 +248,7 @@ function analyser_doctype($data)
 					     $pico);
 			else {
 				$dtd = $topelement . '.dtd';
-				$f = _DIR_RACINE . 'prive/' . $dtd;
+				$f = find_in_path($dtd);
 				if (file_exists($f))
 					return array('', $topelement, 'SYSTEM', $f, $dtd, $pico);
 			}
