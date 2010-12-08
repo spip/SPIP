@@ -34,7 +34,7 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='') {
 	
 	if ($squelette AND preg_match('/^(.*)[.](\w+)$/', $squelette, $r)) {
 		list(, $squelette, $ext) = $r;
-	} else $ext = '';
+	} else $ext = 'html'; // valeur par defaut, historique.
 		
 	// pipeline styliser
 	$squelette = pipeline('styliser', array(
