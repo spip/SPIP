@@ -121,19 +121,15 @@ function base_trouver_table_dist($nom, $serveur=''){
 			}
 		}
 		// S'il n'y a pas de key (cas d'une VIEW),
-		// on va inventer une PRIMARY KEY en prenant le premier champ
-		// de la table
+		// simuler une PRIMARY KEY avec le premier champ de la table
+		// 
 		if (!$desc['key'])
 			$desc['key']['PRIMARY KEY'] = array_shift(array_keys($desc['field']));
 
+		// pour utiliser les globales sur le titre et le date des tables
+		$table = table_objet(preg_replace(',^id_,', '', reset(explode(',', $desc['key']["PRIMARY KEY"]))));
 		$desc['table']= $nom_sql;
 		$desc['connexion']= $serveur;
-		// objet_type peut provoquer un appel reentrant ici.
-		// pour ne pas faire de boucle infinie, on stocke ce qu'on a deja trouve
-		$connexion['tables'][$nom] = $desc;
-
-		$surnom = (strpos($nom, $connexion['prefixe']) === 0) ? substr($nom, strlen($connexion['prefixe'])+1) : $nom;
-		$table = table_objet(objet_type($surnom));
 		$desc['titre'] =
 		  isset($GLOBALS['table_titre'][$table]) ? $GLOBALS['table_titre'][$table] : '';
 		$desc['date'] =
