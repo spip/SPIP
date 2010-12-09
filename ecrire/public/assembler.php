@@ -94,6 +94,9 @@ function assembler($fond, $connect='') {
 			// produire la page : peut mettre a jour $lastmodified
 			$produire_page = charger_fonction('produire_page','public');
 			$page = $produire_page($fond, $contexte, $use_cache, $chemin_cache, NULL, $page, $lastmodified, $connect);
+			if ($page === '')
+				erreur_squelette(_T('info_erreur_squelette2',
+					array('fichier'=>$fond.'.'._EXTENSION_SQUELETTES)));
 		}
 
 		if ($page AND $chemin_cache) $page['cache'] = $chemin_cache;
