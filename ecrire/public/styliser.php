@@ -30,12 +30,10 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='') {
 	// trouver un squelette du nom demande
 	// ne rien dire si on ne trouve pas, 
 	// c'est l'appelant qui sait comment gerer la situation
-	$squelette = trouve_modele($fond,"");
-	
-	if ($squelette AND preg_match('/^(.*)[.](\w+)$/', $squelette, $r)) {
-		list(, $squelette, $ext) = $r;
-	} else $ext = 'html'; // valeur par defaut, historique.
-		
+	// ou les plugins qui feront mieux dans le pipeline
+	$squelette = trouver_fond($fond,"",true);
+	$ext = $squelette['extension'];
+
 	// pipeline styliser
 	$squelette = pipeline('styliser', array(
 		'args' => array(
@@ -46,7 +44,7 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='') {
 			'contexte' => $contexte, // le style d'un objet peut dependre de lui meme
 			'connect' => $connect
 		),
-		'data' => $squelette,
+		'data' => $squelette['fond'],
 	));
 
 	return array($squelette, $ext, $ext, "$squelette.$ext");
