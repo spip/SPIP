@@ -31,7 +31,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * http://doc.spip.org/@public_styliser_dist
  */
-function public_styliser_dist($fond, $contexte, $lang='', $connect='', $ext='html') {
+function public_styliser_dist($fond, $contexte, $lang='', $connect='') {
 
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$id_rubrique = 0;
@@ -42,10 +42,13 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='', $ext='htm
 	// trouver un squelette du nom demande
 	// ne rien dire si on ne trouve pas, 
 	// c'est l'appelant qui sait comment gerer la situation
-	$base = find_in_path("$fond.$ext");
+	$squelette = trouve_modele($fond,"");
 	
-	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
-	$squelette = substr($base, 0, - strlen(".$ext"));
+	// supprimer l'extension pour pouvoir affiner par id_rubrique ou par langue
+	if ($squelette AND preg_match('/^(.*)[.](\w+)$/', $squelette, $r)) {
+		list(, $squelette, $ext) = $r;
+	} else $ext = '';
+		
 	$flux = array(
 		'args' => array(
 			'id_rubrique' => $id_rubrique,
