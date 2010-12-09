@@ -728,8 +728,10 @@ function autoriser_iconifier_dist($faire,$quoi,$id,$qui,$opts){
 	// On reprend le code de l'ancien iconifier pour definir les autorisations pour les autres
 	// objets SPIP. De ce fait meme de nouveaux objets bases sur cet algorithme peuvent continuer
 	// a fonctionner. Cependant il est recommander de leur definir une autorisation specifique
-	$table = table_objet_sql($quoi);
-	$id_objet = id_table_objet($quoi);
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table(table_objet($quoi));
+	$table = $desc['table'];
+	$id_objet = $desc['key']["PRIMARY KEY"];
 	$row = sql_fetsel("id_rubrique, statut", $table, "$id_objet=$id");
 	$droit = autoriser('publierdans','rubrique',$row['id_rubrique']);
 

@@ -27,7 +27,7 @@ function exec_iconifier_dist()
 // http://doc.spip.org/@exec_iconifier_args
 function exec_iconifier_args($id, $primary, $script, $iframe=false)
 {
-	$type = objet_type(table_objet(substr($primary, 3)));
+	$type = substr($primary, 3);
 	if (!preg_match('/^\w+$/', "$primary$script")
 	  OR !autoriser('iconifier', $type, $id)) {
 		include_spip('inc/minipres');

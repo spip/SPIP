@@ -291,6 +291,8 @@ function id_table_objet($type,$serveur='') {
 	}
 }
 
+// Fonction obsolete, utiliser trouver_table a la place
+
 // http://doc.spip.org/@objet_type
 function objet_type($table_objet){
 	// scenario de base

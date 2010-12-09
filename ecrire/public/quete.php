@@ -29,12 +29,14 @@ function quete_chapo($id_article, $connect) {
 
 function quete_parent_lang($table,$id,$connect=''){
 	static $cache_quete = array();
+	static $ids = array('spip_rubriques' => 'id_parent',
+			    'spip_articles' => 'id_rubrique',
+			    'spip_syndic' => 'id_rubrique',
+			    'spip_breves' => 'id_rubrique');
 
-	if (!isset($cache_quete[$connect][$table][$id])
-	AND in_array($table,array('spip_rubriques','spip_articles','spip_syndic','spip_breves'))){
-		$select = ($table=='spip_rubriques'?'id_parent':'id_rubrique');
-		$select .= in_array($table,array('spip_rubriques','spip_articles','spip_breves'))?", lang":"";
-		$_id = id_table_objet(objet_type($table));
+	if (!isset($cache_quete[$connect][$table][$id]) AND isset($ids[$table])) {
+		$select = (($table=='spip_syndic') ? '' : "lang,") . $ids[$table];
+		$_id = 'id_' . preg_replace(',^spip_|s$,', '', $table);
 		$cache_quete[$connect][$table][$id] = sql_fetsel($select, $table,"$_id=".intval($id),'','','','',$connect);
 	}
 	return $cache_quete[$connect][$table][$id];
