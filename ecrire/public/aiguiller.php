@@ -139,6 +139,8 @@ function traiter_formulaires_dynamiques($get=false){
 		changer_langue(array_shift($args));
 			
 
+		// inclure mes_fonctions et autres filtres avant verifier/traiter
+		include_spip('public/parametrer');
 		$verifier = charger_fonction("verifier","formulaires/$form/",true);
 		$post["erreurs_$form"] = pipeline(
 				  'formulaire_verifier',
