@@ -297,6 +297,7 @@ ecrire/plugins/get_infos.php -text
 ecrire/plugins/verifie_conformite.php -text
 ecrire/prive.php -text
 ecrire/public/aiguiller.php -text
+ecrire/public/creer_boucle_pour.php -text
 ecrire/public/decompiler.php -text
 ecrire/public/format_html.php -text
 ecrire/public/index.php -text

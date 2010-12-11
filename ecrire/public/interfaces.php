@@ -83,6 +83,8 @@ class Boucle {
 
 	var $modificateur = array(); // table pour stocker les modificateurs de boucle tels que tout, plat ..., utilisable par les plugins egalement
 
+	var $iterateur = ''; // type d'iterateur
+
 	// obsoletes, conserves provisoirement pour compatibilite
 	var $tout = false;
 	var $plat = false;
