@@ -254,14 +254,14 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	return isset($exposer[$m][$prim]) ? isset($exposer[$m][$prim][$id]) : '';
 }
 
-function quete_debut_pagination($primary,$valeur,$pas,$res,$serveur=''){
+function quete_debut_pagination($primary,$valeur,$pas,$iter){
 	// on ne devrait pas arriver ici si la cle primaire est inexistante
 	// ou composee, mais verifions
 	if (!$primary OR preg_match('/[,\s]/',$primary))
 		return 0;
 
 	$pos = 0;
-	while ($row = sql_fetch($res,$serveur) AND $row[$primary]!=$valeur){
+	while ($row = $iter->next() AND $row[$primary]!=$valeur){
 		$pos++;
 	}
 	// si on a pas trouve
