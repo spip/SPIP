@@ -187,7 +187,9 @@ class IterPOUR extends Iter {
 		// source URL
 		if (isset($this->command['source'])) {
 			if (isset($this->command['sourcemode'])
-			AND $this->command['sourcemode'] == 'table') {
+			AND in_array($this->command['sourcemode'],
+				array('table', 'array', 'tableau'))
+			) {
 				if (is_array($a = $this->command['source'])
 				OR is_array($a = unserialize($this->command['source']))) {
 					$this->tableau = $a;
@@ -197,9 +199,10 @@ class IterPOUR extends Iter {
 			else if (preg_match(',^http://,', $this->command['source'])) {
 				include_spip('inc/distant');
 				$u = recuperer_page($this->command['source']);
-			} else
+			} else if (@is_readable($this->command['source']))
 				$u = spip_file_get_contents($this->command['source']);
 
+			// tout ce bloc devrait marcher par charger_fonction('xxx_to_array')
 			// si c'est du RSS
 			if (isset($this->command['sourcemode'])) {
 				switch ($this->command['sourcemode']) {
@@ -224,7 +227,10 @@ class IterPOUR extends Iter {
 						}
 						break;
 					case 'csv':
-						# decodage csv a peaufiner :-)
+						# decodage csv a passer en inc/csv
+						if (function_exists('str_getcsv')) # PHP 5.3.0
+							$this->tableau = str_getcsv($u);
+						else
 						foreach(explode("\n",$u) as $ligne)
 							$this->tableau[] = explode(',', $ligne);
 						$this->ok = true;
@@ -240,6 +246,8 @@ class IterPOUR extends Iter {
 						// erreur
 					}
 					# sql_quote a l'envers : pas propre...
+					# c'est pour la compat ascendante avec le critere
+					# {tableau=#ENV...} de la boucle POUR de SPIP-Bonux-2
 					$x = null;
 					eval ('$x = '.str_replace('\"', '"', $com[2]).';');
 					if (is_array($x) OR is_array($x = @unserialize($x))) {
