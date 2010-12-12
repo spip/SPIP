@@ -24,15 +24,12 @@ class Iter {
 
 	private $result = false;
 
-	public function Iter() {
-		$this->type = '??';
-	}
-
 	/*
 	 * array command: les commandes d'initialisation
 	 * array info: les infos sur le squelette
 	 */
-	public function init($command, $info=array()) {
+	public function Iter($command, $info=array()) {
+		$this->type = '??';
 		$this->command = $command;
 		$this->info = $info;
 	}
@@ -60,7 +57,7 @@ class IterSQL extends Iter {
 	 * array command: les commandes d'initialisation
 	 * array info: les infos sur le squelette
 	 */
-	public function init($command, $info=array()) {
+	public function IterSQL($command, $info=array()) {
 		$this->type='SQL';
 		$this->command = $command;
 		$this->info = $info;
@@ -86,6 +83,85 @@ class IterSQL extends Iter {
 	}
 }
 
+class IterENUM extends Iter {
+	var $ok = true;
+	var $type;
+	var $command;
+	var $info;
+
+	var $n = 0;
+	var $max = 1000000;
+
+	var $filtre = array();
+
+	private $result = false;
+
+	/*
+	 * array command: les commandes d'initialisation
+	 * array info: les infos sur le squelette
+	 */
+	public function IterENUM($command, $info=array()) {
+		$this->type='ENUM';
+		$this->command = $command;
+		$this->info = $info;
+
+		if (is_array($this->command['where']))
+		foreach ($this->command['where'] as $k => $com) {
+			switch($com[1]) {
+				case 'valeur':
+					unset($op);
+					if ($com[0] == 'REGEXP')
+						$this->filtre[] = 'preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
+					else if ($com[0] == '=')
+						$op = '==';
+					else if (in_array($com[0], array('<','<=', '>', '>=')))
+						$op = $com[0];
+
+					if ($op)
+						$this->filtre[] = '$'.$com[1].$op.str_replace('\"', '"', $com[2]);
+
+					break;
+			}
+
+		}
+
+		// critere {2,7}
+		if ($this->command['limit']) {
+			$limit = explode(',',$this->command['limit']);
+			$this->n = $limit[0];
+			$this->max = $limit[0]+$limit[1]-1;
+		}
+
+
+		// Appliquer les filtres sur (valeur)
+		if ($this->filtre) {
+			$this->filtre = create_function('$valeur', $b = 'return ('.join(') AND (', $this->filtre).');');
+		}
+
+	}
+	public function seek($n=0, $continue=null) {
+		$this->n = $n;
+		return true;
+	}
+	public function next() {
+		if ($f = $this->filtre) {
+			while (
+			$this->n < $this->max
+			AND !$f($a = $this->n++)){};
+		} else
+			$a = $this->n++;
+
+		if ($this->n <= 1+$this->max)
+			return array('valeur' => $a);
+	}
+	public function free(){
+	}
+	public function count() {
+		return $this->max;
+	}
+}
+
+
 class IterPOUR extends Iter {
 	var $ok = false;
 	var $type;
@@ -101,13 +177,53 @@ class IterPOUR extends Iter {
 	 * array command: les commandes d'initialisation
 	 * array info: les infos sur le squelette
 	 */
-	public function init($command, $info=array()) {
+	public function IterPOUR($command, $info=array()) {
 		$this->type='POUR';
 		$this->command = $command;
 		$this->info = $info;
 
 		// les commandes connues pour l'iterateur POUR
 		// sont : tableau=#ARRAY ; cle=...; valeur=...
+		// source URL
+		if (isset($this->command['source'])) {
+			if (preg_match(',^http://,', $this->command['source'])) {
+				include_spip('inc/distant');
+				$u = recuperer_page($this->command['source']);
+			} else
+				$u = spip_file_get_contents($this->command['source']);
+
+			// si c'est du RSS
+			if (isset($this->command['sourcemode'])) {
+				switch ($this->command['sourcemode']) {
+					case 'rss':
+						include_spip('inc/syndic');
+						if (is_array($rss = analyser_backend($u))) {
+							$this->tableau = $rss;
+							$this->ok = true;
+						}
+						break;
+					case 'json':
+						if (is_array($json = json_decode($u))) {
+							$this->tableau = $json;
+							$this->ok = true;
+						}
+						break;
+					case 'yaml':
+						include_spip('inc/yaml');
+						if (is_array($yaml = yaml_decode($u))) {
+							$this->tableau = $yaml;
+							$this->ok = true;
+						}
+						break;
+					case 'csv':
+						# decodage csv a peaufiner :-)
+						foreach(explode("\n",$u) as $ligne)
+							$this->tableau[] = explode(',', $ligne);
+						$this->ok = true;
+				}
+			}
+		}
+
 		if (is_array($this->command['where']))
 		foreach ($this->command['where'] as $k => $com) {
 			switch($com[1]) {

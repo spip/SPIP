@@ -242,21 +242,8 @@ function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
 define('CODE_CORPS_BOUCLE', '%s
 	$t0 = "";
 	// REQUETE
-	$iter = new %s();
-	$iter->init( array(
-		"select"=>$select,
-		"from"=>$from,
-		"type"=>$type,
-		"where"=>$where,
-		"join"=>$join,
-		"groupby"=>$groupby,
-		"orderby"=>$orderby,
-		"limit"=>$limit,
-		"having"=>$having,
-		"table"=>$table,
-		"id"=>$id,
-		"connect"=>$connect
-		),
+	$iter = new %s(
+		%s,
 		array(%s)
 	);
 	if ($iter->ok) {
@@ -401,7 +388,46 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	. calculer_requete_sql($boucles[$id_boucle]);
 
 	$contexte = memoriser_contexte_compil($boucle);
-	$a = sprintf(CODE_CORPS_BOUCLE, $init, $boucle->iterateur, $contexte, $nums, $init_lang, $corps, $fin_lang, $trace);
+
+	switch ($boucle->iterateur) {
+		case 'IterSQL':
+			$command = 'array(
+		"select"=>$select,
+		"from"=>$from,
+		"type"=>$type,
+		"where"=>$where,
+		"join"=>$join,
+		"groupby"=>$groupby,
+		"orderby"=>$orderby,
+		"limit"=>$limit,
+		"having"=>$having,
+		"table"=>$table,
+		"id"=>$id,
+		"connect"=>$connect
+		)';
+			break;
+
+		case 'IterPOUR':
+		case 'IterENUM':
+			$command = 'array("where" => $where, "source"=>$source, "sourcemode"=>$sourcemode, "limit" => $limit)';
+			break;
+
+		default:
+			$command = 'array()';
+			break;
+	}
+
+	$a = sprintf(CODE_CORPS_BOUCLE,
+		$init,
+		$boucle->iterateur,
+		$command,
+		$contexte,
+		$nums,
+		$init_lang,
+		$corps,
+		$fin_lang,
+		$trace
+	);
 
 #	var_dump($a);exit;
 	return $a;

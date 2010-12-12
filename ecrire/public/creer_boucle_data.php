@@ -11,14 +11,13 @@
 \***************************************************************************/
 
 //
-// creer une boucle sur un iterateur POUR
+// creer une boucle sur un iterateur DATA
 // annonce au compilo les "champs" disponibles
 //
-function public_creer_boucle_POUR_dist($b) {
+function public_creer_boucle_DATA_dist($b) {
 	$b->iterateur = 'IterPOUR'; # designe la classe d'iterateur
 	$b->show = array(
 		'field' => array(
-			'tableau' => 'ARRAY',
 			'cle' => 'STRING',
 			'valeur' => 'STRING',
 		)
