@@ -228,6 +228,7 @@ class IterPOUR extends Iter {
 						break;
 					case 'csv':
 						# decodage csv a passer en inc/csv
+						# cf. http://www.php.net/manual/en/function.str-getcsv.php#100579 et suiv.
 						if (function_exists('str_getcsv')) # PHP 5.3.0
 							$this->tableau = str_getcsv($u);
 						else
