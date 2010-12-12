@@ -31,14 +31,7 @@ function analyser_backend($rss, $url_syndic='') {
 	define('_SYNDICATION_DEREFERENCER_URL', false);
 
 	// Echapper les CDATA
-	$echappe_cdata = array();
-	if (preg_match_all(',<!\[CDATA\[(.*)]]>,Uims', $rss,
-	$regs, PREG_SET_ORDER)) {
-		foreach ($regs as $n => $reg) {
-			$echappe_cdata[$n] = $reg[1];
-			$rss = str_replace($reg[0], "@@@SPIP_CDATA$n@@@", $rss);
-		}
-	}
+	cdata_echappe($rss, $echappe_cdata);
 
 	// supprimer les commentaires
 	$rss = preg_replace(',<!--.*-->,Ums', '', $rss);
@@ -131,17 +124,25 @@ function analyser_backend($rss, $url_syndic='') {
 		// Date
 		$la_date = '';
 		if (preg_match(',<(published|modified|issued)>([^<]*)<,Uims',
-		$item,$match))
+		$item,$match)) {
+			cdata_echappe_retour($match[2], $echappe_cdata);
 			$la_date = my_strtotime($match[2]);
+		}
 		if (!$la_date AND
-		preg_match(',<(pubdate)>([^<]*)<,Uims',$item, $match))
+		preg_match(',<(pubdate)>([^<]*)<,Uims',$item, $match)) {
+			cdata_echappe_retour($match[2], $echappe_cdata);
 			$la_date = my_strtotime($match[2]);
+		}
 		if (!$la_date AND
-		preg_match(',<([a-z]+:date)>([^<]*)<,Uims',$item,$match))
-			$la_date = my_strtotime($match[2]);
+		preg_match(',<([a-z]+:date)>([^<]*)<,Uims',$item,$match)) {
+			cdata_echappe_retour($match[2], $echappe_cdata);
+			$la_date = my_strtotime($match[2], $echappe_cdata);
+		}
 		if (!$la_date AND
-		preg_match(',<date>([^<]*)<,Uims',$item,$match))
+		preg_match(',<date>([^<]*)<,Uims',$item,$match)) {
+			cdata_echappe_retour($match[1], $echappe_cdata);
 			$la_date = my_strtotime($match[1]);
+		}
 
 		// controle de validite de la date
 		// pour eviter qu'un backend errone passe toujours devant
@@ -152,7 +153,8 @@ function analyser_backend($rss, $url_syndic='') {
 				$la_date = time();
 		}
 
-		$data['date'] = $la_date;
+		if ($la_date)
+			$data['date'] = $la_date;
 
 		// Honorer le <lastbuilddate> en forcant la date
 		if (preg_match(',<(lastbuilddate|updated|modified)>([^<>]+)</\1>,i',
@@ -388,14 +390,37 @@ function ajouter_tags($matches, $item) {
 }
 
 
-// Retablit le contenu des blocs [[CDATA]] dans un tableau
+// Lit contenu des blocs [[CDATA]] dans un flux
 // http://doc.spip.org/@cdata_echappe_retour
-function cdata_echappe_retour(&$table, &$echappe_cdata) {
-	foreach ($table as $var => $val) {
-		$table[$var] = filtrer_entites($table[$var]);
-		foreach ($echappe_cdata as $n => $e)
-			$table[$var] = str_replace("@@@SPIP_CDATA$n@@@",
-				$e, $table[$var]);
+function cdata_echappe(&$rss, &$echappe_cdata) {
+	$echappe_cdata = array();
+	if (preg_match_all(',<!\[CDATA\[(.*)]]>,Uims', $rss,
+	$regs, PREG_SET_ORDER)) {
+		foreach ($regs as $n => $reg) {
+			if (preg_match(',[<>],', $reg[1])) {
+				$echappe_cdata[$n] = $reg[1];
+				$rss = str_replace($reg[0], "@@@SPIP_CDATA$n@@@", $rss);
+			} else
+				$rss = str_replace($reg[0], $reg[1], $rss);
+		}
+	}
+}
+
+// Retablit le contenu des blocs [[CDATA]] dans une chaine ou un tableau
+// http://doc.spip.org/@cdata_echappe_retour
+function cdata_echappe_retour(&$x, &$echappe_cdata) {
+	if (is_string($x)) {
+		if (strpos($x, '@@@SPIP_CDATA') !== false
+		OR strpos($x, '&lt;') !== false) {
+			$x = filtrer_entites($x);
+			foreach ($echappe_cdata as $n => $e)
+				$x = str_replace("@@@SPIP_CDATA$n@@@", $e, $x);
+		}
+	}
+
+	else if (is_array($x)) {
+		foreach($x as $k => &$v)
+			cdata_echappe_retour($v, $echappe_cdata);
 	}
 }
 ?>
