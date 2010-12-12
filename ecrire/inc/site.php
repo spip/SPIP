@@ -25,9 +25,6 @@ function analyser_site($url) {
 	$texte = recuperer_page($url, true);
 	if (!$texte) return false;
 
-	include_spip('inc/syndic');
-	cdata_echappe($texte, $echappe_cdata);
-
 	if (preg_match(',<(channel|feed)([\:[:space:]][^>]*)?'
 	.'>(.*)</\1>,ims', $texte, $regs)) {
 		$result['syndication'] = 'oui';
@@ -41,12 +38,9 @@ function analyser_site($url) {
 		);
 		$header = str_replace($b,array(),$channel);
 
-		if ($t = extraire_balise($header, 'title')) {
-			cdata_echappe_retour($t, $echappe_cdata);
+		if ($t = extraire_balise($header, 'title'))
 			$result['nom_site'] = supprimer_tags($t);
-		}
 		if ($t = extraire_balises($header, 'link')) {
-			cdata_echappe_retour($t, $echappe_cdata);
 			foreach ($t as $link) {
 				$u = supprimer_tags(filtrer_entites($link));
 				if (!strlen($u))
@@ -64,7 +58,6 @@ function analyser_site($url) {
 
 		if ($a = extraire_balise($header, 'description')
 		OR $a = extraire_balise($header, 'tagline')) {
-			cdata_echappe_retour($a, $echappe_cdata);
 			$result['descriptif'] = supprimer_tags($a);
 		}
 
@@ -117,7 +110,6 @@ function analyser_site($url) {
 		}
 	}
 
-	cdata_echappe_retour($result, $echappe_cdata);
 	return $result;
 }
 
