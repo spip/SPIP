@@ -186,7 +186,15 @@ class IterPOUR extends Iter {
 		// sont : tableau=#ARRAY ; cle=...; valeur=...
 		// source URL
 		if (isset($this->command['source'])) {
-			if (preg_match(',^http://,', $this->command['source'])) {
+			if (isset($this->command['sourcemode'])
+			AND $this->command['sourcemode'] == 'table') {
+				if (is_array($a = $this->command['source'])
+				OR is_array($a = unserialize($this->command['source']))) {
+					$this->tableau = $a;
+					$this->ok = true;
+				}
+			}
+			else if (preg_match(',^http://,', $this->command['source'])) {
 				include_spip('inc/distant');
 				$u = recuperer_page($this->command['source']);
 			} else
