@@ -28,7 +28,7 @@ define('_FEED_GLOBALS', false);
 define ('_PHP_MIN', '4.4.11');
 
 # le nom du repertoire ecrire/
-define('_DIR_RESTREINT_ABS', 'ecrire/');
+if (!defined('_DIR_RESTREINT_ABS')) define('_DIR_RESTREINT_ABS', 'ecrire/');
 # sommes-nous dans ecrire/ ?
 define('_DIR_RESTREINT',
  (!is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
@@ -42,7 +42,7 @@ define('_ROOT_RESTREINT', _ROOT_CWD . _DIR_RESTREINT);
 
 // Icones
 # nom du dossier images
-define('_NOM_IMG_PACK', 'images/');
+if (!defined('_NOM_IMG_PACK')) define('_NOM_IMG_PACK', 'images/');
 # le chemin http (relatif) vers les images standard
 define('_DIR_IMG_PACK', (_DIR_RACINE . 'prive/' . _NOM_IMG_PACK));
 # le chemin des vignettes de type de document
@@ -53,7 +53,7 @@ define('_ROOT_IMG_PACK', dirname(dirname(__FILE__)) . '/prive/' . _NOM_IMG_PACK)
 define('_ROOT_IMG_ICONES_DIST', dirname(dirname(__FILE__)) . '/prive/vignettes/');
 
 # le nom du repertoire des  bibliotheques JavaScript
-define('_JAVASCRIPT', 'javascript/'); // utilisable avec #CHEMIN et find_in_path
+if (!defined('_JAVASCRIPT')) define('_JAVASCRIPT', 'javascript/'); // utilisable avec #CHEMIN et find_in_path
 define('_DIR_JAVASCRIPT', (_DIR_RACINE . 'prive/' . _JAVASCRIPT));
 
 # Le nom des 4 repertoires modifiables par les scripts lances par httpd
@@ -61,13 +61,13 @@ define('_DIR_JAVASCRIPT', (_DIR_RACINE . 'prive/' . _JAVASCRIPT));
 # mais on peut les mettre ailleurs et changer completement les noms
 
 # le nom du repertoire des fichiers Temporaires Inaccessibles par http://
-define('_NOM_TEMPORAIRES_INACCESSIBLES', "tmp/");
+if (!defined('_NOM_TEMPORAIRES_INACCSSIBLES')) define('_NOM_TEMPORAIRES_INACCESSIBLES', "tmp/");
 # le nom du repertoire des fichiers Temporaires Accessibles par http://
-define('_NOM_TEMPORAIRES_ACCESSIBLES', "local/");
+if (!defined('_NOM_TEMPORAIRES_ACCSSIBLES')) define('_NOM_TEMPORAIRES_ACCESSIBLES', "local/");
 # le nom du repertoire des fichiers Permanents Inaccessibles par http://
-define('_NOM_PERMANENTS_INACCESSIBLES', "config/");
+if (!defined('_NOM_PERMANENTS_INACCSSIBLES')) define('_NOM_PERMANENTS_INACCESSIBLES', "config/");
 # le nom du repertoire des fichiers Permanents Accessibles par http://
-define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
+if (!defined('_NOM_PERMANENTS_ACCSSIBLES')) define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
 
 /*
  * detecteur de robot d'indexation
@@ -82,7 +82,7 @@ if (!defined('_IS_BOT'))
 
 
 // Le nom du fichier de personnalisation
-define('_NOM_CONFIG', 'mes_options');
+if (!defined('_NOM_CONFIG')) define('_NOM_CONFIG', 'mes_options');
 
 // Son emplacement absolu si on le trouve
 if (@file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php')
@@ -95,7 +95,7 @@ OR (_EXTENSION_PHP AND @file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . _EXTENS
 // Constante utilisee par le compilateur et le decompilateur
 // sa valeur etant traitee par inc_traduire_dist
 
-define('MODULES_IDIOMES', 'public/spip/ecrire');
+if (!defined('MODULES_IDIOMES')) define('MODULES_IDIOMES', 'public/spip/ecrire');
 
 // *** Fin des define *** //
 
@@ -349,7 +349,7 @@ if (_FILE_OPTIONS) {include_once _FILE_OPTIONS;}
 
 // Masquer les warning
 if (!defined('E_DEPRECATED')) define('E_DEPRECATED', 8192); // compatibilite PHP 5.3
-define('SPIP_ERREUR_REPORT', E_ALL ^ E_NOTICE ^ E_DEPRECATED);
+if (!defined('SPIP_ERREUR_REPORT')) define('SPIP_ERREUR_REPORT', E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 error_reporting(SPIP_ERREUR_REPORT);
 
 // Initialisations critiques non surchargeables par les plugins
@@ -418,7 +418,7 @@ OR _request('action') == 'test_dirs')) {
 
 // Vanter notre art de la composition typographique
 // La globale $spip_header_silencieux permet de rendre le header minimal pour raisons de securite
-define('_HEADER_COMPOSED_BY', "Composed-By: SPIP");
+if (!defined('_HEADER_COMPOSED_BY')) define('_HEADER_COMPOSED_BY', "Composed-By: SPIP");
 if (!headers_sent()) {
 	header("Vary: Cookie, Accept-Encoding");
 	if (!isset($GLOBALS['spip_header_silencieux']) OR !$GLOBALS['spip_header_silencieux'])
