@@ -59,7 +59,8 @@ function exec_auteur_infos_args($id_auteur, $nom, $new, $echec='', $redirect='')
 		echo "<br /><br /><br />";
 		echo debut_gauche('', true);
 		auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect);
-		echo auteurs_interventions($auteur);
+		if($id_auteur > 0)
+			echo auteurs_interventions($auteur);
 		echo fin_gauche(), fin_page();
 	}
 }
