@@ -391,14 +391,14 @@ function sql_multi($sel, $lang, $serveur='', $option=true)
 
 // http://doc.spip.org/@sql_error
 function sql_error($serveur='') {
-	$f = sql_serveur('error', $serveur);
+	$f = sql_serveur('error', $serveur, 'continue');
 	if (!is_string($f) OR !$f) return false;
-	return $f($serveur);
+	return $f('query inconnue', $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_errno
-function sql_errno($serveur='', $option=true) {
-	$f = sql_serveur('errno', $serveur);
+function sql_errno($serveur='') {
+	$f = sql_serveur('errno', $serveur, 'continue');
 	if (!is_string($f) OR !$f) return false;
 	return $f($serveur);
 }
