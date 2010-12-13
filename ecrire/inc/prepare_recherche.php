@@ -16,10 +16,24 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/rechercher');
 if (!defined('_DELAI_CACHE_resultats')) define('_DELAI_CACHE_resultats', 600);
 
-// Preparer les listes id_article IN (...) pour les parties WHERE
-// et points =  des requetes du moteur de recherche
-// http://doc.spip.org/@inc_prepare_recherche_dist
-function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, $serveur='') {
+/**
+ * Preparer les listes id_article IN (...) pour les parties WHERE
+ * et points =  des requetes du moteur de recherche
+ * http://doc.spip.org/@inc_prepare_recherche_dist
+ *
+ * @param string $recherche
+ *    chaine recherchee
+ * @param string $table
+ *    table dans laquelle porte la recherche
+ * @param bool $cond
+ *    critere conditionnel sur {recherche?}
+ * @param string $serveur
+ *    serveur de base de donnees
+ * @param array $modificateurs
+ *    modificateurs de boucle, ie liste des criteres presents
+ * @return array
+ */
+function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, $serveur='', $modificateurs = array()) {
 	static $cache = array();
 	$delai_fraicheur = min(_DELAI_CACHE_resultats,time()-$GLOBALS['meta']['derniere_modif']);
 
@@ -60,7 +74,7 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 
 		// permettre aux plugins de modifier le resultat
 		$points = pipeline('prepare_recherche',array(
-			'args'=>array('type'=>$x,'recherche'=>$recherche,'serveur'=>$serveur),
+			'args'=>array('type'=>$x,'recherche'=>$recherche,'serveur'=>$serveur,'modificateurs'=>$modificateurs),
 			'data'=>$points
 		));
 
