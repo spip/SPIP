@@ -328,5 +328,9 @@ class IterPOUR extends Iter {
 function inc_file_to_array_dist($u) {
 	return preg_split('/\r?\n/', $u);
 }
+function inc_plugins_to_array_dist($u) {
+	include_spip('inc/plugin');
+	return liste_chemin_plugin_actifs();
+}
 
 ?>
