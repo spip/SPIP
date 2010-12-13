@@ -685,6 +685,9 @@ function traiter_tableau($bloc) {
 	$rowspans = $numeric = array();
 	$n = count($lignes[0]);
 	$k = count($lignes);
+	// distinguer les colonnes numeriques a point ou a virgule,
+	// pour les alignements eventuels sur "," ou "."
+	$numeric_class = array('.'=>'point',','=>'virgule');
 	for($i=0;$i<$n;$i++) {
 	  $align = true;
 	  for ($j=0;$j<$k;$j++) $rowspans[$j][$i] = 1;
@@ -696,13 +699,7 @@ function traiter_tableau($bloc) {
 		else if ($r[1]) $align = $r[1];
 	      }
 	  }
-	  $numeric[$i] = !$align ? '' :
-	    (" style='text-align: " .
-	     // http://www.w3.org/TR/REC-CSS2/tables.html#column-alignment
-	     // specifie text-align: "," pour cadrer le long de la virgule
-	     // mais les navigateurs ne l'implementent pas ou mal
-	     (/* $align !== true ?"\"$align\"" : */ 'right') .
-	     "'");
+	  $numeric[$i] = !$align ? '' : (" class='numeric ".$numeric_class[$align]."'");
 	}
 
 	// et on parcourt le tableau a l'envers pour ramasser les
