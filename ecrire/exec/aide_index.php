@@ -197,7 +197,7 @@ function help_section($aide, $contenu, $prof=2)
 
 	if (preg_match($r, $contenu, $m))
 	  return $m[1];
-	spip_log("aide inconnue $r");
+#	spip_log("aide inconnue $r dans " . substr($contenu, 0, 150));
 	return '';
 }
 
@@ -346,9 +346,9 @@ function exec_aide_index_dist()
 				include_spip('inc/distant');
 				sous_repertoire(_DIR_AIDE,'','',true);
 				$img = "$server/$rep/$lang/$file";
-				if (ecrire_fichier(_DIR_AIDE . "test")
-				    AND ($contenu = recuperer_page($img))) {
-				  ecrire_fichier ($img = _DIR_AIDE . $cache, $contenu);
+				$contenu = recuperer_page($img);
+				if ($contenu) {
+				  ecrire_fichier (_DIR_AIDE . $cache, $contenu);
 				  // Bug de certains OS:
 				  // le contenu est incompris au premier envoi
 				  // Donc ne pas mettre d'Expire
