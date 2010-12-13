@@ -978,7 +978,10 @@ function spip_sqlite_showtable($nom_table, $serveur='',$requeter=true){
 			$fields = array();
 			foreach (explode(",",$dec) as $v) {
 				preg_match("/^\s*([^\s]+)\s+(.*)/",$v,$r);
-				$fields[strtolower($r[1])] = $r[2];
+				// trim car 'Sqlite Manager' (plugin Firefox) utilise des guillemets
+				// lorsqu'on modifie une table avec cet outil.
+				// possible que d'autres fassent de meme.
+				$fields[ trim(strtolower($r[1]),'"') ] = $r[2]; 
 			}
 			// key inclues dans la requete
 			$keys = array();
