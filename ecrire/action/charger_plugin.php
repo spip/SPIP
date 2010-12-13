@@ -88,6 +88,10 @@ function action_charger_plugin_dist() {
 
 		if (preg_match(",^Content-Type:\s*application/zip$,Uims",$head))
 			$extension = "zip";
+		// au cas ou, si le content-type n'est pas la
+		// mais que l'extension est explicite
+		elseif(pathinfo($zip, PATHINFO_EXTENSION)=="zip")
+			$extension = "zip";
 
 		# si ce n'est pas un zip dans un format connu,
 		# c'est sans doute une liste de plugins
