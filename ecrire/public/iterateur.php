@@ -201,6 +201,8 @@ class IterPOUR extends Iter {
 				$u = recuperer_page($this->command['source']);
 			} else if (@is_readable($this->command['source']))
 				$u = spip_file_get_contents($this->command['source']);
+			else
+				$u = $this->command['source'];
 
 			// tout ce bloc devrait marcher par charger_fonction('xxx_to_array')
 			// si c'est du RSS
