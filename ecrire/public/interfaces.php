@@ -172,94 +172,101 @@ $table_criteres_infixes = array('<', '>', '<=', '>=', '==', '===', '!=', '!==', 
 
 global $exception_des_connect;
 $exception_des_connect[] = ''; // ne pas transmettre le connect='' par les inclure
+
+
 //
-// Globales de description de la base
-
-//ces variables ne sont pas initialisees par "$var = array()"
-// afin de permettre leur extension dans mes_options.php etc
-
-// http://doc.spip.org/@declarer_interfaces
+/**
+ * Declarer les interfaces de la base pour le compilateur
+ * On utilise une fonction qui initialise les valeurs,
+ * sans ecraser d'eventuelles predefinition dans mes_options
+ * et les envoie dans un pipeline
+ * pour les plugins
+ *
+ * http://doc.spip.org/@declarer_interfaces
+ *
+ * @return void
+ */
 function declarer_interfaces(){
- global $exceptions_des_tables, $table_des_tables, $table_date, $table_titre;
+	global $exceptions_des_tables, $table_des_tables, $table_date, $table_titre;
 
-$table_des_tables['articles']='articles';
-$table_des_tables['auteurs']='auteurs';
-$table_des_tables['documents']='documents';
-$table_des_tables['types_documents']='types_documents';
-$table_des_tables['rubriques']='rubriques';
-$table_des_tables['hierarchie']='rubriques';
-$table_des_tables['messages']='messages';
-
-
-$exceptions_des_tables['documents']['type_document']=array('types_documents'
-, 'titre');
-$exceptions_des_tables['documents']['extension_document']=array('types_documents', 'extension');
-$exceptions_des_tables['documents']['mime_type']=array('types_documents'
-, 'mime_type');
+	$table_des_tables['articles']='articles';
+	$table_des_tables['auteurs']='auteurs';
+	$table_des_tables['documents']='documents';
+	$table_des_tables['types_documents']='types_documents';
+	$table_des_tables['rubriques']='rubriques';
+	$table_des_tables['hierarchie']='rubriques';
+	$table_des_tables['messages']='messages';
 
 
-$table_titre['articles']= 'titre, lang';
-$table_titre['rubriques']= 'titre, lang';
-$table_titre['messages']= "titre, '' AS lang";
-$table_titre['auteurs']= "nom AS titre, '' AS lang";
-$table_titre['documents']= "titre, fichier AS surnom, '' AS lang";
-
-$table_date['articles']='date';
-$table_date['auteurs']='date';
-$table_date['documents']='date';
-$table_date['types_documents']='date';
-$table_date['rubriques']='date';
-
-//
-// tableau des tables de jointures
-// Ex: gestion du critere {id_mot} dans la boucle(ARTICLES)
-
-global $tables_jointures;
-
-$tables_jointures['spip_articles']['id_auteur']= 'auteurs_liens';
-$tables_jointures['spip_articles'][]= 'documents_liens';
-
-$tables_jointures['spip_auteurs'][]= 'auteurs_liens';
-
-$tables_jointures['spip_documents'][]= 'documents_liens';
-$tables_jointures['spip_documents'][]= 'types_documents';
-
-$tables_jointures['spip_rubriques'][]= 'documents_liens';
+	$exceptions_des_tables['documents']['type_document']=array('types_documents'
+	, 'titre');
+	$exceptions_des_tables['documents']['extension_document']=array('types_documents', 'extension');
+	$exceptions_des_tables['documents']['mime_type']=array('types_documents'
+	, 'mime_type');
 
 
+	$table_titre['articles']= 'titre, lang';
+	$table_titre['rubriques']= 'titre, lang';
+	$table_titre['messages']= "titre, '' AS lang";
+	$table_titre['auteurs']= "nom AS titre, '' AS lang";
+	$table_titre['documents']= "titre, fichier AS surnom, '' AS lang";
 
-global  $exceptions_des_jointures;
-#$exceptions_des_jointures['titre_mot'] = array('spip_mots', 'titre'); // pour exemple
+	$table_date['articles']='date';
+	$table_date['auteurs']='date';
+	$table_date['documents']='date';
+	$table_date['types_documents']='date';
+	$table_date['rubriques']='date';
 
-global  $table_des_traitements;
+	//
+	// tableau des tables de jointures
+	// Ex: gestion du critere {id_mot} dans la boucle(ARTICLES)
 
-define('_TRAITEMENT_TYPO', 'typo(%s, "TYPO", $connect)');
-define('_TRAITEMENT_RACCOURCIS', 'propre(%s, $connect)');
-define('_TRAITEMENT_TYPO_SANS_NUMERO', 'typo(supprimer_numero(%s), "TYPO", $connect)');
+	global $tables_jointures;
 
-$table_des_traitements['BIO'][]= _TRAITEMENT_RACCOURCIS;
-$table_des_traitements['CHAPO'][]= _TRAITEMENT_RACCOURCIS;
-$table_des_traitements['DATE'][]= 'normaliser_date(%s)';
-$table_des_traitements['DATE_REDAC'][]= 'normaliser_date(%s)';
-$table_des_traitements['DATE_MODIF'][]= 'normaliser_date(%s)';
-$table_des_traitements['DATE_NOUVEAUTES'][]= 'normaliser_date(%s)';
-$table_des_traitements['DESCRIPTIF'][]= _TRAITEMENT_RACCOURCIS;
-$table_des_traitements['FICHIER']['documents']= 'get_spip_doc(%s)';
-$table_des_traitements['INTRODUCTION'][]= 'PtoBR('. _TRAITEMENT_RACCOURCIS .')';
-$table_des_traitements['MESSAGE'][]= _TRAITEMENT_RACCOURCIS;
-$table_des_traitements['NOM_SITE_SPIP'][]= _TRAITEMENT_TYPO;
-$table_des_traitements['NOM'][]= _TRAITEMENT_TYPO;
-$table_des_traitements['AUTEUR'][]= _TRAITEMENT_TYPO;
-$table_des_traitements['PS'][]= _TRAITEMENT_RACCOURCIS;
-$table_des_traitements['SOURCE'][]= _TRAITEMENT_TYPO;
-$table_des_traitements['SOUSTITRE'][]= _TRAITEMENT_TYPO;
-$table_des_traitements['SURTITRE'][]= _TRAITEMENT_TYPO;
-$table_des_traitements['TAGS'][]= '%s';
-$table_des_traitements['TEXTE'][]= _TRAITEMENT_RACCOURCIS;
-$table_des_traitements['TITRE'][]= _TRAITEMENT_TYPO_SANS_NUMERO;
-$table_des_traitements['TYPE'][]= _TRAITEMENT_TYPO;
-$table_des_traitements['DESCRIPTIF_SITE_SPIP'][]= _TRAITEMENT_RACCOURCIS;
-$table_des_traitements['ENV'][]= 'entites_html(%s,true)';
+	$tables_jointures['spip_articles']['id_auteur']= 'auteurs_liens';
+	$tables_jointures['spip_articles'][]= 'documents_liens';
+
+	$tables_jointures['spip_auteurs'][]= 'auteurs_liens';
+
+	$tables_jointures['spip_documents'][]= 'documents_liens';
+	$tables_jointures['spip_documents'][]= 'types_documents';
+
+	$tables_jointures['spip_rubriques'][]= 'documents_liens';
+
+
+
+	global  $exceptions_des_jointures;
+	#$exceptions_des_jointures['titre_mot'] = array('spip_mots', 'titre'); // pour exemple
+
+	global  $table_des_traitements;
+
+	define('_TRAITEMENT_TYPO', 'typo(%s, "TYPO", $connect)');
+	define('_TRAITEMENT_RACCOURCIS', 'propre(%s, $connect)');
+	define('_TRAITEMENT_TYPO_SANS_NUMERO', 'typo(supprimer_numero(%s), "TYPO", $connect)');
+
+	$table_des_traitements['BIO'][]= _TRAITEMENT_RACCOURCIS;
+	$table_des_traitements['CHAPO'][]= _TRAITEMENT_RACCOURCIS;
+	$table_des_traitements['DATE'][]= 'normaliser_date(%s)';
+	$table_des_traitements['DATE_REDAC'][]= 'normaliser_date(%s)';
+	$table_des_traitements['DATE_MODIF'][]= 'normaliser_date(%s)';
+	$table_des_traitements['DATE_NOUVEAUTES'][]= 'normaliser_date(%s)';
+	$table_des_traitements['DESCRIPTIF'][]= _TRAITEMENT_RACCOURCIS;
+	$table_des_traitements['FICHIER']['documents']= 'get_spip_doc(%s)';
+	$table_des_traitements['INTRODUCTION'][]= 'PtoBR('. _TRAITEMENT_RACCOURCIS .')';
+	$table_des_traitements['MESSAGE'][]= _TRAITEMENT_RACCOURCIS;
+	$table_des_traitements['NOM_SITE_SPIP'][]= _TRAITEMENT_TYPO;
+	$table_des_traitements['NOM'][]= _TRAITEMENT_TYPO;
+	$table_des_traitements['AUTEUR'][]= _TRAITEMENT_TYPO;
+	$table_des_traitements['PS'][]= _TRAITEMENT_RACCOURCIS;
+	$table_des_traitements['SOURCE'][]= _TRAITEMENT_TYPO;
+	$table_des_traitements['SOUSTITRE'][]= _TRAITEMENT_TYPO;
+	$table_des_traitements['SURTITRE'][]= _TRAITEMENT_TYPO;
+	$table_des_traitements['TAGS'][]= '%s';
+	$table_des_traitements['TEXTE'][]= _TRAITEMENT_RACCOURCIS;
+	$table_des_traitements['TITRE'][]= _TRAITEMENT_TYPO_SANS_NUMERO;
+	$table_des_traitements['TYPE'][]= _TRAITEMENT_TYPO;
+	$table_des_traitements['DESCRIPTIF_SITE_SPIP'][]= _TRAITEMENT_RACCOURCIS;
+	$table_des_traitements['ENV'][]= 'entites_html(%s,true)';
 
 
 	// gerer l'affectation en 2 temps car si le pipe n'est pas encore declare, on ecrase les globales
