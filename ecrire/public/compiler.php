@@ -285,7 +285,9 @@ function calculer_boucle($id_boucle, &$boucles) {
 						$jointures[] = array('',array($id=reset($j)),end($j));
 					}
 					$jointures[0][0] = $id_table;
-					fabrique_jointures($boucle, $jointures, true, $boucle->show, $id_table);
+					if (!array_search($id, $boucle->from)){
+						fabrique_jointures($boucle, $jointures, true, $boucle->show, $id_table);
+					}
 					// trouver l'alias de la table d'arrivee qui porte le statut
 					$id = array_search($id, $boucle->from);
 				}
