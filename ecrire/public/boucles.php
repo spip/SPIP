@@ -35,59 +35,6 @@ function boucle_BOUCLE_dist($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
-//
-// <BOUCLE(ARTICLES)>
-//
-// http://doc.spip.org/@boucle_ARTICLES_dist
-function boucle_ARTICLES_dist($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$mstatut = $id_table .'.statut';
-
-	// Restreindre aux elements publies
-	if (!isset($boucle->modificateur['criteres']['statut'])) {
-		if (!$GLOBALS['var_preview']) {
-			if ($GLOBALS['meta']["post_dates"] == 'non')
-				array_unshift($boucle->where,"quete_condition_postdates('$id_table.date')");
-			array_unshift($boucle->where,array("'='", "'$mstatut'", "'\\'publie\\''"));
-		} else
-			array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'"));
-	}
-	return calculer_boucle($id_boucle, $boucles); 
-}
-
-//
-// <BOUCLE(AUTEURS)>
-//
-// http://doc.spip.org/@boucle_AUTEURS_dist
-function boucle_AUTEURS_dist($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$mstatut = $id_table .'.statut';
-
-	// Restreindre aux elements publies
-	if (!isset($boucle->modificateur['criteres']['statut'])) {
-		// Si pas de lien avec un article, selectionner
-		// uniquement les auteurs d'un article publie
-		if (!$GLOBALS['var_preview'])
-		if (!isset($boucle->modificateur['lien']) AND !isset($boucle->modificateur['tout'])) {
-			fabrique_jointures($boucle, array(
-					array($id_table, array('spip_auteurs_liens'), 'id_auteur'),
-					array('', array('spip_articles'), array('id_objet','id_article','objet','article'))
-				), true, $boucle->show, $id_table);
-			$t = array_search('spip_articles', $boucle->from);
-			array_unshift($boucle->where,
-				array("'='", "'$t.statut'", "'\\'publie\\''"));
-			if ($GLOBALS['meta']['post_dates'] == 'non')
-				array_unshift($boucle->where, "quete_condition_postdates('$t.date')");
-		}
-		// pas d'auteurs poubellises
-		array_unshift($boucle->where,array("'!='", "'$mstatut'", "'\\'5poubelle\\''"));
-	}
-
-	return calculer_boucle($id_boucle, $boucles); 
-}
-
 
 //
 // <BOUCLE(DOCUMENTS)>
@@ -150,26 +97,6 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 
 	return calculer_boucle($id_boucle, $boucles);
 }
-
-//
-// <BOUCLE(RUBRIQUES)>
-//
-// http://doc.spip.org/@boucle_RUBRIQUES_dist
-function boucle_RUBRIQUES_dist($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$mstatut = $id_table .'.statut';
-
-	// Restreindre aux elements publies
-	if (!isset($boucle->modificateur['criteres']['statut'])) {
-		if (!$GLOBALS['var_preview'])
-			if (!isset($boucle->modificateur['tout']))
-				array_unshift($boucle->where,array("'='", "'$mstatut'", "'\\'publie\\''"));
-	}
-
-	return calculer_boucle($id_boucle, $boucles); 
-}
-
 
 //
 // <BOUCLE(HIERARCHIE)>

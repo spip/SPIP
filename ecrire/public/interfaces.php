@@ -187,7 +187,7 @@ $exception_des_connect[] = ''; // ne pas transmettre le connect='' par les inclu
  * @return void
  */
 function declarer_interfaces(){
-	global $exceptions_des_tables, $table_des_tables, $table_date, $table_titre;
+	global $exceptions_des_tables, $table_des_tables, $table_date, $table_titre, $table_statut;
 
 	$table_des_tables['articles']='articles';
 	$table_des_tables['auteurs']='auteurs';
@@ -217,6 +217,16 @@ function declarer_interfaces(){
 	$table_date['types_documents']='date';
 	$table_date['rubriques']='date';
 
+	$table_statut['spip_articles'][] = array('champ'=>'statut','publie'=>'publie','previsu'=>'publie,prop','post_date'=>'date','exception'=>'statut');
+	// 2 conditions pour les auteurs : statut=poubelle, et avoir des articles publies !
+	$table_statut['spip_auteurs'][] = array('champ'=>'statut','publie'=>'!5poubelle','previsu'=>'!5poubelle','exception'=>'statut');
+	$table_statut['spip_auteurs'][] = array('champ'=>array(
+																						array('spip_auteurs_liens', 'id_auteur'),
+																						array('spip_articles', array('id_objet','id_article','objet','article')),
+																						'statut'
+																					),'publie'=>'publie','previsu'=>'publie,prop','post_date'=>'date','exception'=>array('statut','lien','tout'));
+	$table_statut['spip_rubriques'][] = array('champ'=>'statut','publie'=>'publie','previsu'=>'!','exception'=>array('statut','tout'));
+
 	//
 	// tableau des tables de jointures
 	// Ex: gestion du critere {id_mot} dans la boucle(ARTICLES)
@@ -232,7 +242,6 @@ function declarer_interfaces(){
 	$tables_jointures['spip_documents'][]= 'types_documents';
 
 	$tables_jointures['spip_rubriques'][]= 'documents_liens';
-
 
 
 	global  $exceptions_des_jointures;
@@ -279,6 +288,7 @@ function declarer_interfaces(){
 			'tables_jointures'=>$tables_jointures,
 			'exceptions_des_jointures'=>$exceptions_des_jointures,
 			'table_des_traitements'=>$table_des_traitements,
+			'table_statut'=>$table_statut,
 			));
 	if ($interfaces){
 			$table_des_tables = $interfaces['table_des_tables'];
@@ -288,6 +298,7 @@ function declarer_interfaces(){
 			$tables_jointures = $interfaces['tables_jointures'];
 			$exceptions_des_jointures = $interfaces['exceptions_des_jointures'];
 			$table_des_traitements = $interfaces['table_des_traitements'];
+	    $table_statut = $interfaces['table_statut'];
 	}
 }
 

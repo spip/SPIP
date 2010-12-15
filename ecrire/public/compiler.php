@@ -189,14 +189,128 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 	return	"\n'<'.'".	"?php ". $code . "\n?'." . "'>'";
 }
 
-//
-// calculer_boucle() produit le corps PHP d'une boucle Spip. 
-// ce corps remplit une variable $t0 retournee en valeur.
-// Ici on distingue boucles recursives et boucle a requete SQL
-// et on insere le code d'envoi au debusqueur du resultat de la fonction.
 
-// http://doc.spip.org/@calculer_boucle
+/**
+ * Calculer la clause where pour filtrer les status,
+ *
+ * @param string $mstatut
+ *  le champ de la table sur lequel porte la condition
+ * @param string $liste
+ *  statut ou liste des statuts separes par une virgule
+ * @return array
+ */
+function calculer_where_statut($mstatut,$liste){
+	$not = false;
+	if (strncmp($liste,'!',1)==0){
+		$not = true;
+	  $liste = substr($liste,1);
+	}
+	// '' => ne rien afficher, '!'=> ne rien filtrer
+	if (!strlen($liste))
+		return ($not?"'1=1'":"'0=1'");
+
+	$liste = explode(',',$liste);
+	foreach($liste as $k=>$v) {
+		$liste[$k] = "\\'".preg_replace(",\W,","",$v)."\\'";
+	}
+  if (count($liste)==1){
+		return array($not?"'<>'":"'='", "'$mstatut'", "'".reset($liste)."'");
+  }
+  else {
+	  return array($not?"'NOT IN'":"'IN'", "'$mstatut'", "'(".implode(',',$liste).")'");
+  }
+}
+
+/**
+ * calculer_boucle() produit le corps PHP d'une boucle Spip.
+ * ce corps remplit une variable $t0 retournee en valeur.
+ * Ici on distingue boucles recursives et boucle a requete SQL
+ * et on insere le code d'envoi au debusqueur du resultat de la fonction.
+ *
+ * http://doc.spip.org/@calculer_boucle
+ *
+ * @param  $id_boucle
+ * @param  $boucles
+ * @return string
+ */
 function calculer_boucle($id_boucle, &$boucles) {
+
+	// gerer les statuts si declares pour cette table
+	/*
+	$table_statut[nom_table][] = array(
+		'champ'=>'statut',  // champ de la table sur lequel porte le filtrage par le statut
+		'publie'=>'publie', // valeur ou liste de valeurs, qui definissent l'objet comme publie.
+		'previsu'=>'publie,prop', // valeur ou liste de valeurs qui sont visibles en previsu
+		'post_date'=>'date', // un champ de date pour la prise en compte des post_dates, ou rien sinon
+	  'exception'=>'statut', // liste des modificateurs qui annulent le filtrage par statut
+	                         // si plusieurs valeurs : array('statut','tout','lien')
+	);
+
+	Pour 'publier' ou 'previsu', si la chaine commence par un "!" on exclu au lieu de filtrer sur les valeurs donnees
+	si la chaine est vide, on ne garde rien si elle est seulement "!" on n'exclu rien
+
+	Si le statut repose sur une jointure, 'champ' est alors un tableau du format suivant :
+	'champ'=>array(
+	    array(table1, cle1),
+	    ...
+	    array(tablen, clen),
+	    champstatut
+	 )
+
+	champstatut est alors le champ statut sur la tablen
+	dans les jointures, clen peut etre un tableau pour une jointure complexe : array('id_objet','id_article','objet','article')	 
+	*/
+
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$table_sql = $boucle->from[$id_table];
+	if (isset($GLOBALS['table_statut'][$table_sql])){
+		foreach($GLOBALS['table_statut'][$table_sql] as $s){
+			// Restreindre aux elements publies si pas de {statut} ou autre dans les criteres
+			$filtrer = true;
+			if (isset($s['exception'])) {
+				foreach(is_array($s['exception'])?$s['exception']:array($s['exception']) as $m) {
+					if (isset($boucle->modificateur['criteres'][$m])) {
+						$filtrer = false;
+						break;
+					}
+				}
+			}
+
+			if ($filtrer) {
+				if (is_array($s['champ'])){
+					$statut = preg_replace(',\W,','',array_pop($s['champ'])); // securite
+					$jointures = array();
+					foreach($s['champ'] as $j) {
+						$jointures[] = array('',array($id=reset($j)),end($j));
+					}
+					$jointures[0][0] = $id_table;
+					fabrique_jointures($boucle, $jointures, true, $boucle->show, $id_table);
+					// trouver l'alias de la table d'arrivee qui porte le statut
+					$id = array_search($id, $boucle->from);
+				}
+				else {
+					$id = $id_table;
+					$statut = preg_replace(',\W,','',$s['champ']); // securite
+				}
+				$mstatut = $id .'.'.$statut;
+
+				if (!$GLOBALS['var_preview']) {
+					if (isset($s['post_date']) AND $s['post_date']
+						AND $GLOBALS['meta']["post_dates"] == 'non'){
+						$date = $id.'.'.preg_replace(',\W,','',$s['post_date']); // securite
+						array_unshift($boucle->where,"quete_condition_postdates('$date')");
+					}
+					array_unshift($boucle->where,calculer_where_statut($mstatut,$s['publie']));
+				}
+				else {
+					array_unshift($boucle->where,calculer_where_statut($mstatut,$s['previsu']));
+				}
+			}
+		}
+	}
+
+
 
 	$boucles[$id_boucle] = pipeline('post_boucle', $boucles[$id_boucle]);
 
