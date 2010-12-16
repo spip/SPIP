@@ -438,12 +438,42 @@ class IterENUM extends Iter {
 }
 
 
+/**
+ * IterDATA pour iterer sur des donnees
+ */
 class IterDATA extends Iter {
+	/**
+	 * tableau de donnees
+	 * @var array
+	 */
 	protected $tableau = array();
+
+	/**
+	 * Conditions de filtrage
+	 * ie criteres de selection
+	 * @var array
+	 */
 	protected $filtre = array();
+
+
+	/**
+	 * Cle courante
+	 * @var null
+	 */
 	protected $cle = null;
+
+	/**
+	 * Valeur courante
+	 * @var null
+	 */
 	protected $valeur = null;
 
+	/**
+	 * Constructeur
+	 *
+	 * @param  $command
+	 * @param array $info
+	 */
 	public function __construct($command, $info=array()) {
 		$this->type='DATA';
 		$this->command = $command;
@@ -452,7 +482,12 @@ class IterDATA extends Iter {
 		$this->select($command);
 	}
 
+	/**
+	 * Revenir au depart
+	 * @return void
+	 */
 	public function rewind() {
+		parent::rewind();
 		reset($this->tableau);
 		list($this->cle, $this->valeur) = each($this->tableau);
 	}
@@ -566,10 +601,10 @@ class IterDATA extends Iter {
 
 		// Appliquer les filtres sur (cle,valeur)
 		if ($this->filtre) {
-			$filtre = create_function('$cle,$valeur', $b = 'return ('.join(') AND (', $this->filtre).');');
+			$func_filtre = create_function('$cle,$valeur', $b = 'return ('.join(') AND (', $this->filtre).');');
 			#var_dump($b);
 			foreach($this->tableau as $cle=>$valeur) {
-				if (!$filtre($cle,$valeur))
+				if (!$func_filtre($cle,$valeur))
 					unset($this->tableau[$cle]);
 			}
 		}
@@ -584,27 +619,50 @@ class IterDATA extends Iter {
 		$this->rewind();
 		#var_dump($this->tableau);
 	}
-	public function seek($n=0, $continue=null) {
-		$this->rewind();
-		while($n-->0
-		AND list($this->cle, $this->valeur) = each($this->tableau)){};
-		return true;
-	}
+
+
+	/**
+	 * L'iterateur est-il encore valide ?
+	 * @return bool
+	 */
 	public function valid(){
 		return !is_null($this->cle);
 	}
+
+	/**
+	 * Retourner la valeur
+	 * @return null
+	 */
 	public function current() {
 		return $this->valeur;
 	}
+
+	/**
+	 * Retourner la cle
+	 * @return null
+	 */
 	public function key() {
 		return $this->cle;
 	}
+
+	/**
+	 * Passer a la valeur suivante
+	 * @return void
+	 */
 	public function next(){
+		parent::next();
 		if ($this->valid())
 			list($this->cle, $this->valeur) = each($this->tableau);
 	}
+
+	/**
+	 * Compter le nombre total de resultats
+	 * @return int
+	 */
 	public function total() {
-		return count($this->tableau);
+		if (is_null($this->total))
+			$this->total = count($this->tableau);
+	  return $this->total;
 	}
 }
 
