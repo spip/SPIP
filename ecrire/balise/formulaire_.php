@@ -18,7 +18,7 @@ function protege_champ($texte){
 		$texte = array_map('protege_champ',$texte);
 	else {
 		// ne pas corrompre une valeur serialize
-		if (preg_match(",^[abis]:\d+[:;],", $texte) AND unserialize($texte)!=false)
+		if ((preg_match(",^[abis]:\d+[:;],", $texte) AND unserialize($texte)!=false) OR is_null($texte))
 			return $texte;
 		$texte = entites_html($texte);
 		$texte = str_replace("'","&#39;",$texte);
