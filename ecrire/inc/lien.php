@@ -237,16 +237,23 @@ function traiter_raccourci_liens($t) {
 	return preg_replace_callback(_EXTRAIRE_LIENS, 'traiter_autoliens', $t);
 }
 
-// Fonction pour les champs chapo commencant par =,  redirection qui peut etre:
-// 1. un raccourci Spip habituel (premier If) [texte->TYPEnnn]
-// 2. un ultra raccourci TYPEnnn voire nnn (article) (deuxieme If)
-// 3. une URL std
-// renvoie une tableau structure comme ci-dessus mais sans calcul d'URL
-// (cf fusion de sauvegardes)
 
 define('_RACCOURCI_CHAPO', '/^(\W*)(\W*)(\w*\d+([?#].*)?)$/');
-
-// http://doc.spip.org/@chapo_redirige
+/**
+ * Fonction pour les champs chapo commencant par =,  redirection qui peut etre:
+ * 1. un raccourci Spip habituel (premier If) [texte->TYPEnnn]
+ * 2. un ultra raccourci TYPEnnn voire nnn (article) (deuxieme If)
+ * 3. une URL std
+ *
+ * renvoie l'url reelle de redirection si le $url=true,
+ * l'url brute contenue dans le chapo sinon
+ *
+ * http://doc.spip.org/@chapo_redirige
+ *
+ * @param string $chapo
+ * @param bool $url
+ * @return string
+ */
 function chapo_redirige($chapo, $url=false)
 {
 	if (!preg_match(_RACCOURCI_LIEN, $chapo, $m))
