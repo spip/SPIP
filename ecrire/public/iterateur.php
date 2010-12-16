@@ -12,30 +12,112 @@
 \***************************************************************************/
 
 
-//
-// Iterateur SQL
-//
-
+/**
+ * Iterateurs
+ * http://php.net/manual/fr/class.iterator.php
+ */
 class Iter implements Iterator {
-	# http://php.net/manual/fr/class.iterator.php
-	public function __construct() {} // initialise
-	public function rewind() {} // revient au depart
-	public function valid() {} // avons-nous un element
-	public function current() {} // quel est sa valeur
-	public function key() {} // quelle est sa cle
-	public function next() {} // avancer d'un cran
+	/**
+	 * Constructeur & initialise
+	 */
+	public function __construct() {
+		$this->pos = 0;
+		$this->total = $this->total();
+	}
 
-	# Iter SPIP
-	var $type; # type de l'iterateur
-	var $command; # parametres de l'iterateur
-	var $info; # infos de compilateur
+	/**
+	 * revient au depart
+	 * @return void
+	 */
+	public function rewind() {
+		$this->pos = 0;
+	}
 
-	// avancer en position n
+	/**
+	 * avons-nous un element
+	 * @return void
+	 */
+	public function valid() {
+		return $this->pos<$this->total;
+	}
+
+	/**
+	 * Valeur courante
+	 * @return void
+	 */
+	public function current() {}
+
+	/**
+	 * Cle courante
+	 * @return void
+	 */
+	public function key() {}
+
+	/**
+	 * avancer d'un cran
+	 * @return void
+	 */
+	public function next() {
+		$this->pos++;
+	}
+
+	# Extension SPIP des iterateurs PHP
+	/**
+	 * type de l'iterateur
+	 * @var string
+	 */
+	protected $type;
+
+	/**
+	 * parametres de l'iterateur
+	 * @var array
+	 */
+	protected $command;
+
+	/**
+	 * infos de compilateur
+	 * @var array
+	 */
+	protected $info;
+
+	/**
+	 * position courante de l'iterateur
+	 * @var int
+	 */
+	protected $pos=null;
+
+	/**
+	 * nombre total resultats dans l'iterateur
+	 * @var int
+	 */
+	protected $total=null;
+
+	/**
+	 * avancer en position n,
+	 * comptee en absolu depuis le debut
+	 *
+	 * @param int $n
+	 *   absolute pos
+	 * @param string $continue
+	 *   param for sql_ api
+	 * @return bool
+	 *   success or fail if not implemented
+	 */
 	public function seek($n=0, $continue=null) {
-		$this->rewind();
-		while($n-->0 AND $this->valid()) $this->next();
+		if ($this->pos>$n)
+			$this->rewind();
+		
+		while($this->pos<$n AND $this->valid())
+			$this->next();
 		return true;
 	}
+
+	/**
+	 * Renvoyer un tableau des donnees correspondantes
+	 * a la position courante de l'iterateur
+	 *
+	 * @return array|bool
+	 */
 	public function fetch() {
 		if ($this->valid()) {
 			$r = array('cle' => $this->key(), 'valeur' => $this->current());
@@ -44,21 +126,58 @@ class Iter implements Iterator {
 			$r = false;
 		return $r;
 	}
-	public function free() {} // liberer la ressource
-	public function total() {} // #TOTAL_BOUCLE
+
+	/**
+	 * liberer la ressource
+	 * @return bool
+	 */
+	public function free() {
+		$this->pos = $this->total = 0;
+	  return true;
+	}
+
+	/**
+	 * Compter le nombre total de resultats
+	 * pour #TOTAL_BOUCLE
+	 * @return int
+	 */
+	public function total() {
+		if (is_null($this->total))
+			$this->total = 0;
+		return $this->total;
+	}
 }
 
+/**
+ * Iterateur SQL
+ */
 class IterSQL extends Iter {
 
-	private $sqlresult = false; # ressource sql
-	private $row = null; # row sql courante
+	/**
+	 * ressource sql
+	 * @var resource|bool
+	 */
+	protected $sqlresult = false;
 
-	private function select() {
+	/**
+	 * row sql courante
+	 * @var array|null
+	 */
+	protected $row = null;
+
+	/**
+	 * selectionner les donnees, ie faire la requete SQL
+	 * @return void
+	 */
+	protected function select() {
+		$this->row = null;
 		$v = &$this->command;
 		$this->sqlresult = calculer_select($v['select'], $v['from'], $v['type'], $v['where'], $v['join'], $v['groupby'], $v['orderby'], $v['limit'], $v['having'], $v['table'], $v['id'], $v['connect'], $this->info);
-		$this->ok = !!$this->sqlresult;
-		if ($this->ok)
+		$ok = !!$this->sqlresult;
+		if ($ok)
 			$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
+	  $this->pos = 0;
+	  $this->total = $this->total();
 	}
 
 	/*
@@ -71,27 +190,65 @@ class IterSQL extends Iter {
 		$this->info = $info;
 		$this->select();
 	}
+
+	/**
+	 * Rembobiner
+	 * @return bool
+	 */
 	public function rewind() {
+		parent::rewind();
 		return $this->seek(0);
 	}
+
+	/**
+	 * Verifier l'etat de l'iterateur
+	 * @return bool
+	 */
 	public function valid() {
-		return is_array($this->row);
+		return $this->sqlresult AND is_array($this->row);
 	}
+
+	/**
+	 * Valeurs sur la position courante
+	 * @return array
+	 */
 	public function current() {
 		return $this->row;
 	}
+	
+	/**
+	 * Sauter a une position absolue
+	 * @param int $n
+	 * @param null|string $continue
+	 * @return bool
+	 */
 	public function seek($n=0, $continue=null) {
-		# SQLite ne sait pas seek(), il faut relancer la query
-		if (!$a = sql_seek($this->sqlresult, $this->command['connect'], $n, $continue)) {
+		if (!sql_seek($this->sqlresult, $n, $this->command['connect'], $continue)) {
+			// SQLite ne sait pas seek(), il faut relancer la query
 			$this->free();
 			$this->select();
+			// et utiliser la methode par defaut pour se deplacer au bon endroit
+			parent::seek($n);
 			return true;
 		}
-		return $a;
+		$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
+		$this->pos = min($n,$this->total());
+		return true;
 	}
+
+	/**
+	 * Avancer d'un cran
+	 * @return void
+	 */
 	public function next(){
 		$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
+		parent::next();
 	}
+
+	/**
+	 * Avancer et retourner les donnees pour le nouvel element
+	 * @return array|bool|null
+	 */
 	public function fetch(){
 		if ($this->valid()) {
 			$r = $this->current();
@@ -100,22 +257,38 @@ class IterSQL extends Iter {
 			$r = false;
 		return $r;
 	}
+
+	/**
+	 * liberer les ressources
+	 * @return bool
+	 */
 	public function free(){
+		parent::free();
 		return sql_free($this->sqlresult, $this->command['connect']);
 	}
+	
+	/**
+	 * Compter le nombre de resultats
+	 * @return int
+	 */
 	public function total() {
-		return sql_count($this->sqlresult, $this->command['connect']);
+		if (is_null($this->total))
+			if (!$this->sqlresult)
+				$this->total = 0;
+			else
+				$this->total = sql_count($this->sqlresult, $this->command['connect']);
+	  return $this->total;
 	}
 }
 
 class IterENUM extends Iter {
-	private $n = 0;
-	private $pos = 0;
-	private $start = 0;
-	private $offset = 0;
-	private $total = 1000000;
-	private $max = 1000000;
-	private $filtre = array();
+	protected $n = 0;
+	#protected $pos = 0;
+	protected $start = 0;
+	protected $offset = 0;
+	#protected $total = 1000000;
+	protected $max = 1000000;
+	protected $filtre = array();
 
 	public function __construct($command=array(), $info=array()) {
 		$this->type='ENUM';
@@ -202,10 +375,10 @@ class IterENUM extends Iter {
 
 
 class IterDATA extends Iter {
-	private $tableau = array();
-	private $filtre = array();
-	private $cle = null;
-	private $valeur = null;
+	protected $tableau = array();
+	protected $filtre = array();
+	protected $cle = null;
+	protected $valeur = null;
 
 	public function __construct($command, $info=array()) {
 		$this->type='DATA';
@@ -220,7 +393,7 @@ class IterDATA extends Iter {
 		list($this->cle, $this->valeur) = each($this->tableau);
 	}
 
-	private function select($command) {
+	protected function select($command) {
 		// les commandes connues pour l'iterateur POUR
 		// sont : tableau=#ARRAY ; cle=...; valeur=...
 		// source URL
