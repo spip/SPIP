@@ -281,14 +281,48 @@ class IterSQL extends Iter {
 	}
 }
 
+/**
+ * IterENUM pour iterer sur un intervalle de nombre
+ * repondant eventuellement a des conditions de filtrage
+ */
 class IterENUM extends Iter {
+
+	/**
+	 * Valeur entiere de l'iterateur, ce qui est renvoye
+	 * @var int
+	 */
 	protected $n = 0;
-	#protected $pos = 0;
+
+	/**
+	 * Valeur de depart de l'iteration, zero
+	 * @var int
+	 */
 	protected $start = 0;
-	protected $offset = 0;
-	#protected $total = 1000000;
+
+	/**
+	 * Maximum d'iteration, valeur de securite
+	 * @var int
+	 */
 	protected $max = 1000000;
+
+	/**
+	 * Offset dans les resultats
+	 * @var int
+	 */
+	protected $offset = 0;
+
+	/**
+	 * Conditions de filtrage
+	 * ie criteres de selection
+	 * @var array
+	 */
 	protected $filtre = array();
+
+	/**
+	 * Fonction de filtrage compilee a partir des criteres de filtre
+	 * @var string
+	 */
+	protected $func_filtre = null;
 
 	public function __construct($command=array(), $info=array()) {
 		$this->type='ENUM';
@@ -315,6 +349,9 @@ class IterENUM extends Iter {
 
 		}
 
+		$this->pos = 0;
+	  $this->total = $this->max;
+	  
 		// critere {2,7}
 		if ($this->command['limit']) {
 			$limit = explode(',',$this->command['limit']);
@@ -322,52 +359,79 @@ class IterENUM extends Iter {
 			$this->total = $limit[1];
 		}
 
-
 		// Appliquer les filtres sur (valeur)
 		if ($this->filtre) {
-			$this->filtre = create_function('$cle,$valeur', $b = 'return ('.join(') AND (', $this->filtre).');');
+			$this->func_filtre = create_function('$cle,$valeur', $b = 'return ('.join(') AND (', $this->filtre).');');
 		}
 
+	  $this->rewind();
 	}
+
+	/**
+	 * Rembobiner
+	 * On part de n=0 et on next() tant qu'on a pas satisfait les filtres,
+	 * en bloquant pos=0
+	 * @return void
+	 */
 	public function rewind() {
 		$this->n = $this->start-1;
-		$this->pos = -1;
 		for ($i=0; $i<=$this->offset; $i++) {
-			$this->next(); # pour filtre
-			$this->pos=0;
+			$this->pos = -1; # forcer la position courante
+			$this->next(); # pour filtrage par func_filtre
 		}
 	}
+
+	/**
+	 * L'iterateur est il encore en cours ?
+	 * @return bool
+	 */
 	public function valid(){
 		return
 			$this->n <= $this->max
 			AND $this->pos < $this->total;
 	}
+
+	/**
+	 * Valeur courante de la valeur
+	 * @return int
+	 */
 	public function current() {
 		return $this->n;
 	}
+
+	/**
+	 * Valeur courante du compteur
+	 * @return int
+	 */
 	public function key() {
 		return $this->pos;
 	}
+
+	/**
+	 * Avancer d'un pas
+	 * Ici c'est un peu tordu :
+	 * - on incremente pos d'une unite,
+	 * car c'est next(), donc on va juste a la position d'apres
+	 * - on incremente n jusqu'a ce que les conditions de filtrage
+	 * soient satisfaites pour trouver le "prochain" resultat
+	 * 
+	 * @return void
+	 */
 	public function next() {
 		$this->pos++;
 		$this->n++;
-		if ($f = $this->filtre) {
-			while (
-			$this->n <= $this->max
-			AND !$f($this->pos,$this->n)) {
+		if ($f = $this->func_filtre) {
+			while ($this->valid()
+			  AND !$f($this->pos,$this->n)) {
 				$this->n++;
 			}
 		}
 	}
 
-	public function seek($n=0, $continue=null) {
-		$this->n = $this->start-1;
-		$this->pos = -1;
-		for ($i=0; $i<=$n; $i++) {
-			$this->next(); # pour filtre
-		}
-		return true;
-	}
+	/**
+	 * Total
+	 * @return int
+	 */
 	public function total() {
 		return $this->total;
 	}
