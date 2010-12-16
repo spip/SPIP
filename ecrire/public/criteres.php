@@ -1385,10 +1385,10 @@ function calculer_param_date($date_compare, $date_orig) {
 function critere_datasource($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '
-	$source = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';
-	$sourcemode = '.calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent).';';
-	$boucle->where['sourcemode'] = '$sourcemode';
-	$boucle->where['source'] = '$source';
+	$command[\'source\'] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';
+	$command[\'sourcemode\'] = '.calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent).';';
+	$boucle->where['sourcemode'] = '$command[\'sourcemode\']';
+	$boucle->where['source'] = '$command[\'source\']';
 }
 
 ?>

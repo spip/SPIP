@@ -359,7 +359,7 @@ define('CODE_CORPS_BOUCLE', '%s
 	$t0 = "";
 	// REQUETE
 	$iter = IterFactory::create(
-	  %s,
+		"%s",
 		%s,
 		array(%s)
 	);
@@ -506,38 +506,10 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	$contexte = memoriser_contexte_compil($boucle);
 
-	switch ($boucle->iterateur) {
-		case 'SQL':
-			$command = 'array(
-		"select"=>$select,
-		"from"=>$from,
-		"type"=>$type,
-		"where"=>$where,
-		"join"=>$join,
-		"groupby"=>$groupby,
-		"orderby"=>$orderby,
-		"limit"=>$limit,
-		"having"=>$having,
-		"table"=>$table,
-		"id"=>$id,
-		"connect"=>$connect
-		)';
-			break;
-
-		case 'DATA':
-		case 'ENUM':
-			$command = 'array("where" => $where, "source"=>$source, "sourcemode"=>$sourcemode, "limit" => $limit)';
-			break;
-
-		default:
-			$command = 'array()';
-			break;
-	}
-
 	$a = sprintf(CODE_CORPS_BOUCLE,
 		$init,
 		$boucle->iterateur,
-		$command,
+		"\$command",
 		$contexte,
 		$nums,
 		$init_lang,
@@ -557,20 +529,20 @@ function calculer_requete_sql($boucle)
 	return ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
 	  . $boucle->in 
 	  . $boucle->hash 
-	  . calculer_dec('$table',  "'" . $boucle->id_table ."'")
-	  . calculer_dec('$id', "'" . $boucle->id_boucle ."'")
+	  . calculer_dec('table',  "'" . $boucle->id_table ."'")
+	  . calculer_dec('id', "'" . $boucle->id_boucle ."'")
 		# En absence de champ c'est un decompte : 
-	  . calculer_dec('$from',  calculer_from($boucle))
-	  . calculer_dec('$type', calculer_from_type($boucle))
-	  . calculer_dec('$groupby', 'array(' . (($g=join("\",\n\t\t\"",$boucle->group))?'"'.$g.'"':'') . ")")
-	  . calculer_dec('$select', 'array("' . join("\",\n\t\t\"", $boucle->select).  "\")")
-	  . calculer_dec('$orderby', 'array(' . calculer_order($boucle) .	")")
-	  . calculer_dec('$where', calculer_dump_array($boucle->where))
-	  . calculer_dec('$join', calculer_dump_join($boucle->join))
-	  . calculer_dec('$limit', (strpos($boucle->limit, 'intval') === false ?
+	  . calculer_dec('from',  calculer_from($boucle))
+	  . calculer_dec('type', calculer_from_type($boucle))
+	  . calculer_dec('groupby', 'array(' . (($g=join("\",\n\t\t\"",$boucle->group))?'"'.$g.'"':'') . ")")
+	  . calculer_dec('select', 'array("' . join("\",\n\t\t\"", $boucle->select).  "\")")
+	  . calculer_dec('orderby', 'array(' . calculer_order($boucle) .	")")
+	  . calculer_dec('where', calculer_dump_array($boucle->where))
+	  . calculer_dec('join', calculer_dump_join($boucle->join))
+	  . calculer_dec('limit', (strpos($boucle->limit, 'intval') === false ?
 				    "'".$boucle->limit."'" :
 				    $boucle->limit))
-	  . calculer_dec('$having', calculer_dump_array($boucle->having));
+	  . calculer_dec('having', calculer_dump_array($boucle->having));
 }
 
 function memoriser_contexte_compil($p) {
@@ -598,7 +570,7 @@ function reconstruire_contexte_compil($context_compil)
 // http://doc.spip.org/@calculer_dec
 function calculer_dec($nom, $val)
 {
-	$static = "static ";
+	$static = "if (!isset(\$command['$nom'])) ";
   if (
     strpos($val, '$') !== false 
     OR strpos($val, 'sql_') !== false
@@ -611,7 +583,7 @@ function calculer_dec($nom, $val)
     ){
     $static = "";
   }
-  return "\n\t" . $static . $nom . ' = ' . $val . ';';
+  return "\n\t" . $static . "\$command['$nom']" . ' = ' . $val . ';';
 }
 
 // http://doc.spip.org/@calculer_dump_array
@@ -1133,7 +1105,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			// laquelle a une definition par defaut
 			if (!function_exists($f)) $f = 'boucle_DEFAUT';
 			if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
-			$req = "\n\n\tstatic \$connect = " .
+			$req = "\n\n\tstatic \$command = array();\n\t\$command['connect'] = " .
 				_q($boucle->sql_serveur) .
 				";" .
 				$f($id, $boucles);
