@@ -358,7 +358,8 @@ function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
 define('CODE_CORPS_BOUCLE', '%s
 	$t0 = "";
 	// REQUETE
-	$iter = new %s(
+	$iter = IterFactory::create(
+	  %s,
 		%s,
 		array(%s)
 	);
@@ -506,7 +507,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	$contexte = memoriser_contexte_compil($boucle);
 
 	switch ($boucle->iterateur) {
-		case 'IterSQL':
+		case 'SQL':
 			$command = 'array(
 		"select"=>$select,
 		"from"=>$from,
@@ -523,8 +524,8 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		)';
 			break;
 
-		case 'IterDATA':
-		case 'IterENUM':
+		case 'DATA':
+		case 'ENUM':
 			$command = 'array("where" => $where, "source"=>$source, "sourcemode"=>$sourcemode, "limit" => $limit)';
 			break;
 
@@ -1037,7 +1038,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 				$boucles[$id]->primary = $show['key']["PRIMARY KEY"];
 				$boucles[$id]->id_table = $x = $show['id_table'];
 				$boucles[$id]->from[$x] = $nom_table = $show['table'];
-				$boucles[$id]->iterateur = 'IterSQL';
+				$boucles[$id]->iterateur = 'SQL';
 
 				$boucles[$id]->descr = &$descr;
 				if ((!$boucles[$id]->jointures)
