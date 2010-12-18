@@ -3,14 +3,14 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 define('URLS_ARBO_EXEMPLE', '/article/titre');
 
@@ -147,8 +147,8 @@ function urls_arbo_creer_chaine_url($x) {
 	$url_old = $x['data'];
 	$objet = $x['objet'];
 	include_spip('inc/filtres');
-	if (!defined("_URLS_ARBO_MAX")) define('_URLS_ARBO_MAX', 35);
-	if (!defined("_URLS_ARBO_MIN")) define('_URLS_ARBO_MIN', 3);
+	if (!defined('_URLS_ARBO_MAX')) define('_URLS_ARBO_MAX', 35);
+	if (!defined('_URLS_ARBO_MIN')) define('_URLS_ARBO_MIN', 3);
 
 	include_spip('action/editer_url');
 	if (!$url = url_nettoyer($objet['titre'],_URLS_ARBO_MAX,_URLS_ARBO_MIN,'-',_url_arbo_minuscules?'strtolower':''))

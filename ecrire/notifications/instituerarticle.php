@@ -6,6 +6,7 @@
  *
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Fonction appelee par divers pipelines
 // http://doc.spip.org/@notifications_instituerarticle_dist

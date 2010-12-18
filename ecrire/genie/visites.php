@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -11,8 +11,8 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-if (!defined("_CRON_LOT_FICHIERS_VISITE")) define('_CRON_LOT_FICHIERS_VISITE', 100);
+if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_CRON_LOT_FICHIERS_VISITE')) define('_CRON_LOT_FICHIERS_VISITE', 100);
 
 ### Pour se debarrasser du md5, comment faire ? Un index sur 'referer' ?
 ### ou alors la meme notion, mais sans passer par des fonctions HEX ?

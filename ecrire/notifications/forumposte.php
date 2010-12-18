@@ -6,6 +6,7 @@
  *
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * cette notification s'execute quand un message est poste,

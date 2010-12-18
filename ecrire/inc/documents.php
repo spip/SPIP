@@ -3,14 +3,14 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions'); // *action_auteur et determine_upload
 include_spip('inc/date');
@@ -46,7 +46,7 @@ function get_spip_doc($fichier) {
 
 // Constante indiquant le charset probable des documents non utf-8 joints
 
-if (!defined("CHARSET_JOINT")) define('CHARSET_JOINT', 'iso-8859-1');
+if (!defined('CHARSET_JOINT')) define('CHARSET_JOINT', 'iso-8859-1');
 
 // Filtre pour #FICHIER permettant d'incruster le contenu d'un document
 // Si 2e arg fourni, conversion dans le charset du site si possible
