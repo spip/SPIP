@@ -229,6 +229,11 @@ ecrire/install/etape_ldap5.php -text
 ecrire/install/etape_sup1.php -text
 ecrire/install/etape_sup2.php -text
 ecrire/install/index.php -text
+ecrire/iterateur/data.php -text
+ecrire/iterateur/enum.php -text
+ecrire/iterateur/iterateur.php -text
+ecrire/iterateur/pour.php -text
+ecrire/iterateur/sql.php -text
 ecrire/iterateurs/data.php -text
 ecrire/iterateurs/enum.php -text
 ecrire/iterateurs/iterateur.php -text
