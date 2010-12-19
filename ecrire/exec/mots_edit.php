@@ -3,14 +3,14 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2010                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('base/abstract_sql');
@@ -61,16 +61,17 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		$ok = true;
 	}
 	else {
-		if (!$new OR !autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))) {
+		$row = sql_countsel('spip_groupes_mots', 
+			($table ? "tables_liees REGEXP '(^|,)$table($|,)'" : '')
+			//($table ? "$table='oui'" : '')
+				    );
+
+		if (!$new OR !autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe)) OR (!$row AND $table)) {
 			include_spip('inc/minipres');
 			echo minipres(_T('info_mot_sans_groupe'));
 		} else {
 			$id_mot = 0;
 			$descriptif = $texte = '';
-			$row = sql_countsel('spip_groupes_mots', 
-			($table ? "tables_liees REGEXP '(^|,)$table($|,)'" : '')
-			//($table ? "$table='oui'" : '')
-			);
 			if (!$row) {
 		  // cas pathologique: 
 		  // creation d'un mot sans groupe de mots cree auparavant
