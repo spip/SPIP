@@ -61,13 +61,13 @@ define('_DIR_JAVASCRIPT', (_DIR_RACINE . 'prive/' . _JAVASCRIPT));
 # mais on peut les mettre ailleurs et changer completement les noms
 
 # le nom du repertoire des fichiers Temporaires Inaccessibles par http://
-if (!defined('_NOM_TEMPORAIRES_INACCSSIBLES')) define('_NOM_TEMPORAIRES_INACCESSIBLES', "tmp/");
+if (!defined('_NOM_TEMPORAIRES_INACCESSIBLES')) define('_NOM_TEMPORAIRES_INACCESSIBLES', "tmp/");
 # le nom du repertoire des fichiers Temporaires Accessibles par http://
-if (!defined('_NOM_TEMPORAIRES_ACCSSIBLES')) define('_NOM_TEMPORAIRES_ACCESSIBLES', "local/");
+if (!defined('_NOM_TEMPORAIRES_ACCESSIBLES')) define('_NOM_TEMPORAIRES_ACCESSIBLES', "local/");
 # le nom du repertoire des fichiers Permanents Inaccessibles par http://
-if (!defined('_NOM_PERMANENTS_INACCSSIBLES')) define('_NOM_PERMANENTS_INACCESSIBLES', "config/");
+if (!defined('_NOM_PERMANENTS_INACCESSIBLES')) define('_NOM_PERMANENTS_INACCESSIBLES', "config/");
 # le nom du repertoire des fichiers Permanents Accessibles par http://
-if (!defined('_NOM_PERMANENTS_ACCSSIBLES')) define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
+if (!defined('_NOM_PERMANENTS_ACCESSIBLES')) define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
 
 /*
  * detecteur de robot d'indexation
