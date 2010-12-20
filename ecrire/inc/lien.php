@@ -32,7 +32,7 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 		@list($type,,$id,,$args,,$ancre) = $match; 
 		if ($id_trad = sql_getfetsel('id_trad', 'spip_articles', "id_article=$id")
 		AND $id_dest = sql_getfetsel('id_article', 'spip_articles',
-			"id_trad=$id_trad AND lang=" . sql_quote($hlang))
+			"id_trad=$id_trad  AND statut<>'refuse' AND lang=" . sql_quote($hlang))
 		)
 			$lien = "$type$id_dest";
 		else
