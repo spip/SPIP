@@ -26,8 +26,8 @@ function configuration_mots_dist(){
 	$config_precise_groupes = $GLOBALS['meta']["config_precise_groupes"];
 	$mots_cles_forums = $GLOBALS['meta']["mots_cles_forums"];
 	$forums_publics = $GLOBALS['meta']["forums_publics"]!='non';
-	if (!$forums_public){
-		$forums_public = sql_countsel('spip_forums', "statut='publie'");
+	if (!$forums_publics){
+		$forums_publics = sql_countsel('spip_forum', "statut='publie'");
 	}
 
 	$res .= "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
@@ -64,7 +64,7 @@ function configuration_mots_dist(){
 	. "</td></tr></table>"
 	. fin_cadre_relief(true);
 
-	if ($forums_publics != "non"){
+	if ($forums_publics){
 		$res .= "<br />\n"
 		. debut_cadre_relief("", true, "", _T('titre_mots_cles_dans_forum'))
 		. "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
