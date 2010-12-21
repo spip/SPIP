@@ -270,12 +270,20 @@ class IterDecorator implements Iterator {
 				return false;
 			}
 			
+			# attention PHP est mechant avec les objets, parfois il ne les
+			# clone pas proprement (directoryiterator sous php 5.2.2)
+			# on se rabat sur la version __toString()
+			if (is_object($v = $this->current())) {
+				if (method_exists($v, '__toString'))
+					$v = $v->__toString();
+				else
+					$v = (array) $v;
+			}
 			$r = array(
 				'cle' => $this->key(),
-				'valeur' => is_object($this->current()) ?
-					clone $this->current() :
-					$this->current()
+				'valeur' => $v
 			);
+
 			$this->next(); // $r['valeur'] avance aussi d'un cran avec DirectoryIterator ! fichtre !
 			return $r;
 		}
