@@ -1,3 +1,6 @@
+Core 2.1.4 -> 2.1.5 ( 21/12/2010) 
+r16784 | esj       | report de r16783. Triple bug en r15088 : la table SQL 'forums' n'existe pas, le nom de la variable n'était pas le même que dans son utilisation plus loin, et son sens n'était plus le même.
+
 Core 2.1.3 -> 2.1.4 ( 21/12/2010) 
 r16745 | cedric    | Quand un article est une redirection reposant sur un raccourci de SPIPil faut generer une url absolue car celle-ci peut etre utilisee depuis une pageavec une profondeur >1 en cas d'url arborescentes.+ la fonction chapo_redirige a manifestement change de signature depuis longtemps et ne renvoie plus qu'une chaine, mais sa documentation aussi bien que la fonction tester_redirection ne le savaient pas : mise a jour de la doc et correction de la fonction de redirection pour renvoyer l'url complete dans le corps du 302 au lieu du premier caractere...
 r16762 | cedric    | La verification de conformite du champ en base par rapport a ce qui a ete envoyee echouait aussi si on envoit une valeur vide sur un champ date, car SQL le cast en '0000-00-00'.Plus generalement, cette verification risque d'echouer sur tout type de champ caste (int, double, float, date, time, year, enum...) et on l'ignore dans ce cas
