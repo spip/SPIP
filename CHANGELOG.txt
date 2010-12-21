@@ -1,4 +1,15 @@
-Core 2.1.2 -> 2.1.3 ( mi dec 2010 ) 
+Core 2.1.3 -> 2.1.4 ( 21/12/2010) 
+r16745 | cedric    | Quand un article est une redirection reposant sur un raccourci de SPIPil faut generer une url absolue car celle-ci peut etre utilisee depuis une pageavec une profondeur >1 en cas d'url arborescentes.+ la fonction chapo_redirige a manifestement change de signature depuis longtemps et ne renvoie plus qu'une chaine, mais sa documentation aussi bien que la fonction tester_redirection ne le savaient pas : mise a jour de la doc et correction de la fonction de redirection pour renvoyer l'url complete dans le corps du 302 au lieu du premier caractere...
+r16762 | cedric    | La verification de conformite du champ en base par rapport a ce qui a ete envoyee echouait aussi si on envoit une valeur vide sur un champ date, car SQL le cast en '0000-00-00'.Plus generalement, cette verification risque d'echouer sur tout type de champ caste (int, double, float, date, time, year, enum...) et on l'ignore dans ce cas
+r16763 | cedric    | $limit indefinie et liberer la resource dans spip_sqlite_count
+r16764 | esj       | modification du copyright.Je profite de cette écriture massive pour normaliser quelque chose de trompeur lorsqu'on compare deux versions, savoir l'usage de " ou ' dans le premier argument de define et defined. Comme les chaînes entre apostrophes sont plus rapidement analysées que celles entre guillemets, je choisis l'apostrophe
+r16768 | esj       | Depuis r11919 (généricité des tables de mots associés), le cas pathologique de la création d'un mot sans qu'aucun groupe de mot ne soit créé au préalable n'était pas blindé contre un nom de table vide: ça bouclait.
+r16775 | esj       | r16768 s'est pris les pieds dans tapis avec le copyright.
+r16776 | esj       | r16373 a eu raison de réparer le bug de conception dans generer_url_public dans le cas relatif depuis l'espace, mais du coup le lien dans le contrôle des forums qui contournait ça ne marchait plus.
+r16778 | esj       | Liens de traduction sous la forme [{en}->art2] ou [{}->art2]: ignorer les articles refusés (Paolo).
+
+
+Core 2.1.2 -> 2.1.3 ( 14/12/2010 ) 
 r16030 | fil       | une date fixe dans le futur pour beneficier du query cache sql + commentaire
 r16032 | cedric    | Le refactoring de [15970] avait rendu impossible le telechargement de lib qui etaient confondues avec des plugins...En effet plugins_get_infos() renvoyait toujours un tableau, meme si le fichier plugin.xml n'existe pas.Du coup on modifie ce cas qui n'est pas utilise autre part en renvoyant false.
 r16035 | fil       | rtrim() pour faire le job
