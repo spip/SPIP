@@ -183,7 +183,7 @@ class IterateurENUM extends IterateurSPIP {
 	 * Total
 	 * @return int
 	 */
-	public function total() {
+	public function count() {
 		return $this->total;
 	}
 }

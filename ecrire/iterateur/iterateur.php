@@ -41,7 +41,7 @@ class IterateurSPIP implements Iterator {
 	 * @return void
 	 */
 	public function valid() {
-		return $this->pos<$this->total;
+		return $this->pos < $this->total;
 	}
 
 	/**
@@ -106,39 +106,7 @@ class IterateurSPIP implements Iterator {
 	 * @return bool
 	 *   success or fail if not implemented
 	 */
-	public function seek($n=0, $continue=null) {
-		if ($this->pos>$n)
-			$this->rewind();
-		
-		while($this->pos<$n AND $this->valid())
-			$this->next();
-		return true;
-	}
-
-	/**
-	 * Avancer de $saut pas
-	 * @param  $saut
-	 * @param  $max
-	 * @return int
-	 */
-	public function skip($saut, $max=null){
-		// pas de saut en arriere autorise pour cette fonction
-		if (($saut=intval($saut))<=0) return $this->pos;
-		$seek = $this->pos + $saut;
-		// si le saut fait depasser le maxi, on libere la resource
-		// et on sort
-		if (is_null($max))
-			$max = $this->total();
-
-		if ($seek>=$max OR $seek>=$this->total()) {
-			// sortie plus rapide que de faire next() jusqu'a la fin !
-			$this->free();
-		  return $max;
-		}
-
-	  $this->seek($seek);
-	  return $this->pos;
-	}
+	#public function seek($n=0, $continue=null) {}
 
 	/**
 	 * Renvoyer un tableau des donnees correspondantes
@@ -146,14 +114,7 @@ class IterateurSPIP implements Iterator {
 	 *
 	 * @return array|bool
 	 */
-	public function fetch() {
-		if ($this->valid()) {
-			$r = array('cle' => $this->key(), 'valeur' => $this->current());
-			$this->next();
-		} else
-			$r = false;
-		return $r;
-	}
+	#public function fetch() {}
 
 	/**
 	 * liberer la ressource
@@ -161,7 +122,7 @@ class IterateurSPIP implements Iterator {
 	 */
 	public function free() {
 		$this->pos = $this->total = 0;
-	  return true;
+		return true;
 	}
 
 	/**
@@ -169,11 +130,7 @@ class IterateurSPIP implements Iterator {
 	 * pour #TOTAL_BOUCLE
 	 * @return int
 	 */
-	public function total() {
-		if (is_null($this->total))
-			$this->total = 0;
-		return $this->total;
-	}
+	#public function count() {}
 }
 
 ?>

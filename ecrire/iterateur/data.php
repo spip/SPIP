@@ -34,7 +34,7 @@ function iterateur_DATA_dist($b) {
 /**
  * IterateurDATA pour iterer sur des donnees
  */
-class IterateurDATA extends IterateurSPIP {
+class IterateurDATA implements Iterator {
 	/**
 	 * tableau de donnees
 	 * @var array
@@ -80,7 +80,6 @@ class IterateurDATA extends IterateurSPIP {
 	 * @return void
 	 */
 	public function rewind() {
-		parent::rewind();
 		reset($this->tableau);
 		list($this->cle, $this->valeur) = each($this->tableau);
 	}
@@ -246,7 +245,6 @@ class IterateurDATA extends IterateurSPIP {
 	 * @return void
 	 */
 	public function next(){
-		parent::next();
 		if ($this->valid())
 			list($this->cle, $this->valeur) = each($this->tableau);
 	}
@@ -255,7 +253,7 @@ class IterateurDATA extends IterateurSPIP {
 	 * Compter le nombre total de resultats
 	 * @return int
 	 */
-	public function total() {
+	public function count() {
 		if (is_null($this->total))
 			$this->total = count($this->tableau);
 	  return $this->total;

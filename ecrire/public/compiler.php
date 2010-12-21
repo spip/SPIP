@@ -491,7 +491,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	if ($boucle->numrows OR $boucle->mode_partie) {
 		if ($count == 'count(*)')
 			$count = "array_shift(\$iter->next())";
-		else $count = "\$iter->total()";
+		else $count = "\$iter->count()";
 		$nums .= "\$Numrows['$id_boucle']['total'] = @intval($count);"
 		. $boucle->mode_partie
 		. "\n\t";
@@ -1000,10 +1000,24 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 				$boucles[$id]->sql_serveur = strtolower($type);
 			}
 
+			// chercher dans les iterateurs du repertoire iterateur/
 			if ($g = charger_fonction(
 			preg_replace('/\W/', '_', $boucle->type_requete), 'iterateur', true)) {
 				$boucles[$id] = $g($boucle);
 
+			// sinon, en cas de requeteur "iter" existe-t-il un iterateur PHP 
+			} else if ($boucle->sql_serveur == 'iter') {
+				if (class_exists($boucle->type_requete)) {
+					$g = charger_fonction('iter', 'iterateur');
+					$boucles[$id] = $g($boucle, $boucle->type_requete);
+				} else {
+					$x = $boucle->type_requete;
+					$boucle->type_requete = false;
+					$msg = array('zbug_iterateur_inconnu',
+							array('iterateur' => $x));
+					erreur_squelette($msg, $boucle);
+				}
+			// utiliser la description des champs transmis
 			} else if ($show) {
 				$boucles[$id]->show = $show;
 				// recopie les infos les plus importantes

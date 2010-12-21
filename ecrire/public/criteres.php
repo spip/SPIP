@@ -1391,4 +1391,17 @@ function critere_datasource($idb, &$boucles, $crit) {
 	$boucle->where['source'] = '$command[\'source\']';
 }
 
+
+/*
+ * Pour passer des arguments a un iterateur non-spip
+ * (iter:xxxIterator){args argument1, argument2, argument3}
+ */
+function critere_args_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	foreach($crit->param as $param) {
+		$boucle->hash .= '
+			$command[\'args\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
+	}
+	$boucle->where['args'] = '$command[\'args\']';
+}
 ?>
