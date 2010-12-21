@@ -270,9 +270,13 @@ class IterDecorator implements Iterator {
 				return false;
 			}
 			
-			$r = array('cle' => $this->key(), 'valeur' => $this->current());
+			$r = array(
+				'cle' => $this->key(),
+				'valeur' => is_object($this->current()) ?
+					clone $this->current() :
+					$this->current()
+			);
 			$this->next(); // $r['valeur'] avance aussi d'un cran avec DirectoryIterator ! fichtre !
-
 			return $r;
 		}
 	}
