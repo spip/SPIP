@@ -1005,7 +1005,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			preg_replace('/\W/', '_', $boucle->type_requete), 'iterateur', true)) {
 				$boucles[$id] = $g($boucle);
 
-			// sinon, en cas de requeteur "iter" existe-t-il un iterateur PHP 
+			// sinon, en cas de requeteur "iter" existe-t-il un iterateur PHP
 			} else if ($boucle->sql_serveur == 'iter') {
 				if (class_exists($boucle->type_requete)) {
 					$g = charger_fonction('iter', 'iterateur');

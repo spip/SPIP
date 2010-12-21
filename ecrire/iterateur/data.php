@@ -268,5 +268,28 @@ function inc_plugins_to_array_dist($u) {
 	include_spip('inc/plugin');
 	return liste_chemin_plugin_actifs();
 }
+function inc_xml_to_array_dist($u) {
+	return ObjectToArray(new SimpleXmlIterator($u));
+}
 
+function XmlToArray($xml_file){
+  $object = new SimpleXmlIterator($xml_file, null, true);
+  return ObjectToArray($object);
+}
+function ObjectToArray($object){
+  $xml_array = array();
+  for( $object->rewind(); $object->valid(); $object->next() ) {
+    if(!array_key_exists($object->key(), $xml_array)){
+      $xml_array[$object->key()] = array();
+    }
+    if($object->hasChildren()){
+      $xml_array[$object->key()][] = ObjectToArray(
+         $object->current());
+    }
+    else{
+      $xml_array[$object->key()][] = strval($object->current());
+    }
+  }
+  return $xml_array;
+}
 ?>
