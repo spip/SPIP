@@ -75,7 +75,6 @@ class IterDecorator implements Iterator {
 		$this->command = $command;
 		$this->info = $info;
 		$this->pos = 0;
-		$this->total = $this->count();
 
 
 		$op = '';
@@ -104,9 +103,9 @@ class IterDecorator implements Iterator {
 		// Appliquer les filtres sur (valeur)
 		if ($this->filtre) {
 			$this->func_filtre = create_function('$cle,$valeur', $b = 'return ('.join(') AND (', $this->filtre).');');
-			$this->total = null; # il faudra tout parcourir pour compter
 		}
 
+		$this->total = $this->count();
 	}
  
 	public function next(){
@@ -259,16 +258,15 @@ class IterDecorator implements Iterator {
 			if ($this->valid()) {
 				$r = array('cle' => $this->key(), 'valeur' => $this->current());
 				if ($f = $this->func_filtre) {
-					do {
+					while ($this->valid()
+					AND !$f($r['cle'], $r['valeur'])) {
 						$this->next();
 						$r = $this->valid()
 							? array('cle' => $this->key(), 'valeur' => $this->current())
 							: false;
 					}
-					while ($r AND !$f($r['cle'], $r['valeur']));
 				}
-				else
-					$this->next();
+				$this->next();
 			} else
 				$r = false;
 			return $r;
@@ -294,7 +292,8 @@ class IterDecorator implements Iterator {
 	 */
 	public function count() {
 		if (is_null($this->total)) {
-			if (method_exists($this->iter, 'count')) {
+			if (method_exists($this->iter, 'count')
+			AND !$this->func_filtre) {
 				return $this->total = $this->iter->count();
 			} else {
 				// compter les lignes et rembobiner
