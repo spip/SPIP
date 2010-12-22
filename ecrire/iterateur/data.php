@@ -153,46 +153,45 @@ class IterateurDATA implements Iterator {
 			}
 		}
 
+		// recuperer le critere {tableau=xxx} pour compat ascendante
+		// boucle POUR ; methode pas tres propre, depreciee par {table XX}
 		if (is_array($this->command['where'])) {
-			$op = '';
 			foreach ($this->command['where'] as $k => $com) {
-				switch($com[1]) {
-					case 'tableau':
-						if ($com[0] !== '=') {
-							// erreur
-						}
-						# sql_quote a l'envers : pas propre...
-						# c'est pour la compat ascendante avec le critere
-						# {tableau=#ENV...} de la boucle POUR de SPIP-Bonux-2
-						$x = null;
-						eval ('$x = '.str_replace('\"', '"', $com[2]).';');
-						if (is_array($x) OR is_array($x = @unserialize($x))) {
-							$this->tableau = $x;
-							$this->ok = true;
-						}
-						else
-							{
-								// erreur
-							}
-						break;
-					case 'clex':
-					case 'valeurx':
-						unset($op);
-						if ($com[0] == 'REGEXP')
-							$this->filtre[] = 'preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
-						else if ($com[0] == '=')
-							$op = '==';
-						else if (in_array($com[0], array('<','<=', '>', '>=')))
-							$op = $com[0];
-
-						if ($op)
-							$this->filtre[] = '$'.$com[1].$op.str_replace('\"', '"', $com[2]);
-
-						break;
+				if ($com[1] === 'tableau') {
+					if ($com[0] !== '=') {
+						// erreur
+					}
+					# sql_quote a l'envers : pas propre...
+					eval ('$x = '.str_replace('\"', '"', $com[2]).';');
+					if (is_array($x) OR is_array($x = @unserialize($x))) {
+						$this->tableau = $x;
+						$this->ok = true;
+					}
 				}
-
 			}
 		}
+
+		// Critere {liste X1, X2, X3}
+		if (isset($this->command['liste'])) {
+			$this->tableau = $this->command['liste'];
+		}
+
+
+		// {datapath query.results}
+		// extraire le chemin "query.results" du tableau de donnees
+		if (is_array($this->command['datapath'])) {
+			list(,$base) = each($this->command['datapath']);
+			foreach(explode('.', $base) as $k) {
+				$t = (array) $this->tableau;
+				if (isset($t[$k]))
+					$this->tableau = $t[$k];
+				else {
+					$this->tableau = null;
+					#$this->fail = true;
+				}
+			}
+		}
+
 
 		// Appliquer les filtres sur (cle,valeur)
 		if ($this->filtre) {
