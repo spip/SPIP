@@ -89,6 +89,7 @@ class IterateurDATA implements Iterator {
 		// sont : tableau=#ARRAY ; cle=...; valeur=...
 		// source URL
 		if (isset($this->command['source'])) {
+var_dump($this->command['source']);
 			if (isset($this->command['sourcemode'])
 			AND in_array($this->command['sourcemode'],
 				array('table', 'array', 'tableau'))
@@ -269,6 +270,11 @@ function inc_plugins_to_array_dist($u) {
 }
 function inc_xml_to_array_dist($u) {
 	return ObjectToArray(new SimpleXmlIterator($u));
+}
+function inc_yql_to_array_dist($u) {
+	define('_YQL_ENDPOINT', 'http://query.yahooapis.com/v1/public/yql?&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&q=');
+	$v = recuperer_page($url = _YQL_ENDPOINT.urlencode($u).'&format=json');
+	return (array) json_decode($v);
 }
 
 function XmlToArray($xml_file){
