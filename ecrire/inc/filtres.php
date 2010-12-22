@@ -1976,8 +1976,8 @@ function url_absolue_css ($css) {
 // Si la cle est de la forme a.b, on renvoie $table[a][b]
 // http://doc.spip.org/@table_valeur
 function table_valeur($table,$cle,$defaut=''){
-	foreach (explode('.', $cle) as $k) {
-		$table= is_string($table)?unserialize($table):$table;
+	foreach (explode('/', $cle) as $k) if ($k !== "") {
+		$table= is_string($table) ? unserialize($table) : $table;
 
 		if (is_object($table))
 			$table = isset($table->$k) ? $table->$k : $default;

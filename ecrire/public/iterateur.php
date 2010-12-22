@@ -113,7 +113,8 @@ class IterDecorator extends FilterIterator {
 	// en fonction des methodes 
 	// et proprietes disponibles
 	public function get_select($nom) {
-		if (method_exists($this->iter, $nom)) {
+		if (is_object($this->iter)
+		AND method_exists($this->iter, $nom)) {
 			return $this->iter->$nom();
 		}
 		/*
@@ -121,11 +122,14 @@ class IterDecorator extends FilterIterator {
 			return $this->iter->$nom;
 		}*/
 		// cle et valeur par defaut
-		if (method_exists($this, $nom)) {
+		// ICI PLANTAGE SI ON NE CONTROLE PAS $nom
+		if (in_array($nom, array('cle', 'valeur'))
+		AND method_exists($this, $nom)) {
 			return $this->$nom();
 		}
-		// big erreur ...
-		return '';
+
+		// Par defaut chercher en xpath dans la valeur()
+		return table_valeur($this->valeur(), $nom);
 	}
 
 	
@@ -191,12 +195,15 @@ class IterDecorator extends FilterIterator {
 		
 		# if (!in_array($cle, array('cle', 'valeur')))
 		#	return;
-		
+
+		$a = '$me->get_select(\''.$cle.'\')';
+
 		$filtre = '';
 		
-		if ($op == 'REGEXP')
-			$filtre = '@preg_match("/". '.str_replace('\"', '"', $valeur).'."/", $'.$cle.')';
-		else if ($op == '=')
+		if ($op == 'REGEXP') {
+			$filtre = '@preg_match("/". '.str_replace('\"', '"', $valeur).'."/", '.$a.')';
+			$op = '';
+		} else if ($op == '=')
 			$op = '==';
 		else if (!in_array($op, array('<','<=', '>', '>='))) {
 			spip_log('operateur non reconnu ' . $op); // [todo] mettre une erreur de squelette
@@ -204,7 +211,7 @@ class IterDecorator extends FilterIterator {
 		}
 	
 		if ($op)
-			$filtre = '$me->get_select(\''.$cle.'\')'.$op.str_replace('\"', '"', $valeur);
+			$filtre = $a.$op.str_replace('\"', '"', $valeur);
 
 		if ($not)
 			$filtre = "!($filtre)";
