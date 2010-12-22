@@ -76,7 +76,7 @@ class IterDecorator implements Iterator {
 
 		$op = '';
 		if ($com[0] == 'REGEXP')
-			$filtre = 'preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
+			$filtre = '@preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
 		else if ($com[0] == '=')
 			$op = '==';
 		else if (in_array($com[0], array('<','<=', '>', '>=')))
