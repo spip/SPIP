@@ -494,7 +494,7 @@ function spip_mysql_fetch($r, $t='', $serveur='',$requeter=true) {
 }
 
 function spip_mysql_seek($r, $row_number, $serveur='',$requeter=true) {
-	if ($r) return mysql_data_seek($r,$row_number);
+	if ($r and mysql_num_rows($r)) return mysql_data_seek($r,$row_number);
 }
 
 
