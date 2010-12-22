@@ -103,13 +103,13 @@ function urls_propres_creer_chaine_url($x) {
 function declarer_url_propre($type, $id_objet) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
-	$table = $desc['table'];
 	$champ_titre = $desc['titre'];
 	$col_id =  @$desc['key']["PRIMARY KEY"];
-	if (!$col_id) return false; // Quand $type ne reference pas une table
+	//  $type doit designer une table, avec champ indiquant un titre
+	if (!$col_id OR !$champ_titre) return false; 
 
+	$table = $desc['table'];
 	$id_objet = intval($id_objet);
-
 
 	//  Recuperer une URL propre correspondant a l'objet.
 	$row = sql_fetsel("U.url, U.date, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.date DESC', 1);
