@@ -133,10 +133,11 @@ function base_trouver_table_dist($nom, $serveur=''){
 		$connexion['tables'][$nom] = $desc;
 
 		$table = table_objet(objet_type($nom));
-		$desc['titre'] =
-		  isset($GLOBALS['table_titre'][$table]) ? $GLOBALS['table_titre'][$table] : '';
+		$desc['titre'] = isset($GLOBALS['table_titre'][$table])
+		? $GLOBALS['table_titre'][$table]
+		: (isset($desc['field']['titre']) ? 'titre' : '');
 		$connexion['tables'][$nom] = $desc;
-		// une nouvelle table a ete descrite
+		// une nouvelle table a ete decrite
 		// mettons donc a jour le cache des descriptions de ce serveur
 		if (is_writeable(_DIR_CACHE))
 			ecrire_fichier($nom_cache_desc_sql[$serveur],serialize($connexion['tables']));
