@@ -1972,11 +1972,21 @@ function url_absolue_css ($css) {
 // filtre table_valeur
 // permet de recuperer la valeur d'un tableau pour une cle donnee
 // prend en entree un tableau serialise ou non (ce qui permet d'enchainer le filtre)
+// ou un objet
+// Si la cle est de la forme a.b, on renvoie $table[a][b]
 // http://doc.spip.org/@table_valeur
 function table_valeur($table,$cle,$defaut=''){
-	$table= is_string($table)?unserialize($table):$table;
-	$table= is_array($table)?$table:array();
-	return isset($table[$cle])?$table[$cle]:$defaut;
+	foreach (explode('.', $cle) as $k) {
+		$table= is_string($table)?unserialize($table):$table;
+
+		if (is_object($table))
+			$table = isset($table->$k) ? $table->$k : $default;
+		else if (is_array($table))
+			$table = isset($table[$k]) ? $table[$k] : $defaut;
+		else
+			$table = $default;
+	}
+	return $table;
 }
 
 // filtre match pour faire des tests avec expression reguliere
