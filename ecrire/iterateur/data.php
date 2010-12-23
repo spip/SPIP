@@ -295,8 +295,8 @@ function inc_yql_to_array_dist($u) {
 	$v = recuperer_page($url = _YQL_ENDPOINT.urlencode($u).'&format=json');
 	$w = json_decode($v);
 	if (!$w) {
-		$this->err = true;
 		spip_log("erreur yql: $url");
+		return false;
 	}
 	return (array) $w;
 }
@@ -307,8 +307,7 @@ function inc_sql_to_array_dist($u) {
 			$r[] = $t;
 		return $r;
 	}
-	$this->err = true;
-	return array();
+	return false;
 }
 
 function XmlToArray($xml_file){
