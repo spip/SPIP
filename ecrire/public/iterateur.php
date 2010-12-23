@@ -71,8 +71,17 @@ class IterDecorator extends FilterIterator {
 	 */
 	protected $func_filtre = null;
 
-
-	
+	/**
+	 * Drapeau a activer en cas d'echec
+	 * (select SQL errone, non chargement des DATA, etc)
+	 */
+	public function err() {
+		if (method_exists($this->iter, 'err'))
+			return $this->iter->err();
+		if (property_exists($this->iter, 'err'))
+			return $this->iter->err;
+		return false;
+	}
 
 	public function __construct(Iterator $iter, $command, $info){
 		parent::__construct($iter);
@@ -90,6 +99,8 @@ class IterDecorator extends FilterIterator {
 			$this->calculer_select();
 			$this->calculer_filtres();
 		}
+
+		$this->err = $this->iter->err;
 
 		$this->total = $this->count();
 	}
@@ -366,7 +377,7 @@ class IterDecorator extends FilterIterator {
 				$r[$nom] = $this->get_select($nom);
 			}
 
-			$this->next(); // $r['valeur'] avance aussi d'un cran avec DirectoryIterator ! fichtre !
+			$this->next();
 			return $r;
 		}
 	}

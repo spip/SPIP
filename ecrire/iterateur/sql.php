@@ -31,6 +31,8 @@ class IterateurSQL implements Iterator {
 	 */
 	protected $row = null;
 
+	protected $firstseek = false;
+
 	/**
 	 * selectionner les donnees, ie faire la requete SQL
 	 * @return void
@@ -39,11 +41,9 @@ class IterateurSQL implements Iterator {
 		$this->row = null;
 		$v = &$this->command;
 		$this->sqlresult = calculer_select($v['select'], $v['from'], $v['type'], $v['where'], $v['join'], $v['groupby'], $v['orderby'], $v['limit'], $v['having'], $v['table'], $v['id'], $v['connect'], $this->info);
-		$ok = !!$this->sqlresult;
-		if ($ok)
-			$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
-	  $this->pos = 0;
-	  $this->total = $this->count();
+		$this->err = !$this->sqlresult;
+		$this->pos = -1;
+		$this->total = $this->count();
 	}
 
 	/*
@@ -62,7 +62,9 @@ class IterateurSQL implements Iterator {
 	 * @return bool
 	 */
 	public function rewind() {
-		return $this->seek(0);
+		return ($this->pos > 0)
+			? $this->seek(0)
+			: true;
 	}
 
 	/**
@@ -70,7 +72,11 @@ class IterateurSQL implements Iterator {
 	 * @return bool
 	 */
 	public function valid() {
-		return $this->sqlresult AND is_array($this->row);
+		if ($this->err)
+			return false;
+		if (!$this->firstseek)
+			$this->next();
+		return is_array($this->row);
 	}
 
 	/**
@@ -115,6 +121,8 @@ class IterateurSQL implements Iterator {
 	 */
 	public function next(){
 		$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
+		$this->pos ++;
+		$this->firstseek |= true;
 	}
 
 	/**
