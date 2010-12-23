@@ -1397,6 +1397,7 @@ function critere_datasource($idb, &$boucles, $crit) {
  */
 function critere_args_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
+	$boucle->hash .= '$command[\'args\']=array();';
 	foreach($crit->param as $param) {
 		$boucle->hash .= '
 			$command[\'args\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
