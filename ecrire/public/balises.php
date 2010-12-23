@@ -270,6 +270,7 @@ function balise_EXPOSE_dist($p) {
 // #VALEUR{a.b} renvoie #VALEUR|table_valeur{a.b}
 // http://doc.spip.org/@balise_VALEUR_dist
 function balise_VALEUR_dist($p) {
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
 	$p->code = index_pile($p->id_boucle, 'valeur', $p->boucles, $b);;
 	if (($v = interprete_argument_balise(1,$p))!==NULL){
 		$p->code = 'table_valeur('.$p->code.', '.$v.')';
