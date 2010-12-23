@@ -22,7 +22,7 @@ class IterFactory{
 
 		// chercher un iterateur PHP existant (par exemple dans SPL)
 		// (il faudrait passer l'argument ->serveur
-		// pour etre certain qu'on est sur un iter:)
+		// pour etre certain qu'on est sur un "php:")
 		if (class_exists($iterateur)) {
 			
 			// arguments de creation de l'iterateur...

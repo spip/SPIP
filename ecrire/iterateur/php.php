@@ -15,7 +15,7 @@
 // creer une boucle sur un iterateur
 // annonce au compilo les "champs" disponibles
 //
-function iterateur_iter_dist($b, $iteratorName) {
+function iterateur_php_dist($b, $iteratorName) {
 	$b->iterateur = $iteratorName; # designe la classe d'iterateur
 	$b->show = array(
 		'field' => array(
