@@ -447,9 +447,8 @@ function phraser_criteres($params, &$result) {
 // plus d'un argument et pas le critere IN:
 // detecter comme on peut si c'est le critere implicite LIMIT debut, fin
 
-			if (($var->type != 'texte') ||
-			    (strpos("0123456789-", $param[strlen($param)-1])
-			     !== false)) {
+			if ($var->type != 'texte'
+			OR preg_match("/^(n|(n-)?\d+)$/S", $param)) {
 			  $op = ',';
 			  $not = "";
 			} else {
@@ -464,6 +463,12 @@ function phraser_criteres($params, &$result) {
 
 			  if ($m[3]) {
 			    $texte = new Texte;
+			    if (preg_match(',^["\'](.*)\1$,', $m[3])) {
+			    	$c = null;
+			    	eval ('$c = '.$m[3]);
+			    	if (isset($c))
+			    		$m[3] = $c;
+			    }
 			    $texte->texte = $m[3]; 
 			    $v[1][0]= $texte;
 			  } else array_shift($v[1]);
