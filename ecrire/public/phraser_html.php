@@ -460,15 +460,15 @@ function phraser_criteres($params, &$result) {
 			  // et mettre son reliquat eventuel
 			  // Recopier pour ne pas alterer le texte source
 			  // utile au debusqueur
-
 			  if ($m[3]) {
-			    $texte = new Texte;
-			    if (preg_match(',^["\'](.*)\1$,', $m[3])) {
+			    // une maniere tres sale de supprimer les "' autour de {critere "xxx","yyy"}
+			    if (preg_match(',^(["\'])(.*)\1$,', $m[3])) {
 			    	$c = null;
-			    	eval ('$c = '.$m[3]);
+			    	eval ('$c = '.$m[3].';');
 			    	if (isset($c))
 			    		$m[3] = $c;
 			    }
+			    $texte = new Texte;
 			    $texte->texte = $m[3]; 
 			    $v[1][0]= $texte;
 			  } else array_shift($v[1]);

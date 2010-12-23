@@ -1410,6 +1410,7 @@ function critere_args_dist($idb, &$boucles, $crit) {
  */
 function critere_liste_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
+	$boucle->hash .= '$command[\'liste\'] = array();'."\n";
 	foreach($crit->param as $param) {
 		$boucle->hash .= '
 			$command[\'liste\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
