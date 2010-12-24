@@ -13,9 +13,8 @@
 
 include_spip('iterateur/data');
 
-
 //
-// creer une boucle sur un iterateur POUR
+// creer une boucle sur un iterateur CONDITION
 // annonce au compilo les "champs" disponibles
 //
 function iterateur_CONDITION_dist($b) {
@@ -26,7 +25,7 @@ function iterateur_CONDITION_dist($b) {
 	return $b;
 }
 
-include_spip('iterateur/data');
+
 class IterateurCONDITION extends IterateurData {
 	protected function select() {
 		$this->tableau = array(0=>1);
