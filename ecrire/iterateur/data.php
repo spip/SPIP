@@ -169,18 +169,6 @@ class IterateurDATA implements Iterator {
 			}
 		}
 
-
-		// Appliquer les filtres sur (cle,valeur)
-		if (!$this->err
-		AND $this->filtre) {
-			$func_filtre = create_function('$cle,$valeur', $b = 'return ('.join(') AND (', $this->filtre).');');
-			var_dump($b);
-			foreach($this->tableau as $cle=>$valeur) {
-				if (!$func_filtre($cle,$valeur))
-					unset($this->tableau[$cle]);
-			}
-		}
-
 		// tri {par x}
 		if ($this->command['orderby']) {
 			$sortfunc = '';
@@ -204,14 +192,6 @@ class IterateurDATA implements Iterator {
 					return 0;'
 				));
 			}
-		}
-
-		// critere {2,7}
-		// TODO : ce critere devrait passer *apres* les filtres
-		if ($this->command['limit']) {
-			$limit = explode(',',$this->command['limit']);
-			$this->tableau = array_slice($this->tableau,
-				$limit[0],$limit[1],true);
 		}
 
 		$this->rewind();
