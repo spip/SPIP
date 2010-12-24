@@ -20,20 +20,44 @@
 class IterFactory{
 	public static function create($iterateur, $command, $info=null){
 
+		// cas des SI {si expression} analises tres tot
+		// pour eviter le chargement de tout iterateur
+		if (isset($command['si'])) {
+			foreach ($command['si'] as $si) {
+				if (!$si) {
+					return new IterDecorator(new IterDefaut(), $command, $info);
+				}
+			}
+		}
+
 		// chercher un iterateur PHP existant (par exemple dans SPL)
 		// (il faudrait passer l'argument ->serveur
 		// pour etre certain qu'on est sur un "php:")
 		if (class_exists($iterateur)) {
-			
-			// arguments de creation de l'iterateur...
-			// (pas glop)
 			$a = isset($command['args']) ? $command['args'] : array() ;
-			switch (count($a)) {
-				case 0:    $iter = new $iterateur();  break;
-				case 1:    $iter = new $iterateur($a[0]);  break;
-				case 2:    $iter = new $iterateur($a[0], $a[1]);  break;
-				case 3:    $iter = new $iterateur($a[0], $a[1], $a[2]);  break;
-				case 4:    $iter = new $iterateur($a[0], $a[1], $a[2], $a[3]);  break;
+
+			// permettre de passer un Iterateur directement {args #ITERATEUR} :
+			// si on recoit deja un iterateur en argument, on l'utilise
+			if (count($a)==1 and is_object($a[0]) and is_subclass_of($a[0], 'Iterator')) {
+				$iter = $a[0];
+
+			// sinon, on cree un iterateur du type donne
+			} else {							
+				// arguments de creation de l'iterateur...
+				// (pas glop)
+				try {
+					switch (count($a)) {
+						case 0:    $iter = new $iterateur();  break;
+						case 1:    $iter = new $iterateur($a[0]);  break;
+						case 2:    $iter = new $iterateur($a[0], $a[1]);  break;
+						case 3:    $iter = new $iterateur($a[0], $a[1], $a[2]);  break;
+						case 4:    $iter = new $iterateur($a[0], $a[1], $a[2], $a[3]);  break;
+					}
+				} catch (Exception $e) {
+					spip_log("Erreur de chargement de l'iterateur $iterateur");
+					spip_log($e->getMessage());
+					$iter = new IterDefaut();
+				}
 			}
 		} else {
 			// chercher la classe d'iterateur
@@ -44,13 +68,24 @@ class IterFactory{
 			  OR !class_exists($class)) {
 				die("Iterateur $iterateur non trouv&#233;");
 				// si l'iterateur n'existe pas, on se rabat sur le generique
-				$iter = new Iterator();
+				$iter = new IterDefaut();
 			} else {
 				$iter = new $class($command, $info);
 			}
 		}
 		return new IterDecorator($iter, $command, $info);
 	}
+}
+
+// mettre directement new Iterator() ne fonctionnait pas car c'est une classe d'implementation.
+// par defaut... ne rien faire :)
+class IterDefaut implements Iterator {
+	public function __construct() {}
+	public function next() {}
+	public function valid() { return false; }
+	public function rewind() {}
+	public function current() {}
+	public function key() {}
 }
 
 
@@ -126,7 +161,14 @@ class IterDecorator extends FilterIterator {
 	public function get_select($nom) {
 		if (is_object($this->iter)
 		AND method_exists($this->iter, $nom)) {
-			return $this->iter->$nom();
+			try {
+				return $this->iter->$nom();
+			} catch(Exception $e) {
+				// #GETCHILDREN sur un fichier de DirectoryIterator ...
+				spip_log("Methode $nom en echec sur " . get_class($this->iter));
+				spip_log("Cela peut être normal : retour d'une ligne de resultat ne pouvant pas calculer cette methode");
+				return '';
+			}
 		}
 		/*
 		if (property_exists($this->iter, $nom)) {
@@ -184,6 +226,7 @@ class IterDecorator extends FilterIterator {
 			}
 		}
 
+		
 		// Appliquer les filtres sur (valeur)
 		if ($this->filtre) {
 			$this->func_filtre = create_function('$me', $b = 'return ('.join(') AND (', $this->filtre).');');
