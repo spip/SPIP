@@ -89,38 +89,94 @@ class IterateurDATA implements Iterator {
 	public function exception_des_criteres() {
 		return array('tableau');
 	}
-	
+
+	protected function cache_get($cle) {
+		# utiliser memoization si dispo
+		include_spip('inc/memoization');
+		if (!function_exists('cache_get')) return;
+		return cache_get($cle);
+	}
+
+	protected function cache_set($cle, $ttl) {
+		# utiliser memoization si dispo
+		include_spip('inc/memoization');
+		if (!function_exists('cache_set')) return;
+		return cache_set($cle,
+			array(
+				'data' => $this->tableau,
+				'time' => time(),
+				'ttl' => $ttl
+			),
+			3600 + $ttl);
+			# conserver le cache 1h deplus que la validite demandee,
+			# pour le cas ou le serveur distant ne repond plus
+	}
+
 	protected function select($command) {
 		// les commandes connues pour l'iterateur POUR
 		// sont : tableau=#ARRAY ; cle=...; valeur=...
 		// source URL
-		if (isset($this->command['source'])) {
+		if (isset($this->command['source'])
+		AND isset($this->command['sourcemode'])) {
 
-			if (isset($this->command['sourcemode'])
-			AND in_array($this->command['sourcemode'],
-				array('table', 'array', 'tableau'))
+			# un peu crado : avant de charger le cache il faut charger
+			# les class indispensables, sinon PHP ne saura pas gerer
+			# l'objet en cache ; cf plugins/icalendar
+			if (isset($this->command['sourcemode']))
+				charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true);
+
+			$cle = 'datasource_'.md5($this->command['sourcemode'].':'.$this->command['source']);
+			# avons-nous un cache dispo ?
+			$cache = $this->cache_get($cle);
+			if (isset($this->command['datacache']))
+				$ttl = intval($this->command['datacache']);
+			if ($cache
+			AND ($cache['time'] + (isset($ttl) ? $ttl : $cache['ttl']))
+				> time()
 			) {
-				if (is_array($a = $this->command['source'])
-				OR is_array($a = unserialize($this->command['source'])))
-					$this->tableau = $a;
+				$this->tableau = $cache['data'];
 			}
-			else if (preg_match(',^https?://,', $this->command['source'])) {
-				include_spip('inc/distant');
-				$u = recuperer_page($this->command['source']);
-			} else if (@is_readable($this->command['source']))
-				$u = spip_file_get_contents($this->command['source']);
-			else
-				$u = $this->command['source'];
+			else {
+				# dommage que ca ne soit pas une option de yql_to_array...
+				if ($this->command['sourcemode'] == 'yql')
+					if (!isset($ttl)) $ttl = 3600;
 
-			if (isset($this->command['sourcemode'])) {
-				if ($g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
-					if (is_array($a = $g($u))) {
+				if (isset($this->command['sourcemode'])
+				AND in_array($this->command['sourcemode'],
+					array('table', 'array', 'tableau'))
+				) {
+					if (is_array($a = $this->command['source'])
+					OR is_array($a = unserialize($this->command['source'])))
 						$this->tableau = $a;
-					} else {
-						$this->err = true;
-						spip_log("erreur sur $g(): $u");
-					}
 				}
+				else if (preg_match(',^https?://,', $this->command['source'])) {
+					include_spip('inc/distant');
+					$u = recuperer_page($this->command['source']);
+					if (!isset($ttl)) $ttl = 24*3600;
+				} else if (@is_readable($this->command['source'])) {
+					$u = spip_file_get_contents($this->command['source']);
+					if (!isset($ttl)) $ttl = 10;
+				} else {
+					$u = $this->command['source'];
+					if (!isset($ttl)) $ttl = 10;
+				}
+
+				if ($u) {
+					if ($g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
+						if (is_array($a = $g($u))) {
+							$this->tableau = $a;
+						} else {
+							$this->err = true;
+							spip_log("erreur sur $g(): $u");
+						}
+					}
+
+					if (!$this->err AND $ttl>0)
+						$this->cache_set($cle, $ttl);
+				}
+				# en cas d'erreur http, utiliser le cache si encore dispo
+				else if ($cache)
+					$this->tableau = $cache['data'];
 			}
 		}
 

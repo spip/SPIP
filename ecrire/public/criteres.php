@@ -1390,6 +1390,12 @@ function critere_datasource($idb, &$boucles, $crit) {
 	$command[\'sourcemode\'] = '.calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent).';';
 }
 
+function critere_datacache($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$boucle->hash .= '
+	$command[\'datacache\'] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';';
+}
+
 
 /*
  * Pour passer des arguments a un iterateur non-spip
@@ -1410,10 +1416,9 @@ function critere_args_dist($idb, &$boucles, $crit) {
  */
 function critere_liste_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$boucle->hash .= '$command[\'liste\'] = array();'."\n";
+	$boucle->hash .= "\n\t".'$command[\'liste\'] = array();'."\n";
 	foreach($crit->param as $param) {
-		$boucle->hash .= '
-			$command[\'liste\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
+		$boucle->hash .= "\t".'$command[\'liste\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).";\n";
 	}
 }
 
@@ -1430,7 +1435,7 @@ function critere_datapath_dist($idb, &$boucles, $crit) {
 }
 
 
-/* le critere {si ...} des boucles CONDITION */
+/* le critere {si ...} applicable a toutes les boucles */
 function critere_si_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '$command[\'si\'] = array();'."\n";
