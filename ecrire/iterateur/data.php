@@ -91,6 +91,7 @@ class IterateurDATA implements Iterator {
 	}
 
 	protected function cache_get($cle) {
+		if (!$cle) return;
 		# utiliser memoization si dispo
 		include_spip('inc/memoization');
 		if (!function_exists('cache_get')) return;
@@ -98,6 +99,7 @@ class IterateurDATA implements Iterator {
 	}
 
 	protected function cache_set($cle, $ttl) {
+		if (!$cle) return;
 		# utiliser memoization si dispo
 		include_spip('inc/memoization');
 		if (!function_exists('cache_set')) return;
@@ -125,8 +127,9 @@ class IterateurDATA implements Iterator {
 			if (isset($this->command['sourcemode']))
 				charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true);
 
-			$cle = 'datasource_'.md5($this->command['sourcemode'].':'.serialize($this->command['source']));
 			# avons-nous un cache dispo ?
+			if (is_string($this->command['source']))
+				$cle = 'datasource_'.md5($this->command['sourcemode'].':'.$this->command['source']);
 			$cache = $this->cache_get($cle);
 			if (isset($this->command['datacache']))
 				$ttl = intval($this->command['datacache']);
