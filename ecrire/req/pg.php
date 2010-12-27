@@ -977,8 +977,11 @@ function spip_pg_cite($v, $t)
 		if (strpos("0123456789", $v[0]) === false)
 			return spip_pg_frommysql($v);
 		else {
-			if (strpos($v, "-00-00") === 4)
-				$v = substr($v,0,4)."-01-01".substr($v,10);
+			if (strpos($v, "-00-00") <= 4) {
+				$annee = substr($v,0,4);
+				if (!intval($annee)) $annee = '0001';
+				$v = $annee ."-01-01".substr($v,10);
+			}
 			return "timestamp '$v'";
 		}
 	}
