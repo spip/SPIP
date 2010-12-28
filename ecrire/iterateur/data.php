@@ -404,9 +404,28 @@ function inc_atom_to_array_dist($u) {
 }
 // glob : lister des fichiers selon un masque, pour la syntaxe cf php.net/glob
 function inc_glob_to_array_dist($u) {
-	return glob($u,
+	return (array) glob($u,
 		GLOB_MARK | GLOB_NOSORT | GLOB_BRACE
 	);
+}
+// ls : lister des fichiers selon un masque glob
+// et renvoyer aussi leurs donnees php.net/stat
+function inc_ls_to_array_dist($u) {
+	$glob = charger_fonction('glob_to_array', 'inc');
+	$a = $glob($u);
+	foreach ($a as &$v) {
+		$b = @stat($v);
+		if (is_array($b))
+			foreach ($b as $k => $ignore)
+				if (is_numeric($k)) unset($b[$k]);
+		$v = array_merge(array(
+			'file' => $v,
+			'basename' => basename($v)
+			),
+			$b
+		);
+	}
+	return $a;
 }
 
 function ObjectToArray($object){
