@@ -339,6 +339,8 @@ function sql_showtable($table, $table_spip = false, $serveur='', $option=true)
 		$vraie_table = preg_replace('/^spip/', $prefixe, $table);
 	} else $vraie_table = $table;
 	
+	if (!$f = sql_showbase($vraie_table, $serveur)) return false;
+	if (!sql_fetch($f, $serveur)) return false;
 	$f = sql_serveur('showtable', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
 	$f = $f($vraie_table, $serveur, $option!==false);
