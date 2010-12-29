@@ -1444,4 +1444,14 @@ function critere_si_dist($idb, &$boucles, $crit) {
 			$command[\'si\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
 	}
 }
+
+// {tableau #XX} pour compatibilite ascendante boucle POUR
+// ... preferer la notation {datasource #XX,table}
+function critere_tableau_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$boucle->hash .= '
+	$command[\'source\'] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';
+	$command[\'sourcemode\'] = \'table\';';
+}
+
 ?>

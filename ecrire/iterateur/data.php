@@ -115,8 +115,8 @@ class IterateurDATA implements Iterator {
 	}
 
 	protected function select($command) {
-		// les commandes connues pour l'iterateur POUR
-		// sont : tableau=#ARRAY ; cle=...; valeur=...
+		// les commandes connues pour l'iterateur POUR/DATA
+		// sont : {tableau #ARRAY} ; cle=...; valeur=...
 		// source URL
 		if (isset($this->command['source'])
 		AND isset($this->command['sourcemode'])) {
@@ -200,24 +200,6 @@ class IterateurDATA implements Iterator {
 				$this->err = false;
 			}
 
-		}
-
-		// recuperer le critere {tableau=xxx} pour compat ascendante
-		// boucle POUR ; methode pas tres propre, depreciee par {table XX}
-		if (is_array($this->command['where'])) {
-			foreach ($this->command['where'] as $k => $com) {
-				if ($com[1] === 'tableau') {
-					if ($com[0] !== '=') {
-						// erreur
-					}
-					# sql_quote a l'envers : pas propre...
-					eval ('$x = '.str_replace('\"', '"', $com[2]).';');
-					if (is_array($x) OR is_array($x = @unserialize($x)))
-						$this->tableau = $x;
-					else
-						$this->err = true;
-				}
-			}
 		}
 
 		// Critere {liste X1, X2, X3}

@@ -22,7 +22,6 @@ function iterateur_POUR_dist($b) {
 	$b->iterateur = 'DATA'; # designe la classe d'iterateur
 	$b->show = array(
 		'field' => array(
-			'tableau' => 'ARRAY',
 			'cle' => 'STRING',
 			'valeur' => 'STRING',
 		)
