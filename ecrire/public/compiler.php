@@ -489,10 +489,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	else $nums = '';
 
 	if ($boucle->numrows OR $boucle->mode_partie) {
-		if ($count == 'count(*)')
-			$count = "array_shift(\$iter->next())";
-		else $count = "\$iter->count()";
-		$nums .= "\$Numrows['$id_boucle']['total'] = @intval($count);"
+		$nums .= "\$Numrows['$id_boucle']['total'] = @intval(\$iter->count());"
 		. $boucle->mode_partie
 		. "\n\t";
 	}
