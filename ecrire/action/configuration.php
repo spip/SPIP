@@ -24,6 +24,15 @@ function action_configuration_dist() {
 	
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
+
+	# ceinture & bretelles, a priori le test dans exec_configurer
+	# suffit a empecher d'obtenir un hash qui passe le test ci-dessus
+	if(!autoriser('configurer', _request('configuration'))) {
+		include_spip('inc/minipres');
+		echo minipres(_T('info_acces_interdit'));
+		exit;
+	}
+
 	$r = rawurldecode(_request('redirect'));
 	$r = parametre_url($r, 'configuration', $arg,"&");
 	appliquer_modifs_config();

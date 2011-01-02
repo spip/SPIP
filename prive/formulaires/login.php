@@ -73,10 +73,12 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 
 		if ($res['redirect']){
 			include_spip('inc/headers');
+			# preparer un lien pour quand redirige_formulaire ne fonctionne pas
+			$valeurs['_deja_loge'] = inserer_attribut(
+				"<a>" . _T('login_par_ici') . "</a>$m",
+				'href', $res['redirect']
+			);
 			$m = redirige_formulaire($res['redirect']);
-			# quand la redirection 302 ci-dessus ne fonctionne pas
-			$valeurs['_deja_loge'] =
-			"<a href='$cible'>" . _T('login_par_ici') . "</a>$m";
 		}
 	}
 	// en cas d'echec de cookie, inc_auth a renvoye vers le script de
@@ -204,9 +206,10 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 			include_spip('inc/headers');
 			$res['redirect'] = $cible;
 		} else {
-			$res['message_ok'] .= "<a href='$cible'>" .
-			  _T('login_par_ici') .
-			  "</a>";
+			$res['message_ok'] .= inserer_attribut(
+				"<a>" . _T('login_par_ici') . "</a>",
+				'href', $cible
+			);
 		}
 	}
 	return $res;
