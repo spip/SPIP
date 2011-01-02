@@ -35,9 +35,9 @@ define('_VERSIONS_SERVEUR', 'http://files.spip.org/');
 define('_VERSIONS_LISTE', 'archives.xml');
 
 function info_maj ($dir, $file, $version){
+	include_spip('inc/plugin');
+	
 	list($maj,$min,$rev) = preg_split('/\D+/', $version);
-#	list($maj,$min,$rev) = preg_split('/\D+/', '1.9.2i'); # pour test
-#	list($maj,$min,$rev) = preg_split('/\D+/', '2.0.8'); # pour test
 
 	$nom = _DIR_CACHE_XML . _VERSIONS_LISTE;
 	$page = !file_exists($nom) ? '' : file_get_contents($nom);
@@ -50,14 +50,11 @@ function info_maj ($dir, $file, $version){
 	preg_match_all($p, $page, $m,  PREG_SET_ORDER);
 	$page = '';
 	foreach ($m as $v) {
-			list(, $maj2, $min2,, $rev2) = $v;
-			if (($maj2 > $maj)
-			OR (($maj2 == $maj)
-				AND (($min2 > $min)
-					OR (($min2 == $min)
-						AND ($rev2 > $rev))))) {
-			  $page .= $maj2 . '.' . $min2 . '.' . $rev2 . ' ';
-		}
+		list(, $maj2, $min2,, $rev2) = $v;
+		$version_maj = $maj2 . '.' . $min2 . '.' . $rev2;
+		if ((spip_version_compare($version, $version_maj, '<'))
+		AND (spip_version_compare($page, $version_maj, '<')))
+			$page = $version_maj;
 	}
 
 	if (!$page) return "";
