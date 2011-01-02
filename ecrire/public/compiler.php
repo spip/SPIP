@@ -897,9 +897,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		$id = strval($id); // attention au type dans index_pile
 		$type = $boucle->type_requete;
 		if ($type AND $type != 'boucle') {
-			if ($boucle->param) {
-				$res = calculer_criteres($id, $boucles);
-			}
+			$crit = !$boucle->param ? true : calculer_criteres($id, $boucles);
 			$descr['id_mere'] = $id;
 			$boucles[$id]->return =
 			  calculer_liste($boucle->milieu,
@@ -909,7 +907,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			// Si les criteres se sont mal compiles
 			// ne pas tenter d'assembler le code final
 			// (mais compiler le corps pour detection d'erreurs)
-			if (is_array($res))
+			if (is_array($crit))
 				$boucles[$id]->type_requete = false;
 		}
 	}
