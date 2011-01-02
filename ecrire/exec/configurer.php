@@ -19,6 +19,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // http://doc.spip.org/@exec_configurer_dist
 function exec_configurer_dist()
 {
+	if(!autoriser('configurer', _request('configuration'))) {
+		include_spip('inc/minipres');
+		echo minipres(_T('info_acces_interdit'));
+		exit;
+	}
 	include_spip('inc/actions');
 	$configuration = charger_fonction(_request('configuration'), 'configuration', true);
 	ajax_retour($configuration ? $configuration() : 'configure quoi?');
