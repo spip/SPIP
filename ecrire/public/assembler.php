@@ -31,10 +31,13 @@ function assembler($fond, $connect='') {
 	$page = array('contexte_implicite'=>calculer_contexte_implicite());
 	$page['contexte_implicite']['cache'] = $fond . preg_replace(',\.[a-zA-Z0-9]*$,', '', preg_replace('/[?].*$/', '', $GLOBALS['REQUEST_URI']));
 	// Cette fonction est utilisee deux fois
-	$cacher = charger_fonction('cacher', 'public');
+	$cacher = charger_fonction('cacher', 'public', true);
 	// Les quatre derniers parametres sont modifies par la fonction:
 	// emplacement, validite, et, s'il est valide, contenu & age
-	$res = $cacher($contexte, $use_cache, $chemin_cache, $page, $lastmodified);
+	if ($cacher)
+		$res = $cacher($GLOBALS['contexte'], $use_cache, $chemin_cache, $page, $lastmodified);
+	else
+		$use_cache = -1;
 	// Si un resultat est retourne, c'est un message d'impossibilite
 	if ($res) {return array('texte' => $res);}
 
@@ -97,7 +100,7 @@ function assembler($fond, $connect='') {
 			$page = $produire_page($fond, $contexte, $use_cache, $chemin_cache, NULL, $page, $lastmodified, $connect);
 			if ($page === '')
 				erreur_squelette(_T('info_erreur_squelette2',
-					array('fichier'=>$fond.'.'._EXTENSION_SQUELETTES)));
+					array('fichier'=>htmlspecialchars($fond).'.'._EXTENSION_SQUELETTES)));
 		}
 
 		if ($page AND $chemin_cache) $page['cache'] = $chemin_cache;
@@ -207,10 +210,13 @@ function inclure_page($fond, $contexte, $connect='') {
 	unset($contexte['fond']);
 	$page = array('contexte_implicite'=>calculer_contexte_implicite());
 	$page['contexte_implicite']['cache'] = $fond;
-	$cacher = charger_fonction('cacher', 'public');
+	$cacher = charger_fonction('cacher', 'public', true);
 	// Les quatre derniers parametres sont modifies par la fonction:
 	// emplacement, validite, et, s'il est valide, contenu & age
-	$res = $cacher($contexte, $use_cache, $chemin_cache, $page, $lastinclude);
+	if ($cacher)
+		$res = $cacher($contexte, $use_cache, $chemin_cache, $page, $lastinclude);
+	else
+		$use_cache = -1;
 	// $res = message d'erreur : on sort de la
 	if ($res) {return array('texte' => $res);}
 
@@ -250,9 +256,12 @@ function public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, 
 	AND is_array($page)
 	AND count($page)
 	AND $page['entetes']['X-Spip-Cache'] > 0){
-		$cacher = charger_fonction('cacher', 'public');
+		$cacher = charger_fonction('cacher', 'public', true);
 		$lastinclude = time();
-		$cacher($contexte_cache, $use_cache, $chemin_cache, $page, $lastinclude);
+		if ($cacher)
+			$cacher($contexte_cache, $use_cache, $chemin_cache, $page, $lastinclude);
+		else
+			$use_cache = -1;
 	}
 	return $page;
 }
