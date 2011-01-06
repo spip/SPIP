@@ -15,8 +15,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('base/abstract_sql');
 
 function is_url_prive($cible){
-	$parse = parse_url($cible);
-	return strncmp(substr($parse['path'],-strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS, strlen(_DIR_RESTREINT_ABS))==0;
+	include_spip('inc/filtres_mini');
+	$path = parse_url(tester_url_absolue($cible)?$cible:url_absolue($cible),PHP_URL_PATH);
+	return strncmp(substr($path,-strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS, strlen(_DIR_RESTREINT_ABS))==0;
 }
 
 function formulaires_login_charger_dist($cible="",$login="",$prive=null)
@@ -194,7 +195,7 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 
 		// si c'est une url absolue, refuser la redirection
 		// sauf si cette securite est levee volontairement par le webmestre
-		elseif (preg_match(";^([a-z]+:)?//;Uims",$cible) AND !defined('_AUTORISER_LOGIN_ABS_REDIRECT')) {
+		elseif (tester_url_absolue($cible) AND !defined('_AUTORISER_LOGIN_ABS_REDIRECT')) {
 			$cible = "";
 		}
 	}
