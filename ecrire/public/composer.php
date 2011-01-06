@@ -509,6 +509,10 @@ function calculer_select ($select = array(), $from = array(),
 			$menage = true;
 		}
 	}
+
+	// evacuer les eventuels groupby vide issus d'un calcul dynamique
+	$groupby = array_diff($groupby,array(''));
+
 	// remplacer les sous requetes recursives au calcul
 	list($where_simples,$where_sous) = trouver_sous_requetes($where);
 	//var_dump($where_sous);
