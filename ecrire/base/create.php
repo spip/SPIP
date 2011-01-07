@@ -18,15 +18,11 @@ include_spip('base/auxiliaires');
 include_spip('base/typedoc');
 include_spip('base/abstract_sql');
 
-
 // http://doc.spip.org/@creer_ou_upgrader_table
 function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='') {
-	static $fcreate = null;
-	if (!$fcreate) $fcreate = sql_serveur('create', $serveur);
-
-	$sql_desc = sql_showtable($table,true,$serveur);
-	if (!$upgrade OR !$sql_desc)
-		$fcreate($table, $desc['field'], $desc['key'], $autoinc, false, $serveur);
+	$sql_desc = $upgrade ? sql_showtable($table,true,$serveur) : false;
+	if (!$sql_desc)
+		sql_create($table, $desc['field'], $desc['key'], $autoinc, false, $serveur);
 	else {
 		// ajouter les champs manquants
 		$last = '';
@@ -38,33 +34,44 @@ function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='
 	}
 }
 
+function alterer_base($tables_inc, $tables_noinc, $up=false, $serveur='')
+{
+	if ($up === false) {
+		$old = false;
+		$up = array();
+	} else {
+		$old = true;
+		if (!is_array($up)) $up = array($up);
+	}
+	foreach($tables_inc as $k => $v)
+		if (!$old OR in_array($k, $up))
+			creer_ou_upgrader_table($k,$v,true,$old,$serveur);
+
+	foreach($tables_noinc as $k => $v)
+		if (!$old OR in_array($k, $up))
+			creer_ou_upgrader_table($k,$v,false,$old,$serveur);
+}
+
 // http://doc.spip.org/@creer_base
 function creer_base($serveur='') {
-	global $tables_principales, $tables_auxiliaires;
 
 	// Note: les mises a jour reexecutent ce code pour s'assurer
 	// de la conformite de la base
 	// pas de panique sur  "already exists" et "duplicate entry" donc.
 
-	foreach($tables_principales as $k => $v)
-		creer_ou_upgrader_table($k,$v,true,false,$serveur);
-
-	foreach($tables_auxiliaires as $k => $v)
-		creer_ou_upgrader_table($k,$v,false,false,$serveur);
+	alterer_base($GLOBALS['tables_principales'],
+		     $GLOBALS['tables_auxiliaires'],
+		     false,
+		     $serveur);
 }
 
 // http://doc.spip.org/@maj_tables
 function maj_tables($upgrade_tables=array(),$serveur=''){
-	global $tables_principales, $tables_auxiliaires;
-	foreach($tables_principales as $k => $v)
-		if (($upgrade_tables==$k OR (is_array($upgrade_tables) && in_array($k,$upgrade_tables))))
-			creer_ou_upgrader_table($k,$v,true,true,$serveur);
-
-	foreach($tables_auxiliaires as $k => $v)
-		if (($upgrade_tables==$k OR (is_array($upgrade_tables) && in_array($k,$upgrade_tables))))
-			creer_ou_upgrader_table($k,$v,false,true,$serveur);
+	alterer_base($GLOBALS['tables_principales'],
+		     $GLOBALS['tables_auxiliaires'],
+		     $upgrade_tables,
+		     $serveur);
 }
-
 
 // http://doc.spip.org/@creer_base_types_doc
 function creer_base_types_doc($serveur='') {
