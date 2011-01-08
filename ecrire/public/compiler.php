@@ -1005,7 +1005,6 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			// sinon, en cas de requeteur d'un type predefini,
 			// utiliser les informations donnees par le requeteur
 			// cas "php:xx" et "data:xx".
-			// "php" existe-t-il un iterateur PHP
 			} else if ($requeteur = charger_fonction($boucle->sql_serveur, 'requeteur', true)) {
 				$requeteur($boucles, $boucle, $id);
 
