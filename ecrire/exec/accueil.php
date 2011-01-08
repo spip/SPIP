@@ -205,9 +205,6 @@ function exec_accueil_dist()
 	}
 
 	echo creer_colonne_droite("", true);
-	list($evtm, $evtt, $evtr) = http_calendrier_messages(date("Y"), date("m"), date("d")," 23:59:59");
-
-	echo $evtt, $evtm, $evtr;
 
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
 

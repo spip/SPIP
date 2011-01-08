@@ -195,8 +195,6 @@ function declarer_interfaces(){
 	$table_des_tables['types_documents']='types_documents';
 	$table_des_tables['rubriques']='rubriques';
 	$table_des_tables['hierarchie']='rubriques';
-	$table_des_tables['messages']='messages';
-
 
 	$exceptions_des_tables['documents']['type_document']=array('types_documents'
 	, 'titre');
@@ -207,7 +205,6 @@ function declarer_interfaces(){
 
 	$table_titre['articles']= 'titre, lang';
 	$table_titre['rubriques']= 'titre, lang';
-	$table_titre['messages']= "titre, '' AS lang";
 	$table_titre['auteurs']= "nom AS titre, '' AS lang";
 	$table_titre['documents']= "titre, fichier AS surnom, '' AS lang";
 
@@ -262,7 +259,6 @@ function declarer_interfaces(){
 	$table_des_traitements['DESCRIPTIF'][]= _TRAITEMENT_RACCOURCIS;
 	$table_des_traitements['FICHIER']['documents']= 'get_spip_doc(%s)';
 	$table_des_traitements['INTRODUCTION'][]= 'PtoBR('. _TRAITEMENT_RACCOURCIS .')';
-	$table_des_traitements['MESSAGE'][]= _TRAITEMENT_RACCOURCIS;
 	$table_des_traitements['NOM_SITE_SPIP'][]= _TRAITEMENT_TYPO;
 	$table_des_traitements['NOM'][]= _TRAITEMENT_TYPO;
 	$table_des_traitements['AUTEUR'][]= _TRAITEMENT_TYPO;

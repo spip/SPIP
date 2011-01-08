@@ -153,34 +153,18 @@ function auteurs_interventions($auteur) {
 	$statut = $auteur['statut'];
 	
 	global $connect_id_auteur;
-	
-	include_spip('inc/message_select');
 
 	if (autoriser('voir', 'article')) $aff_art = array('prepa','prop','publie','refuse'); 
 	else if ($connect_id_auteur == $id_auteur) $aff_art = array('prepa','prop','publie');
 	else $aff_art = array('prop','publie'); 
 
 	$lister_objets = charger_fonction('lister_objets','inc');
-	echo $lister_objets('articles',array('titre'=>_T('info_articles_auteur'),'statut'=>$aff_art, 'par'=>'date','id_auteur'=>$id_auteur));
 
-	// Messages de l'auteur et discussions en cours
-	if ($GLOBALS['meta']['messagerie_agenda'] != 'non'
-	AND $id_auteur != $connect_id_auteur
-	AND autoriser('ecrire', '', '', $auteur)
-	) {
-		echo "<div class='nettoyeur'>&nbsp;</div>";
-		echo debut_cadre_couleur('', true);
-
-		$vus = array();
-	
-		echo afficher_ses_messages('<b>' . _T('info_discussion_cours') . '</b>', ", spip_auteurs_liens AS A, spip_auteurs_liens AS D", "A.id_auteur=$connect_id_auteur AND D.id_auteur=$id_auteur AND statut='publie' AND type='normal' AND rv!='oui' AND A.objet='message' AND A.id_objet=M.id_message AND D.objet='message' AND D.id_objet=M.id_message", $vus, false, false);
-	
-		echo afficher_ses_messages('<b>' . _T('info_vos_rendez_vous') . '</b>', ", spip_auteurs_liens AS A, spip_auteurs_liens AS D", "A.id_auteur=$connect_id_auteur AND D.id_auteur=$id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND date_fin > ".sql_quote(date('Y-m-d H:i:s'))." AND A.objet='message' AND A.id_objet=M.id_message AND D.objet='message' AND D.id_objet=M.id_message", $vus, false, false);
-	
-		echo icone_horizontale(_T('info_envoyer_message_prive'), generer_action_auteur("editer_message","normal/$id_auteur"),
-			  "message-24.png","", false);
-
-		echo fin_cadre_couleur(true);
-	}
+  echo pipeline('affiche_auteurs_interventions',
+	  array(
+		  'args' => array('id_auteur'=>$id_auteur, 'auteur'=>$auteur),
+		  'data' => $lister_objets('articles',array('titre'=>_T('info_articles_auteur'),'statut'=>$aff_art, 'par'=>'date','id_auteur'=>$id_auteur))
+	  )
+  );
 }
 ?>

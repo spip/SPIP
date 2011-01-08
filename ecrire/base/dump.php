@@ -124,13 +124,6 @@ function lister_tables_noexport(){
 		#'spip_versions_fragments' 
 		);
 
-	if (!$GLOBALS['connect_toutes_rubriques']){
-		$EXPORT_tables_noexport[]='spip_messages';
-		#$EXPORT_tables_noexport[]='spip_auteurs_liens'; // where objet='message'
-	}
-
-	$EXPORT_tables_noexport = pipeline('lister_tables_noexport',$EXPORT_tables_noexport);
-
 	return $EXPORT_tables_noexport;
 }
 

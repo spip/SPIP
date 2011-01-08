@@ -386,7 +386,6 @@ function liste_metas()
 		'adresse_neuf' => '',
 		'jours_neuf' => '',
 		'quoi_de_neuf' => 'non',
-		'messagerie_agenda' => 'oui',
 
 		'documents_article' => 'non',
 		'documents_rubrique' => 'non',
