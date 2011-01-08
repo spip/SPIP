@@ -35,17 +35,6 @@ function iterateur_DATA_dist($b) {
 	return $b;
 }
 
-/**
- * Recuperer la cle dans une table ?
- *
- * @param  $table
- * @param  $cle
- * @param string $defaut
- * @return mixed|string
- */
-function Iterateurs_table_valeur($table,$cle,$defaut=''){
-	return table_valeur($table,$cle,$defaut);
-}
 
 /**
  * IterateurDATA pour iterer sur des donnees
@@ -145,15 +134,16 @@ class IterateurDATA implements Iterator {
 
 	/**
 	 * Aller chercher les donnees de la boucle DATA
-	 * 
+	 *
 	 * @throws Exception
 	 * @param  $command
 	 * @return void
 	 */
 	protected function select($command) {
-		// les commandes connues pour l'iterateur POUR/DATA
-		// sont : {tableau #ARRAY} ; cle=...; valeur=...
-		// source URL
+		// les commandes connues pour l'iterateur DATA
+		// sont : {tableau #ARRAY} ; {cle=...} ; {valeur=...}
+		// {source format, [URL], [arg2]...}
+
 		if (isset($this->command['source'])
 		AND isset($this->command['sourcemode'])) {
 
@@ -163,9 +153,13 @@ class IterateurDATA implements Iterator {
 			if (isset($this->command['sourcemode']))
 				charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true);
 
+			# le premier argument peut etre un array, une URL etc.
+			$src = $this->command['source'][0];
+
 			# avons-nous un cache dispo ?
-			if (is_string($this->command['source']))
-				$cle = 'datasource_'.md5($this->command['sourcemode'].':'.$this->command['source']);
+			if (is_string($src))
+				$cle = 'datasource_'.md5($this->command['sourcemode'].':'.var_export($this->command['source'],true));
+
 			$cache = $this->cache_get($cle);
 			if (isset($this->command['datacache']))
 				$ttl = intval($this->command['datacache']);
@@ -187,30 +181,32 @@ class IterateurDATA implements Iterator {
 				AND in_array($this->command['sourcemode'],
 					array('table', 'array', 'tableau'))
 				) {
-					if (is_array($a = $this->command['source'])
+					if (is_array($a = $src)
 					OR (is_string($a)
 					AND $a = str_replace('&quot;', '"', $a) # fragile!
 					AND is_array($a = @unserialize($a)))
 					)
 						$this->tableau = $a;
 				}
-				else if (preg_match(',^https?://,', $this->command['source'])) {
+				else if (preg_match(',^https?://,', $src)) {
 					include_spip('inc/distant');
-					$u = recuperer_page($this->command['source']);
+					$u = recuperer_page($src);
 					if (!$u)
 						throw new Exception("404");
 					if (!isset($ttl)) $ttl = 24*3600;
-				} else if (@is_readable($this->command['source'])) {
-					$u = spip_file_get_contents($this->command['source']);
+				} else if (@is_readable($src)) {
+					$u = spip_file_get_contents($src);
 					if (!isset($ttl)) $ttl = 10;
 				} else {
-					$u = $this->command['source'];
+					$u = $src;
 					if (!isset($ttl)) $ttl = 10;
 				}
 
 				if (!$this->err
 				AND $g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
-					if (is_array($a = $g($u))) {
+					$args = $this->command['source'];
+					$args[0] = $u;
+					if (is_array($a = call_user_func_array($g,$args))) {
 						$this->tableau = $a;
 					}
 				}
@@ -225,7 +221,7 @@ class IterateurDATA implements Iterator {
 			catch (Exception $e) {
 				$e = $e->getMessage();
 				$err = sprintf("[%s, %s] $e",
-					$this->command['source'],
+					$src,
 					$this->command['sourcemode']);
 				erreur_squelette(array($err, array()));
 				$this->err = true;
@@ -248,7 +244,7 @@ class IterateurDATA implements Iterator {
 		// Si a ce stade on n'a pas de table, il y a un bug
 		if (!is_array($this->tableau)) {
 			$this->err = true;
-			spip_log("erreur datasource ".$this->command['source']);
+			spip_log("erreur datasource ".$src);
 		}
 
 
@@ -258,7 +254,7 @@ class IterateurDATA implements Iterator {
 		AND is_array($this->command['datapath'])) {
 			list(,$base) = each($this->command['datapath']);
 			if (strlen($base = trim($base))) {
-				$this->tableau = Iterateurs_table_valeur($this->tableau, $base);
+				$this->tableau = table_valeur($this->tableau, $base);
 				if (!is_array($this->tableau)) {
 					$this->tableau = array();
 					$this->err = true;
@@ -283,14 +279,16 @@ class IterateurDATA implements Iterator {
 							$tv = '%s';
 						# {par hasard}
 						else if ($r[1] == 'alea') {
-							if (!$aleas)
-							$sortfunc .= 'static $aleas = array();';
-							$aleas ++;
-							$tv = '(isset($aleas['.$aleas.'][$v=%s])?$aleas['.$aleas.'][$v]:($aleas['.$aleas.'][$v]=rand(0,1)))';
+							if (!$aleas++)
+								$sortfunc .= 'static $aleas = array();';
+							$tv = '(isset($aleas['.$aleas.'][$v=crc32(serialize(%s))])
+							? $aleas['.$aleas.'][$v]
+							: ($aleas['.$aleas.'][$v]=rand(0,1))
+							)';
 						}
-						# {par valeur/xx/yy} ?? 
+						# {par valeur/xx/yy} ??
 						else
-							$tv = 'Iterateurs_table_valeur(%s, '.var_export($r[1],true).')';
+							$tv = 'table_valeur(%s, '.var_export($r[1],true).')';
 						$sortfunc .= '
 						$a = '.sprintf($tv,'$aa').';
 						$b = '.sprintf($tv,'$bb').';
@@ -313,7 +311,7 @@ class IterateurDATA implements Iterator {
 		AND strlen($fusion = $this->command['groupby'][0])) {
 			$vu = array();
 			foreach($this->tableau as $k => $v) {
-				$val = Iterateurs_table_valeur($v, $fusion);
+				$val = table_valeur($v, $fusion);
 				if (isset($vu[$val]))
 					unset($this->tableau[$k]);
 				else
@@ -376,7 +374,7 @@ class IterateurDATA implements Iterator {
 
 /**
  * file -> tableau
- * 
+ *
  * @param  string $u
  * @return array
  */

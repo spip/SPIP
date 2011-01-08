@@ -52,8 +52,9 @@ function analyse_csv($t)
 	$lignes = explode("\n", $corps);
 
 	// retrait des lignes vides finales
-	while(preg_match("/^$sep*$/", $lignes[count($lignes)-1]))
-	  unset($lignes[count($lignes)-1]);
+	foreach ($lignes as $k=>$l)
+		if (preg_match("/^$sep*$/", $l))
+			unset($lignes[$k]);
 	//  calcul du  nombre de colonne a chaque ligne
 	$nbcols = array();
 	$max = $mil = substr_count($entete, $sep);
