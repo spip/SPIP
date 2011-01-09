@@ -330,9 +330,11 @@ function balise_distante_interdite($p) {
 function champs_traitements ($p) {
 	global $table_des_traitements;
 
-	if (!isset($table_des_traitements[$p->nom_champ]))
-		return $p->code;
-	$ps = $table_des_traitements[$p->nom_champ];
+	if (isset($table_des_traitements[$p->nom_champ]))
+		$ps = $table_des_traitements[$p->nom_champ];
+	else
+		$ps = $table_des_traitements['*'];
+
 	if (is_array($ps)) {
 	  // new style
 

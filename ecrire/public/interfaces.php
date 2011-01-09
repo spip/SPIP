@@ -273,6 +273,11 @@ function declarer_interfaces(){
 	$table_des_traitements['DESCRIPTIF_SITE_SPIP'][]= _TRAITEMENT_RACCOURCIS;
 	$table_des_traitements['ENV'][]= 'entites_html(%s,true)';
 
+	// valeur par defaut pour les balises non listees ci-dessus
+	$table_des_traitements['*'][]= '%s';
+	// toujours securiser les DATA
+	$table_des_traitements['*']['DATA']= 'safehtml(%s)';
+
 
 	// gerer l'affectation en 2 temps car si le pipe n'est pas encore declare, on ecrase les globales
 	$interfaces = pipeline('declarer_tables_interfaces',
