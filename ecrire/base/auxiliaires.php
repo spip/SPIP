@@ -34,32 +34,7 @@ $spip_auteurs_liens = array(
 $spip_auteurs_liens_key = array(
 		"PRIMARY KEY"		=> "id_auteur,id_objet,objet",
 		"KEY id_auteur"	=> "id_auteur");
-/*
-$spip_auteurs_articles = array(
-		"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL");
 
-$spip_auteurs_articles_key = array(
-		"PRIMARY KEY"	=> "id_auteur, id_article",
-		"KEY id_article"	=> "id_article");
-
-$spip_auteurs_rubriques = array(
-		"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_rubrique"	=> "bigint(21) DEFAULT '0' NOT NULL");
-
-$spip_auteurs_rubriques_key = array(
-		"PRIMARY KEY"	=> "id_auteur, id_rubrique",
-		"KEY id_rubrique"	=> "id_rubrique");
-
-$spip_auteurs_messages = array(
-		"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_message"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"vu"		=> "CHAR (3)");
-
-$spip_auteurs_messages_key = array(
-		"PRIMARY KEY"	=> "id_auteur, id_message",
-		"KEY id_message"	=> "id_message");
-*/
 $spip_documents_liens = array(
 		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
@@ -78,17 +53,7 @@ $spip_meta = array(
 
 $spip_meta_key = array(
 		"PRIMARY KEY"	=> "nom");
-/*
-$tables_auxiliaires['spip_auteurs_articles'] = array(
-	'field' => &$spip_auteurs_articles,
-	'key' => &$spip_auteurs_articles_key);
-$tables_auxiliaires['spip_auteurs_rubriques'] = array(
-	'field' => &$spip_auteurs_rubriques,
-	'key' => &$spip_auteurs_rubriques_key);
-$tables_auxiliaires['spip_auteurs_messages'] = array(
-	'field' => &$spip_auteurs_messages,
-	'key' => &$spip_auteurs_messages_key);
-*/
+
 $tables_auxiliaires['spip_auteurs_liens'] = array(
 	'field' => &$spip_auteurs_liens,
 	'key' => &$spip_auteurs_liens_key);

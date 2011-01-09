@@ -69,10 +69,10 @@ function optimiser_sansref($table, $id, $sel, $and="")
 {
 	$in = array();
 	while ($row = sql_fetch($sel)) $in[$row['id']]=true;
+	sql_free($sel);
 
 	if ($in) {
-		$in = join(',', array_keys($in));
-		sql_delete($table,  sql_in($id,$in) . ($and?" AND $and":""));
+		sql_delete($table,  sql_in($id,array_keys($in)) . ($and?" AND $and":""));
 		spip_log("Numeros des entrees $id supprimees dans la table $table: $in");
 	}
 	return count($in);
@@ -141,32 +141,18 @@ function optimiser_base_disparus($attente = 86400) {
 	// Auteurs
 	//
 
-	# les liens d'articles sur des auteurs effaces
+	# les liens d'objets sur des auteurs effaces
 	$res = sql_select("L.id_auteur AS id",
 		      "spip_auteurs_liens AS L
 		        LEFT JOIN spip_auteurs AS A
 		          ON L.id_auteur=A.id_auteur",
-			"L.objet='article' AND A.id_auteur IS NULL");
+			"A.id_auteur IS NULL");
 
-	$n+= optimiser_sansref('spip_auteurs_liens', 'id_auteur', $res, "objet='article'");
+	$n+= optimiser_sansref('spip_auteurs_liens', 'id_auteur', $res);
 
-	# les liens de messages sur des auteurs effaces
-	$res = sql_select("M.id_auteur AS id",
-		      "spip_auteurs_liens AS M
-		        LEFT JOIN spip_auteurs AS A
-		          ON M.id_auteur=A.id_auteur",
-			"M.objet='message' AND A.id_auteur IS NULL");
-
-	$n+= optimiser_sansref('spip_auteurs_liens', 'id_auteur', $res, "objet='message'");
-
-	# les liens de rubriques sur des auteurs effaces
-	$res = sql_select("A.id_objet AS id",
-		      "spip_auteurs_liens AS A
-		        LEFT JOIN spip_rubriques AS R
-		          ON A.id_objet=R.id_rubrique",
-			"A.objet='rubrique' AND R.id_rubrique IS NULL");
-
-	$n+= optimiser_sansref('spip_auteurs_liens', 'id_objet', $res, "objet='rubrique'");
+	include_spip('action/editer_liens');
+	// optimiser les liens de tous les auteurs vers des objets effaces
+	$n+= objet_optimiser_liens(array('document'=>'*','*'));
 
 	# effacer les auteurs poubelle qui ne sont lies a rien
 	$res = sql_select("A.id_auteur AS id",
@@ -186,25 +172,12 @@ function optimiser_base_disparus($attente = 86400) {
 	//
 	// Documents
 	//
+
+	include_spip('action/editer_liens');
+	// optimiser les liens de tous les documents vers des objets effaces
+	$n+= objet_optimiser_liens(array('document'=>'*','*'));
 	
-	# les liens des documents qui sont lies a un objet inexistant
-	$r = sql_select("DISTINCT objet","spip_documents_liens");
-	while ($t = sql_fetch($r)){
-		$type = $t['objet'];
-		$spip_table_objet = table_objet_sql($type);
-		$id_table_objet = id_table_objet($type);
-		$res = sql_select("L.id_document AS id,id_objet",
-			      "spip_documents_liens AS L
-			        LEFT JOIN $spip_table_objet AS O
-			          ON O.$id_table_objet=L.id_objet AND L.objet=".sql_quote($type),
-				"O.$id_table_objet IS NULL");
-		// sur une cle primaire composee, pas d'autres solutions que de virer un a un
-		while ($row = sql_fetch($sel)){
-			sql_delete("spip_documents_liens", array("id_document=".$row['id'],"id_objet=".$row['id_objet'],"objet=".sql_quote($type)));
-			spip_log("Entree ".$row['id']."/".$row['id_objet']."/$type supprimee dans la table spip_documents_liens");
-		}
-	}
-	
+
 	// on ne nettoie volontairement pas automatiquement les documents orphelins
 	
 	$n = pipeline('optimiser_base_disparus', array(
