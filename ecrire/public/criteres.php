@@ -1475,7 +1475,7 @@ function critere_si_dist($idb, &$boucles, $crit) {
 function critere_tableau_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '
-	$command[\'source\'][] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';
+	$command[\'source\'] = array('.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).');
 	$command[\'sourcemode\'] = \'table\';';
 }
 
