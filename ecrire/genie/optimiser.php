@@ -141,18 +141,10 @@ function optimiser_base_disparus($attente = 86400) {
 	// Auteurs
 	//
 
-	# les liens d'objets sur des auteurs effaces
-	$res = sql_select("L.id_auteur AS id",
-		      "spip_auteurs_liens AS L
-		        LEFT JOIN spip_auteurs AS A
-		          ON L.id_auteur=A.id_auteur",
-			"A.id_auteur IS NULL");
-
-	$n+= optimiser_sansref('spip_auteurs_liens', 'id_auteur', $res);
-
 	include_spip('action/editer_liens');
 	// optimiser les liens de tous les auteurs vers des objets effaces
-	$n+= objet_optimiser_liens(array('document'=>'*','*'));
+	// et depuis des auteurs effaces
+	$n+= objet_optimiser_liens(array('document'=>'*'),'*');
 
 	# effacer les auteurs poubelle qui ne sont lies a rien
 	$res = sql_select("A.id_auteur AS id",
