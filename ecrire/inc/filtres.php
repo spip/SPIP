@@ -2108,11 +2108,24 @@ function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=f
 	return $puce_statut($id_objet, $statut, $id_rubrique, $type, $ajax=false);
 }
 
-// Encoder un contexte pour l'ajax, le signer avec une cle, le crypter
-// avec le secret du site, le gziper si possible...
-// l'entree peut etre serialisee (le #ENV** des fonds ajax et ajax_stat)
-// http://doc.spip.org/@encoder_contexte_ajax
-function encoder_contexte_ajax($c,$form='', $emboite=NULL) {
+/**
+ * Encoder un contexte pour l'ajax, le signer avec une cle, le crypter
+ * avec le secret du site, le gziper si possible...
+ * l'entree peut etre serialisee (le #ENV** des fonds ajax et ajax_stat)
+ *
+ * http://doc.spip.org/@encoder_contexte_ajax
+ *
+ * @param string|array $c
+ *   contexte, peut etre un tableau serialize
+ * @param string $form
+ *   nom du formulaire eventuel
+ * @param string $emboite
+ *   contenu a emboiter dans le conteneur ajax
+ * @param string $ajaxid
+ *   ajaxid pour cibler le bloc et forcer sa mise a jour
+ * @return string
+ */
+function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 	if (is_string($c)
 	AND !is_null(@unserialize($c)))
 		$c = unserialize($c);
@@ -2143,8 +2156,13 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL) {
 	}
 	
 	if ($emboite === NULL) return $c;
-	return !trim($emboite) ? '' :  
-	"<div class='ajaxbloc env-$c'>\n$emboite</div><!-- ajaxbloc -->\n";
+	if (!trim($emboite)) return "";
+	$r = "";
+	if ($ajaxid AND is_string($ajaxid)){
+		$c .= ' ajax-id-'.$ajaxid;
+	  $r = ' data-url="'.self().'"';
+	}
+	return "<div class='ajaxbloc env-$c'$r>\n$emboite</div><!-- ajaxbloc -->\n";
 }
 
 // la procedure inverse de encoder_contexte_ajax()

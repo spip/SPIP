@@ -954,7 +954,7 @@ function balise_INCLURE_dist($p) {
 
 		$_options = array();
 		if (isset($_contexte['ajax'])) {
-			$_options[] = "'ajax'=>true";
+			$_options[] = preg_replace(",=>(.*)$,ims",'=> ($v=(\\1))?$v:true',$_contexte['ajax']);
 			unset($_contexte['ajax']);
 		}
 		if ($p->etoile) $_options[] = "'etoile'=>true";
@@ -1011,8 +1011,11 @@ function balise_MODELE_dist($p) {
 			$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 
 		$_options = memoriser_contexte_compil($p);
-		$_options = "'compil'=>array($_options), 'trim'=>true"
-		  . (isset($_contexte['ajax'])?", 'ajax'=>true":'');
+		$_options = "'compil'=>array($_options), 'trim'=>true";
+	  if (isset($_contexte['ajax'])){
+		  $_options .= ", ".preg_replace(",=>(.*)$,ims",'=> ($v=(\\1))?$v:true',$_contexte['ajax']);
+			unset($_contexte['ajax']);
+	  }
 
 		$page = sprintf(CODE_RECUPERER_FOND, $nom, 'array(' . join(',', $_contexte) .')', $_options, _q($connect));
 
