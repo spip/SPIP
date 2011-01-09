@@ -17,15 +17,15 @@ define('_ECRIRE_INC_VERSION', "1");
 # masquer les eventuelles erreurs sur les premiers define
 error_reporting(E_ALL ^ E_NOTICE);
 # compatibilite anciennes versions
-# si vous n'avez aucun fichier .php3, redefinissez a ""
-# ne concerne que le fichier mes_options.php3
-define('_EXTENSION_PHP', '.php3');
+# si vous avez encore un fichier .php3, redefinissez a ".php3"
+# concerne mes_options.php3 / mes_fonctions.php3 / inc_connect.php3
+define('_EXTENSION_PHP', '');
 #define('_EXTENSION_PHP', '');
 #mettre a true pour compatibilite PHP3
 define('_FEED_GLOBALS', false);
 
 # version PHP minimum exigee (cf. inc/utils)
-define ('_PHP_MIN', '4.4.11');
+define ('_PHP_MIN', '5.1.0');
 
 # le nom du repertoire ecrire/
 if (!defined('_DIR_RESTREINT_ABS')) define('_DIR_RESTREINT_ABS', 'ecrire/');
