@@ -216,10 +216,10 @@ function calculer_where_statut($mstatut,$liste){
 		$liste[$k] = "\\'".preg_replace(",\W,","",$v)."\\'";
 	}
   if (count($liste)==1){
-		return array($not?"'<>'":"'='", "'$mstatut'", "'".reset($liste)."'");
+		return "array(".($not?"'<>'":"'='").", '$mstatut', '".reset($liste)."')";
   }
   else {
-	  return array($not?"'NOT IN'":"'IN'", "'$mstatut'", "'(".implode(',',$liste).")'");
+	  return "array(".($not?"'NOT IN'":"'IN'").", '$mstatut', '(".implode(',',$liste).")')";
   }
 }
 
@@ -299,17 +299,17 @@ function calculer_boucle($id_boucle, &$boucles) {
 				}
 				$mstatut = $id .'.'.$statut;
 
-				if (!$GLOBALS['var_preview']) {
-					if (isset($s['post_date']) AND $s['post_date']
-						AND $GLOBALS['meta']["post_dates"] == 'non'){
-						$date = $id.'.'.preg_replace(',\W,','',$s['post_date']); // securite
-						array_unshift($boucle->where,"quete_condition_postdates('$date')");
-					}
-					array_unshift($boucle->where,calculer_where_statut($mstatut,$s['publie']));
+				if (isset($s['post_date']) AND $s['post_date']
+					AND $GLOBALS['meta']["post_dates"] == 'non'){
+					$date = $id.'.'.preg_replace(',\W,','',$s['post_date']); // securite
+					array_unshift($boucle->where,"\$GLOBALS['var_preview']?'':quete_condition_postdates('$date')");
 				}
-				else {
-					array_unshift($boucle->where,calculer_where_statut($mstatut,$s['previsu']));
-				}
+				array_unshift($boucle->where,$w=
+					"\$GLOBALS['var_preview']?"
+						.calculer_where_statut($mstatut,$s['previsu'])
+						.":"
+						.calculer_where_statut($mstatut,$s['previsu'])
+				);
 			}
 		}
 	}
