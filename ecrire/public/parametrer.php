@@ -152,16 +152,15 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 			$page['entetes']['X-Spip-Cache'] = isset($GLOBALS['delais'])?$GLOBALS['delais']:36000;
 
 		$page['contexte'] = $contexte;
+	  
 		// faire remonter le fichier source
-		//if ($GLOBALS['var_inclure'])
-
-		static $var_inclure = false;
-		if ($GLOBALS['var_inclure']){
+		static $js_inclus = false;
+		if (defined('_VAR_INCLURE') AND _VAR_INCLURE){
 			$page['sourcefile'] = $sourcefile;
 			$page['texte'] =
 				"<div class='inclure_blocs'><h6>".$page['sourcefile']."</h6>".$page['texte']."</div>"
-				. ($var_inclure?"":"<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs > h6:first-child').hover(function(){jQuery(this).parent().addClass('hover')},function(){jQuery(this).parent().removeClass('hover')})});</script>");
-			$var_inclure = true;
+				. ($js_inclus?"":"<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs > h6:first-child').hover(function(){jQuery(this).parent().addClass('hover')},function(){jQuery(this).parent().removeClass('hover')})});</script>");
+			$js_inclus = true;
 		}
 
 		// Si un modele contenait #SESSION, on note l'info dans $page

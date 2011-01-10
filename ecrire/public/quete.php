@@ -87,6 +87,8 @@ function quete_profondeur($id, $connect='') {
  * @return string
  */
 function quete_condition_postdates($champ_date, $serveur='') {
+	if (defined(_VAR_PREVIEW) AND _VAR_PREVIEW)
+		return "1=1";
 	return
 	  ($GLOBALS['meta']['date_prochain_postdate'] > time())
 			? "$champ_date<".sql_quote(date('Y-m-d H:i:s',$GLOBALS['meta']['date_prochain_postdate']),$serveur)
@@ -99,11 +101,18 @@ function quete_condition_postdates($champ_date, $serveur='') {
  *
  * @param string $mstatut
  *  le champ de la table sur lequel porte la condition
- * @param string $liste
- *  statut ou liste des statuts separes par une virgule
+ * @param string $previsu
+ *  mode previsu : statut ou liste des statuts separes par une virgule
+ * @param string $publie
+ *  mode publie : statut ou liste des statuts separes par une virgule
+ * @param string $serveur
+ *  serveur de BDD
  * @return array
  */
-function quete_condition_statut($mstatut,$liste, $serveur=''){
+function quete_condition_statut($mstatut,$previsu,$publie, $serveur=''){
+	$liste = $publie;
+	if (defined(_VAR_PREVIEW) AND _VAR_PREVIEW)
+		$liste = $previsu;
 	$not = false;
 	if (strncmp($liste,'!',1)==0){
 		$not = true;

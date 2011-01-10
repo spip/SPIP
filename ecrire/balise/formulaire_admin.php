@@ -70,9 +70,9 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	$env['divclass'] = $float;
 	$env['lang'] = admin_lang();
 	$env['calcul'] = (_request('var_mode') ? 'recalcul' : 'calcul');
-	$env['debug'] = _VAR_PREVIEW ? "" : admin_debug();
+	$env['debug'] = ((defined('_VAR_PREVIEW') AND _VAR_PREVIEW) ? "" : admin_debug());
 	$env['analyser'] = (!$env['debug'] AND !$GLOBALS['xhtml']) ? '' : admin_valider();
-	$env['inclure'] = ($GLOBALS['var_inclure']?'inclure':'');
+	$env['inclure'] = ((defined('_VAR_INCLURE') AND _VAR_INCLURE)?'inclure':'');
 
 	if (!$use_cache)
 		$env['use_cache'] = ' *';
@@ -132,7 +132,7 @@ function admin_objet()
 // http://doc.spip.org/@admin_preview
 function admin_preview($type, $id, $desc=null)
 {
-	if (_VAR_PREVIEW) return '';
+	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW) return '';
 
 	if (!$desc) {
 		$trouver_table = charger_fonction('trouver_table','base');

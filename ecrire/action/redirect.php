@@ -19,7 +19,8 @@ function action_redirect_dist()
 	$type = _request('type');
 	if (!preg_match('/^\w+$/', $type)) return;
 	if ($m = _request('var_mode')) {
-		$GLOBALS['var_urls'] = true; // forcer la mise a jour de l'url de cet objet !
+		// forcer la mise a jour de l'url de cet objet !
+		if (!defined('_VAR_URLS')) define('_VAR_URLS',true);
 		$m = 'var_mode='.urlencode($m);
 	}
 	$h = generer_url_entite_absolue(intval(_request('id')), $type, $m, '', true);
