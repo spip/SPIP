@@ -282,19 +282,19 @@ class IterateurDATA implements Iterator {
 					if ($r[1] == 'cle'){
 						ksort($this->tableau);
 					}
+					# {par hasard}
+					else if ($r[1] == 'alea') {
+						$k = array_keys($this->tableau);
+						shuffle($k);
+						$v = array();
+						foreach($k as $cle)
+							$v[$cle] = $this->tableau[$cle];
+						$this->tableau = $v;
+					}
 					else {
 						# {par valeur}
 						if ($r[1] == 'valeur')
 							$tv = '%s';
-						# {par hasard}
-						else if ($r[1] == 'alea') {
-							if (!$aleas++)
-								$sortfunc .= 'static $aleas = array();';
-							$tv = '(isset($aleas['.$aleas.'][$v=crc32(serialize(%s))])
-							? $aleas['.$aleas.'][$v]
-							: ($aleas['.$aleas.'][$v]=rand(0,1))
-							)';
-						}
 						# {par valeur/xx/yy} ??
 						else
 							$tv = 'table_valeur(%s, '.var_export($r[1],true).')';
