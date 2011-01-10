@@ -1524,15 +1524,13 @@ function spip_initialisation_suite() {
 function init_var_mode(){
 	static $done = false;
 	if (!$done) {
-		// On fixe $GLOBALS['var_mode']
-		$GLOBALS['var_mode'] = false;
 
 		if (isset($_GET['var_mode'])) {
 			// tout le monde peut calcul/recalcul
 			if ($_GET['var_mode'] == 'calcul'
-			OR $_GET['var_mode'] == 'recalcul')
-				$GLOBALS['var_mode'] = $_GET['var_mode'];
-
+			OR $_GET['var_mode'] == 'recalcul') {
+				if (!defined('_VAR_MODE')) define('_VAR_MODE',$_GET['var_mode']);
+			}
 			// preview, debug, blocs, urls et images necessitent une autorisation
 			else if (in_array($_GET['var_mode'],array('preview','debug','inclure','urls','images'))) {
 				include_spip('inc/autoriser');
@@ -1546,39 +1544,39 @@ function init_var_mode(){
 							// basculer sur les criteres de preview dans les boucles
 							if (!defined('_VAR_PREVIEW')) define('_VAR_PREVIEW',true);
 							// forcer le calcul
-							$GLOBALS['var_mode'] = 'calcul';
+							if (!defined('_VAR_MODE')) define('_VAR_MODE','recalcul');
 							// et ne pas enregistrer de cache
 							if (!defined('_VAR_NOCACHE')) define('_VAR_NOCACHE',true);
 							break;
 						case 'inclure':
 							// forcer le compilo et ignorer les caches existants
-							$GLOBALS['var_mode'] = 'calcul';
+							if (!defined('_VAR_MODE')) define('_VAR_MODE','calcul');
 							if (!defined('_VAR_INCLURE')) define('_VAR_INCLURE',true);
 							// et ne pas enregistrer de cache
 							if (!defined('_VAR_NOCACHE')) define('_VAR_NOCACHE',true);
 							break;
 						case 'urls':
 							// forcer le compilo et ignorer les caches existants
-							$GLOBALS['var_mode'] = 'calcul';
-							define('_VAR_URLS',true);
+							if (!defined('_VAR_MODE')) define('_VAR_MODE','calcul');
+							if (!defined('_VAR_URLS')) define('_VAR_URLS',true);
 							break;
 						case 'images':
 							// forcer le compilo et ignorer les caches existants
-							$GLOBALS['var_mode'] = 'calcul';
+							if (!defined('_VAR_MODE')) define('_VAR_MODE','calcul');
 							// indiquer qu'on doit recalculer les images
 							if (!defined('_VAR_IMAGES')) define('_VAR_IMAGES',true);
 							break;
 						case 'debug':
-							$GLOBALS['var_mode'] = 'debug';
+							if (!defined('_VAR_MODE')) define('_VAR_MODE','debug');
 							// et ne pas enregistrer de cache
 							if (!defined('_VAR_NOCACHE')) define('_VAR_NOCACHE',true);
 							break;
 						default :
-							$GLOBALS['var_mode'] = $_GET['var_mode'];
+							if (!defined('_VAR_MODE')) define('_VAR_MODE',$_GET['var_mode']);
 							break;
 					}
 					spip_log($GLOBALS['visiteur_session']['nom']
-						. " ".$GLOBALS['var_mode']);
+						. " "._VAR_MODE);
 				}
 				// pas autorise ?
 				else {
@@ -1593,6 +1591,7 @@ function init_var_mode(){
 					// sinon tant pis
 				}
 			}
+			if (!defined('_VAR_MODE')) define('_VAR_MODE',false);
 		}
 		$done = true;
 	}

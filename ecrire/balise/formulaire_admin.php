@@ -187,8 +187,7 @@ function admin_debug()
 			(isset($GLOBALS['forcer_debug']) AND $GLOBALS['forcer_debug'])
 			OR (isset($GLOBALS['bouton_admin_debug']) AND $GLOBALS['bouton_admin_debug'])
 			OR (
-				isset($GLOBALS['var_mode'])
-				AND $GLOBALS['var_mode'] == 'debug'
+				defined('_VAR_MODE') AND _VAR_MODE == 'debug'
 				AND $_COOKIE['spip_debug']
 			)
 		) AND autoriser('debug')

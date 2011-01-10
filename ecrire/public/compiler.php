@@ -917,7 +917,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 			$boucle->descr['squelette']);
 	}
 	
-	$debug = ($boucles AND isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode']=='debug');
+	$debug = ($boucles AND defined('_VAR_MODE') AND _VAR_MODE == 'debug');
 	if ($debug) {
 		include_spip('public/decompiler');
 		foreach($boucles as $id => $boucle) {
@@ -946,7 +946,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	static $trouver_table;
 	spip_timer('calcul_skel');
 
-	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
+	if (defined('_VAR_MODE') AND _VAR_MODE == 'debug') {
 		$GLOBALS['debug_objets']['squelette'][$nom] = $descr['squelette'];
 		$GLOBALS['debug_objets']['sourcefile'][$nom] = $sourcefile;
 

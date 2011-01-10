@@ -83,7 +83,7 @@ function sql_select ($select = array(), $from = array(), $where = array(),
 	$f = sql_serveur('select', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
 
-	$debug = (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug' );
+	$debug = (defined('_VAR_MODE') AND _VAR_MODE == 'debug');
 	if (($option !== false) AND !$debug) {
 		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, is_array($option) ? true : $option);
 	} else {

@@ -55,7 +55,7 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 	$select = ((!isset($GLOBALS['forcer_lang']) OR !$GLOBALS['forcer_lang']) AND $lang <> $GLOBALS['spip_lang']);
 	if ($select) $select = lang_select($lang);
 
-	$debug = (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'));
+	$debug = (defined('_VAR_MODE') && _VAR_MODE == 'debug');
 
 	$styliser = charger_fonction('styliser', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) =

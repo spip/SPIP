@@ -118,7 +118,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		$html = preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
 	}
 
-	if (_VAR_PREVIEW AND $html) {
+	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW AND $html) {
 		include_spip('inc/filtres'); // pour http_img_pack
 		$x = _T('previsualisation');
 		$x = http_img_pack('naviguer-site.png', $x) . '&nbsp;' . majuscules($x); 
