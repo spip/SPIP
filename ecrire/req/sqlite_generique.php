@@ -374,7 +374,7 @@ function spip_sqlite_create($nom, $champs, $cles, $autoinc=false, $temporary=fal
 function spip_sqlite_create_base($nom, $serveur='', $option=true) {
 	$f = _DIR_DB . $nom . '.sqlite';
 	if (_sqlite_is_version(2, '', $serveur)) {
-		$ok = new sqlite_open($f, _SQLITE_CHMOD, $err);
+		$ok = sqlite_open($f, _SQLITE_CHMOD, $err);
 	} else {
 		$ok = new PDO("sqlite:$f");
 	}
