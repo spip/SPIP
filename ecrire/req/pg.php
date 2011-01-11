@@ -1078,7 +1078,7 @@ function spip_pg_showbase($match, $serveur='',$requeter=true)
 {
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$link = $connexion['link'];
-	$connexion['last'] = $q = "SELECT tablename FROM pg_tables WHERE tablename ILIKE '$match'";
+	$connexion['last'] = $q = "SELECT tablename FROM pg_tables WHERE tablename ILIKE "._q($match);
 	return spip_pg_query_simple($link, $q);
 }
 
