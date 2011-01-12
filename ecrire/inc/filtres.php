@@ -1912,12 +1912,17 @@ function urls_absolues_css($contenu, $source) {
 		create_function('$x',
 			'return "url(\"".suivre_lien("'.$path.'",$x[1])."\")";'
 		), $contenu);
-	// pour les progid:DXImageTransform.Microsoft.AlphaImageLoader(src=...,..)
+
+  // les directives filter ... progid:DXImageTransform.Microsoft.AlphaImageLoader(src=...,..)
+	// de IEx prennent des urls relatives a la page, et non a la css
+	// ne pas y toucher.
+	/*
 	$contenu = preg_replace_callback(
 		";\(\s*src=['\"]?([^'\"/][^:]*)['\"]?\s*(,|\));Uims",
 		create_function('$x',
 			'return "(src=\"".suivre_lien("'.$path.'",$x[1])."\"".$x[2];'
 		), $contenu);
+	 */
 	return $contenu;
 }
 
