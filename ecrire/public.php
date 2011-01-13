@@ -121,11 +121,13 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	// type tableau pour y mettre des choses au besoin.
 	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
 
-	// Mettre le Content-Type Html si manquant ou debug
+	// Mettre le Content-Type Html si manquant 
+	// Idem si debug, avec retrait du Content-Diposition pour voir le voir
 
 	if ($debug OR !isset($page['entetes']['Content-Type'])) {
 		$page['entetes']['Content-Type'] = 
 			"text/html; charset=" . $GLOBALS['meta']['charset'];
+		if ($debug) unset($page['entetes']['Content-Disposition']);
 		$html = true;
 	} else {
 		$html = preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
