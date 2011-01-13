@@ -21,6 +21,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // http://doc.spip.org/@public_styliser_dist
 function public_styliser_dist($fond, $contexte, $lang='', $connect='', $ext='html') {
 
+	// s'assurer que le fond et licite
+	// car il peut etre construit a partir d'une variable d'environnement
+	if (strpos($fond,"../")!==false OR strncmp($fond,'/',1)==0)
+		$fond = "404";
+  
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$id_rubrique = 0;
 	// Chercher le fond qui va servir de squelette
