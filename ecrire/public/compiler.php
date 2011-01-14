@@ -1099,7 +1099,9 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			// laquelle a une definition par defaut
 			if (!function_exists($f)) $f = 'boucle_DEFAUT';
 			if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
-			$req = "\n\n\tstatic \$command = array();\n\t\$command['connect'] = " .
+			$req = "\n\n\tstatic \$command = array();\n\t" .
+					"static \$connect;\n\t" .
+					"\$command['connect'] = \$connect = " .
 				_q($boucle->sql_serveur) .
 				";" .
 				$f($id, $boucles);
