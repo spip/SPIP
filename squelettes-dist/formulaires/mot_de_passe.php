@@ -24,6 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function formulaires_mot_de_passe_charger_dist($id_auteur=null){
 
+	include_spip('base/abstract_sql');
 	$valeurs = array();
 	if ($id_auteur=intval($id_auteur)) {
 		$id_auteur = sql_getfetsel('id_auteur','spip_auteurs',array('id_auteur='.intval($id_auteur),"statut<>'5poubelle'","pass<>''"));
