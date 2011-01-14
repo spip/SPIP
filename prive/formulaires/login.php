@@ -16,7 +16,8 @@ include_spip('base/abstract_sql');
 
 function is_url_prive($cible){
 	include_spip('inc/filtres_mini');
-	$path = parse_url(tester_url_absolue($cible)?$cible:url_absolue($cible),PHP_URL_PATH);
+	$path = parse_url(tester_url_absolue($cible)?$cible:url_absolue($cible));
+	$path = (isset($path['path'])?$path['path']:'');
 	return strncmp(substr($path,-strlen(_DIR_RESTREINT_ABS)), _DIR_RESTREINT_ABS, strlen(_DIR_RESTREINT_ABS))==0;
 }
 
