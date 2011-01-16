@@ -656,6 +656,7 @@ prive/modeles/emb.html -text
 prive/modeles/formulaire.html -text
 prive/modeles/image.html -text
 prive/modeles/img.html -text
+prive/modeles/mail_inscription.html -text
 prive/modeles/pagination.html -text
 prive/modeles/pagination_page.html -text
 prive/modeles/pagination_page_precedent_suivant.html -text
