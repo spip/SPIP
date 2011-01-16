@@ -663,7 +663,6 @@ prive/modeles/pagination_precedent_suivant.html -text
 prive/modeles/pagination_prive.html -text
 prive/modeles/paginationitem.html -text
 prive/modeles/text.html -text
-prive/modeles/typo.html -text
 prive/modeles/video.html -text
 prive/puce_prive.gif -text
 prive/puce_prive_rtl.gif -text
@@ -677,7 +676,6 @@ prive/squelettes/contenu/admin_tech.html -text
 prive/squelettes/contenu/admin_vider.html -text
 prive/squelettes/contenu/auteurs.html -text
 prive/squelettes/contenu/auteurs_fonctions.php -text
-prive/squelettes/contenu/charte.html -text
 prive/squelettes/contenu/configurer.html -text
 prive/squelettes/contenu/configurer_avancees.html -text
 prive/squelettes/contenu/configurer_contenu.html -text
@@ -712,7 +710,6 @@ prive/squelettes/navigation/visiteurs.html -text
 prive/squelettes/objet.html -text
 prive/squelettes/page.html -text
 prive/squelettes/structure.html -text
-prive/squelettes/top/charte.html -text
 prive/squelettes/top/configurer_langage.html -text
 prive/squelettes/top/configurer_preferences.html -text
 prive/squelettes/top/dist.html -text
