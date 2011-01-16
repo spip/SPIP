@@ -194,6 +194,16 @@ function set_request($var, $val = NULL, $c=false) {
 	return false; # n'affecte pas $c
 }
 
+
+/**
+ * Tester si une url est absolue
+ * @param  $url
+ * @return bool
+ */
+function tester_url_absolue($url){
+	return preg_match(";^([a-z]+:)?//;Uims",trim($url))?true:false;
+}
+
 //
 // Prend une URL et lui ajoute/retire un parametre.
 // Exemples : [(#SELF|parametre_url{suite,18})] (ajout)
@@ -1305,8 +1315,15 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 			// si jamais c'est de la mutu avec sous rep, on est perdu si on se fie
 			// a spip.php qui est a la racine du spip, et vue qu'on sait pas se reperer
 			// s'en remettre a l'adresse du site. alea jacta est.
-			OR $ti!==_NOM_TEMPORAIRES_INACCESSIBLES)
-			$uri_ref = (isset($GLOBALS['meta']['adresse_site'])?parse_url($GLOBALS['meta']['adresse_site'],PHP_URL_PATH).'/':'');
+			OR $ti!==_NOM_TEMPORAIRES_INACCESSIBLES){
+
+			if (isset($GLOBALS['meta']['adresse_site'])) {
+				$uri_ref = parse_url($GLOBALS['meta']['adresse_site']);
+				$uri_ref = $uri_ref['path'].'/';
+			}
+		  else
+			  $uri_ref = "";
+		}
 		if (!$uri OR !$uri_ref)
 			$GLOBALS['profondeur_url'] = 0;
 		else {
