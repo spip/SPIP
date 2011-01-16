@@ -13,8 +13,13 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function securiser_redirect_action($redirect){
-	if (tester_url_absolue($redirect) AND !defined('_AUTORISER_ACTION_ABS_REDIRECT'))
-		$redirect = "";
+	if (tester_url_absolue($redirect) AND !defined('_AUTORISER_ACTION_ABS_REDIRECT')){
+		$base = $GLOBALS['meta']['adresse_site']."/";
+		if (strlen($base) AND strncmp($redirect,$base,strlen($base))==0)
+			$redirect = substr($redirect,strlen($base));
+	  else
+		  $redirect = "";
+	}
 	return $redirect;
 }
 
