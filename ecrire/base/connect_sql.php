@@ -60,7 +60,11 @@ function spip_connect($serveur='', $version='') {
 		if (!isset($GLOBALS['db_ok'])) {
 		  // fera mieux la prochaine fois
 			if ($install) return false;
-			spip_log("spip_connect: serveur $index mal defini dans '$f'.");
+			if ($f AND $readable)
+				spip_log("spip_connect: fichier de connexion '$f' OK.");
+			else
+				spip_log("spip_connect: fichier de connexion '$f' non trouve");
+			spip_log("spip_connect: echec connexion ou serveur $index mal defini dans '$f'.");
 			// ne plus reessayer si ce n'est pas l'install
 			return $connexions[$index]=false;
 		}
@@ -155,6 +159,7 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 	if (@file_exists($f)
 	AND (time() - @filemtime($f) < 30)
 	AND !defined('_ECRIRE_INSTALL')) {
+		spip_log("Echec : $f recent. Pas de tentative de connexion");
 		return;
 	}
 	if (!$prefixe)
@@ -179,9 +184,7 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 	// En cas d'indisponibilite du serveur, eviter de le bombarder
 	if (!defined('_ECRIRE_INSTALL')) {
 		@touch($f);
-		$err = "Echec connexion $host $port $login $db";
-		spip_log($err);
-		spip_log($err, $type);
+		spip_log("Echec connexion serveur $type : host[$host] port[$port] login[$login] base[$db]", $type);
 	}
 }
 
