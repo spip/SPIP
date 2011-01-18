@@ -21,7 +21,6 @@ function protege_champ($texte){
 		if (preg_match(",^[abis]:\d+[:;],", $texte) AND unserialize($texte)!=false)
 			return $texte;
 		$texte = entites_html($texte);
-		$texte = str_replace("'","&#39;",$texte);
 	}
 	return $texte;
 }
