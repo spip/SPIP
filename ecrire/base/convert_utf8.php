@@ -19,7 +19,7 @@ function convert_utf8_init($tables_a_convertir)
 	$charset_source = $GLOBALS['meta']['charset'];
 	ecrire_meta('charset', 'utf-8');
 	foreach ($tables_a_convertir as $table => $champ) {
-		spip_log("demande update charset table $table ($champ)");
+		spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "demande update charset table $table ($champ)");
 		spip_query("UPDATE $table SET $champ = CONCAT('<CONVERT ".$charset_source.">', $champ)	WHERE $champ NOT LIKE '<CONVERT %'");
 	}
 

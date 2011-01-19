@@ -259,7 +259,7 @@ function base_liste_table_for_dump($exclude_tables = array()){
 function base_vider_tables_destination_copie($tables, $exlure_tables = array(), $serveur=''){
 	$trouver_table = charger_fonction('trouver_table', 'base');
 
-	spip_log('Vider '.count($tables) . " tables sur serveur '$serveur' : " . join(', ', $tables),'base');
+	spip_log(_LOG_GRAVITE_INFO_IMPORTANTE,'Vider '.count($tables) . " tables sur serveur '$serveur' : " . join(', ', $tables),'base');
 	foreach($tables as $table){
 		// sur le serveur principal, il ne faut pas supprimer l'auteur loge !
 		if (($table!='spip_auteurs') OR $serveur!=''){
@@ -275,7 +275,7 @@ function base_vider_tables_destination_copie($tables, $exlure_tables = array(), 
 	// sur le serveur principal, il ne faut pas supprimer l'auteur loge !
 	// Bidouille pour garder l'acces admin actuel pendant toute la restauration
 	if ($serveur=='') {
-		spip_log('Conserver copieur '.$GLOBALS['visiteur_statut']['id_auteur'] . " dans id_auteur=0 pour le serveur '$serveur'",'dump');
+		spip_log(_LOG_GRAVITE_INFO_IMPORTANTE,'Conserver copieur '.$GLOBALS['visiteur_statut']['id_auteur'] . " dans id_auteur=0 pour le serveur '$serveur'",'dump');
 		sql_delete("spip_auteurs", "id_auteur=0",$serveur);
 		// utiliser le champ webmestre pour stocker l'ancien id ne marchera pas si l'id comporte plus de 3 chiffres...
 		sql_updateq('spip_auteurs', array('id_auteur'=>0, 'webmestre'=>$GLOBALS['visiteur_statut']['id_auteur']), "id_auteur=".intval($GLOBALS['visiteur_statut']['id_auteur']),array(),$serveur);
@@ -301,11 +301,11 @@ function base_detruire_copieur_si_besoin($serveur='')
 	// rien a faire si ce n'est pas le serveur principal !
 	if ($serveur=='') {
 		if (sql_countsel("spip_auteurs", "id_auteur<>0")) {
-			spip_log("Detruire copieur id_auteur=0 pour le serveur '$serveur'",'dump');
+			spip_log(_LOG_GRAVITE_INFO_IMPORTANTE,"Detruire copieur id_auteur=0 pour le serveur '$serveur'",'dump');
 			sql_delete("spip_auteurs", "id_auteur=0", $serveur);
 		}
 		else {
-			spip_log("Restaurer copieur id_auteur=0 pour le serveur '$serveur' (aucun autre auteur en base)",'dump');
+			spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "Restaurer copieur id_auteur=0 pour le serveur '$serveur' (aucun autre auteur en base)",'dump');
 			sql_update('spip_auteurs', array('id_auteur'=>'webmestre', 'webmestre'=>"'oui'"), "id_auteur=0");
 		}
 	}
@@ -334,13 +334,13 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
 		}
 		else {
 			sql_drop_table($table, '', $serveur_dest);
-			spip_log("drop table '$table' sur serveur '$serveur_dest'",'dump');
+			spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "drop table '$table' sur serveur '$serveur_dest'",'dump');
 		}
 		$desc_dest = false;
 	}
 	// si la table n'existe pas dans la destination, la creer a l'identique !
 	if (!$desc_dest) {
-		spip_log("creation '$table' sur serveur '$serveur_dest'",'dump');
+		spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "creation '$table' sur serveur '$serveur_dest'",'dump');
 		include_spip('base/create');
 		creer_ou_upgrader_table($table, $desc, 'auto', $upgrade,$serveur_dest);
 		$desc_dest = sql_showtable($table,false,$serveur_dest);
@@ -388,10 +388,10 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 	$fonction_base_inserer = isset($options['fonction_base_inserer'])?$options['fonction_base_inserer']:'base_inserer_copie';
 	$desc_tables_dest = isset($options['desc_tables_dest'])?$options['desc_tables_dest']:array();
 
-	spip_log("Copier ".count($tables)." tables de '$serveur_source' vers '$serveur_dest'",'dump');
+	spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "Copier ".count($tables)." tables de '$serveur_source' vers '$serveur_dest'",'dump');
 
 	if (!function_exists($fonction_base_inserer)) {
-		spip_log("Fonction '$fonction_base_inserer' inconnue. Abandon",'dump');
+		spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "Fonction '$fonction_base_inserer' inconnue. Abandon",'dump');
 		return true; // echec mais on a fini, donc true
 	}
 	if (!lire_fichier($status_file, $status)
@@ -410,7 +410,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 		ecrire_fichier($status_file,serialize($status));
 	}
 
-	spip_log("Tables a copier :".implode(", ",$tables),'dump');
+	spip_log(_LOG_GRAVITE_INFO, "Tables a copier :".implode(", ",$tables),'dump');
 
 	// les tables auteurs et meta doivent etre copiees en dernier !
 	if (in_array('spip_auteurs',$tables)){
@@ -452,7 +452,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 					}
 					if ($n == $status['tables_copiees'][$table])
 						break;
-					spip_log("recopie $table ".$status['tables_copiees'][$table],'dump');
+					spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "recopie $table ".$status['tables_copiees'][$table],'dump');
 					if ($callback_progression)
 						$callback_progression($status['tables_copiees'][$table],0,$table);
 					ecrire_fichier($status_file,serialize($status));
@@ -461,11 +461,11 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 				}
 				if ($drop_source) {
 					sql_drop_table($table,'',$serveur_source);
-					spip_log("drop $table sur serveur source '$serveur_source'",'dump');
+					spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "drop $table sur serveur source '$serveur_source'",'dump');
 				}
 				$status['tables_copiees'][$table]=($status['tables_copiees'][$table]?-$status['tables_copiees'][$table]:"zero");
 				ecrire_fichier($status_file,serialize($status));
-				spip_log("tables_recopiees ".implode(',',$status['tables_copiees']),'dump');
+				spip_log(_LOG_GRAVITE_INFO, "tables_recopiees ".implode(',',$status['tables_copiees']),'dump');
 				if ($callback_progression)
 					$callback_progression($status['tables_copiees'][$table],$status['tables_copiees'][$table],$table);
 			}

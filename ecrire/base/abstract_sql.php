@@ -43,7 +43,7 @@ function sql_get_charset($charset, $serveur='', $option=true){
 		if (function_exists($f=@$desc['get_charset'])) 
 			if ($f($c, $serveur, $option!==false)) return $c;
 	}
-	spip_log("SPIP ne connait pas les Charsets disponibles sur le serveur $serveur. Le serveur choisira seul.");
+	spip_log(_LOG_GRAVITE_AVERTISSEMENT, "SPIP ne connait pas les Charsets disponibles sur le serveur $serveur. Le serveur choisira seul.");
 	return false;
 }
 
