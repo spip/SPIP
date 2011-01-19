@@ -427,6 +427,6 @@ if (!headers_sent()) {
 		header(_HEADER_COMPOSED_BY . " @ www.spip.net");
 }
 
-# spip_log(_LOG_GRAVITE_DEBUG,$_SERVER['REQUEST_METHOD'].' '.self() . ' - '._FILE_CONNECT);
+spip_log($_SERVER['REQUEST_METHOD'].' '.self() . ' - '._FILE_CONNECT,_LOG_DEBUG);
 
 ?>

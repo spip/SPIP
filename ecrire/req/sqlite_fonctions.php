@@ -79,7 +79,7 @@ function _sqlite_init_functions(&$sqlite){
 		_sqlite_add_function($sqlite, $f, $r);
 	}
 
-	#spip_log(_LOG_GRAVITE_DEBUG,'functions sqlite chargees ','sqlite');
+	#spip_log('functions sqlite chargees ','sqlite.'._LOG_DEBUG);
 }
 
 // permet au besoin de charger des fonctions ailleurs par _sqlite_init_functions();
@@ -108,6 +108,7 @@ function _sqlite_func_ceil($a) {
 // http://doc.spip.org/@_sqlite_func_concat
 function _sqlite_func_concat ($a, $b) {
     return $a.$b;
+    return join('',$args);
 }
 
 
@@ -165,7 +166,7 @@ function _sqlite_func_least () {
 	for ($i = 0; $i < $numargs; $i++) {
 		if ($arg_list[$i] < $least) $least=$arg_list[$i];
 	}
-	#spip_log(_LOG_GRAVITE_DEBUG,"Passage avec LEAST : $least",'sqlite');
+	#spip_log("Passage avec LEAST : $least",'sqlite.'._LOG_DEBUG);
 	return $least;
 }
 
@@ -179,7 +180,7 @@ function _sqlite_func_left ($s, $lenght) {
 // http://doc.spip.org/@_sqlite_func_now
 function _sqlite_func_now(){
 	$result = date("Y-m-d H:i:s");
-	#spip_log(_LOG_GRAVITE_DEBUG,"Passage avec NOW : $result",'sqlite');
+	#spip_log("Passage avec NOW : $result",'sqlite.'._LOG_DEBUG);
 	return $result;
 }
 
@@ -194,7 +195,7 @@ function _sqlite_func_month ($d) {
 // http://doc.spip.org/@_sqlite_func_preg_replace
 function _sqlite_func_preg_replace($quoi, $cherche, $remplace) {
 	$return = preg_replace('%'.$cherche.'%', $remplace, $quoi);
-	#spip_log(_LOG_GRAVITE_DEBUG,"preg_replace : $quoi, $cherche, $remplace, $return",'sqlite');
+	#spip_log("preg_replace : $quoi, $cherche, $remplace, $return",'sqlite.'._LOG_DEBUG);
 	return $return;
 }
 
@@ -214,7 +215,7 @@ function _sqlite_func_right ($s, $length) {
 // http://doc.spip.org/@_sqlite_func_regexp_match
 function _sqlite_func_regexp_match($cherche, $quoi) {
 	$return = preg_match('%'.$cherche.'%', $quoi);
-	#spip_log(_LOG_GRAVITE_DEBUG,"regexp_replace : $quoi, $cherche, $remplace, $return",'sqlite');
+	#spip_log("regexp_replace : $quoi, $cherche, $remplace, $return",'sqlite.'._LOG_DEBUG);
 	return $return;
 }
 
@@ -226,7 +227,7 @@ function _sqlite_func_strftime($date, $conv){
 // http://doc.spip.org/@_sqlite_func_to_days
 function _sqlite_func_to_days ($d) {
 	$result = date("z", _sqlite_func_unix_timestamp($d));
-	#spip_log(_LOG_GRAVITE_DEBUG,"Passage avec TO_DAYS : $d, $result",'sqlite');
+	#spip_log("Passage avec TO_DAYS : $d, $result",'sqlite.'._LOG_DEBUG);
 	return $result;
 }
 
@@ -234,7 +235,7 @@ function _sqlite_func_to_days ($d) {
 // http://doc.spip.org/@_sqlite_func_unix_timestamp
 function _sqlite_func_unix_timestamp($d) {
 	//2005-12-02 20:53:53
-	#spip_log(_LOG_GRAVITE_DEBUG,"Passage avec UNIX_TIMESTAMP : $d",'sqlite');
+	#spip_log("Passage avec UNIX_TIMESTAMP : $d",'sqlite.'._LOG_DEBUG);
 	// mktime ( [int hour [, int minute [, int second [, int month [, int day [, int year [, int is_dst]]]]]]] )
 	if (!$d) return mktime();
 	return strtotime($d);

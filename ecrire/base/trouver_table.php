@@ -110,7 +110,7 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 			$desc = sql_showtable($nom_sql, $table_spip, $serveur);
 			if (!$desc OR !$desc['field']) {
 				if (!$fdesc) {
-					spip_log(_LOG_GRAVITE_INFO_IMPORTANTE,"trouver_table: table inconnue '$serveur' '$nom'");
+					spip_log("trouver_table: table inconnue '$serveur' '$nom'",_LOG_INFO_IMPORTANTE);
 					return null;
 				}
 				// on ne sait pas lire la structure de la table :
