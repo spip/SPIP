@@ -154,6 +154,9 @@ if (window.jQuery)(function($){
 				$.cookie('spip_contenu_formulaire_#ENV{_sign}', s);
 			else
 				$.cookie('spip_contenu_formulaire_#ENV{_sign}', null);
+		}else{
+			/* on vide le champs texte après le submit car refuser_traiter_formulaire_ajax(); va reposter le formulaire, et donc reposer un cookie car saveauto sera false la seconde fois. */
+			$('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}').val('');
 		}
 	});
 }(jQuery));
