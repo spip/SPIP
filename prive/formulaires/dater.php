@@ -144,50 +144,52 @@ function formulaires_dater_verifier_dist($objet, $id_objet, $retour=''){
 function formulaires_dater_traiter_dist($objet, $id_objet, $retour=''){
 	$res = array('editable'=>' ');
 
-	$_id_objet = id_table_objet($objet);
-	$table = table_objet($objet);
-	$trouver_table = charger_fonction('trouver_table','base');
-	$desc = $trouver_table($table);
+	if (_request('changer')){
+		$_id_objet = id_table_objet($objet);
+		$table = table_objet($objet);
+		$trouver_table = charger_fonction('trouver_table','base');
+		$desc = $trouver_table($table);
 
-	if (!$desc)
-		return array('message_erreur'=>_L('erreur')); #impossible en principe
+		if (!$desc)
+			return array('message_erreur'=>_L('erreur')); #impossible en principe
 
-	include_spip('public/interfaces');
-	$champ_date = @$GLOBALS['table_date'][$table];
-	if (!$champ_date) $champ_date = 'date';
+		include_spip('public/interfaces');
+		$champ_date = @$GLOBALS['table_date'][$table];
+		if (!$champ_date) $champ_date = 'date';
 
-	$set = array();
+		$set = array();
 
-	include_spip('inc/date');
-	if (!$d = dater_recuperer_date_saisie(_request('date_jour')))
-		$d = array(date('Y'),date('m'),date('d'));
-	if (!$h = dater_recuperer_heure_saisie(_request('date_heure')))
-		$h = array(0,0);
+		include_spip('inc/date');
+		if (!$d = dater_recuperer_date_saisie(_request('date_jour')))
+			$d = array(date('Y'),date('m'),date('d'));
+		if (!$h = dater_recuperer_heure_saisie(_request('date_heure')))
+			$h = array(0,0);
 
-	$set[$champ_date] = format_mysql_date($d[0], $d[1], $d[2], $h[0], $h[1]);
+		$set[$champ_date] = format_mysql_date($d[0], $d[1], $d[2], $h[0], $h[1]);
 
-	if (isset($desc['field']['date_redac'])){
-		if (!_request('date_redac_jour') OR _request('sans_redac'))
-			$set['date_redac'] = format_mysql_date(0,0,0,0,0,0);
-		else {
-			if (!$d = dater_recuperer_date_saisie(_request('date_redac_jour')))
-				$d = array(date('Y'),date('m'),date('d'));
-			if (!$h = dater_recuperer_heure_saisie(_request('date_redac_heure')))
-				$h = array(0,0);
-			$set['date_redac'] = format_mysql_date($d[0], $d[1], $d[2], $h[0], $h[1]);
+		if (isset($desc['field']['date_redac'])){
+			if (!_request('date_redac_jour') OR _request('sans_redac'))
+				$set['date_redac'] = format_mysql_date(0,0,0,0,0,0);
+			else {
+				if (!$d = dater_recuperer_date_saisie(_request('date_redac_jour')))
+					$d = array(date('Y'),date('m'),date('d'));
+				if (!$h = dater_recuperer_heure_saisie(_request('date_redac_heure')))
+					$h = array(0,0);
+				$set['date_redac'] = format_mysql_date($d[0], $d[1], $d[2], $h[0], $h[1]);
+			}
 		}
-	}
 
-	include_spip('action/editer_'.$objet);
-	include_spip('inc/modifier');
-	if (function_exists($f=$objet."s_set")
-		OR function_exists($f="instituer_".$objet)
-		OR function_exists($f="revision_".$objet)
-	){
-		$f($id_objet,$set);
-	}
-	else {
-		modifier_contenu($objet, $id_objet, array(), $set);
+		include_spip('action/editer_'.$objet);
+		include_spip('inc/modifier');
+		if (function_exists($f=$objet."s_set")
+			OR function_exists($f="instituer_".$objet)
+			OR function_exists($f="revision_".$objet)
+		){
+			$f($id_objet,$set);
+		}
+		else {
+			modifier_contenu($objet, $id_objet, array(), $set);
+		}
 	}
 
 	if ($retour)
