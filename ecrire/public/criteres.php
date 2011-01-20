@@ -279,13 +279,22 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 	$arg = calculer_argument_precedent($idb, 'id_rubrique', $boucles);
 
 	//Trouver une jointure
+	$champ = "id_rubrique";
 	$desc = $boucle->show;
 	//Seulement si necessaire
-	if (!array_key_exists('id_rubrique', $desc['field'])) {
-		$cle = trouver_jointure_champ('id_rubrique', $boucle);
-	} else $cle = $boucle->id_table;
+	if (!array_key_exists($champ, $desc['field'])) {
+		$cle = trouver_jointure_champ($champ, $boucle);
+		$trouver_table = charger_fonction("trouver_table","base");
+		$desc = $trouver_table($boucle->from[$cle]);
+	  if (count(trouver_champs_decomposes($champ,$desc))>1){
+		  $decompose = decompose_champ_id_objet($champ);
+			$champ = array_shift($decompose);
+	    $boucle->where[] = array("'='",_q($cle.".".reset($decompose)),'"'.sql_quote(end($decompose)).'"');
+	  }
+	}
+	else $cle = $boucle->id_table;
 
-	$c = "sql_in('$cle" . ".id_rubrique', calcul_branche_in($arg)"
+	$c = "sql_in('$cle" . ".$champ', calcul_branche_in($arg)"
 	  . ($not ? ", 'NOT'" : '') . ")";
 	$boucle->where[]= !$crit->cond ? $c :
 	  ("($arg ? $c : " . ($not ? "'0=1'" : "'1=1'") .')');
