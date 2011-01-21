@@ -191,27 +191,15 @@ function declarer_interfaces(){
 
 	$table_des_tables['articles']='articles';
 	$table_des_tables['auteurs']='auteurs';
-	$table_des_tables['documents']='documents';
-	$table_des_tables['types_documents']='types_documents';
 	$table_des_tables['rubriques']='rubriques';
 	$table_des_tables['hierarchie']='rubriques';
-
-	$exceptions_des_tables['documents']['type_document']=array('types_documents'
-	, 'titre');
-	$exceptions_des_tables['documents']['extension_document']=array('types_documents', 'extension');
-	$exceptions_des_tables['documents']['mime_type']=array('types_documents'
-	, 'mime_type');
-
 
 	$table_titre['articles']= 'titre, lang';
 	$table_titre['rubriques']= 'titre, lang';
 	$table_titre['auteurs']= "nom AS titre, '' AS lang";
-	$table_titre['documents']= "titre, fichier AS surnom, '' AS lang";
 
 	$table_date['articles']='date';
 	$table_date['auteurs']='date';
-	$table_date['documents']='date';
-	$table_date['types_documents']='date';
 	$table_date['rubriques']='date';
 
 	$table_statut['spip_articles'][] = array(
@@ -260,14 +248,8 @@ function declarer_interfaces(){
 	global $tables_jointures;
 
 	$tables_jointures['spip_articles']['id_auteur']= 'auteurs_liens';
-	$tables_jointures['spip_articles'][]= 'documents_liens';
 
 	$tables_jointures['spip_auteurs'][]= 'auteurs_liens';
-
-	$tables_jointures['spip_documents'][]= 'documents_liens';
-	$tables_jointures['spip_documents'][]= 'types_documents';
-
-	$tables_jointures['spip_rubriques'][]= 'documents_liens';
 
 
 	global  $exceptions_des_jointures;
@@ -286,7 +268,6 @@ function declarer_interfaces(){
 	$table_des_traitements['DATE_MODIF'][]= 'normaliser_date(%s)';
 	$table_des_traitements['DATE_NOUVEAUTES'][]= 'normaliser_date(%s)';
 	$table_des_traitements['DESCRIPTIF'][]= _TRAITEMENT_RACCOURCIS;
-	$table_des_traitements['FICHIER']['documents']= 'get_spip_doc(%s)';
 	$table_des_traitements['INTRODUCTION'][]= 'PtoBR('. _TRAITEMENT_RACCOURCIS .')';
 	$table_des_traitements['NOM_SITE_SPIP'][]= _TRAITEMENT_TYPO;
 	$table_des_traitements['NOM'][]= _TRAITEMENT_TYPO;

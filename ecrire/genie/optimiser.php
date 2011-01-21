@@ -161,17 +161,6 @@ function optimiser_base_disparus($attente = 86400) {
 	sql_delete("spip_auteurs", "statut='nouveau' AND maj < ". sql_quote(date('Y-m-d', time()-45*24*3600)));
 
 
-	//
-	// Documents
-	//
-
-	include_spip('action/editer_liens');
-	// optimiser les liens de tous les documents vers des objets effaces
-	$n+= objet_optimiser_liens(array('document'=>'*'),'*');
-	
-
-	// on ne nettoie volontairement pas automatiquement les documents orphelins
-	
 	$n = pipeline('optimiser_base_disparus', array(
 			'args'=>array(
 				'attente' => $attente,

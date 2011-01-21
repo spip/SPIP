@@ -90,7 +90,6 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 		}
 		spip_log("Creation des tables. Codage $charsetbase");
 		creer_base($server_db); // AT LAST
-		creer_base_types_doc($server_db);
 		// memoriser avec quel charset on l'a creee
 
 		if ($charset) {

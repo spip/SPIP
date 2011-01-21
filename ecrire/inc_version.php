@@ -45,7 +45,7 @@ define('_ROOT_RESTREINT', _ROOT_CWD . _DIR_RESTREINT);
 if (!defined('_NOM_IMG_PACK')) define('_NOM_IMG_PACK', 'images/');
 # le chemin http (relatif) vers les images standard
 define('_DIR_IMG_PACK', (_DIR_RACINE . 'prive/' . _NOM_IMG_PACK));
-# le chemin des vignettes de type de document
+# le chemin des vignettes de type de fichier
 define('_DIR_IMG_ICONES_DIST', _DIR_RACINE . "prive/vignettes/");
 
 # le chemin php (absolu) vers les images standard (pour hebergement centralise)

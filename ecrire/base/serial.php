@@ -118,42 +118,6 @@ $spip_rubriques_key = array(
 #		"KEY url_propre"	=> "url_propre"
 );
 
-$spip_documents = array(
-		"id_document"	=> "bigint(21) NOT NULL",
-		"id_vignette"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"extension"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
-		"titre"	=> "text DEFAULT '' NOT NULL",
-		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"descriptif"	=> "text DEFAULT '' NOT NULL",
-		"fichier"	=> "varchar(255) DEFAULT '' NOT NULL",
-		"taille"	=> "integer",
-		"largeur"	=> "integer",
-		"hauteur"	=> "integer",
-		"mode"	=> "ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL",
-		"distant"	=> "VARCHAR(3) DEFAULT 'non'",
-		"maj"	=> "TIMESTAMP");
-
-$spip_documents_key = array(
-		"PRIMARY KEY"	=> "id_document",
-		"KEY id_vignette"	=> "id_vignette",
-		"KEY mode"	=> "mode",
-		"KEY extension"	=> "extension");
-$spip_documents_join = array(
-		"id_document"=>"id_document",
-		"extension"=>"extension");
-
-$spip_types_documents = array(
-		"extension"	=> "varchar(10) DEFAULT '' NOT NULL",
-		"titre"	=> "text DEFAULT '' NOT NULL",
-		"descriptif"	=> "text DEFAULT '' NOT NULL",
-		"mime_type"	=> "varchar(100) DEFAULT '' NOT NULL",
-		"inclus"	=> "ENUM('non', 'image', 'embed') DEFAULT 'non'  NOT NULL",
-		"upload"	=> "ENUM('oui', 'non') DEFAULT 'oui'  NOT NULL",
-		"maj"	=> "TIMESTAMP");
-
-$spip_types_documents_key = array(
-		"PRIMARY KEY"	=> "extension",
-		"KEY inclus"	=> "inclus");
 
 /// Attention: mes_fonctions peut avoir deja defini cette variable
 /// il faut donc rajouter, mais pas reinitialiser
@@ -164,10 +128,6 @@ $tables_principales['spip_auteurs']  =
 	array('field' => &$spip_auteurs, 'key' => &$spip_auteurs_key,'join' => &$spip_auteurs_join);
 $tables_principales['spip_rubriques'] =
 	array('field' => &$spip_rubriques, 'key' => &$spip_rubriques_key);
-$tables_principales['spip_documents'] =
-	array('field' => &$spip_documents,  'key' => &$spip_documents_key, 'join' => &$spip_documents_join);
-$tables_principales['spip_types_documents']	=
-	array('field' => &$spip_types_documents, 'key' => &$spip_types_documents_key);
 
 	$tables_principales = pipeline('declarer_tables_principales',$tables_principales);
 }

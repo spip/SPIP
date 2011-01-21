@@ -134,42 +134,4 @@ function maj_tables($upgrade_tables=array(),$serveur=''){
 		     $serveur);
 }
 
-/**
- * Creer la table des types de document
- *
- * http://doc.spip.org/@creer_base_types_doc
- *
- * @param string $serveur
- * @return void
- */
-function creer_base_types_doc($serveur='') {
-	global $tables_images, $tables_sequences, $tables_documents, $tables_mime;
-
-	foreach ($tables_mime as $extension => $type_mime) {
-		if (isset($tables_images[$extension])) {
-			$titre = $tables_images[$extension];
-			$inclus='image';
-		}
-		else if (isset($tables_sequences[$extension])) {
-			$titre = $tables_sequences[$extension];
-			$inclus='embed';
-		}
-		else {
-			$inclus='non';
-			if (isset($tables_documents[$extension]))
-				$titre = $tables_documents[$extension];
-			else
-				$titre = '';
-		}
-		// Init ou Re-init ==> replace pas insert
-		sql_replace('spip_types_documents',
-			array('mime_type' => $type_mime,
-				'titre' => $titre,
-				'inclus' => $inclus,
-				'extension' => $extension,
-				'upload' => 'oui'
-			),
-			'', $serveur);
-	}
-}
 ?>

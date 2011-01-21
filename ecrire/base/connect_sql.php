@@ -243,11 +243,11 @@ function table_objet($type,$serveur='') {
 		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
 		$surnoms = pipeline('declarer_tables_objets_surnoms',
 			array(
-				'doc' => 'documents', # pour les modeles
+				# pour les modeles
+				# a enlever ?
+				'doc' => 'documents',
 				'img' => 'documents',
 				'emb' => 'documents',
-				'type_document' => 'types_documents', # hum
-				'extension' => 'types_documents' # hum
 			));
 	}
 	if (isset($surnoms[$type]))
@@ -278,15 +278,11 @@ function table_objet_sql($type,$serveur='') {
 // http://doc.spip.org/@id_table_objet
 function id_table_objet($type,$serveur='') {
 	$type = objet_type($type,$serveur);
-	if ($type == 'type')
-		return 'extension';
-	else {
-		if (!$type) return;
-		$t = table_objet($type);
-		$trouver_table = charger_fonction('trouver_table', 'base');
-		$desc = $trouver_table($t,$serveur);
-		return @$desc['key']["PRIMARY KEY"];
-	}
+	if (!$type) return;
+	$t = table_objet($type);
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table($t,$serveur);
+	return @$desc['key']["PRIMARY KEY"];
 }
 
 // http://doc.spip.org/@objet_type

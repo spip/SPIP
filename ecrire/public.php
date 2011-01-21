@@ -58,17 +58,8 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 			unset($_GET['action']);
 	# sinon, fond par defaut
 	} else {
-		// traiter le cas pathologique d'un upload de document ayant echoue
-		// car trop gros
-		if (empty($_GET) AND empty($_POST) AND empty($_FILES)
-		AND isset($_SERVER["CONTENT_LENGTH"])
-		AND strstr($_SERVER["CONTENT_TYPE"], "multipart/form-data;")) {
-			include_spip('inc/getdocument');
-			erreur_upload_trop_gros();
-		}
-
 		// sinon fond par defaut (cf. assembler.php)
-		$fond = '';
+		$fond = pipeline('detecter_fond_par_defaut','');
 	}
 
 	$tableau_des_temps = array();

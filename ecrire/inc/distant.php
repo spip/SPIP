@@ -346,7 +346,7 @@ function recuperer_entetes($f, $date_verif='')
 // http://doc.spip.org/@nom_fichier_copie_locale
 function nom_fichier_copie_locale($source, $extension) {
 
-	include_spip('inc/getdocument');
+	include_spip('inc/documents');
 	$d = creer_repertoire_documents('distant'); # IMG/distant/
 	$d = sous_repertoire($d, $extension); # IMG/distant/pdf/
 

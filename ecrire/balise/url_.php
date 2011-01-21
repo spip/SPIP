@@ -46,6 +46,7 @@ function generer_generer_url_arg($type, $p, $_id)
 			return NULL;
 		}
 		$s = _q($s);
+		# exception des urls de documents sur un serveur distant...
 		if ($type == 'document') {
 			return 
 			"quete_meta('adresse_site', $s) . '/' .\n\t" .
