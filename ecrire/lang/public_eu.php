@@ -3,32 +3,32 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Ataria',
-'article' => 'Article', # NEW
+'article' => 'Artikulu',
 'articles' => 'Artikuluak',
 'articles_auteur' => 'Egile honen artikuluak',
-'articles_populaires' => 'artikulu arrakastatsuenak',
-'articles_rubrique' => 'Eremu honetako artikuluak',
+'articles_populaires' => 'Artikulu arrakastatsuenak',
+'articles_rubrique' => 'Atal honetako artikuluak',
 'aucun_article' => 'Ez dago artikulurik helbide honetan',
 'aucun_auteur' => 'Ez dago egilerik helbide honetan',
-'aucun_site' => 'ez dago gunerik helbide honetan',
+'aucun_site' => 'Ez dago gunerik helbide honetan',
 'aucune_breve' => 'Ez dago laburrik helbide honetan',
-'aucune_rubrique' => 'Ez dago gairik helbide honetan',
-'auteur' => 'Auteur', # NEW
+'aucune_rubrique' => 'Ez dago atalik helbide honetan',
+'auteur' => 'Egile',
 'autres' => 'Beste',
-'autres_breves' => 'beste laburrak',
-'autres_groupes_mots_clefs' => 'Beste gako-hitz multzoak',
+'autres_breves' => 'Beste berri laburrak',
+'autres_groupes_mots_clefs' => 'Beste gako-hitz taldeak',
 'autres_sites' => 'Beste guneak',
 
 // B
 'bonjour' => 'Agur',
-'breve' => 'Br&egrave;ve', # NEW
-'breves' => 'Laburrak',
+'breve' => 'Berri-labur',
+'breves' => 'Berri-laburrak',
 
 // C
 'commenter_site' => 'Guneari buruz iruzkina egin',
@@ -37,22 +37,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // D
 'date' => 'Data',
 'dernier_ajout' => 'Azken eranskinak',
-'dernieres_breves' => 'Azken laburrak',
+'dernieres_breves' => 'Azken berri-laburrak',
 'derniers_articles' => 'Azken artikuluak',
 'derniers_commentaires' => 'Azken oharrak',
-'derniers_messages_forum' => 'Berri-taldeetan argitaratu azken berriak',
-'documents_interdits_forum' => 'Dokumentuak debekatuak dira berri-taldeetan',
+'derniers_messages_forum' => 'Foroetan argitaratu azken berriak',
+'documents_interdits_forum' => 'Dokumentuak debekatuak dira foroetan',
 
 // E
-'edition_mode_texte' => 'Honen edizioa testu formatuan',
+'edition_mode_texte' => 'Honen edizioa testu formatuan :',
 'en_reponse' => 'Erantzunez',
 'en_resume' => 'Laburbilduz',
 'envoyer_message' => 'Mezua bidali',
-'espace_prive' => 'Leku pribatua',
+'espace_prive' => 'Eremu pribatua',
 
 // F
-'formats_acceptes' => 'Onartutako berri-taldeak : @formats@.',
-'forum' => 'Berri-taldea',
+'formats_acceptes' => 'Onartutako formatuak : @formats@.',
+'forum' => 'Foroa',
 
 // H
 'hierarchie_site' => 'Gunearen hierarkia',
@@ -64,57 +64,57 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_connecter' => 'Konektatu',
 
 // M
-'meme_auteur' => 'Egile berak',
-'meme_rubrique' => 'Gai bera',
-'memes_auteurs' => 'Egile berak',
+'meme_auteur' => 'Egile beretik',
+'meme_rubrique' => 'Atal berean',
+'memes_auteurs' => 'Egile beretik',
 'message' => 'Mezua',
-'messages_forum' => 'Berri-taldeetako mezuak',
-'messages_recents' => 'Berri-taldeetako azken mezuak',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
+'messages_forum' => 'Foroetako mezuak',
+'messages_recents' => 'Foroetako azken mezuak',
+'mots_clef' => 'Gako-hitz',
 'mots_clefs' => 'Gako-hitz',
-'mots_clefs_meme_groupe' => 'Talde bereko hitz-gakoak',
+'mots_clefs_meme_groupe' => 'Talde bereko gako-hitzak',
 
 // N
 'navigation' => 'Arakatu',
 'nom' => 'Izena',
 'nouveautes' => 'Azken berriak',
-'nouveautes_web' => 'Web-ek azken berriak',
+'nouveautes_web' => 'Sareko azken berriak',
 'nouveaux_articles' => 'Artikulu berriak',
-'nouvelles_breves' => 'Azken laburrak',
+'nouvelles_breves' => 'Azken berri-laburrak',
 
 // P
 'page_precedente' => 'Aurreko orrialdea',
 'page_suivante' => 'Hurrengo orrialdea',
 'par_auteur' => 'Egilea',
-'participer_site' => 'Gunekogora-beheretan parte har dezakezu eta zure artikuluak proposatu izena emanez. Segidan, e-posta batez bidez, gunearen eremu pribatuan sartzeko zure atzipen-kodeak ukanen dituzu.',
+'participer_site' => 'Guneko gora-beheretan parte har dezakezu eta zure artikuluak proposatu izena emanez. Segidan, emaila baten bidez, gunearen eremu pribatuan sartzeko zure atzipen-kodeak ukanen dituzu.',
 'plan_site' => 'Gunearen mapa',
 'popularite' => 'Arrakasta',
-'poster_message' => 'Mezua postatu',
-'proposer_site' => 'Eremu honetan gehitzeko gunea proposa dezakezu:',
+'poster_message' => 'Mezua igorri',
+'proposer_site' => 'Atal honetan gehitzeko gune bat proposa dezakezu:',
 
 // R
 'repondre_article' => 'Artikuluari erantzun',
-'repondre_breve' => 'Laburrari erantzun',
+'repondre_breve' => 'Berri-laburrari erantzun',
 'repondre_message' => 'Mezuari erantzun',
 'resultats_recherche' => 'Bilaketaren emaitzak',
-'retour_debut_forums' => 'Berri-taldeen hasierara',
-'rubrique' => 'Eremua',
-'rubriques' => 'Eremuak',
+'retour_debut_forums' => 'Foroen hasierara itzuli',
+'rubrique' => 'Atal',
+'rubriques' => 'Atalak',
 
 // S
 'signatures_petition' => 'Sinadurak',
 'site_realise_avec_spip' => 'SPIPekin eraiki gunea',
 'sites_web' => 'Webguneak',
-'sous_rubriques' => 'Azpi-eremuak',
+'sous_rubriques' => 'Azpi-atalak',
 'spam' => 'Spam',
 'suite' => 'Segida',
-'sur_web' => 'Web-ean',
-'syndiquer_rubrique' => 'Eremu hau sindikatu',
+'sur_web' => 'Sarean',
+'syndiquer_rubrique' => 'Atal hau sindikatu',
 'syndiquer_site' => 'Gune guzia sindikatu',
 
 // T
 'texte_lettre_information' => 'Hona gunearen informazio gutuna',
-'texte_lettre_information_2' => 'Gutunak ondoko egunetik argitaratu artikuluak eta laburrak biltzen ditu',
+'texte_lettre_information_2' => 'Gutunak ondoko egunetik argitaratu artikuluak eta berri-laburrak biltzen ditu',
 
 // V
 'ver_imprimer' => 'Inprimatzeko bertsioa',
