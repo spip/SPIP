@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -67,7 +67,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'bouton_effacer_tout' => 'Esborrar-ho TOT',
 'bouton_envoi_message_02' => 'ENVIAR UN MISSATGE',
 'bouton_envoyer_message' => 'Missatge definitiu : enviar',
-'bouton_fermer' => 'Fermer', # NEW
+'bouton_fermer' => 'Tancar',
 'bouton_forum_petition' => 'F&Ograve;RUM &amp; PETICI&Oacute;',
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'RECORDATORI D\'&Uacute;S PERSONAL',
@@ -313,15 +313,15 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_articles_trouves' => 'Articles trobats',
 'info_articles_trouves_dans_texte' => 'Articles trobats (en el text)',
 'info_attente_validation' => 'Els vostres articles en espera de validaci&oacute;',
-'info_aucun_article' => 'Aucun article', # NEW
-'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
-'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
-'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
-'info_aucun_site' => 'Aucun site', # NEW
-'info_aucun_visiteur' => 'Aucun visiteur', # NEW
+'info_aucun_article' => 'Cap article',
+'info_aucun_article_syndique' => 'Cap article sindicat',
+'info_aucun_auteur' => 'Cap autor',
+'info_aucun_breve' => 'Cap breu',
+'info_aucun_message' => 'Cap missatge',
+'info_aucun_mot_cle' => 'Cap paraula clau',
+'info_aucun_rubrique' => 'Cap secci&oacute;',
+'info_aucun_site' => 'Cap lloc',
+'info_aucun_visiteur' => 'Cap visitant',
 'info_aujourdhui' => 'avui:',
 'info_auteur_message' => 'AUTOR DEL MISSATGE:',
 'info_auteurs' => 'Els autors',
@@ -599,7 +599,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_referencer_doc_distant' => 'Referenciar un document a Internet&nbsp;:',
 'info_refuses' => 'Els vostres articles rebutjats',
 'info_reglage_ldap' => 'Opcions: <b>Posta a punt de la importaci&oacute; LDAP</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
+'info_remplacer_mot' => 'Substituir "@titre@"',
 'info_renvoi_article' => '<b>Redirecci&oacute;.</b> Aquest article et porta a la p&agrave;gina:',
 'info_reserve_admin' => 'Nom&eacute;s els adminsitradors poden modificar aquesta adre&ccedil;a.',
 'info_restauration_sauvegarde' => 'Restauraci&oacute; de la c&ograve;pia de seguretat @archive@',
@@ -823,7 +823,7 @@ amb un color que indica el seu estat:',
 'ldap_correspondance_2' => 'Per cadascun dels camps seg&uuml;ents d\'SPIP, indiqueu el nom del camp LDAP corresponent. Deixeu-lo buit per no omplir-lo, separeu-lo amb espais o comes per assajar diversos camps LDAP.',
 'lien_ajout_destinataire' => 'Afegir aquest destinatari',
 'lien_ajouter_auteur' => 'Afegir aquest autor',
-'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
+'lien_ajouter_mot' => 'Afegir aquesta paraula clau',
 'lien_ajouter_participant' => 'Afegir un participant',
 'lien_email' => 'correu electr&ograve;nic',
 'lien_forum_public' => 'Gestionar el f&ograve;rum p&uacute;blic d\'aquest article',
@@ -836,7 +836,7 @@ amb un color que indica el seu estat:',
 'lien_reponse_rubrique' => 'Resposta a la secci&oacute;',
 'lien_reponse_site_reference' => 'Resposta al lloc referenciat:',
 'lien_retirer_auteur' => 'Retirar aquest autor',
-'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_tous_auteurs' => 'Retirar tots els autors',
 'lien_retrait_particpant' => 'retirar aquest participant',
 'lien_site' => 'lloc',
 'lien_supprimer_rubrique' => 'suprimir aquesta secci&oacute;',
@@ -1139,8 +1139,8 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'titre_admin_effacer' => 'Manteniment t&egrave;cnic',
 'titre_admin_tech' => 'Manteniment t&egrave;cnic',
 'titre_admin_vider' => 'Manteniment t&egrave;cnic',
-'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
-'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
+'titre_ajouter_un_auteur' => 'Afegir un autor',
+'titre_ajouter_un_mot' => 'Afegir una paraula clau',
 'titre_articles_syndiques' => 'Articles sindicats extrets d\'aquest lloc.',
 'titre_breves' => 'Les breus',
 'titre_cadre_afficher_article' => 'Afegir els articles',
