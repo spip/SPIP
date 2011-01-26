@@ -83,7 +83,7 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 		$ret['meta'] = spip_xml_aplatit($arbre['meta']);
 	if (isset($arbre['fonctions']))
 		$ret['fonctions'] = $arbre['fonctions'];
-	$ret['prefix'] = trim(array_pop($arbre['prefix']));
+	$ret['prefix'] = strtolower(trim(array_pop($arbre['prefix'])));
 	if (isset($arbre['pipeline']))
 		$ret['pipeline'] = $arbre['pipeline'];
 	if (isset($arbre['erreur']))
