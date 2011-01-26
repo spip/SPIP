@@ -116,51 +116,37 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $in
 				'contexte'=>$contexte),
 			'data'=> $fond));
 	
-	$onglet_contenu = "<div id='wysiwyg'>$fond</div>"
-		. (_INTERFACE_ONGLETS? $boucles:"");
+	$onglet_contenu = "<div id='wysiwyg'>$fond</div>";
 
 	include_spip('inc/presenter_enfants');
 	$onglet_enfants =
 	  afficher_enfant_rub($id_rubrique, false, true)
-	  .(_INTERFACE_ONGLETS?"":
+	  .
 	   (autoriser('creerrubriquedans','rubrique',$id_rubrique)?"<div style='clear:$spip_lang_right;'>" .
 	    (!$id_rubrique
 		    ? icone_inline(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.png", "new",$spip_lang_right)
 		    : icone_inline(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.png", "new",$spip_lang_right))
-	    ."</div>":""))
+	    ."</div>":"")
 	  . "<br class='nettoyeur' />"
 	  . $boucles;
 
 	$onglet_enfants = pipeline('affiche_enfants',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>$onglet_enfants));
 
-	$onglet_documents = "";
-	if ($id_rubrique > 0 AND $documenter_objet = charger_fonction('documenter_objet','inc',true)){
-		$onglet_documents = $documenter_objet($id_rubrique, "rubrique", 'naviguer', $flag_editable);
-	}
-
-	$onglet_interactivite = "";
-
 	return
 	  pipeline('afficher_fiche_objet',array('args'=>array('type'=>'rubrique','id'=>$id_rubrique),'data'=>
 	  	"<div class='fiche_objet'>" .
-			$haut.
-			(_INTERFACE_ONGLETS?
-		 	afficher_onglets_pages(array(
-				'sousrub'=> _T('onglet_sous_rubriques'),
-				'voir' => _T('onglet_contenu'),
-				'props' => _T('onglet_proprietes'),
-				'docs' => _T('onglet_documents'),
-				'interactivite' => _T('onglet_interactivite')),
-					array(
-				'voir'=>$onglet_contenu,
-				'sousrub'=>$onglet_enfants,
-				'props'=>$onglet_proprietes,
-				'docs'=>$onglet_documents,
-				'interactivite'=>$onglet_interactivite
-			))
-		 	:$onglet_contenu.$onglet_proprietes).
-	  	"</div>".
-	  	(_INTERFACE_ONGLETS?"":$onglet_enfants.$onglet_documents.$onglet_interactivite)
+			$haut .
+
+			"<div class='nettoyeur'></div>" .
+			$onglet_contenu .
+			"<div class='nettoyeur'></div>" .
+			$onglet_proprietes .
+			"<div class='nettoyeur'></div>" .
+	  	"</div>" .
+			
+	  	$onglet_enfants .
+			pipeline('afficher_complement_objet',array('args'=>array('type'=>'rubrique','id'=>$id_rubrique),'data'=>"<div class='nettoyeur'></div>")) .
+			"<div class='nettoyeur'></div>"
 	  	));
 }
 
@@ -279,7 +265,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 	$n = sql_countsel('spip_rubriques');
 	$bouton_article = "";
-	if ($n && !_INTERFACE_ONGLETS) {
+	if ($n) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
 		  $bouton_article .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","new", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
