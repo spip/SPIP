@@ -377,6 +377,7 @@ prive/formulaires/selecteur/navigateur.html -text
 prive/formulaires/selecteur/picker-ajax.html -text
 prive/formulaires/selecteur/picker.css -text
 prive/formulaires/selecteur/rubriques.html -text
+prive/formulaires/selecteur/rubriques_fonctions.php -text
 prive/formulaires/selecteur/selecteur_fonctions.php -text
 prive/formulaires/selecteur_groupe_mot.html -text
 prive/formulaires/selecteur_groupe_mot_fonctions.php -text
