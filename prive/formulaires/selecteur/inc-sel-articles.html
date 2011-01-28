@@ -1,0 +1,11 @@
+<BOUCLE_sel(ARTICLES){id_article IN #ENV{selected}|picker_selected{article}}{statut?}{tout}><li
+	class='article'><input
+	type="hidden"
+	name="[(#ENV{name,id_item})][]"
+	value="article|#ID_ARTICLE"
+	/>[(#ENV{afficher_langue,0}|oui)[&#91;(#LANG)&#93;] ]#TITRE[(#ENV{select,''}|non)
+<a
+	href='#'
+	onclick='jQuery(this).item_unpick();return false;'><img
+	src='#ENV{img_unpick}' alt='' /></a>]<span
+	class="sep">, </span></li></BOUCLE_sel>

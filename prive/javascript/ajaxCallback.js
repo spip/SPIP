@@ -70,6 +70,19 @@ jQuery.fn.animeajax = function(end) {
 	return this; // don't break the chain
 }
 
+jQuery.fn.animeRemove = function(){
+	$(this).addClass('remove').animate({opacity: "0.0"}, 'fast');
+	return this; // don't break the chain
+}
+jQuery.fn.animeAppend = function(){
+	$(this).css('opacity','0.0').animate({opacity: "1.0"}, 1000,function(){
+		jQuery(this).animate({backgroundColor: '#ffffff'}, 3000,function(){
+				jQuery(this).removeClass('append').parents('.append').removeClass('append');
+				jQuery(this).css({backgroundColor: 'inherit'});
+		});
+	});
+}
+
 // s'il n'est pas totalement visible, scroller pour positionner
 // le bloc cible en haut de l'ecran
 // si force = true, scroller dans tous les cas

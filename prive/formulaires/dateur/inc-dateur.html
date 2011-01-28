@@ -1,0 +1,32 @@
+<script type='text/javascript' src='#CHEMIN{formulaires/dateur/dates.js}'></script>
+<script type='text/javascript' src='#CHEMIN{formulaires/dateur/jquery.datePicker.js}'></script>
+<script type='text/javascript' src='#CHEMIN{formulaires/dateur/jquery.timePicker.js}'></script>
+<script type='text/javascript'>/*<![CDATA[*/
+Date.dayNames = ['<:date_jour_1:>', '<:date_jour_2:>', '<:date_jour_3:>', '<:date_jour_4:>', '<:date_jour_5:>', '<:date_jour_6:>', '<:date_jour_7:>'];
+Date.abbrDayNames = ['<:date_jour_1_abbr:>', '<:date_jour_2_abbr:>', '<:date_jour_3_abbr:>', '<:date_jour_4_abbr:>', '<:date_jour_5_abbr:>', '<:date_jour_6_abbr:>', '<:date_jour_7_abbr:>'];
+Date.monthNames = ['<:date_mois_1:>', '<:date_mois_2:>', '<:date_mois_3:>', '<:date_mois_4:>', '<:date_mois_5:>', '<:date_mois_6:>', '<:date_mois_7:>', '<:date_mois_8:>', '<:date_mois_9:>', '<:date_mois_10:>', '<:date_mois_11:>', '<:date_mois_12:>'];
+Date.abbrMonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+Date.firstDayOfWeek = 1;
+Date.format = '#ENV{dateFormat,'dd/mm/yyyy'}';
+jQuery.dpText = {
+	TEXT_PREV_YEAR		:	'<:spip_bonux:annee_precedente|texte_script:>',
+	TEXT_PREV_MONTH		:	'<:spip_bonux:mois_precedent|texte_script:>',
+	TEXT_NEXT_YEAR		:	'<:spip_bonux:annee_suivante|texte_script:>',
+	TEXT_NEXT_MONTH		:	'<:spip_bonux:mois_suivant|texte_script:>',
+	TEXT_CLOSE			:	'<:bouton_fermer|texte_script:>',
+	TEXT_CHOOSE_DATE	:	'<img src=\'#CHEMIN_IMAGE{calendrier-16.png}\' alt=\'<:spip_bonux:afficher_calendrier|attribut_html:>\' />',
+	TITLE_CHOOSE_DATE	:	'<:spip_bonux:afficher_calendrier|texte_script:>'
+}
+jQuery(function(){
+	jQuery('input.date').addClass('datePicker').datePicker({startDate:'#ENV{startDate,'01/01/1900'}'[,endDate:'(#ENV{endDate})']}).dpSetPosition(jQuery.dpConst.POS_TOP, jQuery.dpConst.POS_RIGHT);
+	jQuery("input.heure").addClass('timePicker').timePicker();
+});
+/*]]>*/</script>
+<style type="text/css">
+@import url(#CHEMIN{formulaires/dateur/datePicker.css});
+@import url(#CHEMIN{formulaires/dateur/timePicker.css});
+a.dp-choose-date { display: inline-block; padding: 0; margin: 0px 0 0 -19px; vertical-align: middle; }
+div.time-picker {font-size:11px;  width:5em; /* needed for IE */}
+.formulaire_spip input.date {width:9em;padding-right:25px;}
+.formulaire_spip input.heure {width:7em;}
+</style>

@@ -1,0 +1,8 @@
+<BOUCLE_pour(POUR){tableau #ENV{selected}|picker_selected{rubrique}}>
+<BOUCLE_sel(RUBRIQUES){id_rubrique=#VALEUR}{statut?}{tout}>
+<li class='rubrique'><input type="hidden" name="[(#ENV{name,id_item})][]" value="rubrique|#ID_RUBRIQUE" />[(#ENV{afficher_langue,0}|oui)[&#91;(#LANG)&#93;] ]#TITRE[(#ENV{select,''}|non)
+<a href='#' onclick='jQuery(this).item_unpick();return false;'><img src='#ENV{img_unpick}' alt='' /></a>]<span class="sep">, </span></li></BOUCLE_sel>[
+(#VALEUR|=={0}|oui)
+<li class='rubrique'><input type="hidden" name="[(#ENV{name,id_item})][(#VAL{91}|chr)][(#VAL{93}|chr)]" value="rubrique|[(#VALEUR)]" /><:info_racine_site:>[(#ENV{select,''}|non)
+<a href='#' onclick='jQuery(this).item_unpick();return false;'><img src='[(#ENV{img_unpick})]' alt='' /></a>]<span class="sep">, </span></li>
+]<//B_sel></BOUCLE_pour>

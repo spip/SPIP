@@ -1,0 +1,24 @@
+<script type='text/javascript'>var img_unpick='#CHEMIN{img_pack/item-remove.png}';</script>
+<script type='text/javascript' src='#CHEMIN{formulaires/selecteur/jquery.picker.js}'></script>
+
+[(#REM) afficher la selection dans un ul class item_picked ----------------------------------------
+select=1 => le selecteur se comporte comme un select, avec un seul choix possible
+]<ul class='item_picked[ (#ENV{select,''}|?{select})]'>
+<INCLURE{fond=formulaires/selecteur/inc-sel-rubriques}{name}{selected}{select}{img_unpick=#CHEMIN{img_pack/item-remove.png}}{afficher_langue}>
+</ul>
+
+#SET{id_rubrique,#ENV{id_rubrique}}
+<BOUCLE_art(ARTICLES){statut?}{tout}{id_article}>#SET{id_rubrique,#ID_RUBRIQUE}</BOUCLE_art>
+
+[(#REM) le container item_picker est ici pour etre voisin de item_picked ------]
+<div class='item_picker'>
+<INCLURE{fond=formulaires/selecteur/picker-ajax}{id_rubrique=#GET{id_rubrique}}{id_article}{rubriques=1}{articles=0}{ajax}{env}>
+</div>
+[(#ENV{sortable,'non'}|=={oui}|oui)
+<script type='text/javascript' src='#CHEMIN{formulaires/selecteur/jquery-ui-1.6.custom.js}'></script>
+<script type='text/javascript'>
+jQuery(function() {
+		jQuery("ul.item_picked").sortable();
+	});
+</script>
+]
