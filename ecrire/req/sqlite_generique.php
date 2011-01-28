@@ -489,10 +489,24 @@ function spip_sqlite_countsel($from = array(), $where = array(), $groupby = '', 
 
 // http://doc.spip.org/@spip_sqlite_delete
 function spip_sqlite_delete($table, $where='', $serveur='',$requeter=true) {
-	return spip_sqlite_query(
+	$res = spip_sqlite_query(
 			  _sqlite_calculer_expression('DELETE FROM', $table, ',')
 			. _sqlite_calculer_expression('WHERE', $where),
 			$serveur, $requeter);
+
+	// renvoyer la requete inerte si demandee
+	if (!$requeter) return $res;
+	
+  if ($res){
+	  $link  = _sqlite_link($serveur);
+	  if (_sqlite_is_version(3, $link)) {
+		  return $res->rowCount();
+	  } else {
+		  return sqlite_changes($link);
+	  }
+  }
+  else
+	  return false;
 }
 
 
