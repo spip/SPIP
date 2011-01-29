@@ -60,11 +60,17 @@ body { font-size:0.625em; font-family: Verdana, Geneva, Sans, sans-serif; }
 .large #extra { float: #GET{right}; clear:none; width: 200px; }
 .large #contenu { float: #GET{left}; margin-#GET{left}: 17px; width: 540px; }
 
+/* une seule colonne centrale */
+.pleine_largeur #navigation,.pleine_largeur #extra {display:none;}
+.pleine_largeur #contenu {margin-#GET{left}:0;width:100%;}
+
 /* les formulaires sont en 600px en config large */
+body.edition .large #contenu,
 .articles_edit .large #contenu,
 .mots_edit .large #contenu,
 .breves_edit .large #contenu,
 .rubriques_edit .large #contenu {width:600px; margin-top: 20px;}
+body.edition .large #extra,
 .articles_edit .large #extra,
 .mots_edit .large #extra,
 .breves_edit .large #extra,
