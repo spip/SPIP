@@ -280,7 +280,7 @@ jQuery.fn.ajaxbloc = function() {
 		  return url[0];
 	  }
 
-	  var loadAjax = function(url, href, force){
+	  var loadAjax = function(url, href, force, callback){
 		  jQuery(blocfrag)
 		  .animeajax()
 		  .addClass('loading').positionner(false);
@@ -293,15 +293,17 @@ jQuery.fn.ajaxbloc = function() {
 				  success: function(c){
 					  on_pagination(c,href);
 					  preloaded_urls[url] = c;
+					  if (typeof callback == "function")
+					    callback();
 				  }
 			  });
 		  }
 	  }
-	  jQuery(this).not('.reloaded').bind('reload',function(){
+	  jQuery(this).not('.reloaded').bind('reload',function(event, callback){
 			var href = $(this).attr('data-url');
 		  if (href && typeof href != undefined){
 			  var url = makeAjaxUrl(href);
-			  loadAjax(url, href, true);
+			  loadAjax(url, href, true, callback);
 		  }
 	  }).addClass('reloaded');
 
@@ -353,10 +355,12 @@ jQuery.fn.ajaxbloc = function() {
 /**
  * Recharger un bloc ajax pour le mettre a jour
  * ajaxid est l'id passe en argument de INCLURE{ajax=ajaxid}
+ * la fonction callback optionnelle est executee apres rechargement du bloc
  * @param string ajaxid
+ * @param function callback
  */
-function ajaxReload(ajaxid){
-	jQuery('div.ajaxbloc.ajax-id-'+ajaxid).trigger('reload');
+function ajaxReload(ajaxid, callback){
+	jQuery('div.ajaxbloc.ajax-id-'+ajaxid).trigger('reload', [callback]);
 }
 
 // Ajaxer les formulaires qui le demandent, au demarrage
