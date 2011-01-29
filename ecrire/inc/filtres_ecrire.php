@@ -22,7 +22,7 @@ include_spip('inc/filtres_boites');
  * Bloquer l'acces a une page en renvoyant vers 403
  * @param bool $ok
  */
-function interdire_acces($ok=false) {
+function sinon_interdire_acces($ok=false) {
 	if ($ok) return '';
 	ob_end_clean(); // vider tous les tampons
 	$echec = charger_fonction('403','exec');
