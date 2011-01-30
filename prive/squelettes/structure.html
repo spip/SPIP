@@ -1,5 +1,10 @@
-[#EVAL{_DOCTYPE_ECRIRE}
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+#EVAL{_DOCTYPE_ECRIRE}
+[(#REM) http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6 lte9 lte8 lte7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <![endif]-->
+<!--[if IE 7 ]>    <html class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7 lte9 lte8 lte7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <![endif]-->
+<!--[if IE 8 ]>    <html class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8 lte9 lte8" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <![endif]-->
+<!--[if IE 9 ]>    <html class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9 lte9" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="[(#LANG_DIR)][ (#LANG)] no-js" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"> <!--<![endif]-->
 <head>
 <INCLURE{fond=prive/squelettes/head/#ENV{type},env}>
 </head>
@@ -7,6 +12,3 @@
 <INCLURE{fond=prive/squelettes/body,env}>
 </body>
 </html>
-(#EVAL{#VAL{var_zajax}|_request}|non)][
-<INCLURE{fond=#VAL{prive/squelettes/}|concat{#VAL{var_zajax}|_request}|concat{'/',#ENV{type}},env}>
-(#EVAL{#VAL{var_zajax}|_request}|oui)]
