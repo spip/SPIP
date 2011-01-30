@@ -37,8 +37,10 @@ body { font-size:0.625em; font-family: Verdana, Geneva, Sans, sans-serif; }
 .nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
 
 /* Non visible a l'ecran */
-.invisible { position: absolute; top: -3000em; height: 1%; }
-.none { display: none; }
+.none,.js .none-js,.no-js .none-nojs { display: none; }
+.hidden,.js .hidden-js,.no-js .hidden-nojs  {visibility:hidden;}
+.invisible, /* compat */
+.over,.js .over-js,.no-js .over-nojs { position: absolute; left: -3000em; height: 1%; }
 
 /* ajax */
 .image_loading {float:#GET{right};}
@@ -75,6 +77,15 @@ body.edition .large #extra,
 .mots_edit .large #extra,
 .breves_edit .large #extra,
 .rubriques_edit .large #extra {width:140px;}
+
+/*fix all layout problems of IE6 and IE7*/
+.lte7 .cadre,
+.lte7 .fiche_objet, /*title not visible*/
+.lte7 .ajax-action, /*containers of expandible boxes go mad*/
+.lte7 .tabs-container, /*containers of expandible boxes go mad*/
+.lte7 #portfolio,
+.lte7 #documents {zoom:1}
+
 
 /* style par defaut sur les tables. selecteur generique pour avoir une faible priorite */
 table {
