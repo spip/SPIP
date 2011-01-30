@@ -27,12 +27,13 @@ define('_INTERFACE_ONGLETS', false);
 
 // Faux HR, avec controle de couleur
 // http://doc.spip.org/@hr
+/*
 function hr($color, $retour = false) {
 	$ret = "\n<div style='height: 1px; margin-top: 5px; padding-top: 5px; border-top: 1px solid $color;'></div>";
 
 	if ($retour) return $ret; else echo_log('hr',$ret);
 }
-
+*/
 //
 // Cadres
 //

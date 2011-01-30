@@ -20,152 +20,6 @@ function echo_log($f, $ret) {
 		. $ret;
 }
 
-// Retourne les parametres de personnalisation css de l'espace prive
-// (ltr et couleurs) ce qui permet une ecriture comme :
-// generer_url_public('style_prive', parametres_css_prive())
-// qu'il est alors possible de recuperer dans le squelette style_prive.html avec
-// #SET{claire,##ENV{couleur_claire,edf3fe}}
-// #SET{foncee,##ENV{couleur_foncee,3874b0}}
-// #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
-// #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-// http://doc.spip.org/@parametres_css_prive
-function parametres_css_prive(){
-	global $visiteur_session;
-	global $browser_name, $browser_version;
-
-	$ie = "";
-	include_spip('inc/layer');
-	if ($browser_name=='MSIE')
-		$ie = "&ie=$browser_version";
-	
-	$v = "&v=".$GLOBALS['spip_version_code'];
-
-	$p = "&p=".substr(md5($GLOBALS['meta']['plugin']),0,4);
-
-	$theme = "&themes=".implode(',',lister_themes_prives());
-	
-	$c = (is_array($visiteur_session)
-	AND is_array($visiteur_session['prefs']))
-		? $visiteur_session['prefs']['couleur']
-		: 1;
-
-	$couleurs = charger_fonction('couleurs', 'inc');
-	$recalcul = _request('var_mode')=='recalcul' ? '&var_mode=recalcul':'';
-	return 'ltr=' . $GLOBALS['spip_lang_left'] . '&'. $couleurs($c) . $theme . $v . $p . $ie . $recalcul ;
-}
-
-
-// http://doc.spip.org/@envoi_link
-function envoi_link($nom_site_spip, $minipres=false) {
-	global $spip_display, $spip_lang;
-
-	$paramcss = parametres_css_prive();
-
-	// CSS de secours en cas de non fonct de la suivante
-	$res = '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('style_prive_defaut.css'))
-	. '" id="cssprivee" />'  . "\n"
-
-	// SPIP-style...
-	. '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('spip_style.css'))
-	. '" media="all" />' . "\n"
-
-	// CSS imprimante (masque des trucs, a completer)
-	. '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('spip_style_print.css'))
-	. '" media="print" />' . "\n"
-
-	// CSS "visible au chargement" differente selon js actif ou non
-
-	. '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('spip_style_'
-				     . (_SPIP_AJAX ? 'invisible' : 'visible')
-				     . '.css'))
-	.'" />' . "\n"
-
-	// CSS espace prive : la vraie
-	. '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('style_prive', $paramcss) .'" />' . "\n"
-
-	// CSS optionelle minipres
-	. ($minipres?'<link rel="stylesheet" type="text/css" href="'
-	   . url_absolue(find_in_path('minipres.css')).'" />' . "\n":"");
-
-	$favicon = find_in_path('spip.ico');
-
-	// favicon.ico
-	$res .= '<link rel="shortcut icon" href="'
-	. url_absolue($favicon)
-	. "\" type='image/x-icon' />\n";
-	
-	list($inlinejs,$js) = debut_javascript();
-
-	$nom = entites_html($nom_site_spip);
-
-	$res .= "<link rel='alternate' type='application/rss+xml' title=\"$nom\" href='"
-			. generer_url_public('backend') . "' />\n";
-	$res .= "<link rel='help' type='text/html' title=\""._T('icone_aide_ligne') .
-			"\" href='"
-			. generer_url_ecrire('aide_index',"var_lang=$spip_lang")
-			."' />\n";
-	if ($GLOBALS['meta']["activer_breves"] != "non")
-		$res .= "<link rel='alternate' type='application/rss+xml' title=\""
-			. $nom
-			. " ("._T("info_breves_03")
-			. ")\" href='" . generer_url_public('backend-breves') . "' />\n";
-
-	return $inlinejs . $res . $js;
-}
-
-// http://doc.spip.org/@debut_javascript
-function debut_javascript()
-{
-	global $spip_lang_left, $browser_name, $browser_version;
-	include_spip('inc/charsets');
-
-	// tester les capacites JS :
-
-	// On envoie un script ajah ; si le script reussit le cookie passera a +1
-	// on installe egalement un <noscript></noscript> qui charge une image qui
-	// pose un cookie valant -1
-
-	$testeur = str_replace('&amp;', '\\x26', generer_url_ecrire('test_ajax', 'js=1'));
-
-	if (_SPIP_AJAX AND !defined('_TESTER_NOSCRIPT')) {
-	  // pour le pied de page (deja defini si on est validation XML)
-		define('_TESTER_NOSCRIPT',
-			"<noscript>\n<div style='display:none;'><img src='"
-		        . generer_url_ecrire('test_ajax', 'js=-1')
-		        . "' width='1' height='1' alt='' /></div></noscript>\n");
-	}
-
-	if (!defined('_LARGEUR_ICONES_BANDEAU'))
-		include_spip('inc/bandeau');
-	return array(
-	 	"<script type='text/javascript'>/*<![CDATA[*/"
-			.((isset($_COOKIE['spip_accepte_ajax']) && $_COOKIE['spip_accepte_ajax'] >= 1)
-			? ''
-			: "\nfunction test_accepte_ajax(){jQuery.ajax({'url':'$testeur'});}") .
-			(_OUTILS_DEVELOPPEURS ?"var _OUTILS_DEVELOPPEURS=true;":"") .
-			"\nvar ajax_image_searching = \n'<img src=\"".url_absolue(chemin_image("searching.gif"))."\" alt=\"\" />';" .
-			"\nvar stat = " . (($GLOBALS['meta']["activer_statistiques"] != 'non') ? 1 : 0) .
-			"\nvar largeur_icone = " .
-			intval(_LARGEUR_ICONES_BANDEAU) .
-			"\nvar  bug_offsetwidth = " .
-// uniquement affichage ltr: bug Mozilla dans offsetWidth quand ecran inverse!
-			((($spip_lang_left == "left") &&
-			  (($browser_name != "MSIE") ||
-			   ($browser_version >= 6))) ? 1 : 0) .
-			"\nvar confirm_changer_statut = '" .
-			unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))) .
-			"';\n/*]]>*/</script>\n",
-	// envoi le fichier JS de config si browser ok.
-		$GLOBALS['browser_layer'] .
-    http_script('', 'presentation.js') .
-    http_script('', 'gadgets.js')
-		);
-}
 
 //
 // Cadre centre (haut de page)
@@ -305,6 +159,14 @@ function fin_page()
 	if ($debug) {
 		$chrono = erreur_squelette();
 	} else $chrono = '';
+	
+	if (_SPIP_AJAX AND !defined('_TESTER_NOSCRIPT')) {
+	  // pour le pied de page (deja defini si on est validation XML)
+		define('_TESTER_NOSCRIPT',
+			"<noscript>\n<div style='display:none;'><img src='"
+		        . generer_url_ecrire('test_ajax', 'js=-1')
+		        . "' width='1' height='1' alt='' /></div></noscript>\n");
+	}
 
 	return debut_grand_cadre(true)
 	. (($spip_display == 4)

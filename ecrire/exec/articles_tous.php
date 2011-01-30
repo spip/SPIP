@@ -25,7 +25,7 @@ function exec_articles_tous_dist()
 // http://doc.spip.org/@exec_articles_tous_args
 function exec_articles_tous_args($id_rubrique, $aff_art, $sel_lang)
 {
-	global $browser_layer,$spip_lang_right,$spip_lang_left;
+	global $spip_lang_right,$spip_lang_left;
 
 	changer_typo(); // pour definir la direction de la langue
 	if (!is_array($aff_art)) $aff_art = array('prop','publie');
@@ -61,7 +61,7 @@ var img_deplierbas = "'. chemin_image('noeud_moins.gif') . '";');
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
 		echo debut_droite('', true);
 
-		if ($enfant AND $browser_layer)
+		if ($enfant)
 		  echo couche_formulaire_tous();
 
 		$out = "<textarea cols='1' rows='1' id='deplacements' style='display:none;' name='deplacements'></textarea>"
