@@ -1279,28 +1279,26 @@ function balise_ACTION_FORMULAIRE($p){
  * #BOUTON_ACTION{libelle,url,ajax} pour que l'action soit ajax comme un lien class='ajax'
  * ou
  * #BOUTON_ACTION{libelle,url,ajax,message_confirmation} pour utiliser un message de confirmation
+ * 
+ * #BOUTON_ACTION{libelle[,url[,ajax[,message_confirmation[,title[,callback]]]]]}
  *
  * @param unknown_type $p
  * @return unknown
  */
 function balise_BOUTON_ACTION_dist($p){
 
-	$_label = interprete_argument_balise(1,$p);
-	if (!$_label) $_label="''";
+	$args = array();
+	for ($k=1;$k<=6;$k++){
+		$_a = interprete_argument_balise($k,$p);
+		if (!$_a) $_a="''";
+	  $args[] = $_a;
+	}
+	// supprimer les args vides
+	while(end($args)=="''" AND count($args)>2)
+		array_pop($args);
+	$args = implode(",",$args);
 
-	$_url = interprete_argument_balise(2,$p);
-	if (!$_url) $_url="''";
-
-	$_class = interprete_argument_balise(3,$p);
-	if (!$_class) $_class="''";
-
-	$_confirm = interprete_argument_balise(4,$p);
-	if (!$_confirm) $_confirm="''";
-
-	$_title = interprete_argument_balise(5,$p);
-	if (!$_title) $_title="''";
-
-	$p->code = "bouton_action($_label, $_url, $_class, $_confirm, $_title)";
+	$p->code = "bouton_action($args)";
 	$p->interdire_scripts = false;
 	return $p;
 }
