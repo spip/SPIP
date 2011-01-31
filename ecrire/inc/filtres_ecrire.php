@@ -34,15 +34,21 @@ function sinon_interdire_acces($ok=false) {
 }
 
 
-// Retourne les parametres de personnalisation css de l'espace prive
-// (ltr et couleurs) ce qui permet une ecriture comme :
-// generer_url_public('style_prive', parametres_css_prive())
-// qu'il est alors possible de recuperer dans le squelette style_prive.html avec
-// #SET{claire,##ENV{couleur_claire,edf3fe}}
-// #SET{foncee,##ENV{couleur_foncee,3874b0}}
-// #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
-// #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-// http://doc.spip.org/@parametres_css_prive
+/**
+ * Retourne les parametres de personnalisation css de l'espace prive
+ * (ltr et couleurs) ce qui permet une ecriture comme :
+ * generer_url_public('style_prive', parametres_css_prive())
+ * qu'il est alors possible de recuperer dans le squelette style_prive.html avec
+ * 
+ * #SET{claire,##ENV{couleur_claire,edf3fe}}
+ * #SET{foncee,##ENV{couleur_foncee,3874b0}}
+ * #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+ * #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+ *
+ * http://doc.spip.org/@parametres_css_prive
+ *
+ * @return string
+ */
 function parametres_css_prive(){
 	global $visiteur_session;
 	global $browser_name, $browser_version;
