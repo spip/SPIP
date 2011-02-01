@@ -51,11 +51,12 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 			$ext = !preg_match('/^[.*\w]+$/', $req_ext) ? 'php' : $req_ext;
 			$files = preg_files($dir,  "$ext$", $limit, $rec);
 			if (!$files AND $ext!=='html') {
-				$ext = 'html';
-				$files = preg_files($dir, "$ext$", $limit, $rec);
+				$files = preg_files($dir, 'html$', $limit, $rec);
+				if ($files) $ext = 'html';
 			}
 			if ($files) {
-				list($err, $res) = valider_dir($files, $ext, $url);
+				valider_dir($files, $ext, $url);
+				list($err, $res) = valider_resultats($res, $ext === 'html');
 				$err = ' (' . $err . '/' . count($files) .')';
 			} else {
 				$res = _T('texte_vide');
@@ -291,6 +292,6 @@ function valider_dir($files, $ext, $dir)
 		spip_log("validation de $f en $n secondes");
 		$res[]= $val;
 	}
-	return valider_resultats($res, 	$ext === 'html');
+	return $res;
 }
 ?>
