@@ -88,8 +88,8 @@ function chrono_requete($temps)
 
 		if (!is_array($explain))
 			$explain = array();
-		foreach($explain as $k => $v) {
-			$explain[$k] = "<tr><th>$k</th><td>"
+		foreach($explain as $j => $v) {
+			$explain[$j] = "<tr><th>$j</th><td>"
 			  . str_replace(';','<br />',$v)
 			  . "</td></tr>";
 		}
@@ -103,7 +103,7 @@ function chrono_requete($temps)
 		. join('', $explain)
 		. "</table>";
 
-		$temps[$key] = array($e, $env, $boucle);
+		$temps[$key] = array($e, $env, $k);
 	}
 	// Trier par temps d'execution decroissant
 	array_multisort($t, SORT_DESC, $q, $temps);
