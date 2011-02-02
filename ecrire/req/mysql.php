@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@req_mysql_dist
 function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
-	charger_php_extension('mysql');
+	if (!charger_php_extension('mysql')) return false;
 	if ($port > 0) $host = "$host:$port";
 	$link = @mysql_connect($host, $login, $pass, true);
 	if (!$link) {
