@@ -757,7 +757,9 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 		if (_sqlite_is_version(3, $sqlite)) $nb = $sqlite->lastInsertId();
 		else $nb = sqlite_last_insert_rowid($sqlite);
 	} else $nb = 0;
-	return $t ? trace_query_end($query, $t, $nb, $serveur) : $nb;
+
+	$err = spip_sqlite_error($query, $serveur);
+	return $t ? trace_query_end($query, $t, $nb, $err, $serveur) : $nb;
 
 }
 
@@ -1674,7 +1676,7 @@ class sqlite_traiter_requete{
 // http://doc.spip.org/@sqlite_traiter_requete
 	function sqlite_traiter_requete($query, $serveur = ''){
 		$this->query = $query;
-		$this->serveur = $serveur;
+		$this->serveur = strtolower($serveur);
 		
 		if (!($this->link = _sqlite_link($this->serveur)) && (!defined('_ECRIRE_INSTALL') || !_ECRIRE_INSTALL)){
 			spip_log("Aucune connexion sqlite (link)",'sqlite.'._LOG_ERREUR);
@@ -1695,6 +1697,7 @@ class sqlite_traiter_requete{
 	// faire le tracage si demande 
 // http://doc.spip.org/@executer_requete
 	function executer_requete(){
+		$err = "";
 		if ($this->tracer) {
 			include_spip('public/tracer');
 			$t = trace_query_start();
@@ -1739,7 +1742,8 @@ class sqlite_traiter_requete{
 			$r = false;	
 		}
 
-		return $t ? trace_query_end($this->query, $t, $r, $serveur) : $r;
+		$err .= spip_sqlite_error($this->query, $serveur);
+		return $t ? trace_query_end($this->query, $t, $r, $err, $serveur) : $r;
 	}
 		
 	// transformer la requete pour sqlite 

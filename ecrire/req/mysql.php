@@ -522,7 +522,7 @@ function spip_mysql_countsel($from = array(), $where = array(),
 // mais a l'install la globale n'est pas encore completement definie
 // http://doc.spip.org/@spip_mysql_error
 function spip_mysql_error($query='', $serveur='',$requeter=true) {
-	$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+	$link = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0]['link'];
 	$s = $link ? mysql_error($link) : mysql_error();
 	if ($s) spip_log("$s - $query", 'mysql.'._LOG_ERREUR);
 	return $s;
