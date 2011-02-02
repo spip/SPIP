@@ -26,13 +26,12 @@ function trace_query_start()
 }
 
 // http://doc.spip.org/@trace_query_end
-function trace_query_end($query, $start, $result, $serveur='')
-{
+function trace_query_end($query, $start, $result, $erreur, $serveur=''){
 	if ($start)
 		trace_query_chrono($start, microtime(), $query, $result, $serveur);
 	// tracer les erreurs, sauf pour select, c'est fait dans abstract_sql
-	if ($err = sql_errno() AND !preg_match('/^select\b/i', $query))
-		erreur_squelette(array(sql_errno(), sql_error(), $query));
+	if ($erreur AND !preg_match('/^select\b/i', $query))
+		erreur_squelette(array(sql_errno($serveur), $erreur, $query));
 	return $result;
 }
 
