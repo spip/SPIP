@@ -225,7 +225,6 @@ function debusquer_navigation($tableau, $caption='', $id='debug-nav') {
 //
 
 function debusquer_requete($message) {
-
 	list($errno, $msg, $query) = $message;
 	if (preg_match(',err(no|code):?[[:space:]]*([0-9]+),i', $msg, $regs))
 	  {
@@ -253,7 +252,7 @@ function debusquer_requete($message) {
 		. "\n<br /><span style='color: red'><b>"
 		. htmlspecialchars($query)
 		. "</b></span></tt><br />"
-		. aide('erreur_mysql');
+		;//. aide('erreur_mysql');
 
 	return $err;
 }
