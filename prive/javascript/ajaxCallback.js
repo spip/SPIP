@@ -393,23 +393,47 @@ jQuery.fn.animeajax = jQuery.fn.animateLoading;
 
 /**
  * animation d'un item que l'on supprime :
- * rouge puis fading vers opacity 0  
+ * ajout de la classe remove avec un background tire de cette classe
+ * puis fading vers opacity 0
+ * quand l'element est masque, on retire les classes et css inline
+ *
+ * @param function callback 
+ *
  */
-jQuery.fn.animateRemove = function(){
-	$(this).addClass('remove').animate({opacity: "0.0"}, 'fast');
+jQuery.fn.animateRemove = function(callback){
+	var color = $("<div class='remove'></div>").css('background-color');
+	$(this).addClass('remove').css({backgroundColor: color}).animate({opacity: "0.0"}, 'fast',function(){
+		$(this).removeClass('remove').css({backgroundColor: ''});
+		if (callback)
+			callback.apply(this);
+	});
 	return this; // don't break the chain
 }
 
 /**
  * animation d'un item que l'on ajoute :
- * fading vers opacity 1 en fond vert,
- * puis suppression progressive du fond vert
+ * ajout de la classe append
+ * fading vers opacity 1 avec background herite de la classe append,
+ * puis suppression progressive du background pour revenir a la valeur heritee
+ *
+ * @param function callback
  */
-jQuery.fn.animateAppend = function(){
-	$(this).css('opacity','0.0').animate({opacity: "1.0"}, 1000,function(){
-		jQuery(this).animate({backgroundColor: '#ffffff'}, 3000,function(){
-				jQuery(this).removeClass('append').parents('.append').removeClass('append');
-				jQuery(this).css({backgroundColor: ''});
+jQuery.fn.animateAppend = function(callback){
+	var me=this;
+	// recuperer la couleur portee par la classe append (permet une personalisation)
+	var color = $("<div class='append'></div>").css('background-color');
+	var origin = $(this).css('background-color') || '#ffffff';
+	// pis aller
+	if (origin=='transparent') origin='#ffffff';
+	var sel=$(this);
+	// if target is a tr, include td childrens cause background color on tr doesn't works in a lot of browsers
+	if (sel.is('tr'))
+		sel.add('>td',sel);
+	sel.css('opacity','0.0').addClass('append').css({backgroundColor: color}).animate({opacity: "1.0"}, 1000,function(){
+		sel.animate({backgroundColor: origin}, 3000,function(){
+			sel.removeClass('append').css({backgroundColor: ''});
+			if (callback)
+				callback.apply(me);
 		});
 	});
 }
