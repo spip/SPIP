@@ -45,7 +45,7 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 				asort($v);
 				$dtc->peres[$k] = $v;
 			} 
-	  
+
 			spip_log("Analyser DTD $avail $grammaire (" . spip_timer('dtd') . ") " . count($dtc->macros)  . ' macros, ' . count($dtc->elements)  . ' elements, ' . count($dtc->attributs) . " listes d'attributs, " . count($dtc->entites) . " entites");
 			#	$r = $dtc->regles; ksort($r);foreach($r as $l => $v) {$t=array_keys($dtc->attributs[$l]);echo "<b>$l</b> '$v' ", count($t), " attributs: ", join (', ',$t);$t=$dtc->peres[$l];echo "<br />",count($t), " peres: ", @join (', ',$t), "<br />\n";}exit;
 			ecrire_fichier($file, serialize($dtc), true);
@@ -71,7 +71,7 @@ function compilerRegle($val)
 		preg_replace('/\s*,\s*/','',
 		preg_replace('/(\w+)\s*/','(\1 )',
 		preg_replace('/\s*\)/',')',
-		preg_replace('/\s*([(+*|])\s*/','\1',
+		preg_replace('/\s*([(+*|?])\s*/','\1',
 		preg_replace('/\s*#\w+\s*[,|]?\s*/','', $val))))));
 	return $x;
 }
@@ -316,15 +316,28 @@ function analyser_dtd_attlist($dtd, &$dtc, $grammaire)
 }
 
 
+// Remplace dans la chaine $val les sous-chaines de forme "%NOM;"
+// par leur definition dans le tableau $macros
+// Si le premier argument n'est pas une chaine,
+// retourne les statistiques (pour debug de DTD, inutilise en mode normal)
+
 // http://doc.spip.org/@expanserEntite
-function expanserEntite($val, $macros)
+function expanserEntite($val, $macros=array())
 {
+	static $vu = array();
+	if (!is_string($val)) return $vu;
+
 	if (preg_match_all(_REGEXP_ENTITY_USE, $val, $r, PREG_SET_ORDER)){
 	  foreach($r as $m) {
 		$ent = $m[1];
 		  // il peut valoir ""
-		if (isset($macros[$ent]))
+		if (!isset($macros[$ent]))
+			spip_log("Entite $ent inconnu");
+		else {
+			@$vu[$ent]++;
 			$val = str_replace($m[0], $macros[$ent], $val);
+		}
+
 	  }
 	}
 
