@@ -219,13 +219,14 @@ function finElement($phraseur, $name)
 			}
 		} else {
 			$f = $this->fratrie[substr($depth,2)];
-			if (!preg_match($regle, $f))
+			if (!preg_match($regle, $f)) {
 				coordonnees_erreur($this,
 				" <p>\n<b>$name</b> "
 				  .  _T('zxml_succession_fils_incorrecte')
 				  . '&nbsp;: <b>'
 				  . $f
 				  . '</b>');
+			}
 		}
 
 	}
@@ -245,7 +246,7 @@ function textElement($phraseur, $data)
 			);
 		}
 	}
-	if ($f = $this->process['text']) $f($this, $name, $vide);
+	if ($f = $this->process['text']) $f($this, $data);
 }
 
 function piElement($phraseur, $target, $data)
