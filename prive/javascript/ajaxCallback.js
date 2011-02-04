@@ -1,22 +1,31 @@
-jQuery.spip={};
+jQuery.spip=jQuery.spip || {};
 // A plugin that wraps all ajax calls introducing a fixed callback function on ajax complete
-if(!jQuery.load_handlers) {
-	jQuery.load_handlers = new Array();
-	//
-	// Add a function to the list of those to be executed on ajax load complete
-	//
+if(!jQuery.spip.load_handlers) {
+	jQuery.spip.load_handlers = new Array();
+
+	/**
+	 * OnAjaxLoad allow to
+	 * add a function to the list of those
+	 * to be executed on ajax load complete
+	 *
+	 * most of time function f is applied on the loaded data
+	 * if not known, the whole document is targetted
+	 * 
+	 * @param function f
+	 */
 	function onAjaxLoad(f) {
-		jQuery.load_handlers.push(f);
+		jQuery.spip.load_handlers.push(f);
 	};
 
-	//
-	// Call the functions that have been added to onAjaxLoad
-	//
-	function triggerAjaxLoad(root) {
+	/**
+	 * Call the functions that have been added to onAjaxLoad
+	 * @param root
+	 */
+	jQuery.spip.triggerAjaxLoad = function (root) {
 		console.log('triggerAjaxLoad');
 		console.log(root);
-		for ( var i = 0; i < jQuery.load_handlers.length; i++ )
-			jQuery.load_handlers[i].apply( root );
+		for ( var i = 0; i < jQuery.spip.load_handlers.length; i++ )
+			jQuery.spip.load_handlers[i].apply( root );
 	};
 
 	jQuery.spip.intercepted={};
@@ -36,7 +45,7 @@ if(!jQuery.load_handlers) {
 				params = null;
 			}
 		}
-		var callback2 = function() {console.log('jQuery.load');triggerAjaxLoad(this);callback.apply(this,arguments);};
+		var callback2 = function() {console.log('jQuery.load');jQuery.spip.triggerAjaxLoad(this);callback.apply(this,arguments);};
 		return jQuery.spip.intercepted.load.apply(this,[url, params, callback2]);
 	};
 
@@ -54,7 +63,7 @@ if(!jQuery.load_handlers) {
 			if (typeof options=='function')
 					options = { success: options };
 			var callback = options.success || function(){};
-			options.success = function(){callback.apply(this,arguments);console.log('jQuery.ajaxSubmit');triggerAjaxLoad(me);}
+			options.success = function(){callback.apply(this,arguments);console.log('jQuery.ajaxSubmit');jQuery.spip.triggerAjaxLoad(me);}
 		}
 		return jQuery.spip.intercepted.ajaxSubmit.apply(this,[options]);
 	}
@@ -77,7 +86,7 @@ if(!jQuery.load_handlers) {
 			if(!dataType && !xml || dataType == "html") {
 				console.log('jQuery.ajax');
 				if (typeof s.onAjaxLoad=="undefined" || s.onAjaxLoad!=false)
-					triggerAjaxLoad(s.ajaxTarget?s.ajaxTarget:document);
+					jQuery.spip.triggerAjaxLoad(s.ajaxTarget?s.ajaxTarget:document);
 			}
 		};
 		return jQuery.spip.intercepted.ajax(type);
@@ -85,9 +94,13 @@ if(!jQuery.load_handlers) {
 
 }
 
-// s'il n'est pas totalement visible, scroller pour positionner
-// le bloc cible en haut de l'ecran
-// si force = true, scroller dans tous les cas
+/**
+ * if not fully visible, scroll the page to position
+ * target block at the top of page
+ * if force = true, allways scroll
+ *
+ * @param bool force
+ */
 jQuery.fn.positionner = function(force) {
 	var offset = jQuery(this).offset();
 	var hauteur = parseInt(jQuery(this).css('height'));
@@ -111,23 +124,26 @@ jQuery.fn.positionner = function(force) {
 }
 
 // deux fonctions pour rendre l'ajax compatible Jaws
-var virtualbuffer_id='spip_virtualbufferupdate';
-function initReaderBuffer(){
-	if (jQuery('#'+virtualbuffer_id).length) return;
-	jQuery('body').append('<p style="float:left;width:0;height:0;position:absolute;left:-5000;top:-5000;"><input type="hidden" name="'+virtualbuffer_id+'" id="'+virtualbuffer_id+'" value="0" /></p>');
+jQuery.spip.virtualbuffer_id='spip_virtualbufferupdate';
+jQuery.spip.initReaderBuffer = function(){
+	if (jQuery('#'+jQuery.spip.virtualbuffer_id).length) return;
+	jQuery('body').append('<p style="float:left;width:0;height:0;position:absolute;left:-5000;top:-5000;"><input type="hidden" name="'+jQuery.spip.virtualbuffer_id+'" id="'+jQuery.spip.virtualbuffer_id+'" value="0" /></p>');
 }
-function updateReaderBuffer(){
-	var i = jQuery('#'+virtualbuffer_id);
+jQuery.spip.updateReaderBuffer = function(){
+	var i = jQuery('#'+jQuery.spip.virtualbuffer_id);
 	if (!i.length) return;
 	// incrementons l'input hidden, ce qui a pour effet de forcer le rafraichissement du
 	// buffer du lecteur d'ecran (au moins dans Jaws)
 	i.attr('value',parseInt(i.attr('value'))+1);
 }
 
-// rechargement ajax d'un formulaire dynamique implemente par formulaires/xxx.html
+/**
+ * rechargement ajax d'un formulaire dynamique implemente par formulaires/xxx.html
+ * @param target
+ */
 jQuery.fn.formulaire_dyn_ajax = function(target) {
 	if (this.length)
-		initReaderBuffer();
+		jQuery.spip.initReaderBuffer();
   return this.each(function() {
 		var cible = target || this;
 		jQuery('form:not(.noajax,.bouton_action_post)', this).each(function(){
@@ -204,11 +220,8 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 							},10);
 						}
 					}
-					// on le refait a la main ici car onAjaxLoad intervient sur une iframe dans IE6 et non pas sur le document
-					//console.log('formulaire_dyn_ajax');
-					//triggerAjaxLoad(cible);
 					// mettre a jour le buffer du navigateur pour aider jaws et autres readers
-					updateReaderBuffer();
+					jQuery.spip.updateReaderBuffer();
 				}
 			},
 			iframe: jQuery.browser.msie
@@ -236,74 +249,75 @@ function _confirm(message){
 window.confirm = _confirm;
 
 // rechargement ajax d'une noisette implementee par {ajax}
-// avec mise en cache des url
-var preloaded_urls = {};
+// selecteur personalise, sera defini par defaut a '.pagination a,a.ajax'
 var ajaxbloc_selecteur;
+// mise en cache des url. Il suffit de vider cete variable pour vider le cache
+jQuery.spip.preloaded_urls = {};
+jQuery.spip.on_pagination = function(blocfrag,c,u) {
+	jQuery(blocfrag)
+	.html(c)
+	.removeClass('loading');
+	if (typeof u != undefined)
+		jQuery(blocfrag).attr('data-url',u);
+	var a = jQuery('a:first',jQuery(blocfrag)).eq(0);
+	if (a.length
+		&& a.is('a[name=ajax_ancre]')
+		&& jQuery(a.attr('href'),blocfrag).length){
+			a = a.attr('href')
+		setTimeout(function(){
+			jQuery(a,blocfrag).positionner(false);
+			//a = a.split('#');
+			//window.location.hash = a[1];
+		},10);
+	}
+	else {
+		//jQuery(blocfrag).positionner(false);
+	}
+	console.log('on_pagination');
+	jQuery.spip.triggerAjaxLoad(blocfrag);
+	// si le fragment ajax est dans un form ajax,
+	// il faut remettre a jour les evenements attaches
+	// car le fragment peut comporter des submit ou button
+	a = jQuery(blocfrag).parents('form.hasajax')
+	if (a.length)
+		a.eq(0).removeClass('noajax').parents('div.ajax').formulaire_dyn_ajax();
+	jQuery.spip.updateReaderBuffer();
+}
+
+jQuery.spip.loadAjax = function(blocfrag,url, href, force, callback){
+	jQuery(blocfrag)
+	.animeajax()
+	.addClass('loading').positionner(false);
+	if (jQuery.spip.preloaded_urls[url] && !force) {
+		jQuery.spip.on_pagination(blocfrag,jQuery.spip.preloaded_urls[url],href);
+	} else {
+		jQuery.ajax({
+			url: url,
+			onAjaxLoad:false,
+			success: function(c){
+				jQuery.spip.on_pagination(blocfrag,c,href);
+				jQuery.spip.preloaded_urls[url] = c;
+				if (callback && typeof callback == "function")
+					callback.apply(blocfrag);
+			}
+		});
+	}
+}
+
+jQuery.spip.makeAjaxUrl = function(href,ajax_env){
+	var url = href.split('#');
+	url[0] = parametre_url(url[0],'var_ajax',1);
+	url[0] = parametre_url(url[0],'var_ajax_env',ajax_env);
+	if (url[1])
+		url[0] = parametre_url(url[0],'var_ajax_ancre',url[1]);
+	return url[0];
+}
+
 jQuery.fn.ajaxbloc = function() {
 	if (this.length)
-		initReaderBuffer();
+		jQuery.spip.initReaderBuffer();
 	if (ajaxbloc_selecteur==undefined)
 		ajaxbloc_selecteur = '.pagination a,a.ajax';
-
-	var on_pagination = function(blocfrag,c,u) {
-		jQuery(blocfrag)
-		.html(c)
-		.removeClass('loading');
-		if (typeof u != undefined)
-			jQuery(blocfrag).attr('data-url',u);
-		var a = jQuery('a:first',jQuery(blocfrag)).eq(0);
-		if (a.length
-			&& a.is('a[name=ajax_ancre]')
-			&& jQuery(a.attr('href'),blocfrag).length){
-				a = a.attr('href')
-			setTimeout(function(){
-				jQuery(a,blocfrag).positionner(false);
-				//a = a.split('#');
-				//window.location.hash = a[1];
-			},10);
-		}
-		else {
-			//jQuery(blocfrag).positionner(false);
-		}
-		console.log('on_pagination');
-		triggerAjaxLoad(blocfrag);
-		// si le fragment ajax est dans un form ajax,
-		// il faut remettre a jour les evenements attaches
-		// car le fragment peut comporter des submit ou button
-		a = jQuery(blocfrag).parents('form.hasajax')
-		if (a.length)
-			a.eq(0).removeClass('noajax').parents('div.ajax').formulaire_dyn_ajax();
-		updateReaderBuffer();
-	}
-
-	var loadAjax = function(blocfrag,url, href, force, callback){
-		jQuery(blocfrag)
-		.animeajax()
-		.addClass('loading').positionner(false);
-		if (preloaded_urls[url] && !force) {
-			on_pagination(blocfrag,preloaded_urls[url],href);
-		} else {
-			jQuery.ajax({
-				url: url,
-				onAjaxLoad:false,
-				success: function(c){
-					on_pagination(blocfrag,c,href);
-					preloaded_urls[url] = c;
-					if (callback && typeof callback == "function")
-						callback.apply(blocfrag);
-				}
-			});
-		}
-	}
-	
-	var makeAjaxUrl = function(href,ajax_env){
-		var url = href.split('#');
-		url[0] = parametre_url(url[0],'var_ajax',1);
-		url[0] = parametre_url(url[0],'var_ajax_env',ajax_env);
-		if (url[1])
-			url[0] = parametre_url(url[0],'var_ajax_ancre',url[1]);
-		return url[0];
-	}
 
   return this.each(function() {
 	  jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
@@ -313,7 +327,7 @@ jQuery.fn.ajaxbloc = function() {
 		if (!ajax_env || ajax_env==undefined) return;
 		ajax_env = ajax_env[1];
 
-	  jQuery(this).not('.reloaded').bind('ajaxReload',function(event, options){
+	  jQuery(this).not('.bind-ajaxReload').bind('ajaxReload',function(event, options){
 		  var href = $(this).attr('data-url') || $(this).attr('data-origin');
 		  if (href && typeof href != undefined){
 			  options == options || {};
@@ -321,18 +335,18 @@ jQuery.fn.ajaxbloc = function() {
 			  var args = options.args || {};
 			  for (var key in args)
 	        href = parametre_url(href,key,args[key]);
-			  var url = makeAjaxUrl(href,ajax_env);
-			  loadAjax(blocfrag, url, href, true, callback);
+			  var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
+			  jQuery.spip.loadAjax(blocfrag, url, href, true, callback);
 			  // don't trig reload of parent blocks
 			  event.stopPropagation();
 		  }
-	  }).addClass('reloaded');
+	  }).addClass('bind-ajaxReload');
 
-		jQuery(ajaxbloc_selecteur,this).not('.noajax').each(function(){
+		jQuery(ajaxbloc_selecteur,this).not('.noajax').not('.bind-ajax').each(function(){
 			var href = this.href;
-			var url = makeAjaxUrl(href,ajax_env);
-			if (jQuery(this).is('.preload') && !preloaded_urls[url]) {
-				jQuery.ajax({"url":url,onAjaxLoad:false,"success":function(r){preloaded_urls[url]=r;}});
+			var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
+			if (jQuery(this).is('.preload') && !jQuery.spip.preloaded_urls[url]) {
+				jQuery.ajax({"url":url,onAjaxLoad:false,"success":function(r){jQuery.spip.preloaded_urls[url]=r;}});
 			}
 			jQuery(this).click(function(){
 				if (!ajax_confirm) {
@@ -343,13 +357,13 @@ jQuery.fn.ajaxbloc = function() {
 					if ((d.getTime()-ajax_confirm_date)<=2)
 						return false;
 				}
-				loadAjax(blocfrag, url, href, jQuery(this).is('.nocache'));
+				jQuery.spip.loadAjax(blocfrag, url, href, jQuery(this).is('.nocache'));
 				return false;
 			});
-		}).addClass('noajax'); // previent qu'on ajax pas deux fois le meme lien
+		}).addClass('bind-ajax'); // previent qu'on ajax pas deux fois le meme lien
 		// ajaxer les boutons actions qui sont techniquement des form minimaux
 		// mais se comportent comme des liens
-		jQuery('form.bouton_action_post.ajax:not(.noajax)', this).each(function(){
+		jQuery('form.bouton_action_post.ajax', this).not('.noajax').not('.bind-ajax').each(function(){
 			var leform = this;
 			var url = jQuery(this).attr('action').split('#');
 			jQuery(this)
@@ -360,12 +374,12 @@ jQuery.fn.ajaxbloc = function() {
 				},
 				onAjaxLoad:false,
 				success: function(c){
-					on_pagination(blocfrag,c);
-					preloaded_urls = {}; // on vide le cache des urls car on a fait une action en bdd
+					jQuery.spip.on_pagination(blocfrag,c);
+					jQuery.spip.preloaded_urls = {}; // on vide le cache des urls car on a fait une action en bdd
 				},
 				iframe: jQuery.browser.msie
 			})
-			.addClass('noajax') // previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
+			.addClass('bind-ajax') // previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
 			;
 		});
   });
