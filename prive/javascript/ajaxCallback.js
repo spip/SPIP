@@ -45,15 +45,17 @@ if(!jQuery.load_handlers) {
 	jQuery.fn.ajaxSubmit = function(options){
 		// find the first parent that will not be removed by formulaire_dyn_ajax
 		// or take the whole document
-		var me=jQuery(this).parents('div.ajax');
-		if (me.length)
-			me=me.parent();
-		else
-			me = document;
-		if (typeof options=='function')
-				options = { success: options };
-		var callback = options.success || function(){};
-		options.success = function(){callback.apply(this,arguments);console.log('jQuery.ajaxSubmit');triggerAjaxLoad(me);}
+		if (typeof options.onAjaxLoad=="undefined" || options.onAjaxLoad!=false) {
+			var me=jQuery(this).parents('div.ajax');
+			if (me.length)
+				me=me.parent();
+			else
+				me = document;
+			if (typeof options=='function')
+					options = { success: options };
+			var callback = options.success || function(){};
+			options.success = function(){callback.apply(this,arguments);console.log('jQuery.ajaxSubmit');triggerAjaxLoad(me);}
+		}
 		return jQuery.spip.intercepted.ajaxSubmit.apply(this,[options]);
 	}
 
@@ -263,6 +265,8 @@ jQuery.fn.ajaxbloc = function() {
 		else {
 			//jQuery(blocfrag).positionner(false);
 		}
+		console.log('on_pagination');
+		triggerAjaxLoad(blocfrag);
 		// si le fragment ajax est dans un form ajax,
 		// il faut remettre a jour les evenements attaches
 		// car le fragment peut comporter des submit ou button
@@ -278,8 +282,6 @@ jQuery.fn.ajaxbloc = function() {
 		.addClass('loading').positionner(false);
 		if (preloaded_urls[url] && !force) {
 			on_pagination(blocfrag,preloaded_urls[url],href);
-			console.log('loadAjax');
-			triggerAjaxLoad(blocfrag);
 		} else {
 			jQuery.ajax({
 				url: url,
@@ -287,8 +289,6 @@ jQuery.fn.ajaxbloc = function() {
 				success: function(c){
 					on_pagination(blocfrag,c,href);
 					preloaded_urls[url] = c;
-					console.log('loadAjax');
-					triggerAjaxLoad(blocfrag);
 					if (callback && typeof callback == "function")
 						callback.apply(blocfrag);
 				}
@@ -358,12 +358,10 @@ jQuery.fn.ajaxbloc = function() {
 				beforeSubmit: function(){
 					jQuery(blocfrag).addClass('loading').animeajax().positionner(false);
 				},
+				onAjaxLoad:false,
 				success: function(c){
 					on_pagination(blocfrag,c);
 					preloaded_urls = {}; // on vide le cache des urls car on a fait une action en bdd
-					// on le refait a la main ici car onAjaxLoad intervient sur une iframe dans IE6 et non pas sur le document
-					jQuery(blocfrag)
-					.ajaxbloc();
 				},
 				iframe: jQuery.browser.msie
 			})
