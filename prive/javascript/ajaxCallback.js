@@ -12,13 +12,16 @@ if(!jQuery.load_handlers) {
 	// Call the functions that have been added to onAjaxLoad
 	//
 	function triggerAjaxLoad(root) {
+		console.log('triggerAjaxLoad');
+		console.log(root);
 		for ( var i = 0; i < jQuery.load_handlers.length; i++ )
 			jQuery.load_handlers[i].apply( root );
 	};
 
-	// jQuery uses _load, we use _ACBload
-	jQuery.fn._ACBload = jQuery.fn.load;
+	jQuery.spip={intercepted:{}};
 
+	// intercept jQuery.fn.load
+	jQuery.spip.intercepted.load = jQuery.fn.load;
 	jQuery.fn.load = function( url, params, callback ) {
 
 		callback = callback || function(){};
@@ -32,29 +35,48 @@ if(!jQuery.load_handlers) {
 				params = null;
 			}
 		}
-		var callback2 = function(res,status) {triggerAjaxLoad(this);callback.call(this,res,status);};
-
-		return this._ACBload( url, params, callback2 );
+		var callback2 = function() {console.log('jQuery.load');triggerAjaxLoad(this);callback.apply(this,arguments);};
+		return jQuery.spip.intercepted.load.apply(this,[url, params, callback2]);
 	};
 
-	jQuery._ACBajax = jQuery.ajax;
+	// intercept jQuery.fn.ajaxSubmit
+	jQuery.spip.intercepted.ajaxSubmit = jQuery.fn.ajaxSubmit;
+	jQuery.fn.ajaxSubmit = function(options){
+		// find the first parent that will not be removed by formulaire_dyn_ajax
+		// or take the whole document
+		var me=jQuery(this).parents('div.ajax');
+		if (me.length)
+			me=me.parent();
+		else
+			me = document;
+		if (typeof options=='function')
+				options = { success: options };
+		var callback = options.success || function(){};
+		options.success = function(){callback.apply(this,arguments);console.log('jQuery.ajaxSubmit');triggerAjaxLoad(me);}
+		return jQuery.spip.intercepted.ajaxSubmit.apply(this,[options]);
+	}
 
+	// intercept jQuery.ajax
+	jQuery.spip.intercepted.ajax = jQuery.ajax;
 	jQuery.ajax = function(type) {
 		var s = jQuery.extend(true, {}, jQuery.ajaxSettings, type);
 		var callbackContext = s.context || s;
-		//If called by _load exit now because the callback has already been set
-		if (jQuery.ajax.caller==jQuery.fn._load) return jQuery._ACBajax( type);
-			var orig_complete = s.complete || function() {};
-			type.complete = function(res,status) {
-				// Do not fire OnAjaxLoad if the dataType is not html
-				var dataType = type.dataType;
-				var ct = (res && (typeof res.getResponseHeader == 'function'))
-					? res.getResponseHeader("content-type"): '';
-				var xml = !dataType && ct && ct.indexOf("xml") >= 0;
-				orig_complete.call( callbackContext, res, status);
-				if(!dataType && !xml || dataType == "html") triggerAjaxLoad(document);
+		if (jQuery.ajax.caller==jQuery.spip.intercepted.load || jQuery.ajax.caller==jQuery.spip.intercepted.ajaxSubmit)
+			return jQuery.spip.intercepted.ajax(type);
+		var orig_complete = s.complete || function() {};
+		type.complete = function(res,status) {
+			// Do not fire OnAjaxLoad if the dataType is not html
+			var dataType = type.dataType;
+			var ct = (res && (typeof res.getResponseHeader == 'function'))
+				? res.getResponseHeader("content-type"): '';
+			var xml = !dataType && ct && ct.indexOf("xml") >= 0;
+			orig_complete.call( callbackContext, res, status);
+			if(!dataType && !xml || dataType == "html") {
+				console.log('jQuery.ajax');
+				triggerAjaxLoad(s.ajaxTarget?s.ajaxTarget:document);
+			}
 		};
-		return jQuery._ACBajax(type);
+		return jQuery.spip.intercepted.ajax(type);
 	};
 
 }
@@ -179,7 +201,8 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 						}
 					}
 					// on le refait a la main ici car onAjaxLoad intervient sur une iframe dans IE6 et non pas sur le document
-					triggerAjaxLoad(cible);
+					//console.log('formulaire_dyn_ajax');
+					//triggerAjaxLoad(cible);
 					// mettre a jour le buffer du navigateur pour aider jaws et autres readers
 					updateReaderBuffer();
 				}
@@ -270,10 +293,12 @@ jQuery.fn.ajaxbloc = function() {
 		  .addClass('loading').positionner(false);
 		  if (preloaded_urls[url] && !force) {
 			  on_pagination(preloaded_urls[url],href);
-			  triggerAjaxLoad(document);
+			  console.log('loadAjax');
+			  triggerAjaxLoad(blocfrag);
 		  } else {
 			  jQuery.ajax({
 				  url: url,
+				  ajaxTarget:blocfrag,
 				  success: function(c){
 					  on_pagination(c,href);
 					  preloaded_urls[url] = c;
@@ -546,8 +571,10 @@ jQuery(function() {
 onAjaxLoad(function() {
 	if (jQuery){
 		jQuery('form:not(.bouton_action_post)', this).parents('div.ajax')
-		.formulaire_dyn_ajax();
+			.formulaire_dyn_ajax();
+		if (jQuery(this).is('div.ajaxbloc'))
+			jQuery(this).ajaxbloc();
 		jQuery('div.ajaxbloc', this)
-		.ajaxbloc();
+			.ajaxbloc();
 	}
 });
