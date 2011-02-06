@@ -13,7 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // chargement des valeurs par defaut des champs du formulaire
-function formulaires_recherche_ecrire_charger_dist($action = ''){
+function formulaires_recherche_ecrire_charger_dist($action = '',$class=''){
 	if ($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site'])
 		$lang = $GLOBALS['spip_lang'];
 	else
@@ -23,7 +23,8 @@ function formulaires_recherche_ecrire_charger_dist($action = ''){
 		array(
 			'action' => ($action ? $action : generer_url_ecrire('recherche')), # action specifique, ne passe pas par Verifier, ni Traiter
 			'recherche' => _request('recherche'),
-			'lang' => $lang
+			'lang' => $lang,
+			'class' => $class,
 		);
 }
 
