@@ -555,11 +555,12 @@ td.message, a.message { background: url([(#CHEMIN_IMAGE{m_envoi[(#GET{rtl})].gif
 	margin:20px 0 0;
 	font-size:.95em;
 	border: 1px solid #dfdfdf;
+	position:relative;
 }
 .liste-objets-lies,.liste-objets-associer {margin:0 0 20px;}
 
 .cadre .liste-objets{font-size:1em;}
-
+.liste-objets > .image_loading {position:absolute;top:0;right:0;}
 .liste-objets .pagination,.liste-objets p.pagination {
 	margin:0; padding:1px 5px;
 	background:#eee; border:none;
