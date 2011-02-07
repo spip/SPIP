@@ -28,6 +28,7 @@ function action_editer_article_dist($arg=null) {
 			include_spip('inc/headers');
 			redirige_url_ecrire();
 		}
+	  $id_article = insert_article($id_parent);
 	}
 
 	// Enregistre l'envoi dans la BD
