@@ -41,7 +41,8 @@ global $table_logos;
 $table_logos = array( 
 	'id_article' => 'art', 
 	'id_auteur' => 'aut', 
-	'id_rubrique' => 'rub'
+	'id_rubrique' => 'rub',
+	'id_groupe' => 'groupe',
 );
 
 ?>
