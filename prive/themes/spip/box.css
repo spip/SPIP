@@ -6,7 +6,7 @@ version: 0.2
 /* **************** BLOCK STRUCTURES ***************** */
 /* box */
 .box{margin:20px 0 0;}
-.bd,.ft{padding:0 10px;overflow:hidden;_overflow:visible; _zoom:1;}
+.bd,.ft{padding:0 10px;/*overflow:hidden;_overflow:visible; _zoom:1;*/}
 .bd {padding:10px;}
 .hd {padding:5px 10px;}
 .box .inner{position:relative;}
