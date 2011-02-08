@@ -17,7 +17,6 @@ ecrire/action/etre_webmestre.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/index.php -text
 ecrire/action/instituer_article.php -text
-ecrire/action/instituer_auteur.php -text
 ecrire/action/instituer_collaboration.php -text
 ecrire/action/instituer_langue_rubrique.php -text
 ecrire/action/logout.php -text
@@ -88,7 +87,6 @@ ecrire/exec/informer.php -text
 ecrire/exec/informer_auteur.php -text
 ecrire/exec/infos_perso.php -text
 ecrire/exec/install.php -text
-ecrire/exec/instituer_auteur.php -text
 ecrire/exec/menu_rubriques.php -text
 ecrire/exec/navigation.php -text
 ecrire/exec/naviguer.php -text
