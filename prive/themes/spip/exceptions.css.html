@@ -1,0 +1,89 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+
+/* * ***************************************************/
+/* directives specifiques a une page */
+/* exec=admin_plugin */
+.liste-plugins.formulaire_spip {border:0;background:none;padding:0;}
+.liste-plugins .liens {padding:6px;background:#ddd; margin-left: -6px; margin-right: -7px;}
+#liste_plugins .boutons { margin: -6px; }
+.liste-plugins .liste-items {margin-left: -6px; margin-right: -6px;}
+.liste-plugins .liste-items .item {position:relative;padding-#GET{left}:76px; padding-#GET{right}: 10px;}
+.liste-plugins .liste-items .item.actif {background:#eee;}
+.liste-plugins .liste-items .item.actif:hover {background:#e8e8e8;}
+.liste-plugins .liste-items .item.erreur {background:#fdd;}
+.liste-plugins .liste-items .item.erreur .erreur {color:red;font-weight:bold;}
+.liste-plugins .liste-items .item.on {background:[#(#GET{claire}|couleur_eclaircir)];}
+
+.liste-plugins .liste-items .item .short {color:#666;font-size:0.95em;}
+.liste-plugins .liste-items .item.on .short {display:none;}
+.liste-plugins .liste-items .item .check {float:#GET{left};margin-#GET{left}:-70px;position:relative;display:inline;}
+.liste-plugins .liste-items .item .check input {margin:0;}
+.liste-plugins .liste-items .item .check label {display:none;}
+
+.liste-plugins .liste-items .item .download {float:#GET{left};margin-#GET{left}:-70px;position:relative;display:inline;}
+
+.liste-plugins .liste-items .item .nom {font-size:1.2em;display:inline;}
+.liste-plugins .liste-items .item .nom a {color:#444;}
+.liste-plugins .liste-items .item.actif .nom a {color:#GET{foncee};}
+
+.liste-plugins .liste-items .item .icon {position:absolute;top:3px;#GET{left}:34px;width:32px;height:32px;overflow:hidden;}
+.liste-plugins .liste-items .item .actions {float:#GET{right};visibility:hidden;}
+.liste-plugins .liste-items .item:hover .actions {visibility:visible;}
+.liste-plugins .liste-items .item .cfg_link { position:absolute; right:4px; top:4px; }
+
+.liste-plugins .liste-items .item .details .desc {padding:5px 0 2px;}
+.liste-plugins .liste-items .item .details .auteurs {font-style:italic;padding-bottom:5px;display:inline;}
+.liste-plugins .liste-items .item .details .licence {display:inline;}
+.liste-plugins .liste-items .item .details .tech {font-size:0.9em;float:#GET{right};text-align:#GET{right};clear:#GET{left}}
+
+.install-plugins {background:#ddd;border:1px solid black;color:#555;font-size:0.85em;padding:10px;}
+.install-plugins .ok {color:green;font-weight:bold;}
+.install-plugins .erreur {color:red;font-weight:bold;}
+
+.erreur_message-plugins {border:1px solid red;background:#f0d0d0;font-weight:normal;padding:10px;font-size:0.9em;}
+.erreur_message-plugins >ul {list-style:none;}
+.erreur_message-plugins .info_todo {margin:10px 0;}
+
+#liste_plug { border: solid 1px #GET{foncee}; padding:3px; background-color:white; height: 200px; overflow:auto;overflow-y: auto; }
+
+/* lang_raccourcis */
+#raccourcis .titrem { background: #GET{claire}; }
+
+
+/* editer_auteurs */
+.option_separateur_statut_auteur { background: #GET{claire}; }
+.option_auteur { background: #e4e4e4; }
+
+/* exec/articles */
+.articles h1 {color: #000; font-size: large; margin-top: 5px; }
+#voir .article_prop {text-align: center; font-weight: bold; font-size: small; color: red; }
+
+/* exec/naviguer */
+.naviguer h1 {color: #000;font-size: large; margin-top: 5px; }
+#contenu div.gauche { width: 49%; float: #GET{left}; }
+#contenu div.droite { width: 49%; float: #GET{right}; }
+
+/* exec/auteur_infos */
+#auteur-voir .statut {margin:10px 0;border-top :1px solid #eee;border-bottom :1px solid #eee;padding:10px 0;}
+#auteur-voir .statut ul {margin-bottom:0;}

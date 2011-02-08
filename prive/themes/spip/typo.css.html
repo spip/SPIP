@@ -1,0 +1,50 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+
+body { font-size:0.625em; font-family: Verdana, Geneva, Sans, sans-serif; }
+
+#contenu { font-size:12px; }
+
+h1 { color: #GET{foncee}; font-size:large; font-family: Arial, Sans, sans-serif; margin: 16px 0 0.25em 0; }
+h2 { color: #000; font-size: medium; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
+h3 { color: #666; font-size: medium; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
+/* Raccourcis pour les polices (utile pour les tableaux) */
+.arial0 { font-family: Arial, Sans, sans-serif; font-size: 9px; }
+.arial1 { font-family: Arial, Sans, sans-serif; font-size: 10px; }
+.arial11 { font-family: Arial, Sans, sans-serif; font-size: 11px; }
+.arial2 { font-family: Arial, Sans, sans-serif; font-size: 12px; }
+.verdana1 { font-size: 10px; }
+.verdana2 { font-size: 11px; }
+.verdana12 {font-size: 12px; }
+.verdana3 { font-size: 13px; }
+.serif { font-family: Georgia, Garamond, Times New Roman, serif; }
+.serif1 { font-family: Georgia, Garamond, Times New Roman, serif; font-size: 11px; }
+.serif2 { font-family: Georgia, Garamond, Times New Roman, serif; font-size: 13px; }
+
+.spip_xx-large { font-size: 32px; }
+.spip_x-large { font-size: 26px; }
+.spip_large { font-size: 18px; }
+.spip_medium { font-size: 16px; }
+.spip_small { font-size: 14px; }
+.spip_x-small { font-size: 12px; }
+.spip_xx-small { font-size: 10px; }

@@ -1,0 +1,125 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/* Ancien selecteur de rubriques */
+.selecteur_parent{font-size: 90%; width: 99%; max-height: 24px;} /* appliquee sur le <select> */
+option.selec_rub { background-position: [(#GET{left})] center; background-image: url(#CHEMIN_IMAGE{rubrique-12.gif}); background-repeat: no-repeat; padding-#GET{left}: 16px; }
+option.niveau_1 { font-weight: bold; background: #GET{claire}; background-image: url(#CHEMIN_IMAGE{secteur-12.gif}); background-repeat:  no-repeat; }
+option.niveau_2 { color: #202020; border-bottom: 1px solid #GET{claire}; }
+option.niveau_3 { color: #404040; }
+option.niveau_4 { color: #606060; }
+option.niveau_5 { color: #808080; }
+option.niveau_6 { color: #a0a0a0; }
+
+
+/* brouteur de rubrique */
+div.brouteur_rubrique { display: block; padding: 3px; padding-#GET{right}: 10px; border-top: 0px solid #GET{foncee}; border-bottom: 1px solid #GET{foncee}; border-#GET{left}: 1px solid #GET{foncee}; border-#GET{right}: 1px solid #GET{foncee}; background: url([(#CHEMIN_IMAGE{triangle-droite[(#GET{rtl})].gif})]) [(#GET{right})] center no-repeat; background-color: #fff; }
+div.brouteur_rubrique_on { display: block; padding: 3px; padding-#GET{right}: 10px; border-top: 0px solid #GET{foncee}; border-bottom: 1px solid #GET{foncee}; border-#GET{left}: 1px solid #GET{foncee}; border-#GET{right}: 1px solid #GET{foncee}; background: url([(#CHEMIN_IMAGE{triangle-droite[(#GET{rtl})].gif})]) [(#GET{right})] center no-repeat; background-color: #eeeeee; }
+/*div.brouteur_rubrique:hover { background-color: #e0e0e0; }*/
+
+xdiv.brouteur_rubrique:hover { background-color: #eeeeee; }
+
+div.brouteur_rubrique div, div.brouteur_rubrique_on div { padding-top: 5px; padding-bottom: 5px; padding-#GET{left}: 28px; background-repeat: no-repeat; background-position: center #GET{left}; font-weight: bold; font-family: Arial, Sans, sans-serif; font-size: 12px; }
+div.brouteur_rubrique div a { color: #GET{foncee}; }
+div.brouteur_rubrique_on div a { color: #000; }
+
+.brouteur_icone_racine { background: url(#CHEMIN_IMAGE{racine-site-24.gif}) [(#GET{left})] no-repeat; padding-top: 5px; padding-bottom: 5px; padding-#GET{left}: 28px }
+.brouteur_icone_secteur { background: url(#CHEMIN_IMAGE{secteur-24.gif}) [(#GET{left})] no-repeat; padding-top: 5px; padding-bottom: 5px; padding-#GET{left}: 28px }
+.brouteur_icone_rubrique { background: url(#CHEMIN_IMAGE{rubrique-24.gif}) [(#GET{left})] no-repeat; padding-top: 5px; padding-bottom: 5px; padding-#GET{left}: 28px }
+.brouteur_icone_article { background: url(#CHEMIN_IMAGE{article-24.gif}) [(#GET{left})] no-repeat; margin: 3px; padding-top: 5px; padding-bottom: 5px; padding-#GET{left}: 28px }
+.brouteur_icone_site { background: url(#CHEMIN_IMAGE{site-24.gif}) [(#GET{left})] center no-repeat; margin: 3px; padding-top: 5px; padding-bottom: 5px; padding-#GET{left}: 28px }
+
+.iframe-brouteur { background-color: #eee; border: 0; z-index: 1; }
+/* plongeur */
+div.petite-racine { margin-bottom: -5px; }
+div.petite-racine, a.petite-racine { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN_IMAGE{racine-site-12.gif}); padding-#GET{left}: 15px; background-color: #fff; border: 1px solid #GET{foncee}; border-bottom: 0; width: 134px; }
+div.petite-rubrique, a.petite-rubrique { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN_IMAGE{rubrique-12.gif}); padding-#GET{left}: 15px; }
+div.petit-secteur, a.petit-secteur { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN_IMAGE{secteur-12.gif}); padding-#GET{left}: 15px; }
+div.rub-ouverte, a.rub-ouverte { padding-#GET{right}: 10px; background: url([(#CHEMIN_IMAGE{triangle-droite[(#GET{rtl})].gif})]) [(#GET{right})] center no-repeat; }
+/* selecteur ajax */
+#choix_parent_principal { background: #fff; border: 1px solid #GET{foncee}; position: relative; height: 170px; overflow: auto; margin-top:5px;}
+.recherche_rapide_parent {margin-top: -25px;float:right; }
+.rubrique_actuelle {height: 25px; }
+#selection_rubrique .informer { background: #fff; }
+.informer-auteur { background: #fff; padding: 5px; border-top: 0; }
+
+/* ----- */
+
+ul.item_picked {list-style:none;margin:0;padding:0;float:left;}
+ul.item_picked li {margin:0 2px 2px;padding:2px;background:#eee;border:1px solid #GET{claire};float:#GET{left};clear:none;}
+ul.item_picked li span.sep {display:none;}
+
+ul.item_picked li.article {padding-#GET{left}:15px;background:url([(#CHEMIN_IMAGE{article-12.png}|url_absolue)]) no-repeat [(#GET{left}) ]center;}
+ul.item_picked li.rubrique {padding-#GET{left}:15px;background:url([(#CHEMIN_IMAGE{rubrique-12.png}|url_absolue)]) no-repeat [(#GET{left}) ]center;}
+
+ul.item_picked.select li {padding:2px 0;border:0;font-weight:bold;background:none;float:none;}
+ul.item_picked.select ul > li {float:#GET{left};}
+ul.item_picked.changing {}
+
+.picker_bouton {float:#GET{right};clear:both;}
+
+.item_picker {clear:#GET{left};font-size:0.95em;}
+.item_picker .chemin {border-bottom:1px solid #GET{claire};margin:0.5em 0 0.25em;clear:both;}
+
+.item_picker .frame {background:#fff;border:1px solid #GET{foncee};width:159px;height:400px;float:#GET{left};overflow:auto;position:relative;}
+.cadre .cadre_padding .item_picker .frame {width:153px;}
+.fiche_objet .cadre .cadre_padding .item_picker .frame {width:148px;}
+.item_picker .frame.total_3 {margin-#GET{left}:-58px;border-#GET{left}:3px solid #GET{foncee};}
+.item_picker .frame.frame_0 {margin-#GET{left}:0;z-index:1000;}
+.item_picker .frame.frame_1 {z-index:1010;}
+.item_picker .frame.frame_2 {z-index:1020;}
+.item_picker .frame.frame_3 {z-index:1030;}
+.item_picker .frame.frame_4 {z-index:1040;}
+
+.item_picker .frame .frame_close {float:#GET{right};}
+.item_picker .frame h2 {margin:0;padding:5px;background:[#(#GET{claire}|couleur_eclaircir)];font-size:1.3em;}
+.item_picker .frame .pagination {font-size:0.9em;}
+
+.item_picker .frame ul {list-style:none;margin:0;padding:0;}
+.item_picker .frame ul li {display:block;clear:both;list-style:none;margin:0;padding:0 2px;padding-#GET{left}:15px;position:relative;}
+.item_picker .frame ul li.rubrique {background:url([(#CHEMIN_IMAGE{rubrique-12.png}|url_absolue)]) no-repeat[ (#GET{left}) ]2px;padding-#GET{right}:16px;}
+.item_picker .frame ul li.article {clear:both;background:url([(#CHEMIN_IMAGE{article-12.png}|url_absolue)]) no-repeat[ (#GET{left}) ]2px;}
+
+.item_picker .frame ul li:hover,.item_picker .frame ul li.on {background-color:[#(#GET{claire}|couleur_eclaircir)];}
+.item_picker .frame a:hover,.item_picker .frame a:hover .ouvrir,.item_picker .frame a:hover .add {background-color:#GET{claire};}
+
+.item_picker .frame ul li.rubrique .ouvrir {position:absolute;display:block;top:0px;#GET{right}:0px;}
+.item_picker .frame ul >li .add {float:#GET{left};clear:#GET{left};}
+.item_picker .frame ul li a {display:block;}
+.item_picker .frame a {text-decoration:none;}
+
+.browser .choix_rapide {font-size:0.9em;}
+.browser #picker_id {padding:0;margin:0 5px;border:1px solid;}
+
+
+/* 
+   Selecteurs de rubrique / article 
+   ayant une classe li.selecteur_item 
+   n'ont pas de marge a gauche pour occuper toute la largeur 
+*/
+.formulaire_spip li.selecteur_item {
+	padding-#GET{left}:10px;background:#fff;
+}
+.formulaire_spip li.selecteur_item label {
+	margin-#GET{left}:0;display:block;float:left;padding:2px 0;
+}
+

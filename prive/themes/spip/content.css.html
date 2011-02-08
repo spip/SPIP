@@ -1,0 +1,182 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+
+/*  ------------------------------------------
+/*  Habillage des elements du contenu
+/*  ------------------------------------------ */
+
+#copyright {text-align:right;font-size:x-small;padding-top:1em;border-top:1px solid #eee;}
+
+#chemin { overflow: hidden; margin: 0; padding: 0;	text-align:#GET{left};}
+#chemin > a  { color: #444; }
+#chemin > a:hover { text-decoration: underline;  }
+
+#chemin .bouton_deplacer {display:block;float:#GET{right};position:relative;padding:3px;padding-#GET{left}:20px;}
+#chemin .bouton_deplacer .image_loading {position:absolute;top:0;#GET{left}:0;}
+
+#chemin .aide {padding-top: 0px; }
+
+
+/* Liens hypertexte */
+a { text-decoration: none; color: [#(#GET{foncee}|couleur_foncer{0.25})]; }
+a:hover { text-decoration: underline; }
+a.icone { text-decoration: none; }
+a.icone:hover { text-decoration: none; }
+
+/* * Comparaison d articles */
+.diff-para-deplace { background: #e8e8ff; }
+.diff-para-ajoute { background: #d0ffc0; color: #000; }
+.diff-para-supprime { background: #ffd0c0; color: #904040; text-decoration: line-through; }
+.diff-deplace { background: #e8e8ff; }
+.diff-ajoute { background: #d0ffc0; }
+.diff-supprime { background: #ffd0c0; color: #802020; text-decoration: line-through; }
+.diff-para-deplace .diff-ajoute { background: #b8ffb8; border: 1px solid #808080; }
+.diff-para-deplace .diff-supprime { background: #ffb8b8; border: 1px solid #808080; }
+.diff-para-deplace .diff-deplace { background: #b8b8ff; border: 1px solid #808080; }
+
+
+
+img.puce { width: 7px; height: 7px; border: 0; }
+img.lang { width: 12px; height: 12px; border: 0; }
+
+
+/* * Styles generes par les raccourcis de mise en page */
+
+.chapo { font-weight: bold; color: #333; }
+
+#wysiwyg { font-size: 1em; line-height: 1.4em; }
+#wysiwyg a { /*color: #604A7F;*/ text-decoration: underline; }
+#wysiwyg a:hover { /*color: #f57900;*/ text-decoration: underline; }
+
+.boutonlien { font-weight: bold; font-size: 9px; }
+a.boutonlien:hover { color: #454545; text-decoration: none; }
+a.boutonlien { color: #808080; text-decoration: none; }
+
+a.triangle_block { margin-top: -3px; margin-bottom: -3px; margin-#GET{right}: -3px; filter:alpha(opacity=70); -moz-opacity:0.7; opacity: 0.7; }
+a.triangle_block:hover { filter: alpha(opacity=100); -moz-opacity: 1; opacity: 1; }
+
+.fond-agenda { background: url(#CHEMIN_IMAGE{fond-agenda.gif}) [(#GET{right})] center no-repeat; float: #GET{left}; margin-#GET{right}: 3px; padding-#GET{right}: 4px; line-height: 12px; color: #666; }
+
+.highlight { color: #000; background-color: #666; }
+.highlight.off { padding: 2px; display: block; color: #666; background-color: #fff; }
+a.highlight:hover { color: #000; cursor: pointer; }
+
+a.ical { background: url(#CHEMIN_IMAGE{synchro-24.gif}) no-repeat; background-position: top center; padding-#GET{left}: 30px; padding-bottom: 20px; }
+
+.swap-couche { border: 0; height: 10px; width: 10px; }
+
+.enfants ul { list-style: none; }
+.enfants ul li.rubrique_12 {background:url(#CHEMIN_IMAGE{rubrique-12.gif})[ (#GET{left})] center no-repeat; padding: 2px; padding-#GET{left}: 18px; margin-#GET{left}: 6px;position:relative;}
+
+
+/* menu langues */
+.lang_ecrire { max-height: 24px; border: 1px solid #fff; color: white; width: 100px; background: #GET{foncee}; }
+
+/* pour les puces de changement rapide de statut ; NB: ca buggue car ca s'affiche en-dessous du cadre */
+li .puce_statut { float: #GET{left}; padding-top: 5px; }
+li .puce_article_popup, li.puce_breve_popup,li.puce_site_popup { padding: 0; }
+.puce_article, .puce_breve, .puce_site { position: relative; }
+.puce_article_fixe, .puce_breve_fixe, .puce_site_fixe { position: relative; }
+
+.puce_article_popup, .puce_breve_popup, .puce_site_popup { position: absolute; top: 0; #GET{left}: 0; visibility: hidden; border: 1px solid #666; background-color: #ccc; z-index: 10; }
+.puce_article_popup img, .puce_breve_popup img, .puce_site_popup img { padding: 1px; border: 0; }
+
+.puce_article_popup { width: 55px; }
+.puce_breve_popup, .puce_site_popup { width: 27px; }
+
+.boite_onglets {clear:both; margin-top:15px; }
+.tabs-nav a { color: #GET{foncee}; }
+
+/* generique */
+#voir { overflow: hidden; }
+
+#contenu #wysiwyg div.label { clear: both; display: block; background-color: #GET{claire}; margin-top: 2em; padding: .1em; font-size: x-small; color: #777; }
+#contenu #wysiwyg div p { margin-top: 0; }
+#navigation .infos .numero { font-size: x-small;font-weight: bold; text-align: center; }
+#navigation .infos .numero p { font-size: x-large; margin:5px 0;color:#333; font-family: verdana, helvetica, arial, sans; }
+#navigation .infos .noinfo { color:#ddd;}
+#contenu .bandeau_actions { margin:5px 0;clear:both; }
+#contenu .bandeau_actions a:hover { background: #fff; }
+#contenu .logo_titre { float: #GET{right}; margin: 5px 0; margin-#GET{left}: 5px; }
+
+#contenu #wysiwyg div.champ {display:block;}
+#contenu #wysiwyg div.contenu_ps { background:#dddddd; border:1px solid #666; padding:5px;  margin:1em 0;}
+#contenu #wysiwyg div.contenu_ps.vide {display: none;}
+#contenu #wysiwyg div.contenu_ps div.label {display:inline; background:none;color:#666;}
+#contenu #wysiwyg div.contenu_notes { background:#fff; border-top:1px solid #666; padding-top:5px; margin:1em 0; font-size: 0.83em; line-height: 1.3em;}
+#contenu #wysiwyg div.contenu_notes p {
+	margin: 0; padding: 0;
+	margin-top: 0.5em;
+	margin-left: 2em;
+	text-indent: -2em;
+
+}
+#contenu #wysiwyg div.contenu_notes.vide {display: none;}
+#contenu #wysiwyg div.contenu_notes div.label {display:inline;font-weight:bold;font-size:0.9em;background:none;color:#000;}
+#contenu #wysiwyg div.texte {font-size:1em;}
+
+ul.instituer { /*float: #GET{right}; */ text-align: #GET{left}; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 0; padding:5px 0; /*font-size:0.9em; */ }
+ul.instituer li { list-style: none; margin: 0; padding: 0; }
+ul.instituer li ul { margin: 0; padding: 0; }
+ul.instituer li ul li a { display: block; }
+ul.instituer li ul li img { margin: 1px 1px -1px; margin-#GET{right}: 5px; visibility: hidden; border: 1px solid #f8f7f3; }
+ul.instituer li.selected img,ul.instituer li a:hover img {visibility:visible; }
+ul.instituer a:hover { background: #eee; }
+ul.instituer li.prepa.selected,ul.instituer li.prepa a:hover { background: #fff; }
+ul.instituer li.prop.selected,ul.instituer li.prop a:hover { background: #f89058;color: #fff; }
+ul.instituer li.publie.selected,ul.instituer li.publie a:hover { background: #9dba00;color: #fff; }
+ul.instituer li.poubelle.selected,ul.instituer li.poubelle a:hover { background: #000; color: #fff;}
+ul.instituer li.refuse.selected,ul.instituer li.refuse a:hover { background: #ff0000;color: #fff; }
+
+#voir.tabs-container { background: #fff; padding: 5px; border: 1px solid #999; }
+.no_onglets .tabs-container {background:#fff; border:none;padding-top:0;}
+.no_onglets .tabs-nav {display: none;}
+.no_onglets .fiche_objet { background:#fff;border:1px solid #ccc; padding:5px;margin-bottom:1em; margin-top: 20px;}
+.no_onglets #voir.tabs-container { background: #fff; padding:0; border: 0; }
+
+.no_onglets #contenu #wysiwyg div.label{ display: none; }
+.no_onglets #contenu #wysiwyg .contenu_lien_titre {margin:1em 0;}
+.no_onglets #contenu #wysiwyg .contenu_lien_titre div.label{ color:#000;background:none;display:inline; font-size:1.1em;font-weight:bold;font-family:Georgia,Garamond,Times New Roman,serif;}
+.no_onglets #contenu #wysiwyg .contenu_lien_titre div.lien_titre p { display:inline;}
+.no_onglets #contenu #wysiwyg { padding:5px;}
+.no_onglets #contenu #wysiwyg div.contenu_soustitre,
+.no_onglets #contenu #wysiwyg div.contenu_surtitre,
+.no_onglets #contenu #wysiwyg div.contenu_titre {display: none;}
+.no_onglets #contenu #wysiwyg div.vide {display: none;}
+.no_onglets #contenu h1 {color:#GET{foncee};}
+.no_onglets #contenu #wysiwyg div.contenu_descriptif,
+.no_onglets #contenu #wysiwyg div.contenu_nom_site,
+.no_onglets #contenu #wysiwyg div.contenu_ps
+	{ background:#eeeeee; border: 1px solid #ccc; padding: 1em 1em 0em 1em; margin: 1em 0 ;}
+ .no_onglets #contenu #wysiwyg div.contenu_nom_site {
+ 	padding: 1em;
+ }
+.no_onglets #contenu #wysiwyg div.contenu_descriptif span.label {color:#000;background:none;display:inline;font-size:1.1em;font-weight:bold;}
+body.sites .no_onglets #contenu #wysiwyg div.contenu_nom_site {display: none;}
+.no_onglets .boite_onglets {margin-top:0px; }
+
+
+/* fond des miniatures de logos et documents */
+.miniature_logo, .miniature_document {
+	background: url(#CHEMIN_IMAGE{fond-grille.gif}) top left;
+}

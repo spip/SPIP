@@ -285,6 +285,108 @@ tbody>.tr_liste:last-child td { border-bottom: 0px; }
 .tr_liste td div.liste_clip { height: 12px; overflow: hidden; }
 .tr_liste:hover td div.liste_clip, span.liste_clip { overflow: visible; height: 100%; }
 
+/** OLDIES : cadres issus de PHP */
+/* icone en bord haut du cadre */
+.cadre-icone {position: absolute; top: -16px; #GET{left}: 10px;z-index:1;}
+
+/* * Cadre couleur foncee */
+.cadre_padding { padding: 6px; }
+.cadre_padding.padding_x { padding: 0 6px; }
+.padding_x .bloc_depliable { padding: 6px 0; }
+/* .cadre-titre { font-family: Verdana, Geneva, helvetica, sans; font-weight: bold; font-size: 12px; padding: 3px; }*/
+.cadre { margin: 20px 0 10px 0; font-family: Verdana, Geneva, helvetica, sans; font-size: 11px; position: relative; }
+.cadre { border: 1px solid #aaa; background-color: #eee; }
+.cadre-fonce { background-color: #GET{foncee}; }
+.cadre-gris-fonce { background: #666; }
+.cadre-gris-clair { border: 1px solid #ccc; background-color: #dedede; }
+.cadre-couleur { background-color: #GET{claire}; }
+.cadre-couleur div.cadre-titre { background-color: #GET{foncee}; border-bottom: 2px solid #GET{foncee}; color: #fff; }
+.cadre-couleur-foncee { background-color: #GET{claire}; }
+.cadre-couleur-foncee div.cadre-titre { color: #fff; }
+.cadre-trait-couleur { background-color: #fff; border: 2px solid #GET{foncee}; }
+.cadre-trait-couleur div.cadre-titre { background-color: #GET{foncee}; border-bottom: 2px solid #GET{foncee}; color: #fff; }
+.cadre-r { background-color: #fff; border: 1px solid #ccc; color: #333; }
+.cadre-r div.cadre-titre { background-color: #ccc; border-bottom: 1px solid #666; color: #000; }
+.cadre-e { background-color: #eee; border: 1px solid #ccc; }
+.cadre-e div.cadre-titre { background-color: #GET{claire}; border-bottom: 1px solid #666; color: #000; }
+.cadre-forum { background-color: #fff; border: 1px solid #ccc; margin-bottom: 0; }
+.cadre-forum div.cadre-titre { background-color: #GET{claire}; border-bottom: 1px solid #ccc; color: #000; }
+.cadre-sous_rub { background-color: #fff; border: 1px solid #ccc; }
+.cadre-thread-forum { background-color: #eee; border: 1px solid #ccc; border-top: 0; margin-bottom: 0; margin-top: 0px; }
+.cadre-thread-forum div.cadre-titre { background-color: #ccc; color: #000; }
+.cadre-info{ background-color: #fff; border: 2px solid #GET{foncee}; padding: 5px; }
+.cadre-formulaire { border: 1px solid #GET{foncee}; background-color: #ddd; padding: 5px; color: #444; font-family: Verdana, Geneva, helvetica, sans; font-size: 11px; }
+.cadre-formulaire-editer {color: #444; font-family: Verdana, Geneva, helvetica, sans; font-size: 11px; margin-top:20px;}
+.cadre-formulaire-editer.popin {margin-top:0}
+.cadre-alerte { border: 6px solid red; }
+
+/* -------- */
 .cadre-liste .titrem { background-color: #fff; color: #444; }
 .cadre-liste .titrem.hover { background-color: #GET{claire}}
 .cadre-liste .tr_liste .titrem { background-color:#eee; }
+
+
+.ajax-action {padding-top:0px;clear:both;position: relative; }
+/*
+.dater {position: relative; }
+.dater { border: 1px solid #GET{claire}; }
+.dater .hover, .editer_mot .hover, .editer_auteurs .hover { background-color: #GET{claire}; }
+*/
+/*
+.configuration #contenu .cadre .titrem { background-color:#eee; }
+.configuration #contenu .titrem.hover { background-color: #GET{claire}; }
+.configuration #contenu .cadre-trait-couleur { border: 1px solid #ccc; }
+.configuration #contenu .cadre-trait-couleur .titrem { background-color: #GET{claire};color: [#(#ENV{couleur_foncee}|couleur_foncer)]; text-transform: uppercase; }
+.configuration #contenu .ajax-action,
+.configuration #contenu .cadre-trait-couleur .cadre_padding {
+	padding-top: 0px;
+}
+.configuration #contenu .cadre-couleur .cadre_padding .titrem,
+.configuration #contenu .cadre-trait-couleur .cadre_padding .titrem {
+	text-transform: none;
+	background-color: white;
+	padding-bottom: 11px;
+	color: #444444;
+
+}
+.configuration #contenu .cadre-couleur .titrem { background-color: #GET{claire}; }
+
+*/
+
+/* Titre d'une boite */
+.titrem { font-weight: bold; }
+div.titrem, h3.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat; padding-[(#GET{left})]:16px; padding-[(#GET{right})]:10px;}
+div.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left})] top;background-repeat: no-repeat; position:relative;float:[(#GET{left})];margin-[(#GET{left})]:-16px;}
+
+.cadre-couleur-foncee .titrem { background-color: #GET{claire}; color: #fff; color: #444; }
+.cadre-couleur-foncee .cadre_padding .titrem { color: #444; }
+.cadre-trait-couleur .titrem { background-color: #GET{foncee}; color: #fff; }
+.cadre-trait-couleur .cadre_padding .titrem { background-color: #fff;color: #444; }
+
+.mots_tous #contenu .titrem.impliable { background-color: #GET{claire}; }
+
+.cadre-couleur .titrem { background-color: #fff; }
+/*
+.joindre .titrem, #navigation .joindre .titrem { background-color: #GET{claire}; }
+*/
+.accueil #navigation .titrem { background-color: #fff; }
+
+#navigation .titrem, #extra .titrem {text-align: center; }
+#navigation .titrem, #extra .titrem { background-color: #fff; }
+#liste_images .titrem, #liste_documents .titrem { background-color: #ccc; }
+/*#liste_images .legender .titrem, #liste_documents .legender .titrem { background-color: #fff; } */
+#navigation .hover, #extra .hover, .joindre .hover, #liste_images .hover, #liste_documents .hover { background-color: #GET{claire}; }
+/*
+.iconifier div div.titrem {text-align: #GET{left}; }
+.iconifier div div {text-align: center; }
+.iconifier div div label {text-align: #GET{left};display: block; }
+*/
+/* Deplier / Replier */
+.deplie a.titremancre, .deplie a.titremancre, .depliant a.titremancre, .replie a.titremancre { height: 1px; padding-bottom: 0px; }
+.replie a.titremancre { background-image: url([(#CHEMIN_IMAGE{deplierhaut[(#GET{rtl})].gif})]); }
+.hover { background-color: #GET{claire}; }
+.deplie a.titremancre { background-image: url(#CHEMIN_IMAGE{deplierbas.gif}); }
+.impliable {}
+.js .blocreplie { display: none; }
+.blocdeplie { display: block; background: none; }
+	

@@ -1,0 +1,91 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+
+/* * Style des icones */
+/* structure html : <span class="icone danger horizontale s24 left"><a><img><b>texte</b></span> */
+.icone { display:block; margin:0;padding:0;text-align: center; font-size: 10px;}
+.icone a {display:block;margin:0 auto;width:72px;padding: 5px 0; }
+.icone a:hover {text-decoration:none;}
+.icone a img {margin: 0 auto; display: inline; padding: 4px; background-color: #eee; border: 2px solid #GET{foncee}; }
+.icone a:hover img { background-color: #fff; border-color: #666; }
+.icone a b { font-weight: bold; color: #GET{foncee}; display: block; margin: 2px auto; width: 100%; height: 3em; }
+.icone a:hover b { color: #000;}
+
+/* alignement */
+.icone.left {float:#GET{left};}
+.icone.right {float:#GET{right};}
+.icone.center a {margin:0 auto;}
+
+/* icone horizontale */
+.icone.horizontale { display:block; clear: both;position:relative;margin:0;padding:2px;text-align: #GET{left};padding-#GET{left}:32px;}
+.icone.horizontale a {display:inline;width:auto;padding:0;}
+/* pour les navigateurs modernes */
+.icone.horizontale a {display:table-cell;vertical-align:middle;height:28px;}
+.icone.horizontale.right {text-align: #GET{right};padding-#GET{right}:32px;padding-#GET{left}:2px;}
+.icone.horizontale a img {padding:0;border:0;background:none;position:absolute;#GET{left}:4px;top:50%;margin-top:-12px;}
+.icone.horizontale a b {color:#666;display:inline;}
+.icone.horizontale a:hover b { color: #000;}
+
+/* variantes sans texte ou sans image */
+.icones_img .icone.verticale b {display:none;}
+.icones_texte .icone img {display:none;}
+
+.icones_texte .icone.horizontale {padding:2px;}
+.icones_texte .icone.horizontale a {display:block;padding:4px;color: #606060;border: 1px solid #ddd; background-color: #f0f0f0;}
+.icones_texte .icone.horizontale a:hover { text-decoration: none; color: #000; border-#GET{right}: solid 1px #fff; border-bottom: solid 1px #fff; border-#GET{left}: solid 1px #666; border-top: solid 1px #666; background-color: #eee; }
+
+/* danger */
+.icone.danger {background:none;}
+.icone.danger a { background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
+.icone.danger a img { background-color: #fff; border-color: #ff9999; }
+.icone.danger a:hover img { background-color: #fff; border-color: red; }
+.icone.horizontale.danger a { background: none; }
+.icone.horizontale.danger { background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
+.icones_texte .icone.horizontale.danger {background:none;}
+.icones_texte .icone.horizontale.danger a { background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
+
+/* cas particuliers */
+.icone.verticale.historique-24 { width: 90px; }
+.icone.verticale.suivi-forum-24 { width: 100px; }
+
+
+
+/* * Style des onglets historiques */
+
+div.onglet { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; font-weight: bold; border: 1px solid #GET{foncee}; margin-#GET{right}: 3px; padding: 5px; background-color: #fff; }
+div.onglet a { color: #GET{foncee}; }
+div.onglet_on { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; font-weight: bold; border: 1px solid #GET{foncee}; margin-#GET{right}: 3px; padding: 5px; background-color: #GET{claire}; }
+div.onglet_on a, div.onglet_on a:hover { color: #GET{claire}; color: #GET{foncee}; text-decoration: none; }
+div.onglet_off { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; font-weight: bold; border: 1px solid #GET{foncee}; margin-#GET{right}: 3px; padding: 5px; background-color: #GET{foncee}; color: #fff; }
+
+.reliefblanc { background-image: url(#CHEMIN_IMAGE{barre-blanc.gif}); }
+.reliefgris { background-image: url(#CHEMIN_IMAGE{barre-noir.gif}); }
+.iconeoff { padding: 3px; margin: 1px; border: 1px dashed #ccc; background-color: #f0f0f0; }
+.iconeon { cursor: pointer; padding: 3px; margin: 1px; border-#GET{right}: solid 1px #fff; border-bottom: solid 1px #fff; border-#GET{left}: solid 1px #666; border-top: solid 1px #666; background-color: #eee; }
+.iconedanger { padding: 3px; margin: 1px; border: 1px dashed #000; background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
+
+/* OLDIES anciennes icones issues de php */
+td.icone table {}
+td.icone a { color: #000; text-decoration: none; font-size: 10px; font-weight: bold; }
+td.icone a:hover { text-decoration: none; }
+td.icone a img { border: 0; }
