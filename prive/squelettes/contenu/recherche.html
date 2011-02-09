@@ -5,5 +5,7 @@
 <BOUCLE_tables(POUR){tableau #REM|liste_des_champs}{cle!=breve}{cle!=forum}{cle!=syndic_article}>
 	#SET{table,#CLE|table_objet}
 	#SET{statut,#CLE|=={article}|?{(#SESSION{statut}|statuts_articles_visibles),''}}
-	<INCLURE{fond=prive/listes/#GET{table},recherche=#ENV{recherche},statut=#GET{statut}}>
+	[(#CHEMIN{prive/listes/#GET{table}.html}|oui)
+		<INCLURE{fond=prive/listes/#GET{table},recherche=#ENV{recherche},statut=#GET{statut}}>
+	]
 </BOUCLE_tables>
