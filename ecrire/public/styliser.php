@@ -144,30 +144,43 @@ function styliser_par_langue($flux) {
  * Calcul de la rubrique associee a la requete
  * (selection de squelette specifique par id_rubrique & lang)
  *
+ * attention, on repete cela a chaque inclusion,
+ * on optimise donc pour ne faire la recherche qu'une fois
+ * par contexte semblable du point de vue des id_xx
+ *
+ * http://doc.spip.org/@quete_rubrique_fond
+ *
  * @staticvar array $liste_objets
  * @param array $contexte
  * @return array
- *
- * http://doc.spip.org/@quete_rubrique_fond
  */
 function quete_rubrique_fond($contexte) {
 	static $liste_objets = null;
+	static $quete = array();
 	if (!$liste_objets) {
 		include_spip('inc/urls');
-		$liste_objets = urls_liste_objets(false);
+		$l = urls_liste_objets(false);
 		// placer la rubrique en tete des objets
-		$liste_objets = array_diff($liste_objets,array('rubrique'));
-		array_unshift($liste_objets, 'rubrique');
-	}
-
-	foreach($liste_objets as $objet) {
-		$_id = id_table_objet($objet);
-		if (isset($contexte[$_id])
-		AND $id = intval($contexte[$_id])
-		AND $row = quete_parent_lang(table_objet_sql($objet),$id)) {
-			$lang = isset($row['lang']) ? $row['lang'] : '';
-			return array ($id, $lang);
+		$l = array_diff($l,array('rubrique'));
+		array_unshift($l, 'rubrique');
+		foreach($l as $objet){
+			$liste_objets[id_table_objet($objet)] = $objet;
 		}
 	}
+	$c = array_intersect_key($contexte,$liste_objets);
+	if (!count($c)) return false;
+
+	$s = serialize(array_map(intval,$c));
+	if (isset($quete[$s]))
+		return $quete[$s];
+
+	foreach($c as $_id=>$id) {
+		if ($id
+		  AND $row = quete_parent_lang(table_objet_sql($liste_objets[$_id]),$id)) {
+			$lang = isset($row['lang']) ? $row['lang'] : '';
+			return $quete[$s] = array ($id, $lang);
+		}
+	}
+	return $quete[$s] = false;
 }
 ?>
