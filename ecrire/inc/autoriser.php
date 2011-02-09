@@ -249,6 +249,34 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 }
 
 
+/**
+ * Autoriser a voir un article :
+ * peut etre appelee sans id, mais avec un $opt['statut'] pour tester
+ * la liste des status autorises en fonction de $qui['statut']
+ * 
+ * @return bool
+ */
+function autoriser_article_voir_dist($faire, $type, $id, $qui, $opt){
+	if ($qui['statut'] == '0minirezo') return true;
+	// cas des articles : depend du statut de l'article et de l'auteur
+	if (isset($opt['statut']))
+		$statut = $opt['statut'];
+	else {
+		if (!$id) return false;
+		$statut = sql_getfetsel("statut", "spip_articles", "id_article=".intval($id));
+	}
+
+	return
+		// si on est pas auteur de l'article,
+		// seuls les propose et publies sont visibles
+		in_array($statut, array('prop', 'publie'))
+		// sinon si on est auteur, on a le droit de le voir, evidemment !
+		OR
+		($id AND $qui['id_auteur']
+		     AND include_spip('inc/auth')
+		     AND auteurs_article($id, "id_auteur=".$qui['id_auteur']));
+}
+
 // Voir un objet
 // http://doc.spip.org/@autoriser_voir_dist
 function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
@@ -258,16 +286,12 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	}
 
 	if ($qui['statut'] == '0minirezo') return true;
-	if ($type == 'auteur') return false;
-	if ($type != 'article') return true;
-	if (!$id) return false;
-
-	// un article 'prepa' ou 'poubelle' dont on n'est pas auteur : interdit
-	$r = sql_getfetsel("statut", "spip_articles", "id_article=".sql_quote($id));
-	include_spip('inc/auth'); // pour auteurs_article si espace public
-	return
-		in_array($r, array('prop', 'publie'))
-		OR auteurs_article($id, "id_auteur=".$qui['id_auteur']);
+	// seuls les admin peuvent voir un auteur
+	if ($type == 'auteur')
+		return false;
+	// sinon par defaut tout est visible
+	// sauf cas particuliers traites separemment (ie article)
+	return true;
 }
 
 // Est-on webmestre ? Signifie qu'on n'a meme pas besoin de passer par ftp
