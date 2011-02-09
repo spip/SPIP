@@ -13,6 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/filtres_boites');
+include_spip('inc/boutons');
 
 /**
  * Fonctions utilises au calcul des squelette du prive.
