@@ -672,6 +672,8 @@ prive/squelettes/contenu/configurer_langue.html -text
 prive/squelettes/contenu/configurer_multilang.html -text
 prive/squelettes/contenu/configurer_preferences.html -text
 prive/squelettes/contenu/navigation.html -text
+prive/squelettes/contenu/recherche.html -text
+prive/squelettes/contenu/recherche_fonctions.php -text
 prive/squelettes/contenu/visiteurs.html -text
 prive/squelettes/contenu/visiteurs_fonctions.php -text
 prive/squelettes/extra/dist.html -text
