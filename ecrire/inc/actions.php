@@ -196,25 +196,24 @@ function ajax_action_greffe($fonction, $id, $corps)
 // http://doc.spip.org/@ajax_retour
 function ajax_retour($corps,$xml = true)
 {
+	$e = "";
 	if (isset($_COOKIE['spip_admin'])
 	AND ((_request('var_mode') == 'debug') OR !empty($GLOBALS['tableau_des_temps'])))
-		erreur_squelette();
-	else {
-		if (isset($GLOBALS['transformer_xml']) OR $GLOBALS['exec'] == 'valider_xml') {
-	 	$debut = _DOCTYPE_ECRIRE
-		. "<html><head><title>Debug Spip Ajax</title></head>"
-		.  "<body><div>\n\n"
-		. "<!-- %%%%%%%%%%%%%%%%%%% Ajax %%%%%%%%%%%%%%%%%%% -->\n";
+		$e = erreur_squelette();
+	if (isset($GLOBALS['transformer_xml']) OR $GLOBALS['exec'] == 'valider_xml') {
+	$debut = _DOCTYPE_ECRIRE
+	. "<html><head><title>Debug Spip Ajax</title></head>"
+	.  "<body><div>\n\n"
+	. "<!-- %%%%%%%%%%%%%%%%%%% Ajax %%%%%%%%%%%%%%%%%%% -->\n";
 
-		$fin = '</div></body></html>';
+	$fin = '</div></body></html>';
 
-		} else {
-			$c = $GLOBALS['meta']["charset"];
-			header('Content-Type: text/html; charset='. $c);
-			$debut = (($xml AND strlen(trim($corps)))?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'');
-		}
-		echo $debut, $corps, $fin;
+	} else {
+		$c = $GLOBALS['meta']["charset"];
+		header('Content-Type: text/html; charset='. $c);
+		$debut = (($xml AND strlen(trim($corps)))?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'');
 	}
+	echo $debut, $corps, $fin, $e;
 }
 
 // http://doc.spip.org/@determine_upload
