@@ -18,7 +18,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_rub(RUBRIQUES){id_rubrique?}{id_parent?}{id_mot?}{id_auteur?}{where?}{statut?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_rub(RUBRIQUES){id_rubrique?}{id_parent?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_RUBRIQUE|image_reduire{20,26})]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]"
