@@ -121,6 +121,11 @@
 #bando_navigation ul li.first { border-#GET{left}: 1px solid #eee;}
 #bando_navigation ul.deroulant > li > a { color:#333; }
 
+#bando_navigation .largeur { position:relative; }
+#bando_navigation #masquer_outils{ position:absolute; right:0; bottom:-1px; border:1px solid #999;border-bottom: 1px solid #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];height:18px; width:18px; background:#[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)] url([(#VAL{images/fermer-16.png}|find_in_theme)]) center center no-repeat;}
+.navigation_sans_outils #bando_navigation #masquer_outils{background-color:transparent;width:20px;height:20px;border:0;background-image:url([(#VAL{images/ouvrir-16.png}|find_in_theme)]); }
+#bando_navigation #masquer_outils span{ display: none; }
+
 
 /* par defaut on style pour des icones standards en 48px
 Les styles pour les icones pochoir de diala sont dans themes/spip/style_prive_theme

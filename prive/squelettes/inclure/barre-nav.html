@@ -55,6 +55,35 @@
 								href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]"
 								class="bando2_#CLE">(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_sous></ul></B_sous></li></BOUCLE_boutons></ul>
 			</B_boutons>
+			[(#SESSION{prefs}|table_valeur{display_outils}|is_null|non)
+				[(#SET{display_outils,[(#SESSION{prefs}|table_valeur{display_outils})]})]
+			]
+			[(#SESSION{prefs}|table_valeur{display_outils}|is_null|oui)
+				#SET{display_outils,oui}
+			]
+			#SET{action_outils_afficher, #URL_ACTION_AUTEUR{preferer, display_outils:oui}}
+			#SET{action_outils_masquer, #URL_ACTION_AUTEUR{preferer, display_outils:}}
+			[(#SET{action_outils,[(#GET{display_outils}|?{#GET{action_outils_masquer},#GET{action_outils_afficher}})]})]
+			[(#SET{texte_outils,[(#GET{display_outils}|?{<:label_bando_outils_masquer:>,<:label_bando_outils_afficher:>})]})]
+			<a onclick="if (jQuery('body').is('.navigation_avec_outils')){
+				jQuery('#bando_outils').slideUp('fast');
+				$.get(this.href,function(){
+					$('#masquer_outils').attr('href', '#GET{action_outils_afficher}').attr('title', '<:label_bando_outils_afficher:>').children('span').text('<:label_bando_outils_afficher:>');
+					jQuery('body').removeClass('navigation_avec_outils').addClass('navigation_sans_outils');
+				});
+			}
+			else{
+				jQuery('#bando_outils').slideDown('fast');
+				$.get(this.href,function(){
+					$('#masquer_outils').attr('href', '#GET{action_outils_masquer}').attr('title', '<:label_bando_outils_masquer:>').children('span').text('<:label_bando_outils_masquer:>');
+					jQuery('body').removeClass('navigation_sans_outils').addClass('navigation_avec_outils');
+				});
+			} return false;"
+			title="#GET{texte_outils}"
+			href="#GET{action_outils}"
+			id="masquer_outils">
+				<span>#GET{texte_outils}</span>
+			</a>
 		</div>
 	</div>
 
