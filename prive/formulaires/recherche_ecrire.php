@@ -25,6 +25,7 @@ function formulaires_recherche_ecrire_charger_dist($action = '',$class=''){
 			'recherche' => _request('recherche'),
 			'lang' => $lang,
 			'class' => $class,
+			'_id_champ' => 'rechercher_'.substr(md5($action.$class),0,4),
 		);
 }
 

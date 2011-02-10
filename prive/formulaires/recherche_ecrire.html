@@ -2,12 +2,12 @@
 <form action="[(#ENV{action})]" method="get"><div>
 	[(#ENV{action}|form_hidden)]
 	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
-	<label for="#ENV{id_champ,recherche}"><:info_rechercher_02:></label>
+	<label for="#ENV{_id_champ,recherche}"><:info_rechercher_02:></label>
 	<input type="text"
 				 class="text[(#ENV{recherche}|oui) cancelable]"
 				 size="10"
 				 name="recherche"
-				 id="#ENV{id_champ,recherche}"
+				 id="#ENV{_id_champ,recherche}"
 				 placeholder="<:info_rechercher|attribut_html:>"[
 				 value="(#ENV{recherche})"]
 	/>[<a
@@ -21,16 +21,15 @@
 					 src='[(#CHEMIN_IMAGE{rechercher-20.png})]'
 					 class="image"
 					 alt='<:info_rechercher|attribut_html:>'
-					 onclick="return recherche_submit_#ENV{id_champ,recherche}.apply(this);"
-					 onkeypress="return recherche_submit_#ENV{id_champ,recherche}.apply(this);"
+					 onclick="return recherche_submit_#ENV{_id_champ,recherche}.apply(this);"
+					 onkeypress="return recherche_submit_#ENV{_id_champ,recherche}.apply(this);"
 	/><a class="none[ (#ENV{class,''})] refresh" href="[(#ENV{action}|parametre_url{'recherche',''})]"><:info_rechercher:></a>
 </div></form>
 <script type="text/javascript">/*<![CDATA[*/
-function recherche_submit_#ENV{id_champ,recherche}(){
-	$.placeholderLabel.disable_placeholder_fields.apply($(this).parents('form').eq(0));
-	var a=$(this).siblings('a.refresh');
-	a.attr('href',parametre_url(a.attr('href'),'recherche',$(this).siblings('input.text').val())).followLink();
-	return false;
-}
-/*]]>*/</script>
+function recherche_submit_#ENV{_id_champ,recherche}(){
+$.placeholderLabel.disable_placeholder_fields.apply($(this).parents('form').eq(0));
+var a=$(this).siblings('a.refresh');
+a.attr('href',parametre_url(a.attr('href'),'recherche',$(this).siblings('input.text').val())).followLink();
+return false;
+}/*]]>*/</script>
 </div>
