@@ -92,19 +92,21 @@ function f_boite_infos($flux) {
  */
 function f_afficher_blocs_ecrire($flux) {
 	if (is_string($fond=$flux['args']['fond'])) {
-		if (strncmp($fond,"prive/squelettes/navigation/",28)==0)
+		$exec = _request('exec');
+		if ($fond == "prive/squelettes/navigation/$exec"){
 			$flux['data']['texte'] = pipeline('affiche_gauche',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
-		if (strncmp($fond,"prive/squelettes/extra/",23)==0)
+		}
+		if ($fond=="prive/squelettes/extra/$exec")
 			$flux['data']['texte'] = pipeline('affiche_droite',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
-		if (strncmp($fond,"prive/squelettes/contenu/",25)==0){
+		if ($fond=="prive/squelettes/contenu/$exec"){
 			if (!strpos($flux['data']['texte'],"<!--affiche_milieu-->"))
 				$flux['data']['texte'] = preg_replace(',<div id=["\']wysiwyg,',"<!--affiche_milieu-->\\0",$flux['data']['texte']);
 			$flux['data']['texte'] = pipeline('afficher_fiche_objet',array(
-							                            'args'=>array(
-								                            'contexte'=>$flux['args']['contexte'],
-								                            'type'=>$flux['args']['contexte']['exec'],
-								                            'id'=>$flux['args']['contexte'][id_table_objet($flux['args']['contexte']['exec'])]),
-			                                    'data'=>$flux['data']['texte']));
+																					'args'=>array(
+																						'contexte'=>$flux['args']['contexte'],
+																						'type'=>$flux['args']['contexte']['exec'],
+																						'id'=>$flux['args']['contexte'][id_table_objet($flux['args']['contexte']['exec'])]),
+																					'data'=>$flux['data']['texte']));
 			$flux['data']['texte'] = pipeline('affiche_milieu',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
 		}
 		if (strncmp($fond,"prive/contenu/",14)==0
