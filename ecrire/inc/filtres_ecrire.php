@@ -160,6 +160,11 @@ function statuts_articles_visibles($statut_auteur){
 	return $auth[$statut_auteur];
 }
 
+/**
+ * Afficher le nom de la table
+ * @param  $table
+ * @return mixed|string
+ */
 function affiche_nom_table($table){
 	static $libelles = null;
 	if (!$libelles){
@@ -171,4 +176,27 @@ function affiche_nom_table($table){
 
 	return _T(isset($libelles[$table])?$libelles[$table]:"$table:info_$table");
 }
+
+/**
+ * Afficher la mention des autres auteurs ayant modifie un objet
+ *
+ * @param int $id_objet
+ * @param string $objet
+ * @return string
+ */
+function afficher_qui_edite($id_objet,$objet){
+	static $qui = array();
+	if (isset($qui[$objet][$id_objet]))
+		return $qui[$objet][$id_objet];
+
+	if ($GLOBALS['meta']['articles_modif'] == 'non')
+		return $qui[$objet][$id_objet] = '';
+	
+	include_spip('inc/drapeau_edition');
+	$modif = mention_qui_edite($id_breve, 'breve');
+	if (!$modif) return $qui[$objet][$id_objet] = '';
+	// TODO -- _L("Fil a travaille sur cet objet il y a x minutes")
+	return $qui[$objet][$id_objet] = _T('texte_travail_article', $modif);
+}
+
 ?>
