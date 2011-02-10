@@ -152,8 +152,27 @@ function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
 
 // http://doc.spip.org/@autoriser_previsualiser_dist
 function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
-	return strpos($GLOBALS['meta']['preview'], ",". $qui['statut'] .",")
-		!==false;
+	// si auteur pas autosier, NIET
+	if (strpos($GLOBALS['meta']['preview'], ",". $qui['statut'] .",")===false)
+		return false;
+	// si pas de type et statut fourni, c'est une autorisation generale => OK
+	if (!$type)
+		return true;
+
+	include_spip('public/interfaces');
+	$table = table_objet_sql($type);
+	if (isset($GLOBALS['table_statut'][$table]))
+		foreach($GLOBALS['table_statut'][$table] as $c){
+			if (isset($c['publie'])){
+				if (!isset($c['previsu'])) return false; // pas de previsu definie => NIET
+				$champ = $c['champ'];
+				if (!isset($opt[$champ])) return false; // pas de champ passe a la demande => NIET
+				$previsu = explode(',',$c['previsu']);
+				if (!in_array($opt[$champ],$previsu)) // le statut n'est pas dans ceux definis par la previsu => NIET
+					return false;
+			}
+		}
+	return true;
 }
 
 function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
