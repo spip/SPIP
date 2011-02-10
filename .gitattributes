@@ -298,6 +298,8 @@ prive/editer/liens.html -text
 prive/editer/logo.html -text
 prive/editer/rediriger_article.html -text
 prive/editer/rubrique.html -text
+prive/formulaires/changer_langue.html -text
+prive/formulaires/changer_langue.php -text
 prive/formulaires/configurer_annonces.html -text
 prive/formulaires/configurer_annonces.php -text
 prive/formulaires/configurer_articles.html -text
