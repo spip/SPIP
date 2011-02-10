@@ -8,7 +8,6 @@
 #SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
 #SET{debut,#ENV{debutaut,#EVAL{_request("debutaut");}}}
 #ANCRE_PAGINATION
-[<h3><:info_resultat_recherche:> &laquo;(#ENV{recherche})&raquo;</h3>]
 <div class="liste-objets auteurs">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}})</strong></caption>]
