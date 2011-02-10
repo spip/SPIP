@@ -80,10 +80,13 @@ function init_body_class() {
 	$spip_display_navigation = isset($GLOBALS['visiteur_session']['prefs']['display_navigation'])
 		? $GLOBALS['visiteur_session']['prefs']['display_navigation']
 		: 'navigation_avec_icones';
+	$spip_display_outils = isset($GLOBALS['visiteur_session']['prefs']['display_outils'])
+		? ($GLOBALS['visiteur_session']['prefs']['display_outils']?'navigation_avec_outils':'navigation_sans_outils')
+		: 'navigation_avec_outils';
 	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
 	$display_class=array(1=>'icones_texte',2=>'icones_img_texte',3=>'icones_img');
-	return $GLOBALS['spip_ecran'] . " $spip_display_navigation ".$display_class[$GLOBALS['spip_display']];
+	return $GLOBALS['spip_ecran'] . " $spip_display_navigation $spip_display_outils ".$display_class[$GLOBALS['spip_display']];
 }
 
 // http://doc.spip.org/@alertes_auteur
