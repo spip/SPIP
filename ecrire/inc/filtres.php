@@ -2165,7 +2165,7 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 	if ($ajaxid AND is_string($ajaxid)){
 		$c .= ' ajax-id-'.$ajaxid;
 	}
-	return "<div class='ajaxbloc env-$c'$r>\n$emboite</div><!-- ajaxbloc -->\n";
+	return "<div class='ajaxbloc' data-ajax-env='$c'$r>\n$emboite</div><!--ajaxbloc-->\n";
 }
 
 // la procedure inverse de encoder_contexte_ajax()

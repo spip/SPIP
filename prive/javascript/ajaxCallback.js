@@ -317,6 +317,39 @@ jQuery.spip.makeAjaxUrl = function(href,ajax_env){
 	return url[0];
 }
 
+jQuery.spip.ajaxReload = function(blocfrag, options){
+	var ajax_env = blocfrag.attr('data-ajax-env');
+	if (!ajax_env || ajax_env==undefined) return;
+	var href = blocfrag.attr('data-url') || blocfrag.attr('data-origin');
+	if (href && typeof href != undefined){
+		options == options || {};
+		var callback=options.callback || null;
+		var args = options.args || {};
+		for (var key in args)
+			href = parametre_url(href,key,args[key]);
+		var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
+		jQuery.spip.loadAjax(blocfrag, url, href, true, callback);
+		return true;
+	}
+}
+
+jQuery.spip.ajaxClick = function(blocfrag, href, force){
+	var ajax_env = blocfrag.attr('data-ajax-env');
+	if (!ajax_env || ajax_env==undefined) return;
+	if (!ajax_confirm) {
+		// on rearme pour le prochain clic
+		ajax_confirm=true;
+		var d = new Date();
+		// seule une annulation par confirm() dans les 2 secondes precedentes est prise en compte
+		if ((d.getTime()-ajax_confirm_date)<=2)
+			return false;
+	}
+	var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
+	jQuery.spip.loadAjax(blocfrag, url, href, force);
+	return false;
+}
+
+
 jQuery.fn.ajaxbloc = function() {
 	if (this.length)
 		jQuery.spip.initReaderBuffer();
@@ -327,51 +360,28 @@ jQuery.fn.ajaxbloc = function() {
 	  jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
 		var blocfrag = jQuery(this);
 
-		var ajax_env = (""+blocfrag.attr('class')).match(/env-([^ ]+)/);
+		var ajax_env = blocfrag.attr('data-ajax-env');
 		if (!ajax_env || ajax_env==undefined) return;
-		ajax_env = ajax_env[1];
 
 	  jQuery(this).not('.bind-ajaxReload').bind('ajaxReload',function(event, options){
-		  var href = $(this).attr('data-url') || $(this).attr('data-origin');
-		  if (href && typeof href != undefined){
-			  options == options || {};
-			  var callback=options.callback || null;
-			  var args = options.args || {};
-			  for (var key in args)
-	        href = parametre_url(href,key,args[key]);
-			  var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
-			  jQuery.spip.loadAjax(blocfrag, url, href, true, callback);
-			  // don't trig reload of parent blocks
-			  event.stopPropagation();
-		  }
+		  if (jQuery.spip.ajaxReload(blocfrag,options))
+				// don't trig reload of parent blocks
+				event.stopPropagation();
 	  }).addClass('bind-ajaxReload');
 
-		jQuery(ajaxbloc_selecteur,this).not('.noajax').not('.bind-ajax').each(function(){
-			if (jQuery(this).is('.preload')){
+		jQuery(ajaxbloc_selecteur,this).not('.noajax,.bind-ajax')
+			.click(function(){return jQuery.spip.ajaxClick(blocfrag,this.href,jQuery(this).is('.nocache'));})
+			.filter('.preload').each(function(){
 				var href = this.href;
 				var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
 				if (!jQuery.spip.preloaded_urls[url]) {
 					jQuery.ajax({"url":url,onAjaxLoad:false,"success":function(r){jQuery.spip.preloaded_urls[url]=r;}});
 				}
-			}
-			jQuery(this).click(function(){
-				if (!ajax_confirm) {
-					// on rearme pour le prochain clic
-					ajax_confirm=true;
-					var d = new Date();
-					// seule une annulation par confirm() dans les 2 secondes precedentes est prise en compte
-					if ((d.getTime()-ajax_confirm_date)<=2)
-						return false;
-				}
-				var href = this.href;
-				var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
-				jQuery.spip.loadAjax(blocfrag, url, href, jQuery(this).is('.nocache'));
-				return false;
-			});
-		}).addClass('bind-ajax'); // previent qu'on ajax pas deux fois le meme lien
+			}).addClass('bind-ajax'); // previent qu'on ajax pas deux fois le meme lien
+
 		// ajaxer les boutons actions qui sont techniquement des form minimaux
 		// mais se comportent comme des liens
-		jQuery('form.bouton_action_post.ajax', this).not('.noajax').not('.bind-ajax').each(function(){
+		jQuery('form.bouton_action_post.ajax', this).not('.noajax,.bind-ajax').each(function(){
 			var leform = this;
 			var url = jQuery(this).attr('action').split('#');
 			jQuery(this)
