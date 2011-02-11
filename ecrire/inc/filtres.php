@@ -2320,6 +2320,8 @@ function icone_base($lien, $texte, $fond, $fonction="", $class="",$javascript=""
 			$ajax="ajax";
 		if (strpos($class,"preload")!==false)
 			$ajax.=" preload";
+		if (strpos($class,"nocache")!==false)
+			$ajax.=" nocache";
 		$ajax=" class='$ajax'";
 	}
 
