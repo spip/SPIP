@@ -202,7 +202,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 						// desemboiter d'un niveau pour manger le div que l'on a insere
 						jQuery(":first",cible).unwrap();
 					}
-					// ne pas re-executer le js
+					// chercher une ancre en debut de html pour positionner la page
 					if (a.length
 					  && a.is('a[name=ajax_ancre]')
 					  && jQuery(a.attr('href'),cible).length){
@@ -224,6 +224,9 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 							},10);
 						}
 					}
+					// on vide le cache des urls car on a fait une action en bdd
+					if (jQuery('.reponse_formulaire_ok',cible).length)
+						jQuery.spip.preloaded_urls = {};
 					// mettre a jour le buffer du navigateur pour aider jaws et autres readers
 					jQuery.spip.updateReaderBuffer();
 				}
