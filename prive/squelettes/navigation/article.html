@@ -1,0 +1,18 @@
+<BOUCLE_nav(ARTICLES){id_article}{statut?}{si #ENV{exec}|=={article}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','article','id',#ENV{id_article}}}}
+#BOITE_FERMER
+
+<div class="ajax">
+#FORMULAIRE_EDITER_LOGO{article,#ID_ARTICLE,'',#ENV**}
+</div>
+
+#PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,article,id,#ID_ARTICLE},data,''}}
+
+<div class="ajax">
+#FORMULAIRE_REDIRIGER_ARTICLE{#ENV{id_article}}
+</div>
+
+</BOUCLE_nav>
+[(#ENV{exec}|=={article_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/article_edit,env}>]
+<//B_nav>

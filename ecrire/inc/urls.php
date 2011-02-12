@@ -170,7 +170,7 @@ function generer_url_ecrire_article($id, $args='', $ancre='', $statut='', $conne
 	}
 	$h = ($statut == 'publie' OR $connect)
 	? generer_url_entite_absolue($id, 'article', $args, $ancre, $connect)
-	: (generer_url_ecrire('articles', $a . ($args ? "&$args" : ''))
+	: (generer_url_ecrire('article', $a . ($args ? "&$args" : ''))
 		. ($ancre ? "#$ancre" : ''));
 	return $h;
 }

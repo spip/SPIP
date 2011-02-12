@@ -501,7 +501,7 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='', $liens
 			}
 
 			// calculer le modele
-			# hack articles_edit, breves_edit, indexation
+			# hack indexation
 			if ($doublons)
 				$texte .= preg_replace(',[|][^|=]*,s',' ',$params);
 			# version normale

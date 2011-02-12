@@ -1,0 +1,19 @@
+[(#ID_ARTICLE|oui)
+	[(#AUTORISER{modifier,article,#ID_ARTICLE}|sinon_interdire_acces)]
+][(#ID_ARTICLE|non)
+	#SET{id_rubrique,#ENV{id_rubrique}|trouver_rubrique_creer_objet{article}}
+	[(#AUTORISER{creerarticledans,rubrique,#GET{id_rubrique}}|sinon_interdire_acces)]
+]
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_ARTICLE}|?{#URL_ECRIRE{article,id_article=#ENV{lier_trad,#ID_ARTICLE}},#URL_ECRIRE{naviguer,id_rubrique=#GET{id_rubrique}}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,article,'',left[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[<:texte_modifier_article:>
+	<h1>(#ENV{titre,#INFO_TITRE{article,#ID_ARTICLE}|sinon{<:info_sans_titre:>}})</h1>]
+</div>
+#FORMULAIRE_EDITER_ARTICLE{#ENV{id_article,oui},#GET{id_rubrique},#GET{redirect},#ENV{lier_trad}}
+</div>
+[(#ENV{retourajax,''}|oui)
+<script type="text/javascript">if (window.jQuery) jQuery('#navigation>div').ajaxReload({args:{exec:'article_edit'}});</script>
+]

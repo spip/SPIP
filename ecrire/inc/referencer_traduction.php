@@ -93,7 +93,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	}
 
 	$form .= "<td>"
-	. icone_horizontale(_T('trad_new'), generer_url_ecrire("articles_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "new", false)
+	. icone_horizontale(_T('trad_new'), generer_url_ecrire("article_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "new", false)
 	. "</td>";
 
 	if ($flag AND $liste) {
