@@ -817,7 +817,7 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'zxml_survoler' => 'to see the correct ones, hover with the cursor', # NEW
 'zxml_valeur_attribut' => 'attribute value', # NEW
 'zxml_vide_balise' => 'empty tag', # NEW
-'zxml_vu' => 'seen before', # NE
+'zxml_vu' => 'seen before' # NEW
 );
 
 ?>
