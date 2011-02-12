@@ -21,6 +21,7 @@ hr.clear { visibility: hidden; }
 .clearfix { display: block; }
 /* End hide from IE-mac */
 
+.center {text-align:center;}
 
 /* Non visible a l'ecran */
 .none,.js .none-js,.no-js .none-nojs { display: none; }
