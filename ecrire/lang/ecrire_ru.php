@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -839,6 +839,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jour_non_connu_nc' => '&#1085;&#1077;&#1080;&#1079;&#1074;&#1077;&#1089;&#1090;&#1085;&#1099;&#1081;',
 
 // L
+'label_bando_outils' => 'Barre d\'outils', # NEW
+'label_bando_outils_afficher' => 'Afficher les outils', # NEW
+'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Choose your language', # NEW
 'label_slogan_site' => 'Website slogan', # NEW
 'label_taille_ecran' => 'Screen width', # NEW
