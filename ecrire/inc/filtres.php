@@ -470,46 +470,29 @@ function PtoBR($texte){
 	return $texte;
 }
 
-// Couper les "mots" de plus de $l caracteres (souvent des URLs)
-// http://doc.spip.org/@lignes_longues
-function lignes_longues($texte, $l = 70) {
-	if ($l<1) return $texte;
-	if (!preg_match("/[\w,\/.]{".$l."}/UmsS", $texte))
-		return $texte;
-	// Passer en utf-8 pour ne pas avoir de coupes trop courtes avec les &#xxxx;
-	// qui prennent 7 caracteres
-	#include_spip('inc/charsets');
-	$texte = str_replace("&nbsp;","<&nbsp>",$texte);
-	$texte = html2unicode($texte, true);
-	$texte = str_replace("<&nbsp>","&nbsp;",$texte);
-	$texte = unicode_to_utf_8(charset2unicode(
-		$texte, $GLOBALS['meta']['charset'], true));
 
-	// echapper les tags (on ne veut pas casser les a href=...)
-	$tags = array();
-	if (preg_match_all('/<.+>|&(?:amp;)?#x?[0-9]+;|&(?:amp;)?[a-zA-Z1-4]{2,6};/UumsS', $texte, $t, PREG_SET_ORDER)) {
-		foreach ($t as $n => $tag) {
-			$tags[$n] = $tag[0];
-			$texte = str_replace($tag[0], "<---$n--->", $texte);
-		}
-	}
-	// casser les mots longs qui restent
-	// note : on pourrait preferer couper sur les / , etc.
-	if (preg_match_all("/[\w,\/.]{".$l."}/UmsS", $texte, $longs, PREG_SET_ORDER)) {
-		foreach ($longs as $long) {
-			$texte = str_replace($long[0], $long[0].' ', $texte);
-		}
-	}
+/**
+ * lignes_longues assure qu'un texte ne vas pas deborder d'un bloc
+ * par la faute d'un mot trop long (souvent des URLs)
+ * Ne devrait plus etre utilise et fait directement en CSS par un style
+ * word-wrap:break-word;
+ * cf http://www.alsacreations.com/tuto/lire/1038-gerer-debordement-contenu-css.html
+ *
+ * Pour assurer la compatibilite du filtre, on encapsule le contenu par
+ * un div ou span portant ce style inline.
+ *
+ * http://doc.spip.org/@lignes_longues
+ *
+ * @param string $texte
+ * @return string
+ */
+function lignes_longues($texte) {
+	if (!strlen(trim($texte))) return $texte;
+	include_spip('inc/texte');
+	$tag = preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $texte) ?
+		'div' : 'span';
 
-	// retablir les tags
-	if (preg_match_all('/<---[\s0-9]+--->/UumsS', $texte, $t, PREG_SET_ORDER)) {
-		foreach ($t as $tag) {
-			$n = intval(preg_replace(',[^0-9]+,U','',$tag[0]));
-			$texte = str_replace($tag[0], $tags[$n], $texte);
-		}
-	}
-
-	return importer_charset($texte, 'utf-8');
+	return "<$tag style='word-wrap:break-word;'>$texte</$tag>";
 }
 
 // Majuscules y compris accents, en HTML
