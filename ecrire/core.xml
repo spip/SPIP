@@ -31,10 +31,10 @@
 		<url>navigation</url>
 		<args>menu=bando_publication</args>
 	</bouton>
-	<bouton id='articles' parent="bando_publication">
+	<bouton id='mesarticles' parent="bando_publication">
 		<icone>images/article-16.png</icone>
 		<titre>icone_tous_articles</titre>		
-		<url>articles_page</url>
+		<url>mes_articles</url>
 	</bouton>
 	<bouton id='suivi_edito' parent="bando_publication">
 		<icone>images/suivi-16.png</icone>

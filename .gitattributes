@@ -66,7 +66,6 @@ ecrire/exec/admin_plugin.php -text
 ecrire/exec/aide_index.php -text
 ecrire/exec/articles.php -text
 ecrire/exec/articles_edit.php -text
-ecrire/exec/articles_page.php -text
 ecrire/exec/articles_tous.php -text
 ecrire/exec/auteur_infos.php -text
 ecrire/exec/base_delete_all.php -text
@@ -673,6 +672,7 @@ prive/squelettes/contenu/configurer_langage.html -text
 prive/squelettes/contenu/configurer_langue.html -text
 prive/squelettes/contenu/configurer_multilang.html -text
 prive/squelettes/contenu/configurer_preferences.html -text
+prive/squelettes/contenu/mes_articles.html -text
 prive/squelettes/contenu/navigation.html -text
 prive/squelettes/contenu/recherche.html -text
 prive/squelettes/contenu/recherche_fonctions.php -text
