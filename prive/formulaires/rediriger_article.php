@@ -41,6 +41,8 @@ function formulaires_rediriger_article_traiter_dist($id_article,$retour=''){
 	include_spip('action/editer_article');
 	articles_set($id_article, array('chapo'=>$url));
 
-	return array('message_ok'=>'','editable'=>true);
+	$js = _AJAX ? '<script type="text/javascript">if (window.ajaxReload) ajaxReload("wysiwyg");</script>':'';
+
+	return array('message_ok'=>($url?_L('Redirection activée'):_L('Redirection enlevée')).$js,'editable'=>true);
 }
 ?>
