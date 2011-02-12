@@ -498,7 +498,6 @@ prive/images/messagerie-48.png -text
 prive/images/minipres-gris.png -text
 prive/images/monter-16.png -text
 prive/images/mot-cle-24.gif -text
-prive/images/naviguer-site.png -text
 prive/images/noeud_moins.gif -text
 prive/images/noeud_plus.gif -text
 prive/images/pale.gif -text
@@ -845,7 +844,7 @@ prive/themes/spip/images/plus-16.png -text
 prive/themes/spip/images/plus-info-16.png -text
 prive/themes/spip/images/poubelle-16.png -text
 prive/themes/spip/images/poubelle-24.png -text
-prive/themes/spip/images/preview-24.png -text
+prive/themes/spip/images/preview-public-24.png -text
 prive/themes/spip/images/publication-48.png -text
 prive/themes/spip/images/puce-preparer-8.png -text
 prive/themes/spip/images/puce-proposer-8.png -text
