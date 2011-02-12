@@ -3,13 +3,13 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Entamu del sitiu',
-'article' => 'Article', # NEW
+'article' => 'Art&iacute;culu',
 'articles' => 'Art&iacute;culos',
 'articles_auteur' => 'Art&iacute;culos d\'esti autor',
 'articles_populaires' => 'Los art&iacute;culos m&aacute;s c&eacute;lebres',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Nesta direici&oacute;n nun hai deng&uacute;n sitiu',
 'aucune_breve' => 'Nesta direici&oacute;n nun hai denguna breve',
 'aucune_rubrique' => 'Nesta direici&oacute;n nun hai denguna estaya',
-'auteur' => 'Auteur', # NEW
+'auteur' => 'Autor',
 'autres' => 'Otros',
 'autres_breves' => 'Otres breves',
 'autres_groupes_mots_clefs' => 'Otros grupos de pallabres-clave',
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Bon d&iacute;a',
-'breve' => 'Br&egrave;ve', # NEW
+'breve' => 'Breve',
 'breves' => 'Breves',
 
 // C
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Mensaxe',
 'messages_forum' => 'Mensaxes del foru',
 'messages_recents' => 'Mensaxes m&aacute;s nuevos nos foros',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
+'mots_clef' => 'Pallabra-clave',
 'mots_clefs' => 'Pallabres-clave',
 'mots_clefs_meme_groupe' => 'Pallabres-clave nel mesmu grupu',
 
