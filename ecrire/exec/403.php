@@ -36,7 +36,7 @@ function exec_403_dist(){
 
 	echo debut_droite("403",true);
 	echo "<h1>"._T('info_acces_interdit')."</h1>";
-	echo _L("Vous n'avez pas le droit d'acc&egrave;der à la page <b>@exec@</b>.",array('exec'=>_request('exec')));
+	echo _L("Vous n'avez pas le droit d'acc&eacute;der à la page <b>@exec@</b>.",array('exec'=>_request('exec')));
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'403','exec_erreur'=>$exec),'data'=>''));
 
 	echo fin_gauche(),fin_page();
