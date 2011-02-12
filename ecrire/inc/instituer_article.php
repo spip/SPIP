@@ -45,18 +45,16 @@ function inc_instituer_article_dist($id_article, $statut, $id_rubrique)
 		. aide("artstatut")
 	  ."<ul>";
 	
-	$href = redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article");
-	$href = parametre_url($href,'statut_old',$statut);
-
+	$self = self();
 	foreach($etats as $affiche => $s){
+		$href = generer_action_auteur('instituer_article',"$id_article-$s",$self);
+		$href = parametre_url($href,'statut_old',$statut);
 		$puce = puce_statut($s) . _T($affiche);
 		if ($s==$statut)
 			$class=' selected';
 		else {
 			$class=''; 
-			$puce = "<a href='"
-			. parametre_url($href,'statut_nouv',$s)
-			. "' onclick='return confirm(confirm_changer_statut);'>$puce</a>";
+			$puce = "<a href='$href' onclick='return confirm(confirm_changer_statut);'>$puce</a>";
 		}
 		$res .= "<li class='$s $class'>$puce</li>";
 	}
