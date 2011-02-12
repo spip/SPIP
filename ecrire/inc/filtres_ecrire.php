@@ -219,4 +219,11 @@ function trouver_rubrique_creer_objet($id_rubrique,$objet){
 	}
   return $id_rubrique;
 }
+
+function lien_article_virtuel($chapo){
+	include_spip('inc/lien');
+  if (!chapo_redirigetil($chapo))
+	  return '';
+  return propre("[->".chapo_redirige(substr($chapo, 1))."]");
+}
 ?>
