@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Alterar',
 'bouton_chercher' => 'Procurar',
 'bouton_choisir' => 'Escolher',
-'bouton_deplacer' => 'D&eacute;placer', # NEW
+'bouton_deplacer' => 'Deslocar',
 'bouton_download' => 'Transferir',
 'bouton_enregistrer' => 'Gravar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desativar o sistema interno de mensagens',
@@ -308,7 +308,7 @@ Obrigado por participar
 'forum_lien_hyper' => '<b>Link hipertexto</b> (opcional)',
 'forum_message_definitif' => 'Mensagem definitiva: enviar para o site',
 'forum_message_trop_long' => 'Sua mensagem &eacute; muito longa. O tamanho m&aacute;imo &eacute; de 20000 caracteres.',
-'forum_ne_repondez_pas' => 'N&atilde;o responda a esta mensagem e sim no f&oacute;rum com o endere&ccedil;o a seguir:', # MODIF
+'forum_ne_repondez_pas' => 'N&atilde;o responda a esta mensagem e sim no f&oacute;rum com o endere&ccedil;o a seguir:',
 'forum_non_inscrit' => 'Voc&ecirc; n&atilde;o est&aacute; inscrito, ou o endere&ccedil;o ou a senha est&atilde;o errados.',
 'forum_page_url' => '(Se a sua mensagem se refere a uma mat&eacute;ria pubicada na Web, ou a uma p&aacute;gina fornecendo mais informa&ccedil;&otilde;es, por favor informe abaixo o t&iacute;tulo da p&aacute;gina e o seu endere&ccedil;o.)',
 'forum_par_auteur' => 'por @auteur@',
@@ -378,7 +378,7 @@ Obrigado por participar
 'icone_tous_articles' => 'Todas as suas mat&eacute;rias',
 'icone_tous_auteur' => 'Todos os autores',
 'icone_valider_message' => 'Validar esta mensagem',
-'icone_visiter_site' => 'Visitar', # MODIF
+'icone_visiter_site' => 'Ver o site p&uacute;blico',
 'icone_voir_en_ligne' => 'Ver online',
 'image_tourner_180' => 'Rodar 180&deg;',
 'image_tourner_droite' => 'Rodar 90&deg; &agrave; direita',
@@ -561,7 +561,7 @@ Obrigado por participar
 'info_visites' => 'visitas:',
 'info_vos_rendez_vous' => 'Seus encontros futuros',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Seus lembretes', # MODIF
+'infos_vos_pense_bete' => 'Seus lembretes',
 'item_breve_proposee' => 'Nota proposta',
 
 // L
