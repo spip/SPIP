@@ -71,4 +71,48 @@ form.bouton_action_post button.submit, .formulaire_spip .boutons input.link,.for
 form.bouton_action_post button.submit, .formulaire_spip .boutons input.link,.formulaire_spip .boutons button.link {background:none;border:0;cursor:pointer;padding:0 0 1px;}
 form.bouton_action_post button.submit:hover, .formulaire_spip .boutons input.link:hover,.formulaire_spip .boutons button.link:hover {border-bottom:1px solid;padding:0;}
 
+/* message reussite ? */
+.formulaire_spip .reponse_formulaire {
+	border:2px solid;
+	color:#333;
+	font-weight: normal;
+	padding:5px;
+	padding-left:40px;
+	min-height:24px;
+	margin-bottom:1em;
+}
+.formulaire_spip .reponse_formulaire_ok {
+	border-color: #53AD20;
+	background:#E0FFCF url(#CHEMIN{images/message_ok-24.png}) no-repeat 5px 5px;
+}
+.formulaire_spip .reponse_formulaire_erreur {
+	border-color: #C30;
+	background:#FFD0BF url(#CHEMIN{images/message_erreur-24.png}) no-repeat 5px 5px;
+}
+
+.error,.success,.notice {
+	border:2px solid;
+	color:#333;
+	font-weight: normal;
+	padding:5px;
+	padding-left:40px;
+	min-height:24px;
+	margin-bottom:1em;
+}
+.success{
+	border-color: #C6D880;
+	background:#E6EFC2 url(#CHEMIN{images/message_ok-24.png}) no-repeat 5px 5px;
+	color : #264409;
+}
+.error {
+	border-color: #FBC2C4;
+	background:#FBE3E4 url(#CHEMIN{images/message_erreur-24.png}) no-repeat 5px 5px;
+	color : #8A1F11;
+}
+.notice {
+	border-color: #FFD324;
+	background:#FFF6BF url(#CHEMIN{images/message_notice-24.png}) no-repeat 5px 5px;
+	color : #514721;
+}
+
 [(#INCLURE{fond=#VAL{prive/}|tous_les_fonds{/style_prive_plugin_}}{env}{couleur_claire}{couleur_foncee}{lang}{ltr})]
