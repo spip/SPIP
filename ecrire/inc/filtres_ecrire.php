@@ -226,4 +226,16 @@ function lien_article_virtuel($chapo){
 	  return '';
   return propre("[->".chapo_redirige(substr($chapo, 1))."]");
 }
+
+
+// http://doc.spip.org/@bouton_spip_rss
+function bouton_spip_rss($op, $args=array(), $lang='') {
+
+	global $spip_lang_right;
+	include_spip('inc/acces');
+	$clic = http_img_pack('rss-24.png', 'RSS', '', 'RSS');
+	$args = param_low_sec($op, $args, $lang, 'rss');
+	$url = generer_url_public('rss', $args);
+	return "<a style='float: $spip_lang_right;' href='$url'>$clic</a>";
+}
 ?>
