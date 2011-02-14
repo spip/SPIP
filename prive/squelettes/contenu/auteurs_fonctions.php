@@ -29,20 +29,10 @@ function auteurs_lister_statuts() {
 	
 }
 
-function auteurs_navigation_statut($action,$selected,$statuts){
-	// une barre de navigation entre statuts
-	if (count($statuts)>1) {
-		$nav = array();
-		$nav[] = lien_ou_expose(parametre_url($action,'statut',''), _T('info_tout_afficher'), !in_array($selected,$statuts));
-		foreach ($statuts as $statut) {
-			$texte = array_search($statut, $GLOBALS['liste_des_statuts']);
-			$texte = ($texte?_T($texte):$statut);
-
-			$nav[] = lien_ou_expose(parametre_url($action, 'statut',$statut), $texte, $selected==$statut);
-		}
-		return $nav;
-	}
-	return '';
+function traduit_statut($statut){
+	$texte = array_search($statut, $GLOBALS['liste_des_statuts']);
+	$texte = ($texte?_T($texte):$statut);
+	return $texte;
 }
 
 ?>
