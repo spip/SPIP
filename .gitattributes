@@ -622,6 +622,7 @@ prive/modeles/paginationitem.html -text
 prive/modeles/text.html -text
 prive/modeles/video.html -text
 prive/objets/contenu/article.html -text
+prive/objets/contenu/auteur.html -text
 prive/objets/contenu/plugin_item_rss.html -text
 prive/objets/contenu/rubrique.html -text
 prive/objets/editer/auteur.html -text
@@ -657,6 +658,7 @@ prive/squelettes/contenu/admin_tech.html -text
 prive/squelettes/contenu/admin_vider.html -text
 prive/squelettes/contenu/article.html -text
 prive/squelettes/contenu/article_edit.html -text
+prive/squelettes/contenu/auteur.html -text
 prive/squelettes/contenu/auteurs.html -text
 prive/squelettes/contenu/auteurs_fonctions.php -text
 prive/squelettes/contenu/configurer.html -text
@@ -695,6 +697,7 @@ prive/squelettes/inclure/pied.html -text
 prive/squelettes/navigation/admin_tech.html -text
 prive/squelettes/navigation/article.html -text
 prive/squelettes/navigation/article_edit.html -text
+prive/squelettes/navigation/auteur.html -text
 prive/squelettes/navigation/auteurs.html -text
 prive/squelettes/navigation/configurer.html -text
 prive/squelettes/navigation/dist.html -text
