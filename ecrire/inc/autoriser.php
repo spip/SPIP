@@ -152,7 +152,7 @@ function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
 
 // http://doc.spip.org/@autoriser_previsualiser_dist
 function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
-	// si auteur pas autosier, NIET
+	// si auteur pas autorise, NIET
 	if (strpos($GLOBALS['meta']['preview'], ",". $qui['statut'] .",")===false)
 		return false;
 	// si pas de type et statut fourni, c'est une autorisation generale => OK
@@ -488,6 +488,10 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 // http://doc.spip.org/@autoriser_modifierurl_dist
 function autoriser_modifierurl_dist($faire, $quoi, $id, $qui, $opt) {
 	return autoriser('modifier', $quoi, $id, $qui, $opt);
+}
+
+function autoriser_rubrique_previsualiser_dist($faire,$quoi,$id,$qui,$opts){
+	return autoriser('previsualier');
 }
 
 // http://doc.spip.org/@autoriser_rubrique_iconifier_dist

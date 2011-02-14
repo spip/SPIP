@@ -677,6 +677,7 @@ prive/squelettes/contenu/visiteurs_fonctions.php -text
 prive/squelettes/extra/article.html -text
 prive/squelettes/extra/dist.html -text
 prive/squelettes/head/dist.html -text
+prive/squelettes/hierarchie/auteur.html -text
 prive/squelettes/hierarchie/dist.html -text
 prive/squelettes/hierarchie/objet.html -text
 prive/squelettes/hierarchie/objet_fonctions.php -text
