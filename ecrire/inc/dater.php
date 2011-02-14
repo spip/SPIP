@@ -21,7 +21,7 @@ include_spip('inc/date');
 function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac='')
 {
   return
-		recuperer_fond("prive/editer/dater",array('objet'=>$type,'id_objet'=>$id));
+		recuperer_fond("prive/objets/editer/dater",array('objet'=>$type,'id_objet'=>$id));
 }
 
 ?>

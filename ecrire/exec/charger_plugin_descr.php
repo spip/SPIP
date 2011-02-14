@@ -42,7 +42,7 @@ function exec_charger_plugin_descr_args($url_plugin) {
 
 		include_spip('inc/presentation');
 		$res = debut_cadre_relief('', true)
-		. recuperer_fond('prive/contenu/item_rss_plugin',$item)
+		. recuperer_fond('prive/objets/contenu/plugin_item_rss',$item)
 		. fin_cadre_relief(true);
 		
 		include_spip('inc/actions');

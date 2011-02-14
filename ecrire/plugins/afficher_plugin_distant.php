@@ -103,7 +103,7 @@ function plugins_afficher_plugin_distant_dist($url_page, $zip_file, $info, $expo
 
 // http://doc.spip.org/@affiche_bloc_plugin
 function affiche_bloc_plugin_distant($plug_file, $info) {
-	//recuperer_fond('prive/contenu/item_rss_plugin',$item)
+	//recuperer_fond('prive/objets/contenu/plugin_item_rss',$item)
 
 	$s = "";
 	if (isset($info['descriptif']))
