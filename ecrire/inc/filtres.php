@@ -2282,7 +2282,7 @@ function singulier_ou_pluriel($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
  *  "onclick='...'" par exemple
  * @return string 
  */
-function icone_base($lien, $texte, $fond, $fonction="", $class="",$javascript=""){
+function prepare_icone_base($type, $lien, $texte, $fond, $fonction="", $class="",$javascript=""){
 	if (in_array($fonction,array("del","supprimer.gif")))
 		$class .= ' danger';
 	elseif ($fonction == "rien.gif")
@@ -2322,21 +2322,31 @@ function icone_base($lien, $texte, $fond, $fonction="", $class="",$javascript=""
 		$icone = http_img_pack($fond, $alt, "width='$size' height='$size'");
 	}
 
-	$icone = "<span class='icone s$size $class'>"
-	. "<a href='$lien'$title$ajax$javascript>"
-	. $icone
-	. "<b>$texte</b>"
-	. "</a></span>\n";
+	if ($type=='lien')
+		return "<span class='icone s$size $class'>"
+		. "<a href='$lien'$title$ajax$javascript>"
+		. $icone
+		. "<b>$texte</b>"
+		. "</a></span>\n";
 
-	return $icone;
+	else
+		return bouton_action("$icone<b>$texte</b>",$lien,"icone s$size $class",$javascript,$title);
 }
 
+function icone_base($lien, $texte, $fond, $fonction="", $class="",$javascript=""){
+	return prepare_icone_base('lien', $lien, $texte, $fond, $fonction, $class, $javascript);
+}
 function filtre_icone_verticale_dist($lien, $texte, $fond, $fonction="", $class="",$javascript=""){
 	return icone_base($lien,$texte,$fond,$fonction,"verticale $class",$javascript);
 }
 function filtre_icone_horizontale_dist($lien, $texte, $fond, $fonction="", $class="",$javascript=""){
 	return icone_base($lien,$texte,$fond,$fonction,"horizontale $class",$javascript);
 }
+
+function filtre_bouton_action_horizontal_dist($lien, $texte, $fond, $fonction="", $class="",$confirm=""){
+	return prepare_icone_base('bouton', $lien, $texte, $fond, $fonction, "horizontale $class", $confirm);
+}
+
 
 /**
  * Filtre icone pour compatibilite
