@@ -448,16 +448,45 @@ function balise_LESAUTEURS_dist ($p) {
 }
 
 
-// #RANG
-// affiche le "numero de l'article" quand on l'a titre '1. Premier article';
-// ceci est transitoire afin de preparer une migration vers un vrai systeme de
-// tri des articles dans une rubrique (et plus si affinites)
-// http://doc.spip.org/@balise_RANG_dist
-function balise_RANG_dist ($p) {
-	$_titre = champ_sql('titre', $p);
-	$_rang = champ_sql('rang', $p);
-	$p->code = "(($_rang)?($_rang):recuperer_numero($_titre))";
-	$p->interdire_scripts = false;
+/**
+ * #RANG
+ * affiche le "numero de l'objet" quand on l'a titre '1. Premier article';
+ * ceci est transitoire afin de preparer une migration vers un vrai systeme de
+ * tri des articles dans une rubrique (et plus si affinites)
+ * la balise permet d'extraire le numero masque par |supprimer_numero
+ * la balise recupere le champ declare dans la globale table_titre
+ * ou a defaut le champ 'titre'
+ *
+ * si un champ rang existe, il est pris en priorite
+ *
+ * http://doc.spip.org/@balise_RANG_dist
+ *
+ * @param object $p
+ * @return object
+ */
+function balise_RANG_dist($p) {
+	$b = $p->id_boucle;
+	if ($b === '') {
+		$msg = array('zbug_champ_hors_boucle',
+				array('champ' => '#RANG')
+			  );
+		erreur_squelette($msg, $p);
+	}
+	else {
+		$champ_titre = 'titre';
+		$boucle = &$p->boucles[$p->id_boucle];
+		if (isset($GLOBALS['table_titre'][$boucle->id_table])){
+			$t=$GLOBALS['table_titre'][$boucle->id_table];
+		  if (preg_match(';(^|,)([^,]*titre)(,|$);',$t,$m)){
+			  $m = explode(' ',trim($m[2]));
+		    $champ_titre = reset($m);
+		  }
+		}
+		$_titre = champ_sql($champ_titre, $p);
+		$_rang = champ_sql('rang', $p);
+		$p->code = "(($_rang)?($_rang):recuperer_numero($_titre))";
+		$p->interdire_scripts = false;
+	}
 	return $p;
 }
 
