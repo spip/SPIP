@@ -161,7 +161,7 @@ function infos_naviguer($id_rubrique, $statut, $row)
 
 	$img = http_img_pack(chemin_image('auteur-0minirezo-16.png'),'','');
 	foreach ($res as $k => $row) {
-		$h = generer_url_ecrire('auteur_infos', "id_auteur=" .$row['id_auteur']);
+		$h = generer_url_ecrire('auteur', "id_auteur=" .$row['id_auteur']);
 		$res[$k] = "$img <a href='$h'>" . $row['nom'] . '</a>';
 	}
 	$res = corriger_typo(join('<br />', $res));

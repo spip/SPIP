@@ -150,7 +150,7 @@ function auteurs_recemment_connectes($id_auteur)
 	foreach ($result as $row) {
 		$id = $row['id_auteur'];
 		$mail = formater_auteur_mail($row, $id);
-		$auteurs = "<a href='" . generer_url_ecrire("auteur_infos", "id_auteur=$id") . "'>" . typo($row['nom']) . "</a>";
+		$auteurs = "<a href='" . generer_url_ecrire("auteur", "id_auteur=$id") . "'>" . typo($row['nom']) . "</a>";
 		$res .= "$mail&nbsp;$auteurs" . ", ";
 	}
 

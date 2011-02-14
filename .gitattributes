@@ -625,7 +625,6 @@ prive/objets/contenu/article.html -text
 prive/objets/contenu/auteur.html -text
 prive/objets/contenu/plugin_item_rss.html -text
 prive/objets/contenu/rubrique.html -text
-prive/objets/editer/auteur.html -text
 prive/objets/editer/dater.html -text
 prive/objets/editer/liens.html -text
 prive/objets/editer/logo.html -text
@@ -634,6 +633,7 @@ prive/objets/editer/rubrique.html -text
 prive/objets/infos/article.html -text
 prive/objets/infos/article_fonctions.php -text
 prive/objets/infos/auteur.html -text
+prive/objets/infos/auteur_fonctions.php -text
 prive/objets/infos/rubrique.html -text
 prive/objets/liste/articles.html -text
 prive/objets/liste/auteurs.html -text
@@ -659,6 +659,7 @@ prive/squelettes/contenu/admin_vider.html -text
 prive/squelettes/contenu/article.html -text
 prive/squelettes/contenu/article_edit.html -text
 prive/squelettes/contenu/auteur.html -text
+prive/squelettes/contenu/auteur_edit.html -text
 prive/squelettes/contenu/auteurs.html -text
 prive/squelettes/contenu/auteurs_fonctions.php -text
 prive/squelettes/contenu/configurer.html -text
@@ -680,6 +681,7 @@ prive/squelettes/extra/article.html -text
 prive/squelettes/extra/dist.html -text
 prive/squelettes/head/dist.html -text
 prive/squelettes/hierarchie/auteur.html -text
+prive/squelettes/hierarchie/auteur_edit.html -text
 prive/squelettes/hierarchie/dist.html -text
 prive/squelettes/hierarchie/objet.html -text
 prive/squelettes/hierarchie/objet_fonctions.php -text
@@ -698,6 +700,7 @@ prive/squelettes/navigation/admin_tech.html -text
 prive/squelettes/navigation/article.html -text
 prive/squelettes/navigation/article_edit.html -text
 prive/squelettes/navigation/auteur.html -text
+prive/squelettes/navigation/auteur_edit.html -text
 prive/squelettes/navigation/auteurs.html -text
 prive/squelettes/navigation/configurer.html -text
 prive/squelettes/navigation/dist.html -text

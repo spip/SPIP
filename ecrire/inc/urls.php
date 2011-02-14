@@ -218,7 +218,7 @@ function generer_url_ecrire_auteur($id, $args='', $ancre='', $statut='', $connec
 	$a = (intval($id)?"id_auteur=" . intval($id):'');
 	$h = (!$statut OR $connect)
 	?  generer_url_entite_absolue($id, 'auteur', $args, $ancre, $connect)
-	: (generer_url_ecrire('auteur_infos',$a . ($args ? ($a?"&":"").$args : ''))
+	: (generer_url_ecrire('auteur',$a . ($args ? ($a?"&":"").$args : ''))
 		. ($ancre ? "#$ancre" : ''));
 	return $h;
 }

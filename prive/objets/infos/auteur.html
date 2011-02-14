@@ -1,6 +1,23 @@
 <BOUCLE_auteur(AUTEURS){id_auteur=#ENV{id}}{statut?}{!lang_select}>
 <div class='infos'>
 <div class='numero'><:titre_cadre_numero_auteur:><p>#ID_AUTEUR</p></div>
+
+<div class="statut">
+[<p><:info_statut_auteur:> <strong>(#STATUT|traduire_statut_auteur)</strong></p>]
+[(#AUTORISER{webmestre}|oui)
+	[<p>(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:info_admin_je_suis_webmestre:>,<:info_admin_webmestre:>})</p>]
+]
+[(#AUTORISER{webmestre}|non|et{#SESSION{id_auteur}|=={#ID_AUTEUR}})
+	[(#VAL{_ID_WEBMESTRES}|defined|oui)
+		#SET{options,#VAL{_FILE_OPTIONS}|constant|basename}}
+		<:info_webmestre_forces{file_options=#GET{options}}:>
+	]
+	[(#VAL{_ID_WEBMESTRES}|defined|non)
+		#BOUTON_ACTION{<:info_admin_etre_webmestre:>,#URL_ACTION_AUTEUR{etre_webmestre,(#REM|time),#SELF}}
+	]
+]
+</div>
+
 <div class='nb_elements'>
 <BOUCLE_arts(ARTICLES){id_auteur}{statut!=poubelle}> </BOUCLE_arts>
 [(#STATUT|<>{'6forum'}|?{' ', ''})[<div>(#TOTAL_BOUCLE|singulier_ou_pluriel{info_articles_un,info_articles_nb})</div>]]

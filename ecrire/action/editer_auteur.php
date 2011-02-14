@@ -47,7 +47,7 @@ function action_editer_auteur_dist($arg=null) {
 			$ret = ('&redirect=' . $redirect);
 			spip_log("echec editeur auteur: " . join(' ',$echec));
 			$echec = '&echec=' . join('@@@', $echec);
-			$redirect = generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur$echec$ret",'&');
+			$redirect = generer_url_ecrire('auteur',"id_auteur=$id_auteur$echec$ret",'&');
 		}
 		else
 			$redirect = urldecode($redirect);

@@ -1,4 +1,4 @@
-<BOUCLE_auteur(AUTEURS){id_auteur}{si #ENV{exec}|=={auteur}}>
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}{si #ENV{exec}|=={auteur}}>
 [(#BOITE_OUVRIR{[
 				
 	[(#AUTORISER{modifier,auteur,#ID_AUTEUR})
@@ -29,11 +29,13 @@
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,auteur,id,#ID_AUTEUR},data,'<div class="nettoyeur"></div>'}}
 
 #BOITE_FERMER
+
+
 [(#ENV{id_auteur}|intval|oui)
 
 	#SET{statuts,#SESSION{statut}|statuts_articles_visibles}
-	[(#ID_AUTEUR|=={#SESSION{id_auteur}}) #SET{statuts,''}]
-	[(#PIPELINE{affiche_auteurs_interventions,#ARRAY{args,#ARRAY{id_auteur,#ID_AUTEUR},data,#INCLURE{fond=prive/objets/liste/article,id_auteur,statut=#GET{statuts},par=date,titre=<:info_articles_auteur:>}}})]
+	[(#ID_AUTEUR|=={#SESSION{id_auteur}}|oui) #SET{statuts,''}]
+	[(#PIPELINE{affiche_auteurs_interventions,#ARRAY{args,#ARRAY{id_auteur,#ID_AUTEUR},data,#INCLURE{fond=prive/objets/liste/articles,id_auteur,statut=#GET{statuts},par=date,titre=<:info_articles_auteur:>}}})]
 ]
 
 [(#EVAL{_AJAX}|oui)
