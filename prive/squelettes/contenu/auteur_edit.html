@@ -11,7 +11,7 @@
 	[<:info_modifier_auteur:>
 	<h1>(#ENV{titre,#INFO_NOM{auteur,#ID_AUTEUR}|sinon{<:info_sans_titre:>}})</h1>]
 </div>
-#FORMULAIRE_EDITER_AUTEUR{#ENV{id_auteur,oui},#URL_ECRIRE{auteur,id_auteur=0},#ENV{associer_objet}}
+#FORMULAIRE_EDITER_AUTEUR{#ENV{id_auteur,oui},#ENV{redirect_edit,#URL_ECRIRE{auteur,id_auteur=0}},#ENV{associer_objet}}
 </div>
 [(#ENV{retourajax,''}|oui)
 <script type="text/javascript">if (window.jQuery) jQuery('#navigation>div').ajaxReload({args:{exec:'article_edit'}});</script>
