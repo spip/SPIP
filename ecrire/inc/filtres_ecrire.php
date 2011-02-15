@@ -271,12 +271,12 @@ function auteurs_lister_statuts($quoi='tous',$en_base=true) {
 		case "visiteurs":
 			$statut = array();
 			$exclus = AUTEURS_MIN_REDAC;
-			$exclus = explode(',',$statut);
+			$exclus = explode(',',$exclus);
 			if (!$en_base){
 				// prendre aussi les statuts de la table des status qui ne sont pas dans le define
 				$statut = array_diff(array_values($GLOBALS['liste_des_statuts']),$exclus);
 			}
-			$s_complement = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut,'NOT')));
+			$s_complement = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$exclus,'NOT')));
 			return array_merge($statut,$s_complement);
 			break;
 		default:
