@@ -633,7 +633,6 @@ prive/objets/editer/rubrique.html -text
 prive/objets/infos/article.html -text
 prive/objets/infos/article_fonctions.php -text
 prive/objets/infos/auteur.html -text
-prive/objets/infos/auteur_fonctions.php -text
 prive/objets/infos/rubrique.html -text
 prive/objets/liste/articles.html -text
 prive/objets/liste/auteurs.html -text
@@ -661,7 +660,6 @@ prive/squelettes/contenu/article_edit.html -text
 prive/squelettes/contenu/auteur.html -text
 prive/squelettes/contenu/auteur_edit.html -text
 prive/squelettes/contenu/auteurs.html -text
-prive/squelettes/contenu/auteurs_fonctions.php -text
 prive/squelettes/contenu/configurer.html -text
 prive/squelettes/contenu/configurer_avancees.html -text
 prive/squelettes/contenu/configurer_contenu.html -text
@@ -676,7 +674,6 @@ prive/squelettes/contenu/navigation.html -text
 prive/squelettes/contenu/recherche.html -text
 prive/squelettes/contenu/recherche_fonctions.php -text
 prive/squelettes/contenu/visiteurs.html -text
-prive/squelettes/contenu/visiteurs_fonctions.php -text
 prive/squelettes/extra/article.html -text
 prive/squelettes/extra/dist.html -text
 prive/squelettes/head/dist.html -text

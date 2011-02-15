@@ -1,4 +1,15 @@
-<div id="chemin"><a href="#URL_ECRIRE{auteurs}"><:info_auteurs:></a>
-<BOUCLE_ariane(AUTEURS){id_auteur}{tout}> &gt;
-[(#ID_AUTEUR|generer_url_entite{auteur}|lien_ou_expose{[(#NOM|couper{80}|sinon{<:ecrire:info_sans_titre:>})],1})]
+<div id="chemin">
+<BOUCLE_ariane(AUTEURS){id_auteur}{tout}>
+[(#STATUT|in_array{#VAL{redacteurs}|auteurs_lister_statuts}|oui)
+<a href="#URL_ECRIRE{auteurs}"><:info_auteurs:></a>
+]
+[(#STATUT|in_array{#VAL{redacteurs}|auteurs_lister_statuts}|non)
+<a href="#URL_ECRIRE{visiteurs}"><:info_visiteurs:></a>
+]
+&gt; [(#ID_AUTEUR|generer_url_entite{auteur}|lien_ou_expose{[(#NOM|couper{80}|sinon{<:ecrire:info_sans_titre:>})],1})]
 </BOUCLE_ariane>
+<a href="#URL_ECRIRE{auteurs}"><:info_auteurs:></a>
+[(#ENV{exec}|match{_edit$}|oui)
+&gt; <strong><:ecrire:item_nouvel_auteur:></strong>
+]
+<//B_ariane>
