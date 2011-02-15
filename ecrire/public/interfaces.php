@@ -248,7 +248,7 @@ function declarer_interfaces(){
 	global $tables_jointures;
 
 	$tables_jointures['spip_articles']['id_auteur']= 'auteurs_liens';
-
+	$tables_jointures['spip_rubriques']['id_auteur']= 'auteurs_liens';
 	$tables_jointures['spip_auteurs'][]= 'auteurs_liens';
 
 
