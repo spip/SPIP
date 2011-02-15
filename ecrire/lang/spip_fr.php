@@ -384,6 +384,7 @@ Merci de votre participation
 'icone_supprimer_message' => 'Supprimer ce message',
 'icone_tous_articles' => 'Tous vos articles',
 'icone_tous_auteur' => 'Tous les auteurs',
+'icone_tous_visiteur' => 'Tous les visiteurs',
 'icone_valider_message' => 'Valider ce message',
 'icone_visiter_site' => 'Voir le site public',
 'icone_voir_en_ligne' => 'Voir en ligne',
