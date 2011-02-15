@@ -87,7 +87,7 @@ function quete_profondeur($id, $connect='') {
  * @return string
  */
 function quete_condition_postdates($champ_date, $serveur='') {
-	if (defined(_VAR_PREVIEW) AND _VAR_PREVIEW)
+	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW)
 		return "1=1";
 	return
 	  ($GLOBALS['meta']['date_prochain_postdate'] > time())
@@ -120,7 +120,7 @@ function quete_condition_statut($mstatut,$previsu,$publie, $serveur=''){
 	}
 	// '' => ne rien afficher, '!'=> ne rien filtrer
 	if (!strlen($liste))
-		return ($not?"":"'0=1'");
+		return ($not?"1=1":"'0=1'");
 
 	$liste = explode(',',$liste);
 	foreach($liste as $k=>$v) {
