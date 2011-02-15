@@ -22,7 +22,7 @@
 		<:info_admin_gere_rubriques:>
 		<ul>
 			<BOUCLE_restreint(RUBRIQUES){id_auteur}{statut==.*}{si #STATUT|=={0minirezo}}>
-				<li>[(#TITRE|sinon{<:info_sans_titre:>})]</li>
+				<li><a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">[(#TITRE|sinon{<:info_sans_titre:>})]</a></li>
 			</BOUCLE_restreint>
 		</ul>
 	</div>

@@ -199,6 +199,7 @@ function traduire_statut_auteur($statut,$attente=""){
 		}
 		else return _T('info_statut_auteur_a_confirmer');
 	}
+
 	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
 		       "info_redacteurs" =>  _T('intem_redacteur'),
 		       "info_visiteurs" => _T('item_visiteur'),
@@ -211,7 +212,7 @@ function traduire_statut_auteur($statut,$attente=""){
 	if ($t = array_search($statut, $GLOBALS['liste_des_statuts'])){
 	  if (isset($recom[$t]))
 			return $recom[$t].$plus;
-		return $t.$plus;
+		return _T($t).$plus;
 	}
 
 	// si on a pas reussi a le traduire, retournons la chaine telle quelle
@@ -244,23 +245,56 @@ function afficher_qui_edite($id_objet,$objet){
 /**
  * Lister les statuts des auteurs
  *
- * @param bool $redacteurs
- *   true : retourne les auteurs au moins redacteur, tels que defini par AUTEURS_MIN_REDAC
- *   false : retourne les autres auteurs, cad les visiteurs et autres statuts perso
+ * @param string $redacteurs
+ *   redacteurs : retourne les statuts des auteurs au moins redacteur, tels que defini par AUTEURS_MIN_REDAC
+ *   visiteurs : retourne les statuts des autres auteurs, cad les visiteurs et autres statuts perso
+ *   tous : retourne tous les statuts connus
+ * @param bool $en_base
+ *   si true, ne retourne strictement que les status existants en base
+ *   dans tous les cas, les statuts existants en base sont inclus
  * @return array
  */
-function auteurs_lister_statuts($redacteurs=true) {
+function auteurs_lister_statuts($quoi='tous',$en_base=true) {
 	if (!defined('AUTEURS_MIN_REDAC')) define('AUTEURS_MIN_REDAC', "0minirezo,1comite,5poubelle");
-	$statut = AUTEURS_MIN_REDAC;
-	$statut = explode(',',$statut);
 
-	if ($redacteurs)
-		return $statut;
+	switch($quoi){
+		case "redacteurs":
+			$statut = AUTEURS_MIN_REDAC;
+			$statut = explode(',',$statut);
+			if ($en_base) {
+				$check = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut)));
+				$retire = array_diff($statut,$check);
+				$statut = array_diff($statut,$retire);
+			}
+			return $statut;
+			break;
+		case "visiteurs":
+			$statut = array();
+			$exclus = AUTEURS_MIN_REDAC;
+			$exclus = explode(',',$statut);
+			if (!$en_base){
+				// prendre aussi les statuts de la table des status qui ne sont pas dans le define
+				$statut = array_diff(array_values($GLOBALS['liste_des_statuts']),$exclus);
+			}
+			$s_complement = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut,'NOT')));
+			return array_merge($statut,$s_complement);
+			break;
+		default:
+		case "tous":
+			$statut = array_values($GLOBALS['liste_des_statuts']);
+			$s_complement = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut,'NOT')));
+			$statut = array_merge($statut,$s_complement);
+			if ($en_base) {
+				$check = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut)));
+				$retire = array_diff($statut,$check);
+				$statut = array_diff($statut,$retire);
+			}
+			return $statut;
+			break;
+	}
 
-	// si autre que redacteurs, retourner tous les existants sauf ceux du define
-	$statut = sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut,'NOT'));
-	return array_map('reset',$statut);
-
+	// on arrive jamais ici
+	return array_values($GLOBALS['liste_des_statuts']);
 }
 
 

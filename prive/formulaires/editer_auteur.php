@@ -3,11 +3,6 @@
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function instituer_auteur_ici($auteur=array()){
-	$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
-	return $instituer_auteur($auteur);
-}
-
 // http://doc.spip.org/@inc_editer_mot_dist
 function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);

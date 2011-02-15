@@ -121,7 +121,6 @@ ecrire/inc/index.php -text
 ecrire/inc/informer.php -text
 ecrire/inc/install.php -text
 ecrire/inc/instituer_article.php -text
-ecrire/inc/instituer_auteur.php -text
 ecrire/inc/journal.php -text
 ecrire/inc/json.php -text
 ecrire/inc/lang_liste.php -text
@@ -327,6 +326,8 @@ prive/formulaires/editer_logo.html -text
 prive/formulaires/editer_logo.php -text
 prive/formulaires/editer_rubrique.html -text
 prive/formulaires/editer_rubrique.php -text
+prive/formulaires/inc-instituer_auteur.html -text
+prive/formulaires/inc-instituer_auteur_fonctions.php -text
 prive/formulaires/inc-logo_auteur.html -text
 prive/formulaires/login.php -text
 prive/formulaires/recherche_ecrire.html -text
