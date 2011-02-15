@@ -177,6 +177,46 @@ function affiche_nom_table($table){
 	return _T(isset($libelles[$table])?$libelles[$table]:"$table:info_$table");
 }
 
+
+//
+/**
+ * Traduire le statut technique de l'auteur en langage comprehensible
+ * si $statut=='nouveau' et que le statut en attente est fourni,
+ * le prendre en compte en affichant que l'auteur est en attente
+ *
+ * http://doc.spip.org/@traduire_statut_auteur
+ * 
+ * @param string $statut
+ * @param string $attente
+ * @return string
+ */
+function traduire_statut_auteur($statut,$attente=""){
+	$plus = "";
+	if ($statut=='nouveau') {
+		if ($attente) {
+			$statut = $attente;
+			$plus = " ("._T('info_statut_auteur_a_confirmer').")";
+		}
+		else return _T('info_statut_auteur_a_confirmer');
+	}
+	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
+		       "info_redacteurs" =>  _T('intem_redacteur'),
+		       "info_visiteurs" => _T('item_visiteur'),
+		       '5poubelle' => _T('texte_statut_poubelle'), // bouh
+		       );
+	if (isset($recom[$statut]))
+		return $recom[$statut].$plus;
+
+	// retrouver directement par le statut sinon
+	if ($t = array_search($statut, $GLOBALS['liste_des_statuts'])){
+	  if (isset($recom[$t]))
+			return $recom[$t].$plus;
+		return $t.$plus;
+	}
+
+	return '';
+}
+
 /**
  * Afficher la mention des autres auteurs ayant modifie un objet
  *

@@ -105,33 +105,6 @@ function editer_choix_webmestre($auteur){
 	return "<div class='choix' id='choix-webmestre'$style>$res</div>";
 }
 
-// http://doc.spip.org/@traduire_statut_auteur
-function traduire_statut_auteur($statut,$attente=""){
-	$plus = "";
-	if ($statut=='nouveau') {
-		if ($attente) {
-			$statut = $attente;
-			$plus = " ("._T('info_statut_auteur_a_confirmer').")";
-		}
-		else return _T('info_statut_auteur_a_confirmer');
-	}
-	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
-		       "info_redacteurs" =>  _T('intem_redacteur'),
-		       "info_visiteurs" => _T('item_visiteur'),
-		       '5poubelle' => _T('texte_statut_poubelle'), // bouh
-		       );
-	if (isset($recom[$statut]))
-		return $recom[$statut].$plus;
-
-	// retrouver directement par le statut sinon
-	if ($t = array_search($statut, $GLOBALS['liste_des_statuts'])){
-	  if (isset($recom[$t]))
-			return $recom[$t].$plus;
-		return $t.$plus;
-	}
-
-	return '';
-}
 
 // Menu de choix d'un statut d'auteur
 // http://doc.spip.org/@choix_statut_auteur
