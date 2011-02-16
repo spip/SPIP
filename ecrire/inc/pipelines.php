@@ -25,6 +25,7 @@ function f_jQuery ($texte) {
 		'javascript/jquery.js',
 		'javascript/jquery.form.js',
 		'javascript/jquery.autosave.js',
+		'javascript/jquery.placeholder-label.js',
 		'javascript/ajaxCallback.js',
 		'javascript/jquery.cookie.js'
 	))) as $script)
