@@ -224,6 +224,7 @@
 	<pipeline><nom>compter_contributions_auteur</nom><action></action></pipeline>
 	<pipeline><nom>declarer_filtres_squelettes</nom><action></action></pipeline>
 	<pipeline><nom>declarer_tables_interfaces</nom><action></action></pipeline>
+	<pipeline><nom>declarer_tables_objets_sql</nom><action></action></pipeline>
 	<pipeline><nom>declarer_tables_principales</nom><action></action></pipeline>
 	<pipeline><nom>declarer_tables_auxiliaires</nom><action></action></pipeline>
 	<pipeline><nom>declarer_tables_objets_surnoms</nom><action></action></pipeline>
