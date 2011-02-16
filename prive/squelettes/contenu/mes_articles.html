@@ -1,10 +1,10 @@
 <h1><:icone_tous_articles:></h1>
 
 <BOUCLE_arts(ARTICLES){statut!=poubelle}{id_auteur=#SESSION{id_auteur}}{0,1}>
-	<INCLURE{fond=prive/objets/liste/articles,statut=prepa,titre=info_en_cours_validation,par=date,id_auteur=#SESSION{id_auteur}}>
-	<INCLURE{fond=prive/objets/liste/articles,statut=prop,titre=info_attente_validation,par=date,id_auteur=#SESSION{id_auteur}}>
-	<INCLURE{fond=prive/objets/liste/articles,statut=publie,titre=info_publies,par=date,id_auteur=#SESSION{id_auteur}}>
-	<INCLURE{fond=prive/objets/liste/articles,statut=refuse,titre=info_refuses,par=date,id_auteur=#SESSION{id_auteur}}>
+	<INCLURE{fond=prive/objets/liste/articles,statut=prepa,titre=<:info_en_cours_validation:>,par=date,id_auteur=#SESSION{id_auteur}}>
+	<INCLURE{fond=prive/objets/liste/articles,statut=prop,titre=<:info_attente_validation:>,par=date,id_auteur=#SESSION{id_auteur}}>
+	<INCLURE{fond=prive/objets/liste/articles,statut=publie,titre=<:info_publies:>,par=date,id_auteur=#SESSION{id_auteur}}>
+	<INCLURE{fond=prive/objets/liste/articles,statut=refuse,titre=<:info_refuses:>,par=date,id_auteur=#SESSION{id_auteur}}>
 </BOUCLE_arts>
 [(#AUTORISER{creer,article})
 <a href="#URL_ECRIRE{article_edit,new=oui}"><:icone_ecrire_article:></a>
