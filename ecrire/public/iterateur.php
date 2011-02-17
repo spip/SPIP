@@ -216,6 +216,11 @@ class IterDecorator extends FilterIterator {
 					unset($where[$k]);
 					$menage = true;
 				}
+				// traiter {cle IN a,b} ou {valeur !IN a,b}
+				if (preg_match(',^\(\(([\w/]+)(\s+NOT)?\s+IN\s+(\(.*\))\)\)$,', $op, $regs)) {
+					$this->ajouter_filtre($regs[1], 'IN', $regs[3], $regs[2]);
+					unset($op);
+				}
 			}
 			foreach($where as $k => $v) {
 				// 3 possibilites : count($v) =
@@ -277,9 +282,12 @@ class IterDecorator extends FilterIterator {
 			$valeur = str_replace(array('\"', '_', '%'), array('"', '.', '.*'), preg_quote($valeur));
 			$filtre = 'match('.$a.', '.$valeur.')';
 			$op = '';
-		} else if ($op == '=')
+		} else if ($op == '=') {
 			$op = '==';
-		else if (!in_array($op, array('<','<=', '>', '>='))) {
+		} else if ($op == 'IN') {
+			$filtre = 'in_array('.$a.', array'.$valeur.')';
+			$op = '';
+		} else if (!in_array($op, array('<','<=', '>', '>='))) {
 			spip_log('operateur non reconnu ' . $op); // [todo] mettre une erreur de squelette
 			$op = '';
 		}
