@@ -36,7 +36,7 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 
 	// si spip_log() dans mes_options, poser dans spip.log
 	if (!defined('_DIR_LOG'))
-		$logfile = _DIR_RACINE._NOM_TEMPORAIRES_INACCESSIBLES.$logname.'.log';
+		$logfile = _DIR_RACINE._NOM_TEMPORAIRES_INACCESSIBLES.(test_espace_prive()?'prive_':'').$logname.'.log';
 
 	$rotate = 0;
 	$pid = '(pid '.@getmypid().')';
