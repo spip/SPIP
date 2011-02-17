@@ -67,7 +67,7 @@ function analyser_site($url) {
 		AND $image = recuperer_infos_distantes($r[1])) {
 			if (in_array($image['extension'], array('gif', 'jpg', 'png'))) {
 				$result['format_logo'] = $image['extension'];
-				$result['logo'] = $image['fichier'];
+				$result['logo'] = $r[1];
 			}
 			else if ($image['fichier']) {
 				spip_unlink($image['fichier']);
