@@ -13,17 +13,21 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@action_instituer_collaboration_dist
-function action_instituer_collaboration_dist() {
+function action_debloquer_edition_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
 	if ($arg) {
 		include_spip('inc/drapeau_edition');
-		if ($arg == 'tous')
+		if ($arg == 'tous') {
 			debloquer_tous($GLOBALS['visiteur_session']['id_auteur']);
-		else
-			debloquer_edition($GLOBALS['visiteur_session']['id_auteur'], $arg, 'article');
+		}
+		else {
+			$arg = explode("-",$arg);
+			list($objet,$id_objet) = $arg;
+			debloquer_edition($GLOBALS['visiteur_session']['id_auteur'], $id_objet, $objet);
+		}
 	}
 }
 ?>

@@ -8,6 +8,7 @@ ecrire/action/auth.php -text
 ecrire/action/charger_plugin.php -text
 ecrire/action/confirmer_email.php -text
 ecrire/action/converser.php -text
+ecrire/action/debloquer_edition.php -text
 ecrire/action/desinstaller_plugin.php -text
 ecrire/action/editer_article.php -text
 ecrire/action/editer_auteur.php -text
@@ -17,7 +18,6 @@ ecrire/action/etre_webmestre.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/index.php -text
 ecrire/action/instituer_article.php -text
-ecrire/action/instituer_collaboration.php -text
 ecrire/action/instituer_langue_rubrique.php -text
 ecrire/action/logout.php -text
 ecrire/action/preferer.php -text
@@ -630,6 +630,8 @@ prive/objets/liste/auteurs_associer_fonctions.php -text
 prive/objets/liste/auteurs_fonctions.php -text
 prive/objets/liste/auteurs_lies.html -text
 prive/objets/liste/auteurs_lies_fonctions.php -text
+prive/objets/liste/objets-en-edition.html -text
+prive/objets/liste/objets-en-edition_fonctions.php -text
 prive/objets/liste/rubriques.html -text
 prive/objets/liste/visiteurs.html -text
 prive/objets/liste/visiteurs_fonctions.php -text
