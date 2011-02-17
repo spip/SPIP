@@ -332,7 +332,7 @@ function quete_debut_pagination($primary,$valeur,$pas,$iter){
 		return 0;
 
 	$pos = 0;
-	while ($row = $iter->next() AND $row[$primary]!=$valeur){
+	while ($row = $iter->fetch() AND $row[$primary]!=$valeur){
 		$pos++;
 	}
 	// si on a pas trouve
