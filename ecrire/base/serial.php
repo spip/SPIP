@@ -132,7 +132,7 @@ $tables_principales['spip_rubriques'] =
 	$tables_principales = pipeline('declarer_tables_principales',$tables_principales);
 }
 
-global $tables_principales;
-base_serial($tables_principales);
+include_spip('base/objets');
+$GLOBALS['tables_principales'] = lister_tables_principales();
 
 ?>
