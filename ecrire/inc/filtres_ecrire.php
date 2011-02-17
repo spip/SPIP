@@ -236,7 +236,7 @@ function afficher_qui_edite($id_objet,$objet){
 		return $qui[$objet][$id_objet] = '';
 	
 	include_spip('inc/drapeau_edition');
-	$modif = mention_qui_edite($id_breve, 'breve');
+	$modif = mention_qui_edite($id_objet, $objet);
 	if (!$modif) return $qui[$objet][$id_objet] = '';
 	// TODO -- _L("Fil a travaille sur cet objet il y a x minutes")
 	return $qui[$objet][$id_objet] = _T('texte_travail_article', $modif);
