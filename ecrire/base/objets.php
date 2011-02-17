@@ -37,7 +37,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		include_spip('base/serial');
 		// recuperer les declarations explicites ancienne mode
 		// qui servent a completer declarer_tables_objets_sql
-		base_serial(&$GLOBALS['tables_principales']);
+		base_serial($GLOBALS['tables_principales']);
 		$infos_tables = pipeline('declarer_tables_objets_sql',array(
 			'spip_articles'=> array(
 				'page'=>'article',
