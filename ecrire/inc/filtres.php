@@ -2519,9 +2519,9 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 
 	// Si on demande le titre, on le gere en interne
 	if ($demande_titre = ($info == 'titre')){
-		global $table_titre;
-		$champ_titre = $table_titre[table_objet($type_objet)];
-		if (!$champ_titre) $champ_titre = 'titre';
+		$trouver_table = charger_fonction('trouver_table','base');
+		$desc = $trouver_table(table_objet_sql($type_objet));
+		$champ_titre = isset($desc['titre'])?$desc['titre']:'titre';
 		$champ_titre = ", $champ_titre";
 	}
 
