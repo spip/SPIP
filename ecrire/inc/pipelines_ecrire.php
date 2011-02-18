@@ -120,4 +120,33 @@ function f_afficher_blocs_ecrire($flux) {
 
 	return $flux;
 }
+
+/**
+ * Trouver l'objet qui correspond
+ * a l'exec de l'espace prive passe en argument
+ * renvoie false si pas d'objet en cours, ou un tableau associatif
+ * contenant les informations table_objet_sql,table,type,edition
+ *
+ * @param string $exec
+ *   nom de la page testee
+ * @return array|bool
+ */
+function trouver_objet_exec($exec){
+	static $objet_exec=array();
+	if (!$exec) return false;
+	if (!isset($objet_exec[$exec])){
+		$objet_exec[$exec]=false;
+		include_spip('base/objets');
+		$infos = lister_tables_objets_sql();
+		foreach($infos as $t=>$info){
+			if ($objet_exec[$exec]==$info['url_edit']){
+				return $objet_exec[$exec] = array('edition'=>true,'table_objet_sql'=>$t,'table'=>$info['type'],'type'=>$info['type'],'id_table_objet'=>id_table_objet($info['type']));
+			}
+			if ($exec==$info['url_voir']){
+				return $objet_exec[$exec] = array('edition'=>false,'table_objet_sql'=>$t,'table'=>$info['type'],'type'=>$info['type'],'id_table_objet'=>id_table_objet($info['type']));
+			}
+		}
+	}
+	return $objet_exec[$exec];
+}
 ?>
