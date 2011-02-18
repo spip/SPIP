@@ -142,8 +142,9 @@ if (window.jQuery)(function($){
 		.val(a);
 		$.cookie('spip_contenu_formulaire_#ENV{_sign}', null);
 	}
-	$('#formulaire_forum form')
-	.bind('submit', function() {
+	/* virer le cookie a la validation finale du message */
+	$('input#EVAL{chr(91)}name=confirmer_previsu_forum#EVAL{chr(93)}')
+	.live('click', function(e) {
 		saveauto = false;
 	});
 	$(window)
