@@ -98,7 +98,7 @@ function f_afficher_blocs_ecrire($flux) {
 		}
 		if ($fond=="prive/squelettes/extra/$exec") {
 			include_spip('inc/presentation_mini');
-			$flux['data']['texte'] = pipeline('affiche_droite',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte'])).liste_objets_bloques();
+			$flux['data']['texte'] = pipeline('affiche_droite',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte'])).liste_objets_bloques($exec,$flux['args']['contexte']);
 		}
 		if ($fond=="prive/squelettes/contenu/$exec"){
 			if (!strpos($flux['data']['texte'],"<!--affiche_milieu-->"))
@@ -139,7 +139,7 @@ function trouver_objet_exec($exec){
 		include_spip('base/objets');
 		$infos = lister_tables_objets_sql();
 		foreach($infos as $t=>$info){
-			if ($objet_exec[$exec]==$info['url_edit']){
+			if ($exec==$info['url_edit']){
 				return $objet_exec[$exec] = array('edition'=>true,'table_objet_sql'=>$t,'table'=>$info['type'],'type'=>$info['type'],'id_table_objet'=>id_table_objet($info['type']));
 			}
 			if ($exec==$info['url_voir']){

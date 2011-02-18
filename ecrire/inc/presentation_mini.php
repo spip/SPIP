@@ -90,7 +90,7 @@ function debut_droite($rubrique="", $return= false) {
 
 	if ($spip_display == 4) $res .= " -->";
 
-	$res .= liste_objets_bloques();
+	$res .= liste_objets_bloques(_request('exec'));
 
 	$res .= creer_colonne_droite($rubrique, true)
 	. "</div>";
@@ -106,14 +106,22 @@ function debut_droite($rubrique="", $return= false) {
 }
 
 // http://doc.spip.org/@liste_articles_bloques
-function liste_objets_bloques($id_auteur=null){
-	if (is_null($id_auteur))
-		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
-
+function liste_objets_bloques($exec,$contexte=array(),$auteur=null){
 	$res = '';
 	if ($GLOBALS['meta']["articles_modif"] != "non") {
 		include_spip('inc/drapeau_edition');
-		$objets_ouverts = liste_drapeau_edition($id_auteur);
+		if (is_null($auteur))
+			$auteur = $GLOBALS['visiteur_session'];
+		if ($en_cours=trouver_objet_exec($exec)
+			AND $en_cours['edition']
+			AND $type = $en_cours['type']
+		  AND ($id = $contexte[$en_cours['id_table_objet']] OR $id = _request($en_cours['id_table_objet']))) {
+			// marquer le fait que l'objet est ouvert en edition par toto
+			// a telle date ; une alerte sera donnee aux autres redacteurs
+			signale_edition ($id,  $auteur, $type);
+		}
+
+		$objets_ouverts = liste_drapeau_edition($auteur['id_auteur']);
 		if (count($objets_ouverts)) {
 			$res .= recuperer_fond('prive/objets/liste/objets-en-edition',array(),array('ajax'=>true));
 		}
