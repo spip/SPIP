@@ -438,8 +438,9 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 				return (array('zbug_critere_inconnu', array('critere' => $crit->op . " $par")));
 		}
 		else if ($par == 'date'
-		AND isset($GLOBALS['table_date'][$boucle->type_requete])) {
-			$m = $GLOBALS['table_date'][$boucle->type_requete];
+		  AND $desc = $boucle->show
+		  AND $desc['date']) {
+			$m = $desc['date'];
 			$order = "'".$boucle->id_table ."." . $m . "'";
 		}
 		// par champ. Verifier qu'ils sont presents.
