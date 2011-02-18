@@ -61,11 +61,13 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 					'auteur' => array('nom' => 10),
 				),
 				'statut'=> array(
-					'champ' => 'statut',
-					'publie' => 'publie',
-					'previsu' => 'publie,prop',
-					'post_date' => 'date',
-					'exception' => 'statut'
+					array(
+						'champ' => 'statut',
+						'publie' => 'publie',
+						'previsu' => 'publie,prop',
+						'post_date' => 'date',
+						'exception' => 'statut'
+					)
 				),
 				'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
 			),
@@ -128,10 +130,12 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 					'titre' => 8, 'descriptif' => 5, 'texte' => 1
 				),
 				'statut' => array(
-					'champ' => 'statut',
-					'publie' => 'publie',
-					'previsu' => '!',
-					'exception' => array('statut','tout')
+					array(
+						'champ' => 'statut',
+						'publie' => 'publie',
+						'previsu' => '!',
+						'exception' => array('statut','tout')
+					),
 				),
 				'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
 			)
