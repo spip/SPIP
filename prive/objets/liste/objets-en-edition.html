@@ -1,8 +1,8 @@
 <B_objets>
-[(#BOITE_OUVRIR{<:info_cours_edition:>,'note'})]
-<ul class="liste-items en-edition">
+[(#BOITE_OUVRIR{<:info_cours_edition:>,'note en-edition'})]
+<ul class="liste-items">
 <BOUCLE_objets(POUR){tableau #SESSION{id_auteur}|liste_drapeau_edition}>
-<li class="item #VALEUR{objet}"><a href="[(#VALEUR{id_objet}|generer_url_entite{#VALEUR{objet}})]">[(#CHEMIN_IMAGE{[(#VALEUR{objet}|info_objet{icone_objet})-16]}|balise_img{#VALEUR{objet}|info_objet{texte_objet}})]#INFO_TITRE{#VALEUR{objet},#VALEUR{id_objet}}</a>
+<li class="item #VALEUR{objet}"><a href="[(#VALEUR{id_objet}|generer_url_entite{#VALEUR{objet}})]">[(#CHEMIN_IMAGE{[(#VALEUR{objet}|info_objet{icone_objet})-16]}|balise_img{[(#VALEUR{objet}|info_objet{texte_objet}|_T)],'icone-objet'})]#INFO_TITRE{#VALEUR{objet},#VALEUR{id_objet}}</a>
 	[(#REM) manque un test pour ne pas proposer le lien de l'objet qu'on est en train d'editer
 	]
 	[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img)],[(#URL_ACTION_AUTEUR{debloquer_edition,[(#VALEUR{objet})-#VALEUR{id_objet}],#SELF})],ajax})]
