@@ -25,13 +25,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *		id_objet auquel associer
  * @return array
  */
-function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet){
+function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet,$editable=true){
 	$objet_source = objet_type($table_source);
 	$table_sql_source = table_objet_sql($objet_source);
 
 	// verifier existence de la table xxx_liens
 	include_spip('action/editer_liens');
 	if (!objet_associable($objet_source))
+		return false;
+
+	if (!$editable AND !count(objet_trouver_liens(array($objet_source=>'*'),array($objet=>'*'))))
 		return false;
 	
 	$valeurs = array(
@@ -48,6 +51,7 @@ function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet){
 		'ajouter_lien'=>'',
 		'supprimer_lien'=>'',
 		'_oups' => _request('_oups'),
+		'editable' => $editable?true:false,
 	);
 
 	return $valeurs;
@@ -77,8 +81,8 @@ function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet){
  *		id_objet auquel associer
  * @return array
  */
-function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet){
-	$res = array('editable'=>true);
+function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet,$editable=true){
+	$res = array('editable'=>$editable?true:false);
 	
 	if (_request('tout_voir'))
 		set_request('recherche','');
