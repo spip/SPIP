@@ -241,12 +241,10 @@ function table_jointure($x, $y) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$xdesc = $trouver_table(table_objet($x));
 	$ydesc = $trouver_table(table_objet($y));
-	$tx = $xdesc['table'];
-	$ty = $ydesc['table'];
 	$ix = @$xdesc['key']["PRIMARY KEY"];
 	$iy = @$ydesc['key']["PRIMARY KEY"];
-	if ($table = $GLOBALS['tables_jointures'][$ty][$ix]) return $table;
-	if ($table = $GLOBALS['tables_jointures'][$tx][$iy]) return $table;
+	if ($table = $ydesc['tables_jointures'][$ix]) return $table;
+	if ($table = $xdesc['tables_jointures'][$iy]) return $table;
 	return '';
 }
 

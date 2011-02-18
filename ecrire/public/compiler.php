@@ -942,7 +942,6 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 // Autres specifications comme ci-dessus
 
 function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect=''){
-	global $tables_jointures;
 	static $trouver_table;
 	spip_timer('calcul_skel');
 
@@ -1008,8 +1007,8 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 
 				$boucles[$id]->descr = &$descr;
 				if ((!$boucles[$id]->jointures)
-				AND (isset($tables_jointures[$nom_table])) 
-				AND is_array($x = $tables_jointures[$nom_table]))
+				  AND is_array($show['tables_jointures'])
+				  AND count($x = $show['tables_jointures']))
 					$boucles[$id]->jointures = $x;
 				if ($boucles[$id]->jointures_explicites){
 					$jointures = preg_split("/\s+/",$boucles[$id]->jointures_explicites);

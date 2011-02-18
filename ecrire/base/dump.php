@@ -195,18 +195,26 @@ function lister_tables_noerase(){
  * + toutes les tables auxiliaires hors relations
  * + les tables relations dont les deux tables liees sont dans la liste
  *
- * @global <type> $tables_principales
- * @global <type> $tables_auxiliaires
- * @global <type> $tables_jointures
  * @param array $exclude_tables
  * @return array
  */
 function base_liste_table_for_dump($exclude_tables = array()){
 	$tables_for_dump = array();
 	$tables_pointees = array();
-	global $tables_principales;
-	global $tables_auxiliaires;
-	global $tables_jointures;
+	$tables_principales = $GLOBALS['tables_principales'];
+	$tables_auxiliaires = $GLOBALS['tables_auxiliaires'];
+	$tables_jointures = $GLOBALS['tables_jointures'];
+
+	include_spip('base/objets');
+	$tables = lister_tables_objets_sql();
+	foreach($tables as $t=>$infos){
+		if ($infos['principale'] AND !isset($tables_principales[$t]))
+			$tables_principales[$t] = true;
+		if (!$infos['principale'] AND !isset($tables_auxiliaires[$t]))
+			$tables_auxiliaires[$t] = true;
+		if (count($infos['tables_jointures']))
+			$tables_jointures[$t] = array_merge(isset($tables_jointures[$t])?$tables_jointures[$t]:array(),$infos['tables_jointures']);
+	}
 
 	// on construit un index des tables de liens
 	// pour les ajouter SI les deux tables qu'ils connectent sont sauvegardees
@@ -229,7 +237,7 @@ function base_liste_table_for_dump($exclude_tables = array()){
 			}
 		}
 
-	$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires));
+	$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires),array_keys($tables));
 	foreach($liste_tables as $table){
 	  //		$name = preg_replace("{^spip_}","",$table);
 	  if (		!isset($tables_pointees[$table])

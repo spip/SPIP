@@ -194,55 +194,15 @@ function declarer_interfaces(){
 	$table_des_tables['rubriques']='rubriques';
 	$table_des_tables['hierarchie']='rubriques';
 
-	$table_statut['spip_articles'][] = array(
-		'champ' => 'statut',
-		'publie' => 'publie',
-		'previsu' => 'publie,prop',
-		'post_date' => 'date',
-		'exception' => 'statut'
-	);
-
-	// 2 conditions pour les auteurs : statut!=poubelle,
-	// et avoir des articles publies
-	$table_statut['spip_auteurs'][] = array(
-		'champ' => 'statut',
-		'publie' => '!5poubelle',
-		'previsu' => '!5poubelle',
-		'exception' => 'statut'
-	);
-
-	$table_statut['spip_auteurs'][] = array(
-		'champ' => array(
-			array('spip_auteurs_liens', 'id_auteur'),
-			array(
-				'spip_articles',
-				array('id_objet','id_article','objet','article')
-			),
-			'statut'
-		),
-		'publie' => 'publie',
-		'previsu' => '!',
-		'post_date' => 'date',
-		'exception' => array('statut','lien','tout')
-	);
-
-	$table_statut['spip_rubriques'][] = array(
-		'champ' => 'statut',
-		'publie' => 'publie',
-		'previsu' => '!',
-		'exception' => array('statut','tout')
-	);
+	// definition des statuts de publication
+	global $tables_statut;
+	$table_statut = array();
 
 	//
 	// tableau des tables de jointures
 	// Ex: gestion du critere {id_mot} dans la boucle(ARTICLES)
-
 	global $tables_jointures;
-
-	$tables_jointures['spip_articles']['id_auteur']= 'auteurs_liens';
-	$tables_jointures['spip_rubriques']['id_auteur']= 'auteurs_liens';
-	$tables_jointures['spip_auteurs'][]= 'auteurs_liens';
-
+	$tables_jointures = array();
 
 	global  $exceptions_des_jointures;
 	#$exceptions_des_jointures['titre_mot'] = array('spip_mots', 'titre'); // pour exemple
