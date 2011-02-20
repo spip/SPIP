@@ -123,8 +123,8 @@ function urls_liste_objets($preg = true){
 		$tables_objets = lister_tables_objets_sql();
 		foreach($tables_objets as $t=>$infos){
 			if ($infos['page']) {
-				$tables_objets[] = $infos['type'];
-				$tables_objets = array_merge($tables_objets,$infos['type_surnoms']);
+				$url_objets[] = $infos['type'];
+				$url_objets = array_merge($url_objets,$infos['type_surnoms']);
 			}
 		}
 		$url_objets = pipeline('declarer_url_objets',$url_objets);
