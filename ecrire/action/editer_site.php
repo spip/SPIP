@@ -51,9 +51,11 @@ function action_editer_site_dist($arg=null) {
 			$id_syndic = insert_syndic(_request('id_parent'));
 			revisions_sites($id_syndic);
 			if ($logo = _request('logo')
-			 AND $format_logo = _request('format_logo'))
-				@rename($logo,
+			 AND $format_logo = _request('format_logo')){
+			 	include_spip('inc/distant');
+				@rename(copie_locale($logo),
 				_DIR_IMG . 'siteon'.$id_syndic.'.'.$format_logo);
+			 }
 	}
 	// Erreur
 	else {

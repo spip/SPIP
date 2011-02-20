@@ -405,7 +405,8 @@ function _L($text, $args=array(), $class=NULL) {
 		}
 		// Si des variables n'ont pas ete inserees, le signaler
 		// (chaines de langues pas a jour)
-		if ($args) spip_log("$f:  variables inutilisees " . join(', ', array_keys($args)));
+		// NOTE: c'est du debug, gere comme tel pour SPIP >= 2.3
+		## if ($args) spip_log("$f:  variables inutilisees " . join(', ', array_keys($args)));
 	}
 
 	if ($GLOBALS['test_i18n'] AND $class===NULL)
@@ -961,6 +962,15 @@ function url_de_($http,$host,$request,$prof=0){
 }
 
 
+function tester_url_ecrire($nom){
+	// tester si c'est une page en squelette
+	if (trouver_fond($nom, 'prive/exec/'))
+		return 'fond';
+	// attention, il ne faut pas inclure l'exec ici car sinon on modifie l'environnement
+	// par un simple #URL_ECRIRE dans un squelette (cas d'un define en debut d'exec/nom )
+	return (find_in_path("{$nom}.php",'exec/') OR charger_fonction($nom,'exec',true))?$nom:'';
+}
+
 // Pour une redirection, la liste des arguments doit etre separee par "&"
 // Pour du code XHTML, ca doit etre &amp;
 // Bravo au W3C qui n'a pas ete capable de nous eviter ca
@@ -1047,12 +1057,14 @@ function generer_url_prive($script, $args="", $no_entities=false) {
 function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 	global $spip_lang_right;
 
+	$script1 = array_shift(explode('&', $script));
+
 	return "<form action='"
 	. ($script ? generer_url_ecrire($script) : '')
 	. "' "
 	. ($atts ? $atts : " method='post'")
 	.  "><div>\n"
-	. "<input type='hidden' name='exec' value='$script' />"
+	. "<input type='hidden' name='exec' value='$script1' />"
 	. $corps
 	. (!$submit ? '' :
 	     ("<div style='text-align: $spip_lang_right'><input type='submit' value='$submit' /></div>"))
@@ -1432,7 +1444,7 @@ function spip_initialisation_suite() {
 	define('_IMG_GD_MAX_PIXELS', (isset($GLOBALS['meta']['max_taille_vignettes'])&&$GLOBALS['meta']['max_taille_vignettes']<5500000)?$GLOBALS['meta']['max_taille_vignettes']:0);
 	define('_IMG_GD_QUALITE', 85);
 
-	if (!defined('_MEMORY_LIMIT_MIN')) define('_MEMORY_LIMIT_MIN', 16); // en Mo
+	if (!defined('_MEMORY_LIMIT_MIN')) define('_MEMORY_LIMIT_MIN', 16);
 	// si on est dans l'espace prive et si le besoin est superieur a 8Mo (qui est vraiment le standard)
 	// on verifie que la memoire est suffisante pour le compactage css+js pour eviter la page blanche
 	// il y aura d'autres problemes et l'utilisateur n'ira pas tres loin, mais ce sera plus comprehensible qu'une page blanche
@@ -1826,16 +1838,6 @@ function trouver_fond($nom, $dir='', $pathinfo = false) {
 	   $p['filename'] = ($p['basename']?substr($p['basename'],0,-strlen($p['extension'])-1):'');
 	$p['fond'] = ($f?substr($f,0,-strlen($p['extension'])-1):'');
   return $p;
-}
-
-function tester_url_ecrire($nom){
-	// skels monobloc
-	if (trouver_fond($nom, 'prive/exec/'))
-		return 'fond';
-	// attention, il ne faut pas inclure l'exec ici
-	// car sinon #URL_ECRIRE provoque des inclusions
-	// et des define intrusifs potentiels
-	return (find_in_path("{$nom}.php",'exec/') OR charger_fonction($nom,'exec',true))?$nom:'';
 }
 
 // Charger dynamiquement une extension php
