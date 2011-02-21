@@ -6,13 +6,21 @@
 #SET{retour,#ENV{redirect}|sinon{#ID_AUTEUR|intval|?{#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR},#URL_ECRIRE{auteurs}}}}
 
 <div class='cadre-formulaire-editer'>
-<div class="entete-formulaire">
-	[(#GET{retour}|icone_verticale{<:icone_retour:>,auteur,'',left[(#ENV{retourajax,''}|oui)ajax preload]})]
-	[<:info_modifier_auteur:>
-	<h1>(#ENV{titre,#INFO_NOM{auteur,#ID_AUTEUR}|sinon{<:info_sans_titre:>}})</h1>]
+	<div class="entete-formulaire">
+		[(#GET{retour}|icone_verticale{<:icone_retour:>,auteur,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		[<:info_modifier_auteur:>
+		<h1>(#ENV{titre,#INFO_NOM{auteur,#ID_AUTEUR}|sinon{<:info_sans_titre:>}})</h1>]
+	</div>
+
+	#SET{redirect,#ENV{redirect,#ID_AUTEUR|generer_url_entite{auteur}}}
+	[(#ENV{retourajax,''}|oui)
+		#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+		<div class="ajax">
+	]
+	#FORMULAIRE_EDITER_AUTEUR{#ENV{id_auteur,oui},#GET{redirect},#ENV{associer_objet}}
+	[(#ENV{retourajax,''}|oui)
+		</div>
+		<script type="text/javascript">/*<!\[CDATA\[*/if (window.jQuery) jQuery('#navigation>div,#extra>div').ajaxReload({args:{exec:'#ENV{exec}'}});/*\]\]>*/</script>
+	]
+
 </div>
-#FORMULAIRE_EDITER_AUTEUR{#ENV{id_auteur,oui},#ENV{redirect,#URL_ECRIRE{auteur,id_auteur=0}},#ENV{associer_objet}}
-</div>
-[(#ENV{retourajax,''}|oui)
-<script type="text/javascript">if (window.jQuery) jQuery('#navigation>div').ajaxReload({args:{exec:'article_edit'}});</script>
-]
