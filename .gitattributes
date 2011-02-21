@@ -617,6 +617,7 @@ prive/objets/contenu/plugin_item_rss.html -text
 prive/objets/contenu/rubrique.html -text
 prive/objets/editer/liens.html -text
 prive/objets/editer/logo.html -text
+prive/objets/editer/objet.html -text
 prive/objets/editer/rediriger_article.html -text
 prive/objets/editer/rubrique.html -text
 prive/objets/infos/article.html -text
