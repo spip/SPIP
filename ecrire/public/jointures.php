@@ -295,12 +295,16 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 	if (!$trouver_table)
 		$trouver_table = charger_fonction('trouver_table', 'base');
 
-	// support de la recherche multi champ
+	// support de la recherche multi champ :
+	// si en seconde etape on a decompose le champ id_xx en id_objet,objet
+	// on reentre ici soit en cherchant une table les 2 champs id_objet,objet
+	// soit une table avec les 3 champs id_xx, id_objet, objet
 	if (!is_array($cle))
 		$cle = array($cle);
+
 	foreach($joints as $k => $join) {
 	  if ($join && $table = $trouver_table($join, $boucle->sql_serveur)) {
-	    if (isset($table['field']) 
+	    if (isset($table['field'])
 	    	// verifier que toutes les cles cherchees sont la
 			  AND (count(array_intersect($cle, array_keys($table['field'])))==count($cle))
 			  // si on sait ou on veut arriver, il faut que ca colle
@@ -308,13 +312,34 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 	      return  array($table['table'], $table);
 	  }
 	}
-	// une cle id_xx peut etre implementee par un couple (id_objet,objet)
-	foreach($cle as $k=>$c) {
-		if (is_array($decompose = decompose_champ_id_objet($c))){
-			unset($cle[$k]);
+
+	// au premier coup, on essaye de decomposer, si possible
+	if (count($cle)==1
+	  AND $c = reset($cle)
+	  AND is_array($decompose = decompose_champ_id_objet($c))) {
+
+		$desc = $boucle->show;
+		// cas 1 : la cle id_xx est dans la table de depart
+		// -> on cherche uniquement id_objet,objet a l'arrivee
+		if (isset($desc['field'][$c])){
+			$cle = array();
 			$cle[] = array_shift($decompose); // id_objet
 			$cle[] = array_shift($decompose); // objet
 			return trouver_champ_exterieur($cle,$joints,$boucle,$checkarrivee);
+		}
+		// cas 2 : la cle id_xx n'est pas dans la table de depart
+		// -> il faut trouver une cle de depart zzz telle que
+		// id_objet,objet,zzz soit a l'arrivee
+		else {
+			$depart = liste_champs_jointures($desc['table'],$desc);
+			foreach($depart as $d){
+				$cle = array();
+				$cle[] = array_shift($decompose); // id_objet
+				$cle[] = array_shift($decompose); // objet
+				$cle[] = $d;
+				if ($ext = trouver_champ_exterieur($cle,$joints,$boucle,$checkarrivee))
+					return $ext;
+			}
 		}
 	}
 	return "";
