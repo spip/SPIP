@@ -37,7 +37,8 @@ function install_etape_4_dist()
 	$afficher = charger_fonction("afficher_liste",'plugins');
 	echo $afficher(self(), liste_plugin_files(_DIR_EXTENSIONS),array(), _DIR_EXTENSIONS,'afficher_nom_plugin');
 
-	installe_plugins();
+	$plugins_installer = charger_fonction('installer', 'plugins');
+	$plugins_installer();
 
 	echo info_etape(_T('info_derniere_etape'),
 			_T('info_utilisation_spip')

@@ -196,10 +196,14 @@ function affiche_bloc_plugin($plug_file, $info, $dir_plugins=null) {
 		? '<br />'._T('plugin_source').' '.trim($r[1])
 		:'';
 
+	$nec = !$info['necessite'] ? '' : 
+	  ('<div>' .  _L('Necessite&nbsp;: ') . join(' ', array_map('array_shift', $info['necessite'])) . '</div>');
+
 	$s .= "<div class='tech'>"
 		. join(' &mdash; ', $infotech) .
 		 '<br />' . _T('repertoire_plugins') .' '. $plug_file
 		. $source
+		. $nec
 		."</div>";
 
 

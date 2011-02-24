@@ -17,10 +17,11 @@ include_spip('inc/charsets');
 function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_actifs, $dir_plugins=_DIR_PLUGINS,$afficher_un = 'afficher_plugin'){
 	$get_infos = charger_fonction('get_infos','plugins');
 	$ligne_plug = charger_fonction($afficher_un,'plugins');
+
+	$all_infos = $get_infos($liste_plugins, false, $dir_plugins);
 	$liste_plugins = array_flip($liste_plugins);
-	foreach(array_keys($liste_plugins) as $chemin) {
-		if ($info = $get_infos($chemin, false, $dir_plugins))
-			$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($info['nom']))))));
+	foreach($liste_plugins as $chemin => $v) {
+		$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($all_infos[$dir_plugins][$chemin]['nom']))))));
 	}
 	asort($liste_plugins);
 	$exposed = urldecode(_request('plugin'));

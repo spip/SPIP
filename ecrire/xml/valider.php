@@ -28,7 +28,8 @@ function validerElement($phraseur, $name, $attrs)
 		}
 		if (!$p) {
 			coordonnees_erreur($this," <b>$name</b> "
-				     . _T('zxml_inconnu_balise'));
+				. " / " .  $this->ouvrant 
+				. _T('zxml_inconnu_balise'));
 			return; 
 		}
 	}

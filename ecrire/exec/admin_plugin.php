@@ -42,9 +42,11 @@ function exec_admin_plugin_dist($retour='') {
 		unset($GLOBALS['meta']['plugin_erreur_activation']);
 	}
 
-	$format = '';
-	if (_request('format')!==NULL)
-		$format = _request('format'); // liste ou repertoires
+	$format = _request('format');
+	if (empty($format))
+	  $format = 'liste';
+	elseif (!in_array($format,array('liste','repertoires')))
+		$format = 'repertoires';
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
@@ -64,10 +66,6 @@ function exec_admin_plugin_dist($retour='') {
 	echo $s;
 	echo fin_boite_info(true);
 
-	// la valeur de retour de la fonction ci-dessus n'est pas compatible
-	// avec ce que fait actualise_plugins_actifs, il faut recalculer. A revoir.
-	$lcpa = liste_chemin_plugin_actifs();
-
 	echo pipeline('affiche_gauche',
 		array(
 		'args'=>array('exec'=>'admin_plugin'),
@@ -86,20 +84,19 @@ function exec_admin_plugin_dist($retour='') {
 		effacer_meta('plugin_erreur_activation');
 	}
 
+	// la valeur de retour de la fonction ci-dessous n'est pas compatible
+	// avec ce que fait actualise_plugins_actifs, il faut recalculer. A revoir.
+	$lcpa = liste_chemin_plugin_actifs();
 
 	// on fait l'installation ici,
 	// cela permet aux scripts d'install de faire des affichages (moches...)
-	installe_plugins();
+	$plugins_installer = charger_fonction('installer', 'plugins');
+	$plugins_installer();
 
 	$lpf = liste_plugin_files();
-	$plugins_interessants = @array_keys(unserialize($GLOBALS['meta']['plugins_interessants']));
-	if (!is_array($plugins_interessants))
-		$plugins_interessants = array();
-
 	echo "<div class='liste-plugins formulaire_spip'>";
 
-	echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'),
-	'plugins');
+	echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'), 'plugins');
 
 	if ($quoi!=='actifs'){
 		if ($lpf)
@@ -117,36 +114,34 @@ function exec_admin_plugin_dist($retour='') {
 						_T('plugins_actif_aucun')
 						)."</h3>";
 
-	$sub = "\n<div class='boutons' style='display:none;'>"
-	.  "<input type='submit' class='submit save' value='"._T('bouton_enregistrer')
-	."' />"
-	. "</div>";
-
-	$no_button = false;
-
 	// la liste
 	if ($quoi=='actifs'){
-		$aff = affiche_les_plugins($lcpa, $lcpa, $format);
-		$no_button = !strlen($aff);
-		$corps = $aff;
+		$lcpaffiche = $lcpa;
 	}
 	elseif ($quoi=='tous')
-		$corps = affiche_les_plugins($lpf, $lcpa, $format);
+		$lcpaffiche = $lpf;
 	else {
 		$dir_auto = substr(_DIR_PLUGINS_AUTO, strlen(_DIR_PLUGINS));
 		$lcpaffiche = array();
+		$plugins_interessants = @array_keys(unserialize($GLOBALS['meta']['plugins_interessants']));
+		if (!is_array($plugins_interessants))
+		  $plugins_interessants = array();
+
 		foreach ($lpf as $f)
 			if (!strpos($f, '/')
 			OR ($dir_auto AND substr($f, 0, strlen($dir_auto)) == $dir_auto)
 			OR in_array($f, $lcpa)
 			OR in_array($f, $plugins_interessants))
 				$lcpaffiche[] = $f;
-
-		$corps = affiche_les_plugins($lcpaffiche, $lcpa, $format);
 	}
 
-	if (!$no_button)
-		$corps .= "\n<br />" . $sub;
+	$afficher = charger_fonction("afficher_$format",'plugins');
+	$corps = $afficher(self(),$lcpaffiche, $lcpa);
+	if ($corps) 
+	  $corps .= "\n<br />\n<div class='boutons' style='display:none;'>"
+	    .  "<input type='submit' class='submit save' value='"._T('bouton_enregistrer')
+	    ."' />"
+	    . "</div>";
 
 	echo redirige_action_post('activer_plugins','activer','admin_plugin','', $corps);
 
@@ -212,23 +207,6 @@ function affiche_les_extensions($liste_plugins_actifs){
 		$res .= "</div>\n";
 	}
 	return $res;
-}
-
-// http://doc.spip.org/@affiche_les_plugins
-function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='liste'){
-	if (!$format)
-		$format = 'liste';
-	if (!in_array($format,array('liste','repertoires')))
-		$format = 'repertoires';
-
-	$afficher = charger_fonction("afficher_$format",'plugins');
-	$res = $afficher(self(), $liste_plugins,$liste_plugins_actifs);
-
-	if (!$res) return "";
-#	var_dump(spip_timer('cachexml'));
-
-
-	return	$res;
 }
 
 /**
