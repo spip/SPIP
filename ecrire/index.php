@@ -108,7 +108,7 @@ elseif (isset($GLOBALS['meta']["admin"])) {
 }
 // si nom pas plausible, prendre le script par defaut
 // attention aux deux cas 404/403 qui commencent par un 4 !
-elseif (!preg_match(',^[a-z4_][0-9a-z_]*$,i', $exec)) {
+elseif (!preg_match(',^[a-z4_][0-9a-z_-]*$,i', $exec)) {
 	$exec = "accueil";
 	set_request('exec', $exec);
 }
