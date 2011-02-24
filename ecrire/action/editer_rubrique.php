@@ -113,18 +113,6 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	suivre_invalideur("id='rubrique/$id_rubrique'");
 	// et celui de menu_rubriques 
 	effacer_meta("date_calcul_rubriques");
-
-	// Notification ?
-	pipeline('post_edition',
-		array(
-			'args' => array(
-				'table' => 'spip_rubriques',
-				'id_objet' => $id_rubrique
-			),
-			'data' => $champs
-		)
-	);
-
 }
 
 // si c'est une rubrique-secteur contenant des breves, ne deplacer
