@@ -373,7 +373,7 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 
 function plugins_precompile_xxxtions($plugin_valides, $ordre)
 {
-	$s = array('options' => '', 'fonctions' =>'');
+	$contenu = array('options' => '', 'fonctions' =>'');
 	$liste_fichier_verif = array();
 	$boutons = array();
 	$onglets = array();
@@ -392,22 +392,31 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 			$boutons = array_merge($boutons,$info['bouton']);
 		if ($info['onglet'])
 			$onglets = array_merge($onglets,$info['onglet']);
-		foreach(array('options', 'fonctions') as $charge){
+		foreach($contenu as $charge => $v){
 		  if (isset($info[$charge])) foreach($info[$charge] as $file){
 		// on genere un if file_exists devant chaque include
 		// pour pouvoir garder le meme niveau d'erreur general
 				$file = trim($file);
 				$_file = $root_dir_type . ".'$plug/$file'";
-				$s[$charge] .= "if (file_exists(\$f=$_file)){include_once \$f;}\n";
+				$contenu[$charge] .= "if (file_exists(\$f=$_file)){include_once \$f;}\n";
 				$liste_fichier_verif["$root_dir_type:$plug/$file"]=1;
 			}
 		}
 	}
-	$s['options'] .= "function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($boutons))."');}\n"
-	  . "function onglets_plugins(){return unserialize('".str_replace("'","\'",serialize($onglets))."');}\n";
-	ecrire_fichier_php(_CACHE_PLUGINS_OPT, $s['options']);
-	ecrire_fichier_php(_CACHE_PLUGINS_FCT, $s['fonctions']);
+
+	$contenu['options'] .= plugin_ongletbouton("boutons_plugins", $boutons)
+	. plugin_ongletbouton("onglets_plugins", $onglets);
+
+	ecrire_fichier_php(_CACHE_PLUGINS_OPT, $contenu['options']);
+	ecrire_fichier_php(_CACHE_PLUGINS_FCT, $contenu['fonctions']);
 	return $liste_fichier_verif;
+}
+
+function plugin_ongletbouton($nom, $val)
+{
+	$val =!$val ? 'array()'
+	: ("unserialize('".str_replace("'","\'",serialize($val))."')");
+	return "function $nom(){return $val;}\n";
 }
 
 // creer le fichier CACHE_PLUGIN_VERIF à partir de
