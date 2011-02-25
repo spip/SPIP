@@ -403,10 +403,10 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 			}
 		}
 	}
-	$s['options'] = "function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($boutons))."');}\n"
+	$s['options'] .= "function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($boutons))."');}\n"
 	  . "function onglets_plugins(){return unserialize('".str_replace("'","\'",serialize($onglets))."');}\n";
-	ecrire_fichier_php(_CACHE_PLUGINS_OPT, $s['fonctions']);
-	ecrire_fichier_php(_CACHE_PLUGINS_FCT, $s['options']);
+	ecrire_fichier_php(_CACHE_PLUGINS_OPT, $s['options']);
+	ecrire_fichier_php(_CACHE_PLUGINS_FCT, $s['fonctions']);
 	return $liste_fichier_verif;
 }
 
