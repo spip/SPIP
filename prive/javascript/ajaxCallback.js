@@ -242,7 +242,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 		})
 		// previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
 		// mais le marquer comme ayant l'ajax au cas ou on reinjecte du contenu ajax dedans
-		.addClass('noajax hasajax') 
+		.addClass('noajax hasajax')
 		;
 		});
   });
@@ -262,17 +262,40 @@ function _confirm(message){
 }
 window.confirm = _confirm;
 
-// rechargement ajax d'une noisette implementee par {ajax}
-// selecteur personalise, sera defini par defaut a '.pagination a,a.ajax'
+/**
+ * rechargement ajax d'une noisette implementee par {ajax}
+ * selecteur personalise, sera defini par defaut a '.pagination a,a.ajax'
+ */
 var ajaxbloc_selecteur;
-// mise en cache des url. Il suffit de vider cete variable pour vider le cache
+
+/**
+ * mise en cache des url. Il suffit de vider cete variable pour vider le cache
+ */
 jQuery.spip.preloaded_urls = {};
-jQuery.spip.on_ajax_loaded = function(blocfrag,c,u) {
+
+/**
+ * Afficher dans la page
+ * le html d'un bloc ajax charge
+ * @param object blocfrag
+ * @param string c
+ * @param string href
+ * @param bool history
+ */
+jQuery.spip.on_ajax_loaded = function(blocfrag,c,href,history) {
+	history = history || (history==null);
+	if (typeof href == undefined)
+		history = false;
+	if (history)
+		jQuery.spip.setHistoryState(blocfrag);
+	
 	jQuery(blocfrag)
 	.html(c)
 	.removeClass('loading');
-	if (typeof u != undefined)
-		jQuery(blocfrag).attr('data-url',u);
+	if (typeof href != undefined)
+		jQuery(blocfrag).attr('data-url',href);
+	if (history)
+		jQuery.spip.pushHistoryState(href);
+
 	var a = jQuery('a:first',jQuery(blocfrag)).eq(0);
 	if (a.length
 		&& a.is('a[name=ajax_ancre]')
@@ -291,26 +314,89 @@ jQuery.spip.on_ajax_loaded = function(blocfrag,c,u) {
 	jQuery.spip.updateReaderBuffer();
 }
 
-jQuery.spip.loadAjax = function(blocfrag,url, href, force, callback){
+jQuery.spip.stateId=0;
+jQuery.spip.setHistoryState = function(blocfrag){
+	if (!window.history.replaceState) return;
+	// attribuer un id au bloc si il n'en a pas
+	if (!blocfrag.attr('id')){
+		while (jQuery('#ghsid'+jQuery.spip.stateId).length)
+			jQuery.spip.stateId++;
+		blocfrag.attr('id','ghsid'+jQuery.spip.stateId);
+	}
+	var href= blocfrag.attr('data-url') || blocfrag.attr('data-origin');
+	href = jQuery("<"+"a href='"+href+"'></a>").get(0).href;
+	var state={
+		id:blocfrag.attr('id'),
+		href: href
+	};
+	// on remplace la variable qui decrit l'etat courant
+	// initialement vide
+	// -> elle servira a revenir dans l'etat courant
+	window.history.replaceState(state,window.document.title, window.document.location);
+}
+
+jQuery.spip.pushHistoryState = function(href, title){
+	if (!window.history.pushState)
+		return false;
+	window.history.pushState({}, title, href);
+}
+
+window.onpopstate = function(popState){
+	if (popState.state && popState.state.id){
+		var blocfrag=jQuery('#'+popState.state.id);
+		if (blocfrag.length && popState.state.href) {
+			jQuery.spip.ajaxClick(blocfrag,popState.state.href,{history:false});
+			return true;
+		}
+	}
+}
+
+/**
+ * Charger un bloc ajax represente par l'objet jQuery blocajax qui le pointe
+ * avec la requete ajax url, qui represente le lien href
+ * @param object blocfrag
+ *   bloc cible
+ * @param string url
+ *   url pour la requete ajax
+ * @param string href
+ *   url du lien clique
+ * @param object options
+ *   bool force : pour forcer la requete sans utiliser le cache
+ *   function callback : callback au retour du chargement
+ *   bool history : prendre en charge l'histrisation dans l'url
+ */
+jQuery.spip.loadAjax = function(blocfrag,url, href, options){
+	var force = options.force || false;
 	jQuery(blocfrag)
 	.animeajax()
 	.addClass('loading');/*.positionner(false)*/;
 	if (jQuery.spip.preloaded_urls[url] && !force) {
-		jQuery.spip.on_ajax_loaded(blocfrag,jQuery.spip.preloaded_urls[url],href);
+		jQuery.spip.on_ajax_loaded(blocfrag,jQuery.spip.preloaded_urls[url],href,options.history);
 	} else {
 		jQuery.ajax({
 			url: url,
 			onAjaxLoad:false,
 			success: function(c){
-				jQuery.spip.on_ajax_loaded(blocfrag,c,href);
+				jQuery.spip.on_ajax_loaded(blocfrag,c,href,options.history);
 				jQuery.spip.preloaded_urls[url] = c;
-				if (callback && typeof callback == "function")
-					callback.apply(blocfrag);
+				if (options.callback && typeof options.callback == "function")
+					options.callback.apply(blocfrag);
 			}
 		});
 	}
 }
 
+/**
+ * Calculer l'url ajax a partir de l'url du lien
+ * et de la variable d'environnement du bloc ajax
+ * passe aussi l'ancre eventuelle sous forme d'une variable
+ * pour que le serveur puisse la prendre en compte
+ * et la propager jusqu'a la reponse
+ * sous la forme d'un lien cache
+ *
+ * @param string href
+ * @param string ajax_env
+ */
 jQuery.spip.makeAjaxUrl = function(href,ajax_env){
 	var url = href.split('#');
 	url[0] = parametre_url(url[0],'var_ajax',1);
@@ -320,6 +406,15 @@ jQuery.spip.makeAjaxUrl = function(href,ajax_env){
 	return url[0];
 }
 
+/**
+ * fonction appelee sur l'evenement ajaxReload d'un bloc ajax
+ * que l'on declenche quand on veut forcer sa mise a jour
+ *
+ * @param object blocfrag
+ * @param object options
+ *   callback : fonction appelee apres le rechargement
+ *   args : arguments passes a l'url rechargee (permet une modif du contexte)
+ */
 jQuery.spip.ajaxReload = function(blocfrag, options){
 	var ajax_env = blocfrag.attr('data-ajax-env');
 	if (!ajax_env || ajax_env==undefined) return;
@@ -331,12 +426,24 @@ jQuery.spip.ajaxReload = function(blocfrag, options){
 		for (var key in args)
 			href = parametre_url(href,key,args[key]);
 		var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
-		jQuery.spip.loadAjax(blocfrag, url, href, true, callback);
+		// recharger sans historisation dans l'url
+		jQuery.spip.loadAjax(blocfrag, url, href, {force:true, callback:callback, history:false});
 		return true;
 	}
 }
 
-jQuery.spip.ajaxClick = function(blocfrag, href, force){
+/**
+ * fonction appelee sur l'evenement click d'un lien ajax
+ *
+ * @param object blocfrag
+ *   objet jQuery qui cible le bloc ajax contenant
+ * @param string href
+ *   url du lien a suivre
+ * @param object options
+ *   force : pour interdire l'utilisation du cache
+ *   history : pour interdire la mise en historique
+ */
+jQuery.spip.ajaxClick = function(blocfrag, href, options){
 	var ajax_env = blocfrag.attr('data-ajax-env');
 	if (!ajax_env || ajax_env==undefined) return;
 	if (!ajax_confirm) {
@@ -348,11 +455,15 @@ jQuery.spip.ajaxClick = function(blocfrag, href, force){
 			return false;
 	}
 	var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
-	jQuery.spip.loadAjax(blocfrag, url, href, force);
+	jQuery.spip.loadAjax(blocfrag, url, href, options);
 	return false;
 }
 
-
+/**
+ * Implementer le comportemant des liens ajax
+ * et boutons post ajax qui se comportent
+ * comme un lien ajax
+ */
 jQuery.fn.ajaxbloc = function() {
 	if (this.length)
 		jQuery.spip.initReaderBuffer();
@@ -360,7 +471,10 @@ jQuery.fn.ajaxbloc = function() {
 		ajaxbloc_selecteur = '.pagination a,a.ajax';
 
   return this.each(function() {
-	  jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
+	  // traiter les enfants d'abord :
+	  // un lien ajax provoque le rechargement
+	  // du plus petit bloc ajax le contenant
+	  jQuery('div.ajaxbloc',this).ajaxbloc();
 		var blocfrag = jQuery(this);
 
 		var ajax_env = blocfrag.attr('data-ajax-env');
@@ -373,7 +487,7 @@ jQuery.fn.ajaxbloc = function() {
 	  }).addClass('bind-ajaxReload');
 
 		jQuery(ajaxbloc_selecteur,this).not('.noajax,.bind-ajax')
-			.click(function(){return jQuery.spip.ajaxClick(blocfrag,this.href,jQuery(this).is('.nocache'));})
+			.click(function(){return jQuery.spip.ajaxClick(blocfrag,this.href,{force:jQuery(this).is('.nocache')});})
 			.addClass('bind-ajax')
 			.filter('.preload').each(function(){
 				var href = this.href;
@@ -407,6 +521,11 @@ jQuery.fn.ajaxbloc = function() {
   });
 };
 
+/**
+ * Suivre un lien en simulant le click sur le lien
+ * Si le lien est ajax, on se contente de declencher l'evenement click()
+ * Si le lien est non ajax, on finit en remplacant l'url de la page
+ */
 jQuery.fn.followLink = function(){
 	$(this).click();
 	if (!$(this).is('.bind-ajax'))
@@ -468,7 +587,7 @@ jQuery.fn.animeajax = jQuery.fn.animateLoading;
  * puis fading vers opacity 0
  * quand l'element est masque, on retire les classes et css inline
  *
- * @param function callback 
+ * @param function callback
  *
  */
 jQuery.fn.animateRemove = function(callback){
