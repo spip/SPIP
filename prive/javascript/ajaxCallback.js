@@ -293,8 +293,10 @@ jQuery.spip.on_ajax_loaded = function(blocfrag,c,href,history) {
 	.removeClass('loading');
 	if (typeof href != undefined)
 		jQuery(blocfrag).attr('data-url',href);
-	if (history)
+	if (history) {
 		jQuery.spip.pushHistoryState(href);
+		jQuery.spip.setHistoryState(blocfrag);
+	}
 
 	var a = jQuery('a:first',jQuery(blocfrag)).eq(0);
 	if (a.length
