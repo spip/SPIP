@@ -20,22 +20,34 @@ function plugins_installer_dist(){
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$trouver_table('');
 
-	$liste = liste_plugin_actifs();
-	$get_infos = charger_fonction('get_infos','plugins');
-
-	foreach ($liste as $prefix=>$resume) {
+	foreach (liste_plugin_actifs() as $prefix=>$resume) {
 		$plug = $resume['dir'];
 		$dir_type = $resume['dir_type'];		
-		$infos = $get_infos($plug,false,constant($dir_type));
-		if ($infos AND isset($infos['install'])){
-			$ok = installe_un_plugin($plug,$infos,$dir_type);
+		$infos = charge_instal_plugin($plug, $dir_type); 
+		if ($infos) {
+			$version_cible = isset($infos['version_base'])?$infos['version_base']:'';
+			$f = $infos['prefix']."_install";
+			$arg2 = $infos ;
+			if (!function_exists($f))
+			  $f = isset($infos['version_base']) ? 'spip_plugin_install' : '';
+			else $arg2 = $prefix; // completement debile
+			$ok = !$f ? true : $f('test', $arg2, $version_cible);
+			if (!$ok) {
+				echo "<div class='install-plugins'>";
+				echo _T('plugin_titre_installation',array('plugin'=>typo($infos['nom'])))."<br />";
+				$f('install',$arg2,$version_cible);
+				$ok = $f('test',$arg2,$version_cible);
+				echo "<span class='".($ok?'ok':'erreur')."'>".($ok ? _L("OK"):_L("Echec"))."</span>";
+				echo "</div>";
+				// vider le cache des descriptions de tables
+				// apres chaque installation
+				$trouver_table('');
+			}
 			// on peut enregistrer le chemin ici car 
 			// il est mis a jour juste avant l'affichage du panneau
 			// -> cela suivra si le plugin demenage
 			if ($ok)
 				$meta_plug_installes[] = $plug;
-			// vider le cache des descriptions de tables apres chaque installation
-			$trouver_table('');
 		}
 	}
 	ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
@@ -43,9 +55,8 @@ function plugins_installer_dist(){
 }
 
 // http://doc.spip.org/@spip_plugin_install
-function spip_plugin_install($action, $infos){
+function spip_plugin_install($action, $infos, $version_cible){
 	$prefix = $infos['prefix'];
-	$version_cible = $infos['version_base'];
 	if (isset($infos['meta']) AND (($table = $infos['meta']) !== 'meta'))
 		$nom_meta = "base_version";
 	else {  
@@ -54,7 +65,7 @@ function spip_plugin_install($action, $infos){
 	}
 	switch ($action){
 		case 'test':
-			return (isset($GLOBALS[$table])
+			return  (isset($GLOBALS[$table])
 			AND isset($GLOBALS[$table][$nom_meta]) 
 			AND spip_version_compare($GLOBALS[$table][$nom_meta],$version_cible,'>='));
 			break;
@@ -63,88 +74,55 @@ function spip_plugin_install($action, $infos){
 				$upgrade($nom_meta, $version_cible, $table);
 			break;
 		case 'uninstall':
-			if (function_exists($vider_tables = $prefix."_vider_tables"))
+		  if (function_exists($vider_tables = $prefix."_vider_tables"))
 				$vider_tables($nom_meta, $table);
 			break;
 	}
 }
 
 // http://doc.spip.org/@desinstalle_un_plugin
-function desinstalle_un_plugin($plug,$infos){
-	// faire les include qui vont bien
-	charge_instal_plugin($plug, $infos);
-	$version_cible = isset($infos['version_base'])?$infos['version_base']:'';
-	$prefix_install = $infos['prefix']."_install";
-	if (function_exists($prefix_install)){
-		$prefix_install('uninstall',$infos['prefix'],$version_cible);
-		$ok = $prefix_install('test',$infos['prefix'],$version_cible);
-		return $ok;
+function desinstalle_un_plugin($plug){
+	$infos = charge_instal_plugin($plug);
+	$erreur = 'erreur_plugin_desinstalation_echouee';
+	if ($infos) {
+		$prefix_install = $infos['prefix']."_install";
+		$ok = true;
+		if (function_exists($prefix_install)){
+			$prefix_install('uninstall',$infos['prefix'],$infos['version_base']);
+			$ok = !$prefix_install('test',$infos['prefix'],$infos['version_base']);
+		}
+		if (isset($infos['version_base'])) {
+		  spip_plugin_install('uninstall',$infos, $infos['version_base']);
+		  $ok = spip_plugin_install('test',$infos, $infos['version_base']);
+		}
+		// desactiver si il a bien ete desinstalle
+		if (!$ok) {
+			include_spip('inc/plugin');
+			ecrire_plugin_actifs(array($plug),false,'enleve');
+			$erreur = '';
+		}
 	}
-	if (isset($infos['version_base'])){
-		spip_plugin_install('uninstall',$infos);
-		$ok = spip_plugin_install('test',$infos);
-		return $ok;
-	}
-
-	return false;
+	return $erreur;
 }
 
-function charge_instal_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
-	// passer en chemin absolu si possible
-	$dir = str_replace('_DIR_','_ROOT_',$dir_plugins);
-	if (!defined($dir))
-		$dir = $dir_plugins;
-	
-	// faire les include qui vont bien
-	foreach($infos['install'] as $file){
-		$file = trim($file);
-		if (file_exists($f=constant($dir)."$plug/$file")){
-			include_once($f);
+// charge et retourne les infos
+// et inclut les fichiers necessaires a l'install/desinstal
+// en passant en chemin absolu si possible
+
+function charge_instal_plugin($plug, $dir_type='_DIR_PLUGINS'){
+	$get_infos = charger_fonction('get_infos','plugins');
+	$infos = $get_infos($plug);
+	if (!$infos['install']) return false;
+	$dir = str_replace('_DIR_','_ROOT_',$dir_type);
+	if (!defined($dir)) $dir = $dir_type;
+	$dir = constant($dir);
+	foreach($infos['install'] as $file) {
+		$file = $dir . $plug . "/" . trim($file);
+		if (file_exists($file)){
+			include_once($file);
 		}
 	}
-}
-
-function installe_un_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
-
-	charge_instal_plugin($plug, $infos, $dir_plugins);
-
-	$version_cible = isset($infos['version_base'])?$infos['version_base']:'';
-	$prefix_install = $infos['prefix']."_install";
-	// cas de la fonction install fournie par le plugin
-	if (function_exists($prefix_install)){
-		// voir si on a besoin de faire l'install
-		$ok = $prefix_install('test',$infos['prefix'],$version_cible);
-		if (!$ok) {
-			echo "<div class='install-plugins'>";
-			echo _T('plugin_titre_installation',array('plugin'=>typo($infos['nom'])))."<br />";
-			$prefix_install('install',$infos['prefix'],$version_cible);
-			$ok = $prefix_install('test',$infos['prefix'],$version_cible);
-			// vider le cache des definitions des tables
-			$trouver_table = charger_fonction('trouver_table','base');
-			$trouver_table(false);
-			echo "<span class='".($ok?'ok':'erreur')."'>".($ok ? _L("OK"):_L("Echec"))."</span>";
-			echo "</div>";
-		}
-		return $ok; // le plugin est deja installe et ok
-	}
-	// pas de fonction instal fournie, mais une version_base dans le plugin
-	// on utilise la fonction par defaut
-	if (isset($infos['version_base'])){
-		$ok = spip_plugin_install('test',$infos);
-		if (!$ok) {
-			echo "<div class='install-plugins'>";
-			echo _T('plugin_titre_installation',array('plugin'=>typo($infos['nom'])))."<br />";
-			spip_plugin_install('install',$infos);
-			$ok = spip_plugin_install('test',$infos);
-			// vider le cache des definitions des tables
-			$trouver_table = charger_fonction('trouver_table','base');
-			$trouver_table(false);
-			echo "<span class='".($ok?'ok':'erreur')."'>".($ok ? _L("OK"):_L("Echec"))."</span>";
-			echo "</div>";
-		}
-		return $ok; // le plugin est deja installe et ok
-	}
-	return false;
+	return $infos;
 }
 
 function spip_version_compare($v1,$v2,$op){

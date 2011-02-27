@@ -12,29 +12,13 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/plugin');
 // http://doc.spip.org/@action_desinstaller_plugin_dist
 function action_desinstaller_plugin_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$plug_file = $securiser_action();
-	$get_infos = charger_fonction('get_infos','plugins');
-	$infos = $get_infos($plug_file);
-	$erreur = "";
-	if (isset($infos['install'])){
-		// desinstaller
-		$etat = desinstalle_un_plugin($plug_file,$infos);
-		// desactiver si il a bien ete desinstalle
-		if (!$etat)
-			ecrire_plugin_actifs(array($plug_file),false,'enleve');
-		else
-			$erreur = 'erreur_plugin_desinstalation_echouee';
-	}
-	else {
-		// en principe on ne passe pas la car pas de bouton sur les plugins non
-		// desinstallables
-		echo ('Ce plugin ne peut pas etre desinstalle et vous ne devriez pas arriver la !');
-	}
+	$plugin = $securiser_action();
+	include_spip('plugins/installer');
+	$erreur = desinstalle_un_plugin($plugin);
 	if ($redirect = _request('redirect')){
 		include_spip('inc/headers');
 		if ($erreur)
@@ -43,5 +27,4 @@ function action_desinstaller_plugin_dist() {
 		redirige_par_entete($redirect);
 	}
 }
-
 ?>
