@@ -30,40 +30,33 @@ function exec_admin_plugin_dist($retour='') {
 	// et l'installation des qu'on est dans la colonne principale
 	// si jamais la liste des plugins actifs change, il faut faire un refresh du hit
 	// pour etre sur que les bons fichiers seront charges lors de l'install
-	if (actualise_plugins_actifs()==-1 AND _request('actualise')<2){
+	  liste_plugin_actifs(); 
+	  $actifs = $GLOBALS['meta']['plugin'];
+	  actualise_plugins_actifs();
+	  if (($GLOBALS['meta']['plugin'] != $actifs) AND _request('actualise')<2) {
 		include_spip('inc/headers');
 		redirige_par_entete(parametre_url(self(),'actualise',_request('actualise')+1,'&'));
+	} else admin_plug_args(_request('voir'), _request('erreur'), _request('format'));
 	}
+}
 
+function admin_plug_args($quoi, $erreur, $format)
+{
+	if (!$quoi) $quoi = 'actifs';
 	if ($erreur_activation = isset($GLOBALS['meta']['plugin_erreur_activation'])){
 		$erreur_activation = $GLOBALS['meta']['plugin_erreur_activation'];
 		// l'effacement reel de la meta se fera au moment de l'affichage
 		// mais on la vide pour ne pas l'afficher dans le bandeau haut
 		unset($GLOBALS['meta']['plugin_erreur_activation']);
 	}
-
-	$format = _request('format');
-	if (empty($format))
-	  $format = 'liste';
-	elseif (!in_array($format,array('liste','repertoires')))
-		$format = 'repertoires';
-
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
-	echo "<br />\n";
-	echo "<br />\n";
 
-	$quoi = _request('voir');
-	$quoi = $quoi ? $quoi : 'actifs';
-
-	echo gros_titre(_T('icone_admin_plugin'),'',false);
+	echo "<br /><br />\n", gros_titre(_T('icone_admin_plugin'),'',false);
 	echo barre_onglets("plugins", $quoi=='actifs'?"plugins_actifs":"admin_plugin");
-
 	echo debut_gauche('plugin',true);
 	echo debut_boite_info(true);
-	$s = "";
-	$s .= _T('info_gauche_admin_tech');
-	echo $s;
+	echo _T('info_gauche_admin_tech');
 	echo fin_boite_info(true);
 
 	echo pipeline('affiche_gauche',
@@ -76,11 +69,10 @@ function exec_admin_plugin_dist($retour='') {
 	echo debut_droite('plugin', true);
 
 	// message d'erreur au retour d'un operation
-	if (_request('erreur')){
-		echo "<div class='erreur_message-plugins'>" . _T(_request('erreur')) . "</div>";
-	}
+	if ($erreur)
+		echo "<div class='erreur_message-plugins'>$erreur</div>";
 	if ($erreur_activation){
-		echo "<div class='erreur_message-plugins'>" . $erreur_activation . "</div>";
+		echo "<div class='erreur_message-plugins'>$erreur_activation</div>";
 		effacer_meta('plugin_erreur_activation');
 	}
 
@@ -91,11 +83,12 @@ function exec_admin_plugin_dist($retour='') {
 	// on fait l'installation ici,
 	// cela permet aux scripts d'install de faire des affichages (moches...)
 	$plugins_installer = charger_fonction('installer', 'plugins');
-	$plugins_installer();
+	$actifs = unserialize($GLOBALS['meta']['plugin']);
+	echo nouveaux_plugins($plugins_installer($actifs));
 
 	$lpf = liste_plugin_files();
-	echo "<div class='liste-plugins formulaire_spip'>";
 
+	echo "<div class='liste-plugins formulaire_spip'>";
 	echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'), 'plugins');
 
 	if ($quoi!=='actifs'){
@@ -135,6 +128,11 @@ function exec_admin_plugin_dist($retour='') {
 				$lcpaffiche[] = $f;
 	}
 
+	if (empty($format))
+	  $format = 'liste';
+	elseif (!in_array($format,array('liste','repertoires')))
+		$format = 'repertoires';
+
 	$afficher = charger_fonction("afficher_$format",'plugins');
 	$corps = $afficher(self(),$lcpaffiche, $lcpa);
 	if ($corps) 
@@ -148,7 +146,7 @@ function exec_admin_plugin_dist($retour='') {
 	echo fin_cadre_trait_couleur(true);
 
 	if ($quoi=='actifs')
-		echo affiche_les_extensions(liste_chemin_plugin_actifs(_DIR_EXTENSIONS));
+		echo affiche_les_extensions();
 	echo "</div>";
 	
 	echo 	http_script("
@@ -185,12 +183,26 @@ function exec_admin_plugin_dist($retour='') {
 	);
 
 	echo fin_gauche(), fin_page();
-	}
 }
 
-function affiche_les_extensions($liste_plugins_actifs){
+function nouveaux_plugins($etats)
+{
+	foreach($etats as $nom => $ok) {
+	  $etats[$nom] =  "<div class='install-plugins'>"
+	  . _T('plugin_titre_installation', array('plugin'=>typo($nom)))
+	  . "<br /><span class='"
+	  . ($ok?'ok':'erreur')
+	  . "'>"
+	  . ($ok ? _L("OK"):_L("Echec"))
+	  . "</span></div>";
+	}
+	return join("\n", $etats);
+}
+
+function affiche_les_extensions(){
 	$res = "";
 	if ($liste_extensions = liste_plugin_files(_DIR_EXTENSIONS)) {
+		$actifs = liste_chemin_plugin_actifs(_DIR_EXTENSIONS);
 		$res .= "<div id='extensions'>";
 		$res .= debut_cadre_trait_couleur('',true,'',_T('plugins_liste_extensions'),
 		'liste_extensions');
@@ -199,9 +211,8 @@ function affiche_les_extensions($liste_plugins_actifs){
 			. '<br />'. _T('plugin_info_extension_2')
 			."</p>";
 
-		$format = 'liste';
-		$afficher = charger_fonction("afficher_$format",'plugins');
-		$res .= $afficher(self(), $liste_extensions,$liste_plugins_actifs, _DIR_EXTENSIONS);
+		$afficher = charger_fonction("afficher_liste",'plugins');
+		$res .= $afficher(self(), $liste_extensions,$actifs, _DIR_EXTENSIONS);
 
 		$res .= fin_cadre_trait_couleur(true);
 		$res .= "</div>\n";

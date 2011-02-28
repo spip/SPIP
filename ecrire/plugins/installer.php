@@ -13,34 +13,29 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@installe_plugins
-function plugins_installer_dist(){
-	$meta_plug_installes = array();
+function plugins_installer_dist($liste){
 
-	// vider le cache des descriptions de tables avant installation
+	$meta_plug_installes = $new = array();
+	
+	// vider le cache des descriptions de tables a chaque installation
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$trouver_table('');
 
-	foreach (liste_plugin_actifs() as $prefix=>$resume) {
+	foreach ($liste as $prefix=>$resume) {
 		$plug = $resume['dir'];
 		$dir_type = $resume['dir_type'];		
 		$infos = charge_instal_plugin($plug, $dir_type); 
 		if ($infos) {
-			$version_cible = isset($infos['version_base'])?$infos['version_base']:'';
+			$version = isset($infos['version_base'])?$infos['version_base']:'';
 			$f = $infos['prefix']."_install";
 			$arg2 = $infos ;
 			if (!function_exists($f))
 			  $f = isset($infos['version_base']) ? 'spip_plugin_install' : '';
-			else $arg2 = $prefix; // completement debile
-			$ok = !$f ? true : $f('test', $arg2, $version_cible);
+			else $arg2 = $prefix; // stupide: info deja dans le nom
+			$ok = !$f ? true : $f('test', $arg2, $version);
 			if (!$ok) {
-				echo "<div class='install-plugins'>";
-				echo _T('plugin_titre_installation',array('plugin'=>typo($infos['nom'])))."<br />";
-				$f('install',$arg2,$version_cible);
-				$ok = $f('test',$arg2,$version_cible);
-				echo "<span class='".($ok?'ok':'erreur')."'>".($ok ? _L("OK"):_L("Echec"))."</span>";
-				echo "</div>";
-				// vider le cache des descriptions de tables
-				// apres chaque installation
+				$f('install',$arg2,$version);
+				$new[$infos['nom']] = $f('test',$arg2,$version);
 				$trouver_table('');
 			}
 			// on peut enregistrer le chemin ici car 
@@ -51,7 +46,7 @@ function plugins_installer_dist(){
 		}
 	}
 	ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
-	return true; // succes
+	return $new;
 }
 
 // http://doc.spip.org/@spip_plugin_install
@@ -151,7 +146,7 @@ function liste_plugin_actifs(){
   		return $t;
   	else{ // compatibilite pre 1.9.2, mettre a jour la meta
 	  // Ca aurait du etre fait par le tableau des mises a jour
-			spip_log("MAJ meta plugin vieille version : $meta_plugin","plugin");
+		spip_log("MAJ meta plugin vieille version : $meta_plugin","plugin");
   		$t = explode(",",$meta_plugin);
   		list($liste,) = liste_plugin_valides($t);
 			ecrire_meta('plugin',serialize($liste));

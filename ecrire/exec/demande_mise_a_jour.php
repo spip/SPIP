@@ -20,7 +20,9 @@ function exec_demande_mise_a_jour_dist() {
 	// si jamais la liste des plugins actifs change, il faut faire un refresh du hit
 	// pour etre sur que les bons fichiers seront charges lors de l'install
 	include_spip('inc/plugin');
-	if (actualise_plugins_actifs()==-1){
+	$actifs_avant = liste_plugin_actifs(); 
+	actualise_plugins_actifs();
+	if ($GLOBALS['meta']['plugin'] != $actifs_avant) {
 		include_spip('inc/headers');
 		redirige_par_entete(self());
 	}

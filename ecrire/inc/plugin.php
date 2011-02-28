@@ -307,7 +307,6 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		if ($operation=='enleve')
 			$plugin = array_diff($plugin_valides,$plugin);
 	}
-
 	// recharger le xml des plugins a activer
 	list($plugin_valides,$ordre) = liste_plugin_valides($plugin,true);
 	ecrire_meta('plugin',serialize($plugin_valides));
@@ -549,10 +548,7 @@ function actualise_plugins_actifs($pipe_recherche = false){
 	$plugin_actifs = liste_chemin_plugin_actifs();
 	$plugin_liste = liste_plugin_files();
 	$plugin_new = array_intersect($plugin_actifs,$plugin_liste);
-	$actifs_avant = $GLOBALS['meta']['plugin'];
 	ecrire_plugin_actifs($plugin_new,$pipe_recherche);
-	// retourner -1 si la liste des plugins actifs change
-	return (strcmp($GLOBALS['meta']['plugin'],$actifs_avant)==0) ? 1 : -1;
 }
 
 
