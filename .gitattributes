@@ -18,6 +18,7 @@ ecrire/action/etre_webmestre.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/index.php -text
 ecrire/action/instituer_article.php -text
+ecrire/action/instituer_langue_objet.php -text
 ecrire/action/instituer_langue_rubrique.php -text
 ecrire/action/logout.php -text
 ecrire/action/preferer.php -text
@@ -28,7 +29,6 @@ ecrire/action/reorganiser.php -text
 ecrire/action/session.php -text
 ecrire/action/supprimer.php -text
 ecrire/action/supprimer_lien.php -text
-ecrire/action/supprimer_traduction.php -text
 ecrire/action/tester.php -text
 ecrire/action/tester_taille.php -text
 ecrire/auth/sha256.inc.php -text
@@ -82,7 +82,6 @@ ecrire/exec/naviguer.php -text
 ecrire/exec/plonger.php -text
 ecrire/exec/puce_statut.php -text
 ecrire/exec/rechercher.php -text
-ecrire/exec/referencer_traduction.php -text
 ecrire/exec/rubriques_edit.php -text
 ecrire/exec/selectionner.php -text
 ecrire/exec/suivi_edito.php -text
@@ -144,7 +143,6 @@ ecrire/inc/presenter_enfants.php -text
 ecrire/inc/puce_statut.php -text
 ecrire/inc/recherche_to_array.php -text
 ecrire/inc/rechercher.php -text
-ecrire/inc/referencer_traduction.php -text
 ecrire/inc/securiser_action.php -text
 ecrire/inc/selectionner.php -text
 ecrire/inc/traduire.php -text
@@ -270,8 +268,6 @@ local/remove.txt -text
 prive/aide_body.css -text
 prive/aide_menu.html -text
 prive/cfg.html -text
-prive/formulaires/changer_langue.html -text
-prive/formulaires/changer_langue.php -text
 prive/formulaires/configurer_annonces.html -text
 prive/formulaires/configurer_annonces.php -text
 prive/formulaires/configurer_articles.html -text
@@ -352,6 +348,8 @@ prive/formulaires/selecteur/rubriques_fonctions.php -text
 prive/formulaires/selecteur/selecteur_fonctions.php -text
 prive/formulaires/selecteur_groupe_mot.html -text
 prive/formulaires/selecteur_groupe_mot_fonctions.php -text
+prive/formulaires/traduire.html -text
+prive/formulaires/traduire.php -text
 prive/ical_prive.html -text
 prive/images/admin-12.gif -text
 prive/images/administration-24.gif -text
@@ -624,6 +622,7 @@ prive/objets/infos/article.html -text
 prive/objets/infos/article_fonctions.php -text
 prive/objets/infos/auteur.html -text
 prive/objets/infos/rubrique.html -text
+prive/objets/liste/articles-trad.html -text
 prive/objets/liste/articles.html -text
 prive/objets/liste/auteurs.html -text
 prive/objets/liste/auteurs_associer.html -text

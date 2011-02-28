@@ -1,0 +1,60 @@
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}">
+	<span class="image_loading"></span>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		]
+		<ul>
+			<li class="editer_changer_lang long_label obligatoire[(#ENV**{erreurs}|table_valeur{changer_lang}|oui)erreur]">
+				<label for="changer_lang">[(#VAL{titre_langue_}|concat{#ENV{_objet}}|_T)]</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{changer_lang})</span>
+			]<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>
+				[(#ENV{langue}|?{[(#ENV{langue}|traduire_nom_langue)],[((#ENV{langue_parent}|traduire_nom_langue))]})]
+				[(#ENV{langue_choisie}|=={oui}|non)(<:info_multi_herit:>)]
+				</span>
+				[<span class="toggle_box_link"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>&#91;<a href="#"
+						onclick="var f=jQuery(this).parents('form').eq(0);f.find('li .input').show('fast').siblings('span').hide('fast');f.find('.boutons,.new_trad,.editer_id_trad').show('fast');f.find('#changer_lang').eq(0).focus();return false;"
+						><:bouton_changer:></a>&#93;</span>
+				<span class="input[(#ENV{_saisie_en_cours}|non)none-js]">
+				<select name="changer_lang" id="changer_lang">(#ENV*{_langues})</select>
+				</span>]
+			</li>
+			[(#ENV{_traduire}|oui)
+				[(#ENV{_lister_id_trad}|oui)
+				<li class="fieldset voir_traductions">
+					[(#SET{vue,[prive/objets/liste/(#ENV{_objet}|table_objet)-trad]})]
+					<INCLURE{fond=#GET{vue},id_trad=#ENV{_lister_id_trad},titre=<:titre_liste_traductions:>,env,ajax} />
+					[(#ENV{editable})
+					<span class="input[(#ENV{_saisie_en_cours}|non)none-js]">
+						<input type="submit" class="submit supprimer_trad" name="supprimer_trad" value="<:trad_delier|attribut_html:>" />
+					</span>
+					]
+				</li>
+				]
+				[(#ENV{_lister_id_trad}|non)
+				<li class="editer_id_trad long_label[(#ENV**{erreurs}|table_valeur{id_trad}|oui)erreur][(#ENV{_saisie_en_cours}|non)none-js]">
+					<label for="id_trad"><:trad_lier:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_trad})</span>
+					]<input type="text" class="text" name="id_trad" id="id_trad" value="[(#ENV{id_trad}|?{#ENV{id_trad}})]"
+						onkeypress="$(this).parents('form').find('.boutons').slideDown();"/>
+				</li>
+				]
+			]
+		</ul>
+		[(#ENV{_traduire}|oui)
+			[<div class="new_trad[(#ENV{_saisie_en_cours}|non)none-js]">
+			(#URL_ECRIRE{#ENV{_objet}|info_objet{url_edit},new=oui&lier_trad=#ENV{_id_objet}}|icone_horizontale{<:trad_new:>,traduction,new})
+			</div>]
+		]
+		[(#ENV{editable})
+		<p class="boutons[(#ENV{_saisie_en_cours}|non)none-js]">
+			<input type='submit' class='none' name='changer' value='<:bouton_changer:>' />
+			<input type='submit' class='submit' name='annuler' value='<:bouton_fermer:>' />
+			<input type="submit" class="submit" value="<:bouton_changer:>" />
+		</p>
+	</div></form>]
+</div>
