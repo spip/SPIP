@@ -54,31 +54,23 @@ function articles_set($id_article, $set=null) {
 	// unifier $texte en cas de texte trop long
 	trop_longs_articles();
 
-	$c = array();
-	if (!$set){
-		foreach (array(
+	include_spip('inc/modifier');
+	$c = collecter_requests(
+		// white list
+		array(
 			'surtitre', 'titre', 'soustitre', 'descriptif',
 			'nom_site', 'url_site', 'chapo', 'texte', 'ps',
-		) as $champ)
-			$c[$champ] = _request($champ,$set);
-		$c['lang'] = _request('changer_lang',$set);
-	}
-	else {
-		$c = $set;
-		unset($c['date']);
-		unset($c['statut']);
-		unset($c['id_parent']);
-	}
+		),
+		// black list
+		array('date','statut','id_parent'),
+		// donnees eventuellement fournies
+		$set
+	);
 
-	include_spip('inc/modifier');
 	revision_article($id_article, $c);
 
 	// Modification de statut, changement de rubrique ?
-	$c = array();
-	foreach (array(
-		'date', 'statut', 'id_parent'
-	) as $champ)
-		$c[$champ] = _request($champ,$set);
+	$c = collecter_requests(array('date', 'statut', 'id_parent'),array(),$set);
 	$err .= instituer_article($id_article, $c);
 
 	return $err;
