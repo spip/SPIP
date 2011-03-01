@@ -103,12 +103,19 @@ function f_afficher_blocs_ecrire($flux) {
 		if ($fond=="prive/squelettes/contenu/$exec"){
 			if (!strpos($flux['data']['texte'],"<!--affiche_milieu-->"))
 				$flux['data']['texte'] = preg_replace(',<div id=["\']wysiwyg,',"<!--affiche_milieu-->\\0",$flux['data']['texte']);
-			$flux['data']['texte'] = pipeline('afficher_fiche_objet',array(
-																					'args'=>array(
-																						'contexte'=>$flux['args']['contexte'],
-																						'type'=>$flux['args']['contexte']['exec'],
-																						'id'=>$flux['args']['contexte'][id_table_objet($flux['args']['contexte']['exec'])]),
-																					'data'=>$flux['data']['texte']));
+			if ($o = trouver_objet_exec($exec)
+				AND $objet = $o['type']
+			  AND $o['edition'] == false
+			  AND $id = intval($flux['args']['contexte'][$o['id_table_objet']])){
+				// inserer le formulaire de traduction
+				$flux['data']['texte'] = str_replace("<!--affiche_milieu-->",recuperer_fond('prive/objets/editer/traductions',array('objet'=>$objet,'id_objet'=>$id))."<!--affiche_milieu-->",$flux['data']['texte']);
+				$flux['data']['texte'] = pipeline('afficher_fiche_objet',array(
+																						'args'=>array(
+																							'contexte'=>$flux['args']['contexte'],
+																							'type'=>$objet,
+																							'id'=>$id),
+																						'data'=>$flux['data']['texte']));
+			}
 			$flux['data']['texte'] = pipeline('affiche_milieu',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
 		}
 		if (strncmp($fond,"prive/objets/contenu/",21)==0

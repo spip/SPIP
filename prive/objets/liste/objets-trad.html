@@ -1,0 +1,48 @@
+[(#SET{picto,[(#ENV{objet}|info_objet{icone_objet})-16.png]})]
+#SET{picto,#CHEMIN_IMAGE{#GET{picto}}|balise_img}
+<B_liste_obj>
+#ANCRE_PAGINATION
+<div class="liste-objets [(#ENV{objet}|info_objet{table_objet})] traductions">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:info_traductions:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto'></th>
+			<th class='trad'>&nbsp;</th>
+			<th class='titre principale'><:info_titre:></th>
+			<th class='langue'><:langue:></th>
+			<th class='id'><:info_numero_abbreviation:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_obj(POUR){tableau #ENV{id_trad}|lister_traductions{#ENV{objet}}}{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>#GET{picto}</td>
+			<td class="trad">[(#ENV{id_trad}|=={#VALEUR{id}}|oui)[(#CHEMIN_IMAGE{langue-16.png}|balise_img)]]
+				[(#ENV{editable}|oui)
+				[(#ENV{id_trad}|=={#VALEUR{id}}|non)<button type='submit' name='changer_reference_trad&#91;#VALEUR{id}&#93;' value='#VALEUR{id}'>[(#CHEMIN_IMAGE{langues-off-12.gif}|balise_img)]</button>]
+				]
+			</td>
+			<td class='titre principale'>[(#VALEUR{lang}|lang_select|vide)]<span
+							[(#ENV{id_trad}|=={#VALEUR{id}}|oui)class="on"]
+							dir="[(#VALEUR{lang}|lang_dir)]"
+							lang="#VALEUR{lang}"><a
+							href="[(#VALEUR{id}|generer_url_entite{#ENV{objet}})]"
+							title="<:info_numero_abbreviation|attribut_html:> #VALEUR{id}">[(#RANG). ]#INFO_TITRE{#ENV{objet},#VALEUR{id}}</a></span>
+				[(#EVAL{lang_select()}|vide)]
+				[(#ENV{id_trad}|=={#VALEUR{id}}|oui)<:trad_reference:>]
+			</td>
+			<td class='langue'>[(#VALEUR{lang}|traduire_nom_langue)]</td>
+			<td class='id'>[(#AUTORISER{modifier,#ENV{objet},#VALEUR{id}}|?{
+				<a href="[(#URL_ECRIRE{#ENV{objet}|info_objet{url_edit}}|parametre_url{#ENV{objet}|id_table_objet,#VALEUR{id}})]">#VALEUR{id}</a>,
+				#VALEUR{id}
+			})]</td>
+		</tr>
+	</BOUCLE_liste_obj>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_obj>[
+<div class="liste-objets [(#ENV{objet}|info_objet{table_objet})] traductions"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_obj>

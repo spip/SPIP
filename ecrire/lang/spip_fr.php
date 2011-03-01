@@ -772,7 +772,7 @@ et vous reconnecter au site.
 'titre_statistiques' => 'Statistiques du site',
 'titre_titre_document' => 'Titre du document&nbsp;:',
 'todo' => '&agrave; venir',
-'trad_reference' => '(article de r&eacute;f&eacute;rence)',
+'trad_reference' => '(r&eacute;f&eacute;rence des traductions)',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
