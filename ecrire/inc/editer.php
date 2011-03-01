@@ -27,6 +27,16 @@ function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_
 		$res['message_erreur'] = ($err?$err:_T('erreur'));
 	}
 	else{
+		// Un lien de trad a prendre en compte
+		if ($lier_trad){
+			// referencer la traduction
+			$referencer_traduction = charger_fonction('referencer_traduction','action');
+			$referencer_traduction($type, $id, $lier_trad);
+			// dupliquer tous les liens
+			// TODO
+			// cf API editer_liens
+		}
+
 		$res['message_ok'] = ""; // il faudrait faire mieux que cela !
 		if ($retour) {
 			if (strncmp($retour,'javascript:',11)==0){

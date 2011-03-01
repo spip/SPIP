@@ -92,16 +92,6 @@ function articles_set($id_article, $set=null) {
 		$c[$champ] = _request($champ,$set);
 	$err .= instituer_article($id_article, $c);
 
-	// Un lien de trad a prendre en compte
-	if ($id_trad = _request('lier_trad',$set)){
-		// referencer la traduction
-		$referencer_traduction = charger_fonction('referencer_traduction','action');
-		$referencer_traduction('article', $id_article, $id_trad);
-		// dupliquer tous les liens
-		// TODO
-		// cf API editer_liens
-	}
-
 	return $err;
 }
 
