@@ -175,6 +175,11 @@ function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
+
+function autoriser_changerlangue_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('modifier',$type,$id,$qui,$opt);
+}
+
 function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
 	if (!isset($opt['statut'])){
 		$table = table_objet($type);
