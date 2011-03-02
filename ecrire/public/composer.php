@@ -615,6 +615,20 @@ function calculer_select ($select = array(), $from = array(),
 		OR calculer_jointnul($cle, array_diff($join,array($cle=>$join[$cle])))
 		OR calculer_jointnul($cle, $having)
 		OR calculer_jointnul($cle, $where_simples)) {
+			// corriger les references non explicites dans select
+			// ou groupby
+			foreach($select as $i=>$s) {
+				if ($s == $c) {
+					$select[$i] = "$cle.$c AS $c";
+					break;
+				}
+			}
+			foreach($groupby as $i=>$g) {
+				if ($g == $c) {
+					$groupby[$i] = "$cle.$c";
+					break;
+				}
+			}
 			// on garde une ecriture decomposee pour permettre une simplification ulterieure si besoin
 			// sans recours a preg_match
 			// un implode(' ',..) est fait dans reinjecte_joint un peu plus bas
