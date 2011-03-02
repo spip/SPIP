@@ -115,8 +115,8 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $in
 	  .
 	   (autoriser('creerrubriquedans','rubrique',$id_rubrique)?"<div style='clear:$spip_lang_right;'>" .
 	    (!$id_rubrique
-		    ? icone_inline(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.png", "new",$spip_lang_right)
-		    : icone_inline(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.png", "new",$spip_lang_right))
+		    ? icone_verticale(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.png", "new",$spip_lang_right)
+		    : icone_verticale(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.png", "new",$spip_lang_right))
 	    ."</div>":"")
 	  . "<br class='nettoyeur' />"
 	  . $boucles;
@@ -173,16 +173,16 @@ function infos_naviguer($id_rubrique, $statut, $row)
 // http://doc.spip.org/@raccourcis_naviguer
 function raccourcis_naviguer($id_rubrique, $id_parent)
 {
-	$res = icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("mes_articles"), "article-24.png", '',false);
+	$res = icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("mes_articles"), "article-24.png");
 
 	$n = sql_countsel('spip_rubriques');
 	if ($n) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
-		  $res .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("article_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","new", false);
+		  $res .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("article_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","new");
 
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent))) {
-		  $res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breve_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.png","new", false);
+		  $res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breve_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.png","new");
 		}
 	}
 	else {
@@ -258,7 +258,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	$bouton_article = "";
 	if ($n) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
-		  $bouton_article .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("article_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","new", $spip_lang_right)
+		  $bouton_article .= icone_verticale(_T('icone_ecrire_article'), generer_url_ecrire("article_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.png","new", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
 
 	}
@@ -294,13 +294,13 @@ function montre_naviguer($id_rubrique, $titre, $id_parent, $ze_logo, $flag_edita
 
 	if ($flag_editable
 	AND $id_rubrique > 0) {
-		$actions = icone_inline(_T('icone_modifier_rubrique'),
+		$actions = icone_verticale(_T('icone_modifier_rubrique'),
 			generer_url_ecrire("rubriques_edit",
 				"id_rubrique=$id_rubrique&retour=nav"), $ze_logo, "edit", $spip_lang_right);
 
 		// Supprimer cette rubrique (si vide)
 		if (tester_rubrique_vide($id_rubrique))
-			$actions .= icone_inline(_T('icone_supprimer_rubrique'),
+			$actions .= icone_verticale(_T('icone_supprimer_rubrique'),
 				redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "del", $spip_lang_right);
 	}
 	else
@@ -338,7 +338,7 @@ function tester_rubrique_vide($id_rubrique) {
 function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable)
 {
 	if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable)
-	  return icone_inline(_T('icone_supprimer_rubrique'), redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "del") . "</div>";
+	  return icone_verticale(_T('icone_supprimer_rubrique'), redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "del") . "</div>";
 	return "";
 }
 

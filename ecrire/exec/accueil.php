@@ -63,7 +63,7 @@ function personnel_accueil($coockcookie)
 	if ($coockcookie) {
 		$lien = generer_url_action('cookie', "cookie_admin=non&url=".rawurlencode('./'. _SPIP_ECRIRE_SCRIPT));
 		$t = _T('icone_supprimer_cookie');
-		$lien = icone_horizontale($t, $lien, "cookie-24.png", "supprimer-sansdanger.gif", false);
+		$lien = icone_horizontale($t, $lien, "cookie-24.png", "supprimer-sansdanger.gif");
 		if ($GLOBALS['spip_display'] != 1) 
 			$lien = str_replace('</td></tr></table>', 
 					 aide("cookie").'</td></tr></table>',
@@ -80,7 +80,7 @@ function personnel_accueil($coockcookie)
 		$lien = 
 			  _T('info_activer_cookie').
 			  aide ("cookie").
-			icone_horizontale(_T('icone_activer_cookie'), $lien,"cookie-24.png", "", false);
+			icone_horizontale(_T('icone_activer_cookie'), $lien,"cookie-24.png");
 	}
 	
 	$titre_cadre = afficher_plus_info(generer_url_ecrire("infos_perso"));
