@@ -18,7 +18,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_art(ARTICLES){id_trad}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_art(ARTICLES){id_trad}{where?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 			<td class="trad">[(#ENV{id_trad}|=={#ID_ARTICLE}|oui)[(#CHEMIN_IMAGE{langue-16.png}|balise_img)]]
