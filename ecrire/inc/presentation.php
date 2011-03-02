@@ -358,7 +358,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 }
 
 // http://doc.spip.org/@icone_inline
-function icone_verticale($texte, $lien, $fond, $fonction="", $align="", $javascript=''){
+function icone_verticale($texte, $lien, $fond, $fonction="", $align="", $javascript=""){
 	// cas d'ajax_action_auteur: faut defaire le boulot
 	// (il faudrait fusionner avec le cas $javascript)
 	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r)) {
@@ -370,7 +370,7 @@ function icone_verticale($texte, $lien, $fond, $fonction="", $align="", $javascr
 }
 
 // http://doc.spip.org/@icone_horizontale
-function icone_horizontale($texte, $lien, $fond="", $fonction="", $dummy, $javascript='') {
+function icone_horizontale($texte, $lien, $fond, $fonction="", $dummy="", $javascript="") {
 	$retour = '';
 	// cas d'ajax_action_auteur: faut defaire le boulot
 	// (il faudrait fusionner avec le cas $javascript)
