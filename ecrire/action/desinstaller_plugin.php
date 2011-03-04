@@ -17,8 +17,13 @@ function action_desinstaller_plugin_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$plugin = $securiser_action();
-	include_spip('plugins/installer');
-	$erreur = desinstalle_un_plugin($plugin);
+	$installer_plugins = charger_fonction('installer', 'plugins');
+	$infos = $installer_plugins($plugin, 'uninstall');
+	if ($infos AND !$infos['install_test'][0]) {
+		include_spip('inc/plugin');
+		ecrire_plugin_actifs(array($plugin),false,'enleve');
+		$erreur = '';
+	} else 	$erreur = 'erreur_plugin_desinstalation_echouee';
 	if ($redirect = _request('redirect')){
 		include_spip('inc/headers');
 		if ($erreur)

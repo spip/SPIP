@@ -12,42 +12,69 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@installe_plugins
-function plugins_installer_dist($liste){
+/**
+ * Fonction surchargeable permettant d'installer ou retirer un plugin
+ * en incluant les fichiers associes et en lancant les fonctions specifiques
+ * 1. d'abord sur l'argument 'test',
+ * 2. ensuite sur l'action demandee si le test repond False
+ * 3. enfin sur l'argument 'test' a nouveau.
+ * l'index install_test du tableau resultat est un tableau forme:
+ *  - du resultat 3 
+ *  - des Echo de l'etape 2
+ *
+ * @param string $plug, nom du plugin
+ * @param string $action, nom de l'action (install|uninstall)
+ * @param string $dir_type, repertoire du plugin
+ * 
+ * @return array|boolean True si deja installe, le tableau de get_infos sinon
+// 
+*/
 
-	$meta_plug_installes = $new = array();
-	
-	// vider le cache des descriptions de tables a chaque installation
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	$trouver_table('');
-
-	foreach ($liste as $prefix=>$resume) {
-		$plug = $resume['dir'];
-		$dir_type = $resume['dir_type'];		
-		$infos = charge_instal_plugin($plug, $dir_type); 
-		if ($infos) {
-			$version = isset($infos['version_base'])?$infos['version_base']:'';
-			$f = $infos['prefix']."_install";
-			$arg2 = $infos ;
-			if (!function_exists($f))
-			  $f = isset($infos['version_base']) ? 'spip_plugin_install' : '';
-			else $arg2 = $prefix; // stupide: info deja dans le nom
-			$ok = !$f ? true : $f('test', $arg2, $version);
-			if (!$ok) {
-				$f('install',$arg2,$version);
-				$new[$infos['nom']] = $f('test',$arg2,$version);
-				$trouver_table('');
-			}
-			// on peut enregistrer le chemin ici car 
-			// il est mis a jour juste avant l'affichage du panneau
-			// -> cela suivra si le plugin demenage
-			if ($ok)
-				$meta_plug_installes[] = $plug;
+function plugins_installer_dist($plug, $action, $dir_type='_DIR_PLUGINS')
+{
+	$get_infos = charger_fonction('get_infos','plugins');
+	$infos = $get_infos($plug);
+	if (!$infos['install']) return false;
+	// passer en chemin absolu si possible, c'est plus efficace
+	$dir = str_replace('_DIR_','_ROOT_',$dir_type);
+	if (!defined($dir)) $dir = $dir_type;
+	$dir = constant($dir);
+	foreach($infos['install'] as $file) {
+		$file = $dir . $plug . "/" . trim($file);
+		if (file_exists($file)){
+			include_once($file);
 		}
 	}
-	ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
-	return $new;
+	$version = isset($infos['version_base'])?$infos['version_base']:'';
+	$arg = $infos ;
+	$f = $infos['prefix']."_install";
+	if (!function_exists($f))
+		$f = isset($infos['version_base']) ? 'spip_plugin_install' : '';
+	else $arg = $prefix; // stupide: info deja dans le nom
+
+	if (!$f) {
+		// installation sans operation particuliere
+		$infos['install_test'] = array(true, '');
+		return $infos; 
+	}
+	$test = $f('test', $arg, $version);
+	if ($action == 'uninstall') $test = !$test;
+	// Si deja fait, on ne dit rien
+	if ($test)  return true;
+	// executer l'installation ou l'inverse
+	// et renvoyer la trace (mais il faudrait passer en AJAX plutot)
+	ob_start(); 
+	$f($action, $arg, $version);
+	$aff = ob_get_contents(); 
+	ob_end_clean();
+	// vider le cache des descriptions de tables a chaque (de)installation
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$trouver_table('');
+	$infos['install_test'] = array($f('test', $arg, $version), $aff);
+	return $infos;
 }
+
+// Fonction par defaut pour install/desinstall
 
 // http://doc.spip.org/@spip_plugin_install
 function spip_plugin_install($action, $infos, $version_cible){
@@ -75,50 +102,6 @@ function spip_plugin_install($action, $infos, $version_cible){
 	}
 }
 
-// http://doc.spip.org/@desinstalle_un_plugin
-function desinstalle_un_plugin($plug){
-	$infos = charge_instal_plugin($plug);
-	$erreur = 'erreur_plugin_desinstalation_echouee';
-	if ($infos) {
-		$prefix_install = $infos['prefix']."_install";
-		$ok = true;
-		if (function_exists($prefix_install)){
-			$prefix_install('uninstall',$infos['prefix'],$infos['version_base']);
-			$ok = !$prefix_install('test',$infos['prefix'],$infos['version_base']);
-		}
-		if (isset($infos['version_base'])) {
-		  spip_plugin_install('uninstall',$infos, $infos['version_base']);
-		  $ok = spip_plugin_install('test',$infos, $infos['version_base']);
-		}
-		// desactiver si il a bien ete desinstalle
-		if (!$ok) {
-			include_spip('inc/plugin');
-			ecrire_plugin_actifs(array($plug),false,'enleve');
-			$erreur = '';
-		}
-	}
-	return $erreur;
-}
-
-// charge et retourne les infos
-// et inclut les fichiers necessaires a l'install/desinstal
-// en passant en chemin absolu si possible
-
-function charge_instal_plugin($plug, $dir_type='_DIR_PLUGINS'){
-	$get_infos = charger_fonction('get_infos','plugins');
-	$infos = $get_infos($plug);
-	if (!$infos['install']) return false;
-	$dir = str_replace('_DIR_','_ROOT_',$dir_type);
-	if (!defined($dir)) $dir = $dir_type;
-	$dir = constant($dir);
-	foreach($infos['install'] as $file) {
-		$file = $dir . $plug . "/" . trim($file);
-		if (file_exists($file)){
-			include_once($file);
-		}
-	}
-	return $infos;
-}
 
 function spip_version_compare($v1,$v2,$op){
 	$v1 = strtolower(preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|pl|p),i','\\1.\\2',$v1));

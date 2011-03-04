@@ -604,6 +604,34 @@ function message_crash_plugins() {
 	}
 }
 
+function plugin_installes_meta()
+{
+	$installer_plugins = charger_fonction('installer', 'plugins');
+	$meta_plug_installes = array();
+	foreach (unserialize($GLOBALS['meta']['plugin']) as $prefix=>$resume) {
+		$plug = $resume['dir'];
+ 		$infos = $installer_plugins($plug, 'install', $resume['dir_type']); 
+		if ($infos) {
+			if (!is_array($info) OR $infos['install_test'][0])
+				$meta_plug_installes[] = $plug;
+			if (is_array($infos)) {
+				list($ok, $trace) = $infos['install_test'];
+				echo  "<div class='install-plugins'><div>"
+				  . _T('plugin_titre_installation', 
+				       array('plugin'=>typo($infos['nom'])))
+				  . '</div>'
+				  . $trace
+				  . "<div class='"
+				  . ($ok?'ok':'erreur')
+				  . "'>"
+				  . ($ok ? _L("OK"):_L("Echec"))
+				  . "</div></div>";
+			}
+		}
+	}
+	ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
+}
+
 function ecrire_fichier_php($nom, $contenu, $comment='')
 {
 	ecrire_fichier($nom, 

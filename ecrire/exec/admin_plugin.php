@@ -82,9 +82,7 @@ function admin_plug_args($quoi, $erreur, $format)
 
 	// on fait l'installation ici,
 	// cela permet aux scripts d'install de faire des affichages (moches...)
-	$plugins_installer = charger_fonction('installer', 'plugins');
-	$actifs = unserialize($GLOBALS['meta']['plugin']);
-	echo nouveaux_plugins($plugins_installer($actifs));
+	plugin_installes_meta();
 
 	$lpf = liste_plugin_files();
 
@@ -183,20 +181,6 @@ function admin_plug_args($quoi, $erreur, $format)
 	);
 
 	echo fin_gauche(), fin_page();
-}
-
-function nouveaux_plugins($etats)
-{
-	foreach($etats as $nom => $ok) {
-	  $etats[$nom] =  "<div class='install-plugins'>"
-	  . _T('plugin_titre_installation', array('plugin'=>typo($nom)))
-	  . "<br /><span class='"
-	  . ($ok?'ok':'erreur')
-	  . "'>"
-	  . ($ok ? _L("OK"):_L("Echec"))
-	  . "</span></div>";
-	}
-	return join("\n", $etats);
 }
 
 function affiche_les_extensions(){
