@@ -221,7 +221,8 @@ function instituer_auteur($id_auteur, $c) {
 		array(
 			'args' => array(
 				'table' => 'spip_auteurs',
-				'id_objet' => $id_auteur
+				'id_objet' => $id_auteur,
+				'action' => 'instituer',
 			),
 			'data' => $champs
 		)
