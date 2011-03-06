@@ -17,7 +17,7 @@ function formulaires_configurer_multilinguisme_charger_dist(){
 	foreach(array('multi_objets','gerer_trad_objets') as $m)
 		$valeurs[$m] = explode(',',isset($GLOBALS['meta'][$m])?$GLOBALS['meta'][$m]:'');
 
-	if (count($valeurs['multi_objet'])
+	if (count($valeurs['multi_objets'])
 	  OR count(explode(',',$GLOBALS['meta']['langues_utilisees'])) > 1) {
 
 		$selection = (is_null(_request('multi_objets'))?explode(',', $GLOBALS['meta']['langues_multilingue']):_request('langues_auth'));
