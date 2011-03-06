@@ -38,6 +38,7 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 	$valeurs['editable'] = autoriser('changerlangue',$objet,$id_objet);
 	$valeurs['_langue'] = '';
 	$langue_parent = '';
+	$id_parent = '';
 	if (isset($valeurs['id_rubrique'])){
 		$id_parent = $valeurs['id_rubrique'];
 		if (isset($valeurs['id_parent']))
@@ -63,6 +64,7 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 		// pour afficher la liste des trad sur la base de l'id_trad en base
 		// independamment d'une saisie en cours sur id_trad
 		$valeurs['_lister_id_trad'] = $valeurs['id_trad'];
+		$valeurs['_id_parent'] = $id_parent;
 	}
 
 	$valeurs['_saisie_en_cours'] = (!_request('annuler') AND (_request('changer_lang')!==null OR _request('changer_id_trad')!==null));
