@@ -385,6 +385,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'icone_supprimer_message' => 'Ostranit zpr&aacute;vu',
 'icone_tous_articles' => 'V&#353;echny va&#353;e &#269;l&aacute;nky',
 'icone_tous_auteur' => 'V&#353;ichni auto&#345;i',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Schv&aacute;lit zpr&aacute;vu',
 'icone_visiter_site' => 'Zobrazit web', # MODIF
 'icone_voir_en_ligne' => 'Prohl&iacute;&#382;et online',
@@ -429,7 +430,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_copyright' => '@spip@ je freeware distribuovan&yacute; @lien_gpl@.',
 'info_copyright_doc' => 'Bli&#382;&#353;&iacute; informace viz <a href="@spipnet@">http://www.spip.net/en</a>.', # MODIF
 'info_copyright_gpl' => 'v r&aacute;mci licence GPL',
-'info_cours_edition' => 'Va&#353;e rozpracovan&eacute; &#269;l&aacute;nky',
+'info_cours_edition' => 'Va&#353;e rozpracovan&eacute; &#269;l&aacute;nky', # MODIF
 'info_creer_repertoire' => 'Vytvo&#345;te soubor nebo adres&aacute;&#345; s n&aacute;zvem:',
 'info_creer_repertoire_2' => 'v podadres&aacute;&#345;i <b>@repertoire@</b>. Potom',
 'info_creer_vignette' => 'automatick&eacute; vytvo&#345;en&iacute; n&aacute;hledu',
@@ -579,7 +580,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'lien_afficher_texte_icones' => 'Zobrazit ikony a text',
 'lien_afficher_texte_seul' => 'Zobrazit pouze text',
 'lien_liberer' => 'verze',
-'lien_liberer_tous' => 'uvolnit tyto &#269;l&aacute;nky',
+'lien_liberer_tous' => 'uvolnit tyto &#269;l&aacute;nky', # MODIF
 'lien_nouvea_pense_bete' => 'NOV&Aacute; POZN&Aacute;MKA',
 'lien_nouveau_message' => 'NOV&Aacute; ZPR&Aacute;VA',
 'lien_nouvelle_annonce' => 'NOV&Eacute; OZN&Aacute;MEN&Iacute;',
@@ -771,7 +772,7 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'titre_statistiques' => 'Statistiky str&aacute;nek',
 'titre_titre_document' => 'N&aacute;zev dokumentu:',
 'todo' => 'to come', # NEW
-'trad_reference' => '(referen&#269;n&iacute; &#269;l&aacute;nek)',
+'trad_reference' => '(referen&#269;n&iacute; &#269;l&aacute;nek)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => ': tag B je p&#345;&iacute;li&#353; pozd&#283; ve smy&#269;ce',

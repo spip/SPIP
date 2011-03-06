@@ -383,6 +383,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'icone_supprimer_message' => 'Bu iletiyi sil',
 'icone_tous_articles' => 'T&uuml;m makaleleriniz',
 'icone_tous_auteur' => 'T&uuml;m yazarlar',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => '&#304;letiyi onayla',
 'icone_visiter_site' => 'Ziyaret et', # MODIF
 'icone_voir_en_ligne' => '&Ccedil;evrimi&ccedil;i g&ouml;ster',
@@ -427,7 +428,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_copyright' => '@spip@, @lien_gpl@ GPL lisans&#305; ile da&#287;&#305;t&#305;lan serbest bir yaz&#305;l&#305;md&#305;r.',
 'info_copyright_doc' => 'Ayr&#305;nt&#305;l&#305; bilgi i&ccedil;in, bkz.  <a href="@spipnet@">http://www.spip.net/fr</a>.',
 'info_copyright_gpl' => 'GPL lisans&#305; alt&#305;nda',
-'info_cours_edition' => 'Yaz&#305;lmakta olan makaleleriniz',
+'info_cours_edition' => 'Yaz&#305;lmakta olan makaleleriniz', # MODIF
 'info_creer_repertoire' => '&#350;u isimde bir dosya veya dizin olu&#351;turunuz&nbsp;:',
 'info_creer_repertoire_2' => '<b>@repertoire@</b> alt-dizini i&ccedil;erisinde, daha sonra&nbsp;:',
 'info_creer_vignette' => 'otomatik ikon olu&#351;turma',
@@ -577,7 +578,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'lien_afficher_texte_icones' => 'ikonlar&#305; ve metni g&ouml;r&uuml;nt&uuml;le',
 'lien_afficher_texte_seul' => 'Sadece metni g&ouml;r&uuml;nt&uuml;le',
 'lien_liberer' => 'Serbest b&#305;rak',
-'lien_liberer_tous' => 'Bu makaleleri serbest b&#305;rak',
+'lien_liberer_tous' => 'Bu makaleleri serbest b&#305;rak', # MODIF
 'lien_nouvea_pense_bete' => 'YEN&#304; HATIRLATMA',
 'lien_nouveau_message' => 'YEN&#304; &#304;LET&#304;',
 'lien_nouvelle_annonce' => 'YEN&#304; DUYURU',
@@ -755,7 +756,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'titre_statistiques' => 'Site istatistikleri',
 'titre_titre_document' => 'Belge ba&#351;l&#305;&#287;&#305;&nbsp;:',
 'todo' => 'gelecek',
-'trad_reference' => '(referans makale)',
+'trad_reference' => '(referans makale)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: B etiketinde sorun var',

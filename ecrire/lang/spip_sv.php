@@ -374,6 +374,7 @@ Tack f&ouml;r ditt deltagande
 'icone_supprimer_message' => 'Radera meddelandet',
 'icone_tous_articles' => 'Alla dina artiklar',
 'icone_tous_auteur' => 'Alla f&ouml;rfattare',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Godk&auml;nn meddelandet',
 'icone_visiter_site' => 'Bes&ouml;k sajten', # MODIF
 'icone_voir_en_ligne' => 'Se online',
@@ -418,7 +419,7 @@ Tack f&ouml;r ditt deltagande
 'info_copyright' => '@spip@ &auml;r fri programvara och distribueras @lien_gpl@.',
 'info_copyright_doc' => 'F&ouml;r mer information, se (p&aring; engelska)<a href="@spipnet@">http://www.spip.net/en</a>.',
 'info_copyright_gpl' => 'under GPL-licensen',
-'info_cours_edition' => 'Dina artiklar under bearbetning',
+'info_cours_edition' => 'Dina artiklar under bearbetning', # MODIF
 'info_creer_repertoire' => 'Var god och skapa en katalog som heter:',
 'info_creer_repertoire_2' => 'i under-katalogen <b>@repertoire@</b>, sedan',
 'info_creer_vignette' => 'skapa en tumnagel automatiskt ',
@@ -568,7 +569,7 @@ Tack f&ouml;r ditt deltagande
 'lien_afficher_texte_icones' => 'Visa ikoner och text',
 'lien_afficher_texte_seul' => 'Visa enbart text',
 'lien_liberer' => 'version',
-'lien_liberer_tous' => 'frig&ouml;r artiklarna',
+'lien_liberer_tous' => 'frig&ouml;r artiklarna', # MODIF
 'lien_nouvea_pense_bete' => 'Nytt memo',
 'lien_nouveau_message' => 'NYTT MEDDELANDE',
 'lien_nouvelle_annonce' => 'NYTT MEDDELANDE',
@@ -759,7 +760,7 @@ och koppla upp dig mot sajten igen.
 'titre_statistiques' => 'Statistik f&ouml;r sajten',
 'titre_titre_document' => 'Dokumentets titel:',
 'todo' => 'Att g&ouml;ra',
-'trad_reference' => '(refererad artikel)',
+'trad_reference' => '(refererad artikel)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => ': B taggen f&ouml;r sent i loopen',

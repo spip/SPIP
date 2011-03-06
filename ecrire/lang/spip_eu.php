@@ -377,6 +377,7 @@ Inskribaturik ez bazaude, aurretik inskribatu behar duzu.',
 'icone_supprimer_message' => 'Mezu hau kendu',
 'icone_tous_articles' => 'Zure artikulu guztiak',
 'icone_tous_auteur' => 'Egile guztiak',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Mezu hau onartu',
 'icone_visiter_site' => 'Gune publikoa bisitatu',
 'icone_voir_en_ligne' => 'Linean ikusi',
@@ -421,7 +422,7 @@ Inskribaturik ez bazaude, aurretik inskribatu behar duzu.',
 'info_copyright' => '@spip@ software librea da, @lien_gpl@ banatua.',
 'info_copyright_doc' => 'Argibide gehiago izateko, jo helbide honetara: <a href="@spipnet@">http://www.spip.net/eu</a>.',
 'info_copyright_gpl' => 'GPL lizentziarekin',
-'info_cours_edition' => 'Bukatu gabe utzi dituzun artikuluak',
+'info_cours_edition' => 'Bukatu gabe utzi dituzun artikuluak', # MODIF
 'info_creer_repertoire' => 'Fitxategi edo karpeta bat sortu behar duzu, eta hari izen hau jarri :',
 'info_creer_repertoire_2' => '<b>@repertoire@</b>, azpidirektorioan, eta ondotik :',
 'info_creer_vignette' => 'miniaturaren sorkuntza automatikoa',
@@ -571,7 +572,7 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 'lien_afficher_texte_icones' => 'Ikurrak eta testua erakutsi',
 'lien_afficher_texte_seul' => 'Testua soilik erakutsi',
 'lien_liberer' => 'Askatu',
-'lien_liberer_tous' => 'artikulu hauek askatu',
+'lien_liberer_tous' => 'artikulu hauek askatu', # MODIF
 'lien_nouvea_pense_bete' => 'Oroigarri berria',
 'lien_nouveau_message' => 'Mezu berria',
 'lien_nouvelle_annonce' => 'Iragarpen berria',
@@ -742,7 +743,7 @@ Modu orokorrean, orrialde hauetako kudeaketa zure guneko web arduradun nagusiari
 'titre_statistiques' => 'Gunearen estatistikak',
 'titre_titre_document' => 'Dokumentuaren izenburua',
 'todo' => 'etortzekoak',
-'trad_reference' => '(erreferentziazko artikulua)',
+'trad_reference' => '(erreferentziazko artikulua)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => ': B begiztako baliza aurrerago',

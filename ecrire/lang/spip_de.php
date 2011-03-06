@@ -309,7 +309,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'forum_lien_hyper' => '<b>Hyperlink</b> (optional)',
 'forum_message_definitif' => 'Beitrag fertiggestellt: Endg&uuml;ltig eintragen.',
 'forum_message_trop_long' => 'Ihr Beitrag ist zu lang. Sie k&ouml;nnen maximal 20.000 Zeichen schreiben.',
-'forum_ne_repondez_pas' => 'Antworten Sie nicht auf diese Mail, sondern im Forum mit dieser Adresse:', # MODIF
+'forum_ne_repondez_pas' => 'Antworten Sie nicht auf diese Mail, sondern im Forum mit dieser Adresse:',
 'forum_non_inscrit' => 'Sie sind nicht eingeschrieben oder Adresse bzw. Passwort waren falsch.',
 'forum_page_url' => '(Wenn sich Ihr Beitrag auf einen Artikel im Internet oder auf eine Seite mit Zusatzinformationen bezieht, geben Sie hier bitte den Titel der Seite und ihre Adresse bzw. URL an.)',
 'forum_par_auteur' => 'Nach @auteur@',
@@ -378,6 +378,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'icone_supprimer_message' => 'Nachricht l&ouml;schen',
 'icone_tous_articles' => 'Alle Ihre Artikel',
 'icone_tous_auteur' => 'Alle Autoren',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Beitrag freigeben',
 'icone_visiter_site' => 'Website ansehen',
 'icone_voir_en_ligne' => 'Online ansehen',
@@ -422,7 +423,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_copyright' => '@spip@ ist freie Software im Sinne der @lien_gpl@.',
 'info_copyright_doc' => 'Weitere Informationen finden Sie unter <a href="@spipnet@">http://www.spip.net/de</a>.',
 'info_copyright_gpl' => 'GNU Public License',
-'info_cours_edition' => 'Ihre Artikel in Bearbeitung',
+'info_cours_edition' => 'Ihre Artikel in Bearbeitung', # MODIF
 'info_creer_repertoire' => 'Bitte legen Sie eine Datei oder ein Verzeichnis mit diesem Namen an: ',
 'info_creer_repertoire_2' => '(Im Unterverzeichnis <b>@repertoire@</b>)',
 'info_creer_vignette' => 'Miniaturbilder automatisch anlegen',
@@ -570,7 +571,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'lien_afficher_texte_icones' => 'Piktogramme und Beschriftung anzeigen',
 'lien_afficher_texte_seul' => 'Nur Textmen&uuml;s',
 'lien_liberer' => 'freigeben',
-'lien_liberer_tous' => 'diese Artikel freigeben',
+'lien_liberer_tous' => 'diese Artikel freigeben', # MODIF
 'lien_nouvea_pense_bete' => 'NEUER MERKZETTEL',
 'lien_nouveau_message' => 'NEUE NACHRICHT',
 'lien_nouvelle_annonce' => 'NEUE ANK&Uuml;NDIGUNG',
@@ -740,7 +741,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'titre_statistiques' => 'Statistiken',
 'titre_titre_document' => 'Titel des Dokuments:',
 'todo' => 'demn&auml;chst',
-'trad_reference' => '(Referenzartikel)',
+'trad_reference' => '(Referenzartikel)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: Tag B muss vor der Schleife stehen',

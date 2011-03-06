@@ -385,6 +385,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_supprimer_message' => 'Suprimir aqueth messatge',
 'icone_tous_articles' => 'Tots los v&ograve;stes articles ',
 'icone_tous_auteur' => 'Tots los autors ',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Validar aqueth messatge',
 'icone_visiter_site' => 'Vesitar', # MODIF
 'icone_voir_en_ligne' => 'V&eacute;der en linha',
@@ -429,7 +430,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_copyright' => '@spip@ qu\'ei un logiciau liure distribuit @lien_gpl@.',
 'info_copyright_doc' => 'Per mei informacions, v&eacute;der lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.', # MODIF
 'info_copyright_gpl' => 'devath lic&eacute;ncia GPL',
-'info_cours_edition' => 'Los v&ograve;stes articles en cors de redaccion',
+'info_cours_edition' => 'Los v&ograve;stes articles en cors de redaccion', # MODIF
 'info_creer_repertoire' => 'Volhatz crear un fichi&egrave;r o un repert&ograve;ri nomentat',
 'info_creer_repertoire_2' => 'laguens lo sosrepert&ograve;ri   <b>@repertoire@</b>, puish:', # MODIF
 'info_creer_vignette' => 'creacion automatica de la vinheta',
@@ -576,7 +577,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'lien_afficher_texte_icones' => 'Afichar las ic&ograve;nas e lo t&egrave;xt',
 'lien_afficher_texte_seul' => 'Afichar sonque lo t&egrave;xt',
 'lien_liberer' => 'liberar',
-'lien_liberer_tous' => 'liberar aqueths articles',
+'lien_liberer_tous' => 'liberar aqueths articles', # MODIF
 'lien_nouvea_pense_bete' => 'MEMENTO NAU ',
 'lien_nouveau_message' => 'MESSATGE NAU',
 'lien_nouvelle_annonce' => 'ANONCI NAV&Egrave;TH',
@@ -768,7 +769,7 @@ e tornar connect&agrave;\'vs au sit.
 'titre_statistiques' => 'Estadisticas deu sit',
 'titre_titre_document' => 'T&iacute;tol deu document:',
 'todo' => '&agrave; venir', # NEW
-'trad_reference' => '(article de refer&eacute;ncia)',
+'trad_reference' => '(article de refer&eacute;ncia)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balisa B cap envath',

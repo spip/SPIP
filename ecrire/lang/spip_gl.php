@@ -385,6 +385,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'icone_supprimer_message' => 'Borrar esta mensaxe',
 'icone_tous_articles' => 'Os teus artigos',
 'icone_tous_auteur' => 'Todo o equipo de redacci&oacute;n',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Validar a mensaxe',
 'icone_visiter_site' => 'Ver o web p&uacute;blico',
 'icone_voir_en_ligne' => 'Ver en li&ntilde;a',
@@ -429,7 +430,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_copyright' => '@spip@ &eacute; un programa libre distribu&iacute;do @lien_gpl@.',
 'info_copyright_doc' => 'Para m&aacute;is informaci&oacute;n, vaia a <a href="@spipnet@">http://www.spip.net/gl</a>.',
 'info_copyright_gpl' => 'con licenza GPL',
-'info_cours_edition' => 'Os seus artigos en proceso de edici&oacute;n',
+'info_cours_edition' => 'Os seus artigos en proceso de edici&oacute;n', # MODIF
 'info_creer_repertoire' => 'Debe crear un ficheiro ou cartafol chamado&nbsp;:',
 'info_creer_repertoire_2' => 'dentro do subcartafol <b>@repertoire@</b>, e logo:',
 'info_creer_vignette' => 'creaci&oacute;n autom&aacute;tica da vi&ntilde;eta',
@@ -579,7 +580,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'lien_afficher_texte_icones' => 'Amosar as iconas e o texto',
 'lien_afficher_texte_seul' => 'Amosar s&oacute; o texto',
 'lien_liberer' => 'liberar',
-'lien_liberer_tous' => 'liberar estes artigos',
+'lien_liberer_tous' => 'liberar estes artigos', # MODIF
 'lien_nouvea_pense_bete' => 'NOVA NOTA',
 'lien_nouveau_message' => 'NOVA MENSAXE',
 'lien_nouvelle_annonce' => 'NOVO ANUNCIO',
@@ -768,7 +769,7 @@ e reconectar co web.
 'titre_statistiques' => 'Estat&iacute;sticas do web',
 'titre_titre_document' => 'T&iacute;tulo do documento:',
 'todo' => 'pr&oacute;ximos',
-'trad_reference' => '(artigo de referencia)',
+'trad_reference' => '(artigo de referencia)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: baliza B en aval',

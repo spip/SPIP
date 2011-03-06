@@ -386,6 +386,7 @@ Gracies por participar
 'icone_supprimer_message' => 'Desaniciar esti mensaxe',
 'icone_tous_articles' => 'Tolos art&iacute;culos de to',
 'icone_tous_auteur' => 'Tolos autores',
+'icone_tous_visiteur' => 'Tolos visitantes',
 'icone_valider_message' => 'Validar esti mensaxe',
 'icone_visiter_site' => 'Ver el sitiu p&uacute;blicu',
 'icone_voir_en_ligne' => 'Ver en llinia',
@@ -430,7 +431,7 @@ Gracies por participar
 'info_copyright' => '@spip@ ye un programa llibre distribuy&iacute;u @lien_gpl@.',
 'info_copyright_doc' => 'Pa m&aacute;s informaci&oacute;n, dir al sitiu <a href="@spipnet@">http://www.spip.net/</a>.',
 'info_copyright_gpl' => 'so llicencia GPL',
-'info_cours_edition' => 'Los tos art&iacute;culos en cursu de redaici&oacute;n',
+'info_cours_edition' => 'Los tos art&iacute;culos en cursu de redaici&oacute;n', # MODIF
 'info_creer_repertoire' => 'Debes crear un ficheru o un direutoriu nom&aacute;u:',
 'info_creer_repertoire_2' => 'dientro\'l direutoriu <b>@repertoire@</b>, y llueu:',
 'info_creer_vignette' => 'creaci&oacute;n autom&aacute;tica de la vi&ntilde;eta',
@@ -580,7 +581,7 @@ Gracies por participar
 'lien_afficher_texte_icones' => 'Amosar los iconos y el testu',
 'lien_afficher_texte_seul' => 'Amosar s&oacute;lo el testu',
 'lien_liberer' => 'lliberar',
-'lien_liberer_tous' => 'lliberar estos art&iacute;culos',
+'lien_liberer_tous' => 'lliberar estos art&iacute;culos', # MODIF
 'lien_nouvea_pense_bete' => 'RECORDATORIU NUEVU',
 'lien_nouveau_message' => 'MENSAXE NUEVU',
 'lien_nouvelle_annonce' => 'ANUNCIU NUEVU',
@@ -772,7 +773,7 @@ Intenta',
 'titre_statistiques' => 'Estad&iacute;stiques del sitiu',
 'titre_titre_document' => 'T&iacute;tulu del documentu:',
 'todo' => 'por llegar',
-'trad_reference' => '(art&iacute;culu orixinal)',
+'trad_reference' => '(art&iacute;culu orixinal)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: baliza B detr&aacute;s',

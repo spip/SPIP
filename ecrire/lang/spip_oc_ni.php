@@ -386,6 +386,7 @@ Merc&eacute; de la voastra participacion
 'icone_supprimer_message' => 'Suprimir aqueu messatge',
 'icone_tous_articles' => 'Toi lu voastres articles',
 'icone_tous_auteur' => 'Toi lu autors',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Validar aqueu messatge',
 'icone_visiter_site' => 'Visitar', # MODIF
 'icone_voir_en_ligne' => 'Veire en linha',
@@ -430,7 +431,7 @@ Merc&eacute; de la voastra participacion
 'info_copyright' => 'es un logiciau liure distribuit @lien_gpl@.',
 'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.',
 'info_copyright_gpl' => 'sota licen&ccedil;a GPL',
-'info_cours_edition' => 'Lu voastres articles en cors de redacion',
+'info_cours_edition' => 'Lu voastres articles en cors de redacion', # MODIF
 'info_creer_repertoire' => 'Vorgatz crear un fichier &ograve; un repert&ograve;ri nomat',
 'info_creer_repertoire_2' => 'en dintre dau sosrepert&ograve;ri <b>@repertoire@</b>, pi:',
 'info_creer_vignette' => 'creacion automatica de la vinheta',
@@ -578,7 +579,7 @@ Merc&eacute; de la voastra participacion
 'lien_afficher_texte_icones' => 'Far par&eacute;isser li ic&ograve;nas e lo t&egrave;xt',
 'lien_afficher_texte_seul' => 'Far par&eacute;isser lo t&egrave;xt solet',
 'lien_liberer' => 'liberar',
-'lien_liberer_tous' => 'liberatz aquelu articles',
+'lien_liberer_tous' => 'liberatz aquelu articles', # MODIF
 'lien_nouvea_pense_bete' => 'NOV&Egrave;LA N&Ograve;TA DE RENEMBRAN&Ccedil;A ',
 'lien_nouveau_message' => 'MESSATGE NOV&Egrave;U',
 'lien_nouvelle_annonce' => 'ANONCI NOV&Egrave;U',
@@ -765,7 +766,7 @@ e vos tornar connectar au sit.
 'titre_statistiques' => 'Estatisticas dau sit',
 'titre_titre_document' => 'Titre dau document&nbsp;:',
 'todo' => 'De venir',
-'trad_reference' => '(article de referen&ccedil;a)',
+'trad_reference' => '(article de referen&ccedil;a)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balisa B en aval',

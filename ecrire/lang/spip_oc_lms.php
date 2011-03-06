@@ -385,6 +385,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_supprimer_message' => 'Suprimir queu messatge',
 'icone_tous_articles' => 'Tots v&ograve;stres articles ',
 'icone_tous_auteur' => 'Tots los autors ',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Validar queu messatge',
 'icone_visiter_site' => 'Vesitar', # MODIF
 'icone_voir_en_ligne' => 'Veire en linha',
@@ -429,7 +430,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_copyright' => '@spip@ es un logiciau liure distribuit @lien_gpl@',
 'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.', # MODIF
 'info_copyright_gpl' => 'sos lic&eacute;ncia GPL',
-'info_cours_edition' => 'V&ograve;stres articles en cors de redaccion',
+'info_cours_edition' => 'V&ograve;stres articles en cors de redaccion', # MODIF
 'info_creer_repertoire' => 'Volhatz crear un fichier o un repert&ograve;ri nommat',
 'info_creer_repertoire_2' => 'dedins lo sosrepert&ograve;ri   <b>@repertoire@</b>, puei:',
 'info_creer_vignette' => 'creacion automatica de la vinheta',
@@ -577,7 +578,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'lien_afficher_texte_icones' => 'Afichar las ic&ograve;nas e lo text',
 'lien_afficher_texte_seul' => 'Afichar nonm&agrave;s lo text',
 'lien_liberer' => 'liberar',
-'lien_liberer_tous' => 'liberar quilhs articles',
+'lien_liberer_tous' => 'liberar quilhs articles', # MODIF
 'lien_nouvea_pense_bete' => 'MEMENTO NU&Ograve;U ',
 'lien_nouveau_message' => 'MESSATGE NU&Ograve;U',
 'lien_nouvelle_annonce' => 'ANONCI NOVEU',
@@ -769,7 +770,7 @@ e vos tornar connectar au sit.
 'titre_statistiques' => 'Estadisticas dau sit',
 'titre_titre_document' => 'T&iacute;tol dau document:',
 'todo' => '&agrave; venir', # NEW
-'trad_reference' => '(article de refer&eacute;ncia)',
+'trad_reference' => '(article de refer&eacute;ncia)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balisa B en avau',

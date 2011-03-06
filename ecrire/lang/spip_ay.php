@@ -384,6 +384,7 @@ Arsusiwitamatxa yuspagara
 'icone_supprimer_message' => 'Aka yatiyaw apaqa&ntilde;a',
 'icone_tous_articles' => 'Taqpach qillqatanakama',
 'icone_tous_auteur' => 'Taqpach qillqirinaka',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Aka yatiyaw iyaw sa&ntilde;a',
 'icone_visiter_site' => 'Aka qamaw tumpa&ntilde;a', # MODIF
 'icone_voir_en_ligne' => 'Naktat u&ntilde;ja&ntilde;a',
@@ -428,7 +429,7 @@ Arsusiwitamatxa yuspagara
 'info_copyright' => '@spip@ m&auml; software libre lakiratawa @lien_qpl@.',
 'info_copyright_doc' => 'Juk\'amp yatxata&ntilde;atakix qamaw u&ntilde;ja&ntilde;a &lt;a href=\'http://www.spip.net/es\'&gt;http://www.spip.net/es&lt;/a&gt;.   ',
 'info_copyright_gpl' => 'GLP iyaw saki&ntilde;ampi',
-'info_cours_edition' => 'Qillqatanakamax qillqt\'asiskiwa',
+'info_cours_edition' => 'Qillqatanakamax qillqt\'asiskiwa', # MODIF
 'info_creer_repertoire' => 'M&auml; q\'ipi jan ukjax m&auml; ima&ntilde; q\'ipi akham sutin u&ntilde;staya&ntilde;amaxa',
 'info_creer_repertoire_2' => 'jach\'a q\'ipina &lt;b&gt;@repertoire@&lt;/b&gt;, ukatxa ',
 'info_creer_vignette' => 'Jisk\'itat justupak u&ntilde;stayawi',
@@ -577,7 +578,7 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 'lien_afficher_texte_icones' => 'Jisk\'a saltanakampi sawutanakampi u&ntilde;achaya&ntilde;a',
 'lien_afficher_texte_seul' => 'Sawuk u&ntilde;achaya&ntilde;a',
 'lien_liberer' => 'Antutja&ntilde;a',
-'lien_liberer_tous' => 'aka qillqatanak antutja&ntilde;a',
+'lien_liberer_tous' => 'aka qillqatanak antutja&ntilde;a', # MODIF
 'lien_nouvea_pense_bete' => 'Machaq amtawirinaka',
 'lien_nouveau_message' => 'Machaq yatiyawi',
 'lien_nouvelle_annonce' => 'Machaq yatiyawi',
@@ -738,7 +739,7 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqa&nt
 'titre_statistiques' => 'Qamawit tantiyir',
 'titre_titre_document' => 'Qillqa q\'ipin sutinchawi',
 'todo' => '&agrave; venir', # NEW
-'trad_reference' => '(aytat q\'ipi)',
+'trad_reference' => '(aytat q\'ipi)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => ': bucle B chimputa juk\'amp nayraru',

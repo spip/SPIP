@@ -383,6 +383,7 @@ Thank you for your participation!
 'icone_supprimer_message' => 'Delete this message',
 'icone_tous_articles' => 'All your articles',
 'icone_tous_auteur' => 'All the authors',
+'icone_tous_visiteur' => 'All visitors',
 'icone_valider_message' => 'Validate this message',
 'icone_visiter_site' => 'See the public site',
 'icone_voir_en_ligne' => 'View online',
@@ -427,7 +428,7 @@ Thank you for your participation!
 'info_copyright' => '@spip@ is free software distributed @lien_gpl@.',
 'info_copyright_doc' => 'For more information, see <a href="@spipnet@">http://www.spip.net/en</a>.',
 'info_copyright_gpl' => 'under the GPL license',
-'info_cours_edition' => 'Your articles in progress',
+'info_cours_edition' => 'Your articles in progress', # MODIF
 'info_creer_repertoire' => 'Please create a file or a directory called:',
 'info_creer_repertoire_2' => 'inside the sub-directory <b>@repertoire@</b>, then',
 'info_creer_vignette' => 'automated creation of the thumbnail',
@@ -577,7 +578,7 @@ Thank you for your participation!
 'lien_afficher_texte_icones' => 'Show icons and text',
 'lien_afficher_texte_seul' => 'Show text only',
 'lien_liberer' => 'release',
-'lien_liberer_tous' => 'release these articles',
+'lien_liberer_tous' => 'release these articles', # MODIF
 'lien_nouvea_pense_bete' => 'NEW MEMO',
 'lien_nouveau_message' => 'NEW MESSAGE',
 'lien_nouvelle_annonce' => 'NEW ANNOUNCEMENT',
@@ -769,7 +770,7 @@ and connect again to the site.
 'titre_statistiques' => 'Site statistics',
 'titre_titre_document' => 'Document title:',
 'todo' => 'to come',
-'trad_reference' => '(reference article)',
+'trad_reference' => '(reference article)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => ': B tag too late in loop',

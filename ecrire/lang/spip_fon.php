@@ -355,6 +355,7 @@ sera ignor&eacute;e) :
 'icone_supprimer_message' => 'gb&igrave;&#598;&iacute; w&#603;n &eacute; l&#596;',
 'icone_tous_articles' => 'we&#780;kp&aacute; l&#603; b&iacute;',
 'icone_tous_auteur' => 'ny&#596;wl&aacute;nt&#596; l&#603; b&iacute;',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 's&#596; k&#603;n n&uacute; w&#603;n &eacute; l&#596;',
 'icone_visiter_site' => 'J&oacute;n&#596;', # MODIF
 'icone_voir_en_ligne' => 'Mi kp&#596;n &#598;&ograve; &agrave;t&#603; &#596; j&iacute; ',
@@ -399,7 +400,7 @@ sera ignor&eacute;e) :
 'info_copyright' => '@spip@ Az&#596;w&agrave;n&uacute;m&#603;&#598;&eacute;m&aacute;kp&agrave;c&#603;n&aacute;  @lien_gpl@',
 'info_copyright_doc' => 'n&uacute; mi n&aacute; l&#603; &#598;&oacute; m&#596; x&oacute; d&eacute;v&oacute; l&#603; &#596; mi y&igrave; gblogblo &eacute; l&#596; j&iacute;', # MODIF
 'info_copyright_gpl' => '&#393;&ograve; Gb&egrave;n&iacute;n&aacute; GPL t&#596;n m&#603;',
-'info_cours_edition' => 'mi kp&oacute; &#598;&ograve; w&eacute;kp&aacute; l&#603; wl&aacute;n w&#603; ',
+'info_cours_edition' => 'mi kp&oacute; &#598;&ograve; w&eacute;kp&aacute; l&#603; wl&aacute;n w&#603; ', # MODIF
 'info_creer_repertoire' => 'mi k&#603;nkl&#603;n b&oacute; gb&egrave;t&agrave;x&oacute;kpl&eacute; b&oacute; n&aacute; ny&iacute;k&#596; &#603;:',
 'info_creer_repertoire_2' => '&agrave;kp&aacute;xw&eacute;', # MODIF
 'info_creer_vignette' => 'Kun&#598;&eacute;w&eacute;m&aacute; c&agrave;ca',
@@ -545,7 +546,7 @@ sera ignor&eacute;e) :
 'lien_afficher_texte_icones' => 'xl&#603; w&eacute;m&agrave; l&#603;',
 'lien_afficher_texte_seul' => 'xl&#603; w&eacute;m&agrave; l&#603;',
 'lien_liberer' => 'mi s&#596; j&oacute;',
-'lien_liberer_tous' => 'mi s&#596; w&eacute;kp&aacute; l&#603;  j&oacute;',
+'lien_liberer_tous' => 'mi s&#596; w&eacute;kp&aacute; l&#603;  j&oacute;', # MODIF
 'lien_nouvea_pense_bete' => 'l&igrave;n t&agrave;m&#603; &agrave;g&uacute;&#598;&agrave;g&#596;',
 'lien_nouveau_message' => 'w&#603;n y&#596;y&#596;',
 'lien_nouvelle_annonce' => 'w&#603;n y&#596;y&#596;',
@@ -711,7 +712,7 @@ N&uacute; mi n&aacute; &#598;&oacute; m&#596; n&#596;t&#603;n gblogbloj&iacute; 
 'titre_statistiques' => 'ak&#596;&#331;t&aacute; gblogbloj&iacute;  &#596; t&#596;n ',
 'titre_titre_document' => 'x&oacute;t&aacute; we&#780;m&agrave; t&#596;n &nbsp;:',
 'todo' => '&agrave; venir', # NEW
-'trad_reference' => '(w&eacute;kp&aacute; j&#596; w&eacute;kp&aacute;)',
+'trad_reference' => '(w&eacute;kp&aacute; j&#596; w&eacute;kp&aacute;)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;:D&ograve;gb&oacute; B &#598;&ograve; f&igrave;f&oacute;m&#603;',

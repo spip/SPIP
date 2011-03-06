@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Wijzigen',
 'bouton_chercher' => 'Zoeken',
 'bouton_choisir' => 'Selecteren',
-'bouton_deplacer' => 'D&eacute;placer', # NEW
+'bouton_deplacer' => 'Te verplaatsen',
 'bouton_download' => 'Downloaden',
 'bouton_enregistrer' => 'Behouden',
 'bouton_radio_desactiver_messagerie_interne' => 'Intern berichtensysteem desactiveren',
@@ -312,7 +312,7 @@ Bedankt voor je deelname
 'forum_lien_hyper' => '<b>webverwijzing</b> (optioneel)',
 'forum_message_definitif' => 'Definitief bericht : versturen',
 'forum_message_trop_long' => 'Je bericht is te lang. De maximale lengte is 20.000 tekens.',
-'forum_ne_repondez_pas' => 'Beantwoord deze mail niet maar bezoek het forum op het volgende adres :', # MODIF
+'forum_ne_repondez_pas' => 'Niet reageren op deze mail, maar op het forum om het volgende adres :',
 'forum_non_inscrit' => 'Je bent niet ingeschreven, ofwel is je adres of paswoord niet correct.',
 'forum_page_url' => '(Als je bericht naar een artikel op het web verwijst of naar een pagina die meer informatie bevat, kunt u hier de titel en de URL van deze webverwijzing invoeren.)',
 'forum_par_auteur' => 'door @auteur@',
@@ -384,8 +384,9 @@ Bedankt voor je deelname
 'icone_supprimer_message' => 'Dit bericht wissen',
 'icone_tous_articles' => 'Al je artikels',
 'icone_tous_auteur' => 'Alle auteurs',
+'icone_tous_visiteur' => 'Alle bezoekers',
 'icone_valider_message' => 'Bericht goedkeuren',
-'icone_visiter_site' => 'Bekijken', # MODIF
+'icone_visiter_site' => 'Bekijk publieke site',
 'icone_voir_en_ligne' => 'Online bekijken',
 'image_tourner_180' => '180&deg; draaien',
 'image_tourner_droite' => '90&deg; naar rechts draaien',
@@ -428,7 +429,7 @@ Bedankt voor je deelname
 'info_copyright' => '@spip@ is vrije software @lien_gpl@ distributie.',
 'info_copyright_doc' => 'Voor meer informatie, kijk op de website <a href="@spipnet@">http://www.spip.net/nl</a>.',
 'info_copyright_gpl' => 'onder GPL licentie',
-'info_cours_edition' => 'Je artikels in redactie',
+'info_cours_edition' => 'Je artikels in redactie', # MODIF
 'info_creer_repertoire' => 'Gelieve een bestand of map aan te maken met de volgende naam:',
 'info_creer_repertoire_2' => 'binnen in de submap <b>@repertoire@</b>, vervolgens&nbsp;:',
 'info_creer_vignette' => 'automatische aanmaak miniatuur-afbeeldingen',
@@ -570,7 +571,7 @@ Bedankt voor je deelname
 'info_visites' => 'bezoeke:',
 'info_vos_rendez_vous' => 'Je komende afsrpaken',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Je memo\'s', # MODIF
+'infos_vos_pense_bete' => 'Uw herinneringen',
 'item_breve_proposee' => 'Bericht voorgesteld',
 
 // L
@@ -578,7 +579,7 @@ Bedankt voor je deelname
 'lien_afficher_texte_icones' => 'Toon icoontjes en tekst',
 'lien_afficher_texte_seul' => 'Toon alleen tekst',
 'lien_liberer' => 'Uitgave',
-'lien_liberer_tous' => 'artikels vrijgeven',
+'lien_liberer_tous' => 'artikels vrijgeven', # MODIF
 'lien_nouvea_pense_bete' => 'NIEUWE MEMO',
 'lien_nouveau_message' => 'NIEUW BERICHT',
 'lien_nouvelle_annonce' => 'NIEUWE AANKONDIGING',
@@ -623,7 +624,7 @@ Bedankt voor je deelname
 'login_retour_site' => 'Terug naar de publieke site',
 'login_retoursitepublic' => 'Terug naar de publieke site',
 'login_sans_cookiie' => 'Aanmelden zonder koekie',
-'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
+'login_securise' => 'Secure Login',
 'login_sinscrire' => 'Registreren',
 'login_test_navigateur' => 'Testen van bladerprogramma/opnieuw verbinden',
 'login_verifiez_navigateur' => '(Kijk niettemin na dat je bladerprogramma je paswoord niet heeft onthouden...)',
@@ -773,7 +774,7 @@ opnieuw verbinding maken met de site
 'titre_statistiques' => 'Statistieken van de site',
 'titre_titre_document' => 'Titel van het document:',
 'todo' => 'om te komen',
-'trad_reference' => '(referentie-artikel)',
+'trad_reference' => '(referentie-artikel)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: komende opmaakcode B',

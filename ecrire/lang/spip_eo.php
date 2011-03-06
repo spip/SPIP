@@ -385,6 +385,7 @@ Dankon pro via partopreno
 'icone_supprimer_message' => 'Forigi tiun mesa&#285;on',
 'icone_tous_articles' => '&#264;iuj viaj artikoloj',
 'icone_tous_auteur' => '&#264;iuj a&#365;toroj',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Validigi tiun mesa&#285;on',
 'icone_visiter_site' => 'Viziti', # MODIF
 'icone_voir_en_ligne' => 'Vidi &#265;eretigite',
@@ -429,7 +430,7 @@ Dankon pro via partopreno
 'info_copyright' => '@spip@ estas libera programo distribuata @lien_gpl@.',
 'info_copyright_doc' => 'Por pliaj informoj vidu la retpa&#285;on <a href="@spipnet@">http://www.spip.net/eo</a>.', # MODIF
 'info_copyright_gpl' => 'sub licenco GPL',
-'info_cours_edition' => 'Viaj redaktataj artikoloj',
+'info_cours_edition' => 'Viaj redaktataj artikoloj', # MODIF
 'info_creer_repertoire' => 'Bonvolu krei dosieron a&#365; dosierujon kies nomo estu&nbsp;:',
 'info_creer_repertoire_2' => 'ene de la subdosierujo <b>@repertoire@</b>, kaj&nbsp;:',
 'info_creer_vignette' => 'a&#365;tomata kreo de la vinjeto',
@@ -579,7 +580,7 @@ Dankon pro via partopreno
 'lien_afficher_texte_icones' => 'Afi&#349;i la piktogramojn kaj la tekston',
 'lien_afficher_texte_seul' => 'Afi&#349;i nur la tekston',
 'lien_liberer' => 'liberigi',
-'lien_liberer_tous' => 'liberigi tiujn artikolojn',
+'lien_liberer_tous' => 'liberigi tiujn artikolojn', # MODIF
 'lien_nouvea_pense_bete' => 'NOVA MEMORIGILO',
 'lien_nouveau_message' => 'NOVA MESA&#284;O',
 'lien_nouvelle_annonce' => 'NOVA ANONCO',
@@ -772,7 +773,7 @@ sub la respondeco de la &#265;efa retejestro .</b>',
 'titre_statistiques' => 'Statistikoj de la retejo',
 'titre_titre_document' => 'Titolo de la dokumento&nbsp;:',
 'todo' => 'venonta',
-'trad_reference' => '(referenca artikolo)',
+'trad_reference' => '(referenca artikolo)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: posta B marko',

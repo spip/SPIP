@@ -382,6 +382,7 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'icone_supprimer_message' => 'Elimina il messaggio',
 'icone_tous_articles' => 'Tutti i tuoi articoli',
 'icone_tous_auteur' => 'Tutti gli autori',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Convalida il messaggio',
 'icone_visiter_site' => 'Visita il sito',
 'icone_voir_en_ligne' => 'Vedi on line',
@@ -426,7 +427,7 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'info_copyright' => '@spip@ &egrave; un software libero distribuito @lien_gpl@.',
 'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito <a href="@spipnet@">http://www.spip.net/it</a>.',
 'info_copyright_gpl' => 'sotto licenza GPL',
-'info_cours_edition' => 'Articoli in fase di redazione',
+'info_cours_edition' => 'Articoli in fase di redazione', # MODIF
 'info_creer_repertoire' => 'Creare un file o una cartella chiamata:',
 'info_creer_repertoire_2' => 'all\'interno della sottocartella <b>@repertoire@</b>, poi:',
 'info_creer_vignette' => 'creazione automatica dell\'anteprima',
@@ -577,7 +578,7 @@ o contatta il tuo hoster.</font>',
 'lien_afficher_texte_icones' => 'Mostra le icone e il testo',
 'lien_afficher_texte_seul' => 'Mostra solo il testo',
 'lien_liberer' => 'libera',
-'lien_liberer_tous' => 'liberare questi articoli',
+'lien_liberer_tous' => 'liberare questi articoli', # MODIF
 'lien_nouvea_pense_bete' => 'NUOVO MEMO',
 'lien_nouveau_message' => 'NUOVO MESSAGGIO',
 'lien_nouvelle_annonce' => 'NUOVO ANNUNCIO',
@@ -763,7 +764,7 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'titre_statistiques' => 'Statistiche del sito',
 'titre_titre_document' => 'Titolo del documento:',
 'todo' => 'prossimo',
-'trad_reference' => '(articolo di riferimento)',
+'trad_reference' => '(articolo di riferimento)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => ': ciclo B deve precedere ciclo BOUCLE',

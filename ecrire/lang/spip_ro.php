@@ -383,6 +383,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'icone_supprimer_message' => 'Suprima&#355;i acest mesaj',
 'icone_tous_articles' => 'Toate articolele dvs.',
 'icone_tous_auteur' => 'To&#355;i autorii',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Valida&#355;i acest mesaj',
 'icone_visiter_site' => 'Vizita&#355;i', # MODIF
 'icone_voir_en_ligne' => 'Vede&#355;i &icirc;n direct',
@@ -427,7 +428,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_copyright' => '@spip@ este un program liber distribuit @lien_gpl@.',
 'info_copyright_doc' => 'Pentru mai multe informa&#355;ii, vizita&#355;i site-ul <a href="@spipnet@">http://www.spip.net/ro</a>.',
 'info_copyright_gpl' => 'sub licen&#355;&#259; GPL',
-'info_cours_edition' => 'Articolele dumneavoastr&#259; &icirc;n curs de redactare',
+'info_cours_edition' => 'Articolele dumneavoastr&#259; &icirc;n curs de redactare', # MODIF
 'info_creer_repertoire' => 'V&#259; rug&#259;m s&#259; crea&#355;i un fi&#537;ier sau un director numit&nbsp;:',
 'info_creer_repertoire_2' => 'sub directorul <b>@repertoire@</b>, apoi&nbsp;:',
 'info_creer_vignette' => 'crearea vini&eacute;tei &icirc;n mod automat ',
@@ -577,7 +578,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'lien_afficher_texte_icones' => 'Afi&#351;a&#355;i iconi&#355;e &#351;i text',
 'lien_afficher_texte_seul' => 'Afi&#351;a&#355;i doar text',
 'lien_liberer' => 'elibera&#355;i',
-'lien_liberer_tous' => 'elibera&#355;i aceste articole',
+'lien_liberer_tous' => 'elibera&#355;i aceste articole', # MODIF
 'lien_nouvea_pense_bete' => 'CIORN&#258; NOU&#258;',
 'lien_nouveau_message' => 'MESAJ NOU',
 'lien_nouvelle_annonce' => 'ANUN&#354; NOU',
@@ -760,7 +761,7 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'titre_statistiques' => 'Statisticile site-ului',
 'titre_titre_document' => 'Titlul documentului:',
 'todo' => 'de f&#259;cut',
-'trad_reference' => '(articol de referin&#355;&#259;)',
+'trad_reference' => '(articol de referin&#355;&#259;)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: element B &icirc;nainte',

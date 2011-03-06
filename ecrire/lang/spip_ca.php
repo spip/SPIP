@@ -378,6 +378,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'icone_supprimer_message' => 'Suprimir aquest missatge',
 'icone_tous_articles' => 'Tots els seus articles',
 'icone_tous_auteur' => 'Tots els autors i autores',
+'icone_tous_visiteur' => 'Tots els visitants',
 'icone_valider_message' => 'Validar aquest missatge',
 'icone_visiter_site' => 'Veure el lloc p&uacute;blic',
 'icone_voir_en_ligne' => 'Visualitzar en l&iacute;nia',
@@ -422,7 +423,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_copyright' => '@spip@ &eacute;s programari lliure distribu&iuml;t @lien_gpl@.',
 'info_copyright_doc' => 'Per a m&eacute;s informaci&oacute;, veure el lloc <a href="@spipnet@">http://www.spip.net/ca</a>.',
 'info_copyright_gpl' => 'sota llic&egrave;ncia GPL',
-'info_cours_edition' => 'Els vostres articles en proc&eacute;s de redacci&oacute;',
+'info_cours_edition' => 'Els vostres articles en proc&eacute;s de redacci&oacute;', # MODIF
 'info_creer_repertoire' => 'Creeu un fitxer o un directori anomenat:',
 'info_creer_repertoire_2' => 'a l\'interior del subdirectori <b>@repertoire@</b>, despr&eacute;s:',
 'info_creer_vignette' => 'creaci&oacute; autom&agrave;tica de la miniatura',
@@ -572,7 +573,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'lien_afficher_texte_icones' => 'Mostrar les icones i el text',
 'lien_afficher_texte_seul' => 'Mostrar nom&eacute;s el text',
 'lien_liberer' => 'alliberar',
-'lien_liberer_tous' => 'alliberar aquests articles',
+'lien_liberer_tous' => 'alliberar aquests articles', # MODIF
 'lien_nouvea_pense_bete' => 'NOU RECORDATORI',
 'lien_nouveau_message' => 'NOU MISSATGE',
 'lien_nouvelle_annonce' => 'NOU ANUNCI',
@@ -749,7 +750,7 @@ i tornar-vos a connectar al lloc.
 'titre_statistiques' => 'Estadistiques de la p&agrave;gina',
 'titre_titre_document' => 'T&iacute;tol del document:',
 'todo' => 'pr&ograve;ximament  ',
-'trad_reference' => '(article de refer&egrave;ncia)',
+'trad_reference' => '(article de refer&egrave;ncia)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: l\'etiqueta B ha d\'anar abans',

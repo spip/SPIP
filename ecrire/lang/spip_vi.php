@@ -376,6 +376,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.', # MODIF
 'icone_supprimer_message' => 'Xo&aacute; th&#432; t&iacute;n n&agrave;y',
 'icone_tous_articles' => 'T&#7845;t c&#7843; b&agrave;i v&#7903; c&#7911;a b&#7841;n',
 'icone_tous_auteur' => 'C&aacute;c t&aacute;c gi&#7843;',
+'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Ch&#7845;p thu&#7853;n',
 'icone_visiter_site' => 'Tr&#7903; v&#7873; trang nh&agrave;', # MODIF
 'icone_voir_en_ligne' => 'Xem online',
@@ -420,7 +421,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.', # MODIF
 'info_copyright' => '@spip@ l&agrave; nhu li&#7879;u mi&#7877;n ph&iacute; ph&#7893; bi&#7871;n @lien_gpl@.',
 'info_copyright_doc' => '&#272;&#7875; bi&#7871;t th&ecirc;m, xin v&agrave;o xem trang <a href="@spipnet@">http://www.spip.net/vi</a>.', # MODIF
 'info_copyright_gpl' => 'theo gi&#7845;p ph&eacute;p GPL',
-'info_cours_edition' => 'B&agrave;i c&#7911;a b&#7841;n &#273;ang so&#7841;n',
+'info_cours_edition' => 'B&agrave;i c&#7911;a b&#7841;n &#273;ang so&#7841;n', # MODIF
 'info_creer_repertoire' => 'Xin l&#7853;p ra m&#7897;t h&#7891; s&#417; hay m&#7897;t ng&#259;n mang t&ecirc;n:',
 'info_creer_repertoire_2' => 'trong ng&#259;n ph&#7909; <b>@repertoire@</b>, k&#7871; &#273;&#243;', # MODIF
 'info_creer_vignette' => 't&#7921; &#273;&#7897;ng t&#7841;o ra c&aacute;c h&igrave;nh m&#7851;u nh&#7887;',
@@ -568,7 +569,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.', # MODIF
 'lien_afficher_texte_icones' => 'Xem icon v&agrave; ch&#7919;',
 'lien_afficher_texte_seul' => 'Xem ch&#7919; m&agrave; th&ocirc;i',
 'lien_liberer' => 'ph&#7893; bi&#7871;n',
-'lien_liberer_tous' => 'G&#7905; b&#7887; nh&#7919;ng b&agrave;i n&agrave;y',
+'lien_liberer_tous' => 'G&#7905; b&#7887; nh&#7919;ng b&agrave;i n&agrave;y', # MODIF
 'lien_nouvea_pense_bete' => 'GHI NH&#7898; M&#7898;I',
 'lien_nouveau_message' => 'TH&#431; T&Iacute;N M&#7898;I',
 'lien_nouvelle_annonce' => 'TH&Ocirc;NG B&Aacute;O M&#7898;I',
@@ -737,7 +738,7 @@ N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong 
 'titre_statistiques' => 'Th&#7889;ng K&ecirc;',
 'titre_titre_document' => 'T&#7921;a b&agrave;i:',
 'todo' => '&agrave; venir', # NEW
-'trad_reference' => '(b&agrave;i n&#7889;i k&#7871;t)',
+'trad_reference' => '(b&agrave;i n&#7889;i k&#7871;t)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => ': B tag too late in loop',
