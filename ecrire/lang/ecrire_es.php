@@ -195,7 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'original',
 
 // H
-'htaccess_a_simuler' => 'Advertencia: la configuraci&oacute;n de tu servidor HTTP no toma en ceunta los archivos @htaccess@. Para poder asegurar una buena seguridad, debes modificar la configuraci&oacute;n correspondiente, o si no que las constantes @constantes@ (que se pueden definir en el archivo mes_options.php) tomen valores de carpetas fuera de @document_root@.',
+'htaccess_a_simuler' => 'Advertencia: la configuraci&oacute;n de tu servidor HTTP no toma en ceunta los archivos @htaccess@. Para poder asegurar una buena seguridad, debes modificar la configuraci&oacute;n correspondiente, o si no que las constantes @constantes@ (que se pueden definir en el archivo mes_options.php) tomen valores de carpetas fuera de @document_root@.', # MODIF
 'htaccess_inoperant' => 'htaccess inoperante',
 
 // I
@@ -315,7 +315,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Ninguna breve',
 'info_aucun_message' => 'Ning&uacute;n mensaje',
 'info_aucun_mot_cle' => 'Ninguna palabra-clave',
-'info_aucun_rubrique' => 'Ninguna secci&oacute;n',
+'info_aucun_rubrique' => 'Ninguna secci&oacute;n', # MODIF
 'info_aucun_site' => 'Ningun sitio',
 'info_aucun_visiteur' => 'Ning&uacute;n visitante',
 'info_aujourdhui' => 'hoy:',
@@ -425,6 +425,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_visiteurs_enregistres' => 'Aqu&iacute; se encuentran las personas registradas en el espacio p&uacute;blico del sitio (foros con suscripci&oacute;n).',
 'info_generation_miniatures_images' => 'Generaci&oacute;n de las miniaturas de im&aacute;genes',
 'info_gerer_trad' => 'Manejar los enlaces de traducci&oacute;n?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Grupo importante',
 'info_hebergeur_desactiver_envoi_email' => 'Algunos servidores no permiten el env&iacute;o autom&aacute;tico de correos electr&oacute;nicos. En esos casos, las siguientes funciones de SPIP no dar&aacute;n ning&uacute;n resultado.',
 'info_hier' => 'ayer:',
@@ -485,6 +486,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_multi_langues_choisies' => 'A continuaci&oacute;n selecciona los idiomas que quieres poner a disposici&oacute;n de los redactores de tu sitio.
 Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden ser desactivados.
 ',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => '&iquest;Activar el men&uacute; de idioma en las secciones?',
 'info_multi_secteurs' => '... s&oacute;lo para las secciones situadas en la ra&iacute;z?',
 'info_nb_articles' => '@nb@ art&iacute;culos',
@@ -681,6 +683,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_tout_site5' => 'Art&iacute;culo original',
 'info_tout_site6' => '<b>Atenci&oacute;n:</b> s&oacute;lo se muestran los art&iacute;culos originales.
 Las traducciones est&aacute;n asociadas al original, en un color que indica su estado:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Trabajo colectivo en los art&iacute;culos',
 'info_un_article' => 'un art&iacute;culo,',
 'info_un_mot' => 'Una sola palabra a la vez',
@@ -799,9 +802,9 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'jour_non_connu_nc' => 'n.c.',
 
 // L
-'label_bando_outils' => 'Barre d\'outils', # NEW
-'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+'label_bando_outils' => '&#1605;&#1610;&#1604; &#1575;&#1576;&#1586;&#1575;&#1585; ',
+'label_bando_outils_afficher' => '&#1606;&#1605;&#1575;&#1610;&#1588; &#1575;&#1576;&#1586;&#1575;&#1585;&#1607;&#1575;',
+'label_bando_outils_masquer' => '&#1662;&#1606;&#1607;&#1575;&#1606; &#1587;&#1575;&#1586;&#1610; &#1575;&#1576;&#1586;&#1575;&#1585;&#1607;&#1575;',
 'label_choix_langue' => 'Seleccione su idioma',
 'label_slogan_site' => 'Slogan del sitio',
 'label_taille_ecran' => 'Ancho de pantalla',
@@ -1218,9 +1221,9 @@ t&iacute;tulos y las descripciones de los art&iacute;culos. <br />- Un segundo m
 'trad_article_inexistant' => 'No hay ning&uacute;n art&iacute;culo con ese n&uacute;mero.',
 'trad_article_traduction' => 'Todas las versiones de este art&iacute;culo:',
 'trad_deja_traduit' => 'Error: imposible de vincular este art&iacute;culo con el numero solicitado.',
-'trad_delier' => 'Ya no ligar este art&iacute;culo a sus traducciones ',
+'trad_delier' => 'Ya no ligar este art&iacute;culo a sus traducciones ', # MODIF
 'trad_lier' => 'Este art&iacute;culo es una traducci&oacute;n del art&iacute;culo n&uacute;mero:',
-'trad_new' => 'Escribir una nueva traducci&oacute;n de este art&iacute;culo',
+'trad_new' => 'Escribir una nueva traducci&oacute;n de este art&iacute;culo', # MODIF
 
 // U
 'upload_fichier_zip' => 'Archivo ZIP',

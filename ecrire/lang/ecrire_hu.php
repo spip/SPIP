@@ -202,7 +202,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'forum_info_original' => 'original', # NEW
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -325,7 +325,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'A mai napon&nbsp;:',
@@ -438,6 +438,7 @@ a t&ouml;r&ouml;lt szerz&#337;k pedig kuk&aacute;val vannak jel&ouml;lve.',
 'info_gauche_visiteurs_enregistres' => 'Itt tal&aacute;lhat&oacute;k a honlap nyilv&aacute;nos r&eacute;sz&eacute;n regisztr&aacute;lt l&aacute;togat&oacute;k (be&iacute;ratkoz&aacute;sos f&oacute;rumok).',
 'info_generation_miniatures_images' => 'B&eacute;lyegk&eacute;pek gener&aacute;l&aacute;sa a k&eacute;pekr&#337;l',
 'info_gerer_trad' => 'Ford&iacute;tasi linkek kezel&eacute;se ?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Fontos csoport',
 'info_hebergeur_desactiver_envoi_email' => 'Bizonyos szolg&aacute;ltat&oacute;k nem aktiv&aacute;lj&aacute;k az automatikus email k&uuml;ld&eacute;st a szerver&uuml;kr&#337;l. Ilyen esetben, a k&ouml;vetkez&#337; SPIP funkci&oacute;k nem fognak m&#369;k&ouml;dni.',
 'info_hier' => 'Tegnap&nbsp;:',
@@ -497,6 +498,7 @@ a t&ouml;r&ouml;lt szerz&#337;k pedig kuk&aacute;val vannak jel&ouml;lve.',
 'info_multi_cet_article' => 'A cikk nyelve&nbsp;:',
 'info_multi_langues_choisies' => 'Lejjebb jel&ouml;lje ki a szerz&#337;k &aacute;ltal haszn&aacute;lhat&oacute; nyelveket.
   A honlapj&aacute;n m&aacute;r haszn&aacute;lt nyelveket (els&#337;knek jelennek meg) nem lehet inaktiv&aacute;lni.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'A nyelvi men&uuml; aktiv&aacute;l&aacute;sa a rovatokn&aacute;l&nbsp;?',
 'info_multi_secteurs' => '... csak a gy&ouml;k&eacute;rben tal&aacute;lhat&oacute; rovatok eset&eacute;n&nbsp;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -702,6 +704,7 @@ a felhaszn&aacute;l&oacute;k automatikus emailt kapnak,
 'info_tout_site6' => '<b>Vigy&aacute;zat&nbsp;:</b> csak az eredeti cikkek jelennek meg.
 A ford&iacute;t&aacute;sok az eredetihez vannak csatolva olyan sz&iacute;nben,
 ami &aacute;llapot&aacute;t jelzi&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Egy&uuml;ttm&#369;k&ouml;d&eacute;si munka a cikkeken',
 'info_un_article' => 'egy cikk,',
 'info_un_mot' => 'Egyszerre csak egy sz&oacute;',
@@ -1269,9 +1272,9 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 'trad_article_inexistant' => 'Nincs ilyen sorsz&aacute;m&uacute; cikk.',
 'trad_article_traduction' => 'A cikk &ouml;sszes v&aacute;ltozatai&nbsp;:',
 'trad_deja_traduit' => 'Ez a cikk m&aacute;r egy ford&iacute;t&aacute;s a jelen cikkr&#337;l.', # MODIF
-'trad_delier' => 'Visszavenni a cikk csatol&aacute;s&aacute;t ezekre a ford&iacute;t&aacute;sokra',
+'trad_delier' => 'Visszavenni a cikk csatol&aacute;s&aacute;t ezekre a ford&iacute;t&aacute;sokra', # MODIF
 'trad_lier' => 'Ez a cikk egy ford&iacute;t&aacute;s err&#337;l a cikkr&#337;l&nbsp;:',
-'trad_new' => '&Iacute;rni egy &uacute;jabb ford&iacute;t&aacute;st err&#337;l a cikkr&#337;l',
+'trad_new' => '&Iacute;rni egy &uacute;jabb ford&iacute;t&aacute;st err&#337;l a cikkr&#337;l', # MODIF
 
 // U
 'upload_fichier_zip' => 'ZIP tipus&uacute; f&aacute;jl',

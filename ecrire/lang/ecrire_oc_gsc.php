@@ -200,7 +200,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'forum_info_original' => 'original', # NEW
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -320,7 +320,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'uei:',
@@ -430,6 +430,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
  dens l\'espaci public deu sit (forums dab abonament).',
 'info_generation_miniatures_images' => 'Congreacion de miniaturas deus imatges',
 'info_gerer_trad' => 'Gerir los ligams d\'arrevirada?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Grop important',
 'info_hebergeur_desactiver_envoi_email' => 'Daubuns aubergaders que desactivan lo mandad&iacute;s automatic
  d\'e-mails dempuish los lors serviders. En aqueth cas, las foncionalitats seguentas
@@ -495,6 +496,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_multi_cet_article' => 'Lenga d\'aqueste article:',
 'info_multi_langues_choisies' => 'Volhatz seleccionar &ccedil;a devath las lengas qui son a posita deus redactors deu v&ograve;ste sit.
   Las lengas ja emplegadas dens lo v&ograve;ste sit (afichadas en perm&egrave;ras) ne\'s p&ograve;den pas desactivar.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Activar lo menut de lenga per las rubricas?',
 'info_multi_secteurs' => '... sonque t&agrave; las rubricas a l\'arradit deu sit?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -702,6 +704,7 @@ Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los 
 'info_tout_site6' => '<b>Atencion:</b> sonque los articles originaus que s\'afichan.
 Las arreviradas que s\'ass&ograve;cian a l\'originau,
 ua color qu\'indica lo lor estat:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Trabalh collaboratiu suus articles',
 'info_un_article' => 'un article, ',
 'info_un_mot' => 'Sonque un mot au c&ograve;p',
@@ -1306,9 +1309,9 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'trad_article_inexistant' => 'N\'i a pas nat article qui p&ograve;rte aqueth num&egrave;ro.',
 'trad_article_traduction' => 'Totas las versions d\'aqueth article:',
 'trad_deja_traduit' => 'Aqueth article qu\'ei ja ua arrevirada de l\'article present.',
-'trad_delier' => 'Non ligar plus aqueste article a las soas arreviradas ',
+'trad_delier' => 'Non ligar plus aqueste article a las soas arreviradas ', # MODIF
 'trad_lier' => 'Aqueste article qu\'ei ua arrevirada de l\'article num&egrave;ro:',
-'trad_new' => 'Escr&iacute;ver ua arrevirada nav&egrave;ra d\'aqueste article',
+'trad_new' => 'Escr&iacute;ver ua arrevirada nav&egrave;ra d\'aqueste article', # MODIF
 
 // U
 'upload_fichier_zip' => 'Fichi&egrave;r ZIP',

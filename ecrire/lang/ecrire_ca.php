@@ -198,7 +198,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'forum_info_original' => 'original',
 
 // H
-'htaccess_a_simuler' => 'Advertiment: la configuraci&oacute; del vostre servidor HTTP no t&eacute; en compte els fitxers @htaccess@. Per garantir-vos una bona seguretat, heu de modificar aquesta configuraci&oacute; en aquest punt, o b&eacute; fer que les constants @constantes@ (es defineixen al fitxer mes_options.php) tinguin el valor de directoris a fora de @document_root@.',
+'htaccess_a_simuler' => 'Advertiment: la configuraci&oacute; del vostre servidor HTTP no t&eacute; en compte els fitxers @htaccess@. Per garantir-vos una bona seguretat, heu de modificar aquesta configuraci&oacute; en aquest punt, o b&eacute; fer que les constants @constantes@ (es defineixen al fitxer mes_options.php) tinguin el valor de directoris a fora de @document_root@.', # MODIF
 'htaccess_inoperant' => 'htaccess inoperant',
 
 // I
@@ -319,7 +319,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_aucun_breve' => 'Cap breu',
 'info_aucun_message' => 'Cap missatge',
 'info_aucun_mot_cle' => 'Cap paraula clau',
-'info_aucun_rubrique' => 'Cap secci&oacute;',
+'info_aucun_rubrique' => 'Cap secci&oacute;', # MODIF
 'info_aucun_site' => 'Cap lloc',
 'info_aucun_visiteur' => 'Cap visitant',
 'info_aujourdhui' => 'avui:',
@@ -435,6 +435,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
  a l\'espai p&uacute;blic del lloc (f&ograve;rums per subscripci&oacute;).',
 'info_generation_miniatures_images' => 'Generaci&oacute; de miniatures d\'imatges',
 'info_gerer_trad' => 'Gestionar els enlla&ccedil;os de traducci&oacute;?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Grup important',
 'info_hebergeur_desactiver_envoi_email' => 'Alguns prove&iuml;dors d\'hostatge desactiven l\'enviament autom&agrave;tic de correus electr&ograve;nics des dels seus servidors. En aquest cas, les seg&uuml;ents funcions d\'SPIP no funcionen. ',
 'info_hier' => 'ahir:',
@@ -494,6 +495,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_multi_cet_article' => 'Idioma d\'aquest article:',
 'info_multi_langues_choisies' => 'Seleccioneu a continuaci&oacute; els idiomes a disposici&oacute; dels redactors del vostre lloc.
   Els idiomes ja utilitzats en el vostre lloc (visualitzats en primer lloc) no es poden desactivar.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Activar el men&uacute; d\'idioma a les seccions?',
 'info_multi_secteurs' => '... nom&eacute;s per les seccions situades a l\'arrel?',
 'info_nb_articles' => '@nb@ articles',
@@ -695,6 +697,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_tout_site6' => '<b>Atenci&oacute;:</b> nom&eacute;s es mostren els articles originals.
 Les traduccions estan associades a l\'original,
 amb un color que indica el seu estat:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Treball col&middot;lectiu en els articles',
 'info_un_article' => 'un article,',
 'info_un_mot' => 'Una sola paraula a la vegada',
@@ -813,9 +816,9 @@ amb un color que indica el seu estat:',
 'jour_non_connu_nc' => 'n.c.',
 
 // L
-'label_bando_outils' => 'Barre d\'outils', # NEW
-'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+'label_bando_outils' => 'Barra d\'eines',
+'label_bando_outils_afficher' => 'Mostrar les eines',
+'label_bando_outils_masquer' => 'Amagar les eines',
 'label_choix_langue' => 'Seleccioneu la vostra llengua',
 'label_slogan_site' => 'Esl&ograve;gan del lloc',
 'label_taille_ecran' => 'Amplada de la pantalla',
@@ -1235,9 +1238,9 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'trad_article_inexistant' => 'No existeix cap article que porte aquest n&uacute;mero.',
 'trad_article_traduction' => 'Totes les versions d\'aquest article:',
 'trad_deja_traduit' => 'Error: impossible enlla&ccedil;ar aquest article amb el n&uacute;mero demanat.',
-'trad_delier' => 'No enlla&ccedil;ar aquest article amb aquestes traduccions',
+'trad_delier' => 'No enlla&ccedil;ar aquest article amb aquestes traduccions', # MODIF
 'trad_lier' => 'Aquest article &eacute;s una traducci&oacute; de l\'article n&uacute;mero:',
-'trad_new' => 'Escriure una nova traducci&oacute; d\'aquest article',
+'trad_new' => 'Escriure una nova traducci&oacute; d\'aquest article', # MODIF
 
 // U
 'upload_fichier_zip' => 'Fitxer ZIP',

@@ -190,7 +190,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'original', # NEW
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -310,7 +310,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => '&eacute;gb&eacute;:',
@@ -417,6 +417,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_visiteurs_enregistres' => 'jo&#772;n&#596; b&iacute;b&agrave; s&iacute;n ak&#596;n&#331;t&agrave;',
 'info_generation_miniatures_images' => 'N&uacute; t&iacute;t&#603; l&#603; &#598;e&#770; ye&#772; z&eacute; bl&oacute; gb&egrave;t&aacute;k&#603;n n&aacute;',
 'info_gerer_trad' => 'T&igrave;t&ograve; t&iacute;m&#603; t&#596;n l&#603;?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Ag&ugrave;n tr&iacute;tr&iacute;',
 'info_hebergeur_desactiver_envoi_email' => 'e-mail&ugrave; c&agrave;c&agrave;.',
 'info_hier' => 's&#596; t&oacute; f&iacute;:',
@@ -475,6 +476,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_multi_articles' => 'Gb&egrave; l&#603; s&iacute;n Akp&aacute;xw&eacute; n&iacute; y&iacute; &agrave;z&#596;?',
 'info_multi_cet_article' => 'Gb&egrave; w&eacute;kp&aacute; &eacute; l&#596; t&#596;n :',
 'info_multi_langues_choisies' => 'Mi k&#603;nkl&#603;n b&oacute; s&#596; gb&egrave; &eacute; jl&oacute; my&#596;',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Gb&egrave; l&#603; s&iacute;n Akp&aacute;xw&eacute; n&iacute; y&iacute; &agrave;z&#596;?',
 'info_multi_secteurs' => 'Akp&aacute;xw&eacute; &eacute; l&ograve; &#598;&ograve;k&#596; l&#603; k&#603;&#598;&#603; a ?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -671,6 +673,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_tout_site5' => 'we&#780;kpa&#770; f&#603;w&uacute;.',
 'info_tout_site6' => 'we&#780;kpa&#770; f&#603;w&uacute; j&#603;n y&eacute; s&#596; xl&#603;
 &nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'mi w&agrave;z&#596; &#598;&oacute; kp&#596; &#598;&ograve; w&eacute;kp&aacute; l&#603; j&iacute;',
 'info_un_article' => 'we&#780;kpa&#770;,',
 'info_un_mot' => 'x&oacute;kw&iacute;n &#598;&ograve;kp&oacute;',
@@ -1177,9 +1180,9 @@ demande plus de puissance au serveur.', # NEW
 'trad_article_inexistant' => 'n&uacute;m&#603;l&oacute; &#598;&eacute; s&#596;gb&egrave; &#598;&oacute; w&eacute;pk&aacute; &eacute; l&#596; &aacute;.',
 'trad_article_traduction' => 'w&agrave;l&#596; w&eacute;pk&aacute; &eacute; l&#596; t&#596;n l&#603; b&iacute;',
 'trad_deja_traduit' => 'w&eacute;pk&aacute; &eacute; l&#596; k&ograve; ny&iacute; t&igrave;nm&#603; w&eacute;kp&aacute; &#598;&eacute;v&oacute; t&#596;n.',
-'trad_delier' => 'y&eacute; m&aacute; c&aacute; w&eacute;pk&aacute; &eacute; l&#596; &#598;&oacute; t&igrave;nm&#603; &eacute; l&#596; w&uacute; &oacute;',
+'trad_delier' => 'y&eacute; m&aacute; c&aacute; w&eacute;pk&aacute; &eacute; l&#596; &#598;&oacute; t&igrave;nm&#603; &eacute; l&#596; w&uacute; &oacute;', # MODIF
 'trad_lier' => 'k&ograve; ny&iacute; t&igrave;nm&#603; w&eacute;kp&aacute; &#598;&eacute;v&oacute; t&#596;n&nbsp;:',
-'trad_new' => 'L&#603; wl&aacute;n t&igrave;nm&#603; w&eacute;kp&aacute; &#598;&eacute;v&oacute; t&#596;n',
+'trad_new' => 'L&#603; wl&aacute;n t&igrave;nm&#603; w&eacute;kp&aacute; &#598;&eacute;v&oacute; t&#596;n', # MODIF
 
 // U
 'upload_fichier_zip' => 'Fichier ZIP&ugrave;',

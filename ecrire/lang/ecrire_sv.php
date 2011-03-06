@@ -196,7 +196,7 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'forum_info_original' => 'original',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -320,7 +320,7 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'idag:',
@@ -441,6 +441,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # MODIF
 	dans l\'espace public du site (forums sur abonnement).', # NEW
 'info_generation_miniatures_images' => 'Skapande av tumnagelbilder.',
 'info_gerer_trad' => 'Aktivera &ouml;vers&auml;ttningsl&auml;nkar?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Viktig grupp',
 'info_hebergeur_desactiver_envoi_email' => 'Vissa webhotell avaktiverar automatisk mejl
 p&aring; deras servrar. Om s&aring; &auml;r fallet kan f&ouml;ljande
@@ -506,6 +507,7 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_multi_cet_article' => 'Den h&auml;r artikelns spr&aring;k:',
 'info_multi_langues_choisies' => 'Var v&auml;nlig, v&auml;lj tillg&auml;ngliga spr&aring;k f&ouml;r redakt&ouml;rerna bland spr&aring;ken nedan.
   Spr&aring;k som redan anv&auml;nds p&aring; din sajt (h&ouml;gst upp p&aring; listan) kan inte avaktiveras.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Aktivera spr&aring;kmenyn f&ouml;r avdelningar?',
 'info_multi_secteurs' => '... bara f&ouml;r avdelningarna i roten?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -716,6 +718,7 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_tout_site6' => '<b>OBS:</b> bara orginalartiklarna visas.
 &Ouml;vers&auml;ttningarna &auml;r l&auml;nkade till orginalet
 med en f&auml;rg som visar deras status:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Gemensamt arbete p&aring; artiklar',
 'info_un_article' => 'en artikel,',
 'info_un_mot' => 'Ett nyckelord &aring;t g&aring;ngen',
@@ -1313,9 +1316,9 @@ you can perform searches on sites and
 'trad_article_inexistant' => 'Det finns ingen artikel med det h&auml;r numret',
 'trad_article_traduction' => 'Alla versioner av den h&auml;r artikeln:',
 'trad_deja_traduit' => 'Den h&auml;r artikeln &auml;r i sig en &ouml;vers&auml;ttning av den nuvarande artikeln.', # MODIF
-'trad_delier' => 'Sluta l&auml;nka den h&auml;r artikeln till dess &ouml;vers&auml;ttningar',
+'trad_delier' => 'Sluta l&auml;nka den h&auml;r artikeln till dess &ouml;vers&auml;ttningar', # MODIF
 'trad_lier' => 'Den h&auml;r artikeln &auml;r en &ouml;vers&auml;ttning av artikel nummer:',
-'trad_new' => 'Skriv en ny &ouml;vers&auml;ttning av den h&auml;r artikeln',
+'trad_new' => 'Skriv en ny &ouml;vers&auml;ttning av den h&auml;r artikeln', # MODIF
 
 // U
 'upload_fichier_zip' => 'ZIP fil',

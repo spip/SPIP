@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'orixinal',
 
 // H
-'htaccess_a_simuler' => 'Aviso: a configuraci&oacute;n do seu servidor HTTP non ten conta dos ficheiros @htaccess@. Para poder asegurar unha boa seguridade, c&oacute;mpre que vostede modifique a configuraci&oacute;n neste aspecto, ou ben que as constantes @constantes@ (definibles no ficheiro mes_options.php) te&ntilde;an como valor  cartafoles f&oacute;ra de @document_root@.',
+'htaccess_a_simuler' => 'Aviso: a configuraci&oacute;n do seu servidor HTTP non ten conta dos ficheiros @htaccess@. Para poder asegurar unha boa seguridade, c&oacute;mpre que vostede modifique a configuraci&oacute;n neste aspecto, ou ben que as constantes @constantes@ (definibles no ficheiro mes_options.php) te&ntilde;an como valor  cartafoles f&oacute;ra de @document_root@.', # MODIF
 'htaccess_inoperant' => 'o htaccess non funciona',
 
 // I
@@ -325,7 +325,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Ningunha breve',
 'info_aucun_message' => 'Ningunha mensaxe',
 'info_aucun_mot_cle' => 'Ningunha palabra-clave',
-'info_aucun_rubrique' => 'Ningunha secci&oacute;n',
+'info_aucun_rubrique' => 'Ningunha secci&oacute;n', # MODIF
 'info_aucun_site' => 'Ning&uacute;n sitio',
 'info_aucun_visiteur' => 'Ning&uacute;n visitante',
 'info_aujourdhui' => 'hoxe:',
@@ -445,6 +445,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   no espazo p&uacute;blico do web (foros con rexistro).',
 'info_generation_miniatures_images' => 'Creaci&oacute;n de miniaturas das imaxes',
 'info_gerer_trad' => 'Crear as ligaz&oacute;ns de traduci&oacute;n ?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Grupo importante',
 'info_hebergeur_desactiver_envoi_email' => 'Alg&uacute;ns aloxadores desactivan o env&iacute;o autom&aacute;tico de
   correos-e. dende os seus servidores. Nese caso, as seguintes funcionalidades do
@@ -510,6 +511,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_multi_cet_article' => 'Lingua deste artigo&nbsp;:',
 'info_multi_langues_choisies' => 'Quere seleccionar despois as linguas dispo&ntilde;ibles dos redactores de seu web.
   As linguas xa utilizadas no seu web (fixadas ao principio) non poden ser desactivadas.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Activar o men&uacute; de lingua nas secci&oacute;ns&nbsp;?',
 'info_multi_secteurs' => '... soamente para as secci&oacute;ns situadas na ra&iacute;z&nbsp;?',
 'info_nb_articles' => '@nb@ artigos',
@@ -719,6 +721,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_tout_site6' => '<b>Atenci&oacute;n&nbsp;:</b> s&oacute; os artigos orixinais son amosados.
 As traduci&oacute;ns son asociadas ao orixinal,
 cunha cor que indica o seu estado&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Traballo de colaboraci&oacute;n nos artigos',
 'info_un_article' => 'un artigo,',
 'info_un_mot' => 'Unha palabra a cada vez',
@@ -1309,9 +1312,9 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
 'trad_article_inexistant' => 'Non hai artigo que leve este n&uacute;mero.',
 'trad_article_traduction' => 'Todas as versi&oacute;ns deste artigo&nbsp;:',
 'trad_deja_traduit' => 'Erro: &eacute; imposible religar este artigo co n&uacute;mero solicitado.',
-'trad_delier' => 'Non ligar xa este artigo a estas traduci&oacute;ns',
+'trad_delier' => 'Non ligar xa este artigo a estas traduci&oacute;ns', # MODIF
 'trad_lier' => 'Este artigo &eacute; unha traduci&oacute;n do artigo n&uacute;mero&nbsp;:',
-'trad_new' => 'Escribir unha nova traduci&oacute;n deste artigo',
+'trad_new' => 'Escribir unha nova traduci&oacute;n deste artigo', # MODIF
 
 // U
 'upload_fichier_zip' => 'Arquivo ZIP',

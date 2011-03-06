@@ -195,7 +195,7 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'forum_info_original' => 'original', # NEW
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -315,7 +315,7 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'h&ocirc;m nay:',
@@ -424,6 +424,7 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'info_gauche_visiteurs_enregistres' => 'Danh s&aacute;ch nh&#7919;ng ng&#432;&#7901;i kh&aacute;ch ghi danh trong v&ugrave;ng c&ocirc;ng c&#7897;ng c&#7911;a trang web (theo di&#7877;n &#273;&agrave;n)',
 'info_generation_miniatures_images' => 'H&igrave;nh m&#7851;u xem tr&#432;&#7899;c (thumbnail)',
 'info_gerer_trad' => 'Qu&#7843;n tr&#7883; ph&#7847;n n&#7889;i d&#7883;ch thu&#7853;t?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Nh&oacute;m quan tr&#7885;ng',
 'info_hebergeur_desactiver_envoi_email' => 'M&#7897;t s&#7889; m&aacute;y ch&#7911; kh&ocirc;ng cho ph&eacute;p g&#7917;i email t&#7921; &#273;&#7897;ng t&#7915; server. Trong tr&#432;&#7901;ng h&#7907;p n&agrave;y, nh&#7919;ng &#273;&#7863;c &#273;i&#7875;m sau &#273;&acirc;y c&#7911;a SPIP kh&ocirc;ng th&#7875; thi&#7871;t l&#7853;p &#273;&#432;&#7907;c.',
 'info_hier' => 'h&#244;m qua: ',
@@ -483,6 +484,7 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'info_multi_cet_article' => 'B&agrave;i ti&#7871;ng:',
 'info_multi_langues_choisies' => 'Xin ch&#7885;n ng&ocirc;n ng&#7919; c&oacute; s&#7861;n cho c&aacute;c ch&#7911; b&uacute;t.
   Ng&ocirc;n ng&#7919; &#273;&atilde; d&ugrave;ng cho trang web th&igrave; kh&ocirc;ng t&#7855;t &#273;&#432;&#7907;c.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Cho ph&eacute;p d&#7909;ng nhi&#7873;u th&#7913; ti&#7871;ng trong nh&#7919;ng &#273;&#7873; m&#7909;c&nbsp;?',
 'info_multi_secteurs' => '... ch&#7881; d&agrave;nh cho c&aacute;c &#273;&#7873; m&#7909;c &#7903; g&#7889;c trang web ?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -680,6 +682,7 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'info_tout_site6' => '<b>Ghi ch&uacute;:&nbsp;:</b> ch&#7881; c&oacute; b&agrave;i g&#7889;c m&#7899;i hi&#7879;n ra trong trang n&agrave;y.
 B&agrave;i d&#7883;ch s&#7869; &#273;&#432;&#7907;c li&ecirc;n &#273;&#7899;i v&#7899;i b&agrave;i g&#7889;c,
 v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugrave;y theo t&igrave;nh tr&#7841;ng b&agrave;i v&#7903;&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'S&#7917;a &#273;&#7893;i/So&#7841;n b&agrave;i chung v&#7899;i nhau',
 'info_un_article' => 'm&#7897;t b&#224;i, ',
 'info_un_mot' => 'M&#7895;i l&#7847;n m&#7897;t t&#7915; then ch&#7889;t th&#244;i',
@@ -1205,9 +1208,9 @@ B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc
 'trad_article_inexistant' => 'Kh&ocirc;ng c&oacute; b&agrave;i n&agrave;o v&#7899;i s&#7889; n&agrave;y',
 'trad_article_traduction' => 'T&#7845;t c&#7843; &#7845;n b&#7843;n c&#7911;a b&agrave;i n&agrave;y:',
 'trad_deja_traduit' => 'B&agrave;i n&agrave;y l&agrave; b&#7843;n d&#7883;ch c&#7911;a b&agrave;i hi&#7879;n th&#7901;i',
-'trad_delier' => '&#272;&#7915;ng n&#7889;i b&agrave;i n&agrave;y qua b&#7843;n d&#7883;ch',
+'trad_delier' => '&#272;&#7915;ng n&#7889;i b&agrave;i n&agrave;y qua b&#7843;n d&#7883;ch', # MODIF
 'trad_lier' => 'B&agrave;i n&agrave;y l&agrave; b&#7843;n d&#7883;ch c&#7911;a b&agrave;i s&#7889;',
-'trad_new' => 'D&#7883;ch b&agrave;i n&agrave;y',
+'trad_new' => 'D&#7883;ch b&agrave;i n&agrave;y', # MODIF
 
 // U
 'upload_fichier_zip' => 'H&#7891; s&#417; ZIP',

@@ -194,7 +194,7 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'forum_info_original' => 'original',
 
 // H
-'htaccess_a_simuler' => 'Aviso: a configura&ccedil;&atilde;o do seu servidor HTTP n&atilde;o leva em conta os arquivos @htaccess@. Para poder garantir um bom n&iacute;vel de seguran&ccedil;a, &eacute; preciso que voc&ecirc; altere esta configura&ccedil;&atilde;o, ou que as constantes @constantes@ (defin&iacute;veis no arquivo mes_options.php) tenham como valor os diret&oacute;rios abaixo de @document_root@.',
+'htaccess_a_simuler' => 'Aviso: a configura&ccedil;&atilde;o do seu servidor HTTP n&atilde;o leva em conta os arquivos @htaccess@. Para poder garantir um bom n&iacute;vel de seguran&ccedil;a, &eacute; preciso que voc&ecirc; altere esta configura&ccedil;&atilde;o, ou que as constantes @constantes@ (defin&iacute;veis no arquivo mes_options.php) tenham como valor os diret&oacute;rios abaixo de @document_root@.', # MODIF
 'htaccess_inoperant' => 'htaccess inoperante',
 
 // I
@@ -314,7 +314,7 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'info_aucun_breve' => 'Nenhuma nota',
 'info_aucun_message' => 'Nenhuma mensagem',
 'info_aucun_mot_cle' => 'Nenhuma palavra-chave',
-'info_aucun_rubrique' => 'Nenhuma se&ccedil;&atilde;o',
+'info_aucun_rubrique' => 'Nenhuma se&ccedil;&atilde;o', # MODIF
 'info_aucun_site' => 'Nenhum site',
 'info_aucun_visiteur' => 'Nenhum visitante',
 'info_aujourdhui' => 'Hoje:',
@@ -424,6 +424,7 @@ os autores exclu&iacute;dos por uma lixeira.',
 'info_gauche_visiteurs_enregistres' => 'Voc&ecirc; encontrar&aacute; aqui os visitantes registrados na &aacute;rea p&uacute;blica do site (f&oacute;runs por assinatura).',
 'info_generation_miniatures_images' => 'Gera&ccedil;&atilde;o de miniaturas das imagens',
 'info_gerer_trad' => 'Gerenciar os links de tradu&ccedil;&atilde;o?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Grupo importante',
 'info_hebergeur_desactiver_envoi_email' => 'Alguns servi&ccedil;os de hospedagem desativam o envio autom&aacute;tico de e-mails a partir dos seus servidores. Neste caso, as funcionalidades a seguir n&atilde;o funcionar&atilde;o.',
 'info_hier' => 'ontem:',
@@ -483,6 +484,7 @@ os autores exclu&iacute;dos por uma lixeira.',
 'info_multi_cet_article' => 'Idioma desta mat&eacute;ria:',
 'info_multi_langues_choisies' => 'Por favor, selecione a seguir os idiomas &agrave; disposi&ccedil;&atilde;o dos redatores do seu site.
 Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser desativados.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Ativar o menu de idiomas nas se&ccedil;&otilde;es?',
 'info_multi_secteurs' => '... apenas para as se&ccedil;&otilde;es situadas na raiz?',
 'info_nb_articles' => '@nb@ mat&eacute;rias',
@@ -679,6 +681,7 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_tout_site5' => 'Mat&eacute;ria original.',
 'info_tout_site6' => '<b>Aten&ccedil;&atilde;o:</b> apenas as mat&eacute;rias originais est&atilde;o exibidas.
 As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r que indica o seu status:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Trabalho colaborativo nas mat&eacute;rias',
 'info_un_article' => 'uma mat&eacute;ria,',
 'info_un_mot' => 'Um palavra-chave de cada v&ecirc;z',
@@ -1194,9 +1197,9 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 'trad_article_inexistant' => 'N&atilde;o h&aacute; nenhuma mat&eacute;ria com este n&uacute;mero.',
 'trad_article_traduction' => 'Todas as vers&otilde;es desta mat&eacute;ria:',
 'trad_deja_traduit' => 'Erro: &eacute; imposs&iacute;vel ligar esta mat&eacute;ria ao n&uacute;mero indicado.',
-'trad_delier' => 'Desvincular esta mat&eacute;ria de suas tradu&ccedil;&otilde;es',
+'trad_delier' => 'Desvincular esta mat&eacute;ria de suas tradu&ccedil;&otilde;es', # MODIF
 'trad_lier' => 'Esta mat&eacute;ria &eacute; uma tradu&ccedil;&atilde;o da mat&eacute;ria n&uacute;mero:',
-'trad_new' => 'Escrever uma nova tradu&ccedil;&atilde;o para esta mat&eacute;ria',
+'trad_new' => 'Escrever uma nova tradu&ccedil;&atilde;o para esta mat&eacute;ria', # MODIF
 
 // U
 'upload_fichier_zip' => 'Arquivo ZIP',

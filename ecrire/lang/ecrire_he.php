@@ -197,7 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => '&#1502;&#1511;&#1493;&#1512;&#1497;',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -322,7 +322,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => ':&#1492;&#1497;&#1493;&#1501;',
@@ -444,6 +444,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # MODIF
 	dans l\'espace public du site (forums sur abonnement).', # NEW
 'info_generation_miniatures_images' => '&#1497;&#1493;&#1510;&#1512; &#1514;&#1502;&#1493;&#1504;&#1493;&#1514; &#1502;&#1502;&#1493;&#1494;&#1506;&#1512;&#1493;&#1514;',
 'info_gerer_trad' => '?&#1502;&#1504;&#1492;&#1500; &#1511;&#1497;&#1513;&#1493;&#1512;&#1497; &#1514;&#1512;&#1490;&#1493;&#1501;',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => '&#1511;&#1489;&#1493;&#1510;&#1492; &#1495;&#1513;&#1493;&#1489;&#1492;',
 'info_hebergeur_desactiver_envoi_email' => 'Certains h&eacute;bergeurs d&eacute;sactivent l\'envoi automatique de
 		mails depuis leurs serveurs. Dans ce cas, les fonctionnalit&eacute;s suivantes
@@ -509,6 +510,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # MODIF
 'info_multi_cet_article' => ':&#1513;&#1508;&#1514; &#1492;&#1502;&#1488;&#1502;&#1512; &#1492;&#1494;&#1492;',
 'info_multi_langues_choisies' => 'Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
 		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.', # NEW
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => '&#1488;&#1508;&#1513;&#1512; &#1488;&#1514; &#1514;&#1508;&#1512;&#1497;&#1496; &#1492;&#1513;&#1508;&#1493;&#1514; &#1489;&#1502;&#1491;&#1493;&#1512;&#1497;&#1501;',
 'info_multi_secteurs' => '...&#1512;&#1511; &#1500;&#1502;&#1491;&#1493;&#1512;&#1497;&#1501; &#1492;&#1504;&#1502;&#1510;&#1488;&#1497;&#1501; &#1489;&#1512;&#1488;&#1513;&#1497;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -719,6 +721,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # MODIF
 'info_tout_site6' => '<b>Attention&nbsp;:</b> seuls les articles originaux sont affich&eacute;s.
 Les traductions sont associ&eacute;es &agrave; l\'original,
 dans une couleur qui indique leur &eacute;tat&nbsp;:', # NEW
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Travail collaboratif sur les articles', # NEW
 'info_un_article' => '&#1508;&#1512;&#1497;&#1496;,',
 'info_un_mot' => 'Un seul mot &agrave; la fois', # NEW
@@ -1318,9 +1321,9 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'trad_article_inexistant' => 'Il n\'y a pas d\'article portant ce num&eacute;ro.', # NEW
 'trad_article_traduction' => 'Toutes les versions de cet article&nbsp;:', # NEW
 'trad_deja_traduit' => 'Erreur : impossible de relier cet article au num&eacute;ro demand&eacute;. ', # NEW
-'trad_delier' => 'Ne plus lier cet article &agrave; ces traductions', # NEW
+'trad_delier' => 'Ne plus lier cet article &agrave; ces traductions', # MODIF
 'trad_lier' => 'Cet article est une traduction de l\'article num&eacute;ro&nbsp;:', # NEW
-'trad_new' => '&Eacute;crire une nouvelle traduction de cet article', # NEW
+'trad_new' => '&Eacute;crire une nouvelle traduction de cet article', # MODIF
 
 // U
 'upload_fichier_zip' => '&#1511;&#1493;&#1489;&#1509; ZIP',

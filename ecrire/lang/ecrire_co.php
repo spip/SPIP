@@ -202,7 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'uriginale',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -331,7 +331,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'oghje&nbsp;: ',
@@ -463,6 +463,7 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 'info_gauche_visiteurs_enregistres' => 'Truverete qu&igrave; i visitori arregistrati in u spaziu p&ugrave;bblicu di u situ (foru p&egrave; l\'abbunati).',
 'info_generation_miniatures_images' => 'Creazione di figurette da l\'im&agrave;gini',
 'info_gerer_trad' => 'Gestisce e lee di traduzzione?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Gruppu impurtante',
 'info_hebergeur_desactiver_envoi_email' => 'Certi &ograve;spiti disattiveghjanu l\'inviu autum&agrave;ticu d\'email
 	da i so servori. In stu casu, e seguenti funziunalit&agrave; di SPIP &ugrave;n viaghjeranu pi&ugrave;.',
@@ -527,6 +528,7 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 'info_multi_cet_article' => 'Lingua di st\'art&igrave;culu&nbsp;:',
 'info_multi_langues_choisies' => 'Sceglite puru avanti e lingue disposte &agrave; i scrittori di u situ.
 		E lingue digi&agrave; aduprate in u situ (venenu e prime) &ugrave;n ponu esse disattivate.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Attiv&agrave; u men&ugrave; di lingua p&egrave; e r&ugrave;bbriche&nbsp;?',
 'info_multi_secteurs' => '... solu per e r&ugrave;bbriche cullucate &agrave; a {r&agrave;dica} di u situ&nbsp;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -740,6 +742,7 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 'info_tout_site5' => 'Art&igrave;culu uriginale.',
 'info_tout_site6' => '<b>Attenti&nbsp;:</b> si ponu vede solu l\'art&igrave;culi uriginali.
 		E traduzzioni s&ograve; assuciate &agrave; l\'uriginale, &egrave; un culore indetta u so statu&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Travagliu di messa in cumunu p&egrave; l\'art&igrave;culi',
 'info_un_article' => 'un art&igrave;culu, ',
 'info_un_mot' => 'Una parlla sola &agrave; a volta',
@@ -1313,9 +1316,9 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 'trad_article_inexistant' => '&Ugrave;n esiste art&igrave;culu c&ugrave; stu n&ugrave;meru.',
 'trad_article_traduction' => 'Tutte e versioni di st\'art&igrave;culu&nbsp;:',
 'trad_deja_traduit' => 'Errore&nbsp;: &Ugrave;n h&egrave; micca puss&igrave;bule d\'alle&agrave; st\'art&igrave;culu &agrave; u n&ugrave;meru dumandatu.',
-'trad_delier' => '&Ugrave;n alle&agrave; pi&ugrave; st\'art&igrave;culu &agrave; e so traduzzioni',
+'trad_delier' => '&Ugrave;n alle&agrave; pi&ugrave; st\'art&igrave;culu &agrave; e so traduzzioni', # MODIF
 'trad_lier' => 'St\'art&igrave;culu h&egrave; una traduzzione di l\'art&igrave;culu n&ugrave;meru&nbsp;:',
-'trad_new' => 'Scrive una nova traduzzione di l\'art&igrave;culu',
+'trad_new' => 'Scrive una nova traduzzione di l\'art&igrave;culu', # MODIF
 
 // U
 'upload_fichier_zip' => 'Schedariu ZIP',

@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'original', # NEW
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -323,7 +323,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'i dag:',
@@ -434,6 +434,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_gauche_visiteurs_enregistres' => 'Her finder du de bes&oslash;gende, der er tilmeldt til webstedets offentlige afsnit (fora med tilmelding).',
 'info_generation_miniatures_images' => 'Dannelse af piktogrammer',
 'info_gerer_trad' => 'Danne link til overs&aelig;ttelse?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'vigtig gruppe',
 'info_hebergeur_desactiver_envoi_email' => 'Nogle webhoteller tillader ikke automatisk udsendelse af e-mails. I s&aring; fald kan f&oslash;lgende funktioner i SPIP ikke benyttes.',
 'info_hier' => 'i g&aring;r:',
@@ -494,6 +495,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_multi_langues_choisies' => 'V&aelig;lg de sprog der skal v&aelig;re til r&aring;dighed for redakt&oslash;rer p&aring; webstedet.
   Sprog der allerede er i brug p&aring; webstedet (de &oslash;verste p&aring; listen) kan ikke frav&aelig;lges.
  ',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Muligg&oslash;re sprogvalg til afsnit?',
 'info_multi_secteurs' => 'Kun for afsnit placeret i roden&nbsp;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -698,6 +700,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_tout_site6' => '<b>Advarsel:</b> kun de oprindelige artikler vises.
 Overs&aelig;ttelserne er tilknyttet den oprindelige artikel 
 i en farve, der angiver deres status:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Samarbejde om artikler',
 'info_un_article' => 'en artikel,',
 'info_un_mot' => 'Et n&oslash;gleord ad gangen',
@@ -1267,9 +1270,9 @@ demande plus de puissance au serveur.', # NEW
 'trad_article_inexistant' => 'Der findes ingen artikel med dette nummer.',
 'trad_article_traduction' => 'Alle udgaver af denne artikel&nbsp;:',
 'trad_deja_traduit' => 'Denne artikel er allerede en overs&aelig;ttelse af den aktuelle artikel.',
-'trad_delier' => 'Afbryd forbindelsen mellem denne artikel og overs&aelig;ttelserne',
+'trad_delier' => 'Afbryd forbindelsen mellem denne artikel og overs&aelig;ttelserne', # MODIF
 'trad_lier' => 'Denne artikel er en overs&aelig;ttelse af artikel nummer&nbsp;:',
-'trad_new' => 'Lav en ny overs&aelig;ttelse af denne artikel',
+'trad_new' => 'Lav en ny overs&aelig;ttelse af denne artikel', # MODIF
 
 // U
 'upload_fichier_zip' => 'Fichier ZIP', # NEW

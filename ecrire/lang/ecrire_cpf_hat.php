@@ -206,7 +206,7 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'forum_info_original' => 'original', # NEW
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -331,7 +331,7 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'jodiya,&nbsp;:',
@@ -448,6 +448,7 @@ Koul&egrave; imaj rannkont stati yo (komand&egrave; = v&egrave;r; redakt&egrave;
  nan espas piblik sit sa-a (fowom sou labonman).',
 'info_generation_miniatures_images' => 'Kreyasyon piti imaj la',
 'info_gerer_trad' => 'Eske f&ograve;k sit-la kap okipe tout lyen-tradiksyon ?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Gwoup enp&ograve;tan',
 'info_hebergeur_desactiver_envoi_email' => 'K&egrave;k leb&egrave;g&egrave; ki sispann posibilit&egrave; voye k&egrave;k lim&egrave;l otomatikman
   sou s&egrave;v&egrave; yo-a. Al&ograve;, tout fonksyonalit&eacute; swivan ke pa mache.
@@ -513,6 +514,7 @@ pa mache m&egrave;m.<br />{{F&ograve;k w instal ank&ograve;
 'info_multi_cet_article' => 'Lalanng atik la&nbsp;:',
 'info_multi_langues_choisies' => 'M&egrave;si chwazi lang redakt&egrave; kapab itilize
   genyen inposib kraze lang sa-yo ki deja itilize sou sit-la (yo afiche premy&eacute;).',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Eske gen bezwen m&egrave;t meni lalanng sou ribrik yo &nbsp;?',
 'info_multi_secteurs' => '... s&egrave;lman sou ribrik andan rasin sit la&nbsp;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -723,6 +725,7 @@ Si wi ka aksepte, vizit&eacute; yo ke enskri azot depi
 'info_tout_site6' => '<b>Atansyon&nbsp;:</b> atik lorijin se afiche s&egrave;lman.
 Tout twadiksyon se jwen ak latik lorijin,
 nan yon koul&egrave; ki bay lestati ali&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Soutni ansamn pour atik yo',
 'info_un_article' => 'yon atik,',
 'info_un_mot' => 'Yon s&egrave;l mo nan m&egrave;m tan',
@@ -1317,9 +1320,9 @@ ou nan d&eacute;kripsyon atik sa-yo
 'trad_article_inexistant' => 'Okenn atik gen pa nimewo-a.',
 'trad_article_traduction' => 'Tout versyon pou atik la&nbsp;:',
 'trad_deja_traduit' => 'Atik sa a se deja tradiksyon pou prezan atik la.', # MODIF
-'trad_delier' => 'Retire lyen ansanm atik la ak tout tradidksyon',
+'trad_delier' => 'Retire lyen ansanm atik la ak tout tradidksyon', # MODIF
 'trad_lier' => 'Atik la se tradiksyon atik nimewo&nbsp;:',
-'trad_new' => 'Ekri tradiksyon ank&ograve; pou atik la',
+'trad_new' => 'Ekri tradiksyon ank&ograve; pou atik la', # MODIF
 
 // U
 'upload_fichier_zip' => 'Fichye ZIP',

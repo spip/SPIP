@@ -193,7 +193,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'original',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # MODIF
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -315,7 +315,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'ast&#259;zi&nbsp;:',
@@ -428,6 +428,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 &icirc;n spa&#355;iul public al site-ului (forum-urile pe baz&#259; de abonament).',
 'info_generation_miniatures_images' => 'Generarea de miniaturi ale imaginilor',
 'info_gerer_trad' => 'Gestiona&#355;i leg&#259;turile de traducere ?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Grup important',
 'info_hebergeur_desactiver_envoi_email' => 'Anumi&#355;i furnizori de servicii de hosting dezactiveaz&#259; trimiterea automat&#259; de
   email-uri de pe server-ele lor. &Icirc;n acest caz, func&#355;iile urm&#259;toare
@@ -493,6 +494,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_multi_cet_article' => 'Limba acestui articol&nbsp;:',
 'info_multi_langues_choisies' => 'V&#259; rug&#259;m s&#259; selec&#355;iona&#355;i aici limbile aflate la dispozi&#355;ia redactorilor site-ului dumneavoastr&#259;.
   Limbile deja folosite &icirc;n cadrul site-ului (afi&#351;ate primele) nu pot fi dezactivate.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Activa&#355;i meniul de limb&#259; &icirc;n cadrul rubricilor&nbsp;?',
 'info_multi_secteurs' => '... doar pentru rubricile situate sub r&#259;d&#259;cin&#259;&nbsp;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -703,6 +705,7 @@ Imaginile cu dimensiuni mai mari nu vor fi reduse.',
 'info_tout_site6' => '<b>Aten&#355;ie&nbsp;:</b> doar articolele originale sunt afi&#351;ate.
 Traducerile sunt asociate originalului,
 cu o culoare care le indic&#259; starea&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Lucru colaborativ cu articolele',
 'info_un_article' => 'un articol,',
 'info_un_mot' => 'Un singur cuv&acirc;nt-cheie odat&#259;',
@@ -1267,9 +1270,9 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'trad_article_inexistant' => 'Nu exist&#259; un articol care s&#259; aib&#259; acest numar.',
 'trad_article_traduction' => 'Toate versiunile acestui articol&nbsp;:',
 'trad_deja_traduit' => 'Eroare: nu se poate lega acest articol la num&#259;rul cerut.',
-'trad_delier' => 'Nu mai lega&#355;i articolul de aceste traduceri',
+'trad_delier' => 'Nu mai lega&#355;i articolul de aceste traduceri', # MODIF
 'trad_lier' => 'Acest articol este o traducere a articolului cu num&#259;rul&nbsp;:',
-'trad_new' => 'Scrie&#355;i o nou&#259; traducere a acestui articol',
+'trad_new' => 'Scrie&#355;i o nou&#259; traducere a acestui articol', # MODIF
 
 // U
 'upload_fichier_zip' => 'Fi&#351;ier ZIP',

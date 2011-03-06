@@ -199,7 +199,7 @@ forvi&#349;i ilin poste).',
 'forum_info_original' => 'originala',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # MODIF
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -322,7 +322,7 @@ forvi&#349;i ilin poste).',
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'hodia&#365;&nbsp;: ',
@@ -439,6 +439,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
  en la publika spaco de la retejo (forumoj la&#365; abono).',
 'info_generation_miniatures_images' => 'Bildoj-miniaturigo',
 'info_gerer_trad' => '&#264;u mastrumi la traduk-ligilojn?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Grava grupo',
 'info_hebergeur_desactiver_envoi_email' => 'Iuj retgastigantoj malaktivigas la a&#365;tomatan retleteroj-sendadon ekde ties serviloj. Tiukaze, la jenaj SPIP-funkcioj ne fonkcios.',
 'info_hier' => 'hiera&#365;&nbsp;:',
@@ -499,6 +500,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_multi_cet_article' => 'Lingvo de tiu &#265;i artikolo&nbsp;:',
 'info_multi_langues_choisies' => 'Bonvolu elekti &#265;i-sube la lingvojn, kiujn vi volas disponigi al la redaktantoj de via retejo.
   Vi ne povas malaktivigi la lingvojn jam uzatajn (unue afi&#349;itajn) &#265;e via retejo.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => '&#264;u aktivigi la lingvomenuon en la rubrikoj&nbsp;?',
 'info_multi_secteurs' => '... &#265;u nur por la rubrikoj situantaj &#265;e la radiko&nbsp;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -705,6 +707,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_tout_site5' => 'Originala artikolo.',
 'info_tout_site6' => '<b>Atentu&nbsp;:</b> nur la originalaj artikoloj estas afi&#349;itaj.
 La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Kunlaborado pri la artikoloj',
 'info_un_article' => 'unu artikolo,',
 'info_un_mot' => 'Po nur unu vorto samtempe',
@@ -1304,9 +1307,9 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'trad_article_inexistant' => 'Neniu artikolo kun tiu numero.',
 'trad_article_traduction' => '&#264;iuj versioj de tiu &#265;i artikolo&nbsp;:',
 'trad_deja_traduit' => 'Eraro: ne eblas ligi tiun artikolon al la petita numero.',
-'trad_delier' => 'Ne plu ligi tiun artikolon al ties tradukoj',
+'trad_delier' => 'Ne plu ligi tiun artikolon al ties tradukoj', # MODIF
 'trad_lier' => 'Tiu artikolo estas traduko de la artikolo numero&nbsp;:',
-'trad_new' => 'Skribi novan tradukon de tiu artikolo',
+'trad_new' => 'Skribi novan tradukon de tiu artikolo', # MODIF
 
 // U
 'upload_fichier_zip' => 'ZIP-Dosiero (densigita)',
