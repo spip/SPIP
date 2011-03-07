@@ -130,9 +130,11 @@ function base_trouver_table_dist($nom, $serveur=''){
 		$table = table_objet(preg_replace(',^id_,', '', reset(explode(',', $desc['key']["PRIMARY KEY"]))));
 		$desc['table']= $nom_sql;
 		$desc['connexion']= $serveur;
-		$desc['titre'] = isset($GLOBALS['table_titre'][$table])
-		? $GLOBALS['table_titre'][$table]
-		: (isset($desc['field']['titre']) ? 'titre' : '');
+		$desc['titre'] = isset($GLOBALS['table_titre'][$nom]) ?
+		  isset($GLOBALS['table_titre'][$nom]) 
+		  : (isset($GLOBALS['table_titre'][$table])
+		     ? $GLOBALS['table_titre'][$table]
+		     : (isset($desc['field']['titre']) ? 'titre' : ''));
 
 		$desc['date'] =
 		  isset($GLOBALS['table_date'][$table]) ? $GLOBALS['table_date'][$table] : '';
