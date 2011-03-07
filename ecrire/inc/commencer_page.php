@@ -211,18 +211,16 @@ function alertes_auteur($id_auteur) {
 			$alertes[] = $msg;
 	}
 
-	if (isset($GLOBALS['meta']['message_crash_plugins'])
-	AND autoriser('configurer', 'plugins', null, $id_auteur)) {
+	if (autoriser('configurer', 'plugins', null, $id_auteur)) {
 		include_spip('inc/plugin');
-		if ($msg = message_crash_plugins())
+		if ($list = message_crash_plugins()) {
+			$list = array('plugins' => join(', ', array_map('joli_repertoire', $list)));
+			$msg = _T('plugins_erreur', $list);
+			$url = generer_url_ecrire('admin_plugin');
+			$alertes[] = "<a href='$url'>$msg</a>";
+		}
+		if ($msg = plugin_donne_erreurs())
 			$alertes[] = $msg;
-	}
-
-
-	if (isset($GLOBALS['meta']['plugin_erreur_activation'])
-	AND autoriser('configurer', 'plugins', null, $id_auteur)) {
-		$alertes[] = $GLOBALS['meta']['plugin_erreur_activation'];
-		effacer_meta('plugin_erreur_activation'); // pas normal que ce soit ici
 	}
 
 	$alertes[] = avertissement_messagerie($id_auteur);

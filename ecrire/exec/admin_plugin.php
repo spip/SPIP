@@ -43,12 +43,7 @@ function exec_admin_plugin_dist($retour='') {
 function admin_plug_args($quoi, $erreur, $format)
 {
 	if (!$quoi) $quoi = 'actifs';
-	if ($erreur_activation = isset($GLOBALS['meta']['plugin_erreur_activation'])){
-		$erreur_activation = $GLOBALS['meta']['plugin_erreur_activation'];
-		// l'effacement reel de la meta se fera au moment de l'affichage
-		// mais on la vide pour ne pas l'afficher dans le bandeau haut
-		unset($GLOBALS['meta']['plugin_erreur_activation']);
-	}
+	$erreur_activation = plugin_donne_erreurs();
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 

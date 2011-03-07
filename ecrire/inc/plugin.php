@@ -216,15 +216,12 @@ function plugin_trier($infos, $liste_non_classee)
 
 function plugins_erreurs($liste_non_classee, $liste, $infos, $msg=array())
 {
-	static $erreurs = "";
-
-	include_spip('inc/lang');
-	utiliser_langue_visiteur();
+	static $erreurs = array();
 	foreach($liste_non_classee as $p=>$resume){
 		$dir_type = $resume['dir_type'];
 		$plug = $resume['dir'];
 		$k = $infos[$dir_type][$plug];
-		$plug = array('plugin' => constant($dir_type) . $plug);
+		$plug = constant($dir_type) . $plug;
 		if (!isset($msg[$p])) {
 		  if (!$msg[$p] = plugin_necessite($k['necessite'], $liste))
 		    $msg[$p] = plugin_necessite($k['utilise'], $liste);
@@ -232,10 +229,25 @@ function plugins_erreurs($liste_non_classee, $liste, $infos, $msg=array())
 		  foreach($msg[$p] as $c => $l)
 		    $msg[$p][$c] = plugin_controler_lib($l['nom'], $l['lien']);
 		}
-		$erreurs .= "<li>" . _T('plugin_impossible_activer', $plug)
-		  . "<ul><li>" . implode("</li><li>", $msg[$p]) . "</li></ul></li>";
+		$erreurs[$plug] = $msg[$p];
 	}
-	ecrire_meta('plugin_erreur_activation',	"<ul>$erreurs</ul>");
+	ecrire_meta('plugin_erreur_activation',	serialize($erreurs));
+}
+
+function plugin_donne_erreurs() {
+	if (!isset($GLOBALS['meta']['plugin_erreur_activation'])) return '';
+	$list = @unserialize($GLOBALS['meta']['plugin_erreur_activation']);
+	// Compat ancienne version
+	if (!$list)
+	  $list = $GLOBALS['meta']['plugin_erreur_activation'];
+	else {
+	  foreach($list as $plug => $msg)
+	    $list[$plug] = "<li>" . _T('plugin_impossible_activer', array('plugin' => $plug))
+		  . "<ul><li>" . implode("</li><li>", $msg) . "</li></ul></li>";
+	  $list ="<ul>" . join("\n", $list) . "</ul>";
+	}
+	effacer_meta('plugin_erreur_activation');
+	return $list;
 }
 
 function plugin_necessite($n, $liste) {
@@ -582,26 +594,18 @@ function verifie_include_plugins() {
 
 
 // http://doc.spip.org/@message_crash_plugins
-function message_crash_plugins() {
-	if (autoriser('configurer')
-	AND lire_fichier(_CACHE_PLUGINS_VERIF,$l)
-	AND $l = @unserialize($l)) {
-		$err = array();
-		foreach ($l as $fichier) {
-			if (!@is_readable($fichier)) {
-				spip_log("Verification plugin: echec sur $fichier !");
-				$err[] = $fichier;
-			}
-		}
+function message_crash_plugins()
+{
+	if (!lire_fichier(_CACHE_PLUGINS_VERIF,$l)
+	OR !is_array($l = @unserialize($l)))
+		return array();
 
-		if ($err) {
-			$err = array_map('joli_repertoire', array_unique($err));
-			return "<a href='".generer_url_ecrire('admin_plugin')."'>"
-				._T('plugins_erreur',
-					array('plugins' => join(', ', $err)))
-				.'</a>';
-		}
+	foreach ($l as $k => $fichier) {
+		if (!@is_readable($fichier)) {
+			spip_log("Verification plugin: echec sur $fichier !");
+		} else unset($l[$k]);
 	}
+	return $l;
 }
 
 function plugin_installes_meta()
