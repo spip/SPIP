@@ -131,7 +131,7 @@ function base_trouver_table_dist($nom, $serveur=''){
 		$desc['table']= $nom_sql;
 		$desc['connexion']= $serveur;
 		$desc['titre'] = isset($GLOBALS['table_titre'][$nom]) ?
-		  isset($GLOBALS['table_titre'][$nom]) 
+		  $GLOBALS['table_titre'][$nom] 
 		  : (isset($GLOBALS['table_titre'][$table])
 		     ? $GLOBALS['table_titre'][$table]
 		     : (isset($desc['field']['titre']) ? 'titre' : ''));
