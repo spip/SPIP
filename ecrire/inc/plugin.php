@@ -63,8 +63,8 @@ function liste_plugin_files($dir_plugins = null){
 		// supplementaires ; chemin calcule par rapport a _DIR_PLUGINS.
 		if (isset($dir_plugins_suppl)) {
 			foreach($dir_plugins_suppl as $suppl) {
-				foreach (preg_files($suppl, '/plugin[.]xml$') as $plugin) {
-					$plugin_files[$dir_plugins][] = (_DIR_RACINE ?'': '../') .dirname($plugin);
+				foreach (preg_files(_DIR_RACINE.$suppl, 'plugin[.]xml$') as $plugin) {
+					$plugin_files[$dir_plugins][] = (_DIR_RACINE? '':'../').dirname($plugin);
 				}
 			}
 		}
@@ -388,16 +388,18 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		if (is_array($infos)){
 			foreach($ordre as $p){
 				$dir_type = $plugin_valides[$p]['dir_type'];
-				$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
 				$plug = $plugin_valides[$p]['dir'];
-				if($dir_plugins_suppl && preg_match(',('.$dir_plugins_suppl.'),',$plug)){
-					$dir = "_DIR_RACINE.'".str_replace(_DIR_RACINE,'',$plug)."/'";
-				}else{
-					$dir = $dir_type.".'"
-						. str_replace(constant($dir_type), '', $plug)
-						."/'";
-				}
 				$info = $infos[$dir_type][$plug];
+				if($dir_plugins_suppl && preg_match(',('.$dir_plugins_suppl.'),',$plugin_valides[$p]['dir'])){
+					//$plugin_valides[$p]['dir_type'] = '_DIR_RACINE';
+					$dir_type = '_DIR_RACINE';
+					if(!test_espace_prive())
+						$plug = str_replace('../','',$plug);
+				}
+				$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
+				$dir = $dir_type.".'"
+					. str_replace(constant($dir_type), '', $plug)
+					."/'";
 				// definir le plugin, donc le path avant l'include du fichier options
 				// permet de faire des include_spip pour attraper un inc_ du plugin
 				if ($charge=='chemins'){
@@ -422,8 +424,11 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 						// on genere un if file_exists devant chaque include pour pouvoir garder le meme niveau d'erreur general
 						$file = trim($file);
 
-						if (strpos($plug, constant($dir_type)) === 0) {
+						if (strlen(constant($dir_type)) && (strpos($plug, constant($dir_type)) === 0)) {
 							$dir = str_replace("'".constant($dir_type), $root_dir_type.".'", "'$plug/'");
+						}
+						if($root_dir_type == '_ROOT_RACINE'){
+							$plug = str_replace('../','',$plug);
 						}
 						else
 							$dir = $root_dir_type.".'$plug/'";
