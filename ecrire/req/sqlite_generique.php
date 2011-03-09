@@ -1017,7 +1017,7 @@ function spip_sqlite_showtable($nom_table, $serveur='',$requeter=true){
 				// trim car 'Sqlite Manager' (plugin Firefox) utilise des guillemets
 				// lorsqu'on modifie une table avec cet outil.
 				// possible que d'autres fassent de meme.
-				$fields[ trim(strtolower($r[1]),'"') ] = $r[2]; 
+				$fields[ trim(strtolower($r[1]),'"') ] = $r[2];
 			}
 			// key inclues dans la requete
 			$keys = array();
@@ -1509,7 +1509,10 @@ function _sqlite_remplacements_definitions_table($query,$autoinc=false){
 	$remplace = array(
 		'/enum'.$enum.'/is' => 'VARCHAR',
 		'/binary/is' => '',
+		'/COLLATE \w+_bin/is' => '',
 		'/auto_increment/is' => '',
+		'/(timestamp .* )ON .*$/is' => '\\1',
+		'/character set \w+/is' => '',
 	);
 
 	// pour l'autoincrement, il faut des INTEGER NOT NULL PRIMARY KEY
@@ -1594,7 +1597,7 @@ function _sqlite_ajouter_champs_timestamp($table, $couples, $desc='', $serveur='
 			$f = charger_fonction('trouver_table', 'base');
 			$desc = $f($table, $serveur);
 			// si pas de description, on ne fait rien, ou on die() ?
-			if (!$desc) return $couples;
+			if (!$desc OR !$desc['field']) return $couples;
 		}
 		
 		// recherche des champs avec simplement 'TIMESTAMP'
