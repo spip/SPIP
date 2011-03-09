@@ -174,8 +174,11 @@ if (!class_exists('nanoSha2'))
 						$bytes = 1;
 						return $h;
 					}
-					else if ($h < 0xC2)
-						return false;
+					else if ($h < 0xC2){
+						// pas utf mais renvoyer quand meme ce qu'on a
+						$bytes = 1;
+						return $h;
+					}
 					else if ($h <= 0xDF && $index < $len - 1) {
 						$bytes = 2;
 						return ($h & 0x1F) <<  6 | (ord($c{$index + 1}) & 0x3F);
@@ -191,8 +194,11 @@ if (!class_exists('nanoSha2'))
 																		 | (ord($c{$index + 2}) & 0x3F) << 6
 																		 | (ord($c{$index + 3}) & 0x3F);
 					}
-					else
-						return false;
+					else {
+						// pas utf mais renvoyer quand meme ce qu'on a
+						$bytes = 1;
+						return $h;
+					}
 				}
 
 				function string2binint ($str,$npad=512) {
@@ -412,17 +418,13 @@ if (!function_exists('str_split'))
  * PHP Strings are limitd to (2^31)-1, so it is not worth it to
  * check for input strings > 2^64 as the FIPS180-2 defines.
  */
+function _nano_sha256($str, $ig_func = true) {
+    $obj = new nanoSha2((defined('_NANO_SHA2_UPPER')) ? true : false);
+    return $obj->hash($str, $ig_func);
+}
 // 2009-07-23: Added check for function as the Suhosin plugin adds this routine.
 if (!function_exists('sha256')) {
-    function sha256($str, $ig_func = true) {
-        $obj = new nanoSha2((defined('_NANO_SHA2_UPPER')) ? true : false);
-        return $obj->hash($str, $ig_func);
-    }
-} else {
-    function _nano_sha256($str, $ig_func = true) {
-        $obj = new nanoSha2((defined('_NANO_SHA2_UPPER')) ? true : false);
-        return $obj->hash($str, $ig_func);
-    }
+    function sha256($str, $ig_func = true) { return _nano_sha256($str, $ig_func); }
 }
 
 // support to give php4 the hash() routine which abstracts this code.
