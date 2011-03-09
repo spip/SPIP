@@ -24,13 +24,15 @@ function informer_auteur($bof)
 		unset($row['id_auteur']);
 	else {
 		// piocher les infos sur un autre login
-		$n = sql_countsel('spip_auteurs',"login<>''");
-		$n = (abs(crc32($login))%$n);
-		$row = auth_informer_login(sql_getfetsel('login','spip_auteurs',"login<>''",'','',"$n,1"));
-		if ($row AND is_array($row)){
-			unset($row['id_auteur']);
-			$row['login'] = $login;
+		if ($n = sql_countsel('spip_auteurs',"login<>''")){
+			$n = (abs(crc32($login))%$n);
+			$row = auth_informer_login(sql_getfetsel('login','spip_auteurs',"login<>''",'','',"$n,1"));
+			if ($row AND is_array($row)){
+				unset($row['id_auteur']);
+				$row['login'] = $login;
+			}
 		}
+		else $row = array();
 	}
 
 	return json_export($row);
