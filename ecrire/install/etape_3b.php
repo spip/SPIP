@@ -72,7 +72,7 @@ function install_etape_3b_dist()
 		$htpass = generer_htpass($pass);
 		$alea_actuel = creer_uniqid();
 		$alea_futur = creer_uniqid();
-		$shapass = sha256($alea_actuel.$pass);
+		$shapass = _nano_sha256($alea_actuel.$pass);
 		// prelablement, creer le champ webmestre si il n'existe pas (install neuve
 		// sur une vieille base
 		$t = sql_showtable("spip_auteurs", true);

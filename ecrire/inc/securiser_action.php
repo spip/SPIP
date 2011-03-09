@@ -113,7 +113,7 @@ function _action_auteur($action, $id_auteur, $pass, $alea) {
 			}
 		}
 		include_spip('auth/sha256.inc');
-		$sha[$id_auteur.$pass.$alea] = sha256($id_auteur.$pass.@$GLOBALS['meta'][$alea]);
+		$sha[$id_auteur.$pass.$alea] = _nano_sha256($id_auteur.$pass.@$GLOBALS['meta'][$alea]);
 	}
 	if (function_exists('sha1'))
 		return sha1($action.$sha[$id_auteur.$pass.$alea]);
@@ -154,7 +154,7 @@ function secret_du_site() {
 	  OR (strlen($GLOBALS['meta']['secret_du_site'])<64)) {
 		include_spip('inc/acces');
 		include_spip('auth/sha256.inc');
-		ecrire_meta('secret_du_site', sha256($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid()), 'non');
+		ecrire_meta('secret_du_site', _nano_sha256($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid()), 'non');
 		lire_metas(); // au cas ou ecrire_meta() ne fonctionne pas
 	}
 	return $GLOBALS['meta']['secret_du_site'];
