@@ -192,8 +192,17 @@ function spip_sqlite_alter($query, $serveur='',$requeter=true){
 		$cle = strtoupper($matches[1]);
 		$colonne_origine = $matches[2];
 		$colonne_destination = '';
+
 		$def = $matches[3];
-		$def = _sqlite_remplacements_definitions_table($def);
+
+		// eluder une eventuelle clause before|after|first inutilisable
+		$defr = rtrim(preg_replace('/(BEFORE|AFTER|FIRST)(.*)$/is','', $def));
+		// remplacer les definitions venant de mysql
+		$defr = _sqlite_remplacements_definitions_table($defr);
+
+		// reinjecter dans le do
+		$do = str_replace($def,$defr,$do);
+		$def = $defr;
 		
 		switch($cle){
 			// suppression d'un index
@@ -317,10 +326,6 @@ function spip_sqlite_alter($query, $serveur='',$requeter=true){
 					$do = "ADD".substr($do, 10);
 			case 'ADD':
 			default:
-				if (preg_match('/^(.*)(BEFORE|AFTER|FIRST)(.*)$/is', $do, $matches)) {
-					$do = $matches[1];
-				}
-				
 				if (_sqlite_is_version(3, '', $serveur)){
 					$requete = new sqlite_traiter_requete("$debut $do", $serveur);
 					if (!$requete->executer_requete()){
@@ -1525,6 +1530,8 @@ function _sqlite_remplacements_definitions_table($query,$autoinc=false){
 		'/auto_increment/is' => '',
 		'/(timestamp .* )ON .*$/is' => '\\1',
 		'/character set \w+/is' => '',
+		'/((big|small|medium|tiny)?int(eger)?)'.$num.'\s*unsigned/is' => '\\1 UNSIGNED',
+		'/(text\s+not\s+null)\s*$/is' => "\\1 DEFAULT ''",
 	);
 
 	// pour l'autoincrement, il faut des INTEGER NOT NULL PRIMARY KEY
