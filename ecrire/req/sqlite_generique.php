@@ -1513,6 +1513,7 @@ function _sqlite_remplacements_definitions_table($query,$autoinc=false){
 		'/auto_increment/is' => '',
 		'/(timestamp .* )ON .*$/is' => '\\1',
 		'/character set \w+/is' => '',
+		'/((big|small|medium|tiny)?int(eger)?)'.$num.'\s*unsigned/is' => '\\1 UNSIGNED',
 	);
 
 	// pour l'autoincrement, il faut des INTEGER NOT NULL PRIMARY KEY
