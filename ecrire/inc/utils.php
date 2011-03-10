@@ -963,9 +963,6 @@ function url_de_($http,$host,$request,$prof=0){
 
 
 function tester_url_ecrire($nom){
-	// la verification se base sur le filesystem
-	// il faut donc n'utiliser que des minuscules, par convention
-	$nom = strtolower($nom);
 	// tester si c'est une page en squelette
 	if (find_in_path('prive/exec/' . $nom . '.' . _EXTENSION_SQUELETTES))
 		return 'fond';
