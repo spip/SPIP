@@ -22,7 +22,7 @@
 	    <li class="editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
 				<label for="email"><:entree_adresse_email:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
-				]<input type='text' class='text[ (#GET{disable}|oui)disabled]' name='email' id='email' value="[(#ENV**{email})]" #GET{disable}/>
+				]<input type='text' class='text' name='email' id='email' value="[(#ENV**{email})]" />
 	    </li>
 	    <li class="editer_bio[ (#ENV**{erreurs}|table_valeur{bio}|oui)erreur]">
 				<label for="bio"><:entree_infos_perso:></label>[
@@ -118,3 +118,4 @@
 	]
 
 </div>
+[(#ENV**|unserialize|foreach)]
