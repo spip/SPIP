@@ -43,7 +43,7 @@
 		]
 		[(#AUTORISER{modifier,auteur,#ID_AUTEUR,'',#ARRAY{statut,'?'}}|oui)
 			<li class='editer_statut'>
-			#INCLURE{fond=formulaires/inc-instituer_auteur,statut=#ENV**{statut},id_auteur,webmestre}
+			#INCLURE{fond=formulaires/inc-instituer_auteur,statut=#ENV**{statut,#EVAL{_STATUT_AUTEUR_CREATION}},id_auteur,webmestre}
 		</li>]
 		[(#REM)
 				Site ouaib : nom et url
