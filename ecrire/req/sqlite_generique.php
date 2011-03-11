@@ -143,6 +143,8 @@ function spip_sqlite_query($query, $serveur = '', $requeter = true){
 function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 
 	$query = spip_sqlite_query("ALTER $query", $serveur, false);
+	// traduire la requete pour recuperer les bons noms de table
+	$query = spip_sqlite::traduire_requete($query, $serveur);
 
 	/* 
 		 * la il faut faire les transformations
