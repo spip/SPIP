@@ -424,7 +424,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 	$fonction_base_inserer = isset($options['fonction_base_inserer'])?$options['fonction_base_inserer']:'inserer_copie';
 	$desc_tables_dest = isset($options['desc_tables_dest'])?$options['desc_tables_dest']:array();
 	$racine_fonctions = (isset($options['racine_fonctions_dest'])?$options['racine_fonctions_dest']:'base');
-	$data_pool = (isset($options['data_pool'])?$options['data_pool']:1);
+	$data_pool = (isset($options['data_pool'])?$options['data_pool']:50);
 
 	spip_log( "Copier ".count($tables)." tables de '$serveur_source' vers '$serveur_dest'",'dump.'._LOG_INFO_IMPORTANTE);
 
@@ -556,10 +556,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
  * @return int/bool
  */
 function base_inserer_copie($table,$rows,$desc_dest,$serveur_dest){
-	$ins = 0;
-	foreach($rows as $row)
-		// si l'enregistrement est deja en base, ca fera un echec ou un doublon
-		$ins += (sql_insertq($table,$row,$desc_dest,$serveur_dest)?1:0);
-	return $ins;
+	// si l'enregistrement est deja en base, ca fera un echec ou un doublon
+	return sql_insertq_multi($table,$rows,$desc_dest,$serveur_dest);
 }
 ?>
