@@ -120,8 +120,7 @@ AND $l = @unserialize($l)) {
 	foreach ($l as $fichier) {
 		if (!@is_readable($fichier)) {
 			spip_log("Verification plugin: echec sur $fichier !");
-			include_spip('inc/plugin');
-			verifie_include_plugins();
+			ecrire_meta('message_crash_plugins', $fichier);
 			break; // sortir de la boucle, on a fait un verif
 		}
 	}

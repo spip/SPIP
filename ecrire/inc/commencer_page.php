@@ -213,9 +213,9 @@ function alertes_auteur($id_auteur) {
 
 	if (autoriser('configurer', 'plugins', null, $id_auteur)) {
 		include_spip('inc/plugin');
-		if ($list = message_crash_plugins()) {
-			$list = array('plugins' => join(', ', array_map('joli_repertoire', $list)));
-			$msg = _T('plugins_erreur', $list);
+		if (isset($GLOBALS['meta']['message_crash_plugins'])) {
+			$msg = joli_repertoire($GLOBALS['meta']['message_crash_plugins']);
+			$msg = _T('plugins_erreur', array('plugins' => $msg));
 			$url = generer_url_ecrire('admin_plugin');
 			$alertes[] = "<a href='$url'>$msg</a>";
 		}

@@ -571,42 +571,6 @@ function plugin_est_installe($plug_path){
 	return in_array($plug_path,$plugin_installes);
 }
 
-// http://doc.spip.org/@verifie_include_plugins
-function verifie_include_plugins() {
-	include_spip('inc/meta');
-	ecrire_meta('message_crash_plugins', 1);
-
-/*	if (_request('exec')!="admin_plugin"
-	AND $_SERVER['X-Requested-With'] != 'XMLHttpRequest'){
-		if (@is_readable(_DIR_PLUGINS)) {
-			include_spip('inc/headers');
-			redirige_url_ecrire("admin_plugin");
-		}
-		// plus de repertoire plugin existant, le menu n'existe plus
-		// on fait une mise a jour silencieuse
-		// generer les fichiers php precompiles
-		// de chargement des plugins et des pipelines
-		actualise_plugins_actifs();
-		spip_log("desactivation des plugins suite a suppression du repertoire");
-	}
-*/
-}
-
-
-// http://doc.spip.org/@message_crash_plugins
-function message_crash_plugins()
-{
-	if (!lire_fichier(_CACHE_PLUGINS_VERIF,$l)
-	OR !is_array($l = @unserialize($l)))
-		return array();
-
-	foreach ($l as $k => $fichier) {
-		if (!@is_readable($fichier)) {
-			spip_log("Verification plugin: echec sur $fichier !");
-		} else unset($l[$k]);
-	}
-	return $l;
-}
 
 function plugin_installes_meta()
 {
