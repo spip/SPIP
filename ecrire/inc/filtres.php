@@ -2615,4 +2615,18 @@ function info_objet($objet,$info){
 	$infos = lister_tables_objets_sql($table);
 	return (isset($infos[$info])?$infos[$info]:'');
 }
+
+/**
+ * Filtre pour afficher 'Aucun truc' ou '1 truc' ou 'N trucs'
+ * avec la bonne chaine de langue en fonction de l'objet utilise
+ * @param  $nb
+ * @param  $objet
+ * @return mixed|string
+ */
+function afficher_nb_objets($nb, $objet){
+	if (!$nb)
+		return _T(info_objet($objet,'info_aucun_objet'));
+	else
+		return _T(info_objet($objet,$nb==1?'info_1_objet':'info_nb_objets'),array('nb'=>$nb));
+}
 ?>
