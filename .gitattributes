@@ -631,6 +631,7 @@ prive/objets/liste/articles.html -text
 prive/objets/liste/auteurs.html -text
 prive/objets/liste/auteurs_associer.html -text
 prive/objets/liste/auteurs_associer_fonctions.php -text
+prive/objets/liste/auteurs_enligne.html -text
 prive/objets/liste/auteurs_fonctions.php -text
 prive/objets/liste/auteurs_lies.html -text
 prive/objets/liste/auteurs_lies_fonctions.php -text

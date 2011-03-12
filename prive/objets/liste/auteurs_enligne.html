@@ -1,0 +1,12 @@
+<B_enligne>
+<div class='en_lignes'>
+<b><:info_en_ligne:></b>&nbsp;
+<BOUCLE_enligne(AUTEURS)
+	{id_auteur!=#SESSION{id_auteur}}
+	{statut IN 1comite,0minirezo}
+	{en_ligne>#VAL{'Y-m-d H:i:s'}|date{#VAL{'-15 minutes'}|strtotime}}{!par en_ligne}{pagination 10}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_enligne>[&nbsp;...
+	(#GRAND_TOTAL|>{10}|oui)
+	([(#GRAND_TOTAL|afficher_nb_objets{auteur})])
+	]
+</div>
+</B_enligne>

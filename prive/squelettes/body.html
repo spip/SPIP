@@ -1,7 +1,7 @@
 <INCLURE{fond=prive/squelettes/inclure/barre-nav,env}>
 <div id="page">
 	[(#SESSION{id_auteur}|alertes_auteur)]
-	[(#SESSION{id_auteur}|auteurs_recemment_connectes)]
+	<INCLURE{fond=prive/objets/liste/auteurs_enligne}>
 	<div class="largeur">
 		<div id="haut">
 		<INCLURE{fond=prive/squelettes/hierarchie/#ENV{type},ajax=hierarchie,env}>
