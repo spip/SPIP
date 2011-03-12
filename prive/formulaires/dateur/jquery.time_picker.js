@@ -13,7 +13,7 @@
  * @example  $("#mytime").timePicker();
  * @example  $("#mytime").timePicker({step:30, startTime:"15:00", endTime:"18:00"}); 
  */
-
+;if (window.jQuery)
 (function($){
   
   $.fn.timePicker = function(options) {
