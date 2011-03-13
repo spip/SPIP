@@ -20,7 +20,7 @@ function balise_FORMULAIRE_ADMIN ($p) {
 # on ne peut rien dire au moment de l'execution du squelette
 
 // http://doc.spip.org/@balise_FORMULAIRE_ADMIN_stat
-function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
+function balise_FORMULAIRE_ADMIN_stat($args, $context_compil) {
 	return $args;
 }
 
