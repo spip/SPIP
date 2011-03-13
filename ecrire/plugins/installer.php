@@ -120,24 +120,30 @@ function spip_version_compare($v1,$v2,$op){
 	return version_compare($v1, $v2,$op);
 }
 
-//  A utiliser pour initialiser ma variable globale $plugin
+// Cette fonction retourne la meta "plugin" deserialisee
+// mais en fait une mise a jour qui aurait du intervenir au chgt de version
 // http://doc.spip.org/@liste_plugin_actifs
 function liste_plugin_actifs(){
-  $meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
-  if (strlen($meta_plugin)>0){
-  	if (is_array($t=unserialize($meta_plugin)))
-  		return $t;
-  	else{ // compatibilite pre 1.9.2, mettre a jour la meta
-	  // Ca aurait du etre fait par le tableau des mises a jour
-		spip_log("MAJ meta plugin vieille version : $meta_plugin","plugin");
-  		$t = explode(",",$meta_plugin);
-  		list($liste,) = liste_plugin_valides($t);
-			ecrire_meta('plugin',serialize($liste));
-			return $liste;
-  	}
-  }
-	else
-		return array();
+	$liste = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
+	if (!$liste) return array();
+  	if (!is_array($liste=unserialize($liste))) {
+		// compatibilite pre 1.9.2, mettre a jour la meta
+		spip_log("MAJ meta plugin vieille version : $liste","plugin");
+		$new = true;
+		list(, $liste) = liste_plugin_valides(explode(",",$liste));
+	} else {
+		$new = false;
+		// compat au moment d'une migration depuis version anterieure
+		// si pas de dir_type, alors c'est _DIR_PLUGINS
+		foreach ($liste as $prefix=>$infos) {
+			if (!isset($infos['dir_type'])) {
+				$liste[$prefix]['dir_type'] = "_DIR_PLUGINS";
+				$new = true;
+			}
+		}
+	}
+	if ($new) ecrire_meta('plugin',serialize($liste));
+	return $liste;
 }
 
 ?>

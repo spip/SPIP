@@ -79,29 +79,8 @@ function plugin_version_compatible($intervalle,$version){
 
 
 
-/**
- * Faire la liste des librairies disponibles
- * retourne un array ( nom de la lib => repertoire , ... )
- *
- * @return array
- */
-// http://doc.spip.org/@liste_librairies
-function plugins_liste_librairies() {
-	$libs = array();
-	foreach (array_reverse(creer_chemin()) as $d) {
-		if (is_dir($dir = $d.'lib/')
-		AND $t = @opendir($dir)) {
-			while (($f = readdir($t)) !== false) {
-				if ($f[0] != '.'
-				AND is_dir("$dir/$f"))
-					$libs[$f] = $dir;
-			}
-		}
-	}
-	return $libs;
-}
-
-// Cette fonction cree les fichiers a charger pour faire fonctionner les plug
+// Construire la liste des infos strictement necessaires aux plugins a activer
+// afin de les memoriser dans une meta pas trop grosse
 // http://doc.spip.org/@liste_plugin_valides
 function liste_plugin_valides($liste_plug, $force = false)
 {
@@ -113,36 +92,23 @@ function liste_plugin_valides($liste_plug, $force = false)
 		'_DIR_PLUGINS' => $get_infos($liste_plug, $force, _DIR_PLUGINS)
 		       );
 
-	// creer une premiere liste non ordonnee
 	$liste_non_classee = array();
 	foreach($liste_ext as $plug){
 	  if (isset($infos['_DIR_EXTENSIONS'][$plug]))
-	    plugin_ecrire_resume($liste_non_classee, $plug, $infos, '_DIR_EXTENSIONS');
+	    plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_EXTENSIONS');
 	}
 	foreach($liste_plug as $plug) {
 	  if (isset($infos['_DIR_PLUGINS'][$plug]))
-	    plugin_ecrire_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS');
+	    plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS');
 	}
-	// Signaler les plugins necessitant une lib absente
-	$err = $msg = array();
-	foreach($liste_non_classee as $p => $resume) {
-		foreach($infos[$resume['dir_type']][$resume['dir']]['lib'] as $l) {
-		  if (!find_in_path($l['nom'], 'lib/')) {
-				$err[$p] = $resume;
-				$msg[$p][] = $l;
-				unset($liste_non_classee[$p]);
-			}
-		}
-	}
-	if ($err) plugins_erreurs($err, '', $infos, $msg);
-	return plugin_trier($infos, $liste_non_classee);
+	return array($infos, $liste_non_classee);
 }
 
 // Ne retenir un plugin que s'il est valide
 // et dans leur plus recente version compatible
 // avec la version presente de SPIP
 
-function plugin_ecrire_resume(&$liste, $plug, $infos, $dir)
+function plugin_valide_resume(&$liste, $plug, $infos, $dir)
 {
 	$i = $infos[$dir][$plug];
 	if (!plugin_version_compatible($i['compatible'], $GLOBALS['spip_version_branche']))
@@ -160,12 +126,35 @@ function plugin_ecrire_resume(&$liste, $plug, $infos, $dir)
 		}
 }
 
+/**
+ * Liste les chemins vers les plugins actifs du dossier fourni en argument
+ * a partir d'une liste d'elelements construits par plugin_valide_resume
+ *
+ * @return array
+ */
+// http://doc.spip.org/@liste_chemin_plugin_actifs
+function liste_chemin_plugin_actifs($dir_plugins=_DIR_PLUGINS){
+	$liste = liste_plugin_actifs();
+	foreach ($liste as $prefix=>$infos) {
+		if (defined($infos['dir_type']) 
+		AND constant($infos['dir_type'])==$dir_plugins)
+			$liste[$prefix] = $infos['dir'];
+		else 
+			unset($liste[$prefix]);
+	}
+	return $liste;
+}
+
+// Pour tester utilise, il faut connaitre tous les plugins 
+// qui seront forcement pas la a la fin,
+// car absent de la liste des plugins actifs.
+// Il faut donc construire une liste ordonnee
+// Cette fonction detecte des dependances circulaires, 
+// avec un doute sur un "utilise" qu'on peut ignorer.
+// Mais ne pas inserer silencieusement et risquer un bug sournois latent
+
 function plugin_trier($infos, $liste_non_classee)
 {
-	// pour tester utilise, il faut connaitre tous les plugins 
-	// qui seront forcement pas la a la fin,
-	// car absent de la liste des plugins actifs.
-	// Il faut donc construire une liste ordonnee des plugins
 	$toute_la_liste = $liste_non_classee;
 	$liste = $ordre = array();
 	$count = 0;
@@ -205,14 +194,10 @@ function plugin_trier($infos, $liste_non_classee)
 			}
 		}
 	}
-
-	if ($liste_non_classee) plugins_erreurs($liste_non_classee, $liste, $infos);
-	return array($liste, $ordre);
+	return array($liste, $ordre, $liste_non_classee);
 }
 		
-// dependance circulaire, ou utilise qu'on peut ignorer ?
-// dans le doute on fait une erreur quand meme
-// plutot que d'inserer silencieusement et de risquer un bug sournois latent
+// Collecte les erreurs dans la meta 
 
 function plugins_erreurs($liste_non_classee, $liste, $infos, $msg=array())
 {
@@ -278,68 +263,63 @@ function plugin_controler_lib($lib, $url)
 	}
 	return _T('plugin_necessite_lib', array('lib'=>$lib)) . $url;
 }
-/*
-function plugin_controler_spip($version)
-{
-	return plugin_version_compatible($version, $GLOBALS['spip_version_branche'])
-	  ? '' : _T('plugin_necessite_spip', array('version' => $version));
-}
-*/
-/**
- * Lister les chemins vers les plugins actifs d'un dossier plugins/
- *
- * @return unknown
- */
-// http://doc.spip.org/@liste_chemin_plugin_actifs
-function liste_chemin_plugin_actifs($dir_plugins=_DIR_PLUGINS){
-	$liste = liste_plugin_actifs();
-	foreach ($liste as $prefix=>$infos) {
-		// compat au moment d'une migration depuis version anterieure
-		// si pas de dir_type, alors c'est _DIR_PLUGINS
-		if (!isset($infos['dir_type']))
-			$infos['dir_type'] = "_DIR_PLUGINS";
-		if (defined($infos['dir_type']) 
-		AND constant($infos['dir_type'])==$dir_plugins)
-			$liste[$prefix] = $infos['dir'];
-		else 
-			unset($liste[$prefix]);
-	}
-	return $liste;
-}
 
+// mise a jour du meta en fonction de l'etat du repertoire
+// Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide
+// si elle n'existe pas
+// risque de pb en php5 a cause du typage ou de null (verifier dans la doc php)
+// @return true/false si il y a du nouveau
 // http://doc.spip.org/@ecrire_plugin_actifs
 function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 
 	// creer le repertoire cache/ si necessaire ! (installation notamment)
 	sous_repertoire(_DIR_CACHE, '', false,true);
-	if ($operation!='raz'){
+	if (!spip_connect()) return false;
+	if ($operation!='raz') {
 		$plugin_valides = array_intersect(liste_chemin_plugin_actifs(),liste_plugin_files());
 		if ($operation=='ajoute')
 			$plugin = array_merge($plugin_valides,$plugin);
-		if ($operation=='enleve')
+		elseif ($operation=='enleve')
 			$plugin = array_diff($plugin_valides,$plugin);
+		else $plugin = $plugin_valides;
 	}
+	$actifs_avant = $GLOBALS['meta']['plugin'];
 	// recharger le xml des plugins a activer
-	list($plugin_valides,$ordre) = liste_plugin_valides($plugin,true);
-	ecrire_meta('plugin',serialize($plugin_valides));
-	effacer_meta('message_crash_plugins'); // baisser ce flag !
-	$plugin_header_info = array();
-	foreach($plugin_valides as $p=>$resume){
-		$plugin_header_info[]= $p.($resume['version']?"(".$resume['version'].")":"");
+	list($infos,$liste) = liste_plugin_valides($plugin,true);
+	// trouver l'ordre d'activation
+	list($plugin_valides,$ordre,$reste) = plugin_trier($infos, $liste);
+	if ($reste) plugins_erreurs($reste, $liste, $infos);
+	// Ignorer les plugins necessitant une lib absente
+	// et preparer la meta d'entete Http
+	$err = $msg = $header = array();
+	foreach($plugin_valides as $p => $resume) {
+		$header[]= $p.($resume['version']?"(".$resume['version'].")":"");
+		foreach($infos[$resume['dir_type']][$resume['dir']]['lib'] as $l) {
+			if (!find_in_path($l['nom'], 'lib/')) {
+				$err[$p] = $resume;
+				$msg[$p][] = $l;
+				unset($plugin_valides[$p]);
+			}
+		}
 	}
-	ecrire_meta('plugin_header',substr(strtolower(implode(",",$plugin_header_info)),0,900));
+	if ($err) plugins_erreurs($err, '', $infos, $msg);
+
+	effacer_meta('message_crash_plugins');
+	ecrire_meta('plugin',serialize($plugin_valides));
+	ecrire_meta('plugin_header',substr(strtolower(implode(",",$header)),0,900));
 	// generer charger_plugins_chemin.php
 	plugins_precompile_chemin($plugin_valides, $ordre);
 	// generer les fichiers
-	// charger_plugins_options.php
-	// charger_plugins_fonctions.php
+	// 	charger_plugins_options.php
+	// 	charger_plugins_fonctions.php
 	// et retourner les fichiers a verifier
 	$verifs = plugins_precompile_xxxtions($plugin_valides, $ordre);
 	// mise a jour de la matrice des pipelines
 	pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche);
-	// ecrire les fichiers
-	// _CACHE_PLUGINS_VERIF et _CACHE_PIPELINE
+	// generer les fichiers
+	// 	_CACHE_PLUGINS_VERIF et _CACHE_PIPELINE
 	pipeline_precompile($verifs);
+	return ($GLOBALS['meta']['plugin'] != $actifs_avant);
 }
 
 function plugins_precompile_chemin($plugin_valides, $ordre)
@@ -543,24 +523,6 @@ function pipeline_precompile($verifs){
 	}
 	ecrire_fichier(_CACHE_PLUGINS_VERIF, serialize($verifs));
 	clear_path_cache();
-}
-
-// pas sur que ca serve...
-// http://doc.spip.org/@liste_plugin_inactifs
-function liste_plugin_inactifs(){
-	return array_diff (liste_plugin_files(),liste_chemin_plugin_actifs());
-}
-
-// mise a jour du meta en fonction de l'etat du repertoire
-// Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide
-// si elle n'existe pas
-// risque de pb en php5 a cause du typage ou de null (verifier dans la doc php)
-function actualise_plugins_actifs($pipe_recherche = false){
-	if (!spip_connect()) return false;
-	$plugin_actifs = liste_chemin_plugin_actifs();
-	$plugin_liste = liste_plugin_files();
-	$plugin_new = array_intersect($plugin_actifs,$plugin_liste);
-	ecrire_plugin_actifs($plugin_new,$pipe_recherche);
 }
 
 

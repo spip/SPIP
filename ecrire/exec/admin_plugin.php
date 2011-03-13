@@ -30,19 +30,18 @@ function exec_admin_plugin_dist($retour='') {
 	// et l'installation des qu'on est dans la colonne principale
 	// si jamais la liste des plugins actifs change, il faut faire un refresh du hit
 	// pour etre sur que les bons fichiers seront charges lors de l'install
-	  liste_plugin_actifs(); 
-	  $actifs = $GLOBALS['meta']['plugin'];
-	  actualise_plugins_actifs();
-	  if (($GLOBALS['meta']['plugin'] != $actifs) AND _request('actualise')<2) {
-		include_spip('inc/headers');
-		redirige_par_entete(parametre_url(self(),'actualise',_request('actualise')+1,'&'));
-	} else admin_plug_args(_request('voir'), _request('erreur'), _request('format'));
+		$new = ecrire_plugin_actifs('',false, 'force');
+		if ($new AND _request('actualise')<2) {
+			include_spip('inc/headers');
+			redirige_par_entete(parametre_url(self(),'actualise',_request('actualise')+1,'&'));
+		} else admin_plug_args(_request('voir'), _request('erreur'), _request('format'));
 	}
 }
 
 function admin_plug_args($quoi, $erreur, $format)
 {
 	if (!$quoi) $quoi = 'actifs';
+	// empecher l'affichage des erreurs dans le bandeau, on le donne ensuite
 	$erreur_activation = plugin_donne_erreurs();
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
@@ -63,19 +62,25 @@ function admin_plug_args($quoi, $erreur, $format)
 
 	echo debut_droite('plugin', true);
 
-	// message d'erreur au retour d'un operation
+	// message d'erreur au retour d'une operation
 	if ($erreur)
 		echo "<div class='erreur_message-plugins'>$erreur</div>";
 	if ($erreur_activation){
 		echo "<div class='erreur_message-plugins'>$erreur_activation</div>";
-		effacer_meta('plugin_erreur_activation');
 	}
 
-	// la valeur de retour de la fonction ci-dessous n'est pas compatible
-	// avec ce que fait actualise_plugins_actifs, il faut recalculer. A revoir.
-	$lcpa = liste_chemin_plugin_actifs();
+	// la mise a jour de cette meta a ete faite par ecrire_plugin_actifs
+	$actifs = $lcpa = unserialize($GLOBALS['meta']['plugin']);
 
-	// on fait l'installation ici,
+	// Les affichages se basent sur le repertoire, pas sur le nom
+	foreach ($actifs as $prefix => $infos)
+	  $actifs[$prefix] = $infos['dir'];
+	foreach ($lcpa as $prefix => $infos) {
+	  if ($infos['dir_type'] == '_DIR_PLUGINS')
+	    $lcpa[$prefix] = $infos['dir'];
+	  else unset($lcpa[$prefix]);
+	}
+	// on installe les plugins maintenant,
 	// cela permet aux scripts d'install de faire des affichages (moches...)
 	plugin_installes_meta();
 
@@ -93,12 +98,6 @@ function admin_plug_args($quoi, $erreur, $format)
 							. " &mdash; "._T('plugin_info_automatique_creer')."</p>";
 		}
 	}
-
-	if ($quoi=='actifs' OR $lpf)
-		echo "<h3>".sinon(
-						singulier_ou_pluriel(count($lcpa), 'plugins_actif_un', 'plugins_actifs', 'count'),
-						_T('plugins_actif_aucun')
-						)."</h3>";
 
 	// la liste
 	if ($quoi=='actifs'){
@@ -121,6 +120,9 @@ function admin_plug_args($quoi, $erreur, $format)
 				$lcpaffiche[] = $f;
 	}
 
+	if ($quoi=='actifs' OR $lpf)
+		echo "<h3>".sinon(singulier_ou_pluriel(count($lcpa), 'plugins_actif_un', 'plugins_actifs', 'count'), _T('plugins_actif_aucun'))."</h3>";
+
 	if (empty($format))
 	  $format = 'liste';
 	elseif (!in_array($format,array('liste','repertoires')))
@@ -139,7 +141,7 @@ function admin_plug_args($quoi, $erreur, $format)
 	echo fin_cadre_trait_couleur(true);
 
 	if ($quoi=='actifs')
-		echo affiche_les_extensions();
+		echo affiche_les_extensions($actifs);
 	echo "</div>";
 	
 	echo 	http_script("
@@ -178,25 +180,23 @@ function admin_plug_args($quoi, $erreur, $format)
 	echo fin_gauche(), fin_page();
 }
 
-function affiche_les_extensions(){
-	$res = "";
-	if ($liste_extensions = liste_plugin_files(_DIR_EXTENSIONS)) {
-		$actifs = liste_chemin_plugin_actifs(_DIR_EXTENSIONS);
-		$res .= "<div id='extensions'>";
-		$res .= debut_cadre_trait_couleur('',true,'',_T('plugins_liste_extensions'),
-		'liste_extensions');
-		$res .= "<p>"
-			._T('plugin_info_extension_1', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))
-			. '<br />'. _T('plugin_info_extension_2')
-			."</p>";
+function affiche_les_extensions($actifs)
+{
+	if ((!$liste = liste_plugin_files(_DIR_EXTENSIONS))) return '';
 
-		$afficher = charger_fonction("afficher_liste",'plugins');
-		$res .= $afficher(self(), $liste_extensions,$actifs, _DIR_EXTENSIONS);
+	$afficher = charger_fonction("afficher_liste",'plugins');
+	$liste = $afficher(self(), $liste, $actifs, _DIR_EXTENSIONS);
 
-		$res .= fin_cadre_trait_couleur(true);
-		$res .= "</div>\n";
-	}
-	return $res;
+	return 
+		"<div id='extensions'>"
+		. debut_cadre_trait_couleur('',true,'',_T('plugins_liste_extensions'), 'liste_extensions')
+		. "<p>"
+		. _T('plugin_info_extension_1', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))
+		. '<br />'. _T('plugin_info_extension_2')
+		. "</p>"
+		. $liste
+		. fin_cadre_trait_couleur(true)
+		. "</div>\n";
 }
 
 /**
@@ -205,18 +205,38 @@ function affiche_les_extensions(){
  * @return <type>
  */
 function afficher_librairies(){
-	$res = "";
-	// Lister les librairies disponibles
-	if ($libs = plugins_liste_librairies()) {
-		$res .= debut_cadre_enfonce('', true, '', _T('plugin_librairies_installees'));
-		ksort($libs);
-		$res .= '<dl>';
-		foreach ($libs as $lib => $rep)
-			$res .= "<dt>$lib</dt><dd>".joli_repertoire($rep)."</dd>";
-		$res .= '</dl>';
-		$res .= fin_cadre_enfonce(true);
-	}
+
+	if (!$libs = liste_librairies()) return '';
+	ksort($libs);
+	$res = debut_cadre_enfonce('', true, '', _T('plugin_librairies_installees'));
+	$res .= '<dl>';
+	foreach ($libs as $lib => $rep)
+		$res .= "<dt>$lib</dt><dd>".joli_repertoire($rep)."</dd>\n";
+	$res .= '</dl>';
+	$res .= fin_cadre_enfonce(true);
 	return $res;
 }
 
+
+/**
+ * Faire la liste des librairies disponibles
+ * retourne un array ( nom de la lib => repertoire , ... )
+ *
+ * @return array
+ */
+// http://doc.spip.org/@liste_librairies
+function liste_librairies() {
+	$libs = array();
+	foreach (array_reverse(creer_chemin()) as $d) {
+		if (is_dir($dir = $d.'lib/')
+		AND $t = @opendir($dir)) {
+			while (($f = readdir($t)) !== false) {
+				if ($f[0] != '.'
+				AND is_dir("$dir/$f"))
+					$libs[$f] = $dir;
+			}
+		}
+	}
+	return $libs;
+}
 ?>

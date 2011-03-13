@@ -105,7 +105,7 @@ function pipeline($action, $val=null) {
 			include_spip('inc/plugin');
 			// generer les fichiers php precompiles
 			// de chargement des plugins et des pipelines
-			actualise_plugins_actifs();
+			ecrire_plugin_actifs('',false, 'force');
 			if (!($ok = @is_readable($charger)))
 				spip_log("fichier $charger pas cree");
 		}
@@ -121,10 +121,9 @@ function pipeline($action, $val=null) {
 	}
 	// plantage ?
 	else {
-		include_spip('inc/plugin');
 		// on passe $action en arg pour creer la fonction meme si le pipe
 		// n'est defini nul part ; vu qu'on est la c'est qu'il existe !
-		actualise_plugins_actifs(strtolower($action));
+		ecrire_plugin_actifs('',false, strtolower($action));
 		spip_log("fonction $fonc absente : pipeline desactive");
 	}
 
@@ -364,7 +363,7 @@ function test_espace_prive() {
  * @return bool
  */
 function test_plugin_actif($plugin){
-	return ($plugin AND defined('_DIR_PLUGIN_'.strtoupper($plugin)))? true:false;
+	return ($plugin AND defined('_DIR_PLUGIN_'.strtoupper($plugin)));
 }
 
 //

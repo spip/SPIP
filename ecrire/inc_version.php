@@ -474,7 +474,7 @@ if (@is_readable(_CACHE_PLUGINS_OPT) AND @is_readable(_CACHE_PLUGINS_PATH)){
 	include_spip('inc/plugin');
 	// generer les fichiers php precompiles
 	// de chargement des plugins et des pipelines
-	actualise_plugins_actifs();
+	ecrire_plugin_actifs('',false, 'force');
 }
 // Initialisations non critiques surchargeables par les plugins
 @spip_initialisation_suite();

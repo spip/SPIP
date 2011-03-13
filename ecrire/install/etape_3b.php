@@ -118,8 +118,7 @@ function install_etape_3b_dist()
 	// leur installation ne peut pas se faire sur le meme hit, il faudra donc
 	// poursuivre au hit suivant
 	include_spip('inc/plugin');
-	actualise_plugins_actifs();
-
+	ecrire_plugin_actifs('',false, 'force');
 
 	include_spip('inc/distant');
 	redirige_par_entete(parametre_url(self(),'etape','4','&'));

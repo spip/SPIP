@@ -13,7 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/charsets');
 include_spip('inc/texte');
-include_spip('inc/plugin'); // pour charge_instal_plugin
+include_spip('inc/plugin'); // pour plugin_est_installe
 
 // http://doc.spip.org/@ligne_plug
 function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=false, $class_li="item", $dir_plugins=_DIR_PLUGINS) {
