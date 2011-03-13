@@ -92,10 +92,15 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour='', $options=
 }
 
 function dater_formater_saisie_jour($jour,$mois,$annee,$sep="/"){
-	if (intval($jour))
+	if (intval($jour)){
+		$jour = str_pad($jour,2,'0',STR_PAD_LEFT);
+		$mois = str_pad($mois,2,'0',STR_PAD_LEFT);
 		return "$jour$sep$mois$sep$annee";
-	if (intval($mois))
+	}
+	if (intval($mois)) {
+		$mois = str_pad($mois,2,'0',STR_PAD_LEFT);
 		return "$mois$sep$annee";
+	}
 	return $annee;
 }
 /**
