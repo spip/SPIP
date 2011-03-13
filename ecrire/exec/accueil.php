@@ -235,7 +235,7 @@ function exec_accueil_dist()
 
 	include_spip('inc/presenter_enfants');
 	if (!$connect_id_rubrique)
-		echo afficher_enfant_rub(0, false, true) . "<div class='nettoyeur'></div>";
+		echo afficher_enfant_rub() . "<div class='nettoyeur'></div>";
 
  	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'accueil'),'data'=>''));
 

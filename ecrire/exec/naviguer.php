@@ -111,7 +111,7 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $in
 
 	include_spip('inc/presenter_enfants');
 	$onglet_enfants =
-	  afficher_enfant_rub($id_rubrique, false, true)
+	  afficher_enfant_rub($id_rubrique)
 	  .
 	   (autoriser('creerrubriquedans','rubrique',$id_rubrique)?"<div style='clear:$spip_lang_right;'>" .
 	    (!$id_rubrique
