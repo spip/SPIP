@@ -164,7 +164,7 @@ function nettoyer_url_page($url, $contexte=array())
 
 /**
  * Generer l'url d'un article dans l'espace prive,
- * fonction du statut de l'a rubrique'article
+ * fonction du statut de l'article
  *
  * @param int $id
  * @param string $args
