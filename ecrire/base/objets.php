@@ -125,7 +125,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 			'spip_rubriques' => array(
 				'page'=>'rubrique',
 				'url_voir' => 'rubrique',
-				'url_edit' => 'rubriques_edit',
+				'url_edit' => 'rubrique_edit',
 				'texte_retour' => 'icone_retour',
 				'texte_objets' => 'public:rubriques',
 				'texte_objet' => 'public:rubrique',

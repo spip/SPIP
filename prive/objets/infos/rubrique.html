@@ -27,6 +27,10 @@
 <!--nb_elements-->
 </div>
 
+[(#AUTORISER{supprimer,rubrique,#ID_RUBRIQUE}|oui)
+	[(#URL_ACTION_AUTEUR{supprimer_rubrique,#ID_RUBRIQUE,#ID_PARENT|?{#URL_ECRIRE{rubrique,id_rubrique=#ID_PARENT},#URL_ECRIRE{rubriques}}}|icone_horizontale{<:icone_supprimer_rubrique:>,rubrique,del})]
+]
+
 
 [(#REM)
 

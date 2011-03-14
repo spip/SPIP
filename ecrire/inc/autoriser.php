@@ -249,6 +249,23 @@ function autoriser_rubrique_modifier_dist($faire, $type, $id, $qui, $opt) {
 		autoriser('publierdans', 'rubrique', $id, $qui, $opt);
 }
 
+function autoriser_rubrique_supprimer_dist($faire, $type, $id, $qui, $opt) {
+	if (!$id = intval($id))
+		return false;
+
+	if (sql_countsel('spip_rubriques', "id_parent=".intval($id)))
+		return false;
+
+	if (sql_countsel('spip_articles', "id_rubrique=".intval($id)." AND (statut<>'poubelle')"))
+		return false;
+
+	$compte = pipeline('objet_compte_enfants',array('args'=>array('objet'=>'rubrique','id_objet'=>$id),'data'=>array()));
+	foreach($compte as $objet => $n)
+		if ($n)
+			return false;
+
+	return autoriser('modifier','rubrique',$id);
+}
 
 
 // Autoriser a modifier l'article $id
