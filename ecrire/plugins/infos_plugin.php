@@ -12,13 +12,13 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// lecture d'un fichier ecrit en pseudo-xml, de nom plugin.xml
+// lecture d'un texte ecrit en pseudo-xml issu d'un fichier plugin.xml
 // et conversion approximative en tableau PHP.
 
-function plugins_infos_plugin($plug, $dir_plugins = _DIR_PLUGINS)
+function plugins_infos_plugin($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
 {
 	include_spip('inc/xml');
-	$arbre = spip_xml_load("$dir_plugins$plug/plugin.xml");
+	$arbre = spip_xml_parse($desc);
 	$verifie_conformite = charger_fonction('verifie_conformite','plugins');
 	$verifie_conformite($plug, $arbre, $dir_plugins);
 	$extraire_boutons = charger_fonction('extraire_boutons','plugins');

@@ -15,12 +15,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * lecture du fichier de configuration d'un plugin
  *
- * @staticvar array $infos
- * @staticvar array $plugin_xml_cache
+ * @staticvar string $filecache
+ * @staticvar array $cache
  * @param string|array|false $plug
- * @param bool $force_reload
- * @param string $dir_plugins
- * @return array OR false
+ * @param bool $reload
+ * @param string $dir
+ * @return array 
  */
 function plugins_get_infos_dist($plug=false, $reload=false, $dir = _DIR_PLUGINS){
 	static $cache='';
@@ -53,29 +53,29 @@ function plugins_get_infos_dist($plug=false, $reload=false, $dir = _DIR_PLUGINS)
 }
 
 
-function plugins_get_infos_un($plug, $reload, $dir, &$cache){
-
-	if (!file_exists("$dir$plug/" . ($desc = "paquet") . ".xml")) {
-	  if (!file_exists("$dir$plug/" . ($desc = "plugin") . ".xml"))
+function plugins_get_infos_un($plug, $reload, $dir, &$cache)
+{
+	if (!is_readable($file = "$dir$plug/" . ($desc = "paquet") . ".xml")) {
+	  if (!is_readable($file = "$dir$plug/" . ($desc = "plugin") . ".xml"))
 	    return false;
 	}
 
-	if (($time = intval(@filemtime("$dir$plug/$desc" . '.xml'))) < 0)
-	  return false;
+	if (($time = intval(@filemtime($file))) < 0) return false;
 
 	$pcache = isset($cache[$dir][$plug]) 
 	  ? $cache[$dir][$plug] : array('filemtime' => 0);
 
-	if ((intval($reload) <= 0)
-	AND ($time > 0)
-	AND ($time <= $pcache['filemtime'])) {
+	if (((intval($reload) <= 0)
+		AND ($time > 0)
+		AND ($time <= $pcache['filemtime']))
+	OR (!($texte = spip_file_get_contents($file)))) {
 		return false;
 	}
 	$f = charger_fonction('infos_' . $desc, 'plugins');
-	$ret = $f($plug, $dir);
+	$ret = $f($texte, $plug, $dir);
 	$ret['filemtime'] = $time;
 	$diff = ($ret != $pcache);
-	if ($diff) {
+	if ($diff AND !isset($ret['erreur'])) {
 		$cache[$dir][$plug] = $ret;
 #		echo count($cache[$dir]), $dir,$plug, " $reloadc<br>"; 
 	}

@@ -12,11 +12,11 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// lecture d'un fichier paquet.xml comforme a la DTD homonyme
+// lecture d'un texte conforme a la DTD paquet.dtd
 // et conversion en tableau PHP identique a celui fourni par plugin.xml
 // manque la description
 
-function plugins_infos_paquet($plug, $dir_plugins = _DIR_PLUGINS)
+function plugins_infos_paquet($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
 {
 	include_spip('xml/valider');
 	$vxml = new ValidateurXML();
@@ -27,7 +27,7 @@ function plugins_infos_paquet($plug, $dir_plugins = _DIR_PLUGINS)
 			    );
 	$dir = "$dir_plugins$plug/";
 	$sax = charger_fonction('sax', 'xml');
-	$sax(file_get_contents($dir . 'paquet.xml'), false, $vxml);
+	$sax($desc, false, $vxml);
 	if (!$vxml->err) {
 		$prefix = $vxml->tree['prefix'];
 		if (is_readable($dir . $f = ($prefix . '_options.php')))
