@@ -1,0 +1,14 @@
+<BOUCLE_nav(RUBRIQUES){id_rubrique}{statut?}{si #ENV{exec}|=={rubrique}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','rubrique','id',#ENV{id_rubrique}}}}
+#BOITE_FERMER
+
+<div class="ajax">
+#FORMULAIRE_EDITER_LOGO{rubrique,#ID_RUBRIQUE,'',#ENV**}
+</div>
+
+#PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,rubrique,id,#ID_RUBRIQUE},data,''}}
+
+</BOUCLE_nav>
+[(#ENV{exec}|=={rubrique_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/rubrique_edit,env}>]
+<//B_nav>

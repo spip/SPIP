@@ -155,18 +155,7 @@ function infos_naviguer($id_rubrique, $statut, $row)
 	$navigation =
 	  ($boite ?debut_boite_info(true). $boite . fin_boite_info(true):"");
 
-	$res = sql_allfetsel("A.nom, A.id_auteur", "spip_auteurs AS A LEFT JOIN spip_auteurs_liens AS R ON (R.objet='rubrique' AND A.id_auteur=R.id_auteur)", "A.statut = '0minirezo' AND R.id_objet=$id_rubrique");
-
-	if (!$res) return $navigation;
-
-	$img = http_img_pack(chemin_image('auteur-0minirezo-16.png'),'','');
-	foreach ($res as $k => $row) {
-		$h = generer_url_ecrire('auteur', "id_auteur=" .$row['id_auteur']);
-		$res[$k] = "$img <a href='$h'>" . $row['nom'] . '</a>';
-	}
-	$res = corriger_typo(join('<br />', $res));
-
-	return $navigation . debut_cadre_relief("information-perso-24.png", true, '', _T('info_administrateurs')). $res . fin_cadre_relief(true);
+	return $navigation;
 }
 
 
