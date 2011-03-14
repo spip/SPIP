@@ -106,7 +106,7 @@ if(!jQuery.spip.load_handlers) {
  *
  * @param bool force
  */
-jQuery.fn.positionner = function(force) {
+jQuery.fn.positionner = function(force, setfocus) {
 	var offset = jQuery(this).offset();
 	var hauteur = parseInt(jQuery(this).css('height'));
 	var scrolltop = self['pageYOffset'] ||
@@ -124,7 +124,8 @@ jQuery.fn.positionner = function(force) {
 		.animate({scrollTop: scroll}, 300);
 
 	// positionner le curseur dans la premiere zone de saisie
-	jQuery(jQuery('*', this).filter('input[type=text],textarea')[0]).focus();
+	if (setfocus!==false)
+		jQuery(jQuery('*', this).filter('input[type=text],textarea')[0]).focus();
 	return this; // don't break the chain
 }
 
@@ -168,7 +169,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
         }
 				jQuery(cible).wrap('<div />');
 				cible = jQuery(cible).parent();
-				jQuery(cible).animeajax().positionner(false);
+				jQuery(cible).animeajax().positionner(false,false);
 			},
 			success: function(c){
 				if (c=='noajax'){
