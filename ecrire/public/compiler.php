@@ -192,20 +192,7 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 }
 
 
-/**
- * calculer_boucle() produit le corps PHP d'une boucle Spip.
- * ce corps remplit une variable $t0 retournee en valeur.
- * Ici on distingue boucles recursives et boucle a requete SQL
- * et on insere le code d'envoi au debusqueur du resultat de la fonction.
- *
- * http://doc.spip.org/@calculer_boucle
- *
- * @param  $id_boucle
- * @param  $boucles
- * @return string
- */
-function calculer_boucle($id_boucle, &$boucles) {
-
+function instituer_boucle(&$boucle, $echapper=true){
 	// gerer les statuts si declares pour cette table
 	/*
 	$show['statut'][] = array(
@@ -229,10 +216,9 @@ function calculer_boucle($id_boucle, &$boucles) {
 	 )
 
 	champstatut est alors le champ statut sur la tablen
-	dans les jointures, clen peut etre un tableau pour une jointure complexe : array('id_objet','id_article','objet','article')	 
+	dans les jointures, clen peut etre un tableau pour une jointure complexe : array('id_objet','id_article','objet','article')
 	*/
 
-	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$show = $boucle->show;
 	if (isset($show['statut']) AND $show['statut']){
@@ -257,7 +243,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 					}
 					$jointures[0][0] = $id_table;
 					if (!array_search($id, $boucle->from)){
-						fabrique_jointures($boucle, $jointures, true, $boucle->show, $id_table);
+						fabrique_jointures($boucle, $jointures, true, $boucle->show, $id_table, '', $echapper);
 					}
 					// trouver l'alias de la table d'arrivee qui porte le statut
 					$id = array_search($id, $boucle->from);
@@ -271,19 +257,43 @@ function calculer_boucle($id_boucle, &$boucles) {
 				if (isset($s['post_date']) AND $s['post_date']
 					AND $GLOBALS['meta']["post_dates"] == 'non'){
 					$date = $id.'.'.preg_replace(',\W,','',$s['post_date']); // securite
-					array_unshift($boucle->where,"\nquete_condition_postdates('$date',"._q($boucle->serveur).")");
+					array_unshift($boucle->where,
+						$echapper ?
+							"\nquete_condition_postdates('$date',"._q($boucle->serveur).")"
+						:
+							quete_condition_postdates($date,$boucle->serveur)
+					);
 				}
 				array_unshift($boucle->where,
-					"\nquete_condition_statut('$mstatut',"
-						. _q($s['previsu']).","
-						._q($s['publie']).","
-						._q($boucle->serveur).")"
+					$echapper ?
+						"\nquete_condition_statut('$mstatut',"
+							. _q($s['previsu']).","
+							._q($s['publie']).","
+							._q($boucle->serveur).")"
+					:
+						quete_condition_statut($mstatut,$s['previsu'],$s['publie'],$boucle->serveur)
 				);
 			}
 		}
 	}
+}
 
+/**
+ * calculer_boucle() produit le corps PHP d'une boucle Spip.
+ * ce corps remplit une variable $t0 retournee en valeur.
+ * Ici on distingue boucles recursives et boucle a requete SQL
+ * et on insere le code d'envoi au debusqueur du resultat de la fonction.
+ *
+ * http://doc.spip.org/@calculer_boucle
+ *
+ * @param  $id_boucle
+ * @param  $boucles
+ * @return string
+ */
+function calculer_boucle($id_boucle, &$boucles) {
 
+	$boucle = &$boucles[$id_boucle];
+	instituer_boucle($boucle);
 
 	$boucles[$id_boucle] = pipeline('post_boucle', $boucles[$id_boucle]);
 

@@ -68,7 +68,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 }
 
 // http://doc.spip.org/@fabrique_jointures
-function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='', $col='')
+function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='', $col='', $echap=true)
 {
 	static $num=array();
 	$id_table = "";
@@ -87,11 +87,15 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 			// le where complementaire est envoye dans la jointure pour pouvoir etre elimine avec la jointure
 			// en cas d'optimisation
 			//$boucle->where[] = array("'='","'$obj'","sql_quote('$type')");
-			$boucle->join["L$n"]= array("'$id_table'","'$j2'","'$j1'","'$obj='.sql_quote('$type')");
+			$boucle->join["L$n"]=
+				$echap ?
+					array("'$id_table'","'$j2'","'$j1'","'$obj='.sql_quote('$type')")
+				:
+					array($id_table,$j2,$j1,"$obj=".sql_quote($type));
 		}
 		else
-			$boucle->join["L$n"]= array("'$id_table'","'$j'");
-		$boucle->from[$id_table = "L$n"] = $a[0];    
+			$boucle->join["L$n"]= $echap?array("'$id_table'","'$j'"):array($id_table,$j);
+		$boucle->from[$id_table = "L$n"] = $a[0];
 	}
 
 
@@ -126,7 +130,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 
 	$boucle->modificateur['lien'] = true;
 	return "L$n";
-  }
+}
 
 // condition suffisante pour qu'un Group-By ne soit pas necessaire
 // A ameliorer, notamment voir si calculer_select ne pourrait pas la reutiliser
