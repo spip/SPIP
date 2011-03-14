@@ -1445,4 +1445,25 @@ function balise_SAUTER_dist($p){
 	return $p;
 }
 
+
+/**
+ * Savoir si on objet est publie ou non
+ *
+ * @param <type> $p
+ * @return <type>
+ */
+function balise_PUBLIE_dist($p) {
+	if (!$_type = interprete_argument_balise(1,$p)){
+		$_type = _q($p->type_requete);
+		$_id = champ_sql($p->boucles[$p->id_boucle]->primary,$p);
+	}
+	else
+		$_id = interprete_argument_balise(2,$p);
+
+	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+
+	$p->code = "(objet_test_si_publie(".$_type.",intval(".$_id."),"._q($connect).")?' ':'')";
+	$p->interdire_scripts = false;
+	return $p;
+}
 ?>
