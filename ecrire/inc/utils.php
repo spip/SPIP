@@ -921,11 +921,7 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	if (!$public) {
 		if (!$entite) return '';
 		include_spip('inc/urls');
-		if (function_exists($f = 'generer_url_ecrire_' . $entite)
-			// ou definie par un plugin
-		  OR $f = charger_fonction($f,'urls',true))
-			$res = $f($id, $args, $ancre, ' ');
-		else $res = "";
+		$res = generer_url_ecrire_objet($entite,$id, $args, $ancre, false);
 	} else {
 		if (is_string($public) AND !is_numeric($public)) {
 			include_spip('base/connect_sql');
