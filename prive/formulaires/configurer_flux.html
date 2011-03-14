@@ -5,7 +5,7 @@
 	[(#ENV{editable})
 	[(#SET{titre,<:icone_suivi_activite:>})]
 	<p><:info_syndication_integrale_1{url=#URL_ECRIRE{synchro},titre=#GET{titre}}:></p>
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
