@@ -78,11 +78,9 @@ ecrire/exec/info_plugin.php -text
 ecrire/exec/informer.php -text
 ecrire/exec/install.php -text
 ecrire/exec/menu_rubriques.php -text
-ecrire/exec/naviguer.php -text
 ecrire/exec/plonger.php -text
 ecrire/exec/puce_statut.php -text
 ecrire/exec/rechercher.php -text
-ecrire/exec/rubriques_edit.php -text
 ecrire/exec/selectionner.php -text
 ecrire/exec/suivi_edito.php -text
 ecrire/exec/synchro.php -text
@@ -764,6 +762,7 @@ prive/squelettes/contenu/recherche.html -text
 prive/squelettes/contenu/recherche_fonctions.php -text
 prive/squelettes/contenu/rubrique.html -text
 prive/squelettes/contenu/rubrique_edit.html -text
+prive/squelettes/contenu/rubriques.html -text
 prive/squelettes/contenu/visiteurs.html -text
 prive/squelettes/extra/article.html -text
 prive/squelettes/extra/dist.html -text
@@ -797,6 +796,7 @@ prive/squelettes/navigation/dist.html -text
 prive/squelettes/navigation/infos_perso.html -text
 prive/squelettes/navigation/rubrique.html -text
 prive/squelettes/navigation/rubrique_edit.html -text
+prive/squelettes/navigation/rubriques.html -text
 prive/squelettes/navigation/visiteurs.html -text
 prive/squelettes/objet.html -text
 prive/squelettes/page.html -text

@@ -164,7 +164,7 @@ function balise_URL_PAGE_dist($p) {
 }
 
 //
-// #URL_ECRIRE{naviguer} -> ecrire/?exec=naviguer
+// #URL_ECRIRE{rubriques} -> ecrire/?exec=rubriques
 //
 // http://doc.spip.org/@balise_URL_ECRIRE_dist
 function balise_URL_ECRIRE_dist($p) {

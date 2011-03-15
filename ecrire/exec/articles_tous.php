@@ -333,7 +333,7 @@ function afficher_rubriques_filles(&$article, &$enfant, &$text_article, $id_pare
 			"'>" .
 			//$lesenfants?'<img src="'. chemin_image('deplierhaut.gif') .'" class="expandImage" />':'' .
 		  "<span class='holder icone'> </span><a href='" .
-		   generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
+		   generer_url_entite($id_rubrique,'rubrique') .
 		   "' class='titre'>$titre</a>";
 		
 		$lesenfants = afficher_contenu_rubrique($article, $enfant, $text_article, $id_rubrique, $flag_trad, $profondeur);
