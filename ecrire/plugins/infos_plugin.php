@@ -19,8 +19,10 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
 {
 	include_spip('inc/xml');
 	$arbre = spip_xml_parse($desc);
-	$verifie_conformite = charger_fonction('verifie_conformite','plugins');
-	$verifie_conformite($plug, $arbre, $dir_plugins);
+	if ($plug) {
+	  $verifie_conformite = charger_fonction('verifie_conformite','plugins');
+	  $verifie_conformite($plug, $arbre, $dir_plugins);
+	}
 	$extraire_boutons = charger_fonction('extraire_boutons','plugins');
 	$les_boutons = $extraire_boutons($arbre);
 	if (isset($arbre['erreur'])) 

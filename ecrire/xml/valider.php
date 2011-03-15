@@ -27,8 +27,7 @@ function validerElement($phraseur, $name, $attrs)
 			$p = isset($this->dtc->elements[$name]);
 		}
 		if (!$p) {
-			coordonnees_erreur($this," <b>$name</b> "
-				. " / " .  $this->ouvrant 
+			coordonnees_erreur($this," <b>$name</b>&nbsp;: "
 				. _T('zxml_inconnu_balise'));
 			return; 
 		}

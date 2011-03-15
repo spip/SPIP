@@ -71,11 +71,13 @@ function plugins_get_infos_un($plug, $reload, $dir, &$cache)
 	OR (!($texte = spip_file_get_contents($file)))) {
 		return false;
 	}
+
 	$f = charger_fonction('infos_' . $desc, 'plugins');
 	$ret = $f($texte, $plug, $dir);
 	$ret['filemtime'] = $time;
 	$diff = ($ret != $pcache);
-	if ($diff AND !isset($ret['erreur'])) {
+
+	if ($diff) {
 		$cache[$dir][$plug] = $ret;
 #		echo count($cache[$dir]), $dir,$plug, " $reloadc<br>"; 
 	}

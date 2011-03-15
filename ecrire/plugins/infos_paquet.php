@@ -29,16 +29,11 @@ function plugins_infos_paquet($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
 	$sax = charger_fonction('sax', 'xml');
 	$sax($desc, false, $vxml);
 	if (!$vxml->err) {
-		$prefix = $vxml->tree['prefix'];
-		if (is_readable($dir . $f = ($prefix . '_options.php')))
-			$vxml->tree['options'] = array($f);
-		if (is_readable($dir . $f = ($prefix . '_fonctions.php')))
-			$vxml->tree['fonctions'] = array($f);
-		if (is_readable($dir . $f = ($prefix . '_installation.php')))
-			$vxml->tree['install'] = array($f);
 		// compatibilite avec l'existant:
 		$vxml->tree['icon'] = $vxml->tree['logo']; 
 		$vxml->tree['path'] = $vxml->tree['chemin'] ? $vxml->tree['chemin'] : array(array('dir'=>'')); // initialiser par defaut
+#		if ($plug) 
+paquet_readable_files($vxml, "$dir_plugins$plug/");
 		return $vxml->tree;
 	}
 	// Prendre les messages d'erreur sans les numeros de lignes
@@ -49,6 +44,17 @@ function plugins_infos_paquet($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
 	$t =_T('plugins_erreur', array('plugins' =>$plug));
 	array_unshift($msg, "<a href='$h'>$t</a>");
 	return array('erreur' => $msg);
+}
+
+function paquet_readable_files(&$vxml, $dir)
+{
+	$prefix = $vxml->tree['prefix'];
+	if (is_readable($dir . $f = ($prefix . '_options.php')))
+		$vxml->tree['options'] = array($f);
+	if (is_readable($dir . $f = ($prefix . '_fonctions.php')))
+		$vxml->tree['fonctions'] = array($f);
+	if (is_readable($dir . $f = ($prefix . '_installation.php')))
+		$vxml->tree['install'] = array($f);
 }
 
 // Appeler l'indenteur pour sa gestion de la profondeur, 
