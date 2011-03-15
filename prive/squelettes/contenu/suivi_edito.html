@@ -1,4 +1,4 @@
-<h1 class="none"><:icone_accueil:></h1>
+<h1><:info_suivi_activite:></h1>
 #SET{recentwhere,''}
 <BOUCLE_haspostdate(ARTICLES){statut=publie}{0,1}>
 	[(#SET{recentwhere,[NOT ((#VAL{date}|quete_condition_postdates))]})]
@@ -6,21 +6,6 @@
 	[(#SET{recentwhere,[(#VAL{date}|quete_condition_postdates)]})]
 </BOUCLE_haspostdate>
 
-[(#REM)
-
-	Les articles recents
-
-]
-<INCLURE{fond=prive/objets/liste/articles,titre=<:articles_recents:>,statut=publie,par=date,where=#GET{recentwhere},nb=5} />
-
-
-[(#REM)
-
-	Vos articles en cours
-
-]
-[(#SET{titre,#URL_ECRIRE{mes_articles}|afficher_plus_info|concat{<:info_en_cours_validation:>}})]
-<INCLURE{fond=prive/objets/liste/articles,titre=#GET{titre},statut=prepa,id_auteur=#SESSION{id_auteur},par=date} />
 
 [(#REM)
 
@@ -35,7 +20,10 @@
 	#BOITE_FERMER
 ]
 
+[(#REM)
 
-[(#REM|afficher_enfant_rub)
-<div class='nettoyeur'></div>
+	Les articles recents
+
 ]
+<INCLURE{fond=prive/objets/liste/articles,titre=<:articles_recents:>,statut=publie,par=date,where=#GET{recentwhere},nb=5} />
+

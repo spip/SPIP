@@ -1,0 +1,34 @@
+<div class='accueil_informations articles'>
+	[(#SET{titre,#ARRAY{prepa,<:texte_statut_en_cours_redaction:>,prop,<:texte_statut_attente_validation:>,publie,<:texte_statut_publies:>}})]
+<B_cpt>
+	<h4>[(#URL_ECRIRE{mes_articles}|afficher_plus_info)]<:info_articles:></h4>
+	<ul class="liste-items">
+		<BOUCLE_cpt(DATA){liste prepa,prop,publie}><BOUCLE_arts(ARTICLES){statut=#VALEUR}{pagination 1}>
+			<li class="item[(#STATUT|=={publie}|oui)on]">
+				[(#GET{titre}|table_valeur{#VALEUR})]&nbsp;:
+				#SET{restreints,0}
+				<BOUCLE_restreints(RUBRIQUES){id_auteur=#SESSION{id_auteur}}{si #SESSION{statut}|=={0minirezo}}>
+				<BOUCLE_artsr(ARTICLES){statut=#VALEUR}{branche} />#SET{restreints,#GET{restreints}|plus{#TOTAL_BOUCLE}}<//B_artsr>
+				</BOUCLE_restreints>
+				[(#GET{restreints}|oui)#GET{restreints}/]</B_restreints>#GRAND_TOTAL
+			</li>
+		</BOUCLE_arts></BOUCLE_cpt>
+	</ul>
+</B_cpt>
+</div>
+
+
+<div class='accueil_informations auteurs'>
+	<B_cpta>
+		<h4>[(#URL_ECRIRE{auteurs}|afficher_plus_info)]<:icone_auteurs:></h4>
+		<ul class="liste-items">
+			<BOUCLE_cpta(POUR){tableau #EVAL{$GLOBALS['liste_des_statuts']}}><BOUCLE_auts(AUTEURS){statut=#VALEUR}{tout} />
+			[(#TOTAL_BOUCLE|oui)
+			<li class="item">[(#CLE|_T)]&nbsp;: #TOTAL_BOUCLE
+			</li>
+			]
+			<//B_auts>
+			</BOUCLE_cpta>
+		</ul>
+	</B_cpta>
+</div>
