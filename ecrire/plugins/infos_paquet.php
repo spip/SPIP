@@ -32,8 +32,7 @@ function plugins_infos_paquet($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
 		// compatibilite avec l'existant:
 		$vxml->tree['icon'] = $vxml->tree['logo']; 
 		$vxml->tree['path'] = $vxml->tree['chemin'] ? $vxml->tree['chemin'] : array(array('dir'=>'')); // initialiser par defaut
-#		if ($plug) 
-paquet_readable_files($vxml, "$dir_plugins$plug/");
+		if ($plug) paquet_readable_files($vxml, "$dir_plugins$plug/");
 		return $vxml->tree;
 	}
 	// Prendre les messages d'erreur sans les numeros de lignes
