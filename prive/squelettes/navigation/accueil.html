@@ -1,6 +1,41 @@
-<?php
+[(#BOITE_OUVRIR{[
+	[(#URL_ECRIRE{infos_perso}|afficher_plus_info)]
+	[(#CHEMIN_IMAGE{information-perso-24.png}|balise_img{'','cadre-icone'})]
+	(#SESSION{nom})
+],'simple personnel'})]
 
-include_spip('exec/accueil');
-echo exec_accueil_navigation();
+	<B_restreintes>
+			<h3>[(#GRAND_TOTAL|afficher_nb_objets{rubrique})]</h3>
+			<ul class="liste-items rubriques">
+			<BOUCLE_restreintes(RUBRIQUES){id_auteur=#SESSION{id_auteur}}{tout}{par titre}{pagination 10}{si #SESSION{statut}|=={0minirezo}}>
+				<li class="item rubrique"><a href='[(#ID_RUBRIQUE|generer_url_entite{rubrique})]'>[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img)] #TITRE</a></li>
+			</BOUCLE_restreintes>
+			</ul>
+			[<p class="pagination">(#PAGINATION{prive})</p>]
+	</B_restreintes>
 
-?>
+	[(#EVAL{$_COOKIE}|table_valeur{spip_admin}|oui)
+		[(#SELF|parametre_url{action,cookie}|parametre_url{cookie_admin,non}|parametre_url{redirect,#SELF}|icone_horizontale{<:icone_supprimer_cookie:>,cookie-24.png,delsafe})]
+	][(#EVAL{$_COOKIE}|table_valeur{spip_admin}|non)
+		<p><:info_activer_cookie:> #AIDER{cookie}</p>
+
+		[(#SELF|parametre_url{action,cookie}|parametre_url{cookie_admin,@#SESSION{login}}|parametre_url{redirect,#SELF}|icone_horizontale{<:icone_activer_cookie:>,cookie-24.png})]
+	]
+#BOITE_FERMER
+
+[(#BOITE_OUVRIR{[
+	[(#CHEMIN_IMAGE{racine-24.png}|balise_img{'','cadre-icone'})]
+	(#NOM_SITE_SPIP)
+],'simple etat_base'})]
+
+	[<div class="logo_du_site">(#LOGO_SITE_SPIP|image_reduire{170,170})</div>]
+	<div class="descriptif_du_site">#DESCRIPTIF_SITE_SPIP</div>
+
+		<?php
+
+		include_spip('exec/accueil');
+		echo etat_base_accueil();
+
+		?>
+
+#BOITE_FERMER

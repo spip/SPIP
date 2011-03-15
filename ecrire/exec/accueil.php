@@ -31,67 +31,6 @@ function encours_accueil()
 }
 
 
-// Cartouche d'identification, avec les rubriques administrees
-
-// http://doc.spip.org/@personnel_accueil
-function personnel_accueil($coockcookie)
-{
-	global $spip_lang_left, $connect_id_auteur, $connect_id_rubrique ;
-
-	$res = '';
-
-	if (count($connect_id_rubrique)) {
-
-		$res = sql_allfetsel("R.id_rubrique, R.titre, R.descriptif", "spip_auteurs_liens AS A LEFT JOIN spip_rubriques AS R ON A.id_objet=R.id_rubrique", "A.objet='rubrique' AND A.id_auteur=$connect_id_auteur", "", "titre");
-
-		foreach ($res as $k => $r) {
-			$res[$k] = "<a title='" .
-			  typo($r['descriptif']) .
-			  "' href='" .
-			  generer_url_entite($r['id_rubrique'],'rubrique') . "'>" .
-			  typo($r['titre']) .
-			  '</a>';
-		}
-
-		$res = "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>\n<li>" . join("</li>\n<li>", $res) . "\n</li></ul>";
-	}
-
-	//
-	// Supprimer le cookie, se deconnecter...
-	//
-	
-	if ($coockcookie) {
-		$lien = generer_url_action('cookie', "cookie_admin=non&url=".rawurlencode('./'. _SPIP_ECRIRE_SCRIPT));
-		$t = _T('icone_supprimer_cookie');
-		$lien = icone_horizontale($t, $lien, "cookie-24.png", "supprimer-sansdanger.gif");
-		if ($GLOBALS['spip_display'] != 1) 
-			$lien = str_replace('</td></tr></table>', 
-					 aide("cookie").'</td></tr></table>',
-					 $lien);
-	}
-	//
-	// Modification du cookie
-	//
-
-	else {
-		$cookie = rawurlencode("@$connect_login");
-		$retour = rawurlencode('./' . _SPIP_ECRIRE_SCRIPT);
-		$lien = generer_url_action('cookie', "cookie_admin=$cookie&url=$retour");
-		$lien = 
-			  _T('info_activer_cookie').
-			  aide ("cookie").
-			icone_horizontale(_T('icone_activer_cookie'), $lien,"cookie-24.png");
-	}
-	
-	$titre_cadre = afficher_plus_info(generer_url_ecrire("infos_perso"));
-	$titre_cadre .= majuscules(typo($GLOBALS['visiteur_session']['nom']));
-	
-	return debut_cadre_relief("information-perso-24.png",true, '',$titre_cadre)
-	. $res
-	. "<div class='info_cookie'>$lien</div>"
-	. fin_cadre_relief(true);
-}
-
 // Cartouche du site, avec le nombre d'articles et autres objets ajoutes par les plugins
 
 // http://doc.spip.org/@etat_base_accueil
@@ -102,18 +41,6 @@ function etat_base_accueil()
 	$where = count($connect_id_rubrique) ? sql_in('id_rubrique', $connect_id_rubrique)	: '';
 
 	$res = '';
-
-	if ($spip_display != 1) {
-		$chercher_logo = charger_fonction('chercher_logo', 'inc');
-		if ($r = $chercher_logo(0, 'id_syndic', 'on'))  {
-			list($fid, $dir, $nom, $format) = $r;
-			include_spip('inc/filtres_images_mini');
-			$r = image_reduire("<img src='$fid' alt='' />", 170, 170);
-			if ($r)
-				$res ="<div style='text-align:center; margin-bottom: 5px;'>$r</div>";
-		}
-	}
-	$res .= propre($GLOBALS['meta']["descriptif_site"]);
 
 	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_articles', '', 'statut', '','', "COUNT(*)<>0");
   
@@ -179,8 +106,7 @@ function accueil_liste_participants()
 function exec_accueil_navigation(){
 	$nom = typo($GLOBALS['meta']["nom_site"]);
 	if (!$nom) $nom=  _T('info_mon_site_spip');
-	return personnel_accueil(@$_COOKIE['spip_admin'])
-		. debut_cadre_relief("racine-24.png", true, "", $nom)
+	return  debut_cadre_relief("racine-24.png", true, "", $nom)
 		. etat_base_accueil()
 		. fin_cadre_relief(true);
 }
