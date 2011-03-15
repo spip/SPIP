@@ -1,10 +1,3 @@
 [(#ENV{exec}|match{configurer_}|oui)
 <INCLURE{fond=prive/squelettes/navigation/configurer,env}>
-][(#ENV{exec}|match{configurer_}|non)
-<?php
-
-include_spip('exec/accueil');
-echo exec_accueil_navigation();
-
-?>
 ]
