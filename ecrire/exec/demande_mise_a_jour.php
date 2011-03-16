@@ -26,15 +26,17 @@ function exec_demande_mise_a_jour_dist() {
 	}
 
 	include_spip('inc/presentation');
+	include_spip('inc/filtres_boites');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page('','','','',true,false,false);
-	echo "<br /><br /><h4><span style='color: red'>",	_T('info_message_technique'),"</span><br /> ",
-	_T('info_procedure_maj_version'),
-	"</h4><div>",
-	_T('info_administrateur_site_01'),
-	" <a href='" . generer_url_ecrire("upgrade","reinstall=non") . "'>",
-	_T('info_administrateur_site_02'),
-	"</a></div>";
+
+	echo debut_grand_cadre(true);
+	echo boite_ouvrir(_T('info_message_technique'),'notice');
+	echo "<p>"._T('info_procedure_maj_version')."</p>",
+	     "<p>"._T('info_administrateur_site_01')."</p>";
+	echo bouton_action(_T('bouton_mettre_a_jour_base'),generer_url_ecrire("upgrade","reinstall=non"));
+	echo boite_fermer();
+	echo fin_grand_cadre(true);
 	echo fin_page();
 }
 ?>
