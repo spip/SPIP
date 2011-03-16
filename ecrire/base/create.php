@@ -18,6 +18,28 @@ include_spip('base/typedoc');
 include_spip('base/abstract_sql');
 
 /**
+ * Determiner le flag autoinc pour une table
+ * en fonction de si c'est une table principale
+ *
+ * @param string $table
+ * @param array $desc
+ * @return bool
+ */
+function base_determine_autoinc($table,$desc=array()){
+	if ($t=lister_tables_principales() AND isset($t[$table]))
+		$autoinc = true;
+	elseif ($t=lister_tables_auxiliaires() AND isset($t[$table]))
+		$autoinc = false;
+	else {
+		// essayer de faire au mieux !
+		$autoinc = (isset($desc['key']['PRIMARY KEY'])
+						AND strpos($desc['key']['PRIMARY KEY'],',')===false
+						AND strpos($desc['field'][$desc['key']['PRIMARY KEY']],'default')===false);
+	}
+	return $autoinc;
+}
+
+/**
  * Creer une table,
  * ou ajouter les champs manquants si elle existe deja
  *
@@ -35,18 +57,8 @@ include_spip('base/abstract_sql');
 function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='') {
 	$sql_desc = $upgrade ? sql_showtable($table,true,$serveur) : false;
 	if (!$sql_desc) {
-		if ($autoinc==='auto') {
-			if ($t=lister_tables_principales() AND isset($t[$table]))
-				$autoinc = true;
-			elseif ($t=lister_tables_auxiliaires() AND isset($t[$table]))
-				$autoinc = false;
-			else {
-				// essayer de faire au mieux !
-				$autoinc = (isset($desc['key']['PRIMARY KEY'])
-								AND strpos($desc['key']['PRIMARY KEY'],',')===false
-								AND strpos($desc['field'][$desc['key']['PRIMARY KEY']],'default')===false);
-			}
-		}
+		if ($autoinc==='auto')
+			$autoinc = base_determine_autoinc($table,$desc);
 		sql_create($table, $desc['field'], $desc['key'], $autoinc, false, $serveur);
 	}
 	else {
