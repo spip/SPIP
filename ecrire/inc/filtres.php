@@ -1196,17 +1196,14 @@ function extraire_multi($letexte, $lang=null, $echappe_span=false) {
 				$trad = $trads[$l];
 				$typographie = charger_fonction(lang_typo($l), 'typographie');
 				$trad = traiter_retours_chariots($typographie($trad));
-				$trad = explode("\n", $trad);
-				foreach($trad as $i => $ligne) {
-					if (strlen($ligne)) {
-						$ligne = code_echappement($ligne, 'multi');
-						$ligne = str_replace("'", '"', inserer_attribut($ligne, 'lang', $l));
-						if (lang_dir($l) !== lang_dir($lang))
-							$ligne = str_replace("'", '"', inserer_attribut($ligne, 'dir', lang_dir($l)));
-						$trad[$i] = $ligne;
-					}
-				}
-				$trad = join("\n", $trad);
+				include_spip('inc/texte');
+				$trad_propre = propre($trad);
+				// Tester si on echappe en span ou en div
+				$mode = preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $trad_propre) ? 'div' : 'span';
+				$trad = code_echappement($trad, 'multi', false, $mode);
+				$trad = str_replace("'", '"', inserer_attribut($trad, 'lang', $l));
+				if (lang_dir($l) !== lang_dir($lang))
+					$trad = str_replace("'", '"', inserer_attribut($trad, 'dir', lang_dir($l)));
 				if (!$echappe_span)
 					$trad = echappe_retour($trad, 'multi');
 			}

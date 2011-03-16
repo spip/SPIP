@@ -135,13 +135,12 @@ if (!defined('_BALISES_BLOCS_REGEXP'))
 // une $source differente ; le script detecte automagiquement si ce qu'on
 // echappe est un div ou un span
 // http://doc.spip.org/@code_echappement
-function code_echappement($rempl, $source='', $no_transform=false) {
+function code_echappement($rempl, $source='', $no_transform=false, $mode=NULL) {
 	if (!strlen($rempl)) return '';
 
 	// Tester si on echappe en span ou en div
-	$mode = preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $rempl) ?
-		'div' : 'span';
-	$return = '';
+	if (is_null($mode) OR !in_array($mode,array('div','span')))
+		$mode = preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $rempl) ? 'div' : 'span';
 
 	// Decouper en morceaux, base64 a des probleme selon la taille de la pile
 	$taille = 30000;
