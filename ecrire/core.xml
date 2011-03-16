@@ -235,8 +235,14 @@
 	<pipeline><nom>delete_tables</nom><action></action></pipeline>
 	<pipeline><nom>editer_contenu_objet</nom><action></action></pipeline>
 	<pipeline><nom>exec_init</nom><action></action></pipeline>
-	<pipeline><nom>formulaire_charger</nom><action></action></pipeline>
-	<pipeline><nom>formulaire_verifier</nom><action></action></pipeline>
+	<pipeline><nom>formulaire_charger</nom>
+		<action>cvtmulti_formulaire_charger</action>
+		<inclure>inc/cvt_multietapes.php</inclure>
+	</pipeline>
+	<pipeline><nom>formulaire_verifier</nom>
+		<action>cvtmulti_formulaire_verifier</action>
+		<inclure>inc/cvt_multietapes.php</inclure>
+	</pipeline>
 	<pipeline><nom>formulaire_traiter</nom><action></action></pipeline>
 	<pipeline><nom>formulaire_admin</nom><action></action></pipeline>
 	<pipeline><nom>header_prive</nom>
@@ -299,7 +305,10 @@
 		<action>f_recuperer_fond</action>
 		<inclure>inc/pipelines.php</inclure>
 	</pipeline>
-	<pipeline><nom>styliser</nom><action></action></pipeline>
+	<pipeline><nom>styliser</nom>
+		<action>cvtmulti_styliser</action>
+		<inclure>inc/cvt_multietapes.php</inclure>
+	</pipeline>
 	<pipeline><nom>trig_calculer_prochain_postdate</nom><action></action></pipeline>
 	<pipeline><nom>trig_calculer_langues_rubriques</nom><action></action></pipeline>
 	<pipeline><nom>trig_propager_les_secteurs</nom><action></action></pipeline>
