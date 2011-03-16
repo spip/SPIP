@@ -2636,4 +2636,21 @@ function afficher_nb_objets($nb, $objet){
 	else
 		return _T(info_objet($objet,$nb==1?'info_1_objet':'info_nb_objets'),array('nb'=>$nb));
 }
+
+/**
+ * Fonction de secours pour inserer le head_css de facon conditionnelle
+ * appelee en filtre sur le squelette qui contient #INSERT_HEAD
+ * elle verifie l'absence eventuelle de #INSERT_HEAD_CSS et y suplee si besoin
+ * pour assurer la compat avec les squelettes qui n'utilisent pas
+ * 
+ * @param string $flux
+ * @return void
+ */
+function insert_head_css_conditionnel($flux){
+	if (strpos($flux,'<!-- insert_head_css -->')===false
+		AND $p=strpos($flux,'<!-- insert_head -->')){
+		$flux = substr_replace($flux,pipeline('insert_head_css','<!-- insert_head_css -->'),$p,0);
+	}
+	return $flux;
+}
 ?>
