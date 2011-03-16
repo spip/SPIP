@@ -296,13 +296,15 @@ function base_vider_tables_destination_copie($tables, $exlure_tables = array(), 
 	if ($serveur==''
 	  AND in_array('spip_auteurs',$tables)
 	  AND !in_array('spip_auteurs',$exlure_tables)) {
-		spip_log('Conserver copieur '.$GLOBALS['visiteur_statut']['id_auteur'] . " dans id_auteur=0 pour le serveur '$serveur'",'dump.'._LOG_INFO_IMPORTANTE);
-		sql_delete("spip_auteurs", "id_auteur=0",$serveur);
-		// utiliser le champ webmestre pour stocker l'ancien id ne marchera pas si l'id comporte plus de 3 chiffres...
-		sql_updateq('spip_auteurs', array('id_auteur'=>0, 'webmestre'=>$GLOBALS['visiteur_statut']['id_auteur']), "id_auteur=".intval($GLOBALS['visiteur_statut']['id_auteur']),array(),$serveur);
+		// s'asurer qu'on a pas deja fait la manip !
+		if (sql_countsel("spip_auteurs", "id_auteur<>0")) {
+			spip_log('Conserver copieur '.$GLOBALS['visiteur_statut']['id_auteur'] . " dans id_auteur=0 pour le serveur '$serveur'",'dump.'._LOG_INFO_IMPORTANTE);
+			sql_delete("spip_auteurs", "id_auteur=0",$serveur);
+			// utiliser le champ webmestre pour stocker l'ancien id ne marchera pas si l'id comporte plus de 3 chiffres...
+			sql_updateq('spip_auteurs', array('id_auteur'=>0, 'webmestre'=>$GLOBALS['visiteur_statut']['id_auteur']), "id_auteur=".intval($GLOBALS['visiteur_statut']['id_auteur']),array(),$serveur);
+		}
 		sql_delete("spip_auteurs", "id_auteur!=0",$serveur);
 	}
-
 }
 
 
@@ -352,6 +354,13 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
 			// faire un simple upgrade a la place
 			// pour ajouter les champs manquants
 			$upgrade = true;
+			// coherence avec le drop sur les autres tables
+			base_vider_tables_destination_copie(array($table),array(),$serveur_dest);
+			if ($table=='spip_meta'){
+				// virer les version base qui vont venir avec l'import
+				sql_delete($table, "nom like '%_base_version'",$serveur_dest);
+				sql_delete($table, "nom='version_installee'",$serveur_dest);
+			}
 		}
 		else {
 			sql_drop_table($table, '', $serveur_dest);
