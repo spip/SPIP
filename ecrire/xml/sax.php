@@ -253,9 +253,10 @@ function analyser_doctype($data)
 					return array('', $topelement, 'SYSTEM', $f, $dtd, $pico);
 			}
 		}
+		spip_log("Dtd pas vu pour " . substr($data, 0, 100));
 		return array();
 	}
-	list($doctype,$pi,$co,$pico, $topelement, $avail,$suite) = $page;
+	list($doctype,$pico, $topelement, $avail,$suite) = $page;
 
 	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r))
 		if (!preg_match("/^'([^']*)'\s*(.*)$/", $suite, $r))
