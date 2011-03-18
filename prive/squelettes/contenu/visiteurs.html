@@ -1,6 +1,7 @@
 <h1><:info_visiteurs:></h1>
 
-#SET{statuts,#VAL{visiteurs}|auteurs_lister_statuts}
+#SET{statuts,#VAL{visiteurs}|auteurs_lister_statuts{0}}
+[(#GET{statuts}|count|non)#SET{statuts,#ARRAY{0,zzzz}}]
 <B_st>
 <div class="onglets_simple clearfix">
 	<ul>
