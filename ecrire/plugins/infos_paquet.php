@@ -27,7 +27,7 @@ function plugins_infos_paquet($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
 			    );
 	$dir = "$dir_plugins$plug/";
 	$sax = charger_fonction('sax', 'xml');
-	$sax($desc, false, $vxml);
+	$sax($desc, false, $vxml, 'paquet.dtd');
 	if (!$vxml->err) {
 		// compatibilite avec l'existant:
 		$vxml->tree['icon'] = $vxml->tree['logo']; 

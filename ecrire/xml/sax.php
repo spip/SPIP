@@ -138,9 +138,41 @@ function coordonnees_erreur($phraseur, $msg)
 }
 
 // http://doc.spip.org/@xml_sax_dist
-function xml_sax_dist($page, $apply=false, $phraseur=NULL)
+function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='')
 {
-	// init par defaut si pas fait (compatibilite Tidy espace public)
+	if ($apply) {
+		ob_start();
+		if (is_array($apply))
+		  $r = call_user_func_array($page, $apply);
+		else $r = $page();
+		$page = ob_get_contents();
+		ob_end_clean();
+		// fonction sans aucun "echo", ca doit etre le resultat
+		if (!$page) $page = $r;
+	}
+
+	// charger la DTD et transcoder les entites,
+	// et escamoter le doctype que sax mange en php5 mais pas en  php4
+	if (!$doctype) {
+		if (!$r = analyser_doctype($page)) {
+			$page = _MESSAGE_DOCTYPE . _DOCTYPE_ECRIRE
+			  . preg_replace(_REGEXP_DOCTYPE, '', $page);
+			$r =  analyser_doctype($page);
+		}
+		list($entete, $avail, $grammaire, $rotlvl) = $r;
+		$page = substr($page,strlen($entete));
+	} else {
+		$avail = 'SYSTEM';
+		$grammaire = $doctype;
+		$rotlvl = basename($grammaire);
+	}
+	if (!$page) return '';
+
+	include_spip('xml/analyser_dtd');
+	$dtc = charger_dtd($grammaire, $avail, $rotlvl);
+	$page = sax_bug($page, $dtc);
+
+	// compatibilite Tidy espace public
 	if (!$phraseur) {
 		$indenter_xml = charger_fonction('indenter', 'xml');
 		return $indenter_xml($page, $apply);
@@ -163,21 +195,6 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL)
 
 	xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
 
-	if ($apply) {
-		ob_start();
-		if (is_array($apply))
-		  $r = call_user_func_array($page, $apply);
-		else $r = $page();
-		$page = ob_get_contents();
-		ob_end_clean();
-		// fonction sans aucun "echo", ca doit etre le resultat
-		if (!$page) $page = $r;
-	}
-
-	// charger la DTD et transcoder les entites,
-	// et escamoter le doctype que sax mange en php5 mais pas en  php4
-	list($entete,$page, $dtc) = sax_bug($page);
-
 	$phraseur->sax = $xml_parser;
 	$phraseur->entete = $entete;
 	$phraseur->page = $page;
@@ -194,25 +211,8 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL)
 // sinon on se rabat sur ce qu'en connait SPIP en standard.
 
 // http://doc.spip.org/@sax_bug
-function sax_bug($data)
+function sax_bug($data, $dtc)
 {
-	$r = analyser_doctype($data);
-
-	if (!$r) {
-		$data = _MESSAGE_DOCTYPE . _DOCTYPE_ECRIRE
-		. preg_replace(_REGEXP_DOCTYPE, '', $data);
-		$r =  analyser_doctype($data);
-	}
-
-	list($doctype, $topelement, $avail, $grammaire, $rotlvl, $len) = $r;
-
-	include_spip('xml/analyser_dtd');
-	$dtc = charger_dtd($grammaire, $avail, $rotlvl);
-
-	// l'entete contient eventuellement < ? xml... ? >, le Doctype, 
-	// et des commentaires autour d'eux
-	$entete = ltrim(substr($data,0,$len));
-
 	if ($dtc) {
 		$trans = array();
 		
@@ -220,14 +220,15 @@ function sax_bug($data)
 			if (!strpos(" amp lt gt quot ", $k))
 			    $trans["&$k;"] = $v;
 		}
-		$data = strtr(substr($data,$len), $trans);
+		$data = strtr($data, $trans);
 	} else {
-		$data = html2unicode(substr($data,$len), true);
+		$data = html2unicode($data, true);
 	}
-	return array($entete,unicode2charset($data), $dtc);
+	return unicode2charset($data);
 }
 
-// Reperer le Doctype et le decomposer selon:
+// Retirer < ? xml... ? > et autre PI, ainsi que les commentaires en debut
+// afin de reperer le Doctype et le decomposer selon:
 // http://www.freebsd.org/doc/fr_FR.ISO8859-1/books/fdp-primer/sgml-primer-doctype-declaration.html
 // Si pas de Doctype et premiere balise = RSS prendre la doctype RSS 0.91:
 // les autres formats RSS n'ont pas de DTD,
@@ -237,26 +238,22 @@ function analyser_doctype($data)
 {
 	if (!preg_match(_REGEXP_DOCTYPE, $data, $page)) {
 		if (preg_match(_REGEXP_XML, $data, $page)) {
-			list(,$pico, $topelement) = $page;
-			$pico = strlen($pico);
+			list(,$enetete, $topelement) = $page;
 			if ($topelement == 'rss')
-				return array('',
-					     'rss',
-					     'PUBLIC', 
-					     _DOCTYPE_RSS,
-					     'rss-0.91.dtd',
-					     $pico);
+			  return array($entete, 'PUBLIC', 
+				       _DOCTYPE_RSS,
+					     'rss-0.91.dtd');
 			else {
 				$dtd = $topelement . '.dtd';
 				$f = find_in_path($dtd);
 				if (file_exists($f))
-					return array('', $topelement, 'SYSTEM', $f, $dtd, $pico);
+				  return array($entete, 'SYSTEM', $f, $dtd);
 			}
 		}
 		spip_log("Dtd pas vu pour " . substr($data, 0, 100));
 		return array();
 	}
-	list($doctype,$pico, $topelement, $avail,$suite) = $page;
+	list($entete,, $topelement, $avail,$suite) = $page;
 
 	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r))
 		if (!preg_match("/^'([^']*)'\s*(.*)$/", $suite, $r))
@@ -275,6 +272,6 @@ function analyser_doctype($data)
 		$grammaire = $r[1];
 	}
 
-	return array(substr($doctype,strlen($pico)), $topelement, $avail, $grammaire, $rotlvl, strlen($doctype));
+	return array($entete, $avail, $grammaire, $rotlvl);
 }
 ?>
