@@ -1,8 +1,8 @@
-[(#SET{picto,[(#ENV{objet}|info_objet{icone_objet})-16.png]})]
+[(#SET{picto,[(#ENV{objet}|objet_info{icone_objet})-16.png]})]
 #SET{picto,#CHEMIN_IMAGE{#GET{picto}}|balise_img}
 <B_liste_obj>
 #ANCRE_PAGINATION
-<div class="liste-objets [(#ENV{objet}|info_objet{table_objet})] traductions">
+<div class="liste-objets [(#ENV{objet}|objet_info{table_objet})] traductions">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,<:info_traductions:>})</strong></caption>]
 	<thead>
@@ -34,7 +34,7 @@
 			</td>
 			<td class='langue'>[(#VALEUR{lang}|traduire_nom_langue)]</td>
 			<td class='id'>[(#AUTORISER{modifier,#ENV{objet},#VALEUR{id}}|?{
-				<a href="[(#URL_ECRIRE{#ENV{objet}|info_objet{url_edit}}|parametre_url{#ENV{objet}|id_table_objet,#VALEUR{id}})]">#VALEUR{id}</a>,
+				<a href="[(#URL_ECRIRE{#ENV{objet}|objet_info{url_edit}}|parametre_url{#ENV{objet}|id_table_objet,#VALEUR{id}})]">#VALEUR{id}</a>,
 				#VALEUR{id}
 			})]</td>
 		</tr>
@@ -44,5 +44,5 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_obj>[
-<div class="liste-objets [(#ENV{objet}|info_objet{table_objet})] traductions"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+<div class="liste-objets [(#ENV{objet}|objet_info{table_objet})] traductions"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_obj>

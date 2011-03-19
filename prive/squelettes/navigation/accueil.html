@@ -5,7 +5,7 @@
 ],'simple personnel'})]
 
 	<B_restreintes>
-			<h4>[(#GRAND_TOTAL|afficher_nb_objets{rubrique})]</h4>
+			<h4>[(#GRAND_TOTAL|objet_afficher_nb{rubrique})]</h4>
 			<ul class="liste-items rubriques">
 			<BOUCLE_restreintes(RUBRIQUES){id_auteur=#SESSION{id_auteur}}{tout}{par titre}{pagination 10}{si #SESSION{statut}|=={0minirezo}}>
 				<li class="item rubrique"><a href='[(#ID_RUBRIQUE|generer_url_entite{rubrique})]'>[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img)] #TITRE</a></li>

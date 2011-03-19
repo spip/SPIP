@@ -46,7 +46,7 @@
 		</ul>
 		[(#ENV{_traduire}|oui)
 			[<div class="new_trad[(#ENV{_saisie_en_cours}|non)none-js]">
-			(#URL_ECRIRE{#ENV{_objet}|info_objet{url_edit},new=oui&lier_trad=#ENV{_id_objet}}|parametre_url{#ENV{_objet}|=={rubrique}|?{id_parent,id_rubrique},#ENV{_id_parent}}|icone_horizontale{<:trad_new:>,traduction,new})
+			(#URL_ECRIRE{#ENV{_objet}|objet_info{url_edit},new=oui&lier_trad=#ENV{_id_objet}}|parametre_url{#ENV{_objet}|=={rubrique}|?{id_parent,id_rubrique},#ENV{_id_parent}}|icone_horizontale{<:trad_new:>,traduction,new})
 			</div>]
 		]
 		[(#ENV{editable})
