@@ -23,11 +23,12 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 	if (isset($dtd[$file]))
 		return $dtd[$file];
 
+	if ($avail == 'SYSTEM') $grammaire = find_in_path($grammaire);
+
 	if (lire_fichier($file, $r)) {
-		if ($avail == 'SYSTEM') {
-			if (!$grammaire OR filemtime($file) < filemtime($grammaire))
+		if (!$grammaire) return array();
+		if (($avail == 'SYSTEM') AND filemtime($file) < filemtime($grammaire))
 				$r = false;
-		}
 	}
 
 	if ($r) {
@@ -85,7 +86,7 @@ function analyser_dtd($loc, $avail, &$dtc)
 	$file = sous_repertoire(_DIR_CACHE_XML);
 	// si DTD locale, ignorer ce repertoire pour le moment
 	if ($avail == 'SYSTEM')
-	  $file = find_in_path($loc);
+	  $file = $loc;
 	else {
 	  $file .= preg_replace('/[^\w.]/','_', $loc);
 	}
