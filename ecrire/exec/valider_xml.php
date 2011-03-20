@@ -12,6 +12,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/presentation');
+include_spip('public/debusquer');
 
 // Script de validation XML selon une DTD
 // l'argument var_url peut indiquer un fichier ou un repertoire

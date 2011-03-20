@@ -18,27 +18,28 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function plugins_infos_paquet($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
 {
-	include_spip('xml/valider');
-	$vxml = new ValidateurXML();
-	$vxml->process = array(
+	static $process =  array( // tableau constant
 			'debut' => 'paquet_debutElement',
 			'fin' => 'paquet_finElement',
 			'text' => 'paquet_textElement'
-			    );
-	$dir = "$dir_plugins$plug/";
-	$sax = charger_fonction('sax', 'xml');
-	$sax($desc, false, $vxml, 'paquet.dtd');
+			   );
+
+	$valider_xml = charger_fonction('valider', 'xml');
+	$vxml = $valider_xml($desc, false, $process,  'paquet.dtd');
 	if (!$vxml->err) {
 		// compatibilite avec l'existant:
 		$vxml->tree['icon'] = $vxml->tree['logo']; 
 		$vxml->tree['path'] = $vxml->tree['chemin'] ? $vxml->tree['chemin'] : array(array('dir'=>'')); // initialiser par defaut
 		if ($plug) paquet_readable_files($vxml, "$dir_plugins$plug/");
+
 		return $vxml->tree;
 	}
 	// Prendre les messages d'erreur sans les numeros de lignes
 	$msg = array_map('array_shift', $vxml->err);
 	// Construire le lien renvoyant sur l'application du validateur XML 
-	$h = $GLOBALS['meta']['adresse_site'] . '/'. substr($dir, strlen(_DIR_RACINE)) . 'paquet.xml';
+	$h = $GLOBALS['meta']['adresse_site'] . '/'
+	. substr("$dir_plugins$plug/", strlen(_DIR_RACINE)) . 'paquet.xml';
+
 	$h = generer_url_ecrire('valider_xml', "var_url=$h");
 	$t =_T('plugins_erreur', array('plugins' =>$plug));
 	array_unshift($msg, "<a href='$h'>$t</a>");
@@ -48,12 +49,12 @@ function plugins_infos_paquet($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
 function paquet_readable_files(&$vxml, $dir)
 {
 	$prefix = $vxml->tree['prefix'];
-	if (is_readable($dir . $f = ($prefix . '_options.php')))
-		$vxml->tree['options'] = array($f);
-	if (is_readable($dir . $f = ($prefix . '_fonctions.php')))
-		$vxml->tree['fonctions'] = array($f);
-	if (is_readable($dir . $f = ($prefix . '_installation.php')))
-		$vxml->tree['install'] = array($f);
+
+	$vxml->tree['options'] =  (is_readable($dir . $f = ($prefix . '_options.php'))) ? array($f) : array();
+
+	$vxml->tree['fonctions'] = (is_readable($dir . $f = ($prefix . '_fonctions.php'))) ? array($f) : array();
+
+	$vxml->tree['install'] = (is_readable($dir . $f = ($prefix . '_actions.php'))) ? array($f) : array();
 }
 
 // Appeler l'indenteur pour sa gestion de la profondeur, 

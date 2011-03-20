@@ -19,11 +19,12 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 {
 	static $dtd = array(); # cache bien utile pour le validateur en boucle
 
-	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
-	if (isset($dtd[$file]))
-		return $dtd[$file];
+	if (isset($dtd[$grammaire]))
+		return $dtd[$grammaire];
 
 	if ($avail == 'SYSTEM') $grammaire = find_in_path($grammaire);
+
+	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
 
 	if (lire_fichier($file, $r)) {
 		if (!$grammaire) return array();
@@ -53,7 +54,7 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 		}
 		
 	}
-	$dtd[$file] = $dtc;
+	$dtd[$grammaire] = $dtc;
 	return $dtc;
 }
 

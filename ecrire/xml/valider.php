@@ -289,17 +289,10 @@ function phraserTout($phraseur, $data)
 	}
 }
 
- var $depth = "";
- var $res = "";
- var $err = array();
- var $contenu = array();
- var $ouvrant = array();
- var $reperes = array();
- var $process = array();
- var $entete = '';
- var $page = '';
- var $dtc = NULL;
- var $sax = NULL;
+// Init
+function ValidateurXML($process=array()) {
+	if (is_array($process)) $this->process = $process;
+}
 
  var $ids = array();
  var $idrefs = array();
@@ -307,111 +300,33 @@ function phraserTout($phraseur, $data)
  var $debuts = array();
  var $fratrie = array();
 
-}
-
-// http://doc.spip.org/@emboite_texte
-function emboite_texte($res, $fonc='',$self='')
-{
-	include_spip('public/debusquer');
-	$errs = $res->err;
-	$texte = $res->entete . ($errs ? $errs : $res->page);
-
-	if (!$texte)
-		return array(ancre_texte('', array('','')), false);
-	if (!$errs)
-		return array(ancre_texte($texte, array('', '')), true);
-
-	if (!isset($GLOBALS['debug_objets'])) {
-
-		$colors = array('#e0e0f0', '#f8f8ff');
-		$encore = count_occ($errs);
-		$encore2 = array();
-		$fautifs = array();
-
-		$err = '<tr><th>'
-		.  _T('numero')
-		. "</th><th>"
-		. _T('occurrence')
-		. "</th><th>"
-		. _T('ligne')
-		. "</th><th>"
-		. _T('colonne')
-		. "</th><th>"
-		. _T('erreur')
-		. "</th></tr>";
-
-		$i = 0;
-		$style = "style='text-align: right; padding-right: 5px'";
-		foreach($errs as $r) {
-			$i++;
-			list($msg, $ligne, $col) = $r;
-			#spip_log("$r = list($msg, $ligne, $col");
-			if (isset($encore2[$msg]))
-			  $ref = ++$encore2[$msg];
-			else {$encore2[$msg] = $ref = 1;}
-			$err .= "<tr  style='background-color: "
-			  . $colors[$i%2]
-			  . "'><td $style><a href='#debut_err'>"
-			  . $i
-			  . "</a></td><td $style>"
-			  . "$ref/$encore[$msg]</td>"
-			  . "<td $style><a href='#L"
-			  . $ligne
-			  . "' id='T$i'>"
-			  . $ligne
-			  . "</a></td><td $style>"
-			  . $col
-			  . "</td><td>$msg</td></tr>\n";
-			$fautifs[]= array($ligne, $col, $i, $msg);
-		}
-		$err = "<h2 style='text-align: center'>"
-		.  $i
-		. "<a href='#fin_err'>"
-		.  " "._T('erreur_texte')
-		.  "</a></h2><table id='debut_err' style='width: 100%'>"
-		. $err
-		. " </table><a id='fin_err'></a>";
-		return array(ancre_texte($texte, $fautifs), $err);
-	} else {
-		list($msg, $fermant, $ouvrant) = $errs[0];
-		$rf = reference_boucle_debug($fermant, $fonc, $self);
-		$ro = reference_boucle_debug($ouvrant, $fonc, $self);
-		$err = $msg .
-		  "<a href='#L" . $fermant . "'>$fermant</a>$rf<br />" .
-		  "<a href='#L" . $ouvrant . "'>$ouvrant</a>$ro";
-		return array(ancre_texte($texte, array(array($ouvrant), array($fermant))), $err);
-	}
-}
-
-// http://doc.spip.org/@count_occ
-function count_occ($regs)
-{
-	$encore = array();
-	foreach($regs as $r) {
-		if (isset($encore[$r[0]]))
-			$encore[$r[0]]++;
-		else $encore[$r[0]] = 1;
-	}
-	return $encore;
-}
-
-// Retourne un tableau formee de la page analysee et du tableau des erreurs,
-// ce dernier ayant comme entrees des sous-tableaux [message, ligne, colonne]
-
-// http://doc.spip.org/@xml_valider_dist
-function xml_valider_dist($page, $apply=false, $process=false, $doctype='')
-{
-	static	$default = array(
+ var $dtc = NULL;
+ var $sax = NULL;
+ var $depth = "";
+ var $entete = '';
+ var $page = '';
+ var $res = "";
+ var $err = array();
+ var $contenu = array();
+ var $ouvrant = array();
+ var $reperes = array();
+ var $process =  array(
 			'debut' => 'xml_debutElement',
 			'fin' => 'xml_finElement',
 			'text' => 'xml_textElement',
 			'pi' => 'xml_piElement',
 			'default' => 'xml_defaultElement'
 				 );
+}
 
+// Retourne une structure ValidateurXML, dont le champ "err" est un tableau
+// ayant comme entrees des sous-tableaux [message, ligne, colonne]
+
+// http://doc.spip.org/@xml_valider_dist
+function xml_valider_dist($page, $apply=false, $process=false, $doctype='')
+{
+	$f = new ValidateurXML($process);
 	$sax = charger_fonction('sax', 'xml');
-	$f = new ValidateurXML();
-	$f->process = is_array($process) ? $process : $default;
 	return $sax($page, $apply, $f, $doctype);
 }
 ?>
