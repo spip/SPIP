@@ -313,8 +313,9 @@ function phraserTout($phraseur, $data)
 function emboite_texte($res, $fonc='',$self='')
 {
 	include_spip('public/debusquer');
+	$errs = $res->err;
+	$texte = $res->entete . ($errs ? $errs : $res->page);
 
-	list($texte, $errs) = $res;
 	if (!$texte)
 		return array(ancre_texte('', array('','')), false);
 	if (!$errs)
@@ -398,13 +399,9 @@ function count_occ($regs)
 // ce dernier ayant comme entrees des sous-tableaux [message, ligne, colonne]
 
 // http://doc.spip.org/@xml_valider_dist
-function xml_valider_dist($page, $apply=false, $process=false)
+function xml_valider_dist($page, $apply=false, $process=false, $doctype='')
 {
-
-	$sax = charger_fonction('sax', 'xml');
-	$f = new ValidateurXML();
-	if (!is_array($process)) 
-		$process = array(
+	static	$default = array(
 			'debut' => 'xml_debutElement',
 			'fin' => 'xml_finElement',
 			'text' => 'xml_textElement',
@@ -412,9 +409,9 @@ function xml_valider_dist($page, $apply=false, $process=false)
 			'default' => 'xml_defaultElement'
 				 );
 
-	$f->process = $process;
-	$sax($page, $apply, $f);
-	$page = $f->err ? $f->page : $f->res;
-	return array($f->entete . $page, $f->err);
+	$sax = charger_fonction('sax', 'xml');
+	$f = new ValidateurXML();
+	$f->process = is_array($process) ? $process : $default;
+	return $sax($page, $apply, $f, $doctype);
 }
 ?>

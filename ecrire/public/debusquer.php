@@ -427,7 +427,7 @@ function debusquer_squelette ($fonc, $mode, $self) {
 		$valider = charger_fonction('valider', 'xml');
 		$val = $valider($debug_objets['validation'][$fonc . 'tout']);
 		// Si erreur, signaler leur nombre dans le formulaire admin
-		$debug_objets['validation'] = $val[1] ? count($val[1]):'';
+		$debug_objets['validation'] = $val->err ? count($val->err):'';
 		list($texte, $err) = emboite_texte($val, $fonc, $self);
 		if ($err === false)
 			$err = _T('impossible');

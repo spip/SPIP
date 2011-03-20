@@ -64,28 +64,31 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 			}
 			$bandeau = $dir . '*' . $ext . $err;
 		} else {
-			if (preg_match('/^([^?]*)[?]([0-9a-z_]+)=(.*)$/', $url, $r)) {
-				list(,$server, $dir, $script) = $r;
+			if (preg_match('@^((?:[.]/)?[^?]*)[?]([0-9a-z_]+)=([^&]*)(.*)$@', $url, $r)) {
+			  list(,$server, $dir, $script, $args) = $r;
 				if (((!$server) OR ($server == './') 
 				    OR strpos($server, url_de_base()) === 0)
-				    AND is_dir($dir))
+				    AND is_dir($dir)) {
 				  $url = $script;
-			} else { $dir = 'exec'; $script = $url;}
+				  // Pour quand le validateur saura simuler 
+				  // une query-string...
+				  // $args = preg_split('/&(amp;)?[a-z0-9_]+=/', $args);
+				  $args = true;
+				}
+			} else { $dir = 'exec'; $script = $url; $args = true;}
+
 			$transformer_xml = charger_fonction('valider', 'xml');
 			$onfocus = "this.value='" . addslashes($url) . "';";
 			if (preg_match(',^[a-z][0-9a-z_]*$,i', $url)) {
-				$res = $transformer_xml(charger_fonction($url, $dir), true);
+				$res = $transformer_xml(charger_fonction($url, $dir), $args);
 				$url_aff = valider_pseudo_url($dir, $script);
 			} else {
 				$res = $transformer_xml(recuperer_page($url));
 				$url_aff = entites_html($url);
 			}
-			if ($res[1]) {
-				list($texte, $err) = emboite_texte($res);
-			}
-			else {
+			list($texte, $err) = emboite_texte($res);
+			if (!$err) {
 				$err = '<h3>' . _T('spip_conforme_dtd') . '</h3>';
-				list($texte, ) = emboite_texte($res);
 			}
 
 			$res =
@@ -165,7 +168,7 @@ function valider_script($transformer_xml, $script, $dir, $ext)
 	if ($script == _request('exec') OR $script=='index' OR !$f)
 		return array('/', 0, '', $script,''); 
 
-	list($texte, $err) = $transformer_xml($f, true);
+	$val = $transformer_xml($f, true);
 	$appel = '';
 	
 	// s'il y a l'attribut minipres, le test est non significatif
@@ -175,20 +178,21 @@ function valider_script($transformer_xml, $script, $dir, $ext)
 	// ou c'est une authentification pour action d'administration;
 	// tant pis, on signale le cas par un resultat negatif
 
-	if (strpos($texte, "id='minipres'")) {
+	if (strpos($val->page, "id='minipres'")) {
 		if (!$g = charger_fonction($script . '_args', $dir, true)) {
-			$res = 0 - strlen($res);
+			$res = 0 - strlen($val->page);
 		} else {
 			$args = array(1, 'id_article', 1);
-			list($texte, $err) = $transformer_xml($g, $args);
+			$val = $transformer_xml($g, $args);
 			$appel = 'id_article=1&type=id_article&id=1';
-			if (strpos($texte, "id='minipres'")) {
-				$res = 0 - strlen($texte);
-			} else $res = strlen($texte);
+			if (strpos($val->page, "id='minipres'")) {
+				$res = 0 - strlen($val->page);
+			} else $res = strlen($val->page);
 		}
-	} else $res = strlen($texte);
+	} else $res = strlen($val->page);
 
 	$appel = valider_pseudo_url($dir, $script, $appel);
+	$err = $val->err;
 	return array(count($err), $res, $err, $script, $appel);
 }
 
@@ -231,9 +235,8 @@ function valider_skel($transformer_xml, $file, $dir, $ext)
 		$contexte = valider_contexte($skel_code, $file);
 		$page = $skel_nom(array('cache'=>''), array($contexte));
 	}
-	list($texte, $err) = $transformer_xml($page['texte']);
-	$res = strlen($texte);
-	return array(count($err), $res, $err, $script, $url);
+	$res = $transformer_xml($page['texte']);
+	return array(count($res->err), strlen($res->page), $res->err, $script, $url);
 }
 
 // Analyser le code pour construire un contexte plausible complet

@@ -151,6 +151,7 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='')
 		if (!$page) $page = $r;
 	}
 
+	if (!$page) return '';
 	// charger la DTD et transcoder les entites,
 	// et escamoter le doctype que sax mange en php5 mais pas en  php4
 	if (!$doctype) {
@@ -166,7 +167,6 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='')
 		$grammaire = $doctype;
 		$rotlvl = basename($grammaire);
 	}
-	if (!$page) return '';
 
 	include_spip('xml/analyser_dtd');
 	$dtc = charger_dtd($grammaire, $avail, $rotlvl);
@@ -201,6 +201,8 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='')
 	$phraseur->dtc = $dtc;
 	$phraseur->phraserTout($xml_parser, $page);
 	xml_parser_free($xml_parser);
+	$phraseur->sax = '';
+	return $phraseur;
 }
 
 // SAX ne dit pas si une Entite est dans un attribut ou non.
