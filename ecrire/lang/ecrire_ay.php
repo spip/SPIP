@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoyer_message' => 'Qhananchat yatiyaw: apaya&ntilde;a',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'ARUSKIPA&Ntilde;A &amp; IYAWSATANAKA',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Mayjacha&ntilde;a',
 'bouton_pense_bete' => 'SAPA MAYNIT AMTAYIRI',
 'bouton_radio_activer_messagerie' => 'Manqhat yatiyawiri naktaya&ntilde;a',

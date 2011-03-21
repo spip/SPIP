@@ -69,6 +69,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'bouton_envoyer_message' => 'Missatge definitiu : enviar',
 'bouton_fermer' => 'Tancar',
 'bouton_forum_petition' => 'F&Ograve;RUM &amp; PETICI&Oacute;',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'RECORDATORI D\'&Uacute;S PERSONAL',
 'bouton_radio_activer_messagerie' => 'Activar la missatgeria',

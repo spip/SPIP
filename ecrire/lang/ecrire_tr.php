@@ -73,6 +73,7 @@ Bu ithal istemini onaylamay&#305;n.
 'bouton_envoyer_message' => '&#304;letinin son hali : yolla',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FORUM &amp; &#304;MZA KAMPANYASI',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'De&#287;i&#351;tir',
 'bouton_pense_bete' => 'Ki&#350;iSEL NOT DEFTERi',
 'bouton_radio_activer_messagerie' => 'Sitenin i&ccedil; ileti sistemini a&ccedil;',

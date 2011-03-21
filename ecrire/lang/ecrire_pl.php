@@ -76,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoyer_message' => 'Wiadomo&#347;&#263; ko&#324;cowa: wys&#322;ano',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FORUM &amp; OG&#321;OSZENIA',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Modyfikuj',
 'bouton_pense_bete' => 'NOTATKA OSOBISTA',
 'bouton_radio_activer_messagerie' => 'Aktywuj poczt&#281; wewn&#281;trzn&#261;',

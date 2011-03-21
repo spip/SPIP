@@ -75,6 +75,7 @@ disattivata per motivi sicurezza (verifica con l\'amministratore di sistema).',
 'bouton_envoyer_message' => 'Messaggio definitivo: Invia',
 'bouton_fermer' => 'Chiudi',
 'bouton_forum_petition' => 'FORUM E PETIZIONE',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Modifica',
 'bouton_pense_bete' => 'PROMEMORIA AD USO PERSONALE',
 'bouton_radio_activer_messagerie' => 'Attiva la messaggistica interna',

@@ -70,6 +70,7 @@ risco de destrui&ccedil;&atilde;o da sua base de dados, mal funcionamento genera
 'bouton_envoyer_message' => 'Mensagem definitiva: enviar',
 'bouton_fermer' => 'Fechar',
 'bouton_forum_petition' => 'F&Oacute;RUM E PETI&Ccedil;&Atilde;O',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Alterar',
 'bouton_pense_bete' => 'LEMBRETE DE USO PESSOAL',
 'bouton_radio_activer_messagerie' => 'Ativar o sistema interno de mensagem',

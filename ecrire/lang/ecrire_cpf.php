@@ -86,6 +86,7 @@ Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bez
 'bouton_envoyer_message' => 'Mod&eacute;kri-la l&eacute; fini : anvwa ali',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FOROM &amp; FILSINYATIR',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Sanz',
 'bouton_pense_bete' => 'OUT PROP GARDANT&Egrave;T
 

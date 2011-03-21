@@ -75,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoyer_message' => 'Kone&#269;n&aacute; zpr&aacute;va: odeslat',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'F&Oacute;RUM A PETICE',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Zm&#283;nit',
 'bouton_pense_bete' => 'INTERN&Iacute; POZN&Aacute;MKA',
 'bouton_radio_activer_messagerie' => 'Zapnout intern&iacute; syst&eacute;m zpr&aacute;v',

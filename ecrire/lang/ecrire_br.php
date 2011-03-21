@@ -72,6 +72,7 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 'bouton_envoyer_message' => 'Kemennadenn ziwezha&ntilde; : kas',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FOROM HA SINADEG',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Kemma&ntilde;',
 'bouton_pense_bete' => 'NOTENNIG E&Ntilde;VORI&Ntilde; PERSONEL',
 'bouton_radio_activer_messagerie' => 'Gweredekaat ar postelerezh diabarzh',

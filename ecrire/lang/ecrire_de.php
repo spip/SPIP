@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoyer_message' => 'Nachricht fertig: Senden',
 'bouton_fermer' => 'Schlie&szlig;en',
 'bouton_forum_petition' => 'FORUM + PETITION',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => '&Auml;ndern',
 'bouton_pense_bete' => 'PERS&Ouml;NLICHER MERKZETTEL',
 'bouton_radio_activer_messagerie' => 'Interne Nachrichten aktivieren',

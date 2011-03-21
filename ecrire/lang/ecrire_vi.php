@@ -71,6 +71,7 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'bouton_envoyer_message' => 'Tin th&#432; &#273;&#7847;y &#273;&#7911;: G&#7917;i &#273;i ',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'DI&#7876;N &#272;&Agrave;N &amp; TH&#7880;NH NGUY&#7878;N TH&#431;',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Thay &#273;&#7893;i',
 'bouton_pense_bete' => 'GHI NH&#7898; C&Aacute; NH&Acirc;N',
 'bouton_radio_activer_messagerie' => 'S&#7917; d&#7909;ng th&#432; t&iacute;n n&#7897;i b&#7897;  ',

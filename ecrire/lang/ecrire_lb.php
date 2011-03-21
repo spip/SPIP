@@ -71,6 +71,7 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'bouton_envoyer_message' => 'Definitiven Message: sch&eacute;cken',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FORUM &amp; PETITIOUN',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => '&Auml;nneren',
 'bouton_pense_bete' => 'PERS&Eacute;INLECH NOTIZ',
 'bouton_radio_activer_messagerie' => 'D&eacute;i intern Messagerie aschalten',
