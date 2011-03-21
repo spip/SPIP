@@ -31,7 +31,7 @@ function objet_associable($objet){
 	if ($primary = id_table_objet($objet)
 	  AND $trouver_table($l = $table_sql."_liens")
 		AND !preg_match(',[^\w],',$primary)
-		AND !preg_match(',[^\w],',$table_lien))
+		AND !preg_match(',[^\w],',$l))
 		return array($primary,$l);
 	
 	spip_log("Objet $objet non associable : ne dispose pas d'une cle primaire $primary OU d'une table liens $l",_LOG_ERREUR);
@@ -269,17 +269,46 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
 			$objet = objet_type($objet); # securite
+			// Envoyer aux plugins
+			$id_objet = pipeline('pre_edition_lien',
+				array(
+					'args' => array(
+						'table_lien' => $table_lien,
+						'objet_source' => $objet_source,
+						'id_objet_source' => $id,
+						'objet' => $objet,
+						'id_objet' => $id_objet,
+						'action'=>'insert',
+					),
+					'data' => $id_objet
+				)
+			);
 			if ($id_objet=intval($id_objet)
 				AND !sql_getfetsel(
 								$primary,
 								$table_lien,
 								array('id_objet='.intval($id_objet), 'objet='.sql_quote($objet), $primary.'='.intval($id))))
 			{
+
 					$e = sql_insertq($table_lien, array('id_objet' => $id_objet, 'objet'=>$objet, $primary=>$id));
 					if ($e!==false) {
 						$ins++;
 						lien_propage_date_modif($objet,$id_objet);
 						lien_propage_date_modif($objet_source,$id);
+						// Envoyer aux plugins
+						pipeline('post_edition_lien',
+							array(
+								'args' => array(
+									'table_lien' => $table_lien,
+									'objet_source' => $objet_source,
+									'id_objet_source' => $id,
+									'objet' => $objet,
+									'id_objet' => $id_objet,
+									'action'=>'insert',
+								),
+								'data' => $id_objet
+							)
+						);
 					}
 					else
 						$echec = true;
@@ -293,20 +322,20 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
  * Fabriquer la condition where en tenant compte des jokers *
  *
  * @param string $primary
- * @param int/string/array $id_source
+ * @param int|string|array $id_source
  * @param string $objet
- * @param int/string/array $id_objet
+ * @param int|string|array $id_objet
  * @return <type>
  */
 function lien_where($primary, $id_source, $objet, $id_objet){
-	if (!strlen($id_source) 
+	if ((!is_array($id_source) AND !strlen($id_source))
 	  OR !strlen($objet)
 	  OR (!is_array($id_objet) AND !strlen($id_objet)))
 		return "0=1"; // securite
 
 	$where = array();
 	if ($id_source!=='*')
-		$where[] = addslashes($primary) . "=" . intval($id_source);
+		$where[] = (is_array($id_source)?sql_in(addslashes($primary),array_map('intval',$id_source)):addslashes($primary) . "=" . intval($id_source));
 	if ($objet!=='*')
 		$where[] = "objet=".sql_quote($objet);
 	if ($id_objet!=='*')
@@ -339,18 +368,53 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 		$objet = objet_type($objet); # securite
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
+			// id_objet peut valoir '*'
 			$where = lien_where($primary, $id, $objet, $id_objet);
 			// lire les liens existants pour propager la date de modif
-			$liens = sql_allfetsel("$primary,id_objet",$table_lien,$where);
-			$e = sql_delete($table_lien, $where);
-			if ($e!==false){
-				$dels+=$e;
-				lien_propage_date_modif($objet,array_map('end',$liens));
-				lien_propage_date_modif($objet_source,array_map('reset',$liens));
+			$liens = sql_allfetsel("$primary,id_objet,objet",$table_lien,$where);
+			// iterer sur les liens pour permettre aux plugins de gerer
+			foreach($liens as $l){
+				// Envoyer aux plugins
+				$id_o = pipeline('pre_edition_lien',
+					array(
+						'args' => array(
+							'table_lien' => $table_lien,
+							'objet_source' => $objet_source,
+							'id_objet_source' => $l[$primary],
+							'objet' => $l['objet'],
+							'id_objet' => $l['id_objet'],
+							'action'=>'delete',
+						),
+						'data' => $l['id_objet']
+					)
+				);
+				if ($id_o=intval($id_o)){
+					$where = lien_where($primary, $l[$primary], $l['objet'], $id_o);
+					$e = sql_delete($table_lien, $where);
+					if ($e!==false){
+						$dels+=$e;
+						lien_propage_date_modif($l['objet'],$id_o);
+						lien_propage_date_modif($objet_source,$l[$primary]);
+					}
+					else
+						$echec = true;
+					$retire[] = array('source'=>array($objet_source=>$l[$primary]),'lien'=>array($l['objet']=>$id_o),'type'=>$l['objet'],'id'=>$id_o);
+					// Envoyer aux plugins
+					pipeline('post_edition_lien',
+						array(
+							'args' => array(
+								'table_lien' => $table_lien,
+								'objet_source' => $objet_source,
+								'id_objet_source' => $l[$primary],
+								'objet' => $l['objet'],
+								'id_objet' => $id_o,
+								'action'=>'delete',
+							),
+							'data' => $id_o
+						)
+					);
+				}
 			}
-			else
-				$echec = true;
-			$retire[] = array('source'=>array($objet_source=>$id),'lien'=>array($objet=>$id_objet),'type'=>$objet,'id'=>$id_objet);
 		}
 	}
 	pipeline('trig_supprimer_objets_lies',$retire);

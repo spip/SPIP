@@ -291,7 +291,9 @@
 		<action>quote_amp</action>
 	</pipeline>
 	<pipeline><nom>pre_edition</nom><action></action></pipeline>
+	<pipeline><nom>pre_edition_lien</nom><action></action></pipeline>
 	<pipeline><nom>post_edition</nom><action></action></pipeline>
+	<pipeline><nom>post_edition_lien</nom><action></action></pipeline>
 	<pipeline><nom>pre_insertion</nom><action></action></pipeline>
 	<pipeline><nom>post_insertion</nom><action></action></pipeline>
 	<pipeline><nom>pre_indexation</nom><action></action></pipeline>
