@@ -32,10 +32,10 @@ function base_upgrade_dist($titre='', $reprise='')
 			creer_base();
 		}
 		// securisons les variables d'upgrade
-		$meta = preg_replace('[^\w]','',_request('meta'));
-		$table = preg_replace('[^\w]','',_request('table'));
-		if (!$meta)
-			// lancement initial de l'upgrade
+		$meta = preg_replace(',[^\w],','',_request('meta'));
+		$table = preg_replace(',[^\w],','',_request('table'));
+		if (!$meta OR ($meta=='version_installee' AND $table=='meta'))
+			// lancement de l'upgrade SPIP
 			$res = maj_base();
 		else
 			// reprise sur demande de mise a jour interrompue pour plugin
@@ -119,7 +119,7 @@ function maj_base($version_cible = 0) {
 		$cible = $cible*1000;
 
 	include_spip('maj/svn10000');
-	return maj_while($version_installee, $cible, $GLOBALS['maj'], 'version_installee');
+	return maj_while($version_installee, $cible, $GLOBALS['maj'], 'version_installee','meta',true);
 }
 
 // A partir des > 1.926 (i.e SPIP > 1.9.2), cette fonction gere les MAJ.
@@ -140,15 +140,25 @@ function maj_base($version_cible = 0) {
 define('_UPGRADE_TIME_OUT', 20);
 
 function relance_maj($meta,$table){
-	$installee = $GLOBALS[$table][$meta];
-	if (!headers_sent())
-		redirige_url_ecrire('upgrade', "reinstall=$installee&meta=$meta&table=$table");
-	else {
-		$redirect = generer_url_ecrire('upgrade',"reinstall=$installee&meta=$meta&table=$table",true);
-		echo http_script("location.href=\"".$redirect."\";");
-	}
+	// recuperer la valeur installee en cours
+	// on la tronque numeriquement, elle ne sert pas reellement
+	// sauf pour verifier que ce n'est pas oui ou non
+	// sinon is_numeric va echouer sur un numero de version 1.2.3
+	$installee = intval($GLOBALS[$table][$meta]);
+	$redirect = generer_url_ecrire('upgrade',"reinstall=$installee&meta=$meta&table=$table",true);
+	echo redirige_formulaire($redirect);
+	exit();
 }
 
+/**
+ * Initialiser la page pour l'affichage des progres de l'upgrade
+ * uniquement si la page n'a pas deja ete initilalisee
+ * 
+ * @param string $installee
+ * @param string $meta
+ * @param string $table
+ * @return
+ */
 function maj_debut_page($installee,$meta,$table){
 	static $done = false;
 	if ($done) return;
@@ -164,29 +174,34 @@ function maj_debut_page($installee,$meta,$table){
 	echo http_script("window.setTimeout('location.href=\"".$redirect."\";',".($timeout*1000).")");
 	echo "<div style='text-align: left'>\n";
 	ob_flush();flush();
+	$done = true;
 }
 
 // http://doc.spip.org/@maj_while
-function maj_while($installee, $cible, $maj, $meta='', $table='meta')
+function maj_while($installee, $cible, $maj, $meta='', $table='meta', $debut_page = false)
 {
+	include_spip('inc/plugin');
 	$n = 0;
 	$time = time();
 	// definir le timeout qui peut etre utilise dans les fonctions
 	// de maj qui durent trop longtemps
 	define('_TIME_OUT',$time+_UPGRADE_TIME_OUT);
 
-	while ($installee < $cible) {
-		$installee++;
+	ksort($maj);
+	reset($maj);
+	while (list($v,)=each($maj)) {
 		// si une maj pour cette version
-		if (isset($maj[$installee])) {
-			maj_debut_page($installee,$meta,$table);
-			echo $installee;
-			$etape = serie_alter($installee, $maj[$installee], $meta, $table);
+		if (spip_version_compare($v,$installee,'>')
+			AND spip_version_compare($v,$cible,'<=')) {
+			if ($debut_page)
+				maj_debut_page($v,$meta,$table);
+			echo $v;
+			$etape = serie_alter($v, $maj[$v], $meta, $table);
 			
-			if ($etape) return array($installee, $etape);
+			if ($etape) return array($v, $etape);
 			$n = time() - $time;
-			spip_log( "$table $meta: $installee en $n secondes",'maj.'._LOG_INFO_IMPORTANTE);
-			if ($meta) ecrire_meta($meta, $installee,'non', $table);
+			spip_log( "$table $meta: $v en $n secondes",'maj.'._LOG_INFO_IMPORTANTE);
+			if ($meta) ecrire_meta($meta, $installee=$v,'non', $table);
 			echo "<br />";
 		}
 		if (time() >= _TIME_OUT) {
@@ -195,7 +210,7 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta')
 	}
 	// indispensable pour les chgt de versions qui n'ecrivent pas en base
 	// tant pis pour la redondance eventuelle avec ci-dessus
-	if ($meta) ecrire_meta($meta, $installee,'non');
+	if ($meta) ecrire_meta($meta, $installee,'non',$table);
 	spip_log( "MAJ terminee. $meta: $installee",'maj.'._LOG_INFO_IMPORTANTE);
 	return array();
 }
@@ -205,11 +220,11 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta')
 
 // http://doc.spip.org/@serie_alter
 function serie_alter($serie, $q = array(), $meta='', $table='meta') {
-	$meta .= '_maj_' . $serie;
-	$etape = intval(@$GLOBALS[$table][$meta]);
+	$meta2 = $meta . '_maj_' . $serie;
+	$etape = intval(@$GLOBALS[$table][$meta2]);
 	foreach ($q as $i => $r) {
 		if ($i >= $etape) {
-			$msg = "maj $table $meta etape $i";
+			$msg = "maj $table $meta2 etape $i";
 			if (is_array($r)
 			  AND function_exists($f = array_shift($r))) {
 				spip_log( "$msg: $f " . join(',',$r),'maj.'._LOG_INFO_IMPORTANTE);
@@ -220,7 +235,7 @@ function serie_alter($serie, $q = array(), $meta='', $table='meta') {
 				// il faut les rejouer jusqu'a achevement.
 				// C'est a elle d'assurer qu'elles progressent a chaque rappel
 				if (strncmp($f,"sql_",4)==0)
-					ecrire_meta($meta, $i+1, 'non', $table);
+					ecrire_meta($meta2, $i+1, 'non', $table);
 				echo " . $i";
 				call_user_func_array($f, $r);
 				// si temps imparti depasse, on relance sans ecrire en meta
@@ -228,14 +243,14 @@ function serie_alter($serie, $q = array(), $meta='', $table='meta') {
 				if (time() >= _TIME_OUT) {
 					relance_maj($meta,$table);
 				}
-				ecrire_meta($meta, $i+1, 'non', $table);
-				spip_log( "$meta: ok", 'maj.'._LOG_INFO_IMPORTANTE);
+				ecrire_meta($meta2, $i+1, 'non', $table);
+				spip_log( "$meta2: ok", 'maj.'._LOG_INFO_IMPORTANTE);
 			}
 			else
 				return $i+1;
 		}
 	}
-	effacer_meta($meta, $table);
+	effacer_meta($meta2, $table);
 	return 0;
 }
 
