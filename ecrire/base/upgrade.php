@@ -31,15 +31,19 @@ function base_upgrade_dist($titre='', $reprise='')
 			spip_log("recree les tables eventuellement disparues","maj."._LOG_INFO_IMPORTANTE);
 			creer_base();
 		}
-		$meta = _request('meta');
+		// securisons les variables d'upgrade
+		$meta = preg_replace('[^\w]','',_request('meta'));
+		$table = preg_replace('[^\w]','',_request('table'));
 		if (!$meta)
+			// lancement initial de l'upgrade
 			$res = maj_base();
-		// reprise sur demande de mise a jour interrompue pour plugin 
-		else $res= maj_while($GLOBALS['meta'][$meta],
+		else
+			// reprise sur demande de mise a jour interrompue pour plugin
+			$res= maj_while($GLOBALS[$table][$meta],
 				  $GLOBALS[$meta]['cible'],
 				  $GLOBALS[$meta]['maj'],
 				  $meta,
-				  _request('table'));
+				  $table);
 		if ($res) {
 			if (!is_array($res))
 				spip_log("Pb d'acces SQL a la mise a jour","maj."._LOG_INFO_ERREUR);
@@ -135,24 +139,58 @@ function maj_base($version_cible = 0) {
 
 define('_UPGRADE_TIME_OUT', 20);
 
+function relance_maj($meta,$table){
+	$installee = $GLOBALS[$table][$meta];
+	if (!headers_sent())
+		redirige_url_ecrire('upgrade', "reinstall=$installee&meta=$meta&table=$table");
+	else {
+		$redirect = generer_url_ecrire('upgrade',"reinstall=$installee&meta=$meta&table=$table",true);
+		echo http_script("location.href=\"".$redirect."\";");
+	}
+}
+
+function maj_debut_page($installee,$meta,$table){
+	static $done = false;
+	if ($done) return;
+	include_spip('inc/minipres');
+	@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
+	$timeout = _UPGRADE_TIME_OUT*2;
+	$titre = _T('titre_page_upgrade');
+	$balise_img = chercher_filtre('balise_img');
+	$titre .= $balise_img(chemin_image('searching.gif'));
+	echo ( install_debut_html($titre));
+	// script de rechargement auto sur timeout
+	$redirect = generer_url_ecrire('upgrade',"reinstall=$installee&meta=$meta&table=$table",true);
+	echo http_script("window.setTimeout('location.href=\"".$redirect."\";',".($timeout*1000).")");
+	echo "<div style='text-align: left'>\n";
+	ob_flush();flush();
+}
+
 // http://doc.spip.org/@maj_while
 function maj_while($installee, $cible, $maj, $meta='', $table='meta')
 {
 	$n = 0;
 	$time = time();
+	// definir le timeout qui peut etre utilise dans les fonctions
+	// de maj qui durent trop longtemps
+	define('_TIME_OUT',$time+_UPGRADE_TIME_OUT);
 
 	while ($installee < $cible) {
 		$installee++;
+		// si une maj pour cette version
 		if (isset($maj[$installee])) {
+			maj_debut_page($installee,$meta,$table);
+			echo $installee;
 			$etape = serie_alter($installee, $maj[$installee], $meta, $table);
 			
-			if ($etape) return array($installe, $etape);
+			if ($etape) return array($installee, $etape);
 			$n = time() - $time;
 			spip_log( "$table $meta: $installee en $n secondes",'maj.'._LOG_INFO_IMPORTANTE);
 			if ($meta) ecrire_meta($meta, $installee,'non', $table);
-		} // rien pour SQL
-		if ($n >= _UPGRADE_TIME_OUT) {
-			redirige_url_ecrire('upgrade', "reinstall=$installee&meta=$meta&table=$table");
+			echo "<br />";
+		}
+		if (time() >= _TIME_OUT) {
+			relance_maj($meta,$table);
 		}
 	}
 	// indispensable pour les chgt de versions qui n'ecrivent pas en base
@@ -173,12 +211,28 @@ function serie_alter($serie, $q = array(), $meta='', $table='meta') {
 		if ($i >= $etape) {
 			$msg = "maj $table $meta etape $i";
 			if (is_array($r)
-			AND function_exists($f = array_shift($r))) {
+			  AND function_exists($f = array_shift($r))) {
 				spip_log( "$msg: $f " . join(',',$r),'maj.'._LOG_INFO_IMPORTANTE);
-				ecrire_meta($meta, $i+1, 'non', $table); // attention on enregistre le meta avant de lancer la fonction, de maniere a eviter de boucler sur timeout
+				// pour les fonctions atomiques sql_xx
+				// on enregistre le meta avant de lancer la fonction,
+				// de maniere a eviter de boucler sur timeout
+				// mais pour les fonctions complexes,
+				// il faut les rejouer jusqu'a achevement.
+				// C'est a elle d'assurer qu'elles progressent a chaque rappel
+				if (strncmp($f,"sql_",4)==0)
+					ecrire_meta($meta, $i+1, 'non', $table);
+				echo " . $i";
 				call_user_func_array($f, $r);
+				// si temps imparti depasse, on relance sans ecrire en meta
+				// car on est peut etre sorti sur timeout si c'est une fonction longue
+				if (time() >= _TIME_OUT) {
+					relance_maj($meta,$table);
+				}
+				ecrire_meta($meta, $i+1, 'non', $table);
 				spip_log( "$meta: ok", 'maj.'._LOG_INFO_IMPORTANTE);
-			} else return $i+1;
+			}
+			else
+				return $i+1;
 		}
 	}
 	effacer_meta($meta, $table);
