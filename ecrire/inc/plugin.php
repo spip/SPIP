@@ -21,7 +21,7 @@ define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 // besoin de inc_meta
 include_spip('inc/texte');
 
-function spip_version_compare($v1,$v2,$op){
+function spip_version_compare($v1,$v2,$op=null){
 	$v1 = strtolower(preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|pl|p),i','\\1.\\2',$v1));
 	$v2 = strtolower(preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|pl|p),i','\\1.\\2',$v2));
 	$v1 = str_replace('rc','RC',$v1); // certaines versions de PHP ne comprennent RC qu'en majuscule
