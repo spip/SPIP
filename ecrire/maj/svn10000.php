@@ -261,41 +261,61 @@ $GLOBALS['maj'][15676] = array(array('upgrade_types_documents'));
 $GLOBALS['maj'][15827] = array(array('upgrade_types_documents'));
 
 $GLOBALS['maj'][16428] = array(
-	array('maj_auteurs_16428'),
+	array('maj_liens','auteur'), // creer la table liens
+	array('maj_liens','auteur','article'),
 	array('sql_drop_table',"spip_auteurs_articles"),
+	array('maj_liens','auteur','rubrique'),
 	array('sql_drop_table',"spip_auteurs_rubriques"),
+	array('maj_liens','auteur','message'),
 	array('sql_drop_table',"spip_auteurs_messages"),
 );
 
 // Reunir en une seule table les liens de documents
 //  spip_documents_articles et spip_documents_forum
-function maj_auteurs_16428 () {
+function maj_liens($pivot,$l='') {
+
+	@define('_LOG_FILTRE_GRAVITE',8);
+
+	$pivot = preg_replace(',[^\w],','',$pivot); // securite
+	$liens = "spip_".$pivot."s_liens";
+	$id_pivot = "id_".$pivot;
 	// Creer spip_auteurs_liens
 	global $tables_auxiliaires;
-	include_spip('base/auxiliaires');
-	include_spip('base/create');
-	creer_ou_upgrader_table('spip_auteurs_liens', $tables_auxiliaires['spip_auteurs_liens'], false);
+	if (!$l) {
+		include_spip('base/auxiliaires');
+		include_spip('base/create');
+		creer_ou_upgrader_table($liens, $tables_auxiliaires[$liens], false);
+	}
+	else {
+		// Preparer
+		$l = preg_replace(',[^\w],','',$l); // securite
+		$primary = "id_$l";
+		$ancienne_table = 'spip_'.$pivot.'s_'.$l.'s';
+		$pool = 400;
 
-	// Recopier les donnees
-	foreach (array('article', 'rubrique', 'message') as $l) {
-		while ($s = sql_select('*', 'spip_auteurs_'.$l.'s','','','',"0,1000")) {
-			$tampon = array();
-			$delete = array();
-			while ($t = sql_fetch($s)) {
-				$delete[] = "id_auteur=".$t['id_auteur']." AND id_$l=".$t["id_$l"];
-				// transformer id_xx=N en (id_objet=N, objet=xx)
-				$t['id_objet'] = $t["id_$l"];
-				$t['objet'] = $l;
-				unset($t["id_$l"]);
-				unset($t['maj']);
-				$tampon[] = $t;
+		$trouver_table = charger_fonction('trouver_table','base');
+		if (!$desc = $trouver_table($ancienne_table))
+			return;
+
+		$champs = $desc['field'];
+		if (isset($champs['maj'])) unset($champs['maj']);
+		if (isset($champs[$primary])) unset($champs[$primary]);
+
+		$champs = array_keys($champs);
+		$champs[] = "$primary as id_objet";
+		$champs[] = "'$l' as objet";
+		$champs = implode(', ',$champs);
+
+		// Recopier les donnees
+		while ($id = sql_getfetsel($primary,$ancienne_table,'','','','0,1')){
+			$n = sql_countsel($liens,"objet='$l' AND id_objet=".intval($id));
+			while ($t = sql_allfetsel($champs, $ancienne_table,"$primary=".intval($id),'',$id_pivot,"$n,$pool")) {
+				sql_insertq_multi($liens,$t);
+				$n+=count($t);
+				// si timeout, sortir, la relance nous ramenera dans cette fonction
+				if (time() >= _TIME_OUT) return;
 			}
-			sql_free($s);
-			if (count($tampon)) {
-				sql_insertq_multi('spip_auteurs_liens',$tampon);
-				while ($d = array_shift($delete))
-				 sql_delete ('spip_auteurs_'.$l.'s', $d);
-			}
+			sql_delete ($ancienne_table, "$primary=".intval($id));
 		}
 	}
 }
