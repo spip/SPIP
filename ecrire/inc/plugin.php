@@ -55,7 +55,7 @@ function liste_plugin_files($dir_plugins = null){
 	OR count($plugin_files[$dir_plugins]) == 0){
 		$plugin_files[$dir_plugins] = array();
 		foreach (preg_files($dir_plugins, '/plugin[.]xml$') as $plugin) {
-			$plugin_files[$dir_plugins][] = str_replace($dir_plugins,'',dirname($plugin));
+			$plugin_files[$dir_plugins][] = substr(dirname($plugin),strlen($dir_plugins));
 		}
 		sort($plugin_files[$dir_plugins]);
 
