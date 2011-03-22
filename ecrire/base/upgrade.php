@@ -12,16 +12,22 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Programme de mise a jour des tables SQL lors d'un chgt de version.
-// Marche aussi pour les plugins en appelant directement la fonction maj_while.
-// Pour que ceux-ci profitent aussi de la reprise sur interruption,
-// ils doivent indiquer leur numero de version installee dans une meta.
-// Le nom de cette meta doit aussi etre un tableau global
-// dont l'index "maj" est le sous-tableau des mises a jours
-// et l'index "cible" la version a atteindre
-// A tester.
-
-// http://doc.spip.org/@base_upgrade_dist
+/**
+ * Programme de mise a jour des tables SQL lors d'un chgt de version.
+ * L'entree dans cette fonction est reservee au maj de SPIP coeur
+ *
+ * Marche aussi pour les plugins en appelant directement la fonction maj_plugin
+ * Pour que ceux-ci profitent aussi de la reprise sur interruption,
+ * ils doivent simplement indiquer leur numero de version installee dans une meta
+ * et fournir le tableau maj a la fonction maj_plugin.
+ * La reprise sur timeout se fait alors par la page admin_plugin et jamais par ici
+ *
+ * http://doc.spip.org/@base_upgrade_dist
+ *
+ * @param string $titre
+ * @param string $reprise
+ * @return
+ */
 function base_upgrade_dist($titre='', $reprise='')
 {
 	if (!$titre) return; // anti-testeur automatique
@@ -31,19 +37,11 @@ function base_upgrade_dist($titre='', $reprise='')
 			spip_log("recree les tables eventuellement disparues","maj."._LOG_INFO_IMPORTANTE);
 			creer_base();
 		}
-		// securisons les variables d'upgrade
-		$meta = preg_replace(',[^\w],','',_request('meta'));
-		$table = preg_replace(',[^\w],','',_request('table'));
-		if (!$meta OR ($meta=='version_installee' AND $table=='meta'))
-			// lancement de l'upgrade SPIP
-			$res = maj_base();
-		else
-			// reprise sur demande de mise a jour interrompue pour plugin
-			$res= maj_while($GLOBALS[$table][$meta],
-				  $GLOBALS[$meta]['cible'],
-				  $GLOBALS[$meta]['maj'],
-				  $meta,
-				  $table);
+		
+		// quand on rentre par ici, c'est toujours une mise a jour de SPIP
+		// lancement de l'upgrade SPIP
+		$res = maj_base();
+
 		if ($res) {
 			if (!is_array($res))
 				spip_log("Pb d'acces SQL a la mise a jour","maj."._LOG_INFO_ERREUR);
@@ -71,7 +69,14 @@ function base_upgrade_dist($titre='', $reprise='')
 	$config();
 }
 
-// http://doc.spip.org/@maj_base
+/**
+ * MAJ de base de SPIP
+ *
+ * http://doc.spip.org/@maj_base
+ *
+ * @param int $version_cible
+ * @return array|bool
+ */
 function maj_base($version_cible = 0) {
 	global $spip_version_base;
 
@@ -119,33 +124,62 @@ function maj_base($version_cible = 0) {
 		$cible = $cible*1000;
 
 	include_spip('maj/svn10000');
-	return maj_while($version_installee, $cible, $GLOBALS['maj'], 'version_installee','meta',true);
+	ksort($GLOBALS['maj']);
+	return maj_while($version_installee, $cible, $GLOBALS['maj'], 'version_installee','meta', '', true);
 }
 
-// A partir des > 1.926 (i.e SPIP > 1.9.2), cette fonction gere les MAJ.
-// Se relancer soi-meme pour eviter l'interruption pendant une operation SQL
-// (qu'on espere pas trop longue chacune)
-// evidemment en ecrivant dans la meta a quel numero on en est.
-// Cette fonction peut servir aux plugins qui doivent donner comme arguments:
-// 1. le numero de version courant (nombre entier; ex: numero de commit)
-// 2. le numero de version a atteindre (idem)
-// 3. le tableau des instructions de mise a jour a executer
-// Pour profiter du mecanisme de reprise sur interruption il faut de plus
-// 4. le nom de la meta permettant de retrouver tout ca
-// 5. la table des meta ou elle se trouve ($table_prefix . '_meta' par defaut)
-// (cf debut de fichier)
-// en cas d'echec, cette fonction retourne un tableau (etape,sous-etape)
-// sinon elle retourne un tableau vide
+/**
+ * MAJ d'un plugin de SPIP
+ * appelee par la fonction de maj d'un plugin
+ * on lui fournit un tableau de fonctions elementaires
+ * dont l'indice est la version
+ * 
+ * @param string $nom_meta_base_version
+ * @param string $version_cible
+ * @param array $maj
+ * @param string $table_meta
+ * @return void
+ */
+function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='meta'){
 
-define('_UPGRADE_TIME_OUT', 20);
+	if ($table_meta!=='meta')
+		lire_metas($table_meta);
+	if ( (!isset($GLOBALS[$table_meta][$nom_meta_base_version]) )
+			|| (!spip_version_compare($current_version = $GLOBALS[$table_meta][$nom_meta_base_version],$version_cible,'='))){
 
-function relance_maj($meta,$table){
-	// recuperer la valeur installee en cours
-	// on la tronque numeriquement, elle ne sert pas reellement
-	// sauf pour verifier que ce n'est pas oui ou non
-	// sinon is_numeric va echouer sur un numero de version 1.2.3
-	$installee = intval($GLOBALS[$table][$meta]);
-	$redirect = generer_url_ecrire('upgrade',"reinstall=$installee&meta=$meta&table=$table",true);
+		include_spip('inc/plugin'); // pour spip_version_compare
+		uksort($maj,'spip_version_compare');
+
+		$res = maj_while($current_version, $version_cible, $maj, $nom_meta_base_version, $table_meta, generer_url_ecrire('admin_plugin'));
+		if ($res) {
+			if (!is_array($res))
+				spip_log("Pb d'acces SQL a la mise a jour","maj."._LOG_INFO_ERREUR);
+			else {
+				echo _T('avis_operation_echec') . ' ' . join(' ', $res);
+			}
+		}
+	}
+}
+
+/**
+ * Relancer le hit de maj avant timeout
+ * si pas de redirect fourni, on redirige vers exec=upgrade pour finir
+ * ce qui doit etre une maj SPIP
+ * 
+ * @param string $meta
+ * @param string $table
+ * @param string $redirect
+ * @return void
+ */
+function relance_maj($meta,$table,$redirect=''){
+	if (!$redirect){
+		// recuperer la valeur installee en cours
+		// on la tronque numeriquement, elle ne sert pas reellement
+		// sauf pour verifier que ce n'est pas oui ou non
+		// sinon is_numeric va echouer sur un numero de version 1.2.3
+		$installee = intval($GLOBALS[$table][$meta]);
+		$redirect = generer_url_ecrire('upgrade',"reinstall=$installee&meta=$meta&table=$table",true);
+	}
 	echo redirige_formulaire($redirect);
 	exit();
 }
@@ -177,17 +211,50 @@ function maj_debut_page($installee,$meta,$table){
 	$done = true;
 }
 
-// http://doc.spip.org/@maj_while
-function maj_while($installee, $cible, $maj, $meta='', $table='meta', $debut_page = false)
+define('_UPGRADE_TIME_OUT', 20);
+
+/**
+ * A partir des > 1.926 (i.e SPIP > 1.9.2), cette fonction gere les MAJ.
+ * Se relancer soi-meme pour eviter l'interruption pendant une operation SQL
+ * (qu'on espere pas trop longue chacune)
+ * evidemment en ecrivant dans la meta a quel numero on en est.
+ *
+ * Cette fonction peut servir aux plugins qui doivent donner comme arguments:
+ * 1. le numero de version courant (numero de version 1.2.3 ou entier)
+ * 2. le numero de version a atteindre (numero de version 1.2.3 ou entier)
+ * 3. le tableau des instructions de mise a jour a executer
+ * Pour profiter du mecanisme de reprise sur interruption il faut de plus
+ * 4. le nom de la meta permettant de retrouver tout ca
+ * 5. la table des meta ou elle se trouve ($table_prefix . '_meta' par defaut)
+ * (cf debut de fichier)
+ * en cas d'echec, cette fonction retourne un tableau (etape,sous-etape)
+ * sinon elle retourne un tableau vide
+ *
+ * les fonctions sql_xx appelees lors des maj sont supposees atomiques et ne sont pas relancees
+ * en cas de timeout
+ * mais les fonctions specifiques sont relancees jusqu'a ce qu'elles finissent
+ * elles doivent donc s'assurer de progresser a chaque reprise
+ *
+ * http://doc.spip.org/@maj_while
+ *
+ * @param  $installee
+ * @param  $cible
+ * @param  $maj
+ * @param string $meta
+ * @param string $table
+ * @param string $redirect
+ * @param bool $debut_page
+ * @return array
+ */
+function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect='', $debut_page = false)
 {
-	include_spip('inc/plugin');
+	include_spip('inc/plugin'); // pour spip_version_compare
 	$n = 0;
 	$time = time();
 	// definir le timeout qui peut etre utilise dans les fonctions
 	// de maj qui durent trop longtemps
 	define('_TIME_OUT',$time+_UPGRADE_TIME_OUT);
 
-	ksort($maj);
 	reset($maj);
 	while (list($v,)=each($maj)) {
 		// si une maj pour cette version
@@ -195,8 +262,8 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $debut_pag
 			AND spip_version_compare($v,$cible,'<=')) {
 			if ($debut_page)
 				maj_debut_page($v,$meta,$table);
-			echo $v;
-			$etape = serie_alter($v, $maj[$v], $meta, $table);
+			echo "MAJ $v";
+			$etape = serie_alter($v, $maj[$v], $meta, $table, $redirect);
 			
 			if ($etape) return array($v, $etape);
 			$n = time() - $time;
@@ -205,7 +272,7 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $debut_pag
 			echo "<br />";
 		}
 		if (time() >= _TIME_OUT) {
-			relance_maj($meta,$table);
+			relance_maj($meta,$table,$redirect);
 		}
 	}
 	// indispensable pour les chgt de versions qui n'ecrivent pas en base
@@ -215,11 +282,25 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $debut_pag
 	return array();
 }
 
-// Appliquer une serie de chgt qui risquent de partir en timeout
-// (Alter cree une copie temporaire d'une table, c'est lourd)
-
-// http://doc.spip.org/@serie_alter
-function serie_alter($serie, $q = array(), $meta='', $table='meta') {
+/**
+ * Appliquer une serie de chgt qui risquent de partir en timeout
+ * (Alter cree une copie temporaire d'une table, c'est lourd)
+ *
+ * http://doc.spip.org/@serie_alter
+ *
+ * @param string $serie
+ *   numero de version upgrade
+ * @param array $q
+ *   tableau des operations pour cette version
+ * @param string $meta
+ *   nom de la meta qui contient le numero de version
+ * @param string $table
+ *   nom de la table meta
+ * @param string $redirect
+ *   url de redirection en cas d'interruption
+ * @return int
+ */
+function serie_alter($serie, $q = array(), $meta='', $table='meta', $redirect='') {
 	$meta2 = $meta . '_maj_' . $serie;
 	$etape = intval(@$GLOBALS[$table][$meta2]);
 	foreach ($q as $i => $r) {
@@ -236,12 +317,12 @@ function serie_alter($serie, $q = array(), $meta='', $table='meta') {
 				// C'est a elle d'assurer qu'elles progressent a chaque rappel
 				if (strncmp($f,"sql_",4)==0)
 					ecrire_meta($meta2, $i+1, 'non', $table);
-				echo " . $i";
+				echo " <span title='$i'>.</span>";
 				call_user_func_array($f, $r);
 				// si temps imparti depasse, on relance sans ecrire en meta
 				// car on est peut etre sorti sur timeout si c'est une fonction longue
 				if (time() >= _TIME_OUT) {
-					relance_maj($meta,$table);
+					relance_maj($meta,$table,$redirect);
 				}
 				ecrire_meta($meta2, $i+1, 'non', $table);
 				spip_log( "$meta2: ok", 'maj.'._LOG_INFO_IMPORTANTE);
