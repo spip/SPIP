@@ -35,7 +35,7 @@ function spip_version_compare($v1,$v2,$op=null){
 	$v1 = implode('.',$v1);
 	$v2 = implode('.',$v2);
 
-	return version_compare($v1, $v2,$op);
+	return $op?version_compare($v1, $v2, $op):version_compare($v1, $v2);
 }
 
 // lecture des sous repertoire plugin existants
