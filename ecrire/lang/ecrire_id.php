@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Kelompok penting:</b> Sangat dianjurkan untuk memilih sebuah kata kunci untuk kelompok ini.',
 'avis_deplacement_rubrique' => 'Peringatan! Bagian ini mengandung @contient_breves@ berita@scb@: jika anda memindahkannya, silakan cek kotak ini untuk konfirmasi.',
 'avis_destinataire_obligatoire' => 'Anda harus memilih satu orang penerima sebelum mengirimkan pesan ini.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'Kesalahan koneksi SQL',
 'avis_erreur_version_archive' => '<b>Peringatan! Berkas @archive@ berkaitan dengan
     sebuah versi SPIP yang lain dengan yang anda
@@ -68,15 +68,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_signature_unique_site' => 'hanya satu tanda tangan per situs web',
 'bouton_demande_publication' => 'Permohonan publikasi artikel ini',
 'bouton_desactive_tout' => 'Non aktifkan semua',
-'bouton_desinstaller' => 'D&eacute;sinstaller', # NEW
+'bouton_desinstaller' => 'Désinstaller', # NEW
 'bouton_effacer_index' => 'Hapus indeksasi',
 'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => 'Hapus SEMUA',
 'bouton_envoi_message_02' => 'KIRIM SEBUAH PESAN',
 'bouton_envoyer_message' => 'Pesan terakhir: kirim',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM &amp; PETISI',
-'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
+'bouton_forum_petition' => 'FORUM & PETISI',
+'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modifikasi',
 'bouton_pense_bete' => 'MEMO PRIBADI',
 'bouton_radio_activer_messagerie' => 'Aktifkan sistem pesan intern',
@@ -127,19 +127,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro' => 'Jika anda menggunakan aplikasi kalender yang kompatibel dengan <b>iCal</b>, anda dapat mensinkronisasikannya dengan informasi situs ini.',
 'config_activer_champs' => 'Activer les champs suivants', # NEW
 'config_choix_base_sup' => 'indiquer une base sur ce serveur', # NEW
-'config_erreur_base_sup' => 'SPIP n\'a pas acc&egrave;s &agrave; la liste des bases accessibles', # NEW
-'config_info_base_sup' => 'Si vous avez d\'autres bases de donn&eacute;es &agrave; interroger &agrave; travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les d&eacute;clarer. Si vous laissez certains champs vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.', # NEW
-'config_info_base_sup_disponibles' => 'Bases suppl&eacute;mentaires d&eacute;j&agrave; interrogeables:', # NEW
-'config_info_enregistree' => 'La nouvelle configuration a &eacute;t&eacute; enregistr&eacute;e', # NEW
-'config_info_logos' => 'Chaque &eacute;l&eacute;ment du site peut avoir un logo, ainsi qu\'un &laquo;&nbsp;logo de survol&nbsp;&raquo;', # NEW
+'config_erreur_base_sup' => 'SPIP n\'a pas accès à la liste des bases accessibles', # NEW
+'config_info_base_sup' => 'Si vous avez d\'autres bases de données à interroger à travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les déclarer. Si vous laissez certains champs vides, les identifiants de connexion à la base principale seront utilisés.', # NEW
+'config_info_base_sup_disponibles' => 'Bases supplémentaires déjà interrogeables:', # NEW
+'config_info_enregistree' => 'La nouvelle configuration a été enregistrée', # NEW
+'config_info_logos' => 'Chaque élément du site peut avoir un logo, ainsi qu\'un « logo de survol »', # NEW
 'config_info_logos_utiliser' => 'Utiliser les logos', # NEW
 'config_info_logos_utiliser_non' => 'Ne pas utiliser les logos', # NEW
 'config_info_logos_utiliser_survol' => 'Utiliser les logos de survol', # NEW
 'config_info_logos_utiliser_survol_non' => 'Ne pas utiliser les logos de survol', # NEW
-'config_info_redirection' => 'En activant cette option, vous pourrez cr&eacute;er des articles virtuels, simples r&eacute;f&eacute;rences d\'articles publi&eacute;s sur d\'autres sites ou hors de SPIP.', # NEW
+'config_info_redirection' => 'En activant cette option, vous pourrez créer des articles virtuels, simples références d\'articles publiés sur d\'autres sites ou hors de SPIP.', # NEW
 'config_redirection' => 'Articles virtuels', # NEW
-'config_titre_base_sup' => 'D&eacute;claration d\'une base suppl&eacute;mentaire', # NEW
-'config_titre_base_sup_choix' => 'Choisissez une base suppl&eacute;mentaire', # NEW
+'config_titre_base_sup' => 'Déclaration d\'une base supplémentaire', # NEW
+'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire', # NEW
 'connexion_ldap' => 'Koneksi:',
 'copier_en_local' => 'Kopi ke situs lokal',
 
@@ -162,7 +162,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_adresse_fichier_syndication' => 'Alamat berkas untuk sindikasi:',
 'entree_adresse_site' => '<b>URL Situs</b> [Diperlukan]',
 'entree_base_donnee_1' => 'Alamat database',
-'entree_base_donnee_2' => '(Sering kali, alamat ini sesuai dengan alamat situs anda, kadangkala ia berkaitan dengan nama &laquo;localhost&raquo;, dan bisa juga dibiarkan tidak terisi sama sekali.)',
+'entree_base_donnee_2' => '(Sering kali, alamat ini sesuai dengan alamat situs anda, kadangkala ia berkaitan dengan nama «localhost», dan bisa juga dibiarkan tidak terisi sama sekali.)',
 'entree_biographie' => 'Biografi singkat dalam beberapa kata.',
 'entree_breve_publiee' => 'Apakah artikel berita ini akan dipublikasikan?',
 'entree_chemin_acces' => '<b>Isi</B> path:',
@@ -192,21 +192,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Teks artikel berita',
 'entree_titre_obligatoire' => '<b>Judul</b> [Dibutuhkan]<BR>',
 'entree_url' => 'URL situs anda',
-'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Berkas hilang',
 'erreur_plugin_fichier_def_absent' => 'Berkas definisi hilang',
 'erreur_plugin_nom_fonction_interdit' => 'Nama fungsi yang dilarang',
 'erreur_plugin_nom_manquant' => 'Nama plugin yang hilang',
 'erreur_plugin_prefix_manquant' => 'Nama plugin tidak terdefinisi',
-'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; hilang dalam berkas definisi',
+'erreur_plugin_tag_plugin_absent' => '<plugin> hilang dalam berkas definisi',
 'erreur_plugin_version_manquant' => 'Versi plugin yang hilang',
 
 // F
 'forum_info_original' => 'asli',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
-'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
+'htaccess_inoperant' => 'htaccess inopérant', # NEW
 
 // I
 'ical_info1' => 'Halaman ini memberikan sejumlah metode untuk mengetahui dan berhubungan dengan aktivitas situs ini.',
@@ -224,7 +224,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_titre_rss' => 'Berkas-berkas sindikasi',
 'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'Meletakkan sebuah cookie',
-'icone_activite' => 'Activit&eacute;', # NEW
+'icone_activite' => 'Activité', # NEW
 'icone_admin_plugin' => 'Mengelola plugin',
 'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Tampilkan penulis',
@@ -236,22 +236,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creation_mots_cles' => 'Buat sebuah kata kunci baru',
 'icone_creer_auteur' => 'Buat seorang penulis baru dan asosiasikan dia dengan artikel ini',
 'icone_creer_mot_cle' => 'Buat sebuah kata kunci baru dan tautkan ia ke artikel ini',
-'icone_creer_mot_cle_breve' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cette br&egrave;ve', # NEW
-'icone_creer_mot_cle_rubrique' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cette rubrique', # NEW
-'icone_creer_mot_cle_site' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; ce site', # NEW
+'icone_creer_mot_cle_breve' => 'Créer un nouveau mot-clé et le lier à cette brève', # NEW
+'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
+'icone_creer_mot_cle_site' => 'Créer un nouveau mot-clé et le lier à ce site', # NEW
 'icone_creer_rubrique_2' => 'Buat sebuah bagian baru',
 'icone_ecrire_nouvel_article' => 'Berita dalam bagian ini',
-'icone_edition' => '&Eacute;dition', # NEW
+'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Kirim pesan ini',
 'icone_evolution_visites' => 'Kunjungi tingkat<br>@visites@ kunjungan',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
-'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
+'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'Modifikasi kelompok kata kunci ini',
 'icone_modifier_article' => 'Modifikasi artikel ini',
 'icone_modifier_breve' => 'Modifikasi artikel berita ini',
 'icone_modifier_message' => 'Modifikasi pesan ini',
-'icone_modifier_mot' => 'Modifier ce mot-cl&eacute;', # NEW
+'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Modifikasi bagian ini',
 'icone_modifier_site' => 'Modifikasi situs ini',
 'icone_poster_message' => 'Kirim sebuah pesan',
@@ -274,11 +274,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_voir_tous_mots_cles' => 'Tampilkan semua kata kunci',
 'image_administrer_rubrique' => 'Anda dapat mengelola bagian ini',
 'info_1_article' => '1 artikel',
-'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 artikel berita',
 'info_1_message' => '1 message', # NEW
-'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 situs',
 'info_1_visiteur' => '1 visiteur', # NEW
@@ -289,7 +289,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_admin_gere_rubriques' => 'Administrator ini mengelola bagian-bagian berikut:',
 'info_admin_gere_toutes_rubriques' => 'Administrator ini mengelola <b>semua bagian</b>.',
 'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
-'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrator',
 'info_administrateur_1' => 'Administrator',
@@ -324,11 +324,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_trouves_dans_texte' => 'Artikel ditemukan (dalam teks)',
 'info_attente_validation' => 'Validasi tertunda artikel-artikel anda',
 'info_aucun_article' => 'Aucun article', # NEW
-'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -355,27 +355,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_chemin_acces_2' => 'Mulai sekarang, anda harus mengkonfigurasi path akses ke informasi direktori. Informasi ini penting untuk membaca profil pengguna yang disimpan dalam direktori.',
 'info_chemin_acces_annuaire' => 'Pilihan: <b>Path akses dalam direktori</B>',
 'info_choix_base' => 'Langkah ketiga:',
-'info_classement_1' => '&nbsp;dari @liste@',
-'info_classement_2' => '&nbsp;dari @liste@',
+'info_classement_1' => ' dari @liste@',
+'info_classement_2' => ' dari @liste@',
 'info_code_acces' => 'Jangan lupa kode akses anda!',
 'info_comment_lire_tableau' => 'Bagaimana membaca grafik ini',
-'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
-'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l\'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@', # NEW
-'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages t&eacute;l&eacute;charg&eacute;es. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
+'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
+'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
+'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_compresseur_titre' => 'Optimisations et compression', # NEW
-'info_config_forums_prive' => 'Dans l&#8217;espace priv&#233; du site, vous pouvez activer plusieurs types de forums&nbsp;:', # NEW
-'info_config_forums_prive_admin' => 'Un forum r&#233;serv&#233; aux administrateurs du site&nbsp;:', # NEW
-'info_config_forums_prive_global' => 'Un forum global, ouvert &#224; tous les r&#233;dacteurs&nbsp;:', # NEW
-'info_config_forums_prive_objets' => 'Un forum sous chaque article, br&#232;ve, site r&#233;f&#233;renc&#233;, etc.&nbsp;:', # NEW
+'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
+'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
+'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
+'info_config_forums_prive_objets' => 'Un forum sous chaque article, brève, site référencé, etc. :', # NEW
 'info_config_suivi' => 'Jika alamat ini berkaitan dengan suatu daftar surat, anda dapat mengindikasikan di bawah alamat di mana pengunjung situs dapat mendaftarkan diri. Alamat ini dapat berupa URL (sebagai contoh halaman registrasi daftar surat melalui web), atau alamat e-mail dengan subyek yang spesifik (contoh: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Anda dapat berlangganan daftar surat situs ini. Anda akan menerima melalui e-mail secara otomatis, pengumuman-pengumuman yang berkenaan dengan artikel-artikel dan berita-berita yang dikirim untuk publikasi.',
 'info_confirmer_passe' => 'Konfirmasi kata sandi baru:',
-'info_conflit_edition_avis_non_sauvegarde' => 'Attention, les champs suivants ont &#233;t&#233; modifi&#233;s par ailleurs. Vos modifications sur ces champs n\'ont donc pas &#233;t&#233; enregistr&#233;es.', # NEW
-'info_conflit_edition_differences' => 'Diff&#233;rences&nbsp;:', # NEW
-'info_conflit_edition_version_enregistree' => 'La version enregistr&#233;e&nbsp;:', # NEW
-'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
+'info_conflit_edition_avis_non_sauvegarde' => 'Attention, les champs suivants ont été modifiés par ailleurs. Vos modifications sur ces champs n\'ont donc pas été enregistrées.', # NEW
+'info_conflit_edition_differences' => 'Différences :', # NEW
+'info_conflit_edition_version_enregistree' => 'La version enregistrée :', # NEW
+'info_conflit_edition_votre_version' => 'Votre version :', # NEW
 'info_connexion_base' => 'Langkah kedua: <b>Percobaan untuk koneksi ke database</B>',
-'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
+'info_connexion_base_donnee' => 'Connexion à votre base de données', # NEW
 'info_connexion_ldap_ok' => 'Koneksi LDAP anda berhasil.</b><p> Anda dapat meneruskan ke langkah selanjutnya.</p>', # MODIF
 'info_connexion_mysql' => 'Langkah pertama: <b>Koneksi SQL anda</b>',
 'info_connexion_ok' => 'Koneksi berhasil.',
@@ -402,11 +402,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	artikel-artikel; dan penggunannya dilarang untuk bagian, berita, dll.',
 'info_desactiver_messagerie_personnelle' => 'Anda dapat mengaktifkan atau menonaktifkan sistem pesan pribadi anda di situs ini.',
 'info_descriptif' => 'Deskripsi:',
-'info_desinstaller_plugin' => 'supprime les donn&eacute;es et d&eacute;sactive le plugin', # NEW
+'info_desinstaller_plugin' => 'supprime les données et désactive le plugin', # NEW
 'info_discussion_cours' => 'Diskusi-diskusi yang sedang berlangsung',
 'info_ecrire_article' => 'Sebelum dapat menulis artikel, anda harus membuat paling tidak satu bagian.',
 'info_email_envoi' => 'Alamat e-mail pengirim (opsional)',
-'info_email_envoi_txt' => 'Masukkan alamat e-mail pengirim yang digunakan untuk mengirim e-mail (secara standar, alamat penerima digunakan sebagai alamat pengirim)&nbsp;:',
+'info_email_envoi_txt' => 'Masukkan alamat e-mail pengirim yang digunakan untuk mengirim e-mail (secara standar, alamat penerima digunakan sebagai alamat pengirim) :',
 'info_email_webmestre' => 'Alamat e-mail webmaster (opsional)',
 'info_entrer_code_alphabet' => 'Masukkan kode set karakter yang akan digunakan:',
 'info_envoi_email_automatique' => 'Pengiriman otomatis',
@@ -446,7 +446,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	terdaftar di area umum situs (forum-forum berlangganan).',
 'info_generation_miniatures_images' => 'Membuat gambar-gambar kecil',
 'info_gerer_trad' => 'Aktifkan tautan penerjemahan?',
-'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
+'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_groupe_important' => 'Kelompok penting',
 'info_hebergeur_desactiver_envoi_email' => 'Sejumlah hosting menonaktifkan pengiriman e-mail
   otomatis di server mereka. Dalam hal ini fitur-fitur SPIP berikut tidak
@@ -462,7 +462,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_historique_titre' => 'Pelacakan revisi',
 'info_identification_publique' => 'Identitas umum anda...',
 'info_image_process' => 'Pilih metode terbaik untuk membuat gambar kecil dengan mengklik gambar yang terkait.',
-'info_image_process2' => '<b>Catatan:</b> <i>Jika anda tidak dapat melihat gambar, berarti server anda tidak dikonfigurasi untuk menggunakan peralatan yang ada. Jika anda ingin menggunakan fitur-fitur ini, hubungi bagian teknis penyedia hosting anda dan minta ekstensi &laquo;GD&raquo; atau &laquo;Imagick&raquo; diinstal.</i>',
+'info_image_process2' => '<b>Catatan:</b> <i>Jika anda tidak dapat melihat gambar, berarti server anda tidak dikonfigurasi untuk menggunakan peralatan yang ada. Jika anda ingin menggunakan fitur-fitur ini, hubungi bagian teknis penyedia hosting anda dan minta ekstensi «GD» atau «Imagick» diinstal.</i>',
 'info_images_auto' => 'Gambar secara otomatis dikalkulasi',
 'info_informations_personnelles' => 'Langkah kelima: <b>Informasi pribadi</B>',
 'info_inscription_automatique' => 'Registrasi otomatis editor-editor baru',
@@ -499,7 +499,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_mode_fonctionnement_defaut_forum_public' => 'Mode operasi standar forum-forum umum',
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'Modifikasi artikel berita:',
-'info_modifier_mot' => 'Modifier le mot-cl&eacute; :', # NEW
+'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
 'info_modifier_rubrique' => 'Modifikasi bagian:',
 'info_modifier_titre' => 'Modifikasi: @titre@',
 'info_mon_site_spip' => 'Situs SPIP saya',
@@ -512,15 +512,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_multi_cet_article' => 'Bahasa artikel ini:',
 'info_multi_langues_choisies' => 'Silakan pilih di bawah bahasa yang tersedia untuk editor situs anda.
   Bahasa-bahasa yang telah digunakan oleh situs anda (di daftar paling atas) tidak dapat dinonaktifkan.',
-'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
+'info_multi_objets' => '@objets@ : activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Aktifkan menu bahasa untuk bagian?',
 'info_multi_secteurs' => '... hanya untuk bagian-bagian yang berlokasi di root?',
 'info_nb_articles' => '@nb@ articles', # NEW
-'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
-'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
 'info_nb_sites' => '@nb@ sites', # NEW
 'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
@@ -572,8 +572,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_plus_trois_car' => '(Lebih dari 3 karakter)',
 'info_popularite' => 'popularitas: @popularite@; kunjungan: @visites@',
 'info_popularite_2' => 'popularitas situs:',
-'info_popularite_3' => 'popularitas:&nbsp;@popularite@; kunjungan:&nbsp;@visites@',
-'info_popularite_4' => 'popularitas:&nbsp;@popularite@; kunjungan:&nbsp;@visites@',
+'info_popularite_3' => 'popularitas: @popularite@; kunjungan: @visites@',
+'info_popularite_4' => 'popularitas: @popularite@; kunjungan: @visites@',
 'info_post_scriptum' => 'Postscript',
 'info_post_scriptum_2' => 'Postscript:',
 'info_pour' => 'untuk',
@@ -607,11 +607,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_proposer_site' => 'Siapa yang dapat menyarankan situs-situs referensi?',
 'info_question_utilisation_moteur_recherche' => 'Apakah anda ingin mengunakan mesin pencari yang terintegrasi dengan SPIP?
 	(Menonaktifkannya akan meningkatkan kinerja sistem.)',
-'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aper&ccedil;us des sites d\'origine des visites', # NEW
+'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs &#224; joindre des documents (images, sons...) &#224; leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autoris&#233;s pour les forums (ex: gif, jpg, png, mp3).', # NEW
-'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents consid&eacute;r&eacute;s comme fiables par SPIP, mettre une &eacute;toile. Pour ne rien autoriser, ne rien indiquer.', # NEW
+'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # NEW
+'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents considérés comme fiables par SPIP, mettre une étoile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'Kata-kata kunci dalam kelompok ini dapat ditunjuk oleh:',
 'info_racine_site' => 'Root situs',
 'info_recharger_page' => 'Silakan buka kembali halaman ini beberapa saat lagi.',
@@ -646,7 +646,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_sauvegarde_auteurs' => 'Backup penulis',
 'info_sauvegarde_breves' => 'Backup berita',
 'info_sauvegarde_documents' => 'Backup dokumen',
-'info_sauvegarde_echouee' => 'Jika backup gagal (&laquo;Waktu eksekusi maksimum terlampaui&raquo;),',
+'info_sauvegarde_echouee' => 'Jika backup gagal («Waktu eksekusi maksimum terlampaui»),',
 'info_sauvegarde_forums' => 'Backup forum',
 'info_sauvegarde_groupe_mots' => 'Backup kelompok kata kunci',
 'info_sauvegarde_messages' => 'Backup pesan',
@@ -657,7 +657,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_sauvegarde_reussi_02' => 'Database telah berhasil disimpan di @archive@. Anda dapat',
 'info_sauvegarde_reussi_03' => 'kembali ke manajemen',
 'info_sauvegarde_reussi_04' => 'situs anda.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont &eacute;t&eacute; sauvegard&eacute;e dans @archive@. Vous pouvez', # NEW
+'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
 'info_sauvegarde_rubriques' => 'Backup Bagian',
 'info_sauvegarde_signatures' => 'Backup tanda tangan petisi',
 'info_sauvegarde_sites_references' => 'Backup situs-situs referensi',
@@ -696,10 +696,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_suivi_activite' => 'Tindak lanjut aktivitas editorial',
 'info_supprimer_mot' => 'hapus kata kunci ini',
 'info_surtitre' => 'Judul atas:',
-'info_syndication_integrale_1' => 'Situs anda menyediakan berkas-berkas sindikasi (lihat &#147;<a href="@url@">@titre@</a>&#148;).',
+'info_syndication_integrale_1' => 'Situs anda menyediakan berkas-berkas sindikasi (lihat <a href="@url@">@titre@</a>).',
 'info_syndication_integrale_2' => 'Apakah anda ingin mengirim seluruh artikel atau ringkasannya saja yang terdiri dari beberapa ratus karakter?',
 'info_table_prefix' => 'Data situs ini disimpan di tabel bernama <tt><b>spip</b>_articles</tt>, <tt><b>spip</b>_rubriques</tt>, dst. Jika anda menginstal sejumlah situs dalam database yang sama, anda dapat mengubah prefiks dari nama tabel (Catatan: Gunakan hanya huruf-huruf kecil dan tidak beraksen.).',
-'info_taille_maximale_images' => 'SPIP va tester la taille maximale des images qu\'il peut traiter (en millions de pixels).<br /> Les images plus grandes ne seront pas r&eacute;duites.', # NEW
+'info_taille_maximale_images' => 'SPIP va tester la taille maximale des images qu\'il peut traiter (en millions de pixels).<br /> Les images plus grandes ne seront pas réduites.', # NEW
 'info_taille_maximale_vignette' => 'Ukuran maksimum gambar-gambar kecil yang dihasilkan oleh sistem:',
 'info_terminer_installation' => 'Anda dapat menyelesaikan sekarang proses instalasi standar.',
 'info_texte' => 'Teks',
@@ -712,7 +712,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_total' => 'total:',
 'info_tous_articles_en_redaction' => 'Semua artikel dalam proses',
 'info_tous_articles_presents' => 'Semua artikel yang dipublikasi dalam bagian ini',
-'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
+'info_tous_articles_refuses' => 'Tous les articles refusés', # NEW
 'info_tous_les' => 'setiap:',
 'info_tous_redacteurs' => 'Pengumuman kepada semua editor',
 'info_tout_site' => 'Seluruh situs',
@@ -743,28 +743,28 @@ dalam warna yang menunjukkan statusnya:',
 'info_visiteur_2' => 'situs umum',
 'info_visiteurs' => 'Pengunjung',
 'info_visiteurs_02' => 'Pengunjung situs umum',
-'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
-'install_adresse_base_hebergeur' => 'Adresse de la base de donn&eacute;es attribu&eacute;e par l\'h&eacute;bergeur', # NEW
-'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
+'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
+'install_adresse_base_hebergeur' => 'Adresse de la base de données attribuée par l\'hébergeur', # NEW
+'install_base_ok' => 'La base @base@ a été reconnue', # NEW
 'install_echec_annonce' => 'Instalasi ini tidak akan bekerja, atau akan menghasilkan situs yang tidak berfungsi sebagaimana mestinya...',
 'install_extension_mbstring' => 'SPIP tidak dapat bekerja dengan:',
 'install_extension_php_obligatoire' => 'SPIP membutuhkan sebuah ekstensi php:',
-'install_login_base_hebergeur' => 'Login de connexion attribu&eacute; par l\'h&eacute;bergeur', # NEW
-'install_nom_base_hebergeur' => 'Nom de la base attribu&eacute; par l\'h&eacute;bergeur&nbsp;:', # NEW
+'install_login_base_hebergeur' => 'Login de connexion attribué par l\'hébergeur', # NEW
+'install_nom_base_hebergeur' => 'Nom de la base attribué par l\'hébergeur :', # NEW
 'install_pas_table' => 'Base actuellement sans tables', # NEW
-'install_pass_base_hebergeur' => 'Mot de passe de connexion attribu&eacute; par l\'h&eacute;bergeur', # NEW
+'install_pass_base_hebergeur' => 'Mot de passe de connexion attribué par l\'hébergeur', # NEW
 'install_php_version' => 'Versi PHP @version@ terlalu tua (minimum = @minimum@)',
 'install_select_langue' => 'Pilih sebuah bahasa dengan mengklik tombol "selanjutnya" untuk memulasi prosedur instalasi.',
-'install_select_type_db' => 'Indiquer le type de base de donn&eacute;es&nbsp;:', # NEW
+'install_select_type_db' => 'Indiquer le type de base de données :', # NEW
 'install_select_type_mysql' => 'MySQL', # NEW
 'install_select_type_pg' => 'PostgreSQL', # NEW
 'install_select_type_sqlite2' => 'SQLite 2', # NEW
 'install_select_type_sqlite3' => 'SQLite 3', # NEW
-'install_serveur_hebergeur' => 'Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur', # NEW
-'install_table_prefix_hebergeur' => 'Pr&eacute;fixe de table attribu&eacute; par l\'h&eacute;bergeur&nbsp;:', # NEW
+'install_serveur_hebergeur' => 'Serveur de base de données attribué par l\'hébergeur', # NEW
+'install_table_prefix_hebergeur' => 'Préfixe de table attribué par l\'hébergeur :', # NEW
 'install_tables_base' => 'Tables de la base', # NEW
-'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus r&eacute;pandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
-'install_types_db_connus_avertissement' => 'Attention&nbsp;: plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
+'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus répandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
+'install_types_db_connus_avertissement' => 'Attention : plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
 'intem_redacteur' => 'editor',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Izinkan pendaftaran',
@@ -786,7 +786,7 @@ dalam warna yang menunjukkan statusnya:',
 'item_choix_redacteurs' => 'editor',
 'item_choix_visiteurs' => 'pengunjung situs umum',
 'item_compresseur' => 'Activer la compression', # NEW
-'item_config_forums_prive_global' => 'Activer le forum des r&#233;dacteurs', # NEW
+'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
 'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Buat berkas .htpasswd',
 'item_desactiver_forum_administrateur' => 'Non aktifkan forum administrator',
@@ -794,7 +794,7 @@ dalam warna yang menunjukkan statusnya:',
 'item_gerer_statistiques' => 'Kelola statistik',
 'item_limiter_recherche' => 'Batasi pencarian pada informasi yang terdapat di situs anda',
 'item_login' => 'Log masuk',
-'item_messagerie_agenda' => 'Activer la messagerie et l&#8217;agenda', # NEW
+'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
 'item_mots_cles_association_articles' => 'artikel',
 'item_mots_cles_association_breves' => 'artikel berita',
 'item_mots_cles_association_rubriques' => 'bagian',
@@ -809,14 +809,14 @@ dalam warna yang menunjukkan statusnya:',
 'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Kirim ringkasan saja',
 'item_non_bloquer_liens_syndiques' => 'Jangan blokir tautan web yang berasal dari sindikasi',
-'item_non_compresseur' => 'D&#233;sactiver la compression', # NEW
-'item_non_config_forums_prive_global' => 'D&#233;sactiver le forum des r&#233;dacteurs', # NEW
-'item_non_config_forums_prive_objets' => 'D&#233;sactiver ces forums', # NEW
+'item_non_compresseur' => 'Désactiver la compression', # NEW
+'item_non_config_forums_prive_global' => 'Désactiver le forum des rédacteurs', # NEW
+'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'Jangan buat berkas-berkas ini',
 'item_non_gerer_annuaire_site_web' => 'Non aktifkan direktori situs-situs web',
 'item_non_gerer_statistiques' => 'Jangan kelola statistik',
 'item_non_limiter_recherche' => 'Perluas pencarian isi dari situs-situs referensi',
-'item_non_messagerie_agenda' => 'D&#233;sactiver la messagerie et l&#8217;agenda', # NEW
+'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Jangan publikasi artikel sebelum tanggal publikasinya.',
 'item_non_utiliser_breves' => 'Jangan gunakan berita',
 'item_non_utiliser_config_groupe_mots_cles' => 'Jangan gunakan konfigurasi lanjutan kelompok kata kunci',
@@ -850,12 +850,12 @@ dalam warna yang menunjukkan statusnya:',
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
 'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
-'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
-'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
-'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
+'ldap_correspondance' => 'héritage du champ @champ@', # NEW
+'ldap_correspondance_1' => 'Héritage des champs LDAP', # NEW
+'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Tambahkan penerima ini',
 'lien_ajouter_auteur' => 'Tambahkan penulis ini',
-'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
+'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Tambahkan seorang peserta',
 'lien_email' => 'e-mail',
 'lien_forum_public' => 'Kelola artikel forum umum ini',
@@ -895,7 +895,7 @@ dalam warna yang menunjukkan statusnya:',
 'module_raccourci' => 'Jalan pintas',
 'module_texte_affiche' => 'Teks tampilan',
 'module_texte_explicatif' => 'Anda dapat memasukkan jalan-jalan pintas berikut ke dalam templat situs anda. Mereka akan diterjemahkan secara otomatis dalam berbagai bahasa bila berkas bahasanya telah tersedia.',
-'module_texte_traduction' => 'Berkas bahasa &laquo;&nbsp;@module@&nbsp;&raquo; tersedia di:',
+'module_texte_traduction' => 'Berkas bahasa « @module@ » tersedia di:',
 'mois_non_connu' => 'tidak dikenal',
 
 // N
@@ -903,63 +903,63 @@ dalam warna yang menunjukkan statusnya:',
 
 // O
 'onglet_contenu' => 'Contenu', # NEW
-'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
+'onglet_declarer_une_autre_base' => 'Déclarer une autre base', # NEW
 'onglet_discuter' => 'Discuter', # NEW
 'onglet_documents' => 'Documents', # NEW
-'onglet_interactivite' => 'Interactivit&eacute;', # NEW
-'onglet_proprietes' => 'Propri&eacute;t&eacute;s', # NEW
+'onglet_interactivite' => 'Interactivité', # NEW
+'onglet_proprietes' => 'Propriétés', # NEW
 'onglet_repartition_actuelle' => 'sekarang',
 'onglet_sous_rubriques' => 'Sous-rubriques', # NEW
 
 // P
 'page_pas_proxy' => 'Cette page ne doit pas passer par le proxy', # NEW
-'pas_de_proxy_pour' => 'Au besoin, indiquez les machines ou domaines pour lesquels ce proxy ne doit pas s\'appliquer (par exemple&nbsp;: @exemple@)', # NEW
+'pas_de_proxy_pour' => 'Au besoin, indiquez les machines ou domaines pour lesquels ce proxy ne doit pas s\'appliquer (par exemple : @exemple@)', # NEW
 'plugin_charge_paquet' => 'Chargement du paquet @name@', # NEW
-'plugin_charger' => 'T&#233;l&#233;charger', # NEW
-'plugin_erreur_charger' => 'erreur&nbsp;: impossible de charger @zip@', # NEW
-'plugin_erreur_droit1' => 'Le r&#233;pertoire <code>@dest@</code> n\'est pas accessible en &#233;criture.', # NEW
-'plugin_erreur_droit2' => 'Veuillez v&#233;rifier les droits sur ce r&#233;pertoire (et le cr&#233;er le cas &#233;ch&#233;ant), ou installer les fichiers par FTP.', # NEW
-'plugin_erreur_zip' => 'echec pclzip&nbsp;: erreur @status@', # NEW
+'plugin_charger' => 'Télécharger', # NEW
+'plugin_erreur_charger' => 'erreur : impossible de charger @zip@', # NEW
+'plugin_erreur_droit1' => 'Le répertoire <code>@dest@</code> n\'est pas accessible en écriture.', # NEW
+'plugin_erreur_droit2' => 'Veuillez vérifier les droits sur ce répertoire (et le créer le cas échéant), ou installer les fichiers par FTP.', # NEW
+'plugin_erreur_zip' => 'echec pclzip : erreur @status@', # NEW
 'plugin_etat_developpement' => 'dalam pengembangan',
 'plugin_etat_experimental' => 'eksperimental',
 'plugin_etat_stable' => 'stabil',
 'plugin_etat_test' => 'sedang dites',
 'plugin_impossible_activer' => 'Impossible d\'activer le plugin @plugin@', # NEW
-'plugin_info_automatique1' => 'Si vous souhaitez autoriser l\'installation automatique des plugins, veuillez&nbsp;:', # NEW
-'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
-'plugin_info_automatique2' => 'cr&#233;er un r&#233;pertoire <code>@rep@</code>&nbsp;;', # NEW
-'plugin_info_automatique3' => 'v&#233;rifier que le serveur est autoris&#233; &#224; &#233;crire dans ce r&#233;pertoire.', # NEW
-'plugin_info_automatique_creer' => '&#224; cr&#233;er &#224; la racine du site.', # NEW
-'plugin_info_automatique_exemples' => 'exemples&nbsp;:', # NEW
-'plugin_info_automatique_ftp' => 'Vous pouvez installer des plugins, par FTP, dans le r&#233;pertoire <tt>@rep@</tt>', # NEW
-'plugin_info_automatique_lib' => 'Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.', # NEW
-'plugin_info_automatique_liste' => 'Vos listes de plugins&nbsp;:', # NEW
+'plugin_info_automatique1' => 'Si vous souhaitez autoriser l\'installation automatique des plugins, veuillez :', # NEW
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez :', # NEW
+'plugin_info_automatique2' => 'créer un répertoire <code>@rep@</code> ;', # NEW
+'plugin_info_automatique3' => 'vérifier que le serveur est autorisé à écrire dans ce répertoire.', # NEW
+'plugin_info_automatique_creer' => 'à créer à la racine du site.', # NEW
+'plugin_info_automatique_exemples' => 'exemples :', # NEW
+'plugin_info_automatique_ftp' => 'Vous pouvez installer des plugins, par FTP, dans le répertoire <tt>@rep@</tt>', # NEW
+'plugin_info_automatique_lib' => 'Certains plugins demandent aussi à pouvoir télécharger des fichiers dans le répertoire <code>lib/</code>, à créer le cas échéant à la racine du site.', # NEW
+'plugin_info_automatique_liste' => 'Vos listes de plugins :', # NEW
 'plugin_info_automatique_liste_officielle' => 'les plugins officiels', # NEW
-'plugin_info_automatique_liste_update' => 'Mettre &#224; jour les listes', # NEW
+'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'ou...', # NEW
-'plugin_info_automatique_select' => 'S&#233;lectionnez ci-dessous un plugin&nbsp;: SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>@rep@</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.', # NEW
-'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
-'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
-'plugin_info_telecharger' => '&#224; t&#233;l&#233;charger depuis @url@ et &#224; installer dans @rep@', # NEW
-'plugin_librairies_installees' => 'Librairies install&#233;es', # NEW
-'plugin_necessite_lib' => 'Ce plugin n&#233;cessite la librairie @lib@', # NEW
-'plugin_necessite_plugin' => 'N&eacute;cessite le plugin @plugin@ en version @version@ minimum.', # NEW
-'plugin_necessite_spip' => 'N&eacute;cessite SPIP en version @version@ minimum.', # NEW
-'plugin_source' => 'source:&nbsp;', # NEW
+'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
+'plugin_librairies_installees' => 'Librairies installées', # NEW
+'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
+'plugin_necessite_plugin' => 'Nécessite le plugin @plugin@ en version @version@ minimum.', # NEW
+'plugin_necessite_spip' => 'Nécessite SPIP en version @version@ minimum.', # NEW
+'plugin_source' => 'source: ', # NEW
 'plugin_titre_automatique' => 'Installation automatique', # NEW
 'plugin_titre_automatique_ajouter' => 'Ajouter des plugins', # NEW
 'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
 'plugin_zip_active' => 'Continuez pour l\'activer', # NEW
-'plugin_zip_adresse' => 'indiquez ci-dessous l\'adresse d\'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l\'adresse d\'une liste de plugins.', # NEW
-'plugin_zip_adresse_champ' => 'Adresse du plugin ou de la liste&nbsp;', # NEW
-'plugin_zip_content' => 'Il contient les fichiers suivants (@taille@),<br />pr&#234;ts &#224; installer dans le r&#233;pertoire <code>@rep@</code>', # NEW
-'plugin_zip_installe_finie' => 'Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233;.', # NEW
-'plugin_zip_installe_rep_finie' => 'Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233; dans le r&#233;pertoire @rep@', # NEW
+'plugin_zip_adresse' => 'indiquez ci-dessous l\'adresse d\'un fichier zip de plugin à télécharger, ou encore l\'adresse d\'une liste de plugins.', # NEW
+'plugin_zip_adresse_champ' => 'Adresse du plugin ou de la liste ', # NEW
+'plugin_zip_content' => 'Il contient les fichiers suivants (@taille@),<br />prêts à installer dans le répertoire <code>@rep@</code>', # NEW
+'plugin_zip_installe_finie' => 'Le fichier @zip@ a été décompacté et installé.', # NEW
+'plugin_zip_installe_rep_finie' => 'Le fichier @zip@ a été décompacté et installé dans le répertoire @rep@', # NEW
 'plugin_zip_installer' => 'Vous pouvez maintenant l\'installer.', # NEW
-'plugin_zip_telecharge' => 'Le fichier @zip@ a &#233;t&#233; t&#233;l&#233;charg&#233;', # NEW
-'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
-'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
-'plugins_actifs' => '@count@ plugins activ&#233;s.', # NEW
+'plugin_zip_telecharge' => 'Le fichier @zip@ a été téléchargé', # NEW
+'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
+'plugins_actif_un' => 'Un plugin activé.', # NEW
+'plugins_actifs' => '@count@ plugins activés.', # NEW
 'plugins_actifs_liste' => 'Plugins actifs', # NEW
 'plugins_compte' => '@count@ plugins', # NEW
 'plugins_disponible_un' => 'Un plugin disponible.', # NEW
@@ -967,8 +967,8 @@ dalam warna yang menunjukkan statusnya:',
 'plugins_erreur' => 'Erreur dans les plugins : @plugins@', # NEW
 'plugins_liste' => 'Daftar plugin',
 'plugins_liste_extensions' => 'Extensions', # NEW
-'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
-'plugins_vue_hierarchie' => 'Hi&eacute;rarchie', # NEW
+'plugins_recents' => 'Plugins récents.', # NEW
+'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Versi protokol:',
 
@@ -978,7 +978,7 @@ dalam warna yang menunjukkan statusnya:',
 // S
 'sans_heure' => 'sans heure', # NEW
 'sauvegarde_fusionner' => 'Gabung database sekarang dengan backup',
-'sauvegarde_fusionner_depublier' => 'D&eacute;publier les objets fusionn&eacute;s', # NEW
+'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
 'sauvegarde_url_origine' => 'Jika diperlukan, URL situs sumber:',
 'statut_admin_restreint' => '(admin terbatas)',
 'syndic_choix_moderation' => 'Apa yang akan dilakukan dengan tautan berikut dari situs ini?',
@@ -986,7 +986,7 @@ dalam warna yang menunjukkan statusnya:',
 'syndic_choix_resume' => 'Sejumlah situs menawarkan teks penuh dari artikel-artikel mereka. Ketika teks penuh tersedia, apakah anda ingin mensindikasikannya:',
 'syndic_lien_obsolete' => 'tautan yang tidak perlu',
 'syndic_option_miroir' => 'blokir secara otomatis',
-'syndic_option_oubli' => 'hapus (setelah @mois@&nbsp;bulan)',
+'syndic_option_oubli' => 'hapus (setelah @mois@ bulan)',
 'syndic_option_resume_non' => 'isi penuh dari artikel (format HTML)',
 'syndic_option_resume_oui' => 'sekedar ringkasan (format teks)',
 'syndic_options' => 'Opsi sindikasi:',
@@ -999,18 +999,18 @@ dalam warna yang menunjukkan statusnya:',
 'taille_cache_vide' => 'Cache kosong.',
 'taille_repertoire_cache' => 'Ukuran cache saat ini',
 'text_article_propose_publication' => 'Artikel yang dikirimkan untuk publikasi. Jangan segan-segan memberikan opini anda melalui forum yang yang terlampir di artikel ini (di bagian bawah halaman).', # MODIF
-'text_article_propose_publication_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; cet article (en bas de page).', # NEW
+'text_article_propose_publication_forum' => 'N\'hésitez pas à donner votre avis grâce au forum attaché à cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Sejumlah server LDAP tidak mengizinkan akses anonim. Dalam hal ini anda harus memberikan satu pengidentifikasi akses awal agar bisa mencari informasi dalam direktori setelahnya. Walaupun demikian, dalam banyak kasus kolom-kolom berikut dapat dibiarkan kosong tidak terisi.',
 'texte_admin_effacer_01' => 'Perintah ini menghapus <i>semua</i> isi database,
 termasuk <i>semua</i> parameter akses untuk editor dan administrator. Setelah mengeksekusinya, anda sebaiknya
 menginstal kembali SPIP untuk membuat database baru dan akses administrator pertama.',
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.', # NEW
+'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_admin_tech_01' => 'Opsi ini mengizinkan anda untuk menyimpan isi database ke dalam sebuah berkas di direktori @dossier@. Juga, mengingatkan anda untuk mengambil seluruh direktori @img@, yang berisikan gambar-gambar dan dokumen-dokumen yang digunakan dalam artikel dan bagian.',
 'texte_admin_tech_02' => 'Peringatan: backup ini HANYA dapat dipulihkan dalam sebuah situs yang diinstal dalam versi yang sama dengan SPIP. Anda seharusnya tidak mengosongkan database dan diharapkan menginstal kembali backup setelah pembaharuan... Untuk informasi lebih lanjut silakan membaca <a href="@spipnet@">dokumentasi SPIP</a>.', # MODIF
 'texte_admin_tech_03' => 'Anda dapat memilih untuk menyimpan berkas dalam bentuk kompresi 
 	untuk mempercepat tranfer ke mesin anda atau server backup dan menyimpan sejumlah ruangan di disk.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ', # NEW
-'texte_adresse_annuaire_1' => '( Jika direktori anda diinstal di mesin yang sama dengan situs web anda, kemungkinan besar ini adalah &laquo;localhost&raquo;.)',
+'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
+'texte_adresse_annuaire_1' => '( Jika direktori anda diinstal di mesin yang sama dengan situs web anda, kemungkinan besar ini adalah «localhost».)',
 'texte_ajout_auteur' => 'Penulis berikut telah ditambahkan ke artikel:',
 'texte_annuaire_ldap_1' => 'Jika anda memiliki akses ke sebuah direktori (LDAP), anda dapat menggunakannya untuk mengimpor pengguna secara otomatis di bawah SPIP.',
 'texte_article_statut' => 'Status artikel:',
@@ -1035,21 +1035,21 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 		jika lalu lintas sekarang diperlihara) dan jumlah
 		kunjungan yang disimpan sejak awal ditampilkan dalam
 		balon yang muncul sewaktu mouse diletakkan di atas judul.',
-'texte_compacter_avertissement' => 'Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.', # NEW
-'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.', # NEW
-'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
+'texte_compacter_avertissement' => 'Attention à ne pas activer ces options durant le développement de votre site : les éléments compactés perdent toute lisibilité.', # NEW
+'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela accélère l\'affichage du site.', # NEW
+'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
 'texte_compresse_ou_non' => '(yang ini dapat dikompres atau tidak)',
 'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
-visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
-site est plus rapide derri&#232;re une liaison &#224; faible d&#233;bit), mais
+visiteurs du site. Ce réglage permet d\'optimiser la bande passante (le
+site est plus rapide derrière une liaison à faible débit), mais
 demande plus de puissance au serveur.', # NEW
 'texte_compte_element' => '@count@ elemen',
 'texte_compte_elements' => '@count@ elemen',
 'texte_config_groupe_mots_cles' => 'Apakah anda ingin menaktifkan konfigurasi lanjutan kelompok kata kunci,
 			dengan menspesifikasi, sebagai contoh sebuah kata unik per kelompok
 			dapat dipilih, yang menurut kelompok tersebut penting...?',
-'texte_conflit_edition_correction' => 'Veuillez contr&#244;ler ci-dessous les diff&#233;rences entre les deux versions du texte&nbsp;; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
+'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
 'texte_connexion_mysql' => 'Merujuk kepada informasi yang diberikan hosting anda kepada anda: mereka seharusnya memberikan anda, jika hosting anda mendukung SQL, kode koneksi ke server SQL.', # MODIF
 'texte_contenu_article' => '(Isi artikel dalam beberapa kata.)',
 'texte_contenu_articles' => 'Berdasarkan tampilan yang dipilih untuk situs anda, anda dapat memilih
@@ -1073,8 +1073,8 @@ demande plus de puissance au serveur.', # NEW
 'texte_effacer_donnees_indexation' => 'Hapus data terindeksasi',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'texte_en_cours_validation' => 'Artikel-artikel dan berita-berita berikut dikirim untuk publikasi. Jangan segan-segan memberikan opini anda melalui forum yang terlampir di dalamnya.', # MODIF
-'texte_en_cours_validation_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.', # NEW
-'texte_enrichir_mise_a_jour' => 'Anda dapat memperkaya tampilan teks anda dengan menggunakan &laquo;jalan pintas typografis&raquo;.',
+'texte_en_cours_validation_forum' => 'N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # NEW
+'texte_enrichir_mise_a_jour' => 'Anda dapat memperkaya tampilan teks anda dengan menggunakan «jalan pintas typografis».',
 'texte_fichier_authent' => '<b>Haruskah SPIP membuat berkas <tt>.htpasswd</tt>
   dan <tt>.htpasswd-admin</tt> dalam direktori @dossier@?</b><p>
   Berkas-berkas ini dapat digunakan untuk membatasi akses penulis
@@ -1100,11 +1100,11 @@ demande plus de puissance au serveur.', # NEW
 			secara individual, atau memilih, untuk setiap
 			situs, memblokir tautan yang berasal dari
 			situs-situs tertentu.',
-'texte_login_ldap_1' => '(Biarkan kosong untuk akses anonim atau masukkan path lengkap, sebagai contoh &laquo;<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>&raquo;.)',
+'texte_login_ldap_1' => '(Biarkan kosong untuk akses anonim atau masukkan path lengkap, sebagai contoh «<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>».)',
 'texte_login_precaution' => 'Peringatan! Ini adalah log masuk yang anda gunakan untuk terkoneksi sekarang.
 	Gunakan formulir ini dengan hati-hati...',
 'texte_message_edit' => 'Peringatan: pesan ini dapat dimodifikasi oleh semua administrator situs, dan muncul di hadapan semua editor. Gunakan pengumuman hanya untuk menekankan pentingnya sebuah kejadian dalam siklus hidup situs.',
-'texte_messagerie_agenda' => 'Une messagerie permet aux r&#233;dacteurs du site de communiquer entre eux directement dans l&#8217;espace priv&#233; du site. Elle est associ&#233;e &#224; un agenda.', # NEW
+'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
 'texte_messages_publics' => 'Pesan umum artikel:',
 'texte_mise_a_niveau_base_1' => 'Anda harus memperbaharui berkas-berkas SPIP.
 	Sekarang anda harus memperbaharui database situs.',
@@ -1145,12 +1145,12 @@ demande plus de puissance au serveur.', # NEW
 		sebuah tanggal di masa depan?',
 'texte_rappel_selection_champs' => '[Ingat untuk memilih kolom ini dengan benar.]',
 'texte_recalcul_page' => 'Jika anda hanya ingin
-memperbaharui satu halaman, anda sebaiknya melakukannya dari area umum dan gunakan tombol &laquo; perbaharui &raquo;.',
+memperbaharui satu halaman, anda sebaiknya melakukannya dari area umum dan gunakan tombol « perbaharui ».',
 'texte_recapitiule_liste_documents' => 'Halaman ini menampilkan daftar dari dokumen-dokumen yang anda tempatkan di bagian-bagian. Untuk memodifikasi informasi setiap dokumen, ikuti tautan ke halaman bagiannya.',
 'texte_recuperer_base' => 'Perbaiki database',
 'texte_reference_mais_redirige' => 'artikel referensi di situs SPIP anda, tapi mengarah ke URL lain.',
 'texte_referencement_automatique' => '<b>Referensi situs terotomasi</b><br>Anda dapat mereferensi sebuah situs web secara cepat dengan memberikan di bawah URL yang dimaksud, atau alamat berkas sindikasinya. SPIP secara otomatis akan mengambil informasi yang berkaitan dengan situs tersebut (judul, deskripsi...).',
-'texte_referencement_automatique_verifier' => 'Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
+'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Wetika sejumlah query SQL gagal
   secara sistematis dan tanpa alasan yang jelas, bisa jadi
   permasalahannya adalah database itu sendiri.</b><p>
@@ -1202,11 +1202,11 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'texte_titre_02' => 'Subyek:',
 'texte_titre_obligatoire' => '<b>Judul</b> [Dibutuhkan]',
 'texte_travail_article' => '@nom_auteur_modif@ telah bekerja di artikel ini @date_diff@ menit yang lalu',
-'texte_travail_collaboratif' => 'Jika beberapa editor sering bekerja sama dalam artikel yang sama, sistem dapat menandai artikel-artikel yang saat itu sedang &laquo;dibuka&raquo; guna menghindari konflik saat diedit.
+'texte_travail_collaboratif' => 'Jika beberapa editor sering bekerja sama dalam artikel yang sama, sistem dapat menandai artikel-artikel yang saat itu sedang «dibuka» guna menghindari konflik saat diedit.
   Opsi ini dinonaktifkan secara standar untuk menghindri pesan-pesan peringatan yang tidak perlu.',
 'texte_trop_resultats_auteurs' => 'Terlalu banyak hasil untuk "@cherche_auteur@"; silakan perbaiki pencarian anda.',
 'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce r&eacute;glage ne fonctionnera que si le fichier @htaccess@ est correctement install&eacute; &agrave; la racine du site.', # NEW
+'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'mengunduh versi terakhir',
 'texte_utilisation_moteur_syndiques' => 'Ketika anda menggunakan mesin pencari SPIP, anda dapat melakukan pencarian di situs dan artikel yang tersindikasi dala dua cara yang berbeda. <br>- Cara termudah adalah mencari hanya di judul dan deskripsi artikel. <br>- Kedua, cara yang lebih bagus, selain di atas juga mencari dalam teks situs-situs referensi. Jika anda mereferensi sebuah situs, SPIP akan melakukan pencarian di teks situs tersebut.', # MODIF
 'texte_utilisation_moteur_syndiques_2' => 'Metode ini memaksa SPIP untuk mengunjungi situs-situs referensi secara teratur, yang mungkin dapat menurunkan kinerja situs anda.',
@@ -1216,7 +1216,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_admin_tech' => 'Pemeliharaan teknis',
 'titre_admin_vider' => 'Pemeliharaan teknis',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
-'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Artikel-artikel tersindikasi ditarik dari situs ini',
 'titre_breves' => 'Berita',
 'titre_cadre_afficher_article' => 'Tampilkan artikel:',
@@ -1230,15 +1230,15 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW
 'titre_config_contenu_notifications' => 'Notifications', # NEW
-'titre_config_contenu_prive' => 'Dans l&#8217;espace priv&#233;', # NEW
+'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Konfigurasi situs',
-'titre_config_forums_prive' => 'Forums de l&#8217;espace priv&#233;', # NEW
+'titre_config_forums_prive' => 'Forums de l’espace privé', # NEW
 'titre_config_groupe_mots_cles' => 'Konfigurasi kelompok kata kunci',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Konfigurasi situs',
-'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
-'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
+'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
+'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opsi: <b>Koneksi LDAP anda</b>',
 'titre_dernier_article_syndique' => 'Artikel-artikel sindikasi terbaru',
 'titre_documents_joints' => 'Lampiran',
@@ -1246,7 +1246,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_forum_suivi' => 'Tindak lanjut forum',
 'titre_gauche_mots_edit' => 'NOMOR KATA KUNCI:',
 'titre_groupe_mots' => 'KELOMPOK KATA KUNCI:',
-'titre_identite_site' => 'Identit&eacute; du site', # NEW
+'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'BAHASA ARTIKEL',
 'titre_langue_breve' => 'BAHASA ARTIKEL BERITA',
 'titre_langue_rubrique' => 'BAHASA BAGIAN',
@@ -1266,7 +1266,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_page_articles_tous' => 'Seluruh situs',
 'titre_page_auteurs' => 'Pengunjung',
 'titre_page_breves' => 'Berita',
-'titre_page_breves_edit' => 'Modifikasi artikel berita: &laquo;@titre@&raquo;',
+'titre_page_breves_edit' => 'Modifikasi artikel berita: «@titre@»',
 'titre_page_calendrier' => 'Kalender @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Konfigurasi situs',
 'titre_page_config_fonctions' => 'Konfigurasi situs',
@@ -1316,10 +1316,10 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'upload_fichier_zip' => 'berkas ZIP',
 'upload_fichier_zip_texte' => 'Berkas yang hendak anda instal adalah berkas ZIP.',
 'upload_fichier_zip_texte2' => 'Berkas ini bisa jadu:',
-'upload_info_mode_document' => 'D&#233;poser cette image dans le portfolio', # NEW
+'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
 'upload_limit' => 'Berkas ini terlalu besar untuk server; ukuran maksimum yang diperbolehkan untuk <i>unggah</i> adalah @max@.',
-'upload_zip_conserver' => 'Conserver l&#8217;archive apr&#232;s extraction', # NEW
+'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
 'upload_zip_decompacter' => 'diekstrak dan setiap berkas yang terdapat di dalamnya akan diinstal di situs. Berkas-berkas yang akan diinstal adalah:',
 'upload_zip_telquel' => 'diinstal seperti apa adanya, sebagai berkas ZIP;',
 'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
@@ -1329,13 +1329,13 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'utf8_convert_erreur_deja' => 'Situs anda sudah dalam @charset@, tidak ada yang perlu diubah.',
 'utf8_convert_erreur_orig' => 'Kesalahan: set karakter @charset@ tidak didukung.',
 'utf8_convert_termine' => 'Selesai!',
-'utf8_convert_timeout' => '<b>Penting:</b> Jika server menunjukkan <i>timeout</i>, silakan perbaharui halaman di mana anda memperoleh pesan &laquo;Selesai!&raquo;.',
+'utf8_convert_timeout' => '<b>Penting:</b> Jika server menunjukkan <i>timeout</i>, silakan perbaharui halaman di mana anda memperoleh pesan «Selesai!».',
 'utf8_convert_verifier' => 'Anda sekarang harus mengosongkan cache situs dan periksa apakah semuanya baik-baik saja di halaman-halaman umum situs. Jika anda mengalami sebuah permasalahan besar, sebuah backup data asli anda (dalam format SQL) telah dibuat di direktori @rep@.',
 'utf8_convertir_votre_site' => 'Ubah situs anda ke utf-8',
 
 // V
 'version' => 'Versi:',
-'version_deplace_rubrique' => 'D&#233;plac&#233; de <b>&#171;&nbsp;@from@&nbsp;&#187;</b> vers <b>&#171;&nbsp;@to@&nbsp;&#187;</b>.', # NEW
+'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
 'version_initiale' => 'Versi awal'
 );
 
