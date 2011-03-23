@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Halo',
-'breve' => 'Br&egrave;ve', # NEW
+'breve' => 'Brève', # NEW
 'breves' => 'Artikel-artikel berita',
 
 // C
@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Area pribadi',
 
 // F
-'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
+'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
 'forum' => 'Forum',
 
 // H
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Pesan',
 'messages_forum' => 'Pesan-pesan forum',
 'messages_recents' => 'Pesan-pesan forum terbaru',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
+'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Kata-kata kunci',
 'mots_clefs_meme_groupe' => 'Kata-kata kunci dalam kelompok yang sama',
 
@@ -119,7 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // V
 'ver_imprimer' => 'Versi cetak',
 'voir_en_ligne' => 'Lihat secara online',
-'voir_squelette' => '&#1613;Tampilkan templat halaman ini'
+'voir_squelette' => 'ٍTampilkan templat halaman ini'
 );
 
 ?>

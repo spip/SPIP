@@ -11,47 +11,47 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'accueil_site' => 'Akey sit la',
 'article' => 'Article', # NEW
 'articles' => 'Atik yo',
-'articles_auteur' => 'Tout atik lot&egrave; a',
-'articles_populaires' => 'Atik yo ki plis popil&egrave;',
+'articles_auteur' => 'Tout atik lotè a',
+'articles_populaires' => 'Atik yo ki plis popilè',
 'articles_rubrique' => 'Atik yo nan ribrik sa-a',
-'aucun_article' => 'Gen pa oken atik sou ladr&egrave;s la',
-'aucun_auteur' => 'Gen pa oken lot&egrave; sou ladr&egrave;s la',
-'aucun_site' => 'Gen pa oken sit sou ladr&egrave;s la',
-'aucune_breve' => 'Gen pa oken tinouv&egrave;l sou ladr&egrave;s la',
-'aucune_rubrique' => 'Gen pa oken ribrik sou ladr&egrave;s la',
+'aucun_article' => 'Gen pa oken atik sou ladrès la',
+'aucun_auteur' => 'Gen pa oken lotè sou ladrès la',
+'aucun_site' => 'Gen pa oken sit sou ladrès la',
+'aucune_breve' => 'Gen pa oken tinouvèl sou ladrès la',
+'aucune_rubrique' => 'Gen pa oken ribrik sou ladrès la',
 'auteur' => 'Auteur', # NEW
 'autres' => '<NEW>Ot',
-'autres_breves' => 'L&ograve;t tinouv&egrave;l yo',
-'autres_groupes_mots_clefs' => 'L&ograve;t gwoup mokle yo',
-'autres_sites' => 'L&ograve;t sit yo',
+'autres_breves' => 'Lòt tinouvèl yo',
+'autres_groupes_mots_clefs' => 'Lòt gwoup mokle yo',
+'autres_sites' => 'Lòt sit yo',
 
 // B
 'bonjour' => 'Bonjou',
-'breve' => 'Br&egrave;ve', # NEW
-'breves' => 'Tinouv&egrave;l yo',
+'breve' => 'Brève', # NEW
+'breves' => 'Tinouvèl yo',
 
 // C
-'commenter_site' => 'L&egrave;s yon komant&egrave; sou sit la',
+'commenter_site' => 'Lès yon komantè sou sit la',
 'copie_document_impossible' => '<NEW>Pa ka kopye dokiman la',
 
 // D
 'date' => 'Dat',
-'dernier_ajout' => 'D&egrave;nye bagay ki ajoute',
-'dernieres_breves' => 'D&egrave;nye tinouv&egrave;l yo',
-'derniers_articles' => 'D&egrave;nye atik yo',
-'derniers_commentaires' => 'D&egrave;nye komant&egrave; yo',
-'derniers_messages_forum' => 'D&egrave;nye mesaj yo ki te piblye nan fowom yo',
+'dernier_ajout' => 'Dènye bagay ki ajoute',
+'dernieres_breves' => 'Dènye tinouvèl yo',
+'derniers_articles' => 'Dènye atik yo',
+'derniers_commentaires' => 'Dènye komantè yo',
+'derniers_messages_forum' => 'Dènye mesaj yo ki te piblye nan fowom yo',
 'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
-'edition_mode_texte' => 'Ledisyon modt&egrave;ks pou',
-'en_reponse' => 'Pou r&eacute;ponn a&nbsp;:',
-'en_resume' => 'Nan k&egrave;k mo',
+'edition_mode_texte' => 'Ledisyon modtèks pou',
+'en_reponse' => 'Pou réponn a :',
+'en_resume' => 'Nan kèk mo',
 'envoyer_message' => 'Voye yon mesaj',
-'espace_prive' => 'Espas priv&eacute;',
+'espace_prive' => 'Espas privé',
 
 // F
-'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
+'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
 'forum' => 'Fowom',
 
 // H
@@ -64,62 +64,62 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_connecter' => 'Se connecter', # NEW
 
 // M
-'meme_auteur' => 'M&egrave;m lot&egrave; ki ekri ank&ograve;',
-'meme_rubrique' => 'Andan m&egrave;m ribrik',
-'memes_auteurs' => 'M&egrave;m lot&egrave; yo ki ekri ank&ograve;',
+'meme_auteur' => 'Mèm lotè ki ekri ankò',
+'meme_rubrique' => 'Andan mèm ribrik',
+'memes_auteurs' => 'Mèm lotè yo ki ekri ankò',
 'message' => 'Mesaj',
 'messages_forum' => 'Mesaj yo nan fowom ',
 'messages_recents' => 'Mesaj yo nan fowom ki plis resan',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
+'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Mokle yo',
-'mots_clefs_meme_groupe' => 'Mokle yo nan m&egrave;m gwoup',
+'mots_clefs_meme_groupe' => 'Mokle yo nan mèm gwoup',
 
 // N
 'navigation' => 'Toune-vire',
 'nom' => 'Kouman rele',
-'nouveautes' => 'Nouv&egrave;lt&eacute; yo',
-'nouveautes_web' => 'Kisa nouvo sou w&egrave;b la',
+'nouveautes' => 'Nouvèlté yo',
+'nouveautes_web' => 'Kisa nouvo sou wèb la',
 'nouveaux_articles' => 'Nouvo atik yo',
-'nouvelles_breves' => 'Nouvo tinouv&egrave;l yo',
+'nouvelles_breves' => 'Nouvo tinouvèl yo',
 
 // P
-'page_precedente' => 'paj d&egrave;y&egrave;',
+'page_precedente' => 'paj dèyè',
 'page_suivante' => 'paj swivan',
 'par_auteur' => 'pa',
-'participer_site' => 'Ou se kapab soutni vi sit la ek pwopoze ou pwop atik aw. Pou soutni kon sa enskri a w isit anba. Ou ke gen touswit ou kod laks&egrave; nan espas priv&eacute; sit la.',
+'participer_site' => 'Ou se kapab soutni vi sit la ek pwopoze ou pwop atik aw. Pou soutni kon sa enskri a w isit anba. Ou ke gen touswit ou kod laksè nan espas privé sit la.',
 'plan_site' => 'Kat sit la',
-'popularite' => 'Kouman se popil&egrave;',
+'popularite' => 'Kouman se popilè',
 'poster_message' => 'Voye yon mesaj',
-'proposer_site' => 'Ou se kapab pwopoze yon sit pou ajoute nan ribrik la&nbsp;:',
+'proposer_site' => 'Ou se kapab pwopoze yon sit pou ajoute nan ribrik la :',
 
 // R
 'repondre_article' => 'Reponn sou atik la',
-'repondre_breve' => 'Reponn sou tinouv&egrave;l la',
+'repondre_breve' => 'Reponn sou tinouvèl la',
 'repondre_message' => 'Reponn sou mesaj la',
-'resultats_recherche' => 'Rezilta pou ou ch&egrave;che',
+'resultats_recherche' => 'Rezilta pou ou chèche',
 'retour_debut_forums' => 'Tounyen nan koumansman fowom sa-yo',
 'rubrique' => 'Ribrik',
 'rubriques' => 'Ribrik yo',
 
 // S
 'signatures_petition' => 'Siyati yo',
-'site_realise_avec_spip' => 'Sit la  se sit ki te f&egrave; ak SPIP',
-'sites_web' => 'Sitw&egrave;b yo',
+'site_realise_avec_spip' => 'Sit la  se sit ki te fè ak SPIP',
+'sites_web' => 'Sitwèb yo',
 'sous_rubriques' => 'Souribrik yo',
 'spam' => 'Spam', # NEW
 'suite' => 'swit',
-'sur_web' => 'Sou w&egrave;b',
+'sur_web' => 'Sou wèb',
 'syndiquer_rubrique' => 'Sindike ribrik la',
-'syndiquer_site' => 'Sindike tout sit la m&egrave;m',
+'syndiquer_site' => 'Sindike tout sit la mèm',
 
 // T
-'texte_lettre_information' => 'Tala l&egrave;t-enf&ograve;masyon sit la ',
-'texte_lettre_information_2' => 'L&egrave;t la ka ramase tout atik ek tinouv&egrave;l yo  te pibliye depi',
+'texte_lettre_information' => 'Tala lèt-enfòmasyon sit la ',
+'texte_lettre_information_2' => 'Lèt la ka ramase tout atik ek tinouvèl yo  te pibliye depi',
 
 // V
-'ver_imprimer' => 'V&egrave;syon pou enprime',
+'ver_imprimer' => 'Vèsyon pou enprime',
 'voir_en_ligne' => 'Gad an liy',
-'voir_squelette' => 'kou je sou l&eacute;skel&egrave;t paj-la'
+'voir_squelette' => 'kou je sou léskelèt paj-la'
 );
 
 ?>

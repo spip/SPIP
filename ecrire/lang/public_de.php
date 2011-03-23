@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dernieres_breves' => 'Neue Meldungen',
 'derniers_articles' => 'Neueste Artikel',
 'derniers_commentaires' => 'Neueste Kommentare',
-'derniers_messages_forum' => 'Neuste Forumsbeitr&auml;ge',
+'derniers_messages_forum' => 'Neuste Forumsbeiträge',
 'documents_interdits_forum' => 'Dokumente sind im Forum verboten.',
 
 // E
@@ -68,8 +68,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'In der gleichen Rubrik',
 'memes_auteurs' => 'Von den gleichen Autoren',
 'message' => 'Nachricht',
-'messages_forum' => 'Forumsbeitr&auml;ge',
-'messages_recents' => 'Neuste Forumsbeitr&auml;ge',
+'messages_forum' => 'Forumsbeiträge',
+'messages_recents' => 'Neuste Forumsbeiträge',
 'mots_clef' => 'Schlagwort',
 'mots_clefs' => 'Schlagworte',
 'mots_clefs_meme_groupe' => 'Schlagworte der gleichen Kategorie',
@@ -86,18 +86,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'page_precedente' => 'vorherige Seite',
 'page_suivante' => 'nachfolgende Seite',
 'par_auteur' => 'von ',
-'participer_site' => 'Sie k&ouml;nnen bei dieser Website mitmachen, wenn Sie sich anmelden. Sie erhalten sofort eine E-Mail mit den Zugangsdaten zum Redaktionssystem.',
+'participer_site' => 'Sie können bei dieser Website mitmachen, wenn Sie sich anmelden. Sie erhalten sofort eine E-Mail mit den Zugangsdaten zum Redaktionssystem.',
 'plan_site' => 'Sitemap',
 'popularite' => 'Beliebtheit',
 'poster_message' => 'Nachricht senden',
-'proposer_site' => 'Sie k&ouml;nnen in dieser Rubrik eine Seite vorschlagen&nbsp;:',
+'proposer_site' => 'Sie können in dieser Rubrik eine Seite vorschlagen :',
 
 // R
 'repondre_article' => 'auf diesen Artikel antworten',
 'repondre_breve' => 'auf diese Meldung antworten',
 'repondre_message' => 'auf diese Nachricht antworten',
 'resultats_recherche' => 'Suchergebnis(se)',
-'retour_debut_forums' => 'Zur&uuml;ck zum Beginn des Forums',
+'retour_debut_forums' => 'Zurück zum Beginn des Forums',
 'rubrique' => 'Rubrik',
 'rubriques' => 'Rubriken',
 

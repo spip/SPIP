@@ -12,13 +12,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'article' => 'Article',
 'articles' => 'Articles',
 'articles_auteur' => 'Articles d\'aquest autor',
-'articles_populaires' => 'Els articles m&eacute;s populars',
-'articles_rubrique' => 'Articles d\'aquesta secci&oacute;',
-'aucun_article' => 'No hi ha cap article en aquesta adre&ccedil;a',
-'aucun_auteur' => 'No hi ha cap autor/a a aquesta adre&ccedil;a',
-'aucun_site' => 'No hi ha cap lloc web en aquesta adre&ccedil;a',
-'aucune_breve' => 'No hi ha cap breu a aquesta adre&ccedil;a',
-'aucune_rubrique' => 'No hi ha cap secci&oacute; a aquesta adre&ccedil;a',
+'articles_populaires' => 'Els articles més populars',
+'articles_rubrique' => 'Articles d\'aquesta secció',
+'aucun_article' => 'No hi ha cap article en aquesta adreça',
+'aucun_auteur' => 'No hi ha cap autor/a a aquesta adreça',
+'aucun_site' => 'No hi ha cap lloc web en aquesta adreça',
+'aucune_breve' => 'No hi ha cap breu a aquesta adreça',
+'aucune_rubrique' => 'No hi ha cap secció a aquesta adreça',
 'auteur' => 'Autor',
 'autres' => 'Altres',
 'autres_breves' => 'Altres breus',
@@ -40,11 +40,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dernieres_breves' => 'Darreres breus',
 'derniers_articles' => 'Darrers articles',
 'derniers_commentaires' => 'Darrers comentaris',
-'derniers_messages_forum' => 'Darrers missatges publicats als f&ograve;rums',
-'documents_interdits_forum' => 'Documents prohibits al f&oacute;rum',
+'derniers_messages_forum' => 'Darrers missatges publicats als fòrums',
+'documents_interdits_forum' => 'Documents prohibits al fórum',
 
 // E
-'edition_mode_texte' => 'Edici&oacute; en mode text de ',
+'edition_mode_texte' => 'Edició en mode text de ',
 'en_reponse' => 'En resposta a:',
 'en_resume' => 'En resum',
 'envoyer_message' => 'Enviar un missatge',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptats: @formats@.',
-'forum' => 'F&ograve;rum',
+'forum' => 'Fòrum',
 
 // H
 'hierarchie_site' => 'Jerarquia del lloc',
@@ -65,17 +65,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'meme_auteur' => 'Del mateix/a autor/a',
-'meme_rubrique' => 'A la mateixa secci&oacute;',
+'meme_rubrique' => 'A la mateixa secció',
 'memes_auteurs' => 'Dels mateixos autors',
 'message' => 'Missatge',
-'messages_forum' => 'Missatges al f&ograve;rum',
-'messages_recents' => 'Els missatges m&eacute;s recents als f&ograve;rums',
+'messages_forum' => 'Missatges al fòrum',
+'messages_recents' => 'Els missatges més recents als fòrums',
 'mots_clef' => 'Paraula clau',
 'mots_clefs' => 'Paraules clau',
 'mots_clefs_meme_groupe' => 'Paraules clau al mateix grup',
 
 // N
-'navigation' => 'Navegaci&oacute;',
+'navigation' => 'Navegació',
 'nom' => 'Nom',
 'nouveautes' => 'Les novetats',
 'nouveautes_web' => 'Novetats a la Web',
@@ -83,22 +83,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouvelles_breves' => 'Noves breus',
 
 // P
-'page_precedente' => 'p&agrave;gina anterior',
-'page_suivante' => 'p&agrave;gina seg&uuml;ent',
-'par_auteur' => 'per&nbsp;',
-'participer_site' => 'Podeu participar en la vida d\'aquest lloc web i proposar els vostres articles si ompliu la inscripci&oacute; que hi ha a continuaci&oacute;. Immediatament rebreu un correu electr&ograve;nic indicant-vos els codis d\'acc&eacute;s a l\'espai privat de la web.',
+'page_precedente' => 'pàgina anterior',
+'page_suivante' => 'pàgina següent',
+'par_auteur' => 'per ',
+'participer_site' => 'Podeu participar en la vida d\'aquest lloc web i proposar els vostres articles si ompliu la inscripció que hi ha a continuació. Immediatament rebreu un correu electrònic indicant-vos els codis d\'accés a l\'espai privat de la web.',
 'plan_site' => 'Mapa del lloc Web',
 'popularite' => 'Popularitat',
 'poster_message' => 'Escriure un missatge',
-'proposer_site' => 'Pots proposar un lloc web per afegir-lo a aquesta secci&oacute;:',
+'proposer_site' => 'Pots proposar un lloc web per afegir-lo a aquesta secció:',
 
 // R
 'repondre_article' => 'Respondre a aquest article',
 'repondre_breve' => 'Respondre a aquesta breu',
 'repondre_message' => 'Respondre a aquest missatge',
 'resultats_recherche' => 'Resultats de la recerca',
-'retour_debut_forums' => 'Retorn al comen&ccedil;ament dels f&ograve;rums',
-'rubrique' => 'Secci&oacute;',
+'retour_debut_forums' => 'Retorn al començament dels fòrums',
+'rubrique' => 'Secció',
 'rubriques' => 'Seccions',
 
 // S
@@ -109,17 +109,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'spam' => 'Spam',
 'suite' => 'Segueix',
 'sur_web' => 'Sobre la Web',
-'syndiquer_rubrique' => 'Sindicar aquesta secci&oacute;',
+'syndiquer_rubrique' => 'Sindicar aquesta secció',
 'syndiquer_site' => 'Sindicar tot el lloc Web',
 
 // T
-'texte_lettre_information' => 'Veure la carta de presentaci&oacute; del lloc Web',
+'texte_lettre_information' => 'Veure la carta de presentació del lloc Web',
 'texte_lettre_information_2' => 'Aquesta carta recull i conta els articles i els breus publicades des de',
 
 // V
-'ver_imprimer' => 'Versi&oacute; per imprimir',
-'voir_en_ligne' => 'Veure en l&iacute;nia',
-'voir_squelette' => 'descarregar l\'esquelet d\'aquesta p&agrave;gina'
+'ver_imprimer' => 'Versió per imprimir',
+'voir_en_ligne' => 'Veure en línia',
+'voir_squelette' => 'descarregar l\'esquelet d\'aquesta pàgina'
 );
 
 ?>

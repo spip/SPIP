@@ -8,11 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
-'accueil_site' => 'U&ntilde;naq qamawita',
+'accueil_site' => 'Uñnaq qamawita',
 'article' => 'Article', # NEW
 'articles' => 'Qillqatanaka',
 'articles_auteur' => 'Qillqirin aka qillqatanakapa',
-'articles_populaires' => 'U&ntilde;t\'at qillqatanaka',
+'articles_populaires' => 'Uñt\'at qillqatanaka',
 'articles_rubrique' => 'Aka t\'aqat qillqatanaka',
 'aucun_article' => 'Aka utxawinx, ni kuna qillqatas utjkiti',
 'aucun_auteur' => 'Aka utxawinx janiw qillqirix utjkiti',
@@ -27,11 +27,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Kamisaki',
-'breve' => 'Br&egrave;ve', # NEW
+'breve' => 'Brève', # NEW
 'breves' => 'Jisk\'aptatanaka',
 
 // C
-'commenter_site' => 'Aka qamawxat aruskipt\'a&ntilde;a',
+'commenter_site' => 'Aka qamawxat aruskipt\'aña',
 'copie_document_impossible' => 'Imposible copiar el documento', # NEW
 
 // D
@@ -45,17 +45,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'edition_mode_texte' => 'Sawutjama lurawi',
-'en_reponse' => 'Ukar jaysaya&ntilde;a',
+'en_reponse' => 'Ukar jaysayaña',
 'en_resume' => 'Jisk\'aptasina',
-'envoyer_message' => 'Ma yatiyaw apaya&ntilde;a',
+'envoyer_message' => 'Ma yatiyaw apayaña',
 'espace_prive' => 'Ch\'usawx jark\'ata',
 
 // F
 'formats_acceptes' => 'Formatos aceptados: @formats@.', # NEW
-'forum' => 'Aruskipa&ntilde;a',
+'forum' => 'Aruskipaña',
 
 // H
-'hierarchie_site' => 'Qamawita kamachi&ntilde;awi',
+'hierarchie_site' => 'Qamawita kamachiñawi',
 
 // J
 'jours' => 'Urunaka',
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Yatiyawi',
 'messages_forum' => 'Aruskipawit yatiyawinaka',
 'messages_recents' => 'Amuyt\'awit jichhak amuyt\'awinaka',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
+'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Imt\'at arunaka',
 'mots_clefs_meme_groupe' => 'Pachpa taman imt\'at arunaka',
 
@@ -83,21 +83,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouvelles_breves' => 'Machaq jisk\'aptatanaka',
 
 // P
-'page_precedente' => 'Nayrir laphi u&ntilde;naqa',
-'page_suivante' => 'Jutir laphi u&ntilde;naqa',
+'page_precedente' => 'Nayrir laphi uñnaqa',
+'page_suivante' => 'Jutir laphi uñnaqa',
 'par_auteur' => 'Lurata',
-'participer_site' => 'Kunanaks lurasmaw aka jakawi qamawin ukhamarak qillqatanak lurasma akjaru qillqasisina.Ukat m&auml;kiw m&auml; correo electr&oacute;nico qatuqata mantaw imt\'atanakamampi',
+'participer_site' => 'Kunanaks lurasmaw aka jakawi qamawin ukhamarak qillqatanak lurasma akjaru qillqasisina.Ukat mäkiw mä correo electrónico qatuqata mantaw imt\'atanakamampi',
 'plan_site' => 'Qamawt irpiri',
-'popularite' => 'Juk\'amp u&ntilde;jata',
-'poster_message' => 'Ma yatiyawi qillqa&ntilde;a',
-'proposer_site' => 'Aka t\'aqan usku&ntilde;atakix ma qamaw amuyt\'am:',
+'popularite' => 'Juk\'amp uñjata',
+'poster_message' => 'Ma yatiyawi qillqaña',
+'proposer_site' => 'Aka t\'aqan uskuñatakix ma qamaw amuyt\'am:',
 
 // R
-'repondre_article' => 'Aka qillqat amuykipa&ntilde;a',
-'repondre_breve' => 'Aka jisk\'aptata amuykipa&ntilde;a',
-'repondre_message' => 'Aka yatiyawir jaysa&ntilde;a',
-'resultats_recherche' => 'Thaqhata u&ntilde;stayi',
-'retour_debut_forums' => 'Aruskipawi qalltar kuti&ntilde;a',
+'repondre_article' => 'Aka qillqat amuykipaña',
+'repondre_breve' => 'Aka jisk\'aptata amuykipaña',
+'repondre_message' => 'Aka yatiyawir jaysaña',
+'resultats_recherche' => 'Thaqhata uñstayi',
+'retour_debut_forums' => 'Aruskipawi qalltar kutiña',
 'rubrique' => 'T\'aqa',
 'rubriques' => 'T\'aqanaka',
 
@@ -107,19 +107,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sites_web' => 'web qamawinaka',
 'sous_rubriques' => 'Jutir t\'aqa',
 'spam' => 'Spam', # NEW
-'suite' => 'Sarantaskaki&ntilde;a',
+'suite' => 'Sarantaskakiña',
 'sur_web' => 'Web ukata',
-'syndiquer_rubrique' => 'Aka t\'aqa apxasi&ntilde;a',
-'syndiquer_site' => 't\'aqat qamaw apxasi&ntilde;a',
+'syndiquer_rubrique' => 'Aka t\'aqa apxasiña',
+'syndiquer_site' => 't\'aqat qamaw apxasiña',
 
 // T
 'texte_lettre_information' => 'Akax jisk\'a qillqat yatiyawin qamawipawa',
 'texte_lettre_information_2' => 'Aka jisk\'a qillqatxa qillqatanak ukhamaraki jisk\'aptat yatiyatanak jisk\'ayi',
 
 // V
-'ver_imprimer' => 'U&ntilde;jat liq\'su&ntilde;ataki',
-'voir_en_ligne' => 'Naktata u&ntilde;ja&ntilde;a',
-'voir_squelette' => 'Aka laphi u&ntilde;naqan ch\'aka ch\'aka u&ntilde;ja&ntilde;a'
+'ver_imprimer' => 'Uñjat liq\'suñataki',
+'voir_en_ligne' => 'Naktata uñjaña',
+'voir_squelette' => 'Aka laphi uñnaqan ch\'aka ch\'aka uñjaña'
 );
 
 ?>

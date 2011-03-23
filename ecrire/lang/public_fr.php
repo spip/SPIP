@@ -12,21 +12,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'articles_auteur' => 'Articles de cet auteur',
 'articles_populaires' => 'Articles les plus populaires',
 'articles_rubrique' => 'Articles de cette rubrique',
-'aucun_article' => 'Il n\'y a pas d\'article &agrave; cette adresse',
-'aucun_auteur' => 'Il n\'y a pas d\'auteur &agrave; cette adresse',
-'aucun_site' => 'Il n\'y a pas de site &agrave; cette adresse',
-'aucune_breve' => 'Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
-'aucune_rubrique' => 'Il n\'y a pas de rubrique &agrave; cette adresse',
+'aucun_article' => 'Il n\'y a pas d\'article à cette adresse',
+'aucun_auteur' => 'Il n\'y a pas d\'auteur à cette adresse',
+'aucun_site' => 'Il n\'y a pas de site à cette adresse',
+'aucune_breve' => 'Il n\'y a pas de brève à cette adresse',
+'aucune_rubrique' => 'Il n\'y a pas de rubrique à cette adresse',
 'auteur' => 'Auteur',
 'autres' => 'Autres',
-'autres_breves' => 'Autres br&egrave;ves',
-'autres_groupes_mots_clefs' => 'Autres groupes de mots-cl&eacute;s',
+'autres_breves' => 'Autres brèves',
+'autres_groupes_mots_clefs' => 'Autres groupes de mots-clés',
 'autres_sites' => 'Autres sites',
 
 // B
 'bonjour' => 'Bonjour',
-'breve' => 'Br&egrave;ve',
-'breves' => 'Br&egrave;ves',
+'breve' => 'Brève',
+'breves' => 'Brèves',
 
 // C
 'commenter_site' => 'Commenter ce site',
@@ -35,25 +35,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // D
 'date' => 'Date',
 'dernier_ajout' => 'Dernier ajout',
-'dernieres_breves' => 'Derni&egrave;res br&egrave;ves',
+'dernieres_breves' => 'Dernières brèves',
 'derniers_articles' => 'Derniers articles',
 'derniers_commentaires' => 'Derniers commentaires',
-'derniers_messages_forum' => 'Derniers messages publi&eacute;s dans les forums',
+'derniers_messages_forum' => 'Derniers messages publiés dans les forums',
 'documents_interdits_forum' => 'Documents interdits dans le forum',
 
 // E
-'edition_mode_texte' => '&Eacute;dition en mode texte de',
-'en_reponse' => 'En r&eacute;ponse &agrave;&nbsp;:',
-'en_resume' => 'En r&eacute;sum&eacute;',
+'edition_mode_texte' => 'Édition en mode texte de',
+'en_reponse' => 'En réponse à :',
+'en_resume' => 'En résumé',
 'envoyer_message' => 'Envoyer un message',
-'espace_prive' => 'Espace priv&eacute;',
+'espace_prive' => 'Espace privé',
 
 // F
-'formats_acceptes' => 'Formats accept&#233;s : @formats@.',
+'formats_acceptes' => 'Formats acceptés : @formats@.',
 'forum' => 'Forum',
 
 // H
-'hierarchie_site' => 'Hi&eacute;rarchie du site',
+'hierarchie_site' => 'Hiérarchie du site',
 
 // J
 'jours' => 'jours',
@@ -62,46 +62,46 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_connecter' => 'Se connecter',
 
 // M
-'meme_auteur' => 'Du m&ecirc;me auteur',
-'meme_rubrique' => 'Dans la m&ecirc;me rubrique',
-'memes_auteurs' => 'Des m&ecirc;mes auteurs',
+'meme_auteur' => 'Du même auteur',
+'meme_rubrique' => 'Dans la même rubrique',
+'memes_auteurs' => 'Des mêmes auteurs',
 'message' => 'Message',
 'messages_forum' => 'Messages de forum',
-'messages_recents' => 'Messages de forums les plus r&eacute;cents',
-'mots_clef' => 'Mot-cl&eacute;',
-'mots_clefs' => 'Mots-cl&eacute;s',
-'mots_clefs_meme_groupe' => 'Mots-cl&eacute;s dans le m&ecirc;me groupe',
+'messages_recents' => 'Messages de forums les plus récents',
+'mots_clef' => 'Mot-clé',
+'mots_clefs' => 'Mots-clés',
+'mots_clefs_meme_groupe' => 'Mots-clés dans le même groupe',
 
 // N
 'navigation' => 'Navigation',
 'nom' => 'Nom',
-'nouveautes' => 'Les nouveaut&eacute;s',
-'nouveautes_web' => 'Nouveaut&eacute;s sur le Web',
+'nouveautes' => 'Les nouveautés',
+'nouveautes_web' => 'Nouveautés sur le Web',
 'nouveaux_articles' => 'Nouveaux articles',
-'nouvelles_breves' => 'Nouvelles br&egrave;ves',
+'nouvelles_breves' => 'Nouvelles brèves',
 
 // P
-'page_precedente' => 'page pr&eacute;c&eacute;dente',
+'page_precedente' => 'page précédente',
 'page_suivante' => 'page suivante',
 'par_auteur' => 'par ',
-'participer_site' => 'Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes d\'acc&egrave;s &agrave; l\'espace priv&eacute; du site.',
+'participer_site' => 'Vous pouvez participer à la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez immédiatement un email vous indiquant vos codes d\'accès à l\'espace privé du site.',
 'plan_site' => 'Plan du site',
-'popularite' => 'Popularit&eacute;',
+'popularite' => 'Popularité',
 'poster_message' => 'Poster un message',
-'proposer_site' => 'Vous pouvez proposer un site &agrave; ajouter dans cette rubrique&nbsp;:',
+'proposer_site' => 'Vous pouvez proposer un site à ajouter dans cette rubrique :',
 
 // R
-'repondre_article' => 'R&eacute;pondre &agrave; cet article',
-'repondre_breve' => 'R&eacute;pondre &agrave; cette br&egrave;ve',
-'repondre_message' => 'R&eacute;pondre &agrave; ce message',
-'resultats_recherche' => 'R&eacute;sultats de la recherche',
-'retour_debut_forums' => 'Retour au d&eacute;but des forums',
+'repondre_article' => 'Répondre à cet article',
+'repondre_breve' => 'Répondre à cette brève',
+'repondre_message' => 'Répondre à ce message',
+'resultats_recherche' => 'Résultats de la recherche',
+'retour_debut_forums' => 'Retour au début des forums',
 'rubrique' => 'Rubrique',
 'rubriques' => 'Rubriques',
 
 // S
 'signatures_petition' => 'Signatures',
-'site_realise_avec_spip' => 'Site r&eacute;alis&eacute; avec SPIP',
+'site_realise_avec_spip' => 'Site réalisé avec SPIP',
 'sites_web' => 'Sites Web',
 'sous_rubriques' => 'Sous-rubriques',
 'spam' => 'Spam',
@@ -112,10 +112,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Voici la lettre d\'information du site',
-'texte_lettre_information_2' => 'Cette lettre recense les articles et les br&egrave;ves publi&eacute;s depuis',
+'texte_lettre_information_2' => 'Cette lettre recense les articles et les brèves publiés depuis',
 
 // V
-'ver_imprimer' => 'Version &agrave; imprimer',
+'ver_imprimer' => 'Version à imprimer',
 'voir_en_ligne' => 'Voir en ligne',
 'voir_squelette' => 'voir le squelette de cette page'
 );

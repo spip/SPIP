@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'article' => 'Articolo',
 'articles' => 'Articoli',
 'articles_auteur' => 'Articoli di questo autore',
-'articles_populaires' => 'Articoli pi&ugrave; letti',
+'articles_populaires' => 'Articoli più letti',
 'articles_rubrique' => 'Articoli di questa rubrica',
 'aucun_article' => 'Non ci sono articoli a questo indirizzo',
 'aucun_auteur' => 'Non ci sono autori a questo indirizzo',
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'memes_auteurs' => 'Degli stessi autori',
 'message' => 'Messaggio',
 'messages_forum' => 'Messaggi del forum',
-'messages_recents' => 'Messaggi pi&ugrave; recenti del forum',
+'messages_recents' => 'Messaggi più recenti del forum',
 'mots_clef' => 'Parola chiave',
 'mots_clefs' => 'Parole chiave',
 'mots_clefs_meme_groupe' => 'Parole chiave nello stesso gruppo',
@@ -77,8 +77,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // N
 'navigation' => 'Navigazione',
 'nom' => 'Cognome',
-'nouveautes' => 'Le novit&agrave;',
-'nouveautes_web' => 'Novit&agrave; sul Web',
+'nouveautes' => 'Le novità',
+'nouveautes_web' => 'Novità sul Web',
 'nouveaux_articles' => 'Nuovi articoli',
 'nouvelles_breves' => 'Nuove brevi',
 
@@ -86,11 +86,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'page_precedente' => 'pagina precedente',
 'page_suivante' => 'pagina successiva',
 'par_auteur' => 'di ',
-'participer_site' => '&Egrave; possibile partecipare alla vita di questo sito e proporre degli articoli iscrivendosi qui sotto. Verr&agrave; spedito immediatamente un email con il codice di accesso all\'area riservata del sito.',
+'participer_site' => 'È possibile partecipare alla vita di questo sito e proporre degli articoli iscrivendosi qui sotto. Verrà spedito immediatamente un email con il codice di accesso all\'area riservata del sito.',
 'plan_site' => 'Mappa del sito',
-'popularite' => 'Popolarit&agrave;',
+'popularite' => 'Popolarità',
 'poster_message' => 'Inviare un messaggio',
-'proposer_site' => '&Egrave; possibile proporre un sito da aggiungere a questa rubrica:',
+'proposer_site' => 'È possibile proporre un sito da aggiungere a questa rubrica:',
 
 // R
 'repondre_article' => 'Rispondere all\'articolo',
