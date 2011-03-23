@@ -14,69 +14,69 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_mainteneur' => 'abc@dk2net.dk',
 
 // A
-'access_interface_graphique' => 'Retour &agrave; l\'interface graphique compl&egrave;te', # NEW
-'access_mode_texte' => 'Afficher l\'interface textuelle simplifi&eacute;e', # NEW
+'access_interface_graphique' => 'Retour à l\'interface graphique complète', # NEW
+'access_mode_texte' => 'Afficher l\'interface textuelle simplifiée', # NEW
 'admin_debug' => 'debug', # NEW
 'admin_modifier_article' => 'Rediger artikel',
 'admin_modifier_auteur' => 'Ret forfatter',
 'admin_modifier_breve' => 'Rediger nyhed',
-'admin_modifier_mot' => 'Ret n&oslash;gleord',
+'admin_modifier_mot' => 'Ret nøgleord',
 'admin_modifier_rubrique' => 'Rediger afsnit',
 'admin_recalculer' => 'Opdater side',
 'afficher_calendrier' => 'Afficher le calendrier', # NEW
-'afficher_trad' => 'vis overs&aelig;ttelser',
-'alerte_maj_impossible' => '<b>Advarsel!</b> Opdatering af SQL databasen til version @version@&#381;mislykkedes, m&aring;ske p&aring; grund af et problem med rettigheder i forhold til databasen. Kontakt venligst din webhotel.', # MODIF
-'alerte_modif_info_concourante' => 'ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute;e par ailleurs. La valeur actuelle est&nbsp;:', # NEW
+'afficher_trad' => 'vis oversættelser',
+'alerte_maj_impossible' => '<b>Advarsel!</b> Opdatering af SQL databasen til version @version@Žmislykkedes, måske på grund af et problem med rettigheder i forhold til databasen. Kontakt venligst din webhotel.', # MODIF
+'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifiée par ailleurs. La valeur actuelle est :', # NEW
 'analyse_xml' => 'Analyse XML', # NEW
 'annuler' => 'Annuler',
-'antispam_champ_vide' => 'Veuillez laisser ce champ vide&nbsp;:', # NEW
+'antispam_champ_vide' => 'Veuillez laisser ce champ vide :', # NEW
 'articles_recents' => 'De seneste artikler',
 'avis_archive_incorrect' => 'arkivfilen er ikke en gyldig SPIP fil',
 'avis_archive_invalide' => 'arkivfilen er ikke gyldig',
 'avis_attention' => 'Advarsel!',
 'avis_champ_incorrect_type_objet' => 'Ugyldigt feltnavn @name@ for et objekt af typen @type@',
 'avis_colonne_inexistante' => 'Kolonnen @col@ findes ikke',
-'avis_echec_syndication_01' => 'Syndikering mislykket: enten er den valgte datakilde utilg&aelig;ngelig eller ogs&aring; indeholder den ingen artikler.',
-'avis_echec_syndication_02' => 'Syndication mislykket: kunne ikke f&aring; forbindelse til den valgte datakilde.',
+'avis_echec_syndication_01' => 'Syndikering mislykket: enten er den valgte datakilde utilgængelig eller også indeholder den ingen artikler.',
+'avis_echec_syndication_02' => 'Syndication mislykket: kunne ikke få forbindelse til den valgte datakilde.',
 'avis_erreur' => 'Fejl: se nedenfor\';',
 'avis_erreur_connexion' => 'Ingen forbindelse',
 'avis_erreur_cookie' => 'cookie-problem', # MODIF
-'avis_erreur_fonction_contexte' => 'Programfejl. Denne funktion burde ikke kaldes i denne sammenh&aelig;ng.', # MODIF
+'avis_erreur_fonction_contexte' => 'Programfejl. Denne funktion burde ikke kaldes i denne sammenhæng.', # MODIF
 'avis_erreur_mysql' => 'SQL fejl', # MODIF
 'avis_erreur_sauvegarde' => 'Fejl i sikkerhedskopi (@type@ @id_objet@)!',
-'avis_erreur_visiteur' => 'Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;', # NEW
+'avis_erreur_visiteur' => 'Problème d\'accès à l\'espace privé', # NEW
 
 // B
-'barre_a_accent_grave' => 'Inds&aelig;t et stort A med accent grave',
+'barre_a_accent_grave' => 'Indsæt et stort A med accent grave',
 'barre_aide' => 'Brug typografiske genveje til at forfine layoutet',
-'barre_e_accent_aigu' => 'Inds&aelig;t et stort E med accent',
-'barre_eo' => 'Inds&aelig;t oe ligatur',
-'barre_eo_maj' => 'Inds&aelig;t stort OE ligatur',
-'barre_euro' => 'Inds&aelig;t et &euro;-symbol',
+'barre_e_accent_aigu' => 'Indsæt et stort E med accent',
+'barre_eo' => 'Indsæt oe ligatur',
+'barre_eo_maj' => 'Indsæt stort OE ligatur',
+'barre_euro' => 'Indsæt et €-symbol',
 'barre_gras' => 'Skriv med {{fed type}}',
-'barre_guillemets' => 'S&aelig;t i "anf&oslash;rselstegn" ',
-'barre_guillemets_simples' => 'S&aelig;t i \'anf&oslash;rselstegn\' ',
-'barre_intertitre' => 'G&oslash;r til {{{underoverskrift}}}',
+'barre_guillemets' => 'Sæt i "anførselstegn" ',
+'barre_guillemets_simples' => 'Sæt i \'anførselstegn\' ',
+'barre_intertitre' => 'Gør til {{{underoverskrift}}}',
 'barre_italic' => 'Skriv med {kursiv}',
 'barre_lien' => 'Lav til et [hyperlink->http://...]',
-'barre_lien_input' => 'Angiv m&aring;let for dit hyperlink (du kan angive en internetadresse p&aring; formen  http://www.websted.dk eller bare nummeret p&aring; en artikel p&aring; dette websted).',
-'barre_note' => 'G&oslash;r til en [[Fodnote]]',
-'barre_paragraphe' => 'Cr&#233;er un paragraphe', # NEW
+'barre_lien_input' => 'Angiv målet for dit hyperlink (du kan angive en internetadresse på formen  http://www.websted.dk eller bare nummeret på en artikel på dette websted).',
+'barre_note' => 'Gør til en [[Fodnote]]',
+'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>Citer en besked</quote>',
-'bouton_ajouter_document' => 'Tilf&oslash;j et dokument',
-'bouton_ajouter_image' => 'TILF&Oslash;J BILLEDE', # MODIF
-'bouton_ajouter_image_document' => 'Tilf&oslash;j et billede eller dokument',
+'bouton_ajouter_document' => 'Tilføj et dokument',
+'bouton_ajouter_image' => 'TILFØJ BILLEDE', # MODIF
+'bouton_ajouter_image_document' => 'Tilføj et billede eller dokument',
 'bouton_changer' => 'Opdater',
-'bouton_chercher' => 'S&oslash;g',
-'bouton_choisir' => 'V&aelig;lg',
-'bouton_deplacer' => 'D&eacute;placer', # NEW
+'bouton_chercher' => 'Søg',
+'bouton_choisir' => 'Vælg',
+'bouton_deplacer' => 'Déplacer', # NEW
 'bouton_download' => 'Download',
 'bouton_enregistrer' => 'Gem',
-'bouton_radio_desactiver_messagerie_interne' => 'Sl&aring; intern meddelelsesfunktion fra',
+'bouton_radio_desactiver_messagerie_interne' => 'Slå intern meddelelsesfunktion fra',
 'bouton_radio_envoi_annonces' => 'Send redaktionelle nyheder',
 'bouton_radio_non_envoi_annonces' => 'Send ingen nyheder',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Send ikke oversigt over seneste nyheder',
-'bouton_recharger_page' => 'genindl&aelig;s denne side',
+'bouton_recharger_page' => 'genindlæs denne side',
 'bouton_telecharger' => 'Hent',
 'bouton_valider' => 'Godkend',
 
@@ -85,12 +85,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_jour_entier' => 'hele dagen',
 'cal_matin' => 'morgen (a.m.)',
 'cal_par_jour' => 'daglig kalender',
-'cal_par_mois' => 'm&aring;nedlig kalender',
+'cal_par_mois' => 'månedlig kalender',
 'cal_par_semaine' => 'ugentlig kalender',
 'choix_couleur_interface' => 'farve',
 'choix_interface' => 'choix  de l\'interface', # NEW
 'colonne' => 'Kolonne',
-'confirm_changer_statut' => 'Bekr&aelig;ftelse n&oslash;dvendig: Du har bedt om at &aelig;ndre denne artikels status. Vil du forts&aelig;tte? ',
+'confirm_changer_statut' => 'Bekræftelse nødvendig: Du har bedt om at ændre denne artikels status. Vil du fortsætte? ',
 'correcte' => 'correcte', # NEW
 
 // D
@@ -113,11 +113,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_fmt_heures_minutes' => '@h@:@m@',
 'date_fmt_jour_heure' => '@jour@ kl. @heure@',
 'date_fmt_jour_mois' => '@jourmois@',
-'date_fmt_jour_mois_annee' => '@jourmois@&nbsp;@annee@',
+'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 'date_fmt_mois_annee' => '@nommois@ @annee@',
 'date_fmt_nomjour_date' => '@nomjour@ den @date@',
 'date_heures' => 'timer',
-'date_hier' => 'i g&aring;r',
+'date_hier' => 'i går',
 'date_il_y_a' => 'il y a @delai@', # NEW
 'date_jnum1' => '1',
 'date_jnum10' => '10.',
@@ -150,8 +150,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jnum7' => '7.',
 'date_jnum8' => '8.',
 'date_jnum9' => '9.',
-'date_jour_1' => 's&oslash;ndag',
-'date_jour_1_abbr' => 'S&oslash;n.',
+'date_jour_1' => 'søndag',
+'date_jour_1_abbr' => 'Søn.',
 'date_jour_1_initiale' => 'd.', # NEW
 'date_jour_2' => 'mandag',
 'date_jour_2_abbr' => 'Man.',
@@ -168,22 +168,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jour_6' => 'fredag',
 'date_jour_6_abbr' => 'Fre.',
 'date_jour_6_initiale' => 'F.',
-'date_jour_7' => 'l&oslash;rdag',
-'date_jour_7_abbr' => 'L&oslash;r.',
+'date_jour_7' => 'lørdag',
+'date_jour_7_abbr' => 'Lør.',
 'date_jour_7_initiale' => 'L.',
 'date_jours' => 'dage',
 'date_minutes' => 'minutter',
-'date_mois' => 'm&aring;neder',
+'date_mois' => 'måneder',
 'date_mois_1' => 'januar',
 'date_mois_10' => 'oktober',
 'date_mois_10_abbr' => 'oct.', # NEW
 'date_mois_11' => 'november',
 'date_mois_11_abbr' => 'nov.', # NEW
 'date_mois_12' => 'december',
-'date_mois_12_abbr' => 'd&eacute;c.', # NEW
+'date_mois_12_abbr' => 'déc.', # NEW
 'date_mois_1_abbr' => 'janv.', # NEW
 'date_mois_2' => 'februar',
-'date_mois_2_abbr' => 'f&eacute;vr.', # NEW
+'date_mois_2_abbr' => 'févr.', # NEW
 'date_mois_3' => 'marts',
 'date_mois_3_abbr' => 'mars', # NEW
 'date_mois_4' => 'april',
@@ -195,58 +195,58 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois_7' => 'juli',
 'date_mois_7_abbr' => 'juil.', # NEW
 'date_mois_8' => 'august',
-'date_mois_8_abbr' => 'ao&ucirc;t', # NEW
+'date_mois_8_abbr' => 'août', # NEW
 'date_mois_9' => 'september',
 'date_mois_9_abbr' => 'sept.', # NEW
 'date_saison_1' => 'vinter',
-'date_saison_2' => 'for&aring;r',
+'date_saison_2' => 'forår',
 'date_saison_3' => 'sommer',
-'date_saison_4' => 'efter&aring;r',
+'date_saison_4' => 'efterår',
 'date_secondes' => 'sekunder',
 'date_semaines' => 'uger',
-'date_un_mois' => 'm&aring;ned',
+'date_un_mois' => 'måned',
 'date_une_heure' => 'time',
 'date_une_minute' => 'minut',
 'date_une_seconde' => 'sekund',
 'date_une_semaine' => 'uge',
 'dirs_commencer' => ' for at kunne begynde installationen',
-'dirs_preliminaire' => 'Forberedelser: <b>Ops&aelig;tning af adgangsrettigheder</b>',
+'dirs_preliminaire' => 'Forberedelser: <b>Opsætning af adgangsrettigheder</b>',
 'dirs_probleme_droits' => 'Problem med adgangsrettigheder', # MODIF
-'dirs_repertoires_absents' => '<b>F&oslash;lgende kataloger blev ikke fundet: <ul>@bad_dirs@.</ul> </b>
-  <p>Det skyldes sandsynligvis forkert brug af store og sm&aring; bogstaver.
-  Kontroller, at katalognavnene har samme store og sm&aring; bogstaver som vist ovenfor.
-  Hvis ikke, sm&aring; brug et FTP-program til at omd&oslash;be dem, for at rette fejlen.
+'dirs_repertoires_absents' => '<b>Følgende kataloger blev ikke fundet: <ul>@bad_dirs@.</ul> </b>
+  <p>Det skyldes sandsynligvis forkert brug af store og små bogstaver.
+  Kontroller, at katalognavnene har samme store og små bogstaver som vist ovenfor.
+  Hvis ikke, små brug et FTP-program til at omdøbe dem, for at rette fejlen.
   <p>Derefter kan du', # MODIF
-'dirs_repertoires_suivants' => '<b>F&oslash;lgende kataloger mangler skriveadgang: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_suivants' => '<b>Følgende kataloger mangler skriveadgang: <ul>@bad_dirs@.</ul> </b>
 
-  <p>For at &aelig;ndre dette skal du benytte din FTP-klient til at s&aelig;tte adgangsrettigheder
-  for hvert katalog. Fremgangsm&aring;den er vist i brugerh&aring;ndbogen.
+  <p>For at ændre dette skal du benytte din FTP-klient til at sætte adgangsrettigheder
+  for hvert katalog. Fremgangsmåden er vist i brugerhåndbogen.
 
-  <p>N&aring;r du har fuldf&oslash;rt dette, kan du ', # MODIF
+  <p>Når du har fuldført dette, kan du ', # MODIF
 'double_occurrence' => 'Double occurrence', # MODIF
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'St&oslash;rrelse:',
+'entree_dimensions' => 'Størrelse:',
 'entree_titre_document' => 'Dokumentoverskrift:',
 'entree_titre_image' => 'Billedoverskrift:',
 'envoi_via_le_site' => 'Envoi via le site', # NEW
 'erreur' => 'Fejl',
-'erreur_balise_non_fermee' => 'derni&egrave;re balise non referm&eacute;e :', # NEW
+'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
 'erreur_texte' => 'fejl',
-'etape' => '&Eacute;tape', # NEW
+'etape' => 'Étape', # NEW
 
 // F
 'fichier_introuvable' => 'Fichier @fichier@ introuvable', # NEW
-'form_auteur_confirmation' => 'Bekr&aelig;ft venligst din e-post adresse',
-'form_auteur_email_modifie' => 'Din e-post adresse er blevet &aelig;ndret',
-'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_confirmation' => 'Bekræft venligst din e-post adresse',
+'form_auteur_email_modifie' => 'Din e-post adresse er blevet ændret',
+'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
 'form_auteur_mail_confirmation' => 'Bonjour,
 
-Vous avez demand&eacute; &agrave; changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+Vous avez demandé à changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
 l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignor&eacute;e) :
+sera ignorée) :
 
     @url@
 ', # NEW
@@ -254,55 +254,55 @@ sera ignor&eacute;e) :
 'form_email_non_valide' => 'Din e-mail-adresse er ikke gyldig.',
 'form_forum_access_refuse' => 'Du har ikke mere adgang til dette websted.',
 'form_forum_bonjour' => 'Goddag,', # MODIF
-'form_forum_email_deja_enregistre' => 'Denne e-mail-adresse er allerede tilmeldt. Du kan derfor benytte din s&aelig;dvanlige adgangskode.',
+'form_forum_email_deja_enregistre' => 'Denne e-mail-adresse er allerede tilmeldt. Du kan derfor benytte din sædvanlige adgangskode.',
 'form_forum_identifiant_mail' => 'Dine nye adgangsoplysninger er netop sendt til dig via e-mail.',
 'form_forum_identifiants' => 'Personlige adgangsoplysninger',
-'form_forum_indiquer_nom_email' => 'V&aelig;r venlig at indtaste dit navn og din e-mail-adresse her. Du vil kort tid efter modtage dine personlige adgangsoplysninger via e-mail.',
+'form_forum_indiquer_nom_email' => 'Vær venlig at indtaste dit navn og din e-mail-adresse her. Du vil kort tid efter modtage dine personlige adgangsoplysninger via e-mail.',
 'form_forum_login' => 'login:',
 'form_forum_message_auto' => '(dette er en automatisk udkrevet meddelelse)',
 'form_forum_pass' => 'adgangskode:',
 'form_forum_probleme_mail' => 'E-mail-problem: adgangsoplysninger kunne ikke sendes.',
-'form_forum_voici1' => 'Her er dine adgangsoplysninger for at kunne deltage i forummer p&aring; webstedet "@nom_site_spip@" (@adresse_site@):', # MODIF
+'form_forum_voici1' => 'Her er dine adgangsoplysninger for at kunne deltage i forummer på webstedet "@nom_site_spip@" (@adresse_site@):', # MODIF
 'form_forum_voici2' => 'Her er dine adgangsoplysninger for at kunne indsende artikler til webstedet "@nom_site_spip@" (@adresse_login@):', # MODIF
 'form_indiquer_email' => 'Indtast venligst din e-mail-adresse.',
 'form_indiquer_nom' => 'Indtast venligst dit navn.',
 'form_indiquer_nom_site' => 'Indtast venligst dit websteds navn.',
 'form_pet_adresse_site' => 'Dit websteds URL',
 'form_pet_aucune_signature' => 'Ingen signatur svarer til denne kode...',
-'form_pet_confirmation' => 'Bekr&aelig;ft venligst din signatur:',
+'form_pet_confirmation' => 'Bekræft venligst din signatur:',
 'form_pet_deja_enregistre' => 'Webstedet er allerede registreret',
 'form_pet_deja_signe' => 'Du har allerede signeret denne tekst.',
-'form_pet_envoi_mail_confirmation' => 'En e-mail er netop sendt til dig som bekr&aelig;ftelse. Du b&oslash;r g&aring; ind p&aring; den URL, som er angivet i denne mail, for at bekr&aelig;fte din signatur.', # MODIF
+'form_pet_envoi_mail_confirmation' => 'En e-mail er netop sendt til dig som bekræftelse. Du bør gå ind på den URL, som er angivet i denne mail, for at bekræfte din signatur.', # MODIF
 'form_pet_mail_confirmation' => 'Goddag,
 
-Du har &oslash;nsket at st&oslash;tte denne appel:
+Du har ønsket at støtte denne appel:
 @titre@.
 
-Du at afgivet f&oslash;lgende oplysninger:
+Du at afgivet følgende oplysninger:
     Navn: @nom_email@
     Websted: @nom_site@ - @url_site@
 
 VIGTIGT...
-For at bekr&aelig;fte din underskrift skal du blot klikke dig ind p&aring;
+For at bekræfte din underskrift skal du blot klikke dig ind på
 adressen nedenfor (ellers vil underskriften blive afvist):
     @url@
 
 Tak for din deltagelse
 ', # MODIF
 'form_pet_message_commentaire' => 'Meddelelse eller kommentar?',
-'form_pet_nom_site2' => 'Navn p&aring; dit websted',
+'form_pet_nom_site2' => 'Navn på dit websted',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
-'form_pet_probleme_technique' => 'Teknisk problem: Appelfunktionen er i &oslash;jeblikket ude af drift.',
+'form_pet_probleme_technique' => 'Teknisk problem: Appelfunktionen er i øjeblikket ude af drift.',
 'form_pet_signature_pasprise' => 'Din underskrift er ikke godkendt.',
-'form_pet_signature_validee' => 'Din underskrift er godkendt. Den vil blive offentliggjort, n&aring;r webstedet opdateres. Tak!',
+'form_pet_signature_validee' => 'Din underskrift er godkendt. Den vil blive offentliggjort, når webstedet opdateres. Tak!',
 'form_pet_site_deja_enregistre' => 'Dette websted er allerede registreret',
 'form_pet_url_invalide' => 'Den URL, du har angivet, er ikke gyldig.',
 'form_pet_votre_email' => 'Din e-mail-adresse',
 'form_pet_votre_nom' => 'Dit navn eller alias',
 'form_pet_votre_site' => 'Hvis du har et websted, kan du angive den nedenfor',
-'form_prop_confirmer_envoi' => 'Bekr&aelig;ft afsendelse',
+'form_prop_confirmer_envoi' => 'Bekræft afsendelse',
 'form_prop_description' => 'Beskrivelse/kommentar',
-'form_prop_enregistre' => 'Din forslag er modtaget, det vil blive offentliggjort, n&aring;r det er godkendt af webstedets administratorer.',
+'form_prop_enregistre' => 'Din forslag er modtaget, det vil blive offentliggjort, når det er godkendt af webstedets administratorer.',
 'form_prop_envoyer' => 'Send en meddelelse',
 'form_prop_indiquer_email' => 'Indtast en gyldig e-mail-adresse',
 'form_prop_indiquer_nom_site' => 'Indtast webstedets navn.',
@@ -313,45 +313,45 @@ Tak for din deltagelse
 'form_prop_sujet' => 'Emne',
 'form_prop_url_site' => 'Webstedets URL',
 'forum_acces_refuse' => 'Du har ikke mere adgang til disse forummer',
-'forum_attention_dix_caracteres' => '<b>Advarsel!</b> dit indl&aelig;g er mindre end ti tegn langt.', # MODIF
+'forum_attention_dix_caracteres' => '<b>Advarsel!</b> dit indlæg er mindre end ti tegn langt.', # MODIF
 'forum_attention_trois_caracteres' => '<b>Advarsel!</b> dit emne er mindre end tre tegn langt.', # MODIF
-'forum_attention_trop_caracteres' => '<b>Attention&nbsp;!</b> votre message est trop long (@compte@ caract&egrave;res)&nbsp;: pour pouvoir &ecirc;tre enregistr&eacute;, il ne doit pas d&eacute;passer @max@ caract&egrave;res.', # NEW
+'forum_attention_trop_caracteres' => '<b>Attention !</b> votre message est trop long (@compte@ caractères) : pour pouvoir être enregistré, il ne doit pas dépasser @max@ caractères.', # NEW
 'forum_avez_selectionne' => 'Du har valgt:',
-'forum_cliquer_retour' => 'Klik  <a href=\'@retour_forum@\'>her</a> for at forts&aelig;tte.',
+'forum_cliquer_retour' => 'Klik  <a href=\'@retour_forum@\'>her</a> for at fortsætte.',
 'forum_forum' => 'forum',
-'forum_info_modere' => 'Dette forum benytter forh&aring;ndsgodkendelse: dit bidrag vil f&oslash;rst blive offentliggjort, n&aring;r det er godkendt af en administrator.',
+'forum_info_modere' => 'Dette forum benytter forhåndsgodkendelse: dit bidrag vil først blive offentliggjort, når det er godkendt af en administrator.',
 'forum_lien_hyper' => '<b>Hypertekst link</b> (valgfrit)',
-'forum_message_definitif' => 'Endeligt indl&aelig;g: send til webstedet',
-'forum_message_trop_long' => 'Dit indl&aelig;g er for langt. Maksimal l&aelig;ngde er 20.000 tegn.',
-'forum_ne_repondez_pas' => 'Undlad at besvare denne e-mail, men g&aring; i stedet til forummet p&aring; denne adresse:', # MODIF
+'forum_message_definitif' => 'Endeligt indlæg: send til webstedet',
+'forum_message_trop_long' => 'Dit indlæg er for langt. Maksimal længde er 20.000 tegn.',
+'forum_ne_repondez_pas' => 'Undlad at besvare denne e-mail, men gå i stedet til forummet på denne adresse:', # MODIF
 'forum_non_inscrit' => 'Enten er du ikke tilmeldt, eller adresse eller adgangskode er forkert.',
-'forum_page_url' => '(Hvis dit indl&aelig;g henviser til en artikel, der er offentliggjort p&aring; Internettet, eller til en side der indeholder yderligere oplysninger, s&aring; angiv venligst sidens titel og dens adresse eller URL nedenfor).',
+'forum_page_url' => '(Hvis dit indlæg henviser til en artikel, der er offentliggjort på Internettet, eller til en side der indeholder yderligere oplysninger, så angiv venligst sidens titel og dens adresse eller URL nedenfor).',
 'forum_par_auteur' => 'af @auteur@',
-'forum_poste_par' => 'Indl&aelig;g @parauteur@ som svar p&aring; din artikel.', # MODIF
-'forum_probleme_database' => 'Databaseproblem, dit indl&aelig;g er ikke modtaget.',
+'forum_poste_par' => 'Indlæg @parauteur@ som svar på din artikel.', # MODIF
+'forum_probleme_database' => 'Databaseproblem, dit indlæg er ikke modtaget.',
 'forum_qui_etes_vous' => '<b>Hvem er du?</b> (valgfrit)',
-'forum_texte' => 'Indl&aelig;ggets tekst:',
+'forum_texte' => 'Indlæggets tekst:',
 'forum_titre' => 'Titel:',
 'forum_titre_erreur' => 'Fejl...',
 'forum_url' => 'URL:',
 'forum_valider' => 'Kontroller gyldighed',
-'forum_voir_avant' => 'Vis indl&aelig;g f&oslash;r indsendelse',
+'forum_voir_avant' => 'Vis indlæg før indsendelse',
 'forum_votre_email' => 'Din e-mail-adresse:',
 'forum_votre_nom' => 'Dit navn (eller alias):',
-'forum_vous_enregistrer' => 'F&oslash;r du kan deltage i dette forum,
+'forum_vous_enregistrer' => 'Før du kan deltage i dette forum,
 		skal du tilmelde dig. Indtast venligst nedenfor de
-		personlige adgangsoplysninger, du har f&aring;et tilsendt.
-		Hvis du ikke allerede har tilmeldt dig, skal du g&oslash;re det.',
-'forum_vous_inscrire' => 'tilmeld dig </a> f&oslash;rst.', # MODIF
+		personlige adgangsoplysninger, du har fået tilsendt.
+		Hvis du ikke allerede har tilmeldt dig, skal du gøre det.',
+'forum_vous_inscrire' => 'tilmeld dig </a> først.', # MODIF
 
 // I
-'ical_texte_rss_articles' => 'Filen "backend" for artiklerne p&aring; dette websted findes p&aring; f&oslash;lgende adresse: ',
+'ical_texte_rss_articles' => 'Filen "backend" for artiklerne på dette websted findes på følgende adresse: ',
 'ical_texte_rss_articles2' => 'Du kan ligeledes finde frem til datakilder for artiklerne, der befinder sig i hver af  wedstedets afsnit.  ',
-'ical_texte_rss_breves' => 'Der eksisterer envidere en fil, som indeholder webstedets nyheder. Ved at pr&aelig;cisere et afsnits nummer f&aring;r du udelukkende nyhederne fra dette afsnit. ',
+'ical_texte_rss_breves' => 'Der eksisterer envidere en fil, som indeholder webstedets nyheder. Ved at præcisere et afsnits nummer får du udelukkende nyhederne fra dette afsnit. ',
 'icone_a_suivre' => 'Opgaver',
-'icone_admin_site' => 'Ops&aelig;tning',
+'icone_admin_site' => 'Opsætning',
 'icone_agenda' => 'Dagbog',
-'icone_aide_ligne' => 'Online hj&aelig;lp',
+'icone_aide_ligne' => 'Online hjælp',
 'icone_articles' => 'Artikler',
 'icone_auteurs' => 'Forfattere',
 'icone_breves' => 'Nyheder',
@@ -367,25 +367,25 @@ Tak for din deltagelse
 'icone_ecrire_article' => 'Skriv ny artikel',
 'icone_edition_site' => 'Rediger websted',
 'icone_forum_administrateur' => 'Administratorforum',
-'icone_forum_suivi' => 'Forumopf&oslash;lgning',
+'icone_forum_suivi' => 'Forumopfølgning',
 'icone_gestion_langues' => 'Sprogadministration',
 'icone_informations_personnelles' => 'Personlig information',
-'icone_interface_complet' => 'Komplet brugergr&aelig;nseflade',
-'icone_interface_simple' => 'Forenklet brugergr&aelig;nseflade',
+'icone_interface_complet' => 'Komplet brugergrænseflade',
+'icone_interface_simple' => 'Forenklet brugergrænseflade',
 'icone_maintenance_site' => 'Vedligeholdelse',
 'icone_messagerie_personnelle' => 'Personlige meddelelser',
-'icone_mots_cles' => 'N&oslash;gleord',
+'icone_mots_cles' => 'Nøgleord',
 'icone_nouvelle_breve' => 'Skriv ny nyhed',
 'icone_repartition_actuelle' => 'Vis faktisk fordeling',
 'icone_repartition_debut' => 'Vis fordeling siden start',
-'icone_repartition_visites' => 'Bes&oslash;gsfordeling',
+'icone_repartition_visites' => 'Besøgsfordeling',
 'icone_rubriques' => 'Afsnit',
 'icone_sauver_site' => 'Websted backup',
 'icone_site_entier' => 'Hele webstedet',
 'icone_sites_references' => 'Links',
 'icone_statistiques' => 'Webstedsstatistik',
-'icone_statistiques_visites' => 'Bes&oslash;gsstatistik',
-'icone_suivi_activite' => 'Opf&oslash;lgning p&aring; webstedets aktiviteter',
+'icone_statistiques_visites' => 'Besøgsstatistik',
+'icone_suivi_activite' => 'Opfølgning på webstedets aktiviteter',
 'icone_suivi_actualite' => 'Webstedets udvikling',
 'icone_suivi_forums' => 'Administrer forummer',
 'icone_suivi_pettions' => 'Administrer appeller',
@@ -397,27 +397,27 @@ Tak for din deltagelse
 'icone_tous_auteur' => 'Alle forfattere',
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_valider_message' => 'Godkend meddelelse',
-'icone_visiter_site' => 'Bes&oslash;g websted', # MODIF
+'icone_visiter_site' => 'Besøg websted', # MODIF
 'icone_voir_en_ligne' => 'Vis online',
-'image_tourner_180' => 'Rotation 180&deg;', # NEW
-'image_tourner_droite' => 'Rotation 90&deg; &agrave; droite', # NEW
-'image_tourner_gauche' => 'Rotation 90&deg; &agrave; gauche', # NEW
+'image_tourner_180' => 'Rotation 180°', # NEW
+'image_tourner_droite' => 'Rotation 90° à droite', # NEW
+'image_tourner_gauche' => 'Rotation 90° à gauche', # NEW
 'img_indisponible' => 'image indisponible', # NEW
 'impossible' => 'umuligt',
-'info_a_suivre' => 'OPGAVER&raquo;',
+'info_a_suivre' => 'OPGAVER»',
 'info_a_valider' => '[at kontrollere]',
 'info_acces_interdit' => 'Adgang forbudt',
 'info_acces_refuse' => 'Ingen adgang',
 'info_action' => 'Handling: @action@',
 'info_administrer_rubriques' => 'Du kan administrere dette afsnit og dets underafsnit',
 'info_adresse_non_indiquee' => 'Du har ikke angivet en adresse at teste!',
-'info_aide' => 'HJ&AElig;LP:',
-'info_ajouter_mot' => 'Tilf&oslash;j n&oslash;gleord',
+'info_aide' => 'HJÆLP:',
+'info_ajouter_mot' => 'Tilføj nøgleord',
 'info_annonce' => 'ANNONCERING',
 'info_annonces_generales' => 'Generelle annonceringer:',
 'info_article_propose' => 'Artikel indsendt',
 'info_article_publie' => 'Artikel offentliggjort',
-'info_article_redaction' => 'Artikel p&aring; vej',
+'info_article_redaction' => 'Artikel på vej',
 'info_article_refuse' => 'Artikel afvist',
 'info_article_supprime' => 'Artikel slettet',
 'info_articles' => 'Artikler',
@@ -430,69 +430,69 @@ Tak for din deltagelse
 'info_bloquer_lien' => 'bloker dette link',
 'info_breves_02' => 'Nyheder',
 'info_breves_2' => 'nyheder',
-'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
-'info_breves_un' => '1 br&egrave;ve', # NEW
+'info_breves_nb' => '@nb@ brèves', # NEW
+'info_breves_un' => '1 brève', # NEW
 'info_breves_valider' => 'Nyheder der afventer godkendelse',
 'info_connexion_refusee' => 'Opkobling afvist',
 'info_contact_developpeur' => 'Kontakt en udvikler.',
 'info_contenance' => 'Dette websted indeholder:',
-'info_contribution' => 'indl&aelig;g i fora',
+'info_contribution' => 'indlæg i fora',
 'info_copyright' => '@spip@ er fri software der distribueres @lien_gpl@.',
-'info_copyright_doc' => 'For yderligere oplysninger bes&oslash;g webstedet <a href="@spipnet@">http://www.spip.net/da</a>.', # MODIF
+'info_copyright_doc' => 'For yderligere oplysninger besøg webstedet <a href="@spipnet@">http://www.spip.net/da</a>.', # MODIF
 'info_copyright_gpl' => 'under GPL licens',
-'info_cours_edition' => 'Artikler undervejs', # MODIF
+'info_cours_edition' => 'Artikler undervejs',
 'info_creer_repertoire' => 'Opret en fil eller et katalog med navnet:',
 'info_creer_repertoire_2' => 'i underkataloget <b>@repertoire@</b>, og derefter', # MODIF
-'info_creer_vignette' => 'cr&eacute;ation automatique de la vignette', # NEW
+'info_creer_vignette' => 'création automatique de la vignette', # NEW
 'info_deplier' => 'Luk op',
 'info_descriptif_nombre' => 'beskrivelse(r):',
 'info_description' => 'Beskrivelse:',
 'info_description_2' => 'Beskrivelse:',
-'info_dimension' => 'St&oslash;rrelse:',
+'info_dimension' => 'Størrelse:',
 'info_document' => 'Dokument',
 'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
 'info_documents' => 'Documents', # NEW
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP tillader udveksling af meddelelser og oprettelse af private diskussionsforummer mellem deltagere p&aring; webstedet. Du kan til- eller frav&aelig;lge denne funktion.',
+'info_echange_message' => 'SPIP tillader udveksling af meddelelser og oprettelse af private diskussionsforummer mellem deltagere på webstedet. Du kan til- eller fravælge denne funktion.',
 'info_ecire_message_prive' => 'Skriv en privat meddelelse',
 'info_email_invalide' => 'Ugyldig e-mail-adresse.',
 'info_en_cours_validation' => 'Dine artikler undervejs',
 'info_en_ligne' => 'Online nu:',
 'info_envoyer_message_prive' => 'Send en privat meddelelse til forfatteren',
-'info_erreur_requete' => 'Fejl i foresp&oslash;rgsel:',
+'info_erreur_requete' => 'Fejl i forespørgsel:',
 'info_erreur_squelette2' => 'Ingen template parat <b>@fichier@</b>...',
 'info_erreur_systeme' => 'System fejl (errno @errsys@)',
-'info_erreur_systeme2' => 'Harddisken er m&aring;ske fyldt eller databasen er skadet. <br />
- <font color=\'red\'>pr&oslash;v <a href=\'@script@\'>at reparere databasen</a>,
+'info_erreur_systeme2' => 'Harddisken er måske fyldt eller databasen er skadet. <br />
+ <font color=\'red\'>prøv <a href=\'@script@\'>at reparere databasen</a>,
 eller kontakt din internetudbyder.</font>', # MODIF
-'info_fini' => 'Det er overst&aring;et!',
+'info_fini' => 'Det er overstået!',
 'info_format_image' => 'Billedformater til brug ved dannelse af piktogrammer: @gd_formats@.',
 'info_format_non_defini' => 'ukendt format',
-'info_grand_ecran' => 'Stort sk&aelig;rmbillede',
-'info_image_aide' => 'HJ&AElig;LP',
-'info_image_process_titre' => 'M&eacute;thode de fabrication des vignettes', # NEW
-'info_impossible_lire_page' => '<b>Fejl!</b> Siden kan ikke l&aelig;ses <tt><html>@test_proxy@</html></tt> gennem proxy&yen;en <tt>', # MODIF
+'info_grand_ecran' => 'Stort skærmbillede',
+'info_image_aide' => 'HJÆLP',
+'info_image_process_titre' => 'Méthode de fabrication des vignettes', # NEW
+'info_impossible_lire_page' => '<b>Fejl!</b> Siden kan ikke læses <tt><html>@test_proxy@</html></tt> gennem proxy¥en <tt>', # MODIF
 'info_inclusion_directe' => 'Direkte indlejring:',
 'info_inclusion_vignette' => 'Medtag piktogram:',
 'info_installation_systeme_publication' => 'Installation af publiceringssystemet ...',
 'info_installer_documents' => 'Du kan automatisk installere alle dokumenter, som findes i kataloget @upload@.', # MODIF
-'info_installer_ftp' => 'Som administrator kan du via FTP indl&aelig;se filer i kataloget @upload@, s&aring; du senere kan hente dem der.', # MODIF
-'info_installer_images' => 'Du kan indl&aelig;se filer i formaterne JPEG, GIF og PNG.',
-'info_installer_images_dossier' => 'Indl&aelig;s billeder i kataloget @upload@ for at kunne hente dem her.', # MODIF
-'info_installer_tous_documents' => 'Indl&aelig;s alle dokumenter',
-'info_interface_complete' => 'Fuld brugergr&aelig;nseflade',
-'info_interface_simple' => 'Forenklet brugergr&aelig;nseflade',
-'info_joindre_document_article' => 'Du kan vedh&aelig;fte din artikel dokumenter af typerne',
-'info_joindre_document_rubrique' => 'Du kan til dette afsnit tilf&oslash;je dokumenter af typerne',
-'info_joindre_documents_article' => 'Du kan vedh&aelig;fte din artikel dokumenter af typerne:',
+'info_installer_ftp' => 'Som administrator kan du via FTP indlæse filer i kataloget @upload@, så du senere kan hente dem der.', # MODIF
+'info_installer_images' => 'Du kan indlæse filer i formaterne JPEG, GIF og PNG.',
+'info_installer_images_dossier' => 'Indlæs billeder i kataloget @upload@ for at kunne hente dem her.', # MODIF
+'info_installer_tous_documents' => 'Indlæs alle dokumenter',
+'info_interface_complete' => 'Fuld brugergrænseflade',
+'info_interface_simple' => 'Forenklet brugergrænseflade',
+'info_joindre_document_article' => 'Du kan vedhæfte din artikel dokumenter af typerne',
+'info_joindre_document_rubrique' => 'Du kan til dette afsnit tilføje dokumenter af typerne',
+'info_joindre_documents_article' => 'Du kan vedhæfte din artikel dokumenter af typerne:',
 'info_l_article' => 'artiklen',
 'info_la_breve' => 'nyheden',
 'info_la_rubrique' => 'afsnittet',
 'info_langue_principale' => 'Webstedets hovedsprog',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
 'info_les_auteurs_1' => 'af @les_auteurs@',
-'info_logo_format_interdit' => 'Seuls les logos aux formats @formats@ sont autoris&eacute;s.', # NEW
+'info_logo_format_interdit' => 'Seuls les logos aux formats @formats@ sont autorisés.', # NEW
 'info_logo_max_poids' => 'Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).', # NEW
 'info_logo_max_taille' => 'Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).', # NEW
 'info_mail_fournisseur' => 'ditnavn@udbyder.dk',
@@ -500,57 +500,57 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_message_supprime' => 'BESLED SLETTET',
 'info_messages_nb' => '@nb@ messages', # NEW
 'info_messages_un' => '1 message', # NEW
-'info_mise_en_ligne' => 'Dato for offentligg&oslash;relse online:',
-'info_modification_parametres_securite' => '&aelig;ndring af sikkerhedsops&aelig;tning',
-'info_mois_courant' => 'I l&oslash;bet af m&aring;neden:',
-'info_mot_cle_ajoute' => 'F&oslash;lgende n&oslash;gleord er tilf&oslash;jet til',
+'info_mise_en_ligne' => 'Dato for offentliggørelse online:',
+'info_modification_parametres_securite' => 'ændring af sikkerhedsopsætning',
+'info_mois_courant' => 'I løbet af måneden:',
+'info_mot_cle_ajoute' => 'Følgende nøgleord er tilføjet til',
 'info_multi_herit' => 'Standardsprog',
-'info_multi_langues_soulignees' => 'De <u>inderstregede sprog</u> rummer overs&aelig;ttelse af alle tekster i brugergr&aelig;nsefladen. Hvis du v&aelig;lger disse sprog, vil mange elementer p&aring; det offentlige websted (datoer, forularer) automatisk blive oversat. Hvad ang&aring;r de ikke-understregede sprog, vil disse elementer fremtr&aelig;de p&aring; webstedets hovedsprog.', # MODIF
+'info_multi_langues_soulignees' => 'De <u>inderstregede sprog</u> rummer oversættelse af alle tekster i brugergrænsefladen. Hvis du vælger disse sprog, vil mange elementer på det offentlige websted (datoer, forularer) automatisk blive oversat. Hvad angår de ikke-understregede sprog, vil disse elementer fremtræde på webstedets hovedsprog.', # MODIF
 'info_multilinguisme' => 'Flersprogethed',
-'info_nom_non_utilisateurs_connectes' => 'Dit navn findes ikke p&aring; listen over tilsluttede brugere.',
-'info_nom_utilisateurs_connectes' => 'Dit navn figurerer p&aring; listen over online brugere.',
+'info_nom_non_utilisateurs_connectes' => 'Dit navn findes ikke på listen over tilsluttede brugere.',
+'info_nom_utilisateurs_connectes' => 'Dit navn figurerer på listen over online brugere.',
 'info_nombre_en_ligne' => 'Online nu:',
-'info_non_resultat' => 'Ingen resultater ved s&oslash;gning efter "@cherche_mot@"',
+'info_non_resultat' => 'Ingen resultater ved søgning efter "@cherche_mot@"',
 'info_non_utilisation_messagerie' => 'Du anvender ikke webstedets interne meddelelsessystem.',
 'info_nouveau_message' => 'DU HAR EN NY MEDDELELSE',
 'info_nouveaux_messages' => 'DU HAR @total_messages@ NYE MEDDELELSER',
-'info_numero_abbreviation' => 'N&deg;&nbsp;', # NEW
+'info_numero_abbreviation' => 'N° ', # NEW
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
 'info_panne_site_syndique' => 'Syndikeret side er ude af trit',
 'info_pense_bete' => 'HUSKESEDDEL',
-'info_petit_ecran' => 'Lille sk&aelig;rmbillede',
-'info_petition_close' => 'P&eacute;tition close', # NEW
+'info_petit_ecran' => 'Lille skærmbillede',
+'info_petition_close' => 'Pétition close', # NEW
 'info_pixels' => 'pixels',
-'info_plusieurs_mots_trouves' => 'Der blev fundet flere n&oslash;gleord ved s&oslash;gning efter "@cherche_mot@":',
+'info_plusieurs_mots_trouves' => 'Der blev fundet flere nøgleord ved søgning efter "@cherche_mot@":',
 'info_popularite_5' => 'polularitet:',
 'info_portfolio' => 'Portfolio', # NEW
 'info_portfolio_automatique' => 'Automatisk album:',
-'info_premier_resultat' => '[@debut_limit@ f&oslash;rste resultater af @total@]',
-'info_premier_resultat_sur' => '[@debut_limit@ f&oslash;rste resultater af @total@]',
+'info_premier_resultat' => '[@debut_limit@ første resultater af @total@]',
+'info_premier_resultat_sur' => '[@debut_limit@ første resultater af @total@]',
 'info_probleme_grave' => 'problem med',
-'info_propose_1' => '[@nom_site_spip@] Indl&aelig;g: @titre@',
+'info_propose_1' => '[@nom_site_spip@] Indlæg: @titre@',
 'info_propose_2' => 'Artikel indsendt
 -----------------',
-'info_propose_3' => 'Artiklen "@titre@" er sendt til offentligg&oslash;relse.',
-'info_propose_4' => 'Du inviteres til at anmelde den over for de &oslash;vrige forfattere',
-'info_propose_5' => 'i det forum den tilh&oslash;rer. Den findes p&aring; adressen:',
+'info_propose_3' => 'Artiklen "@titre@" er sendt til offentliggørelse.',
+'info_propose_4' => 'Du inviteres til at anmelde den over for de øvrige forfattere',
+'info_propose_5' => 'i det forum den tilhører. Den findes på adressen:',
 'info_publie_01' => 'Artiklen "@titre@" er vurderet af @connect_nom@.',
-'info_publie_1' => '[@nom_site_spip@] OFFENTLIGG&Oslash;R: @titre@',
+'info_publie_1' => '[@nom_site_spip@] OFFENTLIGGØR: @titre@',
 'info_publie_2' => 'Artikel offentliggjort
 -----------------',
-'info_rechercher' => 'S&oslash;gning',
-'info_rechercher_02' => 'S&oslash;gning:',
+'info_rechercher' => 'Søgning',
+'info_rechercher_02' => 'Søgning:',
 'info_remplacer_vignette' => 'Erstatte standardpiktogrammet med et eget ikon:',
 'info_retablir_lien' => 'Genopret dette link',
-'info_retirer_mot' => 'Slet dette n&oslash;gleord',
-'info_retirer_mots' => 'Slet alle n&oslash;gleord',
+'info_retirer_mot' => 'Slet dette nøgleord',
+'info_retirer_mots' => 'Slet alle nøgleord',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'uden overskrift',
-'info_selectionner_fichier' => 'Du kan v&aelig;lge en fil fra mappen @upload@', # MODIF
-'info_selectionner_fichier_2' => 'V&aelig;lg en fil:',
-'info_signature_supprimee' => 'Signature supprim&eacute;e', # NEW
-'info_signature_supprimee_erreur' => 'Erreur&nbsp;: ce code de suppression ne correspond a aucune signature', # NEW
+'info_selectionner_fichier' => 'Du kan vælge en fil fra mappen @upload@', # MODIF
+'info_selectionner_fichier_2' => 'Vælg en fil:',
+'info_signature_supprimee' => 'Signature supprimée', # NEW
+'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Websted afventer godkendelse',
 'info_site_reference' => 'Online henvisning',
 'info_site_refuse' => 'Websted afvist',
@@ -558,9 +558,9 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_sites_referencer' => 'Link til websted',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'slet piktogram',
-'info_symbole_bleu' => '<b>Bl&aring;t</b> symbol henviser til et <b>memo</b>: dvs. en meddelelse til privat brug.', # MODIF
-'info_symbole_jaune' => '<b>Gult</b> symbol henviser til en <b>annoncering til alle redakt&oslash;rer</b>: den kan redigeres af alle redakt&oslash;rer og er synlig for alle redakt&oslash;rer.', # MODIF
-'info_symbole_vert' => '<b>Gr&oslash;nt</b> symbol henviser til <b>meddelelser udvekslet med andre brugere</b> p&aring; webstedet.', # MODIF
+'info_symbole_bleu' => '<b>Blåt</b> symbol henviser til et <b>memo</b>: dvs. en meddelelse til privat brug.', # MODIF
+'info_symbole_jaune' => '<b>Gult</b> symbol henviser til en <b>annoncering til alle redaktører</b>: den kan redigeres af alle redaktører og er synlig for alle redaktører.', # MODIF
+'info_symbole_vert' => '<b>Grønt</b> symbol henviser til <b>meddelelser udvekslet med andre brugere</b> på webstedet.', # MODIF
 'info_syndication' => 'syndikering:',
 'info_syndication_articles' => 'bidrag',
 'info_telecharger' => 'Hent fra din computer:',
@@ -568,16 +568,16 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_telecharger_ordinateur' => 'Hent fra din computer:',
 'info_tous_resultats_enregistres' => '[alle resultater er registreret]',
 'info_tout_afficher' => 'Vis alle',
-'info_travaux_texte' => 'Dette websted er endnu ikke f&aelig;rdigkonfigureret. Kom tilbage senere...',
+'info_travaux_texte' => 'Dette websted er endnu ikke færdigkonfigureret. Kom tilbage senere...',
 'info_travaux_titre' => 'Webstedet er under konstruktion',
-'info_trop_resultat' => 'For mange resultater til "@cherche_mot@"; v&aelig;r venlig af afgr&aelig;nse s&oslash;gningen yderligere.',
+'info_trop_resultat' => 'For mange resultater til "@cherche_mot@"; vær venlig af afgrænse søgningen yderligere.',
 'info_utilisation_messagerie_interne' => 'Du benytter webstedets interne meddelelsessystem.',
 'info_valider_lien' => 'kontroller dette link',
-'info_verifier_image' => ', kontroller venligst at alle billeder er overf&oslash;rt korrekt.',
+'info_verifier_image' => ', kontroller venligst at alle billeder er overført korrekt.',
 'info_vignette_defaut' => 'Standardpiktogram',
 'info_vignette_personnalisee' => 'Tilpasset piktogram',
-'info_visite' => 'bes&oslash;g:',
-'info_visites' => 'bes&oslash;g:',
+'info_visite' => 'besøg:',
+'info_visites' => 'besøg:',
 'info_vos_rendez_vous' => 'Dine fremtidige aftaler',
 'info_zoom' => 'zoom', # NEW
 'infos_vos_pense_bete' => 'Dine memoer', # MODIF
@@ -595,22 +595,22 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'lien_petitions' => 'APPELLER',
 'lien_popularite' => 'popularitet: @popularite@%',
 'lien_racine_site' => 'TOP',
-'lien_reessayer' => 'fors&oslash;g igen',
+'lien_reessayer' => 'forsøg igen',
 'lien_repondre_message' => 'Kommenter denne meddelelse',
 'lien_supprimer' => 'slet',
 'lien_tout_afficher' => 'Vis alle',
-'lien_visite_site' => 'bes&oslash;g dette websted',
-'lien_visites' => '@visites@ bes&oslash;gende',
+'lien_visite_site' => 'besøg dette websted',
+'lien_visites' => '@visites@ besøgende',
 'lien_voir_auteur' => 'Oplysninger om forfatter',
 'ligne' => 'Ligne', # NEW
 'login' => 'Connexion', # NEW
-'login_acces_prive' => 'adgang til det private omr&aring;de',
+'login_acces_prive' => 'adgang til det private område',
 'login_autre_identifiant' => 'login med en anden brugeridentifikation',
 'login_cookie_accepte' => 'Indstil din browser til at acceptere cookier (i hvert fald fra dette websted).',
 'login_cookie_oblige' => 'For at identificere dig selv sikkert, skal din browser acceptere cookier.',
 'login_deconnexion_ok' => 'Forbindelse afbrudt.',
 'login_erreur_pass' => 'Forkert adgangskode.',
-'login_espace_prive' => 'privat omr&aring;de',
+'login_espace_prive' => 'privat område',
 'login_identifiant_inconnu' => 'Brugeridentifikationen "@login@" kendes ikke.',
 'login_login' => 'Login:',
 'login_login2' => 'Login (brugeridentifikation til dette websted):',
@@ -618,20 +618,20 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'login_motpasseoublie' => 'glemt adgangskode?',
 'login_non_securise' => 'Advarsel, denne formular er ikke sikret.
 
-   Hvis du ikke vil risikere at din adgangskode bliver opsnappet p&aring; nettet, skal du aktivere
+   Hvis du ikke vil risikere at din adgangskode bliver opsnappet på nettet, skal du aktivere
 
    Javascript i din browser og',
-'login_nouvelle_tentative' => 'Nyt fors&oslash;g',
-'login_par_ici' => 'Du er tilmeldt... p&aring; denne m&aring;de...',
+'login_nouvelle_tentative' => 'Nyt forsøg',
+'login_par_ici' => 'Du er tilmeldt... på denne måde...',
 'login_pass2' => 'Adgangskode:',
-'login_preferez_refuser' => '<b>Hvis du foretr&aelig;kker at afvise cookies</b>, kan du anvende en anden opkoblingsm&aring;de (mindre sikker):',
-'login_recharger' => 'genindl&aelig;s denne side',
-'login_rester_identifie' => 'V&aelig;r kendt nogle dage',
+'login_preferez_refuser' => '<b>Hvis du foretrækker at afvise cookies</b>, kan du anvende en anden opkoblingsmåde (mindre sikker):',
+'login_recharger' => 'genindlæs denne side',
+'login_rester_identifie' => 'Vær kendt nogle dage',
 'login_retour_public' => 'Tilbage til det offentlige websted',
 'login_retour_site' => 'Tilbage til den offentlige websted',
 'login_retoursitepublic' => 'tilbage til den offentlige websted',
 'login_sans_cookiie' => 'Identifikation uden cookie',
-'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
+'login_securise' => 'Login sécurisé', # NEW
 'login_sinscrire' => 'tilmelding',
 'login_test_navigateur' => 'test af browser/nyt login',
 'login_verifiez_navigateur' => '(Men kontroller, at din browser ikke har gemt adgangskoden...)',
@@ -642,8 +642,8 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'module_fichiers_langues' => 'Sprogfiler',
 
 // N
-'navigateur_pas_redirige' => 'Hvis din browser ikke er viderestilt, klik her for at forts&aelig;tte. ',
-'numero' => 'Num&eacute;ro', # NEW
+'navigateur_pas_redirige' => 'Hvis din browser ikke er viderestilt, klik her for at fortsætte. ',
+'numero' => 'Numéro', # NEW
 
 // O
 'occurence' => 'Occurrence', # NEW
@@ -658,82 +658,82 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'onglet_messages_internes' => 'Interne meddelelser',
 'onglet_messages_publics' => 'Offentlige meddelelser',
 'onglet_messages_vide' => 'Meddelelser uden tekst',
-'onglet_origine_visites' => 'Bes&oslash;gendes oprindelse',
+'onglet_origine_visites' => 'Besøgendes oprindelse',
 'onglet_repartition_debut' => 'fra begyndelsen',
 'onglet_repartition_lang' => 'efter sprog',
-'onglet_repartition_rubrique' => 'Fordeling p&aring; afsnit',
-'onglet_save_restaur_base' => 'Sikkerhedskopi/genindl&aelig;sning af databasen',
-'onglet_vider_cache' => 'T&oslash;m cachen',
+'onglet_repartition_rubrique' => 'Fordeling på afsnit',
+'onglet_save_restaur_base' => 'Sikkerhedskopi/genindlæsning af databasen',
+'onglet_vider_cache' => 'Tøm cachen',
 
 // P
-'pass_choix_pass' => 'V&aelig;lg ny adgangskode:',
+'pass_choix_pass' => 'Vælg ny adgangskode:',
 'pass_erreur' => 'Fejl',
 'pass_erreur_acces_refuse' => '<b>Fejl:</b> du har ikke mere adgang til dette websted.',
 'pass_erreur_code_inconnu' => '<b>Fejl:</b> denne kode har ikke adgang til dette websted.',
 'pass_erreur_non_enregistre' => '<b>Fejl:</b> adressen <tt>@email_oubli@</tt> er ikke tilmeldt dette websted.',
 'pass_erreur_non_valide' => '<b>Fejl:</b> e-mail-adressen <tt>@email_oubli@</tt> er ugyldig!',
 'pass_erreur_probleme_technique' => '<b>Fejl:</b> denne e-mail kunne ikke sendes af tekniske grunde.',
-'pass_espace_prive_bla' => 'Den private del af dette websted er &aring;ben for bes&oslash;gende efter tilmelding.
-	N&aring;r du har tilmeldt dig, kan du gennemse artikler der er p&aring; vej, indsende artikler og deltage i alle fora.',
+'pass_espace_prive_bla' => 'Den private del af dette websted er åben for besøgende efter tilmelding.
+	Når du har tilmeldt dig, kan du gennemse artikler der er på vej, indsende artikler og deltage i alle fora.',
 'pass_forum_bla' => 'Du har bedt om adgang til et forum, der er forbeholdt registrerede brugere.',
-'pass_indiquez_cidessous' => 'Indtast nedenfor den e-mail-adresse, du tidligere har registreret. Du vil modtage en e-mail, der forklarer, hvordan du f&aring;r adgang.',
+'pass_indiquez_cidessous' => 'Indtast nedenfor den e-mail-adresse, du tidligere har registreret. Du vil modtage en e-mail, der forklarer, hvordan du får adgang.',
 'pass_mail_passcookie' => '(dette er en automatisk dannet e-mail)
 
-For at f&aring; adgang til webstedet 
+For at få adgang til webstedet 
 @nom_site_spip@ (@adresse_site@)
 
-skal du g&aring; til f&oslash;lgende adresse:
+skal du gå til følgende adresse:
     @sendcookie@
 
-Du kan s&aring; indtaste en ny adgangskode
-og igen f&aring; adgang til webstedet.', # MODIF
+Du kan så indtaste en ny adgangskode
+og igen få adgang til webstedet.', # MODIF
 'pass_mot_oublie' => 'Glemt adgangskode',
 'pass_nouveau_enregistre' => 'Din nye adgangskode er registreret.',
 'pass_nouveau_pass' => 'Ny adgangskode',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Glemt adgangskode',
 'pass_quitter_fenetre' => 'Luk vinduet',
-'pass_rappel_login' => 'P&aring;mindelse: din brugeridentifikation (login) er "@login@".',
-'pass_recevoir_mail' => 'Du vil modtage en e-mail, der forklarer hvordan du kan f&aring; adgang til webstedet.',
+'pass_rappel_login' => 'Påmindelse: din brugeridentifikation (login) er "@login@".',
+'pass_recevoir_mail' => 'Du vil modtage en e-mail, der forklarer hvordan du kan få adgang til webstedet.',
 'pass_retour_public' => 'Tilbage til det offentlige websted',
-'pass_rien_a_faire_ici' => 'Intet at g&oslash;re her.',
+'pass_rien_a_faire_ici' => 'Intet at gøre her.',
 'pass_vousinscrire' => 'Tilmelding til webstedet',
-'precedent' => 'pr&eacute;c&eacute;dent', # NEW
-'previsualisation' => 'Pr&eacute;visualisation', # NEW
-'previsualiser' => 'Pr&eacute;visualiser', # NEW
+'precedent' => 'précédent', # NEW
+'previsualisation' => 'Prévisualisation', # NEW
+'previsualiser' => 'Prévisualiser', # NEW
 
 // R
 'retour' => 'Retour', # NEW
 
 // S
-'spip_conforme_dtd' => 'SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :', # NEW
+'spip_conforme_dtd' => 'SPIP considère ce document comme conforme à son DOCTYPE :', # NEW
 'squelette' => 'squelette', # NEW
 'squelette_inclus_ligne' => 'squelette inclus, ligne', # NEW
 'squelette_ligne' => 'squelette, ligne', # NEW
-'stats_visites_et_popularite' => '@visites@ bes&oslash;g; popularitet: @popularite@',
+'stats_visites_et_popularite' => '@visites@ besøg; popularitet: @popularite@',
 'suivant' => 'suivant', # NEW
 
 // T
-'taille_ko' => '@taille@&nbsp;kb',
-'taille_mo' => '@taille@&nbsp;Mb',
+'taille_ko' => '@taille@ kb',
+'taille_mo' => '@taille@ Mb',
 'taille_octets' => '@taille@ byte',
-'texte_actualite_site_1' => 'Denne side viser webstedets status og giver dig mulighed for at f&oslash;lge dine bidrag. Her kan du b&aring;de finde dine uafsluttede artikler og de artikler og nyheder, som du inviteres til at tilkendegive din mening om, samt en p&aring;mindelse om dine tidligere bidrag.<p><hr><p>N&aring;r du er blevet fortrolig med brugergr&aelig;nsefladen s&aring; klik p&aring; &laquo;',
-'texte_actualite_site_2' => 'fuld brugergr&aelig;nseflade',
-'texte_actualite_site_3' => '&raquo; for at f&aring; flere funktioner til r&aring;dighed.',
-'texte_creation_automatique_vignette' => 'Dette websted tillader automatisk dannelse af miniaturepiktogrammer. Hvis du via denne formular indl&aelig;ser billeder i formatet @gd_formats@, vil de blive knyttet sammen med miniaturepiktogrammer med en maksimal st&oslash;rrelse p&aring; @taille_preview@ pixels.',
-'texte_documents_associes' => 'F&oslash;lgende dokumenter er knyttet til artiklen  men inds&aelig;ttes ikke direkte. Afh&aelig;ngig af det offentlige websteds layout kan de optr&aelig;de som vedh&aelig;ftede dokumenter.',
+'texte_actualite_site_1' => 'Denne side viser webstedets status og giver dig mulighed for at følge dine bidrag. Her kan du både finde dine uafsluttede artikler og de artikler og nyheder, som du inviteres til at tilkendegive din mening om, samt en påmindelse om dine tidligere bidrag.<p><hr><p>Når du er blevet fortrolig med brugergrænsefladen så klik på «',
+'texte_actualite_site_2' => 'fuld brugergrænseflade',
+'texte_actualite_site_3' => '» for at få flere funktioner til rådighed.',
+'texte_creation_automatique_vignette' => 'Dette websted tillader automatisk dannelse af miniaturepiktogrammer. Hvis du via denne formular indlæser billeder i formatet @gd_formats@, vil de blive knyttet sammen med miniaturepiktogrammer med en maksimal størrelse på @taille_preview@ pixels.',
+'texte_documents_associes' => 'Følgende dokumenter er knyttet til artiklen  men indsættes ikke direkte. Afhængig af det offentlige websteds layout kan de optræde som vedhæftede dokumenter.',
 'texte_erreur_mise_niveau_base' => 'Databasefejl under opgradering.
-			Billedet <b>@fichier@</b> kunne ikke overf&oslash;res (artiklen @id_article@).<p>
+			Billedet <b>@fichier@</b> kunne ikke overføres (artiklen @id_article@).<p>
 			Noter omhyggeligt denne henvisning, gentag opgraderingsproceduren,
 			og kontrolller sluttelig, at billederne stadig figurerer i dokumentet.', # MODIF
-'texte_erreur_visiteur' => 'Vous avez tent&eacute; d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.', # NEW
+'texte_erreur_visiteur' => 'Vous avez tenté d\'accéder à l\'espace privé avec un login qui ne le permet pas.', # NEW
 'texte_inc_auth_1' => 'Du har identificeret dig selv med login <b>@auth_login@</b>, men det findes ikke (mere) i databasen. 
-		Pr&oslash;v at ', # MODIF
+		Prøv at ', # MODIF
 'texte_inc_auth_2' => 'genetablere forbindelsen',
-'texte_inc_auth_3' => 'efter om n&oslash;dvendigt at have lukket din browser ned og genstartet den igen.',
-'texte_inc_config' => '&AElig;ndringer nedenfor vil markant p&aring;virke webstedets funktion. 
-	 Du r&aring;des til ikke at &aelig;ndre dem, med mindre du er fortrolig med SPIP-systemets funktion.
-	<br /><br /><b>I almindelighed r&aring;des du kraftigt til at lade den hovedansvarlige webmaster p&aring; dit websted tage sig af denne side.</b>', # MODIF
+'texte_inc_auth_3' => 'efter om nødvendigt at have lukket din browser ned og genstartet den igen.',
+'texte_inc_config' => 'Ændringer nedenfor vil markant påvirke webstedets funktion. 
+	 Du rådes til ikke at ændre dem, med mindre du er fortrolig med SPIP-systemets funktion.
+	<br /><br /><b>I almindelighed rådes du kraftigt til at lade den hovedansvarlige webmaster på dit websted tage sig af denne side.</b>', # MODIF
 'texte_inc_meta_1' => 'Kontroller venligst som administrator', # MODIF
 'texte_inc_meta_2' => 'skriveadgangen',
 'texte_inc_meta_3' => 'til kataloget ecrire/', # MODIF
@@ -742,44 +742,44 @@ og igen f&aring; adgang til webstedet.', # MODIF
 'texte_statut_propose_evaluation' => 'indsendt til godkendelse',
 'texte_statut_publie' => 'offentliggjort online',
 'texte_statut_refuse' => 'afvist',
-'titre_ajouter_mot_cle' => 'TILF&Oslash;J N&Oslash;GLEORD:',
+'titre_ajouter_mot_cle' => 'TILFØJ NØGLEORD:',
 'titre_breve_proposee' => 'Indsendte nyheder',
 'titre_breve_publiee' => 'Offentliggjorte nyheder',
 'titre_breve_refusee' => 'Afviste nyheder',
 'titre_cadre_raccourcis' => 'GENVEJE:',
-'titre_changer_couleur_interface' => '&AElig;ndre farve p&aring; brugergr&aelig;nsefladen',
+'titre_changer_couleur_interface' => 'Ændre farve på brugergrænsefladen',
 'titre_forum' => 'Internt forum',
 'titre_image_admin_article' => 'Du kan administrere denne artikel',
 'titre_image_administrateur' => 'Administrator',
-'titre_image_aide' => 'Hj&aelig;lp til dette emne',
+'titre_image_aide' => 'Hjælp til dette emne',
 'titre_image_auteur_supprime' => 'Forfatter slettet',
 'titre_image_redacteur' => 'Forfatter uden adgang',
 'titre_image_redacteur_02' => 'Forfatter',
-'titre_image_visiteur' => 'Bes&oslash;gende',
-'titre_joindre_document' => 'VEDH&AElig;FT DOKUMENT',
+'titre_image_visiteur' => 'Besøgende',
+'titre_joindre_document' => 'VEDHÆFT DOKUMENT',
 'titre_liens_entrants' => 'Dagens indkomne links',
-'titre_mots_cles' => 'N&Oslash;GLEORD',
+'titre_mots_cles' => 'NØGLEORD',
 'titre_probleme_technique' => 'Advarsel: et teknisk problem (SQL server) forhindrer adgang til denne del af webstedet.<p>
-		Tak for din forst&aring;else.', # MODIF
-'titre_publier_document' => 'OFFENTLIGG&Oslash;R ET DOKUMENT I DETTE AFSNIT',
+		Tak for din forståelse.', # MODIF
+'titre_publier_document' => 'OFFENTLIGGØR ET DOKUMENT I DETTE AFSNIT',
 'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-'titre_signatures_confirmees' => 'Signatures confirm&eacute;es', # NEW
+'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 'titre_statistiques' => 'Webstedsstatistik',
 'titre_titre_document' => 'Dokumentoverskrift:',
-'todo' => '&agrave; venir', # NEW
+'todo' => 'à venir', # NEW
 'trad_reference' => '(referenceartikel)', # MODIF
 
 // Z
-'zbug_balise_b_aval' => '&nbsp;: balise B en aval', # NEW
-'zbug_balise_inexistante' => 'Balise @balise@ mal d&eacute;clar&eacute;e pour @from@', # NEW
+'zbug_balise_b_aval' => ' : balise B en aval', # NEW
+'zbug_balise_inexistante' => 'Balise @balise@ mal déclarée pour @from@', # NEW
 'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 'zbug_boucle' => 'boucle', # NEW
-'zbug_boucle_recursive_undef' => 'boucle r&eacute;cursive non d&eacute;finie', # MODIF
+'zbug_boucle_recursive_undef' => 'boucle récursive non définie', # MODIF
 'zbug_calcul' => 'calcul', # NEW
 'zbug_champ_hors_boucle' => 'Champ @champ@ hors boucle', # NEW
 'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'une boucle de motif @motif@', # MODIF
 'zbug_code' => 'code', # NEW
-'zbug_critere_inconnu' => 'crit&egrave;re inconnu @critere@', # MODIF
+'zbug_critere_inconnu' => 'critère inconnu @critere@', # MODIF
 'zbug_distant_interdit' => 'externe interdit', # MODIF
 'zbug_doublon_table_sans_cle_primaire' => 'Doublons sur une table sans clef primaire atomique', # NEW
 'zbug_doublon_table_sans_index' => 'doublons sur une table sans index', # MODIF
@@ -787,25 +787,25 @@ og igen f&aring; adgang til webstedet.', # MODIF
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: mangler slutkoden der lukker', # MODIF
 'zbug_erreur_boucle_syntaxe' => 'forkert loop (BOUCLE) syntax ', # MODIF
 'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
-'zbug_erreur_execution_page' => 'erreur d\'ex&eacute;cution de la page', # MODIF
+'zbug_erreur_execution_page' => 'erreur d\'exécution de la page', # MODIF
 'zbug_erreur_filtre' => 'Fejl - udefineret filter: <b>"@filter@"</b>', # MODIF
 'zbug_erreur_meme_parent' => '{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)', # MODIF
 'zbug_erreur_squelette' => 'Erreur(s) dans le squelette', # NEW
 'zbug_hors_compilation' => 'Hors Compilation', # NEW
-'zbug_info_erreur_squelette' => 'Fejl p&aring; sitet',
+'zbug_info_erreur_squelette' => 'Fejl på sitet',
 'zbug_inversion_ordre_inexistant' => 'inversion d\'un ordre inexistant', # MODIF
-'zbug_pagination_sans_critere' => '#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive', # MODIF
-'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorrects', # MODIF
-'zbug_profile' => 'Temps de calcul&nbsp;: @time@', # NEW
-'zbug_resultat' => 'r&eacute;sultat', # NEW
-'zbug_serveur_indefini' => 'serveur SQL ind&eacute;fini', # MODIF
-'zbug_statistiques' => 'Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e', # NEW
-'zbug_table_inconnue' => 'Table SQL &laquo; @table@ &raquo; inconnue', # NEW
+'zbug_pagination_sans_critere' => '#PAGINATION sans critère {pagination} ou employé dans une boucle recursive', # MODIF
+'zbug_parametres_inclus_incorrects' => 'Paramètres d\'inclusion incorrects', # MODIF
+'zbug_profile' => 'Temps de calcul : @time@', # NEW
+'zbug_resultat' => 'résultat', # NEW
+'zbug_serveur_indefini' => 'serveur SQL indéfini', # MODIF
+'zbug_statistiques' => 'Statistiques des requêtes SQL classées par durée', # NEW
+'zbug_table_inconnue' => 'Table SQL « @table@ » inconnue', # NEW
 'zxml_connus_attributs' => 'attributs connus', # NEW
 'zxml_de' => 'de', # NEW
 'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
 'zxml_inconnu_balise' => 'balise inconnue', # NEW
-'zxml_inconnu_entite' => 'entit&eacute; inconnue', # NEW
+'zxml_inconnu_entite' => 'entité inconnue', # NEW
 'zxml_inconnu_id' => 'ID inconnu', # NEW
 'zxml_mais_de' => 'mais de', # NEW
 'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW

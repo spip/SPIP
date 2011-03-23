@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_calendrier' => 'Afficher le calendrier', # NEW
 'afficher_trad' => 'show translations',
 'alerte_maj_impossible' => '<b>Warning!</b> Failed to update the SQL database to version @version@. This may be due to a permissions problem on the database. Please contact your ISP.',
-'alerte_modif_info_concourante' => 'WARNING: This information has been modified elsewhere. The current value is&nbsp;:',
+'alerte_modif_info_concourante' => 'WARNING: This information has been modified elsewhere. The current value is :',
 'analyse_xml' => 'XML parsing',
 'annuler' => 'Cancel',
 'antispam_champ_vide' => 'Please leave this field empty:',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_e_accent_aigu' => 'Insert a capital E with acute accent',
 'barre_eo' => 'Insert an oe-ligature',
 'barre_eo_maj' => 'Insert a capital EO-ligature',
-'barre_euro' => 'Insert the &euro; symbol',
+'barre_euro' => 'Insert the € symbol',
 'barre_gras' => 'Put in {{bold type}}',
 'barre_guillemets' => 'Place between "double quotes"',
 'barre_guillemets_simples' => 'Place between ‘single quotes’',
@@ -180,10 +180,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois_11' => 'November',
 'date_mois_11_abbr' => 'nov.', # NEW
 'date_mois_12' => 'December',
-'date_mois_12_abbr' => 'd&eacute;c.', # NEW
+'date_mois_12_abbr' => 'déc.', # NEW
 'date_mois_1_abbr' => 'janv.', # NEW
 'date_mois_2' => 'February',
-'date_mois_2_abbr' => 'f&eacute;vr.', # NEW
+'date_mois_2_abbr' => 'févr.', # NEW
 'date_mois_3' => 'March',
 'date_mois_3_abbr' => 'mars', # NEW
 'date_mois_4' => 'April',
@@ -195,7 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois_7' => 'July',
 'date_mois_7_abbr' => 'juil.', # NEW
 'date_mois_8' => 'August',
-'date_mois_8_abbr' => 'ao&ucirc;t', # NEW
+'date_mois_8_abbr' => 'août', # NEW
 'date_mois_9' => 'September',
 'date_mois_9_abbr' => 'sept.', # NEW
 'date_saison_1' => 'winter',
@@ -316,7 +316,7 @@ Thank you for your participation!
 'forum_acces_refuse' => 'You have not access to these forums anymore.',
 'forum_attention_dix_caracteres' => '<b>Warning!</b> Your message needs to be at least ten characters in length.',
 'forum_attention_trois_caracteres' => '<b>Warning!</b> Your title needs to be at least three characters in length.',
-'forum_attention_trop_caracteres' => '<b>Warning&nbsp;!</b> your message is too long (@compte@ characters)&nbsp;: to be able to save it, the message should not contain more than @max@ characters.',
+'forum_attention_trop_caracteres' => '<b>Warning !</b> your message is too long (@compte@ characters) : to be able to save it, the message should not contain more than @max@ characters.',
 'forum_avez_selectionne' => 'You have selected:',
 'forum_cliquer_retour' => 'Click  <a href=\'@retour_forum@\'>here</a> to continue.',
 'forum_forum' => 'forum',
@@ -400,12 +400,12 @@ Thank you for your participation!
 'icone_valider_message' => 'Validate this message',
 'icone_visiter_site' => 'See the public site',
 'icone_voir_en_ligne' => 'View online',
-'image_tourner_180' => 'Rotate 180&deg;',
-'image_tourner_droite' => 'Rotate 90&deg; right',
-'image_tourner_gauche' => 'Rotate 90&deg; left',
+'image_tourner_180' => 'Rotate 180°',
+'image_tourner_droite' => 'Rotate 90° right',
+'image_tourner_gauche' => 'Rotate 90° left',
 'img_indisponible' => 'image unavailable',
 'impossible' => 'impossible',
-'info_a_suivre' => 'LAUNCH PAD&raquo;',
+'info_a_suivre' => 'LAUNCH PAD»',
 'info_a_valider' => '[to be validated]',
 'info_acces_interdit' => 'Access forbidden',
 'info_acces_refuse' => 'Access denied',
@@ -441,7 +441,7 @@ Thank you for your participation!
 'info_copyright' => '@spip@ is free software distributed @lien_gpl@.',
 'info_copyright_doc' => 'For more information, see <a href="@spipnet@">http://www.spip.net/en</a>.',
 'info_copyright_gpl' => 'under the GPL license',
-'info_cours_edition' => 'Your articles in progress', # MODIF
+'info_cours_edition' => 'Your articles in progress',
 'info_creer_repertoire' => 'Please create a file or a directory called:',
 'info_creer_repertoire_2' => 'inside the sub-directory <b>@repertoire@</b>, then',
 'info_creer_vignette' => 'automated creation of the thumbnail',
@@ -493,7 +493,7 @@ Thank you for your participation!
 'info_la_breve' => 'the news item',
 'info_la_rubrique' => 'the section',
 'info_langue_principale' => 'Primary site language',
-'info_largeur_vignette' => '@largeur_vignette@ &times; @hauteur_vignette@ pixels',
+'info_largeur_vignette' => '@largeur_vignette@ × @hauteur_vignette@ pixels',
 'info_les_auteurs_1' => 'by @les_auteurs@',
 'info_logo_format_interdit' => 'Only logos in the formats @formats@ are allowed.',
 'info_logo_max_poids' => 'Logos must be less than @maxi@ (this file is @actuel@).',
@@ -723,12 +723,12 @@ and connect again to the site.
 'suivant' => 'next',
 
 // T
-'taille_ko' => '@taille@&nbsp;kb',
-'taille_mo' => '@taille@&nbsp;Mb',
-'taille_octets' => '@taille@&nbsp;bytes',
-'texte_actualite_site_1' => 'When you become familiar with the interface, click on the &laquo;',
+'taille_ko' => '@taille@ kb',
+'taille_mo' => '@taille@ Mb',
+'taille_octets' => '@taille@ bytes',
+'texte_actualite_site_1' => 'When you become familiar with the interface, click on the «',
 'texte_actualite_site_2' => 'complete interface',
-'texte_actualite_site_3' => '&raquo; to make more features available.',
+'texte_actualite_site_3' => '» to make more features available.',
 'texte_creation_automatique_vignette' => 'Automated creation of preview vignettes is enabled in this site. if you install, through this form, images in the format(s) @gd_formats@, they will be coupled with a vignette which maximum size is @taille_preview@ pixels.',
 'texte_documents_associes' => 'The following documents are associated with the article,,
 				but they were not directly
@@ -808,7 +808,7 @@ and connect again to the site.
 'zbug_erreur_meme_parent' => '{meme_parent} only applies to loops (FORUMS) and (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Error(s) in template',
 'zbug_hors_compilation' => 'Uncompiled',
-'zbug_info_erreur_squelette' => '&#1615;Error in the site',
+'zbug_info_erreur_squelette' => 'ُError in the site',
 'zbug_inversion_ordre_inexistant' => 'Reversion of non-existent order',
 'zbug_pagination_sans_critere' => '#PAGINATION tag without {pagination} criterion, or used in a recursive loop',
 'zbug_parametres_inclus_incorrects' => 'Wrong inclusion parameter: @param@',

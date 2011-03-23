@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_calendrier' => 'Afficher le calendrier', # NEW
 'afficher_trad' => 'tampilkan terjemahan',
 'alerte_maj_impossible' => '<b>Peringatan!</b> Gagal memperbaharui database SQL ke versi @version@, mungkin karena ada masalah hak akses di database. Silakan hubungi ISP anda.',
-'alerte_modif_info_concourante' => 'ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute;e par ailleurs. La valeur actuelle est&nbsp;:', # NEW
+'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifiée par ailleurs. La valeur actuelle est :', # NEW
 'analyse_xml' => 'Pemroresan XML',
 'annuler' => 'Batal',
 'antispam_champ_vide' => 'Mohon biarkan kolom ini kosong:',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_e_accent_aigu' => 'Masukkan huruf kapital E dengan aksen akut',
 'barre_eo' => 'Masukkan sebuah oe-ligature',
 'barre_eo_maj' => 'Masukkan huruf kapital EO-ligature',
-'barre_euro' => 'Masukkan simbol &euro;',
+'barre_euro' => 'Masukkan simbol €',
 'barre_gras' => 'Ubah dalam {{tipe tebal}}',
 'barre_guillemets' => 'Letakkan di antara "dua tanda kutip"',
 'barre_guillemets_simples' => 'Letakkan di antara "tanda kutip tunggal"',
@@ -61,15 +61,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Ubah dalam bentuk [tautan web->http://...]',
 'barre_lien_input' => 'Silakan isi target tautan web anda (anda dapat memberikan sebuah URL internet dalam bentuk http://www.mysite.com atau cukup mencantumkan nomor artikel di situs ini).',
 'barre_note' => 'Ubah ke [[Footnote]]',
-'barre_paragraphe' => 'Cr&#233;er un paragraphe', # NEW
+'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>Kutip sebuah pesan</quote>',
 'bouton_ajouter_document' => 'TAMBAH DOKUMEN', # MODIF
 'bouton_ajouter_image' => 'TAMBAH GAMBAR', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou&nbsp;un&nbsp;document', # NEW
+'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'Modifikasi',
 'bouton_chercher' => 'Pencarian',
 'bouton_choisir' => 'Pilih',
-'bouton_deplacer' => 'D&eacute;placer', # NEW
+'bouton_deplacer' => 'Déplacer', # NEW
 'bouton_download' => 'Unduh',
 'bouton_enregistrer' => 'Simpan',
 'bouton_radio_desactiver_messagerie_interne' => 'Non aktifkan sistem pesan internal',
@@ -180,10 +180,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois_11' => 'November',
 'date_mois_11_abbr' => 'nov.', # NEW
 'date_mois_12' => 'Desember',
-'date_mois_12_abbr' => 'd&eacute;c.', # NEW
+'date_mois_12_abbr' => 'déc.', # NEW
 'date_mois_1_abbr' => 'janv.', # NEW
 'date_mois_2' => 'Februari',
-'date_mois_2_abbr' => 'f&eacute;vr.', # NEW
+'date_mois_2_abbr' => 'févr.', # NEW
 'date_mois_3' => 'Maret',
 'date_mois_3_abbr' => 'mars', # NEW
 'date_mois_4' => 'April',
@@ -195,7 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois_7' => 'Juli',
 'date_mois_7_abbr' => 'juil.', # NEW
 'date_mois_8' => 'Agustus',
-'date_mois_8_abbr' => 'ao&ucirc;t', # NEW
+'date_mois_8_abbr' => 'août', # NEW
 'date_mois_9' => 'September',
 'date_mois_9_abbr' => 'sept.', # NEW
 'date_saison_1' => 'musim dingin',
@@ -235,19 +235,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Kesalahan',
 'erreur_balise_non_fermee' => 'tag terakhir tidak ditutup:',
 'erreur_texte' => 'kesalahan',
-'etape' => '&Eacute;tape', # NEW
+'etape' => 'Étape', # NEW
 
 // F
 'fichier_introuvable' => 'Berkas tidak ditemukan: @fichier@',
 'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
-'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
+'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
 'form_auteur_mail_confirmation' => 'Bonjour,
 
-Vous avez demand&eacute; &agrave; changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
+Vous avez demandé à changer votre adresse email.
+Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
 l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignor&eacute;e) :
+sera ignorée) :
 
     @url@
 ', # NEW
@@ -319,7 +319,7 @@ Terima kasih atas partisipasi anda!
 'forum_acces_refuse' => 'Anda tidak memiliki akses ke forum ini lagi.',
 'forum_attention_dix_caracteres' => '<b>Peringatan!</b> Pesan anda hendaknya terdiri dari sepuluh karakter atau lebih.',
 'forum_attention_trois_caracteres' => '<b>Peringatan!</b> Judul anda hendaknya terdiri dari tiga karakter atau lebih.',
-'forum_attention_trop_caracteres' => '<b>Peringatan&nbsp;!</b> pesan anda terlalu panjang (@compte@ karakter)&nbsp;: untuk dapat menyimpannya, pesan tidak boleh lebih dari @max@ karakter.',
+'forum_attention_trop_caracteres' => '<b>Peringatan !</b> pesan anda terlalu panjang (@compte@ karakter) : untuk dapat menyimpannya, pesan tidak boleh lebih dari @max@ karakter.',
 'forum_avez_selectionne' => 'Anda telah memilih:',
 'forum_cliquer_retour' => 'Klik  <a href=\'@retour_forum@\'>di sini</a> untuk lanjut.',
 'forum_forum' => 'forum',
@@ -403,12 +403,12 @@ Terima kasih atas partisipasi anda!
 'icone_valider_message' => 'Validasi pesan ini',
 'icone_visiter_site' => 'Kunjungi situs', # MODIF
 'icone_voir_en_ligne' => 'Lihat online',
-'image_tourner_180' => 'Putar 180&deg;',
-'image_tourner_droite' => 'Putar 90&deg; kanan',
-'image_tourner_gauche' => 'Putar 90&deg; kiri',
+'image_tourner_180' => 'Putar 180°',
+'image_tourner_droite' => 'Putar 90° kanan',
+'image_tourner_gauche' => 'Putar 90° kiri',
 'img_indisponible' => 'gambar tidak tersedia',
 'impossible' => 'tidak mungkin',
-'info_a_suivre' => 'PAPAN PELUNCUR&raquo;',
+'info_a_suivre' => 'PAPAN PELUNCUR»',
 'info_a_valider' => '[akan divalidasi]',
 'info_acces_interdit' => 'Akses terlarang',
 'info_acces_refuse' => 'Akses ditolak',
@@ -434,8 +434,8 @@ Terima kasih atas partisipasi anda!
 'info_bloquer_lien' => 'Blokir tautan ini',
 'info_breves_02' => 'Berita',
 'info_breves_2' => 'berita',
-'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
-'info_breves_un' => '1 br&egrave;ve', # NEW
+'info_breves_nb' => '@nb@ brèves', # NEW
+'info_breves_un' => '1 brève', # NEW
 'info_breves_valider' => 'Artikel berita yang akan divalidasi',
 'info_connexion_refusee' => 'Koneksi ditolak',
 'info_contact_developpeur' => 'Silakan hubungi pengembang.',
@@ -444,7 +444,7 @@ Terima kasih atas partisipasi anda!
 'info_copyright' => '@spip@ adalah piranti lunak bebas yang didistribusi @lien_gpl@.',
 'info_copyright_doc' => 'Untuk informasi lebih lanjut, kunjungi <a href="@spipnet@">http://www.spip.net/en</a>.', # MODIF
 'info_copyright_gpl' => 'di bawah lisensi GPL',
-'info_cours_edition' => 'Artikel anda dalam proses', # MODIF
+'info_cours_edition' => 'Artikel anda dalam proses',
 'info_creer_repertoire' => 'Silakan buat sebuah berkas atau direktori yang diberi nama:',
 'info_creer_repertoire_2' => 'dalam sub directori <b>@repertoire@</b>, kemudian',
 'info_creer_vignette' => 'pembuatan otomatis gambar kecil',
@@ -496,7 +496,7 @@ Terima kasih atas partisipasi anda!
 'info_la_breve' => 'artikel berita',
 'info_la_rubrique' => 'bagian',
 'info_langue_principale' => 'Bahasa situs utama',
-'info_largeur_vignette' => '@largeur_vignette@ &times; @hauteur_vignette@ pixels',
+'info_largeur_vignette' => '@largeur_vignette@ × @hauteur_vignette@ pixels',
 'info_les_auteurs_1' => 'oleh @les_auteurs@',
 'info_logo_format_interdit' => 'Hanya logo-logo dalam format @formats@ diperbolehkan.',
 'info_logo_max_poids' => 'Logo hendaklan kurang dari @maxi@ (berkas ini @actuel@).',
@@ -525,7 +525,7 @@ Terima kasih atas partisipasi anda!
 'info_panne_site_syndique' => 'Situs-situs sindikasi tidak dapat dijangkau',
 'info_pense_bete' => 'MEMO',
 'info_petit_ecran' => 'Tampilan kecil',
-'info_petition_close' => 'P&eacute;tition close', # NEW
+'info_petition_close' => 'Pétition close', # NEW
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Beberapa kata kunci ditemukan untuk "@cherche_mot@":',
 'info_popularite_5' => 'popularitas:',
@@ -555,8 +555,8 @@ Terima kasih atas partisipasi anda!
 'info_sans_titre_2' => 'tidak berjudul',
 'info_selectionner_fichier' => 'Anda dapat memilih sebuah berkas dari direktori @upload@',
 'info_selectionner_fichier_2' => 'Pilih sebuah berkas:',
-'info_signature_supprimee' => 'Signature supprim&eacute;e', # NEW
-'info_signature_supprimee_erreur' => 'Erreur&nbsp;: ce code de suppression ne correspond a aucune signature', # NEW
+'info_signature_supprimee' => 'Signature supprimée', # NEW
+'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Validasi tertunda situs web',
 'info_site_reference' => 'Situs-situs referensi online',
 'info_site_refuse' => 'Situs web ditolak',
@@ -636,7 +636,7 @@ Terima kasih atas partisipasi anda!
 'login_retour_site' => 'Kembali ke situs umum',
 'login_retoursitepublic' => 'kembali ke situs umum',
 'login_sans_cookiie' => 'Identifikasi tanpa cookie',
-'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
+'login_securise' => 'Login sécurisé', # NEW
 'login_sinscrire' => 'daftar',
 'login_test_navigateur' => 'mencoba browser/koneksi',
 'login_verifiez_navigateur' => '(Bagaimana pun, verifikasi bahwasanya browser anda tidak menyimpan kata sandi anda...)',
@@ -726,12 +726,12 @@ dan mengakses situs kembali.
 'suivant' => 'selanjutnya',
 
 // T
-'taille_ko' => '@taille@&nbsp;kb',
-'taille_mo' => '@taille@&nbsp;Mb',
-'taille_octets' => '@taille@&nbsp;bytes',
-'texte_actualite_site_1' => 'Ketika anda menjadi familiar dengan tatap muka yang ada, kliklah &laquo;',
+'taille_ko' => '@taille@ kb',
+'taille_mo' => '@taille@ Mb',
+'taille_octets' => '@taille@ bytes',
+'texte_actualite_site_1' => 'Ketika anda menjadi familiar dengan tatap muka yang ada, kliklah «',
 'texte_actualite_site_2' => 'tatap muka lengkap',
-'texte_actualite_site_3' => '&raquo; untuk fitur-fitur yang lebih banyak.',
+'texte_actualite_site_3' => '» untuk fitur-fitur yang lebih banyak.',
 'texte_creation_automatique_vignette' => 'Pembuatan otomatis preview gambar kecil diaktifkan di situs ini. Jika anda menginstal, melalui formulir ini, gambar dalam format @gd_formats@, ia akan disandingkan dengan gambar kecil yang berukuran maksimum @taille_preview@ pixels.',
 'texte_documents_associes' => 'Dokumen berikut diasosiasikan dengan artikel,
 				tapi tidak dimasukkan secara langsung.
@@ -782,15 +782,15 @@ dan mengakses situs kembali.
 'titre_probleme_technique' => 'Peringatan: sebuah permasalahan teknis (server SQL) telah mengganggu akses ke bagian situs ini.<p>Terima kasih atas pengertian anda.',
 'titre_publier_document' => 'PUBLIKASI DOKUMEN DI BAGIAN INI',
 'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-'titre_signatures_confirmees' => 'Signatures confirm&eacute;es', # NEW
+'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 'titre_statistiques' => 'Statistik situs',
 'titre_titre_document' => 'Judul dokumen:',
-'todo' => '&agrave; venir', # NEW
+'todo' => 'à venir', # NEW
 'trad_reference' => '(rujuk artikel)', # MODIF
 
 // Z
 'zbug_balise_b_aval' => ': tag B terlambat dalam loop',
-'zbug_balise_inexistante' => 'Balise @balise@ mal d&eacute;clar&eacute;e pour @from@', # NEW
+'zbug_balise_inexistante' => 'Balise @balise@ mal déclarée pour @from@', # NEW
 'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 'zbug_boucle' => 'loop',
 'zbug_boucle_recursive_undef' => 'loop rekursif yang tak terdefinisi', # MODIF
@@ -811,14 +811,14 @@ dan mengakses situs kembali.
 'zbug_erreur_meme_parent' => '{meme_parent} hanya berlaku untuk loop (FORUM) and (RUBRIK)', # MODIF
 'zbug_erreur_squelette' => 'Kesalahan dalam templat',
 'zbug_hors_compilation' => 'Hors Compilation', # NEW
-'zbug_info_erreur_squelette' => '&#1615;Kesalahan di situs',
+'zbug_info_erreur_squelette' => 'ُKesalahan di situs',
 'zbug_inversion_ordre_inexistant' => 'susunan yang tidak dikenal', # MODIF
 'zbug_pagination_sans_critere' => 'Tag #PAGINATION tanpa kriteria (penomoran halaman), atau digunakan dalam loop rekursif', # MODIF
 'zbug_parametres_inclus_incorrects' => 'Parameter-parameter tambahan yang salah', # MODIF
 'zbug_profile' => 'Waktu kalkulasi: @time@',
 'zbug_resultat' => 'hasil',
 'zbug_serveur_indefini' => 'server SQL yang tidak dikenal', # MODIF
-'zbug_statistiques' => 'Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e', # NEW
+'zbug_statistiques' => 'Statistiques des requêtes SQL classées par durée', # NEW
 'zbug_table_inconnue' => 'Tabel SQL yang tidak dikenal "@table@"',
 'zxml_connus_attributs' => 'atribut yang dikenal',
 'zxml_de' => 'dari',
