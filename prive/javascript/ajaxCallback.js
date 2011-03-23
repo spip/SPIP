@@ -376,9 +376,9 @@ jQuery.spip.loadAjax = function(blocfrag,url, href, options){
 	if (jQuery.spip.preloaded_urls[url] && !force) {
 		jQuery.spip.on_ajax_loaded(blocfrag,jQuery.spip.preloaded_urls[url],href,options.history);
 	} else {
+		var d = new Date();
 		jQuery.ajax({
-			url: url,
-			cache:false,
+			url: parametre_url(url,'var_t',d.getTime()),
 			onAjaxLoad:false,
 			success: function(c){
 				jQuery.spip.on_ajax_loaded(blocfrag,c,href,options.history);
