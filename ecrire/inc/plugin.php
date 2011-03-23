@@ -337,9 +337,7 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 		if($dir_plugins_suppl && preg_match($dir_plugins_suppl,$plug)){
 			$dir = "_DIR_RACINE.'".str_replace(_DIR_RACINE,'',$plug)."/'";
 		}else{
-			$dir = $dir_type.".'"
-			  . str_replace(constant($dir_type), '', $plug)
-			  ."/'";
+			$dir = $dir_type.".'" . $plug ."/'";
 		}
 		$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 		$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
@@ -407,7 +405,7 @@ function plugin_ongletbouton($nom, $val)
 {
 	$val =!$val ? 'array()'
 	: ("unserialize('".str_replace("'","\'",serialize($val))."')");
-	return "function $nom(){return $val;}\n";
+	return "if (!function_exists('$nom')) {function $nom(){return $val;}}\n";
 }
 
 // creer le fichier CACHE_PLUGIN_VERIF à partir de
