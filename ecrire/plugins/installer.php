@@ -103,7 +103,7 @@ function spip_plugin_install($action, $infos, $version_cible){
 }
 
 
-function spip_version_compare($v1,$v2,$op){
+function spip_version_compare($v1,$v2,$op=null){
 	$v1 = strtolower(preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|pl|p),i','\\1.\\2',$v1));
 	$v2 = strtolower(preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|pl|p),i','\\1.\\2',$v2));
 	$v1 = str_replace('rc','RC',$v1); // certaines versions de PHP ne comprennent RC qu'en majuscule
@@ -117,7 +117,7 @@ function spip_version_compare($v1,$v2,$op){
 	$v1 = implode('.',$v1);
 	$v2 = implode('.',$v2);
 
-	return version_compare($v1, $v2,$op);
+	return $op?version_compare($v1, $v2,$op):version_compare($v1, $v2);
 }
 
 // Cette fonction retourne la meta "plugin" deserialisee
