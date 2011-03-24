@@ -144,7 +144,7 @@ function optimiser_base_disparus($attente = 86400) {
 	include_spip('action/editer_liens');
 	// optimiser les liens de tous les auteurs vers des objets effaces
 	// et depuis des auteurs effaces
-	$n+= objet_optimiser_liens(array('document'=>'*'),'*');
+	$n+= objet_optimiser_liens(array('auteur'=>'*'),'*');
 
 	# effacer les auteurs poubelle qui ne sont lies a rien
 	$res = sql_select("A.id_auteur AS id",
