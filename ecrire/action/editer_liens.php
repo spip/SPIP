@@ -278,7 +278,7 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 	foreach($objets as $objet => $id_objets){
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
-			$objet = objet_type($objet); # securite
+			$objet = ($objet=='*')?$objet:objet_type($objet); # securite
 			// Envoyer aux plugins
 			$id_objet = pipeline('pre_edition_lien',
 				array(
@@ -335,13 +335,13 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
  * @param int|string|array $id_source
  * @param string $objet
  * @param int|string|array $id_objet
- * @return <type>
+ * @return array
  */
 function lien_where($primary, $id_source, $objet, $id_objet){
 	if ((!is_array($id_source) AND !strlen($id_source))
 	  OR !strlen($objet)
 	  OR (!is_array($id_objet) AND !strlen($id_objet)))
-		return "0=1"; // securite
+		return array("0=1"); // securite
 
 	$where = array();
 	if ($id_source!=='*')
@@ -375,7 +375,7 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 	$dels = 0;
 	$echec = false;
 	foreach($objets as $objet => $id_objets){
-		$objet = objet_type($objet); # securite
+		$objet = ($objet=='*')?$objet:objet_type($objet); # securite
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
 			// id_objet peut valoir '*'
@@ -451,11 +451,11 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
  * @return int
  */
 function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
-	include_spip('base/optimiser');
+	include_spip('genie/optimiser');
 	$echec = false;
 	$dels = 0;
 	foreach($objets as $objet => $id_objets){
-		$objet = objet_type($objet); # securite
+		$objet = ($objet=='*')?$objet:objet_type($objet); # securite
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
 			$where = lien_where($primary, $id, $objet, $id_objet);
@@ -482,10 +482,12 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
 
 			# les liens depuis un objet inexistant
 			$table_source = table_objet_sql($objet_source);
+			// filtrer selon $id, $objet, $id_objet eventuellement fournis
+			// (en general '*' pour chaque)
 			$where = lien_where("L.$primary", $id, $objet, $id_objet);
 			$where[] = "O.$primary IS NULL";
 			$res = sql_select("L.$primary AS id",
-				      "$table_lien AS L LEFT JOIN $table_source AS O ON L.$primary=0.$primary",
+				      "$table_lien AS L LEFT JOIN $table_source AS O ON L.$primary=O.$primary",
 							$where);
 			$dels+= optimiser_sansref($table_lien, $primary, $res);
 		}
@@ -525,7 +527,7 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 	unset($qualif['objet']);
 	unset($qualif['id_objet']);
 	foreach($objets as $objet => $id_objets){
-		$objet = objet_type($objet); # securite
+		$objet = ($objet=='*')?$objet:objet_type($objet); # securite
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
 			$where = lien_where($primary, $id, $objet, $id_objet);
@@ -558,7 +560,7 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 function lien_find($objet_source,$primary,$table_lien,$id,$objets){
 	$trouve = array();
 	foreach($objets as $objet => $id_objets){
-		$objet = objet_type($objet); # securite
+		$objet = ($objet=='*')?$objet:objet_type($objet); # securite
 		// lien_where prend en charge les $id_objets sous forme int ou array
 		$where = lien_where($primary, $id, $objet, $id_objets);
 		$liens = sql_allfetsel('*',$table_lien,$where);
