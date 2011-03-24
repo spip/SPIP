@@ -144,7 +144,7 @@ function insert_objet($objet, $id_parent=null) {
 	// dans les rubriques, on essaie avec la langue de l'auteur,
 	// ou a defaut celle de la rubrique
 	// Sinon c'est la langue de la rubrique qui est choisie + heritee
-	if (in_array($table_sql,$GLOBALS['meta']['multi_objets'])) {
+	if ($GLOBALS['meta']['multi_objets'] AND in_array($table_sql,$GLOBALS['meta']['multi_objets'])) {
 		lang_select($GLOBALS['visiteur_session']['lang']);
 		if (in_array($GLOBALS['spip_lang'],
 		explode(',', $GLOBALS['meta']['langues_multilingue']))) {
