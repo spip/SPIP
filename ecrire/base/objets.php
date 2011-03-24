@@ -224,6 +224,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  *
  * principale
  * editable
+ * champs_editables
  * 
  * titre
  * date
