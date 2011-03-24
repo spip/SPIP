@@ -569,4 +569,9 @@ function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opts) {
 function autoriser_mesarticles_bouton_dist($faire, $type, $id, $qui, $opts){
 	return sql_countsel('spip_auteurs_liens',"objet='article' AND id_auteur=".intval($qui['id_auteur']));
 }
+
+function autoriser_articlecreer_bouton_dist($faire, $type, $id, $qui, $opts){
+	return sql_countsel('spip_rubriques')>0;
+}
+
 ?>
