@@ -53,6 +53,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'page'=>'article',
 				'texte_retour' => 'icone_retour_article',
 				'texte_modifier' => 'icone_modifier_article',
+				'texte_creer' => 'icone_ecrire_article',
 				'texte_objets' => 'public:articles',
 				'texte_objet' => 'public:article',
 				'texte_signale_edition' => 'texte_travail_article',
@@ -130,6 +131,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'texte_objets' => 'public:rubriques',
 				'texte_objet' => 'public:rubrique',
 				'texte_modifier' => 'icone_modifier_rubrique',
+				'texte_creer' => 'icone_creer_rubrique',
 				'info_aucun_objet'=> 'info_aucun_rubrique',
 				'info_1_objet' => 'info_1_rubrique',
 				'info_nb_objets' => 'info_nb_rubriques',
@@ -212,7 +214,9 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  *
  * texte_retour
  * texte_modifier
+ * texte_creer
  * texte_objets
+ * texte_objet
  *
  * info_aucun_objet
  * info_1_objet
@@ -280,9 +284,11 @@ function renseigner_table_objet_sql($table_sql,$infos){
 	// chaines de langue
 	// par defaut : objet:icone_xxx_objet
 	if (!isset($infos['texte_retour']))
-		$infos['texte_retour'] = $infos['type'].':'.'icone_retour_'.$infos['type'];
+		$infos['texte_retour'] = 'icone_retour';
 	if (!isset($infos['texte_modifier']))
 		$infos['texte_modifier'] = $infos['type'].':'.'icone_modifier_'.$infos['type'];
+	if (!isset($infos['texte_creer']))
+		$infos['texte_creer'] = $infos['type'].':'.'icone_creer_'.$infos['type'];
 	if (!isset($infos['texte_objets']))
 		$infos['texte_objets'] = $infos['type'].':'.'titre_'.$infos['table_objet'];
 	if (!isset($infos['texte_objet']))
