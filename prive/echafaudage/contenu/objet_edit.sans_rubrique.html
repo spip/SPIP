@@ -1,0 +1,27 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	[(#AUTORISER{creer,#OBJET}|sinon_interdire_acces)]
+]
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{#OBJET},#URL_ECRIRE{#OBJET|objet_info{table_objet}}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#GET{redirect}|icone_verticale{[(#OBJET|objet_info{texte_retour}|_T)],#OBJET|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[
+		[(#OBJET|objet_info{texte_modifier}|_T)]
+		<h1>(#ENV{titre,#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_OBJET|generer_url_entite{#OBJET}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_{[editer_(#OBJET)],#ENV{id_objet,oui},#GET{redirect},#ENV{lier_trad}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/if (window.jQuery) jQuery('#navigation>div,#extra>div').ajaxReload({args:{exec:'#ENV{exec}'}});/*\]\]>*/</script>
+]
+</div>
