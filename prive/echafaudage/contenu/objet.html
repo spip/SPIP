@@ -1,4 +1,4 @@
-[(#ENV**{exec}|=={#OBJET|objet_info{url_voir}|oui})
+[(#ENV**{exec}|=={#OBJET|objet_info{url_voir}}|oui)
 	[(#ID_OBJET|generer_info_entite{#OBJET,[(#OBJET|id_table_objet)],'**'}|intval|=={#ID_OBJET}|sinon_interdire_acces)]
 
 	[(#BOITE_OUVRIR{[
@@ -12,7 +12,7 @@
 				[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}|icone_verticale{#ID_OBJET|afficher_qui_edite{#OBJET},warning-24,'',right ajax preload})]
 			]
 		]
-		<h1>[(#RANG). ](#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{<:info_sans_titre:>})[(#OBJET|objet_icone|inserer_attribut{class,cadre-icone})]</h1>
+		<h1>[(#INFO_TITRE{#OBJET,#ID_OBJET}|recuperer_numero). ](#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{<:info_sans_titre:>})[(#OBJET|objet_icone|inserer_attribut{class,cadre-icone})]</h1>
 	],simple fiche_objet})]
 
 	<div class="ajax">
@@ -34,13 +34,13 @@
 	#SET{ok,' '}
 ][
 
-(#ENV**{exec}|=={#OBJET|objet_info{url_edit}|oui})
+(#ENV**{exec}|=={#OBJET|objet_info{url_edit}}|oui)
 
 #INCLURE{fond=prive/squelettes/contenu/#ENV**{exec},redirect='',env,retourajax=oui}
 #SET{ok,' '}
 
 ][
 
-(#GET{ok}|sinon_interdire_acces})
+(#GET{ok}|sinon_interdire_acces)
 
 ]
