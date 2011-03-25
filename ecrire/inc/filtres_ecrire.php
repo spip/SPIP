@@ -25,7 +25,9 @@ include_spip('inc/boutons');
  */
 function sinon_interdire_acces($ok=false) {
 	if ($ok) return '';
-	ob_end_clean(); // vider tous les tampons
+	// vider tous les tampons
+	while (ob_get_level())
+		ob_end_clean();
 	$echec = charger_fonction('403','exec');
 	$echec();
 
