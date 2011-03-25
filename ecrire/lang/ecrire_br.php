@@ -189,7 +189,7 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'erreur_plugin_nom_fonction_interdit' => 'Berzet eo anv ar fonksion',
 'erreur_plugin_nom_manquant' => 'Mankout a ra anv an adveziant',
 'erreur_plugin_prefix_manquant' => 'N\'eo ket termenet tachenn envel an adveziant',
-'erreur_plugin_tag_plugin_absent' => '<Adveziant> ezvezant er restr termeniñ',
+'erreur_plugin_tag_plugin_absent' => '&lt;Adveziant&gt; ezvezant er restr termeniñ',
 'erreur_plugin_version_manquant' => 'Mankout a ra stumm an adveziant',
 
 // F
@@ -1015,7 +1015,7 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
 'texte_compacter_avertissement' => 'Diwallit da chom hep gweredekaat an dibarzhioù-mañ e-keit hag emeur o sevel ho lec\'hienn : n\'hall ket an elfennoù gwasket bezañ lennet ken war-lerc\'h.',
 'texte_compacter_script_css' => 'Gallout a ra SPIP gwaskañ ar skriptoù javascript hag ar follennoù-stil CSS, evit o enrollañ er restroù difiñv;  buanoc\'h e teu al lec\'hienn war wel.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(hennezh a c\'hell bezañ gwasket pe get)',
 'texte_compresseur_page' => 'Gallout a ra SPIP gwaskañ ent emgefre pep pajenn kaset da weladennerien al lec\'hienn. Skañvoc\'h eo evit ar bann drafet (buanoc\'h ez aio evit ar c\'hevreadennoù gorrek, da skouer), met goulenn a ra muioc\'h a nerzh digant ar servijer.',
 'texte_compte_element' => '@count@ elfenn',

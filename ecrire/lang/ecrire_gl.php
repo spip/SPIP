@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'Non tes acceso a esta mensaxe.',
 'avis_non_acces_page' => 'Non tes acceso a esta páxina.',
 'avis_operation_echec' => 'Fallou a operación.',
-'avis_operation_impossible' => 'Operaci&oacute;n impos&iacute;bel',
+'avis_operation_impossible' => 'Operaci&amp;oacute;n impos&amp;iacute;bel',
 'avis_probleme_archive' => 'Problema de leitura do ficheiro @archive@',
 'avis_site_introuvable' => 'Non se pode atopar o web',
 'avis_site_syndique_probleme' => 'Atención: a afiliación deste web atopou un problema; o sistema quedou temporalmente interrompido. Verifique o enderezo do ficheiro de afiliación deste web (<b>@url_syndic@</b>), e tente unha nova recuperación da información.',
@@ -136,7 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_redirection' => 'Artigos virtuais',
 'config_titre_base_sup' => 'Declaración dunha base suplementaria',
 'config_titre_base_sup_choix' => 'Escolla unha base de datos suplementaria',
-'connexion_ldap' => 'Conexi&oacute;n :',
+'connexion_ldap' => 'Conexi&amp;oacute;n :',
 'copier_en_local' => 'Copiar en local',
 
 // D
@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_base_donnee_2' => '(Moitas veces este enderezo corresponde ao do teu web, ás veces correspóndese coa mención «localhost», e outras pódese deixar baleiro.)',
 'entree_biographie' => 'Curta biografía en catro verbas.',
 'entree_breve_publiee' => 'Quere que se publique a breve?',
-'entree_chemin_acces' => '<b>Introduce</b> o cami&ntilde;o de acceso :',
+'entree_chemin_acces' => '<b>Introduce</b> o cami&amp;ntilde;o de acceso :',
 'entree_cle_pgp' => 'A túa chave GPG',
 'entree_contenu_rubrique' => '(Contido do tema en poucas palabras.)',
 'entree_description_site' => 'Descrición do web',
@@ -187,7 +187,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_port_annuaire' => 'O número de porto da guía',
 'entree_signature' => 'Sinatura',
 'entree_texte_breve' => 'Texto da breve',
-'entree_titre_obligatoire' => '<b>T&iacute;tulo</b> [Obrigado]<br />',
+'entree_titre_obligatoire' => '<b>T&amp;iacute;tulo</b> [Obrigado]<br />',
 'entree_url' => 'O enderezo (URL) do teu web',
 'erreur_plugin_desinstalation_echouee' => 'A desinstalación do módulo fallou. No entanto, pode desactivalo.',
 'erreur_plugin_fichier_absent' => 'Ficheiro ausente',
@@ -195,7 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'Nome de función prohibido',
 'erreur_plugin_nom_manquant' => 'Falta o nome do módulo',
 'erreur_plugin_prefix_manquant' => 'Espazo de chamada do módulo non definido',
-'erreur_plugin_tag_plugin_absent' => 'Falta o<módulo> no ficheiro de definición',
+'erreur_plugin_tag_plugin_absent' => 'Falta o&lt;módulo&gt; no ficheiro de definición',
 'erreur_plugin_version_manquant' => 'Falta a versión do módulo',
 
 // F
@@ -240,7 +240,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_ecrire_nouvel_article' => 'As breves contidas neste tema',
 'icone_edition' => 'Edición',
 'icone_envoyer_message' => 'Enviar a mensaxe',
-'icone_evolution_visites' => 'Evoluci&oacute;n das visitas<br />@visites@ visitas',
+'icone_evolution_visites' => 'Evoluci&amp;oacute;n das visitas<br />@visites@ visitas',
 'icone_ma_langue' => 'O meu idioma',
 'icone_mes_infos' => 'Os meus datos',
 'icone_mes_preferences' => 'As miñas preferencias',
@@ -280,8 +280,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_1_site' => '1 web',
 'info_1_visiteur' => '1 visitante',
 'info_activer_cookie' => 'Pode activar unha <b>cookie de correspondencia</b>, co cal poderá pasar facilmente do web público ao web privado.',
-'info_activer_forum_public' => '<i>Para activar os foros p&uacute;blicos, escolla o xeito
-  de moderaci&oacute;n predeterminado:</i>',
+'info_activer_forum_public' => '<i>Para activar os foros p&amp;uacute;blicos, escolla o xeito
+  de moderaci&amp;oacute;n predeterminado:</i>',
 'info_admin_etre_webmestre' => 'Concederme os dereitos de administrador',
 'info_admin_gere_rubriques' => 'Esta persoa xestiona os seguintes temas:',
 'info_admin_gere_toutes_rubriques' => 'Esta persoa xestiona <b>todos os temas</b>.',
@@ -348,9 +348,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_changer_nom_groupe' => 'Trocar o nome deste grupo:',
 'info_chapeau' => 'Cabeceira',
 'info_chapeau_2' => 'Cabeceira:',
-'info_chemin_acces_1' => 'Opci&oacute;ns: <b>Cami&ntilde;o de acceso ao anuario</b>',
+'info_chemin_acces_1' => 'Opci&amp;oacute;ns: <b>Cami&amp;ntilde;o de acceso ao anuario</b>',
 'info_chemin_acces_2' => 'En adiante, terá que configurar a vía de acceso ás informacións na guía. Esta información é indispensable para ler os perfís de redactores gardados na guía.',
-'info_chemin_acces_annuaire' => 'Opci&oacute;ns: <b>Cami&ntilde;o de acceso ao anuario</b>',
+'info_chemin_acces_annuaire' => 'Opci&amp;oacute;ns: <b>Cami&amp;ntilde;o de acceso ao anuario</b>',
 'info_choix_base' => 'Terceira etapa:',
 'info_classement_1' => '<sup>o</sup> en @liste@',
 'info_classement_2' => '<sup>a</sup> en @liste@',
@@ -381,7 +381,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contributions' => 'Contribucións',
 'info_creation_mots_cles' => 'Crea e configura aquí as palabras chave do web',
 'info_creation_paragraphe' => '(Para crear parágrafos, simplemente deixe liñas baleiras.)',
-'info_creation_rubrique' => 'Antes de poder escribir artigos,<br /> ten que crear, cando menos un tema ou secci&oacute;n.<br />',
+'info_creation_rubrique' => 'Antes de poder escribir artigos,<br /> ten que crear, cando menos un tema ou secci&amp;oacute;n.<br />',
 'info_creation_tables' => 'Creación das táboas da base de datos',
 'info_creer_base' => '<b>Crear</b> unha nova base de datos:',
 'info_dans_groupe' => 'No grupo:',
@@ -389,8 +389,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_date_publication_anterieure' => 'Data de redacción anterior:',
 'info_date_referencement' => 'DATA DE REFERENCIA DESTE WEB:',
 'info_delet_mots_cles' => 'Solicitouse eliminar a palabra clave
-<b>@titre_mot@</b> (@type_mot@). Esta palabra clave est&aacute; ligada a
-<b>@texte_lie@</b>, ten que confirmar a s&uacute;a decisi&oacute;n :',
+<b>@titre_mot@</b> (@type_mot@). Esta palabra clave est&amp;aacute; ligada a
+<b>@texte_lie@</b>, ten que confirmar a s&amp;uacute;a decisi&amp;oacute;n :',
 'info_derniere_etape' => 'Acabouse!',
 'info_derniere_syndication' => 'A última afiliación deste web fíxose o',
 'info_derniers_articles_publies' => 'Os teus últimos artigos publicados en liña',
@@ -440,8 +440,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_numero_breve' => 'BREVE NÚMERO',
 'info_gauche_statistiques_referers' => 'Esta páxina presenta a lista de <i>referentes</i>,
   ou sexa, os enderezos con ligazóns apuntando a este mesmo web, únicamente para onte e para hoxe; esta lista ponse a cero a cada 24 horas.',
-'info_gauche_suivi_forum' => 'A p&aacute;xina de <i>seguimento dos foros</i> &eeacute; unha ferramenta de xesti&oacute;n do web (e non un espazo de discusi&oacute;n ou de redacci&oacute;n). Mostra todas as contribuci&oacute;ns no foro p&uacute;blico deste artigo e permite xestionar estas contribuci&oacute;ns.',
-'info_gauche_suivi_forum_2' => 'A p&acute;xina de <i>seguimento dos foros</i>  &eeacute; unha ferramenta de xesti&oacute;n do web (e non un espazo de discusi&oacute;n ou de redacci&oacute;n). Mostra todas as contribuci&oacute;ns nos foros do web, tanto as do espazo p&uacute;blico coma as do espazo privado e permite xestionar estas contribuci&oacute;ns.',
+'info_gauche_suivi_forum' => 'A p&amp;aacute;xina de <i>seguimento dos foros</i> &amp;eeacute; unha ferramenta de xesti&amp;oacute;n do web (e non un espazo de discusi&amp;oacute;n ou de redacci&amp;oacute;n). Mostra todas as contribuci&amp;oacute;ns no foro p&amp;uacute;blico deste artigo e permite xestionar estas contribuci&amp;oacute;ns.',
+'info_gauche_suivi_forum_2' => 'A p&amp;acute;xina de <i>seguimento dos foros</i>  &amp;eeacute; unha ferramenta de xesti&amp;oacute;n do web (e non un espazo de discusi&amp;oacute;n ou de redacci&amp;oacute;n). Mostra todas as contribuci&amp;oacute;ns nos foros do web, tanto as do espazo p&amp;uacute;blico coma as do espazo privado e permite xestionar estas contribuci&amp;oacute;ns.',
 'info_gauche_visiteurs_enregistres' => 'aquí atoparás as visitas rexistradas
   no espazo público do web (foros con rexistro).',
 'info_generation_miniatures_images' => 'Creación de miniaturas das imaxes',
@@ -491,10 +491,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_message_technique' => 'Mensaxe técnica:',
 'info_messagerie_interne' => 'mensaxería interna',
 'info_mise_a_niveau_base' => 'posta ao día da súa base SQL',
-'info_mise_a_niveau_base_2' => '{{Atención!}} Instalou unha versi&oacute;n
-  de ficheiros SPIP {anterior} &aacute; que tiña instalada
-  antes neste web: a s&uacute;a base de datos pode que se perdese
-  e o seu web xa non funcionar&oacute;.<br />{{Reinstale os
+'info_mise_a_niveau_base_2' => '{{Atención!}} Instalou unha versi&amp;oacute;n
+  de ficheiros SPIP {anterior} &amp;aacute; que tiña instalada
+  antes neste web: a s&amp;uacute;a base de datos pode que se perdese
+  e o seu web xa non funcionar&amp;oacute;.<br />{{Reinstale os
   ficheiros de SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Configuración por defecto dos foros públicos',
 'info_modifier_auteur' => 'Modificar o autor:',
@@ -625,9 +625,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redirection' => 'Redirección',
 'info_referencer_doc_distant' => 'Referenciar un documento na internet :',
 'info_refuses' => 'Os teus artigos rexeitados',
-'info_reglage_ldap' => 'Opci&oacute;ns: <b>Axustes da importaci&oacute;n LDAP</b>',
+'info_reglage_ldap' => 'Opci&amp;oacute;ns: <b>Axustes da importaci&amp;oacute;n LDAP</b>',
 'info_remplacer_mot' => 'Substituír "@titre@"',
-'info_renvoi_article' => '<b>Redirecci&oacute;n.</b> Este artigo reenv&iacute; &aacute; p&aacute;xina:',
+'info_renvoi_article' => '<b>Redirecci&amp;oacute;n.</b> Este artigo reenv&amp;iacute; &amp;aacute; p&amp;aacute;xina:',
 'info_reserve_admin' => 'Só o equipo de xestión pode modificar este enderezo.',
 'info_restauration_sauvegarde' => 'Restauración da copia de seguridade @archive@',
 'info_restauration_sauvegarde_insert' => 'Inserción de @archive@ na base de datos',
@@ -752,7 +752,7 @@ cunha cor que indica o seu estado :',
 'install_nom_base_hebergeur' => 'Nome da base atribuída polo aloxador :',
 'install_pas_table' => 'Base actualemente sen táboas',
 'install_pass_base_hebergeur' => 'Chave de conexión atribuída polo aloxador',
-'install_php_version' => 'Versi&oacute;n de PHP @version@ insuficiente (m&iacute;nima = @minimum@)',
+'install_php_version' => 'Versi&amp;oacute;n de PHP @version@ insuficiente (m&amp;iacute;nima = @minimum@)',
 'install_select_langue' => 'Selecciona un idioma e preme o botón «seguinte» para comezar co proceso de instalación.',
 'install_select_type_db' => 'Indique o tipo de base de datos :',
 'install_select_type_mysql' => 'MySQL',
@@ -969,7 +969,7 @@ cunha cor que indica o seu estado :',
 'plugins_recents' => 'Módulos recentes.',
 'plugins_vue_hierarchie' => 'Xerarquía',
 'plugins_vue_liste' => 'Listaxe',
-'protocole_ldap' => 'Versi&oacute;n do protocolo :',
+'protocole_ldap' => 'Versi&amp;oacute;n do protocolo :',
 
 // R
 'repertoire_plugins' => 'Repertorio :',
@@ -1029,7 +1029,7 @@ cunha cor que indica o seu estado :',
   revista de prensa, un calendario de eventos...',
 'texte_choix_base_1' => 'Elixe a túa base:',
 'texte_choix_base_2' => 'O servidor SQL contén varias bases de datos.',
-'texte_choix_base_3' => '<b>Seleccione</b> aqu&iacute; a que lle dese o seu provedor:',
+'texte_choix_base_3' => '<b>Seleccione</b> aqu&amp;iacute; a que lle dese o seu provedor:',
 'texte_choix_table_prefix' => 'Prefixo das táboas :',
 'texte_commande_vider_tables_indexation' => 'empregue este comando para baleirar as táboas
   de indexado empregadas polo motor de procura integrado no Spip.
@@ -1044,7 +1044,7 @@ cunha cor que indica o seu estado :',
 'texte_compacter_avertissement' => 'Atención para non activar estas opcións durante o desenvolvemento do seu web: os elementos compactados perden toda a súa lexibilidade.',
 'texte_compacter_script_css' => 'SPIP pode compactar os scripts javascript e as follas de estilo CSS, para rexistralos nas fichas estáticas ; iso acelera a presentación do web.',
 'texte_compatibilite_html' => 'Pode pedir que SPIP produza, no sitio público, código compatible coa norma <i>HTML4</i>, ou permitirlle utilizar as posibilidades máis modernas do <i>HTML5</i>.',
-'texte_compatibilite_html_attention' => 'Non hai ningún risco ao activar a opción <i>HTML5</i>, pero se o fai, as páxinas do seu sitio deberán comezar pola seguinte mención para seren correctas : <code><!DOCTYPE html></code>.',
+'texte_compatibilite_html_attention' => 'Non hai ningún risco ao activar a opción <i>HTML5</i>, pero se o fai, as páxinas do seu sitio deberán comezar pola seguinte mención para seren correctas : <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(comprimido ou non)',
 'texte_compresseur_page' => 'SPIP pode comprimir automaticamente cada páxina que envía ao
 visitante do web. Esta regraxe permite optimizar o ancho de banda (o 
@@ -1052,16 +1052,16 @@ web é máis rápido ao seguirse unha ligazón de baixa velocidade), mais
 demanda máis potencia do servidor.',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementos',
-'texte_config_groupe_mots_cles' => 'Quere activar a configuraci&oacute;n avanzada das palabras clave,
-  para indicar, por exemplo que se pode seleccionar unha palabra &uacute;nica
-  por grupo, que un grupo &eacute; importante... ?',
+'texte_config_groupe_mots_cles' => 'Quere activar a configuraci&amp;oacute;n avanzada das palabras clave,
+  para indicar, por exemplo que se pode seleccionar unha palabra &amp;uacute;nica
+  por grupo, que un grupo &amp;eacute; importante... ?',
 'texte_conflit_edition_correction' => 'Controle a seguir as diferenzas entre as dúas versións do texto; pode tamén copiar as súas modificacións e volver comezar.',
 'texte_connexion_mysql' => 'Consulte os datos que lle proporcionou o seu aloxador: deberá encontrar aí o servidor de bases de datos do que dispón e os identificadores para conectar con el (claves de conexión).',
 'texte_contenu_article' => '(Contido do artigo en poucas palabras.)',
 'texte_contenu_articles' => 'Dependendo da maquetación adoptada para o seu web, pode decidir
   non empregar certos elementos dos artigos. Use esta lista para indicar cales serán os elementos dispoñibles.',
 'texte_crash_base' => 'Se a base de datos ten algún problema, podes tentar unha reparación automática.',
-'texte_creer_rubrique' => 'Antes de poder escribir artigos<br/>, ten que crear un tema ou secci&oacute;n.',
+'texte_creer_rubrique' => 'Antes de poder escribir artigos<br/>, ten que crear un tema ou secci&amp;oacute;n.',
 'texte_date_creation_article' => 'DATA DE CREACIÓN DO ARTIGO',
 'texte_date_publication_anterieure' => 'Data de redacción anterior :',
 'texte_date_publication_anterieure_nonaffichee' => 'Non mostrar data de redacción anterior.',
@@ -1192,7 +1192,7 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'texte_tenter_reparation' => 'Tentar unha reparación da base de datos',
 'texte_test_proxy' => 'Para probar o proxy, indique o enderezo do web que queira testear.',
 'texte_titre_02' => 'Título:',
-'texte_titre_obligatoire' => '<b>T&iacute;tulo</b> [Obrigado]',
+'texte_titre_obligatoire' => '<b>T&amp;iacute;tulo</b> [Obrigado]',
 'texte_travail_article' => '@nom_auteur_modif@ traballou neste artigo hai @date_diff@ minutos',
 'texte_travail_collaboratif' => 'Se é habitual que varias persoas traballen nun
   artigo ao mesmo tempo, o sistema pode mostrar os artigos 

@@ -72,7 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'ENVIAR UN MENSAJE',
 'bouton_envoyer_message' => 'Mensaje definitivo: enviar',
 'bouton_fermer' => 'Cerrar',
-'bouton_forum_petition' => 'FORO & FIRMAS',
+'bouton_forum_petition' => 'FORO &amp; FIRMAS',
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'RECORDATORIO PERSONAL',
@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_contenu_rubrique' => '(Contenido de la sección, en pocas palabras)',
 'entree_description_site' => 'Descripción del sitio',
 'entree_identifiants_connexion' => 'Tus identificadores de conexión...',
-'entree_informations_connexion_ldap' => 'Escriba en este formulario los datos de conexi&oacute;n a tu directorio LDAP. Tales informaciones te serán transmitidas por el administrador del sistema o de la red.',
+'entree_informations_connexion_ldap' => 'Escriba en este formulario los datos de conexi&amp;oacute;n a tu directorio LDAP. Tales informaciones te serán transmitidas por el administrador del sistema o de la red.',
 'entree_infos_perso' => '¿Quién eres?',
 'entree_interieur_rubrique' => 'En el interior de la sección...',
 'entree_liens_sites' => '<b>Enlace hipertexto </b>(referencia, sitio para visitar, ...)',
@@ -189,7 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'Nombre de función prohibido',
 'erreur_plugin_nom_manquant' => 'Falta el nombre del plugin',
 'erreur_plugin_prefix_manquant' => 'Espacio de nombres del plugin no definido',
-'erreur_plugin_tag_plugin_absent' => 'Falta el <plugin> en el archivo de  definición',
+'erreur_plugin_tag_plugin_absent' => 'Falta el &lt;plugin&gt; en el archivo de  definición',
 'erreur_plugin_version_manquant' => 'Falta la versión del plugin',
 
 // F
@@ -988,7 +988,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'texte_compacter_avertissement' => 'Atención a no activar estas opciones durante el desarrollo de tu sitio: los elementos compactados pierden toda legibilidad.',
 'texte_compacter_script_css' => 'SPIP puede compactar los scripts javascript y las hojas de estilo CSS, para almacenarlos en ficheros estáticos; esto acelera la presentación del sitio.',
 'texte_compatibilite_html' => 'Puede elegir si quiere que SPIP produzca, en el sitio público, un código compatible con la norma <i>HTML4</i>, o si prefiere usar las posibilidades más modernas de <i>HTML5</i>.',
-'texte_compatibilite_html_attention' => 'No hay ningún riesgo en activar la opción <i>HTML5</i>, pero entonces las páginas de su sitio tienen que empezar por la mención siguiente (para ser válidas): <code><!DOCTYPE html></code>.',
+'texte_compatibilite_html_attention' => 'No hay ningún riesgo en activar la opción <i>HTML5</i>, pero entonces las páginas de su sitio tienen que empezar por la mención siguiente (para ser válidas): <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(comprimido o no)',
 'texte_compresseur_page' => 'SPIP puede comprimir automáticamente cada página que envía a los
 visitantes del sitio. Este ajuste permite optimizar la banda pasante (el

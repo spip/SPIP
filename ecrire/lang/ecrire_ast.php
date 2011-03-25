@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'UNVIAR UN MENSAXE',
 'bouton_envoyer_message' => 'Mensaxe definitivu: unviar',
 'bouton_fermer' => 'Zarrar',
-'bouton_forum_petition' => 'FORU & SOLICITÚ',
+'bouton_forum_petition' => 'FORU &amp; SOLICITÚ',
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Camudar',
 'bouton_pense_bete' => 'RECORDATORIU PERSONAL',
@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'Nome de función encaboxada',
 'erreur_plugin_nom_manquant' => 'Falta\'l nome del plugin',
 'erreur_plugin_prefix_manquant' => 'Espaciu de nomes del plugin nun definíu',
-'erreur_plugin_tag_plugin_absent' => 'Falta el <plugin> nel archivu de definición',
+'erreur_plugin_tag_plugin_absent' => 'Falta el &lt;plugin&gt; nel archivu de definición',
 'erreur_plugin_version_manquant' => 'Falta la versión del plugin',
 
 // F
@@ -1047,7 +1047,7 @@ reinstalación de SPIP pa crear una nueva base igual que un primer accesu d\'alm
 'texte_compacter_avertissement' => 'Cuida de nun activar estes opciones durante el desarrollo del sitiu: los elementos compactaos dexen dafechu de ser lleibles.',
 'texte_compacter_script_css' => 'SPIP pue compautar los scripts JavaScript y les fueyes d\'estilu CSS, pa guardalos como archivos estáticos; esto acelera l\'amosamientu del sitiu.',
 'texte_compatibilite_html' => 'Puedes pidi-y a SPIP que produza, nel sitiu públicu, códigu compatible cola norma <i>HTML4</i>, o permiti-y utilizar les posibilidaes más modernes del <i>HTML5</i>.',
-'texte_compatibilite_html_attention' => 'Nun hai dengún peligru por activar la opción <i>HTML5</i>, pero si lo faes, les páxines del to sitiu tendrán d\'entamar cola cita darréu pa ser válidos: <code><!DOCTYPE html></code>.',
+'texte_compatibilite_html_attention' => 'Nun hai dengún peligru por activar la opción <i>HTML5</i>, pero si lo faes, les páxines del to sitiu tendrán d\'entamar cola cita darréu pa ser válidos: <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(esti pue tar comprimíu o non)',
 'texte_compresseur_page' => 'SPIP pue comprimir automáticamente toles páxines qu\'unvía a los
 visitantes del sitiu. Esti axuste permite optimizar l\'anchu de banda (el

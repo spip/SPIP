@@ -198,7 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'Zakázané jméno funkce',
 'erreur_plugin_nom_manquant' => 'Chybí jméno pluginu',
 'erreur_plugin_prefix_manquant' => 'Jmenný prostor pluginu není definovaný',
-'erreur_plugin_tag_plugin_absent' => '<plugin> chybí v definičním souboru',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; chybí v definičním souboru',
 'erreur_plugin_version_manquant' => 'Chybí informace o verzi pluginu',
 
 // F
@@ -1043,7 +1043,7 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 'texte_compacter_avertissement' => 'Be careful not to activate these options during the development of your site: compressed elements become difficult to read and debug.', # NEW
 'texte_compacter_script_css' => 'SPIP can compact Javascript files and CSS stylesheets and save them as static files. This accelerates the display of the site.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(může ale nemusí být komprimováno)',
 'texte_compresseur_page' => 'SPIP can automatically compress each page that it sends. This option reduces the bandwidth used, making the site faster for lower speed connections), but it does require more resources from the server.', # NEW
 'texte_compte_element' => '@count@ prvek',

@@ -76,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoyer_message' => 'صيغة نهائية : إرسال',
 'bouton_fermer' => 'إغلاق',
 'bouton_forum_petition' => 'المنتدى والعرائض',
-'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
+'bouton_mettre_a_jour_base' => 'تحديث قاعدة البيانات',
 'bouton_modifier' => 'تغيير',
 'bouton_pense_bete' => 'مذكرة للاستخدام الشخصي',
 'bouton_radio_activer_messagerie' => 'تفعيل المراسلة الداخلية',
@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'اسم دالة غير مسموح به:',
 'erreur_plugin_nom_manquant' => 'اسم الملحق غير الموجود',
 'erreur_plugin_prefix_manquant' => 'حقل تسمية الملحق غير محدد',
-'erreur_plugin_tag_plugin_absent' => '<ملحق> غير موجود في ملف الاعداد',
+'erreur_plugin_tag_plugin_absent' => '&lt;ملحق&gt; غير موجود في ملف الاعداد',
 'erreur_plugin_version_manquant' => 'اصدار الملحق غير موجود',
 
 // F
@@ -1011,7 +1011,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_admin_effacer_01' => 'يقوم هذا الأمر بحذف  كامل محتوى قاعدة البيانات،
 بما في ذلك كل  وسائط الوصول للمحررين والمدراء. بعد تنفيذه، يتحتم عليك
 إعادة تثبيت SPIP لإعادة إنتاج قاعدة جديدة ووسيط دخول أول مدير.',
-'texte_admin_effacer_stats' => 'هذا الامر بحذف كل البيانات المرتبطة بإحصاءات  زيارات الموقع، لما فيها شعبية المقالات.',
+'texte_admin_effacer_stats' => 'هذا الأمر يحذف كل البيانات المرتبطة بإحصاءات  زيارات الموقع، بما فيها شعبية المقالات.',
 'texte_admin_tech_01' => 'يتيح لك هذا الخيار حفظمحتوى قاعدة البيانات في ملف يتم تخزينه في دليل @dossier@. لا تنسى أيضاً أن تسترد كامل دليل @img@، الذي يحتوي على الصور والمستندات المستخدمة في المقالات والأقسام.',
 'texte_admin_tech_02' => 'تحذير: لا يمكن إسترجاع هذه النسخة الاحتياطية إلا من خلال موقع تم تثبيته بالإصدار نفسه من SPIP . بالاخص لا يجب «تفريغ القاعدة» مع الامل بإعادة تثبيتها بعد التحديث... لمزيد من المعلومات راجع <a href="@spipnet@">دليل SPIP </a> .',
 'texte_admin_tech_03' => 'يمكنك اختيار حفظ الملف بشكل مضغوط
@@ -1047,7 +1047,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_compacter_avertissement' => 'حذار من تفعيل هذه الخيارات خلال تطوير الموقع: فالعناصر المضغوطة سوف تفقد مقروئيتها.',
 'texte_compacter_script_css' => 'يستطيع SPIP ضغط رموز جافاسكريبت واوراق الأنماط ليخزنها في ملفات ثابتة، مما يسرّع عرض الموقع.',
 'texte_compatibilite_html' => 'يمكنك الطلب من SPIP إنتاج علامات متوافقة مع مقياس <i>HTML4</i> في الموقع العمومي او السماح له باستخدام إمكانات مقياس <i>HTML5</i> الأحدث.',
-'texte_compatibilite_html_attention' => 'لا يشكل تفعيل خيار <i>HTML5</i> أية مخاطرة ولكن اذا اخترت التفعيل يجب ان تبدأ صفحات موقعك بالعبارة التالية لكي تكون صالحة: <code><!DOCTYPE html></code>.',
+'texte_compatibilite_html_attention' => 'لا يشكل تفعيل خيار <i>HTML5</i> أية مخاطرة ولكن اذا اخترت التفعيل يجب ان تبدأ صفحات موقعك بالعبارة التالية لكي تكون صالحة: <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(يمكن ضغط هذا أم لا)',
 'texte_compresseur_page' => 'يستطيع SPIP، وبشكل آلي، ضغط كل صفحة يعرضها على
 زوار الموقع. ويتيح هذا الخيار تحسين تدفق البيانات (فيصبح

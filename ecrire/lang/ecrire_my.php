@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'စာပို့ပါ',
 'bouton_envoyer_message' => 'နောက်ဆုံးစာကို ပို့ပါ',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'ဖိုရမ် & တောင်းဆိုမှု',
+'bouton_forum_petition' => 'ဖိုရမ် &amp; တောင်းဆိုမှု',
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'ပြန်လည်ပြုပြင်မွမ်းမံသည်',
 'bouton_pense_bete' => 'ကိုယ်ပိုင်မှတ်တမ်း',
@@ -184,7 +184,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'တားမြစ်ထားသော လုပ်ဆောင်ချက်နာမည်',
 'erreur_plugin_nom_manquant' => 'plugin နာမည်မရှိပါ',
 'erreur_plugin_prefix_manquant' => 'Plugin နာမည်အတွက် ဖော်ပြမထားပါ',
-'erreur_plugin_tag_plugin_absent' => '<plugin>အဓိပါယ် ဖွင့်ဆိုချက်ဖိုင်ထဲတွင် မရှိပါ',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt;အဓိပါယ် ဖွင့်ဆိုချက်ဖိုင်ထဲတွင် မရှိပါ',
 'erreur_plugin_version_manquant' => 'မူကွဲဝင်ရောက်ချိတ်ဆက်မှု ပျောက်နေသည်',
 
 // F
@@ -979,7 +979,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_compacter_avertissement' => 'Attention à ne pas activer ces options durant le développement de votre site : les éléments compactés perdent toute lisibilité.', # NEW
 'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela accélère l\'affichage du site.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(ချုံ့ရန်သို့ မချုံ့ရန်)',
 'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
 visiteurs du site. Ce réglage permet d\'optimiser la bande passante (le

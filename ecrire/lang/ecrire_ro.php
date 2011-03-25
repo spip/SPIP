@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'TRIMITEŢI UN MESAJ',
 'bouton_envoyer_message' => 'Mesajul definitiv: trimiteţi',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM & PETIŢIE',
+'bouton_forum_petition' => 'FORUM &amp; PETIŢIE',
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modificaţi',
 'bouton_pense_bete' => 'CIORNĂ PENTRU UZ PERSONAL',
@@ -187,7 +187,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'Nume de funcţie interzis',
 'erreur_plugin_nom_manquant' => 'Nume plugin lipsă',
 'erreur_plugin_prefix_manquant' => 'Spaţiul de nume a plugin-ului nedefinit',
-'erreur_plugin_tag_plugin_absent' => '<plugin> lipsă în fişierul de definiţii',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; lipsă în fişierul de definiţii',
 'erreur_plugin_version_manquant' => 'Versiunea plugin-ului lipsă',
 
 // F
@@ -1018,7 +1018,7 @@ reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces a
 'texte_compacter_avertissement' => 'Atenţie: nu activaţi aceste opţiuni în timpul dezvoltării site-ului dumneavoastră, pentru că elementele compactate îşi pierd lizibilitatea.',
 'texte_compacter_script_css' => 'SPIP poate compacta script-urile javascript şi foile de stil CSS pentru a le înregistra în fişiere statice; aceasta operaţiune accelerează afişarea site-ului.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(acesta poate fi comprimat sau nu)',
 'texte_compresseur_page' => 'SPIP poate comprima în mod automatic fiecare pagină pe care o trimite vizitatorilor site-ului. Aceast reglaj permite să optimizaţi banda pasantă (site-ul este mai rapid chiar şi cu o conexiune internet cu debit scăzut) dar cere mai multe resurse server.',
 'texte_compte_element' => '@count@ element(e)',

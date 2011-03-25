@@ -70,7 +70,7 @@ risco de destruição da sua base de dados, mal funcionamento generalizado do si
 'bouton_envoyer_message' => 'Mensagem definitiva: enviar',
 'bouton_fermer' => 'Fechar',
 'bouton_forum_petition' => 'FÓRUM E PETIÇÃO',
-'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
+'bouton_mettre_a_jour_base' => 'Atualizar a base de dados',
 'bouton_modifier' => 'Alterar',
 'bouton_pense_bete' => 'LEMBRETE DE USO PESSOAL',
 'bouton_radio_activer_messagerie' => 'Ativar o sistema interno de mensagem',
@@ -188,14 +188,14 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'erreur_plugin_nom_fonction_interdit' => 'Nome de função não permitido',
 'erreur_plugin_nom_manquant' => 'Nome do plugin ausente',
 'erreur_plugin_prefix_manquant' => 'Área de nomeação do plugin não definida',
-'erreur_plugin_tag_plugin_absent' => '<plugin> ausente no arquivo de definição',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; ausente no arquivo de definição',
 'erreur_plugin_version_manquant' => 'Versão do plugin ausente',
 
 // F
 'forum_info_original' => 'original',
 
 // H
-'htaccess_a_simuler' => 'Aviso: a configuração do seu servidor HTTP não leva em conta os arquivos @htaccess@. Para poder garantir um bom nível de segurança, é preciso que você altere esta configuração, ou que as constantes @constantes@ (definíveis no arquivo mes_options.php) tenham como valor os diretórios abaixo de @document_root@.', # MODIF
+'htaccess_a_simuler' => 'Aviso: a configuração do seu servidor HTTP não leva em conta os arquivos @htaccess@. Para poder garantir um bom nível de segurança, é preciso que você altere esta configuração, ou que as constantes @constantes@ (definíveis no arquivo mes_options.php) tenham como valor os diretórios abaixo de @document_root@.',
 'htaccess_inoperant' => 'htaccess inoperante',
 
 // I
@@ -315,7 +315,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'info_aucun_breve' => 'Nenhuma nota',
 'info_aucun_message' => 'Nenhuma mensagem',
 'info_aucun_mot_cle' => 'Nenhuma palavra-chave',
-'info_aucun_rubrique' => 'Nenhuma seção', # MODIF
+'info_aucun_rubrique' => 'Nenhuma seção',
 'info_aucun_site' => 'Nenhum site',
 'info_aucun_visiteur' => 'Nenhum visitante',
 'info_aujourdhui' => 'Hoje:',
@@ -425,7 +425,7 @@ os autores excluídos por uma lixeira.',
 'info_gauche_visiteurs_enregistres' => 'Você encontrará aqui os visitantes registrados na área pública do site (fóruns por assinatura).',
 'info_generation_miniatures_images' => 'Geração de miniaturas das imagens',
 'info_gerer_trad' => 'Gerenciar os links de tradução?',
-'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
+'info_gerer_trad_objets' => '@objets@ : gerenciar os links de tradução',
 'info_groupe_important' => 'Grupo importante',
 'info_hebergeur_desactiver_envoi_email' => 'Alguns serviços de hospedagem desativam o envio automático de e-mails a partir dos seus servidores. Neste caso, as funcionalidades a seguir não funcionarão.',
 'info_hier' => 'ontem:',
@@ -485,7 +485,7 @@ os autores excluídos por uma lixeira.',
 'info_multi_cet_article' => 'Idioma desta matéria:',
 'info_multi_langues_choisies' => 'Por favor, selecione a seguir os idiomas à disposição dos redatores do seu site.
 Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.',
-'info_multi_objets' => '@objets@ : activer le menu de langue', # NEW
+'info_multi_objets' => '@objets@ : ativar o menu de idioma',
 'info_multi_rubriques' => 'Ativar o menu de idiomas nas seções?',
 'info_multi_secteurs' => '... apenas para as seções situadas na raiz?',
 'info_nb_articles' => '@nb@ matérias',
@@ -682,7 +682,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 'info_tout_site5' => 'Matéria original.',
 'info_tout_site6' => '<b>Atenção:</b> apenas as matérias originais estão exibidas.
 As traduções estão associadas ao original, numa côr que indica o seu status:',
-'info_traductions' => 'Traductions', # NEW
+'info_traductions' => 'Traduções',
 'info_travail_colaboratif' => 'Trabalho colaborativo nas matérias',
 'info_un_article' => 'uma matéria,',
 'info_un_mot' => 'Um palavra-chave de cada vêz',
@@ -801,9 +801,9 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'jour_non_connu_nc' => 'n.c.',
 
 // L
-'label_bando_outils' => 'Barre d\'outils', # NEW
-'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+'label_bando_outils' => 'Barra de ferramentas',
+'label_bando_outils_afficher' => 'Exibir as ferramentas',
+'label_bando_outils_masquer' => 'Esconder as ferramentas',
 'label_choix_langue' => 'Escolha o seu idioma',
 'label_slogan_site' => 'Slogan do site',
 'label_taille_ecran' => 'Largura da tela',
@@ -962,7 +962,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'texte_acces_ldap_anonyme_1' => 'Alguns servidores LDAP não aceitam nenhum acesso anônimo. Neste caso, é necessário especificar um identificador de acesso inicial de modo a poder, em seguida, pesquisar as informações no diretório. Na maior parte dos casos, entretanto, os campos a seguir poderão ser deixados em branco.',
 'texte_admin_effacer_01' => 'Este comando apaga <i>todo</i> o conteúdo da base de dados,incluindo <i>todos</i> os acessos dos redatores e administradores. Após executá-lo, você deverá reinstalar o SPIP para recriar uma nova base de dados bem como um acesso inicial de administrador.',
 'texte_admin_effacer_stats' => 'Este comando apaga todos os dados ligados às estatísticas de visitação do site, incluindo a popularidade das matérias.',
-'texte_admin_tech_01' => 'Esta opção permite fazer uma cópia de segurança do conteúdo da base num arquivo que será gravado no diretório @dossier@. Não se esqueça, também, de tranferir a totalidade do diretório @img@, que contém as imagens e os documentos usados nas matérias e nas seções.',
+'texte_admin_tech_01' => 'Esta opção permite fazer uma cópia de segurança do conteúdo da base num arquivo que será gravado no diretório @dossier@. Não se esqueça, também, de transferir a totalidade do diretório @img@, que contém as imagens e os documentos usados nas matérias e nas seções.',
 'texte_admin_tech_02' => 'Atenção: esta cópia de segurança só poderá ser restaurada em um site com a mesma versão do SPIP. Sobretudo, não «limpe a base» com o objetivo de reinstalar a cópia de segurança após uma atualização... Consulte <a href="@spipnet@">a documentação do SPIP</a>.',
 'texte_admin_tech_03' => 'Você pode escolher fazer a cópia de segurança em formato compactado, para encurtar a sua transferência para a sua máquina local, ou para um servidor de cópias de segurança, e para economizar espaço em disco.',
 'texte_admin_tech_04' => 'Com o objetivo de fusão com outra base de dados, você pode limitar a cópia de segurança à seção: ',
@@ -986,7 +986,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'texte_compacter_avertissement' => 'Atenção para não ativar estas opções durante o desenvolvimento do seu site: os elementos compactados perdem toda a legibilidade.',
 'texte_compacter_script_css' => 'O SPIP pode compactar os scripts javascript e as folhas de estilo CSS, para gravá-los nos arquivos de estatísticas; isto acelera a exibição do site.',
 'texte_compatibilite_html' => 'Você pode solicitar ao SPIP que gere, no site público, código compatível com o padrão <i>HTML4</i>, ou permitir que ele use as possibilidades mais modernas do <i>HTML5</i>.',
-'texte_compatibilite_html_attention' => 'Não há nenhum risco em ativar a opção <i>HTML5</i> mas, se você o fizer, as páginas do seu site deverão començar com o código a seugir, para serem válidas: <code><!DOCTYPE html></code>.',
+'texte_compatibilite_html_attention' => 'Não há nenhum risco em ativar a opção <i>HTML5</i> mas, se você o fizer, as páginas do seu site deverão començar com o código a seugir, para serem válidas: <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(pode ser compactado ou não)',
 'texte_compresseur_page' => 'O SPIP pode comprimir automaticamente cada página que ele envia aos visitantes do site. Esta regulagem permite otimizar a banda de transmissão (le site torna-se mais rápido quando estiver sob uma conexão de banda baixa), mas demanda mais potência do servidor.',
 'texte_compte_element' => '@count@ elemento',
@@ -1156,7 +1156,7 @@ neste caso, você não poderá usar a sindicação de conteúdo no seu site.</i>
 'titre_page_articles_tous' => 'Todo o site',
 'titre_page_auteurs' => 'Visitantes',
 'titre_page_breves' => 'Notas',
-'titre_page_breves_edit' => 'Editar a nota: &laquo;@titre@&raquo;',
+'titre_page_breves_edit' => 'Editar a nota: &amp;laquo;@titre@&amp;raquo;',
 'titre_page_calendrier' => 'Calendário @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Configuração do site',
 'titre_page_config_fonctions' => 'Configuração do site',
@@ -1198,9 +1198,9 @@ neste caso, você não poderá usar a sindicação de conteúdo no seu site.</i>
 'trad_article_inexistant' => 'Não há nenhuma matéria com este número.',
 'trad_article_traduction' => 'Todas as versões desta matéria:',
 'trad_deja_traduit' => 'Erro: é impossível ligar esta matéria ao número indicado.',
-'trad_delier' => 'Desvincular esta matéria de suas traduções', # MODIF
+'trad_delier' => 'Desvincular destas traduções',
 'trad_lier' => 'Esta matéria é uma tradução da matéria número:',
-'trad_new' => 'Escrever uma nova tradução para esta matéria', # MODIF
+'trad_new' => 'Escrever uma nova tradução',
 
 // U
 'upload_fichier_zip' => 'Arquivo ZIP',

@@ -981,9 +981,9 @@ Le traduzioni sono associate all\'originale,
 'sauvegarde_url_origine' => 'Eventualmente, URL del sito di origine:',
 'statut_admin_restreint' => '(ammin parziale)',
 'syndic_choix_moderation' => 'Come comportarsi con i prossimi link provenienti da questo sito?',
-'syndic_choix_oublier' => 'Come comportarsi con i link che non compaiono pi&ugrave; nel file di syndication?',
+'syndic_choix_oublier' => 'Come comportarsi con i link che non compaiono pi&amp;ugrave; nel file di syndication?',
 'syndic_choix_resume' => 'Alcuni siti diffondono il testo completo degli articoli. Nel caso esso sia disponibile desiderate metterlo in syndication:',
-'syndic_lien_obsolete' => 'link non pi&ugrave; valido',
+'syndic_lien_obsolete' => 'link non pi&amp;ugrave; valido',
 'syndic_option_miroir' => 'bloccarli automaticamente',
 'syndic_option_oubli' => 'cancellarli (dopo @mois@ mesi)',
 'syndic_option_resume_non' => 'il contenuto completo degli articoli (in formato HTML)',
@@ -1040,7 +1040,7 @@ quando si passa con il mouse sopra al titolo.',
 'texte_compacter_avertissement' => 'Fare attenzione a non attivare queste opzioni durante la fase di sviluppo del sito: gli elementi compressi sono completamente illeggibili.',
 'texte_compacter_script_css' => 'SPIP può comprimere gli script javascript e i fogli di stile CSS, per registrarli nei file statici; ciò accelera la visualizzazione del sito.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(può essere compresso o meno)',
 'texte_compresseur_page' => 'SPIP può comprimere automaticamente tutte le pagine che invia ai
 visitatori del sito. Questa impostazione permette di ottimizzare la banda passante (il
