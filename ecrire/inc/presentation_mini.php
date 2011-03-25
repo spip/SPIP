@@ -144,7 +144,16 @@ function fin_page()
 	if ($debug) {
 		$chrono = erreur_squelette();
 	} else $chrono = '';
-	
+
+	return debut_grand_cadre(true)
+	. recuperer_fond('prive/squelettes/inclure/pied')
+	. fin_grand_cadre(true)
+	. "</div>\n" // cf. div centered ouverte dans conmmencer_page()
+	. $chrono
+	. "</body></html>\n";
+}
+
+function html_tests_js(){
 	if (_SPIP_AJAX AND !defined('_TESTER_NOSCRIPT')) {
 	  // pour le pied de page (deja defini si on est validation XML)
 		define('_TESTER_NOSCRIPT',
@@ -152,33 +161,11 @@ function fin_page()
 		        . generer_url_ecrire('test_ajax', 'js=-1')
 		        . "' width='1' height='1' alt='' /></div></noscript>\n");
 	}
-
-	return debut_grand_cadre(true)
-	. (($spip_display == 4)
-		? ("<div><a href='"
-		   . generer_action_auteur('preferer','display:2', self('&'))
-			. "'>"
-			.  _T("access_interface_graphique")
-			. "</a></div>")
-		: ("<div id='copyright'>"
-
-			. info_maj_spip()
-			. info_copyright()
-			. "<br />"
-		 	. _T('info_copyright_doc',
-				array('spipnet' => $GLOBALS['home_server']
-				      . '/' .    $GLOBALS['spip_lang']))
-			     . '</div>'))
-
-	. fin_grand_cadre(true)
-	. "</div>\n" // cf. div centered ouverte dans conmmencer_page()
-	. $GLOBALS['rejoue_session']
+	return $GLOBALS['rejoue_session']
 	. '<div style="background-image: url(\''
 	. generer_url_action('cron')
 	. '\');"></div>'
-	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '')
-	   . $chrono
-	. "</body></html>\n";
+	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '');
 }
 
 function info_maj_spip(){
