@@ -74,7 +74,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'bouton_envoi_message_02' => 'メッセージを送る',
 'bouton_envoyer_message' => '最後のメッセージ: 送る',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => '掲示板と署名機能',
+'bouton_forum_petition' => '掲示板と署名機能', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => '修正',
 'bouton_pense_bete' => '個人的なメモ',

@@ -74,7 +74,7 @@ französischen SPIP-Dokumentation</a>.',
 'bouton_envoi_message_02' => 'NACHRICHT SENDEN',
 'bouton_envoyer_message' => 'Nachricht fertig: Senden',
 'bouton_fermer' => 'Schließen',
-'bouton_forum_petition' => 'FORUM + PETITION',
+'bouton_forum_petition' => 'FORUM + PETITION', # MODIF
 'bouton_mettre_a_jour_base' => 'Datenbank updaten',
 'bouton_modifier' => 'Ändern',
 'bouton_pense_bete' => 'PERSÖNLICHER MERKZETTEL',

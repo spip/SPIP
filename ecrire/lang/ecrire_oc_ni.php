@@ -69,7 +69,7 @@ la documentacion de SPIP</a>.</p>', # MODIF
 'bouton_envoi_message_02' => 'MANDAR UN MESSATGE',
 'bouton_envoyer_message' => 'Messatge definitiu: mandar',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FÒRO &amp; PETICION',
+'bouton_forum_petition' => 'FÒRO &amp; PETICION', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'NÒTA DE RENEMBRANÇA (D\'USATGE PERSONAU)',

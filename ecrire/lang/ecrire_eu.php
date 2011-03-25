@@ -72,7 +72,7 @@ Ez balidatu inportazio galdera hau.
 'bouton_envoi_message_02' => 'MEZUBAT IGORRI',
 'bouton_envoyer_message' => 'Behin-betiko mezua: igorri',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'Foroa eta eskaera',
+'bouton_forum_petition' => 'Foroa eta eskaera', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Aldatu',
 'bouton_pense_bete' => 'OROIGARRI PERTSONALA',

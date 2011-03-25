@@ -71,7 +71,7 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'bouton_envoi_message_02' => 'KAS UR GEMENNADENN',
 'bouton_envoyer_message' => 'Kemennadenn ziwezhañ : kas',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FOROM HA SINADEG',
+'bouton_forum_petition' => 'FOROM HA SINADEG', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Kemmañ',
 'bouton_pense_bete' => 'NOTENNIG EÑVORIÑ PERSONEL',

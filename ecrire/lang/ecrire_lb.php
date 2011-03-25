@@ -70,7 +70,7 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'bouton_envoi_message_02' => 'MESSAGE SCHÉCKEN',
 'bouton_envoyer_message' => 'Definitiven Message: schécken',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM &amp; PETITIOUN',
+'bouton_forum_petition' => 'FORUM &amp; PETITIOUN', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Änneren',
 'bouton_pense_bete' => 'PERSÉINLECH NOTIZ',
