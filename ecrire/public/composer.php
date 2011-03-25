@@ -215,9 +215,18 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 		? 'html'
 		: 'php';
 
+	$skel = array(
+		'squelette' => $nom,
+		'source' => $source,
+		'process_ins' => $process_ins,
+		'invalideurs' => $cache,
+		'entetes' => $headers,
+		'duree' => isset($headers['X-Spip-Cache']) ? intval($headers['X-Spip-Cache']) : 0
+	);
+
 	// traiter #FILTRE{} et filtres
   if (is_null($filtres)) {
-	  $filtres = pipeline('declarer_filtres_squelettes',array());
+	  $filtres = pipeline('declarer_filtres_squelettes',array('args'=>$skel,'data'=>array()));
   }
 	if (count($filtres) OR (isset($headers['X-Spip-Filtre']) AND strlen($headers['X-Spip-Filtre']))) {
 		// proteger les <INCLUDE> et tous les morceaux de php
@@ -239,14 +248,10 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 		unset($headers['X-Spip-Filtre']);
 	}
 
-	return array('texte' => $corps,
-		'squelette' => $nom,
-		'source' => $source,
-		'process_ins' => $process_ins,
-		'invalideurs' => $cache,
-		'entetes' => $headers,
-		'duree' => isset($headers['X-Spip-Cache']) ? intval($headers['X-Spip-Cache']) : 0 
-	);
+	$skel['entetes'] = $headers;
+	$skel['texte'] = $corps;
+
+	return $skel;
 }
 
 
