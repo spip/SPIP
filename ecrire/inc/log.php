@@ -30,13 +30,12 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 		return;
 
 	$logfile = ($logdir===NULL ? _DIR_LOG : $logdir)
-	  . (test_espace_prive()?'prive_':'') //distinguer les logs prives et publics
 	  . ($logname)
 	  . ($logsuf===NULL ? _FILE_LOG_SUFFIX : $logsuf);
 
 	// si spip_log() dans mes_options, poser dans spip.log
 	if (!defined('_DIR_LOG'))
-		$logfile = _DIR_RACINE._NOM_TEMPORAIRES_INACCESSIBLES.(test_espace_prive()?'prive_':'').$logname.'.log';
+		$logfile = _DIR_RACINE._NOM_TEMPORAIRES_INACCESSIBLES.$logname.'.log';
 
 	$rotate = 0;
 	$pid = '(pid '.@getmypid().')';
@@ -45,6 +44,8 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	if (!is_string($message)) $message = var_export($message, true);
 
 	$m = date("M d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '
+	  //distinguer les logs prives et publics dans les grep
+		. (test_espace_prive()?':Pri:':':Pub:')
 		.preg_replace("/\n*$/", "\n", $message);
 
 
@@ -70,7 +71,7 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 
 	// Dupliquer les erreurs specifiques dans le log general
 	if ($logname !== _FILE_LOG
-	AND defined('_FILE_LOG'))
+	  AND defined('_FILE_LOG'))
 		inc_log_dist($logname=='maj' ? 'cf maj.log' : $message);
 }
 
