@@ -144,25 +144,50 @@ function spip_connect_sql($version, $ins='', $serveur='', $cont=false) {
 	exit;
 }
 
-// Fonction appelee par le fichier cree dans config/ a l'instal'.
-// Il contient un appel direct a cette fonction avec comme arguments
-// les identifants de connexion.
-// Si la connexion reussit, la globale db_ok memorise sa description.
-// C'est un tableau egalement retourne en valeur, pour les appels a l'install'
-
-// http://doc.spip.org/@spip_connect_db
+/**
+ * Fonction appelee par le fichier cree dans config/ a l'instal'.
+ * Il contient un appel direct a cette fonction avec comme arguments
+ * les identifants de connexion.
+ * Si la connexion reussit, la globale db_ok memorise sa description.
+ * C'est un tableau egalement retourne en valeur, pour les appels a l'install'
+ *
+ * http://doc.spip.org/@spip_connect_db
+ *
+ * @param string $host
+ * @param string $port
+ * @param string $login
+ * @param string $pass
+ * @param string $db
+ * @param string $type
+ * @param string $prefixe
+ * @param string $auth
+ * @return array
+ */
 function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='', $auth='') {
 	global $db_ok;
 
-	## TODO : mieux differencier les serveurs
-	$f = _DIR_TMP . $type . 'out';
+	// temps avant nouvelle tentative de connexion
+	// suite a une connection echouee
+	if (!defined('_CONNECT_RETRY_DELAY'))
+		define('_CONNECT_RETRY_DELAY',30);
 
-	if (@file_exists($f)
-	AND (time() - @filemtime($f) < 30)
-	AND !defined('_ECRIRE_INSTALL')) {
+	$f = "";
+	// un fichier de identifiant par combinaison (type,host,port,db)
+	// pour ne pas declarer tout indisponible d'un coup
+	// si en cours d'installation ou si db=@test@ on ne pose rien
+	// car c'est un test de connexion
+	if (!defined('_ECRIRE_INSTALL') AND !$db=="@test@")
+		$f = _DIR_TMP . $type . '.' . substr(md5($host.$port.$db),0,8) . '.out';
+	elseif ($db=='@test@')
+		$db = '';
+
+	if ($f
+		AND @file_exists($f)
+	  AND (time() - @filemtime($f) < _CONNECT_RETRY_DELAY)) {
 		spip_log( "Echec : $f recent. Pas de tentative de connexion", _LOG_HS);
 		return;
 	}
+
 	if (!$prefixe)
 		$prefixe = isset($GLOBALS['table_prefix'])
 		? $GLOBALS['table_prefix'] : $db;
@@ -183,7 +208,7 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 		return $db_ok = $g;
 	}
 	// En cas d'indisponibilite du serveur, eviter de le bombarder
-	if (!defined('_ECRIRE_INSTALL')) {
+	if ($f) {
 		@touch($f);
 		spip_log( "Echec connexion serveur $type : host[$host] port[$port] login[$login] base[$db]", $type.'.'._LOG_HS);
 	}
