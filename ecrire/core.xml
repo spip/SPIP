@@ -147,7 +147,7 @@
 	</bouton>
 
 	<onglet id='infos_perso' parent="infos_perso">
-		<icone>images/infos_perso-24.png</icone>
+		<icone>images/information-perso-24.png</icone>
 		<titre>icone_mes_infos</titre>
 	</onglet>
 	<onglet id='configurer_langage' parent="infos_perso">

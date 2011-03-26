@@ -159,8 +159,6 @@ ecrire/install/etape_ldap2.php -text
 ecrire/install/etape_ldap3.php -text
 ecrire/install/etape_ldap4.php -text
 ecrire/install/etape_ldap5.php -text
-ecrire/install/etape_sup1.php -text
-ecrire/install/etape_sup2.php -text
 ecrire/install/index.php -text
 ecrire/iterateur/condition.php -text
 ecrire/iterateur/data.php -text
@@ -318,6 +316,10 @@ prive/formulaires/dater.php -text
 prive/formulaires/dateur/inc-dateur.html -text
 prive/formulaires/dateur/jquery.time_picker.js -text
 prive/formulaires/dateur/time_picker.css -text
+prive/formulaires/declarer_bases.html -text
+prive/formulaires/declarer_bases.php -text
+prive/formulaires/declarer_bases_2.html -text
+prive/formulaires/declarer_bases_3.html -text
 prive/formulaires/editer_article.html -text
 prive/formulaires/editer_article.php -text
 prive/formulaires/editer_auteur.html -text
@@ -780,8 +782,6 @@ prive/squelettes/hierarchie/auteur.html -text
 prive/squelettes/hierarchie/auteur_edit.html -text
 prive/squelettes/hierarchie/dist.html -text
 prive/squelettes/inclure/accueil-information.html -text
-prive/squelettes/inclure/admin_autres_bases.html -text
-prive/squelettes/inclure/admin_autres_bases_fonctions.php -text
 prive/squelettes/inclure/admin_vider_cache.html -text
 prive/squelettes/inclure/admin_vider_cache_fonctions.php -text
 prive/squelettes/inclure/admin_vider_images.html -text
