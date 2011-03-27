@@ -90,140 +90,34 @@ function fin_cadre($style='') {
 }
 
 
-// http://doc.spip.org/@debut_cadre_relief
-function debut_cadre_relief($icone='', $return = false, $fonction='', $titre = '', $id="", $class=""){
-	$retour_aff = debut_cadre('r', $icone, $fonction, $titre, $id, $class);
+function debut_cadre_relief($icone='', $dummy='', $fonction='', $titre = '', $id="", $class=""){return debut_cadre('r', $icone, $fonction, $titre, $id, $class);}
+function fin_cadre_relief(){return fin_cadre('r');}
+function debut_cadre_enfonce($icone='', $dummy='', $fonction='', $titre = '', $id="", $class=""){return debut_cadre('e', $icone, $fonction, $titre, $id, $class);}
+function fin_cadre_enfonce(){return fin_cadre('e');}
+function debut_cadre_sous_rub($icone='', $dummy='', $fonction='', $titre = '', $id="", $class=""){return debut_cadre('sous_rub', $icone, $fonction, $titre, $id, $class);}
+function fin_cadre_sous_rub(){return fin_cadre('sous_rub');}
+function debut_cadre_couleur($icone='', $dummy='', $fonction='', $titre='', $id="", $class=""){return debut_cadre('couleur', $icone, $fonction, $titre, $id, $class);}
+function fin_cadre_couleur(){return fin_cadre('couleur');}
+function debut_cadre_couleur_foncee($icone='', $dummy='', $fonction='', $titre='', $id="", $class=""){return debut_cadre('couleur-foncee', $icone, $fonction, $titre, $id, $class);}
+function fin_cadre_couleur_foncee(){return fin_cadre('couleur-foncee');}
+function debut_cadre_trait_couleur($icone='', $dummy='', $fonction='', $titre='', $id="", $class=""){return debut_cadre('trait-couleur', $icone, $fonction, $titre, $id, $class);}
+function fin_cadre_trait_couleur(){return fin_cadre('trait-couleur');}
+function debut_boite_alerte() {return debut_cadre('alerte', '', '', '', '', '');}
+function fin_boite_alerte() {return fin_cadre('alerte');}
+function debut_boite_info() {return debut_cadre('info', '', '', '', '', '');}
+function fin_boite_info($return=false) {return fin_cadre('info');}
 
-	if ($return) return $retour_aff; else echo($retour_aff);
-}
+// http://doc.spip.org/@gros_titre
+function gros_titre($titre, $ze_logo=''){return "<h1 class='grostitre'>" . $ze_logo.' ' . typo($titre)."</h1>\n";}
 
-// http://doc.spip.org/@fin_cadre_relief
-function fin_cadre_relief($return = false){
-	$retour_aff = fin_cadre('r');
-
-	if ($return) return $retour_aff; else echo($retour_aff);
-}
-
-
-// http://doc.spip.org/@debut_cadre_enfonce
-function debut_cadre_enfonce($icone='', $return = false, $fonction='', $titre = '', $id="", $class=""){
-	$retour_aff = debut_cadre('e', $icone, $fonction, $titre, $id, $class);
-
-	if ($return) return $retour_aff; else echo($retour_aff);
-}
-
-// http://doc.spip.org/@fin_cadre_enfonce
-function fin_cadre_enfonce($return = false){
-
-	$retour_aff = fin_cadre('e');
-
-	if ($return) return $retour_aff; else echo_log('fin_cadre_enfonce',$retour_aff);
-}
-
-
-// http://doc.spip.org/@debut_cadre_sous_rub
-function debut_cadre_sous_rub($icone='', $return = false, $fonction='', $titre = '', $id="", $class=""){
-	$retour_aff = debut_cadre('sous_rub', $icone, $fonction, $titre, $id, $class);
-	if ($return) return $retour_aff; else echo_log('debut_cadre_sous_rub',$retour_aff);
-}
-
-// http://doc.spip.org/@fin_cadre_sous_rub
-function fin_cadre_sous_rub($return = false){
-	$retour_aff = fin_cadre('sous_rub');
-	if ($return) return $retour_aff; else echo_log('fin_cadre_sous_rub',$retour_aff);
-}
-
-// http://doc.spip.org/@debut_cadre_couleur
-function debut_cadre_couleur($icone='', $return = false, $fonction='', $titre='', $id="", $class=""){
-	$retour_aff = debut_cadre('couleur', $icone, $fonction, $titre, $id, $class);
-
-	if ($return) return $retour_aff; else echo_log('debut_cadre_couleur',$retour_aff);
-}
-
-// http://doc.spip.org/@fin_cadre_couleur
-function fin_cadre_couleur($return = false){
-	$retour_aff = fin_cadre('couleur');
-
-	if ($return) return $retour_aff; else echo_log('fin_cadre_couleur',$retour_aff);
-}
-
-
-// http://doc.spip.org/@debut_cadre_couleur_foncee
-function debut_cadre_couleur_foncee($icone='', $return = false, $fonction='', $titre='', $id="", $class=""){
-	$retour_aff = debut_cadre('couleur-foncee', $icone, $fonction, $titre, $id, $class);
-
-	if ($return) return $retour_aff; else echo_log('debut_cadre_couleur_foncee',$retour_aff);
-}
-
-// http://doc.spip.org/@fin_cadre_couleur_foncee
-function fin_cadre_couleur_foncee($return = false){
-	$retour_aff = fin_cadre('couleur-foncee');
-
-	if ($return) return $retour_aff; else echo_log('fin_cadre_couleur_foncee',$retour_aff);
-}
-
-// http://doc.spip.org/@debut_cadre_trait_couleur
-function debut_cadre_trait_couleur($icone='', $return = false, $fonction='', $titre='', $id="", $class=""){
-	$retour_aff = debut_cadre('trait-couleur', $icone, $fonction, $titre, $id, $class);
-	if ($return) return $retour_aff; else echo_log('debut_cadre_trait_couleur',$retour_aff);
-}
-
-// http://doc.spip.org/@fin_cadre_trait_couleur
-function fin_cadre_trait_couleur($return = false){
-	$retour_aff = fin_cadre('trait-couleur');
-
-	if ($return) return $retour_aff; else echo_log('fin_cadre_trait_couleur',$retour_aff);
-}
-
-
-//
-// une boite alerte
-//
-// http://doc.spip.org/@debut_boite_alerte
-function debut_boite_alerte() {
-	return debut_cadre('alerte', '', '', '', '', '');
-}
-
-// http://doc.spip.org/@fin_boite_alerte
-function fin_boite_alerte() {
-	return fin_cadre('alerte');
-}
-
-
-//
-// une boite info
-//
-// http://doc.spip.org/@debut_boite_info
-function debut_boite_info($return=false) {
-	$r = debut_cadre('info', '', '', '', '', 'verdana1');
-	if ($return) return $r; else echo_log('debut_boite_info',$r);
-}
-
-// http://doc.spip.org/@fin_boite_info
-function fin_boite_info($return=false) {
-	$r = fin_cadre('info');
-	if ($return) return $r; else echo_log('fin_boite_info',$r);
-}
-
-
-//
 // La boite des raccourcis
 // Se place a droite si l'ecran est en mode panoramique.
-
 // http://doc.spip.org/@bloc_des_raccourcis
 function bloc_des_raccourcis($bloc) {
-	global $spip_display;
-
-	return creer_colonne_droite('',true)
-	. debut_cadre_enfonce('',true)
-	. (($spip_display != 4)
-	     ? ("\n<div style='font-size: x-small' class='verdana1'><b>"
-		._T('titre_cadre_raccourcis')
-		."</b>")
-	       : ( "<h3>"._T('titre_cadre_raccourcis')."</h3><ul>"))
+	return creer_colonne_droite()
+	. debut_cadre_enfonce('','','',"<h3>"._T('titre_cadre_raccourcis')."</h3>")
 	. $bloc
-	. (($spip_display != 4) ? "</div>" :  "</ul>")
-	. fin_cadre_enfonce(true);
+	. fin_cadre_enfonce();
 }
 
 // Afficher un petit "+" pour lien vers autre page
@@ -248,60 +142,6 @@ function afficher_plus($lien) {
 function afficher_objets($type, $titre_table,$requete,$formater='',$force=false){
 	$afficher_objets = charger_fonction('afficher_objets','inc');
 	return $afficher_objets($type, $titre_table,$requete,$formater,$force);
-}
-
-// http://doc.spip.org/@navigation_pagination
-function navigation_pagination($num_rows, $nb_aff=10, $href=null, $debut, $tmp_var=null, $on='') {
-
-	$texte = '';
-	$self = parametre_url(self(), 'date', '');
-	$deb_aff = intval($debut);
-
-	for ($i = 0; $i < $num_rows; $i += $nb_aff){
-		$deb = $i + 1;
-
-		// Pagination : si on est trop loin, on met des '...'
-		if (abs($deb-$deb_aff)>101) {
-			if ($deb<$deb_aff) {
-				if (!isset($premiere)) {
-					$premiere = '0 ... ';
-					$texte .= $premiere;
-				}
-			} else {
-				$derniere = ' | ... '.$num_rows;
-				$texte .= $derniere;
-				break;
-			}
-		} else {
-
-			$fin = $i + $nb_aff;
-			if ($fin > $num_rows)
-				$fin = $num_rows;
-
-			if ($deb > 1)
-				$texte .= " |\n";
-			if ($deb_aff + 1 >= $deb AND $deb_aff + 1 <= $fin) {
-				$texte .= "<b>$deb</b>";
-			}
-			else {
-				$script = parametre_url($self, $tmp_var, $deb-1);
-				if ($on) $on = generer_onclic_ajax($href, $tmp_var, $deb-1);
-				$texte .= "<a href=\"$script\"$on>$deb</a>";
-			}
-		}
-	}
-
-	return $texte;
-}
-
-// http://doc.spip.org/@generer_onclic_ajax
-function generer_onclic_ajax($url, $idom, $val)
-{
-	return "\nonclick=\"return charger_id_url('"
-	  . parametre_url($url, $idom, $val)
-	  . "','"
-	  . $idom
-	  . '\');"';
 }
 
 // Fonctions onglets
@@ -372,74 +212,5 @@ function icone_horizontale($texte, $lien, $fond, $fonction="", $dummy="", $javas
 	$retour = icone_base($lien, $texte, $fond, $fonction,"horizontale",$javascript);
 	return $retour;
 }
-
-
-// http://doc.spip.org/@gros_titre
-function gros_titre($titre, $ze_logo='', $aff=true){
-	global $spip_display;
-	$res = "\n<h1 class='grostitre'>";
-	if ($spip_display != 4) {
-		$res .= $ze_logo.' ';
-	}
-	$res .= typo($titre)."</h1>\n";
-	if ($aff) echo_log('gros_titre',$res); else return $res;
-}
-
-
-
-// Cadre formulaires
-
-// http://doc.spip.org/@debut_cadre_formulaire
-function debut_cadre_formulaire($style='', $return=false){
-	$x = "\n<div class='cadre-formulaire'" .
-	  (!$style ? "" : " style='$style'") .
-	   ">";
-	if ($return) return  $x; else echo_log('debut_cadre_formulaire',$x);
-}
-
-// http://doc.spip.org/@fin_cadre_formulaire
-function fin_cadre_formulaire($return=false){
-	if ($return) return  "</div>\n"; else echo_log('fin_cadre_formulaire', "</div>\n");
-}
-
-
-//
-// Afficher la hierarchie des rubriques
-//
-
-// http://doc.spip.org/@afficher_hierarchie
-function afficher_hierarchie($id_parent, $editable=true,$id_objet=0,$type='',$id_secteur=0,$restreint='') {
-	$out = recuperer_fond('prive/squelettes/hierarchie/objet',
-					array(
-						'id_parent'=>$id_parent,
-						'objet'=>$type,
-						'id_objet'=>$id_objet,
-						'deplacer'=>_request('deplacer')?'oui':'',
-						'id_secteur'=>$id_secteur,
-						'restreint'=>$restreint,
-						'editable'=>$editable?' ':'',
-					),array('ajax'=>true));
-	$out = pipeline('affiche_hierarchie',array('args'=>array(
-			'id_parent'=>$id_parent,
-			'message'=>$message,
-			'id_objet'=>$id_objet,
-			'objet'=>$type,
-			'id_secteur'=>$id_secteur,
-			'restreint'=>$restreint,
-			'editable'=>$editable?' ':'',
-			),
-			'data'=>$out));
-
- 	return $out;
-}
-
-// Pour construire des menu avec SELECTED
-// http://doc.spip.org/@mySel
-function mySel($varaut,$variable, $option = NULL) {
-	$res = ' value="'.$varaut.'"' . (($variable==$varaut) ? ' selected="selected"' : '');
-
-	return  (!isset($option) ? $res : "<option$res>$option</option>\n");
-}
-
 
 ?>

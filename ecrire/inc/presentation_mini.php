@@ -20,89 +20,36 @@ function echo_log($f, $ret) {
 		. $ret;
 }
 
-
-//
 // Cadre centre (haut de page)
-//
-
 // http://doc.spip.org/@debut_grand_cadre
-function debut_grand_cadre($return=false){
-	$res =  "\n<div class='table_page'>\n";
-	if ($return) return $res; else echo_log('debut_grand_cadre',$res);
-}
-
+function debut_grand_cadre(){	return "\n<div class='table_page'>\n";}
 // http://doc.spip.org/@fin_grand_cadre
-function fin_grand_cadre($return=false){
-	$res = "\n</div>";
-	if ($return) return $res; else echo_log('fin_grand_cadre',$res);
-}
+function fin_grand_cadre(){	return "\n</div>";}
 
-//
 // Debut de la colonne de gauche
-//
-
+// div navigation fermee par creer_colonne_droite qui ouvre
+// div extra lui-meme ferme par debut_droite qui ouvre
+// div contenu lui-meme ferme par fin_gauche() ainsi que
+// div conteneur
 // http://doc.spip.org/@debut_gauche
-function debut_gauche($rubrique = "accueil", $return=false) {
-	global $spip_display;
-	global $spip_ecran, $spip_lang_rtl, $spip_lang_left;
-
-	// div navigation fermee par creer_colonne_droite qui ouvre
-	// div extra lui-meme ferme par debut_droite qui ouvre
-	// div contenu lui-meme ferme par fin_gauche() ainsi que
-	// div conteneur
-
-	$res = "<div id='conteneur' class='".(_INTERFACE_ONGLETS ? "onglets" : "no_onglets")  ."'>
-		\n<div id='navigation'>\n";
-
-	if ($spip_display == 4) $res .= "<!-- ";
-
-	if ($return) return $res; else echo_log('debut_gauche',$res);
-}
-
+function debut_gauche() {	return "<div id='conteneur' class=''>\n<div id='navigation'>\n";}
 // http://doc.spip.org/@fin_gauche
-function fin_gauche()
-{
-	return "</div></div><br class='nettoyeur' />";
-}
-
-//
-// Presentation de l''interface privee, marge de droite
-//
-
+function fin_gauche(){return "</div></div><br class='nettoyeur' />";}
 // http://doc.spip.org/@creer_colonne_droite
-function creer_colonne_droite($rubrique="", $return= false){
+function creer_colonne_droite(){
 	static $deja_colonne_droite;
-	global $spip_ecran, $spip_lang_rtl, $spip_lang_left;
-
-	if ((!($spip_ecran == "large")) OR $deja_colonne_droite) return '';
+	if ($deja_colonne_droite) return '';
 	$deja_colonne_droite = true;
-
-	$res = "\n</div><div id='extra'>";
-
-	if ($return) return $res; else echo_log('creer_colonne_droite',$res);
+	return "\n</div><div id='extra'>";
 }
-
 // http://doc.spip.org/@debut_droite
-function debut_droite($rubrique="", $return= false) {
+function debut_droite($rubrique="") {
 	global $spip_ecran, $spip_display, $spip_lang_left;
 
-	$res = '';
-
-	if ($spip_display == 4) $res .= " -->";
-
-	$res .= liste_objets_bloques(_request('exec'));
-
-	$res .= creer_colonne_droite($rubrique, true)
-	. "</div>";
-
-	$res .= "\n<div id='contenu'>";
-
-	// touche d'acces rapide au debut du contenu : z
-	// Attention avant c'etait 's' mais c'est incompatible avec
-	// le ctrl-s qui fait "enregistrer"
-	$res .= "\n<a id='saut' href='#saut' accesskey='z'></a>\n";
-
-	if ($return) return $res; else echo_log('debut_droite',$res);
+	return liste_objets_bloques(_request('exec'))
+	  . creer_colonne_droite()
+	  . "</div>"
+	  . "\n<div id='contenu'>";
 }
 
 // http://doc.spip.org/@liste_articles_bloques
@@ -129,27 +76,17 @@ function liste_objets_bloques($exec,$contexte=array(),$auteur=null){
 	return $res;
 }
 
-//
 // Fin de page de l'interface privee.
 // Elle comporte une image invisible declenchant une tache de fond
-
 // http://doc.spip.org/@fin_page
-function fin_page()
-{
-	global $spip_display, $tableau_des_temps;
-
-	$debug = ((_request('exec') !== 'valider_xml')  AND ((_request('var_mode') == 'debug') OR $tableau_des_temps AND isset($_COOKIE['spip_admin'])));
-
+function fin_page(){
 	// avec &var_profile=1 on a le tableau de mesures SQL
-	if ($debug) {
-		$chrono = erreur_squelette();
-	} else $chrono = '';
-
-	return debut_grand_cadre(true)
+	$debug = ((_request('exec') !== 'valider_xml')  AND ((_request('var_mode') == 'debug') OR $GLOBALS['tableau_des_temps'] AND isset($_COOKIE['spip_admin'])));
+	return '<div id="pied">'
 	. recuperer_fond('prive/squelettes/inclure/pied')
-	. fin_grand_cadre(true)
-	. "</div>\n" // cf. div centered ouverte dans conmmencer_page()
-	. $chrono
+	. "</div>"
+	. "</div></div>" // cf. div#page et div.largeur ouvertes dans conmmencer_page()
+	. ($debug?erreur_squelette():'')
 	. "</body></html>\n";
 }
 
