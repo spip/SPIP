@@ -38,7 +38,7 @@ function fin_gauche(){return "</div></div><br class='nettoyeur' />";}
 // http://doc.spip.org/@creer_colonne_droite
 function creer_colonne_droite(){
 	static $deja_colonne_droite;
-	if ($deja_colonne_droite) return '';
+	if ($GLOBALS['spip_ecran']!='large' OR $deja_colonne_droite) return '';
 	$deja_colonne_droite = true;
 	return "\n</div><div id='extra'>";
 }
