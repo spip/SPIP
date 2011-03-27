@@ -145,46 +145,18 @@ function afficher_objets($type, $titre_table,$requete,$formater='',$force=false)
 }
 
 // Fonctions onglets
-
-
 // http://doc.spip.org/@debut_onglet
-function debut_onglet(){
-
-	return "
-\n<div style='padding: 7px;'><table border='0' class='centered'><tr>
-";
-}
-
+function debut_onglet(){return "<div class='barre_onglet'><ul class='clearfix'>\n";}
 // http://doc.spip.org/@fin_onglet
-function fin_onglet(){
-	return "</tr></table></div>\n";
-}
-
+function fin_onglet(){return "</ul></div>\n";}
 // http://doc.spip.org/@onglet
 function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	global $spip_display, $spip_lang_left ;
 
-	$res = "<td>";
-	$res .= "\n<div style='position: relative;'>";
-	if ($spip_display != 1) {
-		if (strlen($icone) > 0) {
-			$res .= "\n<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'>" .
-			  http_img_pack("$icone", "", "") . "</div>";
-			$style = " top: 7px; padding-$spip_lang_left: 32px; z-index: 1;";
-		} else {
-			$style = " top: 7px;";
-		}
-	}
-
-	if ($onglet != $onglet_ref) {
-		$res .= "\n<div onmouseover=\"changeclass(this, 'onglet_on');\" onmouseout=\"changeclass(this, 'onglet');\" class='onglet' style='position: relative;$style'><a href='$lien'>$texte</a></div>";
-		$res .= "</div>";
-	} else {
-		$res .= "\n<div class='onglet_off' style='position: relative;$style'>$texte</div>";
-		$res .= "</div>";
-	}
-	$res .= "</td>";
-	return $res;
+	return "<li class='box_onglet'>"
+	 . ($icone?http_img_pack($icone, '', " class='cadre-icone'"):'')
+	 . lien_ou_expose($lien,$texte,$onglet == $onglet_ref)
+	 . "</li>";
 }
 
 // http://doc.spip.org/@icone_inline
