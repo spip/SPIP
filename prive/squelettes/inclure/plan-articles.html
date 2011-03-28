@@ -6,7 +6,7 @@
 <ul class="menu articles">
 	<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}{statut IN #SESSION{statut}|statuts_articles_visibles}{pagination #GET{nb} #GET{nomp}}{lang_select=non}>
 		<li><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
-						title="[(#VAL{article}|objet_info{texte_objet}|_T) #ID_ARTICLE]">[(#STATUT|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]</a></li>
+						title="[(#VAL{article}|objet_info{texte_objet}|_T) #ID_ARTICLE]">[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]</a></li>
 	</BOUCLE_articles>
 </ul>
 [<p class="pagination">[<em>(#VAL{article}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
