@@ -119,7 +119,7 @@ function definir_puce() {
 
 if (!defined('_BALISES_BLOCS')) define('_BALISES_BLOCS',
 	'p|div|pre|ul|ol|li|blockquote|h[1-6r]|'
-	.'t(able|[rdh]|body|foot|extarea)|'
+	.'t(able|[rdh]|head|body|foot|extarea)|'
 	.'form|object|center|marquee|address|'
 	.'applet|iframe|'
 	.'d[ltd]|script|noscript|map|button|fieldset|style');
@@ -873,7 +873,7 @@ function paragrapher($letexte, $forcer=true) {
 
 		// Fermer les paragraphes (y compris sur "STOP P")
 		$letexte = preg_replace(',(<p\s.*)(</?(STOP P|'._BALISES_BLOCS.')[>[:space:]]),UimsS',
-			"\n\\1</p>\n\\2", $letexte);
+			"\\1</p>\n\\2", $letexte);
 
 		// Supprimer les marqueurs "STOP P"
 		$letexte = str_replace('<STOP P>', '', $letexte);
@@ -888,7 +888,7 @@ function paragrapher($letexte, $forcer=true) {
 			$letexte);
 
 		// Renommer les paragraphes normaux
-		$letexte = str_replace('<p >', "<p$class_spip>",
+		$letexte = str_replace('<p >', "\n<p$class_spip>",
 			$letexte);
 	}
 
