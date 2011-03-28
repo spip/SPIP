@@ -767,6 +767,7 @@ prive/squelettes/contenu/configurer_multilang.html -text
 prive/squelettes/contenu/configurer_preferences.html -text
 prive/squelettes/contenu/infos_perso.html -text
 prive/squelettes/contenu/navigation.html -text
+prive/squelettes/contenu/plan.html -text
 prive/squelettes/contenu/recherche.html -text
 prive/squelettes/contenu/recherche_fonctions.php -text
 prive/squelettes/contenu/rubrique.html -text
@@ -791,6 +792,10 @@ prive/squelettes/inclure/barre-nav_fonctions.php -text
 prive/squelettes/inclure/configurer.html -text
 prive/squelettes/inclure/head.html -text
 prive/squelettes/inclure/pied.html -text
+prive/squelettes/inclure/plan-articles.html -text
+prive/squelettes/inclure/plan-breves.html -text
+prive/squelettes/inclure/plan-rubriques.html -text
+prive/squelettes/inclure/plan-sites.html -text
 prive/squelettes/navigation/accueil.html -text
 prive/squelettes/navigation/admin_tech.html -text
 prive/squelettes/navigation/article.html -text
