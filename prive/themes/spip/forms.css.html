@@ -177,7 +177,7 @@
 	font-size:11px;
 	line-height: 1.4em;
 	padding:0;
-	clear:both;
+	/*clear:both;*/ /* provoque la disparition du margin-top dans XPIE8 */
 
 	border: 1px solid #GET{foncee};
 	color: #333;
@@ -646,6 +646,7 @@ h3.titrem {position:relative;}
 .formulaire_spip.formulaire_recherche { float: [(#GET{right})]; border:0;background:none;border: 1px solid #fff; background-color: [#(#GET{foncee}|couleur_foncer)]; margin: 0 0 6px;position:relative;}
 #colorbox .formulaire_spip.formulaire_recherche {z-index:1} /* focus dans la mediabox */
 .formulaire_spip.formulaire_recherche .text{ float:[(#GET{left})];padding:3px;width: 200px;background-color:#GET{foncee};border:none;border-right:1px solid #fff;font-size: 10px; color: #fff;  margin:0;min-height:20px;}
+.lte8 .formulaire_spip.formulaire_recherche .text {min-height:14px} /* IE<=8 ne supporte pas -ms-box-sizing:border-box; */
 .formulaire_spip.formulaire_recherche .text.cancelable {padding-#GET{left}:20px}
 .formulaire_spip.formulaire_recherche .text::-webkit-input-placeholder { color:#eee; }
 .formulaire_spip.formulaire_recherche .text:-moz-placeholder { color:#eee; }
