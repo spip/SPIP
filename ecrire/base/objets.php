@@ -420,10 +420,13 @@ function table_objet_sql($type,$serveur='') {
 	include_spip('public/interfaces');
 	if (isset($table_des_tables[$nom])) {
 		$nom = $table_des_tables[$nom];
+		$nom = "spip_$nom";
 	}
-	$infos_tables = lister_tables_objets_sql();
-	if (isset($infos_tables["spip_$nom"]))
-		return "spip_$nom";
+	else {
+		$infos_tables = lister_tables_objets_sql();
+		if (isset($infos_tables["spip_$nom"]))
+			$nom = "spip_$nom";
+	}
 
 	return $nom ;
 }
@@ -435,7 +438,12 @@ function id_table_objet($type,$serveur='') {
 	$t = table_objet($type);
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($t,$serveur);
-	return isset($desc['key']["PRIMARY KEY"])?$desc['key']["PRIMARY KEY"]:"id_$type";
+	if (isset($desc['key']['PRIMARY KEY']))
+		return $desc['key']['PRIMARY KEY'];
+	if (!$desc OR isset($desc['field']["id_$type"]))
+		return "id_$type";
+	// sinon renvoyer le premier champ de la table...
+	return array_shift(array_keys($desc['field']));
 }
 
 // http://doc.spip.org/@objet_type

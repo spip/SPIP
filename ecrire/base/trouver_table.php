@@ -118,11 +118,6 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 				$desc = $fdesc;
 			}
 		}
-		// S'il n'y a pas de key (cas d'une VIEW),
-		// on va inventer une PRIMARY KEY en prenant le premier champ
-		// de la table
-		if (!$desc['key'])
-			$desc['key']['PRIMARY KEY'] = array_shift(array_keys($desc['field']));
 
 		$desc['table']= $nom_sql;
 		$desc['connexion']= $serveur;
