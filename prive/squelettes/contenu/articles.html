@@ -1,0 +1,20 @@
+<h1><:titre_page_articles_page:></h1>
+<div class='onglets_simple clearfix'>
+	<ul>
+		<li>[(#SELF|parametre_url{id_auteur,''}|lien_ou_expose{<:info_articles_tous:>,[(#ENV{id_auteur,''}|non)],ajax})]</li>
+		<li>[(#SELF|parametre_url{id_auteur,#SESSION{id_auteur}}|lien_ou_expose{<:info_articles_miens:>,#ENV{id_auteur,''}|=={#SESSION{id_auteur}},ajax})]</li>
+	</ul>
+</div>
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+#SET{statuts,#SESSION{statut}|statuts_articles_visibles}
+[(#ENV{id_auteur,''}|=={#SESSION{id_auteur}}|oui)
+	#SET{statuts,#GET{statuts}|array_merge{#LISTE{prepa}}}
+]
+<INCLURE{fond=prive/objets/liste/articles,statut=#GET{status},par=date,id_auteur=#ENV{id_auteur,''},nb=30,env,ajax}>
+
+[(#AUTORISER{creer,article})
+	[(#URL_ECRIRE{article_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique}}|icone_verticale{<:icone_ecrire_article:>,article,new,right})]
+]

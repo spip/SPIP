@@ -24,17 +24,16 @@
 		<titre>info_rubriques</titre>		
 		<url>rubriques</url>
 	</bouton>
+	<bouton id='articles' parent="bando_edition">
+		<icone>images/article-16.png</icone>
+		<titre>info_articles_2</titre>
+	</bouton>
 
 	<bouton id="bando_publication">
 		<icone>images/publication-48.png</icone>
 		<titre>icone_publication</titre>
 		<url>navigation</url>
 		<args>menu=bando_publication</args>
-	</bouton>
-	<bouton id='mesarticles' parent="bando_publication">
-		<icone>images/article-16.png</icone>
-		<titre>icone_tous_articles</titre>		
-		<url>mes_articles</url>
 	</bouton>
 	<bouton id='suivi_edito' parent="bando_publication">
 		<icone>images/suivi-16.png</icone>
