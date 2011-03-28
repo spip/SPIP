@@ -18,19 +18,15 @@ include_spip('inc/presentation');
 
 // http://doc.spip.org/@enfant_rub
 function enfant_rub($collection){
-	global $spip_display, $spip_lang_right, $spip_lang;
-
-	$voir_logo = ($spip_display != 1 AND isset($GLOBALS['meta']['image_process']) AND $GLOBALS['meta']['image_process'] != "non");
+	$voir_logo = (isset($GLOBALS['meta']['image_process']) AND $GLOBALS['meta']['image_process'] != "non");
+	$logo = "";
 
 	if ($voir_logo) {
-		$voir_logo = "float: $spip_lang_right; margin-$spip_lang_right: 0px; margin-top: 0px;";
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	} else $logo ='';
+	}
 
 	$res = "";
-
 	$result = sql_select("id_rubrique, id_parent, titre, descriptif, lang ", "spip_rubriques", "id_parent=$collection",'', '0+titre,titre');
-
 	while($row=sql_fetch($result)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
@@ -50,44 +46,35 @@ function enfant_rub($collection){
 					include_spip('inc/filtres_images_mini');
 					$logo = image_reduire("<img src='$fid' alt='' />", 48, 36);
 					if ($logo)
-						$logo =  "\n<div style='$voir_logo'>$logo</div>";
+						$logo =  inserer_attribut($logo,'class','logo');
 				}
 			}
 
 			$lib_bouton = (!acces_restreint_rubrique($id_rubrique) ? "" :
 			   http_img_pack(chemin_image('auteur-0minirezo-16.png'), '', " width='16' height='16'", _T('image_administrer_rubrique'))) .
-			  " <span dir='$lang_dir'><a href='" .
+			  " <a dir='$lang_dir' href='" .
 			  generer_url_entite($id_rubrique,'rubrique') .
 			  "'>".
 			  typo($titre) .
-			  "</a></span>";
+			  "</a>";
 
 			  $titre = (is_string($logo) ? $logo : '') .
 				  bouton_block_depliable($lib_bouton,$les_sous_enfants ?false:-1,"enfants$id_rubrique");
 
-			$les_enfants = "\n<div class='enfants'>" .
+			$res[] =
 			  debut_cadre_sous_rub(($id_parent ? "rubrique-24.png" : "secteur-24.png"), true, "", $titre) .
-			  (!$descriptif ? '' : "\n<div class='verdana1'>$descriptif</div>") .
-			  (($spip_display == 4) ? '' : $les_sous_enfants) .
-			  "\n<div style='clear:both;'></div>"  .
-			  fin_cadre_sous_rub(true) .
-			  "</div>";
-
-			$res .= ($spip_display != 4)
-			? $les_enfants
-			: "\n<li>$les_enfants</li>";
+			  (!$descriptif ? '' : "\n<div class='descriptif'>$descriptif</div>") .
+			  $les_sous_enfants .
+			  fin_cadre_sous_rub(true);
 		}
 	}
 
-	changer_typo($spip_lang); # remettre la typo de l'interface pour la suite
-	return (($spip_display == 4) ? "\n<ul>$res</ul>\n" :  $res);
-
+	changer_typo($GLOBALS['spip_lang']); # remettre la typo de l'interface pour la suite
+	return $res;
 }
 
 // http://doc.spip.org/@sous_enfant_rub
 function sous_enfant_rub($collection2){
-	global $spip_lang_left;
-
 	$result3 =  sql_select("id_rubrique, id_parent, titre, lang", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre');
 
 	$retour = '';
@@ -98,35 +85,32 @@ function sous_enfant_rub($collection2){
 		changer_typo($row['lang']);
 		$lang_dir = lang_dir($row['lang']);
 		if (autoriser('voir','rubrique',$id_rubrique2))
-			$retour.="\n<li class='arial11 rubrique_12' dir='$lang_dir'><a href='" . generer_url_entite($id_rubrique2,'rubrique') . "'>".typo($titre2)."</a></li>\n";
+			$retour.="\n<li class='item' dir='$lang_dir'><a href='" . generer_url_entite($id_rubrique2,'rubrique') . "'>".typo($titre2)."</a></li>\n";
 	}
 
 	if (!$retour) return '';
 
 	return debut_block_depliable(false,"enfants$collection2")
-	."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n"
+	."\n<ul class='liste-items sous-sous-rub'>\n"
 	. $retour
-	. "</ul>\n\n".fin_block()."\n\n";
+	. "</ul>\n".fin_block()."\n\n";
 }
 
 // http://doc.spip.org/@afficher_enfant_rub
 function afficher_enfant_rub($id_rubrique=0) {
-	global  $spip_display;
-
 	$les_enfants = enfant_rub($id_rubrique);
-	$n = strlen(trim($les_enfants));
+	$n = count($les_enfants);
 
 	if (!$n) return "";
 
-	if (!($x = strpos($les_enfants,"\n<div class='enfants'>",round($n/2)))) {
+	if ($n==1) {
+		$les_enfants=reset($les_enfants);
 		$les_enfants2="";
-	}else{
-		$les_enfants2 = substr($les_enfants, $x);
-		$les_enfants = substr($les_enfants,0,$x);
-		if ($spip_display == 4) {
-		  $les_enfants .= '</li></ul>';
-		  $les_enfants2 = '<ul><li>' . $les_enfants2;
-		}
+	}
+	else{
+		$n = ceil($n/2);
+		$les_enfants2 = implode('',array_slice($les_enfants,$n));
+		$les_enfants = implode('',array_slice($les_enfants,0,$n));
 	}
 
 	$res =

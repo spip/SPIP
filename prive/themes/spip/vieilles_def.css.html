@@ -21,6 +21,7 @@
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
 /* * */
+/*
 .toile_claire {
 	background-color: #GET{claire};
 }
@@ -47,10 +48,10 @@
 .ligne_blanche {	color: white;}
 .ligne_foncee {	color: #GET{foncee};}
 .ligne_noire {	color: #000;}
-
+*/
 
 /* * Formulaires */
-
+/*
 .forml { margin-top: 0px; width: 100%; display: block; padding: 3px; background-color: #f0f0f0; border: 1px solid #GET{claire}; background-position: center bottom; float: none; behavior: url([(#CHEMIN{win_width.htc}|url_absolue)]); font-size: 12px; }
 .formo { margin-top: 0px; width: 100%; display: block; padding: 3px; background-color: #fff; border: 1px solid #GET{claire}; background-position: center bottom; float: none; behavior: url([(#CHEMIN{win_width.htc}|url_absolue)]); font-size: 12px; }
 .fondl { margin-top: 0px; padding: 3px; background-color: #e4e4e4; border: 1px solid #GET{claire}; background-position: center bottom; float: none; font-size: 11px; }
@@ -72,6 +73,7 @@ input[type="submit"] {
 
 select.fondl { padding: 0; }
 .maj-debut:first-letter { text-transform: uppercase; }
+*/
 
 /*style for horizontal list <div class='h-list'><ul ><li><tag class='menu-item'></tag></li></ul></div>*/
 /*for IE item list must be specified in .menu-item*/
@@ -157,7 +159,9 @@ a.icone26:hover img { background: url(#GET{chemin_img_pack}fond-gris-anim.gif); 
 */
 
 /* utilise encore dans core/statistiques */
+/*
 .iconeoff { padding: 3px; margin: 1px; border: 1px dashed #aaa; background-color: #f0f0f0; }
+*/
 
 /* plus du tout utilise ? */
 /*
@@ -271,27 +275,28 @@ li.rub ul{ display: none; }
 li img.expandImage { display: block; float: #GET{left}; position: relative; #GET{left}: -20px; width: 16px; height: 16px; }
 li.selected { background-color: #GET{claire}}
 /* Fin Styles pour "Tout le site" */
-
+/*
 a.triangle_block { margin-top: -3px; margin-bottom: -3px; margin-#GET{right}: -3px; filter:alpha(opacity=70); -moz-opacity:0.7; opacity: 0.7; }
 a.triangle_block:hover { filter: alpha(opacity=100); -moz-opacity: 1; opacity: 1; }
-
+*/
 /*.swap-couche { border: 0; height: 10px; width: 10px; }*/
 
 /* anciennes listes d'objet */
+/*
 .tr_liste { background-color: #eee; }
 .tr_liste_over, .tr_liste:hover { background-color: #fff; }
 .tr_liste td, .tr_liste:hover td, .tr_liste_over td { border-bottom: 1px solid #ddd; }
 tbody>.tr_liste:last-child td { border-bottom: 0px; }
 .tr_liste td div.liste_clip { height: 12px; overflow: hidden; }
 .tr_liste:hover td div.liste_clip, span.liste_clip { overflow: visible; height: 100%; }
-
+*/
 /** OLDIES : cadres issus de PHP */
 
 /* * Cadre couleur foncee */
+/*
 .cadre_padding { padding: 6px; }
 .cadre_padding.padding_x { padding: 0 6px; }
 .padding_x .bloc_depliable { padding: 6px 0; }
-/* .cadre-titre { font-family: Verdana, Geneva, helvetica, sans; font-weight: bold; font-size: 12px; padding: 3px; }*/
 .cadre { margin: 20px 0 10px 0; font-family: Verdana, Geneva, helvetica, sans; font-size: 11px; position: relative; }
 .cadre { border: 1px solid #aaa; background-color: #eee; }
 .cadre-fonce { background-color: #GET{foncee}; }
@@ -314,14 +319,15 @@ tbody>.tr_liste:last-child td { border-bottom: 0px; }
 .cadre-thread-forum div.cadre-titre { background-color: #ccc; color: #000; }
 .cadre-info{ background-color: #fff; border: 2px solid #GET{foncee}; padding: 5px; }
 .cadre-alerte { border: 6px solid red; }
-
+*/
 /* -------- */
+/*
 .cadre-liste .titrem { background-color: #fff; color: #444; }
 .cadre-liste .titrem.hover { background-color: #GET{claire}}
 .cadre-liste .tr_liste .titrem { background-color:#eee; }
+*/
 
-
-.ajax-action {padding-top:0px;clear:both;position: relative; }
+/*.ajax-action {padding-top:0px;clear:both;position: relative; }*/
 /*
 .dater {position: relative; }
 .dater { border: 1px solid #GET{claire}; }
@@ -348,11 +354,7 @@ tbody>.tr_liste:last-child td { border-bottom: 0px; }
 
 */
 
-/* Titre d'une boite */
-.titrem { font-weight: bold; }
-div.titrem, h3.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat; padding-[(#GET{left})]:16px; padding-[(#GET{right})]:10px;}
-div.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left})] top;background-repeat: no-repeat; position:relative;float:[(#GET{left})];margin-[(#GET{left})]:-16px;}
-
+/*
 .cadre-couleur-foncee .titrem { background-color: #GET{claire}; color: #fff; color: #444; }
 .cadre-couleur-foncee .cadre_padding .titrem { color: #444; }
 .cadre-trait-couleur .titrem { background-color: #GET{foncee}; color: #fff; }
@@ -361,28 +363,20 @@ div.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left
 .mots_tous #contenu .titrem.impliable { background-color: #GET{claire}; }
 
 .cadre-couleur .titrem { background-color: #fff; }
+*/
 /*
 .joindre .titrem, #navigation .joindre .titrem { background-color: #GET{claire}; }
 */
-.accueil #navigation .titrem { background-color: #fff; }
-
+/*.accueil #navigation .titrem { background-color: #fff; }*/
+/*
 #navigation .titrem, #extra .titrem {text-align: center; }
 #navigation .titrem, #extra .titrem { background-color: #fff; }
 #liste_images .titrem, #liste_documents .titrem { background-color: #ccc; }
+*/
 /*#liste_images .legender .titrem, #liste_documents .legender .titrem { background-color: #fff; } */
-#navigation .hover, #extra .hover, .joindre .hover, #liste_images .hover, #liste_documents .hover { background-color: #GET{claire}; }
+/*#navigation .hover, #extra .hover, .joindre .hover, #liste_images .hover, #liste_documents .hover { background-color: #GET{claire}; }*/
 /*
 .iconifier div div.titrem {text-align: #GET{left}; }
 .iconifier div div {text-align: center; }
 .iconifier div div label {text-align: #GET{left};display: block; }
 */
-/* Deplier / Replier */
-.deplie a.titremancre, .deplie a.titremancre, .depliant a.titremancre, .replie a.titremancre { height: 1px; padding-bottom: 0px; }
-.replie a.titremancre { background-image: url([(#CHEMIN_IMAGE{deplierhaut[(#GET{rtl})].gif})]); }
-.hover { background-color: #GET{claire}; }
-.deplie a.titremancre { background-image: url(#CHEMIN_IMAGE{deplierbas.gif}); }
-.impliable {}
-.js .blocreplie { display: none; }
-.js .titrem.blocreplie { display: block; }
-.blocdeplie { display: block; background: none; }
-	

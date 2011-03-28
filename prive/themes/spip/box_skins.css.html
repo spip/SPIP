@@ -48,7 +48,7 @@
 .important b{}
 
 /* ----- basic (extends box) ----- */
-.basic {overflow: hidden;margin-bottom: -1px}
+.basic {margin-bottom: -1px}
 .basic .inner {padding-bottom: 1px;border: 1px solid #aaa;}
 .basic .inner .hd {}
 .basic b{}
@@ -56,23 +56,23 @@
 /* ----- error, success, notice (extends box) ----- */
 .box.error, .box.success, .box.notice {padding:0;backround-image:none;}
 .error .inner,.success .inner,.notice .inner{border:2px solid;font-weight: normal;color:#333;}
-.error .bd,.success .bd,.notice .bd {padding-left:40px;min-height:24px;background-repeat:no-repeat;background-position: 5px 5px;}
+.error .bd,.success .bd,.notice .bd {padding-left:40px;min-height:24px;background-repeat:no-repeat;background-position: 2px 5px;}
 .box.error .hd,.box.success .hd,.box.notice .hd {padding-left:40px;}
 .error .ft,.success .ft,.notice .ft {padding-left:40px;}
 .box.error .ft,.box.success .ft,.box.notice .ft {border-color:#ddd;background-color:#eee;}
 
 .success .inner{color: #264409;border-color: #C6D880;background-color:#E6EFC2;}
-.success .bd{background-image:url(#CHEMIN_IMAGE{ok-24.png});}
+.success .bd{background-image:url(#CHEMIN_IMAGE{ok-32.png});}
 .box.success .hd {background-color:#C6DF61;}
 .box.success .hd h1,.box.success .hd h2,.box.success .hd h3,.box.success .hd h4,.box.success .hd h5,.box.success .hd h6 {background-color:#C6DF61;}
 
 .error .inner{color: #8A1F11;border-color: #FBC2C4;background-color:#FBE3E4;}
-.error .bd{background-image:url(#CHEMIN_IMAGE{erreur-24.png});}
+.error .bd{background-image:url(#CHEMIN_IMAGE{erreur-32.png});}
 .box.error .hd {background-color:#DF454F;color:#fff;}
 .box.error .hd h1,.box.error .hd h2,.box.error .hd h3,.box.error .hd h4,.box.error .hd h5,.box.error .hd h6 {background-color:#DF454F;color:#fff;}
 
 .notice .inner{color: #514721;border-color: #FFD324;background-color:#FFF6BF;}
-.notice .bd{background-image:url(#CHEMIN_IMAGE{warning-24.png});}
+.notice .bd{background-image:url(#CHEMIN_IMAGE{warning-32.png});}
 .box.notice .hd {background-color:#FFD83F;}
 .box.notice .hd h1,.box.notice .hd h2,.box.notice .hd h3,.box.notice .hd h4,.box.notice .hd h5,.box.notice .hd h6 {background-color:#FFD83F;}
 
@@ -105,3 +105,24 @@ background-color: #fff; color: #4A4A4A;font-size:1.2em; position:relative;}
 	text-align: #GET{right};
 	padding: 7px 1em;
 }
+
+/* Cas particuliers */
+.simple.sous-rub .inner .hd {padding:0}
+.simple.sous-rub .inner .hd .logo {margin:0;position:absolute;right:0;top:0;z-index:1;}
+.simple.sous-rub .sous-sous-rub {margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;}
+
+/* vieilles boites depliables/repliables
+  encore maintenues mais depreciees
+*/
+.titrem { font-weight: bold; }
+div.titrem, h3.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat; padding-[(#GET{left})]:16px; padding-[(#GET{right})]:10px;margin:0;}
+div.titrem a.titremancre,h3.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left})] top;background-repeat: no-repeat; position:relative;float:[(#GET{left})];margin-[(#GET{left})]:-16px;}
+/* Deplier / Replier */
+.deplie a.titremancre, .deplie a.titremancre, .depliant a.titremancre, .replie a.titremancre { height: 1px; padding-bottom: 0px; }
+.replie a.titremancre { background-image: url([(#CHEMIN_IMAGE{deplierhaut[(#GET{rtl})].gif})]); }
+.hover { background-color: #GET{claire}; }
+.deplie a.titremancre { background-image: url(#CHEMIN_IMAGE{deplierbas.gif}); }
+.impliable {}
+.js .blocreplie { display: none; }
+.js .titrem.blocreplie { display: block; }
+.blocdeplie { display: block; background: none; }
