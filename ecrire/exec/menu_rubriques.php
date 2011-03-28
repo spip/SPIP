@@ -37,7 +37,7 @@ function exec_menu_rubriques_dist() {
 }
 
 function menu_rubriques($complet = true){
-	$ret = "<li class='toutsite'><a href='".generer_url_ecrire('articles_tous')."'>"._T('info_tout_site')."</a></li>";
+	$ret = "<li class='toutsite'><a href='".generer_url_ecrire('plan')."'>"._T('info_tout_site')."</a></li>";
 
 	if (!$complet) {
 		return "<ul class='cols_1'>$ret\n</ul>\n";

@@ -3,14 +3,16 @@
 <B_rubriques>
 	[<p class="pagination">[<em>(#VAL{rubrique}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
 	<ul class="menu">
-		<BOUCLE_rubriques(RUBRIQUES) {id_parent=#ENV{id_parent}}{id_rubrique?} {par num titre,titre}{statut==.?}{pagination #GET{nb} #GET{nomp}}>
+		<BOUCLE_rubriques(RUBRIQUES) {id_parent}{id_rubrique==#ENV{racine,'.*'}} {par num titre,titre}{statut==.?}{pagination #GET{nb} #GET{nomp}}>
 			<li>
-				<a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE})]" class="ajax"
-				title="[(#VAL{rubrique}|objet_info{texte_objet}|_T) #ID_RUBRIQUE]"><strong>[(#STATUT|puce_changement_statut{#STATUT,#ID_PARENT,rubrique})][(#TITRE|couper{100}|sinon{<:info_sans_titre:>})]</strong></a>
+				<a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
+				title="[(#VAL{rubrique}|objet_info{texte_objet}|_T) #ID_RUBRIQUE]"
+				onclick="jQuery('#reloadmain').attr('href',this.href).followLink();return false;"
+				><strong>[(#STATUT|puce_changement_statut{#STATUT,#ID_PARENT,rubrique}) ][(#TITRE|couper{100}|sinon{<:info_sans_titre:>})]</strong></a>
 
 				<INCLURE{fond=prive/squelettes/inclure/plan-articles,id_rubrique,env,ajax}>
 				<INCLURE{fond=prive/squelettes/inclure/plan-sites,id_rubrique,env,ajax}>
-				<INCLURE{fond=prive/squelettes/inclure/plan-rubriques,id_parent=#ID_RUBRIQUE,id_rubrique='',env,ajax}>
+				<INCLURE{fond=prive/squelettes/inclure/plan-rubriques,id_rubrique,racine='',env,ajax}>
 				[(#ID_PARENT|=={0}|oui)
 				<INCLURE{fond=prive/squelettes/inclure/plan-breves,id_rubrique,env,ajax}>
 				]

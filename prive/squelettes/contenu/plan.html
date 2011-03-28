@@ -1,9 +1,19 @@
-<h1><:plan_site:></h1>
-<INCLURE{fond=prive/squelettes/inclure/plan-rubriques,id_rubrique=#ENV{id_rubrique,0},env,ajax}>
+<BOUCLE_rub(RUBRIQUES){id_rubrique}{statut==.*}>
+	#BOITE_OUVRIR{'','note'}
+		<a class='annule_filtre[(#EVAL{_AJAX}|oui)ajax]'
+			 href='[(#SELF|parametre_url{id_rubrique,''})]' title="<:tout_voir|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:tout_voir:>})]</a>
+		<:entree_interieur_rubrique:>
+		<h3><a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">[(#TITRE|sinon{<:info_sans_titre:>})]</a></h3>
+	#BOITE_FERMER
+	<INCLURE{fond=prive/squelettes/inclure/plan-rubriques,racine=^#ENV{id_rubrique}$,id_rubrique=#ID_PARENT}>
+</BOUCLE_rub>
 
+	<INCLURE{fond=prive/squelettes/inclure/plan-rubriques}>
+<//B_rub>
+<a id="reloadmain" href="#SELF" class="ajax none">reload</a>
 <style type="text/css">
 	ul.menu,ul.menu ul {border-left:1px solid #ddd;border-top:0;}
-	ul.menu li h4{margin-left:11px;margin-bottom:0;border-left:1px solid #ddd;}
+	ul.menu li h4{margin-left:11px;margin-bottom:0;border-left:1px solid #ddd;padding-left:4px;margin-top:0;padding-top:10px;}
 	ul.menu li .pagination {margin-left:11px;border-left:1px solid #ddd;}
 	ul.menu li {border-bottom:0;border-top:1px solid #ddd;padding-left:4px;}
 	ul.menu.articles li>a{padding-left:20px;background:url(#CHEMIN_IMAGE{article-16.png}) no-repeat center left;}
