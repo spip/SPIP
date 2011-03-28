@@ -734,7 +734,7 @@ function spip_mysql_quote($v, $type='') {
 			return spip_mysql_cite($v,$type);
 		// si c'est un tableau, le parcourir en propageant le type
 		foreach($v as $k=>$r)
-			$v[$k] = spip_mysql_quote($r, $type='');
+			$v[$k] = spip_mysql_quote($r, $type);
 		return $v;
 	}
 	// si on ne connait pas le type, s'en remettre a _q :
@@ -792,6 +792,7 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 
 // http://doc.spip.org/@spip_mysql_cite
 function spip_mysql_cite($v, $type) {
+	if(is_null($v)) return 'NULL'; // null php se traduit en NULL SQL
 	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v))
 		return $v;
 	if (sql_test_int($type)) {
