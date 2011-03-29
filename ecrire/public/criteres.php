@@ -191,14 +191,18 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	$boucle->hash .= '
 	// RECHERCHE
 	$prepare_recherche = charger_fonction(\'prepare_recherche\', \'inc\');
-	list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'","' . $boucle->sql_serveur . '",'.$_modificateur.');
+	list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'","' . $boucle->sql_serveur . '",'.$_modificateur.',"'.$boucle->primary.'");
 	';
 
 	$t = $boucle->id_table . '.' . $boucle->primary;
 	if (!in_array($t, $boucles[$idb]->select))
 	  $boucle->select[]= $t; # pour postgres, neuneu ici
-	$boucle->join['resultats']=array("'".$boucle->id_table."'","'id'","'".$boucle->primary."'");
-	$boucle->from['resultats']='spip_resultats';
+	// jointure uniquement sur le serveur principal
+	// (on ne peut joindre une table d'un serveur distant avec la table des resultats du serveur principal)
+	if (!$boucle->sql_serveur) {
+		$boucle->join['resultats']=array("'".$boucle->id_table."'","'id'","'".$boucle->primary."'");
+		$boucle->from['resultats']='spip_resultats';
+	}
 	$boucle->select[]= '$rech_select';
 	//$boucle->where[]= "\$rech_where?'resultats.id=".$boucle->id_table.".".$boucle->primary."':''";
 
