@@ -1202,8 +1202,9 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $c
  * @return string
  */
 function calculer_lien_externe_init(&$boucle, $joints, $col, $desc, $cond, $checkarrivee = false){
+	$primary_arrivee = id_table_objet($checkarrivee);
 
-	$intermediaire = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee."_liens");
+	$intermediaire = trouver_champ_exterieur($primary_arrivee, $joints, $boucle, $checkarrivee."_liens");
 	$arrivee = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
 
 	if (!$intermediaire OR !$arrivee) return '';
@@ -1211,7 +1212,7 @@ function calculer_lien_externe_init(&$boucle, $joints, $col, $desc, $cond, $chec
 	$res = fabrique_jointures($boucle,
 		array(
 			array($boucle->id_table,$intermediaire,array(id_table_objet($desc['table_objet']),'id_objet','objet',$desc['type'])),
-			array(reset($intermediaire),$arrivee,$col)
+			array(reset($intermediaire),$arrivee,$primary_arrivee)
 		)
 		, $cond, $desc, $boucle->id_table, array($col));
 	return $res;
