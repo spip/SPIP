@@ -14,11 +14,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/texte');
 
-// http://doc.spip.org/@exec_menu_rubriques_dist
-function exec_menu_rubriques_dist() {
+function action_menu_rubriques_dist() {
+
+	// si pas acces a ecrire, pas acces au menu
+	// on renvoi un 401 qui fait echouer la requete ajax silencieusement
+	if (!autoriser('ecrire')){
+		$retour = "<ul class='cols_1'><li class='toutsite'><a href='".generer_url_ecrire('accueil')."'>"._T('public:lien_connecter')."</a></li></ul>";
+		ajax_retour($retour);
+		exit;
+	}
 
 	header("Cache-Control: no-cache, must-revalidate");
-
 	if ($date = intval(_request('date')))
 		header("Last-Modified: ".gmdate("D, d M Y H:i:s", $date)." GMT");
 

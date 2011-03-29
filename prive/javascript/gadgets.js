@@ -1,6 +1,6 @@
-function init_gadgets(){
+function init_gadgets(url_menu_rubrique){
 	jQuery('#boutonbandeautoutsite').one('mouseover',function(){
-		jQuery(this).siblings('ul').animeajax();
+		jQuery(this).siblings('ul').find('li:first>a').animeajax();
 		jQuery.ajax({
 						url: url_menu_rubrique,
 						success: function(c){
@@ -17,7 +17,7 @@ function focus_zone(selecteur){
 	return false;
 }
 jQuery(document).ready(function(){
-	init_gadgets();
+	init_gadgets(url_menu_rubrique);
 	var is_open = 0;
 	jQuery.fn.menuItemOpen = function(){
 		jQuery(this)
