@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.0.1'); // 24 mars 2011
+define('_ECRAN_SECURITE', '1.0.2'); // 29 mars 2011
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -195,6 +195,17 @@ AND strstr((string)$_REQUEST['znom_sauvegarde'], '/'))
 if (isset($_REQUEST['op']) AND isset($_REQUEST['page'])
 AND $_REQUEST['op'] !== preg_replace('/[^\-\w]/', '', $_REQUEST['op']))
 	$ecran_securite_raison = 'op';
+
+
+/* Forms & Table ne se mefiait pas assez des uploads de fichiers */
+if (count($_FILES)){
+	foreach($_FILES as $k=>$v){
+		 if (preg_match(',^fichier_\d+$,',$k)
+		 AND preg_match(',[.]php3?($|[.]),i',$v['name']))
+		 	unset($_FILES[$k]);
+	}
+}
+
 
 /*
  * S'il y a une raison de mourir, mourons
