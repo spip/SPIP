@@ -1,0 +1,17 @@
+<B_jobs>
+	<div class="jobs_liste jobs_liste_#ENV{objet}">
+	#ANCRE_PAGINATION
+	<ul class="liste_items jobs">
+		<BOUCLE_jobs(JOBS){par date}{pagination 5}{objet}{id_objet}>
+			<li class="item">
+				<div class="date">[(#DATE|date_relative)]</div>
+				[<strong class="description">(#DESCRIPTIF|PtoBR)</strong>]
+				[(#AUTORISER{'annuler','job',#ID_JOB}|oui)
+				<div class="actions">[(#BOUTON_ACTION{<:annuler:>,#URL_ACTION_AUTEUR{annuler_job,#ID_JOB,#SELF},ajax})]</div>
+				]
+			</li>
+		</BOUCLE_jobs>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+	</div>
+</B_jobs>

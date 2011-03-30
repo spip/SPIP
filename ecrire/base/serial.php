@@ -115,6 +115,24 @@ $spip_rubriques_key = array(
 );
 
 
+$spip_jobs = array(
+	"id_job" 	=> "bigint(21) NOT NULL",
+	"descriptif"	=> "text DEFAULT '' NOT NULL",
+	"fonction" 	=> "varchar(255) NOT NULL", //nom de la fonction
+	"args"=> "longblob DEFAULT '' NOT NULL", // arguments
+	"md5args"=> "char(32) NOT NULL default ''", // signature des arguments
+	"inclure" => "varchar(255) NOT NULL", // fichier a inclure ou path/ pour charger_fonction
+	"priorite" 	=> "smallint(6) NOT NULL default 0",
+	"date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // date au plus tot
+	"status" => "tinyint NOT NULL default 1",
+	);
+
+$spip_jobs_key = array(
+	"PRIMARY KEY" 	=> "id_job",
+	"KEY date" => "date",
+	"KEY status" => "status",
+);
+
 /// Attention: mes_fonctions peut avoir deja defini cette variable
 /// il faut donc rajouter, mais pas reinitialiser
 
@@ -124,6 +142,8 @@ $tables_principales['spip_auteurs']  =
 	array('field' => &$spip_auteurs, 'key' => &$spip_auteurs_key,'join' => &$spip_auteurs_join);
 $tables_principales['spip_rubriques'] =
 	array('field' => &$spip_rubriques, 'key' => &$spip_rubriques_key);
+$tables_principales['spip_jobs'] =
+	array('field' => &$spip_jobs, 'key' => &$spip_jobs_key);
 
 	$tables_principales = pipeline('declarer_tables_principales',$tables_principales);
 }

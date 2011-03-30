@@ -207,15 +207,8 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		}
 
 		// Effectuer une tache de fond ?
-		// si #SPIP_CRON est present, on ne le tente que pour les navigateurs
-		// en mode texte (par exemple), et seulement sur les pages web
-		if (defined('_DIRECT_CRON_FORCE')
-			OR (
-			!defined('_DIRECT_CRON_INHIBE')
-			AND $html
-			AND !strstr($page['texte'], '<!-- SPIP-CRON -->')
-			AND !preg_match(',msie|mozilla|opera|konqueror,i', $_SERVER['HTTP_USER_AGENT']))
-			)
+		// si _DIRECT_CRON_FORCE est present, on force l'appel
+		if (defined('_DIRECT_CRON_FORCE'))
 			cron();
 
 		// sauver le cache chemin si necessaire

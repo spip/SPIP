@@ -554,47 +554,127 @@ function action_cron() {
 	include_spip('inc/headers');
 	http_status(204); // No Content
 	header("Connection: close");
-	cron (2);
+	define('_DIRECT_CRON_FORCE',true);
+	cron();
 }
 
-// cron() : execution des taches de fond
-// Le premier argument indique l'intervalle demande entre deux taches
-// par defaut, 60 secondes (quand il est appele par public.php)
-// il vaut 2 quand il est appele par ?action=cron, voire 0 en urgence
-// On peut lui passer en 2e arg le tableau de taches attendu par inc_genie()
-// Retourne Vrai si un tache a pu etre effectuee
-
-// http://doc.spip.org/@cron
-function cron ($gourmand=false, $taches= array()) {
-
-	// Si on est gourmand, ou si le fichier gourmand n'existe pas
-	// ou est trop vieux (> 60 sec), on va voir si un cron est necessaire.
-	// Au passage si on est gourmand on le dit aux autres
-	if (spip_touch(_DIR_TMP.'cron.lock-gourmand', 60, $gourmand)
-	OR ($gourmand!==false)) {
-
-	// Le fichier cron.lock indique la date de la derniere tache
-	// Il permet d'imposer qu'il n'y ait qu'une tache a la fois
-	// et 2 secondes minimum entre chaque:
-	// ca soulage le serveur et ca evite
-	// les conflits sur la base entre taches.
-
-	if (spip_touch(_DIR_TMP.'cron.lock',
-			(is_int($gourmand) ? $gourmand : 2))) {
-			// Si base inaccessible, laisser tomber.
-			if (!spip_connect()) return false;
-
-			$genie = charger_fonction('genie', 'inc', true);
-			if ($genie) {
-				$genie($taches);
-				// redater a la fin du cron
-				// car il peut prendre plus de 2 secondes.
-				spip_touch(_DIR_TMP.'cron.lock', 0);
-				return true;
-			}
-		}# else spip_log("busy");
+/**
+ * cron() : execution des taches de fond
+ * On peut lui passer en 1er (ou 2e arg pour compat)
+ * le tableau de taches attendu par inc_genie()
+ * Retourne Vrai si un tache a pu etre effectuee
+ * pas de verrou ici : les verrous sont geres sur chaque tache
+ * a chaque execution
+ *
+ * http://doc.spip.org/@cron
+ *
+ * @param array $taches
+ *   taches forcees
+ * @param array $taches_old
+ *   taches forcees, pour compat avec ancienne syntaxe
+ * @return bool
+ */
+function cron ($taches=array(), $taches_old= array()) {
+	// si pas en mode cron force
+	// ou si base inaccessible, laisser tomber.
+	if (!defined('_DIRECT_CRON_FORCE') OR !spip_connect()) return false;
+	spip_log("cron !",'jq'._LOG_DEBUG);
+	if (!is_array($taches)) $taches = $taches_old; // compat anciens appels
+	if ($genie = charger_fonction('genie', 'inc', true)) {
+		$genie($taches);
+		return true;
 	}
 	return false;
+}
+
+/**
+ * Ajout d'une tache dans la file d'attente
+ *
+ * @param $function
+ *   The function name to call.
+ * @param $description
+ *   A human-readable description of the queued job.
+ * @param $arguments
+ *   Optional array of arguments to pass to the function.
+ * @param $file
+ *   Optional file path which needs to be included for $fucntion.
+ * @param $no_duplicate
+ *   If TRUE, do not add the job to the queue if one with the same function and
+ *   arguments already exists.
+ * @param $time
+ *		time for starting the job. If 0, job will start as soon as possible
+ * @param $priority
+ *		-10 (low priority) to +10 (high priority), 0 is the default
+ * @return int
+ *	id of job
+ */
+function job_queue_add($function, $description, $arguments = array(), $file = '', $no_duplicate = FALSE, $time=0, $priority=0) {
+	include_spip('inc/queue');
+	return queue_add_job($function, $description, $arguments, $file, $no_duplicate, $time, $priority);
+}
+
+/**
+ * Supprimer une tache de la file d'attente
+ * @param int $id_job
+ *  id of jonb to delete
+ * @return bool
+ */
+function job_queue_remove($id_job){
+	include_spip('inc/queue');
+	return queue_remove_job($id_job);
+}
+
+/**
+ * Associer une tache a un/des objets de SPIP
+ * @param int $id_job
+ *	id of job to link
+ * @param array $objets
+ *  can be a simple array('objet'=>'article','id_objet'=>23)
+ *  or an array of simple array to link multiples objet in one time
+ */
+function job_queue_link($id_job,$objets){
+	include_spip('inc/queue');
+	return queue_link_job($id_job,$objets);
+}
+
+
+/**
+ * Renvoyer le temps de repos restant jusqu'au prochain job
+ * 0 si un job est a traiter
+ * null si la queue n'est pas encore initialise
+ * $force est utilisee par queue_set_next_job_time() pour maj la valeur
+ *  - si true, force la relecture depuis le fichier
+ *  - si int, affecte la static directement avec la valeur
+ *
+ * @staticvar int $queue_next_job_time
+ * @param int/bool $force_next
+ * @return int
+ */
+function queue_sleep_time_to_next_job($force=null) {
+	static $queue_next_job_time = -1;
+	if ($force===true)
+		$queue_next_job_time = -1;
+	elseif ($force)
+		$queue_next_job_time = $force;
+
+	if ($queue_next_job_time==-1) {
+		define('_JQ_NEXT_JOB_TIME_FILENAME',_DIR_TMP . "job_queue_next.txt");
+		// utiliser un cache memoire si dispo
+		if (include_spip('inc/memoization') AND defined('_MEMOIZE_MEMORY') AND _MEMOIZE_MEMORY) {
+			$queue_next_job_time = cache_get(_JQ_NEXT_JOB_TIME_FILENAME);
+		}
+		else {
+			$queue_next_job_time = null;
+			if (lire_fichier(_JQ_NEXT_JOB_TIME_FILENAME, $contenu))
+				$queue_next_job_time = intval($contenu);
+		}
+	}
+
+	if (is_null($queue_next_job_time))
+		return null;
+	if (!$_SERVER['REQUEST_TIME'])
+		$_SERVER['REQUEST_TIME'] = time();
+	return max(0,$queue_next_job_time-$_SERVER['REQUEST_TIME']);
 }
 
 

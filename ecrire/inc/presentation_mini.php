@@ -80,14 +80,16 @@ function liste_objets_bloques($exec,$contexte=array(),$auteur=null){
 // Elle comporte une image invisible declenchant une tache de fond
 // http://doc.spip.org/@fin_page
 function fin_page(){
+	include_spip('inc/pipelines');
 	// avec &var_profile=1 on a le tableau de mesures SQL
 	$debug = ((_request('exec') !== 'valider_xml')  AND ((_request('var_mode') == 'debug') OR $GLOBALS['tableau_des_temps'] AND isset($_COOKIE['spip_admin'])));
-	return '<div id="pied">'
+	$t = '<div id="pied">'
 	. recuperer_fond('prive/squelettes/inclure/pied')
 	. "</div>"
 	. "</div></div>" // cf. div#page et div.largeur ouvertes dans conmmencer_page()
 	. ($debug?erreur_squelette():'')
 	. "</body></html>\n";
+	return f_queue($t);
 }
 
 function html_tests_js(){
@@ -99,9 +101,6 @@ function html_tests_js(){
 		        . "' width='1' height='1' alt='' /></div></noscript>\n");
 	}
 	return $GLOBALS['rejoue_session']
-	. '<div style="background-image: url(\''
-	. generer_url_action('cron')
-	. '\');"></div>'
 	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '');
 }
 

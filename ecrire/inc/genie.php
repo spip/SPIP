@@ -52,43 +52,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@inc_genie_dist
 function inc_genie_dist($taches = array()) {
+	include_spip('inc/queue');
 
-	if (!$taches)
-		$taches = taches_generales();
+	if (_request('exec')=='job_queue')
+		return;
 
-	// Quelle est la tache la plus urgente ?
-	$tache = '';
-	$tmin = $t = time();
-	foreach ($taches as $nom => $periode) {
-		$celock = _DIR_TMP . $nom . '.lock';
-		$date_lock = @filemtime($celock);
-		if ($date_lock + $periode < $tmin) {
-			$tmin = $date_lock + $periode;
-			$tache = $nom;
-			$lock = $celock;
-			$last = $date_lock;
-		}
-	// debug : si la date du fichier est superieure a l'heure actuelle,
-	// c'est que les serveurs Http et de fichiers sont desynchro.
-	// Ca peut mettre en peril les taches cron : signaler dans le log
-	// (On laisse toutefois flotter sur une heure, pas la peine de s'exciter
-	// pour si peu)
-		else if ($date_lock > $t + 3600)
-			spip_log("Erreur de date du fichier $lock : $date_lock > $t !");
-	}
-	if ($tache) {
-		spip_timer('tache');
-		spip_log('cron: debut '.$tache, 'genie');
-		touch($lock);
-		$cron = charger_fonction($tache, 'genie');
-		$retour = $cron($last);
-		// si la tache a eu un effet : log
-		if ($retour) {
-			spip_log("cron: $tache (" . spip_timer('tache') . ") $retour", 'genie');
-			if ($retour < 0)
-				@touch($lock, 0 - $retour);
-		}
-	}
+	$force_jobs = array();
+	// l'ancienne facon de lancer une tache cron immediatement
+	// etait de la passer en parametre a ing_genie_dist
+	// on reroute en ajoutant simplement le job a la queue, ASAP
+	foreach($taches as $function=>$period)
+		$force_jobs[] = queue_add_job($function, _L("Tache CRON $function (ASAP)"), array(time()-abs($period)), "genie/");
+	
+	// et on passe la main a la gestion de la queue !
+	// en forcant eventuellement les jobs ajoute a l'instant
+	queue_schedule(count($force_jobs)?$force_jobs:null);
 }
 
 //
@@ -102,6 +80,10 @@ function inc_genie_dist($taches = array()) {
 // http://doc.spip.org/@taches_generales
 function taches_generales($taches_generales = array()) {
 
+	// verifier que toutes les taches cron sont planifiees
+	// c'est une tache cron !
+	$taches_generales['queue_watch'] = 3600*24;
+
 	// MAJ des rubriques publiques (cas de la publication post-datee)
 	// est fait au coup par coup a present
 	//	$taches_generales['rubriques'] = 3600;
@@ -109,8 +91,9 @@ function taches_generales($taches_generales = array()) {
 	// Optimisation de la base
 	$taches_generales['optimiser'] = 3600*48;
 
-	// cache (chaque 20 minutes => 1/16eme du repertoire cache)
-	$taches_generales['invalideur'] = 1200;
+	// cache (chaque 10 minutes => 1/16eme du repertoire cache,
+	// soit toutes les 2h40 sur le meme rep)
+	$taches_generales['invalideur'] = 600;
 
 	// nouveautes
 	if ($GLOBALS['meta']['adresse_neuf'] AND $GLOBALS['meta']['jours_neuf']
@@ -140,5 +123,53 @@ function genie_invalideur_dist($t) {
 	if ($encore)
 		return (0 - $t);
 	return 1;
+}
+
+/**
+ * Une tache periodique pour surveiller les taches crons et les relancer si besoin
+ * quand ce cron s'execute, il n'est plus dans la queue, donc il se replanifie
+ * lui meme, avec last=time()
+ * avec une dose d'aleatoire pour ne pas planifier toutes les taches au meme moment
+ *
+ * @return int
+ */
+function genie_queue_watch_dist(){
+	$taches = taches_generales();
+	foreach($taches as $tache=>$periode){
+		queue_genie_replan_job($tache,$periode,time()-round(rand(1,$periode)));
+	}
+	return 1;
+}
+
+/**
+ * Replanifier une tache periodique
+ *
+ * @param string $function
+ *   nom de la fonction a appeler
+ * @param int $period
+ *   periodicite en secondes
+ * @param int $last
+ *   date du dernier appel (timestamp)
+ * @param int $time
+ *   date de replanification
+ * @param int $priority
+ *   priorite
+ * @return void
+ */
+function queue_genie_replan_job($function,$period,$last=null,$time=0, $priority=0){
+		if (!$time){
+			if (!is_null($last))
+				$time = $last+$period;
+			else
+				$time=time();
+		}
+		if (is_null($last))
+			$last = $time-$period;
+		spip_log("replan_job $function $period $last $time $priority",'queue');
+		include_spip('inc/queue');
+		// on replanifie un job cron
+		// uniquement si il n'y en a pas deja un avec le meme nom
+		// independament de l'argument
+		queue_add_job($function, _L("Tache CRON $function (toutes les $period s)"), array($last), "genie/", 'function_only', $time, $priority);
 }
 ?>

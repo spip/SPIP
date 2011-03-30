@@ -46,6 +46,16 @@ $spip_meta = array(
 $spip_meta_key = array(
 		"PRIMARY KEY"	=> "nom");
 
+$spip_jobs_liens = array(
+	"id_job"	=> "bigint(21) DEFAULT '0' NOT NULL",
+	"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
+	"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL",
+);
+
+$spip_documents_liens_key = array(
+		"PRIMARY KEY"		=> "id_job,id_objet,objet",
+		"KEY id_job"	=> "id_job");
+
 $tables_auxiliaires['spip_auteurs_liens'] = array(
 	'field' => &$spip_auteurs_liens,
 	'key' => &$spip_auteurs_liens_key);
@@ -56,7 +66,10 @@ $tables_auxiliaires['spip_meta'] = array(
 $tables_auxiliaires['spip_resultats'] = array(
 	'field' => &$spip_resultats,
 	'key' => &$spip_resultats_key);
-	
+$tables_auxiliaires['spip_jobs_liens'] = array(
+	'field' => &$spip_jobs_liens,
+	'key' => &$spip_documents_liens_key);
+
 	$tables_auxiliaires = pipeline('declarer_tables_auxiliaires',$tables_auxiliaires);
 }
 
