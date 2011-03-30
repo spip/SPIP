@@ -509,6 +509,7 @@ exige d\'avoir un accès FTP au site Web.</p>',
 		perdue et votre site ne fonctionnera plus.<br />{{Réinstallez les
 		fichiers de SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mode de fonctionnement par défaut des forums publics',
+'info_modification_enregistree' => 'Votre modification a été enregistrée',
 'info_modifier_auteur' => 'Modifier l\'auteur :',
 'info_modifier_breve' => 'Modifier la brève :',
 'info_modifier_mot' => 'Modifier le mot-clé :',
