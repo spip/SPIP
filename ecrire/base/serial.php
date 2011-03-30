@@ -41,6 +41,7 @@ $spip_articles = array(
 		"id_trad"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"nom_site"	=> "tinytext DEFAULT '' NOT NULL",
 		"url_site"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
+		"virtuel"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
 );
 
 $spip_articles_key = array(

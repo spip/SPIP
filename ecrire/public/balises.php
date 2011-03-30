@@ -357,7 +357,7 @@ function balise_INTRODUCTION_dist($p) {
 
 	if ($type == 'articles') {
 		$_chapo = champ_sql('chapo', $p);
-		$_texte = "(strlen($_descriptif) OR chapo_redirigetil($_chapo))
+		$_texte = "(strlen($_descriptif))
 		? ''
 		: $_chapo . \"\\n\\n\" . $_texte";
 	}
@@ -404,16 +404,6 @@ function balise_LANG_dist ($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_CHAPO_dist
-function balise_CHAPO_dist ($p) {
-	$_chapo = champ_sql('chapo', $p);
-	if (($p->etoile) OR (strpos($_chapo, '$Pile[$SP') === false))
-		$p->code = $_chapo;
-	else
-		$p->code = "nettoyer_chapo($_chapo)";
-	$p->interdire_scripts = true;
-	return $p;
-}
 // #LESAUTEURS
 // les auteurs d'un article (ou d'un article syndique)
 // http://www.spip.net/fr_article902.html

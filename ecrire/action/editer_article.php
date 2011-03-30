@@ -60,6 +60,7 @@ function articles_set($id_article, $set=null) {
 		array(
 			'surtitre', 'titre', 'soustitre', 'descriptif',
 			'nom_site', 'url_site', 'chapo', 'texte', 'ps',
+			'virtuel',
 		),
 		// black list
 		array('date','statut','id_parent'),
