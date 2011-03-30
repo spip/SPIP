@@ -278,7 +278,8 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/auth'); // pour auteurs_article si espace public
 
 	return
-		autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
+		$r
+		AND autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
 		OR (
 			in_array($qui['statut'], array('0minirezo', '1comite'))
 			AND in_array($r['statut'], array('prop','prepa', 'poubelle'))
@@ -566,9 +567,8 @@ function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opts) {
 	return true;
 }
 
-function autoriser_mesarticles_bouton_dist($faire, $type, $id, $qui, $opts){
-	return sql_countsel('spip_auteurs_liens',"objet='article' AND id_auteur=".intval($qui['id_auteur']));
-}
+function autoriser_articles_bouton_dist($faire, $type, $id, $qui, $opts){return true;}
+function autoriser_rubriques_bouton_dist($faire, $type, $id, $qui, $opts){return true;}
 
 function autoriser_articlecreer_bouton_dist($faire, $type, $id, $qui, $opts){
 	return sql_countsel('spip_rubriques')>0;
