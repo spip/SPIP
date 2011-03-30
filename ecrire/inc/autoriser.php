@@ -574,4 +574,11 @@ function autoriser_articlecreer_bouton_dist($faire, $type, $id, $qui, $opts){
 	return sql_countsel('spip_rubriques')>0;
 }
 
+function autoriser_suiviedito_bouton_dist($faire, $type, $id, $qui, $opts){
+	return $qui['statut']=='0minirezo';
+}
+function autoriser_synchro_bouton_dist($faire, $type, $id, $qui, $opts){
+	return $qui['statut']=='0minirezo';
+}
+
 ?>
