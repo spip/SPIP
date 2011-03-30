@@ -1019,7 +1019,6 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		!isset($exceptions_des_jointures[table_objet_sql($table)][$col])
 		AND !isset($exceptions_des_jointures[$col])
 		AND count(trouver_champs_decomposes($col,$desc))>1){
-		var_dump(array('pasla',$table,$col,$exceptions_des_jointures));
 		$e = decompose_champ_id_objet($col);
 		$col = array_shift($e);
 		$where_complement = primary_doublee($e, $table);
