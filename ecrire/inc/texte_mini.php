@@ -337,6 +337,21 @@ function protege_js_modeles($t) {
 }
 
 
+function echapper_faux_tags($letexte){
+	if (strpos($letexte,'<')===false)
+		return $letexte;
+  $textMatches = preg_split (',(</?[a-z!][^<>]*>),', $letexte, null, PREG_SPLIT_DELIM_CAPTURE);
+
+  $letexte = "";
+  while (count($textMatches)) {
+  	// un texte a echapper
+  	$letexte .= str_replace(array("<"),array('&lt;'),array_shift($textMatches));
+  	// un tag html qui a servit a faite le split
+ 		$letexte .= array_shift($textMatches);
+  }
+  return $letexte;
+}
+
 // Securite : utiliser SafeHTML s'il est present dans ecrire/safehtml/
 // http://doc.spip.org/@safehtml
 function safehtml($t) {
