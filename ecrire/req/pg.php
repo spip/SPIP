@@ -994,6 +994,8 @@ function spip_pg_cite($v, $t){
 		if (strpos("0123456789", $v[0]) === false)
 			return spip_pg_frommysql($v);
 		else {
+			if (strncmp($v,'0000',4)==0)
+				$v = "0001" . substr($v,4);
 			if (strpos($v, "-00-00") === 4)
 				$v = substr($v,0,4)."-01-01".substr($v,10);
 			return "timestamp '$v'";
