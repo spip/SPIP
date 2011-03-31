@@ -1162,7 +1162,14 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 		  $i = $nom . preg_replace("/KEY +/", '_',$n);
 		  if ($k != $n) $i = "\"$i\"";
 		  $keys[] = "CREATE INDEX $i ON $nom ($v);";
-		} else $prim .= "$s\n\t\t" . str_replace('`','"',$k) ." ($v)";
+		} 
+		elseif (strpos($k, "UNIQUE ") === 0) {
+			$k = preg_replace("/^UNIQUE +/", '',$k);
+			$prim .= "$s\n\t\tCONSTRAINT " . str_replace('`','"',$k) ." UNIQUE ($v)";
+		}
+		else {
+			$prim .= "$s\n\t\t" . str_replace('`','"',$k) ." ($v)";
+		}
 		if ($k == "PRIMARY KEY")
 			$prim_name = $v;
 		$s = ",";
@@ -1266,27 +1273,28 @@ function spip_pg_multi ($objet, $lang) {
 // A completer par les autres, mais essayer de reduire en amont.
 
 // http://doc.spip.org/@mysql2pg_type
-function mysql2pg_type($v)
-{
-  return     
-  		preg_replace('/auto_increment/i', '', // non reconnu
-  		preg_replace('/bigint/i', 'bigint', 
-  		preg_replace('/mediumint/i', 'mediumint', 
-  		preg_replace('/smallint/i', 'smallint', 
-		preg_replace("/tinyint/i", 'int',
-		preg_replace('/int\s*[(]\s*\d+\s*[)]/i', 'int', 
-		preg_replace("/longtext/i", 'text',
-		str_replace("mediumtext", 'text',
-		preg_replace("/tinytext/i", 'text',
-	  	str_replace("longblob", 'text',
-		str_replace("0000-00-00",'0001-01-01',
-		preg_replace("/datetime/i", 'timestamp',
-		preg_replace("/unsigned/i", '', 	
-		preg_replace("/double/i", 'double precision', 	 	
-		preg_replace('/VARCHAR\((\d+)\)\s+BINARY/i', 'varchar(\1)', 
-		preg_replace("/ENUM *[(][^)]*[)]/i", "varchar(255)",
-					      $v 
-			     ))))))))))))))));
+function mysql2pg_type($v){
+	$remplace = array(
+		'/auto_increment/i' => '', // non reconnu
+		'/bigint/i' => 'bigint',
+		'/mediumint/i' => 'mediumint',
+		'/smallint/i'=> 'smallint',
+		"/tinyint/i" => 'int',
+		'/int\s*[(]\s*\d+\s*[)]/i' => 'int',
+		"/longtext/i" => 'text',
+		"/mediumtext/i" => 'text',
+		"/tinytext/i" => 'text',
+		"/longblob/i" => 'text',
+		"/0000-00-00/" =>'0001-01-01',
+		"/datetime/i" => 'timestamp',
+		"/unsigned/i" => '',
+		"/double/i" => 'double precision',
+		'/VARCHAR\((\d+)\)\s+BINARY/i' => 'varchar(\1)',
+		"/ENUM *[(][^)]*[)]/i" => "varchar(255)",
+		'/(timestamp .* )ON .*$/is' => '\\1',
+	);
+	
+  return preg_replace(array_keys($remplace),array_values($remplace),$v);
 }
 
 // Renvoie false si on n'a pas les fonctions pg (pour l'install)
