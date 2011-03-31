@@ -640,8 +640,10 @@ function spip_sqlite_error($query = '', $serveur = ''){
 	if (_sqlite_is_version(3, $link)){
 		$errs = $link->errorInfo();
 		$s = '';
-		foreach ($errs as $n => $e){
-			$s .= "\n$n : $e";
+		if (ltrim($errs[0],'0')){ // 00000 si pas d'erreur
+			foreach ($errs as $n => $e){
+				$s .= "\n$n : $e";
+			}
 		}
 	} elseif ($link) {
 		$s = sqlite_error_string(sqlite_last_error($link));
@@ -666,7 +668,7 @@ function spip_sqlite_errno($serveur = ''){
 
 	if (_sqlite_is_version(3, $link)){
 		$t = $link->errorInfo();
-		$s = $t[1];
+		$s = ltrim($t[0],'0'); // 00000 si pas d'erreur
 	} elseif ($link) {
 		$s = sqlite_last_error($link);
 	} else {
@@ -675,7 +677,7 @@ function spip_sqlite_errno($serveur = ''){
 
 	if ($s) spip_log("Erreur sqlite $s", 'sqlite.'._LOG_ERREUR);
 
-	return $s ? 1 : 0;
+	return $s ? $s : 0;
 }
 
 
