@@ -21,75 +21,8 @@ include_spip('base/abstract_sql');
 //
 
 function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='', $connect='') {
-	static $u=null;
-	if (!$u) $u=url_de_base();
-	$typo = false;
 
-	// Si une langue est demandee sur un raccourci d'article, chercher
-	// la traduction ;
-	// - [{en}->art2] => traduction anglaise de l'article 2, sinon art 2
-	// - [{}->art2] => traduction en langue courante de l'art 2, sinon art 2
-	// s'applique a tout objet traduit
-	if ($hlang
-	AND $match = typer_raccourci($lien)) { 
-		@list($type,,$id,,$args,,$ancre) = $match;
-		$table_objet_sql = table_objet_sql($type);
-		$id_table_objet = id_table_objet($type);
-		if ($row=sql_fetsel('*', $table_objet_sql, "$id_table_objet=".intval($id))
-			AND isset($row['id_trad'])
-			AND isset($row['lang'])
-			AND $id_dest = sql_getfetsel($id_table_objet, $table_objet_sql,"id_trad=".intval($row['id_trad'])." AND lang=" . sql_quote($hlang))
-			AND objet_test_si_publie($type,$id_dest)
-		)
-			$lien = "$type$id_dest";
-		else
-			$hlang = '';
-	}
-
-	$mode = ($texte AND $class) ? 'url' : 'tout';
-	$lien = calculer_url($lien, $texte, $mode, $connect);
-	if ($mode === 'tout') {
-		$texte = $lien['titre'];
-		if (!$class AND isset($lien['class'])) $class = $lien['class'];
-		$lang = isset($lien['lang']) ?$lien['lang'] : '';
-		$mime = isset($lien['mime']) ? " type='".$lien['mime']."'" : "";
-		$lien = $lien['url'];
-	}
-
-	$lien = trim($lien);
-	if (strncmp($lien,"#",1) == 0)  # ancres pures (internes a la page)
-		$class = 'spip_ancre';
-	elseif (strncasecmp($lien,'mailto:',7)==0) # pseudo URL de mail
-		$class = "spip_mail";
-	elseif (strncmp($texte,'<html>',6)==0) # cf traiter_lien_explicite
-		$class = "spip_url spip_out";
-	elseif (!$class) $class = "spip_out"; # si pas spip_in|spip_glossaire
-
-	// Si l'objet n'est pas de la langue courante, on ajoute hreflang
-	if (!$hlang AND $lang!==$GLOBALS['spip_lang'])
-		$hlang = $lang;
-
-	$lang = ($hlang ? " hreflang='$hlang'" : '');
-
-	if ($title) $title = ' title="'.attribut_html($title).'"';
-
-	// rel=external pour les liens externes
-	if ((strncmp($lien,'http://',7)==0 OR strncmp($lien,'https://',8)==0)
-	  AND strncmp("$lien/", $u ,strlen($u))!=0)
-		$rel = trim("$rel external");
-	if ($rel) $rel = " rel='$rel'";
-
-	if (traiter_modeles($texte, false, $echapper ? 'TYPO' : '', $connect)==$texte){
-		$texte = typo($texte, true, $connect);
-		$lien = "<a href=\"".str_replace('"', '&quot;', $lien)."\" class='$class'$lang$title$rel$mime>$texte</a>";
-		return $lien;
-	}
-	# ceci s'execute heureusement avant les tableaux et leur "|".
-	# Attention, le texte initial est deja echappe mais pas forcement
-	# celui retourne par calculer_url.
-	# Penser au cas [<imgXX|right>->URL], qui exige typo('<a>...</a>')
-	$lien = "<a href=\"".str_replace('"', '&quot;', $lien)."\" class='$class'$lang$title$rel$mime>$texte</a>";
-	return typo($lien, true, $connect);
+	return $lien;
 }
 
 // Regexp des raccourcis, aussi utilisee pour la fusion de sauvegarde Spip
@@ -99,76 +32,14 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 define('_RACCOURCI_LIEN', "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS");
 
 // http://doc.spip.org/@expanser_liens
-function expanser_liens($t, $connect='')
-{
+function expanser_liens($t, $connect=''){
 
 	$t = pipeline('pre_liens', $t);
 
-	expanser_un_lien($connect,'init');
-
-	if (strpos($t, '->') !== false)
-		$t = preg_replace_callback (_RACCOURCI_LIEN, 'expanser_un_lien',$t);
-
 	// on passe a traiter_modeles la liste des liens reperes pour lui permettre
 	// de remettre le texte d'origine dans les parametres du modele
-	$t = traiter_modeles($t, false, false, $connect, expanser_un_lien('','sources'));
-
- 	$t = corriger_typo($t);
-
-	$t = expanser_un_lien($t,'reinsert');
-
+	$t = traiter_modeles($t, false, false, $connect);
 	return $t;
-}
-
-
-function expanser_un_lien($reg, $quoi='echappe'){
-	static $pile = array();
-	static $inserts;
-	static $sources;
-	static $regs;
-	static $k = 0;
-	static $lien;
-	static $connect='';
-
-	switch ($quoi){
-		case 'init':
-			if (!$lien) $lien = charger_fonction('lien', 'inc');
-			array_push($pile,array($inserts,$sources,$regs,$connect,$k));
-			$inserts = $sources = $regs = array();
-			$connect = $reg; // stocker le $connect pour les appels a inc_lien_dist
-			$k=0;
-			return;
-			break;
-		case 'echappe':
-			$inserts[$k] = '@@SPIP_ECHAPPE_LIEN_' . $k . '@@';
-			$sources[$k] = $reg[0];
-
-			#$titre=$reg[1];
-			list($titre, $bulle, $hlang) = traiter_raccourci_lien_atts($reg[1]);
-			$r = end($reg);
-			// la mise en lien automatique est passee par la a tort !
-			// corrigeons pour eviter d'avoir un <a...> dans un href...
-			if (strncmp($r,'<a',2)==0){
-				$href = extraire_attribut($r, 'href');
-				// remplacons dans la source qui peut etre reinjectee dans les arguments
-				// d'un modele
-				$sources[$k] = str_replace($r,$href,$sources[$k]);
-				// et prenons le href comme la vraie url a linker
-				$r = $href;
-			}
-			$regs[$k] = $lien($r, $titre, '', $bulle, $hlang, '', $connect);
-			return $inserts[$k++];
-			break;
-		case 'reinsert':
-			if (count($inserts))
-				$reg = str_replace($inserts, $regs, $reg);
-			list($inserts,$sources,$regs,$connect,$k) = array_pop($pile);
-			return $reg;
-			break;
-		case 'sources':
-			return array($inserts, $sources);
-			break;
-	}
 }
 
 // Meme analyse mais pour eliminer les liens
@@ -176,33 +47,7 @@ function expanser_un_lien($reg, $quoi='echappe'){
 // http://doc.spip.org/@nettoyer_raccourcis_typo
 function nettoyer_raccourcis_typo($texte, $connect='')
 {
-	$texte = pipeline('nettoyer_raccourcis_typo',$texte);
 
-	if (preg_match_all(_RACCOURCI_LIEN, $texte, $regs, PREG_SET_ORDER))
-		foreach ($regs as $reg) {
-			list ($titre,,)= traiter_raccourci_lien_atts($reg[1]);
-			if (!$titre) {
-				$match = typer_raccourci($reg[count($reg)-1]);
-				@list($type,,$id,,,,) = $match;
-				if ($type) {
-					$url = generer_url_entite($id,$type,'','',true);
-					if (is_array($url)) list($type, $id) = $url;
-					$titre = traiter_raccourci_titre($id, $type, $connect);
-				}
-				$titre = $titre ? $titre['titre'] : $match[0];
-			}
-			$titre = corriger_typo(supprimer_tags($titre));
-			$texte = str_replace($reg[0], $titre, $texte);
-		}
-
-	// supprimer les notes
-	$texte = preg_replace(",[[][[]([^]]|[]][^]])*[]][]],UimsS","",$texte);
-
-	// supprimer les codes typos
-	$texte = str_replace(array('}','{'), '', $texte);
-
-	// supprimer les tableaux
-	$texte = preg_replace(",(^|\r)\|.*\|\r,s", "\r", $texte);
 
 	return $texte;
 }
@@ -211,88 +56,24 @@ function nettoyer_raccourcis_typo($texte, $connect='')
 
 // Repere dans la partie texte d'un raccourci [texte->...]
 // la langue et la bulle eventuelles
-
-define('_RACCOURCI_ATTRIBUTS', '/^(.*?)([|]([^<>]*?))?([{]([a-z_]*)[}])?$/');
-
 // http://doc.spip.org/@traiter_raccourci_lien_atts
 function traiter_raccourci_lien_atts($texte) {
-
-	$bulle = $hlang = '';
-	// title et hreflang donnes par le raccourci ?
-	if (strpbrk($texte, "|{") !== false AND
-	  preg_match(_RACCOURCI_ATTRIBUTS, $texte, $m)) {
-
-		$n =count($m);
-		// |infobulle ?
-		if ($n > 2) {
-			$bulle = $m[3];
-			// {hreflang} ?
-			if ($n > 4) {
-			// si c'est un code de langue connu, on met un hreflang
-				if (traduire_nom_langue($m[5]) <> $m[5]) {
-					$hlang = $m[5];
-				} elseif (!$m[5]) {
-					$hlang = test_espace_prive() ?
-					  $GLOBALS['lang_objet'] : $GLOBALS['spip_lang'];
-				// sinon c'est un italique
-				} else {
-					$m[1] .= $m[4];
-				}
-
-			// S'il n'y a pas de hreflang sous la forme {}, ce qui suit le |
-			// est peut-etre une langue
-			} else if (preg_match('/^[a-z_]+$/', $m[3])) {
-			// si c'est un code de langue connu, on met un hreflang
-			// mais on laisse le title (c'est arbitraire tout ca...)
-				if (traduire_nom_langue($m[3]) <> $m[3]) {
-				  $hlang = $m[3];
-				}
-			}
-		}
-		$texte = $m[1];
-	}
-
+	$bulle='';
+	$hlang='';
 	return array(trim($texte), $bulle, $hlang);
 }
 
-define('_EXTRAIRE_DOMAINE', '/^(?:[^\W_]((?:[^\W_]|-){0,61}[^\W_,])?\.)+[a-z]{2,6}\b/Si');
-
-// callback pour la fonction traiter_raccourci_liens()
-// http://doc.spip.org/@autoliens_callback
-function traiter_autoliens($r) {
-	if (count($r)<2) return reset($r);
-	list($tout, $l) = $r;
-	if (!$l) return $tout;
-	// reperer le protocole
-	if (preg_match(',^(https?):/*,S', $l, $m)) {
-		$l = substr($l, strlen($m[0]));
-		$protocol = $m[1];
-	} else 	$protocol = 'http';
-	// valider le nom de domaine
-	if (!preg_match(_EXTRAIRE_DOMAINE, $l)) return $tout;
-	// supprimer les ponctuations a la fin d'une URL
-	preg_match('/^(.*?)([,.;?]?)$/', $l, $k);
-	$url = $protocol.'://'.$k[1];
-	$lien = charger_fonction('lien', 'inc');
-	$r = $lien($url,'','','','','nofollow') . $k[2];
-	// si l'original ne contenait pas le 'http:' on le supprime du clic
-	return $m ? $r : str_replace('>http://', '>', $r);
-}
-
-define('_EXTRAIRE_LIENS', ',' . '\[[^\[\]]*(?:<-|->).*?\]' . '|<a\b.*?</a\b' . '|<\w.*?>' . '|((?:https?:/|www\.)[^"\'\s\[\]\}\)<>]*)' .',imsS');
 
 // Les URLs brutes sont converties en <a href='url'>url</a>
 // http://doc.spip.org/@traiter_raccourci_liens
 function traiter_raccourci_liens($t) {
-	return preg_replace_callback(_EXTRAIRE_LIENS, 'traiter_autoliens', $t);
+	return $t;
 }
 
 
 define('_RACCOURCI_CHAPO', '/^(\W*)(\W*)(\w*\d+([?#].*)?)$/');
 /**
  * Fonction pour les champs virtuels de redirection qui peut etre:
- * 1. un raccourci Spip habituel (premier If) [texte->TYPEnnn]
- * 2. un ultra raccourci TYPEnnn voire nnn (article) (deuxieme If)
  * 3. une URL std
  *
  * renvoie l'url reelle de redirection si le $url=true,
@@ -305,12 +86,7 @@ define('_RACCOURCI_CHAPO', '/^(\W*)(\W*)(\w*\d+([?#].*)?)$/');
  * @return string
  */
 function virtuel_redirige($virtuel, $url=false){
-	if (!strlen($virtuel)) return '';
-	if (!preg_match(_RACCOURCI_LIEN, $virtuel, $m))
-		if (!preg_match(_RACCOURCI_CHAPO, $virtuel, $m))
-			return $virtuel;
-
-	return !$url ? $m[3] : traiter_lien_implicite($m[3]);
+	return $virtuel;
 }
 
 
@@ -551,77 +327,22 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='', $liens
 //
 // Raccourcis ancre [#ancre<-]
 //
-
-define('_RACCOURCI_ANCRE', "/\[#?([^][]*)<-\]/S");
-
 // http://doc.spip.org/@traiter_raccourci_ancre
 function traiter_raccourci_ancre($letexte)
 {
-	if (preg_match_all(_RACCOURCI_ANCRE, $letexte, $m, PREG_SET_ORDER))
-	foreach ($m as $regs)
-		$letexte = str_replace($regs[0],
-		'<a name="'.entites_html($regs[1]).'"></a>', $letexte);
 	return $letexte;
 }
-
-//
-// Raccourcis automatiques [?SPIP] vers un glossaire
-// Wikipedia par defaut, avec ses contraintes techniques
-// cf. http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Conventions_sur_les_titres
-
-define('_RACCOURCI_GLOSSAIRE', "/\[\?+\s*([^][<>]+)\]/S");
-define('_RACCOURCI_GLOSES', '/^([^|#{]*\w[^|#{]*)([^#]*)(#([^|{}]*))?(.*)$/S');
 
 // http://doc.spip.org/@traiter_raccourci_glossaire
 function traiter_raccourci_glossaire($texte)
 {
-	if (!preg_match_all(_RACCOURCI_GLOSSAIRE,
-	$texte, $matches, PREG_SET_ORDER))
-		return $texte;
-
-	include_spip('inc/charsets');
-	$lien = charger_fonction('lien', 'inc');
-
-	foreach ($matches as $regs) {
-	// Eviter les cas particulier genre "[?!?]"
-	// et isoler le lexeme a gloser de ses accessoires
-	// (#:url du glossaire, | bulle d'aide, {} hreflang)
-	// Transformation en pseudo-raccourci pour passer dans inc_lien
-		if (preg_match(_RACCOURCI_GLOSES, $regs[1], $r)) {
-			preg_match('/^(.*?)(\d*)$/', $r[4], $m);
-			$_n = intval($m[2]);
-			$gloss = $m[1] ? ('#' . $m[1]) : '';
-			$t = $r[1] . $r[2] . $r[5];
-			list($t, $bulle, $hlang) = traiter_raccourci_lien_atts($t);
-			$t = unicode2charset(charset2unicode($t), 'utf-8');
-			$ref = $lien("glose$_n$gloss", $t, 'spip_glossaire', $bulle, $hlang);
-			$texte = str_replace($regs[0], $ref, $texte);
-		}
-	}
 	return $texte;
 }
 
 // http://doc.spip.org/@glossaire_std
 function glossaire_std($terme)
 {
-	global $url_glossaire_externe;
-	static $pcre = NULL;
-
-	if ($pcre === NULL) {
-		$pcre = isset($GLOBALS['meta']['pcre_u']) 
-		? $GLOBALS['meta']['pcre_u']
-		  : '';
-		if (strpos($url_glossaire_externe, "%s") === false)
-			$url_glossaire_externe .= '%s';
-	}
-
-	$glosateur = str_replace("@lang@",
-				$GLOBALS['spip_lang'],
-				$GLOBALS['url_glossaire_externe']);
-
-	$terme = rawurlencode(preg_replace(',\s+,'.$pcre, '_', $terme));
-	
-	return  str_replace("%s", $terme, $glosateur);
+	return  $terme;
 }
 
 ?>
