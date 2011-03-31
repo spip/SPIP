@@ -297,10 +297,11 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 		$texte = couper($texte, 2*$longueur);
 
 	// ne pas tenir compte des notes
-	$notes = charger_fonction('notes', 'inc');
-	$notes('','empiler');
+	if ($notes = charger_fonction('notes', 'inc', true))
+		$notes('','empiler');
 	$texte = propre($texte,$connect);
-	$notes('','depiler');
+	if ($notes)
+		$notes('','depiler');
 
 	if (!defined('_INTRODUCTION_SUITE')) define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
@@ -425,10 +426,12 @@ function lister_objets_avec_logos ($type) {
 // Renvoyer l'etat courant des notes, le purger et en preparer un nouveau
 // http://doc.spip.org/@calculer_notes
 function calculer_notes() {
-	$notes = charger_fonction('notes', 'inc');
-	$r = $notes(array());
-	$notes('','depiler');
-	$notes('','empiler');
+	$r='';
+	if ($notes = charger_fonction('notes', 'inc', true)) {
+		$r = $notes(array());
+		$notes('','depiler');
+		$notes('','empiler');
+	}
 	return $r;
 }
 

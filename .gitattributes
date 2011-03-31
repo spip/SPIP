@@ -133,7 +133,6 @@ ecrire/inc/mail.php -text
 ecrire/inc/minipres.php -text
 ecrire/inc/modifier.php -text
 ecrire/inc/nfslock.php -text
-ecrire/inc/notes.php -text
 ecrire/inc/notifications.php -text
 ecrire/inc/pipelines.php -text
 ecrire/inc/pipelines_ecrire.php -text

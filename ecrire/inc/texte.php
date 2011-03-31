@@ -55,17 +55,11 @@ function traiter_raccourcis($letexte) {
 	// Appeler les fonctions de pre_traitement
 	$letexte = pipeline('pre_propre', $letexte);
 
-	// Gerer les notes (ne passe pas dans le pipeline)
-	$notes = charger_fonction('notes', 'inc');
-	list($letexte, $mes_notes) = $notes($letexte);
-
 	// APPELER ICI UN PIPELINE traiter_raccourcis ?
 	// $letexte = pipeline('traiter_raccourcis', $letexte);
 
 	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_propre', $letexte);
-
-	if ($mes_notes) $notes($mes_notes);
 
 	return $letexte;
 }
