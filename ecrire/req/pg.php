@@ -514,19 +514,28 @@ function spip_pg_orderby($order, $select)
 function spip_pg_groupby($groupby, $from, $select)
 {
 	$join = strpos($from, ",");
-	if ($join OR $groupby) $join = !is_array($select) ? $select : join(", ", $select);
+	if ($join OR $groupby) $join = is_array($select) ? $select : explode(", ", $select);
 	if ($join) {
-	  $join = str_replace('DISTINCT ','',$join);
-	  // fct SQL sur colonne et constante apostrophee ==> la colonne
-	  $join = preg_replace('/\w+\(\s*([^(),\']*),\s*\'[^\']*\'[^)]*\)/','\\1', $join);
-	  $join = preg_replace('/CAST\(\s*([^(),\' ]*\s+)as\s*\w+\)/','\\1', $join);
-	  // resultat d'agregat ne sont pas a mettre dans le groupby
-	  $join = preg_replace('/(SUM|COUNT|MAX|MIN|UPPER)\([^)]+\)(\s*AS\s+\w+)\s*,?/i','', $join);
-	  // idem sans AS (fetch numerique)
-	  $join = preg_replace('/(SUM|COUNT|MAX|MIN|UPPER)\([^)]+\)\s*,?/i','', $join);
-	  // ne reste plus que les vrais colonnes, et parfois 1 virgule
-
-	  if (preg_match('/^(.*),\s*$/',$join,$m)) $join=$m[1];
+		// enlever les 0 as points, '', ...
+		foreach($join as $k=>$v){
+			$v = str_replace('DISTINCT ','',$v);
+			// fct SQL sur colonne et constante apostrophee ==> la colonne
+			$v = preg_replace('/\w+\(\s*([^(),\']*),\s*\'[^\']*\'[^)]*\)/','\\1', $v);
+			$v = preg_replace('/CAST\(\s*([^(),\' ]*\s+)as\s*\w+\)/','\\1', $v);
+			// resultat d'agregat ne sont pas a mettre dans le groupby
+			$v = preg_replace('/(SUM|COUNT|MAX|MIN|UPPER)\([^)]+\)(\s*AS\s+\w+)\s*,?/i','', $v);
+			// idem sans AS (fetch numerique)
+			$v = preg_replace('/(SUM|COUNT|MAX|MIN|UPPER)\([^)]+\)\s*,?/i','', $v);
+			// des AS simples : on garde le cote droit du AS
+			$v = preg_replace('/^.*\sAS\s+(\w+)\s*$/i','\\1', $v);
+			// ne reste plus que les vrais colonnes, ou des constantes a virer
+			if (preg_match(',^[\'"],',$v) OR is_numeric($v))
+				unset($join[$k]);
+			else
+				$join[$k] = trim($v);
+		}
+		$join = array_diff($join,array(''));
+		$join = implode(',',$join);
 	}
 	if (is_array($groupby)) $groupby = join(',',$groupby);
 	if ($join) $groupby = $groupby ? "$groupby, $join" : $join;
