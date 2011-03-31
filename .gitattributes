@@ -148,6 +148,7 @@ ecrire/inc/recherche_to_array.php -text
 ecrire/inc/rechercher.php -text
 ecrire/inc/securiser_action.php -text
 ecrire/inc/selectionner.php -text
+ecrire/inc/texte_mini.php -text
 ecrire/inc/traduire.php -text
 ecrire/inc/utils.php -text
 ecrire/inc/xml.php -text
