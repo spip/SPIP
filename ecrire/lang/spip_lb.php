@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Sichen',
 'bouton_choisir' => 'Auswielen',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Eroflueden',
+'bouton_download' => 'Eroflueden', # MODIF
 'bouton_enregistrer' => 'Späicheren',
 'bouton_radio_desactiver_messagerie_interne' => 'Déi intern Messagerie ausschalten',
 'bouton_radio_envoi_annonces' => 'Editorial Annoncen schécken',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Keng Lëscht vun de Neiegkeeten schécken',
 'bouton_recharger_page' => 'dës Säit nei lueden',
 'bouton_telecharger' => 'Eroplueden',
+'bouton_upload' => 'Eroplueden', # MODIF
 'bouton_valider' => 'Validéieren',
 
 // C

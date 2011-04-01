@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Търсене',
 'bouton_choisir' => 'Избор',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Télécharger', # NEW
+'bouton_download' => 'Télécharger', # MODIF
 'bouton_enregistrer' => 'Записване',
 'bouton_radio_desactiver_messagerie_interne' => 'Без система за вътрешни съобщения',
 'bouton_radio_envoi_annonces' => 'Изпращане на редакторски съобщения',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Без изпращане на списък с новини',
 'bouton_recharger_page' => 'Презареждане на страницата',
 'bouton_telecharger' => 'Публикуване',
+'bouton_upload' => 'Публикуване', # MODIF
 'bouton_valider' => 'Изпращане',
 
 // C

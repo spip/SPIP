@@ -71,7 +71,7 @@ Zhen QIN (zhen_q@21cn.com)',
 'bouton_chercher' => '搜索',
 'bouton_choisir' => '选择',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Télécharger', # NEW
+'bouton_download' => 'Télécharger', # MODIF
 'bouton_enregistrer' => '保存',
 'bouton_radio_desactiver_messagerie_interne' => '停用内部消息',
 'bouton_radio_envoi_annonces' => '发送可编辑的声明',
@@ -79,6 +79,7 @@ Zhen QIN (zhen_q@21cn.com)',
 'bouton_radio_non_envoi_liste_nouveautes' => '不发送最近新闻列表',
 'bouton_recharger_page' => '重载本页',
 'bouton_telecharger' => '上传',
+'bouton_upload' => '上传', # MODIF
 'bouton_valider' => '提交',
 
 // C

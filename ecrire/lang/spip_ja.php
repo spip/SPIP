@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => '検索',
 'bouton_choisir' => '選択',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Télécharger', # NEW
+'bouton_download' => 'Télécharger', # MODIF
 'bouton_enregistrer' => '保存',
 'bouton_radio_desactiver_messagerie_interne' => '内部のメッセージ交換を停止',
 'bouton_radio_envoi_annonces' => '編集の発表を送る',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => '最新ニュースリストを送らない',
 'bouton_recharger_page' => 'ページの再読み込み',
 'bouton_telecharger' => 'アップロード',
+'bouton_upload' => 'アップロード', # MODIF
 'bouton_valider' => '確定',
 
 // C

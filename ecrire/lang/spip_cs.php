@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Najít',
 'bouton_choisir' => 'Vybrat',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Download',
+'bouton_download' => 'Download', # MODIF
 'bouton_enregistrer' => 'Uložit',
 'bouton_radio_desactiver_messagerie_interne' => 'Vypnout interní hlášení',
 'bouton_radio_envoi_annonces' => 'Zaslat editorská oznámení',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Nezasílat seznam nejnovějších zpráv',
 'bouton_recharger_page' => 'znovu načíst tuto stránku',
 'bouton_telecharger' => 'Odeslat',
+'bouton_upload' => 'Odeslat', # MODIF
 'bouton_valider' => 'Odeslat',
 
 // C

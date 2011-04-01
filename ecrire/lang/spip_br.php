@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Klask',
 'bouton_choisir' => 'Dibab',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Pellgargañ',
+'bouton_download' => 'Pellgargañ', # MODIF
 'bouton_enregistrer' => 'Enrollañ',
 'bouton_radio_desactiver_messagerie_interne' => 'Diweredekaat ar postelerezh diabarzh',
 'bouton_radio_envoi_annonces' => 'Kas ar c\'hemennoù embann',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Chom hep kas roll an nevezinti',
 'bouton_recharger_page' => 'adkargañ ar bajenn-mañ',
 'bouton_telecharger' => 'Pellgargañ',
+'bouton_upload' => 'Pellgargañ', # MODIF
 'bouton_valider' => 'Kadarnaat',
 
 // C

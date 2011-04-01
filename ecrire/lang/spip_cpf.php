@@ -74,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Rod',
 'bouton_choisir' => 'Swazi',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Trapé',
+'bouton_download' => 'Trapé', # MODIF
 'bouton_enregistrer' => 'Anrozistré',
 'bouton_radio_desactiver_messagerie_interne' => 'Dégrèn lakazmodékri',
 'bouton_radio_envoi_annonces' => 'Anvwa bann zanons léditoryal. ',
@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Anpès anvwayé lalist bann nouvèlté',
 'bouton_recharger_page' => 'rosarz lapazwèb-la ',
 'bouton_telecharger' => 'Télésarz',
+'bouton_upload' => 'Télésarz', # MODIF
 'bouton_valider' => 'Konfirm',
 
 // C

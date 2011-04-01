@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Ara',
 'bouton_choisir' => 'Seç',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'İndir',
+'bouton_download' => 'İndir', # MODIF
 'bouton_enregistrer' => 'Kaydet',
 'bouton_radio_desactiver_messagerie_interne' => 'İç iletileri kapat',
 'bouton_radio_envoi_annonces' => 'Yazar duyurularını yolla',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Yenilikler listesini gönderme',
 'bouton_recharger_page' => 'bu sayfayı yeniden yükle',
 'bouton_telecharger' => 'İndir',
+'bouton_upload' => 'İndir', # MODIF
 'bouton_valider' => 'Onayla',
 
 // C

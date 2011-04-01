@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Søg',
 'bouton_choisir' => 'Vælg',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Download',
+'bouton_download' => 'Download', # MODIF
 'bouton_enregistrer' => 'Gem',
 'bouton_radio_desactiver_messagerie_interne' => 'Slå intern meddelelsesfunktion fra',
 'bouton_radio_envoi_annonces' => 'Send redaktionelle nyheder',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Send ikke oversigt over seneste nyheder',
 'bouton_recharger_page' => 'genindlæs denne side',
 'bouton_telecharger' => 'Hent',
+'bouton_upload' => 'Hent', # MODIF
 'bouton_valider' => 'Godkend',
 
 // C

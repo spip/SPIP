@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Keresés',
 'bouton_choisir' => 'Kiválasztás',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Download', # NEW
+'bouton_download' => 'Download', # MODIF
 'bouton_enregistrer' => 'Mentés',
 'bouton_radio_desactiver_messagerie_interne' => 'Belső üzenetek letiltása',
 'bouton_radio_envoi_annonces' => 'Szerkesztői közlemény küldése',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Ne küldjön listát a legújabb hírekről',
 'bouton_recharger_page' => 'az oldal újratöltése',
 'bouton_telecharger' => 'Feltöltés',
+'bouton_upload' => 'Feltöltés', # MODIF
 'bouton_valider' => 'Rendben',
 
 // C

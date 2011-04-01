@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Pencarian',
 'bouton_choisir' => 'Pilih',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Unduh',
+'bouton_download' => 'Unduh', # MODIF
 'bouton_enregistrer' => 'Simpan',
 'bouton_radio_desactiver_messagerie_interne' => 'Non aktifkan sistem pesan internal',
 'bouton_radio_envoi_annonces' => 'Kirim pengumuman editorial',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Jangan kirim daftar berita terbaru',
 'bouton_recharger_page' => 'perbaharui halaman ini',
 'bouton_telecharger' => 'Unggah',
+'bouton_upload' => 'Unggah', # MODIF
 'bouton_valider' => 'Kirim',
 
 // C

@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Sök',
 'bouton_choisir' => 'Välj',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Ladda hem',
+'bouton_download' => 'Ladda hem', # MODIF
 'bouton_enregistrer' => 'Spara',
 'bouton_radio_desactiver_messagerie_interne' => 'Stäng av möjligheten med interna meddelanden',
 'bouton_radio_envoi_annonces' => 'Skicka redaktionella tillkännagivanden',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Skicka inte en lista med senaste nyheter',
 'bouton_recharger_page' => 'ladda om sidan',
 'bouton_telecharger' => 'Ladda upp',
+'bouton_upload' => 'Ladda upp', # MODIF
 'bouton_valider' => 'Spara',
 
 // C

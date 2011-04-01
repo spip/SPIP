@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'ស្វែងរក',
 'bouton_choisir' => 'ជ្រើសរើស',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'ទាញយក',
+'bouton_download' => 'ទាញយក', # MODIF
 'bouton_enregistrer' => 'រក្សា​ទុក',
 'bouton_radio_desactiver_messagerie_interne' => 'អសកម្មភាព បញ្ញើ​សារ ខាងក្នុង',
 'bouton_radio_envoi_annonces' => 'ផ្ញើ​ ជំនូនដំណឹង ​នៃអ្នក​បោះ​ពុ​ម្ភ​ផ្សាយ',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'មិន​ត្រូវ​ផ្ញើ​ បញ្ជី​ នៃភាពប្លែក',
 'bouton_recharger_page' => 'ផ្ទុកឡើងវិញ ​ទំព័រ​នេះ',
 'bouton_telecharger' => 'ទាញយក',
+'bouton_upload' => 'ទាញយក', # MODIF
 'bouton_valider' => 'ធ្វើអោយមាន សុពលភាព',
 
 // C

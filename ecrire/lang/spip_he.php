@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'חיפוש',
 'bouton_choisir' => 'בחר',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'הורדה',
+'bouton_download' => 'הורדה', # MODIF
 'bouton_enregistrer' => 'שמור',
 'bouton_radio_desactiver_messagerie_interne' => 'ביטול ההתכתבות הפנימית',
 'bouton_radio_envoi_annonces' => 'שליחת הודעות עורך',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'אל תשלח את רשימת החדשות האחרונה',
 'bouton_recharger_page' => 'רענון הדף',
 'bouton_telecharger' => 'הורדה',
+'bouton_upload' => 'הורדה', # MODIF
 'bouton_valider' => 'אישור',
 
 // C

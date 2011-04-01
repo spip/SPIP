@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Bilatu',
 'bouton_choisir' => 'Aukeratu',
 'bouton_deplacer' => 'Lekuz aldatu',
-'bouton_download' => 'Telekargatu',
+'bouton_download' => 'Telekargatu', # MODIF
 'bouton_enregistrer' => 'Grabatu',
 'bouton_radio_desactiver_messagerie_interne' => 'Barne mezularitza desaktibatu',
 'bouton_radio_envoi_annonces' => 'Iragarki editorialak igorri ',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Berrikuntzen zerrenda ez igorri',
 'bouton_recharger_page' => 'Orrialde hau berriz kargatu',
 'bouton_telecharger' => 'Telekargatu',
+'bouton_upload' => 'Telekargatu', # MODIF
 'bouton_valider' => 'Onartu',
 
 // C
