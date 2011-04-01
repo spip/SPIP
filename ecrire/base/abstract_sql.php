@@ -590,8 +590,12 @@ function sql_test_date($type, $serveur='', $option=true)
 function description_table($nom){
 
 	global $tables_principales, $tables_auxiliaires;
-	static $f;
+	static $trouver_table;
 
+	/* toujours utiliser trouver_table
+	 qui renverra la description theorique sinon
+	 car sinon on va se comporter differement selon que la table est declaree
+	 ou non
 	include_spip('base/serial');
 	if (isset($tables_principales[$nom]))
 		return $tables_principales[$nom];
@@ -599,6 +603,8 @@ function description_table($nom){
 	include_spip('base/auxiliaires');
 	if (isset($tables_auxiliaires[$nom]))
 		return $tables_auxiliaires[$nom];
+
+	*/
 
 	if (!$trouver_table) $trouver_table = charger_fonction('trouver_table', 'base');
 	return $trouver_table($nom);
