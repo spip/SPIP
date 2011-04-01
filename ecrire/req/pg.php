@@ -515,6 +515,7 @@ function spip_pg_orderby($order, $select)
 function spip_pg_groupby($groupby, $from, $select)
 {
 	$join = strpos($from, ",");
+	
 	if ($join OR $groupby) $join = is_array($select) ? $select : explode(", ", $select);
 	if ($join) {
 		// enlever les 0 as points, '', ...
@@ -777,13 +778,20 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='',$r
 	$db = $connexion['db'];
 
 	if (!$desc) $desc = description_table($table);
-	$seq = spip_pg_sequence($table);
+	$seq = spip_pg_sequence($table,true);
+	// si pas de cle primaire dans l'insertion, renvoyer curval
+	if (!preg_match(",\b$seq\b,",$champs)){
+		$seq = spip_pg_sequence($table);
+		if ($prefixe)
+			$seq = preg_replace('/^spip/', $prefixe, $seq);
+		$seq = "currval('$seq')";
+	}
+
 
 	if ($prefixe) {
 		$table = preg_replace('/^spip/', $prefixe, $table);
-		$seq = preg_replace('/^spip/', $prefixe, $seq);
 	}
-	$ret = !$seq ? '' : (" RETURNING currval('$seq')");
+	$ret = !$seq ? '' : (" RETURNING $seq");
 	$ins = (strlen($champs)<3)
 	  ? " DEFAULT VALUES"
 	  : "$champs VALUES $valeurs";
@@ -971,7 +979,7 @@ function spip_pg_replace_multi($table, $tab_couples, $desc=array(), $serveur='',
 // Pas extensible pour le moment,
 
 // http://doc.spip.org/@spip_pg_sequence
-function spip_pg_sequence($table)
+function spip_pg_sequence($table,$raw=false)
 {
 	global $tables_principales;
 	include_spip('base/serial');
@@ -981,7 +989,7 @@ function spip_pg_sequence($table)
 	if (!preg_match('/^\w+$/', $prim)
 	OR strpos($desc['field'][$prim], 'int') === false)
 		return '';
-	else  {	return $table . '_' . $prim . "_seq";}
+	else  {	return $raw?$prim:$table . '_' . $prim . "_seq";}
 }
 
 // Explicite les conversions de Mysql d'une valeur $v de type $t
