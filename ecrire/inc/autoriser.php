@@ -273,7 +273,7 @@ function autoriser_rubrique_supprimer_dist($faire, $type, $id, $qui, $opt) {
 // = ou statut 'prop,prepa' et $qui est auteur
 // http://doc.spip.org/@autoriser_article_modifier_dist
 function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
-	$r = sql_fetsel("id_rubrique,statut", "spip_articles", "id_article=".sql_quote($id));
+	$r = sql_fetsel("id_rubrique,statut", "spip_articles", "id_article=".intval($id));
 
 	include_spip('inc/auth'); // pour auteurs_article si espace public
 
@@ -381,7 +381,7 @@ function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut'] == '0minirezo'
 		AND !$qui['restreint']) return true;
 	// "Voir en ligne" si l'auteur a un article publie
-	$n = sql_fetsel('A.id_article', 'spip_auteurs_liens AS L LEFT JOIN spip_articles AS A ON (L.objet=\'article\' AND L.id_objet=A.id_article)', "A.statut='publie' AND L.id_auteur=".sql_quote($id));
+	$n = sql_fetsel('A.id_article', 'spip_auteurs_liens AS L LEFT JOIN spip_articles AS A ON (L.objet=\'article\' AND L.id_objet=A.id_article)', "A.statut='publie' AND L.id_auteur=".intval($id));
 	return $n ? true : false;
 }
 
@@ -539,7 +539,7 @@ function autoriser_iconifier_dist($faire,$quoi,$id,$qui,$opts){
 
 	if (!$droit AND  ($row['statut'] == 'prepa' OR $row['statut'] == 'prop' OR $row['statut'] == 'poubelle')) {
 	  $jointure = table_jointure('auteur', 'article');
-	  if ($droit = sql_fetsel("id_auteur", "spip_$jointure", "id_article=".sql_quote($id) . " AND id_auteur=$connect_id_auteur"))
+	  if ($droit = sql_fetsel("id_auteur", "spip_$jointure", "id_article=".intval($id) . " AND id_auteur=".intval($connect_id_auteur)))
 		$droit = true;
 	}
 
