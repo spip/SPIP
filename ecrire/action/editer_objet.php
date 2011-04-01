@@ -362,7 +362,7 @@ function editer_objet_heritage($objet, $id, $id_rubrique, $statut, $champs, $con
 	// changer aussi son secteur et sa langue (si heritee)
 	if (isset($champs['id_rubrique'])) {
 
-		$row_rub = sql_fetsel("id_secteur, lang", "spip_rubriques", "id_rubrique=".intval($champs['id_rubrique']));
+		$row_rub = sql_fetsel("id_secteur, lang", "spip_rubriques", "id_rubrique=".sql_quote($champs['id_rubrique']));
 		$langue = $row_rub['lang'];
 
 		if (isset($desc['field']['id_secteur']))
