@@ -104,6 +104,9 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $
 			'db' => $db,
 			'prefixe' => $prefixe,
 		);
+		// etre sur qu'on definit bien les fonctions a chaque nouvelle connexion
+		include_spip('req/sqlite_fonctions');
+		_sqlite_init_functions($link);
 	}
 
 	return array(
@@ -1252,25 +1255,14 @@ function _sqlite_is_version($version = '', $link = '', $serveur = '', $requeter 
 
 
 /**
- * retrouver un link (et definir les fonctions externes sqlite->php)
- * $recharger devient inutile (a supprimer ?)
+ * retrouver un link
  * http://doc.spip.org/@_sqlite_link
  *
  * @param string $serveur
- * @param bool $recharger
  * @return
  */
-function _sqlite_link($serveur = '', $recharger = false){
-	static $charge = array();
-	if ($recharger) $charge[$serveur] = false;
-
+function _sqlite_link($serveur = ''){
 	$link = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
-
-	if ($link && !$charge[$serveur]){
-		include_spip('req/sqlite_fonctions');
-		_sqlite_init_functions($link);
-		$charge[$serveur] = true;
-	}
 	return $link;
 }
 
