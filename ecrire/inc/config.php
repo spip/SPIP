@@ -413,6 +413,7 @@ function liste_metas()
 		'adresse_neuf' => '',
 		'jours_neuf' => '',
 		'quoi_de_neuf' => 'non',
+		'preview' => ',0minirezo,1comite,',
 
 		'syndication_integrale' => 'oui',
 		'charset' => _DEFAULT_CHARSET,
