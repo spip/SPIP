@@ -1080,7 +1080,7 @@ function spip_sqlite_showbase($match, $serveur = '', $requeter = true){
 	$match = str_replace("[[TIRETBAS]]", "_", $match);
 	$match = str_replace("[[POURCENT]]", "%", $match);
 	$match = "^$match$";
-	return spip_sqlite_query("SELECT name FROM sqlite_master WHERE type='table' AND REGEXP(tbl_name,"._q($match).")", $serveur, $requeter);
+	return spip_sqlite_query("SELECT name FROM sqlite_master WHERE type='table' AND tbl_name REGEXP "._q($match), $serveur, $requeter);
 }
 
 
