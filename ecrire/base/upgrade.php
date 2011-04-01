@@ -152,11 +152,11 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='m
 		if (isset($maj['create'])){
 			if (!isset($GLOBALS[$table_meta][$nom_meta_base_version])){
 				// installation : on ne fait que l'operation create
-				$maj = array($version_cible=>$maj['create']);
+				$maj = array("0.0.1"=>$maj['create']);
 				// et on lui ajoute un appel a inc/config
 				// pour creer les metas par defaut
 				$config = charger_fonction('config','inc');
-				$maj[$version_cible][] = array($config);
+				$maj[$version_cible] = array(array($config));
 			}
 			// dans tous les cas enlever cet index du tableau
 			unset($maj['create']);
