@@ -198,7 +198,7 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'erreur_plugin_nom_fonction_interdit' => 'Nome di funzione non possibile',
 'erreur_plugin_nom_manquant' => 'Nome del plugin mancante',
 'erreur_plugin_prefix_manquant' => 'Spazio per il nome del plugin non definito',
-'erreur_plugin_tag_plugin_absent' => '<plugin> mancante nel file di definizione',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; mancante nel file di definizione',
 'erreur_plugin_version_manquant' => 'Versione del plugin mancante',
 
 // F

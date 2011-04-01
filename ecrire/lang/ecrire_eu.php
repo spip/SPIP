@@ -189,7 +189,7 @@ Ez balidatu inportazio galdera hau.
 'erreur_plugin_nom_fonction_interdit' => 'Funtzio izena debekatuta',
 'erreur_plugin_nom_manquant' => 'Plugin-aren izena eskas',
 'erreur_plugin_prefix_manquant' => 'Plugin-aren izendatze eremua ez da definitua',
-'erreur_plugin_tag_plugin_absent' => '<plugin> eskas definizioen fitxategian',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; eskas definizioen fitxategian',
 'erreur_plugin_version_manquant' => 'Plugin-aren bersioa eskas',
 
 // F

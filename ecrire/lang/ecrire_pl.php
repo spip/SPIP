@@ -198,7 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'Nieprawidłowa nazwa funkcji',
 'erreur_plugin_nom_manquant' => 'Brak nazwy rozszerzenia',
 'erreur_plugin_prefix_manquant' => 'Nie zdefiniowana nazwa rozszerzenia',
-'erreur_plugin_tag_plugin_absent' => '<plugin> nie ma w pliku definicji',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; nie ma w pliku definicji',
 'erreur_plugin_version_manquant' => 'Brakuje wersji rozszerzenia',
 
 // F

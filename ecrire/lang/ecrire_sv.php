@@ -190,7 +190,7 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'erreur_plugin_nom_fonction_interdit' => 'Förbjudet namn för funktionen',
 'erreur_plugin_nom_manquant' => 'plugin-namnet saknas',
 'erreur_plugin_prefix_manquant' => 'Pluginens prefix odefinierad',
-'erreur_plugin_tag_plugin_absent' => '<plugin> saknas i definitionsfilen',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; saknas i definitionsfilen',
 'erreur_plugin_version_manquant' => 'Denna plugin saknar version.',
 
 // F

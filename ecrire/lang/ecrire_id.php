@@ -198,7 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'Nama fungsi yang dilarang',
 'erreur_plugin_nom_manquant' => 'Nama plugin yang hilang',
 'erreur_plugin_prefix_manquant' => 'Nama plugin tidak terdefinisi',
-'erreur_plugin_tag_plugin_absent' => '<plugin> hilang dalam berkas definisi',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; hilang dalam berkas definisi',
 'erreur_plugin_version_manquant' => 'Versi plugin yang hilang',
 
 // F
