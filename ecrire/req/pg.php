@@ -187,8 +187,10 @@ function spip_pg_ajouter_champs_timestamp($table, $couples, $desc='', $serveur='
 		// mais ceux-ci ne sont pas utilises dans le core
 		$tables[$table] = array();
 		foreach ($desc['field'] as $k=>$v){
-			if (strpos(strtolower(ltrim($v)), 'timestamp')===0)
-			$tables[$table][] = $k;
+			$v = strtolower(ltrim($v));
+			// ne pas ajouter de timestamp now() si un default est specifie
+			if (strpos($v, 'timestamp')===0 AND strpos($v, 'default')===false)
+				$tables[$table][] = $k;
 		}
 	}
 	
