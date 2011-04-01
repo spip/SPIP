@@ -52,7 +52,7 @@ $spip_jobs_liens = array(
 	"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL",
 );
 
-$spip_documents_liens_key = array(
+$spip_jobs_liens_key = array(
 		"PRIMARY KEY"		=> "id_job,id_objet,objet",
 		"KEY id_job"	=> "id_job");
 
@@ -68,7 +68,7 @@ $tables_auxiliaires['spip_resultats'] = array(
 	'key' => &$spip_resultats_key);
 $tables_auxiliaires['spip_jobs_liens'] = array(
 	'field' => &$spip_jobs_liens,
-	'key' => &$spip_documents_liens_key);
+	'key' => &$spip_jobs_liens_key);
 
 	$tables_auxiliaires = pipeline('declarer_tables_auxiliaires',$tables_auxiliaires);
 }
