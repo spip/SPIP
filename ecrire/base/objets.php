@@ -520,6 +520,7 @@ function objet_test_si_publie($objet,$id_objet, $serveur=''){
 		$boucle->where[] = $id_table.".".$id_table_objet.'='.intval($id_objet);
 
 		include_spip('public/compiler');
+		include_spip('public/composer');
 		instituer_boucle($boucle, false);
 		$res = calculer_select($boucle->select,$boucle->from,$boucle->from_type,$boucle->where,$boucle->join,$boucle->group,$boucle->order,$boucle->limit,$boucle->having,$table_objet,$id_table,$serveur);
 		if (sql_fetch($res))

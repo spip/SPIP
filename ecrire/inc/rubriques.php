@@ -293,24 +293,44 @@ function calculer_langues_rubriques() {
 // Cette fonction calcule la liste des langues reellement utilisees dans le
 // site public
 // http://doc.spip.org/@calculer_langues_utilisees
-function calculer_langues_utilisees () {
+function calculer_langues_utilisees ($serveur='') {
 	$langues = array();
 
 	$langues[$GLOBALS['meta']['langue_site']] = 1;
 
-	$result = sql_select("DISTINCT lang", "spip_articles", "statut='publie'");
-	while ($row = sql_fetch($result)) {
-		$langues[$row['lang']] = 1;
-	}
+	include_spip('base/objets');
+	$tables = lister_tables_objets_sql();
+	$trouver_table = charger_fonction('trouver_table','base');
 
-	$result = sql_select("DISTINCT lang", "spip_breves", "statut='publie'");
-	while ($row = sql_fetch($result)) {
-		$langues[$row['lang']] = 1;
-	}
+	foreach(array_keys($tables) as $t){
+		$desc = $trouver_table($t,$serveur);
+		// c'est une table avec des langues
+		if ($desc['exist']
+		  AND isset($desc['field']['lang'])
+			AND isset($desc['field']['langue_choisie'])){
 
-	$result = sql_select("DISTINCT lang", "spip_rubriques", "statut='publie'");
-	while ($row = sql_fetch($result)) {
-		$langues[$row['lang']] = 1;
+			include_spip('public/interfaces');
+			$boucle = new Boucle();
+			$boucle->show = $desc;
+			$boucle->nom = 'calculer_langues_utilisees';
+			$boucle->id_boucle = $desc['table_objet'];
+			$boucle->id_table = $desc['table_objet'];
+			$boucle->serveur = $serveur;
+			$boucle->select[] = "DISTINCT lang";
+			$boucle->from[$desc['table_objet']] = $t;
+			if (isset($desc['statut'])
+		    AND $desc['statut']){
+				include_spip('public/compiler');
+				include_spip('public/composer');
+				instituer_boucle($boucle, false);
+				$res = calculer_select($boucle->select,$boucle->from,$boucle->from_type,$boucle->where,$boucle->join,$boucle->group,$boucle->order,$boucle->limit,$boucle->having,$desc['table_objet'],$desc['table_objet'],$serveur);
+			}
+			else
+				$res = sql_select(implode(',',$boucle->select),$boucle->from);
+			while ($row = sql_fetch($res)) {
+				$langues[$row['lang']] = 1;
+			}
+		}
 	}
 
 	$langues = array_filter(array_keys($langues));
