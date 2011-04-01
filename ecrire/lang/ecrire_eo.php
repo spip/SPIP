@@ -193,7 +193,7 @@ forviŝi ilin poste).',
 'erreur_plugin_nom_fonction_interdit' => 'Malpermesata funkcio-nomo',
 'erreur_plugin_nom_manquant' => 'Kromprogramo-nomo mankas',
 'erreur_plugin_prefix_manquant' => 'Nedifinita nom-spaco de kromprogramo',
-'erreur_plugin_tag_plugin_absent' => '<kromprogramo> mankas en tiu difina dosiero',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; mankas en tiu difina dosiero',
 'erreur_plugin_version_manquant' => 'Kromprogramo-versio mankas',
 
 // F

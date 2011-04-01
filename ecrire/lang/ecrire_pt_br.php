@@ -188,7 +188,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'erreur_plugin_nom_fonction_interdit' => 'Nome de função não permitido',
 'erreur_plugin_nom_manquant' => 'Nome do plugin ausente',
 'erreur_plugin_prefix_manquant' => 'Área de nomeação do plugin não definida',
-'erreur_plugin_tag_plugin_absent' => 'ausente no arquivo de definição', # modif
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; ausente no arquivo de definição',
 'erreur_plugin_version_manquant' => 'Versão do plugin ausente',
 
 // F
