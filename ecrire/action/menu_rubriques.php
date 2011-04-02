@@ -12,7 +12,9 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+include_spip('inc/autoriser');
 include_spip('inc/texte');
+include_spip('inc/filtres');
 
 function action_menu_rubriques_dist() {
 
@@ -20,6 +22,7 @@ function action_menu_rubriques_dist() {
 	// on renvoi un 401 qui fait echouer la requete ajax silencieusement
 	if (!autoriser('ecrire')){
 		$retour = "<ul class='cols_1'><li class='toutsite'><a href='".generer_url_ecrire('accueil')."'>"._T('public:lien_connecter')."</a></li></ul>";
+		include_spip('inc/actions');
 		ajax_retour($retour);
 		exit;
 	}
@@ -61,7 +64,7 @@ function menu_rubriques($complet = true){
 		if ($nb_col <= 1) $nb_col =  ceil($total_lignes / 10);
 		foreach( $arr_low as $id_rubrique => $titre_rubrique) {
 			if (autoriser('voir','rubrique',$id_rubrique)){
-			  $ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, $i, $largeur, $image);
+			  $ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, $i);
 			  $i++;
 			}
 		}
@@ -77,9 +80,7 @@ function menu_rubriques($complet = true){
 }
 
 // http://doc.spip.org/@bandeau_rubrique
-function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $image='') {
-	global $spip_lang_left;
-
+function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal) {
 	static $zmax = 6;
 
 	$nav = "<a href='"
@@ -103,14 +104,13 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $ima
 
 
 	if ($nb_rub = count($arr_rub)) {
-		  $nb_col = min(10,max(1,ceil($nb_rub / 10)));
-		  $ret_ligne = max(4,ceil($nb_rub / $nb_col));
+		$nb_col = min(10,max(1,ceil($nb_rub / 10)));
 	}
 	$ret = "<li class='haschild'>$nav<ul class='cols_$nb_col'>";
 	foreach( $arr_rub as $id_rub => $titre_rub) {
 		if (autoriser('voir','rubrique',$id_rub)){
 			$titre = supprimer_numero(typo($titre_rub));
-			$ret .= bandeau_rubrique($id_rub, $titre, $zdecal+$i, $largeur);
+			$ret .= bandeau_rubrique($id_rub, $titre, $zdecal+$i);
 			$i++;
 		}
 	}
