@@ -30,10 +30,11 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 			list($tagname,$atts) = spip_xml_decompose_tag($tag);
 			if ($tagname=='plugin' AND is_array($sous)){
 				if (!isset($atts['spip'])
-					OR plugin_version_compatible($atts['spip'],$vspip))
+					OR plugin_version_compatible($atts['spip'],$vspip)) {
 					// on prend la derniere declaration avec ce nom
 					$p = end($sous);
 					$compat_spip = isset($atts['spip']) ? $atts['spip'] : '';
+				}
 			}
 		}
 	}
