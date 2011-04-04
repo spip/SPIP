@@ -118,8 +118,11 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	$data = array();
 	if ($type == 'rubrique')
 		$data[0] = _T('info_racine_site');
-	if ($type == 'auteur')
-		$data[0] = '&nbsp;'; # premier choix = neant (rubriques restreintes)
+	# premier choix = neant
+	# si auteur (rubriques restreintes)
+	# ou si creation avec id_rubrique=0
+	if ($type == 'auteur' OR !$id_rubrique)
+		$data[0] = '&nbsp;';
 
 	//
 	// creer une structure contenant toute l'arborescence
@@ -147,7 +150,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	if (preg_match(',^<option[^<>]*value=.(\d*).[^<>]*>([^<]*)</option>$,',$opt,$r))
 	  $r = "<input$att type='hidden' value='" . $r[1] . "' />" . $r[2] ;
 	else 
-	  $r = "<select$att size='1'>\n$opt</select>\n";
+	  $r = "<select".$att." size='1'>\n$opt</select>\n";
 
 	# message pour neuneus (a supprimer ?)
 #	if ($type != 'auteur' AND $type != 'breve')
