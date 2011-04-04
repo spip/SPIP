@@ -49,7 +49,7 @@ function articles_edit_config($row)
 
 function formulaires_editer_article_verifier_dist($id_article='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='articles_edit_config', $row=array(), $hidden=''){
 
-	$erreurs = formulaires_editer_objet_verifier('article',$id_article,array('titre'));
+	$erreurs = formulaires_editer_objet_verifier('article',$id_article,array('titre','id_parent'));
 	return $erreurs;
 }
 
