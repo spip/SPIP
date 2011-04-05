@@ -393,7 +393,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				if($dir_plugins_suppl && preg_match(',('.$dir_plugins_suppl.'),',$plugin_valides[$p]['dir'])){
 					//$plugin_valides[$p]['dir_type'] = '_DIR_RACINE';
 					$dir_type = '_DIR_RACINE';
-					if(!test_espace_prive())
+					//if(!test_espace_prive())
 						$plug = str_replace('../','',$plug);
 				}
 				$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
