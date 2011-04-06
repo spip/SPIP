@@ -191,6 +191,8 @@ function f_boite_infos($flux) {
 	$args = $flux['args'];
 	$type = $args['type'];
 	unset($args['row']);
+	if (!trouver_fond($type,"prive/objets/infos/"))
+		$type = 'objet';
 	$flux['data'] .= recuperer_fond("prive/objets/infos/$type",$args);
 	return $flux;
 }
