@@ -74,18 +74,26 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
 	return $ret;
 }
 
+// Un attribut de nom "id" a une signification particuliere en XML
+// qui ne correspond pas a l'utilissation qu'en font les plugin.xml
+// Pour eviter de complexifier la lecture de paquet.xml
+// qui n'est pour rien dans cette bevue, on doublonne l'information
+// sous les deux index "nom" et "id" dans l'arbre de syntaxe abstraite
+// pour compatibilite, mais seul le premier est disponible quand on lit
+// un paquet.xml, "id" devant etre considere comme obsolete
+
 function info_plugin_normalise_necessite($necessite)
 {
 	$res = array('necessite' => array(), 'lib' => array());
 	foreach($necessite as $need){
 		$id = $need['id'];
-
+		$v = $need['version'];
 		// Necessite SPIP version x ?
 		if (strtoupper($id)=='SPIP') {
-			$res['compatible'] = $need['version'];
+			$res['compatible'] = $v;
 		} else if (preg_match(',^lib:\s*([^\s]*),i', $id, $r)) {
-		  $res['lib'][] = array('nom' => $r[1], 'lien' => $need['src']);
-		} else $res['necessite'][] = array('nom' => $id, 'version' => $need['version']);
+			$res['lib'][] = array('nom' => $r[1], 'id' => $r[1], 'lien' => $need['src']);
+		} else $res['necessite'][] = array('id' => $id, 'nom' => $id, 'version' => $v);
 	}
 	return $res;
 }
@@ -95,7 +103,7 @@ function info_plugin_normalise_utilise($utilise)
 	$res = array();
 	foreach($utilise as $need){
 		$id = $need['id'];
-		$res[]= array('nom' => $id, 'version' => $need['version']);
+		$res[]= array('nom' => $id, 'id' => $id, 'version' => $need['version']);
 	}
 	return $res;
 }
