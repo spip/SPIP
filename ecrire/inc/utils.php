@@ -1250,15 +1250,17 @@ function generer_url_prive($script, $args="", $no_entities=false) {
 function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 	global $spip_lang_right;
 
+	$script1 = array_shift(explode('&', $script));
+
 	return "<form action='"
 	. ($script ? generer_url_ecrire($script) : '')
 	. "' "
 	. ($atts ? $atts : " method='post'")
 	.  "><div>\n"
-	. "<input type='hidden' name='exec' value='$script' />"
+	. "<input type='hidden' name='exec' value='$script1' />"
 	. $corps
 	. (!$submit ? '' :
-	     ("<div style='text-align: $spip_lang_right'><input class='fondo' type='submit' value='$submit' /></div>"))
+	     ("<div style='text-align: $spip_lang_right'><input class='fondo' type='submit' value=\"".entites_html($submit)."\" /></div>"))
 	. "</div></form>\n";
 }
 
