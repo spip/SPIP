@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.0.3'); // 31 mars 2011
+define('_ECRAN_SECURITE', '1.0.4'); // 6 avr. 2011
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -205,6 +205,11 @@ if (count($_FILES)){
 		 	unset($_FILES[$k]);
 	}
 }
+
+/* reinstall=oui un peu trop permissif */
+if (isset($_REQUEST['reinstall'])
+AND $_REQUEST['reinstall'] == 'oui')
+	$ecran_securite_raison = 'reinstall=oui';
 
 
 /*
