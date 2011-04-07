@@ -1,13 +1,1 @@
-body { font-family: Verdana, Geneva, Sans, sans-serif; }
-body { border: 0; }
-
-
-div.pos_r { position: relative; }
-
-option.selec_rub { background-repeat: no-repeat; }
-
-div.messages { padding: 5px; font-size: 10px; font-weight: bold; }
-
-
-.puce_objet .puce_objet_popup { visibility: hidden; }
-.puce_objet.on .puce_objet_popup { visibility: visible; }
+body {  }
