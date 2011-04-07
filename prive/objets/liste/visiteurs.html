@@ -32,7 +32,7 @@
 	<tbody>
 	<BOUCLE_liste_aut(AUTEURS){tout}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} aut}{!compteur_articles_filtres #ENV{filtre_statut_articles,poubelle}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
-			<td class='statut'>[(#ID_AUTEUR|puce_changement_statut{#STATUT,0,auteur})]</td>
+			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
 			<td class="messagerie">[<a href="(#ID_AUTEUR|auteur_lien_messagerie{#EN_LIGNE,#STATUT,#IMESSAGE})">[(#CHEMIN{images/m_envoi.gif}|balise_img{<:info_envoyer_message_prive:>})]</a>]</td>
 			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,26})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
 			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>

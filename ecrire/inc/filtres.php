@@ -2103,6 +2103,23 @@ function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=f
 }
 
 /**
+ * [(#STATUT|puce_statut{article})] affiche une puce passive
+ * [(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})] affiche une puce avec changement rapide
+ *
+ * utilisable sur tout objet qui a declare
+ * @param  $statut
+ * @param  $objet
+ * @param int $id_objet
+ * @param int $id_parent
+ * @return
+ */
+function filtre_puce_statut_dist($statut,$objet,$id_objet=0,$id_parent=0){
+	$puce_statut = charger_fonction('puce_statut','inc');
+	return $puce_statut($id_objet, $statut, $id_parent, $objet);
+}
+
+
+/**
  * Encoder un contexte pour l'ajax, le signer avec une cle, le crypter
  * avec le secret du site, le gziper si possible...
  * l'entree peut etre serialisee (le #ENV** des fonds ajax et ajax_stat)

@@ -80,6 +80,20 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 						'exception' => 'statut'
 					)
 				),
+				'statut_titres' => array(
+					'prepa'=>'info_article_redaction',
+					'prop'=>'info_article_propose',
+					'publie'=>'info_article_publie',
+					'refuse'=>'info_article_refuse',
+					'poubelle'=>'info_article_supprime'
+				),
+				'statut_textes_instituer' => 	array(
+					'prepa' => 'texte_statut_en_cours_redaction',
+					'prop' => 'texte_statut_propose_evaluation',
+					'publie' => 'texte_statut_publie',
+					'refuse' => 'texte_statut_refuse',
+					'poubelle' => 'texte_statut_poubelle',
+				),
 				'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
 			),
 			'spip_auteurs' => array(
@@ -120,6 +134,21 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 						'post_date' => 'date',
 						'exception' => array('statut','lien','tout')
 					),
+				),
+				'statut_images' => array(
+					'auteur-6forum-16.png',
+					'0minirezo'=>'auteur-0minirezo-16.png',
+					'1comite'=>'auteur-1comite-16.png',
+					'6forum'=>'auteur-6forum-16.png',
+					'5poubelle'=>'auteur-5poubelle-16.png',
+					'nouveau'=>''
+				),
+				'statut_titres' => array(
+					'titre_image_visiteur',
+					'0minirezo'=>'titre_image_administrateur',
+					'1comite'=>'titre_image_redacteur_02',
+					'6forum'=>'titre_image_visiteur',
+					'5poubelle'=>'titre_image_auteur_supprime',
 				),
 				'tables_jointures' => array('auteurs_liens'),
 			),
@@ -230,6 +259,11 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  * date
  * champs_versionnes
  *
+ * statut
+ * statut_images
+ * statut_titres
+ * statut_textes_instituer
+ * 
  * les infos non renseignees sont auto deduites par conventions
  * ou laissees vides
  *

@@ -20,7 +20,7 @@
 	<tbody>
 	<BOUCLE_liste_art(ARTICLES){id_trad}{statut==.*}{where?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
+			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
 			<td class="trad">[(#ENV{id_trad}|=={#ID_ARTICLE}|oui)[(#CHEMIN_IMAGE{langue-16.png}|balise_img)]]
 				[(#ENV{editable}|oui)
 				[(#ENV{id_trad}|=={#ID_ARTICLE}|non)<button type='submit' name='changer_reference_trad&#91;#ID_ARTICLE&#93;' value='#ID_ARTICLE'>[(#CHEMIN_IMAGE{langues-off-12.gif}|balise_img)]</button>]

@@ -6,7 +6,7 @@
 	<ul class="menu sites">
 		<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}{statut==.?}{pagination #GET{nb} #GET{nomp}}>
 			<li><a href="[(#ID_SYNDIC|generer_url_entite{site})]"
-						title="[(#VAL{site}|objet_info{texte_objet}|_T) #ID_SYNDIC]">[(#ID_SYNDIC|puce_changement_statut{#STATUT,#ID_RUBRIQUE,site}) ][(#NOM_SITE|couper{80}|sinon{<:info_sans_titre:>})]</a></li>
+						title="[(#VAL{site}|objet_info{texte_objet}|_T) #ID_SYNDIC]">[(#STATUT|puce_statut{site,#ID_SYNDIC,#ID_RUBRIQUE}) ][(#NOM_SITE|couper{80}|sinon{<:info_sans_titre:>})]</a></li>
 		</BOUCLE_sites>
 	</ul>
 	[<p class="pagination">[<em>(#VAL{site}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]

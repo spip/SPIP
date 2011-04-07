@@ -11,156 +11,294 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ACTIVER_PUCE_RAPIDE'))
+	define('_ACTIVER_PUCE_RAPIDE', true);
 
-// http://doc.spip.org/@inc_puce_statut_dist
-function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type, $ajax=false) {
+/**
+ * Afficher la puce statut d'un objet
+ *
+ *
+ * http://doc.spip.org/@inc_puce_statut_dist
+ *
+ * @param int $id_objet
+ * @param string $statut
+ * @param int $id_parent
+ * @param string $type
+ * @param bool $ajax
+ *   indique qu'il ne faut renvoyer que le coeur du menu car on est dans la requete ajax post changement rapide
+ * @return string
+ */
+function inc_puce_statut_dist($id_objet, $statut, $id_parent, $type, $ajax=false, $menu_rapide=_ACTIVER_PUCE_RAPIDE) {
 	$type = objet_type($type);
+	// cas prioritaire : fonction perso, qui permet aussi de gerer les cas historiques
 	if ($f = charger_fonction($type,'puce_statut',true))
-		return $f($id_objet, $statut, $id_rubrique, $type, $ajax);
+		return $f($id_objet, $statut, $id_parent, $type, $ajax, $menu_rapide);
+
+	// si statut_image trouve quelque chose (et '' est quelque chose)
+	// composer une puce, avec si possible changement rapide
+	elseif(!is_null($puce=puce_statut_changement_rapide($id_objet,$statut,$id_parent,$type,$ajax,$menu_rapide))){
+		return $puce;
+	}
+
+	// sinon fausse puce avec le type de l'image
 	else
-		return "<img src='" . chemin_image("$type-24.png") . "' alt='' />";
+		return http_img_pack("$type-16.png",'');
+}
+
+/**
+ * Recuperer l'image correspondant au statut, telle que declaree dans
+ * declarer_tables_objets_sql
+ * sous la forme
+ * array('imagepardefaut.png','statut1'=>'imagestatut1.png','statut2'=>imagestatut2.png' ...)
+ * mettre une chaine vide pour ne pas avoir d'image pour un statut particulier
+ *
+ * si rien de declare et que le statut est dans les cas connus (prepa, prop, publie, refuse, poubelle)
+ * renvoyer l'image par defaut
+ *
+ * @param string $objet
+ * @param string $statut
+ * @return string
+ *   null si pas capable de determiner l'image
+ */
+function statut_image($objet,$statut){
+	$src = null;
+	$table = table_objet_sql($objet);
+	$desc = lister_tables_objets_sql($table);
+	if (isset($desc['statut_images'])){
+		// si une declaration statut_images
+		// mais rien pour le statut demande, ne rien afficher
+		$src = '';
+		if (isset($desc['statut_images'][$statut]))
+			$src = $desc['statut_images'][$statut];
+		// sinon image par defaut ?
+		elseif (isset($desc['statut_images'][0]))
+			$src = $desc['statut_images'][0];
+	}
+	else {
+		switch ($statut) {
+			case 'prepa':
+				$src = 'puce-preparer-8.png';
+				break;
+			case 'prop':
+				$src = 'puce-proposer-8.png';
+				break;
+			case 'publie':
+				$src = 'puce-publier-8.png';
+				break;
+			case 'refuse':
+				$src = 'puce-refuser-8.png';
+				break;
+			case 'poubelle':
+			case 'poub':
+				$src = 'puce-supprimer-8.png';
+				break;
+		}
+	}
+	return $src;
+}
+
+/**
+ * Recuperer le titre correspondant au statut, tel que declaree dans
+ * declarer_tables_objets_sql
+ * sous la forme
+ * array('titre par defaut','statut1'=>'titre statut 1','statut2'=>'titre statut 2' ...)
+ * mettre une chaine vide pour ne pas avoir de titre pour un statut particulier
+ *
+ * si rien de declare et que le statut est dans les cas connus (prepa, prop, publie, refuse, poubelle)
+ * renvoyer le texte par defaut
+ *
+ * @param string $objet
+ * @param string $statut
+ * @return string
+ */
+function statut_titre($objet,$statut){
+	$titre = '';
+	$table = table_objet_sql($objet);
+	$desc = lister_tables_objets_sql($table);
+	if (isset($desc['statut_titres'])){
+		// si une declaration statut_titres
+		// mais rien pour le statut demande, ne rien afficher
+		if (isset($desc['statut_titres'][$statut]))
+			$titre = $desc['statut_titres'][$statut];
+		// sinon image par defaut ?
+		elseif (isset($desc['statut_titres'][0]))
+			$titre = $desc['statut_titres'][0];
+	}
+	else {
+		switch ($statut) {
+			case 'prepa':
+				$titre = 'texte_statut_en_cours_redaction';
+				break;
+			case 'prop':
+				$titre = 'texte_statut_propose_evaluation';
+				break;
+			case 'publie':
+				$titre = 'texte_statut_publie';
+				break;
+			case 'refuse':
+				$titre = 'texte_statut_refuse';
+				break;
+			case 'poubelle':
+			case 'poub':
+				$titre = 'texte_statut_poubelle';
+				break;
+		}
+	}
+	return $titre?_T($titre):'';
 }
 
 
-// http://doc.spip.org/@puce_statut_auteur_dist
-// Hack de compatibilite: les appels directs ont un  $type != 'auteur'
-// si l'auteur ne peut pas se connecter
-// http://doc.spip.org/@puce_statut_auteur_dist
-function puce_statut_auteur_dist($id, $statut, $id_rubrique, $type, $ajax='') {
-
-	static $titre_des_statuts ='';
-	static $images_des_statuts ='';
-
-	// eviter de retraduire a chaque appel
-	if (!$titre_des_statuts) {
-	  $titre_des_statuts = array(
-		"info_administrateurs" => _T('titre_image_administrateur'),
-		"info_redacteurs" => _T('titre_image_redacteur_02'),
-		"info_visiteurs" =>  _T('titre_image_visiteur'),
-		"info_statut_site_4" => _T('titre_image_auteur_supprime')
-		);
-
-	  $images_des_statuts = array(
-			   "info_administrateurs" => chemin_image('auteur-0minirezo-16.png'),
-			   "info_redacteurs" =>chemin_image('auteur-1comite-16.png'),
-			   "info_visiteurs" => chemin_image('auteur-6forum-16.png'),
-			   "info_statut_site_4" => chemin_image('auteur-5poubelle-16.png')
-			   );
+/**
+ * Recuperer le texte correspondant au choix de statut, tel que declare dans
+ * declarer_tables_objets_sql
+ * sous la forme
+ * array('statut1'=>'texte statut 1','statut2'=>'texte statut 2' ...)
+ * mettre une chaine vide pour ne pas proposer un statut
+ * les statuts seront proposes dans le meme ordre que dans la declaration
+ *
+ * si rien de declare et que le statut est dans les cas connus (prepa, prop, publie, refuse, poubelle)
+ * renvoyer le texte par defaut
+ *
+ * @param string $objet
+ * @param string $statut
+ * @return string
+ */
+function statut_texte_instituer($objet,$statut){
+	$texte = '';
+	$table = table_objet_sql($objet);
+	$desc = lister_tables_objets_sql($table);
+	if (isset($desc['statut_textes_instituer'])){
+		// si une declaration statut_titres
+		// mais rien pour le statut demande, ne rien afficher
+		if (isset($desc['statut_textes_instituer'][$statut]))
+			$texte = $desc['statut_textes_instituer'][$statut];
 	}
+	else {
+		switch ($statut) {
+			case 'prepa':
+				$texte = 'texte_statut_en_cours_redaction';
+				break;
+			case 'prop':
+				$texte = 'texte_statut_propose_evaluation';
+				break;
+			case 'publie':
+				$texte = 'texte_statut_publie';
+				break;
+			case 'refuse':
+				$texte = 'texte_statut_refuse';
+				break;
+			case 'poubelle':
+			case 'poub':
+				$texte = 'texte_statut_poubelle';
+				break;
+		}
+	}
+	return $texte?_T($texte):'';
+}
 
-	if ($statut == 'nouveau') return '';
 
-	$index = array_search($statut, $GLOBALS['liste_des_statuts']);
+/**
+ * Afficher la puce statut d'un auteur
+ *
+ * Ne semble plus servir : desactive
+ * Hack de compatibilite: les appels directs ont un  $type != 'auteur'
+ * si l'auteur ne peut pas se connecter
+ *
+ * http://doc.spip.org/@puce_statut_auteur_dist
+ *
+ * @param int $id
+ * @param string $statut
+ * @param int $id_parent
+ * @param string $type
+ * @param string $ajax
+ * @param bool $menu_rapide
+ * @return string
+ */
+function puce_statut_auteur_dist($id, $statut, $id_parent, $type, $ajax='', $menu_rapide=_ACTIVER_PUCE_RAPIDE) {
+	$img = statut_image('auteur',$statut);
+	if (!$img) return '';
+	$alt = statut_titre('auteur',$statut);
 
-	if (!$index) $index = 'info_visiteurs';
-
-	$img = $images_des_statuts[$index];
-	$alt = $titre_des_statuts[$index];
-
+	$fond = ''; $titre = '';
+	/*
 	if ($type != 'auteur') {
 	  $img2 = chemin_image('del-16.png');
 	  $titre = _T('titre_image_redacteur');
 	  $fond = http_style_background($img2, 'top left no-repeat;');
-	} else {$fond = ''; $titre = $alt;}
-	  
+	}
+	else {
+	}
+	*/
 	return http_img_pack($img, $alt, $fond, $titre);
 }
 
 
 // http://doc.spip.org/@puce_statut_rubrique_dist
-function puce_statut_rubrique_dist($id, $statut, $id_rubrique, $type, $ajax='') {
-
-	return "<img src='" . chemin_image('rubrique-12.png') . "' alt='' />";
+function puce_statut_rubrique_dist($id, $statut, $id_rubrique, $type, $ajax='',$menu_rapide=_ACTIVER_PUCE_RAPIDE) {
+	return http_img_pack('rubrique-16.png', '');
 }
 
 // http://doc.spip.org/@puce_statut_article_dist
-function puce_statut_article_dist($id, $statut, $id_rubrique, $type='article', $ajax = false) {
-	global $lang_objet;
-	
-	static $coord = array('publie' => 2,
-			      'prepa' => 0,
-			      'prop' => 1,
-			      'refuse' => 3,
-			      'poubelle' => 4);
+function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='article', $ajax = false, $menu_rapide=_ACTIVER_PUCE_RAPIDE) {
+	$src = statut_image($type, $statut);
+	if (!$src)
+		return $src;
 
-	$lang_dir = lang_dir($lang_objet);
-	if (!$id) {
-	  $id = $id_rubrique;
+	if (!$id
+	  OR !_SPIP_AJAX
+	  OR !$menu_rapide
+	  OR !$id_rubrique
+	  OR !autoriser('publierdans', 'rubrique', $id_rubrique)) {
 	  $ajax_node ='';
-	} else	$ajax_node = " id='imgstatut$type$id'";
+	}
+	else
+		$ajax_node = " id='imgstatut$type$id'";
 
 
-	$inser_puce = puce_statut($statut, " width='8' height='8' style='margin: 1px;'$ajax_node");
+	$inser_puce = http_img_pack($src,statut_titre($type, $statut),$ajax_node);
 
-	if (!autoriser('publierdans', 'rubrique', $id_rubrique)
-	OR !_ACTIVER_PUCE_RAPIDE)
+	if (!$ajax_node)
 		return $inser_puce;
 
-	$titles = array(
-			  "blanche" => _T('texte_statut_en_cours_redaction'),
-			  "orange" => _T('texte_statut_propose_evaluation'),
-			  "verte" => _T('texte_statut_publie'),
-			  "rouge" => _T('texte_statut_refuse'),
-			  "poubelle" => _T('texte_statut_poubelle'));
+	$table = table_objet_sql($type);
+	$desc = lister_tables_objets_sql($table);
+	if (!isset($desc['statut_textes_instituer']))
+		return $inser_puce;
 
-	$clip = 1+ (11*$coord[$statut]);
+	$coord = array_flip(array_keys($desc['statut_textes_instituer']));
+	if (!isset($coord[$statut]))
+		return $inser_puce;
+
+	$unit = 8/*widh de img*/+4/*padding*/;
+	$margin = 4; /* marge a gauche + droite */
+	$zero = 1 /*border*/ + $margin/2 + 2 /*padding*/;
+	$clip = $zero+ ($unit*$coord[$statut]);
 
 	if ($ajax){
-		return 	"<span class='puce_article_fixe'>"
+		$width = $unit*count($desc['statut_textes_instituer'])+$margin;
+		$out = "<span class='puce_objet_fixe $type'>"
 		. $inser_puce
 		. "</span>"
-		. "<span class='puce_article_popup' id='statutdecal$type$id' style='margin-left: -$clip"."px;'>"
-		  . afficher_script_statut($id, $type, -1, 'puce-preparer-8.png', 'prepa', $titles['blanche'])
-		  . afficher_script_statut($id, $type, -12, 'puce-proposer-8.png', 'prop', $titles['orange'])
-		  . afficher_script_statut($id, $type, -23, 'puce-publier-8.png', 'publie', $titles['verte'])
-		  . afficher_script_statut($id, $type, -34, 'puce-refuser-8.png', 'refuse', $titles['rouge'])
-		  . afficher_script_statut($id, $type, -45, 'puce-supprimer-8.png', 'poubelle', $titles['poubelle'])
-		  . "</span>";
+		. "<span class='puce_objet_popup $type' id='statutdecal$type$id' style='width:{$width}px;margin-left:-{$clip}px;'>";
+		$i=0;
+		foreach($desc['statut_textes_instituer'] as $s=>$t){
+			$out .= afficher_script_statut($id, $type, -$zero-$i++*$unit, statut_image($type,$s), $s, _T($t));
+		}
+		$out .= "</span>";
+		return $out;
 	}
-
-	$nom = "puce_statut_";
-
-	if ((! _SPIP_AJAX) AND $type != 'article') 
-	  $over ='';
 	else {
 
+		$nom = "puce_statut_";
 	  $action = generer_url_ecrire('puce_statut',"",true);
 	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', '$id', '$action'); }";
-	  $over = "\nonmouseover=\"$action\"";
+	  $over = " onmouseover=\"$action\"";
+
+		$lang_dir = lang_dir($GLOBALS['lang_objet']);
+		return 	"<span class='puce_objet $type' id='$nom$type$id' dir='$lang_dir'$over>"
+		. $inser_puce
+		. '</span>';
 	}
-
-	return 	"<span class='puce_article' id='$nom$type$id' dir='$lang_dir'$over>"
-	. $inser_puce
-	. '</span>';
-}
-
-
-// La couleur du statut
-// http://doc.spip.org/@puce_statut
-function puce_statut($statut, $atts='') {
-	switch ($statut) {
-		case 'publie':
-			$img = 'puce-publier-8.png';
-			$alt = _T('info_article_publie');
-			return http_img_pack($img, $alt, $atts);
-		case 'prepa':
-			$img = 'puce-preparer-8.png';
-			$alt = _T('info_article_redaction');
-			return http_img_pack($img, $alt, $atts);
-		case 'prop':
-			$img = 'puce-proposer-8.png';
-			$alt = _T('info_article_propose');
-			return http_img_pack($img, $alt, $atts);
-		case 'refuse':
-			$img = 'puce-refuser-8.png';
-			$alt = _T('info_article_refuse');
-			return http_img_pack($img, $alt, $atts);
-		case 'poubelle':
-			$img = 'puce-supprimer-8.png';
-			$alt = _T('info_article_supprime');
-			return http_img_pack($img, $alt, $atts);
-	}
-	return http_img_pack($img, $alt, $atts);
 }
 
 // http://doc.spip.org/@afficher_script_statut
@@ -169,10 +307,17 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act='') 
 	$h = generer_action_auteur("instituer_$type","$id-$statut");
 	$h = "javascript:selec_statut('$id', '$type', $n, '$i', '$h');";
 	$t = supprimer_tags($titre);
-	$inf = getimagesize($i);
-	return "<a href=\"$h\"\ntitle=\"$t\"$act><img src='$i' $inf[3] alt=' '/></a>";
+	return "<a href=\"$h\" title=\"$t\"$act>".http_img_pack($i,$t)."</a>";
 }
 
+// compat
+// La couleur du statut
+// http://doc.spip.org/@puce_statut
 
+function puce_statut($statut, $atts='') {
+	$src = statut_image('article',$statut);
+	if (!$src) return '';
+	return http_img_pack($src, statut_titre('article',$statut), $atts);
+}
 
 ?>
