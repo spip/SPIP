@@ -14,66 +14,73 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // lecture d'un texte ecrit en pseudo-xml issu d'un fichier plugin.xml
 // et conversion approximative en tableau PHP.
-
-function plugins_infos_plugin($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
-{
+function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	include_spip('inc/xml');
 	$arbre = spip_xml_parse($desc);
-	if ($plug) {
-	  $verifie_conformite = charger_fonction('verifie_conformite','plugins');
-	  $verifie_conformite($plug, $arbre, $dir_plugins);
-	}
-	$extraire_boutons = charger_fonction('extraire_boutons','plugins');
-	$les_boutons = $extraire_boutons($arbre);
-	if (isset($arbre['erreur'])) 
-	  spip_log("get_infos $plug " . @join(' ', $arbre['erreur']));
+
+	$verifie_conformite = charger_fonction('verifie_conformite','plugins');
+	$verifie_conformite($plug, $arbre, $dir_plugins);
 
 	include_spip('inc/charsets');
-	$ret = info_plugin_normalise_necessite($arbre['necessite']);
-	$ret['utilise'] = info_plugin_normalise_utilise($arbre['utilise']);
-	$ret['nom'] = charset2unicode(spip_xml_aplatit($arbre['nom']));
-	$ret['version'] = trim(end($arbre['version']));
-
-	if (isset($arbre['auteur']))
-		$ret['auteur'] = spip_xml_aplatit($arbre['auteur']);
+	if (isset($arbre['categorie']))
+		$ret['categorie'] = trim(spip_xml_aplatit($arbre['categorie']));
+	if (isset($arbre['nom']))
+		$ret['nom'] = charset2unicode(spip_xml_aplatit($arbre['nom']));
 	if (isset($arbre['icon']))
 		$ret['icon'] = trim(spip_xml_aplatit($arbre['icon']));
+	if (isset($arbre['auteur']))
+		$ret['auteur'] = spip_xml_aplatit($arbre['auteur']);
+	if (isset($arbre['licence']))
+		$ret['licence'] = spip_xml_aplatit($arbre['licence']);
+	if (isset($arbre['version']))
+		$ret['version'] = trim(spip_xml_aplatit($arbre['version']));
+	if (isset($arbre['version_base']))
+		$ret['version_base'] = trim(spip_xml_aplatit($arbre['version_base']));
+	if (isset($arbre['etat']))
+		$ret['etat'] = trim(spip_xml_aplatit($arbre['etat']));
 	if (isset($arbre['description']))
 		$ret['description'] = spip_xml_aplatit($arbre['description']);
 	if (isset($arbre['lien']))
 		$ret['lien'] = join(' ',$arbre['lien']);
-	if (isset($arbre['etat']))
-		$ret['etat'] = trim(end($arbre['etat']));
 	if (isset($arbre['options']))
 		$ret['options'] = $arbre['options'];
-	if (isset($arbre['licence']))
-		$ret['licence'] = spip_xml_aplatit($arbre['licence']);
-	if (isset($arbre['install']))
-		$ret['install'] = $arbre['install'];
-	if (isset($arbre['config']))
-		$ret['config'] = spip_xml_aplatit($arbre['config']);
-	if (isset($arbre['meta']))
-		$ret['meta'] = spip_xml_aplatit($arbre['meta']);
 	if (isset($arbre['fonctions']))
 		$ret['fonctions'] = $arbre['fonctions'];
-	$ret['prefix'] = trim(array_pop($arbre['prefix']));
-	if (isset($arbre['pipeline']))
-		$ret['pipeline'] = $arbre['pipeline'];
-	if (isset($arbre['erreur']))
-		$ret['erreur'] = $arbre['erreur'];
-	if (isset($arbre['version_base']))
-		$ret['version_base'] = trim(end($arbre['version_base']));
+	if (isset($arbre['prefix']))
+		$ret['prefix'] = trim(spip_xml_aplatit($arbre['prefix']));
+	if (isset($arbre['install']))
+		$ret['install'] = $arbre['install'];
+	if (isset($arbre['meta']))
+		$ret['meta'] = trim(spip_xml_aplatit($arbre['meta']));
+
+	$necessite = info_plugin_normalise_necessite($arbre['necessite']);
+	if (isset($necessite['compatible']))
+		$ret['compatible'] = $necessite['compatible'];
+	$ret['necessite'] = $necessite['necessite'];
+	$ret['lib'] = $necessite['lib'];
+	$ret['utilise'] = info_plugin_normalise_utilise($arbre['utilise']);
 
 	$ret['path'] = $arbre['path'];
+	if (isset($arbre['pipeline']))
+		$ret['pipeline'] = $arbre['pipeline'];
+
+	$extraire_boutons = charger_fonction('extraire_boutons','plugins');
+	$les_boutons = $extraire_boutons($arbre);
+	$ret['bouton'] = $les_boutons['bouton'];
+	$ret['onglet'] = $les_boutons['onglet'];
+		
+	if (isset($arbre['config']))
+		$ret['config'] = spip_xml_aplatit($arbre['config']);
 	if (isset($arbre['noisette']))
 		$ret['noisette'] = $arbre['noisette'];
 
-	$ret['bouton'] = $les_boutons['bouton'];
-	$ret['onglet'] = $les_boutons['onglet'];
-
+	if (isset($arbre['erreur'])) {
+		$ret['erreur'] = $arbre['erreur'];
+		if ($plug) spip_log("infos_plugin $plug " . @join(' ', $arbre['erreur']));
+	}
+	
 	return $ret;
 }
-
 // Un attribut de nom "id" a une signification particuliere en XML
 // qui ne correspond pas a l'utilissation qu'en font les plugin.xml
 // Pour eviter de complexifier la lecture de paquet.xml
@@ -82,28 +89,34 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
 // pour compatibilite, mais seul le premier est disponible quand on lit
 // un paquet.xml, "id" devant etre considere comme obsolete
 
-function info_plugin_normalise_necessite($necessite)
-{
+function info_plugin_normalise_necessite($necessite) {
 	$res = array('necessite' => array(), 'lib' => array());
-	foreach($necessite as $need){
-		$id = $need['id'];
-		$v = $need['version'];
-		// Necessite SPIP version x ?
-		if (strtoupper($id)=='SPIP') {
-			$res['compatible'] = $v;
-		} else if (preg_match(',^lib:\s*([^\s]*),i', $id, $r)) {
-			$res['lib'][] = array('nom' => $r[1], 'id' => $r[1], 'lien' => $need['src']);
-		} else $res['necessite'][] = array('id' => $id, 'nom' => $id, 'version' => $v);
+
+	if (is_array($necessite)) {
+		foreach($necessite as $need) {
+			$id = $need['id'];
+			$v = $need['version'];
+			
+			// Necessite SPIP version x ?
+			if (strtoupper($id)=='SPIP') {
+				$res['compatible'] = $v;
+			} else if (preg_match(',^lib:\s*([^\s]*),i', $id, $r)) {
+				$res['lib'][] = array('nom' => $r[1], 'id' => $r[1], 'lien' => $need['src']);
+			} else $res['necessite'][] = array('id' => $id, 'nom' => $id, 'version' => $v);
+		}
 	}
+	
 	return $res;
 }
 
-function info_plugin_normalise_utilise($utilise)
-{
+function info_plugin_normalise_utilise($utilise) {
 	$res = array();
-	foreach($utilise as $need){
-		$id = $need['id'];
+
+	if (is_array($utilise)) {
+		foreach($utilise as $need){
+			$id = $need['id'];
 		$res[]= array('nom' => $id, 'id' => $id, 'version' => $need['version']);
+		}
 	}
 	return $res;
 }
