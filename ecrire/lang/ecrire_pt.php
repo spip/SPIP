@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Accesso proibido ',
 'avis_article_modifie' => 'Atenção, @nom_auteur_modif@  trabalhou neste artigo há @date_diff@ minutes',
 'avis_aucun_resultat' => 'Nenhum resultado ',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'O caminho que escolheu ',
 'avis_chemin_invalide_2' => 'não parece válido. Favor volte à página anterior e verifique as informações fornecidas. ',
 'avis_connexion_echec_1' => 'A ligação ao servidor  SQL falhou.', # MODIF
@@ -194,6 +195,8 @@ ou da rede',
 'entree_texte_breve' => 'Texto da notícia',
 'entree_titre_obligatoire' => '<b>Título</b> [Obrigatório]<br />', # MODIF
 'entree_url' => 'O endereço (URL) do seu sítio',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fichier absent', # NEW
 'erreur_plugin_fichier_def_absent' => 'Fichier de définition absent', # NEW
@@ -323,6 +326,8 @@ ou da rede',
 'info_articles_2' => 'Artigos',
 'info_articles_auteur' => 'Os artigos deste autor',
 'info_articles_lies_mot' => 'Os artigos ligados a esta palavra-chave',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Artigos encontrados',
 'info_articles_trouves_dans_texte' => 'Artigos encontrados (no texto)',
 'info_attente_validation' => 'Os seus artigos à espera de validação',
@@ -502,6 +507,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
  e o seu sítio já não funcionará .<br />{{Re-instalar os
  ficheiros de SPIP.}}', # MODIF
 'info_mode_fonctionnement_defaut_forum_public' => 'Modo de funcionamento por defeito dos fóruns públicos',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'Modificar a notícia :',
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -586,6 +592,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_preview_comite' => 'Todos os redactores podem visualizar o site',
 'info_preview_desactive' => 'A visualização está totalmente desactivada',
 'info_preview_texte' => 'É possível visualizar o site como se todas os artigos e notas (tendo pelo menos o estatuto de «proposta») estivessem publicados. Esta possibilidade deve estar disponível apenas para os administradores, para todos os redactores, ou para ninguém?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Os seus principais correspondentes',
 'info_procedez_par_etape' => 'proceder etapa por etapa',
 'info_procedure_maj_version' => 'o procedimento de actualização deve ser lançado para adaptar
@@ -751,6 +758,7 @@ numa cor que indica o seu estado:',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de données attribuée par l\'hébergeur', # NEW
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'A instalação vai provavelmente falhar,ou criar um sítio não funcional',
 'install_extension_mbstring' => 'O SPIP não funciona com :',
 'install_extension_php_obligatoire' => 'O SPIP exige a extensão php :',
@@ -851,6 +859,7 @@ numa cor que indica o seu estado:',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -976,6 +985,14 @@ numa cor que indica o seu estado:',
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Version du protocole :', # NEW
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Répertoire :', # NEW
@@ -1245,6 +1262,7 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_cadre_forum_interne' => 'Fórum interno',
 'titre_cadre_interieur_rubrique' => 'Dentro da rubrica',
 'titre_cadre_numero_auteur' => 'AUTOR NÚMERO',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Assinatura</b> [Obrigatório]<br />', # MODIF
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

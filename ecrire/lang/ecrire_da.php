@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Ingen adgang',
 'avis_article_modifie' => 'Advarsel, @nom_auteur_modif@ har arbejdet på denne artikel for @date_diff@ minutter siden',
 'avis_aucun_resultat' => 'Ingen resultater fundet.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Den sti som du har valgt',
 'avis_chemin_invalide_2' => 'ser ikke ud til at være gyldig. Gå tilbage til sidste side og kontroller de oplysninger, du har indtastet.',
 'avis_connexion_echec_1' => 'Ingen forbindelse til SQL-serveren', # MODIF
@@ -188,6 +189,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Nyhedstekst',
 'entree_titre_obligatoire' => '<b>Titel</b> [Skal oplyses]<br />',
 'entree_url' => 'Dit websteds URL',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fichier absent', # NEW
 'erreur_plugin_fichier_def_absent' => 'Fichier de définition absent', # NEW
@@ -315,6 +318,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'Artikler',
 'info_articles_auteur' => 'Denne forfatters artikler',
 'info_articles_lies_mot' => 'Artikler knyttet til dette nøgleord',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Fundne artikler',
 'info_articles_trouves_dans_texte' => 'Artikler fundet (i teksten)',
 'info_attente_validation' => 'Dine artikler som afventer godkendelse',
@@ -480,6 +485,7 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_mise_a_niveau_base' => 'SQL databaseopgradering',
 'info_mise_a_niveau_base_2' => '{{Advarsel!}} Du har installeret en version af SPIP-filer, der er ældre end dem, der var på webstedet i forvejen. Du risikerer at miste databasen og webstedet vil ikke fungere ordentligt mere.<br />{{Geninstraller SPIP-filerne.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Standard funktionsmåde for offentlige forummer',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'Ret nyhed:',
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -563,6 +569,7 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_preview_comite' => 'All authors have access to the preview mode', # NEW
 'info_preview_desactive' => 'Preview mode is disabled', # NEW
 'info_preview_texte' => 'It is possible to preview the site as if all articles and news items (which have at least the status "submitted") were already published. Should this preview mode be restricted to administrators, open to all authors, or disabled completely?', # NEW
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Dine hovedbidragydere',
 'info_procedez_par_etape' => 'gå frem skridt for skridt',
 'info_procedure_maj_version' => 'opgraderingsprocdeduren bør følges for at tilpasse databasen til den nye version af SPIP.',
@@ -724,6 +731,7 @@ i en farve, der angiver deres status:',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de données attribuée par l\'hébergeur', # NEW
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'L\'installation va probablement échouer, ou aboutir à un site non fonctionnel...', # NEW
 'install_extension_mbstring' => 'SPIP ne fonctionne pas avec :', # NEW
 'install_extension_php_obligatoire' => 'SPIP exige l\'extension php :', # NEW
@@ -824,6 +832,7 @@ i en farve, der angiver deres status:',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -949,6 +958,14 @@ i en farve, der angiver deres status:',
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Version du protocole :', # NEW
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Répertoire :', # NEW
@@ -1189,6 +1206,7 @@ demande plus de puissance au serveur.', # NEW
 'titre_cadre_forum_interne' => 'Internt forum',
 'titre_cadre_interieur_rubrique' => 'I afsnit',
 'titre_cadre_numero_auteur' => 'FORFATTER NUMMER',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Underskrift</b> [Obligatorisk]<br />',
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

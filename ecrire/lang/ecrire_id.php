@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Dilarang mengakses.',
 'avis_article_modifie' => 'Perhatian, @nom_auteur_modif@ telah mengedit artikel ini @date_diff@ menit yang lalu',
 'avis_aucun_resultat' => 'Tidak ditemukan hasil apa-apa.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Path yang telah anda pilih',
 'avis_chemin_invalide_2' => 'sepertinya tidak benar. Silakan kembali ke halaman sebelumnya dan verifikasi informasi yang diberikan.',
 'avis_connexion_echec_1' => 'Koneksi ke server SQL gagal.', # MODIF
@@ -192,6 +193,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Teks artikel berita',
 'entree_titre_obligatoire' => '<b>Judul</b> [Dibutuhkan]<BR>',
 'entree_url' => 'URL situs anda',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Berkas hilang',
 'erreur_plugin_fichier_def_absent' => 'Berkas definisi hilang',
@@ -320,6 +323,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'Artikel',
 'info_articles_auteur' => 'Artikel-artikel penulis ini',
 'info_articles_lies_mot' => 'Artikel-artikel yang terasosiasi dengan kata kunci ini',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Artikel ditemukan',
 'info_articles_trouves_dans_texte' => 'Artikel ditemukan (dalam teks)',
 'info_attente_validation' => 'Validasi tertunda artikel-artikel anda',
@@ -497,6 +502,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   tidak akan bekerja sebagaimana mestinya lagi.<br>{{Instal kembali
   berkas-berkas SPIP}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mode operasi standar forum-forum umum',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'Modifikasi artikel berita:',
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -581,6 +587,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => 'Semua penulis memiliki akses ke mode preview',
 'info_preview_desactive' => 'Mode preview dinonaktifkan',
 'info_preview_texte' => 'Ada kemungkinan melihat situs terlebih dahulu seolah-olah semua artikel dan berita (yang paling tidak memiliki status "terkirim") telah dipublikasi. Apakah mode preview ini sebaiknya dibatasi hanya kepada administrator, terbuka untuk semua penulis atau dinonaktifkan selama-lamanya?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Korespondensi utama anda',
 'info_procedez_par_etape' => 'silakan dilanjutkan langkah demi langkah',
 'info_procedure_maj_version' => 'prosedur pembaharuan hendaknya dijalankan untuk
@@ -746,6 +753,7 @@ dalam warna yang menunjukkan statusnya:',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de données attribuée par l\'hébergeur', # NEW
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'Instalasi ini tidak akan bekerja, atau akan menghasilkan situs yang tidak berfungsi sebagaimana mestinya...',
 'install_extension_mbstring' => 'SPIP tidak dapat bekerja dengan:',
 'install_extension_php_obligatoire' => 'SPIP membutuhkan sebuah ekstensi php:',
@@ -846,6 +854,7 @@ dalam warna yang menunjukkan statusnya:',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -971,6 +980,14 @@ dalam warna yang menunjukkan statusnya:',
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Versi protokol:',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Directori:',
@@ -1226,6 +1243,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_cadre_forum_interne' => 'Forum intern',
 'titre_cadre_interieur_rubrique' => 'Dalam bagian',
 'titre_cadre_numero_auteur' => 'NOMOR PENULIS',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Tanda tangan</B> [Dibutuhkan]<BR>',
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

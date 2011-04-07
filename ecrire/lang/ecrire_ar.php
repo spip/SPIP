@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'الدخول محظور',
 'avis_article_modifie' => 'تحذير، @nom_auteur_modif@ عمل على هذا المقال منذ @date_diff@ دقيقة',
 'avis_aucun_resultat' => 'لا توجد نتائج.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'لا يبدو المسار',
 'avis_chemin_invalide_2' => 'الذي حددته صالحاً. الرجاء العودة الى الصفحة السابقة والتأكد من المعلومات المدخلة. والتأكد من المعلومات المدخلة.',
 'avis_connexion_echec_1' => 'فشل الاتصال بقاعدة البيانات.',
@@ -194,13 +195,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'مادة الخبر',
 'entree_titre_obligatoire' => '<b>العنوان</b> [إجباري]<br />',
 'entree_url' => 'عنوان موقعك',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'فشل الغاء تثبيت الملحق. ولكن يمكنك ايقافه.',
 'erreur_plugin_fichier_absent' => 'ملف غير موجود',
 'erreur_plugin_fichier_def_absent' => 'ملف اعداد غير موجود',
 'erreur_plugin_nom_fonction_interdit' => 'اسم دالة غير مسموح به:',
 'erreur_plugin_nom_manquant' => 'اسم الملحق غير الموجود',
 'erreur_plugin_prefix_manquant' => 'حقل تسمية الملحق غير محدد',
-'erreur_plugin_tag_plugin_absent' => '<ملحق> غير موجود في ملف التعريف', # MODIF
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; غير موجود في ملف التعريف',
 'erreur_plugin_version_manquant' => 'اصدار الملحق غير موجود',
 
 // F
@@ -323,6 +326,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'المقالات',
 'info_articles_auteur' => 'مقالات هذا المؤلف',
 'info_articles_lies_mot' => 'المقالات المرتبطة بهذا المفتاح',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'المقالات التي عثر عليها',
 'info_articles_trouves_dans_texte' => 'المقالات التي عثر عليها (في المادة)',
 'info_attente_validation' => 'مقالاتك المنتظرة التصديق',
@@ -506,6 +511,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 مما يحول دون عمل موقعك بشكل سليم.<br />{{إعادة تثبيت
 ملفات SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'الوضعية الافتراضية لتشغيل المنتديات العامة',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'تغيير المؤلف:',
 'info_modifier_breve' => 'تعديل الخبر:',
 'info_modifier_mot' => 'تغيير المفتاح:',
@@ -588,6 +594,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => ' يحق لجميع المحررين الاطلاع على عرض مسبق للموقع',
 'info_preview_desactive' => 'تم تعطيل العرض المسبق',
 'info_preview_texte' => 'من الممكن عرض الموقع مسبقاً كما لو ان كل المقالات والاخبار (التي تتمتع بوضعية «مقترح» على الاقل) منشورة. هل تتاح هذه الوظيفة للمدراء فقط او لجميع المحررين او تُعطل؟',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'مراسلوك الأساسيون',
 'info_procedez_par_etape' => 'الرجاء إتباع الخطوة خطوة ',
 'info_procedure_maj_version' => 'يجب تنفيذ عملية الترقية لتكييف
@@ -753,6 +760,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_webmestre_forces' => 'المشرفون محددون حالياً في <tt>@file_options@</tt>.',
 'install_adresse_base_hebergeur' => 'عنوان قاعدة البيانات التي خصصها لك المضيف',
 'install_base_ok' => 'تم التعرف على القاعدة @base@',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'الارجح ان التثبيت سيفشل او يؤدي الى موقع غير سليم...',
 'install_extension_mbstring' => 'لا يعمل SPIP مع:',
 'install_extension_php_obligatoire' => 'يتطلب SPIP ملحق php:',
@@ -853,6 +861,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_bando_outils_afficher' => 'عرض الأدوات',
 'label_bando_outils_masquer' => 'إخفاء الأدوات',
 'label_choix_langue' => 'حدد لغتك',
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'شعار الموقع',
 'label_taille_ecran' => 'عرض الشاشة',
 'label_texte_et_icones_navigation' => 'قائمة التصفح',
@@ -979,6 +988,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'plugins_vue_liste' => 'لائحة',
 'protocole_ldap' => 'إصدار البروتوكول:',
 
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
+
 // R
 'repertoire_plugins' => 'دليل:',
 
@@ -1047,7 +1064,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_compacter_avertissement' => 'حذار من تفعيل هذه الخيارات خلال تطوير الموقع: فالعناصر المضغوطة سوف تفقد مقروئيتها.',
 'texte_compacter_script_css' => 'يستطيع SPIP ضغط رموز جافاسكريبت واوراق الأنماط ليخزنها في ملفات ثابتة، مما يسرّع عرض الموقع.',
 'texte_compatibilite_html' => 'يمكنك الطلب من SPIP إنتاج علامات متوافقة مع مقياس <i>HTML4</i> في الموقع العمومي او السماح له باستخدام إمكانات مقياس <i>HTML5</i> الأحدث.',
-'texte_compatibilite_html_attention' => 'لا يشكل تفعيل خيار <i>HTML5</i> أية مخاطرة، ولكن اذا اخترت التفعيل يجب ان تبدأ صفحات موقعك بالعبارة التالية لكي تكون صالحة: <code><!DOCTYPE html></code>.', # MODIF
+'texte_compatibilite_html_attention' => 'لا يشكل تفعيل خيار <i>HTML5</i> أية مخاطرة، ولكن اذا اخترت التفعيل يجب ان تبدأ صفحات موقعك بالعبارة التالية لكي تكون صالحة: <code><!DOCTYPE html></code>.',
 'texte_compresse_ou_non' => '(يمكن ضغط هذا أم لا)',
 'texte_compresseur_page' => 'يستطيع SPIP، وبشكل آلي، ضغط كل صفحة يعرضها على
 زوار الموقع. ويتيح هذا الخيار تحسين تدفق البيانات (فيصبح
@@ -1248,6 +1265,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_cadre_forum_interne' => 'المنتدى الداخلي',
 'titre_cadre_interieur_rubrique' => 'في القسم',
 'titre_cadre_numero_auteur' => 'مؤلف رقم',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>التوقيع<b> [إجباري]<br />',
 'titre_compacter_script_css' => 'ضغط الرموز البرمجية وأوراق الأنماط',
 'titre_compresser_flux_http' => 'ضغط تدفق HTTP',

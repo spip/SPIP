@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Access forbidden.',
 'avis_article_modifie' => 'Warning, @nom_auteur_modif@ has worked on this article @date_diff@ minutes ago',
 'avis_aucun_resultat' => 'No results found.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'The path you have selected',
 'avis_chemin_invalide_2' => 'does not seem valid. Please return to the previous page and verify the information provided.',
 'avis_connexion_echec_1' => 'The connection to the SQL server failed.',
@@ -192,6 +193,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Text of news item',
 'entree_titre_obligatoire' => '<b>Title</b> [Required]<br />',
 'entree_url' => 'Your site\'s URL',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'The uninstallation of the plugin failed. You may, however, deactivate it.',
 'erreur_plugin_fichier_absent' => 'File missing',
 'erreur_plugin_fichier_def_absent' => 'Definition file missing',
@@ -320,6 +323,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'Articles',
 'info_articles_auteur' => 'This author\'s articles',
 'info_articles_lies_mot' => 'Articles associated with this keyword',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Articles found',
 'info_articles_trouves_dans_texte' => 'Articles found (in the text)',
 'info_attente_validation' => 'Your articles pending validation',
@@ -501,6 +506,7 @@ through an FTP access to the Web site.</p>',
   and your site will not work properly anymore.<br />{{Reinstall
   SPIP files.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Default operation mode of public forums',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Edit author details:',
 'info_modifier_breve' => 'Modify the news item:',
 'info_modifier_mot' => 'Edit the keyword:',
@@ -583,6 +589,7 @@ through an FTP access to the Web site.</p>',
 'info_preview_comite' => 'All authors have access to the preview mode',
 'info_preview_desactive' => 'Preview mode is disabled',
 'info_preview_texte' => 'It is possible to preview the site as if all articles and news items (which have at least the status "submitted") were already published. Should this preview mode be restricted to administrators, open to all authors, or disabled completely?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Your main correspondents',
 'info_procedez_par_etape' => 'please proceed step by step',
 'info_procedure_maj_version' => 'the upgrade procedure should be ran to adapt
@@ -748,6 +755,7 @@ in a colour indicating their status:',
 'info_webmestre_forces' => 'The web administrators are currently defined in <tt>@file_options@</tt>.',
 'install_adresse_base_hebergeur' => 'Database address attributed by the service provider',
 'install_base_ok' => 'The base @base@ was identified',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'This installation will probably not work, or will result in a nonfunctional site...',
 'install_extension_mbstring' => 'SPIP does not work with:',
 'install_extension_php_obligatoire' => 'SPIP requires a php extension:',
@@ -848,6 +856,7 @@ in a colour indicating their status:',
 'label_bando_outils_afficher' => 'Show the tools',
 'label_bando_outils_masquer' => 'Hide the tools',
 'label_choix_langue' => 'Choose your language',
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Website slogan',
 'label_taille_ecran' => 'Screen width',
 'label_texte_et_icones_navigation' => 'Navigation menu',
@@ -973,6 +982,14 @@ in a colour indicating their status:',
 'plugins_vue_hierarchie' => 'Hierarchy',
 'plugins_vue_liste' => 'List',
 'protocole_ldap' => 'Protocol version:',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Directory:',
@@ -1233,6 +1250,7 @@ you can perform searches on sites and
 'titre_cadre_forum_interne' => 'Internal forum',
 'titre_cadre_interieur_rubrique' => 'In section',
 'titre_cadre_numero_auteur' => 'AUTHOR NUMBER',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Signature</b> [Required]<br />',
 'titre_compacter_script_css' => 'Compression of scripts and CSS',
 'titre_compresser_flux_http' => 'Compression of HTTP data',

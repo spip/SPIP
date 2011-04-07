@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Dostęp zabroniony.',
 'avis_article_modifie' => 'Uwaga, @nom_auteur_modif@ pracował nad tym artykułem @date_diff@ minut temu.',
 'avis_aucun_resultat' => 'Brak wyników szukania.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'Ścieżka, którą wybrałeś',
 'avis_chemin_invalide_2' => 'wydaje się nieprawidłowa. Proszę powrócić na poprzednią stronę w celu weryfikacji informacji.',
 'avis_connexion_echec_1' => 'Połączenie z serwerem SQL nie powiodło się.', # MODIF
@@ -192,6 +193,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Tekst newsa',
 'entree_titre_obligatoire' => '<b>Tytuł</b> [Obowiązkowo]<br />',
 'entree_url' => 'URL Twojej strony',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Brak pliku',
 'erreur_plugin_fichier_def_absent' => 'Brak pliku definicji',
@@ -320,6 +323,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'Artykuły',
 'info_articles_auteur' => 'Artykuły tego autora',
 'info_articles_lies_mot' => 'Artykuły powiązane z tym słowem kluczowym',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Artykuły znalezione',
 'info_articles_trouves_dans_texte' => 'Artykuły znalezione (w tekście)',
 'info_attente_validation' => 'Twoje artykuły oczekujące zatwierdzenia',
@@ -501,6 +506,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   lub popsuta i strona przestanie działać.<br />{{Zainstaluj ponownie
   pliki SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Domyślny tryb funkcjonowania forum publicznego',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'Zmiana newsa:',
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -585,6 +591,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => 'Wszyscy redaktorzy mogą włączyć podgląd artykułu',
 'info_preview_desactive' => 'Podgląd artykułów jest całkiem wyłączony',
 'info_preview_texte' => 'Istnieje możliwość włączania podglądu nieopublikowanych artykułów i newsów (muszą być "zaproponowane do oceny"). Czy chcesz, żeby ta funkcja była dostępna dla administratorów, redaktorów czy dla nikogo ? ',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Wasi główni korespondenci',
 'info_procedez_par_etape' => 'etap za etapem',
 'info_procedure_maj_version' => 'powinna zostać procedura uaktualniania w celu dostosowania
@@ -749,6 +756,7 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adres bazy danych przyznany przez usługodawcę hostingowego',
 'install_base_ok' => 'La base @base@ a été reconnue', # NEW
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'Instalacja może się nie powieść lub może się zdażyć, że strona przestanie działać ...',
 'install_extension_mbstring' => 'SPIP nie działa z:',
 'install_extension_php_obligatoire' => 'SPIP wymaga rozszerzenia php:',
@@ -849,6 +857,7 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -974,6 +983,14 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Liste', # NEW
 'protocole_ldap' => 'Wersja protokołu:',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Katalog :',
@@ -1233,6 +1250,7 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_cadre_forum_interne' => 'Forum wewnętrzne',
 'titre_cadre_interieur_rubrique' => 'Artykuł znajduje się w dziale',
 'titre_cadre_numero_auteur' => 'AUTOR NUMER',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Podpis</b> [Obowiązkowo]<br />',
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Toegang verboden',
 'avis_article_modifie' => 'Opgelet, @nom_auteur_modif@ heeft @date_diff@  minuten geleden aan dit artikel gewerkt.',
 'avis_aucun_resultat' => 'Geen resultaat.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'De toegang die je hebt gekozen',
 'avis_chemin_invalide_2' => 'lijkt niet geldig. Gelieve terug te keren naar de vorige pagina en de ingevulde gegevens na te kijken.',
 'avis_connexion_echec_1' => 'De verbinding met de database is mislukt.',
@@ -190,6 +191,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Tekst van het bericht',
 'entree_titre_obligatoire' => '<b>Titel</b> [verplicht]<br />',
 'entree_url' => 'Je website-adres (URL)',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echouée. Vous pouvez néanmoins le desactiver.', # MODIF
 'erreur_plugin_fichier_absent' => 'Bestand ontbreekt',
 'erreur_plugin_fichier_def_absent' => 'Definitiebestand ontbreekt',
@@ -319,6 +322,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'Artikels',
 'info_articles_auteur' => 'Artikels van deze auteur',
 'info_articles_lies_mot' => 'Artikels gekoppeld aan dit trefwoord',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Gevonden artikels',
 'info_articles_trouves_dans_texte' => 'Gevonden artikels (in de tekst)',
 'info_attente_validation' => 'Je artikels die op goedkeuring wachten',
@@ -497,6 +502,7 @@ De publieke forums kunnen per artikel toegestaan worden
  beschadigd te worden waardoor je site niet meer zal
  functioneren.<br />{{Herinstalleer de SPIP-bestanden.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Standaardwerkwijze van de publieke forums',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'De auteur wijzigen :',
 'info_modifier_breve' => 'Bericht wijzigen :',
 'info_modifier_mot' => 'Het sleutelwoord wijzigen :',
@@ -580,6 +586,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_preview_comite' => 'Alle redacteurs kunnen de site in preview zien',
 'info_preview_desactive' => 'Preview van de site is uitgeschakeld',
 'info_preview_texte' => 'Nu is het ook mogelijk om de site in preview mode te zien, alsof alle artikels en berichten (indien ze tenminste werden « voorgesteld voor publicatie ») ook echt waren gepubliceerd.Dient deze mogelijkheid te worden voorzien voor de beheerders alleen, voor alle redacteurs of voor niemand ?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Je belangrijkste correspondenten',
 'info_procedez_par_etape' => 'volg stap voor stap',
 'info_procedure_maj_version' => 'de procedure voor updaten die nodig is om de databank aan te passen
@@ -746,6 +753,7 @@ een kleur geeft hun status aan :',
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => '<modif>Adres van de database die door leverancier wordt toegekend',
 'install_base_ok' => 'De basis @base@ werd erkend',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'De installatie zal wellicht mislukken of leiden tot een niet-werkende site...',
 'install_extension_mbstring' => 'SPIP functioneert niet met  :',
 'install_extension_php_obligatoire' => 'SPIP heeft de php extensie nodig :',
@@ -846,6 +854,7 @@ een kleur geeft hun status aan :',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -971,6 +980,14 @@ een kleur geeft hun status aan :',
 'plugins_vue_hierarchie' => 'Hiërarchie',
 'plugins_vue_liste' => 'Lijst',
 'protocole_ldap' => 'De versie van het protocol :',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Map :',
@@ -1231,6 +1248,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_cadre_forum_interne' => 'Intern forum',
 'titre_cadre_interieur_rubrique' => 'In de rubriek',
 'titre_cadre_numero_auteur' => 'AUTEUR NUMMER',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Handtekening</b> [Verplicht]<br />',
 'titre_compacter_script_css' => 'Verdichting van de scripts en CSS',
 'titre_compresser_flux_http' => 'Samendrukking van de HTTP stroom',

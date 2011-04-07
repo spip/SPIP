@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Accesu torgau.',
 'avis_article_modifie' => 'Atención, @nom_auteur_modif@ trabayó n\'esti artículo hai @date_diff@ minutos.',
 'avis_aucun_resultat' => 'Dengún resultáu',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'El camín escoyíu',
 'avis_chemin_invalide_2' => 'nun paez afayaízu. Torna a la páxina anterior y revisa la información qu\'escribiste.',
 'avis_connexion_echec_1' => 'Falló l\'enxertu al servidor SQL.',
@@ -194,6 +195,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Testu de la breve',
 'entree_titre_obligatoire' => '<b>Títulu</b> [Obligatoriu]<br />',
 'entree_url' => 'Les señes (URL) del to sitiu web',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'Falló la desinstalación del complementu. Sicasí, puedes desactivalu.',
 'erreur_plugin_fichier_absent' => 'Falta l\'archivu',
 'erreur_plugin_fichier_def_absent' => 'Falta l\'archivu de definición',
@@ -323,6 +326,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'Artículos',
 'info_articles_auteur' => 'Los artículos d\'esti autor',
 'info_articles_lies_mot' => 'Los artículos enllazaos con esta pallabra-clave',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Artículos alcontraos',
 'info_articles_trouves_dans_texte' => 'Artículos alcontraos (nel testu)',
 'info_attente_validation' => 'Los tos artículos esperando validación',
@@ -506,6 +511,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
   perdida y el sitiu ya nun funcionará.<br />{{Reinstala los
   archivos de SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mou de funcionamientu por omisión de los foros públicos',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modificar l\'autor:',
 'info_modifier_breve' => 'Modificar la breve:',
 'info_modifier_mot' => 'Modificar la pallabra-clave:',
@@ -588,6 +594,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_preview_comite' => 'Tolos redactores puen previsualizar el sitiu',
 'info_preview_desactive' => 'La previsualización ta desactivada dafechu',
 'info_preview_texte' => 'Ye posible previsualizar el sitiu como si tolos artículos y les breves (que tengan polo menos l\'estatutu «propuestu») tuvieren espublizaos. ¿Esta posibilidá tien que tar abierta pa los alministradores namái, pa tolos redactores, o pa naide?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Principales intercambéos de mensaxes',
 'info_procedez_par_etape' => 'sigue pasu ente pasu',
 'info_procedure_maj_version' => 'hai que llanzar el procesu d\'actualización a la fin d\'adautar
@@ -753,6 +760,7 @@ con una color que indica el estáu:',
 'info_webmestre_forces' => 'Los webmasters anguaño tan conseñaos en <tt>@file_options@</tt>.',
 'install_adresse_base_hebergeur' => 'Direición de la base datos asitiada pol agospiador web',
 'install_base_ok' => 'Reconocióse la base @base@',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'La instalación probablemente va fallar, o va producir un sitiu que nun funcione...',
 'install_extension_mbstring' => 'SPIP nun funciona con:',
 'install_extension_php_obligatoire' => 'SPIP esixe la estensión php:',
@@ -853,6 +861,7 @@ con una color que indica el estáu:',
 'label_bando_outils_afficher' => 'Amosar les ferramientes',
 'label_bando_outils_masquer' => 'Anubrir les ferramientes',
 'label_choix_langue' => 'Escueye la to llingua',
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Eslogan del sitiu',
 'label_taille_ecran' => 'Tamañu de la pantalla',
 'label_texte_et_icones_navigation' => 'Menú de navegación',
@@ -978,6 +987,14 @@ con una color que indica el estáu:',
 'plugins_vue_hierarchie' => 'Xerarquía',
 'plugins_vue_liste' => 'Llista',
 'protocole_ldap' => 'Versión del protocolu:',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Direutoriu:',
@@ -1248,6 +1265,7 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 'titre_cadre_forum_interne' => 'Foru internu',
 'titre_cadre_interieur_rubrique' => 'Dientro de la estaya',
 'titre_cadre_numero_auteur' => 'AUTOR NÚMBERU',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Robla</b> [Obligatoria]<br />',
 'titre_compacter_script_css' => 'Compautación de los scripts y CSS',
 'titre_compresser_flux_http' => 'Compresión del fluxu HTTP',

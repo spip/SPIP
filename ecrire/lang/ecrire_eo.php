@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Malpermesata aliro.',
 'avis_article_modifie' => 'Atentu, @nom_auteur_modif@ laboris pri tiu artikolo antaŭ @date_diff@ minutoj',
 'avis_aucun_resultat' => 'Neniu rezulto.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'La alirvojo, kiun vi elektis, ',
 'avis_chemin_invalide_2' => 'ne ŝajnas taŭgi. Bonvolu reveni al la antaŭa paĝo kaj kontroli la entajpitajn datenojn.',
 'avis_connexion_echec_1' => 'Konektiĝo al SQL-servilo malsukcesis.',
@@ -187,6 +188,8 @@ forviŝi ilin poste).',
 'entree_texte_breve' => 'Teksto de la fulm-informo',
 'entree_titre_obligatoire' => '<b>Titolo</b> [Deviga]<br />',
 'entree_url' => 'Retadreso de via retejo',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Foresta dosiero',
 'erreur_plugin_fichier_def_absent' => 'Difina dosiero forestas',
@@ -314,6 +317,8 @@ forviŝi ilin poste).',
 'info_articles_2' => 'Artikoloj',
 'info_articles_auteur' => 'La artikoloj de tiu aŭtoro',
 'info_articles_lies_mot' => 'La artikoloj ligitaj kun tiu ŝlosilvorto',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Trovitaj artikoloj',
 'info_articles_trouves_dans_texte' => 'Trovitaj artikoloj (en la teksto)',
 'info_attente_validation' => 'Viaj artikoloj atendantaj validigon',
@@ -486,6 +491,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_mise_a_niveau_base_2' => '{{Atentu!}} Vi ĵus instalis version de la SPIP-dosieroj {pli malnovan} ol tiun, kiu estis instalita antaŭe ĉe via retejo: eblas ke via datenbazo perdiĝos kaj ke via retejo ne plu funkcios.<br />{{Reinstalu la
  SPIP-dosierojn.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Defaŭlta funkcimodo de la publikaj forumoj',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifi tiun ĉi aŭtoron :',
 'info_modifier_breve' => 'Modifi la fulm-informon:',
 'info_modifier_mot' => 'Modifi tiun ĉi ŝlosilvorton :',
@@ -568,6 +574,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_preview_comite' => 'Ĉiuj redaktantoj povas antaŭrigardi la retejon',
 'info_preview_desactive' => 'La antaŭrigardeblo estas malaktivigita',
 'info_preview_texte' => 'Eblas antaŭrigardi la retejon kvazaŭ ciuj artikoloj kaj fulm-informoj (kiuj almenaŭ havas la statuson « proponatan ») estus publikigitaj. Ĉu tio eblu nur al mastrumantoj, al ĉiuj redaktantoj, aŭ al neniu ?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Viaj ĉefaj korespondantoj',
 'info_procedez_par_etape' => 'procedu etapon post etapo',
 'info_procedure_maj_version' => 'la ĝisdatiga proceduro devas esti lanĉita por adapti
@@ -731,6 +738,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adreso de la datenbazo atribuita de la retejgastiganto',
 'install_base_ok' => 'La datumbazo @base@ estis rekonita',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'Certe la instalado estas malsukcesonta, aŭ naskos ne funkciivan retejon...',
 'install_extension_mbstring' => 'SPIP ne funkcias per :',
 'install_extension_php_obligatoire' => 'SPIP postulas la php-kromprogramon :',
@@ -831,6 +839,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Slogan du site', # NEW
 'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
 'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
@@ -956,6 +965,14 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Listo',
 'protocole_ldap' => 'Protokolversio :',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Dosierujo :',
@@ -1226,6 +1243,7 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_cadre_forum_interne' => 'Interna forumo',
 'titre_cadre_interieur_rubrique' => 'Ene de la rubriko',
 'titre_cadre_numero_auteur' => 'AŬTORO NUMERO',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Subskribo</b> [deviga]<br />',
 'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
 'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW

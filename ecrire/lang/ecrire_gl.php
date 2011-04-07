@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Acceso prohibido.',
 'avis_article_modifie' => 'Atención, @nom_auteur_modif@ estaba traballando neste artigo hai @date_diff@ minutos',
 'avis_aucun_resultat' => 'Ningún resultado.',
+'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 'avis_chemin_invalide_1' => 'A rota que elixiches',
 'avis_chemin_invalide_2' => 'non semella ser válida. Volva á páxina anterior e verifique as informacións introducidas.',
 'avis_connexion_echec_1' => 'A conexión á base de datos non vai.',
@@ -189,6 +190,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Texto da breve',
 'entree_titre_obligatoire' => '<b>T&amp;iacute;tulo</b> [Obrigado]<br />',
 'entree_url' => 'O enderezo (URL) do teu web',
+'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
+'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'A desinstalación do módulo fallou. No entanto, pode desactivalo.',
 'erreur_plugin_fichier_absent' => 'Ficheiro ausente',
 'erreur_plugin_fichier_def_absent' => 'Ficheiro de definición ausente',
@@ -317,6 +320,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'Artigos',
 'info_articles_auteur' => 'Os artigos desta persoa',
 'info_articles_lies_mot' => 'Os artigos ligados a esta palabra chave',
+'info_articles_miens' => 'Mes articles', # NEW
+'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Artigos atopados',
 'info_articles_trouves_dans_texte' => 'Artigos atopados (no texto)',
 'info_attente_validation' => 'Os teus artigos en espera de validación',
@@ -497,6 +502,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   e o seu web xa non funcionar&amp;oacute;.<br />{{Reinstale os
   ficheiros de SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Configuración por defecto dos foros públicos',
+'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modificar o autor:',
 'info_modifier_breve' => 'Modificar a breve:',
 'info_modifier_mot' => 'Modificar a palabra clave :',
@@ -581,6 +587,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => 'Todos os redactores poden previsualizar o web',
 'info_preview_desactive' => 'A previsualización está totalmente desactivada',
 'info_preview_texte' => 'É posíbel previsualizar o web como se todos os artigos e breves (que teñan cando menos o estado de « proposto ») estivesen publicados. Esta posibilidade debe estar aberta só para os administradores, para todos os redactores, ou para calquera ?',
+'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Os colaboradores principais',
 'info_procedez_par_etape' => 'procede etapa por etapa',
 'info_procedure_maj_version' => 'o procedemento da posta ó día ten que ser lanzado a fin
@@ -745,6 +752,7 @@ cunha cor que indica o seu estado :',
 'info_webmestre_forces' => 'Os/as webmásters actuais están definidos en <tt>@file_options@</tt>.',
 'install_adresse_base_hebergeur' => 'Enderezo da base de datos atribuída polo aloxador',
 'install_base_ok' => 'A base @base@ foi recoñecida',
+'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 'install_echec_annonce' => 'A instalación probabelmente vai pechar ou lanzar un sitio non funcional...',
 'install_extension_mbstring' => 'SPIP non funnciona con :',
 'install_extension_php_obligatoire' => 'SPIP exixe a extensión php :',
@@ -845,6 +853,7 @@ cunha cor que indica o seu estado :',
 'label_bando_outils_afficher' => 'Afficher les outils', # NEW
 'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 'label_choix_langue' => 'Seleccione o seu idioma',
+'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 'label_slogan_site' => 'Lema do sitio',
 'label_taille_ecran' => 'Largura de pantalla',
 'label_texte_et_icones_navigation' => 'Menú de navegación',
@@ -970,6 +979,14 @@ cunha cor que indica o seu estado :',
 'plugins_vue_hierarchie' => 'Xerarquía',
 'plugins_vue_liste' => 'Listaxe',
 'protocole_ldap' => 'Versi&amp;oacute;n do protocolo :',
+
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_one_job_in_queue' => '1 travail en attente', # NEW
+'queue_purger_queue' => 'Purger la liste des travaux', # NEW
+'queue_titre' => 'Liste de travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Repertorio :',
@@ -1231,6 +1248,7 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'titre_cadre_forum_interne' => 'Foro interno',
 'titre_cadre_interieur_rubrique' => 'Dentro do tema',
 'titre_cadre_numero_auteur' => 'AUTOR/A NÚMERO',
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Sinatura</b> [Obrigado]<br />',
 'titre_compacter_script_css' => 'Compactación de scripts e CSS',
 'titre_compresser_flux_http' => 'Compactación do fluxo HTTP',
