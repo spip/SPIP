@@ -748,6 +748,7 @@ prive/objets/liste/visiteurs.html -text
 prive/objets/liste/visiteurs_fonctions.php -text
 prive/puce_prive.gif -text
 prive/puce_prive_rtl.gif -text
+prive/reset.css -text
 prive/rss.html -text
 prive/rss/a_suivre.html -text
 prive/rss/signatures.html -text
