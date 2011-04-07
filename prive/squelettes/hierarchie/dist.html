@@ -4,7 +4,7 @@
 	#SET{objet,#GET{objet_exec}|table_valeur{type}}
 	#SET{id_objet,#ENV{#GET{objet_exec}|table_valeur{id_table_objet}}}
 
-	#SET{id_parent,#GET{objet}|=={rubrique}|?{#INFO_ID_PARENT{#GET{objet},#GET{id_objet}},#ENV{id_rubrique,#INFO_ID_RUBRIQUE{#GET{objet},#GET{id_objet}}}}}
+	#SET{id_parent,#GET{objet}|=={rubrique}|?{#ENV{id_parent,#INFO_ID_PARENT{#GET{objet},#GET{id_objet}}},#ENV{id_rubrique,#INFO_ID_RUBRIQUE{#GET{objet},#GET{id_objet}}}}}
 	[(#GET{id_parent}|ou{#GET{objet}|=={rubrique}}|oui)
 		<INCLURE{fond=prive/echafaudage/hierarchie/objet,objet=#GET{objet},id_objet=#GET{id_objet},id_parent=#GET{id_parent},id_secteur=#INFO_ID_SECTEUR{#GET{objet},#GET{id_objet}},restreint=#INFO_STATUT{#GET{objet},#GET{id_objet}}|=={publie},editable=#AUTORISER{modifier,#GET{objet},#GET{id_objet}},ajax}>
 	]
