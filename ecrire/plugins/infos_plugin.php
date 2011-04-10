@@ -68,6 +68,8 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	$les_boutons = $extraire_boutons($arbre);
 	$ret['bouton'] = $les_boutons['bouton'];
 	$ret['onglet'] = $les_boutons['onglet'];
+
+	$ret['traduire'] = $arbre['traduire'];
 		
 	if (isset($arbre['config']))
 		$ret['config'] = spip_xml_aplatit($arbre['config']);
