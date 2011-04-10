@@ -153,6 +153,14 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 						$arbre['erreur'][] = _T('erreur_plugin_fichier_absent')." : $nut";
 			}
 		}
+		$traduire = array();
+		if (spip_xml_match_nodes(',^traduire,',$arbre,$trads)){
+			foreach(array_keys($trads) as $tag){
+				list($tag,$att) = spip_xml_decompose_tag($tag);
+				$traduire[] = $att;
+			}
+		}
+		$arbre['traduire'] = $traduire;
 	}
 }
 
