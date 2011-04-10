@@ -87,6 +87,7 @@ function paquet_debutElement($phraseur, $name, $attrs)
 	      $attrs['utilise']=array();
 	      $attrs['pipeline']=array();
 	      $attrs['necessite']=array();
+	      $attrs['auteur']=array();
 	      $phraseur->versions[$phraseur->contenu['compatible']] = $attrs;
 	} else $phraseur->versions[$phraseur->contenu['compatible']][$name][0] = $attrs;
 	$phraseur->versions[$phraseur->contenu['compatible']][''] = '';
