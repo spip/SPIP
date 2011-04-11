@@ -34,7 +34,7 @@
 	#SET{ok,' '}
 ][
 
-(#ENV**{exec}|=={#OBJET|objet_info{url_edit}}|oui)
+(#ENV**{exec}|=={#OBJET|objet_info{url_edit}}|et{#OBJET|objet_info{editable}}|oui)
 
 #INCLURE{fond=prive/squelettes/contenu/#ENV**{exec},redirect='',env,retourajax=oui}
 #SET{ok,' '}
