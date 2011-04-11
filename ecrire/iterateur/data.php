@@ -28,7 +28,7 @@ function iterateur_DATA_dist($b) {
 		'field' => array(
 			'cle' => 'STRING',
 			'valeur' => 'STRING',
-			'*' => 'ALL'
+			'*' => 'ALL' // Champ joker *
 		)
 	);
 	$b->select[] = '.valeur';
