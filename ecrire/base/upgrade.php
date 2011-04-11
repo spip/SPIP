@@ -216,7 +216,7 @@ function maj_debut_page($installee,$meta,$table){
 	@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 	$timeout = _UPGRADE_TIME_OUT*2;
 	$titre = _T('titre_page_upgrade');
-	$balise_img = chercher_filtre('balise_img');
+	$balise_img = charger_filtre('balise_img');
 	$titre .= $balise_img(chemin_image('searching.gif'));
 	echo ( install_debut_html($titre));
 	// script de rechargement auto sur timeout
@@ -264,6 +264,7 @@ define('_UPGRADE_TIME_OUT', 20);
  */
 function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect='', $debut_page = false)
 {
+	$trouver_table = charger_fonction('trouver_table','base');
 	include_spip('inc/plugin'); // pour spip_version_compare
 	$n = 0;
 	$time = time();
@@ -280,7 +281,7 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect=
 				maj_debut_page($v,$meta,$table);
 			echo "MAJ $v";
 			$etape = serie_alter($v, $maj[$v], $meta, $table, $redirect);
-			
+			$trouver_table(''); // vider le cache des descriptions de table
 			if ($etape) return array($v, $etape);
 			$n = time() - $time;
 			spip_log( "$table $meta: $v en $n secondes",'maj.'._LOG_INFO_IMPORTANTE);
@@ -291,6 +292,7 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect=
 			relance_maj($meta,$table,$redirect);
 		}
 	}
+	$trouver_table(''); // vider le cache des descriptions de table
 	// indispensable pour les chgt de versions qui n'ecrivent pas en base
 	// tant pis pour la redondance eventuelle avec ci-dessus
 	if ($meta) ecrire_meta($meta, $installee,'non',$table);
