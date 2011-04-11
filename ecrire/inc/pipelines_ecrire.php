@@ -286,7 +286,7 @@ function trouver_objet_exec($exec){
 		include_spip('base/objets');
 		$infos = lister_tables_objets_sql();
 		foreach($infos as $t=>$info){
-			if ($exec==$info['url_edit']){
+			if ($exec==$info['url_edit'] AND $info['editable']){
 				return $objet_exec[$exec] = array('edition'=>$exec==$info['url_voir']?'':true,'table_objet_sql'=>$t,'table'=>$info['table_objet'],'type'=>$info['type'],'id_table_objet'=>id_table_objet($info['type']));
 			}
 			if ($exec==$info['url_voir']){
