@@ -27,10 +27,9 @@ function balise_INFO__dist($p){
 		erreur_squelette($msg, $p);
 		$p->interdire_scripts = true;
 		return $p;
-	} elseif ($f = charger_fonction($nom, 'balise', true)) {
-		return $f($p);
-	}else {
-		$p->code = champ_sql($info, $p);
+	}
+	else {
+		$p->code = champ_sql($info, $p, false);
 		if (strpos($p->code, '@$Pile[0]') !== false) {
 			$info = strtolower(substr($info,5));
 			$p->code = "generer_info_entite($id_objet, $type_objet, '$info'".($p->etoile?","._q($p->etoile):"").")";
