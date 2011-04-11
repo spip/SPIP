@@ -312,7 +312,7 @@ function renseigner_table_objet_sql($table_sql,$infos){
 	if (!isset($infos['url_voir']))
 		$infos['url_voir'] = $infos['type'];
 	if (!isset($infos['url_edit']))
-		$infos['url_edit'] = $infos['url_voir']."_edit";
+		$infos['url_edit'] = $infos['url_voir'].($infos['editable']?"_edit":'');
 	if (!isset($infos['icone_objet']))
 		$infos['icone_objet'] = $infos['type'];
 
