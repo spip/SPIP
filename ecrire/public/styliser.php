@@ -88,6 +88,14 @@ function styliser_par_objets($flux){
 			if (isset($objets[$table_sql]))
 				$flux['data'] = $echaffauder($table,$table,$table_sql,"prive/objets/liste/objets",$flux['args']['ext']);
 		}
+		if (strncmp($flux['args']['fond'],'prive/objets/contenu/',21)==0){
+			$type = substr($flux['args']['fond'],21);
+			$table = table_objet($type);
+			$table_sql = table_objet_sql($table);
+			$objets = lister_tables_objets_sql();
+			if (isset($objets[$table_sql]))
+				$flux['data'] = $echaffauder($type,$table,$table_sql,"prive/objets/contenu/objet",$flux['args']['ext']);
+		}
 	}
 	return $flux;
 }

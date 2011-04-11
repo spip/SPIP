@@ -252,8 +252,9 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  * info_nb_objets
  *
  * principale
+ * champs_contenu : utlise pour generer l'affichage par defaut du contenu
  * editable
- * champs_editables
+ * champs_editables : utilise pour prendre en compte le post lors de l'edition
  * 
  * titre
  * date
