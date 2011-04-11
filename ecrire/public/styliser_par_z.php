@@ -308,16 +308,26 @@ function prive_echaffauder_dist($exec,$table,$table_sql,$desc_exec,$ext){
 			else
 				$fond = 'objet_edit.sans_rubrique';
 		}
-		$scaffold = "<INCLURE{fond=prive/echafaudage/contenu/".$fond.",objet=".$type.",id_objet=#".strtoupper($primary).",env}>";
+		$dir = z_blocs(test_espace_prive());
+		$dir = reset($dir);
+		$scaffold = "<INCLURE{fond=prive/echafaudage/$dir/".$fond.",objet=".$type.",id_objet=#".strtoupper($primary).",env}>";
 	}
 	// page objets
-	elseif($type = $desc_exec){
-		$scaffold = "<INCLURE{fond=prive/echafaudage/contenu/objets,objet=".$type."} />";
+	elseif($type = $desc_exec AND strpos($type,"/")===false){
+		$dir = z_blocs(test_espace_prive());
+		$dir = reset($dir);
+		$scaffold = "<INCLURE{fond=prive/echafaudage/$dir/objets,objet=".$type."} />";
 	}
-	
-	$dir = sous_repertoire(_DIR_CACHE,"scaffold",false);
-	$dir = sous_repertoire($dir,"contenu",false);
-	$f = $dir."$exec";
+	// morceau d'objet : on fournit le fond de sibstitution dans $desc_exec
+	// et objet et tire de $table
+	elseif($fond = $desc_exec){
+		$dir = md5(dirname($fond));
+		$scaffold = "<INCLURE{fond=$fond,objet=".objet_type($table)."} />";
+	}
+
+	$base_dir = sous_repertoire(_DIR_CACHE,"scaffold",false);
+	$base_dir = sous_repertoire($base_dir,$dir,false);
+	$f = $base_dir."$exec";
 	ecrire_fichier("$f.$ext",$scaffold);
 	return $f;
 }
