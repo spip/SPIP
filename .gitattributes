@@ -20,6 +20,7 @@ ecrire/action/etre_webmestre.php -text
 ecrire/action/forcer_job.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/index.php -text
+ecrire/action/inscrire_auteur.php -text
 ecrire/action/instituer_article.php -text
 ecrire/action/instituer_langue_objet.php -text
 ecrire/action/instituer_langue_rubrique.php -text
