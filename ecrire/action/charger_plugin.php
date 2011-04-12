@@ -39,6 +39,7 @@ function action_charger_plugin_dist() {
 		exit;
 	}
 
+	$zip = "";
 	if ($arg == 'update_flux') {
 		if (is_array($syndic_plug = @unserialize($GLOBALS['meta']['syndic_plug'])))
 			foreach ($syndic_plug as $url => $c)
@@ -153,6 +154,7 @@ function action_charger_plugin_dist() {
 		// Reconnaitre un plugin par son fichier xml
 		$get_infos = charger_fonction('get_infos','plugins');
 		$infos = $get_infos($status['tmpname'], true, '');
+		$nom = $description = $type = "";
 		if ($infos) {
 			$nom = $infos['nom'];
 			$image = $infos['icon'];
@@ -184,7 +186,7 @@ function action_charger_plugin_dist() {
 
 			// l'icone ne peut pas etre dans tmp/ (lecture http oblige)
 			// on la copie donc dans local/chargeur/
-			if ($image) {
+			if (isset($image) AND $image) {
 				$dir = sous_repertoire(_DIR_VAR,'chargeur');
 				@copy($status['tmpname'].'/'.$image, $image2 = $dir.basename($image));
 				$retour = "<img src='".$image2."' style='float:right;' />"
@@ -235,7 +237,7 @@ function action_charger_plugin_dist() {
 
 	include_spip('exec/install'); // pour bouton_suivant()
 
-	$texte = "<div style='text-align:$spip_lang_left;'>$texte</div>\n";
+	$texte = "<div style='text-align:".$spip_lang_left.";'>$texte</div>\n";
 
 	$redirect = rawurldecode(_request('redirect'));
 	// par defaut on revient sur la page admin_plugin
