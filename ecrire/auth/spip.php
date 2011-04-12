@@ -127,7 +127,7 @@ function auth_spip_autoriser_modifier_login($serveur=''){
  */
 function auth_spip_verifier_login($new_login, $id_auteur=0, $serveur=''){
 	// login et mot de passe
-	if (strlen($login)){
+	if (strlen($new_login)){
 		if (strlen($new_login) < _LOGIN_TROP_COURT)
 			return 'info_login_trop_court';
 		else {
