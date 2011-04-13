@@ -143,6 +143,12 @@ jQuery.spip.updateReaderBuffer = function(){
 	i.attr('value',parseInt(i.attr('value'))+1);
 }
 
+jQuery.fn.formulaire_setARIA = function(){
+	if (!this.closest('.ariaformprop').length){
+		this.wrap('<div class="ariaformprop" aria-live="assertive" aria-atomic="true"></div>');
+	}
+	return this;
+}
 /**
  * rechargement ajax d'un formulaire dynamique implemente par formulaires/xxx.html
  * @param target
@@ -152,6 +158,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 		jQuery.spip.initReaderBuffer();
   return this.each(function() {
 		var cible = target || this;
+	  jQuery(cible).formulaire_setARIA();
 		jQuery('form:not(.noajax):not(.bouton_action_post)', this).each(function(){
 		var leform = this;
 		var leclk,leclk_x,leclk_y;
@@ -169,7 +176,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
         }
 				jQuery(cible).wrap('<div />');
 				cible = jQuery(cible).parent();
-				jQuery(cible).animeajax().positionner(false,false);
+				jQuery(cible).closest('.ariaformprop').animateLoading().positionner(false,false);
 			},
 			success: function(c){
 				if (c=='noajax'){
@@ -200,9 +207,10 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					jQuery(cible).html(c);
 					var a = jQuery('a:first',cible).eq(0);
 					var d = jQuery('div.ajax',cible);
-					if (!d.length)
+					if (!d.length){
 						// si pas .ajax dans le form, remettre la classe sur le div que l'on a insere
-						jQuery(cible).addClass('ajax').removeClass('loading');
+						jQuery(cible).addClass('ajax');
+					}
 					else {
 						// sinon nettoyer les br ajaxie
 						d.siblings('br.bugajaxie').remove();
@@ -220,15 +228,21 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 							//a = a.split('#');
 							//window.location.hash = a[1];
 							},10);
+						jQuery(cible).closest('.ariaformprop').endLoading(true);
 					}
 					else{
 						//jQuery(cible).positionner(false);
 						if (a.length && a.is('a[name=ajax_redirect]')){
 							a = a.attr('href');
-							jQuery(cible).addClass('loading').animeajax();
 							setTimeout(function(){
 								document.location.replace(a);
 							},10);
+							// ne pas arreter l'etat loading, puisqu'on redirige !
+							// mais le relancer car l'image loading a pu disparaitre
+							jQuery(cible).closest('.ariaformprop').animateLoading();
+						}
+						else {
+							jQuery(cible).closest('.ariaformprop').endLoading(true);
 						}
 					}
 					// si jamais le formulaire n'a pas un retour OK, retablissons le cache
@@ -236,6 +250,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					if (!jQuery('.reponse_formulaire_ok',cible).length)
 						jQuery.spip.preloaded_urls = preloaded;
 					// mettre a jour le buffer du navigateur pour aider jaws et autres readers
+					// a supprimer ?
 					jQuery.spip.updateReaderBuffer();
 				}
 			},
@@ -291,7 +306,7 @@ jQuery.spip.on_ajax_loaded = function(blocfrag,c,href,history) {
 	
 	jQuery(blocfrag)
 	.html(c)
-	.removeClass('loading');
+	.endLoading();
 	if (typeof href != undefined)
 		jQuery(blocfrag).attr('data-url',href);
 	if (history) {
@@ -371,8 +386,7 @@ window.onpopstate = function(popState){
 jQuery.spip.loadAjax = function(blocfrag,url, href, options){
 	var force = options.force || false;
 	jQuery(blocfrag)
-	.animeajax()
-	.addClass('loading');/*.positionner(false)*/;
+	.animateLoading();
 	if (jQuery.spip.preloaded_urls[url] && !force) {
 		jQuery.spip.on_ajax_loaded(blocfrag,jQuery.spip.preloaded_urls[url],href,options.history);
 	} else {
@@ -469,6 +483,8 @@ jQuery.spip.ajaxClick = function(blocfrag, href, options){
  * comme un lien ajax
  */
 jQuery.fn.ajaxbloc = function() {
+	// hack accessibilite vieille version de JAWS
+	// a supprimer ?
 	if (this.length)
 		jQuery.spip.initReaderBuffer();
 	if (ajaxbloc_selecteur==undefined)
@@ -484,7 +500,7 @@ jQuery.fn.ajaxbloc = function() {
 		var ajax_env = blocfrag.attr('data-ajax-env');
 		if (!ajax_env || ajax_env==undefined) return;
 
-	  jQuery(this).not('.bind-ajaxReload').bind('ajaxReload',function(event, options){
+	  blocfrag.not('.bind-ajaxReload').bind('ajaxReload',function(event, options){
 		  if (jQuery.spip.ajaxReload(blocfrag,options))
 				// don't trig reload of parent blocks
 				event.stopPropagation();
@@ -510,7 +526,7 @@ jQuery.fn.ajaxbloc = function() {
 			.prepend("<input type='hidden' name='var_ajax' value='1' /><input type='hidden' name='var_ajax_env' value='"+(ajax_env)+"' />"+(url[1]?"<input type='hidden' name='var_ajax_ancre' value='"+url[1]+"' />":""))
 			.ajaxForm({
 				beforeSubmit: function(){
-					jQuery(blocfrag).addClass('loading').animeajax().positionner(false);
+					jQuery(blocfrag).animateLoading().positionner(false);
 				},
 				onAjaxLoad:false,
 				success: function(c){
@@ -574,7 +590,7 @@ jQuery.fn.ajaxReload = function(options){
  *
  */
 jQuery.fn.animateLoading = function() {
-	this.children().css('opacity', 0.5);
+	this.attr('aria-busy','true').addClass('loading').children().css('opacity', 0.5);
 	if (typeof ajax_image_searching != 'undefined'){
 		var i = (this).find('.image_loading');
 		if (i.length) i.eq(0).html(ajax_image_searching);
@@ -584,6 +600,21 @@ jQuery.fn.animateLoading = function() {
 }
 // compatibilite avec ancien nommage
 jQuery.fn.animeajax = jQuery.fn.animateLoading;
+
+/**
+ * Fin de l'animation
+ * l'argument permet de forcer le raz du contenu si il est inchange
+ * @param hard
+ */
+jQuery.fn.endLoading = function(hard) {
+	hard = hard || false;
+	this.attr('aria-busy','false').removeClass('loading');
+	if (hard){
+		this.children().css('opacity', '');
+		this.find('.image_loading').html('');
+	}
+	return this; // don't break the chain
+}
 
 /**
  * animation d'un item que l'on supprime :
