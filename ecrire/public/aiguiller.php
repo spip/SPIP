@@ -165,6 +165,13 @@ function traiter_formulaires_dynamiques($get=false){
 						'args'=>array('form'=>$form,'args'=>$args),
 						'data'=>$verifier?call_user_func_array($verifier,$args):array())
 					);
+		// si on ne demandait qu'une verif json
+		if (_request('formulaire_action_verifier_json')){
+			include_spip('inc/json');
+			include_spip('inc/actions');
+			ajax_retour(json_encode($post["erreurs_$form"]),'text/plain');
+			return true; // on a fini le hit
+		}
 		if ((count($post["erreurs_$form"])==0)){
 			$rev = "";
 			$retour = "";
