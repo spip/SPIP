@@ -226,92 +226,20 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	return true;
 }
 
-// Enregistre une revision d'article
-// http://doc.spip.org/@revision_article
-function revision_article ($id_article, $c=false) {
-
-	// Si l'article est publie, invalider les caches et demander sa reindexation
-	$t = sql_getfetsel("statut", "spip_articles", "id_article=$id_article");
-	if ($t == 'publie') {
-		$invalideur = "id='article/$id_article'";
-		$indexation = true;
-	}
-
-	modifier_contenu('article', $id_article,
-		array(
-			'nonvide' => array('titre' => _T('info_sans_titre')),
-			'invalideur' => $invalideur,
-			'indexation' => $indexation,
-			'date_modif' => 'date_modif' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
-		),
-		$c);
-
-	return ''; // pas d'erreur
+/**
+ * Wrapper pour remplacer tous les obsoletes revision_xxx
+ * @param string $objet
+ * @param int $id_objet
+ * @param array $c
+ * @return mixed|string
+ */
+function revision_objet($objet,$id_objet,$c=null){
+	$objet = objet_type($objet); // securite
+	if (include_spip('action/editer_'.$objet) AND function_exists($f=$objet.'_modifier'))
+		return $f($id_objet,$c);
+	include_spip('action/editer_objet');
+	return objet_modifier($objet,$id_objet,$c);
 }
 
-// http://doc.spip.org/@revision_document
-function revision_document($id_document, $c=false) {
-
-	return modifier_contenu('document', $id_document,
-		array(
-			// 'nonvide' => array('titre' => _T('info_sans_titre'))
-		),
-		$c);
-}
-
-
-// http://doc.spip.org/@revision_auteur
-function revision_auteur($id_auteur, $c=false) {
-
-	$r = modifier_contenu('auteur', $id_auteur,
-		array(
-			'nonvide' => array('nom' => _T('ecrire:item_nouvel_auteur'))
-		),
-		$c);
-
-	// .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
-	if (isset($c['login'])
-	OR isset($c['pass'])
-	OR isset($c['statut'])
-	) {
-		include_spip('inc/acces');
-		ecrire_acces();
-	}
-
-	// .. mettre a jour les sessions de cet auteur
-	include_spip('inc/session');
-	$c['id_auteur'] = $id_auteur;
-	actualiser_sessions($c);
-}
-
-
-// http://doc.spip.org/@revision_mot
-function revision_mot($id_mot, $c=false) {
-
-	// regler le groupe
-	if (isset($c['id_groupe']) OR isset($c['type'])) {
-		$row = sql_fetsel("titre", "spip_groupes_mots", "id_groupe=".intval($c['id_groupe']));
-		if ($row)
-			$c['type'] = $row['titre'];
-		else
-			unset($c['type']);
-	}
-
-	modifier_contenu('mot', $id_mot,
-		array(
-			'nonvide' => array('titre' => _T('info_sans_titre'))
-		),
-		$c);
-}
-
-// http://doc.spip.org/@revision_groupe_mot
-function revision_groupe_mot($id_groupe, $c=false) {
-
-	modifier_contenu('groupe_mot', $id_groupe,
-		array(
-			'nonvide' => array('titre' => _T('info_sans_titre'))
-		),
-		$c);
-}
 
 ?>

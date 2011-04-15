@@ -54,12 +54,12 @@ function formulaires_configurer_preferences_traiter_dist(){
 	}
 
 	if (intval($GLOBALS['visiteur_session']['id_auteur'])){
-		include_spip('inc/modifier');
+		include_spip('action/editer_auteur');
 		$c = array('prefs' => serialize($GLOBALS['visiteur_session']['prefs']));
 
 		if (_request('imessage'))
 			$c['imessage'] = _request('imessage');
-		revision_auteur($GLOBALS['visiteur_session']['id_auteur'], $c);
+		auteur_modifier($GLOBALS['visiteur_session']['id_auteur'], $c);
 	}
 
 	if ($spip_ecran = _request('spip_ecran')) {

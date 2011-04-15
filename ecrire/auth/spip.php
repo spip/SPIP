@@ -152,18 +152,17 @@ function auth_spip_modifier_login($new_login, $id_auteur, $serveur=''){
 	if ($new_login == $auteur['login'])
 		return true; // on a rien fait mais c'est bon !
 
-	include_spip('inc/modifier');
+	include_spip('action/editer_auteur');
 
 	// vider le login des auteurs a la poubelle qui avaient ce meme login
 	if (strlen($new_login)){
 		$anciens = sql_select('id_auteur','spip_auteurs','login='.sql_quote($new_login)." AND statut='5poubelle'",'','','','',$serveur);
 		while ($row = sql_fetch($anciens)){
-			revision_auteur($row['id_auteur'], array('login'=>'')); // manque la gestion de $serveur
+			auteur_modifier($row['id_auteur'], array('login'=>'')); // manque la gestion de $serveur
 		}
 	}
 
-	include_spip('inc/modifier');
-	revision_auteur($id_auteur, array('login'=>$new_login)); // manque la gestion de $serveur
+	auteur_modifier($id_auteur, array('login'=>$new_login)); // manque la gestion de $serveur
 
 	return true;
 }
@@ -269,8 +268,8 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur=''){
 	$c['alea_futur'] = $alea_futur;
 	$c['low_sec'] = '';
 
-	include_spip('inc/modifier');
-	revision_auteur($id_auteur, $c); // manque la gestion de $serveur
+	include_spip('action/editer_auteur');
+	auteur_modifier($id_auteur, $c); // manque la gestion de $serveur
 
 }
 

@@ -28,27 +28,28 @@ function action_editer_article_dist($arg=null) {
 			include_spip('inc/headers');
 			redirige_url_ecrire();
 		}
-	  $id_article = insert_article($id_parent);
+	  $id_article = article_inserer($id_parent);
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_article > 0) $err = articles_set($id_article);
+	if ($id_article > 0) $err = article_modifier($id_article);
 
-	if (_request('redirect')) {
-		$redirect = parametre_url(urldecode(_request('redirect')),
-			'id_article', $id_article, '&') . $err;
-	
-		include_spip('inc/headers');
-		redirige_par_entete($redirect);
-	}
-	else 
-		return array($id_article,$err);
+	if ($err)
+		spip_log("echec editeur article: $err",_LOG_ERREUR);
+
+	return array($id_article,$err);
 }
 
-// Appelle toutes les fonctions de modification d'un article
-// $err est de la forme '&trad_err=1'
-// http://doc.spip.org/@articles_set
-function articles_set($id_article, $set=null) {
+/**
+ * Appelle toutes les fonctions de modification d'un article
+ * $err est de la forme chaine de langue ou vide si pas d'erreur
+ * http://doc.spip.org/@articles_set
+ *
+ * @param  $id_article
+ * @param null $set
+ * @return string
+ */
+function article_modifier($id_article, $set=null) {
 	$err = '';
 
 	// unifier $texte en cas de texte trop long
@@ -68,17 +69,38 @@ function articles_set($id_article, $set=null) {
 		$set
 	);
 
-	revision_article($id_article, $c);
+	// Si l'article est publie, invalider les caches et demander sa reindexation
+	$t = sql_getfetsel("statut", "spip_articles", "id_article=".intval($id_article));
+	if ($t == 'publie') {
+		$invalideur = "id='article/$id_article'";
+		$indexation = true;
+	}
+
+	modifier_contenu('article', $id_article,
+		array(
+			'nonvide' => array('titre' => _T('info_sans_titre')),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation,
+			'date_modif' => 'date_modif' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
+		),
+		$c);
+
 
 	// Modification de statut, changement de rubrique ?
 	$c = collecter_requests(array('date', 'statut', 'id_parent'),array(),$set);
-	$err .= instituer_article($id_article, $c);
+	$err .= article_instituer($id_article, $c);
 
 	return $err;
 }
 
-// http://doc.spip.org/@insert_article
-function insert_article($id_rubrique) {
+/**
+ * Inserer un nouvel article en base
+ * http://doc.spip.org/@insert_article
+ *
+ * @param int $id_rubrique
+ * @return int
+ */
+function article_inserer($id_rubrique) {
 
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
@@ -156,7 +178,7 @@ function insert_article($id_rubrique) {
 // statut et rubrique sont lies, car un admin restreint peut deplacer
 // un article publie vers une rubrique qu'il n'administre pas
 // http://doc.spip.org/@instituer_article
-function instituer_article($id_article, $c, $calcul_rub=true) {
+function article_instituer($id_article, $c, $calcul_rub=true) {
 
 	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
@@ -310,11 +332,20 @@ function trop_longs_articles() {
 }
 
 
-// obsolete, utiliser revision_article dans inc/modifier
-// http://doc.spip.org/@revisions_articles
+// obsoletes
 function revisions_articles ($id_article, $c=false) {
-	include_spip('inc/modifier');
-	return revision_article($id_article,$c);
+	return article_modifier($id_article,$c);
 }
-
+function revision_article ($id_article, $c=false) {
+	return article_modifier($id_article,$c);
+}
+function articles_set($id_article, $set=null) {
+	return article_modifier($id_article,$set);
+}
+function insert_article($id_rubrique) {
+	return article_inserer($id_rubrique);
+}
+function instituer_article($id_article, $c, $calcul_rub=true) {
+	return article_instituer($id_article,$c,$calcul_rub);
+}
 ?>

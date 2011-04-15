@@ -35,14 +35,14 @@ function action_editer_objet_dist($id=null, $objet=null, $set=null) {
 	if (!$id = intval($id)) {
 		// on ne sait pas si un parent existe mais on essaye
 		$id_parent = _request('id_parent');
-	  $id = insert_objet($objet, $id_parent);
+	  $id = objet_inserer($objet, $id_parent);
 	}
 
 	if (!($id = intval($id))>0)
 		return array($id,_L('echec enregistrement en base'));
 
 	// Enregistre l'envoi dans la BD
-	$err = objets_set($objet, $id, $set);
+	$err = objet_modifier($objet, $id, $set);
 
 	return array($id,$err);
 }
@@ -56,14 +56,14 @@ function action_editer_objet_dist($id=null, $objet=null, $set=null) {
  * @param array|null $set
  * @return mixed|string
  */
-function objets_set($objet, $id, $set=null) {
+function objet_modifier($objet, $id, $set=null) {
 	$err = '';
 
 	$table_sql = table_objet_sql($objet);
 	$trouver_table = charger_fonction('trouver_table','base');
 	$desc = $trouver_table($table_sql);
 	if (!$desc OR !isset($desc['field'])) {
-		spip_log("Objet $objet inconnu dans objets_set",_LOG_ERREUR);
+		spip_log("Objet $objet inconnu dans objet_modifier",_LOG_ERREUR);
 		return _L("Erreur objet $objet inconnu");
 	}
 	include_spip('inc/modifier');
@@ -108,7 +108,7 @@ function objets_set($objet, $id, $set=null) {
 
 	// Modification de statut, changement de rubrique ?
 	$c = collecter_requests(array($champ_date, 'statut', 'id_parent'),array(),$set);
-	$err = instituer_objet($objet, $id, $c);
+	$err = objet_instituer($objet, $id, $c);
 
 	return $err;
 }
@@ -119,7 +119,7 @@ function objets_set($objet, $id, $set=null) {
  * @param null $id_parent
  * @return bool|int
  */
-function insert_objet($objet, $id_parent=null) {
+function objet_inserer($objet, $id_parent=null) {
 
 	$table_sql = table_objet_sql($objet);
 	$trouver_table = charger_fonction('trouver_table','base');
@@ -213,7 +213,7 @@ function insert_objet($objet, $id_parent=null) {
  * @param bool $calcul_rub
  * @return mixed|string
  */
-function instituer_objet($objet, $id, $c, $calcul_rub=true) {
+function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 
 	$table_sql = table_objet_sql($objet);
 	$trouver_table = charger_fonction('trouver_table','base');
@@ -309,7 +309,7 @@ function instituer_objet($objet, $id, $c, $calcul_rub=true) {
 	if (!count($champs)) return;
 
 	// Envoyer les modifs.
-	editer_objet_heritage($objet, $id, $id_rubrique, $statut_ancien, $champs, $calcul_rub);
+	objet_editer_heritage($objet, $id, $id_rubrique, $statut_ancien, $champs, $calcul_rub);
 
 	// Invalider les caches
 	include_spip('inc/invalideur');
@@ -358,7 +358,7 @@ function instituer_objet($objet, $id, $c, $calcul_rub=true) {
  * @param bool $cond
  * @return 
  */
-function editer_objet_heritage($objet, $id, $id_rubrique, $statut, $champs, $cond=true) {
+function objet_editer_heritage($objet, $id, $id_rubrique, $statut, $champs, $cond=true) {
 	$table_sql = table_objet_sql($objet);
 	$trouver_table = charger_fonction('trouver_table','base');
 	$desc = $trouver_table($table_sql);

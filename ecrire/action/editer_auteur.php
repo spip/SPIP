@@ -24,7 +24,7 @@ function action_editer_auteur_dist($arg=null) {
 	// si id_auteur n'est pas un nombre, c'est une creation
 	if (!$id_auteur = intval($arg)) {
 
-		if (($id_auteur = insert_auteur()) > 0){
+		if (($id_auteur = auteur_inserer()) > 0){
 
 			# cf. GROS HACK
 			# recuperer l'eventuel logo charge avant la creation
@@ -40,7 +40,7 @@ function action_editer_auteur_dist($arg=null) {
 
 	// Enregistre l'envoi dans la BD
 	if ($id_auteur > 0)
-		$err = auteurs_set($id_auteur);
+		$err = auteur_modifier($id_auteur);
 
 	if ($err)
 		spip_log("echec editeur auteur: $err",_LOG_ERREUR);
@@ -48,7 +48,12 @@ function action_editer_auteur_dist($arg=null) {
 	return array($id_auteur,$err);
 }
 
-function insert_auteur($source=null) {
+/**
+ * Inserer un auteur en base
+ * @param string $source
+ * @return int
+ */
+function auteur_inserer($source=null) {
 
 	// Ce qu'on va demander comme modifications
 	$champs = array();
@@ -81,8 +86,14 @@ function insert_auteur($source=null) {
 }
 
 
-// Appelle toutes les fonctions de modification d'un auteur
-function auteurs_set($id_auteur, $set = null) {
+/**
+ * Appelle toutes les fonctions de modification d'un auteur
+ *
+ * @param int $id_auteur
+ * @param array $set
+ * @return string
+ */
+function auteur_modifier($id_auteur, $set = null) {
 	$err = '';
 
 	include_spip('inc/modifier');
@@ -99,7 +110,12 @@ function auteurs_set($id_auteur, $set = null) {
 		$set
 	);
 
-	revision_auteur($id_auteur, $c);
+	$r = modifier_contenu('auteur', $id_auteur,
+		array(
+			'nonvide' => array('nom' => _T('ecrire:item_nouvel_auteur'))
+		),
+		$c);
+	$session = $c;
 
 	// Modification de statut, changement de rubrique ?
 	$c = collecter_requests(
@@ -116,7 +132,13 @@ function auteurs_set($id_auteur, $set = null) {
 		$c['login'] = $c['new_login'];
 	if (isset($c['new_pass']) AND !isset($c['pass']))
 		$c['pass'] = $c['new_pass'];
-	$err .= instituer_auteur($id_auteur, $c);
+	$err .= auteur_instituer($id_auteur, $c);
+
+	// .. mettre a jour les sessions de cet auteur
+	include_spip('inc/session');
+	$session = array_merge($session,$c);
+	$session['id_auteur'] = $id_auteur;
+	actualiser_sessions($session);
 
 	return $err;
 }
@@ -185,8 +207,15 @@ function auteur_qualifier($id_auteur,$objets,$qualif){
 }
 
 
-// http://doc.spip.org/@instituer_auteur
-function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
+/**
+ * Modifier le statut d'un auteur, ou son login/pass
+ * http://doc.spip.org/@instituer_auteur
+ * @param  $id_auteur
+ * @param  $c
+ * @param bool $force_webmestre
+ * @return bool|string
+ */
+function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	if (!$id_auteur=intval($id_auteur))
 		return false;
 	// commencer par traiter les cas particuliers des logins et pass
@@ -228,6 +257,7 @@ function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
 				'table' => 'spip_auteurs',
 				'id_objet' => $id_auteur,
 				'action' => 'instituer',
+				'statut_ancien' => $statut_ancien,
 			),
 			'data' => $champs
 		)
@@ -244,9 +274,16 @@ function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
 
 	if (!count($champs)) return;
 	sql_updateq('spip_auteurs', $champs , 'id_auteur='.$id_auteur);
-	include_spip('inc/modifier');
-	sql_updateq('spip_auteurs',$champs,'id_auteur='.$id_auteur);
-	
+
+	// .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
+	if (isset($champs['login'])
+	  OR isset($champs['pass'])
+	  OR isset($champs['statut'])
+	  ) {
+		include_spip('inc/acces');
+		ecrire_acces();
+	}
+
 	// Invalider les caches
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='auteur/$id_auteur'");
@@ -258,10 +295,12 @@ function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
 				'table' => 'spip_auteurs',
 				'id_objet' => $id_auteur,
 				'action' => 'instituer',
+				'statut_ancien' => $statut_ancien,
 			),
 			'data' => $champs
 		)
 	);
+
 
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
@@ -274,5 +313,21 @@ function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
 
 }
 
+
+
+
+function insert_auteur($source=null) {
+	return auteur_inserer($source);
+}
+function auteurs_set($id_auteur, $set = null) {
+	return auteur_modifier($id_auteur,$set);
+}
+function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
+	return auteur_instituer($id_auteur,$c,$force_webmestre);
+}
+// http://doc.spip.org/@revision_auteur
+function revision_auteur($id_auteur, $c=false) {
+	return auteur_modifier($id_auteur,$c);
+}
 
 ?>

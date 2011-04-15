@@ -27,10 +27,10 @@ function action_editer_rubrique_dist($arg=null) {
 			include_spip('inc/headers');
 			redirige_url_ecrire();
 		}
-		$id_rubrique = insert_rubrique(_request('id_parent'));
+		$id_rubrique = rubrique_inserer(_request('id_parent'));
 	}
 
-	revisions_rubriques($id_rubrique);
+	$err = rubrique_modifier($id_rubrique);
 
 	if (_request('redirect')) {
 		$redirect = parametre_url(
@@ -41,12 +41,18 @@ function action_editer_rubrique_dist($arg=null) {
 		redirige_par_entete($redirect);
 	}
 	else 
-		return array($id_rubrique,'');
+		return array($id_rubrique,$err);
 }
 
 
-// http://doc.spip.org/@insert_rubrique
-function insert_rubrique($id_parent) {
+/**
+ * Inserer une rubrique en base
+ * http://doc.spip.org/@insert_rubrique
+ *
+ * @param int $id_parent
+ * @return int
+ */
+function rubrique_inserer($id_parent) {
 	$champs = array(
 		'titre' => _T('item_nouvelle_rubrique'),
 		'id_parent' => intval($id_parent),
@@ -77,10 +83,16 @@ function insert_rubrique($id_parent) {
 	return $id_rubrique;
 }
 
-// Enregistrer certaines modifications d'une rubrique
-// $c est un tableau qu'on peut proposer en lieu et place de _request()
-// http://doc.spip.org/@revisions_rubriques
-function revisions_rubriques($id_rubrique, $set=null) {
+/**
+ * Modifier une rubrique en base
+ * $set est un tableau qu'on peut proposer en lieu et place de _request()
+ * http://doc.spip.org/@revisions_rubriques
+ *
+ * @param int $id_rubrique
+ * @param array $set
+ * @return string
+ */
+function rubrique_modifier($id_rubrique, $set=null) {
 	include_spip('inc/autoriser');
 	include_spip('inc/filtres');
 
@@ -103,7 +115,7 @@ function revisions_rubriques($id_rubrique, $set=null) {
 	$c = collecter_requests(array('id_parent', 'confirme_deplace'),array(),$set);
 	// Deplacer la rubrique
 	if (isset($c['id_parent'])) {
-		instituer_rubrique($id_rubrique, $c);
+		rubrique_instituer($id_rubrique, $c);
 	}
 
 	// invalider les caches marques de cette rubrique
@@ -111,12 +123,13 @@ function revisions_rubriques($id_rubrique, $set=null) {
 	suivre_invalideur("id='rubrique/$id_rubrique'");
 	// et celui de menu_rubriques 
 	effacer_meta("date_calcul_rubriques");
+	return '';
 }
 
 // si c'est une rubrique-secteur contenant des breves, ne deplacer
 // que si $confirme_deplace == 'oui', et changer l'id_rubrique des
 // breves en question
-
+// A deporter dans les breves via un pipeline ?
 // http://doc.spip.org/@editer_rubrique_breves
 function editer_rubrique_breves($id_rubrique, $id_parent, $c=false)
 {
@@ -134,8 +147,14 @@ function editer_rubrique_breves($id_rubrique, $id_parent, $c=false)
 }
 
 
-// http://doc.spip.org/@instituer_rubrique
-function instituer_rubrique($id_rubrique, $c) {
+/**
+ * Instituer une rubrique (changer son parent)
+ * http://doc.spip.org/@instituer_rubrique
+ * @param int $id_rubrique
+ * @param array $c
+ * @return string
+ */
+function rubrique_instituer($id_rubrique, $c) {
 	// traitement de la rubrique parente
 	// interdiction de deplacer vers ou a partir d'une rubrique
 	// qu'on n'administre pas.
@@ -158,7 +177,8 @@ function instituer_rubrique($id_rubrique, $c) {
 				if ($s['statut'] != 'new') {
 					spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['visiteur_session']['id_auteur'] . ' '.  $GLOBALS['visiteur_session']['statut']);
 				}
-			} elseif (editer_rubrique_breves($id_rubrique, $id_parent, $c)) {
+			}
+			elseif (editer_rubrique_breves($id_rubrique, $id_parent, $c)) {
 				$statut_ancien = $s['statut'];
 				sql_updateq('spip_rubriques', array('id_parent' => $id_parent), "id_rubrique=$id_rubrique");
 
@@ -175,8 +195,19 @@ function instituer_rubrique($id_rubrique, $c) {
 
 				calculer_langues_rubriques();
 
-				return true;
+				return ''; // pas d'erreur
 			}
 		}
 	}
+}
+
+// obsoletes
+function insert_rubrique($id_parent) {
+	return rubrique_inserer($id_parent);
+}
+function revisions_rubriques($id_rubrique, $set=null) {
+	return rubrique_modifier($id_rubrique,$set);
+}
+function instituer_rubrique($id_rubrique, $c) {
+	return rubrique_instituer($id_rubrique, $c);
 }
