@@ -68,7 +68,7 @@ function plugin_bouton_config($nom, $infos, $dir)
 	}
 
 	// sinon prendre le squelette std sur le nom std
-	return recuperer_fond("prive/cfg",
+	return recuperer_fond("prive/modeles/cfg",
 			array('script' => 'configurer_' . $prefix,
 				'nom' => $nom));
 }
