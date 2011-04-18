@@ -46,7 +46,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 		$ret['options'] = $arbre['options'];
 	if (isset($arbre['fonctions']))
 		$ret['fonctions'] = $arbre['fonctions'];
-	if (!isset($arbre['prefix'][0]))
+	if (isset($arbre['prefix'][0]))
 		$ret['prefix'] = trim(array_pop($arbre['prefix']));
 	if (isset($arbre['install']))
 		$ret['install'] = $arbre['install'];
