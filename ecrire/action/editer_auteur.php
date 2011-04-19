@@ -91,9 +91,12 @@ function auteur_inserer($source=null) {
  *
  * @param int $id_auteur
  * @param array $set
+ * @param bool $force_update
+ *   permet de forcer la maj en base des champs fournis, sans passer par instancier
+ *   utilise par auth/spip
  * @return string
  */
-function auteur_modifier($id_auteur, $set = null) {
+function auteur_modifier($id_auteur, $set = null, $force_update=false) {
 	$err = '';
 
 	include_spip('inc/modifier');
@@ -105,7 +108,7 @@ function auteur_modifier($id_auteur, $set = null) {
 		 'imessage','pgp',
 		),
 		// black list
-		array('webmestre','pass','login'),
+		$force_update?array():array('webmestre','pass','login'),
 		// donnees eventuellement fournies
 		$set
 	);
@@ -117,26 +120,28 @@ function auteur_modifier($id_auteur, $set = null) {
 		$c);
 	$session = $c;
 
-	// Modification de statut, changement de rubrique ?
-	$c = collecter_requests(
-		// white list
-		array(
-		 'statut', 'new_login','new_pass','login','pass','webmestre','restreintes','id_parent'
-		),
-		// black list
-		array(),
-		// donnees eventuellement fournies
-		$set
-	);
-	if (isset($c['new_login']) AND !isset($c['login']))
-		$c['login'] = $c['new_login'];
-	if (isset($c['new_pass']) AND !isset($c['pass']))
-		$c['pass'] = $c['new_pass'];
-	$err .= auteur_instituer($id_auteur, $c);
+	if (!$force_update){
+		// Modification de statut, changement de rubrique ?
+		$c = collecter_requests(
+			// white list
+			array(
+			 'statut', 'new_login','new_pass','login','pass','webmestre','restreintes','id_parent'
+			),
+			// black list
+			array(),
+			// donnees eventuellement fournies
+			$set
+		);
+		if (isset($c['new_login']) AND !isset($c['login']))
+			$c['login'] = $c['new_login'];
+		if (isset($c['new_pass']) AND !isset($c['pass']))
+			$c['pass'] = $c['new_pass'];
+		$err .= auteur_instituer($id_auteur, $c);
+		$session = array_merge($session,$c);
+	}
 
 	// .. mettre a jour les sessions de cet auteur
 	include_spip('inc/session');
-	$session = array_merge($session,$c);
 	$session['id_auteur'] = $id_auteur;
 	actualiser_sessions($session);
 
