@@ -81,6 +81,7 @@ ecrire/exec/fond.php -text
 ecrire/exec/fond_monobloc.php -text
 ecrire/exec/index.php -text
 ecrire/exec/info_plugin.php -text
+ecrire/exec/info_plugin_distant.php -text
 ecrire/exec/informer.php -text
 ecrire/exec/install.php -text
 ecrire/exec/plonger.php -text
