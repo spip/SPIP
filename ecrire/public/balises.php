@@ -1417,4 +1417,29 @@ function balise_PUBLIE_dist($p) {
 	$p->interdire_scripts = false;
 	return $p;
 }
+
+/**
+ * #PRODUIRE
+ * generer un fichier statique a partir d'un squelette SPIP
+ *
+ * Le format du fichier sera extrait de la preextension du squelette (typo.css.html, messcripts.js.html)
+ * ou par l'argument format=css ou format=js passe en argument.
+ *
+ * Si pas de format detectable, on utilise .html, comme pour les squelettes
+ *
+ * <link rel="stylesheet" type="text/css" href="#PRODUIRE{fond=css/macss.css,couleur=ffffff}" />
+ * la syntaxe de la balise est la meme que celle de #INCLURE
+ *
+ * @param object $p
+ * @return object
+ */
+function balise_PRODUIRE_dist($p){
+	$balise_inclure = charger_fonction('INCLURE','balise');
+	$p = $balise_inclure($p);
+
+	$p->code = str_replace('recuperer_fond(','produire_fond_statique(',$p->code);
+
+	return $p;
+}
+
 ?>
