@@ -59,8 +59,8 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 	if (!isset($cache[$serveur][$table][$recherche])){
 		$hash_serv = ($serveur?substr(md5($serveur),0,16):'');
 		$hash = substr(md5($recherche . $table),0,16);
-		$where = "(recherche='$hash' AND table_objet=".sql_quote($table)." AND serveur='$hash_serv')";
-		$row = sql_fetsel('UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(maj) AS fraicheur','spip_resultats',$where,'','fraicheur DESC','0,1');
+		$where = "(resultats.recherche='$hash' AND resultats.table_objet=".sql_quote($table)." AND resultats.serveur='$hash_serv')";
+		$row = sql_fetsel('UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(resultats.maj) AS fraicheur','spip_resultats AS resultats',$where,'','fraicheur DESC','0,1');
 		if (!$row OR ($row['fraicheur']>$delai_fraicheur)){
 		 	$rechercher = true;
 		}
@@ -88,7 +88,9 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 
 		// supprimer les anciens resultats de cette recherche
 		// et les resultats trop vieux avec une marge
-		sql_delete('spip_resultats', 'NOT(' .sql_date_proche('maj', (0-($delai_fraicheur+100)), " SECOND") . ") OR ($where)");
+		// pas de AS resultats dans un delete (mysql)
+		$whered = str_replace(array("resultats.recherche","resultats.table_objet","resultats.serveur"),array("recherche","table_objet","serveur"),$where);
+		sql_delete('spip_resultats', 'NOT(' .sql_date_proche('maj', (0-($delai_fraicheur+100)), " SECOND") . ") OR ($whered)");
 
 		// inserer les resultats dans la table de cache des resultats
 		if (count($points)){
