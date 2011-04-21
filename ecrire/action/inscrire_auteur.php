@@ -21,14 +21,19 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $mode
  * @param string $mail_complet
  * @param string $nom
+ * @param array $options
+ *   login : login precalcule
+ *   id : id_rubrique fournit en second arg de #FORMULAIRE_INSCRIPTION
  * @return array|string
  */
-function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $login=''){
-	
+function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = array()){
+	if (!is_array($options))
+		$options = array('id'=>$options);
+
 	if (function_exists('test_inscription'))
 		$f = 'test_inscription';
 	else 	$f = 'test_inscription_dist';
-	$desc = $f($statut, $mail_complet, $nom, $login);
+	$desc = $f($statut, $mail_complet, $nom, $options);
 
 	// erreur ?
 	if (!is_array($desc))
@@ -55,7 +60,7 @@ function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $login=''){
 
 	// charger de suite cette fonction, pour ses utilitaires
 	$envoyer_inscription = charger_fonction("envoyer_inscription","");
-	list($sujet,$msg,$from,$head) = $envoyer_inscription($desc, $nom, $statut);
+	list($sujet,$msg,$from,$head) = $envoyer_inscription($desc, $nom, $statut, $options);
 
 	$notifications = charger_fonction('notifications', 'inc');
 	notifications_envoyer_mails($mail_complet, $msg, $sujet, $from, $head);
@@ -83,21 +88,25 @@ function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $login=''){
  * @param string $statut
  * @param string $mail
  * @param string $nom
+ * @param string $options
  * @return array|string
  */
-function test_inscription_dist($statut, $mail, $nom, $login='') {
+function test_inscription_dist($statut, $mail, $nom, $options) {
 	include_spip('inc/filtres');
 	$nom = trim(corriger_caracteres($nom));
 	if((strlen ($nom) < _LOGIN_TROP_COURT) OR (strlen($nom) > 64))
 	    return 'ecrire:info_login_trop_court';
 	if (!$r = email_valide($mail)) return 'info_email_invalide';
-	return array('email' => $r, 'nom' => $nom, 'bio' => $statut, 'login'=>$login);
+	$res = array('email' => $r, 'nom' => $nom, 'prefs' => $statut);
+	if (isset($options['login']))
+		$res['login'] = $options['login'];
+	return $res;
 }
 
 
 /**
  * On enregistre le demandeur comme 'nouveau', en memorisant le statut final
- * provisoirement dans le champ Bio, afin de ne pas visualiser les inactifs
+ * provisoirement dans le champ prefs, afin de ne pas visualiser les inactifs
  * A sa premiere connexion il obtiendra son statut final.
  *
  * http://doc.spip.org/@inscription_nouveau
@@ -173,13 +182,13 @@ function test_login($nom, $mail) {
  *
  * @param array $desc
  * @param string $nom
- * @param strong $mode
- * @param int $id
+ * @param string $mode
+ * @param array $options
  * @return array
  */
-function envoyer_inscription_dist($desc, $nom, $mode) {
+function envoyer_inscription_dist($desc, $nom, $mode, $options=array()) {
 
-	$contexte = $desc;
+	$contexte = array_merge($desc,$options);
 	$contexte['nom'] = $nom;
 	$contexte['mode'] = $mode;
 
@@ -202,4 +211,65 @@ function creer_pass_pour_auteur($id_auteur) {
 	include_spip('action/editer_auteur');
 	instituer_auteur($id_auteur, array('pass'=>$pass));
 	return $pass;
+}
+
+/**
+ * Un filtre pour determiner le nom du mode des librement inscrits,
+ * a l'aide de la liste globale des statuts (tableau mode => nom du mode)
+ * Utile pour le formulaire d'inscription.
+ * Si un mode est fourni, verifier que la configuration l'accepte.
+ * Si mode inconnu laisser faire, c'est une extension non std
+ * mais verifier que la syntaxe est compatible avec SQL
+ *
+ * http://doc.spip.org/@tester_config
+ *
+ * @param string $statut_tmp
+ * @return string
+ */
+function tester_statut_inscription($statut_tmp){
+	$s = array_search($statut_tmp, $GLOBALS['liste_des_statuts']);
+	switch ($s) {
+
+	case 'info_redacteurs' :
+	  return (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? $statut_tmp : '');
+
+	case 'info_visiteurs' :
+	  return (($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo') ? $statut_tmp : '');
+
+	default:
+	  if ($statut_tmp AND $statut_tmp == addslashes($statut_tmp))
+	    return $statut_tmp;
+	  if ($GLOBALS['meta']["accepter_inscriptions"] == "oui")
+	    return $GLOBALS['liste_des_statuts']['info_redacteurs'];
+	  if ($GLOBALS['meta']["accepter_visiteurs"] == "oui")
+	    return $GLOBALS['liste_des_statuts']['info_visiteurs'];
+	  return '';
+	}
+}
+
+
+/**
+ * Un nouvel inscrit prend son statut definitif a la 1ere connexion.
+ * Le statut a ete memorise dans prefs (cf test_inscription_dist).
+ * On le verifie, car la config a peut-etre change depuis,
+ * et pour compatibilite avec les anciennes versions qui n'utilisaient pas "prefs".
+ *
+ * http://doc.spip.org/@acces_statut
+ *
+ * @param array $auteur
+ * @return array
+ */
+function confirmer_statut_inscription($auteur){
+	// securite
+	if ($auteur['statut'] != 'nouveau') return $auteur;
+
+	if (!($s = tester_statut_inscription('', $auteur['prefs'])))
+		return $auteur;
+
+	include_spip('action/editer_auteur');
+	// changer le statut
+	auteur_modifier($auteur['id_auteur'],array('statut'=> $s));
+	unset($_COOKIE['spip_session']); // forcer la maj de la session
+
+	return $auteur;
 }

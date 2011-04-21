@@ -1368,34 +1368,15 @@ function vider_attribut ($balise, $attribut) {
 }
 
 
-// Un filtre pour determiner le nom du mode des librement inscrits,
-// a l'aide de la liste globale des statuts (tableau mode => nom du mode)
-// Utile pour le formulaire d'inscription.
-// Si un mode est fourni, verifier que la configuration l'accepte.
-// Si mode inconnu laisser faire, c'est une extension non std
-// mais verifier que la syntaxe est compatible avec SQL
-
-// http://doc.spip.org/@tester_config
-function tester_config($id, $mode='') {
-
-	$s = array_search($mode, $GLOBALS['liste_des_statuts']);
-	switch ($s) {
-
-	case 'info_redacteurs' :
-	  return (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? $mode : '');
-
-	case 'info_visiteurs' : 
-	  return (($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo') ? $mode : '');
-
-	default:
-	  if ($mode AND $mode == addslashes($mode))
-	    return $mode;
-	  if ($GLOBALS['meta']["accepter_inscriptions"] == "oui")
-	    return $GLOBALS['liste_des_statuts']['info_redacteurs'];
-	  if ($GLOBALS['meta']["accepter_visiteurs"] == "oui")
-	    return $GLOBALS['liste_des_statuts']['info_visiteurs'];
-	  return '';
-	}
+/**
+ * Un filtre pour determiner le nom du satut des inscrits
+ * @param void $dummy
+ * @param string $mode
+ * @return string
+ */
+function tester_config($dummy, $mode='') {
+	include_spip('action/inscrire_auteur');
+	return tester_statut_inscription($mode);
 }
 
 //

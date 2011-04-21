@@ -350,4 +350,8 @@ $GLOBALS['maj'][17577] = array(
 	array('maj_tables',array('spip_jobs','spip_jobs_liens')),
 );
 
+$GLOBALS['maj'][17743] = array(
+	array('sql_update','spip_auteurs',array('prefs'=>'bio','bio'=>"''"),"statut='nouveau' AND bio<>''"),
+);
+
 ?>

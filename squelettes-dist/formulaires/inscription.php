@@ -12,21 +12,23 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-function formulaires_inscription_charger_dist($mode, $focus, $id=0) {
+function formulaires_inscription_charger_dist($mode='6forum', $id=0) {
+	// pas de formulaire si le mode est interdit
+	include_spip('action/inscrire_auteur');
+	if (!tester_statut_inscription($mode))
+		return false;
+
 	$valeurs = array('nom_inscription'=>'','mail_inscription'=>'', 'id'=>$id);
 	if ($mode=='1comite')
 		$valeurs['_commentaire'] = _T('pass_espace_prive_bla');
 	else 
 		$valeurs['_commentaire'] = _T('pass_forum_bla');
 
-	if (!tester_config($id, $mode))
-		$valeurs['editable'] = false;
-
 	return $valeurs;
 }
 
 // Si inscriptions pas autorisees, retourner une chaine d'avertissement
-function formulaires_inscription_verifier_dist($mode, $focus, $id=0) {
+function formulaires_inscription_verifier_dist($mode='6forum', $id=0) {
 
 	$erreurs = array();
 	include_spip('inc/filtres');	
@@ -67,13 +69,13 @@ function formulaires_inscription_verifier_dist($mode, $focus, $id=0) {
 	return $erreurs;
 }
 
-function formulaires_inscription_traiter_dist($mode, $focus, $id=0) {
+function formulaires_inscription_traiter_dist($mode='6forum', $id=0) {
 
 	$nom = _request('nom_inscription');
 	$mail_complet = _request('mail_inscription');
 
 	$inscrire_auteur = charger_fonction('inscrire_auteur','action');
-	$desc = $inscrire_auteur($mode, $mail_complet, $nom);
+	$desc = $inscrire_auteur($mode, $mail_complet, $nom, array('id'=>$id));
 
 	return array('message_ok'=>is_string($desc) ? $desc : _T('form_forum_identifiant_mail'));
 }
