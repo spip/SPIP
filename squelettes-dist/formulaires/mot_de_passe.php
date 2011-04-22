@@ -12,6 +12,23 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+include_spip('base/abstract_sql');
+
+function retrouve_auteur($id_auteur,$jeton){
+	if ($id_auteur=intval($id_auteur)) {
+		return sql_fetsel('*','spip_auteurs',array('id_auteur='.intval($id_auteur),"statut<>'5poubelle'","pass<>''"));
+	}
+	elseif ($p=_request('p')) {
+		include_spip('action/inscrire_auteur');
+		if ($auteur = auteur_verifier_jeton($p)
+		  AND $auteur['statut']<>'5poubelle'
+		  AND $auteur['pass']<>''){
+			return $auteur;
+		}
+	}
+	return false;
+}
+
 // chargement des valeurs par defaut des champs du formulaire
 /**
  * Chargement de l'auteur qui peut changer son mot de passe.
@@ -24,19 +41,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function formulaires_mot_de_passe_charger_dist($id_auteur=null){
 
-	include_spip('base/abstract_sql');
 	$valeurs = array();
-	if ($id_auteur=intval($id_auteur)) {
-		$id_auteur = sql_getfetsel('id_auteur','spip_auteurs',array('id_auteur='.intval($id_auteur),"statut<>'5poubelle'","pass<>''"));
-	}
-	elseif ($p=_request('p')) {
-		$p = preg_replace(',[^0-9a-f.],i','',$p);
-		if ($p AND $id_auteur = sql_getfetsel('id_auteur','spip_auteurs',array('cookie_oubli='.sql_quote($p),"statut<>'5poubelle'","pass<>''")))
-			$valeurs['_hidden'] = '<input type="hidden" name="p" value="'.$p.'" />';
-	}
+	$jeton = _request('p');
+	$auteur = retrouve_auteur($id_auteur,$jeton);
 
-	if ($id_auteur){
+	if ($auteur){
 		$valeurs['id_auteur'] = $id_auteur; // a toutes fins utiles pour le formulaire
+		if ($jeton)
+			$valeurs['_hidden'] = '<input type="hidden" name="p" value="'.$jeton.'" />';
 	}
 	else {
 		$valeurs['_hidden'] = _T('pass_erreur_code_inconnu');
@@ -70,20 +82,17 @@ function formulaires_mot_de_passe_verifier_dist($id_auteur=null){
  */
 function formulaires_mot_de_passe_traiter_dist($id_auteur=null){
 	$message = '';
-	include_spip('base/abstract_sql');
-	if ($id_auteur=intval($id_auteur)) {
-		$row = sql_fetsel('id_auteur,login','spip_auteurs',array('id_auteur='.intval($id_auteur),"statut<>'5poubelle'","pass<>''"));
-	}
-	elseif ($p=_request('p')) {
-		$p = preg_replace(',[^0-9a-f.],i','',$p);
-		$row = sql_fetsel('id_auteur,login,source','spip_auteurs',array('cookie_oubli='.sql_quote($p),"statut<>'5poubelle'","pass<>''"));
-	}
+
+	$jeton = _request('p');
+	$row = retrouve_auteur($id_auteur,$jeton);
 
 	if ($row
 	 && ($id_auteur = $row['id_auteur'])
 	 && ($oubli = _request('oubli'))) {
 		include_spip('action/editer_auteur');
-		auteurs_set($id_auteur, array('pass'=>$oubli,'cookie_oubli'=>''));
+		include_spip('action/inscrire_auteur');
+		auteurs_set($id_auteur, array('pass'=>$oubli));
+		auteur_effacer_jeton($id_auteur);
 
 		$login = $row['login'];
 		$message = "<b>" . _T('pass_nouveau_enregistre') . "</b>".

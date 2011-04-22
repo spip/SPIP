@@ -57,6 +57,8 @@ function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = ar
 	// generer le mot de passe (ou le refaire si compte inutilise)
 	$desc['pass'] = creer_pass_pour_auteur($desc['id_auteur']);
 
+	// attribuer un jeton pour confirmation par clic sur un lien
+	$desc['jeton'] = auteur_attribuer_jeton($desc['id_auteur']);
 
 	// charger de suite cette fonction, pour ses utilitaires
 	$envoyer_inscription = charger_fonction("envoyer_inscription","");
@@ -191,8 +193,12 @@ function envoyer_inscription_dist($desc, $nom, $mode, $options=array()) {
 	$contexte = array_merge($desc,$options);
 	$contexte['nom'] = $nom;
 	$contexte['mode'] = $mode;
+	$contexte['url_confirm'] = generer_url_action('confirmer_inscription','',true,true);
+	$contexte['url_confirm'] = parametre_url($contexte['url_confirm'],'email',$desc['email']);
+	$contexte['url_confirm'] = parametre_url($contexte['url_confirm'],'jeton',$desc['jeton']);
 
 	$message = recuperer_fond('modeles/mail_inscription',$contexte);
+	var_dump($message);
 	return array("", $message);
 }
 
@@ -272,4 +278,47 @@ function confirmer_statut_inscription($auteur){
 	unset($_COOKIE['spip_session']); // forcer la maj de la session
 
 	return $auteur;
+}
+
+
+/**
+ * Attribuer un jeton temporaire pour un auteur
+ * en assurant l'unicite du jeton
+ * @param int $id_auteur
+ * @return string
+ */
+function auteur_attribuer_jeton($id_auteur){
+	include_spip('inc/acces');
+	// s'assurer de l'unicite du jeton pour le couple (email,cookie)
+	do {
+		$jeton = creer_uniqid();
+		sql_updateq("spip_auteurs", array("cookie_oubli" => $jeton), "id_auteur=" . intval($id_auteur));
+	}
+	while (sql_countsel("spip_auteurs","cookie_oubli=".sql_quote($jeton))>1);
+	return $jeton;
+}
+
+/**
+ * Retrouver l'auteur par son jeton et son email, uniques par construction
+ * @param string $email
+ * @param string $jeton
+ * @return array|bool
+ */
+function auteur_verifier_jeton($jeton){
+	// refuser un jeton corrompu
+	if (preg_match(',[^0-9a-f.],i','',$jeton))
+		return false;
+
+	$desc = sql_fetsel('*','spip_auteurs',"cookie_oubli=".sql_quote($jeton));
+	return $desc;
+}
+
+/**
+ * Effacer le jeton d'un auteur apres utilisation
+ *
+ * @param int $id_auteur
+ * @return bool
+ */
+function auteur_effacer_jeton($id_auteur){
+	return sql_updateq("spip_auteurs", array("cookie_oubli" => ''), "id_auteur=" . intval($id_auteur));
 }
