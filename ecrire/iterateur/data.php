@@ -203,7 +203,10 @@ class IterateurDATA implements Iterator {
 					if (!$u)
 						throw new Exception("404");
 					if (!isset($ttl)) $ttl = 24*3600;
-				} else if (@is_readable($src)) {
+				} else if (@is_dir($src)) {
+					$u = $src;
+					if (!isset($ttl)) $ttl = 10;
+				} else if (@is_readable($src) && @is_file($src)) {
 					$u = spip_file_get_contents($src);
 					if (!isset($ttl)) $ttl = 10;
 				} else {
@@ -510,6 +513,19 @@ function inc_glob_to_array_dist($u) {
 	return (array) glob($u,
 		GLOB_MARK | GLOB_NOSORT | GLOB_BRACE
 	);
+}
+
+/**
+ * pregfiles -> tableau
+ * lister des fichiers a partir d'un dossier de base et selon une regexp.
+ * pour la syntaxe cf la fonction spip preg_files
+ * @param string $dir
+ * @param string $regexp
+ * @param int $limit
+ * @return array|bool
+ */
+function inc_pregfiles_to_array_dist($dir, $regexp=-1, $limit=10000) {
+	return (array) preg_files($dir, $regexp, $limit);
 }
 
 /**
