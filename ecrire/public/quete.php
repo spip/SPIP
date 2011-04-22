@@ -202,8 +202,11 @@ function quete_logo_file($row, $connect=NULL) {
 		$f = charger_fonction('vignette','inc');
 		$logo = $f($row['extension'], false);
 	}
-	if (preg_match(',^'._DIR_IMG_ICONES_DIST.',', $logo))
-			return $logo; 
+	// si c'est une vignette type doc, la renvoyer direct
+	if (strncmp($logo,_DIR_PLUGINS, strlen(_DIR_PLUGINS))==0
+		OR strncmp($logo,_DIR_EXTENSIONS, strlen(_DIR_EXTENSIONS))==0
+		OR strncmp($logo,_DIR_RACINE.'prive/', strlen(_DIR_RACINE.'prive/'))==0)
+		return $logo;
 	return get_spip_doc($logo);
 }
 

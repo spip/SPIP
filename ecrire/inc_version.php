@@ -45,12 +45,9 @@ define('_ROOT_RESTREINT', _ROOT_CWD . _DIR_RESTREINT);
 if (!defined('_NOM_IMG_PACK')) define('_NOM_IMG_PACK', 'images/');
 # le chemin http (relatif) vers les images standard
 define('_DIR_IMG_PACK', (_DIR_RACINE . 'prive/' . _NOM_IMG_PACK));
-# le chemin des vignettes de type de fichier
-define('_DIR_IMG_ICONES_DIST', _DIR_RACINE . "prive/vignettes/");
 
 # le chemin php (absolu) vers les images standard (pour hebergement centralise)
 define('_ROOT_IMG_PACK', dirname(dirname(__FILE__)) . '/prive/' . _NOM_IMG_PACK);
-define('_ROOT_IMG_ICONES_DIST', dirname(dirname(__FILE__)) . '/prive/vignettes/');
 
 # le nom du repertoire des  bibliotheques JavaScript
 if (!defined('_JAVASCRIPT')) define('_JAVASCRIPT', 'javascript/'); // utilisable avec #CHEMIN et find_in_path

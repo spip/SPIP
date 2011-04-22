@@ -45,7 +45,9 @@ function get_spip_doc($fichier) {
 	if (!strlen($fichier))
 		return false;
 
-	$fichier = (strpos($fichier, _DIR_IMG) === false)
+	$fichier = (
+		    strncmp($fichier,_DIR_IMG, strlen(_DIR_IMG))!=0
+		)
 		? _DIR_IMG . $fichier
 		: $fichier ;
 
