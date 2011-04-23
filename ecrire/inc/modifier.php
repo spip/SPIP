@@ -19,23 +19,31 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param array $white_list
  * @param array $black_list
  * @param array|null $set
+ * @param bool $tous Recuperer tous les champs de white_list meme ceux n'ayant pas ete postes
  * @return array
  */
-function collecter_requests($white_list, $black_list, $set=null){
+function collecter_requests($white_list, $black_list, $set=null, $tous=false){
 	$c = $set;
 	if (!$c){
 		$c = array();
-		foreach($white_list as $champ)
-			$c[$champ] = _request($champ);
+		foreach($white_list as $champ) {
+			// on ne collecte que les champs reellement envoyes par defaut.
+			// le cas d'un envoi de valeur NULL peut du coup poser probleme.
+			$val = _request($champ);
+			if ($tous OR $val !== NULL) {
+				$c[$champ] = $val;
+			}
+		}
 		// on ajoute toujours la lang en saisie possible
 		// meme si pas prevu au depart pour l'objet concerne
 		if ($l = _request('changer_lang')){
 			$c['lang'] = $l;
 		}
 	}
-	foreach($black_list as $champ)
+	foreach($black_list as $champ) {
 		unset($c[$champ]);
-
+	}
+	
 	return $c;
 }
 
