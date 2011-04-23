@@ -58,9 +58,16 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 	if (!isset ($options['titre'])) {
 		$balise_img = chercher_filtre('balise_img');
 		$img = $balise_img(chemin_image('image-24.png'), "", 'cadre-icone');
-		$libelles = pipeline('libeller_logo',$GLOBALS['logo_libelles']);
+		$libelles = pipeline('libeller_logo', $GLOBALS['logo_libelles']);
 		$libelle = (($id_objet OR $objet != 'rubrique') ? $objet : 'racine');
-		$libelle = (isset($libelles[$libelle])?$libelles[$libelle]:$libelles['site']);
+		if (isset($libelles[$libelle])) {
+			$libelle = $libelles[$libelle];
+		} elseif ($libelle = objet_info($objet, 'texte_logo_objet')) {
+			$libelle = _T($libelle);
+		} else {
+			$libelle = $libelles['site'];
+		}
+
 		$options['titre'] = $img . $libelle;
 	}
 	if (!isset ($options['editable']))
