@@ -140,47 +140,17 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	$page['entetes'] = pipeline('affichage_entetes_final'._PIPELINE_SUFFIX, $page['entetes']);
 
 
-	// 1. Cas d'une page contenant uniquement du HTML :
-	if ($page['process_ins'] == 'html') {
-		envoyer_entetes($page['entetes']);
-	}
-
-	// 2. Cas d'une page contenant du PHP :
-	// Attention cette partie eval() doit imperativement
-	// etre declenchee dans l'espace des globales (donc pas
-	// dans une fonction).
-	else {
-		// sinon, inclure_balise_dynamique nous enverra peut-etre
-		// quelques en-tetes de plus (voire qq envoyes directement)
-
-		// restaurer l'etat des notes
-		if (isset($page['notes'])
-		  AND $page['notes']
-		  AND $notes = charger_fonction("notes","inc",true)){
-			$notes($page['notes'],'restaurer_etat');
-		}
-		ob_start(); 
-		xml_hack($page, true);
-		$res = eval('?' . '>' . $page['texte']);
-		$page['texte'] = ob_get_contents(); 
-		xml_hack($page);
-		ob_end_clean();
-
-		envoyer_entetes($page['entetes']);
-		// en cas d'erreur lors du eval,
-		// la memoriser dans le tableau des erreurs
-
-		if ($res === false) {
-			$msg = array('zbug_erreur_execution_page');
-			erreur_squelette($msg);
-		}
+	// eval $page et affecte $res
+	include _ROOT_RESTREINT."public/evaluer_page.php";
+	envoyer_entetes($page['entetes']);
+	if ($res === false) {
+		$msg = array('zbug_erreur_execution_page');
+		erreur_squelette($msg);
 	}
 
 	//
-	// Post-traitements
+	// Envoyer le resultat apres post-traitements
 	//
-	page_base_href($page['texte']);
-
 	// (c'est ici qu'on fait var_recherche, validation, boutons d'admin,
 	// cf. public/assembler.php)
 	echo pipeline('affichage_final'._PIPELINE_SUFFIX, $page['texte']);

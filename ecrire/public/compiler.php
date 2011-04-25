@@ -29,6 +29,9 @@ include_spip('public/interfaces');
 // dans l'arborescence des boucles
 include_spip('public/references');
 
+// production du code qui peut etre securisee
+include_spip('public/sandbox');
+
 // definition des boucles
 include_spip('public/boucles');
 
@@ -112,15 +115,7 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 
 //
 // Calculer un <INCLURE()>
-// La constante ci-dessous donne le code general quand il s'agit d'un script.
-
-define('CODE_INCLURE_SCRIPT', 'if (($path = %s) AND is_readable($path))
-	include $path;
-else erreur_squelette(array("fichier_introuvable", array("fichier" => "%s")), array(%s));'
-);
-
-// // et celle-ci pour un squelette (aussi pour #INCLURE, #MODELE #LES_AUTEURS)
-
+// code pour un squelette (aussi pour #INCLURE, #MODELE #LES_AUTEURS)
 define('CODE_RECUPERER_FOND', 'recuperer_fond(%s, %s, array(%s), %s)');
 
 // http://doc.spip.org/@calculer_inclure
@@ -174,12 +169,7 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 
 	// s'il y a une extension .php, ce n'est pas un squelette
 	if (preg_match('/^.+[.]php$/s', $fichier)) {
-		// si inexistant, on essaiera a l'execution
-		if ($path = find_in_path($fichier))
-			$path = "\"$path\"";
-		else $path = "find_in_path(\"$fichier\")";
-
-		$code = sprintf(CODE_INCLURE_SCRIPT, $path, $fichier, $compil);
+		$code = sandbox_composer_inclure_php($fichier, $p);
 	} else 	{
 		$_options[] = "\"compil\"=>array($compil)";
 		if ($ajax)
@@ -698,8 +688,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 		switch($p->type) {
 		// texte seul
 		case 'texte':
-			$code = "'".str_replace(array("\\","'"),array("\\\\","\\'"), $p->texte)."'";
-
+			$code = sandbox_composer_texte($p->texte, $p);
 			$commentaire= strlen($p->texte) . " signes";
 			$avant='';
 			$apres='';

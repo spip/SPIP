@@ -424,16 +424,7 @@ function applique_filtres($p) {
 	if (isset($p->descr['session']))
 		$code = "invalideur_session(\$Cache, $code)";
 
-	// Securite
-	if ($p->interdire_scripts
-	AND $p->etoile != '**') {
-		if (!preg_match("/^sinon[(](.*),'([^']*)'[)]$/", $code, $r))
-			$code = "interdire_scripts($code)";
-		else {
-		  $code = interdire_scripts($r[2]);
-		  $code = "sinon(interdire_scripts($r[1]),'$code')";
-		}
-	}
+	$code = sandbox_composer_interdire_scripts($code, $p);
 	return $code;
 }
 
@@ -466,19 +457,8 @@ function compose_filtres(&$p, $code) {
 		if ($logique)
 			$code = $logique;
 		else {
-			if (isset($GLOBALS['spip_matrice'][$fonc])) {
-				$code = "filtrer('$fonc',$code$arglist)";
-				if ($is_filtre_image) $image_miette = true;
-			}
-
-			// le filtre est defini sous forme de fonction ou de methode
-			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
-			elseif ($f = chercher_filtre($fonc)) {
-				$code = "$f($code$arglist)";
-			}
-			// le filtre n'existe pas,
-			// on le notifie
-			else erreur_squelette(array('zbug_erreur_filtre', array('filtre'=>  texte_script($fonc))), $p);
+			$code = sandbox_composer_filtre($fonc,$code,$arglist,$p);
+			if ($is_filtre_image) $image_miette = true;
 		}
 	}
 	// ramasser les images intermediaires inutiles et graver l'image finale
