@@ -837,6 +837,7 @@ jQuery(function() {
 	.formulaire_dyn_ajax();
 	jQuery('div.ajaxbloc').ajaxbloc();
 	jQuery("input[placeholder]:text").placeholderLabel();
+	jQuery('a.popin').click(function(){if (jQuery.modalbox) jQuery.modalbox(parametre_url(this.href,"var_zajax","contenu"));return false;});
 });
 
 // ... et a chaque fois que le DOM change
@@ -849,6 +850,7 @@ onAjaxLoad(function() {
 		jQuery('div.ajaxbloc', this)
 			.ajaxbloc();
 		jQuery("input[placeholder]:text",this).placeholderLabel();
+		jQuery('a.popin').click(function(){if (jQuery.modalbox) jQuery.modalbox(parametre_url(this.href,"var_zajax","contenu"));return false;});
 	}
 });
 
