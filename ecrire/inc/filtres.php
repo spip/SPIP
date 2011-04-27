@@ -1011,47 +1011,35 @@ function affdate_heure($numdate) {
 }
 
 
-//
-// Alignements en HTML (Old-style, preferer CSS)
-//
-
-// Cette fonction cree le paragraphe s'il n'existe pas (texte sur un seul para)
-// http://doc.spip.org/@aligner
+/**
+ * Alignements en HTML (Old-style, preferer CSS)
+ * Cette fonction ne cree pas de paragraphe
+ *
+ * http://doc.spip.org/@aligner
+ *
+ * @param  $letexte
+ * @param string $justif
+ * @return string
+ */
 function aligner($letexte, $justif='') {
 	$letexte = trim($letexte);
 	if (!strlen($letexte)) return '';
 
-	// Paragrapher proprement
-	$letexte = paragrapher($letexte, true);
-
-	// Inserer les alignements
-	if ($justif)
-		$letexte = str_replace(
-		'<p class="spip">', '<p class="spip" align="'.$justif.'">',
-		$letexte);
+	// Paragrapher rapidement
+	$letexte = "<div style='text-align:$justif'>"
+		. $letexte
+	  ."</div>";
 
 	return $letexte;
 }
-
 // http://doc.spip.org/@justifier
-function justifier($letexte) {
-	return aligner($letexte,'justify');
-}
-
+function justifier($letexte) { return aligner($letexte,'justify');}
 // http://doc.spip.org/@aligner_droite
-function aligner_droite($letexte) {
-	return aligner($letexte,'right');
-}
-
+function aligner_droite($letexte) { return aligner($letexte,'right');}
 // http://doc.spip.org/@aligner_gauche
-function aligner_gauche($letexte) {
-	return aligner($letexte,'left');
-}
-
+function aligner_gauche($letexte) {return aligner($letexte,'left');}
 // http://doc.spip.org/@centrer
-function centrer($letexte) {
-	return aligner($letexte,'center');
-}
+function centrer($letexte) {return aligner($letexte,'center');}
 
 // http://doc.spip.org/@style_align
 function style_align($bof) {
