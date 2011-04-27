@@ -71,7 +71,6 @@ ecrire/core.xml -text
 ecrire/exec/403.php -text
 ecrire/exec/404.php -text
 ecrire/exec/admin_plugin.php -text
-ecrire/exec/aide_index.php -text
 ecrire/exec/articles_tous.php -text
 ecrire/exec/base_delete_all.php -text
 ecrire/exec/base_repair.php -text
@@ -768,6 +767,8 @@ prive/squelettes/body.html -text
 prive/squelettes/contenu/accueil.html -text
 prive/squelettes/contenu/admin_tech.html -text
 prive/squelettes/contenu/admin_vider.html -text
+prive/squelettes/contenu/aide.html -text
+prive/squelettes/contenu/aide_fonctions.php -text
 prive/squelettes/contenu/article.html -text
 prive/squelettes/contenu/article_edit.html -text
 prive/squelettes/contenu/articles.html -text
@@ -837,6 +838,7 @@ prive/squelettes/navigation/visiteurs.html -text
 prive/squelettes/objet.html -text
 prive/squelettes/page.html -text
 prive/squelettes/structure.html -text
+prive/squelettes/top/aide.html -text
 prive/squelettes/top/configurer_langage.html -text
 prive/squelettes/top/configurer_preferences.html -text
 prive/squelettes/top/dist.html -text

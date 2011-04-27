@@ -65,7 +65,7 @@ function collecter_requests($white_list, $black_list, $set=null, $tous=false){
  * @param string $serveur
  * @return bool
  */
-function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
+function modifier_contenu($type, $id, $options, $c=null, $serveur='') {
 	if (!$id = intval($id)) {
 		spip_log('Erreur $id non defini', 'warn');
 		return false;
