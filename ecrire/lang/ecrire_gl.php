@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Acceso prohibido.',
 'avis_article_modifie' => 'Atención, @nom_auteur_modif@ estaba traballando neste artigo hai @date_diff@ minutos',
 'avis_aucun_resultat' => 'Ningún resultado.',
-'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
+'avis_base_inaccessible' => 'Non foi posible conectarse coa base de datos @base@.',
 'avis_chemin_invalide_1' => 'A rota que elixiches',
 'avis_chemin_invalide_2' => 'non semella ser válida. Volva á páxina anterior e verifique as informacións introducidas.',
 'avis_connexion_echec_1' => 'A conexión á base de datos non vai.',
@@ -74,8 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'ENVIAR UNHA MENSAXE',
 'bouton_envoyer_message' => 'Mensaxe definitiva: enviar',
 'bouton_fermer' => 'Cerrar',
-'bouton_forum_petition' => 'FORO e PETICIÓN', # MODIF
-'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
+'bouton_forum_petition' => 'FORO &amp; PETICIÓN',
+'bouton_mettre_a_jour_base' => 'Actualizar a base de datos',
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'NOTA PARA USO PERSOAL',
 'bouton_radio_activer_messagerie' => 'Activar a mensaxería interna',
@@ -190,8 +190,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Texto da breve',
 'entree_titre_obligatoire' => '<b>T&amp;iacute;tulo</b> [Obrigado]<br />',
 'entree_url' => 'O enderezo (URL) do teu web',
-'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
-'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
+'erreur_connect_deja_existant' => 'Xa existe un servidor con ese nome',
+'erreur_nom_connect_incorrect' => 'Este nome de servidor non está autorizado',
 'erreur_plugin_desinstalation_echouee' => 'A desinstalación do módulo fallou. No entanto, pode desactivalo.',
 'erreur_plugin_fichier_absent' => 'Ficheiro ausente',
 'erreur_plugin_fichier_def_absent' => 'Ficheiro de definición ausente',
@@ -205,7 +205,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'orixinal',
 
 // H
-'htaccess_a_simuler' => 'Aviso: a configuración do seu servidor HTTP non ten conta dos ficheiros @htaccess@. Para poder asegurar unha boa seguridade, cómpre que vostede modifique a configuración neste aspecto, ou ben que as constantes @constantes@ (definibles no ficheiro mes_options.php) teñan como valor  cartafoles fóra de @document_root@.', # MODIF
+'htaccess_a_simuler' => 'Aviso: a configuración do seu servidor HTTP non ten conta dos ficheiros @htaccess@. Para poder asegurar unha boa seguridade, cómpre que modifique a configuración neste aspecto, ou ben que as constantes @constantes@ (definibles no ficheiro mes_options.php) teñan como valor  cartafoles fóra de @document_root@.',
 'htaccess_inoperant' => 'o htaccess non funciona',
 
 // I
@@ -320,8 +320,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_2' => 'Artigos',
 'info_articles_auteur' => 'Os artigos desta persoa',
 'info_articles_lies_mot' => 'Os artigos ligados a esta palabra chave',
-'info_articles_miens' => 'Mes articles', # NEW
-'info_articles_tous' => 'Tous les articles', # NEW
+'info_articles_miens' => 'Meus artigos',
+'info_articles_tous' => 'Todos os artigos',
 'info_articles_trouves' => 'Artigos atopados',
 'info_articles_trouves_dans_texte' => 'Artigos atopados (no texto)',
 'info_attente_validation' => 'Os teus artigos en espera de validación',
@@ -331,7 +331,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Ningunha breve',
 'info_aucun_message' => 'Ningunha mensaxe',
 'info_aucun_mot_cle' => 'Ningunha palabra-clave',
-'info_aucun_rubrique' => 'Ningunha sección', # MODIF
+'info_aucun_rubrique' => 'Ningunha sección',
 'info_aucun_site' => 'Ningún sitio',
 'info_aucun_visiteur' => 'Ningún visitante',
 'info_aujourdhui' => 'hoxe:',
@@ -451,7 +451,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   no espazo público do web (foros con rexistro).',
 'info_generation_miniatures_images' => 'Creación de miniaturas das imaxes',
 'info_gerer_trad' => 'Crear as ligazóns de tradución ?',
-'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
+'info_gerer_trad_objets' => '@objets@ : xestionar as ligazóns de tradución',
 'info_groupe_important' => 'Grupo importante',
 'info_hebergeur_desactiver_envoi_email' => 'Algúns aloxadores desactivan o envío automático de
   correos-e. dende os seus servidores. Nese caso, as seguintes funcionalidades do
@@ -502,7 +502,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   e o seu web xa non funcionar&amp;oacute;.<br />{{Reinstale os
   ficheiros de SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Configuración por defecto dos foros públicos',
-'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
+'info_modification_enregistree' => 'O modificación rexistrouse',
 'info_modifier_auteur' => 'Modificar o autor:',
 'info_modifier_breve' => 'Modificar a breve:',
 'info_modifier_mot' => 'Modificar a palabra clave :',
@@ -518,7 +518,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_multi_cet_article' => 'Lingua deste artigo :',
 'info_multi_langues_choisies' => 'Quere seleccionar despois as linguas dispoñibles dos redactores de seu web.
   As linguas xa utilizadas no seu web (fixadas ao principio) non poden ser desactivadas.',
-'info_multi_objets' => '@objets@ : activer le menu de langue', # NEW
+'info_multi_objets' => '@objets@ : activar o menú de idioma',
 'info_multi_rubriques' => 'Activar o menú de lingua nas seccións ?',
 'info_multi_secteurs' => '... soamente para as seccións situadas na raíz ?',
 'info_nb_articles' => '@nb@ artigos',
@@ -587,7 +587,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => 'Todos os redactores poden previsualizar o web',
 'info_preview_desactive' => 'A previsualización está totalmente desactivada',
 'info_preview_texte' => 'É posíbel previsualizar o web como se todos os artigos e breves (que teñan cando menos o estado de « proposto ») estivesen publicados. Esta posibilidade debe estar aberta só para os administradores, para todos os redactores, ou para calquera ?',
-'info_previsions' => 'prévisions :', # NEW
+'info_previsions' => 'previsións:',
 'info_principaux_correspondants' => 'Os colaboradores principais',
 'info_procedez_par_etape' => 'procede etapa por etapa',
 'info_procedure_maj_version' => 'o procedemento da posta ó día ten que ser lanzado a fin
@@ -729,7 +729,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_tout_site6' => '<b>Atención :</b> só os artigos orixinais son amosados.
 As traducións son asociadas ao orixinal,
 cunha cor que indica o seu estado :',
-'info_traductions' => 'Traductions', # NEW
+'info_traductions' => 'Traducións',
 'info_travail_colaboratif' => 'Traballo de colaboración nos artigos',
 'info_un_article' => 'un artigo,',
 'info_un_mot' => 'Unha palabra a cada vez',
@@ -752,7 +752,7 @@ cunha cor que indica o seu estado :',
 'info_webmestre_forces' => 'Os/as webmásters actuais están definidos en <tt>@file_options@</tt>.',
 'install_adresse_base_hebergeur' => 'Enderezo da base de datos atribuída polo aloxador',
 'install_base_ok' => 'A base @base@ foi recoñecida',
-'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
+'install_connect_ok' => 'A nova base está correctamente declarada co nome do servidor @connect@.',
 'install_echec_annonce' => 'A instalación probabelmente vai pechar ou lanzar un sitio non funcional...',
 'install_extension_mbstring' => 'SPIP non funnciona con :',
 'install_extension_php_obligatoire' => 'SPIP exixe a extensión php :',
@@ -849,11 +849,11 @@ cunha cor que indica o seu estado :',
 'jour_non_connu_nc' => 'non consta',
 
 // L
-'label_bando_outils' => 'Barre d\'outils', # NEW
-'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+'label_bando_outils' => 'Barra de ferramentas',
+'label_bando_outils_afficher' => 'Presentar as ferramentas',
+'label_bando_outils_masquer' => 'Agochas as ferramentas',
 'label_choix_langue' => 'Seleccione o seu idioma',
-'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
+'label_nom_fichier_connect' => 'Indique o nome utilizado polo servidor',
 'label_slogan_site' => 'Lema do sitio',
 'label_taille_ecran' => 'Largura de pantalla',
 'label_texte_et_icones_navigation' => 'Menú de navegación',
@@ -981,12 +981,12 @@ cunha cor que indica o seu estado :',
 'protocole_ldap' => 'Versi&amp;oacute;n do protocolo :',
 
 // Q
-'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
-'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
-'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
-'queue_one_job_in_queue' => '1 travail en attente', # NEW
-'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_executer_maintenant' => 'Executar as tarefas de mantemento',
+'queue_nb_jobs_in_queue' => '@nb@ traballos en agarda',
+'queue_next_job_in_nb_sec' => 'Próximo traballo en @nb@ s',
+'queue_one_job_in_queue' => '1 traballo en agarda',
+'queue_purger_queue' => 'Purgar a lista de traballos',
+'queue_titre' => 'Lista de traballos',
 
 // R
 'repertoire_plugins' => 'Repertorio :',
@@ -1248,7 +1248,7 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'titre_cadre_forum_interne' => 'Foro interno',
 'titre_cadre_interieur_rubrique' => 'Dentro do tema',
 'titre_cadre_numero_auteur' => 'AUTOR/A NÚMERO',
-'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
+'titre_cadre_numero_objet' => '@objet@ NUMÉRO :',
 'titre_cadre_signature_obligatoire' => '<b>Sinatura</b> [Obrigado]<br />',
 'titre_compacter_script_css' => 'Compactación de scripts e CSS',
 'titre_compresser_flux_http' => 'Compactación do fluxo HTTP',
@@ -1331,9 +1331,9 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'trad_article_inexistant' => 'Non hai artigo que leve este número.',
 'trad_article_traduction' => 'Todas as versións deste artigo :',
 'trad_deja_traduit' => 'Erro: é imposible religar este artigo co número solicitado.',
-'trad_delier' => 'Non ligar xa este artigo a estas traducións', # MODIF
+'trad_delier' => 'Non ligar a estas traducións',
 'trad_lier' => 'Este artigo é unha tradución do artigo número :',
-'trad_new' => 'Escribir unha nova tradución deste artigo', # MODIF
+'trad_new' => 'Escribir unha nova tradución',
 
 // U
 'upload_fichier_zip' => 'Arquivo ZIP',
