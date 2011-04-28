@@ -97,7 +97,7 @@ function aide_fichier($path, $help_server) {
 	$here = @(is_readable($fichier_aide) AND ($lastm >= $lastversion));
 	$contenu = '';
 
-	if (false AND $here) {
+	if ($here) {
 		lire_fichier($fichier_aide, $contenu);
 		return array($contenu, $lastm);
 	}
