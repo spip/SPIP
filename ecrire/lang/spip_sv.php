@@ -245,6 +245,7 @@ För att bekräfta din nya adress måste du gå till
 'form_email_non_valide' => 'Din epost-adress är ogiltig',
 'form_forum_access_refuse' => 'Du har inte längre tillgång till den här sajten',
 'form_forum_bonjour' => 'Hej @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Epost-adressen är redan i bruk, du kan alltså använda ditt vanliga lösenord',
 'form_forum_identifiant_mail' => 'Dina nya användaruppgifter har precis skickats till dig med epost.',
 'form_forum_identifiants' => 'Personliga användaruppgifter',

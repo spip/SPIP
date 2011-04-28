@@ -263,6 +263,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Out ladrès imèl la pa marsé.',
 'form_forum_access_refuse' => 'Ou néna plid drwa pou akost dann sitwèb-la.',
 'form_forum_bonjour' => 'Oté @nom@,,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Ladrès imèl-la lé déza anrozistré : ou  pé anserv modpas sa-minm sak nana labitid.',
 'form_forum_identifiant_mail' => 'Inn nouvo kod-lidentité la finn dèt anvwayé dann out kazimèl.',
 'form_forum_identifiants' => 'Out bann kod-lidantité',

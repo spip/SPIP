@@ -253,6 +253,7 @@ sera ignorée) :
 'form_email_non_valide' => 'N\'eo ket reizh ho postel.',
 'form_forum_access_refuse' => 'N\'oc\'h ket aotreet da vont war al lec\'hienn-mañ ken.',
 'form_forum_bonjour' => 'Demat @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Enrollet eo ar postel-se dija. Gallout a rit ober gant ho ker-tremen boas neuze.',
 'form_forum_identifiant_mail' => 'Emañ ho kod moned nevez o paouez bezañ kaset deoc\'h dre bostel.',
 'form_forum_identifiants' => 'Titouroù hiniennel',

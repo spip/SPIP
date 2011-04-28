@@ -248,6 +248,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 'form_email_non_valide' => 'La seva adreça electrònica no ha estat validada.',
 'form_forum_access_refuse' => 'No teniu accés a aquest lloc.',
 'form_forum_bonjour' => 'Bon dia @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Aquesta adreça electrònica ja ha estat enregistrada, podeu utilitzar la vostra contrasenya habitual. ',
 'form_forum_identifiant_mail' => 'La identificació us ha estat enviada per correu electrònic. ',
 'form_forum_identifiants' => 'Identificadors personals',

@@ -254,6 +254,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Via retpoŝtadreso ne validas.',
 'form_forum_access_refuse' => 'Vi ne plu havas alir-rajton al tiu retejo.',
 'form_forum_bonjour' => 'Saluton @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Tiu ĉi retpoŝtadreso estas jam registrita, vi povas do uzi vian kutiman pasvorton.',
 'form_forum_identifiant_mail' => 'Via nova ensalutilo estis ĵus al vi sendita per retletero.',
 'form_forum_identifiants' => 'Personaj ensalutiloj',

@@ -253,6 +253,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Địa chỉ email của bạn không đúng.',
 'form_forum_access_refuse' => 'Bạn không có quyền vào trang web này nữa.',
 'form_forum_bonjour' => 'Chào bạn @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Địa chỉ email này đã dùng ghi danh rồi, bạn có thể dùng mật mã của bạn.',
 'form_forum_identifiant_mail' => 'Danh tánh (ID) mới của bạn đã được gửi bằng email.',
 'form_forum_identifiants' => 'Danh tánh (ID) cá nhân',

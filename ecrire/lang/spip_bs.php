@@ -251,6 +251,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Vasa e-mail adresa nije vazeca.',
 'form_forum_access_refuse' => 'Nemate vise pristup ovoj stranici.',
 'form_forum_bonjour' => 'Dobar dan @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Ova e-mail adresa je vec registrovana. Mozete koistiti vasu uobicajenu lozinku',
 'form_forum_identifiant_mail' => 'Vas novi identifikator vam je upravo poslan na vasu e-mail adresu.',
 'form_forum_identifiants' => 'Licni identifikatori',

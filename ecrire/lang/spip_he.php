@@ -256,6 +256,7 @@ sera ignorée) :
 'form_email_non_valide' => 'כתובת הדוא"ל שלך לא מתאימה.',
 'form_forum_access_refuse' => 'הכניסה לאתר אסורה לך.',
 'form_forum_bonjour' => 'שלום @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'כתובת הדוא"ל הזאת כבר רשומה במערכת, כתוצאה מכך הינך יכול להשתמש בסיסמתך הרגילה.',
 'form_forum_identifiant_mail' => 'המזהה החדש נשלח אליך בדוא"ל.',
 'form_forum_identifiants' => 'פרטים אישיים',

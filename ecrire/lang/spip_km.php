@@ -251,6 +251,7 @@ sera ignorée) :
 'form_email_non_valide' => 'អាសយដ្ឋាន​អ៊ីមែវល៍ ​របស់​អ្នក គ្មាន​សុពលភាព។',
 'form_forum_access_refuse' => 'អ្នក​គ្មានទៀត ​ចូល​ទៅសៃថ៍ នេះ ។',
 'form_forum_bonjour' => 'សួស្តី @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'អាសយដ្ឋាន​អ៊ីមែវល៍​នេះ​ ធ្លាប់ត្រូវបានចុះ​ឈ្មោះ​, ដូច្នោះ អ្នកអាចប្រើប្រាស់ ពាក្យសំងាត់ របស់អ្នក តាមទំលាប់។',
 'form_forum_identifiant_mail' => 'អត្តសញ្ញា​ថ្មី របស់អ្នក ទើបតែត្រូវបាន ផ្ញើទៅអ្នក តាម អ៊ីមែវល៍។',
 'form_forum_identifiants' => 'អត្តសញ្ញា​ផ្ទាល់ខ្លួន',

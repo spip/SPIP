@@ -252,6 +252,7 @@ indirizzo qui sotto. (Altrimenti la tua richiesta sarà ignorata.):
 'form_email_non_valide' => 'L\'indirizzo email non è valido.',
 'form_forum_access_refuse' => 'Non hai più accesso a questo sito.',
 'form_forum_bonjour' => 'Buongiorno @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Questo indirizzo email è già registrato, puoi dunque utilizzare la tua password abituale.',
 'form_forum_identifiant_mail' => 'Il nuovo codice identificativo (ID) ti è stato appena inviato tramite email.',
 'form_forum_identifiants' => 'Dati personali',

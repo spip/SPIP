@@ -252,6 +252,7 @@ volgende address (andres zal uw aanvraag niet in acht genomen worden) :
 'form_email_non_valide' => 'Je e-mailadres is niet geldig.',
 'form_forum_access_refuse' => 'Je hebt geen toegang meer tot deze website.',
 'form_forum_bonjour' => 'Hallo @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Dit e-mailadres is reeds geregistreerd. Je kan inloggen met je gebruikelijke paswoord.',
 'form_forum_identifiant_mail' => 'Je nieuwe logingegevens werden je zonet via e-mail toegestuurd.',
 'form_forum_identifiants' => 'Persoonlijke logins',

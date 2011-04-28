@@ -255,6 +255,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Ùn hè vàlidu u vostru indirizzu email.',
 'form_forum_access_refuse' => 'Ùn avete più accessu à stu situ.',
 'form_forum_bonjour' => 'Bonghjornu, o @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'St\'indirizzu email hè digià arregistratu, pudete puru usà u vostru password abbituale.',
 'form_forum_identifiant_mail' => 'U vostru nuvellu còdice vi hè statu mandatu avà per email.',
 'form_forum_identifiants' => 'Còdici persunali',

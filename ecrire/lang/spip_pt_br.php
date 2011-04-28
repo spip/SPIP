@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Procurar',
 'bouton_choisir' => 'Escolher',
 'bouton_deplacer' => 'Deslocar',
-'bouton_download' => 'Transferir', # MODIF
+'bouton_download' => 'Download',
 'bouton_enregistrer' => 'Gravar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desativar o sistema interno de mensagens',
 'bouton_radio_envoi_annonces' => 'Enviar os avisos editoriais',
@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Não enviar a lista de novidades',
 'bouton_recharger_page' => 'atualizar esta página',
 'bouton_telecharger' => 'Transferir',
-'bouton_upload' => 'Transferir', # MODIF
+'bouton_upload' => 'Upload',
 'bouton_valider' => 'Validar',
 
 // C
@@ -249,6 +249,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 'form_email_non_valide' => 'Seu endereço de e-mail não é válido.',
 'form_forum_access_refuse' => 'Você não tem mais acesso a este site.',
 'form_forum_bonjour' => 'Bom dia @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Este endereço de e-mail já está cadastrado, você pode usar a sua senha habitual.',
 'form_forum_identifiant_mail' => 'Seu novo login foi enviado por e-mail.',
 'form_forum_identifiants' => 'Identificadores pessoais',

@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Suchen',
 'bouton_choisir' => 'Auswählen',
 'bouton_deplacer' => 'Verschieben',
-'bouton_download' => 'Übertragen', # MODIF
+'bouton_download' => 'Herunterladen',
 'bouton_enregistrer' => 'Speichern',
 'bouton_radio_desactiver_messagerie_interne' => 'Interne Nachrichten abschalten',
 'bouton_radio_envoi_annonces' => 'Editorische Ankündigungen verschicken',
@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Keine Liste der Neuigkeiten verschicken',
 'bouton_recharger_page' => 'Seite neu laden',
 'bouton_telecharger' => 'Herunterladen',
-'bouton_upload' => 'Herunterladen', # MODIF
+'bouton_upload' => 'Hochladen',
 'bouton_valider' => 'Bestätigen',
 
 // C
@@ -252,6 +252,7 @@ wird Ihre Adresse beibehalten):
 'form_email_non_valide' => 'Ihre E-Mail-Adresse ist ungültig.',
 'form_forum_access_refuse' => 'Sie haben keinen Zugang mehr zu dieser Website.',
 'form_forum_bonjour' => 'Hallo @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Diese E-Mail-Adresse ist bereits eingetragen. Sie können also Ihr normals Passwort verwenden.',
 'form_forum_identifiant_mail' => 'Ihre neuen Zugangsdaten wurden Ihnen per Mail zugestellt.',
 'form_forum_identifiants' => 'Persönliche Zugangsdaten',

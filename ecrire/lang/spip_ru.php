@@ -253,6 +253,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_email_non_valide' => 'Указан неправильный e-mail адрес.',
 'form_forum_access_refuse' => 'Вы больше не имеете доступа к этому сайту.',
 'form_forum_bonjour' => 'Приветствуем @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Этот адрес электронной почты уже зарегистрирован. Попробуйте использовать ваш обычный пароль.',
 'form_forum_identifiant_mail' => 'Ваша новая идентификацтонная информация была отправлена Вам по электронной почте.',
 'form_forum_identifiants' => 'Личные идентификаторы',

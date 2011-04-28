@@ -252,6 +252,7 @@ the address below. (Otherwise your request will be ignored.):
 'form_email_non_valide' => 'Neplatná elektronická adresa.',
 'form_forum_access_refuse' => 'K tomuto webu již nemáte přístup.',
 'form_forum_bonjour' => 'Dobrý den @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Tato elektronická adresa je již zaregistrována. Můžete tedy používat své obvyklé heslo.',
 'form_forum_identifiant_mail' => 'Nové identifikační údaje vám byly odeslány elektronickou poštou.',
 'form_forum_identifiants' => 'Osobní identifikační údaje',

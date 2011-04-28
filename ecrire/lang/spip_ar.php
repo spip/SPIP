@@ -253,6 +253,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_email_non_valide' => 'عنوانك البريدي غير صالح.',
 'form_forum_access_refuse' => 'لم تعد تملك امتياز الدحول إلى هذا الموقع.',
 'form_forum_bonjour' => 'مرحباً @nom@،',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'سبق تسجيل هذا العنوان البريدي، يمكنك إذاً استخدام كلمة سرك الاعتيادية.',
 'form_forum_identifiant_mail' => 'لقد تم إرسال معرّفك الجديد بالبريد الالكتروني.',
 'form_forum_identifiants' => 'بيانات الاتصال الشخصية',

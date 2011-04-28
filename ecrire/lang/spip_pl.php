@@ -253,6 +253,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Twój adres e-mail nie jest prawidłowy.',
 'form_forum_access_refuse' => 'Nie masz już dostępu do tej strony.',
 'form_forum_bonjour' => 'Witaj @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Ten adres e-mail jest już zarejestrowany, wskutek czego nie możesz używać swojego zwykłego hasła.',
 'form_forum_identifiant_mail' => 'Twój nowy identyfikator został właśnie wysłany do Ciebie e-mailem.',
 'form_forum_identifiants' => 'Osobista identyfikacja',
