@@ -9,7 +9,7 @@
 
 		#SET{close,</ul></li>}
 		][(#VALEUR{1}|=={2}|oui)
-			<li class="item[(#VALEUR{2}|=={#ENV{aide}}|oui)on]"><a href='[(#SELF|parametre_url{aide,#VALEUR{2}})]' class="ajax">[(#VALEUR{3})]</a></li>
+			<li class="item[(#VALEUR{2}|=={#ENV{aide}}|oui)on]"><a href='[(#SELF|parametre_url{aide,#VALEUR{2}})]' class="ajax nohistory">[(#VALEUR{3})]</a></li>
 		]
 	</BOUCLE_menu>
 	</ul>
