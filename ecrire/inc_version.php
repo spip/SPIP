@@ -236,9 +236,7 @@ $controler_dates_rss = true;
 # note: un pipeline non reference se compile aussi, mais uniquement
 # lorsqu'il est rencontre
 // http://doc.spip.org/@Tuto-Se-servir-des-points-d-entree
-$spip_pipeline = array(
-	'styliser' => '||styliser_par_rubrique|styliser_par_langue',
-);
+$spip_pipeline = array();
 
 # la matrice standard (fichiers definissant les fonctions a inclure)
 $spip_matrice = array ();
