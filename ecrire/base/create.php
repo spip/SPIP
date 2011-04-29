@@ -31,6 +31,12 @@ function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='
 				sql_alter("TABLE $table ADD $field $type".($last?" AFTER $last":""),$serveur);
 			$last = $field;
 		}
+		foreach($desc['key'] as $key=>$type){
+			if (!isset($sql_desc['key'][$key]))
+				sql_alter("TABLE $table ADD $key ($type)",$serveur);
+			$last = $field;
+		}
+
 	}
 }
 
