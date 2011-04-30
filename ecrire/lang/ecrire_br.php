@@ -152,7 +152,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'entree_base_donnee_1' => 'Chomlec\'h an diaz titouroù',
 'entree_base_donnee_2' => '(Alies e klot ar chomlec\'h-se gant hini ho lec\'hienn, a-wechoù e klot gant ar meneg «localhost», gwechoù all e chom goullo)',
 'entree_biographie' => 'Buhezskrid berr-ha-berr.',
-'entree_breve_publiee' => 'Ha ret eo embann ar berrskrid-mañ ?',
 'entree_chemin_acces' => '<b>Skrivañ</b> an hent moned :',
 'entree_cle_pgp' => 'Hoc\'h alc\'hwez PGP',
 'entree_contenu_rubrique' => '(Danvez ar rubrikenn berr-ha-berr)',
@@ -178,7 +177,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'entree_passe_ldap' => 'Ger-tremen',
 'entree_port_annuaire' => 'Niverenn borzh ar rollad tud',
 'entree_signature' => 'Sinadur',
-'entree_texte_breve' => 'Testenn ar berrskrid',
 'entree_titre_obligatoire' => '<b>Titl</b> [Rekis]<br />',
 'entree_url' => 'Chomlec\'h (URL) ho lec\'hienn',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -231,7 +229,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'icone_creer_mot_cle_rubrique' => 'Krouiñ ur ger-alc\'hwez nevez a vo liammet ouzh ar rubrikenn-mañ.',
 'icone_creer_mot_cle_site' => 'Krouiñ ur ger-alc\'hwez nevez a vo liammet ouzh al lec\'hienn-mañ',
 'icone_creer_rubrique_2' => 'Krouiñ ur rubrikenn nevez',
-'icone_ecrire_nouvel_article' => 'Ar berrskridoù er rubrikenn-mañ',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Kas ar gemennadenn-mañ',
 'icone_evolution_visites' => 'Emdroadur ar gweladennoù : <br />@visites@ gweladenn',
@@ -240,7 +237,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'Kemmañ ar strollad gerioù-mañ',
 'icone_modifier_article' => 'Kemmañ ar pennad-mañ',
-'icone_modifier_breve' => 'Kemmañ ar berrskrid-mañ',
 'icone_modifier_message' => 'Kemmañ ar gemennadenn-mañ',
 'icone_modifier_mot' => 'Kemmañ ar ger-alc\'hwez-mañ',
 'icone_modifier_rubrique' => 'Kemmañ ar rubrikenn-mañ',
@@ -267,7 +263,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'info_1_article' => '1 pennad',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => '1 berrskrid',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -318,7 +313,6 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -334,7 +328,6 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 'info_barre_outils' => 'gant e varrenn ostilhoù ?',
 'info_base_installee' => 'Staliet eo framm ho tiaz-titouroù.',
 'info_bloquer' => 'stankañ',
-'info_breves' => 'Hag implijout a ra ho lec\'hienn ar reizhiad berrskridoù ?',
 'info_breves_03' => 'berrskridoù',
 'info_breves_liees_mot' => 'Ar berrskridoù stag ar ger-stur-mañ outo',
 'info_breves_touvees' => 'Berrskridoù kavet',
@@ -426,7 +419,6 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
   Gant ur pod-lastez eo aroueziet ar re bet diverket.',
 'info_gauche_messagerie' => 'Dre ar postelerezh e c\'hellit eskemm kemennadennoù gant skridaozerien all, derc\'hel notennigoù-eñvor, pe, ma\'z oc\'h merour, skignañ kemennoù war bajenn degemer al lodenn brevez.',
 'info_gauche_numero_auteur' => 'SKRIDAOZER NIVERENN',
-'info_gauche_numero_breve' => 'BERRSKRID NIVERENN',
 'info_gauche_statistiques_referers' => 'War ar bajenn-mañ emañ roll ar <i>referers</i>, da lavaret eo al lec\'hiennoù enno liammoù a gas davet ho lec\'hienn deoc\'h, evit dec\'h hag hiziv hepken. Riñset e vez ar roll-mañ bemdez.',
 'info_gauche_suivi_forum' => 'Pajenn <i>heuliañ ar foromoù</i> a dalvez da verañ ho lec\'hienn, ha ket da dabutal pe da skridaozañ. Warni emañ an holl evezhiadennoù graet war ar forom foran diwar-benn ar pennad-mañ, deoc\'h da c\'hallout o merañ.',
 'info_gauche_suivi_forum_2' => 'Pajenn <i>heuliañ ar foromoù</i> a dalvez da verañ ho lec\'hienn, ha ket da dabutal pe da skridaozañ. Warni emañ an holl evezhiadennoù bet graet war foromoù al lec\'hienn (lodennoù foran ha prevez), deoc\'h da c\'hallout o merañ.',
@@ -501,7 +493,6 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -736,8 +727,6 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'item_autoriser_selectionner_date_en_ligne' => 'Aotren kemmañ deiziad embann pep restr',
 'item_autoriser_syndication_integrale' => 'Skignañ an holl bennadoù er restroù sindikadañ',
 'item_bloquer_liens_syndiques' => 'Stankañ al liammoù sindikadet evit o c\'hadarnaat',
-'item_breve_refusee' => 'KET - Berrskrid nac\'het',
-'item_breve_validee' => 'YA - Berrskrid asantet',
 'item_choix_administrateurs' => 'ar verourien',
 'item_choix_generation_miniature' => 'Krouiñ arlunioù ar skeudennoù en un doare emgefre.',
 'item_choix_non_generation_miniature' => 'Chom hep krouiñ arlunioù diwar skeudennoù.',
@@ -776,7 +765,6 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'item_non_limiter_recherche' => 'Ledanaat an enklask da zanvez al lec\'hiennoù menegeret',
 'item_non_messagerie_agenda' => 'Diweredekaat ar postelerezh hag an deiziataer',
 'item_non_publier_articles' => 'Na embann ar pennadoù a-raok an deiziad embann lakaet.',
-'item_non_utiliser_breves' => 'Na implijout ar berrskridoù',
 'item_non_utiliser_config_groupe_mots_cles' => 'Na implijout kefluniadur araokaet ar strolladoù gerioù-stur.',
 'item_non_utiliser_moteur_recherche' => 'Na implijout al lusker enklask',
 'item_non_utiliser_mots_cles' => 'Na implijout ar gerioù-stur',
@@ -787,7 +775,6 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'item_oui' => 'Ya',
 'item_publier_articles' => 'Embann ar pennadoù, ne vern an deiziad embann lakaet dezho.',
 'item_reponse_article' => 'Respont d\'ar pennad',
-'item_utiliser_breves' => 'Implijout ar berrskridoù',
 'item_utiliser_config_groupe_mots_cles' => 'Implijout kefluniadur araokaet ar strolladoù gerioù-stur',
 'item_utiliser_moteur_recherche' => 'Implijout al lusker enklask',
 'item_utiliser_mots_cles' => 'Implijout ar gerioù-stur',
@@ -979,7 +966,6 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
 'texte_auteur_messagerie' => 'Gallout a ra al lec\'hienn-mañ diskouez deoc\'h roll ar skridaozerien kevreet a-hed an amzer, ar pezh a aotren ac\'hanoc\'h da eskemm ganto war ar prim. Gallout a rit dibab chom hep dont war wel war ar roll-mañ (« diwelus » oc\'h neuze evit an implijerien all).',
 'texte_auteur_messagerie_1' => 'War al lec\'hienn-mañ eo posupl kas kemennadennoù pe sevel foromoù prevez, etre an izili. Gallout a rit dibab chom hep kemer perzh en eskemmoù-se.',
 'texte_auteurs' => 'AR SKRIDAOZERIEN',
-'texte_breves' => 'Skridoù berr ha simpl eo ar berrskridoù. Drezo e c\'haller lakaat enlinenn fonnus-tre keleier berr-ha-berr, merañ ur strobad pennadoù, un deiziataer darvoudoù, hag all.',
 'texte_choix_base_1' => 'Dibabit ho tiaz :',
 'texte_choix_base_2' => 'Er servijer SQL ez eus meur a ziaz titouroù.',
 'texte_choix_base_3' => '<b>Diuzit</b> amañ dindan an hini zo bet lakaet deoc\'h gant an herberc\'hier :',
@@ -1137,7 +1123,6 @@ Gallout a ra restroù-se bezañ menegeret er pennad, pe diskwelet a-ziforc\'h.',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Pennadoù sindikadet tennet eus al lec\'hienn-mañ',
-'titre_breves' => 'Ar berrskridoù',
 'titre_cadre_afficher_article' => 'Diskouez ar pennadoù',
 'titre_cadre_afficher_traductions' => 'Diskouez stad an troidigezhioù evit ar yezhoù-mañ :',
 'titre_cadre_ajouter_auteur' => 'OUZHPENNAÑ UR SKRIDAOZER :',
@@ -1185,7 +1170,6 @@ Gallout a ra restroù-se bezañ menegeret er pennad, pe diskwelet a-ziforc\'h.',
 'titre_page_articles_page' => 'Ar pennadoù',
 'titre_page_articles_tous' => 'Al lec\'hienn a-bezh',
 'titre_page_auteurs' => 'Gweladennerien',
-'titre_page_breves' => 'Berrskridoù',
 'titre_page_breves_edit' => 'Kemmañ ar berrskrid : « @titre@ »',
 'titre_page_calendrier' => 'Deiziataer @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Kefluniañ al lec\'hienn',

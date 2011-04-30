@@ -159,7 +159,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'entree_base_donnee_1' => 'データベースアドレス',
 'entree_base_donnee_2' => '(よく、このアドレスはあなたのサイトのアドレスと同じで、時々«localhost»の時もあり、完全に空のままの時もあります。)',
 'entree_biographie' => 'あなたの略記を数行でお願いします。',
-'entree_breve_publiee' => 'このニュースは公開されるはずですか？',
 'entree_chemin_acces' => 'パスを<b>入力</b>:',
 'entree_cle_pgp' => 'あなたのPGPキー',
 'entree_contenu_rubrique' => '（セクションの内容を短い言葉で。）',
@@ -184,7 +183,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'entree_passe_ldap' => 'パスワード',
 'entree_port_annuaire' => 'ディレクトリのポートナンバー',
 'entree_signature' => '署名',
-'entree_texte_breve' => 'ニュースの文',
 'entree_titre_obligatoire' => '<b>タイトル</b> [必須]<br />',
 'entree_url' => 'あなたのサイトのURL',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -237,7 +235,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
 'icone_creer_mot_cle_site' => 'Créer un nouveau mot-clé et le lier à ce site', # NEW
 'icone_creer_rubrique_2' => '新しいセクションを作る',
-'icone_ecrire_nouvel_article' => 'このセクションのニュース',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'このメッセージを送る',
 'icone_evolution_visites' => '訪問率<br />@visites@訪問',
@@ -246,7 +243,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'このキーワードグループを変更する',
 'icone_modifier_article' => 'この記事を修正',
-'icone_modifier_breve' => 'このニュースを修正',
 'icone_modifier_message' => 'このメッセージを修正',
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'このセクションを修正',
@@ -273,7 +269,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_1_article' => '１記事',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => '１ニュース',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -325,7 +320,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -341,7 +335,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'あなたのデータベースの中に構造物がインストールされました。',
 'info_bloquer' => 'ブロック',
-'info_breves' => 'あなたのサイトで、ニュース・システムをお使いですか？',
 'info_breves_03' => 'ニュース',
 'info_breves_liees_mot' => 'このキーワードに関連するニュース',
 'info_breves_touvees' => 'ニュースが見つかりました。',
@@ -431,7 +424,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_gauche_auteurs_exterieurs' => '外部の著者たち、サイトへのどんなアクセスもない、は青いアイコンで示されています; また、削除された著者たちはゴミ箱です。',
 'info_gauche_messagerie' => 'メッセージ交換はエディター同士でのメッセージの交換を可能にします、保護されたメモ（あなたの私用向け）または、プライベートエリアのホームページのアナウンスを示す（あなたが管理者の場合）。',
 'info_gauche_numero_auteur' => '著者番号',
-'info_gauche_numero_breve' => 'ニュース番号',
 'info_gauche_statistiques_referers' => 'このページは<i>referrers</i>のリストを表示します。つまり昨日と今日の間、あなたのサイトへのリンクを含んだサイト：実際にこのリストは２４時間ごとに初期化されています。',
 'info_gauche_suivi_forum' => '<i>掲示板の続報</i>ページはあなたのサイトの管理道具です。（議論したりエリアを編集できません）。この記事の公開掲示板のすべての貢献を表示して、それら貢献を管理することが可能です。',
 'info_gauche_suivi_forum_2' => '<i>掲示板の続報</i>ページはあなたのサイトの管理道具です。（議論したり編集できません）。この記事の公開掲示板のすべての投稿を表示して、それらの投稿を管理することが可能です。',
@@ -507,7 +499,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -733,8 +724,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Include entire articles in the syndication files', # NEW
 'item_bloquer_liens_syndiques' => '供給（シンジケート）リンクを検査前、妨害する',
-'item_breve_refusee' => 'いいえ - ニュースは拒否された',
-'item_breve_validee' => 'はい - 検査済みニュース',
 'item_choix_administrateurs' => '管理者たち',
 'item_choix_generation_miniature' => '自動的に画像のサムネイルを作る。',
 'item_choix_non_generation_miniature' => '画像のサムネイルを作らない。',
@@ -773,7 +762,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_non_limiter_recherche' => '参照しているサイトの内容へ検索を拡張する',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'それらの公開日付前に記事を公表しない。',
-'item_non_utiliser_breves' => 'ニュースを使わない',
 'item_non_utiliser_config_groupe_mots_cles' => 'キーワードグループの拡張設定を使わない',
 'item_non_utiliser_moteur_recherche' => 'エンジンを使わない',
 'item_non_utiliser_mots_cles' => 'キーワードを使わない',
@@ -784,7 +772,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_oui' => 'はい',
 'item_publier_articles' => 'それらの発表日時を無視して記事を公表する。',
 'item_reponse_article' => '記事に返信',
-'item_utiliser_breves' => 'ニュースを使う',
 'item_utiliser_config_groupe_mots_cles' => 'キーワードグループの拡張設定を使う',
 'item_utiliser_moteur_recherche' => '検索エンジンを使う',
 'item_utiliser_mots_cles' => 'キーワードを使う',
@@ -974,7 +961,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_auteur_messagerie' => 'このサイトはリアルタイムでメッセージ交換できるように、接続中のエディターのリストを絶えず表示することが出来ます。このリストに表れないようにも出来ます。(そうすると、他の著者たちには" 見えません ")。',
 'texte_auteur_messagerie_1' => 'このサイトはメッセージ交換やサイトの参加者と関係者用の掲示板を作ることができます。あなたはこの交換に参加しないようにも設定出来ます。',
 'texte_auteurs' => '著者たち',
-'texte_breves' => 'ニュースは短くて簡単な文章です。オンラインで簡潔な情報を公表したり、プレスレビューに使ったり、イベントのカレンダーなどに使えます。',
 'texte_choix_base_1' => 'あなたのデータベースの選択:',
 'texte_choix_base_2' => 'SQLサーバーはいくつかのデータベースを含んでいます。',
 'texte_choix_base_3' => 'あなたのホストがあなたに割り当てたものを<b>下から１つ選んで下さい</b>:',
@@ -1104,7 +1090,6 @@ demande plus de puissance au serveur.', # NEW
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'このサイトで成功した記事を配給しました。',
-'titre_breves' => 'ニュース',
 'titre_cadre_afficher_article' => '記事の表示:',
 'titre_cadre_afficher_traductions' => '次の言語のための、翻訳のステータスの表示:',
 'titre_cadre_ajouter_auteur' => '著者の追加:',
@@ -1152,7 +1137,6 @@ demande plus de puissance au serveur.', # NEW
 'titre_page_articles_page' => '記事',
 'titre_page_articles_tous' => '全てのサイト',
 'titre_page_auteurs' => '訪問者たち',
-'titre_page_breves' => 'ニュース',
 'titre_page_breves_edit' => 'ニュースの変更: «@titre@»',
 'titre_page_calendrier' => 'カレンダー @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'サイトの設定',

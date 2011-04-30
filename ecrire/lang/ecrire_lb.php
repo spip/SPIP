@@ -151,7 +151,6 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'entree_base_donnee_1' => 'Adress vun der Datebank',
 'entree_base_donnee_2' => '(Dës Adress ass oft selwëcht wéi déi vun ärem Site, heiansdo ass ët "localhost", heiansdo gët se eidel gelooss.)',
 'entree_biographie' => 'Kuerz Biographie an e puer Wierder.',
-'entree_breve_publiee' => 'Soll dës Kuerzmeldung publizéiert ginn?',
 'entree_chemin_acces' => 'De Wee <b>aginn</b>:',
 'entree_cle_pgp' => 'Äre PGP-Schlëssel',
 'entree_contenu_rubrique' => '(Inhalt vun der Rubrik an e puer Wierder.)',
@@ -177,7 +176,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'entree_passe_ldap' => 'Passwuert',
 'entree_port_annuaire' => 'D\'Port-Nummer vun der Lëscht',
 'entree_signature' => 'Ënnerschrëft',
-'entree_texte_breve' => 'Text vun der Kuerzmeldung',
 'entree_titre_obligatoire' => '<b>Titel</b> [Obligatoresch]<br />',
 'entree_url' => 'D\'Adress (URL) vun ärem Site',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -230,7 +228,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'icone_creer_mot_cle_rubrique' => 'E neit Schlësselwuert maachen an et un dës Rubrik bannen',
 'icone_creer_mot_cle_site' => 'E neit Schlësselwuert maachen an et un dëse Site bannen',
 'icone_creer_rubrique_2' => 'Nei Rubrik derbäi setzen',
-'icone_ecrire_nouvel_article' => 'Kuerzmeldungen aus dëser Rubrik',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Dëse Message schécken',
 'icone_evolution_visites' => 'Evolutioun vun den Visiten<br />@visites@ Visiten',
@@ -239,7 +236,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'Dëse Schlësselwierder-Grupp änneren',
 'icone_modifier_article' => 'Dësen Artikel änneren',
-'icone_modifier_breve' => 'Dës Kuerzmeldung änneren',
 'icone_modifier_message' => 'Dëse Message änneren',
 'icone_modifier_mot' => 'Dëst Schlësselwuert änneren',
 'icone_modifier_rubrique' => 'Dës Rubrik änneren',
@@ -266,7 +262,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_1_article' => '1 Artikel',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => '1 Kuerzmeldung',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -314,7 +309,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -330,7 +324,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_barre_outils' => 'mat senger Toolbar?',
 'info_base_installee' => 'D\'Struktur vun ärer Datebank ass installéiert.',
 'info_bloquer' => 'blockéieren',
-'info_breves' => 'Benotzt äre Site de Kuerzmeldungs-System?',
 'info_breves_03' => 'Kuerzmeldungen',
 'info_breves_liees_mot' => 'Kuerzmeldungen déi un dëst Schlësselwuert gebonnen sinn',
 'info_breves_touvees' => 'Kuerzmeldungen fonnt',
@@ -417,7 +410,6 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gréng; Redakter =
 'info_gauche_auteurs_exterieurs' => 'Déi extern Auteuren ouni Zougang zum Site sinn mat enger bloer Ikone markéiert, déi geläschten Auteuren mat enger Dreckskëscht.',
 'info_gauche_messagerie' => 'D\'Messagerie erlaabt Iech Messagen un d\'Redakteren ze schécken, privat Notizen ze maachen oder Annoncen op d\'Startsäit vum privaten Deel ze sätzen (wann dër Administrateur sidd).',
 'info_gauche_numero_auteur' => 'AUTEUR NUMMER',
-'info_gauche_numero_breve' => 'KUERZMELDUNG NUMMER',
 'info_gauche_statistiques_referers' => 'Dës Säit weist d\'Lëscht vun de <i>Referer</i>, déi Siten wou e Link op ären Site geklickt gouf, awer nëmmen fir haut: dës Lëscht gët all 24 Stonnen op Null gesaat.',
 'info_gauche_suivi_forum' => 'D\'Säit <i>Gestioun Forum\'en</i> ass fir d\'Maintenance (an nët fir ze diskutéieren oder ze schreiwen). Si weist all d\'Beiträg vum öffentlëche Forum fir dësen Artikel an erlaabt dës Beiträg ze géréieren.',
 'info_gauche_suivi_forum_2' => 'D\'Säit <i>Suivi Forum\'en</i> erlaabt d\'Gestioun (a nët diskutéieren oder schreiwen). Si weist all d\'Beiträg vun de Forum\'en vum Site, déi öffentlëch an déi privat, an dir kënnt d\'Beiträg géréieren.',
@@ -491,7 +483,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -714,8 +705,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'item_autoriser_selectionner_date_en_ligne' => 'Erlaaben den Datum vun all Dokument ze änneren',
 'item_autoriser_syndication_integrale' => 'D\'Artikelen ganz an de Syndicatiouns-Fichier\'en iwerdroën',
 'item_bloquer_liens_syndiques' => 'Déi syndiquéiert Linken fir eng Validatioun blockéieren',
-'item_breve_refusee' => 'NEEN - Kuerzmeldung refuséiert',
-'item_breve_validee' => 'JO - Kuerzmeldung validéiert',
 'item_choix_administrateurs' => 'd\'Administrateuren',
 'item_choix_generation_miniature' => 'Automatësch Miniaturen vun de Biller maachen.',
 'item_choix_non_generation_miniature' => 'Keng Miniaturen vun de Biller maachen.',
@@ -754,7 +743,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'item_non_limiter_recherche' => 'D\'Sich op den Inhalt vun de referenzéierten Siten erweideren',
 'item_non_messagerie_agenda' => 'D\'Messagerie an den Agenda ausschalten',
 'item_non_publier_articles' => 'D\'Artikelen nët virun dem Publikatiouns-Datum fräischalten.',
-'item_non_utiliser_breves' => 'D\'Kuerzmeldungen ausschalten',
 'item_non_utiliser_config_groupe_mots_cles' => 'Déi erweidert Konfiguratioun vun de Schlësselwierder ausschalten',
 'item_non_utiliser_moteur_recherche' => 'De Sich-Motor ausschalten',
 'item_non_utiliser_mots_cles' => 'D\'Schlësselwierder ausschalten',
@@ -765,7 +753,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'item_oui' => 'Jo',
 'item_publier_articles' => 'D\'Artikelen, egal wéi e Publikatiouns-Datum, fräischalten',
 'item_reponse_article' => 'Äntwert op den Artikel',
-'item_utiliser_breves' => 'D\'Kuerzmeldungen aschalten',
 'item_utiliser_config_groupe_mots_cles' => 'Déi erweidert Konfiguratioun vun de Schlësselwierder aschalten',
 'item_utiliser_moteur_recherche' => 'De Sich-Motor aschalten',
 'item_utiliser_mots_cles' => 'D\'Schlësselwierder aschalten',
@@ -955,7 +942,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'texte_auteur_messagerie' => 'De Site kann Iech dauernd d\'Lëscht vun den ugemelten Redakteren weisen, fir dat dier hinnen direkt Messagen kënnt schécken. Dir kënnt décidéieren nët an der Lëscht ze sinn (dir sidd "onsichtbar" fir déi aner Benotzer).',
 'texte_auteur_messagerie_1' => 'De Site erlaabt den Austausch vu Messagen a privat Forum\'en tëschent den Mataarbechter. Dir kënnt décidéieren nët dorun deelzehuelen.',
 'texte_auteurs' => 'D\'AUTEUREN',
-'texte_breves' => 'D\'Kuerzmeldungen si kuerz an einfach Texter déi Iech erlaben Informatiounen séier ze publizéieren, eng Presse-Revue ze maachen, en Agenda ze weisen...',
 'texte_choix_base_1' => 'Wielt är Datebank:',
 'texte_choix_base_2' => 'Den SQL-Server huet e puer Datebanken.',
 'texte_choix_base_3' => '<b>Wielt</b> hei déi Iech vun ärem Provider zougewisen gouf:',
@@ -1081,7 +1067,6 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Syndiquéiert Artikelen vun dësem Site',
-'titre_breves' => 'D\'Kuerzmeldungen',
 'titre_cadre_afficher_article' => 'D\'Artikelen weisen',
 'titre_cadre_afficher_traductions' => 'Zoustand vun den Iwwersetzungen weisen fir dës Sproochen:',
 'titre_cadre_ajouter_auteur' => 'AUTEUR DERBÄI SETZEN:',
@@ -1129,7 +1114,6 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_page_articles_page' => 'D\'Artikelen',
 'titre_page_articles_tous' => 'De ganzen Site',
 'titre_page_auteurs' => 'Visiteuren',
-'titre_page_breves' => 'Kuerzmeldungen',
 'titre_page_breves_edit' => 'Kuerzmeldung änneren: "@titre@"',
 'titre_page_calendrier' => 'Kalenner @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Astellen vum Site',

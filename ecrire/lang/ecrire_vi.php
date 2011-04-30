@@ -151,7 +151,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'entree_base_donnee_1' => 'Địa chỉ database',
 'entree_base_donnee_2' => '(Thông thường, địa chỉ này giống địa chỉ website của bạn, đôi khi nó mang tên «localhost», và có khi nó để trống.)',
 'entree_biographie' => 'Tiểu sử ngắn gọn (một vài chữ).',
-'entree_breve_publiee' => 'Đăng tải tin ngắn này không?',
 'entree_chemin_acces' => '<b>Xin cho biết</b> tên ngăn:',
 'entree_cle_pgp' => 'Khóa PGP của bạn',
 'entree_contenu_rubrique' => '(Mô tả ngắn gọn nội dung của đề mục)',
@@ -176,7 +175,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'entree_passe_ldap' => 'Mật mã',
 'entree_port_annuaire' => 'Số cổng của thư mục',
 'entree_signature' => 'Chữ ký',
-'entree_texte_breve' => 'Nội dung tin ngắn',
 'entree_titre_obligatoire' => '<b>Tựa đề</b> [Bắt buộc]<br />',
 'entree_url' => 'Địa chỉ website của bạn',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -229,7 +227,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'icone_creer_mot_cle_rubrique' => 'Create a new keyword and attach it to this section', # NEW
 'icone_creer_mot_cle_site' => 'Create a new keyword and attach it to this site', # NEW
 'icone_creer_rubrique_2' => 'Thêm một đề mục mới ',
-'icone_ecrire_nouvel_article' => 'Tin ngắn trong đề mục này',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Gửi thư tín này',
 'icone_evolution_visites' => 'Thống kê<br />@visites@ độc giả',
@@ -238,7 +235,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'Sửa NHÓM từ này',
 'icone_modifier_article' => 'Sửa bài này',
-'icone_modifier_breve' => 'Sửa tin ngắn này',
 'icone_modifier_message' => 'Sửa thư tín này',
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Sửa đề mục này',
@@ -265,7 +261,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_1_article' => '1 bài',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => '1 bản tin ngắn',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -313,7 +308,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -329,7 +323,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Cấu trúc database của bạn đã được thiết trí.',
 'info_bloquer' => 'ngăn chận',
-'info_breves' => 'Trang web của bạn có sử dụng hệ thống tin ngắn không?',
 'info_breves_03' => ' tin ngắn',
 'info_breves_liees_mot' => 'Những tin ngắn liên hệ đến từ then chốt này',
 'info_breves_touvees' => 'Những tin ngắn tìm thấy',
@@ -416,7 +409,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_gauche_auteurs_exterieurs' => 'Các tác giả bên ngoài (không được phép vào trang web) được biểu hiện bằng icon màu xanh dương; Tác giả nào bị xóa tên được biểu hiện bằng icon thùng rác.',
 'info_gauche_messagerie' => 'Phương tiện thư tín cho phép bạn trao đổi thư tín giữa các chủ bút với nhau, lưu trữ bản ghi nhớ (để sử dụng riêng) hoặc hiển thị thông báo trên trang nhà của vùng riêng (nếu bạn là người quản trị).',
 'info_gauche_numero_auteur' => 'SỐ THỨ TỰ TÁC GIẢ:',
-'info_gauche_numero_breve' => 'SỐ THỨ TỰ TIN NGẮN',
 'info_gauche_statistiques_referers' => 'Trang này liệt kê danh sách <i>referrers</i>, tức là các trang có chứa điểm nối đến trang của bạn, chỉ cho hôm nay mà thôi: thật ra danh sách này được soạn mỗi 24 giờ.',
 'info_gauche_suivi_forum' => 'Trang <i>Quản trị Diễn Đàn</i> là một phương tiện quản trị của trang web (không dùng để trao đổi hay sửa đổi). Trang này liệt kê tất cả mọi thư tín trong diễn đàn công cộng của bài này và cho phép bạn quản trị những thư tín này.',
 'info_gauche_suivi_forum_2' => 'Trang <i>Quản trị Diễn Đàn</i> là một phương tiện quản trị của trang web (không dùng để trao đổi hay sửa đổi). Trang này liệt kê tất cả mọi thư tín trong diễn đàn công cộng của bài này và cho phép bạn quản trị những thư tín này.',
@@ -490,7 +482,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -714,8 +705,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Include entire articles in the syndication files', # NEW
 'item_bloquer_liens_syndiques' => 'Ngăn lại, không chấp thuận các điểm nối syndicated',
-'item_breve_refusee' => 'TỪ CHỐI - không đăng',
-'item_breve_validee' => 'CHẤP THUẬN đăng tải',
 'item_choix_administrateurs' => 'quản trị viên',
 'item_choix_generation_miniature' => 'Tự động tạo ra các hình mẫu.',
 'item_choix_non_generation_miniature' => 'Đừng tạo ra hình mẫu.',
@@ -754,7 +743,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_non_limiter_recherche' => 'Nới rộng việc tìm kiếm qua đến nội dung của các website nối kết',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Không đăng tải bài trước ngày được phép đăng.',
-'item_non_utiliser_breves' => 'Không dùng tin ngắn',
 'item_non_utiliser_config_groupe_mots_cles' => 'Không dùng cấu hình cao cấp của nhóm từ then chốt',
 'item_non_utiliser_moteur_recherche' => 'Đừng dùng',
 'item_non_utiliser_mots_cles' => 'Không dùng từ then chốt',
@@ -765,7 +753,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_oui' => 'Dùng',
 'item_publier_articles' => 'Cứ đăng tải bài bất kể ngày ghi.',
 'item_reponse_article' => 'Hồi đáp bài ',
-'item_utiliser_breves' => 'Dùng tin ngắn',
 'item_utiliser_config_groupe_mots_cles' => 'Dùng cấu hình cao cấp của nhóm từ then chốt',
 'item_utiliser_moteur_recherche' => 'Dùng cơ phận tìm kiếm',
 'item_utiliser_mots_cles' => 'Dùng từ then chốt',
@@ -955,7 +942,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_auteur_messagerie' => 'Website này có thể giám sát liên tục danh sách những chủ bút đang vào, và cho phép bạn trao đổi thư tín ngay lập tức (nếu hệ thư tín bị tắt thì danh sách các chủ bút đang vào cũng bị tắt theo). Bạn có thể chọn không xuất hiện trong danh sách này (đối với những người khác, bạn sẽ «vô hình»).',
 'texte_auteur_messagerie_1' => 'Website này cho phép trao đổi thư tín và cho lập ra những diễn đàn trao đổi riêng tư của các tham dự viên. Bạn có thể chọn không tham gia vào sự trao đổi này. ',
 'texte_auteurs' => 'TÁC GIẢ',
-'texte_breves' => 'Tin ngắn là đoạn văn ngắn gọn đơn giản để có thể thông báo online các chi tiết cô đọng, quản trị các thông cáo báo chí, lịch trình sự việc ...',
 'texte_choix_base_1' => 'Chọn database của bạn:',
 'texte_choix_base_2' => 'Server SQL chứa nhiều database.',
 'texte_choix_base_3' => '<b>Chọn</b> một trong số dưới đây thuộc về bạn:',
@@ -1090,7 +1076,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Những bài vỡ từng xuất bản bị thu hồi ra khỏi trang web.',
-'titre_breves' => 'Tin ngắn',
 'titre_cadre_afficher_article' => 'Liệt kê những bài',
 'titre_cadre_afficher_traductions' => 'Cho xem tình trạng dịch thuật của ngôn ngữ này.',
 'titre_cadre_ajouter_auteur' => 'THÊM MỘT TÁC GIẢ:',
@@ -1138,7 +1123,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_page_articles_page' => 'Bài vỡ',
 'titre_page_articles_tous' => 'Toàn bộ trang web',
 'titre_page_auteurs' => 'Khách',
-'titre_page_breves' => 'Tin ngắn',
 'titre_page_breves_edit' => 'Sửa đổi tin ngắn: «@titre@»',
 'titre_page_calendrier' => 'Lịch @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Cấu hình website',

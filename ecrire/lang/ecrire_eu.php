@@ -153,7 +153,6 @@ Ez balidatu inportazio galdera hau.
 'entree_base_donnee_1' => 'Datu-basearen helbidea',
 'entree_base_donnee_2' => '(Askotan helbide honek zure gunearekin bat dator, batzutan «localhost»arekin etabestetan, guztiz husturik geratzen da.)',
 'entree_biographie' => 'Biografia labur bat, hitzgutxitan...',
-'entree_breve_publiee' => 'Berri labur hau argitaratuko dugu?',
 'entree_chemin_acces' => 'Sartu sarbidearen bidea:',
 'entree_cle_pgp' => 'Zure PGPkodea',
 'entree_contenu_rubrique' => '(Atalaren edukia, hitz gutxitan)',
@@ -178,7 +177,6 @@ Ez balidatu inportazio galdera hau.
 'entree_passe_ldap' => 'Zure pasahitza',
 'entree_port_annuaire' => 'Urtekariaren atakaren zenbakia',
 'entree_signature' => 'Sinadura',
-'entree_texte_breve' => 'Berri laburraren testua',
 'entree_titre_obligatoire' => '<b>Izenburua</b> [Derrigorrezko]<br />',
 'entree_url' => 'Zure lekuaren (URL) helbidea',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -231,7 +229,6 @@ Ez balidatu inportazio galdera hau.
 'icone_creer_mot_cle_rubrique' => 'Gako-hitz berri bat sortu eta atal huni lotu',
 'icone_creer_mot_cle_site' => 'Gako-hitz berri bat sortu eta gune huni lotu',
 'icone_creer_rubrique_2' => 'Atal berribat eratu',
-'icone_ecrire_nouvel_article' => 'Atal honen berri laburrak',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Mezua igorri',
 'icone_evolution_visites' => 'Bisiten eboluzioa @visites@ bisitak',
@@ -240,7 +237,6 @@ Ez balidatu inportazio galdera hau.
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'Hitz talde hau aldatu',
 'icone_modifier_article' => 'Artikulu hau aldatu',
-'icone_modifier_breve' => 'Berri laburhau aldatu',
 'icone_modifier_message' => 'Mezua aldatu',
 'icone_modifier_mot' => 'Gako-hitz hori aldatu',
 'icone_modifier_rubrique' => 'Atal hau aldatu',
@@ -267,7 +263,6 @@ Ez balidatu inportazio galdera hau.
 'info_1_article' => 'artikulu 1',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => 'berri labur 1',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -315,7 +310,6 @@ Ez balidatu inportazio galdera hau.
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -331,7 +325,6 @@ Ez balidatu inportazio galdera hau.
 'info_barre_outils' => 'bere tresna-barrarekin ?',
 'info_base_installee' => 'Zure datubasearen egitura instalatua izan da',
 'info_bloquer' => 'Blokatu',
-'info_breves' => 'Berri laburren sistema erabil dezakezu',
 'info_breves_03' => 'berri laburrak',
 'info_breves_liees_mot' => 'Gako-hitz honi lotutako berri laburrak',
 'info_breves_touvees' => 'Aurkitutako berri laburrak',
@@ -419,7 +412,6 @@ Ikonoaren koloreak autore bakoitzaren egoera adierazten du (idazlaria = berdea; 
 'info_gauche_auteurs_exterieurs' => 'Kanpoko autoreak, gunean sartzeko baimenik ezdutenak, ikono urdin batez adierazten dira; ezabatuak izan direnak, berriz, paperontzibatez.',
 'info_gauche_messagerie' => 'Mezularitzak idazlarien artean mezuak trukatzen,abisuak kontserbatzen (zure erabilera pertsonalarentzat), edo eremu pribatuko orri nagusian iragarpenak jartzen (administratzailea bazara) uzten dizu.',
 'info_gauche_numero_auteur' => 'IDAZLEA ',
-'info_gauche_numero_breve' => 'Berri laburra',
 'info_gauche_statistiques_referers' => 'Orri honetan referers-en zerrenda dago, hau da, zure web-gunera eramaten dituztenloturak dauzkaten tokien zerrenda, bakarrik atzo eta gaurko; zerrenda honek egunerozerora jartzen da.',
 'info_gauche_suivi_forum' => 'Foroak jarraitzeko orrialdea zureguneko kudeaketa-tresna bat da (eta ez eztabaida edo idazketa-eremu bat). Artikulu honen foro publikoko kontribuzio guztiak bistaratzen ditu eta kontribuzio hauek administratzen uzten dizu.',
 'info_gauche_suivi_forum_2' => 'Foroak jarraitzeko orrialdea zureguneko kudeaketa-tresna bat da (eta ez eztabaida edo idazketa-eremu bat). Guneko foroetako kontribuzio guztiak bistaratzen ditu, bai gune publikokoak bai eremu pribatukoak eta kontribuzio hauek administratzen uzten dizu.',
@@ -493,7 +485,6 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -722,8 +713,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'item_autoriser_selectionner_date_en_ligne' => 'dokumentu bakotxaren data aldatzea baimendu',
 'item_autoriser_syndication_integrale' => 'Artikuluen osotasuna zabaldu sindikazio fitxategietan',
 'item_bloquer_liens_syndiques' => 'Onartzeko prozesuan dauden sindikatutako loturakblokeatu',
-'item_breve_refusee' => 'Berri laburra arbuiaturik',
-'item_breve_validee' => 'Berri laburra arbuiaturik',
 'item_choix_administrateurs' => 'administratzaileak',
 'item_choix_generation_miniature' => 'Irudien miniaturak automatikoki sortu',
 'item_choix_non_generation_miniature' => 'Ez sortu miniaturarik',
@@ -762,7 +751,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'item_non_limiter_recherche' => 'Aipatutako lekuen edukian ikertu',
 'item_non_messagerie_agenda' => 'Mezutegia eta agenda desaktibatu',
 'item_non_publier_articles' => 'Artikuluak adierazitako argitaratze data baino lehen ezargitaratu',
-'item_non_utiliser_breves' => 'Ez erabili berri laburrak',
 'item_non_utiliser_config_groupe_mots_cles' => 'Ez erabili gako-hitz taldeenkonfigurazio zehatza',
 'item_non_utiliser_moteur_recherche' => 'Ez erabili motorra',
 'item_non_utiliser_mots_cles' => 'Ez erabili gako-hitzak',
@@ -773,7 +761,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'item_oui' => 'Bai',
 'item_publier_articles' => 'Artikuluak argitaratu argitaratze-eguna kontuan izan gabe ',
 'item_reponse_article' => 'Artikuluari erantzuna',
-'item_utiliser_breves' => 'Berri laburrak erabili',
 'item_utiliser_config_groupe_mots_cles' => 'Gako-hitz taldeen konfigurazio zehatzaerabili',
 'item_utiliser_moteur_recherche' => 'Bilaketa-motorra erabili',
 'item_utiliser_mots_cles' => 'Gako-hitzak erabili',
@@ -963,7 +950,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'texte_auteur_messagerie' => 'Toki honekuneoro konektatuta dauden pertsonen zerrenda erakutsi ahal dizu, honela mezuakzuzenean trukatu ahal dituzu. Gainera, zerrendan ez agertzea erabaki dezakezu(besteontzat "ikustezina" zaude)',
 'texte_auteur_messagerie_1' => 'Toki honek mezu-trukea eta eztabaida-foro pribatuen sorrera onartzen ditu tokiko parte-hartzaileen artean. Truke horietan parte ez hartzea erabaki ahal duzu zuk.',
 'texte_auteurs' => 'AUTOREAK',
-'texte_breves' => 'Laburrak argibide zehatzenargitaratze azkarra uzten duten artikulu txikiak dira.',
 'texte_choix_base_1' => 'Baseaaukeratu',
 'texte_choix_base_2' => 'MYSQL zerbitzariak data base ugari dauzka.',
 'texte_choix_base_3' => 'Aukeratu hemen zure ostapen zuzkitzaileak eman dizuna:',
@@ -1095,7 +1081,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Toki honetako elkartutako artikuluak',
-'titre_breves' => 'Laburrak',
 'titre_cadre_afficher_article' => 'Artikuluak erakutsi',
 'titre_cadre_afficher_traductions' => 'Hizkuntza honetarako dauden itzulpenen egoeraerakutsi',
 'titre_cadre_ajouter_auteur' => 'Idazle bat erantsi',
@@ -1143,7 +1128,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_page_articles_page' => 'Artikuluak',
 'titre_page_articles_tous' => 'Toki osoa',
 'titre_page_auteurs' => 'Bisitari',
-'titre_page_breves' => 'Berri laburrak',
 'titre_page_breves_edit' => '« @titre@ » notalaburra aldatu',
 'titre_page_calendrier' => 'Egutegia @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Tokiaren konfigurazioa',

@@ -156,7 +156,6 @@ la documentacion d\'SPIP</a>.', # MODIF
 'entree_base_donnee_1' => 'Adreiça de la basa de donadas',
 'entree_base_donnee_2' => '(Sovent, quela adreiça correspond a la de vòstre sit, daus uns còps correspond a la mençon "localhost", daus uns còps, se laissa voida completament.)',
 'entree_biographie' => 'Biografia breva, en quauques mots.',
-'entree_breve_publiee' => 'Quela breva la chau publicar?',
 'entree_chemin_acces' => '<b>Entrar</b> lo chamin d\'accès:',
 'entree_cle_pgp' => 'Vòstra clau PGP',
 'entree_contenu_rubrique' => '(Contengut de la rubrica en quauques mots.)',
@@ -183,7 +182,6 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'entree_passe_ldap' => 'Mot de santa Clara',
 'entree_port_annuaire' => 'Lo numero de pòrt de l\'annuari',
 'entree_signature' => 'Signatura',
-'entree_texte_breve' => 'Text de la breva',
 'entree_titre_obligatoire' => '<b>Títol</b> [Obligatòri]<br />',
 'entree_url' => 'L\'adreiça (URL) de vòstre sit',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -236,7 +234,6 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
 'icone_creer_mot_cle_site' => 'Créer un nouveau mot-clé et le lier à ce site', # NEW
 'icone_creer_rubrique_2' => 'Crear una rubrica nuòva',
-'icone_ecrire_nouvel_article' => 'Las brevas contengudas dins quela rubrica',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Mandar queu messatge',
 'icone_evolution_visites' => 'Evolucion de las vesitas<br />@visites@ vesitas',
@@ -245,7 +242,6 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'Modificar queu grop de mots',
 'icone_modifier_article' => 'Modificar quel article',
-'icone_modifier_breve' => 'Modificar quela breva',
 'icone_modifier_message' => 'Modificar queu messatge',
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Modificar quela rubrica',
@@ -272,7 +268,6 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_1_article' => '1 article',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => '1 breva',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -320,7 +315,6 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -336,7 +330,6 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'L\'estructura de vòstra basa de donadas es installada.',
 'info_bloquer' => 'blocar',
-'info_breves' => 'Vòstre sit utiliza lo sistema de brevas?',
 'info_breves_03' => 'brevas',
 'info_breves_liees_mot' => 'Las brevas liadas a queu mot clau',
 'info_breves_touvees' => 'Brevas trobadas',
@@ -423,7 +416,6 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_gauche_auteurs_exterieurs' => 'Los autors exteriors, sens accès au sit, son indicats emb una icòna blava; los autors esfaçats emb un bordilhier.',
 'info_gauche_messagerie' => 'La messatjariá vos permet d\'eschamjar daus messatges entre redactors, de servar daus mementos (per vòstre usatge personau) o d\'afichar daus anoncis sus la pagina d\'acuelh de l\'espaci privat (se setz administrator/tritz).',
 'info_gauche_numero_auteur' => 'AUTOR NUMERO',
-'info_gauche_numero_breve' => 'BREVA NUMERO',
 'info_gauche_statistiques_referers' => 'Quela pagina presenta la lista daus <i>referidors</i>, quò vòu dire daus sits menant a vòstre quite sit, unicament pet ier e uei: quela lista s\'actualiza chasca 24 oras.',
 'info_gauche_suivi_forum' => 'La pagina de <i>segut daus forums</i> es un esplech de gestion de vòstre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions dau forum public de quel article e vos permet de gerir quelas contribucions.',
 'info_gauche_suivi_forum_2' => 'La pagina de <i>segut daus forums</i> es un esplech de gestion dau vòstre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions dau forum public de quel article e vos permet de gerir quelas contribucions.',
@@ -504,7 +496,6 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -738,8 +729,6 @@ una color indica lor estat:',
 'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
 'item_bloquer_liens_syndiques' => 'Blocar los liams sindicats per validacion',
-'item_breve_refusee' => 'NON - Breva refusada',
-'item_breve_validee' => 'ÒC - Breva validada',
 'item_choix_administrateurs' => 'los administrators',
 'item_choix_generation_miniature' => 'Congrear automaticament las miniaturas daus imatges.',
 'item_choix_non_generation_miniature' => 'Pas congrear de miniaturas daus imatges.',
@@ -778,7 +767,6 @@ una color indica lor estat:',
 'item_non_limiter_recherche' => 'Eslarjar la cercha au contengut daus sits referenciats',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Pas publicar los articles avans la data de publicacion previsda.',
-'item_non_utiliser_breves' => 'Pas utilizar las brevas',
 'item_non_utiliser_config_groupe_mots_cles' => 'Pas utilizar la configuracion avançada daus grops de mots clau',
 'item_non_utiliser_moteur_recherche' => 'Pas utilizar lo motor',
 'item_non_utiliser_mots_cles' => 'Pas utilizar los mots clau',
@@ -789,7 +777,6 @@ una color indica lor estat:',
 'item_oui' => 'Òc ',
 'item_publier_articles' => 'Publicar los articles, quina que siá lor data de publicacion',
 'item_reponse_article' => 'Responsa a l\'article',
-'item_utiliser_breves' => 'Utilizar las brevas',
 'item_utiliser_config_groupe_mots_cles' => 'Utilizar la configuracion avançada daus grops de mots clau',
 'item_utiliser_moteur_recherche' => 'Utilizar lo cerchador',
 'item_utiliser_mots_cles' => 'Utilizar los mots clau',
@@ -980,8 +967,6 @@ una color indica lor estat:',
 'texte_auteur_messagerie' => 'Queste sit vos pòt indicar de contunh la tiera daus redactors connectats, çò que vos permet d\'eschamjar daus messatges en directe. Podetz decidir de pas aparéisser dins quela tiera (setz "invisible/a" per los autres utilizaires).',
 'texte_auteur_messagerie_1' => 'Queu sit permet d\'eschamjar daus messatges e de constituir daus forums de discussion privats entre los participants dau sit. Podetz decidir de pas participar a quilhs eschamges.',
 'texte_auteurs' => 'LOS AUTORS',
-'texte_breves' => 'Las brevas son daus texts corts e simples que permeten de metre en linha regde de las informacions concisas, de gerir
- una revista de premsa, un chalendier d\'eveniments...',
 'texte_choix_base_1' => 'Chausissetz vòstra basa:',
 'texte_choix_base_2' => 'Lo servidor SQL conten mai d\'una basa de donadas.',
 'texte_choix_base_3' => '<b>Chausissetz</b> çai sos la que vòstre auberjador vos a atribuida:',
@@ -1189,7 +1174,6 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Articles sindicats tirats de queu sit',
-'titre_breves' => 'Las brevas',
 'titre_cadre_afficher_article' => 'Afichar los articles',
 'titre_cadre_afficher_traductions' => 'Afichar l\'estat de las reviradas per las lengas seguentas:',
 'titre_cadre_ajouter_auteur' => 'APONDRE UN AUTOR:',
@@ -1237,7 +1221,6 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_page_articles_page' => 'Los articles',
 'titre_page_articles_tous' => 'Tot lo sit',
 'titre_page_auteurs' => 'Vesitaires',
-'titre_page_breves' => 'Brevas',
 'titre_page_breves_edit' => 'Modificar la breva: «@titre@»',
 'titre_page_calendrier' => 'Chalendier @nom_mois@ de @annee@',
 'titre_page_config_contenu' => 'Configuracion dau sit',

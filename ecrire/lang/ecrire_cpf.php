@@ -186,7 +186,6 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 'entree_base_donnee_1' => 'Ladrès labazdodné',
 'entree_base_donnee_2' => '(Souvandfwa ladrès-la lé paréy sak ladrès lo sitwèb, nadfwa pwatan lé inn sinp «localhost», nadfwa lé vid.)',
 'entree_biographie' => 'Arkont inn pé kisa ou lé.',
-'entree_breve_publiee' => 'Pour pibliyé tit nouvèl-la ?',
 'entree_chemin_acces' => '<b>Mèt</b> lo somin-laksé :',
 'entree_cle_pgp' => 'Out klé PGP',
 'entree_contenu_rubrique' => '(Kosa moun i va trouv dann rubrik-la, an kèk mo sèlman.)',
@@ -214,7 +213,6 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 'entree_passe_ldap' => 'Modpas',
 'entree_port_annuaire' => 'Lo niméro d-por dlo karné ',
 'entree_signature' => 'Sinyatir',
-'entree_texte_breve' => 'Lo tèks pou tit-nouvèl',
 'entree_titre_obligatoire' => '<b>Titr</b> [Nésésèr]<br />',
 'entree_url' => 'Ladrès (URL) out sitwèb',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -267,7 +265,6 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
 'icone_creer_mot_cle_site' => 'Créer un nouveau mot-clé et le lier à ce site', # NEW
 'icone_creer_rubrique_2' => 'Kré inn nouvèl rubrik',
-'icone_ecrire_nouvel_article' => 'Bann tit-nouvèl dann rubrik-la',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Anvwa modékri-la',
 'icone_evolution_visites' => 'Lévolisyon do bann vizit<br />@visites@ visites',
@@ -276,7 +273,6 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'Sanz lo group bann mo-la',
 'icone_modifier_article' => 'Sanz lartik-la',
-'icone_modifier_breve' => 'Sanz tit-nouvèl-la',
 'icone_modifier_message' => 'Sanz modékri-la',
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Sanz rubrik-la',
@@ -303,7 +299,6 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 'info_1_article' => '1 lartik',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => '1 tit-nouvèl',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -354,7 +349,6 @@ inn liv-zimaz (sédir inn galri).',
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -370,7 +364,6 @@ inn liv-zimaz (sédir inn galri).',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Lastriktir out bazdodné lé instalé.',
 'info_bloquer' => 'blok ali',
-'info_breves' => 'Kouk sitwèb aou i anserv lo sistèm bann tit-nouvèl ?',
 'info_breves_03' => 'Bann tit-nouvèl',
 'info_breves_liees_mot' => 'Bann tit-nouvèl an gatiraz èk molaklé-la ',
 'info_breves_touvees' => 'Bann tit-nouvèl ni la finn trouvé',
@@ -460,7 +453,6 @@ néséser pou sanz inn sizé sir lo sit.', # MODIF
 'info_gauche_auteurs_exterieurs' => 'Bann lotèr-déor, sak nana pwinn laksé sir lo sitwèb, lé présizé èk inn likonn blé ; bann lotèr dégréné lé kadré èk inn korbéy.',
 'info_gauche_messagerie' => 'Kazmodékri-la i permé azot mèt ansanm pou lanvwa inndé modékri antrozot, gard out prop bann gardandèt, ou byin sa ankor : afis tout bann zanons sir pazlakèy dann zéspas privé (si ou lé komandèr).',
 'info_gauche_numero_auteur' => 'LOTÈR NIMÉRO',
-'info_gauche_numero_breve' => 'TIT-NOUVÈL NIMÉRO',
 'info_gauche_statistiques_referers' => 'Pazwèb-la i prézant lo fil <i>bann référèr</i>, ou poutoudir lo fil bann sit sak i gatir out prop sitwèb. Rannkont-la lé selman valab po yèr é zordi : fil-la i ropat zéro tout bann 24H.',
 'info_gauche_suivi_forum' => 'Paz <i>swivi bann forom</i> lé inn zoutiy pou zèr an liyn out sit (pa inn léspas kozman o lékritir). Li afis tout bann kontribusyon dann forom-déor pou lartik-minm. Ou pé zèr tout banna dopwi lapazwèb-la.',
 'info_gauche_suivi_forum_2' => 'Paz <i>swivi bann forom</i> lé inn zoutiy pou zèr an liyn out sit (pa inn léspas kozman o lékritir). Li afis tout bann kontribusyon sak lé prézanté dann tout bann forom out sit i ébèrz (kiswa forom-dodan, forom-déor, tousala...). Li permé zèr bann kontribusyon-la.',
@@ -541,7 +533,6 @@ fisyé SPIP.}}',
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -774,8 +765,6 @@ sanm in koulèr i présiz son léta :',
 'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Pou don a zot tout lartik byen komplé andann bann fisyé pou la sindikasyon',
 'item_bloquer_liens_syndiques' => 'Blok bann gatir sindiké pou lakonfirmasyon',
-'item_breve_refusee' => 'NON - Tit-nouvèl arfizé',
-'item_breve_validee' => 'WI - Tit-nouvèl konfirmé',
 'item_choix_administrateurs' => 'bann komandèr',
 'item_choix_generation_miniature' => 'Pou kré otomatikman bann zimaz-minyatir (bann vinyèt).',
 'item_choix_non_generation_miniature' => 'Pou anpès kré otomatikman bann zimaz-minyatir (bann vinyèt).',
@@ -814,7 +803,6 @@ sanm in koulèr i présiz son léta :',
 'item_non_limiter_recherche' => 'Ékart lo rodaz pou lo kontnu bann sit référansé',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Bann zartik lé pa an liyn avan ladat sak lé di.',
-'item_non_utiliser_breves' => 'Anpès ansèrv bann tit-nouvèl',
 'item_non_utiliser_config_groupe_mots_cles' => 'Anserv pa lakonfigirasyon présiz pou bann group molaklé',
 'item_non_utiliser_moteur_recherche' => 'Anpès ansèrv lo rodèr',
 'item_non_utiliser_mots_cles' => 'Anpès ansèrv bann molaklé',
@@ -825,7 +813,6 @@ sanm in koulèr i présiz son léta :',
 'item_oui' => 'Wi',
 'item_publier_articles' => 'Mèt an liyn tout bann zartik san gèt ladat lapiblikasyon.',
 'item_reponse_article' => 'Répons lartik',
-'item_utiliser_breves' => 'Ansèrv bann tit-nouvèl',
 'item_utiliser_config_groupe_mots_cles' => 'Anserv lakonfigirasyon présiz pour bann group molaklé.',
 'item_utiliser_moteur_recherche' => 'Ansèrv lo rodèr',
 'item_utiliser_mots_cles' => 'Ansèrv bann molaklé',
@@ -1017,7 +1004,6 @@ linstalasyon do SPIP pou kré inn nouvèl labaz èk inn promyé laksé komandèr
 'texte_auteur_messagerie' => 'Sit-la i pé armont toultan tout bann lotèr an liyn. Sa lé itil pour mèt ansanm bann modékri, dann tan minm moun lé sir lo sit (mé kank lakazmodékri lé dégréné anlèr, list-la lé pa visib). Ou pé swazi kas aou dann la list-la (bann zitilizatèr i pé pa vwar aou somansa ou pé vwar azot).',
 'texte_auteur_messagerie_1' => 'Sit-la i permé lanvwa bann modékri èk lakréasyon bann forom privé antrozot bann dalon si lo sit. Ou lé lib mèt ansanm ou arfiz aparèt dann forom kozman-la.',
 'texte_auteurs' => 'BANN LOTÈR',
-'texte_breves' => 'Inn tit-nouvèl lé inn ti tèks sinp  sak i permé mèt an liyn vitman tout bann zinformasyon préciz. Li permèt osi zèr inn tourlaprès o inn kalandryé bann zévénman...',
 'texte_choix_base_1' => 'Swazi out labaz :',
 'texte_choix_base_2' => 'Servèr SQL li kontyin  plizyèr bann bazdodné.',
 'texte_choix_base_3' => '<b>Swazi</b> anba terlà sak out lébérzèr la donn aou :',
@@ -1174,7 +1160,6 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Bann zartik sindiké i sort lo sit-la',
-'titre_breves' => 'Bann tit-nouvèl',
 'titre_cadre_afficher_article' => 'Afis bann zartik',
 'titre_cadre_afficher_traductions' => 'Afis léta bann tradiksyon pou lalang-la.',
 'titre_cadre_ajouter_auteur' => 'AZOUT INN LOTÈR :',
@@ -1222,7 +1207,6 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_page_articles_page' => 'Bann zartik',
 'titre_page_articles_tous' => 'Lo sit antyé',
 'titre_page_auteurs' => 'Bann vizitèr',
-'titre_page_breves' => 'Bann tit-nouvèl',
 'titre_page_breves_edit' => 'Sanz la tit-nouvèl : « @titre@ »',
 'titre_page_calendrier' => 'Kalandryé @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Lakonfigirasyon lo sit',
