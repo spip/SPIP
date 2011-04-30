@@ -338,7 +338,6 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Aliet eo gwiriañ mat en a-raok ha gwasket e vez dija en a-raok ar restroù php ent emgefre gant an herberc\'hier pe get. Evit se e c\'hellit implijout ar servij-mañ : @testgzip@',
 'info_compresseur_texte' => 'Ma ne vez ket gwasket ent emgefre ar pajennoù HTML gant ho servijer evit o c\'has d\'al lennerien e c\'hellit klask gwaskañ dre ret evit bihanaat ment ar pajennoù pellgarget.  <b>Diwallit</b> : gallout a ra kement-se gorrekaat servijerioù zo.',
-'info_compresseur_titre' => 'Gwellekaat ha gwaskañ',
 'info_config_forums_prive' => 'E lodenn brevez al lec\'hienn e c\'hellit ober gant seurtoù foromoù disheñvel :',
 'info_config_forums_prive_admin' => 'Ur forom miret evit merourien al lec\'hienn hepken :',
 'info_config_forums_prive_global' => 'Ur forom hollek, digor d\'an holl skridaozerien :',
@@ -555,9 +554,6 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_publier' => 'embann',
 'info_publies' => 'Ho pennadoù bet embannet',
 'info_question_accepter_visiteurs' => 'M\'eo resisaet e frammoù ho lec\'hienn e c\'hall ar weladennerien en em enrollañ hep moned ouzh al lodenn brevez, gweredekait an dibarzh a-is :',
-'info_question_activer_compactage_css' => 'Ha c\'hoant hoc\'h eus ma vefe gwasket ar follennoù stil (CSS) ?',
-'info_question_activer_compactage_js' => 'Ha c\'hoant hoc\'h e vefe gwasket ar skriptoù javascript ?',
-'info_question_activer_compresseur' => 'Ha c\'hoant hoc\'h eus e vefe gwasket al lanvad HTTP ?',
 'info_question_gerer_statistiques' => 'Ha rankout a ra ho lec\'hienn merañ stadegoù ar gweladennoù ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Hag aotren a rit e c\'hellfe skridaozerien nevez en em enrollañ adalek al lec\'hienn foran ?
   Ma asantit e c\'hello ar weladennerien en em enskrivañ adalek ur furmskrid emgefreek, 
@@ -721,7 +717,6 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'item_choix_non_generation_miniature' => 'Chom hep krouiñ arlunioù diwar skeudennoù.',
 'item_choix_redacteurs' => 'ar skridaozerien',
 'item_choix_visiteurs' => 'gweladennerien al lec\'hienn foran',
-'item_compresseur' => 'Gweredekaat ar gwaskañ',
 'item_config_forums_prive_global' => 'Gweredekaat forom ar skridaozerien',
 'item_config_forums_prive_objets' => 'Gweredekaat ar foromoù-se',
 'item_creer_fichiers_authent' => 'Krouiñ ar restroù .htpasswd',
@@ -962,12 +957,9 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
   ar gweladenniñ d\'ar memes lusk) hag an niver a weladennoù abaoe
   an deroù a c\'heller gwelet er lagadenn a zeu war wel
   pa dremen al logodenn war an titl.',
-'texte_compacter_avertissement' => 'Diwallit da chom hep gweredekaat an dibarzhioù-mañ e-keit hag emeur o sevel ho lec\'hienn : n\'hall ket an elfennoù gwasket bezañ lennet ken war-lerc\'h.',
-'texte_compacter_script_css' => 'Gallout a ra SPIP gwaskañ ar skriptoù javascript hag ar follennoù-stil CSS, evit o enrollañ er restroù difiñv;  buanoc\'h e teu al lec\'hienn war wel.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(hennezh a c\'hell bezañ gwasket pe get)',
-'texte_compresseur_page' => 'Gallout a ra SPIP gwaskañ ent emgefre pep pajenn kaset da weladennerien al lec\'hienn. Skañvoc\'h eo evit ar bann drafet (buanoc\'h ez aio evit ar c\'hevreadennoù gorrek, da skouer), met goulenn a ra muioc\'h a nerzh digant ar servijer.',
 'texte_compte_element' => '@count@ elfenn',
 'texte_compte_elements' => '@count@ elfenn',
 'texte_config_groupe_mots_cles' => 'Ha c\'hoant hoc\'h eus ober gant kefluniadur araokaet ar gerioù-stur ?
@@ -1116,8 +1108,6 @@ Gallout a ra restroù-se bezañ menegeret er pennad, pe diskwelet a-ziforc\'h.',
 'titre_cadre_numero_auteur' => 'SKRIDAOZER NIVERENN',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Sinadur</b> [Rekis]<br />',
-'titre_compacter_script_css' => 'Gwaskañ ar furmskridoù hag ar follennoù-stil',
-'titre_compresser_flux_http' => 'Gwaskañ al lanvad HTTP',
 'titre_config_contenu_notifications' => 'Kemennoù nevezinti',
 'titre_config_contenu_prive' => 'El lodenn brevez',
 'titre_config_contenu_public' => 'War al lec\'hienn foran',

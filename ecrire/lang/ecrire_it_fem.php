@@ -348,7 +348,6 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Si raccomanda di verificare preventivamente se il provider comprime già in maniera sistematica gli script php; a tal fine è possibile utilizzare, per esempio,  il seguente servizio: @testgzip@',
 'info_compresseur_texte' => 'Se il proprio server non comprime automaticamente le pagine HTML per inviarle ai visitatori, è possibile tentare di forzare la compressione per diminuire il peso delle pagine da scaricare. <b>Attenzione</b>: ciò può rallentare notevolmente alcuni server.',
-'info_compresseur_titre' => 'Ottimizzazione e compressione',
 'info_config_forums_prive' => 'Nell\'area riservata del sito è possibile attivare diversi tipi di forum:',
 'info_config_forums_prive_admin' => 'Un forum riservato alle amministratrici del sito:',
 'info_config_forums_prive_global' => 'Un forum globale, aperto a tutte le redattrici:',
@@ -573,9 +572,6 @@ il database alla nuova versione di SPIP.',
 'info_publier' => 'pubblicare',
 'info_publies' => 'I tuoi articoli pubblicati',
 'info_question_accepter_visiteurs' => 'I modelli di pagina del sito prevedono la registrazione di utenti senza accesso all\'area riservata. Attivare la seguente funzionalità:',
-'info_question_activer_compactage_css' => 'Si desidera attivare la compressione dei fogli di stile (CSS)?',
-'info_question_activer_compactage_js' => 'Si desidera attivare la compressione degli script (javascript)?',
-'info_question_activer_compresseur' => 'Si desidera attivare la compressione del flusso HTTP?',
 'info_question_gerer_statistiques' => 'Il sito deve gestire le statistiche delle visite?',
 'info_question_inscription_nouveaux_redacteurs' => 'Accettate le iscrizioni di nuove redattrici
 direttamente  dal sito pubblico? In questo caso, chi visita il sito potrà iscriversi
@@ -740,7 +736,6 @@ Le traduzioni sono associate all\'originale,
 'item_choix_non_generation_miniature' => 'Non creare le thumbnail delle immagini.',
 'item_choix_redacteurs' => 'le redattrici',
 'item_choix_visiteurs' => 'i visitatori del sito pubblico',
-'item_compresseur' => 'Attiva la compressione',
 'item_config_forums_prive_global' => 'Attiva i forum delle redattrici',
 'item_config_forums_prive_objets' => 'Attiva questi forum',
 'item_creer_fichiers_authent' => 'Crea i file .htpasswd',
@@ -982,15 +977,9 @@ numero di visite quotidiane che riceverà rimanendo costante il ritmo attuale di
 consultazione) e il numero di visite ricevute dall\'inizio,
 sono visualizzati nel commento che appare
 quando si passa con il mouse sopra al titolo.',
-'texte_compacter_avertissement' => 'Fare attenzione a non attivare queste opzioni durante la fase di sviluppo del sito: gli elementi compressi sono completamente illeggibili.',
-'texte_compacter_script_css' => 'SPIP può comprimere gli script javascript e i fogli di stile CSS, per registrarli nei file statici; ciò accelera la visualizzazione del sito.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(può essere compresso o meno)',
-'texte_compresseur_page' => 'SPIP può comprimere automaticamente tutte le pagine che invia ai
-visitatori del sito. Questa impostazione permette di ottimizzare la banda passante (il
-sito è più rapido in una connessione a bassa velocità), ma
-richiede una maggiore potenza del server.',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementi',
 'texte_config_groupe_mots_cles' => 'Vuoi attivare la configurazione avanzata delle parole chiave,
@@ -1157,8 +1146,6 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_cadre_numero_auteur' => 'AUTRICE NUMERO',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Firma</b> [Obbligatoria]<br />',
-'titre_compacter_script_css' => 'Compressione degli script e dei CSS',
-'titre_compresser_flux_http' => 'Compressione del flusso HTTP',
 'titre_config_contenu_notifications' => 'Notifiche',
 'titre_config_contenu_prive' => 'Nell\'area riservata',
 'titre_config_contenu_public' => 'Sul sito pubblico',

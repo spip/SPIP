@@ -347,7 +347,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'HTML-standaard te volgen',
 'info_compresseur_gzip' => '<b>N. B. :</b> Hij wordt aanbevolen om eerst te controleren of leverancier de scripts php  reeds systematisch samenperst; daarvoor, kunt u bijvoorbeeld de volgende dienst gebruiken : @testgzip@',
 'info_compresseur_texte' => 'Als uw server de bladzijdes HTML niet automatisch samendrukt om ze te verzenden naar de internauten, kunt u deze samendrukking proberen te forceren om het gewicht van de gedownloade bladzijdes te verminderen. <b>Aandacht</b>: dat kan bepaalde servers aanzienlijk vertragen.',
-'info_compresseur_titre' => 'Optimaliseringen en samendrukking',
 'info_config_forums_prive' => 'In de particuliere ruimte van de site, kunt u verschillende soorten forums activeren :',
 'info_config_forums_prive_admin' => 'Een forum dat voor de beheerders van de site is gereserveerd :',
 'info_config_forums_prive_global' => 'Een globaal forum, open voor alle redacteuren :',
@@ -572,9 +571,6 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_publier' => 'publiceren',
 'info_publies' => 'Je gepubliceerde artikels',
 'info_question_accepter_visiteurs' => 'Als de sjablonen van je site voorzien dat bezoekers zich kunnen registreren zonder toegang tot de privé-ruimte, activeer dan de volgende optie :',
-'info_question_activer_compactage_css' => 'Wilt u de verdichting van de stijl bladen  activeren (CSS) ?',
-'info_question_activer_compactage_js' => 'Wilt u de verdichting van de scripts activeren (javascript) ?',
-'info_question_activer_compresseur' => 'Wilt u de samendrukking van de stroom activeren HTTP ?',
 'info_question_gerer_statistiques' => 'Dient je site bezoekersstatiestieken aan te maken ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Aanvaard je inschrijvingen van nieuwe redacteuren vanop
  de publieke site? Indien wel, dan kunnen bezoekers
@@ -741,7 +737,6 @@ een kleur geeft hun status aan :',
 'item_choix_non_generation_miniature' => 'Geen verkleinde afbeeldingen aanmaken.',
 'item_choix_redacteurs' => 'de redacteurs',
 'item_choix_visiteurs' => 'bezoekers van de publieke site',
-'item_compresseur' => 'De samendrukking activeren',
 'item_config_forums_prive_global' => 'Het redacteuren forum activeren',
 'item_config_forums_prive_objets' => 'Deze forums activeren',
 'item_creer_fichiers_authent' => 'de .htpasswd bestanden aanmaken',
@@ -986,15 +981,9 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
  het aantal bezoeken dat het artikel op een dag zal
  krijgen als huidige ritme van raadpleging wordt
  aangehouden.',
-'texte_compacter_avertissement' => 'De aandacht om niet deze opties tijdens de ontwikkeling van uw site te activeren: de compact elementen verliezen elke leesbaarheid.',
-'texte_compacter_script_css' => 'SPIP kan compact de javascript scripts en de CSS stijl bladen, om ze te registreren in statische bestanden; dat versnelt de display van de site.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(deze kan gecomprimeerd worden of niet)',
-'texte_compresseur_page' => 'SPIP kan elke bladzijde automatisch samenpersen die hij naar
- bezoekers van de site verzendt. Dit regelen maakt het mogelijk om de drukke reep te optimaliseren (de
- site is sneller achter een verbinding aan gering debiet), maar
- vraagt meer macht aan de server.',
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elements',
 'texte_config_groupe_mots_cles' => 'Wilt u de geavanceerde configuratie van de sleutelwoorden activeren,
@@ -1173,8 +1162,6 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_cadre_numero_auteur' => 'AUTEUR NUMMER',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Handtekening</b> [Verplicht]<br />',
-'titre_compacter_script_css' => 'Verdichting van de scripts en CSS',
-'titre_compresser_flux_http' => 'Samendrukking van de HTTP stroom',
 'titre_config_contenu_notifications' => 'Kennisgevingen',
 'titre_config_contenu_prive' => 'In de particuliere ruimte',
 'titre_config_contenu_public' => 'Op de openbare site',

@@ -341,7 +341,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Önce, barındırma servisinin php skriptlerini sistematik olarak sıkıştırıp sıkıştırmadığının kontrol edilmesi önerilir ; bunun için, örneğin şu hizmeti kullanabilirsiniz : @testgzip@',
 'info_compresseur_texte' => 'Eğer sunucunuz html sayfaları otomatik olarak sıkıştırmıyorsa, yüklenen sayfa ağırlıklarını düşürmek için bu işlemi yapmaya zorlayabilirsiniz. <b>Dikkat</b> : bu işlem bazı sunucuları gözle görülür şekilde yavaşlatabilir.',
-'info_compresseur_titre' => 'Optimizasyon ve sıkıştırma',
 'info_config_forums_prive' => 'Sitenin özel alanında bir çok farklı tipteki forumu aktive edebilirsiniz  :',
 'info_config_forums_prive_admin' => 'Site yöneticilierine ayrılmış bir forum :',
 'info_config_forums_prive_global' => 'Tüm yazarlara açık genel forum :',
@@ -564,9 +563,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_publier' => 'Yayınla',
 'info_publies' => 'Çevrimiçi yayınlanan makaleleriniz',
 'info_question_accepter_visiteurs' => 'Eğer sitenizin iskeleti özel alana erişimi olmayan ziyaretçilerin kaydını öngörüyorsa, aşağıdaki seçeneği çalıştırınız :',
-'info_question_activer_compactage_css' => 'CSS\'lerin sıkıştırılmasını aktive etmek ister misiniz ?',
-'info_question_activer_compactage_js' => 'Skriptlerin (javascript) sıkıştırılmasını aktive etmek ister misiniz ?',
-'info_question_activer_compresseur' => 'HTTP akışının sıkıştırılmasını aktive etmek ister misiniz ?',
 'info_question_gerer_statistiques' => 'Siteniz ziyaret istatistiğini yönetmeli mi ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Kamu sitesinden yeni editörlerin kaydolmasını kabul ediyor musunuz ?
     Eğer kabul ediyorsanız, ziyaretçiler otomatik
@@ -730,7 +726,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_choix_non_generation_miniature' => 'Resimlerin minyatürlerini otomatik olarak üretme',
 'item_choix_redacteurs' => 'Yazarlar',
 'item_choix_visiteurs' => 'Kamu sitesi ziyaretçileri',
-'item_compresseur' => 'Sıkıştırmayı aktive et',
 'item_config_forums_prive_global' => 'Yazarlar forumunu aktive et',
 'item_config_forums_prive_objets' => 'Şu forumları aktive et',
 'item_creer_fichiers_authent' => '.htpasswd dosyalarını yarat',
@@ -973,12 +968,9 @@ yaratabilir. Bu da otomatik olarak bir galeri
    geleceği tahmin edilen günlük ziyaretçi sayısı) ve başından beri gelen
    ziyaretçi sayısı, fare başlık üzerinden geçtiğinde
    ortaya çıkan konuşma balonunun içinde görüntülenir. ',
-'texte_compacter_avertissement' => 'Sitenizin geliştirilmesi esnasında bu seçenekleri aktive etmeyin : sıkıştırılmış elemanlar tüm okunabilirliklerini kaybederler.',
-'texte_compacter_script_css' => 'SPIP javascript sktripleri ve CSSleri sıkıştırabilir ve bunları statik dosyalara kaydedebilir ; böylece sitenin gösterilmesi hızlanır.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(bu, sıkıştırılmış ya da sıkıştırılmamış olabilir)',
-'texte_compresseur_page' => 'SPIP site ziyaretçilerine gönderdiği her sayfayı sıkıştırabilir. Bu ayar bandı optimize eder. (site düşük debili bir bağlantıda hızlanmış olur) ama hizmet biriminden çok fazla güç ister.',
 'texte_compte_element' => '@count@ eleman',
 'texte_compte_elements' => '@count@ eleman',
 'texte_config_groupe_mots_cles' => 'Örneğin, grup başına tek sözcük seçme olanağı bulunduğunu,
@@ -1104,8 +1096,6 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_cadre_numero_auteur' => 'YAZAR NO',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>İmza</b> [Zorunlu]<br />',
-'titre_compacter_script_css' => 'Skriptlerin ve CSSlerin sıkıştırılması',
-'titre_compresser_flux_http' => 'HTTP akısının sıkıştırılması',
 'titre_config_contenu_notifications' => 'Notlama',
 'titre_config_contenu_prive' => 'Özel alanda',
 'titre_config_contenu_public' => 'Kamusal sitede',

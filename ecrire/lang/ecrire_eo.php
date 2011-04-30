@@ -342,7 +342,6 @@ forviŝi ilin poste).',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Estas rekomendate antaŭfare kontroli, ĉu via retgastiganto jam ĉiufoje densigas la php-skriptojn; por tio, vi povas ekzemple uzi la jenan servon : @testgzip@',
 'info_compresseur_texte' => 'Se via servilo ne aŭtomate densigas la html-paĝojn por ilin sendi al interretanoj, vi povas provi trudi tiun densigon por malkreskigi la pezon de la elŝutitaj paĝoj. <b>Atentu</b> :  tio povas forte malrapidigi iujn servilojn.',
-'info_compresseur_titre' => 'Plejbonigoj kaj densigoj',
 'info_config_forums_prive' => 'En la privata spaco de la retejo, vi povas aktivigi plurajn tipojn de forumoj :',
 'info_config_forums_prive_admin' => 'Forumo rezervita al retejaj mastrumantoj :',
 'info_config_forums_prive_global' => 'Ĝenerala forumo, malfermita al ĉiuj redaktantoj :',
@@ -560,9 +559,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_publier' => 'publikigi',
 'info_publies' => 'Viaj artikoloj rete publikigitaj',
 'info_question_accepter_visiteurs' => 'Se via skeleto ebligas registradon de vizitantoj, kiuj ne rajtas aliri la privatan spacon, bonvolu aktivigi la ĉi-suban opcion :',
-'info_question_activer_compactage_css' => 'Ĉu vi deziras aktivigi la densigon de la stilfolio (CSS) ?',
-'info_question_activer_compactage_js' => 'Ĉu vi deziras aktivigi la densigon de la skriptoj (Ĝavoskripto) ?',
-'info_question_activer_compresseur' => 'Ĉu vi volas aktivigi densigon de la HTTP-fluo ?',
 'info_question_gerer_statistiques' => 'Ĉu via retejo devas mastrumi la statistikojn pri la vizitoj ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Ĉu vi akceptas la registriĝadon de novaj redaktantoj ekde
   la publika spaco ? Se vi akceptas tion, la vizitantoj povos registriĝi
@@ -726,7 +722,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_choix_non_generation_miniature' => 'Ne generi bildajn miniaturojn.',
 'item_choix_redacteurs' => 'la redaktantoj',
 'item_choix_visiteurs' => 'la vizitantoj de la publika spaco',
-'item_compresseur' => 'Aktivigi la densigon',
 'item_config_forums_prive_global' => 'Aktivigi la forumon de redaktantoj',
 'item_config_forums_prive_objets' => 'Aktivigi tiujn ĉi forumojn',
 'item_creer_fichiers_authent' => 'Krei la dosierojn .htpasswd',
@@ -969,15 +964,9 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
   tiel daŭros) kaj la nombro de vizitoj ricevitaj
   de la komenco afiŝiĝas en la veziko kiu
   aperas kiam la tajpmontrilo superpasas la titolon.',
-'texte_compacter_avertissement' => 'Attention à ne pas activer ces options durant le développement de votre site : les éléments compactés perdent toute lisibilité.', # NEW
-'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela accélère l\'affichage du site.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(tiu ĉi povas aŭ ne esti densigita)',
-'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
-visiteurs du site. Ce réglage permet d\'optimiser la bande passante (le
-site est plus rapide derrière une liaison à faible débit), mais
-demande plus de puissance au serveur.', # NEW
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementoj',
 'texte_config_groupe_mots_cles' => 'Ĉu vi deziras aktivigi la plendetalan konfiguron de la ŝlosilvortoj,
@@ -1164,8 +1153,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_cadre_numero_auteur' => 'AŬTORO NUMERO',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Subskribo</b> [deviga]<br />',
-'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
-'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW
 'titre_config_contenu_notifications' => 'Notifications', # NEW
 'titre_config_contenu_prive' => 'En la privata spaco',
 'titre_config_contenu_public' => 'Ĉe la publika retejo',

@@ -349,7 +349,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => 'It is advisable to first check if the service provider systematically compresses PHP scripts. To do this you can, for example, use the following service: @testgzip@', # NEW
 'info_compresseur_texte' => 'If your server does not automatically compress HTML pages when sending them, you can attempt to force the compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ', # NEW
-'info_compresseur_titre' => 'Optimisations and compression', # NEW
 'info_config_forums_prive' => 'In the editing area of the site several differnt kinds of forum may be activated:', # NEW
 'info_config_forums_prive_admin' => 'A forum reserved for site administrators:', # NEW
 'info_config_forums_prive_global' => 'A global forum, open to all the authors:', # NEW
@@ -577,9 +576,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_publier' => 'zveřejnit',
 'info_publies' => 'Vaše články publikované online',
 'info_question_accepter_visiteurs' => 'Pokud šablona vašeho webu vyžaduje přihlášení návštěvníků bez přístupu do privátní části, aktivujte tuto možnost zde:',
-'info_question_activer_compactage_css' => 'Do you wish to activate compression for CSS stylesheets?', # NEW
-'info_question_activer_compactage_js' => 'Do you wish to activate compression for Javascript files?', # NEW
-'info_question_activer_compresseur' => 'Do you wish to activate compression for the HTTP data?', # NEW
 'info_question_gerer_statistiques' => 'Mají se na vašem webu vést statistiky návštěvnosti?',
 'info_question_inscription_nouveaux_redacteurs' => 'Mohou se noví redaktoři přihlašovat z veřejné části webu?
   Pokud ano, návštěvníci se mohou přihlašovat pomocí automatického formuláře
@@ -745,7 +741,6 @@ ukazuje jejich stav:',
 'item_choix_non_generation_miniature' => 'Negenerovat náhledy obrázků.',
 'item_choix_redacteurs' => 'redaktoři',
 'item_choix_visiteurs' => 'návštěvníci veřejného webu',
-'item_compresseur' => 'Activate compression', # NEW
 'item_config_forums_prive_global' => 'Activate the authors\' forum', # NEW
 'item_config_forums_prive_objets' => 'Activate these forums', # NEW
 'item_creer_fichiers_authent' => 'Vytvořit soubory .htpasswd',
@@ -988,12 +983,9 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
   a počet celkových návštěv za celou dobu zveřejnění
   jsou uvedeny v místní nabídce, která se zobrazí
   při umístění myši nad názvem článku.',
-'texte_compacter_avertissement' => 'Be careful not to activate these options during the development of your site: compressed elements become difficult to read and debug.', # NEW
-'texte_compacter_script_css' => 'SPIP can compact Javascript files and CSS stylesheets and save them as static files. This accelerates the display of the site.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(může ale nemusí být komprimováno)',
-'texte_compresseur_page' => 'SPIP can automatically compress each page that it sends. This option reduces the bandwidth used, making the site faster for lower speed connections), but it does require more resources from the server.', # NEW
 'texte_compte_element' => '@count@ prvek',
 'texte_compte_elements' => '@count@ prvky',
 'texte_config_groupe_mots_cles' => 'Chcete zapnout rozšířené nastavení klíčových slov,
@@ -1166,8 +1158,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_cadre_numero_auteur' => 'ČÍSLO AUTORA',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Podpis</b> [povinný údaj]<br />', # MODIF
-'titre_compacter_script_css' => 'Compression of scripts and CSS', # NEW
-'titre_compresser_flux_http' => 'Compression of HTTP data', # NEW
 'titre_config_contenu_notifications' => 'Notifications', # NEW
 'titre_config_contenu_prive' => 'In the editing area', # NEW
 'titre_config_contenu_public' => 'On the public site', # NEW
