@@ -214,7 +214,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 &lt;a href=\\&quot;\\&quot;http://www.spip.net/fr_suivi&gt;SPIP ukat qillqanakawi&lt;/a&gt;.',
 'ical_info_calendrier' => 'Pä pachachimpuw utjtam. Mayirix qamawit mä laphi uñnaqawa kunanti taqpach yatiyat qillqatank yatiyi: jumakiw uñjtax uka mä suti imt\'awi ukata, ukatxa mayjt\'ayasmaw kuna pachtix munktax ukja imt\'awim mayjt\'ayasa.',
-'ical_lien_rss_breves' => 'Qamawit jisk\'aptatanak apxasiwi ',
 'ical_methode_http' => 'Apaqaña',
 'ical_methode_webcal' => 'Kikipawi (webcal://)',
 'ical_texte_js' => 'Javascript mä siqix ukhamakiw uñachayatam, kawkirs jumankir qamawina, jichhaki yatiyat qillqatanak aka qamawina ',
@@ -238,7 +237,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creation_mots_cles' => 'Mä machaq imt\'at aru uñstayaña ',
 'icone_creer_auteur' => 'Mä machaq qillqiri uñstayaña ukatsti aka qillqatar mayacht\'aña',
 'icone_creer_mot_cle' => 'Créer un nouveau mot-clé et le lier à cet article', # NEW
-'icone_creer_mot_cle_breve' => 'Créer un nouveau mot-clé et le lier à cette brève', # NEW
 'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
 'icone_creer_mot_cle_site' => 'Créer un nouveau mot-clé et le lier à ce site', # NEW
 'icone_creer_rubrique_2' => 'Mä machaq t\'aqa uñstayaña',
@@ -256,9 +254,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_site' => 'Aka qamawi mayjt\'ayaña',
 'icone_poster_message' => 'Mä yatiyawi apayaña',
 'icone_publication' => 'Publication', # NEW
-'icone_publier_breve' => 'Aka jisk\'aptata taqir yatiyaña',
 'icone_referencer_nouveau_site' => 'Mä machaq qamawi aytaña',
-'icone_refuser_breve' => 'Aka jisk\'aptata janiw saña',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Kutiña',
 'icone_retour_article' => 'Qillqatar kutiña',
@@ -345,10 +341,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Ch\'akha ch\'akha pirwa yatiyawinakamatxa uchantataxiwa',
 'info_bloquer' => 'jark\'antaña',
-'info_breves_03' => 'Jisk\'aptatanaka',
-'info_breves_liees_mot' => 'Jisk\'aptatanak aka imt\'at arur mayachata',
-'info_breves_touvees' => 'Jikit jisk\'aptatanak',
-'info_breves_touvees_dans_texte' => 'Jisk\'aptatanak jikita (sawuna)',
 'info_changer_nom_groupe' => 'Aka qututx sut mayxt\'ayam',
 'info_chapeau' => 'Qalltawi',
 'info_chapeau_2' => 'Qalltawi:',
@@ -494,7 +486,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_mode_fonctionnement_defaut_forum_public' => 'Mode de fonctionnement par défaut des forums publics', # NEW
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
-'info_modifier_breve' => 'Modifier la brève :', # NEW
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
 'info_modifier_rubrique' => 'Modifier la rubrique :', # NEW
 'info_modifier_titre' => 'Modifier : @titre@', # NEW
@@ -524,7 +515,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_nom_site' => 'Nom de votre site', # NEW
 'info_nom_site_2' => '<b>Nom du site</b> [Obligatoire]', # NEW
 'info_nombre_articles' => '@nb_articles@ articles,', # NEW
-'info_nombre_breves' => '@nb_breves@ brèves,', # NEW
 'info_nombre_partcipants' => 'PARTICIPANTS A LA DISCUSSION :', # NEW
 'info_nombre_rubriques' => '@nb_rubriques@ rubriques,', # NEW
 'info_nombre_sites' => '@nb_sites@ sites,', # NEW
@@ -697,7 +687,6 @@ dans une couleur qui indique leur état :', # NEW
 'info_un_article' => 'un article,', # NEW
 'info_un_mot' => 'Un seul mot à la fois', # NEW
 'info_un_site' => 'un site,', # NEW
-'info_une_breve' => 'une brève,', # NEW
 'info_une_rubrique' => 'une rubrique,', # NEW
 'info_une_rubrique_02' => '1 rubrique', # NEW
 'info_url' => 'URL :', # NEW
@@ -764,7 +753,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_login' => 'Login', # NEW
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
 'item_mots_cles_association_articles' => 'aux articles', # NEW
-'item_mots_cles_association_breves' => 'aux brèves', # NEW
 'item_mots_cles_association_rubriques' => 'aux rubriques', # NEW
 'item_mots_cles_association_sites' => 'aux sites référencés ou syndiqués.', # NEW
 'item_non' => 'Non', # NEW
@@ -791,7 +779,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_non_utiliser_mots_cles' => 'Ne pas utiliser les mots-clés', # NEW
 'item_non_utiliser_syndication' => 'Ne pas utiliser la syndication automatique', # NEW
 'item_nouvel_auteur' => 'Nouvel auteur', # NEW
-'item_nouvelle_breve' => 'Nouvelle brève', # NEW
 'item_nouvelle_rubrique' => 'Nouvelle rubrique', # NEW
 'item_oui' => 'Oui', # NEW
 'item_publier_articles' => 'Publier les articles, quelle que soit leur date de publication.', # NEW
@@ -830,8 +817,6 @@ dans une couleur qui indique leur état :', # NEW
 'lien_nom_site' => 'NOM DU SITE :', # NEW
 'lien_nouvelle_recuperation' => 'Tenter une nouvelle récupération des données', # NEW
 'lien_reponse_article' => 'Réponse à l\'article', # NEW
-'lien_reponse_breve' => 'Réponse à la brève', # NEW
-'lien_reponse_breve_2' => 'Réponse à la brève', # NEW
 'lien_reponse_rubrique' => 'Réponse à la rubrique', # NEW
 'lien_reponse_site_reference' => 'Réponse au site référencé :', # NEW
 'lien_retirer_auteur' => 'Retirer l\'auteur', # NEW
@@ -848,7 +833,6 @@ dans une couleur qui indique leur état :', # NEW
 'lien_voir_en_ligne' => 'VOIR EN LIGNE :', # NEW
 'logo_article' => 'LOGO DE L\'ARTICLE', # NEW
 'logo_auteur' => 'LOGO DE L\'AUTEUR', # NEW
-'logo_breve' => 'LOGO DE LA BRÈVE', # NEW
 'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'LOGO DU MOT-CLÉ', # NEW
 'logo_rubrique' => 'LOGO DE LA RUBRIQUE', # NEW
@@ -1218,7 +1202,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_groupe_mots' => 'GROUPE DE MOTS :', # NEW
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LANGUE DE L\'ARTICLE', # NEW
-'titre_langue_breve' => 'LANGUE DE LA BRÈVE', # NEW
 'titre_langue_rubrique' => 'LANGUE DE LA RUBRIQUE', # NEW
 'titre_langue_trad_article' => 'LANGUE ET TRADUCTIONS DE L\'ARTICLE', # NEW
 'titre_les_articles' => 'LES ARTICLES', # NEW
@@ -1227,7 +1210,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_mots_tous' => 'Les mots-clés', # NEW
 'titre_naviguer_dans_le_site' => 'Naviguer dans le site...', # NEW
 'titre_nouveau_groupe' => 'Nouveau groupe', # NEW
-'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 'titre_nouvelle_rubrique' => 'Nouvelle rubrique', # NEW
 'titre_numero_rubrique' => 'RUBRIQUE NUMÉRO :', # NEW
 'titre_page_admin_effacer' => 'Maintenance technique : effacer la base', # NEW
@@ -1235,7 +1217,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_articles_page' => 'Les articles', # NEW
 'titre_page_articles_tous' => 'Tout le site', # NEW
 'titre_page_auteurs' => 'Visiteurs', # NEW
-'titre_page_breves_edit' => 'Modifier la brève : « @titre@ »', # NEW
 'titre_page_calendrier' => 'Calendrier @nom_mois@ @annee@', # NEW
 'titre_page_config_contenu' => 'Configuration du site', # NEW
 'titre_page_config_fonctions' => 'Configuration du site', # NEW

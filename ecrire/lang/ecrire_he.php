@@ -203,7 +203,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_info1' => 'הדף הזה מציג כמה שיטות לשמור קשר עם פעילות האתר הזה.',
 'ical_info2' => 'ליותר פרטים על כל הטכניקות, אל תהסס לפנות ל המסמכים של <<a href="@spipnet@">SPIP </a',
 'ical_info_calendrier' => 'שני לוחות זמנים נמצאים בסל האשפה. הראשון הוא מפת אתר אשר מראה את כל הכתבות המפורסמות. השני מכיל הודעות עורכים גם ההודעות הפרטיות האחרונות שלך: זה שמור בשבילך הודות למפתח אישי שאתה יכול לשנות בכל זמן על ידי חידוש סיסמתך.',
-'ical_lien_rss_breves' => 'איסוף תוכן רשת של תקצירי האתר',
 'ical_methode_http' => 'מוריד',
 'ical_methode_webcal' => 'סינכרוניזציה (webcal://)',
 'ical_texte_js' => 'שורה של שפת "ג\'אווה סקריפט" מאפשרת להציג, בקלות ובכל אתר ששייך לך, המאמרים האחרונים מפורסמים באתר זה.',
@@ -227,7 +226,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creation_mots_cles' => 'צור מילת מפתח חדשה',
 'icone_creer_auteur' => 'צור מחבר חדש ושתף אותו עם המאמר הזה',
 'icone_creer_mot_cle' => 'צור מילת מפתח חדשה וצור לה קישור עם המאמר הזה',
-'icone_creer_mot_cle_breve' => 'צור מילת מפתח חדשה וקשר אותה לתקציר זה',
 'icone_creer_mot_cle_rubrique' => 'צור מילת מפתח חדשה וקשר אותה לרובריקה הזאת',
 'icone_creer_mot_cle_site' => 'צור מילת מפתח חדשה וקשר אותה לאתר זה',
 'icone_creer_rubrique_2' => 'צור מדור חדש',
@@ -245,9 +243,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_site' => 'שנה את האתר הזה',
 'icone_poster_message' => 'כתוב הודעה',
 'icone_publication' => 'Publication', # NEW
-'icone_publier_breve' => 'פרסם את המבזק',
 'icone_referencer_nouveau_site' => 'ייחס אתר חדש',
-'icone_refuser_breve' => 'דחה את המבזק',
 'icone_relancer_signataire' => 'העלה מחדש את החתום',
 'icone_retour' => 'אחורה',
 'icone_retour_article' => 'אל המאמר הקודם',
@@ -332,10 +328,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_barre_outils' => 'עם סרגל הכלים שלי?',
 'info_base_installee' => '.המבנה של בסיס הנתונים שלך מותקן',
 'info_bloquer' => 'חסום',
-'info_breves_03' => 'מבזקים',
-'info_breves_liees_mot' => 'מבזקים הקשורים למילת מפתח זו',
-'info_breves_touvees' => 'מבזקים שנמצאו',
-'info_breves_touvees_dans_texte' => 'מבזקים שנמצאו (בתוך הטקסט)',
 'info_changer_nom_groupe' => ':שנה את שם הקבוצה הזאת',
 'info_chapeau' => 'סיפון',
 'info_chapeau_2' => ':הקדמה',
@@ -490,7 +482,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_mode_fonctionnement_defaut_forum_public' => 'פעולה ברירת מחדל של פורומים ציבוריים',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
-'info_modifier_breve' => 'תיקון המבזק :',
 'info_modifier_mot' => 'ערוך את מילה המפתח :',
 'info_modifier_rubrique' => 'תיקון המדור הזה:',
 'info_modifier_titre' => 'שנה: @titre@',
@@ -520,7 +511,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_nom_site' => 'שם האתר שלך',
 'info_nom_site_2' => '<b>Nom du site</b> [Obligatoire]', # NEW
 'info_nombre_articles' => '@nb_articles@ מאמרים,',
-'info_nombre_breves' => '@nb_breves@ מבזקים,',
 'info_nombre_partcipants' => ':משתתפים לדיון',
 'info_nombre_rubriques' => '@nb_rubriques@ מדורים,',
 'info_nombre_sites' => '@nb_sites@ אתרים,',
@@ -695,7 +685,6 @@ dans une couleur qui indique leur état :', # NEW
 'info_un_article' => 'פריט,',
 'info_un_mot' => 'Un seul mot à la fois', # NEW
 'info_un_site' => 'האתר,',
-'info_une_breve' => 'מבזק אחד',
 'info_une_rubrique' => 'קטגוריה,',
 'info_une_rubrique_02' => '1 rubrique', # NEW
 'info_url' => 'קישור :',
@@ -762,7 +751,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_login' => 'הסינכ',
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
 'item_mots_cles_association_articles' => 'aux articles', # NEW
-'item_mots_cles_association_breves' => 'אל המבזקים',
 'item_mots_cles_association_rubriques' => 'aux rubriques', # NEW
 'item_mots_cles_association_sites' => 'aux sites référencés ou syndiqués.', # NEW
 'item_non' => 'לא',
@@ -789,7 +777,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_non_utiliser_mots_cles' => 'Ne pas utiliser les mots-clés', # NEW
 'item_non_utiliser_syndication' => 'Ne pas utiliser la syndication automatique', # NEW
 'item_nouvel_auteur' => 'מחבר חדש',
-'item_nouvelle_breve' => 'מבזק חדש',
 'item_nouvelle_rubrique' => 'נושא חדש',
 'item_oui' => 'כן',
 'item_publier_articles' => 'Publier les articles, quelle que soit leur date de publication.', # NEW
@@ -828,8 +815,6 @@ dans une couleur qui indique leur état :', # NEW
 'lien_nom_site' => 'NOM DU SITE :', # NEW
 'lien_nouvelle_recuperation' => 'Tenter une nouvelle récupération des données', # NEW
 'lien_reponse_article' => 'Réponse à l\'article', # NEW
-'lien_reponse_breve' => 'תגובה למבזק',
-'lien_reponse_breve_2' => 'תגובה למבזק',
 'lien_reponse_rubrique' => 'Réponse à la rubrique', # NEW
 'lien_reponse_site_reference' => 'Réponse au site référencé :', # NEW
 'lien_retirer_auteur' => 'Retirer l\'auteur', # NEW
@@ -846,7 +831,6 @@ dans une couleur qui indique leur état :', # NEW
 'lien_voir_en_ligne' => 'VOIR EN LIGNE :', # NEW
 'logo_article' => 'למס מאמר',
 'logo_auteur' => 'למס מחבר',
-'logo_breve' => 'לוגו של המבזק',
 'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'למס מילה מפתח',
 'logo_rubrique' => 'למס של כותרת',
@@ -1216,7 +1200,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_groupe_mots' => 'GROUPE DE MOTS :', # NEW
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LANGUE DE L\'ARTICLE', # NEW
-'titre_langue_breve' => 'LANGUE DE LA BRÈVE', # NEW
 'titre_langue_rubrique' => 'LANGUE DE LA RUBRIQUE', # NEW
 'titre_langue_trad_article' => 'LANGUE ET TRADUCTIONS DE L\'ARTICLE', # NEW
 'titre_les_articles' => 'LES ARTICLES', # NEW
@@ -1225,7 +1208,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_mots_tous' => 'מילות מפתח',
 'titre_naviguer_dans_le_site' => 'Naviguer dans le site...', # NEW
 'titre_nouveau_groupe' => 'Nouveau groupe', # NEW
-'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 'titre_nouvelle_rubrique' => 'Nouvelle rubrique', # NEW
 'titre_numero_rubrique' => 'RUBRIQUE NUMÉRO :', # NEW
 'titre_page_admin_effacer' => 'Maintenance technique : effacer la base', # NEW
@@ -1233,7 +1215,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_articles_page' => 'מאמרים',
 'titre_page_articles_tous' => 'כל האתר',
 'titre_page_auteurs' => 'מבקרים',
-'titre_page_breves_edit' => 'Modifier la brève : « @titre@ »', # NEW
 'titre_page_calendrier' => 'Calendrier @nom_mois@ @annee@', # NEW
 'titre_page_config_contenu' => 'Configuration du site', # NEW
 'titre_page_config_fonctions' => 'Configuration du site', # NEW
