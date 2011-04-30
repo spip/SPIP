@@ -108,13 +108,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Natychmiastowa publikacja wiadomości
  (posty będą się ukazywać w momencie ich wysłania, administratorzy mogą
  je później usunąć).',
-'bouton_radio_sauvegarde_compressee' => 'zapisz w postaci skompresowanej w @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'zapisz w postaci nieskompresowanej w @fichier@',
 'bouton_radio_supprimer_petition' => 'Usuń ogłoszenia',
 'bouton_radio_syndication' => 'Syndykacja:',
 'bouton_redirection' => 'PRZEKIERUJ',
 'bouton_relancer_installation' => 'Uruchom ponownie instalację',
-'bouton_restaurer_base' => 'Przywróć bazę danych',
 'bouton_suivant' => 'Następny',
 'bouton_tenter_recuperation' => 'Próba naprawy',
 'bouton_test_proxy' => 'Test proxy',
@@ -346,7 +343,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Ostrzeżenie',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Struktura Twojej bazy danych została zainstalowana.',
-'info_base_restauration' => 'Trwa odtwarzanie bazy danych.',
 'info_bloquer' => 'zablokuj',
 'info_breves' => 'Czy na Twojej stronie działa system newsów?',
 'info_breves_03' => 'newsy',
@@ -417,7 +413,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_envoi_email_automatique' => 'Automatyczna wysyłka maili',
 'info_envoi_forum' => 'Wysyłka forum do autorów artykułów',
 'info_envoyer_maintenant' => 'Wyślij teraz',
-'info_erreur_restauration' => 'Błąd odtwarzania : plik nie istnieje.',
 'info_etape_suivante' => 'Przejdź do następnego kroku',
 'info_etape_suivante_1' => 'Możesz przejść do następnego kroku.',
 'info_etape_suivante_2' => 'Możesz przejść do następnego kroku.',
@@ -641,8 +636,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Przekierowanie.</b> Ten artykuł odsyła do strony:',
 'info_reserve_admin' => 'Tylko administratorzy mogą zmienić ten adres.',
-'info_restauration_sauvegarde' => 'odtworzenie zapisanego pliku @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Ograniczenie zarządzaniem rubryką :',
 'info_resultat_recherche' => 'Wyniki wyszukiwania:',
 'info_rubriques' => 'Działy',
@@ -651,29 +644,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_rubriques_trouvees' => 'Odnalezione działy',
 'info_rubriques_trouvees_dans_texte' => 'Odnalezione działy (w tekście)',
 'info_sans_titre' => 'Bez tytułu',
-'info_sauvegarde' => 'Backup',
-'info_sauvegarde_articles' => 'Backup artykułów',
-'info_sauvegarde_articles_sites_ref' => 'Zapisz artykuły ze zlinkowanych stron',
-'info_sauvegarde_auteurs' => 'Backup autorów',
-'info_sauvegarde_breves' => 'Backup newsów',
-'info_sauvegarde_documents' => 'Backup dokumentów',
-'info_sauvegarde_echouee' => 'Jeśli zapis się nie powiódł («Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'Backup forum',
-'info_sauvegarde_groupe_mots' => 'Backup grup słów kluczowych',
-'info_sauvegarde_messages' => 'Backup wiadomości',
-'info_sauvegarde_mots_cles' => 'Backup słów kluczowych',
-'info_sauvegarde_petitions' => 'Zapisz ogłoszenia',
-'info_sauvegarde_refers' => 'Zapisz odnośniki',
-'info_sauvegarde_reussi_01' => 'Backup zakończył się pomyślnie.',
-'info_sauvegarde_reussi_02' => '<Baza danych została zapisana w @archive@. Możesz',
-'info_sauvegarde_reussi_03' => 'powrót do zarządzania',
-'info_sauvegarde_reussi_04' => 'Twojej strony.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'Kopia bezpieczeństwa działów',
-'info_sauvegarde_signatures' => 'Zapisz podpisy petycji',
-'info_sauvegarde_sites_references' => 'Zapisz zlinkowane strony',
-'info_sauvegarde_type_documents' => 'Backup typów dokumentów',
-'info_sauvegarde_visites' => 'Backup odwiedzin',
 'info_selection_chemin_acces' => '<b>Wybierz</b> poniżej ścieżkę dostępu w katalogu:',
 'info_selection_un_seul_mot_cle' => 'Możesz wybrać <b>tylko jedno słowo kluczowe</b> naraz w tej grupie.',
 'info_signatures' => 'podpisy',
@@ -997,9 +967,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Dokonać połączenia istniejącej bazy danych z backupem',
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Ewentualnie, URL strony oryginalnej :',
 'statut_admin_restreint' => '(admin z ograniczeniami)',
 'syndic_choix_moderation' => 'Co zrobić z linkami, które pochodzą z tego serwisu ?',
 'syndic_choix_oublier' => 'Co zrobić z linkami, których nie ma już w pliku syndykacji?',
@@ -1025,12 +992,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 włącznie z <i>wszystkimi</i> parametrami dostępu dla redaktorów i administartorów. Po jej zastosowaniu powinieneś
 zreinstalować SPIP w celu utworzenia nowej bazy danych i dostępu pierwszego administratora.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Ta opcja pozwala Ci zapisać zawartość bazy danych w pliku, który zostanie zachowany w katalogu @dossier@. Pamiętaj także o skopiowaniu całego katalogu @img@, który zawiera obrazki i dokumenty używane w artykułach i działach.',
-'texte_admin_tech_02' => 'Uwaga: tą kopię bezpieczeństwa będzie można odtworzyć
- TYLKO I WYŁĄCZNIE w serwisie opartym na tej samej wersji SPIP. Nie wolno  "oprózniać bazy danych" sądząc, że po zaktualizowaniu SPIP będzie można odtworzyć bazę z backupu. Więcej informacji w <a href="@spipnet@">dokumentacji SPIP</a>.', # MODIF
-'texte_admin_tech_03' => 'Możesz wybrać wykonanie kopii bezpieczeńśtwa pod postacią skompresowaną, w celu
- przyspieszenia ściągania pliku lub zapisywania na serwerze, i zarazem oszczędności przestrzeni dyskowej.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Jeśli Twój katalog jest zainstalowany na tym samym komputerze co strona internetowa, chodzi zapewne o «localhost».)',
 'texte_ajout_auteur' => 'Następujący autor został dodany do artykułu:',
 'texte_annuaire_ldap_1' => 'Jeśli masz dostęp do katalogu (LDAP), możesz zniego skorzystać do automatycznego importu użytkowników SPIP.  ',
@@ -1176,15 +1137,6 @@ odświeżyć tylko jedną stronę, zrób to z obszaru publicznego, używając pr
  Możesz spróbować naprawić je tutaj ; jeśli jednak nie powiedzie się taka operacja,
   zachcowaj kopię wyświetlanego komunikatu, ponieważ może on zawierać wskazówki w czym tkwi poroblem.
 <p>  Jeśli problem będzie się pojawiał często skontaktuj się z administratorem Twojego serwera.', # MODIF
-'texte_restaurer_base' => 'Odtwórz zawartość kopii bezpieczeństwa bazy',
-'texte_restaurer_sauvegarde' => 'Ta opcja pozwala Ci odtworzyć poprzednią kopię bezpieczeństwa
-  bazy danych. Aby móc to uczynić plik - kopia bezpieczeństwa powienien być
-  umieszczony w katalogu @dossier@.
-  Bądź ostrożny korzystając z tej funkcji : <b> modyfikacje i ewentualne straty, są
-  nieodwracalne.</b>',
-'texte_sauvegarde' => 'Backup zawartości bazy danych',
-'texte_sauvegarde_base' => 'Backup bazy danych',
-'texte_sauvegarde_compressee' => 'Backup zostanie zrobiony w nieskompresowanym pliku @fichier@.',
 'texte_selection_langue_principale' => 'Możesz poniżej wybrać « główny język » serwisu. Ten wybór nie zmusza Cię - na szczęście ! - do pisania artykułów w wybranym języku, ale pozwala określić :
  <ul><li> domyślny format dat na stronach publicznych ;</li>
  <li> rodzaj kodowania tekstu, który ma używać SPIP ;</li>

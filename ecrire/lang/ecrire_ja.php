@@ -105,13 +105,10 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'bouton_radio_petition_activee' => '署名機能を使用中',
 'bouton_radio_publication_immediate' => '投稿と同時に表示
 （投稿すると瞬時に表示するため、管理者は投稿を削除することは可能ですが投稿後になるでしょう）。',
-'bouton_radio_sauvegarde_compressee' => '圧縮して、@fichier@に保存する',
-'bouton_radio_sauvegarde_non_compressee' => '未圧縮で、@fichier@に保存する',
 'bouton_radio_supprimer_petition' => '署名機能を無効にする',
 'bouton_radio_syndication' => '供給（シンジケート）:',
 'bouton_redirection' => 'リダイレクト',
 'bouton_relancer_installation' => 'インストレーションを再起動',
-'bouton_restaurer_base' => 'データベースを復元',
 'bouton_suivant' => '次',
 'bouton_tenter_recuperation' => '修復を試みる',
 'bouton_test_proxy' => 'プロキシーをテスト',
@@ -343,7 +340,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_avertissement' => '警告',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'あなたのデータベースの中に構造物がインストールされました。',
-'info_base_restauration' => '進行中のデータベースの修復。',
 'info_bloquer' => 'ブロック',
 'info_breves' => 'あなたのサイトで、ニュース・システムをお使いですか？',
 'info_breves_03' => 'ニュース',
@@ -412,7 +408,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_envoi_email_automatique' => 'メールを自動送信',
 'info_envoi_forum' => '記事の著者たちに掲示板を送る',
 'info_envoyer_maintenant' => '今送る',
-'info_erreur_restauration' => '復元エラー：ファイルが見つかりません。',
 'info_etape_suivante' => '次のステップに進む',
 'info_etape_suivante_1' => '次のステップに移ることが出来ます。',
 'info_etape_suivante_2' => '次のステップに移ることが出来ます。',
@@ -614,8 +609,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>リダイレクション。</b> この記事はそのページを参照します:',
 'info_reserve_admin' => '管理者のみがこのアドレスを変更することが出来る。',
-'info_restauration_sauvegarde' => 'バックアップ@archive@の復元', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => '管理できるセクションの制限:',
 'info_resultat_recherche' => '検索結果:',
 'info_rubriques' => 'セクション',
@@ -624,29 +617,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_rubriques_trouvees' => '見つかったセクション',
 'info_rubriques_trouvees_dans_texte' => '見つかったセクション（文中）',
 'info_sans_titre' => '無名',
-'info_sauvegarde' => 'バックアップ',
-'info_sauvegarde_articles' => '記事類をバックアップ',
-'info_sauvegarde_articles_sites_ref' => '参照されたサイトの記事をバックアップ',
-'info_sauvegarde_auteurs' => '著者達をバックアップ',
-'info_sauvegarde_breves' => 'ニュース類をバックアップ',
-'info_sauvegarde_documents' => 'ドキュメント類をバックアップ',
-'info_sauvegarde_echouee' => 'もしバックアップが失敗するなら («最大実行時間を超えた»),',
-'info_sauvegarde_forums' => '掲示板類のバックアップ',
-'info_sauvegarde_groupe_mots' => 'グループキーワード類のバックアップ',
-'info_sauvegarde_messages' => 'メッセージ類のバックアップ',
-'info_sauvegarde_mots_cles' => 'キーワード類のバックアップ',
-'info_sauvegarde_petitions' => '署名類のバックアップ',
-'info_sauvegarde_refers' => '参照類のバックアップ',
-'info_sauvegarde_reussi_01' => 'バックアップは成功しました。',
-'info_sauvegarde_reussi_02' => 'データベースは、@archive@に保存されました。あなたは出来ます',
-'info_sauvegarde_reussi_03' => '管理画面へ戻る',
-'info_sauvegarde_reussi_04' => 'of あなたのサイト。',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'セクション類をバックアップ',
-'info_sauvegarde_signatures' => '署名機能の署名類をバックアップ',
-'info_sauvegarde_sites_references' => '参照されたサイト類をバックアップ',
-'info_sauvegarde_type_documents' => 'ドキュメントのタイプをバックアップ',
-'info_sauvegarde_visites' => '訪問者類をバックアップ',
 'info_selection_chemin_acces' => '<b>下を選択</b> ディレクトリのアクセスパス:',
 'info_selection_un_seul_mot_cle' => 'あなたはこのグループ内で、１度に<b>１つのキーワードだけ</b>選ぶことができます。',
 'info_signatures' => '署名',
@@ -971,9 +941,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(限定された管理者)',
 'syndic_choix_moderation' => 'このサイトからの次のリンクもするべきですか？',
 'syndic_choix_oublier' => '供給(Syndication)ファイルのもう存在しないリンクもしたほうがいいですか？',
@@ -997,10 +964,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_acces_ldap_anonyme_1' => 'いくらかのLDAPサーバーはどんな匿名でのアクセスも許しません。こういう場合、あなたはこの後ディレクトリの情報を検索できる最初のIDを入力する必要があります。しかしながら、次のところはほとんどの場合は空欄のままで大丈夫です。',
 'texte_admin_effacer_01' => 'この手順はデータベースの<i>すべての</i> 内容を削除します。<i>すべての</i> エディター達や管理者のアクセスの為の設定も含みます。実行した後、新しいデータベースを作り、管理者が最初にアクセスするため、SPIPを再インストールする必要があります。',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'このオプションはデータベースの内容を@dossier@ディレクトリに用意してあるファイルに保存することができます。記事やセクションで使った画像やドキュメントを含んだ<i>IMG/</i>全体、ディレクトリを忘れずに保存しておいてください。',
-'texte_admin_tech_02' => '警告：このバックアップは、同じバージョンのSPIPがインストールしてある場合のみ復元できます。もちろんデータベースを空にしたり、アップグレード後にバックアップを復元してはいけません。さらに詳しいことは<a href="@spipnet@">SPIP documentation</a>を参照してください。', # MODIF
-'texte_admin_tech_03' => 'ファイルを圧縮して保存するか未圧縮で保存するか決められます。圧縮すると、あなたのマシンかバックアップサーバーへの転送は早くなり、大きさが若干小さくなります。',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '( もしあなたのディレクトリがあなたのWebサイトと同じマシンにインストールされているなら、それはおそらく«localhost»。）',
 'texte_ajout_auteur' => '次の著者は記事に加筆した:',
 'texte_annuaire_ldap_1' => 'もしあなたがディレクトリ（LDAP）にアクセスできるのなら、SPIPに自動的にユーザーを輸入（インポート）することが可能です。',
@@ -1099,11 +1062,6 @@ demande plus de puissance au serveur.', # NEW
 'texte_referencement_automatique' => '<b>サイトの自動参照</b><br />下にあなたの望むURLか、そのbackendファイルのアドレスを入力することによってすばやくウェブサイトを参照することができます。SPIPは自動的にそのサイトに関する情報を拾ってくるでしょう（タイトル、記述...）。',
 'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>いくらかのSQLの要求（クエリー）がシステム的に何も理由を表さず失敗したとき、データベース自体が壊れている可能性があります。</b><p>SQLは偶然壊れたとき、また使えるようにテーブルの機能を修復します。ここで、あなたはこの修復に挑戦できます; 失敗した場合、あなたは画面の複製をとっておくべきです。何が悪かったのかが書いてあるかもしれません。</p><p>もし問題が残っているなら、あなたのホストと連絡をとってください。</p>', # MODIF
-'texte_restaurer_base' => 'データベースのバックアップの内容を復元',
-'texte_restaurer_sauvegarde' => 'このオプションで前にバックアップしたデータベースを復元することが可能です。復元するには、バックアップ用のファイルが@dossier@ディレクトリに保存されていなければなりません。必ずこの機能は注意して使ってください：<b>どんな潜在的な変更や損失も撤回することができません。</b>',
-'texte_sauvegarde' => 'データベースの内容をバックアップ',
-'texte_sauvegarde_base' => 'データベースをバックアップ',
-'texte_sauvegarde_compressee' => '@fichier@ に圧縮してない状態でバックアップされます。',
 'texte_selection_langue_principale' => 'あなたはサイトの"主な言語"を下で選択できます。運良く、この選択によって、選択した言語でしか記事が書けないということはありませんが、次を決定します
 
 <ul><li> 公開されているサイトの日付の標準な書き方</li>

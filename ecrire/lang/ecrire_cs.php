@@ -107,13 +107,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Okamžité zveřejňování zpráv
  (příspěvky se zobrazují okamžitě,
  správci je mohou odstranit dodatečně).',
-'bouton_radio_sauvegarde_compressee' => 'uložit komprimovaně v  @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'uložit nekomprimovaně v @fichier@',
 'bouton_radio_supprimer_petition' => 'Odstranit petici',
 'bouton_radio_syndication' => 'Syndikace:',
 'bouton_redirection' => 'PŘESMĚROVÁNÍ',
 'bouton_relancer_installation' => 'Znovu spustit instalaci',
-'bouton_restaurer_base' => 'Obnovit databázi',
 'bouton_suivant' => 'Další',
 'bouton_tenter_recuperation' => 'Zkusit opravu',
 'bouton_test_proxy' => 'Zkusit proxy',
@@ -347,7 +344,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Upozornění',
 'info_barre_outils' => 'with its toolbar?', # NEW
 'info_base_installee' => 'Struktura vaší databáze byla nainstalována.',
-'info_base_restauration' => 'Databáze se obnovuje.',
 'info_bloquer' => 'zablokovat',
 'info_breves' => 'Používá váš web novinky?',
 'info_breves_03' => 'novinky',
@@ -418,7 +414,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_envoi_email_automatique' => 'Automatické zasílání emailů',
 'info_envoi_forum' => 'Zasílání diskusních skupin autorům článků',
 'info_envoyer_maintenant' => 'Odeslat nyní',
-'info_erreur_restauration' => 'Chyba při obnově: soubor neexistuje.',
 'info_etape_suivante' => 'Přejít k dalšímu kroku',
 'info_etape_suivante_1' => 'Můžete přejít k dalšímu kroku.',
 'info_etape_suivante_2' => 'Můžete přejít k dalšímu kroku.',
@@ -641,8 +636,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Přesměrování.</b> Tento článek odkazuje na stránku:', # MODIF
 'info_reserve_admin' => 'Pouze administrátoři smějí modifikovat tuto adresu.',
-'info_restauration_sauvegarde' => 'obnova uložení @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Inserting @archive@ in the database', # NEW
 'info_restreindre_rubrique' => 'Omezit správu sekce :',
 'info_resultat_recherche' => 'Výsledky vyhledávání:',
 'info_rubriques' => 'Sekce',
@@ -651,29 +644,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_rubriques_trouvees' => 'Nalezené sekce',
 'info_rubriques_trouvees_dans_texte' => 'Nalezené sekce(v textu)',
 'info_sans_titre' => 'Bez názvu',
-'info_sauvegarde' => 'Uložení',
-'info_sauvegarde_articles' => 'Uložit články',
-'info_sauvegarde_articles_sites_ref' => 'Uložit články z webu, na který vede odkaz',
-'info_sauvegarde_auteurs' => 'Uložit autory',
-'info_sauvegarde_breves' => 'Uložit novinky',
-'info_sauvegarde_documents' => 'Uložit dokumenty',
-'info_sauvegarde_echouee' => 'Pokud se uložení nezdařilo («Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'Uložit diskusní skupiny',
-'info_sauvegarde_groupe_mots' => 'Uložit skupiny slov',
-'info_sauvegarde_messages' => 'Uložit zprávy',
-'info_sauvegarde_mots_cles' => 'Uložit klíčová slova',
-'info_sauvegarde_petitions' => 'Uložit petice',
-'info_sauvegarde_refers' => 'Uložit osoby, které zadali odkazy',
-'info_sauvegarde_reussi_01' => 'Uložení proběhlo úspěšně.',
-'info_sauvegarde_reussi_02' => 'Databáze byla uložena do @archive@. Můžete',
-'info_sauvegarde_reussi_03' => 'se vrátit ke správě',
-'info_sauvegarde_reussi_04' => 'vašeho webu.',
-'info_sauvegarde_rubrique_reussi' => 'The tables of the @titre@ section have been saved to @archive@. You can', # NEW
-'info_sauvegarde_rubriques' => 'Uložit sekce',
-'info_sauvegarde_signatures' => 'Uložit podpisy pod peticemi',
-'info_sauvegarde_sites_references' => 'Uložit weby na něž vedou odkazy',
-'info_sauvegarde_type_documents' => 'Uložit typy dokumentů',
-'info_sauvegarde_visites' => 'Uložit návštěvy',
 'info_selection_chemin_acces' => '<b>Zadejte</b> cestu k adresáři:',
 'info_selection_un_seul_mot_cle' => 'V této skupině může být najednou vybráno <b>pouze jedno klíčové slovo à</b>.',
 'info_signatures' => 'podpisy',
@@ -998,9 +968,6 @@ ukazuje jejich stav:',
 
 // S
 'sans_heure' => 'time unspecified', # NEW
-'sauvegarde_fusionner' => 'Merge the current database with the backup', # NEW
-'sauvegarde_fusionner_depublier' => 'Unpublish the merged objects', # NEW
-'sauvegarde_url_origine' => 'If necessary, the URL of the source site:', # NEW
 'statut_admin_restreint' => '(admin - vyhrazeno)',
 'syndic_choix_moderation' => 'Co se má udělat s budoucími odkazy z tohoto webu?',
 'syndic_choix_oublier' => 'Co s odkazy, které už nejsou v syndikačním souboru?',
@@ -1026,11 +993,6 @@ ukazuje jejich stav:',
 včetně <i>veškerých</i> přístupů redaktorů a správců. Pokud jej spustíte, musíte následně znovu nainstalovat
 systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.',
 'texte_admin_effacer_stats' => 'This command deletes all data linked to the statistics of visits to the site, including the relative popularity of articles.', # NEW
-'texte_admin_tech_01' => 'Tato volba je určena k uložení obsahu databáze do souboru, jenž bude uložen v adresáři @dossier@. Nezapomeňte zálohovat i obsah celého adresáře @img@, ve kterém jsou uloženy obrázky a dokumenty použité v článcích a sekcích.',
-'texte_admin_tech_02' => 'Pozor! Takto uložené soubory lze obnovit POUZE na webu, kde je nainstalována stejná verze systému SPIP. V žádném případě "nevyprázdňujte databázi" s tím, že obnovíte zálohu po aktualizaci... Viz <a href="@spipnet@">la dokumentace k systému SPIP</a>.', # MODIF
-'texte_admin_tech_03' => 'Můžete se rozhodnout o uložení komprimovaného souboru. Tím zkrátíte
- dobu potřebnou k jeho přenosu u vás nebo na serveru kde máte zálohy a ušetříte místo na disku.',
-'texte_admin_tech_04' => 'In order to merge with another database, you can restrict the backup to one section: ', # NEW
 'texte_adresse_annuaire_1' => '(Máte-li adresář uložen na stejném počítači jako tento web, jedná se nejspíše o "localhost".)',
 'texte_ajout_auteur' => 'K článku byl doplněn tento autor:',
 'texte_annuaire_ldap_1' => 'Máte-li přístup k adresáři (LDAP), můžete jej použít k automatickému importu uživatelů do systému SPIP.',
@@ -1171,14 +1133,6 @@ přejděte raději do veřejné části a použijte tlačítko "znovu vypočíta
   Může v něm být uvedena příčina selhání...</p><p>
   Jestliže problém nejde vyřešit, kontaktujte
   svého poskytovatele webového prostoru.</p>', # MODIF
-'texte_restaurer_base' => 'Obnovit obsah ze zálohy databáze',
-'texte_restaurer_sauvegarde' => 'Tato volba slouží k obnově dříve pořízené zálohy databáze.
-  Záložní soubor musí být v adresáři @dossier@.
-  Při použití této funkce postupujte opatrně. <b>Změny i případné ztráty
-  jsou totiž nevratné.</b>',
-'texte_sauvegarde' => 'Zálohovat obsah databáze',
-'texte_sauvegarde_base' => 'Uložit databázi',
-'texte_sauvegarde_compressee' => 'Záloha bude uložena do nekomprimovaného souboru @fichier@.',
 'texte_selection_langue_principale' => 'Níže můžete vybrat "hlavní jazyk" webu. Tato volba vás neomezuje na psaní článků pouze v tomto jazyce, ale umožňuje určit:
  <ul><li> standardní formát dat veřejného webu;</li>
  <li> podstatu textového procesoru, který systém SPIP použije při zadávání textů;</li>

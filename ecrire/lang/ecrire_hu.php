@@ -105,13 +105,10 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'bouton_radio_petition_activee' => 'Aláírásgyűjtés aktiválása',
 'bouton_radio_publication_immediate' => 'Üzenetek azonnali publikálása
  (a küldött anyagok már küldéskor megjelennek, az adminisztrátorok későb tudják törölni).',
-'bouton_radio_sauvegarde_compressee' => 'tömörített mentés a következön: @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'nem tömörített mentés a következőn: @fichier@',
 'bouton_radio_supprimer_petition' => 'Törölni az aláírásgyűjtést',
 'bouton_radio_syndication' => 'Szindikálás :',
 'bouton_redirection' => 'ÁTIRÁNYÍTÁS',
 'bouton_relancer_installation' => 'Telepítés újrakezdése',
-'bouton_restaurer_base' => 'Adatbázis resztaurálása',
 'bouton_suivant' => 'Következő',
 'bouton_tenter_recuperation' => 'Kisérletezni egy javítást',
 'bouton_test_proxy' => 'Probálni a proxyt',
@@ -343,7 +340,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_avertissement' => 'Figyelmeztetés',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Az Ön adatbázisának struktúrája telepítve van.',
-'info_base_restauration' => 'Az adatbázis resztaurálás alatt van.',
 'info_bloquer' => 'blokkol',
 'info_breves' => 'Az Ön honlapja használja-e a hírek rendszerét ?',
 'info_breves_03' => 'hírek',
@@ -414,7 +410,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_envoi_email_automatique' => 'Automatikus email küldés',
 'info_envoi_forum' => 'Fórumok küldése a cikkek szerzőinek',
 'info_envoyer_maintenant' => 'Azonnali küldés',
-'info_erreur_restauration' => 'Resztaurálási hiba : nem létező fájl.',
 'info_etape_suivante' => 'Következő lépés',
 'info_etape_suivante_1' => 'Léphet a következőre.',
 'info_etape_suivante_2' => 'Léphet a következőre.',
@@ -619,8 +614,6 @@ a felhasználók automatikus emailt kapnak,
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Átirányítás.</b> Ez a cikk erre az oldalra hivatkozik:', # MODIF
 'info_reserve_admin' => 'Csak az adminisztrátork módosíthatják ezt a címet.',
-'info_restauration_sauvegarde' => 'A @archive@ nevű mentés resztaurálása', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Korlátozni a kezelést a következő rubrikára :',
 'info_resultat_recherche' => 'Keresés eredményei :',
 'info_rubriques' => 'Rovatok',
@@ -629,29 +622,6 @@ a felhasználók automatikus emailt kapnak,
 'info_rubriques_trouvees' => 'Talált rovatok',
 'info_rubriques_trouvees_dans_texte' => 'Talált rovatok (a szövegben)',
 'info_sans_titre' => 'Cím nélkül',
-'info_sauvegarde' => 'Mentés',
-'info_sauvegarde_articles' => 'A cikkek mentése',
-'info_sauvegarde_articles_sites_ref' => 'A felvett honlapok cikkeinek mentése',
-'info_sauvegarde_auteurs' => 'A szerzők mentése',
-'info_sauvegarde_breves' => 'A hírek mentése',
-'info_sauvegarde_documents' => 'A dokumentumok mentése',
-'info_sauvegarde_echouee' => 'Ha sikertelen a mentés («Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'A fórumok mentése',
-'info_sauvegarde_groupe_mots' => 'A kulcsszó csoportok mentése',
-'info_sauvegarde_messages' => 'Az üzenetek mentése',
-'info_sauvegarde_mots_cles' => 'A kulcssavak mentése',
-'info_sauvegarde_petitions' => 'Az aláírásgyűjtések mentése',
-'info_sauvegarde_refers' => 'A "referers" mentése',
-'info_sauvegarde_reussi_01' => 'Mentés sikeres.',
-'info_sauvegarde_reussi_02' => 'Az adatbázis mentve lett a @archive@ nevű mappába. Lehet',
-'info_sauvegarde_reussi_03' => 'visszatérni',
-'info_sauvegarde_reussi_04' => 'honlapja üzemeltetéséhez.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'A rovatok mentése',
-'info_sauvegarde_signatures' => 'A peticiók aláírásainak mentése',
-'info_sauvegarde_sites_references' => 'A felvett honlapok mentése',
-'info_sauvegarde_type_documents' => 'A dokumentumok tipusainak mentése',
-'info_sauvegarde_visites' => 'A látógatások mentése',
 'info_selection_chemin_acces' => '<b>Válassza</b> lejjebb az elérési utat a címtárban :',
 'info_selection_un_seul_mot_cle' => '<b>Csak egy kulcsszó</b> választható egyszerre abban a csoportban.',
 'info_signatures' => 'aláírások',
@@ -976,9 +946,6 @@ ami állapotát jelzi :',
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(korlátolt admin)',
 'syndic_choix_moderation' => 'Mi legyen azokkal a linkekkel, melyek jönnek erről a honlapról ?',
 'syndic_choix_oublier' => 'Mi legyen azekkel a linkekkel, melyek nem szerepelnek a szindikálási (RSS) fájlban ?',
@@ -1004,10 +971,6 @@ ami állapotát jelzi :',
 bele értve az <i>összes</i> szerzői, illetve adminisztrátori hozzáférést. Miután futtata, akkor indítani kell az
 SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy első adminisztrátori hozzáférést.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Ez az opció lehetővé teszi az adatbázis tartalmának a mentését egy fájlban, ami az @dossier@ mappában található. Ne felejtse el megmenteni az @img@ mappa teljes tartalmát, ami a cikkekben és a rovatokban használt dokumentumokat, illetve képeket tartalmazza.',
-'texte_admin_tech_02' => 'Vigyázat: ezt a mentést lehet resztaurálni CSAK egy azonos verziójű SPIP honlapon. Tehát nem szabad  « üríteni az adatbázis » abban a reményben, hogy újratelepítheti a mentést egy verziói fejlesztés után... Érdeklődjön <a href="@spipnet@">az SPIP dokumentációja (Fr)</a>.', # MODIF
-'texte_admin_tech_03' => 'Tömörített formában is lehet menteni a fájlt, a rövidebb letöltési idő és a kisebb foglalt hely érdekében.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Ha az Ön címtára ugyanazon a gépen van telepítve, mint ez a honlap, akkor valószínűleg «localhost»-ról van szó.)',
 'texte_ajout_auteur' => 'A következő szerző lett hozzátéve a cikkhez :',
 'texte_annuaire_ldap_1' => 'A címtárhoz van hozzáférése (LDAP), akkor ezt az SPIP-be való a felhasználók automatikus importálására használhatja.',
@@ -1139,13 +1102,6 @@ szeretne frissíteni, akkor menjen inkább a nyilvános részre, és kattintson 
   Kudarc esetén, tartson másolatot a képernyőről,
   ami talán nyomokat tartalmaz...</p><p>
  Ha a probléma fennáll, keresse a szolgáltatóját.</p>', # MODIF
-'texte_restaurer_base' => 'Egy megmentett adatbázis tartalmának resztaurálása',
-'texte_restaurer_sauvegarde' => 'Ez az opció lehetővé teszi egy már megmentett adatbázis resztaurálását.
-  Azért a mentést tartalmazó fájlt kell helyezni a @dossier@ mappába.
-  Legyen óvatos ezzel a lehetőséggel : <b>a módosítások, esetleges vesztések visszavonhatatlanok.</b>',
-'texte_sauvegarde' => 'Az adatbázis tartalmának mentése',
-'texte_sauvegarde_base' => 'Adatbázis mentése',
-'texte_sauvegarde_compressee' => 'A mentés a nem tömörített @fichier@ n. fájlba fog törtenni.',
 'texte_selection_langue_principale' => 'Lejjebb kijelölhető a honlap « fő nyelve ». Ez a választás - szerencsére ! - nem kötelez írni cikkeket a választott nyelven, de meghatározhatja :
  <ul><li> a nyilvános részen az alapértelmezett dátumformátumot ;</li>
  <li> milyen nyomdai motort használhasson az SPIP a szövegekre ;</li>

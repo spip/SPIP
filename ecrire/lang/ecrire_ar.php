@@ -108,13 +108,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'نشر فوري للمشاركات
 (ستظهر المشاركات حال إرسالها، ويمكن للمدراء
 حذفها وقتذاك).',
-'bouton_radio_sauvegarde_compressee' => 'حفظ بملف مضغوط في @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'حفظ بملف غير مضغوط في @fichier@',
 'bouton_radio_supprimer_petition' => 'حذف العريضة',
 'bouton_radio_syndication' => 'ترخيص:',
 'bouton_redirection' => 'إعادة توجيه',
 'bouton_relancer_installation' => 'إعادة إطلاق عملية التثبيت',
-'bouton_restaurer_base' => 'إسترجاع القاعدة',
 'bouton_suivant' => 'التالي',
 'bouton_tenter_recuperation' => 'محاولة إصلاح',
 'bouton_test_proxy' => 'اختبار الجهاز الوكيل',
@@ -349,7 +346,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'تحذير',
 'info_barre_outils' => 'مع شريط أدواته؟',
 'info_base_installee' => '<b>تم تثبيت بنية قاعدة البيانات. ',
-'info_base_restauration' => 'القاعدة قيد الاسترجاع',
 'info_bloquer' => 'إيقاف',
 'info_breves' => 'هل يستخدم موقعك نظام الأخبار؟',
 'info_breves_03' => 'الأخبار',
@@ -420,7 +416,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_envoi_email_automatique' => 'إرسال البريد الآلي',
 'info_envoi_forum' => 'إرسال المنتديات الى مؤلفي المقالات',
 'info_envoyer_maintenant' => 'إرسال الآن',
-'info_erreur_restauration' => 'خطأ إسترجاع: ملف غير موجود.',
 'info_etape_suivante' => 'إنتقل الى الخطوة التالية',
 'info_etape_suivante_1' => 'يمكنك الانتقال الى الخطوة التالية.',
 'info_etape_suivante_2' => 'يمكنك الانتقال الى الخطوة التالية.',
@@ -644,8 +639,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_remplacer_mot' => 'استبدال "@titre@"',
 'info_renvoi_article' => '<b>إعادة توجيه.</b> هذا المقال يحيل الى الصفحة: ',
 'info_reserve_admin' => 'المدراء وحدهم يمكنهم تغيير هذا العنوان.',
-'info_restauration_sauvegarde' => 'إسترجاع النسخة الاحتياطية @archive@',
-'info_restauration_sauvegarde_insert' => 'إدراج @archive@ في القاعدة',
 'info_restreindre_rubrique' => 'حصر الإدارة في القسم:',
 'info_resultat_recherche' => 'نتائج البحث:',
 'info_rubriques' => 'الأقسام',
@@ -654,29 +647,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_rubriques_trouvees' => 'الأقسام التي عثر عليها',
 'info_rubriques_trouvees_dans_texte' => 'الأقسام التي عثر عليها (في المادة)',
 'info_sans_titre' => 'بدون عنوان',
-'info_sauvegarde' => 'نسخة إحتياطية',
-'info_sauvegarde_articles' => 'نسخ إحتياطي للمقالات',
-'info_sauvegarde_articles_sites_ref' => 'نسخ إحتياطي لمقالات المواقع المبوبة',
-'info_sauvegarde_auteurs' => 'نسخ إحتياطي للمؤلفين',
-'info_sauvegarde_breves' => 'نسخ إحتياطي للأخبار',
-'info_sauvegarde_documents' => 'نسخ إحتياطي للمنتديات',
-'info_sauvegarde_echouee' => 'اذا فشل النسخ الاحتياطي («Maximum execution time exceeded»)، ',
-'info_sauvegarde_forums' => 'نسخ إحتياطي للمنتديات',
-'info_sauvegarde_groupe_mots' => 'نسخ إحتياطي لمجموعات المفاتيح',
-'info_sauvegarde_messages' => 'نسخ إحتياطي للرسائل',
-'info_sauvegarde_mots_cles' => 'نسخ إحتياطي للمفاتيح',
-'info_sauvegarde_petitions' => 'نسخ إحتياطي للعرائض',
-'info_sauvegarde_refers' => 'نسخ إحتياطي لمواقع المصدر',
-'info_sauvegarde_reussi_01' => 'نجح النسخ الاحتياطي.',
-'info_sauvegarde_reussi_02' => 'تم حفظ قاعدة البيانات في @archive@. يمكنك',
-'info_sauvegarde_reussi_03' => 'العودة الى إدارة',
-'info_sauvegarde_reussi_04' => 'موقعك.',
-'info_sauvegarde_rubrique_reussi' => 'ان حفظ جداول القسم @titre@ في @archive@. يمكنك',
-'info_sauvegarde_rubriques' => 'نسخ إحتياطي للأقسام',
-'info_sauvegarde_signatures' => 'نسخ إحتياطي لتوقيعات العرائض',
-'info_sauvegarde_sites_references' => 'نسخ إحتياطي للمواقع المبوبة',
-'info_sauvegarde_type_documents' => 'نسخ إحتياطي لأنواع المستندات',
-'info_sauvegarde_visites' => 'نسخ إحتياطي للزيارات',
 'info_selection_chemin_acces' => '<b>حدد</b> أدناه مسار الدخول في الدليل:',
 'info_selection_un_seul_mot_cle' => 'يمكنك تحديد <b>مفتاح واحد فقط</b>  في وقت واحد من هذه المجموعة.',
 'info_signatures' => 'التوقيعات',
@@ -1001,9 +971,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 'sans_heure' => 'بدون توقيت الساعات',
-'sauvegarde_fusionner' => 'دمج القاعدة الحالية والنسخة الاحتياطية',
-'sauvegarde_fusionner_depublier' => 'الغاء نشر العناصر المدمجة',
-'sauvegarde_url_origine' => 'عنوان URL للموقع المصدر، اذا امكن:',
 'statut_admin_restreint' => ')إدارة محدودة(',
 'syndic_choix_moderation' => 'ماذا تريد ان تفعل بالوصلات المقبلة القادمة من هذا الموقع؟',
 'syndic_choix_oublier' => 'ماذا تريد ان تفعل بالوصلات التي لم تعد واردة في ملف الترخيص؟',
@@ -1029,11 +996,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 بما في ذلك كل  وسائط الوصول للمحررين والمدراء. بعد تنفيذه، يتحتم عليك
 إعادة تثبيت SPIP لإعادة إنتاج قاعدة جديدة ووسيط دخول أول مدير.',
 'texte_admin_effacer_stats' => 'هذا الأمر يحذف كل البيانات المرتبطة بإحصاءات  زيارات الموقع، بما فيها شعبية المقالات.',
-'texte_admin_tech_01' => 'يتيح لك هذا الخيار حفظمحتوى قاعدة البيانات في ملف يتم تخزينه في دليل @dossier@. لا تنسى أيضاً أن تسترد كامل دليل @img@، الذي يحتوي على الصور والمستندات المستخدمة في المقالات والأقسام.',
-'texte_admin_tech_02' => 'تحذير: لا يمكن إسترجاع هذه النسخة الاحتياطية إلا من خلال موقع تم تثبيته بالإصدار نفسه من SPIP . بالاخص لا يجب «تفريغ القاعدة» مع الامل بإعادة تثبيتها بعد التحديث... لمزيد من المعلومات راجع <a href="@spipnet@">دليل SPIP </a> .',
-'texte_admin_tech_03' => 'يمكنك اختيار حفظ الملف بشكل مضغوط
-لتسريع نقله الى جهازك أو الى خادم إحتياطي وتوفير يعض المساحة على القرص الثابت.',
-'texte_admin_tech_04' => 'من اجل الدمج في قاعدة اخرى، يمكن اقتصار النسخة الاحتياطية على القسم:',
 'texte_adresse_annuaire_1' => 'إذا كان دليلك مثبت على الجهاز نفسه الذي يحتوي موقعك، فإنه على الأرجح «localhost»)).',
 'texte_ajout_auteur' => 'تمت إضافة المؤلف التالي الى المقال:',
 'texte_annuaire_ldap_1' => 'إذا كان لديك إمكتان وصول الى دليل LDAP، يمكنك استخدامه لجلب المستخدمين آلياً الى SPIP.',
@@ -1185,15 +1147,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 أدلة عن المشكلة...</p><p>
 إذا استمرت المشكلة إتصل
   بمضيف موقعك.</p>',
-'texte_restaurer_base' => 'إسترجاع محتوى النسخة الاحتياطية من القاعدة',
-'texte_restaurer_sauvegarde' => 'يتيح لك هذا الخيار إسترجاع نسخة إحتياطية
-سابقة من القاعدة. لتنفيذ ذلك، يجب على ملف النسخة الاحتياطية
-ان يكون قد حفظ في دليل @dossier@.
-توخى الحذر مع هذه الوظيفة: <b>اي تعديل أو فقدان في البيانات نهائي ولا يمكن
-التراجع عنه</b>.',
-'texte_sauvegarde' => 'نسخ إحتياطي لمحتوى القاعدة',
-'texte_sauvegarde_base' => 'إنشاء نسخة إحتياطية من القاعدة',
-'texte_sauvegarde_compressee' => 'سيتم حفظ النسخة الاحتياطية في ملف غير مضغوط @fichier@.',
 'texte_selection_langue_principale' => 'أدناه يمكنك تحديد «اللغة الأساسية » للموقع. لحسن الحظ لن يفرض عليك هذا الخيار تحرير مقالاتك باللغة المحددة، الا انه يحدد:
 <ul><li> تنسيق التواريخ الافتراضي في الموقع العام؛</li>
 <ul><li> طبيعة محرك الكتابة الذي يجب على SPIP استخدامه لتنسيق النصوص؛</li>

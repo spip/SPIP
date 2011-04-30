@@ -108,13 +108,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Publikasi pesan segera
  (kontribusi akan ditampilkan sesegera mungkin setelah dikirimkan, kemudian
  administrator dapat menghapusnya).',
-'bouton_radio_sauvegarde_compressee' => 'simpan dalam bentuk kompresi di @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'simpan dalam bentuk tidak terkompresi di @fichier@',
 'bouton_radio_supprimer_petition' => 'Hapus petisi',
 'bouton_radio_syndication' => 'Sindikasi:',
 'bouton_redirection' => 'MENGALIHKAN TUJUAN	',
 'bouton_relancer_installation' => 'Menjalankan instalasi kembali',
-'bouton_restaurer_base' => 'Memulihkan database',
 'bouton_suivant' => 'Selanjutnya',
 'bouton_tenter_recuperation' => 'Usaha perbaikan',
 'bouton_test_proxy' => 'Tes proxy',
@@ -346,7 +343,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Peringatan',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Struktur database anda telah diinstal.',
-'info_base_restauration' => 'Pemulihan database dalam proses.',
 'info_bloquer' => 'blok',
 'info_breves' => 'Apakah situs anda menggunakan sistem pemberitaan?',
 'info_breves_03' => 'artikel berita',
@@ -417,7 +413,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_envoi_email_automatique' => 'Pengiriman otomatis',
 'info_envoi_forum' => 'Kirim forum ke penulis artikel',
 'info_envoyer_maintenant' => 'Kirim sekarang',
-'info_erreur_restauration' => 'Kesalahan pemulihan: berkas tidak ditemukan.',
 'info_etape_suivante' => 'Lanjut ke langkah berikutnya',
 'info_etape_suivante_1' => 'Anda dapat pindah ke langkah selanjutnya.',
 'info_etape_suivante_2' => 'Anda dapat pindah ke langkah selanjutnya.',
@@ -637,8 +632,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Pengalihan tujuan.</B> Artikel ini mengarah pada halaman:',
 'info_reserve_admin' => 'Hanya administrator yang dapat memodifikasi alamat ini.',
-'info_restauration_sauvegarde' => 'memulihkan backup @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Batasi manajemen ke bagian:',
 'info_resultat_recherche' => 'Hasil-hasil pencarian:',
 'info_rubriques' => 'Bagian',
@@ -647,29 +640,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_rubriques_trouvees' => 'Bagian ditemukan',
 'info_rubriques_trouvees_dans_texte' => 'Bagian ditemukan (dalam teks)',
 'info_sans_titre' => 'Tidak berjudul',
-'info_sauvegarde' => 'Backup',
-'info_sauvegarde_articles' => 'Backup artikel',
-'info_sauvegarde_articles_sites_ref' => 'Backup artikel-artikel dari situs-situs referensi',
-'info_sauvegarde_auteurs' => 'Backup penulis',
-'info_sauvegarde_breves' => 'Backup berita',
-'info_sauvegarde_documents' => 'Backup dokumen',
-'info_sauvegarde_echouee' => 'Jika backup gagal («Waktu eksekusi maksimum terlampaui»),',
-'info_sauvegarde_forums' => 'Backup forum',
-'info_sauvegarde_groupe_mots' => 'Backup kelompok kata kunci',
-'info_sauvegarde_messages' => 'Backup pesan',
-'info_sauvegarde_mots_cles' => 'Backup kata-kata kunci',
-'info_sauvegarde_petitions' => 'Backup petisi',
-'info_sauvegarde_refers' => 'Backup pereferensi',
-'info_sauvegarde_reussi_01' => 'Backup berhasil.',
-'info_sauvegarde_reussi_02' => 'Database telah berhasil disimpan di @archive@. Anda dapat',
-'info_sauvegarde_reussi_03' => 'kembali ke manajemen',
-'info_sauvegarde_reussi_04' => 'situs anda.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'Backup Bagian',
-'info_sauvegarde_signatures' => 'Backup tanda tangan petisi',
-'info_sauvegarde_sites_references' => 'Backup situs-situs referensi',
-'info_sauvegarde_type_documents' => 'Backup tipe dokumen',
-'info_sauvegarde_visites' => 'Backup kunjungan',
 'info_selection_chemin_acces' => '<b>Pilih</b> di bawah path akses dalam direktori:',
 'info_selection_un_seul_mot_cle' => 'Anda hanya dapat memilih <b>satu kata kunci</b> dalam kelompok ini.',
 'info_signatures' => 'tanda tangan',
@@ -994,9 +964,6 @@ dalam warna yang menunjukkan statusnya:',
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Gabung database sekarang dengan backup',
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Jika diperlukan, URL situs sumber:',
 'statut_admin_restreint' => '(admin terbatas)',
 'syndic_choix_moderation' => 'Apa yang akan dilakukan dengan tautan berikut dari situs ini?',
 'syndic_choix_oublier' => 'Apa yang akan dilakukan dengan tautan yang tidak ada lagi dalam berkas sindikasi?',
@@ -1022,11 +989,6 @@ dalam warna yang menunjukkan statusnya:',
 termasuk <i>semua</i> parameter akses untuk editor dan administrator. Setelah mengeksekusinya, anda sebaiknya
 menginstal kembali SPIP untuk membuat database baru dan akses administrator pertama.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Opsi ini mengizinkan anda untuk menyimpan isi database ke dalam sebuah berkas di direktori @dossier@. Juga, mengingatkan anda untuk mengambil seluruh direktori @img@, yang berisikan gambar-gambar dan dokumen-dokumen yang digunakan dalam artikel dan bagian.',
-'texte_admin_tech_02' => 'Peringatan: backup ini HANYA dapat dipulihkan dalam sebuah situs yang diinstal dalam versi yang sama dengan SPIP. Anda seharusnya tidak mengosongkan database dan diharapkan menginstal kembali backup setelah pembaharuan... Untuk informasi lebih lanjut silakan membaca <a href="@spipnet@">dokumentasi SPIP</a>.', # MODIF
-'texte_admin_tech_03' => 'Anda dapat memilih untuk menyimpan berkas dalam bentuk kompresi 
-	untuk mempercepat tranfer ke mesin anda atau server backup dan menyimpan sejumlah ruangan di disk.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '( Jika direktori anda diinstal di mesin yang sama dengan situs web anda, kemungkinan besar ini adalah «localhost».)',
 'texte_ajout_auteur' => 'Penulis berikut telah ditambahkan ke artikel:',
 'texte_annuaire_ldap_1' => 'Jika anda memiliki akses ke sebuah direktori (LDAP), anda dapat menggunakannya untuk mengimpor pengguna secara otomatis di bawah SPIP.',
@@ -1177,15 +1139,6 @@ memperbaharui satu halaman, anda sebaiknya melakukannya dari area umum dan gunak
   jika gagal, anda sebaiknya menyimpan salinan dari tampilan
   yang mungkin dapat dijadikan petunjuk apa yang salah...</p><p>
   Jika permasalahan ini msih berlanjut, hubungi hosting anda.</p>', # MODIF
-'texte_restaurer_base' => 'Pulihkan isi backup database',
-'texte_restaurer_sauvegarde' => 'Opsi ini mengizinkan anda untuk memulihkan backup database
-sebelumnya. Untuk melakukannya, berkas yang berisikan backup harus disimpan di
-direktori @dossier@.
-Berhati-hatilah dengan fitur ini: <b>Setiap modifikasi atau kerusakan tidak
-dapat dipulihkan kembali.</b>',
-'texte_sauvegarde' => 'Backup isi database',
-'texte_sauvegarde_base' => 'Backup database',
-'texte_sauvegarde_compressee' => 'Backup akan disimpan dalam berkas tidak terkompresi @fichier@.',
 'texte_selection_langue_principale' => 'Anda dapat memilih di bawah "bahasa utama" situs. Untungnya, pilihan ini tidak membatasi anda menulis artikel dalam bahasa yang dipilih, tapi mengizinkan anda untuk menentukan
 
 <ul><li> format tanggal standar di situs umum</li>

@@ -105,13 +105,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Onmiddellijke publicatie van berichten
  (bijdragen worden zichtbaar zodra ze verstuurd worden; beheerders kunnen nadien nog steeds
  berichten schrappen).',
-'bouton_radio_sauvegarde_compressee' => 'gecomprimeerde opslag onder @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'niet-gecomprimeerde opslag onder @fichier@',
 'bouton_radio_supprimer_petition' => 'De petitie verwijderen',
 'bouton_radio_syndication' => 'Syndicatie :',
 'bouton_redirection' => 'OMLEIDING',
 'bouton_relancer_installation' => 'Installatie herbeginnen',
-'bouton_restaurer_base' => 'De databank herstellen',
 'bouton_suivant' => 'Volgende',
 'bouton_tenter_recuperation' => 'Poging tot herstel',
 'bouton_test_proxy' => 'Proxy proberen',
@@ -345,7 +342,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Waarschuwing',
 'info_barre_outils' => 'met zijn werktuigen staaf ?',
 'info_base_installee' => 'De structuur van je databank is geïnstalleerd.',
-'info_base_restauration' => 'De databank wordt hersteld.',
 'info_bloquer' => 'blokkeren',
 'info_breves' => 'Werkt je website met het systeem van berichten?',
 'info_breves_03' => 'nieuwsberichten',
@@ -416,7 +412,6 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_envoi_email_automatique' => 'Automatisch verzenden van e-mails',
 'info_envoi_forum' => 'Versturen van de forums aan de auteurs van de artikels',
 'info_envoyer_maintenant' => 'Nu versturen',
-'info_erreur_restauration' => 'Herstelfout : onbestaande map.',
 'info_etape_suivante' => 'Naar de volgende stap ',
 'info_etape_suivante_1' => 'Je kan de volgende stap zetten.',
 'info_etape_suivante_2' => 'Je kan de volgende stap zetten.',
@@ -637,8 +632,6 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Doorsturen.</b> Dit artikel verwijst naar de pagina:',
 'info_reserve_admin' => 'Alleen beheerders kunnen dit adres wijzigen.',
-'info_restauration_sauvegarde' => 'Restauratie van de bescherming @archive@',
-'info_restauration_sauvegarde_insert' => 'Integratie van @archive@ in de basis',
 'info_restreindre_rubrique' => 'Beheer tot deze rubriek beperken :',
 'info_resultat_recherche' => 'onderzoek resultaats:',
 'info_rubriques' => 'Rubrieken',
@@ -647,29 +640,6 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_rubriques_trouvees' => 'Rubrieken vondeling',
 'info_rubriques_trouvees_dans_texte' => 'Rubrieken vondeling (in tekst)',
 'info_sans_titre' => 'Zonder titel',
-'info_sauvegarde' => 'Backup',
-'info_sauvegarde_articles' => 'Artikel redden',
-'info_sauvegarde_articles_sites_ref' => 'Artikels van de referentiesites bewaren',
-'info_sauvegarde_auteurs' => 'Backup de auteurs',
-'info_sauvegarde_breves' => 'Backup de berichten',
-'info_sauvegarde_documents' => 'Backup de dokumenten',
-'info_sauvegarde_echouee' => 'Indien het maken van de reserverkopie mislukt is («Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'Backup de forums',
-'info_sauvegarde_groupe_mots' => 'Groepen trefwoorden bewaren',
-'info_sauvegarde_messages' => 'Bewaar de berichten',
-'info_sauvegarde_mots_cles' => 'Trefwoorden bewaren',
-'info_sauvegarde_petitions' => 'Petities bewaren',
-'info_sauvegarde_refers' => 'Backup de referers',
-'info_sauvegarde_reussi_01' => 'Backup succes.',
-'info_sauvegarde_reussi_02' => 'De databank werd bewaard in @archive@. Je kan ',
-'info_sauvegarde_reussi_03' => 'terugkeren naar het beheer',
-'info_sauvegarde_reussi_04' => 'op uw website.',
-'info_sauvegarde_rubrique_reussi' => 'De tabels van de rubriek @titre@ werden in @archive@ beschermd. U kunt',
-'info_sauvegarde_rubriques' => 'Backup rubrieken',
-'info_sauvegarde_signatures' => 'De namen van de petitie bewaren',
-'info_sauvegarde_sites_references' => 'De gekoppelde sites opslaan',
-'info_sauvegarde_type_documents' => 'Types documenten opslaan',
-'info_sauvegarde_visites' => 'Backup de bezoeken',
 'info_selection_chemin_acces' => '<b>Selecteer</b> hierna de toegangswijze tot het jaarboek:',
 'info_selection_un_seul_mot_cle' => 'Men kan slechts <b>één enkel trefwoord</b> tegelijk kiezen uit deze groep.',
 'info_signatures' => 'namen',
@@ -994,9 +964,6 @@ een kleur geeft hun status aan :',
 
 // S
 'sans_heure' => 'zonder huur',
-'sauvegarde_fusionner' => 'De huidige basis en de bescherming fusioneren',
-'sauvegarde_fusionner_depublier' => 'De gefusioneerde onderwerpen depubliceren',
-'sauvegarde_url_origine' => 'Eventueel URL van de site van oorsprong:',
 'statut_admin_restreint' => '(beperkte toegang)',
 'syndic_choix_moderation' => 'Wat te doen met volgende links afkomstig van deze site ?',
 'syndic_choix_oublier' => 'Wat te doen met links die niet langer voorkomen in het bestand voor syndicatie ?',
@@ -1021,10 +988,6 @@ een kleur geeft hun status aan :',
 'texte_admin_effacer_01' => 'Met dit commando vernietig je de  <i>volledige</i> inhoud van de databank,
 inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je dit uitgevoerd hebt, dien je de herinstallatie van SPIP te starten om een volledig nieuwe database aan te maken en toegangsrechten voor een eerste beheerder.',
 'texte_admin_effacer_stats' => 'Deze bestelling wist alle gegevens in verband met de statistieken van bezoek van de plaats uit, met inbegrip van de populariteit van de artikelen.',
-'texte_admin_tech_01' => 'Deze optie laat je toe de inhoud van de databank te bewaren in een bestand dat bewaard zal worden in de map @dossier@. Vergeet ook niet de volledige map @img@ te bewaren. Zij bevat alle afbeeldingen en bijlagen bij de artikels en rubrieken.',
-'texte_admin_tech_02' => 'Opgelet: deze bescherming zal SLECHTS in een plaats kunnen hersteld worden die onder dezelfde versie van SPIP wordt geplaatst. Men heeft dus vooral geen &laquo;&nbsp;nodig de basis&nbsp;&raquo; te legen door de bescherming te hopen opnieuw te installeren na een update… Raadpleegt <a href= " @spipnet@ " > de documentatie van SPIP </a>.',
-'texte_admin_tech_03' => 'Je kan de reservekopie ook als een gecomprimeerd bestand opslaan, dit om de overzettijd van de server naar je computer sterk in te korten en om schijfruimte te besparen.',
-'texte_admin_tech_04' => 'Met het oog op fusie met een andere basis, kunt u de bescherming beperken tot de rubriek:',
 'texte_adresse_annuaire_1' => '(Als de map is geïnstalleerd is op dezelfde computer als je website, is het waarschijnlijk «localhost».)',
 'texte_ajout_auteur' => 'Deze auteuer is toegevoegd aan het artikel :',
 'texte_annuaire_ldap_1' => 'Als je toegang hebt tot een LDAP-adresboek, kan je dit gebruiken om automatisch gebruikers in te voeren in SPIP.',
@@ -1169,15 +1132,6 @@ Als u geen nut ervan hebt, kunt u deze keuze
  zal bevatten over de aard van het probleem...
  Is het probleem niet opgelost, wend je dan tot je
  hostingprovider.</p>', # MODIF
-'texte_restaurer_base' => 'De inhoud van de reservekopie van de databank terugzetten',
-'texte_restaurer_sauvegarde' => 'Deze optie laat je toe een eerder genomen reservekopie van de databank
- terug te plaatsen. Hiertoe dien je het bestand met de reservekopie
- te plaatsen in de map @dossier@.
- Wees voorzichtig met het gebruik van deze optie: <b>alle wijzigingen, eventuele verliezen, zijn
-  onomkeerbaar.</b>',
-'texte_sauvegarde' => 'Een reservekopie maken van de inhoud van de databank',
-'texte_sauvegarde_base' => 'Reservekopie maken van de databank',
-'texte_sauvegarde_compressee' => 'De reservekopie zal gemaakt worden in het niet-gecomprimeerde bestand @fichier@.',
 'texte_selection_langue_principale' => 'Hieronder kan je de «basistaal» van de site kiezen. Deze keuze verplicht je - gelukkig! - niet om artikels in deze taal te schrijven maar laat wel toe om het volgende te bepalen:
  <ul><li> het standaardformaat van de data op de publieke site;</li>
  <li> de aard van de typografische motor die SPIP dient te gebruiken om teksten te tonen;</li>

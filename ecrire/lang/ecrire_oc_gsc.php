@@ -102,13 +102,10 @@ la documentacion d\'SPIP</a>.', # MODIF
 'bouton_radio_publication_immediate' => 'Publicar los messatges suu pic
  (las contribucions qu\'apareishen tanlèu mandadas, los administrators que las pòden
  suprimir puish).',
-'bouton_radio_sauvegarde_compressee' => 'Sauvagarda comprimida devath @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'Sauvagarda non comprimida devath @fichier@',
 'bouton_radio_supprimer_petition' => 'Suprimir la peticion',
 'bouton_radio_syndication' => 'Sindicacion:',
 'bouton_redirection' => 'TORNAR DIRIGIR',
 'bouton_relancer_installation' => 'Tornar lançar l\'installacion',
-'bouton_restaurer_base' => 'Restaurar la basa',
 'bouton_suivant' => 'Seguent',
 'bouton_tenter_recuperation' => 'Ensajar de reparar',
 'bouton_test_proxy' => 'Ensajar lo proxy',
@@ -338,7 +335,6 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'info_avertissement' => 'Avís',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'L\'estructura de la vòsta basa de dadas qu\'ei installada.',
-'info_base_restauration' => 'La basa qu\'ei en cors de restauracion.',
 'info_bloquer' => 'blocar',
 'info_breves' => 'Utiliza, lo vòste sit, lo sistèma de brèvas?',
 'info_breves_03' => 'brèvas',
@@ -407,7 +403,6 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'info_envoi_email_automatique' => 'Mandadís d\'e-mails automatics',
 'info_envoi_forum' => 'Mandadís deus forums aus autors deus articles',
 'info_envoyer_maintenant' => 'Mandar ara',
-'info_erreur_restauration' => 'Error de restauracion: fichièr inexistent.',
 'info_etape_suivante' => 'Passar a l\'estapa seguenta',
 'info_etape_suivante_1' => 'Que podetz passar a l\'estapa seguenta.',
 'info_etape_suivante_2' => 'Que podetz passar a l\'estapa seguenta.',
@@ -619,8 +614,6 @@ Daubuns aubergaders n\'autorizan pas lo mandadís d\'e-mails dempuish los lors s
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redireccion.</b> Aqueth article que renvia a la pagina:',
 'info_reserve_admin' => 'Sonque los administrators que pòden modificar aquera adreiça.',
-'info_restauration_sauvegarde' => 'restauracion de la sauvagarda @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Restrénher la gestion a la rubrica:',
 'info_resultat_recherche' => 'Resultats de la cèrca:',
 'info_rubriques' => 'Rubricas',
@@ -629,29 +622,6 @@ Daubuns aubergaders n\'autorizan pas lo mandadís d\'e-mails dempuish los lors s
 'info_rubriques_trouvees' => 'Rubricas trobadas',
 'info_rubriques_trouvees_dans_texte' => 'Rubricas trobadas (dens lo tèxt)',
 'info_sans_titre' => 'Shens títol',
-'info_sauvegarde' => 'Sauvagarda',
-'info_sauvegarde_articles' => 'Sauvagardar los articles',
-'info_sauvegarde_articles_sites_ref' => 'Sauvagardar los articles deus sits referenciats',
-'info_sauvegarde_auteurs' => 'Sauvagardar los autors',
-'info_sauvegarde_breves' => 'Sauvagardar las brèvas',
-'info_sauvegarde_documents' => 'Sauvagardar los documents',
-'info_sauvegarde_echouee' => 'Se la sauvagarda s\'i ei mauescaduda(«Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'Sauvagardar los forums',
-'info_sauvegarde_groupe_mots' => 'Sauvagardar los grops de mots',
-'info_sauvegarde_messages' => 'Sauvagardar los messatges',
-'info_sauvegarde_mots_cles' => 'Sauvagardar los mots clau',
-'info_sauvegarde_petitions' => 'Sauvagardar las peticions',
-'info_sauvegarde_refers' => 'Sauvagardar los referiders',
-'info_sauvegarde_reussi_01' => 'Sauvagarda escaduda.',
-'info_sauvegarde_reussi_02' => 'La basa qu\'ei estada sauvagardada dens @archive@. Que podetz',
-'info_sauvegarde_reussi_03' => 'tornar a la gestion',
-'info_sauvegarde_reussi_04' => 'deu vòste sit.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'Sauvagardar las rubricas',
-'info_sauvegarde_signatures' => 'Sauvagardar las signaturas de peticions',
-'info_sauvegarde_sites_references' => 'Sauvagardar los sits referenciats',
-'info_sauvegarde_type_documents' => 'Sauvagardar los tipes de documents',
-'info_sauvegarde_visites' => 'Sauvagardar las vesitas',
 'info_selection_chemin_acces' => '<b>Seleccionatz</b> ça devath lo camin d\'accès dens l\'annuari:',
 'info_selection_un_seul_mot_cle' => 'Que\'s pòt seleccionar sonque <b>un mot clau</b> au còp dens aqueth grop.',
 'info_signatures' => 'signaturas',
@@ -976,9 +946,6 @@ ua color qu\'indica lo lor estat:',
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(admin. restrent)',
 'syndic_choix_moderation' => 'Que\'s pòt har dab los ligams vienents qui provienen d\'aqueth sit?',
 'syndic_choix_oublier' => 'Que\'s pòt har dab los ligams qui figuran pas pus dens lo fichièr de sindicacion?',
@@ -1003,12 +970,6 @@ ua color qu\'indica lo lor estat:',
 'texte_admin_effacer_01' => 'Aquera comanda qu\'esfaça <i>tot</i> lo contengut de la basa de dadas,
  inclús <i>tots</i> los accès redactors e administrators. Un còp que l\'auratz executada, qu\'auratz de tornar lançar l\'installacion d\'SPIP tà tornar crear ua basa navèra atau com un permèr accès administrator.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Aquera opcion que\'vs permet de sauvagardar lo contengut de la basa dens un fichièr qui serà servat dens lo repertòri @dossier@.
-N\'oblidetz pas tanpòc de recuperar l\'integralitat deu repertòri <i>IMG/</i>, qui contien los imatges e los documents utilizats dens los articles e rubricas.',
-'texte_admin_tech_02' => 'Atencion: aquera sauvagarda que\'s poirà restaurar SONQUE dens un sit installat dab la medisha version d\'SPIP. Donc subertot non cau pas "vueidar la basa" en esperar de reïnstallar la sauvagarda après ua actualizacion. Consultatz <a href="@spipnet@">la documentacion d\'SPIP</a>.', # MODIF
-'texte_admin_tech_03' => 'Que podetz causir de sauvagardar lo fichièr devath forma comprimida, entà
- accelerar lo son transferiment a vòste o a çò d\'un servider de sauvagardas, e entà estauviar espaci disc.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Se lo vòste annuari ei installat sus la medisha maquina qu\'aqueth sit web, que s\'ageish probable de "localhost".)',
 'texte_ajout_auteur' => 'L\'autor seguent qu\'ei estat ajustat a l\'article:',
 'texte_annuaire_ldap_1' => 'S\'acceditz a un annuari (LDAP), que\'u podetz utilizar tà importar automaticament utilizaires devath SPIP.',
@@ -1165,15 +1126,6 @@ tornar calcular sonque ua pagina, passatz meilèu per l\'espaci public e utiliza
  dilhèu indicis de çò qui non va pas...<p>
   Se lo problèma e persisteish, contactatz lo vòste
   aubergader.<p>', # MODIF
-'texte_restaurer_base' => 'Restaurar lo contengut d\'ua sauvagarda de la basa',
-'texte_restaurer_sauvegarde' => 'Aquera opcion que\'vs permet de restaurar ua sauvagarda 
- de la basa que l\'avèvatz hèita abans. Tà har aquò, que cau aver botat lo fichièr qui contien la sauvagarda 
-dens lo repertòri @dossier@.
-  Totun, siatz prudent(a) dab aquera foncionalitat: <b>las modificacions e pèrdas eventuaus que son
-  irreversiblas.</b>',
-'texte_sauvegarde' => 'Sauvagardar lo contengut de la basa',
-'texte_sauvegarde_base' => 'Sauvagardar la basa',
-'texte_sauvegarde_compressee' => 'La sauvagarda que\'s harà dens lo fichièr non comprimit @fichier@.',
 'texte_selection_langue_principale' => 'Que podetz seleccionar ça devath la "lenga principau" deu sit. Aquera causida non vs\'obliga pas -gran gai- d\'escríver los vòstes articles dens la lenga seleccionada, mes que permet de determinar:
  <ul><li> lo format predefinit de las datas suu sit public;</li>
  <li> la natura deu motor tipografic que SPIP e deu utilizar tau rendut deus tèxts;</li>

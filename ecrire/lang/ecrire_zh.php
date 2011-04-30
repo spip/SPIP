@@ -106,13 +106,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => '直接消息出版物
  (投稿发送后可显示, 管理员可以
  删除它们).',
-'bouton_radio_sauvegarde_compressee' => '存为压缩文件@fichier@', # MODIF
-'bouton_radio_sauvegarde_non_compressee' => '存为不压缩的文件@fichier@', # MODIF
 'bouton_radio_supprimer_petition' => '删除请求',
 'bouton_radio_syndication' => '联合:',
 'bouton_redirection' => '重定向',
 'bouton_relancer_installation' => '重新安装',
-'bouton_restaurer_base' => '恢复数据库',
 'bouton_suivant' => '下一步',
 'bouton_tenter_recuperation' => '试图修复',
 'bouton_test_proxy' => '测试代理',
@@ -342,7 +339,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => '消息',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => '您的数据库已经安装.',
-'info_base_restauration' => '正在修复数据库.',
 'info_bloquer' => 'bloquer', # NEW
 'info_breves' => '您的站点使用了新闻简要系统,吗?',
 'info_breves_03' => '简要',
@@ -413,7 +409,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_envoi_email_automatique' => '自动邮寄',
 'info_envoi_forum' => '发送论坛给文章作者 ',
 'info_envoyer_maintenant' => '现在发送',
-'info_erreur_restauration' => '恢复失败: 文件未找到.',
 'info_etape_suivante' => '到下一步',
 'info_etape_suivante_1' => '你可移动到下一步.',
 'info_etape_suivante_2' => '你可移动到下一步.',
@@ -638,8 +633,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>重定向.</b> 引用该页的文章:', # MODIF
 'info_reserve_admin' => '只有管理能改这个地址.',
-'info_restauration_sauvegarde' => '恢复备份 @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => '限制专栏管理:',
 'info_resultat_recherche' => '搜索结果:',
 'info_rubriques' => '专栏',
@@ -648,29 +641,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_rubriques_trouvees' => '找到的专栏',
 'info_rubriques_trouvees_dans_texte' => '找到的专栏(在文章中)',
 'info_sans_titre' => '无标题',
-'info_sauvegarde' => '备份',
-'info_sauvegarde_articles' => '备份文章',
-'info_sauvegarde_articles_sites_ref' => '备份引用站点的文章',
-'info_sauvegarde_auteurs' => '备份作者',
-'info_sauvegarde_breves' => '备份新闻',
-'info_sauvegarde_documents' => '备份文档',
-'info_sauvegarde_echouee' => '备份失败(«超时»),',
-'info_sauvegarde_forums' => '备份论坛',
-'info_sauvegarde_groupe_mots' => '备份关键词组',
-'info_sauvegarde_messages' => '备份消息',
-'info_sauvegarde_mots_cles' => '备份关键词',
-'info_sauvegarde_petitions' => '备份请求',
-'info_sauvegarde_refers' => '备份参考',
-'info_sauvegarde_reussi_01' => '备份成功.',
-'info_sauvegarde_reussi_02' => '数据库保存在@archive@. 你可以', # MODIF
-'info_sauvegarde_reussi_03' => '返回管理',
-'info_sauvegarde_reussi_04' => '你的站点.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => '备份专栏',
-'info_sauvegarde_signatures' => '备份请求签名',
-'info_sauvegarde_sites_references' => '备份引用站点',
-'info_sauvegarde_type_documents' => '备份文档类型',
-'info_sauvegarde_visites' => '备份访问者',
 'info_selection_chemin_acces' => '从目录的访问路径<b>选择</b> :',
 'info_selection_un_seul_mot_cle' => '你一次从组中可选择 <b>只有一个关键词</b> .',
 'info_signatures' => '签名',
@@ -995,9 +965,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(受限制的管理)',
 'syndic_choix_moderation' => 'Que faire des prochains liens en provenance de ce site ?', # NEW
 'syndic_choix_oublier' => 'Que faire des liens qui ne figurent plus dans le fichier de syndication ?', # NEW
@@ -1023,15 +990,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <i>所有</i> 访问者和管理者的访问参数. 执行后, 为新建数据库和第一个管理员访问你应
 重新安装 SPIP .',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => '此操作允许您保存数据库内容为一个文件到@dossier@.
-记得刷新整个 <i>IMG/</i> 目录, 它包含文章和各专栏中使用的图片和文档.', # MODIF
-'texte_admin_tech_02' => '警告 : 备份仅有在同样的SPIP版本中才被恢复
-. 升级SPIP前备份数据库这是
-普遍的错误
-... 更多消息参见 <a href="@spipnet@">SPIP 文档</a>.', # MODIF
-'texte_admin_tech_03' => '你可以选择保存文件为压缩格式, to 
- 为加速传输你的机器或你的服务器,保留磁盘空间.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '( 如果你的目录安装到同样机器作为WEB站点, 可能 «localhost».)',
 'texte_ajout_auteur' => '以下作者加到文章:',
 'texte_annuaire_ldap_1' => '若你有权访问(LDAP) 目录, 你可用它在SPIP下自动导入用户.',
@@ -1190,15 +1148,6 @@ demande plus de puissance au serveur.', # NEW
   出错的线索...
   <p>如果问题仍然存在,请联系
   主机.', # MODIF
-'texte_restaurer_base' => '恢复备份数据库内容',
-'texte_restaurer_sauvegarde' => '该选项允许你恢复以前的数据库
-. 打包它, 包括备份的文件已存在
-目录 @dossier@.
-小心使用这个特性: <b>任何修改或丢失将不可
-撤回.</b>', # MODIF
-'texte_sauvegarde' => '备份数据库内容',
-'texte_sauvegarde_base' => '备份数据库',
-'texte_sauvegarde_compressee' => '备份将在未压缩文件 @fichier@.', # MODIF
 'texte_selection_langue_principale' => '你可在下面选择"主要语言". 幸运地,选择不限制你的文章使用选中的语言,但允许确定
 
 <ul><li> 公众站点的缺省日期格式</li>

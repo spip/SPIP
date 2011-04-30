@@ -107,13 +107,10 @@ patisipasyon yo zitilizatè tout ke pa afiche sou sitwèb piblik si yon komandé
 'bouton_radio_publication_immediate' => 'Piblikasyon imedyat pout tout mesaj
  (patisipasyon ke afiche dirèkman yo te voye, komandè rès kapab kraze y aprè
 ).',
-'bouton_radio_sauvegarde_compressee' => 'yon sòvgad konprese sou @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'yon sòvgad sak se pa konprese sou @fichier@',
 'bouton_radio_supprimer_petition' => 'Kraez petisyon nan',
 'bouton_radio_syndication' => 'Sendikasyon :',
 'bouton_redirection' => 'TOUNYEN ADRES DEYO',
 'bouton_relancer_installation' => 'Ann eseye ankò instalasyon nan',
-'bouton_restaurer_base' => 'Aranje labaz',
 'bouton_suivant' => 'Swivan',
 'bouton_tenter_recuperation' => 'Esèy yon aranjman',
 'bouton_test_proxy' => 'Esèy proksi',
@@ -349,7 +346,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_avertissement' => 'Mesaj pou atansyon',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Strikti bazdone se enstale.',
-'info_base_restauration' => 'Labaz ap restore',
 'info_bloquer' => 'bloké',
 'info_breves' => 'Eske w sit ap itlize sistèm tinouvèl yo?',
 'info_breves_03' => 'tinouvèl yo',
@@ -419,7 +415,6 @@ anba atik yo ; y ke entèdi pou tout ribrik yo, é tinouvèl yo...',
 'info_envoi_email_automatique' => 'Pou voye kèk limèl otomatikman',
 'info_envoi_forum' => 'Voye fowom yo pou tout loté atik yo',
 'info_envoyer_maintenant' => 'Voye kounye-a touswit',
-'info_erreur_restauration' => 'Erè pou restorasyon : fichye-an ap pa egsiste.',
 'info_etape_suivante' => 'Mach etap swivan',
 'info_etape_suivante_1' => 'Ou kapab mach etap swivan.',
 'info_etape_suivante_2' => 'Ou kapab mach etap swivan.',
@@ -640,8 +635,6 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Tounyen dèyè sou yon lòt adrès.</b> Atik-la ap sòti sou lapaj-la:',
 'info_reserve_admin' => 'Komandè ysèlman yokapab chanje ladrès-la',
-'info_restauration_sauvegarde' => 'Restòwasyon lasòvgad @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Diminye drwa yo komandé-a pou li kapab debouye sou ribrik-la sèlman:',
 'info_resultat_recherche' => 'Rezilta chèche w-a :',
 'info_rubriques' => 'Ribrik yo',
@@ -650,29 +643,6 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
 'info_rubriques_trouvees' => 'Ribrik yo ki te fin rannkont',
 'info_rubriques_trouvees_dans_texte' => 'Ribrik yo ki te fin rannkont (nan tèks)',
 'info_sans_titre' => 'Bagay ki pa rele oken non',
-'info_sauvegarde' => 'Sòvgad',
-'info_sauvegarde_articles' => 'Sòvgade atik yo',
-'info_sauvegarde_articles_sites_ref' => 'Sòvgade atik yo ki nan sit referansé yo',
-'info_sauvegarde_auteurs' => 'Sòvgade lotè yo ',
-'info_sauvegarde_breves' => 'Sòvgade tinouvèl yo ',
-'info_sauvegarde_documents' => 'Sòvgade dokiman yo ',
-'info_sauvegarde_echouee' => 'Si sòvgad-la te pa mache («Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'Sove fowom yo',
-'info_sauvegarde_groupe_mots' => 'Sòvgade gwoup-mokle yo ',
-'info_sauvegarde_messages' => 'Sòvgade mesaj yo ',
-'info_sauvegarde_mots_cles' => 'Sòvgade mokle yo ',
-'info_sauvegarde_petitions' => 'Sòvgade petisyon yo ',
-'info_sauvegarde_refers' => 'Sòvgade rèfèrè yo ',
-'info_sauvegarde_reussi_01' => 'Sòvgad-la te mache',
-'info_sauvegarde_reussi_02' => 'Baz-la te fin sovgadé nan @archive@. W kapab',
-'info_sauvegarde_reussi_03' => 'tounyen dèyè okipe',
-'info_sauvegarde_reussi_04' => 'sit a w.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'Sòvgade ribrik yo ',
-'info_sauvegarde_signatures' => 'Sòvgade tout siyati nan petisyon yo ',
-'info_sauvegarde_sites_references' => 'Sòvgade sit referansé yo',
-'info_sauvegarde_type_documents' => 'Sòvgade tip-dokiman yo ',
-'info_sauvegarde_visites' => 'Sòvgade vizit yo ',
 'info_selection_chemin_acces' => '<b>Chwazi</b> chemen laksé nan laniyè :',
 'info_selection_un_seul_mot_cle' => 'Se posib chwasi selman <b> yon sèl mokle</b> nan group la .',
 'info_signatures' => 'siyati yo',
@@ -997,9 +967,6 @@ nan yon koulè ki bay lestati ali :',
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(komandè ki limité)',
 'syndic_choix_moderation' => 'Kisa SPIP ka fè ak pwochen lyanaj ki soti sit-la ?',
 'syndic_choix_oublier' => 'Kisa SPIP ka fè ak lyanaj ki pa pwézan nan fichyé sendikasyon la ?',
@@ -1025,11 +992,6 @@ nan yon koulè ki bay lestati ali :',
 ak <i>tout</i> aksé rédaktè ak komanè yo. Si w te fé mache ali, fòk w enstalé  yon lòt fwa laprosédi
 lenstalasyon SPIP pou w kreye yon lòt nouvo baz ak son promyé laksé komandè',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Opsyon nan ka pèmè aw kembe kontni labazdone nan yon fichye ke sere nan repertwar @dossier@. Pa oublye genyen tout repetwar-la @img@, pou sere byen tout limaj ak dokiman ki nan zot atik, zot ki repertwar-la ka kembe azot li mèm.',
-'texte_admin_tech_02' => 'Atansyon: sòvgad-la ke kapab restore SELMAN sou yon sit ki enstalé sou yon mèm vèsyon SPIP. Fòk pa w « vid labaz » po enstalé sòvgad-la apré met nan nivo... Gade <a href="@spipnet@">dokimantasyon SPIP</a>.', # MODIF
-'texte_admin_tech_03' => 'Ou kapab chwazi sòvgad fichye-a nan fòm koprésé, pou rann transfè ali taptap
- sou machin a w osnon yon sèvè pou lasòvgad è pou gad swen pa depanse tro lespas diks lòdinatè.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Si laniyé aw se enstalé sou mèm machin sévè sit aw, se posib li rele senpman «localhost».)',
 'texte_ajout_auteur' => 'Lotè-a te fin ajoute pou atik-la :',
 'texte_annuaire_ldap_1' => 'Si w gen laksé lanyiè (LDAP), w kapab itilize ali pou enpòte otomatikman itilizatè yo sou SPIP.',
@@ -1177,15 +1139,6 @@ W kapab esey issit yon aranjman ;
  Si bagay-la ki pa mache, kenbe ou yon kopi lafichaj, ki sere pètèt indis pou rannkont ki pa mache...</p><p>
   Si pwoblèm la ki kenbe, mèsi kontak lébérjè
 .</p>', # MODIF
-'texte_restaurer_base' => 'Restore kontni yon sovgad baz-la',
-'texte_restaurer_sauvegarde' => 'Opsyon-nan ki pémè w restore yon sovgad  ki w té fé avan sou baz-la.
- Akoz, fok w plasé fichye an ki kembe sovgad-la nan répertwar 
- @dossier@.
-  Tansyon kank w touche fonksyonalité an  : <b>tout chanjman, tout bagay ki perdi, se
-  définitif.</b>', # MODIF
-'texte_sauvegarde' => 'Sovgad kontni baz-la',
-'texte_sauvegarde_base' => 'Sovgad baz-la',
-'texte_sauvegarde_compressee' => 'Sovgad ke pou fè nan yon fichye pa koprésé sa-a, ki rele @fichier@.', # MODIF
 'texte_selection_langue_principale' => 'W kapab chwazi  « lang prensipal » sit-la. Chwa-an se pa obligasyon - bon dié ! - w ékri artik-w nan lang-la, men bagay-la li pémè défini :
  <ul><li> fòma otomatik tout dat sou sit piblik ;</li>
  <li> ki mòtè tipografik, fòk sistèm SPIP li itilize pou rann tout tèks sou sit-la ;</li>
