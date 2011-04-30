@@ -384,7 +384,6 @@ Mersi aou mèt ansanm isi
 'icone_maintenance_site' => 'Lantrotyen lo sitwèb',
 'icone_messagerie_personnelle' => 'Out kazmodékri',
 'icone_mots_cles' => 'Bann molaklé',
-'icone_nouvelle_breve' => 'Ékri inn ot tit-nouvèl',
 'icone_repartition_actuelle' => 'Armontr kouk sa lé partazé astèr ',
 'icone_repartition_debut' => 'Armontr kouk sa lé partazé dopi lorizin',
 'icone_repartition_visites' => 'Koman i partaz bann vizit',
@@ -437,11 +436,9 @@ Mersi aou mèt ansanm isi
 'info_auteurs_nombre' => '(bann) lotèr :',
 'info_authentification_ftp' => 'Lotantificasyon (èk FTP).',
 'info_bloquer_lien' => 'blok lo gatiraz-la',
-'info_breves_02' => 'Bann tit-nouvèl',
 'info_breves_2' => 'bann tit-nouvèl',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Bann tit-nouvèl pou konfirmé',
 'info_connexion_refusee' => 'Lakostaz lé arfizé',
 'info_contact_developpeur' => 'Mersi kontak inn dévlopèr.',
 'info_contenance' => 'Dann sit-la nana :',
@@ -591,7 +588,6 @@ Mersi aou mèt ansanm isi
 'info_vos_rendez_vous' => 'Out bann prosin randévou',
 'info_zoom' => 'zoum',
 'infos_vos_pense_bete' => 'Out bann gardantèt', # MODIF
-'item_breve_proposee' => 'Tit-nouvèl-la lé propozé',
 
 // L
 'lien_afficher_icones_seuls' => 'Afis sèlman bann zikon',
@@ -761,9 +757,6 @@ aou lès lazéstyon do bann paz-la pou lo wèbmèt prinsipal.</b>', # MODIF
 'texte_statut_publie' => 'pibliyé an liyn',
 'texte_statut_refuse' => 'arfizé',
 'titre_ajouter_mot_cle' => 'AZOUT INN MOLAKLÉ :',
-'titre_breve_proposee' => 'Tit-nouvèl propozé',
-'titre_breve_publiee' => 'Tit-nouvèl pibliyé',
-'titre_breve_refusee' => 'Tit-nouvèl arfizé',
 'titre_cadre_raccourcis' => 'BANN RÉDIYON:',
 'titre_changer_couleur_interface' => 'Sanz lakoulèr lintèrfas',
 'titre_forum' => 'Forom ',

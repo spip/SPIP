@@ -380,7 +380,6 @@ Obrigado pela sua participação
 'icone_maintenance_site' => 'Manutenção do sítio',
 'icone_messagerie_personnelle' => 'Correio pessoal',
 'icone_mots_cles' => 'Palavras-chave',
-'icone_nouvelle_breve' => 'Escrever uma notícia curta',
 'icone_repartition_actuelle' => 'Exibir a distribuição actual',
 'icone_repartition_debut' => 'Exibir a distribuição desde o início',
 'icone_repartition_visites' => 'Distribuição das visitas',
@@ -433,11 +432,9 @@ Obrigado pela sua participação
 'info_auteurs_nombre' => 'autor(es) :',
 'info_authentification_ftp' => 'Autenticação (por FTP)',
 'info_bloquer_lien' => 'bloquear este vínculo',
-'info_breves_02' => 'Notícias',
 'info_breves_2' => 'notícias',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Notícias a validar',
 'info_connexion_refusee' => 'Ligação recusada',
 'info_contact_developpeur' => 'Favor contactar com um programador',
 'info_contenance' => 'Este sítio contem :',
@@ -588,7 +585,6 @@ entre os participantes do sítio. Pode activar ou
 'info_vos_rendez_vous' => 'Os seus futuros encontros',
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Os seus memorandos', # MODIF
-'item_breve_proposee' => 'Notícia proposta',
 
 // L
 'lien_afficher_icones_seuls' => 'Exibir apenas os ícones',
@@ -762,9 +758,6 @@ Poderá então introduzir uma nova palavra-passe
 'texte_statut_publie' => 'publicado em linha',
 'texte_statut_refuse' => 'recusado',
 'titre_ajouter_mot_cle' => 'ACRESCENTAR UMA PALAVRA-CHAVE',
-'titre_breve_proposee' => 'Notícia proposta',
-'titre_breve_publiee' => 'Notícia publicada',
-'titre_breve_refusee' => 'Notícia recusada',
 'titre_cadre_raccourcis' => 'ATALHOS :',
 'titre_changer_couleur_interface' => 'Mudar a cor da interface',
 'titre_forum' => 'Fórum',

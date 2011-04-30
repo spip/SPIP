@@ -355,7 +355,6 @@ sera ignorée) :
 'icone_maintenance_site' => 'Odrzavanje stranice',
 'icone_messagerie_personnelle' => 'Licni servis poruka',
 'icone_mots_cles' => 'Kljucne rijeci',
-'icone_nouvelle_breve' => 'Napisi novo obavjestenje',
 'icone_repartition_actuelle' => 'Prikazi trenutnu distribuciju',
 'icone_repartition_debut' => 'Prikazi distribuciju od pocetka',
 'icone_repartition_visites' => 'Distribucija posjeta',
@@ -408,11 +407,9 @@ sera ignorée) :
 'info_auteurs_nombre' => 'autor/i:',
 'info_authentification_ftp' => 'Authentifikacija (FTP-om).',
 'info_bloquer_lien' => 'blokiraj ovaj link',
-'info_breves_02' => 'Obavjestenja',
 'info_breves_2' => 'obavjestenja',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Obavjestenja za ovjeriti',
 'info_connexion_refusee' => 'Prijava odbijena',
 'info_contact_developpeur' => 'Kontaktirajte programera.',
 'info_contenance' => 'Ova stranica sadrzi:',
@@ -560,7 +557,6 @@ sera ignorée) :
 'info_vos_rendez_vous' => 'Vasi sastanci koji slijede',
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Vase biljeske', # MODIF
-'item_breve_proposee' => 'Predlozena obavjestenja',
 
 // L
 'lien_afficher_icones_seuls' => 'Prikazi samo ikone',
@@ -716,9 +712,6 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 'texte_statut_publie' => 'objavljeno',
 'texte_statut_refuse' => 'odbijeno',
 'titre_ajouter_mot_cle' => 'DODATI KLJUCNU RIJEC:',
-'titre_breve_proposee' => 'Predlozeno obavjestenje',
-'titre_breve_publiee' => 'Obavjestenje objavljeno',
-'titre_breve_refusee' => 'Obavjestenje odbijeno',
 'titre_cadre_raccourcis' => 'PRECICE:',
 'titre_changer_couleur_interface' => 'Promijeni boju interfejsa',
 'titre_forum' => 'Forum',

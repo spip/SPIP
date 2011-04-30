@@ -374,7 +374,6 @@ sera ignorée) :
 'icone_maintenance_site' => '站点维护',
 'icone_messagerie_personnelle' => '个人消息',
 'icone_mots_cles' => '关键词',
-'icone_nouvelle_breve' => '写新简要',
 'icone_repartition_actuelle' => '显示实际分布',
 'icone_repartition_debut' => '显示从开始的分布',
 'icone_repartition_visites' => '访问分布',
@@ -427,11 +426,9 @@ sera ignorée) :
 'info_auteurs_nombre' => '作者:',
 'info_authentification_ftp' => '(通过 FTP)验证.',
 'info_bloquer_lien' => '阻止这个连接',
-'info_breves_02' => '简要',
 'info_breves_2' => '简要',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => '需确认的简要',
 'info_connexion_refusee' => '连接禁止',
 'info_contact_developpeur' => '请联系开发者.',
 'info_contenance' => '站点包括:',
@@ -582,7 +579,6 @@ sera ignorée) :
 'info_vos_rendez_vous' => '将来的约会',
 'info_zoom' => '缩放',
 'infos_vos_pense_bete' => '备注', # MODIF
-'item_breve_proposee' => '新闻提交',
 
 // L
 'lien_afficher_icones_seuls' => '只显示图片',
@@ -759,9 +755,6 @@ sera ignorée) :
 'texte_statut_publie' => '在线出版',
 'texte_statut_refuse' => '丢弃',
 'titre_ajouter_mot_cle' => '加关键字:',
-'titre_breve_proposee' => '提交的新闻',
-'titre_breve_publiee' => '发表的新闻',
-'titre_breve_refusee' => '丢弃的新闻',
 'titre_cadre_raccourcis' => '快捷方式:',
 'titre_changer_couleur_interface' => '改变界面颜色',
 'titre_forum' => '内部论坛',

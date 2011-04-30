@@ -381,7 +381,6 @@ Dziękujemy za wzięcie udziału.
 'icone_maintenance_site' => 'Administracja stroną',
 'icone_messagerie_personnelle' => 'Wiadomości prywatne',
 'icone_mots_cles' => 'Słowa kluczowe',
-'icone_nouvelle_breve' => 'Napisz nowy news',
 'icone_repartition_actuelle' => 'Pokaż aktualną dystrybucję',
 'icone_repartition_debut' => 'Pokaż dystrybucję od początku',
 'icone_repartition_visites' => 'Rozłożenie wizyt',
@@ -434,11 +433,9 @@ Dziękujemy za wzięcie udziału.
 'info_auteurs_nombre' => 'autor(zy):',
 'info_authentification_ftp' => 'Uwierzytelnienie (poprzez FTP).',
 'info_bloquer_lien' => 'zablokuj ten link',
-'info_breves_02' => 'Newsy',
 'info_breves_2' => 'newsy',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Newsy do zatwierdzenia',
 'info_connexion_refusee' => 'Brak połączenia',
 'info_contact_developpeur' => 'Proszę skontaktować się z deweloperem.',
 'info_contenance' => 'Ta strona zawiera:',
@@ -589,7 +586,6 @@ Dziękujemy za wzięcie udziału.
 'info_vos_rendez_vous' => 'Twoje przyszłe spotkania',
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Twoje notatki', # MODIF
-'item_breve_proposee' => 'Zaproponowany news',
 
 // L
 'lien_afficher_icones_seuls' => 'Pokazuj tylko ikonki',
@@ -763,9 +759,6 @@ a następnie sprawdź czy obrazki pojawiają się zawsze w artykułach.',
 'texte_statut_publie' => 'opublikowany online',
 'texte_statut_refuse' => 'odrzucony',
 'titre_ajouter_mot_cle' => 'DODAJ SŁOWO KLUCZOWE:',
-'titre_breve_proposee' => 'News zatwierdzony',
-'titre_breve_publiee' => 'News opublikowany',
-'titre_breve_refusee' => 'News odrzucony',
 'titre_cadre_raccourcis' => 'SKRÓTY :',
 'titre_changer_couleur_interface' => 'Zmiana koloru interfejsu',
 'titre_forum' => 'Forum',

@@ -381,7 +381,6 @@ Terima kasih atas partisipasi anda!
 'icone_maintenance_site' => 'Pemeliharaan situs',
 'icone_messagerie_personnelle' => 'Sistem pesan pribadi',
 'icone_mots_cles' => 'Kata-kata kunci',
-'icone_nouvelle_breve' => 'Tulis sebuah artikel berita baru',
 'icone_repartition_actuelle' => 'Tampilkan distribusi sekarang',
 'icone_repartition_debut' => 'Tampilkan distribusi dari awal',
 'icone_repartition_visites' => 'Distribusi kunjungan',
@@ -434,11 +433,9 @@ Terima kasih atas partisipasi anda!
 'info_auteurs_nombre' => 'penulis:',
 'info_authentification_ftp' => 'Ototentikasi (dengan FTP).',
 'info_bloquer_lien' => 'Blokir tautan ini',
-'info_breves_02' => 'Berita',
 'info_breves_2' => 'berita',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Artikel berita yang akan divalidasi',
 'info_connexion_refusee' => 'Koneksi ditolak',
 'info_contact_developpeur' => 'Silakan hubungi pengembang.',
 'info_contenance' => 'Situs ini berisikan:',
@@ -589,7 +586,6 @@ Terima kasih atas partisipasi anda!
 'info_vos_rendez_vous' => 'Janji-janji anda yang akan datang',
 'info_zoom' => 'perbesar',
 'infos_vos_pense_bete' => 'Memo anda', # MODIF
-'item_breve_proposee' => 'Artikel berita dikirim',
 
 // L
 'lien_afficher_icones_seuls' => 'Tampilkan icon saja',
@@ -765,9 +761,6 @@ dan mengakses situs kembali.
 'texte_statut_publie' => 'dipublikasi online',
 'texte_statut_refuse' => 'ditolak',
 'titre_ajouter_mot_cle' => 'TAMBAH SEBUAH KATA KUNCI:',
-'titre_breve_proposee' => 'Artikel berita yang dikirim',
-'titre_breve_publiee' => 'Artikel berita dipublikasi',
-'titre_breve_refusee' => 'Artikel berita ditolak',
 'titre_cadre_raccourcis' => 'JALAN PINTAS:',
 'titre_changer_couleur_interface' => 'Mengubah warna tatap muka',
 'titre_forum' => 'Forum',

@@ -377,7 +377,6 @@ Tak for din deltagelse
 'icone_maintenance_site' => 'Vedligeholdelse',
 'icone_messagerie_personnelle' => 'Personlige meddelelser',
 'icone_mots_cles' => 'Nøgleord',
-'icone_nouvelle_breve' => 'Skriv ny nyhed',
 'icone_repartition_actuelle' => 'Vis faktisk fordeling',
 'icone_repartition_debut' => 'Vis fordeling siden start',
 'icone_repartition_visites' => 'Besøgsfordeling',
@@ -430,11 +429,9 @@ Tak for din deltagelse
 'info_auteurs_nombre' => 'forfatter(e):',
 'info_authentification_ftp' => 'Adgangskontrol (ved FTP).',
 'info_bloquer_lien' => 'bloker dette link',
-'info_breves_02' => 'Nyheder',
 'info_breves_2' => 'nyheder',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Nyheder der afventer godkendelse',
 'info_connexion_refusee' => 'Opkobling afvist',
 'info_contact_developpeur' => 'Kontakt en udvikler.',
 'info_contenance' => 'Dette websted indeholder:',
@@ -583,7 +580,6 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_vos_rendez_vous' => 'Dine fremtidige aftaler',
 'info_zoom' => 'zoom', # NEW
 'infos_vos_pense_bete' => 'Dine memoer', # MODIF
-'item_breve_proposee' => 'Nyhed indsendt',
 
 // L
 'lien_afficher_icones_seuls' => 'Vis kun piktogrammer',
@@ -745,9 +741,6 @@ og igen få adgang til webstedet.', # MODIF
 'texte_statut_publie' => 'offentliggjort online',
 'texte_statut_refuse' => 'afvist',
 'titre_ajouter_mot_cle' => 'TILFØJ NØGLEORD:',
-'titre_breve_proposee' => 'Indsendte nyheder',
-'titre_breve_publiee' => 'Offentliggjorte nyheder',
-'titre_breve_refusee' => 'Afviste nyheder',
 'titre_cadre_raccourcis' => 'GENVEJE:',
 'titre_changer_couleur_interface' => 'Ændre farve på brugergrænsefladen',
 'titre_forum' => 'Internt forum',

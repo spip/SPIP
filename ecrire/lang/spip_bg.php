@@ -381,7 +381,6 @@ sera ignorée) :
 'icone_maintenance_site' => 'Поддръжка на сайта',
 'icone_messagerie_personnelle' => 'Лични съобщения',
 'icone_mots_cles' => 'Ключови думи',
-'icone_nouvelle_breve' => 'Съставяне на новина',
 'icone_repartition_actuelle' => 'Покажи настоящата дистрибуция',
 'icone_repartition_debut' => 'Покажи началната дистрибуция',
 'icone_repartition_visites' => 'Разпределяне на посещенията',
@@ -434,11 +433,9 @@ sera ignorée) :
 'info_auteurs_nombre' => 'автор(и):',
 'info_authentification_ftp' => 'Удостоверяване автентичността (чрез FTP).',
 'info_bloquer_lien' => 'блокиране на препратката',
-'info_breves_02' => 'Новини',
 'info_breves_2' => 'новини',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Новини за одобрение',
 'info_connexion_refusee' => 'Забранено свързване',
 'info_contact_developpeur' => 'Моля, свържете се с някой разработчик.',
 'info_contenance' => 'Сайтът съдържа:',
@@ -589,7 +586,6 @@ sera ignorée) :
 'info_vos_rendez_vous' => 'Вашите бъдещи срещи',
 'info_zoom' => 'увеличение',
 'infos_vos_pense_bete' => 'Лични бележки', # MODIF
-'item_breve_proposee' => 'Изпратени новини',
 
 // L
 'lien_afficher_icones_seuls' => 'Показване само на икони',
@@ -765,9 +761,6 @@ sera ignorée) :
 'texte_statut_publie' => 'публикувана на сайта',
 'texte_statut_refuse' => 'отхвърлена',
 'titre_ajouter_mot_cle' => 'ДОБАВЯНЕ НА КЛЮЧОВА ДУМА:',
-'titre_breve_proposee' => 'Изпратена новина',
-'titre_breve_publiee' => 'Публикувана новина',
-'titre_breve_refusee' => 'Отхвърлена новина',
 'titre_cadre_raccourcis' => 'КОМАНДИ ЗА УСКОРЕН ДОСТЪП:',
 'titre_changer_couleur_interface' => 'Смяна цвета на интерфейса',
 'titre_forum' => 'Форум',

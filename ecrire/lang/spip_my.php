@@ -352,7 +352,6 @@ sera ignorée) :
 'icone_maintenance_site' => 'ဆိုက်ပြုပြင်စီမံရန်',
 'icone_messagerie_personnelle' => 'ကိုယ်ပိုင် စာစောင်ပေးပို့ရန်',
 'icone_mots_cles' => 'စကားစုများ',
-'icone_nouvelle_breve' => 'သတင်း အသစ်ရေးရန်',
 'icone_repartition_actuelle' => 'လက်ရှိထုတ်ဝေမှုကို ထုတ်ပြပါ',
 'icone_repartition_debut' => 'ကနဦးအစမှ ထုတ်ဝေမှုကို ထုတ်ပြပါ',
 'icone_repartition_visites' => 'ထုတ်ဝေမှု အခြေပြဇယားများ',
@@ -405,11 +404,9 @@ sera ignorée) :
 'info_auteurs_nombre' => 'စာရေးသူ(များ)',
 'info_authentification_ftp' => 'စမ်းစစ်အတည်ပြုခြင်း(FTP မှ)',
 'info_bloquer_lien' => 'ဤဆက်သွယ်မှုကို ပိတ်ပင်ရန်',
-'info_breves_02' => 'သတင်း',
 'info_breves_2' => 'သတင်း',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'သတင်းအတည်ပြုရန်',
 'info_connexion_refusee' => 'ဆက်သွယ်ရန်ကြိုးစားမှု ငြင်းပယ်ခံရသည်',
 'info_contact_developpeur' => 'တီထွင်သူကိုဆက်သွယ်ပါ',
 'info_contenance' => 'ဆိုက်ထဲပါဝင်သည့် အရာများမှာ၊',
@@ -557,7 +554,6 @@ sera ignorée) :
 'info_vos_rendez_vous' => 'အနာဂတ်ချိန်းဆိုချက်',
 'info_zoom' => 'အ​ကြီးချဲ့ရန်',
 'infos_vos_pense_bete' => 'သင့်မှတ်တမ်းများ', # MODIF
-'item_breve_proposee' => 'သတင်း တင်သွင်းပြီးပြီ',
 
 // L
 'lien_afficher_icones_seuls' => 'ရုပ်ပုံသက်သက်ကိုပြပေးပါ',
@@ -699,9 +695,6 @@ sera ignorée) :
 'texte_statut_publie' => 'အွန်လိုင်းတွင် ထုတ်​​ဝေပြီး',
 'texte_statut_refuse' => 'ငြင်းပယ်ထားသည်',
 'titre_ajouter_mot_cle' => 'စကားစုထည့်ပါအုံး',
-'titre_breve_proposee' => 'သတင်းများတင်သွင်းပြီး',
-'titre_breve_publiee' => 'သတင်းများ ထုတ်​​ဝေပြီး',
-'titre_breve_refusee' => 'သတင်းများ ငြင်းပယ်ထားပြီး',
 'titre_cadre_raccourcis' => '​မာတိကာ',
 'titre_changer_couleur_interface' => 'စာမျက်နှာ အရာင်ပြောင်းရန်',
 'titre_forum' => 'ဖိုရမ်',

@@ -381,7 +381,6 @@ sera ignorée) :
 'icone_maintenance_site' => 'תחזוקת אתר',
 'icone_messagerie_personnelle' => 'התכתבות אישית',
 'icone_mots_cles' => 'מילות מפתח',
-'icone_nouvelle_breve' => 'כתוב מבזק חדש',
 'icone_repartition_actuelle' => 'הראה תפוצה ממשית',
 'icone_repartition_debut' => 'הצג חלוקה מן ההתחלה',
 'icone_repartition_visites' => 'חלוקת ביקורים',
@@ -434,11 +433,9 @@ sera ignorée) :
 'info_auteurs_nombre' => ':(מחבר(ים',
 'info_authentification_ftp' => '.(.אישור (על ידי אף.טי.פי',
 'info_bloquer_lien' => 'חסום את הקישור הזה',
-'info_breves_02' => 'מבזקים',
 'info_breves_2' => 'מבזקים',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'לתת תוקף למבזקים האלה',
 'info_connexion_refusee' => 'החיבור מסורב',
 'info_contact_developpeur' => '.אנא צור קשר עם המפתח',
 'info_contenance' => ':האתר הזה מכיל',
@@ -589,7 +586,6 @@ sera ignorée) :
 'info_vos_rendez_vous' => 'פגישות עתידיות שלך',
 'info_zoom' => 'זום',
 'infos_vos_pense_bete' => 'התזכירים שלך', # MODIF
-'item_breve_proposee' => 'מבזק מוצע',
 
 // L
 'lien_afficher_icones_seuls' => 'הצג צלמיות בלבד',
@@ -766,9 +762,6 @@ sera ignorée) :
 'texte_statut_publie' => 'מפורסם',
 'texte_statut_refuse' => 'מסורב',
 'titre_ajouter_mot_cle' => 'הוספת מילת מפתח:',
-'titre_breve_proposee' => 'מבזק מוצע',
-'titre_breve_publiee' => 'מבזק מפורסם',
-'titre_breve_refusee' => 'מבזק מסורב',
 'titre_cadre_raccourcis' => 'קיצורי דרך :',
 'titre_changer_couleur_interface' => 'שינוי צבע הממשק',
 'titre_forum' => 'פורום',

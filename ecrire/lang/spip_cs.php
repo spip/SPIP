@@ -380,7 +380,6 @@ Děkujeme vám za účast
 'icone_maintenance_site' => 'Údržba webu',
 'icone_messagerie_personnelle' => 'Osobní zprávy',
 'icone_mots_cles' => 'Klíčová slova',
-'icone_nouvelle_breve' => 'Napsat novinku',
 'icone_repartition_actuelle' => 'Zobrazit aktuální rozdělení',
 'icone_repartition_debut' => 'Zobrazit rozdělení od počátku',
 'icone_repartition_visites' => 'Rozdělení návštěv',
@@ -433,11 +432,9 @@ Děkujeme vám za účast
 'info_auteurs_nombre' => 'Autor či autoři:',
 'info_authentification_ftp' => 'Autentifikace (pomocí FTP).',
 'info_bloquer_lien' => 'zablokovat tento odkaz',
-'info_breves_02' => 'Novinky',
 'info_breves_2' => 'novinky',
 'info_breves_nb' => '@nb@ news items', # NEW
 'info_breves_un' => '1 news item', # NEW
-'info_breves_valider' => 'Novinky ke schválení',
 'info_connexion_refusee' => 'Spojení bylo odepřeno',
 'info_contact_developpeur' => 'Kontaktujte vývojáře.',
 'info_contenance' => 'Tyto stránky obsahují:',
@@ -588,7 +585,6 @@ Děkujeme vám za účast
 'info_vos_rendez_vous' => 'Vaše budoucí schůzky',
 'info_zoom' => 'zvětšit/zmenšit',
 'infos_vos_pense_bete' => 'Vaše poznámky', # MODIF
-'item_breve_proposee' => 'Předložené novinky',
 
 // L
 'lien_afficher_icones_seuls' => 'Zobrazit pouze ikony',
@@ -764,9 +760,6 @@ a znovu se ke stránkám připojíte.
 'texte_statut_publie' => 'zveřejněno online',
 'texte_statut_refuse' => 'odmítnuto',
 'titre_ajouter_mot_cle' => 'PŘIDAT KLÍČOVÉ SLOVO:',
-'titre_breve_proposee' => 'Předložená novinka',
-'titre_breve_publiee' => 'Novinka zveřejněna',
-'titre_breve_refusee' => 'Novinka zamítnuta',
 'titre_cadre_raccourcis' => 'KLÁVESOVÉ ZKRATKY:',
 'titre_changer_couleur_interface' => 'Změna barvy rozhraní',
 'titre_forum' => 'Diskusní skupina',

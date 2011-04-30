@@ -380,7 +380,6 @@ Mercé per vòstra participacion
 'icone_maintenance_site' => 'Mantenença dau sit',
 'icone_messagerie_personnelle' => 'Messatjariá personala',
 'icone_mots_cles' => 'Mots clau',
-'icone_nouvelle_breve' => 'Escriure una brèva nòva',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuala',
 'icone_repartition_debut' => 'Afichar la reparticion dempuei lo començament',
 'icone_repartition_visites' => 'Reparticion de las vesitas',
@@ -433,11 +432,9 @@ Mercé per vòstra participacion
 'info_auteurs_nombre' => 'autor(s)',
 'info_authentification_ftp' => 'autentificacion (per FTP).',
 'info_bloquer_lien' => 'Blocar aqueu liam',
-'info_breves_02' => 'Brèvas',
 'info_breves_2' => 'brèvas',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Brèvas de validar',
 'info_connexion_refusee' => 'Connexion refusaa',
 'info_contact_developpeur' => 'Vougatz contactar un desvolopaire.',
 'info_contenance' => 'Aqueu sit conten:',
@@ -586,7 +583,6 @@ Mercé per vòstra participacion
 'info_vos_rendez_vous' => 'Vòstres rendètz-vos venents',
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Vòstres mementos', # MODIF
-'item_breve_proposee' => 'Brèva prepausaa',
 
 // L
 'lien_afficher_icones_seuls' => 'Afichar mas que las icònas',
@@ -762,9 +758,6 @@ e vos tornar connectar au sit.
 'texte_statut_publie' => 'publicat en linha',
 'texte_statut_refuse' => 'refusat',
 'titre_ajouter_mot_cle' => 'APONDRE UN MOT CLAU:',
-'titre_breve_proposee' => 'Brèva prepausaa',
-'titre_breve_publiee' => 'Brèva publicaa',
-'titre_breve_refusee' => 'Brèva refusaa',
 'titre_cadre_raccourcis' => 'ACORCHAS:',
 'titre_changer_couleur_interface' => 'Chambiar la color de l\'interfàcia',
 'titre_forum' => 'Forum',
