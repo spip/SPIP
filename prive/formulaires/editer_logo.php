@@ -13,13 +13,9 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 global $logo_libelles;
-$logo_libelles['article'] = _T('logo_article').aide ("logoart");
-$logo_libelles['auteur'] = _T('logo_auteur').aide ("logoart");
-$logo_libelles['breve'] = _T('logo_breve').aide ("breveslogo");
 // utilise pour le logo du site, donc doit rester ici
-$logo_libelles['site'] = _T('logo_site')." ".aide ("rublogo");
-$logo_libelles['rubrique'] = _T('logo_rubrique')." ".aide ("rublogo");
-$logo_libelles['racine'] = _T('logo_standard_rubrique')." ".aide ("rublogo");
+$logo_libelles['site'] = _T('logo_site');
+$logo_libelles['racine'] = _T('logo_standard_rubrique');
 
 /**
  * Formulaire #EDITER_LOGO
@@ -66,6 +62,18 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 			$libelle = _T($libelle);
 		} else {
 			$libelle = $libelles['site'];
+		}
+		switch($objet){
+			case 'article':
+			case 'auteur':
+				$libelle .= " " . aide ("logoart");
+				break;
+			case 'breve':
+				$libelle .= " " . aide ("breveslogo");
+				break;
+			default:
+				$libelle .= " " . aide ("rublogo");
+				break;
 		}
 
 		$options['titre'] = $img . $libelle;
