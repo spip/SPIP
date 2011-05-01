@@ -272,13 +272,6 @@ $liste_des_etats = array(
 	'texte_statut_refuse' => 'refuse'
 );
 
-$liste_des_forums = array(
-	'bouton_radio_modere_posteriori' => 'pos',
-	'bouton_radio_modere_priori' => 'pri',
-	'bouton_radio_modere_abonnement' => 'abo',
-	'info_pas_de_forum' => 'non'
-);
-
 // liste des methodes d'authentifications
 $liste_des_authentifications = array(
 	'spip'=>'spip',
