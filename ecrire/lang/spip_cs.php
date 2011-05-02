@@ -317,37 +317,15 @@ Děkujeme vám za účast
 'form_prop_non_enregistre' => 'Váš návrh byl zaznamenán.',
 'form_prop_sujet' => 'Předmět',
 'form_prop_url_site' => 'Adresa URL webu',
-'forum_acces_refuse' => 'K těmto diskusním skupinám již nemáte přístup.',
-'forum_attention_dix_caracteres' => '<b>Varování!</b> Zpráva musí obsahovat minimálně deset znaků.',
-'forum_attention_trois_caracteres' => '<b>Varování!</b> Název musí obsahovat minimálně deset znaků.',
-'forum_attention_trop_caracteres' => '<b>Varování !</b> vaše zpráva je příliš dlouhá(@compte@ znaků) : aby jí bylo možné uložit, nesmí obsahovat více než  @max@ znaků.',
-'forum_avez_selectionne' => 'Zvolili jste:',
-'forum_cliquer_retour' => 'Pokračujte klepnutím <a href=\'@retour_forum@\'>na tento odkaz</a>.',
-'forum_forum' => 'diskusní skupina',
-'forum_info_modere' => 'Tato diskusní skupina je moderovaná: vaše příspěvky se zobrazí až po schválení správcem tohoto webu.',
-'forum_lien_hyper' => '<b>Hypertextový odkaz</b> (volitelné)',
-'forum_message_definitif' => 'Závěrečná zpráva: odesláno na web',
-'forum_message_trop_long' => 'Zpráva je příliš dlouhá. Maximum je 20.000 znaků.',
-'forum_ne_repondez_pas' => 'Neodpovídejte na tuto zprávu. Odpověď zveřejněte v rámci skupiny na adrese:', # MODIF
 'forum_non_inscrit' => 'Buď nejste zaregistrováni nebo jste zadali nesprávnou adresu či heslo.',
-'forum_page_url' => '(Týká-li se zpráva článku zveřejněného na webu nebo stránky s doplňujícími informacemi, zadejte dále název stránky a její adresu).',
 'forum_par_auteur' => 'Autor: @auteur@',
-'forum_poste_par' => 'Zpráva od posted@parauteur@ na základě vašeho článku.', # MODIF
 'forum_probleme_database' => 'Kvůli problémům s databází nebylo možné vaši zprávu zaznamenat.',
 'forum_qui_etes_vous' => '<b>Kdo jste?</b> (volitelné)',
-'forum_texte' => 'Text zprávy:',
-'forum_titre' => 'Předmět:',
 'forum_titre_erreur' => 'Chyba...',
 'forum_url' => 'Adresa URL:',
 'forum_valider' => 'Potvrdit výběr',
-'forum_voir_avant' => 'Před odesláním zprávu zobrazit',
 'forum_votre_email' => 'Váš e-mail:',
 'forum_votre_nom' => 'Vaše jméno (resp. přezdívka):',
-'forum_vous_enregistrer' => 'Této diskusní skupiny se můžete účastnit
-  až po zaregistrování. Děkujeme vám
-  za zadání identifikačních údajů.
-  Nejste-li doposud zaregistrováni, musíte ',
-'forum_vous_inscrire' => 'tak učinit nyní.',
 
 // I
 'ical_texte_rss_articles' => 'Adresa souboru na serveru (backend) článků na webu je:',
@@ -396,11 +374,9 @@ Děkujeme vám za účast
 'icone_suivi_revisions' => 'Revize článků',
 'icone_supprimer_document' => 'Odstranit dokument',
 'icone_supprimer_image' => 'Odstranit obrázek',
-'icone_supprimer_message' => 'Ostranit zprávu',
 'icone_tous_articles' => 'Všechny vaše články',
 'icone_tous_auteur' => 'Všichni autoři',
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-'icone_valider_message' => 'Schválit zprávu',
 'icone_visiter_site' => 'Zobrazit web', # MODIF
 'icone_voir_en_ligne' => 'Prohlížet online',
 'image_tourner_180' => 'Otočit o 180°',
@@ -657,9 +633,6 @@ Děkujeme vám za účast
 'onglet_informations_personnelles' => 'Osobní údaje',
 'onglet_interactivite' => 'Interaktivita',
 'onglet_messagerie' => 'Systém zpráv',
-'onglet_messages_internes' => 'Interní zprávy',
-'onglet_messages_publics' => 'Veřejné zprávy',
-'onglet_messages_vide' => 'Zprávy bez textu',
 'onglet_origine_visites' => 'Původ návštěv',
 'onglet_repartition_debut' => 'od počátku',
 'onglet_repartition_lang' => 'Rozdělení podle jazyků',
@@ -762,7 +735,6 @@ a znovu se ke stránkám připojíte.
 'titre_ajouter_mot_cle' => 'PŘIDAT KLÍČOVÉ SLOVO:',
 'titre_cadre_raccourcis' => 'KLÁVESOVÉ ZKRATKY:',
 'titre_changer_couleur_interface' => 'Změna barvy rozhraní',
-'titre_forum' => 'Diskusní skupina',
 'titre_image_admin_article' => 'Máte možnost správy tohoto článku',
 'titre_image_administrateur' => 'Správce',
 'titre_image_aide' => 'Nápověda k položce',

@@ -317,37 +317,15 @@ Mercés entà la vòsta participacion
 'form_prop_non_enregistre' => 'La vòsta proposicion n\'ei pas estada registrada.',
 'form_prop_sujet' => 'Subjècte',
 'form_prop_url_site' => 'Adreiça (URL) deu sit',
-'forum_acces_refuse' => 'Non podetz plus accedir a aqueths forums.',
-'forum_attention_dix_caracteres' => '<b>Atencion!</b> lo vòste messatge que deu tiéner aumensh dètz caractèrs.',
-'forum_attention_trois_caracteres' => '<b>Atencion!</b> lo vòste títol que deu tiéner aumensh de tres caractèrs.',
-'forum_attention_trop_caracteres' => '<b>Attention !</b> votre message est trop long (@compte@ caractères) : pour pouvoir être enregistré, il ne doit pas dépasser @max@ caractères.', # NEW
-'forum_avez_selectionne' => 'Qu\'avetz seleccionat:',
-'forum_cliquer_retour' => 'Clicatz <a href=\'@retour_forum@\'>ací</a> tà contunhar.',
-'forum_forum' => 'forum',
-'forum_info_modere' => 'Aqueste forum qu\'ei moderat a priòri: la vòsta contribucion que pareisherà sonque après qu\'un administrator deu sit l\'aja validada.',
-'forum_lien_hyper' => '<b>Ligam ipertèxt</b> (opcionau)',
-'forum_message_definitif' => 'Messatge definitiu : mandar au sit',
-'forum_message_trop_long' => 'Lo vòste messatge qu\'ei tròp long. La longor maximau qu\'ei de 20 000 caractèrs.',
-'forum_ne_repondez_pas' => 'Non responiatz pas a aqueth e-mail mes peu forum a l\'adreiça seguenta: ', # MODIF
 'forum_non_inscrit' => 'Sia n\'ètz pas inscriut(a), sia avetz hèit ua error d\'adreiça o de mot de santa Clara. ',
-'forum_page_url' => '(se lo vòste messatge e\'s refereish a un article publicat peu web, o a ua pagina qui baile mei informacions, que podetz marcar ça devath lo títol de la pagina e la soa adreiça URL.)',
 'forum_par_auteur' => 'per @auteur@',
-'forum_poste_par' => 'Messatge poste@parauteur@ qui hè seguida au vòste article.', # MODIF
 'forum_probleme_database' => 'Problèma de basa de dadas, lo vòste messatge non s\'ei pas registrat.',
 'forum_qui_etes_vous' => '<b>Qui ètz?</b> (opcionau)',
-'forum_texte' => 'Tèxt deu vòste messatge:',
-'forum_titre' => 'Títol:',
 'forum_titre_erreur' => 'Error...',
 'forum_url' => 'URL:',
 'forum_valider' => 'Validar aquera causida',
-'forum_voir_avant' => 'Véder lo messatge abans de\'u mandar',
 'forum_votre_email' => 'La vòsta adreiça e-mail:',
 'forum_votre_nom' => 'Lo vòste nom (o pseudonim):',
-'forum_vous_enregistrer' => 'Entà participar a
-  aqueth forum, en permèras que\'vs cau registrar. Mercés
-  de marcar ça devath l\'identificant personau qui avetz recebut.
- Se n\'ètz pas registrat/ada, qu\'ei necessari',
-'forum_vous_inscrire' => 'inscrive\'vs',
 
 // I
 'ical_texte_rss_articles' => 'Lo fichièr "backend" deus articles d\'aqueste sit que\'s tròba a l\'adreiça:',
@@ -396,11 +374,9 @@ Mercés entà la vòsta participacion
 'icone_suivi_revisions' => 'Modificacions deus articles',
 'icone_supprimer_document' => 'Suprimir aqueth document',
 'icone_supprimer_image' => 'Suprimir aqueth imatge',
-'icone_supprimer_message' => 'Suprimir aqueth messatge',
 'icone_tous_articles' => 'Tots los vòstes articles ',
 'icone_tous_auteur' => 'Tots los autors ',
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-'icone_valider_message' => 'Validar aqueth messatge',
 'icone_visiter_site' => 'Vesitar', # MODIF
 'icone_voir_en_ligne' => 'Véder en linha',
 'image_tourner_180' => 'Rotacion 180°',
@@ -654,9 +630,6 @@ Mercés entà la vòsta participacion
 'onglet_informations_personnelles' => 'Informacions personaus',
 'onglet_interactivite' => 'Interactivitat',
 'onglet_messagerie' => 'Messatjaria',
-'onglet_messages_internes' => 'Messatges intèrnes',
-'onglet_messages_publics' => 'Messatges publics',
-'onglet_messages_vide' => 'Messatges shens tèxt',
 'onglet_origine_visites' => 'Origina de las vesitas',
 'onglet_repartition_debut' => 'dempuish la començança',
 'onglet_repartition_lang' => 'Reparticion per lengas',
@@ -759,7 +732,6 @@ e tornar connectà\'vs au sit.
 'titre_ajouter_mot_cle' => 'AJUSTAR UN MOT CLAU:',
 'titre_cadre_raccourcis' => 'ACORCIDAS:',
 'titre_changer_couleur_interface' => 'Cambiar la color de l\'interfàcia',
-'titre_forum' => 'Forum',
 'titre_image_admin_article' => 'Que podetz administrar aqueste article',
 'titre_image_administrateur' => 'Administrator',
 'titre_image_aide' => 'Ajuda sus aqueth element',

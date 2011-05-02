@@ -313,35 +313,15 @@ sera ignorée) :
 'form_prop_non_enregistre' => '您的提议未被记录.',
 'form_prop_sujet' => '标题',
 'form_prop_url_site' => '站点URL',
-'forum_acces_refuse' => '您已经无权访问这些论坛.',
-'forum_attention_dix_caracteres' => '<b>警告!</b> 您的消息少于十个字符.', # MODIF
-'forum_attention_trois_caracteres' => '<b>警告!</b> 您的标题少于三个字符.', # MODIF
-'forum_attention_trop_caracteres' => '<b>Attention !</b> votre message est trop long (@compte@ caractères) : pour pouvoir être enregistré, il ne doit pas dépasser @max@ caractères.', # NEW
-'forum_avez_selectionne' => '您已选择:',
-'forum_cliquer_retour' => '单击  <a href=\'@retour_forum@\'>这里</a> 继续.',
-'forum_forum' => '论坛',
-'forum_info_modere' => '论坛是预缓冲的: 您的投稿只有被站点管理员确认才能显示.',
-'forum_lien_hyper' => '<MODIF><b>超链接</b> (可选)',
-'forum_message_definitif' => '最后消息: 发送到站点',
-'forum_message_trop_long' => '您的消息过长. 最大长度为20000个字符.',
-'forum_ne_repondez_pas' => '请勿回复该信件,请到如下地址的论坛回复:', # MODIF
 'forum_non_inscrit' => '可能您还没有注册或者您输入的地址或密码错误.',
-'forum_page_url' => '(如果您的消息引用了web上发表的文章请提供进一步的消息, 请输入页头和它的URL).',
 'forum_par_auteur' => '按 @auteur@',
-'forum_poste_par' => '您文章@parauteur@之后后发表的信息.', # MODIF
 'forum_probleme_database' => '数据库问题,您的消息未能保存.',
 'forum_qui_etes_vous' => '<b>您是谁?</b> (可选)', # MODIF
-'forum_texte' => '消息正文:',
-'forum_titre' => '标题:',
 'forum_titre_erreur' => '错误...',
 'forum_url' => 'URL:',
 'forum_valider' => '使选择生效',
-'forum_voir_avant' => '发表前预览',
 'forum_votre_email' => '您的邮件地址:',
 'forum_votre_nom' => '您的名字(或昵称):',
-'forum_vous_enregistrer' => '在参与论坛前,您必须注册. 谢谢您填写已经递交过的个人信息.
-如果你您尚未注册, 您必须',
-'forum_vous_inscrire' => '请注册。',
 
 // I
 'ical_texte_rss_articles' => '本站点文章的«引用»文件地址:',
@@ -390,11 +370,9 @@ sera ignorée) :
 'icone_suivi_revisions' => '文章修改',
 'icone_supprimer_document' => '删除文档',
 'icone_supprimer_image' => '删除图片',
-'icone_supprimer_message' => '删除消息',
 'icone_tous_articles' => '您所有的文章',
 'icone_tous_auteur' => '所有作者',
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-'icone_valider_message' => '使消息有效',
 'icone_visiter_site' => '<MODIF>访问', # MODIF
 'icone_voir_en_ligne' => '在线预览',
 'image_tourner_180' => '旋转180°',
@@ -651,9 +629,6 @@ sera ignorée) :
 'onglet_informations_personnelles' => '个人信息',
 'onglet_interactivite' => '互动',
 'onglet_messagerie' => '消息',
-'onglet_messages_internes' => '内容消息',
-'onglet_messages_publics' => '公众消息',
-'onglet_messages_vide' => '无文字消息',
 'onglet_origine_visites' => '访问者起源',
 'onglet_repartition_debut' => '从开始',
 'onglet_repartition_lang' => '<MODIF>根据语言重新分布',
@@ -757,7 +732,6 @@ sera ignorée) :
 'titre_ajouter_mot_cle' => '加关键字:',
 'titre_cadre_raccourcis' => '快捷方式:',
 'titre_changer_couleur_interface' => '改变界面颜色',
-'titre_forum' => '内部论坛',
 'titre_image_admin_article' => '你可以管理这篇文章',
 'titre_image_administrateur' => '管理者',
 'titre_image_aide' => '该项目的帮助',
