@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'מאמרים אחרונים',
 'derniers_commentaires' => 'תגובות אחרונות',
 'derniers_messages_forum' => 'הודעות אחרונות בפורום',
-'documents_interdits_forum' => 'בשלב זה נאסר בפורום',
 
 // E
 'edition_mode_texte' => 'הוצאה באורח טקסט של ',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'פורמטים מקובלים: : @formats@.',
-'forum' => 'פורום',
 
 // H
 'hierarchie_site' => 'מדרג האתר',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'הוספת תגובה למאמר',
 'repondre_breve' => 'הוספת תגובה למבזק',
-'repondre_message' => 'הוספת תגובה להודעה',
 'resultats_recherche' => 'תוצאות החיפוש',
 'retour_debut_forums' => 'חזרה לדף הראשי של הפורומים',
 'rubrique' => 'מדור',

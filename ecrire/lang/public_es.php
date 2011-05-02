@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Últimos artículos',
 'derniers_commentaires' => 'Últimos comentarios',
 'derniers_messages_forum' => 'Últimos mensajes publicados en los foros',
-'documents_interdits_forum' => 'Documentos prohibidos en el foro',
 
 // E
 'edition_mode_texte' => 'Edición en modo texto de',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formatos aceptados: @formats@.',
-'forum' => 'Foro',
 
 // H
 'hierarchie_site' => 'Jerarquía del sitio',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Comentar este artículo',
 'repondre_breve' => 'Comentar esta breve',
-'repondre_message' => 'Responder este mensaje',
 'resultats_recherche' => 'Resultados de la búsqueda',
 'retour_debut_forums' => 'Volver al inicio del foro',
 'rubrique' => 'Sección',

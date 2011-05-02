@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Ultimele articole',
 'derniers_commentaires' => 'Ultimele comentarii',
 'derniers_messages_forum' => 'Ultimele mesaje publicate în forum-uri',
-'documents_interdits_forum' => 'Documentele sunt interzise în forum',
 
 // E
 'edition_mode_texte' => 'Editare în mod text a',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formate acceptate : @formats@.',
-'forum' => 'Forum',
 
 // H
 'hierarchie_site' => 'Ierarhia site-ului',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Răspundeţi la acest articol',
 'repondre_breve' => 'Răspundeţi la acestă ştire',
-'repondre_message' => 'Răspundeţi la acest mesaj',
 'resultats_recherche' => 'Rezultatele căutarii',
 'retour_debut_forums' => 'Înapoi la începutul forum-urilor',
 'rubrique' => 'Rubrică',

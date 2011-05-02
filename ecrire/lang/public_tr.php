@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Son eklenen makaleler',
 'derniers_commentaires' => 'Son eklenen yorumlar',
 'derniers_messages_forum' => 'Forumlarda yayınlanan son mesajlar',
-'documents_interdits_forum' => 'Forumda yasak olan belgeler',
 
 // E
 'edition_mode_texte' => 'Metin şeklinde değiştir',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Kabûl edilen biçemler : @formats@.',
-'forum' => 'Forum',
 
 // H
 'hierarchie_site' => 'Site hiyerarşisi',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Bu makaleyi yanıtla',
 'repondre_breve' => 'Bu kısa haberi yanıtla',
-'repondre_message' => 'Bu mesajı yanıtla',
 'resultats_recherche' => 'Arama sonuçları',
 'retour_debut_forums' => 'Forumların başına dön',
 'rubrique' => 'Bölüm',

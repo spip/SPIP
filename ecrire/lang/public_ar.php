@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'آخر المقالات',
 'derniers_commentaires' => 'آخر التعليقات',
 'derniers_messages_forum' => 'آخر المشاركات المنشورة في المنتديات',
-'documents_interdits_forum' => 'المستندات ممنوعة في المنتدى',
 
 // E
 'edition_mode_texte' => 'النشرة في وضعية النصوص',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'التنسيقات المسموحة: @formats@.',
-'forum' => 'المنتدى',
 
 // H
 'hierarchie_site' => 'هرمية الموقع',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'الرد على هذا المقال',
 'repondre_breve' => 'الرد على هذا الخبر',
-'repondre_message' => 'الرد على هذه المشاركة',
 'resultats_recherche' => 'نتائج البحث',
 'retour_debut_forums' => 'عودة الى بداية المنتديات',
 'rubrique' => 'القسم',

@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Bann dèrnyé zartik',
 'derniers_commentaires' => 'Bann dèrnyé lavi',
 'derniers_messages_forum' => 'Bann dèrnyé modékri andann bann forom',
-'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Po édité andann mod tèks',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-'forum' => 'Forom kozman',
 
 // H
 'hierarchie_site' => 'Bardrin lo sitwèb',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Po réponn si lartik-la',
 'repondre_breve' => 'Po réponn la tite-nouvèl-la',
-'repondre_message' => 'Po réponn modékri-la',
 'resultats_recherche' => 'Kosa lo rodèr la finn trouvé',
 'retour_debut_forums' => 'Artourn bann débi bann forom',
 'rubrique' => 'Ribrik',

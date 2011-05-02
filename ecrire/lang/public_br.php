@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Pennadoù diwezhañ',
 'derniers_commentaires' => 'Evezhiadennoù diwezhañ',
 'derniers_messages_forum' => 'Kemennadennoù diwezhañ embannet er foromoù',
-'documents_interdits_forum' => 'Teulioù difennet er forom',
 
 // E
 'edition_mode_texte' => 'Aozañ e mod testenn',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Furmadoù aotreet : @formats@.',
-'forum' => 'Forom',
 
 // H
 'hierarchie_site' => 'Gwezennadur al lec\'hienn',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Respont d\'ar pennad-mañ',
 'repondre_breve' => 'Respont d\'ar berrskrid-mañ',
-'repondre_message' => 'Respont d\'ar gemennadenn-mañ',
 'resultats_recherche' => 'Disoc\'hoù an enklask',
 'retour_debut_forums' => 'Distreiñ e deroù ar foromoù',
 'rubrique' => 'Rubrikenn',

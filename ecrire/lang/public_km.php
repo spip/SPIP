@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'អត្ថបទ​ ចុងក្រោយ',
 'derniers_commentaires' => 'វិចារ​ ចុងក្រោយ',
 'derniers_messages_forum' => 'វិចារ​ថ្មីៗ ត្រូវបានផ្សព្វផ្សាយ ក្នុងវេទិកា',
-'documents_interdits_forum' => 'ឯកសារហាម ក្នុងវេទិកា',
 
 // E
 'edition_mode_texte' => 'កំណែប្រែ ជាទំរង់អត្ថបទសុទ្ធ',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'ទ្រង់ទ្រាយ ដែលព្រមទទួល៖ @formats@។',
-'forum' => 'វេទិកា',
 
 // H
 'hierarchie_site' => 'ថានានុក្រម​ នៃសៃថ៍',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'ឆ្លើយ​តប​ ទៅអត្ថបទ​នេះ',
 'repondre_breve' => 'ឆ្លើយ​តប​ ទៅ ពត៌មានសង្ខេបនេះ',
-'repondre_message' => 'ឆ្លើយ​តប​ ទៅ​សារ​នេះ',
 'resultats_recherche' => 'លទ្ធផល​ស្វែងរក',
 'retour_debut_forums' => 'ត្រឡប់​ទៅ ទីដំបូងនៃ​វេទិកា',
 'rubrique' => 'មុខអត្ថបទ',

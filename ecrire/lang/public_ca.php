@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Darrers articles',
 'derniers_commentaires' => 'Darrers comentaris',
 'derniers_messages_forum' => 'Darrers missatges publicats als fòrums',
-'documents_interdits_forum' => 'Documents prohibits al fórum',
 
 // E
 'edition_mode_texte' => 'Edició en mode text de ',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptats: @formats@.',
-'forum' => 'Fòrum',
 
 // H
 'hierarchie_site' => 'Jerarquia del lloc',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Respondre a aquest article',
 'repondre_breve' => 'Respondre a aquesta breu',
-'repondre_message' => 'Respondre a aquest missatge',
 'resultats_recherche' => 'Resultats de la recerca',
 'retour_debut_forums' => 'Retorn al començament dels fòrums',
 'rubrique' => 'Secció',

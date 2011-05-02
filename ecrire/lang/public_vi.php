@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Những bài mới nhất ',
 'derniers_commentaires' => 'Các góp ý mới nhất',
 'derniers_messages_forum' => 'Trao đổi mới nhất hiện trong diễn đàn',
-'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'văn bản thường',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-'forum' => 'Diễn đàn',
 
 // H
 'hierarchie_site' => 'Cấu trúc thứ bậc của trang web',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Trả lời bài này',
 'repondre_breve' => 'Trả lời tin ngắn này',
-'repondre_message' => 'Trả lời mẫu tin này',
 'resultats_recherche' => 'Kết quả tìm kiếm',
 'retour_debut_forums' => 'Trở về trang đầu của diễn đàn',
 'rubrique' => 'Ðề Mục',

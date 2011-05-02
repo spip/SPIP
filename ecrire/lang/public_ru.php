@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Последние статьи',
 'derniers_commentaires' => 'Последние коментарии',
 'derniers_messages_forum' => 'Последние сообщения в форумах',
-'documents_interdits_forum' => 'Запрещенно добавлять документы к сообщениям форума',
 
 // E
 'edition_mode_texte' => 'Текстовый режим',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Допустимые форматы: @formats@.',
-'forum' => 'Форум',
 
 // H
 'hierarchie_site' => 'Иерархия сайта',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Ответить на эту статью',
 'repondre_breve' => 'Ответить на эту новость',
-'repondre_message' => 'Ответить на это сообщение',
 'resultats_recherche' => 'Результаты поиска',
 'retour_debut_forums' => 'К началу форумов',
 'rubrique' => 'Рубрика',

@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Senaste artiklarna',
 'derniers_commentaires' => 'Senaste kommentarerna',
 'derniers_messages_forum' => 'Senaste forum-meddelandena',
-'documents_interdits_forum' => 'Dokument är inte tillåtna i forumet',
 
 // E
 'edition_mode_texte' => 'Textversion',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Godkända format: @formats@.',
-'forum' => 'Forum',
 
 // H
 'hierarchie_site' => 'Sajtens hierarki',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Svara på artikeln',
 'repondre_breve' => 'Svara på nyheten',
-'repondre_message' => 'Svara på meddelandet',
 'resultats_recherche' => 'Sök-resultat',
 'retour_debut_forums' => 'Tillbaka till forumens början',
 'rubrique' => 'Avdelning',

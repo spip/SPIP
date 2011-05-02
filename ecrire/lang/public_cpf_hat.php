@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Dènye atik yo',
 'derniers_commentaires' => 'Dènye komantè yo',
 'derniers_messages_forum' => 'Dènye mesaj yo ki te piblye nan fowom yo',
-'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Ledisyon modtèks pou',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-'forum' => 'Fowom',
 
 // H
 'hierarchie_site' => 'Estrikti sit sa-a',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Reponn sou atik la',
 'repondre_breve' => 'Reponn sou tinouvèl la',
-'repondre_message' => 'Reponn sou mesaj la',
 'resultats_recherche' => 'Rezilta pou ou chèche',
 'retour_debut_forums' => 'Tounyen nan koumansman fowom sa-yo',
 'rubrique' => 'Ribrik',
