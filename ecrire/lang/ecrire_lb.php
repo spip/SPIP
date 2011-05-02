@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'D\'Verbindung mam LDAP-Server huet nët fonktionnéiert.',
 'avis_connexion_ldap_echec_2' => 'Gidd op déi läscht Säit zeréck a kontrolléiert d\'Informatiounen.',
 'avis_connexion_ldap_echec_3' => 'Alternativ benotzt keng LDAP-Ënnerstetzung fir d\'Benotzer ze importéieren.',
-'avis_conseil_selection_mot_cle' => '<b>Wichtege Grupp:</b> ët ass wiirklech ugeroden e Schlësselwuert aus dësem Grupp ze wielen.',
 'avis_deplacement_rubrique' => 'Opgepasst! Dës Rubrik huet @contient_breves@ brève@scb@: wann der se réckelt, klickt dëst Konfirmatiouns-Feld un.',
 'avis_destinataire_obligatoire' => 'Dir musst dën Empfänger uginn ier der dësen Message fortschéckt.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'Fehler bei der SQL-Verbindung',
 'avis_erreur_version_archive' => 'Opgepasst! De Fichier @archive@ korrespondéiert zu enger anerer SPIP-Versioun wéi déi installéiert.
 Dir kommt an grouss Schwieregkeeten:
@@ -57,8 +55,6 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'bouton_annuler' => 'Ofbriechen',
 'bouton_checkbox_envoi_message' => 'ët kann e Message geschéckt ginn',
 'bouton_checkbox_indiquer_site' => 'dir musst en Internet-Site uginn',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'd\'Administrateuren vum Site',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'd\'Redakteren',
 'bouton_checkbox_signature_unique_email' => 'eng eenzeg Ënnerschrëft pro Email-Adress',
 'bouton_checkbox_signature_unique_site' => 'Eng eenzeg Ënnerschrëft pro Internet-Site',
 'bouton_demande_publication' => 'D\'Publikatioun vum Artikel ufroën',
@@ -204,8 +200,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'icone_arret_discussion' => 'Nët méi un dëser Diskussioun deelhuelen',
 'icone_calendrier' => 'Kalenner',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'E Schlësselwierder-Grupp maachen',
-'icone_creation_mots_cles' => 'E Schlësselwuert maachen',
 'icone_creer_auteur' => 'E neien Auteur derbäi setzen an un dësen Artikel bannen',
 'icone_creer_mot_cle' => 'E neit Schlësselwuert derbäi setzen an un dësen Artikel bannen',
 'icone_creer_mot_cle_rubrique' => 'E neit Schlësselwuert maachen an et un dës Rubrik bannen',
@@ -217,10 +211,8 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'Dëse Schlësselwierder-Grupp änneren',
 'icone_modifier_article' => 'Dësen Artikel änneren',
 'icone_modifier_message' => 'Dëse Message änneren',
-'icone_modifier_mot' => 'Dëst Schlësselwuert änneren',
 'icone_modifier_rubrique' => 'Dës Rubrik änneren',
 'icone_modifier_site' => 'Dëse Site änneren',
 'icone_publication' => 'Publication', # NEW
@@ -231,12 +223,10 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Korrespondenz-Cookie läschen',
-'icone_supprimer_groupe_mots' => 'Dëse Grupp läschen',
 'icone_supprimer_rubrique' => 'Dës Rubrik läschen',
 'icone_supprimer_signature' => 'Dës Ënnerschrëft läschen',
 'icone_valider_signature' => 'Dës Ënnerschrëft validéieren',
 'icone_voir_sites_references' => 'Referenzéiert Siten weisen',
-'icone_voir_tous_mots_cles' => 'All d\'Schlësselwierder weisen',
 'image_administrer_rubrique' => 'Dir kënnt dës Rubrik administréieren',
 'info_1_article' => '1 Artikel',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -277,7 +267,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_articles_02' => 'Artikelen',
 'info_articles_2' => 'Artikelen',
 'info_articles_auteur' => 'Artikelen vun dësem Auteur',
-'info_articles_lies_mot' => 'Artikelen déi un dëst Schlësselwuert gebonnen sinn',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Artikelen fonnt',
@@ -287,7 +276,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -301,7 +289,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_barre_outils' => 'mat senger Toolbar?',
 'info_base_installee' => 'D\'Struktur vun ärer Datebank ass installéiert.',
 'info_bloquer' => 'blockéieren',
-'info_changer_nom_groupe' => 'Numm vun dësem Grupp änneren:',
 'info_chapeau' => 'Chapeau',
 'info_chapeau_2' => 'Chapeau:',
 'info_chemin_acces_1' => 'Optiounen: <b>Wee an der Lëscht</b>',
@@ -330,17 +317,13 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Inhalt vun den Artikelen',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'Setzt hei d\'Schlësselwierder vum Site derbäi a konfiguréiert se',
 'info_creation_paragraphe' => '(Fir e neien Abschnitt, loosst einfach eng eidel Zeil.)',
 'info_creation_rubrique' => 'Ier dër kënnt en Artikel schreiwen<br />musst dër op manst eng Rubrik derbäi setzen.<br />',
 'info_creation_tables' => 'Tabellen an d\'Datebank schreiwen',
 'info_creer_base' => 'Eng nei Datebank <b>uleen</b>:',
-'info_dans_groupe' => 'Am Grupp:',
 'info_dans_rubrique' => 'An der Rubrik:',
 'info_date_publication_anterieure' => 'Éischten Redaktiounsdatum:',
 'info_date_referencement' => 'DËSE SITE GOUF REFERENZÉIERT:',
-'info_delet_mots_cles' => 'Dir wëllt d\'Schlësselwuert
- <b>@titre_mot@</b> (@type_mot@) läschen. Dëst Wuert ass un <b>@texte_lie@</b> gebonnen, dir musst dës Decisioun bestätegen:',
 'info_derniere_etape' => 'Ët ass färdeg!',
 'info_derniere_syndication' => 'Läscht Syndicatioun vun dësem Site den',
 'info_derniers_articles_publies' => 'Är läscht publizéiert Artikelen',
@@ -377,7 +360,6 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gréng; Redakter =
 'info_generation_miniatures_images' => 'Miniaturen vun de Biller maachen',
 'info_gerer_trad' => 'Iwwersetzungs-Linken aschalten?',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'Wichtege Grupp',
 'info_hebergeur_desactiver_envoi_email' => 'Verschidden Provider\'en erlaaben nët automatësch Email\'en ze schécken. An deem Fall fonktionnéiert dat hei nët.',
 'info_hier' => 'gëschter:',
 'info_historique' => 'Versiounen:',
@@ -417,14 +399,11 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gréng; Redakter =
 'info_mise_a_niveau_base_2' => '{{Opgepasst!}} Dier hutt eng {al} Versioun vun de SPIP-Fichier\'en installéiert: är Datebank riskéiert verluer ze goën an äre Site nët méi ze fonktionnéieren.<br />{{Installéiert d\'SPIP-Fichier\'en nach eng kéier.}}',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Auteur änneren:',
-'info_modifier_mot' => 'Schlësselwuert änneren:',
 'info_modifier_rubrique' => 'Rubrik änneren:',
 'info_modifier_titre' => 'Änneren: @titre@',
 'info_mon_site_spip' => 'Mäin SPIP-Site',
 'info_mot_sans_groupe' => '(Wierder ouni Grupp...)',
 'info_moteur_recherche' => 'Integréierten Sich-Motor',
-'info_mots_cles' => 'D\'Schlësselwierder',
-'info_mots_cles_association' => 'D\'Schlësselwierder vun dësem Grupp kënnen associéiert ginn:',
 'info_moyenne' => 'Moyenne:',
 'info_multi_articles' => 'De Sprooch-Menu bei den Artikelen aschalten?',
 'info_multi_cet_article' => 'Sprooch vun dësem Artikel:',
@@ -468,7 +447,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_ortho_activer' => 'D\'Orthographie aschalten',
 'info_ortho_desactiver' => 'D\'Orthographie ausschalten',
 'info_ou' => 'oder...',
-'info_oui_suppression_mot_cle' => 'ech wëll dëst Schlësselwuert definitiv läschen.',
 'info_page_interdite' => 'Säit gespaart',
 'info_par_nom' => 'no Numm',
 'info_par_nombre_article' => 'no Zuel vun den Artikelen',
@@ -502,14 +480,12 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_question_accepter_visiteurs' => 'Wann är Skeletter d\'Aschreiwung vu Visiteuren ouni Zougang op de privaten Deel virgesinn, da schalt d\'Optioun hei drënner an:',
 'info_question_gerer_statistiques' => 'Soll äre Site d\'Statistik vun de Visiten géréieren?',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptéiert dier d\'Aschreiwe vu neie Redakteren direkt vum öffentlëche Site? Wa jo, da kënnen d\'Visiteuren sëch iwert een automatësche Formulaire aschreiwen an esou Zougang op de privaten Deel kréien fir hir Artikelen ze proposéieren. <blockquote><i>Während der Aschreiwungs-Phase kréien d\'Benotzer automatësch en Email mat hieren Zougangsinformatiounen. Verschidde Provideren verbidden d\'Schécken vun Email vun hieren Serveren aus: an deem Fall ass d\'automatëscht Aschreiwen onméiglech.', # MODIF
-'info_question_mots_cles' => 'Wëllt dir Schlësselwierder op ärem Site benotzen?',
 'info_question_proposer_site' => 'Wie kann e Site proposéieren?',
 'info_question_utilisation_moteur_recherche' => 'Wëllt dir de Sich-Motor vu SPIP benotzen?
 (ausschalten mëcht de System méi séier.)',
 'info_question_vignettes_referer' => 'Wann dir d\'Statistik kuckt kënnt dir eng Preview vun den Ausgangs-Site gesinn',
 'info_question_vignettes_referer_non' => 'D\'Preview vun den Ausgangs-Site nët weisen',
 'info_question_vignettes_referer_oui' => 'Preview vun den Ausgangs-Site weisen',
-'info_qui_attribue_mot_cle' => 'D\'Wierder vun dësem Grupp kënne verdeelt ginn vun:',
 'info_racine_site' => 'Wuerzel vum Site',
 'info_recharger_page' => 'Lued dës Säit an e puer Sekonnen nei.',
 'info_recherche_auteur_a_affiner' => 'Zevill Resultater fir "@cherche_auteur@"; verbessert är Sich.',
@@ -523,19 +499,16 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_redirection' => 'Ëmledung',
 'info_refuses' => 'Är refuséiert Artikelen',
 'info_reglage_ldap' => 'Optiounen: <b>Astellen vum LDAP-Import</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Ëmledung.</b> Dësen Artikel weist op d\'Säit:',
 'info_reserve_admin' => 'Nëmmen d\'Administrateuren kënnen dës Adress änneren.',
 'info_restreindre_rubrique' => 'D\'Gestioun aschränken op d\'Rubrik:',
 'info_resultat_recherche' => 'Resultater vun der Sich:',
 'info_rubriques' => 'Rubriken',
 'info_rubriques_02' => 'Rubriken',
-'info_rubriques_liees_mot' => 'Un dëst Schlësselwuert gebonnen Rubriken',
 'info_rubriques_trouvees' => 'Rubriken fonnt',
 'info_rubriques_trouvees_dans_texte' => 'Rubriken fonnt (am Text)',
 'info_sans_titre' => 'Ouni Titel',
 'info_selection_chemin_acces' => '<b>Wielt</b> hei de Wee fir den Annuaire:',
-'info_selection_un_seul_mot_cle' => 'Dir kënnt <b>ëmmer nëmmen een Schlësselwuert</b> an dësem Grupp wielen.',
 'info_signatures' => 'Ënnerschrëften',
 'info_site' => 'Site',
 'info_site_2' => 'Site:',
@@ -565,7 +538,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_statut_utilisateurs_1' => 'Default-Status vun den importéierten Auteuren',
 'info_statut_utilisateurs_2' => 'Wielt de Status vun den Persounen aus dem LDAP-Annuaire déi sech fir d\'éischt umelden. Dier kënnt duerno dës Valeur pro Auteur änneren.',
 'info_suivi_activite' => 'Suivi vun der editorialer Aktivitéit',
-'info_supprimer_mot' => 'dëst Wuert läschen',
 'info_surtitre' => 'Iwwertitel:',
 'info_syndication_integrale_1' => 'Äre Site proposéiert Syndicatiouns-Fichier\'en (kuckt op "<a href="@url@">@titre@</a>").',
 'info_syndication_integrale_2' => 'Wëllt dir d\'Artikelen ganz oder nëmmen e Résumé vun e puer honnert Buchstawen iwerdroën?',
@@ -579,7 +551,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_texte_message' => 'Text vun ärem Message:',
 'info_texte_message_02' => 'Text vun ärem Message',
 'info_titre' => 'Titel:',
-'info_titre_mot_cle' => 'Numm oder Titel vum Schlësselwuert',
 'info_total' => 'Total:',
 'info_tous_articles_en_redaction' => 'All d\'Artikelen an der Aarbecht',
 'info_tous_articles_presents' => 'All d\'Artikelen déi an dëser Rubrik publizéiert sinn',
@@ -595,7 +566,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Zesummenaarbecht bei den Artikelen',
 'info_un_article' => 'en Artikel,',
-'info_un_mot' => 'Wuert fir Wuert',
 'info_un_site' => 'e Site,',
 'info_une_rubrique' => 'eng Rubrik,',
 'info_une_rubrique_02' => '1 Rubrik',
@@ -640,7 +610,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'item_activer_messages_avertissement' => 'Warnungen aschalten',
 'item_administrateur_2' => 'Administrateur',
 'item_afficher_calendrier' => 'Am Kalenner weisen',
-'item_ajout_mots_cles' => 'Schlësselwierder an de Forum\'en erlaben',
 'item_autoriser_documents_joints' => 'Dokumenter bei den Artikelen erlaben',
 'item_autoriser_documents_joints_rubriques' => 'Dokumenter an de Rubriken erlaben',
 'item_autoriser_syndication_integrale' => 'D\'Artikelen ganz an de Syndicatiouns-Fichier\'en iwerdroën',
@@ -663,7 +632,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'item_non_accepter_inscriptions' => 'Keng Aschreiwung unhuelen',
 'item_non_activer_messages_avertissement' => 'Keng Warnungen',
 'item_non_afficher_calendrier' => 'Kee Kalenner weisen',
-'item_non_ajout_mots_cles' => 'D\'Schlësselwierder an de Forum\'en verbidden',
 'item_non_autoriser_documents_joints' => 'Keng Dokumenter bei den Artikelen erlaben',
 'item_non_autoriser_documents_joints_rubriques' => 'Keng Dokumenter an de Rubriken erlaben',
 'item_non_autoriser_syndication_integrale' => 'Nëmmen e Résumé iwerdroën',
@@ -675,18 +643,14 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'item_non_limiter_recherche' => 'D\'Sich op den Inhalt vun de referenzéierten Siten erweideren',
 'item_non_messagerie_agenda' => 'D\'Messagerie an den Agenda ausschalten',
 'item_non_publier_articles' => 'D\'Artikelen nët virun dem Publikatiouns-Datum fräischalten.',
-'item_non_utiliser_config_groupe_mots_cles' => 'Déi erweidert Konfiguratioun vun de Schlësselwierder ausschalten',
 'item_non_utiliser_moteur_recherche' => 'De Sich-Motor ausschalten',
-'item_non_utiliser_mots_cles' => 'D\'Schlësselwierder ausschalten',
 'item_non_utiliser_syndication' => 'Déi automatesch Syndicatioun ausschalten',
 'item_nouvel_auteur' => 'Neien Auteur',
 'item_nouvelle_rubrique' => 'Nei Rubrik',
 'item_oui' => 'Jo',
 'item_publier_articles' => 'D\'Artikelen, egal wéi e Publikatiouns-Datum, fräischalten',
 'item_reponse_article' => 'Äntwert op den Artikel',
-'item_utiliser_config_groupe_mots_cles' => 'Déi erweidert Konfiguratioun vun de Schlësselwierder aschalten',
 'item_utiliser_moteur_recherche' => 'De Sich-Motor aschalten',
-'item_utiliser_mots_cles' => 'D\'Schlësselwierder aschalten',
 'item_utiliser_syndication' => 'Déi automatesch Syndicatioun aschalten',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -710,7 +674,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Destinataire derbäi setzen',
 'lien_ajouter_auteur' => 'Dësen Auteur derbäi setzen',
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'E Mataarbechter derbäi setzen',
 'lien_email' => 'Email',
 'lien_mise_a_jour_syndication' => 'Elo updaten',
@@ -730,8 +693,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'lien_voir_en_ligne' => 'ONLINE KUCKEN:',
 'logo_article' => 'LOGO VUM ARTIKEL',
 'logo_auteur' => 'LOGO VUM AUTEUR',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'LOGO VUM SCHLËSSELWUERT',
 'logo_rubrique' => 'LOGO VUN DER RUBRIK',
 'logo_site' => 'LOGO VUM SITE',
 'logo_standard_rubrique' => 'STANDARD-LOGO VUN DE RUBRIKEN',
@@ -876,7 +837,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'texte_compresse_ou_non' => '(dee kann kompriméiert sinn oder nët)',
 'texte_compte_element' => '@count@ Element',
 'texte_compte_elements' => '@count@ Elementer',
-'texte_config_groupe_mots_cles' => 'Wëll dir déi erweidert Astellung vun de Schlësselwierder, fir z.B. unzeginn dat een een eenzegt Wuert pro Grupp kann auswielen, dat e Grupp wichteg ass...?',
 'texte_conflit_edition_correction' => 'Kontrolléiert d\'Ënnerscheeder tëschent den zwou Versioune vum Text; dir kënnt är Ännerungen och kopéieren an erëm ufänken.',
 'texte_connexion_mysql' => 'Kuckt an der Informatioun vun ärem Hosting: dir musst do den Datebankserver an är perséinlech Identifikatioun fannen.',
 'texte_contenu_article' => '(Inhalt vum Artikel an e puer Wierder.)',
@@ -919,14 +879,11 @@ Elo muss d\'Datebank vum Site ugepasst ginn.',
 'texte_modifier_article' => 'Den Artikel änneren:',
 'texte_moteur_recherche_active' => '<b>De Sich-Motor ass ageschalt.</b> Benotzt dës Prozedur fir eng séier Indexatioun (z.B. no enger Restauratioun). Déi normal Ännerungen (iwwer de SPIP-Interface) ginn automatësch nei indexéiert: dës Prozedur ass nëmmen an aussergewéinlechen Fäll néideg.',
 'texte_moteur_recherche_non_active' => 'De Sich-Motor ass ausgeschalt.',
-'texte_mots_cles' => 'D\'Schlësselwierder erlaaben thematësch Linken tëschent den Artikelen ze maachen, egal a wéi enger Rubrik se sinn. Dir kënnt esou är Navigatioun vum Site erweideren, oder dëst benotzen fir de Layout vun den Artikelen an de Skeletter unzepassen.',
-'texte_mots_cles_dans_forum' => 'Wëllt dir erlaaben dass d\'Schlësselwierder an den öffentlëche Forum\'en aschalten vun de Benotzer gewielt ginn? (Opgepasst: dës Fonktioun ass zimlëch schwéier richteg ze benotzen.)',
 'texte_multilinguisme' => 'Wann dir Artikelen a méi Sproochen mat enger komplexer Navigatioun wëllt benotzen, da kënnt dir e Menu fir d\'Sproochwiel bei den Artikelen an/oder de Rubriken aschalten, je no Organisatioun vun ärem Site.',
 'texte_multilinguisme_trad' => 'Dir kënnt och eng Gestioun vun de Linken tëschent den Iwwersetzungen vun engem Artikel aschalten.',
 'texte_non_compresse' => '<i>nët kompriméiert</i> (äre Server erlaabt dat nët)',
 'texte_non_fonction_referencement' => 'Dir wëllt villäicht dës automatesch Fonktioun nët aschalten a selwer d\'Elementer vun ärem Site uginn...',
 'texte_nouveau_message' => 'Neie Message',
-'texte_nouveau_mot' => 'Neit Wuert',
 'texte_nouvelle_version_spip_1' => 'Dir hut eng nei Versioun vu SPIP installéiert.',
 'texte_nouvelle_version_spip_2' => 'Dës nei Versioun verlaangt e méi kompletten Update wéi normalerweis. Wann dir de Webmaster vum Site sidd, läscht de Fichier @connect@ a fuert mat der Installatioun weider fir är Zougangsparameteren un d\'Datebank unzepassen.<p>(N.B.: wann dir är Parameteren vergiess hutt, kuckt am Fichier @connect@ ier dër e läscht...)</p>', # MODIF
 'texte_operation_echec' => 'Gidd op déi läscht Säit zerëck, wielt eng aner Datebank oder setzt eng derbäi. Kontrolléiert d\'Informatiounen vun ärem Provider.',
@@ -995,7 +952,6 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_config_contenu_prive' => 'Am privaten Deel',
 'titre_config_contenu_public' => 'Um öffentlëche Site',
 'titre_config_fonctions' => 'Astellen vum Site',
-'titre_config_groupe_mots_cles' => 'Astellen vun de Schlësselwierder-Gruppen',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Astellen vum Site',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1003,7 +959,6 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_connexion_ldap' => 'Optiounen: <b>Är LDAP-Verbindung</b>',
 'titre_dernier_article_syndique' => 'Läscht syndiquéiert Artikelen',
 'titre_evolution_visite' => 'Évolutioun vun de Visiten',
-'titre_gauche_mots_edit' => 'WUERT NUMMER:',
 'titre_groupe_mots' => 'WUERT-GRUPP:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'SPROOCH VUM ARTIKEL',
@@ -1011,10 +966,7 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_langue_trad_article' => 'SPROOCH AN IWWERSETZUNGEN VUM ARTIKEL',
 'titre_les_articles' => 'D\'ARTIKELEN',
 'titre_messagerie_agenda' => 'Messagerie an Agenda',
-'titre_mots_cles_dans_forum' => 'Schlësselwierder an de Forum\'en vum öffentlëchen Site',
-'titre_mots_tous' => 'D\'Schlësselwierder',
 'titre_naviguer_dans_le_site' => 'Am Site surfen...',
-'titre_nouveau_groupe' => 'Neie Grupp',
 'titre_nouvelle_rubrique' => 'Nei Rubrik',
 'titre_numero_rubrique' => 'RUBRIK NUMMER:',
 'titre_page_admin_effacer' => 'Maintenance: Datebank läschen',
@@ -1032,7 +984,6 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_page_index' => 'Äre privaten Deel',
 'titre_page_message_edit' => 'E Message schreiwen',
 'titre_page_messagerie' => 'Är Messagerie',
-'titre_page_mots_tous' => 'Schlësselwierder',
 'titre_page_recherche' => 'Resultater vun der Sich @recherche@',
 'titre_page_sites_tous' => 'Déi referenzéiert Siten',
 'titre_page_statistiques' => 'Statistik pro Rubrik',

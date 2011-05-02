@@ -26,10 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'Jalanuqirirux chinuwi ukaxa LDAP janiw walt\'kiti.',
 'avis_connexion_ldap_echec_2' => 'Nayrir laphi uñnaqar kutt\'am ukatsti jikit yatiyawinak qhanstayam.',
 'avis_connexion_ldap_echec_3' => 'Mayakipawjam, askichir ukax jan apnaqamti LDAP apnaqirinak apayaniñataki.',
-'avis_conseil_selection_mot_cle' => '&lt;b&gt;Wakiskir qutu: &lt;/b&gt; aka qututx mä imt\'at aru ajlliñ uk amuyt\'ayasi.',
 'avis_deplacement_rubrique' => '¡AMUYAM! Aka t\'aqan utjiwa @contient_breves@ breve@scb@. Janitix yäqtaxa,  iyaw sat casilla uk naktayam.',
 'avis_destinataire_obligatoire' => 'Mä yatiyaw qatuqir uñachayam janir aka yatiyaw apaykasa.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'Chinuw pantjata MySQL',
 'avis_erreur_version_archive' => '<b>Attention! Le fichier @archive@ correspond à
     une autre version de SPIP que celle que vous avez
@@ -64,8 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_annuler' => 'Jiwt\'ayaña',
 'bouton_checkbox_envoi_message' => 'Inas mä yatiyaw apayaña',
 'bouton_checkbox_indiquer_site' => 'Mä Web qamawi uñachayapunima',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'qamawit apnaqirinaka',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'Qillqirinaka',
 'bouton_checkbox_signature_unique_email' => 'aruskipayirit mä iyawsaki',
 'bouton_checkbox_signature_unique_site' => 'Web qamawit mä iyawsaki',
 'bouton_demande_publication' => 'Aka qillqat yatiyañ mayiña',
@@ -216,8 +212,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_arret_discussion' => 'Aka aruskipawin jan mayamp arst\'añati',
 'icone_calendrier' => 'Pachachimpu',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'Mä machaq qutu arunaka uñstayaña',
-'icone_creation_mots_cles' => 'Mä machaq imt\'at aru uñstayaña ',
 'icone_creer_auteur' => 'Mä machaq qillqiri uñstayaña ukatsti aka qillqatar mayacht\'aña',
 'icone_creer_mot_cle' => 'Créer un nouveau mot-clé et le lier à cet article', # NEW
 'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
@@ -229,10 +223,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'Aka qutu arunaka mayjt\'ayaña',
 'icone_modifier_article' => 'Aka qillqata mayjt\'ayaña',
 'icone_modifier_message' => 'Aka yatiyawi mayjt\'ayaña',
-'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Aka t\'aqa mayjt\'ayaña',
 'icone_modifier_site' => 'Aka qamawi mayjt\'ayaña',
 'icone_publication' => 'Publication', # NEW
@@ -243,12 +235,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => '\\&quot;Cookie\\&quot; uk apaqaña yatiyawinakata ',
-'icone_supprimer_groupe_mots' => 'Apaqayaña aka tama',
 'icone_supprimer_rubrique' => 'Aka t\'aqa a paqayaña',
 'icone_supprimer_signature' => 'Aka iyawsa apaqaña',
 'icone_valider_signature' => 'Aka iyaws iyaw saña',
 'icone_voir_sites_references' => 'Aytat qamawinak uñjaña',
-'icone_voir_tous_mots_cles' => 'Taqpach imt\'at arunak uñjaña',
 'image_administrer_rubrique' => 'Aka t\'aqa apnaqasmawa',
 'info_1_article' => '1 qillqata',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -295,7 +285,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_02' => 'qillqatanaka',
 'info_articles_2' => 'Qillqatanaka',
 'info_articles_auteur' => 'Aka qillqirit qillqatanaka',
-'info_articles_lies_mot' => 'Qillqatanak aka imt\'at arur mayachata',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Qillqatanak jikita',
@@ -305,7 +294,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -319,7 +307,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Ch\'akha ch\'akha pirwa yatiyawinakamatxa uchantataxiwa',
 'info_bloquer' => 'jark\'antaña',
-'info_changer_nom_groupe' => 'Aka qututx sut mayxt\'ayam',
 'info_chapeau' => 'Qalltawi',
 'info_chapeau_2' => 'Qalltawi:',
 'info_chemin_acces_1' => 'Ajlliñatakiwa:  &lt;b&gt;&lt;/b&gt;mantañ thakhita jach\'a q\'ipina&lt;/b&gt;',
@@ -349,16 +336,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contact' => 'Jikxatata',
 'info_contenu_articles' => 'Qillqatanakat utjawi',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'Uñachayaña ukhamarak kamachiña qamawit imt\'at arunaka',
 'info_creation_paragraphe' => ' (Tanta amuyunak uñstayañatakix, ch\'usa siqinak jaytam)',
 'info_creation_rubrique' => 'Janir qillqatanak qillt\'asinxa, &lt;br /&gt; mä t\'aqa uñstayañama.&lt;br /&gt;',
 'info_creation_tables' => 'Pusir sarawi: &lt;b&gt;base ukat uyu uyunakat uñstayawi&lt;/b&gt; ',
 'info_creer_base' => '&lt;b&gt;uñstayaña&lt;/b&gt; mä machaq yatiyawinak pirwa: ',
-'info_dans_groupe' => 'Tamanxa',
 'info_dans_rubrique' => 'T\'aqanxa...',
 'info_date_publication_anterieure' => 'Nayrt\'ir uru aka qillqawita',
 'info_date_referencement' => 'APXASIW URU AKA QAMAWITA:',
-'info_delet_mots_cles' => 'Imt\'at aruta apaqañ mayta &lt;b&gt;@titre_mot@&lt;/b&gt; (@type_mot@). Kunati aka imt\'at aru mayachataki &lt;b&gt;@texte_lie@&lt;/b&gt; iyawsañama aka amtawiru:',
 'info_derniere_etape' => 'Qhipa sarawi: ¡tukuytanwa!',
 'info_derniere_syndication' => 'Aka qamawitxa qhipa apxasiwix apasiwayiwa',
 'info_derniers_articles_publies' => 'Qhipa yatiyat qillqatanakama',
@@ -399,7 +383,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_generation_miniatures_images' => 'Génération de miniatures des images', # NEW
 'info_gerer_trad' => '¿Jaqukiptaw chinunak apnaqaña?',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'Wakiskir qutu',
 'info_hebergeur_desactiver_envoi_email' => 'Certains hébergeurs désactivent l\'envoi automatique de
 		mails depuis leurs serveurs. Dans ce cas, les fonctionnalités suivantes
 		de SPIP ne fonctionneront pas.', # NEW
@@ -445,14 +428,11 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 		fichiers de SPIP.}}', # NEW
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
-'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
 'info_modifier_rubrique' => 'Modifier la rubrique :', # NEW
 'info_modifier_titre' => 'Modifier : @titre@', # NEW
 'info_mon_site_spip' => 'Mon site SPIP', # NEW
 'info_mot_sans_groupe' => '(Mots sans groupe...)', # NEW
 'info_moteur_recherche' => 'Moteur de recherche intégré', # NEW
-'info_mots_cles' => 'Les mots-clés', # NEW
-'info_mots_cles_association' => 'Les mots-clés de ce groupe peuvent être associés :', # NEW
 'info_moyenne' => 'moyenne :', # NEW
 'info_multi_articles' => 'Activer le menu de langue sur les articles ?', # NEW
 'info_multi_cet_article' => 'Langue de cet article :', # NEW
@@ -497,7 +477,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_ortho_activer' => 'Activer le vérificateur d\'orthographe', # NEW
 'info_ortho_desactiver' => 'Désactiver le vérificateur d\'orthographe', # NEW
 'info_ou' => 'ou...', # NEW
-'info_oui_suppression_mot_cle' => 'je veux supprimer définitivement ce mot-clé.', # NEW
 'info_page_interdite' => 'Page interdite', # NEW
 'info_par_nom' => 'par nom', # NEW
 'info_par_nombre_article' => 'par nombre d\'articles', # NEW
@@ -540,14 +519,12 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
   hébergeurs désactivent l\'envoi de mails depuis leurs
   serveurs : dans ce cas, l\'inscription automatique est
   impossible.</i></blockquote>', # NEW
-'info_question_mots_cles' => 'Souhaitez-vous utiliser les mots-clés sur votre site ?', # NEW
 'info_question_proposer_site' => 'Qui peut proposer des sites référencés ?', # NEW
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche intégré à SPIP ?
 	(le désactiver accélère le fonctionnement du système.)', # NEW
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_attribue_mot_cle' => 'Les mots de ce groupe peuvent être attribués par :', # NEW
 'info_racine_site' => 'Racine du site', # NEW
 'info_recharger_page' => 'Veuillez recharger cette page dans quelques instants.', # NEW
 'info_recherche_auteur_a_affiner' => 'Trop de résultats pour "@cherche_auteur@" ; veuillez affiner la recherche.', # NEW
@@ -561,19 +538,16 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_redirection' => 'Redirection', # NEW
 'info_refuses' => 'Vos articles refusés', # NEW
 'info_reglage_ldap' => 'Options : <b>Réglage de l\'importation LDAP</b>', # NEW
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redirection.</b> Cet article renvoie à la page:', # NEW
 'info_reserve_admin' => 'Seuls les administrateurs peuvent modifier cette adresse.', # NEW
 'info_restreindre_rubrique' => 'Restreindre la gestion à la rubrique :', # NEW
 'info_resultat_recherche' => 'Résultats de la recherche :', # NEW
 'info_rubriques' => 'Rubriques', # NEW
 'info_rubriques_02' => 'rubriques', # NEW
-'info_rubriques_liees_mot' => 'Les rubriques liées à ce mot-clé', # NEW
 'info_rubriques_trouvees' => 'Rubriques trouvées', # NEW
 'info_rubriques_trouvees_dans_texte' => 'Rubriques trouvées (dans le texte)', # NEW
 'info_sans_titre' => 'Sans titre', # NEW
 'info_selection_chemin_acces' => '<b>Sélectionnez</b> ci-après le chemin d\'accès dans l\'annuaire :', # NEW
-'info_selection_un_seul_mot_cle' => 'On ne peut sélectionner qu\'<b>un seul mot-clé à</b> la fois dans ce groupe.', # NEW
 'info_signatures' => 'signatures', # NEW
 'info_site' => 'Site', # NEW
 'info_site_2' => 'site :', # NEW
@@ -603,7 +577,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_statut_utilisateurs_1' => 'Statut par défaut des utilisateurs importés', # NEW
 'info_statut_utilisateurs_2' => 'Choisissez le statut qui est attribué aux personnes présentes dans l\'annuaire LDAP lorsqu\'elles se connectent pour la première fois. Vous pourrez par la suite modifier cette valeur pour chaque auteur au cas par cas.', # NEW
 'info_suivi_activite' => 'Suivi de l\'activité éditoriale', # NEW
-'info_supprimer_mot' => 'supprimer ce mot', # NEW
 'info_surtitre' => 'Surtitre :', # NEW
 'info_syndication_integrale_1' => 'Votre site propose des fichiers de syndication (voir « <a href="@url@">@titre@</a> »).', # NEW
 'info_syndication_integrale_2' => 'Souhaitez-vous transmettre les articles dans leur intégralité, ou ne diffuser qu\'un résumé de quelques centaines de caractères ?', # NEW
@@ -617,7 +590,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_texte_message' => 'Texte de votre message :', # NEW
 'info_texte_message_02' => 'Texte du message', # NEW
 'info_titre' => 'Titre :', # NEW
-'info_titre_mot_cle' => 'Nom ou titre du mot-clé', # NEW
 'info_total' => 'total :', # NEW
 'info_tous_articles_en_redaction' => 'Tous les articles en cours de rédaction', # NEW
 'info_tous_articles_presents' => 'Tous les articles publiés dans cette rubrique', # NEW
@@ -635,7 +607,6 @@ dans une couleur qui indique leur état :', # NEW
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Travail collaboratif sur les articles', # NEW
 'info_un_article' => 'un article,', # NEW
-'info_un_mot' => 'Un seul mot à la fois', # NEW
 'info_un_site' => 'un site,', # NEW
 'info_une_rubrique' => 'une rubrique,', # NEW
 'info_une_rubrique_02' => '1 rubrique', # NEW
@@ -680,7 +651,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_activer_messages_avertissement' => 'Activer les messages d\'avertissement', # NEW
 'item_administrateur_2' => 'administrateur', # NEW
 'item_afficher_calendrier' => 'Afficher dans le calendrier', # NEW
-'item_ajout_mots_cles' => 'Autoriser l\'ajout de mots-clés aux forums', # NEW
 'item_autoriser_documents_joints' => 'Autoriser les documents joints aux articles', # NEW
 'item_autoriser_documents_joints_rubriques' => 'Autoriser les documents dans les rubriques', # NEW
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
@@ -703,7 +673,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_non_accepter_inscriptions' => 'Ne pas accepter les inscriptions', # NEW
 'item_non_activer_messages_avertissement' => 'Pas de messages d\'avertissement', # NEW
 'item_non_afficher_calendrier' => 'Ne pas afficher dans le calendrier', # NEW
-'item_non_ajout_mots_cles' => 'Interdire l\'utilisation des mots-clés dans les forums', # NEW
 'item_non_autoriser_documents_joints' => 'Ne pas autoriser les documents dans les articles', # NEW
 'item_non_autoriser_documents_joints_rubriques' => 'Ne pas autoriser les documents dans les rubriques', # NEW
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
@@ -715,18 +684,14 @@ dans une couleur qui indique leur état :', # NEW
 'item_non_limiter_recherche' => 'Etendre la recherche au contenu des sites référencés', # NEW
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Ne pas publier les articles avant la date de publication fixée.', # NEW
-'item_non_utiliser_config_groupe_mots_cles' => 'Ne pas utiliser la configuration avancée des groupes de mots-clés', # NEW
 'item_non_utiliser_moteur_recherche' => 'Ne pas utiliser le moteur', # NEW
-'item_non_utiliser_mots_cles' => 'Ne pas utiliser les mots-clés', # NEW
 'item_non_utiliser_syndication' => 'Ne pas utiliser la syndication automatique', # NEW
 'item_nouvel_auteur' => 'Nouvel auteur', # NEW
 'item_nouvelle_rubrique' => 'Nouvelle rubrique', # NEW
 'item_oui' => 'Oui', # NEW
 'item_publier_articles' => 'Publier les articles, quelle que soit leur date de publication.', # NEW
 'item_reponse_article' => 'Réponse à l\'article', # NEW
-'item_utiliser_config_groupe_mots_cles' => 'Utiliser la configuration avancée des groupes de mots-clés', # NEW
 'item_utiliser_moteur_recherche' => 'Utiliser le moteur de recherche', # NEW
-'item_utiliser_mots_cles' => 'Utiliser les mots-clés', # NEW
 'item_utiliser_syndication' => 'Utiliser la syndication automatique', # NEW
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -750,7 +715,6 @@ dans une couleur qui indique leur état :', # NEW
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Ajouter ce destinataire', # NEW
 'lien_ajouter_auteur' => 'Ajouter cet auteur', # NEW
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Ajouter un participant', # NEW
 'lien_email' => 'email', # NEW
 'lien_mise_a_jour_syndication' => 'Mettre à jour maintenant', # NEW
@@ -770,8 +734,6 @@ dans une couleur qui indique leur état :', # NEW
 'lien_voir_en_ligne' => 'VOIR EN LIGNE :', # NEW
 'logo_article' => 'LOGO DE L\'ARTICLE', # NEW
 'logo_auteur' => 'LOGO DE L\'AUTEUR', # NEW
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'LOGO DU MOT-CLÉ', # NEW
 'logo_rubrique' => 'LOGO DE LA RUBRIQUE', # NEW
 'logo_site' => 'LOGO DE CE SITE', # NEW
 'logo_standard_rubrique' => 'LOGO STANDARD DES RUBRIQUES', # NEW
@@ -926,9 +888,6 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 'texte_compresse_ou_non' => '(celui-ci peut être compressé ou non)', # NEW
 'texte_compte_element' => '@count@ élément', # NEW
 'texte_compte_elements' => '@count@ éléments', # NEW
-'texte_config_groupe_mots_cles' => 'Souhaitez-vous activer la configuration avancée des mots-clés,
-   en indiquant par exemple qu\'on peut sélectionner un mot unique
-   par groupe, qu\'un groupe est important... ?', # NEW
 'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
 'texte_connexion_mysql' => 'Consultez les informations fournies par votre hébergeur : vous devez y trouver le serveur de base de données qu\'il propose et vos identifiants personnels pour vous y connecter.', # NEW
 'texte_contenu_article' => '(Contenu de l\'article en quelques mots.)', # NEW
@@ -991,17 +950,11 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 		façon normale (depuis l\'interface SPIP) sont automatiquement
 		réindexés : cette commande n\'est donc utile que de façon exceptionnelle.', # NEW
 'texte_moteur_recherche_non_active' => 'Le moteur de recherche n\'est pas activé.', # NEW
-'texte_mots_cles' => 'Les mots-clés permettent de créer des liens thématiques entre vos articles
-		indépendamment de leur placement dans des rubriques. Vous pouvez ainsi
-		enrichir la navigation de votre site, voire utiliser ces propriétés
-		pour personnaliser la présentation des articles dans vos squelettes.', # NEW
-'texte_mots_cles_dans_forum' => 'Souhaitez-vous permettre l\'utilisation de mots-clés sélectionnables par les visiteurs dans les forums du site public ? (Attention : cette option est relativement complexe à utiliser correctement.)', # NEW
 'texte_multilinguisme' => 'Si vous souhaitez gérer des articles en plusieurs langues, avec une navigation complexe, vous pouvez ajouter un menu de sélection de langue sur les articles et/ou sur les rubriques, en fonction de l\'organisation de votre site.', # NEW
 'texte_multilinguisme_trad' => 'Vous pouvez également activer un système de gestion de liens entre les différentes traductions d\'un article.', # NEW
 'texte_non_compresse' => '<i>non compressé</i> (votre serveur ne supportant pas cette fonctionnalité)', # NEW
 'texte_non_fonction_referencement' => 'Vous pouvez préférer ne pas utiliser cette fonction automatique, et indiquer vous-même les éléments concernant ce site...', # NEW
 'texte_nouveau_message' => 'Nouveau message', # NEW
-'texte_nouveau_mot' => 'Nouveau mot', # NEW
 'texte_nouvelle_version_spip_1' => 'Vous avez installé une nouvelle version de SPIP.', # NEW
 'texte_nouvelle_version_spip_2' => 'Cette nouvelle version nécessite une mise à jour plus complète qu\'à l\'accoutumée. Si vous êtes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre à jour vos paramètres de connexion à la base de données.<p> (NB. : si vous avez oublié vos paramètres de connexion, jetez un œil au fichier @connect@ avant de le supprimer...)</p>', # NEW
 'texte_operation_echec' => 'Retournez à la page précédente, sélectionnez une autre base ou créez-en une nouvelle. Vérifiez les informations fournies par votre hébergeur.', # NEW
@@ -1107,7 +1060,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Configuration du site', # NEW
-'titre_config_groupe_mots_cles' => 'Configuration des groupes de mots-clés', # NEW
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configuration du site', # NEW
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1115,7 +1067,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_connexion_ldap' => 'Options : <b>Votre connexion LDAP</b>', # NEW
 'titre_dernier_article_syndique' => 'Derniers articles syndiqués', # NEW
 'titre_evolution_visite' => 'Évolution des visites', # NEW
-'titre_gauche_mots_edit' => 'MOT NUMÉRO :', # NEW
 'titre_groupe_mots' => 'GROUPE DE MOTS :', # NEW
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LANGUE DE L\'ARTICLE', # NEW
@@ -1123,10 +1074,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_langue_trad_article' => 'LANGUE ET TRADUCTIONS DE L\'ARTICLE', # NEW
 'titre_les_articles' => 'LES ARTICLES', # NEW
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW
-'titre_mots_cles_dans_forum' => 'Mots-clés dans les forums du site public', # NEW
-'titre_mots_tous' => 'Les mots-clés', # NEW
 'titre_naviguer_dans_le_site' => 'Naviguer dans le site...', # NEW
-'titre_nouveau_groupe' => 'Nouveau groupe', # NEW
 'titre_nouvelle_rubrique' => 'Nouvelle rubrique', # NEW
 'titre_numero_rubrique' => 'RUBRIQUE NUMÉRO :', # NEW
 'titre_page_admin_effacer' => 'Maintenance technique : effacer la base', # NEW
@@ -1144,7 +1092,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_index' => 'Votre espace privé', # NEW
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW
-'titre_page_mots_tous' => 'Mots-clés', # NEW
 'titre_page_recherche' => 'Résultats de la recherche @recherche@', # NEW
 'titre_page_sites_tous' => 'Les sites référencés', # NEW
 'titre_page_statistiques' => 'Statistiques par rubriques', # NEW

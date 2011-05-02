@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'LDAPサーバへの接続に失敗しました。',
 'avis_connexion_ldap_echec_2' => '前のページに戻って、与えられている情報を確認してください。',
 'avis_connexion_ldap_echec_3' => '交代でLDAPサポートをユーザのインポートのために利用しないでください。',
-'avis_conseil_selection_mot_cle' => '<b>重要グループ :</b> このグループからキーワードを選択することを強くお薦めします。',
 'avis_deplacement_rubrique' => '注意！ この項目は、 @contient_breves@　件のニュースを含んでいます: それを移動する場合は、確認のためこのボックスにチェックを入れてください。',
 'avis_destinataire_obligatoire' => 'メッセージを送信するには、受取人を選択してください。',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'SQL接続のエラーです。',
 'avis_erreur_version_archive' => '<b>注意！ @archive@ ファイルは
 あなたのお手元のSPIPとは異なるバージョンのSPIPに対応するものです。</b>このままですと、データベースの破壊や
@@ -61,8 +59,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'bouton_annuler' => 'Annuler', # NEW
 'bouton_checkbox_envoi_message' => 'メッセージが送れるようにする',
 'bouton_checkbox_indiquer_site' => 'ウェブサイトを必須入力にする',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'サイトの管理者',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'エディターズ',
 'bouton_checkbox_signature_unique_email' => 'メールアドレス１つにつき、１署名まで',
 'bouton_checkbox_signature_unique_site' => 'ウェブサイト１つにつき、１署名まで',
 'bouton_demande_publication' => 'この記事の公開を要求する',
@@ -207,8 +203,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'icone_arret_discussion' => 'このディスカッションに参加するのをやめる',
 'icone_calendrier' => 'カレンダー',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => '新しいキーワードのグループを作る',
-'icone_creation_mots_cles' => '新しいキーワードを作る',
 'icone_creer_auteur' => '新しい著者を作って、彼をこの記事に参加させる。',
 'icone_creer_mot_cle' => '新しいキーワードと、この記事へのリンクを作る',
 'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
@@ -220,10 +214,8 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'このキーワードグループを変更する',
 'icone_modifier_article' => 'この記事を修正',
 'icone_modifier_message' => 'このメッセージを修正',
-'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'このセクションを修正',
 'icone_modifier_site' => 'このサイトを修正',
 'icone_publication' => 'Publication', # NEW
@@ -234,12 +226,10 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'クッキーの削除',
-'icone_supprimer_groupe_mots' => 'このグループを削除',
 'icone_supprimer_rubrique' => 'このセクションを削除',
 'icone_supprimer_signature' => 'この署名を削除',
 'icone_valider_signature' => 'この署名を確認',
 'icone_voir_sites_references' => '参照したサイトの表示',
-'icone_voir_tous_mots_cles' => 'すべてのキーワードの表示',
 'image_administrer_rubrique' => 'あなたはこのセクションを管理することができる',
 'info_1_article' => '１記事',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -284,7 +274,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_articles_02' => '記事',
 'info_articles_2' => '記事',
 'info_articles_auteur' => 'この著者の記事',
-'info_articles_lies_mot' => 'このキーワードに関連した記事',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => '記事が見つかりました',
@@ -294,7 +283,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -308,7 +296,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'あなたのデータベースの中に構造物がインストールされました。',
 'info_bloquer' => 'ブロック',
-'info_changer_nom_groupe' => 'このグループ名を変更して下さい:',
 'info_chapeau' => '飾り',
 'info_chapeau_2' => 'イントロダクション:',
 'info_chemin_acces_1' => 'オプション: <b>ディレクトリのアクセス・パス</b>',
@@ -337,18 +324,13 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_contact' => '連絡方法',
 'info_contenu_articles' => '記事の内容',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'このサイトのキーワードをここに作って設定して下さい。',
 'info_creation_paragraphe' => '(パラグラフ＜段落・文節＞を作るには、空行をおけばいいだけです。)',
 'info_creation_rubrique' => '記事を書けるようになる前に、<br />最低１つのセクションを作成する必要があります。<br />',
 'info_creation_tables' => '４番目のステップ: <b>データベースのテーブルの作成</b>',
 'info_creer_base' => '新しいデータベースを<b>作成</b>:',
-'info_dans_groupe' => 'グループ内:',
 'info_dans_rubrique' => 'セクション内:',
 'info_date_publication_anterieure' => '公表時の日付:',
 'info_date_referencement' => 'このサイトを参照した日付 :',
-'info_delet_mots_cles' => 'キーワード削除リクエストを受け付けました。
-<b>@titre_mot@</b> (@type_mot@)は 
-<b>@texte_lie@</b>に関連づけられていますが、 この決定を確定してください。 :',
 'info_derniere_etape' => '最後のステップ: <b>終わりました！',
 'info_derniere_syndication' => 'このサイトの最後の供給（シンジケーション）が実行されたのは',
 'info_derniers_articles_publies' => 'あなたの最近公開された記事',
@@ -385,7 +367,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_generation_miniatures_images' => '画像のサムネイルを生成',
 'info_gerer_trad' => '翻訳版同士リンクし合いますか？',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => '重要なグループ',
 'info_hebergeur_desactiver_envoi_email' => '若干のホストでは、それらサーバー上から自動的にメールを送ることが出来ません。そういう場合、SPIPの次の機能は実施できません。',
 'info_hier' => '昨日：',
 'info_historique' => 'リビジョン（修正）:',
@@ -428,14 +409,11 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
   再インストール。}}',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
-'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
 'info_modifier_rubrique' => '修正するセクション:',
 'info_modifier_titre' => '修正: @titre@',
 'info_mon_site_spip' => '私のSPIPのサイト',
 'info_mot_sans_groupe' => '(グループを除いたキーワード...)',
 'info_moteur_recherche' => '検索エンジンを結合した',
-'info_mots_cles' => 'キーワード',
-'info_mots_cles_association' => 'このグループのキーワードに結びつけることが出来る:',
 'info_moyenne' => '平均：',
 'info_multi_articles' => '記事用に言語選択メニューを有効にしますか？',
 'info_multi_cet_article' => 'この記事の言語：',
@@ -479,7 +457,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_ortho_activer' => 'スペルチェッカーを有効にする',
 'info_ortho_desactiver' => 'スペルチェッカーを無効にする。',
 'info_ou' => '又は...',
-'info_oui_suppression_mot_cle' => '私はこのキーワードを永久に削除することを望みます。',
 'info_page_interdite' => '禁じられたページ',
 'info_par_nom' => 'par nom', # NEW
 'info_par_nombre_article' => '(記事の数によって)',
@@ -513,14 +490,12 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_question_accepter_visiteurs' => 'もしあなたのサイトのテンプレートが、プライベートエリアに入らないで登録する訪問者たちを許すなら、次のオプションを有効にしてください:',
 'info_question_gerer_statistiques' => 'あなたのサイトの訪問者の統計を管理すべきですか？',
 'info_question_inscription_nouveaux_redacteurs' => '公開されているサイトで新しいエディターの登録を募りますか？　許可した場合、訪問者たちはフォームから自動で登録でき、プライベートエリアにアクセスし自分の記事を提出できます。 <blockquote><i>登録作業中に、ユーザーは自動的に送信されるプライベートエリアへのIDとパスワードを記したe-mailを受け取ります。若干のホストでは、それらサーバー上からメールが送れない場合があります：そういう場合、自動登録を実施できません。', # MODIF
-'info_question_mots_cles' => 'あなたのサイトでキーワードを使いたいですか？',
 'info_question_proposer_site' => '誰が参照サイトを提案できますか？',
 'info_question_utilisation_moteur_recherche' => 'SPIPに結合された検索エンジンを使いたいですか?
  (無効にするとシステムが早くなります。)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_attribue_mot_cle' => 'このグループのキーワードは次によって割り当て出来る:',
 'info_racine_site' => 'サイトのルート',
 'info_recharger_page' => 'ちょっとしてからこのページを再読込してください。',
 'info_recherche_auteur_a_affiner' => '"@cherche_auteur@"の検索結果が多すぎます; もうちょっとキーワードをひねって検索して下さい。',
@@ -534,19 +509,16 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_redirection' => 'リダイレクション',
 'info_refuses' => 'あなたの記事は拒絶された',
 'info_reglage_ldap' => 'オプション：<b>LDAPインポートの調整</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>リダイレクション。</b> この記事はそのページを参照します:',
 'info_reserve_admin' => '管理者のみがこのアドレスを変更することが出来る。',
 'info_restreindre_rubrique' => '管理できるセクションの制限:',
 'info_resultat_recherche' => '検索結果:',
 'info_rubriques' => 'セクション',
 'info_rubriques_02' => 'セクション',
-'info_rubriques_liees_mot' => 'このキーワードと結びつけられているセクション',
 'info_rubriques_trouvees' => '見つかったセクション',
 'info_rubriques_trouvees_dans_texte' => '見つかったセクション（文中）',
 'info_sans_titre' => '無名',
 'info_selection_chemin_acces' => '<b>下を選択</b> ディレクトリのアクセスパス:',
-'info_selection_un_seul_mot_cle' => 'あなたはこのグループ内で、１度に<b>１つのキーワードだけ</b>選ぶことができます。',
 'info_signatures' => '署名',
 'info_site' => 'サイト',
 'info_site_2' => 'サイト：',
@@ -576,7 +548,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_statut_utilisateurs_1' => '読み込まれたユーザーの標準の状態',
 'info_statut_utilisateurs_2' => '始めて接続したときにLDAPディレクトリに存在・属している人たちの状態を選択してください。後で、それぞれの著者ごとにケースバイケースで値を変更できます。',
 'info_suivi_activite' => '編集活動の手伝い',
-'info_supprimer_mot' => 'このキーワードを削除',
 'info_surtitre' => 'トップタイトル:',
 'info_syndication_integrale_1' => 'Your site offers syndication files (see &#147;<a href="@url@">@titre@</a>”).', # NEW
 'info_syndication_integrale_2' => 'Do you wish to send whole articles or only a summary of a few hundred characters?', # NEW
@@ -590,7 +561,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_texte_message' => 'あなたのメッセージ文章:',
 'info_texte_message_02' => 'メッセージの文章',
 'info_titre' => 'タイトル:',
-'info_titre_mot_cle' => 'このキーワードの名前かタイトル',
 'info_total' => '合計:',
 'info_tous_articles_en_redaction' => '進行中のすべての記事',
 'info_tous_articles_presents' => 'このセクションに出版したすべての記事',
@@ -608,7 +578,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => '記事の共同作業',
 'info_un_article' => '記事、',
-'info_un_mot' => '１度に１つのキーワード',
 'info_un_site' => '１つのサイト、',
 'info_une_rubrique' => '１つのセクション、',
 'info_une_rubrique_02' => '１セクション',
@@ -653,7 +622,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_activer_messages_avertissement' => '警告メッセージを作動させる',
 'item_administrateur_2' => '管理者',
 'item_afficher_calendrier' => 'カレンダーに表示',
-'item_ajout_mots_cles' => '掲示板へキーワードの追加を許可',
 'item_autoriser_documents_joints' => 'ドキュメントが記事に結びつくのを許可する',
 'item_autoriser_documents_joints_rubriques' => 'セクション内のドキュメントを許可する',
 'item_autoriser_syndication_integrale' => 'Include entire articles in the syndication files', # NEW
@@ -676,7 +644,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_non_accepter_inscriptions' => '登録を許可しない',
 'item_non_activer_messages_avertissement' => '警告メッセージを表示しない',
 'item_non_afficher_calendrier' => 'カレンダー上に表示しない',
-'item_non_ajout_mots_cles' => '掲示板へのキーワードの付加を許可しない',
 'item_non_autoriser_documents_joints' => '記事内のドキュメントを許可しない',
 'item_non_autoriser_documents_joints_rubriques' => 'セクション内のドキュメントを許可しない',
 'item_non_autoriser_syndication_integrale' => 'Only send a summary', # NEW
@@ -688,18 +655,14 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_non_limiter_recherche' => '参照しているサイトの内容へ検索を拡張する',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'それらの公開日付前に記事を公表しない。',
-'item_non_utiliser_config_groupe_mots_cles' => 'キーワードグループの拡張設定を使わない',
 'item_non_utiliser_moteur_recherche' => 'エンジンを使わない',
-'item_non_utiliser_mots_cles' => 'キーワードを使わない',
 'item_non_utiliser_syndication' => '自動的に供給（シンジケート）しない',
 'item_nouvel_auteur' => '新しい著者',
 'item_nouvelle_rubrique' => '新しいセクション',
 'item_oui' => 'はい',
 'item_publier_articles' => 'それらの発表日時を無視して記事を公表する。',
 'item_reponse_article' => '記事に返信',
-'item_utiliser_config_groupe_mots_cles' => 'キーワードグループの拡張設定を使う',
 'item_utiliser_moteur_recherche' => '検索エンジンを使う',
-'item_utiliser_mots_cles' => 'キーワードを使う',
 'item_utiliser_syndication' => '自動的に供給（シンジケート）する',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -723,7 +686,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'この受取人を追加',
 'lien_ajouter_auteur' => 'この著者を追加',
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => '関係者を追加',
 'lien_email' => 'e-mail',
 'lien_mise_a_jour_syndication' => '今アップデート',
@@ -743,8 +705,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'lien_voir_en_ligne' => 'オンラインで見る:',
 'logo_article' => '記事のロゴ',
 'logo_auteur' => '著者のロゴ',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'キーワードのロゴ',
 'logo_rubrique' => 'セクションのロゴ',
 'logo_site' => 'サイトのロゴ',
 'logo_standard_rubrique' => 'セクションのための標準的なロゴ',
@@ -889,7 +849,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_compresse_ou_non' => '(これが圧縮できなかったか、違う)',
 'texte_compte_element' => '@count@ 要素',
 'texte_compte_elements' => '@count@ 要素',
-'texte_config_groupe_mots_cles' => 'キーワードグループの拡張設定を使用したいですか？、指定することによって、例えばグループ毎に１つユニークな単語をを選択することが出来ました、そのグループは重要...?',
 'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
 'texte_connexion_mysql' => 'あなたのホストからあなたに提供されている情報を参照して下さい: もしあなたのホストがSQL、SQLサーバーへの接続コードをサポートするなら、それはあなたを与えるべきです。', # MODIF
 'texte_contenu_article' => '（記事の内容の短い説明。）',
@@ -930,14 +889,11 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_modifier_article' => '修正する記事:',
 'texte_moteur_recherche_active' => '<b>検索エンジンは有効になっています。</b>すばやく再度インデックスしたいならこれを実行してください（例えばバックアップを復元した後など）。気をつけてください、（SPIPのインターフェースから）普通に変更されたドキュメントは再度自動的にインデックスされています。：そのためこのコマンドは特別な事情があるときだけ有用です。',
 'texte_moteur_recherche_non_active' => '検索エンジンが無効です。',
-'texte_mots_cles' => 'キーワードは記事の場所にかかわらず、あなたの記事と話題（キーワード）をくっつける事が出来ます。そのようにあなたのサイトで検索し易くするか、あなたのテンプレートで記事をカスタマイズするそれらの特性を使う。',
-'texte_mots_cles_dans_forum' => '公開サイトの掲示板の中で、訪問者によってキーワードが選択されるのを許可しますか？（警告：このオプションはどちらかというと複雑です。）',
 'texte_multilinguisme' => 'もし記事をいくつかの言語で管理したいなら、完全なナビゲーション インターフェースによって、あなたのサイトの組織の記事と、セクションに言語選択メニューを追加できます。',
 'texte_multilinguisme_trad' => '同じく、あなたは１つの記事の、違う翻訳版間のリンク管理システムを有効にできます。',
 'texte_non_compresse' => '<i>未圧縮</i>（あなたのサーバーでこの機能は使えません）',
 'texte_non_fonction_referencement' => 'あなたはこの自動化機能を使わず、そのサイトに関する要素を手作業で入力することができます...',
 'texte_nouveau_message' => '新しいメッセージ',
-'texte_nouveau_mot' => '新しいキーワード',
 'texte_nouvelle_version_spip_1' => 'たった今SPIPの新しいバージョンがインストールされました。',
 'texte_nouvelle_version_spip_2' => 'この新しいバージョンはこまめに更新（アップデート）することが必要となります。もしこのサイトの管理者なら、<tt>ecrire</tt>ディレクトリの<tt>inc_connect.php3</tt>ファイルを削除して、あなたのデータベースとの接続の仕方などを変更するためインストールを再度実施してください。<p>（付記：もし接続用の情報などを忘れているのなら、<tt>inc_connect.php3</tt>を"削除する前に"見ておいてください。）</p>', # MODIF
 'texte_operation_echec' => '前のページに戻って、他のデータベースを選択するか、新しいのを作ってください。あなたのホストに提供された情報を確認してみてください。',
@@ -1009,7 +965,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'サイトの設定',
-'titre_config_groupe_mots_cles' => 'キーワードグループの設定',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'サイトの設定',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1017,7 +972,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_connexion_ldap' => 'オプションズ: <b>あなたのLDAPコネクション</b>',
 'titre_dernier_article_syndique' => '最新の配給された記事',
 'titre_evolution_visite' => '訪れるレベル',
-'titre_gauche_mots_edit' => 'キーワード番号:',
 'titre_groupe_mots' => 'キーワードグループ:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => '記事の言語',
@@ -1025,10 +979,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_langue_trad_article' => '記事の言語と翻訳版',
 'titre_les_articles' => '記事',
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW
-'titre_mots_cles_dans_forum' => 'パブリックなサイトの掲示板のキーワード',
-'titre_mots_tous' => 'キーワード',
 'titre_naviguer_dans_le_site' => 'このサイトをブラウザする...',
-'titre_nouveau_groupe' => '新しいグループ',
 'titre_nouvelle_rubrique' => '新しいセクション',
 'titre_numero_rubrique' => 'セクション番号:',
 'titre_page_admin_effacer' => '技術的なメンテナンス: データベースを削除しています',
@@ -1046,7 +997,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_page_index' => 'あなたのプライベートエリア',
 'titre_page_message_edit' => 'メッセージを書く',
 'titre_page_messagerie' => 'あなたのメッセージング',
-'titre_page_mots_tous' => 'キーワード',
 'titre_page_recherche' => '検索語 @recherche@ による検索結果',
 'titre_page_sites_tous' => '参照されたサイト',
 'titre_page_statistiques' => 'セクションごとの統計',

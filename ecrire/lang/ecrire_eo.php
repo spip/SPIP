@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'Konektiĝo al LDAP-servilo malsukcesis.',
 'avis_connexion_ldap_echec_2' => 'Revenu al la antaŭa paĝo, kaj kontrolu la entajpitajn datenojn. ',
 'avis_connexion_ldap_echec_3' => 'Eventuale, provu ne uzi LDAP-materialon por importi uzantojn.',
-'avis_conseil_selection_mot_cle' => '<b>Ampleksa grupo :</b> Estas tre konsilate elekti ŝlosilvorton el tiu grupo.',
 'avis_deplacement_rubrique' => 'Atentu! Tiu ĉi rubriko enhavas @contient_breves@ fulm-informon @scb@ : se vi translokas ĝin, bonvolu noĉi tiun por-konfirman noĉujon. ',
 'avis_destinataire_obligatoire' => 'Vi devas indiki adresaton antaŭ ol sendi ĉi tiun mesaĝon.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'SQL-konekta eraro ',
 'avis_erreur_version_archive' => '<b>Atentu! La dosiero @archive@ kongruas kun
     alia versio de SPIP ol tiu, kiun vi instalis.</b>
@@ -61,8 +59,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_annuler' => 'Nuligi',
 'bouton_checkbox_envoi_message' => 'eblas sendi mesaĝon',
 'bouton_checkbox_indiquer_site' => 'devige indiku retejon',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'la retejaj mastrumantoj',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'la redaktantoj',
 'bouton_checkbox_signature_unique_email' => 'po unu subskribo por retpoŝtadreso',
 'bouton_checkbox_signature_unique_site' => 'po unu subskribo por retejo',
 'bouton_demande_publication' => 'Peti publikigon de tiu ĉi artikolo',
@@ -207,8 +203,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_arret_discussion' => 'Ne plu partopreni en ĉi tiu diskuto',
 'icone_calendrier' => 'Kalendaro',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'Krei novan grupon de vortoj',
-'icone_creation_mots_cles' => 'Krei novan ŝlosilvorton',
 'icone_creer_auteur' => 'Krei novan aŭtoron kaj ligi ŝlin al tiu artikolo',
 'icone_creer_mot_cle' => 'Krei novan ŝlosilvorton kaj ligi ĝin al tiu artikolo',
 'icone_creer_mot_cle_rubrique' => 'Krei novan ŝlosilvorton kaj ligi ĝin kun tiu ĉi rubriko',
@@ -220,10 +214,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'Modifi tiun ĉi vortgrupon',
 'icone_modifier_article' => 'Modifi tiun ĉi artikolon',
 'icone_modifier_message' => 'Modifi tiun ĉi mesaĝon',
-'icone_modifier_mot' => 'Modifi tiun ĉi ŝlosilvorton',
 'icone_modifier_rubrique' => 'Modifi tiun ĉi rubrikon',
 'icone_modifier_site' => 'Modifi tiun ĉi retejon',
 'icone_publication' => 'Publication', # NEW
@@ -234,12 +226,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Forviŝi la por-korespondan kuketon ',
-'icone_supprimer_groupe_mots' => 'Forviŝi tiun grupon',
 'icone_supprimer_rubrique' => 'Forviŝi tiun rubrikon',
 'icone_supprimer_signature' => 'Forviŝi tiun subskribon',
 'icone_valider_signature' => 'Validigi tiun subskribon',
 'icone_voir_sites_references' => 'Vidi la referencigitajn retejojn',
-'icone_voir_tous_mots_cles' => 'Vidi ĉiujn ŝlosilvortojn',
 'image_administrer_rubrique' => 'Vi povas mastrumi tiun rubrikon',
 'info_1_article' => '1 artikolo',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -282,7 +272,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_02' => 'artikoloj',
 'info_articles_2' => 'Artikoloj',
 'info_articles_auteur' => 'La artikoloj de tiu aŭtoro',
-'info_articles_lies_mot' => 'La artikoloj ligitaj kun tiu ŝlosilvorto',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Trovitaj artikoloj',
@@ -292,7 +281,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -306,7 +294,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_barre_outils' => 'ĉu per ĝia ilobreto?',
 'info_base_installee' => 'La strukturo de via datenbazo estas instalita.',
 'info_bloquer' => 'bloki',
-'info_changer_nom_groupe' => 'Ŝanĝi la nomon de tiu grupo:',
 'info_chapeau' => 'Ĉapo',
 'info_chapeau_2' => 'Ĉapo :',
 'info_chemin_acces_1' => 'Opcioj : <b>Alirvojo en la LDAP-dosierujilo</b>',
@@ -335,18 +322,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contact' => 'Kontakt-adreso',
 'info_contenu_articles' => 'Enhavo de la artikoloj',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'Ĉi tie, kreu kaj konfiguru la ŝlosilvortojn de la retejo',
 'info_creation_paragraphe' => '(Por krei malplenajn paragrafojn, simple lasu malplenajn liniojn.)',
 'info_creation_rubrique' => 'Antaŭ ol skribi artikolojn,<br /> vi kreu almenaŭ po unu rubrikon.<br />',
 'info_creation_tables' => 'Kreo de la datentabeloj',
 'info_creer_base' => '<b>Krei</b> novan datenbazon :',
-'info_dans_groupe' => 'En la grupo:',
 'info_dans_rubrique' => 'En la rubriko:',
 'info_date_publication_anterieure' => 'Dato de antaŭa redakto :',
 'info_date_referencement' => 'REFERENCIGO-DATO DE TIU RETEJO :',
-'info_delet_mots_cles' => 'Vi petis forigon de la ŝlosilvorto
- <b>@titre_mot@</b> (@type_mot@). Ĉar la ŝlosilvorto estas ligita kun
- <b>@texte_lie@</b>, vi konfirmu ĉi tiun decidon :',
 'info_derniere_etape' => 'Finite !',
 'info_derniere_syndication' => 'La lasta abonĝisdatigo de tiu retejo estis farita la ',
 'info_derniers_articles_publies' => 'Viaj artikoloj laste rete publikigitaj',
@@ -386,7 +368,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_generation_miniatures_images' => 'Bildoj-miniaturigo',
 'info_gerer_trad' => 'Ĉu mastrumi la traduk-ligilojn?',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'Grava grupo',
 'info_hebergeur_desactiver_envoi_email' => 'Iuj retgastigantoj malaktivigas la aŭtomatan retleteroj-sendadon ekde ties serviloj. Tiukaze, la jenaj SPIP-funkcioj ne fonkcios.',
 'info_hier' => 'hieraŭ :',
 'info_historique' => 'Revizioj :',
@@ -427,14 +408,11 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
  SPIP-dosierojn.}}',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifi tiun ĉi aŭtoron :',
-'info_modifier_mot' => 'Modifi tiun ĉi ŝlosilvorton :',
 'info_modifier_rubrique' => 'Modifi la rubrikon:',
 'info_modifier_titre' => 'Modifi: @titre@',
 'info_mon_site_spip' => 'Mia SPIP-retejo',
 'info_mot_sans_groupe' => '(Vortoj sen grupo...)',
 'info_moteur_recherche' => 'Integrita serĉilo',
-'info_mots_cles' => 'La ŝlosilvortoj',
-'info_mots_cles_association' => 'Eblas kunligi ŝlosilvortojn el tiu grupo :',
 'info_moyenne' => 'meznombro :',
 'info_multi_articles' => 'Ĉu aktivigi la lingvomenuon en la artikoloj ?',
 'info_multi_cet_article' => 'Lingvo de tiu ĉi artikolo :',
@@ -478,7 +456,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_ortho_activer' => 'Aktivigi la ortografian kontrolilon',
 'info_ortho_desactiver' => 'Malaktivigi la ortografian kontrolilon',
 'info_ou' => 'aŭ...',
-'info_oui_suppression_mot_cle' => 'mi volas definitive forviŝi tiun ŝlosilvorton.',
 'info_page_interdite' => 'Malpermesata paĝo',
 'info_par_nom' => 'laŭ nomo',
 'info_par_nombre_article' => 'laŭ nombro de artikoloj',
@@ -520,14 +497,12 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
   alir-kodoj al la privata spaco. Iuj
   retejgastigantoj malaktivigas la sendadon de retleteroj el siaj
   serviloj : tiukaze la aŭtomata aliĝo ne eblos.', # MODIF
-'info_question_mots_cles' => 'Ĉu vi deziras uzi ŝlosilvortojn ĉe via retejo ?',
 'info_question_proposer_site' => 'Kiu povas proponi referencigitajn retejojn ?',
 'info_question_utilisation_moteur_recherche' => 'Ĉu vi deziras uzi la SPIP-internan serĉilon ?
  (malaktivigi ĝin rapidigas la funkciadon de la sistemo.)',
 'info_question_vignettes_referer' => 'Kiam vi konsultas statistikojn, vi povas havi superrigardon pri tio, de kiuj retejoj venas vizitantoj',
 'info_question_vignettes_referer_non' => 'Ne vidigi de kiuj retejoj venas vizitantoj',
 'info_question_vignettes_referer_oui' => 'Vidigi de kiuj retejoj venas vizitantoj',
-'info_qui_attribue_mot_cle' => 'La vortoj de tiu ĉi grupo povas esti atribuitaj de :',
 'info_racine_site' => 'Radiko de la retejo',
 'info_recharger_page' => 'Bonvolu refreŝigi tiun ĉi paĝon post momento.',
 'info_recherche_auteur_a_affiner' => 'Tro da rezultoj por "@cherche_auteur@"; bonvolu fajnigi la serĉokriteriojn.',
@@ -541,19 +516,16 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_redirection' => 'Alidirektigo',
 'info_refuses' => 'Viaj rifuzitaj artikoloj',
 'info_reglage_ldap' => 'Opcioj: <b>Agordo de la LDAP-elŝuto</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Alidirektigo.</b> Tiu artikolo alidirektas al la paĝo:',
 'info_reserve_admin' => 'Nur la mastrumantoj povas modifi tiun ĉi adreson.',
 'info_restreindre_rubrique' => 'Limigi la mastrumadon al la rubriko:',
 'info_resultat_recherche' => 'Serĉo-rezultoj:',
 'info_rubriques' => 'Rubrikoj',
 'info_rubriques_02' => 'rubrikoj',
-'info_rubriques_liees_mot' => 'La rubrikoj ligitaj al tiu ŝlosilvorto',
 'info_rubriques_trouvees' => 'Trovitaj rubrikoj',
 'info_rubriques_trouvees_dans_texte' => 'Rubrikoj trovitaj (en la teksto)',
 'info_sans_titre' => 'Sen titolo',
 'info_selection_chemin_acces' => '<b>Selektu</b> ĉi-sube alirvojon en la dosierujilo:',
-'info_selection_un_seul_mot_cle' => 'Oni povas elekti nur<b>po unu ŝlosilvorto</b> samtempe por tiu grupo.',
 'info_signatures' => 'subskriboj',
 'info_site' => 'Retejo',
 'info_site_2' => 'retejo :',
@@ -583,7 +555,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_statut_utilisateurs_1' => 'Defaŭlta statuso de la importitaj uzantoj',
 'info_statut_utilisateurs_2' => 'Elektu la statuson atribuotan al la personoj ĉeestantaj en LDAP-dosierujilo, kiam ili unuafoje konektiĝas. Poste vi povos modifi tiun valoron por ĉiu aŭtoro laŭkaze.',
 'info_suivi_activite' => 'Superrigardo de la redakta agado',
-'info_supprimer_mot' => 'forviŝi tiun vorton',
 'info_surtitre' => 'Surtitolo:',
 'info_syndication_integrale_1' => 'Via retejo proponas abondosierojn (vidu « <a href="@url@">@titre@</a> »).',
 'info_syndication_integrale_2' => 'Ĉu vi deziras transdoni tutajn artikolojn, aŭ nur afiŝi kelkcent-literan resumon ?',
@@ -597,7 +568,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_texte_message' => 'Teksto de via mesaĝo :',
 'info_texte_message_02' => 'Teksto de la mesaĝo',
 'info_titre' => 'Titolo :',
-'info_titre_mot_cle' => 'Nomo aŭ titolo de la ŝlosilvorto',
 'info_total' => 'totalo :',
 'info_tous_articles_en_redaction' => 'Ĉiuj artikoloj redaktataj',
 'info_tous_articles_presents' => 'Ĉiuj artikoloj publikigitaj en tiu ĉi rubriko',
@@ -614,7 +584,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Kunlaborado pri la artikoloj',
 'info_un_article' => 'unu artikolo,',
-'info_un_mot' => 'Po nur unu vorto samtempe',
 'info_un_site' => 'retejo,',
 'info_une_rubrique' => 'unu rubriko,',
 'info_une_rubrique_02' => '1 rubriko',
@@ -659,7 +628,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_activer_messages_avertissement' => 'Aktivigi la averto-mesaĝojn',
 'item_administrateur_2' => 'mastrumanto',
 'item_afficher_calendrier' => 'Afiŝi en la kalendaro',
-'item_ajout_mots_cles' => 'Permesi la aldonon de ŝlosilvortoj al la forumoj',
 'item_autoriser_documents_joints' => 'Permesi alkroĉon de dokumentoj al la artikoloj',
 'item_autoriser_documents_joints_rubriques' => 'Permesi dokumentojn en la rubrikoj',
 'item_autoriser_syndication_integrale' => 'Disponigi la tuton de la artikoloj en la abondosieroj',
@@ -682,7 +650,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_non_accepter_inscriptions' => 'Ne akcepti la registropetojn',
 'item_non_activer_messages_avertissement' => 'Neniuj averto-mesaĝoj',
 'item_non_afficher_calendrier' => 'Ne afiŝi en la kalendaro',
-'item_non_ajout_mots_cles' => 'Malpermesi la uzadon de ŝlosilvortoj en la forumoj',
 'item_non_autoriser_documents_joints' => 'Ne permesi dokumentojn en la artikoloj',
 'item_non_autoriser_documents_joints_rubriques' => 'Ne permesi dokumentojn en la rubrikoj',
 'item_non_autoriser_syndication_integrale' => 'Nur disponigi po unu resumo',
@@ -694,18 +661,14 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_non_limiter_recherche' => 'Etendi la serĉadon al la enhavo de la referencigitaj retejoj',
 'item_non_messagerie_agenda' => 'Malaktivigi la mesaĝilon kaj la agendon',
 'item_non_publier_articles' => 'Ne publikigi la artikolojn antaŭ la fiksita publikig-dato.',
-'item_non_utiliser_config_groupe_mots_cles' => 'Ne uzi la fajnan konfiguron de la grupoj de ŝlosilvortoj',
 'item_non_utiliser_moteur_recherche' => 'Ne uzi la serĉilon',
-'item_non_utiliser_mots_cles' => 'Ne uzi la ŝlosilvortojn',
 'item_non_utiliser_syndication' => 'Ne uzi la aŭtomatan abonrilaton',
 'item_nouvel_auteur' => 'Nova aŭtoro',
 'item_nouvelle_rubrique' => 'Nova rubriko',
 'item_oui' => 'Jes',
 'item_publier_articles' => 'Publikigi la artikolojn, kiu ajn estas ties publikig-dato.',
 'item_reponse_article' => 'Respondo al la artikolo',
-'item_utiliser_config_groupe_mots_cles' => 'Uzi la fajnan konfiguron de la ŝlosilvortoj-grupoj',
 'item_utiliser_moteur_recherche' => 'Uzi la serĉilon',
-'item_utiliser_mots_cles' => 'Uzi la ŝlosilvortojn',
 'item_utiliser_syndication' => 'Uzi la aŭtomatan abonrilaton',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -729,7 +692,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Aldoni tiun adresaton',
 'lien_ajouter_auteur' => 'Aldoni tiun aŭtoron',
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Aldoni partoprenanton',
 'lien_email' => 'retpoŝtadreso',
 'lien_mise_a_jour_syndication' => 'Ĝisdatigi nun',
@@ -749,8 +711,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'lien_voir_en_ligne' => 'VIDI ĈERETIGITE :',
 'logo_article' => 'VINJETO DE LA ARTIKOLO',
 'logo_auteur' => 'VINJETO DE LA AŬTORO',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'VINJETO DE LA ŜLOSILVORTO',
 'logo_rubrique' => 'VINJETO DE LA RUBRIKO',
 'logo_site' => 'VINJETO DE LA RETEJO',
 'logo_standard_rubrique' => 'LAŬNORMA VINJETO DE RUBRIKOJ',
@@ -905,9 +865,6 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 'texte_compresse_ou_non' => '(tiu ĉi povas aŭ ne esti densigita)',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementoj',
-'texte_config_groupe_mots_cles' => 'Ĉu vi deziras aktivigi la plendetalan konfiguron de la ŝlosilvortoj,
-   indikante ekzemple ke oni povas elekti po unu vorton en grupo,
-   ke iu grupo estu grava... ?',
 'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
 'texte_connexion_mysql' => 'Konsultu la informojn donitajn de via retgastiganto : en ili, vi trovos la ensalutilojn necesajn por konektiĝi al la SQL-servilo.', # MODIF
 'texte_contenu_article' => '(Kelkvorta enhavo-priskribo de la artikolo.)',
@@ -968,17 +925,11 @@ ligilojn al jena aŭ alia retejo.',
   (ekde la SPIP-interfaco) estas aŭtomate reindeksitaj:
   tiu ĉi komando estas do nur escepte utila.',
 'texte_moteur_recherche_non_active' => 'La serĉilo ne estas aktivgita.',
-'texte_mots_cles' => 'La ŝlosilvortoj ebligas krei temajn ligilojn inter viaj artikoloj
-  sendepende de ties situo en la rubrikoj. Vi povas tiel
-  pliriĉigi la retumadon ĉe via retejo, eĉ uzi tiujn trajtojn
-  por laŭvole aspektigi artikolojn en viaj skeletoj.',
-'texte_mots_cles_dans_forum' => 'Ĉu vi deziras permesi uzadon de ŝlosilvortoj selekteblaj de la vizitantoj, en la forumoj de la publika spaco ? (Atentu : tiu opcio estas relative kompleksa por ĝuste uzi ĝin.)',
 'texte_multilinguisme' => 'Se vi deziras mastrumi la artikolojn en pluraj lingvoj, per kompleksa retumado, vi povas aldoni menuon pri lingvoelekto en la artikoloj kaj/aŭ en la rubrikoj, konforme al la organizo de via retejo.',
 'texte_multilinguisme_trad' => 'Vi povas ankaŭ aktivigi sistemon por mastrumi la ligilojn inter la diversaj tradukoj de artikolo.',
 'texte_non_compresse' => '<i>ne densigita</i> (ĉar via servilo ne eltenas tiun funkcion)',
 'texte_non_fonction_referencement' => 'Vi povas preferi ne uzi tiun aŭtomatan funkcion kaj indiki mem la elementojn koncernantajn tiun ĉi retejon...',
 'texte_nouveau_message' => 'Nova mesaĝo',
-'texte_nouveau_mot' => 'Nova vorto',
 'texte_nouvelle_version_spip_1' => 'Vi instalis novan version de SPIP.',
 'texte_nouvelle_version_spip_2' => 'Tiu ĉi nova versio bezonas pli kompletan ĝisdatigon ol kutime. Se vi estas mastrumanto de la retejo, bonvolu forviŝi la dosieron @connect@ kaj restarigi la instalprocezon por ĝisdatigi viajn konekt-parametrojn al la datenbazo.<p> (Notu : se vi forgesis viajn konektparametrojn, legu la dosieron @connect@ antaŭ ol forviŝi ĝin...)', # MODIF
 'texte_operation_echec' => 'Reiru al antaŭa paĝo, selektu alian datenbazon aŭ kreu novan. Kontrolu la informojn donitajn de via retgastiganto.',
@@ -1085,7 +1036,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_config_contenu_prive' => 'En la privata spaco',
 'titre_config_contenu_public' => 'Ĉe la publika retejo',
 'titre_config_fonctions' => 'Agordo de la retejo',
-'titre_config_groupe_mots_cles' => 'Agordo de la ŝlosilvortaj grupoj',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Agordo de la retejo',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1093,7 +1043,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_connexion_ldap' => 'Opcioj: <b>Via konekto LDAP</b>',
 'titre_dernier_article_syndique' => 'Laste abonŝutitaj artikoloj',
 'titre_evolution_visite' => 'Evoluo de la vizitoj',
-'titre_gauche_mots_edit' => 'VORTO NUMERO:',
 'titre_groupe_mots' => 'GRUPO DE VORTOJ:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LINGVO DE LA ARTIKOLO',
@@ -1101,10 +1050,7 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_langue_trad_article' => 'LINGVO KAJ TRADUKOJ DE LA ARTIKOLO',
 'titre_les_articles' => 'LA ARTIKOLOJ',
 'titre_messagerie_agenda' => 'Mesaĝilo kaj agendo',
-'titre_mots_cles_dans_forum' => 'Ŝlosilvortoj en la forumoj de la publika spaco',
-'titre_mots_tous' => 'La ŝlosilvortoj',
 'titre_naviguer_dans_le_site' => 'Retejumi...',
-'titre_nouveau_groupe' => 'Nova grupo',
 'titre_nouvelle_rubrique' => 'Nova rubriko',
 'titre_numero_rubrique' => 'RUBRIKO NUMERO:',
 'titre_page_admin_effacer' => 'Teknika bontenado: forviŝi la datenbazon',
@@ -1122,7 +1068,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_page_index' => 'Via privata spaco',
 'titre_page_message_edit' => 'Skribi mesaĝon',
 'titre_page_messagerie' => 'Via mesaĝilo',
-'titre_page_mots_tous' => 'Ŝlosilvortoj',
 'titre_page_recherche' => 'Serĉrezulto @recherche@',
 'titre_page_sites_tous' => 'La referencigitaj retejoj',
 'titre_page_statistiques' => 'Statistikoj laŭ rubrikoj',

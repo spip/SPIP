@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'LDAP sunucusuna bağlantı başarısız.',
 'avis_connexion_ldap_echec_2' => 'Bir önceki sayfaya dönüp verdiğiniz bilgileri kontrol edin.',
 'avis_connexion_ldap_echec_3' => 'Buna alternatif olarak, kullanıcı ithal etmek için LDAP sunucusunu kullanmayın.',
-'avis_conseil_selection_mot_cle' => '<b>Önemli grup :</b> bu grupta anahtar sözcük seçmeniz şiddetle önerilir.',
 'avis_deplacement_rubrique' => 'Dikkat ! Bu bölüm @contient_breves@ kısa haber @scb@  içeriyor: eğer yerini değiştiriyorsanız (taşıyorsanız) lütfen bu onay kutucuğunu işaretleyin.',
 'avis_destinataire_obligatoire' => 'Bu iletiyi yollamadan önce kime yollamak istediğinizi belirmelisiniz.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'SQL bağlantısı hatası',
 'avis_erreur_version_archive' => '<b>Dikkat! @archive@ dosyası kullandığınız
 SPIP sürümüne uymuyor.</b> Büyük zorluklarla
@@ -59,8 +57,6 @@ Bu ithal istemini onaylamayın.
 'bouton_annuler' => 'İptal',
 'bouton_checkbox_envoi_message' => 'ileti gönderme olanağı',
 'bouton_checkbox_indiquer_site' => 'bir Web sitesi belirtmek zorundasınız',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'site yöneticileri',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'yazarlar',
 'bouton_checkbox_signature_unique_email' => 'e-posta adresi başına sadece bir imza',
 'bouton_checkbox_signature_unique_site' => 'site başına sadece bir imza',
 'bouton_demande_publication' => 'Bu makalenin yayınlanmasını iste',
@@ -205,8 +201,6 @@ Bu ithal istemini onaylamayın.
 'icone_arret_discussion' => 'Artık bu sohbete katılma',
 'icone_calendrier' => 'Takvim',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'Yeni bir sözcük grubu oluştur',
-'icone_creation_mots_cles' => 'Yeni bir anahtar sözcük oluştur',
 'icone_creer_auteur' => 'Yeni bir yazar oluştur ve bu makaleye bağla',
 'icone_creer_mot_cle' => 'Yeni bir anahtar sözcük yarat ve bu makaleye bağla',
 'icone_creer_mot_cle_rubrique' => 'Yeni bir anahtar sözcük oluştur ve bu başlığa bağla',
@@ -218,10 +212,8 @@ Bu ithal istemini onaylamayın.
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'Bu sözcük gurubunu değiştir',
 'icone_modifier_article' => 'Bu makaleyi değiştir',
 'icone_modifier_message' => 'Bu iletiyi değiştir',
-'icone_modifier_mot' => 'Bu anahtar sözcüğü değiştir',
 'icone_modifier_rubrique' => 'Bu bölümü değiştir',
 'icone_modifier_site' => 'Bu siteyi değiştir',
 'icone_publication' => 'Publication', # NEW
@@ -232,12 +224,10 @@ Bu ithal istemini onaylamayın.
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Yazışma çerezini sil',
-'icone_supprimer_groupe_mots' => 'Bu grubu sil',
 'icone_supprimer_rubrique' => 'Bu bölümü sil',
 'icone_supprimer_signature' => 'Bu imzayı sil',
 'icone_valider_signature' => 'Bu imzayı onayla',
 'icone_voir_sites_references' => 'Atıfta bulunulan siteleri göster',
-'icone_voir_tous_mots_cles' => 'Tüm anahtar sözcükleri göster',
 'image_administrer_rubrique' => 'Bu bölümü yönetebilirsiniz',
 'info_1_article' => '1 makale',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -282,7 +272,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_articles_02' => 'makale',
 'info_articles_2' => 'Makaleler',
 'info_articles_auteur' => 'Bu yazarın makaleleri',
-'info_articles_lies_mot' => 'Bu anahtar sözcüğe bağlı makaleler',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Bulunan makaleler',
@@ -292,7 +281,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -306,7 +294,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_barre_outils' => 'alet çubuğuyla birlikte mi ?',
 'info_base_installee' => 'Veritabanınızın yapısı kuruldu.',
 'info_bloquer' => 'engelle',
-'info_changer_nom_groupe' => 'Bu gurubun adını değiştir :',
 'info_chapeau' => 'Giriş',
 'info_chapeau_2' => 'Giriş :',
 'info_chemin_acces_1' => 'Seçenekler : <b>Rehbere erişim yolu</b>',
@@ -335,17 +322,13 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_contact' => 'İletişim',
 'info_contenu_articles' => 'Makalelerin içeriği',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'Burada sitenin anahtar sözcüklerini yaratınız ve konfigürasyonunu yapınız.',
 'info_creation_paragraphe' => '(Paragraf yaratmak için sadece boş bir kaç satır bırakınız.)',
 'info_creation_rubrique' => 'Makale yazmadan önce en az bir bölüm yaratmanız gerekir.',
 'info_creation_tables' => 'Veritabanı tablolarının yaratılması',
 'info_creer_base' => 'Yeni bir veritabanı <b>yaratılması</b> :',
-'info_dans_groupe' => 'Grupta :',
 'info_dans_rubrique' => 'Bölümde :',
 'info_date_publication_anterieure' => 'Daha önceki yayınlanma tarihi :',
 'info_date_referencement' => 'BU SİTEYE ATIFTA BULUNULMA TARİHİ :',
-'info_delet_mots_cles' => '<b>@titre_mot@</b>(@type_mot@) anahtar sözcüğünü silmek istediniz. Bu anahtar sözcük  
-<b>@texte_lie@<b>\'e bağlı olduğundan, bu kararı onaylamanız gerekiyor :',
 'info_derniere_etape' => 'Tamamlandı !',
 'info_derniere_syndication' => 'Bu sitenin son paylaşım tarihi:',
 'info_derniers_articles_publies' => 'Çevrimiçi yayınlanan son makaleleriniz',
@@ -384,7 +367,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_generation_miniatures_images' => 'Mevcut resimlerin minyatürlerinin üretilmesi',
 'info_gerer_trad' => 'Çeviri bağlantıları yönetilsin mi ?',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'Önemli gurup',
 'info_hebergeur_desactiver_envoi_email' => 'Bazı Hizmet bilgisayarları kendi sunucularından 
                                            otomatik e-posta gönderisini durduruyorlar. 
                                            Bu durumda SPIP\'in şu işlevleri çalışmaz :',
@@ -430,14 +412,11 @@ yaratabilir. Bu da otomatik olarak bir galeri
             {{SPIP dosyalarını tekrar kurunuz.}}',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Yazarı değiştir :',
-'info_modifier_mot' => 'Anahtar sözcüğü değiştir :',
 'info_modifier_rubrique' => 'Bölümü değiştir :',
 'info_modifier_titre' => 'Değiştir : @titre@',
 'info_mon_site_spip' => 'Benim SPIP sitem',
 'info_mot_sans_groupe' => '(Grupsuz sözcükler...)',
 'info_moteur_recherche' => 'Entegre arama motoru',
-'info_mots_cles' => 'Anahtar sözcükler',
-'info_mots_cles_association' => 'Bu grubun anahtar sözcüklerinin bağlanabilir :',
 'info_moyenne' => 'Ortalama :',
 'info_multi_articles' => 'Makalelerin dil mönüsü çalıştırılsın mı  ?',
 'info_multi_cet_article' => 'Bu makalenin dili :',
@@ -482,7 +461,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_ortho_activer' => 'İmlâ kontrolünü çalıştır',
 'info_ortho_desactiver' => 'İmlâ kontrolünü durdur',
 'info_ou' => 'Veya ...',
-'info_oui_suppression_mot_cle' => 'Bu anahtar sözcüğü temelli silmek istiyorum',
 'info_page_interdite' => 'Yasaklanmış sayfa',
 'info_par_nom' => 'isme göre',
 'info_par_nombre_article' => 'makale sayısına göre',
@@ -523,14 +501,12 @@ yaratabilir. Bu da otomatik olarak bir galeri
 <blockquote><i>Kayıt aşamasında,    kullanıcılara,  özel siteye erişim şifresi veren bir otomatik
     e-posta gönderilir. Bazı Hizmet bilgisayarları kendi sunucularından
     e-posta yollanmasını durduruyorlar : bu durumda otomatik kayıt olanaksızdır.', # MODIF
-'info_question_mots_cles' => 'Sitenizde anahtar sözcük kullanmak istiyor musunuz ?',
 'info_question_proposer_site' => 'Kim atıfta bulunulan siteler önerebilir ?',
 'info_question_utilisation_moteur_recherche' => 'SPIP\'in entegre arama motorunu kullanmak istiyor musunuz ?
                (onu durdurmak sistemin işleyişini hızlandırır)',
 'info_question_vignettes_referer' => 'İstatistikleri incelediğinizde, ziyaretlerin yapıldığı kaynak sitelerden görüntüler görebilirsiniz',
 'info_question_vignettes_referer_non' => 'Ziyaretlerin yapıldığı kaynak sitelerden alıntıları gösterme',
 'info_question_vignettes_referer_oui' => 'Ziyaretlerin yapıldığı kaynak sitelerden görüntüler göster',
-'info_qui_attribue_mot_cle' => 'Bu guruptaki anahtar sözcüklerin kim tarafından verilebileceği :',
 'info_racine_site' => 'Sitenin kökü',
 'info_recharger_page' => 'Lütfen bu sayfayı az sonra tekrar yükleyiniz.',
 'info_recherche_auteur_a_affiner' => '"@cherche_auteur@" için çok fazla sonuç alındı ; lütfen aramayı ayrıntılayınız.',
@@ -544,19 +520,16 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_redirection' => 'Yönlendirme',
 'info_refuses' => 'Reddedilen makaleleriniz',
 'info_reglage_ldap' => 'Seçenekler : <b>LDAP ithalinin ayarlanması.</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Yönlendirme.</b> Bu makalenin bizi şu sayfaya yönlendirir:',
 'info_reserve_admin' => 'Bu adresi sadece yöneticiler değiştirebilir.',
 'info_restreindre_rubrique' => 'Yönetimi bu bölümle sınırla:',
 'info_resultat_recherche' => 'Arama sonucu :',
 'info_rubriques' => 'Bölümler',
 'info_rubriques_02' => 'bölüm',
-'info_rubriques_liees_mot' => 'Bu anahtar sözcüğe bağlı bölümler',
 'info_rubriques_trouvees' => 'Bulunan bölümler',
 'info_rubriques_trouvees_dans_texte' => 'Bulunan bölümler (metnin içinde)',
 'info_sans_titre' => 'Başlıksız',
 'info_selection_chemin_acces' => 'Rehbere erişim yolunu <b>seçiniz</b> :',
-'info_selection_un_seul_mot_cle' => 'Bu grupta bir defada sadece bir anahtar sözcük seçebilirsiniz.',
 'info_signatures' => 'İmzalar',
 'info_site' => 'Site ',
 'info_site_2' => 'Site :',
@@ -586,7 +559,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_statut_utilisateurs_1' => 'İthal edilen kullanıcıların varsayılan statüsü',
 'info_statut_utilisateurs_2' => 'LDAP dizininde mevcut olan kişilere ilk defa bağlantı kurduklarında verilen statüyü seçiniz. Sonradan bu statüyü her bir yazar için tek tek değiştirebilirsiniz.',
 'info_suivi_activite' => 'Yayın etkinliklerini izleme',
-'info_supprimer_mot' => 'Bu sözcüğü sil',
 'info_surtitre' => 'Üst başlık :',
 'info_syndication_integrale_1' => 'Siteniz paylaşım dosyaları öneriyor  (bkz « <a href="@url@">@titre@</a> »).',
 'info_syndication_integrale_2' => 'Makaleleri oldukları gibi mi iletmek isterseniz yoksa bir kaç yüz sözcüklük özetlerini mi ?',
@@ -600,7 +572,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_texte_message' => 'İletinizin metni :',
 'info_texte_message_02' => 'İleti metni',
 'info_titre' => 'Başlık :',
-'info_titre_mot_cle' => 'Anahtar sözcüğün ismi veya başlığı',
 'info_total' => 'toplam :',
 'info_tous_articles_en_redaction' => 'Yazılmakta olan tüm makaleler',
 'info_tous_articles_presents' => 'Bu bölümde yayınlanan tüm makaleler',
@@ -618,7 +589,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Makalelerde işbirliği',
 'info_un_article' => 'bir makale,',
-'info_un_mot' => 'Her defasında tek bir anahtar sözcük',
 'info_un_site' => 'bir site,',
 'info_une_rubrique' => 'bir bölüm,',
 'info_une_rubrique_02' => '1 bölüm',
@@ -663,7 +633,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_activer_messages_avertissement' => 'Uyarı iletilerini etkinleştir',
 'item_administrateur_2' => 'yönetici',
 'item_afficher_calendrier' => 'Takvimde görüntüle',
-'item_ajout_mots_cles' => 'Forumlara anahtar sözcük eklemeye izin ver',
 'item_autoriser_documents_joints' => 'Makalelere doküman eklenmesine izin ver',
 'item_autoriser_documents_joints_rubriques' => 'Bölümlerde dokümanlara izin ver',
 'item_autoriser_syndication_integrale' => 'Makaleleri paylaşım dosyalarında oldukları gibi yayınla',
@@ -686,7 +655,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_non_accepter_inscriptions' => 'Kayıtları reddet',
 'item_non_activer_messages_avertissement' => 'Uyarı iletisi yok',
 'item_non_afficher_calendrier' => 'Takvimde gösterme',
-'item_non_ajout_mots_cles' => 'Forumlarda anahtar sözcük kullanımını yasakla',
 'item_non_autoriser_documents_joints' => 'Makalelerde dokümana izin verme',
 'item_non_autoriser_documents_joints_rubriques' => 'Bölümlerde dokümanlara izin verme',
 'item_non_autoriser_syndication_integrale' => 'Sadece özet yayınla',
@@ -698,18 +666,14 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_non_limiter_recherche' => 'Aramayı atıfta bulunulan sitelere genişlet',
 'item_non_messagerie_agenda' => 'Mesajlaşmayı ve ajandayı dezaktive et',
 'item_non_publier_articles' => 'Makaleleri yayın tarihinden önce yayınlama',
-'item_non_utiliser_config_groupe_mots_cles' => 'Anahtar sözcük guruplarının gelişmiş konfigürasyonunu kullanma',
 'item_non_utiliser_moteur_recherche' => 'Motoru kullanma',
-'item_non_utiliser_mots_cles' => 'Anahtar sözcükleri kullanma',
 'item_non_utiliser_syndication' => 'Otomatik paylaşımı kullanma',
 'item_nouvel_auteur' => 'Yeni yazar ',
 'item_nouvelle_rubrique' => 'Yeni bölüm ',
 'item_oui' => 'Evet  ',
 'item_publier_articles' => 'Makaleleri yayın tarihlerine bakmadan yayınla',
 'item_reponse_article' => 'Makaleye yanıt ',
-'item_utiliser_config_groupe_mots_cles' => 'Anahtar sözcük guruplarının gelişmiş konfigürasyonunu kullan',
 'item_utiliser_moteur_recherche' => 'Arama motorunu kullan',
-'item_utiliser_mots_cles' => 'Anahtar sözcükleri kullan',
 'item_utiliser_syndication' => 'Otomatik paylaşımı kullan',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -733,7 +697,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Bu alıcıyı ekle',
 'lien_ajouter_auteur' => 'Bu yazarın ekle',
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Bir katılımcıyı ekle',
 'lien_email' => 'e-posta ',
 'lien_mise_a_jour_syndication' => 'Şimdi güncelle',
@@ -753,8 +716,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'lien_voir_en_ligne' => 'ÇEVRİMİÇİ GÖSTER :',
 'logo_article' => 'MAKALE LOGOSU',
 'logo_auteur' => 'YAZAR LOGOSU',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'ANAHTAR SÖZCÜK LOGOSU',
 'logo_rubrique' => 'BÖLÜM LOGOSU',
 'logo_site' => 'SİTE LOGOSU',
 'logo_standard_rubrique' => 'STANDART BÖLÜM LOGOSU',
@@ -909,9 +870,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_compresse_ou_non' => '(bu, sıkıştırılmış ya da sıkıştırılmamış olabilir)',
 'texte_compte_element' => '@count@ eleman',
 'texte_compte_elements' => '@count@ eleman',
-'texte_config_groupe_mots_cles' => 'Örneğin, grup başına tek sözcük seçme olanağı bulunduğunu,
-           bir grubun önemli olduğunu ... belirtmek gibi,
-           anahtar sözcüklerin gelişmiş konfigürasyonunu çalıştırmak ister misiniz ? ',
 'texte_conflit_edition_correction' => 'Lütfen aşağıdaki 2 metin arasındaki farkları kontrol edin ; değişikliklerinizi kopyalayıp devam da edebilirsiniz.',
 'texte_connexion_mysql' => 'Servis sağlayıcınız tarafından size verilen bilgilere bakınız : orada size önerilen veri tabanı sunucusunu ve bu sunucuya bağlanmak için gereken bilgileri bulacaksınız. ',
 'texte_contenu_article' => '(Birkaç sözcükte makalenin içeriği) ',
@@ -953,14 +911,11 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_modifier_article' => 'Makaleyi değiştir :',
 'texte_moteur_recherche_active' => '<b>Arama motoru etkin.</b> Bu komutu, eğer (örneğin bir yedeklemeyi geri yükledikten sonra) tekrar hızlı bir endeksleme yapmak istiyorsanız kullanın. Normal bir şekilde (SPIP arayüzünden) değiştirilen dokümanların  otomatik olarak tekrar endekslendiğine dikkatinizi çekeriz : dolayısıyla bu komut ancak istisnai olarak faydalıdır.',
 'texte_moteur_recherche_non_active' => 'Arama motoru aktif değil.',
-'texte_mots_cles' => 'Anahtar sözcükler makaleleriniz arasında bölümlerdeki yerlerini gözetmeksizin konusal bağlantılar kurmaya yarar.  Böylece, sitenizdeki gezintiyi zenginleştirir, şablonlarınızda makalelerin sunumunu kişiselleştirmek için bu özellikleri kullanabilirsiniz.',
-'texte_mots_cles_dans_forum' => 'Kamu sitesinin forumlarında, ziyaretçiler tarafından seçilebilir anahtar sözcüklerin kullanımına izin vermek istiyor musunuz ?  (Dikkat : bu seçeneğin kullanımı karmaşıktır).',
 'texte_multilinguisme' => 'Eğer karmaşık gezintili, bir kaç dilde makaleler yönetmek istiyorsanız makalelere ve/veya bölümlere sitenizin düzenine göre bir dil seçeneği mönüsü ekleyebilirsiniz.',
 'texte_multilinguisme_trad' => 'Ayrıca, bir makalenin çeşitli çevirileri arasında bir bağlantı yönetme sistemi de çalıştırabilirsiniz. ',
 'texte_non_compresse' => 'Sıkıştırılmamış (sunucunuz bu özniteliği taşıyamıyor). ',
 'texte_non_fonction_referencement' => 'Bu otomatik işlevi kullanmamayı tercih edebilir, bu siteyle ilgili unsurları kendiniz belirtebilirsiniz.... ',
 'texte_nouveau_message' => 'Yeni ileti',
-'texte_nouveau_mot' => 'Yeni sözcük',
 'texte_nouvelle_version_spip_1' => 'SPIP\'in yeni bir sürümünü yüklediniz.',
 'texte_nouvelle_version_spip_2' => 'Bu yeni uyarlama alışılana göre daha eksiksiz bir güncelleştirme gerektirir. Eğer siz bu sitenin Ağ Yöneticisi iseniz lütfen @connect@  dosyasını ecrire dizininden siliniz ve veritabanına bağlantı parametrelerinizi güncelleştirmek amacıyla yüklemeyi tekrar yapınız. <p>(Not : bağlantı parametrelerinizi unuttuysanız, silmeden önce @connect@ dosyasına bir göz atınız...) </p>', # MODIF
 'texte_operation_echec' => 'Bir önceki sayfaya geri dönüp başka bir veri tabanı seçiniz ya da yeni bir tane yaratınız. Ana bilgisayarınız tarafından verilen bilgilerden emin olunuz. ',
@@ -1028,7 +983,6 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_config_contenu_prive' => 'Özel alanda',
 'titre_config_contenu_public' => 'Kamusal sitede',
 'titre_config_fonctions' => 'Site konfigürasyonu',
-'titre_config_groupe_mots_cles' => 'Anahtar sözcük guruplarının konfigürasyonu',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Site konfigürasyonu',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1036,7 +990,6 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_connexion_ldap' => 'Seçenekler : <b>LDAP bağlantılarınız</b>',
 'titre_dernier_article_syndique' => 'Son yayınlanan paylaşımlı makaleler',
 'titre_evolution_visite' => 'Ziyaretlerin gelişimi ',
-'titre_gauche_mots_edit' => 'ANAHTAR SÖZCÜK NO:',
 'titre_groupe_mots' => 'SÖZCÜK GRUBU:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'MAKALENİN DİLİ ',
@@ -1044,10 +997,7 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_langue_trad_article' => 'MAKALENİN DİLİ VE ÇEVİRİLERİ ',
 'titre_les_articles' => 'MAKALELER',
 'titre_messagerie_agenda' => 'Mesajlaşma ve Ajanda',
-'titre_mots_cles_dans_forum' => 'Kamu sitesi forumlarında anahtar sözcükler ',
-'titre_mots_tous' => 'Anahtar sözcükler',
 'titre_naviguer_dans_le_site' => 'Sitede gezin...',
-'titre_nouveau_groupe' => 'Yeni grup',
 'titre_nouvelle_rubrique' => 'Yeni bölüm',
 'titre_numero_rubrique' => 'BÖLÜM NO :',
 'titre_page_admin_effacer' => 'Teknik bakım : veritabanını sil',
@@ -1065,7 +1015,6 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_page_index' => 'Özel alanınız',
 'titre_page_message_edit' => 'Bir ileti oluştur',
 'titre_page_messagerie' => 'İletileriniz',
-'titre_page_mots_tous' => 'Anahtar sözcükler',
 'titre_page_recherche' => 'Arama sonuçları  @recherche@ ',
 'titre_page_sites_tous' => 'Atıfta bulunulan siteler ',
 'titre_page_statistiques' => 'Bölümlere göre istatistikler ',

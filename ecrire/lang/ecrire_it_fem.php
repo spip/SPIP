@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'La connessione al server LDAP è fallita.',
 'avis_connexion_ldap_echec_2' => 'Torna alla pagina precedente e verifica le informazioni fornite. ',
 'avis_connexion_ldap_echec_3' => 'In alternativa, non utilizzare il supporto LDAP per importare utenti.',
-'avis_conseil_selection_mot_cle' => '<b>Gruppo importante:</b> è consigliato selezionare una parola chiave in questo gruppo.',
 'avis_deplacement_rubrique' => 'Attenzione! Questa rubrica contiene @contient_breves@ breve/i: se vuoi spostarla, spunta questa casella per confermare.',
 'avis_destinataire_obligatoire' => 'Devi indicare un destinatario prima di mandare questo messaggio.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'Errore di connessione SQL',
 'avis_erreur_version_archive' => '<b>Attenzione! Il file @archive@ corrisponde a
 una versione di SPIP diversa da quella installata.</b> Potranno sorgere notevoli problemi:
@@ -61,8 +59,6 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'bouton_annuler' => 'Annulla',
 'bouton_checkbox_envoi_message' => 'possibilità di inviare un messaggio',
 'bouton_checkbox_indiquer_site' => 'indicare obbligatoriamente un sito Web',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'le amministratrici del sito',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'le redattrici',
 'bouton_checkbox_signature_unique_email' => 'una sola adesione per indirizzo email',
 'bouton_checkbox_signature_unique_site' => 'una sola adesione per sito Web',
 'bouton_demande_publication' => 'Chiedi la pubblicazione di questo articolo',
@@ -208,8 +204,6 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'icone_arret_discussion' => 'Non partecipare più a questa discussione',
 'icone_calendrier' => 'Calendario',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'Crea un nuovo gruppo',
-'icone_creation_mots_cles' => 'Crea una nuova parola chiave',
 'icone_creer_auteur' => 'Crea una nuova autrice ed associala a questo articolo',
 'icone_creer_mot_cle' => 'Crea una nuova parola chiave e collegala a questo articolo',
 'icone_creer_mot_cle_rubrique' => 'Creare una nuova parola chiave e collegarla a questa rubrica',
@@ -221,10 +215,8 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'Modifica questo gruppo',
 'icone_modifier_article' => 'Modifica l\'articolo',
 'icone_modifier_message' => 'Modifica il messaggio',
-'icone_modifier_mot' => 'Modifica questa parola chiave',
 'icone_modifier_rubrique' => 'Modifica la rubrica',
 'icone_modifier_site' => 'Modifica il sito',
 'icone_publication' => 'Publication', # NEW
@@ -235,12 +227,10 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Elimina il cookie di corrispondenza',
-'icone_supprimer_groupe_mots' => 'Elimina il gruppo',
 'icone_supprimer_rubrique' => 'Elimina la rubrica',
 'icone_supprimer_signature' => 'Cancella l\'adesione',
 'icone_valider_signature' => 'Conferma l\'adesione',
 'icone_voir_sites_references' => 'Vedi i siti in repertorio',
-'icone_voir_tous_mots_cles' => 'Vedi tutte le parole chiave',
 'image_administrer_rubrique' => 'Puoi amministrare questa rubrica',
 'info_1_article' => '1 articolo',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -284,7 +274,6 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 'info_articles_02' => 'articoli',
 'info_articles_2' => 'Articoli',
 'info_articles_auteur' => 'Articoli di questo autore',
-'info_articles_lies_mot' => 'Gli articoli collegati a questa parola chiave',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Articoli trovati',
@@ -294,7 +283,6 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -308,7 +296,6 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 'info_barre_outils' => 'con la barra degli strumenti?',
 'info_base_installee' => 'La struttura del vostro database è installata.',
 'info_bloquer' => 'bloccare',
-'info_changer_nom_groupe' => 'Cambiare il nome di questo gruppo:',
 'info_chapeau' => 'Introduzione',
 'info_chapeau_2' => 'Introduzione:',
 'info_chemin_acces_1' => 'Opzioni: <b>Percorso d\'accesso ai dati nell\'elenco</b>',
@@ -337,19 +324,13 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 'info_contact' => 'Contatti',
 'info_contenu_articles' => 'Contentuto degli articoli',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'In questa pagina è possibile creare e configurare le parole chiave del sito',
 'info_creation_paragraphe' => '(Per creare dei paragrafi indipendenti, lasciare fra loro delle righe vuote.)',
 'info_creation_rubrique' => 'Prima di poter scrivere degli articoli, <br />devi creare almeno una rubrica.<br />',
 'info_creation_tables' => 'Creazione delle tabelle nel database',
 'info_creer_base' => '<b>Creare</b> un nuovo database:',
-'info_dans_groupe' => 'Nel gruppo:',
 'info_dans_rubrique' => 'Nella rubrica:',
 'info_date_publication_anterieure' => 'Data di redazione anteriore:',
 'info_date_referencement' => 'DATA DI INSERIMENTO IN REPERTORIO DI QUESTO SITO:',
-'info_delet_mots_cles' => 'Hai chiesto
-di eliminare la parola chiave
-<b>@titre_mot@</b> (@type_mot@). Essendo quest\'ultima collegata a
-<b>@texte_lie@</b>, è necessario confermare la decisione:',
 'info_derniere_etape' => 'Finito!',
 'info_derniere_syndication' => 'L\'ultima <em>syndication</em> di questo sito è stata effettuata il',
 'info_derniers_articles_publies' => 'I tuoi ultimi articoli pubblicati',
@@ -391,7 +372,6 @@ pubblico del sito (forum su abbonamento).',
 'info_generation_miniatures_images' => 'Generazione di thumbnail di immagini',
 'info_gerer_trad' => 'Gestire i link di traduzione?',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'Gruppo importante',
 'info_hebergeur_desactiver_envoi_email' => 'Alcuni hoster disattivano l\'invio automatico di email
 dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate non funzioneranno.',
 'info_hier' => 'ieri:',
@@ -434,14 +414,11 @@ dei file di SPIP {precedente} rispetto a quella che era in uso per questo sito:
 le informazioni contenute nel database sono probabilmente andate perse.<br />{{Reinstallare i file di SPIP.}}',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifica l\'autrice:',
-'info_modifier_mot' => 'Modifica la parola chiave:',
 'info_modifier_rubrique' => 'Modifica la rubrica:',
 'info_modifier_titre' => 'Modifica: @titre@',
 'info_mon_site_spip' => 'Il mio sito SPIP',
 'info_mot_sans_groupe' => '(Parole chiave senza gruppo...)',
 'info_moteur_recherche' => 'Motore di ricerca integrato',
-'info_mots_cles' => 'Le parole chiave',
-'info_mots_cles_association' => 'Le parole chiave di questo gruppo possono essere associate:',
 'info_moyenne' => 'media: ',
 'info_multi_articles' => 'Attivare il menu della lingua negli articoli?',
 'info_multi_cet_article' => 'Lingua di questo articolo:',
@@ -486,7 +463,6 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 'info_ortho_activer' => 'Attivare il controllo ortografico',
 'info_ortho_desactiver' => 'Disattivare il controllo ortografico',
 'info_ou' => 'o... ',
-'info_oui_suppression_mot_cle' => 'voglio cancellare definitivamente questa parola chiave.',
 'info_page_interdite' => 'Pagina riservata',
 'info_par_nom' => 'per nome',
 'info_par_nombre_article' => 'per numero di articoli',
@@ -528,14 +504,12 @@ le utenti ricevono automaticamente un email
 che fornisce loro i codici d\'accesso al sito privato. Alcuni
 hoster disattivano l\'invio di email dai propri server: in questo caso, l\'iscrizione automatica è
 impossibile.', # MODIF
-'info_question_mots_cles' => 'Vuoi utilizzare le parole chiave nel sito?',
 'info_question_proposer_site' => 'Chi può proporre i siti da citare?',
 'info_question_utilisation_moteur_recherche' => 'Desideri utilizzare il motore di ricerca integrato di SPIP?
 (disattivandolo viene velocizzato il funzionamento del sistema)',
 'info_question_vignettes_referer' => 'Quando si consultano le statistiche è possibile visualizzare delle anteprime dei siti di origine delle visite',
 'info_question_vignettes_referer_non' => 'Non visualizzare la cattura dello schermo dei siti di origine delle visite',
 'info_question_vignettes_referer_oui' => 'Visualizzare le catture di schermo dei siti di origine delle visite',
-'info_qui_attribue_mot_cle' => 'Le parole chiave di questo gruppo possono essere attribuite da:',
 'info_racine_site' => 'Root del sito',
 'info_recharger_page' => 'Aggiorna questa pagina fra qualche istante.',
 'info_recherche_auteur_a_affiner' => 'Troppi risultati per "@cherche_auteur@"; restringi la ricerca.',
@@ -549,19 +523,16 @@ impossibile.', # MODIF
 'info_redirection' => 'Reindirizzamento',
 'info_refuses' => 'I tuoi articoli rifiutati',
 'info_reglage_ldap' => 'Opzioni: <b>Parametri per l\'importazione LDAP</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Reindirizzamento.</b> Quest\'articolo rimanda alla pagina:',
 'info_reserve_admin' => 'Solo le amministratrici possono modificare quest\'indirizzo.',
 'info_restreindre_rubrique' => 'Limita la facoltà di gestione alla rubrica:',
 'info_resultat_recherche' => 'Risultati della ricerca:',
 'info_rubriques' => 'Rubriche',
 'info_rubriques_02' => 'rubriche',
-'info_rubriques_liees_mot' => 'Le rubriche collegate a questa parola chiave',
 'info_rubriques_trouvees' => 'Rubriche trovate',
 'info_rubriques_trouvees_dans_texte' => 'Rubriche trovate (ricerca nel testo)',
 'info_sans_titre' => 'Senza titolo',
 'info_selection_chemin_acces' => '<b>Seleziona</b> qui sotto il percorso d\'accesso nell\'elenco:',
-'info_selection_un_seul_mot_cle' => 'È consentito selezionare <b>una sola parola chiave</b> alla volta in questo gruppo.',
 'info_signatures' => 'firme',
 'info_site' => 'Sito',
 'info_site_2' => 'sito: ',
@@ -591,7 +562,6 @@ impossibile.', # MODIF
 'info_statut_utilisateurs_1' => 'Status predefinito delle utenti importate',
 'info_statut_utilisateurs_2' => 'Scegli lo status da attribuire alle personne presenti nell\'elenco LDAP quando si collegano per la prima volta. Potrai poi modificare questa impostazione per ogni singola autrice.',
 'info_suivi_activite' => 'Monitoraggio dell\'attività editoriale',
-'info_supprimer_mot' => 'cancella questa parola',
 'info_surtitre' => 'Occhiello:',
 'info_syndication_integrale_1' => 'Il tuo sito propone dei file di  syndication (vedi « <a href="@url@">@titre@</a> »).',
 'info_syndication_integrale_2' => 'Si desidera trasmettere gli articoli in versione integrale oppure in versione riassunta di un centinaio di caratteri?',
@@ -605,7 +575,6 @@ impossibile.', # MODIF
 'info_texte_message' => 'Testo del messaggio:',
 'info_texte_message_02' => 'Testo del messaggio',
 'info_titre' => 'Titolo:',
-'info_titre_mot_cle' => 'Nome o titolo della parola chiave',
 'info_total' => 'totale: ',
 'info_tous_articles_en_redaction' => 'Tutti gli articoli in corso di redazione',
 'info_tous_articles_presents' => 'Tutti gli articoli pubblicati in questa rubrica',
@@ -623,7 +592,6 @@ Le traduzioni sono associate all\'originale,
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Lavoro di collaborazione sugli articoli',
 'info_un_article' => 'un articolo, ',
-'info_un_mot' => 'Una parola sola alla volta',
 'info_un_site' => 'un sito, ',
 'info_une_rubrique' => 'una rubrica, ',
 'info_une_rubrique_02' => '1 rubrica',
@@ -668,7 +636,6 @@ Le traduzioni sono associate all\'originale,
 'item_activer_messages_avertissement' => 'Attiva i messaggi d\'avvertimento',
 'item_administrateur_2' => 'amministratrice',
 'item_afficher_calendrier' => 'Pubblica nel calendario',
-'item_ajout_mots_cles' => 'Consenti l\'uso di parole chiave nei forum',
 'item_autoriser_documents_joints' => 'Consenti di allegare documenti agli articoli',
 'item_autoriser_documents_joints_rubriques' => 'Consenti di allegare documenti alle rubriche',
 'item_autoriser_syndication_integrale' => 'Diffondere la versione integrale degli articoli nei file di syndication',
@@ -691,7 +658,6 @@ Le traduzioni sono associate all\'originale,
 'item_non_accepter_inscriptions' => 'Non accettare le iscrizioni',
 'item_non_activer_messages_avertissement' => 'Nessun messaggio d\'avvertimento',
 'item_non_afficher_calendrier' => 'Non pubblicare nel calendario',
-'item_non_ajout_mots_cles' => 'Non consentire l\'uso di parole chiave nei forum',
 'item_non_autoriser_documents_joints' => 'Non consentire di allegare documenti agli articoli',
 'item_non_autoriser_documents_joints_rubriques' => 'Non consentire di allegare documenti alle rubriche',
 'item_non_autoriser_syndication_integrale' => 'Diffondere solo un riassunto',
@@ -703,18 +669,14 @@ Le traduzioni sono associate all\'originale,
 'item_non_limiter_recherche' => 'Estendi la ricerca al contenuto dei siti in syndication',
 'item_non_messagerie_agenda' => 'Disattiva la messaggistica e l’agenda',
 'item_non_publier_articles' => 'Non pubblicare gli articoli prima della data impostata.',
-'item_non_utiliser_config_groupe_mots_cles' => 'Non utilizzare la configurazione avanzata dei gruppi di parole chiave',
 'item_non_utiliser_moteur_recherche' => 'Non utilizzare il motore di ricerca',
-'item_non_utiliser_mots_cles' => 'Non utilizzare le parole chiave',
 'item_non_utiliser_syndication' => 'Non attivare la syndication automatica',
 'item_nouvel_auteur' => 'Nuova autrice',
 'item_nouvelle_rubrique' => 'Nuova rubrica',
 'item_oui' => 'Sì',
 'item_publier_articles' => 'Pubblica gli articoli indipendentemente dalla data impostata.',
 'item_reponse_article' => 'Risposta all\'articolo ',
-'item_utiliser_config_groupe_mots_cles' => 'Utilizza la configurazione avanzata dei gruppi di parole chiave',
 'item_utiliser_moteur_recherche' => 'Utilizza il motore di ricerca',
-'item_utiliser_mots_cles' => 'Utilizza le parole chiave',
 'item_utiliser_syndication' => 'Attiva la syndication automatica',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -738,7 +700,6 @@ Le traduzioni sono associate all\'originale,
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Aggiungi il destinatario',
 'lien_ajouter_auteur' => 'Aggiungi questa autrice',
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Aggiungi una partecipante',
 'lien_email' => 'email',
 'lien_mise_a_jour_syndication' => 'Aggiorna adesso',
@@ -758,8 +719,6 @@ Le traduzioni sono associate all\'originale,
 'lien_voir_en_ligne' => 'VEDI ON LINE:',
 'logo_article' => 'LOGO DELL\'ARTICOLO',
 'logo_auteur' => 'LOGO DELL\'AUTORE',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'LOGO DELLA PAROLA CHIAVE',
 'logo_rubrique' => 'LOGO DELLA RUBRICA',
 'logo_site' => 'LOGO DI QUESTO SITO ',
 'logo_standard_rubrique' => 'LOGO STANDARD DELLE RUBRICHE',
@@ -913,8 +872,6 @@ quando si passa con il mouse sopra al titolo.',
 'texte_compresse_ou_non' => '(può essere compresso o meno)',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementi',
-'texte_config_groupe_mots_cles' => 'Vuoi attivare la configurazione avanzata delle parole chiave,
-indicando per esempio che si può selezionare una parola unica per gruppo o che un gruppo è importante, ecc.?',
 'texte_conflit_edition_correction' => 'Controllare qui sotto le differenze tra le due versioni del testo; è possibile anche copiare le modifiche e poi ricominciare.',
 'texte_connexion_mysql' => 'Consulta le informazioni fornite dal tuo hoster: devi poterci trovare, i codici di collegamento alla base di dati.',
 'texte_contenu_article' => 'Contenuto dell\'articolo in poche parole (<em>abstract</em>)',
@@ -970,17 +927,11 @@ se vuoi procedere a una reindicizzazione rapida (dopo il ripristino
 di un salvataggio, per esempio). Nota bene: i documenti modificati in modo standard (con l\'interfaccia di SPIP) sono automaticamente
 reindicizzati. Questo commando, quindi, è utile solo in casi eccezionali.',
 'texte_moteur_recherche_non_active' => 'Il motore di ricerca non è attivato.',
-'texte_mots_cles' => 'Le parole chiave permettono di creare dei link tematici tra gli articoli
-indipendentemente dal posto che occupano nelle diverse rubriche.
-Si può quindi arricchire la navigazione del sito, o utilizzare queste proprietà
-per personalizzare la presentazione degli articoli nei tuoi modelli di layout.',
-'texte_mots_cles_dans_forum' => 'Vuoi consentire ai visitatori di selezionare delle parole chiave nei forum pubblici? (Attenzione: questa opzione è relativamente complessa da gestire in modo corretto.)',
 'texte_multilinguisme' => 'Se desideri gestire gli articoli in diverse lingue, con un sistema di navigazione complesso, è possibile aggiungere un menu di selezione della lingua negli articoli e/o nelle rubriche, in funzione della struttura del sito.',
 'texte_multilinguisme_trad' => 'È anche possibile attivare un sistema di gestione dei link fra le diverse traduzioni di un articolo.',
 'texte_non_compresse' => '<i>non compresso</i> (il tuo server non supporta questa funzionalità)',
 'texte_non_fonction_referencement' => 'Puoi non utilizzare questa funzione automatica, e indicare direttamente gli elementi riguardanti il sito...',
 'texte_nouveau_message' => 'Nuovo messaggio',
-'texte_nouveau_mot' => 'Nuova parola',
 'texte_nouvelle_version_spip_1' => 'Hai installato una nuova versione di SPIP.',
 'texte_nouvelle_version_spip_2' => 'Questa nuova versione necessita un aggiornamento più radicale del solito. Se sei la webmistress del sito, cancella il file @connect@ e riprendi l\'installazione al fine di aggiornare i parametri di connessione al database.<p> (NB: se hai dimenticato i parametri di connessione, rileggi il file @connect@ prima di cancellarlo...)</p>', # MODIF
 'texte_operation_echec' => 'Torna alla pagina precedente, seleziona un altro database o creane uno nuovo. Verifica le informazioni fornite dal tuo hoster.',
@@ -1076,7 +1027,6 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_config_contenu_prive' => 'Nell\'area riservata',
 'titre_config_contenu_public' => 'Sul sito pubblico',
 'titre_config_fonctions' => 'Configurazione del sito',
-'titre_config_groupe_mots_cles' => 'Configurazione dei gruppi di parole chiave',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configurazione del sito',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1084,7 +1034,6 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_connexion_ldap' => 'Opzioni: <b>La connessione LDAP</b>',
 'titre_dernier_article_syndique' => 'Ultimi articoli in syndication',
 'titre_evolution_visite' => 'Evoluzione delle visite',
-'titre_gauche_mots_edit' => 'PAROLA CHIAVE NUMERO:',
 'titre_groupe_mots' => 'GRUPPO DI PAROLE CHIAVE:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LINGUA DELL\'ARTICOLO',
@@ -1092,10 +1041,7 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_langue_trad_article' => 'LINGUA E TRADUZIONI DELL\'ARTICOLO',
 'titre_les_articles' => 'GLI ARTICOLI',
 'titre_messagerie_agenda' => 'Messagistica e agenda',
-'titre_mots_cles_dans_forum' => 'Parole chiave nel forum del sito pubblico',
-'titre_mots_tous' => 'Le parole chiave',
 'titre_naviguer_dans_le_site' => 'Navigare nel sito...',
-'titre_nouveau_groupe' => 'Nuovo gruppo',
 'titre_nouvelle_rubrique' => 'Nuova rubrica',
 'titre_numero_rubrique' => 'RUBRICA NUMERO:',
 'titre_page_admin_effacer' => 'Manutenzione tecnica: svuota il database',
@@ -1113,7 +1059,6 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_page_index' => 'Area riservata',
 'titre_page_message_edit' => 'Scrivere un messaggio',
 'titre_page_messagerie' => 'I tuoi messaggi',
-'titre_page_mots_tous' => 'Parole chiave',
 'titre_page_recherche' => 'Risultati della ricerca @recherche@',
 'titre_page_sites_tous' => 'I siti repertoriati',
 'titre_page_statistiques' => 'Statistiche per rubrica',

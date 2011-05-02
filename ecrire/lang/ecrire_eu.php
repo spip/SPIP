@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'LDAP zerbitzariarekiko lokarriak huts egin du',
 'avis_connexion_ldap_echec_2' => 'Itzul zaitez aurreko orrialdera eta egiazta itzazu sartutako informazioak.',
 'avis_connexion_ldap_echec_3' => 'Horren ordez, erabiltzaileak inportatzeko ez erabili LDAP euskarria.',
-'avis_conseil_selection_mot_cle' => 'Talde garrantzitsua: talde honetatik gako-hitz bat aukeratzea aholkatzen da.',
 'avis_deplacement_rubrique' => 'ADI EGON!. Atal honek (@contient_breves@)breve@scb@. Mugitzen baduzu, eragin ezazu baieztapen-kutxatila hau.',
 'avis_destinataire_obligatoire' => 'Mezu hau igorri aurretik jasotzailea zehaztu behar duzu.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'SQL lokarri-errorea',
 'avis_erreur_version_archive' => '<b>KONTUZ !
 
@@ -59,8 +57,6 @@ Ez balidatu inportazio galdera hau.
 'bouton_annuler' => 'Ezeztatu',
 'bouton_checkbox_envoi_message' => 'mezu bat bidaltzeko aukera',
 'bouton_checkbox_indiquer_site' => 'Web toki bat derrigorrezadierazi',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'gunearen administratzaileak',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'Idazlariak',
 'bouton_checkbox_signature_unique_email' => 'Posta elektroniko bakoitzeko sinadura bana',
 'bouton_checkbox_signature_unique_site' => 'sinadura bakar bat Web gune bakoitzako ',
 'bouton_demande_publication' => 'Artikulu honen argitaratzea eskatu',
@@ -205,8 +201,6 @@ Ez balidatu inportazio galdera hau.
 'icone_arret_discussion' => 'Elkarrizketa honetan ez berriro parte hartu ',
 'icone_calendrier' => 'Egutegi',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'Hitz talde berri bateratu',
-'icone_creation_mots_cles' => 'Gako-hitz berri bat eratu',
 'icone_creer_auteur' => 'Egile berri bat eratu eta artikulu honi elkartu',
 'icone_creer_mot_cle' => 'Gako-hitz berri bat eratu eta artikuluhoni elkartu',
 'icone_creer_mot_cle_rubrique' => 'Gako-hitz berri bat sortu eta atal huni lotu',
@@ -218,10 +212,8 @@ Ez balidatu inportazio galdera hau.
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'Hitz talde hau aldatu',
 'icone_modifier_article' => 'Artikulu hau aldatu',
 'icone_modifier_message' => 'Mezua aldatu',
-'icone_modifier_mot' => 'Gako-hitz hori aldatu',
 'icone_modifier_rubrique' => 'Atal hau aldatu',
 'icone_modifier_site' => 'Leku hau aldatu',
 'icone_publication' => 'Publication', # NEW
@@ -232,12 +224,10 @@ Ez balidatu inportazio galdera hau.
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Korrespondentzi-“cookie”-a ezabatu',
-'icone_supprimer_groupe_mots' => 'Talde hau ezabatu',
 'icone_supprimer_rubrique' => 'Atal hau ezabatu',
 'icone_supprimer_signature' => 'Sinadura hau ezabatu',
 'icone_valider_signature' => 'Sinadura hau onartu',
 'icone_voir_sites_references' => 'Aipatutako lekuak ikusi',
-'icone_voir_tous_mots_cles' => 'Gako-hitz guztiak ikusi',
 'image_administrer_rubrique' => 'Atal hau kudeatu ahal duzu',
 'info_1_article' => 'artikulu 1',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -278,7 +268,6 @@ Ez balidatu inportazio galdera hau.
 'info_articles_02' => 'Artikuluak',
 'info_articles_2' => 'Artikuluak',
 'info_articles_auteur' => 'Idazlari honen artikuluak',
-'info_articles_lies_mot' => 'Gako-hitz honi lotutako artikuluak',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Aurkitutako artikuluak',
@@ -288,7 +277,6 @@ Ez balidatu inportazio galdera hau.
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -302,7 +290,6 @@ Ez balidatu inportazio galdera hau.
 'info_barre_outils' => 'bere tresna-barrarekin ?',
 'info_base_installee' => 'Zure datubasearen egitura instalatua izan da',
 'info_bloquer' => 'Blokatu',
-'info_changer_nom_groupe' => 'Talde honenizena aldatu',
 'info_chapeau' => 'Idazpurua',
 'info_chapeau_2' => 'Epigrafea:',
 'info_chemin_acces_1' => 'Aukerak: sarbidea urtekarian',
@@ -331,16 +318,13 @@ Ez balidatu inportazio galdera hau.
 'info_contact' => 'Kontaktua',
 'info_contenu_articles' => 'Artikuluen edukia',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'Guneko gako-hitzak sortu eta konfiguratu',
 'info_creation_paragraphe' => '(Paragrafoak sortzeko, utzi lerro hutsak.)',
 'info_creation_rubrique' => 'Artikuluak idatzi baino lehen Atal bat sortu behar duzu.',
 'info_creation_tables' => 'Laugarren etapa: Basearen taulak sortzea',
 'info_creer_base' => 'Datu base berri bat sortu:',
-'info_dans_groupe' => 'Talde honetan',
 'info_dans_rubrique' => 'Atal honetan...',
 'info_date_publication_anterieure' => 'Lehengo argitaratze data',
 'info_date_referencement' => 'Toki honen erreferentziapendata',
-'info_delet_mots_cles' => 'Honako gako-hitz hau ezabatzeko eskatu duzu:@titre_mot@ (@type_mot@) Gako-hitz hori, honi lotua dago: @texte_lie@. Mesedez,berretsi zure erabakia.',
 'info_derniere_etape' => 'Azken etapa : Bukatu da!',
 'info_derniere_syndication' => 'Gune honen azken sindikazioa egin zen eguna:',
 'info_derniers_articles_publies' => 'Zure azken artikulu argitaratuak',
@@ -378,7 +362,6 @@ Ikonoaren koloreak autore bakoitzaren egoera adierazten du (idazlaria = berdea; 
 'info_generation_miniatures_images' => 'Irudien miniatura-sorkuntza',
 'info_gerer_trad' => 'Itzulpen-estekak kudeatu?',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'Talde garrantzitsua',
 'info_hebergeur_desactiver_envoi_email' => 'Ostapen zuzkitzaile batzuek mail-bidalketa automatikoa desaktibatzen dute bere zerbitzarietatik.
 Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_hier' => 'atzo:',
@@ -419,14 +402,11 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_mise_a_niveau_base_2' => '{{Kontuz!}} Lehendikgune honetan aurkitzen zen SPIP fitxategien {lehenagoko} bertsio bat instalatuduzu: zure datu-basea galdua izateko arriskuan dago eta zure guneak ez dugehiago funtzionatuko.{{SPIP fitxategiak berrinstalatu.}}',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Egilea aldatu :',
-'info_modifier_mot' => 'Gako-hitza aldatu :',
 'info_modifier_rubrique' => 'Gaia aldatu :',
 'info_modifier_titre' => 'Aldatu :@titre@',
 'info_mon_site_spip' => 'Nire SPIP gunea',
 'info_mot_sans_groupe' => '(Talderik gabeko hitzak...)',
 'info_moteur_recherche' => 'Barneratutako bilaketa motorra',
-'info_mots_cles' => 'Gako-hitzak',
-'info_mots_cles_association' => 'Talde honetako gako-hitzak erlazionatuta egon daitezke :',
 'info_moyenne' => 'ertaina :',
 'info_multi_articles' => 'Artikuluetan hizkuntza menu-a aktibatu?',
 'info_multi_cet_article' => 'Artikuluhonen hizkuntza:',
@@ -469,7 +449,6 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_ortho_activer' => 'Zuzentzaile ortografikoa aktibatu',
 'info_ortho_desactiver' => 'Zuzentzaile ortografikoa desaktibatu',
 'info_ou' => 'edo...',
-'info_oui_suppression_mot_cle' => 'Gako-hitz hauezabatu nahi dut',
 'info_page_interdite' => 'Orri debekatua',
 'info_par_nom' => 'izenez',
 'info_par_nombre_article' => '(artikulu kopuruaren arabera)',
@@ -508,14 +487,12 @@ Onartzen badituzu, bisitariak inprimaki automatizatu batetik harpidetu ahal izan
 Inskribatzean, erabiltzaileek mezu elektroniko automatiko bat jasotzen dute gune pribaturako sarbide-kodeak emanez.
 
 Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarietatik : kasu honetan, inskripzio automatikoa ezinezkoa da.', # MODIF
-'info_question_mots_cles' => 'Zure gunean gako-hitzakerabili nahi dituzu?',
 'info_question_proposer_site' => 'Nork proposatu ahal ditu gune erreferentziatuak ?',
 'info_question_utilisation_moteur_recherche' => 'SPIP-ean integratutako bilatzailea erabili nahi duzu ?
 (desaktibapenak sistemaren funtzionamendua bizkortzen du.)',
 'info_question_vignettes_referer' => 'Estatistikak begiratzean, bisiten jatorrien guneen aurrebista ikusten ahal duzu',
 'info_question_vignettes_referer_non' => 'Bisiten jatorrien guneen kapturak ez erakutsi',
 'info_question_vignettes_referer_oui' => 'Bisiten jatorrien guneen kapturak erakutsi',
-'info_qui_attribue_mot_cle' => 'Talde honetako hitzak hurrengoagatik esleituak izan daitzeke :',
 'info_racine_site' => 'Gunearen erroa',
 'info_recharger_page' => 'Mesedez orrialde hau berriz kargatu minutu batzuk barru.',
 'info_recherche_auteur_a_affiner' => 'Emaitza gehiegi "@cherche_auteur@"-rako ; mesedez bilaketa doitu.',
@@ -529,19 +506,16 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 'info_redirection' => 'Birbidirekzioa',
 'info_refuses' => 'Zure artikulu ezetsiak',
 'info_reglage_ldap' => 'Aukerak : LDAP inportazioaren konfigurazioa',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => 'Birbidirekzioa. Artikulu hau orrialdera itzultzen da:',
 'info_reserve_admin' => 'Helbide hauAdministrazio taldeak bakarrik aldatu ahal du',
 'info_restreindre_rubrique' => 'Kudeaketa atalera mugatu :',
 'info_resultat_recherche' => 'Bilaketaren emaitzak:',
 'info_rubriques' => 'Atalak',
 'info_rubriques_02' => 'atalak',
-'info_rubriques_liees_mot' => 'Gako-hitz honi lotutako atalak',
 'info_rubriques_trouvees' => 'Aukitutako atalak',
 'info_rubriques_trouvees_dans_texte' => 'Aurkitutako atalak (testuan)',
 'info_sans_titre' => 'Titulurik gabe',
 'info_selection_chemin_acces' => 'Ondoren urtekarian sartzeko bidea hautatu :',
-'info_selection_un_seul_mot_cle' => 'Bakoitzean gako-hitz bat bakarrik hauta daiteketalde honetan.',
 'info_signatures' => 'sinadurak',
 'info_site' => 'Tokia',
 'info_site_2' => 'tokia :',
@@ -571,7 +545,6 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 'info_statut_utilisateurs_1' => 'Inportatutako erabiltzaileen estatus lehenetsia',
 'info_statut_utilisateurs_2' => 'LDAP urtekarian dauden pertsonei emandako estatusa aukeratu lehen aldiz konektatzen direnean. Ondoren balio hau aldatu ahal izango duzu idazle bakoitzarentzat kasuz kasu.',
 'info_suivi_activite' => 'argitaratze-jardueraren jarraipena',
-'info_supprimer_mot' => 'hitz hau kendu',
 'info_surtitre' => 'Aurreizenburua',
 'info_syndication_integrale_1' => 'Zure guneak sindikazio fitxategiak (ikus « <a href="@url@">@titre@</a> »).',
 'info_syndication_integrale_2' => 'Artikuluak beren osotasunean igorri nahi al dituzu, edo zonait ehuneko karakteretako bilduma bat zabaldu nahi duzu ?',
@@ -585,7 +558,6 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 'info_texte_message' => 'Zure mezuaren testua :',
 'info_texte_message_02' => 'Mezuaren testua',
 'info_titre' => 'Titulua :',
-'info_titre_mot_cle' => 'Gako-hitzaren izena edo titulua',
 'info_total' => 'guztira :',
 'info_tous_articles_en_redaction' => 'Artikulu guztiak idazteko bidean',
 'info_tous_articles_presents' => 'Argitaratutako artikulu guztiak eremu honetan',
@@ -602,7 +574,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Artikuluei buruzko lan kolaboratiboa',
 'info_un_article' => 'artikulu bat,',
-'info_un_mot' => 'Hitz bakar bat aldi berean',
 'info_un_site' => 'gune bat,',
 'info_une_rubrique' => 'atal bat,',
 'info_une_rubrique_02' => 'atal bat',
@@ -647,7 +618,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'item_activer_messages_avertissement' => 'Ohartarazpen mezuak aktibatu',
 'item_administrateur_2' => 'administratzailea',
 'item_afficher_calendrier' => 'Egutegianerakutsi',
-'item_ajout_mots_cles' => 'Baimendu gako-hitzak foroetan ',
 'item_autoriser_documents_joints' => 'Artikuluei erantsitako dokumentuak baimendu',
 'item_autoriser_documents_joints_rubriques' => 'Ataletako artikuluak baimendu',
 'item_autoriser_syndication_integrale' => 'Artikuluen osotasuna zabaldu sindikazio fitxategietan',
@@ -670,7 +640,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'item_non_accepter_inscriptions' => 'Ez onartu inskripziorik',
 'item_non_activer_messages_avertissement' => 'Ohar mezurik gabe',
 'item_non_afficher_calendrier' => 'Ez erakutsi egutegian',
-'item_non_ajout_mots_cles' => 'Foroetan gako-hitzak erabiltzea galarazi',
 'item_non_autoriser_documents_joints' => 'Artikuluetan dokumentuak sartzea galarazi',
 'item_non_autoriser_documents_joints_rubriques' => 'Ataletan dokumentuak sartzeagalarazi',
 'item_non_autoriser_syndication_integrale' => 'Bilduma bat baizik zabaldu',
@@ -682,18 +651,14 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'item_non_limiter_recherche' => 'Aipatutako lekuen edukian ikertu',
 'item_non_messagerie_agenda' => 'Mezutegia eta agenda desaktibatu',
 'item_non_publier_articles' => 'Artikuluak adierazitako argitaratze data baino lehen ezargitaratu',
-'item_non_utiliser_config_groupe_mots_cles' => 'Ez erabili gako-hitz taldeenkonfigurazio zehatza',
 'item_non_utiliser_moteur_recherche' => 'Ez erabili motorra',
-'item_non_utiliser_mots_cles' => 'Ez erabili gako-hitzak',
 'item_non_utiliser_syndication' => 'Ez erabili sindikazio automatikoa',
 'item_nouvel_auteur' => 'Egile berria',
 'item_nouvelle_rubrique' => 'Atal berria',
 'item_oui' => 'Bai',
 'item_publier_articles' => 'Artikuluak argitaratu argitaratze-eguna kontuan izan gabe ',
 'item_reponse_article' => 'Artikuluari erantzuna',
-'item_utiliser_config_groupe_mots_cles' => 'Gako-hitz taldeen konfigurazio zehatzaerabili',
 'item_utiliser_moteur_recherche' => 'Bilaketa-motorra erabili',
-'item_utiliser_mots_cles' => 'Gako-hitzak erabili',
 'item_utiliser_syndication' => 'Sindikazio automatikoa erabili',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -717,7 +682,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Jasotzaile hau erantsi',
 'lien_ajouter_auteur' => 'Egile hau erantsi',
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Parte-hartzaile bat erantsi',
 'lien_email' => 'posta elektronikoa',
 'lien_mise_a_jour_syndication' => 'Orain gaurkotu',
@@ -737,8 +701,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'lien_voir_en_ligne' => 'LINEAN IKUSI :',
 'logo_article' => 'Artikuluaren logotipoa...',
 'logo_auteur' => 'EGILEAREN LOGOA',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'GAKO-HITZAREN LOGOA',
 'logo_rubrique' => 'ATALAREN LOGOA',
 'logo_site' => 'GUNEAREN LOGOA',
 'logo_standard_rubrique' => 'ATALEN LOGO ESTANDARRA',
@@ -884,7 +846,6 @@ Artikuluaren onarpena (berak jasoko duen eguneroko bisiten kopuruaren estimazio 
 'texte_compresse_ou_non' => '(hau konprimitua izan ahal da edo ez)',
 'texte_compte_element' => '@count@ osagai',
 'texte_compte_elements' => '@count@osagai',
-'texte_config_groupe_mots_cles' => 'Gako-hitzen konfigurazio aurreratua aktibatu nahi duzu, adibidez talde bakoitzean hitz bakar bat hautatu ahal dela,talde bat garrantzitsua dela,... adieraziz?',
 'texte_conflit_edition_correction' => 'Otoi, testoaren bi bertsio desberdinen arteko desberdinatsunak kontrola itzazu ;edo zure aldaketak kopia itzazu, eta ondotik berriz hasi.',
 'texte_connexion_mysql' => 'Zure ostapen zuzkitzaileak emandako informazioak kontsultatu :
 zure ostapen zuzkitzaileak SQL jasaten badu, han aurkitu beharko zenituzke SQL zerbitzarirako konexio-kodeak.',
@@ -928,14 +889,11 @@ Ez baduzu baliagarritasunik, aukera hau bere balio lehenetsiari utzi ahal diozu 
 berrindexazio bizkor bati ekin nahi badiozu (adibidez babeskopiabat berreskuratu ondoren). Modu arruntean aldatutako dokumentuak (SPIP interfazetik)automatikoki berrindexatuak direla antzeman : 
 beraz komando hau salbuespenezkomodurako bakarrik da probetxugarria.',
 'texte_moteur_recherche_non_active' => 'Bilaketarako motorea ez dago aktibaturik.',
-'texte_mots_cles' => 'Gako-hitzekinartikuluen artean lotura tematikoak egin ditzakezu, bere atalen barruko kokapena zeinden kontutan hartu gabe. Honela, zure tokiaren nabigazioa hobetu ahal duzu, edopropietate hauek ere erabili zure egituren barruan artikuluen itxura egokitzeko.',
-'texte_mots_cles_dans_forum' => 'Gako-hitzen erabilera utzi nahi al duzu, bisitariektoki publikoaren foruetan aukeratu ahal izango dituztenak? (Adi egon: aukera haunahiko konplexua da zuzen erabiltzeko.)',
 'texte_multilinguisme' => 'Hizkuntza batbaino gehiago erabili nahi baldin baduzu, nabigatze zailarekin, zure tokiarenantolakuntzaren arabera, artikuluentzat edota atalentzat hizkuntza aukeratzeko menu baterantsi ahal duzu.',
 'texte_multilinguisme_trad' => 'Artikulu baten itzulpen desberdinenarteko lotura sistema bat ere aktiba dezakezu.',
 'texte_non_compresse' => 'konpresiorikgabe (zure zerbitzariak ez du funtzionalitate hau jasaten)',
 'texte_non_fonction_referencement' => 'Agian nahiago duzu funtzio automatiko hau ezerabili, eta zuk zeuk adierazi toki honi dagozkien osagaiak...',
 'texte_nouveau_message' => 'Mezu berria',
-'texte_nouveau_mot' => 'Hitz berria',
 'texte_nouvelle_version_spip_1' => 'SPIPren bertsio berri bat instalatu duzu.',
 'texte_nouvelle_version_spip_2' => 'Bertsioberri honek ohiko eguneratze osoago bat behar du. Guneko web arduraduna bazara,mesedez ecrire direktorioko inc_connect.php3 fitxategia ezabatu eta instalazioariberriro ekin zure konexio-parametroak eguneratzeko datu-basean.(NB. : zure konexio-parametroak ahaztu badituzu, inc_connect.php3 fitxategiagainbegiratu ezabatu aurretik...)', # MODIF
 'texte_operation_echec' => 'Lehengo orriraitzuli, beste base bat aukeratu edo base berri bat sortu. Zure ostapen zuzkitzaileakemandako argibideak egiaztatu.',
@@ -1008,7 +966,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Tokiaren konfigurazioa',
-'titre_config_groupe_mots_cles' => 'Gako-hitzen taldeen konfigurazioa',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Tokiarenkonfigurazioa',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1016,7 +973,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_connexion_ldap' => 'Aukerak: zure LDAP konexioa',
 'titre_dernier_article_syndique' => 'Azken artikulu elkartuak',
 'titre_evolution_visite' => 'Bisiten bilakaera',
-'titre_gauche_mots_edit' => 'Hitza',
 'titre_groupe_mots' => 'Hitzen taldea',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'ARTIKULUKOHIZKUNTZA',
@@ -1024,10 +980,7 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_langue_trad_article' => 'ARTIKULUKO HIZKUNTZA ETA ITZULPENAK',
 'titre_les_articles' => 'Artikuluak',
 'titre_messagerie_agenda' => 'Mezutegia eta agenda',
-'titre_mots_cles_dans_forum' => 'Toki publikoko foroetan hitz gakoak',
-'titre_mots_tous' => 'Gako-hitzak',
 'titre_naviguer_dans_le_site' => 'Tokian ibili...',
-'titre_nouveau_groupe' => 'Talde berria',
 'titre_nouvelle_rubrique' => 'Atal berria',
 'titre_numero_rubrique' => 'ATALA:',
 'titre_page_admin_effacer' => 'Mantenimendu teknikoa: basea ezabatu',
@@ -1045,7 +998,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_page_index' => 'Zure gune pribatua',
 'titre_page_message_edit' => 'Mezu bat idatzi',
 'titre_page_messagerie' => 'Zure mezularitza',
-'titre_page_mots_tous' => 'Gako-hitzak',
 'titre_page_recherche' => 'Bilaketaren emaitzak @recherche@',
 'titre_page_sites_tous' => 'Erreferentziatutako tokiak',
 'titre_page_statistiques' => 'Atalez atal estatistikak',

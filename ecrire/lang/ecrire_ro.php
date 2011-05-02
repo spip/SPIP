@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'Conexiunea la serverul LDAP a eşuat.',
 'avis_connexion_ldap_echec_2' => 'Reveniţi la pagina anterioară şi verificaţi datele completate.',
 'avis_connexion_ldap_echec_3' => 'Ca alternativă, importaţi utilizatorii fără să folosiţi suportul LDAP.',
-'avis_conseil_selection_mot_cle' => '<b>Grup important:</b>  e foarte indicat să selecţionaţi un cuvânt cheie în acest grup.',
 'avis_deplacement_rubrique' => 'Atenţie! În această rubrică se găsesc @contient_breves@ ştiri@scb@: dacă o deplasaţi, bifaţi această casetă de confirmare.',
 'avis_destinataire_obligatoire' => 'Trebuie sa indicaţi un destinatar înainte de a trimite mesajul',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'Eroare de conexiune SQL',
 'avis_erreur_version_archive' => '<b>Atenţie! Fişierul @archive@ corespunde unei versiuni SPIP anterioare celei pe care aţi instalat-o.</b> Veţi întâmpina dificultăţi serioase: risc de distrugere a bazei de date, defecte în funcţionarea site-ului, ş.a.m.d. Nu validaţi importarea. Pentru informaţii suplimentare, consultaţi <a href="@spipnet@">                                documentaţia SPIP.</a>.', # MODIF
 'avis_espace_interdit' => '<b>Spaţiu interzis</b><div>SPIP este déjà instalat</div>.',
@@ -54,8 +52,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_annuler' => 'Anulaţi',
 'bouton_checkbox_envoi_message' => 'posibilitate de trimitere mesaj',
 'bouton_checkbox_indiquer_site' => 'indicare obligatorie a unui site Web',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administratorii site-ului',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'redactorii',
 'bouton_checkbox_signature_unique_email' => 'o singură semnătura pe adresă email',
 'bouton_checkbox_signature_unique_site' => 'o singură semnătură pe site Web',
 'bouton_demande_publication' => 'Cereţi publicarea articolului',
@@ -201,8 +197,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_arret_discussion' => 'Nu mai participaţi la această dicuţie',
 'icone_calendrier' => 'Calendar',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'Creaţi un nou grup de cuvinte',
-'icone_creation_mots_cles' => 'Creaţi un nou cuvânt-cheie',
 'icone_creer_auteur' => 'Creaţi un nou autor şi atribuiţi-i articolul.',
 'icone_creer_mot_cle' => 'Creaţi un nou cuvânt-cheie şi legaţi-l de acest articol.',
 'icone_creer_mot_cle_rubrique' => 'Creaţi un nou cuvânt-cheie şi legaţi-l de această rubrică',
@@ -214,10 +208,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'Modificaţi acest grup de cuvinte',
 'icone_modifier_article' => 'Modificaţi acest articol',
 'icone_modifier_message' => 'Modificaţi acest mesaj',
-'icone_modifier_mot' => 'Modificaţi acest cuvânt-cheie',
 'icone_modifier_rubrique' => 'Modificaţi această rubrică',
 'icone_modifier_site' => 'Modificaţi acest site',
 'icone_publication' => 'Publication', # NEW
@@ -228,12 +220,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Ştergeţi cookie-ul de corespondenţă',
-'icone_supprimer_groupe_mots' => 'Ştergeţi acest grup',
 'icone_supprimer_rubrique' => 'Ştergeţi această rubrică',
 'icone_supprimer_signature' => 'Ştergeţi această semnătură',
 'icone_valider_signature' => 'Validaţi această semnătură',
 'icone_voir_sites_references' => 'Vedeţi site-urile referenţiate',
-'icone_voir_tous_mots_cles' => 'Vedeţi toate cuvintele-cheie',
 'image_administrer_rubrique' => 'Puteţi administra această rubrică',
 'info_1_article' => '1 articol',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -275,7 +265,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_02' => 'articole',
 'info_articles_2' => 'Articole',
 'info_articles_auteur' => 'Articole de acelaşi autor',
-'info_articles_lies_mot' => 'Articole legate de acest cuvânt-cheie',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Articole găsite',
@@ -285,7 +274,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -299,7 +287,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_barre_outils' => 'cu toolbar-ul său ?',
 'info_base_installee' => 'Structura bazei dumneavoastră de date a fost instalată.',
 'info_bloquer' => 'blocaţi',
-'info_changer_nom_groupe' => 'Schimbaţi numele acestui grup :',
 'info_chapeau' => 'Introducere',
 'info_chapeau_2' => 'Introducere :',
 'info_chemin_acces_1' => 'Opţiuni: <b>Calea de acces în anuar</b>',
@@ -328,18 +315,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contact' => 'Contact',
 'info_contenu_articles' => 'Conţinutul articolelor',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'Creaţi şi configuraţi aici cuvintele-cheie de pe acest site',
 'info_creation_paragraphe' => '(Pentru a crea paragrafe, lăsaţi pur şi simplu liniile goale.)',
 'info_creation_rubrique' => 'Înainte de a putea scrie articole,<br /> trebuie să creaţi cel puţin o rubrică.<br />',
 'info_creation_tables' => 'Crearea tabelelor bazei de date',
 'info_creer_base' => '<b>Creaţi</b> o nouă baze de date :',
-'info_dans_groupe' => 'În grupul :',
 'info_dans_rubrique' => 'În rubrica :',
 'info_date_publication_anterieure' => 'Data redactării anterioare :',
 'info_date_referencement' => 'DATA DE REFERENŢIERE A ACESTUI SITE :',
-'info_delet_mots_cles' => 'Aţi cerut ştergerea cuvântului-cheie
-<b>@titre_mot@</b> (@type_mot@). Acest cuvânt-cheie fiind legat de
-<b>@texte_lie@</b> vă rugăm să confirmaţi această decizie :',
 'info_derniere_etape' => 'Gata !',
 'info_derniere_syndication' => 'Ultima sindicalizare a acestui site a fost făcuta la data de',
 'info_derniers_articles_publies' => 'Articolele dumneavoastră publicate recent',
@@ -378,7 +360,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_generation_miniatures_images' => 'Generarea de miniaturi ale imaginilor',
 'info_gerer_trad' => 'Gestionaţi legăturile de traducere ?',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'Grup important',
 'info_hebergeur_desactiver_envoi_email' => 'Anumiţi furnizori de servicii de hosting dezactivează trimiterea automată de
   email-uri de pe server-ele lor. În acest caz, funcţiile următoare
   din SPIP nu sunt disponibile.',
@@ -424,14 +405,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 {{Reinstalaţi fişierele originale SPIP.}}',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modificaţi autorul :',
-'info_modifier_mot' => 'Modificaţi cuvântul-cheie :',
 'info_modifier_rubrique' => 'Modificaţi rubrica :',
 'info_modifier_titre' => 'Modificaţi : @titre@',
 'info_mon_site_spip' => 'Site-ul meu SPIP',
 'info_mot_sans_groupe' => '(Cuvinte fără grup...)',
 'info_moteur_recherche' => 'Motorul de căutare integrat',
-'info_mots_cles' => 'Cuvintele-cheie',
-'info_mots_cles_association' => 'Cuvintele-cheie din acest grup pot fi asociate :',
 'info_moyenne' => 'medie :',
 'info_multi_articles' => 'Activaţi meniul de limbă în cadrul articolelor ?',
 'info_multi_cet_article' => 'Limba acestui articol :',
@@ -475,7 +453,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ortho_activer' => 'Activaţi verificatorul ortografic',
 'info_ortho_desactiver' => 'Dezactivaţi verificatorul ortografic',
 'info_ou' => 'sau...',
-'info_oui_suppression_mot_cle' => 'doresc să şterg definitiv acest cuvânt-cheie.',
 'info_page_interdite' => 'Pagină interzisă',
 'info_par_nom' => 'după nume',
 'info_par_nombre_article' => 'după numărul de articole',
@@ -518,14 +495,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   furnizori de hosting dezactivează trimiterea de email-uri de pe
   server-ele lor : în acest caz înscrierea automatică este
   imposibilă.', # MODIF
-'info_question_mots_cles' => 'Doriţi să utilizaţi cuvintele-cheie pe site-ul dumneavoastră ?',
 'info_question_proposer_site' => 'Cine poate propune site-uri referenţiate ?',
 'info_question_utilisation_moteur_recherche' => 'Doriţi să utilizaţi motorul de căutare integrat în SPIP ?
  (funcţionarea sistemului este mai rapidă fără activarea motorului de căutare.)',
 'info_question_vignettes_referer' => 'Atunci când vizualizaţi statisticile, puteţi vizualiza pre-vederi ale site-uri de unde provin vizitele',
 'info_question_vignettes_referer_non' => 'Nu afişati capturile site-urilor de unde vin vizitele',
 'info_question_vignettes_referer_oui' => 'Afişaţi capturile site-urilor de unde provin vizitele',
-'info_qui_attribue_mot_cle' => 'Cuvintele-cheie din acest grup pot fi atribuite de către :',
 'info_racine_site' => 'Rădăcina site-ului',
 'info_recharger_page' => 'Vă rugăm să reîncărcaţi această pagină în câteva momente.',
 'info_recherche_auteur_a_affiner' => 'Prea multe rezultate pentru "@cherche_auteur@" ; vă rugăm să rafinaţi termenii căutării.',
@@ -539,19 +514,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redirection' => 'Redirijare',
 'info_refuses' => 'Articolele dumneavoastră refuzate',
 'info_reglage_ldap' => 'Opţiuni : <b>Reglajele importului LDAP</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redirijare.</b> Acest articol trimite la pagina:',
 'info_reserve_admin' => 'Doar administratorii pot modifica această adresă.',
 'info_restreindre_rubrique' => 'Restrângeţi gestiunea la rubrica:',
 'info_resultat_recherche' => 'Rezultatele căutării :',
 'info_rubriques' => 'Rubrici',
 'info_rubriques_02' => 'rubrici',
-'info_rubriques_liees_mot' => 'Rubricile legate de acest cuvânt-cheie',
 'info_rubriques_trouvees' => 'Rubrici găsite',
 'info_rubriques_trouvees_dans_texte' => 'Rubrici găsite (în text)',
 'info_sans_titre' => 'Fără titlu',
 'info_selection_chemin_acces' => '<b>Selecţionaţi</b> aici calea de acces în anuar :',
-'info_selection_un_seul_mot_cle' => 'Doar <b>un singur cuvânt-cheie</b> poate fi selecţionat pe moment din acest grup.',
 'info_signatures' => 'semnături',
 'info_site' => 'Site',
 'info_site_2' => 'site :',
@@ -581,7 +553,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_statut_utilisateurs_1' => 'Starea implicită a utilizatorilor importaţi',
 'info_statut_utilisateurs_2' => 'Alegeţi starea implicită care este atribuită persoanelor care sunt prezente în anuarul LDAP atunci când se vor conecta pentru prima dată. Veţi putea modifica mai târziu această valoare caz după caz, pentru fiecare autor.',
 'info_suivi_activite' => 'Urmărirea activităţii editoriale',
-'info_supprimer_mot' => 'ştergeţi acest cuvânt',
 'info_surtitre' => 'Supratitlu :',
 'info_syndication_integrale_1' => 'Site-ul dumneavoastră propune fişiere de sindicalizare (vedeţi « <a href="@url@">@titre@</a> »).',
 'info_syndication_integrale_2' => 'Doriţi să transmiteţi articolele în totalitatea lor, sau doar să difuzaţi un rezumat de câteva sute de simboluri ?',
@@ -596,7 +567,6 @@ Imaginile cu dimensiuni mai mari nu vor fi reduse.',
 'info_texte_message' => 'Textul mesajului dumneavoastră :',
 'info_texte_message_02' => 'Textul mesajului',
 'info_titre' => 'Titlu :',
-'info_titre_mot_cle' => 'Numele sau titlu cuvântului-cheie',
 'info_total' => 'total :',
 'info_tous_articles_en_redaction' => 'Toate articolele în curs de redactare',
 'info_tous_articles_presents' => 'Toate articolele publicate în această rubrică',
@@ -614,7 +584,6 @@ cu o culoare care le indică starea :',
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Lucru colaborativ cu articolele',
 'info_un_article' => 'un articol,',
-'info_un_mot' => 'Un singur cuvânt-cheie odată',
 'info_un_site' => 'un site,',
 'info_une_rubrique' => 'o rubrică,',
 'info_une_rubrique_02' => '1 rubrică',
@@ -659,7 +628,6 @@ cu o culoare care le indică starea :',
 'item_activer_messages_avertissement' => 'Activaţi mesajele de avertisment',
 'item_administrateur_2' => 'administrator',
 'item_afficher_calendrier' => 'Afişaţi în calendar',
-'item_ajout_mots_cles' => 'Autorizaţi adăugarea cuvintelor-cheie la forum-uri',
 'item_autoriser_documents_joints' => 'Autorizaţi documentele ataşate în articole',
 'item_autoriser_documents_joints_rubriques' => 'Autorizaţi documentele ataşate în rubrici',
 'item_autoriser_syndication_integrale' => 'Difuzaţi integralitatea articolelor în fişierele de sindicalizare',
@@ -682,7 +650,6 @@ cu o culoare care le indică starea :',
 'item_non_accepter_inscriptions' => 'Nu acceptaţi înscrierile',
 'item_non_activer_messages_avertissement' => 'Fără mesaje de avertisment',
 'item_non_afficher_calendrier' => 'Nu afişaţi în calendar',
-'item_non_ajout_mots_cles' => 'Interziceţi utilizarea cuvintelor-cheie în forum-uri',
 'item_non_autoriser_documents_joints' => 'Nu autorizaţi documentele în articole',
 'item_non_autoriser_documents_joints_rubriques' => 'Nu autorizaţi documentele în rubrici',
 'item_non_autoriser_syndication_integrale' => 'Difuzaţi doar un rezumat',
@@ -694,18 +661,14 @@ cu o culoare care le indică starea :',
 'item_non_limiter_recherche' => 'Măriţi zona de căutare la conţinutul site-urilor referenţiate',
 'item_non_messagerie_agenda' => 'Dezactivaţi mesageria şi agenda',
 'item_non_publier_articles' => 'Nu publicaţi articolele înaintea datei de publicare fixată.',
-'item_non_utiliser_config_groupe_mots_cles' => 'Nu folosiţi configurarea avansată a grupurilor de cuvinte-cheie',
 'item_non_utiliser_moteur_recherche' => 'Nu folosiţi motorul',
-'item_non_utiliser_mots_cles' => 'Nu utilizaţi cuvintele-cheie',
 'item_non_utiliser_syndication' => 'Nu folosiţi sindicalizarea automatică',
 'item_nouvel_auteur' => 'Autor nou',
 'item_nouvelle_rubrique' => 'Rubrică nouă',
 'item_oui' => 'Da',
 'item_publier_articles' => 'Publicaţi articolele indiferent de data lor de publicare.',
 'item_reponse_article' => 'Răspuns la articolul',
-'item_utiliser_config_groupe_mots_cles' => 'Utilizaţi configurarea avansată a grupurilor de cuvinte-cheie',
 'item_utiliser_moteur_recherche' => 'Utilizaţi motorul de căutare',
-'item_utiliser_mots_cles' => 'Utilizaţi cuvintele-cheie',
 'item_utiliser_syndication' => 'Utilizaţi sindicalizarea automatică',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -729,7 +692,6 @@ cu o culoare care le indică starea :',
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Adăugaţi acest destinatar',
 'lien_ajouter_auteur' => 'Adăugaţi acest autor',
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Adăugaţi un participant',
 'lien_email' => 'email',
 'lien_mise_a_jour_syndication' => 'Aduceţi la zi acum',
@@ -749,8 +711,6 @@ cu o culoare care le indică starea :',
 'lien_voir_en_ligne' => 'VEDEŢI ÎN DIRECT :',
 'logo_article' => 'VINIETA ARTICOLULUI',
 'logo_auteur' => 'VINIETA AUTORULUI',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'VINIETA CUVÂNTULUI-CHEIE',
 'logo_rubrique' => 'VINIETA RUBRICII',
 'logo_site' => 'VINIETA ACESTUI SITE',
 'logo_standard_rubrique' => 'VINIETA STANDARD A RUBRICILOR',
@@ -902,9 +862,6 @@ reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces a
 'texte_compresse_ou_non' => '(acesta poate fi comprimat sau nu)',
 'texte_compte_element' => '@count@ element(e)',
 'texte_compte_elements' => '@count@ element(e)',
-'texte_config_groupe_mots_cles' => 'Doriţi să activaţi configurarea avansată a cuvintelor-cheie,
-   indicând, de exemplu, că puteţi selecţiona un cuvânt unic
-   pe grup, sau că un grup este important... ?',
 'texte_conflit_edition_correction' => 'Vă rugăm să controlaţi mai jos diferenţele între cele două versiuni ale textului; puteţi de asemenea să copiaţi modificările dumneavoastră, pentru a reîncepe.',
 'texte_connexion_mysql' => 'Vă rugăm să consultaţi informaţiile care v-au fost date de către furnizorul dumneavoastră : ar trebui să găsiţi codurile de acces la server-ul de baze de date.',
 'texte_contenu_article' => '(Conţinutul articolului în câteva cuvinte.)',
@@ -959,17 +916,11 @@ reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces a
   modificate în mod normal (adică cu ajutorul interfeţei SPIP) sunt în mod automat
   reindexate : aşadar, această comandă nu este utilă decât în mod excepţional.',
 'texte_moteur_recherche_non_active' => 'Motorul de căutare nu este activat.',
-'texte_mots_cles' => 'Cuvintele-cheie permit crearea de legături tematice între articole,
-  independent de plasarea lor în rubrici. Puteţi astfel
-  să îmbogăţiţi navigarea site-ului dumneavoatră, adică să utilizaţi aceste proprietăţi
-  pentru a personaliza prezentarea articolelor în scheletele dumneavoastră.',
-'texte_mots_cles_dans_forum' => 'Doriţi să permiteţi utilizarea cuvintelor-cheie de către vizitatori, în forum-urile site-ului public ? (Atenţie : această opţiune este relativ complicat de folosit corect).',
 'texte_multilinguisme' => 'Dacă doriţi să gestionaţi articole în mai multe limbi, cu o navigare complexă, puteţi să adăugaţi un meniu de selectare a limbii pentru articole şi/sau rubrici, în funcţie de organizarea site-ului dumneavoastră.',
 'texte_multilinguisme_trad' => 'Puteţi, de asemenea, să activaţi sistemul de gestiune a legăturilor între diferitele traduceri ale unui articol.',
 'texte_non_compresse' => '<i>necomprimat</i> (server-ul dumneavoastră nu suportă această funcţionalitate)',
 'texte_non_fonction_referencement' => 'Puteţi să alegeţi să nu folosiţi această funcţie automată, ci să indicaţi chiar dumneavoastră elementele legate de acest site...',
 'texte_nouveau_message' => 'Mesaj nou',
-'texte_nouveau_mot' => 'Cuvânt nou',
 'texte_nouvelle_version_spip_1' => 'Aţi instalat o nouă versiune SPIP.',
 'texte_nouvelle_version_spip_2' => 'Această nouă versiune necesită o aducere la zi mai completă decât în mod obişnuit. Dacă sunteţi webmaster-ul site-ului, vă rugam să ştergeţi fişierul @connect@ şi să reluaţi instalarea de la capăt pentru a permite aducerea la zi a parametrilor dumneavoastră de conectare la baza de date.
 (Nota Bene : dacă cumva aţi uitat parametrii de conectare, aruncaţi o privire la fişierul @connect@ înainte de a-l şterge...)', # MODIF
@@ -1058,7 +1009,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_config_contenu_prive' => 'În spaţiul privat',
 'titre_config_contenu_public' => 'Pe site-ul public',
 'titre_config_fonctions' => 'Configuraţia site-ului',
-'titre_config_groupe_mots_cles' => 'Configuraţia grupurilor de cuvinte-cheie',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configuraţia site-ului',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1066,7 +1016,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_connexion_ldap' => 'Opţiuni : <b>Conexiunea dumneavoastră LDAP</b>',
 'titre_dernier_article_syndique' => 'Ultimele articole sindicalizate',
 'titre_evolution_visite' => 'Evoluţia vizitelor',
-'titre_gauche_mots_edit' => 'CUVÂNT NUMĂRUL :',
 'titre_groupe_mots' => 'GRUP DE CUVINTE :',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LIMBA ARTICOLULUI',
@@ -1074,10 +1023,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_langue_trad_article' => 'LIMBA ŞI TRADUCERILE ARTICOLULUI',
 'titre_les_articles' => 'ARTICOLELE',
 'titre_messagerie_agenda' => 'Mesagerie şi agendă',
-'titre_mots_cles_dans_forum' => 'Cuvinte-cheie în forum-urile site-ului public',
-'titre_mots_tous' => 'Cuvintele-cheie',
 'titre_naviguer_dans_le_site' => 'Navigaţi în structura site-ului...',
-'titre_nouveau_groupe' => 'Grup nou',
 'titre_nouvelle_rubrique' => 'Rubrică nouă',
 'titre_numero_rubrique' => 'RUBRICA NUMĂRUL :',
 'titre_page_admin_effacer' => 'Întreţinere tehnică : ştergeţi baza de date',
@@ -1095,7 +1041,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_page_index' => 'Spaţiul dumneavoastră privat',
 'titre_page_message_edit' => 'Scrieţi un mesaj',
 'titre_page_messagerie' => 'Mesageria dumneavoastră',
-'titre_page_mots_tous' => 'Cuvinte-cheie',
 'titre_page_recherche' => 'Rezultatele căutării @recherche@',
 'titre_page_sites_tous' => 'Site-urile referenţiate',
 'titre_page_statistiques' => 'Statisticile pe rubrici',

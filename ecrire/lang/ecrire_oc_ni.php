@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'La connexion au servidor LDAP a soït.',
 'avis_connexion_ldap_echec_2' => 'Tornatz a la pàgina anteriora, e verificatz li informacions que nos avètz fornidi. ',
 'avis_connexion_ldap_echec_3' => 'D\'un biais alternatiu, utilisetz pas lo supoart LDAP per importar d\'utilisaires.',
-'avis_conseil_selection_mot_cle' => '<b>Grop important:</b> es foart aconselhat de seleccionar un mòt clau dins aqueu grop.',
 'avis_deplacement_rubrique' => 'Dàida ! Aquela rubrica conten @contient_breves@ brèva@scb@ : se la desplaçatz, vorgatz ben faire una taca dins aquela casa de confirmacion.',
 'avis_destinataire_obligatoire' => 'Devètz indicar un destinatari denant de mandar aqueu messatge.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'Error de conexion SQL',
 'avis_erreur_version_archive' => '<b>Dàida ! Lo fichier @archive@ correspoande à una autra version de SPIP qu\'aquela qu\'avètz installada.</b> Anatz vèrs de bèli dificultats : risca de destruccion de la voastra basa de donadas, disfoncionaments divèrs dau sit eca. Non validetz aquela demanda d\'importacion.<p> Per mai d\'informacions, veguètz
 <a href="@spipnet@">
@@ -56,8 +54,6 @@ la documentacion de SPIP</a>.</p>', # MODIF
 'bouton_annuler' => 'Anular',
 'bouton_checkbox_envoi_message' => 'possibilitat de mandar un messatge',
 'bouton_checkbox_indiquer_site' => 'indicar obligatòriament un sit web',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'Lu administrators dau sit',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'lu redactors',
 'bouton_checkbox_signature_unique_email' => 'una soleta signatura per adreça e-mail',
 'bouton_checkbox_signature_unique_site' => 'una soleta signatura per sit web',
 'bouton_demande_publication' => 'Demandar la publicacion d\'aquest article',
@@ -203,8 +199,6 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'icone_arret_discussion' => 'Participar plus à-n-aquela discussion',
 'icone_calendrier' => 'Calendier',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'Crear un novèu grop de mòts',
-'icone_creation_mots_cles' => 'Crear un novèu mòt clau ',
 'icone_creer_auteur' => 'Crear un novèl autor e l\'associar à-n-aquel article',
 'icone_creer_mot_cle' => 'Crear un novèu mòt clau e lo ligar à-n-aquel article',
 'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
@@ -216,10 +210,8 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'Modificar aqueu grop de mòts',
 'icone_modifier_article' => 'Modificar aquel article',
 'icone_modifier_message' => 'Modificar aqueu messatge',
-'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Modificar aquela rubrica',
 'icone_modifier_site' => 'Modificar aqueu sit',
 'icone_publication' => 'Publication', # NEW
@@ -230,12 +222,10 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Suprimir lo cookie de correspondença',
-'icone_supprimer_groupe_mots' => 'Suprimir aqueu document',
 'icone_supprimer_rubrique' => 'Suprimir aquela rubrica',
 'icone_supprimer_signature' => 'Suprimir aquela signatura',
 'icone_valider_signature' => 'Validar aquela signatura',
 'icone_voir_sites_references' => 'Veire lu sits referençats',
-'icone_voir_tous_mots_cles' => 'Veire toi lu mòts claus',
 'image_administrer_rubrique' => 'Podètz administrar aquela rubrica',
 'info_1_article' => '1 article',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -276,7 +266,6 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_articles_02' => 'articles',
 'info_articles_2' => 'Articles',
 'info_articles_auteur' => 'Lu articles d\'aquel autor',
-'info_articles_lies_mot' => 'Lu articles ligats à-n-aqueu mòt clau',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Articles trobats',
@@ -286,7 +275,6 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -300,7 +288,6 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'L\'estructura de la voastra basa de donadas es installada.',
 'info_bloquer' => 'blocar',
-'info_changer_nom_groupe' => 'Cambiar lo nom d\'aqueu grop:',
 'info_chapeau' => 'Capèu',
 'info_chapeau_2' => 'Capèu :',
 'info_chemin_acces_1' => 'Opcions: <b>camin d\'accès dins l\'annuari</b>',
@@ -329,17 +316,13 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_contact' => 'Contact',
 'info_contenu_articles' => 'Contengut dei articles',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'Creatz e configuratz aquí lu mòts claus dau sit',
 'info_creation_paragraphe' => '(Per crear de paragrafs, laissatz de linhas vuèii, tot simplament)',
 'info_creation_rubrique' => 'Denant de poder escriure d\'articles,<br /> devètz crear aumens una rubrica.<br />',
 'info_creation_tables' => 'Creacion dei taulas de la basa',
 'info_creer_base' => '<b>Crear</b> una basa nòva de donadas:',
-'info_dans_groupe' => 'Dins lo grop:',
 'info_dans_rubrique' => 'Dins la rubrica:',
 'info_date_publication_anterieure' => 'Data anteriora de redaccion:',
 'info_date_referencement' => 'DATA DE REFERENÇAMENT D\'AQUEU SIT :',
-'info_delet_mots_cles' => 'Avètz demandat de suprimir lo mòt clau
-<b>@titre_mot@</b> (@type_mot@). Aqueu mòt clau es ligat à <b>@texte_lie@</b>. Devètz confirmar aquela decision :',
 'info_derniere_etape' => 'Es acabat !',
 'info_derniere_syndication' => 'La darriera sindicacion d\'aqueu sit si faguèt lo',
 'info_derniers_articles_publies' => 'Lu voastres darriers articles publicats en linha',
@@ -377,7 +360,6 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_generation_miniatures_images' => 'Generacion de miniaturas dei imatges',
 'info_gerer_trad' => 'Gerar lu estacs de revirada?',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'Grop important',
 'info_hebergeur_desactiver_envoi_email' => 'I son d\'aubergadors que desactivan lo mandadís automatic d\'e-mails despi lu sieus servidors. En aqueu cas, li foncionalitats seguenti de SPIP foncionaràn pas.',
 'info_hier' => 'ièr :',
 'info_historique' => 'Revisions:',
@@ -421,14 +403,11 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
   fichiers de SPIP.}}',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modificar l\'autor :',
-'info_modifier_mot' => 'Modificar lo mot clau :',
 'info_modifier_rubrique' => 'Modificar la rubrica:',
 'info_modifier_titre' => 'Modificar: @titre@',
 'info_mon_site_spip' => 'Lo mieu sit SPIP',
 'info_mot_sans_groupe' => '(Mòts sensa grop...)',
 'info_moteur_recherche' => 'Motor de recerca integrat',
-'info_mots_cles' => 'Lu mòts claus',
-'info_mots_cles_association' => 'Lu mòts claus d\'aqueu grop poadon èstre associats :',
 'info_moyenne' => 'mejana :',
 'info_multi_articles' => 'Activar lo menut de lenga per lu articles ?',
 'info_multi_cet_article' => 'Lenga d\'aquest article:',
@@ -472,7 +451,6 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_ortho_activer' => 'Activar lo verificador d\'ortografia',
 'info_ortho_desactiver' => 'Desactivar lo verificador d\'ortografia',
 'info_ou' => 'ò... ',
-'info_oui_suppression_mot_cle' => 'Voali suprimir aqueu mòt clau definitivament.',
 'info_page_interdite' => 'Pàgina proïbida',
 'info_par_nom' => 'per nom',
 'info_par_nombre_article' => 'per nombre d\'articles',
@@ -514,13 +492,11 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
  aubergadors desactivon lo mandadís d\'e-mails despí lu sieus
  servidors: en aqueu cas, l\'inscripcion automatica es
  impossibla.', # MODIF
-'info_question_mots_cles' => 'Desiratz d\'utilisar lu mòts claus sus lo voastre sit?',
 'info_question_proposer_site' => 'Cu pòu prepauar de sits referençats?',
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilisar lo motor de recerca integrat à SPIP? (s\'es desactivat, accelèra lo foncionament dau sistema.)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_attribue_mot_cle' => 'Lu mòts d\'aqueu grop poadon èstre atribuits de :',
 'info_racine_site' => 'Raiç dau sit',
 'info_recharger_page' => 'Vorgatz tornar cargar aquela pàgina dins un momenton.',
 'info_recherche_auteur_a_affiner' => 'Tròup de resultats per "@cherche_auteur@"; vorgatz afinar la recerca.',
@@ -534,19 +510,16 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_redirection' => 'Redireccion',
 'info_refuses' => 'Lu voastres articles refudats',
 'info_reglage_ldap' => 'Opcions: <b>Reglatge de l\'importacion LDAP</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redireccion.</b> Aquel article torna mandar à la pàgina:',
 'info_reserve_admin' => 'Solets lu administrators poadon modificar aquela adreça.',
 'info_restreindre_rubrique' => 'Restrénher la gestion à la rubrica:',
 'info_resultat_recherche' => 'Resultats de la recerca :',
 'info_rubriques' => 'Rubricas',
 'info_rubriques_02' => ' rubricas',
-'info_rubriques_liees_mot' => 'Li rubricas ligadi à-n-aqueu mòt clau',
 'info_rubriques_trouvees' => 'Rubricas trobadi',
 'info_rubriques_trouvees_dans_texte' => 'Rubricas trobadi (dins lo tèxt)',
 'info_sans_titre' => 'Sensa titre',
 'info_selection_chemin_acces' => '<b>Seleccionatz</b> çai sota lo camin d\'accès dins l\'annuari:',
-'info_selection_un_seul_mot_cle' => 'Si pòu seleccionar qu\'<b>un mòt clau</b> à l\'encòup dins aqueu grop.',
 'info_signatures' => 'signaturas',
 'info_site' => 'Sit',
 'info_site_2' => 'sit : ',
@@ -576,7 +549,6 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_statut_utilisateurs_1' => 'Estatut predefinit dei utilisaires importats',
 'info_statut_utilisateurs_2' => 'Chausissètz l\'estatut qu\'es atribuit ai personas presenti dins l\'annuari LDAP quora si connecton lo premier còup. Pi podrètz modificar aquela valor per cada autor au cas per cas.',
 'info_suivi_activite' => 'Seguit de l\'activitat editoriala',
-'info_supprimer_mot' => 'suprimir aqueu mòt',
 'info_surtitre' => 'Sobretitre:',
 'info_syndication_integrale_1' => 'Lo voastre site propausa de fichiers de syndicacion (veire « <a href="@url@">@titre@</a> »).',
 'info_syndication_integrale_2' => 'Desiratz transmetre l\'integralitat dei articles, ò difusar ren qu\'un resumit de quauqui centenas de caractèrs ?',
@@ -590,7 +562,6 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_texte_message' => 'Tèxt dau voastre messatge:',
 'info_texte_message_02' => 'Tèxt dau messatge',
 'info_titre' => 'Titre:',
-'info_titre_mot_cle' => 'Nom ò titre dau mòt clau',
 'info_total' => 'totau : ',
 'info_tous_articles_en_redaction' => 'Toi lu articles en cors de redaccion',
 'info_tous_articles_presents' => 'Toi lu articles publicats dins aquela rubrica',
@@ -608,7 +579,6 @@ una color indica lo sieu estat :',
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Travalh collaboratiu sus lu articles',
 'info_un_article' => 'un article, ',
-'info_un_mot' => 'Un sol mòt à l\'encòup',
 'info_un_site' => 'un sit, ',
 'info_une_rubrique' => 'una rubrica, ',
 'info_une_rubrique_02' => '1 rubrica',
@@ -653,7 +623,6 @@ una color indica lo sieu estat :',
 'item_activer_messages_avertissement' => 'Activar lu messatges d\'avertiment',
 'item_administrateur_2' => 'administrator',
 'item_afficher_calendrier' => 'Far paréisser dins lo calendier',
-'item_ajout_mots_cles' => 'Autorisar l\'ajust de mòts claus ai fòros',
 'item_autoriser_documents_joints' => 'Autorisar lu documents jonchs ai articles',
 'item_autoriser_documents_joints_rubriques' => 'Autorisar lu documents dins li rubricas',
 'item_autoriser_syndication_integrale' => 'Difusir l\'integralitat dei articles dins lu fichiers de syndicacion',
@@ -676,7 +645,6 @@ una color indica lo sieu estat :',
 'item_non_accepter_inscriptions' => 'Acceptar pas li inscripcions',
 'item_non_activer_messages_avertissement' => 'Minga de messatge d\'avertiment',
 'item_non_afficher_calendrier' => 'Pas far paréisser dins lo calendier',
-'item_non_ajout_mots_cles' => 'Proïbir l\'utilisacion dei mòts claus dins lu fòros',
 'item_non_autoriser_documents_joints' => 'Autorisar pas lu documents dins lu articles',
 'item_non_autoriser_documents_joints_rubriques' => 'Autorisar pas lu documents dins li rubricas',
 'item_non_autoriser_syndication_integrale' => 'Difusir ren qu\'un resumit',
@@ -688,18 +656,14 @@ una color indica lo sieu estat :',
 'item_non_limiter_recherche' => 'Alargar la recerca au contengut dei sits referençats',
 'item_non_messagerie_agenda' => '<NEW>D&eacute;sactiver la messagerie et l’agenda',
 'item_non_publier_articles' => 'Publicar pas lus articles avans la data de publicacion prevista.',
-'item_non_utiliser_config_groupe_mots_cles' => 'Utilisar pas la configuracion avançada dei grops de mòts claus',
 'item_non_utiliser_moteur_recherche' => 'Utilisar pas lo motor',
-'item_non_utiliser_mots_cles' => 'Utilisar pas lu mòts claus',
 'item_non_utiliser_syndication' => 'Utilisar pas la sindicacion automatica',
 'item_nouvel_auteur' => 'Novèl autor',
 'item_nouvelle_rubrique' => 'Novèla rubrica',
 'item_oui' => 'Aï',
 'item_publier_articles' => 'Publicar lu articles, quauque sigue la data de publicacion',
 'item_reponse_article' => 'Respoasta à l\'article',
-'item_utiliser_config_groupe_mots_cles' => 'Utilisar la configuracion avançada dei grops de mòts claus',
 'item_utiliser_moteur_recherche' => 'Utilisar lo motor de recerca',
-'item_utiliser_mots_cles' => 'Utilisar lu mòts claus',
 'item_utiliser_syndication' => 'Utilisar la sindicacion automatica',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -723,7 +687,6 @@ una color indica lo sieu estat :',
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Ajustar aqueu destinatari',
 'lien_ajouter_auteur' => 'Ajustar aquel autor',
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Ajustar un participant',
 'lien_email' => 'e-mail',
 'lien_mise_a_jour_syndication' => 'Actualisar aüra',
@@ -743,8 +706,6 @@ una color indica lo sieu estat :',
 'lien_voir_en_ligne' => 'VEIRE EN LINHA:',
 'logo_article' => 'LÒGO DE L\'ARTICLE',
 'logo_auteur' => 'LÒGO DE L\'AUTOR',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'LÒGO DAU MÒT CLAU',
 'logo_rubrique' => 'LÒGO DE LA RUBRICA',
 'logo_site' => 'LÒGO D\'AQUEU SIT',
 'logo_standard_rubrique' => 'LÒGO ESTANDARD DEI RUBRICAS',
@@ -894,9 +855,6 @@ qu\'apareisse quora la rateta passa sus lo titre.',
 'texte_compresse_ou_non' => '(Aquesto pòu èstre comprimit ò non)',
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elements',
-'texte_config_groupe_mots_cles' => 'Desiratz d\'activar la configuracion avançada dei mòts claus,
- en indicant per exemple que si pòu seleccionar un mòt unic
- per grop, qu\'un grop es important... ?',
 'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
 'texte_connexion_mysql' => 'Consultatz li informacions que lo voastre aubergador fornisse : li devètz trobar lo servidor de basa de donadas que prepaua e lu identificants personaus per vos connectar.',
 'texte_contenu_article' => '(Contengut de l\'article en quaucu mots.)',
@@ -959,17 +917,11 @@ qu\'apareisse quora la rateta passa sus lo titre.',
   maniera normala (a partir de l\'interfaça SPIP) se tornan indexar
   automaticament: donc aquesta comanda es utila solament d\'un biais excepcionau.',
 'texte_moteur_recherche_non_active' => 'Lo motor de recerca es pas activat.',
-'texte_mots_cles' => 'Lu mòts claus permeton crear de ligams tematics entre lu voastres articles
-  quauque que sigue la sieua plaça dins li rubricas. Aquò vos permete
-  d\'enriquir la navigacion dau voastre site, e mai d\'utilisar aqueli proprietats 
-  per personalisar la presentacion dei articles dins li esqueletas. ',
-'texte_mots_cles_dans_forum' => 'Desiratz de permetre l\'utilisacion dei mòts claus seleccionables dai visitaires dins lu fòros dau sit public ? (Atencion: es pron complèxe d\'utilisar aquela opcion correctament.)',
 'texte_multilinguisme' => 'Se desiratz gerar d\'articles en mai d\'una lenga, emb una navigacion complèxa, podètz apondre un menut per chausir la lenga dei articles e/ò dei rubricas, en foncion de l\'organisacion dau voastre sit.',
 'texte_multilinguisme_trad' => 'Podètz tanben activar un sistema de gestion dei ligams entre li diferentes reviradas d\'un article.',
 'texte_non_compresse' => '<i>non comprimit</i> (lo voastre servidor supoarta pas aquela foncionalitat)',
 'texte_non_fonction_referencement' => 'Podètz chausir d\'utilisar pas aquela foncion automatica, e indicar de vos meme lu elements que tòcan aqueu sit...',
 'texte_nouveau_message' => 'Messatge novèu',
-'texte_nouveau_mot' => 'Novèu mòt',
 'texte_nouvelle_version_spip_1' => 'Avètz installat una novèla version de SPIP.',
 'texte_nouvelle_version_spip_2' => 'Aquesta version novèla demanda una actualisacion mai completa que de costuma. Se siètz webmèstre/webmèstressa dau site, vorgatz escafar lo fichier @connect@ e tornar prendre l\'installacion per fin d\'actualisar lu voastres paramètres de connexion à la basa de donadas.<p> (NB: s\'avètz denembrat lu voastres paramètres de connexion, regarjatz lo fichier @connect@ denant de lo suprimir...)</p>', # MODIF
 'texte_operation_echec' => 'Tornatz à la pàgina precedenta, chausissètz una autra basa ò creatz-nen una novèla. Verificatz li informacions que lo voastre aubergador v\'a fornidi.',
@@ -1077,7 +1029,6 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Configuracion dau sit',
-'titre_config_groupe_mots_cles' => 'Configuracion dei grops de mòts claus',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configuracion dau sit',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1085,7 +1036,6 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'titre_connexion_ldap' => 'Opcions : <b>La voastra connexion LDAP</b>',
 'titre_dernier_article_syndique' => 'Darriers articles sindicats',
 'titre_evolution_visite' => 'Evolucion dei visitas',
-'titre_gauche_mots_edit' => 'MÒT NÚMERO :',
 'titre_groupe_mots' => 'GROP DE MÒTS :',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LENGA DE L\'ARTICLE',
@@ -1093,10 +1043,7 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'titre_langue_trad_article' => 'LENGA E REVIRADAS DE L\'ARTICLE',
 'titre_les_articles' => 'LU ARTICLES',
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW
-'titre_mots_cles_dans_forum' => 'Mòts claus dins lu fòros dau sit public',
-'titre_mots_tous' => 'Lu mòts claus',
 'titre_naviguer_dans_le_site' => 'Navigar dins lo sit...',
-'titre_nouveau_groupe' => 'Novèu grop',
 'titre_nouvelle_rubrique' => 'Novèla rubrica',
 'titre_numero_rubrique' => 'RUBRICA NÚMERO :',
 'titre_page_admin_effacer' => 'Mantenança tecnica : escaçar la basa',
@@ -1114,7 +1061,6 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'titre_page_index' => 'Lo voastre espaci privat',
 'titre_page_message_edit' => 'Escriure un messatge',
 'titre_page_messagerie' => 'La voastra messatgeria',
-'titre_page_mots_tous' => 'Mòts claus',
 'titre_page_recherche' => 'Resultats de la recerca @recherche@',
 'titre_page_sites_tous' => 'Lu sits referençats',
 'titre_page_statistiques' => 'Estatisticas per rubricas',
