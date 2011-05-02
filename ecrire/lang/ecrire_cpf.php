@@ -114,7 +114,6 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 'bouton_radio_desactiver_messagerie' => 'Dégrèn lakazmodékri ',
 'bouton_radio_envoi_annonces_adresse' => 'Anvwa bann zanons sir ladrès-la:',
 'bouton_radio_envoi_liste_nouveautes' => 'Anvwa lalist bann nouvèlté',
-'bouton_radio_modere_priori' => 'lé modèré-dovan',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Bann lotèr-la i pé pa vwar ou lé an liyn
 
 ',
@@ -788,9 +787,6 @@ sanm in koulèr i présiz son léta :',
 'lien_mise_a_jour_syndication' => 'Arnouvèl astèr toudswit',
 'lien_nom_site' => 'LO NON LO SITWÈB :',
 'lien_nouvelle_recuperation' => 'Esèy inn ot sarzman do bann doné.',
-'lien_reponse_article' => 'Réponn lartik-la',
-'lien_reponse_rubrique' => 'Répons pou rubrik-la',
-'lien_reponse_site_reference' => 'Répons pou sit-la:',
 'lien_retirer_auteur' => 'Artir lotèr-la',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Artir dalon-la',

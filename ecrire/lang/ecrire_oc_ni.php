@@ -82,7 +82,6 @@ la documentacion de SPIP</a>.</p>', # MODIF
 'bouton_radio_desactiver_messagerie' => 'Desactivar la messatgeria',
 'bouton_radio_envoi_annonces_adresse' => 'Mandar li anonças à l\'adreça :',
 'bouton_radio_envoi_liste_nouveautes' => 'Mandar la tiera dei noveutats',
-'bouton_radio_modere_priori' => 'moderacion à priòri',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Aparéisser pas dins la tiera dei redactors',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Mandar pas d\'anonças editoriali',
 'bouton_radio_non_syndication' => 'Minga de sindicacion', # essai commentaire
@@ -745,9 +744,6 @@ una color indica lo sieu estat :',
 'lien_mise_a_jour_syndication' => 'Actualisar aüra',
 'lien_nom_site' => 'NOM DAU SIT:',
 'lien_nouvelle_recuperation' => 'Temptar una novèla recuperacion de li donadas',
-'lien_reponse_article' => 'Respoasta à l\'article',
-'lien_reponse_rubrique' => 'Respoasta à la rubrica',
-'lien_reponse_site_reference' => 'Respoasta au sit referençat :',
 'lien_retirer_auteur' => 'Retirar l\'autor',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'retirar aqueu participant',

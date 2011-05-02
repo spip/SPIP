@@ -83,7 +83,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'bouton_radio_desactiver_messagerie' => 'Không sử dụng thư tín nội bộ',
 'bouton_radio_envoi_annonces_adresse' => 'Gửi thông báo đến địa chỉ:',
 'bouton_radio_envoi_liste_nouveautes' => 'Gửi các tin tức mới nhất',
-'bouton_radio_modere_priori' => 'xét trước, đăng sau',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Không hiện tên ra  ',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Đừng gửi bất cứ thông báo xã luận nào',
 'bouton_radio_non_syndication' => 'Không có syndication',
@@ -732,9 +731,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'lien_mise_a_jour_syndication' => 'Cập nhật bây giờ',
 'lien_nom_site' => 'TÊN WEBSITE:',
 'lien_nouvelle_recuperation' => 'Thử tìm cách thu hồi dữ kiện',
-'lien_reponse_article' => 'Hồi âm bài này',
-'lien_reponse_rubrique' => 'Hồi âm đề mục này',
-'lien_reponse_site_reference' => 'Hồi âm website nối kết:',
 'lien_retirer_auteur' => 'Loại bỏ tác giả',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Loại bỏ tham dự viên này',

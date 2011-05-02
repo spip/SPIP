@@ -88,7 +88,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_desactiver_messagerie' => 'Dezaktywuj pocztę',
 'bouton_radio_envoi_annonces_adresse' => 'Wysyłaj ogłoszenia na adres :',
 'bouton_radio_envoi_liste_nouveautes' => 'Wysyłaj najnowszą listę newsów',
-'bouton_radio_modere_priori' => 'moderacja a priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nie pokazuj w liście redaktorów',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Nie wysyłaj żadnych zawiadomień redakcyjnych',
 'bouton_radio_non_syndication' => 'Bez syndykacji',
@@ -767,9 +766,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'lien_mise_a_jour_syndication' => 'Uaktualnij teraz',
 'lien_nom_site' => 'NAZWA STRONY:',
 'lien_nouvelle_recuperation' => 'Spróbuj ponowić odtwarzanie danych',
-'lien_reponse_article' => 'Odpowiedz na ten artykuł',
-'lien_reponse_rubrique' => 'Odpowiedz w tym dziale',
-'lien_reponse_site_reference' => 'Odwołanie się do zlinkowanej strony :',
 'lien_retirer_auteur' => 'Usuń autora',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'usuń uczestnika',

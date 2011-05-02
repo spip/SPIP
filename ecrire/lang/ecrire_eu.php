@@ -85,7 +85,6 @@ Ez balidatu inportazio galdera hau.
 'bouton_radio_desactiver_messagerie' => 'Mezularitza desaktibatu',
 'bouton_radio_envoi_annonces_adresse' => 'Iragarkiak hurrengo helbideraigorri:',
 'bouton_radio_envoi_liste_nouveautes' => 'Nobedadeen zerrenda igorri',
-'bouton_radio_modere_priori' => 'aurretiaz moderatua',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Erredaktoreen zerrendan ez agertzea',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ez igorri iragarki editorialik',
 'bouton_radio_non_syndication' => 'Sindikaziorik ez',
@@ -740,9 +739,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'lien_mise_a_jour_syndication' => 'Orain gaurkotu',
 'lien_nom_site' => 'Lekuaren izena',
 'lien_nouvelle_recuperation' => 'Datuak berreskuratzen berriro saiatu',
-'lien_reponse_article' => 'Artikuluari erantzuna',
-'lien_reponse_rubrique' => 'Atalari erantzuna',
-'lien_reponse_site_reference' => 'Aipatutako lekuari erantzuna',
 'lien_retirer_auteur' => 'Egile hau baztertu',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Parte-hartzailehau baztertu',

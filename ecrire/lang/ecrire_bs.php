@@ -80,7 +80,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_desactiver_messagerie' => 'Dezaktivirati servis poruka',
 'bouton_radio_envoi_annonces_adresse' => 'Posalji najave na adresu:',
 'bouton_radio_envoi_liste_nouveautes' => 'Posalji listu novosti',
-'bouton_radio_modere_priori' => '\\f1 pre-moderation\\f0 ',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ne prikazuj u listi urednika',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ne salji editorijalne najave',
 'bouton_radio_non_syndication' => 'Bez sindikacije',
@@ -725,9 +724,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'lien_mise_a_jour_syndication' => 'Osvjezi sada',
 'lien_nom_site' => 'IME STRANICE:',
 'lien_nouvelle_recuperation' => 'Pokusaj ponovno dobavljanje podataka',
-'lien_reponse_article' => 'Odgovori na clanak',
-'lien_reponse_rubrique' => 'Odgovori na rubriku',
-'lien_reponse_site_reference' => 'Odgovori na referenciranu stranicu:',
 'lien_retirer_auteur' => 'Odstrani autora',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Odstrani ovog ucesnika',
