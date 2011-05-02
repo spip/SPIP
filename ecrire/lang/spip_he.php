@@ -319,7 +319,6 @@ sera ignorée) :
 'form_prop_url_site' => 'הכתובת הכללית של האתר',
 'forum_non_inscrit' => 'או שאינך רשום במערכת או שהכתובת או הסיסמה שגויים.',
 'forum_par_auteur' => 'מאת @auteur@',
-'forum_probleme_database' => 'בעיית בסיס נתונים, הודעתך לא יכולה להירשם.',
 'forum_titre_erreur' => 'שגיאה...',
 
 // I
@@ -344,8 +343,6 @@ sera ignorée) :
 'icone_doc_rubrique' => 'מסמכים של המדורים',
 'icone_ecrire_article' => 'כתוב מאמר חדש',
 'icone_edition_site' => 'ערוך אתר',
-'icone_forum_administrateur' => 'פורום מנהלים',
-'icone_forum_suivi' => 'מעקב אחר הפורומים',
 'icone_gestion_langues' => 'ניהול שפה',
 'icone_informations_personnelles' => 'מידע אישי',
 'icone_interface_complet' => 'ממשק שלם',
@@ -426,9 +423,6 @@ sera ignorée) :
 'info_documents' => 'מסמכים',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP מאפשר החלפת הודעות והקמת פורומים
-  פרטים בין משתתפי האתר. אפשר להפעיל או
-  להסיר פונקציה זו.',
 'info_ecire_message_prive' => 'כתוב הודעה אישית',
 'info_email_invalide' => '.כתובת דוא"ל שגויה',
 'info_en_cours_validation' => 'המאמרים שלך בהתקדמות',

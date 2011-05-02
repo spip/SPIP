@@ -318,7 +318,6 @@ Děkujeme vám za účast
 'form_prop_url_site' => 'Adresa URL webu',
 'forum_non_inscrit' => 'Buď nejste zaregistrováni nebo jste zadali nesprávnou adresu či heslo.',
 'forum_par_auteur' => 'Autor: @auteur@',
-'forum_probleme_database' => 'Kvůli problémům s databází nebylo možné vaši zprávu zaznamenat.',
 'forum_titre_erreur' => 'Chyba...',
 
 // I
@@ -343,8 +342,6 @@ Děkujeme vám za účast
 'icone_doc_rubrique' => 'Dokumenty v příloze',
 'icone_ecrire_article' => 'Napsat nový článek',
 'icone_edition_site' => 'Editovat web',
-'icone_forum_administrateur' => 'Diskusní skupina správců',
-'icone_forum_suivi' => 'Navazující zprávy diskusní skupiny',
 'icone_gestion_langues' => 'Správa jazyků',
 'icone_informations_personnelles' => 'Osobní údaje',
 'icone_interface_complet' => 'Úplné rozhraní',
@@ -425,9 +422,6 @@ Děkujeme vám za účast
 'info_documents' => 'Dokumenty',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'Systém SPIP umožňuje výměnu zpráv a vytváření soukromých
-  diskusních skupin pro účastníky webu. Tuto funkci můžete
-  zapnout nebo vypnout.',
 'info_ecire_message_prive' => 'Napsat soukromou zprávu',
 'info_email_invalide' => 'Neplatný e-mail.',
 'info_en_cours_validation' => 'Vaše rozpracované články',

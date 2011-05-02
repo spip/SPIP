@@ -313,7 +313,6 @@ Gràcies per la participació
 'form_prop_url_site' => 'Adreça (URL) del lloc',
 'forum_non_inscrit' => 'No esteu inscrit o bé l\'adreça o la contrasenya són errònies. ',
 'forum_par_auteur' => 'per @auteur@',
-'forum_probleme_database' => 'Problema de la base de dades, el vostre missatge no s\'ha registrat.',
 'forum_titre_erreur' => 'Error...',
 
 // I
@@ -338,8 +337,6 @@ Gràcies per la participació
 'icone_doc_rubrique' => 'Documents de les seccions',
 'icone_ecrire_article' => 'Escriure un nou article',
 'icone_edition_site' => 'Edició',
-'icone_forum_administrateur' => 'Fòrum dels administradors/administradores',
-'icone_forum_suivi' => 'Seguiment dels fòrums',
 'icone_gestion_langues' => 'Gestió de les llengües',
 'icone_informations_personnelles' => 'Informacions personals',
 'icone_interface_complet' => 'interfície completa',
@@ -420,9 +417,6 @@ Gràcies per la participació
 'info_documents' => 'Documents',
 'info_documents_nb' => '@nb@ documents',
 'info_documents_un' => '1 document',
-'info_echange_message' => 'SPIP permet l\'intercanvi de missatges i la creació de fòrums de discussió
-  privats entre els participants d\'un lloc. Podeu habilitar o
-  inhabilitar aquesta funcionalitat.',
 'info_ecire_message_prive' => 'Escriure un missatge privat',
 'info_email_invalide' => 'L\'adreça electrònica no és vàlida.',
 'info_en_cours_validation' => 'Articles en procés de redacció',

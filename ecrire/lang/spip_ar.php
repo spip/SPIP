@@ -319,7 +319,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_prop_url_site' => 'عنوان الموقع',
 'forum_non_inscrit' => 'إما انك غير مسجل أو هناك خطأ في العنوان أو كلمة السر.',
 'forum_par_auteur' => 'من @auteur@',
-'forum_probleme_database' => 'مشكلة في قاعدة البيانات، لم يتم تسجيل مشاركتك.',
 'forum_titre_erreur' => 'خطأ...',
 
 // I
@@ -344,8 +343,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_doc_rubrique' => 'مستندات الأقسام',
 'icone_ecrire_article' => 'كتابة مقال جديد',
 'icone_edition_site' => 'تحرير الموقع',
-'icone_forum_administrateur' => 'منتدى المديرين',
-'icone_forum_suivi' => 'متابعة المنتديات',
 'icone_gestion_langues' => 'إدارة اللغات',
 'icone_informations_personnelles' => 'المعلومات الشخصية',
 'icone_interface_complet' => 'واجهة كاملة',
@@ -426,9 +423,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_documents' => 'المستندات',
 'info_documents_nb' => '@nb@ مستند',
 'info_documents_un' => 'مستند واحد',
-'info_echange_message' => 'يتيح SPIP  تبادل الرسائل وإنشاء منتديات نقاش
-خاصة بين المشتركين في الموقع. يمكنك تفعيل هذه
-الوظيفة أو إيقافها.',
 'info_ecire_message_prive' => 'تحرير رسالة خاصة',
 'info_email_invalide' => 'عنوان بريد غير صالح.',
 'info_en_cours_validation' => 'مقالاتك قيد التحرير',

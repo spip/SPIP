@@ -315,7 +315,6 @@ Mèsi  w soutni petisyon-nan
 'form_prop_url_site' => 'Ladrès (URL) sitwèb',
 'forum_non_inscrit' => 'W ap pa enskri ankò, oubyen ladrès osinon modpas ou se pa korèk.',
 'forum_par_auteur' => 'se @auteur@ te ekri',
-'forum_probleme_database' => 'Pwoblèm ak bazdone, mesaj ou te pa enskri.',
 'forum_titre_erreur' => 'Erè ...',
 
 // I
@@ -340,8 +339,6 @@ Mèsi  w soutni petisyon-nan
 'icone_doc_rubrique' => 'Dokiman yo nan ribrik yo',
 'icone_ecrire_article' => 'Ekri yon nouvo atik',
 'icone_edition_site' => 'Ledisyon',
-'icone_forum_administrateur' => 'Fowom pou komandè yo',
-'icone_forum_suivi' => 'Swiv tout fowom yo',
 'icone_gestion_langues' => 'Okipe plizyè lang',
 'icone_informations_personnelles' => 'Ransèyman pèsonèl',
 'icone_interface_complet' => 'Entèfas konplé',
@@ -422,8 +419,6 @@ Mèsi  w soutni petisyon-nan
 'info_documents' => 'Dokiman yo',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP ka pémè lechanj mesaj ek kreyasyon fowom kozman privé
- ant tout moun ka soutni sit la. W kap mèt oubyen kraze fonksyonalite a.',
 'info_ecire_message_prive' => 'Ekri yon mesaj prive',
 'info_email_invalide' => 'Adrès limèl se pa bon.',
 'info_en_cours_validation' => 'Atik sa-yo se tout atik w yo ki ap ekri ankò',

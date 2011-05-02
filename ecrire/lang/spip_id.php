@@ -319,7 +319,6 @@ Terima kasih atas partisipasi anda!
 'form_prop_url_site' => 'URL situs',
 'forum_non_inscrit' => 'Anda belum terdaftar atau alamat atau kata sandi yang salah.',
 'forum_par_auteur' => 'oleh @auteur@',
-'forum_probleme_database' => 'Permasalahan database, pesan anda tidak dapat disimpan.',
 'forum_titre_erreur' => 'Kesalahan...',
 
 // I
@@ -344,8 +343,6 @@ Terima kasih atas partisipasi anda!
 'icone_doc_rubrique' => 'Lampiran',
 'icone_ecrire_article' => 'Tulis artikel baru',
 'icone_edition_site' => 'Edit situs',
-'icone_forum_administrateur' => 'Forum administrator',
-'icone_forum_suivi' => 'Tindak lanjut forum',
 'icone_gestion_langues' => 'Manajemen bahasa',
 'icone_informations_personnelles' => 'Informasi pribadi',
 'icone_interface_complet' => 'tatap muka lengkap',
@@ -426,9 +423,6 @@ Terima kasih atas partisipasi anda!
 'info_documents' => 'Dokumen',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP mengizinkan pertukaran pesan dan pembuatan forum
-		diskusi pribadi di antara pengunjung situs. Anda dapat mengaktifkan
-		atau menonaktifka fitur ini.',
 'info_ecire_message_prive' => 'Tulis pesan pribadi',
 'info_email_invalide' => 'Alamat e-mail tidak sah.',
 'info_en_cours_validation' => 'Artikel anda dalam proses',

@@ -316,7 +316,6 @@ Thank you for participating!
 'form_prop_url_site' => 'Site URL',
 'forum_non_inscrit' => 'Either you are not registered, or the address or password are wrong.',
 'forum_par_auteur' => 'by @auteur@',
-'forum_probleme_database' => 'Database problem, your message could not be recorded.',
 'forum_titre_erreur' => 'Error...',
 
 // I
@@ -341,8 +340,6 @@ Thank you for participating!
 'icone_doc_rubrique' => 'Documents attached',
 'icone_ecrire_article' => 'Write a new article',
 'icone_edition_site' => 'Edit site',
-'icone_forum_administrateur' => 'Administrators\' forum',
-'icone_forum_suivi' => 'Manage forums',
 'icone_gestion_langues' => 'Language options',
 'icone_informations_personnelles' => 'Personal information',
 'icone_interface_complet' => 'full interface',
@@ -423,9 +420,6 @@ Thank you for participating!
 'info_documents' => 'Documents',
 'info_documents_nb' => '@nb@ documents',
 'info_documents_un' => '1 document',
-'info_echange_message' => 'SPIP allows the exchange of messages and the creation of private
-  discussion forums for site members. You can enable or
-  disable this feature.',
 'info_ecire_message_prive' => 'Write a private message',
 'info_email_invalide' => 'Invalid email address.',
 'info_en_cours_validation' => 'Your articles in progress',

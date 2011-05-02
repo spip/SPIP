@@ -316,7 +316,6 @@ Katılımınız için teşekkürler
 'form_prop_url_site' => 'Sitenin Url adresi',
 'forum_non_inscrit' => 'Kayıtlı değilsiniz veya adresiniz veya şifreniz hatalı.',
 'forum_par_auteur' => 'yazan @auteur@ ',
-'forum_probleme_database' => 'Veritabanı sorunu, mesajınız kaydedilemedi.',
 'forum_titre_erreur' => 'Hata...',
 
 // I
@@ -341,8 +340,6 @@ Katılımınız için teşekkürler
 'icone_doc_rubrique' => 'Bölüm belgeleri',
 'icone_ecrire_article' => 'Yeni bir makale yaz',
 'icone_edition_site' => 'Yayın',
-'icone_forum_administrateur' => 'Yöneticiler forumu',
-'icone_forum_suivi' => 'Forum takibi',
 'icone_gestion_langues' => 'Dillerin yönetimi',
 'icone_informations_personnelles' => 'Kişisel bilgiler',
 'icone_interface_complet' => 'Tüm arayüz',
@@ -423,9 +420,6 @@ Katılımınız için teşekkürler
 'info_documents' => 'Belge',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP site katılımcıları arasında ileti alışverişi
-                           ve özel sohbet forumları oluşturma olanağı verir.
-                           Bu işlevi çalıştırabilir veya durdurabilirsiniz.',
 'info_ecire_message_prive' => 'Özel bir ileti yaz',
 'info_email_invalide' => 'Geçersiz e-posta adresi.',
 'info_en_cours_validation' => 'Yazılmakta olan makaleleriniz',

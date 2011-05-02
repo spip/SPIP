@@ -293,7 +293,6 @@ sera ignorée) :
 'form_prop_url_site' => 'ဆိုက်လိပ်စာ',
 'forum_non_inscrit' => 'သင်မှတ်ပုံတင်ထားခြင်း မရှိ (သို့) စကားဝှက် မှားယွင်းနေတာဖြစ်ပါလိမ့်မည်',
 'forum_par_auteur' => 'မှ @auteur@',
-'forum_probleme_database' => 'သိုလောင်မှု ပြသနာ၊ သင့်စာစောင် သိမ်းဆည်း၍မရနိုင်ပါ',
 'forum_titre_erreur' => 'မှားယွင်းမှု',
 
 // I
@@ -318,8 +317,6 @@ sera ignorée) :
 'icone_doc_rubrique' => 'ပူးတွဲစာ တင်သွင်းရန်',
 'icone_ecrire_article' => 'ဆောင်းပါးအသစ် ရေးသားရန်',
 'icone_edition_site' => 'တည်းဖြတ်ရန်',
-'icone_forum_administrateur' => 'စီမံသူများ ဖိုရမ်',
-'icone_forum_suivi' => 'ဖိုရမ်နောက်ဆက်တွဲ',
 'icone_gestion_langues' => 'ဘာသာစကား စီမံရန်',
 'icone_informations_personnelles' => 'ကိုယ်ရေးကိုတာ အချက်အလက်',
 'icone_interface_complet' => 'ပြီးပြည့်စုံသော စာမျက်နှာ',
@@ -400,7 +397,6 @@ sera ignorée) :
 'info_documents' => 'စာရွက်စာတမ်းများ',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'သုံးစွဲသူအချင်းချင်းကြားတွင် ကိုယ်ပိုင်ဖိုရမ်တွင် ဆွေးနွေးခြင်း သတင်းစကားများ ဖလှယ်ခြင်းများကို SPIP မှ ခွင့်ပြုထားပါသည်။ ဤလုပ်ဆောင်ချက်များကို သင့်မှာရွေးချယ်ပိုင်ခွင့် ရှိသည်။',
 'info_ecire_message_prive' => 'ကိုယ်ရေးကိုတာ သတင်းစကား',
 'info_email_invalide' => 'မရှိသေးသော အီးမေးလ်လိပ်စာ',
 'info_en_cours_validation' => 'သင့်ဆောင်းပါးများသည် ပြင်ဆင်နေဆဲဖြစ်သည်',

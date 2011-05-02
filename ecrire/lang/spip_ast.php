@@ -319,7 +319,6 @@ Gracies por participar
 'form_prop_url_site' => 'Señes (URL) del sitiu',
 'forum_non_inscrit' => 'Nun tas apuntáu, o les tos señes o contraseña tan equivocáos.',
 'forum_par_auteur' => 'por @auteur@',
-'forum_probleme_database' => 'Problema de base datos, el to mensaxe nun quedó rexistráu.',
 'forum_titre_erreur' => 'Error...',
 
 // I
@@ -344,8 +343,6 @@ Gracies por participar
 'icone_doc_rubrique' => 'Documentos de les estayes',
 'icone_ecrire_article' => 'Escribir un artículu nuevu',
 'icone_edition_site' => 'Edición',
-'icone_forum_administrateur' => 'Foru d\'alministradores',
-'icone_forum_suivi' => 'Siguimientu de los foros',
 'icone_gestion_langues' => 'Xestión de les llingües',
 'icone_informations_personnelles' => 'Información personal',
 'icone_interface_complet' => 'interfaz completa',
@@ -426,9 +423,6 @@ Gracies por participar
 'info_documents' => 'Documentos',
 'info_documents_nb' => '@nb@ documentos',
 'info_documents_un' => '1 documentu',
-'info_echange_message' => 'SPIP permite l\'intercambéu de mensaxes y la creación de foros de discutiniu
-  privaos ente los participantes nel sitiu. Pues activar o
-  desactivar esta carauterística.',
 'info_ecire_message_prive' => 'Escribir un mensaxe priváu',
 'info_email_invalide' => 'Señes d\'email non válides.',
 'info_en_cours_validation' => 'Los tos artículos en cursu de redaición',

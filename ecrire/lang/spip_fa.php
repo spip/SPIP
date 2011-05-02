@@ -304,7 +304,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_prop_url_site' => '(URL) آدرس سايت',
 'forum_non_inscrit' => 'شما ثبت نشده ايد، يا اينكه آدرس يا كلمه ورودتان اشتباه است',
 'forum_par_auteur' => 'بوسيله @auteur@ ',
-'forum_probleme_database' => 'نقص در داده پى ها، پيام شما ثبت نشده',
 'forum_titre_erreur' => '...اشتباه',
 
 // I
@@ -329,8 +328,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_doc_rubrique' => 'اسناد بخش ها',
 'icone_ecrire_article' => 'يك مقاله جديد بنويسيد',
 'icone_edition_site' => ' نشر سايت',
-'icone_forum_administrateur' => 'سخنگاه براى گردانند گان سايت',
-'icone_forum_suivi' => 'دنباله سخنگاه',
 'icone_gestion_langues' => 'اداره كردن بخش زبانها',
 'icone_informations_personnelles' => 'اطلاعات شخصى',
 'icone_interface_complet' => 'نماى كامل',
@@ -411,7 +408,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_documents' => 'اسناد',
 'info_documents_nb' => '@nb@ سندها',
 'info_documents_un' => 'سند 1',
-'info_echange_message' => 'اين سيستم امكان تبادل پيام و مباحثه خصوصى را بين كاربران سايت ميدهد. شما ميتوانيد اين كاربرد را فعال يا غير فعال كنيد',
 'info_ecire_message_prive' => 'يك پيام خصوصى بنويسيد',
 'info_email_invalide' => 'آدرس ايميل معتبر نميباشد',
 'info_en_cours_validation' => 'مقاله هايتان در حال نگارش',

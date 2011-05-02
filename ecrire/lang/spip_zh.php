@@ -314,7 +314,6 @@ sera ignorée) :
 'form_prop_url_site' => '站点URL',
 'forum_non_inscrit' => '可能您还没有注册或者您输入的地址或密码错误.',
 'forum_par_auteur' => '按 @auteur@',
-'forum_probleme_database' => '数据库问题,您的消息未能保存.',
 'forum_titre_erreur' => '错误...',
 
 // I
@@ -339,8 +338,6 @@ sera ignorée) :
 'icone_doc_rubrique' => '各专栏文档',
 'icone_ecrire_article' => '写新文章',
 'icone_edition_site' => '<MODIF>编辑',
-'icone_forum_administrateur' => '管理员论坛',
-'icone_forum_suivi' => '跟踪论坛',
 'icone_gestion_langues' => '语言管理',
 'icone_informations_personnelles' => '个人信息',
 'icone_interface_complet' => '完整界面',
@@ -421,9 +418,6 @@ sera ignorée) :
 'info_documents' => '文件',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP 允许在讨论者中交换消息和私有讨论论坛
-  . 你可激活或
-  使这个特性不可用.',
 'info_ecire_message_prive' => '写一个私有信息',
 'info_email_invalide' => '无论电子邮件地址.',
 'info_en_cours_validation' => '进展中的文章',

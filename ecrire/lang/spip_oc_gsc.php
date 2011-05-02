@@ -318,7 +318,6 @@ Mercés entà la vòsta participacion
 'form_prop_url_site' => 'Adreiça (URL) deu sit',
 'forum_non_inscrit' => 'Sia n\'ètz pas inscriut(a), sia avetz hèit ua error d\'adreiça o de mot de santa Clara. ',
 'forum_par_auteur' => 'per @auteur@',
-'forum_probleme_database' => 'Problèma de basa de dadas, lo vòste messatge non s\'ei pas registrat.',
 'forum_titre_erreur' => 'Error...',
 
 // I
@@ -343,8 +342,6 @@ Mercés entà la vòsta participacion
 'icone_doc_rubrique' => 'Documents de las rubricas',
 'icone_ecrire_article' => 'Escríver un article nau',
 'icone_edition_site' => 'Edicion',
-'icone_forum_administrateur' => 'Forum deus administrators',
-'icone_forum_suivi' => 'Seguit deus forums',
 'icone_gestion_langues' => 'Gestion de las lengas',
 'icone_informations_personnelles' => 'Informacions personaus',
 'icone_interface_complet' => 'Interfàcia completa',
@@ -425,7 +422,6 @@ Mercés entà la vòsta participacion
 'info_documents' => 'Documents',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP que permet d\'escambiar messatges e de constituir forums privats de discussion entre los participants deu sit. Que podetz activar o desactivar aquera foncionalitat.',
 'info_ecire_message_prive' => 'Escríver un messatge privat',
 'info_email_invalide' => 'Adreiça e-mail invalida',
 'info_en_cours_validation' => 'Los vòstes articles en cors de redaccion',

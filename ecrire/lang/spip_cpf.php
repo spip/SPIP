@@ -323,7 +323,6 @@ Mersi aou mèt ansanm isi
 'form_prop_url_site' => 'Ladrès (URL) lo sitwèb',
 'forum_non_inscrit' => 'Ou lé pa inskri, kiswa out ladrès, kiswa out modpas nana kanardé.',
 'forum_par_auteur' => 'sanm @auteur@',
-'forum_probleme_database' => 'Astèr néna inn larlik èk out bazdodné. Porézon sa minm, out modékri la pwinn finn dèt anrozistré.',
 'forum_titre_erreur' => 'Kanard...',
 
 // I
@@ -348,8 +347,6 @@ Mersi aou mèt ansanm isi
 'icone_doc_rubrique' => 'Bann dokiman dann bann rubrik',
 'icone_ecrire_article' => 'Ékri inn nouvo lartik',
 'icone_edition_site' => 'Lédisyon lo sitwèb',
-'icone_forum_administrateur' => 'Forom kozman bann komandèr',
-'icone_forum_suivi' => 'Swivi bann forom',
 'icone_gestion_langues' => 'Po zéré bann lang',
 'icone_informations_personnelles' => 'Ladi Lafé',
 'icone_interface_complet' => 'Lintèrfas konplé',
@@ -430,8 +427,6 @@ Mersi aou mèt ansanm isi
 'info_documents' => 'Bann dokiman',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'Èk SPIP ou pé anvwayé bann modékri é fé zwé bann forom kozman
-(forom privé) antrozot. Lé posib mèt ou dégrèn fonksyon-la kom sak ou vé.',
 'info_ecire_message_prive' => 'Pou kré inn modékri privé',
 'info_email_invalide' => 'Out ladrès imèl lé pa bon.',
 'info_en_cours_validation' => 'Out bann zartik-la lé apré lékritir',

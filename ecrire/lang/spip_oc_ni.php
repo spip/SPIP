@@ -319,7 +319,6 @@ Mercé de la voastra participacion
 'form_prop_url_site' => 'Adreça (URL) dau sit',
 'forum_non_inscrit' => 'Siètz pas inscrich(a), ò l\'adreça ò lo mòt de santa Clara son erronèus.',
 'forum_par_auteur' => 'da @auteur@',
-'forum_probleme_database' => 'Problèma de basa de donadas, lo voastre messatge es pas estat registrat.',
 'forum_titre_erreur' => 'Error...',
 
 // I
@@ -344,8 +343,6 @@ Mercé de la voastra participacion
 'icone_doc_rubrique' => 'Documents dei rubricas',
 'icone_ecrire_article' => 'Escriure un novèl article',
 'icone_edition_site' => 'Edicion',
-'icone_forum_administrateur' => 'Fòro dei administrators',
-'icone_forum_suivi' => 'Seguit dei fòros',
 'icone_gestion_langues' => 'Gestion dei lengas',
 'icone_informations_personnelles' => 'Informacions personali',
 'icone_interface_complet' => 'interfaça completa',
@@ -426,7 +423,6 @@ Mercé de la voastra participacion
 'info_documents' => 'Documents',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP permete l\'escambi de messatges e la constitucion de fòros privats de discucion entre lu participants dau sit. Podètz activar ò desactivar aquela foncionalitat',
 'info_ecire_message_prive' => 'Escriure un messatge privat',
 'info_email_invalide' => 'Adreça e-mail invalida',
 'info_en_cours_validation' => 'Lu voastres articles en cors de redaccion',

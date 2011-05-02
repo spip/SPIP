@@ -319,7 +319,6 @@ Gracias por tu participación
 'form_prop_url_site' => 'Dirección (URL) del sitio',
 'forum_non_inscrit' => 'No estás inscrita o inscrito, o bien la dirección o la contraseña son erróneas.',
 'forum_par_auteur' => 'por @auteur@',
-'forum_probleme_database' => 'Problema de la base de datos, tu mensaje no ha sido registrado.',
 'forum_titre_erreur' => 'Error...',
 
 // I
@@ -344,8 +343,6 @@ Gracias por tu participación
 'icone_doc_rubrique' => 'Documentos de las secciones',
 'icone_ecrire_article' => 'Nuevo artículo',
 'icone_edition_site' => 'Edición del sitio',
-'icone_forum_administrateur' => 'Foro de administradoras y administradores',
-'icone_forum_suivi' => 'Seguimiento de los foros',
 'icone_gestion_langues' => 'Gestión de idiomas',
 'icone_informations_personnelles' => 'Informaciones personales',
 'icone_interface_complet' => 'Interfaz completa',
@@ -426,9 +423,6 @@ Gracias por tu participación
 'info_documents' => 'Documentos',
 'info_documents_nb' => '@nb@ documentos',
 'info_documents_un' => '1 documento',
-'info_echange_message' => 'En función de las preferencias, SPIP permite el intercambio de mensajes y la existencia de foros internos
- privados entre los participantes del sitio. Esta funcionalidad
-se puede activar o desactivar .',
 'info_ecire_message_prive' => 'Escribir un mensaje privado',
 'info_email_invalide' => 'La dirección de correo electrónico no es válida.',
 'info_en_cours_validation' => 'Tus artículos en curso',

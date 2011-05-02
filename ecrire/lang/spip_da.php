@@ -315,7 +315,6 @@ Tak for din deltagelse
 'form_prop_url_site' => 'Webstedets URL',
 'forum_non_inscrit' => 'Enten er du ikke tilmeldt, eller adresse eller adgangskode er forkert.',
 'forum_par_auteur' => 'af @auteur@',
-'forum_probleme_database' => 'Databaseproblem, dit indlæg er ikke modtaget.',
 'forum_titre_erreur' => 'Fejl...',
 
 // I
@@ -340,8 +339,6 @@ Tak for din deltagelse
 'icone_doc_rubrique' => 'Dokumenter i afsnit',
 'icone_ecrire_article' => 'Skriv ny artikel',
 'icone_edition_site' => 'Rediger websted',
-'icone_forum_administrateur' => 'Administratorforum',
-'icone_forum_suivi' => 'Forumopfølgning',
 'icone_gestion_langues' => 'Sprogadministration',
 'icone_informations_personnelles' => 'Personlig information',
 'icone_interface_complet' => 'Komplet brugergrænseflade',
@@ -422,7 +419,6 @@ Tak for din deltagelse
 'info_documents' => 'Documents', # NEW
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP tillader udveksling af meddelelser og oprettelse af private diskussionsforummer mellem deltagere på webstedet. Du kan til- eller fravælge denne funktion.',
 'info_ecire_message_prive' => 'Skriv en privat meddelelse',
 'info_email_invalide' => 'Ugyldig e-mail-adresse.',
 'info_en_cours_validation' => 'Dine artikler undervejs',

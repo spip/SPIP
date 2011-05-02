@@ -312,7 +312,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'form_prop_url_site' => 'URL của trang web',
 'forum_non_inscrit' => 'Hoặc là bạn chưa ghi danh, hoặc địa chỉ hay mật mã không đúng.',
 'forum_par_auteur' => 'bởi @auteur@',
-'forum_probleme_database' => 'Có vấn đề với database, thư tín của bạn không lưu trữ được.',
 'forum_titre_erreur' => 'Có lỗi...',
 
 // I
@@ -337,8 +336,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'icone_doc_rubrique' => 'Tài liệu của đề mục',
 'icone_ecrire_article' => 'Viết một bài mới',
 'icone_edition_site' => 'Sửa đổi',
-'icone_forum_administrateur' => 'Diễn đàn quản trị viên',
-'icone_forum_suivi' => 'Quản trị diễn đàn',
 'icone_gestion_langues' => 'Quản trị ngôn ngữ',
 'icone_informations_personnelles' => 'Dữ kiện cá nhân',
 'icone_interface_complet' => 'Xem tất cả',
@@ -419,7 +416,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'info_documents' => 'Tài liệu',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP cho phép trao đổi thư tín và lập ra những diễn đàn trao đổi riêng giữa các tham dự viên. Bạn có thể tắt/mở đặc điểm này.',
 'info_ecire_message_prive' => 'Viết thư tín riêng',
 'info_email_invalide' => 'Địa chỉ email không đúng.',
 'info_en_cours_validation' => 'Bài viết đang soạn',

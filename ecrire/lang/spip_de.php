@@ -314,7 +314,6 @@ Vielen Dank für Ihre Teilnahme
 'form_prop_url_site' => 'Adresse (URL) der Website',
 'forum_non_inscrit' => 'Sie sind nicht eingeschrieben oder Adresse bzw. Passwort waren falsch.',
 'forum_par_auteur' => 'Nach @auteur@',
-'forum_probleme_database' => 'Datenbankfehler. Ihr Beitrag wurde nicht gespeichert',
 'forum_titre_erreur' => 'Fehler...',
 
 // I
@@ -339,8 +338,6 @@ Vielen Dank für Ihre Teilnahme
 'icone_doc_rubrique' => 'Dokumente der Rubriken',
 'icone_ecrire_article' => 'Neuen Artikel schreiben',
 'icone_edition_site' => 'Redaktion',
-'icone_forum_administrateur' => 'Forum der Administratoren',
-'icone_forum_suivi' => 'Foren moderieren',
 'icone_gestion_langues' => 'Sprachverwaltung',
 'icone_informations_personnelles' => 'Persönliche Informationen',
 'icone_interface_complet' => 'Expertenmodus',
@@ -421,7 +418,6 @@ Vielen Dank für Ihre Teilnahme
 'info_documents' => 'Dokumente',
 'info_documents_nb' => '@nb@ Dokumente',
 'info_documents_un' => '1 Dokument',
-'info_echange_message' => 'In SPIP können Sie interne Nachrichten austauschen und interne Foren für Teilnehmer der Website anlegen. Diese Funktionen können Sie abschalten.',
 'info_ecire_message_prive' => 'Neue private Nachricht schreiben',
 'info_email_invalide' => 'Ungültige E-Mail Adresse.',
 'info_en_cours_validation' => 'Ihre Artikel in Bearbeitung',

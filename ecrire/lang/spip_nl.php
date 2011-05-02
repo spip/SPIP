@@ -317,7 +317,6 @@ Bedankt voor je deelname
 'form_prop_url_site' => 'Website-adres (URL)',
 'forum_non_inscrit' => 'Je bent niet ingeschreven, ofwel is je adres of paswoord niet correct.',
 'forum_par_auteur' => 'door @auteur@',
-'forum_probleme_database' => 'Probleem met databank, je bericht is niet geregistreerd.',
 'forum_titre_erreur' => 'Fout ...',
 
 // I
@@ -342,8 +341,6 @@ Bedankt voor je deelname
 'icone_doc_rubrique' => 'Bijlagen van de rubrieken',
 'icone_ecrire_article' => 'Een nieuw artikel schrijven',
 'icone_edition_site' => 'Redactie',
-'icone_forum_administrateur' => 'Forum van de beheerders',
-'icone_forum_suivi' => 'Opvolging van de forums',
 'icone_gestion_langues' => 'Talenbeheer',
 'icone_informations_personnelles' => 'Persoonlijke gegevens',
 'icone_interface_complet' => 'Volledige interface',
@@ -424,8 +421,6 @@ Bedankt voor je deelname
 'info_documents' => 'documenten',
 'info_documents_nb' => '@nb@ documenten',
 'info_documents_un' => '1 document',
-'info_echange_message' => 'SPIP voorziet in de mogelijkheid om berichten uit te wisselen en private discussieforums op te
-    starten tussen de deelnemers aan de site.Wil je deze mogelijkheid aan- of uitzetten ?',
 'info_ecire_message_prive' => 'Een privé-bericht schrijven',
 'info_email_invalide' => 'Fout e-mailadres.',
 'info_en_cours_validation' => 'Je artikels in redactie',

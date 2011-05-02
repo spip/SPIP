@@ -318,7 +318,6 @@ Dankon pro via partopreno
 'form_prop_url_site' => 'Adreso (URL) de la retejo',
 'forum_non_inscrit' => 'Vi ne estas registrita, aŭ la adreso aŭ la pasvorto ne ĝustas.',
 'forum_par_auteur' => 'de @auteur@',
-'forum_probleme_database' => 'Datenbazo-problemo, via mesaĝo ne estas registrita.',
 'forum_titre_erreur' => 'Eraro...',
 
 // I
@@ -343,8 +342,6 @@ Dankon pro via partopreno
 'icone_doc_rubrique' => 'Dokumentoj de la rubrikoj',
 'icone_ecrire_article' => 'Skribi novan artikolon',
 'icone_edition_site' => 'Redaktejo',
-'icone_forum_administrateur' => 'Forumo de la mastrumantoj',
-'icone_forum_suivi' => 'Supervido de la forumoj',
 'icone_gestion_langues' => 'Mastrumado de lingvoj',
 'icone_informations_personnelles' => 'Personaj datenoj',
 'icone_interface_complet' => 'kompleta interfaco',
@@ -425,9 +422,6 @@ Dankon pro via partopreno
 'info_documents' => 'Dokumentoj',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP ebligas interŝanĝon de mesaĝoj kaj la starigon de privataj diskutforumoj
- inter la partoprenantoj de la retejo. Vi povas aktivigi aŭ
- malaktivigi tiun funkcion.',
 'info_ecire_message_prive' => 'Skribi privatan mesaĝon',
 'info_email_invalide' => 'Nevalida retpoŝtadreso.',
 'info_en_cours_validation' => 'Viaj redaktataj artikoloj',

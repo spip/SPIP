@@ -319,7 +319,6 @@ Dziękujemy za wzięcie udziału.
 'form_prop_url_site' => 'URL stron\\y',
 'forum_non_inscrit' => 'Nie jesteś zarejestrowany, lub adres bądź hasło są nieprawidłowe.',
 'forum_par_auteur' => 'wg @auteur@',
-'forum_probleme_database' => 'Problem z bazą danych, Twoja wiadomość nie mogła być zapisana.',
 'forum_titre_erreur' => 'Błąd...',
 
 // I
@@ -344,8 +343,6 @@ Dziękujemy za wzięcie udziału.
 'icone_doc_rubrique' => 'Załączniki',
 'icone_ecrire_article' => 'Napisz nowy artykuł',
 'icone_edition_site' => 'Edycja',
-'icone_forum_administrateur' => 'Forum administratorów',
-'icone_forum_suivi' => 'Kontynuacja forum',
 'icone_gestion_langues' => 'Zarządzanie językami',
 'icone_informations_personnelles' => 'Informacje osobiste',
 'icone_interface_complet' => 'cały interfejs',
@@ -426,9 +423,6 @@ Dziękujemy za wzięcie udziału.
 'info_documents' => 'Dokumenty',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP pozwala na wymianę wiadomości i utworzenie Forum dyskusyjnego
-  prywatnie pomiędzy użytkownikami tej strony. Możesz włączyć lub wyłączyć
-  tę funkcję.',
 'info_ecire_message_prive' => 'Napisz prywatną wiadomość',
 'info_email_invalide' => 'Nieprawidłowy adres e-mail.',
 'info_en_cours_validation' => 'Twoje artykuły są w trakcie redagowania',

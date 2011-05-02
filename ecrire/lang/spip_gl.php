@@ -319,7 +319,6 @@ Grazas pola súa participación
 'form_prop_url_site' => 'Enderezo (URL) do web',
 'forum_non_inscrit' => 'Aínda non se rexistrou, ou o enderezo ou a chave son incorrectos.',
 'forum_par_auteur' => 'por @auteur@',
-'forum_probleme_database' => 'Problema da base de datos, a súa mensaxe non foi rexistrada.',
 'forum_titre_erreur' => 'Erro...',
 
 // I
@@ -344,8 +343,6 @@ Grazas pola súa participación
 'icone_doc_rubrique' => 'Documento dos temas',
 'icone_ecrire_article' => 'Escribir un novo artigo',
 'icone_edition_site' => 'Edición',
-'icone_forum_administrateur' => 'Foro de xestión',
-'icone_forum_suivi' => 'Seguimento dos foros',
 'icone_gestion_langues' => 'Xestión das linguas',
 'icone_informations_personnelles' => 'Información persoal',
 'icone_interface_complet' => 'Interface completa',
@@ -426,9 +423,6 @@ Grazas pola súa participación
 'info_documents' => 'Documentos',
 'info_documents_nb' => '@nb@ documentos',
 'info_documents_un' => '1 documento',
-'info_echange_message' => 'SPIP permite o intercambio de mensaxes e a constitución de foros de discusión
-  privados entre os participantes do web. Pode activar ou
-  desactivar esta funcionalidade.',
 'info_ecire_message_prive' => 'Escribir unha mensaxe privada',
 'info_email_invalide' => 'Enderezo de correo-e. incorrecto.',
 'info_en_cours_validation' => 'Os seus artigos en proceso de redacción',

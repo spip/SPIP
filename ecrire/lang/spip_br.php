@@ -316,7 +316,6 @@ Trugarez da gemer perzh
 'form_prop_url_site' => 'Chomlec\'h (URL) al lec\'hienn',
 'forum_non_inscrit' => 'N\'oc\'h ket enskrivet, pe direizh eo ar ger-tremen pe ar chomlec\'h.',
 'forum_par_auteur' => 'gant @auteur@',
-'forum_probleme_database' => 'Kudenn diaz titouroù, n\'eo ket bet enrollet ho kemennadenn.',
 'forum_titre_erreur' => 'Fazi...',
 
 // I
@@ -341,8 +340,6 @@ Trugarez da gemer perzh
 'icone_doc_rubrique' => 'Teulioù ar rubrikennoù',
 'icone_ecrire_article' => 'Skrivañ ur pennad nevez',
 'icone_edition_site' => 'Embann',
-'icone_forum_administrateur' => 'Forom ar verourien',
-'icone_forum_suivi' => 'Heuliañ ar foromoù',
 'icone_gestion_langues' => 'Merañ ar yezhoù',
 'icone_informations_personnelles' => 'Titouroù hiniennel',
 'icone_interface_complet' => 'Etrefas klok',
@@ -423,7 +420,6 @@ Trugarez da gemer perzh
 'info_documents' => 'Teulioù',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP a ginnig eskemm kemennadennoù ha sevel foromoù prevez etre izili al lec\'hienn. Gallout a rit ober gant ar servij-mañ, pe get.',
 'info_ecire_message_prive' => 'Skrivañ ur gerig prevez;',
 'info_email_invalide' => 'Postel direizh.',
 'info_en_cours_validation' => 'Ar pennadoù emaoc\'h o skrivañ',
