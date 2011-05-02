@@ -328,7 +328,6 @@ Trugarez da gemer perzh
 'icone_aide_ligne' => 'Skoazell',
 'icone_articles' => 'Pennadoù',
 'icone_auteurs' => 'Skridaozerien',
-'icone_breves' => 'Berrskridoù',
 'icone_brouteur' => 'Merdeiñ prim',
 'icone_configuration_site' => 'Kefluniañ ',
 'icone_configurer_site' => 'Kefluniañ ho lec\'hienn',

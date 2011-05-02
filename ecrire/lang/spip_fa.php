@@ -316,7 +316,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_aide_ligne' => ' كمك',
 'icone_articles' => 'مقالات',
 'icone_auteurs' => 'نويسندگان',
-'icone_breves' => 'مقالات كوتاه',
 'icone_brouteur' => 'شبكه نوردى سريع',
 'icone_configuration_site' => 'پيكر بندى سايت',
 'icone_configurer_site' => 'سايت تان را پيكر بندى كنيد',

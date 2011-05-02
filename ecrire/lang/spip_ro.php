@@ -329,7 +329,6 @@ Mulţumim pentru participarea dumneavoastră
 'icone_aide_ligne' => 'Ajutor',
 'icone_articles' => 'Articole',
 'icone_auteurs' => 'Autori',
-'icone_breves' => 'Ştiri',
 'icone_brouteur' => 'Navigare rapidă',
 'icone_configuration_site' => 'Configurare',
 'icone_configurer_site' => 'Configuraţi-vă site-ul',

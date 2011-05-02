@@ -328,7 +328,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_aide_ligne' => 'Помощь',
 'icone_articles' => 'Статьи',
 'icone_auteurs' => 'Авторы',
-'icone_breves' => 'Новости',
 'icone_brouteur' => 'Быстрый переход',
 'icone_configuration_site' => 'Конфигурация',
 'icone_configurer_site' => 'Настройте ваш сайт',

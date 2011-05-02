@@ -331,7 +331,6 @@ Terima kasih atas partisipasi anda!
 'icone_aide_ligne' => 'Bantuan',
 'icone_articles' => 'Artikel',
 'icone_auteurs' => 'Penulis',
-'icone_breves' => 'Berita',
 'icone_brouteur' => 'Jelajah cepat',
 'icone_configuration_site' => 'Konfigurasi',
 'icone_configurer_site' => 'Konfigurasi situs anda',

@@ -305,7 +305,6 @@ sera ignorée) :
 'icone_aide_ligne' => 'အကူအညီရယူရန်',
 'icone_articles' => 'ဆောင်းပါများ',
 'icone_auteurs' => 'စာရေးသူ',
-'icone_breves' => 'သတင်း',
 'icone_brouteur' => 'အမြန်ကြည့်ရှုရန်',
 'icone_configuration_site' => 'စီမံတပ်ဆင်ရန်',
 'icone_configurer_site' => 'သင့်ဝက်ဘ်ဆိုက်ကို စီမံ​တပ်ဆင်ပါ',

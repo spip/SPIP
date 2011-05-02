@@ -331,7 +331,6 @@ Dziękujemy za wzięcie udziału.
 'icone_aide_ligne' => 'Pomoc',
 'icone_articles' => 'Artykuły',
 'icone_auteurs' => 'Autorzy',
-'icone_breves' => 'Newsy',
 'icone_brouteur' => 'Menu podręczne',
 'icone_configuration_site' => 'Konfiguracja',
 'icone_configurer_site' => 'Konfiguruj swoją stronę',

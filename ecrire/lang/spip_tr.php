@@ -328,7 +328,6 @@ Katılımınız için teşekkürler
 'icone_aide_ligne' => 'Yardım',
 'icone_articles' => 'Makaleler',
 'icone_auteurs' => 'Yazarlar',
-'icone_breves' => 'Kısa haberler',
 'icone_brouteur' => 'Hızlı gezinti',
 'icone_configuration_site' => 'Yapılandırma',
 'icone_configurer_site' => 'Sitenizi yapılandırın',

@@ -332,7 +332,6 @@ l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
 'icone_aide_ligne' => 'Aiutu',
 'icone_articles' => 'Artìculi',
 'icone_auteurs' => 'Autori',
-'icone_breves' => 'Dispacci',
 'icone_brouteur' => 'Navigazione veloce',
 'icone_configuration_site' => 'Paràmetri',
 'icone_configurer_site' => 'Cunfigurà u vostru situ',

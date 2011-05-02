@@ -330,7 +330,6 @@ Obrigado pela sua participação
 'icone_aide_ligne' => 'Ajuda',
 'icone_articles' => 'Artigos',
 'icone_auteurs' => 'Autores',
-'icone_breves' => 'Notícias',
 'icone_brouteur' => 'Navegação rápida',
 'icone_configuration_site' => 'Configuração',
 'icone_configurer_site' => 'Configurar o seu sítio',

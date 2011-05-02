@@ -327,7 +327,6 @@ Tak for din deltagelse
 'icone_aide_ligne' => 'Online hjælp',
 'icone_articles' => 'Artikler',
 'icone_auteurs' => 'Forfattere',
-'icone_breves' => 'Nyheder',
 'icone_brouteur' => 'Hurtig browsing',
 'icone_configuration_site' => 'Konfiguration',
 'icone_configurer_site' => 'Konfigurer dit websted',

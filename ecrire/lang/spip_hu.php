@@ -328,7 +328,6 @@ Köszönjük részvételét!
 'icone_aide_ligne' => 'Súgó',
 'icone_articles' => 'Cikkek',
 'icone_auteurs' => 'Szerzők',
-'icone_breves' => 'Hírek',
 'icone_brouteur' => 'Gyors böngészés',
 'icone_configuration_site' => 'Konfigurálás',
 'icone_configurer_site' => 'A honlap konfigurálása',

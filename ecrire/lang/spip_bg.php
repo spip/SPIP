@@ -331,7 +331,6 @@ sera ignorée) :
 'icone_aide_ligne' => 'Помощник',
 'icone_articles' => 'Статии',
 'icone_auteurs' => 'Автори',
-'icone_breves' => 'Новини',
 'icone_brouteur' => 'Бърза навигация',
 'icone_configuration_site' => 'Конфигуриране',
 'icone_configurer_site' => 'Конфигуриране на сайта',

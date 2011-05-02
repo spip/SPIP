@@ -325,7 +325,6 @@ Gràcies per la participació
 'icone_aide_ligne' => 'Ajuda',
 'icone_articles' => 'Articles',
 'icone_auteurs' => 'Autors/es',
-'icone_breves' => 'Breus',
 'icone_brouteur' => 'Navegació ràpida',
 'icone_configuration_site' => 'Configuració',
 'icone_configurer_site' => 'Configurar el vostre lloc',

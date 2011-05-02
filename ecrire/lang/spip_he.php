@@ -331,7 +331,6 @@ sera ignorée) :
 'icone_aide_ligne' => 'עזרה',
 'icone_articles' => 'מאמרים',
 'icone_auteurs' => 'מחברים',
-'icone_breves' => 'מבזקים',
 'icone_brouteur' => 'גלישה מהירה',
 'icone_configuration_site' => 'תצורת האתר',
 'icone_configurer_site' => 'עצב את אתרך',

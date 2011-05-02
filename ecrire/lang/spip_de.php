@@ -326,7 +326,6 @@ Vielen Dank für Ihre Teilnahme
 'icone_aide_ligne' => 'Online-Hilfe',
 'icone_articles' => 'Artikel',
 'icone_auteurs' => 'Autoren',
-'icone_breves' => 'Meldungen',
 'icone_brouteur' => 'Übersicht',
 'icone_configuration_site' => 'Konfiguration',
 'icone_configurer_site' => 'Ihre Website konfigurieren',

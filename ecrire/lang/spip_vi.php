@@ -324,7 +324,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'icone_aide_ligne' => 'Giúp đỡ',
 'icone_articles' => 'Bài',
 'icone_auteurs' => 'Ban biên tập',
-'icone_breves' => 'Tin ngắn',
 'icone_brouteur' => 'Xem lẹ',
 'icone_configuration_site' => 'Cấu hình',
 'icone_configurer_site' => 'Sửa cấu hình Website',
