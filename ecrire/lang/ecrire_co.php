@@ -85,25 +85,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_activer_petition' => 'Attivà a petizione',
 'bouton_radio_afficher' => 'Vede',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Cumparisce frà a lista di i scrittori cunnessi',
-'bouton_radio_articles_futurs' => 'solu à l\'artìculi futuri (nisuna mudìfica à a basa attuale).',
-'bouton_radio_articles_tous' => 'à tutti l\'artìculi quant\'elli sò.',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'à tutti l\'artìculi salvu quelli per chì hè disattivatu u foru.',
 'bouton_radio_desactiver_messagerie' => 'Disattivà la messageria',
-'bouton_radio_enregistrement_obligatoire' => 'Arregistramenu ubbligatoriu (l\'utilizatori 
-		devenu abbunà si rinsignendu u so indirizzu e-mail prima di pudè mandà cuntributi).',
 'bouton_radio_envoi_annonces_adresse' => 'Mandà l\'annunci à l\'indirizzu :',
 'bouton_radio_envoi_liste_nouveautes' => 'Mandà a lista di e nuvità',
-'bouton_radio_moderation_priori' => 'Muderazione in antìcipu (i cuntributi ùn sò pubblicati chè dopu accunsentu da l\'amministratori).',
-'bouton_radio_modere_abonnement' => 'Solu cù abbunamentu',
-'bouton_radio_modere_posteriori' => 'Muderazione dopu',
 'bouton_radio_modere_priori' => 'muderazione in antìcipu',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ùn cumparisce micca frà a lista di i scrittori cunnessi ',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ùn mandà micca annunci editoriali ',
 'bouton_radio_non_syndication' => 'Nisuna sindicazione',
 'bouton_radio_pas_petition' => 'Nisuna petizione',
 'bouton_radio_petition_activee' => 'Petizione attivata',
-'bouton_radio_publication_immediate' => 'Pubblicazione à l\'istante di i messagi
-(e cuntribuzioni sò pubblicate subbitu dopu mandate, l\'amministradori i ponu sguassà dopu).',
 'bouton_radio_supprimer_petition' => 'Toglie a petizione',
 'bouton_radio_syndication' => 'Sindicazione :',
 'bouton_redirection' => 'RINDIRIZZAMENTU',
@@ -251,14 +241,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_mot' => 'Mudificà stu segnu',
 'icone_modifier_rubrique' => 'Mudificà a rùbbrica',
 'icone_modifier_site' => 'Mudificà u situ',
-'icone_poster_message' => 'Mandà un messagiu',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => 'Riferisce un novu situ',
 'icone_relancer_signataire' => 'Rilancià u signatariu',
 'icone_retour' => 'In daretu',
 'icone_retour_article' => 'Turnà à l\'artìculu',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => 'Guardia di u foru pùbblicu : @nb_forums@ cuntributi',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Sguassà u cookie di currispundenza',
 'icone_supprimer_groupe_mots' => 'Sguassà stu gruppu',
@@ -278,8 +266,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Pudete puru attivà un <b>cookie di currispundenza</b>, vi permetterà 
 	di passà senza straziu da u situ pùbblicu à u situ privatu.',
-'info_activer_forum_public' => '<i>Per attivà i fori pùbblichi, sceglite puru u tippu 
-	di muderazione predefinitu :</i>',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'St\'amministratore gestisce e seguenti rùbbriche :',
 'info_admin_gere_toutes_rubriques' => 'St\'amministratore gestisce <b>tutte e rùbbriche</b>.',
@@ -306,7 +292,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajouter_rubrique' => 'Aghjunghje un\'altra rùbbrica da amministrà :',
 'info_annonce_nouveautes' => 'Annunciu di e nuvità',
 'info_anterieur' => 'anteriore',
-'info_appliquer_choix_moderation' => 'Serà appiecata sta scelta di muderazione :',
 'info_article' => 'artìculu',
 'info_article_2' => 'artìculi',
 'info_article_a_paraitre' => 'L\'artìculi post-datati da pubblicà',
@@ -354,10 +339,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		pudete aduprà per esempiu stu serviziu : @testgzip@',
 'info_compresseur_texte' => 'Sì u vostru servore ùn cumpressa micca in autumàticu e pàgine HTML da mandà le à i visitori, pruvate puru à furzà a cumpressione da 
 		sminuì u pesu di e pàgine da scaricà. <b>Attenti</b> : Quessa pò ralentisce assai certi servori.',
-'info_config_forums_prive' => 'In u spaziu riservatu di u situ, pudete puru attivà diversi tippi di fori :',
-'info_config_forums_prive_admin' => 'Un foru riservatu à l\'amministratori di u situ :',
-'info_config_forums_prive_global' => 'Un foru generale, apertu à tutti i scrittori :',
-'info_config_forums_prive_objets' => 'Un foru per ogni artìculu, dispacciu, situ riferitu, etc. :',
 'info_config_suivi' => 'Sì st\'indirizzu currisponde à una mailing-list, rinsignate puru quì sottu l\'indirizzu cù chì i participanti di u situ si ponu iscrive. 
 		St\'indirizzu pò esse un\'URL (per esempiu a pàgina-web d\'iscrizzione à a lista), o puru un indirizzu email cù un sugettu specìficu 
 		(per esempiu : <tt>@adresse_suivi@?subject=subscribe</tt>) :',
@@ -391,9 +372,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_derniere_etape' => 'Fatta !',
 'info_derniere_syndication' => 'L\'ùltima <em>sindicazione</em> di stu situ hè stata fatta ',
 'info_derniers_articles_publies' => 'I vostr\'ùltimi artìculi pubblicati',
-'info_desactiver_forum_public' => 'Disattivà l\'adopru di i fori pùbblichi.
-	I fori pùbblichi puderanu esse auturizati di volta in volta
-	per i sìnguli artìculi; Invece seranu interdetti per e rùbbriche, i dispacci, etc.',
 'info_desactiver_messagerie_personnelle' => 'Pudete puru attivà o disattivà u sistema di messageria persunale pè stu situ.',
 'info_descriptif' => 'Discrizzione :',
 'info_desinstaller_plugin' => 'sguassa i dati è disattiveghja u plugin',
@@ -405,7 +383,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_email_webmestre' => 'Indirizzu email di u webmaestru (micca ubbligatoriu)',
 'info_entrer_code_alphabet' => 'Indettà u còdice di u santacroce da aduprà :',
 'info_envoi_email_automatique' => 'Inviu autumàticu d\'email',
-'info_envoi_forum' => 'Nutìfiche da i fori à l\'autori di l\'artìculi',
 'info_envoyer_maintenant' => 'Mandà avà',
 'info_etape_suivante' => 'Passà à a prùssima tappa',
 'info_etape_suivante_1' => 'Pudete passà à a prùssima tappa.',
@@ -416,7 +393,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		prucede à invii d\'email, per esempiu à una mailing-list di i scrittori, l\'annunciu di e dumande di 
 		pubblicazione è cunvalidazione d\'artìculi.',
 'info_fichiers_authent' => 'Schedari d\'autentificazione ".htpasswd"',
-'info_fonctionnement_forum' => 'Funziunamentu di u foru :',
 'info_forum_administrateur' => 'foru di l\'amministratori',
 'info_forum_interne' => 'foru internu',
 'info_forum_ouvert' => 'In u spaziu privatu di u situ, hè apertu un foru à tutti i scrittori arregistrati.
@@ -441,9 +417,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 		lista solu per eri è oghje , chì Vene sviutata ogni 24 ore.',
 'info_gauche_suivi_forum' => 'A pàgina di <i>guardia di i fori</i> hè un arnese di gestione di u situ (è micca un spaziu di ragiunata o di scrittura). 
 		Nentru ci venenu pubblicati tutti i cuntributi di u foru pùbblicu di st\'artìculu, è vi permette a gestione di sti cuntributi.',
-'info_gauche_suivi_forum_2' => 'A pàgina di <i>guardia di i fori</i> hè un arnese di gestione di u situ (è micca un spaziu di ragiunata o di scrittura). 
-		Nentru ci venenu pubblicati tutti i cuntributi di i fori di u situ, ch\'elli sianu quelli di u situ pùbblicu o quelli di u spaziu privatu, 
-		è vi permette a gestione di sti cuntributi.',
 'info_gauche_visiteurs_enregistres' => 'Truverete quì i visitori arregistrati in u spaziu pùbblicu di u situ (foru pè l\'abbunati).',
 'info_generation_miniatures_images' => 'Creazione di figurette da l\'imàgini',
 'info_gerer_trad' => 'Gestisce e lee di traduzzione?',
@@ -476,11 +449,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_lien_hypertexte' => 'Lea ipertestu :',
 'info_liens_syndiques_1' => 'lee sindicate',
 'info_liens_syndiques_2' => 'stanu in attesa di cunvalidazione.',
-'info_liens_syndiques_3' => 'fori',
-'info_liens_syndiques_4' => 'stanu',
-'info_liens_syndiques_5' => 'foru',
-'info_liens_syndiques_6' => 'stà',
-'info_liens_syndiques_7' => 'in attesa di cunvalidazione',
 'info_liste_redacteurs_connectes' => 'Lista di i scrittori cunnessi',
 'info_login_existant' => 'Stu login esiste digià.',
 'info_login_trop_court' => 'Login troppu cortu.',
@@ -496,7 +464,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_mise_a_niveau_base_2' => '{{Attenti!}} Hè stata stallata una versione
 	di i schedari di SPIP {anteriore} di pettu à quella chì era in usu per stu situ :
 	Ci hè u rìsicu chì a vostra basa di dati sia persa è chì u vostru situ sia scundisatu.<br />{{Ristallà i schedari di SPIP.}}',
-'info_mode_fonctionnement_defaut_forum_public' => 'Modu di funziunamentu predefinitu di i fori pùbblichi',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Mudificà l\'autore :',
 'info_modifier_mot' => 'Mudificà u segnu :',
@@ -545,9 +512,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_numero_article' => 'ARTÌCULU NÙMERU :',
 'info_obligatoire_02' => '[Ubbligatoriu]',
 'info_option_accepter_visiteurs' => 'Accettà l\'iscrizzione di visitori di u situ pùbblicu',
-'info_option_email' => 'Quando un visitore di u situ posta un novu messagiu in u foru
-	assuciatu à un artìculu, l\'autori di st\'artìculu ne ponu esse
-	avvisati da un email. Signalate puru per ogni tippu di foru s\'ellu ci vole à usà st\'opzione.',
 'info_option_faire_suivre' => 'Signalà i novi messagi à l\'autori dil\'artìculi',
 'info_option_ne_pas_accepter_visiteurs' => 'Rifiutà l\'iscrizzione di i visitori',
 'info_option_ne_pas_faire_suivre' => 'Ùn signalà micca i novi messagi',
@@ -561,7 +525,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_par_nombre_article' => 'per numeru d\'artìculi',
 'info_par_statut' => 'per statutu',
 'info_par_tri' => '\'(per @tri@)\'',
-'info_pas_de_forum' => 'Nisunu foru',
 'info_passe_trop_court' => 'Password troppu cortu.',
 'info_passes_identiques' => 'I dui password ùn sò listessi.',
 'info_pense_bete_ancien' => 'I vostri mementi vechji', # MODIF
@@ -604,10 +567,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_question_vignettes_referer' => 'Cunsultendu e statìstiche, pudete puru vede in antìcipu siti d\'orìgine di e vìsite',
 'info_question_vignettes_referer_non' => 'Ùn vede micca a cattura di screnu di i siti d\'orìgine di e vìsite',
 'info_question_vignettes_referer_oui' => 'Vede a cattura di screnu di i siti d\'orìgine di e vìsite',
-'info_question_visiteur_ajout_document_forum' => 'Sè vo vulete auturizà i visitori à alleà ducumenti (imàgini, mùsiche ...) à i so messagi di u foru, 
-		rinsignate quì sottu a lista di \'estensioni di i ducumenti auturizati pè i fori (per esempiu : gif, jpg, png, mp3).',
-'info_question_visiteur_ajout_document_forum_format' => 'Sè vo vulete auturizà tutti i tippi di ducumenti cunsiderati da affidati da SPIP, mettite una 
-		stelluccia. Per ùn auturizà nunda, ùn mettite nunda.',
 'info_qui_attribue_mot_cle' => 'I segni di stu gruppu ponu esse attribuiti da :',
 'info_racine_site' => 'Ràdica di u situ',
 'info_recharger_page' => 'Aghjurnate sta pàgina da quì à un minutu.',
@@ -742,7 +701,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'intem_redacteur' => 'scrittore',
 'intitule_licence' => 'Licenza',
 'item_accepter_inscriptions' => 'Accettà l\'iscrizzioni',
-'item_activer_forum_administrateur' => 'Attivà u foru di l\'amministratori',
 'item_activer_messages_avertissement' => 'Attivà i messagi d\'avertimentu',
 'item_administrateur_2' => 'amministratore',
 'item_afficher_calendrier' => 'Pubblicà in l\'almanaccu',
@@ -757,10 +715,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'item_choix_non_generation_miniature' => 'Ùn creà micca e figurette di l\'imàgini.',
 'item_choix_redacteurs' => 'i scrittori',
 'item_choix_visiteurs' => 'i visitori di u situ pùbblicu',
-'item_config_forums_prive_global' => 'Attivà i fori di i scrittori',
-'item_config_forums_prive_objets' => 'Attivà sti fori',
 'item_creer_fichiers_authent' => 'Creà i schedari .htpasswd',
-'item_desactiver_forum_administrateur' => 'Disattivà u foru di l\'amministratori',
 'item_gerer_annuaire_site_web' => 'Gestisce un annuariu di siti Web',
 'item_gerer_statistiques' => 'Gestisce e statìstiche',
 'item_limiter_recherche' => 'Limità a ricerca à l\'infurmazioni cuntenute in u vostru situ',
@@ -780,8 +735,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'item_non_autoriser_syndication_integrale' => 'Sparghje solu un riassuntu',
 'item_non_bloquer_liens_syndiques' => 'Ùn bluccà micca e lee chì venenu da a sindicazione',
 'item_non_compresseur' => 'Disattivà a cumpressione',
-'item_non_config_forums_prive_global' => 'Disattivà i fori di i scrittori',
-'item_non_config_forums_prive_objets' => 'Disattivà sti fori',
 'item_non_creer_fichiers_authent' => 'Ùn creà micca sti schedari',
 'item_non_gerer_annuaire_site_web' => 'Disattivà l\'annuariu di i siti Web',
 'item_non_gerer_statistiques' => 'Ùn gestisce micca e statìstiche',
@@ -973,7 +926,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'taille_cache_vide' => 'U cache hè viotu.',
 'taille_repertoire_cache' => 'Taglia di u cartulare di cache',
 'text_article_propose_publication' => 'Artìculu prupostu per a pubblicazione.',
-'text_article_propose_publication_forum' => 'Date puru u vostru parè in u foru di st\'artìculu (in fondu di pàgina).',
 'texte_acces_ldap_anonyme_1' => 'Certi servori LDAP ùn accettanu nisun accessu anònimu. In stu casu, si deve specificà 
 		un còdice d\'accessu iniziale di modu à pudè dopu ricircà infurmazioni in l\'annuariu. 
 		Ma sia cum\'ella sia, i seguenti campi puderanu esse lasciati vioti.',
@@ -1034,7 +986,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'texte_effacer_statistiques' => 'Sguassà e statìstiche',
 'texte_en_cours_validation' => 'L\'artìculi è i dispacci quì sottu sò pruposti à a pubblicazione. Date puru u vostru parè usendu i fori chì seguitanu
 	ogni artìculu o dispacciu.',
-'texte_en_cours_validation_forum' => 'Date puru u vostru parè usendu i fori chì li sò assuciati.',
 'texte_enrichir_mise_a_jour' => 'Pudete puru arricchisce a paginatura di u vostru testu usendu l\'«accurtatoghji tipugràfichi».',
 'texte_fichier_authent' => '<b>Deve SPIP creà i schedari speciali <tt>.htpasswd</tt> è <tt>.htpasswd-admin</tt> in u cartulare @dossier@ ?</b><p>
 	Sti schedari ponu ghjuvà pè limità l\'accessu à l\'autori è à l\'amministratori in certe parti di u situ (per esempiu, per un prugrammu esternu
@@ -1159,8 +1110,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'titre_cadre_afficher_article' => 'Vede l\'artìculi',
 'titre_cadre_afficher_traductions' => 'Vede u statu di e traduzzioni per e seguenti lingue :',
 'titre_cadre_ajouter_auteur' => 'AGHJUNGHJE UN AUTORE : ',
-'titre_cadre_forum_administrateur' => 'Foru privatu di l\'amministratori',
-'titre_cadre_forum_interne' => 'Foru internu',
 'titre_cadre_interieur_rubrique' => 'Dentr\'à a rùbbrica',
 'titre_cadre_numero_auteur' => 'AUTORE NÙMERU',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1169,7 +1118,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'titre_config_contenu_prive' => 'In u spaziu privatu',
 'titre_config_contenu_public' => 'Nant\'à u situ pùbblicu',
 'titre_config_fonctions' => 'Cunfigurazione di u situ',
-'titre_config_forums_prive' => 'Fori di u spaziu privatu',
 'titre_config_groupe_mots_cles' => 'Cunfigurazione di i gruppi di segni',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Cunfigurazione di u situ',
@@ -1179,7 +1127,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'titre_dernier_article_syndique' => 'Ùltimi artìculi sindicati',
 'titre_documents_joints' => 'Ducumenti alleati',
 'titre_evolution_visite' => 'Evuluzione di e vìsite',
-'titre_forum_suivi' => 'Guardia di i fori',
 'titre_gauche_mots_edit' => 'SEGNU NÙMERU :',
 'titre_groupe_mots' => 'GRUPPU DI PARULLE :',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1208,7 +1155,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'titre_page_documents_liste' => 'I ducumenti di e rùbbriche',
 'titre_page_forum' => 'Foru di l\'amministratori',
 'titre_page_forum_envoi' => 'Mandà un messagiu',
-'titre_page_forum_suivi' => 'Guardia di i fori',
 'titre_page_index' => 'U vostru spaziu privatu',
 'titre_page_message_edit' => 'Scrive un messagiu',
 'titre_page_messagerie' => 'I vostri messagi',

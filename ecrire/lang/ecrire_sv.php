@@ -83,23 +83,15 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'bouton_radio_activer_petition' => 'Aktivera namninsamlingen',
 'bouton_radio_afficher' => 'Visa',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Synas i listan över anslutna redaktörere',
-'bouton_radio_articles_futurs' => 'endast för framtida artiklar (ingen inverkan på databasen).',
-'bouton_radio_articles_tous' => 'på alla artiklar utan undantag.',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'på alla artiklar utom de utan forum.',
 'bouton_radio_desactiver_messagerie' => 'Stäng av meddelandefunktionen',
-'bouton_radio_enregistrement_obligatoire' => 'Krav på registrering (användare måste registrera sig genom att tillhandahålla sin e-postadress innan de kan bidra).  being able to post contributions).',
 'bouton_radio_envoi_annonces_adresse' => 'Skicka meddelanden till adressen:',
 'bouton_radio_envoi_liste_nouveautes' => 'Skicka lista över senaste notiser',
-'bouton_radio_moderation_priori' => 'Moderering i förhand (bidrag visas endast efter att de godkänts av en administatör).',
-'bouton_radio_modere_abonnement' => 'registrering krävs',
-'bouton_radio_modere_posteriori' => 'moderering i efterhand',
 'bouton_radio_modere_priori' => 'moderering i förhand',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Inte synas i listan över anslutna redaktörere',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Skicka inga redaktionella meddelanden',
 'bouton_radio_non_syndication' => 'Ingen syndikering',
 'bouton_radio_pas_petition' => 'Inga namninsamlingar',
 'bouton_radio_petition_activee' => 'Namninsamling aktiverad',
-'bouton_radio_publication_immediate' => 'Omedelbar publicering av meddelanden (bidrag visas direkt efter att de skickas, administratörer kan radera dom senare):',
 'bouton_radio_supprimer_petition' => 'Radera namninsamlingen',
 'bouton_radio_syndication' => 'Syndikering:',
 'bouton_redirection' => 'OMPEKA',
@@ -240,14 +232,12 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'icone_modifier_mot' => 'Editera detta nyckelord',
 'icone_modifier_rubrique' => 'Editera avdelningen',
 'icone_modifier_site' => 'Editera sajten',
-'icone_poster_message' => 'Anslå ett meddelande',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => 'Länka en ny sajt',
 'icone_relancer_signataire' => 'Kontakta personen igen',
 'icone_retour' => 'Tillbaka',
 'icone_retour_article' => 'Tillbaka till artikeln',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => 'Uppföljning av publika forum: @nb_forums@ bidrag',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Radera cookien',
 'icone_supprimer_groupe_mots' => 'Radera den här gruppen',
@@ -267,7 +257,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Du kan aktivera en <b>administrationscookie</b>, som tillåter dig
  att enkelt växla mellan den publika och den privata delen.',
-'info_activer_forum_public' => '<i>för att aktivera publika forum, var vänlig och välj moderationssätt:</i>',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Den här administratören hanterar följande avdelningar:',
 'info_admin_gere_toutes_rubriques' => 'Den här administratören hanterar <b>alla avdelningar</b>.',
@@ -295,7 +284,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_ajouter_rubrique' => 'lägg till en annan avdelning:',
 'info_annonce_nouveautes' => 'Senaste nyheterna',
 'info_anterieur' => 'föregående',
-'info_appliquer_choix_moderation' => 'Aktivera ditt val av moderering:',
 'info_article' => 'artikel',
 'info_article_2' => 'artiklar',
 'info_article_a_paraitre' => 'Fördaterade artiklar som kommer att publiceras',
@@ -340,10 +328,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
-'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
-'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
-'info_config_forums_prive_objets' => 'Un forum sous chaque article, brève, site référencé, etc. :', # NEW
 'info_config_suivi' => 'Om den här adressen är en mailing lista, kan du under adressen visa var man kan registrera sig. Det kan vara en URL (till exempel en webbsida där man kan registrera sig), eller en e-postadress med en speciell ärenderad (till exempel: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Du kan anmäla dig till sajtens nyhetsbrev. Du kommer då att automatiskt få meddelanden om artiklar och nyheter som laddats upp för publicering.',
 'info_confirmer_passe' => 'Bekräfta ditt nya lösenord:',
@@ -374,9 +358,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_derniere_etape' => 'Klart!',
 'info_derniere_syndication' => 'Den sista syndikeringen av den här sajten skedde den',
 'info_derniers_articles_publies' => 'Dina senaste publicerade artiklar',
-'info_desactiver_forum_public' => 'Avaktivera de publika forumen.
- Publika forum kan tillåtas  för
- enskilda artiklar; de kommer inte att vara aktiva för avdelningae, nyheter, osv.',
 'info_desactiver_messagerie_personnelle' => 'Du kan aktivera eller avaktivera dina personliga meddelanden på den här sajten.',
 'info_descriptif' => 'Beskrivning:',
 'info_desinstaller_plugin' => 'raderar data och avaktiverar tillägget',
@@ -387,7 +368,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_email_webmestre' => 'Webmasterns mejladress (frivillig)',
 'info_entrer_code_alphabet' => 'Skriv in koden för teckenuppsättningen som skall användas:',
 'info_envoi_email_automatique' => 'Automatisk e-post',
-'info_envoi_forum' => 'Skicka foruminlägg till artikelredaktörerna',
 'info_envoyer_maintenant' => 'Skicka nu',
 'info_etape_suivante' => 'Gå till nästa steg',
 'info_etape_suivante_1' => 'Du kan fortsätta till nästa steg.',
@@ -398,7 +378,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
   aktiviteterna, kan SPIP skicka medddelanden via e-post, exempelvis till en maillista för redaktörer,
   angående publiceringar och godkännanden.',
 'info_fichiers_authent' => 'Lösenordsfil ".htpasswd"',
-'info_fonctionnement_forum' => 'Fonctionnement du forum :', # NEW
 'info_forum_administrateur' => 'Administratörernas forum',
 'info_forum_interne' => 'Internt forum',
 'info_forum_ouvert' => 'I sajtens privata del är ett forum öppet för alla
@@ -420,7 +399,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_gauche_numero_auteur' => 'REDAKTÖR NUMMER:',
 'info_gauche_statistiques_referers' => 'Cette page présente la liste des <i>referers</i>, c\'est-à-dire des sites contenant des liens menant vers votre propre site, uniquement pour hier et aujourd\'hui ; cette liste est remise à zéro toutes les 24 heures.', # NEW
 'info_gauche_suivi_forum' => 'Sidna för<i>forumuppföljning</i> är ett administrationsverktyg för din sajt (inte en diskussions- eller redigeringsida). Den visar alla bidrag till det publika forum som hör till artikeln och där kan du hantera bidragen contributions.',
-'info_gauche_suivi_forum_2' => 'La page de <i>suivi des forums</i> est un outil de gestion de votre site (et non un espace de discussion ou de rédaction). Elle affiche toutes les contributions des forums du site, aussi bien celles du site public que de l\'espace privé et vous permet de gérer ces contributions.', # NEW
 'info_gauche_visiteurs_enregistres' => 'Vous trouverez ici les visiteurs enregistrés
 	dans l\'espace public du site (forums sur abonnement).', # NEW
 'info_generation_miniatures_images' => 'Skapande av tumnagelbilder.',
@@ -453,11 +431,6 @@ funktioner hos SPIP inte användas.',
 'info_lien_hypertexte' => 'Hyperlänk:',
 'info_liens_syndiques_1' => 'syndikerade länkar',
 'info_liens_syndiques_2' => 'i väntan på validering.',
-'info_liens_syndiques_3' => 'forum',
-'info_liens_syndiques_4' => 'är',
-'info_liens_syndiques_5' => 'forum',
-'info_liens_syndiques_6' => 'är',
-'info_liens_syndiques_7' => 'i väntan på validering.',
 'info_liste_redacteurs_connectes' => 'Inlogggade redaktörer',
 'info_login_existant' => 'Användarnamnet finns redan.',
 'info_login_trop_court' => 'Användarnamnet är för kort.',
@@ -475,7 +448,6 @@ funktioner hos SPIP inte användas.',
   varit installerade på sajten: Du riskerar att förlora databasen
   och ha en sajt som inte längre fungerar.<br />{{återinstallera
   SPIP filerna.}}',
-'info_mode_fonctionnement_defaut_forum_public' => 'Valt funktionssätt för de publika forumen',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Editera detaljer för redaktören:',
 'info_modifier_mot' => 'Editera nyckelordet:',
@@ -524,9 +496,6 @@ funktioner hos SPIP inte användas.',
 'info_numero_article' => 'ARTIKEL NUMMER:',
 'info_obligatoire_02' => '[Krävs]',
 'info_option_accepter_visiteurs' => 'Tillåt besökare registrera sig på den publika delen',
-'info_option_email' => 'When a site visitor posts a message to the forum
-		associated with an article, the article\'s authors can be
-		informed of this message by e-mail. Do you wish to use this option?', # MODIF
 'info_option_faire_suivre' => 'Vidarebefordra forummeddelanden till artikelredaktören',
 'info_option_ne_pas_accepter_visiteurs' => 'Avvisa besökarregistrering',
 'info_option_ne_pas_faire_suivre' => 'Vidarebefordra inte forummeddelanden',
@@ -540,7 +509,6 @@ funktioner hos SPIP inte användas.',
 'info_par_nombre_article' => 'efter antal artiklar',
 'info_par_statut' => 'efter status',
 'info_par_tri' => '\'(efter @tri@)\'',
-'info_pas_de_forum' => 'inget forum',
 'info_passe_trop_court' => 'lösenordet är för kort.',
 'info_passes_identiques' => 'De två lösenorden är inte identiska.',
 'info_pense_bete_ancien' => 'Dina gamla meddelanden', # MODIF
@@ -585,8 +553,6 @@ funktioner hos SPIP inte användas.',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Visa skärmbilder av länkande sajter',
-'info_question_visiteur_ajout_document_forum' => 'Do you wish to authorise visitors to attach documenst (images, sound files, ...) to their forum messages?', # MODIF
-'info_question_visiteur_ajout_document_forum_format' => 'If so, give below the list of extensions for the file types which are to be authorised (e.g. gif, jpg, png, mp3).', # MODIF
 'info_qui_attribue_mot_cle' => 'Nyckelord i den här gruppen kan tilldelas av:',
 'info_racine_site' => 'Sajtens bas',
 'info_recharger_page' => 'Var vänlig och uppdatera sidan om en liten stund.',
@@ -718,7 +684,6 @@ med en färg som visar deras status:',
 'intem_redacteur' => 'redaktör',
 'intitule_licence' => 'Licens',
 'item_accepter_inscriptions' => 'Tillåt registreringar',
-'item_activer_forum_administrateur' => 'Aktivera administratörernas forum',
 'item_activer_messages_avertissement' => 'Aktivera varningsmeddelanden',
 'item_administrateur_2' => 'administratör',
 'item_afficher_calendrier' => 'Visa i kalendern',
@@ -733,10 +698,7 @@ med en färg som visar deras status:',
 'item_choix_non_generation_miniature' => 'Generera inte miniatyrer.',
 'item_choix_redacteurs' => 'redaktörer',
 'item_choix_visiteurs' => 'besökare till den publika delen',
-'item_config_forums_prive_global' => 'Aktivera redaktörernas forum',
-'item_config_forums_prive_objets' => 'Aktivera dessa forum',
 'item_creer_fichiers_authent' => 'Skapa .htpasswd filer',
-'item_desactiver_forum_administrateur' => 'Avaktivera administratörernas forum',
 'item_gerer_annuaire_site_web' => 'Administrera webbsajt-katalogen',
 'item_gerer_statistiques' => 'Hantera statistik',
 'item_limiter_recherche' => 'Begränsa sökningen till information i din sajt',
@@ -756,8 +718,6 @@ med en färg som visar deras status:',
 'item_non_autoriser_syndication_integrale' => 'Skicka bara en sammanfattning',
 'item_non_bloquer_liens_syndiques' => 'Blockera inte länkar som kommer ifrån syndikering',
 'item_non_compresseur' => 'Avaktivera komprimering',
-'item_non_config_forums_prive_global' => 'Avaktivera redaktörernas forum',
-'item_non_config_forums_prive_objets' => 'Avaktivera dessa forum',
 'item_non_creer_fichiers_authent' => 'Skapa inte dessa filer',
 'item_non_gerer_annuaire_site_web' => 'Avaktivera webbsajt-katalogen',
 'item_non_gerer_statistiques' => 'Hantera inte statistik',
@@ -945,7 +905,6 @@ med en färg som visar deras status:',
 'taille_cache_vide' => 'Cachen är tom.',
 'taille_repertoire_cache' => 'Taille du répertoire cache', # NEW
 'text_article_propose_publication' => 'Artikel inlämnad för publicering. tveka inte att säga din mening i forumet längst ned på sidan.', # MODIF
-'text_article_propose_publication_forum' => 'N\'hésitez pas à donner votre avis grâce au forum attaché à cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Certains serveurs LDAP n\'acceptent aucun accès anonyme. Dans ce cas il faut spécifier un identifiant d\'accès initial afin de pouvoir ensuite rechercher des informations dans l\'annuaire. Dans la plupart des cas néanmoins, les champs suivants pourront être laissés vides.', # NEW
 'texte_admin_effacer_01' => 'Detta kommando raderar <i>all</i> information i databasen,
 inklusive <i>alla</i> uppgifter om användare. Efter att du använt det, måste du 
@@ -1008,7 +967,6 @@ installera om SPIP för att skapa en ny databas och den första administratören
 'texte_effacer_donnees_indexation' => 'Effacer les données d\'indexation', # NEW
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'texte_en_cours_validation' => 'The following articles and news are submitted for publication. Do not hesitate to give your opinion through the forums attached to them.', # MODIF
-'texte_en_cours_validation_forum' => 'N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # NEW
 'texte_enrichir_mise_a_jour' => 'Vous pouvez enrichir la mise en page de votre texte en utilisant des « raccourcis typographiques ».', # NEW
 'texte_fichier_authent' => '<b>Should SPIP create the <tt>.htpasswd</tt>
   and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p>
@@ -1157,8 +1115,6 @@ you can perform searches on sites and
 'titre_cadre_afficher_article' => 'Visa artiklarna:',
 'titre_cadre_afficher_traductions' => 'Visa status för översättningen för följande språk:',
 'titre_cadre_ajouter_auteur' => 'LÄGG TILL EN REDAKTÖR:',
-'titre_cadre_forum_administrateur' => 'Administratörernas privata forum ',
-'titre_cadre_forum_interne' => 'Internt forum',
 'titre_cadre_interieur_rubrique' => 'I Avdelningen',
 'titre_cadre_numero_auteur' => 'Redaktör nummer',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1167,7 +1123,6 @@ you can perform searches on sites and
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Sajtens konfiguration',
-'titre_config_forums_prive' => 'Forums de l’espace privé', # NEW
 'titre_config_groupe_mots_cles' => 'Konfigurera nyckelordsgrupper',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Sajtens konfiguration',
@@ -1177,7 +1132,6 @@ you can perform searches on sites and
 'titre_dernier_article_syndique' => 'Senaste syndikerade artiklar',
 'titre_documents_joints' => 'Bifogade dokument',
 'titre_evolution_visite' => 'Besöksnivå',
-'titre_forum_suivi' => 'Suivi des forums', # NEW
 'titre_gauche_mots_edit' => 'NYCKELORDSNUMMER:',
 'titre_groupe_mots' => 'NYCKELORDSGRUPP:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1206,7 +1160,6 @@ you can perform searches on sites and
 'titre_page_documents_liste' => 'Bifogade dokument',
 'titre_page_forum' => 'Administratörernas forum',
 'titre_page_forum_envoi' => 'Sänd ett meddelande',
-'titre_page_forum_suivi' => 'Suivi des forums', # NEW
 'titre_page_index' => 'Din privata del',
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW

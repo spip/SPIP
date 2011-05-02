@@ -84,29 +84,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_activer_petition' => 'Zapnout petici',
 'bouton_radio_afficher' => 'Zobrazit',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Zobrazit v seznamu připojených redaktorů',
-'bouton_radio_articles_futurs' => 'pouze k budoucím článkům (žádná akce v databázi).',
-'bouton_radio_articles_tous' => 'ke všem článkům bez výjimky.',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'ke všem článkům s výjimkou těch, kde je vypnutá diskusní skupina.',
 'bouton_radio_desactiver_messagerie' => 'Vypnout systém zpráv',
-'bouton_radio_enregistrement_obligatoire' => 'Povinná registrace (uživatelé se musí
-  nejprve přihlásit zadáním své elektronické adresy
-  a teprve potom mohou zasílat své příspěvky).',
 'bouton_radio_envoi_annonces_adresse' => 'Odesílat oznámení na adresu:',
 'bouton_radio_envoi_liste_nouveautes' => 'Zasílat seznam novinek',
-'bouton_radio_moderation_priori' => 'Moderovaná skupina (příspěvky
- budou zveřejněny až po schválení jedním
- ze správců).',
-'bouton_radio_modere_abonnement' => 'na základě přihlášení',
-'bouton_radio_modere_posteriori' => 'moderování ex post',
 'bouton_radio_modere_priori' => 'moderování předem',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nezobrazovat v seznamu redaktorů',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Nezasílat redaktorská oznámení',
 'bouton_radio_non_syndication' => 'Bez syndikace',
 'bouton_radio_pas_petition' => 'Bez petice',
 'bouton_radio_petition_activee' => 'Petice zapnuta',
-'bouton_radio_publication_immediate' => 'Okamžité zveřejňování zpráv
- (příspěvky se zobrazují okamžitě,
- správci je mohou odstranit dodatečně).',
 'bouton_radio_supprimer_petition' => 'Odstranit petici',
 'bouton_radio_syndication' => 'Syndikace:',
 'bouton_redirection' => 'PŘESMĚROVÁNÍ',
@@ -248,14 +234,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_mot' => 'Edit this keyword', # NEW
 'icone_modifier_rubrique' => 'Změnit sekci',
 'icone_modifier_site' => 'Změnit web',
-'icone_poster_message' => 'Odeslat zprávu',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => 'Zveřejnit odkaz na nový web',
 'icone_relancer_signataire' => 'Contact the signatory again', # NEW
 'icone_retour' => 'Zpět',
 'icone_retour_article' => 'Zpět k článku',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => 'Sledování veřejné diskusní skupiny: @nb_forums@ příspěvky',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Smazat cookie',
 'icone_supprimer_groupe_mots' => 'Odstranit skupinu',
@@ -275,8 +259,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Můžete nastavit <b>administrátorské cookie</b>, které vám dovolí
  snadno přecházet mezi prohlížením webu a jeho editací.',
-'info_activer_forum_public' => '<i>Chcete-li zapnout veřejné diskusní skupiny musíte zvolit jejich 
- standardní způsob moderování:</i>', # MODIF
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Tento správce ospovídá za následující sekce:',
 'info_admin_gere_toutes_rubriques' => 'Tento správce odpovídá ua <b>všechny sekce</b>.',
@@ -304,7 +286,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajouter_rubrique' => 'Přidat další sekci do správy:',
 'info_annonce_nouveautes' => 'Oznámení novinek',
 'info_anterieur' => 'předchozí',
-'info_appliquer_choix_moderation' => 'Použít tento způsob moderování:',
 'info_article' => 'článek',
 'info_article_2' => 'články',
 'info_article_a_paraitre' => 'Články čekající na termín publikování',
@@ -349,10 +330,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => 'It is advisable to first check if the service provider systematically compresses PHP scripts. To do this you can, for example, use the following service: @testgzip@', # NEW
 'info_compresseur_texte' => 'If your server does not automatically compress HTML pages when sending them, you can attempt to force the compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ', # NEW
-'info_config_forums_prive' => 'In the editing area of the site several differnt kinds of forum may be activated:', # NEW
-'info_config_forums_prive_admin' => 'A forum reserved for site administrators:', # NEW
-'info_config_forums_prive_global' => 'A global forum, open to all the authors:', # NEW
-'info_config_forums_prive_objets' => 'A forum attached to each article, news item, referenced site, etc.:', # NEW
 'info_config_suivi' => 'Jedná-li se o adresu diskusní skupiny, můžete zde uvést adresu, na které se mohou účastníci webu přihlásit. Může se jednat o adresu URL (například webová stránka pro přihlášení do skupiny) nebo o elektronickou adresu s uvedením specifického předmětu (např.: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Můžete se přihlásit na mailing-list tohoto webu. Potom budete dostávat oznámení o článcích a novinkách připravených k publikování.',
 'info_confirmer_passe' => 'Potvrdit nové heslo:',
@@ -383,9 +360,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_derniere_etape' => 'Poslední krok: <b>byl dokončen!', # MODIF
 'info_derniere_syndication' => 'Poslední syndikace tohoto webu byla pro vedena ',
 'info_derniers_articles_publies' => 'Vaše poslední publikované články.',
-'info_desactiver_forum_public' => 'Vypnout veřejné diskusní skupiny
-. Tyto skupiny bude možno zapnout ad hoc
- u jednotlivých článků; budou zakázány u sekcí, novinek atd.',
 'info_desactiver_messagerie_personnelle' => 'U tohoto webu můžete zapnout nebo vypnout systém interních zpráv.',
 'info_descriptif' => 'Popis:',
 'info_desinstaller_plugin' => 'deletes the data and deactivates the plugin', # NEW
@@ -396,7 +370,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_email_webmestre' => 'Email správce webu (volitelný údaj)',
 'info_entrer_code_alphabet' => 'Zadejte kód znakové sady, která se má používat:',
 'info_envoi_email_automatique' => 'Automatické zasílání emailů',
-'info_envoi_forum' => 'Zasílání diskusních skupin autorům článků',
 'info_envoyer_maintenant' => 'Odeslat nyní',
 'info_etape_suivante' => 'Přejít k dalšímu kroku',
 'info_etape_suivante_1' => 'Můžete přejít k dalšímu kroku.',
@@ -408,7 +381,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   a o schválení článků. Tím se ulehčí sledování publikační činnosti
   na webu. ',
 'info_fichiers_authent' => 'Autentifikační soubor ".htpasswd"',
-'info_fonctionnement_forum' => 'Fungování diskusní skupiny:',
 'info_forum_administrateur' => 'diskusní skupina správců',
 'info_forum_interne' => 'interní diskusní skupina',
 'info_forum_ouvert' => 'V privátní části webu je diskusní skupina otevřena všem
@@ -429,7 +401,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_gauche_numero_auteur' => 'ČÍSLO AUTORA',
 'info_gauche_statistiques_referers' => 'Na této stránce je seznam <i>referencí</i>, to je webů, ze kterých vede odkaz na váš vlastní web. Údaje jsou pouze za včerejšek a dnešek. Seznam se každých 24 hodin vynuluje.',
 'info_gauche_suivi_forum' => 'Stránka pro <i>sledování diskusních skupin</i> je určena ke správě vašeho webu (nejedná se o prostor pro diskusi ani pro redigování). Jsou na ní zobrazeny všechny diskusní příspěvky z veřejné skupiny a umožňuje vám jejich správu.', # MODIF
-'info_gauche_suivi_forum_2' => 'Stránka pro <i>sledování diskusních skupin</i> je určena ke správě vašeho webu (nejedná se o prostor pro diskusi ani pro redigování). Jsou na ní zobrazeny všechny diskusní příspěvky z veřejné skupiny a umožňuje vám jejich správu.', # MODIF
 'info_gauche_visiteurs_enregistres' => 'Zde naleznete návštěvníky zaregistrované
  ve veřejné části webu (diskusní skupiny, do kterých je nutno se přihlásit).',
 'info_generation_miniatures_images' => 'Generování náhledů',
@@ -462,11 +433,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_lien_hypertexte' => 'Hypertextový odkaz:',
 'info_liens_syndiques_1' => 'syndikovaný odkaz',
 'info_liens_syndiques_2' => 'čekající na schválení.',
-'info_liens_syndiques_3' => 'diskusní skupiny',
-'info_liens_syndiques_4' => 'jsou',
-'info_liens_syndiques_5' => 'diskusní skupina',
-'info_liens_syndiques_6' => 'je',
-'info_liens_syndiques_7' => 'čekající na schválení.',
 'info_liste_redacteurs_connectes' => 'Seznam připojených redaktorů',
 'info_login_existant' => 'Toto uživatelské jméno již existuje.',
 'info_login_trop_court' => 'Uživatelské jeméno je příliš krátké.',
@@ -484,7 +450,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
   vystavujete se riziku ztráty databáze a nefunkčnosti vašeho webu. 
              <br />{{Nainstalujte znovu
   soubor systému SPIP.}}', # MODIF
-'info_mode_fonctionnement_defaut_forum_public' => 'Standardní režim veřejných diskusních skupin',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Edit author details:', # NEW
 'info_modifier_mot' => 'Edit the keyword:', # NEW
@@ -532,9 +497,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_numero_article' => 'ČLÁNEK Č.:',
 'info_obligatoire_02' => '[povinný údaj]',
 'info_option_accepter_visiteurs' => 'Schválit přihlášení návštěvníků veřejného webu',
-'info_option_email' => 'Autoři článku mohou být informováni emailem o tom, že návštěvníci
-  webu poslali zprávu do diskusní skupiny, týkající se
-  jejich článku. Chcete tuto možnost použít?', # MODIF
 'info_option_faire_suivre' => 'Sledovat zprávy z diskusní skupiny autory článků',
 'info_option_ne_pas_accepter_visiteurs' => 'Odmítnout přihlášky návštěvníků',
 'info_option_ne_pas_faire_suivre' => 'Nesledovat zprávy z diskusní skupiny',
@@ -548,7 +510,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_par_nombre_article' => 'podle počtu článků',
 'info_par_statut' => 'podle stavu',
 'info_par_tri' => '\'(podle @tri@)\'',
-'info_pas_de_forum' => 'bez diskusní skupiny',
 'info_passe_trop_court' => 'Heslo je příliš krátké.',
 'info_passes_identiques' => 'Zadaná hesla nesouhlasí.',
 'info_pense_bete_ancien' => 'Staré interní poznámky', # MODIF
@@ -593,8 +554,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_question_vignettes_referer' => 'When you consult the statistics, you can see a preview of the originating sites of the visits. ', # NEW
 'info_question_vignettes_referer_non' => 'Do not show the screenshots of the originating sites', # NEW
 'info_question_vignettes_referer_oui' => 'Show the screenshots of the originating sites', # NEW
-'info_question_visiteur_ajout_document_forum' => 'If you wish to allow visitors to attach documents (images, sound files, ...) to their forum messages, indicate below the list of file extensions which are authorised (e.g. gif, jpg, png, mp3).', # NEW
-'info_question_visiteur_ajout_document_forum_format' => 'If you wish to authorise all document types which SPIP allows, then put an asterisk. To allow no file-types, leave empty.', # NEW
 'info_qui_attribue_mot_cle' => 'Slova z této skupiny smí přiřazovat:',
 'info_racine_site' => 'Kořenový adresář webu',
 'info_recharger_page' => 'Za okamžik zkuste stránku znovu nahrát.',
@@ -726,7 +685,6 @@ ukazuje jejich stav:',
 'intem_redacteur' => 'redaktor',
 'intitule_licence' => 'License', # NEW
 'item_accepter_inscriptions' => 'Schválit přihlášky',
-'item_activer_forum_administrateur' => 'Zapnout diskusní skupinu správců',
 'item_activer_messages_avertissement' => 'Zapnout upozornění',
 'item_administrateur_2' => 'správce',
 'item_afficher_calendrier' => 'Zobrazit v kalendáři',
@@ -741,10 +699,7 @@ ukazuje jejich stav:',
 'item_choix_non_generation_miniature' => 'Negenerovat náhledy obrázků.',
 'item_choix_redacteurs' => 'redaktoři',
 'item_choix_visiteurs' => 'návštěvníci veřejného webu',
-'item_config_forums_prive_global' => 'Activate the authors\' forum', # NEW
-'item_config_forums_prive_objets' => 'Activate these forums', # NEW
 'item_creer_fichiers_authent' => 'Vytvořit soubory .htpasswd',
-'item_desactiver_forum_administrateur' => 'Vypnout diskusní skupinu správců',
 'item_gerer_annuaire_site_web' => 'Správa adresáře webů',
 'item_gerer_statistiques' => 'Správa statistik',
 'item_limiter_recherche' => 'Omezit vyhledávání na údaje obsažené na vašem webu',
@@ -764,8 +719,6 @@ ukazuje jejich stav:',
 'item_non_autoriser_syndication_integrale' => 'Poslat pouze shrnutí',
 'item_non_bloquer_liens_syndiques' => 'Neblokovat odkazy, které jsou výsledkem syndikace',
 'item_non_compresseur' => 'Deactivate compression', # NEW
-'item_non_config_forums_prive_global' => 'Deactivate the authors\' forum', # NEW
-'item_non_config_forums_prive_objets' => 'Deactivate these forums', # NEW
 'item_non_creer_fichiers_authent' => 'Nevytvářet tyto soubory',
 'item_non_gerer_annuaire_site_web' => 'Vypnout adresář webu',
 'item_non_gerer_statistiques' => 'Bez správy statistik',
@@ -953,7 +906,6 @@ ukazuje jejich stav:',
 'taille_cache_vide' => 'Cache je prázdná.',
 'taille_repertoire_cache' => 'Velikost adresáře cache',
 'text_article_propose_publication' => 'Články připravené k publikování. Neváhejte přidat svůj názor prostřednictvím diskusního fóra, jež je připojeno ke každému článku (na spodním okraji stránky).', # MODIF
-'text_article_propose_publication_forum' => 'You can comment on this article by using the attached forum (at the bottom of the page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Některé servery LDAP odmítají anonymní přístup. V takovém případě je třeba definovat identifikační údaje pro přístup, aby bylo možno hledat v adresáři. Přesto je však většinou možné nechat následující pole nevyplněná.',
 'texte_admin_effacer_01' => 'Tímto příkazem odstraníte <i>veškerý</i> obsah databáze,
 včetně <i>veškerých</i> přístupů redaktorů a správců. Pokud jej spustíte, musíte následně znovu nainstalovat
@@ -1014,7 +966,6 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 'texte_effacer_donnees_indexation' => 'Odstranit indexy',
 'texte_effacer_statistiques' => 'Delete the statistics', # NEW
 'texte_en_cours_validation' => 'Následující články a novinky jsou připraveny k publikaci. Neváhejte připojit svůj názor prostřednictvím diskusního fóra, jež je k nim připojeno.', # MODIF
-'texte_en_cours_validation_forum' => 'You can give your comments by using the forums which are attached to them.', # NEW
 'texte_enrichir_mise_a_jour' => 'Zalamování textu můžete rozšířit pomocí "typografických zkratek".',
 'texte_fichier_authent' => '<b>Má systém SPIP vytvořit speciální soubory <tt>.htpasswd</tt>
   a <tt>.htpasswd-admin</tt> v adresáři  @dossier@?</b><p>
@@ -1152,8 +1103,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_cadre_afficher_article' => 'Zobrazit články',
 'titre_cadre_afficher_traductions' => 'Zobrazit stav překladu v následujících jazycích:',
 'titre_cadre_ajouter_auteur' => 'PŘIDAT AUTORA:',
-'titre_cadre_forum_administrateur' => 'Soukromá diskusní skupina správců',
-'titre_cadre_forum_interne' => 'Interní diskusní skupina',
 'titre_cadre_interieur_rubrique' => 'V rámci sekce',
 'titre_cadre_numero_auteur' => 'ČÍSLO AUTORA',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1162,7 +1111,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_config_contenu_prive' => 'In the editing area', # NEW
 'titre_config_contenu_public' => 'On the public site', # NEW
 'titre_config_fonctions' => 'Nastavení webu',
-'titre_config_forums_prive' => 'Forums in the editing area', # NEW
 'titre_config_groupe_mots_cles' => 'Nastavení skupin klíčových slov',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Nastavení webu',
@@ -1172,7 +1120,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_dernier_article_syndique' => 'Poslední syndikované články',
 'titre_documents_joints' => 'Připojené dokumenty',
 'titre_evolution_visite' => 'Vývoj návštěvnosti',
-'titre_forum_suivi' => 'Sledování diskusních skupin',
 'titre_gauche_mots_edit' => 'ČÍSLO SLOVA:',
 'titre_groupe_mots' => 'SKUPINA SLOV:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1201,7 +1148,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_page_documents_liste' => 'Dokumenty v sekcích',
 'titre_page_forum' => 'Diskusní skupina správců',
 'titre_page_forum_envoi' => 'Odeslat zprávu',
-'titre_page_forum_suivi' => 'Sledování diskusních skupin',
 'titre_page_index' => 'Váš privátní prostor',
 'titre_page_message_edit' => 'Upravit zprávu',
 'titre_page_messagerie' => 'Váš systém zpráv',

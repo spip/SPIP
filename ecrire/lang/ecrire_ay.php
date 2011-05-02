@@ -87,25 +87,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_activer_petition' => 'Mayiwix naktayaña',
 'bouton_radio_afficher' => 'Uñachayaña',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Chint\'at tanta qillqirinakan uñstaña',
-'bouton_radio_articles_futurs' => 'jutir yatiyawinakaruki (pirwa yatiyawinak janiw mayjt\'aykiti)',
-'bouton_radio_articles_tous' => 'taqpach qillqatanakaru',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'Taqpach qillqatanakaru, janiw jiwt\'at aruskipañanakar ukhama.',
 'bouton_radio_desactiver_messagerie' => 'yatiyawir jiwt\'aña',
-'bouton_radio_enregistrement_obligatoire' => 'Qillqaw mayita (qillqayasiñapuniw aruskipayir churasina janir aruskipañan arst\'asa)',
 'bouton_radio_envoi_annonces_adresse' => 'Yatiyawinak utjawir apayaña:',
 'bouton_radio_envoi_liste_nouveautes' => 'Machaq tanta yatiyawinak apayaña',
-'bouton_radio_moderation_priori' => 'Modération à priori (les
-	contributions ne s\'affichent publiquement qu\'après validation par les
-	administrateurs).', # NEW
-'bouton_radio_modere_abonnement' => 'qillqatanakatakiki',
-'bouton_radio_modere_posteriori' => 'qhipurunx k\'achata',
 'bouton_radio_modere_priori' => 'nayraqatax k\'achata',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Tanta qillqirinakan jan uñstaña',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Yatiyawinak qhanstat jan apayaña',
 'bouton_radio_non_syndication' => 'Ni kunas apxasiwi',
 'bouton_radio_pas_petition' => 'Jan mayiyawimpi',
 'bouton_radio_petition_activee' => 'Mayiyaw naktata',
-'bouton_radio_publication_immediate' => 'Yatiyawinakat jank\'aki yatiyaña (apayasinxa yanapawinakaxa uñstapxiwa, apnaqawirit ukata qhipurunxa apaqataspawa)',
 'bouton_radio_supprimer_petition' => 'Mayiwi apaqaña',
 'bouton_radio_syndication' => 'Apxasiwi',
 'bouton_redirection' => 'Irpxatawi',
@@ -252,14 +242,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Aka t\'aqa mayjt\'ayaña',
 'icone_modifier_site' => 'Aka qamawi mayjt\'ayaña',
-'icone_poster_message' => 'Mä yatiyawi apayaña',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => 'Mä machaq qamawi aytaña',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Kutiña',
 'icone_retour_article' => 'Qillqatar kutiña',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => 'Jichhaptat aruskiñat yatiyata: @nb_forums@yanapawinaka',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => '\\&quot;Cookie\\&quot; uk apaqaña yatiyawinakata ',
 'icone_supprimer_groupe_mots' => 'Apaqayaña aka tama',
@@ -280,8 +268,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Vous pouvez activer un <b>cookie de correspondance</b>, ce qui vous
 	permettra de passer facilement du site public au site privé.', # NEW
-'info_activer_forum_public' => '<i>Pour activer les forums publics, veuillez choisir leur mode
-	de modération par défaut:</i>', # NEW
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Jutir t\'aqanakxa aka jaqiw apnaqi:',
 'info_admin_gere_toutes_rubriques' => 'Aka apnaqiriw apnaqi <b>taqpacha apnaqi</b>.',
@@ -309,7 +295,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajouter_rubrique' => 'Apnaqañatakix yaqha t\'aqa yapaña',
 'info_annonce_nouveautes' => 'Machaq yatiyawinaka yatiyaña',
 'info_anterieur' => 'nayriri',
-'info_appliquer_choix_moderation' => 'Aka amuya kasta luraña',
 'info_article' => 'qillqata
 ',
 'info_article_2' => 'qillqatanaka',
@@ -356,10 +341,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
-'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
-'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
-'info_config_forums_prive_objets' => 'Un forum sous chaque article, brève, site référencé, etc. :', # NEW
 'info_config_suivi' => 'Si cette adresse correspond à une mailing-list, vous pouvez indiquer ci-dessous l\'adresse à laquelle les participants au site peuvent s\'inscrire. Cette adresse peut être une URL (par exemple la page d\'inscription à la liste par le Web), ou une adresse email dotée d\'un sujet spécifique (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):', # NEW
 'info_config_suivi_explication' => 'Tanta aruskipayiriru aka qamawitxa qillqayasismaw. Aruskipayiritxa qillqatanakat yatiyawinak qatuqata ukatsti jisk\'aptat amtatanak yatiyatawiru.',
 'info_confirmer_passe' => 'Machaq imt\'aw iyaw saña: ',
@@ -388,7 +369,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_derniere_etape' => 'Qhipa sarawi: ¡tukuytanwa!',
 'info_derniere_syndication' => 'Aka qamawitxa qhipa apxasiwix apasiwayiwa',
 'info_derniers_articles_publies' => 'Qhipa yatiyat qillqatanakama',
-'info_desactiver_forum_public' => 'Aruskipañanak jiwt\'ayaña. Qillqatanakatakikiw naktayatani, ukhamarusa janiw jisk\'aptatanakataki t\'aqanakatakiraki.',
 'info_desactiver_messagerie_personnelle' => 'Aka qamawinxa juman yatiyawirima naktayasmaw jiwt\'ayarakismaw',
 'info_descriptif' => 'Uñt\'ayawi:',
 'info_desinstaller_plugin' => 'supprime les données et désactive le plugin', # NEW
@@ -399,7 +379,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_email_webmestre' => 'Aruskipayirit utjawipa webmaster ukata (ajlliñatakiwa)',
 'info_entrer_code_alphabet' => 'Qillqa chimputampi lurkatax uk uchantam',
 'info_envoi_email_automatique' => 'Aruskipayirinakat justup apayawi',
-'info_envoi_forum' => 'Aruskipañanakat uñch\'ukiwi',
 'info_envoyer_maintenant' => 'Jichhaki apayaña',
 'info_etape_suivante' => 'Arkir sarawir sarantaña',
 'info_etape_suivante_1' => 'Arkir sarawir sarantasmawa',
@@ -408,7 +387,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_exportation_base' => 'base ukax apsusispaw @archive@ uka tuqiru',
 'info_facilite_suivi_activite' => 'Qillqa lurawit uñch\'ukiw jasachañatakix, SPIP ukax aruskipayirit apayaspa, mä tanta qillqirinakar ukhama yatiyatawinakataki yatiyawinaka ukatak mayiwinaka, ukhamarak qillqatanakat iyaw sawi.',
 'info_fichiers_authent' => 'Chiqpach sirit q\'ipinaka «.htpasswd» ',
-'info_fonctionnement_forum' => 'Aruskipañawit lurt\'xawipa:',
 'info_forum_administrateur' => 'Qutu apnaqirita aruskipañawi',
 'info_forum_interne' => 'manqhat aruskipañawi',
 'info_forum_ouvert' => 'Qamawit ch\'usawj jark\'atapanx Taqpach qillqatanakatakikiw mä aruskipañawiw utji. Ukxarux, Mä aruskipañaw apxatat apnaqirinakatakikiw naktayaña.',
@@ -428,7 +406,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_gauche_numero_auteur' => 'JAKHU QILLQIRINAKA',
 'info_gauche_statistiques_referers' => 'Aka Web qamawix tantanak uñicht\'ayi &lt;i&gt;referers&lt;/i&gt;, qamawinakan chinunak utjkis ukhamarak juman qamawimar apapxi, masurutakiki ukhamarak jichhurutakiki; aka tantaxa sapa pä tunka urasanaka ch\'usaru uskuña.',
 'info_gauche_suivi_forum' => 'Web qamawixa &lt;i&gt;aruskipañawinakat uñch\'ukiwi&lt;/i&gt; mä irnaqañatak qamawimat apnaqawiwa ( janiw aruskipaw qamawxakiti ukhamarak janiw qillqayaw qamawxakiti). Taqpach yanapanaka aruskipañawinakat aka qillqatata ukhamarak apnaqayaraktamwa.',
-'info_gauche_suivi_forum_2' => 'Web qamawixa &lt;i&gt;aruskipañawinakat uñch\'ukiwi&lt;/i&gt; mä irnaqañatak qamawimat apnaqawiwa ( janiw aruskipaw qamawxakiti ukhamarak janiw qillqayaw qamawxakiti). Taqpach yanapanaka aruskipañawinakat aka qillqatata ukhamarak apnaqayaraktamwa.',
 'info_gauche_visiteurs_enregistres' => 'Akanxa jach\'a qamaw utan qillqatanakakiw jikxatasi (aruskipañawinak qillqayasiyampi)',
 'info_generation_miniatures_images' => 'Génération de miniatures des images', # NEW
 'info_gerer_trad' => '¿Jaqukiptaw chinunak apnaqaña?',
@@ -460,11 +437,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_lien_hypertexte' => 'Lien hypertexte :', # NEW
 'info_liens_syndiques_1' => 'liens syndiqués', # NEW
 'info_liens_syndiques_2' => 'sont en attente de validation.', # NEW
-'info_liens_syndiques_3' => 'forums', # NEW
-'info_liens_syndiques_4' => 'sont', # NEW
-'info_liens_syndiques_5' => 'forum', # NEW
-'info_liens_syndiques_6' => 'est', # NEW
-'info_liens_syndiques_7' => 'en attente de validation', # NEW
 'info_liste_redacteurs_connectes' => 'Liste des rédacteurs connectés', # NEW
 'info_login_existant' => 'Ce login existe déjà.', # NEW
 'info_login_trop_court' => 'Login trop court.', # NEW
@@ -482,7 +454,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 		auparavant sur ce site: votre base de données risque d\'être
 		perdue et votre site ne fonctionnera plus.<br />{{Réinstallez les
 		fichiers de SPIP.}}', # NEW
-'info_mode_fonctionnement_defaut_forum_public' => 'Mode de fonctionnement par défaut des forums publics', # NEW
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -531,7 +502,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_numero_article' => 'ARTICLE NUMÉRO :', # NEW
 'info_obligatoire_02' => '[Obligatoire]', # NEW
 'info_option_accepter_visiteurs' => 'Accepter l\'inscription de visiteurs du site public', # NEW
-'info_option_email' => 'Lorsqu\'un visiteur du site poste un nouveau message dans le forum associé à un article, les auteurs de l\'article peuvent être prévenus de ce message par e-mail. Indiquer pour chaque type de forum s\'il faut utiliser cette option.', # NEW
 'info_option_faire_suivre' => 'Faire suivre les messages des forums aux auteurs des articles', # NEW
 'info_option_ne_pas_accepter_visiteurs' => 'Refuser l\'inscription des visiteurs', # NEW
 'info_option_ne_pas_faire_suivre' => 'Ne pas faire suivre les messages des forums', # NEW
@@ -545,7 +515,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_par_nombre_article' => 'par nombre d\'articles', # NEW
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
-'info_pas_de_forum' => 'pas de forum', # NEW
 'info_passe_trop_court' => 'Mot de passe trop court.', # NEW
 'info_passes_identiques' => 'Les deux mots de passe ne sont pas identiques.', # NEW
 'info_pense_bete_ancien' => 'Vos anciens pense-bêtes', # NEW
@@ -590,8 +559,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # NEW
-'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents considérés comme fiables par SPIP, mettre une étoile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'Les mots de ce groupe peuvent être attribués par :', # NEW
 'info_racine_site' => 'Racine du site', # NEW
 'info_recharger_page' => 'Veuillez recharger cette page dans quelques instants.', # NEW
@@ -723,7 +690,6 @@ dans une couleur qui indique leur état :', # NEW
 'intem_redacteur' => 'rédacteur', # NEW
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Accepter les inscriptions', # NEW
-'item_activer_forum_administrateur' => 'Activer le forum des administrateurs', # NEW
 'item_activer_messages_avertissement' => 'Activer les messages d\'avertissement', # NEW
 'item_administrateur_2' => 'administrateur', # NEW
 'item_afficher_calendrier' => 'Afficher dans le calendrier', # NEW
@@ -738,10 +704,7 @@ dans une couleur qui indique leur état :', # NEW
 'item_choix_non_generation_miniature' => 'Ne pas générer de miniatures des images.', # NEW
 'item_choix_redacteurs' => 'les rédacteurs', # NEW
 'item_choix_visiteurs' => 'les visiteurs du site public', # NEW
-'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
-'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Créer les fichiers .htpasswd', # NEW
-'item_desactiver_forum_administrateur' => 'Désactiver le forum des administrateurs', # NEW
 'item_gerer_annuaire_site_web' => 'Gérer un annuaire de sites Web', # NEW
 'item_gerer_statistiques' => 'Gérer les statistiques', # NEW
 'item_limiter_recherche' => 'Limiter la recherche aux informations contenues dans votre site', # NEW
@@ -761,8 +724,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
 'item_non_bloquer_liens_syndiques' => 'Ne pas bloquer les liens issus de la syndication', # NEW
 'item_non_compresseur' => 'Désactiver la compression', # NEW
-'item_non_config_forums_prive_global' => 'Désactiver le forum des rédacteurs', # NEW
-'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'Ne pas créer ces fichiers', # NEW
 'item_non_gerer_annuaire_site_web' => 'Désactiver l\'annuaire de sites Web', # NEW
 'item_non_gerer_statistiques' => 'Ne pas gérer les statistiques', # NEW
@@ -950,7 +911,6 @@ dans une couleur qui indique leur état :', # NEW
 'taille_cache_vide' => 'Le cache est vide.', # NEW
 'taille_repertoire_cache' => 'Taille du répertoire cache', # NEW
 'text_article_propose_publication' => 'Article proposé pour la publication.', # NEW
-'text_article_propose_publication_forum' => 'N\'hésitez pas à donner votre avis grâce au forum attaché à cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Certains serveurs LDAP n\'acceptent aucun accès anonyme. Dans ce cas il faut spécifier un identifiant d\'accès initial afin de pouvoir ensuite rechercher des informations dans l\'annuaire. Dans la plupart des cas néanmoins, les champs suivants pourront être laissés vides.', # NEW
 'texte_admin_effacer_01' => 'Cette commande efface <i>tout</i> le contenu de la base de données,
 y compris <i>tous</i> les accès rédacteurs et administrateurs. Après l\'avoir exécutée, vous devrez lancer la
@@ -1013,7 +973,6 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 'texte_effacer_donnees_indexation' => 'Effacer les données d\'indexation', # NEW
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'texte_en_cours_validation' => 'Les articles et brèves ci-dessous sont proposés à la publication.', # NEW
-'texte_en_cours_validation_forum' => 'N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # NEW
 'texte_enrichir_mise_a_jour' => 'Vous pouvez enrichir la mise en page de votre texte en utilisant des « raccourcis typographiques ».', # NEW
 'texte_fichier_authent' => '<b>SPIP doit-il créer les fichiers spéciaux <tt>.htpasswd</tt>
   et <tt>.htpasswd-admin</tt> dans le répertoire @dossier@ ?</b><p>
@@ -1164,8 +1123,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_cadre_afficher_article' => 'Afficher les articles', # NEW
 'titre_cadre_afficher_traductions' => 'Afficher l\'état des traductions pour les langues suivantes :', # NEW
 'titre_cadre_ajouter_auteur' => 'AJOUTER UN AUTEUR :', # NEW
-'titre_cadre_forum_administrateur' => 'Forum privé des administrateurs', # NEW
-'titre_cadre_forum_interne' => 'Forum interne', # NEW
 'titre_cadre_interieur_rubrique' => 'À l\'intérieur de la rubrique', # NEW
 'titre_cadre_numero_auteur' => 'AUTEUR NUMÉRO', # NEW
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1174,7 +1131,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Configuration du site', # NEW
-'titre_config_forums_prive' => 'Forums de l’espace privé', # NEW
 'titre_config_groupe_mots_cles' => 'Configuration des groupes de mots-clés', # NEW
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configuration du site', # NEW
@@ -1184,7 +1140,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_dernier_article_syndique' => 'Derniers articles syndiqués', # NEW
 'titre_documents_joints' => 'Documents joints', # NEW
 'titre_evolution_visite' => 'Évolution des visites', # NEW
-'titre_forum_suivi' => 'Suivi des forums', # NEW
 'titre_gauche_mots_edit' => 'MOT NUMÉRO :', # NEW
 'titre_groupe_mots' => 'GROUPE DE MOTS :', # NEW
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1213,7 +1168,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_documents_liste' => 'Les documents des rubriques', # NEW
 'titre_page_forum' => 'Forum des administrateurs', # NEW
 'titre_page_forum_envoi' => 'Envoyer un message', # NEW
-'titre_page_forum_suivi' => 'Suivi des forums', # NEW
 'titre_page_index' => 'Votre espace privé', # NEW
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW

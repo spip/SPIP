@@ -80,23 +80,15 @@ Hồ sơ SPIP</a>.', # MODIF
 'bouton_radio_activer_petition' => 'Dùng thỉnh nguyện thư ',
 'bouton_radio_afficher' => 'Hiển thị',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Hiện tên ra',
-'bouton_radio_articles_futurs' => 'chỉ tác động đến bài vở mới (không làm thay đổi database) ',
-'bouton_radio_articles_tous' => 'cho tất cả bài vở.',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'cho tất cả bài vở trừ những bài không có diễn đàn.',
 'bouton_radio_desactiver_messagerie' => 'Không sử dụng thư tín nội bộ',
-'bouton_radio_enregistrement_obligatoire' => 'Phải ghi danh (độc giả phải ghi tên và cho địa chỉ email trước khi gửi thư tín vào diễn đàn).',
 'bouton_radio_envoi_annonces_adresse' => 'Gửi thông báo đến địa chỉ:',
 'bouton_radio_envoi_liste_nouveautes' => 'Gửi các tin tức mới nhất',
-'bouton_radio_moderation_priori' => 'Phải được chấp thuận trước (thư tín chỉ được đăng sau khi được quản trị viên chấp thuận).',
-'bouton_radio_modere_abonnement' => 'ghi danh mới được đăng',
-'bouton_radio_modere_posteriori' => 'đăng trước, xét sau',
 'bouton_radio_modere_priori' => 'xét trước, đăng sau',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Không hiện tên ra  ',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Đừng gửi bất cứ thông báo xã luận nào',
 'bouton_radio_non_syndication' => 'Không có syndication',
 'bouton_radio_pas_petition' => 'Không dùng',
 'bouton_radio_petition_activee' => 'Thỉnh nguyện thư được mở lên',
-'bouton_radio_publication_immediate' => 'Phát hành thư tín ngay lập tức (thư gửi đi sẽ hiện lên ngay, quản trị viên có thể xóa chúng sau đó).',
 'bouton_radio_supprimer_petition' => 'Xóa thỉnh nguyện thư',
 'bouton_radio_syndication' => 'Syndication:',
 'bouton_redirection' => 'CHUYỂN TỚI',
@@ -237,14 +229,12 @@ Hồ sơ SPIP</a>.', # MODIF
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Sửa đề mục này',
 'icone_modifier_site' => 'Sửa liên kết này',
-'icone_poster_message' => 'Gửi một thư tín ',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => 'Thêm một điểm nối vào trang Web khác',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Trở lại',
 'icone_retour_article' => 'Trở về bài trước',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => 'Theo dõi diễn đàn : @nb_forums@ dóng góp',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'xóa bỏ cookie',
 'icone_supprimer_groupe_mots' => 'Xóa NHÓM từ này ',
@@ -263,7 +253,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_1_site' => '1 trang web',
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Bạn có thể cho chạy <b>administration cookie</b> để bạn có thể qua lại giữa trang web công cộng và khu vực riêng.',
-'info_activer_forum_public' => '<i>Để diễn đàn công cộng hoạt động, xin chọn một trong những phương thức điều hợp sau đây</i>',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Nhân vật này có quyền quản trị các đề mục sau đây:',
 'info_admin_gere_toutes_rubriques' => 'Nhân vật này có quyền quản trị <b>tất cả các đề mục</b>.',
@@ -288,7 +277,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_ajouter_rubrique' => 'Thêm một đề mục khác để quản trị:',
 'info_annonce_nouveautes' => 'Thông tin mới nhất',
 'info_anterieur' => 'trước đó',
-'info_appliquer_choix_moderation' => 'Dùng phương thức điều hợp này:',
 'info_article' => 'bài',
 'info_article_2' => 'bài',
 'info_article_a_paraitre' => 'Những bài đã đề ngày để phát hành',
@@ -333,10 +321,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
-'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
-'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
-'info_config_forums_prive_objets' => 'Un forum sous chaque article, brève, site référencé, etc. :', # NEW
 'info_config_suivi' => 'Nếu địa chỉ này là của một mailing list,  bạn cho biết địa chỉ để ghi danh. Địa chỉ ghi danh có thể là URL (thí dụ trang ghi danh qua web), hay địa chỉ email có ghi rõ tựa đề (subject). Thí dụ: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Bạn có thể ghi danh vào mailing list dưới đây, nếu bạn muốn nhận thông tin các bài được nộp vào trang web này.',
 'info_confirmer_passe' => 'Xác nhận lại mật mã mới:',
@@ -367,7 +351,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_derniere_etape' => 'Bước chót: <b>Hoàn tất!</b>',
 'info_derniere_syndication' => 'Xuất bản song hành chót của website này xảy ra vào ',
 'info_derniers_articles_publies' => 'Những bài phát hành mới nhất của bạn',
-'info_desactiver_forum_public' => 'Khóa việc sử dụng diễn đàn công cộng. Diễn đàn công cộng có thể được cho phép theo từng trường hợp một cho các bài vở; tuy nhiên sẽ cấm không được dùng cho các đề mục, tin ngắn, v.v...',
 'info_desactiver_messagerie_personnelle' => 'Bạn có thể tắt/mở hộp thư tín cá nhân của bạn.',
 'info_descriptif' => 'Tóm lược:',
 'info_desinstaller_plugin' => 'deletes the data and deactivates the plugin', # NEW
@@ -378,7 +361,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_email_webmestre' => 'Địa chỉ email của webmaster (không bắt buộc) ',
 'info_entrer_code_alphabet' => 'Cho biết bảng mã sử dụng: ',
 'info_envoi_email_automatique' => 'Gửi email tự động',
-'info_envoi_forum' => 'Gửi thư tín diễn đàn đến tác giả bài viết',
 'info_envoyer_maintenant' => 'Gửi bây giờ',
 'info_etape_suivante' => 'Qua bước kế',
 'info_etape_suivante_1' => 'Bạn có thể qua bước kế tiếp.',
@@ -387,7 +369,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_exportation_base' => 'Đem database ra ngoài vào @archive@',
 'info_facilite_suivi_activite' => 'Để làm nhẹ công việc của Ban Biên Tập, SPIP gửi bằng email các thông báo xin phép đăng và chấp thuận bài vở (đến mailing list của chủ bút chẳng hạn) ',
 'info_fichiers_authent' => 'Hồ sơ xác nhận ".htpasswd"',
-'info_fonctionnement_forum' => 'Thao tác của diễn đàn: ',
 'info_forum_administrateur' => 'Diễn đàn quản trị viên',
 'info_forum_interne' => 'Diễn đàn nội bộ',
 'info_forum_ouvert' => 'Trong vùng riêng, một diễn đàn được mở ra cho mọi chủ bút đã có ghi danh. Bạn có thể tắt/mở một diễn đàn phụ trội dành riêng cho các quản trị viên.',
@@ -402,7 +383,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_gauche_numero_auteur' => 'SỐ THỨ TỰ TÁC GIẢ:',
 'info_gauche_statistiques_referers' => 'Trang này liệt kê danh sách <i>referrers</i>, tức là các trang có chứa điểm nối đến trang của bạn, chỉ cho hôm nay mà thôi: thật ra danh sách này được soạn mỗi 24 giờ.',
 'info_gauche_suivi_forum' => 'Trang <i>Quản trị Diễn Đàn</i> là một phương tiện quản trị của trang web (không dùng để trao đổi hay sửa đổi). Trang này liệt kê tất cả mọi thư tín trong diễn đàn công cộng của bài này và cho phép bạn quản trị những thư tín này.',
-'info_gauche_suivi_forum_2' => 'Trang <i>Quản trị Diễn Đàn</i> là một phương tiện quản trị của trang web (không dùng để trao đổi hay sửa đổi). Trang này liệt kê tất cả mọi thư tín trong diễn đàn công cộng của bài này và cho phép bạn quản trị những thư tín này.',
 'info_gauche_visiteurs_enregistres' => 'Danh sách những người khách ghi danh trong vùng công cộng của trang web (theo diễn đàn)',
 'info_generation_miniatures_images' => 'Hình mẫu xem trước (thumbnail)',
 'info_gerer_trad' => 'Quản trị phần nối dịch thuật?',
@@ -432,11 +412,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_lien_hypertexte' => 'Điểm kết nối:',
 'info_liens_syndiques_1' => 'điểm kết nối syndicated',
 'info_liens_syndiques_2' => 'chờ thông qua.',
-'info_liens_syndiques_3' => ' diễn đàn',
-'info_liens_syndiques_4' => ' là',
-'info_liens_syndiques_5' => 'diễn đàn',
-'info_liens_syndiques_6' => ' là',
-'info_liens_syndiques_7' => 'chờ thông qua.',
 'info_liste_redacteurs_connectes' => 'Danh sách các chủ bút đang nối vào',
 'info_login_existant' => 'Login này đã có.',
 'info_login_trop_court' => 'Login ngắn quá.',
@@ -450,7 +425,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_messagerie_interne' => 'Tin tức nội bộ',
 'info_mise_a_niveau_base' => 'Nâng cấp database SQL',
 'info_mise_a_niveau_base_2' => '{{Cảnh báo!}}Bạn vừa thiết trí một ấn bản SPIP cũ hơn ấn bản thiết trí trước đây: database của bạn có thể gặp rủi ro mất mát và webiste không hoạt động đúng nữa.{{Tái thiết trí các hồ sơ SPIP.}} ',
-'info_mode_fonctionnement_defaut_forum_public' => 'Cách thức điều hành định sẵn của diễn đàn công',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -498,7 +472,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_numero_article' => 'SỐ THỨ TỰ BÀI:',
 'info_obligatoire_02' => '[Bắt buộc] ',
 'info_option_accepter_visiteurs' => 'Cho phép khách ghi danh từ trang công cộng',
-'info_option_email' => 'Khi một vị khách gửi thư tín vào diễn đàn có liên hệ tới một bài viết, tác giả bài viết đó có thể được thông báo qua email. Bạn có muốn dùng đặc điểm này không? ', # MODIF
 'info_option_faire_suivre' => 'Chuyển thư tín trong diễn đàn đến tác giả bài',
 'info_option_ne_pas_accepter_visiteurs' => 'Từ chối khách ghi danh',
 'info_option_ne_pas_faire_suivre' => 'Đừng chuyển thư tín của diễn đàn',
@@ -512,7 +485,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_par_nombre_article' => '(theo số lượng bài) ',
 'info_par_statut' => 'by status', # NEW
 'info_par_tri' => '\'(by @tri@)\'', # NEW
-'info_pas_de_forum' => 'không có diễn đàn',
 'info_passe_trop_court' => 'Mật mã ngắn quá.',
 'info_passes_identiques' => 'Hai mật mã không giống hệt nhau.',
 'info_pense_bete_ancien' => 'Bản ghi nhớ cũ của bạn', # MODIF
@@ -547,8 +519,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # NEW
-'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents considérés comme fiables par SPIP, mettre une étoile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'Những người có quyền ấn định các từ then chốt này:',
 'info_racine_site' => 'Gốc của website',
 'info_recharger_page' => 'Xin nạp lại trang này trong giây lát.',
@@ -680,7 +650,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'intem_redacteur' => 'chủ bút',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Cho phép ghi danh',
-'item_activer_forum_administrateur' => 'Mở diễn đàn quản trị',
 'item_activer_messages_avertissement' => 'Cho phép cảnh báo',
 'item_administrateur_2' => 'quản lý',
 'item_afficher_calendrier' => 'Hiện ra trong lịch',
@@ -695,10 +664,7 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_choix_non_generation_miniature' => 'Đừng tạo ra hình mẫu.',
 'item_choix_redacteurs' => 'chủ bút',
 'item_choix_visiteurs' => 'Khách của website công',
-'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
-'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Lập ra hồ sơ .htpasswd',
-'item_desactiver_forum_administrateur' => 'Khóa diễn đàn quản trị viên',
 'item_gerer_annuaire_site_web' => 'Quản trị thư mục website',
 'item_gerer_statistiques' => 'Quản trị số thống kê',
 'item_limiter_recherche' => 'Giới hạn việc tìm kiếm trong khối lượng tin của website bạn',
@@ -718,8 +684,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_non_autoriser_syndication_integrale' => 'Only send a summary', # NEW
 'item_non_bloquer_liens_syndiques' => 'Không ngăn chặn các điểm nối kết từ syndication',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
-'item_non_config_forums_prive_global' => 'Désactiver le forum des rédacteurs', # NEW
-'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'Đừng lập ra các hồ sơ này',
 'item_non_gerer_annuaire_site_web' => 'Tắt thư mục websites',
 'item_non_gerer_statistiques' => 'Không quản trị các thống kê',
@@ -907,7 +871,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'taille_cache_vide' => 'Cache trống rỗng.',
 'taille_repertoire_cache' => 'Khổ hiện thời của cache',
 'text_article_propose_publication' => 'Bài nộp để chuẩn bị phát hành. Xin đừng ngần ngại cho ý kiến của bạn qua diễn đàn đính kèm theo bài này (ở cuối trang).', # MODIF
-'text_article_propose_publication_forum' => 'N\'hésitez pas à donner votre avis grâce au forum attaché à cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Một số server LDAP không cho phép vào ẩn danh. Trong trường hợp này bạn phải dùng một ký danh đầu tiên để có thể đi tìm tòi dữ kiện trong danh bạ sau đó. Tuy nhiên, trong hầu hết trường hợp, những khoảng sau đây có thể để trống.',
 'texte_admin_effacer_01' => 'Mệnh lệnh này xóa <i>tất cả</i> nội dung của database, luôn cả login/mật mã của các chủ bút và quản lý. Sau khi chạy mệnh lệnh này xong, bạn nên thiết trí lại SPIP để tái lập lại một database mới cùng với login/mật mã của quản trị viên đầu tiên.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
@@ -951,7 +914,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_effacer_donnees_indexation' => 'Xóa dữ kiện indexing',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'texte_en_cours_validation' => 'Bài vở và tin ngắn sau đây được nộp để chờ phát hành. Xin góp ý qua diễn đàn đính kèm. ', # MODIF
-'texte_en_cours_validation_forum' => 'N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # NEW
 'texte_enrichir_mise_a_jour' => 'Bạn có thể trình bày văn bản gọn đẹp hơn bằng cách dùng những <b>«lối xếp bài tắt»</b>.',
 'texte_fichier_authent' => 'SPIP có nên lập ra hồ sơ đặc biệt <tt>.htpasswd</tt> và <tt>.htpasswd-admin</tt> trong thư mục @dossier@?</b><p> Hai hồ sơ này dùng để giới hạn các tác giả và quản lý viên ra/vào các nơi khác trong website.<p>Nếu bạn chưa từng sử dụng đặc tính này, hãy để nguyên lựa chọn này với các giá trị định sẵn (không lập ra hồ sơ). ', # MODIF
 'texte_informations_personnelles_1' => 'Hệ thống sẽ cung cấp cho bạn lối ra/vào website.',
@@ -1052,8 +1014,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_cadre_afficher_article' => 'Liệt kê những bài',
 'titre_cadre_afficher_traductions' => 'Cho xem tình trạng dịch thuật của ngôn ngữ này.',
 'titre_cadre_ajouter_auteur' => 'THÊM MỘT TÁC GIẢ:',
-'titre_cadre_forum_administrateur' => 'Diễn đàn dành riêng cho quản trị viên',
-'titre_cadre_forum_interne' => 'Diễn đàn nội bộ',
 'titre_cadre_interieur_rubrique' => 'Trong đề mục',
 'titre_cadre_numero_auteur' => 'SỐ THỨ TỰ TÁC GIẢ',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1062,7 +1022,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Cấu hình của website',
-'titre_config_forums_prive' => 'Forums de l’espace privé', # NEW
 'titre_config_groupe_mots_cles' => 'Cấu hình các nhóm từ then chốt',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Cấu hình của website',
@@ -1072,7 +1031,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_dernier_article_syndique' => 'Những bài vừa được liên kết',
 'titre_documents_joints' => 'Tài liệu đính kèm',
 'titre_evolution_visite' => 'Thống Kê',
-'titre_forum_suivi' => 'Quản trị Diễn đàn',
 'titre_gauche_mots_edit' => 'SỐ THỨ TỰ CỦA TỪ THEN CHỐT:',
 'titre_groupe_mots' => 'NHÓM TỪ THEN CHỐT:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1101,7 +1059,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_page_documents_liste' => 'Tài liệu của đề mục',
 'titre_page_forum' => 'Diễn đàn cho các quản lý',
 'titre_page_forum_envoi' => 'Gửi thư tín',
-'titre_page_forum_suivi' => 'Quản trị diễn đàn',
 'titre_page_index' => 'Vùng riêng của bạn',
 'titre_page_message_edit' => 'Viết thư tín',
 'titre_page_messagerie' => 'Thư tín của bạn',

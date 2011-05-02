@@ -84,27 +84,15 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'bouton_radio_activer_petition' => 'Az aláírásgyűjtés aktiválása',
 'bouton_radio_afficher' => 'Megjelenítés',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Szerepelni a csatlakozott szerzők listában',
-'bouton_radio_articles_futurs' => 'csak a leendő cikkek részére (nincs hatás az adatbázisban).',
-'bouton_radio_articles_tous' => 'minden cikknek, kivétel nélkül.',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'minden cikknek, kivéve azokat, melynek nincs aktiválva a fóruma.',
 'bouton_radio_desactiver_messagerie' => 'Inaktiválni az üzeneteket',
-'bouton_radio_enregistrement_obligatoire' => 'Beíratkozás kötelező (a
-  felhasználóknak be kell iratkozniuk azzal, hogy adják email címüket mielőbb
-  küldhessenek anyagokat).',
 'bouton_radio_envoi_annonces_adresse' => 'Küldeni a hírdetéseket a következő címre :',
 'bouton_radio_envoi_liste_nouveautes' => 'Küldeni az újdongágok listáját',
-'bouton_radio_moderation_priori' => 'Előzetes moderálás (a
- küldött anyagok csak az adminisztrátorok adta jováhagyást kerülnek nyilvánosságra).',
-'bouton_radio_modere_abonnement' => 'moderálva beiratkozásnál',
-'bouton_radio_modere_posteriori' => 'utólag moderált',
 'bouton_radio_modere_priori' => 'elözőleg moderálva',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nem szerepelni a szerzők listában',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ne legyen szerkesztői hírküldés',
 'bouton_radio_non_syndication' => 'Nincs szindikálás',
 'bouton_radio_pas_petition' => 'Nincs aláírásgyűjtés',
 'bouton_radio_petition_activee' => 'Aláírásgyűjtés aktiválása',
-'bouton_radio_publication_immediate' => 'Üzenetek azonnali publikálása
- (a küldött anyagok már küldéskor megjelennek, az adminisztrátorok későb tudják törölni).',
 'bouton_radio_supprimer_petition' => 'Törölni az aláírásgyűjtést',
 'bouton_radio_syndication' => 'Szindikálás :',
 'bouton_redirection' => 'ÁTIRÁNYÍTÁS',
@@ -246,14 +234,12 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'A rovat módosítása',
 'icone_modifier_site' => 'A honlap módosítása',
-'icone_poster_message' => 'Üzenet küldése',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => 'Új honlap felvétele',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Vissza',
 'icone_retour_article' => 'Vissza a cikkhez',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => 'A nyilvános fórum megfigyelése : @nb_forums@ hozzászlás',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'A hivatkozási süti (cookie) törlése',
 'icone_supprimer_groupe_mots' => 'A csoport törlése',
@@ -272,8 +258,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_1_site' => '1 honlap',
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Egy <b>hivatkozási sütit</b> (cookie) lehet aktiválni, melynek segítségével könnyen át tud menni a nyilvános részről a privát részre.',
-'info_activer_forum_public' => '<i>A nyilvános fórumok aktiválására, válassza az alapértelmezett
- móderálási módjukat:</i>', # MODIF
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Ez az adminisztrátor a következő rovatokat kezelheti :',
 'info_admin_gere_toutes_rubriques' => 'Ez az adminisztrátor az <b>összes rubrikát</b> kezeli.',
@@ -300,7 +284,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_ajouter_rubrique' => 'Újabb adminisztrálandó rovat létrehozása :',
 'info_annonce_nouveautes' => 'Az újdonságok közlése',
 'info_anterieur' => 'elöző',
-'info_appliquer_choix_moderation' => 'Alkalmazni ezt a moderálási választást :',
 'info_article' => 'cikk',
 'info_article_2' => 'cikk',
 'info_article_a_paraitre' => 'utólagosan dátumozott publikálandó cikkek',
@@ -345,10 +328,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
-'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
-'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
-'info_config_forums_prive_objets' => 'Un forum sous chaque article, brève, site référencé, etc. :', # NEW
 'info_config_suivi' => 'Ha ez a cím egy levelező listahoz tartozik, lejjebb azt a címet jelezheti, ahova a résztvevők beíratkozhatnak. Ez a cím akár URL lehet (pl. a beíratkozási oldal a Weben), vagy egy specifikus tárgyat tartalmazó email cím (pl.<tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Beíratkozhat a honlap levelező listájához. Ilyenkor emailben fogja kapni ezeket a cikkeket, híreket, melyeket javasoltak publikálásra.',
 'info_confirmer_passe' => 'Az új jelszó erősítse meg :',
@@ -379,9 +358,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_derniere_etape' => 'Utolsó lépés : <b>Vége van !', # MODIF
 'info_derniere_syndication' => 'A honlap legutolsó szindikálása került sor',
 'info_derniers_articles_publies' => 'Az Ön legutolsó publikált cikkei',
-'info_desactiver_forum_public' => 'A nyilvános fórumok kikapcsolása.
- A nyilvános fórumokat egyenként lehet engedélyezni
- a cikkeknél ; tiltva lesznek a rovatoknál, híreknél, stb.',
 'info_desactiver_messagerie_personnelle' => 'Lehet aktiválni, vagy inaktiválni a személyes levelezést a honlapon.',
 'info_descriptif' => 'Rövid ismertető :',
 'info_desinstaller_plugin' => 'supprime les données et désactive le plugin', # NEW
@@ -392,7 +368,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_email_webmestre' => 'A Webmester email címe (opció)',
 'info_entrer_code_alphabet' => 'Írja be a használandó abécé kódját :',
 'info_envoi_email_automatique' => 'Automatikus email küldés',
-'info_envoi_forum' => 'Fórumok küldése a cikkek szerzőinek',
 'info_envoyer_maintenant' => 'Azonnali küldés',
 'info_etape_suivante' => 'Következő lépés',
 'info_etape_suivante_1' => 'Léphet a következőre.',
@@ -401,7 +376,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_exportation_base' => 'Adatbázis exportálása @archive@ felé',
 'info_facilite_suivi_activite' => 'Ahhoz, hogy könnyebben lehessen figyelemmel követni a honlap szerkesztői tevékenységét, SPIP emailen küldheti például a publikálási, ill. cikkjóváhagyási kéréseket egy szerzői levelezőlistára.',
 'info_fichiers_authent' => 'Azonosítási fájlok « .htpasswd »',
-'info_fonctionnement_forum' => 'Fórum működése :',
 'info_forum_administrateur' => 'adminisztrátorok fóruma',
 'info_forum_interne' => 'belső fórum',
 'info_forum_ouvert' => 'Minden regisztrált szerző részére van fórum a honlap privát részében.Lejjebb aktiválhat egy újabb fórumot, ami csak az adminisztrátoroknak lesz elérhető.',
@@ -418,7 +392,6 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_gauche_numero_auteur' => 'SZERZŐ SZÁMA',
 'info_gauche_statistiques_referers' => 'Ez az oldal a <i>referers</i> listáját mutat, vagyis olyan honlapokat, melyeken az Ön honlapjához hivatkozó linkek találhatók, de csak a tegnapi és a mai napra : ez a lista nullázva van 24 óra után.',
 'info_gauche_suivi_forum' => 'A <i>fórumok megfigyelése</i> nevű oldal  a honlap egyik kezelési eszkőze (és nem pedig egy vitás, vagy szerzői rész). A cikk nyilvános fórumának összes hozzzászólását jeleníti meg és lehetővé teszi e hozzászólások kezelését.', # MODIF
-'info_gauche_suivi_forum_2' => 'A <i>fórumok megfigyelése</i> nevű oldal a honlap egyik kezelési eszkőze (és nem pedig vitás, vagy szerzői rész). A honlap összes (nyilvános, ill. privát rész) fórumainak hozzászólásait jeleníti meg, és ezeknek kezelését teszi lehetővé.', # MODIF
 'info_gauche_visiteurs_enregistres' => 'Itt találhatók a honlap nyilvános részén regisztrált látogatók (beíratkozásos fórumok).',
 'info_generation_miniatures_images' => 'Bélyegképek generálása a képekről',
 'info_gerer_trad' => 'Fordítasi linkek kezelése ?',
@@ -448,11 +421,6 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_lien_hypertexte' => 'Hiperhivatkozás :',
 'info_liens_syndiques_1' => 'Szindikált linkek',
 'info_liens_syndiques_2' => 'jóváhagyás alatt vannak.',
-'info_liens_syndiques_3' => 'fórumok',
-'info_liens_syndiques_4' => 'vannak',
-'info_liens_syndiques_5' => 'fórum',
-'info_liens_syndiques_6' => 'van',
-'info_liens_syndiques_7' => 'jóváhagyás alatt',
 'info_liste_redacteurs_connectes' => 'Jelenleg csatlakozott szerzők listája',
 'info_login_existant' => 'Ez a login már létezik.',
 'info_login_trop_court' => 'A login túl rövid.',
@@ -466,7 +434,6 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_messagerie_interne' => 'Belső levelezés',
 'info_mise_a_niveau_base' => 'A SQL adatbázisa naprakész tétele', # MODIF
 'info_mise_a_niveau_base_2' => '{{Vigyázat!}} Az SPIP fájlait egyik {elöző} változatot telepített fel, mint ami ezelőtt volt ezen a tárhelyen: az adatbázis veszhet, és a honlap többet nem fog működni.<br />{{Telepítse újra az SPIP fájlait.}}', # MODIF
-'info_mode_fonctionnement_defaut_forum_public' => 'Nyilvános fórumok alapértelmezett működési módszere',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -515,8 +482,6 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_numero_article' => 'CIKK SZÁMA :',
 'info_obligatoire_02' => '[Kötelező]',
 'info_option_accepter_visiteurs' => 'A látogatói beíratkozás engedélyezése ',
-'info_option_email' => 'Ha egy látogató üzenetet küld egy új üzenetet a cikkhez csatolt fórumba,
-  akkor a szerzők erről az üzenetről értesülhetnek emailen. Szeretne használni ezt az opciót ?', # MODIF
 'info_option_faire_suivre' => 'A fórumok üzenetei továbbítása a cikkek szerzői felé',
 'info_option_ne_pas_accepter_visiteurs' => 'Látogatói beíratkozás tiltása',
 'info_option_ne_pas_faire_suivre' => 'Nem továbbítani a fórumok üzeneteit',
@@ -530,7 +495,6 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_par_nombre_article' => '(cikk darabszám szerint)', # MODIF
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
-'info_pas_de_forum' => 'Nincs fórum',
 'info_passe_trop_court' => 'A jelszó túl rövid.',
 'info_passes_identiques' => 'A két jelszó nem egyforma.',
 'info_pense_bete_ancien' => 'Az Ön régebbi emlékeztet?i', # MODIF
@@ -571,8 +535,6 @@ a felhasználók automatikus emailt kapnak,
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_question_visiteur_ajout_document_forum' => 'Souhaitez-vous autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forums ?', # MODIF
-'info_question_visiteur_ajout_document_forum_format' => 'Le cas échéant, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # MODIF
 'info_qui_attribue_mot_cle' => 'A csoport szavait hozzárendelheti :',
 'info_racine_site' => 'Honlap teteje',
 'info_recharger_page' => 'Legyen szíves újratölteni ezt az oldalt egy kis idő múlva.',
@@ -704,7 +666,6 @@ ami állapotát jelzi :',
 'intem_redacteur' => 'szerző',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Elfogadni a beíratkozásokat',
-'item_activer_forum_administrateur' => 'Admninisztrátori fórum aktiválása',
 'item_activer_messages_avertissement' => 'A figyelmeztető üzenetek aktiválása',
 'item_administrateur_2' => 'adminisztrátor',
 'item_afficher_calendrier' => 'Megjelenítés a naptárban',
@@ -719,10 +680,7 @@ ami állapotát jelzi :',
 'item_choix_non_generation_miniature' => 'A bélyegképeket nem kell létrehozni.',
 'item_choix_redacteurs' => 'a szerzők',
 'item_choix_visiteurs' => 'a nyilvános honlap látógatói',
-'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
-'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'A .htpasswd tipusú fájlok létrehozása',
-'item_desactiver_forum_administrateur' => 'Az adminisztrátori fórumok inaktiválása',
 'item_gerer_annuaire_site_web' => 'Egy honlap címtár kezelése',
 'item_gerer_statistiques' => 'A statisztikák kezelése',
 'item_limiter_recherche' => 'Keresés a honlapon',
@@ -742,8 +700,6 @@ ami állapotát jelzi :',
 'item_non_autoriser_syndication_integrale' => 'Csak egy összefoglalást átadni',
 'item_non_bloquer_liens_syndiques' => 'Nem blokkolni a szindikálásból eredő linkeket',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
-'item_non_config_forums_prive_global' => 'Désactiver le forum des rédacteurs', # NEW
-'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'Nem kell létrehozni ezeket a fájlokat',
 'item_non_gerer_annuaire_site_web' => 'A honlap címtár inaktiválása',
 'item_non_gerer_statistiques' => 'Nem kell kezelni a statisztikákat',
@@ -931,7 +887,6 @@ ami állapotát jelzi :',
 'taille_cache_vide' => 'A cache üres.',
 'taille_repertoire_cache' => 'Cache mappa mérete',
 'text_article_propose_publication' => 'Publikálásra javasolt cikk. Ne habozzon hozzászólni a cikkhez kötött fórum segítségével (az oldal végén).', # MODIF
-'text_article_propose_publication_forum' => 'N\'hésitez pas à donner votre avis grâce au forum attaché à cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Bizonyos LDAP szerverek nem fogadják el a névtelen hozzáférést. Ilyen esetben egy azonosítót kell jelezni ahhoz, hogy lehessen keresni adatokat a címtárban. Legtöbb esetben azonban, a következő mezők üresen maradhatnak.',
 'texte_admin_effacer_01' => 'Ez a parancs az adatbázis <i>egész</i> tartalmát törli,
 bele értve az <i>összes</i> szerzői, illetve adminisztrátori hozzáférést. Miután futtata, akkor indítani kell az
@@ -988,7 +943,6 @@ SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy 
 'texte_effacer_donnees_indexation' => 'Az indexálási adatok törlése',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'texte_en_cours_validation' => 'Az alábbi híreket és cikkeket javasolták publikálásra. Szóljon hozzá a hozzájuk csatolt fórumokban.', # MODIF
-'texte_en_cours_validation_forum' => 'N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # NEW
 'texte_enrichir_mise_a_jour' => 'A szerkesztést lehet szépíteni a « nyomdai jelek » segítségével.',
 'texte_fichier_authent' => '<b>SPIP-nek kell-e létrehoznia spéciális <tt>.htpasswd</tt>
   és <tt>.htpasswd-admin</tt> fájlokat a @dossier@ mappában?</b><p>
@@ -1118,8 +1072,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_cadre_afficher_article' => 'Cikkek megjelenítése',
 'titre_cadre_afficher_traductions' => 'A fordítások állápotának megjelenítése a következő nyelvekről :',
 'titre_cadre_ajouter_auteur' => 'ÚJ SZERZŐ :',
-'titre_cadre_forum_administrateur' => 'Privát adminisztrátori fórum',
-'titre_cadre_forum_interne' => 'Belső fórum',
 'titre_cadre_interieur_rubrique' => 'A rovaton belül',
 'titre_cadre_numero_auteur' => 'SZERZŐ SZÁMA',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1128,7 +1080,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'A honlap konfigurálása',
-'titre_config_forums_prive' => 'Forums de l’espace privé', # NEW
 'titre_config_groupe_mots_cles' => 'A kulcsszavak csoportjainak konfigurálása',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'A honlap konfigurálása',
@@ -1138,7 +1089,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_dernier_article_syndique' => 'Utolsó szindikált cikkek',
 'titre_documents_joints' => 'Mellékelt dokumentumok',
 'titre_evolution_visite' => 'A látógatások kialakulása',
-'titre_forum_suivi' => 'A fórumok megfigyelése',
 'titre_gauche_mots_edit' => 'SZÓ SZÁMA :',
 'titre_groupe_mots' => 'SZÓCSOPORT :',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1167,7 +1117,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_page_documents_liste' => 'A rovatok dokumentumai',
 'titre_page_forum' => 'Adminisztrátori fórum',
 'titre_page_forum_envoi' => 'Üzenet küldés',
-'titre_page_forum_suivi' => 'Fórumok megfigyelése',
 'titre_page_index' => 'Az Ön privát része',
 'titre_page_message_edit' => 'Üzenet szerkesztése',
 'titre_page_messagerie' => 'Az Ön levelezése',

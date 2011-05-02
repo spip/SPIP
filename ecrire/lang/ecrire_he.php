@@ -78,29 +78,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_activer_petition' => 'להפעיל את העצומה',
 'bouton_radio_afficher' => 'הראה',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'הופיע ברשימת העורכים המחוברים',
-'bouton_radio_articles_futurs' => 'לכתבות הבאות בלבד(ללא פעולה בבסיס (הנתונים',
-'bouton_radio_articles_tous' => 'לכל הכתבות ללא יוצא מן הכלל',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'לכל הכתבות, חוץ מאלה עם הפורומים הפסולים',
 'bouton_radio_desactiver_messagerie' => 'ביטול התכתבות ',
-'bouton_radio_enregistrement_obligatoire' => 'שמירה הכרחית (ה
- משתמשים צריכים להיות מנויים על ידי מסירת כתובת המייל שלהם לפני
- שהם יוכלו לשלוח את תרומותיהם).',
 'bouton_radio_envoi_annonces_adresse' => ':שליחת הודעות לכתובת',
 'bouton_radio_envoi_liste_nouveautes' => 'שלח את רשימת החדשות האחרונה',
-'bouton_radio_moderation_priori' => 'בוררות מוקדמת (ה
- תורמים מופיעים בציבור רק לאחר שהם מאושרים על ידי
- האדמיניסטרטורים).',
-'bouton_radio_modere_abonnement' => 'צמצום על ידי מנוי',
-'bouton_radio_modere_posteriori' => 'צמצום לאחר מכן',
 'bouton_radio_modere_priori' => 'צמצום מראש',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'אל תופיע ברשימת העורכים המחוברים',
 'bouton_radio_non_envoi_annonces_editoriales' => 'אל תשלח הודעות עורך ',
 'bouton_radio_non_syndication' => 'אין סינדיקציה',
 'bouton_radio_pas_petition' => 'אין עצומה',
 'bouton_radio_petition_activee' => 'עצומה מופעלת',
-'bouton_radio_publication_immediate' => 'פרסום מיידי של הודעות
- (התרומות מופיעות מרגע שליחתן, האדמיניסטרטורים יכולים
- למחקן לאחר מכן).',
 'bouton_radio_supprimer_petition' => 'מחק את העצומה',
 'bouton_radio_syndication' => ':סינדיקציה',
 'bouton_redirection' => 'כוון שנית',
@@ -241,14 +227,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_mot' => 'שנה מילת מפתח זאת',
 'icone_modifier_rubrique' => 'תיקון מדור',
 'icone_modifier_site' => 'שנה את האתר הזה',
-'icone_poster_message' => 'כתוב הודעה',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => 'ייחס אתר חדש',
 'icone_relancer_signataire' => 'העלה מחדש את החתום',
 'icone_retour' => 'אחורה',
 'icone_retour_article' => 'אל המאמר הקודם',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => 'מעקב אחר הפורום הכללי: @nb_forums@ תרומה/תרומות',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => '"מחק "קוקיי',
 'icone_supprimer_groupe_mots' => 'מחק קבוצה זו',
@@ -268,8 +252,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'אתה יכול להפעיל <b> עוגיית התכתבות</b>, אשר יאפשר לך
  לעבור בקלות מן האתר הציבורי לאתר הפרטי.',
-'info_activer_forum_public' => 'על מנת להפעיל את הפורומים הציבוריים, אנא בחר את מצב
- הבוררות שלהם כברירת מחדל:</i>',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'המנהל הזה מנהל את המדורים הבאים:',
 'info_admin_gere_toutes_rubriques' => 'המנהל הזה מנהל את <b>כל המדורים</b>.',
@@ -297,7 +279,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajouter_rubrique' => 'הוספת מדור נוסף לניהול:',
 'info_annonce_nouveautes' => 'מודעות אחרונות של חדשות',
 'info_anterieur' => 'הקודם',
-'info_appliquer_choix_moderation' => ':יישם את הבחירה הזו של צמצום',
 'info_article' => 'מאמר',
 'info_article_2' => 'מאמרים',
 'info_article_a_paraitre' => 'המאמרים בעלי תאריך מאוחר שיופיעו',
@@ -342,10 +323,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :/b> מומלץ לבדוק מראש אם המאכסן מכווץ מקודם בצורה סיסטמטית את הסקריפטים php ; לשם כך, אתה יכול למשל להשתמש בשרות הבא : @testgzip@  ',
 'info_compresseur_texte' => 'אם השרת שלך אינו מכווץ אוטומטית את דפי ה-HTML על מנת לשלחם לגולשים, אתה יכול לנסות לאלץ את הכיווץ הזה על מנת להפחית את נפח הדפים המורדים.<b>שים לב</b> : הדבר יכול להאיט בצורה ניכרת כמה מסוגי שרתים ',
-'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
-'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
-'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
-'info_config_forums_prive_objets' => 'Un forum sous chaque article, brève, site référencé, etc. :', # NEW
 'info_config_suivi' => 'אם הכתובת הזאת מותאמת לרשימת דיוור,  אתה יכול לציין להלן את הכתובת איפה שמשתתפי האתר יכולים להרשם. הכתובת הזאת יכולה להיות כתובת כללית (למשל העמוד של רשימת הרישום דרך הרשת), או כתובת דוא"למעונקת עם נושא מסויים (למשל: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'הינך יכול להירשם לרשימת הדיוור של האתר. לאחר הרישום תקבל, על ידי דואר אלקטרוני, את המודעות באשר למאמרים ולמבזקים המוצעים לפרסום.',
 'info_confirmer_passe' => ':אשר סיסמה חדשה',
@@ -376,9 +353,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_derniere_etape' => 'זהו הסתיים!',
 'info_derniere_syndication' => 'הסינדיקציה האחרונה של האתר הזה בוצעה',
 'info_derniers_articles_publies' => 'המאמרים המפורסמים המאוחרים ביותר שלך',
-'info_desactiver_forum_public' => 'ביטול פעילות הפורומים
-הציבוריים. הפורומים הציבוריים יופעלו רק אחרי החלטה
-על המאמרם. לא יהיה אפשר להפעיל אותם על המדורים, על המבזקים וכו\'.',
 'info_desactiver_messagerie_personnelle' => 'הינך יכול לאפשר או לנטרל את ההעברת ההודעות האישיות שלך באתר זה.',
 'info_descriptif' => ':תיאור',
 'info_desinstaller_plugin' => 'supprime les données et désactive le plugin', # NEW
@@ -389,7 +363,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_email_webmestre' => '(כתובת הדוא"ל של מומחה הרשת (רשות',
 'info_entrer_code_alphabet' => ':רשום את הקוד של מערך התווים להשתמש בו',
 'info_envoi_email_automatique' => 'דיוור אוטומטי',
-'info_envoi_forum' => 'שלח פורומים למחברי המאמרים',
 'info_envoyer_maintenant' => 'שלח עכשיו',
 'info_etape_suivante' => 'לך אל השלב הבא',
 'info_etape_suivante_1' => '.הינך יכול לעבור לשלב הבא',
@@ -401,7 +374,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		à une mailing-list des rédacteurs, l\'annonce des demandes de
 		publication et des validations d\'articles.', # NEW
 'info_fichiers_authent' => '".htpasswd" אישור קובץ',
-'info_fonctionnement_forum' => ':פעולת הפורום',
 'info_forum_administrateur' => 'פורום אחראים',
 'info_forum_interne' => 'פורום פנימי',
 'info_forum_ouvert' => 'Dans l\'espace privé du site, un forum est ouvert à tous
@@ -423,7 +395,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_gauche_numero_auteur' => ':מספר מחבר',
 'info_gauche_statistiques_referers' => 'הדף הזה מציג רשימה של <i>referrers</i>, כלומר האתר מכיל קישורים לאתרך, רק להיום: למעשה הרשימה הזאת מתעדכנת כל 24 שעות.',
 'info_gauche_suivi_forum' => 'ה<i>forums follow-up</i> דף הוא לא אמצעי ניהול של אתרך (לא אזור דיון או עריכה). הוא מציג את כל התרומות של הפורום הציבורי של המאמר הזה ומאפשר לך לנהל את התרומות האלה.',
-'info_gauche_suivi_forum_2' => 'ה<i>forums follow-up</i> דף הוא לא אמצעי ניהול של אתרך (לא דיון או עריכה). הוא מציג את כל התרומות של הפורום הציבורי של המאמר הזה ומאפשר לך לנהל את התרומות האלה',
 'info_gauche_visiteurs_enregistres' => 'Vous trouverez ici les visiteurs enregistrés
 	dans l\'espace public du site (forums sur abonnement).', # NEW
 'info_generation_miniatures_images' => 'יוצר תמונות ממוזערות',
@@ -456,11 +427,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_lien_hypertexte' => ':קישור היפר טקסט',
 'info_liens_syndiques_1' => 'קישורים עם סינדיקציה',
 'info_liens_syndiques_2' => '.מחכה למתן תוקף חוקי',
-'info_liens_syndiques_3' => 'פורומים',
-'info_liens_syndiques_4' => ' ',
-'info_liens_syndiques_5' => 'פורום',
-'info_liens_syndiques_6' => ' ',
-'info_liens_syndiques_7' => '.מחכה למתן תוקף חוקי',
 'info_liste_redacteurs_connectes' => 'רשימה של עורכים מחוברים',
 'info_login_existant' => '.שם ההתחברות הזה תפוס',
 'info_login_trop_court' => '.שם ההתחברות יותר מדי קצר',
@@ -478,7 +444,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 		auparavant sur ce site: votre base de données risque d\'être
 		perdue et votre site ne fonctionnera plus.<br />{{Réinstallez les
 		fichiers de SPIP.}}', # NEW
-'info_mode_fonctionnement_defaut_forum_public' => 'פעולה ברירת מחדל של פורומים ציבוריים',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_mot' => 'ערוך את מילה המפתח :',
@@ -527,9 +492,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_numero_article' => ':מספר מאמר',
 'info_obligatoire_02' => '[מהווה חובה]',
 'info_option_accepter_visiteurs' => 'Accepter l\'inscription de visiteurs du site public', # NEW
-'info_option_email' => 'Lorsqu\'un visiteur du site poste un nouveau message dans le forum
-		associé à un article, les auteurs de l\'article peuvent être
-		prévenus de ce message par e-mail. Souhaitez-vous utiliser cette option ?', # MODIF
 'info_option_faire_suivre' => 'להעביר הלאה הודעות פורומים למחברי המאמרים',
 'info_option_ne_pas_accepter_visiteurs' => 'Refuser l\'inscription des visiteurs', # NEW
 'info_option_ne_pas_faire_suivre' => 'אל תעביר הלאה הודעות פורומים',
@@ -543,7 +505,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_par_nombre_article' => '(על ידי מספר מאמרים)',
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
-'info_pas_de_forum' => 'אין פורום',
 'info_passe_trop_court' => '.סיסמה קצרה מדי',
 'info_passes_identiques' => '.שתי הסימאות לא זהות',
 'info_pense_bete_ancien' => 'התזכירים הישנים שלך', # MODIF
@@ -588,8 +549,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # NEW
-'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents considérés comme fiables par SPIP, mettre une étoile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'מילות המפתח בקבוצה זו יכולים להיות מוקצים על ידי:',
 'info_racine_site' => 'בסיס האתר',
 'info_recharger_page' => '.אנא טען מחדש דף זה בעוד כמה רגעים',
@@ -721,7 +680,6 @@ dans une couleur qui indique leur état :', # NEW
 'intem_redacteur' => 'עורך',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Accepter les inscriptions', # NEW
-'item_activer_forum_administrateur' => 'Activer le forum des administrateurs', # NEW
 'item_activer_messages_avertissement' => 'Activer les messages d\'avertissement', # NEW
 'item_administrateur_2' => 'מנהל',
 'item_afficher_calendrier' => 'Afficher dans le calendrier', # NEW
@@ -736,10 +694,7 @@ dans une couleur qui indique leur état :', # NEW
 'item_choix_non_generation_miniature' => 'Ne pas générer de miniatures des images.', # NEW
 'item_choix_redacteurs' => 'les rédacteurs', # NEW
 'item_choix_visiteurs' => 'les visiteurs du site public', # NEW
-'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
-'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Créer les fichiers .htpasswd', # NEW
-'item_desactiver_forum_administrateur' => 'Désactiver le forum des administrateurs', # NEW
 'item_gerer_annuaire_site_web' => 'Gérer un annuaire de sites Web', # NEW
 'item_gerer_statistiques' => 'Gérer les statistiques', # NEW
 'item_limiter_recherche' => 'Limiter la recherche aux informations contenues dans votre site', # NEW
@@ -759,8 +714,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
 'item_non_bloquer_liens_syndiques' => 'Ne pas bloquer les liens issus de la syndication', # NEW
 'item_non_compresseur' => 'Désactiver la compression', # NEW
-'item_non_config_forums_prive_global' => 'Désactiver le forum des rédacteurs', # NEW
-'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'Ne pas créer ces fichiers', # NEW
 'item_non_gerer_annuaire_site_web' => 'Désactiver l\'annuaire de sites Web', # NEW
 'item_non_gerer_statistiques' => 'Ne pas gérer les statistiques', # NEW
@@ -948,7 +901,6 @@ dans une couleur qui indique leur état :', # NEW
 'taille_cache_vide' => 'האתר המטמון ריק.',
 'taille_repertoire_cache' => 'Taille du répertoire cache', # NEW
 'text_article_propose_publication' => 'במאמר מוצע לפרסום.',
-'text_article_propose_publication_forum' => 'N\'hésitez pas à donner votre avis grâce au forum attaché à cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Certains serveurs LDAP n\'acceptent aucun accès anonyme. Dans ce cas il faut spécifier un identifiant d\'accès initial afin de pouvoir ensuite rechercher des informations dans l\'annuaire. Dans la plupart des cas néanmoins, les champs suivants pourront être laissés vides.', # NEW
 'texte_admin_effacer_01' => 'Cette commande efface <i>tout</i> le contenu de la base de données,
 y compris <i>tous</i> les accès rédacteurs et administrateurs. Après l\'avoir exécutée, vous devrez lancer la
@@ -1011,7 +963,6 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 'texte_effacer_donnees_indexation' => 'Effacer les données d\'indexation', # NEW
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'texte_en_cours_validation' => 'Les articles et brèves ci-dessous sont proposés à la publication. N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # MODIF
-'texte_en_cours_validation_forum' => 'N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # NEW
 'texte_enrichir_mise_a_jour' => 'Vous pouvez enrichir la mise en page de votre texte en utilisant des « raccourcis typographiques ».', # NEW
 'texte_fichier_authent' => '<b>SPIP doit-il créer les fichiers spéciaux <tt>.htpasswd</tt>
   et <tt>.htpasswd-admin</tt> dans le répertoire @dossier@ ?</b><p>
@@ -1162,8 +1113,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_cadre_afficher_article' => 'Afficher les articles', # NEW
 'titre_cadre_afficher_traductions' => 'Afficher l\'état des traductions pour les langues suivantes :', # NEW
 'titre_cadre_ajouter_auteur' => 'AJOUTER UN AUTEUR :', # NEW
-'titre_cadre_forum_administrateur' => 'Forum privé des administrateurs', # NEW
-'titre_cadre_forum_interne' => 'Forum interne', # NEW
 'titre_cadre_interieur_rubrique' => 'À l\'intérieur de la rubrique', # NEW
 'titre_cadre_numero_auteur' => 'AUTEUR NUMÉRO', # NEW
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1172,7 +1121,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Configuration du site', # NEW
-'titre_config_forums_prive' => 'Forums de l’espace privé', # NEW
 'titre_config_groupe_mots_cles' => 'Configuration des groupes de mots-clés', # NEW
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configuration du site', # NEW
@@ -1182,7 +1130,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_dernier_article_syndique' => 'Derniers articles syndiqués', # NEW
 'titre_documents_joints' => 'Documents joints', # NEW
 'titre_evolution_visite' => 'Évolution des visites', # NEW
-'titre_forum_suivi' => 'Suivi des forums', # NEW
 'titre_gauche_mots_edit' => 'MOT NUMÉRO :', # NEW
 'titre_groupe_mots' => 'GROUPE DE MOTS :', # NEW
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1211,7 +1158,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_documents_liste' => 'Les documents des rubriques', # NEW
 'titre_page_forum' => 'Forum des administrateurs', # NEW
 'titre_page_forum_envoi' => 'Envoyer un message', # NEW
-'titre_page_forum_suivi' => 'Suivi des forums', # NEW
 'titre_page_index' => 'Votre espace privé', # NEW
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW

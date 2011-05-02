@@ -84,27 +84,15 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'bouton_radio_activer_petition' => '署名機能を使う',
 'bouton_radio_afficher' => '表示',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => '接続中に接続中エディターのリストに表示',
-'bouton_radio_articles_futurs' => 'これから作られる記事のみ（今データベースにある記事はそのまま除外）。',
-'bouton_radio_articles_tous' => 'すべての記事、特例を認めない、全部。',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'すべての記事、掲示板機能を使っていない記事は除く。',
 'bouton_radio_desactiver_messagerie' => 'メッセージ交換を不能にする',
-'bouton_radio_enregistrement_obligatoire' => '必要な登録 (
-  ユーザは、寄稿することができる前に彼らのe-mailアドレスを提供することによって、
-  定期受信すべきです)。',
 'bouton_radio_envoi_annonces_adresse' => 'アナウンスを送信するアドレス:',
 'bouton_radio_envoi_liste_nouveautes' => '最新のニュースリストを送る',
-'bouton_radio_moderation_priori' => '事前に適正検査 (
- 投稿物は、管理者によって適正検査された後、表示されます)。',
-'bouton_radio_modere_abonnement' => '会員だけ投稿可能',
-'bouton_radio_modere_posteriori' => 'コメントを投稿後に検査',
 'bouton_radio_modere_priori' => '検査したコメントのみ表示',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => '接続中のエディターズのリストに表示しない',
 'bouton_radio_non_envoi_annonces_editoriales' => '編集の発表を送らない',
 'bouton_radio_non_syndication' => '供給（シンジケート）しない',
 'bouton_radio_pas_petition' => '署名機能なし',
 'bouton_radio_petition_activee' => '署名機能を使用中',
-'bouton_radio_publication_immediate' => '投稿と同時に表示
-（投稿すると瞬時に表示するため、管理者は投稿を削除することは可能ですが投稿後になるでしょう）。',
 'bouton_radio_supprimer_petition' => '署名機能を無効にする',
 'bouton_radio_syndication' => '供給（シンジケート）:',
 'bouton_redirection' => 'リダイレクト',
@@ -245,14 +233,12 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'このセクションを修正',
 'icone_modifier_site' => 'このサイトを修正',
-'icone_poster_message' => 'メッセージの投稿',
 'icone_publication' => 'Publication', # NEW
 'icone_referencer_nouveau_site' => '新しいサイトを参照する',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => '戻る',
 'icone_retour_article' => '記事に戻る',
 'icone_squelette' => 'Squelettes', # NEW
-'icone_suivi_forum' => '公開掲示板の追跡: @nb_forums@ 投稿',
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'クッキーの削除',
 'icone_supprimer_groupe_mots' => 'このグループを削除',
@@ -272,7 +258,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => '<b>管理者用クッキー</b>を使うことが出来ます。 それによって
 パブリックなサイトとプライベートエリアの切替が簡単に出来ます。',
-'info_activer_forum_public' => '<i>公開掲示板を利用可能にするため、それらの検査方法の標準を選択して下さい:</i>',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'この管理者は下記のセクションを管理:',
 'info_admin_gere_toutes_rubriques' => 'この管理者は<b>すべてのセクション</b>を管理。',
@@ -300,7 +285,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_ajouter_rubrique' => '管理する他のセクションを追加:',
 'info_annonce_nouveautes' => '最新のニュースアナウンス',
 'info_anterieur' => '前候補',
-'info_appliquer_choix_moderation' => 'この検査方法を使う:',
 'info_article' => '記事',
 'info_article_2' => '記事',
 'info_article_a_paraitre' => '公開されている記事の投稿日付',
@@ -345,10 +329,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
-'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
-'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
-'info_config_forums_prive_objets' => 'Un forum sous chaque article, brève, site référencé, etc. :', # NEW
 'info_config_suivi' => 'もしもこのアドレスがメーリングリストのものと一致する場合、サイト参加者が登録可能なアドレスを下記に表示することができます。記すべきアドレスは、URL（例えばWeb経由の登録ページなど）、サブジェクトを特定してあるメールアドレス (たとえば: <tt>@adresse_suivi@?subject=subscribe</tt>)がいいでしょう。',
 'info_config_suivi_explication' => 'あなたはこのサイトに関するメーリングリストに加入することが出来ます。あなたは自動送信メールによって、公表するために提出された記事、ニュースに関するアナウンスを受け取るでしょう。(訳注：フランス語？だらけ）',
 'info_confirmer_passe' => '新しいパスワードの確認:',
@@ -379,7 +359,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_derniere_etape' => '最後のステップ: <b>終わりました！',
 'info_derniere_syndication' => 'このサイトの最後の供給（シンジケーション）が実行されたのは',
 'info_derniers_articles_publies' => 'あなたの最近公開された記事',
-'info_desactiver_forum_public' => '公開掲示板は使わない。公開掲示板は記事ごとに許可する。それらはセクション、ニュース、その他によって禁止できる。',
 'info_desactiver_messagerie_personnelle' => 'あなたはこのサイト上で個人的なメッセージ交換を、するかしないか決められます。',
 'info_descriptif' => '記述:',
 'info_desinstaller_plugin' => 'supprime les données et désactive le plugin', # NEW
@@ -390,7 +369,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_email_webmestre' => 'ウェブマスターのe-mailアドレス（任意）',
 'info_entrer_code_alphabet' => '使っている文字セットのコードを入力してください:',
 'info_envoi_email_automatique' => 'メールを自動送信',
-'info_envoi_forum' => '記事の著者たちに掲示板を送る',
 'info_envoyer_maintenant' => '今送る',
 'info_etape_suivante' => '次のステップに進む',
 'info_etape_suivante_1' => '次のステップに移ることが出来ます。',
@@ -399,7 +377,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_exportation_base' => '@archive@ へデータベースをエキスポート（輸出）',
 'info_facilite_suivi_activite' => 'サイトでの編集活動のお手伝いのために、SPIPは記事公開要求、適性検査の結果など、メールで自動送信することが出来ます。（例えばメーリングリストなど）',
 'info_fichiers_authent' => '認証ファイル ".htpasswd"',
-'info_fonctionnement_forum' => '掲示板の操作:',
 'info_forum_administrateur' => '管理者用の掲示板',
 'info_forum_interne' => '関係者用の掲示板',
 'info_forum_ouvert' => 'サイトのプライベートエリアの中で、掲示板はすべての登録されたエディターに公開されています。
@@ -417,7 +394,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_gauche_numero_auteur' => '著者番号',
 'info_gauche_statistiques_referers' => 'このページは<i>referrers</i>のリストを表示します。つまり昨日と今日の間、あなたのサイトへのリンクを含んだサイト：実際にこのリストは２４時間ごとに初期化されています。',
 'info_gauche_suivi_forum' => '<i>掲示板の続報</i>ページはあなたのサイトの管理道具です。（議論したりエリアを編集できません）。この記事の公開掲示板のすべての貢献を表示して、それら貢献を管理することが可能です。',
-'info_gauche_suivi_forum_2' => '<i>掲示板の続報</i>ページはあなたのサイトの管理道具です。（議論したり編集できません）。この記事の公開掲示板のすべての投稿を表示して、それらの投稿を管理することが可能です。',
 'info_gauche_visiteurs_enregistres' => 'ここでサイトのパブリックなエリアで登録された訪問者たちを探せるでしょう（寄付による掲示板）。',
 'info_generation_miniatures_images' => '画像のサムネイルを生成',
 'info_gerer_trad' => '翻訳版同士リンクし合いますか？',
@@ -447,11 +423,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_lien_hypertexte' => 'リンク:',
 'info_liens_syndiques_1' => '供給（シンジケート）リンク',
 'info_liens_syndiques_2' => '適正検査前。',
-'info_liens_syndiques_3' => '掲示板',
-'info_liens_syndiques_4' => 'are',
-'info_liens_syndiques_5' => '掲示板',
-'info_liens_syndiques_6' => 'is',
-'info_liens_syndiques_7' => '適正検査前。',
 'info_liste_redacteurs_connectes' => '接続中のエディターのリスト',
 'info_login_existant' => 'このIDは既に使われています。',
 'info_login_trop_court' => 'ログインIDが短すぎます。',
@@ -468,7 +439,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
   {古い}バージョンのSPIPのファイルをインストールしました: あなたのデータベースには損失の危機が迫り、
   あなたのサイトはこれ以上適切に動かないでしょう。<br />{{SPIPファイルを
   再インストール。}}',
-'info_mode_fonctionnement_defaut_forum_public' => '公開掲示板の標準の操作方法',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
@@ -516,7 +486,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_numero_article' => '記事番号:',
 'info_obligatoire_02' => '[要求した]',
 'info_option_accepter_visiteurs' => 'パブリックなサイトからの訪問者の登録を許可',
-'info_option_email' => 'サイトの訪問者が、記事に関連している掲示板にメッセージを投稿した時、記事の著者たちにe-mailによってこのメッセージを通知できます。あなたはこのオプションを使いたいですか ？', # MODIF
 'info_option_faire_suivre' => '記事の著者たちへ掲示板のメッセージを送る',
 'info_option_ne_pas_accepter_visiteurs' => '訪問者の登録を断る',
 'info_option_ne_pas_faire_suivre' => '前の掲示板のメッセージを送らない',
@@ -530,7 +499,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_par_nombre_article' => '(記事の数によって)',
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
-'info_pas_de_forum' => '掲示板無し',
 'info_passe_trop_court' => 'パスワードが短すぎます。',
 'info_passes_identiques' => 'その二つのパスワードは同一でない。',
 'info_pense_bete_ancien' => 'あなたの古いメモ類', # MODIF
@@ -566,8 +534,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # NEW
-'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents considérés comme fiables par SPIP, mettre une étoile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'このグループのキーワードは次によって割り当て出来る:',
 'info_racine_site' => 'サイトのルート',
 'info_recharger_page' => 'ちょっとしてからこのページを再読込してください。',
@@ -699,7 +665,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'intem_redacteur' => 'エディター',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => '登録を許可',
-'item_activer_forum_administrateur' => '管理者用の掲示板を作る',
 'item_activer_messages_avertissement' => '警告メッセージを作動させる',
 'item_administrateur_2' => '管理者',
 'item_afficher_calendrier' => 'カレンダーに表示',
@@ -714,10 +679,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_choix_non_generation_miniature' => '画像のサムネイルを作らない。',
 'item_choix_redacteurs' => 'エディターズ',
 'item_choix_visiteurs' => 'パブリックなサイトの訪問者',
-'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
-'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => '.htpasswdファイルを作る',
-'item_desactiver_forum_administrateur' => '管理者用の掲示板を作らない',
 'item_gerer_annuaire_site_web' => 'Webサイトのディレクトリを管理',
 'item_gerer_statistiques' => '統計を管理',
 'item_limiter_recherche' => 'あなたのサイトに含まれている情報に検索を制限する',
@@ -737,8 +699,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_non_autoriser_syndication_integrale' => 'Only send a summary', # NEW
 'item_non_bloquer_liens_syndiques' => '供給（シンジケート）から生じるリンクを妨害しない',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
-'item_non_config_forums_prive_global' => 'Désactiver le forum des rédacteurs', # NEW
-'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'それらファイルを作らない',
 'item_non_gerer_annuaire_site_web' => 'Webサイトディレクトリを無効化',
 'item_non_gerer_statistiques' => '統計を管理しない',
@@ -926,7 +886,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'taille_cache_vide' => 'キャッシュは空です。',
 'taille_repertoire_cache' => '現在のキャッシュの大きさ',
 'text_article_propose_publication' => 'この記事は公開の為に提出されました。この記事の掲示板で、どうぞためらわずに意見してください(ページの一番下)。', # MODIF
-'text_article_propose_publication_forum' => 'N\'hésitez pas à donner votre avis grâce au forum attaché à cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'いくらかのLDAPサーバーはどんな匿名でのアクセスも許しません。こういう場合、あなたはこの後ディレクトリの情報を検索できる最初のIDを入力する必要があります。しかしながら、次のところはほとんどの場合は空欄のままで大丈夫です。',
 'texte_admin_effacer_01' => 'この手順はデータベースの<i>すべての</i> 内容を削除します。<i>すべての</i> エディター達や管理者のアクセスの為の設定も含みます。実行した後、新しいデータベースを作り、管理者が最初にアクセスするため、SPIPを再インストールする必要があります。',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
@@ -970,7 +929,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_effacer_donnees_indexation' => 'インデックスデータを削除',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'texte_en_cours_validation' => '次の記事およびニュースは公表するために送られました。それらの掲示板を通してあなたの意見を述べることを、どうぞためらわないでください。', # MODIF
-'texte_en_cours_validation_forum' => 'N\'hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # NEW
 'texte_enrichir_mise_a_jour' => 'あなたは、«印刷上のショートカット»を使うことによってあなたの文章のレイアウトを豊かにすることができます。',
 'texte_fichier_authent' => '<b>SPIPは<tt>.ecrire/data/</tt>フォルダ内に<tt>.htpasswd</tt>ファイルと<tt>.htpasswd-admin</tt>ファイルを作るべきですか？</b><p>それらのファイルであなたのサイトの他の部分で、著者たちと管理者に限定したアクセスを使うことが出来ます。（例えば、外部の統計プログラムとか）。</p><p>
 もしこのようなファイルを使わないのなら、このオプションを触らないでください（ファイルを作らないでください）。</p>', # MODIF
@@ -1066,8 +1024,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_cadre_afficher_article' => '記事の表示:',
 'titre_cadre_afficher_traductions' => '次の言語のための、翻訳のステータスの表示:',
 'titre_cadre_ajouter_auteur' => '著者の追加:',
-'titre_cadre_forum_administrateur' => '管理者のプライベートな掲示板',
-'titre_cadre_forum_interne' => '関係者用の掲示板',
 'titre_cadre_interieur_rubrique' => 'セクションで',
 'titre_cadre_numero_auteur' => '著者番号',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
@@ -1076,7 +1032,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'サイトの設定',
-'titre_config_forums_prive' => 'Forums de l’espace privé', # NEW
 'titre_config_groupe_mots_cles' => 'キーワードグループの設定',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'サイトの設定',
@@ -1086,7 +1041,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_dernier_article_syndique' => '最新の配給された記事',
 'titre_documents_joints' => '付加されている書類',
 'titre_evolution_visite' => '訪れるレベル',
-'titre_forum_suivi' => '掲示板の続報',
 'titre_gauche_mots_edit' => 'キーワード番号:',
 'titre_groupe_mots' => 'キーワードグループ:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1115,7 +1069,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_page_documents_liste' => '付属した文章',
 'titre_page_forum' => '管理者用の掲示板',
 'titre_page_forum_envoi' => 'メッセージを送る',
-'titre_page_forum_suivi' => '掲示板の続報',
 'titre_page_index' => 'あなたのプライベートエリア',
 'titre_page_message_edit' => 'メッセージを書く',
 'titre_page_messagerie' => 'あなたのメッセージング',
