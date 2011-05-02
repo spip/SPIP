@@ -63,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'verplicht een website opgeven',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'beheerders van de site',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'auteurs',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'bezoekers van de publieke site die een bericht op het forum posten',
 'bouton_checkbox_signature_unique_email' => 'een enkele handtekening per e-mail adres',
 'bouton_checkbox_signature_unique_site' => 'een enkele handtekening per website',
 'bouton_demande_publication' => 'De publicatie van het artikel vragen',
@@ -75,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'EEN BERICHT VERZENDEN',
 'bouton_envoyer_message' => 'Definitief bericht : versturen',
 'bouton_fermer' => 'Sluit',
-'bouton_forum_petition' => 'FORUM &amp; PETITIE', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Wijzigen',
 'bouton_pense_bete' => 'MEMO VOOR PERSOONLIJK GEBRUIK',
@@ -183,9 +181,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Ruimte van plugin naam is niet bepaalde ',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; ontbreekt in het definitiebestand',
 'erreur_plugin_version_manquant' => 'Versie van de ontbrekende plugin',
-
-// F
-'forum_info_original' => 'origineel',
 
 // H
 'htaccess_a_simuler' => 'Waarschuwing: De configuratie van de HTTP-server negeert @htaccess@ bestanden . Te zorgen voor goede beveiliging, moet u deze configuratie te veranderen op dit, of dat de constanten @constantes@ (definieerbaar in het bestand mes_options.php) hebben waarde als directories buiten @document_root@. ', # MODIF
@@ -379,11 +374,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  vergemakkelijken, kan SPIP mails versturen -bijvoorbeeld naar een mailinglist van redacteurs-
  met de aankondiging van vragen voor publicatie of goedgekeurde publicaties.',
 'info_fichiers_authent' => 'Verificatiebestand ".htpasswd"',
-'info_forum_administrateur' => 'Forum van de beheerders',
-'info_forum_interne' => 'intern forum',
-'info_forum_ouvert' => 'Een forum in het private deel van de site is toegankelijk
-  voor alle geregistreerde redacteurs. Hieronder kan je een
-  extra forum aanmaken dat alleen bestemd is voor de beheerders.',
 'info_forum_statistiques' => 'Statistieken van de bezoeken',
 'info_forums_abo_invites' => 'Je site bevat forums met abonnement; bezoekers worden dus op de publieke site verzocht zich in te schrijven.',
 'info_gauche_admin_effacer' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p> Ze geeft toegang tot verschillende onderhoudstaken. Voor sommige taken is een afzonderlijke aanmelding tot de site via FTP vereist.</p>', # MODIF
@@ -398,7 +388,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_messagerie' => 'Het berichtensysteem laat toe om berichten uit te wisselen tussen redacteurs, memo\'s (voor persoonlijk gebruik) te bewaren of aankondigingen te tonen op de beginpagina van de privé-ruimte (als je beheerder bent).',
 'info_gauche_numero_auteur' => 'NUMMER AUTEUR',
 'info_gauche_statistiques_referers' => 'Deze pagina toont een lijst met <i>referers</i>, tw. sites die een koppeling bevatten naar je eigen site, enkel voor vandaag en gisteren: de lijst wordt elke 24 uur opnieuw aangemaakt.',
-'info_gauche_suivi_forum' => 'De pagina voor <i>opvolging van de forums</i> is een plek voor beheer van je site (en dus niet voor discussie of redactie). Alle bijdragen aan het publieke forum aansluitend op die artikel worden getoond en kan je hier beheren.',
 'info_gauche_visiteurs_enregistres' => 'Hier zal je de geregistreerde bezoekers van de
  publieke site vinden (forums met inschrijving).',
 'info_generation_miniatures_images' => 'Aanmaak van de miniatuurafbeeldingen',
@@ -497,7 +486,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_option_accepter_visiteurs' => 'Inschrijving van bezoekers van de publieke site aanvaarden',
 'info_option_faire_suivre' => 'Berichten van het forum bezorgen aan de auteurs van de artikels',
 'info_option_ne_pas_accepter_visiteurs' => 'Inschrijving van bezoekers weigeren',
-'info_option_ne_pas_faire_suivre' => 'Berichten uit de forums niet laten opvolgen',
 'info_options_avancees' => 'GEAVANCEERDE OPTIES',
 'info_ortho_activer' => 'Spellingcontrole inschakelen',
 'info_ortho_desactiver' => 'Spellingcontrole uitschakelen',
@@ -762,7 +750,6 @@ een kleur geeft hun status aan :',
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Voeg nieuwe deelnemer toe',
 'lien_email' => 'e-mail',
-'lien_forum_public' => 'Beheer het publieke forum van dit artikel',
 'lien_mise_a_jour_syndication' => 'Update nu',
 'lien_nom_site' => 'WEBSITENAME:',
 'lien_nouvelle_recuperation' => 'Probeer de gegevens opnieuw te vinden',
@@ -1150,8 +1137,6 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_page_controle_petition' => 'Vervolg van de petities',
 'titre_page_delete_all' => 'Volledige en onomkeerbare verwijdering',
 'titre_page_documents_liste' => 'Documenten van de rubrieken',
-'titre_page_forum' => 'Forum van de beheerders',
-'titre_page_forum_envoi' => 'Een bericht versturen',
 'titre_page_index' => 'Je privé-ruimte',
 'titre_page_message_edit' => 'Een bericht opstellen',
 'titre_page_messagerie' => 'Je brievenbus',
@@ -1159,7 +1144,6 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_page_recherche' => 'Zoekresultaat voor @recherche@ ',
 'titre_page_sites_tous' => 'De referentiesites',
 'titre_page_statistiques' => 'Statistieken per rubriek',
-'titre_page_statistiques_messages_forum' => 'Berichten van forum',
 'titre_page_statistiques_referers' => 'Statistieken (per referer)',
 'titre_page_statistiques_signatures_jour' => 'Aantal handtekeningen per dag',
 'titre_page_statistiques_signatures_mois' => 'Aantal handtekeningen per maand',

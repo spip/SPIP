@@ -64,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'obligatorisk angivelse af websted ',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administratorer af webstedet',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'redaktører',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'besøgende på det offentlige websted når de sender meddelelse til et forum',
 'bouton_checkbox_signature_unique_email' => 'kun en signatur pr. e-mail-adresse',
 'bouton_checkbox_signature_unique_site' => 'kun en signatur pr. websted',
 'bouton_demande_publication' => 'Anmod om at få offentliggjort denne artikel',
@@ -76,7 +75,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'SEND MEDDELELSE',
 'bouton_envoyer_message' => 'Send færdig meddelelse',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM &amp; APPELLER', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Ret',
 'bouton_pense_bete' => 'PERSONLIGT MEMO',
@@ -183,9 +181,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non défini', # NEW
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; manquant dans le fichier de définition', # NEW
 'erreur_plugin_version_manquant' => 'Version du plugin manquante', # NEW
-
-// F
-'forum_info_original' => 'original', # NEW
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -376,9 +371,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_exportation_base' => 'eksporter database til @archive@',
 'info_facilite_suivi_activite' => 'For at lette opfølgning på webstedets redaktionelle aktiviteter sender SPIP e-mails med anmodning om offentliggørelse og godkendelse til f.eks. redaktørens adresseliste.',
 'info_fichiers_authent' => 'Adgangskontrolfil ".htpasswd"',
-'info_forum_administrateur' => 'administratorforum',
-'info_forum_interne' => 'internt forum',
-'info_forum_ouvert' => 'I det private afsnit af webstedet er der et forum åbent for alle registrerede redaktører. Nedenfor kan du åbne et ekstra forum alene for administratorer.',
 'info_forum_statistiques' => 'Besøgsstatistik',
 'info_forums_abo_invites' => 'Your site contains forums by subscription; visitors may register for them on the public site.', # NEW
 'info_gauche_admin_effacer' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en særlig adgangskontrol, der kræver FTP-adgang til siden.', # MODIF
@@ -390,7 +382,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	eller for at vise annonceringer i det private område (hvis du er administrator).',
 'info_gauche_numero_auteur' => 'FORFATTER NUMMER:',
 'info_gauche_statistiques_referers' => 'Denne side viser en oversigt over <i>henvisende sider</i>, dvs. websteder der har linket til dit websted alene i dag. Faktisk nulstilles oversigten med 24 timers mellemrum.',
-'info_gauche_suivi_forum' => '<i>Forumopfølgning</i> er et administrationsværktøj (ikke et diskussions- eller redigeringsområde). Det viser alle indlæg i det offentlige forum knyttet til en bestemt artikel og giver dig mulighed for at administrere indlæggene.',
 'info_gauche_visiteurs_enregistres' => 'Her finder du de besøgende, der er tilmeldt til webstedets offentlige afsnit (fora med tilmelding).',
 'info_generation_miniatures_images' => 'Dannelse af piktogrammer',
 'info_gerer_trad' => 'Danne link til oversættelse?',
@@ -484,7 +475,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_option_accepter_visiteurs' => 'Allow visitors registration from the public site', # NEW
 'info_option_faire_suivre' => 'Videresend meddelelser i forummer til artiklernes forfattere',
 'info_option_ne_pas_accepter_visiteurs' => 'Refuse visitor registration', # NEW
-'info_option_ne_pas_faire_suivre' => 'Videresend ikke meddelelser i forummer',
 'info_options_avancees' => 'AVANCEREDE INDSTILLINGER',
 'info_ortho_activer' => 'Enable the spell checker.', # NEW
 'info_ortho_desactiver' => 'Disable the spell checker.', # NEW
@@ -744,7 +734,6 @@ i en farve, der angiver deres status:',
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Tilføj modtager',
 'lien_email' => 'e-mail',
-'lien_forum_public' => 'Vedligehold denne artikels offentlige forum',
 'lien_mise_a_jour_syndication' => 'Opdater nu',
 'lien_nom_site' => 'WEBSTEDETS NAVN:',
 'lien_nouvelle_recuperation' => 'Forsøg at hente data igen',
@@ -1109,8 +1098,6 @@ i en farve, der angiver deres status:',
 'titre_page_controle_petition' => 'Opfølgning på appel',
 'titre_page_delete_all' => 'total og uigenkaldelig sletning',
 'titre_page_documents_liste' => 'Dokumenter i afsnit',
-'titre_page_forum' => 'Administratorforum',
-'titre_page_forum_envoi' => 'Send meddelelse',
 'titre_page_index' => 'Dit private område',
 'titre_page_message_edit' => 'Skriv meddelelse',
 'titre_page_messagerie' => 'Din meddelelsesfunktion',
@@ -1118,7 +1105,6 @@ i en farve, der angiver deres status:',
 'titre_page_recherche' => 'Søgeresultater @recherche@',
 'titre_page_sites_tous' => 'Links til websteder',
 'titre_page_statistiques' => 'Statistik pr. afsnit',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Statistik (indkommende links)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

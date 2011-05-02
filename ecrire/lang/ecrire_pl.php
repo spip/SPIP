@@ -64,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'Musisz wpisać nazwę strony internetowej',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administratorzy strony',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'redaktorzy',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'odwiedzający publiczną stronę, kiedy umieszczają wiadomość na forum.',
 'bouton_checkbox_signature_unique_email' => 'tylko jeden podpis na adres e-mail',
 'bouton_checkbox_signature_unique_site' => 'tylko jeden podpis na stronę internetową',
 'bouton_demande_publication' => 'Prośba o publikację artykułu',
@@ -76,7 +75,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'WYŚLIJ WIADOMOŚĆ',
 'bouton_envoyer_message' => 'Wiadomość końcowa: wysłano',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM &amp; OGŁOSZENIA', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modyfikuj',
 'bouton_pense_bete' => 'NOTATKA OSOBISTA',
@@ -183,9 +181,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Nie zdefiniowana nazwa rozszerzenia',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; nie ma w pliku definicji',
 'erreur_plugin_version_manquant' => 'Brakuje wersji rozszerzenia',
-
-// F
-'forum_info_original' => 'oryginalny',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # MODIF
@@ -380,11 +375,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
    na listę mailingową redaktorów, informację-zapytanie
   o sprawdzenie i publikację artykułów.',
 'info_fichiers_authent' => 'Plik uwierzytelniający « .htpasswd »',
-'info_forum_administrateur' => 'forum administratorów',
-'info_forum_interne' => 'forum wewnętrzne',
-'info_forum_ouvert' => 'W strefie prywatnej, forum jest otwarte dla wszystkich
-  zarejestrownych redaktorów. Możecie także aktywować
-  dodatkowe forum, zarezerwowane jedynie dla adminów.',
 'info_forum_statistiques' => 'Odwiedź statystyki',
 'info_forums_abo_invites' => 'Twoja strona zawiera formu dostępne po zalogowaniu, zatem odwiedzający powinni się zarejestrować na stronie publicznej.',
 'info_gauche_admin_effacer' => '<b>Ta strona jest dostępna jedynie dla administratorów.<b><p> Daje ona dostęp do funkcji technicznych serwisu. Niektóre spośród nich wymagają wymagają połączenia   z serwerem przez FTP.', # MODIF
@@ -399,7 +389,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_messagerie' => 'Poczta wewnętrzna pozwala Ci wymieniać wiadomości z innymi redaktorami, i zapisywać notki (prywatne) lub publikować ogłoszenia na stronie głównej strefy prywatnej (jeśli jesteś administratorem).',
 'info_gauche_numero_auteur' => 'AUTOR NUMER',
 'info_gauche_statistiques_referers' => 'Ta strona wyświetla listę <i>odnośników</i>, to znaczy stron które zawierają łącza prowadzące do Twojej strony, które ktoś użył wczoraj lub dzisiaj : lista jest zerowana co 24 godziny.',
-'info_gauche_suivi_forum' => 'Strona <i>obserwacji forum</i> jest narzędziem zarządzania stroną (nie, miejscem dyskusji czy redakcji). Wyświetla ona wszystkie komentarze do danego artykułu na forum publicznym i pozwala edytować owe komentarze.',
 'info_gauche_visiteurs_enregistres' => 'Znajdziesz tu gości zarejestrowanych
  w strefie publicznej strony (abonament forum).',
 'info_generation_miniatures_images' => 'Generowanie miniaturek obrazków',
@@ -499,7 +488,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_option_accepter_visiteurs' => 'Zaakceptuj zapisy czytelników Twojej strony',
 'info_option_faire_suivre' => 'Przesłać wiadomości tego forum do autorów artykułów',
 'info_option_ne_pas_accepter_visiteurs' => 'Wyłącz zapisy czytelników serwisu',
-'info_option_ne_pas_faire_suivre' => 'Nie przesyłać wiadomości tego forum',
 'info_options_avancees' => 'OPCJE ZAAWANSOWANE',
 'info_ortho_activer' => 'Włącz korektor ortografii',
 'info_ortho_desactiver' => 'Wyłącz korektor ortografii',
@@ -762,7 +750,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Dodaj uczestnika',
 'lien_email' => 'e-mail',
-'lien_forum_public' => 'Zarządzaj forum publicznym tego artykułu',
 'lien_mise_a_jour_syndication' => 'Uaktualnij teraz',
 'lien_nom_site' => 'NAZWA STRONY:',
 'lien_nouvelle_recuperation' => 'Spróbuj ponowić odtwarzanie danych',
@@ -1145,8 +1132,6 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_page_controle_petition' => 'Archiwum ogłoszeń',
 'titre_page_delete_all' => 'całkowite i nieodwracalne usunięcie',
 'titre_page_documents_liste' => 'Załączniki',
-'titre_page_forum' => 'Forum administratorów',
-'titre_page_forum_envoi' => 'Wyślij wiadomość',
 'titre_page_index' => 'Twój obszar prywatny',
 'titre_page_message_edit' => 'Napisz wiadomość',
 'titre_page_messagerie' => 'Twoje wiadomości',
@@ -1154,7 +1139,6 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_page_recherche' => 'Wyniki wyszukiwania @recherche@',
 'titre_page_sites_tous' => 'Zlinkowane strony',
 'titre_page_statistiques' => 'Statystyki działu',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Statystyki (linki wchodzące)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

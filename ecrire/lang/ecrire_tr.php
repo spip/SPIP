@@ -61,7 +61,6 @@ Bu ithal istemini onaylamayın.
 'bouton_checkbox_indiquer_site' => 'bir Web sitesi belirtmek zorundasınız',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'site yöneticileri',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'yazarlar',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'foruma ileti gönderirken kamusal site ziyaretçileri.',
 'bouton_checkbox_signature_unique_email' => 'e-posta adresi başına sadece bir imza',
 'bouton_checkbox_signature_unique_site' => 'site başına sadece bir imza',
 'bouton_demande_publication' => 'Bu makalenin yayınlanmasını iste',
@@ -73,7 +72,6 @@ Bu ithal istemini onaylamayın.
 'bouton_envoi_message_02' => 'İLETİ YOLLA',
 'bouton_envoyer_message' => 'İletinin son hali : yolla',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM &amp; İMZA KAMPANYASI', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Değiştir',
 'bouton_pense_bete' => 'KiŞiSEL NOT DEFTERi',
@@ -180,9 +178,6 @@ Bu ithal istemini onaylamayın.
 'erreur_plugin_prefix_manquant' => 'Plugin isimlendirme alanı tanımlanmamış',
 'erreur_plugin_tag_plugin_absent' => 'Tanımlama dosyasında &lt;plugin&gt; eksik',
 'erreur_plugin_version_manquant' => 'Plugin\'in uyarlaması eksik',
-
-// F
-'forum_info_original' => 'orijinal',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -375,11 +370,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
                                    SPIP, e-posta ile, örneğin, yayınlama taleplerinin  ve makale
                                    onaylarının duyurusunu editörlerin bir gönderi listesine yollayabilir.',
 'info_fichiers_authent' => ' « .htpasswd » tasdik dosyaları',
-'info_forum_administrateur' => 'Yöneticiler forumu',
-'info_forum_interne' => 'İç forum',
-'info_forum_ouvert' => 'Sitenin özel alanında, tüm kayıtlı yazarlara açık olan bir forum mevcuttur.
-                        Aşağıda, sadece yöneticilere özel, 
-                        fazladan bir forumu çalıştırabilirsiniz.',
 'info_forum_statistiques' => 'Ziyaret istatistikleri',
 'info_forums_abo_invites' => 'Siteniz abone yöntemiyle çalışan forumlar bulunduruyor ; dolayısıyla ziyaretçiler kamu sitesine kaydolmaya davet edilirler.',
 'info_gauche_admin_effacer' => 'Bu sayfa sadece site yetkililerinin erişimine izin verir. Çeşitli teknik bakım işlevlerine erişim vermektedir. Bunlardan bazıları, Web sitesine bir FTP erişimi gerektiren özel bir tasdik sürecine yol açar.', # MODIF
@@ -390,7 +380,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_gauche_messagerie' => 'Mesajlaşma sizin yazarlar ile ileti alışverişinde bulunmanızı, hatırlatmaları saklamanızı (kişisel amaçlı) veya özel alanın erişim sayfasına duyuru koymanızı sağlar (yöneticiyseniz).',
 'info_gauche_numero_auteur' => 'YAZAR NUMARASI',
 'info_gauche_statistiques_referers' => 'Bu sayfa atıflar listesini, yani sizin sitenize yönlendiren bağlar bulunduran sitelerin listesini sunar, ancak sadece dün ve bugün içindir ; bu liste her 24 saatte bir sıfırlanır.',
-'info_gauche_suivi_forum' => '<i>Forumları izleme</i> sayfası sitenizi yönetme aracıdır (sohbet, ya da yazı yazma alanı değildir). Bir makaleye kamu forumundan yapılan tüm katkıları gösterir ve bu katkıları yönetmenizi sağlar.',
 'info_gauche_visiteurs_enregistres' => 'Burada sitenin kamu alanına kaydolan 
                                         ziyaretçileri bulacaksınız (abonelik yöntemiyle yönetilen forumlar).',
 'info_generation_miniatures_images' => 'Mevcut resimlerin minyatürlerinin üretilmesi',
@@ -490,7 +479,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_option_accepter_visiteurs' => 'Kamu sitesi ziyaretçilerinin kaydını kabul et',
 'info_option_faire_suivre' => 'Forum iletilerinin makale yazarlarına gönderilmesi',
 'info_option_ne_pas_accepter_visiteurs' => 'Ziyaretçi kayıdını reddet',
-'info_option_ne_pas_faire_suivre' => 'Forum iletilerini gönderme',
 'info_options_avancees' => 'GELİŞMİŞ SEÇENEKLER',
 'info_ortho_activer' => 'İmlâ kontrolünü çalıştır',
 'info_ortho_desactiver' => 'İmlâ kontrolünü durdur',
@@ -752,7 +740,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Bir katılımcıyı ekle',
 'lien_email' => 'e-posta ',
-'lien_forum_public' => 'Bu makalenin kamu forumunu yönet',
 'lien_mise_a_jour_syndication' => 'Şimdi güncelle',
 'lien_nom_site' => 'SİTENİN ADI : ',
 'lien_nouvelle_recuperation' => 'Verilerin yeniden alınmasını dene',
@@ -1085,8 +1072,6 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_page_controle_petition' => 'Dilekçelerin izlenmesi',
 'titre_page_delete_all' => 'tamamen ve geri alınamaz biçimde silinmesi',
 'titre_page_documents_liste' => 'Bölümlere ait dokümanlar',
-'titre_page_forum' => 'Yöneticiler forumu ',
-'titre_page_forum_envoi' => 'İleti yolla',
 'titre_page_index' => 'Özel alanınız',
 'titre_page_message_edit' => 'Bir ileti oluştur',
 'titre_page_messagerie' => 'İletileriniz',
@@ -1094,7 +1079,6 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_page_recherche' => 'Arama sonuçları  @recherche@ ',
 'titre_page_sites_tous' => 'Atıfta bulunulan siteler ',
 'titre_page_statistiques' => 'Bölümlere göre istatistikler ',
-'titre_page_statistiques_messages_forum' => 'Forum  mesajları',
 'titre_page_statistiques_referers' => 'İstatistikler (giriş bağları)',
 'titre_page_statistiques_signatures_jour' => 'Günlük imza sayısı',
 'titre_page_statistiques_signatures_mois' => 'Aylık imza sayısı',

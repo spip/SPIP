@@ -64,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'Anda harus mengisi nama untuk sebuah situs web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administrator situs',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'editor',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'pengunjung situs umum saat mereka mengirimkan sebuah pesan di forum.',
 'bouton_checkbox_signature_unique_email' => 'hanya satu tanda tangan per alamat e-mail',
 'bouton_checkbox_signature_unique_site' => 'hanya satu tanda tangan per situs web',
 'bouton_demande_publication' => 'Permohonan publikasi artikel ini',
@@ -76,7 +75,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'KIRIM SEBUAH PESAN',
 'bouton_envoyer_message' => 'Pesan terakhir: kirim',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM &amp; PETISI', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modifikasi',
 'bouton_pense_bete' => 'MEMO PRIBADI',
@@ -183,9 +181,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Nama plugin tidak terdefinisi',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; hilang dalam berkas definisi',
 'erreur_plugin_version_manquant' => 'Versi plugin yang hilang',
-
-// F
-'forum_info_original' => 'asli',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -379,11 +374,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   SPIP dapat mengirimkan notifikasi melalui e-mail, ke daftar surat seorang editor,
   sebagai contoh permohonan publikasi dan validasi artikel.',
 'info_fichiers_authent' => 'Berkas ototentikasi ".htpasswd"',
-'info_forum_administrateur' => 'forum administrators',
-'info_forum_interne' => 'forum internal',
-'info_forum_ouvert' => 'Di area pribadi situs, sebuah forum terbuka untuk semua
-		editor yang terdaftar. Di bawah, anda dapat mengaktifkan
-		forum tambahan direservasi untuk para administrator.',
 'info_forum_statistiques' => 'Statistik kunjungan',
 'info_forums_abo_invites' => 'Situs anda berisikan forum-forum berlangganan; pengunjung dapat mendaftarkan diri pada forum-forum tersebut di situs umum.',
 'info_gauche_admin_effacer' => '<b>Hanya administrator yang memiliki akses ke halaman ini.</b><p> Halaman ini memberikan akses ke berbagai tugas pemeliharaan teknis. Beberapa di antaranya memerlukan proses ototentikasi tersendiri yang membutuhkan akses FTP ke situs web.</p>', # MODIF
@@ -395,7 +385,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_messagerie' => 'Sistem pesan mengizinkan anda bertukar pesan dengan sesama editor, untuk menyimpan memo (untuk keperluan pribadi anda) atau untuk menampilkan pengumuman di halaman depan area pribadi (jika anda seorang administrator).',
 'info_gauche_numero_auteur' => 'NOMOR PENULIS:',
 'info_gauche_statistiques_referers' => 'Halaman ini menampilkan daftar <i>pereferensi</I>, yakni situs-situs yang memuat tautan ke situs anda, hanya untuk kemarin dan hari ini: sesungguhnya daftar ini diperbaharui setiap 24 jam.',
-'info_gauche_suivi_forum' => 'Halaman <i>tindak lanjut forum</i> adalah alat bantu pengelola situs anda (bukan area diskusi atau pengeditan). Halaman ini menampilkan semua kontribusi forum umum artikel ini dan mengizinkan anda untuk mengelola kontribusi-kontribusi ini.',
 'info_gauche_visiteurs_enregistres' => 'Anda akan menemukan di sini para pengunjung
 	terdaftar di area umum situs (forum-forum berlangganan).',
 'info_generation_miniatures_images' => 'Membuat gambar-gambar kecil',
@@ -495,7 +484,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_option_accepter_visiteurs' => 'Izinkan registrasi pengunjung dari situs umum',
 'info_option_faire_suivre' => 'Teruskan pesan forum ke penulis artikel',
 'info_option_ne_pas_accepter_visiteurs' => 'Tolak registrasi pengunjung',
-'info_option_ne_pas_faire_suivre' => 'Jangan teruskan pesan forum',
 'info_options_avancees' => 'OPSI-OPSI LANJUTAN',
 'info_ortho_activer' => 'Aktifkan pemeriksa ejaan.',
 'info_ortho_desactiver' => 'Non aktifkan pemeriksa ejaan.',
@@ -759,7 +747,6 @@ dalam warna yang menunjukkan statusnya:',
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Tambahkan seorang peserta',
 'lien_email' => 'e-mail',
-'lien_forum_public' => 'Kelola artikel forum umum ini',
 'lien_mise_a_jour_syndication' => 'Perbaharui sekarang',
 'lien_nom_site' => 'NAMA SITUS:',
 'lien_nouvelle_recuperation' => 'Mencoba melakukan pengambilan data baru',
@@ -1140,8 +1127,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_page_controle_petition' => 'Tindak lanjut petisi',
 'titre_page_delete_all' => 'penghapusan menyeluruh dan tidak dapat dikembalikan lagi',
 'titre_page_documents_liste' => 'Lampiran',
-'titre_page_forum' => 'Forum administrator',
-'titre_page_forum_envoi' => 'Kirim sebuah pesan',
 'titre_page_index' => 'Area pribadi anda',
 'titre_page_message_edit' => 'Tulis sebuah pesan',
 'titre_page_messagerie' => 'Sistem pesan anda',
@@ -1149,7 +1134,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_page_recherche' => 'Hasil pencarian @recherche@',
 'titre_page_sites_tous' => 'Situs-situs referensi',
 'titre_page_statistiques' => 'Statistik berdasarkan bagian',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Statistik (tautan masuk)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

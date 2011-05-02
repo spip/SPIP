@@ -59,7 +59,6 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'bouton_checkbox_indiquer_site' => 'dir musst en Internet-Site uginn',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'd\'Administrateuren vum Site',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'd\'Redakteren',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'd\'Visiteuren vum Site wann se e Message an de Forum schécken.',
 'bouton_checkbox_signature_unique_email' => 'eng eenzeg Ënnerschrëft pro Email-Adress',
 'bouton_checkbox_signature_unique_site' => 'Eng eenzeg Ënnerschrëft pro Internet-Site',
 'bouton_demande_publication' => 'D\'Publikatioun vum Artikel ufroën',
@@ -71,7 +70,6 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'bouton_envoi_message_02' => 'MESSAGE SCHÉCKEN',
 'bouton_envoyer_message' => 'Definitiven Message: schécken',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM &amp; PETITIOUN', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Änneren',
 'bouton_pense_bete' => 'PERSÉINLECH NOTIZ',
@@ -179,9 +177,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'erreur_plugin_prefix_manquant' => 'Namespace vum Plugin nët definéiert',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; fehlt am Definitiouns-Fichier',
 'erreur_plugin_version_manquant' => 'Versioun vum Plugin fehlt',
-
-// F
-'forum_info_original' => 'Original',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -368,9 +363,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_exportation_base' => 'Export vun der Datebank op @archive@',
 'info_facilite_suivi_activite' => 'Fir déi editorial Aktivitéiten ze verfolgen, kann SPIP d\'Demanden fir Artikelen ze publizéieren oder d\'Validatiounen un eng Mailing-Lëscht vun de Redakteren schécken.',
 'info_fichiers_authent' => 'Identifikatiouns-Fichier\'en ".htpasswd"',
-'info_forum_administrateur' => 'Forum vun den Administrateuren',
-'info_forum_interne' => 'Internen Forum',
-'info_forum_ouvert' => 'Am privaten Deel vum Site gët ët e Forum fir d\'Redakteren. Dir kënnt hei nach e Forum, just fir d\'Administrateuren, aschalten.',
 'info_forum_statistiques' => 'Statistik vun de Visiten',
 'info_forums_abo_invites' => 'Äre Site huet Forum\'en wou een sech umelden muss; d\'Visiteuren ginn also agelueden sëch ze enregistréieren.',
 'info_gauche_admin_effacer' => '<b>Dës Säit ass fir déi Responsabel vum Site reservéiert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een sëch iwwer FTP identifizéieren kënnen.</p>', # MODIF
@@ -382,7 +374,6 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gréng; Redakter =
 'info_gauche_messagerie' => 'D\'Messagerie erlaabt Iech Messagen un d\'Redakteren ze schécken, privat Notizen ze maachen oder Annoncen op d\'Startsäit vum privaten Deel ze sätzen (wann dër Administrateur sidd).',
 'info_gauche_numero_auteur' => 'AUTEUR NUMMER',
 'info_gauche_statistiques_referers' => 'Dës Säit weist d\'Lëscht vun de <i>Referer</i>, déi Siten wou e Link op ären Site geklickt gouf, awer nëmmen fir haut: dës Lëscht gët all 24 Stonnen op Null gesaat.',
-'info_gauche_suivi_forum' => 'D\'Säit <i>Gestioun Forum\'en</i> ass fir d\'Maintenance (an nët fir ze diskutéieren oder ze schreiwen). Si weist all d\'Beiträg vum öffentlëche Forum fir dësen Artikel an erlaabt dës Beiträg ze géréieren.',
 'info_gauche_visiteurs_enregistres' => 'Hei sinn déi ageschriwen Visiteuren vum öffentlëchen Deel (Forum\'en op Abonnement).',
 'info_generation_miniatures_images' => 'Miniaturen vun de Biller maachen',
 'info_gerer_trad' => 'Iwwersetzungs-Linken aschalten?',
@@ -474,7 +465,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_option_accepter_visiteurs' => 'D\'Aschreiwung vu Visiteuren unhuelen',
 'info_option_faire_suivre' => 'D\'Messagen vun de Forum\'en un d\'Auteuren vun den Artikelen schécken',
 'info_option_ne_pas_accepter_visiteurs' => 'D\'Aschreiwung vu Visiteuren refuséieren',
-'info_option_ne_pas_faire_suivre' => 'D\'Messagen vun de Forum\'en nët schécken',
 'info_options_avancees' => 'FORTGESCHRËTTEN OPTIOUNEN',
 'info_ortho_activer' => 'D\'Orthographie aschalten',
 'info_ortho_desactiver' => 'D\'Orthographie ausschalten',
@@ -727,7 +717,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'E Mataarbechter derbäi setzen',
 'lien_email' => 'Email',
-'lien_forum_public' => 'Öffentlëche Forum vum Artikel aschalten',
 'lien_mise_a_jour_syndication' => 'Elo updaten',
 'lien_nom_site' => 'NUMM VUM SITE:',
 'lien_nouvelle_recuperation' => 'Eng nei Restauratioun vun den Daten probéieren',
@@ -1047,8 +1036,6 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_page_controle_petition' => 'Suivi vun de Petitiounen',
 'titre_page_delete_all' => 'definitiv an irreversibel läschen',
 'titre_page_documents_liste' => 'D\'Dokumenter aus de Rubriken',
-'titre_page_forum' => 'Forum vun den Administrateuren',
-'titre_page_forum_envoi' => 'Message schécken',
 'titre_page_index' => 'Äre privaten Deel',
 'titre_page_message_edit' => 'E Message schreiwen',
 'titre_page_messagerie' => 'Är Messagerie',
@@ -1056,7 +1043,6 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_page_recherche' => 'Resultater vun der Sich @recherche@',
 'titre_page_sites_tous' => 'Déi referenzéiert Siten',
 'titre_page_statistiques' => 'Statistik pro Rubrik',
-'titre_page_statistiques_messages_forum' => 'Forum-Messagen',
 'titre_page_statistiques_referers' => 'Statistik (Linken déi eran kommen)',
 'titre_page_statistiques_signatures_jour' => 'Zuel vun den Ënnerschrëften pro Dag',
 'titre_page_statistiques_signatures_mois' => 'Zuel vun den Ënnerschrëfte pro Mount',

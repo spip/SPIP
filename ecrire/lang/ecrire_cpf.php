@@ -72,9 +72,6 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 'bouton_checkbox_indiquer_site' => 'a zot lé nésésèr mèt lo non dinn sitwèb',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'Bann komandèr-sitwèb',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'Bann lotèr',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'bann vizitèr lo sit piblik kank zot i espédi inn modékri si inn forom.
-
-',
 'bouton_checkbox_signature_unique_email' => 'inn sèl sinyatir po inn ladrès imèl',
 'bouton_checkbox_signature_unique_site' => 'inn sèl sinyatir po inn sitwèb',
 'bouton_demande_publication' => 'Domann lapiblikasyon lartik-la',
@@ -86,7 +83,6 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 'bouton_envoi_message_02' => 'ANVWA INN MODÉKRI',
 'bouton_envoyer_message' => 'Modékri-la lé fini : anvwa ali',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FOROM &amp; FILSINYATIR', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Sanz',
 'bouton_pense_bete' => 'OUT PROP GARDANTÈT
@@ -214,9 +210,6 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 'erreur_plugin_prefix_manquant' => 'L\'espas pou donn in non pou pligin la li pa défini',
 'erreur_plugin_tag_plugin_absent' => 'Nena pa okinn &lt;plugin&gt; andan fisyé pou la definisyon',
 'erreur_plugin_version_manquant' => 'Nena pa okinn vésyon pou plugin la',
-
-// F
-'forum_info_original' => 'original', # NEW
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -408,9 +401,6 @@ domann dégrèn molaklé-la
 'info_exportation_base' => 'Lésportasyon labaz aprosan  @archive@',
 'info_facilite_suivi_activite' => 'Pou swiv fasilman laktivité léditoryal sir lo sit, SPIP i pé anvwa inn zanons dann fil-imèl pou tout bann zitilizatèr anrozistré. Zanons komsa i kadr tout bann dommand pou lapiblikasyon oubyinsa bann konfirmasyon do dernyé bann zartik.',
 'info_fichiers_authent' => 'Bann fisyé pou lotantifikasyon « .htpasswd »',
-'info_forum_administrateur' => 'forom bann komandèr',
-'info_forum_interne' => 'forom-dodan',
-'info_forum_ouvert' => 'Dann léspas privé lo sit, inn forom lé ouver pou tout bann lotèr. Ou pé osi fé zwé inn ot forom sèlman pou bann komandèr. Anon vwar anba tèrla.',
 'info_forum_statistiques' => 'Bann sifklé pou bann visit',
 'info_forums_abo_invites' => 'Out sit néna bann forom si labonman ; Ifo bann vizitèr li inskri azot si lo sit piblik.',
 'info_gauche_admin_effacer' => '<b>Pazwèb-la, lé sèlman ouvèr pou inndé responsab lo sit.</b><p> Li donn laksé sir bann fonksyon pou lantrotyen tèknik. Nana désertin sak i domann aou fé zwé inn prosésus spésial pou lotantifikasyon. Dann ka-la inn laksé FTP lé néséser pou sanz inn sizé sir lo sit.', # MODIF
@@ -423,7 +413,6 @@ néséser pou sanz inn sizé sir lo sit.', # MODIF
 'info_gauche_messagerie' => 'Kazmodékri-la i permé azot mèt ansanm pou lanvwa inndé modékri antrozot, gard out prop bann gardandèt, ou byin sa ankor : afis tout bann zanons sir pazlakèy dann zéspas privé (si ou lé komandèr).',
 'info_gauche_numero_auteur' => 'LOTÈR NIMÉRO',
 'info_gauche_statistiques_referers' => 'Pazwèb-la i prézant lo fil <i>bann référèr</i>, ou poutoudir lo fil bann sit sak i gatir out prop sitwèb. Rannkont-la lé selman valab po yèr é zordi : fil-la i ropat zéro tout bann 24H.',
-'info_gauche_suivi_forum' => 'Paz <i>swivi bann forom</i> lé inn zoutiy pou zèr an liyn out sit (pa inn léspas kozman o lékritir). Li afis tout bann kontribusyon dann forom-déor pou lartik-minm. Ou pé zèr tout banna dopwi lapazwèb-la.',
 'info_gauche_visiteurs_enregistres' => 'Ou va trouv tèrla bann vizitèr anroziztré sir figirwèb piblik (bann forom sir labonman).',
 'info_generation_miniatures_images' => 'La kréasyon bann miniatyr pou bann zimaz',
 'info_gerer_trad' => 'Zot i vé zèr bann gatir pou bann tradiksyon ?',
@@ -523,7 +512,6 @@ la finn dèt publyé).',
 'info_option_accepter_visiteurs' => 'Asèpt bann vizitèr i inskri azot si lo sit piblik',
 'info_option_faire_suivre' => 'Pou fé swiv bann modékri lo forom a tout bann lotèr bann zartik',
 'info_option_ne_pas_accepter_visiteurs' => 'Arfiz bann vizitèr i inskri azot',
-'info_option_ne_pas_faire_suivre' => 'Anpés fé swiv bann modékri bann forom',
 'info_options_avancees' => 'BANN ZOPSYON AVANSÉ',
 'info_ortho_activer' => 'Roul ron lo korèktèr po la grafi',
 'info_ortho_desactiver' => 'Dégrènn lo korèktèr po la grafi',
@@ -783,7 +771,6 @@ sanm in koulèr i présiz son léta :',
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Azout inn dalon',
 'lien_email' => 'limèl',
-'lien_forum_public' => 'Zèr lo forom piblik dann zartik-la',
 'lien_mise_a_jour_syndication' => 'Arnouvèl astèr toudswit',
 'lien_nom_site' => 'LO NON LO SITWÈB :',
 'lien_nouvelle_recuperation' => 'Esèy inn ot sarzman do bann doné.',
@@ -1133,8 +1120,6 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_page_controle_petition' => 'Pu swiv bann filsinyatir',
 'titre_page_delete_all' => 'Dégrénaz antyé. Lé pa posib artourné komand-la',
 'titre_page_documents_liste' => 'Bann dokiman dann bann rubrik',
-'titre_page_forum' => 'Forom bann komandèr',
-'titre_page_forum_envoi' => 'Anvwa inn modékri',
 'titre_page_index' => 'Out léspas privé',
 'titre_page_message_edit' => 'Ékri inn modékri',
 'titre_page_messagerie' => 'Out kazmodékri',
@@ -1142,7 +1127,6 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_page_recherche' => 'Bann rézilta pou lo rodaz @recherche@',
 'titre_page_sites_tous' => 'Bann sitwèb référansé',
 'titre_page_statistiques' => 'Bann sifklé sanm inn rubrik',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Bann sifklé (bann gatir i rant dann sit)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

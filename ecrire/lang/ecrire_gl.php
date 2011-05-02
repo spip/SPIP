@@ -62,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'indicar obrigatoriamente un web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'o equipo de xestión do web',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'o equipo de redacción',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'visitantes do web público cando escriben unha mensaxe nun foro.',
 'bouton_checkbox_signature_unique_email' => 'unha soa sinatura por cada enderezo de correo-e',
 'bouton_checkbox_signature_unique_site' => 'unha soa sinatura por cada web',
 'bouton_demande_publication' => 'Solicitar a publicación deste artigo',
@@ -74,7 +73,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'ENVIAR UNHA MENSAXE',
 'bouton_envoyer_message' => 'Mensaxe definitiva: enviar',
 'bouton_fermer' => 'Cerrar',
-'bouton_forum_petition' => 'FORO &amp; PETICIÓN',
 'bouton_mettre_a_jour_base' => 'Actualizar a base de datos',
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'NOTA PARA USO PERSOAL',
@@ -182,9 +180,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Espazo de chamada do módulo non definido',
 'erreur_plugin_tag_plugin_absent' => 'Falta o&lt;módulo&gt; no ficheiro de definición',
 'erreur_plugin_version_manquant' => 'Falta a versión do módulo',
-
-// F
-'forum_info_original' => 'orixinal',
 
 // H
 'htaccess_a_simuler' => 'Aviso: a configuración do seu servidor HTTP non ten conta dos ficheiros @htaccess@. Para poder asegurar unha boa seguridade, cómpre que modifique a configuración neste aspecto, ou ben que as constantes @constantes@ (definibles no ficheiro mes_options.php) teñan como valor  cartafoles fóra de @document_root@.',
@@ -378,11 +373,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   a unha lista de enderezos do equipo de redacción, avisos das peticións
   de publicación e de validacións dos artigos.',
 'info_fichiers_authent' => 'Ficheiros de autenticación «.htpasswd»',
-'info_forum_administrateur' => 'foro do equipo de xestión',
-'info_forum_interne' => 'foro interno',
-'info_forum_ouvert' => 'Dentro do espazo privado do web, hai un foro aberto
-  a toda os usuarios rexistrados. Aquí abaixo pode activar un foro
-  complementar, reservado ao equipo de xestión.',
 'info_forum_statistiques' => 'Estatísticas das visitas',
 'info_forums_abo_invites' => 'O seu web dispón de foros para se aboar ; os visitantes están invitados a se rexistrar neles na parte pública do web.',
 'info_gauche_admin_effacer' => '<b>Esta páxina é unicamente accessible para o equipo de xestión do web.</b><p> Dálle acceso a diferentes funcións de mantemento técnico. Algunhas delas dan lugar a procesos de autenticación específicos, que esixen ter un acceso por FTP ao web.</p>',
@@ -396,7 +386,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_numero_auteur' => 'AUTOR/A NÚMERO',
 'info_gauche_statistiques_referers' => 'Esta páxina presenta a lista de <i>referentes</i>,
   ou sexa, os enderezos con ligazóns apuntando a este mesmo web, únicamente para onte e para hoxe; esta lista ponse a cero a cada 24 horas.',
-'info_gauche_suivi_forum' => 'A p&amp;aacute;xina de <i>seguimento dos foros</i> &amp;eeacute; unha ferramenta de xesti&amp;oacute;n do web (e non un espazo de discusi&amp;oacute;n ou de redacci&amp;oacute;n). Mostra todas as contribuci&amp;oacute;ns no foro p&amp;uacute;blico deste artigo e permite xestionar estas contribuci&amp;oacute;ns.',
 'info_gauche_visiteurs_enregistres' => 'aquí atoparás as visitas rexistradas
   no espazo público do web (foros con rexistro).',
 'info_generation_miniatures_images' => 'Creación de miniaturas das imaxes',
@@ -496,7 +485,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_option_accepter_visiteurs' => 'Aceptar a inscrición de visitantes do web público',
 'info_option_faire_suivre' => 'Enviar aviso das mensaxes dos foros ás persoas responsabeis dos artigos',
 'info_option_ne_pas_accepter_visiteurs' => 'Rexeitar a inscrición de visitantes',
-'info_option_ne_pas_faire_suivre' => 'Non enviar avisos das mensaxes dos foros',
 'info_options_avancees' => 'OPCIÓNS AVANZADAS',
 'info_ortho_activer' => 'Activar a comprobación de ortografía.',
 'info_ortho_desactiver' => 'Desactivar a comprobación de ortografía.',
@@ -759,7 +747,6 @@ cunha cor que indica o seu estado :',
 'lien_ajouter_mot' => 'Engadir a palabra-clave',
 'lien_ajouter_participant' => 'Engadir participante',
 'lien_email' => 'correo-e.',
-'lien_forum_public' => 'Xestionar o foro público deste artigo',
 'lien_mise_a_jour_syndication' => 'Poñer ao día agora',
 'lien_nom_site' => 'NOME DO WEB:',
 'lien_nouvelle_recuperation' => 'Tentar unha nova recuperación dos datos',
@@ -1144,8 +1131,6 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'titre_page_controle_petition' => 'Seguimento das peticións',
 'titre_page_delete_all' => 'Supresión total e irreversible',
 'titre_page_documents_liste' => 'Os documentos dos temas',
-'titre_page_forum' => 'Foro de xestión',
-'titre_page_forum_envoi' => 'Enviar unha mensaxe',
 'titre_page_index' => 'O teu espazo privado',
 'titre_page_message_edit' => 'Redactar unha mensaxe',
 'titre_page_messagerie' => 'A túa mensaxería',
@@ -1153,7 +1138,6 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'titre_page_recherche' => 'Resultados da procura de @recherche@',
 'titre_page_sites_tous' => 'Os webs referidos',
 'titre_page_statistiques' => 'Estatísticas por temas',
-'titre_page_statistiques_messages_forum' => 'Mensaxes de foro',
 'titre_page_statistiques_referers' => 'Estatísticas (ligazóns entrantes)',
 'titre_page_statistiques_signatures_jour' => 'Número de sinaturas por día',
 'titre_page_statistiques_signatures_mois' => 'Número de sinaturas por mes',

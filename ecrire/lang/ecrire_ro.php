@@ -56,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'indicare obligatorie a unui site Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administratorii site-ului',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'redactorii',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'vizitatorii site-ului public când postează un mesaj într-un forum.',
 'bouton_checkbox_signature_unique_email' => 'o singură semnătura pe adresă email',
 'bouton_checkbox_signature_unique_site' => 'o singură semnătură pe site Web',
 'bouton_demande_publication' => 'Cereţi publicarea articolului',
@@ -68,7 +67,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'TRIMITEŢI UN MESAJ',
 'bouton_envoyer_message' => 'Mesajul definitiv: trimiteţi',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM &amp; PETIŢIE', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modificaţi',
 'bouton_pense_bete' => 'CIORNĂ PENTRU UZ PERSONAL',
@@ -176,9 +174,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Spaţiul de nume a plugin-ului nedefinit',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; lipsă în fişierul de definiţii',
 'erreur_plugin_version_manquant' => 'Versiunea plugin-ului lipsă',
-
-// F
-'forum_info_original' => 'original',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # MODIF
@@ -367,10 +362,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_exportation_base' => 'exportul bazei de date către @archive@',
 'info_facilite_suivi_activite' => 'Pentru a uşura urmărirea activităţii editoriale a site-ului, SPIP poate trimite prin email cererile de publicare şi de validare a articolelor. De exemplu, destinatarul poate fi o listă de distribuţie a redacţiei.',
 'info_fichiers_authent' => 'Fişiere de autentificare « .htpasswd »',
-'info_forum_administrateur' => 'forum-ul administratorilor',
-'info_forum_interne' => 'forum intern',
-'info_forum_ouvert' => 'În spaţiul privat, un forum este deschis pentru toţi redactorii înregistraţi.
-   Puteţi activa mai jos un forum suplimentar, rezervat doar administratorilor.',
 'info_forum_statistiques' => 'Statisticile vizitelor',
 'info_forums_abo_invites' => 'Site-ul dumneavoastră are forum-uri cu abonament ; vizitatorii sunt, aşadar, invitaţi să se înregistreze pe site-ul public.',
 'info_gauche_admin_effacer' => '<b>Această pagină este accesibilă doar responsabililor acestui site</b><br /> Ea dă acces la diverse funcţii de întreţinere tehnică. Unele dintre aceste funcţii cer un proces de autentificare specific, de exemplu să aveţi un acces FTP la site-ul Web.', # MODIF
@@ -383,7 +374,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_messagerie' => 'Mesageria vă permite să schimbaţi mesaje între redactori, să conservaţi ciorne (pentru folosul dumneavoastră personal) sau pentru a afişa anunţuri pe pagina de gardă a spaţiului privat (dacă sunteţi administrator).',
 'info_gauche_numero_auteur' => 'AUTORUL NUMĂRUL',
 'info_gauche_statistiques_referers' => 'Această pagină prezintă lista <i>referers</i>, adică a site-urilor care conţin legături către acest site, doar pentru ieri şi astăzi ; această listă este re-iniţializată la fiecare 24 de ore.',
-'info_gauche_suivi_forum' => '<i>Pagina de urmărire a forum-urilor</i> este o unealtă de gestiune a site-ului (nu un spaţiu de discuţii sau de redactare). Această pagină afişează toate contribuţiile la forum-ul public al acestui articol şi vă permite să gestionaţi aceste contribuţii.',
 'info_gauche_visiteurs_enregistres' => 'Veţi găsi aici vizitatorii înregistraţi
 în spaţiul public al site-ului (forum-urile pe bază de abonament).',
 'info_generation_miniatures_images' => 'Generarea de miniaturi ale imaginilor',
@@ -482,7 +472,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_option_accepter_visiteurs' => 'Acceptaţi înscrierea vizitatorilor site-ului public',
 'info_option_faire_suivre' => 'Faceţi ca mesajele forum-urilor să fie trimise autorilor articolelor',
 'info_option_ne_pas_accepter_visiteurs' => 'Refuzaţi înscrierea vizitatorilor',
-'info_option_ne_pas_faire_suivre' => 'Faceţi ca mesajele forum-urilor să nu fie trimise autorilor articolelor',
 'info_options_avancees' => 'OPŢIUNI AVANSATE',
 'info_ortho_activer' => 'Activaţi verificatorul ortografic',
 'info_ortho_desactiver' => 'Dezactivaţi verificatorul ortografic',
@@ -747,7 +736,6 @@ cu o culoare care le indică starea :',
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Adăugaţi un participant',
 'lien_email' => 'email',
-'lien_forum_public' => 'Gestionaţi forum-ul public al acestui articol',
 'lien_mise_a_jour_syndication' => 'Aduceţi la zi acum',
 'lien_nom_site' => 'NUME SITE :',
 'lien_nouvelle_recuperation' => 'Încercaţi încă o dată recuperarea datelor',
@@ -1113,8 +1101,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_page_controle_petition' => 'Urmărirea petiţiilor',
 'titre_page_delete_all' => 'ştergere totală şi ireversibilă',
 'titre_page_documents_liste' => 'Documentele rubricilor',
-'titre_page_forum' => 'Forum-ul administratorilor',
-'titre_page_forum_envoi' => 'Trimiteţi un mesaj',
 'titre_page_index' => 'Spaţiul dumneavoastră privat',
 'titre_page_message_edit' => 'Scrieţi un mesaj',
 'titre_page_messagerie' => 'Mesageria dumneavoastră',
@@ -1122,7 +1108,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_page_recherche' => 'Rezultatele căutării @recherche@',
 'titre_page_sites_tous' => 'Site-urile referenţiate',
 'titre_page_statistiques' => 'Statisticile pe rubrici',
-'titre_page_statistiques_messages_forum' => 'Mesajele forum-ului',
 'titre_page_statistiques_referers' => 'Statistici (legături în intrare)',
 'titre_page_statistiques_signatures_jour' => 'Număr de semnături pe zi',
 'titre_page_statistiques_signatures_mois' => 'Număr de semnături pe lună',

@@ -62,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => '您必须输入站点的名字',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => '站点管理员',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => '编辑者',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => '在论坛上发表消息的站点访问者.',
 'bouton_checkbox_signature_unique_email' => '一个邮件地址只能有一个签名',
 'bouton_checkbox_signature_unique_site' => '一个站点只能有一个签名',
 'bouton_demande_publication' => '请求发表文章',
@@ -74,7 +73,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => '发消息',
 'bouton_envoyer_message' => '最后消息:发送',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => '论坛和请求', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => '修改',
 'bouton_pense_bete' => '个人备注',
@@ -181,9 +179,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non défini', # NEW
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; manquant dans le fichier de définition', # NEW
 'erreur_plugin_version_manquant' => 'Version du plugin manquante', # NEW
-
-// F
-'forum_info_original' => 'original', # NEW
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -376,11 +371,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   公共请求和文章
   确认的声明.',
 'info_fichiers_authent' => '认证文件 ".htpasswd"',
-'info_forum_administrateur' => '管理者论坛',
-'info_forum_interne' => '内部论坛',
-'info_forum_ouvert' => '站点的私有区, 论坛对
-  所有注册用户开放. 下面, 你可以激活一个为管理员
-  保留的论坛.',
 'info_forum_statistiques' => '访问统计',
 'info_forums_abo_invites' => '您的网站包含要求注册的公共论坛；所以公共网站的访客将被要求注册。',
 'info_gauche_admin_effacer' => '<MODIF><b>只有管理员才有权访问该页.</b><p> 它提供访问不同的技术维护任务. 其中有些需要特殊认证，必须通过FTP访问站点.', # MODIF
@@ -396,7 +386,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_messagerie' => '消息允许你在作者中交换消息, 为保护备忘录(给个人用的) 或在主页私有区上显示声明(如果你是管理者).',
 'info_gauche_numero_auteur' => '作者号:',
 'info_gauche_statistiques_referers' => '<MODIF>页面显示 <i>引用</i>列表, 例如. 包含你站点的链接, 只有今天: 列表每24小时都要更新.',
-'info_gauche_suivi_forum' => ' <i>论坛跟踪</i> 页是你站点的一个管理工具 (不是讨论或编辑区). 它显示这篇文章的所有论坛出版物并允许你管理这些出版物.', # MODIF
 'info_gauche_visiteurs_enregistres' => '在这儿你将找到在站点公共区
  注册的访问者(订阅论坛).',
 'info_generation_miniatures_images' => '产生像册',
@@ -496,7 +485,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_option_accepter_visiteurs' => '允许公共网站访问者注册。',
 'info_option_faire_suivre' => '转寄论坛消息给作者',
 'info_option_ne_pas_accepter_visiteurs' => '拒绝公共网站访问者注册。',
-'info_option_ne_pas_faire_suivre' => '不要转寄论坛消息',
 'info_options_avancees' => '高级选项',
 'info_ortho_activer' => '使用拼写检查功能',
 'info_ortho_desactiver' => '不使用拼写检查功能',
@@ -760,7 +748,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => '添加一个新的参与者',
 'lien_email' => '电子邮件',
-'lien_forum_public' => '管理文章的公共论坛',
 'lien_mise_a_jour_syndication' => '现在更新',
 'lien_nom_site' => '站点名:',
 'lien_nouvelle_recuperation' => '试着重新获取数据',
@@ -1153,8 +1140,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_controle_petition' => '跟踪请求',
 'titre_page_delete_all' => '所有和不能撤回的删除',
 'titre_page_documents_liste' => '专栏文档',
-'titre_page_forum' => '管理论坛',
-'titre_page_forum_envoi' => '发送消息',
 'titre_page_index' => '您的私有区',
 'titre_page_message_edit' => '写消息',
 'titre_page_messagerie' => '您的消息',
@@ -1162,7 +1147,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_recherche' => '搜索结果@recherche@',
 'titre_page_sites_tous' => '参考站点',
 'titre_page_statistiques' => '按专栏统计',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => '统计(引入链接)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

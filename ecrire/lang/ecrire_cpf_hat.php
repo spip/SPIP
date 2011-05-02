@@ -63,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'fòk enskri yon sitwèb',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'komandè yon sit la',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'redaktè yo',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'vizitè yo sou sit piblik kan jan y p mèt yon mesaj andan yon fowom.',
 'bouton_checkbox_signature_unique_email' => 'yon sèl siyati pou yon ladrès imèl ',
 'bouton_checkbox_signature_unique_site' => 'yon sèl siyati pou yon sitwèb',
 'bouton_demande_publication' => 'Mann atik la i parèt',
@@ -75,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'VOYE YON MESAJ',
 'bouton_envoyer_message' => 'Mesaj se bon : voye',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FOWOM &amp; PETISYON', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Chanje',
 'bouton_pense_bete' => 'RAPLE-W POU W MEM',
@@ -185,9 +183,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non défini', # NEW
 'erreur_plugin_tag_plugin_absent' => '&lt;Pa oken plegin an &gt; nan fichye pou définisyon',
 'erreur_plugin_version_manquant' => 'Pa oken vesyon plegin an',
-
-// F
-'forum_info_original' => 'original', # NEW
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -381,11 +376,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 , SPIP kapab
  voye tout domann osnon konfimasyon pou fè parèt yon atik pa egsanp nan list-limèl pou redaktè.',
 'info_fichiers_authent' => 'Fichye yo pou lotantifikasyon « .htpasswd »',
-'info_forum_administrateur' => 'fowom pou komandè yo',
-'info_forum_interne' => 'fowom andan sit la',
-'info_forum_ouvert' => 'Nan lespas privé sit-la, yon fowom gen ouvè pou tout moun
- ki rédaktè enskri. W kapab mèt, isit-anba, yon fowom
- anplis, ki résèvé pou komandé yo sèlman.',
 'info_forum_statistiques' => 'Estatistik tout vizit',
 'info_forums_abo_invites' => 'Sit w genyen fowom sou abonman ; vizitè   se invite enskri ali sou sit piblik.',
 'info_gauche_admin_effacer' => '<b>Responsab sit-la selman kapab fè lekti paj-la.</b><p> Li pèrmè laksé pou diféran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laksé FTP pou sitweb-la.</p>', # MODIF
@@ -398,7 +388,6 @@ Koulè imaj rannkont stati yo (komandè = vèr; redaktè = jon).',
 'info_gauche_messagerie' => 'Mesajri rann w kapab voye tout mesaj ant redaktè, gade pansbèt (pèsonel) osnon fè parèt annons sou paj akey nan espas prive (si w se komandè).',
 'info_gauche_numero_auteur' => 'LOTE NIMEWO',
 'info_gauche_statistiques_referers' => 'Paj-la se paj ki done lis <i>referers</i>, se dir tout sit sa-yo ki genyen lyen ki rive sou sit w, yer ak jodila ; li repar zéwo tout 24èr la.',
-'info_gauche_suivi_forum' => 'Paj <i>swivi fowom yo</i> se outiy pou sit ou (kontrè yon espas pou soutni ek ekri ant zot itlizatè). Li afich tout patisipasyon nan fowom piblik yon atik ak rann w kapab okipe yo.',
 'info_gauche_visiteurs_enregistres' => 'Ou ka rannkont isit vizitè yo ki enskri
  nan espas piblik sit sa-a (fowom sou labonman).',
 'info_generation_miniatures_images' => 'Kreyasyon piti imaj la',
@@ -498,7 +487,6 @@ pa mache mèm.<br />{{Fòk w instal ankò
 'info_option_accepter_visiteurs' => 'Asepte vizitè yo enskri y sou sit piblik',
 'info_option_faire_suivre' => 'Voye mesaj yo nan fowom yo pou lotè sa-yo tout atik ki komanté',
 'info_option_ne_pas_accepter_visiteurs' => 'Refize lenskripsyon vizitè yo',
-'info_option_ne_pas_faire_suivre' => 'Voye pa mesaj fowom yo ',
 'info_options_avancees' => 'KEK OPSYON PWESI ',
 'info_ortho_activer' => 'Fè mache vérifikatè lotograf',
 'info_ortho_desactiver' => 'Suspann vérifikatè lotograf',
@@ -762,7 +750,6 @@ nan yon koulè ki bay lestati ali :',
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Ajoute yon patisipan',
 'lien_email' => 'limèl',
-'lien_forum_public' => 'Zèr fowom piblik atik la',
 'lien_mise_a_jour_syndication' => 'arnouvèl kounye-a',
 'lien_nom_site' => 'KOUMAN SIT-LA RELE :',
 'lien_nouvelle_recuperation' => 'esey yon lòt rékipérasyon tout done sa-yo',
@@ -1154,8 +1141,6 @@ ou nan dékripsyon atik sa-yo
 'titre_page_controle_petition' => 'Swivi petisyon yo',
 'titre_page_delete_all' => 'krazman konple ke pa posib pou anile',
 'titre_page_documents_liste' => 'Dokiman yo nan ribrik ',
-'titre_page_forum' => 'Fowom komandè yo',
-'titre_page_forum_envoi' => 'Voye yon mesaj',
 'titre_page_index' => 'Espas prive a w',
 'titre_page_message_edit' => 'Ekri yon mesaj',
 'titre_page_messagerie' => 'Ou kazmodekri ',
@@ -1163,7 +1148,6 @@ ou nan dékripsyon atik sa-yo
 'titre_page_recherche' => 'Rezilta chèche @recherche@',
 'titre_page_sites_tous' => 'Tout sit referanse yo',
 'titre_page_statistiques' => 'Estatsitik pou tout pati yo nan sit sa a',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Rézilta estatistik (lyen sa-yo ka rive)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

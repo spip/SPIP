@@ -66,7 +66,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'Mä Web qamawi uñachayapunima',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'qamawit apnaqirinaka',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'Qillqirinaka',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'jach\'a qamaw utat tumpirinaka, aruskipañanakan aruskipapxi ukja',
 'bouton_checkbox_signature_unique_email' => 'aruskipayirit mä iyawsaki',
 'bouton_checkbox_signature_unique_site' => 'Web qamawit mä iyawsaki',
 'bouton_demande_publication' => 'Aka qillqat yatiyañ mayiña',
@@ -78,7 +77,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'MÄ YATIYAWI',
 'bouton_envoyer_message' => 'Qhananchat yatiyaw: apayaña',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'ARUSKIPAÑA &amp; IYAWSATANAKA', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Mayjachaña',
 'bouton_pense_bete' => 'SAPA MAYNIT AMTAYIRI',
@@ -189,9 +187,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Sutinakat ch\'usawj pluguin ukat jan qhanstata',
 'erreur_plugin_tag_plugin_absent' => 'Janiw utjkiti &lt;plugin&gt; qhanstayawin q\'ipita',
 'erreur_plugin_version_manquant' => 'Pluguin ukat uñjata jan utjkiti',
-
-// F
-'forum_info_original' => 'nayriri',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -386,9 +381,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_exportation_base' => 'base ukax apsusispaw @archive@ uka tuqiru',
 'info_facilite_suivi_activite' => 'Qillqa lurawit uñch\'ukiw jasachañatakix, SPIP ukax aruskipayirit apayaspa, mä tanta qillqirinakar ukhama yatiyatawinakataki yatiyawinaka ukatak mayiwinaka, ukhamarak qillqatanakat iyaw sawi.',
 'info_fichiers_authent' => 'Chiqpach sirit q\'ipinaka «.htpasswd» ',
-'info_forum_administrateur' => 'Qutu apnaqirita aruskipañawi',
-'info_forum_interne' => 'manqhat aruskipañawi',
-'info_forum_ouvert' => 'Qamawit ch\'usawj jark\'atapanx Taqpach qillqatanakatakikiw mä aruskipañawiw utji. Ukxarux, Mä aruskipañaw apxatat apnaqirinakatakikiw naktayaña.',
 'info_forum_statistiques' => 'Tumpatanakat tantiyirinaka',
 'info_forums_abo_invites' => 'Qamawimax aruskipañawinakaniw qullqimp qillqatanakatakikiwa; Aka jach\'a uta qamawinxa tumpirinakaru qillqayasiñataki jawthapiyi.',
 'info_gauche_admin_effacer' => '&lt;b&gt;Aka Web qamawix qamawit apnaqirinakatakikiwa.&lt;/b&gt;&lt;p&gt; Mantayiwa kunayman uñjawinakar  askichañataki. Yaqhipanakax', # MODIF
@@ -404,7 +396,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 ',
 'info_gauche_numero_auteur' => 'JAKHU QILLQIRINAKA',
 'info_gauche_statistiques_referers' => 'Aka Web qamawix tantanak uñicht\'ayi &lt;i&gt;referers&lt;/i&gt;, qamawinakan chinunak utjkis ukhamarak juman qamawimar apapxi, masurutakiki ukhamarak jichhurutakiki; aka tantaxa sapa pä tunka urasanaka ch\'usaru uskuña.',
-'info_gauche_suivi_forum' => 'Web qamawixa &lt;i&gt;aruskipañawinakat uñch\'ukiwi&lt;/i&gt; mä irnaqañatak qamawimat apnaqawiwa ( janiw aruskipaw qamawxakiti ukhamarak janiw qillqayaw qamawxakiti). Taqpach yanapanaka aruskipañawinakat aka qillqatata ukhamarak apnaqayaraktamwa.',
 'info_gauche_visiteurs_enregistres' => 'Akanxa jach\'a qamaw utan qillqatanakakiw jikxatasi (aruskipañawinak qillqayasiyampi)',
 'info_generation_miniatures_images' => 'Génération de miniatures des images', # NEW
 'info_gerer_trad' => '¿Jaqukiptaw chinunak apnaqaña?',
@@ -503,7 +494,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_option_accepter_visiteurs' => 'Accepter l\'inscription de visiteurs du site public', # NEW
 'info_option_faire_suivre' => 'Faire suivre les messages des forums aux auteurs des articles', # NEW
 'info_option_ne_pas_accepter_visiteurs' => 'Refuser l\'inscription des visiteurs', # NEW
-'info_option_ne_pas_faire_suivre' => 'Ne pas faire suivre les messages des forums', # NEW
 'info_options_avancees' => 'OPTIONS AVANCÉES', # NEW
 'info_ortho_activer' => 'Activer le vérificateur d\'orthographe', # NEW
 'info_ortho_desactiver' => 'Désactiver le vérificateur d\'orthographe', # NEW
@@ -767,7 +757,6 @@ dans une couleur qui indique leur état :', # NEW
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Ajouter un participant', # NEW
 'lien_email' => 'email', # NEW
-'lien_forum_public' => 'Gérer le forum public de cet article', # NEW
 'lien_mise_a_jour_syndication' => 'Mettre à jour maintenant', # NEW
 'lien_nom_site' => 'NOM DU SITE :', # NEW
 'lien_nouvelle_recuperation' => 'Tenter une nouvelle récupération des données', # NEW
@@ -1162,8 +1151,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_controle_petition' => 'Suivi des pétitions', # NEW
 'titre_page_delete_all' => 'suppression totale et irréversible', # NEW
 'titre_page_documents_liste' => 'Les documents des rubriques', # NEW
-'titre_page_forum' => 'Forum des administrateurs', # NEW
-'titre_page_forum_envoi' => 'Envoyer un message', # NEW
 'titre_page_index' => 'Votre espace privé', # NEW
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW
@@ -1171,7 +1158,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_recherche' => 'Résultats de la recherche @recherche@', # NEW
 'titre_page_sites_tous' => 'Les sites référencés', # NEW
 'titre_page_statistiques' => 'Statistiques par rubriques', # NEW
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Statistiques (liens entrants)', # NEW
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

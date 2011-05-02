@@ -63,7 +63,6 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'bouton_checkbox_indiquer_site' => 'indicare obbligatoriamente un sito Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'le amministratrici del sito',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'le redattrici',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'i visitatori del sito pubblico quando scrivono un messaggio in un forum.',
 'bouton_checkbox_signature_unique_email' => 'una sola adesione per indirizzo email',
 'bouton_checkbox_signature_unique_site' => 'una sola adesione per sito Web',
 'bouton_demande_publication' => 'Chiedi la pubblicazione di questo articolo',
@@ -75,7 +74,6 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'bouton_envoi_message_02' => 'INVIA UN MESSAGGIO',
 'bouton_envoyer_message' => 'Messaggio definitivo: Invia',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM E PETIZIONE', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modifica',
 'bouton_pense_bete' => 'PROMEMORIA AD USO PERSONALE',
@@ -183,9 +181,6 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'erreur_plugin_prefix_manquant' => 'Spazio per il nome del plugin non definito',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; mancante nel file di definizione',
 'erreur_plugin_version_manquant' => 'Versione del plugin mancante',
-
-// F
-'forum_info_original' => 'originale',
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -380,11 +375,6 @@ dell\'attività editoriale del sito, SPIP può far pervenire via email,
 per esempio ad una mailing-list delle redattrici, l\'annuncio delle domande di
 pubblicazione e di convalida degli articoli.',
 'info_fichiers_authent' => 'File d\'autenticazione ".htpasswd"',
-'info_forum_administrateur' => 'forum delle amministratrici',
-'info_forum_interne' => 'forum interno',
-'info_forum_ouvert' => 'Nell\'area riservata del sito, è disponibile un forum per
-tutte le redattrici registrate. È anche possibile attivare un
-secondo forum riservato alle sole amministratrici.',
 'info_forum_statistiques' => 'Statistiche delle visite',
 'info_forums_abo_invites' => 'Il sito comprende dei forum accessibili solo a utenti registrate. Nel sito pubblico è quindi presente una pagina d\'iscrizione.',
 'info_gauche_admin_effacer' => '<b>Questa pagina è accessibile solo alle responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>', # MODIF
@@ -397,7 +387,6 @@ le autrici eliminate, invece, da un cestino.',
 'info_gauche_messagerie' => 'Il sistema di messaggistica permette di scambiare dei messaggi tra redattrici, di conservare dei memo (promemoria ad uso personale) o di pubblicare degli annunci nel pannello di controllo dell\'area riservata (se sei amministratrice).',
 'info_gauche_numero_auteur' => 'AUTRICE NUMERO',
 'info_gauche_statistiques_referers' => 'Questa pagina presenta un elenco dei siti che contengono link verso il tuo (<i>referrer</i>). Questo elenco è valido però solo per oggi essendo azzerato ogni 24 ore.',
-'info_gauche_suivi_forum' => 'La pagina di <i>monitoraggio dei forum</i> è uno strumento di gestione del sito (e non uno spazio di discussione o di redazione). In essa sono pubblicati tutti i contributi del forum pubblico di quest\'articolo, permettendone la gestione.',
 'info_gauche_visiteurs_enregistres' => 'Trovi qui i visitatori registrati allo spazio
 pubblico del sito (forum su abbonamento).',
 'info_generation_miniatures_images' => 'Generazione di thumbnail di immagini',
@@ -494,7 +483,6 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 'info_option_accepter_visiteurs' => 'Accetta l\'iscrizione di utenti del sito pubblico',
 'info_option_faire_suivre' => 'Segnala i nuovi messaggi',
 'info_option_ne_pas_accepter_visiteurs' => 'Rifiuta l\'iscrizione di utenti',
-'info_option_ne_pas_faire_suivre' => 'Non segnalare i nuovi messaggi',
 'info_options_avancees' => 'OPZIONE AVANZATA',
 'info_ortho_activer' => 'Attivare il controllo ortografico',
 'info_ortho_desactiver' => 'Disattivare il controllo ortografico',
@@ -757,7 +745,6 @@ Le traduzioni sono associate all\'originale,
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Aggiungi una partecipante',
 'lien_email' => 'email',
-'lien_forum_public' => 'Gestisci il forum pubblico di quest\'articolo',
 'lien_mise_a_jour_syndication' => 'Aggiorna adesso',
 'lien_nom_site' => 'NOME DEL SITO:',
 'lien_nouvelle_recuperation' => 'Tenta nuovamente di ripristinare i dati',
@@ -1130,8 +1117,6 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_page_controle_petition' => 'Monitoraggio delle petizioni',
 'titre_page_delete_all' => 'eliminazione totale e irreversible',
 'titre_page_documents_liste' => 'I documenti delle rubriche',
-'titre_page_forum' => 'Forum delle amministratrici',
-'titre_page_forum_envoi' => 'Invia un messaggio',
 'titre_page_index' => 'Area riservata',
 'titre_page_message_edit' => 'Scrivere un messaggio',
 'titre_page_messagerie' => 'I tuoi messaggi',
@@ -1139,7 +1124,6 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_page_recherche' => 'Risultati della ricerca @recherche@',
 'titre_page_sites_tous' => 'I siti repertoriati',
 'titre_page_statistiques' => 'Statistiche per rubrica',
-'titre_page_statistiques_messages_forum' => 'Messaggi dei forum',
 'titre_page_statistiques_referers' => 'Statistiche (link al tuo sito)',
 'titre_page_statistiques_signatures_jour' => 'Numero di firme al giorno',
 'titre_page_statistiques_signatures_mois' => 'Numero di firme al mese',

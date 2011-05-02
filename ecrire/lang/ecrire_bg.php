@@ -64,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'Моля, впишете името на Интернет сайт',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'администратори на сайта',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'редактори',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'посетители на публичния сайт, когато изпращат съобщение до форума.',
 'bouton_checkbox_signature_unique_email' => 'позволен е само един запис на електронен адрес',
 'bouton_checkbox_signature_unique_site' => 'позволен е само един запис на Интернет сайт',
 'bouton_demande_publication' => 'Заявка за публикуване на статията',
@@ -76,7 +75,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'ИЗПРАЩАНЕ НА СЪОБЩЕНИЕ',
 'bouton_envoyer_message' => 'Последно съобщение: изпращане',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'ФОРУМ и МОЛБИ', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Промяна',
 'bouton_pense_bete' => 'ЛИЧНА БЕЛЕЖКА',
@@ -183,9 +181,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Не е определено име, указващо мястото на плъгина',
 'erreur_plugin_tag_plugin_absent' => '&lt;плъгин&gt; липсва във файла - дефиниция',
 'erreur_plugin_version_manquant' => 'Липсва версията на плъгина',
-
-// F
-'forum_info_original' => 'original', # NEW
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -381,11 +376,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   на редактори, например.
 ',
 'info_fichiers_authent' => 'Файл за удостоверяване автентичността: .htpasswd',
-'info_forum_administrateur' => 'форум за администратори',
-'info_forum_interne' => 'вътрешен форум',
-'info_forum_ouvert' => 'В личната зона на сайта форумът е достъпен за всички
-  регистрирани редактори. По-надолу можете да
-  активирате допълнителен форум, запазен за администраторите.',
 'info_forum_statistiques' => 'Статистика на посещенията',
 'info_forums_abo_invites' => 'Сайтът Ви съдържа форуми посредством предварителен абонамент; посетителите могат да се регистират за тях през публичния сайт.',
 'info_gauche_admin_effacer' => '<b>Само администратори имат достъп до тази страница.</b><p> Тя осигурява достъп до различни технически задачи за поддръжка. Някои от тях позволяват специфичен процес на идентификация и изискват FTP достъп до сайта.', # MODIF
@@ -401,7 +391,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_messagerie' => 'Изпращането на съобщения позволява да се обменя информация между редакторите, да се съхраняват бележки (за лично ползване) или да се публикуват обяви в началната страница на личната зона (ако сте администратор).',
 'info_gauche_numero_auteur' => 'НОМЕР НА АВТОРА:',
 'info_gauche_statistiques_referers' => 'Тази страница показва списък с <i>препратки към сайтове</i>: т.е. сайтовете, съдържащи връзка към Вашия сайт, само за вчера и днес: този списък се акуализира на всеки 24 часа.',
-'info_gauche_suivi_forum' => 'Страницата <i>Допълнения във форумите</i> е инструмент за управление на сайта (а не зона за дискусии или за публикации). Тя показва целия принос от съобщения в публичния форум на статията и позволява боравенето с тези съобщения.',
 'info_gauche_visiteurs_enregistres' => 'Тук ще намерите посетителите, регистрирани
  в публичната зона на сайта (форумите са с предварително записване).',
 'info_generation_miniatures_images' => 'Генерирана на умалени образи на изображенията',
@@ -501,7 +490,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_option_accepter_visiteurs' => 'Позволяване регистрацията на посетители от публичния сайт',
 'info_option_faire_suivre' => 'Препраща съобщения от форума към автора на статията',
 'info_option_ne_pas_accepter_visiteurs' => 'Отказ за регистрация на посетител',
-'info_option_ne_pas_faire_suivre' => 'Без препращане на съобщения от форума',
 'info_options_avancees' => 'ПОДРОБНИ ОПЦИИ',
 'info_ortho_activer' => 'Активиране на програмата за проверка на правописа.',
 'info_ortho_desactiver' => 'Деактивиране на програмата за проверка на правописа.',
@@ -764,7 +752,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Добавяне на участник',
 'lien_email' => 'Електронен адрес',
-'lien_forum_public' => 'Управление на публичния форум към статията',
 'lien_mise_a_jour_syndication' => 'Актуализация',
 'lien_nom_site' => 'ИМЕ НА САЙТА:',
 'lien_nouvelle_recuperation' => 'Опитайте да направите ново възстановяване на данните ',
@@ -1154,8 +1141,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_controle_petition' => 'Допълнения на молбите',
 'titre_page_delete_all' => 'пълно и безвъзвратно изтриване',
 'titre_page_documents_liste' => 'Рубрика "документи"',
-'titre_page_forum' => 'Форум на администраторите',
-'titre_page_forum_envoi' => 'Изпращане на съобщение',
 'titre_page_index' => 'Лична зона',
 'titre_page_message_edit' => 'Писане на съобщение',
 'titre_page_messagerie' => 'Вашите съобщения',
@@ -1163,7 +1148,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_recherche' => 'Резултати от търсенето @recherche@',
 'titre_page_sites_tous' => 'Свързани сайтове',
 'titre_page_statistiques' => 'Статистика по рубрики',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Статистика (входящи препратки)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

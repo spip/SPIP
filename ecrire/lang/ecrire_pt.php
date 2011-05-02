@@ -65,7 +65,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'indicar obrigatoriamente um sítio Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'os administradores do sítio',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'os redactores',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'os visitantes do sítio público quando mandam uma mensagem num fórum',
 'bouton_checkbox_signature_unique_email' => 'uma única assinatura por endereço email',
 'bouton_checkbox_signature_unique_site' => 'uma única assinatura por sítio Web',
 'bouton_demande_publication' => 'Pedir a publicação deste artigo ',
@@ -77,7 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'MANDAR UMA MENSAGEM',
 'bouton_envoyer_message' => 'Mensagem definitiva: mandar',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FÓRUM &amp; ABAIXO-ASSINADO', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'MEMORANDO DE USO PESSOAL',
@@ -186,9 +184,6 @@ ou da rede',
 'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non défini', # NEW
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; manquant dans le fichier de définition', # NEW
 'erreur_plugin_version_manquant' => 'Version du plugin manquante', # NEW
-
-// F
-'forum_info_original' => 'original', # NEW
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -383,11 +378,6 @@ ou da rede',
  a uma <i>mailing-list</i> dos redactores, o anúncio dos pedidos de
  publicação e das validações de artigos.',
 'info_fichiers_authent' => 'Ficheiros de autenticação « .htpasswd »',
-'info_forum_administrateur' => 'fórum dos administradores',
-'info_forum_interne' => 'fórum interno',
-'info_forum_ouvert' => 'No espaço privado do sítio, um fórum está aberto a todos
- os redactores registados. Pode, a seguir, activar um
- fórum suplementar, reservado apenas aos administradores',
 'info_forum_statistiques' => 'Estatísticas das visitas',
 'info_forums_abo_invites' => 'O seu site contém fóruns por assinatura; os visitantes são convidados a registar-se no site público.',
 'info_gauche_admin_effacer' => '<b>Esta página é acessível apenas aos responsáveis pelo site.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao website.</p>', # MODIF
@@ -400,7 +390,6 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_gauche_messagerie' => 'A caixa de correio permite-lhe trocar mensagens entre redactores, conservar memorandos (para o seu uso pessoal) ou exibir anúncios na página de abertura do espaço privado ( se for administrador).',
 'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
 'info_gauche_statistiques_referers' => 'Esta página apresenta a lista dos  <i>referers</i>, ou seja, dos sites que contêm links para o seu site, unicamente para ontem e hoje; esta lista é actualizada a cada 24 horas.',
-'info_gauche_suivi_forum' => 'A página de <i>acompanhamento dos fóruns </i> é um instrumento de gestão do seu sítio (e não um espaço de discussão ou de redacção). Exibe todas as contribuições do fórum público deste artigo e permite-lhe gerir essas contribuições. ', # MODIF
 'info_gauche_visiteurs_enregistres' => 'Encontrará aqui os visitantes registados
  no espaço público do sítio (fóruns por assinatura).',
 'info_generation_miniatures_images' => 'Geração de miniaturas das imagens',
@@ -500,7 +489,6 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_option_accepter_visiteurs' => 'Aceitar a inscrição de visitantes do site público',
 'info_option_faire_suivre' => 'Fazer seguir as mensagens dos fóruns para os autores dos artigos',
 'info_option_ne_pas_accepter_visiteurs' => 'Recusar a inscrição dos visitantes',
-'info_option_ne_pas_faire_suivre' => 'Não fazer seguir as mensagens dos fóruns',
 'info_options_avancees' => 'OPÇÕES AVANÇADAS',
 'info_ortho_activer' => 'Activar o corrector ortográfico',
 'info_ortho_desactiver' => 'Desactivar o corrector ortográfico',
@@ -764,7 +752,6 @@ numa cor que indica o seu estado:',
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Acrescentar um participante',
 'lien_email' => 'email',
-'lien_forum_public' => 'Gerir o fórum público deste artigo',
 'lien_mise_a_jour_syndication' => 'Actualizar agora',
 'lien_nom_site' => 'NOME DO SÍTIO',
 'lien_nouvelle_recuperation' => 'Tentar uma nova recuperação dos dados',
@@ -1158,8 +1145,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_page_controle_petition' => 'Acompanhamento dos abaixo-assinados',
 'titre_page_delete_all' => 'Supressão total e irreversível',
 'titre_page_documents_liste' => 'Os documentos das rubricas',
-'titre_page_forum' => 'Fórum dos administradores',
-'titre_page_forum_envoi' => 'Enviar uma mensagem',
 'titre_page_index' => 'O seu espaço privado',
 'titre_page_message_edit' => 'Redigir uma mensagem',
 'titre_page_messagerie' => 'O seu correio',
@@ -1167,7 +1152,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_page_recherche' => 'Resultados da pesquisa @recherche@',
 'titre_page_sites_tous' => 'Os sítios referenciados',
 'titre_page_statistiques' => 'Estatísticas por rubricas',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Estatísticas (ligações de entrada)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

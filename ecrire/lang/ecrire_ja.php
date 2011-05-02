@@ -63,7 +63,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'bouton_checkbox_indiquer_site' => 'ウェブサイトを必須入力にする',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'サイトの管理者',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'エディターズ',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'パブリックなサイトの訪問者が掲示板にメッセージを投稿したとき',
 'bouton_checkbox_signature_unique_email' => 'メールアドレス１つにつき、１署名まで',
 'bouton_checkbox_signature_unique_site' => 'ウェブサイト１つにつき、１署名まで',
 'bouton_demande_publication' => 'この記事の公開を要求する',
@@ -75,7 +74,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'bouton_envoi_message_02' => 'メッセージを送る',
 'bouton_envoyer_message' => '最後のメッセージ: 送る',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => '掲示板と署名機能', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => '修正',
 'bouton_pense_bete' => '個人的なメモ',
@@ -182,9 +180,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'erreur_plugin_prefix_manquant' => 'Plugin\'s namespace undefined', # NEW
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; missing in the definition file', # NEW
 'erreur_plugin_version_manquant' => 'Missing version of the plugin', # NEW
-
-// F
-'forum_info_original' => 'original', # NEW
 
 // H
 'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
@@ -376,11 +371,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_exportation_base' => '@archive@ へデータベースをエキスポート（輸出）',
 'info_facilite_suivi_activite' => 'サイトでの編集活動のお手伝いのために、SPIPは記事公開要求、適性検査の結果など、メールで自動送信することが出来ます。（例えばメーリングリストなど）',
 'info_fichiers_authent' => '認証ファイル ".htpasswd"',
-'info_forum_administrateur' => '管理者用の掲示板',
-'info_forum_interne' => '関係者用の掲示板',
-'info_forum_ouvert' => 'サイトのプライベートエリアの中で、掲示板はすべての登録されたエディターに公開されています。
-  下で、あなたは管理者のために
-  予約された特別なフォーラムを有効にすることができます。',
 'info_forum_statistiques' => '訪問者の統計',
 'info_forums_abo_invites' => 'あなたのサイトはサブスクリプションのための掲示板を持っています; 訪問者達はパブリックなサイトでそれらのために登録するかもしれません。',
 'info_gauche_admin_effacer' => '<b>管理者のみがこのページにアクセス出来る。</b><p> そのページはさまざまな技術的メンテナンスのための手順を提供します。いくらかの手順では同WEBサイトへのFTPアクセスによる特別な認証手順が必要です。</p>', # MODIF
@@ -392,7 +382,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_gauche_messagerie' => 'メッセージ交換はエディター同士でのメッセージの交換を可能にします、保護されたメモ（あなたの私用向け）または、プライベートエリアのホームページのアナウンスを示す（あなたが管理者の場合）。',
 'info_gauche_numero_auteur' => '著者番号',
 'info_gauche_statistiques_referers' => 'このページは<i>referrers</i>のリストを表示します。つまり昨日と今日の間、あなたのサイトへのリンクを含んだサイト：実際にこのリストは２４時間ごとに初期化されています。',
-'info_gauche_suivi_forum' => '<i>掲示板の続報</i>ページはあなたのサイトの管理道具です。（議論したりエリアを編集できません）。この記事の公開掲示板のすべての貢献を表示して、それら貢献を管理することが可能です。',
 'info_gauche_visiteurs_enregistres' => 'ここでサイトのパブリックなエリアで登録された訪問者たちを探せるでしょう（寄付による掲示板）。',
 'info_generation_miniatures_images' => '画像のサムネイルを生成',
 'info_gerer_trad' => '翻訳版同士リンクし合いますか？',
@@ -487,7 +476,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_option_accepter_visiteurs' => 'パブリックなサイトからの訪問者の登録を許可',
 'info_option_faire_suivre' => '記事の著者たちへ掲示板のメッセージを送る',
 'info_option_ne_pas_accepter_visiteurs' => '訪問者の登録を断る',
-'info_option_ne_pas_faire_suivre' => '前の掲示板のメッセージを送らない',
 'info_options_avancees' => '拡張オプション',
 'info_ortho_activer' => 'スペルチェッカーを有効にする',
 'info_ortho_desactiver' => 'スペルチェッカーを無効にする。',
@@ -742,7 +730,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => '関係者を追加',
 'lien_email' => 'e-mail',
-'lien_forum_public' => 'この記事の公開掲示板を管理',
 'lien_mise_a_jour_syndication' => '今アップデート',
 'lien_nom_site' => 'サイトの名前:',
 'lien_nouvelle_recuperation' => 'データの新しい検索を開始',
@@ -1063,8 +1050,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_page_controle_petition' => '署名の把握',
 'titre_page_delete_all' => '撤回できない、ページ全体の削除',
 'titre_page_documents_liste' => '付属した文章',
-'titre_page_forum' => '管理者用の掲示板',
-'titre_page_forum_envoi' => 'メッセージを送る',
 'titre_page_index' => 'あなたのプライベートエリア',
 'titre_page_message_edit' => 'メッセージを書く',
 'titre_page_messagerie' => 'あなたのメッセージング',
@@ -1072,7 +1057,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_page_recherche' => '検索語 @recherche@ による検索結果',
 'titre_page_sites_tous' => '参照されたサイト',
 'titre_page_statistiques' => 'セクションごとの統計',
-'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => '統計（入ってくるリンク）',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW

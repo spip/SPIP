@@ -61,7 +61,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'Вы должны ввести название вебсайта',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'администраторы сайта',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'редакторы',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'посетители основной части сайта, когда они размещают сообщение на форуме.',
 'bouton_checkbox_signature_unique_email' => 'только одна подпись за адрес электронной почты',
 'bouton_checkbox_signature_unique_site' => 'только одна подпись за вебсайт',
 'bouton_demande_publication' => 'Запрос на публикацию этой статьи',
@@ -73,7 +72,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'ОТПРАВИТЬ СООБЩЕНИЕ',
 'bouton_envoyer_message' => 'Последнее сообщение: отправить',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'ФОРУМ И КОММЕНТАРИИ', # MODIF
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Изменить',
 'bouton_pense_bete' => 'ЛИЧНАЯ ЗАПИСКА',
@@ -180,9 +178,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Неопределено пространство имен плагина',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; отсутствует в файле описания',
 'erreur_plugin_version_manquant' => 'Отсутствует версия плагина',
-
-// F
-'forum_info_original' => 'Исходник',
 
 // H
 'htaccess_a_simuler' => 'Внимание: в настройках веб-сервера отключено использование @htaccess@ файлов. Для обеспечение достаточного уровня безопасности внесите изменения в настройку сервера или обратитесь в техническую поддержку хостинга. В противном случае, убедитесь, что значения @constantes@ (которые задаются в файле mes_options.php)  находятся вне папки @document_root@.', # MODIF
@@ -376,11 +371,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  SPIP может рассылать уведомления по электронной почте, для редакторской почтовой рассылки например,
  прошение о публикации и утверждение статьи.',
 'info_fichiers_authent' => 'Файл подтверждения подлинности ".htpasswd"',
-'info_forum_administrateur' => 'административный форум',
-'info_forum_interne' => 'внутренний форум',
-'info_forum_ouvert' => 'В административной части сайта, форум открыт для всех 
-  зарегистрированных редакторов. Ниже Вы можете включить 
-  дополнительный форум для отдельных администраторов.',
 'info_forum_statistiques' => 'История посещений',
 'info_forums_abo_invites' => 'Ваш сайт содержит форумы по подписке; посетители могут зарегистрироваться к ним на основном сайте.',
 'info_gauche_admin_effacer' => '<b>Только администраторы имеют доступ к этой странице. </b> <p>Она обеспечивает доступ к ряду функциям по обслуживанию сайта. Некоторые из них требуют прав доступа к FTP сайта. </p> ',
@@ -396,7 +386,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_messagerie' => 'Передача сообщений позволяет обмениваться сообщениями между редакторами, сохранять записки (для Вашего личного использования) или показывать объявления на основной странице административной части (если Вы - администратор).',
 'info_gauche_numero_auteur' => 'НОМЕР АВТОРА:',
 'info_gauche_statistiques_referers' => 'Эта страница показывает список <i> ссылок </i>, то есть сайты, содержащие ссылки к Вашему личному сайту, только для вчера и сегодня: фактически этот список обновляется каждые 24 часа.',
-'info_gauche_suivi_forum' => '<i>Продолжение форумов </i> страница - инструмент управления Вашего сайта (не область обсуждения или редактирования). Она показывает все вклады основного форума этой статьи и позволяет Вам управлять этими вкладами.',
 'info_gauche_visiteurs_enregistres' => 'Вы найдете здесь зарегистрированных посетителей
  в основной части сайта (форумы по подписке).',
 'info_generation_miniatures_images' => 'Создание уменьшенных изображений',
@@ -496,7 +485,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_option_accepter_visiteurs' => 'Разрешить регистрацию посетителей с основной части сайта',
 'info_option_faire_suivre' => 'Отправлять авторам комментарии к их статьям',
 'info_option_ne_pas_accepter_visiteurs' => 'Отказаться от регистрации посетителя',
-'info_option_ne_pas_faire_suivre' => 'Не отправлять сообщения c форумов',
 'info_options_avancees' => 'ДОПОЛНИТЕЛЬНЫЕ ОПЦИИ',
 'info_ortho_activer' => 'Включить программу проверки орфографии.',
 'info_ortho_desactiver' => 'Выключить программу проверки орфографии.',
@@ -760,7 +748,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Добавить участника',
 'lien_email' => 'Электронная почта',
-'lien_forum_public' => 'Управлять этой статьей основного форума',
 'lien_mise_a_jour_syndication' => 'Обновить сейчас',
 'lien_nom_site' => 'НАЗВАНИЕ САЙТА:',
 'lien_nouvelle_recuperation' => 'Попробывать выполнить новый поиск данных',
@@ -1146,8 +1133,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_controle_petition' => 'Дополнительные комментарии',
 'titre_page_delete_all' => 'полное и необратимое удаление',
 'titre_page_documents_liste' => 'Прилагаемые документы',
-'titre_page_forum' => 'Форум администраторов',
-'titre_page_forum_envoi' => 'Отправить сообщение',
 'titre_page_index' => 'Ваша административная часть',
 'titre_page_message_edit' => 'Написать сообщение',
 'titre_page_messagerie' => 'Ваша передача сообщений',
@@ -1155,7 +1140,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_recherche' => 'Результаты поиска @recherche@',
 'titre_page_sites_tous' => 'Ссылочные сайты',
 'titre_page_statistiques' => 'Статистика разделов',
-'titre_page_statistiques_messages_forum' => 'Форум сообщений',
 'titre_page_statistiques_referers' => 'Статистика  (входящие ссылки)',
 'titre_page_statistiques_signatures_jour' => 'Подсчет подписей за день',
 'titre_page_statistiques_signatures_mois' => 'Подсчет подписей за месяц',
