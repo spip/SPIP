@@ -124,7 +124,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'စာသားထပ်ထည့်ပါ',
 'diff_texte_deplace' => 'စာသားရွေ့ပါ',
 'diff_texte_supprime' => 'စာသားဖျက်ပစ်ပါ',
-'double_clic_inserer_doc' => 'စာသားထဲတွင် အတိုကောက်ကိုထည့်ရန် နှစ်ချက်နှိပ်ပါ',
 
 // E
 'email' => 'အီးမေးလ်',
@@ -515,7 +514,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redacteurs' => 'စာတည်းများ',
 'info_redaction_en_cours' => 'တည်းဖြတ်နေဆဲ',
 'info_redirection' => 'လမ်းကြောင်းလွဲခြင်း',
-'info_referencer_doc_distant' => 'အင်တာနက်ရှိ မှတ်တမ်းတခုကို ကိုးကားပါ',
 'info_refuses' => 'သင့်ဆောင်းပါးကို ငြင်းပယ်သည်',
 'info_reglage_ldap' => 'ရွေးချယ်ရန်များ - <b>LDAP တင်သွင်းမှုကို ညှိနေသည်</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -638,7 +636,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_ajout_mots_cles' => 'ဖိုရမ်များတွင် သော့ချက်စကားလုံးများ ထပ်ပေါင်းခြင်းကို ခွင့်ပြုသည်',
 'item_autoriser_documents_joints' => 'ဆောင်းပါးများနှင့် စာရွက်စာတမ်း တွဲခွင့်ပြုသည်',
 'item_autoriser_documents_joints_rubriques' => 'အခန်းကဏ္ဍများထဲတွင် စာရွက်စာတမ်းများခွင့်ပြုသည်',
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'ပူးတွဲချိတ်ဆက်မှုထဲတွင် ဆောင်းပါးအားလုံးပါဝင်သည်',
 'item_bloquer_liens_syndiques' => 'ပူးတွဲချိတ်ဆက်မှုများကို အတည်တကျရှိခြင်းမှ ပိတ်ပင်လိုက်ပါ',
 'item_choix_administrateurs' => 'ကြီးကြပ်သူများ',
@@ -662,7 +659,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_non_ajout_mots_cles' => 'ဖိုရမ်များထဲသို့ သော့ချက်စကားလုံးများ ထပ်ထည့်ခွင့်မပြုပါ',
 'item_non_autoriser_documents_joints' => 'ဆောင်းပါးများထဲရှိ စာရွက်စာတမ်းများ ခွင့်မပြုပါ',
 'item_non_autoriser_documents_joints_rubriques' => 'ကဏ္ဍများထဲရှိ စာရွက်စာတမ်းများ ခွင့်မပြုပါ',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'နမူနာကိုသာပို့ပါ',
 'item_non_bloquer_liens_syndiques' => 'ပူးတွဲချိတ်ဆက်မှု စတင်နေခြင်းကို ပိတ်ပင်ခြင်း မလုပ်ပါနှင့်',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -886,8 +882,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_date_publication_article' => 'အွန်လိုင်းထုတ်ဝေမှုရက်စွဲ',
 'texte_descriptif_petition' => 'တောင်းဆိုမှုဖော်ပြချက်',
 'texte_descriptif_rapide' => 'အကျဉ်းချုပ်ဖော်ပြချက်',
-'texte_documents_joints' => 'ဆောင်းပါးများ/စာရွက်စာတမ်းများ (ရုံးစာများ၊ ဓါတ်ပုံများ၊ ရုပ်သံဆိုင်ရာ စသည့်) ကို ထပ်မံပေါင်းထည့်နိုင်သည်။ ဤဖိုင်များသည် ဆောင်းပါးထဲ သို့  ပြင်ပတွင် အညွှန်းအဖြစ်ဖော်ပြပါမည်။', # MODIF
-'texte_documents_joints_2' => 'ဤဆက်တင်တွင် ဆောင်းပါးအတွင်း ပုံတိုက်ရိုက်ထည့်သွင်းခြင်းကိုရပ်၍မရပါ',
 'texte_effacer_base' => 'SPIP အချက်လက်သိုလှောင်မှုကို ဖျက်ပစ်ပါ',
 'texte_effacer_donnees_indexation' => 'စာညွှန်းကိုဖျက်ပစ်ပါ',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -997,7 +991,6 @@ proxy လိပ်စာကို အောက်တွင်​ဖော်ပ�
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Options: <b>သင့် LDAP ချိတ်ဆက်မှု</b>',
 'titre_dernier_article_syndique' => 'နောက်ဆုံး ပူးတွဲချိတ်ဆက်ထားသော ဆောင်းပါးများ',
-'titre_documents_joints' => 'စာရွက်စာတမ်းများတွဲပါ',
 'titre_evolution_visite' => 'ဝက်ဘ်ဆိုက်သို့ ဝင်ရောက်ကြည့်ရှုမှုအဆင့်',
 'titre_gauche_mots_edit' => 'သော့ချက်စကားလုံးနံပါတ်',
 'titre_groupe_mots' => 'သော့ချက်စကားလုံးအုပ်စု',
@@ -1051,7 +1044,6 @@ proxy လိပ်စာကို အောက်တွင်​ဖော်ပ�
 'titre_syndication' => 'ဝက်ဘ်ဆိုက် ပူးတွဲချိတ်ဆက်စေခြင်း',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'ပို့ဆောင်မှုအလွှာ လုံခြုံရေး',
-'tout_dossier_upload' => '@နောက်ထပ်@ အညွှန်းတစ်ခုလုံး',
 'trad_article_inexistant' => 'ဤနံပါတ်နှင့် ဆောင်းပါးမရှိပါ',
 'trad_article_traduction' => 'ဤဆောင်းပါး၏ မူကွဲအားလုံး',
 'trad_deja_traduit' => 'အခက်ခဲ- တောင်းဆိုထားသော နံပါတ်နှင့် ဆက်သွယ်မှုမပြုနိုင်ပါ',
@@ -1060,16 +1052,8 @@ proxy လိပ်စာကို အောက်တွင်​ဖော်ပ�
 'trad_new' => 'ဤဆောင်းပါးကို ပြန်လည်ဘာသာပြန်ပါ', # MODIF
 
 // U
-'upload_fichier_zip' => 'ကျစ်လစ်ထားသောဖိုင်',
-'upload_fichier_zip_texte' => 'ထည့်သွင်းလိုသောဖိုင်သည် ကျစ်လစ်ထားသည်',
-'upload_fichier_zip_texte2' => 'ဤဖိုင်ဖြစ်နိုင်ချေရှိသည်',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'ဤဖိုင်သည် ဆာဗာသို့ထည့်သွင်းရန် ​အလွန်ကြီးသည်၊ အ​ကြီးဆုံး @max@ သာလက်ခံနိုင်သည်',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'ကျစ်လစ်ထားသောဖိုင်များ ပြန်ဖြေ၍ တစ်ခုခြင်းကို ဆာဗာထဲသို့ထည့်သွင်းမည့် ဖိုင်များမှာ',
-'upload_zip_telquel' => 'ကျစ်လစ်ဖိုင် ​အဖြစ်ဖြင့် ထည့်သွင်းထားသည်',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'ခဏစောင့်ပြီးမှ သည်စာမျက်နှာကို ပြန်သွားပါ',
 'utf8_convert_avertissement' => 'သိုလှောင်သိမ်းဆည်းမှုတွင် ပါဝင်သော အရာများ (ဆောင်းပါး၊ သတင်း စသည်) များကို character set <b>@orig@</b> မှ character set <b>@charset@</b> သို့ပြောင်းလဲရန် ကြိုးစားနေသည်။',
 'utf8_convert_backup' => 'သင့်ဝက်ဘ်ဆိုက် အပိုသိမ်းဆည်းရန် မမေ့ပါနှင့်၊ ပုံစံနှင့် ဘာသာစကားဖိုင်များကိုလည်း @charset@ နှင့်သင့်လျော်ခြင်း ရှိ၊ မရှိ စစ်ဆေးပါ',

@@ -131,7 +131,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Vložený text',
 'diff_texte_deplace' => 'Přemístěný text',
 'diff_texte_supprime' => 'Odstraněný text',
-'double_clic_inserer_doc' => 'Tuto zkratku vložíte do textu poklepáním',
 
 // E
 'email' => 'e-mail',
@@ -553,7 +552,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_redacteurs' => 'Redaktoři',
 'info_redaction_en_cours' => 'ROZPRACOVÁNO',
 'info_redirection' => 'Přesměrování',
-'info_referencer_doc_distant' => 'Odkaz na dokument na internetu:',
 'info_refuses' => 'Vaše odmítnuté články',
 'info_reglage_ldap' => 'Možnost: <b>Nastavení importu LDAP</b>', # MODIF
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -678,7 +676,6 @@ ukazuje jejich stav:',
 'item_ajout_mots_cles' => 'Povolit přidání klíčového slova k diskusní skupině',
 'item_autoriser_documents_joints' => 'Povolit dokumenty přiložené k článku',
 'item_autoriser_documents_joints_rubriques' => 'Povolit dokumenty v sekcích',
-'item_autoriser_selectionner_date_en_ligne' => 'Allow changes to the date of each document', # NEW
 'item_autoriser_syndication_integrale' => 'Vložit kompletní články do syndikačních souborů',
 'item_bloquer_liens_syndiques' => 'Zablokovat syndikované odkazy pro schválení',
 'item_choix_administrateurs' => 'administrátoři',
@@ -702,7 +699,6 @@ ukazuje jejich stav:',
 'item_non_ajout_mots_cles' => 'Zakázat používání klíčových slov v diskusních skupinách',
 'item_non_autoriser_documents_joints' => 'Nepovolit dokumenty v článcích',
 'item_non_autoriser_documents_joints_rubriques' => 'Nepovolit dokumenty v sekcích',
-'item_non_autoriser_selectionner_date_en_ligne' => 'The date of a document is the date it was added to the site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Poslat pouze shrnutí',
 'item_non_bloquer_liens_syndiques' => 'Neblokovat odkazy, které jsou výsledkem syndikace',
 'item_non_compresseur' => 'Deactivate compression', # NEW
@@ -941,10 +937,6 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 'texte_date_publication_article' => 'DATUM ZVEŘEJNĚNÍ ONLINE:',
 'texte_descriptif_petition' => 'Popis petice',
 'texte_descriptif_rapide' => 'Stručný popis',
-'texte_documents_joints' => 'Můžete povolit přidávání dokumentů (textových a jiných souborů, obrázků, multimédii atd.),
- a to jak k článkům tak i k sekcím. Na tyto soubory pak můžete v článcích
- odkazovat, případně je můžete zobrazovat samostatně.', # MODIF
-'texte_documents_joints_2' => 'I při tomto nastavení můžete vkládat obrázky přímo do článků.',
 'texte_effacer_base' => 'Odstranit databázi SPIP',
 'texte_effacer_donnees_indexation' => 'Odstranit indexy',
 'texte_effacer_statistiques' => 'Delete the statistics', # NEW
@@ -1101,7 +1093,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_conflit_edition' => 'Conflict while editing', # NEW
 'titre_connexion_ldap' => 'Možnost: <b>Vaše připojení LDAP</b>',
 'titre_dernier_article_syndique' => 'Poslední syndikované články',
-'titre_documents_joints' => 'Připojené dokumenty',
 'titre_evolution_visite' => 'Vývoj návštěvnosti',
 'titre_gauche_mots_edit' => 'ČÍSLO SLOVA:',
 'titre_groupe_mots' => 'SKUPINA SLOV:',
@@ -1155,7 +1146,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_syndication' => 'Syndikace webů',
 'titre_type_urls' => 'Typ adres URL',
 'tls_ldap' => 'Transport Layer Security :',
-'tout_dossier_upload' => 'Celá složka @upload@',
 'trad_article_inexistant' => 'Článek tohoto čísla neexistuje.',
 'trad_article_traduction' => 'Dostupné překlady tohoto článku:',
 'trad_deja_traduit' => 'Chyba: tento článek není možné propojit s požadovaným číslem',
@@ -1164,16 +1154,8 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'trad_new' => 'Nově přeložit článek', # MODIF
 
 // U
-'upload_fichier_zip' => 'Komprimovaný soubor ZIP',
-'upload_fichier_zip_texte' => 'Chcete nainstalovat komprimovaný soubor ZIP.',
-'upload_fichier_zip_texte2' => 'Tento soubor může být:',
 'upload_info_mode_document' => 'Place this image in the portfolio', # NEW
 'upload_info_mode_image' => 'Remove this image from the portfolio', # NEW
-'upload_limit' => 'Soubor je pro server příliš velký. Maximální povolená velikost pro <i>odeslání</i> je @max@.',
-'upload_zip_conserver' => 'Keep the archive file after extracting its contents', # NEW
-'upload_zip_decompacter' => 'rozbalený a každý ze souborů v něm obsažený bude na web nainstalován. Budou nainstalovány tyto soubory:',
-'upload_zip_telquel' => 'nainstalovat tak, jak je, tedy ve formátu ZIP;',
-'upload_zip_titrer' => 'Add titles according to the filenames', # NEW
 'utf8_convert_attendez' => 'Počkejte několik sekund a potom znovu načtěte tuto stránku.',
 'utf8_convert_avertissement' => 'Nyní zkonvertujete obsah databáze (články, novinky, ...) ze znakové sady <b>@orig@</b> do znakové sady  <b>@charset@</b>.',
 'utf8_convert_backup' => 'Nezapomeňte nejprve udělat kompletní zálohu vašeho webu. Rovněž zkontrolujte, zda jsou vaše šablony a jazykové soubory kompatibilní se znakovou sadou @charset@. ',

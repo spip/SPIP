@@ -131,7 +131,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'diff_texte_ajoute' => 'Szöveg beszúrva',
 'diff_texte_deplace' => 'Szöveg áthelyezve',
 'diff_texte_supprime' => 'Szöveg törölve',
-'double_clic_inserer_doc' => 'Dupla kattintással beszúrhatja a gyorshivatkozást a szövegbe.',
 
 // E
 'email' => 'email',
@@ -536,7 +535,6 @@ a felhasználók automatikus emailt kapnak,
 'info_redacteurs' => 'Szerzők',
 'info_redaction_en_cours' => 'SZERKESZTÉS ALATT VAN',
 'info_redirection' => 'Átirányítás',
-'info_referencer_doc_distant' => 'Felvenni egy dokumentumot a Neten :',
 'info_refuses' => 'Az Ön elutasított cikkei',
 'info_reglage_ldap' => 'Opciók: <b>LDAP importálás beállítása</b>', # MODIF
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -661,7 +659,6 @@ ami állapotát jelzi :',
 'item_ajout_mots_cles' => 'Fórumokhoz kötött kulcsszavak hozzáadása engedélyezése',
 'item_autoriser_documents_joints' => 'Cikkekhez csatolt dokumentumok engedélyezése',
 'item_autoriser_documents_joints_rubriques' => 'Rovatokban lévő dokumentumok engedélyezése',
-'item_autoriser_selectionner_date_en_ligne' => 'Pouvoir sélectionner la date de mise en ligne de chaque document', # MODIF
 'item_autoriser_syndication_integrale' => 'A cikkek teljes tartalma a szindikálási fájlokban',
 'item_bloquer_liens_syndiques' => 'Szindikált linkek tiltása jóváhagyás érdekében',
 'item_choix_administrateurs' => 'az adminisztrátorok',
@@ -685,7 +682,6 @@ ami állapotát jelzi :',
 'item_non_ajout_mots_cles' => 'Kulcsszavak használatának tiltása a fórumokban',
 'item_non_autoriser_documents_joints' => 'Dokumentumok tiltása a cikkekben',
 'item_non_autoriser_documents_joints_rubriques' => 'Dokumentumok tiltása a rovatokban',
-'item_non_autoriser_selectionner_date_en_ligne' => 'Ne pas pouvoir changer manuellement la date des documents', # MODIF
 'item_non_autoriser_syndication_integrale' => 'Csak egy összefoglalást átadni',
 'item_non_bloquer_liens_syndiques' => 'Nem blokkolni a szindikálásból eredő linkeket',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -919,11 +915,6 @@ SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy 
 'texte_date_publication_article' => 'NYILVÁNOS PUBLIKÁLÁS IDŐPONTJA :',
 'texte_descriptif_petition' => 'Az aláírásgyűjtés leírása',
 'texte_descriptif_rapide' => 'Rövid leírás',
-'texte_documents_joints' => 'Engedelyézheti a dokumentumok hozzáadását (irodai fájlok, képek,
- multimédia, stb.) a cikkekhez és/vagy a rovatokhoz. Ezekre a fájlokra
- lehet majd hivatkozni a
- cikken belül, vagy külön megjeleníteni.', # MODIF
-'texte_documents_joints_2' => 'Ez a beállítás nem akadályozza a közvetlen képbeszűrást a cikkekbe.',
 'texte_effacer_base' => 'Az SPIP adatbázisa törlése',
 'texte_effacer_donnees_indexation' => 'Az indexálási adatok törlése',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1072,7 +1063,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opciók : <b>Az Ön LDAP csatlakozás</b>',
 'titre_dernier_article_syndique' => 'Utolsó szindikált cikkek',
-'titre_documents_joints' => 'Mellékelt dokumentumok',
 'titre_evolution_visite' => 'A látógatások kialakulása',
 'titre_gauche_mots_edit' => 'SZÓ SZÁMA :',
 'titre_groupe_mots' => 'SZÓCSOPORT :',
@@ -1126,7 +1116,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_syndication' => 'Honlapok szindikálása',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
-'tout_dossier_upload' => 'Az egész mappa @upload@',
 'trad_article_inexistant' => 'Nincs ilyen sorszámú cikk.',
 'trad_article_traduction' => 'A cikk összes változatai :',
 'trad_deja_traduit' => 'Ez a cikk már egy fordítás a jelen cikkről.', # MODIF
@@ -1135,16 +1124,8 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'trad_new' => 'Írni egy újabb fordítást erről a cikkről', # MODIF
 
 // U
-'upload_fichier_zip' => 'ZIP tipusú fájl',
-'upload_fichier_zip_texte' => 'ZIP tipusú az a fájl, amit akar telepíteni.',
-'upload_fichier_zip_texte2' => 'Ez a fájl lehet :',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Ez a fájl túl nagy a szervernek; a máximalis <i>feltöltési</i> méret @max@.',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'kitömöritve, és az összes eleme a honlapra telepítve. A honlapra telepített fájlok a következők lesznek :',
-'upload_zip_telquel' => 'Egymagában telepítve, mint ZIP tömörített állómány;',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Várjon egy kicsit, majd töltse újra az oldalt.',
 'utf8_convert_avertissement' => 'Most az adatbázis tartalmát (cikkek, hírek, stb.) készül konvertálni az eredeti <b>@orig@</b> karaktertáblából a <b>@charset@</b> karaktertábla felé.',
 'utf8_convert_backup' => 'Ne felejtse először teljesen megmenteni a honlapját. Azt is ellenőrizze, hogy a szkiptjei és a nyelvi fájlok is @charset@ kompatibilis. Egyébként a módosítások követése, ha aktivált, károsodni fog.', # MODIF

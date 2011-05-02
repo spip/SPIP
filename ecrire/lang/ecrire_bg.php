@@ -132,7 +132,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Добавен текст',
 'diff_texte_deplace' => 'Преместен текст',
 'diff_texte_supprime' => 'Изтрит текст',
-'double_clic_inserer_doc' => 'Щракнете два пъти с мишката, за да вмъкнете отпратката вътре в текста',
 
 // E
 'email' => 'електронен адрес',
@@ -556,7 +555,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redacteurs' => 'Редактори',
 'info_redaction_en_cours' => 'В ХОД Е ПИСАНЕ',
 'info_redirection' => 'Пренасочване',
-'info_referencer_doc_distant' => 'Отпратка към документ, намиращ се в Интернет:',
 'info_refuses' => 'Вашите отхвърлени статии',
 'info_reglage_ldap' => 'Опции: <b>Приспособяване на вписването чрез LDAP</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -680,7 +678,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_ajout_mots_cles' => 'Позволяване добавянето на ключови думи през форумите',
 'item_autoriser_documents_joints' => 'Одобряване на документи, прикрепени към статии',
 'item_autoriser_documents_joints_rubriques' => 'Одобряване на документи в рубриките',
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Включване на цели статии във файловете за обединяване',
 'item_bloquer_liens_syndiques' => 'Блокиране на обединените връзки за одобрение',
 'item_choix_administrateurs' => 'администратори',
@@ -704,7 +701,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_non_ajout_mots_cles' => 'Забрана за добавяне на ключови думи през форумите ',
 'item_non_autoriser_documents_joints' => 'Забрана за одобряване на документи в статии',
 'item_non_autoriser_documents_joints_rubriques' => 'Забрана за одобряване на документи в рубриките',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Изпращане на резюме',
 'item_non_bloquer_liens_syndiques' => 'Без блокиране на връзките - следствия от обединяване',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -944,11 +940,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_date_publication_article' => 'ДАТА НА ПУБЛИКУВАНЕ В ИНТЕРНЕТ:',
 'texte_descriptif_petition' => 'Описание на молбите',
 'texte_descriptif_rapide' => 'Кратко описание',
-'texte_documents_joints' => 'Можете да разрешите добавянето на документи (файлове, изображения,
- мултимедия и др.) към статиите и/или рубриките. Тези файлове
- могат след това да се свързват като част от
- статията или да се показват отделно.', # MODIF
-'texte_documents_joints_2' => 'Настройката не възпрепятства поместването на изображения направо в статиите.',
 'texte_effacer_base' => 'Изтриване на базата данни СПИП',
 'texte_effacer_donnees_indexation' => 'Изтриване на данни с индекси',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1113,7 +1104,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Възможности: <b>Вашата LDAP-връзка</b>',
 'titre_dernier_article_syndique' => 'Най-новите обединени статии',
-'titre_documents_joints' => 'Приложени документи',
 'titre_evolution_visite' => 'Развитие на посещенията',
 'titre_gauche_mots_edit' => 'НОМЕР НА КЛЮЧОВА ДУМА:',
 'titre_groupe_mots' => 'ГРУПА ОТ КЛЮЧОВИ ДУМИ:',
@@ -1167,7 +1157,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_syndication' => 'Обединяване на сайтовете',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
-'tout_dossier_upload' => 'Цялата папка @upload@',
 'trad_article_inexistant' => 'Не съществува статия с такъв номер',
 'trad_article_traduction' => 'Всички версии на статията:',
 'trad_deja_traduit' => 'Статията е вече преведена',
@@ -1176,16 +1165,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'trad_new' => 'Писане на нов превод на статията', # MODIF
 
 // U
-'upload_fichier_zip' => 'ZIP файл',
-'upload_fichier_zip_texte' => 'Файлът, който желаете да инсталирате е в ZIP формат.',
-'upload_fichier_zip_texte2' => 'Файлът може да бъде:',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Файлът е прекалено голям за сървъра; максималната позволена големина за  <i>upload</i> е @max@.',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'декомпресиран и всеки файл, който се съдържа в него ще бъде инсталиран на сайта. Файловете, които ще бъдат инсталирани са:',
-'upload_zip_telquel' => 'инсталиран както е, като ZIP файл;',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Почакайте няколко секунди и след това презаредете страницата.',
 'utf8_convert_avertissement' => 'В процес сте да промените съдържанието на базата Ви от данни (статии, новини и др.) от езикова кодировка <b>@orig@</b> към <b>@charset@</b>.',
 'utf8_convert_backup' => 'Не забравяйте първо да направите пълен архив на сайта. Проверете също, дали шаблоните и езиковите файлове са съвместими с @charset@. ',

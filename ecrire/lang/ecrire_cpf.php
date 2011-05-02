@@ -158,7 +158,6 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 'diff_texte_ajoute' => 'Tèks azouté',
 'diff_texte_deplace' => 'Tèks la bouzé',
 'diff_texte_supprime' => 'Tèks rotiré',
-'double_clic_inserer_doc' => 'Fè in doub-klik pou mèt rédiyon-la andan out tèks ',
 
 // E
 'email' => 'ladrès imèl',
@@ -574,7 +573,6 @@ sak i dégrèn lanvwa bann limèl sir zot bann servèr : dann kala, linskrisyon
 'info_redacteurs' => 'Bann lotèr',
 'info_redaction_en_cours' => 'LÉ APRÉ LÉKRITRIR',
 'info_redirection' => 'Tourné-viré (artourn sir inn somin wèb)',
-'info_referencer_doc_distant' => 'Pou référansé in dokiman-déor si lintènèt :',
 'info_refuses' => 'Out bann zartik lé afronté',
 'info_reglage_ldap' => 'Bann lopsyon : <b>Réglaz linportasyon LDAP</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -699,7 +697,6 @@ sanm in koulèr i présiz son léta :',
 'item_ajout_mots_cles' => 'Permèt azouté bann molaklé dann bann forom',
 'item_autoriser_documents_joints' => 'Permèt do zwinn inndé dokiman dann bann zartik',
 'item_autoriser_documents_joints_rubriques' => 'Permèt azout bann dokiman dann bann rubrik',
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Pou don a zot tout lartik byen komplé andann bann fisyé pou la sindikasyon',
 'item_bloquer_liens_syndiques' => 'Blok bann gatir sindiké pou lakonfirmasyon',
 'item_choix_administrateurs' => 'bann komandèr',
@@ -723,7 +720,6 @@ sanm in koulèr i présiz son léta :',
 'item_non_ajout_mots_cles' => 'Anpès ansèrv bann molaklé dann bann forom',
 'item_non_autoriser_documents_joints' => 'Anpès zwinn inndé dokiman dann bann zartik',
 'item_non_autoriser_documents_joints_rubriques' => 'Anpès zwinn inndé dokiman dann bann rubrik',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Pour donn azot selman in rézimé',
 'item_non_bloquer_liens_syndiques' => 'Anpès bloké bann gatir sak i vyind lasindikasyon',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -956,9 +952,6 @@ Anserv lalist anba-la pou kadr byin sak lé disponib.',
 'texte_date_publication_article' => 'LADAT LAPIBLIKASYON AN LIYN :',
 'texte_descriptif_petition' => 'Dékri inn pé kosa ifo sinyé',
 'texte_descriptif_rapide' => 'Dékri vitman kosa i lé',
-'texte_documents_joints' => 'Ou pé permèt azouté tout bann dokiman dann bann zartik èk bann rubrik (dokiman i pé èt pou sa : fisyé birotik, zimaz,
-zéléman miltimédia, tousala...). Bann fisyé-la, ou pé answit référans azot dann zinn lartik, oubyinsa afis azot sil koté.<p>', # MODIF
-'texte_documents_joints_2' => 'Réglaz-la i afront pa d-mèt bann zimaz dann bann zartik.',
 'texte_effacer_base' => 'Dégrèn bazdodné SPIP',
 'texte_effacer_donnees_indexation' => 'Dégrèn tout bann doné pou lindéksasyon',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1092,7 +1085,6 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Bann lopsyon : <b>Out lakostaz LDAP</b>',
 'titre_dernier_article_syndique' => 'Bann dernyé zartik sindiké',
-'titre_documents_joints' => 'Bann dokiman zwinn',
 'titre_evolution_visite' => 'Lévolisyon do bann vizit',
 'titre_gauche_mots_edit' => 'MO NIMÉRO :',
 'titre_groupe_mots' => 'GROUP BANN MO :',
@@ -1146,7 +1138,6 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_syndication' => 'Sindikasyon bann sitwèb',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
-'tout_dossier_upload' => 'Tout dosyé konplé la @upload@',
 'trad_article_inexistant' => 'Ni la pa trouv okin lartik i port zot niméro-la.',
 'trad_article_traduction' => 'Tout bann versyon lartik-la :',
 'trad_deja_traduit' => 'Lartik-la lé déza inn tradiksyon li-minm.',
@@ -1155,16 +1146,8 @@ sak i pé rand out sit inn pé pli lan.',
 'trad_new' => 'Ekri inn nouvèl tradiksyon lartik-la', # MODIF
 
 // U
-'upload_fichier_zip' => 'Fisyé ZIP',
-'upload_fichier_zip_texte' => 'Fisyé-là sak ou vé instalé lé inn fisyé Zip.',
-'upload_fichier_zip_texte2' => 'Fisyé-la lé pitèt :',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Fisyé-l li lé tro gro pou lo sèrvèr ; pli gran tay lé posib <i>upload</i> sa lé @max@.',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'dékopresé é sakinn zéléman ali sré pou instalé si lo sit. Tout bann fisyé pou instal i sra lor :',
-'upload_zip_telquel' => 'instalé komsa kom in larsiv kopresé Zip ;',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Mersi espèr in ti moman pi rocharj lo paj la.',
 'utf8_convert_avertissement' => 'Ou sava chanje lo kontni out bazdodné (bzartik, tite-nouvèl,etousal) sat lé koméla dan formad karaktèr <b>@orig@</b> pou pass azot dan bann karaktèr<b>@charset@</b>.',
 'utf8_convert_backup' => 'Oubly pa fè in sovgard byen komplé out sit. Sra nésésèr ou gad byen sak out ban leskelèt ek bann fisyé lang zot lé kopatib ek @charset@. Pangar, si lo sistèm pou swiv bann révizyon lé aktivé, li sra sirman ravajé.',

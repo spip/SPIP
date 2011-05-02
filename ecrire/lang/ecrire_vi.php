@@ -127,7 +127,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'diff_texte_ajoute' => 'Văn bản thêm vào',
 'diff_texte_deplace' => 'Văn bản dời đi',
 'diff_texte_supprime' => 'Văn bản bị xóa',
-'double_clic_inserer_doc' => 'Nhấp chuột hai lần để thêm lối tắt này vào khung chữ',
 
 // E
 'email' => 'Ðiện thư',
@@ -520,7 +519,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_redacteurs' => 'Chủ bút',
 'info_redaction_en_cours' => 'ĐANG SOẠN',
 'info_redirection' => 'Chuyển hướng',
-'info_referencer_doc_distant' => 'Nối kết với một tài liệu trên internet:',
 'info_refuses' => 'Bài của bạn bị từ chối',
 'info_reglage_ldap' => 'Chọn lựa: <b>Điều chỉnh việc nhập LDAP</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -645,7 +643,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_ajout_mots_cles' => 'Cho phép thêm các từ then chốt vào diễn đàn',
 'item_autoriser_documents_joints' => 'Cho phép đính kèm tài liệu vào bài vở',
 'item_autoriser_documents_joints_rubriques' => 'Cho phép đính kèm tài liệu trong đề mục',
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Include entire articles in the syndication files', # NEW
 'item_bloquer_liens_syndiques' => 'Ngăn lại, không chấp thuận các điểm nối syndicated',
 'item_choix_administrateurs' => 'quản trị viên',
@@ -669,7 +666,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_non_ajout_mots_cles' => 'Không cho phép thêm các từ then chốt vào diễn đàn',
 'item_non_autoriser_documents_joints' => 'Không cho phép đính kèm tài liệu vào bài vở',
 'item_non_autoriser_documents_joints_rubriques' => 'Không cho phép đính kèm tài liệu trong đề mục',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Only send a summary', # NEW
 'item_non_bloquer_liens_syndiques' => 'Không ngăn chặn các điểm nối kết từ syndication',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -893,8 +889,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_date_publication_article' => 'NGÀY ĐĂNG TẢI ONLINE :',
 'texte_descriptif_petition' => 'Mô tả Thỉnh nguyện thư',
 'texte_descriptif_rapide' => 'Tóm lược',
-'texte_documents_joints' => 'Bạn có thể cho phép đính kèm thêm các tài liệu (hồ sơ, hình ảnh, v.v...) vào các bài vở và/hoặc đề mục. Những hồ sơ này có thể được nối kết trong bài hoặc hiện riêng ra.', # MODIF
-'texte_documents_joints_2' => 'LƯU Ý: Bố trí hiện nay không ngăn ngừa việc nhét hình trực tiếp vào bài vở.',
 'texte_effacer_base' => 'Xóa database SPIP',
 'texte_effacer_donnees_indexation' => 'Xóa dữ kiện indexing',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1014,7 +1008,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Tùy chọn: <b>Kết nối vào LDAP</b>',
 'titre_dernier_article_syndique' => 'Những bài vừa được liên kết',
-'titre_documents_joints' => 'Tài liệu đính kèm',
 'titre_evolution_visite' => 'Thống Kê',
 'titre_gauche_mots_edit' => 'SỐ THỨ TỰ CỦA TỪ THEN CHỐT:',
 'titre_groupe_mots' => 'NHÓM TỪ THEN CHỐT:',
@@ -1068,7 +1061,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_syndication' => 'Syndicate trang web',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
-'tout_dossier_upload' => 'Tất cả hồ sơ @upload@',
 'trad_article_inexistant' => 'Không có bài nào với số này',
 'trad_article_traduction' => 'Tất cả ấn bản của bài này:',
 'trad_deja_traduit' => 'Bài này là bản dịch của bài hiện thời',
@@ -1077,16 +1069,8 @@ Bạn có thể cho phép cảnh báo hay không:',
 'trad_new' => 'Dịch bài này', # MODIF
 
 // U
-'upload_fichier_zip' => 'Hồ sơ ZIP',
-'upload_fichier_zip_texte' => 'Hồ sơ bạn tính thiết trí là hồ sơ ZIP.',
-'upload_fichier_zip_texte2' => 'Hồ sơ này có thể:',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Hồ sơ này quá to cho server; khổ lớn nhất cho phép <i>đem lên</i> là @max@.',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'được mở ra và hồ sơ trong đó sẽ được thiết trí vào trang web. Các hồ sơ sẽ được thiết trí là:',
-'upload_zip_telquel' => 'thiết trí y nguyên, hồ sơ ZIP;',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Wait a few seconds and then reload this page.', # NEW
 'utf8_convert_avertissement' => 'You are about to convert the contents of your database (articles, news items, etc) from the character set <b>@orig@</b> to the character set <b>@charset@</b>.', # NEW
 'utf8_convert_backup' => 'Don\'t forget to first make a complete backup of your site. You need also to check that your templates and language files are compatible with @charset@.', # NEW

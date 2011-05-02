@@ -129,7 +129,6 @@ Ez balidatu inportazio galdera hau.
 'diff_texte_ajoute' => 'Testua erantsita',
 'diff_texte_deplace' => 'Mugitua izan den textua',
 'diff_texte_supprime' => 'Testuaezabatua',
-'double_clic_inserer_doc' => 'klik bikoitzaren bidez lasterbidea testoan txertatzen ahal duzu',
 
 // E
 'email' => 'posta elektronikoa',
@@ -528,7 +527,6 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 'info_redacteurs' => 'Idazleak',
 'info_redaction_en_cours' => 'Idaztekobidean',
 'info_redirection' => 'Birbidirekzioa',
-'info_referencer_doc_distant' => 'Dokumentu bat interneten erreferentziatu :',
 'info_refuses' => 'Zure artikulu ezetsiak',
 'info_reglage_ldap' => 'Aukerak : LDAP inportazioaren konfigurazioa',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -652,7 +650,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'item_ajout_mots_cles' => 'Baimendu gako-hitzak foroetan ',
 'item_autoriser_documents_joints' => 'Artikuluei erantsitako dokumentuak baimendu',
 'item_autoriser_documents_joints_rubriques' => 'Ataletako artikuluak baimendu',
-'item_autoriser_selectionner_date_en_ligne' => 'dokumentu bakotxaren data aldatzea baimendu',
 'item_autoriser_syndication_integrale' => 'Artikuluen osotasuna zabaldu sindikazio fitxategietan',
 'item_bloquer_liens_syndiques' => 'Onartzeko prozesuan dauden sindikatutako loturakblokeatu',
 'item_choix_administrateurs' => 'administratzaileak',
@@ -676,7 +673,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'item_non_ajout_mots_cles' => 'Foroetan gako-hitzak erabiltzea galarazi',
 'item_non_autoriser_documents_joints' => 'Artikuluetan dokumentuak sartzea galarazi',
 'item_non_autoriser_documents_joints_rubriques' => 'Ataletan dokumentuak sartzeagalarazi',
-'item_non_autoriser_selectionner_date_en_ligne' => 'Dokumentuen data da gunean noiz gehituak izan diren data',
 'item_non_autoriser_syndication_integrale' => 'Bilduma bat baizik zabaldu',
 'item_non_bloquer_liens_syndiques' => 'Ez blokeatu sindikazio-loturak',
 'item_non_compresseur' => 'Konprimatzea desaktibatu',
@@ -902,8 +898,6 @@ zure ostapen zuzkitzaileak SQL jasaten badu, han aurkitu beharko zenituzke SQL z
 'texte_date_publication_article' => 'ARGITARAPEN DATA:',
 'texte_descriptif_petition' => 'Eskaeraren azalpena',
 'texte_descriptif_rapide' => 'Deskribapen motza',
-'texte_documents_joints' => 'Dokumentuak(fitxategi bulegotikak, irudiak, multimedia, etab.) artikuluetara eta/edo ataletara gehitzea baimendu ahal duzu. Gero fitxategi hauek artikuluan erreferientziatuak izaten ahalko dira, edo bananduta bistaratuak.', # MODIF
-'texte_documents_joints_2' => 'Konfigurazio honek ez du galarazten irudien zuzeneko txertatzea artikuluetan.',
 'texte_effacer_base' => 'Ezabatu SPIP datu-basea',
 'texte_effacer_donnees_indexation' => 'Indexazio datak ezabatu',
 'texte_effacer_statistiques' => 'Estatistikak ezabatu',
@@ -1021,7 +1015,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Aukerak: zure LDAP konexioa',
 'titre_dernier_article_syndique' => 'Azken artikulu elkartuak',
-'titre_documents_joints' => 'Erantsitako dokumentuak',
 'titre_evolution_visite' => 'Bisiten bilakaera',
 'titre_gauche_mots_edit' => 'Hitza',
 'titre_groupe_mots' => 'Hitzen taldea',
@@ -1075,7 +1068,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_syndication' => 'Tokien elkarpena',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :',
-'tout_dossier_upload' => 'Karpeta osoa @upload@',
 'trad_article_inexistant' => 'Zenbaki horrekin ez dago artikulurik',
 'trad_article_traduction' => 'Artikulu honen bertsio guztiak:',
 'trad_deja_traduit' => 'Errorea : Artikulu hau ezin da eskatutako zenbakiari lotu.',
@@ -1084,16 +1076,8 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'trad_new' => 'Artikulu honen itzulpen berria idatzi', # MODIF
 
 // U
-'upload_fichier_zip' => 'ZIP fitxategia',
-'upload_fichier_zip_texte' => 'Instalatzea proposatzen den fitxategia Zip fitxategi bat da.',
-'upload_fichier_zip_texte2' => 'Fitxategi hau izan ahal da:',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Fitxategi hauhandiegia da zerbitzarirako; baimendutako gehienezko tamainia upload-ean@max@-koa da.',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'deskonprimituta eta gunean instalatutadaukan elementu bakoitza. Gunean instalatu egingo diren fitxategiak dira:',
-'upload_zip_telquel' => 'Besterik gabe instalatuta, Zip fitxategi bezala;',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.', # NEW
 'utf8_convert_avertissement' => 'Vous vous apprêtez à convertir le contenu de votre base de données (articles, brèves, etc) du jeu de caractères <b>@orig@</b> vers le jeu de caractères <b>@charset@</b>.', # NEW
 'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde complète de votre site. Vous devrez aussi vérifier que vos squelettes et fichiers de langue sont compatibles @charset@.', # NEW

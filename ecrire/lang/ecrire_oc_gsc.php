@@ -126,7 +126,6 @@ la documentacion d\'SPIP</a>.', # MODIF
 'diff_texte_ajoute' => 'Tèxt ajustat',
 'diff_texte_deplace' => 'Tèxt ajustat',
 'diff_texte_supprime' => 'Tèxt suprimit',
-'double_clic_inserer_doc' => 'Besclicatz entà inserir aquera acorcida dens lo tèxt.',
 
 // E
 'email' => 'e-mail',
@@ -536,7 +535,6 @@ Daubuns aubergaders n\'autorizan pas lo mandadís d\'e-mails dempuish los lors s
 'info_redacteurs' => 'Redactors',
 'info_redaction_en_cours' => 'EN CORS DE REDACCION',
 'info_redirection' => 'Redireccion',
-'info_referencer_doc_distant' => 'Referenciar un document dens l\'Internet:',
 'info_refuses' => 'Los vòstes articles arrefusats',
 'info_reglage_ldap' => 'Opcions: <b>Reglatge de l\'importacion LDAP</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -661,7 +659,6 @@ ua color qu\'indica lo lor estat:',
 'item_ajout_mots_cles' => 'Autorizar que s\'ajuste mots clau aus forums',
 'item_autoriser_documents_joints' => 'Autorizar que\'s junte documents aus articles',
 'item_autoriser_documents_joints_rubriques' => 'Autorizar los documents dens las rubricas',
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
 'item_bloquer_liens_syndiques' => 'Blocar los ligams sindicats per validacion',
 'item_choix_administrateurs' => 'los administrators',
@@ -685,7 +682,6 @@ ua color qu\'indica lo lor estat:',
 'item_non_ajout_mots_cles' => 'Proïbir l\'utilizacion deus mots clau dens los forums',
 'item_non_autoriser_documents_joints' => 'N\'autorizar pas los documents dens los articles',
 'item_non_autoriser_documents_joints_rubriques' => 'N\'autorizar pas los documents dens las rubricas',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
 'item_non_bloquer_liens_syndiques' => 'Non blocar pas los ligams gessits de la sindicacion',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -921,11 +917,6 @@ qu\'apareish quan la murga e passa suu títol.',
 'texte_date_publication_article' => 'DATA DE PUBLICACION EN LINHA :',
 'texte_descriptif_petition' => 'Descriptiu de la peticion',
 'texte_descriptif_rapide' => 'Descriptiu rapid',
-'texte_documents_joints' => 'Que podetz autorizar que s\'ajusten documents (fichièrs burotics, imatges,
- multimèdia, etc.) aus articles e/o a las rubricas. Aqueths fichièrs
- que pòden puish estar referenciats dens
- l\'article, o aparéisher a despart.', # MODIF
-'texte_documents_joints_2' => 'Aqueth reglatge n\'empacha pas d\'inserir imatges dirèctament dens los articles.',
 'texte_effacer_base' => 'Esfaçar la basa de dadas SPIP',
 'texte_effacer_donnees_indexation' => 'Esfaçar las dadas d\'indexacion',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1104,7 +1095,6 @@ s\'avetz modificat de bèth pro lo grafisme o l\'estructura deu sit.',
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opcions: <b>La vòsta connexion LDAP</b>',
 'titre_dernier_article_syndique' => 'Darrèrs articles sindicats',
-'titre_documents_joints' => 'Documents junts',
 'titre_evolution_visite' => 'Evolucion de las vesitas',
 'titre_gauche_mots_edit' => 'MOT NUMÈRO:',
 'titre_groupe_mots' => 'GROP DE MOTS:',
@@ -1158,7 +1148,6 @@ s\'avetz modificat de bèth pro lo grafisme o l\'estructura deu sit.',
 'titre_syndication' => 'Sindicacion de sits',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
-'tout_dossier_upload' => 'Tot lo dorsièr @upload@',
 'trad_article_inexistant' => 'N\'i a pas nat article qui pòrte aqueth numèro.',
 'trad_article_traduction' => 'Totas las versions d\'aqueth article:',
 'trad_deja_traduit' => 'Aqueth article qu\'ei ja ua arrevirada de l\'article present.',
@@ -1167,16 +1156,8 @@ s\'avetz modificat de bèth pro lo grafisme o l\'estructura deu sit.',
 'trad_new' => 'Escríver ua arrevirada navèra d\'aqueste article', # MODIF
 
 // U
-'upload_fichier_zip' => 'Fichièr ZIP',
-'upload_fichier_zip_texte' => 'Lo fichièr que prepausatz d\'installar qu\'ei un fichièr Zip.',
-'upload_fichier_zip_texte2' => 'Aqueth fichièr que pòt estar:',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Aqueth fichièr qu\'ei tròp gròs peu servider; la talha maxima autorizada en <i>upload</i> qu\'ei de @max@.',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'descomprimit e cada element que contien installat suu sit. Alavetz los fichièrs que seràn installats suu sit que son:',
-'upload_zip_telquel' => 'installat tau com ei, com archiu comprimit Zip;',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.', # NEW
 'utf8_convert_avertissement' => 'Vous vous apprêtez à convertir le contenu de votre base de données (articles, brèves, etc) du jeu de caractères <b>@orig@</b> vers le jeu de caractères <b>@charset@</b>.', # NEW
 'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde complète de votre site. Vous devrez aussi vérifier que vos squelettes et fichiers de langue sont compatibles @charset@.', # NEW

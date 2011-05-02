@@ -127,7 +127,6 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'diff_texte_ajoute' => 'Text derbäi setzen',
 'diff_texte_deplace' => 'Text geréckelt',
 'diff_texte_supprime' => 'Text geläscht',
-'double_clic_inserer_doc' => 'Duebel-Klick fir dës Ofkirzung an den Text ze iwerhuelen',
 
 // E
 'email' => 'Email',
@@ -522,7 +521,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_redacteurs' => 'Redakteren',
 'info_redaction_en_cours' => 'AN DER AARBECHT',
 'info_redirection' => 'Ëmledung',
-'info_referencer_doc_distant' => 'En Dokument vum Internet referenzéieren:',
 'info_refuses' => 'Är refuséiert Artikelen',
 'info_reglage_ldap' => 'Optiounen: <b>Astellen vum LDAP-Import</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -645,7 +643,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'item_ajout_mots_cles' => 'Schlësselwierder an de Forum\'en erlaben',
 'item_autoriser_documents_joints' => 'Dokumenter bei den Artikelen erlaben',
 'item_autoriser_documents_joints_rubriques' => 'Dokumenter an de Rubriken erlaben',
-'item_autoriser_selectionner_date_en_ligne' => 'Erlaaben den Datum vun all Dokument ze änneren',
 'item_autoriser_syndication_integrale' => 'D\'Artikelen ganz an de Syndicatiouns-Fichier\'en iwerdroën',
 'item_bloquer_liens_syndiques' => 'Déi syndiquéiert Linken fir eng Validatioun blockéieren',
 'item_choix_administrateurs' => 'd\'Administrateuren',
@@ -669,7 +666,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'item_non_ajout_mots_cles' => 'D\'Schlësselwierder an de Forum\'en verbidden',
 'item_non_autoriser_documents_joints' => 'Keng Dokumenter bei den Artikelen erlaben',
 'item_non_autoriser_documents_joints_rubriques' => 'Keng Dokumenter an de Rubriken erlaben',
-'item_non_autoriser_selectionner_date_en_ligne' => 'Den Datum vun den Dokumenter ass deen wéini së op de Site gesaat goufen',
 'item_non_autoriser_syndication_integrale' => 'Nëmmen e Résumé iwerdroën',
 'item_non_bloquer_liens_syndiques' => 'D\'Linken aus der Syndicatioun nët blockéieren',
 'item_non_compresseur' => 'Kompressioun ausschalten',
@@ -894,8 +890,6 @@ Benotzt d\'Lëscht hei drënner fir unzegin wéi eng Elementer e kann benotzen.'
 'texte_date_publication_article' => 'PUBLIZÉIRT DEN:',
 'texte_descriptif_petition' => 'Beschreiwung vun der Petitioun',
 'texte_descriptif_rapide' => 'Kuerz Beschreiwung',
-'texte_documents_joints' => 'Dir kënnt Dokumenter (Fichier\'en, Biller, Multimedia, asw) bei den Artikelen an/oder de Rubriken erlaben. Dës Fichier\'en kënnen dann am Artikel gelinkt oder separat ugewisen ginn.', # MODIF
-'texte_documents_joints_2' => 'Dës Astellung verhënnert nët Biller direkt an den Artikel derbäi ze setzen.',
 'texte_effacer_base' => 'D\'SPIP-Datebank läschen',
 'texte_effacer_donnees_indexation' => 'Den Index läschen',
 'texte_effacer_statistiques' => 'Statistik läschen',
@@ -1008,7 +1002,6 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_conflit_edition' => 'Konflikt wärend der Editioun',
 'titre_connexion_ldap' => 'Optiounen: <b>Är LDAP-Verbindung</b>',
 'titre_dernier_article_syndique' => 'Läscht syndiquéiert Artikelen',
-'titre_documents_joints' => 'Gelinkten Dokumenter',
 'titre_evolution_visite' => 'Évolutioun vun de Visiten',
 'titre_gauche_mots_edit' => 'WUERT NUMMER:',
 'titre_groupe_mots' => 'WUERT-GRUPP:',
@@ -1062,7 +1055,6 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_syndication' => 'Syndicatioun vun de Siten',
 'titre_type_urls' => 'Format vun den URL-Adressen',
 'tls_ldap' => 'Transport Layer Security:',
-'tout_dossier_upload' => 'De ganzen Dossier @upload@',
 'trad_article_inexistant' => 'Ët gët keen Artikel mat där Nummer.',
 'trad_article_traduction' => 'All d\'Versiounen vun dësem Artikel:',
 'trad_deja_traduit' => 'Fehler: Onméiglech dësen Artikel un déi gefrote Nummer ze bannen.',
@@ -1071,16 +1063,8 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'trad_new' => 'Eng nei Iwwersetzung vun dësem Artikel schreiwen', # MODIF
 
 // U
-'upload_fichier_zip' => 'ZIP-Fichier',
-'upload_fichier_zip_texte' => 'De Fichier deen dër installéieren wëllt ass en Zip-Fichier.',
-'upload_fichier_zip_texte2' => 'Dëse Fichier ka sinn:',
 'upload_info_mode_document' => 'Dëst Bild am Portfolio ofleen',
 'upload_info_mode_image' => 'Dëst Bild aus dem Portfolio läschen',
-'upload_limit' => 'Dëse Fichier ass ze grouss fir de Server; déi maximal Gréisst fir <i>eropzelueden</i> ass @max@.',
-'upload_zip_conserver' => 'Archiv no der Extraktioun behalen',
-'upload_zip_decompacter' => 'de-kompriméiert an all Element um Site installéiert. D\'Fichier\'en déi dann um Site installéiert ginn sinn:',
-'upload_zip_telquel' => 'esou wéi en ass, als kompriméierten Zip-Archiv installéiert;',
-'upload_zip_titrer' => 'Titel ginn baséiert um Numm vum Fichier',
 'utf8_convert_attendez' => 'Waart e bëschen a lued dann dës Säit nei.',
 'utf8_convert_avertissement' => 'Dir wärt elo den Inhalt vun ärer Datebank (Artikelen, Kurzmeldungen, asw) vum Character-Set <strong>@orig@</strong> ob <strong>@charset@</strong> änneren.',
 'utf8_convert_backup' => 'Vergiesst nët virdrun e kompletten Backup vun ärem Site ze maachen. Dir musst och kontrolléieren ob är Skeletter a Sproch-Fichier\'en @charset@ kompatibel sinn.',

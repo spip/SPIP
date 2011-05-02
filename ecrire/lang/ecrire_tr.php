@@ -129,7 +129,6 @@ Bu ithal istemini onaylamayın.
 'diff_texte_ajoute' => 'Eklenmiş metin ',
 'diff_texte_deplace' => 'Yeri değiştirilmiş metin ',
 'diff_texte_supprime' => 'Silinmiş metin ',
-'double_clic_inserer_doc' => 'Bu kısayolu metne eklemek için çift tıklayınız',
 
 // E
 'email' => 'e-posta',
@@ -543,7 +542,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_redacteurs' => 'Editörler',
 'info_redaction_en_cours' => 'YAZIM AŞAMASINDA',
 'info_redirection' => 'Yönlendirme',
-'info_referencer_doc_distant' => 'Internet üzerinde bir dokümana atıfta bulunmak :',
 'info_refuses' => 'Reddedilen makaleleriniz',
 'info_reglage_ldap' => 'Seçenekler : <b>LDAP ithalinin ayarlanması.</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -668,7 +666,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_ajout_mots_cles' => 'Forumlara anahtar sözcük eklemeye izin ver',
 'item_autoriser_documents_joints' => 'Makalelere doküman eklenmesine izin ver',
 'item_autoriser_documents_joints_rubriques' => 'Bölümlerde dokümanlara izin ver',
-'item_autoriser_selectionner_date_en_ligne' => 'Her belgenin çevrimiçi yayınlanma tarihinin değiştirilmesine izin vermek',
 'item_autoriser_syndication_integrale' => 'Makaleleri paylaşım dosyalarında oldukları gibi yayınla',
 'item_bloquer_liens_syndiques' => 'Paylaşımlı bağların onay için engellenmesi',
 'item_choix_administrateurs' => 'Yöneticiler ',
@@ -692,7 +689,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_non_ajout_mots_cles' => 'Forumlarda anahtar sözcük kullanımını yasakla',
 'item_non_autoriser_documents_joints' => 'Makalelerde dokümana izin verme',
 'item_non_autoriser_documents_joints_rubriques' => 'Bölümlerde dokümanlara izin verme',
-'item_non_autoriser_selectionner_date_en_ligne' => 'Belgelerin tarihleri siteye eklendikleri tarihtir',
 'item_non_autoriser_syndication_integrale' => 'Sadece özet yayınla',
 'item_non_bloquer_liens_syndiques' => 'Paylaşmadan gelen bağları engelleme',
 'item_non_compresseur' => 'Sıkıştırmayı dezaktive et',
@@ -931,11 +927,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_date_publication_article' => 'ÇEVRİMİÇİ YAYINLANMA TARİHİ:',
 'texte_descriptif_petition' => 'Dilekçenin tanımı',
 'texte_descriptif_rapide' => 'Hızlı tanım',
-'texte_documents_joints' => 'Makale ve/veya bölümlere doküman eklenmesine izin verebilirsiniz
-    (dosya, resim, mültimedya, vb.)
-     Bu dosyalar sonradan makalede atıf konusu olabilir 
-     ya da ayrı olarak görüntülenebilirler. ', # MODIF
-'texte_documents_joints_2' => 'Bu ayar, makalelere doğrudan resim girilmesine engel değildir.',
 'texte_effacer_base' => 'SPIP veritabanını sil',
 'texte_effacer_donnees_indexation' => 'Endeksleme verilerini sil',
 'texte_effacer_statistiques' => 'İstatistikleri sil',
@@ -1044,7 +1035,6 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_conflit_edition' => 'Düzenleme esnasında çakışma',
 'titre_connexion_ldap' => 'Seçenekler : <b>LDAP bağlantılarınız</b>',
 'titre_dernier_article_syndique' => 'Son yayınlanan paylaşımlı makaleler',
-'titre_documents_joints' => 'Ekteki dokümanlar',
 'titre_evolution_visite' => 'Ziyaretlerin gelişimi ',
 'titre_gauche_mots_edit' => 'ANAHTAR SÖZCÜK NO:',
 'titre_groupe_mots' => 'SÖZCÜK GRUBU:',
@@ -1098,7 +1088,6 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_syndication' => 'Site paylaşımı',
 'titre_type_urls' => 'URL adres tipi',
 'tls_ldap' => 'Taşıma Katmanı Güvenliği (TLS) :',
-'tout_dossier_upload' => 'Tüm @upload@ dosyası',
 'trad_article_inexistant' => 'Bu numaralı bir makale yok.',
 'trad_article_traduction' => 'Bu makalenin tüm sürümleri :',
 'trad_deja_traduit' => 'Bu makalenin istenen numaraya bağlanması olanaksız.',
@@ -1107,16 +1096,8 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'trad_new' => 'Bu makalenin yeni bir çevirisini yaz', # MODIF
 
 // U
-'upload_fichier_zip' => 'ZIP dosya',
-'upload_fichier_zip_texte' => 'Kurmayı önerdiğiniz dosya bir Zip dosya.',
-'upload_fichier_zip_texte2' => 'Bu dosyanın şu sorunu olabilir :',
 'upload_info_mode_document' => 'Bu resmi portföye ekle',
 'upload_info_mode_image' => 'Bu resmi portföyden çıkar',
-'upload_limit' => 'Bu dosya sunucuya göre fazla büyük ; yüklenmesine izin verilen en büyük dosya : <i>@max@</i>.',
-'upload_zip_conserver' => 'Açtıktan sonra arşiv dosyasını sakla',
-'upload_zip_decompacter' => 'Açıldı ve içerdiği tüm elemanlar siteye kuruldu. Siteye kurulacak dosyalar şunlar :',
-'upload_zip_telquel' => 'Sıkıştırılmış ZIP arşivi olarak, olduğu gibi kurulmuş ;',
-'upload_zip_titrer' => 'Dosya isimlerine göre başlık ver',
 'utf8_convert_attendez' => 'Bir süre bekleyip sayfayı yeniden yükleyiniz.',
 'utf8_convert_avertissement' => 'Veritabanınızın içeriğini (makaleler, kısa haberler vs.) <b>@orig@</b> karakter setinden <b>@charset@</b> karakter setine dönüştürmektesiniz .',
 'utf8_convert_backup' => 'Önceden sitenizin tam bir yedeğini almayı unutmayınız. Ayrıca iskeletlerinizin ve dil dosyalarınızın @charset@ karakter setiyle uyumlu olup olmadığını doğrulamalısınız. ',

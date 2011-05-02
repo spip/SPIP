@@ -132,7 +132,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Added text', # NEW
 'diff_texte_deplace' => 'Moved text', # NEW
 'diff_texte_supprime' => 'Deleted text', # NEW
-'double_clic_inserer_doc' => 'Double-cliquez pour insérer ce raccourci dans le texte', # NEW
 
 // E
 'email' => 'e-mail',
@@ -537,7 +536,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redacteurs' => 'Redaktører',
 'info_redaction_en_cours' => 'REDIGERING ER IGANG',
 'info_redirection' => 'Viderestilling',
-'info_referencer_doc_distant' => 'Référencer un document sur l\'internet :', # NEW
 'info_refuses' => 'Dine artikler er afvist',
 'info_reglage_ldap' => 'Muligheder: <b>Konfigurere LDAP understøttelse</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -662,7 +660,6 @@ i en farve, der angiver deres status:',
 'item_ajout_mots_cles' => 'Tillad at knytte nøgleord til forummer',
 'item_autoriser_documents_joints' => 'Tillad at vedhæfte dokumenter til artikler',
 'item_autoriser_documents_joints_rubriques' => 'Tillad dokumenter i afsnit',
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
 'item_bloquer_liens_syndiques' => 'Afspær syndikerede links indtil de er godkendt',
 'item_choix_administrateurs' => 'administratorer',
@@ -686,7 +683,6 @@ i en farve, der angiver deres status:',
 'item_non_ajout_mots_cles' => 'Tillad ikke at knytte nøgleord til forummer',
 'item_non_autoriser_documents_joints' => 'Tillad ikke vedhæftning af dokumenter til artikler',
 'item_non_autoriser_documents_joints_rubriques' => 'Tillad ikke dokumenter i afsnit',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
 'item_non_bloquer_liens_syndiques' => 'Undlad at spærre links til syndikerede websteder',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -918,9 +914,6 @@ i en farve, der angiver deres status:',
 'texte_date_publication_article' => 'DATO FOR ONLINE OFFENTLIGGØRELSE:',
 'texte_descriptif_petition' => 'Beskrivelse af appellen',
 'texte_descriptif_rapide' => 'Kort beskrivelse',
-'texte_documents_joints' => 'Du kan tillade at dokumenter (kontorfiler, billeder,
-	multimedia, osv.) føjes til artikler og/eller afsnit. Der kan så henvises til filerne i dokumentet, eller de kan vises separat.<p>', # MODIF
-'texte_documents_joints_2' => 'Denne konfiguration hindrer ikke indsættelse af billeder direkte i dokumenter.',
 'texte_effacer_base' => 'Slet SPIP databasen',
 'texte_effacer_donnees_indexation' => 'Slet indekseringsdata',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1070,7 +1063,6 @@ i en farve, der angiver deres status:',
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Indstillinger: <b>Din LDAP forbindelse</b>',
 'titre_dernier_article_syndique' => 'Senest syndikerede artikler',
-'titre_documents_joints' => 'Vedhæftede dokumenter',
 'titre_evolution_visite' => 'Udvikling i besøgstal',
 'titre_gauche_mots_edit' => 'NØGLEORDSNUMMER:',
 'titre_groupe_mots' => 'NØGLEORDSGRUPPE:',
@@ -1124,7 +1116,6 @@ i en farve, der angiver deres status:',
 'titre_syndication' => 'Webstedssyndikering',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
-'tout_dossier_upload' => 'Tout le dossier @upload@', # NEW
 'trad_article_inexistant' => 'Der findes ingen artikel med dette nummer.',
 'trad_article_traduction' => 'Alle udgaver af denne artikel :',
 'trad_deja_traduit' => 'Denne artikel er allerede en oversættelse af den aktuelle artikel.',
@@ -1133,16 +1124,8 @@ i en farve, der angiver deres status:',
 'trad_new' => 'Lav en ny oversættelse af denne artikel', # MODIF
 
 // U
-'upload_fichier_zip' => 'Fichier ZIP', # NEW
-'upload_fichier_zip_texte' => 'Le fichier que vous proposez d\'installer est un fichier Zip.', # NEW
-'upload_fichier_zip_texte2' => 'Ce fichier peut être :', # NEW
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Ce fichier est trop gros pour le serveur ; la taille maximum autorisée en <i>upload</i> est de @max@.', # NEW
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'décompressé et chaque élément qu\'il contient installé sur le site. Les fichiers qui seront alors installés sur le site sont :', # NEW
-'upload_zip_telquel' => 'installé tel quel, en tant qu\'archive compressée Zip ;', # NEW
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.', # NEW
 'utf8_convert_avertissement' => 'Vous vous apprêtez à convertir le contenu de votre base de données (articles, brèves, etc) du jeu de caractères <b>@orig@</b> vers le jeu de caractères <b>@charset@</b>.', # NEW
 'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde complète de votre site. Vous devrez aussi vérifier que vos squelettes et fichiers de langue sont compatibles @charset@.', # NEW

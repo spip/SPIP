@@ -132,7 +132,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Dodany tekst',
 'diff_texte_deplace' => 'Przeniesiony tekst',
 'diff_texte_supprime' => 'Usunięty tekst',
-'double_clic_inserer_doc' => 'Kliknij dwa razy aby umieścić skrót w tekście',
 
 // E
 'email' => 'e-mail',
@@ -554,7 +553,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redacteurs' => 'Redaktorzy',
 'info_redaction_en_cours' => 'REDAKCJA W TOKU',
 'info_redirection' => 'Przekierowanie',
-'info_referencer_doc_distant' => 'Dodaj odnośnik do dokumentu w internecie:',
 'info_refuses' => 'Twoje odrzucone artykuły',
 'info_reglage_ldap' => 'Opcje: <b>Regulacja importu LDAP</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -678,7 +676,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'item_ajout_mots_cles' => 'Autoryzuj słowa kluczowe dodane do forum',
 'item_autoriser_documents_joints' => 'Autoryzuj załączniki do artykułów',
 'item_autoriser_documents_joints_rubriques' => 'Autoryzacja dokumentów w działach',
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Wysyłanie pełnej treści artykułów w pliku syndykacji',
 'item_bloquer_liens_syndiques' => 'Zablokuj akceptację syndykowanych linków',
 'item_choix_administrateurs' => 'administratorzy',
@@ -702,7 +699,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'item_non_ajout_mots_cles' => 'Nie autoryzuj dodawania słów kluczowych do forum',
 'item_non_autoriser_documents_joints' => 'Nie autoryzuj dokumentów w artykułach',
 'item_non_autoriser_documents_joints_rubriques' => 'Nie autoryzuj dokumentów w działach',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Wysyłanie podsumowania',
 'item_non_bloquer_liens_syndiques' => 'Nie blokuj łączy pochodzących z syndykacji',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -939,11 +935,6 @@ od początku opublikowania artykułu pojawi się kiedy najedziesz myszką na tyt
 'texte_date_publication_article' => 'DATA PUBLIKACJI ONLINE:',
 'texte_descriptif_petition' => 'Opis ogłoszenia',
 'texte_descriptif_rapide' => 'Krótki opis',
-'texte_documents_joints' => 'Możesz autoryzować dodawanie dokumentów tekstowych, obrazków,
-multimediów, itd.) do artykułów bądź działów. Te pliki
- mogą zostać dołączone do artykułu
- lub mogą być użyte niezależnie.<p>', # MODIF
-'texte_documents_joints_2' => 'Te ustawienia nie przeszkadzają we wstawianiu obrazków bezpośrednio do artykułów.',
 'texte_effacer_base' => 'Usuń bazę danych SPIP',
 'texte_effacer_donnees_indexation' => 'Wymaż dane pochodzące z indeksowania',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1104,7 +1095,6 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opcje: <b>Twoje połączenie LDAP</b>',
 'titre_dernier_article_syndique' => 'Ostatnio syndykowane artykuły',
-'titre_documents_joints' => 'Załączniki',
 'titre_evolution_visite' => 'Ewolucja odwiedzin',
 'titre_gauche_mots_edit' => 'SŁOWO NUMER :',
 'titre_groupe_mots' => 'GRUPY SŁÓW KLUCZOWYCH:',
@@ -1158,7 +1148,6 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_syndication' => 'Syndykacja stron',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :',
-'tout_dossier_upload' => 'Cały katalog @upload@',
 'trad_article_inexistant' => 'Nie ma artykułu o tym numerze.',
 'trad_article_traduction' => 'Wszystkie wersje tego artykułu:',
 'trad_deja_traduit' => 'Błąd: nie można połączyć tego artykułu z wybranym numerem.',
@@ -1167,16 +1156,8 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'trad_new' => 'Napisz nowe tłumaczenie artykułu', # MODIF
 
 // U
-'upload_fichier_zip' => 'Plik ZIP',
-'upload_fichier_zip_texte' => 'Plik, który chcesz zainstalować jest plikiem ZIP.',
-'upload_fichier_zip_texte2' => 'Ten plik może być :',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Ten plik jest zbyt duży dla serwera ;maksymalny rozmiar pliku zapisywanego na serwerze to @max@.',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'zdekompresowany i każdy jego element zostanie zainstalowany w serwisie. Pliki, które zostaną zainstalowane w serwisie to:',
-'upload_zip_telquel' => 'zostaną zainstalowane jako archiwum Zip;',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Poczekaj chwilę i odśwież stronę.',
 'utf8_convert_avertissement' => 'Zamierzasz przekonwertować zawartość Twojej bazy danych (artykuły, aktualności, etc.) z kodowania <b>@orig@</b> na kodowanie <b>@charset@</b>.',
 'utf8_convert_backup' => 'Nie zapomnij wykonać wcześniej kopii bezpieczeństwa Twojej strony. Powinieneś także zweryfikować czy Twoje szkielety i pliki językowe są zgodne z @charset@. W innym wypadku przegląd zmian - jeśli jest aktywny - zostanie zniszczony.',

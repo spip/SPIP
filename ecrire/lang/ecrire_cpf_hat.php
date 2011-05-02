@@ -131,7 +131,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Tèks se ajoute',
 'diff_texte_deplace' => 'Tèks se deplase',
 'diff_texte_supprime' => 'Tèks se kraze',
-'double_clic_inserer_doc' => 'Apiyé-doub pou mèt tichemen-nan nan teks sa-a',
 
 // E
 'email' => 'limèl',
@@ -553,7 +552,6 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
 'info_redacteurs' => 'Redaktè yo',
 'info_redaction_en_cours' => 'KI AP POU EKRI ANKO',
 'info_redirection' => 'Tounyen déyè sou yon lòt adrès ',
-'info_referencer_doc_distant' => 'Réféwanse yon dokiman-déo sou entènèt :',
 'info_refuses' => 'Atik w-a ki te finn refize',
 'info_reglage_ldap' => 'Opsyon : <b>Reglaj lempotasyon LDAP</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -678,7 +676,6 @@ nan yon koulè ki bay lestati ali :',
 'item_ajout_mots_cles' => 'Bay pémision joute tout moklé nan fowom yo',
 'item_autoriser_documents_joints' => 'Asèpte dokiman jwenn yo nan atik yo',
 'item_autoriser_documents_joints_rubriques' => 'Asèpte dokiman jwenn yo nan ribrik yo',
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
 'item_bloquer_liens_syndiques' => 'Bloke lyen lasendikasyon sa-yo ki pou konfime',
 'item_choix_administrateurs' => 'komandè yo',
@@ -702,7 +699,6 @@ nan yon koulè ki bay lestati ali :',
 'item_non_ajout_mots_cles' => 'Entèdi moun yo mèt mokle nan fowom yo',
 'item_non_autoriser_documents_joints' => 'Asèpte pa dokiman jwenn nan atik yo',
 'item_non_autoriser_documents_joints_rubriques' => 'Asèpte pa dokiman jwenn nan ribrik yo',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
 'item_non_bloquer_liens_syndiques' => 'Blok pa lyen ki soti senkikasyon an',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -941,11 +937,6 @@ lenstalasyon SPIP pou w kreye yon lòt nouvo baz ak son promyé laksé komandè'
 'texte_date_publication_article' => 'LADAT PIBLIKASYON AN LIY :',
 'texte_descriptif_petition' => 'Dékrisyon pétisyon nan',
 'texte_descriptif_rapide' => 'Dekrisyon taptap',
-'texte_documents_joints' => 'Ou kapab permè ajoute tou dokiman (fichye birotik, limaj,
- miltimédia, etousa.) nan atik ak ribrik yo. Fichye sa-yo
- se posib référans azot aprè nan latik
- osnon afiche azot tou sèl.', # MODIF
-'texte_documents_joints_2' => 'Règlaj-la ka pa enpeche bay zot limaj nan atik dirékman.',
 'texte_effacer_base' => 'Efase labazdoné SPIP',
 'texte_effacer_donnees_indexation' => 'Efase tout doné pou lendeksasyon',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1113,7 +1104,6 @@ ou nan dékripsyon atik sa-yo
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opsyon sa-yo : <b>ou konèksyon LDAP</b>',
 'titre_dernier_article_syndique' => 'Tout denye atik sendike',
-'titre_documents_joints' => 'Dokiman yo te jwenn nan atik',
 'titre_evolution_visite' => 'Evolisyon vizit yo',
 'titre_gauche_mots_edit' => 'MOKLE NIMEWO :',
 'titre_groupe_mots' => 'GWOUP MOKLE :',
@@ -1167,7 +1157,6 @@ ou nan dékripsyon atik sa-yo
 'titre_syndication' => 'Sendikasyon pou tout sit yo',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
-'tout_dossier_upload' => 'Dosyé-a tout antyé @upload@',
 'trad_article_inexistant' => 'Okenn atik gen pa nimewo-a.',
 'trad_article_traduction' => 'Tout versyon pou atik la :',
 'trad_deja_traduit' => 'Atik sa a se deja tradiksyon pou prezan atik la.', # MODIF
@@ -1176,16 +1165,8 @@ ou nan dékripsyon atik sa-yo
 'trad_new' => 'Ekri tradiksyon ankò pou atik la', # MODIF
 
 // U
-'upload_fichier_zip' => 'Fichye ZIP',
-'upload_fichier_zip_texte' => 'Fichye sak w ap pwopoze instale se yon fichye Zip.',
-'upload_fichier_zip_texte2' => 'Fichye se petèt :',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Fichye a se two gwo pou servèr la  ; pli gran tay posib pou <i>upload</i>se @max@.',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'dekonprese ek chak eleman li ka kontni se instale sou sit-la. Fichye yo ke instale sou sit-la se  :',
-'upload_zip_telquel' => 'te enstale komsa kom achiv koprese Zip ;',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.', # NEW
 'utf8_convert_avertissement' => 'Vous vous apprêtez à convertir le contenu de votre base de données (articles, brèves, etc) du jeu de caractères <b>@orig@</b> vers le jeu de caractères <b>@charset@</b>.', # NEW
 'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde complète de votre site. Vous devrez aussi vérifier que vos squelettes et fichiers de langue sont compatibles @charset@.', # NEW
