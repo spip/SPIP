@@ -452,11 +452,15 @@ function _T($texte, $args=array(), $class='') {
 	}
 	$text = $traduire($texte, $lang);
 
-	if (!strlen($text))
+	if (!strlen($text)){
+		$text = $texte;
 		// pour les chaines non traduites, assurer un service minimum
-		$text = str_replace('_', ' ',
-			 (($n = strpos($texte,':')) === false ? $texte :
-				substr($texte, $n+1)));
+		if (!isset($GLOBALS['test_i18n']))
+			$text = str_replace('_', ' ',
+				 (($n = strpos($text,':')) === false ? $texte :
+					substr($texte, $n+1)));
+		$class=null;
+	}
 
 	return _L($text, $args, $class);
 
@@ -465,7 +469,7 @@ function _T($texte, $args=array(), $class='') {
 // Remplacer les variables @....@ par leur valeur dans une chaine de langue.
 // Aussi appelee quand une chaine n'est pas encore dans les fichiers de langue
 // http://doc.spip.org/@_L
-function _L($text, $args=array(), $class=NULL) {
+function _L($text, $args=array(), $class=null) {
 	$f = $text;
 	if (is_array($args)) {
 		foreach ($args as $name => $value) {
@@ -479,8 +483,8 @@ function _L($text, $args=array(), $class=NULL) {
 		if ($args) spip_log("$f:  variables inutilisees " . join(', ', array_keys($args)),_LOG_DEBUG);
 	}
 
-	if ($GLOBALS['test_i18n'] AND $class===NULL)
-		return "<span style='color:red;'>$text</span>";
+	if ($GLOBALS['test_i18n'] AND $class===null)
+		return "<blink style='color:red;'>$text</blink>";
 	else
 		return $text;
 }
