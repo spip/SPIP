@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Transformi al [[sub-paĝan noton]]',
 'barre_paragraphe' => 'Krei paragrafon',
 'barre_quote' => '<quote>Citi mesaĝon</quote>',
-'bouton_ajouter_document' => 'ALDONI DOKUMENTON', # MODIF
-'bouton_ajouter_image' => 'ALDONI BILDON', # MODIF
-'bouton_ajouter_image_document' => 'Aldoni bildon aŭ dokumenton',
 'bouton_changer' => 'Ŝanĝi',
 'bouton_chercher' => 'Serĉi',
 'bouton_choisir' => 'Elekti',
@@ -227,9 +224,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'okazanta',
-'entree_dimensions' => 'Dimensioj :',
-'entree_titre_document' => 'Titolo de la dokumento :',
-'entree_titre_image' => 'Bildtitolo :',
 'envoi_via_le_site' => 'Sendo tra la retejo',
 'erreur' => 'Eraro',
 'erreur_balise_non_fermee' => 'lasta ne fermita marko :',
@@ -368,9 +362,6 @@ Dankon pro via partopreno
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Viziti', # MODIF
 'icone_voir_en_ligne' => 'Vidi ĉeretigite',
-'image_tourner_180' => 'Rotacio 180°',
-'image_tourner_droite' => '90° rotacio dekstren',
-'image_tourner_gauche' => '90° rotacio maldekstren',
 'img_indisponible' => 'nedisponebla bildo',
 'impossible' => 'ne eblas',
 'info_a_suivre' => 'STABEJO »',
@@ -416,9 +407,6 @@ Dankon pro via partopreno
 'info_description' => 'Priskribo :',
 'info_description_2' => 'Priskribo :',
 'info_dimension' => 'Dimensioj :',
-'info_document' => 'Dokumento ',
-'info_document_indisponible' => 'Tiu ĉi dokumento ne disponeblas',
-'info_documents' => 'Dokumentoj',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Skribi privatan mesaĝon',
@@ -439,14 +427,11 @@ Dankon pro via partopreno
 'info_image_aide' => 'HELPILO',
 'info_image_process_titre' => 'Metodo pri vinjet-farado',
 'info_impossible_lire_page' => '<b>Eraro!</b> Ne eblas legi la paĝon <tt> <html>@test_proxy@</html> </tt> tra la prokura servilo <tt>',
-'info_inclusion_directe' => 'Rekta inkludo :',
-'info_inclusion_vignette' => 'Inkludo de la vinjeto :',
 'info_installation_systeme_publication' => 'Instalo de la publikiga sistemo...',
 'info_installer_documents' => 'Vi povas aŭtomate instali ĉiujn dokumentojn troviĝantajn en la dosiero @upload@.',
 'info_installer_ftp' => 'Kiel mastrumanto, vi povas instali (FTP-e) dosierojn en la dosierujon @upload@ kaj poste rekte selekti ilin ĉi tie.',
 'info_installer_images' => 'Vi povas instali bildojn je la formatoj JPEG, GIF kaj PNG.',
 'info_installer_images_dossier' => 'Instali bildojn en la dosierujon @upload@ por povi ilin selekti ĉi tie.',
-'info_installer_tous_documents' => 'Instali ĉiujn dokumentojn',
 'info_interface_complete' => 'kompleta interfaco',
 'info_interface_simple' => 'Simpla interfaco',
 'info_joindre_document_article' => 'Vi povas ligi kun tiu artikolo dokumentojn tiajn, kiaj',
@@ -460,7 +445,6 @@ Dankon pro via partopreno
 'info_les_auteurs_1' => 'de @les_auteurs@',
 'info_logo_format_interdit' => 'Nur vinjetoj je formatoj @formats@ estas permesataj.',
 'info_logo_max_poids' => 'Vinjetoj devige pezu malpli ol @maxi@ (tiu dosiero pezas @actuel@).',
-'info_logo_max_taille' => 'Vinjetoj devige pezu malpli ol @maxi@ (tiu dosiero pezas @actuel@).',
 'info_mail_fournisseur' => 'vi@retalir-provizisto.com',
 'info_message_2' => 'MESAĜO',
 'info_message_supprime' => 'FORIGITA MESAĜO',
@@ -489,7 +473,6 @@ Dankon pro via partopreno
 'info_pixels' => 'bilderoj',
 'info_plusieurs_mots_trouves' => 'Pluraj ŝlosilvortoj trovitaj por "@cherche_mot@":',
 'info_popularite_5' => 'populareco :',
-'info_portfolio' => 'Bildaro',
 'info_portfolio_automatique' => 'Aŭtomata bildaro :',
 'info_premier_resultat' => '[@debut_limit@ unuaj rezultoj el @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ unuaj rezultoj el @total@]',
@@ -529,7 +512,6 @@ Dankon pro via partopreno
 'info_symbole_vert' => 'La <b>verda</b> simbolo indikas la <b>mesaĝojn interŝanĝitajn kun aliaj uzantoj</b> de la retejo.',
 'info_syndication' => 'abonrilato :',
 'info_syndication_articles' => 'artikolo(j)',
-'info_telecharger' => 'Alŝuti ekde via komputilo :',
 'info_telecharger_nouveau_logo' => 'Alŝuti novan vinjeton :',
 'info_telecharger_ordinateur' => 'Alŝuti ekde via komputilo :',
 'info_tous_resultats_enregistres' => '[ĉiuj rezultoj estas registritaj]',

@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Đổi thành [[Ghi chú]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>Trích dẫn một đoạn văn</quote>',
-'bouton_ajouter_document' => 'THÊM TÀI LIỆU', # MODIF
-'bouton_ajouter_image' => 'THÊM HÌNH', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'Thay đổi',
 'bouton_chercher' => 'Tìm',
 'bouton_choisir' => 'Chọn',
@@ -226,9 +223,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'Khổ:',
-'entree_titre_document' => 'Tựa bài hồ sơ:',
-'entree_titre_image' => 'Tựa đề hình:',
 'envoi_via_le_site' => 'Gửi từ trang web',
 'erreur' => 'Lỗi',
 'erreur_balise_non_fermee' => 'tag cuối cùng chưa đóng:',
@@ -362,9 +356,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Trở về trang nhà', # MODIF
 'icone_voir_en_ligne' => 'Xem online',
-'image_tourner_180' => 'Xoay 180°',
-'image_tourner_droite' => 'Xoay qua phải 90°',
-'image_tourner_gauche' => 'Xoay qua trái 90°',
 'img_indisponible' => 'hình không có',
 'impossible' => 'không thể được',
 'info_a_suivre' => 'NƠI BẮT ĐẦU»',
@@ -410,9 +401,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'info_description' => 'Tóm lược:',
 'info_description_2' => 'Tóm lược:',
 'info_dimension' => 'Khổ:',
-'info_document' => 'Tài liệu ',
-'info_document_indisponible' => 'Tài liệu này không có',
-'info_documents' => 'Tài liệu',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Viết thư tín riêng',
@@ -433,14 +421,11 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'info_image_aide' => 'GIÚP ĐỠ',
 'info_image_process_titre' => 'Cách tạo hình mẫu nhỏ',
 'info_impossible_lire_page' => '<b>Lỗi!</b> Không đọc được trang <tt><html>@test_proxy@</html></tt> qua proxy <tt>', # MODIF
-'info_inclusion_directe' => 'Gộp vào trực tiếp:',
-'info_inclusion_vignette' => 'Gộp các hình nhỏ xem trước:',
 'info_installation_systeme_publication' => 'Thiết trí hệ thống phát hành ...',
 'info_installer_documents' => 'Bạn có thể cài đặt tất cả tài liệu trong ngăn @upload@.', # MODIF
 'info_installer_ftp' => 'Là quản trị viên, bạn có thể cài đặt (dùng FTP) các hồ sơ trong ngăn @upload@ rồi chọn lựa chúng sau đó trực tiếp từ đây.', # MODIF
 'info_installer_images' => 'Bạn có thể cài đặt hình trong dạng JPEG, GIF và PNG.',
 'info_installer_images_dossier' => 'Cài đạt hình trong ngăn @upload@ để có thể chọn lựa chúng từ đây.',
-'info_installer_tous_documents' => 'Cài đặt tất cả tài liệu',
 'info_interface_complete' => 'Xem tất cả',
 'info_interface_simple' => 'Xem đơn giản',
 'info_joindre_document_article' => 'Bạn có thể đính kèm vào bài viết các hồ sơ trong dạng',
@@ -454,7 +439,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'info_les_auteurs_1' => 'của @les_auteurs@ ',
 'info_logo_format_interdit' => 'Chỉ chấp nhận logo trong các dạng @formats@.',
 'info_logo_max_poids' => 'Logo phải nhỏ hơn @maxi@ (Hồ sơ này là @actuel@).',
-'info_logo_max_taille' => 'Hồ sơ này phải nhỏ hơn @maxi@ (hồ sơ này là @actuel@).',
 'info_mail_fournisseur' => ' you@isp.com',
 'info_message_2' => 'THƯ TÍN',
 'info_message_supprime' => 'THƯ TÍN ĐƯỢC XÓA',
@@ -483,7 +467,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'info_pixels' => 'chấm',
 'info_plusieurs_mots_trouves' => 'Tìm thấy một số từ then chốt cho "@cherche_mot@":',
 'info_popularite_5' => ' phổ thông:',
-'info_portfolio' => 'Tập hồ sơ',
 'info_portfolio_automatique' => 'Portfolio tự động:',
 'info_premier_resultat' => '[@debut_limit@ kết quả đầu tiên trong số @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ kết quả đầu tiên trong số @total@]',
@@ -523,7 +506,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'info_symbole_vert' => 'Ký hiệu <b>xanh lá cây</b> cho biết <b>thư tín trao đổi với những người dùng</b> của website.', # MODIF
 'info_syndication' => 'phát hành:',
 'info_syndication_articles' => 'bài',
-'info_telecharger' => 'Đem/tải lên từ máy bạn:',
 'info_telecharger_nouveau_logo' => 'Đem/tải lên một logo mới:',
 'info_telecharger_ordinateur' => 'Đem/tải lên từ máy bạn:',
 'info_tous_resultats_enregistres' => '[Toàn bộ kết quả được ghi nhớ lại] ',

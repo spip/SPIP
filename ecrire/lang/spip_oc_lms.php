@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Transformar en [[Nòta de pe]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>Citar un messatge</quote>',
-'bouton_ajouter_document' => 'APONDRE UN DOCUMENT', # MODIF
-'bouton_ajouter_image' => 'APONDRE UN IMATGE', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'Chamjar',
 'bouton_chercher' => 'Cerchar',
 'bouton_choisir' => 'Chausir',
@@ -226,9 +223,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'Dimensions:',
-'entree_titre_document' => 'Títol dau document:',
-'entree_titre_image' => 'Títol de l\'imatge:',
 'envoi_via_le_site' => 'Mandadís emb lo biais dau sit web',
 'erreur' => 'Erreur', # NEW
 'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
@@ -368,9 +362,6 @@ Mercés per vòstra participacion
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Vesitar', # MODIF
 'icone_voir_en_ligne' => 'Veire en linha',
-'image_tourner_180' => 'Rotacion 180°',
-'image_tourner_droite' => 'Rotacion 90° vers la drecha',
-'image_tourner_gauche' => 'Rotacion 90° vers la mança',
 'img_indisponible' => 'imatge indisponible',
 'impossible' => 'impossible', # NEW
 'info_a_suivre' => 'DE SEGRE>>',
@@ -416,9 +407,6 @@ Mercés per vòstra participacion
 'info_description' => 'Descripcion:',
 'info_description_2' => 'Descripcion:',
 'info_dimension' => 'Dimensions:',
-'info_document' => 'Document ',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
-'info_documents' => 'Documents',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Escriure un messatge privat',
@@ -439,14 +427,11 @@ Mercés per vòstra participacion
 'info_image_aide' => 'AJUDA',
 'info_image_process_titre' => 'Metòde de fabrication de las vinhetas',
 'info_impossible_lire_page' => '<b>Error!</b> Impossible de legir la pagina <tt><html>@test_proxy@</html></tt> tras lo proxy <tt>',
-'info_inclusion_directe' => 'Inclusion directa:',
-'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_installation_systeme_publication' => 'Installacion dau sistema de publicacion...',
 'info_installer_documents' => 'Podetz installar automaticament tots los documents contenguts dins lo repertòri @upload@.',
 'info_installer_ftp' => 'Coma administrator, podetz installar (per FTP) daus fichiers dins lo dorsier @upload@,  puei los  seleccionar directament aicí.',
 'info_installer_images' => 'Podetz installar daus imatges aus formats JPEG, GIF e PNG.',
 'info_installer_images_dossier' => 'Installar daus imatges dins lo dorsier @upload@ per los poder seleccionar aicí.',
-'info_installer_tous_documents' => 'Installar tots los documents ',
 'info_interface_complete' => 'Interfàcia completa',
 'info_interface_simple' => 'Interfàcia simplificada',
 'info_joindre_document_article' => 'Podetz jónher a quel article daus documents de la mena de',
@@ -460,7 +445,6 @@ Mercés per vòstra participacion
 'info_les_auteurs_1' => 'per @les_auteurs@ ',
 'info_logo_format_interdit' => 'Los lògos de formats @formats@ son sols autorizats.',
 'info_logo_max_poids' => 'Los lògos an de far mens de @maxi@ (queste fichier fai @actuel@).',
-'info_logo_max_taille' => 'Los lògos an de far mens de @maxi@ (queste fichier fai @actuel@).',
 'info_mail_fournisseur' => 'vos@fornidor.com',
 'info_message_2' => 'MESSATGE',
 'info_message_supprime' => 'MESSATGE SUPRIMIT',
@@ -489,7 +473,6 @@ Mercés per vòstra participacion
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Mai d\'un mot clau trobat per "@cherche_mot@" :',
 'info_popularite_5' => 'popularitat:',
-'info_portfolio' => 'Pòrtfòlio',
 'info_portfolio_automatique' => 'Pòrtfòlio automatic:',
 'info_premier_resultat' => '[@debut_limit@ primiers resultats de @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primiers resultats de @total@]',
@@ -529,7 +512,6 @@ Mercés per vòstra participacion
 'info_symbole_vert' => 'Lo simbeu <b>verd</b> marca los <b>messatges eschamjats emb d\'autres utilizaires</b> dau sit.',
 'info_syndication' => 'sindicacion:',
 'info_syndication_articles' => 'article(s)',
-'info_telecharger' => 'Telecharjar a partir de vòstre ordenador:',
 'info_telecharger_nouveau_logo' => 'Telecharjar un lògo nuòu:',
 'info_telecharger_ordinateur' => 'Telecharjar a partir de vòstre ordenador:',
 'info_tous_resultats_enregistres' => '[tots los resultats son registrats]',

@@ -67,9 +67,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Po sanzé an [[not anba lapaz]]',
 'barre_paragraphe' => 'Kré in paragraf',
 'barre_quote' => '<quote>Sit inn modékri</quote>',
-'bouton_ajouter_document' => 'AZOUT INN DOKIMAN', # MODIF
-'bouton_ajouter_image' => 'AZOUT INN ZIMAZ', # MODIF
-'bouton_ajouter_image_document' => 'Azout\' in zimaz ou in dokiman',
 'bouton_changer' => 'Sanz',
 'bouton_chercher' => 'Rod',
 'bouton_choisir' => 'Swazi',
@@ -236,9 +233,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'Kouk sa lé gran :',
-'entree_titre_document' => 'Lo non lo dokiman :',
-'entree_titre_image' => 'Lo nond limaz :',
 'envoi_via_le_site' => 'Envwa samn lo sit',
 'erreur' => 'Kanard',
 'erreur_balise_non_fermee' => 'dernyé baliz lé pa fermé :',
@@ -373,9 +367,6 @@ Mersi aou mèt ansanm isi
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Bat-karé ', # MODIF
 'icone_voir_en_ligne' => 'Vwar an liyn',
-'image_tourner_180' => 'Touné 180°',
-'image_tourner_droite' => 'touné drwat 90° ',
-'image_tourner_gauche' => 'Touné goch 90° ',
 'img_indisponible' => 'zimaj-la lé pa posib giny ali',
 'impossible' => 'pa posib',
 'info_a_suivre' => 'POU SWIV »',
@@ -421,9 +412,6 @@ Mersi aou mèt ansanm isi
 'info_description' => 'Kosa ou va trouv isi :',
 'info_description_2' => 'Kosa ou va trouv isi :',
 'info_dimension' => 'Dimansyon :',
-'info_document' => 'Dokiman',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
-'info_documents' => 'Bann dokiman',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Pou kré inn modékri privé',
@@ -444,14 +432,11 @@ Mersi aou mèt ansanm isi
 'info_image_aide' => 'KOUDMIN',
 'info_image_process_titre' => 'Koman ou pé kré bann tit-zimaz',
 'info_impossible_lire_page' => '<b>Kanard !</b> Lé inposib lir pazwèb-la <tt><html>@test_proxy@</html></tt> èk lo proksi <tt>', # MODIF
-'info_inclusion_directe' => 'Linklizyon dirèk :',
-'info_inclusion_vignette' => 'Linklizyon limaz-minyatir :',
 'info_installation_systeme_publication' => 'Pou fé zwé (instal) lo sistèm lapiblikasyon...',
 'info_installer_documents' => 'Ou pé fè zwé otomatikman tout bann dokiman sak lé prézan dann fisyé @upload@.',
 'info_installer_ftp' => 'Kom komandèr, ou pé instal (èk FTP) bann fisyé dann dosyé @upload@ pou answuit swazi banna tèrla dirèkman.',
 'info_installer_images' => 'Ou pé fèr zwé bann zimaz èk lo forma JPEG, GIF é minm PNG.',
 'info_installer_images_dossier' => 'Instal bann zimaz dann dosyé @upload@ pou swazi azot answit, tèrla dirèkman.',
-'info_installer_tous_documents' => 'Instal tout bann dokiman-minm',
 'info_interface_complete' => 'Lintèrfas konplé',
 'info_interface_simple' => 'Lintèrfas sinp',
 'info_joindre_document_article' => 'Dann zartik-la, ou pé zwinn inndé dokiman kom',
@@ -465,7 +450,6 @@ Mersi aou mèt ansanm isi
 'info_les_auteurs_1' => 'èk @les_auteurs@',
 'info_logo_format_interdit' => 'Lé posib mèt sèlman bann logo dann bann forma @formats@.',
 'info_logo_max_poids' => 'Fok out bann logo nena in pwa andsou @maxi@ (fichyé la li fé @actuel@).',
-'info_logo_max_taille' => 'Fok out bann logo nena inn tay andsou  @maxi@ (fichye la li fé @actuel@).',
 'info_mail_fournisseur' => 'out@fournisèr.com',
 'info_message_2' => 'MODEKRI',
 'info_message_supprime' => 'MODÉKRI SUPRIMÉ',
@@ -494,7 +478,6 @@ Mersi aou mèt ansanm isi
 'info_pixels' => 'bann piksèl',
 'info_plusieurs_mots_trouves' => 'Nana plizièr bann molaklé pou "@cherche_mot@":',
 'info_popularite_5' => 'popularité :',
-'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Livzimaz otomatik :',
 'info_premier_resultat' => '[@debut_limit@ bann promyé rézilta si @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ bann promyé rézilta si @total@]',
@@ -534,7 +517,6 @@ Mersi aou mèt ansanm isi
 'info_symbole_vert' => 'Lo sinbol <b>vèr</b> i mark <b>bann modékri èk dot bann zitilizatèr</b> lo sitwèb.', # MODIF
 'info_syndication' => 'Lasindikasyon :',
 'info_syndication_articles' => '(bann) lartik',
-'info_telecharger' => 'Télésarz dopwi out prop lordinatèr :',
 'info_telecharger_nouveau_logo' => 'Télésarz inn nouvo logo :',
 'info_telecharger_ordinateur' => 'Télésarz dopwi out prop lordinatèr :',
 'info_tous_resultats_enregistres' => '[tout bann rézilta la finn dèt anroziztré]',

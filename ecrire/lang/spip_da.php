@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Gør til en [[Fodnote]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>Citer en besked</quote>',
-'bouton_ajouter_document' => 'Tilføj et dokument',
-'bouton_ajouter_image' => 'TILFØJ BILLEDE', # MODIF
-'bouton_ajouter_image_document' => 'Tilføj et billede eller dokument',
 'bouton_changer' => 'Opdater',
 'bouton_chercher' => 'Søg',
 'bouton_choisir' => 'Vælg',
@@ -228,9 +225,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'Størrelse:',
-'entree_titre_document' => 'Dokumentoverskrift:',
-'entree_titre_image' => 'Billedoverskrift:',
 'envoi_via_le_site' => 'Envoi via le site', # NEW
 'erreur' => 'Fejl',
 'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
@@ -365,9 +359,6 @@ Tak for din deltagelse
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Besøg websted', # MODIF
 'icone_voir_en_ligne' => 'Vis online',
-'image_tourner_180' => 'Rotation 180°', # NEW
-'image_tourner_droite' => 'Rotation 90° à droite', # NEW
-'image_tourner_gauche' => 'Rotation 90° à gauche', # NEW
 'img_indisponible' => 'image indisponible', # NEW
 'impossible' => 'umuligt',
 'info_a_suivre' => 'OPGAVER»',
@@ -413,9 +404,6 @@ Tak for din deltagelse
 'info_description' => 'Beskrivelse:',
 'info_description_2' => 'Beskrivelse:',
 'info_dimension' => 'Størrelse:',
-'info_document' => 'Dokument',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
-'info_documents' => 'Documents', # NEW
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Skriv en privat meddelelse',
@@ -436,14 +424,11 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_image_aide' => 'HJÆLP',
 'info_image_process_titre' => 'Méthode de fabrication des vignettes', # NEW
 'info_impossible_lire_page' => '<b>Fejl!</b> Siden kan ikke læses <tt><html>@test_proxy@</html></tt> gennem proxy¥en <tt>', # MODIF
-'info_inclusion_directe' => 'Direkte indlejring:',
-'info_inclusion_vignette' => 'Medtag piktogram:',
 'info_installation_systeme_publication' => 'Installation af publiceringssystemet ...',
 'info_installer_documents' => 'Du kan automatisk installere alle dokumenter, som findes i kataloget @upload@.', # MODIF
 'info_installer_ftp' => 'Som administrator kan du via FTP indlæse filer i kataloget @upload@, så du senere kan hente dem der.', # MODIF
 'info_installer_images' => 'Du kan indlæse filer i formaterne JPEG, GIF og PNG.',
 'info_installer_images_dossier' => 'Indlæs billeder i kataloget @upload@ for at kunne hente dem her.', # MODIF
-'info_installer_tous_documents' => 'Indlæs alle dokumenter',
 'info_interface_complete' => 'Fuld brugergrænseflade',
 'info_interface_simple' => 'Forenklet brugergrænseflade',
 'info_joindre_document_article' => 'Du kan vedhæfte din artikel dokumenter af typerne',
@@ -457,7 +442,6 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_les_auteurs_1' => 'af @les_auteurs@',
 'info_logo_format_interdit' => 'Seuls les logos aux formats @formats@ sont autorisés.', # NEW
 'info_logo_max_poids' => 'Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).', # NEW
-'info_logo_max_taille' => 'Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).', # NEW
 'info_mail_fournisseur' => 'ditnavn@udbyder.dk',
 'info_message_2' => 'BESKED',
 'info_message_supprime' => 'BESLED SLETTET',
@@ -486,7 +470,6 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Der blev fundet flere nøgleord ved søgning efter "@cherche_mot@":',
 'info_popularite_5' => 'polularitet:',
-'info_portfolio' => 'Portfolio', # NEW
 'info_portfolio_automatique' => 'Automatisk album:',
 'info_premier_resultat' => '[@debut_limit@ første resultater af @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ første resultater af @total@]',
@@ -526,7 +509,6 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_symbole_vert' => '<b>Grønt</b> symbol henviser til <b>meddelelser udvekslet med andre brugere</b> på webstedet.', # MODIF
 'info_syndication' => 'syndikering:',
 'info_syndication_articles' => 'bidrag',
-'info_telecharger' => 'Hent fra din computer:',
 'info_telecharger_nouveau_logo' => 'Hent nyt logo:',
 'info_telecharger_ordinateur' => 'Hent fra din computer:',
 'info_tous_resultats_enregistres' => '[alle resultater er registreret]',

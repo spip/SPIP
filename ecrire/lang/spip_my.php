@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => '[[Footnote]]သို့ပြန်သွားပါ',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>စာစောင်ကို ကုဒ်လုပ်ပါ</quote>',
-'bouton_ajouter_document' => 'စာရွက်စာတမ်းထည့်ရန်', # MODIF
-'bouton_ajouter_image' => 'ပုံထည့်သွင်းရန်', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'ပြုပြင်ရန်',
 'bouton_chercher' => 'ရှာဖွေရန်',
 'bouton_choisir' => 'ရွေးချယ်ရန်',
@@ -220,9 +217,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => '​​အရွယ်အစား',
-'entree_titre_document' => 'စာမျက်နှာ ခေါင်းစဉ်',
-'entree_titre_image' => 'ရုပ်ပုံခေါင်းစဉ်',
 'envoi_via_le_site' => 'ဝက်ဘ်ဆိုက်မှတဆင့် ပေးပို့ပါ',
 'erreur' => 'အမှားအယွင်း',
 'erreur_balise_non_fermee' => 'နောက်ဆုံး တေးမှတ်ချက် ပိတ်မထားပါ',
@@ -343,9 +337,6 @@ sera ignorée) :
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'ဆိုက်ကိုသွားလည်ပါ', # MODIF
 'icone_voir_en_ligne' => 'အွန်လိုင်းတွင်ကြည့်ရှုရန်',
-'image_tourner_180' => '၁၈ဝ° လှည့်ရန်',
-'image_tourner_droite' => '၉ဝ° ညာလှည့်ရန်',
-'image_tourner_gauche' => '၉ဝ° ဘယ်လှည့်ရန်',
 'img_indisponible' => 'ပုံမရနိုင်ပါ',
 'impossible' => 'မဖြစ်နိုင်ပါ',
 'info_a_suivre' => 'စီစဉ်ထုတ်ပြန်မှုနေရာ»',
@@ -391,9 +382,6 @@ sera ignorée) :
 'info_description' => 'ဖော်ပြချက်',
 'info_description_2' => 'ဖော်ပြချက်',
 'info_dimension' => 'အရွယ်အစား',
-'info_document' => 'စာရွက်စာတမ်း',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
-'info_documents' => 'စာရွက်စာတမ်းများ',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'ကိုယ်ရေးကိုတာ သတင်းစကား',
@@ -413,14 +401,11 @@ sera ignorée) :
 'info_image_aide' => 'အကူအညီရယူပါ',
 'info_image_process_titre' => 'နမူနာပုံကို ဖန်တီးရန်နည်းလမ်း',
 'info_impossible_lire_page' => '<b>အမှားအယွင်း</b> ဒီစာမျက်နှာကို <tt><html>@test_proxy@</html></tt>  မှကျော်ဖတ်၍မရနိုင်ပါဘူး',
-'info_inclusion_directe' => 'တိုက်ရိုက်ထပ်ထည့်ရန်',
-'info_inclusion_vignette' => 'ဒီဇိုင်းပါဝင်သည်',
 'info_installation_systeme_publication' => 'ထုတ်ဝေမှုကို ထည့်သွင်းထားရန်',
 'info_installer_documents' => 'ဤ @upload@ ဖိုင်​တွဲထဲတွင်ရှိသော အရာများအားလုံးကို သင်ထည့်သွင်းနိုင်သည်',
 'info_installer_ftp' => 'စီမံခန့်ခွဲသူ​အနေနှင့် FTP မှ @upload@ ဖိုင်​တွဲထဲတွင် ထည့်ထားသော အရာများကို နောက်နောင်တွင်အသုံးပြုရန် ဤနေရာမှ ရွေးချယ်နိုင်သည်။',
 'info_installer_images' => 'ပုံရိပ်အမျိုးအစား JPEG, GIF နှင့် PNG များကို ထည့်သွင်းအသုံးပြုနိုင်သည်',
 'info_installer_images_dossier' => 'ဖိုင်တွဲ @upload@ တွင်ထည့်သွင်းထား​မည့် ပုံရိပ်များကို ဤနေရာမှရွေးချယ်ပါ',
-'info_installer_tous_documents' => 'စာရွက်စာတမ်းများ အားလုံးကို ထည့်သွင်းပါ',
 'info_interface_complete' => 'ပြည့်စုံသော စာမျက်နှာ',
 'info_interface_simple' => 'ရိုစင်းသော စာမျက်နှာ',
 'info_joindre_document_article' => 'သင့်ဆောင်းပါးနှင့် ပူးတွဲနိုင်သော အ​မျိုးအစားများ',
@@ -434,7 +419,6 @@ sera ignorée) :
 'info_les_auteurs_1' => 'မှ @les_auteurs@',
 'info_logo_format_interdit' => 'logo အမျိုးအစား @formats@ ကိုသာခွင့်ပြုသည်',
 'info_logo_max_poids' => 'Logo များ၏ အရွယ်အစားဟာ @maxi@ အောက်ရှိရပါမယ် (ဒီဖိုင်ဟာ @actuel@ရှိပါတယ်)',
-'info_logo_max_taille' => 'Logo များ၏ အရွယ်အစားဟာ @maxi@ အောက်ရှိရပါမယ် (ဒီဖိုင်ဟာ @actuel@ရှိပါတယ်)',
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => 'သတင်းစာစောင်',
 'info_message_supprime' => 'စာစောင်ပယ်ဖျက်ပြီး',
@@ -463,7 +447,6 @@ sera ignorée) :
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => '\\"@cherche_mot@\\" အတွက် စကားစုအမြောက်အများ တွေ့ရှိပါသည်',
 'info_popularite_5' => 'ထင်ပေါ်ကျော်ကြားမှု',
-'info_portfolio' => 'ရွေးချယ်မှု',
 'info_portfolio_automatique' => 'အလိုအလျှောက်ရွေးချယ်မှု',
 'info_premier_resultat' => '[@debut_limit@ သည် @total@၏ ပထမတွေ့ရှိချက်]',
 'info_premier_resultat_sur' => '[@debut_limit@သည် @total@၏ ပထမတွေ့ရှိချက်]',
@@ -503,7 +486,6 @@ sera ignorée) :
 'info_symbole_vert' => 'အစိမ်းရောင် သ​င်္ကေတသည် ဤဆိုက်သုံးစွဲသူအချင်းချင်း သတင်းစကားများ ဖလှယ်ခြင်းဖြစ်သည်။</b>',
 'info_syndication' => 'ပူးတွဲချိတ်ဆက်မှု',
 'info_syndication_articles' => 'ဆောင်းပါးများ',
-'info_telecharger' => 'သင့်ကွန်ပျူတာမှ တင်သွင်းပါ',
 'info_telecharger_nouveau_logo' => 'logo အသစ် တင်သွင်းရန်',
 'info_telecharger_ordinateur' => 'သင့်ကွန်ပျူတာမှ တင်သွင်းပါ',
 'info_tous_resultats_enregistres' => '[ရှာဖွေတွေ့ရှိချက်များအားလုံး မှတ်တမ်းတင်ထားပါသည်]',

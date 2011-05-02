@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Změnit na [[poznámku pod čarou]]',
 'barre_paragraphe' => 'Vytvořit odstavec',
 'barre_quote' => '<quote>Citovat zprávu</quote>',
-'bouton_ajouter_document' => 'PŘIDAT DOKUMENT',
-'bouton_ajouter_image' => 'PŘIDAT OBRÁZEK',
-'bouton_ajouter_image_document' => 'Přidat obrázek nebo dokument',
 'bouton_changer' => 'Změnit',
 'bouton_chercher' => 'Najít',
 'bouton_choisir' => 'Vybrat',
@@ -226,9 +223,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'probíhá zpracování',
-'entree_dimensions' => 'Velikost:',
-'entree_titre_document' => 'Název dokumentu:',
-'entree_titre_image' => 'Název obrázku:',
 'envoi_via_le_site' => 'Odeslat pomocí webu',
 'erreur' => 'Error', # NEW
 'erreur_balise_non_fermee' => 'last tag not closed:', # NEW
@@ -368,9 +362,6 @@ Děkujeme vám za účast
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Zobrazit web', # MODIF
 'icone_voir_en_ligne' => 'Prohlížet online',
-'image_tourner_180' => 'Otočit o 180°',
-'image_tourner_droite' => 'Otočit o 90° doprava',
-'image_tourner_gauche' => 'Otočit o 90° doleva',
 'img_indisponible' => 'Obrázek není k dispozici',
 'impossible' => 'nemožné',
 'info_a_suivre' => 'HLAVNÍ NABÍDKA"',
@@ -416,9 +407,6 @@ Děkujeme vám za účast
 'info_description' => 'Popis:',
 'info_description_2' => 'Popis:',
 'info_dimension' => 'Velikost:',
-'info_document' => 'Dokument',
-'info_document_indisponible' => 'This document is unavailable', # NEW
-'info_documents' => 'Dokumenty',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Napsat soukromou zprávu',
@@ -439,14 +427,11 @@ Děkujeme vám za účast
 'info_image_aide' => 'NÁPOVĚDA',
 'info_image_process_titre' => 'Návod k vytvoření náhledů',
 'info_impossible_lire_page' => '<b>Chyba!</b> Stránku nelze číst <tt><html>@test_proxy@</html></tt> přes proxy bránu <tt>', # MODIF
-'info_inclusion_directe' => 'Přímé vložení:',
-'info_inclusion_vignette' => 'Vložit náhled:',
 'info_installation_systeme_publication' => 'Instalace publikačního systému ...',
 'info_installer_documents' => 'Všechny dokumenty ve složce @upload@ lze nainstalovat automaticky.',
 'info_installer_ftp' => 'Jako správce můžete instalovat (pomocí FTP) soubory do složky @upload@ a následně je odtamtud můžete přímo vybírat.',
 'info_installer_images' => 'Obrázky lze instalovat ve formátu JPEG, GIF a PNG.',
 'info_installer_images_dossier' => 'Nainstalujte obrázky do složky @upload@, abyste je odtamtud mohli vybírat.',
-'info_installer_tous_documents' => 'Instalovat všechny dokumenty',
 'info_interface_complete' => 'úplné rozhraní',
 'info_interface_simple' => 'jednoduché rozhraní',
 'info_joindre_document_article' => 'K článku lze připojit dokumenty ve formátu',
@@ -460,7 +445,6 @@ Děkujeme vám za účast
 'info_les_auteurs_1' => 'od @les_auteurs@',
 'info_logo_format_interdit' => 'Loga jsou povolena pouze ve formátu @formats@.',
 'info_logo_max_poids' => 'Log nesmí být větší než @maxi@ (tento soubor má velikost @actuel@).',
-'info_logo_max_taille' => 'Logo nesmí být větší než @maxi@ (tento soubor má velikost @actuel@).',
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => 'ZPRÁVA',
 'info_message_supprime' => 'ZPRÁVA BYLA ODSTRANĚNA',
@@ -489,7 +473,6 @@ Děkujeme vám za účast
 'info_pixels' => 'pixelů',
 'info_plusieurs_mots_trouves' => 'Pro "@cherche_mot@" bylo nalezeno několik klíčových slov:',
 'info_popularite_5' => 'oblíbenost:',
-'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Automatizované portfolio:',
 'info_premier_resultat' => '[@debut_limit@ prvních výsledků z @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ prvních výsledků z @total@]',
@@ -529,7 +512,6 @@ Děkujeme vám za účast
 'info_symbole_vert' => '<b>Zeleným</b> symbolem jsou označeny <b>zprávy vyměňované s ostatními uživateli</b> webu.', # MODIF
 'info_syndication' => 'syndikace:',
 'info_syndication_articles' => 'článek/článků',
-'info_telecharger' => 'Odeslat z počítače:',
 'info_telecharger_nouveau_logo' => 'Odeslat nové logo:',
 'info_telecharger_ordinateur' => 'Odeslat z počítače:',
 'info_tous_resultats_enregistres' => '[všechny výsledky jsou zapsány]',

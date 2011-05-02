@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Transformar en [[Nòta de bas de pàgina]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>Citar un messatge</quote>',
-'bouton_ajouter_document' => 'Ajustar un document',
-'bouton_ajouter_image' => 'Ajustar un imatge',
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'Cambiar',
 'bouton_chercher' => 'Cercar',
 'bouton_choisir' => 'Chausir',
@@ -226,9 +223,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'Dimensions:',
-'entree_titre_document' => 'Titre dau document:',
-'entree_titre_image' => 'Titre de l\'imatge:',
 'envoi_via_le_site' => 'Mandadís mé lo biais dau sit web',
 'erreur' => 'Error',
 'erreur_balise_non_fermee' => 'darrièra balisa non tapada :',
@@ -369,9 +363,6 @@ Mercé de la voastra participacion
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Visitar', # MODIF
 'icone_voir_en_ligne' => 'Veire en linha',
-'image_tourner_180' => 'Rotacion 180°',
-'image_tourner_droite' => 'Rotacion 90° à drecha',
-'image_tourner_gauche' => 'Rotacion 90° à senèca',
 'img_indisponible' => 'imatge indisponible',
 'impossible' => 'impossible',
 'info_a_suivre' => 'DA SEGRE &gt;&gt;',
@@ -417,9 +408,6 @@ Mercé de la voastra participacion
 'info_description' => 'Descripcion:',
 'info_description_2' => 'Descripcion:',
 'info_dimension' => 'Dimensions:',
-'info_document' => 'Document ',
-'info_document_indisponible' => 'Aqueu document es pas disponible',
-'info_documents' => 'Documents',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Escriure un messatge privat',
@@ -440,14 +428,11 @@ Mercé de la voastra participacion
 'info_image_aide' => 'AJUDA',
 'info_image_process_titre' => 'Metòde de fabricacion dei vinhetas',
 'info_impossible_lire_page' => '<b>Error !</b> Impossible de lièger la pàgina <tt><html>@test_proxy@</html></tt> à travèrs lo proxy <tt>',
-'info_inclusion_directe' => 'Inclusion dirècta :',
-'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_installation_systeme_publication' => 'Installacion dau sistema de publicacion...',
 'info_installer_documents' => 'Podètz installar automaticament toi lu documents contenguts dins lo dorsier @upload@.',
 'info_installer_ftp' => 'Coma administrator, podètz installar (per FTP) de fichiers dins lo dorsier @upload@ pi lu seleccionar directament aquí.',
 'info_installer_images' => 'Podètz installar d\'imatges ai formats JPEG, GIF e PNG.',
 'info_installer_images_dossier' => 'Installar d\'imatges dins lo dorsier @upload@ per lu poder seleccionar aquí.',
-'info_installer_tous_documents' => 'Installar toi lu documents',
 'info_interface_complete' => 'interfaça completa',
 'info_interface_simple' => 'Interfaça simplificada',
 'info_joindre_document_article' => 'Podètz jónher à-n-aquel article de documents de tipe',
@@ -461,7 +446,6 @@ Mercé de la voastra participacion
 'info_les_auteurs_1' => 'per @les_auteurs@ ',
 'info_logo_format_interdit' => 'Solets lu lògos de formats @formats@ son  autorisats.',
 'info_logo_max_poids' => 'Lu lògos devon obligatòriament faire mens de @maxi@ (aquèu fichier fa @actuel@).',
-'info_logo_max_taille' => 'Lu lògos devon obligatòriament faire mens de @maxi@ (aquèu fichier fa @actuel@).',
 'info_mail_fournisseur' => 'vos@provesidor.org',
 'info_message_2' => 'MESSATGE',
 'info_message_supprime' => 'MESSATGE SUPRIMIT',
@@ -490,7 +474,6 @@ Mercé de la voastra participacion
 'info_pixels' => 'pixèus',
 'info_plusieurs_mots_trouves' => 'Mantun mòts claus trobats per "@cherche_mot@":',
 'info_popularite_5' => 'popularitat:',
-'info_portfolio' => 'Poartfolio',
 'info_portfolio_automatique' => 'Poartfòlio automatic:',
 'info_premier_resultat' => '[@debut_limit@ promiers resultats de @total@]',
 'info_premier_resultat_sur' => ' [@debut_limit@ promiers resultats de @total@]',
@@ -530,7 +513,6 @@ Mercé de la voastra participacion
 'info_symbole_vert' => 'Lo simbòl <b>verd</b> marca lu <b>messatges escambiats mé d\'autres utilisaires</b> dau sit.',
 'info_syndication' => 'sindicacion:',
 'info_syndication_articles' => 'article(s)',
-'info_telecharger' => 'Telecargar despí lo voastre ordinator :',
 'info_telecharger_nouveau_logo' => 'Telecargar un novèu lògo :',
 'info_telecharger_ordinateur' => 'Telecargar despí lo voastre ordinator :',
 'info_tous_resultats_enregistres' => '[toi lu resultats son registrats]',

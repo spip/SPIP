@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Ubah ke [[Footnote]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>Kutip sebuah pesan</quote>',
-'bouton_ajouter_document' => 'TAMBAH DOKUMEN', # MODIF
-'bouton_ajouter_image' => 'TAMBAH GAMBAR', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'Modifikasi',
 'bouton_chercher' => 'Pencarian',
 'bouton_choisir' => 'Pilih',
@@ -229,9 +226,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'Ukuran:',
-'entree_titre_document' => 'Judul dokumen:',
-'entree_titre_image' => 'Judul gambar:',
 'envoi_via_le_site' => 'Dikirim melalui situs',
 'erreur' => 'Kesalahan',
 'erreur_balise_non_fermee' => 'tag terakhir tidak ditutup:',
@@ -369,9 +363,6 @@ Terima kasih atas partisipasi anda!
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Kunjungi situs', # MODIF
 'icone_voir_en_ligne' => 'Lihat online',
-'image_tourner_180' => 'Putar 180°',
-'image_tourner_droite' => 'Putar 90° kanan',
-'image_tourner_gauche' => 'Putar 90° kiri',
 'img_indisponible' => 'gambar tidak tersedia',
 'impossible' => 'tidak mungkin',
 'info_a_suivre' => 'PAPAN PELUNCUR»',
@@ -417,9 +408,6 @@ Terima kasih atas partisipasi anda!
 'info_description' => 'Deskripsi:',
 'info_description_2' => 'Deskripsi:',
 'info_dimension' => 'Ukuran:',
-'info_document' => 'Dokumen',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
-'info_documents' => 'Dokumen',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Tulis pesan pribadi',
@@ -440,14 +428,11 @@ Terima kasih atas partisipasi anda!
 'info_image_aide' => 'BANTUAN',
 'info_image_process_titre' => 'Bagaimana membuat gambar-gambar kecil',
 'info_impossible_lire_page' => '<b>Kesalahan!</b> Halaman tidak dapat dibaca <tt><html>@test_proxy@</html></tt> melalui proxy <tt>',
-'info_inclusion_directe' => 'Penambahan langsung:',
-'info_inclusion_vignette' => 'Ikutkan gambar kecil:',
 'info_installation_systeme_publication' => 'Instalasi sistem publikasi ...',
 'info_installer_documents' => 'Anda dapat menginstal secara otomatis semua dokumen yang berada dalam direktori @upload@.',
 'info_installer_ftp' => 'Sebagai administrator, anda dapat menginstal (dengan FTP) berkas-berkas dalam direktori @upload@ agar dapat memilih berkas langsung dari sini nantinya.',
 'info_installer_images' => 'Anda dapat menginstal gambar dengan format JPEG, GIF atau PNG.',
 'info_installer_images_dossier' => 'Instal gambar dalam direktori @upload@ agar dapat dipilih di sini.',
-'info_installer_tous_documents' => 'Instal semua dokumen',
 'info_interface_complete' => 'tatap muka lengkap',
 'info_interface_simple' => 'Tatap muka disederhana',
 'info_joindre_document_article' => 'Anda dapat melampirkan di artikel anda tipe-tipe dokumen',
@@ -461,7 +446,6 @@ Terima kasih atas partisipasi anda!
 'info_les_auteurs_1' => 'oleh @les_auteurs@',
 'info_logo_format_interdit' => 'Hanya logo-logo dalam format @formats@ diperbolehkan.',
 'info_logo_max_poids' => 'Logo hendaklan kurang dari @maxi@ (berkas ini @actuel@).',
-'info_logo_max_taille' => 'Logo hendaklah kurang dari @maxi@ (berkas ini @actuel@).',
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => 'PESAN',
 'info_message_supprime' => 'PESAN DIHAPUS',
@@ -490,7 +474,6 @@ Terima kasih atas partisipasi anda!
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Beberapa kata kunci ditemukan untuk "@cherche_mot@":',
 'info_popularite_5' => 'popularitas:',
-'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Portfolio terotomasi:',
 'info_premier_resultat' => '[@debut_limit@ hasil pertama dari @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ hasil pertama dari @total@]',
@@ -530,7 +513,6 @@ Terima kasih atas partisipasi anda!
 'info_symbole_vert' => 'Simbol <b>hijau</B> menandakan <b>pesan yang diperoleh dari pengguna lainnya</B> di situs.',
 'info_syndication' => 'sindikasi:',
 'info_syndication_articles' => 'artikel',
-'info_telecharger' => 'Unggah dari komputer anda:',
 'info_telecharger_nouveau_logo' => 'Unggah logo baru:',
 'info_telecharger_ordinateur' => 'Unggah dari komputer anda:',
 'info_tous_resultats_enregistres' => '[semua hasil disimpan]',

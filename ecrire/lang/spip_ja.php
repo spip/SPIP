@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => '変える [[Footnote]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>メッセージへ引用符</quote>',
-'bouton_ajouter_document' => 'ドキュメントの追加', # MODIF
-'bouton_ajouter_image' => '画像を追加する', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => '修正する',
 'bouton_chercher' => '検索',
 'bouton_choisir' => '選択',
@@ -229,9 +226,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'サイズ:',
-'entree_titre_document' => '文章のタイトル:',
-'entree_titre_image' => 'イメージのタイトル:',
 'envoi_via_le_site' => 'サイト経由で送信',
 'erreur' => 'ƒGƒ‰[',
 'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
@@ -368,9 +362,6 @@ sera ignorée) :
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'サイトを訪れる', # MODIF
 'icone_voir_en_ligne' => 'オンラインで見る',
-'image_tourner_180' => '180°回転',
-'image_tourner_droite' => '右に90°回転',
-'image_tourner_gauche' => '左に90°回転',
 'img_indisponible' => '利用できないイメージ',
 'impossible' => '不可能',
 'info_a_suivre' => 'PADを起動»',
@@ -416,9 +407,6 @@ sera ignorée) :
 'info_description' => '記述:',
 'info_description_2' => '記述:',
 'info_dimension' => 'サイズ:',
-'info_document' => 'ドキュメント',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
-'info_documents' => 'ドキュメント',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'プライベートなメッセージを書く',
@@ -439,14 +427,11 @@ sera ignorée) :
 'info_image_aide' => 'ヘルプ',
 'info_image_process_titre' => 'サムネイルの作り方',
 'info_impossible_lire_page' => '<b>エラー!</b> ページを読むことが出来なかった <tt><html>@test_proxy@</html></tt> プロキシを介して <tt>', # MODIF
-'info_inclusion_directe' => '直接インクルード:',
-'info_inclusion_vignette' => '含まれるビネット(半身写真、模様など):',
 'info_installation_systeme_publication' => '出版システムインストレーション ...',
 'info_installer_documents' => 'あなたは@upload@フォルダにあるすべてのドキュメントを自動的にインストール出来ます。', # MODIF
 'info_installer_ftp' => '管理者なら@upload@フォルダに（FTPで）ファイルを置いておけば、後でここから直接そのファイルを選択できるようになります。', # MODIF
 'info_installer_images' => 'あなたはJPEG、GIF、PNGフォーマットの画像をインストール出来ます。',
 'info_installer_images_dossier' => '@upload@ フォルダにインストールしたファイルをここで選択することが出来ます。', # MODIF
-'info_installer_tous_documents' => 'すべてのドキュメントをインストール',
 'info_interface_complete' => '完全なインターフェース',
 'info_interface_simple' => 'シンプルなインターフェース',
 'info_joindre_document_article' => 'あなたはあなたの記事へタイプのドキュメントを付着させることが出来ます。',
@@ -460,7 +445,6 @@ sera ignorée) :
 'info_les_auteurs_1' => ' @les_auteurs@によって',
 'info_logo_format_interdit' => '@formats@フォーマットのロゴのみ許可します。',
 'info_logo_max_poids' => 'ロゴは、@maxi@より少ないべきです（このファイルは@actuel@）。',
-'info_logo_max_taille' => 'ロゴは、@maxi@より少ないべきです（このファイルは@actuel@）。',
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => 'メッセージ',
 'info_message_supprime' => 'メッセージは削除された',
@@ -489,7 +473,6 @@ sera ignorée) :
 'info_pixels' => 'ピクセル',
 'info_plusieurs_mots_trouves' => '"@cherche_mot@"についていくつかのキーワードが見つかった:',
 'info_popularite_5' => '人気:',
-'info_portfolio' => '代表作品集',
 'info_portfolio_automatique' => '自動作成の代表作品集:',
 'info_premier_resultat' => '[@debut_limit@ 初めの結果、トータル @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ 最初の結果、トータル @total@]',
@@ -529,7 +512,6 @@ sera ignorée) :
 'info_symbole_vert' => '<b>緑</b>のシンボルは、サイトの<b>他のユーザーと交換したメッセージ</b>。', # MODIF
 'info_syndication' => '供給（シンジケーション):',
 'info_syndication_articles' => '記事',
-'info_telecharger' => 'あなたのコンピュータからアップロード:',
 'info_telecharger_nouveau_logo' => '新しいロゴをアップロード:',
 'info_telecharger_ordinateur' => 'あなたのコンピュータからアップロード:',
 'info_tous_resultats_enregistres' => '[すべての結果は記録されます]',

@@ -64,9 +64,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'barre_note' => '转为[[页尾标号]]',
 'barre_paragraphe' => '<modif>新建段落',
 'barre_quote' => '<quote>引用一个消息</quote>',
-'bouton_ajouter_document' => '添加文档', # MODIF
-'bouton_ajouter_image' => '添加图片', # MODIF
-'bouton_ajouter_image_document' => '添加图片或文件',
 'bouton_changer' => '修改',
 'bouton_chercher' => '搜索',
 'bouton_choisir' => '选择',
@@ -227,9 +224,6 @@ Zhen QIN (zhen_q@21cn.com)',
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => '大小:',
-'entree_titre_document' => '文件标题:',
-'entree_titre_image' => '图像标题:',
 'envoi_via_le_site' => '通过本网站发送',
 'erreur' => 'Erreur', # NEW
 'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
@@ -364,9 +358,6 @@ sera ignorée) :
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => '<MODIF>访问', # MODIF
 'icone_voir_en_ligne' => '在线预览',
-'image_tourner_180' => '旋转180°',
-'image_tourner_droite' => '向右旋转90° ',
-'image_tourner_gauche' => '向左旋转 90°',
 'img_indisponible' => '必需图像',
 'impossible' => 'impossible', # NEW
 'info_a_suivre' => '跟踪 »',
@@ -412,9 +403,6 @@ sera ignorée) :
 'info_description' => '描述:',
 'info_description_2' => '描述:',
 'info_dimension' => '大小:',
-'info_document' => '文档',
-'info_document_indisponible' => '<modif>无法获得此文件',
-'info_documents' => '文件',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => '写一个私有信息',
@@ -435,14 +423,11 @@ sera ignorée) :
 'info_image_aide' => '帮助',
 'info_image_process_titre' => '生成图标的方法',
 'info_impossible_lire_page' => '<b>错误!</b>通过代理服务，此页不能阅读<tt><html>@test_proxy@</html></tt>',
-'info_inclusion_directe' => '直接包含:',
-'info_inclusion_vignette' => '包含小插图:',
 'info_installation_systeme_publication' => '公众系统安装 ...',
 'info_installer_documents' => '您可以自动安装 @upload@ 中所有文件。',
 'info_installer_ftp' => '作为管理员，您可安装(通过 FTP)@upload@中文件使得以后能从这儿选择.',
 'info_installer_images' => '你可安装的图片格式 JPEG, GIF 及其它 PNG.',
 'info_installer_images_dossier' => '安装@upload@目录中的图片以便在这里可以选择他们。',
-'info_installer_tous_documents' => '安装所有文档',
 'info_interface_complete' => '完整界面',
 'info_interface_simple' => '简单界面 ',
 'info_joindre_document_article' => '你可附上你的文章的附加文档的类型',
@@ -456,7 +441,6 @@ sera ignorée) :
 'info_les_auteurs_1' => '按 @les_auteurs@',
 'info_logo_format_interdit' => '仅@formats@格式之文件被允许作标志',
 'info_logo_max_poids' => 'Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
-'info_logo_max_taille' => '标志不得超过 @maxi@ (目前的文件大小为@actuel@).',
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => '消息',
 'info_message_supprime' => '删除的消息',
@@ -485,7 +469,6 @@ sera ignorée) :
 'info_pixels' => '像素',
 'info_plusieurs_mots_trouves' => '几个关键词找到了 "@cherche_mot@":',
 'info_popularite_5' => '流行:',
-'info_portfolio' => '相册',
 'info_portfolio_automatique' => '自动相册:',
 'info_premier_resultat' => '[@debut_limit@ 最新结果出了 @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ 最新结果出了@total@]',
@@ -525,7 +508,6 @@ sera ignorée) :
 'info_symbole_vert' => '<MODIF><b>绿色</b>表示<b>站点中与其它用户交换的信息</b>。',
 'info_syndication' => '<MODIF>聚合 ：',
 'info_syndication_articles' => '文章',
-'info_telecharger' => '从你的电脑上传:',
 'info_telecharger_nouveau_logo' => '上传新图标:',
 'info_telecharger_ordinateur' => '从你的电脑上传:',
 'info_tous_resultats_enregistres' => '[所有结果被记录]',

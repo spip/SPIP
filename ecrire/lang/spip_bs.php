@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Pretvori u [[fusnotu]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>citiraj neku poruku</quote>',
-'bouton_ajouter_document' => 'DODAJ DOKUMENT', # MODIF
-'bouton_ajouter_image' => 'DODAJ FOTOGRAFIJU', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'Izmijeni',
 'bouton_chercher' => 'Pretraga',
 'bouton_choisir' => 'Izaberi',
@@ -224,9 +221,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'Dimenzije:',
-'entree_titre_document' => 'Naziv dokumenta:',
-'entree_titre_image' => 'Naziv fotografije:',
 'envoi_via_le_site' => 'Poslano putem stranice',
 'erreur' => 'Erreur', # NEW
 'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
@@ -346,9 +340,6 @@ sera ignorée) :
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Posjeti', # MODIF
 'icone_voir_en_ligne' => 'Pogledaj online',
-'image_tourner_180' => 'Okreni za 180°',
-'image_tourner_droite' => 'Okreni 90° na desnu stranu',
-'image_tourner_gauche' => 'Okreni 90° na lijevu stranu',
 'img_indisponible' => 'fotografija je nedostupna',
 'impossible' => 'impossible', # NEW
 'info_a_suivre' => 'LAUNCH PAD»',
@@ -394,9 +385,6 @@ sera ignorée) :
 'info_description' => 'Opis:',
 'info_description_2' => 'Opis:',
 'info_dimension' => 'Dimenzije:',
-'info_document' => 'Dokument',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
-'info_documents' => 'Dokumenti',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Napisi privatnu poruku',
@@ -416,14 +404,11 @@ sera ignorée) :
 'info_image_aide' => 'POMOC',
 'info_image_process_titre' => 'Metoda pravljenja vinjeta',
 'info_impossible_lire_page' => '<b>Greska!</b> Nemoguce procitati stranicu <tt><html>@test_proxy@</html></tt> iako proxy <tt>', # MODIF
-'info_inclusion_directe' => 'Direktno ukljucivanje:',
-'info_inclusion_vignette' => 'Ukljuci vinjetu:',
 'info_installation_systeme_publication' => 'Instalacija sistema objavljivanja...',
 'info_installer_documents' => 'Mozete automatski instalirati sve dokumente iz foldera <i>upload</i>.',
 'info_installer_ftp' => 'Kao administrator mozete putem FTP-a instalirati dokumente iz foldera @upload@ da bi ste ih kasnije izabrali direktno sa ove lokacije.',
 'info_installer_images' => 'Mozete instalirati fotografije formata JPEG, GIF i PNG.',
 'info_installer_images_dossier' => 'Instalirajte fotografije u folder @upload@ da bi ste ih mogli izabrati sa ov lokacije.',
-'info_installer_tous_documents' => 'Instaliraj sve dokumente',
 'info_interface_complete' => 'Cjelokupni interfejs',
 'info_interface_simple' => 'Pojednostavljeni interfejs',
 'info_joindre_document_article' => 'Ovom clanku mozete pridruziti dokumente tipa',
@@ -437,7 +422,6 @@ sera ignorée) :
 'info_les_auteurs_1' => 'od @les_auteurs@',
 'info_logo_format_interdit' => 'Dozvoljeni su samo logotipi formata @formats@.',
 'info_logo_max_poids' => 'Logotip mora biti manji od @maxi@ (ovaj dokument je @actuel@).',
-'info_logo_max_taille' => 'Logotip mora biti manji od @maxi@ (ovaj dokument je @actuel@).',
 'info_mail_fournisseur' => 'vi@isp.com',
 'info_message_2' => 'PORUKA',
 'info_message_supprime' => 'PORUKA JE IZBRISANA',
@@ -466,7 +450,6 @@ sera ignorée) :
 'info_pixels' => 'piksela',
 'info_plusieurs_mots_trouves' => 'Pronadjeno je vise kljucnih rijeci za "@cherche_mot@":',
 'info_popularite_5' => 'popularno:',
-'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Automatski portfolio:',
 'info_premier_resultat' => '[@debut_limit@ prvih rezultata od ukupno @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ prvih rezultata od ukupno @total@]',
@@ -506,7 +489,6 @@ sera ignorée) :
 'info_symbole_vert' => 'Simbol <b>vert</b> ukazuje na <b>poruke razmijene sa drugim korisnicima</b> stranicama.', # MODIF
 'info_syndication' => 'sindikacija:',
 'info_syndication_articles' => 'clanak/ci',
-'info_telecharger' => 'Upload sa vaseg kompjutera:',
 'info_telecharger_nouveau_logo' => 'Upload novi logotip:',
 'info_telecharger_ordinateur' => 'Upload sa vaseg kompjutera:',
 'info_tous_resultats_enregistres' => '[registrovani su svi rezultati]',
