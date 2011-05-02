@@ -295,7 +295,6 @@ akan ditolak):
 
 Terima kasih atas partisipasi anda!
 ',
-'form_pet_message_commentaire' => 'Ada pesan atau komentar?',
 'form_pet_nom_site2' => 'Nama situs web anda',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => 'Permasalahan teknis, sistem tanda tangan untuk sementara waktu terganggu.',
@@ -321,12 +320,7 @@ Terima kasih atas partisipasi anda!
 'forum_non_inscrit' => 'Anda belum terdaftar atau alamat atau kata sandi yang salah.',
 'forum_par_auteur' => 'oleh @auteur@',
 'forum_probleme_database' => 'Permasalahan database, pesan anda tidak dapat disimpan.',
-'forum_qui_etes_vous' => '<b>Siapa anda?</b> (opsional)',
 'forum_titre_erreur' => 'Kesalahan...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Validasi pilihan ini',
-'forum_votre_email' => 'Alamat e-mail anda:',
-'forum_votre_nom' => 'Nama anda (atau alias):',
 
 // I
 'ical_texte_rss_articles' => 'Alamat berkas sindikasi artikel situs adalah:',
@@ -370,7 +364,6 @@ Terima kasih atas partisipasi anda!
 'icone_statistiques_visites' => 'Statistik',
 'icone_suivi_activite' => 'Tindak lanjut aktivitas situs',
 'icone_suivi_actualite' => 'Statistik situs',
-'icone_suivi_forums' => 'Kelola forum',
 'icone_suivi_pettions' => 'Kelola petisi',
 'icone_suivi_revisions' => 'Revisi artikel',
 'icone_supprimer_document' => 'Hapus dokumen ini',

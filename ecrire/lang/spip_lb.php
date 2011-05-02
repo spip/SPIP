@@ -292,7 +292,6 @@ Fir är Ënnerschrëft ze validéieren, surft op dës Adress (am aneren Fall gë
 
 Merci fir är Participatioun
 ',
-'form_pet_message_commentaire' => 'E Message, e Kommentar?',
 'form_pet_nom_site2' => 'Numm vun ärem Site',
 'form_pet_probleme_liens' => 'Korrigéiert äre Message a maacht d\'Hypertext-Linken ewech.',
 'form_pet_probleme_technique' => 'Technësche Problem, d\'Ënnerschrëften si momentan ausser Betrieb.',
@@ -318,12 +317,7 @@ Merci fir är Participatioun
 'forum_non_inscrit' => 'Dir sidd nët ugemellt, oder d\'Adress oder d\'Passwuert si falsch.',
 'forum_par_auteur' => 'No @auteur@',
 'forum_probleme_database' => 'Problem mat der Datebank, äre Message gouf nët enregistréiert.',
-'forum_qui_etes_vous' => '<b>Wie sidd Dir?</b> (optionnel)',
 'forum_titre_erreur' => 'Fehler...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Är Wiel validéieren',
-'forum_votre_email' => 'Är Email-Adress:',
-'forum_votre_nom' => 'Äre Numm (oder Pseudo):',
 
 // I
 'ical_texte_rss_articles' => 'De "Backend"-Fichier vun den Artikelen vun dësem Site ass op dër Adress:',
@@ -367,7 +361,6 @@ Merci fir är Participatioun
 'icone_statistiques_visites' => 'Statistik',
 'icone_suivi_activite' => 'D\'Liewen vum Site verfolgen',
 'icone_suivi_actualite' => 'Evolutioun vum Site',
-'icone_suivi_forums' => 'Forum\'en verfolgen',
 'icone_suivi_pettions' => 'Petitiounen verfolgen',
 'icone_suivi_revisions' => 'Ännerungen vun den Artikelen',
 'icone_supprimer_document' => 'Dëst Dokument läschen',

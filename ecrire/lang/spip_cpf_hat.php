@@ -291,7 +291,6 @@ Pou konfime siyati-a, fòk sèlman w abòd ladrès anba (sinon, sitwèb-la ke pa
 
 Mèsi  w soutni petisyon-nan
 ', # MODIF
-'form_pet_message_commentaire' => 'Gen yon mesaj, yon komanté pou di ?',
 'form_pet_nom_site2' => 'Kouman sitwèb ou rele',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => 'Pwoblèm teknik, siyati se pa posib kounye-a. Tann pwoblèm-la ke aranje pou rete sispann a yo.',
@@ -317,12 +316,7 @@ Mèsi  w soutni petisyon-nan
 'forum_non_inscrit' => 'W ap pa enskri ankò, oubyen ladrès osinon modpas ou se pa korèk.',
 'forum_par_auteur' => 'se @auteur@ te ekri',
 'forum_probleme_database' => 'Pwoblèm ak bazdone, mesaj ou te pa enskri.',
-'forum_qui_etes_vous' => '<b>Kouman w rele ?</b> (pa oblijé)',
 'forum_titre_erreur' => 'Erè ...',
-'forum_url' => 'URL :',
-'forum_valider' => 'Apiyé chwa-a',
-'forum_votre_email' => 'Ladrès limèl ou :',
-'forum_votre_nom' => 'Kouman w rele (ousinon kouman w vlé rele isit) :',
 
 // I
 'ical_texte_rss_articles' => 'Fichyé «backend» pou tout atik yo, w ke rannkont sou ladrès la :',
@@ -366,7 +360,6 @@ Mèsi  w soutni petisyon-nan
 'icone_statistiques_visites' => 'Estatistik',
 'icone_suivi_activite' => 'Gad lavi sit la',
 'icone_suivi_actualite' => 'Evolisyon  sit la',
-'icone_suivi_forums' => 'Swiv/okipe tout fowom ',
 'icone_suivi_pettions' => 'Swiv/ okipe tout petisyon  ',
 'icone_suivi_revisions' => 'Chanjman nan atik yo',
 'icone_supprimer_document' => 'Kraze dokiman nan',

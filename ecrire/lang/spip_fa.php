@@ -280,7 +280,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 از شركتتان متشكريم
  ',
-'form_pet_message_commentaire' => 'يك پيام ، يك تفسير ؟',
 'form_pet_nom_site2' => 'نام سايتتان<b>      ',
 'form_pet_probleme_liens' => 'خواهشمند است پیامتان را با حذف پیوند هایپرتکت دریافت کنید.',
 'form_pet_probleme_technique' => 'نقص فنى، امضاء ها موقتأ لغو شدند',
@@ -306,12 +305,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_non_inscrit' => 'شما ثبت نشده ايد، يا اينكه آدرس يا كلمه ورودتان اشتباه است',
 'forum_par_auteur' => 'بوسيله @auteur@ ',
 'forum_probleme_database' => 'نقص در داده پى ها، پيام شما ثبت نشده',
-'forum_qui_etes_vous' => '(اختيارى) <b> كى هستيد؟ </b>                                      ',
 'forum_titre_erreur' => '...اشتباه',
-'forum_url' => 'URL :',
-'forum_valider' => 'اين انتخاب را معتبر كنيد',
-'forum_votre_email' => ':آدرس ايميل تان',
-'forum_votre_nom' => '(نام  يا (نام مستعارتان  ',
 
 // I
 'ical_texte_rss_articles' => 'فايل  «backend»مقالات اين سايت در آدرس زير ميباشد:',
@@ -355,7 +349,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_statistiques_visites' => 'آمار بازديد كنندگان',
 'icone_suivi_activite' => ' پيگيرى فعاليت سايت',
 'icone_suivi_actualite' => 'تحول سايت',
-'icone_suivi_forums' => 'پيگيرى/اداره كردن سخنگاه',
 'icone_suivi_pettions' => 'پيگيرى/اداره كردن درخواست ',
 'icone_suivi_revisions' => 'اصلاح مقالات',
 'icone_supprimer_document' => 'اين سند را حذف كنيد',

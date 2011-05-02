@@ -293,7 +293,6 @@ adresa de mai jos (în caz contrat, cererea dumneavoastră va fi refuzată) :
 
 Mulţumim pentru participarea dumneavoastră
 ',
-'form_pet_message_commentaire' => 'Un mesaj, un comentariu ?',
 'form_pet_nom_site2' => 'Numele site-ului dumneavoastră de Web',
 'form_pet_probleme_liens' => 'Vă rugăm să reluati introducerea mesajului - suprimaţi legăturile hipertext.',
 'form_pet_probleme_technique' => 'Datorită unor probleme tehnice, semnăturile sunt deocamdată suspendate.',
@@ -319,12 +318,7 @@ Mulţumim pentru participarea dumneavoastră
 'forum_non_inscrit' => 'Nu sunteţi înscris, sau adresa ori parola dumneavoastră nu sunt corecte.',
 'forum_par_auteur' => 'de @auteur@',
 'forum_probleme_database' => 'Problemă tehnică cu baza de date, mesajul dumneavoastră nu a fost înregistrat.',
-'forum_qui_etes_vous' => '<b>Cine sunteţi dumneavoastră ?</b> (opţional)',
 'forum_titre_erreur' => 'Eroare...',
-'forum_url' => 'URL :',
-'forum_valider' => 'Validaţi această alegere',
-'forum_votre_email' => 'Adresa dumneavoastră de email :',
-'forum_votre_nom' => 'Numele dumneavoastră (sau pseudonimul) :',
 
 // I
 'ical_texte_rss_articles' => 'Fişierul «backend» al articolelor acestui site se găseşte la adresa:',
@@ -368,7 +362,6 @@ Mulţumim pentru participarea dumneavoastră
 'icone_statistiques_visites' => 'Statistici',
 'icone_suivi_activite' => 'Urmăriţi activitatea site-ului',
 'icone_suivi_actualite' => 'Evoluţia site-ului',
-'icone_suivi_forums' => 'Administrare forumuri',
 'icone_suivi_pettions' => 'Urmăriţi/gestionaţi petiţiile',
 'icone_suivi_revisions' => 'Modificări ale articolelor',
 'icone_supprimer_document' => 'Suprimaţi acest document',

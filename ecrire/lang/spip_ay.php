@@ -299,7 +299,6 @@ Iyaw sawima iyaw sañatakix utjawir uñachayata ukar chinusiñamawa
 
 Arsusiwitamatxa yuspagara
    ',
-'form_pet_message_commentaire' => '¿Mä yatiyawi, mä amuyu?',
 'form_pet_nom_site2' => 'Web qamawiman sutipa',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => 'Jan wali, iyawsanakax sayt\'ataw anchhichanakax.',
@@ -325,12 +324,7 @@ Arsusiwitamatxa yuspagara
 'forum_non_inscrit' => 'Janiw qillqataktati, utjawich imt\'atach pantjatawa.',
 'forum_par_auteur' => 'lurata @auteur@',
 'forum_probleme_database' => 'Pirwan yatiyawinakax jan waliru puritaw, yatiyawimax janiw qillqaskiti',
-'forum_qui_etes_vous' => '&lt;b&gt;¿Khititasa?&lt;/b&gt;    (ajlliñatakiwa)',
 'forum_titre_erreur' => 'Pantjata...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Ajllita yaw saña',
-'forum_votre_email' => 'Aruskipayiriman utjawipa:',
-'forum_votre_nom' => 'Sutima (jan ukjax sutichawima):',
 
 // I
 'ical_texte_rss_articles' => '«Backend» q\'ipix aka qamawin qillqatanakata, utjawin jikisi:',
@@ -376,7 +370,6 @@ Arsusiwitamatxa yuspagara
 'icone_statistiques_visites' => 'Tumpatanakat tantiyatanaka',
 'icone_suivi_activite' => 'Qamawit uñch\'ukiwi',
 'icone_suivi_actualite' => 'Qamawin jilawi',
-'icone_suivi_forums' => 'Aruskipañanak apnaqaña ukhamarak uñch\'ukiña',
 'icone_suivi_pettions' => 'Mayitanakat apnaqawi',
 'icone_suivi_revisions' => 'Qillqatanakat mayjaptatanaka',
 'icone_supprimer_document' => 'Aka qillqa q\'ip apaqaña',

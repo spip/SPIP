@@ -292,7 +292,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 Спасибо за участие!
 ',
-'form_pet_message_commentaire' => 'Любое сообщение или комментарий?',
 'form_pet_nom_site2' => 'Название вашего сайта',
 'form_pet_probleme_liens' => 'Отредактируйте ваше сообщение, исключив из него все ссылки.',
 'form_pet_probleme_technique' => 'Техническая проблема, подписка временно не работает.',
@@ -318,12 +317,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_non_inscrit' => 'Или Вы не регистрированы, или адрес или пароль неправильны.',
 'forum_par_auteur' => ' @auteur@',
 'forum_probleme_database' => 'Проблема базы данных, ваше сообщение не могло быть записано.',
-'forum_qui_etes_vous' => '<b>Кто вы?</b> (необязательно)',
 'forum_titre_erreur' => 'Ошибка...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Подтвердите выбор',
-'forum_votre_email' => 'Ваш e-mail адрес:',
-'forum_votre_nom' => 'Ваше имя (или псевдоним):',
 
 // I
 'ical_texte_rss_articles' => 'RSS статей всего сайта:',
@@ -367,7 +361,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_statistiques_visites' => 'Статистика',
 'icone_suivi_activite' => 'RSS и iCal',
 'icone_suivi_actualite' => 'Статистика сайта',
-'icone_suivi_forums' => 'Управление форумами',
 'icone_suivi_pettions' => 'Управление комментариями',
 'icone_suivi_revisions' => 'Версии статьи',
 'icone_supprimer_document' => 'Удалить этот документ',

@@ -294,7 +294,6 @@ la vòsta demanda):
 
 Mercés entà la vòsta participacion
 ', # MODIF
-'form_pet_message_commentaire' => 'Un messatge, ua remarca?',
 'form_pet_nom_site2' => 'Nom deu vòste sit web',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => 'Problèma tecnic, las signaturas que son temporàriament arrestadas.',
@@ -320,12 +319,7 @@ Mercés entà la vòsta participacion
 'forum_non_inscrit' => 'Sia n\'ètz pas inscriut(a), sia avetz hèit ua error d\'adreiça o de mot de santa Clara. ',
 'forum_par_auteur' => 'per @auteur@',
 'forum_probleme_database' => 'Problèma de basa de dadas, lo vòste messatge non s\'ei pas registrat.',
-'forum_qui_etes_vous' => '<b>Qui ètz?</b> (opcionau)',
 'forum_titre_erreur' => 'Error...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Validar aquera causida',
-'forum_votre_email' => 'La vòsta adreiça e-mail:',
-'forum_votre_nom' => 'Lo vòste nom (o pseudonim):',
 
 // I
 'ical_texte_rss_articles' => 'Lo fichièr "backend" deus articles d\'aqueste sit que\'s tròba a l\'adreiça:',
@@ -369,7 +363,6 @@ Mercés entà la vòsta participacion
 'icone_statistiques_visites' => 'Estadisticas',
 'icone_suivi_activite' => 'Seguir l\'activitat editoriau',
 'icone_suivi_actualite' => 'Evolucion deu sit',
-'icone_suivi_forums' => 'Seguir/gerir los forums',
 'icone_suivi_pettions' => 'Seguir/gerir las peticions',
 'icone_suivi_revisions' => 'Modificacions deus articles',
 'icone_supprimer_document' => 'Suprimir aqueth document',

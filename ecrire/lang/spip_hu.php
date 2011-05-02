@@ -292,7 +292,6 @@ lenti címhez kell csatlakozni (ellenkező esetben az Ön kérése el lesz utas�
 
 Köszönjük részvételét!
 ',
-'form_pet_message_commentaire' => 'Üzenet, hozzászólás ?',
 'form_pet_nom_site2' => 'Honlapjának neve',
 'form_pet_probleme_liens' => 'Kérjük, törölje a hiperhivatkozásokat üzenetéből.',
 'form_pet_probleme_technique' => 'Technikai hiba, az aláírás ideiglenesen fel van függesztve.',
@@ -318,12 +317,7 @@ Köszönjük részvételét!
 'forum_non_inscrit' => 'Nincs regisztrálva, vagy a cím vagy a jelszó hibás.',
 'forum_par_auteur' => 'Írta: @auteur@',
 'forum_probleme_database' => 'Adatbázis hiba, az Ön üzenetét nem rögzítettük.',
-'forum_qui_etes_vous' => '<b>Kicsoda Ön?</b> (nem kötelező)',
 'forum_titre_erreur' => 'Hiba...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Érvényesítse választását',
-'forum_votre_email' => 'Az Ön email címe:',
-'forum_votre_nom' => 'Az Öne neve (vagy beceneve):',
 
 // I
 'ical_texte_rss_articles' => 'A honlap cikkeinek «backend» fájlja ezen a címen található:',
@@ -367,7 +361,6 @@ Köszönjük részvételét!
 'icone_statistiques_visites' => 'Statisztikák',
 'icone_suivi_activite' => 'A honlap életének megfigyelése',
 'icone_suivi_actualite' => 'A honlap kialakulása',
-'icone_suivi_forums' => 'Figyelni/kezelni a fórumokat',
 'icone_suivi_pettions' => 'Figyelni/kezelni az aláírásgyűjtéseket',
 'icone_suivi_revisions' => 'Cikkek módosítása',
 'icone_supprimer_document' => 'A dokumentum törlése',

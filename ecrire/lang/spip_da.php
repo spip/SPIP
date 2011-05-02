@@ -291,7 +291,6 @@ adressen nedenfor (ellers vil underskriften blive afvist):
 
 Tak for din deltagelse
 ', # MODIF
-'form_pet_message_commentaire' => 'Meddelelse eller kommentar?',
 'form_pet_nom_site2' => 'Navn på dit websted',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => 'Teknisk problem: Appelfunktionen er i øjeblikket ude af drift.',
@@ -317,12 +316,7 @@ Tak for din deltagelse
 'forum_non_inscrit' => 'Enten er du ikke tilmeldt, eller adresse eller adgangskode er forkert.',
 'forum_par_auteur' => 'af @auteur@',
 'forum_probleme_database' => 'Databaseproblem, dit indlæg er ikke modtaget.',
-'forum_qui_etes_vous' => '<b>Hvem er du?</b> (valgfrit)',
 'forum_titre_erreur' => 'Fejl...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Kontroller gyldighed',
-'forum_votre_email' => 'Din e-mail-adresse:',
-'forum_votre_nom' => 'Dit navn (eller alias):',
 
 // I
 'ical_texte_rss_articles' => 'Filen "backend" for artiklerne på dette websted findes på følgende adresse: ',
@@ -366,7 +360,6 @@ Tak for din deltagelse
 'icone_statistiques_visites' => 'Besøgsstatistik',
 'icone_suivi_activite' => 'Opfølgning på webstedets aktiviteter',
 'icone_suivi_actualite' => 'Webstedets udvikling',
-'icone_suivi_forums' => 'Administrer forummer',
 'icone_suivi_pettions' => 'Administrer appeller',
 'icone_suivi_revisions' => 'Modifications des articles', # NEW
 'icone_supprimer_document' => 'Slet dette dokument',

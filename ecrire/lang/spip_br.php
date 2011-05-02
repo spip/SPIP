@@ -292,7 +292,6 @@ Evit kadarnaat ho sinadur eo trawalc\'h deoc\'h mont d\'ar chomlec\'h amañ dind
 
 Trugarez da gemer perzh
 ',
-'form_pet_message_commentaire' => 'Ur gemennadenn, un evezhiadenn ?',
 'form_pet_nom_site2' => 'Anv ho lec\'hienn',
 'form_pet_probleme_liens' => 'Savit ho kemennadenn en-dro en ur dennañ ar gourliammoù zo enni. ',
 'form_pet_probleme_technique' => 'Ur gudenn deknikel zo, n\'haller ket sinañ evit ar poent.',
@@ -318,12 +317,7 @@ Trugarez da gemer perzh
 'forum_non_inscrit' => 'N\'oc\'h ket enskrivet, pe direizh eo ar ger-tremen pe ar chomlec\'h.',
 'forum_par_auteur' => 'gant @auteur@',
 'forum_probleme_database' => 'Kudenn diaz titouroù, n\'eo ket bet enrollet ho kemennadenn.',
-'forum_qui_etes_vous' => '<b>Piv oc\'h-hu ?</b> (Diret)',
 'forum_titre_erreur' => 'Fazi...',
-'forum_url' => 'URL :',
-'forum_valider' => 'Kadarnaat an dibab-mañ',
-'forum_votre_email' => 'Ho postel :',
-'forum_votre_nom' => 'Hoc\'h anv (pe lesanv) :',
 
 // I
 'ical_texte_rss_articles' => 'D\'ar chomlec\'h-mañ emañ restr «backend» ar pennadoù :',
@@ -367,7 +361,6 @@ Trugarez da gemer perzh
 'icone_statistiques_visites' => 'Stadegoù',
 'icone_suivi_activite' => 'Heuliañ buhez al lec\'hienn',
 'icone_suivi_actualite' => 'Emdroadur al lec\'hienn',
-'icone_suivi_forums' => 'Heuliañ/merañ ar foromoù',
 'icone_suivi_pettions' => 'Heuliañ/merañ ar sinadegoù',
 'icone_suivi_revisions' => 'Kemmoù ar pennadoù',
 'icone_supprimer_document' => 'Diverkañ an teul-mañ',

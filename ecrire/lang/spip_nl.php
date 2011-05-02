@@ -293,7 +293,6 @@ Om je gegevens te valideren, volstaat het het onderstaande adres
 
 Bedankt voor je deelname
 ',
-'form_pet_message_commentaire' => 'Een bericht, een commentaar?',
 'form_pet_nom_site2' => 'Naam van je website',
 'form_pet_probleme_liens' => 'Gelieve uw bericht te herbeginnen zonder internet links.',
 'form_pet_probleme_technique' => 'Technisch probleem. Inloggen is momenteel niet mogelijk.',
@@ -319,12 +318,7 @@ Bedankt voor je deelname
 'forum_non_inscrit' => 'Je bent niet ingeschreven, ofwel is je adres of paswoord niet correct.',
 'forum_par_auteur' => 'door @auteur@',
 'forum_probleme_database' => 'Probleem met databank, je bericht is niet geregistreerd.',
-'forum_qui_etes_vous' => '<b>Wie ben je ?</b> (optioneel)',
 'forum_titre_erreur' => 'Fout ...',
-'forum_url' => 'URL :',
-'forum_valider' => 'Keuze bevestigen',
-'forum_votre_email' => 'Je e-mailadres :',
-'forum_votre_nom' => 'Je naam (of alias) :',
 
 // I
 'ical_texte_rss_articles' => 'Het «backend» bestand van de artikels bevindt zich op dit adres:',
@@ -368,7 +362,6 @@ Bedankt voor je deelname
 'icone_statistiques_visites' => 'Statistieken',
 'icone_suivi_activite' => 'De activiteit van de site opvolgen',
 'icone_suivi_actualite' => 'Evolutie van de site',
-'icone_suivi_forums' => 'Forums opvolgen/beheren',
 'icone_suivi_pettions' => 'Petities opvolgen/beheren',
 'icone_suivi_revisions' => 'Wijzigingen van de artikels',
 'icone_supprimer_document' => 'Deze bijlage wissen',

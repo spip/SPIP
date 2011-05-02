@@ -295,7 +295,6 @@ no podrá ser tomada en cuenta):
 
 Gracias por tu participación
 ',
-'form_pet_message_commentaire' => '¿Un mensaje, un comentario?',
 'form_pet_nom_site2' => 'Nombre de tu sitio Web',
 'form_pet_probleme_liens' => 'Ingresa nuevamente tu mensaje, quitando los enlaces hypertexto.',
 'form_pet_probleme_technique' => 'Problema técnico, las firmas están temporalmente suspendidas.',
@@ -321,12 +320,7 @@ Gracias por tu participación
 'forum_non_inscrit' => 'No estás inscrita o inscrito, o bien la dirección o la contraseña son erróneas.',
 'forum_par_auteur' => 'por @auteur@',
 'forum_probleme_database' => 'Problema de la base de datos, tu mensaje no ha sido registrado.',
-'forum_qui_etes_vous' => '<b>¿Quién eres?</b> (opcional)',
 'forum_titre_erreur' => 'Error...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Validar la elección',
-'forum_votre_email' => 'Tu dirección de correo electrónico:',
-'forum_votre_nom' => 'Tu nombre (o seudónimo):',
 
 // I
 'ical_texte_rss_articles' => 'El archivo «backend» de artículos de este sitio se encuentra en la dirección:',
@@ -370,7 +364,6 @@ Gracias por tu participación
 'icone_statistiques_visites' => 'Estadísticas de visitas',
 'icone_suivi_activite' => 'Seguir la vida del sitio',
 'icone_suivi_actualite' => 'Evolución del sitio',
-'icone_suivi_forums' => 'Seguir y administrar los foros',
 'icone_suivi_pettions' => 'Gestión de las peticiones',
 'icone_suivi_revisions' => 'Modificaciones de artículos',
 'icone_supprimer_document' => 'Suprimir este documento',

@@ -283,7 +283,6 @@ adressen nedan (annars kommer din begäran att nekas:
 
 Tack för ditt deltagande
 ',
-'form_pet_message_commentaire' => 'Något meddelande eller kommentar?',
 'form_pet_nom_site2' => 'Namn på din webbssajt',
 'form_pet_probleme_liens' => 'Var vänlig ändra ditt meddelande, ta bort alla hyperlänkar.',
 'form_pet_probleme_technique' => 'Registrering är tillfälligtvis omöjligt på grund av ett tekniskt problem.',
@@ -309,12 +308,7 @@ Tack för ditt deltagande
 'forum_non_inscrit' => 'Antingen är du inte registrerad eller så är adressen eller lösenordet felaktigt.',
 'forum_par_auteur' => 'av @auteur@',
 'forum_probleme_database' => 'Databas-problem, ditt meddelande kunde inte sparas.',
-'forum_qui_etes_vous' => '<b>Vem är du?</b> (valfritt)',
 'forum_titre_erreur' => 'Fel...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Granska valet',
-'forum_votre_email' => 'Din epost-adress',
-'forum_votre_nom' => 'Ditt namn (eller alias):',
 
 // I
 'ical_texte_rss_articles' => 'filen «backend» för artiklarna på den här sajten finns på adressen:',
@@ -358,7 +352,6 @@ Tack för ditt deltagande
 'icone_statistiques_visites' => 'Statistik',
 'icone_suivi_activite' => 'Uppföljning av sajtens aktivitet',
 'icone_suivi_actualite' => 'Statistik för sajten',
-'icone_suivi_forums' => 'Hantera forumen',
 'icone_suivi_pettions' => 'Hantera namninsamlingarna',
 'icone_suivi_revisions' => 'Förändringar i artiklar',
 'icone_supprimer_document' => 'Radera dokumentet',

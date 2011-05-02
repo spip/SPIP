@@ -290,7 +290,6 @@ sera ignorée) :
 
 感谢您的参与
 ', # MODIF
-'form_pet_message_commentaire' => '其它消息和评论?',
 'form_pet_nom_site2' => '您的站点名',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => '技术问题,签名被即刻中断.',
@@ -316,12 +315,7 @@ sera ignorée) :
 'forum_non_inscrit' => '可能您还没有注册或者您输入的地址或密码错误.',
 'forum_par_auteur' => '按 @auteur@',
 'forum_probleme_database' => '数据库问题,您的消息未能保存.',
-'forum_qui_etes_vous' => '<b>您是谁?</b> (可选)', # MODIF
 'forum_titre_erreur' => '错误...',
-'forum_url' => 'URL:',
-'forum_valider' => '使选择生效',
-'forum_votre_email' => '您的邮件地址:',
-'forum_votre_nom' => '您的名字(或昵称):',
 
 // I
 'ical_texte_rss_articles' => '本站点文章的«引用»文件地址:',
@@ -365,7 +359,6 @@ sera ignorée) :
 'icone_statistiques_visites' => '访问统计', # MODIF
 'icone_suivi_activite' => '跟踪站点的活动',
 'icone_suivi_actualite' => '站点评估',
-'icone_suivi_forums' => '跟踪/管理论坛',
 'icone_suivi_pettions' => '跟踪/管理请求',
 'icone_suivi_revisions' => '文章修改',
 'icone_supprimer_document' => '删除文档',

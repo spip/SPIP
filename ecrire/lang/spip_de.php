@@ -290,7 +290,6 @@ Um Ihre Unterschrift zu bestätigen müssen Sie diese Seite aufrufen (wenn Sie e
 
 Vielen Dank für Ihre Teilnahme
 ',
-'form_pet_message_commentaire' => 'Eine Nachricht, ein Kommentar?',
 'form_pet_nom_site2' => 'Name Ihrer Website',
 'form_pet_probleme_liens' => 'Bitte entfernen Sie die Hyperlinks aus Ihrer Nachricht.',
 'form_pet_probleme_technique' => 'Technisches Problem: Signaturen sind vorübergehend nicht möglich.',
@@ -316,12 +315,7 @@ Vielen Dank für Ihre Teilnahme
 'forum_non_inscrit' => 'Sie sind nicht eingeschrieben oder Adresse bzw. Passwort waren falsch.',
 'forum_par_auteur' => 'Nach @auteur@',
 'forum_probleme_database' => 'Datenbankfehler. Ihr Beitrag wurde nicht gespeichert',
-'forum_qui_etes_vous' => '<b>Wer sind Sie?</b> (optional)',
 'forum_titre_erreur' => 'Fehler...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Auswahl bestätigen',
-'forum_votre_email' => 'Ihr E-Mail Adresse:',
-'forum_votre_nom' => 'Ihr Name (oder Pseudonym) :',
 
 // I
 'ical_texte_rss_articles' => 'Die «backend» Datei mit den Artikeln der Website finden Sie unter dieser Adresse:',
@@ -365,7 +359,6 @@ Vielen Dank für Ihre Teilnahme
 'icone_statistiques_visites' => 'Statistiken',
 'icone_suivi_activite' => 'Aktivitäten verfolgen',
 'icone_suivi_actualite' => 'Entwicklung der Website',
-'icone_suivi_forums' => 'Foren verwalten',
 'icone_suivi_pettions' => 'Petitionen verwalten',
 'icone_suivi_revisions' => 'Änderungen des Artikels',
 'icone_supprimer_document' => 'Dokument löschen',

@@ -295,7 +295,6 @@ la to solicitú):
 
 Gracies por participar
 ',
-'form_pet_message_commentaire' => '¿Un mensaxe, un comentariu?',
 'form_pet_nom_site2' => 'Nome del to sitiu Web',
 'form_pet_probleme_liens' => 'Ties que iguar el to mensaxe quitando-y los enllaces d\'hipertestu.',
 'form_pet_probleme_technique' => 'Hai un problema téunicu, les firmes tan temporalmente suspendíes.',
@@ -321,12 +320,7 @@ Gracies por participar
 'forum_non_inscrit' => 'Nun tas apuntáu, o les tos señes o contraseña tan equivocáos.',
 'forum_par_auteur' => 'por @auteur@',
 'forum_probleme_database' => 'Problema de base datos, el to mensaxe nun quedó rexistráu.',
-'forum_qui_etes_vous' => '<b>¿Quién yes?</b> (opcional)',
 'forum_titre_erreur' => 'Error...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Validar la escoyeta',
-'forum_votre_email' => 'Les tos señes d\'email:',
-'forum_votre_nom' => 'El to nome (o nomatu):',
 
 // I
 'ical_texte_rss_articles' => 'El ficheru «backend» de los artículos d\'esti sitiu alcuéntrase na direición:',
@@ -370,7 +364,6 @@ Gracies por participar
 'icone_statistiques_visites' => 'Estadístiques',
 'icone_suivi_activite' => 'Siguir l\'actividá del sitiu',
 'icone_suivi_actualite' => 'Evolución del sitiu',
-'icone_suivi_forums' => 'Siguir/xestionar los foros',
 'icone_suivi_pettions' => 'Siguir/xestionar les solicitudes',
 'icone_suivi_revisions' => 'Cambéos de los artículos',
 'icone_supprimer_document' => 'Desaniciar esti documentu',
