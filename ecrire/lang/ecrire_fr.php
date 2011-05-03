@@ -128,6 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_supprime' => 'Texte supprimé',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@',
 'email' => 'email',
 'email_2' => 'email :',
 'en_savoir_plus' => 'En savoir plus',
