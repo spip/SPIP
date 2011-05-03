@@ -265,40 +265,8 @@ sera ignorée) :
 'form_indiquer_email' => 'Попълнете електронния си адрес.',
 'form_indiquer_nom' => 'Попълнете името си.',
 'form_indiquer_nom_site' => 'Попълнете името на Вашия сайт.',
-'form_pet_adresse_site' => 'URL на сайта',
-'form_pet_aucune_signature' => 'Кодът не отговаря на никой запис',
-'form_pet_confirmation' => 'Моля, потвърдете записа:',
 'form_pet_deja_enregistre' => 'Сайтът е вече регистриран',
-'form_pet_deja_signe' => 'Тектът вече е записан.',
-'form_pet_envoi_mail_confirmation' => 'Писмо за потвърждение вече е изпратено до Вас. Моля, посетете уеб-адреса, споменат в това писмо, за да потвърдите записа си. ', # MODIF
-'form_pet_mail_confirmation' => 'Добър ден,
-
-Пожелали сте да подпишете молбата:
-@titre@.
-
-Подали сте следната информация:
-    Име: @nom_email@
-    Сайт: @nom_site@ - @url_site@
-@message@
-
-ВАЖНО!
-За да потвърдите записа, посетете следния 
-Интернет адрес (в противен случай молбата
-ще бъде отхвърлена):
-    @url@
-
-Благодаря за участието!
-',
-'form_pet_nom_site2' => 'Име на Вашия сайт',
-'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
-'form_pet_probleme_technique' => 'Техническа грешка: записите са прекъснати моментално.',
 'form_pet_signature_pasprise' => 'Грешен запис',
-'form_pet_signature_validee' => 'Подписът е одобрен. Благодаря!',
-'form_pet_site_deja_enregistre' => 'Сайтът е вече регистриран',
-'form_pet_url_invalide' => 'Грешен уеб-адрес (URL) на страницата',
-'form_pet_votre_email' => 'Електронен адрес',
-'form_pet_votre_nom' => 'Име или псевдоним',
-'form_pet_votre_site' => 'Ако имате Интернет страница, може да я отворите по-долу',
 'form_prop_confirmer_envoi' => 'Потвърждение на изпращането',
 'form_prop_description' => 'Описание/коментар',
 'form_prop_enregistre' => 'Вашето предложение е записано. То ще се появи на страниците на сайта след одобрение от администратор. ',
@@ -342,7 +310,6 @@ sera ignorée) :
 'icone_interface_simple' => 'Опростен интерфейс',
 'icone_maintenance_site' => 'Поддръжка на сайта',
 'icone_messagerie_personnelle' => 'Лични съобщения',
-'icone_mots_cles' => 'Ключови думи',
 'icone_repartition_actuelle' => 'Покажи настоящата дистрибуция',
 'icone_repartition_debut' => 'Покажи началната дистрибуция',
 'icone_repartition_visites' => 'Разпределяне на посещенията',
@@ -492,15 +459,11 @@ sera ignorée) :
 'info_rechercher_02' => 'Търсене:',
 'info_remplacer_vignette' => 'Смяна на винетката по подразбиране с лого по избор:',
 'info_retablir_lien' => 'възстановяване на препратката',
-'info_retirer_mot' => 'Премахване на ключовата дума',
-'info_retirer_mots' => 'Премахване на всички ключови думи',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'без заглавие',
 'info_selectionner_fichier' => 'Избиране на файл от папка @upload@',
 'info_selectionner_fichier_2' => 'Изберете файл:',
-'info_signature_supprimee' => 'Signature supprimée', # NEW
-'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Сайт очакващ одобрение',
 'info_site_reference' => 'Свързани сайтове',
 'info_site_refuse' => 'Интернет страницата е отхвърлена',

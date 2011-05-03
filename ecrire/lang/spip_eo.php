@@ -262,42 +262,8 @@ sera ignorée) :
 'form_indiquer_email' => 'Bonvolu indiki vian retpoŝtadreson.',
 'form_indiquer_nom' => 'Bonvolu indiki vian nomon.',
 'form_indiquer_nom_site' => 'Bonvolu indiki la nomon de via retejo.',
-'form_pet_adresse_site' => 'Retadreso de via retejo',
-'form_pet_aucune_signature' => 'Neniu subskribo kongruas kun tiu kodo...',
-'form_pet_confirmation' => 'Bonvolu konfirmi vian subskribon:',
 'form_pet_deja_enregistre' => 'Tiu retejo estas jam registrita',
-'form_pet_deja_signe' => 'Vi jam subskribis tiun tekston.',
-'form_pet_envoi_mail_confirmation' => 'Konfirma retmesaĝo estis ĵus sendita al @email@. Vi devas aliri la retadreson menciitan en tiu mesaĝo por validigi vian subskribon.',
-'form_pet_mail_confirmation' => 'Saluton,
-
-Vi petis subskribi la petskribon:
-@titre@.
-
-Vi entajpis jenajn informojn:
-    Nomo: @nom_email@
-    Retejo: @nom_site@ - @url_site@
-    @message@
-
-GRAVE...
-Por validigi vian subskribon, sufiĉas konektiĝi al
-la ĉi-suba retadreso (alie via peto
-estos rifuzita):
-
-    @url@
-
-
-Dankon pro via partopreno
-',
-'form_pet_nom_site2' => 'Nomo de via retejo',
-'form_pet_probleme_liens' => 'Bonvolu retrakti vian mesaĝon forigante hiperteskajn ligilojn.',
-'form_pet_probleme_technique' => 'Teknika problemo, la subskribeblo estas portempe ne ebla.',
 'form_pet_signature_pasprise' => 'Via subskribo ne estas registrita.',
-'form_pet_signature_validee' => 'Via subskribo estas validigita. Dankon !',
-'form_pet_site_deja_enregistre' => 'Tiu retejo estas jam registrita',
-'form_pet_url_invalide' => 'La retadreso, kiun vi indikis, ne validas.',
-'form_pet_votre_email' => 'Via retpoŝtadreso',
-'form_pet_votre_nom' => 'Via nomo aŭ salutnomo',
-'form_pet_votre_site' => 'Se vi havas retejon, vi povas ĝin indiki ĉi-sube',
 'form_prop_confirmer_envoi' => 'Konfirmi la sendon',
 'form_prop_description' => 'Priskribo/komento',
 'form_prop_enregistre' => 'Via kontribuo estas registrita, ĝi aperos ĉerete post validigo de la respondeculoj de la retejo.',
@@ -341,7 +307,6 @@ Dankon pro via partopreno
 'icone_interface_simple' => 'Simpla interfaco',
 'icone_maintenance_site' => 'Retejo-bontenado',
 'icone_messagerie_personnelle' => 'Persona mesaĝilo',
-'icone_mots_cles' => 'Ŝlosilvortoj',
 'icone_repartition_actuelle' => 'Afiŝi la nunan distribuon',
 'icone_repartition_debut' => 'Afiŝi la distribuon ekde la komenco',
 'icone_repartition_visites' => 'Vizitoj-distribuo',
@@ -491,15 +456,11 @@ Dankon pro via partopreno
 'info_rechercher_02' => 'Serĉi :',
 'info_remplacer_vignette' => 'Anstataŭi la defaŭltan vinjeton per propra vinjeto :',
 'info_retablir_lien' => 'Restaŭri tiun ligilon',
-'info_retirer_mot' => 'Forigi tiun vorton',
-'info_retirer_mots' => 'Forigi ĉiujn vortojn',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'sen titolo',
 'info_selectionner_fichier' => 'Vi povas selekti dosieron el la dosierujo @upload@',
 'info_selectionner_fichier_2' => 'Elektu dosieron :',
-'info_signature_supprimee' => 'Subskribo forviŝita',
-'info_signature_supprimee_erreur' => 'Eraro : tiu ĉi forviŝcela kodo kongruas kun neniu subskribo',
 'info_site_attente' => 'Retejo atendanta validigon',
 'info_site_reference' => 'Retejo rete referencigita',
 'info_site_refuse' => 'Rifuzita retejo',

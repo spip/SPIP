@@ -266,39 +266,8 @@ sera ignorée) :
 'form_indiquer_email' => 'רשום את כתובת הדוא"ל.',
 'form_indiquer_nom' => 'רשום את שמך.',
 'form_indiquer_nom_site' => 'רשום את שם האתר שלך.',
-'form_pet_adresse_site' => 'הכתובת הכללית של האתר שלך',
-'form_pet_aucune_signature' => 'שום חתימה לא מתאימה לקוד...',
-'form_pet_confirmation' => 'נא אשר את חתימתך.',
 'form_pet_deja_enregistre' => 'האתר הזה כבר רשום במערכת',
-'form_pet_deja_signe' => 'כבר חתמת על הטקסט הזה.',
-'form_pet_envoi_mail_confirmation' => 'דוא"ל אישור נשלח לכתובת @email@. נא להקליק בקישור שצוין בהודעה כדי לתת תוקף לחתימתך.',
-'form_pet_mail_confirmation' => 'שלום,
-
-ביקשת לתחתום את הפטיציה הבאה:
-@titre@.
-
-הכנסת את הפרטים הבאים:
-    שם: @nom_email@
-    אתר: @nom_site@ - @url_site@
-
-לתשומת לבך...
-כדי לאשר את חתימתך, צריך שתתחבר/י 
-לכתובת הבאה (אם לא, אז בקשתך
-תימאס):
-    @url@
-
-תודה על השתתפותך
-',
-'form_pet_nom_site2' => 'שם האתר שלך',
-'form_pet_probleme_liens' => 'נא לתקן את הודעתך בהסרת הקישורים.',
-'form_pet_probleme_technique' => 'בעיה טכנית, חתימות לא עובדות כרגע.',
 'form_pet_signature_pasprise' => 'חתימתך נתקלה בהתעלמות.',
-'form_pet_signature_validee' => 'החתימה שלך מקובלת. תודה לך !',
-'form_pet_site_deja_enregistre' => 'האתר הזה כבר רשום במערכת',
-'form_pet_url_invalide' => 'הכתובת הכללית שכתבת לא ברת תוקף.',
-'form_pet_votre_email' => 'כתובת הדוא"ל שלך',
-'form_pet_votre_nom' => 'השם או הכינוי שלך',
-'form_pet_votre_site' => 'אם ברשותך אתר, כתוב את כתובתו להלן',
 'form_prop_confirmer_envoi' => 'אשר שליחה',
 'form_prop_description' => 'תיאור/פירוש',
 'form_prop_enregistre' => 'ההצעה שלך נרשמה, היא תופיע ברשת לאחר אישור של מנהלי האתר.',
@@ -342,7 +311,6 @@ sera ignorée) :
 'icone_interface_simple' => 'ממשק מפושט',
 'icone_maintenance_site' => 'תחזוקת אתר',
 'icone_messagerie_personnelle' => 'התכתבות אישית',
-'icone_mots_cles' => 'מילות מפתח',
 'icone_repartition_actuelle' => 'הראה תפוצה ממשית',
 'icone_repartition_debut' => 'הצג חלוקה מן ההתחלה',
 'icone_repartition_visites' => 'חלוקת ביקורים',
@@ -492,15 +460,11 @@ sera ignorée) :
 'info_rechercher_02' => ':חיפוש',
 'info_remplacer_vignette' => 'החלפת הגפנית שבברירת מחדל ללוגו מותאם :',
 'info_retablir_lien' => 'החזרת קישור זה',
-'info_retirer_mot' => 'הסרת מילת מפתח זו',
-'info_retirer_mots' => 'הסרת כל מילות מפתח',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'ללא כותרת',
 'info_selectionner_fichier' => 'בחירת קובץ בתיקיה @upload@',
 'info_selectionner_fichier_2' => 'בחירת קובץ :',
-'info_signature_supprimee' => 'חתימה נמחקה',
-'info_signature_supprimee_erreur' => 'טעות : קוד המחיקה לא מתאים לאף חתימה',
 'info_site_attente' => 'האתר בציפיית הוולידציה',
 'info_site_reference' => 'מראי מקום אתרים מקוונים',
 'info_site_refuse' => 'האתר נדחה',

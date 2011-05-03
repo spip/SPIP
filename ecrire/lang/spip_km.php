@@ -259,39 +259,8 @@ sera ignorée) :
 'form_indiquer_email' => 'សូម​បង្ហាញ ​អាសយដ្ឋាន​អ៊ីមែវល៍ ​របស់​អ្នក។',
 'form_indiquer_nom' => 'សូមបង្ហាញ​ឈ្មោះ ​របស់​អ្នក។',
 'form_indiquer_nom_site' => 'សូមបង្ហាញ​ឈ្មោះ​វ៉ែបសៃថ៍ របស់​អ្នក។',
-'form_pet_adresse_site' => 'អាសយដ្ឋានវ៉ែបសៃថ៍ របស់​អ្នក',
-'form_pet_aucune_signature' => 'គ្មាន​ហត្ថលេខា​ ត្រូវ​នឹងអក្សរ​កូដ​នេះ​...',
-'form_pet_confirmation' => 'សូម​បញ្ជាក់​ទទួលស្គាល់ ​ហត្ថលេខា​ របស់​អ្នក៖',
 'form_pet_deja_enregistre' => 'វ៉ែបសៃថ៍នេះ​ ធ្លាប់ត្រូវបាន​ចុះបញ្ជី​។',
-'form_pet_deja_signe' => 'អ្នក​ធ្លាប់បាន ​ចុះហត្ថលេខា អត្ថបទ​នេះ។',
-'form_pet_envoi_mail_confirmation' => 'មួយអ៊ីមែវល៍បញ្ជាក់​ទទួលស្គាល់ ​ទើបត្រូវបានផ្ញើ​ទៅ​ @email@។ អ្នកត្រូវតែចូល​មើល អាសយដ្ឋានវ៉ែប បានប្រាប់ ក្នុងអ៊ីមែវល៍នេះ​ ដើម្បីធ្វើសុពលភាពហត្ថលេខា ​របស់​អ្នក។',
-'form_pet_mail_confirmation' => 'សួស្ដី, 
- 
-អ្នកបានសួររក ចុះហត្ថលេខា បណ្តឹងជំទាស់៖ 
-  @titre@.
- អ្នក​បាន​ផ្ដល់ ​ពត៌មាន ខាងក្រោម៖
- ឈ្មោះ ៖ @nom_email@
- វ៉ែបសៃថ៍ ៖ @nom_site@ - @url_site@
-@message@
- 
- សំខាន់​...
- ​ដើម្បី​សុពលភាព​ហត្ថលេខា ​របស់​អ្នក, អ្នកចាំបាច់ត្រូវ​ភ្ជាប់​ទៅ​ អាសយដ្ឋាន​ខាងក្រោម (បើមិនដូច្នោះ, សំណើ ​របស់​អ្នក ​នឹង​ត្រូវ​បដិសេធ​)៖
-
-     @url@
-
-
-​អរគុណ ចំពោះការ​ចូលរួម របស់អ្នក
-',
-'form_pet_nom_site2' => 'ឈ្មោះ​វ៉ែបសៃថ៍ របស់​អ្នក',
-'form_pet_probleme_liens' => 'សូមកែប្រែ សាររបស់អ្នក, យកចេញ គ្រប់តំណភ្ជាប់។',
-'form_pet_probleme_technique' => 'បញ្ហា​បច្ចេកទេស, ហត្ថលេខាតាំងអស់ ​ត្រូវ​បាន​ពន្យួរ បណ្តោះអាសន្ន។',
 'form_pet_signature_pasprise' => 'ហត្ថលេខា ​របស់​អ្នក ត្រូវ​បាន​បដិសេធ ។',
-'form_pet_signature_validee' => 'ហត្ថលេខា ​របស់​អ្នក មាន​សុពលភាព ។ អរគុណ !',
-'form_pet_site_deja_enregistre' => 'បានចុះបញ្ជីហើយ វ៉ែបសៃថ៍នេះ។',
-'form_pet_url_invalide' => 'អាសយដ្ឋាន URL ដែល​អ្នក​បានបង្ហាញ គ្មានសុពលភាព។',
-'form_pet_votre_email' => 'អាសយដ្ឋាន​អ៊ីមែវល៍ ​របស់​អ្នក',
-'form_pet_votre_nom' => 'ឈ្មោះ ឬ ​ឈ្មោះ​ហៅ​ក្រៅ​ របស់​អ្នក',
-'form_pet_votre_site' => 'បើ​អ្នកមាន មួយវ៉ែបសៃថ៍, អ្នក​អាច​បង្ហាញវា ​ខាងក្រោម',
 'form_prop_confirmer_envoi' => 'បញ្ជាក់​ទទួលស្គាល់ បញ្ញើ',
 'form_prop_description' => 'ការពិពណ៌នា/វិចារ',
 'form_prop_enregistre' => 'បានចុះបញ្ជី សំណើរ​ របស់​អ្នក​, វា​នឹង​លេច​ចេញ ​លើ​អិនរើណែត បន្ទាប់ពីមាន​សុពលភាព ​ដោយ​អ្នកអភិបាលវ៉ែបសៃថ៍នេះ។',
@@ -335,7 +304,6 @@ sera ignorée) :
 'icone_interface_simple' => 'ផ្ទាំងប្រទាក់ ​ត្រូវបានសាមញ',
 'icone_maintenance_site' => 'តំហែទាំ​វ៉ែបសៃថ៍',
 'icone_messagerie_personnelle' => 'បញ្ញើសារ​ផ្ទាល់ខ្លួន',
-'icone_mots_cles' => 'ពាក្យ​គន្លឹះ',
 'icone_repartition_actuelle' => 'បង្ហាញចេញ ​បំណែងចែក​បច្ចុប្បន្ន',
 'icone_repartition_debut' => 'បង្ហាញ​ បំណែងចែក ពី​ដំបូង',
 'icone_repartition_visites' => 'បំណែងចែក ការ​ទស្សនា',
@@ -483,15 +451,11 @@ sera ignorée) :
 'info_rechercher_02' => 'ស្វែងរក ៖',
 'info_remplacer_vignette' => 'ជំនួស កូន​រូបភាព លំនាំដើម ដោយ​រូប​សញ្ញា ​ដែល​បានបង្កើត​ខ្លួនឯង ៖',
 'info_retablir_lien' => 'ស្ដារ​ឡើងវិញ តំណភ្ជាប់នេះ',
-'info_retirer_mot' => 'ដកចេញ ពាក្យនេះ',
-'info_retirer_mots' => 'ដកចេញ គ្រប់ពាក្យ​',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'គ្មាន​ចំណងជើង',
 'info_selectionner_fichier' => 'អ្នក​អាច​ជ្រើសយក មួយសំណុំឯកសារ នៃថតឯកសារ @upload@',
 'info_selectionner_fichier_2' => 'ជ្រើសយក មួយឯកសារ ៖',
-'info_signature_supprimee' => 'បានលុបចេញ ហត្ថលេខា',
-'info_signature_supprimee_erreur' => 'កំហុស  ៖ អក្សរកូដ លុបចេញនេះ គ្មានត្រូវតាម ហត្ថលេខាណាមួយ',
 'info_site_attente' => 'វ៉ែបសៃថ៍ រង់ចាំ​សុពលភាព',
 'info_site_reference' => 'វ៉ែបសៃថ៍យោង លើអិនរើណែត',
 'info_site_refuse' => '​បាន​បដិសេធ វ៉ែបសៃថ៍',

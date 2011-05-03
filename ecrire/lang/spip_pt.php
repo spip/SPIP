@@ -263,41 +263,8 @@ sera ignorée) :
 'form_indiquer_email' => 'Favor indicar o seu endereço email.',
 'form_indiquer_nom' => 'Favor indicar o seu nome.',
 'form_indiquer_nom_site' => 'Favor indicar o nome do seu sítio.',
-'form_pet_adresse_site' => 'Endereço do seu sítio',
-'form_pet_aucune_signature' => 'Nenhuma assinatura corresponde a este código...',
-'form_pet_confirmation' => 'Favor confirmar a sua assinatura:',
 'form_pet_deja_enregistre' => 'Este sítio já está registado',
-'form_pet_deja_signe' => 'Já assinou este texto.',
-'form_pet_envoi_mail_confirmation' => 'Um correio electrónico acabou de lhe ser enviado. Deverá visitar o endereço do sítio Web mencionado neste correio para validar a sua assinatura', # MODIF
-'form_pet_mail_confirmation' => 'Bom dia, 
-
-Pediu para assinar o abaixo assinado :
-@titre@.
-
-Forneceu as seguintes informações :
-    Nome: @nom_email@
-    Sítio: @nom_site@ - @url_site@
-
-
-IMPORTANTE...
-Para validar a sua assinatura, basta ligar-se ao
- endereço abaixo indicado (caso contrário, o seu pedido será rejeitado) :
-
-    @url@
-
-
-Obrigado pela sua participação
-', # MODIF
-'form_pet_nom_site2' => 'Nome do seu sítio Web',
-'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
-'form_pet_probleme_technique' => 'Problema técnico, as assinaturas estão temporariamente suspensas.',
 'form_pet_signature_pasprise' => 'A sua assinatura não está tomada em conta.',
-'form_pet_signature_validee' => 'A sua assinatura foi validada. Obrigado!',
-'form_pet_site_deja_enregistre' => 'Este sítio já está registado',
-'form_pet_url_invalide' => 'O URL que indicou não é válido.',
-'form_pet_votre_email' => 'O seu endereço email',
-'form_pet_votre_nom' => 'O seu nome ou pseudónimo',
-'form_pet_votre_site' => 'Se tem um sítio Web, pode indicá-lo a seguir',
 'form_prop_confirmer_envoi' => 'Confirmar o envio',
 'form_prop_description' => 'Descrição/comentário',
 'form_prop_enregistre' => 'A sua proposta foi registada, aparecerá em linha depois da validação pelos responsáveis deste sítio.',
@@ -341,7 +308,6 @@ Obrigado pela sua participação
 'icone_interface_simple' => 'Interface simplificada',
 'icone_maintenance_site' => 'Manutenção do sítio',
 'icone_messagerie_personnelle' => 'Correio pessoal',
-'icone_mots_cles' => 'Palavras-chave',
 'icone_repartition_actuelle' => 'Exibir a distribuição actual',
 'icone_repartition_debut' => 'Exibir a distribuição desde o início',
 'icone_repartition_visites' => 'Distribuição das visitas',
@@ -491,15 +457,11 @@ Obrigado pela sua participação
 'info_rechercher_02' => 'Procurar :',
 'info_remplacer_vignette' => 'Substituir a vinheta por defeito por um logotipo personalizado :',
 'info_retablir_lien' => 'restabelecer este vínculo',
-'info_retirer_mot' => 'Retirar esta palavra',
-'info_retirer_mots' => 'Retirar todas as palavras',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'sem título',
 'info_selectionner_fichier' => 'Pode seleccionar um ficheiro do dossier @upload@', # MODIF
 'info_selectionner_fichier_2' => 'Seleccionar um ficheiro :',
-'info_signature_supprimee' => 'Signature supprimée', # NEW
-'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Sítio Web à espera de validação',
 'info_site_reference' => 'Sítio referenciado em linha',
 'info_site_refuse' => 'Sítio Web recusado',

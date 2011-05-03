@@ -263,42 +263,8 @@ sitiu "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Pon les tos señes de corréu electrónicu.',
 'form_indiquer_nom' => 'Indica el to nome.',
 'form_indiquer_nom_site' => 'Indica el nome del to sitiu Web.',
-'form_pet_adresse_site' => 'Señes del to sitiu',
-'form_pet_aucune_signature' => 'Denguna robla concasa con esi códigu...',
-'form_pet_confirmation' => 'Confirma equí la to firma:',
 'form_pet_deja_enregistre' => 'Esti sitiu ya ta rexistráu',
-'form_pet_deja_signe' => 'Ya roblaste esti testu.',
-'form_pet_envoi_mail_confirmation' => 'Acaba de mandase un corréu electrónicu de confirmación a @email@. Vas tener que visitar la direición Web que se menta nesi corréu pa validar la to firma.',
-'form_pet_mail_confirmation' => 'Bones,
-
-Vienes de pidir la firma de la solicitú:
-@titre@.
-
-Pa ello diste la siguiente información:
-    Nome: @nom_email@
-    Sitiu Web: @nom_site@ - @url_site@
-    @message@
-
-IMPORTANTE...
-Pa validar la to firma, val con conectate a la
-direición d\'embaxo (en casu contrariu, va refugase
-la to solicitú):
-
-    @url@
-
-
-Gracies por participar
-',
-'form_pet_nom_site2' => 'Nome del to sitiu Web',
-'form_pet_probleme_liens' => 'Ties que iguar el to mensaxe quitando-y los enllaces d\'hipertestu.',
-'form_pet_probleme_technique' => 'Hai un problema téunicu, les firmes tan temporalmente suspendíes.',
 'form_pet_signature_pasprise' => 'La to firma nun se tuvo en cuenta.',
-'form_pet_signature_validee' => 'La to firma ta validada. ¡Gracies!',
-'form_pet_site_deja_enregistre' => 'Esti sitiu ya ta rexistráu',
-'form_pet_url_invalide' => 'L\'URL que indicaste nun ye válida.',
-'form_pet_votre_email' => 'Les tos señes de corréu electrónicu',
-'form_pet_votre_nom' => 'El to nome o nomatu',
-'form_pet_votre_site' => 'Si tienes un sitiu Web, puedes conseñalu darréu',
 'form_prop_confirmer_envoi' => 'Confirmar l\'unvíu',
 'form_prop_description' => 'Descripción/comentariu',
 'form_prop_enregistre' => 'La to propuesta quedó rexistrada, apaecerá en llínia tres de la validación polos responsables d\'esti sitiu.',
@@ -342,7 +308,6 @@ Gracies por participar
 'icone_interface_simple' => 'Interfaz simplificada',
 'icone_maintenance_site' => 'Mantenimientu del sitiu',
 'icone_messagerie_personnelle' => 'Mensaxería personal',
-'icone_mots_cles' => 'Pallabres-clave',
 'icone_repartition_actuelle' => 'Amosar el repartu actual',
 'icone_repartition_debut' => 'Amosar el repartu dende l\'entamu',
 'icone_repartition_visites' => 'Repartu de les visites',
@@ -492,15 +457,11 @@ Gracies por participar
 'info_rechercher_02' => 'Restolar:',
 'info_remplacer_vignette' => 'Cambear la viñeta por omisión por un logo personalizáu:',
 'info_retablir_lien' => 'reestablecer esti enllaz',
-'info_retirer_mot' => 'Retirar esta pallabra',
-'info_retirer_mots' => 'Retirar toles pallabres',
 'info_rubriques_nb' => '@nb@ seiciónes',
 'info_rubriques_un' => '1 seición',
 'info_sans_titre_2' => 'ensin títulu',
 'info_selectionner_fichier' => 'Puedes escoyer un ficheru del direutoriu @upload@',
 'info_selectionner_fichier_2' => 'Escueye un ficheru:',
-'info_signature_supprimee' => 'Robla desaniciada',
-'info_signature_supprimee_erreur' => 'Error: esi códigu de desaniciu nun concasa con denguna robla',
 'info_site_attente' => 'Sitiu Web esperando validación',
 'info_site_reference' => 'Sitiu referenciáu en llinia',
 'info_site_refuse' => 'Sitiu Web refugáu',

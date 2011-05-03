@@ -262,41 +262,8 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Vă rugăm sa indicaţi adresa dumneavoastră de email.',
 'form_indiquer_nom' => 'Va rugăm să indicaţi numele dumneavoastră.',
 'form_indiquer_nom_site' => 'Vă rugăm să indicaţi adresa site-ul dumneavoastră de web.',
-'form_pet_adresse_site' => 'Adresa site-ului dumneavoastră',
-'form_pet_aucune_signature' => 'Nici o semnătură nu corespunde acestui cod...',
-'form_pet_confirmation' => 'Vă rugăm să confirmaţi semnătura dumneavoastră :',
 'form_pet_deja_enregistre' => 'Acest site este deja înregistrat',
-'form_pet_deja_signe' => 'Aţi semnat deja acest text.',
-'form_pet_envoi_mail_confirmation' => 'Un email de confirmare tocmai v-a fost trimis la adresa @email@. Pentru a valida semnătura dumneavoastră, va trebui să vizitaţi adresa de web menţionată in email.',
-'form_pet_mail_confirmation' => 'Bună ziua,
-
-Aţi cerut să semnaţi petiţia :
-@titre@.
-
-Aţi furnizat informaţiile următoare :
-    Nume: @nom_email@
-    Site: @nom_site@ - @url_site@
-
-
-IMPORTANT...
-Pentru a valida semnătura, trebuie să vizitaţi
-adresa de mai jos (în caz contrat, cererea dumneavoastră va fi refuzată) :
-
-    @url@
-
-
-Mulţumim pentru participarea dumneavoastră
-',
-'form_pet_nom_site2' => 'Numele site-ului dumneavoastră de Web',
-'form_pet_probleme_liens' => 'Vă rugăm să reluati introducerea mesajului - suprimaţi legăturile hipertext.',
-'form_pet_probleme_technique' => 'Datorită unor probleme tehnice, semnăturile sunt deocamdată suspendate.',
 'form_pet_signature_pasprise' => 'Semnătura dumneavoastră nu a fost luată în considerare.',
-'form_pet_signature_validee' => 'Semnătura dumneavoastră este validată. Mulţumiri  !',
-'form_pet_site_deja_enregistre' => 'Acest site este deja înregistrat',
-'form_pet_url_invalide' => 'Adresa URL indicată nu este valabilă.',
-'form_pet_votre_email' => 'Adresa dumneavoastră de email',
-'form_pet_votre_nom' => 'Numele sau pseudonimul dumneavoastră',
-'form_pet_votre_site' => 'Dacă aveţi un site Web, puteţi să-l indicaţi mai jos',
 'form_prop_confirmer_envoi' => 'Confirmaţi trimiterea',
 'form_prop_description' => 'Descriere/comentariu',
 'form_prop_enregistre' => 'Propunerea dumneavoastră a fost înregistrată, ea va fi publicată după validarea ei de către responsabilii acestui site.',
@@ -340,7 +307,6 @@ Mulţumim pentru participarea dumneavoastră
 'icone_interface_simple' => 'interfaţa simplificată',
 'icone_maintenance_site' => 'Întreţinerea site-ului',
 'icone_messagerie_personnelle' => 'Mesageria personală',
-'icone_mots_cles' => 'Cuvinte-cheie',
 'icone_repartition_actuelle' => 'Afişaţi repartiţia curentă',
 'icone_repartition_debut' => 'Afişaţi repartiţia de la început',
 'icone_repartition_visites' => 'Repartiţia vizitelor',
@@ -490,15 +456,11 @@ Mulţumim pentru participarea dumneavoastră
 'info_rechercher_02' => 'Căutaţi :',
 'info_remplacer_vignette' => 'Înlocuiţi viniéta implicită cu o viniétă personalizată :',
 'info_retablir_lien' => 'restabiliţi această legatură',
-'info_retirer_mot' => 'Retrageţi acest cuvânt',
-'info_retirer_mots' => 'Retrageţi toate cuvintele',
 'info_rubriques_nb' => '@nb@ rubrici',
 'info_rubriques_un' => '1 rubrică',
 'info_sans_titre_2' => 'fără titlu',
 'info_selectionner_fichier' => 'Puteţi selecţiona un fişier din directorul @upload@',
 'info_selectionner_fichier_2' => 'Selecţionaţi un fişier :',
-'info_signature_supprimee' => 'Semnătură suprimată',
-'info_signature_supprimee_erreur' => 'Eroare : acest cod de ştergere nu corespunde nici unei semnături',
 'info_site_attente' => 'Site Web în aşteptarea validării',
 'info_site_reference' => 'Site referenţiat în direct',
 'info_site_refuse' => 'Site Web refuzat',

@@ -264,38 +264,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_indiquer_email' => 'Пожалуйста, введите ваш адрес электронной почты.',
 'form_indiquer_nom' => 'Введите ваше имя.',
 'form_indiquer_nom_site' => 'Пожалуйста, введите название вашего сайта.',
-'form_pet_adresse_site' => 'URL вашего сайта',
-'form_pet_aucune_signature' => 'Этому коду не соответствует никакая подпись...',
-'form_pet_confirmation' => 'Пожалуйста, подтвердите вашу подпись:',
 'form_pet_deja_enregistre' => 'Этот сайт уже зарегистрирован',
-'form_pet_deja_signe' => 'Вы уже подписали этот текст.',
-'form_pet_envoi_mail_confirmation' => 'Вам было отправленно письмо, для окончания регистрации перейдите по ссылке в письме.',
-'form_pet_mail_confirmation' => 'Добрый день,
-
-Вы решили подписать прошение:
-@titre@.
-
-Вы предоставили следующую информацию:
-    Имя: @nom_email@
-    Сайт: @nom_site@ - @url_site@
-
-Важно!
-Чтобы подтвердить свою подпись, перейдите, пожалуйста, по указанному ниже адресу 
-(иначе, ваш запрос будет удален):
-    @url@
-
-Спасибо за участие!
-',
-'form_pet_nom_site2' => 'Название вашего сайта',
-'form_pet_probleme_liens' => 'Отредактируйте ваше сообщение, исключив из него все ссылки.',
-'form_pet_probleme_technique' => 'Техническая проблема, подписка временно не работает.',
 'form_pet_signature_pasprise' => 'Ваша подпись проигнорирована.',
-'form_pet_signature_validee' => 'Ваша подписка подтверждена. Спасибо!',
-'form_pet_site_deja_enregistre' => 'Этот сайт уже зарегистрирован',
-'form_pet_url_invalide' => 'Вы указали неправильный URL сайта.',
-'form_pet_votre_email' => 'Ваш e-mail адрес',
-'form_pet_votre_nom' => 'Ваше имя или псевдоним',
-'form_pet_votre_site' => 'Если у вас есть сайт, вы можете указать его ниже',
 'form_prop_confirmer_envoi' => 'Подтвердите отправку',
 'form_prop_description' => 'Описание/комментарий',
 'form_prop_enregistre' => 'Ваше предложение было записано и будет online после подтверждения администраторами сайта.',
@@ -339,7 +309,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_interface_simple' => 'Упрощенный интерфейс',
 'icone_maintenance_site' => 'Обслуживание сайта',
 'icone_messagerie_personnelle' => 'Личные сообщения',
-'icone_mots_cles' => 'Кейворды',
 'icone_repartition_actuelle' => 'На данный момент',
 'icone_repartition_debut' => 'Распределение показов с начала',
 'icone_repartition_visites' => 'Статистика посещений',
@@ -490,15 +459,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_rechercher_02' => 'Поиск:',
 'info_remplacer_vignette' => 'Заменить миниатюру своим уменьшеным изображением:',
 'info_retablir_lien' => 'восстановить эту ссылку',
-'info_retirer_mot' => 'Удалить ключевое слово',
-'info_retirer_mots' => 'Удалить все ключевые слова',
 'info_rubriques_nb' => '@nb@ раздела(ов)',
 'info_rubriques_un' => '1 раздел',
 'info_sans_titre_2' => 'без названия',
 'info_selectionner_fichier' => 'Вы можете выбрать файл из папки @upload@',
 'info_selectionner_fichier_2' => 'Выбрать файл:',
-'info_signature_supprimee' => 'Подпись удалена',
-'info_signature_supprimee_erreur' => 'Ошибка: данному удалению не соответствует никакая подпись',
 'info_site_attente' => 'Вебсайт, ожидающий проверки',
 'info_site_reference' => 'Сайты, на которые ведут ссылки, онлайн',
 'info_site_refuse' => 'Вебсайт отклонен',

@@ -262,42 +262,8 @@ do web "@nom_site_spip@" (@adresse_site@):',
 'form_indiquer_email' => 'Indique o seu enderezo de correo-e.',
 'form_indiquer_nom' => 'Indica o teu nome.',
 'form_indiquer_nom_site' => 'Indique o nome do seu web.',
-'form_pet_adresse_site' => 'Enderezo do seu web',
-'form_pet_aucune_signature' => 'Non hai nengunha sinatura que corresponda a este código...',
-'form_pet_confirmation' => 'Por favor, confirma a túa sinatura:',
 'form_pet_deja_enregistre' => 'Este web xa foi rexistrado',
-'form_pet_deja_signe' => 'Xa asinou este texto.',
-'form_pet_envoi_mail_confirmation' => 'Envióuselle un correo electrónico de confirmación. Terá que visitar o enderezo web mencionado nel para validar a súa sinatura.',
-'form_pet_mail_confirmation' => 'Bos días,
-
-Pediu asinar a solicitude:
-@titre@.
-
-Proporcionou os seguintes datos:
-     Nome: @nom_email@
-     Web: @nom_site@ - @url_site@
-     @message@
-
-IMPORTANTE...
-Para validar a súa sinatura, só ten que conectar co
-enderezo de máis abaixo (en caso contrario, a súa solicitude
-será rexeitada):
-
-     @url@
-
-
-Grazas pola súa participación
-',
-'form_pet_nom_site2' => 'Nome do seu Web',
-'form_pet_probleme_liens' => 'Retome a súa mensaxe logo de suprimir as ligazóns de hipertexto.',
-'form_pet_probleme_technique' => 'Problema técnico, as sinaturas foron suspendidas temporalmente.',
 'form_pet_signature_pasprise' => 'A túa sinatura non foi tida en conta.',
-'form_pet_signature_validee' => 'A súa sinatura foi validada. Deus llo pague!',
-'form_pet_site_deja_enregistre' => 'Este web xa foi rexistrado',
-'form_pet_url_invalide' => 'O URL que indicou non é válido.',
-'form_pet_votre_email' => 'O seu enderezo de correo-e.',
-'form_pet_votre_nom' => 'O teu nome ou alcume',
-'form_pet_votre_site' => 'Se tes unha páxina web, pódelo indicar aquí embaixo',
 'form_prop_confirmer_envoi' => 'Confirmar o envío',
 'form_prop_description' => 'Descrición/comentario',
 'form_prop_enregistre' => 'A súa proposta foi rexistrada, estará en liña en canto sexa
@@ -342,7 +308,6 @@ Grazas pola súa participación
 'icone_interface_simple' => 'Interface sinxela',
 'icone_maintenance_site' => 'Mantemento do web',
 'icone_messagerie_personnelle' => 'Mensaxería persoal',
-'icone_mots_cles' => 'Palabras-clave',
 'icone_repartition_actuelle' => 'Mostrar a distribución actual',
 'icone_repartition_debut' => 'Mostrar distribución dende o principio',
 'icone_repartition_visites' => 'Distribución das visitas',
@@ -492,15 +457,11 @@ Grazas pola súa participación
 'info_rechercher_02' => 'Buscar:',
 'info_remplacer_vignette' => 'Trocar a viñeta por defecto por un logo persoal:',
 'info_retablir_lien' => 'reestablecer esta ligazón',
-'info_retirer_mot' => 'Retirar esta palabra',
-'info_retirer_mots' => 'Retirar todas as palabras',
 'info_rubriques_nb' => '@nb@ seccións',
 'info_rubriques_un' => '1 seccións',
 'info_sans_titre_2' => 'sen título',
 'info_selectionner_fichier' => 'Pode seleccionar un ficheiro do cartafol @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un ficheiro:',
-'info_signature_supprimee' => 'Sinatura suprimida',
-'info_signature_supprimee_erreur' => 'Erro : este código de supresión non corresponde a ningunha sinatura',
 'info_site_attente' => 'Sitio web agardando pola validación',
 'info_site_reference' => 'Web referido en liña',
 'info_site_refuse' => 'Web rexeitado',

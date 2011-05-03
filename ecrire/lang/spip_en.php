@@ -262,40 +262,8 @@ the site "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Please enter your email address.',
 'form_indiquer_nom' => 'Please enter your name.',
 'form_indiquer_nom_site' => 'Please enter the name of your site.',
-'form_pet_adresse_site' => 'URL of your site',
-'form_pet_aucune_signature' => 'No signature matching this code...',
-'form_pet_confirmation' => 'Please confirm your signature:',
 'form_pet_deja_enregistre' => 'This site is already registered',
-'form_pet_deja_signe' => 'You have already signed this text.',
-'form_pet_envoi_mail_confirmation' => 'A confirmation email has just been sent to  @email@. You should visit the URL given in this email to validate your signature.',
-'form_pet_mail_confirmation' => 'Hello,
-
-You asked to sign the petition:
-@titre@.
-
-You provided the following information:
-    Name: @nom_email@
-    Site: @nom_site@ - @url_site@
-@message@
-
-IMPORTANT...
-To validate your signature, you just need to connect to
-the address below (otherwise your request
-will be rejected):
-    @url@
-
-Thank you for participating!
-',
-'form_pet_nom_site2' => 'Name of your website',
-'form_pet_probleme_liens' => 'Please edit your message, removing all hyperlinks.',
-'form_pet_probleme_technique' => 'Technical problem: signatures are interrupted momentarily.',
 'form_pet_signature_pasprise' => 'Your signature has been ignored.',
-'form_pet_signature_validee' => 'Your signature is valid. Thank you!',
-'form_pet_site_deja_enregistre' => 'This site is already registered',
-'form_pet_url_invalide' => 'The URL that you entered is not valid.',
-'form_pet_votre_email' => 'Your email address',
-'form_pet_votre_nom' => 'Your name or alias',
-'form_pet_votre_site' => 'If you have a website, you can enter the URL below',
 'form_prop_confirmer_envoi' => 'Confirm send',
 'form_prop_description' => 'Description/comment',
 'form_prop_enregistre' => 'Your suggestion has been recorded. It will appear online after being validated by the administrators of this site.',
@@ -339,7 +307,6 @@ Thank you for participating!
 'icone_interface_simple' => 'Simplified interface',
 'icone_maintenance_site' => 'Site maintenance',
 'icone_messagerie_personnelle' => 'Private messages',
-'icone_mots_cles' => 'Keywords',
 'icone_repartition_actuelle' => 'Show current distribution',
 'icone_repartition_debut' => 'Show distribution from the start',
 'icone_repartition_visites' => 'Distribution of Visits',
@@ -489,15 +456,11 @@ Thank you for participating!
 'info_rechercher_02' => 'Search:',
 'info_remplacer_vignette' => 'Replace the default vignette by a customised logo:',
 'info_retablir_lien' => 'restore this link',
-'info_retirer_mot' => 'Remove this keyword',
-'info_retirer_mots' => 'Remove all keywords',
 'info_rubriques_nb' => '@nb@ sections',
 'info_rubriques_un' => '1 section',
 'info_sans_titre_2' => 'untitled',
 'info_selectionner_fichier' => 'You can select a file from the folder @upload@',
 'info_selectionner_fichier_2' => 'Select a file:',
-'info_signature_supprimee' => 'Signature deleted',
-'info_signature_supprimee_erreur' => 'Error: this deletion code does not correspond to any signatures',
 'info_site_attente' => 'Website awaiting validation',
 'info_site_reference' => 'Referenced sites online',
 'info_site_refuse' => 'Website rejected',

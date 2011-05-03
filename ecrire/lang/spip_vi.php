@@ -263,35 +263,8 @@ sera ignorée) :
 'form_indiquer_email' => 'Xin cho vào địa chỉ email của bạn.',
 'form_indiquer_nom' => 'Xin cho vào tên bạn.',
 'form_indiquer_nom_site' => 'Xin cho vào tên của website bạn.',
-'form_pet_adresse_site' => 'URL của website bạn',
-'form_pet_aucune_signature' => 'Không ký hiệu nào phù hợp với mã số này...',
-'form_pet_confirmation' => 'Xin xác nhận chữ ký của bạn:',
 'form_pet_deja_enregistre' => 'Website này đã được ghi danh',
-'form_pet_deja_signe' => 'Bạn đã ký văn bản này.',
-'form_pet_envoi_mail_confirmation' => 'Một email xác nhận đã được gửi cho bạn. Bạn nên vào địa chỉ URL đề cập trong email đó để xác nhận chữ ký của mình.', # MODIF
-'form_pet_mail_confirmation' => 'Chào bạn,
-
-Bạn yêu cầu ký vào thỉnh nguyện thư @titre@.
-
-Bạn cung cấp các chi tiết sau:
-    Tên: @nom_email@
-    Web: @nom_site@ - @url_site@
-
-QUAN TRỌNG...
-Để xác nhận chữ ký của bạn, và địa chỉ sau đây (nếu không, lời yêu cầu của bạn sẽ bị từ chối):
-    @url@
-
-Cám ơn sự tham gia của bạn.', # MODIF
-'form_pet_nom_site2' => 'Tên trang web của bạn',
-'form_pet_probleme_liens' => 'Sửa đổi phần nội dung, xin lấy ra các hyperlink.',
-'form_pet_probleme_technique' => 'Trục trặc kỹ thuật, chữ ký bị đình trệ trong giây lát.',
 'form_pet_signature_pasprise' => 'Chữ ký bạn đã bị lờ đi.',
-'form_pet_signature_validee' => 'Chữ ký bạn được xác nhận. Cám ơn bạn!',
-'form_pet_site_deja_enregistre' => 'Website này đã được ghi danh',
-'form_pet_url_invalide' => 'URL bạn cho vào không đúng.',
-'form_pet_votre_email' => 'Địa chỉ email của bạn',
-'form_pet_votre_nom' => 'Tên hay bí danh',
-'form_pet_votre_site' => 'Nếu bạn có một trang web, bạn có thể cho biết tên của nó dưới đây',
 'form_prop_confirmer_envoi' => 'Xác nhận thông báo gửi đi',
 'form_prop_description' => 'Mô tả/bình luận',
 'form_prop_enregistre' => 'Đề nghị của bạn đã được ghi nhận, nó sẽ xuất hiện online sau khi được quản trị viên thông qua.',
@@ -335,7 +308,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'icone_interface_simple' => 'Xem đơn giản',
 'icone_maintenance_site' => 'Bảo trì',
 'icone_messagerie_personnelle' => 'Thư tín cá nhân',
-'icone_mots_cles' => 'Từ then chốt',
 'icone_repartition_actuelle' => 'Cho xem phân loại hiện nay',
 'icone_repartition_debut' => 'Cho xem phân loại từ ban đầu',
 'icone_repartition_visites' => 'Phân bố số thăm viếng',
@@ -485,15 +457,11 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'info_rechercher_02' => 'Tìm:',
 'info_remplacer_vignette' => 'Thay thế hình xem trước định sẵn bằng logo riêng:',
 'info_retablir_lien' => 'Phục hồi điểm nối kết này',
-'info_retirer_mot' => 'Xóa từ then chốt này',
-'info_retirer_mots' => 'Xóa hết tất cả từ then chốt',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'không tựa đề',
 'info_selectionner_fichier' => 'Bạn có thể chọn một hồ trơ trong ngăn @upload@', # MODIF
 'info_selectionner_fichier_2' => 'Chọn một hồ sơ:',
-'info_signature_supprimee' => 'Chữ ký đã được xoá',
-'info_signature_supprimee_erreur' => 'Lỗi: code để xoá này không liên hệ đến bất kỳ chữ ký nào',
 'info_site_attente' => 'Chờ chấp thuận website',
 'info_site_reference' => 'Website nối kết online',
 'info_site_refuse' => 'Website bị từ chối',

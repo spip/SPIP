@@ -261,42 +261,8 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'Veuillez indiquer votre adresse email.',
 'form_indiquer_nom' => 'Veuillez indiquer votre nom.',
 'form_indiquer_nom_site' => 'Veuillez indiquer le nom de votre site.',
-'form_pet_adresse_site' => 'Adresse de votre site',
-'form_pet_aucune_signature' => 'Aucune signature ne correspond à ce code...',
-'form_pet_confirmation' => 'Veuillez confirmer votre signature :',
 'form_pet_deja_enregistre' => 'Ce site est déjà enregistré',
-'form_pet_deja_signe' => 'Vous avez déjà signé ce texte.',
-'form_pet_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre signature.',
-'form_pet_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à signer la pétition :
-@titre@.
-
-Vous avez fourni les informations suivantes :
-    Nom: @nom_email@
-    Site: @nom_site@ - @url_site@
-    @message@
-
-IMPORTANT...
-Pour valider votre signature, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera rejetée) :
-
-    @url@
-
-
-Merci de votre participation
-',
-'form_pet_nom_site2' => 'Nom de votre site Web', # enlever le gras
-'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.',
-'form_pet_probleme_technique' => 'Problème technique, les signatures sont temporairement suspendues.',
 'form_pet_signature_pasprise' => 'Votre signature n\'est pas prise en compte.',
-'form_pet_signature_validee' => 'Votre signature est validée. Merci !',
-'form_pet_site_deja_enregistre' => 'Ce site est déjà enregistré',
-'form_pet_url_invalide' => 'L\'URL que vous avez indiquée n\'est pas valide.',
-'form_pet_votre_email' => 'Votre adresse email',
-'form_pet_votre_nom' => 'Votre nom ou pseudo',
-'form_pet_votre_site' => 'Si vous avez un site Web, vous pouvez l\'indiquer ci-dessous',
 'form_prop_confirmer_envoi' => 'Confirmer l\'envoi',
 'form_prop_description' => 'Description/commentaire',
 'form_prop_enregistre' => 'Votre proposition est enregistrée, elle apparaîtra en ligne après validation par les responsables de ce site.',
@@ -340,7 +306,6 @@ Merci de votre participation
 'icone_interface_simple' => 'Interface simplifiée',
 'icone_maintenance_site' => 'Maintenance du site',
 'icone_messagerie_personnelle' => 'Messagerie personnelle',
-'icone_mots_cles' => 'Mots-clés',
 'icone_repartition_actuelle' => 'Afficher la répartition actuelle',
 'icone_repartition_debut' => 'Afficher la répartition depuis le début',
 'icone_repartition_visites' => 'Répartition des visites',
@@ -490,15 +455,11 @@ Merci de votre participation
 'info_rechercher_02' => 'Rechercher :',
 'info_remplacer_vignette' => 'Remplacer la vignette par défaut par un logo personnalisé :',
 'info_retablir_lien' => 'rétablir ce lien',
-'info_retirer_mot' => 'Retirer ce mot',
-'info_retirer_mots' => 'Retirer tous les mots',
 'info_rubriques_nb' => '@nb@ rubriques',
 'info_rubriques_un' => '1 rubrique',
 'info_sans_titre_2' => 'sans titre',
 'info_selectionner_fichier' => 'Vous pouvez sélectionner un fichier du dossier @upload@',
 'info_selectionner_fichier_2' => 'Sélectionner un fichier :',
-'info_signature_supprimee' => 'Signature supprimée',
-'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature',
 'info_site_attente' => 'Site Web en attente de validation',
 'info_site_reference' => 'Site référencé en ligne',
 'info_site_refuse' => 'Site Web refusé',

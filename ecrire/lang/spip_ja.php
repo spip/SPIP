@@ -266,38 +266,8 @@ sera ignorée) :
 'form_indiquer_email' => 'あなたのe-mailアドレスを入力して下さい。',
 'form_indiquer_nom' => 'あなたの名前を入力して下さい。',
 'form_indiquer_nom_site' => 'あなたのサイトの名前を入力して下さい。',
-'form_pet_adresse_site' => 'あなたのサイトのURL',
-'form_pet_aucune_signature' => '署名がこのコードと一致しません...',
-'form_pet_confirmation' => 'あなたの署名を確認してください:',
 'form_pet_deja_enregistre' => 'このサイトは既に登録済みです',
-'form_pet_deja_signe' => 'あなたは既にこの文章に署名しました。',
-'form_pet_envoi_mail_confirmation' => '確認用メールが今、あなたへ送られました。記述されたメールアドレスが、あなたのものだと証明するため、メールに記載してあるURLを開いてください。', # MODIF
-'form_pet_mail_confirmation' => 'ご機嫌いかがですか？
-
-あなたが署名を提出しました:
-@titre@.
-
-次の情報が提出されました:
-    名前: @nom_email@
-    サイト: @nom_site@ - @url_site@
-
-重要...
-署名を有効にするために、今すぐ下のホームページを開いてください
- (さもなければ、メールアドレスを証明できないため、あなたの署名は拒絶されるでしょう):
-    @url@
-
-参加してくれてありがとうございました。
-', # MODIF
-'form_pet_nom_site2' => 'あなたのウェブサイトの名前',
-'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
-'form_pet_probleme_technique' => '技術的問題、署名はほんの短い間、中断されました。',
 'form_pet_signature_pasprise' => 'あなたの署名は無視されました。',
-'form_pet_signature_validee' => 'あなたの署名は有効です。Thank you!',
-'form_pet_site_deja_enregistre' => 'このサイトは既に登録されています。',
-'form_pet_url_invalide' => 'あなたが入力したURLは、有効ではありません。',
-'form_pet_votre_email' => 'あなたのe-mailアドレス',
-'form_pet_votre_nom' => 'あなたの名前か別名',
-'form_pet_votre_site' => 'もしあなたがウェブサイトを持っているなら、下に入力することが出来ます。',
 'form_prop_confirmer_envoi' => '発送を確認',
 'form_prop_description' => '種類/コメント',
 'form_prop_enregistre' => 'あなたの提案は記録されました、管理者によって適正検査された後オンラインに現れるでしょう。',
@@ -341,7 +311,6 @@ sera ignorée) :
 'icone_interface_simple' => 'シンプルなインターフェース',
 'icone_maintenance_site' => 'サイトメンテナンス',
 'icone_messagerie_personnelle' => '個人的なメッセージ交換',
-'icone_mots_cles' => 'キーワード',
 'icone_repartition_actuelle' => '現在のディストリビューションを表示する',
 'icone_repartition_debut' => '初めからのディストリビューションを表示',
 'icone_repartition_visites' => 'ディストリビューションを訪問',
@@ -491,15 +460,11 @@ sera ignorée) :
 'info_rechercher_02' => '検索 :',
 'info_remplacer_vignette' => 'カスタマイズしたロゴによってデフォルトのビネット(半身像、写真)を置き換える:',
 'info_retablir_lien' => 'このリンクを復活',
-'info_retirer_mot' => 'このキーワードを削除',
-'info_retirer_mots' => 'すべてのキーワードを削除',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => '無名',
 'info_selectionner_fichier' => 'あなたは@upload@フォルダのファイルを選択することが出来ます。', # MODIF
 'info_selectionner_fichier_2' => '選択したファイル:',
-'info_signature_supprimee' => 'Signature supprimée', # NEW
-'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'ウェブサイトの適正検査中',
 'info_site_reference' => 'オンラインでサイトを参照',
 'info_site_refuse' => '拒否されたウェブサイト',

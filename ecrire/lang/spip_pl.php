@@ -263,42 +263,8 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Proszę wpisać swój adres e-mail.',
 'form_indiquer_nom' => 'Proszę wpisać swoje nazwisko.',
 'form_indiquer_nom_site' => 'Proszę wpisać nazwę swoich stron\\y.',
-'form_pet_adresse_site' => 'URL Twojej strony',
-'form_pet_aucune_signature' => 'Żaden podpis nie odpowiada podanemu kodowi...',
-'form_pet_confirmation' => 'Proszę potwierdzić swój podpis:',
 'form_pet_deja_enregistre' => 'Ta strona jest już zarejestrowana',
-'form_pet_deja_signe' => 'Już podpisałeś ten tekst.',
-'form_pet_envoi_mail_confirmation' => 'E-mail potwierdzający został właśnie do Ciebie wysłany. Odwiedź URL wymienione w mailu, aby zatwierdzić swój podpis.', # MODIF
-'form_pet_mail_confirmation' => 'Witamy,
-
-Zgłosiłeś chęć podpisania petycji:
-@titre@.
-
-Podałeś następujące informacje:
-    Name: @nom_email@
-    Site: @nom_site@ - @url_site@
-    @message@
-
-WAŻNE...
-Aby zatwierdzić swój podpis, musisz połączyć się z
-poniższym adresem (w przeciwnym razie, Twoja prośba
-zostanie odrzucona):
-
-    @url@
-
-
-Dziękujemy za wzięcie udziału.
-',
-'form_pet_nom_site2' => 'Nazwa Twojej strony internetowej',
-'form_pet_probleme_liens' => 'Spróbuj wysłać wiadomość po usunięciu linków.',
-'form_pet_probleme_technique' => 'Problem techniczny, podpisy są tymczasowo zawieszone.',
 'form_pet_signature_pasprise' => 'Twój podpis został zlekceważony.',
-'form_pet_signature_validee' => 'Twój podpis został zatwierdzony. Dziękujemy!',
-'form_pet_site_deja_enregistre' => 'Ta strona jest już zarejestrowana',
-'form_pet_url_invalide' => 'Wpisany URL nie jest prawidłowy.',
-'form_pet_votre_email' => 'Twój adres e-mail ',
-'form_pet_votre_nom' => 'Twoje imię lub alias',
-'form_pet_votre_site' => 'Jesli masz stronę internetową, możesz wpisać ją poniżej',
 'form_prop_confirmer_envoi' => 'Potwierdź wysłanie',
 'form_prop_description' => 'Opis/komentarz',
 'form_prop_enregistre' => 'Twoja propozycja została zapisana, pojawi się online po jej zatwierdzeniu przez administratora tej strony.',
@@ -342,7 +308,6 @@ Dziękujemy za wzięcie udziału.
 'icone_interface_simple' => 'Uproszczony interfejs',
 'icone_maintenance_site' => 'Administracja stroną',
 'icone_messagerie_personnelle' => 'Wiadomości prywatne',
-'icone_mots_cles' => 'Słowa kluczowe',
 'icone_repartition_actuelle' => 'Pokaż aktualną dystrybucję',
 'icone_repartition_debut' => 'Pokaż dystrybucję od początku',
 'icone_repartition_visites' => 'Rozłożenie wizyt',
@@ -492,15 +457,11 @@ Dziękujemy za wzięcie udziału.
 'info_rechercher_02' => 'Szukaj:',
 'info_remplacer_vignette' => 'Zamień domyślną miniaturkę na wybrane przez ciebie logo :',
 'info_retablir_lien' => 'przywróc link',
-'info_retirer_mot' => 'Usuń to słowo kluczowe',
-'info_retirer_mots' => 'Usuń wszystkie słowa kluczowe',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'bez tytułu',
 'info_selectionner_fichier' => 'Możesz wybrać plik z folderu @upload@',
 'info_selectionner_fichier_2' => 'Wybierz plik:',
-'info_signature_supprimee' => 'Wpis usunięty',
-'info_signature_supprimee_erreur' => 'Błąd: ten kod nie odpowiada żadnemu wpisowi',
 'info_site_attente' => 'Strona internetowa oczekująca na zatwierdzenie',
 'info_site_reference' => 'Strona zlinkowana on-line',
 'info_site_refuse' => 'Strona internetowa odrzucona',

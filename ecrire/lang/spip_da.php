@@ -263,38 +263,8 @@ sera ignorée) :
 'form_indiquer_email' => 'Indtast venligst din e-mail-adresse.',
 'form_indiquer_nom' => 'Indtast venligst dit navn.',
 'form_indiquer_nom_site' => 'Indtast venligst dit websteds navn.',
-'form_pet_adresse_site' => 'Dit websteds URL',
-'form_pet_aucune_signature' => 'Ingen signatur svarer til denne kode...',
-'form_pet_confirmation' => 'Bekræft venligst din signatur:',
 'form_pet_deja_enregistre' => 'Webstedet er allerede registreret',
-'form_pet_deja_signe' => 'Du har allerede signeret denne tekst.',
-'form_pet_envoi_mail_confirmation' => 'En e-mail er netop sendt til dig som bekræftelse. Du bør gå ind på den URL, som er angivet i denne mail, for at bekræfte din signatur.', # MODIF
-'form_pet_mail_confirmation' => 'Goddag,
-
-Du har ønsket at støtte denne appel:
-@titre@.
-
-Du at afgivet følgende oplysninger:
-    Navn: @nom_email@
-    Websted: @nom_site@ - @url_site@
-
-VIGTIGT...
-For at bekræfte din underskrift skal du blot klikke dig ind på
-adressen nedenfor (ellers vil underskriften blive afvist):
-    @url@
-
-Tak for din deltagelse
-', # MODIF
-'form_pet_nom_site2' => 'Navn på dit websted',
-'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
-'form_pet_probleme_technique' => 'Teknisk problem: Appelfunktionen er i øjeblikket ude af drift.',
 'form_pet_signature_pasprise' => 'Din underskrift er ikke godkendt.',
-'form_pet_signature_validee' => 'Din underskrift er godkendt. Den vil blive offentliggjort, når webstedet opdateres. Tak!',
-'form_pet_site_deja_enregistre' => 'Dette websted er allerede registreret',
-'form_pet_url_invalide' => 'Den URL, du har angivet, er ikke gyldig.',
-'form_pet_votre_email' => 'Din e-mail-adresse',
-'form_pet_votre_nom' => 'Dit navn eller alias',
-'form_pet_votre_site' => 'Hvis du har et websted, kan du angive den nedenfor',
 'form_prop_confirmer_envoi' => 'Bekræft afsendelse',
 'form_prop_description' => 'Beskrivelse/kommentar',
 'form_prop_enregistre' => 'Din forslag er modtaget, det vil blive offentliggjort, når det er godkendt af webstedets administratorer.',
@@ -338,7 +308,6 @@ Tak for din deltagelse
 'icone_interface_simple' => 'Forenklet brugergrænseflade',
 'icone_maintenance_site' => 'Vedligeholdelse',
 'icone_messagerie_personnelle' => 'Personlige meddelelser',
-'icone_mots_cles' => 'Nøgleord',
 'icone_repartition_actuelle' => 'Vis faktisk fordeling',
 'icone_repartition_debut' => 'Vis fordeling siden start',
 'icone_repartition_visites' => 'Besøgsfordeling',
@@ -488,15 +457,11 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_rechercher_02' => 'Søgning:',
 'info_remplacer_vignette' => 'Erstatte standardpiktogrammet med et eget ikon:',
 'info_retablir_lien' => 'Genopret dette link',
-'info_retirer_mot' => 'Slet dette nøgleord',
-'info_retirer_mots' => 'Slet alle nøgleord',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'uden overskrift',
 'info_selectionner_fichier' => 'Du kan vælge en fil fra mappen @upload@', # MODIF
 'info_selectionner_fichier_2' => 'Vælg en fil:',
-'info_signature_supprimee' => 'Signature supprimée', # NEW
-'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Websted afventer godkendelse',
 'info_site_reference' => 'Online henvisning',
 'info_site_refuse' => 'Websted afvist',

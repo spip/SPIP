@@ -263,41 +263,8 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 'form_indiquer_email' => 'Vorgatz indicar la vòstra adreiça e-mail.',
 'form_indiquer_nom' => 'Vorgatz indicar lo vòstre nom.',
 'form_indiquer_nom_site' => 'Vorgatz indicar lo nom dau vòstre sit.',
-'form_pet_adresse_site' => 'Adreiça dau vòstre sit',
-'form_pet_aucune_signature' => 'Minga de signatura non correspònde a aqueu còde...',
-'form_pet_confirmation' => 'Vorgatz confirmar la vòstra signatura:',
 'form_pet_deja_enregistre' => 'Ja aqueu sit es registrat',
-'form_pet_deja_signe' => 'Avètz ja signat aqueu tèxt.',
-'form_pet_envoi_mail_confirmation' => 'Aüra recebretz un e-mail de confirmacion. Per validar la vòstra signatura, cau vesitar l\'adreiça web mençonada per aquest corrier.', # MODIF
-'form_pet_mail_confirmation' => 'Bònjorn,
-
-avètz demandat de signar la peticion:
-@titre@.
-
-Avètz fornit li informacions seguenti :
-    Nom: @nom_email@
-    Sit: @nom_site@ - @url_site@
-
-
-IMPORTANT...
-Per validar la vòstra signatura, basta de vos connectar a 
- l\'adreiça çai sota (senon s\'escamparà
- la vòstra demanda): 
-    @url@
-
-
-Mercé per la vòstra participacion
-',
-'form_pet_nom_site2' => 'Nom dau vòstre sit web',
-'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
-'form_pet_probleme_technique' => 'Problèma tecnic, li signaturas son temporàriament arrestadi.',
 'form_pet_signature_pasprise' => 'La vòstra signatura non es pilhada en còmpte.',
-'form_pet_signature_validee' => 'La vòstra signatura es validada. Mercé!',
-'form_pet_site_deja_enregistre' => 'Ja aqueu sit es registrat',
-'form_pet_url_invalide' => 'L\'URL qu\'avètz indicada non es valida.',
-'form_pet_votre_email' => 'La vòstra adreiça e-mail',
-'form_pet_votre_nom' => 'Lo vòstre nom ò pseudonim',
-'form_pet_votre_site' => 'Se tenètz un sit, o podètz marcar çai sota',
 'form_prop_confirmer_envoi' => 'Confirmar lo mandadís',
 'form_prop_description' => 'Descripcion/comentari',
 'form_prop_enregistre' => 'La vòstra proposicion es ben registrada, apareisserà en linha tre que lu responsables dau sit l\'auràn validada.',
@@ -341,7 +308,6 @@ Mercé per la vòstra participacion
 'icone_interface_simple' => 'Interfàcia simplificada',
 'icone_maintenance_site' => 'Mantenença dau sit',
 'icone_messagerie_personnelle' => 'Messatjaria personala',
-'icone_mots_cles' => 'Mots clau',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuala',
 'icone_repartition_debut' => 'Afichar la reparticion despí la començança',
 'icone_repartition_visites' => 'Reparticion dei vesitas',
@@ -491,15 +457,11 @@ Mercé per la vòstra participacion
 'info_rechercher_02' => 'Cercar:',
 'info_remplacer_vignette' => 'Remplaçar la vinheta predefinida per un lògo personalizat:',
 'info_retablir_lien' => 'Restablir aqueu ligam',
-'info_retirer_mot' => 'Quitar aqueu mot',
-'info_retirer_mots' => 'Quitar toi lu mots ',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'sensa títol',
 'info_selectionner_fichier' => 'Podètz seleccionar un fichier dau dorsier @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un fichier:',
-'info_signature_supprimee' => 'Signature supprimée', # NEW
-'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Sit web en espèra de validacion',
 'info_site_reference' => 'Sit referenciat en linha',
 'info_site_refuse' => 'Sit web refusat',
