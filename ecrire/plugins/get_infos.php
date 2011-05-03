@@ -35,12 +35,19 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 			$cache = unserialize($contenu);
 		}
 		if (!is_array($cache)) $cache = array();
-	} 
+	}
 	$force_reload |= !isset($cache[$dir_plugins][$plug]['filemtime']);
- 
-	$desc = "$dir_plugins$plug/$filename";
+
+	$desc = rtrim("$dir_plugins$plug",'/');
+	# pas de repertoire, pas de plugin
+	# il faut a minima '.' si on veut chercher dans le rep courant
+	if (!$desc)
+		return false;
+
+	$desc .= "/$filename";
 	if (!file_exists($desc))
 		return false;
+	
 	$time = intval(@filemtime($desc));
 
 	if (!$force_reload
