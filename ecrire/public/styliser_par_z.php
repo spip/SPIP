@@ -109,14 +109,22 @@ function public_styliser_par_z_dist($flux){
 				AND isset($GLOBALS['visiteur_session']['statut']) // performance
 				AND autoriser('webmestre')){
 				$type = substr($fond,strlen($z_contenu)+1);
+				if (($type=='page') AND isset($flux['args']['contexte'][$page]))
+					$type = $flux['args']['contexte'][$page];
 				if (!isset($disponible[$type]))
 					$disponible[$type] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,$type,$ext,$echaffauder);
-				if (is_string($disponible[$type]))
+				if (is_string($disponible[$type])) {
 					$flux['data'] = $disponible[$type];
+
+				}
 				elseif ($echaffauder
 					AND $is = $disponible[$type]
-					AND is_array($is))
+					AND is_array($is)) {
 					$flux['data'] = $echaffauder($type,$is[0],$is[1],$is[2],$ext);
+				}
+				else{
+					$flux['data'] = ($disponible['404'] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,'404',$ext,$echaffauder));
+				}
 			}
 
 			// sinon, si on demande un fond non trouve dans un des autres blocs
@@ -128,6 +136,8 @@ function public_styliser_par_z_dist($flux){
 					AND $dir !== $z_contenu
 					AND in_array($dir,$z_blocs)){
 					$type = substr($fond,strlen("$dir/"));
+					if (($type=='page') AND isset($flux['args']['contexte'][$page]))
+						$type = $flux['args']['contexte'][$page];
 					if ($type!=='page' AND !isset($disponible[$type]))
 						$disponible[$type] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,$type,$ext,$echaffauder);
 					if ($type=='page' OR $disponible[$type])
@@ -152,7 +162,7 @@ function public_styliser_par_z_dist($flux){
 				$flux['data'] = $f;
 		}
 		elseif ($fond=='structure' 
-			AND _request('var_zajax')
+			AND z_sanitize_var_zajax()
 			AND $f = find_in_path($prefix_path.$prepend.'ajax'.".$ext")) {
 			$flux['data'] = substr($f,0,-strlen(".$ext"));
 		}
@@ -332,4 +342,18 @@ function prive_echaffauder_dist($exec,$table,$table_sql,$desc_exec,$ext){
 	return $f;
 }
 
+/**
+ * Recuperer et verifier var_zajax si demande dans l'url
+ * @return bool|string
+ */
+function z_sanitize_var_zajax(){
+	$z_ajax = _request('var_zajax');
+	if (!$z_ajax) return false;
+	if (!$z_blocs = z_blocs(test_espace_prive())
+	  OR !in_array($z_ajax,$z_blocs)) {
+		set_request('var_zajax'); // enlever cette demande incongrue
+		$z_ajax = false;
+	}
+	return $z_ajax;
+}
 ?>
