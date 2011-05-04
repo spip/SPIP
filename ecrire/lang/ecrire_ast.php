@@ -926,8 +926,6 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
   pa evitar l\'apaición de mensaxes d\'avisu
   intempestivos.',
 'texte_trop_resultats_auteurs' => 'Abondos resultaos pa "@cherche_auteur@" ; has d\'afinar la gueta.',
-'texte_type_urls' => 'Embaxo pues escoyer el mou de cálculu de les señes de les páxines.',
-'texte_type_urls_attention' => 'Atención esti axuste nun funcionará más que si l\'archivu @htaccess@ ta correutamente instaláu na raiz del sitiu.',
 'texte_unpack' => 'descarga de la versión cabera',
 'texte_utilisation_moteur_syndiques' => 'Cuando uses el motor de restolar integráu en
   SPIP, puedes facer les guetes nos sitios webs y
@@ -1002,7 +1000,6 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 'titre_rendez_vous' => 'CITES:',
 'titre_reparation' => 'Igua',
 'titre_suivi_petition' => 'Siguimientu de les solicitudes',
-'titre_type_urls' => 'Tipu de señes URL',
 'tls_ldap' => 'Transport Layer Security (TLS):',
 'trad_article_inexistant' => 'Nun hay dengún artículu con esi númberu.',
 'trad_article_traduction' => 'Toles versiones d\'esti artículu:',

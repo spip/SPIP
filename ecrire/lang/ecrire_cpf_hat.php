@@ -925,8 +925,6 @@ Bagay-la pémè, pa egsanp, fòse rekalkil tout paj sa-yo, apré plizyè gro cha
    mesaj yo pou atansyon.
 ',
 'texte_trop_resultats_auteurs' => 'Genyen tro rezilta pou "@cherche_auteur@" ; mèsi présiz chèche w-a.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'téléchajman dènyè vèsyon',
 'texte_utilisation_moteur_syndiques' => 'Kan w itilize motè-rechèche andodan SPIP, w kapab chèche
     sou sit ak atik sendiké yo nan dé manyè diféran.
@@ -1000,7 +998,6 @@ ou nan dékripsyon atik sa-yo
 'titre_rendez_vous' => 'PWOPOZE YON RANKONT :',
 'titre_reparation' => 'Reparasyon',
 'titre_suivi_petition' => 'Swiv tout petisyon yo',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Okenn atik gen pa nimewo-a.',
 'trad_article_traduction' => 'Tout versyon pou atik la :',

@@ -839,8 +839,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'texte_travail_article' => '@nom_auteur_modif@ ostaje @date_diff@ minuta za rad na ovom clanku',
 'texte_travail_collaboratif' => 'Ako je uobicajeno da vise urednika radi na istom clanku, sistem moze postavljati posljednje « otvarane » clanke, da bi se izbjegle simultane izmjene. Ova opcija je standardno iskljucena, da bi se izbjeglo postavljanje neodgovarajucih poruka upozorenja.',
 'texte_trop_resultats_auteurs' => 'Previse rezultata za pretragu "@cherche_auteur@" ; predefinisite opcije pretrazivanja.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'download posljednje verzije',
 'texte_utilisation_moteur_syndiques' => 'Ako koristitie motor pretrage koji je integrisan u SPIP, mozete na dva razlicita nacina izvesti pretragu na sindikovanim stranicama i clancima. <br /><img  src=\\"puce.gif\\"> Najjednostavnije je pretrazivati samo naslove i opise clanaka. <br /><img src=\\"puce.gif\\"> Mnogo jaca metoda dozvoljava SPIP-u da trazi unutar tekstova preporucenih sranica. Dakle, ako preporucite neku stranicu, SPIP ce izvrsiti pretragu unutar samog teksta stranice.', # MODIF
 'texte_utilisation_moteur_syndiques_2' => 'Ova metoda obavezuje SPIP da redovno posjecuje preporucene stranice, sto moze izazvati lahko usporavanje vase sopstvene stranice.',
@@ -902,7 +900,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'titre_rendez_vous' => 'SASTANAK:',
 'titre_reparation' => 'Popravka',
 'titre_suivi_petition' => 'Pracenje peticija',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Ne postoji clanak koji nosi ovaj broj.',
 'trad_article_traduction' => 'Sve verzije ovog clanka:',

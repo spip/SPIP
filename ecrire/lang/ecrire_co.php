@@ -933,8 +933,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 		«aperti» di pocu, di modu ch\'elle ùn sianu fatte parechje mudìfiche à listessu tempu. Sta scelta hè predefinita disattivata per ùn 
 		creà micca messagi d\'avertimentu in quantità.',
 'texte_trop_resultats_auteurs' => 'Troppu risultati per "@cherche_auteur@"; precisate puru a ricerca.',
-'texte_type_urls' => 'Pudete puru sceglie quì sottu u modu di càlculu di l\'indirizzu di a pàgina.',
-'texte_type_urls_attention' => 'Attenti : St\'opzione viaghja solu s\'ellu hè stallatu cum\'ellu ci vole u schedariu @htaccess@, à a ràdica di u situ.',
 'texte_unpack' => 'scaricà l\'ùltima versione',
 'texte_utilisation_moteur_syndiques' => 'Quand\'è vo usate u mutore di ricerca integratu di SPIP, pudete fà ricerche nant\'à i siti è l\'artìculi sindicati
 		di duie manere sferenti. <br />
@@ -1000,7 +998,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'titre_rendez_vous' => 'APPUNTAMENTU :',
 'titre_reparation' => 'Riparazione',
 'titre_suivi_petition' => 'Guardia di e petizioni',
-'titre_type_urls' => 'Tippu d\'indirizzi URL',
 'tls_ldap' => 'Transport Layer Security :',
 'trad_article_inexistant' => 'Ùn esiste artìculu cù stu nùmeru.',
 'trad_article_traduction' => 'Tutte e versioni di st\'artìculu :',

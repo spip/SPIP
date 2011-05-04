@@ -859,8 +859,6 @@ Arazoa berriro gertatzen baldin bada, zureostatu-sariaren hornitzailearekin kont
 'texte_travail_article' => '@nom_auteur_modif@ artikulu hau berridatzi egin duduela@date_diff@ minutu.',
 'texte_travail_collaboratif' => 'Sarritan erredaktore batbaino gehiago artikulu berberan lan egiten dute, sistemak duela gutxi "irekiak" izandiren artikuluak erakutsi ahal du, aldi bereko aldaketak saihesteko. Aukera hau,kontrakoa egin ezean, desaktibatuta dago ezorduko abisu mezuak saihesteko.',
 'texte_trop_resultats_auteurs' => '"@cherche_auteur@" bilaketarako emaitza gehiegi.Irizpideak zehaztu.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'Azken bertsiotik telekargatua.',
 'texte_utilisation_moteur_syndiques' => 'SPIP-en barneratutako bilaketa motorra erabiltzen duzunean, 
 bilaketak tokietan eta sindikatutako artikuluetan bi era desberdinetan egin ditzakezu
@@ -926,7 +924,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_rendez_vous' => 'AIPAMENAK:',
 'titre_reparation' => 'Konponketa',
 'titre_suivi_petition' => 'Eskaerenkudeaketa',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :',
 'trad_article_inexistant' => 'Zenbaki horrekin ez dago artikulurik',
 'trad_article_traduction' => 'Artikulu honen bertsio guztiak:',

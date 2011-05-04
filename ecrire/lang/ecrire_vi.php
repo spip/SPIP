@@ -857,8 +857,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_travail_collaboratif' => 'Nếu có nhiều người cùng soạn/sửa đổi một bài, hệ thống có thể cho thấy những bài đang được «làm việc» để tránh trường hợp sửa đổi cùng một lúc. 
 Bạn có thể cho phép cảnh báo hay không:',
 'texte_trop_resultats_auteurs' => 'Quá nhiều kết quả khi tìm "@cherche_auteur@"; hãy duyệt lại việc tìm kiếm.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'Đang tải xuống ấn bản mới nhất',
 'texte_utilisation_moteur_syndiques' => 'Nếu bạn dùng cơ phận tìm kiếm của SPIP, bạn có thể tìm trong webiste và bài vở syndicated bằng nhiều cách khác nhau. <br /><img src=\'puce.gif\'>Cách đơn giản nhất là tìm trong tựa đề và phần mô tả bài. <br /><img src=\'puce.gif\'> Cách thứ nhất, mạnh hơn, cho phép SPIP tìm kiếm trong văn bản của website nối kết. Nếu bạn nối kết một website, SPIP sẽ tìm trong văn bản của website đó. ', # MODIF
 'texte_utilisation_moteur_syndiques_2' => 'Phương pháp này buộc SPIP đến viếng thường xuyên những website kết nối; việc này có thể làm giảm hiệu suất của website bạn.',
@@ -920,7 +918,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_rendez_vous' => 'VÔ SỔ LỊCH:',
 'titre_reparation' => 'Sửa chữa',
 'titre_suivi_petition' => 'Quản trị Thỉnh nguyện thư',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Không có bài nào với số này',
 'trad_article_traduction' => 'Tất cả ấn bản của bài này:',

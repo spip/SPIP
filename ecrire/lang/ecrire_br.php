@@ -883,8 +883,6 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
   a-benn herzel ma vo graet meur a gemm war un dro.
   Diweredekaet eo an dibarzh-mañ dre ziouer kuit da gaout kemennoù diwall a-hed an amzer.',
 'texte_trop_resultats_auteurs' => 'Re a zisoc\'hoù evit "@cherche_auteur@" ; resisait termenoù hoc\'h enklask.',
-'texte_type_urls' => 'Gallout a rit dibab amañ dindan an doare ma vo jedet chomlec\'h ar pajennoù.',
-'texte_type_urls_attention' => 'Diwallit, ne\'z aio an dra-mañ en-dro nemet ma vez staliet mat ar restr @htaccess@ e gwrizienn al lec\'hienn.',
 'texte_unpack' => 'o pellgargañ ar stumm diwezhañ',
 'texte_utilisation_moteur_syndiques' => 'Pa implijit al lusker enklask enframmet
  e SPIP e c\'hallit sevel enklaskoù war an lec\'hiennoù hag
@@ -952,7 +950,6 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
 'titre_rendez_vous' => 'EMGAV :',
 'titre_reparation' => 'Kempenn',
 'titre_suivi_petition' => 'Heuliañ ar sinadegoù',
-'titre_type_urls' => 'Seurt chomlec\'hioù URL',
 'tls_ldap' => 'Surentez Treuzdougen a-Wiskadoù :',
 'trad_article_inexistant' => 'N\'eus pennad ebet gant an niverenn-mañ.',
 'trad_article_traduction' => 'Holl stummoù ar pennad-mañ :',

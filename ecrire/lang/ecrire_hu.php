@@ -892,8 +892,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
  a váratlan figyelmeztető üzenetek elkerülésére.
 ',
 'texte_trop_resultats_auteurs' => 'Túl sok találat erre "@cherche_auteur@" ; szükítse a kérésést.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'Legújabb verzió letöltése',
 'texte_utilisation_moteur_syndiques' => 'Ha az SPIP belső  kereső motorját használja 
     , kétféle módon lehet keresni a szindikált cikkekben, illetve honlapokon.
@@ -962,7 +960,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_rendez_vous' => 'TALÁLKOZÓ :',
 'titre_reparation' => 'Javítás',
 'titre_suivi_petition' => 'Aláírásgyűjtések megfigyelése',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Nincs ilyen sorszámú cikk.',
 'trad_article_traduction' => 'A cikk összes változatai :',

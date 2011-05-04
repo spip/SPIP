@@ -920,8 +920,6 @@ Si lo larlik-la i rest touzour, ifo koz do sa èk out léberzèr.<p>', # MODIF
 'texte_travail_collaboratif' => 'Si néna souvandfwa plisyèr lotèr pou mèt ansanm  inn travay sir lo minm lartik, lo sistèm i pé afis inn zanons spésial. Zanons-la, i pé montr azot bann zartik sak la finn dèt « ouver » inn ti pé avan. Lé pratik pou anpès bann sanzman similtané.
 Mé vèy byin, lopsyon-la, li lé pa aktivé otomatikman pou anpès lafisaz inn lavizman abizif.',
 'texte_trop_resultats_auteurs' => 'Néna trod rézilta pou "@cherche_auteur@" ; mersi kadr myé lo rodaz.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'télézarzman dla dernyèr versyon',
 'texte_utilisation_moteur_syndiques' => 'Kank ou i anserv lo rodèr SPIP, ou pé fèr bann rodaz sir tout bann sit èk out bann zartik sindiké. Néna plisyèr manyir diféran. <br /><img src=\'puce.gif\'> Pli sinp lé rod sélman dann lo titr ou dann ladéskrisyon out bann zartik. <br />-
 Inn dézièm métod, pli pwisan, li permè a SPIP rod osi dann kor lo tèks tout out bann sit référansé . Si ou
@@ -987,7 +985,6 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_rendez_vous' => 'RANDÉVOU :',
 'titre_reparation' => 'Aranzman',
 'titre_suivi_petition' => 'Pou swiv bann filsinyatir',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Ni la pa trouv okin lartik i port zot niméro-la.',
 'trad_article_traduction' => 'Tout bann versyon lartik-la :',

@@ -931,8 +931,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   с цел да не се показват излишни
   предупредителни съобщения.',
 'texte_trop_resultats_auteurs' => 'Твърде много намерени резултати за @cherche_auteur@; моля, прецизирайте търсенето.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'Изтегляне на най-новата версия',
 'texte_utilisation_moteur_syndiques' => 'При използване на търсачката, внедрена в СПИП, можете да търсите сайтове и статии, обединени по два начина. <br />- По-лесният е да търсите само в заглавията и описанията на статиите.<br />- Вторият начин, който е много по-ефективен, позволява на СПИП да търси в текста на свързаните сайтове. Ако свържете сайт към Вашия, СПИП ще търси в текста на съответния сайт.', # MODIF
 'texte_utilisation_moteur_syndiques_2' => 'Този метод кара СПИП често да посещава свързаните сайтове, които биха могли да предизвикат понижаване на представянето на собствения Ви сайт.',
@@ -994,7 +992,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_rendez_vous' => 'СРЕЩИ:',
 'titre_reparation' => 'Поправка',
 'titre_suivi_petition' => 'Допълнения на молбите',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Не съществува статия с такъв номер',
 'trad_article_traduction' => 'Всички версии на статията:',

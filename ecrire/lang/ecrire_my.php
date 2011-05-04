@@ -838,8 +838,6 @@ proxy လိပ်စာကို အောက်တွင်​ဖော်ပ�
 'texte_travail_article' => '@nom_auteur_modif@သည် ဤဆောင်းပါးတွင် လွန်ခဲ့သော မိနစ် @date_diff@ ကအလုပ်လုပ်ပြီးပြီ',
 'texte_travail_collaboratif' => 'စာတည်းများ ဆောင်းပါးတပုဒ်ပေါ်တွင် အတူတူလုပ်ဆောင်နေပါက၊ မှားယွင်းသော လုပ်ဆောင်မှုများ မဖြစ်ရန်၊ နောက်ဆုံး စာတည်း «opened&raquo ဟုဖော်ပြပါမည်။ ဒီသတိပေး စာစောင်ဟာ အနောက်အယှက်များ မဖြစ်စေရန် ကနဦးမှ ပိတ်ပင်ထားပါသည်။',
 'texte_trop_resultats_auteurs' => ' \\"@cherche_auteur@\\"; အတွက်ရှာဖွေမှုရလာဒ်များလွန်းသည်၊ ရှာဖွေမှုကိုပြန်ဆန်းစစ်ပါ၊',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'နောက်ဆုံးမူကွဲကိုဆွဲချနေသည်',
 'texte_utilisation_moteur_syndiques' => 'ရှာဖွေမှုပုံစံထည့်သွင်းထားသော SPIP ကိုသင်အသုံးပြုသည့်အခါ ပူးတွဲချိတ်ဆက်ထားသော ဆောင်းပါးများနှင့် 
 ဝက်ဘ်ဆိုက်ပေါ်ရှာဖွေမှုများကို နည်းနှစ်မျိုးဖြင့်သုံးနိုင်သည်၊ ဆောင်းပါးမှဖော်ပြချက်နှင့် ခေါင်းစဉ်များဖြင့် ရှာဖွေခြင်းသည် အရိုးရှင်းဆုံးနည်းဖြစ်သည်၊ 
@@ -903,7 +901,6 @@ proxy လိပ်စာကို အောက်တွင်​ဖော်ပ�
 'titre_rendez_vous' => 'ချိန်းဆိုချက်များ',
 'titre_reparation' => 'ပြန်လည်ပြင်ဆင်သည်',
 'titre_suivi_petition' => 'နောက်ဆက်တွဲတောင်းဆိုမှု',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'ပို့ဆောင်မှုအလွှာ လုံခြုံရေး',
 'trad_article_inexistant' => 'ဤနံပါတ်နှင့် ဆောင်းပါးမရှိပါ',
 'trad_article_traduction' => 'ဤဆောင်းပါး၏ မူကွဲအားလုံး',

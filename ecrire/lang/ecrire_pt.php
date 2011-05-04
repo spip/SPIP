@@ -929,8 +929,6 @@ a fim de evitar as modificações simultâneas.
   a fim de evitar exibir mensagens de aviso
  intempestivas.',
 'texte_trop_resultats_auteurs' => 'Demasiado resultados para "@cherche_auteur@" ; favor afinar a pesquisa.',
-'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
-'texte_type_urls_attention' => 'Attention ce réglage ne fonctionnera que si le fichier @htaccess@ est correctement installé à la racine du site.', # NEW
 'texte_unpack' => 'telecarregamento da última versão',
 'texte_utilisation_moteur_syndiques' => 'Quando utilizar o motor integrado de pesquisa 
   no SPIP, pode efectuar as pesquisas nos sítios e
@@ -1004,7 +1002,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_rendez_vous' => 'ENCONTROS',
 'titre_reparation' => 'Reparação',
 'titre_suivi_petition' => 'Seguimento dos abaixo-assinados',
-'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Não há artigo com este número',
 'trad_article_traduction' => 'Todas as versões deste artigo :',
