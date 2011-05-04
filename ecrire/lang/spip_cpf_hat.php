@@ -305,15 +305,12 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'icone_interface_simple' => 'Entèfas senp',
 'icone_maintenance_site' => 'Swen pou sit la',
 'icone_messagerie_personnelle' => 'Kazmodékri',
-'icone_repartition_actuelle' => 'Afiche repatisyon kounye-a',
 'icone_repartition_debut' => 'Afiche repatisyon depi koumansman',
-'icone_repartition_visites' => 'Repatisyon vizit yo',
 'icone_rubriques' => 'Ribrik yo',
 'icone_sauver_site' => 'Sov sit la',
 'icone_site_entier' => 'Tout sit sa mèm',
 'icone_sites_references' => 'Sit referansé yo',
 'icone_statistiques' => 'Rezilta estatistik sit la',
-'icone_statistiques_visites' => 'Estatistik',
 'icone_suivi_activite' => 'Gad lavi sit la',
 'icone_suivi_actualite' => 'Evolisyon  sit la',
 'icone_suivi_pettions' => 'Swiv/ okipe tout petisyon  ',
@@ -432,7 +429,6 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'info_petition_close' => 'Pétition close', # NEW
 'info_pixels' => 'piksèl yo',
 'info_plusieurs_mots_trouves' => 'Kèk mokle te fin sòti pou "@cherche_mot@":',
-'info_popularite_5' => 'Kouman se popilè :',
 'info_portfolio_automatique' => 'Livlimaj otomatik :',
 'info_premier_resultat' => '[@debut_limit@ premye rezilta sa-yo si  @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ premye rezilta sa-yo si @total@]',
@@ -473,12 +469,11 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'info_vignette_defaut' => 'Viyèt otomatik',
 'info_vignette_personnalisee' => 'Viyèt pèsonèl',
 'info_visite' => 'vizit :',
-'info_visites' => 'vizit yo :',
 'info_vos_rendez_vous' => 'W ke rannkont',
-'info_zoom' => 'gwoplan',
 'infos_vos_pense_bete' => 'Mesaj yo pou w raple-w', # MODIF
 
 // L
+'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Afiche ikòn yo sèlman',
 'lien_afficher_texte_icones' => 'Afiche ikòn ak tèks',
 'lien_afficher_texte_seul' => 'Fè parèt kisa se tèks sèlman',
@@ -548,9 +543,6 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'onglet_informations_personnelles' => 'Enfòmasyon pèsonèl',
 'onglet_interactivite' => 'Entèwaktivite',
 'onglet_messagerie' => 'Kazmodékri',
-'onglet_origine_visites' => 'Lorijin vizit yo',
-'onglet_repartition_debut' => 'depi koumansman',
-'onglet_repartition_lang' => 'Repatisyon ant lang',
 'onglet_repartition_rubrique' => 'Repatisyon ant ribrik',
 'onglet_save_restaur_base' => 'Sòvgad/aranje labaz',
 'onglet_vider_cache' => 'Vide kach-la',
@@ -657,7 +649,6 @@ lès plitò jestyon paj sa-yo pou wèbmèt prensipal sou sit-la.</b>', # MODIF
 'titre_image_redacteur_02' => 'Redaktè',
 'titre_image_visiteur' => 'Vizitè',
 'titre_joindre_document' => 'JWENN YON DOKIMAN',
-'titre_liens_entrants' => 'Lyen sa-yo ka rive',
 'titre_mots_cles' => 'MOKLE YO',
 'titre_probleme_technique' => 'Atansyon : yon pxoblèm teknik (sèrvèr SQL) fe entediksyon antre nan pati a nan sit sa a. Mési konprann.', # MODIF
 'titre_publier_document' => 'PIBLIYE YON DOKIMAN NAN PATI A NAN SIT SA A',

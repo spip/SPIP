@@ -305,15 +305,12 @@ sera ignorée) :
 'icone_interface_simple' => 'Interface simplificada',
 'icone_maintenance_site' => 'Manutenção do sítio',
 'icone_messagerie_personnelle' => 'Correio pessoal',
-'icone_repartition_actuelle' => 'Exibir a distribuição actual',
 'icone_repartition_debut' => 'Exibir a distribuição desde o início',
-'icone_repartition_visites' => 'Distribuição das visitas',
 'icone_rubriques' => 'Rubricas',
 'icone_sauver_site' => 'Salvaguarda do sítio',
 'icone_site_entier' => 'Todo o sítio',
 'icone_sites_references' => 'Sítios referenciados',
 'icone_statistiques' => 'Estatísticas do sítio',
-'icone_statistiques_visites' => 'Estatísticas de visitas',
 'icone_suivi_activite' => 'Acompanhar a vida do sítio',
 'icone_suivi_actualite' => 'Evolução do sítio',
 'icone_suivi_pettions' => 'Seguir/gerir os abaixo-assinados',
@@ -432,7 +429,6 @@ sera ignorée) :
 'info_petition_close' => 'Pétition close', # NEW
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Muitas palavras-chave encontradas para "@cherche_mot@":',
-'info_popularite_5' => 'popularidade :',
 'info_portfolio_automatique' => 'Portfolio automático :',
 'info_premier_resultat' => '[@debut_limit@ primeiros resultados em @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primeiros resultados em @total@]',
@@ -473,12 +469,11 @@ sera ignorée) :
 'info_vignette_defaut' => 'Vinheta por defeito',
 'info_vignette_personnalisee' => 'Vinheta personalizada',
 'info_visite' => 'visita :',
-'info_visites' => 'visitas :',
 'info_vos_rendez_vous' => 'Os seus futuros encontros',
-'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Os seus memorandos', # MODIF
 
 // L
+'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Exibir apenas os ícones',
 'lien_afficher_texte_icones' => 'Exibir ícones e o texto',
 'lien_afficher_texte_seul' => 'Exibir apenas o texto',
@@ -549,9 +544,6 @@ sera ignorée) :
 'onglet_informations_personnelles' => 'Informações pessoais',
 'onglet_interactivite' => 'Interactividade',
 'onglet_messagerie' => 'Correio',
-'onglet_origine_visites' => 'Origem das visitas',
-'onglet_repartition_debut' => 'desde o início',
-'onglet_repartition_lang' => 'Distribuição por línguas',
 'onglet_repartition_rubrique' => 'Distribuição das rubricas',
 'onglet_save_restaur_base' => 'Salvaguardar/restaurar a base',
 'onglet_vider_cache' => 'Esvaziar a cache',
@@ -657,7 +649,6 @@ Poderá então introduzir uma nova palavra-passe
 'titre_image_redacteur_02' => 'Redactor',
 'titre_image_visiteur' => 'Visitante',
 'titre_joindre_document' => 'ANEXAR UM DOCUMENTO',
-'titre_liens_entrants' => 'Links de entrada',
 'titre_mots_cles' => 'PALAVRAS-CHAVE',
 'titre_probleme_technique' => 'Atenção : um problema técnico (servidor SQL) impede o acesso a esta parte do sítio. Obrigado pela sua compreensão.', # MODIF
 'titre_publier_document' => 'PUBLICAR UM DOCUMENTO NESTA RUBRICA',

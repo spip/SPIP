@@ -305,15 +305,12 @@ sera ignorée) :
 'icone_interface_simple' => 'Xem đơn giản',
 'icone_maintenance_site' => 'Bảo trì',
 'icone_messagerie_personnelle' => 'Thư tín cá nhân',
-'icone_repartition_actuelle' => 'Cho xem phân loại hiện nay',
 'icone_repartition_debut' => 'Cho xem phân loại từ ban đầu',
-'icone_repartition_visites' => 'Phân bố số thăm viếng',
 'icone_rubriques' => 'Ðề Mục',
 'icone_sauver_site' => 'Lưu trữ database',
 'icone_site_entier' => 'Tất cả bài trong website ',
 'icone_sites_references' => 'Liên kết',
 'icone_statistiques' => 'Thống kê tổng quát',
-'icone_statistiques_visites' => 'Thống kê',
 'icone_suivi_activite' => 'Những việc của Ban Biên Tập',
 'icone_suivi_actualite' => 'Tiến triển của trang web',
 'icone_suivi_pettions' => 'Quản trị thỉnh nguyện thư',
@@ -432,7 +429,6 @@ sera ignorée) :
 'info_petition_close' => 'Pétition close', # NEW
 'info_pixels' => 'chấm',
 'info_plusieurs_mots_trouves' => 'Tìm thấy một số từ then chốt cho "@cherche_mot@":',
-'info_popularite_5' => ' phổ thông:',
 'info_portfolio_automatique' => 'Portfolio tự động:',
 'info_premier_resultat' => '[@debut_limit@ kết quả đầu tiên trong số @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ kết quả đầu tiên trong số @total@]',
@@ -473,12 +469,11 @@ sera ignorée) :
 'info_vignette_defaut' => 'Hình xem trước định sẵn',
 'info_vignette_personnalisee' => 'Hình xem trước có điều chỉnh',
 'info_visite' => 'thăm viếng:',
-'info_visites' => ' thăm viếng:',
 'info_vos_rendez_vous' => 'Những lần hẹn sắp tới',
-'info_zoom' => 'phóng lớn',
 'infos_vos_pense_bete' => 'Bản ghi nhớ của bạn', # MODIF
 
 // L
+'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Xem icon mà thôi',
 'lien_afficher_texte_icones' => 'Xem icon và chữ',
 'lien_afficher_texte_seul' => 'Xem chữ mà thôi',
@@ -548,9 +543,6 @@ sera ignorée) :
 'onglet_informations_personnelles' => 'Dữ kiện cá nhân',
 'onglet_interactivite' => 'Đặc điểm thông tin',
 'onglet_messagerie' => 'Thư tín',
-'onglet_origine_visites' => 'Xuất xứ của thăm viếng',
-'onglet_repartition_debut' => 'từ ban đầu',
-'onglet_repartition_lang' => 'Phổ biến theo ngôn ngữ',
 'onglet_repartition_rubrique' => 'Phân loại theo đề mục',
 'onglet_save_restaur_base' => 'Lưu trữ/phục hồi database',
 'onglet_vider_cache' => 'Dọn sạch cache',
@@ -636,7 +628,6 @@ Nếu bạn đem vào những hình ảnh trong dạng  @gd_formats@, chúng s�
 'titre_image_redacteur_02' => 'Tác giả',
 'titre_image_visiteur' => 'Khách',
 'titre_joindre_document' => 'ĐÍNH KÈM MỘT HỒ SƠ',
-'titre_liens_entrants' => 'Các điểm nối vào',
 'titre_mots_cles' => 'TỪ THEN CHỐT',
 'titre_probleme_technique' => 'Báo động: trục trặc kỹ thuật (SQL server) thành ra không vào được chỗ này của trang web.<p>Xin thông cảm.', # MODIF
 'titre_publier_document' => 'PHÁT HÀNH MỘT TÀI LIỆU TRONG ĐỀ MỤC NÀY',

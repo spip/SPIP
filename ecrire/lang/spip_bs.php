@@ -301,15 +301,12 @@ sera ignorée) :
 'icone_interface_simple' => 'Pojednostavljeni interfejs',
 'icone_maintenance_site' => 'Odrzavanje stranice',
 'icone_messagerie_personnelle' => 'Licni servis poruka',
-'icone_repartition_actuelle' => 'Prikazi trenutnu distribuciju',
 'icone_repartition_debut' => 'Prikazi distribuciju od pocetka',
-'icone_repartition_visites' => 'Distribucija posjeta',
 'icone_rubriques' => 'Rubrike',
 'icone_sauver_site' => 'Backup stranice',
 'icone_site_entier' => 'Cjela stranica',
 'icone_sites_references' => 'Preporucene stranice',
 'icone_statistiques' => 'Statistike stranice',
-'icone_statistiques_visites' => 'Statistike',
 'icone_suivi_activite' => 'Prati aktivnost stranice',
 'icone_suivi_actualite' => 'Razvoj stranice',
 'icone_suivi_pettions' => 'Prati/uredi peticija',
@@ -427,7 +424,6 @@ sera ignorée) :
 'info_petition_close' => 'Pétition close', # NEW
 'info_pixels' => 'piksela',
 'info_plusieurs_mots_trouves' => 'Pronadjeno je vise kljucnih rijeci za "@cherche_mot@":',
-'info_popularite_5' => 'popularno:',
 'info_portfolio_automatique' => 'Automatski portfolio:',
 'info_premier_resultat' => '[@debut_limit@ prvih rezultata od ukupno @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ prvih rezultata od ukupno @total@]',
@@ -468,12 +464,11 @@ sera ignorée) :
 'info_vignette_defaut' => 'Standardna vinjeta',
 'info_vignette_personnalisee' => 'Personalizovana vinjeta',
 'info_visite' => 'posjeta:',
-'info_visites' => 'posjete:',
 'info_vos_rendez_vous' => 'Vasi sastanci koji slijede',
-'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Vase biljeske', # MODIF
 
 // L
+'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Prikazi samo ikone',
 'lien_afficher_texte_icones' => 'Prikazi ikone i tekst',
 'lien_afficher_texte_seul' => 'Prikazi samo tekst',
@@ -542,9 +537,6 @@ sera ignorée) :
 'onglet_informations_personnelles' => 'Licne informacije',
 'onglet_interactivite' => 'Interaktivnost',
 'onglet_messagerie' => 'Servis poruka',
-'onglet_origine_visites' => 'Porijeklo posjete',
-'onglet_repartition_debut' => 'od pocetka',
-'onglet_repartition_lang' => 'Distribicija po jezicima',
 'onglet_repartition_rubrique' => 'Distribucija po rubrikama',
 'onglet_save_restaur_base' => 'Backup/obnova baze podataka',
 'onglet_vider_cache' => 'Isprazni kes',
@@ -634,7 +626,6 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 'titre_image_redacteur_02' => 'Urednik',
 'titre_image_visiteur' => 'Posjetioc',
 'titre_joindre_document' => 'PRIDRUZI DOKUMENT',
-'titre_liens_entrants' => 'Unosenje linkova',
 'titre_mots_cles' => 'KLJUCNE RIJECI',
 'titre_probleme_technique' => 'Upozorenje: tehnicki problem (SQL server) sprijecava pristup ovom dijelu stranice. Hvala na razumijevanju.', # MODIF
 'titre_publier_document' => 'OBJAVI DOKUMENT U OVOJ RUBRICI',
