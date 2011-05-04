@@ -126,12 +126,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // D
 'date_mot_heures' => 'urasa
 ',
-'diff_para_ajoute' => 'Yapat tanta amuyuyunaka',
-'diff_para_deplace' => 'Jan yäqat tanta amuyunaka',
-'diff_para_supprime' => 'Apaqat tanta amuyunaka',
-'diff_texte_ajoute' => 'Yapat sawu',
-'diff_texte_deplace' => 'Jan yäqat sawu',
-'diff_texte_supprime' => 'Apaqat sawu',
 
 // E
 'email' => 'aruskipayiri',
@@ -386,14 +380,11 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 		mails depuis leurs serveurs. Dans ce cas, les fonctionnalités suivantes
 		de SPIP ne fonctionneront pas.', # NEW
 'info_hier' => 'hier :', # NEW
-'info_historique' => 'Uñakipawinaka:',
 'info_historique_activer' => 'Uñakipawinakat uñch\'ukiwi naktaña',
 'info_historique_affiche' => 'Aka uñjat uñachayaña',
 'info_historique_comparaison' => 'kikipawi',
 'info_historique_desactiver' => 'Uñakipawinakat uñch\'ukiwi jiwt\'ayaña',
-'info_historique_lien' => 'Amtañanak mayjt\'awinakat uñachayaña',
 'info_historique_texte' => 'Le suivi des révisions permet de conserver un historique de toutes les modifications apportées au contenu d\'un article, et d\'afficher les différences entre les versions successives.', # NEW
-'info_historique_titre' => 'Uñakipawinakat uñch\'ukiwi',
 'info_identification_publique' => 'Uñacht\'ayawima...',
 'info_image_process' => 'Veuillez sélectionner la meilleure méthode de fabrication des vignettes en cliquant sur l\'image correspondante.', # NEW
 'info_image_process2' => '<b>N.B.</b> <i>Si aucune image n\'apparaît, alors le serveur qui héberge votre site n\'a pas été configuré pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions «GD» ou «Imagick».</i>', # NEW
@@ -1132,9 +1123,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8', # NEW
 
 // V
-'version' => 'Version :', # NEW
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Version initiale' # NEW
+'version' => 'Version :' # NEW
 );
 
 ?>

@@ -122,12 +122,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'ساعات',
-'diff_para_ajoute' => 'فقرة مضافة',
-'diff_para_deplace' => 'فقرة منقولة',
-'diff_para_supprime' => 'فقرة محذوفة',
-'diff_texte_ajoute' => 'نص مضاف',
-'diff_texte_deplace' => 'نص منقول',
-'diff_texte_supprime' => 'نص محذوف',
 
 // E
 'email' => 'البريد الالكتروني',
@@ -382,14 +376,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 في أجهزتهم. في هذه الحال، لا يمكن تفعيل
 وظائف SPIP التالية.<i>',
 'info_hier' => 'البارحة:',
-'info_historique' => 'التعديلات:',
 'info_historique_activer' => 'تفعيل متابعة التعديلات',
 'info_historique_affiche' => 'عرض هدا الاصدار',
 'info_historique_comparaison' => 'مقارنة',
 'info_historique_desactiver' => 'ايقاف متابعة التعديلات',
-'info_historique_lien' => 'عرض التعديلات',
 'info_historique_texte' => 'تتيح متابعة التعديلات الحفاظ على وصف تاريخي لكل التعديلات التي دخلت على مادة المقال وعرض الفوارق بين الاصدارات المتتالية.',
-'info_historique_titre' => 'متابعة التعديلات',
 'info_identification_publique' => 'هويتك العمومية...',
 'info_image_process' => 'الرجاء اختيار افضل طريقة لإنشاء المصغرات بالنقر على الصورة المناسبة.',
 'info_image_process2' => '<b>ملاحظة</b> <i>اذا لم تظهر اية صورة يكون جهاز الخدمة الذي يضيف موقعك غير معدّ لاستخدام هذه الادوات. اذا رغبت في استخدام هذه الوظائف، اتصل بالمسؤول التقني واطلب تثبيت احد الملحقين «GD» او «Imagick».</i>',
@@ -1128,9 +1119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'utf8_convertir_votre_site' => 'تحويل موقعك الى utf-8',
 
 // V
-'version' => 'الإصدار:',
-'version_deplace_rubrique' => 'منقول من <b>«@from@»</b> الى <b>«@to@»</b>.',
-'version_initiale' => 'الاصدار الاصلي'
+'version' => 'الإصدار:'
 );
 
 ?>

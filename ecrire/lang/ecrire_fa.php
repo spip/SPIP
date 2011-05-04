@@ -114,12 +114,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'ساعت',
-'diff_para_ajoute' => 'بند اضافه شده',
-'diff_para_deplace' => 'بند جابجا شده',
-'diff_para_supprime' => 'بند حذف شده',
-'diff_texte_ajoute' => 'متن اضافه شده',
-'diff_texte_deplace' => 'متن جابجا شده',
-'diff_texte_supprime' => 'متن حذف شده',
 
 // E
 'email' => 'ايميل',
@@ -358,14 +352,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'تعدادى از ميزبانان ارسال خودكار نامه ها را از سرورهايشان غير فعال ميكنند. در اين صورت،  عملكردهاى بعدى اسپيپ  كار نخوهند كرد. ',
 'info_hier' => ': ديروز',
-'info_historique' => 'بازبينى ها :',
 'info_historique_activer' => 'ادامه بازبينى ها را فعال كنيد',
 'info_historique_affiche' => 'نمايش دادن اين نسخه',
 'info_historique_comparaison' => 'مقايسه',
 'info_historique_desactiver' => 'غير فعال كردن ادامه بازبينى ها',
-'info_historique_lien' => 'روزنگار اصلاحات را نشان دهيد',
 'info_historique_texte' => 'پى گيرى بازنگريها بشما امكان دسترسى به يك روزنگار را ميدهد كه هر گونه اصلاح در محتوى يك مقاله را همراه با تفاوتهاى مابين نسخه هاى ديگر نشان ميدهد.',
-'info_historique_titre' => 'پى گيرى بازنگريها',
 'info_identification_publique' => '...شناسنامه شما',
 'info_image_process' => 'خواهشمند است بهترين شيوه ساخت تصاوير كوچك را با كليك كردن بروي تصوير مربوطه انتخاب نماييد.',
 'info_image_process2' => '<<b>N.B.</b> درصورتيكه تصويرى ظاهر نشود, سرورى كه سايتتان را پذيراست براى چنين ابزارى پيكربندى نشده است. اگر مايل به استفاده از اين كاركردها هستيد با سرپرست فنى تماس بگيريد و تقاضاىGD          يا   «Imagick» را بكنيد.',
@@ -1022,9 +1013,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'utf8_convertir_votre_site' => 'تبدیل سایتتان به utf-8',
 
 // V
-'version' => 'نسخه:',
-'version_deplace_rubrique' => '<از اينجا <تا اينجاb>« @from@ »</b> <b>« @to@ »</b> را حذف كن.',
-'version_initiale' => 'نسخه ى نخست'
+'version' => 'نسخه:'
 );
 
 ?>

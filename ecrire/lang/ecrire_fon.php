@@ -114,12 +114,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'ganmɛ lɛ',
-'diff_para_ajoute' => 'gɔ wěkpaxwé ná',
-'diff_para_deplace' => 'sɛ wěkpaxwé sín',
-'diff_para_supprime' => 'súnsún wěkpaxwé sín',
-'diff_texte_ajoute' => 'zě wé gɔ ná',
-'diff_texte_deplace' => 'sɛ wě sín',
-'diff_texte_supprime' => 'súnsún wě sín',
 
 // E
 'email' => 'e-mailu',
@@ -356,14 +350,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'e-mailù càcà.',
 'info_hier' => 'sɔ tó fí:',
-'info_historique' => 'sɔ tó fí:',
 'info_historique_activer' => 'sɔ tó fí',
 'info_historique_affiche' => 'zé wàlɔ ɔ xlɛ',
 'info_historique_comparaison' => 'kpɔnɖéwú',
 'info_historique_desactiver' => 'mi jó kpɔnɖéwú ɔ dó',
-'info_historique_lien' => 'mi zé ɖìdyɔ sín àfɔ ɖìɖè xlɛ',
 'info_historique_texte' => 'mi zé ɖìdyɔ sín àfɔ ɖìɖè xlɛ.',
-'info_historique_titre' => 'mi zé ɖìdyɔ sín àfɔ ɖìɖè xlɛ',
 'info_identification_publique' => 'Nyíkɔ mi tɔn tòbítùn...',
 'info_image_process' => 'Mi cyán wàlɔ ɖàgbè lɛ.',
 'info_image_process2' => 'Mi cyán wàlɔ ɖàgbè lɛ',
@@ -1007,9 +998,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8', # NEW
 
 // V
-'version' => 'Version :', # NEW
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'wàlɔ bìbɛ tɔn'
+'version' => 'Version :' # NEW
 );
 
 ?>

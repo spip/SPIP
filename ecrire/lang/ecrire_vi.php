@@ -117,12 +117,6 @@ Hồ sơ SPIP</a>.', # MODIF
 
 // D
 'date_mot_heures' => 'Giờ',
-'diff_para_ajoute' => 'Đoạn văn thêm vào',
-'diff_para_deplace' => 'Đoạn văn dời đi',
-'diff_para_supprime' => 'Đoạn văn bị xóa',
-'diff_texte_ajoute' => 'Văn bản thêm vào',
-'diff_texte_deplace' => 'Văn bản dời đi',
-'diff_texte_supprime' => 'Văn bản bị xóa',
 
 // E
 'email' => 'Ðiện thư',
@@ -359,14 +353,11 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'Một số máy chủ không cho phép gửi email tự động từ server. Trong trường hợp này, những đặc điểm sau đây của SPIP không thể thiết lập được.',
 'info_hier' => 'hôm qua: ',
-'info_historique' => 'Sửa đổi:',
 'info_historique_activer' => 'Cho phép tiếp tục sửa đổi',
 'info_historique_affiche' => 'Hiển thị ấn bản này',
 'info_historique_comparaison' => 'so sánh',
 'info_historique_desactiver' => 'Đóng việc nối tiếp sửa đổi',
-'info_historique_lien' => 'Hiển thị danh sách các ấn bản',
 'info_historique_texte' => 'Nối tiếp sửa đổi cho phép bạn theo dõi những sửa đổi của một bài và cho thấy sự khác biệt giữa các ấn bản được sửa.',
-'info_historique_titre' => 'Theo dõi sửa đổi',
 'info_identification_publique' => 'Danh tánh công cộng của bạn...',
 'info_image_process' => 'Xin chọn cách tạo ra hình trang trí bằng bấm trên hình đẹp nhất.',
 'info_image_process2' => '<b>N.B.</b> <i>Nếu bạn không thấy hình nào cả có nghĩa là máy chủ chưa được thiết trí để sử dụng hình. Nếu bạn muốn dùng hình, liên lạc với nhóm phụ trách kỹ thuật của công ty cung cấp dịch vụ để yêu cầu có extension «GD» hay «Imagick».</i>',
@@ -1029,9 +1020,7 @@ Bạn có thể cho phép cảnh báo hay không:',
 'utf8_convertir_votre_site' => 'Convert your site to utf-8', # NEW
 
 // V
-'version' => 'Version:', # NEW
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Ấn bản đầu tiên'
+'version' => 'Version:' # NEW
 );
 
 ?>

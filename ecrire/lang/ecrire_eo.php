@@ -121,12 +121,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'horoj',
-'diff_para_ajoute' => 'Paragrafo aldonita',
-'diff_para_deplace' => 'Paragrafo translokita',
-'diff_para_supprime' => 'Paragrafo forviŝita',
-'diff_texte_ajoute' => 'Teksto aldonita',
-'diff_texte_deplace' => 'Teksto translokita',
-'diff_texte_supprime' => 'Teksto forviŝita',
 
 // E
 'email' => 'retpoŝtadreso',
@@ -369,14 +363,11 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'Iuj retgastigantoj malaktivigas la aŭtomatan retleteroj-sendadon ekde ties serviloj. Tiukaze, la jenaj SPIP-funkcioj ne fonkcios.',
 'info_hier' => 'hieraŭ :',
-'info_historique' => 'Revizioj :',
 'info_historique_activer' => 'Aktivigi la superrigardo de la revizioj',
 'info_historique_affiche' => 'Afiŝi tiun version',
 'info_historique_comparaison' => 'kompari',
 'info_historique_desactiver' => 'Malaktivigi la superrigardon de la revizioj',
-'info_historique_lien' => 'Afiŝi historion pri modifoj',
 'info_historique_texte' => 'La superrigardo de revizioj ebligas konservi historion de ĉiuj modifoj al la enhavo de artikolo, kaj afiŝi la diferencojn inter la sinsekvaj versioj.',
-'info_historique_titre' => 'Superrigardo de revizioj',
 'info_identification_publique' => 'Via publika identeco...',
 'info_image_process' => 'Bonvolu elekti la plej bonan metodon por fabriki vinjetojn musklakante laŭcele bildon.',
 'info_image_process2' => '<b>N.B.</b> <i>Se neniu bildo afiŝiĝas, tio signifas ke la servilo kiu gastigas vian retejon ne estas konfigurita por uzi tiajn ilojn. Se vi deziras uzi tiujn funkciojn, petu la «GD» aŭ «Imagick» modulojn al la teknika repondeculo.</i>',
@@ -1108,9 +1099,7 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'utf8_convertir_votre_site' => 'Konverti vian retejon en utf-8',
 
 // V
-'version' => 'Versio :',
-'version_deplace_rubrique' => 'Transloki de <b>« @from@ »</b> al <b>« @to@ »</b>.',
-'version_initiale' => 'Komenca versio'
+'version' => 'Versio :'
 );
 
 ?>

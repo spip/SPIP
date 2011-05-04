@@ -115,12 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => '"H"',
-'diff_para_ajoute' => 'סעיף שהוסף',
-'diff_para_deplace' => 'סעיף שהוחלף',
-'diff_para_supprime' => 'סעיף שנמחק',
-'diff_texte_ajoute' => 'טקסט מוסף',
-'diff_texte_deplace' => 'טקסט ששונה מיקומו',
-'diff_texte_supprime' => 'טקסט שנמחק',
 
 // E
 'email' => 'דוא"ל',
@@ -372,14 +366,11 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 		mails depuis leurs serveurs. Dans ce cas, les fonctionnalités suivantes
 		de SPIP ne fonctionneront pas.', # NEW
 'info_hier' => ':אתמול',
-'info_historique' => 'Révisions :', # NEW
 'info_historique_activer' => 'Activer le suivi des révisions', # NEW
 'info_historique_affiche' => 'Afficher cette version', # NEW
 'info_historique_comparaison' => 'comparaison', # NEW
 'info_historique_desactiver' => 'Désactiver le suivi des révisions', # NEW
-'info_historique_lien' => 'Afficher l\'historique des modifications', # NEW
 'info_historique_texte' => 'Le suivi des révisions permet de conserver un historique de toutes les modifications apportées au contenu d\'un article, et d\'afficher les différences entre les versions successives.', # NEW
-'info_historique_titre' => 'Suivi des révisions', # NEW
 'info_identification_publique' => '...הזהות הציבורית שלך',
 'info_image_process' => 'Veuillez sélectionner la meilleure méthode de fabrication des vignettes en cliquant sur l\'image correspondante.', # NEW
 'info_image_process2' => '<b>N.B.</b> <i>Si aucune image n\'apparaît, alors le serveur qui héberge votre site n\'a pas été configuré pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions «GD» ou «Imagick».</i>', # NEW
@@ -1118,9 +1109,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8', # NEW
 
 // V
-'version' => 'מספר :',
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'מספר הראשונ'
+'version' => 'מספר :'
 );
 
 ?>

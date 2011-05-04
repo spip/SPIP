@@ -120,12 +120,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'horas',
-'diff_para_ajoute' => 'Parágrafo engadido',
-'diff_para_deplace' => 'Parágrafo desprazado',
-'diff_para_supprime' => 'Parágrafo suprimido',
-'diff_texte_ajoute' => 'Texto engadido',
-'diff_texte_deplace' => 'Texto desprazado',
-'diff_texte_supprime' => 'Texto suprimido',
 
 // E
 'email' => 'correo electrónico',
@@ -375,14 +369,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   correos-e. dende os seus servidores. Nese caso, as seguintes funcionalidades do
   SPIP non estarán dispoñibles.',
 'info_hier' => 'onte:',
-'info_historique' => 'Revisións :',
 'info_historique_activer' => 'Activar o seguimento de revisións',
 'info_historique_affiche' => 'Mostrar esta versión',
 'info_historique_comparaison' => 'Comparación',
 'info_historique_desactiver' => 'Desactivar o seguimento de revisións',
-'info_historique_lien' => 'Mostrar o histórico de modificacións',
 'info_historique_texte' => 'O seguimento de revisións permite conservar un histórico de todas as modificacións realizadas no contido dun artigo, e de mostrar as diferenzas entre as versións sucesivas.',
-'info_historique_titre' => 'Seguimento de revisións',
 'info_identification_publique' => 'A súa identidade pública...',
 'info_image_process' => 'Probe a seleccionar o mellor método de fabricación de viñetas premendo sobre a imaxe correspondente.',
 'info_image_process2' => '<b>N.B.</b> <i>Se non aparece ningunha imaxe, significa que o servidor que aloxa o web non foi configurado para para usar tales utilidades. Se desexa empregar estas funcións, contacte co responsable técnico e solicítelle as extensións «GD» ou «Imagick».</i>',
@@ -1111,9 +1102,7 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'utf8_convertir_votre_site' => 'Converter o seu web a utf-8',
 
 // V
-'version' => 'Versión :',
-'version_deplace_rubrique' => 'Movido de <b>« @from@ »</b> a <b>« @to@ »</b>.',
-'version_initiale' => 'Versión inicial'
+'version' => 'Versión :'
 );
 
 ?>

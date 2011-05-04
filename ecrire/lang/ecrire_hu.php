@@ -121,12 +121,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 
 // D
 'date_mot_heures' => 'órák',
-'diff_para_ajoute' => 'Paragráfus beszúrva',
-'diff_para_deplace' => 'Paragráfus áthelyezve',
-'diff_para_supprime' => 'Paragráfus törölve',
-'diff_texte_ajoute' => 'Szöveg beszúrva',
-'diff_texte_deplace' => 'Szöveg áthelyezve',
-'diff_texte_supprime' => 'Szöveg törölve',
 
 // E
 'email' => 'email',
@@ -368,14 +362,11 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'Bizonyos szolgáltatók nem aktiválják az automatikus email küldést a szerverükről. Ilyen esetben, a következő SPIP funkciók nem fognak működni.',
 'info_hier' => 'Tegnap :',
-'info_historique' => 'Felülvizsgálatok :',
 'info_historique_activer' => 'A felülvizsgálatok megfigyelésének aktiválása',
 'info_historique_affiche' => 'A verzió megjelenítése',
 'info_historique_comparaison' => 'Összehasonlítás',
 'info_historique_desactiver' => 'A felülvizsgalatok megfigyelésének inaktiválása',
-'info_historique_lien' => 'A módosítások előzményei megjelenítése',
 'info_historique_texte' => 'A felülvizsgalatok megfigyelése egy cikk tartalmához nyújtott összes módosításokről tárolja az előzményeket, és megjeleníti az egymást követő változatok eltéréseket.',
-'info_historique_titre' => 'Felülvizsgálatok megfigyelése',
 'info_identification_publique' => 'Az Ön nyilvános azonosítása...',
 'info_image_process' => 'Válasszon a bélyegképek legjobb készítesi modszerét azzal, hogy kattintson a megfelelő képre.',
 'info_image_process2' => '<b>Megjegyzés</b> <i>Ha egyetlen kép sem jelenik meg, akkor ez azt jelenti, hogy a honlapját tároló szervert nem konfigurálták olyan eszkőzök használására. Ha mégis akarja használni ezeket a funkciókat, keresse a rendszergazdát, és a «GD» vagy «Imagick» kiegészítéseket kérje.</i>',
@@ -1081,9 +1072,7 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'utf8_convertir_votre_site' => 'utf-8 karaktertáblába konvertálodjon a honlapja',
 
 // V
-'version' => 'Verzió :',
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Eredeti verzió'
+'version' => 'Verzió :'
 );
 
 ?>

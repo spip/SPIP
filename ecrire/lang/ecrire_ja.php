@@ -121,12 +121,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 
 // D
 'date_mot_heures' => '時',
-'diff_para_ajoute' => '短い記事を追加した',
-'diff_para_deplace' => '短い記事を変更した',
-'diff_para_supprime' => '短い記事を削除した',
-'diff_texte_ajoute' => 'テキストを追加した',
-'diff_texte_deplace' => 'テキストを変更した',
-'diff_texte_supprime' => '文章を削除した',
 
 // E
 'email' => 'メール',
@@ -368,14 +362,11 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => '若干のホストでは、それらサーバー上から自動的にメールを送ることが出来ません。そういう場合、SPIPの次の機能は実施できません。',
 'info_hier' => '昨日：',
-'info_historique' => 'リビジョン（修正）:',
 'info_historique_activer' => 'リビジョン（修正点）の表示を有効にする',
 'info_historique_affiche' => 'このバージョンを表示',
 'info_historique_comparaison' => '比較',
 'info_historique_desactiver' => 'リビジョン（改訂）の表示を無効化する',
-'info_historique_lien' => '変更のリストを表示',
 'info_historique_texte' => '改訂（リビジョン）の追跡で、あなたが記事のすべての変更を記録・追跡することが可能になります。前後バージョンとの記事の変更点を表示することができます。',
-'info_historique_titre' => '改訂（リビジョン）の追跡',
 'info_identification_publique' => 'あなたの公開ID...',
 'info_image_process' => 'ミニチュアを作る最も良い方法を、対応する写真の上を、クリックして選んでください。',
 'info_image_process2' => '<b>付記</b> <i>もし画像を見ることが出来なかったら、あなたのサーバーではソフトが使えるように設定してありません。もしあなたがそれらの機能を使いたいなら、プロバイダの技術サポートに«GD»か«Imagick»拡張をインストールしてもらって下さい。</i>',
@@ -1037,9 +1028,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'utf8_convertir_votre_site' => 'あなたのサイトをutf-8に変換します。',
 
 // V
-'version' => 'バージョン:',
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => '最初のバージョン'
+'version' => 'バージョン:'
 );
 
 ?>

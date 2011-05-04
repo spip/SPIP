@@ -123,12 +123,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'ore',
-'diff_para_ajoute' => 'paragrafu aghjuntu',
-'diff_para_deplace' => 'Paragrafu spiazzatu',
-'diff_para_supprime' => 'Paragrafu sguassatu',
-'diff_texte_ajoute' => 'Testu aghjuntu',
-'diff_texte_deplace' => 'Testu spiazzatu',
-'diff_texte_supprime' => 'Testu sguassatu',
 
 // E
 'email' => 'email',
@@ -393,15 +387,12 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_hebergeur_desactiver_envoi_email' => 'Certi òspiti disattiveghjanu l\'inviu autumàticu d\'email
 	da i so servori. In stu casu, e seguenti funziunalità di SPIP ùn viaghjeranu più.',
 'info_hier' => 'eri :',
-'info_historique' => 'Revisioni :',
 'info_historique_activer' => 'Attivà a guardia di e revisioni',
 'info_historique_affiche' => 'Vede sta versione',
 'info_historique_comparaison' => 'paragonu',
 'info_historique_desactiver' => 'Disattivà a guardia di e revisioni',
-'info_historique_lien' => 'Vede a storia di e mudìfiche',
 'info_historique_texte' => 'A gestione di e revisioni permette di tene una vistica di tutte e mudìfiche fatte à un artìculu, mustrendu ne e sferenze frà 
 		e diverse versioni.',
-'info_historique_titre' => 'Veghja di e revisioni',
 'info_identification_publique' => 'A vostra identità pùbblica...',
 'info_image_process' => 'Sceglite puru u mètudu preferitu per a creazione di e figurette clicchendu nant\'à l\'imàgine currispundente.',
 'info_image_process2' => '<b>N.B.</b> <i>S\'ella ùn vene nisun\'imàgine, vole dì chì a cunfigurazione di u vostru servore ùn permette l\'usu di tale 
@@ -1123,9 +1114,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'utf8_convertir_votre_site' => 'Cunvertisce u situ in UTF-8',
 
 // V
-'version' => 'Versione :',
-'version_deplace_rubrique' => 'Spiazzatu da <b>« @from@ »</b> à <b>« @to@ »</b>.',
-'version_initiale' => 'Versione iniziale'
+'version' => 'Versione :'
 );
 
 ?>

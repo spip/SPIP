@@ -121,12 +121,6 @@ französischen SPIP-Dokumentation</a>.',
 
 // D
 'date_mot_heures' => 'Stunden',
-'diff_para_ajoute' => 'Neuer Absatz',
-'diff_para_deplace' => 'Absatz verschoben',
-'diff_para_supprime' => 'Absatz gelöscht',
-'diff_texte_ajoute' => 'Neuer Text',
-'diff_texte_deplace' => 'Text verschoben',
-'diff_texte_supprime' => 'Text gelöscht',
 
 // E
 'email' => 'E-Mail',
@@ -364,14 +358,11 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_gerer_trad_objets' => '@objets@: Übersetzungslinks verwalten',
 'info_hebergeur_desactiver_envoi_email' => 'Manche ISPs verhindern den Versand von Mails mit PHP. Die Mailfunktionen von SPIP funktionieren dann nicht.',
 'info_hier' => 'Gestern:',
-'info_historique' => 'Versionen:',
 'info_historique_activer' => 'Versionskontrolle aktivieren',
 'info_historique_affiche' => 'Version anzeigen',
 'info_historique_comparaison' => 'Vergleich',
 'info_historique_desactiver' => 'Versionskontrolle abschalten',
-'info_historique_lien' => 'Versionen anzeigen',
 'info_historique_texte' => 'Die Versionskontrolle ermöglicht es, alle Änderungen an einem Artikel aufzuzeichnen und die Unterschiede zwischen aufeinander folgenden Versionen anzuzeigen.',
-'info_historique_titre' => 'Versionskontrolle',
 'info_identification_publique' => 'Ihre öffentliche Identität ...',
 'info_image_process' => 'Bitte wählen Sie das beste Verfahren zum Generieren der Miniaturbilder, indem Sie auf ein Bild klicken.',
 'info_image_process2' => '<b>Bemerkung:</b> <i>Wenn kein Bild angezeigt wird, ist der Server ihrer Website nicht für die Verwendung solcher Werkzeuge eingerichtet. Wenn Sie diese Funktionen nutzen möchten, wenden Sie sich bitte an den verantwortlichen Techniker und bitten ihn, die Erweiterungen «GD» oder «Imagick» einzurichten.</i>',
@@ -1037,9 +1028,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'utf8_convertir_votre_site' => 'Website nach utf-8 konvertieren',
 
 // V
-'version' => 'Version:',
-'version_deplace_rubrique' => 'Verschoben von <b>« @from@ »</b> nach <b>« @to@ »</b>.',
-'version_initiale' => 'Ursprüngliche Fassung'
+'version' => 'Version:'
 );
 
 ?>

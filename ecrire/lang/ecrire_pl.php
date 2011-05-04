@@ -122,12 +122,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'godz.',
-'diff_para_ajoute' => 'Dodany akapit',
-'diff_para_deplace' => 'Akapit przeniesiony',
-'diff_para_supprime' => 'Akapit usunięty',
-'diff_texte_ajoute' => 'Dodany tekst',
-'diff_texte_deplace' => 'Przeniesiony tekst',
-'diff_texte_supprime' => 'Usunięty tekst',
 
 // E
 'email' => 'e-mail',
@@ -378,14 +372,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   emaili za pośrednictwem ich serwerów. W tym przypadku te funkcje
   SPIP nie będą działały.',
 'info_hier' => 'wczoraj:',
-'info_historique' => 'Poprawki :',
 'info_historique_activer' => 'Włączyć zarządzanie poprawkami',
 'info_historique_affiche' => 'Wyświetl tę wersję',
 'info_historique_comparaison' => 'porównanie',
 'info_historique_desactiver' => 'Wyłączyć zarządzanie poprawkami',
-'info_historique_lien' => 'Wyświetl historię zmian',
 'info_historique_texte' => 'Zarządzanie poprawkami artykułu pozwala zachować historię wszystkich zmian dokonanych w treści artykułu i wyświetlić różnice pomiędzy kolejnymi wersjami.',
-'info_historique_titre' => 'Zarządzanie poprawkami',
 'info_identification_publique' => 'Twoja nazwa publiczna',
 'info_image_process' => 'Wybierz najlepsza metode przygotowania miniaturek kilkając na odpowiednim obrazku.',
 'info_image_process2' => '<b>N.B.</b> <i>Jeśli nie wyświetlił się żaden obrazek, Twój serwer nie został skonfugurowany tak, aby skorzystać z tego narzędzia. Jeśli jednak chcesz skorzystać z tych funkcji, skontaktuj się z osobą odpowiedzialną za sprawy techniczne Twojego serwisu i poproś o włączenie rozszerzeń "GD" lub "Imagick".</i>',
@@ -1111,9 +1102,7 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'utf8_convertir_votre_site' => 'Konwertuj stronę na utf-8.',
 
 // V
-'version' => 'Wersja :',
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Wersja początkowa'
+'version' => 'Wersja :'
 );
 
 ?>

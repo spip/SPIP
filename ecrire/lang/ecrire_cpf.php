@@ -146,12 +146,6 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 
 // D
 'date_mot_heures' => 'èr',
-'diff_para_ajoute' => 'Paragraf azouté',
-'diff_para_deplace' => 'Paragraf la bouzé',
-'diff_para_supprime' => 'Paragraf rotiré',
-'diff_texte_ajoute' => 'Tèks azouté',
-'diff_texte_deplace' => 'Tèks la bouzé',
-'diff_texte_supprime' => 'Tèks rotiré',
 
 // E
 'email' => 'ladrès imèl',
@@ -398,14 +392,11 @@ néséser pou sanz inn sizé sir lo sit.', # MODIF
 zot bann servèr. Dann ka-la, bann  fonksyonalité
 SPIP anba-la, i sava pa marsé.',
 'info_hier' => 'Yèr :',
-'info_historique' => 'Sak la sanzé :',
 'info_historique_activer' => 'Po fé roulé lo swivi tout sat la sanzé',
 'info_historique_affiche' => 'Afisé versyon-la',
 'info_historique_comparaison' => 'Kompar',
 'info_historique_desactiver' => 'Dégrèn lo swivi tout sak la sanzé',
-'info_historique_lien' => 'Afisé listwar sat la sanzé',
 'info_historique_texte' => 'Lo swivi sat la sanzé i pèrmé gard listwar out bann sanzman andann zartik, è afisé bann diférans sanm tout bann versyon.',
-'info_historique_titre' => 'Lo swivi sak la sanzé',
 'info_identification_publique' => 'Out lidantité piblik...',
 'info_image_process' => 'Mersi swazi lo méyèr manyir pou fabrik out bann vinyèt sam apiyé si limaz i korespon.',
 'info_image_process2' => '<b>Pangar</b> <i>Si néna okinn zimaz sat i pé vwar an liny, i pé dir lo sèrvèr li ébèrz out sitwèb lé pa kofigiré po akèy bann zouti-la. Ifo zot i koz èk lo résponsab po domann ali tout bann zekstansyon «GD» ou «Imagick».</i>',
@@ -1102,9 +1093,7 @@ sak i pé rand out sit inn pé pli lan.',
 'utf8_convertir_votre_site' => 'Po chanjer out sit ek utf-8',
 
 // V
-'version' => 'Vesyon :',
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Promyé vèrsyon'
+'version' => 'Vesyon :'
 );
 
 ?>

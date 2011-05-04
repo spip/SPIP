@@ -121,12 +121,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'uur',
-'diff_para_ajoute' => 'Toegevoegde paragraaf',
-'diff_para_deplace' => 'Verplaatste paragraaf',
-'diff_para_supprime' => 'Verwijderde paragraaf',
-'diff_texte_ajoute' => 'Toegevoegde tekst',
-'diff_texte_deplace' => 'Verplaatste tekst',
-'diff_texte_supprime' => 'Verwijderde tekst',
 
 // E
 'email' => 'e-mail',
@@ -375,14 +369,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'Sommige hostingbedrijven staan het automatisch versturen van e-mails door hun servers niet toe. In dat geval zullen de volgende functionaliteiten van SPIP niet werken.',
 'info_hier' => 'gisteren:',
-'info_historique' => 'Revisies :',
 'info_historique_activer' => 'Activeren van het opvolgen van de revisies',
 'info_historique_affiche' => 'Deze versie weergeven',
 'info_historique_comparaison' => 'vergelijking',
 'info_historique_desactiver' => 'Het opvolgen van de revisies desactiveren',
-'info_historique_lien' => 'De geschiedenis van de wijzigingen weergeven',
 'info_historique_texte' => 'Met de opvolging van de revisies is het mogelijk de geschiedenis van alle wijzigingen aan een artikel bij te houden, en de verschillende tussen opeenvolgende versies weer te geven.',
-'info_historique_titre' => 'Opvolging van de revisies',
 'info_identification_publique' => 'Je publieke identiteit...',
 'info_image_process' => 'Kies de beste methode om een miniatuurafbeelding te maken door op de bijhorende afbeelding te klikken.',
 'info_image_process2' => '<b>N.B.</b> <i>Wanneer geen enkel beeld wordt getoond, betekent dit dat de server van je website niet is ingesteld om deze tools te gebruiken. Als je van deze functies gebruik wil maken, dien je de technische verantwoordelijke van de server te contacteren en te vragen naar «GD» of «Imagick» extensies.</i>',
@@ -1117,9 +1108,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'utf8_convertir_votre_site' => 'Je site omzetten naar utf-8',
 
 // V
-'version' => 'Versie :',
-'version_deplace_rubrique' => 'Verplaatsen van <b>« @from@ »</b> naar <b>« @to@ »</b>.',
-'version_initiale' => 'Beginversie'
+'version' => 'Versie :'
 );
 
 ?>

@@ -119,12 +119,6 @@ Ez balidatu inportazio galdera hau.
 
 // D
 'date_mot_heures' => 'orduak',
-'diff_para_ajoute' => 'Paragrafo bat erantsi egin da',
-'diff_para_deplace' => 'Paragrafo murgildua',
-'diff_para_supprime' => 'Paragrafo ezabatua',
-'diff_texte_ajoute' => 'Testua erantsita',
-'diff_texte_deplace' => 'Mugitua izan den textua',
-'diff_texte_supprime' => 'Testuaezabatua',
 
 // E
 'email' => 'posta elektronikoa',
@@ -364,14 +358,11 @@ Ikonoaren koloreak autore bakoitzaren egoera adierazten du (idazlaria = berdea; 
 'info_hebergeur_desactiver_envoi_email' => 'Ostapen zuzkitzaile batzuek mail-bidalketa automatikoa desaktibatzen dute bere zerbitzarietatik.
 Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_hier' => 'atzo:',
-'info_historique' => 'Berrikuspenak :',
 'info_historique_activer' => 'Berrikuspenen jarraipena aktibatu',
 'info_historique_affiche' => 'Bertsio hau bistaratu',
 'info_historique_comparaison' => 'konparazioa',
 'info_historique_desactiver' => 'Berrikuspenen jarraipena desaktibatu',
-'info_historique_lien' => 'Aldaketen zerrenda erakutsi',
 'info_historique_texte' => 'Berrikuspenen jarraipenak artikulu baten edukiari egindako aldaketa guztien historia gordetzen eta geroko bertsioen arteko desberdintasunak bistaratzen uzten du.',
-'info_historique_titre' => 'Berrikuspenen jarraipena',
 'info_identification_publique' => 'Zurenortasun publikoa...',
 'info_image_process' => 'Mesedez aukeratu biñetak egitekomodurik onena dagokion irudian klikatuz.',
 'info_image_process2' => '<b>N.B.</b> Ez bada irudirik agertzen, orduan zure gunea ostatatzen duen zerbitzaria ez dago konfiguratuta tresna horiek erabiltzeko. Funtzio horiek erabili nahi badituzu, arduradun teknikoarekin kontaktatu eta «GD» edo «Imagick» luzapenak eskatu.',
@@ -1038,9 +1029,7 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'utf8_convertir_votre_site' => 'Zure gunean utf-8-era konbertitu',
 
 // V
-'version' => 'Bertsioa :',
-'version_deplace_rubrique' => '<b>« @from@ »</b>-etik <b>« @to@ »</b>-era mugitua.',
-'version_initiale' => 'Hasierako bertsioioa'
+'version' => 'Bertsioa :'
 );
 
 ?>

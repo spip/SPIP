@@ -117,12 +117,6 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 
 // D
 'date_mot_heures' => 'h',
-'diff_para_ajoute' => 'Kapitel derbäi setzen',
-'diff_para_deplace' => 'Kapitel geréckelt',
-'diff_para_supprime' => 'Kapitel geläscht',
-'diff_texte_ajoute' => 'Text derbäi setzen',
-'diff_texte_deplace' => 'Text geréckelt',
-'diff_texte_supprime' => 'Text geläscht',
 
 // E
 'email' => 'Email',
@@ -361,14 +355,11 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gréng; Redakter =
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'Verschidden Provider\'en erlaaben nët automatësch Email\'en ze schécken. An deem Fall fonktionnéiert dat hei nët.',
 'info_hier' => 'gëschter:',
-'info_historique' => 'Versiounen:',
 'info_historique_activer' => 'Versioning aschalten',
 'info_historique_affiche' => 'Nei Versioun weisen',
 'info_historique_comparaison' => 'Verglach',
 'info_historique_desactiver' => 'Versioning ausschalten',
-'info_historique_lien' => 'Historique vun den Ännerungen weisen',
 'info_historique_texte' => 'De Versioning erlaabt den Historique vun allen Ännerungen vun engem Artikel an d\'Uweisen vun den Ënnerscheeder tëschent de Versiounen.',
-'info_historique_titre' => 'Versioning',
 'info_identification_publique' => 'Är öffentlëch Identitéit...',
 'info_image_process' => 'Wielt déi bescht Method fir Vignetten ze maachen an deem dier op d\'Bild klickt.',
 'info_image_process2' => '<b>N.B.</b> <i>Wan dier kee Bild gesidd, dann ass de Server nët fir dës Fonktionnalitéit konfiguréiert. Wann dir se wëllt benotzen, kontaktéiert een Techniker a froot fir d\'Extensiounen "GD" oder "Imagick".</i>',
@@ -1024,9 +1015,7 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'utf8_convertir_votre_site' => 'Ären Site ob UTF-8 konvertéieren',
 
 // V
-'version' => 'Versioun:',
-'version_deplace_rubrique' => 'Verschoben vun <b>"@from@"</b> op <b>"@to@"</b>.',
-'version_initiale' => 'Original-Versioun'
+'version' => 'Versioun:'
 );
 
 ?>

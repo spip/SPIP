@@ -122,12 +122,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'ч.',
-'diff_para_ajoute' => 'Добавен абзац',
-'diff_para_deplace' => 'Преместен абзац',
-'diff_para_supprime' => 'Изтрит абзац',
-'diff_texte_ajoute' => 'Добавен текст',
-'diff_texte_deplace' => 'Преместен текст',
-'diff_texte_supprime' => 'Изтрит текст',
 
 // E
 'email' => 'електронен адрес',
@@ -380,14 +374,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   от техните сървъри. В този случай, следните свойства
   на СПИП не работят:',
 'info_hier' => 'вчера:',
-'info_historique' => 'Корекции:',
 'info_historique_activer' => 'Активиране проследяването на преработките',
 'info_historique_affiche' => 'Показване на версията',
 'info_historique_comparaison' => 'сравнение',
 'info_historique_desactiver' => 'Дезактивиране проследяването на преработките',
-'info_historique_lien' => 'Показване на списък с версии',
 'info_historique_texte' => 'Проследяването на корекциите позволява да се прави справка на всички промени, направени на статията и да показва различията между последващите версии.',
-'info_historique_titre' => 'Проследяване на корекциите (поправките)',
 'info_identification_publique' => 'Публична самоличност...',
 'info_image_process' => 'Изберете най-удобният начин да създавате миниатюри, чрез натискане въру съответната картинка.',
 'info_image_process2' => '<b>N.B.</b> <i>Ако не можете да видите никакво изображение, следователно сървърът Ви не е конфигуриран да използва такива инструменти. Ако искате да ползвате това свойство, трябва да се свържете с доставчика си и да поискате да ви инсталират разширения от типа "GD" или "Imagick"</i>',
@@ -1120,9 +1111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'utf8_convertir_votre_site' => 'Превключете сайта си на utf-8',
 
 // V
-'version' => 'Версия:',
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Първоначална версия'
+'version' => 'Версия:'
 );
 
 ?>

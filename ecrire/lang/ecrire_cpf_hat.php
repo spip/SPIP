@@ -121,12 +121,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'èr yo',
-'diff_para_ajoute' => 'Pawagwaf ki ajoute',
-'diff_para_deplace' => 'Pawagwaf ki deplase ',
-'diff_para_supprime' => 'Pawagwaf ki kraze',
-'diff_texte_ajoute' => 'Tèks se ajoute',
-'diff_texte_deplace' => 'Tèks se deplase',
-'diff_texte_supprime' => 'Tèks se kraze',
 
 // E
 'email' => 'limèl',
@@ -377,14 +371,11 @@ Koulè imaj rannkont stati yo (komandè = vèr; redaktè = jon).',
   sou sèvè yo-a. Alò, tout fonksyonalité swivan ke pa mache.
 ',
 'info_hier' => 'yèr :',
-'info_historique' => 'Kisa te chanje :',
 'info_historique_activer' => 'Fè mache posibilité gad kisa te chanje',
 'info_historique_affiche' => 'Fè parèt vèsyon la',
 'info_historique_comparaison' => 'konparezon',
 'info_historique_desactiver' => 'Kraze swivi kisa te chanje',
-'info_historique_lien' => 'Fè parèt lis listwa kisa te chanje',
 'info_historique_texte' => 'Swivi tout chanjman ran w kapab sere yon istorik pou tout bagay ki ap chanje nan kontni yon atik. Li afich kisa ki chanje ant kèk vèsyon sa-yo.',
-'info_historique_titre' => 'Swivi kisa te chanje',
 'info_identification_publique' => 'Ou lidantité piblik...',
 'info_image_process' => 'Tanpri chwazi mèyè métod pou lakreyasyon viyèt yo. Pou sa-a mèsi klike sou imaj la ki koresponn.',
 'info_image_process2' => '<b>N.B.</b> <i>Si oken imaj ki parèt, pètèt se sèvè ki ebèj sit ou ki pa konfigire pou itilize outiy sa-yo. Fòk w kontak responsab teknik sèvè an pou domann tout ektansyon «GD» ou «Imagick» sa-yo.</i>',
@@ -1122,9 +1113,7 @@ ou nan dékripsyon atik sa-yo
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8', # NEW
 
 // V
-'version' => 'Version :', # NEW
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Premye versyon'
+'version' => 'Version :' # NEW
 );
 
 ?>

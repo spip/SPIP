@@ -123,12 +123,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'horas',
-'diff_para_ajoute' => 'Parágrafo acrescentado',
-'diff_para_deplace' => 'Parágrafo alterado',
-'diff_para_supprime' => 'Parágrafo suprimido',
-'diff_texte_ajoute' => 'Texto acrescentado',
-'diff_texte_deplace' => 'Texto alterado',
-'diff_texte_supprime' => 'Texto suprimido',
 
 // E
 'email' => 'email',
@@ -379,14 +373,11 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
  mails a partir dos seus  servidores. Nesse caso, as seguintes
  funcionalidades de SPIP não funcionarão.',
 'info_hier' => 'ontem :',
-'info_historique' => 'Revisões :',
 'info_historique_activer' => 'Activar o acompanhamento das revisões',
 'info_historique_affiche' => 'Visualizar esta versão',
 'info_historique_comparaison' => 'comparação',
 'info_historique_desactiver' => 'Desactivar o acompanhamento das revisões',
-'info_historique_lien' => 'Visualizar o histórico de alterações',
 'info_historique_texte' => 'O acompanhamento das revisões permite conservar um histórico de todas as  alterações realizadas ao conteúdo dum artigo, e visualizar as diferenças entre as sucessivas versões',
-'info_historique_titre' => 'Acompanhamento das revisões',
 'info_identification_publique' => 'A sua identidade pública...',
 'info_image_process' => 'Seleccione o melhor método de criar as vinhetas clicando sobre a imagem correspondente.',
 'info_image_process2' => '<b>N.B.</b> <i> Se nenhuma imagem aparece, então o servidor que alberga o seu sítio não foi configurado para utilizar tais ferramentas. Se deseja utilizar essas funções, contacte o responsavel técnico e peça as extensões  «GD» ou «Imagick».</i>',
@@ -1127,9 +1118,7 @@ ao SPIP pesquisar igualmente no texto dos
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8', # NEW
 
 // V
-'version' => 'Version :', # NEW
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'versão inicial'
+'version' => 'Version :' # NEW
 );
 
 ?>

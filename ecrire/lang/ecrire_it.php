@@ -121,12 +121,6 @@ disattivata per motivi sicurezza (verifica con l\'amministratore di sistema).',
 
 // D
 'date_mot_heures' => 'ore',
-'diff_para_ajoute' => 'paragrafo aggiunto',
-'diff_para_deplace' => 'Paragrafo spostato',
-'diff_para_supprime' => 'Paragrafo cancellato',
-'diff_texte_ajoute' => 'Testo aggiunto',
-'diff_texte_deplace' => 'Testo spostato',
-'diff_texte_supprime' => 'Testo cancellato',
 
 // E
 'email' => 'email',
@@ -377,14 +371,11 @@ pubblico del sito (forum su abbonamento).',
 'info_hebergeur_desactiver_envoi_email' => 'Alcuni hoster disattivano  l\'invio automatico di email
 dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate non funzioneranno.',
 'info_hier' => 'ieri:',
-'info_historique' => 'Revisioni:',
 'info_historique_activer' => 'Attivare la gestione delle revisioni',
 'info_historique_affiche' => 'Visualizzare questa versione',
 'info_historique_comparaison' => 'confronto',
 'info_historique_desactiver' => 'Disattivare la gestione delle revisioni',
-'info_historique_lien' => 'Mostra la cronologia delle modifiche',
 'info_historique_texte' => 'La gestione delle revisioni permette di conservare traccia di tutte le modifiche effettuate su un articolo, mostrando le differenze fra le sue versioni successive.',
-'info_historique_titre' => 'Gestione delle revisioni',
 'info_identification_publique' => 'La tua identità pubblica...',
 'info_image_process' => 'Seleziona il metodo migliore per la creazione delle anteprime cliccando sull\'immagine corrispondente.',
 'info_image_process2' => '<b>N.B.</b> <i>Se non appare alcuna immagine, ciò significa che la configurazione del server non permette l\'uso di alcune funzioni grafiche. Se si desidera utilizzarle, rivolgersi al responsabile tecnico chiedendo di installare le estensioni "GD" o "Imagick".</i>',
@@ -1102,9 +1093,7 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'utf8_convertir_votre_site' => 'Convertire il sito in UTF-8',
 
 // V
-'version' => 'Versione:',
-'version_deplace_rubrique' => 'Spostato da <b>« @from@ »</b> a <b>« @to@ »</b>.',
-'version_initiale' => 'Versione iniziale'
+'version' => 'Versione:'
 );
 
 ?>
