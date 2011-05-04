@@ -265,7 +265,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrateurs' => 'Apnaqirinaka',
 'info_administrer_rubrique' => 'Aka t\'aqxa apnaqasmawa',
 'info_adresse' => 'utjawiru:',
-'info_adresse_email' => 'Aka aruskipayirit utjawi:',
 'info_adresse_url' => 'Utjawi (URL) jach\'a qamaw utata',
 'info_afficher_visites' => 'Tumpirinak uñachayaña ukataki:',
 'info_affichier_visites_articles_plus_visites' => 'Tumpirininak uñachayaña &lt;b&gt;qalltatpach qillqatanak juk\'amp tumpata:&lt;/b&gt;',
@@ -556,7 +555,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_site_reference_2' => 'Site référencé', # NEW
 'info_site_syndique' => 'Ce site est syndiqué...', # NEW
 'info_site_valider' => 'Sites à valider', # NEW
-'info_site_web' => 'SITE WEB :', # NEW
 'info_sites' => 'sites', # NEW
 'info_sites_lies_mot' => 'Les sites référencés liés à ce mot-clé', # NEW
 'info_sites_proxy' => 'Utiliser un proxy', # NEW
@@ -587,7 +585,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_texte' => 'Texte', # NEW
 'info_texte_explicatif' => 'Texte explicatif', # NEW
 'info_texte_long' => '(le texte est long : il apparaît donc en plusieurs parties qui seront recollées après validation.)', # NEW
-'info_texte_message' => 'Texte de votre message :', # NEW
 'info_texte_message_02' => 'Texte du message', # NEW
 'info_titre' => 'Titre :', # NEW
 'info_total' => 'total :', # NEW
