@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'ATENCION!',
 'avis_champ_incorrect_type_objet' => 'Nom de camp incorrècte @name@ tà objècte de tipe @type@',
 'avis_colonne_inexistante' => 'La colomna @col@ n\'existeish pas',
-'avis_echec_syndication_01' => 'La sindicacion que s\'i ei mauescaduda: lo backend indicat qu\'ei indeschifrable o non perpausa pas nat article.',
-'avis_echec_syndication_02' => 'La sindicacion que s\'i ei mauescaduda: impossible d\'accedir au backend d\'aqueth sit.',
 'avis_erreur' => 'Error: vejatz ça devath',
 'avis_erreur_connexion' => 'Error de connexion',
 'avis_erreur_cookie' => 'problèma de cookie',
@@ -273,7 +271,6 @@ deu sit "@nom_site_spip@" (@adresse_site@):', # MODIF
 'form_prop_indiquer_nom_site' => 'Volhatz indicar lo nom deu sit.',
 'form_prop_indiquer_sujet' => 'Volhatz indicar un subjècte',
 'form_prop_message_envoye' => 'Messatge mandat',
-'form_prop_nom_site' => 'Nom deu sit',
 'form_prop_non_enregistre' => 'La vòsta proposicion n\'ei pas estada registrada.',
 'form_prop_sujet' => 'Subjècte',
 'form_prop_url_site' => 'Adreiça (URL) deu sit',
@@ -331,7 +328,6 @@ deu sit "@nom_site_spip@" (@adresse_site@):', # MODIF
 'img_indisponible' => 'imatge indisponible',
 'impossible' => 'impossible', # NEW
 'info_a_suivre' => 'DE SEGUIR>>',
-'info_a_valider' => '[de validar]',
 'info_acces_interdit' => 'Accès proïbit',
 'info_acces_refuse' => 'Accès arrefusat',
 'info_action' => 'Accion: @action@',
@@ -353,7 +349,6 @@ deu sit "@nom_site_spip@" (@adresse_site@):', # MODIF
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'autor(s)',
 'info_authentification_ftp' => 'autentificacion (per FTP).',
-'info_bloquer_lien' => 'Blocar aqueth ligam',
 'info_breves_2' => 'brèvas',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -432,7 +427,6 @@ deu sit "@nom_site_spip@" (@adresse_site@):', # MODIF
 'info_nouveaux_messages' => 'QU\'AVETZ @total_messages@ MESSATGES NAUS',
 'info_numero_abbreviation' => 'N° ',
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => 'Sit sindicat en pana',
 'info_pense_bete' => 'MEMENTO',
 'info_petit_ecran' => 'Ecran petit ',
 'info_petition_close' => 'Pétition close', # NEW
@@ -442,7 +436,6 @@ deu sit "@nom_site_spip@" (@adresse_site@):', # MODIF
 'info_portfolio_automatique' => 'Pòrtfòlio automatic:',
 'info_premier_resultat' => '[@debut_limit@ permèrs resultats de @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ permèrs resultats de @total@]',
-'info_probleme_grave' => 'problèma de',
 'info_propose_1' => '[@nom_site_spip@] Que perpausa: @titre@',
 'info_propose_2' => 'Article perpausat
 ---------------',
@@ -455,24 +448,17 @@ deu sit "@nom_site_spip@" (@adresse_site@):', # MODIF
 'info_rechercher' => 'Cercar',
 'info_rechercher_02' => 'Cercar:',
 'info_remplacer_vignette' => 'Remplaçar la vinheta predefinida per un lògo personalizat:',
-'info_retablir_lien' => 'Restablir aqueth ligam',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'shens títol',
 'info_selectionner_fichier' => 'Que podetz seleccionar un fichièr deu dorsièr @upload@', # MODIF
 'info_selectionner_fichier_2' => 'Seleccionar un fichièr:',
-'info_site_attente' => 'Sit web en espèra de validacion',
-'info_site_reference' => 'Sit referenciat en linha',
-'info_site_refuse' => 'Sit web arrefusat',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Referenciar un sit',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'suprimir la vinheta',
 'info_symbole_bleu' => 'Lo simbèu <b>blau</b> que marca un <b>memento</b>: qu\'ei a díser un messatge tau vòste usatge personau.', # MODIF
 'info_symbole_jaune' => 'Lo simbèu <b>jaune</b> que marca un <b>anonci tà tots los redactors </b>: los administrators que\'u pòden modificar, cada redactor que\'u pòt véder.', # MODIF
 'info_symbole_vert' => 'Lo simbèu <b>verd</b> que marca los <b>messatges escambiats dab autes utilizaires</b> deu sit.', # MODIF
-'info_syndication' => 'sindicacion:',
-'info_syndication_articles' => 'article(s)',
 'info_telecharger_nouveau_logo' => 'Telecargar un lògo nau:',
 'info_telecharger_ordinateur' => 'Telecargar a partir deu vòste ordenader:',
 'info_tous_resultats_enregistres' => '[tots los resultats que son registrats]',

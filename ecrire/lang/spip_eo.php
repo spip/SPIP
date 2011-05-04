@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'ATENTU !',
 'avis_champ_incorrect_type_objet' => 'Erara tajpuja nomo @name@ por la objekto de tipo @type@',
 'avis_colonne_inexistante' => 'La kolumno @col@ ne ekzistas',
-'avis_echec_syndication_01' => 'Abonligo malsukcesis: la indikata abondosiero (backend-dosiero) ne estas deĉifrebla aŭ proponas neniun artikolon.',
-'avis_echec_syndication_02' => 'Abonligo malsukcesis: ne eblas aliri abondosieron (backend-dosiero) de tiu retejo.',
 'avis_erreur' => 'Eraro: vidu ĉi-sube',
 'avis_erreur_connexion' => 'Konekt-eraro',
 'avis_erreur_cookie' => 'kuketo-problemo',
@@ -272,7 +270,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'Bonvolu indiki la nomon de la retejo.',
 'form_prop_indiquer_sujet' => 'Bonvolu indiki temon',
 'form_prop_message_envoye' => 'Mesaĝo sendita',
-'form_prop_nom_site' => 'Nomo de la retejo',
 'form_prop_non_enregistre' => 'Via propono ne estis registrita.',
 'form_prop_sujet' => 'Temo',
 'form_prop_url_site' => 'Adreso (URL) de la retejo',
@@ -330,7 +327,6 @@ sera ignorée) :
 'img_indisponible' => 'nedisponebla bildo',
 'impossible' => 'ne eblas',
 'info_a_suivre' => 'STABEJO »',
-'info_a_valider' => '[validigenda]',
 'info_acces_interdit' => 'Malpermesata aliro',
 'info_acces_refuse' => 'Rifuzita aliro',
 'info_action' => 'Ago : @action@',
@@ -352,7 +348,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'aŭtoro(j) :',
 'info_authentification_ftp' => 'Aŭtentigo (per FTP).',
-'info_bloquer_lien' => 'bloki tiun ligilon',
 'info_breves_2' => 'fulm-informoj',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -431,7 +426,6 @@ sera ignorée) :
 'info_nouveaux_messages' => 'VI HAVAS @total_messages@ NOVA(J)N MESAĜO(J)N',
 'info_numero_abbreviation' => 'N° ',
 'info_obligatoire' => 'Tiu ĉi informo estas deviga',
-'info_panne_site_syndique' => 'Abonligita retejo paneas',
 'info_pense_bete' => 'MEMORIGILO',
 'info_petit_ecran' => 'Eta ekrano',
 'info_petition_close' => 'Petskribo fermita',
@@ -441,7 +435,6 @@ sera ignorée) :
 'info_portfolio_automatique' => 'Aŭtomata bildaro :',
 'info_premier_resultat' => '[@debut_limit@ unuaj rezultoj el @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ unuaj rezultoj el @total@]',
-'info_probleme_grave' => 'problemo de',
 'info_propose_1' => '[@nom_site_spip@] Proponas: @titre@',
 'info_propose_2' => 'Proponita artikolo
 ---------------',
@@ -455,24 +448,17 @@ sera ignorée) :
 'info_rechercher' => 'Serĉi',
 'info_rechercher_02' => 'Serĉi :',
 'info_remplacer_vignette' => 'Anstataŭi la defaŭltan vinjeton per propra vinjeto :',
-'info_retablir_lien' => 'Restaŭri tiun ligilon',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'sen titolo',
 'info_selectionner_fichier' => 'Vi povas selekti dosieron el la dosierujo @upload@',
 'info_selectionner_fichier_2' => 'Elektu dosieron :',
-'info_site_attente' => 'Retejo atendanta validigon',
-'info_site_reference' => 'Retejo rete referencigita',
-'info_site_refuse' => 'Rifuzita retejo',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Referencigi retejon',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'forigi la vinjeton',
 'info_symbole_bleu' => 'La <b>blua</b> simbolo indikas <b>memorigilon</b> : tio estas al vi persone adresata memoriga mesaĝo.',
 'info_symbole_jaune' => 'La <b>flava</b> simbolo indikas <b>anoncon al ĉiuj redaktantoj</b> : modifebla de ĉiuj mastrumantoj, kaj videbla de ĉiuj redaktantoj.',
 'info_symbole_vert' => 'La <b>verda</b> simbolo indikas la <b>mesaĝojn interŝanĝitajn kun aliaj uzantoj</b> de la retejo.',
-'info_syndication' => 'abonrilato :',
-'info_syndication_articles' => 'artikolo(j)',
 'info_telecharger_nouveau_logo' => 'Alŝuti novan vinjeton :',
 'info_telecharger_ordinateur' => 'Alŝuti ekde via komputilo :',
 'info_tous_resultats_enregistres' => '[ĉiuj rezultoj estas registritaj]',

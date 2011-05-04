@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => '危ない！',
 'avis_champ_incorrect_type_objet' => 'タイプ @type@ のオブジェクトに対して、フィールド名 @name@ が無効です。',
 'avis_colonne_inexistante' => 'カラム @col@ が存在しません。',
-'avis_echec_syndication_01' => '組織化に失敗しました：　指定されたバックエンドが判読できないか、どの記事も示されていないかのどちらかです。',
-'avis_echec_syndication_02' => '組織化に失敗しました：　このサイトのバックエンドに到達できません。',
 'avis_erreur' => 'エラー: 下記を参照',
 'avis_erreur_connexion' => '接続エラーです。',
 'avis_erreur_cookie' => 'クッキーの問題',
@@ -276,7 +274,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'サイトの名前を入力して下さい。',
 'form_prop_indiquer_sujet' => '題名を入力して下さい',
 'form_prop_message_envoye' => '送られたメッセージ',
-'form_prop_nom_site' => 'サイトの名前',
 'form_prop_non_enregistre' => 'あなたの提案は記録されませんでした。',
 'form_prop_sujet' => '題名',
 'form_prop_url_site' => 'サイトのURL',
@@ -334,7 +331,6 @@ sera ignorée) :
 'img_indisponible' => '利用できないイメージ',
 'impossible' => '不可能',
 'info_a_suivre' => 'PADを起動»',
-'info_a_valider' => '[検査済み]',
 'info_acces_interdit' => 'アクセスが許されなかった',
 'info_acces_refuse' => 'アクセスが拒否された',
 'info_action' => 'アクション: @action@',
@@ -356,7 +352,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => '著者(たち):',
 'info_authentification_ftp' => '認証 (FTPによって)。',
-'info_bloquer_lien' => 'このリンクをブロック',
 'info_breves_2' => 'ニュース',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -435,7 +430,6 @@ sera ignorée) :
 'info_nouveaux_messages' => 'あなたに@total_messages@通のメッセージが来ています',
 'info_numero_abbreviation' => 'No',
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => '故障中のサイトを供給している',
 'info_pense_bete' => 'メモ',
 'info_petit_ecran' => '小さく表示',
 'info_petition_close' => 'Pétition close', # NEW
@@ -445,7 +439,6 @@ sera ignorée) :
 'info_portfolio_automatique' => '自動作成の代表作品集:',
 'info_premier_resultat' => '[@debut_limit@ 初めの結果、トータル @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ 最初の結果、トータル @total@]',
-'info_probleme_grave' => 'エラー',
 'info_propose_1' => '[@nom_site_spip@] 提出されました: @titre@',
 'info_propose_2' => '提出された記事
 -------------',
@@ -459,24 +452,17 @@ sera ignorée) :
 'info_rechercher' => 'サイト内検索',
 'info_rechercher_02' => '検索 :',
 'info_remplacer_vignette' => 'カスタマイズしたロゴによってデフォルトのビネット(半身像、写真)を置き換える:',
-'info_retablir_lien' => 'このリンクを復活',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => '無名',
 'info_selectionner_fichier' => 'あなたは@upload@フォルダのファイルを選択することが出来ます。', # MODIF
 'info_selectionner_fichier_2' => '選択したファイル:',
-'info_site_attente' => 'ウェブサイトの適正検査中',
-'info_site_reference' => 'オンラインでサイトを参照',
-'info_site_refuse' => '拒否されたウェブサイト',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'サイトを参照',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'ビネット(半身像、模様)を削除',
 'info_symbole_bleu' => '<b>青</b>のシンボルは、<b>メモ</b>を表します: すなわちあなたが個人的に使用するメッセージ', # MODIF
 'info_symbole_jaune' => '<b>黄色</b>のシンボルは、<b>すべてのエディターへのアナウンス</b>: それはすべての管理者が編集でき、すべてのエディターに見えます。', # MODIF
 'info_symbole_vert' => '<b>緑</b>のシンボルは、サイトの<b>他のユーザーと交換したメッセージ</b>。', # MODIF
-'info_syndication' => '供給（シンジケーション):',
-'info_syndication_articles' => '記事',
 'info_telecharger_nouveau_logo' => '新しいロゴをアップロード:',
 'info_telecharger_ordinateur' => 'あなたのコンピュータからアップロード:',
 'info_tous_resultats_enregistres' => '[すべての結果は記録されます]',

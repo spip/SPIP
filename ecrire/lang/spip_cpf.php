@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'TANSYON PANGAR !',
 'avis_champ_incorrect_type_objet' => 'Non d\'karo-la lé fo @name@ pou inn sizé lo tip-la minm : @type@',
 'avis_colonne_inexistante' => 'Nana pwinn kolonn-la : @col@ ',
-'avis_echec_syndication_01' => 'Sindikasyon-la la giny pa marsé : lé inposib lir lo "backend" ou la doné, oubyensa li néna pwind zartik propozé.',
-'avis_echec_syndication_02' => 'Sindikasyon-la, la giny pa marsé : larivé dann "backend" sit-la lé inposib.',
 'avis_erreur' => 'Kanard : gèt anba.',
 'avis_erreur_connexion' => 'Astèr néna inn kanard èk lakostaz.
 
@@ -281,7 +279,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'Mersi mèt tèrla lo non lo sitwèb',
 'form_prop_indiquer_sujet' => 'Mersi indik inn sizé',
 'form_prop_message_envoye' => 'Out modékri la finn dèt anvwayé',
-'form_prop_nom_site' => 'Non lo sitwèb',
 'form_prop_non_enregistre' => 'Out kontribusyion lé pa anrozistré',
 'form_prop_sujet' => 'Sizé',
 'form_prop_url_site' => 'Ladrès (URL) lo sitwèb',
@@ -339,7 +336,6 @@ sera ignorée) :
 'img_indisponible' => 'zimaj-la lé pa posib giny ali',
 'impossible' => 'pa posib',
 'info_a_suivre' => 'POU SWIV »',
-'info_a_valider' => '[pou konfirmasyon]',
 'info_acces_interdit' => 'Ou néna pwinn permisyon akost lapazwèb-la.',
 'info_acces_refuse' => 'Lakostaz lapazwèb lé afronté',
 'info_action' => 'Azisman : @action@',
@@ -361,7 +357,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => '(bann) lotèr :',
 'info_authentification_ftp' => 'Lotantificasyon (èk FTP).',
-'info_bloquer_lien' => 'blok lo gatiraz-la',
 'info_breves_2' => 'bann tit-nouvèl',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -440,7 +435,6 @@ sera ignorée) :
 'info_nouveaux_messages' => 'OU NÈNA @total_messages@ BANN MODÉKRI',
 'info_numero_abbreviation' => 'N° ',
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => 'Lo sit sindiké-la lé an pan',
 'info_pense_bete' => 'GARDANTÈT',
 'info_petit_ecran' => 'Tit ékran',
 'info_petition_close' => 'Pétition close', # NEW
@@ -450,7 +444,6 @@ sera ignorée) :
 'info_portfolio_automatique' => 'Livzimaz otomatik :',
 'info_premier_resultat' => '[@debut_limit@ bann promyé rézilta si @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ bann promyé rézilta si @total@]',
-'info_probleme_grave' => 'kanard èk',
 'info_propose_1' => '[@nom_site_spip@] i propoz aou : @titre@',
 'info_propose_2' => 'Lartik-la lé propozé
 ---------------',
@@ -464,24 +457,17 @@ sera ignorée) :
 'info_rechercher' => 'Rod',
 'info_rechercher_02' => 'Rod :',
 'info_remplacer_vignette' => 'Sanz lavinyèt sanswa kont out prop logo :',
-'info_retablir_lien' => 'Armèt lo gatir dégréné-la',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'néna pwinn titr',
 'info_selectionner_fichier' => 'Ou i pé swazi in fisyé dann dosyé @upload@',
 'info_selectionner_fichier_2' => 'Swazi inn fisyé :',
-'info_site_attente' => 'Sitwèb-la lé apré espèr lakonfirmasyon',
-'info_site_reference' => 'Sitwèb référansé an liyn',
-'info_site_refuse' => 'Sitwèb-la lé arfizé',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Référans inn sitwèb',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'dégrèn vinyèt-la',
 'info_symbole_bleu' => 'Lo sinbol <b>blé</b> li mark <b>inn gardantèt</b>: inn modékri pour out prop lisaz.', # MODIF
 'info_symbole_jaune' => 'Lo sinbol <b>zon</b> li mark <b>inn zanons pou tout bann lotèr</b> : banna i pé vwar ali an liyn ; bann komandèr i pé sanz ali.', # MODIF
 'info_symbole_vert' => 'Lo sinbol <b>vèr</b> i mark <b>bann modékri èk dot bann zitilizatèr</b> lo sitwèb.', # MODIF
-'info_syndication' => 'Lasindikasyon :',
-'info_syndication_articles' => '(bann) lartik',
 'info_telecharger_nouveau_logo' => 'Télésarz inn nouvo logo :',
 'info_telecharger_ordinateur' => 'Télésarz dopwi out prop lordinatèr :',
 'info_tous_resultats_enregistres' => '[tout bann rézilta la finn dèt anroziztré]',

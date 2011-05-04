@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'POZOR!',
 'avis_champ_incorrect_type_objet' => 'Naplatný název pole @name@ objektu typu @type@',
 'avis_colonne_inexistante' => 'Sloupec @col@ neexistuje',
-'avis_echec_syndication_01' => 'Vytvoření dat selhalo: Buď nelze číst z vybraného základního systému (backend) nebo na něm není žádný článek.',
-'avis_echec_syndication_02' => 'Selhalo zpracování dat: Nelze komunikovat se základním systémem (backend) těchto stránek.',
 'avis_erreur' => 'Chyba: viz níže;',
 'avis_erreur_connexion' => 'Chyba při spojení',
 'avis_erreur_cookie' => 'Problémy se sušenkou :-) (cookie)',
@@ -272,7 +270,6 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'form_prop_indiquer_nom_site' => 'Zadejte název webu.',
 'form_prop_indiquer_sujet' => 'Zadejte předmět',
 'form_prop_message_envoye' => 'Zpráva byla odeslána',
-'form_prop_nom_site' => 'Název webu',
 'form_prop_non_enregistre' => 'Váš návrh byl zaznamenán.',
 'form_prop_sujet' => 'Předmět',
 'form_prop_url_site' => 'Adresa URL webu',
@@ -330,7 +327,6 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'img_indisponible' => 'Obrázek není k dispozici',
 'impossible' => 'nemožné',
 'info_a_suivre' => 'HLAVNÍ NABÍDKA"',
-'info_a_valider' => '[ke schválení]',
 'info_acces_interdit' => 'Přístup zakázán',
 'info_acces_refuse' => 'Přístup odepřen',
 'info_action' => 'Akce: @action@',
@@ -352,7 +348,6 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'Autor či autoři:',
 'info_authentification_ftp' => 'Autentifikace (pomocí FTP).',
-'info_bloquer_lien' => 'zablokovat tento odkaz',
 'info_breves_2' => 'novinky',
 'info_breves_nb' => '@nb@ news items', # NEW
 'info_breves_un' => '1 news item', # NEW
@@ -431,7 +426,6 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'info_nouveaux_messages' => 'MÁTE CELKEM @total_messages@ NOVÝCH ZPRÁV',
 'info_numero_abbreviation' => 'č.',
 'info_obligatoire' => 'This information is required', # NEW
-'info_panne_site_syndique' => 'Syndikovaný web nefunguje',
 'info_pense_bete' => 'POZNÁMKA',
 'info_petit_ecran' => 'Malý displej',
 'info_petition_close' => 'Petition closed', # NEW
@@ -441,7 +435,6 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'info_portfolio_automatique' => 'Automatizované portfolio:',
 'info_premier_resultat' => '[@debut_limit@ prvních výsledků z @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ prvních výsledků z @total@]',
-'info_probleme_grave' => 'chyba',
 'info_propose_1' => '[@nom_site_spip@] Předloženo: @titre@',
 'info_propose_2' => 'Předložen článek
 -----------------',
@@ -455,24 +448,17 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'info_rechercher' => 'Najít',
 'info_rechercher_02' => 'Najít:',
 'info_remplacer_vignette' => 'Nahradit standardní náhled vlastním logem:',
-'info_retablir_lien' => 'obnovit tento odkaz',
 'info_rubriques_nb' => '@nb@ sections', # NEW
 'info_rubriques_un' => '1 section', # NEW
 'info_sans_titre_2' => 'bez názvu',
 'info_selectionner_fichier' => 'Můžete vybrat soubor ze složky @upload@',
 'info_selectionner_fichier_2' => 'Vybrat soubor:',
-'info_site_attente' => 'Web čeká na schválení',
-'info_site_reference' => 'Web odkazovaný online',
-'info_site_refuse' => 'Web byl odmítnut',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Zadat odkaz na web',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'odstranit náhled',
 'info_symbole_bleu' => '<b>Modrým</b> symbolem je označena <b>interní poznámka</b>, tj. zpráva určená pro osobní potřebu.', # MODIF
 'info_symbole_jaune' => '<b>Žlutým</b> symbolem je označena <b>zpráva pro všechny redaktory</b>: může ji upravovat kterýkoli ze správců a zobrazuje se všem redaktorům.', # MODIF
 'info_symbole_vert' => '<b>Zeleným</b> symbolem jsou označeny <b>zprávy vyměňované s ostatními uživateli</b> webu.', # MODIF
-'info_syndication' => 'syndikace:',
-'info_syndication_articles' => 'článek/článků',
 'info_telecharger_nouveau_logo' => 'Odeslat nové logo:',
 'info_telecharger_ordinateur' => 'Odeslat z počítače:',
 'info_tous_resultats_enregistres' => '[všechny výsledky jsou zapsány]',

@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'ATANSYON !',
 'avis_champ_incorrect_type_objet' => 'Kouman chan-a li ap rele, pou bagay-la, se pa korek @name@ pou lojè tip @type@',
 'avis_colonne_inexistante' => 'Kolòn nan @col@ pa egziste kounye-a',
-'avis_echec_syndication_01' => 'Sendikasyon te pa mache : "backend"  te rele konsa se pa posib fé lekti osnon se li pa pwopoze okenn atik kounye-a.',
-'avis_echec_syndication_02' => 'Sendikasyon te pa mache : gen enposib aksede "backend" sit-la.',
 'avis_erreur' => 'Erè : tanpri gad isit anba',
 'avis_erreur_connexion' => 'Erè ak koneksyon',
 'avis_erreur_cookie' => 'pwoblèm èk gatomakro (kouki)',
@@ -273,7 +271,6 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'form_prop_indiquer_nom_site' => 'Mèsi enskri kouman sit ou rele',
 'form_prop_indiquer_sujet' => 'Mèsi ékri yon sijé',
 'form_prop_message_envoye' => 'Mesaj te fin voye',
-'form_prop_nom_site' => 'Kouman sit la i rele',
 'form_prop_non_enregistre' => 'Pwopozisyon ou te pa rojistré',
 'form_prop_sujet' => 'Sije',
 'form_prop_url_site' => 'Ladrès (URL) sitwèb',
@@ -331,7 +328,6 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'img_indisponible' => 'imaj-la se pa disponib',
 'impossible' => 'enposib',
 'info_a_suivre' => 'AKEY »',
-'info_a_valider' => '[pou konfime]',
 'info_acces_interdit' => 'Aksè entèdi',
 'info_acces_refuse' => 'Aksè refize',
 'info_action' => 'Aksyon: @action@',
@@ -353,7 +349,6 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'lotè (yo) :',
 'info_authentification_ftp' => 'Lotantifikasyon (pa FTP).',
-'info_bloquer_lien' => 'blok lyen nan',
 'info_breves_2' => 'tinouvèl yo',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -432,7 +427,6 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'info_nouveaux_messages' => 'W GEN @total_messages@ NOUVO MESAJ YO',
 'info_numero_abbreviation' => 'N° ',
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => 'Sit sendike a se pa mache',
 'info_pense_bete' => 'RAPLE-W',
 'info_petit_ecran' => 'Piti lékran',
 'info_petition_close' => 'Pétition close', # NEW
@@ -442,7 +436,6 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'info_portfolio_automatique' => 'Livlimaj otomatik :',
 'info_premier_resultat' => '[@debut_limit@ premye rezilta sa-yo si  @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ premye rezilta sa-yo si @total@]',
-'info_probleme_grave' => 'pwoblèm ek',
 'info_propose_1' => '[@nom_site_spip@] ka pwopoze : @titre@',
 'info_propose_2' => 'Atik pwopoze pou parèt
 ---------------',
@@ -456,24 +449,17 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'info_rechercher' => 'Chèche',
 'info_rechercher_02' => 'Chèche :',
 'info_remplacer_vignette' => 'Chanje vinyèt otomatik ek yon logo pèsonèl :',
-'info_retablir_lien' => 'Romèt lyen-nan',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'ki pa rele',
 'info_selectionner_fichier' => 'W kapab chwazi yon fichye nan dosyé @upload@', # MODIF
 'info_selectionner_fichier_2' => 'Chwazi yon fichye :',
-'info_site_attente' => 'Sit web ki tann yon komandè konfime ali',
-'info_site_reference' => 'Sit referanse an liy',
-'info_site_refuse' => 'Sit we ki te fin refize',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Referanse yon sit',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'kraze viyèt-la',
 'info_symbole_bleu' => 'Senbol <b>ble</b> ki endik <b>yon pansbèt</b>: yon mesaj ou pou izaj pèsonèl ou.', # MODIF
 'info_symbole_jaune' => 'Senbol <b>jon</b> ki endik <b>yon anons pou tout redaktè</b> : ki visib pout tout redaktè nan espas prive, ak ki komandè kapab chanje selman.', # MODIF
 'info_symbole_vert' => 'Senbol <b>vèr</b> ki endik <b> yon mesaj  voye ant zot zitilizatè</b> sit la.', # MODIF
-'info_syndication' => 'sendikasyon :',
-'info_syndication_articles' => 'atik (yo)',
 'info_telecharger_nouveau_logo' => 'Téléchaj yon nouvo logo :',
 'info_telecharger_ordinateur' => 'Telechaj sou lòdinatè ou :',
 'info_tous_resultats_enregistres' => '[tout rézilta yo ki enskri nan memwar ]',

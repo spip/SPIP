@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'DİKKAT !',
 'avis_champ_incorrect_type_objet' => '@type@ tipindeki nesne için @name@ ismi geçersiz',
 'avis_colonne_inexistante' => '@col@ isimli sütun yok',
-'avis_echec_syndication_01' => 'Haber paylaşımı başarısız: girdiğiniz sunucu çözülemedi veya hiç bir haber sunmuyor.',
-'avis_echec_syndication_02' => 'Haber paylaşımı başarısız: bu sitenin sunucusuna ulaşılamadı.',
 'avis_erreur' => 'Hata: aşağıdaki açıklamaya bakınız',
 'avis_erreur_connexion' => 'Bağlantı hatası',
 'avis_erreur_cookie' => 'çerez sorunu',
@@ -269,7 +267,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'Sitenin ismini giriniz.',
 'form_prop_indiquer_sujet' => 'Bir konu belirtiniz',
 'form_prop_message_envoye' => 'İleti gönderildi',
-'form_prop_nom_site' => 'Sitenin ismi',
 'form_prop_non_enregistre' => 'Öneriniz kaydedilmedi.',
 'form_prop_sujet' => 'Konu',
 'form_prop_url_site' => 'Sitenin Url adresi',
@@ -327,7 +324,6 @@ sera ignorée) :
 'img_indisponible' => 'resim mevcut değil',
 'impossible' => 'olanaksız',
 'info_a_suivre' => 'İZLENECEK »',
-'info_a_valider' => '[onaylanacak]',
 'info_acces_interdit' => 'Erişim yasak',
 'info_acces_refuse' => 'Erişim reddedildi',
 'info_action' => 'Eylem : @action@',
@@ -349,7 +345,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'yazar(lar) :',
 'info_authentification_ftp' => 'Onay (FTP ile)',
-'info_bloquer_lien' => 'bu bağlantıyı engelle',
 'info_breves_2' => 'kısa haberler',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -428,7 +423,6 @@ sera ignorée) :
 'info_nouveaux_messages' => '@total_messages@ YENİ MESAJINIZ VAR',
 'info_numero_abbreviation' => 'N° ',
 'info_obligatoire' => 'Bu bilgi zorunludur.',
-'info_panne_site_syndique' => 'Paylaşımlı sitede arıza var',
 'info_pense_bete' => 'HATIRLATMA',
 'info_petit_ecran' => 'Küçük ekran',
 'info_petition_close' => 'Dilekçe kapandı',
@@ -438,7 +432,6 @@ sera ignorée) :
 'info_portfolio_automatique' => 'Otomatik portföy :',
 'info_premier_resultat' => '[Toplam @total@ dan @debut_limit@ ilk sonuç]',
 'info_premier_resultat_sur' => '[@debut_limit@ ilk sonuç / @total@ sonuç]',
-'info_probleme_grave' => 'sorun',
 'info_propose_1' => '[@nom_site_spip@] Öneriyor : @titre@',
 'info_propose_2' => 'Önerilen makale
 ---------------',
@@ -452,24 +445,17 @@ sera ignorée) :
 'info_rechercher' => 'Ara',
 'info_rechercher_02' => 'Ara :',
 'info_remplacer_vignette' => 'Varsayılan etiketi kişiselleştirilmiş bir logo ile değiştir :',
-'info_retablir_lien' => 'Bu bağlantıyı tekrar kur',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'başlıksız',
 'info_selectionner_fichier' => '@upload@ dizininden bir dosya seçebilirsiniz. ',
 'info_selectionner_fichier_2' => 'Bir dosya seç :',
-'info_site_attente' => 'Onaylanmayı bekleyen Web sitesi',
-'info_site_reference' => 'Atıfta bulunulan çevrimiçi site',
-'info_site_refuse' => 'Web sitesi reddedildi',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Bir siteye atıfta bulun',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'Bu etiketi sil',
 'info_symbole_bleu' => '<b>Mavi</b> sembol bir <b>hatırlatmayı</b> gösterir : yani, kişisel kullanımınız için bir iletidir.',
 'info_symbole_jaune' => '<b>Sarı</b> sembol <b>tüm editörlere yönelik</b> bir duyuruyu gösterir : tüm yöneticiler tarafından değiştirilebilir ve tüm editörler tarafından görülebilir. ',
 'info_symbole_vert' => 'Sarı sembol sitenin başka kullanıcılarıyla yapılan ileti alışverişlerini gösterir.',
-'info_syndication' => 'Paylaşım :',
-'info_syndication_articles' => 'Makale',
 'info_telecharger_nouveau_logo' => 'Yeni bir logo yükle :',
 'info_telecharger_ordinateur' => 'Bilgisayarınızdan indiriniz :',
 'info_tous_resultats_enregistres' => '[tüm sonuçlar kaydedildi]',

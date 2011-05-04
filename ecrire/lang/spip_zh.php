@@ -37,8 +37,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'avis_attention' => '注意!',
 'avis_champ_incorrect_type_objet' => '无效名 @name@ 对象名 @type@',
 'avis_colonne_inexistante' => ' @col@ 列不存在',
-'avis_echec_syndication_01' => '联合失败: 要么是选择的禁止读,要么它不提供任何文章.',
-'avis_echec_syndication_02' => '联合失败: 不能到达站点的阻止区.',
 'avis_erreur' => '错误: 参见以下',
 'avis_erreur_connexion' => '连接失败',
 'avis_erreur_cookie' => 'cookie错误',
@@ -274,7 +272,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => '请输入站点名',
 'form_prop_indiquer_sujet' => '请输入标题',
 'form_prop_message_envoye' => '消息发送',
-'form_prop_nom_site' => '站点名',
 'form_prop_non_enregistre' => '您的提议未被记录.',
 'form_prop_sujet' => '标题',
 'form_prop_url_site' => '站点URL',
@@ -332,7 +329,6 @@ sera ignorée) :
 'img_indisponible' => '必需图像',
 'impossible' => 'impossible', # NEW
 'info_a_suivre' => '跟踪 »',
-'info_a_valider' => '[使有效]',
 'info_acces_interdit' => '访问禁止',
 'info_acces_refuse' => '访问拒绝',
 'info_action' => '动作: @action@',
@@ -354,7 +350,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => '作者:',
 'info_authentification_ftp' => '(通过 FTP)验证.',
-'info_bloquer_lien' => '阻止这个连接',
 'info_breves_2' => '简要',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -433,7 +428,6 @@ sera ignorée) :
 'info_nouveaux_messages' => '你有 @total_messages@ 条新消息',
 'info_numero_abbreviation' => '第 ',
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => '联合站点次序颠倒',
 'info_pense_bete' => '忘备',
 'info_petit_ecran' => '小图显示',
 'info_petition_close' => 'Pétition close', # NEW
@@ -443,7 +437,6 @@ sera ignorée) :
 'info_portfolio_automatique' => '自动相册:',
 'info_premier_resultat' => '[@debut_limit@ 最新结果出了 @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ 最新结果出了@total@]',
-'info_probleme_grave' => '错误',
 'info_propose_1' => '[@nom_site_spip@] 提交: @titre@',
 'info_propose_2' => '提交文章
 -----------------',
@@ -457,24 +450,17 @@ sera ignorée) :
 'info_rechercher' => '搜索',
 'info_rechercher_02' => '搜索:',
 'info_remplacer_vignette' => '用定制的图标取代缺省的图标:',
-'info_retablir_lien' => '恢复这个连接',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => '无标题',
 'info_selectionner_fichier' => '<MODIF>从@upload@文件中选择一个文件',
 'info_selectionner_fichier_2' => '选择一个文件:',
-'info_site_attente' => '未确认的站点',
-'info_site_reference' => '在线引用的站点',
-'info_site_refuse' => '丢弃的站点',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => '参考站点',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => '删除小插图',
 'info_symbole_bleu' => '<MODIF><b>蓝色</b>标志<b>备注</b>：例如个人使用的消息.',
 'info_symbole_jaune' => '<MODIF><b>黄色</b>表示<b>对所有编辑者声明</b> ：所有站点管理者都能看见并编辑。',
 'info_symbole_vert' => '<MODIF><b>绿色</b>表示<b>站点中与其它用户交换的信息</b>。',
-'info_syndication' => '<MODIF>聚合 ：',
-'info_syndication_articles' => '文章',
 'info_telecharger_nouveau_logo' => '上传新图标:',
 'info_telecharger_ordinateur' => '从你的电脑上传:',
 'info_tous_resultats_enregistres' => '[所有结果被记录]',

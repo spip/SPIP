@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'Advarsel!',
 'avis_champ_incorrect_type_objet' => 'Ugyldigt feltnavn @name@ for et objekt af typen @type@',
 'avis_colonne_inexistante' => 'Kolonnen @col@ findes ikke',
-'avis_echec_syndication_01' => 'Syndikering mislykket: enten er den valgte datakilde utilgængelig eller også indeholder den ingen artikler.',
-'avis_echec_syndication_02' => 'Syndication mislykket: kunne ikke få forbindelse til den valgte datakilde.',
 'avis_erreur' => 'Fejl: se nedenfor\';',
 'avis_erreur_connexion' => 'Ingen forbindelse',
 'avis_erreur_cookie' => 'cookie-problem', # MODIF
@@ -273,7 +271,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'Indtast webstedets navn.',
 'form_prop_indiquer_sujet' => 'Angiv et emne',
 'form_prop_message_envoye' => 'Meddelelse sendt',
-'form_prop_nom_site' => 'Webstedets navn',
 'form_prop_non_enregistre' => 'Din forslag er ikke modtaget.',
 'form_prop_sujet' => 'Emne',
 'form_prop_url_site' => 'Webstedets URL',
@@ -331,7 +328,6 @@ sera ignorée) :
 'img_indisponible' => 'image indisponible', # NEW
 'impossible' => 'umuligt',
 'info_a_suivre' => 'OPGAVER»',
-'info_a_valider' => '[at kontrollere]',
 'info_acces_interdit' => 'Adgang forbudt',
 'info_acces_refuse' => 'Ingen adgang',
 'info_action' => 'Handling: @action@',
@@ -353,7 +349,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'forfatter(e):',
 'info_authentification_ftp' => 'Adgangskontrol (ved FTP).',
-'info_bloquer_lien' => 'bloker dette link',
 'info_breves_2' => 'nyheder',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -432,7 +427,6 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_nouveaux_messages' => 'DU HAR @total_messages@ NYE MEDDELELSER',
 'info_numero_abbreviation' => 'N° ', # NEW
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => 'Syndikeret side er ude af trit',
 'info_pense_bete' => 'HUSKESEDDEL',
 'info_petit_ecran' => 'Lille skærmbillede',
 'info_petition_close' => 'Pétition close', # NEW
@@ -442,7 +436,6 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_portfolio_automatique' => 'Automatisk album:',
 'info_premier_resultat' => '[@debut_limit@ første resultater af @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ første resultater af @total@]',
-'info_probleme_grave' => 'problem med',
 'info_propose_1' => '[@nom_site_spip@] Indlæg: @titre@',
 'info_propose_2' => 'Artikel indsendt
 -----------------',
@@ -456,24 +449,17 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_rechercher' => 'Søgning',
 'info_rechercher_02' => 'Søgning:',
 'info_remplacer_vignette' => 'Erstatte standardpiktogrammet med et eget ikon:',
-'info_retablir_lien' => 'Genopret dette link',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'uden overskrift',
 'info_selectionner_fichier' => 'Du kan vælge en fil fra mappen @upload@', # MODIF
 'info_selectionner_fichier_2' => 'Vælg en fil:',
-'info_site_attente' => 'Websted afventer godkendelse',
-'info_site_reference' => 'Online henvisning',
-'info_site_refuse' => 'Websted afvist',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Link til websted',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'slet piktogram',
 'info_symbole_bleu' => '<b>Blåt</b> symbol henviser til et <b>memo</b>: dvs. en meddelelse til privat brug.', # MODIF
 'info_symbole_jaune' => '<b>Gult</b> symbol henviser til en <b>annoncering til alle redaktører</b>: den kan redigeres af alle redaktører og er synlig for alle redaktører.', # MODIF
 'info_symbole_vert' => '<b>Grønt</b> symbol henviser til <b>meddelelser udvekslet med andre brugere</b> på webstedet.', # MODIF
-'info_syndication' => 'syndikering:',
-'info_syndication_articles' => 'bidrag',
 'info_telecharger_nouveau_logo' => 'Hent nyt logo:',
 'info_telecharger_ordinateur' => 'Hent fra din computer:',
 'info_tous_resultats_enregistres' => '[alle resultater er registreret]',

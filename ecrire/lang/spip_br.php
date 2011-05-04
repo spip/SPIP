@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'DIWALLIT !',
 'avis_champ_incorrect_type_objet' => 'Anv maezienn direizh @name@ evit un draezenn a seurt @type@',
 'avis_colonne_inexistante' => 'N\'eus ket eus ar bann @col@',
-'avis_echec_syndication_01' => 'C\'hwitet eo bet ar sindikadur : dilennus eo ar backend kinniget, pe ne ginnig pennad ebet.',
-'avis_echec_syndication_02' => 'C\'hwitet eo bet ar sindikadur : n\'eus ket tu da dizhout backend al lec\'hienn-mañ.',
 'avis_erreur' => 'Fazi: gwelet amañ a-is',
 'avis_erreur_connexion' => 'Fazi kevreañ',
 'avis_erreur_cookie' => 'kudenn toupin',
@@ -271,7 +269,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'Merkit anv al lec\'hienn.',
 'form_prop_indiquer_sujet' => 'Merkit ur sujed',
 'form_prop_message_envoye' => 'Kaset eo bet ar gemennadenn',
-'form_prop_nom_site' => 'Anv al lec\'hienn',
 'form_prop_non_enregistre' => 'N\'eo ket bet enrollet ho kinnig',
 'form_prop_sujet' => 'Sujed',
 'form_prop_url_site' => 'Chomlec\'h (URL) al lec\'hienn',
@@ -329,7 +326,6 @@ sera ignorée) :
 'img_indisponible' => 'skeudenn dibosupl da gaout',
 'impossible' => 'dibosupl',
 'info_a_suivre' => 'DA GENDERC\'HEL»',
-'info_a_valider' => '[da wiriañ]',
 'info_acces_interdit' => 'Difennet mont tre',
 'info_acces_refuse' => 'Nac\'het eo bet deoc\'h mon tre',
 'info_action' => 'Oberiadenn : @action@',
@@ -351,7 +347,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'skridaozer(ien) :',
 'info_authentification_ftp' => 'Gwiriañ (dre FTP).',
-'info_bloquer_lien' => 'Stankañ al liamm-mañ',
 'info_breves_2' => 'berrskridoù',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -430,7 +425,6 @@ sera ignorée) :
 'info_nouveaux_messages' => '@total_messages@ KEMENNADENN NEVEZ HOC\'H EUS BET',
 'info_numero_abbreviation' => 'Niv. ',
 'info_obligatoire' => 'Ret eo deoc\'h reiñ an titour-mañ',
-'info_panne_site_syndique' => 'Sac\'het eo al lec\'hienn sindikadet',
 'info_pense_bete' => 'NOTENNIG-EÑVOR',
 'info_petit_ecran' => 'Skramm bihan',
 'info_petition_close' => 'Kloz eo ar sinadeg',
@@ -440,7 +434,6 @@ sera ignorée) :
 'info_portfolio_automatique' => 'Portfolio emgefre :',
 'info_premier_resultat' => '[@debut_limit@ disoc\'h kentañ diwar @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ disoc\'h kentañ diwar @total@]',
-'info_probleme_grave' => 'kudenn a',
 'info_propose_1' => '[@nom_site_spip@] a ginnig : @titre@',
 'info_propose_2' => 'Pennad bet kinniget
 ---------------',
@@ -454,24 +447,17 @@ sera ignorée) :
 'info_rechercher' => 'Klask',
 'info_rechercher_02' => 'Klask :',
 'info_remplacer_vignette' => 'Erlec\'hiañ ar skeudennig dre ziouer gant ul logo deoc\'h :',
-'info_retablir_lien' => 'adlakaat al liamm-mañ',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'titl ebet',
 'info_selectionner_fichier' => 'Gallout a rit diuzañ ur restr eus an teuliad @upload@',
 'info_selectionner_fichier_2' => 'Diuzañ ur restr :',
-'info_site_attente' => 'Lec\'hienn a c\'hortoz bezañ kadarnaet',
-'info_site_reference' => 'Lec\'hienn menegeret enlinenn',
-'info_site_refuse' => 'Lec\'hienn bet nac\'het',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Menegeriñ ul lec\'hienn',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'diverkañ ar skeudennig',
 'info_symbole_bleu' => 'Talvezout a ra an arouez <b>glas</b> evit un <b>notennig-eñvor</b>: da lavaret eo ur gemennadenn evidoc\'h hepken.',
 'info_symbole_jaune' => 'Talvezout a ra an arouez <b>melen</b> evit ur <b>c\'hemenn d\'an holl skridaozerien</b> : a c\'hell bezañ kemmet gant ur merour ha lennet gant an holl skridaozerien.',
 'info_symbole_vert' => 'Talvezout a ra an arouez <b>gwer</b> evit ar <b>c\'hemennadennoù bet eskemmet etre implijerien all</b> al lec\'hienn.',
-'info_syndication' => 'Sindikadur :',
-'info_syndication_articles' => 'pennad(où)',
 'info_telecharger_nouveau_logo' => 'Pellgargañ ul logo nevez :',
 'info_telecharger_ordinateur' => 'Pellgargañ adal hoc\'h urzhiataer :',
 'info_tous_resultats_enregistres' => '[enrollet e vez an holl discoc\'hoù]',

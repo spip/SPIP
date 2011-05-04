@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => '~* သတိပေးချက် *~',
 'avis_champ_incorrect_type_objet' => 'ဒီ @type@ အ​မျိုးအစားအတွက် နာမည်@name@ မရှိပါ',
 'avis_colonne_inexistante' => 'ကော်လံ @col@ မရှိပါ',
-'avis_echec_syndication_01' => 'ပူးတွဲချိတ်ဆက်မှု အ​ဆင်မ​​ပြေပါ၊ ချိတ်ဆက်မှုကို မဖတ်နိုင်တာ (သို့) ခွင့်ပြုချက် ပေးမထားခြင်းကြောင့် ဖြစ်နိုင်ပါသည်',
-'avis_echec_syndication_02' => 'ပူးတွဲချိတ်ဆက်မှု အ​ဆင်မ​​ပြေပါ၊ ဤဝက်ဘ်ဆိုက် အတွင်းဘက်နှင့် မချိတ်ဆက်နိုင်ပါ ',
 'avis_erreur' => 'အမှား၊ အောက်ပါကို ကြည့်ရှုပါ',
 'avis_erreur_connexion' => 'ဆက်သွယ်မှု အမှား',
 'avis_erreur_cookie' => 'cookie ပြသနာ',
@@ -265,7 +263,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'ဝက်ဘ်ဆိုက်နာမည်ကို ထည့်ပါ',
 'form_prop_indiquer_sujet' => 'အကြောင်းအရာကို ထည့်ပါ',
 'form_prop_message_envoye' => 'စာ​စောင်ပို့ပေးပြီ',
-'form_prop_nom_site' => 'ဆိုက်နာမည်',
 'form_prop_non_enregistre' => 'သင့်အကြံပြုချက် သိမ်းဆည်းထားခြင်းမရှိသေးပါ',
 'form_prop_sujet' => 'အကြောင်းအရာ',
 'form_prop_url_site' => 'ဆိုက်လိပ်စာ',
@@ -323,7 +320,6 @@ sera ignorée) :
 'img_indisponible' => 'ပုံမရနိုင်ပါ',
 'impossible' => 'မဖြစ်နိုင်ပါ',
 'info_a_suivre' => 'စီစဉ်ထုတ်ပြန်မှုနေရာ»',
-'info_a_valider' => '[ထပ်မံအတည်ပြုရန်]',
 'info_acces_interdit' => 'ဝင်ရောက်ခွင့် တားမြစ်ထားသည်',
 'info_acces_refuse' => 'ဝင်ခွင့်ငြင်းပယ်ခြင်းခံရသည်',
 'info_action' => 'လုပ်ဆောင်ချက် @action@',
@@ -345,7 +341,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'စာရေးသူ(များ)',
 'info_authentification_ftp' => 'စမ်းစစ်အတည်ပြုခြင်း(FTP မှ)',
-'info_bloquer_lien' => 'ဤဆက်သွယ်မှုကို ပိတ်ပင်ရန်',
 'info_breves_2' => 'သတင်း',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -423,7 +418,6 @@ sera ignorée) :
 'info_nouveaux_messages' => 'သင့်မှာစာစောင် အသစ် @total_messages@ ရောက်နေပါသည်',
 'info_numero_abbreviation' => 'မဟုတ်ဘူး',
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => 'ပူးတွဲချိတ်ဆက်မှု ပျက်နေသည်',
 'info_pense_bete' => 'မှတ်တမ်း',
 'info_petit_ecran' => 'ဖော်ပြမှုအသေး',
 'info_petition_close' => 'Pétition close', # NEW
@@ -433,7 +427,6 @@ sera ignorée) :
 'info_portfolio_automatique' => 'အလိုအလျှောက်ရွေးချယ်မှု',
 'info_premier_resultat' => '[@debut_limit@ သည် @total@၏ ပထမတွေ့ရှိချက်]',
 'info_premier_resultat_sur' => '[@debut_limit@သည် @total@၏ ပထမတွေ့ရှိချက်]',
-'info_probleme_grave' => 'အမှားအယွင်း',
 'info_propose_1' => '[@nom_site_spip@] တင်သွင်းပြီး @titre@',
 'info_propose_2' => 'ဆောင်ပါးတင်သွင်းပြီး
 -----------------',
@@ -447,24 +440,17 @@ sera ignorée) :
 'info_rechercher' => 'ရှာဖွေရန်',
 'info_rechercher_02' => 'ရှာဖွေရန်',
 'info_remplacer_vignette' => 'ပေးထားသော လိုဂိုဒီရိုင်းကို သင်နှစ်သက်သော ဒီရိုင်းနှင့်အစားထိုးပါ',
-'info_retablir_lien' => 'ဒီအချိတ်အဆက်ကို ပြန်လည်ထည့်သွင်းရန်',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'ခေါင်းစဉ်မရှိ​သေးပါ',
 'info_selectionner_fichier' => 'ဖိုင်များကို @upload@မှရွေးချယ်ရရှိနိုင်ပါသည်',
 'info_selectionner_fichier_2' => 'ဖိုင်ရွေးချယ်ပါ',
-'info_site_attente' => 'ဝက်ဘ်ဆိုက် အတည်ပြုချက်ရရန် ဆိုင်းငံ့ခြင်းခံရသည်',
-'info_site_reference' => 'အွန်လိုင်း အညွှန်းဆိုက်များ',
-'info_site_refuse' => 'ဝက်ဘ်ဆိုက်ငြင်းပယ်ခြင်းခံရသည်',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'ဆိုက်ညွှန်းခြင်း',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'ဒီရိုင်းဆင်မြန်းခြင်းကို ပယ်ဖျက်ရန်',
 'info_symbole_bleu' => 'အပြာရောင် သ​င်္ကေတသည် မှတ်ချက်ကိုဖော်ပြသည်။ ဥပမာ၊ ကိုယ်ရေးကိုတာ စာစောင် စသည်ဖြင့်',
 'info_symbole_jaune' => 'အဝါရောင် သ​င်္ကေတသည် စာတည်းအဖွဲ့သားအားလုံးသို့ ​ကြေငြာချက်များဖြစ်သည်။ စာတည်းအဖွဲ့သား အားလုံးမှ တည်းဖြတ်နိုင်ပြီး၊ ​ဤ​အဖွဲ့သား အားလုံးသို့ မြင်သာအောင်ပြနိုင်သည်။',
 'info_symbole_vert' => 'အစိမ်းရောင် သ​င်္ကေတသည် ဤဆိုက်သုံးစွဲသူအချင်းချင်း သတင်းစကားများ ဖလှယ်ခြင်းဖြစ်သည်။</b>',
-'info_syndication' => 'ပူးတွဲချိတ်ဆက်မှု',
-'info_syndication_articles' => 'ဆောင်းပါးများ',
 'info_telecharger_nouveau_logo' => 'logo အသစ် တင်သွင်းရန်',
 'info_telecharger_ordinateur' => 'သင့်ကွန်ပျူတာမှ တင်သွင်းပါ',
 'info_tous_resultats_enregistres' => '[ရှာဖွေတွေ့ရှိချက်များအားလုံး မှတ်တမ်းတင်ထားပါသည်]',

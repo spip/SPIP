@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'HATI-HATI!',
 'avis_champ_incorrect_type_objet' => 'Nama kolom salah @name@ untuk obyek tipe @type@',
 'avis_colonne_inexistante' => 'Kolom @col@ tidak ada',
-'avis_echec_syndication_01' => 'Sindikasi gagal: berkas yang dipilih tidak dapat dibaca atau ia tidak menyediakan satu artikel pun.',
-'avis_echec_syndication_02' => 'Sindikasi gagal: tidak dapat menjangkau berkas sindikasi situs ini.',
 'avis_erreur' => 'Kesalahan: lihat di bawah\';',
 'avis_erreur_connexion' => 'Kesalahan koneksi',
 'avis_erreur_cookie' => 'masalah cookie',
@@ -275,7 +273,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'Silakan masukkan nama situs.',
 'form_prop_indiquer_sujet' => 'Silakan masukkan sebuah subyek',
 'form_prop_message_envoye' => 'Pesan terkirim',
-'form_prop_nom_site' => 'Nama situs',
 'form_prop_non_enregistre' => 'Proposal anda tidak disimpan.',
 'form_prop_sujet' => 'Subyek',
 'form_prop_url_site' => 'URL situs',
@@ -333,7 +330,6 @@ sera ignorée) :
 'img_indisponible' => 'gambar tidak tersedia',
 'impossible' => 'tidak mungkin',
 'info_a_suivre' => 'PAPAN PELUNCUR»',
-'info_a_valider' => '[akan divalidasi]',
 'info_acces_interdit' => 'Akses terlarang',
 'info_acces_refuse' => 'Akses ditolak',
 'info_action' => 'Aksi: @action@',
@@ -355,7 +351,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'penulis:',
 'info_authentification_ftp' => 'Ototentikasi (dengan FTP).',
-'info_bloquer_lien' => 'Blokir tautan ini',
 'info_breves_2' => 'berita',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -434,7 +429,6 @@ sera ignorée) :
 'info_nouveaux_messages' => 'ANDA MEMILIKI @total_messages@ PESAN BARU',
 'info_numero_abbreviation' => 'Tidak',
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => 'Situs-situs sindikasi tidak dapat dijangkau',
 'info_pense_bete' => 'MEMO',
 'info_petit_ecran' => 'Tampilan kecil',
 'info_petition_close' => 'Pétition close', # NEW
@@ -444,7 +438,6 @@ sera ignorée) :
 'info_portfolio_automatique' => 'Portfolio terotomasi:',
 'info_premier_resultat' => '[@debut_limit@ hasil pertama dari @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ hasil pertama dari @total@]',
-'info_probleme_grave' => 'kesalahan',
 'info_propose_1' => '[@nom_site_spip@] Dikirim: @titre@',
 'info_propose_2' => 'Artikel dikirim
 -----------------',
@@ -458,24 +451,17 @@ sera ignorée) :
 'info_rechercher' => 'Pencarian',
 'info_rechercher_02' => 'Pencarian:',
 'info_remplacer_vignette' => 'Ganti gambar kecil standar dengan sebuah logo yang disediakan:',
-'info_retablir_lien' => 'pulihkan tautan ini',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'tidak berjudul',
 'info_selectionner_fichier' => 'Anda dapat memilih sebuah berkas dari direktori @upload@',
 'info_selectionner_fichier_2' => 'Pilih sebuah berkas:',
-'info_site_attente' => 'Validasi tertunda situs web',
-'info_site_reference' => 'Situs-situs referensi online',
-'info_site_refuse' => 'Situs web ditolak',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Merujuk sebuah situs',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'hapus gambar kecil',
 'info_symbole_bleu' => 'Simbol <b>biru</B> menandakan sebuah <b>memo</B>: yakni sebuah pesan untuk penggunaan pribadi anda.',
 'info_symbole_jaune' => 'Simbol <b>kuning</B> menandakan sebuah <b>pengumuman untuk semua edtor</B>: dapat diedit oleh semua administrator, dan muncul pada semua editor.',
 'info_symbole_vert' => 'Simbol <b>hijau</B> menandakan <b>pesan yang diperoleh dari pengguna lainnya</B> di situs.',
-'info_syndication' => 'sindikasi:',
-'info_syndication_articles' => 'artikel',
 'info_telecharger_nouveau_logo' => 'Unggah logo baru:',
 'info_telecharger_ordinateur' => 'Unggah dari komputer anda:',
 'info_tous_resultats_enregistres' => '[semua hasil disimpan]',

@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'LƯU Ý!',
 'avis_champ_incorrect_type_objet' => 'Tên field @name@ không đúng cho dạng @type@',
 'avis_colonne_inexistante' => 'Không có cột nào tên @col@',
-'avis_echec_syndication_01' => 'Xuất bản thất bại: vì backend không đọc được hoặc nó không cho ra bài nào cả.',
-'avis_echec_syndication_02' => 'Xuất bản thất bại: không thể nối vào backend của trang web này.',
 'avis_erreur' => 'CÓ LỖI: xem dưới đây',
 'avis_erreur_connexion' => 'Có Lỗi: không nối được',
 'avis_erreur_cookie' => 'Có lỗi cookie',
@@ -273,7 +271,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'Xin cho vào tên của trang web.',
 'form_prop_indiquer_sujet' => 'Xin điền vào tựa đề',
 'form_prop_message_envoye' => 'Đã gửi thư tín',
-'form_prop_nom_site' => 'Tên trang web',
 'form_prop_non_enregistre' => 'Đề nghị của bạn chưa được lưu trữ.',
 'form_prop_sujet' => 'Tựa đề',
 'form_prop_url_site' => 'URL của trang web',
@@ -331,7 +328,6 @@ sera ignorée) :
 'img_indisponible' => 'hình không có',
 'impossible' => 'không thể được',
 'info_a_suivre' => 'NƠI BẮT ĐẦU»',
-'info_a_valider' => '[chờ thông qua]',
 'info_acces_interdit' => 'Không vào/dùng được',
 'info_acces_refuse' => 'Không vào được',
 'info_action' => 'Công việc: @action@',
@@ -353,7 +349,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'tác giả:',
 'info_authentification_ftp' => 'Xác nhận (dùng FTP).',
-'info_bloquer_lien' => 'chặn điểm nối này',
 'info_breves_2' => 'tin ngắn',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -432,7 +427,6 @@ sera ignorée) :
 'info_nouveaux_messages' => 'BẠN CÓ @total_messages@ THƯ TÍN MỚI',
 'info_numero_abbreviation' => 'Số ',
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => 'Website syndicated bị vấn đề',
 'info_pense_bete' => 'GHI NHỚ',
 'info_petit_ecran' => 'Xem dạng nhỏ',
 'info_petition_close' => 'Pétition close', # NEW
@@ -442,7 +436,6 @@ sera ignorée) :
 'info_portfolio_automatique' => 'Portfolio tự động:',
 'info_premier_resultat' => '[@debut_limit@ kết quả đầu tiên trong số @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ kết quả đầu tiên trong số @total@]',
-'info_probleme_grave' => 'lỗi của',
 'info_propose_1' => '[@nom_site_spip@] Nộp: @titre@',
 'info_propose_2' => 'Bài được nộp
 -----------------',
@@ -456,24 +449,17 @@ sera ignorée) :
 'info_rechercher' => 'Tìm kiếm',
 'info_rechercher_02' => 'Tìm:',
 'info_remplacer_vignette' => 'Thay thế hình xem trước định sẵn bằng logo riêng:',
-'info_retablir_lien' => 'Phục hồi điểm nối kết này',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'không tựa đề',
 'info_selectionner_fichier' => 'Bạn có thể chọn một hồ trơ trong ngăn @upload@', # MODIF
 'info_selectionner_fichier_2' => 'Chọn một hồ sơ:',
-'info_site_attente' => 'Chờ chấp thuận website',
-'info_site_reference' => 'Website nối kết online',
-'info_site_refuse' => 'Website bị từ chối',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Nối kết một website',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'xóa hình nhỏ xem trước',
 'info_symbole_bleu' => 'Ký hiệu <b>xanh dương</b> cho biết <b>bản ghi nhớ</b>: tức là thư tín cho riêng bạn.', # MODIF
 'info_symbole_jaune' => 'Ký hiệu <b>vàng</b> cho biết <b>thông báo đến tất cả chủ bút</b>: tất cả chủ bút có thể sửa đổi được, và chủ bút nào cũng nhìn thấy được.', # MODIF
 'info_symbole_vert' => 'Ký hiệu <b>xanh lá cây</b> cho biết <b>thư tín trao đổi với những người dùng</b> của website.', # MODIF
-'info_syndication' => 'phát hành:',
-'info_syndication_articles' => 'bài',
 'info_telecharger_nouveau_logo' => 'Đem/tải lên một logo mới:',
 'info_telecharger_ordinateur' => 'Đem/tải lên từ máy bạn:',
 'info_tous_resultats_enregistres' => '[Toàn bộ kết quả được ghi nhớ lại] ',
