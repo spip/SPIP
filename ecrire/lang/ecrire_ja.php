@@ -44,10 +44,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'avis_operation_echec' => '操作に失敗しました。',
 'avis_operation_impossible' => 'Opération impossible', # NEW
 'avis_probleme_archive' => '@archive@ ファイルの読み込みに問題があります。',
-'avis_site_introuvable' => 'ウェブサイトが見つかりません。',
-'avis_site_syndique_probleme' => '警告: このサイトで遭遇した問題を供給することについて; 従って、そのシステムは一時的に妨害された。どうか、このサイトの供給ファイル（<b>@url_syndic@</b>）のアドレスを確かめて、情報を新しくリカバリーすることに挑戦してみてください。', # MODIF
-'avis_sites_probleme_syndication' => 'これらのサイトは、供給の問題に遭遇した',
-'avis_sites_syndiques_probleme' => 'それらは問題を生じるサイトを配給しました',
 'avis_suppression_base' => '注意！データ消去します。復旧出来ません。',
 'avis_version_mysql' => 'あなたのSQLのバージョン  （@version_mysql@） は、データベーステーブルの自動修復が不可能です。',
 
@@ -83,11 +79,9 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'bouton_radio_envoi_liste_nouveautes' => '最新のニュースリストを送る',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => '接続中のエディターズのリストに表示しない',
 'bouton_radio_non_envoi_annonces_editoriales' => '編集の発表を送らない',
-'bouton_radio_non_syndication' => '供給（シンジケート）しない',
 'bouton_radio_pas_petition' => '署名機能なし',
 'bouton_radio_petition_activee' => '署名機能を使用中',
 'bouton_radio_supprimer_petition' => '署名機能を無効にする',
-'bouton_radio_syndication' => '供給（シンジケート）:',
 'bouton_redirection' => 'リダイレクト',
 'bouton_relancer_installation' => 'インストレーションを再起動',
 'bouton_suivant' => '次',
@@ -128,15 +122,12 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'ディレクトリのアドレス',
 'entree_adresse_email' => 'メールアドレス',
-'entree_adresse_fichier_syndication' => '配給のための «backend» ファイルのアドレス:',
-'entree_adresse_site' => '<b>URL</b> [必須]',
 'entree_base_donnee_1' => 'データベースアドレス',
 'entree_base_donnee_2' => '(よく、このアドレスはあなたのサイトのアドレスと同じで、時々«localhost»の時もあり、完全に空のままの時もあります。)',
 'entree_biographie' => 'あなたの略記を数行でお願いします。',
 'entree_chemin_acces' => 'パスを<b>入力</b>:',
 'entree_cle_pgp' => 'あなたのPGPキー',
 'entree_contenu_rubrique' => '（セクションの内容を短い言葉で。）',
-'entree_description_site' => 'サイトの解説',
 'entree_identifiants_connexion' => 'あなたの接続ID...',
 'entree_informations_connexion_ldap' => 'LDAP接続の情報をこのフォームに書き込んでください。あなたはあなたのシステムまたは、ネットワーク管理者によってこの情報を提供されるでしょう。',
 'entree_infos_perso' => 'あなたは誰？',
@@ -211,9 +202,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'icone_modifier_article' => 'この記事を修正',
 'icone_modifier_message' => 'このメッセージを修正',
 'icone_modifier_rubrique' => 'このセクションを修正',
-'icone_modifier_site' => 'このサイトを修正',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => '新しいサイトを参照する',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => '戻る',
 'icone_retour_article' => '記事に戻る',
@@ -223,7 +212,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'icone_supprimer_rubrique' => 'このセクションを削除',
 'icone_supprimer_signature' => 'この署名を削除',
 'icone_valider_signature' => 'この署名を確認',
-'icone_voir_sites_references' => '参照したサイトの表示',
 'image_administrer_rubrique' => 'あなたはこのセクションを管理することができる',
 'info_1_article' => '１記事',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -288,7 +276,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_avertissement' => '警告',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'あなたのデータベースの中に構造物がインストールされました。',
-'info_bloquer' => 'ブロック',
 'info_chapeau' => '飾り',
 'info_chapeau_2' => 'イントロダクション:',
 'info_chemin_acces_1' => 'オプション: <b>ディレクトリのアクセス・パス</b>',
@@ -325,7 +312,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_date_publication_anterieure' => '公表時の日付:',
 'info_date_referencement' => 'このサイトを参照した日付 :',
 'info_derniere_etape' => '最後のステップ: <b>終わりました！',
-'info_derniere_syndication' => 'このサイトの最後の供給（シンジケーション）が実行されたのは',
 'info_derniers_articles_publies' => 'あなたの最近公開された記事',
 'info_desactiver_messagerie_personnelle' => 'あなたはこのサイト上で個人的なメッセージ交換を、するかしないか決められます。',
 'info_descriptif' => '記述:',
@@ -379,8 +365,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_langues' => 'サイトの言語',
 'info_ldap_ok' => 'LDAP認証はインストールされています。',
 'info_lien_hypertexte' => 'リンク:',
-'info_liens_syndiques_1' => '供給（シンジケート）リンク',
-'info_liens_syndiques_2' => '適正検査前。',
 'info_liste_redacteurs_connectes' => '接続中のエディターのリスト',
 'info_login_existant' => 'このIDは既に使われています。',
 'info_login_trop_court' => 'ログインIDが短すぎます。',
@@ -422,7 +406,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_nom' => '名前',
 'info_nom_destinataire' => '受取人の名前',
 'info_nom_site' => 'ＨＰの名前',
-'info_nom_site_2' => '<b>サイトの名前</b> [必須]',
 'info_nombre_articles' => '@nb_articles@ 記事、',
 'info_nombre_partcipants' => '討論の参加者:',
 'info_nombre_rubriques' => '@nb_rubriques@ セクション、',
@@ -480,7 +463,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_question_accepter_visiteurs' => 'もしあなたのサイトのテンプレートが、プライベートエリアに入らないで登録する訪問者たちを許すなら、次のオプションを有効にしてください:',
 'info_question_gerer_statistiques' => 'あなたのサイトの訪問者の統計を管理すべきですか？',
 'info_question_inscription_nouveaux_redacteurs' => '公開されているサイトで新しいエディターの登録を募りますか？　許可した場合、訪問者たちはフォームから自動で登録でき、プライベートエリアにアクセスし自分の記事を提出できます。 <blockquote><i>登録作業中に、ユーザーは自動的に送信されるプライベートエリアへのIDとパスワードを記したe-mailを受け取ります。若干のホストでは、それらサーバー上からメールが送れない場合があります：そういう場合、自動登録を実施できません。', # MODIF
-'info_question_proposer_site' => '誰が参照サイトを提案できますか？',
 'info_question_utilisation_moteur_recherche' => 'SPIPに結合された検索エンジンを使いたいですか?
  (無効にするとシステムが早くなります。)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
@@ -513,14 +495,10 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_site' => 'サイト',
 'info_site_2' => 'サイト：',
 'info_site_min' => 'サイト',
-'info_site_propose' => 'サイトに提出された:',
 'info_site_reference_2' => '参照されたサイト',
-'info_site_syndique' => 'このサイトは供給（シンジケート）されています...',
-'info_site_valider' => '適正検査済みサイト',
 'info_sites' => 'サイト',
 'info_sites_lies_mot' => '参照されたサイトをこのキーワードと関連付ける',
 'info_sites_proxy' => 'プロキシを使う',
-'info_sites_refuses' => 'サイトに拒否された',
 'info_sites_trouves' => '見つかったサイト',
 'info_sites_trouves_dans_texte' => '見つかったサイト（文中）',
 'info_sous_titre' => 'サブタイトル:',
@@ -530,10 +508,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_statut_auteur_autre' => 'その他の状態:',
 'info_statut_efface' => '削除',
 'info_statut_redacteur' => 'エディター',
-'info_statut_site_1' => 'このサイトは:',
-'info_statut_site_2' => '公開中',
-'info_statut_site_3' => '提出中',
-'info_statut_site_4' => 'ゴミ箱の中',
 'info_statut_utilisateurs_1' => '読み込まれたユーザーの標準の状態',
 'info_statut_utilisateurs_2' => '始めて接続したときにLDAPディレクトリに存在・属している人たちの状態を選択してください。後で、それぞれの著者ごとにケースバイケースで値を変更できます。',
 'info_suivi_activite' => '編集活動の手伝い',
@@ -613,14 +587,12 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_autoriser_documents_joints' => 'ドキュメントが記事に結びつくのを許可する',
 'item_autoriser_documents_joints_rubriques' => 'セクション内のドキュメントを許可する',
 'item_autoriser_syndication_integrale' => 'Include entire articles in the syndication files', # NEW
-'item_bloquer_liens_syndiques' => '供給（シンジケート）リンクを検査前、妨害する',
 'item_choix_administrateurs' => '管理者たち',
 'item_choix_generation_miniature' => '自動的に画像のサムネイルを作る。',
 'item_choix_non_generation_miniature' => '画像のサムネイルを作らない。',
 'item_choix_redacteurs' => 'エディターズ',
 'item_choix_visiteurs' => 'パブリックなサイトの訪問者',
 'item_creer_fichiers_authent' => '.htpasswdファイルを作る',
-'item_gerer_annuaire_site_web' => 'Webサイトのディレクトリを管理',
 'item_gerer_statistiques' => '統計を管理',
 'item_limiter_recherche' => 'あなたのサイトに含まれている情報に検索を制限する',
 'item_login' => 'ログインID',
@@ -635,23 +607,19 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_non_autoriser_documents_joints' => '記事内のドキュメントを許可しない',
 'item_non_autoriser_documents_joints_rubriques' => 'セクション内のドキュメントを許可しない',
 'item_non_autoriser_syndication_integrale' => 'Only send a summary', # NEW
-'item_non_bloquer_liens_syndiques' => '供給（シンジケート）から生じるリンクを妨害しない',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
 'item_non_creer_fichiers_authent' => 'それらファイルを作らない',
-'item_non_gerer_annuaire_site_web' => 'Webサイトディレクトリを無効化',
 'item_non_gerer_statistiques' => '統計を管理しない',
 'item_non_limiter_recherche' => '参照しているサイトの内容へ検索を拡張する',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'それらの公開日付前に記事を公表しない。',
 'item_non_utiliser_moteur_recherche' => 'エンジンを使わない',
-'item_non_utiliser_syndication' => '自動的に供給（シンジケート）しない',
 'item_nouvel_auteur' => '新しい著者',
 'item_nouvelle_rubrique' => '新しいセクション',
 'item_oui' => 'はい',
 'item_publier_articles' => 'それらの発表日時を無視して記事を公表する。',
 'item_reponse_article' => '記事に返信',
 'item_utiliser_moteur_recherche' => '検索エンジンを使う',
-'item_utiliser_syndication' => '自動的に供給（シンジケート）する',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => '訪問者',
@@ -676,9 +644,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'lien_ajouter_auteur' => 'この著者を追加',
 'lien_ajouter_participant' => '関係者を追加',
 'lien_email' => 'e-mail',
-'lien_mise_a_jour_syndication' => '今アップデート',
 'lien_nom_site' => 'サイトの名前:',
-'lien_nouvelle_recuperation' => 'データの新しい検索を開始',
 'lien_retirer_auteur' => '著者を削除',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'この関係者を削除',
@@ -795,15 +761,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 // S
 'sans_heure' => 'sans heure', # NEW
 'statut_admin_restreint' => '(限定された管理者)',
-'syndic_choix_moderation' => 'このサイトからの次のリンクもするべきですか？',
-'syndic_choix_oublier' => '供給(Syndication)ファイルのもう存在しないリンクもしたほうがいいですか？',
-'syndic_choix_resume' => 'いくつかのサイトは、記事の全文を供給します。全文が利用可能な場合、全文を供給(Syndicate)していいですか？:',
-'syndic_lien_obsolete' => '切れたリンク',
-'syndic_option_miroir' => 'それらを自動的にブロック',
-'syndic_option_oubli' => '(@mois@ ヶ月後に) それを削除',
-'syndic_option_resume_non' => '記事のすべての内容 (HTML形式)',
-'syndic_option_resume_oui' => '短い概要 (文章形式)',
-'syndic_options' => '供給機能(Syndication)オプション:',
 
 // T
 'taille_cache_image' => 'SPIPによる画像自動管理（ビネット（半身像、画像で作られている題名、TeXフォーマットの数式など...) @dir@ ディレクトリ内を合計 @taille@ に調整します。',
@@ -865,13 +822,11 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_jeu_caractere_4' => 'If that does not correspond to the situation you have with your data (for example, after restoring your database from a backup), or if <em>you are setting up this site</em> and wish to use a different character set, please indicate the character set here:', # NEW
 'texte_jeu_caractere_conversion' => 'Note: You can decide to convert all the texts (articles, news items, forums, etc.) of your site once and for all to the character set <tt>utf-8</tt>. To do this, go to the <a href="@url@">UTF-8 conversion page</a>.', # NEW
 'texte_lien_hypertexte' => '（もしあなたのメッセージがウェブに公開されている記事か、さらなる情報を提供しているページへリンクしている場合、ここにページのタイトルとURLを入力してください。）',
-'texte_liens_sites_syndiques' => '供給（シンジケート）サイトから生じるリンクをあらかじめ排除しておけます; 次の設定はそれらを作った後供給（シンジケート）サイトのデフォルト設定を表示します。それは、そのとき、とにかく可能なそれぞれの個別のリンクを排除するか、それぞれのサイトに、特定のサイトから来ているリンクを排除する。',
 'texte_login_ldap_1' => '（匿名アクセスのために空状態にしておくか、完全なパスを入力、例えば、«<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>»。）',
 'texte_login_precaution' => '警告! これは今あなたが接続しているログインIDです。
  注意してこのフォームを使ってください...',
 'texte_message_edit' => '警告：このメッセージはすべてのサイト管理者によって変更することができます、そしてすべてのエディターに表示されます。サイト生活での重要な出来事を強調するときのみ、アナウンスを使ってください。',
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
-'texte_messages_publics' => '記事の公開メッセージ:',
 'texte_mise_a_niveau_base_1' => 'あなたはちょうど今SPIPのファイルを更新しました
  今あなたはサイトのデータベースも更新しなければなりません。',
 'texte_modifier_article' => '修正する記事:',
@@ -880,7 +835,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_multilinguisme' => 'もし記事をいくつかの言語で管理したいなら、完全なナビゲーション インターフェースによって、あなたのサイトの組織の記事と、セクションに言語選択メニューを追加できます。',
 'texte_multilinguisme_trad' => '同じく、あなたは１つの記事の、違う翻訳版間のリンク管理システムを有効にできます。',
 'texte_non_compresse' => '<i>未圧縮</i>（あなたのサーバーでこの機能は使えません）',
-'texte_non_fonction_referencement' => 'あなたはこの自動化機能を使わず、そのサイトに関する要素を手作業で入力することができます...',
 'texte_nouveau_message' => '新しいメッセージ',
 'texte_nouvelle_version_spip_1' => 'たった今SPIPの新しいバージョンがインストールされました。',
 'texte_nouvelle_version_spip_2' => 'この新しいバージョンはこまめに更新（アップデート）することが必要となります。もしこのサイトの管理者なら、<tt>ecrire</tt>ディレクトリの<tt>inc_connect.php3</tt>ファイルを削除して、あなたのデータベースとの接続の仕方などを変更するためインストールを再度実施してください。<p>（付記：もし接続用の情報などを忘れているのなら、<tt>inc_connect.php3</tt>を"削除する前に"見ておいてください。）</p>', # MODIF
@@ -897,8 +851,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_recapitiule_liste_documents' => 'このページはセクション内に置いてあるドキュメントのリストのまとめです。それぞれのドキュメントの情報を変更するには、次の（置いてあるセクションへリンクしている）リンクをクリックしてください。',
 'texte_recuperer_base' => 'データベースを復元',
 'texte_reference_mais_redirige' => 'あなたのSPIPサイト内の記事を参照しているけれど、他のURLへとリダイレクションしている。',
-'texte_referencement_automatique' => '<b>サイトの自動参照</b><br />下にあなたの望むURLか、そのbackendファイルのアドレスを入力することによってすばやくウェブサイトを参照することができます。SPIPは自動的にそのサイトに関する情報を拾ってくるでしょう（タイトル、記述...）。',
-'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>いくらかのSQLの要求（クエリー）がシステム的に何も理由を表さず失敗したとき、データベース自体が壊れている可能性があります。</b><p>SQLは偶然壊れたとき、また使えるようにテーブルの機能を修復します。ここで、あなたはこの修復に挑戦できます; 失敗した場合、あなたは画面の複製をとっておくべきです。何が悪かったのかが書いてあるかもしれません。</p><p>もし問題が残っているなら、あなたのホストと連絡をとってください。</p>', # MODIF
 'texte_selection_langue_principale' => 'あなたはサイトの"主な言語"を下で選択できます。運良く、この選択によって、選択した言語でしか記事が書けないということはありませんが、次を決定します
 
@@ -917,8 +869,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_statut_refuses' => '拒否された',
 'texte_suppression_fichiers' => 'これを使うとSPIPのすべてのキャッシュファイルが削除されます。これを許可すると、特にサイトの構造や画像の重要な変更を入力している場合に備えて、すべてのページのリフレッシュを強制します。',
 'texte_sur_titre' => 'トップタイトル',
-'texte_syndication' => 'これを許可すると、最新の資料のリストを自動的に検索することが可能になります。これをするには供給（シンジケート）を作動させなければなりません。
-  <blockquote><i>若干のホストではこの機能は無効です。そういう場合、あなたはあなたのサイトから内容を供給（シンジケート）することは出来ないでしょう。</i></blockquote>', # MODIF
 'texte_table_ok' => ': このテーブルはOK。',
 'texte_tables_indexation_vides' => '空のエンジンのテーブルをインデックス',
 'texte_tentative_recuperation' => '復元を試みる',
@@ -941,7 +891,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_admin_vider' => '技術的なメンテナンス',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => 'このサイトで成功した記事を配給しました。',
 'titre_cadre_afficher_article' => '記事の表示:',
 'titre_cadre_afficher_traductions' => '次の言語のための、翻訳のステータスの表示:',
 'titre_cadre_ajouter_auteur' => '著者の追加:',
@@ -958,7 +907,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'オプションズ: <b>あなたのLDAPコネクション</b>',
-'titre_dernier_article_syndique' => '最新の配給された記事',
 'titre_evolution_visite' => '訪れるレベル',
 'titre_groupe_mots' => 'キーワードグループ:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -986,7 +934,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_page_message_edit' => 'メッセージを書く',
 'titre_page_messagerie' => 'あなたのメッセージング',
 'titre_page_recherche' => '検索語 @recherche@ による検索結果',
-'titre_page_sites_tous' => '参照されたサイト',
 'titre_page_statistiques' => 'セクションごとの統計',
 'titre_page_statistiques_referers' => '統計（入ってくるリンク）',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
@@ -994,17 +941,10 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_page_statistiques_visites' => '訪問者の統計',
 'titre_page_upgrade' => 'SPIPアップグレード',
 'titre_publication_articles_post_dates' => '記事の投稿時間の公開',
-'titre_referencement_sites' => 'サイトを参照しているのと、配給',
 'titre_referencer_site' => 'サイトの参照:',
 'titre_rendez_vous' => '約束:',
 'titre_reparation' => '修理',
-'titre_site_numero' => 'サイト番号:',
-'titre_sites_proposes' => '提出したサイト',
-'titre_sites_references_rubrique' => 'このセクション内で参照されたサイト ',
-'titre_sites_syndiques' => '配給されたサイト',
-'titre_sites_tous' => '参照されたサイト',
 'titre_suivi_petition' => '署名の把握',
-'titre_syndication' => 'サイトの配給',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'この番号には記事はありません',

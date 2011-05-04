@@ -43,10 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_operation_echec' => '操作失败.',
 'avis_operation_impossible' => 'Opération impossible', # NEW
 'avis_probleme_archive' => '读取文件@archive@失败 ',
-'avis_site_introuvable' => '站点未找到',
-'avis_site_syndique_probleme' => '警告: 联合站点遇到问题; 目前系统临时中断. 请确认站点的联合文件地址(<b>@url_syndic@</b>), 重新尝试执行信息恢复.', # MODIF
-'avis_sites_probleme_syndication' => '这些站点遇到联合问题',
-'avis_sites_syndiques_probleme' => '这些联合站点出现问题',
 'avis_suppression_base' => '注意, 数据删除不可挽回',
 'avis_version_mysql' => 'SQL (@version_mysql@) 版本不允许数据库表格的自动修复.',
 
@@ -82,11 +78,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_liste_nouveautes' => '发送最近新闻列表',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => '不要出现在连接编辑者列表中',
 'bouton_radio_non_envoi_annonces_editoriales' => '不发送任何编辑的声明',
-'bouton_radio_non_syndication' => '没有联合',
 'bouton_radio_pas_petition' => '没有请求',
 'bouton_radio_petition_activee' => '激活请求',
 'bouton_radio_supprimer_petition' => '删除请求',
-'bouton_radio_syndication' => '联合:',
 'bouton_redirection' => '重定向',
 'bouton_relancer_installation' => '重新安装',
 'bouton_suivant' => '下一步',
@@ -127,15 +121,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => '目录地址',
 'entree_adresse_email' => '您的邮件地址',
-'entree_adresse_fichier_syndication' => '联合所用的«引用»文件地址:', # MODIF
-'entree_adresse_site' => '<b>站点地址</b> [必须的]',
 'entree_base_donnee_1' => '数据库地址',
 'entree_base_donnee_2' => '(该地址经常对应您的站点地址,有时对应 «localhost», 有时可以留空.)',
 'entree_biographie' => '自我简介.',
 'entree_chemin_acces' => '<b>输入</b> 路径:', # MODIF
 'entree_cle_pgp' => '您的PGP钥匙',
 'entree_contenu_rubrique' => '(专栏内容简介.)',
-'entree_description_site' => '站点描述',
 'entree_identifiants_connexion' => '您的连接标识符...',
 'entree_informations_connexion_ldap' => '请在表单中填入LDAP连接信息. 所有信息应该由系统或网络管理员提供.',
 'entree_infos_perso' => '您是谁?',
@@ -210,9 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_article' => '修改文章',
 'icone_modifier_message' => '修改消息',
 'icone_modifier_rubrique' => '修改此栏',
-'icone_modifier_site' => '修改站点',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => '引用一个新站点',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => '返回',
 'icone_retour_article' => '返回文章',
@@ -222,7 +211,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_rubrique' => '删除此栏',
 'icone_supprimer_signature' => '删除签名',
 'icone_valider_signature' => '使签名有效',
-'icone_voir_sites_references' => '查看参考站点',
 'image_administrer_rubrique' => '您可以管理该栏',
 'info_1_article' => '1篇文章',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -285,7 +273,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => '消息',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => '您的数据库已经安装.',
-'info_bloquer' => 'bloquer', # NEW
 'info_chapeau' => '前言',
 'info_chapeau_2' => '前言:',
 'info_chemin_acces_1' => '选项: <b>目录的访问路径</b>', # MODIF
@@ -322,7 +309,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_date_publication_anterieure' => '更早出版的日期:', # MODIF
 'info_date_referencement' => '参考站点日期:',
 'info_derniere_etape' => '最后一步: <b>完成了!', # MODIF
-'info_derniere_syndication' => '站点的最近联合己移出',
 'info_derniers_articles_publies' => '你最近出版的文章',
 'info_desactiver_messagerie_personnelle' => '你可激活或使站点个人消息不可用.',
 'info_descriptif' => '描述:',
@@ -386,8 +372,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_langues' => '站点语言',
 'info_ldap_ok' => 'LDAP 验证已安装.',
 'info_lien_hypertexte' => '超链接:',
-'info_liens_syndiques_1' => '联合连接',
-'info_liens_syndiques_2' => '未确认.',
 'info_liste_redacteurs_connectes' => '列出连接的编辑者',
 'info_login_existant' => '这个登录名已经存在.',
 'info_login_trop_court' => '登录名太短.',
@@ -431,7 +415,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_nom' => '名字',
 'info_nom_destinataire' => '接收者名字',
 'info_nom_site' => '你的站点名',
-'info_nom_site_2' => '<b>站点名</b> [必须]',
 'info_nombre_articles' => '@nb_articles@ 文章,',
 'info_nombre_partcipants' => '讨论的参考者:',
 'info_nombre_rubriques' => '专栏@nb_rubriques@,',
@@ -498,7 +481,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   这样,
   自动注册将
   不生效.', # MODIF
-'info_question_proposer_site' => '谁能提出引用站点?',
 'info_question_utilisation_moteur_recherche' => '你希望SPIP集成搜索引擎吗?
  (使它不可用能加速系统的性能.)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
@@ -531,14 +513,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_site' => '站点',
 'info_site_2' => '站点:',
 'info_site_min' => '站点',
-'info_site_propose' => '提交的站点:',
 'info_site_reference_2' => '引用的站点',
-'info_site_syndique' => '联合的站点...',
-'info_site_valider' => '使有效的站点',
 'info_sites' => '站点',
 'info_sites_lies_mot' => '与关键词关联的参考站点',
 'info_sites_proxy' => '使用代理',
-'info_sites_refuses' => '丢弃的站点',
 'info_sites_trouves' => '站点找到了',
 'info_sites_trouves_dans_texte' => '站点找到了 (在正文)',
 'info_sous_titre' => '子标题:',
@@ -548,10 +526,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_statut_auteur_autre' => 'Autre statut :', # NEW
 'info_statut_efface' => '删除',
 'info_statut_redacteur' => '编辑者',
-'info_statut_site_1' => '站点是:',
-'info_statut_site_2' => '出版',
-'info_statut_site_3' => '提交',
-'info_statut_site_4' => '到垃圾箱',
 'info_statut_utilisateurs_1' => '导入用户的缺省状态',
 'info_statut_utilisateurs_2' => 'Choose the status that is attributed to the persons present in the LDAP directory when they connect for the first time. Later, you can modify this value for each author on a case by case basis.',
 'info_suivi_activite' => '继续使编辑可用',
@@ -631,14 +605,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_autoriser_documents_joints' => '认证文章附加的文档',
 'item_autoriser_documents_joints_rubriques' => '认证专栏中的文档',
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
-'item_bloquer_liens_syndiques' => '阻止联合站点确认',
 'item_choix_administrateurs' => '管理者',
 'item_choix_generation_miniature' => '自动产生像片册.',
 'item_choix_non_generation_miniature' => '不产生像片册.',
 'item_choix_redacteurs' => '编辑者',
 'item_choix_visiteurs' => '公共站点的访问者',
 'item_creer_fichiers_authent' => '创建 .htpasswd 文件',
-'item_gerer_annuaire_site_web' => '管理站点目录',
 'item_gerer_statistiques' => '管理统计',
 'item_limiter_recherche' => '限制搜索你站点包括的内容',
 'item_login' => '登录',
@@ -653,23 +625,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_non_autoriser_documents_joints' => '不论证文章中文档',
 'item_non_autoriser_documents_joints_rubriques' => '不认证专栏中的文档',
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
-'item_non_bloquer_liens_syndiques' => '不阻止联合中引出的链接',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
 'item_non_creer_fichiers_authent' => '不创建这些文件',
-'item_non_gerer_annuaire_site_web' => '使网站目录不可用',
 'item_non_gerer_statistiques' => '不管理统计表',
 'item_non_limiter_recherche' => '扩充搜索到参考站点',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => '不发表出版日期前的文章.',
 'item_non_utiliser_moteur_recherche' => '不使用引擎',
-'item_non_utiliser_syndication' => '不使用自动联合',
 'item_nouvel_auteur' => '新作者',
 'item_nouvelle_rubrique' => '新专栏',
 'item_oui' => '是',
 'item_publier_articles' => '忽略出版日期出版文章.',
 'item_reponse_article' => '回复文章',
 'item_utiliser_moteur_recherche' => '使用搜索引擎',
-'item_utiliser_syndication' => '使用自动联合',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => '访问者',
@@ -694,9 +662,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_ajouter_auteur' => '加作者',
 'lien_ajouter_participant' => '添加一个新的参与者',
 'lien_email' => '电子邮件',
-'lien_mise_a_jour_syndication' => '现在更新',
 'lien_nom_site' => '站点名:',
-'lien_nouvelle_recuperation' => '试着重新获取数据',
 'lien_retirer_auteur' => '移去作者',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => '移去参与者',
@@ -813,15 +779,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // S
 'sans_heure' => 'sans heure', # NEW
 'statut_admin_restreint' => '(受限制的管理)',
-'syndic_choix_moderation' => 'Que faire des prochains liens en provenance de ce site ?', # NEW
-'syndic_choix_oublier' => 'Que faire des liens qui ne figurent plus dans le fichier de syndication ?', # NEW
-'syndic_choix_resume' => 'Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer :', # NEW
-'syndic_lien_obsolete' => 'lien obsolète', # NEW
-'syndic_option_miroir' => 'les bloquer automatiquement', # NEW
-'syndic_option_oubli' => 'les effacer (après @mois@ mois)', # NEW
-'syndic_option_resume_non' => 'le contenu complet des articles (au format HTML)', # NEW
-'syndic_option_resume_oui' => 'un simple résumé (au format texte)', # NEW
-'syndic_options' => 'Options de syndication :', # NEW
 
 // T
 'taille_cache_image' => 'Les images calculées automatiquement par SPIP (vignettes des documents, titres présentés sous forme graphique, fonctions mathématiques au format TeX...) occupent dans le répertoire @dir@ un total de @taille@.', # NEW
@@ -911,20 +868,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_jeu_caractere_4' => 'Si cela ne correspond pas à la réalité de vos données (suite, par exemple, à une restauration de base de données), ou si <em>vous démarrez ce site</em> et souhaitez partir sur un autre jeu de caractères, veuillez indiquer ce dernier ici :', # NEW
 'texte_jeu_caractere_conversion' => 'Note : vous pouvez décider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, brèves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.', # NEW
 'texte_lien_hypertexte' => '(如果消息引用了一个WEB站点的文章, 或页面, 请提供页面标题和 URL.)',
-'texte_liens_sites_syndiques' => '从联合站点发出的连接能
-   被预先阻止; 以下
-   设置允许联合站点创建后
-   显示缺省设置. 
-   然后无论如何可分开阻止每个连接
-   , 或选择,
-   对每一站点, 阻止连接来自
-   任何特别的站点.',
 'texte_login_ldap_1' => '(匿名访问留空或输入完整路径, 例如 «<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>».)',
 'texte_login_precaution' => '警告 ! 这是你正连接的登录.
  小心使用这个表单...',
 'texte_message_edit' => '警告: 消息可被所有站点管理员管理, 对所有编辑显示. 使用声明只加重了站点的重要事件.',
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
-'texte_messages_publics' => '文章的公共消息:',
 'texte_mise_a_niveau_base_1' => '你已更新 SPIP 文件.
  现在你必须更新站点
  数据库.',
@@ -938,7 +886,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_multilinguisme' => '如果您希望用复杂导航管理多语言文章, 您可以根据站点的组织, 在文章及/或专栏中添加语言选择菜单.',
 'texte_multilinguisme_trad' => '同样,在不同的文章翻译中你可以激活连接管理系统.',
 'texte_non_compresse' => '<i>未解压</i> (你的服务器不支持)',
-'texte_non_fonction_referencement' => '你可以选择不使用这个自动特性, 手动输入连接元素...',
 'texte_nouveau_message' => '新消息',
 'texte_nouvelle_version_spip_1' => '您已经安装了新版SPIP.',
 'texte_nouvelle_version_spip_2' => '新版本需要比通常更彻底的更新. 如果你是站点管理员, 请删除目录中 <tt>ecrire</tt>文件 <tt>inc_connect.php3</tt>  并重新安装更新你的数据库连接参数. <p>(NB.: 如果你忘记了连接参数, 在删除前看看<tt>inc_connect.php3</tt> ...)', # MODIF
@@ -962,8 +909,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_recapitiule_liste_documents' => '该页将汇总各专栏中的文档. 如需修改各个文档的信息, 单击所属专栏页面的链接.',
 'texte_recuperer_base' => '修复数据库',
 'texte_reference_mais_redirige' => '你的SPIP参考的文章, 但是重定向到别的 URL.',
-'texte_referencement_automatique' => '<b>自动站点引用</b><br />通过指出以下的想得到的URL或后端文件的地址,您可以迅速引用一个站点. SPIP 将自动获得关于站点的信息 (标题, 描述...).', # MODIF
-'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>当一些 SQL 查询失败并且没有任何原因显示
   , 可能是数据库
   自动出错了
@@ -994,11 +939,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 这允许你, 另外地, 以防你进入站点结构和图片重要修改后
 强制你刷新所有的页面.',
 'texte_sur_titre' => '顶标题',
-'texte_syndication' => '如果站点允许, 可以自动得到最新的素材
-  . 要这样的话, 你必须激活联合. 
-  <blockquote><i>一些主机禁用这个功能; 
-  这种情况下, 你不能使用
-  你站点的内容联合.</i></blockquote>', # MODIF
 'texte_table_ok' => ': 表好了.',
 'texte_tables_indexation_vides' => '引擎的索引表为空.',
 'texte_tentative_recuperation' => '试图修复',
@@ -1028,7 +968,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_admin_vider' => '技术维护',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => '剔除站点的联合文章',
 'titre_cadre_afficher_article' => '显示文章:',
 'titre_cadre_afficher_traductions' => '显示语言的翻译状态.',
 'titre_cadre_ajouter_auteur' => '加作者:',
@@ -1045,7 +984,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => '选项: <b>你的 LDAP 连接</b>',
-'titre_dernier_article_syndique' => '最后联合的文章',
 'titre_evolution_visite' => '访问者评估',
 'titre_groupe_mots' => '关键词组:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1073,7 +1011,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_message_edit' => '写消息',
 'titre_page_messagerie' => '您的消息',
 'titre_page_recherche' => '搜索结果@recherche@',
-'titre_page_sites_tous' => '参考站点',
 'titre_page_statistiques' => '按专栏统计',
 'titre_page_statistiques_referers' => '统计(引入链接)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
@@ -1081,17 +1018,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_statistiques_visites' => '访问者统计',
 'titre_page_upgrade' => 'SPIP升级 ',
 'titre_publication_articles_post_dates' => '发表日期文章的出版物',
-'titre_referencement_sites' => '参考站点和联合组织',
 'titre_referencer_site' => '参考站点:',
 'titre_rendez_vous' => '约会:',
 'titre_reparation' => '修复',
-'titre_site_numero' => '站点号:',
-'titre_sites_proposes' => '已提交站点',
-'titre_sites_references_rubrique' => '此栏下的参考站点',
-'titre_sites_syndiques' => '联合站点',
-'titre_sites_tous' => '参考站点',
 'titre_suivi_petition' => '跟踪请求',
-'titre_syndication' => '站点联合',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => '没有文章为该号',

@@ -46,10 +46,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_operation_echec' => 'A operação falhou. ',
 'avis_operation_impossible' => 'Opération impossible', # NEW
 'avis_probleme_archive' => 'Problema de leitura do ficheiro @archive@',
-'avis_site_introuvable' => 'Não se encontra o sítio',
-'avis_site_syndique_probleme' => 'Atenção: a ligação deste sítio teve um problema  ; o sistema está portanto temporariamente interrompido. Verifique o endereço do ficheiro de ligação deste sítio (<b>@url_syndic@</b>), e tente uma nova recuperação das informações. ', # MODIF
-'avis_sites_probleme_syndication' => 'Estes sítios tiveram um problema de ligação  ',
-'avis_sites_syndiques_probleme' => 'Estes sítios provocaram um problema  ',
 'avis_suppression_base' => 'Atenção, a supressão dos dados é irreversível',
 'avis_version_mysql' => 'A sua versão de SQL (@version_mysql@) não permite a auto-reparação das tabelas da base.', # MODIF
 
@@ -85,11 +81,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_liste_nouveautes' => 'Enviar a lista das novidades',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Não aparecer na lista dos redactores',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Não enviar anúncios editoriais',
-'bouton_radio_non_syndication' => 'Não há vinculação',
 'bouton_radio_pas_petition' => 'Não há abaixo-assinado',
 'bouton_radio_petition_activee' => 'Abaixo-assinado activado',
 'bouton_radio_supprimer_petition' => 'Suprimir o abaixo-assinado',
-'bouton_radio_syndication' => 'Vinculação',
 'bouton_redirection' => 'REDIRIGIR',
 'bouton_relancer_installation' => 'Lançar de novo a instalação',
 'bouton_suivant' => 'Seguinte',
@@ -130,15 +124,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Endereço do anuário',
 'entree_adresse_email' => 'O seu endereço email',
-'entree_adresse_fichier_syndication' => 'Endereço do ficheiro  « backend » para a vinculação :', # MODIF
-'entree_adresse_site' => '<b>Endereço do sítio</b> [Obrigatório]',
 'entree_base_donnee_1' => 'Endereço da base de dados',
 'entree_base_donnee_2' => '(Muitas vezes, este endereço corresponde ao do seu sítio, outras vezes, corresponde à menção «localhost», às vezes, fica totalmente vazio.)',
 'entree_biographie' => 'Curta biografia, em poucas palavras',
 'entree_chemin_acces' => '<b>Introduzir</b> o caminho de acesso :', # MODIF
 'entree_cle_pgp' => 'A sua chave PGP',
 'entree_contenu_rubrique' => '(Conteúdo da rubrica em poucas palavras.)',
-'entree_description_site' => 'Descrição do sítio',
 'entree_identifiants_connexion' => 'Os seus identificadores de ligação',
 'entree_informations_connexion_ldap' => 'Favor pôr neste formulário as informações de ligação ao seu anuário LDAP.
 Essas informações devem poder ser fornecidas pelo administrador do sistema,
@@ -215,9 +206,7 @@ ou da rede',
 'icone_modifier_article' => 'Modificar este artigo',
 'icone_modifier_message' => 'Modificar esta mensagem',
 'icone_modifier_rubrique' => 'Modificar esta rubrica',
-'icone_modifier_site' => 'Modificar este sítio',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => 'Referenciar um novo sítio',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'voltar',
 'icone_retour_article' => 'Voltar ao artigo',
@@ -227,7 +216,6 @@ ou da rede',
 'icone_supprimer_rubrique' => 'Suprimir esta rubrica',
 'icone_supprimer_signature' => 'Suprimir esta assinatura',
 'icone_valider_signature' => 'Validar esta assinatura',
-'icone_voir_sites_references' => 'Ver os sítios referenciados',
 'image_administrer_rubrique' => 'Pode administrar esta rubrica',
 'info_1_article' => '1 artigo',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -292,7 +280,6 @@ ou da rede',
 'info_avertissement' => 'Aviso',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'A estrutura da sua base de dados está instalada',
-'info_bloquer' => 'bloquear',
 'info_chapeau' => 'Cabeçalho',
 'info_chapeau_2' => 'Cabeçalho :',
 'info_chemin_acces_1' => 'Opções : <b>Caminho de acesso no anuário</b>', # MODIF
@@ -329,7 +316,6 @@ ou da rede',
 'info_date_publication_anterieure' => 'Data de publicação anterior:',
 'info_date_referencement' => 'DATA DE REFERENCIAMENTO DESTE SÍTIO :',
 'info_derniere_etape' => 'Última etapa : <b>Acabou !', # MODIF
-'info_derniere_syndication' => 'A última vinculação deste sítio foi efectuada a',
 'info_derniers_articles_publies' => 'Os seus últimos artigos publicados em linha',
 'info_desactiver_messagerie_personnelle' => 'Pode activar ou desactivar o seu correio pessoal neste sítio.',
 'info_descriptif' => 'Descrição:',
@@ -390,8 +376,6 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_langues' => 'Línguas do sítio',
 'info_ldap_ok' => 'A autenticação LDAP está instalada.',
 'info_lien_hypertexte' => 'Vínculo hipertexto :',
-'info_liens_syndiques_1' => 'laços vinculados',
-'info_liens_syndiques_2' => 'estão à espera de validação',
 'info_liste_redacteurs_connectes' => 'Lista dos redactores ligados',
 'info_login_existant' => 'Este login já existe.',
 'info_login_trop_court' => 'Login demasiado curto.',
@@ -435,7 +419,6 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_nom' => 'Nome',
 'info_nom_destinataire' => 'Nome do destinatário',
 'info_nom_site' => 'Nome do seu sítio',
-'info_nom_site_2' => '<b>Nome do sítio</b> [Obrigatório]',
 'info_nombre_articles' => '@nb_articles@ artigos,',
 'info_nombre_partcipants' => 'PARTICIPANTES NA DISCUSSÃO :',
 'info_nombre_rubriques' => '@nb_rubriques@ rubricas,',
@@ -502,7 +485,6 @@ fornecendo-lhes os seus códigos de acesso ao sítio privado.Alguns
 serviços de hospedagem desactivam o envio de mails a partir dos seus
  servidores : nesse caso, a inscrição automática é
  impossível.', # MODIF
-'info_question_proposer_site' => 'Quem pode propor sítios referenciados ?',
 'info_question_utilisation_moteur_recherche' => 'Deseja utilizar o motor integrado de pesquisa a SPIP ?
 (desactivá-lo acelera o funcionamento do sistema)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
@@ -535,14 +517,10 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 'info_site' => 'Sítio',
 'info_site_2' => 'sítio :',
 'info_site_min' => 'sítio',
-'info_site_propose' => 'Sítio proposto a :',
 'info_site_reference_2' => 'Sítio referenciado',
-'info_site_syndique' => 'Este sítio está vinculado....',
-'info_site_valider' => 'Sítios a validar',
 'info_sites' => 'sítios',
 'info_sites_lies_mot' => 'Os sítios referenciados ligados a esta palavra-chave',
 'info_sites_proxy' => 'Utilizar um proxy',
-'info_sites_refuses' => 'Os sítios recusados ',
 'info_sites_trouves' => 'Sítios encontrados',
 'info_sites_trouves_dans_texte' => 'Sítios encontrados (no texto)',
 'info_sous_titre' => 'Sub-título :',
@@ -552,10 +530,6 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 'info_statut_auteur_autre' => 'Autre statut :', # NEW
 'info_statut_efface' => 'Apagado',
 'info_statut_redacteur' => 'Redactor',
-'info_statut_site_1' => 'Este sítio é :',
-'info_statut_site_2' => 'Publicado',
-'info_statut_site_3' => 'Proposto',
-'info_statut_site_4' => 'Para o caixote do lixo',
 'info_statut_utilisateurs_1' => 'Estatuto por defeito dos utilizadores importados',
 'info_statut_utilisateurs_2' => 'Escolha o estatuto atribuído às pessoas presentes no anuário LDAP quando elas se ligam pela primeira vez. Poderá depois modificar este valor para cada autor, caso a caso.',
 'info_suivi_activite' => 'Acompanhamento da actividade editorial',
@@ -635,14 +609,12 @@ numa cor que indica o seu estado:',
 'item_autoriser_documents_joints' => 'Autorizar os documentos juntos aos artigos',
 'item_autoriser_documents_joints_rubriques' => 'Autorizar os documentos nas rubricas',
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
-'item_bloquer_liens_syndiques' => 'Impedir os laços vinculados para validação',
 'item_choix_administrateurs' => 'os administradores',
 'item_choix_generation_miniature' => 'Gerar automaticamente as miniaturas das imagens.',
 'item_choix_non_generation_miniature' => 'Não gerar miniaturas das imagens.',
 'item_choix_redacteurs' => 'os redactores',
 'item_choix_visiteurs' => 'os visitadores do sítio público',
 'item_creer_fichiers_authent' => 'Criar os ficheiros .htpasswd',
-'item_gerer_annuaire_site_web' => 'Gerir um anuário de sítios Web',
 'item_gerer_statistiques' => 'Gerir as estatísticas',
 'item_limiter_recherche' => 'Limitar a pesquisa às informações contidas no seu sítio',
 'item_login' => 'Login',
@@ -657,23 +629,19 @@ numa cor que indica o seu estado:',
 'item_non_autoriser_documents_joints' => 'Não autorizar os documentos nos artigos',
 'item_non_autoriser_documents_joints_rubriques' => 'Não autorizar os documentos nas rubricas',
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
-'item_non_bloquer_liens_syndiques' => 'Não impedir os laços resultantes da vinculação',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
 'item_non_creer_fichiers_authent' => 'Não criar estes ficheiros',
-'item_non_gerer_annuaire_site_web' => 'Desactivar o anuário de sítios Web',
 'item_non_gerer_statistiques' => 'Não gerir as estatísticas',
 'item_non_limiter_recherche' => 'Alargar a pesquisa ao conteúdo dos sítios referenciados',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Não publicar os artigos antes da data de publicação fixada.',
 'item_non_utiliser_moteur_recherche' => 'Não utilizar o motor',
-'item_non_utiliser_syndication' => 'Não utilizar a vinculação automática',
 'item_nouvel_auteur' => 'Novo autor',
 'item_nouvelle_rubrique' => 'Nova rubrica',
 'item_oui' => 'Sim',
 'item_publier_articles' => 'Publicar os artigos, seja qual for a sua data de publicação.',
 'item_reponse_article' => 'Resposta ao artigo',
 'item_utiliser_moteur_recherche' => 'Utilizar o motor de pesquisa',
-'item_utiliser_syndication' => 'Utilizar a vinculação automática',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'visitante',
@@ -698,9 +666,7 @@ numa cor que indica o seu estado:',
 'lien_ajouter_auteur' => 'Acrescentar este autor',
 'lien_ajouter_participant' => 'Acrescentar um participante',
 'lien_email' => 'email',
-'lien_mise_a_jour_syndication' => 'Actualizar agora',
 'lien_nom_site' => 'NOME DO SÍTIO',
-'lien_nouvelle_recuperation' => 'Tentar uma nova recuperação dos dados',
 'lien_retirer_auteur' => 'Tirar o autor',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'tirar este participante',
@@ -817,15 +783,6 @@ numa cor que indica o seu estado:',
 // S
 'sans_heure' => 'sans heure', # NEW
 'statut_admin_restreint' => '(admin restrito)',
-'syndic_choix_moderation' => 'Que fazer com as novas ligações provenientes deste sítio ?',
-'syndic_choix_oublier' => 'Que fazer com as ligações que não aparecem mais no ficheiro de sindicação  ?',
-'syndic_choix_resume' => 'Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer :', # NEW
-'syndic_lien_obsolete' => 'ligação desactualizada',
-'syndic_option_miroir' => 'bloquear automaticamente',
-'syndic_option_oubli' => 'eliminar (após @mês@ mês)',
-'syndic_option_resume_non' => 'le contenu complet des articles (au format HTML)', # NEW
-'syndic_option_resume_oui' => 'un simple résumé (au format texte)', # NEW
-'syndic_options' => 'Opções de sindicação :',
 
 // T
 'taille_cache_image' => 'As imagens calculadas automaticamente pelo SPIP (miniaturas dos documentos, títulos apresentados sob forma gráfica, funções matemáticas no formato TeX...) ocupam no directório @dir@ um total de @taille@.',
@@ -912,18 +869,11 @@ o sítio público (balisa<tt>#CHARSET</tt>).', # MODIF
 'texte_jeu_caractere_4' => 'Si cela ne correspond pas à la réalité de vos données (suite, par exemple, à une restauration de base de données), ou si <em>vous démarrez ce site</em> et souhaitez partir sur un autre jeu de caractères, veuillez indiquer ce dernier ici :', # NEW
 'texte_jeu_caractere_conversion' => 'Note : vous pouvez décider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, brèves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.', # NEW
 'texte_lien_hypertexte' => '(Se a sua mensagem se refere a um artigo publicado na Web, ou a uma página que fornece mais informações, favor indicar a seguir o título da página e o endereço URL.)',
-'texte_liens_sites_syndiques' => 'Os laços resultantes dos sítios vinculados podem
- ser bloqueados a priori ; a definição
- a seguir indica a definição por defeito dos
- sítios vinculados depois da sua criação. Depois é
- possível, de qualquer modo, desbloquear cada laço individualmente, ou escolher
-, sítio por sítio, bloquear os laços futuros deste ou daquele sítio.',
 'texte_login_ldap_1' => '(Deixar vazio para um acesso anónimo, ou introduzir o caminho completo, por exemplo, « <tt>uid=silva, ou=users, dc=meu-dominio, dc=com</tt> ».)',
 'texte_login_precaution' => 'Atenção ! Isto é o login sob o qual está ligado actualmente.
 Utilize este formulário com precaução...',
 'texte_message_edit' => 'Atenção : esta mensagem pode ser modificada por todos os administradores do sítio, e é visível por todos os redactores. Utilizar os anúncios apenas para exibir acontecimentos importantes da vida do sítio.',
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
-'texte_messages_publics' => 'Mensagens públicas do artigo :',
 'texte_mise_a_niveau_base_1' => 'Acaba de actualizar os ficheiros SPIP.
 é preciso agora pôr a nível a base de dados
  do sítio. ',
@@ -937,7 +887,6 @@ de uma salvaguarda por exemplo). Note que os documentos modificados de
 'texte_multilinguisme' => 'Se desejar gerir artigos em muitas línguas, com uma navegação complexa, pode acrescentar um menu de língua aos artigos e/ou nas rubricas, em função da organização do seu sítio.',
 'texte_multilinguisme_trad' => 'Pode também activar um sistema de gestão de laços entre as diferentes traduções de um artigo.',
 'texte_non_compresse' => '<i>não comprimido</i> ( o seu sezrvidor não suporta esta funcionalidade)',
-'texte_non_fonction_referencement' => 'Pode preferir não utilizar esta função automática, e indicar os elementos relativos a este sítio...',
 'texte_nouveau_message' => 'Nova mensagem',
 'texte_nouvelle_version_spip_1' => 'Instalou uma nova versão de SPIP.',
 'texte_nouvelle_version_spip_2' => 'Esta nova versão precisa de uma actualização mais completa do que o normal. Se é o webmaster do site, por favor, apague o ficheiro <tt>inc_connect.php3</tt> do directório <tt>ecrire</tt> e retome a instalação de forma a incluir os seus parâmetros de ligação à base de dados.<p> (NB.: se não se lembra dos seus parâmetros de ligação, consulte o arquivo <tt>inc_connect.php3</tt> antes de apagá-lo...)</p>', # MODIF
@@ -960,8 +909,6 @@ recompor uma única página, passe pelo espaço público e utilize o botão «re
 'texte_recapitiule_liste_documents' => 'Esta página recapitula a lista dos documentos que colocou nas rubricas. Para modificar as informações de cada documento, siga o link para a página da rubrica.',
 'texte_recuperer_base' => 'Reparar a base de dados',
 'texte_reference_mais_redirige' => 'artigo referenciado no seu sítio SPIP, mas redirigido para uma outra URL.',
-'texte_referencement_automatique' => '<b>Referenciamento automatizado de um sítio</b><br />Pode referenciar rapidamente um sítio Web indicando a seguir o endereço URL desejado, ou o endereço do seu backend. SPIP vai recuperar automaticamente as informações relativas a esse sítio (título, descrição...).', # MODIF
-'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Quando alguns pedidos SQL falharem
  sistematicamente e sem zazão aparente, é possível
  que seja por causa da  própria base de dados
@@ -985,11 +932,6 @@ recompor uma única página, passe pelo espaço público e utilize o botão «re
 na cache SPIP. Isso permite, por exemplo, obrigar uma recomposição de todas as páginas se você
  fez modificaçõesimportantes de grafismo ou de estrutura do sítio.',
 'texte_sur_titre' => 'Supra-título',
-'texte_syndication' => 'É possível recuperar automaticamente, quando um sítio Web o permitir, 
- a lista das suas novidades. Para tal, deve activar a vinculação. 
-  <blockquote><i>Alguns serviços de hospedagem desactivam esta funcionalidade ; 
- neste caso, não poderá utilizar a vinculação de conteúdo
-a partir do seu sítio.</i></blockquote>', # MODIF
 'texte_table_ok' => ': esta tabela está OK.',
 'texte_tables_indexation_vides' => 'As tabelas de indexação do motor estão vazias.',
 'texte_tentative_recuperation' => 'Tentativa de reparação',
@@ -1031,7 +973,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_admin_vider' => 'Manutenção técnica',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => 'Artigos vinculados tirados deste sítio',
 'titre_cadre_afficher_article' => 'Exibir os artigos',
 'titre_cadre_afficher_traductions' => 'Exibir o estado das traduções para estas línguas:',
 'titre_cadre_ajouter_auteur' => 'ACRESCENTAR UM AUTOR :',
@@ -1048,7 +989,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opções: <b>Sua ligação LDAP</b>',
-'titre_dernier_article_syndique' => 'Últimos artigos vinculados',
 'titre_evolution_visite' => 'Evolução das visitas',
 'titre_groupe_mots' => 'GRUPO DE PALAVRAS :',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1076,7 +1016,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_page_message_edit' => 'Redigir uma mensagem',
 'titre_page_messagerie' => 'O seu correio',
 'titre_page_recherche' => 'Resultados da pesquisa @recherche@',
-'titre_page_sites_tous' => 'Os sítios referenciados',
 'titre_page_statistiques' => 'Estatísticas por rubricas',
 'titre_page_statistiques_referers' => 'Estatísticas (ligações de entrada)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
@@ -1084,17 +1023,10 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_page_statistiques_visites' => 'Estatísticas das visitas',
 'titre_page_upgrade' => 'Reactualização de SPIP',
 'titre_publication_articles_post_dates' => 'Publicação dos artigos pós-datados',
-'titre_referencement_sites' => 'Referenciação de sítios e vinculação',
 'titre_referencer_site' => 'Referenciar o sítio',
 'titre_rendez_vous' => 'ENCONTROS',
 'titre_reparation' => 'Reparação',
-'titre_site_numero' => 'SÍTIO NÚMERO :',
-'titre_sites_proposes' => 'Os sítios propostos',
-'titre_sites_references_rubrique' => 'Os sítios referenciados nesta rubrica',
-'titre_sites_syndiques' => 'Os sítios vinculados',
-'titre_sites_tous' => 'Os sítios referenciados',
 'titre_suivi_petition' => 'Seguimento dos abaixo-assinados',
-'titre_syndication' => 'Vinculação de sítios',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Não há artigo com este número',

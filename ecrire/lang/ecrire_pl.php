@@ -45,10 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_operation_echec' => 'Operacja nie powiodła się.',
 'avis_operation_impossible' => 'Operacja niemożliwa',
 'avis_probleme_archive' => 'Istnieje błąd w pliku @archive@',
-'avis_site_introuvable' => 'Strony nie znaleziono',
-'avis_site_syndique_probleme' => 'Uwaga : syndykacja strony napotkała na problem ; system został na chwilę wstrzymany. Sprawdź URL syndykowanej strony (<b>@url_syndic@</b>), i spróbuj powtórnie pozyskać informacje.', # MODIF
-'avis_sites_probleme_syndication' => 'Te strony mają problem z syndykacją',
-'avis_sites_syndiques_probleme' => 'Następujące strony syndykowane sprawiają problem',
 'avis_suppression_base' => 'OSTRZEŻENIE, usunięcie danych jest nieodwracalne',
 'avis_version_mysql' => 'Twoja wersja SQL (@version_mysql@) nie umożliwia auto-naprawy tablic baz danych.', # MODIF
 
@@ -84,11 +80,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_liste_nouveautes' => 'Wysyłaj najnowszą listę newsów',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nie pokazuj w liście redaktorów',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Nie wysyłaj żadnych zawiadomień redakcyjnych',
-'bouton_radio_non_syndication' => 'Bez syndykacji',
 'bouton_radio_pas_petition' => 'Wyłącz ogłoszenia',
 'bouton_radio_petition_activee' => 'Ogłoszenia włączone',
 'bouton_radio_supprimer_petition' => 'Usuń ogłoszenia',
-'bouton_radio_syndication' => 'Syndykacja:',
 'bouton_redirection' => 'PRZEKIERUJ',
 'bouton_relancer_installation' => 'Uruchom ponownie instalację',
 'bouton_suivant' => 'Następny',
@@ -129,15 +123,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adres katalogu',
 'entree_adresse_email' => 'Twój adres e-mail',
-'entree_adresse_fichier_syndication' => 'Adres pliku syndykacji:',
-'entree_adresse_site' => '<b>URL strony</b> [obowiązkowo]',
 'entree_base_donnee_1' => 'Adres bazy danych',
 'entree_base_donnee_2' => '(Często adres ten jest taki sam, jak adres strony, czasem odpowiada nazwie «serwera lokalnego», a czasem jest pozostawiony pusty.)',
 'entree_biographie' => 'Krótka biografia w kilku słowach.',
 'entree_chemin_acces' => '<b>Podaj</b> ścieżkę dostępu:',
 'entree_cle_pgp' => 'Twój klucz PGP',
 'entree_contenu_rubrique' => '(Tematyka działu w kilku słowach.)',
-'entree_description_site' => 'Opis strony',
 'entree_identifiants_connexion' => 'Identyfikatory połączenia...',
 'entree_informations_connexion_ldap' => 'Proszę w ten formularz wpisać informacje o połączeniu LDAP. Uzyskać je można od administratora systemu lub sieci.',
 'entree_infos_perso' => 'Kim jesteś?',
@@ -212,9 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_article' => 'Zmień ten artykuł',
 'icone_modifier_message' => 'Zmień tę wiadomość',
 'icone_modifier_rubrique' => 'Zmień ten dział',
-'icone_modifier_site' => 'Zmień tę stronę',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => 'Nowy link do strony',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Powrót',
 'icone_retour_article' => 'Powrót do artykułu',
@@ -224,7 +213,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_rubrique' => 'Usuń ten dział',
 'icone_supprimer_signature' => 'Usuń ten podpis',
 'icone_valider_signature' => 'Zatwierdź ten podpis',
-'icone_voir_sites_references' => 'Pokaż zlinkowane strony',
 'image_administrer_rubrique' => 'Możesz zarządzać tym działem',
 'info_1_article' => '1 artykuł',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -289,7 +277,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Ostrzeżenie',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Struktura Twojej bazy danych została zainstalowana.',
-'info_bloquer' => 'zablokuj',
 'info_chapeau' => 'Wstęp',
 'info_chapeau_2' => 'Wstęp:',
 'info_chemin_acces_1' => 'Opcje: <b>Ścieżka dostępu do katalogu</b>',
@@ -326,7 +313,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_date_publication_anterieure' => 'Data poprzedniej publikacji:',
 'info_date_referencement' => 'DATA ZLINKOWANIA TEJ STRONY:',
 'info_derniere_etape' => 'Zakończone z sukcesem!',
-'info_derniere_syndication' => 'Ostatnia syndykacja tego serwisu została dokonana',
 'info_derniers_articles_publies' => 'Twoje ostatnie opublikowane artykuły',
 'info_desactiver_messagerie_personnelle' => 'Możesz włączyć lub wyłączyć wewnętrzną pocztę w tym serwisie.',
 'info_descriptif' => 'Opis:',
@@ -389,8 +375,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_langues' => 'Języki stron',
 'info_ldap_ok' => 'Uwierzytelnianie LDAP jest włączone.',
 'info_lien_hypertexte' => 'Hiperłącze:',
-'info_liens_syndiques_1' => 'linki syndykowane',
-'info_liens_syndiques_2' => 'oczekujące zatwierdzenia.',
 'info_liste_redacteurs_connectes' => 'Lista zalogowanych redaktorów',
 'info_login_existant' => 'Podany login już istnieje.',
 'info_login_trop_court' => 'Za krótki login.',
@@ -434,7 +418,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_nom' => 'Nazwisko',
 'info_nom_destinataire' => 'Nazwisko odbiorcy',
 'info_nom_site' => 'Nazwa Twojej strony',
-'info_nom_site_2' => '<b>Nazwa strony</b> [obowiązkowo]',
 'info_nombre_articles' => '@nb_articles@ artykułów,',
 'info_nombre_partcipants' => 'UCZESTNICY DYSKUSJI:',
 'info_nombre_rubriques' => '@nb_rubriques@ działu,',
@@ -501,7 +484,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   wyłączają możliwość wysyłania maili z ich
   serwerów : w tym przypadku automatyczne zapisanie się jest
   niemożliwe.', # MODIF
-'info_question_proposer_site' => 'Kto może proponować zlinkowane strony ?',
 'info_question_utilisation_moteur_recherche' => 'Czy życzysz sobie skorzystać z wyszukiwarki wewnętrznej SPIP ?
  (jej wyłączenie przyspiesza funkcjonowanie systemu.)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
@@ -534,14 +516,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_site' => 'Strona',
 'info_site_2' => 'strona:',
 'info_site_min' => 'strona',
-'info_site_propose' => 'Strona zaproponowana :',
 'info_site_reference_2' => 'Strona zlinkowana',
-'info_site_syndique' => 'Ta strona jest syndykowana...',
-'info_site_valider' => 'Strony do zatwierdzenia',
 'info_sites' => 'strony',
 'info_sites_lies_mot' => 'Zlinkowane strony związane z tymi słowami kluczowymi',
 'info_sites_proxy' => 'Użyj proxy',
-'info_sites_refuses' => 'Odrzucone strony',
 'info_sites_trouves' => 'Znalezione strony',
 'info_sites_trouves_dans_texte' => 'Strony znalezione (w tekście)',
 'info_sous_titre' => 'Podtytuł:',
@@ -551,10 +529,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_statut_auteur_autre' => 'Inny status :',
 'info_statut_efface' => 'Usunięto',
 'info_statut_redacteur' => 'Redaktor',
-'info_statut_site_1' => 'Ta strona jest:',
-'info_statut_site_2' => 'Opublikowana',
-'info_statut_site_3' => 'Zatwierdzona',
-'info_statut_site_4' => 'Do kosza',
 'info_statut_utilisateurs_1' => 'Domyślny status zaiportowanych użytkowników',
 'info_statut_utilisateurs_2' => 'Wybierz status, który zostanie przyznany osobom występującym w katalogu LDAP, kiedy połączą się po raz pierwszy. Możesz zmieniać tę wartość w zależności od autora. ',
 'info_suivi_activite' => 'Archiwum aktywności edytorskiej',
@@ -633,14 +607,12 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'item_autoriser_documents_joints' => 'Autoryzuj załączniki do artykułów',
 'item_autoriser_documents_joints_rubriques' => 'Autoryzacja dokumentów w działach',
 'item_autoriser_syndication_integrale' => 'Wysyłanie pełnej treści artykułów w pliku syndykacji',
-'item_bloquer_liens_syndiques' => 'Zablokuj akceptację syndykowanych linków',
 'item_choix_administrateurs' => 'administratorzy',
 'item_choix_generation_miniature' => 'Generuj automatycznie miniaturki obrazków.',
 'item_choix_non_generation_miniature' => 'Nie generuj miniaturek obrazków.',
 'item_choix_redacteurs' => 'redaktorzy',
 'item_choix_visiteurs' => 'odwiedzający stronę publiczną',
 'item_creer_fichiers_authent' => 'Utwórz pliki .htpasswd',
-'item_gerer_annuaire_site_web' => 'Zarządzaj katalogiem stron www',
 'item_gerer_statistiques' => 'Zarządzaj statystykami',
 'item_limiter_recherche' => 'Ogranicz szukanie do informacji zawartych na Twojej stronie',
 'item_login' => 'Login',
@@ -655,23 +627,19 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'item_non_autoriser_documents_joints' => 'Nie autoryzuj dokumentów w artykułach',
 'item_non_autoriser_documents_joints_rubriques' => 'Nie autoryzuj dokumentów w działach',
 'item_non_autoriser_syndication_integrale' => 'Wysyłanie podsumowania',
-'item_non_bloquer_liens_syndiques' => 'Nie blokuj łączy pochodzących z syndykacji',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
 'item_non_creer_fichiers_authent' => 'Nie twórz tych plików',
-'item_non_gerer_annuaire_site_web' => 'Wyłącz katalog stron www',
 'item_non_gerer_statistiques' => 'Nie zarządzaj statystykami',
 'item_non_limiter_recherche' => 'Szukaj także w treści stron, które są zlinkowane w systemie',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Nie publikuj artykułów przed datą ich publikacji.',
 'item_non_utiliser_moteur_recherche' => 'Nie używaj wyszukiwarki',
-'item_non_utiliser_syndication' => 'Wyłącz automatyczną syndykację',
 'item_nouvel_auteur' => 'Nowy autor',
 'item_nouvelle_rubrique' => 'Nowy dział',
 'item_oui' => 'Tak',
 'item_publier_articles' => 'Publikuj artykuły bez względu na datę ich publikacji.',
 'item_reponse_article' => 'Odpowiedz na artykuł',
 'item_utiliser_moteur_recherche' => 'Używaj wyszukiwarki',
-'item_utiliser_syndication' => 'Używaj automatycznej syndykacji',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'odwiedzający',
@@ -696,9 +664,7 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'lien_ajouter_auteur' => 'Dodaj autora',
 'lien_ajouter_participant' => 'Dodaj uczestnika',
 'lien_email' => 'e-mail',
-'lien_mise_a_jour_syndication' => 'Uaktualnij teraz',
 'lien_nom_site' => 'NAZWA STRONY:',
-'lien_nouvelle_recuperation' => 'Spróbuj ponowić odtwarzanie danych',
 'lien_retirer_auteur' => 'Usuń autora',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'usuń uczestnika',
@@ -815,15 +781,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 // S
 'sans_heure' => 'sans heure', # NEW
 'statut_admin_restreint' => '(admin z ograniczeniami)',
-'syndic_choix_moderation' => 'Co zrobić z linkami, które pochodzą z tego serwisu ?',
-'syndic_choix_oublier' => 'Co zrobić z linkami, których nie ma już w pliku syndykacji?',
-'syndic_choix_resume' => 'Niektóre strony publikują pełny tekst artykułów. Jeśli dostępna jest taka wersja czy chcesz z niej skorzystać :',
-'syndic_lien_obsolete' => 'nieaktualny link',
-'syndic_option_miroir' => 'blokować automatycznie',
-'syndic_option_oubli' => 'usunąć (po @mois@  miesiącach)',
-'syndic_option_resume_non' => 'pełna treść artykułów (w formacie HTML)',
-'syndic_option_resume_oui' => 'posumowanie (w postaci tekstowej)',
-'syndic_options' => 'Opcje syndykacji :',
 
 // T
 'taille_cache_image' => 'Obrazki mają automatycznie zmieniany rozmiar przez SPIP (miniaturki dokumentów, tytuły przedstawiane w postaci graficznej, funkcje matematyczne w formacie TeX...) zajmują w katalogu @dir@ obszar @taille@.',
@@ -901,18 +858,11 @@ od początku opublikowania artykułu pojawi się kiedy najedziesz myszką na tyt
 'texte_jeu_caractere_4' => 'Jeśli to nie odpowiada aktualnemu kodowaniu Twoich danych (np. po odtworzeniu bazy danych), lub jeśli <em>uruchamiasz stronę</em> i chcesz ustamić inne kodowanie, wpisz je tutaj:',
 'texte_jeu_caractere_conversion' => 'Wskazówka : możesz chcieć przekonwertować  swoje dane z całego serwisu (artykuły, aktualności, fora, itd) na kodowanie <tt>utf-8</tt>, udając się na <a href="@url@"> stronę konwertera utf-8</a>.',
 'texte_lien_hypertexte' => '(Jeśli Twoja wiadomość odnosi się do jakiegoś artykułu opublikowanego w internecie, albo do strony, na której można znaleźć dodatkowe informacje, wpisz tytuł strony i jej adres URL.)',
-'texte_liens_sites_syndiques' => 'Łącza pochodzące z syndykacji mogą
-   być domyślnie zablokowane ; regulacja tego
-   wskazuje regulacje domyślne
-   stron syndykowanych po ich stworzeniu. Jest
-   możliwe późniejsze odblokowanie, łączy indywidualnie, lub
-   wybór, strona po stronie, blokady linków pochodzących z danych stron.',
 'texte_login_ldap_1' => '(Pozostaw puste przy dostępie anonimowym, lub wpisz pełną ścieżkę, np. « <tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt> ».)',
 'texte_login_precaution' => 'Uwaga ! To jest login, z którego pomocą jesteś teraz połączony.
  Używaj tego formularza ostrożnie...',
 'texte_message_edit' => 'Ostrzeżenie: ta wiadomość może być zmieniana przez wszystkich administratorów strony i jest widoczna dla wszystkich redaktorów. Używaj zawiadomień jedynie, aby podkreślić ważne wydarzenia w życiu strony.',
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
-'texte_messages_publics' => 'Publiczne komentarze do artykułu :',
 'texte_mise_a_niveau_base_1' => 'Właśnie zaktualizowałeś pliki SPIP.
  Teraz należy uaktualnić bazę danych
  Twojego serwisu.',
@@ -925,7 +875,6 @@ od początku opublikowania artykułu pojawi się kiedy najedziesz myszką na tyt
 'texte_multilinguisme' => 'Jeśli planujesz edytować artykuły w wielu językach, ze złożoną nawigacją, możesz dołożyć do artykułu lub działu, menu wyboru języka, jako element organizacyjny Twojej strony.',
 'texte_multilinguisme_trad' => 'Możesz także włączyć system zarządzania linkami pomiędzy przekładami artykułów.',
 'texte_non_compresse' => '<i>nie skompresowany</i> (twój serwer nie posiada tej funkcji)',
-'texte_non_fonction_referencement' => 'Być może wolisz nie używać funkcji automatycznej, i samemu zaznaczyć elementy związane z tą stroną...',
 'texte_nouveau_message' => 'Nowa wiadomość',
 'texte_nouvelle_version_spip_1' => 'Nowa wersja SPIP została zainstalowana.',
 'texte_nouvelle_version_spip_2' => 'Nowa wersja wymaga bardziej kompletnego dostosowania niż zwykle. Jeśli jesteś administratorem strony wykasuj plik @connect@ z katalogu <tt>ecrire</tt> i powtórz instalację w celu uaktualnienia Twoich parametrów połączenia z bazą danych .<p> (NB. : jeśli zapomniałeś parametry połączenia, rzuć okiem do pliku @connect@ zanim go skasujesz...)', # MODIF
@@ -949,8 +898,6 @@ odświeżyć tylko jedną stronę, zrób to z obszaru publicznego, używając pr
 'texte_recapitiule_liste_documents' => 'Ta strona wyświetla w postaci listy dokumenty które umieściłeś w działach. Aby zmienić informacje o danym dokumencie, kliknij na łącze prowadzące do strony danego działu.',
 'texte_recuperer_base' => 'Napraw bazę danych',
 'texte_reference_mais_redirige' => 'linki z artykułów w twoim serwisie SPIP, przekierowujące do innych URL-i.',
-'texte_referencement_automatique' => '<b>Zautomatyzowane dodawanie linków</b><br />Możesz szybko dodać link do jakiejś strony internetowej, wpisując poniżej jej adres, oraz adres jej pliku syndykacji. SPIP automatycznie dopisze informacje, dotyczące tej strony (tytuł, opis...).',
-'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Jeśli pewne zapytania SQL nie udają się
   regularnie i bez widocznego powodu, możliwe jest
   że powodem tego jest baza danych</b><p>
@@ -973,10 +920,6 @@ odświeżyć tylko jedną stronę, zrób to z obszaru publicznego, używając pr
 'texte_suppression_fichiers' => 'Używaj tego polecenia gdy chcesz usunąć wszystkie pliki zapisane
  w cache SPIP. Pozwoli to na odświeżenie wszystkich stron, jeśli dokonaliści poważniejszych modyfikacji w układzie graficznym lub strukturze strony.',
 'texte_sur_titre' => 'Nadtytuł',
-'texte_syndication' => 'Jeśli dany serwis na to pozwala, jest możliwość wyciągnięcia z niego 
-  listy newsów. Aby skorzystać z tej funkcji musisz włączyć <i>syndykację ?</i>. 
-  <blockquote><i>Niektóre serwery mają taką możliwość wyłączoną ; 
-  wówczas nie możesz używać syndykacji przy użyciu swojej strony.</i></blockquote>', # MODIF
 'texte_table_ok' => ': ta tabela działa poprawnie.',
 'texte_tables_indexation_vides' => 'Tabele indeksowania wyszukiwarki są puste.',
 'texte_tentative_recuperation' => 'Próba naprawy',
@@ -1015,7 +958,6 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_admin_vider' => 'Konserwacja techniczna',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => 'Artykułu syndykowane, wyciągnięte z tej strony',
 'titre_cadre_afficher_article' => 'Pokaż artykuły:',
 'titre_cadre_afficher_traductions' => 'Wyświetl stan przekładów dla następujących języków:',
 'titre_cadre_ajouter_auteur' => 'DODAJ ARTYKUŁY:',
@@ -1032,7 +974,6 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opcje: <b>Twoje połączenie LDAP</b>',
-'titre_dernier_article_syndique' => 'Ostatnio syndykowane artykuły',
 'titre_evolution_visite' => 'Ewolucja odwiedzin',
 'titre_groupe_mots' => 'GRUPY SŁÓW KLUCZOWYCH:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1060,7 +1001,6 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_page_message_edit' => 'Napisz wiadomość',
 'titre_page_messagerie' => 'Twoje wiadomości',
 'titre_page_recherche' => 'Wyniki wyszukiwania @recherche@',
-'titre_page_sites_tous' => 'Zlinkowane strony',
 'titre_page_statistiques' => 'Statystyki działu',
 'titre_page_statistiques_referers' => 'Statystyki (linki wchodzące)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
@@ -1068,17 +1008,10 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_page_statistiques_visites' => 'Statystyka odwiedzin',
 'titre_page_upgrade' => 'Dostosowanie SPIP',
 'titre_publication_articles_post_dates' => 'Publikacja post-datowanych artykułów',
-'titre_referencement_sites' => 'Linkowanie i zrzeszanie stron',
 'titre_referencer_site' => 'Dodaj link do strony :',
 'titre_rendez_vous' => 'SPOTKANIA:',
 'titre_reparation' => 'Napraw',
-'titre_site_numero' => 'STRONA NUMER :',
-'titre_sites_proposes' => 'Strony zatwierdzone',
-'titre_sites_references_rubrique' => 'Linki do stron z tego działu',
-'titre_sites_syndiques' => 'Syndykowane serwisy',
-'titre_sites_tous' => 'Linki do stron',
 'titre_suivi_petition' => 'Archiwum ogłoszeń',
-'titre_syndication' => 'Syndykacja stron',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :',
 'trad_article_inexistant' => 'Nie ma artykułu o tym numerze.',

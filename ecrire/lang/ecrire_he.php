@@ -38,10 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_operation_echec' => 'הפעולה נכשלה',
 'avis_operation_impossible' => 'פעולה אינה אפשרית',
 'avis_probleme_archive' => 'שגיאת קריאה בקובץ @archive@',
-'avis_site_introuvable' => 'אתר לא נמצא',
-'avis_site_syndique_probleme' => 'אזהרה: הסינדיקציה של האתר הזה נתקלה בבעיה; כתוצאה מכך המערכת מנותקת זמנית. נא אשר את הכתובת של קובץ הסינדיקציה של האתר הזה(<b>@url_syndic@</b>), ונסה עוד פעם לבצע החזרה חדשה של האינפורמציה',
-'avis_sites_probleme_syndication' => '.האתרים האלה נתקלו בבעיית סינדיקציה ',
-'avis_sites_syndiques_probleme' => 'אתרי הסינדיקציה האלה יצרו בעיה',
 'avis_suppression_base' => 'אזהרה, מחיקת המידע היא פעולה בלתי הפיכה ',
 'avis_version_mysql' => 'הגרסה שלך ל-מיי.אס.קיו.אל  (@version_mysql@) לא מאפשרת תיקון עצמי לטבלאות בסיס הנתונים ',
 
@@ -77,11 +73,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_liste_nouveautes' => 'שלח את רשימת החדשות האחרונה',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'אל תופיע ברשימת העורכים המחוברים',
 'bouton_radio_non_envoi_annonces_editoriales' => 'אל תשלח הודעות עורך ',
-'bouton_radio_non_syndication' => 'אין סינדיקציה',
 'bouton_radio_pas_petition' => 'אין עצומה',
 'bouton_radio_petition_activee' => 'עצומה מופעלת',
 'bouton_radio_supprimer_petition' => 'מחק את העצומה',
-'bouton_radio_syndication' => ':סינדיקציה',
 'bouton_redirection' => 'כוון שנית',
 'bouton_relancer_installation' => 'התחל בשנית התקנה',
 'bouton_suivant' => 'הבא',
@@ -122,15 +116,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'מען המדריך',
 'entree_adresse_email' => 'הדוא"ל שלך',
-'entree_adresse_fichier_syndication' => 'כתובת קובץ הסינדיקציה :',
-'entree_adresse_site' => '<b>כתובת האתר</b> [Obligatoire]',
 'entree_base_donnee_1' => 'כתובת בסיס הנתונים',
 'entree_base_donnee_2' => '(לעיתים הכתובת מתאימה לזאת של אתרך, לפעמים היא מתאימה למושג «localhost»,לפעמים היא מושארת לגמרי ריקה).',
 'entree_biographie' => 'ביוגרפיה קצרה בכמה מילים',
 'entree_chemin_acces' => '<b>Enter</b> את הדרך:',
 'entree_cle_pgp' => 'מפתח ה-פי.ג\'י.פי שלך',
 'entree_contenu_rubrique' => '(תוכן המדור בכמה מילים.)',
-'entree_description_site' => 'תיאור האתר',
 'entree_identifiants_connexion' => '...מזהי ההתחברות שלך',
 'entree_informations_connexion_ldap' => 'נא מלא את התבנית הזאת עם אינפורמציית התקשרות ה-אל.די.איי.פי. אתה תהיה מוענק עם האינפורמציה הזאת על ידי מנהל הרשת או המערכת.',
 'entree_infos_perso' => '?מי אתה',
@@ -205,9 +196,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_article' => 'שנה את המאמר הזה',
 'icone_modifier_message' => 'שנה את ההודעה הזאת',
 'icone_modifier_rubrique' => 'תיקון מדור',
-'icone_modifier_site' => 'שנה את האתר הזה',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => 'ייחס אתר חדש',
 'icone_relancer_signataire' => 'העלה מחדש את החתום',
 'icone_retour' => 'אחורה',
 'icone_retour_article' => 'אל המאמר הקודם',
@@ -217,7 +206,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_rubrique' => 'מחיקת המדור',
 'icone_supprimer_signature' => 'מחק חתימה זו',
 'icone_valider_signature' => 'תן תוקף לחתימה זו',
-'icone_voir_sites_references' => 'הצג אתרים עם מראי מקום',
 'image_administrer_rubrique' => 'אתה יכול לנהל את המדור',
 'info_1_article' => 'מאמר 1',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -282,7 +270,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'אזהרה',
 'info_barre_outils' => 'עם סרגל הכלים שלי?',
 'info_base_installee' => '.המבנה של בסיס הנתונים שלך מותקן',
-'info_bloquer' => 'חסום',
 'info_chapeau' => 'סיפון',
 'info_chapeau_2' => ':הקדמה',
 'info_chemin_acces_1' => 'אפשרויות: <b>Access path in directory</b>',
@@ -319,7 +306,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_date_publication_anterieure' => 'תאריך של הוצאה לאור מוקדמת:',
 'info_date_referencement' => ':תאריך של הוספת מראי מקום באתר זה',
 'info_derniere_etape' => 'זהו הסתיים!',
-'info_derniere_syndication' => 'הסינדיקציה האחרונה של האתר הזה בוצעה',
 'info_derniers_articles_publies' => 'המאמרים המפורסמים המאוחרים ביותר שלך',
 'info_desactiver_messagerie_personnelle' => 'הינך יכול לאפשר או לנטרל את ההעברת ההודעות האישיות שלך באתר זה.',
 'info_descriptif' => ':תיאור',
@@ -383,8 +369,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_langues' => 'שפת האתר',
 'info_ldap_ok' => '.אישור אל.די.אי.פי מותקן',
 'info_lien_hypertexte' => ':קישור היפר טקסט',
-'info_liens_syndiques_1' => 'קישורים עם סינדיקציה',
-'info_liens_syndiques_2' => '.מחכה למתן תוקף חוקי',
 'info_liste_redacteurs_connectes' => 'רשימה של עורכים מחוברים',
 'info_login_existant' => '.שם ההתחברות הזה תפוס',
 'info_login_trop_court' => '.שם ההתחברות יותר מדי קצר',
@@ -428,7 +412,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_nom' => 'שם',
 'info_nom_destinataire' => 'שם המקבל',
 'info_nom_site' => 'שם האתר שלך',
-'info_nom_site_2' => '<b>Nom du site</b> [Obligatoire]', # NEW
 'info_nombre_articles' => '@nb_articles@ מאמרים,',
 'info_nombre_partcipants' => ':משתתפים לדיון',
 'info_nombre_rubriques' => '@nb_rubriques@ מדורים,',
@@ -495,7 +478,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
   hébergeurs désactivent l\'envoi de mails depuis leurs
   serveurs : dans ce cas, l\'inscription automatique est
   impossible.', # MODIF
-'info_question_proposer_site' => '?מי יכול להציע אתרים עם מראי מקום',
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche intégré à SPIP ?
 	(le désactiver accélère le fonctionnement du système.)', # NEW
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
@@ -528,14 +510,10 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_site' => 'אתר אינטרנט',
 'info_site_2' => 'אתר אינטרנט :',
 'info_site_min' => 'אתר',
-'info_site_propose' => 'Site proposé le :', # NEW
 'info_site_reference_2' => 'Site référencé', # NEW
-'info_site_syndique' => 'Ce site est syndiqué...', # NEW
-'info_site_valider' => 'אתרים כדי לאמת',
 'info_sites' => 'אתרים',
 'info_sites_lies_mot' => 'Les sites référencés liés à ce mot-clé', # NEW
 'info_sites_proxy' => 'Utiliser un proxy', # NEW
-'info_sites_refuses' => 'Les sites refusés', # NEW
 'info_sites_trouves' => 'Sites trouvés', # NEW
 'info_sites_trouves_dans_texte' => 'Sites trouvés (dans le texte)', # NEW
 'info_sous_titre' => 'כתוביות :',
@@ -545,10 +523,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_statut_auteur_autre' => 'Autre statut :', # NEW
 'info_statut_efface' => 'Effacé', # NEW
 'info_statut_redacteur' => 'Rédacteur', # NEW
-'info_statut_site_1' => 'אתר זה :',
-'info_statut_site_2' => 'לאור',
-'info_statut_site_3' => 'המוצעת',
-'info_statut_site_4' => 'לפח',
 'info_statut_utilisateurs_1' => 'Statut par défaut des utilisateurs importés', # NEW
 'info_statut_utilisateurs_2' => 'Choisissez le statut qui est attribué aux personnes présentes dans l\'annuaire LDAP lorsqu\'elles se connectent pour la première fois. Vous pourrez par la suite modifier cette valeur pour chaque auteur au cas par cas.', # NEW
 'info_suivi_activite' => 'Suivi de l\'activité éditoriale', # NEW
@@ -628,14 +602,12 @@ dans une couleur qui indique leur état :', # NEW
 'item_autoriser_documents_joints' => 'Autoriser les documents joints aux articles', # NEW
 'item_autoriser_documents_joints_rubriques' => 'Autoriser les documents dans les rubriques', # NEW
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
-'item_bloquer_liens_syndiques' => 'Bloquer les liens syndiqués pour validation', # NEW
 'item_choix_administrateurs' => 'les administrateurs', # NEW
 'item_choix_generation_miniature' => 'Générer automatiquement les miniatures des images.', # NEW
 'item_choix_non_generation_miniature' => 'Ne pas générer de miniatures des images.', # NEW
 'item_choix_redacteurs' => 'les rédacteurs', # NEW
 'item_choix_visiteurs' => 'les visiteurs du site public', # NEW
 'item_creer_fichiers_authent' => 'Créer les fichiers .htpasswd', # NEW
-'item_gerer_annuaire_site_web' => 'Gérer un annuaire de sites Web', # NEW
 'item_gerer_statistiques' => 'Gérer les statistiques', # NEW
 'item_limiter_recherche' => 'Limiter la recherche aux informations contenues dans votre site', # NEW
 'item_login' => 'הסינכ',
@@ -650,23 +622,19 @@ dans une couleur qui indique leur état :', # NEW
 'item_non_autoriser_documents_joints' => 'Ne pas autoriser les documents dans les articles', # NEW
 'item_non_autoriser_documents_joints_rubriques' => 'Ne pas autoriser les documents dans les rubriques', # NEW
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
-'item_non_bloquer_liens_syndiques' => 'Ne pas bloquer les liens issus de la syndication', # NEW
 'item_non_compresseur' => 'Désactiver la compression', # NEW
 'item_non_creer_fichiers_authent' => 'Ne pas créer ces fichiers', # NEW
-'item_non_gerer_annuaire_site_web' => 'Désactiver l\'annuaire de sites Web', # NEW
 'item_non_gerer_statistiques' => 'Ne pas gérer les statistiques', # NEW
 'item_non_limiter_recherche' => 'Etendre la recherche au contenu des sites référencés', # NEW
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Ne pas publier les articles avant la date de publication fixée.', # NEW
 'item_non_utiliser_moteur_recherche' => 'Ne pas utiliser le moteur', # NEW
-'item_non_utiliser_syndication' => 'Ne pas utiliser la syndication automatique', # NEW
 'item_nouvel_auteur' => 'מחבר חדש',
 'item_nouvelle_rubrique' => 'נושא חדש',
 'item_oui' => 'כן',
 'item_publier_articles' => 'Publier les articles, quelle que soit leur date de publication.', # NEW
 'item_reponse_article' => 'Réponse à l\'article', # NEW
 'item_utiliser_moteur_recherche' => 'Utiliser le moteur de recherche', # NEW
-'item_utiliser_syndication' => 'Utiliser la syndication automatique', # NEW
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'visiteur', # NEW
@@ -691,9 +659,7 @@ dans une couleur qui indique leur état :', # NEW
 'lien_ajouter_auteur' => 'Ajouter cet auteur', # NEW
 'lien_ajouter_participant' => 'Ajouter un participant', # NEW
 'lien_email' => 'דואר אלקטרוני',
-'lien_mise_a_jour_syndication' => 'Mettre à jour maintenant', # NEW
 'lien_nom_site' => 'NOM DU SITE :', # NEW
-'lien_nouvelle_recuperation' => 'Tenter une nouvelle récupération des données', # NEW
 'lien_retirer_auteur' => 'Retirer l\'auteur', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'retirer ce participant', # NEW
@@ -810,15 +776,6 @@ dans une couleur qui indique leur état :', # NEW
 // S
 'sans_heure' => 'בלי זמן',
 'statut_admin_restreint' => '(admin restreint)', # NEW
-'syndic_choix_moderation' => 'Que faire des prochains liens en provenance de ce site ?', # NEW
-'syndic_choix_oublier' => 'Que faire des liens qui ne figurent plus dans le fichier de syndication ?', # NEW
-'syndic_choix_resume' => 'Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer :', # NEW
-'syndic_lien_obsolete' => 'lien obsolète', # NEW
-'syndic_option_miroir' => 'les bloquer automatiquement', # NEW
-'syndic_option_oubli' => 'les effacer (après @mois@ mois)', # NEW
-'syndic_option_resume_non' => 'le contenu complet des articles (au format HTML)', # NEW
-'syndic_option_resume_oui' => 'un simple résumé (au format texte)', # NEW
-'syndic_options' => 'Options de syndication :', # NEW
 
 // T
 'taille_cache_image' => 'Les images calculées automatiquement par SPIP (vignettes des documents, titres présentés sous forme graphique, fonctions mathématiques au format TeX...) occupent dans le répertoire @dir@ un total de @taille@.', # NEW
@@ -900,20 +857,11 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 'texte_jeu_caractere_4' => 'Si cela ne correspond pas à la réalité de vos données (suite, par exemple, à une restauration de base de données), ou si <em>vous démarrez ce site</em> et souhaitez partir sur un autre jeu de caractères, veuillez indiquer ce dernier ici :', # NEW
 'texte_jeu_caractere_conversion' => 'Note : vous pouvez décider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, brèves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.', # NEW
 'texte_lien_hypertexte' => '(Si votre message se réfère à un article publié sur le Web, ou à une page fournissant plus d\'informations, veuillez indiquer ci-après le titre de la page et son adresse URL.)', # NEW
-'texte_liens_sites_syndiques' => 'Les liens issus des sites syndiqués peuvent
-			être bloqués a priori ; le réglage
-			ci-dessous indique le réglage par défaut des
-			sites syndiqués après leur création. Il
-			est ensuite possible, de toutes façons, de
-			débloquer chaque lien individuellement, ou de
-			choisir, site par site, de bloquer les liens à venir
-			de tel ou tel site.', # NEW
 'texte_login_ldap_1' => '(Laisser vide pour un accès anonyme, ou entrer le chemin complet, par exemple « <tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt> ».)', # NEW
 'texte_login_precaution' => 'Attention ! Ceci est le login sous lequel vous êtes connecté actuellement.
 	Utilisez ce formulaire avec précaution...', # NEW
 'texte_message_edit' => 'Attention : ce message peut être modifié par tous les administrateurs du site, et est visible par tous les rédacteurs. N\'utilisez les annonces que pour exposer des événements importants de la vie du site.', # NEW
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
-'texte_messages_publics' => 'Messages publics de l\'article :', # NEW
 'texte_mise_a_niveau_base_1' => 'Vous venez de mettre à jour les fichiers SPIP.
 	Il faut maintenant mettre à niveau la base de données
 	du site.', # NEW
@@ -927,7 +875,6 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 'texte_multilinguisme' => 'Si vous souhaitez gérer des articles en plusieurs langues, avec une navigation complexe, vous pouvez ajouter un menu de sélection de langue sur les articles et/ou sur les rubriques, en fonction de l\'organisation de votre site.', # NEW
 'texte_multilinguisme_trad' => 'Vous pouvez également activer un système de gestion de liens entre les différentes traductions d\'un article.', # NEW
 'texte_non_compresse' => '<i>non compressé</i> (votre serveur ne supportant pas cette fonctionnalité)', # NEW
-'texte_non_fonction_referencement' => 'Vous pouvez préférer ne pas utiliser cette fonction automatique, et indiquer vous-même les éléments concernant ce site...', # NEW
 'texte_nouveau_message' => 'הודעה חדשה',
 'texte_nouvelle_version_spip_1' => 'Vous avez installé une nouvelle version de SPIP.', # NEW
 'texte_nouvelle_version_spip_2' => 'Cette nouvelle version nécessite une mise à jour plus complète qu\'à l\'accoutumée. Si vous êtes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre à jour vos paramètres de connexion à la base de données.<p> (NB. : si vous avez oublié vos paramètres de connexion, jetez un œil au fichier @connect@ avant de le supprimer...)</p>', # MODIF
@@ -947,8 +894,6 @@ recalculer une seule page, passez plutôt par l\'espace public et utilisez-y le 
 'texte_recapitiule_liste_documents' => 'Cette page récapitule la liste des documents que vous avez placés dans les rubriques. Pour modifier les informations de chaque document, suivez le lien vers la page de sa rubrique.', # NEW
 'texte_recuperer_base' => 'Réparer la base de données', # NEW
 'texte_reference_mais_redirige' => 'article référencé dans votre site SPIP, mais redirigé vers une autre URL.', # NEW
-'texte_referencement_automatique' => '<b>Référencement automatisé d\'un site</b><br />Vous pouvez référencer rapidement un site Web en indiquant ci-dessous l\'adresse URL désirée, ou l\'adresse de son fichier de syndication. SPIP va récupérer automatiquement les informations concernant ce site (titre, description...).', # NEW
-'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Lorsque certaines requêtes SQL échouent
   systématiquement et sans raison apparente, il est possible
   que ce soit à cause de la base de données
@@ -975,11 +920,6 @@ recalculer une seule page, passez plutôt par l\'espace public et utilisez-y le 
 dans le cache SPIP. Cela permet par exemple de forcer un recalcul de toutes les pages si vous
 avez fait des modifications importantes de graphisme ou de structure du site.', # NEW
 'texte_sur_titre' => 'על כותרת',
-'texte_syndication' => 'Il est possible de récupérer automatiquement, lorsqu\'un site Web le permet, 
-		la liste de ses nouveautés. Pour cela, vous devez activer la syndication. 
-		<blockquote><i>Certains hébergeurs désactivent cette fonctionnalité ; 
-		dans ce cas, vous ne pourrez pas utiliser la syndication de contenu
-		depuis votre site.</i></blockquote>', # MODIF
 'texte_table_ok' => ': cette table est OK.', # NEW
 'texte_tables_indexation_vides' => 'Les tables d\'indexation du moteur sont vides.', # NEW
 'texte_tentative_recuperation' => 'Tentative de réparation', # NEW
@@ -1022,7 +962,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_admin_vider' => 'Maintenance technique', # NEW
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => 'Articles syndiqués tirés de ce site', # NEW
 'titre_cadre_afficher_article' => 'Afficher les articles', # NEW
 'titre_cadre_afficher_traductions' => 'Afficher l\'état des traductions pour les langues suivantes :', # NEW
 'titre_cadre_ajouter_auteur' => 'AJOUTER UN AUTEUR :', # NEW
@@ -1039,7 +978,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Options : <b>Votre connexion LDAP</b>', # NEW
-'titre_dernier_article_syndique' => 'Derniers articles syndiqués', # NEW
 'titre_evolution_visite' => 'Évolution des visites', # NEW
 'titre_groupe_mots' => 'GROUPE DE MOTS :', # NEW
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1067,7 +1005,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW
 'titre_page_recherche' => 'Résultats de la recherche @recherche@', # NEW
-'titre_page_sites_tous' => 'Les sites référencés', # NEW
 'titre_page_statistiques' => 'Statistiques par rubriques', # NEW
 'titre_page_statistiques_referers' => 'Statistiques (liens entrants)', # NEW
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
@@ -1075,17 +1012,10 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_statistiques_visites' => 'Statistiques des visites', # NEW
 'titre_page_upgrade' => 'Mise à niveau de SPIP', # NEW
 'titre_publication_articles_post_dates' => 'Publication des articles post-datés', # NEW
-'titre_referencement_sites' => 'Référencement de sites et syndication', # NEW
 'titre_referencer_site' => 'Référencer le site :', # NEW
 'titre_rendez_vous' => 'RENDEZ-VOUS :', # NEW
 'titre_reparation' => 'תיקון',
-'titre_site_numero' => 'SITE NUMÉRO :', # NEW
-'titre_sites_proposes' => 'Les sites proposés', # NEW
-'titre_sites_references_rubrique' => 'Les sites référencés dans cette rubrique', # NEW
-'titre_sites_syndiques' => 'Les sites syndiqués', # NEW
-'titre_sites_tous' => 'Les sites référencés', # NEW
 'titre_suivi_petition' => 'Suivi des pétitions', # NEW
-'titre_syndication' => 'Syndication de sites', # NEW
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Il n\'y a pas d\'article portant ce numéro.', # NEW

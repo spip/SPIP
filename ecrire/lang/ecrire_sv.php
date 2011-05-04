@@ -43,10 +43,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'avis_operation_echec' => 'Operationen misslyckades.',
 'avis_operation_impossible' => 'Operationen omöjlig att genomföra',
 'avis_probleme_archive' => 'Läsfel i filen @archive@',
-'avis_site_introuvable' => 'Webbplatsen hittades inte',
-'avis_site_syndique_probleme' => 'OBS! Syndikeringen av den här sajten har stött på ett problem ; Därför är funktionen tillfälligt avbruten. Var vänlig och verifiera adressen till sajtens syndikeringsfil (<b>@url_syndic@</b>), och försök att göra en ny hämtning av information.',
-'avis_sites_probleme_syndication' => 'Dessa sajter har ett syndikeringsproblem',
-'avis_sites_syndiques_probleme' => 'Det har uppstått ett problem med syndikeringen av sajterna',
 'avis_suppression_base' => 'OBS! Radering av data är permanent och kan inte göras ogjord.',
 'avis_version_mysql' => 'Din version av MySql (@version_mysql@) stöder inte automatisk reparation av databas-tabeller.',
 
@@ -82,11 +78,9 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'bouton_radio_envoi_liste_nouveautes' => 'Skicka lista över senaste notiser',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Inte synas i listan över anslutna redaktörere',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Skicka inga redaktionella meddelanden',
-'bouton_radio_non_syndication' => 'Ingen syndikering',
 'bouton_radio_pas_petition' => 'Inga namninsamlingar',
 'bouton_radio_petition_activee' => 'Namninsamling aktiverad',
 'bouton_radio_supprimer_petition' => 'Radera namninsamlingen',
-'bouton_radio_syndication' => 'Syndikering:',
 'bouton_redirection' => 'OMPEKA',
 'bouton_relancer_installation' => 'Kör installationen igen',
 'bouton_suivant' => 'Nästa',
@@ -127,15 +121,12 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Katalogens adress',
 'entree_adresse_email' => 'Din e-postadress',
-'entree_adresse_fichier_syndication' => 'Adress till syndikeringsfil:',
-'entree_adresse_site' => '<b>Webbplats URL</b> [Krävs]',
 'entree_base_donnee_1' => 'Adress till databasen',
 'entree_base_donnee_2' => '(Ofta är det samma adress som till din webbplats, ibland är det "localhost" och ibland lämnas det helt tomt.)',
 'entree_biographie' => 'Kort biografi med några få ord.',
 'entree_chemin_acces' => '<b>Fyll i</b> sökvägen:',
 'entree_cle_pgp' => 'Din PGP-nyckel',
 'entree_contenu_rubrique' => '(Några få ord som beskriver innehållet i avdelningen)',
-'entree_description_site' => 'Beskrivning av webbplats',
 'entree_identifiants_connexion' => 'Dina anslutningsuppgifter',
 'entree_informations_connexion_ldap' => 'Fyll i det här formuläret med uppgifter om din anslutning till LDAP. Din system eller nätverks administratör kan ge dig dessa.',
 'entree_infos_perso' => 'Vem är du?',
@@ -210,9 +201,7 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'icone_modifier_article' => 'Editera artikeln',
 'icone_modifier_message' => 'Editera meddelandet',
 'icone_modifier_rubrique' => 'Editera avdelningen',
-'icone_modifier_site' => 'Editera sajten',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => 'Länka en ny sajt',
 'icone_relancer_signataire' => 'Kontakta personen igen',
 'icone_retour' => 'Tillbaka',
 'icone_retour_article' => 'Tillbaka till artikeln',
@@ -222,7 +211,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'icone_supprimer_rubrique' => 'Radera den här avdelningen',
 'icone_supprimer_signature' => 'Radera den här signaturen',
 'icone_valider_signature' => 'Validera signaturen',
-'icone_voir_sites_references' => 'Visa länkade sajter',
 'image_administrer_rubrique' => 'Du kan hantera den här avdelningen',
 'info_1_article' => '1 artikel',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -287,7 +275,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_avertissement' => 'Varning',
 'info_barre_outils' => 'med dess verktygsfält?',
 'info_base_installee' => 'Databasen är skapad',
-'info_bloquer' => 'Block',
 'info_chapeau' => 'Ingress',
 'info_chapeau_2' => 'Introduktion:',
 'info_chemin_acces_1' => 'inställningar: <b>sökväg i katalogen</b>',
@@ -324,7 +311,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_date_publication_anterieure' => 'Datum för tidigare publicering:',
 'info_date_referencement' => 'DATUM DÅ SAJTEN LÄNKADES:',
 'info_derniere_etape' => 'Klart!',
-'info_derniere_syndication' => 'Den sista syndikeringen av den här sajten skedde den',
 'info_derniers_articles_publies' => 'Dina senaste publicerade artiklar',
 'info_desactiver_messagerie_personnelle' => 'Du kan aktivera eller avaktivera dina personliga meddelanden på den här sajten.',
 'info_descriptif' => 'Beskrivning:',
@@ -387,8 +373,6 @@ funktioner hos SPIP inte användas.',
 'info_langues' => 'Sajtens språk',
 'info_ldap_ok' => 'L\'authentification LDAP est installée.', # NEW
 'info_lien_hypertexte' => 'Hyperlänk:',
-'info_liens_syndiques_1' => 'syndikerade länkar',
-'info_liens_syndiques_2' => 'i väntan på validering.',
 'info_liste_redacteurs_connectes' => 'Inlogggade redaktörer',
 'info_login_existant' => 'Användarnamnet finns redan.',
 'info_login_trop_court' => 'Användarnamnet är för kort.',
@@ -432,7 +416,6 @@ funktioner hos SPIP inte användas.',
 'info_nom' => 'Namn',
 'info_nom_destinataire' => 'Mottagarens namn',
 'info_nom_site' => 'Din sajts namn',
-'info_nom_site_2' => '<b>Sajtens namn</b> [krävs]',
 'info_nombre_articles' => '@nb_articles@ artiklar,',
 'info_nombre_partcipants' => 'DELTAGARE I DISKUSSIONEN:',
 'info_nombre_rubriques' => '@nb_rubriques@ avdelningar,',
@@ -499,7 +482,6 @@ funktioner hos SPIP inte användas.',
   hébergeurs désactivent l\'envoi de mails depuis leurs
   serveurs : dans ce cas, l\'inscription automatique est
   impossible.', # MODIF
-'info_question_proposer_site' => 'Vem kan föreslå länkar till sajter?',
 'info_question_utilisation_moteur_recherche' => 'Vill du använda SPIPŽs integrerade sökfunktion?
  (Att stänga av den ökar systemets prestanda.)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
@@ -532,14 +514,10 @@ funktioner hos SPIP inte användas.',
 'info_site' => 'Sajt',
 'info_site_2' => 'sajt:',
 'info_site_min' => 'sajt',
-'info_site_propose' => 'Sajt föreslagen den:',
 'info_site_reference_2' => 'Länkad sajt',
-'info_site_syndique' => 'Denna sajt är syndikerad...',
-'info_site_valider' => 'Sajter som väntar på godkännande',
 'info_sites' => 'sajter',
 'info_sites_lies_mot' => 'Länkade sajter knutna till detta nyckelord',
 'info_sites_proxy' => 'Använder en proxy',
-'info_sites_refuses' => 'Refuserade sajter',
 'info_sites_trouves' => 'Hittade sajter',
 'info_sites_trouves_dans_texte' => 'Hittade sajter (i texten)',
 'info_sous_titre' => 'Undertitel:',
@@ -549,10 +527,6 @@ funktioner hos SPIP inte användas.',
 'info_statut_auteur_autre' => 'Annan status:',
 'info_statut_efface' => 'Raderad',
 'info_statut_redacteur' => 'Redaktör',
-'info_statut_site_1' => 'Denna sajt är:',
-'info_statut_site_2' => 'Publicerad',
-'info_statut_site_3' => 'Inskickad',
-'info_statut_site_4' => 'I papperskorgen',
 'info_statut_utilisateurs_1' => 'Startinställningar för importerade användare',
 'info_statut_utilisateurs_2' => 'Choisissez le statut qui est attribué aux personnes présentes dans l\'annuaire LDAP lorsqu\'elles se connectent pour la première fois. Vous pourrez par la suite modifier cette valeur pour chaque auteur au cas par cas.', # NEW
 'info_suivi_activite' => 'Följ upp aktiviteten på sajten',
@@ -632,14 +606,12 @@ med en färg som visar deras status:',
 'item_autoriser_documents_joints' => 'Tillåt dokument bifogade till artiklarna',
 'item_autoriser_documents_joints_rubriques' => 'Tillåt dokument i avdelningarna',
 'item_autoriser_syndication_integrale' => 'Inkludera hela artiklar i syndikeringsfilerna',
-'item_bloquer_liens_syndiques' => 'Stoppa syndikerade länkar från godkännande',
 'item_choix_administrateurs' => 'administratörer',
 'item_choix_generation_miniature' => 'Generera miniatyrer automatiskt.',
 'item_choix_non_generation_miniature' => 'Generera inte miniatyrer.',
 'item_choix_redacteurs' => 'redaktörer',
 'item_choix_visiteurs' => 'besökare till den publika delen',
 'item_creer_fichiers_authent' => 'Skapa .htpasswd filer',
-'item_gerer_annuaire_site_web' => 'Administrera webbsajt-katalogen',
 'item_gerer_statistiques' => 'Hantera statistik',
 'item_limiter_recherche' => 'Begränsa sökningen till information i din sajt',
 'item_login' => 'Login',
@@ -654,23 +626,19 @@ med en färg som visar deras status:',
 'item_non_autoriser_documents_joints' => 'Tillåt inte dokument i artiklarna',
 'item_non_autoriser_documents_joints_rubriques' => 'Tillåt inte dokument i avdelningarna',
 'item_non_autoriser_syndication_integrale' => 'Skicka bara en sammanfattning',
-'item_non_bloquer_liens_syndiques' => 'Blockera inte länkar som kommer ifrån syndikering',
 'item_non_compresseur' => 'Avaktivera komprimering',
 'item_non_creer_fichiers_authent' => 'Skapa inte dessa filer',
-'item_non_gerer_annuaire_site_web' => 'Avaktivera webbsajt-katalogen',
 'item_non_gerer_statistiques' => 'Hantera inte statistik',
 'item_non_limiter_recherche' => 'Utöka indexeringen till att omfatta innehåll på länkade sajter',
 'item_non_messagerie_agenda' => 'Avaktivera meddelandesystemet och kalendern',
 'item_non_publier_articles' => 'Publicera inte artiklar innan deras publiceringsdatum.',
 'item_non_utiliser_moteur_recherche' => 'Använd inte sökmotorn',
-'item_non_utiliser_syndication' => 'Använd inte automatisk syndikering',
 'item_nouvel_auteur' => 'Ny redaktör',
 'item_nouvelle_rubrique' => 'Ny avdelning',
 'item_oui' => 'Ja',
 'item_publier_articles' => 'Publicera artiklarna utan att ta hänsyn till publiceringsdatum.',
 'item_reponse_article' => 'Svara på artikeln',
 'item_utiliser_moteur_recherche' => 'Använd sökmotorn',
-'item_utiliser_syndication' => 'Använd automatisk syndikering',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'besökare',
@@ -695,9 +663,7 @@ med en färg som visar deras status:',
 'lien_ajouter_auteur' => 'Lätt till redaktören',
 'lien_ajouter_participant' => 'Lägg till en deltagare',
 'lien_email' => 'e-post',
-'lien_mise_a_jour_syndication' => 'Uppdatera nu',
 'lien_nom_site' => 'SAJTENS NAMN:',
-'lien_nouvelle_recuperation' => 'Försök att hämta datum igen',
 'lien_retirer_auteur' => 'Ta bort redaktören',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'ta bort deltagaren',
@@ -814,15 +780,6 @@ med en färg som visar deras status:',
 // S
 'sans_heure' => 'sans heure', # NEW
 'statut_admin_restreint' => '(admin restreint)', # NEW
-'syndic_choix_moderation' => 'Que faire des prochains liens en provenance de ce site ?', # NEW
-'syndic_choix_oublier' => 'Que faire des liens qui ne figurent plus dans le fichier de syndication ?', # NEW
-'syndic_choix_resume' => 'Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer :', # NEW
-'syndic_lien_obsolete' => 'Trasig länk',
-'syndic_option_miroir' => 'les bloquer automatiquement', # NEW
-'syndic_option_oubli' => 'les effacer (après @mois@ mois)', # NEW
-'syndic_option_resume_non' => 'det fullständiga innehållet i artiklarna (i HTML-format)',
-'syndic_option_resume_oui' => 'en enkel sammanfattning (i text-format)',
-'syndic_options' => 'Alternativ för syndikering :',
 
 // T
 'taille_cache_image' => 'Les images calculées automatiquement par SPIP (vignettes des documents, titres présentés sous forme graphique, fonctions mathématiques au format TeX...) occupent dans le répertoire @dir@ un total de @taille@.', # NEW
@@ -904,20 +861,11 @@ installera om SPIP för att skapa en ny databas och den första administratören
 'texte_jeu_caractere_4' => 'Si cela ne correspond pas à la réalité de vos données (suite, par exemple, à une restauration de base de données), ou si <em>vous démarrez ce site</em> et souhaitez partir sur un autre jeu de caractères, veuillez indiquer ce dernier ici :', # NEW
 'texte_jeu_caractere_conversion' => 'Note : vous pouvez décider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, brèves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.', # NEW
 'texte_lien_hypertexte' => '(Si votre message se réfère à un article publié sur le Web, ou à une page fournissant plus d\'informations, veuillez indiquer ci-après le titre de la page et son adresse URL.)', # NEW
-'texte_liens_sites_syndiques' => 'Les liens issus des sites syndiqués peuvent
-			être bloqués a priori ; le réglage
-			ci-dessous indique le réglage par défaut des
-			sites syndiqués après leur création. Il
-			est ensuite possible, de toutes façons, de
-			débloquer chaque lien individuellement, ou de
-			choisir, site par site, de bloquer les liens à venir
-			de tel ou tel site.', # NEW
 'texte_login_ldap_1' => '(Laisser vide pour un accès anonyme, ou entrer le chemin complet, par exemple « <tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt> ».)', # NEW
 'texte_login_precaution' => 'Attention ! Ceci est le login sous lequel vous êtes connecté actuellement.
 	Utilisez ce formulaire avec précaution...', # NEW
 'texte_message_edit' => 'Attention : ce message peut être modifié par tous les administrateurs du site, et est visible par tous les rédacteurs. N\'utilisez les annonces que pour exposer des événements importants de la vie du site.', # NEW
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
-'texte_messages_publics' => 'Messages publics de l\'article :', # NEW
 'texte_mise_a_niveau_base_1' => 'Du har just uppdaterat filerna i SPIP.
  Nu måste du uppgradera sajtens databas.',
 'texte_modifier_article' => 'Redigera artikeln:',
@@ -930,7 +878,6 @@ installera om SPIP för att skapa en ny databas och den första administratören
 'texte_multilinguisme' => 'Om du vill hantera artiklar på flera språk, med en avancerad navigering, kan du lägga till en option för språkval i artiklar och avdelningar, i enlighet med sajtens struktur.',
 'texte_multilinguisme_trad' => 'Dessutom kan du aktivera ett system för länkhantering av de olika översättningarna av en artikel.',
 'texte_non_compresse' => '<i>okomprimerad</i> (din server stöder inte denna funktion)',
-'texte_non_fonction_referencement' => 'Du kan välja att inte använda den automatiska funktionen och i stället mata in information om sajetn manuellt...',
 'texte_nouveau_message' => 'Nytt meddelande',
 'texte_nouvelle_version_spip_1' => 'Du har installerat en ny version av SPIP.',
 'texte_nouvelle_version_spip_2' => 'Cette nouvelle version nécessite une mise à jour plus complète qu\'à l\'accoutumée. Si vous êtes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre à jour vos paramètres de connexion à la base de données.<p> (NB. : si vous avez oublié vos paramètres de connexion, jetez un œil au fichier @connect@ avant de le supprimer...)</p>', # MODIF
@@ -950,8 +897,6 @@ enbart en sida, är det bäst att göra det från den publika delen genom att kl
 'texte_recapitiule_liste_documents' => 'Cette page récapitule la liste des documents que vous avez placés dans les rubriques. Pour modifier les informations de chaque document, suivez le lien vers la page de sa rubrique.', # NEW
 'texte_recuperer_base' => 'Reparera databasen',
 'texte_reference_mais_redirige' => 'article référencé dans votre site SPIP, mais redirigé vers une autre URL.', # NEW
-'texte_referencement_automatique' => '<b>Référencement automatisé d\'un site</b><br />Vous pouvez référencer rapidement un site Web en indiquant ci-dessous l\'adresse URL désirée, ou l\'adresse de son fichier de syndication. SPIP va récupérer automatiquement les informations concernant ce site (titre, description...).', # NEW
-'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Lorsque certaines requêtes SQL échouent
   systématiquement et sans raison apparente, il est possible
   que ce soit à cause de la base de données
@@ -978,11 +923,6 @@ enbart en sida, är det bäst att göra det från den publika delen genom att kl
 i SPIP\'s cache. Det gör det möjligt att tvinga fram en uppdatering av alla sidor om du
 gjort viktiga förändringar i sajtens utseende eller struktur.',
 'texte_sur_titre' => 'Övertitel',
-'texte_syndication' => 'If a site allows it, it is possible to retrieve automatically
-		the list of its latest material. To achieve this, you must activate the syndication. 
-		<blockquote><i>Some hosts disable this function; 
-		in this case, you cannot use the content syndication
-		from your site.</i></blockquote>', # MODIF
 'texte_table_ok' => ': den här tabellen är OK.',
 'texte_tables_indexation_vides' => 'Indextabellerna är tomma.',
 'texte_tentative_recuperation' => 'Reparationsförsök',
@@ -1024,7 +964,6 @@ you can perform searches on sites and
 'titre_admin_vider' => 'Tekniskt underhåll',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => 'Syndikerade artiklar från den här sajten',
 'titre_cadre_afficher_article' => 'Visa artiklarna:',
 'titre_cadre_afficher_traductions' => 'Visa status för översättningen för följande språk:',
 'titre_cadre_ajouter_auteur' => 'LÄGG TILL EN REDAKTÖR:',
@@ -1041,7 +980,6 @@ you can perform searches on sites and
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Optioner: <b>Din LDAP koppling</b>',
-'titre_dernier_article_syndique' => 'Senaste syndikerade artiklar',
 'titre_evolution_visite' => 'Besöksnivå',
 'titre_groupe_mots' => 'NYCKELORDSGRUPP:',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1069,7 +1007,6 @@ you can perform searches on sites and
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW
 'titre_page_recherche' => 'Sökresultat @recherche@',
-'titre_page_sites_tous' => 'Refererade webbplatser',
 'titre_page_statistiques' => 'Statistik uppdelat på avdelning',
 'titre_page_statistiques_referers' => 'Statistik (inkommande länkar)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
@@ -1077,17 +1014,10 @@ you can perform searches on sites and
 'titre_page_statistiques_visites' => 'Besöksstatistik',
 'titre_page_upgrade' => 'Uppgradera SPIP',
 'titre_publication_articles_post_dates' => 'Tidsstyrd publicering av artiklar',
-'titre_referencement_sites' => 'Référencement de sites et syndication', # NEW
 'titre_referencer_site' => 'Referera webbplatsen:',
 'titre_rendez_vous' => 'MÖTEN:',
 'titre_reparation' => 'Reparera',
-'titre_site_numero' => 'WEBBPLATS NUMMER',
-'titre_sites_proposes' => 'Les sites proposés', # NEW
-'titre_sites_references_rubrique' => 'Refererade webbplatser i den här avdelningen',
-'titre_sites_syndiques' => 'Les sites syndiqués', # NEW
-'titre_sites_tous' => 'Refererade webbplatser',
 'titre_suivi_petition' => 'Uppföljning av namninasamlingar',
-'titre_syndication' => 'Syndication de sites', # NEW
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Det finns ingen artikel med det här numret',

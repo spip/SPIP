@@ -44,10 +44,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_operation_echec' => 'Operasyon la te pa mache.',
 'avis_operation_impossible' => 'Opération impossible', # NEW
 'avis_probleme_archive' => 'Pwoblèm pou fè lekti fichyé @archive@',
-'avis_site_introuvable' => 'Sit la, gen pa rann kont ali',
-'avis_site_syndique_probleme' => 'Atansyon : sendikasyon pou sit sa-a gen yon pwoblèm ; sistèm pa mache kounyen-a. Gad si ladrès fichye sendikasyon sit-la se korèk (<b>@url_syndic@</b>), aprèsa ann esey yon lòt rekipérasyon enfòmasyon sa-yo. ', # MODIF
-'avis_sites_probleme_syndication' => 'Sit yo se sit sak gen yon pwoblèm sendikasyon',
-'avis_sites_syndiques_probleme' => 'Sit yon se sit sak té bay yon pwoblèm',
 'avis_suppression_base' => 'ATANSYON,  sipwesyon tout done-an se pa kav tounen deyé',
 'avis_version_mysql' => 'Ou versyon SQL (@version_mysql@) i gen pa pémi ranje tousèl tab yo andan la bazdoné.', # MODIF
 
@@ -83,11 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_liste_nouveautes' => 'Voye yon lis nouvèlte yo',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ann pa aparèt w nan lis redakté yo ap an liy',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Rete voye anons editoyal ',
-'bouton_radio_non_syndication' => 'Okenn sendikasyon',
 'bouton_radio_pas_petition' => 'Okenn petisyon',
 'bouton_radio_petition_activee' => 'Petisyon ka mache',
 'bouton_radio_supprimer_petition' => 'Kraez petisyon nan',
-'bouton_radio_syndication' => 'Sendikasyon :',
 'bouton_redirection' => 'TOUNYEN ADRES DEYO',
 'bouton_relancer_installation' => 'Ann eseye ankò instalasyon nan',
 'bouton_suivant' => 'Swivan',
@@ -128,15 +122,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adrès nan aniyè',
 'entree_adresse_email' => 'ou ladrès limèl',
-'entree_adresse_fichier_syndication' => 'Ladrès fichye pou la sendikasyon :',
-'entree_adresse_site' => '<b>Ladrès sit la</b> [Nésesè]',
 'entree_base_donnee_1' => 'Ladrès bazdone',
 'entree_base_donnee_2' => '(Souvan ladrès-la se paréy sak ladrès sitwèb w-a, osnon lès senpman «localhost»,  oubyen lès ali vid.)',
 'entree_biographie' => 'Ki se w (kèk mo sèlman).',
 'entree_chemin_acces' => '<b>Rantre</b> chemen pou aksè :',
 'entree_cle_pgp' => 'Ou klé PGP',
 'entree_contenu_rubrique' => '(Kisa ribrik-la gen kontni nan kèk mo.)',
-'entree_description_site' => 'Dekrisyon sit-la',
 'entree_identifiants_connexion' => 'Ou lidantifyan pou koneksyon...',
 'entree_informations_connexion_ldap' => 'Mèsi mèt dann komisyon-la tout enfòmasyon nésesè pou abòd  laniyè LDAP.
 
@@ -214,9 +205,7 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'icone_modifier_article' => 'Chanje atik la',
 'icone_modifier_message' => 'Chanje mesaj la',
 'icone_modifier_rubrique' => 'Chanje ribrik la',
-'icone_modifier_site' => 'Chanje sit la',
 'icone_publication' => 'Publication', # NEW
-'icone_referencer_nouveau_site' => 'Referans yon nouvo sit',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Tounyen deyé',
 'icone_retour_article' => 'Tounyen deyé sou atik a',
@@ -226,7 +215,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'icone_supprimer_rubrique' => 'Kraze ribrik la',
 'icone_supprimer_signature' => 'Kraze siyati a',
 'icone_valider_signature' => 'Konfime siyati a',
-'icone_voir_sites_references' => 'Gad sit referanse yo',
 'image_administrer_rubrique' => 'Ou kapab gèr ribrik la',
 'info_1_article' => '1 atik',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -291,7 +279,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_avertissement' => 'Mesaj pou atansyon',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Strikti bazdone se enstale.',
-'info_bloquer' => 'bloké',
 'info_chapeau' => 'Chapo',
 'info_chapeau_2' => 'Chapo :',
 'info_chemin_acces_1' => 'Opsyion sa-yo: <b>Chemen pou laksè nan laniyè</b>',
@@ -328,7 +315,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_date_publication_anterieure' => 'Dat li te fin pibliyé avan :',
 'info_date_referencement' => 'DAT SIT-LA TE FIN REFERANSE :',
 'info_derniere_etape' => 'Dènye etap : <b> se fin fini !', # MODIF
-'info_derniere_syndication' => 'Dènye sendikasyon sit-la te fin  fè an jou',
 'info_derniers_articles_publies' => 'Denye atik w-a ki te fin pibliye an liy',
 'info_desactiver_messagerie_personnelle' => 'W kapab mèt oubyen suspann lan kazmodékri (mesajri) pésonèl sou sit-la.',
 'info_descriptif' => 'Dekrisyon :',
@@ -388,8 +374,6 @@ Koulè imaj rannkont stati yo (komandè = vèr; redaktè = jon).',
 'info_langues' => 'Tout lanng sit la',
 'info_ldap_ok' => 'Lotantifikasyon LDAP se enstale.',
 'info_lien_hypertexte' => 'Lyen ipètèks :',
-'info_liens_syndiques_1' => 'lyen sendike sa-yo',
-'info_liens_syndiques_2' => 'ki tan pou yon komandè konfime yo.',
 'info_liste_redacteurs_connectes' => 'Llis redaktè ki ap an liy kounye-a',
 'info_login_existant' => 'Nonkod la ki egziste deja.',
 'info_login_trop_court' => 'Nondkod ki tro piti.',
@@ -433,7 +417,6 @@ pa mache mèm.<br />{{Fòk w instal ankò
 'info_nom' => 'Kouman i rele',
 'info_nom_destinataire' => 'Kouman destinatè i rele',
 'info_nom_site' => 'Kouman sit la li rele',
-'info_nom_site_2' => '<b>Kouman sit la li rele</b> [Nesesé]',
 'info_nombre_articles' => '@nb_articles@ atik (yo),',
 'info_nombre_partcipants' => 'PATISIPAN TO NAN KOZMAN :',
 'info_nombre_rubriques' => '@nb_rubriques@ ribrik (yo),',
@@ -500,7 +483,6 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
   lébèjè ka enpeche lanvwa tout limèl  depi zot sèvè :
   alò, lenskrisyon otomatik ke
   inposib.', # MODIF
-'info_question_proposer_site' => 'Kimoun kapab pwopoze kèk sit referansé ?',
 'info_question_utilisation_moteur_recherche' => 'Eske w vle itilize motè pou chèche de SPIP ?
  (enlèv ali ke rann sistèm pli rapid ek soup.)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
@@ -533,14 +515,10 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
 'info_site' => 'Sit',
 'info_site_2' => 'sit :',
 'info_site_min' => 'sit',
-'info_site_propose' => 'Sit pwopoze an jou :',
 'info_site_reference_2' => 'Sit referanse',
-'info_site_syndique' => 'Sit-la se sendike...',
-'info_site_valider' => 'Sit sa-yo se sit yo ki pou konfime',
 'info_sites' => 'sit yo',
 'info_sites_lies_mot' => 'Sit referanse sa-yo ki jwenn nan lyen ak mokle-a',
 'info_sites_proxy' => 'Itilize yon proksi (proxy)',
-'info_sites_refuses' => 'Sit sa-yo ki te refize',
 'info_sites_trouves' => 'Sit sa-yo ki te fin rannkont',
 'info_sites_trouves_dans_texte' => 'Sit sa-yo ki te finn rannkont (nan tèks)',
 'info_sous_titre' => 'Soutit :',
@@ -550,10 +528,6 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
 'info_statut_auteur_autre' => 'Autre statut :', # NEW
 'info_statut_efface' => 'Ki te finn kraze',
 'info_statut_redacteur' => 'Redaktè',
-'info_statut_site_1' => 'Sit-la se :',
-'info_statut_site_2' => 'Pibliye',
-'info_statut_site_3' => 'Pwopoze pou parèt ',
-'info_statut_site_4' => 'Nan bwat poubèl',
 'info_statut_utilisateurs_1' => 'Lestati otomatik pou zitilizatè enpòte yo',
 'info_statut_utilisateurs_2' => 'Chwazi stati ki bay smou préan nan laniyé  LDAP, kank moun ka konek azot promyé fwa. Aprésa w kapab chanje valè la pou chak lotè, chaken apré lòt.',
 'info_suivi_activite' => 'Swivi laktivité léditoryal',
@@ -633,14 +607,12 @@ nan yon koulè ki bay lestati ali :',
 'item_autoriser_documents_joints' => 'Asèpte dokiman jwenn yo nan atik yo',
 'item_autoriser_documents_joints_rubriques' => 'Asèpte dokiman jwenn yo nan ribrik yo',
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
-'item_bloquer_liens_syndiques' => 'Bloke lyen lasendikasyon sa-yo ki pou konfime',
 'item_choix_administrateurs' => 'komandè yo',
 'item_choix_generation_miniature' => 'Kreye otomatikman vèsyon miyati (viyèt) pou tout imaj.',
 'item_choix_non_generation_miniature' => 'Pa kreye miyati pou limaj.',
 'item_choix_redacteurs' => 'redaktè yo',
 'item_choix_visiteurs' => 'vizitè yo d sit piblik',
 'item_creer_fichiers_authent' => 'Kreye fichye yo .htpasswd',
-'item_gerer_annuaire_site_web' => 'Okipe yon laniye sit web yo',
 'item_gerer_statistiques' => 'Okipe lestatistik yo',
 'item_limiter_recherche' => 'Sere lachèche nan limit lenfomasyon ki kontni sit a w. ',
 'item_login' => 'Nonkod',
@@ -655,23 +627,19 @@ nan yon koulè ki bay lestati ali :',
 'item_non_autoriser_documents_joints' => 'Asèpte pa dokiman jwenn nan atik yo',
 'item_non_autoriser_documents_joints_rubriques' => 'Asèpte pa dokiman jwenn nan ribrik yo',
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
-'item_non_bloquer_liens_syndiques' => 'Blok pa lyen ki soti senkikasyon an',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
 'item_non_creer_fichiers_authent' => 'Kreye pa fichye sa yo',
-'item_non_gerer_annuaire_site_web' => 'Rotir lanyie sit web',
 'item_non_gerer_statistiques' => 'Fè pa estatistik',
 'item_non_limiter_recherche' => 'Tann chèche nan kontni sit ki referansé',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Pa pibliyé atik sa-yo avan ladat ki présizé.',
 'item_non_utiliser_moteur_recherche' => 'Itilize pa motè-rechèche',
-'item_non_utiliser_syndication' => 'Itilize pa sendikasyon otomatik',
 'item_nouvel_auteur' => 'Nouvo lotè',
 'item_nouvelle_rubrique' => 'Nouvo ribrik',
 'item_oui' => 'Wi',
 'item_publier_articles' => 'Fè parèt tout atik kiswa dat piblikasyon ali.',
 'item_reponse_article' => 'Repons sou atik sa-a',
 'item_utiliser_moteur_recherche' => 'Itilize motè-rechèche',
-'item_utiliser_syndication' => 'Itilize sendikasyon otomatik',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'vizitè',
@@ -696,9 +664,7 @@ nan yon koulè ki bay lestati ali :',
 'lien_ajouter_auteur' => 'Ajoute lotè-a',
 'lien_ajouter_participant' => 'Ajoute yon patisipan',
 'lien_email' => 'limèl',
-'lien_mise_a_jour_syndication' => 'arnouvèl kounye-a',
 'lien_nom_site' => 'KOUMAN SIT-LA RELE :',
-'lien_nouvelle_recuperation' => 'esey yon lòt rékipérasyon tout done sa-yo',
 'lien_retirer_auteur' => 'Kraze lotè-a',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'kraze patisipan-nan',
@@ -815,15 +781,6 @@ nan yon koulè ki bay lestati ali :',
 // S
 'sans_heure' => 'sans heure', # NEW
 'statut_admin_restreint' => '(komandè ki limité)',
-'syndic_choix_moderation' => 'Kisa SPIP ka fè ak pwochen lyanaj ki soti sit-la ?',
-'syndic_choix_oublier' => 'Kisa SPIP ka fè ak lyanaj ki pa pwézan nan fichyé sendikasyon la ?',
-'syndic_choix_resume' => 'Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer :', # NEW
-'syndic_lien_obsolete' => 'lianaj se two vyé',
-'syndic_option_miroir' => 'rèt sa-yo otomatikman',
-'syndic_option_oubli' => 'efase yo (apwè @mois@ mwa)',
-'syndic_option_resume_non' => 'le contenu complet des articles (au format HTML)', # NEW
-'syndic_option_resume_oui' => 'un simple résumé (au format texte)', # NEW
-'syndic_options' => 'Tout opsyon pou sendikasyon :',
 
 // T
 'taille_cache_image' => 'Tout imaj ki SPIP kav kalkile otomatikman (viyèt nan dokiman, kouman li rele ki pwézanté nan foma gwafik, tout fonksyon matematik nan foma TeX...) yo ka okipe nan répètwar @dir@ lespas total ki @taille@.',
@@ -909,16 +866,11 @@ lenstalasyon SPIP pou w kreye yon lòt nouvo baz ak son promyé laksé komandè'
 'texte_jeu_caractere_4' => 'Si cela ne correspond pas à la réalité de vos données (suite, par exemple, à une restauration de base de données), ou si <em>vous démarrez ce site</em> et souhaitez partir sur un autre jeu de caractères, veuillez indiquer ce dernier ici :', # NEW
 'texte_jeu_caractere_conversion' => 'Note : vous pouvez décider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, brèves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.', # NEW
 'texte_lien_hypertexte' => '(Si mesaj aw se mesaj ki pale yon atik w rankout deò sou yo lòt sitweb, osnon yon paj ki sere plis enfòmasyon, mèsi bay isit anba kouman li rele ak kilès URL.)',
-'texte_liens_sites_syndiques' => 'Tout lyen ki sòti tout sit sendike, genyen
-posib blok azot dabò ; réglaj isit
-   anba se réglaj otomatik pou tout sit apré kreasyon sendikasyon azot
-   posib déblok azot aprè, ou debloke selman lyen pa lyen, osnon chwazi bloke  sit pa sit, tput lyen ki sòit laveni sou sit sa-yo. ',
 'texte_login_ldap_1' => '(Kembe vid ali pou yo laksé anonim, osnon ekri w chemen konple pa egsanp « <tt>uid=mwen, ou=users, dc=sitamwen, dc=com</tt> ».)',
 'texte_login_precaution' => 'Atansyon ! bagay-la se nonkod koumon w rele kounyen-a.
  Ann itilize fòmilè-a ek swen...',
 'texte_message_edit' => 'Atansyon : tout komandè sit sa-a kapab chnaje mesaj-la ak tout redaktè kapab li ali. Mèsi itilize mesaj anons komsa sélman pou soutni yon evenman enpòtan nan vi sit-la.',
 'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
-'texte_messages_publics' => 'Mesaj piblik yo ki nan atik-la :',
 'texte_mise_a_niveau_base_1' => 'W te fini renouvèle tout fichye SPIP.
  Fòk kembe nan nivo labazdoné
  pou sit-la.',
@@ -932,7 +884,6 @@ posib blok azot dabò ; réglaj isit
 'texte_multilinguisme' => 'Si w vle itilize atik yo sous sit-la nan diferan lang, ak yon navigasyon konplèks,  w kapab ajoute yon meni-dewoulè pou chwazi lalang tout atik ak ribrik yo, selon kouman w te òganize sit aw.',
 'texte_multilinguisme_trad' => 'Ou kap mèt yon sistèm pou okipe kèk lyen ant plizyè tradiksyon yon mèm atik.',
 'texte_non_compresse' => '<i>ki pa konprese</i> (sèvè w ki pa soutni nan fonksyon la)',
-'texte_non_fonction_referencement' => 'W ka vle pa itilize fonksyon otomatik la, men endike w mèm tout éléman yo ki pale sit-la...',
 'texte_nouveau_message' => 'Nouvo mesaj',
 'texte_nouvelle_version_spip_1' => 'W te enstalé yon nouvo vésyon SPIP.',
 'texte_nouvelle_version_spip_2' => 'Fòk w fè yon arnouvèlman pli konple pou monte nivo nouvo vèsyon an. Si w se webmèt sit-la, mèsi efase fichye-a <tt>inc_connect.php3</tt> nan repetwar <tt>ecrire</tt> ak ropran lenstalasyon pou mèt paramèt koneksyon sou bazdone nan nivo.<p> (Gad. : si w te oubliye paramèt koneksyon aw, gad fichye <tt>inc_connect.php3</tt> avan efase ali...)</p>', # MODIF
@@ -955,8 +906,6 @@ kalkil ankò yon sel paj selman, itilize plito lespas piblik ak bouton « Kalkil
 'texte_recapitiule_liste_documents' => 'Paj-la ka rankont tout dokiman w teplase nan ribrik yo. Si w vle chanje tout lenfòmasyon chak dokiman, mèsi swiv lyanaj sou paj ribrik azot.',
 'texte_recuperer_base' => 'Aranje bazdoné la',
 'texte_reference_mais_redirige' => 'atik ki referanse nan sit SPIP aou, men ki viré direksyon sou yon lot URL.',
-'texte_referencement_automatique' => '<b>Référansman otomatik pou yon sitweb</b><br />W kapab referanse fasilman yon sitweb si w bay ladrès URL osnon bay ladrès fichye backend ali. SPIP ke pran otomatikman tout enfòmasyon posib pou sit-la (kouman li rele, dekrisyon...).', # MODIF
-'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>kank kèk rekèt SQL ki pa mache
   sistématikman ak ki pa rézon vizib, se posib bagay la ki ako bazdoné-la  li mèm
 .</b><p>
@@ -980,11 +929,6 @@ W kapab esey issit yon aranjman ;
 Bagay-la pémè, pa egsanp, fòse rekalkil tout paj sa-yo, apré plizyè gro chanjman nan grafism osnon lastrikti sit aou.
 ',
 'texte_sur_titre' => 'Sir-tit',
-'texte_syndication' => 'Kank sitweb-la li pèmè bagay-sa-a, se posib pran otomatikman lis tout nouvèlté ali. 
-Fòk w aktive sendikasyon an. 
-  <blockquote><i>Tansyon kèk zébèrjè, zot ka dézaktiv fonksyonalité-a ; 
-  akoz bagay-la, inposib pran sendikasyon-an depi sit aou
-.</i></blockquote>', # MODIF
 'texte_table_ok' => ': tab-la se bon.',
 'texte_tables_indexation_vides' => 'Tab pou indeksayon motè se vid.',
 'texte_tentative_recuperation' => 'Esey aranjé',
@@ -1026,7 +970,6 @@ ou nan dékripsyon atik sa-yo
 'titre_admin_vider' => 'Swen teknik',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-'titre_articles_syndiques' => 'Atik sendike ki rale yo sit la',
 'titre_cadre_afficher_article' => 'Fè parèt atik yo',
 'titre_cadre_afficher_traductions' => 'Fè parèt kouman se tradiksyon yo pou tout lanng swivan :',
 'titre_cadre_ajouter_auteur' => 'KREYE YON LOTE :',
@@ -1043,7 +986,6 @@ ou nan dékripsyon atik sa-yo
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opsyon sa-yo : <b>ou konèksyon LDAP</b>',
-'titre_dernier_article_syndique' => 'Tout denye atik sendike',
 'titre_evolution_visite' => 'Evolisyon vizit yo',
 'titre_groupe_mots' => 'GWOUP MOKLE :',
 'titre_identite_site' => 'Identité du site', # NEW
@@ -1071,7 +1013,6 @@ ou nan dékripsyon atik sa-yo
 'titre_page_message_edit' => 'Ekri yon mesaj',
 'titre_page_messagerie' => 'Ou kazmodekri ',
 'titre_page_recherche' => 'Rezilta chèche @recherche@',
-'titre_page_sites_tous' => 'Tout sit referanse yo',
 'titre_page_statistiques' => 'Estatsitik pou tout pati yo nan sit sa a',
 'titre_page_statistiques_referers' => 'Rézilta estatistik (lyen sa-yo ka rive)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
@@ -1079,17 +1020,10 @@ ou nan dékripsyon atik sa-yo
 'titre_page_statistiques_visites' => 'Estatistik pou tout vizit yo',
 'titre_page_upgrade' => 'Mèt SPIP nan nivle',
 'titre_publication_articles_post_dates' => 'Piblikasyon tout atik yo posdate',
-'titre_referencement_sites' => 'Referansman pou tout sit yo ak sendikasyon ',
 'titre_referencer_site' => 'Referanse sit la :',
 'titre_rendez_vous' => 'PWOPOZE YON RANKONT :',
 'titre_reparation' => 'Reparasyon',
-'titre_site_numero' => 'SIT NIMEWO  :',
-'titre_sites_proposes' => 'Tout sit pwopoze ',
-'titre_sites_references_rubrique' => 'Tout sit referanse nan pati sa a nan sit la',
-'titre_sites_syndiques' => 'Tout sit sendike yo',
-'titre_sites_tous' => 'Tout sit referanse andan sit la',
 'titre_suivi_petition' => 'Swiv tout petisyon yo',
-'titre_syndication' => 'Sendikasyon pou tout sit yo',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
 'trad_article_inexistant' => 'Okenn atik gen pa nimewo-a.',
