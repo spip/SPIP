@@ -62,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Desactivalo too',
 'bouton_desinstaller' => 'Desasitiar',
 'bouton_effacer_index' => 'Desaniciar los índices',
-'bouton_effacer_statistiques' => 'Desaniciar les estadístiques',
 'bouton_effacer_tout' => 'Desaniciar TOO',
 'bouton_envoi_message_02' => 'UNVIAR UN MENSAXE',
 'bouton_envoyer_message' => 'Mensaxe definitivu: unviar',
@@ -118,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'hores',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'corréu electrónicu',
 'email_2' => 'correu elletrónicu:',
 'en_savoir_plus' => 'Pa saber más',
@@ -198,7 +198,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Facer una estaya nueva',
 'icone_edition' => 'Edición',
 'icone_envoyer_message' => 'Unviar esti mensaxe',
-'icone_evolution_visites' => 'Evolución de les visites<br />@visites@ visites',
 'icone_ma_langue' => 'La mio llingua',
 'icone_mes_infos' => 'La mio información',
 'icone_mes_preferences' => 'Les mios preferencies',
@@ -242,7 +241,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'a les señes:',
 'info_adresse_url' => 'Direición (URL) del sitiu públicu',
 'info_afficher_visites' => 'Amosar les visites pa:',
-'info_affichier_visites_articles_plus_visites' => 'Amosar les visites pa <b>los artículos más visitaos dende l\'entamu:</b>',
 'info_aide_en_ligne' => 'Aida en llinia de SPIP',
 'info_ajout_image' => 'Cuando amestes imáxenes como documentos axuntaos a un artículu,
   SPIP puede crear por tí, automáticamente, viñetes (miniatures) de les
@@ -288,7 +286,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => '<sup>u</sup> en @liste@',
 'info_classement_2' => '<sup>u</sup> en @liste@',
 'info_code_acces' => '¡Nun escaezas los tos códigos d\'accesu!',
-'info_comment_lire_tableau' => 'Cómo lleer esti cuadru',
 'info_compatibilite_html' => 'Norma HTML a siguir',
 'info_compresseur_gzip' => '<b>Nota:</b> Recomiéndase verificar de mano si l\'agospiador ya comprime automáticamente los scripts php ; pa esto, puedes utilizar por exemplu el serviciu siguiente: @testgzip@',
 'info_compresseur_texte' => 'Si el to sirvidor nun comprime automáticamente les páxines html par unviales a los internautes, puedes tentar de forzar esta compresión pa amenorgar el pesu de les páxines descargáes. <b>Atención</b>: esto puede ralentizar enforma dellos sirvidores.',
@@ -337,7 +334,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   a una llista de corréu de redactores, l\'anunciu de les propuestes de
   publicación y les validaciones d\'artículos.',
 'info_fichiers_authent' => 'Archivos d\'autentificación «.htpasswd»',
-'info_forum_statistiques' => 'Estadístiques de les visites',
 'info_forums_abo_invites' => 'Esti sitiu tien foros pa abonaos; poro a los visiteurs se-yos encamienta que se rexistren nel sitiu públicu.',
 'info_gauche_admin_effacer' => '<b>Esta páxina namái ye accesible pa los responsables del sitiu.</b><p> Equí ta l\'accesu a les diferentes funciones de mantenimientu téunicu. Delles llancen un procesu d\'identificación específicu, pal que fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_gauche_admin_tech' => '<b>Esta páxina namái ye accesible pa los responsables del sitiu.</b><p> Equí ta l\'accesu a les diferentes
@@ -458,8 +454,6 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_plus_cinq_car_2' => '(Más de 5 carauteres)',
 'info_plus_trois_car' => '(Más de 3 carauteres)',
 'info_popularite' => 'popularidá: @popularite@; visites: @visites@',
-'info_popularite_2' => 'popularidá del sitiu:',
-'info_popularite_3' => 'popularidá: @popularite@; visites: @visites@',
 'info_popularite_4' => 'popularidá: @popularite@; visites : @visites@',
 'info_post_scriptum' => 'Post Scríptum',
 'info_post_scriptum_2' => 'Post Scríptum:',
@@ -468,7 +462,6 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_preview_comite' => 'Tolos redactores puen previsualizar el sitiu',
 'info_preview_desactive' => 'La previsualización ta desactivada dafechu',
 'info_preview_texte' => 'Ye posible previsualizar el sitiu como si tolos artículos y les breves (que tengan polo menos l\'estatutu «propuestu») tuvieren espublizaos. ¿Esta posibilidá tien que tar abierta pa los alministradores namái, pa tolos redactores, o pa naide?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Principales intercambéos de mensaxes',
 'info_procedez_par_etape' => 'sigue pasu ente pasu',
 'info_procedure_maj_version' => 'hai que llanzar el procesu d\'actualización a la fin d\'adautar
@@ -478,7 +471,6 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_publier' => 'espublizar',
 'info_publies' => 'Los tos artículos espublizáos en llinia',
 'info_question_accepter_visiteurs' => 'Si les cadarmes d\'esti sitiu prevén el rexistru de visitantes ensin accesu a l\'espaciu priváu, has d\'activar la opción d\'embaxo:',
-'info_question_gerer_statistiques' => '¿El sitiu tien que xestionar les estadístiques de les visites?',
 'info_question_inscription_nouveaux_redacteurs' => '¿Aceutes les inscripciones de nuevos redactores dende\'l
   sitiu públicu? Si aceutes, los visitantes podrán inscribise
   dende un formulariu automatizáu y tendrán accesu a l\'espaciu priváu pa
@@ -490,9 +482,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
   imposible.</i></blockquote>',
 'info_question_utilisation_moteur_recherche' => '¿Quies utilizar el motor de restolar integráu con SPIP?
  (desactivalu acelera el funcionamientu del sistema.)',
-'info_question_vignettes_referer' => 'Cuando consultes les estadístiques, pues amosar miniatures de los sitios d\'orixe de les visites',
 'info_question_vignettes_referer_non' => 'Nun amosar les captures de los sitios d\'orixe de les visites',
-'info_question_vignettes_referer_oui' => 'Amosar captures de los sitios d\'orixe de les visites',
 'info_racine_site' => 'Raiz del sitiu',
 'info_recharger_page' => 'Ties que recargar esta páxina nunos instantes.',
 'info_recherche_auteur_a_affiner' => 'Hai resultaos asgaya pa "@cherche_auteur@", apurre más criterios a la gueta.',
@@ -575,7 +565,6 @@ con una color que indica el estáu:',
 'info_urlref' => 'Enllace d\'hipertestu:',
 'info_utilisation_spip' => 'Agora puedes entamar a utilizar el sistema d\'espublizamientu asistíu...',
 'info_visites_par_mois' => 'Amosar por meses:',
-'info_visites_plus_populaires' => 'Amosar les visites de <b>los artículos más populares</b> y de <b>los caberos artículos espublizaos:</b>',
 'info_visiteur_1' => 'Visitante',
 'info_visiteur_2' => 'del sitiu públicu',
 'info_visiteurs' => 'Visitantes',
@@ -618,7 +607,6 @@ con una color que indica el estáu:',
 'item_choix_redacteurs' => 'los redactores',
 'item_choix_visiteurs' => 'los visitantes del sitiu públicu',
 'item_creer_fichiers_authent' => 'Crear los archivos .htpasswd',
-'item_gerer_statistiques' => 'Xestionar les estadístiques',
 'item_limiter_recherche' => 'Llendar la gueta a les informaciones conteníes nesti sitiu',
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'Activar la mensaxer&iacute;a y l’axenda',
@@ -799,7 +787,6 @@ con una color que indica el estáu:',
 'texte_admin_effacer_01' => 'Esta orde desanicia <i>tol</i> conteníu de la base de datos,
 incluyíos <i>tolos</i> accesos de redactores y alministradores. Tres d\'executalu, vas tener que llanzar la
 reinstalación de SPIP pa crear una nueva base igual que un primer accesu d\'alministrador.',
-'texte_admin_effacer_stats' => 'Esta orde esborra tolos datos tocantes a les estadístiques de visites al sitiu, incluyendo la popularidá de los artículos.',
 'texte_adresse_annuaire_1' => '(Si la guía ta instalada na mesma máquina que esti sitiu Web, ye probablemente «localhost».)',
 'texte_ajout_auteur' => 'El siguiente autor amestose a l\'artículu:',
 'texte_annuaire_ldap_1' => 'Si ties accesu a una guía (LDAP), vas poder utilizala pa importar automáticamente usuarios a SPIP.',
@@ -817,13 +804,6 @@ reinstalación de SPIP pa crear una nueva base igual que un primer accesu d\'alm
 'texte_commande_vider_tables_indexation' => 'Utiliza esta orde a la fin de vaciar les tables d\'indexación utilizáes
    pol motor de guetar integráu con SPIP. Esto va permitite
    ganar espaciu nel discu.',
-'texte_comment_lire_tableau' => 'El rangu de l\'artículu,
-  na clasificación por popularidá, vién indicáu nel
-  marxe; la popularidá de l\'artículu (una estimación del
-  númberu de visites diaries que recibirá si el ritmu actual de
-  consultes se mantuviere) y el númberu de visites recibíes
-  dende\'l so espublizamientu amuésense na burbuya
-  que apaez al pasar el mur pol títulu.',
 'texte_compatibilite_html' => 'Puedes pidi-y a SPIP que produza, nel sitiu públicu, códigu compatible cola norma <i>HTML4</i>, o permiti-y utilizar les posibilidaes más modernes del <i>HTML5</i>.',
 'texte_compatibilite_html_attention' => 'Nun hai dengún peligru por activar la opción <i>HTML5</i>, pero si lo faes, les páxines del to sitiu tendrán d\'entamar cola cita darréu pa ser válidos: <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(esti pue tar comprimíu o non)',
@@ -920,7 +900,6 @@ recalcular una sola páxina, pasa meyor pel espaciu públicu y calca nel botón 
  <li> la natura del motor tipográficu que SPIP tien que utilizar pa representar los testos;</li>
  <li> la llingua utilizada nos formularios del sitiu públicu;</li>
  <li> la llingua por omisión pa presentar l\'espaciu priváu.</li></ul>',
-'texte_signification' => 'Les barres escures representen les entráes acumuláes (total de les sub-estayes), les barres clares el númberu de visites pa cada estaya.',
 'texte_sous_titre' => 'Subtítulu',
 'texte_statistiques_visites' => '(barres prietes:  domingu / curva prieta: evolución de la media)',
 'texte_statut_attente_validation' => 'esperando validación',
@@ -988,7 +967,6 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 'titre_configurer_preferences' => 'Configurar les tos preferencies',
 'titre_conflit_edition' => 'Conflictu durante la edición',
 'titre_connexion_ldap' => 'Axustes: <b>La to conexón LDAP</b>',
-'titre_evolution_visite' => 'Evolución de les visites',
 'titre_groupe_mots' => 'GRUPU DE PALLABRES:',
 'titre_identite_site' => 'Identidá del sitiu',
 'titre_langue_article' => 'LLINGUA DE L\'ARTICULU',
@@ -1015,11 +993,9 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 'titre_page_message_edit' => 'Redactar un mensaxe',
 'titre_page_messagerie' => 'La to mensaxería',
 'titre_page_recherche' => 'Resultaos de la gueta @recherche@',
-'titre_page_statistiques' => 'Estadístiques por estayes',
 'titre_page_statistiques_referers' => 'Estadístiques (enllaces entrantes)',
 'titre_page_statistiques_signatures_jour' => 'Númberu de robles por día',
 'titre_page_statistiques_signatures_mois' => 'Númberu de robles por mes',
-'titre_page_statistiques_visites' => 'Estadístiques de les visites',
 'titre_page_upgrade' => 'Actualización de SPIP',
 'titre_publication_articles_post_dates' => 'Publicación d\'artículos con fecha posterior',
 'titre_referencer_site' => 'Referenciar el sitiu:',

@@ -62,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Tout désactiver', # NEW
 'bouton_desinstaller' => 'Désinstaller', # NEW
 'bouton_effacer_index' => 'Slet indeksering',
-'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => 'Slet alt',
 'bouton_envoi_message_02' => 'SEND MEDDELELSE',
 'bouton_envoyer_message' => 'Send færdig meddelelse',
@@ -118,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'timer',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'e-mail',
 'email_2' => 'e-mail:',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -196,7 +196,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Opret nyt afsnit',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Send denne meddelelse',
-'icone_evolution_visites' => 'Udvikling i besøg <br />@visites@ besøg',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -239,7 +238,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'til adressen:',
 'info_adresse_url' => 'Dit offentlige websteds URL',
 'info_afficher_visites' => 'Vis besøg for:',
-'info_affichier_visites_articles_plus_visites' => 'Vis besøg til <b>de mest besøgte artikler siden starten:</b>',
 'info_aide_en_ligne' => 'SPIP online hjælp',
 'info_ajout_image' => 'Når du vedhæfter billeder til en artikel, kan
 		SPIP automatisk lave miniatureudgaver af billederne.
@@ -285,7 +283,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => '<sup>.</sup> af @liste@',
 'info_classement_2' => '<sup>.</sup> af @liste@',
 'info_code_acces' => 'Glem ikke dine egne adgangsoplysninger!',
-'info_comment_lire_tableau' => 'Sådan læses grafen',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
@@ -331,7 +328,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_exportation_base' => 'eksporter database til @archive@',
 'info_facilite_suivi_activite' => 'For at lette opfølgning på webstedets redaktionelle aktiviteter sender SPIP e-mails med anmodning om offentliggørelse og godkendelse til f.eks. redaktørens adresseliste.',
 'info_fichiers_authent' => 'Adgangskontrolfil ".htpasswd"',
-'info_forum_statistiques' => 'Besøgsstatistik',
 'info_forums_abo_invites' => 'Your site contains forums by subscription; visitors may register for them on the public site.', # NEW
 'info_gauche_admin_effacer' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en særlig adgangskontrol, der kræver FTP-adgang til siden.', # MODIF
 'info_gauche_admin_tech' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en særlig adgangskontrol, der kræver FTP-adgang til siden.', # MODIF
@@ -441,8 +437,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_plus_cinq_car_2' => '(Mere end 5 tegn)',
 'info_plus_trois_car' => '(Mere end 3 tegn)',
 'info_popularite' => 'popularitet: @popularite@; besøg: @visites@',
-'info_popularite_2' => 'webstedets polularitet:',
-'info_popularite_3' => 'polularitet: @popularite@; besøg: @visites@',
 'info_popularite_4' => 'polularitet: @popularite@; besøg: @visites@',
 'info_post_scriptum' => 'Efterskrift',
 'info_post_scriptum_2' => 'Efterskrift:',
@@ -451,7 +445,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => 'All authors have access to the preview mode', # NEW
 'info_preview_desactive' => 'Preview mode is disabled', # NEW
 'info_preview_texte' => 'It is possible to preview the site as if all articles and news items (which have at least the status "submitted") were already published. Should this preview mode be restricted to administrators, open to all authors, or disabled completely?', # NEW
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Dine hovedbidragydere',
 'info_procedez_par_etape' => 'gå frem skridt for skridt',
 'info_procedure_maj_version' => 'opgraderingsprocdeduren bør følges for at tilpasse databasen til den nye version af SPIP.',
@@ -460,7 +453,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'publier', # NEW
 'info_publies' => 'Dine offentliggjorte artikler',
 'info_question_accepter_visiteurs' => 'If your site\'s templates allow visitors to register without entering the private area, please activate the following option:', # NEW
-'info_question_gerer_statistiques' => 'Skal dit websted danne besøgsstatistik?',
 'info_question_inscription_nouveaux_redacteurs' => 'Vil du tillade, at nye redaktører tilmelder sig
 		på det offentligt tilgængelige websted? Ja betyder, at besøgende kan tilmelde sig på en automatisk dannet formular,
 		og derefter få adgang til det private område, hvor de kan vedligeholde deres egne artikler.
@@ -469,9 +461,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		tilmelding ikke finde sted.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Ønsker du at anvende den søgefunktion, der findes i SPIP?
 	(At fravælge søgefunktionen gør webstedet hurtigere.)',
-'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 'info_racine_site' => 'Top',
 'info_recharger_page' => 'Vær venlig at genindlæse denne side om et øjeblik.',
 'info_recherche_auteur_a_affiner' => 'For mange resultater fundet til "@cherche_auteur@"; vær venlig at afgrænse søgningen mere.',
@@ -554,7 +544,6 @@ i en farve, der angiver deres status:',
 'info_urlref' => 'Hyperlink:',
 'info_utilisation_spip' => 'SPIP er nu klar til brug...',
 'info_visites_par_mois' => 'Besøg pr. måned:',
-'info_visites_plus_populaires' => 'Vis besøg til <b>de mest populære artikler</b> og til <b>de senest offentliggjorte artikler:</b>',
 'info_visiteur_1' => 'Besøgende',
 'info_visiteur_2' => 'på den offentligt tilgængelige websted',
 'info_visiteurs' => 'Besøgende',
@@ -597,7 +586,6 @@ i en farve, der angiver deres status:',
 'item_choix_redacteurs' => 'redaktører',
 'item_choix_visiteurs' => 'besøgende på den offentlige websted',
 'item_creer_fichiers_authent' => 'Dan .htpasswd filer',
-'item_gerer_statistiques' => 'Dan statistik',
 'item_limiter_recherche' => 'Begræns søgning til information på din eget websted',
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
@@ -778,7 +766,6 @@ i en farve, der angiver deres status:',
 'texte_admin_effacer_01' => 'Denne kommando sletter <i>hele</i> indholdet i databasen,
 	herunder <i>hele</i> opsætningen for redaktører og administratorer. Når du har udført den, bør du 
 	geninstallere SPIP for at danne en ny database og åbne op for den første administratoradgang.',
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_adresse_annuaire_1' => '(Hvis dit katalog findes på samme server som webstedet, er det formentlig «localhost».)',
 'texte_ajout_auteur' => 'Følgende forfatter har bidraget til artiklen:',
 'texte_annuaire_ldap_1' => 'Hvis du har adgang til et LDAP-katalog, kan du anvende det til automatisk at importere brugere i SPIP.',
@@ -795,10 +782,6 @@ i en farve, der angiver deres status:',
 'texte_choix_table_prefix' => 'Préfixe des tables :', # NEW
 'texte_commande_vider_tables_indexation' => 'Brug denne kommando til at tømme de indekstabeller, som benyttes af SPIP\'s indbyggede søgefunktion.
 			Derved kan du spare diskplads.',
-'texte_comment_lire_tableau' => 'Artiklens rangering i popularitetslisten vises i marginen. Artiklens popularitet 
-		(et overslag over hvor mange daglige besøg den vil opnå, hvis det aktuelle trafikomfang opretholdes) 
-		og antallet af besøg, der er registreret siden begyndelsen, vises i den ballon, der kommer til syne når musen 
-		holdes over titlen.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(denne kan være komprimeret eller ikke)',
@@ -890,8 +873,6 @@ i en farve, der angiver deres status:',
 		<li> det sprog der anvendes i formularer på det offentlige websted</li>
 
 		<li> standardsproget i det private område.</li></ul>',
-'texte_signification' => 'Røde bjælker viser summer (totaler for underafsnit), 
-		grønne bjælker viser antal besøg i hvert afsnit.',
 'texte_sous_titre' => 'Underrubrik',
 'texte_statistiques_visites' => '(mørke bjælker:  Søndag / mørk kurve: gennemsnitsudvikling)',
 'texte_statut_attente_validation' => 'afventer godkendelse',
@@ -946,7 +927,6 @@ i en farve, der angiver deres status:',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Indstillinger: <b>Din LDAP forbindelse</b>',
-'titre_evolution_visite' => 'Udvikling i besøgstal',
 'titre_groupe_mots' => 'NØGLEORDSGRUPPE:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'ARTIKLENS SPROG',
@@ -973,11 +953,9 @@ i en farve, der angiver deres status:',
 'titre_page_message_edit' => 'Skriv meddelelse',
 'titre_page_messagerie' => 'Din meddelelsesfunktion',
 'titre_page_recherche' => 'Søgeresultater @recherche@',
-'titre_page_statistiques' => 'Statistik pr. afsnit',
 'titre_page_statistiques_referers' => 'Statistik (indkommende links)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
-'titre_page_statistiques_visites' => 'Besøgsstatistik',
 'titre_page_upgrade' => 'SPIP opgradering',
 'titre_publication_articles_post_dates' => 'Offentliggørelse af fremdaterede artikler',
 'titre_referencer_site' => 'Henvis til webstedet:',

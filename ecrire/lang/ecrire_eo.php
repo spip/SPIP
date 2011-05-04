@@ -61,7 +61,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Ĉion malaktivigi',
 'bouton_desinstaller' => 'Malinstali',
 'bouton_effacer_index' => 'Forviŝi indicojn',
-'bouton_effacer_statistiques' => 'Forviŝi statistikojn',
 'bouton_effacer_tout' => 'Forviŝi ĈION',
 'bouton_envoi_message_02' => 'SENDI MESAĜON',
 'bouton_envoyer_message' => 'Definitiva mesaĝo: sendi',
@@ -117,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'horoj',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'retpoŝtadreso',
 'email_2' => 'retpoŝtadreso :',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -195,7 +195,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Krei novan rubrikon',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Sendi tiun ĉi mesaĝon',
-'icone_evolution_visites' => 'Evoluado de la vizitoj<br />@visites@ vizitoj',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -238,7 +237,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'ĉe la adreso :',
 'info_adresse_url' => 'Retadreso (URL) de la publika retejo',
 'info_afficher_visites' => 'Afiŝi la vizitojn de :',
-'info_affichier_visites_articles_plus_visites' => 'Afiŝi la vizitojn por la <b>plej vizititaj artikoloj ekde la komenco :</b>',
 'info_aide_en_ligne' => 'Reta SPIP-helpilo',
 'info_ajout_image' => 'Kiam vi ligas bildojn kiel alkroĉitajn dokumentojn al artikolo,
  SPIP povas aŭtomate krei por vi etajn vinjetojn de la
@@ -283,7 +281,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => '<sup>a</sup> en @liste@',
 'info_classement_2' => '<sup>a</sup> en @liste@',
 'info_code_acces' => 'Ne forgesu viajn proprajn alir-kodojn !',
-'info_comment_lire_tableau' => 'Kiel legi tiun ĉi tabelon',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Estas rekomendate antaŭfare kontroli, ĉu via retgastiganto jam ĉiufoje densigas la php-skriptojn; por tio, vi povas ekzemple uzi la jenan servon : @testgzip@',
 'info_compresseur_texte' => 'Se via servilo ne aŭtomate densigas la html-paĝojn por ilin sendi al interretanoj, vi povas provi trudi tiun densigon por malkreskigi la pezon de la elŝutitaj paĝoj. <b>Atentu</b> :  tio povas forte malrapidigi iujn servilojn.',
@@ -329,7 +326,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_exportation_base' => 'Eksporto de la datenbazo al @archive@',
 'info_facilite_suivi_activite' => 'Por faciligi la kontrolon de la reteja ĉefartikola aktiveco, SPIP povas transdoni per retmesaĝoj - ekzemple al dissendlisto de redaktantoj - la anoncon pri publikig-petoj kaj validig-petoj de artikoloj.',
 'info_fichiers_authent' => 'Aŭtentokontrolaj dosieroj « .htpasswd »',
-'info_forum_statistiques' => 'Statistikoj pri vizitoj',
 'info_forums_abo_invites' => 'Via retejo enhavas forumojn alireblajn nur per abono ; vizitantoj estas invititaj al registriĝo ĉe la publika retejo.',
 'info_gauche_admin_effacer' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun paĝon.</b><p>Ĝi ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan aŭtentigan procezon, kiu postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun paĝon.</b><p>Ĝi ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan aŭtentigan procezon, kiu
@@ -441,8 +437,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_plus_cinq_car_2' => '(Pli ol 5 signoj)',
 'info_plus_trois_car' => '(Pli ol 3 signoj)',
 'info_popularite' => 'populareco : @popularite@ ; vizitoj : @visites@',
-'info_popularite_2' => 'populareco de la retejo :',
-'info_popularite_3' => 'populareco : @popularite@ ; vizitoj : @visites@',
 'info_popularite_4' => 'populareco : @popularite@ ; vizitoj : @visites@',
 'info_post_scriptum' => 'Postskribo',
 'info_post_scriptum_2' => 'Postskribo:',
@@ -451,7 +445,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_preview_comite' => 'Ĉiuj redaktantoj povas antaŭrigardi la retejon',
 'info_preview_desactive' => 'La antaŭrigardeblo estas malaktivigita',
 'info_preview_texte' => 'Eblas antaŭrigardi la retejon kvazaŭ ciuj artikoloj kaj fulm-informoj (kiuj almenaŭ havas la statuson « proponatan ») estus publikigitaj. Ĉu tio eblu nur al mastrumantoj, al ĉiuj redaktantoj, aŭ al neniu ?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Viaj ĉefaj korespondantoj',
 'info_procedez_par_etape' => 'procedu etapon post etapo',
 'info_procedure_maj_version' => 'la ĝisdatiga proceduro devas esti lanĉita por adapti
@@ -461,7 +454,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_publier' => 'publikigi',
 'info_publies' => 'Viaj artikoloj rete publikigitaj',
 'info_question_accepter_visiteurs' => 'Se via skeleto ebligas registradon de vizitantoj, kiuj ne rajtas aliri la privatan spacon, bonvolu aktivigi la ĉi-suban opcion :',
-'info_question_gerer_statistiques' => 'Ĉu via retejo devas mastrumi la statistikojn pri la vizitoj ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Ĉu vi akceptas la registriĝadon de novaj redaktantoj ekde
   la publika spaco ? Se vi akceptas tion, la vizitantoj povos registriĝi
   per aŭtomata aliĝilo kaj tiam aliros al la privata spaco por
@@ -472,9 +464,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
   serviloj : tiukaze la aŭtomata aliĝo ne eblos.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Ĉu vi deziras uzi la SPIP-internan serĉilon ?
  (malaktivigi ĝin rapidigas la funkciadon de la sistemo.)',
-'info_question_vignettes_referer' => 'Kiam vi konsultas statistikojn, vi povas havi superrigardon pri tio, de kiuj retejoj venas vizitantoj',
 'info_question_vignettes_referer_non' => 'Ne vidigi de kiuj retejoj venas vizitantoj',
-'info_question_vignettes_referer_oui' => 'Vidigi de kiuj retejoj venas vizitantoj',
 'info_racine_site' => 'Radiko de la retejo',
 'info_recharger_page' => 'Bonvolu refreŝigi tiun ĉi paĝon post momento.',
 'info_recherche_auteur_a_affiner' => 'Tro da rezultoj por "@cherche_auteur@"; bonvolu fajnigi la serĉokriteriojn.',
@@ -556,7 +546,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'info_urlref' => 'Hiperligilo :',
 'info_utilisation_spip' => 'Vi povas nun ekuzi la asistatan publikigilon...',
 'info_visites_par_mois' => 'Afiŝado laŭ monato :',
-'info_visites_plus_populaires' => 'Afiŝi la vizitojn por <b>la plej popularaj artikoloj</b> kaj por <b>la laste publikigitaj artikoloj :</b>',
 'info_visiteur_1' => 'Vizitanto',
 'info_visiteur_2' => 'de la publika spaco',
 'info_visiteurs' => 'Vizitantoj',
@@ -599,7 +588,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_choix_redacteurs' => 'la redaktantoj',
 'item_choix_visiteurs' => 'la vizitantoj de la publika spaco',
 'item_creer_fichiers_authent' => 'Krei la dosierojn .htpasswd',
-'item_gerer_statistiques' => 'Mastrumi statistikojn',
 'item_limiter_recherche' => 'Limigi la serĉprocezon al informoj entenataj ĉe via retejo',
 'item_login' => 'Salutnomo',
 'item_messagerie_agenda' => 'Aktivigi la mesaĝilon kaj la agendon',
@@ -780,7 +768,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'texte_admin_effacer_01' => 'Tiu komando forviŝas <i>la tutan</i> enhavon de la datenbazo,
 inkluzive de <i>ĉiuj</i> alirrajtoj de redaktantoj kaj mastrumantoj. Post ties efektivigo, vi devos lanĉi la
 SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_adresse_annuaire_1' => '(Se via adresaro estas instalita ĉe la sama maŝino kiel la retejo, temas verŝajne pri «localhost».)',
 'texte_ajout_auteur' => 'La jena aŭtoro estis aldonita al la artikolo:',
 'texte_annuaire_ldap_1' => 'Se vi havas aliron al dosierujilo (LDAP), vi povas uzi ĝin por aŭtomate importi uzantojn sub SPIP.',
@@ -798,13 +785,6 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 'texte_commande_vider_tables_indexation' => 'Uzu tiun komandon por malplenigi la indeksajn tabelojn uzatajn
    de la SPIP-integrita serĉilo. Tio ebligos al vi
    gajni diskospacon.',
-'texte_comment_lire_tableau' => 'La rango de la artikolo,
-  en la klasifiko laŭ populareco, estas indikita en la
-  marĝeno ; la populareco de la artikolo (taksado de la
-  nombro de ĉiutagaj vizitoj, kiun ĝi atingos se la nuna vizit-ritmo
-  tiel daŭros) kaj la nombro de vizitoj ricevitaj
-  de la komenco afiŝiĝas en la veziko kiu
-  aperas kiam la tajpmontrilo superpasas la titolon.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(tiu ĉi povas aŭ ne esti densigita)',
@@ -903,7 +883,6 @@ vian retgastiganton.<p>', # MODIF
  <li> kian tipografiilon SPIP devas uzi pri tekst-aspektigo ;</li>
  <li> la lingvon uzendan en la formularoj de la publika spaco ;</li>
  <li> la lingvon defaŭlte prezentitan en la privata spaco.</li></ul>',
-'texte_signification' => 'La ruĝaj stangoj reprezentas la sumigitajn datenojn (sumo de la sub-rubrikoj), la helaj stangoj, la nombron de vizitoj por ĉiu rubriko.',
 'texte_sous_titre' => 'Subtitolo',
 'texte_statistiques_visites' => '(Malhelaj stangoj: dimanĉo / malhela kurbo : evoluo de la meznombro)',
 'texte_statut_attente_validation' => 'Atendantaj validigon',
@@ -969,7 +948,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opcioj: <b>Via konekto LDAP</b>',
-'titre_evolution_visite' => 'Evoluo de la vizitoj',
 'titre_groupe_mots' => 'GRUPO DE VORTOJ:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LINGVO DE LA ARTIKOLO',
@@ -996,11 +974,9 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_page_message_edit' => 'Skribi mesaĝon',
 'titre_page_messagerie' => 'Via mesaĝilo',
 'titre_page_recherche' => 'Serĉrezulto @recherche@',
-'titre_page_statistiques' => 'Statistikoj laŭ rubrikoj',
 'titre_page_statistiques_referers' => 'Statistikoj (eniraj ligoj)',
 'titre_page_statistiques_signatures_jour' => 'Subskribnombro en tago',
 'titre_page_statistiques_signatures_mois' => 'Subskribnombro en monato',
-'titre_page_statistiques_visites' => 'Statistikoj de la vizitoj',
 'titre_page_upgrade' => 'SPIP-alniveligo',
 'titre_publication_articles_post_dates' => 'Publikigo de la postdatitaj artikoloj',
 'titre_referencer_site' => 'Referencigi la retejon:',

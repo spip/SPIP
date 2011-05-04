@@ -59,7 +59,6 @@ Bu ithal istemini onaylamayın.
 'bouton_desactive_tout' => 'Hepsinin etkinliğini durdur ',
 'bouton_desinstaller' => 'Sil',
 'bouton_effacer_index' => 'Endeksleri sil',
-'bouton_effacer_statistiques' => 'İstatistikleri sil',
 'bouton_effacer_tout' => 'HEPSİNİ sil',
 'bouton_envoi_message_02' => 'İLETİ YOLLA',
 'bouton_envoyer_message' => 'İletinin son hali : yolla',
@@ -115,6 +114,7 @@ Bu ithal istemini onaylamayın.
 'date_mot_heures' => 'saat ',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'e-posta',
 'email_2' => 'e-posta :',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -193,7 +193,6 @@ Bu ithal istemini onaylamayın.
 'icone_creer_rubrique_2' => 'Yeni bir bölüm oluştur',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Bu iletiyi gönder',
-'icone_evolution_visites' => 'Ziyaretlerin gelişimi<br /> @visites@ ziyaret',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -237,7 +236,6 @@ Bu ithal istemini onaylamayın.
 'info_adresse' => 'şu adresteki :',
 'info_adresse_url' => 'Kamusal sitenin adresi (URL) ',
 'info_afficher_visites' => 'Şu adrese yapılan ziyaretlerin gösterileceği yer :',
-'info_affichier_visites_articles_plus_visites' => '<b>Başlangıçtan beri en çok ziyaret edilen makaleleri<b> göster :',
 'info_aide_en_ligne' => 'SPIP çevrimiçi yardım',
 'info_ajout_image' => 'Bir makalenin eki olarak resim eklediğinizde,
                SPIP sizin için otomatik olarak eklenen resimlerin ikonlarını (minyatürlerini) 
@@ -283,7 +281,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_classement_1' => '@liste@\'den     inci',
 'info_classement_2' => '@liste@\'den     inci',
 'info_code_acces' => 'Kendi erişim şifrelerinizi unutmayınız !',
-'info_comment_lire_tableau' => 'Bu tabloyu nasıl okumalı ?',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Önce, barındırma servisinin php skriptlerini sistematik olarak sıkıştırıp sıkıştırmadığının kontrol edilmesi önerilir ; bunun için, örneğin şu hizmeti kullanabilirsiniz : @testgzip@',
 'info_compresseur_texte' => 'Eğer sunucunuz html sayfaları otomatik olarak sıkıştırmıyorsa, yüklenen sayfa ağırlıklarını düşürmek için bu işlemi yapmaya zorlayabilirsiniz. <b>Dikkat</b> : bu işlem bazı sunucuları gözle görülür şekilde yavaşlatabilir.',
@@ -331,7 +328,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
                                    SPIP, e-posta ile, örneğin, yayınlama taleplerinin  ve makale
                                    onaylarının duyurusunu editörlerin bir gönderi listesine yollayabilir.',
 'info_fichiers_authent' => ' « .htpasswd » tasdik dosyaları',
-'info_forum_statistiques' => 'Ziyaret istatistikleri',
 'info_forums_abo_invites' => 'Siteniz abone yöntemiyle çalışan forumlar bulunduruyor ; dolayısıyla ziyaretçiler kamu sitesine kaydolmaya davet edilirler.',
 'info_gauche_admin_effacer' => 'Bu sayfa sadece site yetkililerinin erişimine izin verir. Çeşitli teknik bakım işlevlerine erişim vermektedir. Bunlardan bazıları, Web sitesine bir FTP erişimi gerektiren özel bir tasdik sürecine yol açar.', # MODIF
 'info_gauche_admin_tech' => 'Bu sayfa sadece site yetkililerinin erişimine izin verir. Çeşitli teknik bakım işlevlerine erişim vermektedir. Bunlardan bazıları, Web sitesine bir FTP erişimi gerektiren özel bir tasdik sürecine yol açar.', # MODIF
@@ -446,8 +442,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_plus_cinq_car_2' => '(5 karakterden fazla)',
 'info_plus_trois_car' => '(3 karakterden fazla)',
 'info_popularite' => 'popülerlik : @popularite@ ; ziyaretler : @visites@',
-'info_popularite_2' => 'Sitenin popülerliği',
-'info_popularite_3' => 'popülerlik : @popularite@ ; ziyaretler : @visites@',
 'info_popularite_4' => 'popülerlik : @popularite@ ; ziyaretler : @visites@',
 'info_post_scriptum' => ' Not :',
 'info_post_scriptum_2' => ' Not :',
@@ -456,7 +450,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_preview_comite' => 'Siteyi tüm yazarlar ön izleyebilir',
 'info_preview_desactive' => 'Önizleme kipi tamamen iptal edildi',
 'info_preview_texte' => 'Siteyi sanki (en azından « önerildi » statüsüne sahip) tüm makale ve haberler yayınlanmış gibi önizlemeye almak olanaklıdır. Bu olanak sadece yöneticilere mi, tüm yazarlara mı, açık olmalı yoksa hiç kimseye açık olmamalı mı ?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Başlıca yazışmacılarınız',
 'info_procedez_par_etape' => 'Aşama aşama ilerleyiniz',
 'info_procedure_maj_version' => 'Veritabanını yeni SPIP sürümüne uyarlamak için
@@ -466,7 +459,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_publier' => 'Yayınla',
 'info_publies' => 'Çevrimiçi yayınlanan makaleleriniz',
 'info_question_accepter_visiteurs' => 'Eğer sitenizin iskeleti özel alana erişimi olmayan ziyaretçilerin kaydını öngörüyorsa, aşağıdaki seçeneği çalıştırınız :',
-'info_question_gerer_statistiques' => 'Siteniz ziyaret istatistiğini yönetmeli mi ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Kamu sitesinden yeni editörlerin kaydolmasını kabul ediyor musunuz ?
     Eğer kabul ediyorsanız, ziyaretçiler otomatik
     bir form ile kaydolabilecek ve kendi makalelerini
@@ -476,9 +468,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
     e-posta yollanmasını durduruyorlar : bu durumda otomatik kayıt olanaksızdır.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'SPIP\'in entegre arama motorunu kullanmak istiyor musunuz ?
                (onu durdurmak sistemin işleyişini hızlandırır)',
-'info_question_vignettes_referer' => 'İstatistikleri incelediğinizde, ziyaretlerin yapıldığı kaynak sitelerden görüntüler görebilirsiniz',
 'info_question_vignettes_referer_non' => 'Ziyaretlerin yapıldığı kaynak sitelerden alıntıları gösterme',
-'info_question_vignettes_referer_oui' => 'Ziyaretlerin yapıldığı kaynak sitelerden görüntüler göster',
 'info_racine_site' => 'Sitenin kökü',
 'info_recharger_page' => 'Lütfen bu sayfayı az sonra tekrar yükleyiniz.',
 'info_recherche_auteur_a_affiner' => '"@cherche_auteur@" için çok fazla sonuç alındı ; lütfen aramayı ayrıntılayınız.',
@@ -561,7 +551,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_urlref' => 'Hipermetin bağı :',
 'info_utilisation_spip' => 'SPIP artık kullanılmaya hazırdır...',
 'info_visites_par_mois' => 'Ay olarak görüntüleme :',
-'info_visites_plus_populaires' => '<b>En popüler makaleler</b> ile <b>yayınlanan son makalelere</b> yapılan ziyaretleri görüntüle.',
 'info_visiteur_1' => 'Kamu sitesi',
 'info_visiteur_2' => 'ziyaretçisi',
 'info_visiteurs' => 'Ziyaretçiler',
@@ -604,7 +593,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_choix_redacteurs' => 'Yazarlar',
 'item_choix_visiteurs' => 'Kamu sitesi ziyaretçileri',
 'item_creer_fichiers_authent' => '.htpasswd dosyalarını yarat',
-'item_gerer_statistiques' => 'İstatistikleri yönet',
 'item_limiter_recherche' => 'Aramayı sitenizde yer alan bilgilerle sınırla',
 'item_login' => 'Kullanıcı ismi',
 'item_messagerie_agenda' => 'Mesajlaşmayı ve ajandayı aktive et',
@@ -787,7 +775,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
   Bu komuttan sonra, yeni bir veritabanı ve bir yönetici 
   erişimi yaratmak üzere SPIP\'i 
   yeniden yüklemelisiniz. ',
-'texte_admin_effacer_stats' => 'Bu komut, site ziyareti istatistiklerine bağlı tüm bilgileri siler (makalelerin popülerlikleri de dahil).',
 'texte_adresse_annuaire_1' => '(Eğer dizininiz bu Web sitesi ile aynı makinaya yüklenmiş ise, muhtemelen bir yerel hizmet bilgisayarı «localhost» sözkonusudur.)',
 'texte_ajout_auteur' => 'Makaleye şu yazar eklendi :',
 'texte_annuaire_ldap_1' => 'Eğer bir (LDAP) dizinine erişiminiz varsa, onu SPIP\'e otomatik olarak kullanıcı ithal etmek için  kullanabilirsiniz. ',
@@ -805,11 +792,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_commande_vider_tables_indexation' => 'Bu komutu SPIP\'teki arama motoru tarafından
     kullanılan endeksleme çizelgelerini boşaltmak için kullanınız.
     Diskteki alanı boşa harcamamış olursunuz.',
-'texte_comment_lire_tableau' => 'Popülerlik sınıflandırmasında makalenin sırası kenarda belirtilmiştir ;
-   makalenin popülerliği (şimdiki başvuru sıklığı devam ettiği takdirde,
-   geleceği tahmin edilen günlük ziyaretçi sayısı) ve başından beri gelen
-   ziyaretçi sayısı, fare başlık üzerinden geçtiğinde
-   ortaya çıkan konuşma balonunun içinde görüntülenir. ',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(bu, sıkıştırılmış ya da sıkıştırılmamış olabilir)',
@@ -880,7 +862,6 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 <li> SPIP\'in metinler için kullanacağı tipografi motorunun cinsini ;</li>
 <li> kamu sitesinin formlarında kullanılan dili ;</li>
 <li> özel alanda varsayılan dili belirlemeye yarar.</li></ul>',
-'texte_signification' => 'Koyu çizgiler, toplam girişleri (alt-bölümlerin toplamını), açık çizgiler ise, her bir bölüme gelen ziyaret sayısını temsil eder.',
 'texte_sous_titre' => 'Alt-başlık',
 'texte_statistiques_visites' => '(koyu çizgiler : pazar / koyu eğriler : ortalamanın gelişimi)',
 'texte_statut_attente_validation' => 'Onay bekliyor',
@@ -926,7 +907,6 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Düzenleme esnasında çakışma',
 'titre_connexion_ldap' => 'Seçenekler : <b>LDAP bağlantılarınız</b>',
-'titre_evolution_visite' => 'Ziyaretlerin gelişimi ',
 'titre_groupe_mots' => 'SÖZCÜK GRUBU:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'MAKALENİN DİLİ ',
@@ -953,11 +933,9 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_page_message_edit' => 'Bir ileti oluştur',
 'titre_page_messagerie' => 'İletileriniz',
 'titre_page_recherche' => 'Arama sonuçları  @recherche@ ',
-'titre_page_statistiques' => 'Bölümlere göre istatistikler ',
 'titre_page_statistiques_referers' => 'İstatistikler (giriş bağları)',
 'titre_page_statistiques_signatures_jour' => 'Günlük imza sayısı',
 'titre_page_statistiques_signatures_mois' => 'Aylık imza sayısı',
-'titre_page_statistiques_visites' => 'Ziyaret istatistikleri',
 'titre_page_upgrade' => 'SPIP seviyesinin yükseltilmesi ',
 'titre_publication_articles_post_dates' => 'İleri tarihli makalelerin yayınlanması ',
 'titre_referencer_site' => 'Atıfta bulunulacak site : ',

@@ -62,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Disable all',
 'bouton_desinstaller' => 'Uninstall',
 'bouton_effacer_index' => 'Delete indexing',
-'bouton_effacer_statistiques' => 'Delete the statistics',
 'bouton_effacer_tout' => 'Delete ALL',
 'bouton_envoi_message_02' => 'SEND A MESSAGE',
 'bouton_envoyer_message' => 'Message complete: send',
@@ -118,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'H',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'email',
 'email_2' => 'email:',
 'en_savoir_plus' => 'To learn more',
@@ -196,7 +196,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Create a new section',
 'icone_edition' => 'Edit',
 'icone_envoyer_message' => 'Send this message',
-'icone_evolution_visites' => 'Amount of visits <br />@visites@ visits',
 'icone_ma_langue' => 'My language',
 'icone_mes_infos' => 'My details',
 'icone_mes_preferences' => 'Preferences',
@@ -240,7 +239,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'to this address:',
 'info_adresse_url' => 'URL of the public site',
 'info_afficher_visites' => 'Show visits for:',
-'info_affichier_visites_articles_plus_visites' => 'Show visits for <b>the most popular articles of all time:</b>',
 'info_aide_en_ligne' => 'SPIP Online Help',
 'info_ajout_image' => 'When you add images as attached documents to an article,
   SPIP can automatically create thumbnails from
@@ -286,7 +284,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => ' out of @liste@',
 'info_classement_2' => ' out of @liste@',
 'info_code_acces' => 'Do not forget your own access codes!',
-'info_comment_lire_tableau' => 'How to read this graph',
 'info_compatibilite_html' => 'HTML norm to apply',
 'info_compresseur_gzip' => 'It is advisable to check first whether your hosting provider already systematically compresses PHP scripts. To do this you can use a service such as @testgzip@',
 'info_compresseur_texte' => 'If your server does not compress HTML pages before sending them, you can attempt to force compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ',
@@ -334,7 +331,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   activities, SPIP can send rmail notifications, e.g. to an editors\' mailing list,
   of publication requests and article validations.',
 'info_fichiers_authent' => 'Authentication file ".htpasswd"',
-'info_forum_statistiques' => 'Visit statistics',
 'info_forums_abo_invites' => 'Your site contains forums by subscription; visitors may register for them on the public site.',
 'info_gauche_admin_effacer' => '<b>Only webmasters have access to this page.</b><p> It provides access to various technical maintenance tasks. Some of them require a specific authentication process via FTP.</p>',
 'info_gauche_admin_tech' => '<b>Only webmasters have access to this page.</b><p> It provides access to various
@@ -454,8 +450,6 @@ via FTP.</p>',
 'info_plus_cinq_car_2' => '(More than 5 characters)',
 'info_plus_trois_car' => '(More than 3 characters)',
 'info_popularite' => 'popularity: @popularite@; visits: @visites@',
-'info_popularite_2' => 'site popularity:',
-'info_popularite_3' => 'popularity: @popularite@; visits: @visites@',
 'info_popularite_4' => 'popularity: @popularite@; visits: @visites@',
 'info_post_scriptum' => 'Postscript',
 'info_post_scriptum_2' => 'Postscript:',
@@ -464,7 +458,6 @@ via FTP.</p>',
 'info_preview_comite' => 'All authors have access to Preview mode',
 'info_preview_desactive' => 'Preview mode is disabled',
 'info_preview_texte' => 'It is possible to preview the site as if all articles and news items (with at least the status "submitted") were already published. Should this preview mode be restricted to administrators, open to all authors, or disabled completely?',
-'info_previsions' => 'forecasts:',
 'info_principaux_correspondants' => 'Your main correspondents',
 'info_procedez_par_etape' => 'please proceed step by step',
 'info_procedure_maj_version' => 'the upgrade procedure must be run to adapt
@@ -474,7 +467,6 @@ via FTP.</p>',
 'info_publier' => 'publish',
 'info_publies' => 'Your articles published online',
 'info_question_accepter_visiteurs' => 'If your site\'s template allows visitors to register without entering the private area, please activate the following option:',
-'info_question_gerer_statistiques' => 'Should your site manage visit statistics?',
 'info_question_inscription_nouveaux_redacteurs' => 'Do you wish to allow new editors to register
  via the public site? If you agree to this, visitors will be able to  register
   using an automatic form, and then access the private area to
@@ -486,9 +478,7 @@ via FTP.</p>',
   implemented.</i></blockquote>',
 'info_question_utilisation_moteur_recherche' => 'Do you wish to use SPIP\'s integrated search engine?
  (Disabling it speeds up system performance.)',
-'info_question_vignettes_referer' => 'When you consult the statistics, you can see a preview of any referring sites from which a visitor came. ',
 'info_question_vignettes_referer_non' => 'Do not show screenshots of referring sites',
-'info_question_vignettes_referer_oui' => 'Show screenshots of referring sites',
 'info_racine_site' => 'Site root',
 'info_recharger_page' => 'Please wait a few moments, then reload this page.',
 'info_recherche_auteur_a_affiner' => 'Too many results for "@cherche_auteur@"; please refine your search.',
@@ -571,7 +561,6 @@ and their status is colour-coded:',
 'info_urlref' => 'Hyperlink:',
 'info_utilisation_spip' => 'SPIP is now ready for use',
 'info_visites_par_mois' => 'Monthly display:',
-'info_visites_plus_populaires' => 'Show visits for <b>the most popular articles</b> and <b>the most recent articles:</b>',
 'info_visiteur_1' => 'Visitor',
 'info_visiteur_2' => 'to the public site',
 'info_visiteurs' => 'Visitors',
@@ -614,7 +603,6 @@ and their status is colour-coded:',
 'item_choix_redacteurs' => 'editors',
 'item_choix_visiteurs' => 'visitors to the public site',
 'item_creer_fichiers_authent' => 'Create .htpasswd files',
-'item_gerer_statistiques' => 'Manage statistics',
 'item_limiter_recherche' => 'Limit the search to your site',
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'Activate messaging system and calendars',
@@ -795,7 +783,6 @@ and their status is colour-coded:',
 'texte_admin_effacer_01' => 'This command deletes <i>all</i> content in the database,
 including <i>all</i> the access parameters for editors and administrators. After using it, you must
 reinstall SPIP, create a new database and a new administrator account.',
-'texte_admin_effacer_stats' => 'This command deletes all statistics on visits to the site, including article popularity.',
 'texte_adresse_annuaire_1' => '(If your directory is installed on the same machine as your website, it is probably «localhost».)',
 'texte_ajout_auteur' => 'The following author was added to the article:',
 'texte_annuaire_ldap_1' => 'If you have access to a LDAP directory server, you can use it to import users automatically into SPIP.',
@@ -813,13 +800,6 @@ reinstall SPIP, create a new database and a new administrator account.',
 'texte_commande_vider_tables_indexation' => 'Use this command to empty the indexing tables used
    by SPIP\'s integrated search engine. It will anable you
    to save some disk space.',
-'texte_comment_lire_tableau' => 'Articles are ranked by popularity.
- Mouseover any article\'s title to
- show its popularity (i.e. estimated number
- of daily visits it will have if the
- current trend continues), and the
- number of visits recorded since it was
- first published.',
 'texte_compatibilite_html' => 'You can require SPIP to produce code compatible with the <i>HTML4</i> standard, or allow it to use more modern <i>HTML5</i> compatible code.',
 'texte_compatibilite_html_attention' => 'There is no risk involved in activating the <i>HTML5</i> option. But if you do, the pages of your site must begin with the following code in order to be valid:  <code><!DOCTYPE html></code>.',
 'texte_compresse_ou_non' => '(compression optional)',
@@ -917,7 +897,6 @@ to refresh a single page, it is easier to view that page from the public site an
 <li> the nature of the typographical engine which will be used by SPIP for rendering text,</li>
 <li> the language used in the forms on the public site,</li>
 <li> the default language displayed in the private area.</li></ul>',
-'texte_signification' => 'Dark bars represent cumulative entries (total subsections), light bars represent the number of visits for each section.',
 'texte_sous_titre' => 'Subtitle',
 'texte_statistiques_visites' => '(dark bars = Sunday, dark curve: average visits)',
 'texte_statut_attente_validation' => 'awaiting validation',
@@ -977,7 +956,6 @@ you can perform searches on syndicated sites and
 'titre_configurer_preferences' => 'Configure your preferences',
 'titre_conflit_edition' => 'Conflict while editing',
 'titre_connexion_ldap' => 'Options: <b>Your LDAP connection</b>',
-'titre_evolution_visite' => 'Visitor Statistics',
 'titre_groupe_mots' => 'KEYWORD GROUP:',
 'titre_identite_site' => 'Site identity',
 'titre_langue_article' => 'ARTICLE LANGUAGE',
@@ -1004,11 +982,9 @@ you can perform searches on syndicated sites and
 'titre_page_message_edit' => 'Write a message',
 'titre_page_messagerie' => 'Your messaging',
 'titre_page_recherche' => 'Search results @recherche@',
-'titre_page_statistiques' => 'Statistics by section',
 'titre_page_statistiques_referers' => 'Statistics (incoming links)',
 'titre_page_statistiques_signatures_jour' => 'Signatures count by day',
 'titre_page_statistiques_signatures_mois' => 'Signatures count by month',
-'titre_page_statistiques_visites' => 'Visit statistics',
 'titre_page_upgrade' => 'SPIP upgrade',
 'titre_publication_articles_post_dates' => 'Publication of post dated articles',
 'titre_referencer_site' => 'Reference the site:',

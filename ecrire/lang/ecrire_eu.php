@@ -59,7 +59,6 @@ Ez balidatu inportazio galdera hau.
 'bouton_desactive_tout' => 'Dena desaktibatu',
 'bouton_desinstaller' => 'Desinstalatu',
 'bouton_effacer_index' => 'Aurkibideak ezabatu ',
-'bouton_effacer_statistiques' => 'Estatistikak ezabatu',
 'bouton_effacer_tout' => 'Ezabatu DENA!',
 'bouton_envoi_message_02' => 'MEZUBAT IGORRI',
 'bouton_envoyer_message' => 'Behin-betiko mezua: igorri',
@@ -115,6 +114,7 @@ Ez balidatu inportazio galdera hau.
 'date_mot_heures' => 'orduak',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'posta elektronikoa',
 'email_2' => 'posta elektronikoa:',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -193,7 +193,6 @@ Ez balidatu inportazio galdera hau.
 'icone_creer_rubrique_2' => 'Atal berribat eratu',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Mezua igorri',
-'icone_evolution_visites' => 'Bisiten eboluzioa @visites@ bisitak',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -236,7 +235,6 @@ Ez balidatu inportazio galdera hau.
 'info_adresse' => 'helbidera:',
 'info_adresse_url' => 'Toki publikoaren helbidea(URL) ',
 'info_afficher_visites' => 'Atal honentzako bisitak erakutsi:',
-'info_affichier_visites_articles_plus_visites' => 'Hasieratik gehien irakurritakoartikuluen bisitak argitaratu :',
 'info_aide_en_ligne' => 'SPIP-eko zuzeneko laguntza',
 'info_ajout_image' => 'Irudiak dokumentu bezala gehitzen direnean SPIP-ekautomatikoki sartutako irudi hauen ikonoak sor ditzake. Erabilgarria izan daiteke,adibidez, galeria bat sortzeko.',
 'info_ajout_participant' => 'Partehartzaile hau erantsiaizan da:',
@@ -279,7 +277,6 @@ Ez balidatu inportazio galdera hau.
 'info_classement_1' => '. @zerrendan@',
 'info_classement_2' => '.@zerrendan@',
 'info_code_acces' => 'Zure sarbide kodeak ezahaztu !',
-'info_comment_lire_tableau' => 'Nola irakurri lauki hau',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Aterbetazileak ez dituenez jadanik php script-ak konprimitzen baieztatzea gomendatua da ; horretarako serbitsu hau erabiltzen ahal dezakezu : @testgzip@',
 'info_compresseur_texte' => 'Zure sareburuak ez baditu automatikoki html orrialdeak konprimitzen erabiltzaileari igortzeko, konpresioa bortxatzen entsegatzen ahal zira deskargatutako orrien pisua ttipitzeko.<b>Kontuz</b> : teknika hunek zoinbeit sareburu zinez moteltzen ahal ditu.',
@@ -325,7 +322,6 @@ Ez balidatu inportazio galdera hau.
 'info_exportation_base' => 'basearen esportazioa @archive@-ra',
 'info_facilite_suivi_activite' => 'Jarduera editorialaren jarraipena errazteko, SPIP-ekkorreo elektronikoaren bidez bidali ahal dizkio, adibidez erredaktoreen zerrenda bati,artikuluen baliaztapen eta argitarapenen eskaeren iragarkiak.',
 'info_fichiers_authent' => '« .htpasswd » autentifikazio-fitxategiak',
-'info_forum_statistiques' => 'Bisiten estatistikak',
 'info_forums_abo_invites' => 'Zure guneak harpidetza beharrezkoa egiten dituen foroak hartzen ditu ; beraz, bisitariak gune publikoan erregistratzera gonbidatuta daude.',
 'info_gauche_admin_effacer' => 'Orrialde honetan tokiaren arduradunak baino ezin dira sartu.Mantenimendu teknikoaren funtzio guztietan sartzeko aukera ematen du. Hoietakobatzuk baimentzeko prozesu bat egin behar dute eta prozesu hori egiteko web tokiari FTP-ren bidez sarrera edukitzea beharrezkoa da.', # MODIF
 'info_gauche_admin_tech' => 'Orrialde honetan tokiaren arduradunak baino ezin dira sartu.Mantenimendu teknikoaren funtzio guztietan sartzeko aukera ematen du. 
@@ -434,8 +430,6 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_plus_cinq_car_2' => '(5 karaktere baino gehiago)',
 'info_plus_trois_car' => '(3karaktere baino gehiago)',
 'info_popularite' => 'Arrakasta: @popularite@ Bisitak:@visites@',
-'info_popularite_2' => 'Gunearen arrakasta edo onarpena:',
-'info_popularite_3' => 'Arrakasta: @popularite@ Bisitak: @visites@',
 'info_popularite_4' => 'Arrakasta: @popularite@ Bisitak: @visites@',
 'info_post_scriptum' => 'Post scriptum',
 'info_post_scriptum_2' => 'Post scriptum:',
@@ -444,7 +438,6 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_preview_comite' => 'Idazlari guztiek tokia aurreikusten ahal dute',
 'info_preview_desactive' => 'Aurreikuspena guztiz desaktibatuta dago',
 'info_preview_texte' => 'Gunea artikulu eta berri labur guztiak (gutxienez« proposatua » statusa dutenak) argitaratuta egon balira bezala aurreikustea posible da. Posibilitate hau administratzaileentzat bakarrik, idazlari guztientzat, edo inorentzat egon behar da zabalik?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Zure korrespontsal printzipalak',
 'info_procedez_par_etape' => 'etapaz etapa jokatu',
 'info_procedure_maj_version' => 'Eguneratzeko prozedura bete egin behar da datu-basea SPIP-en bertsio berrira moldatzeko.',
@@ -453,7 +446,6 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_publier' => 'Argitaratu',
 'info_publies' => 'Zure artikuluargitaratuak',
 'info_question_accepter_visiteurs' => 'Zure tokiaren egituretan gunepribaturako baimenik gabeko bisitanteen errejistroa aurreikusia baldin badago, aukerahau aktibatu egin beharko duzu:',
-'info_question_gerer_statistiques' => 'Zure tokiakbisiten estatistikak kudeatzea nahi duzu?',
 'info_question_inscription_nouveaux_redacteurs' => 'Gune publikotik idazlari berrien inskripzioak onartzen dituzu ?
 Onartzen badituzu, bisitariak inprimaki automatizatu batetik harpidetu ahal izango dira eta orduan eremu pribatuan sartuko dira beren artikuluak proposatzeko.
 
@@ -462,9 +454,7 @@ Inskribatzean, erabiltzaileek mezu elektroniko automatiko bat jasotzen dute gune
 Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarietatik : kasu honetan, inskripzio automatikoa ezinezkoa da.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'SPIP-ean integratutako bilatzailea erabili nahi duzu ?
 (desaktibapenak sistemaren funtzionamendua bizkortzen du.)',
-'info_question_vignettes_referer' => 'Estatistikak begiratzean, bisiten jatorrien guneen aurrebista ikusten ahal duzu',
 'info_question_vignettes_referer_non' => 'Bisiten jatorrien guneen kapturak ez erakutsi',
-'info_question_vignettes_referer_oui' => 'Bisiten jatorrien guneen kapturak erakutsi',
 'info_racine_site' => 'Gunearen erroa',
 'info_recharger_page' => 'Mesedez orrialde hau berriz kargatu minutu batzuk barru.',
 'info_recherche_auteur_a_affiner' => 'Emaitza gehiegi "@cherche_auteur@"-rako ; mesedez bilaketa doitu.',
@@ -546,7 +536,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'info_urlref' => 'Hipertestu lotura:',
 'info_utilisation_spip' => 'Lagundutakoargitaratze sistema erabiltzen has zaitezke...',
 'info_visites_par_mois' => 'Bisitak hilabeteko :',
-'info_visites_plus_populaires' => 'Bisitak bistaratu artikulu hedatuenengatik eta argitaratutako azken artikuluengatik :',
 'info_visiteur_1' => 'Bisitaria',
 'info_visiteur_2' => 'gune publikoaren',
 'info_visiteurs' => 'Bisitariak',
@@ -589,7 +578,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'item_choix_redacteurs' => 'erredaktoreak',
 'item_choix_visiteurs' => 'lekuarenbisitariak',
 'item_creer_fichiers_authent' => '".htpasswd" fitxategiak sortu',
-'item_gerer_statistiques' => 'Estatistikak kudeatu',
 'item_limiter_recherche' => 'Lekuhonetan mugatu ikerketa',
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'Mezutegia eta agenda aktibatu',
@@ -768,7 +756,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'text_article_propose_publication' => 'Argitarapenerako proposatutako artikulua.',
 'texte_acces_ldap_anonyme_1' => 'LDAP zerbitzari batzuekez dute onartzen sarbide anonimorik. Kasu honetan hasierako sarbide-identifikatzaile batzehaztu behar da gero urtekarian informazioak bilatu ahal izateko. Hala ere, kasu gehienetan, hurrengo eremuak hutsik laga ahal izango dira.',
 'texte_admin_effacer_01' => 'Manamendu honek datu-basearen edukiera osoa ezabatzendu, eta hemen konprimituriko idazlari eta administratzaile-sarbide guztiak. Hori egikarituondoren, SPIP-en berrinstalazioa hasi beharko duzu berriro base berri bat eta lehenadministratzaile-sarbide bat sortzeko.',
-'texte_admin_effacer_stats' => 'Manu hunek gunearen bisiten estatistikei lotutako datu guziak ezabatzen ditu, artikuluen arrakasta barne.',
 'texte_adresse_annuaire_1' => '(Zure urtekaria Web gune hau dagoen ordenagailu berdinean instalatzen bada, segur aski «localhost»-az ari gara.)',
 'texte_ajout_auteur' => 'Hurrengo egilea artikulura gehitua izan da :',
 'texte_annuaire_ldap_1' => '(LDAP) urtekari baterako sarbidea baduzu, erabiltzaileak automatikoki SPIP-en azpian inportatzeko erabili ahalduzu.',
@@ -784,8 +771,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'texte_choix_base_3' => 'Aukeratu hemen zure ostapen zuzkitzaileak eman dizuna:',
 'texte_choix_table_prefix' => 'Mahaien aurrizkiak :',
 'texte_commande_vider_tables_indexation' => 'Komando hau erabili SPIP-en integratuta dagoen bilaketa-tresnak erabilitako indexazio-taulak husteko. Honek disko-lekua irabazten utziko dizu.',
-'texte_comment_lire_tableau' => 'Artikuluaren heina, onarpenaren araberako sailkapenean, marjinean dago adierazita ;
-Artikuluaren onarpena (berak jasoko duen eguneroko bisiten kopuruaren estimazio bat oraingokontsulta-erritmoa mantentzen bada) eta hasieratik jasotako bisiten kopurua saguak izenburuaren gainetik pasatzen denean agertzen den argibidean erakusten dira.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(hau konprimitua izan ahal da edo ez)',
@@ -857,7 +842,6 @@ Orokorrean, aukera hau hutsik geratuko da.',
 Hemenkonponketa hau egiten saia zaitezke; huts eginez gero, gorde emaitzaren kopia bat,posible baita huts egitearen aztarnak izatea... 
 Arazoa berriro gertatzen baldin bada, zureostatu-sariaren hornitzailearekin kontaktuan jarri.', # MODIF
 'texte_selection_langue_principale' => 'Jarraian tokiaren "hizkuntza nagusia" aukeradezakezu. Aukera honek ez du behartzen - zorionez!- artikuluak aukeratutakohizkuntzan idaztera, baina, besteak beste, gauza hauek zehaztu ahal dira:Besteak adierazi ezean, toki publikoan dataren formatua;Testuak errepikatzeko SPIP-ek erabili behar duen motor tipografikoaren natura;Toki publikoaren formularioetan erabilitako hizkuntza;Besteak adierazi ezean, gune pribatuan erakutsitako hizkuntza.',
-'texte_signification' => 'Barra ilunek metatutako sarrerak irudikatzen dituzte(azpiatalen erabatekoa), barra argiek atal bakoitzaren bisita guztiak.',
 'texte_sous_titre' => 'Azpititulua',
 'texte_statistiques_visites' => '(barra ilunak : igandea / kurbailuna : ertainaren eboluzioa)',
 'texte_statut_attente_validation' => 'Baliozkotasunaren zain',
@@ -907,7 +891,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Aukerak: zure LDAP konexioa',
-'titre_evolution_visite' => 'Bisiten bilakaera',
 'titre_groupe_mots' => 'Hitzen taldea',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'ARTIKULUKOHIZKUNTZA',
@@ -934,11 +917,9 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_page_message_edit' => 'Mezu bat idatzi',
 'titre_page_messagerie' => 'Zure mezularitza',
 'titre_page_recherche' => 'Bilaketaren emaitzak @recherche@',
-'titre_page_statistiques' => 'Atalez atal estatistikak',
 'titre_page_statistiques_referers' => 'Estatistikak (sartu direnloturak)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
-'titre_page_statistiques_visites' => 'Bisiten estatistikak',
 'titre_page_upgrade' => 'SPIPen gaurkotzea',
 'titre_publication_articles_post_dates' => 'Geroko datarekinartikuluen argitarapena',
 'titre_referencer_site' => 'Toki bat erreferentziatu',

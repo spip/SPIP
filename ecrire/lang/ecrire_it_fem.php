@@ -60,7 +60,6 @@ disattivata per motivi sicurezza (verifica con l\'amministratrice di sistema).',
 'bouton_desactive_tout' => 'Disattiva tutto',
 'bouton_desinstaller' => 'Disinstalla',
 'bouton_effacer_index' => 'Cancella gli indici',
-'bouton_effacer_statistiques' => 'Cancellare le statistiche',
 'bouton_effacer_tout' => 'Cancella TUTTO',
 'bouton_envoi_message_02' => 'INVIA UN MESSAGGIO',
 'bouton_envoyer_message' => 'Messaggio definitivo: Invia',
@@ -116,6 +115,7 @@ disattivata per motivi sicurezza (verifica con l\'amministratrice di sistema).',
 'date_mot_heures' => 'ore',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'email',
 'email_2' => 'email:',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -195,7 +195,6 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'icone_creer_rubrique_2' => 'Crea una nuova rubrica',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Invia questo messaggio',
-'icone_evolution_visites' => 'Evoluzione delle visite<br />@visites@ visite',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -239,7 +238,6 @@ di passare facilmente dal sito pubblico all\'interfaccia privata.',
 'info_adresse' => 'all\'indirizzo:',
 'info_adresse_url' => 'Indirizzo (URL) del sito pubblico',
 'info_afficher_visites' => 'Visualizzare le visite per:',
-'info_affichier_visites_articles_plus_visites' => 'Mostra le visite per <b>gli articoli più letti dall\'inaugurazione del sito:</b>',
 'info_aide_en_ligne' => 'Guida in linea SPIP',
 'info_ajout_image' => 'Quando aggiungi delle immagini come documenti allegati ad un articolo,
 SPIP può creare  delle thumbnail (miniature) delle
@@ -284,7 +282,6 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 'info_classement_1' => '<sup>o</sup> su @liste@',
 'info_classement_2' => '<sup>o</sup> su @liste@',
 'info_code_acces' => 'Non dimenticare i tuoi codici d\'accesso!',
-'info_comment_lire_tableau' => 'Come leggere questa tabella',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Si raccomanda di verificare preventivamente se il provider comprime già in maniera sistematica gli script php; a tal fine è possibile utilizzare, per esempio,  il seguente servizio: @testgzip@',
 'info_compresseur_texte' => 'Se il proprio server non comprime automaticamente le pagine HTML per inviarle ai visitatori, è possibile tentare di forzare la compressione per diminuire il peso delle pagine da scaricare. <b>Attenzione</b>: ciò può rallentare notevolmente alcuni server.',
@@ -333,7 +330,6 @@ dell\'attività editoriale del sito, SPIP può far pervenire via email,
 per esempio ad una mailing-list delle redattrici, l\'annuncio delle domande di
 pubblicazione e di convalida degli articoli.',
 'info_fichiers_authent' => 'File d\'autenticazione ".htpasswd"',
-'info_forum_statistiques' => 'Statistiche delle visite',
 'info_forums_abo_invites' => 'Il sito comprende dei forum accessibili solo a utenti registrate. Nel sito pubblico è quindi presente una pagina d\'iscrizione.',
 'info_gauche_admin_effacer' => '<b>Questa pagina è accessibile solo alle responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Questa pagina è accessibile solo alle responsabili del sito.</b><p> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>', # MODIF
@@ -447,8 +443,6 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 'info_plus_cinq_car_2' => '(Più di 5 caratteri)',
 'info_plus_trois_car' => '(Più di 3 caratteri)',
 'info_popularite' => 'popolarità: @popularite@; visite: @visites@',
-'info_popularite_2' => 'popolarità del sito: ',
-'info_popularite_3' => 'popolarità: @popularite@; visite: @visites@',
 'info_popularite_4' => 'popolarità: @popularite@; visite: @visites@',
 'info_post_scriptum' => 'Post Scriptum',
 'info_post_scriptum_2' => 'Post Scriptum:',
@@ -457,7 +451,6 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 'info_preview_comite' => 'Tutte le redattrici possono visualizzare l\'anteprima del sito',
 'info_preview_desactive' => 'L\'anteprima del sito è totalmente disattivata',
 'info_preview_texte' => 'È possibile visualizzare un\'anteprima del sito comprendente anche gli articoli e le brevi "proposti" per la pubblicazione. Questa funzionalità può essere disattivata, consentita solo alle amministratrici o a tutte le redattrici.',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Corrispondenti principali',
 'info_procedez_par_etape' => 'procedere passo dopo passo',
 'info_procedure_maj_version' => 'è necessario avviare la procedura di aggiornamento per adattare
@@ -467,7 +460,6 @@ il database alla nuova versione di SPIP.',
 'info_publier' => 'pubblicare',
 'info_publies' => 'I tuoi articoli pubblicati',
 'info_question_accepter_visiteurs' => 'I modelli di pagina del sito prevedono la registrazione di utenti senza accesso all\'area riservata. Attivare la seguente funzionalità:',
-'info_question_gerer_statistiques' => 'Il sito deve gestire le statistiche delle visite?',
 'info_question_inscription_nouveaux_redacteurs' => 'Accettate le iscrizioni di nuove redattrici
 direttamente  dal sito pubblico? In questo caso, chi visita il sito potrà iscriversi
 grazie ad un modulo automatizzato e accedere all\'area riservata per proporre
@@ -478,9 +470,7 @@ hoster disattivano l\'invio di email dai propri server: in questo caso, l\'iscri
 impossibile.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Desideri utilizzare il motore di ricerca integrato di SPIP?
 (disattivandolo viene velocizzato il funzionamento del sistema)',
-'info_question_vignettes_referer' => 'Quando si consultano le statistiche è possibile visualizzare delle anteprime dei siti di origine delle visite',
 'info_question_vignettes_referer_non' => 'Non visualizzare la cattura dello schermo dei siti di origine delle visite',
-'info_question_vignettes_referer_oui' => 'Visualizzare le catture di schermo dei siti di origine delle visite',
 'info_racine_site' => 'Root del sito',
 'info_recharger_page' => 'Aggiorna questa pagina fra qualche istante.',
 'info_recherche_auteur_a_affiner' => 'Troppi risultati per "@cherche_auteur@"; restringi la ricerca.',
@@ -563,7 +553,6 @@ Le traduzioni sono associate all\'originale,
 'info_urlref' => 'Link ipertestuale:',
 'info_utilisation_spip' => 'Puoi ora cominciare ad utilizzare il sistema di pubblicazione assistita...',
 'info_visites_par_mois' => 'Visualizzazione per mese:',
-'info_visites_plus_populaires' => 'Pubblica le visite per <b>gli articoli più popolari </b> e per <b>gli ultimi articoli pubblicati:</b>',
 'info_visiteur_1' => 'Visitatori',
 'info_visiteur_2' => 'del sito pubblico',
 'info_visiteurs' => 'Visitatori',
@@ -606,7 +595,6 @@ Le traduzioni sono associate all\'originale,
 'item_choix_redacteurs' => 'le redattrici',
 'item_choix_visiteurs' => 'i visitatori del sito pubblico',
 'item_creer_fichiers_authent' => 'Crea i file .htpasswd',
-'item_gerer_statistiques' => 'Gestisci le statistiche',
 'item_limiter_recherche' => 'Limita la ricerca alle informazioni contenute nel tuo sito',
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'Attiva la messaggistica e l\'agenda',
@@ -786,7 +774,6 @@ Le traduzioni sono associate all\'originale,
 'texte_acces_ldap_anonyme_1' => 'Alcuni server LDAP non consentono accessi anonimi. In questo caso si deve specificare un identificatore d\'accesso iniziale al fine di poter poi ricercare delle informazioni nell\'elenco. Nella maggior parte dei casi tuttavia, i campi seguenti potranno essere lasciati vuoti.',
 'texte_admin_effacer_01' => 'Questo commando cancella <i>tutto</i> il contenuto del database,
  compresi <i>tutti</i> i login delle redattrici e delle amministratrici. Dopo averlo eseguito, dovrai riavviare la procedura di installazione per ricreare un nuovo database e un primo ID amministrativo.',
-'texte_admin_effacer_stats' => 'Questo comando cancella tutti i dati collegati alle statistiche delle visite al sito, comprese la popolarità degli articoli.',
 'texte_adresse_annuaire_1' => '(Se la rubrica è installata nella stessa macchina di questo sito, dovrai probabilmente inserire "localhost".)',
 'texte_ajout_auteur' => 'La seguente autrice è stata aggiunta all\'articolo:',
 'texte_annuaire_ldap_1' => 'Se hai accesso ad una rubrica (LDAP), puoi utilizzarla per importare automaticamente delle utenti sotto SPIP.',
@@ -804,13 +791,6 @@ Le traduzioni sono associate all\'originale,
 'texte_commande_vider_tables_indexation' => 'Utilizza questo comando per svuotare le tabelle d\'incidizzazione utilizzate
 dal motore di ricerca integrato di SPIP. Ciò permetterà
 di guadagnare spazio sul disco.',
-'texte_comment_lire_tableau' => 'Il posizionamento dell\'articolo,
-nella classifica per popolarità, è indicato qui
-sopra. La popolarità dell\'articolo (una stima del
-numero di visite quotidiane che riceverà rimanendo costante il ritmo attuale di
-consultazione) e il numero di visite ricevute dall\'inizio,
-sono visualizzati nel commento che appare
-quando si passa con il mouse sopra al titolo.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(può essere compresso o meno)',
@@ -899,7 +879,6 @@ Se il problema persiste, contattare la webmistress.</p>', # MODIF
 <li> la tipologia di motore tipografico che SPIP deve utilizzare per la resa del testo;</li>
 <li> la lingua utilizzata nelle finestre di dialogo del sito pubblico;</li>
 <li> la lingua di default nell\'area riservata all\'amministrazione.</li></ul>',
-'texte_signification' => 'Le barre più scure rappresentano le entrate accumulate (per il totale delle sottorubriche), le barre più chiare il numero di visite per ogni rubrica.',
 'texte_sous_titre' => 'Sottotitolo',
 'texte_statistiques_visites' => '(barre scure:  domenica / curve scure: evoluzione della media)',
 'texte_statut_attente_validation' => 'in attesa di convalida',
@@ -960,7 +939,6 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflitto all\'atto dell\'edizione',
 'titre_connexion_ldap' => 'Opzioni: <b>La connessione LDAP</b>',
-'titre_evolution_visite' => 'Evoluzione delle visite',
 'titre_groupe_mots' => 'GRUPPO DI PAROLE CHIAVE:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LINGUA DELL\'ARTICOLO',
@@ -987,11 +965,9 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_page_message_edit' => 'Scrivere un messaggio',
 'titre_page_messagerie' => 'I tuoi messaggi',
 'titre_page_recherche' => 'Risultati della ricerca @recherche@',
-'titre_page_statistiques' => 'Statistiche per rubrica',
 'titre_page_statistiques_referers' => 'Statistiche (link al tuo sito)',
 'titre_page_statistiques_signatures_jour' => 'Numero di firme al giorno',
 'titre_page_statistiques_signatures_mois' => 'Numero di firme al mese',
-'titre_page_statistiques_visites' => 'Statistiche delle visite',
 'titre_page_upgrade' => 'Aggiornamento di SPIP',
 'titre_publication_articles_post_dates' => 'Pubblicazione di articoli postdatati',
 'titre_referencer_site' => 'Inserire il sito in repertorio:',

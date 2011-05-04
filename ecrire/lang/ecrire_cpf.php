@@ -68,7 +68,6 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 'bouton_desactive_tout' => 'Dégrenn tout zot',
 'bouton_desinstaller' => 'Désinstaller', # NEW
 'bouton_effacer_index' => 'Dégrèn a tout bann zindèks ',
-'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => 'Dégrèn a TOUT',
 'bouton_envoi_message_02' => 'ANVWA INN MODÉKRI',
 'bouton_envoyer_message' => 'Modékri-la lé fini : anvwa ali',
@@ -142,6 +141,7 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 'date_mot_heures' => 'èr',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'ladrès imèl',
 'email_2' => 'ladrès imèl :',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -223,7 +223,6 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 'icone_creer_rubrique_2' => 'Kré inn nouvèl rubrik',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Anvwa modékri-la',
-'icone_evolution_visites' => 'Lévolisyon do bann vizit<br />@visites@ visites',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -266,7 +265,6 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 'info_adresse' => 'si ladrès :',
 'info_adresse_url' => 'Ladrès (URL) lo sit piblik (figirwèb)',
 'info_afficher_visites' => 'Armontr bann vizit pou :',
-'info_affichier_visites_articles_plus_visites' => 'Armontr bann vizit pou <b>bann zartik lé pli vizité dopwi lo komansman :</b>',
 'info_aide_en_ligne' => 'Koudmin an liyn SPIP',
 'info_ajout_image' => 'Kank ou azout inndé zimaz pou mèt inn dokiman-zwinn èk inn lartik,
 SPIP i pé kré otomatikman inndé vinyèt (inndé tit-limaz), aparti 
@@ -312,7 +310,6 @@ inn liv-zimaz (sédir inn galri).',
 'info_classement_1' => '<sup>yé</sup> si @liste@',
 'info_classement_2' => '<sup>èm</sup> si @liste@',
 'info_code_acces' => 'Oubliy pa out prop bann kod-laksé !',
-'info_comment_lire_tableau' => 'Koman i pé lir lo tablo-la',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
@@ -358,7 +355,6 @@ inn liv-zimaz (sédir inn galri).',
 'info_exportation_base' => 'Lésportasyon labaz aprosan  @archive@',
 'info_facilite_suivi_activite' => 'Pou swiv fasilman laktivité léditoryal sir lo sit, SPIP i pé anvwa inn zanons dann fil-imèl pou tout bann zitilizatèr anrozistré. Zanons komsa i kadr tout bann dommand pou lapiblikasyon oubyinsa bann konfirmasyon do dernyé bann zartik.',
 'info_fichiers_authent' => 'Bann fisyé pou lotantifikasyon « .htpasswd »',
-'info_forum_statistiques' => 'Bann sifklé pou bann visit',
 'info_forums_abo_invites' => 'Out sit néna bann forom si labonman ; Ifo bann vizitèr li inskri azot si lo sit piblik.',
 'info_gauche_admin_effacer' => '<b>Pazwèb-la, lé sèlman ouvèr pou inndé responsab lo sit.</b><p> Li donn laksé sir bann fonksyon pou lantrotyen tèknik. Nana désertin sak i domann aou fé zwé inn prosésus spésial pou lotantifikasyon. Dann ka-la inn laksé FTP lé néséser pou sanz inn sizé sir lo sit.', # MODIF
 'info_gauche_admin_tech' => '<b>Pazwèb-la, lé sèlman ouvèr pour inndé responsab lo sit.</b><p> Li donn laksé sir bann fonksyon pou lantrotyen tèknik. Nana désertin sak i domann aou fé zwé inn prosésus spésial pou lotantifikasyon. Dann ka-la inn laksé FTP lé
@@ -475,8 +471,6 @@ la finn dèt publyé).',
 'info_plus_cinq_car_2' => '(Pli dé 5 karaktèr-limprimri)',
 'info_plus_trois_car' => '(Pli dé 3 karaktèr-limprimri)',
 'info_popularite' => 'Koman lé populèr : @popularite@ ; bann vizit : @visites@',
-'info_popularite_2' => 'Popularité lo sitwèb :',
-'info_popularite_3' => 'Koman lé populèr : @popularite@ ; bann vizit : @visites@',
 'info_popularite_4' => 'koman lé populèr : @popularite@ ; bann vizit : @visites@',
 'info_post_scriptum' => 'Koz-Déryèr',
 'info_post_scriptum_2' => 'Koz-déryèr :',
@@ -485,7 +479,6 @@ la finn dèt publyé).',
 'info_preview_comite' => 'Tout bann rédaktèr i pé vwar lo sit avan',
 'info_preview_desactive' => 'Manyir po vwar lo sit avan lé tout dégréné-la',
 'info_preview_texte' => 'Lé posib vwar lo sit avan komsi tout bann zartik èk bann tit-nouvèl (sat néna omwin lo statu « pou pibliyé ») zot sré astèr an liny. Ou pé swazi si lé sèlman po komandèr, po rédaktèr ou si lé pa posib ni po lin ni po lot. ',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Out méyèr dalon po koresponn',
 'info_procedez_par_etape' => 'azi étap sanm étap',
 'info_procedure_maj_version' => 'Lé nésésèr fé zwé arnouvèlman la bazdodné pou giny roul ron la nouvèl
@@ -495,7 +488,6 @@ versyon SPIP.',
 'info_publier' => 'pibliyé',
 'info_publies' => 'Out bann zartik an liyn',
 'info_question_accepter_visiteurs' => 'Si out bann lékèlet i permé out bann vizitèr inskri azot si lo sitwèb,     anon fé zwé lopsyon anba-terla :',
-'info_question_gerer_statistiques' => 'Di anou tèrla, si ou vé out sit i zèr bann sifklé pou bann vizit :',
 'info_question_inscription_nouveaux_redacteurs' => 'Indik si ou laksèp linskrisyon bann nouvo lotèr dopwi lo sit piblik ? Si
  ou vé, bann lotèr i poura inskri azot èk lo formulèr otomatik. Zot i poura akosté
 sir figirwèb privé é propoz zot prop zartik minm.
@@ -503,9 +495,7 @@ sir figirwèb privé é propoz zot prop zartik minm.
 sak i dégrèn lanvwa bann limèl sir zot bann servèr : dann kala, linskrisyon otomatik li lé pa posib', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Indik si ou vé ansèrv lo rodèr-dodan SPIP
 (si ou défalk ali, lo sistèm lé pli rapid.)',
-'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 'info_racine_site' => 'Rasin lo sitwèb',
 'info_recharger_page' => 'Mersi rosarz lapazwèb-la disi inn ti moman.',
 'info_recherche_auteur_a_affiner' => 'Néna trod bann rézilta pou "@cherche_auteur@" ; mersi kadr myé kosa i rod.',
@@ -588,7 +578,6 @@ sanm in koulèr i présiz son léta :',
 'info_urlref' => 'Gatir wèb :',
 'info_utilisation_spip' => 'Astèr ou pé anserv lo sistèm lapiblikasyon SPIP...',
 'info_visites_par_mois' => 'Afis pou lo mwa :',
-'info_visites_plus_populaires' => 'Afis bann vizit pou <b>bann zartik sak lé pli populèr</b> e <b>bann dernyé zartik an liyn :</b>',
 'info_visiteur_1' => 'Vizitèr',
 'info_visiteur_2' => 'lo figirwèb',
 'info_visiteurs' => 'Bann vizitèr',
@@ -631,7 +620,6 @@ sanm in koulèr i présiz son léta :',
 'item_choix_redacteurs' => 'bann lotèr',
 'item_choix_visiteurs' => 'bann vizitèr sir figirwèb',
 'item_creer_fichiers_authent' => 'Pou kré bann fisyé .htpasswd',
-'item_gerer_statistiques' => 'Zèr bann sifklè pou bann vizit',
 'item_limiter_recherche' => 'Mèt inn limit pou lo rodaz zinformasyon sir out sitwèb',
 'item_login' => 'Nondkod',
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
@@ -812,7 +800,6 @@ sanm in koulèr i présiz son léta :',
 'texte_admin_effacer_01' => 'Komand-la i dégrèn <i>tout</i> lo kontnu la bazdodné,
 <i>tout</i> minm bann laksè lotèr èk komandèr. Si ou i anserv ali, i sra nésésèr fé zwé inn nouvèl 
 linstalasyon do SPIP pou kré inn nouvèl labaz èk inn promyé laksé komandèr.',
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_adresse_annuaire_1' => '(Si out karné lé instalé sir lamasin paréy minm sitwèb-la, néna grannsans i sra pour èt «localhost».)',
 'texte_ajout_auteur' => 'Lotèr answit la fin dèt azouté pou lartik-la :',
 'texte_annuaire_ldap_1' => 'Si ou nana laksé sir inn karné(LDAP), i pé inport otomatikman bann zitilizatèr pou mèt tout zot ansanm sir out sit SPIP.',
@@ -829,9 +816,6 @@ linstalasyon do SPIP pou kré inn nouvèl labaz èk inn promyé laksé komandèr
 'texte_choix_table_prefix' => 'Préfixe des tables :', # NEW
 'texte_commande_vider_tables_indexation' => 'Itiliz komand-la pou vid bann tab lindèksasyon sak lo rodèr SPIP i
 anserv astèr. Kom sa ou sava giny inn pé plid léspas-diks.',
-'texte_comment_lire_tableau' => 'Dann lamarz-la, ou va trouv lo rand lartik pou vwar kouk sa lé populèr ; pou sa minm, kank
-ou bat-karé si lo non inn lartik, néna inn bil sak i aparé : dann bil-la, i va trouv la popularité lartik èk lo nonb vizit dopwi lorizin.La popularité lé kom inn prévizyon
-lo nonb vizit posib sir lo sit porézon lo ritm aktyèl lé stab.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(i pé konpèrs ali si ou vé)',
@@ -918,7 +902,6 @@ Si lo larlik-la i rest touzour, ifo koz do sa èk out léberzèr.<p>', # MODIF
 <li> bann karaktèr-limprimri sak SPIP i dwa anserv pou afisé bann tèks ;</li>
 <li> la lang ifo ansèrv pour tout bann formulèr ;</li>
 <li> la lang léspas privé.</li></ul>',
-'texte_signification' => 'Bann bar fénwar i roprézant  bann zantré kimilé (pou lansanm bann sourubrik), bann bar klèr lo nonb bann vizit pou sakinn rubrik.',
 'texte_sous_titre' => 'Soutitr',
 'texte_statistiques_visites' => '(bann bar koulèr-fénwar :  dimans / liyn koulèr-fénwar : lo sanzman lamwayinn)',
 'texte_statut_attente_validation' => 'i espèr lakonfirmasyon',
@@ -969,7 +952,6 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Bann lopsyon : <b>Out lakostaz LDAP</b>',
-'titre_evolution_visite' => 'Lévolisyon do bann vizit',
 'titre_groupe_mots' => 'GROUP BANN MO :',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LANG LARTIK-LA',
@@ -996,11 +978,9 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_page_message_edit' => 'Ékri inn modékri',
 'titre_page_messagerie' => 'Out kazmodékri',
 'titre_page_recherche' => 'Bann rézilta pou lo rodaz @recherche@',
-'titre_page_statistiques' => 'Bann sifklé sanm inn rubrik',
 'titre_page_statistiques_referers' => 'Bann sifklé (bann gatir i rant dann sit)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
-'titre_page_statistiques_visites' => 'Bann sifklé pou bann vizit',
 'titre_page_upgrade' => 'Dernyé sanzman SPIP (armizanivo)',
 'titre_publication_articles_post_dates' => 'Piblikasyion pou bann zartik daté-déryèr',
 'titre_referencer_site' => 'Référans inn sitwèb :',

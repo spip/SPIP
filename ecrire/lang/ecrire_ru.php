@@ -59,7 +59,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Отключить все',
 'bouton_desinstaller' => 'Удалить',
 'bouton_effacer_index' => 'Удалить индексацию',
-'bouton_effacer_statistiques' => 'Удалить статистику',
 'bouton_effacer_tout' => 'Удалить ВСЕ',
 'bouton_envoi_message_02' => 'ОТПРАВИТЬ СООБЩЕНИЕ',
 'bouton_envoyer_message' => 'Последнее сообщение: отправить',
@@ -115,6 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => ':',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'адрес электронной почты',
 'email_2' => 'адрес электронной почты:',
 'en_savoir_plus' => 'подробнее',
@@ -193,7 +193,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Создать новый раздел',
 'icone_edition' => 'Edit', # NEW
 'icone_envoyer_message' => 'Отправить сообщение',
-'icone_evolution_visites' => 'Уровень посещений<br />@visites@ ',
 'icone_ma_langue' => 'My language', # NEW
 'icone_mes_infos' => 'My details', # NEW
 'icone_mes_preferences' => 'Preferences', # NEW
@@ -237,7 +236,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'на адрес:',
 'info_adresse_url' => 'Адрес сайта (URL)',
 'info_afficher_visites' => 'Показать посещения для:',
-'info_affichier_visites_articles_plus_visites' => 'Самые посещаемые статьи с начала работы сайта: </b>',
 'info_aide_en_ligne' => 'SPIP Oнлайн Помощь',
 'info_ajout_image' => 'Когда Вы добавляете изображения как прикрепленные документы к  статье, 
   SPIP может автоматически создать уменьшенную копию 
@@ -283,7 +281,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => ' из @списка@',
 'info_classement_2' => ' из @списка@',
 'info_code_acces' => 'Не забудьте Ваши собственные кода доступа!',
-'info_comment_lire_tableau' => 'Как прочитать этот график',
 'info_compatibilite_html' => 'HTML norm to follow', # NEW
 'info_compresseur_gzip' => 'Для начала рекомендуется проверить сжимает ли поставщик услуг PHP скрипты систематически. Для этого Вы можете, например, использовать следующую услугу: @testgzip@',
 'info_compresseur_texte' => 'Если Ваш сервер автоматически не сжимает HTML страницы при их отправке, Вы можете попробывать вынужденное сжатие для уменьшения размера передаваемых страниц. <b>Внимание</b>: это может иметь заметный негативный эффект на производительность некоторых серверов, ',
@@ -331,7 +328,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  SPIP может рассылать уведомления по электронной почте, для редакторской почтовой рассылки например,
  прошение о публикации и утверждение статьи.',
 'info_fichiers_authent' => 'Файл подтверждения подлинности ".htpasswd"',
-'info_forum_statistiques' => 'История посещений',
 'info_forums_abo_invites' => 'Ваш сайт содержит форумы по подписке; посетители могут зарегистрироваться к ним на основном сайте.',
 'info_gauche_admin_effacer' => '<b>Только администраторы имеют доступ к этой странице. </b> <p>Она обеспечивает доступ к ряду функциям по обслуживанию сайта. Некоторые из них требуют прав доступа к FTP сайта. </p> ',
 'info_gauche_admin_tech' => '<b>Только администраторы имеют доступ к этой странице. </b> <p> Она обеспечивает доступ к различным 
@@ -451,8 +447,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_plus_cinq_car_2' => '(Более 5 источников)',
 'info_plus_trois_car' => '(Более 3-х источников)',
 'info_popularite' => 'популярность: @popularite@; посещения: @visites@',
-'info_popularite_2' => 'популярность сайта:',
-'info_popularite_3' => 'популярность: @popularite@; посещения: @visites@',
 'info_popularite_4' => 'популярность: @popularite@; посещения: @visites@',
 'info_post_scriptum' => 'Постскрипт',
 'info_post_scriptum_2' => 'Постскриптум: ',
@@ -461,7 +455,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => 'Все авторы имеют доступ к режиму предварительного просмотра',
 'info_preview_desactive' => 'Режим предварительного просмотра отключен.',
 'info_preview_texte' => 'Вы можете предварительно просмотреть сайт, если все статьи и новости (которые, по крайней мере имеют статус "представленные") были уже опубликованные. Этот режим предварительного просмотра должен быть ограничен администраторами, открытым для всех авторов, или полностью отключенным?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Ваши основные корреспонденты',
 'info_procedez_par_etape' => 'пожалуйста выполняйте этап за этапом',
 'info_procedure_maj_version' => 'процедура обновления должна адаптировать 
@@ -471,7 +464,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'опубликовать',
 'info_publies' => 'Ваши статьи, опубликованные на сайте:',
 'info_question_accepter_visiteurs' => 'Если шаблоны Вашего сайта позволяют посетителям регистрироваться, не входя в административную часть, пожалуйста включите следующую опцию:',
-'info_question_gerer_statistiques' => 'Должен ли Ваш сайт включить историю посещений?',
 'info_question_inscription_nouveaux_redacteurs' => 'Хотели бы Вы разрешить регистрацию новых редакторов 
  с основного сайта? Если Вы согласны с этим, посетители могут зарегистрироваться 
   используя автоматическую форму, и также получать доступ к административной части для 
@@ -483,9 +475,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   выполнена.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Хотите ли Вы использовать поисковую систему, интегрированную в SPIP?
  (Её отключение ускоряет работу системы.)',
-'info_question_vignettes_referer' => 'Когда Вы принимаете во внимание статистику, Вы можете просмотреть текущие посещения сайтов. ',
 'info_question_vignettes_referer_non' => 'Не показывать изображения главной страницы',
-'info_question_vignettes_referer_oui' => 'Показывать изображения главной страницы',
 'info_racine_site' => 'Корень сайта',
 'info_recharger_page' => 'Пожалуйста перезагрузите эту страницу через несколько минут.',
 'info_recherche_auteur_a_affiner' => 'Слишком много результатов для "@cherche_auteur"; пожалуйста уточните запрос.',
@@ -568,7 +558,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_urlref' => 'Гиперссылка:',
 'info_utilisation_spip' => 'SPIP готов к использованию...',
 'info_visites_par_mois' => 'Ежемесячный показ:',
-'info_visites_plus_populaires' => 'Показать статистику для <b> самых популярных </b> и <b>последних опубликованных статей:</b>',
 'info_visiteur_1' => 'Посетитель',
 'info_visiteur_2' => 'из основной части сайта',
 'info_visiteurs' => 'Посетители',
@@ -611,7 +600,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_choix_redacteurs' => 'редакторы',
 'item_choix_visiteurs' => 'посетители основного сайта',
 'item_creer_fichiers_authent' => 'Создать .htpasswd файлы',
-'item_gerer_statistiques' => 'Вести статистику',
 'item_limiter_recherche' => 'Ограничить поиск информации, содержащейся на Вашем сайте',
 'item_login' => 'Логин',
 'item_messagerie_agenda' => 'Включить систему обмена сообщениями и календарь',
@@ -792,7 +780,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_admin_effacer_01' => 'Эта команда удаляет <i> все </i> содержание базы данных, 
 включая <i> все </i> параметры доступа для редакторов и администраторов. После выполнения этого, Вы должны 
 переустановить SPIP, чтобы восстановить новую базу данных и доступ первого администратора.',
-'texte_admin_effacer_stats' => '<MODIF>Это команда удаляет все данные, которые связаны со статистикой посещений сайта,включая сравнительную популярность статей. ',
 'texte_adresse_annuaire_1' => '( Если Ваш каталог установлен на том же компьютере, что Ваш вебсайт, это вероятно «локальный хост».)',
 'texte_ajout_auteur' => 'Следующий автор был добавлен к статье:',
 'texte_annuaire_ldap_1' => 'Если Вы имеете доступ к каталогу(LDAP), Вы можете использовать его, для автоматического импорта пользователей под SPIP.',
@@ -810,13 +797,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_commande_vider_tables_indexation' => 'Использовать эту команду для очистки индексации таблиц
 с помощью поисковой системы, интегрированной в SPIP. Это позволит Вам 
   освободить немного места на диске.',
-'texte_comment_lire_tableau' => 'Справа 
- показывается уровень 
-  посещаемости статьи; черной линией отображается прогноз посещений (при условии 
- что сохранится 
-  текущая динамика), и зеленым цветом - количество посещений за день. 
- Для более подробной информации 
- наведите мышку на интересующую Вас дату. ',
 'texte_compatibilite_html' => 'You can ask SPIP to produce code compatible with the norm <i>HTML4</i> for the public site, or else allow it use more modern <i>HTML5</i> compatible code.', # NEW
 'texte_compatibilite_html_attention' => 'There is no risk involved in activating the <i>HTML5</i> option. But if you do, the pages of your site must begin with the following code in order to be valid:  <code><!DOCTYPE html></code>.', # NEW
 'texte_compresse_ou_non' => '(файл может быть архивом)',
@@ -918,7 +898,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <li> язык, используемый по умолчанию на сайте </li> 
 
 <li> язык ,по умолчанию, для   административной части. </li> </ul>',
-'texte_signification' => 'Темные штрихи представляют накопленные записи (общее количество подразделов), светлые штрихи, представляют количество посещений для каждого раздела.',
 'texte_sous_titre' => 'Подзаголовок',
 'texte_statistiques_visites' => '(темные штрихи: воскресенье / темная кривая: средний уровень)',
 'texte_statut_attente_validation' => 'в ожидании утверждения',
@@ -973,7 +952,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_configurer_preferences' => 'Configure your preferences', # NEW
 'titre_conflit_edition' => 'Противоречие в процессе редактирования',
 'titre_connexion_ldap' => 'Опции: <b>Ваше LDAP соединение</b>',
-'titre_evolution_visite' => 'Уровень посещений',
 'titre_groupe_mots' => 'ГРУППА КЛЮЧЕВЫХ СЛОВ:',
 'titre_identite_site' => 'Site identity', # NEW
 'titre_langue_article' => 'ЯЗЫК СТАТЬИ',
@@ -1000,11 +978,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_message_edit' => 'Написать сообщение',
 'titre_page_messagerie' => 'Ваша передача сообщений',
 'titre_page_recherche' => 'Результаты поиска @recherche@',
-'titre_page_statistiques' => 'Статистика разделов',
 'titre_page_statistiques_referers' => 'Статистика  (входящие ссылки)',
 'titre_page_statistiques_signatures_jour' => 'Подсчет подписей за день',
 'titre_page_statistiques_signatures_mois' => 'Подсчет подписей за месяц',
-'titre_page_statistiques_visites' => 'История посещений',
 'titre_page_upgrade' => 'SPIP обновления',
 'titre_publication_articles_post_dates' => '<MODIF>Публикация и дата размещения статей',
 'titre_referencer_site' => 'Ссылка на сайт:',

@@ -61,7 +61,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Vše vypnout',
 'bouton_desinstaller' => 'Uninstall', # NEW
 'bouton_effacer_index' => 'Odstranit indexování',
-'bouton_effacer_statistiques' => 'Delete the statistics', # NEW
 'bouton_effacer_tout' => 'Odstranit vše',
 'bouton_envoi_message_02' => 'ODESLAT ZPRÁVU',
 'bouton_envoyer_message' => 'Konečná zpráva: odeslat',
@@ -117,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'hodina',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'e-mail',
 'email_2' => 'email:',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -196,7 +196,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Vytvořit novou sekci',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Odeslat zprávu',
-'icone_evolution_visites' => 'Vývoj návštěvnosti<br />@visites@ visites', # MODIF
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -240,7 +239,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'na adrese:',
 'info_adresse_url' => 'Adresa URL veřejného webu',
 'info_afficher_visites' => 'Zobrazit návštěvy:',
-'info_affichier_visites_articles_plus_visites' => 'Zobrazit návštěvnost <b>nejoblíbenějších článků od počátku:</b>',
 'info_aide_en_ligne' => 'Nápověda online systému SPIP',
 'info_ajout_image' => 'Přikládáte-li k článku obrázky jako dokumenty,
   systém SPIP umí automaticky vytvořit jejich náhledy
@@ -286,7 +284,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => 'z @liste@',
 'info_classement_2' => '<sup>e</sup> z @liste@',
 'info_code_acces' => 'Nezapomeňte své přístupové kódy!',
-'info_comment_lire_tableau' => 'Vysvětlivky k tabulce',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => 'It is advisable to first check if the service provider systematically compresses PHP scripts. To do this you can, for example, use the following service: @testgzip@', # NEW
 'info_compresseur_texte' => 'If your server does not automatically compress HTML pages when sending them, you can attempt to force the compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ', # NEW
@@ -335,7 +332,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   a o schválení článků. Tím se ulehčí sledování publikační činnosti
   na webu. ',
 'info_fichiers_authent' => 'Autentifikační soubor ".htpasswd"',
-'info_forum_statistiques' => 'Statistiky návštěvnosti',
 'info_forums_abo_invites' => 'Na vašem webu existují diskusní skupiny vyhrazené přihlášeným účastníkům; návštěvníci se musí tedy zaregistrovat na veřejné části webu.',
 'info_gauche_admin_effacer' => '<b>Tato stránka je přístupná pouze těm, kdo za web odpovídají.</b><p> Umožňuje přístup k funkcím určeným pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduje FTP přístup k webu.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Tato stránka je vyhrazena těm, kdo za web odpovídají.</b><p> Umožňuje přístup k funkcím
@@ -453,8 +449,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_plus_cinq_car_2' => '(Více než 5 znaků)',
 'info_plus_trois_car' => '(více než 3 znaky)',
 'info_popularite' => 'oblíbenost: @popularite@; návštěvy: @visites@',
-'info_popularite_2' => 'oblíbenost webu:',
-'info_popularite_3' => 'oblívenost: @popularite@; návštěvy: @visites@',
 'info_popularite_4' => 'oblíbenost: @popularite@; návštěvy: @visites@',
 'info_post_scriptum' => 'P.S.',
 'info_post_scriptum_2' => 'P.S.:',
@@ -463,7 +457,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_preview_comite' => 'Náhled webu je přístupný všem redaktorům',
 'info_preview_desactive' => 'Náhledy jsou zcela vypnuty',
 'info_preview_texte' => 'Náhled umožňuje zobrazit web tak, jakoby všechny články a novinky (minimálně ve stavu "předloženo") byly zveřejněny. Chcete náhled povolit jen správcům, všem redaktorům nebo jej nechcete povolit nikomu?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Vaši hlavní korespondenti',
 'info_procedez_par_etape' => 'postupujte krok za krokem',
 'info_procedure_maj_version' => 'pro úpravu nové verze systému SPIP je třeba spustit aktualizaci
@@ -473,7 +466,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_publier' => 'zveřejnit',
 'info_publies' => 'Vaše články publikované online',
 'info_question_accepter_visiteurs' => 'Pokud šablona vašeho webu vyžaduje přihlášení návštěvníků bez přístupu do privátní části, aktivujte tuto možnost zde:',
-'info_question_gerer_statistiques' => 'Mají se na vašem webu vést statistiky návštěvnosti?',
 'info_question_inscription_nouveaux_redacteurs' => 'Mohou se noví redaktoři přihlašovat z veřejné části webu?
   Pokud ano, návštěvníci se mohou přihlašovat pomocí automatického formuláře
   a získají přístup do privátní části. Budou tak moci navrhovat své vlastní
@@ -485,9 +477,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
   nemožné.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Chcete používat vyhledávač, který je součástí systému SPIP?
  (je-li vyhledávač vypnut, zrychluje to chod systému.)',
-'info_question_vignettes_referer' => 'When you consult the statistics, you can see a preview of the originating sites of the visits. ', # NEW
 'info_question_vignettes_referer_non' => 'Do not show the screenshots of the originating sites', # NEW
-'info_question_vignettes_referer_oui' => 'Show the screenshots of the originating sites', # NEW
 'info_racine_site' => 'Kořenový adresář webu',
 'info_recharger_page' => 'Za okamžik zkuste stránku znovu nahrát.',
 'info_recherche_auteur_a_affiner' => 'Pro "@cherche_auteur@" bylo nalezeno příliš mnoho výsledků. Upřesněte vyhledávací kritéria.',
@@ -570,7 +560,6 @@ ukazuje jejich stav:',
 'info_urlref' => 'Hypertextový odkaz:',
 'info_utilisation_spip' => 'Nyní můžete začít používat redakční systém...',
 'info_visites_par_mois' => 'Zobrazení po měsících:',
-'info_visites_plus_populaires' => 'Zobrazit návštevnost <b>nejčtenějších</b> a <b>nejnovějších článků:</b>',
 'info_visiteur_1' => 'Návštěvník',
 'info_visiteur_2' => 'z veřejného webu',
 'info_visiteurs' => 'Návštěvníci',
@@ -613,7 +602,6 @@ ukazuje jejich stav:',
 'item_choix_redacteurs' => 'redaktoři',
 'item_choix_visiteurs' => 'návštěvníci veřejného webu',
 'item_creer_fichiers_authent' => 'Vytvořit soubory .htpasswd',
-'item_gerer_statistiques' => 'Správa statistik',
 'item_limiter_recherche' => 'Omezit vyhledávání na údaje obsažené na vašem webu',
 'item_login' => 'Uživatelské jméno',
 'item_messagerie_agenda' => 'Activate the messaging sytem and the calendar', # NEW
@@ -794,7 +782,6 @@ ukazuje jejich stav:',
 'texte_admin_effacer_01' => 'Tímto příkazem odstraníte <i>veškerý</i> obsah databáze,
 včetně <i>veškerých</i> přístupů redaktorů a správců. Pokud jej spustíte, musíte následně znovu nainstalovat
 systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.',
-'texte_admin_effacer_stats' => 'This command deletes all data linked to the statistics of visits to the site, including the relative popularity of articles.', # NEW
 'texte_adresse_annuaire_1' => '(Máte-li adresář uložen na stejném počítači jako tento web, jedná se nejspíše o "localhost".)',
 'texte_ajout_auteur' => 'K článku byl doplněn tento autor:',
 'texte_annuaire_ldap_1' => 'Máte-li přístup k adresáři (LDAP), můžete jej použít k automatickému importu uživatelů do systému SPIP.',
@@ -812,13 +799,6 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 'texte_commande_vider_tables_indexation' => 'Tento příkaz slouží k vyčištění indexových tabulek, které používá
    vyhledávač, jenž je součástí systému SPIP. Umožní vám získat více
    místa na disku.',
-'texte_comment_lire_tableau' => 'Pořadí článku v žebříčku,
-  oblíbenosti je uvedeno na okraji.
-  Oblíbenost článku (odhad každodenního
-  počtu návštěvníků za předpokladu, že počet návštěv bude pokračovat dosavadním tempem)
-  a počet celkových návštěv za celou dobu zveřejnění
-  jsou uvedeny v místní nabídce, která se zobrazí
-  při umístění myši nad názvem článku.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(může ale nemusí být komprimováno)',
@@ -912,7 +892,6 @@ přejděte raději do veřejné části a použijte tlačítko "znovu vypočíta
  <li> podstatu textového procesoru, který systém SPIP použije při zadávání textů;</li>
  <li> jazyk formulářů veřejného webu;</li>
  <li> výchozí jazyk privátní části.</li></ul>',
-'texte_signification' => 'Tmavě jsou označeny kumulované údaje (celkem v rámci podsekcí), světle je uveden počet návštěv v jednotlivých sekcích.',
 'texte_sous_titre' => 'Dílčí název',
 'texte_statistiques_visites' => '(tmavě:  neděle / tmavá křivka: průměr)',
 'texte_statut_attente_validation' => 'čekající na schválení',
@@ -973,7 +952,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflict while editing', # NEW
 'titre_connexion_ldap' => 'Možnost: <b>Vaše připojení LDAP</b>',
-'titre_evolution_visite' => 'Vývoj návštěvnosti',
 'titre_groupe_mots' => 'SKUPINA SLOV:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'JAZYK ČLÁNKU',
@@ -1000,11 +978,9 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_page_message_edit' => 'Upravit zprávu',
 'titre_page_messagerie' => 'Váš systém zpráv',
 'titre_page_recherche' => 'Výsledky vyhledávání @recherche@',
-'titre_page_statistiques' => 'Statistiky podle sekcí',
 'titre_page_statistiques_referers' => 'Statistiky (příchozí odkazy)',
 'titre_page_statistiques_signatures_jour' => 'Signatures count by day', # NEW
 'titre_page_statistiques_signatures_mois' => 'Signatures count by month', # NEW
-'titre_page_statistiques_visites' => 'Statistiky návštěvnosti',
 'titre_page_upgrade' => 'Aktualizace systému SPIP',
 'titre_publication_articles_post_dates' => 'Zveřejnění post-datovaných článků',
 'titre_referencer_site' => 'Zadat odkaz na web:',

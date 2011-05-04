@@ -60,7 +60,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'bouton_desactive_tout' => 'Avaktivera alla',
 'bouton_desinstaller' => 'Avinstallera',
 'bouton_effacer_index' => 'Radera index',
-'bouton_effacer_statistiques' => 'Radera statistiken',
 'bouton_effacer_tout' => 'Radera ALLA',
 'bouton_envoi_message_02' => 'SKICKA ETT MEDDELANDE',
 'bouton_envoyer_message' => 'Färdigt meddelande: skicka',
@@ -116,6 +115,7 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'date_mot_heures' => 'h',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'e-post',
 'email_2' => 'e-post:',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -194,7 +194,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'icone_creer_rubrique_2' => 'Skapa en ny avdelning',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Sänd detta meddelande',
-'icone_evolution_visites' => 'Besöksantal<br />@visites@ besök',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -238,7 +237,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_adresse' => 'till adressen:',
 'info_adresse_url' => 'Din sajts publika URL',
 'info_afficher_visites' => 'Visa besök till:',
-'info_affichier_visites_articles_plus_visites' => 'Visa besök till <b>de mest besökta artiklarna sedan starten:</b>',
 'info_aide_en_ligne' => 'SPIP Online Hjälp',
 'info_ajout_image' => 'När du lägget till filer som bifogade dokument till en artikel,
   kan SPIP automatiskt skapa miniatyrer av de
@@ -284,7 +282,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_classement_1' => '<sup>er</sup> sur @liste@', # NEW
 'info_classement_2' => '<sup>e</sup> sur @liste@', # NEW
 'info_code_acces' => 'Glöm inte ditt eget lösenord!',
-'info_comment_lire_tableau' => 'Hur tolkar man den här bilden',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
@@ -332,7 +329,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
   aktiviteterna, kan SPIP skicka medddelanden via e-post, exempelvis till en maillista för redaktörer,
   angående publiceringar och godkännanden.',
 'info_fichiers_authent' => 'Lösenordsfil ".htpasswd"',
-'info_forum_statistiques' => 'Besöksstatistik',
 'info_forums_abo_invites' => 'Votre site comporte des forums sur abonnement ; les visiteurs sont donc invités à s\'enregistrer sur le site public.', # NEW
 'info_gauche_admin_effacer' => '<b>Endast administratörer har tillgång till denna sida.</b><p> Den ger tillgång till tekniska underhållsrutiner av olika slag. En del av dem kommer, om de används, att kräva FTP-tillgång till Webservern för autentifiering.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes
@@ -452,8 +448,6 @@ funktioner hos SPIP inte användas.',
 'info_plus_cinq_car_2' => '(Mer än 5 tecken)',
 'info_plus_trois_car' => '(Mer än 3 tecken)',
 'info_popularite' => 'popularitet: @popularite@; besök: @visites@',
-'info_popularite_2' => 'sajtens popularitet:',
-'info_popularite_3' => 'populäritet: @popularite@; besök: @visites@',
 'info_popularite_4' => 'popularitet: @popularite@; besök: @visites@',
 'info_post_scriptum' => 'Postscript',
 'info_post_scriptum_2' => 'PS:',
@@ -462,7 +456,6 @@ funktioner hos SPIP inte användas.',
 'info_preview_comite' => 'Alla redaktörer har tillgång till förhandsvisning',
 'info_preview_desactive' => 'Förhandsvisning är avaktiverad',
 'info_preview_texte' => 'Il est possible de prévisualiser le site comme si tous les articles et les brèves (ayant au moins le statut « proposé ») étaient publiés. Cette possibilité doit-elle être ouverte aux administrateurs seulement, à tous les rédacteurs, ou à personne ?', # NEW
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Vos principaux correspondants', # NEW
 'info_procedez_par_etape' => 'Var vänlig, fortsätt steg för steg',
 'info_procedure_maj_version' => 'Uppdateringsproceduren skall köras för att
@@ -472,7 +465,6 @@ funktioner hos SPIP inte användas.',
 'info_publier' => 'publicera',
 'info_publies' => 'Dina onlinepublicerade artiklar',
 'info_question_accepter_visiteurs' => 'Om sajtens template tillåter besökare att registrera sig utan att gå in i den privata delen, var vänlig och aktivera följande option:',
-'info_question_gerer_statistiques' => 'Skall din sajt hantera besöksstatistik?',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptez-vous les inscriptions de nouveaux rédacteurs à
   partir du site public ? Si vous acceptez, les visiteurs pourront s\'inscrire
   depuis un formulaire automatisé et accéderont alors à l\'espace privé pour
@@ -484,9 +476,7 @@ funktioner hos SPIP inte användas.',
   impossible.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Vill du använda SPIPŽs integrerade sökfunktion?
  (Att stänga av den ökar systemets prestanda.)',
-'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_question_vignettes_referer_oui' => 'Visa skärmbilder av länkande sajter',
 'info_racine_site' => 'Sajtens bas',
 'info_recharger_page' => 'Var vänlig och uppdatera sidan om en liten stund.',
 'info_recherche_auteur_a_affiner' => 'För många resultat för "@cherche_auteur@"; Var vänlig och avgränsa sökningen mer.',
@@ -569,7 +559,6 @@ med en färg som visar deras status:',
 'info_urlref' => 'Hyperlänk:',
 'info_utilisation_spip' => 'SPIP är nu färdig att användas..',
 'info_visites_par_mois' => 'Besökare per månad:',
-'info_visites_plus_populaires' => 'Visa besök till <b>de populäraste artiklarna</b> och till <b>de senast publicerade artiklarna:</b>',
 'info_visiteur_1' => 'Besökare',
 'info_visiteur_2' => 'på den publika delen',
 'info_visiteurs' => 'Besökare',
@@ -612,7 +601,6 @@ med en färg som visar deras status:',
 'item_choix_redacteurs' => 'redaktörer',
 'item_choix_visiteurs' => 'besökare till den publika delen',
 'item_creer_fichiers_authent' => 'Skapa .htpasswd filer',
-'item_gerer_statistiques' => 'Hantera statistik',
 'item_limiter_recherche' => 'Begränsa sökningen till information i din sajt',
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'Aktivera meddelandesystemet och kalendern',
@@ -793,7 +781,6 @@ med en färg som visar deras status:',
 'texte_admin_effacer_01' => 'Detta kommando raderar <i>all</i> information i databasen,
 inklusive <i>alla</i> uppgifter om användare. Efter att du använt det, måste du 
 installera om SPIP för att skapa en ny databas och den första administratören.',
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_adresse_annuaire_1' => '( Om din katalog är installerad på samma dator som din websajt, är det troligen «localhost».)',
 'texte_ajout_auteur' => 'Följande redaktör lades till artikeln:',
 'texte_annuaire_ldap_1' => 'Om du har tillgång till en LDAP-katalog kan du använda den för att importera användare till SPIP.',
@@ -811,13 +798,6 @@ installera om SPIP för att skapa en ny databas och den första administratören
 'texte_commande_vider_tables_indexation' => 'Utilisez cette commande afin de vider les tables d\'indexation utilisées
 			par le moteur de recherche intégré à SPIP. Cela vous permettra
 			de gagner de l\'espace disque.', # NEW
-'texte_comment_lire_tableau' => 'Artikeln rank i
-  popularitetsklassificeringen visas i 
-  marginalen; artikelns popularitet (en uppskattning av
-  antalet dagliga besök den skulle få om den aktuella
-  trafikmängden upprätthålls) och antal besök
-  sedan starten visas i bubblan som 
-  dyker upp när muspekaren hålls över titeln.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(Den kan vara komprimerad eller inte.)',
@@ -913,7 +893,6 @@ enbart en sida, är det bäst att göra det från den publika delen genom att kl
 	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes ;</li>
 	<li> la langue utilisée dans les formulaires du site public ;</li>
 	<li> la langue présentée par défaut dans l\'espace privé.</li></ul>', # NEW
-'texte_signification' => 'Les barres foncées représentent les entrées cumulées (total des sous-rubriques), les barres claires le nombre de visites pour chaque rubrique.', # NEW
 'texte_sous_titre' => 'Undertitel',
 'texte_statistiques_visites' => '(mörka staplar:  Söndag / mörk linje: genomsnittlig nivå)',
 'texte_statut_attente_validation' => 'väntar på godkännande',
@@ -980,7 +959,6 @@ you can perform searches on sites and
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Optioner: <b>Din LDAP koppling</b>',
-'titre_evolution_visite' => 'Besöksnivå',
 'titre_groupe_mots' => 'NYCKELORDSGRUPP:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'ARTIKELNS SPRÅK',
@@ -1007,11 +985,9 @@ you can perform searches on sites and
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW
 'titre_page_recherche' => 'Sökresultat @recherche@',
-'titre_page_statistiques' => 'Statistik uppdelat på avdelning',
 'titre_page_statistiques_referers' => 'Statistik (inkommande länkar)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
-'titre_page_statistiques_visites' => 'Besöksstatistik',
 'titre_page_upgrade' => 'Uppgradera SPIP',
 'titre_publication_articles_post_dates' => 'Tidsstyrd publicering av artiklar',
 'titre_referencer_site' => 'Referera webbplatsen:',

@@ -60,7 +60,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Desactivar todo',
 'bouton_desinstaller' => 'Desinstalar',
 'bouton_effacer_index' => 'Borrar os índices',
-'bouton_effacer_statistiques' => 'Borrar as estatísticas',
 'bouton_effacer_tout' => 'Borrar TODO',
 'bouton_envoi_message_02' => 'ENVIAR UNHA MENSAXE',
 'bouton_envoyer_message' => 'Mensaxe definitiva: enviar',
@@ -116,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'horas',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'correo electrónico',
 'email_2' => 'correo electrónico:',
 'en_savoir_plus' => 'Máis información',
@@ -195,7 +195,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Crear un novo tema',
 'icone_edition' => 'Edición',
 'icone_envoyer_message' => 'Enviar a mensaxe',
-'icone_evolution_visites' => 'Evoluci&amp;oacute;n das visitas<br />@visites@ visitas',
 'icone_ma_langue' => 'O meu idioma',
 'icone_mes_infos' => 'Os meus datos',
 'icone_mes_preferences' => 'As miñas preferencias',
@@ -238,7 +237,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'ó enderezo:',
 'info_adresse_url' => 'Enderezo (URL) do web público',
 'info_afficher_visites' => 'Mostrar as visitas de :',
-'info_affichier_visites_articles_plus_visites' => 'Mostrar as visitas de <b>os artigos máis visitados dende o principio:</b>',
 'info_aide_en_ligne' => 'Axuda en liña do SPIP',
 'info_ajout_image' => 'Cando engada imaxes como documentos adxuntos a un artigo,
   SPIP pode crear, automaticamente, viñetas (miniaturas) das
@@ -284,7 +282,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => '<sup>o</sup> en @liste@',
 'info_classement_2' => '<sup>a</sup> en @liste@',
 'info_code_acces' => 'Non esquezas os teus códigos de acceso!',
-'info_comment_lire_tableau' => 'Cómo interpretar este cadro',
 'info_compatibilite_html' => 'Norma HTML que se segue',
 'info_compresseur_gzip' => '<b>N. B. :</b> Recoméndaselle comprobar antes de nada se o aloxador comprime xa sistematicamente os  scripts php ; para iso, pode utilizar por exemplo o servizo seguinte : @testgzip@',
 'info_compresseur_texte' => 'No caso de que o seu servidor non comprima automaticamente as páxinas html para enviarllas aos internautas, pode probar a forzar esta compresión para diminuír o peso das páxinas para descarga. <b>Alerta</b> : isto pode ralentizar considerablemente certos servidores.',
@@ -333,7 +330,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   a unha lista de enderezos do equipo de redacción, avisos das peticións
   de publicación e de validacións dos artigos.',
 'info_fichiers_authent' => 'Ficheiros de autenticación «.htpasswd»',
-'info_forum_statistiques' => 'Estatísticas das visitas',
 'info_forums_abo_invites' => 'O seu web dispón de foros para se aboar ; os visitantes están invitados a se rexistrar neles na parte pública do web.',
 'info_gauche_admin_effacer' => '<b>Esta páxina é unicamente accessible para o equipo de xestión do web.</b><p> Dálle acceso a diferentes funcións de mantemento técnico. Algunhas delas dan lugar a procesos de autenticación específicos, que esixen ter un acceso por FTP ao web.</p>',
 'info_gauche_admin_tech' => '<b>Esta páxina é unicamente accessible para o equipo de xestión do web.</b><p> Dálle acceso a diferentes funcións de mantemento técnico. Algunhas delas dan lugar a procesos de autenticación específicos, que esixen ter un acceso por FTP ao web.</p>',
@@ -451,8 +447,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_plus_cinq_car_2' => '(Máis de 5 caracteres)',
 'info_plus_trois_car' => '(Máis de 3 caracteres)',
 'info_popularite' => 'popularidade: @popularite@; visitas: @visites@',
-'info_popularite_2' => 'popularidade do web:',
-'info_popularite_3' => 'popularidade: @popularite@; visitas: @visites@',
 'info_popularite_4' => 'popularidade: @popularite@; visitas: @visites@',
 'info_post_scriptum' => 'Pé do artigo',
 'info_post_scriptum_2' => 'Pé do artigo:',
@@ -461,7 +455,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => 'Todos os redactores poden previsualizar o web',
 'info_preview_desactive' => 'A previsualización está totalmente desactivada',
 'info_preview_texte' => 'É posíbel previsualizar o web como se todos os artigos e breves (que teñan cando menos o estado de « proposto ») estivesen publicados. Esta posibilidade debe estar aberta só para os administradores, para todos os redactores, ou para calquera ?',
-'info_previsions' => 'previsións:',
 'info_principaux_correspondants' => 'Os colaboradores principais',
 'info_procedez_par_etape' => 'procede etapa por etapa',
 'info_procedure_maj_version' => 'o procedemento da posta ó día ten que ser lanzado a fin
@@ -471,7 +464,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'publicar',
 'info_publies' => 'Os teus artigos publicados en liña',
 'info_question_accepter_visiteurs' => 'Se os esqueletos do seu web prevén o rexistro de visitantes sen acceso á parte web privada, active a opción aquí abaixo :',
-'info_question_gerer_statistiques' => 'O seu web ten que xerar as estatísticas das visitas?',
 'info_question_inscription_nouveaux_redacteurs' => 'Aceptará as inscricións de novos redactores
   desde o web público? De aceptalos, os visitantes poderanse rexistrar cun
   formulario automatizado e accederán ao espazo privado para
@@ -482,9 +474,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   nese caso, a inscrición automática é imposible.</i></blockquote>',
 'info_question_utilisation_moteur_recherche' => 'Quere empregar o motor de procura integrado en SPIP?
   (desactivalo acelera o funcionamento do sistema.)',
-'info_question_vignettes_referer' => 'Cando vostede consulte as estatísticas, pode visualizar resumos dos webs que orixinan as visitas.',
 'info_question_vignettes_referer_non' => 'Non mostrar as capturas de webs de orixe das visitas',
-'info_question_vignettes_referer_oui' => 'Mostrar as capturas de web de orixe das visitas',
 'info_racine_site' => 'Raíz do web',
 'info_recharger_page' => 'Recarga a páxina nuns intres.',
 'info_recherche_auteur_a_affiner' => 'Resultados de máis para "@cherche_auteur@"; por favor, afine a súa procura.',
@@ -567,7 +557,6 @@ cunha cor que indica o seu estado :',
 'info_urlref' => 'Ligazón de hipertexto :',
 'info_utilisation_spip' => 'Agora podes comezar a usar o sistema de publicación asistida...',
 'info_visites_par_mois' => 'Ordear por mes:',
-'info_visites_plus_populaires' => 'Mostrar as visitas para <b>os artigos máis populares</b> e para <b>os últimos artigos publicados:</b>',
 'info_visiteur_1' => 'Visitante',
 'info_visiteur_2' => 'do web público',
 'info_visiteurs' => 'Visitantes',
@@ -610,7 +599,6 @@ cunha cor que indica o seu estado :',
 'item_choix_redacteurs' => 'o equipo de redacción',
 'item_choix_visiteurs' => 'as visitas do web público',
 'item_creer_fichiers_authent' => 'Crear os ficheiros «.htpasswd»',
-'item_gerer_statistiques' => 'Xestionar as estatísticas',
 'item_limiter_recherche' => 'Limitar a procura ás informacións contidas neste web',
 'item_login' => 'Identificador',
 'item_messagerie_agenda' => 'Activar a mensaxería e a axenda',
@@ -792,7 +780,6 @@ cunha cor que indica o seu estado :',
 		incluindo <i>todos</i> os accesos dos equipos de xestión e de redacción.
 		Logo de executa.lo, terás que lanzar de novo a instalación do SPIP para crear unha
 		nova base e un novo acceso de administración.',
-'texte_admin_effacer_stats' => 'Este comando borra todos os datos ligados ás estatísticas de visita do web, e inclúe a popularidade dos artigos.',
 'texte_adresse_annuaire_1' => '(Se a súa guía/directorio foi aloxada na mesma máquina ca este
   web, seguramente será «localhost».)',
 'texte_ajout_auteur' => '@ seguinte autor/a foi engadido ao artigo:',
@@ -813,13 +800,6 @@ cunha cor que indica o seu estado :',
 'texte_commande_vider_tables_indexation' => 'empregue este comando para baleirar as táboas
   de indexado empregadas polo motor de procura integrado no Spip.
   Isto permite gañar espazo en disco.',
-'texte_comment_lire_tableau' => 'O rango do artigo,
-		na clasificación por popularidade, está indicado á marxe;
-		a popularidade do artigo (unha estimación do número
-		de visitas cotiás que terá se o ritmo actual de
-		consulta se mantén) e o número de visitas recibidas
-		dende o principio son amosadas no bolo que
-		aparece cando pasas co rato por riba do título.',
 'texte_compatibilite_html' => 'Pode pedir que SPIP produza, no sitio público, código compatible coa norma <i>HTML4</i>, ou permitirlle utilizar as posibilidades máis modernas do <i>HTML5</i>.',
 'texte_compatibilite_html_attention' => 'Non hai ningún risco ao activar a opción <i>HTML5</i>, pero se o fai, as páxinas do seu sitio deberán comezar pola seguinte mención para seren correctas : <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(comprimido ou non)',
@@ -912,7 +892,6 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
   <li>a natureza do motor tipográfico que SPIP ten que empregar para a reprodución dos textos;</li>
   <li>a lingua empregada nos formularios do web público;</li>
   <li>a lingua presentada por defecto no espazo privado.</li></ul>',
-'texte_signification' => 'As barras escuras representan as entradas acumuladas (total dos apartados), as barras claras o número de visitas para cada tema.',
 'texte_sous_titre' => 'Subtítulo',
 'texte_statistiques_visites' => '(barras escuras:  domingo / curva escura: evolución da media)',
 'texte_statut_attente_validation' => 'agardando pola validación',
@@ -974,7 +953,6 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'titre_configurer_preferences' => 'Configurar as súas preferencias',
 'titre_conflit_edition' => 'Conflito tras a edición',
 'titre_connexion_ldap' => 'Opcións: <b>A súa conexión LDAP</b>',
-'titre_evolution_visite' => 'Evolución das visitas',
 'titre_groupe_mots' => 'GRUPO DE PALABRAS:',
 'titre_identite_site' => 'Identidade do sitio',
 'titre_langue_article' => 'LINGUA DO ARTIGO',
@@ -1001,11 +979,9 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'titre_page_message_edit' => 'Redactar unha mensaxe',
 'titre_page_messagerie' => 'A túa mensaxería',
 'titre_page_recherche' => 'Resultados da procura de @recherche@',
-'titre_page_statistiques' => 'Estatísticas por temas',
 'titre_page_statistiques_referers' => 'Estatísticas (ligazóns entrantes)',
 'titre_page_statistiques_signatures_jour' => 'Número de sinaturas por día',
 'titre_page_statistiques_signatures_mois' => 'Número de sinaturas por mes',
-'titre_page_statistiques_visites' => 'Estatísticas das visitas',
 'titre_page_upgrade' => 'Posta ao día de SPIP',
 'titre_publication_articles_post_dates' => 'Publicación dos artigos con data posterior',
 'titre_referencer_site' => 'Referir o web:',

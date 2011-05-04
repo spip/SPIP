@@ -55,7 +55,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'בטל פעולה של הכל',
 'bouton_desinstaller' => 'הסר',
 'bouton_effacer_index' => 'מחיקת הרשימות',
-'bouton_effacer_statistiques' => 'מחק סטטיסטיקות',
 'bouton_effacer_tout' => 'מחיקת הכל',
 'bouton_envoi_message_02' => 'שליחת הודעה',
 'bouton_envoyer_message' => 'הודעה סופית : שלח',
@@ -111,6 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => '"H"',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'דוא"ל',
 'email_2' => 'דוא"ל:',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -189,7 +189,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'צור מדור חדש',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'שלח הודעה זו',
-'icone_evolution_visites' => 'התפתחות ביקורים<br />@visites@ ביקורים',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -233,7 +232,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => ':אל הכתובת',
 'info_adresse_url' => 'הכתובת הכללית של האתר הציבורי שלך',
 'info_afficher_visites' => ':הצג ביקורים ל',
-'info_affichier_visites_articles_plus_visites' => 'הצג ביקורים ל <b>the most visited articles since the beginning:</b>',
 'info_aide_en_ligne' => 'עזרה מקוונת ל-אס.פי.אי.פי',
 'info_ajout_image' => 'כאשר אתה מוסיף תמונות כמסמכים מצורפים למאמר,
  SPIP יכול ליצור עבורך, בצורה אוטומטית, מיניאטורות של
@@ -279,7 +277,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => '<sup>st</sup> מחוץ ל @liste@',
 'info_classement_2' => '<sup>th</sup> מחוץ ל @liste@',
 'info_code_acces' => '!אל תשכח את את קודי הגישה שלך',
-'info_comment_lire_tableau' => 'איך לקרוא את הגרף הזה',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :/b> מומלץ לבדוק מראש אם המאכסן מכווץ מקודם בצורה סיסטמטית את הסקריפטים php ; לשם כך, אתה יכול למשל להשתמש בשרות הבא : @testgzip@  ',
 'info_compresseur_texte' => 'אם השרת שלך אינו מכווץ אוטומטית את דפי ה-HTML על מנת לשלחם לגולשים, אתה יכול לנסות לאלץ את הכיווץ הזה על מנת להפחית את נפח הדפים המורדים.<b>שים לב</b> : הדבר יכול להאיט בצורה ניכרת כמה מסוגי שרתים ',
@@ -328,7 +325,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		à une mailing-list des rédacteurs, l\'annonce des demandes de
 		publication et des validations d\'articles.', # NEW
 'info_fichiers_authent' => '".htpasswd" אישור קובץ',
-'info_forum_statistiques' => 'סטטיסטיקות מבקרים',
 'info_forums_abo_invites' => 'Votre site comporte des forums sur abonnement ; les visiteurs sont donc invités à s\'enregistrer sur le site public.', # NEW
 'info_gauche_admin_effacer' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes fonctions de maintenance technique. Certaines d\'entre elles donnent lieu à un processus d\'authentification spécifique, qui exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes
@@ -448,8 +444,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_plus_cinq_car_2' => '(יותר מ-5 תווים)',
 'info_plus_trois_car' => '(יותר מ-3 תווים)',
 'info_popularite' => 'פופולריות: @popularite@; ביקורים: @visites@',
-'info_popularite_2' => ':פופולריות האתר',
-'info_popularite_3' => 'פופולריות: @popularite@; :ביקורים @visites@',
 'info_popularite_4' => 'פופולריות: @popularite@; פופולריות: @visites@',
 'info_post_scriptum' => 'פוסטסקריפט',
 'info_post_scriptum_2' => ':פוסטסקריפט',
@@ -458,7 +452,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_preview_comite' => 'Tous les rédacteurs peuvent prévisualiser le site', # NEW
 'info_preview_desactive' => 'La prévisualisation est totalement désactivée', # NEW
 'info_preview_texte' => 'אפשר לבקר את האתר בהקשפה מוקדמת כאילו כל המאמרים והמבזקים התפרסמו (עם לפחות הסטטוס "מוצע"). האם אתה רוצה להגיש אפשרות זו למנהלים בלבד, לכל מחברים או לכולם?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'הכתבים הראשיים שלך',
 'info_procedez_par_etape' => 'אנא המשך צעד אחר צעד',
 'info_procedure_maj_version' => 'la procédure de mise à jour doit être lancée afin d\'adapter
@@ -468,7 +461,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_publier' => 'לפרסם',
 'info_publies' => 'המאמרים שלך מפורסמים ברשת',
 'info_question_accepter_visiteurs' => 'Si les squelettes de votre site prévoient l\'enregistrement de visiteurs sans accès à l\'espace privé, veuillez activer l\'option ci-dessous :', # NEW
-'info_question_gerer_statistiques' => '?האם אתרך יכול לנהל סטטיסטיקות ביקורים',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptez-vous les inscriptions de nouveaux rédacteurs à
   partir du site public ? Si vous acceptez, les visiteurs pourront s\'inscrire
   depuis un formulaire automatisé et accéderont alors à l\'espace privé pour
@@ -480,9 +472,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
   impossible.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche intégré à SPIP ?
 	(le désactiver accélère le fonctionnement du système.)', # NEW
-'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 'info_racine_site' => 'בסיס האתר',
 'info_recharger_page' => '.אנא טען מחדש דף זה בעוד כמה רגעים',
 'info_recherche_auteur_a_affiner' => 'יותר מדי תוצאות ל"@cherche_auteur@"; אנא עדן את החיפוש שלך.',
@@ -565,7 +555,6 @@ dans une couleur qui indique leur état :', # NEW
 'info_urlref' => 'Lien hypertexte :', # NEW
 'info_utilisation_spip' => 'Vous pouvez maintenant commencer à utiliser le système de publication assistée...', # NEW
 'info_visites_par_mois' => 'Affichage par mois :', # NEW
-'info_visites_plus_populaires' => 'Afficher les visites pour <b>les articles les plus populaires</b> et pour <b>les derniers articles publiés :</b>', # NEW
 'info_visiteur_1' => 'המבקר',
 'info_visiteur_2' => 'אתר ציבורי',
 'info_visiteurs' => 'מבקרים',
@@ -608,7 +597,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_choix_redacteurs' => 'les rédacteurs', # NEW
 'item_choix_visiteurs' => 'les visiteurs du site public', # NEW
 'item_creer_fichiers_authent' => 'Créer les fichiers .htpasswd', # NEW
-'item_gerer_statistiques' => 'Gérer les statistiques', # NEW
 'item_limiter_recherche' => 'Limiter la recherche aux informations contenues dans votre site', # NEW
 'item_login' => 'הסינכ',
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
@@ -789,7 +777,6 @@ dans une couleur qui indique leur état :', # NEW
 'texte_admin_effacer_01' => 'Cette commande efface <i>tout</i> le contenu de la base de données,
 y compris <i>tous</i> les accès rédacteurs et administrateurs. Après l\'avoir exécutée, vous devrez lancer la
 réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier accès administrateur.', # NEW
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_adresse_annuaire_1' => '(Si votre annuaire est installé sur la même machine que ce site Web, il s\'agit probablement de «localhost».)', # NEW
 'texte_ajout_auteur' => 'L\'auteur suivant a été ajouté à l\'article :', # NEW
 'texte_annuaire_ldap_1' => 'Si vous avez accès à un annuaire (LDAP), vous pouvez l\'utiliser pour importer automatiquement des utilisateurs sous SPIP.', # NEW
@@ -807,13 +794,6 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 'texte_commande_vider_tables_indexation' => 'Utilisez cette commande afin de vider les tables d\'indexation utilisées
 			par le moteur de recherche intégré à SPIP. Cela vous permettra
 			de gagner de l\'espace disque.', # NEW
-'texte_comment_lire_tableau' => 'Le rang de l\'article,
-		dans le classement par popularité, est indiqué dans la
-		marge ; la popularité de l\'article (une estimation du
-		nombre de visites quotidiennes qu\'il recevra si le rythme actuel de
-		consultation se maintient) et le nombre de visites reçues
-		depuis le début sont affichées dans la bulle qui
-		apparaît lorsque la souris survole le titre.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(celui-ci peut être compressé ou non)', # NEW
@@ -910,7 +890,6 @@ recalculer une seule page, passez plutôt par l\'espace public et utilisez-y le 
 	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes ;</li>
 	<li> la langue utilisée dans les formulaires du site public ;</li>
 	<li> la langue présentée par défaut dans l\'espace privé.</li></ul>', # NEW
-'texte_signification' => 'Les barres foncées représentent les entrées cumulées (total des sous-rubriques), les barres claires le nombre de visites pour chaque rubrique.', # NEW
 'texte_sous_titre' => 'כתובית',
 'texte_statistiques_visites' => '(barres foncées :  dimanche / courbe foncée : évolution de la moyenne)', # NEW
 'texte_statut_attente_validation' => 'אימות ממתינים',
@@ -978,7 +957,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Options : <b>Votre connexion LDAP</b>', # NEW
-'titre_evolution_visite' => 'Évolution des visites', # NEW
 'titre_groupe_mots' => 'GROUPE DE MOTS :', # NEW
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LANGUE DE L\'ARTICLE', # NEW
@@ -1005,11 +983,9 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW
 'titre_page_recherche' => 'Résultats de la recherche @recherche@', # NEW
-'titre_page_statistiques' => 'Statistiques par rubriques', # NEW
 'titre_page_statistiques_referers' => 'Statistiques (liens entrants)', # NEW
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
-'titre_page_statistiques_visites' => 'Statistiques des visites', # NEW
 'titre_page_upgrade' => 'Mise à niveau de SPIP', # NEW
 'titre_publication_articles_post_dates' => 'Publication des articles post-datés', # NEW
 'titre_referencer_site' => 'Référencer le site :', # NEW

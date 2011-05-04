@@ -64,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Taqpach jiwt\'ayaña',
 'bouton_desinstaller' => 'Désinstaller', # NEW
 'bouton_effacer_index' => 'Utjirinaka chhaqhayaña',
-'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => '¡Taqpach chhaqhayaña!',
 'bouton_envoi_message_02' => 'MÄ YATIYAWI',
 'bouton_envoyer_message' => 'Qhananchat yatiyaw: apayaña',
@@ -122,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'aruskipayiri',
 'email_2' => 'aruskipayiri:
 ',
@@ -204,7 +204,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Mä machaq t\'aqa uñstayaña',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Yatiyawi apayaña',
-'icone_evolution_visites' => 'Tumpatanakan jilawi<br />@visites@ tumpatanaka',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -249,7 +248,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'utjawiru:',
 'info_adresse_url' => 'Utjawi (URL) jach\'a qamaw utata',
 'info_afficher_visites' => 'Tumpirinak uñachayaña ukataki:',
-'info_affichier_visites_articles_plus_visites' => 'Tumpirininak uñachayaña &lt;b&gt;qalltatpach qillqatanak juk\'amp tumpata:&lt;/b&gt;',
 'info_aide_en_ligne' => 'SPIP naktatat yanapa',
 'info_ajout_image' => 'Lorsque vous ajoutez des images en tant que documents joints à un article,
 		SPIP peut créer pour vous, automatiquement, des vignettes (miniatures) des
@@ -297,7 +295,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '° ukjaru @liste@ 
 ',
 'info_code_acces' => '¡Mantañ chimpunakam jan armasimti!',
-'info_comment_lire_tableau' => 'Kunjams aka cuadro liyt\'aña ',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
@@ -343,7 +340,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_exportation_base' => 'base ukax apsusispaw @archive@ uka tuqiru',
 'info_facilite_suivi_activite' => 'Qillqa lurawit uñch\'ukiw jasachañatakix, SPIP ukax aruskipayirit apayaspa, mä tanta qillqirinakar ukhama yatiyatawinakataki yatiyawinaka ukatak mayiwinaka, ukhamarak qillqatanakat iyaw sawi.',
 'info_fichiers_authent' => 'Chiqpach sirit q\'ipinaka «.htpasswd» ',
-'info_forum_statistiques' => 'Tumpatanakat tantiyirinaka',
 'info_forums_abo_invites' => 'Qamawimax aruskipañawinakaniw qullqimp qillqatanakatakikiwa; Aka jach\'a uta qamawinxa tumpirinakaru qillqayasiñataki jawthapiyi.',
 'info_gauche_admin_effacer' => '&lt;b&gt;Aka Web qamawix qamawit apnaqirinakatakikiwa.&lt;/b&gt;&lt;p&gt; Mantayiwa kunayman uñjawinakar  askichañataki. Yaqhipanakax', # MODIF
 'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes
@@ -462,8 +458,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_plus_cinq_car_2' => '(Plus de 5 caractères)', # NEW
 'info_plus_trois_car' => '(Plus de 3 caractères)', # NEW
 'info_popularite' => 'popularité : @popularite@ ; visites : @visites@', # NEW
-'info_popularite_2' => 'popularité du site :', # NEW
-'info_popularite_3' => 'popularité : @popularite@ ; visites : @visites@', # NEW
 'info_popularite_4' => 'popularité : @popularite@ ; visites : @visites@', # NEW
 'info_post_scriptum' => 'Post-Scriptum', # NEW
 'info_post_scriptum_2' => 'Post-scriptum :', # NEW
@@ -472,7 +466,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_preview_comite' => 'Tous les rédacteurs peuvent prévisualiser le site', # NEW
 'info_preview_desactive' => 'La prévisualisation est totalement désactivée', # NEW
 'info_preview_texte' => 'Il est possible de prévisualiser le site comme si tous les articles et les brèves (ayant au moins le statut « proposé ») étaient publiés. Cette possibilité doit-elle être ouverte aux administrateurs seulement, à tous les rédacteurs, ou à personne ?', # NEW
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Vos principaux correspondants', # NEW
 'info_procedez_par_etape' => 'procédez étape par étape', # NEW
 'info_procedure_maj_version' => 'la procédure de mise à jour doit être lancée afin d\'adapter
@@ -482,7 +475,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_publier' => 'publier', # NEW
 'info_publies' => 'Vos articles publiés en ligne', # NEW
 'info_question_accepter_visiteurs' => 'Si les squelettes de votre site prévoient l\'enregistrement de visiteurs sans accès à l\'espace privé, veuillez activer l\'option ci-dessous :', # NEW
-'info_question_gerer_statistiques' => 'Votre site doit-il gérer les statistiques des visites ?', # NEW
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptez-vous les inscriptions de nouveaux rédacteurs à
   partir du site public ? Si vous acceptez, les visiteurs pourront s\'inscrire
   depuis un formulaire automatisé et accéderont alors à l\'espace privé pour
@@ -494,9 +486,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
   impossible.</i></blockquote>', # NEW
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche intégré à SPIP ?
 	(le désactiver accélère le fonctionnement du système.)', # NEW
-'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 'info_racine_site' => 'Racine du site', # NEW
 'info_recharger_page' => 'Veuillez recharger cette page dans quelques instants.', # NEW
 'info_recherche_auteur_a_affiner' => 'Trop de résultats pour "@cherche_auteur@" ; veuillez affiner la recherche.', # NEW
@@ -579,7 +569,6 @@ dans une couleur qui indique leur état :', # NEW
 'info_urlref' => 'Lien hypertexte :', # NEW
 'info_utilisation_spip' => 'Vous pouvez maintenant commencer à utiliser le système de publication assistée...', # NEW
 'info_visites_par_mois' => 'Affichage par mois :', # NEW
-'info_visites_plus_populaires' => 'Afficher les visites pour <b>les articles les plus populaires</b> et pour <b>les derniers articles publiés :</b>', # NEW
 'info_visiteur_1' => 'Visiteur', # NEW
 'info_visiteur_2' => 'du site public', # NEW
 'info_visiteurs' => 'Visiteurs', # NEW
@@ -622,7 +611,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_choix_redacteurs' => 'les rédacteurs', # NEW
 'item_choix_visiteurs' => 'les visiteurs du site public', # NEW
 'item_creer_fichiers_authent' => 'Créer les fichiers .htpasswd', # NEW
-'item_gerer_statistiques' => 'Gérer les statistiques', # NEW
 'item_limiter_recherche' => 'Limiter la recherche aux informations contenues dans votre site', # NEW
 'item_login' => 'Login', # NEW
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
@@ -803,7 +791,6 @@ dans une couleur qui indique leur état :', # NEW
 'texte_admin_effacer_01' => 'Cette commande efface <i>tout</i> le contenu de la base de données,
 y compris <i>tous</i> les accès rédacteurs et administrateurs. Après l\'avoir exécutée, vous devrez lancer la
 réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier accès administrateur.', # NEW
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_adresse_annuaire_1' => '(Si votre annuaire est installé sur la même machine que ce site Web, il s\'agit probablement de «localhost».)', # NEW
 'texte_ajout_auteur' => 'L\'auteur suivant a été ajouté à l\'article :', # NEW
 'texte_annuaire_ldap_1' => 'Si vous avez accès à un annuaire (LDAP), vous pouvez l\'utiliser pour importer automatiquement des utilisateurs sous SPIP.', # NEW
@@ -821,13 +808,6 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 'texte_commande_vider_tables_indexation' => 'Utilisez cette commande afin de vider les tables d\'indexation utilisées
 			par le moteur de recherche intégré à SPIP. Cela vous permettra
 			de gagner de l\'espace disque.', # NEW
-'texte_comment_lire_tableau' => 'Le rang de l\'article,
-		dans le classement par popularité, est indiqué dans la
-		marge ; la popularité de l\'article (une estimation du
-		nombre de visites quotidiennes qu\'il recevra si le rythme actuel de
-		consultation se maintient) et le nombre de visites reçues
-		depuis le début sont affichées dans la bulle qui
-		apparaît lorsque la souris survole le titre.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(celui-ci peut être compressé ou non)', # NEW
@@ -924,7 +904,6 @@ recalculer une seule page, passez plutôt par l\'espace public et utilisez-y le 
 	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes ;</li>
 	<li> la langue utilisée dans les formulaires du site public ;</li>
 	<li> la langue présentée par défaut dans l\'espace privé.</li></ul>', # NEW
-'texte_signification' => 'Les barres foncées représentent les entrées cumulées (total des sous-rubriques), les barres claires le nombre de visites pour chaque rubrique.', # NEW
 'texte_sous_titre' => 'Sous-titre', # NEW
 'texte_statistiques_visites' => '(barres foncées :  dimanche / courbe foncée : évolution de la moyenne)', # NEW
 'texte_statut_attente_validation' => 'en attente de validation', # NEW
@@ -992,7 +971,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Options : <b>Votre connexion LDAP</b>', # NEW
-'titre_evolution_visite' => 'Évolution des visites', # NEW
 'titre_groupe_mots' => 'GROUPE DE MOTS :', # NEW
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LANGUE DE L\'ARTICLE', # NEW
@@ -1019,11 +997,9 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW
 'titre_page_recherche' => 'Résultats de la recherche @recherche@', # NEW
-'titre_page_statistiques' => 'Statistiques par rubriques', # NEW
 'titre_page_statistiques_referers' => 'Statistiques (liens entrants)', # NEW
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
-'titre_page_statistiques_visites' => 'Statistiques des visites', # NEW
 'titre_page_upgrade' => 'Mise à niveau de SPIP', # NEW
 'titre_publication_articles_post_dates' => 'Publication des articles post-datés', # NEW
 'titre_referencer_site' => 'Référencer le site :', # NEW

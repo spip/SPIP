@@ -58,7 +58,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'bouton_desactive_tout' => 'Dizenaouiñ pep tra',
 'bouton_desinstaller' => 'Distaliañ',
 'bouton_effacer_index' => 'Diverkañ ar menegerioù',
-'bouton_effacer_statistiques' => 'Diverkañ ar stadegoù',
 'bouton_effacer_tout' => 'Diverkañ PEP TRA',
 'bouton_envoi_message_02' => 'KAS UR GEMENNADENN',
 'bouton_envoyer_message' => 'Kemennadenn ziwezhañ : kas',
@@ -114,6 +113,7 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'date_mot_heures' => 'eur',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'postel',
 'email_2' => 'postel :',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -193,7 +193,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'icone_creer_rubrique_2' => 'Krouiñ ur rubrikenn nevez',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Kas ar gemennadenn-mañ',
-'icone_evolution_visites' => 'Emdroadur ar gweladennoù : <br />@visites@ gweladenn',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -236,7 +235,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'info_adresse' => 'er chomlec\'h :',
 'info_adresse_url' => 'Chomlec\'h (URL) al lec\'hienn foran',
 'info_afficher_visites' => 'Diskouez ar gweladennoù evit :',
-'info_affichier_visites_articles_plus_visites' => 'Diskouez ar gweladennoù evit <b>ar pennadoù lennet ar muiañ, abaoe an deroù :</b>',
 'info_aide_en_ligne' => 'Skoazell enlinenn SPIP',
 'info_ajout_image' => 'Pa ouzhpennit skeudennoù evel restroù stag ouzh ur pennad 
   e c\'hell SPIP krouiñ ent emgefre evidoc\'h skeudennoùigoù (bihanaet) eus
@@ -282,7 +280,6 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 'info_classement_1' => '<sup>añ</sup> war @liste@',
 'info_classement_2' => '<sup>vet</sup> war @liste@',
 'info_code_acces' => 'N\'ankouait ket ho kodoù moned !',
-'info_comment_lire_tableau' => 'Penaos lenn an daolenn-mañ',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Aliet eo gwiriañ mat en a-raok ha gwasket e vez dija en a-raok ar restroù php ent emgefre gant an herberc\'hier pe get. Evit se e c\'hellit implijout ar servij-mañ : @testgzip@',
 'info_compresseur_texte' => 'Ma ne vez ket gwasket ent emgefre ar pajennoù HTML gant ho servijer evit o c\'has d\'al lennerien e c\'hellit klask gwaskañ dre ret evit bihanaat ment ar pajennoù pellgarget.  <b>Diwallit</b> : gallout a ra kement-se gorrekaat servijerioù zo.',
@@ -330,7 +327,6 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
   d\'ul roll-skignañ enni ar skridaozerien da skouer,
   ar goulennoù embann ha kadarnaat ar pennadoù.',
 'info_fichiers_authent' => 'Restroù gwiriekaat « .htpasswd »',
-'info_forum_statistiques' => 'Stadegoù gweladenniñ',
 'info_forums_abo_invites' => 'Foromoù dre goumanant zo war ho lec\'hienn ; pedet e vez ar weladennerien d\'en em enrollañ war lodenn foran al lec\'hienn neuze.',
 'info_gauche_admin_effacer' => '<b>N\'eus nemet an dud e-karg eus al lec\'hienn a c\'hell mont war ar bajenn-mañ.</b><p>Warni e reer al labourioù-kempenn teknikel. Evit traoù zo ez eus ezhomm eus un argerzh testeniekaat dibar, a c\'houlenn kaout ur moned FTP ouzh al lec\'hienn.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>N\'eus nemet an dud e-karg eus al lec\'hienn a c\'hell mont war ar bajenn-mañ.</b><p> Warni e reer al labourioù kempenn teknikel. Evit traoù zo ez eus ezhomm eus un argerzh testeniekaat dibar a c\'houlenn kaout ur moned FTP ouzh al lec\'hienn.</p>', # MODIF
@@ -441,8 +437,6 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_plus_cinq_car_2' => '(Ouzhpenn 5 arouezenn)',
 'info_plus_trois_car' => '(Ouzhpenn 3 arouezenn)',
 'info_popularite' => 'brud; : @popularite@ ; gweladennoù : @visites@',
-'info_popularite_2' => 'brud al lec\'hienn :',
-'info_popularite_3' => 'brud; : @popularite@ ; gweladennoù : @visites@',
 'info_popularite_4' => 'brud; : @popularite@ ; gweladennoù : @visites@',
 'info_post_scriptum' => 'Goude-skrid',
 'info_post_scriptum_2' => 'Goude-skrid :',
@@ -451,7 +445,6 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_preview_comite' => 'Gallout a ra an holl skridaozerien rakwelet al lec\'hienn',
 'info_preview_desactive' => 'Diweredekaet-mik eo ar rakweled',
 'info_preview_texte' => 'Posupl eo rakwelet penaos e vefe al lec\'hienn ma vefe embannet an holl bennadoù hag an holl verrskridoù (dezho ar statud « kinniget » d\'an nebeutañ). Daoust ha dleout a rafe an holl skridaozerien gallout en ober, ar verourien hepken, pe den ebet ?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Ho kenskriverien bennañ',
 'info_procedez_par_etape' => 'kit war-raok pazenn-ha-pazenn',
 'info_procedure_maj_version' => 'rankout a ra al labour hizivaat bezañ lañset a-benn azasaat 
@@ -461,7 +454,6 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_publier' => 'embann',
 'info_publies' => 'Ho pennadoù bet embannet',
 'info_question_accepter_visiteurs' => 'M\'eo resisaet e frammoù ho lec\'hienn e c\'hall ar weladennerien en em enrollañ hep moned ouzh al lodenn brevez, gweredekait an dibarzh a-is :',
-'info_question_gerer_statistiques' => 'Ha rankout a ra ho lec\'hienn merañ stadegoù ar gweladennoù ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Hag aotren a rit e c\'hellfe skridaozerien nevez en em enrollañ adalek al lec\'hienn foran ?
   Ma asantit e c\'hello ar weladennerien en em enskrivañ adalek ur furmskrid emgefreek, 
   ha gouest e vint neuze da dizhout al lodenn brevez evit kinnig o fennadoù dezho o-unan.
@@ -471,9 +463,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
   en degouezh-se ne vo ket posupl en em enrollañ ent emgefre.</i></blockquote>',
 'info_question_utilisation_moteur_recherche' => 'Ha c\'hoant hoc\'h eus da ober gant lusker enklask diabarzh SPIP ?
  (diweredekaat anezhañ a laka ar reizhiad da vont buanoc\'h.)',
-'info_question_vignettes_referer' => 'En ur sellet ouzh ar stadegoù e c\'hallit teuler un tamm sell ouzh lec\'hiennoù orin ar weladennerien',
 'info_question_vignettes_referer_non' => 'Chom hep diskouez skeudennoùigoù lec\'hiennoù orin ar weladennerien',
-'info_question_vignettes_referer_oui' => 'Diskouez skeudennoùigoù lec\'hiennoù orin ar weladennerien',
 'info_racine_site' => 'Gwrizienn al lec\'hienn',
 'info_recharger_page' => 'Adkargit ar-bajenn-mañ a-raok pell, mar plij.',
 'info_recherche_auteur_a_affiner' => 'Re a zisoc\'hoù zo evit "@cherche_auteur@" ; resisait hoc\'h enklask mar plij.',
@@ -556,7 +546,6 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'info_urlref' => 'Liamm gourskrid :',
 'info_utilisation_spip' => 'Bremañ e c\'hellit kregiñ da implijout ar reizhiad embann ameilet...',
 'info_visites_par_mois' => 'Diskouez dre viz :',
-'info_visites_plus_populaires' => 'Diskouez ar gweladennoù evit <b>ar pennadoù brudetañ</b> hag evit <b>ar pennadoù nevez-embannet :</b>',
 'info_visiteur_1' => 'Gweladenner',
 'info_visiteur_2' => 'al lec\'hienn foran',
 'info_visiteurs' => 'Gweladenner',
@@ -599,7 +588,6 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'item_choix_redacteurs' => 'ar skridaozerien',
 'item_choix_visiteurs' => 'gweladennerien al lec\'hienn foran',
 'item_creer_fichiers_authent' => 'Krouiñ ar restroù .htpasswd',
-'item_gerer_statistiques' => 'Merañ ar stadegoù',
 'item_limiter_recherche' => 'Bevenniñ an enklask da ditouroù al lec\'hienn',
 'item_login' => 'Kod kevreañ',
 'item_messagerie_agenda' => 'Gweredekaat ar postelerezh hag an deiziataer',
@@ -780,7 +768,6 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'texte_admin_effacer_01' => 'Diverkañ a raio an urzhad-se <i>PEP TRA</i> en ho tiaz titouroù,
 da lavaret eo <i>holl</i> aotreoù ar verourien hag ar skridaozerien. Goude bezañ bet graet se e rankot
 adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kentañ nevez.',
-'texte_admin_effacer_stats' => 'Diverket e vo an holl roadoù a denn da stadegoù gweladenniñ al lec\'hienn, en o zouez ar re a heuilh berzh ar pennadoù.',
 'texte_adresse_annuaire_1' => '(M\'eo staliet ar roll tud war an hevelep mekanik hag al lec\'hienn-mañ, e tle bezañ «localhost».)',
 'texte_ajout_auteur' => 'Ouzhpennet eo bet ar skridaozer-mañ d\'ar pennad :',
 'texte_annuaire_ldap_1' => 'M\'hoc\'h eus tro d\'ober gant ur roll tud (LDAP) e c\'hellit e implijout evit enporzhiañ implijerien war SPIP ent emgefre.',
@@ -797,12 +784,6 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
 'texte_choix_table_prefix' => 'Rakger an taolennoù :',
 'texte_commande_vider_tables_indexation' => 'Grit gant an urzhiad-mañ a-benn goullonderiñ an taolennoù menegeriñ implijet
    gant lusker enklask diabarzh SPIP. Gounit a reot plas war ho pladenn.',
-'texte_comment_lire_tableau' => 'Renk ar pennad,
-  hervez e vrud, a c\'haller gwelet er marz;
-  brud ar pennad (o rakwelet pet gweladenn en do bemdez ma kendalc\'h
-  ar gweladenniñ d\'ar memes lusk) hag an niver a weladennoù abaoe
-  an deroù a c\'heller gwelet er lagadenn a zeu war wel
-  pa dremen al logodenn war an titl.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(hennezh a c\'hell bezañ gwasket pe get)',
@@ -882,7 +863,6 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
  <li> peseurt lusker skrivañ a rank bezañ implijet gant SPIP evit diskouez an testennoù ;</li>
  <li> ar yezh implijet e furmskridoù al lodenn foran ;</li>
  <li> ar yezh implijet dre ziouer el lodenn brevez.</li></ul>',
-'texte_signification' => 'Diskouez a ra ar barrennoù teñval sammad ar gweladennoù bodet (hollad an isrubrikennoù), hag ar barrennoù sklaer an niver a weladennoù evit pep rubrikenn.',
 'texte_sous_titre' => 'Istitl',
 'texte_statistiques_visites' => '(barrennoù teñval :  Sul / krommenn deñval : emdroadur ar geidenn)',
 'texte_statut_attente_validation' => 'o c\'hortoz bezañ asantet',
@@ -937,7 +917,6 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Bec\'h e-ser embann',
 'titre_connexion_ldap' => 'Dibarzhioù : <b>Ho kevreadenn LDAP</b>',
-'titre_evolution_visite' => 'Emdroadur ar gweladennoù',
 'titre_groupe_mots' => 'STROLLAD GERIOÙ :',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'YEZH AR PENNAD',
@@ -964,11 +943,9 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
 'titre_page_message_edit' => 'Skrivañ ur gemennadenn',
 'titre_page_messagerie' => 'Ho postelerezh',
 'titre_page_recherche' => 'Disoc\'hoù an enklask @recherche@',
-'titre_page_statistiques' => 'Stadegoù dre rubrikennoù',
 'titre_page_statistiques_referers' => 'Stadegoù (liammoù davet al lec\'hienn-mañ)',
 'titre_page_statistiques_signatures_jour' => 'Niver a sinadurioù bemdez',
 'titre_page_statistiques_signatures_mois' => 'Niver a sinadurioù bep miz',
-'titre_page_statistiques_visites' => 'Stadegoù gweladenniñ',
 'titre_page_upgrade' => 'Hizivaat SPIP',
 'titre_publication_articles_post_dates' => 'Embann ar pennadoù deiziataet a-c\'houde',
 'titre_referencer_site' => 'Menegeriñ war al lec\'hienn :',
