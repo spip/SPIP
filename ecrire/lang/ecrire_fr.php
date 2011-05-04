@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'heures',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@',
 'email' => 'email',
 'email_2' => 'email :',
 'en_savoir_plus' => 'En savoir plus',
