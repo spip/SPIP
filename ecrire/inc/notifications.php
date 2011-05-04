@@ -88,10 +88,8 @@ function notifications_envoyer_mails($emails, $texte, $sujet="", $from = "", $he
 		$email = $envoi['email'];
 		$sujet = $envoi['sujet'];
 		$texte = $envoi['texte'];
-		if (function_exists('job_queue_add'))
-			job_queue_add('envoyer_mail', ">$email : $sujet", array($email, $sujet, $texte, $from, $headers), 'inc/');
-		else
-			$envoyer_mail($email, $sujet, $texte, $from, $headers);
+
+		job_queue_add('envoyer_mail', ">$email : $sujet", array($email, $sujet, $texte, $from, $headers), 'inc/');
 	}
 
 }
