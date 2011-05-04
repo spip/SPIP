@@ -261,7 +261,7 @@ $liste_des_statuts = array(
 	"info_administrateurs" => '0minirezo',
 	"info_redacteurs" =>'1comite',
 	"info_visiteurs" => '6forum',
-	"info_statut_site_4" => '5poubelle'
+	"texte_statut_poubelle" => '5poubelle'
 );
 
 $liste_des_etats = array(
