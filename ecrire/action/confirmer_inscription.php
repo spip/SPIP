@@ -34,6 +34,7 @@ function action_confirmer_inscription_dist() {
 		auteur_effacer_jeton($auteur['id_auteur']);
 
 		// si pas de redirection demandee, rediriger vers public ou prive selon le statut de l'auteur
+		// TODO : ne semble pas marcher si inscrit non visiteur, a debug
 		if (!_request('redirect')){
 			if (autoriser('ecrire'))
 				$GLOBALS['redirect'] = _DIR_RESTREINT_ABS;
