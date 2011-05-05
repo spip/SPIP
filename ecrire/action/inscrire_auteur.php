@@ -46,6 +46,7 @@ function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = ar
 		return _T('titre_probleme_technique');
 
 	$row = sql_fetch($res);
+	sql_free($res);
 	// s'il n'existe pas deja, creer les identifiants
 	$desc = $row ? $row : inscription_nouveau($desc);
 
