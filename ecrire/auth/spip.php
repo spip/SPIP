@@ -157,8 +157,8 @@ function auth_spip_modifier_login($new_login, $id_auteur, $serveur=''){
 
 	// vider le login des auteurs a la poubelle qui avaient ce meme login
 	if (strlen($new_login)){
-		$anciens = sql_select('id_auteur','spip_auteurs','login='.sql_quote($new_login)." AND statut='5poubelle'",'','','','',$serveur);
-		while ($row = sql_fetch($anciens)){
+		$anciens = sql_allfetsel('id_auteur','spip_auteurs','login='.sql_quote($new_login)." AND statut='5poubelle'",'','','','',$serveur);
+		while ($row = array_pop($anciens)){
 			auteur_modifier($row['id_auteur'], array('login'=>''), true); // manque la gestion de $serveur
 		}
 	}
@@ -322,6 +322,7 @@ function auth_spip_synchroniser_distant($id_auteur, $champs, $options = array(),
 					$p2 .= $t['login'].':'.$t['htpass']."\n";
 			}
 		}
+		sql_free($s);
 		if ($p1) {
 			ecrire_fichier($htpasswd, $p1);
 			ecrire_fichier($htpasswd.'-admin', $p2);
