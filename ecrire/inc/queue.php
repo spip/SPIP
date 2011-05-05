@@ -108,9 +108,15 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 	if ($id_job){
 		queue_update_next_job_time($time);
 	}
+	// si la mise en file d'attente du job echoue,
+	// il ne faut pas perdre l'execution de la fonction
+	// on la lance immediatement, c'est un fallback
+	else {
+		$set_job['id_job'] = 0;
+		queue_start_job($set_job);
+	}
 
 	return $id_job;
-
 }
 
 /**
