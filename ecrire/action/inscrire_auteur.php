@@ -281,7 +281,7 @@ function confirmer_statut_inscription($auteur){
 	// securite
 	if ($auteur['statut'] != 'nouveau') return $auteur;
 
-	if (!($s = tester_statut_inscription('', $auteur['prefs'])))
+	if (!($s = tester_statut_inscription($auteur['prefs'])))
 		return $auteur;
 
 	include_spip('action/editer_auteur');
