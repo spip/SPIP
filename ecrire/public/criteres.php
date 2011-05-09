@@ -1103,13 +1103,17 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 		elseif (count($index)==2){
 			list($t, $col) = $t[$col];
 		}
-		else 	{
+		elseif (count($index)==1){
 			list($calculer_critere_externe) = $index;
 			$t = $table;
 		}
-	} else if (isset($exceptions_des_jointures[$col]))
+		else
+			$t =''; // jointure non declaree. La trouver.
+	}
+	elseif (isset($exceptions_des_jointures[$col]))
 		list($t, $col) = $exceptions_des_jointures[$col];
-	else $t =''; // jointure non declaree. La trouver.
+	else
+		$t =''; // jointure non declaree. La trouver.
 
 	$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
 
