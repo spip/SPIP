@@ -991,6 +991,7 @@ function calculer_critere_infixe_externe(&$boucle, $crit, $op, $desc, $col, $col
 	// gestion par les plugins des jointures tordues 
 	// pas automatiques mais necessaires
 	if (is_array($exceptions_des_jointures[$table])) {
+
 		$t = $exceptions_des_jointures[$table];
 		$index = isset($t[$col])
 		?  $t[$col] : (isset($t['']) ? $t[''] : array());
@@ -999,11 +1000,14 @@ function calculer_critere_infixe_externe(&$boucle, $crit, $op, $desc, $col, $col
 			list($t, $col, $calculer_critere_externe) = $index;
 		elseif (count($index)==2)
 			list($t, $col) = $t[$col];
-		else 	{
+		elseif (count($index)==1){
 			list($calculer_critere_externe) = $index;
 			$t = $table;
 		}
-	} else if (isset($exceptions_des_jointures[$col]))
+		else
+			$t=''; // jointure non declaree. La trouver.
+	}
+	elseif (isset($exceptions_des_jointures[$col]))
 		list($t, $col) = $exceptions_des_jointures[$col];
 	else $t =''; // jointure non declaree. La trouver.
 
