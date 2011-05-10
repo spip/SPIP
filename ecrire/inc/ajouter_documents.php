@@ -438,6 +438,8 @@ function corriger_extension($ext) {
 		return 'jpg';
 	case 'tiff':
 		return 'tif';
+	case 'mpeg':
+		return 'mpg';
 	default:
 		return $ext;
 	}
