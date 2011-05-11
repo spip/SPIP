@@ -1,0 +1,8 @@
+[(#REM)
+	Affiche la liste des auteurs d'un article
+][(#REM)
+	Modele pour la balise #LESAUTEURS, dans le cas des auteurs d'un article
+	(pour un article syndique, la balise affiche directement la valeur du champ)
+]
+<BOUCLE_auteurs(AUTEURS) {id_article} {par nom} {", "}>
+<span class="vcard author"><a class="url fn spip_in" href="#URL_AUTEUR">#NOM</a></span></BOUCLE_auteurs>
