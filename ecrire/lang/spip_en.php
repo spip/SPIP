@@ -244,7 +244,7 @@ the address below. (Otherwise your request will be ignored.):
 'form_email_non_valide' => 'Your email address is not valid.',
 'form_forum_access_refuse' => 'You no longer have access to this site.',
 'form_forum_bonjour' => 'Hello @nom@,',
-'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
+'form_forum_confirmer_email' => 'To confirm your email address, follow this link: @url_confirm@',
 'form_forum_email_deja_enregistre' => 'This email address is already registered. Enter your usual password.',
 'form_forum_identifiant_mail' => 'Your new identifier has just been emailed to you.',
 'form_forum_identifiants' => 'Personal identifiers',
@@ -472,7 +472,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 'infos_vos_pense_bete' => 'Your memos',
 
 // L
-'label_poids_fichier' => 'Taille', # NEW
+'label_poids_fichier' => 'Size',
 'lien_afficher_icones_seuls' => 'Show only icons',
 'lien_afficher_texte_icones' => 'Show icons and text',
 'lien_afficher_texte_seul' => 'Show only text',
