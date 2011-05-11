@@ -1092,8 +1092,6 @@ squelettes-dist/formulaires/mot_de_passe.php -text
 squelettes-dist/formulaires/oubli.php -text
 squelettes-dist/formulaires/recherche.php -text
 squelettes-dist/identifiants.html -text
-squelettes-dist/modeles/article_traductions.html -text
-squelettes-dist/modeles/favicon.html -text
 squelettes-dist/modeles/lesauteurs.html -text
 squelettes-dist/robots.txt.html -text
 squelettes-dist/sitemap.xml.html -text
