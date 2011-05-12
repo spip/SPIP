@@ -527,7 +527,7 @@ function autoriser_rubrique_previsualiser_dist($faire,$quoi,$id,$qui,$opts){
 
 // http://doc.spip.org/@autoriser_rubrique_iconifier_dist
 function autoriser_rubrique_iconifier_dist($faire,$quoi,$id,$qui,$opts){
-	return autoriser('publierdans', 'rubrique', $id, $qui, $opt);
+	return autoriser('publierdans', 'rubrique', $id, $qui, $opts);
 }
 // http://doc.spip.org/@autoriser_auteur_iconifier_dist
 function autoriser_auteur_iconifier_dist($faire,$quoi,$id,$qui,$opts){
