@@ -450,10 +450,11 @@ function table_objet($type,$serveur='') {
 			return $desc['id_table'];
 		elseif ($desc = $trouver_table($type,$serveur))
 			return $desc['id_table'];
+
+		spip_log( 'table_objet('.$type.') calculee sans verification', _LOG_AVERTISSEMENT);
 	}
 
-	spip_log( 'table_objet('.$type.') calculee sans verification', _LOG_AVERTISSEMENT);
-	return rtrim($type,'s')."s"; # cas historique ne devant plus servir
+	return rtrim($type,'s')."s"; # cas historique ne devant plus servir, sauf si $serveur=false
 }
 
 // http://doc.spip.org/@table_objet_sql
