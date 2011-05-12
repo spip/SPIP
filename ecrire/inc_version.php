@@ -92,7 +92,7 @@ OR (_EXTENSION_PHP AND @file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . _EXTENS
 // Constante utilisee par le compilateur et le decompilateur
 // sa valeur etant traitee par inc_traduire_dist
 
-if (!defined('MODULES_IDIOMES')) define('MODULES_IDIOMES', 'public/spip/ecrire');
+if (!defined('MODULES_IDIOMES')) define('MODULES_IDIOMES', 'public|spip|ecrire');
 
 // *** Fin des define *** //
 
@@ -292,7 +292,7 @@ $liste_des_authentifications = array(
 $spip_version_branche = "3.0.0-dev";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
-$spip_version_code = 17563;
+$spip_version_code = 17873;
 // version de la base SQL (= numero SVN de sa derniere modif)
 $spip_version_base = 17743;
 
