@@ -1931,7 +1931,9 @@ class sqlite_requeteur {
 				if (strtoupper(substr(ltrim($query), 0, 6))=='SELECT'){
 					if ($r){
 						$l = $this->link->query($query);
-						$r->spipSqliteRowCount = count($l->fetchAll());
+						$i = 0;
+						while ($l->fetch()) $i++;
+						$r->spipSqliteRowCount = $i;
 						unset($l);
 					} elseif (is_a($r, 'PDOStatement')) {
 						$r->spipSqliteRowCount = 0;
