@@ -45,6 +45,16 @@
 <INCLURE{fond=prive/objets/contenu/article,id=#ID_ARTICLE,virtuel=oui,ajax=wysiwyg}>
 </div>
 
+[(#AUTORISER{modifier,article,#ID_ARTICLE})
+
+	[(#ID_ARTICLE|afficher_qui_edite{article}|non)
+		[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}|icone_verticale{<:icone_modifier_article:>,article,edit,right ajax preload})]
+	]
+	[(#ID_ARTICLE|afficher_qui_edite{article}|oui)
+		[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}|icone_verticale{#ID_ARTICLE|afficher_qui_edite{article},warning-24,'',right ajax preload})]
+	]
+]
+
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,article,id,#ID_ARTICLE},data,'<div class="nettoyeur"></div>'}}
 
 #BOITE_FERMER
