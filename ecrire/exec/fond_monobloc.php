@@ -78,12 +78,14 @@ function exec_fond_monobloc_dist(){
 	}
 
 	echo debut_gauche("exec_$exec",true);
+
 	$contexte = array('exec'=>$exec);
-	$objet = objet_type(preg_replace(",_edit$,","",$exec));
-	$id = id_table_objet($objet);
-	if (_request($id))
-		$contexte[$id] = _request($id);
-	
+	if ($objet_exec = trouver_objet_exec($exec)){
+		$id = $objet_exec['id_table_objet'];
+		if (_request($id))
+			$contexte[$id] = _request($id);
+	}
+
 	echo $navigation;
 	echo pipeline('affiche_gauche',array('args'=>$contexte,'data'=>''));
 
