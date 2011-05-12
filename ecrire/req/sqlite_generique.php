@@ -1243,7 +1243,7 @@ function _sqlite_init(){
 function _sqlite_is_version($version = '', $link = '', $serveur = '', $requeter = true){
 	if ($link==='') $link = _sqlite_link($serveur);
 	if (!$link) return false;
-	if (is_a($link, 'PDO')){
+	if ($link instanceof PDO){
 		$v = 3;
 	} else {
 		$v = 2;
@@ -1935,7 +1935,7 @@ class sqlite_requeteur {
 						while ($l->fetch()) $i++;
 						$r->spipSqliteRowCount = $i;
 						unset($l);
-					} elseif (is_a($r, 'PDOStatement')) {
+					} elseif ($r instanceof PDOStatement) {
 						$r->spipSqliteRowCount = 0;
 					}
 				}
