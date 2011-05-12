@@ -14,13 +14,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
-function retrouve_auteur($id_auteur,$jeton){
+function retrouve_auteur($id_auteur,$jeton=''){
 	if ($id_auteur=intval($id_auteur)) {
 		return sql_fetsel('*','spip_auteurs',array('id_auteur='.intval($id_auteur),"statut<>'5poubelle'","pass<>''"));
 	}
-	elseif ($p=_request('p')) {
+	elseif ($jeton) {
 		include_spip('action/inscrire_auteur');
-		if ($auteur = auteur_verifier_jeton($p)
+		if ($auteur = auteur_verifier_jeton($jeton)
 		  AND $auteur['statut']<>'5poubelle'
 		  AND $auteur['pass']<>''){
 			return $auteur;
@@ -39,10 +39,11 @@ function retrouve_auteur($id_auteur,$jeton){
  * @param int $id_auteur
  * @return array
  */
-function formulaires_mot_de_passe_charger_dist($id_auteur=null){
+function formulaires_mot_de_passe_charger_dist($id_auteur=null, $jeton=null){
 
 	$valeurs = array();
-	$jeton = _request('p');
+	// compatibilite anciens appels du formulaire
+	if (is_null($jeton)) $jeton = _request('p');
 	$auteur = retrouve_auteur($id_auteur,$jeton);
 
 	if ($auteur){
@@ -64,12 +65,18 @@ function formulaires_mot_de_passe_charger_dist($id_auteur=null){
  *
  * @param int $id_auteur
  */
-function formulaires_mot_de_passe_verifier_dist($id_auteur=null){
+function formulaires_mot_de_passe_verifier_dist($id_auteur=null, $jeton=null){
 	$erreurs = array();
 	if (!_request('oubli'))
 		$erreurs['oubli'] = _T('info_obligatoire');
-	else if (strlen(_request('oubli')) < 6)
+	else if (strlen($p=_request('oubli')) < 6)
 		$erreurs['oubli'] = _T('info_passe_trop_court');
+	else {
+		if (!is_null($c = _request('oubli_confirm'))){
+			if ($c!==$p)
+				$erreurs['oubli'] = _T('info_passes_identiques');
+		}
+	}
 
 	return $erreurs;
 }
@@ -80,10 +87,11 @@ function formulaires_mot_de_passe_verifier_dist($id_auteur=null){
  *
  * @param int $id_auteur
  */
-function formulaires_mot_de_passe_traiter_dist($id_auteur=null){
+function formulaires_mot_de_passe_traiter_dist($id_auteur=null, $jeton=null){
 	$message = '';
 
-	$jeton = _request('p');
+	// compatibilite anciens appels du formulaire
+	if (is_null($jeton)) $jeton = _request('p');
 	$row = retrouve_auteur($id_auteur,$jeton);
 
 	if ($row
