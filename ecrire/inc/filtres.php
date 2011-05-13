@@ -2405,7 +2405,7 @@ function bando_images_background(){
 /**
  * Trouver une eventuelle css de surcharge dans le theme prive
  * a inclure dans les styles prives
- * 
+ *
  * @return <type>
  */
 function bando_style_prive_theme() {
@@ -2699,12 +2699,13 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
 	// mettre a jour le fichier si il n'existe pas
 	// ou trop ancien
   if (!file_exists($filename)
-	  OR filemtime($filename)<$cache['lastmodified']){
+	  OR ($cache['lastmodified'] AND filemtime($filename)<$cache['lastmodified'])
+    OR _VAR_MODE=='recalcul'){
 
 	  $contenu = $cache['texte'];
 	  // passer les urls en absolu si c'est une css
 	  if ($extension=="css")
-	    $contenu = urls_absolues_css($contenu, generer_url_public($fond));
+	    $contenu = urls_absolues_css($contenu, test_espace_prive()?generer_url_ecrire('accueil'):generer_url_public($fond));
 
     $comment = "/* #PRODUIRE{fond=$fond";
     foreach($contexte as $k=>$v)
