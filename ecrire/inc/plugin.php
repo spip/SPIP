@@ -58,14 +58,16 @@ function liste_plugin_files($dir_plugins = null){
 // http://doc.spip.org/@plugin_version_compatible
 function plugin_version_compatible($intervalle,$version){
 	if (!strlen($intervalle)) return true;
-	if (!preg_match(',^[\[\(]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-]*)[\]\)]$,',$intervalle,$regs)) return false;
-	#var_dump("$version::$intervalle");
+	if (!preg_match(',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,',$intervalle,$regs)) return false;
+	#var_dump("arguments : $version::$intervalle");
+	// Extraction des bornes et traitement de * pour la borne sup uniquement
+	// On autorise uniquement les ecritures 3.0.*, 3.*
 	$minimum = $regs[1];
 	$maximum = $regs[2];
+	$maximum = str_replace('.*', '', $maximum);
 	$minimum_inc = $intervalle{0}=="[";
 	$maximum_inc = substr($intervalle,-1)=="]";
-	#var_dump("$version::$minimum_inc::$minimum::$maximum::$maximum_inc");
-	#var_dump(spip_version_compare($version,$minimum,'<'));
+	#var_dump("borne inf : $minimum::$minimum_inc - borne sup : $maximum::$maximum_inc");
 	if (strlen($minimum)){
 		if ($minimum_inc AND spip_version_compare($version,$minimum,'<')) return false;
 		if (!$minimum_inc AND spip_version_compare($version,$minimum,'<=')) return false;
