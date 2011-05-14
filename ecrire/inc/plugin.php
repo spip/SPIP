@@ -26,16 +26,27 @@ function spip_version_compare($v1,$v2,$op=null){
 	$v2 = strtolower(preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|pl|p),i','\\1.\\2',$v2));
 	$v1 = str_replace('rc','RC',$v1); // certaines versions de PHP ne comprennent RC qu'en majuscule
 	$v2 = str_replace('rc','RC',$v2); // certaines versions de PHP ne comprennent RC qu'en majuscule
+
 	$v1 = explode('.',$v1);
 	$v2 = explode('.',$v2);
+	// $v1 est toujours une version, donc sans etoile
 	while (count($v1)<count($v2))
 		$v1[] = '0';
-	while (count($v2)<count($v1))
-		$v2[] = '0';
+
+	// $v2 peut etre une borne, donc accepte l'etoile
+	$etoile = false;
+	foreach ($v1 as $k => $v) {
+		if (!isset($v2[$k]))
+			$v2[] = ($etoile AND (is_numeric($v) OR $v=='pl' OR $v=='p')) ? $v : '0';
+		else if ($v2[$k] == '*') {
+			$etoile = true;
+			$v2[$k] = $v;
+		}
+	}
 	$v1 = implode('.',$v1);
 	$v2 = implode('.',$v2);
 
-	return $op?version_compare($v1, $v2, $op):version_compare($v1, $v2);
+	return $op?version_compare($v1, $v2,$op):version_compare($v1, $v2);
 }
 
 // lecture des sous repertoire plugin existants
@@ -81,7 +92,6 @@ function plugin_version_compatible($intervalle,$version){
 	// -- on autorise uniquement les ecritures 3.0.*, 3.*
 	$minimum = $regs[1];
 	$maximum = $regs[2];
-	$maximum = str_replace('.*', '', $maximum);
 	$minimum_inc = $intervalle{0}=="[";
 	$maximum_inc = substr($intervalle,-1)=="]";
 
