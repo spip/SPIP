@@ -1191,8 +1191,9 @@ function extraire_multi($letexte, $lang=null, $echappe_span=false) {
 				$typographie = charger_fonction(lang_typo($l), 'typographie');
 				$trad = traiter_retours_chariots($typographie($trad));
 				include_spip('inc/texte');
-				$trad_propre = propre($trad);
 				// Tester si on echappe en span ou en div
+				// il ne faut pas echapper en div si propre produit un seul paragraphe
+				$trad_propre = preg_replace(",(^<p[^>]*>|</p>$),Uims","",propre($trad));
 				$mode = preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $trad_propre) ? 'div' : 'span';
 				$trad = code_echappement($trad, 'multi', false, $mode);
 				$trad = str_replace("'", '"', inserer_attribut($trad, 'lang', $l));
