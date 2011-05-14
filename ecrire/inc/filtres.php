@@ -880,6 +880,7 @@ function affdate_base($numdate, $vue, $param = '') {
 
 	switch ($vue) {
 	case 'saison':
+		$saison = '';
 		if ($mois > 0){
 			$saison = 1;
 			if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = 2;
@@ -887,7 +888,7 @@ function affdate_base($numdate, $vue, $param = '') {
 			if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = 4;
 			if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = 1;
 		}
-		return _T('date_saison_'.$saison);
+		return $saison?_T('date_saison_'.$saison):'';
 
 	case 'court':
 		if ($avjc) return $annee;
