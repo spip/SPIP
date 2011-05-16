@@ -63,6 +63,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'texte_logo_objet' => 'logo_article',
 				'titre' => 'titre, lang',
 				'date' => 'date',
+				'champs_editables' => array('surtitre', 'titre', 'soustitre', 'descriptif','nom_site', 'url_site', 'chapo', 'texte', 'ps','virtuel'),
 				'champs_versionnes' => array('id_rubrique', 'surtitre', 'titre', 'soustitre', 'jointure_auteurs', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps'),
 				'rechercher_champs' => array(
 					'surtitre' => 5, 'titre' => 8, 'soustitre' => 5, 'chapo' => 3,
@@ -109,6 +110,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'texte_logo_objet' => 'logo_auteur',
 				'titre' => "nom AS titre, '' AS lang",
 				'date' => 'date',
+				'champs_editables' => array('nom','email','bio','nom_site','url_site','imessage','pgp'),
 				'champs_versionnes' => array('nom', 'bio', 'email', 'nom_site', 'url_site', 'login'),
 				'rechercher_champs' => array(
 					'nom' => 5, 'bio' => 1, 'email' => 1, 'nom_site' => 1, 'url_site' => 1, 'login' => 1
@@ -169,6 +171,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'texte_logo_objet' => 'logo_rubrique',
 				'titre'=>'titre, lang',
 				'date' => 'date',
+				'champs_editables' => array('titre', 'texte', 'descriptif', 'extra'),
 				'champs_versionnes' => array('titre', 'descriptif', 'texte'),
 				'rechercher_champs' => array(
 					'titre' => 8, 'descriptif' => 5, 'texte' => 1

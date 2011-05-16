@@ -56,13 +56,10 @@ function article_modifier($id_article, $set=null) {
 	trop_longs_articles();
 
 	include_spip('inc/modifier');
+	include_spip('inc/filtres');
 	$c = collecter_requests(
 		// white list
-		array(
-			'surtitre', 'titre', 'soustitre', 'descriptif',
-			'nom_site', 'url_site', 'chapo', 'texte', 'ps',
-			'virtuel',
-		),
+		objet_info('article','champs_editables'),
 		// black list
 		array('date','statut','id_parent'),
 		// donnees eventuellement fournies
