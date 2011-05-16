@@ -815,9 +815,7 @@ prive/squelettes/inclure/configurer.html -text
 prive/squelettes/inclure/head.html -text
 prive/squelettes/inclure/pied.html -text
 prive/squelettes/inclure/plan-articles.html -text
-prive/squelettes/inclure/plan-breves.html -text
 prive/squelettes/inclure/plan-rubriques.html -text
-prive/squelettes/inclure/plan-sites.html -text
 prive/squelettes/navigation/accueil.html -text
 prive/squelettes/navigation/admin_tech.html -text
 prive/squelettes/navigation/article.html -text
