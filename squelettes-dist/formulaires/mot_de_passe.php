@@ -55,6 +55,7 @@ function formulaires_mot_de_passe_charger_dist($id_auteur=null, $jeton=null){
 		$valeurs['_hidden'] = _T('pass_erreur_code_inconnu');
 		$valeurs['editable'] =  false; // pas de saisie
 	}
+	$valeurs['oubli']='';
 	return $valeurs;
 }
 
@@ -73,9 +74,15 @@ function formulaires_mot_de_passe_verifier_dist($id_auteur=null, $jeton=null){
 		$erreurs['oubli'] = _T('info_passe_trop_court');
 	else {
 		if (!is_null($c = _request('oubli_confirm'))){
-			if ($c!==$p)
+			if (!$c)
+				$erreurs['oubli_confirm'] = _T('info_obligatoire');
+			elseif ($c!==$p)
 				$erreurs['oubli'] = _T('info_passes_identiques');
 		}
+	}
+	if (isset($erreurs['oubli'])){
+		set_request('oubli');
+		set_request('oubli_confirm');
 	}
 
 	return $erreurs;
