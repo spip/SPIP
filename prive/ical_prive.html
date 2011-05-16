@@ -27,16 +27,16 @@ CATEGORIES:<:icone_a_suivre|filtrer_ical:>
 URL:[(#URL_ECRIRE{accueil})]
 END:VTODO</B_article><BOUCLE_breve(BREVES){lang_select=non}{par date}{inverse}{statut="prop"}>
 BEGIN:VEVENT
-SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]] <:item_breve_proposee:>
+SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]] <:breves:item_breve_proposee:>
 UID:breve#ID_BREVE @ [(#URL_SITE_SPIP|filtrer_ical)]
 DTSTAMP:[(#DATE|date_ical)]
 DTSTART:[(#DATE|date_ical)]
-CATEGORIES:<:item_breve_proposee:>
+CATEGORIES:<:breves:item_breve_proposee:>
 URL:URL_ECRIRE{breves_voir, id_breve=#ID_BREVE}
 END:VEVENT</BOUCLE_breve>
 BEGIN:VTODO
-SUMMARY:<:info_breves_valider|filtrer_ical:>: #TOTAL_BOUCLE [[(#NOM_SITE_SPIP|filtrer_ical)]]
-UID:<:info_breves_valider|filtrer_ical:> #DATE [(#URL_SITE_SPIP|filtrer_ical)]
+SUMMARY:<:breves:info_breves_valider|filtrer_ical:>: #TOTAL_BOUCLE [[(#NOM_SITE_SPIP|filtrer_ical)]]
+UID:<:breves:info_breves_valider|filtrer_ical:> #DATE [(#URL_SITE_SPIP|filtrer_ical)]
 DESCRIPTION:<BOUCLE_breve2(BREVES){lang_select=non}{par date}{inverse}{statut="prop"}>#TITRE / </BOUCLE_breve2>
 DTSTAMP:[(#DATE|date_ical)]
 DTSTART:[(#DATE|date_ical)]
