@@ -33,7 +33,7 @@ function formulaires_inscription_verifier_dist($mode='6forum', $id=0) {
 	$erreurs = array();
 	include_spip('inc/filtres');	
 	if (!tester_config($id, $mode) OR (strlen(_request('nobot'))>0))
-		$erreurs['message_erreur'] = _T('rien_a_faire_ici');
+		$erreurs['message_erreur'] = _T('pass_rien_a_faire_ici');
 
 	if (!$nom = _request('nom_inscription'))
 		$erreurs['nom_inscription'] = _T("info_obligatoire");
