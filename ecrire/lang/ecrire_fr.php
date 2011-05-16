@@ -127,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_chemin_acces' => '<b>Entrer</b> le chemin d\'accès :',
 'entree_cle_pgp' => 'Votre clé PGP',
 'entree_contenu_rubrique' => '(Contenu de la rubrique en quelques mots.)',
+'entree_description_site' => 'Description du site',
 'entree_identifiants_connexion' => 'Vos identifiants de connexion...',
 'entree_informations_connexion_ldap' => 'Veuillez entrer dans ce formulaire les informations de connexion à votre annuaire LDAP.
 	Ces informations doivent pouvoir vous être fournies par l\'administrateur du système,
