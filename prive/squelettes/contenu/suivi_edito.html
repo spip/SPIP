@@ -1,4 +1,4 @@
-<h1><:info_suivi_activite:></h1>
+<h1 class="grostitre"><:info_suivi_activite:></h1>
 #SET{recentwhere,''}
 <BOUCLE_haspostdate(ARTICLES){statut=publie}{0,1}>
 	[(#SET{recentwhere,[NOT ((#VAL{date}|quete_condition_postdates))]})]
