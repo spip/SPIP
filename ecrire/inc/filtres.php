@@ -2696,7 +2696,8 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
 
   // calculer le nom de la css
 	$dir_var = sous_repertoire (_DIR_VAR, 'cache-'.$extension);
-	$filename = $dir_var . $extension."dyn-".md5($fond.serialize($contexte).$connect) .".$extension";
+	$nom_safe = preg_replace(",\W,",'_',str_replace('.','_',$fond));
+	$filename = $dir_var . $extension."dyn-$nom_safe-".substr(md5($fond.serialize($contexte).$connect),0,8) .".$extension";
 
 	// mettre a jour le fichier si il n'existe pas
 	// ou trop ancien
