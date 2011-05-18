@@ -299,7 +299,7 @@ function queue_schedule($force_jobs = null){
 		$cond = "status=".intval(_JQ_SCHEDULED)." AND ".sql_in("id_job", $force_jobs);
 	else {
 		$now = date('Y-m-d H:i:s',$time);
-		$cond = "status=".intval(_JQ_SCHEDULED)." AND date<".sql_quote($now);
+		$cond = "status=".intval(_JQ_SCHEDULED)." AND date<=".sql_quote($now);
 	}
 
 	register_shutdown_function('queue_error_handler'); // recuperer les erreurs auant que possible
