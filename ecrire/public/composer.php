@@ -205,7 +205,7 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
   }
 	if (count($filtres) OR (isset($headers['X-Spip-Filtre']) AND strlen($headers['X-Spip-Filtre']))) {
 		include_spip('public/sandbox');
-		$corps = sandbox_filtrer_squelette($skel,$corps,explode('|', $headers['X-Spip-Filtre']),$filtres[$skel]);
+		$corps = sandbox_filtrer_squelette($skel,$corps,explode('|', $headers['X-Spip-Filtre']),$filtres[$nom]);
 		unset($headers['X-Spip-Filtre']);
 	}
 
