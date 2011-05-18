@@ -37,8 +37,12 @@ function action_confirmer_inscription_dist() {
 		// TODO : ne semble pas marcher si inscrit non visiteur, a debug
 		if (!_request('redirect')){
 			// on passe id_auteur explicite pour forcer une lecture en base de toutes les infos
-			if (autoriser('ecrire','','',$auteur['id_auteur']))
+			if (autoriser('ecrire','','',$auteur['id_auteur'])){
+				// poser un cookie admin aussi
+				$cookie = charger_fonction('cookie','action');
+				$cookie("@".$GLOBALS['visiteur_session']['login']);
 				$GLOBALS['redirect'] = _DIR_RESTREINT_ABS;
+			}
 			else
 				$GLOBALS['redirect'] = $GLOBALS['meta']['adresse_site'];
 		}
