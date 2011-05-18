@@ -102,3 +102,54 @@ function sandbox_composer_interdire_scripts($code, &$p){
 	return $code;
 }
 
+
+/**
+ * Appliquer des filtres sur un squelette complet
+ * la fonction peut plusieurs tableaux de filtres a partir du 3eme argument
+ * qui seront appliques dans l'ordre
+ *
+ * @param array $skel
+ * @param string $corps
+ * @param array $filtres
+ * @param array ...
+ * @return mixed|string
+ */
+function sandbox_filtrer_squelette($skel, $corps, $filtres){
+	$series_filtres = func_get_args();
+	array_shift($series_filtres);// skel
+	array_shift($series_filtres);// corps
+
+	// proteger les <INCLUDE> et tous les morceaux de php licites
+	if ($skel['process_ins'] == 'php')
+		$corps = preg_replace_callback(',<[?](\s|php|=).*[?]>,UimsS','echapper_php_callback', $corps);
+
+	foreach($series_filtres as $filtes){
+		if (count($filtres))
+			foreach ($filtres as $filtre) {
+				if ($f = chercher_filtre($filtre))
+					$corps = $f($corps);
+			}
+	}
+
+	// restaurer les echappements
+	return echapper_php_callback($corps);
+}
+
+
+// http://doc.spip.org/@echapper_php_callback
+function echapper_php_callback($r) {
+	static $src = array();
+	static $dst = array();
+
+	// si on recoit un tableau, on est en mode echappement
+	// on enregistre le code a echapper dans dst, et le code echappe dans src
+	if (is_array($r)) {
+		$dst[] = $r[0];
+		return $src[] = '___'.md5($r[0]).'___';
+	}
+
+	// si on recoit une chaine, on est en mode remplacement
+	$r = str_replace($src, $dst, $r);
+	$src = $dst = array(); // raz de la memoire
+	return $r;
+}
