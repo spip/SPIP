@@ -36,7 +36,8 @@ function action_confirmer_inscription_dist() {
 		// si pas de redirection demandee, rediriger vers public ou prive selon le statut de l'auteur
 		// TODO : ne semble pas marcher si inscrit non visiteur, a debug
 		if (!_request('redirect')){
-			if (autoriser('ecrire'))
+			// on passe id_auteur explicite pour forcer une lecture en base de toutes les infos
+			if (autoriser('ecrire','',$auteur['id_auteur']))
 				$GLOBALS['redirect'] = _DIR_RESTREINT_ABS;
 			else
 				$GLOBALS['redirect'] = $GLOBALS['meta']['adresse_site'];
@@ -44,8 +45,16 @@ function action_confirmer_inscription_dist() {
 	}
 	else {
 		// lien perime :
-		// rediriger vers la page de login
-		$GLOBALS['redirect'] = parametre_url(generer_url_public('login','',false),'url',_request('redirect'));
+		if ($GLOBALS['visiteur_session']['id_auteur']){
+			// on passe id_auteur explicite pour forcer une lecture en base de toutes les infos
+			if (autoriser('ecrire','',$GLOBALS['visiteur_session']['id_auteur']))
+				$GLOBALS['redirect'] = _DIR_RESTREINT_ABS;
+			else
+				$GLOBALS['redirect'] = $GLOBALS['meta']['adresse_site'];
+		}
+		else
+			// rediriger vers la page de login si pas encore loge
+			$GLOBALS['redirect'] = parametre_url(generer_url_public('login','',false),'url',_request('redirect'));
 	}
 
 }
