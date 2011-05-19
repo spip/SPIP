@@ -24,6 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param array $options
  *   login : login precalcule
  *   id : id_rubrique fournit en second arg de #FORMULAIRE_INSCRIPTION
+ *   from : email de l'envoyeur pour l'envoi du mail d'inscription
  * @return array|string
  */
 function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = array()){
@@ -211,7 +212,9 @@ function envoyer_inscription_dist($desc, $nom, $mode, $options=array()) {
 	$contexte['url_confirm'] = parametre_url($contexte['url_confirm'],'jeton',$desc['jeton']);
 
 	$message = recuperer_fond('modeles/mail_inscription',$contexte);
-	return array("", $message);
+	$from = (isset($options['from'])?$options['from']:null);
+	$head = null;
+	return array("", $message,$from,$head);
 }
 
 
