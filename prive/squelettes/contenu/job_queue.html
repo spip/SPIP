@@ -1,13 +1,6 @@
 #CACHE{0}
 [(#AUTORISER{administrer,queue}|sinon_interdire_acces)]
-<?php
-// bloquer la queue sur ce hit
-// pour avoir coherence entre l'affichage de la liste de jobs
-// et les jobs en base en fin de hit
-define('_DEBUG_BLOCK_QUEUE',true);
-include_spip('inc/genie');
-genie_queue_watch_dist();
-?>
+[(#REM|job_queue_block_and_watch)]
 <h1 class="grostitre"><:queue_titre:></h1>
 <B_jobs>
 	<div class="liste">
