@@ -203,9 +203,9 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
   if (!isset($filtres[$nom])) {
 	  $filtres[$nom] = pipeline('declarer_filtres_squelettes',array('args'=>$skel,'data'=>array()));
   }
-	if (count($filtres) OR (isset($headers['X-Spip-Filtre']) AND strlen($headers['X-Spip-Filtre']))) {
+	if (count($filtres[$nom]) OR (isset($headers['X-Spip-Filtre']) AND strlen($headers['X-Spip-Filtre']))) {
 		include_spip('public/sandbox');
-		$corps = sandbox_filtrer_squelette($skel,$corps,explode('|', $headers['X-Spip-Filtre']),$filtres[$nom]);
+		$corps = sandbox_filtrer_squelette($skel,$corps,strlen($headers['X-Spip-Filtre'])?explode('|', $headers['X-Spip-Filtre']):array(),$filtres[$nom]);
 		unset($headers['X-Spip-Filtre']);
 	}
 
