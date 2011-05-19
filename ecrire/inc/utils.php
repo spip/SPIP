@@ -1783,6 +1783,16 @@ function spip_desinfecte(&$t,$deep = true) {
 
 // http://doc.spip.org/@verifier_visiteur
 function verifier_visiteur() {
+	// Rq: pour que cette fonction marche depuis mes_options
+	// il faut forcer l'init si ce n'est fait
+	// mais on risque de perturber des plugins en initialisant trop tot
+	// certaines constantes
+	@spip_initialisation_core(
+		(_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
+		(_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
+		(_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),
+		(_DIR_RACINE  . _NOM_TEMPORAIRES_ACCESSIBLES)
+	);
 
 	// Demarrer une session NON AUTHENTIFIEE si on donne son nom
 	// dans un formulaire sans login (ex: #FORMULAIRE_FORUM)
@@ -1796,12 +1806,6 @@ function verifier_visiteur() {
 		}
 	}
 	if (isset($init)) {
-		@spip_initialisation_core(
-			(_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
-			(_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
-			(_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),
-			(_DIR_RACINE  . _NOM_TEMPORAIRES_ACCESSIBLES)
-		);
 		#@spip_initialisation_suite();
 		$session = charger_fonction('session', 'inc');
 		$session();
@@ -1818,18 +1822,6 @@ function verifier_visiteur() {
 	$h = (isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http']);
 	if ($h OR isset($_COOKIE['spip_session']) OR isset($_COOKIE[$GLOBALS['cookie_prefix'].'_session'])) {
 
-		// Rq: pour que cette fonction marche depuis mes_options
-		// il faut forcer l'init si ce n'est fait
-		// mais on risque de perturber des plugins en initialisant trop tot
-		// certaines constantes
-		@spip_initialisation_core(
-			(_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
-			(_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
-			(_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),
-			(_DIR_RACINE  . _NOM_TEMPORAIRES_ACCESSIBLES)
-		);
-		#@spip_initialisation_suite();
-
 		$session = charger_fonction('session', 'inc');
 		if ($session()) {
 			return $GLOBALS['visiteur_session']['statut'];
@@ -1843,9 +1835,11 @@ function verifier_visiteur() {
 			return $GLOBALS['visiteur_session']['statut'];
 		}
 	}
+
 	// au moins son navigateur nous dit la langue preferee de cet inconnu
 	include_spip('inc/lang');
 	utiliser_langue_visiteur();
+
 	return false;
 }
 
