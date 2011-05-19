@@ -25,6 +25,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *   login : login precalcule
  *   id : id_rubrique fournit en second arg de #FORMULAIRE_INSCRIPTION
  *   from : email de l'envoyeur pour l'envoi du mail d'inscription
+ *   force_nouveau : forcer le statut nouveau sur l'auteur inscrit, meme si il existait deja en base
  * @return array|string
  */
 function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = array()){
