@@ -308,16 +308,28 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		// pour assurer la compat en transition
 		foreach($infos_tables as $table=>$infos) {
 			$principale_ou_auxiliaire = ($infos['principale']?'tables_principales':'tables_auxiliaires');
-			if (!isset($GLOBALS[$principale_ou_auxiliaire][$table])){
-				// l'ajouter au tableau
-				$GLOBALS[$principale_ou_auxiliaire][$table] = array();
-				if (isset($infos['field']) AND isset($infos['key']))
-					$GLOBALS[$principale_ou_auxiliaire][$table] = &$infos_tables[$table];
-				else {
-					// lire sa definition en base
-					$trouver_table = charger_fonction('trouver_table','base');
-					$GLOBALS[$principale_ou_auxiliaire][$table] = $trouver_table($table);
-				}
+			// memoriser des champs eventuels declares par des plugins dans le pipeline tables_xxx
+			// qui a ete appelle avant
+			$mem = (isset($GLOBALS[$principale_ou_auxiliaire][$table])?$GLOBALS[$principale_ou_auxiliaire][$table]:array());
+			// l'ajouter au tableau
+			$GLOBALS[$principale_ou_auxiliaire][$table] = array();
+			if (isset($infos['field']) AND isset($infos['key'])){
+				foreach(array('field','key','join') as $k)
+					if (isset($infos_tables[$table][$k]))
+						$GLOBALS[$principale_ou_auxiliaire][$table][$k] = &$infos_tables[$table][$k];
+			}
+			else {
+				// lire sa definition en base
+				$trouver_table = charger_fonction('trouver_table','base');
+				$GLOBALS[$principale_ou_auxiliaire][$table] = $trouver_table($table);
+			}
+			if (count($mem)){
+				foreach(array_keys($mem) as $k)
+					if (isset($GLOBALS[$principale_ou_auxiliaire][$table][$k]))
+						$GLOBALS[$principale_ou_auxiliaire][$table][$k] = array_merge($GLOBALS[$principale_ou_auxiliaire][$table][$k],$mem[$k]);
+					else
+						$GLOBALS[$principale_ou_auxiliaire][$table][$k] = $mem[$k];
+				var_dump($GLOBALS[$principale_ou_auxiliaire][$table]);
 			}
 		}
 		$deja_la = false;
