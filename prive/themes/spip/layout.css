@@ -1,5 +1,5 @@
 /* Layout */
-#page { font-size:11px;}
+#page {}
 /* ecran etroit*/
 #haut {text-align:center;margin-top:10px;}
 .largeur { width: 780px; margin: auto; text-align:left; }
@@ -7,6 +7,7 @@
 #navigation { float: left; width: 200px; min-height: 100px; }
 #extra { float: left; clear:left; width: 200px; }
 #contenu { float: right ; margin-left: 30px; width: 550px; }
+#pied {}
 
 /* ecran large*/
 .large .largeur {width:974px;}

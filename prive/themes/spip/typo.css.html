@@ -21,32 +21,176 @@
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 #SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
 
-body { font-size: 0.625em; font-family: Verdana, Geneva, sans-serif; line-height: 1.5em; }
+[(#REM)<style>
+/* --------------------------------------------------------------
 
-#contenu { font-size:12px; }
+   typo.css.html
+   Base typographique
+   Cf.: http://www.spip-contrib.net/3820
 
-h1,h2,h3 { font-family: Arial, Helvetica, sans-serif; font-weight: bold; }
-h1 { margin: 16px 0 0.25em 0; font-size: large; color: #GET{foncee}; }
-h2 { margin: 0.5em 0 0.25em 0; font-size: medium; color: #000; }
-h3 { margin: 0.5em 0 0.25em 0; font-size: medium; color: #666; }
-/* Raccourcis pour les polices (utile pour les tableaux) */
-.arial0 { font-family: Arial, Helvetica, sans-serif; font-size: 9px; }
-.arial1 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
-.arial11 { font-family: Arial, Helvetica, sans-serif; font-size: 11px; }
-.arial2 { font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
-.verdana1 { font-family: Verdana, Geneva, sans-serif; font-size: 10px; }
-.verdana2 { font-family: Verdana, Geneva, sans-serif; font-size: 11px; }
-.verdana12 { font-family: Verdana, Geneva, sans-serif; font-size: 12px; }
-.verdana3 { font-family: Verdana, Geneva, sans-serif; font-size: 13px; }
-.serif { font-family: Georgia, Garamond, Times New Roman, serif; }
-.serif1 { font-family: Georgia, Garamond, Times New Roman, serif; font-size: 11px; }
-.serif2 { font-family: Georgia, Garamond, Times New Roman, serif; font-size: 13px; }
+-------------------------------------------------------------- */
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
 
-.spip_xx-large { font-size: 32px; }
-.spip_x-large { font-size: 26px; }
-.spip_large { font-size: 18px; }
-.spip_medium { font-size: 16px; }
-.spip_small { font-size: 14px; }
-.spip_x-small { font-size: 12px; }
-.spip_xx-small { font-size: 10px; }
-#wysiwyg { font-size: 1em; }
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+
+/* Valeurs par defaut :
+#SET{font-size,#ENV{font-size,1em}} [ font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.2em}} [ line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,1.2em}} [ margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [ text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV{font-family,'Helvetica, Arial, sans-serif'}} [ font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [ background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [ color: (#GET{color});]
+*/
+
+html { font-size: 100.01%; } /* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
+body { background: #GET{background-color}; font: #GET{font-size}/#GET{line-height}[ (#GET{font-family})]; color: #GET{color}; }
+
+/* Titraille / Intertitres */
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 { margin: 0; padding: 0; font-size: 100%; font-weight: normal; }
+hr { height: 1px; margin:[ (#GET{margin-bottom})] 0; border: 0; background: #GET{color}; color: #GET{color}; }
+
+/* Titraille Blueprint
+Cf. : http://www.blueprintcss.org/tests/parts/elements.html
+h1 { font-size: 3em; line-height: 1; margin-bottom: 0.5em; }
+h2 { font-size: 2em; margin-bottom: 0.75em; }
+h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6 { font-size: 1em; font-weight: bold; }*/
+
+h1,.h1 {font-size: 2em; line-height:#GET{line-height};margin-bottom: [(#GET{margin-bottom}|div{2})em]; }
+#SET{coeff,#GET{line-height}|plus{2}|div{2}|div{#GET{line-height}}}
+#SET{coeffinv,#VAL{1}|div{#GET{coeff}}}
+h2,.h2 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv}|mult{2})em];[ margin-bottom: (#GET{coeffinv})em;]}
+h3,.h3 {[ font-size: (#GET{line-height}|mult{1})em]; line-height: 1; margin-bottom: 1em; font-weight: bold;}
+#SET{coeff,#GET{line-height}|plus{1}|div{2}|div{#GET{line-height}}}
+#SET{coeffinv,#VAL{1}|div{#GET{coeff}}}
+h4,.h4 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;]font-weight: bold; }
+h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: #GET{margin-bottom}; }
+h6,.h6 { font-size: 1em; font-weight: bold; }
+
+#haut h1,h1.grostitre {margin-top:[(#ENV{margin-bottom}|mult{1.5}|div{2}|div{#GET{line-height}})em]}
+
+/* Enrichissements typographiques */
+strong, b { font-weight: bold; }
+em, i { font-style: italic; }
+small, .small { font-size: 80%; }
+big, .big { font-size: 150%; }
+abbr[title], acronym[title] { border-bottom: .1em dotted; cursor: help; }
+dfn { font-weight: bold; font-style: italic; }
+del { text-decoration: line-through; }
+ins { text-decoration: none; background-color: #FFC; }
+sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
+sup { vertical-align: super; }
+.ie sup { vertical-align: text-top; }
+sub { vertical-align: sub; }
+.ie sub { vertical-align: text-bottom; }
+.caps { font-variant: small-caps; }
+
+/* Listes */
+ul, ol, li, dl, dt, dd {}
+ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0; }
+
+dl dt { font-weight: bold; }
+dl dd {}
+
+/* Tableaux */
+table { margin-bottom: #GET{margin-bottom}; width: 100%; }
+caption {[ font-size: (#GET{line-height}|mult{1})em;] line-height: 1; }
+th { font-weight: bold; }
+thead th { background: [#(#ENV{claire}|couleur_eclaircir{0.4})]; }
+table.spip td, table.spip th, /* annuler spip-styles */
+th,td,caption {[ padding: (#GET{line-height}|div{2})em;] }
+
+tbody tr:nth-child(even) td,tbody tr:nth-child(even) th,
+tbody tr.even td,tbody tr.even th { background: [#(#ENV{claire}|couleur_eclaircir{0.80})]; }
+tfoot { font-style: italic; }
+caption { background: #eee; }
+
+/* Citations, code et poesie */
+q { font-style: italic; }
+blockquote { padding: 0 #GET{text-indent}; font-style: italic; }
+cite { font-style: italic; }
+
+address { font-style: italic; }
+
+pre,code,kbd,samp,var,tt { font-family: 'lucida console',monospace; font-size: 1em; }
+pre { margin:[ (#GET{margin-bottom}) ]0; white-space: pre; }
+kbd { background-color: #GET{color}; color: #GET{background-color}; }
+samp { font-weight: bold; }
+var { font-style: italic; }
+
+/* Paragraphes */
+p, .p, dl, dd, blockquote, address, pre, table, fieldset { margin-bottom: #GET{margin-bottom}; }
+
+/* Liens */
+a {}
+a:hover {}
+a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
+.on { font-weight: bold; }
+
+/* end */
+
+/*
+ * Specificites de code SPIP (ex spip-styles.css)
+ */
+
+/* Listes SPIP */
+ul.spip,.formulaire_spip ul.spip { list-style: square; margin-bottom:#ENV{margin-bottom};}
+ul.spip ul { list-style: circle; }
+ol.spip { list-style: decimal; margin-bottom:#ENV{margin-bottom};}
+
+ul.spip li, ol.spip li, .formulaire_spip ul.spip li {margin-#ENV{left}:#ENV{text-indent};}
+ul.spip li li, ol.spip li li, .formulaire_spip ul.spip li li {margin-#ENV{left}:[(#ENV{text-indent}|div{2})px];}
+
+/* Citations, code et poesie */
+/*blockquote.spip { margin: 2em 0; padding-left: 1em; border-left: 0.30em solid; }
+blockquote.spip_poesie { margin: 2em 0; padding-left: 1em; border-left: 1px solid; font-family: Garamond, Georgia, Times, serif; }
+blockquote.spip_poesie div { text-indent: -3em; margin-left: 3em; }
+*/
+.spip_code, .spip_cadre { color: #336; }
+.spip_cadre { width: 99%; background-color: #F3F3F3; border: 1px dotted #ddd; padding:5px;-ms-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+div.spip_code, .spip_cadre { margin-bottom: #ENV{margin-bottom}; }
+
+.spip_surligne { background: #FF6; }
+
+/* Tableaux */
+table.spip { max-width: 99%; margin-right: auto; margin-left: auto; margin-bottom: #ENV{margin-bottom}; border-collapse: collapse; border-spacing: 0;}
+table.spip caption { caption-side: top; /* bottom pas pris en compte par IE */ text-align: center; margin-right: auto; margin-left: auto; font-weight: bold; }
+table.spip th, table.spip td { /*padding: 0.20em 0.40em; text-align: left; */border: 1px solid #ccc; }
+table.spip td.numeric {text-align:right;}
+
+/* Logos, documents et images */
+img, .spip_logos { margin: 0; padding: 0; border: 0; }
+.spip_documents { text-align: center; }
+.spip_documents p { margin: 0.10em; padding: 0; }
+.spip_documents_center { display: block; clear: both; width: 100%; margin: [(#ENV{margin-bottom})] auto; }
+.spip_documents_left { float: #ENV{left}; margin-#ENV{right}: 15px; margin-bottom: [(#ENV{margin-bottom})]; }
+.spip_documents_right { float: #ENV{right}; margin-#ENV{left}: 15px; margin-bottom: [(#ENV{margin-bottom})]; }
+.spip_doc_titre { margin-right: auto; margin-left: auto; font-weight: bold; font-size: 0.90em; }
+.spip_doc_descriptif { clear: both; margin-right: auto; margin-left: auto; font-size: 0.90em; }
+
+/* modeles par defaut */
+.spip_modele { float: right; display: block; padding: 1em; border: 1px solid; width: 180px; }
+
+/* Couleurs des liens de SPIP */
+a.spip_note {} /* liens vers notes de bas de page */
+a.spip_ancre {} /* liens internes a la page */
+a.spip_in {} /* liens internes */
+a.spip_mail { color: #900; }
+a.spip_mail:before { content: "\002709"; } /* liens vers un email */
+a.spip_out,a[rel=external] { color: #009; } /* liens sortants */
+a.spip_url { color: #009; } /* liens url sortants */
+a.spip_glossaire { color: #060; } /* liens vers encyclopedie */
+a.spip_glossaire:hover { text-decoration: underline overline; }
+a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
+.on { font-weight: bold; } /* liens exposes */

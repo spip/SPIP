@@ -15,39 +15,35 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-#SET{claire,##ENV{couleur_claire,edf3fe}}
-#SET{foncee,##ENV{couleur_foncee,3874b0}}
-#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
-#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+#SET{iconfontsize,0.9em}
 
 /* * Style des icones */
 /* structure html : <span class="icone danger horizontale s24 left"><a><img><b>texte</b></span> */
-.icone { display:block; margin:0;padding:0;text-align: center; font-size: 10px;}
+.icone { display:block; margin:0;padding:0;text-align: center; /*font-size: 10px;*/}
 .icone a,.icone .submit {display:block;margin:0 auto;width:72px;padding: 5px 0;border:0;cursor:hand;cursor:pointer; }
 .icone a:hover {text-decoration:none;}
-.icone a img,.icone .submit img {margin: 0 auto; display: inline; padding: 4px; background-color: #eee; border: 2px solid #GET{foncee}; }
+.icone a img,.icone .submit img {margin: 0 auto; display: inline; padding: 4px; background-color: #eee; border: 2px solid #ENV{foncee}; }
 .icone a:hover img,.icone .submit:hover img  { background-color: #fff; border-color: #666; }
-.icone a b,.box .icone a b,.icone .submit b,.box .icone .submit b { font-weight: bold; color: #GET{foncee}; display: block; margin: 2px auto; width: 100%; height: 3em; }
+.icone a b,.box .icone a b,.icone .submit b,.box .icone .submit b { font-weight: bold; color: #ENV{foncee}; display: block; margin: 2px auto; width: 100%; font-size:#GET{iconfontsize};height: [(#ENV{line-height}|mult{2}|div{#GET{iconfontsize}})em];line-height:1; }
 .icone a:hover b,.icone .submit:hover b { color: #000;}
 
 /*form.bouton_action_post.icone,form.bouton_action_post.icone div,form.bouton_action_post.icone .submit {display:block;}*/
 
 
 /* alignement */
-.icone.left {float:#GET{left};}
-.icone.right {float:#GET{right};}
+.icone.left {float:#ENV{left};}
+.icone.right {float:#ENV{right};}
 .icone.center a,.icone.center .submit {margin:0 auto;}
-.icone.clearleft {clear:#GET{left};}
-.icone.clearright {clear:#GET{right};}
+.icone.clearleft {clear:#ENV{left};}
+.icone.clearright {clear:#ENV{right};}
 
 /* icone horizontale */
-.icone.horizontale { display:block; clear: both;position:relative;margin:0;padding:2px;text-align: #GET{left};padding-#GET{left}:32px;}
+.icone.horizontale { display:block; clear: both;position:relative;margin:0;padding:2px;text-align: #ENV{left};padding-#ENV{left}:32px;}
 .icone.horizontale a,.icone.horizontale .submit {display:inline;width:auto;padding:0;}
 /* pour les navigateurs modernes */
 .icone.horizontale a,.icone.horizontale .submit {display:table-cell;vertical-align:middle;height:28px;}
-.icone.horizontale.right {text-align: #GET{right};padding-#GET{right}:32px;padding-#GET{left}:2px;}
-.icone.horizontale a img,.icone.horizontale .submit img {padding:0;border:0;background:none;position:absolute;#GET{left}:4px;top:50%;margin-top:-12px;}
+.icone.horizontale.right {text-align: #ENV{right};padding-#ENV{right}:32px;padding-#ENV{left}:2px;}
+.icone.horizontale a img,.icone.horizontale .submit img {padding:0;border:0;background:none;position:absolute;#ENV{left}:4px;top:50%;margin-top:-12px;}
 .icone.horizontale a b,.icone.horizontale .submit b {color:#666;display:inline;}
 .icone.horizontale a:hover b,.icone.horizontale .submit:hover b { color: #000;}
 
@@ -57,7 +53,7 @@
 
 .icones_texte .icone.horizontale {padding:2px;}
 .icones_texte .icone.horizontale a,.icones_texte .icone.horizontale .submit {display:block;padding:7px;height:auto;color: #606060;border: 1px solid #ddd; background-color: #f0f0f0;}
-.icones_texte .icone.horizontale a:hover,.icones_texte .icone.horizontale .submit:hover  { text-decoration: none; color: #000; border-#GET{right}: solid 1px #fff; border-bottom: solid 1px #fff; border-#GET{left}: solid 1px #666; border-top: solid 1px #666; background-color: #eee; }
+.icones_texte .icone.horizontale a:hover,.icones_texte .icone.horizontale .submit:hover  { text-decoration: none; color: #000; border-#ENV{right}: solid 1px #fff; border-bottom: solid 1px #fff; border-#ENV{left}: solid 1px #666; border-top: solid 1px #666; background-color: #eee; }
 
 /* danger */
 .icone.danger {background:none;}
@@ -74,7 +70,7 @@
 .icone.verticale.suivi-forum-24 { width: 100px; }
 
 /* icone en bord haut du cadre */
-.cadre-icone {position: absolute; top: -16px; #GET{left}: 10px;z-index:1;}
+.cadre-icone {position: absolute; top: -16px; #ENV{left}: 10px;z-index:1;}
 
 
 /* barre onglet historique
@@ -90,37 +86,37 @@
 	display:inline-block;
 	zoom:1;
 	*display:inline;
-	margin:0 auto;text-align:#GET{left};padding:0;list-style:none;}
-.barre_onglet li {float:#GET{left};border: 1px solid #GET{foncee};margin:0;padding:0;margin-#GET{right}: 3px;position:relative;list-style:none;}
+	margin:0 auto;text-align:#ENV{left};padding:0;list-style:none;}
+.barre_onglet li {float:#ENV{left};border: 1px solid #ENV{foncee};margin:0;padding:0;margin-#ENV{right}: 3px;position:relative;list-style:none;}
 .barre_onglet .cadre-icone {top:-8px;left:4px;}
-.barre_onglet a,.barre_onglet strong {display:block;font-weight: bold;padding: 5px;text-decoration: none;padding-#GET{left}:32px;background-color:#fff;}
-.barre_onglet strong {background-color: #GET{foncee}; color: #fff;}
-.barre_onglet a:hover {background-color: #GET{claire}; color: #fff;text-decoration: none;}
+.barre_onglet a,.barre_onglet strong {display:block;font-weight: bold;padding: 5px;text-decoration: none;padding-#ENV{left}:32px;background-color:#fff;}
+.barre_onglet strong {background-color: #ENV{foncee}; color: #fff;}
+.barre_onglet a:hover {background-color: #ENV{claire}; color: #fff;text-decoration: none;}
 
 
 /* onglets simple 1er et second niveau
 <div class='onglets_simple clearfix'><ul><li><strong></strong></li><li><a></a></li></ul></div>
 <div class='onglets_simple second clearfix'><ul><li><strong></strong></li><li><a></a></li></ul></div>
 */
-.onglets_simple { margin:1em 0;clear:#GET{left};border-bottom:1px solid #GET{foncee};padding-#GET{left}:5px;}
+.onglets_simple { margin:1em 0;clear:#ENV{left};border-bottom:1px solid #ENV{foncee};padding-#ENV{left}:5px;}
 .onglets_simple ul {list-style:none;margin-left:1px;padding:0;}
 .onglets_simple ul li {float:left;padding:0;margin:0;margin-bottom:-1px;}
 
-.onglets_simple ul li strong,.onglets_simple ul li a {display:block;float:#GET{left};padding:4px 7px;border:1px solid #GET{foncee};margin-#GET{left}:5px;background-color:#eee;background-position:center left;background-repeat:no-repeat;}
+.onglets_simple ul li strong,.onglets_simple ul li a {display:block;float:#ENV{left};padding:4px 7px;border:1px solid #ENV{foncee};margin-#ENV{left}:5px;background-color:#eee;background-position:center left;background-repeat:no-repeat;}
 .onglets_simple ul li strong,.onglets_simple ul li a:hover {background-color:#f8f7f3;}
 .onglets_simple ul li a:hover {cursor:hand;cursor:pointer;}
 .onglets_simple ul li strong {border-bottom:1px solid #f8f7f3;color:#555;}
 
-.onglets_simple.second {font-size:0.9em;border:0;padding-#GET{left}:0;}
-.onglets_simple.second ul li strong,.onglets_simple.second ul li a {margin-#GET{left}:0px;margin-#GET{right}:5px;margin-bottom:5px;}
-.onglets_simple.second ul li strong {border:1px solid #GET{foncee};}
+.onglets_simple.second {font-size:0.9em;border:0;padding-#ENV{left}:0;}
+.onglets_simple.second ul li strong,.onglets_simple.second ul li a {margin-#ENV{left}:0px;margin-#ENV{right}:5px;margin-bottom:5px;}
+.onglets_simple.second ul li strong {border:1px solid #ENV{foncee};}
 .onglets_simple.second ul li strong,.onglets_simple.second ul li a:hover {background-color:#fff;}
 
 
 .reliefblanc { background-image: url(#CHEMIN_IMAGE{barre-blanc.gif}); }
 .reliefgris { background-image: url(#CHEMIN_IMAGE{barre-noir.gif}); }
 .iconeoff { padding: 3px; margin: 1px; border: 1px dashed #ccc; background-color: #f0f0f0; }
-.iconeon { cursor: pointer; padding: 3px; margin: 1px; border-#GET{right}: solid 1px #fff; border-bottom: solid 1px #fff; border-#GET{left}: solid 1px #666; border-top: solid 1px #666; background-color: #eee; }
+.iconeon { cursor: pointer; padding: 3px; margin: 1px; border-#ENV{right}: solid 1px #fff; border-bottom: solid 1px #fff; border-#ENV{left}: solid 1px #666; border-top: solid 1px #666; background-color: #eee; }
 .iconedanger { padding: 3px; margin: 1px; border: 1px dashed #000; background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
 
 /* OLDIES anciennes icones issues de php */

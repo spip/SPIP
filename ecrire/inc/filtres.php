@@ -2405,18 +2405,6 @@ function bando_images_background(){
 }
 
 /**
- * Trouver une eventuelle css de surcharge dans le theme prive
- * a inclure dans les styles prives
- *
- * @return <type>
- */
-function bando_style_prive_theme() {
-	if ($f = find_in_theme('style_prive_theme.html'))
-		return substr(preg_replace(',[.]html$,Ui','',$f),strlen(_DIR_RACINE));
-	return '';
-}
-
-/**
  * Generer un bouton_action
  * utilise par #BOUTON_ACTION
  *

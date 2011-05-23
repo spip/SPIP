@@ -15,13 +15,14 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-#SET{claire,##ENV{couleur_claire,edf3fe}}
-#SET{foncee,##ENV{couleur_foncee,3874b0}}
-#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
-#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
-
 [(#INCLURE{prive/themes/spip/box.css})]
+/* ajustement des marges selon grille verticale en em */
+.box{margin:[(#ENV{margin-bottom}|mult{1.5})em] 0;}
+.bd {padding:[(#ENV{margin-bottom}|div{2})em] 10px;}
+.bd > :first-child,.bd > :first-child > :first-child {margin-top:0;}
+.bd > :last-child {margin-bottom:0;}
+.hd, .ft {padding:[(#ENV{margin-bottom}|div{2})em] 10px;}
+.hd h1,.hd h2,.hd h3,.hd h4,.hd h5,.hd h6 {margin-bottom:0;}
 
 /* **************** BLOCK SKINS ***************** */
 /* ====== Contour blocks ====== */
@@ -31,12 +32,12 @@
 .simple .inner .hd {}
 .simple b{}
 /* ----- info (extends box) ----- */
-.info .inner {border:2px solid #GET{claire};background:#fcfcfc;}
+.info .inner {border:2px solid #ENV{claire};background:#fcfcfc;}
 .info .inner .hd {}
 .info b{}
 /* ----- note (extends box) ----- */
 .note,.note .inner{border:1px solid #c2c2c2;}
-.note .inner{border-color:#fff; border-width:4px; background-color:[#(#GET{claire}|couleur_eclaircir{0.85})];}
+.note .inner{border-color:#fff; border-width:4px; background-color:[#(#ENV{claire}|couleur_eclaircir{0.85})];}
 .note .inner .hd {}
 
 /* ----- raccourcis (extends box) ----- */
@@ -44,12 +45,12 @@
 .note .inner .hd {}
 
 /* ----- important (extends box) ----- */
-.important .inner{border: 3px solid [(#GET{foncee})]; border-bottom-width:10px;background:#fff;}
+.important .inner{border: 3px solid [(#ENV{foncee})]; border-bottom-width:10px;background:#fff;}
 .important b{}
 
 /* ----- basic (extends box) ----- */
-.basic {margin-bottom: -1px}
-.basic .inner {padding-bottom: 1px;border: 1px solid #aaa;}
+.basic {/*margin-bottom: -1px*/}
+.basic .inner {/*padding-bottom: 1px;*/border: 1px solid #aaa;}
 .basic .inner .hd {}
 .basic b{}
 
@@ -78,32 +79,31 @@
 
 
 /* ====== Background blocks ====== */
-.highlight .inner{background-color:#GET{claire};}
-.inverse .inner{background-color:#GET{foncee};color:#ffffff}
+.highlight .inner{background-color:#ENV{claire};}
+.inverse .inner{background-color:#ENV{foncee};color:#ffffff}
 
 /* ====== Block headers and footers ====== */
-.hd.titrem { margin-top:10px;padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat; padding-[(#GET{left})]:16px; padding-[(#GET{right})]:10px;
-background-color: [#(#GET{foncee}|couleur_eclaircir)];color: #4A4A4A; font-size:1.2em;position:relative;}
-.hd.titrem h1,.hd.titrem h2,.hd.titrem h3,.hd.titrem h4,.hd.titrem h5,.hd.titrem h6{font-size:100%;color:#4A4A4A;padding:0;margin:0;}
+.hd.titrem { background-repeat: no-repeat; padding-[(#ENV{left})]:16px; padding-[(#ENV{right})]:10px;
+background-color: [#(#ENV{foncee}|couleur_eclaircir)];color: #4A4A4A; font-size:[(#ENV{line-height}|mult{1})em];position:relative;line-height: 1;}
+.hd.titrem h1,.hd.titrem h2,.hd.titrem h3,.hd.titrem h4,.hd.titrem h5,.hd.titrem h6{ font-size: 1em; color:#4A4A4A;}
 
-.section{ padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat; padding-[(#GET{left})]:16px; padding-[(#GET{right})]:10px;
-background-color: #GET{foncee}; color: #4A4A4A;font-size:1.2em;position:relative;}
+.section{ background-repeat: no-repeat; padding-[(#ENV{left})]:16px; padding-[(#ENV{right})]:10px;
+background-color: #ENV{foncee}; color: #4A4A4A;font-size:1.2em;position:relative;}
 .section h1,.section h2,.section h3,.section h4,.section h5,.section h6{font-size:100%;color:#4A4A4A;padding:0;margin:0;}
 
-.bam{ padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat; padding-[(#GET{left})]:16px; padding-[(#GET{right})]:10px;
-background-color: [#(#GET{foncee}|couleur_foncer)]; color: #fff;font-size:1.2em; position:relative;}
+.bam{ background-repeat: no-repeat; padding-[(#ENV{left})]:16px; padding-[(#ENV{right})]:10px;
+background-color: [#(#ENV{foncee}|couleur_foncer)]; color: #fff;font-size:1.2em; position:relative;}
 .bam h1,.bam h2,.bam h3,.bam h4,.bam h5,.bam h6{font-size:100%;color:#fff;padding:0;margin:0;}
 
-.topper{ padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat; padding-[(#GET{left})]:16px; padding-[(#GET{right})]:10px;
+.topper{ background-repeat: no-repeat; padding-[(#ENV{left})]:16px; padding-[(#ENV{right})]:10px;
 background-color: #fff; color: #4A4A4A;font-size:1.2em; position:relative;}
 .topper h1,.topper h2,.topper h3,.topper h4,.topper h5,.topper h6{font-size:100%;color:#4A4A4A;padding:0;margin:0;}
 
-.act{	[background-color: #(#GET{claire}|couleur_eclaircir);]
-	[border-top: 1px solid (#GET{claire});]
-	margin:0;
+.act{	[background-color: #(#ENV{claire}|couleur_eclaircir);]
+	[border-top: 1px solid (#ENV{claire});]
+	margin-top:-1px;
 	clear:both;
-	text-align: #GET{right};
-	padding: 7px 1em;
+	text-align: #ENV{right};
 }
 
 /* Cas particuliers */
@@ -115,12 +115,12 @@ background-color: #fff; color: #4A4A4A;font-size:1.2em; position:relative;}
   encore maintenues mais depreciees
 */
 .titrem { font-weight: bold; }
-div.titrem, h3.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat; padding-[(#GET{left})]:16px; padding-[(#GET{right})]:10px;margin:0;}
-div.titrem a.titremancre,h3.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left})] top;background-repeat: no-repeat; position:relative;float:[(#GET{left})];margin-[(#GET{left})]:-16px;}
+div.titrem, h3.titrem { display: block; padding-top: [(#ENV{margin-bottom}|div{2})em]; padding-bottom: [(#ENV{margin-bottom}|div{2})em]; background-repeat: no-repeat; padding-[(#ENV{left})]:16px; padding-[(#ENV{right})]:10px;}
+div.titrem a.titremancre,h3.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#ENV{left})] top;background-repeat: no-repeat; position:relative;float:[(#ENV{left})];margin-[(#ENV{left})]:-16px;}
 /* Deplier / Replier */
 .deplie a.titremancre, .deplie a.titremancre, .depliant a.titremancre, .replie a.titremancre { height: 1px; padding-bottom: 0px; }
-.replie a.titremancre { background-image: url([(#CHEMIN_IMAGE{deplierhaut[(#GET{rtl})].gif})]); }
-.hover { background-color: #GET{claire}; }
+.replie a.titremancre { background-image: url([(#CHEMIN_IMAGE{deplierhaut[(#ENV{rtl})].gif})]); }
+.hover { background-color: #ENV{claire}; }
 .deplie a.titremancre { background-image: url(#CHEMIN_IMAGE{deplierbas.gif}); }
 .impliable {}
 .js .blocreplie { display: none; }
