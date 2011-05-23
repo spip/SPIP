@@ -1,4 +1,4 @@
-<div class='accueil_informations articles'>
+<div class='accueil_informations articles liste'>
 	[(#SET{titre,#ARRAY{prepa,<:texte_statut_en_cours_redaction:>,prop,<:texte_statut_attente_validation:>,publie,<:texte_statut_publies:>}})]
 <B_cpt>
 	<h4>[(#URL_ECRIRE{mes_articles}|afficher_plus_info)]<:info_articles:></h4>
@@ -18,7 +18,7 @@
 </div>
 
 
-<div class='accueil_informations auteurs'>
+<div class='accueil_informations auteurs liste'>
 	<B_cpta>
 		<h4>[(#URL_ECRIRE{auteurs}|afficher_plus_info)]<:icone_auteurs:></h4>
 		<ul class="liste-items">
