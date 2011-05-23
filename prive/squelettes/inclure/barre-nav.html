@@ -24,9 +24,8 @@
 				<a class='menu_lang'
 					 href='#URL_ECRIRE{configurer_langage}'
 					 title='<:titre_config_langage:>'>[(#CHEMIN_IMAGE{langues.png}|balise_img{<:titre_config_langage:>})][(#LANG|traduire_nom_langue)]</a> |
-				<a class='aide'
-					 onclick="window.open(this.href, 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580');return false;"
-					 href='#URL_ECRIRE{aide_index,var_lang=#LANG}'><:icone_aide_ligne:></a> |
+				<a class='aide popin' target='_blank'
+					href='#URL_ECRIRE{aide,var_lang=#LANG}'><:icone_aide_ligne:></a> |
 				<a href='[(#VAL{logout}|generer_url_action{logout=prive})]'><:icone_deconnecter:></a>
 			</p>
 			<p class='nom_site_spip'><a
