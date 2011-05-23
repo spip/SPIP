@@ -1,21 +1,21 @@
-<div class="menu" style="float:left;width:200px;">
+<div style="float:left;width:200px;">
 	#SET{close,''}
-	<ul class="menu-items">
+	<ul>
 	<BOUCLE_menu(DATA){source tableau,#ENV{aide}|aide_menu}>
 		[(#VALEUR{1}|=={1}|oui)
-		#GET{close}
-		<li class="item"><h3>[(#VALEUR{2})]</h3>
-			<ul class="menu-items">
-
-		#SET{close,</ul></li>}
+		#GET**{close}
+		<div class='liste'><h3>[(#VALEUR{2})]</h3>
+			<ul class="liste-items">
+			#SET{close,'</ul></div>'}
 		][(#VALEUR{1}|=={2}|oui)
 			<li class="item[(#VALEUR{2}|=={#ENV{aide}}|oui)on]"><a href='[(#SELF|parametre_url{aide,#VALEUR{2}})]' class="ajax nohistory">[(#VALEUR{3})]</a></li>
 		]
 	</BOUCLE_menu>
+		#GET**{close}
 	</ul>
 </div>
 
-<div lang="[(#EVAL{_request('var_lang_r')}|aide_changer_langue{#ENV{lang_r}})]" style="position:relative;margin-left:220px;">
+<div class="contenu-aide" lang="[(#EVAL{_request('var_lang_r')}|aide_changer_langue{#ENV{lang_r}})]" style="position:relative;margin-left:220px;">
 	[(#ENV{aide}|aide_extrait_section|image_reduire{500}|sinon{
 		[<div style='text-align:center;'>
 			(#CHEMIN_IMAGE{logo-spip.gif}|balise_img{SPIP})
