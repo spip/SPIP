@@ -15,17 +15,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // http://doc.spip.org/@base_admin_repair_dist
 function base_repair_dist($titre='', $reprise='') {
 
-	$f = sql_repair('repair', NULL, 'continue');
-	if ($f) {
-		$res = admin_repair_tables();
-	} else {
-		if ($titre)
-		  spip_log( "Pas d'instruction REPAIR dans ce serveur SQL", _LOG_ERREUR);
-		$res = '     ';
-	}
-
+	$res = admin_repair_tables();
 	if (!$res) {
-		$res = "<br /><br /><span style='color: red; font-weight: bold;'><tt>"._T('avis_erreur_mysql').' '.sql_errno().': '.sql_error() ."</tt></span><br /><br /><br />\n";
+		$res = "<div class='error'>"._T('avis_erreur_mysql').' '.sql_errno().': '.sql_error() ."</div>\n";
 	} else {
 		include_spip('inc/rubriques');
 		calculer_rubriques();
@@ -77,6 +69,9 @@ function admin_repair_plat(){
 // http://doc.spip.org/@admin_repair_tables
 function admin_repair_tables() {
 
+	$repair = sql_repair('repair', NULL, 'continue');
+	include_spip('base/create');
+
 	$connexion = $GLOBALS['connexions'][0];
 	$prefixe = $connexion['prefixe'];
 	$res1 = sql_showbase();
@@ -90,9 +85,15 @@ function admin_repair_tables() {
 			// supprimer la meta avant de lancer la reparation
 			// car le repair peut etre long ; on ne veut pas boucler
 			effacer_meta('admin_repair');
-			$result_repair = sql_repair($tab);
-			if (!$result_repair) return false;
-	
+			if ($repair){
+				$result_repair = sql_repair($tab);
+				if (!$result_repair) return false;
+			}
+			else {
+				// si pas de repair, essayer quand meme de recreer la table
+				maj_tables($tab);
+			}
+
 			$count = sql_countsel($tab);
 	
 			if ($count>1)
