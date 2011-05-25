@@ -177,7 +177,7 @@ function copy_request($script, $suite, $submit='')
 {
 	include_spip('inc/filtres');
 	foreach(array_merge($_POST,$_GET) as $n => $c) {
-		if ($n!='fichier' AND $n!='exec' AND !is_array($c))
+		if (!in_array($n,array('fichier','exec','validation_admin')) AND !is_array($c))
 		$suite .= "\n<input type='hidden' name='$n' value='" .
 			entites_html($c) .
 			"'  />";
