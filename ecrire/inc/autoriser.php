@@ -554,11 +554,6 @@ function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opts) {
 	if (!autoriser('detruire') OR _request('reinstall'))
 		return false;
 
-	include_spip('inc/abstract_sql');
-	include_spip('inc/plugin');
-	if (spip_version_compare(sql_version(),'3.23.14','<'))
-		return false;
-
 	return true;
 }
 
