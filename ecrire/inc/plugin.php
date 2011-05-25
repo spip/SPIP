@@ -437,21 +437,22 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				// permet de faire des include_spip pour attraper un inc_ du plugin
 				if ($charge=='chemins'){
 					$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
-					if ($plug) // cas de SPIP : $plug='' :> ignorer ici
+					if ($plug) {// cas de SPIP : $plug='' :> ignorer ici
 						$splugs .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
-					if (count($info['path']))
-						foreach($info['path'] as $chemin){
-							if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
-								$dir = $chemin['dir'];
-								if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
-								if (!isset($chemin['type']) OR $chemin['type']=='public')
-									$chemins['public'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
-								if (!isset($chemin['type']) OR $chemin['type']=='prive')
-									$chemins['prive'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
-								#$splugs .= "if (".(($chemin['type']=='public')?"":"!")."_DIR_RESTREINT) ";
-								#$splugs .= "_chemin(_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"").");\n";
+						if (count($info['path']))
+							foreach($info['path'] as $chemin){
+								if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
+									$dir = $chemin['dir'];
+									if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
+									if (!isset($chemin['type']) OR $chemin['type']=='public')
+										$chemins['public'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+									if (!isset($chemin['type']) OR $chemin['type']=='prive')
+										$chemins['prive'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+									#$splugs .= "if (".(($chemin['type']=='public')?"":"!")."_DIR_RESTREINT) ";
+									#$splugs .= "_chemin(_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"").");\n";
+								}
 							}
-						}
+					}
 				}
 				// concerne uniquement options et fonctions
 				if (isset($info[$charge])){
