@@ -70,7 +70,10 @@ function admin_repair_plat(){
 function admin_repair_tables() {
 
 	$repair = sql_repair('repair', NULL, 'continue');
+
+	// recreer les tables manquantes eventuelles
 	include_spip('base/create');
+	creer_base();
 
 	$connexion = $GLOBALS['connexions'][0];
 	$prefixe = $connexion['prefixe'];
@@ -90,7 +93,7 @@ function admin_repair_tables() {
 				if (!$result_repair) return false;
 			}
 			else {
-				// si pas de repair, essayer quand meme de recreer la table
+				// si pas de repair, essayer quand meme de maj la table
 				maj_tables($tab);
 			}
 
