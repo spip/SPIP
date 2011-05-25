@@ -103,11 +103,13 @@ function action_charger_plugin_dist() {
 		}
 	}
 	else {
-		$extension = pathinfo($zip, PATHINFO_EXTENSION);
+		$extension = pathinfo($fichier, PATHINFO_EXTENSION);
+		if (!$extension)
+			$extension = pathinfo($zip, PATHINFO_EXTENSION);
 	}
-
 	# format de fichier inconnu
 	if (!$extension) {
+		spip_log("Extension inconnue pour le paquet $fichier venant de $zip");
 		include_spip('inc/headers');
 		redirige_url_ecrire('charger_plugin');
 	}
