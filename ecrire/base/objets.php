@@ -379,6 +379,8 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  * statut_images
  * statut_titres
  * statut_textes_instituer
+ *
+ * modeles : permet de declarer les modeles associes a cet objet
  * 
  * les infos non renseignees sont auto deduites par conventions
  * ou laissees vides
@@ -476,6 +478,9 @@ function renseigner_table_objet_sql($table_sql,$infos){
 		$infos['rechercher_champs'] = array();
 	if (!isset($infos['rechercher_jointures']))
 		$infos['rechercher_jointures'] = array();
+
+	if (!isset($infos['modeles']))
+		$infos['modeles'] = array($infos['type']);
 
 	return $infos;
 }
