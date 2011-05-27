@@ -28,7 +28,7 @@
 	    </li>
 	  	#SET{name,descriptif_site}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}"><:entree_description_site:></label>
+	    	<label for="#GET{name}"><:texte_descriptif_rapide:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<textarea name='#GET{name}' id='#GET{name}' rows='7'>#ENV{#GET{name}}</textarea>
 	    </li>
