@@ -14,6 +14,7 @@
 				<label for="#GET{name}"><:info_image_process:>#AIDER{logoart}</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
+				<div class="vignettes_reducteur clearfix">
 				#SET{process,gd1}
 				[<button
 					type="submit"
@@ -54,6 +55,7 @@
 					name="image_process_#EVAL{chr(91)}[(#GET{process})]#EVAL{chr(93)}">
 				[(#GET{process}|strtoupper)]
 				</button>]
+				</div>
 				<p class="explication"><:info_image_process2:></p>
 			</li>
 			[(#ENV{image_process}|match{^(gd1|gd2)$}|oui)
