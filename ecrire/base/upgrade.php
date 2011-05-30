@@ -295,7 +295,7 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect=
 	$trouver_table(''); // vider le cache des descriptions de table
 	// indispensable pour les chgt de versions qui n'ecrivent pas en base
 	// tant pis pour la redondance eventuelle avec ci-dessus
-	if ($meta) ecrire_meta($meta, $installee,'non',$table);
+	if ($meta) ecrire_meta($meta, $cible,'non',$table);
 	spip_log( "MAJ terminee. $meta: $installee",'maj.'._LOG_INFO_IMPORTANTE);
 	return array();
 }
