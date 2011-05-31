@@ -1,5 +1,5 @@
 [(#BOITE_OUVRIR{[
-	[(#URL_ECRIRE{infos_perso}|afficher_plus_info)]
+	[(#URL_ECRIRE{infos_perso}|afficher_plus_info{<:icone_informations_personnelles:>})]
 	[(#CHEMIN_IMAGE{information-perso-24.png}|balise_img{'','cadre-icone'})]
 	(#SESSION{nom})
 ],'simple personnel'})]
@@ -26,6 +26,7 @@
 #BOITE_FERMER
 
 [(#BOITE_OUVRIR{[
+	[(#URL_ECRIRE{configurer_identite}|afficher_plus_info{<:titre_identite_site:>})]
 	[(#CHEMIN_IMAGE{racine-24.png}|balise_img{'','cadre-icone'})]
 	(#NOM_SITE_SPIP)
 ],'simple etat_base'})]

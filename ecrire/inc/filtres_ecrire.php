@@ -406,12 +406,13 @@ function filtre_afficher_enfant_rub_dist($id_rubrique){
 // Afficher un petit "i" pour lien vers autre page
 
 // http://doc.spip.org/@afficher_plus
-function afficher_plus_info($lien) {
+function afficher_plus_info($lien, $titre="+") {
 	global $spip_lang_right, $spip_display;
 
+	$titre = attribut_html($titre);
 	if ($spip_display != 4) {
-			return "\n<a href='$lien' style='position:absolute;right:10px;'>" .
-			  http_img_pack(chemin_image("information-16.png"), "+", "") ."</a>";
+			return "\n<a href='$lien' title='$titre' style='position:absolute;right:10px;'>" .
+			  http_img_pack(chemin_image("information-16.png"), $titre, "") ."</a>";
 	}
 }
 ?>
