@@ -52,7 +52,7 @@
 #bando_outils li.boussole a#boutonbandeautoutsite {display:block;line-height:1em;}
 #bando_outils li.boussole a#boutonbandeautoutsite img {padding:2px; }
 #bando_outils li.boussole a#boutonbandeautoutsite:hover,#bando_outils li.boussole a#boutonbandeautoutsite:focus {background:#fff;}
-#bando_outils li.boussole a .image_loading {float:right;}
+#bando_outils li.boussole a .image_loading {float:#ENV{right};}
 
 #bando_outils ul.deroulant {font-size:0.9em;}
 #bando_outils ul.deroulant li ul {background:#fff;[border:1px solid (#ENV{claire});]padding:0px;border-top:0;padding-top:0;margin-left:-1px;}
@@ -116,7 +116,7 @@
 #bando_navigation ul.deroulant > li > a { color:#333; }
 
 #bando_navigation .largeur { position:relative; }
-#bando_navigation #masquer_outils{ position:absolute; right:-33px; bottom:-23px; height:18px; width:18px; background:transparent url([(#VAL{images/fermer-16.png}|find_in_theme)]) center center no-repeat;}
+#bando_navigation #masquer_outils{ position:absolute; #ENV{right}:-33px; bottom:-23px; height:18px; width:18px; background:transparent url([(#VAL{images/fermer-16.png}|find_in_theme)]) center center no-repeat;}
 .navigation_sans_outils #bando_navigation { border-bottom:1px solid #ddd; }
 .navigation_sans_outils #bando_navigation #masquer_outils{background-image:url([(#VAL{images/ouvrir-16.png}|find_in_theme)]); }
 #bando_navigation #masquer_outils span{ display: none; }

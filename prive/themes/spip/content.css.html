@@ -21,7 +21,7 @@
 /*  ------------------------------------------ */
 html {background-color:#eee;}
 #pied {font-size:0.9em;border-top:1px solid #ddd;background:#eee;margin-top:[(#ENV{margin-bottom}|div{0.9})em];padding-top:[(#ENV{margin-bottom}|div{0.9})em];overflow:hidden;}
-#copyright {text-align:right;}
+#copyright {text-align:#ENV{right};}
 
 #chemin { overflow: hidden; margin: 0; padding: 0;	text-align:#ENV{left};}
 #chemin > a  { color: #444; }
@@ -40,6 +40,7 @@ a:hover { text-decoration: underline; }
 a.icone { text-decoration: none; }
 a.icone:hover { text-decoration: none; }
 
+a.plus_info {display:block;position:absolute;#ENV{right}:10px;}
 
 img.puce { width: 7px; height: 7px; border: 0; }
 img.lang { width: 12px; height: 12px; border: 0; }
@@ -118,8 +119,8 @@ ul.instituer li.refuse.selected,ul.instituer li.refuse a:hover { background: #ff
 #wysiwyg .contenu_notes { background:#fff; border-top:1px solid #666; padding-top:5px; margin:1em 0; font-size: 0.9em; line-height: 1.3em;}
 #wysiwyg .contenu_notes.vide {display: none;}
 #wysiwyg .contenu_notes .label {display:inline;font-weight:bold;background:none;color:#000;}
-#wysiwyg .contenu_notes .notes { padding-left: 2em;}
-#wysiwyg .contenu_notes .spip_note {display:block;float:left;margin-left:-2em;}
+#wysiwyg .contenu_notes .notes { padding-#ENV{left}: 2em;}
+#wysiwyg .contenu_notes .spip_note {display:block;float:#ENV{left};margin-#ENV{left}:-2em;}
 #wysiwyg .texte {font-size:1em;}
 
 #wysiwyg { padding:5px;}
