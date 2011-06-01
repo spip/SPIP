@@ -22,7 +22,7 @@
 		<legend><:envoyer_message:></legend>
 		<ul>
 			<li class='saisie_email_message_auteur obligatoire[ (#ENV*{erreurs}|table_valeur{email_message_auteur}|oui)erreur]'>
-				<label for="email_message_auteur#ENV{id}"><:form_pet_votre_email:></label>
+				<label for="email_message_auteur#ENV{id}"><:entree_adresse_email:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{email_message_auteur})</span>]
 				<input[ (#HTML5|?{required="required" type="email" class="text email",type="text" class="text"})] name="email_message_auteur" id="email_message_auteur#ENV{id}" value="#ENV{email_message_auteur}" size="30" />
 			</li>
