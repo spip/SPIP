@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'articles_rubrique' => 'Articles in this section',
 'aucun_article' => 'No articles here',
 'aucun_auteur' => 'No authors here',
-'aucun_site' => 'No linked sites here',
+'aucun_site' => 'No links here',
 'aucune_breve' => 'No news items here',
 'aucune_rubrique' => 'No sections here',
 'auteur' => 'Author',
@@ -57,14 +57,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jours' => 'days',
 
 // L
-'lien_connecter' => 'Sign in',
+'lien_connecter' => 'Log in',
 
 // M
 'meme_auteur' => 'By the same author',
 'meme_rubrique' => 'Also in this section',
 'memes_auteurs' => 'By the same authors',
 'message' => 'Message',
-'messages_forum' => 'Forum messages',
+'messages_forum' => 'Forum posts',
 'messages_recents' => 'Most recent forum posts',
 'mots_clef' => 'Keyword',
 'mots_clefs' => 'Keywords',
@@ -76,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes' => 'What\'s new',
 'nouveautes_web' => 'What\'s new on the Web',
 'nouveaux_articles' => 'New articles',
-'nouvelles_breves' => 'New news items',
+'nouvelles_breves' => 'Latest news items',
 
 // P
 'page_precedente' => 'previous page',
@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Here is the site newsletter',
-'texte_lettre_information_2' => 'This letter summarises articles and news items published since',
+'texte_lettre_information_2' => 'This letter resumes the articles and news items published since',
 
 // V
 'ver_imprimer' => 'Printable version',
