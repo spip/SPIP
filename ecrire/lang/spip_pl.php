@@ -23,10 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modyfikuj słowo kluczowe',
 'admin_modifier_rubrique' => 'Modyfikuj dział',
 'admin_recalculer' => 'Odśwież ',
-'afficher_calendrier' => 'Afficher le calendrier', # NEW
+'afficher_calendrier' => 'Wyświetl kalendarz',
 'afficher_trad' => 'pokaż przekłady',
-'alerte_maj_impossible' => '<MODIF><b>Uwaga!</b> Uaktualnienie bazy danych SQL do wersji @version@ jest nie możliwe. Powodem jest prawdopodobnie brak możliwości modyfikacji bazy danych. Skontaktuj się z administratorem.',
-'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifiée par ailleurs. La valeur actuelle est :', # NEW
+'alerte_maj_impossible' => '<b>Uwaga!</b> Uaktualnienie bazy danych SQL do wersji @version@ jest nie możliwe. Powodem jest prawdopodobnie brak uprawnień do modyfikacji bazy danych. Skontaktuj się z administratorem lub firmą hostingową.',
+'alerte_modif_info_concourante' => 'UWAGA: Ta informacja była zmieniana w innym miejscu. Obecna wartość to:Cette information a été modifiée par ailleurs. La valeur actuelle est :',
 'analyse_xml' => 'Analiza XML',
 'annuler' => 'Anuluj',
 'antispam_champ_vide' => 'Pozostaw puste:',
@@ -59,13 +59,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Zmień w [hiperłącze->http://...]',
 'barre_lien_input' => 'Proszę wpisać cel hiperłącza (może to być URL internetowy w formie http://www.mysite.com lub po prostu numer artykułu na tej stronie).',
 'barre_note' => 'Zmień w [[Przypis]]',
-'barre_paragraphe' => 'Créer un paragraphe', # NEW
+'barre_paragraphe' => 'Utwórz paragraf',
 'barre_quote' => '<quote>Zacytuj wiadomość</quote>',
 'bouton_changer' => 'Zatwierdź',
 'bouton_chercher' => 'Szukaj',
 'bouton_choisir' => 'Wybierz',
-'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Ściągnij', # MODIF
+'bouton_deplacer' => 'Przenieś',
+'bouton_download' => 'Ściągnij',
 'bouton_enregistrer' => 'Zapisz',
 'bouton_radio_desactiver_messagerie_interne' => 'Dezaktywuj pocztę wewnętrzną',
 'bouton_radio_envoi_annonces' => 'Wyślij ogłoszenia redakcyjne',
@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Nie wysyłaj najnowszej listy newsów',
 'bouton_recharger_page' => 'ponownie załaduj tę stronę',
 'bouton_telecharger' => 'Załaduj',
-'bouton_upload' => 'Załaduj', # MODIF
+'bouton_upload' => 'Załaduj',
 'bouton_valider' => 'Zatwierdź',
 
 // C
@@ -172,39 +172,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois' => 'miesiąc',
 'date_mois_1' => 'Styczeń',
 'date_mois_10' => 'Październik',
-'date_mois_10_abbr' => 'oct.', # NEW
+'date_mois_10_abbr' => 'paźdź.',
 'date_mois_11' => 'Listopad',
-'date_mois_11_abbr' => 'nov.', # NEW
+'date_mois_11_abbr' => 'list.',
 'date_mois_12' => 'Grudzień',
-'date_mois_12_abbr' => 'déc.', # NEW
-'date_mois_1_abbr' => 'janv.', # NEW
+'date_mois_12_abbr' => 'gru.',
+'date_mois_1_abbr' => 'sty.',
 'date_mois_2' => 'Luty',
-'date_mois_2_abbr' => 'févr.', # NEW
+'date_mois_2_abbr' => 'lut.',
 'date_mois_3' => 'Marzec',
-'date_mois_3_abbr' => 'mars', # NEW
+'date_mois_3_abbr' => 'mar.',
 'date_mois_4' => 'Kwiecień',
-'date_mois_4_abbr' => 'avr.', # NEW
+'date_mois_4_abbr' => 'kw.',
 'date_mois_5' => 'Maj',
-'date_mois_5_abbr' => 'mai', # NEW
+'date_mois_5_abbr' => 'maj',
 'date_mois_6' => 'Czerwiec',
-'date_mois_6_abbr' => 'juin', # NEW
+'date_mois_6_abbr' => 'czer.',
 'date_mois_7' => 'Lipiec',
-'date_mois_7_abbr' => 'juil.', # NEW
+'date_mois_7_abbr' => 'lip.',
 'date_mois_8' => 'Sierpień',
-'date_mois_8_abbr' => 'août', # NEW
+'date_mois_8_abbr' => 'sie.',
 'date_mois_9' => 'Wrzesień',
-'date_mois_9_abbr' => 'sept.', # NEW
+'date_mois_9_abbr' => 'wrz.',
 'date_saison_1' => 'zima',
 'date_saison_2' => 'wiosna',
 'date_saison_3' => 'lato',
 'date_saison_4' => 'jesień',
-'date_secondes' => 'secondes', # NEW
+'date_secondes' => 'sekundy',
 'date_semaines' => 'tygodnie',
-'date_un_mois' => 'mois', # NEW
-'date_une_heure' => 'heure', # NEW
-'date_une_minute' => 'minute', # NEW
-'date_une_seconde' => 'seconde', # NEW
-'date_une_semaine' => 'semaine', # NEW
+'date_un_mois' => 'miesiące',
+'date_une_heure' => 'godzina',
+'date_une_minute' => 'minuta',
+'date_une_seconde' => 'sekunda',
+'date_une_semaine' => 'tydzień',
 'dirs_commencer' => ' w celu rzeczywistego rozpoczęcia instalacji',
 'dirs_preliminaire' => 'Wstęp: <b>Ustawienia pozwoleń dostępu</b>',
 'dirs_probleme_droits' => 'Problem z prawami dostępu',
@@ -217,35 +217,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Aby temu zapobiec, skorzystaj z klienta FTP i ureguluj konieczne prawa dostępu
   do tych katalogów. Procedura jest wytłumaczona od A-Z w przewodniku instalacji.
   <p>Kiedy dokonasz koniecznych zmian, będziesz mógł',
-'double_occurrence' => 'Podwójne wystąpienie', # MODIF
+'double_occurrence' => 'Podwójne wystąpienie @balise@',
 
 // E
-'en_cours' => 'en cours', # NEW
+'en_cours' => 'w trakcie',
 'envoi_via_le_site' => 'Wyślij ze strony',
 'erreur' => 'Błąd',
 'erreur_balise_non_fermee' => 'ostatni znacznik nie jest zamknięty :',
 'erreur_texte' => 'błąd/błędy',
-'etape' => 'Étape', # NEW
+'etape' => 'Etap',
 
 // F
 'fichier_introuvable' => 'Plik @fichier@ nie odnaleziony',
-'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-'form_auteur_mail_confirmation' => 'Bonjour,
+'form_auteur_confirmation' => 'Potwierdź swój e-mail',
+'form_auteur_email_modifie' => 'Twój adres e-mail został zmieniony.',
+'form_auteur_envoi_mail_confirmation' => 'Mail z potwierdzeniem został wysłany na adres @email@. Prosimy o kliknięcie w link, przesłany w e-mailu aby zatwierdzić adres e-mail.',
+'form_auteur_mail_confirmation' => 'Dzień dobry,
 
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
+Uruchomiłeś procedurę zmiany adresu e-mail.
+Aby zatwierdzić nowy adres, wystarczy wejść pod podany niżej link,
+jeśli tego nie uczynisz próba zmiany adresu zostanie anulowana:
 
     @url@
-', # NEW
+',
 'form_deja_inscrit' => 'Jesteś już zarejestrowany.',
 'form_email_non_valide' => 'Twój adres e-mail nie jest prawidłowy.',
 'form_forum_access_refuse' => 'Nie masz już dostępu do tej strony.',
 'form_forum_bonjour' => 'Witaj @nom@,',
-'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
+'form_forum_confirmer_email' => 'Aby zatwierdzić Twój adres e-mail, kliknij w ten link: @url_confirm@',
 'form_forum_email_deja_enregistre' => 'Ten adres e-mail jest już zarejestrowany, wskutek czego nie możesz używać swojego zwykłego hasła.',
 'form_forum_identifiant_mail' => 'Twój nowy identyfikator został właśnie wysłany do Ciebie e-mailem.',
 'form_forum_identifiants' => 'Osobista identyfikacja',
@@ -319,8 +318,8 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 'icone_supprimer_image' => 'Usuń ten obrazek',
 'icone_tous_articles' => 'Wszystkie Twoje artykuły',
 'icone_tous_auteur' => 'Wszyscy autorzy',
-'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-'icone_visiter_site' => 'Odwiedź', # MODIF
+'icone_tous_visiteur' => 'Wszyscy odwiedzający',
+'icone_visiter_site' => 'Przejdź do Twojego serwisu',
 'icone_voir_en_ligne' => 'Obejrzyj online',
 'img_indisponible' => 'obrazek niedostępny',
 'impossible' => 'niemożliwe',
@@ -341,13 +340,13 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 'info_article_supprime' => 'Artykuł usunięty',
 'info_articles' => 'Artykuły',
 'info_articles_a_valider' => 'Artykuły do zatwierdzenia',
-'info_articles_nb' => '@nb@ articles', # NEW
+'info_articles_nb' => '@nb@ artykułów',
 'info_articles_proposes' => 'Zaproponowane artykuły',
-'info_articles_un' => '1 article', # NEW
+'info_articles_un' => '1 artykuł',
 'info_auteurs_nombre' => 'autor(zy):',
 'info_authentification_ftp' => 'Uwierzytelnienie (poprzez FTP).',
 'info_breves_2' => 'newsy',
-'info_breves_nb' => '@nb@ brèves', # NEW
+'info_breves_nb' => '@nb@ newsów',
 'info_breves_un' => '1 brève', # NEW
 'info_connexion_refusee' => 'Brak połączenia',
 'info_contact_developpeur' => 'Proszę skontaktować się z deweloperem.',
@@ -356,7 +355,7 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 'info_copyright' => '@spip@ - darmowe oprogramowanie dystrybuowane w oparciu o licencję @lien_gpl@.',
 'info_copyright_doc' => 'Więcej informacji na stronie <a href="@spipnet@">http://www.spip.net</a>.', # MODIF
 'info_copyright_gpl' => 'na licencji GPL',
-'info_cours_edition' => 'Twoje artykuły w trakcie redagowania',
+'info_cours_edition' => 'Twoje artykuły w trakcie redagowania', # MODIF
 'info_creer_repertoire' => 'Utwórz plik lub katalog o nazwie:',
 'info_creer_repertoire_2' => 'w podkatalogu <b>@repertoire@</b>, a następnie:',
 'info_creer_vignette' => 'generowanie miniaturki',
