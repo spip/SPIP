@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		]
 		<ul>
-			<li class="editer_changer_lang long_label obligatoire[(#ENV**{erreurs}|table_valeur{changer_lang}|oui)erreur]">
+			<li class="editer editer_changer_lang long_label obligatoire[(#ENV**{erreurs}|table_valeur{changer_lang}|oui)erreur]">
 				<label for="changer_lang">[(#VAL{titre_langue_}|concat{#ENV{_objet}}|_T)]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{changer_lang})</span>
 			]<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>
@@ -35,7 +35,7 @@
 				</li>
 				]
 				[(#ENV{_lister_id_trad}|non)
-				<li class="editer_id_trad long_label[(#ENV**{erreurs}|table_valeur{id_trad}|oui)erreur][(#ENV{_saisie_en_cours}|non)none-js]">
+				<li class="editer editer_id_trad long_label[(#ENV**{erreurs}|table_valeur{id_trad}|oui)erreur][(#ENV{_saisie_en_cours}|non)none-js]">
 					<label for="id_trad"><:trad_lier:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_trad})</span>
 					]<input type="text" class="text" name="id_trad" id="id_trad" value="[(#ENV{id_trad}|?{#ENV{id_trad}})]"

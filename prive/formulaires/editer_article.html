@@ -10,24 +10,24 @@
 	  <ul>
 	  
 	  	[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|oui)
-	    <li class="editer_surtitre[ (#ENV**{erreurs}|table_valeur{surtitre}|oui)erreur]">
+	    <li class="editer editer_surtitre[ (#ENV**{erreurs}|table_valeur{surtitre}|oui)erreur]">
 		<label for="surtitre"><:texte_sur_titre:><em class="aide">#AIDER{surtitre}</em></label>[
 		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{surtitre})</span>
 		]<input type='text' class='text' name='surtitre' id='surtitre'[ lang='(#LANGUE)'] value="[(#ENV**{surtitre})]" />
 	    </li>]
-	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+	    <li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 	    	<label for="titre"><:info_titre:><em class="aide">#AIDER{titre}</em></label>[
 		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 		]<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,''})]"
 				placeholder="<:info_nouvel_article|attribut_html:>" />
 	    </li>
 	  	[(#ENV**{config}|table_valeur{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|oui)
-	    <li class="editer_soustitre[ (#ENV**{erreurs}|table_valeur{soustitre}|oui)erreur]">
+	    <li class="editer editer_soustitre[ (#ENV**{erreurs}|table_valeur{soustitre}|oui)erreur]">
 		<label for="soustitre"><:texte_sous_titre:><em class="aide">#AIDER{soustitre}</em></label>[
 		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{soustitre})</span>
 		]<input type='text' class='text' name='soustitre' id='soustitre'[ lang='(#LANGUE)'] value="[(#ENV**{soustitre})]" />
 	    </li>]
-		[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+		[<li class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
 				<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
 				]
@@ -35,7 +35,7 @@
 	    </li>]
 		
 	  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
-	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+	    <li class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 		<label for="descriptif"><:texte_descriptif_rapide:><em class="aide">#AIDER{descriptif}</em></label>[
 		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
 		]<textarea name='descriptif' id='descriptif'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
@@ -48,7 +48,7 @@
 		<input type='hidden' name='changer_virtuel' value='oui' />
 		<p class='explication'><:texte_article_virtuel_reference:></p>
 		</li>]
-		[<li class="editer_chapo[ (#ENV**{erreurs}|table_valeur{chapo}|oui)erreur]">(#ENV**{chapo}|match{^=,Uis}|non)
+		[<li class="editer editer_chapo[ (#ENV**{erreurs}|table_valeur{chapo}|oui)erreur]">(#ENV**{chapo}|match{^=,Uis}|non)
 			<label for="chapo"><:info_chapeau:><em class="aide">#AIDER{chapo}</em></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{chapo})</span>
 			]<textarea name='chapo' id='chapo'[ lang='(#LANGUE)'][ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo})]</textarea>
@@ -56,16 +56,16 @@
 			]
 
 		[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|oui)
-	  	<li class="editer_liens_sites fieldset">
+	  	<li class="editer editer_liens_sites fieldset">
 			<fieldset>
 				<h3 class="legend"><:entree_liens_sites:></h3>
 				<ul>
-				<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
+				<li class="editer editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
 					<label for="nom_site"><:info_titre:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>
 					]<input type='text' class='text' name='nom_site' id='nom_site'[ lang='(#LANGUE)'] value="[(#ENV**{nom_site})]" />
 				</li>
-				<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
+				<li class="editer editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
 					<label for="url_site"><:info_url:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>
 					]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
@@ -75,14 +75,14 @@
 		</li>]
 	    
 	  	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|oui)
-	    <li class="editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+	    <li class="editer editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
 			<label for="text_area"><:info_texte:><em class="aide">#AIDER{text_area}</em></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
 			][(#ENV**{_texte_trop_long,''})]
 				<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'>[(#ENV**{texte})]</textarea>
 	    </li>]
 	  	[(#ENV**{config}|table_valeur{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|oui)
-	    <li class="editer_ps[ (#ENV**{erreurs}|table_valeur{ps}|oui)erreur]">
+	    <li class="editer editer_ps[ (#ENV**{erreurs}|table_valeur{ps}|oui)erreur]">
 			<label for="ps"><:info_post_scriptum:></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ps})</span>
 			]<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>

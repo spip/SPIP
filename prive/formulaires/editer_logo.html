@@ -13,7 +13,7 @@
 	  <div style="display:none;"><input type='submit' class='submit' value='<:bouton_telecharger:>' /></div>
 	]
 	  <ul>
-	    <li class="editer_logo_on [ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
+	    <li class="editer editer_logo_on [ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
 			[(#ENV{logo_on}|oui)
 				[(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{logo_on},quoi=logo_on,editable=#ENV{logo_off}|non|et{#ENV{editable}}})]
 			][(#ENV{editable})
@@ -26,7 +26,7 @@
 			]
 	    </li>
 		[(#ENV{logo_survol}|ou{#ENV{logo_off}}|oui)
-	    <li class="editer_logo_off [ (#ENV**{erreurs}|table_valeur{logo_off}|oui)erreur]">
+	    <li class="editer editer_logo_off [ (#ENV**{erreurs}|table_valeur{logo_off}|oui)erreur]">
 			[(#ENV{logo_off}|oui)
 				[(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{logo_off},quoi=logo_off,editable=#ENV{editable}})]
 			][(#ENV{editable})

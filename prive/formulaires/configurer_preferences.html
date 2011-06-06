@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 		  	#SET{name,spip_ecran}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:label_taille_ecran:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">
@@ -24,7 +24,7 @@
 				</div>
 			</li>
 			#SET{name,display_navigation}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:label_texte_et_icones_navigation:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">
@@ -39,7 +39,7 @@
 				</div>
 			</li>
 			#SET{name,display_outils}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:label_bando_outils:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">
@@ -54,7 +54,7 @@
 				</div>
 			</li>
 		  	#SET{name,display}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:label_texte_et_icones_page:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">
@@ -86,7 +86,7 @@
 				</div>
 			</li>
 			#SET{name,couleur}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:titre_changer_couleur_interface:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">
@@ -190,7 +190,7 @@
 					<label for="[(#GET{name})]_20"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 20" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{20});" /></label>
 				</div>]
 			</li>
-			<li class="editer_imessage">
+			<li class="editer editer_imessage">
 				<label><:info_liste_redacteurs_connectes:></label>
 				<p class='explication'><:texte_auteur_messagerie:></p>
 				<div class="choix">

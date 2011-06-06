@@ -13,7 +13,7 @@
 		<p class="explication"><:config_info_base_sup:></p>
 		<ul>
 			#SET{name,sql_serveur_db}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:install_select_type_db:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
@@ -29,19 +29,19 @@
 				<fieldset>
 					<legend><:install_adresse_base_hebergeur:></legend>
 					#SET{name,adresse_db}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-					<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 						<label for="#GET{name}"><:entree_base_donnee_1:></label>[
 						<span class='erreur_message'>(#GET{erreurs})</span>
 						]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}"/>
 					</li>
 					#SET{name,login_db}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-					<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 						<label for="#GET{name}"><:entree_login_connexion_1:></label>[
 						<span class='erreur_message'>(#GET{erreurs})</span>
 						]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}"/>
 					</li>
 					#SET{name,pass_db}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-					<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 						<label for="#GET{name}"><:entree_mot_passe_1:></label>[
 						<span class='erreur_message'>(#GET{erreurs})</span>
 						]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}"/>
