@@ -739,11 +739,11 @@ function remplacer_jointnul($cle, $exp, $equiv='')
 function calculer_nom_fonction_squel($skel, $mime_type='html', $connect='')
 {
 	// ne pas doublonner les squelette selon qu'ils sont calcules depuis ecrire/ ou depuis la racine
-	if (strlen(_DIR_RACINE) AND substr($skel,0,strlen(_DIR_RACINE))==_DIR_RACINE)
+	if ($l=strlen(_DIR_RACINE) AND strncmp($skel,_DIR_RACINE,$l)==0)
 		$skel = substr($skel,strlen(_DIR_RACINE));
 	return $mime_type
 	. (!$connect ?  '' : preg_replace('/\W/',"_", $connect)) . '_'
-	. md5($GLOBALS['spip_version_code'] . ' * ' . $skel);
+	. md5($GLOBALS['spip_version_code'] . ' * ' . $skel . (isset($GLOBALS['marqueur_skel'])?'*'.$GLOBALS['marqueur_skel']:''));
 }
 
 ?>

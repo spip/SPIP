@@ -182,7 +182,9 @@ function calculer_contexte_implicite(){
 		'https' => $_SERVER['HTTPS'],
 		'espace' => test_espace_prive(),
 		'marqueur' => (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : ''),
+		'marqueur_skel' => (isset($GLOBALS['marqueur_skel']) ?  $GLOBALS['marqueur_skel'] : ''),
 		'notes' => $notes?$notes('','contexter_cache'):'',
+		'spip_version_code' => $GLOBALS['spip_version_code'],
 	);
 	return $contexte_implicite;
 }
