@@ -149,6 +149,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'info_1_objet' => 'info_1_auteur',
 				'info_nb_objets' => 'info_nb_auteurs',
 				'texte_logo_objet' => 'logo_auteur',
+				'texte_creer_associer' => 'creer_et_associer_un_auteur',
 				'titre' => "nom AS titre, '' AS lang",
 				'date' => 'date',
 				'principale' => 'oui',

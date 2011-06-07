@@ -21,7 +21,7 @@
 				[(#REM|generer_url_ecrire_entite_edit{#ENV{objet_source}}
 							|parametre_url{associer_objet,#ENV{objet}|concat{'|',#ENV{id_objet}}}
 							|parametre_url{redirect,#SELF|parametre_url{dummy,'','&'}}
-							|icone_horizontale{[(#VAL{creer_et_associer_un_}|concat{#ENV{objet_source}}|_T)],#ENV{objet_source},new})]
+							|icone_horizontale{[(#ENV{objet_source}|objet_info{texte_creer_associer}|_T)],#ENV{objet_source},new})]
 				]
 				<div class="toggle_box_link">
 					&#91;<a href="#"

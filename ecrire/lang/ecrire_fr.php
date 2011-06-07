@@ -110,6 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire',
 'connexion_ldap' => 'Connexion :',
 'copier_en_local' => 'Copier en local',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur',
 
 // D
 'date_mot_heures' => 'heures',
