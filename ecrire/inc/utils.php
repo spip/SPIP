@@ -926,15 +926,14 @@ function load_path_cache(){
 	$GLOBALS['path_files'] = array();
 	// si le visiteur est admin,
 	// on ne recharge pas le cache pour forcer sa mise a jour
-	// le cache de chemin n'est utilise que dans le public
-	if (_DIR_RESTREINT
+	if (
 		// la session n'est pas encore chargee a ce moment, on ne peut donc pas s'y fier
 		//AND (!isset($GLOBALS['visiteur_session']['statut']) OR $GLOBALS['visiteur_session']['statut']!='0minirezo')
 		// utiliser le cookie est un pis aller qui marche 'en general'
 		// on blinde par un second test au moment de la lecture de la session
-		AND !isset($_COOKIE[$GLOBALS['cookie_prefix'].'_admin'])
+		// !isset($_COOKIE[$GLOBALS['cookie_prefix'].'_admin'])
 		// et en ignorant ce cache en cas de recalcul explicite
-		AND _request('var_mode')!=='recalcul'
+		!_request('var_mode')
 		){
 		// on essaye de lire directement sans verrou pour aller plus vite
 		if ($contenu = spip_file_get_contents(_CACHE_CHEMIN)){
@@ -946,9 +945,6 @@ function load_path_cache(){
 			}
 		}
 	}
-	// pas de sauvegarde du chemin si on est pas dans le public
-	if (!_DIR_RESTREINT)
-		define('_SAUVER_CHEMIN',false);
 }
 
 function save_path_cache(){
