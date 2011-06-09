@@ -7,4 +7,5 @@
 ]
 [(#REM) Si pas de title, celui ci sera mis automatiquement par f_title_auto
 en capturant le premier <h1> de la page]
-#PIPELINE{header_prive,#INCLURE{fond=prive/squelettes/inclure/head}}
+#SET{paramcss,#REM|parametres_css_prive}
+#PIPELINE{header_prive,#INCLURE{fond=prive/squelettes/inclure/head,titre,minipres,paramcss=#GET{paramcss}}}
