@@ -111,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Choose an additional database', # NEW
 'connexion_ldap' => 'Connection:', # NEW
 'copier_en_local' => 'Copy to local site', # NEW
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'hodina',
@@ -275,6 +276,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Upozornění',
 'info_barre_outils' => 'with its toolbar?', # NEW
 'info_base_installee' => 'Struktura vaší databáze byla nainstalována.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Stříška',
 'info_chapeau_2' => 'Stříška:',
 'info_chemin_acces_1' => 'Volitelný údaj: <b>Přístup k adresáři</b>', # MODIF

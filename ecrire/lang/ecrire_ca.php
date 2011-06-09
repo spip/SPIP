@@ -105,6 +105,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'config_titre_base_sup_choix' => 'Escolliu una base suplementària',
 'connexion_ldap' => 'Connexió:',
 'copier_en_local' => 'Copiar en local',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'hores',
@@ -266,6 +267,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_avertissement' => 'Avís',
 'info_barre_outils' => 'amb la seva barra d\'eines?',
 'info_base_installee' => 'L\'estructura de la vostra bases de dades s\'ha instal·lat.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Encapçalament',
 'info_chapeau_2' => 'Encapçalament:',
 'info_chemin_acces_1' => 'Opcions: <b>Camí d\'accés al directori</b>',

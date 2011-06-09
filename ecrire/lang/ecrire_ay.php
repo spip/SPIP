@@ -115,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire', # NEW
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'urasa
@@ -285,6 +286,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Amuyam',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Ch\'akha ch\'akha pirwa yatiyawinakamatxa uchantataxiwa',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Qalltawi',
 'info_chapeau_2' => 'Qalltawi:',
 'info_chemin_acces_1' => 'Ajlliñatakiwa:  &lt;b&gt;&lt;/b&gt;mantañ thakhita jach\'a q\'ipina&lt;/b&gt;',

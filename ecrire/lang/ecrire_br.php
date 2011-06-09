@@ -108,6 +108,7 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'config_titre_base_sup_choix' => 'Diuzit un diaz ouzhpenn',
 'connexion_ldap' => 'Kevreañ :',
 'copier_en_local' => 'Eilañ en diabarzh',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'eur',
@@ -271,6 +272,7 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 'info_avertissement' => 'Kemenn diwall',
 'info_barre_outils' => 'gant e varrenn ostilhoù ?',
 'info_base_installee' => 'Staliet eo framm ho tiaz-titouroù.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Tog',
 'info_chapeau_2' => 'Tog :',
 'info_chemin_acces_1' => 'Dibarzhioù : <b>hent moned er rollad tud</b>',

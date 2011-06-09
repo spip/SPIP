@@ -111,6 +111,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire', # NEW
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'órák',
@@ -273,6 +274,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_avertissement' => 'Figyelmeztetés',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Az Ön adatbázisának struktúrája telepítve van.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Bevezető',
 'info_chapeau_2' => 'Bevezető :',
 'info_chemin_acces_1' => 'Opciók : <b>Elérési út a címtárban</b>', # MODIF

@@ -105,6 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'ជ្រើសរើសបន្ថែម មួយមូលដ្ឋានទិន្នន័យ',
 'connexion_ldap' => 'កា​រ​ភ្ជាប់ ៖',
 'copier_en_local' => 'Copier en local', # NEW
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'ម៉ោង',
@@ -267,6 +268,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'ការ​ព្រមាន',
 'info_barre_outils' => 'ជាមួយ របារឧបករ របស់វា ឬ?',
 'info_base_installee' => 'បានតំលើង រចនាសម្ពន្ធ មូលដ្ឋានទិន្នន័យ របស់អ្នក។',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'ឧបករ រក្សា​ទិន្នន័យ',
 'info_chapeau_2' => 'សេចក្ដី​ផ្ដើម ៖',
 'info_chemin_acces_1' => 'ជម្រើស ៖<b>ច្រកចូល​នៅ​ក្នុង​បញ្ជី​រាយ​ឈ្មោះ</b>',

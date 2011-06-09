@@ -109,6 +109,7 @@ Ez balidatu inportazio galdera hau.
 'config_titre_base_sup_choix' => 'Aukeratu datu base osagarri bat',
 'connexion_ldap' => 'Konexioa :',
 'copier_en_local' => 'Lokalean kopiatu',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'orduak',
@@ -268,6 +269,7 @@ Ez balidatu inportazio galdera hau.
 'info_avertissement' => 'Abisua',
 'info_barre_outils' => 'bere tresna-barrarekin ?',
 'info_base_installee' => 'Zure datubasearen egitura instalatua izan da',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Idazpurua',
 'info_chapeau_2' => 'Epigrafea:',
 'info_chemin_acces_1' => 'Aukerak: sarbidea urtekarian',

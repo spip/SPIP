@@ -105,6 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'בחר בסיס נתונים נוסף',
 'connexion_ldap' => 'התחברות:',
 'copier_en_local' => 'העתק למקומי',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => '"H"',
@@ -268,6 +269,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'אזהרה',
 'info_barre_outils' => 'עם סרגל הכלים שלי?',
 'info_base_installee' => '.המבנה של בסיס הנתונים שלך מותקן',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'סיפון',
 'info_chapeau_2' => ':הקדמה',
 'info_chemin_acces_1' => 'אפשרויות: <b>Access path in directory</b>',

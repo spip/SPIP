@@ -110,6 +110,7 @@ disattivata per motivi sicurezza (verifica con l\'amministratrice di sistema).',
 'config_titre_base_sup_choix' => 'Scegliere un database supplementare',
 'connexion_ldap' => 'Connessione:',
 'copier_en_local' => 'Copia in locale',
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'ore',
@@ -273,6 +274,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 'info_avertissement' => 'Avvertimento',
 'info_barre_outils' => 'con la barra degli strumenti?',
 'info_base_installee' => 'La struttura del vostro database è installata.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Introduzione',
 'info_chapeau_2' => 'Introduzione:',
 'info_chemin_acces_1' => 'Opzioni: <b>Percorso d\'accesso ai dati nell\'elenco</b>',

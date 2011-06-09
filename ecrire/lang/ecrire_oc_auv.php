@@ -106,6 +106,7 @@ la documentacion d\'SPIP</a>.', # MODIF
 'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire', # NEW
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'oras',
@@ -267,6 +268,7 @@ L\'administrator dau sistèma o de la ret vos deu poder fornir
 'info_avertissement' => 'Avís',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'L\'estructura de vòstra basa de donadas z-es installada.',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Chapèl',
 'info_chapeau_2' => 'Chapèl:',
 'info_chemin_acces_1' => 'Opcions: <b>chamin d\'accès dins l\'annuari</b>',

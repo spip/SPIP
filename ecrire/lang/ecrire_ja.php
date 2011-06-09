@@ -111,6 +111,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire', # NEW
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => '時',
@@ -274,6 +275,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_avertissement' => '警告',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'あなたのデータベースの中に構造物がインストールされました。',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => '飾り',
 'info_chapeau_2' => 'イントロダクション:',
 'info_chemin_acces_1' => 'オプション: <b>ディレクトリのアクセス・パス</b>',

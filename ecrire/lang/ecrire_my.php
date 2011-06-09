@@ -104,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Choisissez une base supplémentaire', # NEW
 'connexion_ldap' => 'ချိတ်ဆက်မှု',
 'copier_en_local' => 'Copier en local', # NEW
+'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
 // D
 'date_mot_heures' => 'H',
@@ -263,6 +264,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'သတိပေးချက်',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'သင့်အချက်လက် သိုလှောင်မှု တည်ဆောက်ပုံကို ထည့်သွင်းပြီးဖြစ်သည်',
+'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'စာရေးခုံ',
 'info_chapeau_2' => 'မိတ်ဆက်ခြင်း',
 'info_chemin_acces_1' => 'ရွေးချယ်ရန်များ <b>ဖိုင်လမ်းညွှန်ထဲရှိ ဆက်သွယ်ရန်လမ်းကြောင်း</b>',
