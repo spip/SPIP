@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modifica&#355;i cuvântul cheie',
 'admin_modifier_rubrique' => 'Modificaţi rubrica',
 'admin_recalculer' => 'Recalculaţi această pagină',
-'afficher_calendrier' => 'Afficher le calendrier', # NEW
+'afficher_calendrier' => 'Afişaţi calendarul',
 'afficher_trad' => 'afişaţi traducerile',
 'alerte_maj_impossible' => '<b>Alertă !</b> Aducerea la zi a bazei de date SQL către versiunea @version@ este imposibilă, probabil din cauza unei probleme de drepturi de modificare în baza de date. Vă rugăm să contactaţi furnizorul dumneavoastră de hosting.',
 'alerte_modif_info_concourante' => 'ATENŢIE : Această informaţie a fost modificată. Valoarea curentă este :',
@@ -64,8 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Schimbaţi',
 'bouton_chercher' => 'Căutaţi',
 'bouton_choisir' => 'Alegeţi',
-'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Descărcaţi', # MODIF
+'bouton_deplacer' => 'Deplasaţi',
+'bouton_download' => 'Descărcaţi',
 'bouton_enregistrer' => 'Înregistraţi',
 'bouton_radio_desactiver_messagerie_interne' => 'Dezactivaţi mesageria internă',
 'bouton_radio_envoi_annonces' => 'Trimiteţi anunţurile editoriale',
@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Nu trimiteţi lista de noutăţi',
 'bouton_recharger_page' => 're-încărcați această pagină',
 'bouton_telecharger' => 'Descărcaţi',
-'bouton_upload' => 'Descărcaţi', # MODIF
+'bouton_upload' => 'Încărcaţi',
 'bouton_valider' => 'Validaţi',
 
 // C
@@ -172,28 +172,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois' => 'luni',
 'date_mois_1' => 'ianuarie',
 'date_mois_10' => 'octombrie',
-'date_mois_10_abbr' => 'oct.', # NEW
+'date_mois_10_abbr' => 'oct.',
 'date_mois_11' => 'noiembrie',
-'date_mois_11_abbr' => 'nov.', # NEW
+'date_mois_11_abbr' => 'noi.',
 'date_mois_12' => 'decembrie',
-'date_mois_12_abbr' => 'déc.', # NEW
-'date_mois_1_abbr' => 'janv.', # NEW
+'date_mois_12_abbr' => 'dec.',
+'date_mois_1_abbr' => 'ian.',
 'date_mois_2' => 'februarie',
-'date_mois_2_abbr' => 'févr.', # NEW
+'date_mois_2_abbr' => 'feb.',
 'date_mois_3' => 'martie',
-'date_mois_3_abbr' => 'mars', # NEW
+'date_mois_3_abbr' => 'mar.',
 'date_mois_4' => 'aprilie',
-'date_mois_4_abbr' => 'avr.', # NEW
+'date_mois_4_abbr' => 'apr.',
 'date_mois_5' => 'mai',
-'date_mois_5_abbr' => 'mai', # NEW
+'date_mois_5_abbr' => 'mai',
 'date_mois_6' => 'iunie',
-'date_mois_6_abbr' => 'juin', # NEW
+'date_mois_6_abbr' => 'iun.',
 'date_mois_7' => 'iulie',
-'date_mois_7_abbr' => 'juil.', # NEW
+'date_mois_7_abbr' => 'iul.',
 'date_mois_8' => 'august',
-'date_mois_8_abbr' => 'août', # NEW
+'date_mois_8_abbr' => 'aug.',
 'date_mois_9' => 'septembrie',
-'date_mois_9_abbr' => 'sept.', # NEW
+'date_mois_9_abbr' => 'sep.',
 'date_saison_1' => 'iarna',
 'date_saison_2' => 'primăvara',
 'date_saison_3' => 'vara',
@@ -244,7 +244,7 @@ adresa de mai jos (în caz contrat cererea dumneavoastră va fi ignorată) :
 'form_email_non_valide' => 'Adresa dumneavoastră de email nu este valabilă.',
 'form_forum_access_refuse' => 'Nu mai aveţi dreptul de acces la acest site.',
 'form_forum_bonjour' => 'Bun? ziua @nom@,',
-'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
+'form_forum_confirmer_email' => 'Pentru a confirma adresa dvs. de email, vizitaţi această adresă: @url_confirm@',
 'form_forum_email_deja_enregistre' => 'Această adresă de email este deja înregistrată. Puteţi, aşadar, utiliza parola dumneavoastră obişnuită.',
 'form_forum_identifiant_mail' => 'Noul dumneavoastră identificator tocmai v-a fost trimis pe email.',
 'form_forum_identifiants' => 'Identificatori personali',
@@ -318,8 +318,8 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 'icone_supprimer_image' => 'Suprimaţi această imagine',
 'icone_tous_articles' => 'Toate articolele dvs.',
 'icone_tous_auteur' => 'Toţi autorii',
-'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-'icone_visiter_site' => 'Vizitaţi', # MODIF
+'icone_tous_visiteur' => 'Toţi vizitatorii',
+'icone_visiter_site' => 'Vizitaţi site-ul public',
 'icone_voir_en_ligne' => 'Vedeţi în direct',
 'img_indisponible' => 'imagine nedisponibilă',
 'impossible' => 'imposibil',
@@ -355,7 +355,7 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 'info_copyright' => '@spip@ este un program liber distribuit @lien_gpl@.',
 'info_copyright_doc' => 'Pentru mai multe informaţii, vizitaţi site-ul <a href="@spipnet@">http://www.spip.net/ro</a>.',
 'info_copyright_gpl' => 'sub licenţă GPL',
-'info_cours_edition' => 'Articolele dumneavoastră în curs de redactare',
+'info_cours_edition' => 'În curs de redactare',
 'info_creer_repertoire' => 'Vă rugăm să creaţi un fișier sau un director numit :',
 'info_creer_repertoire_2' => 'sub directorul <b>@repertoire@</b>, apoi :',
 'info_creer_vignette' => 'crearea viniétei în mod automat ',
@@ -472,12 +472,12 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 'infos_vos_pense_bete' => 'Ciornele dumneavoastră',
 
 // L
-'label_poids_fichier' => 'Taille', # NEW
+'label_poids_fichier' => 'Mărime',
 'lien_afficher_icones_seuls' => 'Afişaţi doar iconiţe',
 'lien_afficher_texte_icones' => 'Afişaţi iconiţe şi text',
 'lien_afficher_texte_seul' => 'Afişaţi doar text',
 'lien_liberer' => 'eliberaţi',
-'lien_liberer_tous' => 'eliberaţi aceste articole', # MODIF
+'lien_liberer_tous' => 'Eliberaţi toate articolele',
 'lien_nouvea_pense_bete' => 'CIORNĂ NOUĂ',
 'lien_nouveau_message' => 'MESAJ NOU',
 'lien_nouvelle_annonce' => 'ANUNŢ NOU',
@@ -649,7 +649,7 @@ Veţi putea după aceea alege o nouă parolă şi veţi putea să vă reconecta�
 'titre_statistiques' => 'Statisticile site-ului',
 'titre_titre_document' => 'Titlul documentului:',
 'todo' => 'de făcut',
-'trad_reference' => '(articol de referinţă)', # MODIF
+'trad_reference' => '(referinţa traducerilor)',
 
 // Z
 'zbug_balise_b_aval' => ' : element B înainte',
