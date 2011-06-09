@@ -495,12 +495,15 @@ function pipeline_precompile($verifs){
 				. $file . ')){include_once($f);}'."\n";
 			}
 		}
-		$content .= "function execute_pipeline_$action(&\$val){\n"
+		if (strlen($s_inc))
+			$s_inc = "static \$inc=null;\nif (!\$inc){\n$s_inc\$inc=true;\n}\n";
+		$content .= "// Pipeline $action \n"
+		.	"function execute_pipeline_$action(&\$val){\n"
 		. $s_inc
 		. $s_call
 		. "return \$val;\n}\n";
 	}
-	ecrire_fichier_php(_CACHE_PIPELINES, $content, "// Pipeline $action \n");
+	ecrire_fichier_php(_CACHE_PIPELINES, $content);
 	// on note dans tmp la liste des fichiers qui doivent etre presents,
 	// pour les verifier "souvent"
 	// ils ne sont verifies que depuis l'espace prive,
