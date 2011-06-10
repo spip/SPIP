@@ -579,6 +579,7 @@ jQuery.fn.ajaxbloc = function() {
 				var href = this.href;
 				var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
 				if (!jQuery.spip.preloaded_urls[url]) {
+					jQuery.spip.preloaded_urls[url] = '<!--preloading-->';
 					jQuery.ajax({"url":url,onAjaxLoad:false,"success":function(r){jQuery.spip.preloaded_urls[url]=r;}});
 				}
 			}); // previent qu'on ajax pas deux fois le meme lien
