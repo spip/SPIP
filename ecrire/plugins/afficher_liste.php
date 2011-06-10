@@ -21,7 +21,7 @@ function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_ac
 	$all_infos = $get_infos($liste_plugins, false, $dir_plugins);
 	$liste_plugins = array_flip($liste_plugins);
 	foreach($liste_plugins as $chemin => $v) {
-		$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($all_infos[$dir_plugins][$chemin]['nom']))))));
+		$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($all_infos[$chemin]['nom']))))));
 	}
 	asort($liste_plugins);
 	$exposed = urldecode(_request('plugin'));
