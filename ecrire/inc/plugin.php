@@ -193,7 +193,7 @@ function plugin_trier($infos, $liste_non_classee)
 			// on ne peut inserer qu'apres eux
 			foreach($info1['necessite'] as $need){
 			  $nom = strtoupper($need['nom']);
-			  if (!isset($liste[$nom]) OR !plugin_version_compatible($version,$liste[$nom]['version'])) {
+			  if (!isset($liste[$nom]) OR !plugin_version_compatible($need['version'],$liste[$nom]['version'])) {
 			      $info1 = false;
 			      break;
 			  }
@@ -323,11 +323,13 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	$err = $msg = $header = array();
 	foreach($plugin_valides as $p => $resume) {
 		$header[]= $p.($resume['version']?"(".$resume['version'].")":"");
-		foreach($infos[$resume['dir_type']][$resume['dir']]['lib'] as $l) {
-			if (!find_in_path($l['nom'], 'lib/')) {
-				$err[$p] = $resume;
-				$msg[$p][] = $l;
-				unset($plugin_valides[$p]);
+		if ($resume['dir']){ 
+			foreach($infos[$resume['dir_type']][$resume['dir']]['lib'] as $l) {
+				if (!find_in_path($l['nom'], 'lib/')) {
+					$err[$p] = $resume;
+					$msg[$p][] = $l;
+					unset($plugin_valides[$p]);
+				}
 			}
 		}
 	}
@@ -357,6 +359,7 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 		$dir_plugins_suppl = ":" . implode(array_filter(explode(':',_DIR_PLUGINS_SUPPL)),'|') . ":";
 	
 	$chemins = array();
+	$contenu = "";
 	foreach($ordre as $p => $info){
 		$dir_type = $plugin_valides[$p]['dir_type'];
 		$plug = $plugin_valides[$p]['dir'];
@@ -369,15 +372,17 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 			$dir = $dir_type.".'" . $plug ."/'";
 		}
 		$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
-		$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
-		foreach($info['path'] as $chemin){
-			if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
-				$dir = $chemin['dir'];
-				if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
-				if (!isset($chemin['type']) OR $chemin['type']=='public')
-					$chemins['public'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
-				if (!isset($chemin['type']) OR $chemin['type']=='prive')
-					$chemins['prive'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+		if ($prefix!=="SPIP"){
+			$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
+			foreach($info['path'] as $chemin){
+				if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
+					$dir = $chemin['dir'];
+					if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
+					if (!isset($chemin['type']) OR $chemin['type']=='public')
+						$chemins['public'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+					if (!isset($chemin['type']) OR $chemin['type']=='prive')
+						$chemins['prive'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
+				}
 			}
 		}
 	}
@@ -401,11 +406,6 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 		$plug = $plugin_valides[$p]['dir'];
 		$dir = constant($dir_type);
 		$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
-		// Eliminer le rep s'il y est deja
-		// (j'espere que c'est du code mort, c'est abominable).
-		if (strpos($plug, $dir) === 0) {
-			  $plug = substr($plug,strlen($dir));
-		}
 		if ($info['bouton'])
 			$boutons = array_merge($boutons,$info['bouton']);
 		if ($info['onglet'])
@@ -451,7 +451,7 @@ function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
 		$dir_type = $plugin_valides[$p]['dir_type'];
 		$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
 		$plug = $plugin_valides[$p]['dir'];
-		$prefix = $info['prefix']."_";
+		$prefix = (($info['prefix']=="spip")?"":$info['prefix']."_");
 		if (isset($info['pipeline']) AND is_array($info['pipeline'])){
 			foreach($info['pipeline'] as $pipe){
 				$nom = $pipe['nom'];
@@ -571,7 +571,7 @@ function plugin_installes_meta()
 		$plug = $resume['dir'];
  		$infos = $installer_plugins($plug, 'install', $resume['dir_type']); 
 		if ($infos) {
-			if (!is_array($info) OR $infos['install_test'][0])
+			if (!is_array($infos) OR $infos['install_test'][0])
 				$meta_plug_installes[] = $plug;
 			if (is_array($infos)) {
 				list($ok, $trace) = $infos['install_test'];
