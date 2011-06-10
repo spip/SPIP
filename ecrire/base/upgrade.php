@@ -61,7 +61,6 @@ function base_upgrade_dist($titre='', $reprise='')
 	spip_unlink(_CACHE_RUBRIQUES);
 	spip_unlink(_CACHE_PLUGINS_OPT);
 	spip_unlink(_CACHE_PLUGINS_FCT);
-	spip_unlink(_CACHE_PLUGINS_VERIF);
 
 	include_spip('inc/auth');
 	auth_synchroniser_distant();

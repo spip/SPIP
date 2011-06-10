@@ -345,12 +345,11 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// 	charger_plugins_options.php
 	// 	charger_plugins_fonctions.php
 	// et retourner les fichiers a verifier
-	$verifs = plugins_precompile_xxxtions($plugin_valides, $ordre);
+	plugins_precompile_xxxtions($plugin_valides, $ordre);
 	// mise a jour de la matrice des pipelines
 	pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche);
-	// generer les fichiers
-	// 	_CACHE_PLUGINS_VERIF et _CACHE_PIPELINE
-	pipeline_precompile($verifs);
+	// generer le fichier _CACHE_PIPELINE
+	pipeline_precompile();
 	return ($GLOBALS['meta']['plugin'] != $actifs_avant);
 }
 
@@ -398,7 +397,6 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 function plugins_precompile_xxxtions($plugin_valides, $ordre)
 {
 	$contenu = array('options' => '', 'fonctions' =>'');
-	$liste_fichier_verif = array();
 	$boutons = array();
 	$onglets = array();
 
@@ -418,7 +416,6 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 				$file = trim($file);
 				$_file = $root_dir_type . ".'$plug/$file'";
 				$contenu[$charge] .= "include_once_check($_file);\n";
-				$liste_fichier_verif["$root_dir_type:$plug/$file"]=1;
 			}
 		}
 	}
@@ -428,7 +425,6 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 
 	ecrire_fichier_php(_CACHE_PLUGINS_OPT, $contenu['options']);
 	ecrire_fichier_php(_CACHE_PLUGINS_FCT, $contenu['fonctions']);
-	return $liste_fichier_verif;
 }
 
 function plugin_ongletbouton($nom, $val)
@@ -498,7 +494,7 @@ function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
 
 // precompilation des pipelines
 // http://doc.spip.org/@pipeline_precompile
-function pipeline_precompile($verifs){
+function pipeline_precompile(){
 	global $spip_pipeline, $spip_matrice;
 
 	$content = "";
@@ -512,7 +508,6 @@ function pipeline_precompile($verifs){
 			$s_call .= '$val = minipipe(\''.$fonc.'\', $val);'."\n";
 			if (isset($spip_matrice[$fonc])){
 				$file = $spip_matrice[$fonc];
-				$verifs[$file] = 1;
 				$file = "'$file'";
 				// si un _DIR_XXX: est dans la chaine, on extrait la constante
 				if (preg_match(",(_(DIR|ROOT)_[A-Z_]+):,Ums",$file,$regs)){
@@ -536,22 +531,6 @@ function pipeline_precompile($verifs){
 		. "return \$val;\n}\n";
 	}
 	ecrire_fichier_php(_CACHE_PIPELINES, $content);
-	// on note dans tmp la liste des fichiers qui doivent etre presents,
-	// pour les verifier "souvent"
-	// ils ne sont verifies que depuis l'espace prive,
-	// mais peuvent etre reconstruit depuis l'espace public
-	// dans le cas d'un plugin non declare, 
-	// spip etant mis devant le fait accompli
-	// hackons donc avec un "../" en dur dans ce cas,
-	// qui ne manquera pas de nous embeter un jour...
-	$verifs = array_keys($verifs);
-	foreach ($verifs as $k => $f){
-		// si un _DIR_XXX: est dans la chaine, on extrait la constante
-		if (preg_match(",(_(DIR|ROOT)_[A-Z_]+):,Ums",$f,$regs))
-			$f = str_replace($regs[0],$regs[2]=="ROOT"?constant($regs[1]):(_DIR_RACINE?"":"../").constant($regs[1]),$f);
-		$verifs[$k] = $f;
-	}
-	ecrire_fichier(_CACHE_PLUGINS_VERIF, serialize($verifs));
 	clear_path_cache();
 }
 

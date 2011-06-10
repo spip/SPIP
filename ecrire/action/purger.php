@@ -40,7 +40,6 @@ function action_purger_dist($arg=null)
 			@spip_unlink(_CACHE_PLUGINS_PATH);
 			@spip_unlink(_CACHE_PLUGINS_OPT);
 			@spip_unlink(_CACHE_PLUGINS_FCT);
-			@spip_unlink(_CACHE_PLUGINS_VERIF);
 			@spip_unlink(_CACHE_CHEMIN);
 			purger_repertoire(_DIR_CACHE,array('subdir'=>true));
 			purger_repertoire(_DIR_AIDE);
