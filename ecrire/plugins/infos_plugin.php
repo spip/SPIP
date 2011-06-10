@@ -38,8 +38,10 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 		$ret['version_base'] = trim(spip_xml_aplatit($arbre['version_base']));
 	if (isset($arbre['etat']))
 		$ret['etat'] = trim(spip_xml_aplatit($arbre['etat']));
-	if (isset($arbre['description']))
-		$ret['description'] = spip_xml_aplatit($arbre['description']);
+	$ret['description'] = $ret['slogan'] = "";
+	if (isset($arbre['description'])){
+		$ret['slogan'] = $ret['description'] = spip_xml_aplatit($arbre['description']);
+	}
 	if (isset($arbre['lien']))
 		$ret['lien'] = join(' ',$arbre['lien']);
 	if (isset($arbre['options']))
@@ -54,8 +56,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 		$ret['meta'] = trim(spip_xml_aplatit($arbre['meta']));
 
 	$necessite = info_plugin_normalise_necessite($arbre['necessite']);
-	if (isset($necessite['compatible']))
-		$ret['compatible'] = $necessite['compatible'];
+	$ret['compatible'] = isset($necessite['compatible'])?$necessite['compatible']:'';
 	$ret['necessite'] = $necessite['necessite'];
 	$ret['lib'] = $necessite['lib'];
 	$ret['utilise'] = info_plugin_normalise_utilise($arbre['utilise']);
