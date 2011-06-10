@@ -63,7 +63,7 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		$arbre['prefix'] = array("");
 	} else{
 		$prefix = trim(end($arbre['prefix']));
-		if (strtoupper($prefix)=='SPIP'){
+		if (strtoupper($prefix)=='SPIP' AND $plug!="./"){
 			$arbre['erreur'][] = _T('erreur_plugin_prefix_interdit');
 		}
 		if (isset($arbre['etat'])){
@@ -133,6 +133,14 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 			}
 		}
 		$arbre['utilise'] = $utilise;
+		$procure = array();
+		if (spip_xml_match_nodes(',^procure,',$arbre,$uses)){
+			foreach(array_keys($uses) as $tag){
+				list($tag,$att) = spip_xml_decompose_tag($tag);
+				$procure[] = $att;
+			}
+		}
+		$arbre['procure'] = $procure;
 		$path = array();
 		if (spip_xml_match_nodes(',^chemin,',$arbre,$paths)){
 			foreach(array_keys($paths) as $tag){
