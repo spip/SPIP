@@ -11,7 +11,6 @@ ecrire/action/confirmer_email.php -text
 ecrire/action/confirmer_inscription.php -text
 ecrire/action/converser.php -text
 ecrire/action/debloquer_edition.php -text
-ecrire/action/desinstaller_plugin.php -text
 ecrire/action/editer_article.php -text
 ecrire/action/editer_auteur.php -text
 ecrire/action/editer_liens.php -text
