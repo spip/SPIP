@@ -211,7 +211,7 @@ function auteur_qualifier($id_auteur,$objets,$qualif){
 
 /**
  * Modifier le statut d'un auteur, ou son login/pass
- * http://doc.spip.org/@auteur_instituer
+ * http://doc.spip.org/@instituer_auteur
  * @param  $id_auteur
  * @param  $c
  * @param bool $force_webmestre
