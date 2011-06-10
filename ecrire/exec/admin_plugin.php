@@ -30,7 +30,7 @@ function exec_admin_plugin_dist($retour='') {
 	// et l'installation des qu'on est dans la colonne principale
 	// si jamais la liste des plugins actifs change, il faut faire un refresh du hit
 	// pour etre sur que les bons fichiers seront charges lors de l'install
-		$new = ecrire_plugin_actifs('',false, 'force');
+		$new = actualise_plugins_actifs();
 		if ($new AND _request('actualise')<2) {
 			include_spip('inc/headers');
 			redirige_par_entete(parametre_url(self(),'actualise',_request('actualise')+1,'&'));
@@ -46,12 +46,8 @@ function admin_plug_args($quoi, $erreur, $format)
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 
-	echo "<br /><br />\n", gros_titre(_T('icone_admin_plugin'),'',false);
-	echo barre_onglets("plugins", $quoi=='actifs'?"plugins_actifs":"admin_plugin");
 	echo debut_gauche('plugin',true);
-	echo debut_boite_info(true);
-	echo _T('info_gauche_admin_tech');
-	echo fin_boite_info(true);
+	echo recuperer_fond('prive/squelettes/navigation/configurer',array());
 
 	echo pipeline('affiche_gauche',
 		array(
@@ -61,12 +57,14 @@ function admin_plug_args($quoi, $erreur, $format)
 	);
 
 	echo debut_droite('plugin', true);
+	echo gros_titre(_T('icone_admin_plugin'),'',false);
+	echo barre_onglets("plugins", $quoi=='actifs'?"plugins_actifs":"admin_plugin");
 
 	// message d'erreur au retour d'une operation
 	if ($erreur)
-		echo "<div class='erreur_message-plugins'>$erreur</div>";
+		echo "<div class='error'>$erreur</div>";
 	if ($erreur_activation){
-		echo "<div class='erreur_message-plugins'>$erreur_activation</div>";
+		echo "<div class='error'>$erreur_activation</div>";
 	}
 
 	// la mise a jour de cette meta a ete faite par ecrire_plugin_actifs
