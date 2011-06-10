@@ -30,6 +30,22 @@ else
 // quelques inclusions et ini prealables
 include_spip('inc/commencer_page');
 
+function shutdown_error(){
+
+	// si on arrive ici avec un tampon non ferme : erreur fatale
+/*	if (ob_get_level()){
+		// envoyer tous les tampons
+		while (ob_get_level())
+			ob_end_flush();
+
+		var_dump(error_get_last());
+		#echo "<hr />"."Erreur fatale (memoire ?)<hr />";
+		@flush();
+	}*/
+}
+register_shutdown_function('shutdown_error');
+
+
 // on retient l'envoi de html pour pouvoir tout jeter et generer une 403
 // si on tombe sur un filtre sinon_interdire_acces
 // il faudrait etre capable de flusher cela des que le contenu principal est genere
