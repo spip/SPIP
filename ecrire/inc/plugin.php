@@ -288,6 +288,11 @@ function plugin_controler_lib($lib, $url)
 	return _T('plugin_necessite_lib', array('lib'=>$lib)) . $url;
 }
 
+// Pour compatibilite et lisibilite du code
+function actualise_plugins_actifs($pipe_recherche = false){
+	return ecrire_plugin_actifs('', $pipe_recherche, 'force');
+}
+
 // mise a jour du meta en fonction de l'etat du repertoire
 // Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide
 // si elle n'existe pas
