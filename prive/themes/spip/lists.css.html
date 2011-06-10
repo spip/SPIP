@@ -143,4 +143,4 @@
 .plan .menu-items .item>a {padding: 0.25em 0;background-repeat:no-repeat;background-position:center #ENV{left};background-repeat:no-repeat;}
 
 <BOUCLE_objets2(DATA){source table,#REM|lister_tables_objets_sql}{cle!=spip_rubriques}>
-.plan .menu-items.[(#VALEUR{table_objet})] .item>a{padding-#ENV{left}:20px;background-image:url(#CHEMIN_IMAGE{#VALEUR{icone_objet}-16.png});}</BOUCLE_objets2>
+.plan .menu-items.[(#VALEUR{table_objet})] .item>a{padding-#ENV{left}:20px;[background-image:url((#CHEMIN_IMAGE{#VALEUR{icone_objet}-16.png}));]}</BOUCLE_objets2>
