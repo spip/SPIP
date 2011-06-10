@@ -21,18 +21,37 @@ $GLOBALS['ldap_attributes'] = array(
 	'email' => "mail", 
 	'bio' => "description");
 
+/**
+ * Fonction principale d'authentification du module auth/ldap
+ *
+ * - On se bind avec le compte generique defini dans config/ldap.php,
+ * - On determine le DN de l'utilisateur candidat a l'authentification,
+ * - On se re-bind avec ce DN et le mot de passe propose.
+ *
+ * Si la connexion est autorisee, on renvoie pour enregistrement en session,
+ * en plus des champs SQL habituels, les informations de connexion de
+ * l'utilisateur (DN et password). Cela permettra de se binder en cours de
+ * session sous son identite specifique pour les operations necessitant des
+ * privileges particuliers.
+ * TODO: Gerer une constante de conf qui permette de choisir entre ce
+ *       comportement et tout faire avec le compte generique.
+ *
+ * @param string $serveur
+ * @return string
+ */
 // http://doc.spip.org/@inc_auth_ldap_dist
 function auth_ldap_dist ($login, $pass, $serveur='') {
 
-	#spip_log("ldap $login " . ($pass ? "mdp fourni" : "mdp absent"));
+	spip_log("ldap $login " . ($pass ? "mdp fourni" : "mdp absent"));
 
 	// Utilisateur connu ?
 	if (!($dn = auth_ldap_search($login, $pass, true, $serveur))) return array();
+	$credentials_ldap = array('ldap_dn' => $dn, 'ldap_password' => $pass);
 
 	// Si l'utilisateur figure deja dans la base, y recuperer les infos
 	$r = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='ldap'",'','','','',$serveur);
 
-	if ($r) return $r;
+	if ($r) return array_merge($r, $credentials_ldap);
 
 	// sinon importer les infos depuis LDAP, 
 
@@ -48,7 +67,10 @@ function auth_ldap_dist ($login, $pass, $serveur='') {
 	}				
 
 	if ($r)
-		return sql_fetsel("*", "spip_auteurs", "id_auteur=".intval($r),'','','','',$serveur);
+		return array_merge(
+			$credentials_ldap,
+			sql_fetsel("*", "spip_auteurs", "id_auteur=".intval($r),'','','','',$serveur)
+			);
 
 	// sinon echec
 	spip_log("Creation de l'auteur '$login' impossible");
@@ -177,5 +199,72 @@ function auth_ldap_retrouver_login($login, $serveur='')
 {
 	return auth_ldap_search($login, '', false, $serveur) ? $login : '';
 }
+
+/**
+ * Verification de la validite d'un mot de passe pour le mode d'auth concerne
+ * c'est ici que se font eventuellement les verifications de longueur mini/maxi
+ * ou de force.
+ *
+ * @param string $new_pass
+ * @param string $login
+ *  le login de l'auteur : permet de verifier que pass et login sont differents
+ *  meme a la creation lorsque l'auteur n'existe pas encore
+ * @param int $id_auteur
+ *  si auteur existant deja
+ * @return string
+ *  message d'erreur si login non valide, chaine vide sinon
+ */
+function auth_ldap_verifier_pass($login, $new_pass, $id_auteur=0, $serveur=''){
+    include_spip('auth/spip');
+    return auth_spip_verifier_pass($login, $new_pass, $id_auteur, $serveur);
+}
+
+/**
+ * Informer du droit de modifier ou non le pass
+ *
+ * On ne peut pas détecter a l'avance si l'autorisation sera donnee, il
+ * faudra informer l'utilisateur a posteriori si la modif n'a pas pu se
+ * faire.
+ * @return bool
+ *  pour un auteur LDAP, a priori toujours true, a conditiion que le serveur
+ *  l'autorise: par exemple, pour OpenLDAP il faut avoir dans slapd.conf:
+ *    access to attr=userPassword
+ *       by self write
+ *       ...
+ */
+function auth_ldap_autoriser_modifier_pass($serveur=''){
+    return true;
+}
+
+/**
+ * Fonction de modification du mot de passe
+ *
+ * On se bind au LDAP cette fois sous l'identite de l'utilisateur, car le
+ * compte generique defini dans config/ldap.php n'a generalement pas (et
+ * ne devrait pas avoir) les droits suffisants pour faire la modification.
+ * @return bool
+ *  informe du succes ou de l'echec du changement du mot de passe
+ */
+function auth_ldap_modifier_pass($login, $new_pass, $id_auteur, $serveur=''){
+    if (is_null($new_pass) OR auth_ldap_verifier_pass($login, $new_pass,$id_auteur,$serveur)!='') {
+        return false;
+    }
+    if (!$ldap = auth_ldap_connect($serveur))
+       return '';
+    $link = $ldap['link'];
+    include_spip("inc/session");
+    $dn = session_get('ldap_dn');
+    if ('' == $dn) {
+        return false;
+    }
+    if (!ldap_bind($link, $dn, session_get('ldap_password'))) {
+       return false;
+    }
+    $encoded_pass = "{MD5}".base64_encode(pack("H*",md5($new_pass)));
+    $success = ldap_mod_replace($link, $dn, array('userPassword' => $encoded_pass));
+    return $success;
+}
+
+
 
 ?>
