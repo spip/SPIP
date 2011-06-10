@@ -416,7 +416,7 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 		// pour pouvoir garder le meme niveau d'erreur general
 				$file = trim($file);
 				$_file = $root_dir_type . ".'$plug/$file'";
-				$contenu[$charge] .= "if (file_exists(\$f=$_file)){include_once \$f;}\n";
+				$contenu[$charge] .= "include_once_check($_file);\n";
 				$liste_fichier_verif["$root_dir_type:$plug/$file"]=1;
 			}
 		}
@@ -523,8 +523,7 @@ function pipeline_precompile($verifs){
 					$file = str_replace("''.","",$file);
 					$file = str_replace(constant($dir), '', $file);
 				}
-				$s_inc .= 'if (file_exists($f='
-				. $file . ')){include_once($f);}'."\n";
+				$s_inc .= "include_once_check($file);\n";
 			}
 		}
 		if (strlen($s_inc))

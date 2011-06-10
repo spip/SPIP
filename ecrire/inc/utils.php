@@ -67,6 +67,19 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 	exit;
 }
 
+/**
+ * Inclusion unique avec verification d'existence du fichier + log en crash sinon
+ * @param string $file
+ * @return bool
+ */
+function include_once_check($file){
+	if (file_exists($file)) {include_once $file;return true;}
+	$crash = (isset($GLOBALS['message_crash_plugins'])?unserialize($GLOBALS['message_crash_plugins']):'');
+	$crash = ($crash?$crash:array());
+	$crash[$file] = true;
+	ecrire_meta('message_crash_plugins',serialize($crash));
+	return false;
+}
 
 //
 // la fonction cherchant un fichier PHP dans le SPIP_PATH
