@@ -140,6 +140,7 @@ ecrire/inc/notifications.php -text
 ecrire/inc/pipelines.php -text
 ecrire/inc/pipelines_ecrire.php -text
 ecrire/inc/plonger.php -text
+ecrire/inc/plugin.php -text
 ecrire/inc/prepare_recherche.php -text
 ecrire/inc/presentation_mini.php -text
 ecrire/inc/presenter_enfants.php -text
