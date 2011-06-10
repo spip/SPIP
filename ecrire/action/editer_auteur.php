@@ -220,16 +220,19 @@ function auteur_qualifier($id_auteur,$objets,$qualif){
 function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	if (!$id_auteur=intval($id_auteur))
 		return false;
+	$erreurs = array(); // contiendra les differentes erreurs a traduire par _T()
 	// commencer par traiter les cas particuliers des logins et pass
 	// avant le changement de statut eventuel
 	if (isset($c['login']) OR isset($c['pass'])){
 		$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
 		include_spip('inc/auth');
 		if (isset($c['login']))
-			auth_modifier_login($auth_methode, $c['login'], $id_auteur);
+			if (!auth_modifier_login($auth_methode, $c['login'], $id_auteur))
+				$erreurs[] = 'ecrire:impossible_modifier_login_auteur';
 		if (isset($c['pass'])){
 			$c['login'] = sql_getfetsel('login','spip_auteurs','id_auteur='.intval($id_auteur));
-			auth_modifier_pass($auth_methode, $c['login'], $c['pass'], $id_auteur);
+			if (!auth_modifier_pass($auth_methode, $c['login'], $c['pass'], $id_auteur))
+				$erreurs[] = 'ecrire:impossible_modifier_pass_auteur';
 		}
 	}
 
@@ -274,7 +277,7 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 		auteur_associer($id_auteur,array('rubrique'=>$rubriques));
 	}
 
-	if (!count($champs)) return;
+	if (!count($champs)) return implode(' ', array_map('_T', $erreurs));
 	sql_updateq('spip_auteurs', $champs , 'id_auteur='.$id_auteur);
 
 	// .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
@@ -311,7 +314,7 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 		);
 	}
 
-	return ''; // pas d'erreur
+	return implode(' ', array_map('_T', $erreurs));
 
 }
 
