@@ -16,7 +16,7 @@ include_spip('inc/texte');
 include_spip('inc/plugin'); // pour plugin_est_installe
 
 // http://doc.spip.org/@ligne_plug
-function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=false, $class_li="item", $dir_plugins=_DIR_PLUGINS) {
+function plugins_afficher_plugin_dist($url_page, $plug_file, $checked, $actif, $expose=false, $class_li="item", $dir_plugins=_DIR_PLUGINS) {
 
 	static $id_input = 0;
 	static $versions = array();
@@ -26,15 +26,23 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$info = $get_infos($plug_file, $force_reload, $dir_plugins);
 	$prefix = $info['prefix'];
 	$cfg = "";
+	$checkable = ($dir_plugins!==_DIR_EXTENSIONS);
 
 	if (!plugin_version_compatible($info['compatible'], $GLOBALS['spip_version_branche'])){
 		$erreur = http_img_pack("plugin-dis-32.png",_T('plugin_info_non_compatible_spip')," class='picto_err'",_T('plugin_info_non_compatible_spip'));
 		$class_li .= " disabled";
+		$checkable = false;
 	}
 	elseif (isset($info['erreur'])) {
 		$class_li .= " error";
 		$erreur = http_img_pack("plugin-err-32.png",_T('plugin_info_erreur_xml')," class='picto_err'",_T('plugin_info_erreur_xml'))
 		  . "<div class='erreur'>" . join('<br >', $info['erreur']) . "</div>";
+		$checkable = false;
+	}
+	elseif (isset($GLOBALS['erreurs_activation_raw'][$dir_plugins.$plug_file])){
+		$class_li .= " error";
+		$erreur = http_img_pack("plugin-err-32.png",_T('plugin_impossible_activer', array('plugin' => $info['nom']))," class='picto_err'",_T('plugin_impossible_activer', array('plugin' => $info['nom'])))
+		  . "<div class='erreur'>" . implode("<br />",$GLOBALS['erreurs_activation_raw'][$dir_plugins.$plug_file]) . "</div>";
 	}
 	else
 		$cfg = $actif ? plugin_bouton_config($plug_file,$info,$dir_plugins) : "";
@@ -44,8 +52,8 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 
 	$class_li .= ($actif?" actif":"") . ($expose?" on":"");
 	return "<li id='$prefix$id' class='$class_li'>"
-	. (($erreur OR $dir_plugins===_DIR_EXTENSIONS)
-	   ? '': plugin_checkbox(++$id_input, $plug_file, $actif))
+	. ((!$checkable AND !$checked)
+	   ? '': plugin_checkbox(++$id_input, $plug_file, $checked))
 	.  plugin_resume($info, $dir_plugins, $plug_file, $url_page)
 	. $cfg
 	. $erreur

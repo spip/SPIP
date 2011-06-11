@@ -42,6 +42,9 @@ function admin_plug_args($quoi, $erreur, $format)
 {
 	if (!$quoi) $quoi = 'actifs';
 	// empecher l'affichage des erreurs dans le bandeau, on le donne ensuite
+	// format brut par plugin
+	$GLOBALS['erreurs_activation_raw'] = plugin_donne_erreurs(true, false);
+	// format resume mis en forme
 	$erreur_activation = plugin_donne_erreurs();
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
@@ -68,26 +71,22 @@ function admin_plug_args($quoi, $erreur, $format)
 	}
 
 	// la mise a jour de cette meta a ete faite par ecrire_plugin_actifs
-	$actifs = $lcpa = unserialize($GLOBALS['meta']['plugin']);
+	$actifs = unserialize($GLOBALS['meta']['plugin']);
+	$lcpa = $actifs + unserialize($GLOBALS['meta']['plugin_attente']);
 
 	// Les affichages se basent sur le repertoire, pas sur le nom
-	foreach ($actifs as $prefix => $infos)
-	  $actifs[$prefix] = $infos['dir'];
-	foreach ($lcpa as $prefix => $infos) {
-	  if ($infos['dir_type'] == '_DIR_PLUGINS')
-	    $lcpa[$prefix] = $infos['dir'];
-	  else unset($lcpa[$prefix]);
-	}
+	$actifs = liste_chemin_plugin($actifs, '');
+	$lcpa = liste_chemin_plugin($lcpa);
+	
 	// on installe les plugins maintenant,
 	// cela permet aux scripts d'install de faire des affichages (moches...)
 	plugin_installes_meta();
-
-	$lpf = liste_plugin_files();
 
 	echo "<div class='liste-plugins formulaire_spip'>";
 	echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'), 'plugins');
 
 	if ($quoi!=='actifs'){
+		$lpf = liste_plugin_files();
 		if ($lpf)
 			echo "<p>"._T('texte_presente_plugin')."</p>";
 		else {
@@ -95,27 +94,12 @@ function admin_plug_args($quoi, $erreur, $format)
 				echo  "<p>"._T('plugin_info_automatique_ftp',array('rep'=>joli_repertoire(_DIR_PLUGINS)))
 							. " &mdash; "._T('plugin_info_automatique_creer')."</p>";
 		}
-	}
-
-	// la liste
-	if ($quoi=='actifs'){
-		$lcpaffiche = $lcpa;
-	}
-	elseif ($quoi=='tous')
 		$lcpaffiche = $lpf;
+	}
 	else {
-		$dir_auto = substr(_DIR_PLUGINS_AUTO, strlen(_DIR_PLUGINS));
-		$lcpaffiche = array();
-		$plugins_interessants = @array_keys(unserialize($GLOBALS['meta']['plugins_interessants']));
-		if (!is_array($plugins_interessants))
-		  $plugins_interessants = array();
-
-		foreach ($lpf as $f)
-			if (!strpos($f, '/')
-			OR ($dir_auto AND substr($f, 0, strlen($dir_auto)) == $dir_auto)
-			OR in_array($f, $lcpa)
-			OR in_array($f, $plugins_interessants))
-				$lcpaffiche[] = $f;
+		// la liste
+		// $quoi=='actifs'
+		$lcpaffiche = $lcpa;
 	}
 
 	if ($quoi=='actifs' OR $lpf)
@@ -127,8 +111,8 @@ function admin_plug_args($quoi, $erreur, $format)
 		$format = 'repertoires';
 
 	$afficher = charger_fonction("afficher_$format",'plugins');
-	$corps = $afficher(self(),$lcpaffiche, $lcpa);
-	if ($corps) 
+	$corps = $afficher(self(),$lcpaffiche, $lcpa, $actifs);
+	if ($corps)
 	  $corps .= "\n<br />\n<div class='boutons' style='display:none;'>"
 	    .  "<input type='submit' class='submit save' value='"._T('bouton_enregistrer')
 	    ."' />"
@@ -183,7 +167,7 @@ function affiche_les_extensions($actifs)
 	if ((!$liste = liste_plugin_files(_DIR_EXTENSIONS))) return '';
 
 	$afficher = charger_fonction("afficher_liste",'plugins');
-	$liste = $afficher(self(), $liste, $actifs, _DIR_EXTENSIONS);
+	$liste = $afficher(self(), $liste, array(), $actifs, _DIR_EXTENSIONS);
 
 	return 
 		"<div id='extensions'>"
