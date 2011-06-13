@@ -2708,4 +2708,18 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
 
   return $filename;
 }
+
+/**
+ * Ajouter un timestamp a une url de fichier
+ * [(#CHEMIN{monfichier}|timestamp)]
+ *
+ * @param string $fichier
+ * @return string
+ */
+function timestamp($fichier){
+	if (!$fichier) return $fichier;
+	$m = filemtime($fichier);
+	return "$fichier?$m";
+}
+
 ?>
