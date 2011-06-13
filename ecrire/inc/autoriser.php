@@ -275,7 +275,8 @@ function autoriser_rubrique_supprimer_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$r = sql_fetsel("id_rubrique,statut", "spip_articles", "id_article=".sql_quote($id));
 
-	include_spip('inc/auth'); // pour auteurs_article si espace public
+	if (!function_exists('auteurs_article'))
+		include_spip('inc/auth'); // pour auteurs_article si espace public
 
 	return
 		$r
@@ -320,7 +321,7 @@ function autoriser_article_voir_dist($faire, $type, $id, $qui, $opt){
 		// sinon si on est auteur, on a le droit de le voir, evidemment !
 		OR
 		($id AND $qui['id_auteur']
-		     AND include_spip('inc/auth')
+		     AND (function_exists('auteurs_article') OR include_spip('inc/auth'))
 		     AND auteurs_article($id, "id_auteur=".$qui['id_auteur']));
 }
 
