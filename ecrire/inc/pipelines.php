@@ -11,6 +11,8 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
+if (test_espace_prive())
+	include_spip('inc/pipelines_ecrire');
 
 
 // Inserer jQuery
@@ -29,7 +31,6 @@ function f_jQuery ($texte) {
 		'javascript/ajaxCallback.js',
 		'javascript/jquery.cookie.js'
 		));
-	include_spip('inc/pipelines_ecrire');
 	$jqueryui_plugins = jqueryui_dependances(pipeline('jqueryui_plugins',
 		array(
 			'jquery.ui.core',
@@ -108,7 +109,6 @@ function f_admin ($texte) {
 
 function f_recuperer_fond($flux) {
 	if (!test_espace_prive()) return $flux;
-	include_spip('inc/pipelines_ecrire');
 	return f_afficher_blocs_ecrire($flux);
 }
 

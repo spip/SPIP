@@ -542,7 +542,6 @@ function memoriser_contexte_compil($p) {
 function reconstruire_contexte_compil($context_compil)
 {
 	if (!is_array($context_compil)) return $context_compil;
-	include_spip('public/interfaces');
 	$p = new Contexte;
 	$p->descr = array('sourcefile' => $context_compil[0],
 				  'nom' => $context_compil[1]);

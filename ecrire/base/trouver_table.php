@@ -12,6 +12,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('public/interfaces');
+include_spip('base/objets');
 
 // Trouve la description d'une table, en particulier celle d'une boucle
 // Si on ne la trouve pas, on demande au serveur SQL
@@ -67,7 +68,6 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 
 	// base sous SPIP: gerer les abreviations explicites des noms de table
 	if ($connexion['spip_connect_version']) {
-		include_spip('public/interfaces');
 		if (isset($table_des_tables[$nom])) {
 			$nom = $table_des_tables[$nom];
 			$nom_sql = 'spip_' . $nom;
@@ -127,7 +127,6 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 		// charger les infos declarees pour cette table
 		// en lui passant les infos connues
 		// $desc est prioritaire pour la description de la table
-		include_spip('base/objets');
 		$desc = array_merge(lister_tables_objets_sql($nom_sql,$desc),$desc);
 		
 		$connexion['tables'][$nom] = $desc;

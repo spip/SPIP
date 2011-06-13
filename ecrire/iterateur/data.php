@@ -159,7 +159,9 @@ class IterateurDATA implements Iterator {
 			# un peu crado : avant de charger le cache il faut charger
 			# les class indispensables, sinon PHP ne saura pas gerer
 			# l'objet en cache ; cf plugins/icalendar
-			if (isset($this->command['sourcemode']))
+			# perf : pas de fonction table_to_array ! (table est deja un array)
+			if (isset($this->command['sourcemode'])
+			  AND !in_array($this->command['sourcemode'],array('table', 'array', 'tableau')))
 				charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true);
 
 			# le premier argument peut etre un array, une URL etc.
@@ -197,29 +199,30 @@ class IterateurDATA implements Iterator {
 					)
 						$this->tableau = $a;
 				}
-				else if (preg_match(',^https?://,', $src)) {
-					include_spip('inc/distant');
-					$u = recuperer_page($src);
-					if (!$u)
-						throw new Exception("404");
-					if (!isset($ttl)) $ttl = 24*3600;
-				} else if (@is_dir($src)) {
-					$u = $src;
-					if (!isset($ttl)) $ttl = 10;
-				} else if (@is_readable($src) && @is_file($src)) {
-					$u = spip_file_get_contents($src);
-					if (!isset($ttl)) $ttl = 10;
-				} else {
-					$u = $src;
-					if (!isset($ttl)) $ttl = 10;
-				}
-
-				if (!$this->err
-				AND $g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
-					$args = $this->command['source'];
-					$args[0] = $u;
-					if (is_array($a = call_user_func_array($g,$args))) {
-						$this->tableau = $a;
+				else {
+					if (preg_match(',^https?://,', $src)) {
+						include_spip('inc/distant');
+						$u = recuperer_page($src);
+						if (!$u)
+							throw new Exception("404");
+						if (!isset($ttl)) $ttl = 24*3600;
+					} else if (@is_dir($src)) {
+						$u = $src;
+						if (!isset($ttl)) $ttl = 10;
+					} else if (@is_readable($src) && @is_file($src)) {
+						$u = spip_file_get_contents($src);
+						if (!isset($ttl)) $ttl = 10;
+					} else {
+						$u = $src;
+						if (!isset($ttl)) $ttl = 10;
+					}
+					if (!$this->err
+					AND $g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
+						$args = $this->command['source'];
+						$args[0] = $u;
+						if (is_array($a = call_user_func_array($g,$args))) {
+							$this->tableau = $a;
+						}
 					}
 				}
 

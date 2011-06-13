@@ -294,6 +294,9 @@ function calculer_langues_rubriques() {
 // site public
 // http://doc.spip.org/@calculer_langues_utilisees
 function calculer_langues_utilisees ($serveur='') {
+	include_spip('public/interfaces');
+	include_spip('public/compiler');
+	include_spip('public/composer');
 	$langues = array();
 
 	$langues[$GLOBALS['meta']['langue_site']] = 1;
@@ -309,7 +312,6 @@ function calculer_langues_utilisees ($serveur='') {
 		  AND isset($desc['field']['lang'])
 			AND isset($desc['field']['langue_choisie'])){
 
-			include_spip('public/interfaces');
 			$boucle = new Boucle();
 			$boucle->show = $desc;
 			$boucle->nom = 'calculer_langues_utilisees';
@@ -320,8 +322,6 @@ function calculer_langues_utilisees ($serveur='') {
 			$boucle->from[$desc['table_objet']] = $t;
 			if (isset($desc['statut'])
 		    AND $desc['statut']){
-				include_spip('public/compiler');
-				include_spip('public/composer');
 				instituer_boucle($boucle, false);
 				$res = calculer_select($boucle->select,$boucle->from,$boucle->from_type,$boucle->where,$boucle->join,$boucle->group,$boucle->order,$boucle->limit,$boucle->having,$desc['table_objet'],$desc['table_objet'],$serveur);
 			}
