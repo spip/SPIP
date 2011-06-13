@@ -141,7 +141,8 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 		// sauf sous wintruc ou ca ne marche pas
 		$ok = false;
 		if ($truncate AND _OS_SERVEUR != 'windows'){
-			include_spip('inc/acces');
+			if (!function_exists('creer_uniqid'))
+				include_spip('inc/acces');
 			$id = creer_uniqid();
 			// on ouvre un pointeur sur un fichier temporaire en ecriture +raz
 			if ($fp2 = spip_fopen_lock("$fichier.$id", 'w',LOCK_EX)) {
