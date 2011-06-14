@@ -177,10 +177,17 @@ function nettoyer_url_page($url, $contexte=array())
  *
  */
 function generer_url_ecrire_objet($objet,$id, $args='', $ancre='', $public=null, $connect=''){
-	if (function_exists($f = 'generer_url_ecrire_' . $objet)
-		// ou definie par un plugin
-	  OR $f = charger_fonction($f,'urls',true))
-		return $f($id, $args, $ancre, $public, $connect);
+	static $furls = array();
+	if (!isset($furls[$objet])){
+		if (function_exists($f = 'generer_url_ecrire_' . $objet)
+			// ou definie par un plugin
+			OR $f = charger_fonction($f,'urls',true))
+			$furls[$objet] = $f;
+		else
+			$furls[$objet] = '';
+	}
+	if ($furls[$objet])
+		return $furls[$objet]($id, $args, $ancre, $public, $connect);
 	// si pas de flag public fourni
 	// le calculer en fonction de la declaration de statut
 	if (is_null($public) AND !$connect)

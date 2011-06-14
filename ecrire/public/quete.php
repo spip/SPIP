@@ -162,7 +162,9 @@ function quete_meta($nom, $serveur) {
 // le chemin du fichier, celui du logo de survol, l'attribut style=w/h
 
 function quete_logo($type, $onoff, $id, $id_rubrique, $flag) {
-	$chercher_logo = charger_fonction('chercher_logo', 'inc');
+	static $chercher_logo;
+	if (is_null($chercher_logo))
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$nom = strtolower($onoff);
 
 	while (1) {

@@ -112,9 +112,9 @@ function lang_typo($lang='') {
 			: $GLOBALS['spip_lang'];
 	}
 	if ($lang == 'eo'
-	OR $lang == 'fr'
-	OR substr($lang, 0, 3) == 'fr_'
-	OR $lang == 'cpf')
+	  OR $lang == 'fr'
+	  OR strncmp($lang, 'fr_', 3)==0
+	  OR $lang == 'cpf')
 		return 'fr';
 	else
 		return 'en';

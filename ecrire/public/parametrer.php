@@ -43,6 +43,7 @@ if (test_espace_prive ())
 
 // http://doc.spip.org/@public_parametrer_dist
 function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
+	static $composer,$styliser,$notes=null;
 	$page = tester_redirection($fond, $contexte, $connect);
 	if ($page) return $page;
 
@@ -56,7 +57,8 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 
 	$debug = (defined('_VAR_MODE') && _VAR_MODE == 'debug');
 
-	$styliser = charger_fonction('styliser', 'public');
+	if (!$styliser)
+		$styliser = charger_fonction('styliser', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) =
 		$styliser($fond, $contexte, $GLOBALS['spip_lang'], $connect);
 
@@ -72,7 +74,8 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 		// charger le squelette en specifiant les langages cibles et source
 		// au cas il faudrait le compiler (source posterieure au resultat)
 
-		$composer = charger_fonction('composer', 'public');
+		if (!$composer)
+			$composer = charger_fonction('composer', 'public');
 		$code = $composer($skel, $mime_type, $gram, $sourcefile, $connect);
 	} else $code = '';
 
@@ -86,7 +89,9 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 
 		// On cree un marqueur de notes unique lie a cette composition
 		// et on enregistre l'etat courant des globales de notes...
-		if ($notes = charger_fonction('notes', 'inc', true))
+		if (is_null($notes))
+			$notes = charger_fonction('notes', 'inc', true);
+		if ($notes)
 			$notes('','empiler');
 
 		// Rajouter d'office ces deux parametres

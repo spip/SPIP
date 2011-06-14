@@ -2093,7 +2093,9 @@ function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=f
  * @return
  */
 function filtre_puce_statut_dist($statut,$objet,$id_objet=0,$id_parent=0){
-	$puce_statut = charger_fonction('puce_statut','inc');
+	static $puce_statut = null;
+	if (!$puce_statut)
+		$puce_statut = charger_fonction('puce_statut','inc');
 	return $puce_statut($id_objet, $statut, $id_parent, $objet);
 }
 
@@ -2507,6 +2509,7 @@ function tri_champ_select($t){
  * @return string
  */
 function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
+	static $trouver_table=null;
 	// On verifie qu'on a tout ce qu'il faut
 	$id_objet = intval($id_objet);
 	if (!($id_objet and $type_objet and $info))
@@ -2518,7 +2521,8 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 
 	// Si on demande le titre, on le gere en interne
 	if ($demande_titre = ($info == 'titre')){
-		$trouver_table = charger_fonction('trouver_table','base');
+		if (!$trouver_table)
+			$trouver_table = charger_fonction('trouver_table','base');
 		$desc = $trouver_table(table_objet_sql($type_objet));
 		$champ_titre = isset($desc['titre'])?$desc['titre']:'titre';
 		$champ_titre = ", $champ_titre";
