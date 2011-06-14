@@ -2115,8 +2115,8 @@ class sqlite_traducteur {
 		//
 		// Correction Antiquotes et echappements
 		// ` => rien
-		if (strpos($this->query,'`')!==false OR strpos($this->query,$this->codeEchappements)!==false)
-			$this->query = str_replace(array('`',$this->codeEchappements), array('',"''"), $this->query);
+		if (strpos($this->query,'`')!==false)
+			$this->query = str_replace('`','', $this->query);
 
 		switch (count($textes)){
 			case 0:break;
@@ -2130,6 +2130,9 @@ class sqlite_traducteur {
 				$this->query = call_user_func_array('sprintf',$textes);
 				break;
 		}
+
+		if (strpos($this->query,$this->codeEchappements)!==false)
+			$this->query = str_replace($this->codeEchappements,"''", $this->query);
 
 		return $this->query;
 	}
