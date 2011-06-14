@@ -173,9 +173,7 @@ function balise_URL_ECRIRE_dist($p) {
 	if (!$code)
 		$fonc = "''";
 	else{
-		if (preg_match("/^'[^']*'$/", $code))
-			$fonc = $code;
-		else {$code = "(\$f = $code)"; $fonc = '$f';}
+		$fonc = $code;
 		$args = interprete_argument_balise(2,$p);
 		if ($args != "''" && $args!==NULL)
 			$fonc .= ',' . $args;
