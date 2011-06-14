@@ -6,6 +6,7 @@ ecrire/action/activer_plugins.php -text
 ecrire/action/ajouter_lien.php -text
 ecrire/action/annuler_job.php -text
 ecrire/action/auth.php -text
+ecrire/action/calculer_taille_cache.php -text
 ecrire/action/charger_plugin.php -text
 ecrire/action/confirmer_email.php -text
 ecrire/action/confirmer_inscription.php -text
@@ -800,9 +801,7 @@ prive/squelettes/hierarchie/auteur_edit.html -text
 prive/squelettes/hierarchie/dist.html -text
 prive/squelettes/inclure/accueil-information.html -text
 prive/squelettes/inclure/admin_vider_cache.html -text
-prive/squelettes/inclure/admin_vider_cache_fonctions.php -text
 prive/squelettes/inclure/admin_vider_images.html -text
-prive/squelettes/inclure/admin_vider_images_fonctions.php -text
 prive/squelettes/inclure/barre-nav.html -text
 prive/squelettes/inclure/barre-nav_fonctions.php -text
 prive/squelettes/inclure/cfg.html -text

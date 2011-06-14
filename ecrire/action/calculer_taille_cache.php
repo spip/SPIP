@@ -12,6 +12,41 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+
+// Cette action permet de confirmer un changement d'email
+
+function action_calculer_taille_cache_dist($arg=null){
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
+	include_spip('inc/filtres');
+
+	if ($arg=='images'){
+		$taille = calculer_taille_dossier(_DIR_VAR);
+		$res = _T('ecrire:taille_cache_image',
+		array(
+			'dir' => joli_repertoire(_DIR_VAR),
+			'taille' => "<b>".taille_en_octets($taille)."</b>"
+			)
+		);
+	}
+	else {
+		include_spip('inc/invalideur');
+		$taille = intval(taille_du_cache());
+		$res = ($taille<=250000) ?
+			_T('taille_cache_vide')
+			:
+			_T('taille_cache_octets',array('octets'=>taille_en_octets($taille)));
+		$res = "<b>$res</b>";
+	}
+	
+	$res = "<p>$res</p>";
+	ajax_retour($res);
+}
+
+
+
 // http://doc.spip.org/@calculer_taille_dossier
 function calculer_taille_dossier ($dir) {
 	$handle = @opendir($dir);
@@ -29,19 +64,5 @@ function calculer_taille_dossier ($dir) {
 	closedir($handle);
 	return $taille;
 }
-
-
-
-// http://doc.spip.org/@afficher_taille_cache_vignettes
-function afficher_taille_cache_vignettes() {
-	$taille = calculer_taille_dossier(_DIR_VAR);
-	return _T('ecrire:taille_cache_image',
-		array(
-			'dir' => joli_repertoire(_DIR_VAR),
-			'taille' => "<b>".taille_en_octets($taille)."</b>"
-			)
-		);
-}
-
 
 ?>
