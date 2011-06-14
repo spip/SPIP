@@ -1982,7 +1982,7 @@ class sqlite_traducteur {
 	
 	// Pour les corrections a effectuer sur les requetes :
 	var $textes = array(); // array(code=>'texte') trouvé
-	var $codeEchappements = "%@##@%";
+	var $codeEchappements = "\x1@##@\x1"; // on utilise \x1 caractere interdit
 
 	function sqlite_traducteur($query, $prefixe, $sqlite_version){
 		$this->query = $query;
