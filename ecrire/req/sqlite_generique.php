@@ -505,6 +505,15 @@ function spip_sqlite_count($r, $serveur = '', $requeter = true){
 
 	if (_sqlite_is_version(3, '', $serveur)){
 		// select ou autre (insert, update,...) ?
+
+		// (link,requete) a compter
+		if (is_array($r->spipSqliteRowCount)){
+			list($link,$query) = $r->spipSqliteRowCount;
+			$l = $link->query($query);
+			$i = 0;
+			while ($l->fetch()) $i++;
+			$r->spipSqliteRowCount = $i;
+		}
 		if (isset($r->spipSqliteRowCount)){
 			// Ce compte est faux s'il y a des limit dans la requete :(
 			// il retourne le nombre d'enregistrements sans le limit
@@ -702,32 +711,25 @@ function spip_sqlite_explain($query, $serveur = '', $requeter = true){
 function spip_sqlite_fetch($r, $t = '', $serveur = '', $requeter = true){
 
 	$link = _sqlite_link($serveur);
-	if (!$t){
-		if (_sqlite_is_version(3, $link)){
-			$t = SPIP_SQLITE3_ASSOC;
-		} else {
-			$t = SPIP_SQLITE2_ASSOC;
-		}
-	}
+	$is_v3 = _sqlite_is_version(3, $link);
+	if (!$t)
+		$t = ($is_v3 ? SPIP_SQLITE3_ASSOC : SPIP_SQLITE2_ASSOC);
 
-
-	if (_sqlite_is_version(3, $link)){
-		if ($r) $retour = $r->fetch($t);
-	} elseif ($r) {
-		$retour = sqlite_fetch_array($r, $t);
-	}
+	$retour = false;
+	if ($r)
+		$retour = ($is_v3 ? $r->fetch($t) : sqlite_fetch_array($r, $t));
 
 	// les version 2 et 3 parfois renvoie des 'table.titre' au lieu de 'titre' tout court ! pff !
 	// suppression de 'table.' pour toutes les cles (c'est un peu violent !)
-	if ($retour){
-		$new = array();
+	// c'est couteux : on ne verifie que la premiere ligne pour voir si on le fait ou non
+	if ($retour
+	  AND strpos(implode('',array_keys($retour)),'.')!==false){
 		foreach ($retour as $cle => $val){
 			if (($pos = strpos($cle, '.'))!==false){
-				$cle = substr($cle, ++$pos);
+				$retour[substr($cle, $pos+1)] = &$retour[$cle];
+				unset($retour[$cle]);
 			}
-			$new[$cle] = $val;
 		}
-		$retour = &$new;
 	}
 
 	return $retour;
@@ -1930,16 +1932,15 @@ class sqlite_requeteur {
 				// particulierement s'il y a des LIMIT dans la requete.
 				if (strtoupper(substr(ltrim($query), 0, 6))=='SELECT'){
 					if ($r){
-						$l = $this->link->query($query);
-						$i = 0;
-						while ($l->fetch()) $i++;
-						$r->spipSqliteRowCount = $i;
-						unset($l);
-					} elseif ($r instanceof PDOStatement) {
+						// noter le link et la query pour faire le comptage *si* on en a besoin
+						$r->spipSqliteRowCount = array($this->link,$query);
+					}
+					elseif ($r instanceof PDOStatement) {
 						$r->spipSqliteRowCount = 0;
 					}
 				}
-			} else {
+			}
+			else {
 				$r = sqlite_query($this->link, $query);
 			}
 
@@ -1950,7 +1951,8 @@ class sqlite_requeteur {
 			}
 			else $err = "";
 
-		} else {
+		}
+		else {
 			$r = false;
 		}
 
@@ -2001,12 +2003,19 @@ class sqlite_traducteur {
 		//
 		// 1) Protection des textes en les remplacant par des codes
 		//
-		// enlever les echappements ''
-		$this->query = str_replace("''", $this->codeEchappements, $this->query);
-		// enlever les 'textes'
-		$this->textes = array(); // vider 
-		$this->query = preg_replace_callback("/('[^']*')/", array(&$this, '_remplacerTexteParCode'), $this->query);
+		// enlever les 'textes' et initialiser avec
 
+		// enlever les echappements '' avant la detection des textes
+		if (strpos($this->query,"''")!==false)
+			$this->query = str_replace("''", $this->codeEchappements, $this->query);
+
+		# peupler $textes
+		$textes = array();
+		if (preg_match_all("/'[^']*'/S",$this->query,$textes)){
+			$textes = reset($textes); // indice 0 du match
+			$this->query = str_replace($textes,"%s",$this->query);
+		}
+		
 		//
 		// 2) Corrections de la requete
 		//
@@ -2050,14 +2059,14 @@ class sqlite_traducteur {
 
 		// Correction des noms de tables FROM
 		// mettre les bons noms de table dans from, update, insert, replace...
-		if (preg_match('/\s(SET|VALUES|WHERE|DATABASE)\s/i', $this->query, $regs)){
+		if (preg_match('/\s(SET|VALUES|WHERE|DATABASE)\s/iS', $this->query, $regs)){
 			$suite = strstr($this->query, $regs[0]);
 			$this->query = substr($this->query, 0, -strlen($suite));
 		}
 		else
 			$suite = '';
 		$pref = ($this->prefixe) ? $this->prefixe."_" : "";
-		$this->query = preg_replace('/([,\s])spip_/', '\1'.$pref, $this->query).$suite;
+		$this->query = preg_replace('/([,\s])spip_/S', '\1'.$pref, $this->query).$suite;
 
 		// Correction zero AS x
 		// pg n'aime pas 0+x AS alias, sqlite, dans le meme style, 
@@ -2095,25 +2104,33 @@ class sqlite_traducteur {
 		// (4*1.0/3) n'est pas rendu dans ce cas !
 		# $this->query = str_replace('/','* 1.00 / ',$this->query);
 
-		// Correction Antiquotes
-		// ` => rien
-		$this->query = str_replace('`', '', $this->query);
 
 		// Correction critere REGEXP, non reconnu en sqlite2
 		if (($this->sqlite_version==2) && (strpos($this->query, 'REGEXP')!==false)){
 			$this->query = preg_replace('/([^\s\(]*)(\s*)REGEXP(\s*)([^\s\)]*)/', 'REGEXP($4, $1)', $this->query);
 		}
 
-
 		//
 		// 3) Remise en place des textes d'origine
 		//
-		// remettre les 'textes'
-		foreach ($this->textes as $cle => $val){
-			$this->query = str_replace($cle, $val, $this->query);
+		// Correction Antiquotes et echappements
+		// ` => rien
+		if (strpos($this->query,'`')!==false OR strpos($this->query,$this->codeEchappements)!==false)
+			$this->query = str_replace(array('`',$this->codeEchappements), array('',"''"), $this->query);
+
+		switch (count($textes)){
+			case 0:break;
+			case 1:$this->query=sprintf($this->query,$textes[0]);break;
+			case 2:$this->query=sprintf($this->query,$textes[0],$textes[1]);break;
+			case 3:$this->query=sprintf($this->query,$textes[0],$textes[1],$textes[2]);break;
+			case 4:$this->query=sprintf($this->query,$textes[0],$textes[1],$textes[2],$textes[3]);break;
+			case 5:$this->query=sprintf($this->query,$textes[0],$textes[1],$textes[2],$textes[3],$textes[4]);break;
+			default:
+				array_unshift($textes,$this->query);
+				$this->query = call_user_func_array('sprintf',$textes);
+				break;
 		}
-		// remettre les echappements ''
-		$this->query = str_replace($this->codeEchappements, "''", $this->query);
+
 		return $this->query;
 	}
 
@@ -2150,18 +2167,6 @@ class sqlite_traducteur {
 			$res .= "\nWHEN $index=$v THEN $n";
 		}
 		return "CASE $res ELSE 0 END ";
-	}
-
-	/**
-	 * callback ou l'on sauve le texte qui est cache dans un tableau $this->textes
-	 * http://doc.spip.org/@_remplacerTexteParCode
-	 *
-	 * @param  $matches
-	 * @return string
-	 */
-	function _remplacerTexteParCode($matches){
-		$this->textes[$code = "%@##".count($this->textes)."##@%"] = $matches[1];
-		return $code;
 	}
 
 }
