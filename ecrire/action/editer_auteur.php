@@ -226,10 +226,10 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	if (isset($c['login']) OR isset($c['pass'])){
 		$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
 		include_spip('inc/auth');
-		if (isset($c['login']))
+		if (isset($c['login']) AND strlen($c['login']))
 			if (!auth_modifier_login($auth_methode, $c['login'], $id_auteur))
 				$erreurs[] = 'ecrire:impossible_modifier_login_auteur';
-		if (isset($c['pass'])){
+		if (isset($c['pass']) AND strlen($c['pass'])){
 			$c['login'] = sql_getfetsel('login','spip_auteurs','id_auteur='.intval($id_auteur));
 			if (!auth_modifier_pass($auth_methode, $c['login'], $c['pass'], $id_auteur))
 				$erreurs[] = 'ecrire:impossible_modifier_pass_auteur';
