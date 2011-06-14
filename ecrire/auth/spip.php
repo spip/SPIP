@@ -272,6 +272,7 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur=''){
 	include_spip('action/editer_auteur');
 	auteur_modifier($id_auteur, $c, true); // manque la gestion de $serveur
 
+	return true; // on a bien modifie le pass
 }
 
 /**
