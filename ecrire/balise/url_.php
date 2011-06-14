@@ -181,9 +181,7 @@ function balise_URL_ECRIRE_dist($p) {
 			$fonc .= ',' . $args;
 	}
 	$p->code = 'generer_url_ecrire(' . $fonc .')';
-	if ($code) 
-		$p->code = "(tester_url_ecrire($code) ?" . $p->code .'  : "")';
-	#$p->interdire_scripts = true;
+	$p->interdire_scripts = false;
 	return $p;
 }
 
