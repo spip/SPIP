@@ -35,7 +35,7 @@ function install_etape_4_dist()
 	// installer les extensions
 	include_spip('inc/plugin');
 	$afficher = charger_fonction("afficher_liste",'plugins');
-	echo $afficher(self(), liste_plugin_files(_DIR_EXTENSIONS),array(), _DIR_EXTENSIONS,'afficher_nom_plugin');
+	echo $afficher(self(), liste_plugin_files(_DIR_EXTENSIONS),array(), array(), _DIR_EXTENSIONS,'afficher_nom_plugin');
 
 	plugin_installes_meta();
 
