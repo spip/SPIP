@@ -242,8 +242,8 @@ function auth_spip_autoriser_modifier_pass($serveur=''){
  */
 function auth_spip_verifier_pass($login, $new_pass, $id_auteur=0, $serveur=''){
 	// login et mot de passe
-	if (strlen($new_pass) < 6)
-		return _T('info_passe_trop_court');
+	if (strlen($new_pass) < _PASS_LONGUEUR_MINI)
+		return _T('info_passe_trop_court_car_pluriel',array('nb'=>_PASS_LONGUEUR_MINI));
 
 	return '';
 }
