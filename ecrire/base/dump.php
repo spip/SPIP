@@ -481,7 +481,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 
 	foreach ($tables as $table){
 		// verifier que la table est presente dans la base source
-		if ($desc_source = sql_showtable($table,false,$serveur_source)){
+		if ($desc_source = sql_showtable($table,true,$serveur_source)){
 			// $status['tables_copiees'][$table] contient l'avancement
 			// de la copie pour la $table : 0 a N et -N quand elle est finie (-1 si vide et finie...)
 			if (!isset($status['tables_copiees'][$table]))
