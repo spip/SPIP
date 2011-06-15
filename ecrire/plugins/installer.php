@@ -27,13 +27,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $dir_type, repertoire du plugin
  * 
  * @return array|boolean True si deja installe, le tableau de get_infos sinon
-// 
-*/
-
+ *
+ */
 function plugins_installer_dist($plug, $action, $dir_type='_DIR_PLUGINS')
 {
 	$get_infos = charger_fonction('get_infos','plugins');
-	$infos = $get_infos($plug);
+	$infos = $get_infos($plug, false, constant($dir_type));
 	if (!$infos['install']) return false;
 	// passer en chemin absolu si possible, c'est plus efficace
 	$dir = str_replace('_DIR_','_ROOT_',$dir_type);
@@ -50,7 +49,8 @@ function plugins_installer_dist($plug, $action, $dir_type='_DIR_PLUGINS')
 	$f = $infos['prefix']."_install";
 	if (!function_exists($f))
 		$f = isset($infos['version_base']) ? 'spip_plugin_install' : '';
-	else $arg = $prefix; // stupide: info deja dans le nom
+	else
+		$arg = $infos['prefix']; // stupide: info deja dans le nom
 
 	if (!$f) {
 		// installation sans operation particuliere
