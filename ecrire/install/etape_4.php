@@ -29,7 +29,7 @@ function install_etape_4_dist()
 	echo info_progression_etape(4,'etape_','install/');
 
 	echo "<p>"
-			._L('Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))
+			._T('plugin_info_extension_1', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))
 			."</p>";
 
 	// installer les extensions
