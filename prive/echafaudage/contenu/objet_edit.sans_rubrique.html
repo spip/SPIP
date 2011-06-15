@@ -22,6 +22,6 @@
 		[(#FORMULAIRE_{[editer_(#OBJET)],#ENV{id_objet,oui},#GET{redirect},#ENV{lier_trad}})]
 [(#ENV{retourajax,''}|oui)
 	</div>
-	<script type="text/javascript">/*<!\[CDATA\[*/if (window.jQuery) jQuery('#navigation>div,#extra>div').ajaxReload({args:{exec:'#ENV{exec}'}});/*\]\]>*/</script>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
 ]
 </div>

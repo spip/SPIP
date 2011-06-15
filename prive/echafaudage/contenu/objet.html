@@ -37,9 +37,7 @@
 
 	#BOITE_FERMER
 	[(#EVAL{_AJAX}|oui)
-	<script type="text/javascript">if (window.jQuery)
-	jQuery(function(){jQuery('#navigation>div, #chemin').ajaxReload({args:{exec:'[(#OBJET|objet_info{url_voir})]'}});})
-	</script>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('[(#OBJET|objet_info{url_voir})]','#navigation,#chemin');/*\]\]>*/</script>
 	]
 	#SET{ok,' '}
 ][

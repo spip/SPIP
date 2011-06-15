@@ -39,9 +39,7 @@
 ]
 
 [(#EVAL{_AJAX}|oui)
-<script type="text/javascript">if (window.jQuery)
-jQuery(function(){jQuery('#navigation>div').ajaxReload({args:{exec:'auteur'}});})
-</script>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation');/*\]\]>*/</script>
 ]
 </BOUCLE_auteur>
 [(#ENV**{exec}|=={auteur_edit}|?{#INCLURE{fond=prive/squelettes/contenu/auteur_edit,env,retourajax=oui},#REM|sinon_interdire_acces})]

@@ -154,3 +154,26 @@ jQuery.fn.depliant_clicancre = function(cible) {
 		me.toggleother(cible);
 		return false;
 }
+
+/**
+ * Recharger les blocs d'une page exec
+ * et changer la class du body si necessaire
+ * Par defaut les blocs recharges sont #navigation,#extra
+ * mais il suffit de passer des valeurs differentes en second argument
+ * 
+ * @param exec
+ * @param blocs
+ */
+function reloadExecPage(exec, blocs){
+	if (window.jQuery) {
+		jQuery(function(){
+			if (!blocs)
+				blocs="#navigation,#extra";
+			jQuery(blocs).find('>div').ajaxReload({args:{exec:exec}});
+			if (exec.match(/_edit$/))
+				jQuery('body').addClass('edition');
+			else
+				jQuery('body').removeClass('edition');
+		})
+	}
+}
