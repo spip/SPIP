@@ -50,12 +50,13 @@ function base_upgrade_dist($titre='', $reprise='')
 	spip_log("Fin de mise a jour SQL. Debut m-a-j acces et config","maj."._LOG_INFO_IMPORTANTE);
 	
 	// supprimer quelques fichiers temporaires qui peuvent se retrouver invalides
-	spip_unlink(_DIR_TMP.'plugin_xml.cache');
-	spip_unlink(_DIR_SESSIONS.'ajax_fonctions.txt');
-	spip_unlink(_CACHE_PIPELINES);
-	spip_unlink(_CACHE_RUBRIQUES);
-	spip_unlink(_CACHE_PLUGINS_OPT);
-	spip_unlink(_CACHE_PLUGINS_FCT);
+	@spip_unlink(_CACHE_RUBRIQUES);
+	@spip_unlink(_CACHE_PIPELINES);
+	@spip_unlink(_CACHE_PLUGINS_PATH);
+	@spip_unlink(_CACHE_PLUGINS_OPT);
+	@spip_unlink(_CACHE_PLUGINS_FCT);
+	@spip_unlink(_CACHE_CHEMIN);
+	@spip_unlink(_DIR_TMP."plugin_xml_cache.gz");
 
 	include_spip('inc/auth');
 	auth_synchroniser_distant();
