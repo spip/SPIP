@@ -58,7 +58,7 @@ function exec_upgrade_dist()
 		$res = $admin('upgrade', _T('info_mise_a_niveau_base'), $commentaire);
 		if ($res) echo $res;
 		else {
-			$res = redirige_action_auteur('purger', 'cache', 'admin_plugin', '', true);
+			$res = redirige_action_auteur('purger', 'cache', 'admin_plugin', 'var_mode=recalcul', true);
 			echo redirige_formulaire($res);
 		}
 	}

@@ -41,6 +41,7 @@ function action_purger_dist($arg=null)
 			@spip_unlink(_CACHE_PLUGINS_OPT);
 			@spip_unlink(_CACHE_PLUGINS_FCT);
 			@spip_unlink(_CACHE_CHEMIN);
+			@spip_unlink(_DIR_TMP."plugin_xml_cache.gz");
 			purger_repertoire(_DIR_CACHE,array('subdir'=>true));
 			purger_repertoire(_DIR_AIDE);
 			purger_repertoire(_DIR_VAR.'cache-css');
