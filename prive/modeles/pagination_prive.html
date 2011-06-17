@@ -34,11 +34,12 @@
 	href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}'
 	class='lien_pagination'
 	rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})</a>]</span>[
+	(#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}|<{1000}|oui)[
 	(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })
 	][<span
 	class="all[(#ENV{page_courante}|=={0}|oui)disabled]">[<span
 	class='sep'>(#GET*{sep})</span>](#ENV{url}
 	|parametre_url{#ENV{debut},-1}
 	|ancre_url{#ENV{ancre}}
-	|lien_ou_expose{<:lien_tout_afficher:>,#ENV{page_courante}|=={0},lien_pagination,'',nofollow})</span>]
+	|lien_ou_expose{<:lien_tout_afficher:>,#ENV{page_courante}|=={0},lien_pagination,'',nofollow})</span>]]
 </B_pages>
