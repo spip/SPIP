@@ -33,7 +33,13 @@ function charger_filtre($fonc, $default='filtre_identite_dist') {
 
 function filtre_identite_dist($texte){return $texte;}
 
-// http://adoc.spip.org/@chercher_filtre
+/**
+ * http://adoc.spip.org/@chercher_filtre
+ *
+ * @param string $fonc
+ * @param null $default
+ * @return string
+ */
 function chercher_filtre($fonc, $default=NULL) {
 	if (!$fonc) return $default;
 	// Cas des types mime, sans confondre avec les appels de fonction de classe
