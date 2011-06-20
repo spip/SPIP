@@ -35,7 +35,7 @@
 
 	#SET{enfants,''}
 	[(#OBJET|concat{-enfants}|trouver_fond{prive/objets/contenu/}|oui)
-		[(#SET{enfants,[(#INCLURE{fond=[prive/objets/contenu/(#OBJET)-enfants],id_rubrique,env})]})]
+		[(#SET{enfants,[(#INCLURE{fond=[prive/objets/contenu/(#OBJET)-enfants],id_objet,env})]})]
 	]
 	[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet,#OBJET,id_objet,#ID_OBJET},data,#GET{enfants}})]})]
 
