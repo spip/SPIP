@@ -580,4 +580,36 @@ function autoriser_queue_purger_dist(){
 	return autoriser('webmestre');
 }
 
+
+
+/**
+ * Lister les auteurs d'un article
+ * fonction generique utilisee par plusieurs autorisations
+ *
+ * http://doc.spip.org/@auteurs_article
+ *
+ * @param int $id_article
+ * @param string $cond
+ * @return array|bool
+ */
+function auteurs_article($id_article, $cond='')
+{
+	return sql_allfetsel("id_auteur", "spip_auteurs_liens", "objet='article' AND id_objet=$id_article". ($cond ? " AND $cond" : ''));
+}
+
+
+/**
+ * Tester si on est admin restreint sur une rubrique donnee
+ * fonction generique utilisee dans des autorisations ou assimilee
+ *
+ * http://doc.spip.org/@acces_restreint_rubrique
+ *
+ * @param  $id_rubrique
+ * @return bool
+ */
+function acces_restreint_rubrique($id_rubrique) {
+	global $connect_id_rubrique;
+
+	return (isset($connect_id_rubrique[$id_rubrique]));
+}
 ?>

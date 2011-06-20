@@ -15,53 +15,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('base/abstract_sql');
 
 
-/**
- * Tester si on est admin restreint sur une rubrique donnee
- * ne devrait plus rien faire ici : c'est du domaine des autorisations
- *
- * http://doc.spip.org/@acces_restreint_rubrique
- *
- * @param  $id_rubrique
- * @return bool
- */
-function acces_restreint_rubrique($id_rubrique) {
-	global $connect_id_rubrique;
-
-	return (isset($connect_id_rubrique[$id_rubrique]));
-}
-
-/**
- * Lister les auteurs d'un article
- * ne devrait plus rien faire ici
- *
- * http://doc.spip.org/@auteurs_article
- *
- * @param int $id_article
- * @param string $cond
- * @return array|bool
- */
-function auteurs_article($id_article, $cond='')
-{
-	return sql_allfetsel("id_auteur", "spip_auteurs_liens", "objet='article' AND id_objet=$id_article". ($cond ? " AND $cond" : ''));
-}
-
-
-/**
- * Lister les auteurs autorises a on ne sait quoi ...
- * Plus rien a faire ici
- * 
- * // http://doc.spip.org/@auteurs_autorises
- *
- * @param string $in
- * @param string $cond
- * @return string
- */
-function auteurs_autorises($in, $cond='')
-{
-	return sql_in("statut", array('0minirezo','1comite'))
-	  . (!$cond ? '' : " AND $cond")
-	  . (!$in ? '' : (" AND ". sql_in("id_auteur", $in, 'NOT')));
-}
 
 
 /**
