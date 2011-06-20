@@ -21,7 +21,7 @@
 
 #BOITE_FERMER
 
-[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,rubrique,id_rubrique,#ID_RUBRIQUE},data,#INCLURE{fond=prive/objets/contenu/rubrique-enfants,id_rubrique,env}})]})]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,rubrique,id_rubrique,#ID_RUBRIQUE,objet,rubrique,id_objet,#ID_RUBRIQUE},data,#INCLURE{fond=prive/objets/contenu/rubrique-enfants,id_rubrique,env}})]})]
 
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,rubrique,id,#ID_RUBRIQUE},data,'<div class="nettoyeur"></div>'}}
 
