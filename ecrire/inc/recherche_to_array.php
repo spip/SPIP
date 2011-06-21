@@ -17,24 +17,29 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // methodes sql
 function inc_recherche_to_array_dist($recherche, $options = array()) {
 
+	// options par defaut
 	$options = array_merge(
 		array(
 		'score' => true,
 		'champs' => false,
-		'matches' => false
-		), $options);
+		'toutvoir' => false,
+		'matches' => false,
+		'jointures' => false
+		),
+		$options
+	);
 
 	include_spip('inc/rechercher');
 	include_spip('inc/autoriser');
 
 	$requete = array(
-	"SELECT"=>array(),
-	"FROM"=>array(),
-	"WHERE"=>array(),
-	"GROUPBY"=>array(),
-	"ORDERBY"=>array(),
-	"LIMIT"=>"",
-	"HAVING"=>array()
+		"SELECT"=>array(),
+		"FROM"=>array(),
+		"WHERE"=>array(),
+		"GROUPBY"=>array(),
+		"ORDERBY"=>array(),
+		"LIMIT"=>"",
+		"HAVING"=>array()
 	);
 
 	$table = sinon($options['table'], 'article');
@@ -55,7 +60,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 	// Recherche fulltext
 	foreach ($champs as $champ => $poids) {
 		if (is_array($champ)){
-		  spip_log("requetes imbriquees interdites");
+			spip_log("requetes imbriquees interdites");
 		} else {
 			if (strpos($champ,".")===FALSE)
 				$champ = "t.$champ";
@@ -66,7 +71,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 	if ($a) $requete['WHERE'][] = join(" OR ", $a);
 	$requete['FROM'][] = table_objet_sql($table).' AS t';
 
-	$r = array();
+	$results = array();
 
 	$s = sql_select(
 		$requete['SELECT'], $requete['FROM'], $requete['WHERE'],
@@ -90,7 +95,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			foreach ($champs as $champ => $poids) {
 				$champ = explode('.',$champ);
 				$champ = end($champ);
-				if ($n = 
+				if ($n =
 					($options['score'] || $options['matches'])
 					? preg_match_all($preg, translitteration_rapide($t[$champ]), $regs, PREG_SET_ORDER)
 					: preg_match($preg, translitteration_rapide($t[$champ]))
@@ -112,19 +117,23 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			}
 
 			if ($vu) {
-				$r[$id] = array();
+				if (!isset($results))
+					$results = array();
+				$results[$id] = array();
 				if ($champs_vus)
-					$r[$id]['champs'] = $champs_vus;
+					$results[$id]['champs'] = $champs_vus;
 				if ($score)
-					$r[$id]['score'] = $score;
+					$results[$id]['score'] = $score;
 				if ($matches)
-					$r[$id]['matches'] = $matches;
+					$results[$id]['matches'] = $matches;
 			}
 		}
 	}
 
 
 	// Gerer les donnees associees
+	// ici on est un peu naze : pas capables de reconstruire une jointure complexe
+	// on ne sait passer que par table de laison en 1 coup
 	if (isset($jointures[$table])
 	AND $joints = recherche_en_base(
 			$recherche,
@@ -132,33 +141,55 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			array_merge($options, array('jointures' => false))
 		)
 	) {
-		foreach ($joints as $jtable => $jj) {
-			$it = id_table_objet($table);
-			$ij =  id_table_objet($jtable);
-			if (in_array($jtable, array('auteur', 'document', 'mot')))
-				$s = sql_select("id_objet as $it, $ij", "spip_${jtable}s_liens", array("objet='$table'",sql_in('id_'.${jtable}, array_keys($jj))), '','','','',$serveur);
+		include_spip('action/editer_liens');
+		foreach ($joints as $table_liee => $ids_trouves) {
+			// on peut definir une fonction de recherche jointe pour regler les cas particuliers
+			if (!$rechercher_joints = charger_fonction("rechercher_joints_${table}_${table_liee}","inc",true)){
+				$cle_depart = id_table_objet($table);
+				$cle_arrivee =  id_table_objet($table_liee);
+				// sinon cherchons une table de liaison
+				// TODO : pas de table de liaison : $cle_depart est dans table_liee ou $cle_arrivee est dans table
+
+				// cas recherche principale article, objet lie document : passer par spip_documents_liens
+				if ($l = objet_associable($table_liee)){
+					list($primary, $table_liens) = $l;
+					$s = sql_select("id_objet as $cle_depart, $primary as $cle_arrivee", $table_liens, array("objet='$table'",sql_in($primary, array_keys($ids_trouves))), '','','','',$serveur);
+				}
+				// cas recherche principale auteur, objet lie article: passer par spip_auteurs_liens
+				elseif ($l = objet_associable($table)){
+					list($primary, $table_liens) = $l;
+					$s = sql_select("$primary as $cle_depart, id_objet as $cle_arrivee", $table_liens, array("objet='$table_liee'",sql_in('id_objet', array_keys($ids_trouves))), '','','','',$serveur);
+				}
+				// cas table de liaison generique spip_xxx_yyy
+				else{
+					$table_sql = preg_replace('/^spip_/', '', table_objet_sql($table));
+					$table_liee_sql = preg_replace('/^spip_/', '', table_objet_sql($table_liee));
+					$s = sql_select("$cle_depart,$cle_arrivee", "spip_${table_liee_sql}_${table_sql}", sql_in('id_'.${table_liee}, array_keys($ids_trouves)), '','','','',$serveur);
+				}
+			}
 			else
-				$s = sql_select("$it,$ij", "spip_${jtable}s_${table}s", sql_in('id_'.${jtable}, array_keys($jj)), '','','','',$serveur);
-			while ($t = sql_fetch($s,$serveur)) {
-				$id = $t[$it];
-				$joint = $jj[$t[$ij]];
-				if (!isset($r))
-					$r = array();
-				if (!isset($r[$id]))
-					$r[$id] = array();
+				list($cle_depart,$cle_arrivee,$s) = $rechercher_joints($table,$table_liee,array_keys($ids_trouves), $serveur);
+
+			while ($t = is_array($s)?array_shift($s):sql_fetch($s)) {
+				$id = $t[$cle_depart];
+				$joint = $ids_trouves[$t[$cle_arrivee]];
+				if (!isset($results))
+					$results = array();
+				if (!isset($results[$id]))
+					$results[$id] = array();
 				if ($joint['score'])
-					$r[$id]['score'] += $joint['score'];
+					$results[$id]['score'] += $joint['score'];
 				if ($joint['champs'])
 				foreach($joint['champs'] as $c => $val)
-					$r[$id]['champs'][$jtable.'.'.$c] = $val;
+					$results[$id]['champs'][$table_liee.'.'.$c] = $val;
 				if ($joint['matches'])
 				foreach($joint['matches'] as $c => $val)
-					$r[$id]['matches'][$jtable.'.'.$c] = $val;
+					$results[$id]['matches'][$table_liee.'.'.$c] = $val;
 			}
 		}
 	}
 
-	return $r;
+	return $results;
 }
 
 
