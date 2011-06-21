@@ -23,6 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Renvoie false si l'objet n'est pas associable.
  *
  * @param string $objet
+ * @return array|bool
  */
 function objet_associable($objet){
 	$trouver_table = charger_fonction('trouver_table','base');
@@ -56,7 +57,7 @@ function objet_associable($objet){
  * @param array $objets_source
  * @param array|string $objets_lies
  * @param array $qualif
- * @return string
+ * @return bool|int
  */
 function objet_associer($objets_source, $objets_lies, $qualif = null){
 	$modifs = objet_traiter_liaisons('lien_insert', $objets_source, $objets_lies);
@@ -84,7 +85,7 @@ function objet_associer($objets_source, $objets_lies, $qualif = null){
  *
  * @param array $objets_source
  * @param array|string $objets_lies
- * @return string
+ * @return bool|int
  */
 function objet_dissocier($objets_source,$objets_lies){
 	return objet_traiter_liaisons('lien_delete',$objets_source,$objets_lies);
@@ -108,6 +109,7 @@ function objet_dissocier($objets_source,$objets_lies){
  * @param array $objets_source
  * @param array|string $objets_lies
  * @param array $qualif
+ * @return bool|int
  */
 function objet_qualifier_liens($objets_source,$objets_lies,$qualif){
 	return objet_traiter_liaisons('lien_set',$objets_source,$objets_lies,$qualif);
@@ -224,10 +226,11 @@ function objet_dupliquer_liens($objet,$id_source,$id_cible){
  * alors appliquee dans la foulee.
  * En cas de lot de liens, c'est la meme qualification qui est appliquee a tous
  *
+ * @param string $operation
  * @param array $objets_source
  * @param array $objets_lies
- * @param array $qualif
- * @return string
+ * @param array $set
+ * @return bool|int|array
  */
 function objet_traiter_liaisons($operation,$objets_source,$objets_lies, $set = null){
 	// accepter une syntaxe minimale pour supprimer tous les liens
@@ -271,7 +274,7 @@ function objet_traiter_liaisons($operation,$objets_source,$objets_lies, $set = n
  * @param sgring $table_lien
  * @param int $id
  * @param array $objets
- * @return int
+ * @return bool|int
  */
 function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 	$ins = 0;
@@ -369,7 +372,7 @@ function lien_where($primary, $id_source, $objet, $id_objet){
  * @param sgring $table_lien
  * @param int $id
  * @param array $objets
- * @return int
+ * @return bool|int
  */
 function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 	$retire = array();
@@ -449,7 +452,7 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
  * @param sgring $table_lien
  * @param int $id
  * @param array $objets
- * @return int
+ * @return bool|int
  */
 function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
 	include_spip('genie/optimiser');
@@ -515,6 +518,7 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
  * @param int $id
  * @param array $objets
  * @param array $qualif
+ * @return bool|int
  */
 function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 	$echec = null;
@@ -557,6 +561,7 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
  * @param sgring $table_lien
  * @param int $id
  * @param array $objets
+ * @return array
  */
 function lien_find($objet_source,$primary,$table_lien,$id,$objets){
 	$trouve = array();
@@ -579,7 +584,7 @@ function lien_find($objet_source,$primary,$table_lien,$id,$objets){
  * Propager la date_modif sur les objets dont un lien a ete modifie
  *
  * @param string $objet
- * @param array/int $ids
+ * @param array|int $ids
  */
 function lien_propage_date_modif($objet,$ids){
 	$trouver_table = charger_fonction('trouver_table','base');
