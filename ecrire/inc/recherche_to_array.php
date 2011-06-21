@@ -142,29 +142,37 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		)
 	) {
 		include_spip('action/editer_liens');
+		$trouver_table = charger_fonction('trouver_table','base');
+		$cle_depart = id_table_objet($table);
+		$desc_depart = $trouver_table($table,$serveur);
+		$depart_associable = objet_associable($table);
 		foreach ($joints as $table_liee => $ids_trouves) {
 			// on peut definir une fonction de recherche jointe pour regler les cas particuliers
 			if (!$rechercher_joints = charger_fonction("rechercher_joints_${table}_${table_liee}","inc",true)){
-				$cle_depart = id_table_objet($table);
 				$cle_arrivee =  id_table_objet($table_liee);
+				$desc_arrivee = $trouver_table($table_liee,$serveur);
+				// cas simple : $cle_depart dans la table_liee
+				if (isset($desc_arrivee['field'][$cle_depart])){
+					$s = sql_select("$cle_depart, $cle_arrivee", $desc_arrivee['table_sql'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
+				}
+				// cas simple : $cle_arrivee dans la table
+				elseif (isset($desc_depart['field'][$desc_arrivee])){
+					$s = sql_select("$cle_depart, $cle_arrivee", $desc_depart['table_sql'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
+				}
 				// sinon cherchons une table de liaison
-				// TODO : pas de table de liaison : $cle_depart est dans table_liee ou $cle_arrivee est dans table
-
 				// cas recherche principale article, objet lie document : passer par spip_documents_liens
-				if ($l = objet_associable($table_liee)){
+				elseif ($l = objet_associable($table_liee)){
 					list($primary, $table_liens) = $l;
 					$s = sql_select("id_objet as $cle_depart, $primary as $cle_arrivee", $table_liens, array("objet='$table'",sql_in($primary, array_keys($ids_trouves))), '','','','',$serveur);
 				}
 				// cas recherche principale auteur, objet lie article: passer par spip_auteurs_liens
-				elseif ($l = objet_associable($table)){
+				elseif ($l = $depart_associable){
 					list($primary, $table_liens) = $l;
 					$s = sql_select("$primary as $cle_depart, id_objet as $cle_arrivee", $table_liens, array("objet='$table_liee'",sql_in('id_objet', array_keys($ids_trouves))), '','','','',$serveur);
 				}
 				// cas table de liaison generique spip_xxx_yyy
 				else{
-					$table_sql = preg_replace('/^spip_/', '', table_objet_sql($table));
-					$table_liee_sql = preg_replace('/^spip_/', '', table_objet_sql($table_liee));
-					$s = sql_select("$cle_depart,$cle_arrivee", "spip_${table_liee_sql}_${table_sql}", sql_in('id_'.${table_liee}, array_keys($ids_trouves)), '','','','',$serveur);
+					$s = sql_select("$cle_depart,$cle_arrivee", "spip_".$desc_arrivee['table_objet']."_".$desc_depart['table_objet'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
 				}
 			}
 			else
