@@ -3,20 +3,24 @@
 <h1 class="grostitre"><:titre_admin_tech:></h1>
 
 [(#AUTORISER{reparer,base})
-
+	<!--reparer_base-->
 	#BOITE_OUVRIR{#VAL{texte_recuperer_base}|_T|wrap{'<h3>'},'simple','titrem'}
 		<p><:texte_crash_base:></p>
 	#BOITE_PIED
 		[(#BOUTON_ACTION{<:bouton_tenter_recuperation:>,#URL_ECRIRE{base_repair}})]
 	#BOITE_FERMER
+	<!--/reparer_base-->
 ]
 
 [(#AUTORISER{detruire}|oui)
+	<!--declarer_base-->
 	<div class="ajax">
 		#FORMULAIRE_DECLARER_BASES
 	</div>
+	<!--/declarer_base-->
 ]
 
+<!--effacer_base-->
 #BOITE_OUVRIR{#VAL{texte_effacer_base}|_T|wrap{'<h3>'},'error','titrem'}
 	<p><:info_avertissement:></p>
 	<p><:texte_admin_effacer_01:></p>
@@ -24,3 +28,4 @@
 #BOITE_PIED
 	[(#BOUTON_ACTION{<:bouton_effacer_tout:>,#URL_ECRIRE{base_delete_all,reinstall=non}})]
 #BOITE_FERMER
+<!--/effacer_base-->
