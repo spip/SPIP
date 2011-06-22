@@ -100,6 +100,8 @@ elseif (isset($GLOBALS['meta']["admin"])) {
 	}
 	if ($n) {
 		list(,$var_f,$n) = $l;
+		if (tester_url_ecrire("base_$var_f"))
+			$var_f = "base_$var_f";
 		if ($var_f != $exec) {
 			spip_log("Le script $var_f lance par $n se substitue a $exec");
 			$exec = $var_f;
