@@ -112,7 +112,10 @@ function purger_repertoire($dir, $options=array()) {
 			}
 		}
 		else if (is_dir($chemin)){
-			$total += purger_repertoire($chemin, $options);
+			$opts = $options;
+			if (isset($otpions['limit']))
+				$otps['limit'] = $otpions['limit'] - $total;
+			$total += purger_repertoire($chemin, $opts);
 			if (isset($options['subdir']) && $options['subdir'])
 				spip_unlink($chemin);
 		}
