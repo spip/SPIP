@@ -107,7 +107,10 @@ function article_inserer($id_rubrique) {
 		$id_rubrique = $row['id_rubrique'];
 	} else $row = sql_fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
 
-	$id_secteur = $row['id_secteur'];
+	// eviter $id_secteur = NULL (erreur sqlite) si la requete precedente echoue 
+	// cas de id_rubrique = -1 par exemple avec plugin "pages"
+	$id_secteur = isset($row['id_secteur']) ? $row['id_secteur'] : 0;
+	
 	$lang_rub = $row['lang'];
 
 	$lang = "";
