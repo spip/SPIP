@@ -51,13 +51,32 @@ function ajouter_session($auteur) {
 
 	// Attention un visiteur peut avoir une session et un id=0,
 	// => ne pas melanger les sessions des differents visiteurs
-	$auteur['id_auteur'] = intval($auteur['id_auteur']);
+	$id_auteur = intval($auteur['id_auteur']);
 	if (!isset($_COOKIE['spip_session'])
-	OR !preg_match(',^'.$auteur['id_auteur'].'_,', $_COOKIE['spip_session']))
-		$_COOKIE['spip_session'] = $auteur['id_auteur'].'_'.md5(uniqid(rand(),true));
+	OR !preg_match(',^'.$id_auteur.'_,', $_COOKIE['spip_session']))
+		$_COOKIE['spip_session'] = $id_auteur.'_'.md5(uniqid(rand(),true));
 
 	$fichier_session = fichier_session('alea_ephemere');
-
+	
+	// Si ce n'est pas un inscrit (les inscrits ont toujours des choses en session)
+	// on va vérifier s'il y a vraiment des choses à écrire
+	if (!$id_auteur){
+		// On supprime les données de base pour voir le contenu réel de la session
+		$auteur_verif = $auteur;
+		if (isset($auteur_verif['id_auteur'])) unset($auteur_verif['id_auteur']);
+		if (isset($auteur_verif['hash_env'])) unset($auteur_verif['hash_env']);
+		if (isset($auteur_verif['ip_change'])) unset($auteur_verif['ip_change']);
+		
+		// Si après ça la session est vide alors on supprime l'éventuel fichier et on arrête là
+		if (!$auteur_verif){
+			if (@file_exists($fichier_session)) spip_unlink($fichier_session);
+			return false;
+		}
+	}
+	
+	// Maintenant on sait qu'on a des choses à écrire
+	// On s'assure d'avoir au moins ces valeurs
+	$auteur['id_auteur'] = $id_auteur;
 	if (!isset($auteur['hash_env'])) $auteur['hash_env'] = hash_env();
 	if (!isset($auteur['ip_change'])) $auteur['ip_change'] = false;
 
@@ -84,7 +103,13 @@ function ajouter_session($auteur) {
 // Ajouter une donnee dans la session SPIP
 // http://doc.spip.org/@session_set
 function session_set($nom, $val=null) {
-	$GLOBALS['visiteur_session'][$nom] = $val;
+	// On ajoute que si la valeur n'est pas nulle
+	if ($val != null)
+		$GLOBALS['visiteur_session'][$nom] = $val;
+	// Sinon on regarde si la valeur existait afin de la supprimer
+	elseif (isset($GLOBALS['visiteur_session'][$nom]))
+		unset($GLOBALS['visiteur_session'][$nom]);
+	
 	ajouter_session($GLOBALS['visiteur_session']);
 	actualiser_sessions($GLOBALS['visiteur_session']);
 }
