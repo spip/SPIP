@@ -61,7 +61,9 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 		$hash = substr(md5($recherche . $table),0,16);
 		$where = "(resultats.recherche='$hash' AND resultats.table_objet=".sql_quote($table)." AND resultats.serveur='$hash_serv')";
 		$row = sql_fetsel('UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(resultats.maj) AS fraicheur','spip_resultats AS resultats',$where,'','fraicheur DESC','0,1');
-		if (!$row OR ($row['fraicheur']>$delai_fraicheur)){
+		if (!$row
+		  OR ($row['fraicheur']>$delai_fraicheur)
+		  OR (defined('_VAR_MODE') AND _VAR_MODE=='recalcul')){
 		 	$rechercher = true;
 		}
 	}

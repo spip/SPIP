@@ -144,19 +144,21 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		include_spip('action/editer_liens');
 		$trouver_table = charger_fonction('trouver_table','base');
 		$cle_depart = id_table_objet($table);
-		$desc_depart = $trouver_table($table,$serveur);
+		$table_depart = table_objet($table,$serveur);
+		$desc_depart = $trouver_table($table_depart,$serveur);
 		$depart_associable = objet_associable($table);
 		foreach ($joints as $table_liee => $ids_trouves) {
 			// on peut definir une fonction de recherche jointe pour regler les cas particuliers
 			if (!$rechercher_joints = charger_fonction("rechercher_joints_${table}_${table_liee}","inc",true)){
 				$cle_arrivee =  id_table_objet($table_liee);
-				$desc_arrivee = $trouver_table($table_liee,$serveur);
+				$table_arrivee = table_objet($table_liee,$serveur);
+				$desc_arrivee = $trouver_table($table_arrivee,$serveur);
 				// cas simple : $cle_depart dans la table_liee
 				if (isset($desc_arrivee['field'][$cle_depart])){
 					$s = sql_select("$cle_depart, $cle_arrivee", $desc_arrivee['table_sql'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
 				}
 				// cas simple : $cle_arrivee dans la table
-				elseif (isset($desc_depart['field'][$desc_arrivee])){
+				elseif (isset($desc_depart['field'][$cle_arrivee])){
 					$s = sql_select("$cle_depart, $cle_arrivee", $desc_depart['table_sql'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
 				}
 				// sinon cherchons une table de liaison
@@ -171,8 +173,9 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 					$s = sql_select("$primary as $cle_depart, id_objet as $cle_arrivee", $table_liens, array("objet='$table_liee'",sql_in('id_objet', array_keys($ids_trouves))), '','','','',$serveur);
 				}
 				// cas table de liaison generique spip_xxx_yyy
-				else{
-					$s = sql_select("$cle_depart,$cle_arrivee", "spip_".$desc_arrivee['table_objet']."_".$desc_depart['table_objet'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
+				elseif($t=$trouver_table($table_arrivee."_".$table_depart,$serveur)
+				  OR $t=$trouver_table($table_depart."_".$table_arrivee,$serveur)){
+					$s = sql_select("$cle_depart,$cle_arrivee", $t["table_sql"], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
 				}
 			}
 			else
