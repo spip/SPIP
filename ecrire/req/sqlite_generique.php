@@ -1982,7 +1982,6 @@ class sqlite_traducteur {
 	
 	// Pour les corrections a effectuer sur les requetes :
 	var $textes = array(); // array(code=>'texte') trouvé
-	var $codeEchappements = "\x1@##@\x1"; // on utilise \x1 caractere interdit
 
 	function sqlite_traducteur($query, $prefixe, $sqlite_version){
 		$this->query = $query;
@@ -2004,18 +2003,7 @@ class sqlite_traducteur {
 		// 1) Protection des textes en les remplacant par des codes
 		//
 		// enlever les 'textes' et initialiser avec
-
-		// enlever les echappements '' avant la detection des textes
-		if (strpos($this->query,"''")!==false)
-			$this->query = str_replace("''", $this->codeEchappements, $this->query);
-
-		# peupler $textes
-		if (preg_match_all("/(['\"])[^']*(\\1)/S",$this->query,$textes)){
-			$textes = reset($textes); // indice 0 du match
-			$this->query = str_replace($textes,"%s",$this->query);
-		}
-		else
-			$textes = array();
+		list($this->query, $textes) = query_echappe_textes($this->query);
 
 		//
 		// 2) Corrections de la requete
@@ -2119,27 +2107,7 @@ class sqlite_traducteur {
 		if (strpos($this->query,'`')!==false)
 			$this->query = str_replace('`','', $this->query);
 
-		# debug de la substitution
-		#if (($c1=substr_count($this->query,"%"))!=($c2=count($textes))){
-		#	spip_log("$c1 ::". $this->query,"tradsqlite"._LOG_ERREUR);
-		#	spip_log("$c2 ::". var_export($textes,1),"tradsqlite"._LOG_ERREUR);
-		#	spip_log("ini ::". $qi,"tradsqlite"._LOG_ERREUR);
-		#}
-		switch (count($textes)){
-			case 0:break;
-			case 1:$this->query=sprintf($this->query,$textes[0]);break;
-			case 2:$this->query=sprintf($this->query,$textes[0],$textes[1]);break;
-			case 3:$this->query=sprintf($this->query,$textes[0],$textes[1],$textes[2]);break;
-			case 4:$this->query=sprintf($this->query,$textes[0],$textes[1],$textes[2],$textes[3]);break;
-			case 5:$this->query=sprintf($this->query,$textes[0],$textes[1],$textes[2],$textes[3],$textes[4]);break;
-			default:
-				array_unshift($textes,$this->query);
-				$this->query = call_user_func_array('sprintf',$textes);
-				break;
-		}
-
-		if (strpos($this->query,$this->codeEchappements)!==false)
-			$this->query = str_replace($this->codeEchappements,"''", $this->query);
+		$this->query = query_reinjecte_textes($this->query, $textes);
 
 		return $this->query;
 	}

@@ -273,6 +273,64 @@ function table_jointure($x, $y) {
 	return '';
 }
 
+/**
+ * Echapper les textes entre ' ' ou " " d'une requete SQL
+ * avant son pre-traitement
+ * On renvoi la query sans textes et les textes separes, dans
+ * leur ordre d'apparition dans la query
+ *
+ * @param string $query
+ * @return array
+ */
+function query_echappe_textes($query){
+	static $codeEchappements = "\x1@##@\x1";
+	if (strpos($query,"''")!==false)
+		$query = str_replace("''", $codeEchappements, $query);
+	if (preg_match_all("/(['\"])[^']*(\\1)/S",$query,$textes)){
+		$textes = reset($textes); // indice 0 du match
+		$query = str_replace($textes,"%s",$query);
+	}
+	else
+		$textes = array();
+
+	return array($query, $textes);
+}
+
+/**
+ * Reinjecter les textes d'une requete SQL a leur place initiale,
+ * apres traitement de la requete
+ *
+ * @param string $query
+ * @param array $textes
+ * @return string
+ */
+function query_reinjecte_textes($query, $textes){
+	static $codeEchappements = "\x1@##@\x1";
+	# debug de la substitution
+	#if (($c1=substr_count($query,"%"))!=($c2=count($textes))){
+	#	spip_log("$c1 ::". $query,"tradquery"._LOG_ERREUR);
+	#	spip_log("$c2 ::". var_export($textes,1),"tradquery"._LOG_ERREUR);
+	#	spip_log("ini ::". $qi,"tradquery"._LOG_ERREUR);
+	#}
+	switch (count($textes)){
+		case 0:break;
+		case 1:$query=sprintf($query,$textes[0]);break;
+		case 2:$query=sprintf($query,$textes[0],$textes[1]);break;
+		case 3:$query=sprintf($query,$textes[0],$textes[1],$textes[2]);break;
+		case 4:$query=sprintf($query,$textes[0],$textes[1],$textes[2],$textes[3]);break;
+		case 5:$query=sprintf($query,$textes[0],$textes[1],$textes[2],$textes[3],$textes[4]);break;
+		default:
+			array_unshift($textes,$query);
+			$query = call_user_func_array('sprintf',$textes);
+			break;
+	}
+
+	if (strpos($query,$codeEchappements)!==false)
+		$query = str_replace($codeEchappements,"''", $query);
+
+	return $query;
+}
+
 // Pour compatibilite. Ne plus utiliser.
 // http://doc.spip.org/@spip_query
 function spip_query($query, $serveur='') {
