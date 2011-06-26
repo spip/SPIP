@@ -31,8 +31,8 @@ Valeurs par defaut :
 
 [(#REM) les vieux styles a evacuer en premier, ca permet qu'ils ne polluent pas en cas de double definition]
 
-#INCLURE{#CHEMIN{prive/themes/spip/base.css}|direction_css{#GET{dir}}}
-#INCLURE{#CHEMIN{prive/themes/spip/layout.css}|direction_css{#GET{dir}}}
+[(#INCLURE{#VAL{base.css}  |find_in_theme|direction_css{#GET{dir}}})]
+[(#INCLURE{#VAL{layout.css}|find_in_theme|direction_css{#GET{dir}}})]
 
 <BOUCLE_css(POUR){tableau #LISTE{typo.css,grids.css,bando.css,icons.css,lists.css,forms.css,picker.css,box_skins.css,jquery-ui.css,content.css,exceptions.css,theme.css}}>
 [(#SET{fond,[(#VALEUR|concat{.html}|find_in_theme|substr{[(#VAL{_DIR_RACINE}|constant|strlen)],[(#VAL{-5}|intval)]})]})]
