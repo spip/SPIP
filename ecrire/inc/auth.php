@@ -431,6 +431,7 @@ function auth_identifier_login($login, $password, $serveur=''){
  *
  * @param string $auth_methode
  * @param string $login
+ * @param string $redirect
  * @param string $serveur
  * @return string
  */
@@ -446,10 +447,11 @@ function auth_terminer_identifier_login($auth_methode, $login, $serveur=''){
 }
 
 /**
-* Loger un auteur suite a son identification
-*
-* @param array $auteur
-*/
+ * Loger un auteur suite a son identification
+ *
+ * @param array $auteur
+ * @return bool
+ */
 function auth_loger($auteur){
 	if (!is_array($auteur) OR !count($auteur))
 		return false;
