@@ -247,6 +247,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		SPIP peut créer pour vous, automatiquement, des vignettes (miniatures) des
 		images insérées. Cela permet par exemple de créer
 		automatiquement une galerie ou un portfolio.',
+'info_afficher_par_nb' => 'Afficher par',
 'info_ajout_participant' => 'Le participant suivant est ajouté :',
 'info_ajouter_rubrique' => 'Ajouter une autre rubrique à administrer :',
 'info_annonce_nouveautes' => 'Annonce des nouveautés',
