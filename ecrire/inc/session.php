@@ -51,6 +51,7 @@ function inc_session_dist($auteur=false)
  * creees il y a plus de 4*_RENOUVELLE_ALEA
  * Tenir compte de l'ancien format ou les noms commencaient par "session_"
  * et du meme coup des repertoires plats
+ * Attention : id_auteur peut etre negatif (cas des auteurs temporaires pendant le dump)
  *
  * http://doc.spip.org/@supprimer_sessions
  *
@@ -59,11 +60,12 @@ function inc_session_dist($auteur=false)
  */
 function supprimer_sessions($id_auteur, $toutes=true) {
 
-	if ($toutes) {
+	spip_log("supprimer sessions auteur $id_auteur");
+	if ($toutes OR $id_auteur!==$GLOBALS['visiteur_session']['id_auteur']) {
 		$dir = opendir(_DIR_SESSIONS);
 		$t = time()  - (4*_RENOUVELLE_ALEA);
 		while(($f = readdir($dir)) !== false) {
-			if (preg_match(",^\D*(\d+)_\w{32}\.php[3]?$,", $f, $regs)){
+			if (preg_match(",^[^\d-]*(-?\d+)_\w{32}\.php[3]?$,", $f, $regs)){
 				$f = _DIR_SESSIONS . $f;
 				if (($regs[1] == $id_auteur) OR ($t > filemtime($f)))
 					spip_unlink($f);
@@ -179,6 +181,7 @@ function verifier_session($change=false) {
 
 		// Renouveler la session avec l'alea courant
 		include($fichier_session);
+		spip_log('renouvelle session '.$GLOBALS['visiteur_session']['id_auteur']);
 		spip_unlink($fichier_session);
 		ajouter_session($GLOBALS['visiteur_session']);
 	}
