@@ -72,7 +72,9 @@ function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='
 			$last = $field;
 		}
 		foreach($desc['key'] as $key=>$type){
-			if (!isset($sql_desc['key'][$key]))
+			// Ne pas oublier les cas des cles non nommees dans la declaration et qui sont retournees
+			// par le showtable sous la forme d'un index de tableau "KEY $type" et non "KEY"
+			if (!isset($sql_desc['key'][$key]) AND !isset($sql_desc['key']["$key $type"]))
 				sql_alter("TABLE $table ADD $key ($type)",$serveur);
 			$last = $field;
 		}
