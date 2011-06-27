@@ -189,10 +189,11 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 
 	$_modificateur = var_export($boucle->modificateur,true);
 	$boucle->hash .= '
-	// RECHERCHE
-	if ("'.$crit->cond.'" AND !strlen('.$quoi.')){
+	// RECHERCHE'
+	.($crit->cond?'
+	if (!strlen('.$quoi.')){
 		list($rech_select, $rech_where) = array("0 as points","");
-	}
+	}':'').'
 	else {
 		$prepare_recherche = charger_fonction(\'prepare_recherche\', \'inc\');
 		list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'","' . $boucle->sql_serveur . '",'.$_modificateur.',"'.$boucle->primary.'");
@@ -982,7 +983,7 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args)
 		  $where = array("'?'", "(is_array($pred))", 
 				 critere_IN_cas ($idb, $boucles, 'COND', $arg, $op, array($pred), $col), 
 				 $where);
-		$where = array("'?'", "!isset($pred)","''", $where);
+		$where = array("'?'", "!is_null($pred)","''", $where);
 		if ($where_complement) // condition annexe du type "AND (objet='article')"
 			$where_complement = array("'?'", "!$pred","''", $where_complement);
 	}
