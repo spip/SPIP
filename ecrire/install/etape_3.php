@@ -127,7 +127,7 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	  if ($r) $r = sql_fetch($r, $server_db);
 	  $version_installee = !$r ? 0 : (double) $r['valeur'];
 	  if (!$version_installee OR ($spip_version_base < $version_installee)) {
-	    $fupdateq('spip_meta', array('valeur'=>$spip_version_base, 'impt'=>'non'), "nom='version_installee'", $server_db);
+	    $fupdateq('spip_meta', array('valeur'=>$spip_version_base, 'impt'=>'non'), "nom='version_installee'",'', $server_db);
 	    spip_log("nouvelle version installee: $spip_version_base");
 	  }
 	  // eliminer la derniere operation d'admin mal terminee
@@ -184,7 +184,7 @@ function install_propose_ldap()
 
 
 // http://doc.spip.org/@install_premier_auteur
-function install_premier_auteur($email, $login, $nom, $pass, $hidden)
+function install_premier_auteur($email, $login, $nom, $pass, $hidden, $auteur_obligatoire)
 {
 	return info_progression_etape(3,'etape_','install/') .
 		info_etape(_T('info_informations_personnelles'),
@@ -192,9 +192,11 @@ function install_premier_auteur($email, $login, $nom, $pass, $hidden)
 		     "<b>"._T('texte_informations_personnelles_1')."</b>" .
 			     aide ("install5") .
 			     "<p>" .
-			     _T('texte_informations_personnelles_2') . " " .
-			     _T('info_laisser_champs_vides')
-			     )
+			     ($auteur_obligatoire?
+				     ''
+				     :
+				     _T('texte_informations_personnelles_2') . " " . _T('info_laisser_champs_vides')
+			     ))
 	. generer_form_ecrire('install', (
 			  "\n<input type='hidden' name='etape' value='3b' />"
 			  . $hidden
@@ -202,11 +204,12 @@ function install_premier_auteur($email, $login, $nom, $pass, $hidden)
 				    array(
 					  'nom' => array(
 							 'label' => "<b>"._T('entree_signature')."</b><br />\n"._T('entree_nom_pseudo_1')."\n",
-							 'valeur' => $nom
+							 'valeur' => $nom,
+						   'required' => $auteur_obligatoire,
 							 ),
 					  'email' => array(
 							   'label' => "<b>"._T('entree_adresse_email')."</b>\n",
-							   'valeur' => $email
+							   'valeur' => $email,
 							   )
 					  )
 				    )
@@ -215,15 +218,18 @@ function install_premier_auteur($email, $login, $nom, $pass, $hidden)
 				   array(
 					 'login' => array(
 							  'label' => "<b>"._T('entree_login')."</b><br />\n"._T('info_plus_trois_car')."\n",
-							  'valeur' => $login
+							  'valeur' => $login,
+	              'required' => $auteur_obligatoire,
 							  ),
 					 'pass' => array(
 							 'label' => "<b>"._T('entree_mot_passe')."</b><br />\n"._T('info_plus_cinq_car_2')."\n",
-							 'valeur' => $pass
+							 'valeur' => $pass,
+	             'required' => $auteur_obligatoire,
 							 ),
 					 'pass_verif' => array(
 							       'label' => "<b>"._T('info_confirmer_passe')."</b><br />\n",
-							       'valeur' => $pass
+							       'valeur' => $pass,
+	                   'required' => $auteur_obligatoire,
 							       )
 					 )
 				     )
@@ -291,6 +297,9 @@ function install_etape_3_dist()
 		$hidden = predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 		  . (defined('_INSTALL_NAME_DB') ? ''
 		     : "\n<input type='hidden' name='sel_db' value='$sel_db' />");
+
+		$auteur_obligatoire = !sql_countsel('spip_auteurs');
+
 		$res =  "<p class='resultat ok'><b>"
 		. _T('info_base_installee')
 		. "</b></p>"
@@ -298,7 +307,7 @@ function install_etape_3_dist()
 					_request('login'),
 					_request('nom'),
 					_request('pass'),
-					 $hidden)
+					 $hidden, $auteur_obligatoire)
 		  . (($ldap_present  OR !function_exists('ldap_connect'))
 		     ?  '' : install_propose_ldap());
 	}
