@@ -44,8 +44,6 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 		$ret['slogan'] = spip_xml_aplatit($arbre['slogan']);
 	if (isset($arbre['description'])){
 		$ret['description'] = spip_xml_aplatit($arbre['description']);
-		if (!$ret['slogan'])
-			$ret['slogan'] = info_plugin_normalise_slogan($ret['description']);
 	}
 
 	if (isset($arbre['lien']))
@@ -129,35 +127,6 @@ function info_plugin_normalise_utilise($utilise) {
 		}
 	}
 	return $res;
-}
-
-
-
-function info_plugin_normalise_slogan($description) {
-	include_spip('inc/texte');
-
-	// On extrait les traductions de l'eventuel multi
-	// Si le nom n'est pas un multi alors le tableau renvoye est de la forme '' => 'nom'
-	$descriptions = extraire_trads(str_replace(array('<multi>', '</multi>'), array(), $description, $nbr_replace));
-	$multi = ($nbr_replace > 0) ? true : false;
-
-	// On boucle sur chaque multi ou sur la chaine elle-meme en extrayant le slogan
-	// dans les differentes langues
-	$slogan = '';
-	foreach ($descriptions as $_lang => $_descr) {
-		$_descr = trim($_descr);
-		if (!$_lang)
-			$_lang = 'fr';
-		$nbr_matches = preg_match(',^(.+)[.!?\r\n\f],Um', $_descr, $matches);
-		$slogan .= (($multi) ? '[' . $_lang . ']' : '') . 
-					(($nbr_matches > 0) ? trim($matches[1]) : couper($_descr, 80, ''));
-	}
-
-	if ($slogan)
-		// On renvoie un nouveau slogan multi ou pas
-		$slogan = (($multi) ? '<multi>' : '') . $slogan . (($multi) ? '</multi>' : '');
-
-	return $slogan;
 }
 
 ?>
