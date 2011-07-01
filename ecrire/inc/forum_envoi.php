@@ -53,7 +53,7 @@ function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message,
 }
 
 // http://doc.spip.org/@forum_envoi_form
-function forum_envoi_form($id, $row, $script, $statut, $titre, $corps, $form, $objet, $args) {
+function forum_envoi_form($id, $row, $script, $statut, $titre, $corps, $form, $objet, $args, $fct_ajax='') {
 
 	$id_parent = $row['id_forum'];
 	$cat = $id . '/'
@@ -77,7 +77,7 @@ $form
 	. fin_cadre_formulaire(true);
 
 	if (_AJAX)
-	  return ajax_action_post('poster_forum_prive',$cat, $script, $args, $corps, array(),'','', "&id=$id&id_parent=$id_parent&statut=$statut");
+	  return ajax_action_post('poster_forum_prive',$cat, $script, $args, $corps, array(),'','', "&id=$id&id_parent=$id_parent&statut=$statut", $fct_ajax);
 	else return redirige_action_auteur('poster_forum_prive',$cat, $script, $args, $corps, "\nmethod='post' id='formulaire'");
 }
 
