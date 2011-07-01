@@ -320,9 +320,9 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 						$GLOBALS[$principale_ou_auxiliaire][$table][$k] = &$infos_tables[$table][$k];
 			}
 			else {
-				// lire sa definition en base
-				$trouver_table = charger_fonction('trouver_table','base');
-				$GLOBALS[$principale_ou_auxiliaire][$table] = $trouver_table($table);
+				// ici on ne renvoie que les declarations, donc RIEN
+				// pour avoir la vrai description en base, il faut passer par trouver_table
+				$GLOBALS[$principale_ou_auxiliaire][$table] = array();
 			}
 			if (count($mem)){
 				foreach(array_keys($mem) as $k)
