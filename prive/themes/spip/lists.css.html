@@ -109,7 +109,8 @@
 .liste_items .item.on,.liste-items .item.on  {background-color:[#(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)];font-weight:normal;}
 .liste_items .item.on:hover,.liste-items .item.on:hover  {background-color:[#(#ENV{claire}|couleur_eclaircir)];}
 .liste_items .item h3,.liste-items .item h3  {margin:0;}
-
+/* Permet d'utiliser la grid sur les listes */
+.item.unit, .item.lastUnit {clear:none;}
 
 .liste_items .item .actions,.liste-items .item .actions  {float:none;margin:0;clear:both;text-align:#ENV{right};}
 
