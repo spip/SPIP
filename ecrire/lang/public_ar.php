@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'ها هي نشرة الموقع',
-'texte_lettre_information_2' => 'تحصي هذه النشرة المقالات والأخبار المنشورة منذ ',
+'texte_lettre_information_2' => 'تحصي هذه النشرة المقالات والأخبار المنشورة منذ ', # MODIF
 
 // V
 'ver_imprimer' => 'نسخة للطباعة',

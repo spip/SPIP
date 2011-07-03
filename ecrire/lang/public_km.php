@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'នេះជា​ ព្រឹត្ដិ​បត្រពត៌មាន ​នៃសៃថ៍',
-'texte_lettre_information_2' => 'លិខិតនេះ​ សង្ខេប ​​អត្ថបទ និង​ ពត៌មានខ្លី ដែលត្រូវបានផ្សព្វផ្សាយ ពី',
+'texte_lettre_information_2' => 'លិខិតនេះ​ សង្ខេប ​​អត្ថបទ និង​ ពត៌មានខ្លី ដែលត្រូវបានផ្សព្វផ្សាយ ពី', # MODIF
 
 // V
 'ver_imprimer' => 'កំណែ ​ដែលត្រូវបោះពុម្ភ',

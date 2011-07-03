@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Berikut adalah laporan berkala situs',
-'texte_lettre_information_2' => 'Laporan ini memberikan ringkasan artikel-artikel dan berita-berita yang dipublikasikan sejak',
+'texte_lettre_information_2' => 'Laporan ini memberikan ringkasan artikel-artikel dan berita-berita yang dipublikasikan sejak', # MODIF
 
 // V
 'ver_imprimer' => 'Versi cetak',

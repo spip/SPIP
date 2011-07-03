@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Akax jisk\'a qillqat yatiyawin qamawipawa',
-'texte_lettre_information_2' => 'Aka jisk\'a qillqatxa qillqatanak ukhamaraki jisk\'aptat yatiyatanak jisk\'ayi',
+'texte_lettre_information_2' => 'Aka jisk\'a qillqatxa qillqatanak ukhamaraki jisk\'aptat yatiyatanak jisk\'ayi', # MODIF
 
 // V
 'ver_imprimer' => 'Uñjat liq\'suñataki',

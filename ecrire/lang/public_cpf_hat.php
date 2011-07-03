@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Tala lèt-enfòmasyon sit la ',
-'texte_lettre_information_2' => 'Lèt la ka ramase tout atik ek tinouvèl yo  te pibliye depi',
+'texte_lettre_information_2' => 'Lèt la ka ramase tout atik ek tinouvèl yo  te pibliye depi', # MODIF
 
 // V
 'ver_imprimer' => 'Vèsyon pou enprime',

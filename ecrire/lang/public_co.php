@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Eccu a lèttera d\'infurmazione di u situ',
-'texte_lettre_information_2' => 'Sta lèttera face u censu di l\'artìculi è i dispacci dipoi',
+'texte_lettre_information_2' => 'Sta lèttera face u censu di l\'artìculi è i dispacci dipoi', # MODIF
 
 // V
 'ver_imprimer' => 'Versione da stampà',

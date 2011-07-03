@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Hei ass d\'Newsletter vum Site',
-'texte_lettre_information_2' => 'Dës Newsletter ass eng Lëscht vun den Artikelen a Kuerzmeldungen zënter',
+'texte_lettre_information_2' => 'Dës Newsletter ass eng Lëscht vun den Artikelen a Kuerzmeldungen zënter', # MODIF
 
 // V
 'ver_imprimer' => 'Drock-Versioun',

@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Đây là bản tin của trang web',
-'texte_lettre_information_2' => 'Tóm tắt các bài vở và tin ngắn đã phát hành từ ',
+'texte_lettre_information_2' => 'Tóm tắt các bài vở và tin ngắn đã phát hành từ ', # MODIF
 
 // V
 'ver_imprimer' => 'Kiểu dể in',
