@@ -211,6 +211,8 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'icone_supprimer_signature' => 'Diverkañ ar sinadur-mañ',
 'icone_valider_signature' => 'Aprouiñ ar sinadur-mañ',
 'image_administrer_rubrique' => 'Gallout a rit merañ ar rubrikenn-mañ',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 pennad',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -235,6 +237,7 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'info_administrer_rubrique' => 'Gallout a rit merañ ar rubrikenn-mañ',
 'info_adresse' => 'er chomlec\'h :',
 'info_adresse_url' => 'Chomlec\'h (URL) al lec\'hienn foran',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Diskouez ar gweladennoù evit :',
 'info_aide_en_ligne' => 'Skoazell enlinenn SPIP',
 'info_ajout_image' => 'Pa ouzhpennit skeudennoù evel restroù stag ouzh ur pennad 
@@ -366,6 +369,7 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 'info_liste_redacteurs_connectes' => 'Roll ar skridaozerien kevreet',
 'info_login_existant' => 'C\'hoazh ez eus eus ar ger kevreañ-mañ.',
 'info_login_trop_court' => 'Re verr eo ar ger-kevreañ.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Al logoioù',
 'info_maximum' => 'd\'ar muiañ :',
 'info_meme_rubrique' => 'En hevelep rubrikenn',
@@ -433,6 +437,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_par_statut' => 'dre statud',
 'info_par_tri' => '\'(dre @tri@)\'',
 'info_passe_trop_court' => 'Ger-tremen re verr.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Ne glot ket an daou c\'her-tremen.',
 'info_pense_bete_ancien' => 'Ho notennoùigoù-eñvor kozh', # MODIF
 'info_plus_cinq_car' => 'ouzhpenn pemp arouezenn',
@@ -466,6 +471,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_question_utilisation_moteur_recherche' => 'Ha c\'hoant hoc\'h eus da ober gant lusker enklask diabarzh SPIP ?
  (diweredekaat anezhañ a laka ar reizhiad da vont buanoc\'h.)',
 'info_question_vignettes_referer_non' => 'Chom hep diskouez skeudennoùigoù lec\'hiennoù orin ar weladennerien',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Gwrizienn al lec\'hienn',
 'info_recharger_page' => 'Adkargit ar-bajenn-mañ a-raok pell, mar plij.',
 'info_recherche_auteur_a_affiner' => 'Re a zisoc\'hoù zo evit "@cherche_auteur@" ; resisait hoc\'h enklask mar plij.',
@@ -655,12 +661,12 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'lien_trier_nombre_articles' => 'Renkañ diouzh an niver a bennadoù',
 'lien_trier_statut' => 'Renkañ diouzh ar statud',
 'lien_voir_en_ligne' => 'GWELET ENLINENN :',
-'logo_article' => 'LOGO AR PENNAD',
-'logo_auteur' => 'LOGO AR SKRIDAOZER',
-'logo_rubrique' => 'LOGO AR RUBRIKENN',
-'logo_site' => 'LOGO AL LEC\'HIENN-MAÑ',
-'logo_standard_rubrique' => 'LOGO BOAS AR RUBRIKENNOÙ',
-'logo_survol' => 'LOGO RIKLAÑ AL LOGODENN',
+'logo_article' => 'LOGO AR PENNAD', # MODIF
+'logo_auteur' => 'LOGO AR SKRIDAOZER', # MODIF
+'logo_rubrique' => 'LOGO AR RUBRIKENN', # MODIF
+'logo_site' => 'LOGO AL LEC\'HIENN-MAÑ', # MODIF
+'logo_standard_rubrique' => 'LOGO BOAS AR RUBRIKENNOÙ', # MODIF
+'logo_survol' => 'LOGO RIKLAÑ AL LOGODENN', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'dibab ho tiaz',
@@ -711,8 +717,12 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'plugin_info_automatique_liste_update' => 'Hizivaat ar rolloù',
 'plugin_info_automatique_ou' => 'pe...',
 'plugin_info_automatique_select' => 'Diuzit un adveziant amañ a-is : pellgarget e vo gant SPIP ha staliet er c\'havlec\'h <code>@rep@</code> ; ma\'z eus eus an adveziant-mañ c\'hoazh e vo hizivaet.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'da bellgargañ adal @url@ ha da staliañ e @rep@',
 'plugin_librairies_installees' => 'Levraouegoù bet staliet',
 'plugin_necessite_lib' => 'Ezhomm en deus an adveziant-mañ eus al levraoueg @lib@',
@@ -749,9 +759,10 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Kavlec\'h :',

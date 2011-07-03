@@ -209,6 +209,8 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'icone_supprimer_signature' => 'Suprimir aquela signatura',
 'icone_valider_signature' => 'Validar aquela signatura',
 'image_administrer_rubrique' => 'Podètz administrar aquela rubrica',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 article',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -233,6 +235,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_administrer_rubrique' => 'Podètz administrar aquela rubrica',
 'info_adresse' => 'a l\'adreça:',
 'info_adresse_url' => 'Adreça (URL) dau sit public',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Afichar li visitas per :',
 'info_aide_en_ligne' => 'Ajuda en linha SPIP',
 'info_ajout_image' => 'Quora ajustatz d\'imatges coma estacaments jonchs à un article, SPIP pòu crear automaticament per vautres de vinhetas (miniaturas) deis images inserits. Aquò permete per exemple de crear automaticament una galaria ò un poartfòlio.',
@@ -359,6 +362,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_liste_redacteurs_connectes' => 'Tiera dei redactors connectats',
 'info_login_existant' => 'Aqueu login ja existisse.',
 'info_login_trop_court' => 'Login tròup cort.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Lu lògos',
 'info_maximum' => 'maximum :',
 'info_meme_rubrique' => 'Dins la mema rubrica',
@@ -428,6 +432,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_par_statut' => 'per estatut',
 'info_par_tri' => '\'(per @tri@)\'',
 'info_passe_trop_court' => 'Mòt de santa Clara tròup cort.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Li doi mòts de santa Clara son pas identics.',
 'info_pense_bete_ancien' => 'Li voastri anciani nòtas de renembrança', # MODIF
 'info_plus_cinq_car' => 'mai de 5 caractèrs',
@@ -461,6 +466,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
  impossibla.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilisar lo motor de recerca integrat à SPIP? (s\'es desactivat, accelèra lo foncionament dau sistema.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Raiç dau sit',
 'info_recharger_page' => 'Vorgatz tornar cargar aquela pàgina dins un momenton.',
 'info_recherche_auteur_a_affiner' => 'Tròup de resultats per "@cherche_auteur@"; vorgatz afinar la recerca.',
@@ -650,12 +656,12 @@ una color indica lo sieu estat :',
 'lien_trier_nombre_articles' => 'Triar per nombre d\'articles',
 'lien_trier_statut' => 'Triar per estatut',
 'lien_voir_en_ligne' => 'VEIRE EN LINHA:',
-'logo_article' => 'LÒGO DE L\'ARTICLE',
-'logo_auteur' => 'LÒGO DE L\'AUTOR',
-'logo_rubrique' => 'LÒGO DE LA RUBRICA',
-'logo_site' => 'LÒGO D\'AQUEU SIT',
-'logo_standard_rubrique' => 'LÒGO ESTANDARD DEI RUBRICAS',
-'logo_survol' => 'LÒGO PER LO SUBREVÒL',
+'logo_article' => 'LÒGO DE L\'ARTICLE', # MODIF
+'logo_auteur' => 'LÒGO DE L\'AUTOR', # MODIF
+'logo_rubrique' => 'LÒGO DE LA RUBRICA', # MODIF
+'logo_site' => 'LÒGO D\'AQUEU SIT', # MODIF
+'logo_standard_rubrique' => 'LÒGO ESTANDARD DEI RUBRICAS', # MODIF
+'logo_survol' => 'LÒGO PER LO SUBREVÒL', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Chausida de la voastra basa',
@@ -706,8 +712,12 @@ una color indica lo sieu estat :',
 'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'ou...', # NEW
 'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
 'plugin_librairies_installees' => 'Librairies installées', # NEW
 'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
@@ -744,9 +754,10 @@ una color indica lo sieu estat :',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Repertòri:',

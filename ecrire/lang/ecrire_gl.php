@@ -213,6 +213,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Borrar esta sinatura',
 'icone_valider_signature' => 'Validar a sinatura',
 'image_administrer_rubrique' => 'Podes administrar este tema',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 artigo',
 'info_1_article_syndique' => '1 artigo sindicado',
 'info_1_auteur' => '1 autor',
@@ -237,6 +239,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'Podes administrar este tema',
 'info_adresse' => 'ó enderezo:',
 'info_adresse_url' => 'Enderezo (URL) do web público',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Mostrar as visitas de :',
 'info_aide_en_ligne' => 'Axuda en liña do SPIP',
 'info_ajout_image' => 'Cando engada imaxes como documentos adxuntos a un artigo,
@@ -373,6 +376,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_liste_redacteurs_connectes' => 'Lista de redactores conectados',
 'info_login_existant' => 'Este identificador xa existe.',
 'info_login_trop_court' => 'Identificador curto de máis.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Os logos',
 'info_maximum' => 'máximo:',
 'info_meme_rubrique' => 'Na mesma rúbrica ou sección',
@@ -443,6 +447,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_par_statut' => 'por estado',
 'info_par_tri' => '\'(por @tri@)\'',
 'info_passe_trop_court' => 'Chave moi curta.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'As dúas chaves non son idénticas.',
 'info_pense_bete_ancien' => 'Notas vellas',
 'info_plus_cinq_car' => 'máis de 5 caracteres',
@@ -477,6 +482,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Quere empregar o motor de procura integrado en SPIP?
   (desactivalo acelera o funcionamento do sistema.)',
 'info_question_vignettes_referer_non' => 'Non mostrar as capturas de webs de orixe das visitas',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Raíz do web',
 'info_recharger_page' => 'Recarga a páxina nuns intres.',
 'info_recherche_auteur_a_affiner' => 'Resultados de máis para "@cherche_auteur@"; por favor, afine a súa procura.',
@@ -666,12 +672,12 @@ cunha cor que indica o seu estado :',
 'lien_trier_nombre_articles' => 'Ordear por número de artigos',
 'lien_trier_statut' => 'Ordear por categoría',
 'lien_voir_en_ligne' => 'VER EN LIÑA:',
-'logo_article' => 'LOGO DO ARTIGO',
-'logo_auteur' => 'LOGO DESTA PERSOA',
-'logo_rubrique' => 'LOGO DO TEMA',
-'logo_site' => 'LOGO DESTE WEB',
-'logo_standard_rubrique' => 'LOGO ESTANDAR DOS TEMAS',
-'logo_survol' => 'LOGO DE INTERCAMBIO',
+'logo_article' => 'LOGO DO ARTIGO', # MODIF
+'logo_auteur' => 'LOGO DESTA PERSOA', # MODIF
+'logo_rubrique' => 'LOGO DO TEMA', # MODIF
+'logo_site' => 'LOGO DESTE WEB', # MODIF
+'logo_standard_rubrique' => 'LOGO ESTANDAR DOS TEMAS', # MODIF
+'logo_survol' => 'LOGO DE INTERCAMBIO', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Elixe a túa base',
@@ -722,8 +728,12 @@ cunha cor que indica o seu estado :',
 'plugin_info_automatique_liste_update' => 'Actualizar as listaxes',
 'plugin_info_automatique_ou' => 'ou...',
 'plugin_info_automatique_select' => 'Seleccione a seguir un módulo : SPIP  descargarao e instalarao no cartafol <code>@rep@</code> ; si o módulo xa existe será actualizado.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'As extensións seguintes cárganse e actívanse no cartafol @extensions@.',
 'plugin_info_extension_2' => 'Non son desactivables',
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'descargar desde @url@ e instalalo no cartafol @rep@',
 'plugin_librairies_installees' => 'Librarías instaladas',
 'plugin_necessite_lib' => 'Este módulo necesita a libraría @lib@',
@@ -760,9 +770,10 @@ cunha cor que indica o seu estado :',
 'queue_executer_maintenant' => 'Executar as tarefas de mantemento',
 'queue_nb_jobs_in_queue' => '@nb@ traballos en agarda',
 'queue_next_job_in_nb_sec' => 'Próximo traballo en @nb@ s',
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 traballo en agarda',
 'queue_purger_queue' => 'Purgar a lista de traballos',
-'queue_titre' => 'Lista de traballos',
+'queue_titre' => 'Lista de traballos', # MODIF
 
 // R
 'repertoire_plugins' => 'Repertorio :',

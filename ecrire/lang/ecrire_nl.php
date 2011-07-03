@@ -214,6 +214,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Deze naam wissen',
 'icone_valider_signature' => 'Deze naam goedkeuren',
 'image_administrer_rubrique' => 'Je kan deze rubriek beheren',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 artikel',
 'info_1_article_syndique' => 'Gesyndiceerde 1 artikel',
 'info_1_auteur' => '1 auteur',
@@ -239,6 +241,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'Je kan deze rubriek beheren',
 'info_adresse' => 'aan/naar het adres:',
 'info_adresse_url' => 'Adres (URL) van de website',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Toon het aantal bezoeken voor:',
 'info_aide_en_ligne' => 'ONLINE HELP VAN SPIP',
 'info_ajout_image' => 'Als je afbeeldingen als bijlage aan een document toevoegt,
@@ -373,6 +376,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_liste_redacteurs_connectes' => 'Lijst met online redacteuren',
 'info_login_existant' => 'Deze login is reeds in gebruik',
 'info_login_trop_court' => 'Login te kort.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'De logo\'s',
 'info_maximum' => 'maximum:',
 'info_meme_rubrique' => 'In dezelfde rubriek',
@@ -444,6 +448,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_par_statut' => 'per statuut',
 'info_par_tri' => '\'(per @tri@)\'',
 'info_passe_trop_court' => 'Paswoord te kort.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Beide paswoorden zijn niet identiek.',
 'info_pense_bete_ancien' => 'Voorbije memos', # MODIF
 'info_plus_cinq_car' => 'Meer dan 5 karakters',
@@ -480,6 +485,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Wil je gebruik maken van de geintegreerde zoekmachine van SPIP ?
  (niet-activeren hiervan versnelt de werking van het systeem.)',
 'info_question_vignettes_referer_non' => 'Niet de vangsten van de sites van oorsprong van de bezoeken te kennen geven',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Begin van de site',
 'info_recharger_page' => 'Gelieve deze pagina binnen enkele ogenblikken te herladen.',
 'info_recherche_auteur_a_affiner' => 'Teveel resultaten voor "@cherche_auteur@" ; gelieve de zoekopdracht te verfijnen.',
@@ -669,12 +675,12 @@ een kleur geeft hun status aan :',
 'lien_trier_nombre_articles' => 'Sorteer op aantal artikels',
 'lien_trier_statut' => 'Sorteer op status',
 'lien_voir_en_ligne' => 'ONLINE BEKIJKEN:',
-'logo_article' => 'LOGO VAN HET ARTIKEL',
-'logo_auteur' => 'LOGO VAN DE AUTEUR',
-'logo_rubrique' => 'LOGO VAN DE RUBRIEK',
-'logo_site' => 'LOGO VAN DE WEBSITE',
-'logo_standard_rubrique' => 'STANDAARDLOGO VOOR RUBRIEKEN',
-'logo_survol' => 'ZWEVEND LOGO',
+'logo_article' => 'LOGO VAN HET ARTIKEL', # MODIF
+'logo_auteur' => 'LOGO VAN DE AUTEUR', # MODIF
+'logo_rubrique' => 'LOGO VAN DE RUBRIEK', # MODIF
+'logo_site' => 'LOGO VAN DE WEBSITE', # MODIF
+'logo_standard_rubrique' => 'STANDAARDLOGO VOOR RUBRIEKEN', # MODIF
+'logo_survol' => 'ZWEVEND LOGO', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Databank kiezen',
@@ -725,8 +731,12 @@ een kleur geeft hun status aan :',
 'plugin_info_automatique_liste_update' => 'De lijsten bijwerken',
 'plugin_info_automatique_ou' => 'om...',
 'plugin_info_automatique_select' => 'Selecteert hieronder een plugin : SPIP zal het downloaden en zal in de lijst <code>@rep@</code>  het plaatsen; als dit plugin reeds bestaat, zal hij bijgewerkt worden.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'om sinds @url@ te downloaden en om te plaatsen in @rep@',
 'plugin_librairies_installees' => 'Geplaatste boekhandels',
 'plugin_necessite_lib' => 'Dit plugin vereist de boekhandel @lib@',
@@ -763,9 +773,10 @@ een kleur geeft hun status aan :',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Map :',

@@ -214,6 +214,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Hapus tanda tangan ini',
 'icone_valider_signature' => 'Validasi tanda tangan ini',
 'image_administrer_rubrique' => 'Anda dapat mengelola bagian ini',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 artikel',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -239,6 +241,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'Anda dapat mengelola bagian ini',
 'info_adresse' => 'ke alamat:',
 'info_adresse_url' => 'URL situs umum anda',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Tampilkan kunjungan untuk:',
 'info_aide_en_ligne' => 'Bantuan Online SPIP',
 'info_ajout_image' => 'Ketika anda menambahkan gambar sebagai lampiran pada sebuah artikel,
@@ -372,6 +375,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_liste_redacteurs_connectes' => 'Daftar editor-editor terkoneksi',
 'info_login_existant' => 'Log masuk ini sudah ada.',
 'info_login_trop_court' => 'Log masuk terlalu pendek.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'maksimum:',
 'info_meme_rubrique' => 'Dalam bagian yang sama',
@@ -442,6 +446,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_par_statut' => 'berdasarkan status',
 'info_par_tri' => '(Oleh @tri@)',
 'info_passe_trop_court' => 'Kata sandi terlalu pendek.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Dua kata sandi tidak identik.',
 'info_pense_bete_ancien' => 'Memo-memo lama anda', # MODIF
 'info_plus_cinq_car' => 'lebih dari 5 karakter',
@@ -477,6 +482,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Apakah anda ingin mengunakan mesin pencari yang terintegrasi dengan SPIP?
 	(Menonaktifkannya akan meningkatkan kinerja sistem.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Root situs',
 'info_recharger_page' => 'Silakan buka kembali halaman ini beberapa saat lagi.',
 'info_recherche_auteur_a_affiner' => 'Terlalu banyaj hasil untuk "@cherche_auteur@"; silakan perbaiki pencarian anda.',
@@ -666,12 +672,12 @@ dalam warna yang menunjukkan statusnya:',
 'lien_trier_nombre_articles' => 'Disusun berdasarkan jumlah artikel',
 'lien_trier_statut' => 'Disusun berdasarkan status',
 'lien_voir_en_ligne' => 'LIHAT ONLINE:',
-'logo_article' => 'LOGO ARTIKEL',
-'logo_auteur' => 'LOGO PENULIS',
-'logo_rubrique' => 'LOGO BAGIAN',
-'logo_site' => 'LOGO SITUS INI',
-'logo_standard_rubrique' => 'LOGO STANDAR UNTUK BAGIAN',
-'logo_survol' => 'LOGO SAMARAN',
+'logo_article' => 'LOGO ARTIKEL', # MODIF
+'logo_auteur' => 'LOGO PENULIS', # MODIF
+'logo_rubrique' => 'LOGO BAGIAN', # MODIF
+'logo_site' => 'LOGO SITUS INI', # MODIF
+'logo_standard_rubrique' => 'LOGO STANDAR UNTUK BAGIAN', # MODIF
+'logo_survol' => 'LOGO SAMARAN', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Pilih database anda',
@@ -722,8 +728,12 @@ dalam warna yang menunjukkan statusnya:',
 'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'ou...', # NEW
 'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
 'plugin_librairies_installees' => 'Librairies installées', # NEW
 'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
@@ -760,9 +770,10 @@ dalam warna yang menunjukkan statusnya:',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Directori:',

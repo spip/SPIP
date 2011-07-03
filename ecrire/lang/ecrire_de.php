@@ -111,7 +111,7 @@ französischen SPIP-Dokumentation</a>.',
 'config_titre_base_sup_choix' => 'Wählen Sie eine zusätzliche Datenbank',
 'connexion_ldap' => 'Verbindung:',
 'copier_en_local' => 'Lokale Koipe',
-'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_un_auteur' => 'Autor anlegen und zuordnen',
 
 // D
 'date_mot_heures' => 'Stunden',
@@ -213,6 +213,8 @@ französischen SPIP-Dokumentation</a>.',
 'icone_supprimer_signature' => 'Unterschrift löschen',
 'icone_valider_signature' => 'Unterschrift bestätigen',
 'image_administrer_rubrique' => 'Sie können diese Rubrik verwalten',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 Artikel',
 'info_1_article_syndique' => '1 syndizierte Artikel',
 'info_1_auteur' => '1 Autor',
@@ -237,6 +239,7 @@ französischen SPIP-Dokumentation</a>.',
 'info_administrer_rubrique' => 'Sie können diese Rubrik verwalten',
 'info_adresse' => 'an Adresse:',
 'info_adresse_url' => 'Adresse (URL) der öffentlichen Website',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Besuche anzeigen für:',
 'info_aide_en_ligne' => 'SPIP Online-Hilfe',
 'info_ajout_image' => 'Wenn Sie Bilder als Dokumente anlegen, die einem Artikel zugeordnet sind, kann SPIP automatisch (Miniatur-)Vorschaubilder dazu erstellen. Sie können so eine automatische Galerie oder Bildermappe einrichten.',
@@ -271,7 +274,7 @@ französischen SPIP-Dokumentation</a>.',
 'info_avertissement' => 'Warnung',
 'info_barre_outils' => 'mit Symbolleiste?',
 'info_base_installee' => 'Die Struktur Ihrer Datenbank wurde angelegt.',
-'info_bio' => 'Biographie', # NEW
+'info_bio' => 'Biographie',
 'info_chapeau' => 'Kopf',
 'info_chapeau_2' => 'Kopf:',
 'info_chemin_acces_1' => 'Optionen: <b>Pfad im Verzeichnis</b>',
@@ -362,6 +365,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_liste_redacteurs_connectes' => 'Liste der zur Zeit angemeldeten Redakteure',
 'info_login_existant' => 'Dieses Login ist bereits vergeben.',
 'info_login_trop_court' => 'Login zu kurz.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Die Logos',
 'info_maximum' => 'Maximum:',
 'info_meme_rubrique' => 'In der gleichen Rubrik',
@@ -426,6 +430,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_par_statut' => 'nach Status',
 'info_par_tri' => '\'(nach @tri@)\'',
 'info_passe_trop_court' => 'Passwort zu kurz.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Die zwei Passworte stimmen nicht überein.',
 'info_pense_bete_ancien' => 'Ihre alten Merkzettel',
 'info_plus_cinq_car' => 'mehr als 5 Zeichen',
@@ -457,6 +462,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
  In diesem Fall funktioniert die automatische Anmeldung nicht.',
 'info_question_utilisation_moteur_recherche' => 'Wollen Sie die integrierte Suchfunktion von SPIP verwenden? (ohne Suchfunktion wird Ihr System schneller.)',
 'info_question_vignettes_referer_non' => 'Keine Thumbnails der Herkunftswebsites anzeigen',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'OBERSTE EBENE DER WEBSITE',
 'info_recharger_page' => 'Bitte laden Sie diese Seite in ein paar Augenblicken erneut.',
 'info_recherche_auteur_a_affiner' => 'Zu viele Fundstellen für R20;@cherche_auteur@R21; - bitte grenzen Sie die Suche ein.',
@@ -625,7 +631,7 @@ in einer Farbe, die den Status anzeigt :',
 'label_slogan_site' => 'Slogan der Website',
 'label_taille_ecran' => 'Bildschirmbreite',
 'label_texte_et_icones_navigation' => 'Navigationsmenü',
-'label_texte_et_icones_page' => 'Auf der Seite azeiegn',
+'label_texte_et_icones_page' => 'Auf der Seite anzeigen',
 'ldap_correspondance' => 'Vererbung von Feld @champ@',
 'ldap_correspondance_1' => 'Vererbung des LDAP Felds',
 'ldap_correspondance_2' => 'Geben sie bitte für jedes der folgenden SPIP-Felder das entsprechende LDAP-Feld an. Leere Felder werden nicht genutzt, LDAP-Felder mit Leerzeichen oder Kommata trennen, um mehrere zu probieren. ',
@@ -646,12 +652,12 @@ in einer Farbe, die den Status anzeigt :',
 'lien_trier_nombre_articles' => 'Nach Zahl der Artikel sortieren',
 'lien_trier_statut' => 'Nach Status sortieren',
 'lien_voir_en_ligne' => 'ONLINE ANZEIGEN:',
-'logo_article' => 'ARTIKEL-LOGO',
-'logo_auteur' => 'AUTOREN-LOGO',
-'logo_rubrique' => 'RUBRIK-LOGO',
-'logo_site' => 'WEBSITE-LOGO',
-'logo_standard_rubrique' => 'STANDARD-LOGO FÜR RUBRIKEN',
-'logo_survol' => 'MOUSEOVER-LOGO',
+'logo_article' => 'ARTIKEL-LOGO', # MODIF
+'logo_auteur' => 'AUTOREN-LOGO', # MODIF
+'logo_rubrique' => 'RUBRIK-LOGO', # MODIF
+'logo_site' => 'WEBSITE-LOGO', # MODIF
+'logo_standard_rubrique' => 'STANDARD-LOGO FÜR RUBRIKEN', # MODIF
+'logo_survol' => 'MOUSEOVER-LOGO', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Datenbank auswählen',
@@ -702,8 +708,12 @@ in einer Farbe, die den Status anzeigt :',
 'plugin_info_automatique_liste_update' => 'Listen aktualisieren',
 'plugin_info_automatique_ou' => 'oder...',
 'plugin_info_automatique_select' => 'Wählen Sie ein Plugin aus. SPIP wird es herunterladen und im Verzeichnis <code>@rep@</code> installieren. Falls das Plugin bereits installiert ist, wird es auf den neuesten Stand gebracht.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Diese Erweiterungen liegen im Verzeichnis @extensions@ und sind aktiviert.',
 'plugin_info_extension_2' => 'Man kann sie nicht deaktivieren.',
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'herunterladen von @url@ und in @rep@ installieren',
 'plugin_librairies_installees' => 'Installierte Bibliotheken',
 'plugin_necessite_lib' => 'Dieses Plugin benötigt die Bibliothek @lib@',
@@ -740,9 +750,10 @@ in einer Farbe, die den Status anzeigt :',
 'queue_executer_maintenant' => 'Jetzt ausführen',
 'queue_nb_jobs_in_queue' => '@nb@ Jobs in der Warteschlange',
 'queue_next_job_in_nb_sec' => 'Nächster Job in @nb@ s',
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 Job in der Warteschlange',
 'queue_purger_queue' => 'Jobliste löschen',
-'queue_titre' => 'Jobliste',
+'queue_titre' => 'Jobliste', # MODIF
 
 // R
 'repertoire_plugins' => 'Verzeichnis:',

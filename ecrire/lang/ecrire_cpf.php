@@ -241,6 +241,8 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 'icone_supprimer_signature' => 'Dégrèn sinyatir-la',
 'icone_valider_signature' => 'Konfirm sinyatir-la',
 'image_administrer_rubrique' => 'Ou néna drwa d-komandman sir rubrik-la',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 lartik',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -265,6 +267,7 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 'info_administrer_rubrique' => 'Ou pé zèr larubrik-la',
 'info_adresse' => 'si ladrès :',
 'info_adresse_url' => 'Ladrès (URL) lo sit piblik (figirwèb)',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Armontr bann vizit pou :',
 'info_aide_en_ligne' => 'Koudmin an liyn SPIP',
 'info_ajout_image' => 'Kank ou azout inndé zimaz pou mèt inn dokiman-zwinn èk inn lartik,
@@ -396,6 +399,7 @@ SPIP anba-la, i sava pa marsé.',
 'info_liste_redacteurs_connectes' => 'Fil bann lotèr an liyn',
 'info_login_existant' => 'Nondkod-la li lé déza anservi.',
 'info_login_trop_court' => 'Nondkod-la lé takini : ékart ali.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'Pli gran siksé :',
 'info_meme_rubrique' => 'Andann mèm ribrik-la',
@@ -467,6 +471,7 @@ la finn dèt publyé).',
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => 'Out modpas lé tro takini.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Bann dé modpass-la lé pa parèy.',
 'info_pense_bete_ancien' => 'Out bann vyé gardantèt', # MODIF
 'info_plus_cinq_car' => 'pli dé 5 karaktèr-limprimri',
@@ -498,6 +503,7 @@ sak i dégrèn lanvwa bann limèl sir zot bann servèr : dann kala, linskrisyon
 'info_question_utilisation_moteur_recherche' => 'Indik si ou vé ansèrv lo rodèr-dodan SPIP
 (si ou défalk ali, lo sistèm lé pli rapid.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Rasin lo sitwèb',
 'info_recharger_page' => 'Mersi rosarz lapazwèb-la disi inn ti moman.',
 'info_recherche_auteur_a_affiner' => 'Néna trod bann rézilta pou "@cherche_auteur@" ; mersi kadr myé kosa i rod.',
@@ -687,12 +693,12 @@ sanm in koulèr i présiz son léta :',
 'lien_trier_nombre_articles' => 'Prézant swivan lo nonb do bann zartik',
 'lien_trier_statut' => 'Prézant swivan lo statu',
 'lien_voir_en_ligne' => 'GÈT AN LIYN :',
-'logo_article' => 'LOGO LARTIK-LA',
-'logo_auteur' => 'LOGO LOTÈR-LA',
-'logo_rubrique' => 'LOGO RUBRIK-LA',
-'logo_site' => 'LOGO SITWÈB-LA',
-'logo_standard_rubrique' => 'LOGO POU TOUT BANN RUBRIK',
-'logo_survol' => 'LOGO POU LOFÉ ',
+'logo_article' => 'LOGO LARTIK-LA', # MODIF
+'logo_auteur' => 'LOGO LOTÈR-LA', # MODIF
+'logo_rubrique' => 'LOGO RUBRIK-LA', # MODIF
+'logo_site' => 'LOGO SITWÈB-LA', # MODIF
+'logo_standard_rubrique' => 'LOGO POU TOUT BANN RUBRIK', # MODIF
+'logo_survol' => 'LOGO POU LOFÉ ', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Lo swa out bazdodné',
@@ -743,8 +749,12 @@ sanm in koulèr i présiz son léta :',
 'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'ou...', # NEW
 'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
 'plugin_librairies_installees' => 'Librairies installées', # NEW
 'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
@@ -781,9 +791,10 @@ sanm in koulèr i présiz son léta :',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Répertwar :',

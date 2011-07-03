@@ -216,6 +216,8 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'icone_supprimer_signature' => 'Kraze siyati a',
 'icone_valider_signature' => 'Konfime siyati a',
 'image_administrer_rubrique' => 'Ou kapab gèr ribrik la',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 atik',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -241,6 +243,7 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_administrer_rubrique' => 'Ou kapab gère ribrik-la',
 'info_adresse' => 'sou ladrès :',
 'info_adresse_url' => 'Ladrès(URL) sit piblik',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Fè parèt vizit yo pou :',
 'info_aide_en_ligne' => 'Bourad an liy SPIP',
 'info_ajout_image' => 'Kan w vlé ajoute kèk imaj tankou kèk dokiman jwenn sou yon atik,
@@ -375,6 +378,7 @@ Koulè imaj rannkont stati yo (komandè = vèr; redaktè = jon).',
 'info_liste_redacteurs_connectes' => 'Llis redaktè ki ap an liy kounye-a',
 'info_login_existant' => 'Nonkod la ki egziste deja.',
 'info_login_trop_court' => 'Nondkod ki tro piti.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'maksimom :',
 'info_meme_rubrique' => 'Lòt dokiman nan pati sa a nan sit la',
@@ -445,6 +449,7 @@ pa mache mèm.<br />{{Fòk w instal ankò
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => 'Modpas se tro piti.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Ou dè modpas yo se pa parey sa-mèm.',
 'info_pense_bete_ancien' => 'Ou vyé raple-w sa-yo ', # MODIF
 'info_plus_cinq_car' => 'plis de 5 kawaktè-leprimri',
@@ -480,6 +485,7 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
 'info_question_utilisation_moteur_recherche' => 'Eske w vle itilize motè pou chèche de SPIP ?
  (enlèv ali ke rann sistèm pli rapid ek soup.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Rasin sit-la',
 'info_recharger_page' => 'Tapri rochaj paj la nan kèk minit.',
 'info_recherche_auteur_a_affiner' => 'Genyen trò rezilta pou "@cherche_auteur@" ; tanpri souple fè yon nouvo chèche pli prési.',
@@ -669,12 +675,12 @@ nan yon koulè ki bay lestati ali :',
 'lien_trier_nombre_articles' => 'Fé parèt swivan nonm atik yo',
 'lien_trier_statut' => 'ranje swivan lestati',
 'lien_voir_en_ligne' => 'GAD AN LIY:',
-'logo_article' => 'LOGO ATIK LA',
-'logo_auteur' => 'LOGO LOTÈ',
-'logo_rubrique' => 'LOGO RIBRIK',
-'logo_site' => 'LOGO SIT LA',
-'logo_standard_rubrique' => 'LOGO ODINÈ TOUT RIBRIK YO',
-'logo_survol' => 'LOGO POU VOLE',
+'logo_article' => 'LOGO ATIK LA', # MODIF
+'logo_auteur' => 'LOGO LOTÈ', # MODIF
+'logo_rubrique' => 'LOGO RIBRIK', # MODIF
+'logo_site' => 'LOGO SIT LA', # MODIF
+'logo_standard_rubrique' => 'LOGO ODINÈ TOUT RIBRIK YO', # MODIF
+'logo_survol' => 'LOGO POU VOLE', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Chwa labaz w-a',
@@ -725,8 +731,12 @@ nan yon koulè ki bay lestati ali :',
 'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'ou...', # NEW
 'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
 'plugin_librairies_installees' => 'Librairies installées', # NEW
 'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
@@ -763,9 +773,10 @@ nan yon koulè ki bay lestati ali :',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Répertoire :', # NEW

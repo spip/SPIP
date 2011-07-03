@@ -211,6 +211,8 @@ Ez balidatu inportazio galdera hau.
 'icone_supprimer_signature' => 'Sinadura hau ezabatu',
 'icone_valider_signature' => 'Sinadura hau onartu',
 'image_administrer_rubrique' => 'Atal hau kudeatu ahal duzu',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => 'artikulu 1',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -235,6 +237,7 @@ Ez balidatu inportazio galdera hau.
 'info_administrer_rubrique' => 'Atal haukudeatu ahal duzu',
 'info_adresse' => 'helbidera:',
 'info_adresse_url' => 'Toki publikoaren helbidea(URL) ',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Atal honentzako bisitak erakutsi:',
 'info_aide_en_ligne' => 'SPIP-eko zuzeneko laguntza',
 'info_ajout_image' => 'Irudiak dokumentu bezala gehitzen direnean SPIP-ekautomatikoki sartutako irudi hauen ikonoak sor ditzake. Erabilgarria izan daiteke,adibidez, galeria bat sortzeko.',
@@ -362,6 +365,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_liste_redacteurs_connectes' => 'Konektatuak dauden erredaktoreen zerrenda',
 'info_login_existant' => 'Login hori dagoeneko existitzen da.',
 'info_login_trop_court' => 'Login hori laburregia da',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Logoak',
 'info_maximum' => 'gehienez:',
 'info_meme_rubrique' => 'Atal berean',
@@ -426,6 +430,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_par_statut' => 'egoeraren arabera',
 'info_par_tri' => '\'(par @tri@)\'',
 'info_passe_trop_court' => 'Pasahitz laburregia.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Pasahitzak ezberdinak dira',
 'info_pense_bete_ancien' => 'Zure ohartarapen zaharrak', # MODIF
 'info_plus_cinq_car' => '5 karaktere baino gehiago',
@@ -457,6 +462,7 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 'info_question_utilisation_moteur_recherche' => 'SPIP-ean integratutako bilatzailea erabili nahi duzu ?
 (desaktibapenak sistemaren funtzionamendua bizkortzen du.)',
 'info_question_vignettes_referer_non' => 'Bisiten jatorrien guneen kapturak ez erakutsi',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Gunearen erroa',
 'info_recharger_page' => 'Mesedez orrialde hau berriz kargatu minutu batzuk barru.',
 'info_recherche_auteur_a_affiner' => 'Emaitza gehiegi "@cherche_auteur@"-rako ; mesedez bilaketa doitu.',
@@ -645,12 +651,12 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'lien_trier_nombre_articles' => 'Artikuluen izenagatik sailkatu',
 'lien_trier_statut' => 'Estatusagatik sailkatu',
 'lien_voir_en_ligne' => 'LINEAN IKUSI :',
-'logo_article' => 'Artikuluaren logotipoa...',
-'logo_auteur' => 'EGILEAREN LOGOA',
-'logo_rubrique' => 'ATALAREN LOGOA',
-'logo_site' => 'GUNEAREN LOGOA',
-'logo_standard_rubrique' => 'ATALEN LOGO ESTANDARRA',
-'logo_survol' => 'LOGOA BEGIRATUAGATIK',
+'logo_article' => 'Artikuluaren logotipoa...', # MODIF
+'logo_auteur' => 'EGILEAREN LOGOA', # MODIF
+'logo_rubrique' => 'ATALAREN LOGOA', # MODIF
+'logo_site' => 'GUNEAREN LOGOA', # MODIF
+'logo_standard_rubrique' => 'ATALEN LOGO ESTANDARRA', # MODIF
+'logo_survol' => 'LOGOA BEGIRATUAGATIK', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Zure basearen aukera',
@@ -701,8 +707,12 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'plugin_info_automatique_liste_update' => 'Zerrendak gaurkotu',
 'plugin_info_automatique_ou' => 'edo...',
 'plugin_info_automatique_select' => 'Plugin bat aukera ezazu beherago : SPIPek deskargatuko du eta <code>@rep@</code> direktorioan instalatuko du ; plugin hau jadanik existitzen bada, gaurkotua izanen da.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => '@url@ helbidetik deskargatu beharra, eta @rep@ direktorioan instalatzekoa',
 'plugin_librairies_installees' => 'Instalatutako liburutegiak',
 'plugin_necessite_lib' => 'plugin hunek @lib@ liburutegia beharesten du.',
@@ -739,9 +749,10 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Direktorioa :',

@@ -213,6 +213,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Forviŝi tiun subskribon',
 'icone_valider_signature' => 'Validigi tiun subskribon',
 'image_administrer_rubrique' => 'Vi povas mastrumi tiun rubrikon',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 artikolo',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -237,6 +239,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'Vi povas mastrumi tiun rubrikon',
 'info_adresse' => 'ĉe la adreso :',
 'info_adresse_url' => 'Retadreso (URL) de la publika retejo',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Afiŝi la vizitojn de :',
 'info_aide_en_ligne' => 'Reta SPIP-helpilo',
 'info_ajout_image' => 'Kiam vi ligas bildojn kiel alkroĉitajn dokumentojn al artikolo,
@@ -367,6 +370,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_liste_redacteurs_connectes' => 'Listo de la konektitaj redaktantoj',
 'info_login_existant' => 'Tiu salutnomo jam ekzistas.',
 'info_login_trop_court' => 'Tro mallonga salutnomo.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'La vinjetoj',
 'info_maximum' => 'maksimumo :',
 'info_meme_rubrique' => 'En la sama rubriko',
@@ -433,6 +437,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_par_statut' => 'laŭ statuso',
 'info_par_tri' => '\'(laŭ @tri@)\'',
 'info_passe_trop_court' => 'Pasvorto tro mallonga.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Ambaŭ pasvortoj ne samas.',
 'info_pense_bete_ancien' => 'Viaj malnovaj memorigiloj', # MODIF
 'info_plus_cinq_car' => 'pli ol 5 signoj',
@@ -467,6 +472,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Ĉu vi deziras uzi la SPIP-internan serĉilon ?
  (malaktivigi ĝin rapidigas la funkciadon de la sistemo.)',
 'info_question_vignettes_referer_non' => 'Ne vidigi de kiuj retejoj venas vizitantoj',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Radiko de la retejo',
 'info_recharger_page' => 'Bonvolu refreŝigi tiun ĉi paĝon post momento.',
 'info_recherche_auteur_a_affiner' => 'Tro da rezultoj por "@cherche_auteur@"; bonvolu fajnigi la serĉokriteriojn.',
@@ -655,12 +661,12 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'lien_trier_nombre_articles' => 'Vicigi laŭ nombro de artikoloj',
 'lien_trier_statut' => 'Vicigi laŭ statuso',
 'lien_voir_en_ligne' => 'VIDI ĈERETIGITE :',
-'logo_article' => 'VINJETO DE LA ARTIKOLO',
-'logo_auteur' => 'VINJETO DE LA AŬTORO',
-'logo_rubrique' => 'VINJETO DE LA RUBRIKO',
-'logo_site' => 'VINJETO DE LA RETEJO',
-'logo_standard_rubrique' => 'LAŬNORMA VINJETO DE RUBRIKOJ',
-'logo_survol' => 'VINJETO POR FLUGRIGARDO',
+'logo_article' => 'VINJETO DE LA ARTIKOLO', # MODIF
+'logo_auteur' => 'VINJETO DE LA AŬTORO', # MODIF
+'logo_rubrique' => 'VINJETO DE LA RUBRIKO', # MODIF
+'logo_site' => 'VINJETO DE LA RETEJO', # MODIF
+'logo_standard_rubrique' => 'LAŬNORMA VINJETO DE RUBRIKOJ', # MODIF
+'logo_survol' => 'VINJETO POR FLUGRIGARDO', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Elekto de via datenbazo',
@@ -711,8 +717,12 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'plugin_info_automatique_liste_update' => 'Ĝisdatigi la listojn',
 'plugin_info_automatique_ou' => 'aŭ...',
 'plugin_info_automatique_select' => 'Elektu ĉi-sube kromprogramon : SPIP elŝutos ĝin kaj instalos ĝin en la dosierujo <code>@rep@</code> ; se tiu ĉi kromprogramo jam ekzistas, ĝi estos ĝisdatigita.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'elŝutota de @url@ kaj instalota en @rep@',
 'plugin_librairies_installees' => 'Instalitaj bibliotekoj',
 'plugin_necessite_lib' => 'Tiu ĉi kromprogramo bezonas la bibliotekon @lib@',
@@ -749,9 +759,10 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Dosierujo :',

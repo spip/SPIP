@@ -222,6 +222,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Aka iyawsa apaqaña',
 'icone_valider_signature' => 'Aka iyaws iyaw saña',
 'image_administrer_rubrique' => 'Aka t\'aqa apnaqasmawa',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 qillqata',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -248,6 +250,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'Aka t\'aqxa apnaqasmawa',
 'info_adresse' => 'utjawiru:',
 'info_adresse_url' => 'Utjawi (URL) jach\'a qamaw utata',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Tumpirinak uñachayaña ukataki:',
 'info_aide_en_ligne' => 'SPIP naktatat yanapa',
 'info_ajout_image' => 'Lorsque vous ajoutez des images en tant que documents joints à un article,
@@ -384,6 +387,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_liste_redacteurs_connectes' => 'Liste des rédacteurs connectés', # NEW
 'info_login_existant' => 'Ce login existe déjà.', # NEW
 'info_login_trop_court' => 'Login trop court.', # NEW
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'maximum :', # NEW
 'info_meme_rubrique' => 'Dans la même rubrique', # NEW
@@ -454,6 +458,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => 'Mot de passe trop court.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Les deux mots de passe ne sont pas identiques.', # NEW
 'info_pense_bete_ancien' => 'Vos anciens pense-bêtes', # NEW
 'info_plus_cinq_car' => 'plus de 5 caractères', # NEW
@@ -489,6 +494,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche intégré à SPIP ?
 	(le désactiver accélère le fonctionnement du système.)', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Racine du site', # NEW
 'info_recharger_page' => 'Veuillez recharger cette page dans quelques instants.', # NEW
 'info_recherche_auteur_a_affiner' => 'Trop de résultats pour "@cherche_auteur@" ; veuillez affiner la recherche.', # NEW
@@ -678,12 +684,12 @@ dans une couleur qui indique leur état :', # NEW
 'lien_trier_nombre_articles' => 'Trier par nombre d\'articles', # NEW
 'lien_trier_statut' => 'Trier par statut', # NEW
 'lien_voir_en_ligne' => 'VOIR EN LIGNE :', # NEW
-'logo_article' => 'LOGO DE L\'ARTICLE', # NEW
-'logo_auteur' => 'LOGO DE L\'AUTEUR', # NEW
-'logo_rubrique' => 'LOGO DE LA RUBRIQUE', # NEW
-'logo_site' => 'LOGO DE CE SITE', # NEW
-'logo_standard_rubrique' => 'LOGO STANDARD DES RUBRIQUES', # NEW
-'logo_survol' => 'LOGO POUR SURVOL', # NEW
+'logo_article' => 'Logo de l\'article', # NEW
+'logo_auteur' => 'Logo de l\'auteur', # NEW
+'logo_rubrique' => 'Logo de la rubrique', # NEW
+'logo_site' => 'Logo de ce site', # NEW
+'logo_standard_rubrique' => 'Logo standard des rubriques', # NEW
+'logo_survol' => 'Logo pour survol', # NEW
 
 // M
 'menu_aide_installation_choix_base' => 'Choix de votre base', # NEW
@@ -734,8 +740,12 @@ dans une couleur qui indique leur état :', # NEW
 'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'ou...', # NEW
 'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
 'plugin_librairies_installees' => 'Librairies installées', # NEW
 'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
@@ -772,9 +782,10 @@ dans une couleur qui indique leur état :', # NEW
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Répertoire :', # NEW

@@ -216,6 +216,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Desaniciar esta robla',
 'icone_valider_signature' => 'Validar esta robla',
 'image_administrer_rubrique' => 'Puedes alministrar esta estaya',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 artículu',
 'info_1_article_syndique' => '1 artículu sindicáu',
 'info_1_auteur' => '1 autor',
@@ -241,6 +243,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'Puedes alministrar esta estaya',
 'info_adresse' => 'a les señes:',
 'info_adresse_url' => 'Direición (URL) del sitiu públicu',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Amosar les visites pa:',
 'info_aide_en_ligne' => 'Aida en llinia de SPIP',
 'info_ajout_image' => 'Cuando amestes imáxenes como documentos axuntaos a un artículu,
@@ -380,6 +383,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_liste_redacteurs_connectes' => 'Llista de los redactores conectáos',
 'info_login_existant' => 'Esti nome ya esiste.',
 'info_login_trop_court' => 'El nome ye mui curtiu.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Los logos',
 'info_maximum' => 'másimu:',
 'info_meme_rubrique' => 'Na mesma estaya',
@@ -450,6 +454,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_par_statut' => 'pol cargu',
 'info_par_tri' => '\'(por @tri@)\'',
 'info_passe_trop_court' => 'La contraseña ye mui curtia.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Les dos contraseñes nun concasen.',
 'info_pense_bete_ancien' => 'Recordatorios antiguos',
 'info_plus_cinq_car' => 'más de 5 carauteres',
@@ -485,6 +490,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_question_utilisation_moteur_recherche' => '¿Quies utilizar el motor de restolar integráu con SPIP?
  (desactivalu acelera el funcionamientu del sistema.)',
 'info_question_vignettes_referer_non' => 'Nun amosar les captures de los sitios d\'orixe de les visites',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Raiz del sitiu',
 'info_recharger_page' => 'Ties que recargar esta páxina nunos instantes.',
 'info_recherche_auteur_a_affiner' => 'Hai resultaos asgaya pa "@cherche_auteur@", apurre más criterios a la gueta.',
@@ -674,12 +680,12 @@ con una color que indica el estáu:',
 'lien_trier_nombre_articles' => 'Ordenar pol númberu d\'artículos',
 'lien_trier_statut' => 'Ordenar pol estau',
 'lien_voir_en_ligne' => 'VER EN LLINIA:',
-'logo_article' => 'LOGO DE L\'ARTÍCULU',
-'logo_auteur' => 'LOGO DE L\'AUTOR O AUTORA',
-'logo_rubrique' => 'LOGO DE LA ESTAYA',
-'logo_site' => 'LOGO D\'ESTI SITIU',
-'logo_standard_rubrique' => 'LOGO ESTÁNDAR DE LES ESTAYES',
-'logo_survol' => 'LOGO AL PASAR EL MUR',
+'logo_article' => 'LOGO DE L\'ARTÍCULU', # MODIF
+'logo_auteur' => 'LOGO DE L\'AUTOR O AUTORA', # MODIF
+'logo_rubrique' => 'LOGO DE LA ESTAYA', # MODIF
+'logo_site' => 'LOGO D\'ESTI SITIU', # MODIF
+'logo_standard_rubrique' => 'LOGO ESTÁNDAR DE LES ESTAYES', # MODIF
+'logo_survol' => 'LOGO AL PASAR EL MUR', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Escoyeta de la base',
@@ -730,8 +736,12 @@ con una color que indica el estáu:',
 'plugin_info_automatique_liste_update' => 'Actualizar les llistes',
 'plugin_info_automatique_ou' => 'o...',
 'plugin_info_automatique_select' => 'Seleiciona un plugin d\'embaxo: SPIP va descargalu y anicialu nel direutoriu <code>@rep@</code> ; si el plugin ya esiste, pondrase al día.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les estensiones darréu se carguen y s\'activen nel direutoriu @extensions@.',
 'plugin_info_extension_2' => 'Estes nun pueden desactivase.',
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'a descargar de @url@ y a instalar en @rep@',
 'plugin_librairies_installees' => 'Llibreríes instaláes',
 'plugin_necessite_lib' => 'Esti plugin necesita la llibrería @lib@',
@@ -768,9 +778,10 @@ con una color que indica el estáu:',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Direutoriu:',

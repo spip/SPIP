@@ -207,6 +207,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Ştergeţi această semnătură',
 'icone_valider_signature' => 'Validaţi această semnătură',
 'image_administrer_rubrique' => 'Puteţi administra această rubrică',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 articol',
 'info_1_article_syndique' => '1 articol sindicat',
 'info_1_auteur' => '1 autor',
@@ -232,6 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'Puteţi administra această rubrică',
 'info_adresse' => 'la adresa :',
 'info_adresse_url' => 'Adresa (URL) a site-ului public',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Afişează vizitele pentru :',
 'info_aide_en_ligne' => 'Ajutor SPIP în linie',
 'info_ajout_image' => 'Când adăugaţi imagini ca documente ataşate unui articol, SPIP poate crea pentru dvs. viniéte ale imaginilor introduse. Aceasta permite de exemplu crearea automată a unei galerii sau a unui portofoliu.',
@@ -361,6 +364,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_liste_redacteurs_connectes' => 'Lista redactorilor conectaţi',
 'info_login_existant' => 'Acest login există déjà.',
 'info_login_trop_court' => 'Login prea scurt.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Logo-urile',
 'info_maximum' => 'maxim :',
 'info_meme_rubrique' => 'În aceeaşi rubrică',
@@ -430,6 +434,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_par_statut' => 'după statut',
 'info_par_tri' => '\'(după @tri@)\'',
 'info_passe_trop_court' => 'Parolă prea scurtă.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Cele două parole nu sunt identice.',
 'info_pense_bete_ancien' => 'Vechile dumneavoastră ciorne', # MODIF
 'info_plus_cinq_car' => 'mai mult de 5 caractere',
@@ -465,6 +470,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Doriţi să utilizaţi motorul de căutare integrat în SPIP ?
  (funcţionarea sistemului este mai rapidă fără activarea motorului de căutare.)',
 'info_question_vignettes_referer_non' => 'Nu afişati capturile site-urilor de unde vin vizitele',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Rădăcina site-ului',
 'info_recharger_page' => 'Vă rugăm să reîncărcaţi această pagină în câteva momente.',
 'info_recherche_auteur_a_affiner' => 'Prea multe rezultate pentru "@cherche_auteur@" ; vă rugăm să rafinaţi termenii căutării.',
@@ -655,12 +661,12 @@ cu o culoare care le indică starea :',
 'lien_trier_nombre_articles' => 'Triaţi după numărul articolelor',
 'lien_trier_statut' => 'Triaţi după stare',
 'lien_voir_en_ligne' => 'VEDEŢI ÎN DIRECT :',
-'logo_article' => 'VINIETA ARTICOLULUI',
-'logo_auteur' => 'VINIETA AUTORULUI',
-'logo_rubrique' => 'VINIETA RUBRICII',
-'logo_site' => 'VINIETA ACESTUI SITE',
-'logo_standard_rubrique' => 'VINIETA STANDARD A RUBRICILOR',
-'logo_survol' => 'VINIETA PENTRU SURVOL',
+'logo_article' => 'VINIETA ARTICOLULUI', # MODIF
+'logo_auteur' => 'VINIETA AUTORULUI', # MODIF
+'logo_rubrique' => 'VINIETA RUBRICII', # MODIF
+'logo_site' => 'VINIETA ACESTUI SITE', # MODIF
+'logo_standard_rubrique' => 'VINIETA STANDARD A RUBRICILOR', # MODIF
+'logo_survol' => 'VINIETA PENTRU SURVOL', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Alegeţi baza dumneavoastră',
@@ -711,8 +717,12 @@ cu o culoare care le indică starea :',
 'plugin_info_automatique_liste_update' => 'Aduceţi listele la zi',
 'plugin_info_automatique_ou' => 'sau...',
 'plugin_info_automatique_select' => 'Selecţionaţi mai jos un plug-in : SPIP o să îl descarce şi îl va instala în directorul <code>@rep@</code> ; dacă acest plug-in există deja, el va fi adus la zi.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'de descărcat de la @url@ şi de instalat în @rep@',
 'plugin_librairies_installees' => 'Librăriile instalate',
 'plugin_necessite_lib' => 'Acest plug-in are nevoie de librăria @lib@',
@@ -749,9 +759,10 @@ cu o culoare care le indică starea :',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste de travaux', # MODIF
 
 // R
 'repertoire_plugins' => 'Director :',
