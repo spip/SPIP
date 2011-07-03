@@ -104,7 +104,7 @@ function ajouter_session($auteur) {
 // http://doc.spip.org/@session_set
 function session_set($nom, $val=null) {
 	// On ajoute que si la valeur n'est pas nulle
-	if ($val != null)
+	if ($val !== null)
 		$GLOBALS['visiteur_session'][$nom] = $val;
 	// Sinon on regarde si la valeur existait afin de la supprimer
 	elseif (isset($GLOBALS['visiteur_session'][$nom]))
