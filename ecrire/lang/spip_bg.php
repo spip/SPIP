@@ -354,7 +354,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'Забранено свързване',
 'info_contact_developpeur' => 'Моля, свържете се с някой разработчик.',
 'info_contenance' => 'Сайтът съдържа:',
-'info_contribution' => 'принос от съобщения във форума',
+'info_contribution' => 'принос от съобщения във форума', # MODIF
 'info_copyright' => '@spip@ е свободен софтуер, разпространяван @lien_gpl@.',
 'info_copyright_doc' => 'За повече информация, посетете сайта <a href="@spipnet@">http://www.spip.net/bg</a>.', # MODIF
 'info_copyright_gpl' => 'под лиценза GPL',

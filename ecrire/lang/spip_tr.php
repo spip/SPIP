@@ -348,7 +348,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'Bağlantı reddedildi',
 'info_contact_developpeur' => 'Lütfen bir program geliştirici ile temasa geçiniz.',
 'info_contenance' => 'Site içeriği :',
-'info_contribution' => 'Forum katkıları',
+'info_contribution' => 'Forum katkıları', # MODIF
 'info_copyright' => '@spip@, @lien_gpl@ GPL lisansı ile dağıtılan serbest bir yazılımdır.',
 'info_copyright_doc' => 'Ayrıntılı bilgi için, bkz.  <a href="@spipnet@">http://www.spip.net/fr</a>.',
 'info_copyright_gpl' => 'GPL lisansı altında',

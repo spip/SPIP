@@ -357,7 +357,7 @@ en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 'info_connexion_refusee' => 'Arust\'awix janiw satakiti',
 'info_contact_developpeur' => 'Mä prucramaturamp aruskipt\'añamawa.',
 'info_contenance' => 'Aka qamawinx utjiwa:',
-'info_contribution' => 'Aruskipañat yanapawinaka',
+'info_contribution' => 'Aruskipañat yanapawinaka', # MODIF
 'info_copyright' => '@spip@ mä software libre lakiratawa @lien_qpl@.',
 'info_copyright_doc' => 'Juk\'amp yatxatañatakix qamaw uñjaña &lt;a href=\'http://www.spip.net/es\'&gt;http://www.spip.net/es&lt;/a&gt;.   ',
 'info_copyright_gpl' => 'GLP iyaw sakiñampi',

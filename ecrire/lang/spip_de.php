@@ -349,7 +349,7 @@ wird Ihre Adresse beibehalten):
 'info_connexion_refusee' => 'Die Verbindung wurde verweigert.',
 'info_contact_developpeur' => 'Bitte kontaktieren Sie einen der Entwickler.',
 'info_contenance' => 'Diese Website enthält:',
-'info_contribution' => 'Forumsbeiträge',
+'info_contribution' => 'Forumsbeiträge', # MODIF
 'info_copyright' => '@spip@ ist freie Software im Sinne der @lien_gpl@.',
 'info_copyright_doc' => 'Weitere Informationen finden Sie unter <a href="@spipnet@">http://www.spip.net/de</a>.',
 'info_copyright_gpl' => 'GNU Public License',

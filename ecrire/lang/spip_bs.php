@@ -348,7 +348,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'Prijava odbijena',
 'info_contact_developpeur' => 'Kontaktirajte programera.',
 'info_contenance' => 'Ova stranica sadrzi:',
-'info_contribution' => 'Pridonos foruma',
+'info_contribution' => 'Pridonos foruma', # MODIF
 'info_copyright' => '@spip@ je slobodni softver distribucije @lien_gpl@.',
 'info_copyright_doc' => 'Za vise informacija pogledajte <a href="@spipnet@">http://www.spip.net/fr</a>.', # MODIF
 'info_copyright_gpl' => 'pod GPL licencom',

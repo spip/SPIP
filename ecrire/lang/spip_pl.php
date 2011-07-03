@@ -351,7 +351,7 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 'info_connexion_refusee' => 'Brak połączenia',
 'info_contact_developpeur' => 'Proszę skontaktować się z deweloperem.',
 'info_contenance' => 'Ta strona zawiera:',
-'info_contribution' => 'wpisy na forum',
+'info_contribution' => 'wpisy na forum', # MODIF
 'info_copyright' => '@spip@ - darmowe oprogramowanie dystrybuowane w oparciu o licencję @lien_gpl@.',
 'info_copyright_doc' => 'Więcej informacji na stronie <a href="@spipnet@">http://www.spip.net</a>.', # MODIF
 'info_copyright_gpl' => 'na licencji GPL',

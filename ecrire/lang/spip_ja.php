@@ -355,7 +355,7 @@ sera ignorée) :
 'info_connexion_refusee' => '接続が拒否された',
 'info_contact_developpeur' => '開発者に連絡を取って下さい。',
 'info_contenance' => 'このサイトのコンテンツ:',
-'info_contribution' => '掲示板の投稿',
+'info_contribution' => '掲示板の投稿', # MODIF
 'info_copyright' => '@spip@ は、@lien_gpl@ で配布されているフリーソフトです。',
 'info_copyright_doc' => '更なる情報を得るには、<a href="@spipnet@">http://www.spip.net/ja</a>を見てください。', # MODIF
 'info_copyright_gpl' => 'GPLライセンスのもと',

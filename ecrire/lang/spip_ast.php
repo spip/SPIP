@@ -352,7 +352,7 @@ sitiu "@nom_site_spip@" (@adresse_login@):',
 'info_connexion_refusee' => 'Conexón refugada',
 'info_contact_developpeur' => 'Ponte en contautu con un desendolcador.',
 'info_contenance' => 'Esti sitiu contien:',
-'info_contribution' => 'contribuciones del foru',
+'info_contribution' => 'contribuciones del foru', # MODIF
 'info_copyright' => '@spip@ ye un programa llibre distribuyíu @lien_gpl@.',
 'info_copyright_doc' => 'Pa más información, dir al sitiu <a href="@spipnet@">http://www.spip.net/</a>.',
 'info_copyright_gpl' => 'so llicencia GPL',

@@ -354,7 +354,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'Koneksi ditolak',
 'info_contact_developpeur' => 'Silakan hubungi pengembang.',
 'info_contenance' => 'Situs ini berisikan:',
-'info_contribution' => 'kontribusi forum',
+'info_contribution' => 'kontribusi forum', # MODIF
 'info_copyright' => '@spip@ adalah piranti lunak bebas yang didistribusi @lien_gpl@.',
 'info_copyright_doc' => 'Untuk informasi lebih lanjut, kunjungi <a href="@spipnet@">http://www.spip.net/en</a>.', # MODIF
 'info_copyright_gpl' => 'di bawah lisensi GPL',

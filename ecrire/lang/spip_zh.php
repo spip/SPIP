@@ -353,7 +353,7 @@ sera ignorée) :
 'info_connexion_refusee' => '连接禁止',
 'info_contact_developpeur' => '请联系开发者.',
 'info_contenance' => '站点包括:',
-'info_contribution' => '论坛投稿',
+'info_contribution' => '论坛投稿', # MODIF
 'info_copyright' => '@spip@是一款免费软件@lien_gpl@。',
 'info_copyright_doc' => '详细信息,请访问站点 <a href="@spipnet@">http://www.spip.net/zh</a>.', # MODIF
 'info_copyright_gpl' => '根据GPL协议',

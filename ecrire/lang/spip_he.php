@@ -355,7 +355,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'החיבור מסורב',
 'info_contact_developpeur' => '.אנא צור קשר עם המפתח',
 'info_contenance' => ':האתר הזה מכיל',
-'info_contribution' => 'תרומת הפורום',
+'info_contribution' => 'תרומת הפורום', # MODIF
 'info_copyright' => 'תוכנה מופצת בחינם <a href=\'license.txt\'>under GPL license.</a>',
 'info_copyright_doc' => 'למידע נוסף, בקרו באתר זה <a href="@spipnet@">http://www.spip.net/en</a>.',
 'info_copyright_gpl' => 'תחת רשיון GPL',

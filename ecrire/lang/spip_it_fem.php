@@ -352,7 +352,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'Connessione rifiutata',
 'info_contact_developpeur' => 'Contatta un programmatore.',
 'info_contenance' => 'Questo sito contiene:',
-'info_contribution' => 'contributi dei forum',
+'info_contribution' => 'contributi dei forum', # MODIF
 'info_copyright' => '@spip@ è un software libero distribuito @lien_gpl@.',
 'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito <a href="@spipnet@">http://www.spip.net/it</a>.',
 'info_copyright_gpl' => 'sotto licenza GPL',

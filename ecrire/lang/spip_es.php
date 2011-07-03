@@ -351,7 +351,7 @@ en el sitio "@nom_site_spip@" (@adresse_login@):',
 'info_connexion_refusee' => 'Conexión rechazada',
 'info_contact_developpeur' => 'Debes contactar con un programador.',
 'info_contenance' => 'Este sitio contiene:',
-'info_contribution' => 'contribuciones del foro',
+'info_contribution' => 'contribuciones del foro', # MODIF
 'info_copyright' => '@spip@ es un software libre distribuído @lien_gpl@.',
 'info_copyright_doc' => 'Para mayor información, ver el sitio <a href="@spipnet@">http://www.spip.net/es</a>.',
 'info_copyright_gpl' => 'bajo licencia GPL',

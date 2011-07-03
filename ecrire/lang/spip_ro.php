@@ -351,7 +351,7 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 'info_connexion_refusee' => 'Conexiune refuzată',
 'info_contact_developpeur' => 'Vă rugăm să contactaţi un dezvoltator.',
 'info_contenance' => 'Acest site conţine :',
-'info_contribution' => 'contribuţii la forum',
+'info_contribution' => 'contribuţii la forum', # MODIF
 'info_copyright' => '@spip@ este un program liber distribuit @lien_gpl@.',
 'info_copyright_doc' => 'Pentru mai multe informaţii, vizitaţi site-ul <a href="@spipnet@">http://www.spip.net/ro</a>.',
 'info_copyright_gpl' => 'sub licenţă GPL',

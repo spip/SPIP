@@ -352,7 +352,7 @@ do web "@nom_site_spip@" (@adresse_site@):',
 'info_connexion_refusee' => 'Conexión rexeitada',
 'info_contact_developpeur' => 'Tes que contactar cun desenrolador.',
 'info_contenance' => 'Este web contén:',
-'info_contribution' => 'contribucións no foro',
+'info_contribution' => 'contribucións no foro', # MODIF
 'info_copyright' => '@spip@ é un programa libre distribuído @lien_gpl@.',
 'info_copyright_doc' => 'Para máis información, vaia a <a href="@spipnet@">http://www.spip.net/gl</a>.',
 'info_copyright_gpl' => 'con licenza GPL',
