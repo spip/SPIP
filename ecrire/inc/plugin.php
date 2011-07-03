@@ -17,7 +17,7 @@ define('_FILE_PLUGIN_CONFIG', '/(plugin|paquet)[.]xml$');
 // l'adresse du repertoire de telechargement et de decompactage des plugins
 define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 
-include_spip('inc/texte'); // ?????
+#include_spip('inc/texte'); // ????? Appelle public/parametrer trop tot avant la reconstruction du chemin des plugins.
 include_spip('plugins/installer');
 
 // lecture des sous repertoire plugin existants
@@ -317,6 +317,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 
 	// creer le repertoire cache/ si necessaire ! (installation notamment)
 	sous_repertoire(_DIR_CACHE, '', false,true);
+	
 	if (!spip_connect()) return false;
 	if ($operation!='raz') {
 		$plugin_valides = liste_chemin_plugin_actifs();
