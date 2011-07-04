@@ -25,11 +25,6 @@ function definir_raccourcis_alineas(){
 	return array('','');
 }
 
-// http://doc.spip.org/@traiter_poesie
-function traiter_poesie($letexte)
-{
-	return $letexte;
-}
 
 //
 // Tableaux
