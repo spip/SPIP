@@ -43,9 +43,16 @@ include_spip('base/objets');
  *
  */
 function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
+	static $current_base = null;
 	// les anciennes fonctions modifient directement les globales
 	// on les sauve avant l'appel, et on les retablit apres !
 	$save = array(@$GLOBALS['fond'],@$GLOBALS['contexte'],@$_SERVER['REDIRECT_url_propre'],@$_ENV['url_propre']);
+	if (is_null($current_base)){
+		include_spip('inc/filtres_mini');
+		$current_base = url_absolue('./');
+	}
+	if (strncmp($url,$current_base,strlen($current_base))==0)
+		$url = substr($url,strlen($current_base));
 
 	// si on est pas en train d'assembler la page principale,
 	// vider les globales url propres qui ne doivent pas etre utilisees en cas
