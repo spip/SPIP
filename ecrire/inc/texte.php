@@ -239,7 +239,7 @@ function paragrapher($letexte, $forcer=true) {
 
 // Harmonise les retours chariots et mange les paragraphes html
 // http://doc.spip.org/@traiter_retours_chariots
-// /!\ utilisee dans inc/filtres
+// ne sert plus
 function traiter_retours_chariots($letexte) {
 	$letexte = preg_replace(",\r\n?,S", "\n", $letexte);
 	$letexte = preg_replace(",<p[>[:space:]],iS", "\n\n\\0", $letexte);
