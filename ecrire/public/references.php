@@ -372,9 +372,9 @@ function champs_traitements ($p) {
 
 		// le traitement peut n'etre defini que pour une table en particulier "spip_articles"
 		if ($table_sql AND isset($ps[$table_sql]))
-			$ps = $ps[$type_requete];
+			$ps = $ps[$table_sql];
 		// ou pour une boucle en particulier "DATA","articles"
-		elseif (isset($ps[$table_sql]))
+		elseif (isset($ps[$type_requete]))
 			$ps = $ps[$type_requete];
 		// ou pour indiferrement quelle que soit la boucle
 		elseif(isset($ps[0]))
