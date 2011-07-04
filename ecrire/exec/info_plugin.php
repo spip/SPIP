@@ -9,7 +9,7 @@ function exec_info_plugin_dist() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$plug = _request('plugin');
+		$plug = _DIR_RACINE . _request('plugin');
 		$get_infos = charger_fonction('get_infos','plugins');
 		$info = $get_infos($plug);
 		$afficher_plugin = charger_fonction("afficher_plugin","plugins");
