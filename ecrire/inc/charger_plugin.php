@@ -497,7 +497,7 @@ function afficher_liste_listes_plugins() {
 				generer_action_auteur('charger_plugin', 'supprimer_flux'),'supprimer_flux', $url).'">'._T('lien_supprimer').'</a>]</div>';
 			$time = @filemtime(_DIR_TMP.'syndic_plug_'.md5($url).'.txt');
 			$ret .= '<li class="item">'.inserer_attribut(PtoBR(propre("[->$url]")),'title',$url).' ('._T('plugins_compte',array('count' => $c)).') '
-							.($time?"<div class='small'>" . _T('info_derniere_syndication').' '.affdate(date('Y-m-d H:i:s',$time)) ."</div>":'')
+							.($time?"<div class='small'>" . _T('sites:info_derniere_syndication').' '.affdate(date('Y-m-d H:i:s',$time)) ."</div>":'')
 							. $a .'</li>';
 		}
 		$ret .= '</ul>';
