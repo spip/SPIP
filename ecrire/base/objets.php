@@ -137,7 +137,9 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 					'refuse' => 'texte_statut_refuse',
 					'poubelle' => 'texte_statut_poubelle',
 				),
-				'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
+				'tables_jointures' => array(
+					#'id_auteur' => 'auteurs_liens' // declaration generique plus bas
+				),
 			),
 			'spip_auteurs' => array(
 				'page'=>'auteur',
@@ -230,7 +232,9 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 					'6forum'=>'titre_image_visiteur',
 					'5poubelle'=>'titre_image_auteur_supprime',
 				),
-				'tables_jointures' => array('auteurs_liens'),
+				'tables_jointures' => array(
+					#'auteurs_liens' // declaration generique plus bas
+				),
 			),
 			'spip_rubriques' => array(
 				'page'=>'rubrique',
@@ -283,8 +287,12 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 						'exception' => array('statut','tout')
 					),
 				),
-				'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
-			)
+				'tables_jointures' => array(
+					#'id_auteur' => 'auteurs_liens' // declaration generique plus bas
+				),
+			),
+			// toutes les tables ont le droit a une jointure sur les auteurs
+			array('tables_jointures'=>array('id_auteur'=>'auteurs_liens'))
 		));
 		// completer les informations manquantes ou implicites
 		$all = array();
