@@ -612,22 +612,23 @@ function spip_mysql_insertq_multi($table, $tab_couples=array(), $desc=array(), $
 	if (!$desc) $tab_couples = array();
 	$fields =  isset($desc['field'])?$desc['field']:array();
 	
-	$cles = "(" . join(',',array_keys($tab_couples[0])) . ')';
+	$cles = "(" . join(',',array_keys(reset($tab_couples))) . ')';
 	$valeurs = array();
+	$r = false;
+
+	// Quoter et Inserer par groupes de 100 max pour eviter un debordement de pile
 	foreach ($tab_couples as $couples) {
 		foreach ($couples as $champ => $val){
 			$couples[$champ]= spip_mysql_cite($val, $fields[$champ]);
 		}
 		$valeurs[] = '(' .join(',', $couples) . ')';
+		if (count($valeurs)>=100){
+			$r = spip_mysql_insert($table, $cles, join(', ', $valeurs), $desc, $serveur, $requeter);
+			$valeurs = array();
+		}
 	}
-
-	// Inserer par groupes de 100 max pour eviter un debordement de pile
-	$r = false;
-	do {
-		$ins = array_slice($valeurs,0,100);
-		$valeurs = array_slice($valeurs,100);
-		$r = spip_mysql_insert($table, $cles, join(', ', $ins), $desc, $serveur, $requeter);
-	}  while (count($valeurs));
+	if (count($valeurs))
+		$r = spip_mysql_insert($table, $cles, join(', ', $valeurs), $desc, $serveur, $requeter);
 
 	return $r; // dans le cas d'une table auto_increment, le dernier insert_id
 }
