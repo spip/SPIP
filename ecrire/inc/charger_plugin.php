@@ -526,7 +526,7 @@ function bouton_telechargement_plugin($url, $rep) {
 			'',
 			'',
 			"<input type='hidden' name='url_zip_plugin' value='$url' />"
-			."<input type='submit' name='ok' value='"._T('bouton_telecharger')."' />",
+			."<input type='submit' name='ok' value='"._T('bouton_download')."' />",
 			'class="noajax"');
 	else if ($rep == 'lib'){
 		$bouton = "<div class='info_todo'>"._T('plugin_info_automatique1_lib')."\n"

@@ -10,7 +10,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[(#REM) un submit pour attraper la touche entree]
-	  <div style="display:none;"><input type='submit' class='submit' value='<:bouton_telecharger:>' /></div>
+	  <div style="display:none;"><input type='submit' class='submit' value='<:bouton_upload:>' /></div>
 	]
 	  <ul>
 	    <li class="editer editer_logo_on [ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
@@ -48,7 +48,7 @@
 	  <!--extra-->
 	[(#ENV{editable})
 		[(#GET{valider})
-	  <p class="boutons"[(#GET{hide})style='display:none;']><input type='submit' class='submit' value='<:bouton_telecharger:>' /></p>
+	  <p class="boutons"[(#GET{hide})style='display:none;']><input type='submit' class='submit' value='<:bouton_upload:>' /></p>
 		]
 	</div></form>
 	]
