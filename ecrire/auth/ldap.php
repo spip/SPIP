@@ -36,6 +36,8 @@ $GLOBALS['ldap_attributes'] = array(
  * TODO: Gerer une constante de conf qui permette de choisir entre ce
  *       comportement et tout faire avec le compte generique.
  *
+ * @param string $login
+ * @param string $pass
  * @param string $serveur
  * @return string
  */
@@ -113,6 +115,7 @@ function auth_ldap_connect($serveur='') {
  * @param string $login
  * @param string $pass
  * @param bool $checkpass
+ * @param string $serveur
  * @return string
  *	le login trouve ou chaine vide si non trouve
  */
@@ -157,6 +160,13 @@ function auth_ldap_search($login, $pass, $checkpass=true, $serveur=''){
 	return '';
 }
 
+/**
+ * Retrouver un dn
+ * @param string $dn
+ * @param array $desc
+ * @param string $serveur
+ * @return array
+ */
 function auth_ldap_retrouver($dn, $desc=array(), $serveur='')
 {
 	// Lire les infos sur l'utilisateur a partir de son DN depuis LDAP
@@ -193,6 +203,7 @@ function auth_ldap_retrouver($dn, $desc=array(), $serveur='')
  * Retrouver le login de quelqu'un qui cherche a se loger
  *
  * @param string $login
+ * @param string $serveur
  * @return string
  */
 function auth_ldap_retrouver_login($login, $serveur='')
@@ -211,6 +222,7 @@ function auth_ldap_retrouver_login($login, $serveur='')
  *  meme a la creation lorsque l'auteur n'existe pas encore
  * @param int $id_auteur
  *  si auteur existant deja
+ * @param string $serveur
  * @return string
  *  message d'erreur si login non valide, chaine vide sinon
  */
@@ -225,6 +237,7 @@ function auth_ldap_verifier_pass($login, $new_pass, $id_auteur=0, $serveur=''){
  * On ne peut pas détecter a l'avance si l'autorisation sera donnee, il
  * faudra informer l'utilisateur a posteriori si la modif n'a pas pu se
  * faire.
+ * @param string $serveur
  * @return bool
  *  pour un auteur LDAP, a priori toujours true, a conditiion que le serveur
  *  l'autorise: par exemple, pour OpenLDAP il faut avoir dans slapd.conf:
@@ -242,6 +255,10 @@ function auth_ldap_autoriser_modifier_pass($serveur=''){
  * On se bind au LDAP cette fois sous l'identite de l'utilisateur, car le
  * compte generique defini dans config/ldap.php n'a generalement pas (et
  * ne devrait pas avoir) les droits suffisants pour faire la modification.
+ * @param $login
+ * @param $new_pass
+ * @param $id_auteur
+ * @param string $serveur
  * @return bool
  *  informe du succes ou de l'echec du changement du mot de passe
  */
