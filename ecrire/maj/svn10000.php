@@ -310,17 +310,42 @@ function maj_liens($pivot,$l='') {
 		$champs = implode(', ',$champs);
 
 		// Recopier les donnees
-		while ($id = sql_getfetsel($primary,$ancienne_table,'','','','0,1')){
-			$n = sql_countsel($liens,"objet='$l' AND id_objet=".intval($id));
-			while ($t = sql_allfetsel($champs, $ancienne_table,"$primary=".intval($id),'',$id_pivot,"$n,$pool")) {
-				sql_insertq_multi($liens,$t);
-				$n+=count($t);
-				// si timeout, sortir, la relance nous ramenera dans cette fonction
+		$sub_pool = 100;
+		while ($ids = array_map('reset',sql_allfetsel("$primary",$ancienne_table,'','','',"0,$sub_pool"))){
+			$insert = array();
+			foreach($ids as $id){
+				$n = sql_countsel($liens,"objet='$l' AND id_objet=".intval($id));
+				while ($t = sql_allfetsel($champs, $ancienne_table,"$primary=".intval($id),'',$id_pivot,"$n,$pool")) {
+					$n+=count($t);
+					// empiler en s'assurant a minima de l'unicite
+					while ($r = array_shift($t))
+						$insert[$r[$id_pivot].':'.$r['id_objet']] = $r;
+					if (count($insert)>=$sub_pool){
+						maj_liens_insertq_multi_check($liens,$insert,$tables_auxiliaires[$liens]);
+						$insert = array();
+					}
+					// si timeout, sortir, la relance nous ramenera dans cette fonction
+					// et on verifiera/repartira de la
+					if (time() >= _TIME_OUT) return;
+				}
 				if (time() >= _TIME_OUT) return;
 			}
-			sql_delete ($ancienne_table, "$primary=".intval($id));
+			if (count($insert))
+				maj_liens_insertq_multi_check($liens,$insert,$tables_auxiliaires[$liens]);
+			sql_delete ($ancienne_table, sql_in($primary,$ids));
 		}
 	}
+}
+function maj_liens_insertq_multi_check($table,$couples,$desc=array()){
+	$n_before = sql_countsel($table);
+	sql_insertq_multi($table,$couples,$desc);
+	$n_after = sql_countsel($table);
+	if (($n_after-$n_before)==count($couples))
+		return;
+	// si ecart, on recommence l'insertion ligne par ligne...
+	// moins rapide mais secure : seul le couple en doublon echouera, et non toute la serie
+	foreach($couples as $c)
+		sql_insertq($table,$c,$desc);
 }
 
 $GLOBALS['maj'][17311] = array(
