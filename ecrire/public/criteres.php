@@ -793,6 +793,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			$where = array("'NOT'", $where);
 		else
 			// un not sur un critere de jointure se traduit comme un NOT IN avec une sous requete
+			// c'est une sous requete identique a la requete principale sous la forme (SELF,$select,$where) avec $select et $where qui surchargent
 			$where = array("'NOT'",array("'IN'","'".$boucles[$idb]->id_table.".".$boucles[$idb]->primary."'" ,array("'SELF'","'".$boucles[$idb]->id_table.".".$boucles[$idb]->primary."'",$where)));
 
 	$boucles[$idb]->where[] = $where;
@@ -967,6 +968,7 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args)
 			$where = array("'NOT'", $where);
 		else
 			// un not sur un critere de jointure se traduit comme un NOT IN avec une sous requete
+			// c'est une sous requete identique a la requete principale sous la forme (SELF,$select,$where) avec $select et $where qui surchargent
 			$where = array("'NOT'",array("'IN'","'".$boucles[$idb]->id_table.".".$boucles[$idb]->primary."'" ,array("'SELF'","'".$boucles[$idb]->id_table.".".$boucles[$idb]->primary."'",$where)));
 
 	// inserer la condition (cf {lang?})
