@@ -193,8 +193,8 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	.($crit->cond?'
 	if (!strlen('.$quoi.')){
 		list($rech_select, $rech_where) = array("0 as points","");
-	}':'').'
-	else {
+	} else':'').'
+	{
 		$prepare_recherche = charger_fonction(\'prepare_recherche\', \'inc\');
 		list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'","' . $boucle->sql_serveur . '",'.$_modificateur.',"'.$boucle->primary.'");
 	}
