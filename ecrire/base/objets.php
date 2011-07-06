@@ -352,8 +352,9 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		define('_init_tables_objets_sql',true);
 	}
 	if ($table_sql AND !isset($infos_tables[$table_sql])){
-	#	$infos_tables[$table_sql] = renseigner_table_objet_sql($table_sql,$desc);
-		return renseigner_table_objet_sql($table_sql,$desc);
+		#$desc = renseigner_table_objet_sql($table_sql,$desc);
+		$desc = renseigner_table_objet_interfaces($table_sql,$desc);
+		return $desc;
 	}
 	if ($table_sql)
 		return isset($infos_tables[$table_sql])?$infos_tables[$table_sql]:array();
