@@ -38,8 +38,6 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		// pas de reentrance (cas base/serial)
 		if ($deja_la) return array();
 		$deja_la = true;
-		# recuperer les interfaces (table_titre, table_date)
-		include_spip('public/interfaces');
 		# recuperer les tables_principales si besoin
 		include_spip('base/serial');
 		# recuperer les tables_auxiliaires si besoin
@@ -296,19 +294,19 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		));
 		// completer les informations manquantes ou implicites
 		$all = array();
-		foreach($infos_tables as $t=>$infos) {
+		foreach(array_keys($infos_tables) as $t) {
 			// les cles numeriques servent a declarer
 			// les proprietes applicables a tous les objets
 			// on les mets de cote
 			if (is_numeric($t)) {
-				$all = array_merge_recursive($all,$infos);
+				$all = array_merge_recursive($all,$infos_tables[$t]);
 				unset($infos_tables[$t]);
 			}
 			else
-				$infos_tables[$t] = renseigner_table_objet_sql($t,$infos);
+				$infos_tables[$t] = renseigner_table_objet_sql($t,$infos_tables[$t]);
 		}
 		// repercuter les proprietes generales communes a tous les objets
-		foreach($infos_tables as $t=>$infos){
+		foreach(array_keys($infos_tables) as $t) {
 			$infos_tables[$t] = array_merge_recursive($infos_tables[$t],$all);
 		}
 
@@ -340,7 +338,18 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 						$GLOBALS[$principale_ou_auxiliaire][$table][$k] = $mem[$k];
 			}
 		}
+
+		// recuperer les interfaces (table_titre, table_date)
+		// on ne le fait que dans un second temps pour que table_objet soit fonctionnel
+		// dans le pipeline de declarer_tables_interfaces
+		include_spip('public/interfaces');
+		foreach(array_keys($infos_tables) as $t) {
+			$infos_tables[$t] = renseigner_table_objet_interfaces($t,$infos_tables[$t]);
+		}
+
 		$deja_la = false;
+		// lever la constante qui dit qu'on a tout init et qu'on peut cacher
+		define('_init_tables_objets_sql',true);
 	}
 	if ($table_sql AND !isset($infos_tables[$table_sql])){
 	#	$infos_tables[$table_sql] = renseigner_table_objet_sql($table_sql,$desc);
@@ -382,8 +391,6 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  * editable
  * champs_editables : utilise pour prendre en compte le post lors de l'edition
  * 
- * titre
- * date
  * champs_versionnes
  *
  * statut
@@ -400,7 +407,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  * @param array $infos
  * @return array
  */
-function renseigner_table_objet_sql($table_sql,$infos){
+function renseigner_table_objet_sql($table_sql,&$infos){
 	if (!isset($infos['type'])){
 		// si on arrive de base/trouver_table, on a la cle primaire :
 		// s'en servir pour extrapoler le type
@@ -471,18 +478,6 @@ function renseigner_table_objet_sql($table_sql,$infos){
 		$infos['info_nb_objets'] = $infos['type'].':'.'info_nb_'.$infos['table_objet'];
 
 
-	if (!isset($infos['titre']))
-		$infos['titre'] = isset($GLOBALS['table_titre'][$infos['table_objet']]) ? $GLOBALS['table_titre'][$infos['table_objet']] : '';
-	if (!isset($infos['date']))
-		$infos['date'] = isset($GLOBALS['table_date'][$infos['table_objet']]) ? $GLOBALS['table_date'][$infos['table_objet']] : '';
-	if (!isset($infos['statut']))
-		$infos['statut'] = isset($GLOBALS['table_statut'][$table_sql]) ? $GLOBALS['table_statut'][$table_sql] : '';
-	if (!isset($infos['tables_jointures']))
-		$infos['tables_jointures'] = array();
-	if (isset($GLOBALS['tables_jointures'][$table_sql]))
-		$infos['tables_jointures'] = array_merge($infos['tables_jointures'],$GLOBALS['tables_jointures'][$table_sql]);
-	
-
 	if (!isset($infos['champs_editables']))
 		$infos['champs_editables'] = array();
 	if (!isset($infos['champs_versionnes']))
@@ -497,6 +492,34 @@ function renseigner_table_objet_sql($table_sql,$infos){
 
 	return $infos;
 }
+
+/**
+ * Renseigner les infos d'interface compilateur pour les tables objets
+ * complete la declaration precedente
+ * 
+ * titre
+ * date
+ * statut
+ * tables_jointures
+ *
+ * @param $table_sql
+ * @param $infos
+ * @return array
+ */
+function renseigner_table_objet_interfaces($table_sql,&$infos){
+	if (!isset($infos['titre']))
+		$infos['titre'] = isset($GLOBALS['table_titre'][$infos['table_objet']]) ? $GLOBALS['table_titre'][$infos['table_objet']] : '';
+	if (!isset($infos['date']))
+		$infos['date'] = isset($GLOBALS['table_date'][$infos['table_objet']]) ? $GLOBALS['table_date'][$infos['table_objet']] : '';
+	if (!isset($infos['statut']))
+		$infos['statut'] = isset($GLOBALS['table_statut'][$table_sql]) ? $GLOBALS['table_statut'][$table_sql] : '';
+	if (!isset($infos['tables_jointures']))
+		$infos['tables_jointures'] = array();
+	if (isset($GLOBALS['tables_jointures'][$table_sql]))
+		$infos['tables_jointures'] = array_merge($infos['tables_jointures'],$GLOBALS['tables_jointures'][$table_sql]);
+	return $infos;
+}
+
 
 function lister_tables_principales(){
 	if (!count($GLOBALS['tables_principales'])){
@@ -534,11 +557,19 @@ function lister_tables_objets_surnoms(){
 		foreach($infos_tables as $t=>$infos){
 			// cas de base type=>table
 			// et preg_replace(',^spip_|^id_|s$,',table)=>table
-			$surnoms[$infos['type']] = $infos['table_objet'];
-			$surnoms[preg_replace(',^spip_|^id_|s$,', '', $infos['table_objet'])] = $infos['table_objet'];
-			if (is_array($infos['table_objet_surnoms']) AND count($infos['table_objet_surnoms']))
-				foreach($infos['table_objet_surnoms'] as $surnom)
-					$surnoms[$surnom] = $infos['table_objet'];
+			if ($infos['table_objet']){ // securite, si la fonction est appelee trop tot, c'est vide
+				$surnoms[$infos['type']] = $infos['table_objet'];
+				$surnoms[preg_replace(',^spip_|^id_|s$,', '', $infos['table_objet'])] = $infos['table_objet'];
+				if (is_array($infos['table_objet_surnoms']) AND count($infos['table_objet_surnoms']))
+					foreach($infos['table_objet_surnoms'] as $surnom)
+						$surnoms[$surnom] = $infos['table_objet'];
+			}
+		}
+		// si init pas fini, ne pas memoriser
+		if (!defined('_init_tables_objets_sql')){
+			$res = $surnoms;
+			$surnoms = null;
+			return $res;
 		}
 	}
 	return $surnoms;
@@ -557,9 +588,18 @@ function lister_types_surnoms(){
 		$surnoms = pipeline('declarer_type_surnoms', array('racine-site'=>'site'));
 		$infos_tables = lister_tables_objets_sql();
 		foreach($infos_tables as $t=>$infos){
-			if (is_array($infos['type_surnoms']) AND count($infos['type_surnoms']))
-				foreach($infos['type_surnoms'] as $surnom)
-					$surnoms[$surnom] = $infos['type'];
+			if ($infos['type']){ // securite, si la fonction est appelee trop tot, c'est vide
+				$surnoms[$infos['type']] = $infos['type']; // optimisation pour table_objet
+				if (is_array($infos['type_surnoms']) AND count($infos['type_surnoms']))
+					foreach($infos['type_surnoms'] as $surnom)
+						$surnoms[$surnom] = $infos['type'];
+			}
+		}
+		// si init pas fini, ne pas memoriser
+		if (!defined('_init_tables_objets_sql')){
+			$res = $surnoms;
+			$surnoms = null;
+			return $res;
 		}
 	}
 	return $surnoms;
