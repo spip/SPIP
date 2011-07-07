@@ -25,6 +25,9 @@
 			.each(function(){
 				if (!opt.confirm || confirm(opt.confirmstring)) {
 					var contenu = $(this).serialize();
+					// ajoutons un timestamp
+					var d=new Date();
+					contenu = contenu + "&__timestamp=" + d.getTime();
 					$.post('spip.php', {
 						'action': 'session',
 						'var': 'autosave_' + $('input[name=autosave]', this).val(),
