@@ -1135,8 +1135,21 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 		$t =''; // jointure non declaree. La trouver.
 
 	// ici on construit le from pour fournir $col en piochant dans les jointures
-	$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
 
+	// si des jointures explicites sont fournies, on cherche d'abord dans celles ci
+	// permet de forcer une table de lien quand il y a ambiguite
+	// <BOUCLE_(DOCUMENTS documents_liens){id_mot}>
+	// alors que <BOUCLE_(DOCUMENTS){id_mot}> produit la meme chose que <BOUCLE_(DOCUMENTS mots_liens){id_mot}>
+	$table = "";
+	if ($boucle->jointures_explicites){
+		$jointures_explicites = explode(' ',$boucle->jointures_explicites);
+		$table = $calculer_critere_externe($boucle, $jointures_explicites, $col, $desc, ($crit->cond OR $op !='='), $t);
+	}
+
+	// et sinon on cherche parmi toutes les jointures declarees
+	if (!$table)
+		$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
+	
 	if (!$table) return '';
 
 	// il ne reste plus qu'a trouver le champ dans les from
