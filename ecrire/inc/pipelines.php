@@ -47,7 +47,11 @@ function f_jQuery ($texte) {
 function f_surligne ($texte) {
 	if (!$GLOBALS['html']) return $texte;
 	$rech = _request('var_recherche');
-	if (!$rech AND !isset($_SERVER['HTTP_REFERER'])) return $texte;
+	if (!$rech
+	  AND (!defined('_SURLIGNE_RECHERCHE_REFERERS')
+	       OR !_SURLIGNE_RECHERCHE_REFERERS
+	       OR !isset($_SERVER['HTTP_REFERER'])))
+		return $texte;
 	include_spip('inc/surligne');
 	return surligner_mots($texte, $rech);
 }
