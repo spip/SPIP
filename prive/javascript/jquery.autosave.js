@@ -27,7 +27,7 @@
 					// ajoutons un timestamp
 					var d=new Date();
 					contenu = contenu + "&__timestamp=" + d.getTime();
-					$.post('spip.php', {
+					$.post(window.location, {
 						'action': 'session',
 						'var': 'autosave_' + $('input[name=autosave]', this).val(),
 						'val': contenu
