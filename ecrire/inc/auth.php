@@ -654,15 +654,19 @@ function lire_php_auth($login, $pw, $serveur=''){
 function ask_php_auth($pb, $raison, $retour='', $url='', $re='', $lien='') {
 	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
 	@Header("HTTP/1.0 401 Unauthorized");
-	$ici = generer_url_ecrire();
+	$corps = "";
+	$public = generer_url_public();
+	$ecrire = generer_url_ecrire();
 	$retour = $retour?$retour:_T('icone_retour');
-	echo "<b>$pb</b><p>$raison</p>[<a href='$ici'>$retour</a>] ";
+	$corps .= "<p>$raison</p>[<a href='$public'>$retour</a>] ";
 	if ($url) {
-		echo "[<a href='", generer_url_action('cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";
+		$corps .= "[<a href='" . generer_url_action('cookie',"essai_auth_http=oui&$url") . "'>$re</a>]";
 	}
 
 	if ($lien)
-		echo " [<a href='$ici'>"._T('login_espace_prive')."</a>]";
+		$corps .= " [<a href='$ecrire'>"._T('login_espace_prive')."</a>]";
+	include_spip('inc/minipres');
+	echo minipres($pb,$corps);
 	exit;
 }
 ?>
