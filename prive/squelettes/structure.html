@@ -10,7 +10,5 @@
 <head>
 <INCLURE{fond=prive/squelettes/head/#ENV{type},env}>
 </head>
-<body class="#ENV{type,page}[(#ENV{type,page}|match{_edit$}|oui)edition][ #ENV{type,page}_(#ENV{composition,''})] [(#REM|init_body_class)]">
 <INCLURE{fond=prive/squelettes/body,env}>
-</body>
 </html>

@@ -1,32 +1,34 @@
-<INCLURE{fond=prive/squelettes/inclure/barre-nav,lang,recherche,plugins=(#REM|parametres_css_prive)}>
-<div id="page">
-	[(#SESSION{id_auteur}|alertes_auteur)]
-	<INCLURE{fond=prive/objets/liste/auteurs_enligne}>
-	<div class="largeur">
-		<div id="haut">
-			<INCLURE{fond=prive/squelettes/hierarchie/#ENV{type},ajax=hierarchie,env}>
-			[(#REM)<!--
-			Ici, # INCLURE car top/xx peut affecter la globale 'pleine_largeur'
-			-->]
-			#INCLURE{fond=prive/squelettes/top/#ENV{type},ajax=top,env}
-		</div>
-		<div id="conteneur" class="[(#LARGEUR_ECRAN)]">
-			<div id="navigation" class='lat' role='contentinfo'>
-				<INCLURE{fond=prive/squelettes/navigation/#ENV{type},ajax=navigation,env}>
-			[(#EVAL{$GLOBALS}|table_valeur{spip_ecran}|=={large}|oui)
-			</div>
-			<div id="extra" class='lat' role='complementary'>]
-				<INCLURE{fond=prive/squelettes/extra/#ENV{type},ajax=extra,env}>
-			</div>
-			<div id="contenu" role='main'>
-				<INCLURE{fond=prive/squelettes/contenu/#ENV{type},ajax=contenu,env}>
-			</div>
-		</div>
-		<br class="nettoyeur" />
-	</div>
-	<div id="pied">
+<body class="#ENV{type,page}[(#ENV{type,page}|match{_edit$}|oui)edition][ #ENV{type,page}_(#ENV{composition,''})] [(#REM|init_body_class)]">
+	<INCLURE{fond=prive/squelettes/inclure/barre-nav,lang,recherche,plugins=(#REM|parametres_css_prive)}>
+	<div id="page">
+		[(#SESSION{id_auteur}|alertes_auteur)]
+		<INCLURE{fond=prive/objets/liste/auteurs_enligne}>
 		<div class="largeur">
-		<INCLURE{fond=prive/squelettes/inclure/pied}>
+			<div id="haut">
+				<INCLURE{fond=prive/squelettes/hierarchie/#ENV{type},ajax=hierarchie,env}>
+				[(#REM)<!--
+				Ici, # INCLURE car top/xx peut affecter la globale 'pleine_largeur'
+				-->]
+				#INCLURE{fond=prive/squelettes/top/#ENV{type},ajax=top,env}
+			</div>
+			<div id="conteneur" class="[(#LARGEUR_ECRAN)]">
+				<div id="navigation" class='lat' role='contentinfo'>
+					<INCLURE{fond=prive/squelettes/navigation/#ENV{type},ajax=navigation,env}>
+				[(#EVAL{$GLOBALS}|table_valeur{spip_ecran}|=={large}|oui)
+				</div>
+				<div id="extra" class='lat' role='complementary'>]
+					<INCLURE{fond=prive/squelettes/extra/#ENV{type},ajax=extra,env}>
+				</div>
+				<div id="contenu" role='main'>
+					<INCLURE{fond=prive/squelettes/contenu/#ENV{type},ajax=contenu,env}>
+				</div>
+			</div>
+			<br class="nettoyeur" />
+		</div>
+		<div id="pied">
+			<div class="largeur">
+			<INCLURE{fond=prive/squelettes/inclure/pied}>
+			</div>
 		</div>
 	</div>
-</div>
+</body>
