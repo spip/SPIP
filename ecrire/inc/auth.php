@@ -140,6 +140,7 @@ function auth_mode()
 					$auth_can_disconnect = true;
 					$GLOBALS['visiteur_session'] = $r;
 					$connect_login = $GLOBALS['visiteur_session']['login'];
+					$id_auteur = $r['id_auteur'];
 				} else {
 				  // cas de la session en plus de PHP_AUTH
 				  /*				  if ($id_auteur != $r['id_auteur']){
