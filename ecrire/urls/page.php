@@ -33,11 +33,6 @@ function _generer_url_page($type,$id, $args='', $ancre='') {
 		if (NULL != $url) return $url;
 	}
 
-	if ($type == 'document') {
-		include_spip('inc/documents');
-		return generer_url_document_dist($id, $args, $ancre);
-	}
-
 	$url = _debut_urls_page . $type . _separateur_urls_page
 	  . $id . _terminaison_urls_page;
 
