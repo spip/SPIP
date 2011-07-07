@@ -19,8 +19,7 @@
 			confirm: false,
 			confirmstring: 'Sauvegarder ?'
 		});
-		$(window)
-		.bind('unload',function() {
+		var save_changed = function(){
 			$('form.autosavechanged')
 			.each(function(){
 				if (!opt.confirm || confirm(opt.confirmstring)) {
@@ -34,14 +33,19 @@
 						'val': contenu
 					});
 				}
-			});
-		});
+			}).removeClass('autosavechanged');
+		}
+		$(window)
+		.bind('unload',save_changed);
 		return this
 		.bind('change keyup', function() {
 			$(this).addClass('autosavechanged');
 		})
 		.bind('submit',function() {
-			$(this).removeClass('autosavechanged');
+			save_changed();
+			/* trop agressif : exemple du submit previsu forum, ou des submit suivant/precedent d'un cvt multipage
+			on sauvegarde toujours, et le serveur videra quand il faudra */
+			/*$(this).removeClass('autosavechanged')*/;
 		});
 	}
 })(jQuery);
