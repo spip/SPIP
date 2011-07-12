@@ -12,10 +12,13 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-function formulaires_inscription_charger_dist($mode='6forum', $id=0) {
+function formulaires_inscription_charger_dist($mode='', $id=0) {
+
+	// fournir le mode de la config
+	include_spip('inc/filtres');
+		$mode=tester_config($id, $mode);
 	// pas de formulaire si le mode est interdit
-	include_spip('action/inscrire_auteur');
-	if (!tester_statut_inscription($mode))
+	if (!$mode)
 		return false;
 
 	$valeurs = array('nom_inscription'=>'','mail_inscription'=>'', 'id'=>$id);
@@ -28,11 +31,14 @@ function formulaires_inscription_charger_dist($mode='6forum', $id=0) {
 }
 
 // Si inscriptions pas autorisees, retourner une chaine d'avertissement
-function formulaires_inscription_verifier_dist($mode='6forum', $id=0) {
-
+function formulaires_inscription_verifier_dist($mode='', $id=0) {
+	
+	// fournir le mode de la config ou verifier que celui fournit par le squelette est autorisee par celle ci
+	include_spip('inc/filtres');
+		$mode=tester_config($id, $mode);
 	$erreurs = array();
-	include_spip('inc/filtres');	
-	if (!tester_config($id, $mode) OR (strlen(_request('nobot'))>0))
+
+	if (!$mode OR (strlen(_request('nobot'))>0))
 		$erreurs['message_erreur'] = _T('pass_rien_a_faire_ici');
 
 	if (!$nom = _request('nom_inscription'))
@@ -69,8 +75,12 @@ function formulaires_inscription_verifier_dist($mode='6forum', $id=0) {
 	return $erreurs;
 }
 
-function formulaires_inscription_traiter_dist($mode='6forum', $id=0) {
-
+function formulaires_inscription_traiter_dist($mode='', $id=0) {
+	
+	// fournir le mode de la config si le squelette ne surcharge pas
+	include_spip('inc/filtres');
+		$mode=tester_config($id, $mode);
+		
 	$nom = _request('nom_inscription');
 	$mail_complet = _request('mail_inscription');
 
