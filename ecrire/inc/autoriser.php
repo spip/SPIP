@@ -567,7 +567,7 @@ function autoriser_configurerlangage_onglet_dist($faire,$quoi,$id,$qui,$opts) {
 function autoriser_configurerpreference_onglet_dist($faire,$quoi,$id,$qui,$opts) {
 	return true;
 }
-
+function autoriser_auteurs_bouton_dist($faire, $type, $id, $qui, $opts){return true;}
 function autoriser_articles_bouton_dist($faire, $type, $id, $qui, $opts){return true;}
 function autoriser_rubriques_bouton_dist($faire, $type, $id, $qui, $opts){return true;}
 
