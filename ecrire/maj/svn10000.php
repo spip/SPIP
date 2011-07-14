@@ -378,4 +378,9 @@ $GLOBALS['maj'][17743] = array(
 	array('sql_update','spip_auteurs',array('prefs'=>'bio','bio'=>"''"),"statut='nouveau' AND bio<>''"),
 );
 
+$GLOBALS['maj'][18219] = array(
+	array('sql_alter',"TABLE spip_rubriques DROP id_import"),
+	array('sql_alter',"TABLE spip_rubriques DROP export"),
+);
+
 ?>
