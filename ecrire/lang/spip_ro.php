@@ -353,7 +353,7 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 'info_contenance' => 'Acest site conţine :',
 'info_contribution' => 'contribuţii la forum', # MODIF
 'info_copyright' => '@spip@ este un program liber distribuit @lien_gpl@.',
-'info_copyright_doc' => 'Pentru mai multe informaţii, vizitaţi site-ul <a href="@spipnet@">http://www.spip.net/ro</a>.',
+'info_copyright_doc' => 'Pentru mai multe informaţii, vizitaţi site-ul <a href="@spipnet@">http://www.spip.net/ro</a>.', # MODIF
 'info_copyright_gpl' => 'sub licenţă GPL',
 'info_cours_edition' => 'În curs de redactare',
 'info_creer_repertoire' => 'Vă rugăm să creaţi un fișier sau un director numit :',
@@ -502,7 +502,7 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 'login_espace_prive' => 'spaţiu privat',
 'login_identifiant_inconnu' => 'identificatorul « @login@ » este necunoscut.',
 'login_login' => 'Login :',
-'login_login2' => 'Login (identificator de conectare la site) :',
+'login_login2' => 'Login (identificator de conectare la site) :', # MODIF
 'login_login_pass_incorrect' => '(Login sau parolă incorectă.)',
 'login_motpasseoublie' => 'parolă uitată ?',
 'login_non_securise' => 'Atenţie, acest formular nu este securizat.

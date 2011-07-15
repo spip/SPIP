@@ -505,7 +505,7 @@ sera ignorée) :
 'login_espace_prive' => 'area pribadi',
 'login_identifiant_inconnu' => 'Pengidentifikasi "@login@" tidak dikenal.',
 'login_login' => 'Log masuk:',
-'login_login2' => 'Log masuk (pengidentifikasi untuk koneksi ke situs):',
+'login_login2' => 'Log masuk (pengidentifikasi untuk koneksi ke situs):', # MODIF
 'login_login_pass_incorrect' => '(Log masuk atau kata sandi salah).',
 'login_motpasseoublie' => 'lupa kata sandi?',
 'login_non_securise' => 'Berhati-hatilah, formulir ini tidak aman.

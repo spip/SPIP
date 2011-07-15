@@ -503,7 +503,7 @@ sera ignorée) :
 'login_espace_prive' => 'vùng riêng',
 'login_identifiant_inconnu' => 'Không biết danh tánh "@login@".',
 'login_login' => 'Login:',
-'login_login2' => 'Login (danh tánh để vào trang web):',
+'login_login2' => 'Login (danh tánh để vào trang web):', # MODIF
 'login_login_pass_incorrect' => '(login hoặc mật mã không đúng).',
 'login_motpasseoublie' => 'quên mật mã?',
 'login_non_securise' => 'Cảnh báo, phiếu điền này không an toàn.

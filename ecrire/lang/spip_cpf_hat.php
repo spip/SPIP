@@ -503,7 +503,7 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'login_espace_prive' => 'espas privé',
 'login_identifiant_inconnu' => 'Lidantifyan-nan « @login@ » li se pa rokoni.',
 'login_login' => 'Nonnkod :',
-'login_login2' => 'Nonnkod (idantifyan pou koneksyon sou sit-la) :',
+'login_login2' => 'Nonnkod (idantifyan pou koneksyon sou sit-la) :', # MODIF
 'login_login_pass_incorrect' => '(Kouman w rele osnon modpas ou se pa korèk.)',
 'login_motpasseoublie' => 'modpas ki oubliyé ?',
 'login_non_securise' => 'Tansyon; Fòmilè sa-a se pa sekirize. Si w vle pa

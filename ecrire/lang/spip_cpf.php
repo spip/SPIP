@@ -511,7 +511,7 @@ sera ignorée) :
 'login_espace_prive' => 'Léspas privé',
 'login_identifiant_inconnu' => 'Lo nondkod « @login@ » li lé pa konu.',
 'login_login' => 'Nondkod :',
-'login_login2' => 'Nondkod (lidantifian pou lakostaz lo sitwèb) :',
+'login_login2' => 'Nondkod (lidantifian pou lakostaz lo sitwèb) :', # MODIF
 'login_login_pass_incorrect' => '(Out nondkod ou modpas lé pa korèk.)',
 'login_motpasseoublie' => 'Ou la oubliyé out modpas ?',
 'login_non_securise' => 'Tansyon pangar, formulèr-la lé pa sékirizé.

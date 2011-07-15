@@ -357,7 +357,7 @@ sera ignorée) :
 'info_contenance' => ':האתר הזה מכיל',
 'info_contribution' => 'תרומת הפורום', # MODIF
 'info_copyright' => 'תוכנה מופצת בחינם <a href=\'license.txt\'>under GPL license.</a>',
-'info_copyright_doc' => 'למידע נוסף, בקרו באתר זה <a href="@spipnet@">http://www.spip.net/en</a>.',
+'info_copyright_doc' => 'למידע נוסף, בקרו באתר זה <a href="@spipnet@">http://www.spip.net/en</a>.', # MODIF
 'info_copyright_gpl' => 'תחת רשיון GPL',
 'info_cours_edition' => 'המאמרים שלך בהתקדמות',
 'info_creer_repertoire' => ':נא צור קובץ או ספרייה אשר נקראת',
@@ -506,7 +506,7 @@ sera ignorée) :
 'login_espace_prive' => 'איזור פרטי',
 'login_identifiant_inconnu' => 'שם משתמש "@login@" לא ידוע למערכת.',
 'login_login' => 'שם משתמש:',
-'login_login2' => 'שם משתמש (מזהה לחיבור לאתר):',
+'login_login2' => 'שם משתמש (מזהה לחיבור לאתר):', # MODIF
 'login_login_pass_incorrect' => '(שם משתמש או סיסמה לא נכונים).',
 'login_motpasseoublie' => 'שכחת את הסיסמה?',
 'login_non_securise' => 'לתשומת לבך : טופס זה אינו בטוח.

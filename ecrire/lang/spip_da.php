@@ -503,7 +503,7 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'login_espace_prive' => 'privat område',
 'login_identifiant_inconnu' => 'Brugeridentifikationen "@login@" kendes ikke.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (brugeridentifikation til dette websted):',
+'login_login2' => 'Login (brugeridentifikation til dette websted):', # MODIF
 'login_login_pass_incorrect' => '(Forkert adgangskode eller ).',
 'login_motpasseoublie' => 'glemt adgangskode?',
 'login_non_securise' => 'Advarsel, denne formular er ikke sikret.

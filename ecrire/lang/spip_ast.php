@@ -354,7 +354,7 @@ sitiu "@nom_site_spip@" (@adresse_login@):',
 'info_contenance' => 'Esti sitiu contien:',
 'info_contribution' => 'contribuciones del foru', # MODIF
 'info_copyright' => '@spip@ ye un programa llibre distribuyíu @lien_gpl@.',
-'info_copyright_doc' => 'Pa más información, dir al sitiu <a href="@spipnet@">http://www.spip.net/</a>.',
+'info_copyright_doc' => 'Pa más información, dir al sitiu <a href="@spipnet@">http://www.spip.net/</a>.', # MODIF
 'info_copyright_gpl' => 'so llicencia GPL',
 'info_cours_edition' => 'Los tos artículos en cursu de redaición',
 'info_creer_repertoire' => 'Debes crear un ficheru o un direutoriu nomáu:',
@@ -503,7 +503,7 @@ sitiu "@nom_site_spip@" (@adresse_login@):',
 'login_espace_prive' => 'espaciu priváu',
 'login_identifiant_inconnu' => 'L\'alcuñu «@login@» ye desconocíu.',
 'login_login' => 'Nome d\'usuariu:',
-'login_login2' => 'Login (alcuñu de conexón al sitiu):',
+'login_login2' => 'Login (alcuñu de conexón al sitiu):', # MODIF
 'login_login_pass_incorrect' => '(Login o contraseña incorreutu.)',
 'login_motpasseoublie' => '¿escaecisti la contraseña?',
 'login_non_securise' => 'Atención, esti formulariu nun ye seguru.

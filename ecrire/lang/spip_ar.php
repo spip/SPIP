@@ -352,9 +352,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_connexion_refusee' => 'رفض الاتصال',
 'info_contact_developpeur' => 'الرجاء الاتصال بمطوّر.',
 'info_contenance' => 'هذا الموقع يحتوي على:',
-'info_contribution' => 'مشاركة منتديات', # MODIF
+'info_contribution' => 'مشاركة منتديات',
 'info_copyright' => '@spip@ برنامج حر موزع @lien_gpl@.',
-'info_copyright_doc' => 'لمزيد من المعلومات راجع الموقع<a href="@spipnet@">http://www.spip.net/ar</a>.',
+'info_copyright_doc' => 'لمزيد من المعلومات راجع الموقع<a href="@spipnet@">http://www.spip.net/ar</a>.', # MODIF
 'info_copyright_gpl' => 'بموجب الترخيص العام GPL',
 'info_cours_edition' => 'قيد التحرير',
 'info_creer_repertoire' => 'الرجاء إنشاء ملف أو دليل باسم',
@@ -503,7 +503,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'login_espace_prive' => 'المجال الخاص',
 'login_identifiant_inconnu' => 'المعرّف «@login@» غير معروف.',
 'login_login' => 'المعرّف:',
-'login_login2' => 'المعرّف (للاتصال بالموقع):',
+'login_login2' => 'المعرّف (للاتصال بالموقع):', # MODIF
 'login_login_pass_incorrect' => '(خطأ في المعرّف أو كلمة السر).',
 'login_motpasseoublie' => 'هل نسيت كلمة السر؟',
 'login_non_securise' => 'لطفا، هذه الاستمارة غير آمنة.

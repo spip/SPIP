@@ -359,9 +359,9 @@ en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 'info_contenance' => 'Aka qamawinx utjiwa:',
 'info_contribution' => 'Aruskipañat yanapawinaka', # MODIF
 'info_copyright' => '@spip@ mä software libre lakiratawa @lien_qpl@.',
-'info_copyright_doc' => 'Juk\'amp yatxatañatakix qamaw uñjaña &lt;a href=\'http://www.spip.net/es\'&gt;http://www.spip.net/es&lt;/a&gt;.   ',
+'info_copyright_doc' => 'Juk\'amp yatxatañatakix qamaw uñjaña &lt;a href=\'http://www.spip.net/es\'&gt;http://www.spip.net/es&lt;/a&gt;.   ', # MODIF
 'info_copyright_gpl' => 'GLP iyaw sakiñampi',
-'info_cours_edition' => 'Qillqatanakamax qillqt\'asiskiwa',
+'info_cours_edition' => 'Qillqatanakamax qillqt\'asiskiwa', # MODIF
 'info_creer_repertoire' => 'Mä q\'ipi jan ukjax mä imañ q\'ipi akham sutin uñstayañamaxa',
 'info_creer_repertoire_2' => 'jach\'a q\'ipina <b>@repertoire@</b>, ukatxa ',
 'info_creer_vignette' => 'Jisk\'itat justupak uñstayawi',
@@ -512,7 +512,7 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ 
 'login_espace_prive' => 'ch\'usawx jark\'ata',
 'login_identifiant_inconnu' => 'Apnaqirin sutipa «@login@» janiw uñt\'atakiti.',
 'login_login' => 'Apnaqirin sutipa:',
-'login_login2' => 'Qalltawi (qamawir yatiyt\'asiñataki apnaqirin sutipa):',
+'login_login2' => 'Qalltawi (qamawir yatiyt\'asiñataki apnaqirin sutipa):', # MODIF
 'login_login_pass_incorrect' => '(Apnaqirin sutipach imt\'at jan wali.)',
 'login_motpasseoublie' => '¿imt\'aw armata?',
 'login_non_securise' => 'Amuyam, aka phuqañ laphix janiw sum imatakiti. Janitix imt\'atamx katuntat red ukan munktax, naktayam JavaScript en tu navegador y ',

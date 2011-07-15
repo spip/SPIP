@@ -506,7 +506,7 @@ sera ignorée) :
 'login_espace_prive' => 'プライベートエリア',
 'login_identifiant_inconnu' => 'そのID、"@login@"は、知りません。',
 'login_login' => 'ログインID:',
-'login_login2' => 'ログインID（このサイトに接続するためのID）:',
+'login_login2' => 'ログインID（このサイトに接続するためのID）:', # MODIF
 'login_login_pass_incorrect' => '（ログインIDかパスワードが間違っています）。',
 'login_motpasseoublie' => 'パスワードを忘れましたか？',
 'login_non_securise' => '警告：このフォームは安全でないです。

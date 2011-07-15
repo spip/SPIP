@@ -353,7 +353,7 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 'info_contenance' => 'Deze site bevat:',
 'info_contribution' => 'Bijdragen aan het forum', # MODIF
 'info_copyright' => '@spip@ is vrije software @lien_gpl@ distributie.',
-'info_copyright_doc' => 'Voor meer informatie, kijk op de website <a href="@spipnet@">http://www.spip.net/nl</a>.',
+'info_copyright_doc' => 'Voor meer informatie, kijk op de website <a href="@spipnet@">http://www.spip.net/nl</a>.', # MODIF
 'info_copyright_gpl' => 'onder GPL licentie',
 'info_cours_edition' => 'Je artikels in redactie',
 'info_creer_repertoire' => 'Gelieve een bestand of map aan te maken met de volgende naam:',
@@ -503,7 +503,7 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 'login_espace_prive' => 'Privaat gedeelte',
 'login_identifiant_inconnu' => 'Loginnaam « @login@ » is niet bekend.',
 'login_login' => 'Login :',
-'login_login2' => 'Login (naam voor aanmelding bij deze site):',
+'login_login2' => 'Login (naam voor aanmelding bij deze site):', # MODIF
 'login_login_pass_incorrect' => '(Foutieve loginnaam of paswoord).',
 'login_motpasseoublie' => 'Paswoord vergeten?',
 'login_non_securise' => 'Opgepast, dit formuilier is niet beveiligd.

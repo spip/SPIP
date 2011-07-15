@@ -350,7 +350,7 @@ sera ignorée) :
 'info_contenance' => 'Site içeriği :',
 'info_contribution' => 'Forum katkıları', # MODIF
 'info_copyright' => '@spip@, @lien_gpl@ GPL lisansı ile dağıtılan serbest bir yazılımdır.',
-'info_copyright_doc' => 'Ayrıntılı bilgi için, bkz.  <a href="@spipnet@">http://www.spip.net/fr</a>.',
+'info_copyright_doc' => 'Ayrıntılı bilgi için, bkz.  <a href="@spipnet@">http://www.spip.net/fr</a>.', # MODIF
 'info_copyright_gpl' => 'GPL lisansı altında',
 'info_cours_edition' => 'Yazılmakta olan makaleleriniz',
 'info_creer_repertoire' => 'Şu isimde bir dosya veya dizin oluşturunuz :',
@@ -499,7 +499,7 @@ sera ignorée) :
 'login_espace_prive' => 'Özel alan',
 'login_identifiant_inconnu' => '"@login@" kullanıcı ismi tanınmıyor.',
 'login_login' => 'Kullanıcı ismi :',
-'login_login2' => 'Kullanıcı ismi :',
+'login_login2' => 'Kullanıcı ismi :', # MODIF
 'login_login_pass_incorrect' => '(Kullanıcı ismi veya şifre hatalı.)',
 'login_motpasseoublie' => 'Şifreyi unuttum',
 'login_non_securise' => 'Dikkat, bu form güvenli değil.

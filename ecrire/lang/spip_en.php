@@ -353,7 +353,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 'info_contenance' => 'This site contains:',
 'info_contribution' => 'forum contributions', # MODIF
 'info_copyright' => '@spip@ is free software distributed @lien_gpl@.',
-'info_copyright_doc' => 'For more information, see <a href="@spipnet@">http://www.spip.net/en</a>.',
+'info_copyright_doc' => 'For more information, see <a href="@spipnet@">http://www.spip.net/en</a>.', # MODIF
 'info_copyright_gpl' => 'under the GPL license',
 'info_cours_edition' => 'In progress',
 'info_creer_repertoire' => 'Please create a file or a directory called:',
@@ -502,7 +502,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 'login_espace_prive' => 'private area',
 'login_identifiant_inconnu' => 'The identifier "@login@" is unknown.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (identifier for connection to the site):',
+'login_login2' => 'Login (identifier for connection to the site):', # MODIF
 'login_login_pass_incorrect' => '(Wrong login or password).',
 'login_motpasseoublie' => 'password forgotten?',
 'login_non_securise' => 'Caution, this form is not secure.

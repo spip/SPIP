@@ -503,7 +503,7 @@ sera ignorée) :
 'login_espace_prive' => 'espaço privado',
 'login_identifiant_inconnu' => 'O identificador « @login@ » é desconhecido.',
 'login_login' => 'Login :',
-'login_login2' => 'Login (identificador de conexão ao sítio) :',
+'login_login2' => 'Login (identificador de conexão ao sítio) :', # MODIF
 'login_login_pass_incorrect' => '(Login ou palavra-passe incorrecta.)',
 'login_motpasseoublie' => 'palavra - passe esquecida ?',
 'login_non_securise' => 'Atenção, este formulário não é seguro.

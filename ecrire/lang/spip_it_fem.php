@@ -354,7 +354,7 @@ sera ignorée) :
 'info_contenance' => 'Questo sito contiene:',
 'info_contribution' => 'contributi dei forum', # MODIF
 'info_copyright' => '@spip@ è un software libero distribuito @lien_gpl@.',
-'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito <a href="@spipnet@">http://www.spip.net/it</a>.',
+'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito <a href="@spipnet@">http://www.spip.net/it</a>.', # MODIF
 'info_copyright_gpl' => 'sotto licenza GPL',
 'info_cours_edition' => 'Articoli in fase di redazione',
 'info_creer_repertoire' => 'Creare un file o una cartella chiamata:',
@@ -505,7 +505,7 @@ o contatta il tuo hoster.</font>',
 'login_espace_prive' => 'area riservata',
 'login_identifiant_inconnu' => 'L\'ID « @login@ » risulta inesistente.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (ID di connessione al sito):',
+'login_login2' => 'Login (ID di connessione al sito):', # MODIF
 'login_login_pass_incorrect' => '(Login o password errati.)',
 'login_motpasseoublie' => 'password dimenticata?',
 'login_non_securise' => 'Attenzione, questo modulo non è sicuro.

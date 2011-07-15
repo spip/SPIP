@@ -350,7 +350,7 @@ sera ignorée) :
 'info_contenance' => 'វ៉ែបសៃថ៍ នេះ​មានផ្ទុក ៖',
 'info_contribution' => 'ការ​រួមចំណែក នៃ​វេទិកា', # MODIF
 'info_copyright' => '@spip@ ជា​ផ្នែកទន់សេរី ត្រូវបានបែងចែក ​ដោយ @lien_gpl@។',
-'info_copyright_doc' => 'សំរាប់ ពត៌មាន​បន្ថែម, ​មើលសៃថ៍ <a href="@spipnet@">http://www.spip.net/en</a>។',
+'info_copyright_doc' => 'សំរាប់ ពត៌មាន​បន្ថែម, ​មើលសៃថ៍ <a href="@spipnet@">http://www.spip.net/en</a>។', # MODIF
 'info_copyright_gpl' => 'តាមអាជ្ញាបណ្ណ GPL',
 'info_cours_edition' => 'អត្ថបទ​ របស់​អ្នក ​កំពុង ​ត្រូវតែង',
 'info_creer_repertoire' => 'សូម​បង្កើត មួយ​ឯកសារ ឬ មួយ​បញ្ជី​រាយ​នាម ដែលបានដាក់ឈ្មោះ​៖',
@@ -497,7 +497,7 @@ sera ignorée) :
 'login_espace_prive' => 'ទីឯកជន',
 'login_identifiant_inconnu' => 'មិន​ស្គាល់​ អត្តសញ្ញា​"@login@"។',
 'login_login' => 'ពិនិត្យចូល ៖',
-'login_login2' => 'ពិនិត្យចូល (​អត្តសញ្ញា​ សំរាប់ភ្ជាប់ទៅ​ វ៉ែបសៃថ៍) ៖',
+'login_login2' => 'ពិនិត្យចូល (​អត្តសញ្ញា​ សំរាប់ភ្ជាប់ទៅ​ វ៉ែបសៃថ៍) ៖', # MODIF
 'login_login_pass_incorrect' => '(ការ​ពិនិត្យ​ចូល ឬ ​ពាក្យសំងាត់ មិន​ត្រឹមត្រូវ។​)',
 'login_motpasseoublie' => 'ភ្លេច​ ពាក្យសំងាត់ ឬ?',
 'login_non_securise' => 'ប្រយ័ត្ន, បែបបទនេះ គ្មានសុវត្ថភាព។ បើ​អ្នក​មិនចង់ ពាក្យសំងាត់ ​របស់​អ្នក ត្រូវ​បានស្ទាក់ លើបណ្តាញ, សូមសកម្ម ចាវ៉ាស្គ្រិប ក្នុងឿបកររាវរក របស់អ្នក និង',
