@@ -375,7 +375,7 @@ function serie_alter($serie, $q = array(), $meta='', $table='meta', $redirect=''
 // http://doc.spip.org/@upgrade_types_documents
 function upgrade_types_documents() {
 	if (include_spip('base/medias')
-	  AND function_exists('creer_base_types_doc'));
+	AND function_exists('creer_base_types_doc'))
 		creer_base_types_doc();
 }
 
