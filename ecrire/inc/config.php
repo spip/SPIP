@@ -459,47 +459,6 @@ function actualise_metas($liste_meta)
 }
 
 
-// http://doc.spip.org/@avertissement_config
-function avertissement_config() {
-	global $spip_lang_right, $spip_lang_left;
-
-	return debut_boite_info(true)
-	. "\n<div class='verdana2' style='text-align: justify'>
-	<p style='text-align: center'><b>"._T('avis_attention')."</b></p>"
-	. http_img_pack("warning-48.png", (_T('avis_attention')),
-		" style='float: $spip_lang_right; padding-$spip_lang_left: 10px;'")
-	. _T('texte_inc_config')
-	. "</div>"
-	. fin_boite_info(true)
-	. "<p>&nbsp;</p>\n";
-}
-
-
-// http://doc.spip.org/@bouton_radio
-function bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
-	static $id_label = 0;
-
-	if (strlen($onClick) > 0) $onClick = " onclick=\"$onClick\"";
-	$texte = "<input type='radio' name='$nom' value='$valeur' id='label_${nom}_${id_label}'$onClick";
-	if ($actif) {
-		$texte .= ' checked="checked"';
-		$titre = '<b>'.$titre.'</b>';
-	}
-	$texte .= " /> <label for='label_${nom}_${id_label}'>$titre</label>\n";
-	$id_label++;
-	return $texte;
-}
-
-
-// http://doc.spip.org/@afficher_choix
-function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
-	$choix = array();
-	while (list($valeur, $titre) = each($valeurs)) {
-		$choix[] = bouton_radio($nom, $valeur, $titre, $valeur == $valeur_actuelle);
-	}
-	return "\n".join($sep, $choix);
-}
-
 
 //
 // Gestion des modifs
