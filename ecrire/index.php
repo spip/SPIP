@@ -115,7 +115,7 @@ elseif (!preg_match(',^[a-z4_][0-9a-z_-]*$,i', $exec)) {
 	set_request('exec', $exec);
 }
 
-// compatibilite ascendante
+// compatibilite ascendante : obsolete, ne plus utiliser
 $GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
 	? $GLOBALS['visiteur_session']['prefs']['display']
 	: 0;

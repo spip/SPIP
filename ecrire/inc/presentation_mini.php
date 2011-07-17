@@ -44,8 +44,6 @@ function creer_colonne_droite(){
 }
 // http://doc.spip.org/@debut_droite
 function debut_droite($rubrique="") {
-	global $spip_ecran, $spip_display, $spip_lang_left;
-
 	return liste_objets_bloques(_request('exec'))
 	  . creer_colonne_droite()
 	  . "</div>"

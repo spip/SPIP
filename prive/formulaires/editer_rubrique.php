@@ -22,7 +22,7 @@ function formulaires_editer_rubrique_charger_dist($id_rubrique='new', $id_parent
 
 function rubriques_edit_config($row)
 {
-	global $spip_ecran, $spip_lang, $spip_display;
+	global $spip_ecran, $spip_lang;
 
 	$config = $GLOBALS['meta'];
 	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;

@@ -462,12 +462,8 @@ function filtre_afficher_enfant_rub_dist($id_rubrique){
  * @return string
  */
 function afficher_plus_info($lien, $titre="+") {
-	global $spip_display;
-
 	$titre = attribut_html($titre);
-	if ($spip_display != 4) {
-			return "\n<a href='$lien' title='$titre' class='plus_info'>" .
-			  http_img_pack(chemin_image("information-16.png"), $titre, "") ."</a>";
-	}
+	return "\n<a href='$lien' title='$titre' class='plus_info'>" .
+		http_img_pack(chemin_image("information-16.png"), $titre, "") ."</a>";
 }
 ?>

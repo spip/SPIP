@@ -84,17 +84,9 @@ function bloc_des_raccourcis($bloc) {
 	  . boite_ouvrir(_T('titre_cadre_raccourcis'),'raccourcis') . $bloc . boite_fermer();
 }
 
-// Afficher un petit "+" pour lien vers autre page
-
+// Compatibilite
 // http://doc.spip.org/@afficher_plus
-function afficher_plus($lien) {
-	global $spip_lang_right, $spip_display;
-
-	if ($spip_display != 4) {
-			return "\n<a href='$lien' style='float:$spip_lang_right; padding-right: 10px;'>" .
-			  http_img_pack(chemin_image("plus-info-16.png"), "+", "") ."</a>";
-	}
-}
+function afficher_plus($lien) {include_spip('inc/filtres_ecrire');afficher_plus_info($lien);}
 
 
 
@@ -115,8 +107,6 @@ function debut_onglet(){return "<div class='barre_onglet'><ul class='clearfix'>\
 function fin_onglet(){return "</ul></div>\n";}
 // http://doc.spip.org/@onglet
 function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
-	global $spip_display, $spip_lang_left ;
-
 	return "<li class='box_onglet'>"
 	 . ($icone?http_img_pack($icone, '', " class='cadre-icone'"):'')
 	 . lien_ou_expose($lien,$texte,$onglet == $onglet_ref)
