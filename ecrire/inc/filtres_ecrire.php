@@ -22,6 +22,7 @@ include_spip('inc/boutons');
 /**
  * Bloquer l'acces a une page en renvoyant vers 403
  * @param bool $ok
+ * @return string
  */
 function sinon_interdire_acces($ok=false) {
 	if ($ok) return '';
@@ -78,33 +79,52 @@ function parametres_css_prive(){
 }
 
 
-// http://doc.spip.org/@chercher_rubrique
-function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,$actionable = false, $retour_sans_cadre=false){
+/**
+ * Afficher le selecteur de rubrique
+ * qui permet de placer un objet dans la hierarchie des rubriques de SPIP
+ *
+ * http://doc.spip.org/@chercher_rubrique
+ *
+ * @param $titre
+ * @param $id_objet
+ * @param $id_parent
+ * @param $objet
+ * @param $id_secteur
+ * @param $restreint
+ * @param bool $actionable
+ *   true : fournit le selecteur dans un form directement postable
+ * @param bool $retour_sans_cadre
+ * @return string
+ */
+function chercher_rubrique($titre,$id_objet, $id_parent, $objet, $id_secteur, $restreint,$actionable = false, $retour_sans_cadre=false){
 	global $spip_lang_right;
 	include_spip('inc/autoriser');
-	if (intval($id) && !autoriser('modifier', $type, $id))
+	if (intval($id_objet) && !autoriser('modifier', $objet, $id_objet))
 		return "";
 	if (!sql_countsel('spip_rubriques'))
 		return "";
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	$form = $chercher_rubrique($id_parent, $type, $restreint, ($type=='rubrique')?$id:0);
+	$form = $chercher_rubrique($id_parent, $objet, $restreint, ($objet=='rubrique')?$id_objet:0);
 
 	if ($id_parent == 0) $logo = "racine-24.png";
 	elseif ($id_secteur == $id_parent) $logo = "secteur-24.png";
 	else $logo = "rubrique-24.png";
 
 	$confirm = "";
-	if ($type=='rubrique') {
+	if ($objet=='rubrique') {
 		// si c'est une rubrique-secteur contenant des breves, demander la
 		// confirmation du deplacement
-		$contient_breves = sql_countsel('spip_breves', "id_rubrique=$id");
+		$contient_breves = sql_countsel('spip_breves', "id_rubrique=".intval($id_objet));
 
 		if ($contient_breves > 0) {
 			$scb = ($contient_breves>1? 's':'');
 			$scb = _T('avis_deplacement_rubrique',
 				array('contient_breves' => $contient_breves,
 				      'scb' => $scb));
-			$confirm .= "\n<div class='confirmer_deplacement verdana2'><div class='choix'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>" . $scb . "</label></div></div>\n";
+			$confirm .= "\n<div class='confirmer_deplacement verdana2'>"
+			            ."<div class='choix'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>"
+			            . $scb .
+			            "</label></div></div>\n";
 		} else
 			$confirm .= "<input type='hidden' name='confirme_deplace' value='oui' />\n";
 	}
@@ -115,20 +135,30 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 				. '<input class="fondo" type="submit" value="'._T('bouton_choisir').'"/>'
 				. "</div>";
 		}
-		$form = "<input type='hidden' name='editer_$type' value='oui' />\n" . $form;
-		$form = generer_action_auteur("editer_$type", $id, self(), $form, " method='post' class='submit_plongeur'");
+		$form = "<input type='hidden' name='editer_$objet' value='oui' />\n" . $form;
+		$form = generer_action_auteur("editer_$objet", $id_objet, self(), $form, " method='post' class='submit_plongeur'");
 	}
 
 	if ($retour_sans_cadre)
 		return $form;
 
 	include_spip('inc/presentation');
-	return debut_cadre_couleur($logo, true, "", $msg) . $form .fin_cadre_couleur(true);
+	return debut_cadre_couleur($logo, true, "", $titre) . $form .fin_cadre_couleur(true);
 
 }
 
 
-// http://doc.spip.org/@avoir_visiteurs
+/**
+ * Tester si le site peut avoir des visiteurs
+ *
+ * http://doc.spip.org/@avoir_visiteurs
+ *
+ * @param bool $past
+ *   si true, prendre en compte le fait que le site a *deja* des visiteurs
+ *   comme le droit d'en avoir de nouveaux
+ * @param bool $accepter
+ * @return bool
+ */
 function avoir_visiteurs($past=false, $accepter=true) {
 	if ($GLOBALS['meta']["forums_publics"] == 'abo') return true;
 	if ($accepter AND $GLOBALS['meta']["accepter_visiteurs"] <> 'non') return true;
@@ -164,7 +194,6 @@ function statuts_articles_visibles($statut_auteur){
 	return $auth[$statut_auteur];
 }
 
-//
 /**
  * Traduire le statut technique de l'auteur en langage comprehensible
  * si $statut=='nouveau' et que le statut en attente est fourni,
@@ -236,7 +265,7 @@ function afficher_qui_edite($id_objet,$objet){
 /**
  * Lister les statuts des auteurs
  *
- * @param string $redacteurs
+ * @param string $quoi
  *   redacteurs : retourne les statuts des auteurs au moins redacteur, tels que defini par AUTEURS_MIN_REDAC
  *   visiteurs : retourne les statuts des autres auteurs, cad les visiteurs et autres statuts perso
  *   tous : retourne tous les statuts connus
@@ -338,7 +367,17 @@ function lien_article_virtuel($virtuel){
 }
 
 
-// http://doc.spip.org/@bouton_spip_rss
+/**
+ * Filtre pour generer un bouton RSS prive
+ * protege par un hash de faible securite
+ *
+ * http://doc.spip.org/@bouton_spip_rss
+ *
+ * @param string $op
+ * @param array $args
+ * @param string $lang
+ * @return string
+ */
 function bouton_spip_rss($op, $args=array(), $lang='') {
 	include_spip('inc/acces');
 	$clic = http_img_pack('rss-24.png', 'RSS', '', 'RSS');
@@ -348,7 +387,14 @@ function bouton_spip_rss($op, $args=array(), $lang='') {
 }
 
 
-// http://doc.spip.org/@alertes_auteur
+/**
+ * Verifier la presence d'alertes pour les auteur
+ *
+ * http://doc.spip.org/@alertes_auteur
+ *
+ * @param int $id_auteur
+ * @return string
+ */
 function alertes_auteur($id_auteur) {
 
 	$alertes = array();
@@ -396,17 +442,27 @@ function alertes_auteur($id_auteur) {
 			."</div></div>";
 }
 
-
+/**
+ * Filtre pour afficher les rubriques enfants d'une rubrique
+ * @param int $id_rubrique
+ * @return string
+ */
 function filtre_afficher_enfant_rub_dist($id_rubrique){
 	include_spip('inc/presenter_enfants');
 	return afficher_enfant_rub(intval($id_rubrique));
 }
 
-// Afficher un petit "i" pour lien vers autre page
-
-// http://doc.spip.org/@afficher_plus
+/**
+ * Afficher un petit "i" pour lien vers autre page
+ *
+ * http://doc.spip.org/@afficher_plus
+ *
+ * @param string $lien
+ * @param string $titre
+ * @return string
+ */
 function afficher_plus_info($lien, $titre="+") {
-	global $spip_lang_right, $spip_display;
+	global $spip_display;
 
 	$titre = attribut_html($titre);
 	if ($spip_display != 4) {
