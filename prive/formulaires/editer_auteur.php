@@ -23,10 +23,10 @@ function formulaires_editer_auteur_identifier_dist($id_auteur='new', $retour='',
 // http://doc.spip.org/@articles_edit_config
 function auteurs_edit_config($row)
 {
-	global $spip_ecran, $spip_lang;
+	global $spip_lang;
 
 	$config = $GLOBALS['meta'];
-	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
+	$config['lignes'] = 8;
 	$config['langue'] = $spip_lang;
 
 	// pour instituer_auteur
