@@ -251,7 +251,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 // http://doc.spip.org/@analyser_dtd_element
 function analyser_dtd_element($dtd, &$dtc, $grammaire)
 {
-	if (!preg_match('/^<!ELEMENT\s+([^>%\s]+)([^>]*)>\s*(.*)$/s', $dtd, $m))
+	if (!preg_match('/^<!ELEMENT\s+([^>\s]+)([^>]*)>\s*(.*)$/s', $dtd, $m))
 		return -3;
 
 	list(,$nom, $contenu, $dtd) = $m;
