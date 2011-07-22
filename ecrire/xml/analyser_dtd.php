@@ -19,15 +19,17 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 {
 	static $dtd = array(); # cache bien utile pour le validateur en boucle
 
+	if (isset($dtd[$grammaire]))
+		return $dtd[$grammaire];
+
+	if ($avail == 'SYSTEM') $grammaire = find_in_path($grammaire);
+
 	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
-	if (isset($dtd[$file]))
-		return $dtd[$file];
 
 	if (lire_fichier($file, $r)) {
-		if ($avail == 'SYSTEM') {
-			if (!$grammaire OR filemtime($file) < filemtime($grammaire))
+		if (!$grammaire) return array();
+		if (($avail == 'SYSTEM') AND filemtime($file) < filemtime($grammaire))
 				$r = false;
-		}
 	}
 
 	if ($r) {
@@ -52,7 +54,7 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 		}
 		
 	}
-	$dtd[$file] = $dtc;
+	$dtd[$grammaire] = $dtc;
 	return $dtc;
 }
 
@@ -103,7 +105,7 @@ function analyser_dtd($loc, $avail, &$dtc)
 
 	$dtd = ltrim($dtd);
 	if (!$dtd) {
-		spip_log("DTD '$loc' inaccessible");
+		spip_log("DTD '$loc' ($file) inaccessible");
 		return false;
 	} else 	spip_log("analyse de la DTD $loc ");
 
@@ -337,7 +339,6 @@ function expanserEntite($val, $macros=array())
 			@$vu[$ent]++;
 			$val = str_replace($m[0], $macros[$ent], $val);
 		}
-
 	  }
 	}
 
