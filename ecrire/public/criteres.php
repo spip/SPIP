@@ -33,10 +33,8 @@ function critere_racine_dist($idb, &$boucles, $crit) {
 		$exceptions_des_tables[$boucle->id_table]['id_parent'] :
 		'id_parent';
 
-	if ($not)
-		return (array('zbug_critere_inconnu', array('critere' => $not . $crit->op)));
-
-	$boucle->where[]= array("'='", "'$boucle->id_table." . "$id_parent'", 0);
+	$c = array("'='", "'$boucle->id_table." . "$id_parent'", 0);
+	$boucle->where[]= ($crit->not ? array("'NOT'", $c) : $c);
 }
 
 // {exclus}
