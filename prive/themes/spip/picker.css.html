@@ -22,8 +22,8 @@
 
 /* Ancien selecteur de rubriques */
 .selecteur_parent{font-size: 90%; width: 99%; max-height: 24px;} /* appliquee sur le <select> */
-option.selec_rub { background-position: [(#GET{left})] center; background-image: url(#CHEMIN_IMAGE{rubrique-12.gif}); background-repeat: no-repeat; padding-#GET{left}: 16px; }
-option.niveau_1 { font-weight: bold; background: #GET{claire}; background-image: url(#CHEMIN_IMAGE{secteur-12.gif}); background-repeat:  no-repeat; }
+option.selec_rub { background-position: [(#GET{left})] center; background-image: url(#CHEMIN_IMAGE{rubrique-12.png}); background-repeat: no-repeat; padding-#GET{left}: 16px; }
+option.niveau_1 { font-weight: bold; background: #GET{claire}; background-image: url(#CHEMIN_IMAGE{secteur-12.png}); background-repeat:  no-repeat; }
 option.niveau_2 { color: #202020; border-bottom: 1px solid #GET{claire}; }
 option.niveau_3 { color: #404040; }
 option.niveau_4 { color: #606060; }
@@ -33,9 +33,9 @@ option.niveau_6 { color: #a0a0a0; }
 
 /* plongeur */
 div.petite-racine { margin-bottom: -5px; }
-div.petite-racine, a.petite-racine { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN_IMAGE{racine-site-12.gif}); padding-#GET{left}: 15px; background-color: #fff; border: 1px solid #GET{foncee}; border-bottom: 0; width: 134px; }
-div.petite-rubrique, a.petite-rubrique { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN_IMAGE{rubrique-12.gif}); padding-#GET{left}: 15px; }
-div.petit-secteur, a.petit-secteur { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN_IMAGE{secteur-12.gif}); padding-#GET{left}: 15px; }
+div.petite-racine, a.petite-racine { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN_IMAGE{racine-12.png}); padding-#GET{left}: 15px; background-color: #fff; border: 1px solid #GET{foncee}; border-bottom: 0; width: 134px; }
+div.petite-rubrique, a.petite-rubrique { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN_IMAGE{rubrique-12.png}); padding-#GET{left}: 15px; }
+div.petit-secteur, a.petit-secteur { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN_IMAGE{secteur-12.png}); padding-#GET{left}: 15px; }
 div.rub-ouverte, a.rub-ouverte { padding-#GET{right}: 10px; background: url([(#CHEMIN_IMAGE{triangle-droite[(#GET{rtl})].gif})]) [(#GET{right})] center no-repeat; }
 /* selecteur ajax */
 #choix_parent_principal { background: #fff; border: 1px solid #GET{foncee}; position: relative; height: 170px; overflow: auto; margin-top:5px;}

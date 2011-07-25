@@ -83,7 +83,7 @@ function admin_plug_args($quoi, $erreur, $format)
 	plugin_installes_meta();
 
 	echo "<div class='liste-plugins formulaire_spip'>";
-	echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'), 'plugins');
+	echo debut_cadre_trait_couleur('plugin-24.png',true,'',_T('plugins_liste'), 'plugins');
 
 	if ($quoi!=='actifs'){
 		$lpf = liste_plugin_files();
