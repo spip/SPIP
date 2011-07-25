@@ -117,9 +117,11 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW AND $html) {
 		include_spip('inc/filtres'); // pour http_img_pack
-		$x = _T('previsualisation');
-		$x = http_img_pack('preview-public-24.png', $x) . '&nbsp;' . majuscules($x);
-		$x = "<div class='spip-previsu'>$x</div>";
+		$x = "<div class='spip-previsu' "
+		     . http_style_background('preview-32.png')
+		     . ">"
+		     . _T('previsualisation')
+		     . "</div>";
 		if (!$pos = strpos($page['texte'], '</body>'))
 			$pos = strlen($page['texte']);
 		$page['texte'] = substr_replace($page['texte'], $x, $pos, 0);
