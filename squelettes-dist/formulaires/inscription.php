@@ -13,7 +13,8 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_inscription_charger_dist($mode='', $id=0) {
-
+	global $visiteur_session;
+	
 	// fournir le mode de la config ou tester si l'argument du formulaire est un mode accepte par celle-ci 
 	include_spip('inc/filtres');
 	$mode=tester_config($id, $mode);
@@ -22,6 +23,10 @@ function formulaires_inscription_charger_dist($mode='', $id=0) {
 	if (!$mode)
 		return false;
 
+	// pas de formulaire si on a déjà une session avec un statut égal ou meilleur au mode
+	if(isset($visiteur_session['statut']) && ($visiteur_session['statut'] <= $mode))
+		return false;
+	
 	$valeurs = array('nom_inscription'=>'','mail_inscription'=>'', 'id'=>$id);
 	if ($mode=='1comite')
 		$valeurs['_commentaire'] = _T('pass_espace_prive_bla');
