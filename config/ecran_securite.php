@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.0.4'); // 6 avr. 2011
+define('_ECRAN_SECURITE', '1.0.5'); // 26 juil. 2011
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -34,13 +34,13 @@ if (!defined('_IS_BOT'))
  *       (sauf pour id_table, qui n'est pas numerique jusqu'a [5743])
  */
 foreach ($_GET as $var => $val)
-	if (strncmp($var,"id_",3)==0 AND $var!='id_table')
+	if ($_GET[$var] AND strncmp($var,"id_",3)==0 AND $var!='id_table')
 		$_GET[$var] = is_array($_GET[$var])?@array_map('intval',$_GET[$var]):intval($_GET[$var]);
 foreach ($_POST as $var => $val)
-	if (strncmp($var,"id_",3)==0 AND $var!='id_table')
+	if ($_POST[$var] AND strncmp($var,"id_",3)==0 AND $var!='id_table')
 		$_POST[$var] = is_array($_POST[$var])?@array_map('intval',$_POST[$var]):intval($_POST[$var]);
 foreach ($GLOBALS as $var => $val)
-	if (strncmp($var,"id_",3)==0 AND $var!='id_table')
+	if ($GLOBALS[$var] AND strncmp($var,"id_",3)==0 AND $var!='id_table')
 		$GLOBALS[$var] = is_array($GLOBALS[$var])?@array_map('intval',$GLOBALS[$var]):intval($GLOBALS[$var]);
 
 
