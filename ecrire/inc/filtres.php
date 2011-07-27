@@ -2132,7 +2132,7 @@ function http_img_pack($img, $alt, $atts='', $title='', $utiliser_suffixe_size =
  * @return string
  */
 function http_style_background($img, $att=''){
-  return " style='background-image: url(\"".chemin_image($img)."\")" . ($att ? (' ' . $att) : '') . ";'";
+  return " style='background".($att?"":"-image").": url(\"".chemin_image($img)."\")" . ($att ? (' ' . $att) : '') . ";'";
 }
 
 /**
