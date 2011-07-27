@@ -2436,7 +2436,7 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction="", $class=""
 		// 2 images pour composer l'icone : le fond (article) en background,
 		// la fonction (new) en image
 		$icone = http_img_pack($fonction, $alt, "width='$size' height='$size'\n" .
-					http_style_background($fond, "no-repeat center center"));
+					http_style_background($fond));
 	}
 	else {
 		$icone = http_img_pack($fond, $alt, "width='$size' height='$size'");
