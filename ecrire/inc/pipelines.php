@@ -246,10 +246,6 @@ function jqueryui_dependances($plugins){
 		$keys = array_keys($intersect);
 		array_splice($plugins,$keys[0], 0, "jquery.effects.core");
 	}
-	if(count($intersect = array_intersect($plugins,$dependance_effects)) > 0){
-		$keys = array_keys($intersect);
-		array_splice($plugins,$keys[0], 0, "jquery.effects.core");
-	}
 	$plugins = array_unique($plugins);
 	foreach ($plugins as $val) {
 		$scripts[] = "prive/javascript/ui/".$val.".js";
