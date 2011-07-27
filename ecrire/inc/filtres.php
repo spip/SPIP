@@ -1031,6 +1031,91 @@ function affdate_heure($numdate) {
 	return _T('date_fmt_jour_heure', array('jour' => affdate($numdate), 'heure' =>  _T('date_fmt_heures_minutes', array('h'=> $heures, 'm'=> $minutes))));
 }
 
+/**
+ * Afficher de facon textuelle les dates de debut et fin en fonction des cas
+ * - Lundi 20 fevrier a 18h
+ * - Le 20 fevrier de 18h a 20h
+ * - Du 20 au 23 fevrier
+ * - du 20 fevrier au 30 mars
+ * - du 20 fevrier 2007 au 30 mars 2008
+ * $horaire='oui' ou true permet d'afficher l'horaire, toute autre valeur n'indique que le jour
+ * $forme peut contenir une ou plusieurs valeurs parmi
+ *  - abbr (afficher le nom des jours en abbrege)
+ *  - hcal (generer une date au format hcal)
+ *  - annee (forcer l'affichage de l'annee)
+ *
+ * @param string $date_debut
+ * @param string $date_fin
+ * @param string $horaire
+ * @param string $forme
+ * @return string
+ */
+function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
+	$abbr = '';
+	if (strpos($forme,'abbr')!==false) $abbr = 'abbr';
+	$affdate = "affdate_jourcourt";
+	if (strpos($forme,'annee')!==false) $affdate = 'affdate';
+
+	$dtstart = $dtend = $dtabbr = "";
+	if (strpos($forme,'hcal')!==false) {
+		$dtstart = "<abbr class='dtstart' title='".date_iso($date_debut)."'>";
+		$dtend = "<abbr class='dtend' title='".date_iso($date_fin)."'>";
+		$dtabbr = "</abbr>";
+	}
+
+	$date_debut = strtotime($date_debut);
+	$date_fin = strtotime($date_fin);
+	$d = date("Y-m-d", $date_debut);
+	$f = date("Y-m-d", $date_fin);
+	$h = ($horaire==='oui' OR $horaire===true);
+	$hd = _T('date_fmt_heures_minutes_court', array('h'=> date("H",$date_debut), 'm'=> date("i",$date_debut)));
+	$hf = _T('date_fmt_heures_minutes_court', array('h'=> date("H",$date_fin), 'm'=> date("i",$date_fin)));
+	$au = " " . strtolower(_T('date_fmt_periode_to')) . " ";
+	$du = _T('date_fmt_periode_from') . " ";
+	if ($d==$f)
+	{ // meme jour
+		$s = ucfirst(nom_jour($d,$abbr))." ".$affdate($d);
+		if ($h)
+			if ($hd!=$hf)
+				$s .= " $hd";
+			else
+				$s = _T('date_fmt_jour_heure',array('jour'=>$s,'heure'=>$hd));
+		$s = "$dtstart$s$dtabbr";
+		if ($h AND $hd!=$hf) $s .= "-$dtend$hf$dtabbr";
+	}
+	else if ((date("Y-m",$date_debut))==date("Y-m",$date_fin))
+	{ // meme annee et mois, jours differents
+		if ($h){
+			$s = $du . $dtstart . affdate_jourcourt($d,date("Y",$date_debut)) . " $hd" . $dtabbr;
+			$s .= $au . $dtend . $affdate($f);
+			if ($hd!=$hf) $s .= " $hf";
+			$s .= $dtabbr;
+		}
+		else {
+			$s = $du . $dtstart . jour($d) . $dtabbr;
+			$s .= $au . $dtend . $affdate($f) . $dtabbr;
+		}
+	}
+	else if ((date("Y",$date_debut))==date("Y",$date_fin))
+	{ // meme annee, mois et jours differents
+		$s = $du . $dtstart . affdate_jourcourt($d,date("Y",$date_debut));
+		if ($h) $s .= " $hd";
+		$s .= $dtabbr . $au . $dtend . $affdate($f);
+		if ($h) $s .= " $hf";
+		$s .= $dtabbr;
+	}
+	else
+	{ // tout different
+		$s = $du . $dtstart . affdate($d);
+		if ($h)
+			$s .= " ($hd)";
+		$s .= $dtabbr . $au . $dtend. affdate($f);
+		if ($h)
+			$s .= " ($hf)";
+		$s .= $dtabbr;
+	}
+	return $s;
+}
 
 /**
  * Alignements en HTML (Old-style, preferer CSS)
