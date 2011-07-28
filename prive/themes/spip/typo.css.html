@@ -67,14 +67,16 @@ h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
 h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
 h6 { font-size: 1em; font-weight: bold; }*/
 
-h1,.h1 {font-size: 2em; line-height:#GET{line-height};margin-bottom: [(#GET{margin-bottom}|div{2})em]; }
 #SET{coeff,#GET{line-height}|plus{2}|div{2}|div{#GET{line-height}}}
 #SET{coeffinv,#VAL{1}|div{#GET{coeff}}}
-h2,.h2 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv}|mult{2})em];[ margin-bottom: (#GET{coeffinv})em;]}
-h3,.h3 {[ font-size: (#GET{line-height}|mult{1})em]; line-height: 1; margin-bottom: 1em; font-weight: bold;}
+h1,.h1 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv}|mult{2})em];[ margin-bottom: (#GET{coeffinv})em;]}
+h2,.h2 {[ font-size: (#GET{line-height}|mult{1})em]; line-height: 1; margin-bottom: 1em; font-weight: bold;}
 #SET{coeff,#GET{line-height}|plus{1}|div{2}|div{#GET{line-height}}}
 #SET{coeffinv,#VAL{1}|div{#GET{coeff}}}
-h4,.h4 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;]font-weight: bold; }
+h3,.h3 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;]font-weight: bold; }
+#SET{coeff,#GET{line-height}|plus{3}|div{4}|div{#GET{line-height}}}
+#SET{coeffinv,#VAL{1}|div{#GET{coeff}}}
+h4,.h4,caption,.caption-wrap {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;]font-weight: bold; }
 h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: #GET{margin-bottom}; }
 h6,.h6 { font-size: 1em; font-weight: bold; }
 
@@ -105,7 +107,6 @@ dl dd {}
 
 /* Tableaux */
 table { margin-bottom: #GET{margin-bottom}; width: 100%; }
-caption {[ font-size: (#GET{line-height}|mult{1})em;] line-height: 1; }
 th { font-weight: bold; }
 thead th { background: [#(#ENV{claire}|couleur_eclaircir{0.4})]; }
 table.spip td, table.spip th, /* annuler spip-styles */
