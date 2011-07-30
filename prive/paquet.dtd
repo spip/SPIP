@@ -1,0 +1,144 @@
+<!--================ Entites XML std =========================-->
+
+<!ENTITY % HTMLlat1 PUBLIC
+   "-//W3C//ENTITIES Latin 1 for XHTML//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+%HTMLlat1;
+
+<!ENTITY % HTMLsymbol PUBLIC
+   "-//W3C//ENTITIES Symbols for XHTML//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+%HTMLsymbol;
+
+<!ENTITY % HTMLspecial PUBLIC
+   "-//W3C//ENTITIES Special for XHTML//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+%HTMLspecial;
+
+<!--================ DTD originale =========================-->
+
+<!ENTITY % LANG "CDATA"> <!-- nom de langue -->
+<!ENTITY % MAIL "CDATA"> <!-- adresse mail -->
+<!ENTITY % NAME "CDATA"> <!-- identificateur (notamment nom de fonction) -->
+<!ENTITY % NUMBER "CDATA"> <!-- nombre entier naturel -->
+<!ENTITY % PATH "CDATA"> <!-- chemin d'acces a un fichier ou repertoire -->
+<!ENTITY % CONTEXT "CDATA"> <!-- couples x=y separes par esperluete -->
+<!ENTITY % URI "CDATA"> <!-- lien sur le Web -->
+<!ENTITY % VNUM "CDATA"> <!-- 3 entiers naturels separes par un point: x.y.z -->
+<!ENTITY % INTERVAL "CDATA"> <!-- 2 VNUM entre crochets separes par un point-virgule -->
+<!ENTITY % ITEM "CDATA"> <!-- chaine de langue -->
+
+<!ENTITY % ETAT "(experimental|dev|test|stable)" >
+
+<!ENTITY % CATEGORY "(auteur|communication|date|divers|edition|maintenance|multimedia|navigation|outil|performance|squelette|statistique|theme)" >
+
+<!ENTITY % CREDITS "(auteur|copyright|credit|licence)*" >
+
+<!ENTITY % IMPLEMENTATION "(menu|chemin|lib|necessite|onglet|procure|pipeline|utilise)*" >
+
+<!ELEMENT paquet (nom, %CREDITS;, traduire*, %IMPLEMENTATION;, spip*) >
+<!ATTLIST paquet
+	  prefix ID #REQUIRED
+	  categorie %CATEGORY; #REQUIRED
+	  version %VNUM; #REQUIRED
+	  etat %ETAT; #REQUIRED
+	  compatibilite %INTERVAL; #REQUIRED
+	  logo %PATH; #IMPLIED
+	  schema %NUMBER; #IMPLIED
+	  meta %NAME; #IMPLIED
+	  documentation %URI; #IMPLIED
+	  demonstration %URI; #IMPLIED
+	  developpement %URI; #IMPLIED
+>
+
+<!ELEMENT nom (#PCDATA)>
+
+<!ELEMENT auteur (#PCDATA)>
+<!ATTLIST auteur 
+	  lien %URI; #IMPLIED
+	  mail %MAIL; #IMPLIED
+>
+
+<!ELEMENT copyright (#PCDATA)>
+
+<!ELEMENT credit (#PCDATA)>
+<!ATTLIST credit
+	  lien %URI; #IMPLIED
+>
+
+<!ELEMENT licence (#PCDATA)>
+<!ATTLIST licence
+	  lien %URI; #IMPLIED
+>
+
+<!ELEMENT traduire EMPTY>
+<!ATTLIST traduire
+          module %NAME; #REQUIRED
+          reference %LANG; #REQUIRED
+          gestionnaire %NAME; #IMPLIED
+>
+
+<!ELEMENT spip %IMPLEMENTATION; >
+<!ATTLIST spip
+	  compatibilite %INTERVAL; #REQUIRED
+>
+
+<!ELEMENT chemin EMPTY>
+<!ATTLIST chemin
+	  path %PATH; #REQUIRED
+	  type %NAME; #IMPLIED
+>
+
+<!ELEMENT necessite EMPTY>
+<!ATTLIST necessite
+	  nom %NAME; #REQUIRED
+	  compatibilite %INTERVAL; #IMPLIED
+>
+
+<!ELEMENT lib EMPTY>
+<!ATTLIST lib
+	  nom %NAME; #REQUIRED
+	  lien %URI; #REQUIRED
+>
+
+<!ELEMENT utilise EMPTY>
+<!ATTLIST utilise
+	  nom %NAME; #REQUIRED
+	  compatibilite %INTERVAL; #IMPLIED
+>
+
+<!ELEMENT procure EMPTY>
+<!ATTLIST procure
+	  nom %NAME; #REQUIRED
+	  compatibilite %INTERVAL; #IMPLIED
+>
+
+<!ELEMENT pipeline EMPTY>
+<!ATTLIST pipeline
+	  nom %NAME; #REQUIRED
+	  action %NAME; #IMPLIED
+	  inclure %PATH; #IMPLIED
+>
+
+<!ELEMENT menu EMPTY>
+<!ATTLIST menu 
+	  nom %NAME; #REQUIRED
+	  titre %ITEM; #REQUIRED
+	  parent %NAME; #IMPLIED
+	  position %NUMBER; #IMPLIED
+	  action %NAME; #IMPLIED
+	  parametres %CONTEXT; #IMPLIED
+	  icone %PATH; #IMPLIED
+>
+
+<!ELEMENT onglet EMPTY>
+<!ATTLIST onglet 
+	  nom %NAME; #REQUIRED
+	  titre %ITEM; #REQUIRED
+	  parent %NAME; #IMPLIED
+	  position %NUMBER; #IMPLIED
+	  action %NAME; #IMPLIED
+	  parametres %CONTEXT; #IMPLIED
+	  icone %PATH; #IMPLIED
+>
+
