@@ -10,11 +10,11 @@
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_rubrique,info_nb_rubriques}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='picto'></th>
-			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
-			<th class='langue'></th>
-			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
-			<th class='id'>[(#TRI{id_rubrique,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='langue' scope='col'></th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_rubrique,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
