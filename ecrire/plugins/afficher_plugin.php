@@ -117,7 +117,7 @@ function plugin_resume($info, $dir_plugins, $plug_file, $url_page){
 
 	$url = parametre_url($url_page, "plugin", substr($dir,strlen(_DIR_RACINE)));
 
-	if (isset($info['icon']) and $i = trim($info['icon'])) {
+	if (isset($info['logo']) and $i = trim($info['logo'])) {
 		include_spip("inc/filtres_images_mini");
 		$i = inserer_attribut(image_reduire("$dir/$i", 32),'alt','');
 		$i = "<div class='icon'><a href='$url' rel='info'>$i</a></div>";

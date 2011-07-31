@@ -96,7 +96,7 @@ function liste_plugin_valides($liste_plug, $force = false)
 	// que les plugins valides, et dans leur derniere version en cas de doublon
 	$infos['_DIR_RESTREINT'][''] = $get_infos('./',$force,_DIR_RESTREINT,'plugin.xml');
 	$infos['_DIR_RESTREINT']['SPIP']['version'] = $GLOBALS['spip_version_branche'];
-	$infos['_DIR_RESTREINT']['SPIP']['path'] = array();
+	$infos['_DIR_RESTREINT']['SPIP']['chemin'] = array();
 	$liste_non_classee = array('SPIP'=>array(
 		'nom' => 'SPIP',
 		'etat' => 'stable',
@@ -139,7 +139,9 @@ function liste_plugin_valides($liste_plug, $force = false)
 function plugin_valide_resume(&$liste, $plug, $infos, $dir)
 {
 	$i = $infos[$dir][$plug];
-	if (!plugin_version_compatible($i['compatible'], $GLOBALS['spip_version_branche']))
+	if (isset($i['erreur']) AND $i['erreur'])
+		return;
+	if (!plugin_version_compatible($i['compatibilite'], $GLOBALS['spip_version_branche']))
 		return;
 	$p = strtoupper($i['prefix']);
 	if (!isset($liste[$p]) 
@@ -403,7 +405,7 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 		$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 		if ($prefix!=="SPIP"){
 			$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
-			foreach($info['path'] as $chemin){
+			foreach($info['chemin'] as $chemin){
 				if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
 					$dir = $chemin['dir'];
 					if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
@@ -434,8 +436,8 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 		$plug = $plugin_valides[$p]['dir'];
 		$dir = constant($dir_type);
 		$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
-		if ($info['bouton'])
-			$boutons = array_merge($boutons,$info['bouton']);
+		if ($info['menu'])
+			$boutons = array_merge($boutons,$info['menu']);
 		if ($info['onglet'])
 			$onglets = array_merge($onglets,$info['onglet']);
 		foreach($contenu as $charge => $v){

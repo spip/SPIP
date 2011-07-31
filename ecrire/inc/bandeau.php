@@ -69,8 +69,8 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 				+ array($id=> new Bouton(
 					($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
 					$infos['titre'],	// titre
-					$infos['url']?$infos['url']:null,
-					$infos['args']?$infos['args']:null
+					$infos['action']?$infos['action']:null,
+					$infos['parametres']?$infos['parametres']:null
 					))
 				+ array_slice($boutons_admin[$parent]->sousmenu,$position,100);
 			}
@@ -84,8 +84,8 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 				+array($id=> new Bouton(
 					($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
 					$infos['titre'],	// titre
-					$infos['url']?$infos['url']:null,
-					$infos['args']?$infos['args']:null
+					$infos['action']?$infos['action']:null,
+					$infos['parametres']?$infos['parametres']:null
 					))
 				+ array_slice($boutons_admin,$position,100);
 			}
