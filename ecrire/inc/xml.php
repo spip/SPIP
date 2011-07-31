@@ -158,14 +158,16 @@ function spip_xml_decompose_tag($tag){
 }
 
 // http://doc.spip.org/@spip_xml_match_nodes
-function spip_xml_match_nodes($regexp,&$arbre,&$matches){
+function spip_xml_match_nodes($regexp,&$arbre,&$matches,$init=true){
+	if ($init)
+		$matches = array();
 	if(is_array($arbre) && count($arbre))
 		foreach(array_keys($arbre) as $tag){
 			if (preg_match($regexp,$tag))
 				$matches[$tag] = &$arbre[$tag];
 			if (is_array($arbre[$tag]))
 				foreach(array_keys($arbre[$tag]) as $occurences)
-					spip_xml_match_nodes($regexp,$arbre[$tag][$occurences],$matches);
+					spip_xml_match_nodes($regexp,$arbre[$tag][$occurences],$matches,false);
 		}
 	return (count($matches));
 }
