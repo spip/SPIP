@@ -241,7 +241,7 @@ Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un colle
 		<action>f_boite_infos</action>
 		<inclure>inc/pipelines_ecrire.php</inclure>
 	</pipeline>
-	<pipeline><nom>ajouter_boutons</nom><action></action></pipeline>
+	<pipeline><nom>ajouter_menus</nom><action></action></pipeline>
 	<pipeline><nom>ajouter_onglets</nom><action></action></pipeline>
 	<pipeline><nom>body_prive</nom><action></action></pipeline>
 	<pipeline><nom>calculer_rubriques</nom><action></action></pipeline>

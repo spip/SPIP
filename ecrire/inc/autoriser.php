@@ -567,18 +567,18 @@ function autoriser_configurerlangage_onglet_dist($faire,$quoi,$id,$qui,$opts) {
 function autoriser_configurerpreference_onglet_dist($faire,$quoi,$id,$qui,$opts) {
 	return true;
 }
-function autoriser_auteurs_bouton_dist($faire, $type, $id, $qui, $opts){return true;}
-function autoriser_articles_bouton_dist($faire, $type, $id, $qui, $opts){return true;}
-function autoriser_rubriques_bouton_dist($faire, $type, $id, $qui, $opts){return true;}
+function autoriser_auteurs_menu_dist($faire, $type, $id, $qui, $opts){return true;}
+function autoriser_articles_menu_dist($faire, $type, $id, $qui, $opts){return true;}
+function autoriser_rubriques_menu_dist($faire, $type, $id, $qui, $opts){return true;}
 
-function autoriser_articlecreer_bouton_dist($faire, $type, $id, $qui, $opts){
+function autoriser_articlecreer_menu_dist($faire, $type, $id, $qui, $opts){
 	return sql_countsel('spip_rubriques')>0;
 }
 
-function autoriser_suiviedito_bouton_dist($faire, $type, $id, $qui, $opts){
+function autoriser_suiviedito_menu_dist($faire, $type, $id, $qui, $opts){
 	return $qui['statut']=='0minirezo';
 }
-function autoriser_synchro_bouton_dist($faire, $type, $id, $qui, $opts){
+function autoriser_synchro_menu_dist($faire, $type, $id, $qui, $opts){
 	return $qui['statut']=='0minirezo';
 }
 
