@@ -113,7 +113,7 @@ function admin_plug_args($quoi, $erreur, $format)
 	$afficher = charger_fonction("afficher_$format",'plugins');
 	$corps = $afficher(self(),$lcpaffiche, $lcpa, $actifs);
 	if ($corps)
-	  $corps .= "\n<br />\n<div class='boutons' style='display:none;'>"
+	  $corps .= "\n<div class='boutons' style='display:none;'>"
 	    .  "<input type='submit' class='submit save' value='"._T('bouton_enregistrer')
 	    ."' />"
 	    . "</div>";
