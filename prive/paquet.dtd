@@ -1,18 +1,18 @@
 <!--================ Entites XML std =========================-->
 
-<!ENTITY % HTMLlat1 PUBLIC
+<!ENTITY % HTMLlat1 SYSTEM
    "-//W3C//ENTITIES Latin 1 for XHTML//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent">
+   "xhtml-lat1.ent">
 %HTMLlat1;
 
-<!ENTITY % HTMLsymbol PUBLIC
+<!ENTITY % HTMLsymbol SYSTEM
    "-//W3C//ENTITIES Symbols for XHTML//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+   "xhtml-symbol.ent">
 %HTMLsymbol;
 
-<!ENTITY % HTMLspecial PUBLIC
+<!ENTITY % HTMLspecial SYSTEM
    "-//W3C//ENTITIES Special for XHTML//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+   "xhtml-special.ent">
 %HTMLspecial;
 
 <!--================ DTD originale =========================-->
