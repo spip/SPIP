@@ -242,8 +242,11 @@ function chargeur_charger_zip($quoi = array())
 
 	$quoi['remove'] = $racine;
 
+	// si pas de racine commune, reprendre le nom du fichier zip
+	// en lui enlevant la racine h+md5 qui le prefixe eventuellement
+	// cf action/charger_plugin L74
 	if (!strlen($nom = basename($racine)))
-		$nom = basename($fichier, '.zip');
+		$nom = preg_replace(",^h[0-9a-f]{8}-,i","",basename($fichier, '.zip'));
 
 	$dir_export = $quoi['root_extract']
 		? $quoi['dest']
@@ -251,12 +254,18 @@ function chargeur_charger_zip($quoi = array())
 
 	$tmpname = $quoi['tmp'].$nom.'/';
 
-	// On extrait, mais dans tmp/ si on ne veut pas vraiment le faire
+	// choisir la cible selon si on veut vraiment extraire ou pas
+	$target = $quoi['extract'] ? $dir_export : $tmpname;
+	// ici, il faut vider le rep cible si il existe deja, non ?
+	if (is_dir($target)){
+		include_spip('inc/invalideur');
+		purger_repertoire($target,array('subdir'=>true));
+	}
+
+	// et enfin on extrait
 	$ok = $zip->extract(
 		PCLZIP_OPT_PATH,
-			$quoi['extract']
-				? $dir_export
-				: $tmpname
+			$target
 		,
 		PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
 		PCLZIP_OPT_REPLACE_NEWER,
