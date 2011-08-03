@@ -14,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/filtres_boites');
 include_spip('inc/boutons');
+include_spip('inc/pipelines_ecrire');
 
 /**
  * Fonctions utilises au calcul des squelette du prive.
@@ -438,7 +439,7 @@ function alertes_auteur($id_auteur) {
 
 	if ($alertes = array_filter($alertes))
 		return "<div class='wrap-messages-alertes'><div class='messages-alertes'>".
-			join('<hr />', $alertes)
+			join(' | ', $alertes)
 			."</div></div>";
 }
 

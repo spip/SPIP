@@ -27,8 +27,8 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 	return init_entete($titre, $id_rubrique, $minipres)
 	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
 	. "<div id='page'>"
-	. ($alertes?alertes_auteur($connect_id_auteur):'')
 	. auteurs_recemment_connectes($connect_id_auteur)
+	. ($alertes?alertes_auteur($connect_id_auteur):'')
 	. '<div class="largeur">';
 }
 
