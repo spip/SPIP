@@ -88,7 +88,7 @@ function public_styliser_par_z_dist($flux){
 
 			// si on est sur un ?page=XX non trouve
 			if ($flux['args']['contexte'][$page] == $fond 
-				OR $flux['args']['contexte']['type'] == $fond
+				OR $flux['args']['contexte']['type-page'] == $fond
 				OR ($fond=='sommaire' AND !$flux['args']['contexte'][$page])) {
 
 				// si on est sur un ?page=XX non trouve
@@ -152,12 +152,12 @@ function public_styliser_par_z_dist($flux){
 		// pour des raisons de perfo, les declinaisons doivent etre dans le
 		// meme dossier que body.html
 		if ($fond=='body' AND substr($squelette,-strlen($fond))==$fond){
-			if (isset($flux['args']['contexte']['type'])
+			if (isset($flux['args']['contexte']['type-page'])
 				AND (
 					(isset($flux['args']['contexte']['composition'])
-					AND file_exists(($f=$squelette."-".$flux['args']['contexte']['type']."-".$flux['args']['contexte']['composition']).".$ext"))
+					AND file_exists(($f=$squelette."-".$flux['args']['contexte']['type-page']."-".$flux['args']['contexte']['composition']).".$ext"))
 					OR
-					file_exists(($f=$squelette."-".$flux['args']['contexte']['type']).".$ext")
+					file_exists(($f=$squelette."-".$flux['args']['contexte']['type-page']).".$ext")
 					))
 				$flux['data'] = $f;
 		}
@@ -306,7 +306,7 @@ function prive_echaffauder_dist($exec,$table,$table_sql,$desc_exec,$ext){
 
 	// page objet ou objet_edit
 	if (is_array($desc_exec)) {
-		$type = $desc_exec['type'];
+		$type = $desc_exec['type-page'];
 		$primary = $desc_exec['id_table_objet'];
 
 		if ($desc_exec['edition']===false)

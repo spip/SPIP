@@ -4,4 +4,4 @@
 
 ]
 #SET{zajax,#VAL{var_zajax}|_request|replace{\W,''}}
-<INCLURE{fond=prive/squelettes/#GET{zajax}|concat{'/',#ENV{type}},ajax=#GET{zajax},env}>
+<INCLURE{fond=prive/squelettes/#GET{zajax}|concat{'/',#ENV{type-page}},ajax=#GET{zajax},env}>
