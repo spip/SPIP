@@ -198,9 +198,15 @@ function objet_inserer($objet, $id_parent=null) {
 
 	// controler si le serveur n'a pas renvoye une erreur
 	// et associer l'auteur sinon
-	if ($id > 0 AND $GLOBALS['visiteur_session']['id_auteur']) {
-		include_spip('action/editer_auteur');
-		auteur_associer($GLOBALS['visiteur_session']['id_auteur'], array($objet=>$id));
+	// si la table n'a pas deja un champ id_auteur
+	// et si le form n'a pas poste un id_auteur (meme vide, ce qui sert a annuler cette auto association)
+	if ($id > 0
+	  AND !isset($desc['field']['id_auteur'])){
+		$id_auteur = (is_null(_request('id_auteur'))?$GLOBALS['visiteur_session']['id_auteur']:_request('id_auteur'));
+	  if ($id_auteur) {
+			include_spip('action/editer_auteur');
+			auteur_associer($GLOBALS['visiteur_session']['id_auteur'], array($objet=>$id));
+	  }
 	}
 
 	return $id;
@@ -239,7 +245,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 	elseif (isset($desc['field']['date']))
 		$champ_date = 'date';
 	if ($champ_date)
-	$sel[] = ($champ_date?"$champ_date as date":"'' as date");
+		$sel[] = ($champ_date?"$champ_date as date":"'' as date");
 	$sel[] = (isset($desc['field']['id_rubrique'])?'id_rubrique':"0 as id_rubrique");
 
 	$row = sql_fetsel($sel, $table_sql, id_table_objet($objet).'='.intval($id));
@@ -257,10 +263,10 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 		if ($id_rubrique ?
 				autoriser('publierdans', 'rubrique', $id_rubrique)
 			:
-				autoriser('publier', $objet, $id)
+				autoriser('instituer', $objet, $id, null, array('statut'=>$s))
 			)
 			$statut = $champs['statut'] = $s;
-		else if (autoriser('modifier', $objet, $id) AND $s != 'publie')
+		else if ($s!='publie' AND autoriser('modifier', $objet, $id))
 			$statut = $champs['statut'] = $s;
 		else
 			spip_log("editer_objet $id refus " . join(' ', $c));
