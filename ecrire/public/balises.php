@@ -638,8 +638,8 @@ function balise_ENV_dist($p, $src = NULL) {
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
 		$p->code = $src
-		? ('is_array($a = ('.$src.')) ? $a['.$_nom.'] : ""')
-		: ('@$Pile[0][' . $_nom . ']');
+		? ('is_array($a = ('.$src.')) ? $a[(string)'.$_nom.'] : ""')
+		: ('@$Pile[0][(string)' . $_nom . ']');
 		if ($_sinon)
 			$p->code = 'sinon('.
 				$p->code.",$_sinon)";
@@ -1056,7 +1056,7 @@ function balise_SET_dist($p){
 	if (!$_nom OR !$_val) {
 		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'SET'));
 		erreur_squelette($err_b_s_a, $p);
-	} else 	$p->code = "vide(\$Pile['vars'][$_nom] = $_val)";
+	} else 	$p->code = "vide(\$Pile['vars'][(string)$_nom] = $_val)";
 
 	$p->interdire_scripts = false; // la balise ne renvoie rien
 	return $p;
