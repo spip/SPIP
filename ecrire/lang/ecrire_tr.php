@@ -722,6 +722,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'plugin_info_automatique_liste_update' => 'Listeleri güncelle',
 'plugin_info_automatique_ou' => 'veya...',
 'plugin_info_automatique_select' => 'Aşağıdan bir eklenti seçiniz : SPIP o eklentiyi indirecek ve <code>@rep@</code> dizinine kuracaktır ; eğer bu eklenti zaten kurulu ise güncellenecektir.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW

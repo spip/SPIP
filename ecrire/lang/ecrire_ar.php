@@ -736,6 +736,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'plugin_info_automatique_liste_update' => 'تحديث اللوائح',
 'plugin_info_automatique_ou' => 'او...',
 'plugin_info_automatique_select' => 'اختر اخحد الملحقات ادناه: سيقوم SPIP بتحميله وتثبيته في المجلد <code>@rep@</code>. اذا كان هذا الملحق موجوداً سوف يتم تحديثه.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'تعريف هذا الملحق غير صحيح',
 'plugin_info_extension_1' => 'تم تحميل الإضافات أدناه وتفعيلها في مجلد @extensions@.',
 'plugin_info_extension_2' => 'لا يمكن إيقافها.',

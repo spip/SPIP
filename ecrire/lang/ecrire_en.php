@@ -214,8 +214,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Delete this signature',
 'icone_valider_signature' => 'Validate this signature',
 'image_administrer_rubrique' => 'You can manage this section',
-'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
-'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
+'impossible_modifier_login_auteur' => 'Login cannot be changed.',
+'impossible_modifier_pass_auteur' => 'Password cannot be changed.',
 'info_1_article' => '1 article',
 'info_1_article_syndique' => '1 syndicated article',
 'info_1_auteur' => '1 author',
@@ -241,7 +241,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'You can manage this section',
 'info_adresse' => 'to this address:',
 'info_adresse_url' => 'URL of the public site',
-'info_afficher_par_nb' => 'Afficher par', # NEW
+'info_afficher_par_nb' => 'Show ',
 'info_afficher_visites' => 'Show visits for:',
 'info_aide_en_ligne' => 'SPIP Online Help',
 'info_ajout_image' => 'When you add images as attached documents to an article,
@@ -379,7 +379,7 @@ via FTP.</p>',
 'info_liste_redacteurs_connectes' => 'List of editors online',
 'info_login_existant' => 'This login already exists.',
 'info_login_trop_court' => 'Login too short.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Your login must contain at least @nb@ characters.',
 'info_logos' => 'The logos',
 'info_maximum' => 'maximum:',
 'info_meme_rubrique' => 'In this section',
@@ -450,7 +450,7 @@ via FTP.</p>',
 'info_par_statut' => 'by status',
 'info_par_tri' => '\'(by @tri@)\'',
 'info_passe_trop_court' => 'Password too short.',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Your password must contain at least @nb@ characters.',
 'info_passes_identiques' => 'The two passwords are not identical.',
 'info_pense_bete_ancien' => 'Your old memos',
 'info_plus_cinq_car' => 'more than 5 characters',
@@ -486,7 +486,7 @@ via FTP.</p>',
 'info_question_utilisation_moteur_recherche' => 'Do you wish to use SPIP\'s integrated search engine?
  (Disabling it speeds up system performance.)',
 'info_question_vignettes_referer_non' => 'Do not show screenshots of referring sites',
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ worked on the contents @date_diff@ minutes ago',
 'info_racine_site' => 'Site root',
 'info_recharger_page' => 'Please wait a few moments, then reload this page.',
 'info_recherche_auteur_a_affiner' => 'Too many results for "@cherche_auteur@"; please refine your search.',
@@ -676,12 +676,12 @@ and their status is colour-coded:',
 'lien_trier_nombre_articles' => 'Sort by total articles',
 'lien_trier_statut' => 'Sort by status',
 'lien_voir_en_ligne' => 'VIEW ONLINE:',
-'logo_article' => 'ARTICLE LOGO', # MODIF
-'logo_auteur' => 'AUTHOR\'S LOGO', # MODIF
-'logo_rubrique' => 'SECTION LOGO', # MODIF
-'logo_site' => 'LOGO FOR THIS SITE', # MODIF
-'logo_standard_rubrique' => 'STANDARD SECTION LOGO', # MODIF
-'logo_survol' => 'MOUSEOVER LOGO', # MODIF
+'logo_article' => 'Article logo',
+'logo_auteur' => 'Autor\'s logo',
+'logo_rubrique' => 'Logo of the section',
+'logo_site' => 'Logo of this site',
+'logo_standard_rubrique' => 'Standard logo of sections',
+'logo_survol' => 'Mouseover logo',
 
 // M
 'menu_aide_installation_choix_base' => 'Choosing your database',
@@ -732,12 +732,13 @@ and their status is colour-coded:',
 'plugin_info_automatique_liste_update' => 'Update lists',
 'plugin_info_automatique_ou' => 'or...',
 'plugin_info_automatique_select' => 'Select a plugin below: SPIP will load it and will install it in the <code>@rep@</code> directory. If the plugin already exists, it will be updated.',
-'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
+'plugin_info_credit' => 'Crédits', # NEW
+'plugin_info_erreur_xml' => 'Incorrect declaration of the plugin',
 'plugin_info_extension_1' => 'These extensions have been loaded and are active in the @extensions@ directory.',
 'plugin_info_extension_2' => 'They cannot be uninstalled.',
-'plugin_info_install_ok' => 'Installation réussie', # NEW
-'plugin_info_necessite' => 'Necessite :', # NEW
-'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
+'plugin_info_install_ok' => 'Installation successful',
+'plugin_info_necessite' => 'Required:',
+'plugin_info_non_compatible_spip' => 'This plugin is incompatible with this version of SPIP',
 'plugin_info_telecharger' => 'load from @url@ and install to @rep@',
 'plugin_librairies_installees' => 'Libraries installed',
 'plugin_necessite_lib' => 'This plugin requires the library @lib@',
@@ -772,12 +773,12 @@ and their status is colour-coded:',
 
 // Q
 'queue_executer_maintenant' => 'Run now',
-'queue_nb_jobs_in_queue' => '@nb@ jobs in queue',
+'queue_nb_jobs_in_queue' => '@nb@ tasks in queue',
 'queue_next_job_in_nb_sec' => 'Next job in @nb@ s',
-'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
+'queue_no_job_in_queue' => 'No pending tasks',
 'queue_one_job_in_queue' => '1 job in queue',
 'queue_purger_queue' => 'Purge job queue',
-'queue_titre' => 'List of jobs', # MODIF
+'queue_titre' => 'List of tasks',
 
 // R
 'repertoire_plugins' => 'Directory:',

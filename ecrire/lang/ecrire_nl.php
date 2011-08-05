@@ -731,6 +731,7 @@ een kleur geeft hun status aan :',
 'plugin_info_automatique_liste_update' => 'De lijsten bijwerken',
 'plugin_info_automatique_ou' => 'om...',
 'plugin_info_automatique_select' => 'Selecteert hieronder een plugin : SPIP zal het downloaden en zal in de lijst <code>@rep@</code>  het plaatsen; als dit plugin reeds bestaat, zal hij bijgewerkt worden.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW

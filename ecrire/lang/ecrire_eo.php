@@ -717,6 +717,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'plugin_info_automatique_liste_update' => 'Ĝisdatigi la listojn',
 'plugin_info_automatique_ou' => 'aŭ...',
 'plugin_info_automatique_select' => 'Elektu ĉi-sube kromprogramon : SPIP elŝutos ĝin kaj instalos ĝin en la dosierujo <code>@rep@</code> ; se tiu ĉi kromprogramo jam ekzistas, ĝi estos ĝisdatigita.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW

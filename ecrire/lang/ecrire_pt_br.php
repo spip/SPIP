@@ -699,6 +699,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'plugin_info_automatique_liste_update' => 'Atualizar as listas',
 'plugin_info_automatique_ou' => 'ou...',
 'plugin_info_automatique_select' => 'Selecione abaixo um plugin: O SPIP o transferirá e o instalará no diretório <code>@rep@</code>; se o plugin já existir, será atualizado.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'As extensões abaixo são carregadas e ativadas no diretório @extensions@.',
 'plugin_info_extension_2' => 'Elas não são desativáveis.',

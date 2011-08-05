@@ -708,6 +708,7 @@ in einer Farbe, die den Status anzeigt :',
 'plugin_info_automatique_liste_update' => 'Listen aktualisieren',
 'plugin_info_automatique_ou' => 'oder...',
 'plugin_info_automatique_select' => 'Wählen Sie ein Plugin aus. SPIP wird es herunterladen und im Verzeichnis <code>@rep@</code> installieren. Falls das Plugin bereits installiert ist, wird es auf den neuesten Stand gebracht.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'Die Deklaration dieses Plugins ist nicht korrekt.',
 'plugin_info_extension_1' => 'Diese Erweiterungen liegen im Verzeichnis @extensions@ und sind aktiviert.',
 'plugin_info_extension_2' => 'Man kann sie nicht deaktivieren.',

@@ -717,6 +717,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'plugin_info_automatique_liste_update' => 'Hizivaat ar rolloù',
 'plugin_info_automatique_ou' => 'pe...',
 'plugin_info_automatique_select' => 'Diuzit un adveziant amañ a-is : pellgarget e vo gant SPIP ha staliet er c\'havlec\'h <code>@rep@</code> ; ma\'z eus eus an adveziant-mañ c\'hoazh e vo hizivaet.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW

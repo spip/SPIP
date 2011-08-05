@@ -717,6 +717,7 @@ cu o culoare care le indică starea :',
 'plugin_info_automatique_liste_update' => 'Aduceţi listele la zi',
 'plugin_info_automatique_ou' => 'sau...',
 'plugin_info_automatique_select' => 'Selecţionaţi mai jos un plug-in : SPIP o să îl descarce şi îl va instala în directorul <code>@rep@</code> ; dacă acest plug-in există deja, el va fi adus la zi.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW

@@ -750,6 +750,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'plugin_info_automatique_ou' => 'o puru ...',
 'plugin_info_automatique_select' => 'Sceglie quì sottu un plugin : SPIP u scaricherà, poi u stallerà in u cartulare <code>@rep@</code>. 
 	S\'ellu ci era digià, serà aghjurnata.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW

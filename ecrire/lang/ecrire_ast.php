@@ -736,6 +736,7 @@ con una color que indica el estáu:',
 'plugin_info_automatique_liste_update' => 'Actualizar les llistes',
 'plugin_info_automatique_ou' => 'o...',
 'plugin_info_automatique_select' => 'Seleiciona un plugin d\'embaxo: SPIP va descargalu y anicialu nel direutoriu <code>@rep@</code> ; si el plugin ya esiste, pondrase al día.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les estensiones darréu se carguen y s\'activen nel direutoriu @extensions@.',
 'plugin_info_extension_2' => 'Estes nun pueden desactivase.',

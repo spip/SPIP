@@ -728,6 +728,7 @@ Le traduzioni sono associate all\'originale,
 'plugin_info_automatique_liste_update' => 'Aggiornare gli elenchi',
 'plugin_info_automatique_ou' => 'oppure...',
 'plugin_info_automatique_select' => 'Selezionata un\'estensione qui sotto: SPIP la scaricherà e la installerà nella cartella <code>@rep@</code>; se questo estensione è già presente verrà aggiornata.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @extensions@.',
 'plugin_info_extension_2' => 'Questo non pu&amp;ugrave; essere disinstallato.',
