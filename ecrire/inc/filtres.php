@@ -2847,4 +2847,10 @@ function filtre_nettoyer_titre_email_dist($titre){
 	include_spip('inc/envoyer_mail');
 	return nettoyer_titre_email($titre);
 }
+
+function filtre_chercher_rubrique_dist($titre,$id_objet, $id_parent, $objet, $id_secteur, $restreint,$actionable = false, $retour_sans_cadre=false){
+	include_spip('inc/filtres_ecrire');
+	return chercher_rubrique($titre,$id_objet, $id_parent, $objet, $id_secteur, $restreint,$actionable, $retour_sans_cadre);
+}
+
 ?>
