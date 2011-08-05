@@ -108,11 +108,14 @@ Zhen QIN (zhen_q@21cn.com)',
 'date_de_mois_9' => '@nommois@@j@日',
 'date_demain' => '明天',
 'date_fmt_heures_minutes' => '@h@:@m@',
+'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
 'date_fmt_jour_heure' => '@jour@@heure@时',
 'date_fmt_jour_mois' => '@nommois@@jour@日',
 'date_fmt_jour_mois_annee' => '@annee@年@nommois@@jour@日',
 'date_fmt_mois_annee' => '@annee@年@nommois@',
 'date_fmt_nomjour_date' => '@nomjour@ 日@date@',
+'date_fmt_periode_from' => 'Du', # NEW
+'date_fmt_periode_to' => 'au', # NEW
 'date_heures' => '小时',
 'date_hier' => '昨天',
 'date_il_y_a' => ' @delai@以前',

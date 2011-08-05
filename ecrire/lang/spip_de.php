@@ -107,11 +107,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_mois_9' => '@j@ @nommois@',
 'date_demain' => 'morgen',
 'date_fmt_heures_minutes' => '@h@ Uhr @m@ Minuten',
+'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
 'date_fmt_jour_heure' => '@jour@ um @heure@',
 'date_fmt_jour_mois' => '@jour@. @nommois@',
 'date_fmt_jour_mois_annee' => '@jour@. @nommois@ @annee@',
 'date_fmt_mois_annee' => '@nommois@ @annee@',
 'date_fmt_nomjour_date' => 'am @nomjour@ @date@',
+'date_fmt_periode_from' => 'Du', # NEW
+'date_fmt_periode_to' => 'au', # NEW
 'date_heures' => 'Stunden',
 'date_hier' => 'gestern',
 'date_il_y_a' => 'vor @delai@',
@@ -351,7 +354,7 @@ wird Ihre Adresse beibehalten):
 'info_contenance' => 'Diese Website enthält:',
 'info_contribution' => 'Beiträge',
 'info_copyright' => '@spip@ ist freie Software im Sinne der @lien_gpl@.',
-'info_copyright_doc' => 'Weitere Informationen finden Sie unter <a href="@spipnet@">http://www.spip.net/de</a>.', # MODIF
+'info_copyright_doc' => 'Weitere Informationen finden Sie unter <a href="@spipnet@">@spipnet_affiche@</a>.',
 'info_copyright_gpl' => 'GNU Public License',
 'info_cours_edition' => 'In Bearbeitung',
 'info_creer_repertoire' => 'Bitte legen Sie eine Datei oder ein Verzeichnis mit diesem Namen an: ',
@@ -500,7 +503,7 @@ wird Ihre Adresse beibehalten):
 'login_espace_prive' => 'Redaktionssystem',
 'login_identifiant_inconnu' => 'Benutzer «@login@» unbekannt.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (für diese Website):', # MODIF
+'login_login2' => 'Login-ID oder E-Mail:',
 'login_login_pass_incorrect' => '(Login oder Passwort falsch.)',
 'login_motpasseoublie' => 'Passwort vergessen?',
 'login_non_securise' => 'Achtung, dieses Formular ist nicht abgesichert. Wenn Sie sicher stellen wollen, dass Ihr Passwort nicht im Netzwerk mitgehört werden kann, aktivieren Sie bitte Javascript und',
