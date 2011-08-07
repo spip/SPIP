@@ -31,7 +31,7 @@ $spip_auteurs_liens = array(
 		"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL",
-		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
+		"vu"	=> "VARCHAR(6) DEFAULT 'non' NOT NULL");
 
 $spip_auteurs_liens_key = array(
 		"PRIMARY KEY"		=> "id_auteur,id_objet,objet",

@@ -383,4 +383,8 @@ $GLOBALS['maj'][18219] = array(
 	array('sql_alter',"TABLE spip_rubriques DROP export"),
 );
 
+$GLOBALS['maj'][18310] = array(
+	array('sql_alter',"TABLE spip_auteurs_liens CHANGE vu vu VARCHAR(6) DEFAULT 'non' NOT NULL"),
+);
+
 ?>
