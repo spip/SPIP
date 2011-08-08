@@ -176,7 +176,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 		include_spip('inc/recherche_to_array');
 		$to_array = charger_fonction('recherche_to_array', 'inc');
 		$results[$table] = $to_array($recherche,
-			array_merge($options, array('table' => $table))
+			array_merge($options, array('table' => $table, 'champs' => $champs))
 		);
 		##var_dump($results[$table]);
 
