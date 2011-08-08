@@ -306,7 +306,7 @@ function prive_echaffauder_dist($exec,$table,$table_sql,$desc_exec,$ext){
 
 	// page objet ou objet_edit
 	if (is_array($desc_exec)) {
-		$type = $desc_exec['type-page'];
+		$type = $desc_exec['type'];
 		$primary = $desc_exec['id_table_objet'];
 
 		if ($desc_exec['edition']===false)
