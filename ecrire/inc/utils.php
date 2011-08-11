@@ -1024,7 +1024,7 @@ function find_all_in_path($dir,$pattern, $recurs=false){
 // http://doc.spip.org/@autoriser_sans_cookie
 function autoriser_sans_cookie($nom)
 {
-  static $autsanscookie = array('aide_index', 'install', 'base_repair');
+  static $autsanscookie = array('install', 'base_repair');
   $nom = preg_replace('/.php[3]?$/', '', basename($nom));
   return in_array($nom, $autsanscookie);
 }
