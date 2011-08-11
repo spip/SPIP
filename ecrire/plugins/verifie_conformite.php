@@ -29,7 +29,12 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		foreach($matches as $tag=>$sous){
 			list($tagname,$atts) = spip_xml_decompose_tag($tag);
 			if ($tagname=='plugin' AND is_array($sous)){
+				// On rajoute la condition sur $n :
+				// -- en effet si $n==1 on a pas plus a choisir la balise que l'on ait
+				//    un attribut spip ou pas. Cela permet de traiter tous les cas mono-balise
+				//    de la meme facon.
 				if (!isset($atts['spip'])
+					OR $n==1
 					OR plugin_version_compatible($atts['spip'],$vspip)) {
 					// on prend la derniere declaration avec ce nom
 					$p = end($sous);
