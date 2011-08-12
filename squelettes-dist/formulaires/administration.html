@@ -1,25 +1,11 @@
  <div[ class="(#ENV{divclass,spip-admin-bloc})"] id='spip-admin' dir="#LANG_DIR">[
 	<a href="(#ENV{analyser})" class="spip-admin-boutons"
 		id="analyser"><:analyse_xml:>[ ((#ENV{xhtml_error}))]</a>]
-	[<a href="[(#ENV{voir_article})]" class="spip-admin-boutons"
-		id="voir_article"><:article:>
-			((#ENV{id_article}))</a>]
-	[<a href="[(#ENV{voir_breve})]" class="spip-admin-boutons"
-		id="voir_breve"><:breves:breve:>
-			((#ENV{id_breve}))</a>]
-	[<a href="[(#ENV{voir_rubrique})]" class="spip-admin-boutons"
-		id="voir_rubrique"><:rubrique:>
-			((#ENV{id_rubrique}))</a>]
-	[<a href="[(#ENV{voir_mot})]" class="spip-admin-boutons"
-		id="voir_mot"><:mots_clef:>
-			((#ENV{id_mot}))</a>]
-	[(#ENV{id_syndic}|oui)[(#AUTORISER{modifier,site,#ENV{id_syndic}}|oui)
-	<a href="[(#ENV{voir_site})]" class="spip-admin-boutons"
-		id="voir_site"><:info_site:>
-			[((#ENV{id_syndic}))]</a>]]
-	[<a href="[(#ENV{voir_auteur})]" class="spip-admin-boutons"
-		id="voir_auteur"><:auteur:>
-			((#ENV{id_auteur}))</a>]<!--extra-->[
+	[(#ENV{objet}|oui)
+		[<a href="[(#ENV{voir_#ENV{objet}})]" class="spip-admin-boutons"
+		id="voir_#ENV{objet}">[(#ENV{objet}|objet_info{texte_objet}|_T)]
+			((#ENV{id_objet}))</a>]
+	]<!--extra-->[
 	<a href="(#ENV{ecrire})" class="spip-admin-boutons"
 		id="ecrire"><:espace_prive:></a>]
 	<a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]" class="spip-admin-boutons"
