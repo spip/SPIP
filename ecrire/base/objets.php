@@ -719,6 +719,12 @@ function objet_type($table_objet, $serveur=''){
  * @return bool
  */
 function objet_test_si_publie($objet,$id_objet, $serveur=''){
+	// voir si une fonction est definie pour faire le boulot
+	// elle a la priorite dans ce cas
+	if ($f = charger_fonction($objet."_test_si_publie","base",true))
+		return $f($objet,$id_objet, $serveur);
+
+	// sinon on se fie a la declaration de l'objet si presente
 	$id_table = $table_objet = table_objet($objet);
 	$id_table_objet = id_table_objet($objet, $serveur);
 	$trouver_table = charger_fonction('trouver_table', 'base');
@@ -743,9 +749,6 @@ function objet_test_si_publie($objet,$id_objet, $serveur=''){
 			return true;
 		return false;
 	}
-	// voir si une fonction est definie pour faire le boulot
-	if ($f = charger_fonction($objet."_test_si_publie","base",true))
-		return $f($objet,$id_objet, $serveur);
 
 	// si pas d'info statut ni de fonction : l'objet est publie
 	return true;
