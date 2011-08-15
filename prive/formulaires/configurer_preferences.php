@@ -20,7 +20,7 @@ function formulaires_configurer_preferences_charger_dist(){
 	$valeurs = array();
 	$valeurs['display_navigation'] = isset($GLOBALS['visiteur_session']['prefs']['display_navigation'])?$GLOBALS['visiteur_session']['prefs']['display_navigation']:'navigation_avec_icones';
 	$valeurs['display_outils'] = isset($GLOBALS['visiteur_session']['prefs']['display_outils'])?$GLOBALS['visiteur_session']['prefs']['display_outils']:'oui';
-	$valeurs['display'] = (isset($GLOBALS['visiteur_session']['prefs']['display']) AND $GLOBALS['visiteur_session']['prefs']['display']>0)?$GLOBALS['visiteur_session']['prefs']['display']:1;
+	$valeurs['display'] = (isset($GLOBALS['visiteur_session']['prefs']['display']) AND $GLOBALS['visiteur_session']['prefs']['display']>0)?$GLOBALS['visiteur_session']['prefs']['display']:2;
 	$valeurs['couleur'] = (isset($GLOBALS['visiteur_session']['prefs']['couleur']) AND $GLOBALS['visiteur_session']['prefs']['couleur']>0)?$GLOBALS['visiteur_session']['prefs']['couleur']:1;
 	$valeurs['spip_ecran'] = $GLOBALS['spip_ecran'];
 

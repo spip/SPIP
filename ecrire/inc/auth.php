@@ -223,7 +223,7 @@ function auth_init_droits($row)
 	// si prefs pas definies, les definir par defaut
 	if (!isset($GLOBALS['visiteur_session']['prefs']['couleur'])){
 		$GLOBALS['visiteur_session']['prefs']['couleur'] = 1;
-		$GLOBALS['visiteur_session']['prefs']['display'] = 0;
+		$GLOBALS['visiteur_session']['prefs']['display'] = 2;
 		$GLOBALS['visiteur_session']['prefs']["display_navigation"] = "navigation_avec_icones";
 		$GLOBALS['visiteur_session']['prefs']["display_outils"] = "oui";
 	}
