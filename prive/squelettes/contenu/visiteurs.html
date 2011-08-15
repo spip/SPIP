@@ -25,3 +25,6 @@
 #VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}}|wrap{'<h3>'}
 }})
 ]
+[(#AUTORISER{creer,auteur})
+	[(#URL_ECRIRE{auteur_edit,new=oui}|icone_verticale{<:icone_creer_nouvel_auteur:>,auteur,new,right})]
+]
