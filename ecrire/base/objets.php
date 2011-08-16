@@ -557,8 +557,10 @@ function lister_tables_objets_surnoms(){
 			// cas de base type=>table
 			// et preg_replace(',^spip_|^id_|s$,',table)=>table
 			if ($infos['table_objet']){ // securite, si la fonction est appelee trop tot, c'est vide
-				$surnoms[$infos['type']] = $infos['table_objet'];
+				// optimisations pour table_objet
+				//$surnoms[$infos['type']] = $infos['table_objet'];
 				$surnoms[preg_replace(',^spip_|^id_|s$,', '', $infos['table_objet'])] = $infos['table_objet'];
+				$surnoms[preg_replace(',^spip_|^id_|s$,', '', $infos['type'])] = $infos['table_objet'];
 				if (is_array($infos['table_objet_surnoms']) AND count($infos['table_objet_surnoms']))
 					foreach($infos['table_objet_surnoms'] as $surnom)
 						$surnoms[$surnom] = $infos['table_objet'];
@@ -588,7 +590,11 @@ function lister_types_surnoms(){
 		$infos_tables = lister_tables_objets_sql();
 		foreach($infos_tables as $t=>$infos){
 			if ($infos['type']){ // securite, si la fonction est appelee trop tot, c'est vide
-				$surnoms[$infos['type']] = $infos['type']; // optimisation pour table_objet
+				// optimisations pour objet_type
+				//$surnoms[$infos['type']] = $infos['type'];
+				$surnoms[preg_replace(',^spip_|^id_|s$,', '', $infos['table_objet'])] = $infos['type'];
+				$surnoms[preg_replace(',^spip_|^id_|s$,', '', $infos['type'])] = $infos['type'];
+				// surnoms declares
 				if (is_array($infos['type_surnoms']) AND count($infos['type_surnoms']))
 					foreach($infos['type_surnoms'] as $surnom)
 						$surnoms[$surnom] = $infos['type'];
