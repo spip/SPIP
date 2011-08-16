@@ -296,10 +296,22 @@ function id_table_objet($type,$serveur='') {
 
 // http://doc.spip.org/@objet_type
 function objet_type($table_objet){
+	static $surnoms = null;
+	if (!$surnoms){
+		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
+		$surnoms = pipeline('declarer_type_surnoms', array());
+	}
+	
 	// scenario de base
 	// le type est decline a partir du nom de la table en enlevant le prefixe eventuel
 	// et la marque du pluriel
 	$type = preg_replace(',^spip_|s$,', '', $table_objet);
+	if (isset($surnoms[$type]))
+		return $surnoms[$type];
+	
+	// securite : eliminer les caracteres non \w
+	$type = preg_replace(',[^\w-],','',$type);
+	
 	// si le type redonne bien la table c'est bon
 	if ( (table_objet($type)==$table_objet)
 	  OR (table_objet_sql($type)==$table_objet))
