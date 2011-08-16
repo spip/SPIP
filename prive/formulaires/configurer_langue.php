@@ -52,6 +52,8 @@ function formulaires_configurer_langue_traiter_dist(){
 			// le test a defait ca:
 			utiliser_langue_visiteur();
 			$res['message_ok'] = _T('config_info_enregistree');
+			include_spip('inc/rubriques');
+			calculer_langues_rubriques();
 		}
 		// le test a defait ca:
 		utiliser_langue_visiteur();
