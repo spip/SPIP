@@ -31,6 +31,8 @@ function action_instituer_langue_objet_dist($objet,$id, $id_rubrique, $changer_l
 		}
 		else {
 			$langue_parent = sql_getfetsel("lang", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
+			if (!$langue_parent)
+				$langue_parent = $GLOBALS['meta']['langue_site'];
 			sql_updateq($table_objet_sql, array('lang'=>$langue_parent, 'langue_choisie'=>'non'), "$id_table_objet=".intval($id));
 			$changer_lang = $langue_parent;
 		}
