@@ -301,6 +301,7 @@ function traite_query($query, $db='', $prefixe='') {
 		}
 	}
 	$r = preg_replace(_SQL_PREFIXE_TABLE, '\1'.$pref, $query) . $suite;
+	var_dump($r);
 	#spip_log("traite_query: " . substr($r,0, 50) . ".... $db, $prefixe", _LOG_DEBUG);
 	return $r;
 }
@@ -402,14 +403,14 @@ function spip_mysql_create_view($nom, $query_select, $serveur='',$requeter=true)
 function spip_mysql_drop_table($table, $exist='', $serveur='',$requeter=true)
 {
 	if ($exist) $exist =" IF EXISTS";
-	return spip_mysql_query("DROP TABLE$exist `$table`", $serveur, $requeter);
+	return spip_mysql_query("DROP TABLE$exist $table", $serveur, $requeter);
 }
 
 // supprime une vue 
 // http://doc.spip.org/@spip_mysql_drop_view
 function spip_mysql_drop_view($view, $exist='', $serveur='',$requeter=true) {
 	if ($exist) $exist =" IF EXISTS";
-	return spip_mysql_query("DROP VIEW$exist `$view`", $serveur, $requeter);
+	return spip_mysql_query("DROP VIEW$exist $view", $serveur, $requeter);
 }
 
 // http://doc.spip.org/@spip_mysql_showbase
