@@ -24,11 +24,12 @@ function action_editer_article_dist($arg=null) {
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_article = intval($arg)) {
 		$id_parent = _request('id_parent');
-		if (!($id_parent AND $GLOBALS['visiteur_session']['id_auteur'])) {
-			include_spip('inc/headers');
-			redirige_url_ecrire();
-		}
-	  $id_article = article_inserer($id_parent);
+		if (!$id_parent)
+			$err = _L("creation interdite d'un article sans rubrique");
+		elseif(!autoriser('creerarticledans','rubrique',$id_parent))
+			$err = _L("vous n'avez pas le droit de creer un article");
+		else
+			$id_article = article_inserer($id_parent);
 	}
 
 	// Enregistre l'envoi dans la BD
