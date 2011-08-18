@@ -842,7 +842,7 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 'texte_effacer_base' => 'Effacer la base de données SPIP',
 'texte_effacer_donnees_indexation' => 'Effacer les données d\'indexation',
 'texte_effacer_statistiques' => 'Effacer les statistiques',
-'texte_en_cours_validation' => 'Les articles et brèves ci-dessous sont proposés à la publication.',
+'texte_en_cours_validation' => 'Les contenus ci-dessous sont en attente de validation.',
 'texte_enrichir_mise_a_jour' => 'Vous pouvez enrichir la mise en page de votre texte en utilisant des « raccourcis typographiques ».',
 'texte_fichier_authent' => '<b>SPIP doit-il créer les fichiers spéciaux <tt>.htpasswd</tt>
   et <tt>.htpasswd-admin</tt> dans le répertoire @dossier@ ?</b><p>
