@@ -11,7 +11,9 @@
 			#SET{close,'</ul></div>'}
 		][(#VALEUR{1}|=={2}|oui)
 			[(#GET{next}|=={next}|oui)#SET{next,#VALEUR}]
-			<li class="item[(#VALEUR{2}|=={#ENV{aide}}|oui)on#SET{next,next}]"><a href='[(#SELF|parametre_url{aide,#VALEUR{2}})]#contenu-aide' class="ajax nohistory">[(#VALEUR{3})]</a></li>
+			<li class="item[(#VALEUR{2}|=={#ENV{aide}}|oui)on#SET{next,next}]"><a
+							onclick="jQuery(this).closest('#cboxLoadedContent').scrollTop(0);"
+							href='[(#SELF|parametre_url{aide,#VALEUR{2}})]#contenu-aide' class="ajax nohistory">[(#VALEUR{3})]</a></li>
 			[(#GET{next}|non)#SET{prev,#VALEUR}]
 		]
 	</BOUCLE_menu>
@@ -33,8 +35,10 @@
 		</p>]
 	})]
 	<p>
-		[<a href="[(#SELF|parametre_url{aide,#GET{prev}|table_valeur{2}})]#contenu-aide" class="ajax nohistory">&lt; (#GET{prev}|table_valeur{3})</a> | ]
-		[<a href="[(#SELF|parametre_url{aide,#GET{next}|table_valeur{2}})]#contenu-aide" class="ajax nohistory">(#GET{next}|table_valeur{3}) &gt;</a>]
+		[<a onclick="jQuery(this).closest('#cboxLoadedContent').scrollTop(0);"
+				href="[(#SELF|parametre_url{aide,#GET{prev}|table_valeur{2}})]#contenu-aide" class="ajax nohistory">&lt; (#GET{prev}|table_valeur{3})</a> | ]
+		[<a onclick="jQuery(this).closest('#cboxLoadedContent').scrollTop(0);"
+				href="[(#SELF|parametre_url{aide,#GET{next}|table_valeur{2}})]#contenu-aide" class="ajax nohistory">(#GET{next}|table_valeur{3}) &gt;</a>]
 	</p>
 </div>
 
