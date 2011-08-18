@@ -59,6 +59,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'info_1_objet' => 'info_1_article',
 				'info_nb_objets' => 'info_nb_articles',
 				'texte_logo_objet' => 'logo_article',
+				'texte_langue_objet' => 'titre_langue_article',
 				'titre' => 'titre, lang',
 				'date' => 'date',
 				'principale' => 'oui',
@@ -247,6 +248,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'info_1_objet' => 'info_1_rubrique',
 				'info_nb_objets' => 'info_nb_rubriques',
 				'texte_logo_objet' => 'logo_rubrique',
+				'texte_langue_objet' => 'titre_langue_rubrique',
 				'titre'=>'titre, lang',
 				'date' => 'date',
 				'principale' => 'oui',
@@ -384,6 +386,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  * info_nb_objets
  *
  * texte_logo_objet
+ * texte_langue_objet
  *
  * principale
  * champs_contenu : utlise pour generer l'affichage par defaut du contenu
@@ -465,7 +468,9 @@ function renseigner_table_objet_sql($table_sql,&$infos){
 		$infos['texte_objet'] = $infos['type'].':'.'titre_'.$infos['type'];
 	if (!isset($infos['texte_logo_objet']))  // objet:titre_logo_objet "Logo de ce X"
 		$infos['texte_logo_objet'] = $infos['type'].':'.'titre_logo_'.$infos['type'];
-		
+	if (!isset($infos['texte_langue_objet']))  // objet:texte_langue_objet "Langue de ce X"
+		$infos['texte_logo_objet'] = $infos['type'].':'.'titre_langue_'.$infos['type'];
+
 	// objet:info_aucun_objet
 	if (!isset($infos['info_aucun_objet']))
 		$infos['info_aucun_objet'] = $infos['type'].':'.'info_aucun_'.$infos['type'];

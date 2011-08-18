@@ -10,7 +10,7 @@
 		]
 		<ul>
 			<li class="editer editer_changer_lang long_label obligatoire[(#ENV**{erreurs}|table_valeur{changer_lang}|oui)erreur]">
-				<label for="changer_lang">[(#VAL{titre_langue_}|concat{#ENV{_objet}}|_T)]</label>[
+				<label for="changer_lang">[(#ENV{_objet}|objet_info{texte_langue_objet}|_T)]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{changer_lang})</span>
 			]<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>
 				[(#ENV{langue}|?{[(#ENV{langue}|traduire_nom_langue)],[((#ENV{langue_parent}|traduire_nom_langue))]})]
