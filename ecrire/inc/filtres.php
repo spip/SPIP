@@ -234,17 +234,6 @@ function image_filtrer($args){
 	return $texte;
 }
 
-// pour les feuilles de style
-function filtre_background_image_dist ($img, $couleur, $pos="") {
-	if (!function_exists("imagecreatetruecolor")
-	  OR !include_spip('filtres/images_transforme')
-	  OR !function_exists('image_sepia')
-	  OR !function_exists('image_aplatir')
-	  )
-		return "background-color: #$couleur;";
-	return "background: url(".url_absolue(extraire_attribut(image_aplatir(image_sepia($img, $couleur),"gif","cccccc", 64, true), "src")).") $pos;";
-}
-
 //
 // Retourner taille d'une image
 // pour les filtres |largeur et |hauteur
