@@ -86,6 +86,16 @@ function url_absolue($url, $base='') {
 	return suivre_lien($base, $url);
 }
 
+/**
+ * Supprimer le protocole d'une url absolue
+ * pour en faire une url relative au protocole
+ * @param string $url_absolue
+ * @return string
+ */
+function url_relative_protocole($url_absolue){
+	return preg_replace(";^[a-z]{3,7}://;i","//",$url_absolue);
+}
+
 // un filtre pour transformer les URLs relatives en URLs absolues ;
 // ne s'applique qu'aux textes contenant des liens
 // http://doc.spip.org/@liens_absolus
