@@ -46,7 +46,7 @@ function suivre_lien($url, $lien) {
 
 	if (preg_match(',^(mailto|javascript):,iS', $lien))
 		return $lien;
-	if (preg_match(',^([a-z0-9]+://.*?)(/.*)?$,iS', $lien, $r))
+	if (preg_match(';^((?:[a-z]{3,7}:)?//.*?)(/.*)?$;iS', $lien, $r))
 		return $r[1].resolve_path($r[2]);
 
 	# L'url site spip est un lien absolu aussi
@@ -56,7 +56,7 @@ function suivre_lien($url, $lien) {
 
 	# lien relatif, il faut verifier l'url de base
 	# commencer par virer la chaine de get de l'url de base
-	if (preg_match(',^(.*?://[^/]+)(/.*?/?)?([^/#?]*)([?][^#]*)?(#.*)?$,S', $url, $regs)) {
+	if (preg_match(';^((?:[a-z]{3,7}:)?//[^/]+)(/.*?/?)?([^/#?]*)([?][^#]*)?(#.*)?$;S', $url, $regs)) {
 		$debut = $regs[1];
 		$dir = !strlen($regs[2]) ? '/' : $regs[2];
 		$mot = $regs[3];
