@@ -35,12 +35,16 @@ function install_etape_3b_dist()
 		     : ((strlen($login)<3) ?
 			_T('info_login_trop_court')
 			: ''));
+		include_spip('inc/filtres');
+		if (!$echec AND $email AND !email_valide($email))
+			$echec = _T('form_email_non_valide');
 		if ($echec) {
 			echo minipres(
 			'AUTO',
-			"<h2>$echec</h2>\n".
 			info_progression_etape(3,'etape_','install/', true).
-			"<p class='resultat echec'>"._T('avis_connexion_echec_2')."</p>"
+			"<div class='error'><h3>$echec</h3>\n".
+			"<p>"._T('avis_connexion_echec_2')."</p>".
+			"</div>"
 			);
 			exit;
 		}

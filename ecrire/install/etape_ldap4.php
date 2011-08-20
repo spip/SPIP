@@ -37,8 +37,8 @@ function install_etape_ldap4_dist()
 	if ($fail) {
 		echo info_etape(_T('info_chemin_acces_annuaire')),
 			info_progression_etape(3,'etape_ldap','install/', true),
-			"<p class='resultat'><b>"._T('avis_operation_echec')."</b></p><p>"._T('avis_chemin_invalide_1'),
-			" (<tt>".htmlspecialchars($base_ldap)."</tt>) "._T('avis_chemin_invalide_2')."</p>";
+			"<div class='error'><p><b>"._T('avis_operation_echec')."</b></p><p>"._T('avis_chemin_invalide_1'),
+			" (<tt>".htmlspecialchars($base_ldap)."</tt>) "._T('avis_chemin_invalide_2')."</p></div>";
 	}
 	else {
 		info_etape(_T('info_reglage_ldap'));

@@ -49,7 +49,7 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 		else {
 		  $re = "Le nom de la base doit correspondre a $re";
 		  spip_log($re);
-		  return "<!--\n$re\n-->";
+		  return "<p>"._T("avis_connexion_erreur_nom_base")."</p><!--\n$re\n-->";
 		}
 	}
 
@@ -272,9 +272,11 @@ function install_etape_3_dist()
 		$res = install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db, $sel_db, $chmod_db);
 
 		if ($res) {
-			$res .= info_progression_etape(2,'etape_','install/', true);
-
-			$res .= "<p class='resultat echec'><b>"._T('avis_operation_echec')."</b></p>"._T('texte_operation_echec');
+			$res = info_progression_etape(2,'etape_','install/', true)
+				. "<div class='error'><h3>"._T('avis_operation_echec')."</h3>"
+			  . $res
+			  . "<p>"._T('texte_operation_echec')."</p>"
+			  . "</div>";
 		}
 	
 	} else { 
@@ -300,9 +302,9 @@ function install_etape_3_dist()
 
 		$auteur_obligatoire = !sql_countsel('spip_auteurs');
 
-		$res =  "<p class='resultat ok'><b>"
+		$res =  "<div class='success'><h3>"
 		. _T('info_base_installee')
-		. "</b></p>"
+		. "</h3></div>"
 		. install_premier_auteur(_request('email'),
 					_request('login'),
 					_request('nom'),
