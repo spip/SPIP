@@ -20,7 +20,7 @@
 				[(#ENV{logo_on}|non)
 					<label for="logo_on_#ENV{objet}_#ENV{id_objet}">[(#ENV{_options}|table_valeur{label}|sinon{<:info_telecharger_nouveau_logo:>})]</label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_on})</span>
-					]<input type='file' class='file' name='logo_on' size="[(#ENV{_options}|table_valeur{size_input}|sinon{15})]" id='logo_on_#ENV{objet}_#ENV{id_objet}' value="" />
+					]<input type='file' class='file' name='logo_on' size="[(#ENV{_options}|table_valeur{size_input}|sinon{12})]" id='logo_on_#ENV{objet}_#ENV{id_objet}' value="" />
 					#SET{valider,' '}
 				]
 			]
@@ -36,7 +36,7 @@
 					<div style="display:none;" #SET{hide,' '}]>
 					<label for="logo_off"><:info_telecharger_nouveau_logo:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_off})</span>
-					]<input type='file' class='file' name='logo_off' size="15" id='logo_off_#ENV{objet}_#ENV{id_objet}' value="" />
+					]<input type='file' class='file' name='logo_off' size="[(#ENV{_options}|table_valeur{size_input}|sinon{12})]" id='logo_off_#ENV{objet}_#ENV{id_objet}' value="" />
 					#SET{valider,' '}
 					</div>
 				]
