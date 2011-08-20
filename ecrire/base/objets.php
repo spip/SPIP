@@ -469,7 +469,7 @@ function renseigner_table_objet_sql($table_sql,&$infos){
 	if (!isset($infos['texte_logo_objet']))  // objet:titre_logo_objet "Logo de ce X"
 		$infos['texte_logo_objet'] = $infos['type'].':'.'titre_logo_'.$infos['type'];
 	if (!isset($infos['texte_langue_objet']))  // objet:texte_langue_objet "Langue de ce X"
-		$infos['texte_logo_objet'] = $infos['type'].':'.'titre_langue_'.$infos['type'];
+		$infos['texte_langue_objet'] = $infos['type'].':'.'titre_langue_'.$infos['type'];
 
 	// objet:info_aucun_objet
 	if (!isset($infos['info_aucun_objet']))
