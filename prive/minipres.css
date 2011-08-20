@@ -77,6 +77,13 @@ body.minipres fieldset, body.minipres .fieldset  { border: 1px solid #ccc; paddi
 .install-plugins + .install-plugins {margin-top: 0;border-top: 0;}
 .install-plugins .result {display:block;position:absolute;top:10px;right:10px;font-weight:bold;}
 
+.formulaire_spip { background: none; border: none; margin: 0; padding: 0; }
+.formulaire_spip .boutons {text-align: right;}
+.formulaire_spip fieldset { margin: 0; padding: 0; border: 1px solid #babdb6; padding: 1em; font-size: 1em; }
+.formulaire_spip fieldset ul {margin: 0; padding: 0; list-style: none; }
+.formulaire_spip fieldset ul li label,
+.formulaire_spip fieldset ul li .erreur_message,
+.formulaire_spip fieldset ul li .details { display: block; width: auto; }
 
 /* Page de login
 ---------------------------------------------- */
@@ -87,24 +94,17 @@ body.minipres fieldset, body.minipres .fieldset  { border: 1px solid #ccc; paddi
 .page_login .formulaire_menu_lang select { display: inline; }
 .page_login .formulaire_menu_lang input.submit { display: inline; }
 .page_login .formulaire_login { clear: both; text-align: left; font-size: .9em; }
-.page_login .formulaire_login fieldset { margin: 0; padding: 0; border: 1px solid #babdb6; padding: 1em; font-size: 1em; }
 .page_login .formulaire_login fieldset .spip_logos { float: right; padding-left: 5px; }
-.page_login .formulaire_login fieldset ul { float: left; width: 70%; margin: 0; padding: 0; list-style: none; }
+.page_login .formulaire_login fieldset ul { float: left; width: 70%; }
 .page_login .formulaire_login fieldset ul li { margin: 0; padding: 0.50em 0; }
-.page_login .formulaire_login fieldset ul li label,
-.page_login .formulaire_login fieldset ul li .erreur_message,
-.page_login .formulaire_login fieldset ul li .details { display: block; width: auto; }
-.page_login .formulaire_login fieldset ul li label.nofx { display: inline; }
 .page_login .formulaire_login fieldset ul li input.text,
 .page_login .formulaire_login fieldset ul li input.password { width: 11em; margin: 0; display: inline; }
-.page_login .boutons { text-align: right; }
 .page_login .retour { clear: both; text-align: center; font-size: .9em; }
 
 
 /* Oublie du mot de passe
 ---------------------------------------------- */
 body.pass #minipres {}
-body.pass .formulaire_spip { background: none; border: none; margin: 0; padding: 0; }
 
 
 /* Couleurs des liens
