@@ -100,15 +100,15 @@ function virtuel_redirige($virtuel, $url=false){
 // 'url':   seulement U  (i.e. generer_url_RACCOURCI)
 
 // http://doc.spip.org/@calculer_url
-function calculer_url ($ref, $texte='', $pour='url', $connect='') {
-	$r = traiter_lien_implicite($ref, $texte, $pour, $connect);
-	return $r ? $r : traiter_lien_explicite($ref, $texte, $pour, $connect);
+function calculer_url ($ref, $texte='', $pour='url', $connect='', $echappe_typo = true) {
+	$r = traiter_lien_implicite($ref, $texte, $pour, $connect, $echappe_typo);
+	return $r ? $r : traiter_lien_explicite($ref, $texte, $pour, $connect, $echappe_typo);
 }
 
 define('_EXTRAIRE_LIEN', ",^\s*(http:?/?/?|mailto:?)\s*$,iS");
 
 // http://doc.spip.org/@traiter_lien_explicite
-function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
+function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='', $echappe_typo = true)
 {
 	if (preg_match(_EXTRAIRE_LIEN, $ref))
 		return ($pour != 'tout') ? '' : array('','','','');
@@ -121,7 +121,9 @@ function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
 		// evite l'affichage de trops longues urls.
 		$lien_court = charger_fonction('lien_court', 'inc');
 		$texte = $lien_court($texte);
-		$texte = "<html>".quote_amp($texte)."</html>";
+		if ($echappe_typo){
+			$texte = "<html>".quote_amp($texte)."</html>";
+		}
 	}
 
 	// petites corrections d'URL
