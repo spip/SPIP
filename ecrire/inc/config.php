@@ -419,7 +419,6 @@ function liste_metas()
 		'charset' => _DEFAULT_CHARSET,
 		'dir_img' => substr(_DIR_IMG,strlen(_DIR_RACINE)),
 
-		'multi_articles' => 'non',
 		'multi_rubriques' => 'non',
 		'multi_secteurs' => 'non',
 		'gerer_trad' => 'non',
