@@ -12,7 +12,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/editer_select');
+include_spip('inc/precharger_objet');
 
 
 // Recupere les donnees d'un article pour composer un formulaire d'edition
@@ -21,8 +21,8 @@ include_spip('inc/editer_select');
 // lier_trad = l'associer a l'article numero $lier_trad
 // new=oui = article a creer si on valide le formulaire
 // http://doc.spip.org/@inc_article_select_dist
-function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0) {
-	return select_objet('article', $id_article, $id_rubrique, $lier_trad, 'titre');
+function inc_precharger_article_dist($id_article, $id_rubrique=0, $lier_trad=0) {
+	return precharger_objet('article', $id_article, $id_rubrique, $lier_trad, 'titre');
 }
 
 
@@ -31,8 +31,8 @@ function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0) {
 // on initialise les donnees de maniere specifique
 //
 // (fonction facultative si pas de changement dans les traitements)
-function inc_article_select_trad_dist($id_article, $id_rubrique=0, $lier_trad=0) {
-	return select_objet_trad('article', $id_article, $id_rubrique, $lier_trad, 'titre');
+function inc_precharger_traduction_article_dist($id_article, $id_rubrique=0, $lier_trad=0) {
+	return precharger_traduction_objet('article', $id_article, $id_rubrique, $lier_trad, 'titre');
 }
 
 

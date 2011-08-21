@@ -29,7 +29,7 @@ include_spip('inc/autoriser'); // necessaire si appel de l'espace public
  *                             dans la declaration de l'objet
  * @return array couples cles / valeurs des champs du formulaire à charger.
 **/
-function select_objet($type, $id_objet, $id_rubrique=0, $lier_trad=0, $champ_titre = 'titre') {
+function precharger_objet($type, $id_objet, $id_rubrique=0, $lier_trad=0, $champ_titre = 'titre') {
 	global $connect_id_rubrique, $spip_lang;
 	
 	$table = table_objet_sql($type);
@@ -46,14 +46,14 @@ function select_objet($type, $id_objet, $id_rubrique=0, $lier_trad=0, $champ_tit
 	# il faudrait calculer $champ_titre ici
 	$is_rubrique = isset($desc['field']['id_rubrique']);
 	$is_secteur  = isset($desc['field']['id_secteur']);
-	
+
 	// si demande de traduction
 	// on recupere les valeurs de la traduction
 	if ($lier_trad){
-		if ($select = charger_fonction($type."_select_trad",'inc',true))
+		if ($select = charger_fonction("precharger_traduction_" . $type,'inc',true))
 			$row = $select($id_objet, $id_rubrique, $lier_trad);
 		else
-			$row = select_objet_trad($type, $id_objet, $id_rubrique, $lier_trad, $champ_titre);
+			$row = precharger_traduction_objet($type, $id_objet, $id_rubrique, $lier_trad, $champ_titre);
 	} else {
 		$row[$champ_titre] = '';
 		if ($is_rubrique) {
@@ -108,7 +108,7 @@ function select_objet($type, $id_objet, $id_rubrique=0, $lier_trad=0, $champ_tit
  * 
  * @return array couples cles / valeurs des champs du formulaire à charger
 **/
-function select_objet_trad($type, $id_objet, $id_rubrique=0, $lier_trad=0, $champ_titre = 'titre') {
+function precharger_traduction_objet($type, $id_objet, $id_rubrique=0, $lier_trad=0, $champ_titre = 'titre') {
 	$table = table_objet_sql($type);
 	$_id_objet = id_table_objet($table);
 
