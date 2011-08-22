@@ -19,6 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param int $id
  * @param string $objet
+ * @param array $set
  * @return array
  */
 function action_editer_objet_dist($id=null, $objet=null, $set=null) {
@@ -57,6 +58,10 @@ function action_editer_objet_dist($id=null, $objet=null, $set=null) {
  * @return mixed|string
  */
 function objet_modifier($objet, $id, $set=null) {
+	if (include_spip('action/editer_'.$objet)
+	  AND function_exists($modifier = $objet."_modifier"))
+		return $modifier($id,$set);
+
 	$err = '';
 
 	$table_sql = table_objet_sql($objet);
@@ -125,6 +130,9 @@ function objet_modifier($objet, $id, $set=null) {
  * @return bool|int
  */
 function objet_inserer($objet, $id_parent=null) {
+	if (include_spip('action/editer_'.$objet)
+	  AND function_exists($inserer = $objet."_inserer"))
+		return $inserer($id_parent);
 
 	$table_sql = table_objet_sql($objet);
 	$trouver_table = charger_fonction('trouver_table','base');
@@ -225,6 +233,9 @@ function objet_inserer($objet, $id_parent=null) {
  * @return mixed|string
  */
 function objet_instituer($objet, $id, $c, $calcul_rub=true) {
+	if (include_spip('action/editer_'.$objet)
+	  AND function_exists($instituer = $objet."_instituer"))
+		return $instituer($id,$c,$calcul_rub);
 
 	$table_sql = table_objet_sql($objet);
 	$trouver_table = charger_fonction('trouver_table','base');
