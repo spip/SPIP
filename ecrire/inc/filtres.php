@@ -346,9 +346,8 @@ function supprimer_caracteres_illegaux($texte) {
 	static $to = null;
 	
 	if (is_array($texte)) {
-		return array_map('corriger_caracteres_windows', $texte);
+		return array_map('supprimer_caracteres_illegaux', $texte);
 	}
-	
 	if (!$to) $to = str_repeat('-', strlen($from));
 	return strtr($texte, $from, $to);
 }
@@ -474,8 +473,9 @@ function PtoBR($texte){
 }
 
 // Couper les "mots" de plus de $l caracteres (souvent des URLs)
+// en mettant des espaces (par defaut, soft hyphen &#173: = &shy;)
 // http://doc.spip.org/@lignes_longues
-function lignes_longues($texte, $l = 70) {
+function lignes_longues($texte, $l = 70, $espace='&#173;') {
 	if ($l<1) return $texte;
 	if (!preg_match("/[\w,\/.]{".$l."}/UmsS", $texte))
 		return $texte;
@@ -500,7 +500,7 @@ function lignes_longues($texte, $l = 70) {
 	// note : on pourrait preferer couper sur les / , etc.
 	if (preg_match_all("/[\w,\/.]{".$l."}/UmsS", $texte, $longs, PREG_SET_ORDER)) {
 		foreach ($longs as $long) {
-			$texte = str_replace($long[0], $long[0].' ', $texte);
+			$texte = str_replace($long[0], $long[0].$espace, $texte);
 		}
 	}
 
@@ -1142,7 +1142,7 @@ function date_fin_semaine($annee, $mois, $jour) {
 // http://doc.spip.org/@agenda_connu
 function agenda_connu($type)
 {
-  return in_array($type, array('jour','mois','semaine','periode')) ? ' ' : '';
+  return in_array($type, array('jour','mois','semaine','periode', 'trimestre')) ? ' ' : '';
 }
 
 
@@ -1219,7 +1219,9 @@ function agenda_periode($type, $nb, $avec, $sans='')
 		$evt = array($sans, $avec, $min, $max);
 		$type = 'mois';
 	}
-	return http_calendrier_init($start, $type,  _request('echelle'), _request('partie_cal'), self('&'), $evt);
+	$ancre = _request('ancre');
+	$s =  self('&') . (preg_match('/^[\w-]+$/', $ancre) ? "#$ancre" : '');
+	return http_calendrier_init($start, $type,  _request('echelle'), _request('partie_cal'), $s, $evt);
 }
 
 
@@ -1230,7 +1232,7 @@ function agenda_controle($date='date', $jour='jour', $mois='mois', $annee='annee
 	$jour = _request($jour);
 	$mois = _request($mois);
 	$annee = _request($annee);
-	
+
 	if (!($jour||$mois||$anne)) {
 		if ($date = recup_date(_request($date))) {
 			list($annee, $mois, $jour ) = $date;
@@ -1317,11 +1319,10 @@ function extraire_multi($letexte, $lang=null, $echappe_span=false) {
 				$l = key($trads);
 				$trad = $trads[$l];
 				$typographie = charger_fonction(lang_typo($l), 'typographie');
-				$trad = $typographie($trad);
+				$trad = traiter_retours_chariots($typographie($trad));
 				$trad = explode("\n", $trad);
 				foreach($trad as $i => $ligne) {
 					if (strlen($ligne)) {
-						$e = true;
 						$ligne = code_echappement($ligne, 'multi');
 						$ligne = str_replace("'", '"', inserer_attribut($ligne, 'lang', $l));
 						if (lang_dir($l) !== lang_dir($lang))
@@ -1812,7 +1813,7 @@ function form_hidden($action) {
 			.'"'
 			. (is_null($val)
 				? ''
-				: ' value="'.entites_html($val).'"'
+				: ' value="'.str_replace("'","&#39;",entites_html($val)).'"'
 				)
 			. ' type="hidden" />';
 	}
@@ -1917,12 +1918,17 @@ function urls_absolues_css($contenu, $source) {
 		create_function('$x',
 			'return "url(\"".suivre_lien("'.$path.'",$x[1])."\")";'
 		), $contenu);
-	// pour les progid:DXImageTransform.Microsoft.AlphaImageLoader(src=...,..)
+
+  // les directives filter ... progid:DXImageTransform.Microsoft.AlphaImageLoader(src=...,..)
+	// de IEx prennent des urls relatives a la page, et non a la css
+	// ne pas y toucher.
+	/*
 	$contenu = preg_replace_callback(
 		";\(\s*src=['\"]?([^'\"/][^:]*)['\"]?\s*(,|\));Uims",
 		create_function('$x',
 			'return "(src=\"".suivre_lien("'.$path.'",$x[1])."\"".$x[2];'
 		), $contenu);
+	 */
 	return $contenu;
 }
 
