@@ -875,6 +875,7 @@ prive/vignettes/xml.png -text
 prive/vignettes/zip.png -text
 /rien.gif -text
 /spip.php -text
+squelettes-dist/agenda_trimestre.html -text
 squelettes-dist/favicon.ico.html -text
 squelettes-dist/feed.png -text
 squelettes-dist/formulaires/ecrire_auteur.php -text
