@@ -14,13 +14,13 @@
 // (cette distinction est obsolete a present, on la garde provisoirement
 // par souci de compatiilite).
 
-if (isset($GLOBALS['_INC_PUBLIC'])) {
+if (isset($GLOBALS['_INC_PUBLIC']) AND $GLOBALS['_INC_PUBLIC']) {
 
 	echo recuperer_fond($fond, $contexte_inclus, array(), _request('connect'));
 
 } else {
 
-	$GLOBALS['_INC_PUBLIC'] = 0;
+	$GLOBALS['_INC_PUBLIC'] = 1;
 	define('_PIPELINE_SUFFIX',  test_espace_prive()?'_prive':'');
 
 	// Faut-il initialiser SPIP ? (oui dans le cas general)
