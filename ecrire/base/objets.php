@@ -136,6 +136,8 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 					'refuse' => 'texte_statut_refuse',
 					'poubelle' => 'texte_statut_poubelle',
 				),
+				'texte_changer_statut' => 'texte_article_statut',
+				'aide_changer_statut' => 'artstatut',
 				'tables_jointures' => array(
 					#'id_auteur' => 'auteurs_liens' // declaration generique plus bas
 				),
