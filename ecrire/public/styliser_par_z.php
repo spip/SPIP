@@ -200,6 +200,7 @@ function z_blocs($espace_prive=false) {
  * @param string $z_contenu
  * @param string $type
  * @param string $ext
+ * @param bool $echaffauder
  * @return mixed
  */
 function z_contenu_disponible($prefix_path,$z_contenu,$type,$ext,$echaffauder=true){
