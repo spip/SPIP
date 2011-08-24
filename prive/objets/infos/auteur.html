@@ -3,7 +3,7 @@
 <div class='numero'><:titre_cadre_numero_auteur:><p>#ID_AUTEUR</p></div>
 
 <div class="statut">
-[<p><:info_statut_auteur:> <strong>(#STATUT|traduire_statut_auteur{#BIO*})</strong></p>]
+[<p>[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:info_statut_auteur_2:>,<:info_statut_auteur:>})] <strong>(#STATUT|traduire_statut_auteur{#BIO*})</strong></p>]
 [(#REM) Cette autorisation porte sur l'auteur parcouru dans la boucle ! ]
 [(#AUTORISER{webmestre,'',0,#ID_AUTEUR}|oui)
 	[<p>(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:info_admin_je_suis_webmestre:>,<:info_admin_webmestre:>})</p>]
@@ -28,7 +28,7 @@
 	</div>
 </B_restreint>
 [(#STATUT|=={0minirezo}|oui)
-	<p><:info_admin_gere_toutes_rubriques:></p>
+	[<p>(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:info_admin_gere_toutes_rubriques_2:>,<:info_admin_gere_toutes_rubriques:>})</p>]
 ]
 <//B_restreint>
 </div>

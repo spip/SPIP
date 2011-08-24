@@ -62,10 +62,10 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 			AND !strlen(trim($email))
 			AND $email!=($email_ancien=sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur)))
 			){
-			$erreurs['email'] = _T('form_email_non_valide');
+			$erreurs['email'] = (($id_auteur==$GLOBALS['visiteur_session']['id_auteur'])?_T('form_email_non_valide'):_T('form_prop_indiquer_email'));
 		}
 		else if (!email_valide($email)){
-			$erreurs['email'] = _T('form_email_non_valide');
+			$erreurs['email'] = (($id_auteur==$GLOBALS['visiteur_session']['id_auteur'])?_T('form_email_non_valide'):_T('form_prop_indiquer_email'));
 		}
 	}
 
