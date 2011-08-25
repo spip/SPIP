@@ -193,7 +193,7 @@ function inc_envoyer_mail_dist($destinataire, $sujet, $corps, $from = "", $heade
 	switch($hebergeur) {
 	case 'lycos':
 		$queue_mails[] = array(
-			'email' => $email,
+			'email' => $destinataire,
 			'sujet' => $sujet,
 			'texte' => $texte,
 			'headers' => $headers);
@@ -201,7 +201,7 @@ function inc_envoyer_mail_dist($destinataire, $sujet, $corps, $from = "", $heade
 	case 'free':
 		return false;
 	default:
-		return @mail($email, $sujet, $texte, $headers);
+		return @mail($destinataire, $sujet, $texte, $headers);
 	}
 }
 
