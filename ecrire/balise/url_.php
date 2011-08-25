@@ -73,12 +73,9 @@ function balise_URL__dist($p) {
 	} elseif ($f = charger_fonction($nom, 'balise', true)) {
 		return $f($p);
 	}else {
-		$code = champ_sql($nom, $p);
-		if (strpos($code, '@$Pile[0]') !== false) {
-			$nom = strtolower(substr($nom,4));
-			$code = generer_generer_url($nom, $p);
-			if ($code === NULL) return NULL;
-		}
+		$nom = strtolower(substr($nom,4));
+		$code = generer_generer_url($nom, $p);
+		$code = champ_sql($nom, $p, $code);
 		if (!$p->etoile)
 			$p->code = "vider_url($code)";
 		$p->interdire_scripts = false;

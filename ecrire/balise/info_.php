@@ -29,11 +29,9 @@ function balise_INFO__dist($p){
 		return $p;
 	}
 	else {
-		$p->code = champ_sql($info, $p, false);
-		if (strpos($p->code, '@$Pile[0]') !== false) {
-			$info = strtolower(substr($info,5));
-			$p->code = "generer_info_entite($id_objet, $type_objet, '$info'".($p->etoile?","._q($p->etoile):"").")";
-		}
+		$info = strtolower(substr($info,5));
+		$code = "generer_info_entite($id_objet, $type_objet, '$info'".($p->etoile?","._q($p->etoile):"").")";
+		$p->code = champ_sql($info, $p, $code);
 		$p->interdire_scripts = true;
 		return $p;
 	}
