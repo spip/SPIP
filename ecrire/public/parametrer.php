@@ -76,15 +76,17 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 
 		if (!$composer)
 			$composer = charger_fonction('composer', 'public');
-		$code = $composer($skel, $mime_type, $gram, $sourcefile, $connect);
-	} else $code = '';
+		$fonc = $composer($skel, $mime_type, $gram, $sourcefile, $connect);
+	}
+	else
+		$fonc = '';
 
-	if (!$code) { // squelette inconnu (==='') ou faux (===false)
-		$page = $code;
-	} else {
-	// Preparer l'appel de la fonction principale du squelette 
+	if (!$fonc) { // squelette inconnu (==='') ou faux (===false)
+		$page = $fonc;
+	}
+	else {
+		// Preparer l'appel de la fonction principale du squelette 
 
-		list($fonc) = $code;
 		spip_timer($a = 'calcul page '.rand(0,1000));
 
 		// On cree un marqueur de notes unique lie a cette composition

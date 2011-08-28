@@ -36,8 +36,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 	$nom = calculer_nom_fonction_squel($squelette, $mime_type, $connect);
 
 	//  si deja en memoire (INCLURE  a repetition) c'est bon.
-
-	if (function_exists($nom)) return array($nom);
+	if (function_exists($nom)) return $nom;
 
 	if (defined('_VAR_MODE') AND _VAR_MODE == 'debug')
 		$GLOBALS['debug_objets']['courant'] = $nom;
@@ -45,19 +44,23 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 	$phpfile = sous_repertoire(_DIR_SKELS,'',false,true) . $nom . '.php';
 
 	// si squelette est deja compile et perenne, le charger
-	if (!squelette_obsolete($phpfile, $source)
-	AND lire_fichier ($phpfile, $skel_code,
-	array('critique' => 'oui', 'phpcheck' => 'oui'))){
-		#print_r($skel_code);
-		eval('?'.'>'.$skel_code);
-#	spip_log($skel_code, 'comp')
+	if (!squelette_obsolete($phpfile, $source)){
+		include_once $phpfile;
+		#if (!squelette_obsolete($phpfile, $source)
+		#  AND lire_fichier ($phpfile, $skel_code,
+		#  array('critique' => 'oui', 'phpcheck' => 'oui'))){
+		## eval('?'.'>'.$skel_code);
+		#	 spip_log($skel_code, 'comp')
+		#}
 	}
-	if (@file_exists($lib = $squelette . '_fonctions'.'.php'))
+
+	if (file_exists($lib = $squelette . '_fonctions'.'.php')){
 		include_once $lib;
+	}
 
 	// tester si le eval ci-dessus a mis le squelette en memoire
 
-	if (function_exists($nom)) return array($nom, $skel_code);
+	if (function_exists($nom)) return $nom;
 
 	// charger le source, si possible, et compiler 
 	if (lire_fichier ($source, $skel)) {
@@ -107,7 +110,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 		AND (_request('var_mode_affiche') == 'code')  )
 			erreur_squelette();
 	}
-	return $nom ? array($nom, $code) : false;
+	return $nom ? $nom : false;
 }
 
 function squelette_traduit($squelette, $sourcefile, $phpfile, $boucles)
