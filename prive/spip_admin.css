@@ -31,6 +31,7 @@ a:active.spip-admin-boutons,
 
 #debug_boucle fieldset { background-color: #ccf; }
 #debug_boucle fieldset fieldset { background-color: #fff; font-family: Verdana, Geneva, sans-serif; padding: 0.5em 1.5em; }
+#spip-debug code { background-color: #ccf;}
 
 #spip-boucles { min-height: 200px; max-height: 50%; margin: 0 0 1em 0; padding: .5em 0; overflow: -moz-scrollbars-vertical; overflow-y: auto; border-top: 1px solid #39F; border-bottom: 2px solid #666; }
 
