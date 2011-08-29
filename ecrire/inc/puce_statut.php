@@ -307,7 +307,7 @@ function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='articl
 
 // http://doc.spip.org/@afficher_script_statut
 function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act='') {
-	$h = generer_action_auteur("instituer_$type","$id-$statut");
+	$h = generer_action_auteur("instituer_objet","$type-$id-$statut");
 	$h = "selec_statut('$id', '$type', $n, jQuery('img',this).attr('src'), '$h');return false;";
 	$t = supprimer_tags($titre);
 	return "<a href=\"#\" onclick=\"$h\" title=\"$t\"$act>".http_img_pack($img,$t)."</a>";

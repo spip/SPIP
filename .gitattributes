@@ -25,6 +25,7 @@ ecrire/action/index.php -text
 ecrire/action/inscrire_auteur.php -text
 ecrire/action/instituer_langue_objet.php -text
 ecrire/action/instituer_langue_rubrique.php -text
+ecrire/action/instituer_objet.php -text
 ecrire/action/logout.php -text
 ecrire/action/menu_rubriques.php -text
 ecrire/action/preferer.php -text
