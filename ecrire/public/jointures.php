@@ -76,15 +76,16 @@ function trouver_champs_decomposes($champ, $desc){
  * @param bool $cond
  * @return string
  */
-function calculer_jointure(&$boucle, $depart, $arrivee, $col = '', $cond = false){
+function calculer_jointure(&$boucle, $depart, $arrivee, $col = '', $cond = false, $max_liens=5){
 	// les jointures minimales sont optimales :
 	// on contraint le nombre d'etapes en l'augmentant
 	// jusqu'a ce qu'on trouve une jointure ou qu'on atteigne la limite maxi 
-	$max_liens = 1;
+	$max = 1;
 	$res = false;
-	while ($max_liens<=5 AND !$res){
-		$res = calculer_chaine_jointures($boucle, $depart, $arrivee, array(), array(), $max_liens);
-		$max_liens++;
+	$milieu_exclus = ($col?$col:array());
+	while ($max<=$max_liens AND !$res){
+		$res = calculer_chaine_jointures($boucle, $depart, $arrivee, array(), $milieu_exclus, $max);
+		$max++;
 	}
 	if (!$res) return "";
 
@@ -289,11 +290,17 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu = array(), $
 
 	if (is_string($milieu_exclus))
 		$milieu_exclus = array($milieu_exclus);
+	// quand on a exclus id_objet comme cle de jointure, il faut aussi exclure objet
+	// faire une jointure sur objet tout seul n'a pas de sens
+	if (in_array('id_objet',$milieu_exclus) AND !in_array('objet',$milieu_exclus))
+		$milieu_exclus[] = 'objet';
 
 	list($dnom, $ddesc) = $depart;
 	list($anom, $adesc) = $arrivee;
-	if (!count($vu))
+	if (!count($vu)){
 		$vu[] = $dnom; // ne pas oublier la table de depart
+		$vu[] = $anom; // ne pas oublier la table d'arrivee
+	}
 
 	$akeys = array();
 	foreach ($adesc['key'] as $k)
@@ -347,8 +354,10 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu = array(), $
 	// sinon essayer de passer par une autre table
 	$new = $vu;
 	foreach ($boucle->jointures as $v){
-		if ($v && (!in_array($v, $vu)) &&
-		    ($def = $trouver_table($v, $boucle->sql_serveur))
+		if ($v
+		    AND !in_array($v, $vu)
+		    AND $def = $trouver_table($v, $boucle->sql_serveur)
+			  AND !in_array($def['table_sql'], $vu)
 		){
 			// ne pas tester les cles qui sont exclues a l'appel
 			// ie la cle de la jointure precedente
@@ -359,13 +368,18 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu = array(), $
 			       AND $max_iter--){
 				$jointure_directe_possible = reset($jointure_directe_possible);
 				$milieu = end($jointure_directe_possible);
-				if (is_string($milieu))
+				$exclure_fin = $milieu_exclus;
+				if (is_string($milieu)){
+					$exclure_fin[] = $milieu;
 					$test_cles[] = $milieu;
-				else
+				}
+				else{
+					$exclure_fin = array_merge($exclure_fin, $milieu);
 					$test_cles = array_merge($test_cles, $milieu);
+				}
 				// essayer de rejoindre l'arrivee a partir de cette etape intermediaire
-				// sans repasser par la meme cle milieu
-				$r = calculer_chaine_jointures($boucle, array($v, $def), $arrivee, $new, $milieu, $max_liens-1);
+				// sans repasser par la meme cle milieu, ni une cle deja vue !
+				$r = calculer_chaine_jointures($boucle, array($v, $def), $arrivee, $new, $exclure_fin, $max_liens-1);
 				if ($r){
 					array_unshift($r, $jointure_directe_possible);
 					return $r;

@@ -1205,26 +1205,30 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $c
 		if ($res = calculer_lien_externe_init($boucle, $joints, $col, $desc, $cond, $checkarrivee))
 			return $res;
 	}
-
-	$cle = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
-	if (!$cle) return '';
-	$t = array_search($cle[0], $boucle->from);
-	// transformer eventuellement id_xx en (id_objet,objet)
-	$cols = trouver_champs_decomposes($col,$cle[1]);
-	if ($t) {
-			$joindre = false;
-			foreach($cols as $col){
-			  $c = '/\b' . $t  . ".$col" . '\b/';
-			  if (trouver_champ($c, $boucle->where)) $joindre = true;
-			  else {
-			    // mais ca peut etre dans le FIELD pour le Having
-			    $c = "/FIELD.$t" .".$col,/";
-			    if (trouver_champ($c, $boucle->select)) $joindre = true;
-			  }
+	foreach($joints as $joint){
+		if ($arrivee = trouver_champ_exterieur($col, array($joint), $boucle, $checkarrivee)){
+			$t = array_search($arrivee[0], $boucle->from);
+			// transformer eventuellement id_xx en (id_objet,objet)
+			$cols = trouver_champs_decomposes($col,$arrivee[1]);
+			if ($t) {
+					$joindre = false;
+					foreach($cols as $col){
+						$c = '/\b' . $t  . ".$col" . '\b/';
+						if (trouver_champ($c, $boucle->where)) $joindre = true;
+						else {
+							// mais ca peut etre dans le FIELD pour le Having
+							$c = "/FIELD.$t" .".$col,/";
+							if (trouver_champ($c, $boucle->select)) $joindre = true;
+						}
+					}
+					if (!$joindre) return $t;
 			}
-		  if (!$joindre) return $t;
+			if ($res = calculer_jointure($boucle, array($boucle->id_table, $desc), $arrivee, $cols, $cond, 1))
+				return $res;
+		}
 	}
-	return calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $cols, $cond);
+	return '';
+
 }
 
 /**
