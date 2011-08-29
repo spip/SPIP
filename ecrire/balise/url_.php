@@ -157,12 +157,14 @@ function balise_URL_PAGE_dist($p) {
 		}
 	}
 	if (!$code) {
-	  $code = "''";
-	  $args = "preg_replace(array(',^.*[?],', ',^./,'), '', self('&'))";
-	} elseif (!$args) $args = "''";
-
-	$noentities = $p->etoile ? ", true" : '';
-	$p->code = "generer_url_public($code, $args$noentities)";
+		$noentities = $p->etoile ? "'&'" : '';
+		$code = "url_de_base() . preg_replace(',^./,', '', self($noentitites))";
+	} else{
+	  	if (!$args) $args = "''";
+		$noentities = $p->etoile ? ", true" : '';
+		$code = "generer_url_public($code, $args$noentities)";
+	}
+	$p->code = $code;
 	#$p->interdire_scripts = true;
 	return $p;
 }
