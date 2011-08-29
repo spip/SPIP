@@ -147,7 +147,7 @@ function info_copyright() {
 	return _T('info_copyright',
 		   array('spip' => "<b>SPIP $version</b> ",
 			 'lien_gpl' =>
-			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' onclick=\"window.open(this.href, 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"))
+			 "<a href='". generer_url_ecrire("aide", "aide=licence&var_lang=$spip_lang") . "' onclick=\"window.open(this.href, 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"))
 		. $secu;
 
 }
