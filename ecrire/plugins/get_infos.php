@@ -66,20 +66,27 @@ function plugins_get_infos_un($plug, $reload, $dir, &$cache)
 	}
 
 	if (($time = intval(@filemtime($file))) < 0) return false;
+	$md5 = md5_file($file);
 
 	$pcache = isset($cache[$dir][$plug]) 
-	  ? $cache[$dir][$plug] : array('filemtime' => 0);
+	  ? $cache[$dir][$plug] : array('filemtime' => 0, 'md5_file' => '');
 
-	if (((intval($reload) <= 0)
+	// si le cache est valide
+	if ((intval($reload) <= 0)
 		AND ($time > 0)
-		AND ($time <= $pcache['filemtime']))
-	OR (!($texte = spip_file_get_contents($file)))) {
+		AND ($time <= $pcache['filemtime'])
+	  AND $md5==$pcache['md5_file'])
+		return false;
+
+	// si on arrive pas a lire le fichier, se contenter du cache
+	if (!($texte = spip_file_get_contents($file))) {
 		return false;
 	}
 
 	$f = charger_fonction('infos_' . $desc, 'plugins');
 	$ret = $f($texte, $plug, $dir);
 	$ret['filemtime'] = $time;
+	$ret['md5_file'] = $md5;
 	$diff = ($ret != $pcache);
 
 	if ($diff) {

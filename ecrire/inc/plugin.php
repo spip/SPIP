@@ -344,6 +344,10 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	}
 	$actifs_avant = $GLOBALS['meta']['plugin'];
 	// recharger le xml des plugins a activer
+	// on forcer le reload ici, meme si le fichier xml n'a pas change
+	// pour ne pas rater l'ajout ou la suppression d'un fichier fonctions/options/administrations
+	// pourra etre evite quand on ne supportera plus les plugin.xml
+	// en deplacant la detection de ces fichiers dans la compilation ci dessous
 	list($infos,$liste) = liste_plugin_valides($plugin,true);
 	// trouver l'ordre d'activation
 	list($plugin_valides,$ordre,$reste) = plugin_trier($infos, $liste);
