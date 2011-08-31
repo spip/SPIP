@@ -119,7 +119,7 @@ function xml_parsestring($phraseur, $data)
 			 ('(' .
 			  _T('erreur_balise_non_fermee') .
 			  " <tt>" .
-			  $prhaseur->ouvrant[$phraseur->depth] .
+			  $phraseur->ouvrant[$phraseur->depth] .
 			  "</tt> " .
 			  _T('ligne') .
 			  " " .
@@ -240,7 +240,7 @@ function analyser_doctype($data)
 {
 	if (!preg_match(_REGEXP_DOCTYPE, $data, $page)) {
 		if (preg_match(_REGEXP_XML, $data, $page)) {
-			list(,$enetete, $topelement) = $page;
+			list(,$entete, $topelement) = $page;
 			if ($topelement == 'rss')
 			  return array($entete, 'PUBLIC', 
 				       _DOCTYPE_RSS,
