@@ -464,9 +464,15 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 
 function plugin_ongletbouton($nom, $val)
 {
-	$val =!$val ? 'array()'
-	: ("unserialize('".str_replace("'","\'",serialize($val))."')");
-	return "if (!function_exists('$nom')) {function $nom(){return $val;}}\n";
+	if (!$val) $val = array();
+	define("_UPDATED_$nom",$val = serialize($val));
+	define("_UPDATED_md5_$nom",$md5=md5($val));
+	$val = "unserialize('".str_replace("'","\'",$val)."')";
+	return
+		"if (!function_exists('$nom')) {\n"
+	 ."function $nom(){return defined('_UPDATED_$nom')?unserialize(_UPDATED_$nom):$val;}\n"
+		."function md5_$nom(){return defined('_UPDATED_md5_$nom')?_UPDATED_md5_$nom:'".$md5."';}\n"
+	 ."}\n";
 }
 
 // creer le fichier CACHE_PLUGIN_VERIF a partir de
