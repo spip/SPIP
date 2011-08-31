@@ -46,7 +46,7 @@ function cvtconf_formulaire_charger($flux){
 function cvtconf_formulaire_traiter($flux){
 	if ($form = $flux['args']['form']
 	  AND strncmp($form,'configurer_',11)==0 // un #FORMULAIRE_CONFIGURER_XXX
-		AND !charger_fonction("traiter","formulaires/$form/",true) // sans fonction charger()
+		AND !charger_fonction("traiter","formulaires/$form/",true) // sans fonction traiter()
 		) {
 
 		// charger les valeurs
@@ -85,7 +85,7 @@ function cvtconf_formulaire_traiter($flux){
  * @return array
  */
 function cvtconf_formulaires_configurer_recense($form){
-	$valeurs = array();
+	$valeurs = array('editable'=>' ');
 
 	// sinon cas analyse du squelette
 	if ($f = find_in_path($form.'.' . _EXTENSION_SQUELETTES, 'formulaires/')
