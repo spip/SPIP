@@ -228,14 +228,14 @@ function calculer_rubriques_publiees() {
 function propager_les_secteurs()
 {
 	// fixer les id_secteur des rubriques racines
-	sql_update('spip_rubriques', array('id_secteur'=>'id_rubrique'), "id_parent=0");
+	sql_update('spip_rubriques', array('id_secteur'=>'id_rubrique','profondeur'=>0), "id_parent=0");
 
 	// reparer les rubriques qui n'ont pas l'id_secteur de leur parent
 	do {
 		$continuer = false;
-		$r = sql_select("A.id_rubrique AS id, R.id_secteur AS secteur", "spip_rubriques AS A, spip_rubriques AS R", "A.id_parent = R.id_rubrique AND A.id_secteur <> R.id_secteur");
+		$r = sql_select("A.id_rubrique AS id, R.id_secteur AS secteur, R.profondeur+1 as profondeur", "spip_rubriques AS A, spip_rubriques AS R", "A.id_parent = R.id_rubrique AND (A.id_secteur <> R.id_secteur OR A.profondeur <> R.profondeur+1)");
 		while ($row = sql_fetch($r)) {
-			sql_update("spip_rubriques", array("id_secteur" => $row['secteur']), "id_rubrique=".$row['id']);
+			sql_update("spip_rubriques", array("id_secteur" => $row['secteur'],'profondeur' => $row['profondeur']), "id_rubrique=".$row['id']);
 			$continuer = true;
 		}
 	} while ($continuer);
