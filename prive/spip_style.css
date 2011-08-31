@@ -58,4 +58,5 @@ a.spip_url { color: #009; } /* liens url sortants */
 a.spip_glossaire { color: #060; } /* liens vers encyclopedie */
 a.spip_glossaire:hover { text-decoration: underline overline; }
 .on { font-weight: bold; } /* liens exposes */
-
+.url_long:after { content: "\2026"; }
+.url_long span { position:absolute; left:-1000px; width:500px; }
