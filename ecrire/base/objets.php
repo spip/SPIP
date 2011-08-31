@@ -146,6 +146,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 			'spip_auteurs' => array(
 				'page'=>'auteur',
 				'texte_retour' => 'icone_retour',
+				'texte_ajouter' => 'titre_ajouter_un_auteur',
 				'texte_modifier' => 'admin_modifier_auteur',
 				'texte_objets' => 'icone_auteurs',
 				'texte_objet' => 'public:auteur',
@@ -382,6 +383,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  * texte_retour
  * texte_modifier
  * texte_creer
+ * texte_ajouter
  * texte_objets
  * texte_objet
  *
@@ -468,6 +470,8 @@ function renseigner_table_objet_sql($table_sql,&$infos){
 		$infos['texte_modifier'] = $infos['type'].':'.'icone_modifier_'.$infos['type'];
 	if (!isset($infos['texte_creer']))
 		$infos['texte_creer'] = $infos['type'].':'.'icone_creer_'.$infos['type'];
+	if (!isset($infos['texte_ajouter'])) // Ajouter un X
+		$infos['texte_ajouter'] = $infos['type'].':'.'texte_ajouter_'.$infos['type'];
 	if (!isset($infos['texte_objets']))
 		$infos['texte_objets'] = $infos['type'].':'.'titre_'.$infos['table_objet'];
 	if (!isset($infos['texte_objet']))

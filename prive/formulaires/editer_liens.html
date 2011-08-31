@@ -15,7 +15,7 @@
 
 		[(#ENV{visible,0}|et{#ENV{editable}}|oui)
 			<div class="selecteur[(#ENV{recherche}|oui)filtre]">
-				<h3 class="titrem">[(#VAL{titre_ajouter_un_}|concat{#ENV{objet_source}}|_T)]</h3>
+				<h3 class="titrem">[(#ENV{objet_source}|objet_info{texte_ajouter}|_T)]</h3>
 				<INCLURE{fond=prive/objets/liste/#ENV{_vue_ajout},action='',env,ajax}>
 				[(#AUTORISER{creer,#ENV{objet_source}}|oui)
 				[(#REM|generer_url_ecrire_entite_edit{#ENV{objet_source}}
@@ -35,13 +35,13 @@
 			<div class="toggle_box_link" style="display:none;">
 					&#91;<a href="#"
 						onclick="jQuery(this).parents('div.toggle_box_link').hide('fast').siblings('.selecteur').show('fast');jQuery('#visible-#ENV{id}').attr('value',1);return false;"
-						>[(#VAL{titre_ajouter_un_}|concat{#ENV{objet_source}}|_T)]</a>&#93;
+						>[(#ENV{objet_source}|objet_info{texte_ajouter}|_T)]</a>&#93;
 			</div>
 		]
 	[(#ENV{editable})
 		[(#ENV{visible,0}|non)
 		<div class="toggle_box_link">
-			&#91;<button class="link" name="visible" value="1">[(#VAL{titre_ajouter_un_}|concat{#ENV{objet_source}}|_T)]</button>&#93;
+			&#91;<button class="link" name="visible" value="1">[(#ENV{objet_source}|objet_info{texte_ajouter}|_T)]</button>&#93;
 		</div>
 		]
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
