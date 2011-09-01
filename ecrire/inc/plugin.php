@@ -12,8 +12,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Regexp permettant de reperer les fichiers plugin.xml et paquet.xml
-define('_FILE_PLUGIN_CONFIG', '/(plugin|paquet)[.]xml$');
 // l'adresse du repertoire de telechargement et de decompactage des plugins
 define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 
@@ -26,33 +24,72 @@ include_spip('plugins/installer');
 // http://doc.spip.org/@liste_plugin_files
 function liste_plugin_files($dir_plugins = null){
 	static $plugin_files=array();
-
-	if (is_null($dir_plugins)) {
+	if (is_null($dir_plugins))
 		$dir_plugins = _DIR_PLUGINS;
-		if (defined('_DIR_PLUGINS_SUPPL'))
-			$dir_plugins_suppl = array_filter(explode(':',_DIR_PLUGINS_SUPPL));
-	}
-
 	if (!isset($plugin_files[$dir_plugins])
 	OR count($plugin_files[$dir_plugins]) == 0){
-		$plugin_files[$dir_plugins] = array();
-		foreach (preg_files($dir_plugins, _FILE_PLUGIN_CONFIG) as $plugin) {
-			$plugin_files[$dir_plugins][] = substr(dirname($plugin),strlen($dir_plugins));
+		foreach (fast_find_plugin_dirs($dir_plugins) as $plugin) {
+			$plugin_files[$dir_plugins][] = substr($plugin,strlen($dir_plugins));
 		}
-		sort($plugin_files[$dir_plugins]);
-
 		// hack affreux pour avoir le bon chemin pour les repertoires
 		// supplementaires ; chemin calcule par rapport a _DIR_PLUGINS.
 		if (isset($dir_plugins_suppl)) {
 			foreach($dir_plugins_suppl as $suppl) {
-				foreach (preg_files($suppl, _FILE_PLUGIN_CONFIG) as $plugin) {
-					$plugin_files[$dir_plugins][] = (_DIR_RACINE ?'': '../') .dirname($plugin);
+				foreach (fast_find_plugin_dirs($suppl) as $plugin) {
+					$plugin_files[$dir_plugins][] = (_DIR_RACINE ?'': '../') .$plugin;
 				}
 			}
 		}
+		sort($plugin_files[$dir_plugins]);
 	}
-
 	return $plugin_files[$dir_plugins];
+}
+
+function fast_find_plugin_dirs($dir,$max_prof=100) {
+	$fichiers = array();
+	// revenir au repertoire racine si on a recu dossier/truc
+	// pour regarder dossier/truc/ ne pas oublier le / final
+	$dir = preg_replace(',/[^/]*$,', '', $dir);
+	if ($dir == '') $dir = '.';
+
+	if (!is_dir($dir))
+		return $fichiers;
+	if (is_plugin_dir($dir,'')) {
+		$fichiers[] = $dir;
+		return $fichiers;
+	}
+	if ($max_prof<=0)
+		return $fichiers;
+
+	$subdirs = glob("$dir/*",GLOB_ONLYDIR);
+	foreach($subdirs as $d){
+		$fichiers = array_merge($fichiers,fast_find_plugin_dirs("$d/",--$max_prof));
+	}
+	return $fichiers;
+}
+
+function is_plugin_dir($dir,$dir_plugins = null){
+	if (is_array($dir)){
+		foreach($dir as $k=>$d){
+			if (!is_plugin_dir($d,$dir_plugins))
+				unset($dir[$k]);
+		}
+		return $dir;
+	}
+	if (is_null($dir_plugins))
+		$dir_plugins = _DIR_PLUGINS;
+	$search = array("$dir_plugins$dir/plugin.xml","$dir_plugins$dir/paquet.xml");
+	if ($dir_plugins==_DIR_PLUGINS AND defined('_DIR_PLUGINS_SUPPL')){
+		$dir_plugins_suppl = array_filter(explode(':',_DIR_PLUGINS_SUPPL));
+		foreach($dir_plugins_suppl as $ds)
+		$search[] = $ds."$dir/plugin.xml";
+		$search[] = $ds."$dir/paquet.xml";
+	}
+	$search = "{".implode(",",$search)."}";
+	if (glob($search,GLOB_BRACE))
+		return $dir;
+	else
+		return '';
 }
 
 // http://doc.spip.org/@plugin_version_compatible
@@ -334,8 +371,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		if (isset($GLOBALS['meta']['plugin_attente'])
 		  AND $a = unserialize($GLOBALS['meta']['plugin_attente']))
 		$plugin_valides = $plugin_valides + liste_chemin_plugin($a);
+		$plugin_valides = is_plugin_dir($plugin_valides);
 
-		$plugin_valides = array_intersect($plugin_valides,liste_plugin_files());
 		if ($operation=='ajoute')
 			$plugin = array_merge($plugin_valides,$plugin);
 		elseif ($operation=='enleve')
