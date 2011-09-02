@@ -31,7 +31,7 @@ Valeurs par defaut :
 
 [(#REM) les vieux styles a evacuer en premier, ca permet qu'ils ne polluent pas en cas de double definition]
 
-[(#INCLURE{#VAL{base.css}|find_in_theme|direction_css{#GET{dir}}})]
+[(#INCLURE{#VAL{clear.css}|find_in_theme|direction_css{#GET{dir}}})]
 [(#INCLURE{#VAL{layout.css}|find_in_theme|direction_css{#GET{dir}}})]
 
 <BOUCLE_css(POUR){tableau #LISTE{typo.css,grids.css,bando.css,icons.css,lists.css,forms.css,picker.css,box_skins.css,jquery-ui.css,content.css,exceptions.css,theme.css}}>
