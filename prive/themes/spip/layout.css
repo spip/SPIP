@@ -6,7 +6,7 @@
 #conteneur,.table_page { clear: both; margin-right: auto; margin-left: auto; text-align: left; width: 780px; margin-top:0.5em;}
 #navigation { float: left; width: 200px; min-height: 100px; }
 #extra { float: left; clear:left; width: 200px; }
-#contenu { float: right ; margin-left: 30px; width: 550px; }
+#contenu { float: right ; margin-left: 30px; width: 550px; min-height:400px}
 #pied {}
 div.messages-alertes {text-align: right;background: #fff;padding: 5px;width: 770px;clear: both; margin-right: auto; margin-left: auto;}
 
