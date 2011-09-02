@@ -93,6 +93,16 @@ function aff_selection_titre(titre, id, idom, nid)
 }
 
 
+/**
+ * Utilise dans inc/plonger
+ * @param id
+ * @param racine
+ * @param url
+ * @param col
+ * @param sens
+ * @param informer
+ * @param event
+ */
 function aff_selection_provisoire(id, racine, url, col, sens,informer,event)
 {
     charger_id_url(url.href,
@@ -106,11 +116,19 @@ function aff_selection_provisoire(id, racine, url, col, sens,informer,event)
   return false;
 }
 
-// Lanche une requete Ajax a chaque frappe au clavier dans une balise de saisie.
-// Si l'entree redevient vide, rappeler l'URL initiale si dispo.
-// Sinon, controler au retour si le resultat est unique, 
-// auquel cas forcer la selection.
-
+/**
+ * Lanche une requete Ajax a chaque frappe au clavier dans une balise de saisie.
+ * Si l'entree redevient vide, rappeler l'URL initiale si dispo.
+ * Sinon, controler au retour si le resultat est unique,
+ * auquel cas forcer la selection.
+ * utlise dans inc/selectionner
+ * @param valeur
+ * @param rac
+ * @param url
+ * @param img
+ * @param nid
+ * @param init
+ */
 function onkey_rechercher(valeur, rac, url, img, nid, init) {
 	var Field = findObj_forcer(rac);
 	if (!valeur.length) {	
@@ -317,7 +335,7 @@ function retour_id_url(Field, jjscript)
 	jQuery(Field).css({'visibility':'visible','display':'block'});
 	if (jjscript) jjscript();
 }
-
+/*
 function charger_node_url_si_vide(url, noeud, gifanime, jjscript,event) {
 
 	if  (noeud.style.display !='none') {
@@ -332,3 +350,4 @@ function charger_node_url_si_vide(url, noeud, gifanime, jjscript,event) {
 	}
   return false;
 }
+*/

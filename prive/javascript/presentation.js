@@ -11,6 +11,14 @@ $.fn.hoverClass = function(c) {
 
 
 var accepter_change_statut = false;
+/**
+ * Utilisee dans inc/puce_statut pour les puces au survol
+ * @param int id
+ * @param strong type
+ * @param int decal
+ * @param string puce
+ * @param string script
+ */
 function selec_statut(id, type, decal, puce, script) {
 
 	node = $('.imgstatut'+type+id);
@@ -35,6 +43,14 @@ function selec_statut(id, type, decal, puce, script) {
 	});
 }
 
+/**
+ * Utilisee dans inc/puce_statut pour les puces au survol
+ * @param objet node
+ * @param string nom
+ * @param string type
+ * @param int id
+ * @param string action
+ */
 function prepare_selec_statut(node, nom, type, id, action)
 {
 	$(node)
