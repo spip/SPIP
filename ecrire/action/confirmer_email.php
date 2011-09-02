@@ -22,8 +22,8 @@ function action_confirmer_email_dist()
 
 	include_spip('inc/filtres');
 	if ($GLOBALS['visiteur_session']['id_auteur'] AND email_valide($arg)){
-		$editer_auteur = charger_fonction('editer_auteur','action');
-		auteurs_set($GLOBALS['visiteur_session']['id_auteur'],array('email'=>$arg));
+		include_spip('action/editer_auteur');
+		auteur_modifier($GLOBALS['visiteur_session']['id_auteur'],array('email'=>$arg));
 	}
 	// verifier avant de rediriger pour invalider le message de confirmation
 	// si ca n'a pas marche

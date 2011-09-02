@@ -59,7 +59,9 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 		if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
 		$source = (is_array($_FILES) ? array_pop($_FILES) : "");
 	}
-	if ($source) {
+	if (!$source)
+		spip_log("spip_image_ajouter : source inconnue");
+	else {
 		$f =_DIR_LOGOS . $arg . '.tmp';
 
 		if (!is_array($source)) 
@@ -75,10 +77,10 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 
 				$source = deplacer_fichier_upload($source['tmp_name'], $f);
 		}
+		if (!$source)
+			spip_log("pb de copie pour $f");
 	}
-	if (!$source)
-		spip_log("pb de copie pour $f");
-	else {
+	if ($source AND $f) {
 		$size = @getimagesize($f);
 		$type = !$size ? '': ($size[2] > 3 ? '' : $formats_logos[$size[2]-1]);
 		if ($type) {

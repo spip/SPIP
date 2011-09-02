@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * L'email est utilise pour reperer si il existe deja ou non
  * => identifiant par defaut
  *
- * @param string $mode
+ * @param string $statut
  * @param string $mail_complet
  * @param string $nom
  * @param array $options
@@ -187,6 +187,7 @@ function test_login($nom, $mail) {
 			return $login;
 		$login = $login_base.$i;
 	}
+	return $login;
 }
 
 
@@ -317,8 +318,7 @@ function auteur_attribuer_jeton($id_auteur){
 }
 
 /**
- * Retrouver l'auteur par son jeton et son email, uniques par construction
- * @param string $email
+ * Retrouver l'auteur par son jeton
  * @param string $jeton
  * @return array|bool
  */

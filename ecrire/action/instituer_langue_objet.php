@@ -16,7 +16,7 @@
  * @param int $id
  * @param int $id_rubrique
  * @param string $changer_lang
- * @return void
+ * @return string
  */
 function action_instituer_langue_objet_dist($objet,$id, $id_rubrique, $changer_lang) {
 	if ($changer_lang) {

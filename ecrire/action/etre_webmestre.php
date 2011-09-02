@@ -17,7 +17,7 @@ include_spip('inc/actions');
 /**
  * Prouver qu'on a les droits de webmestre via un ftp, et
  * devenir webmestre sans refaire l'install
- * @return <type>
+ * @return void
  */
 function action_etre_webmestre_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');

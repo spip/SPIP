@@ -50,7 +50,7 @@ function action_calculer_taille_cache_dist($arg=null){
 // http://doc.spip.org/@calculer_taille_dossier
 function calculer_taille_dossier ($dir) {
 	$handle = @opendir($dir);
-	if (!$handle) return;
+	if (!$handle) return 0;
 	$taille = 0;
 	while (($fichier = @readdir($handle)) !== false) {
 		// Eviter ".", "..", ".htaccess", etc.

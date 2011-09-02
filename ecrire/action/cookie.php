@@ -17,8 +17,9 @@ include_spip('inc/cookie');
 
 // http://doc.spip.org/@action_cookie_dist
 function action_cookie_dist($set_cookie_admin=null, $change_session = null) {
-	$redirect = null;
+	$redirect_echec = $redirect = null;
 	$test_echec_cookie = null;
+	$url = "";
 	if (is_null($set_cookie_admin)){
 		$set_cookie_admin = _request('cookie_admin');
 		$change_session = _request('change_session');
