@@ -115,7 +115,8 @@ function public_debusquer_dist($message='', $lieu='') {
 function debusquer_compose_message($msg)
 {
 	if (is_array($msg)) {
-		if (!is_numeric($msg[0]))
+		// sqlite renvoit des erreurs alpha num
+		if (!is_numeric($msg[0]) AND count($msg)==2)
 			// message avec argument: instancier
 			$msg = _T($msg[0], $msg[1], 'spip-debug-arg');
 		else
