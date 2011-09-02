@@ -171,7 +171,8 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 	// Recupere les < ?php header('Xx: y'); ? > pour $page['headers']
 	// note: on essaie d'attrapper aussi certains de ces entetes codes
 	// "a la main" dans les squelettes, mais evidemment sans exhaustivite
-	if (preg_match_all(
+	if (stripos($corps,'header')!==false
+		AND preg_match_all(
 	'/(<[?]php\s+)@?header\s*\(\s*.([^:\'"]*):?\s*([^)]*)[^)]\s*\)\s*[;]?\s*[?]>/ims',
 	$corps, $regs, PREG_SET_ORDER)){
 		foreach ($regs as $r) {
@@ -188,7 +189,9 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 	// S'agit-il d'un resultat constant ou contenant du code php
 	$process_ins = (
 		strpos($corps,'<'.'?') === false
-		OR strpos(str_replace('<'.'?xml', '', $corps),'<'.'?') === false
+		OR
+		 (strpos($corps,'<'.'?xml')!==false AND
+		  strpos(str_replace('<'.'?xml', '', $corps),'<'.'?') === false)
 	)
 		? 'html'
 		: 'php';
