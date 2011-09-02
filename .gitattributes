@@ -381,6 +381,7 @@ prive/images/aide.gif -text
 prive/images/aide_rtl.gif -text
 prive/images/arrow_left.gif -text
 prive/images/arrow_right.gif -text
+prive/images/background.gif -text
 prive/images/degrade-etapes-clair-left.gif -text
 prive/images/degrade-etapes-clair-right.gif -text
 prive/images/degrade-etapes-fonce-left.gif -text
@@ -411,7 +412,6 @@ prive/images/m_envoi_bleu_rtl.gif -text
 prive/images/m_envoi_jaune.gif -text
 prive/images/m_envoi_jaune_rtl.gif -text
 prive/images/m_envoi_rtl.gif -text
-prive/images/minipres-gris.png -text
 prive/images/noeud_moins.gif -text
 prive/images/noeud_plus.gif -text
 prive/images/pale.gif -text

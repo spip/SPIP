@@ -13,7 +13,7 @@ ul,ol,li { list-style: none; }
 
 /* Disposition a l'ecran
 ---------------------------------------------- */
-body { background: #babdb6 url(images/minipres-gris.png) no-repeat scroll 97% 100px; }
+body { background: #EEE url(images/background.gif) repeat; }
 
 /* Espaceur de blocs */
 .nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 0; font-size: 0; }
