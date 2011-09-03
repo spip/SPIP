@@ -28,9 +28,9 @@ function install_etape_4_dist()
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 	echo info_progression_etape(4,'etape_','install/');
 
-	echo "<div class='success'><h3>"
+	echo "<div class='success'><b>"
 		. _T('info_derniere_etape')
-		. "</h3><p>"
+		. "</b><p>"
 		. _T('info_utilisation_spip')
 		. "</p></div>";
 

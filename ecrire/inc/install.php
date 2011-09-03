@@ -166,7 +166,7 @@ function login_hebergeur() {
 // http://doc.spip.org/@info_etape
 function info_etape($titre, $complement = ''){
 	return "<h2>".$titre."</h2>\n" .
-	($complement ? "<br />".$complement."\n":'');
+	($complement ? "".$complement."\n":'');
 }
 
 // http://doc.spip.org/@bouton_suivant
@@ -175,9 +175,9 @@ function bouton_suivant($code = '') {
 	static $suivant = 0;
 	$id = 'suivant'.(($suivant>0)?strval($suivant):'');
 	$suivant +=1;
-	return "\n<span class='suivant'><input id='".$id."' type='submit'\nvalue=\"" .
+	return "\n<p class='boutons suivant'><input id='".$id."' type='submit'\nvalue=\"" .
 		$code .
-		" >>\" /></span>\n";
+		" >>\" /></p>\n";
 }
 
 // http://doc.spip.org/@info_progression_etape
@@ -332,12 +332,12 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 		: ('<fieldset><legend>'
 		   ._T('install_select_type_db')
 		. "</legend>"
-			.'<label for="sql_serveur_db">'
+			.'<label for="sql_serveur_db" class="p">'
 			. _T('install_types_db_connus')
 			// Passer l'avertissement SQLIte en  commentaire, on pourra facilement le supprimer par la suite sans changer les traductions.
 			. "<br /><small>(". _T('install_types_db_connus_avertissement') .')</small>'
 			.'</label>'
-		. "\n<div style='text-align: center;'><select name='server_db' id='sql_serveur_db' >\n"
+		. "\n<div class='p center'><select name='server_db' id='sql_serveur_db' >\n"
 		.   join("\n", install_select_serveur())
 		. "\n</select></div></fieldset>")
 	)
