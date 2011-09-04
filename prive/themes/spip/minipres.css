@@ -104,10 +104,13 @@ label {}
 .page_login .formulaire_menu_lang .boutons,
 .page_login .formulaire_menu_lang input.submit { display: inline; }
 .page_login .formulaire_login { clear: both; text-align: left; }
-.page_login .formulaire_login fieldset .spip_logos { float: right; padding-left: 10px; }
+.page_login .formulaire_login fieldset { clear: both; margin: 0; padding: 0 0 0 50px; border: 0; }
+.page_login .formulaire_login fieldset legend { display: none; }
+.page_login .formulaire_login fieldset #spip_logo_auteur { float: left; margin-top: 1em; margin-left: -50px; }
 .page_login .formulaire_login fieldset ul { float: left; }
 .page_login .formulaire_login fieldset ul li input.text,
-.page_login .formulaire_login fieldset ul li input.password { width: 11em; margin: 0; display: inline; }
+.page_login .formulaire_login fieldset ul li input.password { width: 14em; margin: 0; display: inline; font-size: 150%; }
+.page_login .boutons { margin: 0; padding-right: 50px; }
 .page_login .retour { clear: both; }
 .page_login .generator { margin: 0; }
 
