@@ -1,7 +1,7 @@
 /* Correction des styles par defaut
 ---------------------------------------------- */
 html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
-body { font: .825em/20px helvetica, arial, sans-serif; color: #222; }
+body { font: .75em/20px Verdana, Geneva, sans-serif; color: #222; }
 input, textarea, select { font-size: 100%; font-family: inherit; }
 
 h1 { margin: 0 auto 20px auto; font-size: 1.3em; font-weight: bold; color: #5c3566; text-align: center; }
@@ -97,15 +97,15 @@ label {}
 /* Page de login
 ---------------------------------------------- */
 .page_login { text-align: center; }
-.page_login #minipres { width: 28em; }
+.page_login #minipres { width: 30em; }
 .page_login .formulaire_menu_lang { text-align: center; }
 .page_login .formulaire_menu_lang label { display: none; }
 .page_login .formulaire_menu_lang select { display: inline; }
 .page_login .formulaire_menu_lang .boutons,
 .page_login .formulaire_menu_lang input.submit { display: inline; }
-.page_login .formulaire_login { clear: both; text-align: left; font-siize: .9em; }
+.page_login .formulaire_login { clear: both; text-align: left; }
 .page_login .formulaire_login fieldset .spip_logos { float: right; padding-left: 10px; }
-.page_login .formulaire_login fieldset ul { float: left; width: 70%; }
+.page_login .formulaire_login fieldset ul { float: left; }
 .page_login .formulaire_login fieldset ul li input.text,
 .page_login .formulaire_login fieldset ul li input.password { width: 11em; margin: 0; display: inline; }
 .page_login .retour { clear: both; }
