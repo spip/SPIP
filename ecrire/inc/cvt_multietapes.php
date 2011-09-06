@@ -187,7 +187,7 @@ function cvtmulti_formulaire_verifier($flux){
 			if ($derniere_etape_ok==$e-1 AND !count($erreurs[$e]))
 				$derniere_etape_ok = $e;
 			// possibilite de poster dans _retour_etape_x
-			if (_request("_retour_etape_$e"))
+			if (!is_null(_request("_retour_etape_$e")))
 				$etape_demandee = $e;
 		}
 
