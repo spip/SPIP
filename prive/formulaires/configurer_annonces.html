@@ -17,13 +17,13 @@
 				<div class="choix">
 					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] 
-					onchange="if ($(this).attr('checked')) $('#suivi_complements').hide('fast');"
+					onchange="if ($(this).prop('checked')) $('#suivi_complements').hide('fast');"
 					/><label for="#GET{name}_non"><:bouton_radio_non_envoi_annonces_editoriales:></label>
 				</div>
 				<div class="choix">
 					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
 					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"]
-					onchange="if ($(this).attr('checked')) $('#suivi_complements').show('fast');"
+					onchange="if ($(this).prop('checked')) $('#suivi_complements').show('fast');"
 					/><label for="#GET{name}_oui"><:bouton_radio_envoi_annonces_adresse:></label>
 				</div>
 				<fieldset id="suivi_complements"[(#ENV{#GET{name}}|=={oui}|non)style='display:none;']>
@@ -54,13 +54,13 @@
 				<div class="choix">
 					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"]
-					onchange="if ($(this).attr('checked')) $('#neuf_complements').hide('fast');"
+					onchange="if ($(this).prop('checked')) $('#neuf_complements').hide('fast');"
 					/><label for="#GET{name}_non"><:info_non_envoi_liste_nouveautes:></label>
 				</div>
 				<div class="choix">
 					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
 					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"]
-					onchange="if ($(this).attr('checked')) $('#neuf_complements').show('fast');"
+					onchange="if ($(this).prop('checked')) $('#neuf_complements').show('fast');"
 					/><label for="#GET{name}_oui"><:bouton_radio_envoi_liste_nouveautes:></label>
 				</div>
 				<fieldset id="neuf_complements"[(#ENV{#GET{name}}|=={oui}|non)style='display:none;']>
