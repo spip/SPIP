@@ -1017,16 +1017,11 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 		$col = $boucle->primary;
 
 	// Cas particulier : id_parent => verifier les exceptions de tables
-	if ($col=='id_parent')
-		$col = isset($exceptions_des_tables[$table]['id_parent']) ?
-			$exceptions_des_tables[$table]['id_parent'] :
-			'id_parent';
+	if (in_array($col,array('id_parent','id_secteur'))
+	  AND isset($exceptions_des_tables[$table][$col]))
+		$col = $exceptions_des_tables[$table][$col];
 
-		// Cas particulier : id_secteur pour certaines tables
-	else if (($col=='id_secteur') && ($type=='breves')){
-		$col = 'id_rubrique';
-	}
-		// et possibilite de gerer un critere secteur sur des tables de plugins (ie forums)
+	// et possibilite de gerer un critere secteur sur des tables de plugins (ie forums)
 	else if (($col=='id_secteur') AND ($critere_secteur = charger_fonction("critere_secteur_$type", "public", true))){
 		$table = $critere_secteur($idb, $boucles, $val, $crit);
 	}
