@@ -66,7 +66,7 @@ function test_oubli_dist($email)
 function formulaires_oubli_verifier_dist(){
 	$erreurs = array();
 
-	$email = _request('oubli');
+	$email = strval(_request('oubli'));
 
 	$r = formulaires_oubli_mail($email);
 
