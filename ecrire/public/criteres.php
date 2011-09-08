@@ -1284,23 +1284,27 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit){
 		if ($val=='lang')
 			$val = array(kwote('$GLOBALS[\'spip_lang\']'));
 		else {
-			// Si id_parent, comparer l'id_parent avec l'id_objet
-			// de la boucle superieure.... faudrait verifier qu'il existe
-			// pour eviter l'erreur SQL
-			if ($val=='id_parent')
+			$defaut = null;
+			if ($val=='id_parent') {
+				// Si id_parent, comparer l'id_parent avec l'id_objet
+				// de la boucle superieure.... faudrait verifier qu'il existe
+				// pour eviter l'erreur SQL
 				$val = $boucles[$idb]->primary;
+				// mais si pas de boucle superieure, prendre id_parent dans l'env
+				$defaut = "\$Pile[0]['id_parent']";
+			}
+			elseif ($val=='id_enfant'){
 				// Si id_enfant, comparer l'id_objet avec l'id_parent
 				// de la boucle superieure
-			else if ($val=='id_enfant')
 				$val = 'id_parent';
-			// un critere conditionnel sur date est traite a part
-			// car la date est mise d'office par SPIP,
-			$val = calculer_argument_precedent($idb, $val, $boucles);
-			if ($crit->cond AND ($col=="date" OR $col=="date_redac")){
-				if ($val=="\$Pile[0]['".$col."']"){
-					$val = "(\$Pile[0]['{$col}_default']?'':$val)";
-				}
 			}
+			elseif ($crit->cond AND ($col=="date" OR $col=="date_redac")){
+				// un critere conditionnel sur date est traite a part
+				// car la date est mise d'office par SPIP,
+				$defaut = "(\$Pile[0]['{$col}_default']?'':\$Pile[0]['".$col."'])";
+			}
+
+			$val = calculer_argument_precedent($idb, $val, $boucles, $defaut);
 			$val = array(kwote($val));
 		}
 	} else {
