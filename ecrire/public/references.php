@@ -556,7 +556,7 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles, $defaut=null) 
 		$defaut = "@\$Pile[\$SP]['$nom_champ']";
 	}
 
-	return index_pile($prec, $nom_champ, $boucles,'', $defaut);
+	return index_pile($boucles[$idb]->id_parent, $nom_champ, $boucles,'', $defaut);
 }
 
 //
