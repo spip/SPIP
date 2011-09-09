@@ -15,11 +15,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // http://doc.spip.org/@exec_dater_dist
 function exec_dater_dist()
 {
-	exec_dater_args(intval(_request('id')), _request('type'));
+	exec_dater_args(intval(_request('id')), _request('type'), _request('script'));
 }
 
 // http://doc.spip.org/@exec_dater_args
-function exec_dater_args($id, $type)
+function exec_dater_args($id, $type, $script)
 {
 	if (!$id OR !autoriser('voir',$type,$id)) {
 		include_spip('inc/minipres');
@@ -31,15 +31,32 @@ function exec_dater_args($id, $type)
 			$type = 'article';
 			$table = table_objet_sql($type);
 		}
-		$prim = 'id_' . $type;
-		$row = sql_fetsel("*", $table, "$prim=$id");
-		$statut = $row['statut'];
-		$date = $row[($type!='breve')?"date":"date_heure"];
-		$date_redac = isset($row["date_redac"]) ? $row["date_redac"] : '';
-		$script = ($type=='article')? 'articles' : ($type == 'breve' ? 'breves_voir' : 'sites');
-		$dater = charger_fonction('dater', 'inc');
+		if (!preg_match('/^[_\w]+$/', $script)) $script = 'articles';
+		if (!function_exists($f = "dater_retour_$script")) $f = "dater_retour_articles";
 		include_spip('inc/actions');
-		ajax_retour($dater($id, 'ajax', $statut, $type, $script, $date, $date_redac));
+		ajax_retour($f($id, $type, $table));
 	}
+}
+
+function dater_retour_articles($id, $type, $table)
+{
+	$r = sql_fetsel("date, date_redac,statut", $table, "id_$type=$id");
+	$date_redac = $r["date_redac"];
+	$dater = charger_fonction('dater', 'inc');
+	return $dater($id, 'ajax', $r['statut'], $type, 'articles', $r['date'], $date_redac);
+}
+
+function dater_retour_breves_voir($id, $type, $table)
+{
+	$r = sql_fetsel("statut, date_heure", $table, "id_$type=$id");
+	$dater = charger_fonction('dater', 'inc');
+	return $dater($id, 'ajax', $r['statut'], $type, 'breves_voir', $r['date_heure']);
+}
+
+function dater_retour_sites($id, $type, $table)
+{
+	$r = sql_fetsel("statut, date", $table, "id_$type=$id");
+	$dater = charger_fonction('dater', 'inc');
+	return $dater($id, 'ajax', $r['statut'], $type, 'sites', $r['date']);
 }
 ?>
