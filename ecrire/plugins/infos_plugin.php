@@ -22,8 +22,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	$verifie_conformite($plug, $arbre, $dir_plugins);
 
 	include_spip('inc/charsets');
-	include_spip('inc/texte');
-	
+
 	if (isset($arbre['categorie']))
 		$ret['categorie'] = trim(spip_xml_aplatit($arbre['categorie']));
 	if (isset($arbre['nom']))
