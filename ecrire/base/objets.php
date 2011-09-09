@@ -36,12 +36,12 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 	// prealablement recuperer les tables_principales
 	if (is_null($infos_tables)){
 		// pas de reentrance (cas base/serial)
-		if ($deja_la) return array();
+		if ($deja_la) {
+			spip_log ("Re-entrance anormale sur lister_tables_objets_sql :"
+				. var_export(debug_backtrace(),true),_LOG_CRITIQUE);
+			return array();
+		}
 		$deja_la = true;
-		# recuperer les tables_principales si besoin
-		include_spip('base/serial');
-		# recuperer les tables_auxiliaires si besoin
-		include_spip('base/auxiliaires');
 		// recuperer les declarations explicites ancienne mode
 		// qui servent a completer declarer_tables_objets_sql
 		base_serial($GLOBALS['tables_principales']);
@@ -372,6 +372,95 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 }
 
 
+// http://doc.spip.org/@base_serial
+function base_serial(&$tables_principales){
+
+	$spip_jobs = array(
+		"id_job" 	=> "bigint(21) NOT NULL",
+		"descriptif"	=> "text DEFAULT '' NOT NULL",
+		"fonction" 	=> "varchar(255) NOT NULL", //nom de la fonction
+		"args"=> "longblob DEFAULT '' NOT NULL", // arguments
+		"md5args"=> "char(32) NOT NULL default ''", // signature des arguments
+		"inclure" => "varchar(255) NOT NULL", // fichier a inclure ou path/ pour charger_fonction
+		"priorite" 	=> "smallint(6) NOT NULL default 0",
+		"date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // date au plus tot
+		"status" => "tinyint NOT NULL default 1",
+		);
+
+	$spip_jobs_key = array(
+		"PRIMARY KEY" 	=> "id_job",
+		"KEY date" => "date",
+		"KEY status" => "status",
+	);
+
+	/// Attention: mes_fonctions peut avoir deja defini cette variable
+	/// il faut donc rajouter, mais pas reinitialiser
+	$tables_principales['spip_jobs'] = array('field' => &$spip_jobs, 'key' => &$spip_jobs_key);
+	$tables_principales = pipeline('declarer_tables_principales',$tables_principales);
+}
+
+
+// http://doc.spip.org/@base_auxiliaires
+function base_auxiliaires(&$tables_auxiliaires){
+$spip_resultats = array(
+ 		"recherche"	=> "char(16) DEFAULT '' NOT NULL",
+		"id"	=> "INT UNSIGNED NOT NULL",
+ 		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
+		"table_objet"	=> "varchar(30) DEFAULT '' NOT NULL",
+		"serveur"	=> "char(16) DEFAULT '' NOT NULL", // hash md5 partiel du serveur de base ('' pour le serveur principal)
+		"maj"	=> "TIMESTAMP" );
+
+$spip_resultats_key = array(
+// pas de cle ni index, ca fait des insertions plus rapides et les requetes jointes utilisees en recheche ne sont pas plus lentes ...
+);
+
+$spip_auteurs_liens = array(
+		"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL",
+		"vu"	=> "VARCHAR(6) DEFAULT 'non' NOT NULL");
+
+$spip_auteurs_liens_key = array(
+		"PRIMARY KEY"		=> "id_auteur,id_objet,objet",
+		"KEY id_auteur"	=> "id_auteur");
+
+$spip_meta = array(
+		"nom"	=> "VARCHAR (255) NOT NULL",
+		"valeur"	=> "text DEFAULT ''",
+		"impt"	=> "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
+		"maj"	=> "TIMESTAMP");
+
+$spip_meta_key = array(
+		"PRIMARY KEY"	=> "nom");
+
+$spip_jobs_liens = array(
+	"id_job"	=> "bigint(21) DEFAULT '0' NOT NULL",
+	"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
+	"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL",
+);
+
+$spip_jobs_liens_key = array(
+		"PRIMARY KEY"		=> "id_job,id_objet,objet",
+		"KEY id_job"	=> "id_job");
+
+$tables_auxiliaires['spip_auteurs_liens'] = array(
+	'field' => &$spip_auteurs_liens,
+	'key' => &$spip_auteurs_liens_key);
+
+$tables_auxiliaires['spip_meta'] = array(
+	'field' => &$spip_meta,
+	'key' => &$spip_meta_key);
+$tables_auxiliaires['spip_resultats'] = array(
+	'field' => &$spip_resultats,
+	'key' => &$spip_resultats_key);
+$tables_auxiliaires['spip_jobs_liens'] = array(
+	'field' => &$spip_jobs_liens,
+	'key' => &$spip_jobs_liens_key);
+
+	$tables_auxiliaires = pipeline('declarer_tables_auxiliaires',$tables_auxiliaires);
+}
+
+
 /**
  * Auto remplissage des informations non explicites
  * sur un objet d'une table sql
@@ -540,15 +629,19 @@ function renseigner_table_objet_interfaces($table_sql,&$infos){
 
 
 function lister_tables_principales(){
-	if (!count($GLOBALS['tables_principales'])){
+	static $done = false;
+	if (!$done OR !count($GLOBALS['tables_principales'])){
 		lister_tables_objets_sql();
+		$done = true;
 	}
 	return $GLOBALS['tables_principales'];
 }
 
 function lister_tables_auxiliaires(){
-	if (!count($GLOBALS['tables_auxiliaires'])){
+	static $done = false;
+	if (!$done OR !count($GLOBALS['tables_auxiliaires'])){
 		lister_tables_objets_sql();
+		$done = true;
 	}
 	return $GLOBALS['tables_auxiliaires'];
 }
