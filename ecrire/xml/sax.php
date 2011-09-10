@@ -12,7 +12,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/filtres');
 include_spip('inc/charsets');
 include_spip('xml/interfaces');
 
@@ -36,7 +35,7 @@ function xml_debutElement($phraseur, $name, $attrs)
 	$sep = ' ';
 	foreach ($attrs as $k => $v) {
 	  $delim = strpos($v, "'") === false ? "'" : '"';
-	  $val = entites_html($v);
+	  $val = htmlspecialchars($v,ENT_QUOTES);
 	  $att .= $sep .  $k . "=" . $delim
 	    . ($delim !== '"' ? str_replace('&quot;', '"', $val) : $val)
 	    . $delim;
@@ -78,7 +77,7 @@ function xml_textElement($phraseur, $data)
 	$depth = $phraseur->depth;
 	$phraseur->contenu[$depth] .= preg_match('/^script/',$phraseur->ouvrant[$depth])
 	  ? $data
-	  : entites_html($data);
+	  : htmlspecialchars($data,ENT_QUOTES);
 }
 
 function xml_piElement($phraseur, $target, $data)
