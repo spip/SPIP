@@ -145,7 +145,9 @@ function copier_document($ext, $orig, $source) {
  * @return bool|string
  */
 function determine_upload($type='') {
-
+	if(!function_exists('autoriser'))
+		include_spip('inc/autoriser');
+	
 	if (!autoriser('chargerftp')
 	OR $type == 'logos') # on ne le permet pas pour les logos
 		return false;
