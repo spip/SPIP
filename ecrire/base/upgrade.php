@@ -168,7 +168,14 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='m
 		include_spip('inc/plugin'); // pour spip_version_compare
 		uksort($maj,'spip_version_compare');
 
-		$res = maj_while($current_version, $version_cible, $maj, $nom_meta_base_version, $table_meta, generer_url_ecrire('admin_plugin'));
+		// la redirection se fait par defaut sur la page d'administration des plugins
+		// sauf lorsque nous sommes sur l'installation de SPIP
+		$redirect = generer_url_ecrire('admin_plugin');
+		if (defined('_ECRIRE_INSTALL')) {
+			$redirect = parametre_url(generer_url_ecrire('install'),'etape', _request('etape'));
+		}
+		
+		$res = maj_while($current_version, $version_cible, $maj, $nom_meta_base_version, $table_meta, $redirect);
 		if ($res) {
 			if (!is_array($res))
 				spip_log("Pb d'acces SQL a la mise a jour","maj."._LOG_INFO_ERREUR);
