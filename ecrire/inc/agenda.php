@@ -490,11 +490,10 @@ function http_calendrier_semaine_sept($annee, $mois, $jour, $echelle, $partie_ca
 
 	$today=date("Ymd");
 	$total = '';
-	$class = " bordure_$spip_lang_left";
 
 	for ($j=$jour; $j<$jour+7;$j++){
 		$v = mktime(0,0,0,$mois, $j, $annee);
-		$v = http_calendrier_ics($annee, $mois, $j, $echelle, $partie_cal, $largeur, $evt, '', $class . ( (date("w",$v)==0 && test_espace_prive()) ? 
+		$v = http_calendrier_ics($annee, $mois, $j, $echelle, $partie_cal, $largeur, $evt, '', ( (date("w",$v)==0 && test_espace_prive()) ? 
 			  " jour_dimanche" :
 			  ((date("Ymd", $v) == $today) ? 
 			   " jour_encours" :
@@ -610,6 +609,7 @@ function http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, $large
 
 	$sansheure = !isset($evt[0][$date]) ? '' : http_calendrier_ics_trois($evt[0][$date], $largeur, $dimjour, $fontsize, '');
 
+
 	return
 	   "\n<div class='calendrier-jour$class' style='$style'>" .
 	  http_calendrier_ics_grille($debut, $fin, $dimheure, $dimjour, $echelle) .
@@ -680,7 +680,7 @@ function http_calendrier_ics_div($evts, $date, $debut, $fin, $dimheure, $dimjour
 		$hauteur = calendrier_height ("$heure_debut:$minutes_debut", "$heure_fin:$minutes_fin", $debut, $fin, $dimheure, $dimjour);
 
 		if ($bas_prec >= $haut) $decale += 1;
-		else $decale = 4;
+		else $decale = ($echelle >= 120) ? 4 : 3;
 		if ($bas > $bas_prec) $bas_prec = $bas;
 			
 		$url = isset($evenement['URL']) ? $evenement['URL'] : ''; 
@@ -1188,7 +1188,7 @@ function http_calendrier_messages($annee='', $mois='', $jour='', $heures='', $pa
 		$date = date("$annee-$mois-$jour");
 		$datef = "'$date $heures'";
 		if ($heures = quete_calendrier_interval_rv("'$date'", $datef))
-			$evtr = http_calendrier_ics_titre($annee,$mois,$jour,generer_url_ecrire('calendrier')) . http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, 90, array('', $heures));
+		  $evtr = http_calendrier_ics_titre($annee,$mois,$jour,generer_url_ecrire('calendrier')) . http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, 90, array('', $heures), '', ' calendrier-msg');
 	}
 	return array($evtm, $evtt, $evtr);
 }
