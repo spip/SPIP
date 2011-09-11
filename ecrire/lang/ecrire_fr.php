@@ -802,6 +802,8 @@ dans une couleur qui indique leur état :',
 'statut_admin_restreint' => '(admin restreint)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)',
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)',
 'taille_cache_image' => 'Les images calculées automatiquement par SPIP (vignettes des documents, titres présentés sous forme graphique, fonctions mathématiques au format TeX...) occupent dans le répertoire @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Ce site ne prévoit pas de limitation de taille du répertoire du cache.',
 'taille_cache_maxi' => 'SPIP essaie de limiter la taille du répertoire du cache de ce site à environ <b>@octets@</b> de données.',

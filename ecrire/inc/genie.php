@@ -62,7 +62,7 @@ function inc_genie_dist($taches = array()) {
 	// etait de la passer en parametre a ing_genie_dist
 	// on reroute en ajoutant simplement le job a la queue, ASAP
 	foreach($taches as $function=>$period)
-		$force_jobs[] = queue_add_job($function, _L("Tache CRON $function (ASAP)"), array(time()-abs($period)), "genie/");
+		$force_jobs[] = queue_add_job($function, _T('tache_cron_asap', array('function'=>$function)), array(time()-abs($period)), "genie/");
 	
 	// et on passe la main a la gestion de la queue !
 	// en forcant eventuellement les jobs ajoute a l'instant
@@ -170,6 +170,6 @@ function queue_genie_replan_job($function,$period,$last=null,$time=0, $priority=
 		// on replanifie un job cron
 		// uniquement si il n'y en a pas deja un avec le meme nom
 		// independament de l'argument
-		queue_add_job($function, _L("Tache CRON $function (toutes les $period s)"), array($last), "genie/", 'function_only', $time, $priority);
+		queue_add_job($function, _T('tache_cron_secondes', array('function'=>$function, 'nb'=>$period)), array($last), "genie/", 'function_only', $time, $priority);
 }
 ?>
