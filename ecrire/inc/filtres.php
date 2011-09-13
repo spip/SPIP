@@ -2620,30 +2620,42 @@ function tri_champ_select($t){
  * @return string
  */
 function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
+	global $table_des_traitements;
 	static $trouver_table=null;
+	static $objets;
+
 	// On verifie qu'on a tout ce qu'il faut
 	$id_objet = intval($id_objet);
 	if (!($id_objet and $type_objet and $info))
+		return '';
+
+	// si on a deja note que l'objet n'existe pas, ne pas aller plus loin
+	if (isset($objets[$type_objet]) AND $objets[$type_objet]===false)
 		return '';
 
 	// Si on demande l'url, on retourne direct la fonction
 	if ($info == 'url')
 		return generer_url_entite($id_objet, $type_objet);
 
-	// Si on demande le titre, on le gere en interne
-	if ($demande_titre = ($info == 'titre')){
+	// Sinon on va tout chercher dans la table et on garde en memoire
+	$demande_titre = ($info == 'titre');
+
+	// On ne fait la requete que si on a pas deja l'objet ou si on demande le titre mais qu'on ne l'a pas encore
+	if (!isset($objets[$type_objet][$id_objet])
+	  OR
+	  ($demande_titre AND !isset($objets[$type_objet][$id_objet]['titre']))
+	  ){
 		if (!$trouver_table)
 			$trouver_table = charger_fonction('trouver_table','base');
 		$desc = $trouver_table(table_objet_sql($type_objet));
-		$champ_titre = isset($desc['titre'])?$desc['titre']:'titre';
-		$champ_titre = ", $champ_titre";
-	}
+		if (!$desc)
+			return $objets[$type_objet] = false;
 
-	// Sinon on va tout chercher dans la table et on garde en memoire
-	static $objets;
-
-	// On ne fait la requete que si on a pas deja l'objet ou si on demande le titre mais qu'on ne l'a pas encore
-	if (!$objets[$type_objet][$id_objet] or ($demande_titre and !$objets[$type_objet][$id_objet]['titre'])){
+		// Si on demande le titre, on le gere en interne
+		if ($demande_titre){
+			$champ_titre = isset($desc['titre'])?$desc['titre']:'titre';
+			$champ_titre = ", $champ_titre";
+		}
 		include_spip('base/abstract_sql');
 		include_spip('base/connect_sql');
 		$objets[$type_objet][$id_objet] = sql_fetsel(
@@ -2652,19 +2664,17 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 			id_table_objet($type_objet).' = '.intval($id_objet)
 		);
 	}
-	$ligne = $objets[$type_objet][$id_objet];
 
 	if ($demande_titre)
 		$info_generee = $objets[$type_objet][$id_objet]['titre'];
 	// Si la fonction generer_TRUC_entite existe, on l'utilise
 	else if ($generer = charger_fonction("generer_${info}_entite", '', true))
-		$info_generee = $generer($id_objet, $type_objet, $ligne);
+		$info_generee = $generer($id_objet, $type_objet, $objets[$type_objet][$id_objet]);
 	// Sinon on prend le champ SQL
 	else
-		$info_generee = $ligne[$info];
+		$info_generee = $objets[$type_objet][$id_objet][$info];
 
 	// On va ensuite chercher les traitements automatiques a faire
-	global $table_des_traitements;
 	$maj = strtoupper($info);
 	$traitement = $table_des_traitements[$maj];
 	$table_objet = table_objet($type_objet);
