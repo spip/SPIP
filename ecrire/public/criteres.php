@@ -621,14 +621,24 @@ function calculer_critere_parties($idb, &$boucles, $crit){
 
 	list($a11, $a12) = calculer_critere_parties_aux($idb, $boucles, $a1);
 	list($a21, $a22) = calculer_critere_parties_aux($idb, $boucles, $a2);
-	if (($op==',') && (is_numeric($a11) && (is_numeric($a21))))
+
+	if (($op==',') && (is_numeric($a11) && (is_numeric($a21)))){
 		$boucle->limit = $a11.','.$a21;
+	}
 	else {
 		$boucle->total_parties = ($a21!='n') ? $a21 : $a22;
 		$partie = ($a11!='n') ? $a11 : $a12;
 		$mode = (($op=='/') ? '/' :
 			(($a11=='n') ? '-' : '+').(($a21=='n') ? '-' : '+'));
-		calculer_parties($boucles, $idb, $partie, $mode);
+		// cas simple {0,#ENV{truc}} compilons le en LIMIT :
+		if ($mode="++" AND $op==','){
+			$boucle->limit =
+				(is_numeric($a11)?"'$a11'":$a11)
+				.".','."
+				.(is_numeric($a21)?"'$a21'":$a21);
+		}
+		else
+			calculer_parties($boucles, $idb, $partie, $mode);
 	}
 }
 
@@ -637,8 +647,9 @@ function calculer_critere_parties($idb, &$boucles, $crit){
 //
 
 function calculer_parties(&$boucles, $id_boucle, $debut, $mode){
-
 	$total_parties = $boucles[$id_boucle]->total_parties;
+#	var_dump($total_parties);
+#	var_dump($mode);
 	preg_match(",([+-/p])([+-/])?,", $mode, $regs);
 	list(, $op1, $op2) = $regs;
 	$nombre_boucle = "\$Numrows['$id_boucle']['total']";
@@ -665,7 +676,7 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode){
 					(($total_parties==1) ? "" : (' + '.($total_parties-1))) :
 					('+'.$total_parties.' - 1'));
 		}
-
+#var_dump($fin);die();
 		// {pagination}, gerer le debut_xx=-1 pour tout voir
 		if ($op1=='p'){
 			$debut .= ";\n	\$debut_boucle = ((\$tout=(\$debut_boucle == -1))?0:(\$debut_boucle))";
