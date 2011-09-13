@@ -33,6 +33,7 @@ function array_set_merge(&$table,$index,$valeur){
 function lister_tables_objets_sql($table_sql=null, $desc=array()){
 	static $deja_la = false;
 	static $infos_tables = null;
+	static $md5 = null;
 	// prealablement recuperer les tables_principales
 	if (is_null($infos_tables)){
 		// pas de reentrance (cas base/serial)
@@ -357,9 +358,11 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		}
 
 		$deja_la = false;
-		// lever la constante qui dit qu'on a tout init et qu'on peut cacher
-		define('_init_tables_objets_sql',true);
+		// signature
+		$md5 = md5(serialize($infos_tables));
 	}
+	if ($table_sql==="::md5")
+		return $md5;
 	if ($table_sql AND !isset($infos_tables[$table_sql])){
 		#$desc = renseigner_table_objet_sql($table_sql,$desc);
 		$desc = renseigner_table_objet_interfaces($table_sql,$desc);
