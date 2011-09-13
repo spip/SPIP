@@ -118,14 +118,14 @@ function dater_redac($id, $type, $script, $possedeDateRedac, $date_redac, $fct_a
 
 	$js = "\"findObj_forcer('valider_date_redac-$id').style.visibility='visible';\"";
 	$label =
-		'<input type="radio" name="avec_redac" value="non" id="avec_redac_on$id"' .
-		($possedeDateRedac ? '' : ' checked="checked"') .
+		"<input type='radio' name='avec_redac' value='non' id='avec_redac_on$id'" .
+		($possedeDateRedac ? '' : " checked='checked'") .
 		" onclick=$js" .
-		' /> <label for="avec_redac_on$id">'.
+		" /> <label for='avec_redac_on$id'>" .
 		_T('texte_date_publication_anterieure_nonaffichee').
 		'</label>' .
-		'<br /><input type="radio" name="avec_redac" value="oui" id="avec_redac_off$id"' .
-		(!$possedeDateRedac ? '' : ' checked="checked"') .
+		"<br /><input type='radio' name='avec_redac' value='oui' id='avec_redac_off$id'" .
+		(!$possedeDateRedac ? '' : " checked='checked'") .
 		" onclick=$js /> <label for='avec_redac_off$id'>" .
 		_T('bouton_radio_afficher').
 	  ' :</label> ';
