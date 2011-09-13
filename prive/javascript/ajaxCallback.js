@@ -576,7 +576,7 @@ jQuery.fn.ajaxbloc = function() {
 	  }).addClass('bind-ajaxReload');
 
 		jQuery(ajaxbloc_selecteur,this).not('.noajax,.bind-ajax')
-			.click(function(){return jQuery.spip.ajaxClick(blocfrag,this.href,{force:jQuery(this).is('.nocache'),history:!jQuery(this).is('.nohistory')});})
+			.click(function(){return jQuery.spip.ajaxClick(blocfrag,this.href,{force:jQuery(this).is('.nocache'),history:!(jQuery(this).is('.nohistory')||jQuery(this).closest('.box_modalbox').length)});})
 			.addClass('bind-ajax')
 			.filter('.preload').each(function(){
 				var href = this.href;
