@@ -22,6 +22,11 @@ function aide_contenu(){
 
 	include_spip('inc/aider');
 	list($contenu, $lastm) = aide_fichier($path, $help_server);
+
+	if (strpos($contenu,"aide_index")!==false){
+		$contenu = preg_replace(",target=['\"][^'\"]*['\"],Uims","class='ajax'",$contenu);
+		$contenu = str_replace("aide_index","aide",$contenu);
+	}
 	return $contenu;
 }
 
