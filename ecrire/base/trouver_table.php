@@ -32,7 +32,7 @@ include_spip('base/objets');
 function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 	static $nom_cache_desc_sql=array();
 	global $tables_principales, $tables_auxiliaires, $table_des_tables;
-	
+
 	if (!spip_connect($serveur)
 	OR !preg_match('/^[a-zA-Z0-9._-]*/',$nom))
 		return null;
@@ -100,9 +100,10 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 			$fdesc = &$tables_principales[$nom_sql];
 		}
 		else {
-			if (isset($tables_auxiliaires['spip_' .$nom])) {
-				$nom_sql = 'spip_' . $nom;
-				$fdesc = &$tables_auxiliaires[$nom_sql];
+			if (isset($tables_auxiliaires[$n=$nom])
+			  OR isset($tables_auxiliaires[$n='spip_'.$nom])) {
+				$nom_sql = $n;
+				$fdesc = &$tables_auxiliaires[$n];
 			}  # table locale a cote de SPIP, comme non SPIP:
 		}
 	}
@@ -143,6 +144,7 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 
 	// toujours retourner $nom dans id_table
 	$res['id_table']=$nom;
+
 	return $res;
 }
 ?>
