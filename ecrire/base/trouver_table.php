@@ -11,10 +11,7 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
-include_spip('public/interfaces');
 include_spip('base/objets');
-include_spip('base/serial');
-include_spip('base/auxiliaires');
 
 // Trouve la description d'une table, en particulier celle d'une boucle
 // Si on ne la trouve pas, on demande au serveur SQL
@@ -135,7 +132,6 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 
 		// si tables_objets_sql est bien fini d'init, on peut cacher
 		$connexion['tables'][$nom_sql] = $desc;
-		if ($nom!==$nom_sql)
 		$res = &$connexion['tables'][$nom_sql];
 		// une nouvelle table a ete decrite
 		// mettons donc a jour le cache des descriptions de ce serveur
