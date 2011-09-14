@@ -119,7 +119,7 @@ function xml_parsestring($phraseur, $data)
 			 ('(' .
 			  _T('erreur_balise_non_fermee') .
 			  " <tt>" .
-			  $prhaseur->ouvrant[$phraseur->depth] .
+			  $phraseur->ouvrant[$phraseur->depth] .
 			  "</tt> " .
 			  _T('ligne') .
 			  " " .
