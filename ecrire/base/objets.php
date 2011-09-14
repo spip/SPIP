@@ -34,8 +34,10 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 	static $deja_la = false;
 	static $infos_tables = null;
 	static $md5 = null;
+	static $plugin_hash = null;
 	// prealablement recuperer les tables_principales
-	if (is_null($infos_tables)){
+	if (is_null($infos_tables)
+	  OR $plugin_hash!==_PLUGINS_HASH){
 		// pas de reentrance (cas base/serial)
 		if ($deja_la) {
 			spip_log ("Re-entrance anormale sur lister_tables_objets_sql :"
@@ -43,11 +45,13 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 			return array();
 		}
 		$deja_la = true;
+		$plugin_hash = _PLUGINS_HASH; // avant de lancer les pipelines
+
 		// recuperer les declarations explicites ancienne mode
 		// qui servent a completer declarer_tables_objets_sql
 		base_serial($GLOBALS['tables_principales']);
 		base_auxiliaires($GLOBALS['tables_auxiliaires']);
-		$infos_tables = pipeline('declarer_tables_objets_sql',array(
+		$infos_tables = array(
 			'spip_articles'=> array(
 				'page'=>'article',
 				'texte_retour' => 'icone_retour_article',
@@ -297,7 +301,10 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 			),
 			// toutes les tables ont le droit a une jointure sur les auteurs
 			array('tables_jointures'=>array('id_auteur'=>'auteurs_liens'))
-		));
+		);
+
+		$infos_tables =	pipeline('declarer_tables_objets_sql',$infos_tables);
+
 		// completer les informations manquantes ou implicites
 		$all = array();
 		foreach(array_keys($infos_tables) as $t) {
