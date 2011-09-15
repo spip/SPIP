@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'הוספת תגובה לאתר',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'לא מצליח להעתיק מסמך',
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'באותו המדור',
 'memes_auteurs' => 'מאת אותם המחברים',
 'message' => 'הודעה',
-'messages_forum' => 'הודעות הפורום',
+'messages_forum' => 'הודעות הפורום', # MODIF
 'messages_recents' => 'ההודעות החדשות בפורום',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'מילות מפתח',

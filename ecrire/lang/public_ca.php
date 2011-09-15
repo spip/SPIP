@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Comentar aquest lloc web',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Impossible copiar el document',
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'A la mateixa secció',
 'memes_auteurs' => 'Dels mateixos autors',
 'message' => 'Missatge',
-'messages_forum' => 'Missatges al fòrum',
+'messages_forum' => 'Missatges al fòrum', # MODIF
 'messages_recents' => 'Els missatges més recents als fòrums',
 'mots_clef' => 'Paraula clau',
 'mots_clefs' => 'Paraules clau',
@@ -109,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Veure la carta de presentació del lloc Web',
-'texte_lettre_information_2' => 'Aquesta carta recull i conta els articles i els breus publicades des de', # MODIF
+'texte_lettre_information_2' => 'Aquesta carta recull les novetats publicades des de',
 
 // V
 'ver_imprimer' => 'Versió per imprimir',

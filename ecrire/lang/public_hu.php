@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Hozzászólás a honlapról',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Ugyanabban a rovatban',
 'memes_auteurs' => 'Ugyanettől a szerzőktől',
 'message' => 'Üzenet',
-'messages_forum' => 'Fórum üzenetei',
+'messages_forum' => 'Fórum üzenetei', # MODIF
 'messages_recents' => 'A fórumok legfríssebb üzenetei',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Kulcsszavak',

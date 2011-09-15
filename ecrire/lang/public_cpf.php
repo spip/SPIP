@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Donn out lavi si lo sit-la',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Andan minm ribrik-la',
 'memes_auteurs' => 'Po bann zotèr minm',
 'message' => 'Modékri',
-'messages_forum' => 'Bann modékri andann forom',
+'messages_forum' => 'Bann modékri andann forom', # MODIF
 'messages_recents' => 'Bann modékri la finn mèt an dernyé andan forom',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Bann molaklé',

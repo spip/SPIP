@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Guneari buruz iruzkina egin',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Dokumentua ezin da kopiatu',
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Atal berean',
 'memes_auteurs' => 'Egile beretik',
 'message' => 'Mezua',
-'messages_forum' => 'Foroetako mezuak',
+'messages_forum' => 'Foroetako mezuak', # MODIF
 'messages_recents' => 'Foroetako azken mezuak',
 'mots_clef' => 'Gako-hitz',
 'mots_clefs' => 'Gako-hitz',
@@ -109,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Hona gunearen informazio gutuna',
-'texte_lettre_information_2' => 'Gutunak ondoko egunetik argitaratu artikuluak eta berri-laburrak biltzen ditu', # MODIF
+'texte_lettre_information_2' => 'Gutunak ondoko egunetik argitaratu artikulu eta berri-laburrak biltzen ditu',
 
 // V
 'ver_imprimer' => 'Inprimatzeko bertsioa',

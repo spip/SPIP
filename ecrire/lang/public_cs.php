@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Komentář k tomuto odkazu',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Dokument není možné kopírovat',
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Ve stejné rubrice',
 'memes_auteurs' => 'Od stejných autorů',
 'message' => 'Zpráva',
-'messages_forum' => 'Zprávy v diskusním fóru',
+'messages_forum' => 'Zprávy v diskusním fóru', # MODIF
 'messages_recents' => 'Poslední zprávy v diskusních fórech',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Klíčová slova',

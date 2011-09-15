@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Comentaţi acest site',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Imposibil de copiat documentul',
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'În aceaşi rubrică',
 'memes_auteurs' => 'De aceaşi autori',
 'message' => 'Mesaj',
-'messages_forum' => 'Mesajele forum-ului',
+'messages_forum' => 'Mesajele forum-ului', # MODIF
 'messages_recents' => 'Cele mai recente mesaje de forum',
 'mots_clef' => 'Cuvânt-cheie',
 'mots_clefs' => 'Cuvinte-cheie',
@@ -109,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Iată scrisoarea de informaţii a site-ului',
-'texte_lettre_information_2' => 'Această scrisoare conţine lista articolelor şi ştirilor publicate de la', # MODIF
+'texte_lettre_information_2' => 'Această scrisoare conţine lista noutatilor publicate de la',
 
 // V
 'ver_imprimer' => 'Versiunea imprimabilă',

@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Bu siteye yorum ekle',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Belgeyi kopyalamak olanaksız',
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Aynı bölümde',
 'memes_auteurs' => 'Aynı yazarlardan',
 'message' => 'İleti',
-'messages_forum' => 'Forum mesajları',
+'messages_forum' => 'Forum mesajları', # MODIF
 'messages_recents' => 'Son forum mesajları',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Anahtar sözcük',

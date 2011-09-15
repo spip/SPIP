@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Komentar di situs ini',
+'contact' => 'Contact', # NEW
 'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Dalam bagian yang sama',
 'memes_auteurs' => 'Oleh penulis-penulis yang sama',
 'message' => 'Pesan',
-'messages_forum' => 'Pesan-pesan forum',
+'messages_forum' => 'Pesan-pesan forum', # MODIF
 'messages_recents' => 'Pesan-pesan forum terbaru',
 'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Kata-kata kunci',
