@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'A SQL szerverhez való csatlakozás sikertelen.', # MODIF
 'avis_connexion_echec_2' => 'Menjen az elöző oldalra, és ellenőrizze a beírt adatokat.',
 'avis_connexion_echec_3' => '<b>Megjegyzés:</b> Sok szerver esetén, <b>kérni kell</b> a SQL adatbázishoz való hozzáférés aktválását, mielőbb használhassa. Amennyiben nem tud csatlakozni, ellenőrizze, ha ez az eljárás megtörtént-e.', # MODIF
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => 'Az LDAP szerverhez való csatlakozás sikertelen.',
 'avis_connexion_ldap_echec_2' => 'Menjen az elöző oldalra, és ellenőrizze a beírt adatokat.',
 'avis_connexion_ldap_echec_3' => 'Alternatív módon, ne használja az LDAP támogatást felhasználók importálására.',
@@ -123,16 +124,20 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'A címjegyzék címe',
 'entree_adresse_email' => 'Az Ön email címe',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'Adatbázis címe',
 'entree_base_donnee_2' => '(Gyakran ez a cím a honlapé, néha «localhost», néha teljesen üres marad.)',
 'entree_biographie' => 'Rövid önéletrajz pár szóban.',
 'entree_chemin_acces' => '<b>Beírni</b> az elerési utat :', # MODIF
 'entree_cle_pgp' => 'Az Ön PGP kulcsa',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Rovat tartalma pár szóban.)',
 'entree_identifiants_connexion' => 'A csatlakozási azonosítói...',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'Ezen az űrlapon írja be az Ön LDAP szerver csatlakozási információkat.
  Ezek az információ szerezhetők a rendszer, vagy a hálozat adminisztrátorától.',
 'entree_infos_perso' => 'Kicsoda Ön ?',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'Melyik rovatba kerüljön :',
 'entree_liens_sites' => '<b>Hiperhívatkozás</b> (referencia, látógatható honlap...)', # MODIF
 'entree_login' => 'Az Ön felhasználói neve (login)',
@@ -145,13 +150,16 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'entree_nom_fichier' => 'Írja be a fájl nevét @texte_compresse@:',
 'entree_nom_pseudo' => 'Az Ön neve, vagy felhasználói neve',
 'entree_nom_pseudo_1' => '(Az Ön neve vagy felhsználói neve)',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'A honlapja neve',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => 'Új jelszó',
 'entree_passe_ldap' => 'Jelszó',
 'entree_port_annuaire' => 'A címtár port száma',
 'entree_signature' => 'Aláírás',
 'entree_titre_obligatoire' => '<b>Cím</b> [Kötelező]<br />', # MODIF
 'entree_url' => 'A honlapja címe (URL)',
+'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
 'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
@@ -227,7 +235,8 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_activer_cookie' => 'Egy <b>hivatkozási sütit</b> (cookie) lehet aktiválni, melynek segítségével könnyen át tud menni a nyilvános részről a privát részre.',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Ez az adminisztrátor a következő rovatokat kezelheti :',
-'info_admin_gere_toutes_rubriques' => 'Ez az adminisztrátor az <b>összes rubrikát</b> kezeli.',
+'info_admin_gere_toutes_rubriques' => 'Ez az adminisztrátor az <b>összes rubrikát</b> kezeli.', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
@@ -305,7 +314,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Cikkek tartalma',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_paragraphe' => '(Paragrafúsok létrehozására, egyszerűen csak üres sorokat kell hagyni.)',
+'info_creation_paragraphe' => '(Paragrafúsok létrehozására, egyszerűen csak üres sorokat kell hagyni.)', # MODIF
 'info_creation_rubrique' => 'Mielőbb cikkeket írhasson,<br /> legalább egy rubrikát kell létrehozni.<br />', # MODIF
 'info_creation_tables' => 'Negyedik lépés : <b>Az adatbázis táblai létrehozása</b>', # MODIF
 'info_creer_base' => '<b>Létrehozni</b> egy újabb adatbázist :', # MODIF
@@ -369,7 +378,7 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_liste_redacteurs_connectes' => 'Jelenleg csatlakozott szerzők listája',
 'info_login_existant' => 'Ez a login már létezik.',
 'info_login_trop_court' => 'A login túl rövid.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'A legtöbb :',
 'info_meme_rubrique' => 'Abban a rovatban',
@@ -422,7 +431,7 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_nouvel_article' => 'Új cikk',
 'info_nouvelle_traduction' => 'Új fordítás :',
 'info_numero_article' => 'CIKK SZÁMA :',
-'info_obligatoire_02' => '[Kötelező]',
+'info_obligatoire_02' => '[Kötelező]', # MODIF
 'info_option_accepter_visiteurs' => 'A látogatói beíratkozás engedélyezése ',
 'info_option_faire_suivre' => 'A fórumok üzenetei továbbítása a cikkek szerzői felé',
 'info_option_ne_pas_accepter_visiteurs' => 'Látogatói beíratkozás tiltása',
@@ -436,7 +445,7 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => 'A jelszó túl rövid.',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'A két jelszó nem egyforma.',
 'info_pense_bete_ancien' => 'Az Ön régebbi emlékeztet?i', # MODIF
 'info_plus_cinq_car' => 'több, mint 5 karakter',
@@ -497,7 +506,7 @@ a felhasználók automatikus emailt kapnak,
 'info_site_2' => 'honlap :',
 'info_site_min' => 'honlap',
 'info_site_reference_2' => 'Felvett honlap',
-'info_site_web' => 'HONLAP :',
+'info_site_web' => 'HONLAP :', # MODIF
 'info_sites' => 'honlapok',
 'info_sites_lies_mot' => 'A kulcsszóhoz kötött felvett honlapok',
 'info_sites_proxy' => 'Proxy használata',
@@ -506,6 +515,7 @@ a felhasználók automatikus emailt kapnak,
 'info_sous_titre' => 'Alcím :',
 'info_statut_administrateur' => 'Adminisztrátor',
 'info_statut_auteur' => 'A szerző státusza :', # MODIF
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Megerősítendő beíratkozás',
 'info_statut_auteur_autre' => 'Egyéb státusz :',
 'info_statut_efface' => 'Törölt',
@@ -523,7 +533,7 @@ a felhasználók automatikus emailt kapnak,
 'info_texte' => 'Szöveg',
 'info_texte_explicatif' => 'Magyarázat',
 'info_texte_long' => '(hosszú a szöveg : tehát több részben bontva jelenik meg, melyek össze lesznek hozva jóváhagyás után.)',
-'info_texte_message' => 'Üzenete szövege :',
+'info_texte_message' => 'Üzenete szövege :', # MODIF
 'info_texte_message_02' => 'Üzenet szövege',
 'info_titre' => 'Cím :',
 'info_total' => 'Összesen :',
@@ -580,6 +590,8 @@ ami állapotát jelzi :',
 'install_tables_base' => 'Tables de la base', # NEW
 'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus répandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
 'install_types_db_connus_avertissement' => 'Attention : plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'szerző',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Elfogadni a beíratkozásokat',
@@ -770,6 +782,8 @@ ami állapotát jelzi :',
 'statut_admin_restreint' => '(korlátolt admin)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => 'Az SPIP által kalkulált képek (dok. bélyegképei, grafikusan megjelenő címek, TeX formatumú matek függvények...) @taille@ méretű helyet foglalnak a @dir@ nevű mappában.',
 'taille_cache_infinie' => 'Ennél a honlapnál nincs méretkorlátozás a <code>CACHE/</code> mappában.',
 'taille_cache_maxi' => 'SPIP próbálja korlátozni a <code>CACHE/</code> mappa méretét kb. <b>@octets@</b> méretre.',
@@ -943,8 +957,8 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_connexion_ldap' => 'Opciók : <b>Az Ön LDAP csatlakozás</b>',
 'titre_groupe_mots' => 'SZÓCSOPORT :',
 'titre_identite_site' => 'Identité du site', # NEW
-'titre_langue_article' => 'A CIKK NYELVE',
-'titre_langue_rubrique' => 'A ROVAT NYELVE',
+'titre_langue_article' => 'A CIKK NYELVE', # MODIF
+'titre_langue_rubrique' => 'A ROVAT NYELVE', # MODIF
 'titre_langue_trad_article' => 'A CIKK NYELVE ÉS FORDÍTÁSAI',
 'titre_les_articles' => 'CIKKEK',
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW

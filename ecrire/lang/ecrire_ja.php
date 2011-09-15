@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'SQLサーバーへの接続に失敗しました。', # MODIF
 'avis_connexion_echec_2' => '前のページに戻って、与えられている情報を確認してください。',
 'avis_connexion_echec_3' => '<b>注意</b> 多くのサーバー上では、それを利用できるためには事前に自分が, SQLにアクセスできるよう<b>リクエストを行う</b>必要があります。 もし接続できない場合、現在このリクエストが行われているかどうかを確認してください。', # MODIF
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => 'LDAPサーバへの接続に失敗しました。',
 'avis_connexion_ldap_echec_2' => '前のページに戻って、与えられている情報を確認してください。',
 'avis_connexion_ldap_echec_3' => '交代でLDAPサポートをユーザのインポートのために利用しないでください。',
@@ -123,15 +124,19 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'ディレクトリのアドレス',
 'entree_adresse_email' => 'メールアドレス',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'データベースアドレス',
 'entree_base_donnee_2' => '(よく、このアドレスはあなたのサイトのアドレスと同じで、時々«localhost»の時もあり、完全に空のままの時もあります。)',
 'entree_biographie' => 'あなたの略記を数行でお願いします。',
 'entree_chemin_acces' => 'パスを<b>入力</b>:',
 'entree_cle_pgp' => 'あなたのPGPキー',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '（セクションの内容を短い言葉で。）',
 'entree_identifiants_connexion' => 'あなたの接続ID...',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'LDAP接続の情報をこのフォームに書き込んでください。あなたはあなたのシステムまたは、ネットワーク管理者によってこの情報を提供されるでしょう。',
 'entree_infos_perso' => 'あなたは誰？',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'セクションの中に：',
 'entree_liens_sites' => '<b>ハイパーリンク</b>（訪問サイトの参照...）',
 'entree_login' => 'あなたのログインID',
@@ -144,13 +149,16 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'entree_nom_fichier' => 'ファイル名を打ち込んでください @texte_compresse@:',
 'entree_nom_pseudo' => 'あなたの名前か仮名',
 'entree_nom_pseudo_1' => '（あなたの名前か仮名）',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'あなたのウェブサイトの名前',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => '新しいパスワード',
 'entree_passe_ldap' => 'パスワード',
 'entree_port_annuaire' => 'ディレクトリのポートナンバー',
 'entree_signature' => '署名',
 'entree_titre_obligatoire' => '<b>タイトル</b> [必須]<br />',
 'entree_url' => 'あなたのサイトのURL',
+'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
 'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
@@ -227,7 +235,8 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 パブリックなサイトとプライベートエリアの切替が簡単に出来ます。',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'この管理者は下記のセクションを管理:',
-'info_admin_gere_toutes_rubriques' => 'この管理者は<b>すべてのセクション</b>を管理。',
+'info_admin_gere_toutes_rubriques' => 'この管理者は<b>すべてのセクション</b>を管理。', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
@@ -306,7 +315,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_contact' => '連絡方法',
 'info_contenu_articles' => '記事の内容',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_paragraphe' => '(パラグラフ＜段落・文節＞を作るには、空行をおけばいいだけです。)',
+'info_creation_paragraphe' => '(パラグラフ＜段落・文節＞を作るには、空行をおけばいいだけです。)', # MODIF
 'info_creation_rubrique' => '記事を書けるようになる前に、<br />最低１つのセクションを作成する必要があります。<br />',
 'info_creation_tables' => '４番目のステップ: <b>データベースのテーブルの作成</b>',
 'info_creer_base' => '新しいデータベースを<b>作成</b>:',
@@ -369,7 +378,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_liste_redacteurs_connectes' => '接続中のエディターのリスト',
 'info_login_existant' => 'このIDは既に使われています。',
 'info_login_trop_court' => 'ログインIDが短すぎます。',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => '最大:',
 'info_meme_rubrique' => '同じセクションで',
@@ -424,7 +433,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_nouvel_article' => '新しい記事',
 'info_nouvelle_traduction' => '新しい翻訳:',
 'info_numero_article' => '記事番号:',
-'info_obligatoire_02' => '[要求した]',
+'info_obligatoire_02' => '[要求した]', # MODIF
 'info_option_accepter_visiteurs' => 'パブリックなサイトからの訪問者の登録を許可',
 'info_option_faire_suivre' => '記事の著者たちへ掲示板のメッセージを送る',
 'info_option_ne_pas_accepter_visiteurs' => '訪問者の登録を断る',
@@ -438,7 +447,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => 'パスワードが短すぎます。',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'その二つのパスワードは同一でない。',
 'info_pense_bete_ancien' => 'あなたの古いメモ類', # MODIF
 'info_plus_cinq_car' => '６文字以上',
@@ -494,7 +503,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_site_2' => 'サイト：',
 'info_site_min' => 'サイト',
 'info_site_reference_2' => '参照されたサイト',
-'info_site_web' => 'ウェブサイト：',
+'info_site_web' => 'ウェブサイト：', # MODIF
 'info_sites' => 'サイト',
 'info_sites_lies_mot' => '参照されたサイトをこのキーワードと関連付ける',
 'info_sites_proxy' => 'プロキシを使う',
@@ -503,6 +512,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_sous_titre' => 'サブタイトル:',
 'info_statut_administrateur' => '管理者',
 'info_statut_auteur' => 'この著者の状態:', # MODIF
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Registration to be confirmed', # NEW
 'info_statut_auteur_autre' => 'その他の状態:',
 'info_statut_efface' => '削除',
@@ -520,7 +530,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_texte' => 'テキスト',
 'info_texte_explicatif' => '説明用の文章',
 'info_texte_long' => '(文章が長い：いくつかに文章に分けられていますが、適正検査後、システムが自動で繋ぎます。)',
-'info_texte_message' => 'あなたのメッセージ文章:',
+'info_texte_message' => 'あなたのメッセージ文章:', # MODIF
 'info_texte_message_02' => 'メッセージの文章',
 'info_titre' => 'タイトル:',
 'info_total' => '合計:',
@@ -577,6 +587,8 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'install_tables_base' => 'Tables de la base', # NEW
 'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus répandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
 'install_types_db_connus_avertissement' => 'Attention : plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'エディター',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => '登録を許可',
@@ -767,6 +779,8 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'statut_admin_restreint' => '(限定された管理者)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => 'SPIPによる画像自動管理（ビネット（半身像、画像で作られている題名、TeXフォーマットの数式など...) @dir@ ディレクトリ内を合計 @taille@ に調整します。',
 'taille_cache_infinie' => 'このサイトは<code>CACHE/</code>ディレクトリのどんな大きさの制限も設定していない。',
 'taille_cache_maxi' => 'SPIPは<code>CACHE/</code>ディレクトリのデータの大きさを大体<b>@octets@</b>までに制限できます。',
@@ -908,8 +922,8 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_connexion_ldap' => 'オプションズ: <b>あなたのLDAPコネクション</b>',
 'titre_groupe_mots' => 'キーワードグループ:',
 'titre_identite_site' => 'Identité du site', # NEW
-'titre_langue_article' => '記事の言語',
-'titre_langue_rubrique' => 'セクションの言語',
+'titre_langue_article' => '記事の言語', # MODIF
+'titre_langue_rubrique' => 'セクションの言語', # MODIF
 'titre_langue_trad_article' => '記事の言語と翻訳版',
 'titre_les_articles' => '記事',
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW

@@ -15,12 +15,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Accès prohibit',
 'avis_article_modifie' => 'Atenció, @nom_auteur_modif@ ha treballat en aquest article fa @date_diff@ minuts',
 'avis_aucun_resultat' => 'Cap resultat',
-'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
+'avis_base_inaccessible' => 'Impossible connectar-se a la base de dades @base@.',
 'avis_chemin_invalide_1' => 'El camí que heu triat',
 'avis_chemin_invalide_2' => 'no sembla pas vàlid. Voleu tornar a la pàgina precedent i constrastar les informacions donades.',
 'avis_connexion_echec_1' => 'La connexió a la base de dades ha fracassat.',
 'avis_connexion_echec_2' => 'Tornar a la pàgina precedent per verificar les dades que heu ficat.',
 'avis_connexion_echec_3' => '<b>N.B.</b> A molts dels servidors, heu de <b>demanar</b> l\'activació del vostre accés a la base de dades abans de poder-la utilitzar. Si no podeu connectar-vos, verifiqueu que heu efectuat aquest pas.',
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => ' La connexió amb el servidor LDAP ha caigut.',
 'avis_connexion_ldap_echec_2' => 'Tornar a la pàgina precedent per verificar les dades que heu ficat.',
 'avis_connexion_ldap_echec_3' => 'Alternativament, no utilitzeu el support LDAP per a importar els usuaris.',
@@ -105,29 +106,33 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'config_titre_base_sup_choix' => 'Escolliu una base suplementària',
 'connexion_ldap' => 'Connexió:',
 'copier_en_local' => 'Copiar en local',
-'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_un_auteur' => 'Crear i associar un autor',
 
 // D
 'date_mot_heures' => 'hores',
 
 // E
-'ecran_securite' => ' + écran de sécurité @version@', # NEW
+'ecran_securite' => '+ pantalla de seguretat @version@',
 'email' => 'correu electrònic',
 'email_2' => 'correu electrònic:',
 'en_savoir_plus' => 'Per més informació',
 'entree_adresse_annuaire' => 'Adreça del directori',
 'entree_adresse_email' => 'L\'adreça electrònica ',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'Adreça de la base de dades',
 'entree_base_donnee_2' => '(Sovint aquesta adreça correspon a la del vostre lloc, a vegades correspon a la menció «localhost», altres vegades es deixa totalment buida.)',
 'entree_biographie' => 'Biografia curta i en poques paraules.',
 'entree_chemin_acces' => '<b>Entrar</b> el camí d\'accés:',
 'entree_cle_pgp' => 'La vostra clau PGP',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Contingut de la secció, en poques paraules.)',
 'entree_identifiants_connexion' => 'Els vostres identificadors de connexió...',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'Entreu en aquest formulari les informacions de connexió del vostre directori LDAP.
  L\'administrador del sistema o de la xarxa us pot donar aquestes informacions.
    ',
 'entree_infos_perso' => 'Qui sóu?',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'A l\'interior de la secció:',
 'entree_liens_sites' => '<b>Enllaç hipertext</b> (referència, indret a visitar...)',
 'entree_login' => 'El vostre nom d\'usuari',
@@ -140,15 +145,18 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'entree_nom_fichier' => 'Introduir el nom del fitxer @texte_compresse@:',
 'entree_nom_pseudo' => 'El vostre nom o pseudònim',
 'entree_nom_pseudo_1' => '(El vostre nom o el vostre pseudònim)',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'El nom del vostre lloc',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => 'Una nova contrasenya',
 'entree_passe_ldap' => 'Contrasenya',
 'entree_port_annuaire' => 'Número de port del directori',
 'entree_signature' => 'Secció',
 'entree_titre_obligatoire' => '<b>Títol</b> [Obligatori]<br />',
 'entree_url' => 'L\'adreça (URL) del vostre lloc',
-'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
-'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
+'entree_url_2' => 'Adresse (URL) du site', # NEW
+'erreur_connect_deja_existant' => 'Ja existeix un servidor amb aquest nom',
+'erreur_nom_connect_incorrect' => 'Aquest nom de servidor no està autoritzat',
 'erreur_plugin_desinstalation_echouee' => 'La desinstal·lació del connector ha fracassat. No obstant el podeu desactivar. ',
 'erreur_plugin_fichier_absent' => 'Fitxer absent',
 'erreur_plugin_fichier_def_absent' => 'Fitxer de definició absent',
@@ -209,8 +217,8 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'icone_supprimer_signature' => 'Suprimir aquesta secció',
 'icone_valider_signature' => 'Validar aquesta signatura',
 'image_administrer_rubrique' => 'Podeu administrar aquesta secció',
-'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
-'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
+'impossible_modifier_login_auteur' => 'Impossible modificar l\'usuari.',
+'impossible_modifier_pass_auteur' => 'Impossible modificar la contrasenya.',
 'info_1_article' => '1 article',
 'info_1_article_syndique' => '1 article sindicat',
 'info_1_auteur' => '1 autor',
@@ -222,7 +230,8 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_activer_cookie' => 'Podeu activar una <b>galeta de correspondència</b>, us permetrà passar fàcilment del lloc públic al lloc privat.',
 'info_admin_etre_webmestre' => 'Donar-me els drets d\'administrador',
 'info_admin_gere_rubriques' => 'Aquest administrador gestiona les següents seccions:',
-'info_admin_gere_toutes_rubriques' => 'Aquest administrador gestiona <b>totes les seccions</b>.',
+'info_admin_gere_toutes_rubriques' => 'Aquest administrador gestiona <b>totes les seccions</b>.', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Sóc <b>administrador</b>',
 'info_admin_statuer_webmestre' => 'Donar a aquest administrador els drets de webmestre',
 'info_admin_webmestre' => 'Aquest administrador és <b>webmestre</b>',
@@ -235,7 +244,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_administrer_rubrique' => 'Podeu administrar aquesta secció',
 'info_adresse' => 'a l\'adreça:',
 'info_adresse_url' => 'Adreça (URL) del lloc públic',
-'info_afficher_par_nb' => 'Afficher par', # NEW
+'info_afficher_par_nb' => 'Mostrar per',
 'info_afficher_visites' => 'Mostrar les visites per:',
 'info_aide_en_ligne' => 'Ajuda en línia d\'SPIP',
 'info_ajout_image' => 'Quan afegiu imatges com a documents adjunts en un article, l\'SPIP pot crear automàticament imatges en miniatura de les imatges inserides. Això permet, per exemple, la creació automàtica d\'una galeria o d\'un portafoli.',
@@ -249,8 +258,8 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_articles_02' => 'articles',
 'info_articles_2' => 'Articles',
 'info_articles_auteur' => 'Articles d\'aquest autor',
-'info_articles_miens' => 'Mes articles', # NEW
-'info_articles_tous' => 'Tous les articles', # NEW
+'info_articles_miens' => 'Els meus articles',
+'info_articles_tous' => 'Tots els articles',
 'info_articles_trouves' => 'Articles trobats',
 'info_articles_trouves_dans_texte' => 'Articles trobats (en el text)',
 'info_attente_validation' => 'Els vostres articles en espera de validació',
@@ -270,7 +279,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_avertissement' => 'Avís',
 'info_barre_outils' => 'amb la seva barra d\'eines?',
 'info_base_installee' => 'L\'estructura de la vostra bases de dades s\'ha instal·lat.',
-'info_bio' => 'Biographie', # NEW
+'info_bio' => 'Biografia',
 'info_chapeau' => 'Encapçalament',
 'info_chapeau_2' => 'Encapçalament:',
 'info_chemin_acces_1' => 'Opcions: <b>Camí d\'accés al directori</b>',
@@ -298,7 +307,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_contact' => 'Contacte',
 'info_contenu_articles' => 'Contingut dels articles',
 'info_contributions' => 'Contribucions',
-'info_creation_paragraphe' => '(Per crear paràgrafs, deixeu simplement  unes línies buides.)',
+'info_creation_paragraphe' => '(Per crear paràgrafs, deixeu simplement  unes línies buides.)', # MODIF
 'info_creation_rubrique' => 'Abans de poder escriure articles,<br /> heu de crear com a mínim una secció.<br />',
 'info_creation_tables' => 'Creació de les taules de la base de dades',
 'info_creer_base' => '<b>Crear</b> una nova base de dades:',
@@ -363,7 +372,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_liste_redacteurs_connectes' => 'Llista de redactors connectats',
 'info_login_existant' => 'Aquest nom d\'usuari ja existeix.',
 'info_login_trop_court' => 'Nom d\'usuari massa curt.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'El vostre usuari ha de tenir com a mínim @nb@ caràcters.', # MODIF
 'info_logos' => 'Els logotips',
 'info_maximum' => 'màxim:',
 'info_meme_rubrique' => 'Dins la mateixa secció',
@@ -374,7 +383,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_messagerie_interne' => 'Missatgeria interna',
 'info_mise_a_niveau_base' => 'actualització de la vostra base de dades SQL',
 'info_mise_a_niveau_base_2' => '{{Atenció!}} Heu instal·lat una versió dels fitxers d\'SPIP {anterior} a la que hi havia anteriorment en aquest lloc: correu el risc de perdre la vostra base de dades i que el vostre lloc deixi de funcionar.<br />{{Torneu a instal·lar els fitxers d\'SPIP.}}',
-'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
+'info_modification_enregistree' => 'La vostra modificació s\'ha enregistrat',
 'info_modifier_auteur' => 'Modificar l\'autor:',
 'info_modifier_rubrique' => 'Modificar la secció:',
 'info_modifier_titre' => 'Modificar : @titre@',
@@ -416,7 +425,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_nouvel_article' => 'Nou article',
 'info_nouvelle_traduction' => 'Nova traducció:',
 'info_numero_article' => 'ARTICLE NÚMERO:',
-'info_obligatoire_02' => '[Obligatori]',
+'info_obligatoire_02' => '[Obligatori]', # MODIF
 'info_option_accepter_visiteurs' => 'Acceptar la inscripció dels visitants del lloc públic',
 'info_option_faire_suivre' => 'Reenviar els missatges del fòrum als autors dels articles',
 'info_option_ne_pas_accepter_visiteurs' => 'Refusar la inscripció de visitants',
@@ -430,7 +439,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_par_statut' => 'per estat',
 'info_par_tri' => '\'(par @tri@)\'',
 'info_passe_trop_court' => 'Contrasenya massa curta.',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'La vostra contrasenya ha de tenir com a mínim @nb@ caràcters.', # MODIF
 'info_passes_identiques' => 'Les dues contrasenyes no són idèntiques.',
 'info_pense_bete_ancien' => 'Els vostres antics recordatoris',
 'info_plus_cinq_car' => 'més de 5 caràcters',
@@ -459,7 +468,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_question_utilisation_moteur_recherche' => 'Voleu fer servir el motor de cerca integrat a l\'SPIP?
  (inhabilitar-lo accelera el funcionament del sistema.)',
 'info_question_vignettes_referer_non' => 'No mostrar les captures dels llocs d\'origen de les visites',
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ ha treballat en aquest contingut fa @date_diff@ minuts',
 'info_racine_site' => 'Arrel del lloc',
 'info_recharger_page' => 'Actualitzeu aquesta pàgina en breus instants.',
 'info_recherche_auteur_a_affiner' => 'Massa resultats per "@cherche_auteur@"; afineu la cerca.',
@@ -488,7 +497,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_site_2' => 'lloc:',
 'info_site_min' => 'lloc',
 'info_site_reference_2' => 'Lloc referenciat',
-'info_site_web' => 'LLOC WEB:',
+'info_site_web' => 'LLOC WEB:', # MODIF
 'info_sites' => 'llocs',
 'info_sites_lies_mot' => 'Els llocs referenciats lligats a aquesta paraula clau',
 'info_sites_proxy' => 'Utilitzar un proxy',
@@ -497,6 +506,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_sous_titre' => 'Subtítol:',
 'info_statut_administrateur' => 'Administrador',
 'info_statut_auteur' => 'Estatus d\'aquest autor:',
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Inscripció per confirmar',
 'info_statut_auteur_autre' => 'Un altre estat:',
 'info_statut_efface' => 'Suprimit',
@@ -514,7 +524,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_texte' => 'Text',
 'info_texte_explicatif' => 'Text explicatiu',
 'info_texte_long' => '(el text és llarg: es mostra en diverses parts que seran ajuntades després de la validació.)',
-'info_texte_message' => 'Text del vostre missatge:',
+'info_texte_message' => 'Text del vostre missatge:', # MODIF
 'info_texte_message_02' => 'Text del missatge',
 'info_titre' => 'Títol:',
 'info_total' => 'total :',
@@ -551,7 +561,7 @@ amb un color que indica el seu estat:',
 'info_webmestre_forces' => 'Els administradors estan definits a <tt>@file_options@</tt>.',
 'install_adresse_base_hebergeur' => 'Adreça de la base de dades donada per l\'hostatjador',
 'install_base_ok' => 'La base @base@ ha estat reconeguda',
-'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
+'install_connect_ok' => 'La nova base de dades ha estat correctament declarada amb el nom del servidor @connect@.',
 'install_echec_annonce' => 'La instal·lació probablement fracassarà, o anirà a parar a un lloc no funcional...',
 'install_extension_mbstring' => 'SPIP no funciona amb :',
 'install_extension_php_obligatoire' => 'SPIP exigeix l\'extensió php :',
@@ -571,6 +581,8 @@ amb un color que indica el seu estat:',
 'install_tables_base' => 'Taules de la base',
 'install_types_db_connus' => 'SPIP sap utilitzar <b>MySQL</b> (el més difós), <b>PostgreSQL</b> i <b>SQLite</b>.',
 'install_types_db_connus_avertissement' => 'Alerta: Diversos plugins només funcionen amb MySQL',
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'redactor',
 'intitule_licence' => 'Llicència',
 'item_accepter_inscriptions' => 'Acceptar les inscripcions',
@@ -624,7 +636,7 @@ amb un color que indica el seu estat:',
 'label_bando_outils_afficher' => 'Mostrar les eines',
 'label_bando_outils_masquer' => 'Amagar les eines',
 'label_choix_langue' => 'Seleccioneu la vostra llengua',
-'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
+'label_nom_fichier_connect' => 'Indiqueu el nom utilitzat per aquest servidor',
 'label_slogan_site' => 'Eslògan del lloc',
 'label_taille_ecran' => 'Amplada de la pantalla',
 'label_texte_et_icones_navigation' => 'Menú de navegació',
@@ -649,12 +661,12 @@ amb un color que indica el seu estat:',
 'lien_trier_nombre_articles' => 'Classificar per número d\'articles',
 'lien_trier_statut' => 'Classificar per estat',
 'lien_voir_en_ligne' => 'VEURE EN LÍNIA:',
-'logo_article' => 'LOGOTIP DE L\'ARTICLE', # MODIF
-'logo_auteur' => 'LOGOTIP DE L\'AUTOR', # MODIF
-'logo_rubrique' => 'LOGOTIP DE LA SECCIÓ', # MODIF
-'logo_site' => 'LOGOTIP D\'AQUEST LLOC', # MODIF
-'logo_standard_rubrique' => 'LOGOTIP ESTÀNDARD DE LES SECCIONS', # MODIF
-'logo_survol' => 'Logotip canviant', # MODIF
+'logo_article' => 'Logotip de l\'article',
+'logo_auteur' => 'Logotip de l\'autor',
+'logo_rubrique' => 'Logotip de la secció',
+'logo_site' => 'Logotip d\'aquest lloc',
+'logo_standard_rubrique' => 'Logotip estàndard de les seccions',
+'logo_survol' => 'Logotip canviant',
 
 // M
 'menu_aide_installation_choix_base' => 'Trieu la vostra base de dades',
@@ -705,13 +717,13 @@ amb un color que indica el seu estat:',
 'plugin_info_automatique_liste_update' => 'Actualitzar les llistes',
 'plugin_info_automatique_ou' => 'o...',
 'plugin_info_automatique_select' => 'Seleccioneu més avall un plugin: SPIP el baixarà i l\'instal·larà a dins del directori <code>@rep@</code> ; si aquest plugin ja existeix, s\'actualitzarà.',
-'plugin_info_credit' => 'Crédits', # NEW
-'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
+'plugin_info_credit' => 'Crèdits',
+'plugin_info_erreur_xml' => 'La declaració d\'aquest connector és incorrecta',
 'plugin_info_extension_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @extensions@.',
 'plugin_info_extension_2' => 'No es poden desactivar.',
-'plugin_info_install_ok' => 'Installation réussie', # NEW
-'plugin_info_necessite' => 'Necessite :', # NEW
-'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
+'plugin_info_install_ok' => 'Instal·lació correcta',
+'plugin_info_necessite' => 'Necessita:',
+'plugin_info_non_compatible_spip' => 'Aquest connector no és compatible amb aquesta versió d\'SPIP',
 'plugin_info_telecharger' => 'baixar-lo des de @url@ i instal·lar-lo a @rep@',
 'plugin_librairies_installees' => 'Llibreries instal·lades',
 'plugin_necessite_lib' => 'Aquest plugin necessita la llibreria @lib@',
@@ -745,13 +757,13 @@ amb un color que indica el seu estat:',
 'protocole_ldap' => 'Versió del protocol:',
 
 // Q
-'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
-'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
-'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
-'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
-'queue_one_job_in_queue' => '1 travail en attente', # NEW
-'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste des travaux', # NEW
+'queue_executer_maintenant' => 'Executar ara',
+'queue_nb_jobs_in_queue' => '@nb@ treballs en espera',
+'queue_next_job_in_nb_sec' => 'Proper treball en @nb@ s',
+'queue_no_job_in_queue' => 'Cap treball en espera',
+'queue_one_job_in_queue' => '1 treball en espera',
+'queue_purger_queue' => 'Purgar la llista de treballs',
+'queue_titre' => 'Llista de treballs',
 
 // R
 'repertoire_plugins' => 'Directori:',
@@ -761,6 +773,8 @@ amb un color que indica el seu estat:',
 'statut_admin_restreint' => '(admin restringida)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => 'Les imatges calculades automàticament per SPIP (miniatures dels documents, títols presentats en forma gràfica, función matemàtiques en format TeX...) ocupen en el directori @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Aquest lloc Web no preveu limitar la mida del directori de la memòria cau (cache).',
 'taille_cache_maxi' => 'SPIP prova de limitar la mida del directori de la memòria cau (cache) d\'aquest lloc a aproximadament <b>@octets@</b> de dades.',
@@ -789,7 +803,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr�
  pel motor de recerca integrat en SPIP. Això vos permetrà
   guanyar espai a disc.',
 'texte_compatibilite_html' => 'Podeu demanar a SPIP que produeixi, al lloc públic, codi compatible amb la norma <i>HTML4</i>, o permetre-li utilitzar les possibilitats més modernes de l\'<i>HTML5</i>.',
-'texte_compatibilite_html_attention' => 'No hi ha cap risc activant la opció <i>HTML5</i>, però si ho feu, les pàgines del vostre lloc, si voleu que siguin vàlides, hauran de començar per la següent menció: <code><!DOCTYPE html></code>.',
+'texte_compatibilite_html_attention' => 'No hi ha cap risc activant la opció <i>HTML5</i>, però si ho feu, les pàgines del vostre lloc, si voleu que siguin vàlides, hauran de començar per la següent menció: <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(açò pot ser comprimit o no)',
 'texte_compte_element' => ' @count@ element',
 'texte_compte_elements' => ' @count@ elements',
@@ -810,7 +824,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr�
 'texte_effacer_base' => 'Esborrar la base de dades SPIP',
 'texte_effacer_donnees_indexation' => 'Borrar les dades d\'indexació',
 'texte_effacer_statistiques' => 'Esborrar les estadístiques',
-'texte_en_cours_validation' => 'Els articles i breus que hi ha aquí a sota estan proposats per ser publicats. ',
+'texte_en_cours_validation' => 'Els articles i breus que hi ha aquí a sota estan proposats per ser publicats. ', # MODIF
 'texte_enrichir_mise_a_jour' => 'Podeu enriquir la compaginació del text emprant "dreceres tipogràfiques".',
 'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el directori @dossier@ ?</b><p>
  Aquests fitxers us poden servir per restringir l\'accés als autors i als administradors a altres llocs de la vostra Web (programa extern d\'estadístiques, per exemple).</p> Si no li veieu cap utilitat, podeu deixar aquesta opció en el seu valor per defecte (no crear fitxers).</p>',
@@ -901,7 +915,7 @@ el que pot provocar un lleuger alentiment de la vostra pròpia web.',
 'titre_cadre_ajouter_auteur' => 'AFEGIR UN AUTOR:',
 'titre_cadre_interieur_rubrique' => 'A l\'interior de la secció',
 'titre_cadre_numero_auteur' => 'AUTOR NÚMERO',
-'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
+'titre_cadre_numero_objet' => '@objet@ NÚMERO:',
 'titre_cadre_signature_obligatoire' => '<b>Signatura</b> [Obligatòria]<br />',
 'titre_config_contenu_notifications' => 'Notificacions',
 'titre_config_contenu_prive' => 'A l\'espai privat',
@@ -914,8 +928,8 @@ el que pot provocar un lleuger alentiment de la vostra pròpia web.',
 'titre_connexion_ldap' => 'Opcions: <b>Vostre connexió LDAP</b>',
 'titre_groupe_mots' => 'GRUP DE MOTS:',
 'titre_identite_site' => 'Identitat del lloc',
-'titre_langue_article' => 'LLENGUA DE L\'ARTICLE',
-'titre_langue_rubrique' => 'LLENGUA DE LA SECCIÓ',
+'titre_langue_article' => 'LLENGUA DE L\'ARTICLE', # MODIF
+'titre_langue_rubrique' => 'LLENGUA DE LA SECCIÓ', # MODIF
 'titre_langue_trad_article' => 'LLENGUA I TRADUCCIONS DE L\'ARTICLE',
 'titre_les_articles' => 'ELS ARTICLES',
 'titre_messagerie_agenda' => 'Missatgeria i agenda',

@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'Koneksyon sou sévè SQL te pa mache.', # MODIF
 'avis_connexion_echec_2' => 'Tounyen dèyè sou paj avan, e gad byen tout enfòmasyon w te bay isit-la mèm.',
 'avis_connexion_echec_3' => '<b>Atansyon</b> Ak enpè sévè sa-yo fòk  w <b>domann</b> ou lébèrgè te aktive laksé labaz SQL, avan w kap itilize ali. Si w vwa se pa posib mèm konek a w, ann gad byen si w te domann ali avan.', # MODIF
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => 'Koneksyon sou servè LDAP te pa mache.',
 'avis_connexion_ldap_echec_2' => 'Tounyen dèyè paj avan pou ou byen gade ankò enfòmasyon yo w te doné.',
 'avis_connexion_ldap_echec_3' => 'Ann itilize pa sipò LDAP pou gen enpòt itilizatè yo.',
@@ -123,18 +124,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adrès nan aniyè',
 'entree_adresse_email' => 'ou ladrès limèl',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'Ladrès bazdone',
 'entree_base_donnee_2' => '(Souvan ladrès-la se paréy sak ladrès sitwèb w-a, osnon lès senpman «localhost»,  oubyen lès ali vid.)',
 'entree_biographie' => 'Ki se w (kèk mo sèlman).',
 'entree_chemin_acces' => '<b>Rantre</b> chemen pou aksè :',
 'entree_cle_pgp' => 'Ou klé PGP',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Kisa ribrik-la gen kontni nan kèk mo.)',
 'entree_identifiants_connexion' => 'Ou lidantifyan pou koneksyon...',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'Mèsi mèt dann komisyon-la tout enfòmasyon nésesè pou abòd  laniyè LDAP.
 
 
 Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'entree_infos_perso' => 'Kouman w rele ?',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'Andan ribrik-la :',
 'entree_liens_sites' => '<b>Lyen ipètèks</b> (referans, sit pou fè yon vire...)',
 'entree_login' => 'Ou nonkod',
@@ -147,13 +152,16 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'entree_nom_fichier' => 'Mési enskri kouman fichye @texte_compresse@ i rele:',
 'entree_nom_pseudo' => 'Kouman w rele',
 'entree_nom_pseudo_1' => '(Kouman w rele)',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'Kouman sit li rele',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => 'Nouvo modpas',
 'entree_passe_ldap' => 'Modpas',
 'entree_port_annuaire' => 'Niméwo por lanyè',
 'entree_signature' => 'Siyati',
 'entree_titre_obligatoire' => '<b>Kouman bagay la rele</b> [Nesesè]<br />',
 'entree_url' => 'Ladrès (URL) sit-w',
+'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
 'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
@@ -230,7 +238,8 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
  fè yon viré ant sit piblik ek sit privé.',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Komandè-a gè ribrik yo isit kote mèm :',
-'info_admin_gere_toutes_rubriques' => 'Komandè-a kapab gère <b>tout ribrik yo</b>.',
+'info_admin_gere_toutes_rubriques' => 'Komandè-a kapab gère <b>tout ribrik yo</b>.', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
@@ -309,7 +318,7 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_contact' => 'Kontak',
 'info_contenu_articles' => 'Kisa ap kontni nan atik yo',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_paragraphe' => '(Pou kreye kèk pawagwaf, ann lès kèk liy vid senpman.)',
+'info_creation_paragraphe' => '(Pou kreye kèk pawagwaf, ann lès kèk liy vid senpman.)', # MODIF
 'info_creation_rubrique' => 'Avan w kapab ekri kèk atik,<br /> fòk w te fin kreye yon ribrik omwen.<br />',
 'info_creation_tables' => 'Katryèm etap : <b>Kreye kèk tab nan bazdone</b>', # MODIF
 'info_creer_base' => '<b>Kreye</b> yon nouvo bazdone :',
@@ -378,7 +387,7 @@ Koulè imaj rannkont stati yo (komandè = vèr; redaktè = jon).',
 'info_liste_redacteurs_connectes' => 'Llis redaktè ki ap an liy kounye-a',
 'info_login_existant' => 'Nonkod la ki egziste deja.',
 'info_login_trop_court' => 'Nondkod ki tro piti.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'maksimom :',
 'info_meme_rubrique' => 'Lòt dokiman nan pati sa a nan sit la',
@@ -435,7 +444,7 @@ pa mache mèm.<br />{{Fòk w instal ankò
 'info_nouvel_article' => 'Nouvo atik',
 'info_nouvelle_traduction' => 'Nouvo tradiksyon :',
 'info_numero_article' => 'ATIK NIMEWO :',
-'info_obligatoire_02' => '[Nésèsè]',
+'info_obligatoire_02' => '[Nésèsè]', # MODIF
 'info_option_accepter_visiteurs' => 'Asepte vizitè yo enskri y sou sit piblik',
 'info_option_faire_suivre' => 'Voye mesaj yo nan fowom yo pou lotè sa-yo tout atik ki komanté',
 'info_option_ne_pas_accepter_visiteurs' => 'Refize lenskripsyon vizitè yo',
@@ -449,7 +458,7 @@ pa mache mèm.<br />{{Fòk w instal ankò
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => 'Modpas se tro piti.',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Ou dè modpas yo se pa parey sa-mèm.',
 'info_pense_bete_ancien' => 'Ou vyé raple-w sa-yo ', # MODIF
 'info_plus_cinq_car' => 'plis de 5 kawaktè-leprimri',
@@ -514,7 +523,7 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
 'info_site_2' => 'sit :',
 'info_site_min' => 'sit',
 'info_site_reference_2' => 'Sit referanse',
-'info_site_web' => 'SIT WEB :',
+'info_site_web' => 'SIT WEB :', # MODIF
 'info_sites' => 'sit yo',
 'info_sites_lies_mot' => 'Sit referanse sa-yo ki jwenn nan lyen ak mokle-a',
 'info_sites_proxy' => 'Itilize yon proksi (proxy)',
@@ -523,6 +532,7 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
 'info_sous_titre' => 'Soutit :',
 'info_statut_administrateur' => 'Komandè',
 'info_statut_auteur' => 'Lestati lotè-a :', # MODIF
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Inscription à confirmer', # NEW
 'info_statut_auteur_autre' => 'Autre statut :', # NEW
 'info_statut_efface' => 'Ki te finn kraze',
@@ -540,7 +550,7 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
 'info_texte' => 'Tèks',
 'info_texte_explicatif' => 'Tèks pou esplike',
 'info_texte_long' => '(akoz tèks-la se lon : li afiche nan kèk pat sa-yo, zot ke kenbe ansamn aprè konfimasyon.)',
-'info_texte_message' => 'Tèks pou mesaj-w :',
+'info_texte_message' => 'Tèks pou mesaj-w :', # MODIF
 'info_texte_message_02' => 'Tèks pou mesaj-la',
 'info_titre' => 'Tit (Kouman i rele) :',
 'info_total' => 'kont konple :',
@@ -597,6 +607,8 @@ nan yon koulè ki bay lestati ali :',
 'install_tables_base' => 'Tables de la base', # NEW
 'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus répandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
 'install_types_db_connus_avertissement' => 'Attention : plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'redaktè',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Asèpt enskripsyon yo',
@@ -787,6 +799,8 @@ nan yon koulè ki bay lestati ali :',
 'statut_admin_restreint' => '(komandè ki limité)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => 'Tout imaj ki SPIP kav kalkile otomatikman (viyèt nan dokiman, kouman li rele ki pwézanté nan foma gwafik, tout fonksyon matematik nan foma TeX...) yo ka okipe nan répètwar @dir@ lespas total ki @taille@.',
 'taille_cache_infinie' => 'Genyen pa oken limit pou latay répertwar CACHE.',
 'taille_cache_maxi' => 'SPIP ka eseye limite latay répertwar CACHE sit-la, alantou <b>@octets@</b> pou tout doné .',
@@ -981,8 +995,8 @@ ou nan dékripsyon atik sa-yo
 'titre_connexion_ldap' => 'Opsyon sa-yo : <b>ou konèksyon LDAP</b>',
 'titre_groupe_mots' => 'GWOUP MOKLE :',
 'titre_identite_site' => 'Identité du site', # NEW
-'titre_langue_article' => 'LALANNG ATIK-LA',
-'titre_langue_rubrique' => 'LALANNG RIBRIK-LA',
+'titre_langue_article' => 'LALANNG ATIK-LA', # MODIF
+'titre_langue_rubrique' => 'LALANNG RIBRIK-LA', # MODIF
 'titre_langue_trad_article' => 'LALANNG AK TRADIKSYON YO ATIK-LA',
 'titre_les_articles' => 'ATIK YO',
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW

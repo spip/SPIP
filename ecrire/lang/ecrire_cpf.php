@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'Lakostaz-la sir servèr SQL la finn loupé.', # MODIF
 'avis_connexion_echec_2' => 'Artourn paz-déryèr èk vèy byin bann zinformasyon ou la doné.',
 'avis_connexion_echec_3' => '<b>Tansyon Pangar!</b> Sir bonpé servèr i dwa <b>domann</b> léberzèr li fé zwé out permisyon pou lakostaz labaz SQL, sinonsa i pé pa giny anserv ali. Si ou lé pa kav akost labaz, véy byin si ou la domandé permisyon-la.', # MODIF
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => 'Lakostaz-la si lo servèr LDAP, li la pa finn marsé.',
 'avis_connexion_ldap_echec_2' => 'Artourn paz-déryèr èk vèy byin bann zinformasyon ou la doné.',
 'avis_connexion_ldap_echec_3' => 'Dann ka-la,i giny pa a rien anserv lo supor LDAP pou import a bann zitilizatèr.',
@@ -148,18 +149,22 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Ladrès karné',
 'entree_adresse_email' => 'Out ladrès imèl',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'Ladrès labazdodné',
 'entree_base_donnee_2' => '(Souvandfwa ladrès-la lé paréy sak ladrès lo sitwèb, nadfwa pwatan lé inn sinp «localhost», nadfwa lé vid.)',
 'entree_biographie' => 'Arkont inn pé kisa ou lé.',
 'entree_chemin_acces' => '<b>Mèt</b> lo somin-laksé :',
 'entree_cle_pgp' => 'Out klé PGP',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Kosa moun i va trouv dann rubrik-la, an kèk mo sèlman.)',
 'entree_identifiants_connexion' => 'Out nondkod é modpas pou akost lo sitwèb...',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'Mersi mèt dann komisyon-la bann zinformasyon nésésèr pou akost lo karné LDAP.
 
 
 Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a ou.',
 'entree_infos_perso' => 'Kisa ou lé ?',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'Dann rubrik :',
 'entree_liens_sites' => '<b>Gatiraz</b> (égsanp : sitwèb lé konséyé, tousala...)',
 'entree_login' => 'Out nondkod',
@@ -172,13 +177,16 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 'entree_nom_fichier' => 'Mersi mèt lo non do fisyé @texte_compresse@:',
 'entree_nom_pseudo' => 'Out vrénon oubyin ti-non-gaté',
 'entree_nom_pseudo_1' => '(Out vrénon oubyin ti-non-gaté)',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'Lo non out sitwèb',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => 'Nouvo modpas',
 'entree_passe_ldap' => 'Modpas',
 'entree_port_annuaire' => 'Lo niméro d-por dlo karné ',
 'entree_signature' => 'Sinyatir',
 'entree_titre_obligatoire' => '<b>Titr</b> [Nésésèr]<br />',
 'entree_url' => 'Ladrès (URL) out sitwèb',
+'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
 'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
@@ -254,7 +262,8 @@ Bann zinformasyon-la, sé komandèr-sistèm ou komandèr-rézo sak i dwa donn a 
 'info_activer_cookie' => 'I pé fé zwé inn <b>gatomakro drokonésans </b>. Kom sa ou sra kav pas fasilman dopwi lafigirwèb piblik sir lo sit privé.',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Komandèr-la lé responsab si bann rubrik anba:',
-'info_admin_gere_toutes_rubriques' => 'Komandèr-la lé responsab pou <b>TOUT bann rubrik</b>.',
+'info_admin_gere_toutes_rubriques' => 'Komandèr-la lé responsab pou <b>TOUT bann rubrik</b>.', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
@@ -333,7 +342,7 @@ inn liv-zimaz (sédir inn galri).',
 'info_contact' => 'Kontak',
 'info_contenu_articles' => 'Kosa bann zartik i kontyin ',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_paragraphe' => '(Pou kré bann paragraf, lès sinpman trwakat liyn vid.)',
+'info_creation_paragraphe' => '(Pou kré bann paragraf, lès sinpman trwakat liyn vid.)', # MODIF
 'info_creation_rubrique' => 'Avand ékrir bann zartik minm ,<br /> i dwa kré inn rubrik o mwin.<br />',
 'info_creation_tables' => 'Katryèm étap : <b> kréasyon inndé tab labaz</b>',
 'info_creer_base' => '<b>Kré</b> inn nouvèl bazdodné :',
@@ -399,7 +408,7 @@ SPIP anba-la, i sava pa marsé.',
 'info_liste_redacteurs_connectes' => 'Fil bann lotèr an liyn',
 'info_login_existant' => 'Nondkod-la li lé déza anservi.',
 'info_login_trop_court' => 'Nondkod-la lé takini : ékart ali.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'Pli gran siksé :',
 'info_meme_rubrique' => 'Andann mèm ribrik-la',
@@ -457,7 +466,7 @@ la finn dèt publyé).',
 'info_nouvel_article' => 'Nouvo lartik',
 'info_nouvelle_traduction' => 'Nouvèl tradiksyon :',
 'info_numero_article' => 'LARTIK NIMÉRO :',
-'info_obligatoire_02' => '[Obligatwar]',
+'info_obligatoire_02' => '[Obligatwar]', # MODIF
 'info_option_accepter_visiteurs' => 'Asèpt bann vizitèr i inskri azot si lo sit piblik',
 'info_option_faire_suivre' => 'Pou fé swiv bann modékri lo forom a tout bann lotèr bann zartik',
 'info_option_ne_pas_accepter_visiteurs' => 'Arfiz bann vizitèr i inskri azot',
@@ -471,7 +480,7 @@ la finn dèt publyé).',
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => 'Out modpas lé tro takini.',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Bann dé modpass-la lé pa parèy.',
 'info_pense_bete_ancien' => 'Out bann vyé gardantèt', # MODIF
 'info_plus_cinq_car' => 'pli dé 5 karaktèr-limprimri',
@@ -532,7 +541,7 @@ sak i dégrèn lanvwa bann limèl sir zot bann servèr : dann kala, linskrisyon
 'info_site_2' => 'sitwèb :',
 'info_site_min' => 'sitwèb',
 'info_site_reference_2' => 'Sitwèb référansé',
-'info_site_web' => 'SITWÈB :',
+'info_site_web' => 'SITWÈB :', # MODIF
 'info_sites' => 'bann sitwèb',
 'info_sites_lies_mot' => 'Bann sit référansé sak lé gatiré èk molalklé-la',
 'info_sites_proxy' => 'Anserv inn proksi',
@@ -541,6 +550,7 @@ sak i dégrèn lanvwa bann limèl sir zot bann servèr : dann kala, linskrisyon
 'info_sous_titre' => 'Soutitr :',
 'info_statut_administrateur' => 'Komandèr',
 'info_statut_auteur' => 'Lo statu lotèr-la :', # MODIF
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Ou i dwa konfime out linkrisyon ',
 'info_statut_auteur_autre' => 'In ot stati :',
 'info_statut_efface' => 'Dégréné',
@@ -558,7 +568,7 @@ sak i dégrèn lanvwa bann limèl sir zot bann servèr : dann kala, linskrisyon
 'info_texte' => 'Tèks',
 'info_texte_explicatif' => 'Esplik inn pé ',
 'info_texte_long' => '(tèks-la lé lon : akoz li aparé astèr an plizyèr karo, sak i sava kolé dinn bou aprè lakonfirmasyon.)',
-'info_texte_message' => 'Lo tèks out modékri :',
+'info_texte_message' => 'Lo tèks out modékri :', # MODIF
 'info_texte_message_02' => 'Lo tèks lo modékri',
 'info_titre' => 'Titr :',
 'info_total' => 'Boudikont :',
@@ -615,6 +625,8 @@ sanm in koulèr i présiz son léta :',
 'install_tables_base' => 'Tables de la base', # NEW
 'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus répandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
 'install_types_db_connus_avertissement' => 'Attention : plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'lotèr',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Asèpt bann zinskrisyon',
@@ -805,6 +817,8 @@ sanm in koulèr i présiz son léta :',
 'statut_admin_restreint' => '(komandèr ti-drwa)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => 'Ban zimaz sak SPIP i pé kalkilé otomatikman (tite-zimaz dann dokiman, bann non i prézant grafikman, bann fonkson matématik dan forma TeX...)  zot i prann andan répertwar @dir@ in léspas total sat i ariv @taille@.',
 'taille_cache_infinie' => 'Sit-la li di pas ryin si tay lo répèrtwar <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP li sar esayé armèn lo tay lo répertwar <code>CACHE/</code> pou lo sit-la environ <b>@octets@</b> bann doné.',
@@ -968,8 +982,8 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_connexion_ldap' => 'Bann lopsyon : <b>Out lakostaz LDAP</b>',
 'titre_groupe_mots' => 'GROUP BANN MO :',
 'titre_identite_site' => 'Identité du site', # NEW
-'titre_langue_article' => 'LANG LARTIK-LA',
-'titre_langue_rubrique' => 'LANG LARUBRIK-LA',
+'titre_langue_article' => 'LANG LARTIK-LA', # MODIF
+'titre_langue_rubrique' => 'LANG LARUBRIK-LA', # MODIF
 'titre_langue_trad_article' => 'LANG EK TRADIKSYON LARTIK',
 'titre_les_articles' => 'BANN ZARTIK',
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW

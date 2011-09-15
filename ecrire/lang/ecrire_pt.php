@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'A ligação ao servidor  SQL falhou.', # MODIF
 'avis_connexion_echec_2' => 'Volte à página anterior e verifique as informações que forneceu ',
 'avis_connexion_echec_3' => '<b>N.B.</b> Em diversos servidores, precisa <b>solicitar</b> a activação do seu acesso à base de dados SQL antes de poder utilizá-la. Se não consegue ligar-se, verifique se efectuou esse pedido.', # MODIF
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => 'A ligação ao servidor LDAP falhou',
 'avis_connexion_ldap_echec_2' => 'Volte à página anterior e verifique as informações que forneceu ',
 'avis_connexion_ldap_echec_3' => 'Alternativamente, não utilize o suporte LDAP para importar utilizadores.',
@@ -125,17 +126,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Endereço do anuário',
 'entree_adresse_email' => 'O seu endereço email',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'Endereço da base de dados',
 'entree_base_donnee_2' => '(Muitas vezes, este endereço corresponde ao do seu sítio, outras vezes, corresponde à menção «localhost», às vezes, fica totalmente vazio.)',
 'entree_biographie' => 'Curta biografia, em poucas palavras',
 'entree_chemin_acces' => '<b>Introduzir</b> o caminho de acesso :', # MODIF
 'entree_cle_pgp' => 'A sua chave PGP',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Conteúdo da rubrica em poucas palavras.)',
 'entree_identifiants_connexion' => 'Os seus identificadores de ligação',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'Favor pôr neste formulário as informações de ligação ao seu anuário LDAP.
 Essas informações devem poder ser fornecidas pelo administrador do sistema,
 ou da rede',
 'entree_infos_perso' => 'Quem é você?',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'Dentro da rubrica :',
 'entree_liens_sites' => '<b>Laço hipertexto</b> (referência, sítio a visitar ...)', # MODIF
 'entree_login' => 'O seu login',
@@ -148,13 +153,16 @@ ou da rede',
 'entree_nom_fichier' => 'Favor introduzir o nome do ficheiro @texte_compresse@:',
 'entree_nom_pseudo' => 'O seu nome ou o seu pseudónimo',
 'entree_nom_pseudo_1' => '(O seu nome ou o seu pseudónimo)',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'O nome do seu sítio',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => 'Nova palavra-passe',
 'entree_passe_ldap' => 'Palavra-passe',
 'entree_port_annuaire' => 'O número de porta do anuário',
 'entree_signature' => 'Assinatura',
 'entree_titre_obligatoire' => '<b>Título</b> [Obrigatório]<br />', # MODIF
 'entree_url' => 'O endereço (URL) do seu sítio',
+'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
 'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
@@ -231,7 +239,8 @@ ou da rede',
  permitirá passar facilmente do sítio público ao sítio privado ',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Este administrador gere as seguintes rubricas:',
-'info_admin_gere_toutes_rubriques' => 'Este administrador gere <b>todas as rubricas</b>.',
+'info_admin_gere_toutes_rubriques' => 'Este administrador gere <b>todas as rubricas</b>.', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
@@ -310,7 +319,7 @@ ou da rede',
 'info_contact' => 'Contacto',
 'info_contenu_articles' => 'Conteúdo dos artigos',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_paragraphe' => '(Para criar parágrafos, deixe simplesmente linhas vazias.)',
+'info_creation_paragraphe' => '(Para criar parágrafos, deixe simplesmente linhas vazias.)', # MODIF
 'info_creation_rubrique' => 'Antes de poder escrever artigos, <br />deve criar pelo menos uma rubrica.<br />', # MODIF
 'info_creation_tables' => 'Quarta etapa : <b>Criação das tabelas da base<b>', # MODIF
 'info_creer_base' => '<b>Criar</b> uma nova base de dados', # MODIF
@@ -380,7 +389,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_liste_redacteurs_connectes' => 'Lista dos redactores ligados',
 'info_login_existant' => 'Este login já existe.',
 'info_login_trop_court' => 'Login demasiado curto.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'máximo :',
 'info_meme_rubrique' => 'Na mesma rubrica',
@@ -437,7 +446,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_nouvel_article' => 'Novo artigo',
 'info_nouvelle_traduction' => 'Nova tradução :',
 'info_numero_article' => 'ARTIGO NÚMERO :',
-'info_obligatoire_02' => '[Obigatório]',
+'info_obligatoire_02' => '[Obigatório]', # MODIF
 'info_option_accepter_visiteurs' => 'Aceitar a inscrição de visitantes do site público',
 'info_option_faire_suivre' => 'Fazer seguir as mensagens dos fóruns para os autores dos artigos',
 'info_option_ne_pas_accepter_visiteurs' => 'Recusar a inscrição dos visitantes',
@@ -451,7 +460,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => 'Palavra-passe demasiado curta',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'As duas palavras-passe não são idênticas.',
 'info_pense_bete_ancien' => 'Os seus antigos memorandos', # MODIF
 'info_plus_cinq_car' => 'mais de 5 carácteres',
@@ -516,7 +525,7 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 'info_site_2' => 'sítio :',
 'info_site_min' => 'sítio',
 'info_site_reference_2' => 'Sítio referenciado',
-'info_site_web' => 'SÍTIO WEB :',
+'info_site_web' => 'SÍTIO WEB :', # MODIF
 'info_sites' => 'sítios',
 'info_sites_lies_mot' => 'Os sítios referenciados ligados a esta palavra-chave',
 'info_sites_proxy' => 'Utilizar um proxy',
@@ -525,6 +534,7 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 'info_sous_titre' => 'Sub-título :',
 'info_statut_administrateur' => 'Administrador',
 'info_statut_auteur' => 'Estatuto deste autor :', # MODIF
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Inscription à confirmer', # NEW
 'info_statut_auteur_autre' => 'Autre statut :', # NEW
 'info_statut_efface' => 'Apagado',
@@ -542,7 +552,7 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 'info_texte' => 'Texto',
 'info_texte_explicatif' => 'Texto explicativo',
 'info_texte_long' => '(o texto é comprido : aparece, por isso, em muitas partes que serão coladas depois da validação.)',
-'info_texte_message' => 'Texto da sua mensagem :',
+'info_texte_message' => 'Texto da sua mensagem :', # MODIF
 'info_texte_message_02' => 'Texto da mensagem',
 'info_titre' => 'Título :',
 'info_total' => 'total :',
@@ -599,6 +609,8 @@ numa cor que indica o seu estado:',
 'install_tables_base' => 'Tables de la base', # NEW
 'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus répandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
 'install_types_db_connus_avertissement' => 'Attention : plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'redactor',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Aceitar as inscrições',
@@ -789,6 +801,8 @@ numa cor que indica o seu estado:',
 'statut_admin_restreint' => '(admin restrito)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => 'As imagens calculadas automaticamente pelo SPIP (miniaturas dos documentos, títulos apresentados sob forma gráfica, funções matemáticas no formato TeX...) ocupam no directório @dir@ um total de @taille@.',
 'taille_cache_infinie' => 'Este site não prevê limitação de tamanho do diretório <code>CACHE/</code>.', # MODIF
 'taille_cache_maxi' => 'O SPIP tenta limitar o tamanho do diretório <code>CACHE/</code> deste site em cerca de <b>@octets@</b>.', # MODIF
@@ -985,8 +999,8 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_connexion_ldap' => 'Opções: <b>Sua ligação LDAP</b>',
 'titre_groupe_mots' => 'GRUPO DE PALAVRAS :',
 'titre_identite_site' => 'Identité du site', # NEW
-'titre_langue_article' => 'LÍNGUA DO ARTIGO ',
-'titre_langue_rubrique' => 'LÍNGUA DA RUBRICA',
+'titre_langue_article' => 'LÍNGUA DO ARTIGO ', # MODIF
+'titre_langue_rubrique' => 'LÍNGUA DA RUBRICA', # MODIF
 'titre_langue_trad_article' => 'LÍNGUA E TRADUÇÕES DO ARTIGO',
 'titre_les_articles' => 'OS ARTIGOS',
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW

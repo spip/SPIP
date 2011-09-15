@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'D\'Verbannen mat der Datebank huet nët fonktionnéiert.',
 'avis_connexion_echec_2' => 'Gidd op déi läscht Säit zerëck a kontrolléiert d\'Informatiounen.',
 'avis_connexion_echec_3' => '<b>N.B.</b> Op ville Server\'en muss der d\'Aktivatioun vun engem Zougang un d\'Datebank <b>ufroën</b>, ier der se kënnt benotzen. Wann der keng Verbindung kritt, kontrolléiert op dat gemaach ass.',
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => 'D\'Verbindung mam LDAP-Server huet nët fonktionnéiert.',
 'avis_connexion_ldap_echec_2' => 'Gidd op déi läscht Säit zeréck a kontrolléiert d\'Informatiounen.',
 'avis_connexion_ldap_echec_3' => 'Alternativ benotzt keng LDAP-Ënnerstetzung fir d\'Benotzer ze importéieren.',
@@ -119,16 +120,20 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adress vun der Sammlung',
 'entree_adresse_email' => 'Är Email-Adress',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'Adress vun der Datebank',
 'entree_base_donnee_2' => '(Dës Adress ass oft selwëcht wéi déi vun ärem Site, heiansdo ass ët "localhost", heiansdo gët se eidel gelooss.)',
 'entree_biographie' => 'Kuerz Biographie an e puer Wierder.',
 'entree_chemin_acces' => 'De Wee <b>aginn</b>:',
 'entree_cle_pgp' => 'Äre PGP-Schlëssel',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Inhalt vun der Rubrik an e puer Wierder.)',
 'entree_identifiants_connexion' => 'Är Zougangs-Informatiounen...',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'Gidd an dësen Formulaire d\'Informatiounen vun ärer LDAP-Verbindung an.
 Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.',
 'entree_infos_perso' => 'Wie sidd Dir?',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'An der Rubrik:',
 'entree_liens_sites' => '<b>Link</b> (Referenz, interessante Site...)',
 'entree_login' => 'Äre Login',
@@ -141,13 +146,16 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'entree_nom_fichier' => 'Gidd de Numm vum Fichier @texte_compresse@ an:',
 'entree_nom_pseudo' => 'Äre Numm oder äre Pseudo',
 'entree_nom_pseudo_1' => '(Äre Numm oder äre Pseudo)',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'De Numm vun ärem Site',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => 'Neit Passwuert',
 'entree_passe_ldap' => 'Passwuert',
 'entree_port_annuaire' => 'D\'Port-Nummer vun der Lëscht',
 'entree_signature' => 'Ënnerschrëft',
 'entree_titre_obligatoire' => '<b>Titel</b> [Obligatoresch]<br />',
 'entree_url' => 'D\'Adress (URL) vun ärem Site',
+'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
 'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
@@ -223,7 +231,8 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_activer_cookie' => 'Dir kënnt e <b>Korrespondenz-Cookie</b> aktivéieren, dien Iech erlaabt einfach vum öffentlëchen op de privaten Site ze wiesselen.',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Dësen Administrateur kënmert sëch ëm folgend Rubriken:',
-'info_admin_gere_toutes_rubriques' => 'Dësen Administrateur këmmert sëch ëm <b>all Rubriken</b>.',
+'info_admin_gere_toutes_rubriques' => 'Dësen Administrateur këmmert sëch ëm <b>all Rubriken</b>.', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
@@ -299,7 +308,7 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Inhalt vun den Artikelen',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_paragraphe' => '(Fir e neien Abschnitt, loosst einfach eng eidel Zeil.)',
+'info_creation_paragraphe' => '(Fir e neien Abschnitt, loosst einfach eng eidel Zeil.)', # MODIF
 'info_creation_rubrique' => 'Ier dër kënnt en Artikel schreiwen<br />musst dër op manst eng Rubrik derbäi setzen.<br />',
 'info_creation_tables' => 'Tabellen an d\'Datebank schreiwen',
 'info_creer_base' => 'Eng nei Datebank <b>uleen</b>:',
@@ -362,7 +371,7 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gréng; Redakter =
 'info_liste_redacteurs_connectes' => 'Lëscht vun den ugemelden Redakteren',
 'info_login_existant' => 'Dëse Login gët ët schon.',
 'info_login_trop_court' => 'De Login ass ze kuerz.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'D\'Logo\'en',
 'info_maximum' => 'Maximum:',
 'info_meme_rubrique' => 'An dëser Rubrik',
@@ -414,7 +423,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_nouvel_article' => 'Neien Artikel',
 'info_nouvelle_traduction' => 'Nei Iwwersetzung:',
 'info_numero_article' => 'ARTIKEL NUMMER:',
-'info_obligatoire_02' => '[Obligatoresch]',
+'info_obligatoire_02' => '[Obligatoresch]', # MODIF
 'info_option_accepter_visiteurs' => 'D\'Aschreiwung vu Visiteuren unhuelen',
 'info_option_faire_suivre' => 'D\'Messagen vun de Forum\'en un d\'Auteuren vun den Artikelen schécken',
 'info_option_ne_pas_accepter_visiteurs' => 'D\'Aschreiwung vu Visiteuren refuséieren',
@@ -428,7 +437,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_par_statut' => 'no Status',
 'info_par_tri' => '\'(no @tri@)\'',
 'info_passe_trop_court' => 'Passwuert ze kuerz.',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Déi zwee Passwierder si nët selwecht.',
 'info_pense_bete_ancien' => 'Är al Notizen', # MODIF
 'info_plus_cinq_car' => 'méi wéi 5 Buchstawen',
@@ -484,7 +493,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_site_2' => 'Site:',
 'info_site_min' => 'Site',
 'info_site_reference_2' => 'Referenzéierten Site',
-'info_site_web' => 'SITE:',
+'info_site_web' => 'SITE:', # MODIF
 'info_sites' => 'Siten',
 'info_sites_lies_mot' => 'Un dëst Schlësselwuert gebonnen referenzéiert Siten',
 'info_sites_proxy' => 'Proxy benotzen',
@@ -493,6 +502,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_sous_titre' => 'Ënnertitel:',
 'info_statut_administrateur' => 'Administrateur',
 'info_statut_auteur' => 'Statut vun dësem Auteur:',
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Umeldung ze konfirméieren',
 'info_statut_auteur_autre' => 'Aneren Status:',
 'info_statut_efface' => 'Geläscht',
@@ -510,7 +520,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_texte' => 'Text',
 'info_texte_explicatif' => 'Erklärung',
 'info_texte_long' => '(den Text ass laang: en ass an e puer Stécker déi bei der Validatioun zesummen gepecht ginn.)',
-'info_texte_message' => 'Text vun ärem Message:',
+'info_texte_message' => 'Text vun ärem Message:', # MODIF
 'info_texte_message_02' => 'Text vun ärem Message',
 'info_titre' => 'Titel:',
 'info_total' => 'Total:',
@@ -565,6 +575,8 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'install_tables_base' => 'Datebanktabellen',
 'install_types_db_connus' => 'SPIP kann <b>MySQL</b> (am wäiteste verbreed), <b>PostgreSQL</b> an <b>SQLite</b> benotzen.',
 'install_types_db_connus_avertissement' => 'Opgepasst: verschidde Plugin\'en fonktionnéiere nëmmen mat MySQL',
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'Redakter',
 'intitule_licence' => 'Lizenz',
 'item_accepter_inscriptions' => 'Aschreiwungen unhuelen',
@@ -755,6 +767,8 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'statut_admin_restreint' => '(restriktiven Admin)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => 'Déi automatësch berechent Biller (Vignetten vun Dokumenter, graphesch Titelen, mathematesch Formelen am TeX-Format...) brauchen am Répertoire @dir@ eng Plaz vun @taille@.',
 'taille_cache_infinie' => 'De Cache vun dësem Site ass nët an der Gréisst limitéiert.',
 'taille_cache_maxi' => 'SPIP probéiert d\'Gréisst vum Cache vun dësem Site op ongeféier <b>@octets@</b> ze limitéieren.',
@@ -800,7 +814,7 @@ Benotzt d\'Lëscht hei drënner fir unzegin wéi eng Elementer e kann benotzen.'
 'texte_effacer_base' => 'D\'SPIP-Datebank läschen',
 'texte_effacer_donnees_indexation' => 'Den Index läschen',
 'texte_effacer_statistiques' => 'Statistik läschen',
-'texte_en_cours_validation' => 'Dës Artikelen a Kuerzmeldungen sinn fir d\'Publikatioun proposéiert.',
+'texte_en_cours_validation' => 'Dës Artikelen a Kuerzmeldungen sinn fir d\'Publikatioun proposéiert.', # MODIF
 'texte_enrichir_mise_a_jour' => 'Dir kënnt de Layout verbesseren mat "typographeschen Ofkiirzungen".',
 'texte_fichier_authent' => '<b>Soll SPIP déi speziell Fichier\'en <tt>.htpasswd</tt> an <tt>.htpasswd-admin</tt> am Dossier @dossier@ maachen?</b><p>
 Dës Fichier\'en kënnen den Zougang vun den Redakteren an Administrateuren op verschidden Deeler vum Site kontrolléieren (z.B. externe Statistik-Program).</p><p>
@@ -895,8 +909,8 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_connexion_ldap' => 'Optiounen: <b>Är LDAP-Verbindung</b>',
 'titre_groupe_mots' => 'WUERT-GRUPP:',
 'titre_identite_site' => 'Identité du site', # NEW
-'titre_langue_article' => 'SPROOCH VUM ARTIKEL',
-'titre_langue_rubrique' => 'SPROOCH VUN DER RUBRIK',
+'titre_langue_article' => 'SPROOCH VUM ARTIKEL', # MODIF
+'titre_langue_rubrique' => 'SPROOCH VUN DER RUBRIK', # MODIF
 'titre_langue_trad_article' => 'SPROOCH AN IWWERSETZUNGEN VUM ARTIKEL',
 'titre_les_articles' => 'D\'ARTIKELEN',
 'titre_messagerie_agenda' => 'Messagerie an Agenda',

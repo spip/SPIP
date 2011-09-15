@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'C\'hwitet eo ar c\'hevreañ ouzh an diaz-titouroù.',
 'avis_connexion_echec_2' => 'Deuit en dro d\'ar bajenn a-raok, ha gwiriit an titouroù lakaet ganeoc\'h.',
 'avis_connexion_echec_3' => '<b>N.B.</b> War meur a servijer eo ret deoc\'h <b>goulenn</b> bezañ aotreet da dizhout an diaz-titouroù a-raok gallout implijout anezhañ. Ma n\'hallit ket kevreañ, gwiriit ha graet hoc\'h eus ar goulenn-se.',
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => 'C\'hwitet eo krevreañ ouzh ar servijer LDAP.',
 'avis_connexion_ldap_echec_2' => 'Deuit en-dro d\'ar bajenn a-raok, ha gwiriit an titouroù lakaet ganeoc\'h.',
 'avis_connexion_ldap_echec_3' => 'Bep eil tro, n\'implijit ket ar skor LDAP evit enporzhiañ implijourien.',
@@ -120,16 +121,20 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Chomlec\'h ar rollad tud',
 'entree_adresse_email' => 'Ho postel',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'Chomlec\'h an diaz titouroù',
 'entree_base_donnee_2' => '(Alies e klot ar chomlec\'h-se gant hini ho lec\'hienn, a-wechoù e klot gant ar meneg «localhost», gwechoù all e chom goullo)',
 'entree_biographie' => 'Buhezskrid berr-ha-berr.',
 'entree_chemin_acces' => '<b>Skrivañ</b> an hent moned :',
 'entree_cle_pgp' => 'Hoc\'h alc\'hwez PGP',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Danvez ar rubrikenn berr-ha-berr)',
 'entree_identifiants_connexion' => 'Ho titouroù kevreañ...',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'Skrivit er furmskrid-mañ titouroù kevreañ ho rollad tud LDAP
  Gant merour ar reizhiad pe ar rouedad e c\'hell ar re-se bezañ roet deoc\'h.',
 'entree_infos_perso' => 'Piv oc\'h-c\'hwi ?',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'E diabarzh ar rubrikenn :',
 'entree_liens_sites' => '<b>Liamm gourskrid</b> (davenn, lec\'hienn da weladenniñ,...)',
 'entree_login' => 'Ho ker kevreañ',
@@ -142,13 +147,16 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'entree_nom_fichier' => 'Merkit anv ar restr @texte_compresse@:',
 'entree_nom_pseudo' => 'Hoc\'h anv pe lesanv',
 'entree_nom_pseudo_1' => '(Hoc\'h anv pe ho lesanv)',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'Anv ho lec\'hienn',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => 'Ger-tremen nevez',
 'entree_passe_ldap' => 'Ger-tremen',
 'entree_port_annuaire' => 'Niverenn borzh ar rollad tud',
 'entree_signature' => 'Sinadur',
 'entree_titre_obligatoire' => '<b>Titl</b> [Rekis]<br />',
 'entree_url' => 'Chomlec\'h (URL) ho lec\'hienn',
+'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
 'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
@@ -224,7 +232,8 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'info_activer_cookie' => 'Gallout a rit implijout un <b>toupin heuliañ</b>, ar pezh a dalvezo deoc\'h da dremen en un doare aes eus al lec\'hienn brevez d\'an hini foran.',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Ar rubrikennoù da-heul a vez meret gant ar merour-mañ :',
-'info_admin_gere_toutes_rubriques' => 'An <b>holl rubrikennoù</b> zo meret gant ar merour-mañ.',
+'info_admin_gere_toutes_rubriques' => 'An <b>holl rubrikennoù</b> zo meret gant ar merour-mañ.', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
@@ -303,7 +312,7 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 'info_contact' => 'Darempred',
 'info_contenu_articles' => 'Danvez ar pennadoù',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_paragraphe' => '(Evit krouiñ rannbennadoù, lezit goullo linennoù zo traken)',
+'info_creation_paragraphe' => '(Evit krouiñ rannbennadoù, lezit goullo linennoù zo traken)', # MODIF
 'info_creation_rubrique' => 'A-benn gallout skrivañ pennadoù <br />e rankit bezañ krouet ur rubrikenn da nebeutañ.<br />',
 'info_creation_tables' => 'Krouiñ taolennoù an diaz titouroù',
 'info_creer_base' => '<b>Krouiñ</b> un diaz titouroù nevez :',
@@ -369,7 +378,7 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 'info_liste_redacteurs_connectes' => 'Roll ar skridaozerien kevreet',
 'info_login_existant' => 'C\'hoazh ez eus eus ar ger kevreañ-mañ.',
 'info_login_trop_court' => 'Re verr eo ar ger-kevreañ.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Al logoioù',
 'info_maximum' => 'd\'ar muiañ :',
 'info_meme_rubrique' => 'En hevelep rubrikenn',
@@ -423,7 +432,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_nouvel_article' => 'Pennad nevez',
 'info_nouvelle_traduction' => 'Troidigezh nevez :',
 'info_numero_article' => 'PENNAD NIVERENN :',
-'info_obligatoire_02' => '[Rekis]',
+'info_obligatoire_02' => '[Rekis]', # MODIF
 'info_option_accepter_visiteurs' => 'Aotren enrolladennoù gweladennerien al lec\'hienn foran',
 'info_option_faire_suivre' => 'Lakaat skridaozerien ar pennadoù da heuliañ evezhiadennoù ar forom',
 'info_option_ne_pas_accepter_visiteurs' => 'Nac\'hañ enrolladennoù ar weladennerien',
@@ -437,7 +446,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_par_statut' => 'dre statud',
 'info_par_tri' => '\'(dre @tri@)\'',
 'info_passe_trop_court' => 'Ger-tremen re verr.',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Ne glot ket an daou c\'her-tremen.',
 'info_pense_bete_ancien' => 'Ho notennoùigoù-eñvor kozh', # MODIF
 'info_plus_cinq_car' => 'ouzhpenn pemp arouezenn',
@@ -500,7 +509,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_site_2' => 'lec\'hienn :',
 'info_site_min' => 'lec\'hienn',
 'info_site_reference_2' => 'Lec\'hienn menegeret',
-'info_site_web' => 'LEC\'HIENN :',
+'info_site_web' => 'LEC\'HIENN :', # MODIF
 'info_sites' => 'lec\'hiennoù',
 'info_sites_lies_mot' => 'Al lec\'hiennoù menegeret liammet ouzh ar ger-stur-mañ',
 'info_sites_proxy' => 'Implijout ur proksi',
@@ -509,6 +518,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_sous_titre' => 'Istitl :',
 'info_statut_administrateur' => 'Merour',
 'info_statut_auteur' => 'Statud ar skridaozer-mañ :',
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Enskrivadur da gadarnaat',
 'info_statut_auteur_autre' => 'Statud all :',
 'info_statut_efface' => 'Diverket',
@@ -526,7 +536,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_texte' => 'Testenn',
 'info_texte_explicatif' => 'Testenn displegañ',
 'info_texte_long' => '(Dre ma\'z eo hir an destenn eo bet rannet e meur a lodenn, a vo adpeget asambles goude ma vo bet aprouet an destenn)',
-'info_texte_message' => 'Testenn ho kemennadenn :',
+'info_texte_message' => 'Testenn ho kemennadenn :', # MODIF
 'info_texte_message_02' => 'Testenn ar gemennadenn',
 'info_titre' => 'Titl :',
 'info_total' => 'hollad :',
@@ -583,6 +593,8 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'install_tables_base' => 'Taolennoù en diaz',
 'install_types_db_connus' => 'Gallout a ra SPIP ober gant <b>MySQL</b> (an hini implijetañ), <b>PostgreSQL</b> ha <b>SQLite</b>.',
 'install_types_db_connus_avertissement' => 'Diwallit : meur a adveziant ne\'z eont en-dro nemet gant MySQL',
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'skridaozer',
 'intitule_licence' => 'Aotre',
 'item_accepter_inscriptions' => 'Degemer an enskrivadurioù',
@@ -773,6 +785,8 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'statut_admin_restreint' => '(merour strishaet)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => '@taille@ eo hollad ar skeudennoù jedet gant ent emgefre gant SPIP (skeudennigoù an teulioù, an titloù kinniget dindan ur stumm grafek, ar fonksionoù jedoniezh er stumm TeX...) hag a zo er c\'havlec\'h @dir@.',
 'taille_cache_infinie' => 'N\'eo ket bevennet ment kavlec\'h ar grubuilh war al lec\'hienn-mañ.',
 'taille_cache_maxi' => 'Klask a ra SPIP bevenniñ ment kavlec\'h krubuilh al lec\'hienn-mañ e-tro <b>@octets@</b> a roadennoù.',
@@ -822,7 +836,7 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
 'texte_effacer_base' => 'Diverkañ diaz titouroù SPIP',
 'texte_effacer_donnees_indexation' => 'Diverkañ ar roadoù menegeriñ',
 'texte_effacer_statistiques' => 'Diverkañ ar stadegoù',
-'texte_en_cours_validation' => 'Kinniget eo ar pennadoù ha berrskridoù amañ dindan d\'an embann.',
+'texte_en_cours_validation' => 'Kinniget eo ar pennadoù ha berrskridoù amañ dindan d\'an embann.', # MODIF
 'texte_enrichir_mise_a_jour' => 'Gallout a rit bravaat pajennaozañ ho testenn en ur implijout « berradennoù tipografek ».',
 'texte_fichier_authent' => '<b>Ha rankout a ra SPIP krouiñ ar restroù dibar <tt>.htpasswd</tt>
   ha <tt>.htpasswd-admin</tt> er c\'havlec\'h @dossier@ ?</b><p>
@@ -933,8 +947,8 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
 'titre_connexion_ldap' => 'Dibarzhioù : <b>Ho kevreadenn LDAP</b>',
 'titre_groupe_mots' => 'STROLLAD GERIOÙ :',
 'titre_identite_site' => 'Identité du site', # NEW
-'titre_langue_article' => 'YEZH AR PENNAD',
-'titre_langue_rubrique' => 'YEZH AR RUBRIKENN',
+'titre_langue_article' => 'YEZH AR PENNAD', # MODIF
+'titre_langue_rubrique' => 'YEZH AR RUBRIKENN', # MODIF
 'titre_langue_trad_article' => 'YEZH HA TROIDIGEZHIOÙ AR PENNAD',
 'titre_les_articles' => 'AR PENNADOÙ',
 'titre_messagerie_agenda' => 'Postelerezh ha deiziataer',
