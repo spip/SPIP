@@ -276,7 +276,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'Đã gửi thư tín',
 'form_prop_non_enregistre' => 'Đề nghị của bạn chưa được lưu trữ.',
 'form_prop_sujet' => 'Tựa đề',
-'form_prop_url_site' => 'URL của trang web',
+'form_prop_url_site' => 'URL của trang web', # MODIF
 'forum_non_inscrit' => 'Hoặc là bạn chưa ghi danh, hoặc địa chỉ hay mật mã không đúng.',
 'forum_par_auteur' => 'bởi @auteur@',
 'forum_titre_erreur' => 'Có lỗi...',
@@ -476,6 +476,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'Bản ghi nhớ của bạn', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Xem icon mà thôi',
 'lien_afficher_texte_icones' => 'Xem icon và chữ',
@@ -575,6 +576,7 @@ Bạn cho vào mật mã mới để vào lại trang web.', # MODIF
 'pass_nouveau_pass' => 'Mật mã mới',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Quên mật mã',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Rời bỏ khung đó',
 'pass_rappel_login' => 'Lưu ý: login của bạn là "@login@".',
 'pass_recevoir_mail' => 'Bạn sẽ nhận qua email chi tiết chỉ dẫn cách thu hồi phép ra/vô trang web.',

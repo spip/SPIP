@@ -272,7 +272,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'បានផ្ញើ សារ',
 'form_prop_non_enregistre' => 'គ្មានបានចុះបញ្ជី សំណើ ​របស់​អ្នក។',
 'form_prop_sujet' => 'ប្រធានបទ',
-'form_prop_url_site' => 'អាសយដ្ឋាន URL នៃវ៉ែបសៃថ៍',
+'form_prop_url_site' => 'អាសយដ្ឋាន URL នៃវ៉ែបសៃថ៍', # MODIF
 'forum_non_inscrit' => '​អ្នកគ្មានបាន​ចុះ​ឈ្មោះ, ឬ ​អាសយដ្ឋាន ឬ ពាក្យសំងាត់ ខុស​។',
 'forum_par_auteur' => 'ដោយ @auteur@',
 'forum_titre_erreur' => 'កំហុស​...',
@@ -470,6 +470,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'ការក្រើនរំលឹក ​របស់​អ្នក', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'បង្ហាញ​តែ​រូបតំណាង​ប៉ុណ្ណោះ',
 'lien_afficher_texte_icones' => 'បង្ហាញចេញ ​រូបតំណាង និង​អត្ថបទ',
@@ -564,6 +565,7 @@ sera ignorée) :
 'pass_nouveau_pass' => 'ពាក្យសំងាតថ្មី',
 'pass_ok' => 'យល់ព្រម',
 'pass_oubli_mot' => 'ភ្លេច​ពាក្យសំងាត់',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'ចាក​ចេញ ពី​បង្អួច​នេះ',
 'pass_rappel_login' => 'ក្រើនរំលឹក ៖ អត្តសញ្ញា របស់​អ្នក (ការពិនិត្យ​ចូល​) គឺ "@login@"។',
 'pass_recevoir_mail' => 'អ្នក​នឹង​ទទួល​បាន ​អ៊ីមែវល៍ ​ដោយ​ពន្យល់​អំពីវិធី រកមើលការចូលទៅ របស់អ្នក លើវ៉ែបសៃថ៍។',

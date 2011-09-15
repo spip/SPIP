@@ -276,7 +276,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'Mensagem mandada',
 'form_prop_non_enregistre' => 'A sua proposta não foi registada.',
 'form_prop_sujet' => 'Assunto',
-'form_prop_url_site' => 'Endereço (URL) do sítio',
+'form_prop_url_site' => 'Endereço (URL) do sítio', # MODIF
 'forum_non_inscrit' => 'Não está inscrito, ou o endereço ou a palavra-passe estão errados.',
 'forum_par_auteur' => 'por @auteur@',
 'forum_titre_erreur' => 'Erro...',
@@ -476,6 +476,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'Os seus memorandos', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Exibir apenas os ícones',
 'lien_afficher_texte_icones' => 'Exibir ícones e o texto',
@@ -584,6 +585,7 @@ Poderá então introduzir uma nova palavra-passe
 'pass_nouveau_pass' => 'Nova palavra-passe',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Esquecida a palavra-passe',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Deixar esta janela',
 'pass_rappel_login' => 'Recorde : o seu identificador (login) é « @login@ ».',
 'pass_recevoir_mail' => 'Vai receber um email que indica como recuperar o seu acesso ao sítio.',

@@ -276,7 +276,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'Meddelelse sendt',
 'form_prop_non_enregistre' => 'Din forslag er ikke modtaget.',
 'form_prop_sujet' => 'Emne',
-'form_prop_url_site' => 'Webstedets URL',
+'form_prop_url_site' => 'Webstedets URL', # MODIF
 'forum_non_inscrit' => 'Enten er du ikke tilmeldt, eller adresse eller adgangskode er forkert.',
 'forum_par_auteur' => 'af @auteur@',
 'forum_titre_erreur' => 'Fejl...',
@@ -476,6 +476,7 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'infos_vos_pense_bete' => 'Dine memoer', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Vis kun piktogrammer',
 'lien_afficher_texte_icones' => 'Vis piktogrammer og tekst',
@@ -579,6 +580,7 @@ og igen få adgang til webstedet.', # MODIF
 'pass_nouveau_pass' => 'Ny adgangskode',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Glemt adgangskode',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Luk vinduet',
 'pass_rappel_login' => 'Påmindelse: din brugeridentifikation (login) er "@login@".',
 'pass_recevoir_mail' => 'Du vil modtage en e-mail, der forklarer hvordan du kan få adgang til webstedet.',

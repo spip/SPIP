@@ -276,7 +276,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'Messagiu mandatu',
 'form_prop_non_enregistre' => 'Ùn hè micca stata arregistrata a vostra pruposta.',
 'form_prop_sujet' => 'Sugettu',
-'form_prop_url_site' => 'Indirizzu (URL) di u situ',
+'form_prop_url_site' => 'Indirizzu (URL) di u situ', # MODIF
 'forum_non_inscrit' => 'Ùn site micca iscrittu, o l\'indirizzu o u password sò sbagliati.',
 'forum_par_auteur' => 'da @auteur@',
 'forum_titre_erreur' => 'Errore ...',
@@ -479,6 +479,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'I vostri mementi', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Fà cumparisce solu l\'icone',
 'lien_afficher_texte_icones' => 'Fà cumparisce l\'icone cù u testu',
@@ -583,6 +584,7 @@ Puderete tandu inserisce un nuvellu password
 'pass_nouveau_pass' => 'Nuvellu password',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Password dimenticatu',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Esce da sta finestra',
 'pass_rappel_login' => 'Attenti : u vostru còdice (login) hè « @login@ ».',
 'pass_recevoir_mail' => 'Avete da riceve un email spieghendu vi cumu ricuarà u vostru accessu à u situ.',

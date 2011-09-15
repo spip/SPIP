@@ -278,7 +278,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'Съобщението бе изпратено',
 'form_prop_non_enregistre' => 'Предложението не беше запазено.',
 'form_prop_sujet' => 'Относно',
-'form_prop_url_site' => 'URL на сайта',
+'form_prop_url_site' => 'URL на сайта', # MODIF
 'forum_non_inscrit' => 'Или не сте регистрирани, или адресът/ паролата са погрешни.',
 'forum_par_auteur' => 'от @auteur@',
 'forum_titre_erreur' => 'Грешка',
@@ -478,6 +478,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'Лични бележки', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Показване само на икони',
 'lien_afficher_texte_icones' => 'Показване икони и текст',
@@ -590,6 +591,7 @@ sera ignorée) :
 'pass_nouveau_pass' => 'Нова парола',
 'pass_ok' => 'Изпращане',
 'pass_oubli_mot' => 'Забравена парола',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Затваряне на прозореца',
 'pass_rappel_login' => 'Напомняне: Вашето потребителско име (идентификатор) е @login@.',
 'pass_recevoir_mail' => 'Ще получите писмо с инструкции за това, как

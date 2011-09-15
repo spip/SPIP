@@ -276,7 +276,7 @@ do web "@nom_site_spip@" (@adresse_site@):',
 'form_prop_message_envoye' => 'Mensaxe enviada',
 'form_prop_non_enregistre' => 'A súa proposta non foi rexistrada.',
 'form_prop_sujet' => 'Asunto',
-'form_prop_url_site' => 'Enderezo (URL) do web',
+'form_prop_url_site' => 'Enderezo (URL) do web', # MODIF
 'forum_non_inscrit' => 'Aínda non se rexistrou, ou o enderezo ou a chave son incorrectos.',
 'forum_par_auteur' => 'por @auteur@',
 'forum_titre_erreur' => 'Erro...',
@@ -476,6 +476,7 @@ do web "@nom_site_spip@" (@adresse_site@):',
 'infos_vos_pense_bete' => 'As súas notas',
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Amosar só as iconas',
 'lien_afficher_texte_icones' => 'Amosar as iconas e o texto',
@@ -584,6 +585,7 @@ e reconectar co web.
 'pass_nouveau_pass' => 'Nova chave',
 'pass_ok' => 'ben',
 'pass_oubli_mot' => 'Chave esquecida',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Pechar esta xanela',
 'pass_rappel_login' => 'Lembra: o teu identificador (login) é « @login@ «.',
 'pass_recevoir_mail' => 'Recibirás un correo indicándote os pasos a seguir para recuperar o teu acceso.',

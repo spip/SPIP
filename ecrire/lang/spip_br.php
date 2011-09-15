@@ -274,7 +274,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'Kaset eo bet ar gemennadenn',
 'form_prop_non_enregistre' => 'N\'eo ket bet enrollet ho kinnig',
 'form_prop_sujet' => 'Sujed',
-'form_prop_url_site' => 'Chomlec\'h (URL) al lec\'hienn',
+'form_prop_url_site' => 'Chomlec\'h (URL) al lec\'hienn', # MODIF
 'forum_non_inscrit' => 'N\'oc\'h ket enskrivet, pe direizh eo ar ger-tremen pe ar chomlec\'h.',
 'forum_par_auteur' => 'gant @auteur@',
 'forum_titre_erreur' => 'Fazi...',
@@ -474,6 +474,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'Ho notennigoù-eñvor', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Diskouez ar skeudennigoù hepken',
 'lien_afficher_texte_icones' => 'Diskouez ar skeudennigoù hag an destenn',
@@ -578,6 +579,7 @@ kevreañ en-dro ouzh al lec\'hienn.
 'pass_nouveau_pass' => 'Ger-tremen nevez',
 'pass_ok' => 'MAT EO',
 'pass_oubli_mot' => 'Ankouaet ar ger-tremen',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Kuitaat ar prenestr-mañ',
 'pass_rappel_login' => 'Dalc\'hit soñj : « @login@ » eo ho anv-tremen (login).',
 'pass_recevoir_mail' => 'Ur postel a vo kaset deoc\'h, ennañ an titouroù ret da c\'hallout tizhout al lec\'hienn en-dro.',

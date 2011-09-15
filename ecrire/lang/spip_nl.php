@@ -275,7 +275,7 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 'form_prop_message_envoye' => 'Bericht verzonden',
 'form_prop_non_enregistre' => 'Je voorstel is niet geregistreerd',
 'form_prop_sujet' => 'Onderwerp',
-'form_prop_url_site' => 'Website-adres (URL)',
+'form_prop_url_site' => 'Website-adres (URL)', # MODIF
 'forum_non_inscrit' => 'Je bent niet ingeschreven, ofwel is je adres of paswoord niet correct.',
 'forum_par_auteur' => 'door @auteur@',
 'forum_titre_erreur' => 'Fout ...',
@@ -476,6 +476,7 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 'infos_vos_pense_bete' => 'Uw herinneringen',
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Toon alleen icoontjes',
 'lien_afficher_texte_icones' => 'Toon icoontjes en tekst',
@@ -587,6 +588,7 @@ opnieuw verbinding maken met de site
 'pass_nouveau_pass' => 'Nieuw paswoord',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Paswoord vergeten',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Venster sluiten',
 'pass_rappel_login' => 'Herinnering : je aanmeldingsnaam (login) is "@login@".',
 'pass_recevoir_mail' => 'Je zal een e-mail ontvangen waarin uitgelegd staat hoe je opnieuw toegang krijgt tot de site.',

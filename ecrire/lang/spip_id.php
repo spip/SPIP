@@ -278,7 +278,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'Pesan terkirim',
 'form_prop_non_enregistre' => 'Proposal anda tidak disimpan.',
 'form_prop_sujet' => 'Subyek',
-'form_prop_url_site' => 'URL situs',
+'form_prop_url_site' => 'URL situs', # MODIF
 'forum_non_inscrit' => 'Anda belum terdaftar atau alamat atau kata sandi yang salah.',
 'forum_par_auteur' => 'oleh @auteur@',
 'forum_titre_erreur' => 'Kesalahan...',
@@ -478,6 +478,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'Memo anda', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Tampilkan icon saja',
 'lien_afficher_texte_icones' => 'Tampilkan icon dan teks',
@@ -587,6 +588,7 @@ dan mengakses situs kembali.
 'pass_nouveau_pass' => 'Kata sandi baru',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Lupa kata sandi',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Keluar dari layar ini',
 'pass_rappel_login' => 'Pengingat: pengidentifikasi (log masuk) anda adalah "@login@".',
 'pass_recevoir_mail' => 'Anda akan menerima sebuah e-mail yang menjelaskan bagaimana anda mendapatkan akses anda ke situs.',

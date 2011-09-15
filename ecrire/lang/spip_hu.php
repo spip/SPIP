@@ -274,7 +274,7 @@ the address below. (Otherwise your request will be ignored.):
 'form_prop_message_envoye' => 'Üzenet elküldve',
 'form_prop_non_enregistre' => 'A javaslatát nem rögzítettük.',
 'form_prop_sujet' => 'Tárgy',
-'form_prop_url_site' => 'Honlap címe',
+'form_prop_url_site' => 'Honlap címe', # MODIF
 'forum_non_inscrit' => 'Nincs regisztrálva, vagy a cím vagy a jelszó hibás.',
 'forum_par_auteur' => 'Írta: @auteur@',
 'forum_titre_erreur' => 'Hiba...',
@@ -474,6 +474,7 @@ the address below. (Otherwise your request will be ignored.):
 'infos_vos_pense_bete' => 'Az Ön emlékeztetői', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Csak az ikonok megjelenítése',
 'lien_afficher_texte_icones' => 'Ikonok és szöveg megjelenítése',
@@ -579,6 +580,7 @@ Akkor újabb jelszót tud beírni
 'pass_nouveau_pass' => 'Új jelszó',
 'pass_ok' => 'Rendben',
 'pass_oubli_mot' => 'Jelszó elvesztése',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Kilépni az ablakból',
 'pass_rappel_login' => 'Emlékeztető : az Ön azonosítója (login) « @login@ ».',
 'pass_recevoir_mail' => 'Hamarosan olyan emailt fog kapni, ami mutatja hogyan lehet visszaszerezni a hozzáférést a honlapra.',

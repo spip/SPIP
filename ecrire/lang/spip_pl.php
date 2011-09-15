@@ -275,7 +275,7 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 'form_prop_message_envoye' => 'Wiadomość wysłana',
 'form_prop_non_enregistre' => 'Twoja propozycja nie została zapisana.',
 'form_prop_sujet' => 'Temat',
-'form_prop_url_site' => 'URL stron\\y',
+'form_prop_url_site' => 'URL stron\\y', # MODIF
 'forum_non_inscrit' => 'Nie jesteś zarejestrowany, lub adres bądź hasło są nieprawidłowe.',
 'forum_par_auteur' => 'wg @auteur@',
 'forum_titre_erreur' => 'Błąd...',
@@ -475,6 +475,7 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 'infos_vos_pense_bete' => 'Twoje notatki', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Pokazuj tylko ikonki',
 'lien_afficher_texte_icones' => 'POkazuj ikonki i tekst',
@@ -584,6 +585,7 @@ można ponownie połączyć się ze stroną.
 'pass_nouveau_pass' => 'Nowe hasło',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Zapomnienie hasła',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Zamknij okno',
 'pass_rappel_login' => 'Przypomnienie : twój identyfikator (login) to « @login@ ».',
 'pass_recevoir_mail' => 'Otrzymasz e-mail wyjaśniający jak możesz odzyskać dostęp do strony.',

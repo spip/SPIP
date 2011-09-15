@@ -275,7 +275,7 @@ indirizzo qui sotto. (Altrimenti la tua richiesta sarà ignorata.):
 'form_prop_message_envoye' => 'Messaggio inviato',
 'form_prop_non_enregistre' => 'La tua proposta non è stata registrata.',
 'form_prop_sujet' => 'Argomento',
-'form_prop_url_site' => 'Indirizzo (URL) del sito',
+'form_prop_url_site' => 'Indirizzo (URL) del sito', # MODIF
 'forum_non_inscrit' => 'Non sei iscritto, oppure l\'indirizzo o la password inseriti non sono corretti.',
 'forum_par_auteur' => 'di @auteur@',
 'forum_titre_erreur' => 'Errore...',
@@ -477,6 +477,7 @@ o contatta il tuo hoster.</font>',
 'infos_vos_pense_bete' => 'I tuoi memo',
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Mostra solo le icone',
 'lien_afficher_texte_icones' => 'Mostra le icone e il testo',
@@ -583,6 +584,7 @@ e riconnetterti all\'area riservata.
 'pass_nouveau_pass' => 'Nuova password',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Password dimenticata',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Chiudi la finestra',
 'pass_rappel_login' => 'Ricorda: il tuo ID (login) è « @login@ ».',
 'pass_recevoir_mail' => 'Riceverai un email contenente le istruzioni per recuperare i dati di accesso al sito.',

@@ -279,7 +279,7 @@ sera ignorée) :
 'form_prop_message_envoye' => '送られたメッセージ',
 'form_prop_non_enregistre' => 'あなたの提案は記録されませんでした。',
 'form_prop_sujet' => '題名',
-'form_prop_url_site' => 'サイトのURL',
+'form_prop_url_site' => 'サイトのURL', # MODIF
 'forum_non_inscrit' => 'あなたが未登録なのか、アドレスかパスワードが間違っているのかどちらかです。',
 'forum_par_auteur' => 'by @auteur@',
 'forum_titre_erreur' => 'エラー...',
@@ -479,6 +479,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'あなたのメモ', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'アイコン表示のみ',
 'lien_afficher_texte_icones' => 'アイコンとテキストの表示',
@@ -586,6 +587,7 @@ sera ignorée) :
 'pass_nouveau_pass' => '新しいパスワード',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'パスワードを忘れている',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'このウィンドウを終了する',
 'pass_rappel_login' => 'リマインダー: あなたのID (ログインID) は " @login@ "。',
 'pass_recevoir_mail' => 'あなたは、このサイトへどのようにアクセスできるかの説明を、e-mailで受け取るでしょう。',

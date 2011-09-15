@@ -267,7 +267,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'wɛn ɔ yí',
 'form_prop_non_enregistre' => 'E siwú wlí Xógbè mì tɔn hɛn á',
 'form_prop_sujet' => 'Xógbè',
-'form_prop_url_site' => 'nɔtɛn (URLU) gblogblojí ɔ tɔn',
+'form_prop_url_site' => 'nɔtɛn (URLU) gblogblojí ɔ tɔn', # MODIF
 'forum_non_inscrit' => 'mì ná nyíkɔ , kàbí nɔtɛn, cávì lɛ nyɔ á.',
 'forum_par_auteur' => '@nyɔwlántɔ ɖókpóɖókpó@',
 'forum_titre_erreur' => 'mì klɛn àfɔ',
@@ -465,6 +465,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'tàmɛ lìn àgúɖágɔ', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'jònɔ',
 'lien_afficher_texte_icones' => 'xlɛ wémà lɛ',
@@ -562,6 +563,7 @@ Nú mi ná ɖó mɔ nɔtɛn gblogblojí  é lɔ tɔn  mi yì
 'pass_nouveau_pass' => 'Mi sɔ càvì ɖévó',
 'pass_ok' => 'bà yí',
 'pass_oubli_mot' => 'mi yɔn càvì ɔ',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'jó flècè é lɔ ɖó',
 'pass_rappel_login' => 'nyíkɔ mi tɔn  « @login@ ».',
 'pass_recevoir_mail' => 'mi ná sɛ wɛn ɖê ná ɖɔ ɖé mi ná byɔ gblogblojí gbɔn é .',

@@ -107,14 +107,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_mois_9' => '@j@ @nommois@',
 'date_demain' => 'mâine',
 'date_fmt_heures_minutes' => '@h@h@m@min',
-'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
+'date_fmt_heures_minutes_court' => '@h@h@m@',
 'date_fmt_jour_heure' => '@jour@ la @heure@',
 'date_fmt_jour_mois' => '@jour@ @nommois@',
 'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 'date_fmt_mois_annee' => '@nommois@ @annee@',
 'date_fmt_nomjour_date' => '@nomjour@ @date@',
-'date_fmt_periode_from' => 'Du', # NEW
-'date_fmt_periode_to' => 'au', # NEW
+'date_fmt_periode_from' => 'De la',
+'date_fmt_periode_to' => 'la',
 'date_heures' => 'ore',
 'date_hier' => 'ieri',
 'date_il_y_a' => 'acum @delai@',
@@ -275,7 +275,7 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 'form_prop_message_envoye' => 'Mesaj trimis',
 'form_prop_non_enregistre' => 'Propunerea dumneavoastră nu a fost înregistrată.',
 'form_prop_sujet' => 'Subiect',
-'form_prop_url_site' => 'Adresa (URL-ul) site-ului',
+'form_prop_url_site' => 'Adresa (URL-ul) site-ului', # MODIF
 'forum_non_inscrit' => 'Nu sunteţi înscris, sau adresa ori parola dumneavoastră nu sunt corecte.',
 'forum_par_auteur' => 'de @auteur@',
 'forum_titre_erreur' => 'Eroare...',
@@ -354,9 +354,9 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 'info_connexion_refusee' => 'Conexiune refuzată',
 'info_contact_developpeur' => 'Vă rugăm să contactaţi un dezvoltator.',
 'info_contenance' => 'Acest site conţine :',
-'info_contribution' => 'contribuţii la forum', # MODIF
+'info_contribution' => 'contribuţii',
 'info_copyright' => '@spip@ este un program liber distribuit @lien_gpl@.',
-'info_copyright_doc' => 'Pentru mai multe informaţii, vizitaţi site-ul <a href="@spipnet@">http://www.spip.net/ro</a>.', # MODIF
+'info_copyright_doc' => 'Pentru mai multe informaţii, vizitaţi site-ul <a href="@spipnet@">@spipnet_affiche@</a>.',
 'info_copyright_gpl' => 'sub licenţă GPL',
 'info_cours_edition' => 'În curs de redactare',
 'info_creer_repertoire' => 'Vă rugăm să creaţi un fișier sau un director numit :',
@@ -475,6 +475,7 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 'infos_vos_pense_bete' => 'Ciornele dumneavoastră',
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Mărime',
 'lien_afficher_icones_seuls' => 'Afişaţi doar iconiţe',
 'lien_afficher_texte_icones' => 'Afişaţi iconiţe şi text',
@@ -505,7 +506,7 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 'login_espace_prive' => 'spaţiu privat',
 'login_identifiant_inconnu' => 'identificatorul « @login@ » este necunoscut.',
 'login_login' => 'Login :',
-'login_login2' => 'Login (identificator de conectare la site) :', # MODIF
+'login_login2' => 'Login sau adresa email :',
 'login_login_pass_incorrect' => '(Login sau parolă incorectă.)',
 'login_motpasseoublie' => 'parolă uitată ?',
 'login_non_securise' => 'Atenţie, acest formular nu este securizat.
@@ -581,6 +582,7 @@ Veţi putea după aceea alege o nouă parolă şi veţi putea să vă reconecta�
 'pass_nouveau_pass' => 'Parolă nouă',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Parolă uitată',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Părăsiţi această fereastră',
 'pass_rappel_login' => 'Atenţie : identificatorul dumneavoastră (login) este « @login@ ».',
 'pass_recevoir_mail' => 'Veţi primi în curând un email care vă va indica cum puteţi să recuperaţi accesul la site.',
