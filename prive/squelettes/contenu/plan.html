@@ -5,9 +5,9 @@
 		<:entree_interieur_rubrique:>
 		<h3><a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">[(#TITRE|sinon{<:info_sans_titre:>})]</a></h3>
 	#BOITE_FERMER
-	<INCLURE{fond=prive/squelettes/inclure/plan-rubriques,racine=^#ENV{id_rubrique}$,id_rubrique=#ID_PARENT}>
+	<INCLURE{fond=prive/squelettes/inclure/plan-rubriques,id_rubrique=#ENV{id_rubrique},id_parent=#ID_PARENT}>
 </BOUCLE_rub>
 
-	<INCLURE{fond=prive/squelettes/inclure/plan-rubriques,id_rubrique=0}>
+	<INCLURE{fond=prive/squelettes/inclure/plan-rubriques,id_parent=0}>
 <//B_rub>
 <a id="reloadmain" href="#SELF" class="ajax none">reload</a>

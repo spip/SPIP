@@ -3,7 +3,7 @@
 <B_rubriques>
 	[<p class="pagination">[<em>(#VAL{rubrique}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
 	<ul class="menu-items rubriques">
-		<BOUCLE_rubriques(RUBRIQUES) {id_parent}{id_rubrique==#ENV{racine,'.*'}} {par num titre,titre}{statut==.*}{pagination #GET{nb} #GET{nomp}}>
+		<BOUCLE_rubriques(RUBRIQUES) {id_parent}{id_rubrique?} {par num titre,titre}{statut==.*}{pagination #GET{nb} #GET{nomp}}>
 			<li class="item">
 				<a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
 				title="[(#VAL{rubrique}|objet_info{texte_objet}|_T) #ID_RUBRIQUE]"
@@ -17,7 +17,7 @@
 						<INCLURE{fond=#GET{fond},id_rubrique=#_rubriques:ID_RUBRIQUE,env,ajax}>
 					]
 				]</BOUCLE_objets>
-				<INCLURE{fond=prive/squelettes/inclure/plan-rubriques,id_rubrique,racine='',env,ajax}>
+				<INCLURE{fond=prive/squelettes/inclure/plan-rubriques,id_parent=#ID_RUBRIQUE,id_rubrique='',env,ajax}>
 			</li>
 		</BOUCLE_rubriques>
 	</ul>
