@@ -1345,6 +1345,10 @@ function balise_TRI_dist($p, $liste='true') {
 		$p->code = $boucle->modificateur['tri_champ'];
 		return $p;
 	}
+	// forcer la jointure si besoin, et si le champ est statique
+	if (preg_match(",^'([\w.]+)'$,i",$_champ,$m)){
+		index_pile($b, $m[1], $p->boucles);
+	}
 
 	$_libelle = interprete_argument_balise(2,$p);
 	$_libelle = $_libelle?$_libelle:$_champ;
