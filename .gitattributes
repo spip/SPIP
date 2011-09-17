@@ -993,6 +993,7 @@ prive/xhtml-special.ent -text
 prive/xhtml-symbol.ent -text
 /rien.gif -text
 /spip.php -text
+/spip.png -text
 squelettes-dist/favicon.ico.html -text
 squelettes-dist/formulaires/ecrire_auteur.php -text
 squelettes-dist/formulaires/inscription.php -text
