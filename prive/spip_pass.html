@@ -8,7 +8,6 @@
 <title><:pass_mot_oublie:> - [(#NOM_SITE_SPIP|textebrut)]</title>
 <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 <meta name="robots" content="none" />
-<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
 <link rel="stylesheet" href="[(#VAL{reset.css}|find_in_theme|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#VAL{clear.css}|find_in_theme|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#VAL{minipres.css}|find_in_theme|direction_css)]" type="text/css" />
@@ -18,8 +17,9 @@
 ]
 #INSERT_HEAD
 
+<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
 </head>
-<body class='pass' >
+<body>
 
 <div id='minipres'>
 
@@ -33,15 +33,15 @@
 		  #FORMULAIRE_MOT_DE_PASSE
 		]
 	</div>
-	<div style='text-align: #LANG_RIGHT'>
+	<div class="quitter_fenetre">
 	<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 	document.write("<a href='")
 	document.write((window.opener) ? "javascript:close()" : "./")
-	document.write("'><:pass_quitter_fenetre:><" + "/a>");
+	document.write("' title='<:pass_quitter_fenetre:>'><:pass_quitter_fenetre:><" + "/a>");
 	document.getElementById('oubli').focus()
 	/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 	<noscript>
-		&#91;<a href='./'><:pass_retour_public:></a>&#93;
+		&#91;<a href='./' title='<:pass_retour_public:>'><:pass_retour_public:></a>&#93;
 	</noscript>
 	</div>
 	
