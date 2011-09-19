@@ -87,7 +87,7 @@ function optimiser_sansref($table, $id, $sel, $and="")
 function optimiser_base_disparus($attente = 86400) {
 
 	# format = 20060610110141, si on veut forcer une optimisation tout de suite
-	$mydate = date("YmdHis", time() - $attente);
+	$mydate = sql_quote(date("Y-m-d H:i:s", time() - $attente));
 
 	$n = 0;
 
