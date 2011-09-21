@@ -1070,7 +1070,7 @@ function spip_sqlite_selectdb($db, $serveur = '', $requeter = true){
 
 // http://doc.spip.org/@spip_sqlite_set_charset
 function spip_sqlite_set_charset($charset, $serveur = '', $requeter = true){
-	spip_log("Gestion charset sql a ecrire : "."SET NAMES "._q($charset), 'sqlite.'._LOG_ERREUR);
+	# spip_log("Gestion charset sql a ecrire : "."SET NAMES "._q($charset), 'sqlite.'._LOG_ERREUR);
 	# return spip_sqlite_query("SET NAMES ". spip_sqlite_quote($charset), $serveur); //<-- Passe pas !
 }
 
