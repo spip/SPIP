@@ -1,3 +1,4 @@
+-
 Core 2.1.10->2.1.11 (22/09/2011) 
 
 r17662 | fil       | 2011-04-06 23:19:16 +0200 (mer, 06 avr 2011) | permettre d'avoir une apostrophe dans un bouton de generer_form_ecrire (ex: ''Relancer l'installation'')
