@@ -289,7 +289,27 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 	// note : la fonction peut "mettre a jour un document" si on lui
 	// passe "mode=document" et "id_document=.." (pas utilise)
 
+		// Envoyer aux plugins
+		$a = pipeline('pre_insertion',
+			array(
+				'args' => array(
+					'table' => 'spip_documents',
+				),
+				'data' => $a
+			)
+		);
+
 		$id = sql_insertq("spip_documents", $a);
+
+		pipeline('post_insertion',
+			array(
+				'args' => array(
+					'table' => 'spip_documents',
+					'id_objet' => $id_document
+				),
+				'data' => $a
+			)
+		);
 
 		spip_log ("ajout du document $source $nom_envoye  (M '$mode' T '$type_lien' L '$id_lien' D '$id')");
 
