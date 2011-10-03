@@ -1,49 +1,95 @@
 /* ------------------------------------------ */
 /* Styles pour l'agenda de SPIP
+/* ce serait bien de trouver une methodologie de nommage  ... */
 /* ------------------------------------------ */
+
+/* (pour le prive, style_prive predomine en ce qui concerne la couleur */
+
+table.calendrier { border: 0; border-collapse: collapse; }
+table.calendrier-large {  width: 70em; }
+table.calendrier-etroit { width: 60em; }
+table.calendrier caption { color: #FFF; background-color: #CCC; font-family: Verdana, Geneva, Sans, sans-serif; font-weight: bold; font-size: 1em; padding-bottom: 3px;}
+table.calendrier caption img { border: 0; vertical-align: middle; margin: 1px; }
+table.calendrier th { background: #DDD; width: 14%; padding: 5px; text-align: center; vertical-align: middle; font-size: 0.8em; font-weight: bold; font-family: Verdana, Geneva, Sans, sans-serif; }
+table.calendrier th a { color: #000; }
+table.calendrier td { border-color: #666; border-bottom: 1px solid; border-top: 0; height: 8em;  vertical-align: top;}
+
+
+table.calendrier td > a { float: left;
+font-family: arial, helvetica, sans-serif; font-size: 1.2em; color: #000;
+}
+table.calendrier td > a+a { float: right;
+font-family: arial, helvetica, sans-serif; font-size: 1.2em; color: #000;
+}
+table.calendrier td > a + div {clear: both;}
+
+table.calendrier tr.heure td { border: 0; height: 8em;  vertical-align: top;}
+
+tr.calendrier-titre-jour > th { width: 18%; }
+tr.calendrier-titre-jour > th+th { width: 3%; }
+tr.calendrier-titre-jour > th+th+th { width: 58%; }
+tr.calendrier-titre-jour > th+th+th+th { width: 3%; }
+tr.calendrier-titre-jour > th+th+th+th+th { width: 18%; }
+
+tr.calendrier-3jours > td { width: 18%; border: 1px solid; border-top: 0; }
+tr.calendrier-3jours > td+td { width: 3%; border: 0;}
+tr.calendrier-3jours > td+td+td { width: 58%; border: 1px solid; border-top: 0; }
+tr.calendrier-3jours > td+td+td+td { width: 3%;  border: 0;}
+tr.calendrier-3jours > td+td+td+td+td { width: 18%; border: 1px solid; border-top: 0; }
+
+tr.calendrier-3jours > td > div {border: 0;} 
+
+/* complements pour la bordure d'une case */
+.bordure_left { border-left: 1px solid; }
+.bordure_right { border-right: 1px solid; }
+.bordure_double { border-right: 1px solid; border-left: 1px solid;}
+/* et pour son fond */
+.jour_dimanche { background: #eee;color: #000; }
+.jour_encours { background: #FFF;color: #000; }
+.jour_gris { background: #eee;color: #000; }
+.jour_pris { background: #FFF;color: #000; }
+
+/* polices */
+
 .calendrier-arial9 { font-family: Arial, Sans, sans-serif; font-size: 9px; }
 .calendrier-arial10 { font-family: Arial, Sans, sans-serif; font-size: 10px; }
 .calendrier-arial11 { font-family: Arial, Sans, sans-serif; font-size: 11px; }
-.calendrier-verdana10 { font-family: Verdana, Geneva, Sans, sans-serif; font-size: 10px; }
+.calendrier-verdana { font-family: Verdana, Geneva, Sans, sans-serif; }
 .calendrier-helvetica16 { font-family: arial, helvetica, sans-serif; font-size: 16px; color: #000; }
 
-div.navigation-calendrier { color: #FFF; background-color: #CCC; font-family: Verdana, Geneva, Sans, sans-serif; font-weight: bold; font-size: 14px; }
-div.navigation-calendrier img { border: 0; vertical-align: middle; margin: 1px; }
+.calendrier-agenda-abb11 { border: 1px solid #000; margin-left: 1px; margin-top: 1px; padding: 1px; text-align: center; font-family: Arial, Sans, sans-serif; font-size: 11px; font-weight: bold;}
+
+.calendrier-agenda-abb11 a {  color: black; }
+
+.calendrier-evt { cursor: auto; position: absolute; overflow: hidden; -moz-opacity: 0.6; filter: alpha(opacity=60); font-family: Arial, Sans, sans-serif;}
 
 .calendrier-annee { background: #AAA; padding: 3px; margin: 1px; font-family: Verdana, Geneva, Sans, sans-serif; font-size: 10px; font-weight: bold; color: #FFF; }
 .calendrier-annee:hover { color: #000; background-color: #FFF; }
-.calendrier-table-large { border: 0; width: 900px; }
-.calendrier-table-etroit { border: 0; width: 750px; }
-.calendrier-td-centre { width: 550px; padding-left: 25px; padding-right: 25px; vertical-align: top; }
-.calendrier-td { width: 14%; vertical-align: top; }
-.calendrier-th { width: 14%; padding: 5px; text-align: center; vertical-align: middle; font-size: 10px; font-weight: bold; font-family: Verdana, Geneva, Sans, sans-serif; }
-.calendrier-th a { color: #000; }
-.calendrier-table-etroit .calendrier-td-gauche { width: 0; vertical-align: top; }
-.calendrier-table-large .calendrier-td-gauche { width: 150px; vertical-align: top; }
-.calendrier-table-etroit .calendrier-td-droit { width: 150px; vertical-align: top; }
-.calendrier-table-large .calendrier-td-droit { width: 150px; vertical-align: top; }
-.calendrier-jour { position: relative; color: #999; /*background-color: #FFF;*/ border: 1px solid #AAA; }
+
+
+/* Typo des horaires dans une journee */
+.calendrier-jour { position: relative; color: #999; border: 1px solid #AAA; border-right: 0;}
+/* heure pile */
+.calendrier-jour > span { position: absolute; margin-left: 2px; margin-right: 2px; border-top: 1px solid #CCC; font-weight: bold; }
+/* minutes lors du zoom intelligent */
+span.calendrier-jour-m { font-weight: normal; }
+
 .calendrier-agenda { margin-left: 1px; margin-top: 1px; padding: 1px; text-align: center; background-color: #FFF; }
 .calendrier-demiagenda { margin-left: 1px; margin-top: 0; padding: 0; text-align: center; background-color: #FFF; }
 .calendrier-tripleagenda { vertical-align: top; width: 33%; }
-.calendrier-cadreagenda { visibility: hidden; width: 100%; position: absolute; padding-top: 5px; padding-bottom: 5px; border: 0; background-color: #FFF; }
+.calendrier-cadreagenda { position: absolute;  padding-bottom: 5px; border: 0; background: #eee;  margin-top:20px; z-index: 1000;}
+
+
 .calendrier-titre { padding: 5px; text-align: center; font-weight: bold; }
 .calendrier-evenement { padding: 2px; margin-top: 2px; }
-.calendrier-heurepile { position: absolute; margin-left: 2px; margin-right: 2px; border-top: 1px solid #CCC; font-weight: bold; }
-.calendrier-heureface { position: absolute; margin-left: 2px; margin-right: 2px; border-top: 1px solid #CCC; }
-
-.calendrier-mozleft {}
-.calendrier-mozright {}
-.calendrier-moztop8 {}
-.calendrier-mozbottom8 {}
-.calendrier-moztop6 {}
-.calendrier-mozbottom6 {}
 
 .calendrier-opacity { -moz-opacity: 0.3; filter: alpha(opacity=30); }
 .calendrier-png { width: 12px; height: 12px; }
 .calendrier-icone { width: 14px; height: 7px; border: 0; }
 .calendrier-noir  { color: #000; } /* style anar */
-.calendrier-nb  { background-color: #FFF; border: 1px solid #000; color: #000; } /* style cinemat(yp)ographe */
+.calendrier-nb  { background-color: #FFF; border: 1px solid #000; color: #000; }
+
+ /* style cinemat(yp)ographe */
 .calendrier-couleur1 { background: #FDE5F2; border: 1px solid #CD006F; color: #CD006F; } /* Fushia */
 .calendrier-couleur1i { background: #CD006F; border: 1px solid #FDE5F2; color: #FDE5F2; } /* Fushia */
 .calendrier-couleur2 { background: #EDF3FE; border: 1px solid #5da7c5; color: #5da7c5; } /* Bleu */
@@ -73,17 +119,10 @@ div.navigation-calendrier img { border: 0; vertical-align: middle; margin: 1px; 
 .calendrier-couleur14 { background: #F5EEE5; border: 1px solid #8C6635; color: #8C6635; } /* Marron */
 .calendrier-couleur14i { background: #8C6635; border: 1px solid #F5EEE5; color: #F5EEE5; } /* Marron */
 
-/* agenda */
-.bandeau_agenda { background: #DDD; }
-.jour_dimanche { background: #eee;color: #000; }
-.jour_encours { background: #FFF;color: #000; }
-.jour_gris { background: #eee;color: #000; }
-.jour_pris { background: #FFF;color: #000; }
-.calendrier-cadreagenda { background: #eee; } /* grille du calendrier pour espace public */
-/* (pour le prive, style_prive predomine */
+.calendrier-summary {font-family: Verdana, Geneva, Sans, sans-serif; font-weight: bold;}
 
-.bordure_claire { border: 1px solid #666; }
-.bordure_foncee { border: 1px solid #000; }
-.bordure_claire_basse { border-bottom: 1px solid #666; }
-.bordure_claire_left { border-left: 1px solid #666; }
-.bordure_claire_right { border-right: 1px solid #666; }
+.calendrier-location {font-family: Verdana, Geneva, Sans, sans-serif; border:0}
+
+.calendrier-attendee {border:0}
+
+.calendrier-url {border: 0}

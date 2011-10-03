@@ -1142,7 +1142,7 @@ function date_fin_semaine($annee, $mois, $jour) {
 // http://doc.spip.org/@agenda_connu
 function agenda_connu($type)
 {
-  return in_array($type, array('jour','mois','semaine','periode')) ? ' ' : '';
+  return in_array($type, array('jour','mois','semaine','periode', 'trimestre')) ? ' ' : '';
 }
 
 
@@ -1219,7 +1219,9 @@ function agenda_periode($type, $nb, $avec, $sans='')
 		$evt = array($sans, $avec, $min, $max);
 		$type = 'mois';
 	}
-	return http_calendrier_init($start, $type,  _request('echelle'), _request('partie_cal'), self('&'), $evt);
+	$ancre = _request('ancre');
+	$s =  self('&') . (preg_match('/^[\w-]+$/', $ancre) ? "#$ancre" : '');
+	return http_calendrier_init($start, $type,  _request('echelle'), _request('partie_cal'), $s, $evt);
 }
 
 
@@ -1230,7 +1232,7 @@ function agenda_controle($date='date', $jour='jour', $mois='mois', $annee='annee
 	$jour = _request($jour);
 	$mois = _request($mois);
 	$annee = _request($annee);
-	
+
 	if (!($jour||$mois||$anne)) {
 		if ($date = recup_date(_request($date))) {
 			list($annee, $mois, $jour ) = $date;
