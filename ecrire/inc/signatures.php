@@ -104,7 +104,9 @@ function signatures_edit($script, $id, $arg, $row) {
 			._T('info_adresse_email')
 			."</span> "
 			. (!email_valide($ad_email)
-				? $ad_email : ("<a href='mailto:" . attribut_html($ad_email) . "'>$ad_email</a></div>\n"));
+			   ? $ad_email :
+			   ("<a href='mailto:" . attribut_html($ad_email) . "'>$ad_email</a>"))
+			. "</div>\n";
 	}
 
 	$res .= "<div class='texte'>" . message_de_signature($row) . "</div>";
