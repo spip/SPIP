@@ -186,12 +186,6 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			spip_log ("Echec copie du fichier $fichier");
 			return;
 		}
-
-		// Filesize tout seul est limité à 2Go
-		// cf http://php.net/manual/fr/function.filesize.php#refsect1-function.filesize-returnvalues
-		if($taille == '2147483647'){
-			$taille = sprintf("%u", filesize($fichier));
-		}
 		
 		// _INTERFACE_DOCUMENTS
 		// Si mode == 'choix', fixer le mode image/document
