@@ -593,7 +593,7 @@ function sql_test_date($type, $serveur='', $option=true)
 // Cette fonction devrait disparaitre
 
 // http://doc.spip.org/@description_table
-function description_table($nom){
+function description_table($nom, $serveur=''){
 
 	global $tables_principales, $tables_auxiliaires;
 	static $trouver_table;
@@ -604,7 +604,7 @@ function description_table($nom){
 	 ou non
 	 */
 	if (!$trouver_table) $trouver_table = charger_fonction('trouver_table', 'base');
-	if ($desc = $trouver_table($nom))
+	if ($desc = $trouver_table($nom, $serveur))
 		return $desc;
 
 	// sauf a l'installation :

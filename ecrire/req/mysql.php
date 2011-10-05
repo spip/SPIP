@@ -598,7 +598,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$req
 // http://doc.spip.org/@spip_mysql_insertq
 function spip_mysql_insertq($table, $couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
-	if (!$desc) $desc = description_table($table);
+	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) $couples = array();
 	$fields =  isset($desc['field'])?$desc['field']:array();
 
@@ -613,7 +613,7 @@ function spip_mysql_insertq($table, $couples=array(), $desc=array(), $serveur=''
 // http://doc.spip.org/@spip_mysql_insertq_multi
 function spip_mysql_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
-	if (!$desc) $desc = description_table($table);
+	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) $tab_couples = array();
 	$fields =  isset($desc['field'])?$desc['field']:array();
 	
@@ -657,7 +657,7 @@ function spip_mysql_update($table, $champs, $where='', $desc='', $serveur='',$re
 function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$champs) return;
-	if (!$desc) $desc = description_table($table);
+	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) $champs = array(); else $fields =  $desc['field'];
 	$set = array();
 	foreach ($champs as $champ => $val) {

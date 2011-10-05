@@ -817,7 +817,7 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc = '', $serveur = ''
 
 // http://doc.spip.org/@spip_sqlite_insertq
 function spip_sqlite_insertq($table, $couples = array(), $desc = array(), $serveur = '', $requeter = true){
-	if (!$desc) $desc = description_table($table);
+	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) die("$table insertion sans description");
 	$fields = isset($desc['field']) ? $desc['field'] : array();
 
@@ -840,7 +840,7 @@ function spip_sqlite_insertq($table, $couples = array(), $desc = array(), $serve
 
 // http://doc.spip.org/@spip_sqlite_insertq_multi
 function spip_sqlite_insertq_multi($table, $tab_couples = array(), $desc = array(), $serveur = '', $requeter = true){
-	if (!$desc) $desc = description_table($table);
+	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) die("$table insertion sans description");
 	if (!isset($desc['field']))
 		$desc['field'] = array();
@@ -992,7 +992,7 @@ function spip_sqlite_date_proche($champ, $interval, $unite){
 
 // http://doc.spip.org/@spip_sqlite_replace
 function spip_sqlite_replace($table, $couples, $desc = array(), $serveur = '', $requeter = true){
-	if (!$desc) $desc = description_table($table);
+	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) die("$table insertion sans description");
 	$fields = isset($desc['field']) ? $desc['field'] : array();
 
@@ -1192,7 +1192,7 @@ function spip_sqlite_update($table, $champs, $where = '', $desc = '', $serveur =
 function spip_sqlite_updateq($table, $champs, $where = '', $desc = array(), $serveur = '', $requeter = true){
 
 	if (!$champs) return;
-	if (!$desc) $desc = description_table($table);
+	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) die("$table insertion sans description");
 	$fields = $desc['field'];
 
