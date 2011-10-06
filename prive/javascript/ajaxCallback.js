@@ -853,8 +853,10 @@ onAjaxLoad(function() {
 			.formulaire_dyn_ajax();
 		if (jQuery(this).is('div.ajaxbloc'))
 			jQuery(this).ajaxbloc();
-		jQuery('div.ajaxbloc', this)
-			.ajaxbloc();
+		else if (jQuery(this).closest('div.ajaxbloc').length)
+			jQuery(this).closest('div.ajaxbloc').ajaxbloc();
+		else
+			jQuery('div.ajaxbloc', this).ajaxbloc();
 		jQuery("input[placeholder]:text",this).placeholderLabel();
 		jQuery('a.popin',this).click(function(){if (jQuery.modalbox) jQuery.modalbox(parametre_url(this.href,"var_zajax",jQuery(this).attr('data-var_zajax')?jQuery(this).attr('data-var_zajax'):var_zajax_content));return false;});
 	}
