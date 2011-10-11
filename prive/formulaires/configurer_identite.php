@@ -45,7 +45,10 @@ function formulaires_configurer_identite_traiter_dist(){
 	include_spip('inc/meta');
 	foreach(array('nom_site','slogan_site','descriptif_site','email_webmaster') as $k)
 		ecrire_meta($k,_request($k));
-
-	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
+	
+	include_spip('inc/texte_mini');
+	$reload .= "<script type='text/javascript'>if (window.jQuery) jQuery('#bando_identite .nom_site_spip .nom').html('". couper(_request('nom_site'),35) ." ');</script>";
+	
+	return array('message_ok'=>_T('config_info_enregistree').$reload,'editable'=>true);
 }
 ?>
