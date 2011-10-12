@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 	function job_queue_block_and_watch(){
 		// bloquer la queue sur ce hit
 		// pour avoir coherence entre l'affichage de la liste de jobs

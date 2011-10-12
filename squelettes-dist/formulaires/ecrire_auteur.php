@@ -11,6 +11,8 @@
 \***************************************************************************/
 
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function formulaires_ecrire_auteur_charger_dist($id_auteur, $id_article, $mail){
 	include_spip('inc/texte');
 	$puce = definir_puce();

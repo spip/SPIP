@@ -10,6 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // Filtre ad hoc pour le formulaire de login:
 // le parametre var_login n'est pas dans le contexte pour optimiser le cache
 // il faut aller le chercher a la main

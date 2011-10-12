@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 
 /**
  * Transformer un tableau d'entrees array("rubrique|9","article|8",...)

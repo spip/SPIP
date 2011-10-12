@@ -11,6 +11,8 @@
 \***************************************************************************/
 
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /*
  * Des fonctions pour les requetes SQL
  * 

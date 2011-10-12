@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function aide_changer_langue($var_lang_r, $lang_r) {
 	if ($var_lang_r)
 		changer_langue($lang = $var_lang_r);

@@ -11,6 +11,8 @@
 \***************************************************************************/
 
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Compter les articles publies lies a un auteur, dans une boucle auteurs
  * pour la vue prive/liste/auteurs.html
