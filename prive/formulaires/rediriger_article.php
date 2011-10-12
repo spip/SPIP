@@ -44,6 +44,6 @@ function formulaires_rediriger_article_traiter_dist($id_article,$retour=''){
 
 	$js = _AJAX ? '<script type="text/javascript">if (window.ajaxReload) ajaxReload("wysiwyg");</script>':'';
 
-	return array('message_ok'=>($url?_L('Redirection activée'):_L('Redirection enlevée')).$js,'editable'=>true);
+	return array('message_ok'=>($url?_T('info_redirection_activee'):_T('info_redirection_desactivee')).$js,'editable'=>true);
 }
 ?>
