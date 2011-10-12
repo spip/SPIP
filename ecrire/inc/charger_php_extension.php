@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // cette fonction (adaptee de phpMyAdmin)
 // permet de charger un module php
 // dont le nom est donne en argument (ex: 'mysql')

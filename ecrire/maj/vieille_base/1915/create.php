@@ -12,8 +12,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('maj/vieille_base/1915/serial');
 include_spip('maj/vieille_base/1915/auxiliaires');
 include_spip('maj/vieille_base/1915/typedoc');

@@ -10,6 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function saisie_url_syndic($url_syndic,$name='url_syndic',$id='url_syndic'){
 	$res = "";
 	if (strlen($url_syndic) < 8) $url_syndic = "http://";

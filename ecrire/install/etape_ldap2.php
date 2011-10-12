@@ -11,6 +11,8 @@
 \***************************************************************************/
 
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // http://doc.spip.org/@install_etape_ldap2_dist
 function install_etape_ldap2_dist()
 {
