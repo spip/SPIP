@@ -505,6 +505,8 @@ funktioner hos SPIP inte användas.',
 'info_redacteurs' => 'Redaktörer',
 'info_redaction_en_cours' => 'UNDER ARBETE',
 'info_redirection' => 'Ompekning',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Refuserade artiklar',
 'info_reglage_ldap' => 'inställningar: <b>anpassar LDAP import</b>',
 'info_renvoi_article' => '<b>Ompekning.</b> Den här artikeln pekar om till:',

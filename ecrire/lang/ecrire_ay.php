@@ -515,6 +515,8 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_redacteurs' => 'Rédacteurs', # NEW
 'info_redaction_en_cours' => 'EN COURS DE RÉDACTION', # NEW
 'info_redirection' => 'Redirection', # NEW
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Vos articles refusés', # NEW
 'info_reglage_ldap' => 'Options : <b>Réglage de l\'importation LDAP</b>', # NEW
 'info_renvoi_article' => '<b>Redirection.</b> Cet article renvoie à la page:', # NEW

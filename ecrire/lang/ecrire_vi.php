@@ -473,6 +473,8 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_redacteurs' => 'Chủ bút',
 'info_redaction_en_cours' => 'ĐANG SOẠN',
 'info_redirection' => 'Chuyển hướng',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Bài của bạn bị từ chối',
 'info_reglage_ldap' => 'Chọn lựa: <b>Điều chỉnh việc nhập LDAP</b>',
 'info_renvoi_article' => '<b>Chuyển hướng.</b> Bài này nối đến trang: ',

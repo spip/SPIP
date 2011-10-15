@@ -489,6 +489,8 @@ a felhasználók automatikus emailt kapnak,
 'info_redacteurs' => 'Szerzők',
 'info_redaction_en_cours' => 'SZERKESZTÉS ALATT VAN',
 'info_redirection' => 'Átirányítás',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Az Ön elutasított cikkei',
 'info_reglage_ldap' => 'Opciók: <b>LDAP importálás beállítása</b>', # MODIF
 'info_renvoi_article' => '<b>Átirányítás.</b> Ez a cikk erre az oldalra hivatkozik:', # MODIF

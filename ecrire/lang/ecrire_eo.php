@@ -493,6 +493,8 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_redacteurs' => 'Redaktantoj',
 'info_redaction_en_cours' => 'REDAKTATA',
 'info_redirection' => 'Alidirektigo',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Viaj rifuzitaj artikoloj',
 'info_reglage_ldap' => 'Opcioj: <b>Agordo de la LDAP-elŝuto</b>',
 'info_renvoi_article' => '<b>Alidirektigo.</b> Tiu artikolo alidirektas al la paĝo:',

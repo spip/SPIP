@@ -477,6 +477,8 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_redacteurs' => 'Redactores/as',
 'info_redaction_en_cours' => 'En curso de redacción...',
 'info_redirection' => 'Redirección',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Tus artículos rechazados',
 'info_reglage_ldap' => 'Opciones: <b>Ajustes de la importación LDAP</b>',
 'info_renvoi_article' => '<b>Redirección.</b> Este artículo reenvía a la página:',

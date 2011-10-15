@@ -524,6 +524,8 @@ sak i dégrèn lanvwa bann limèl sir zot bann servèr : dann kala, linskrisyon
 'info_redacteurs' => 'Bann lotèr',
 'info_redaction_en_cours' => 'LÉ APRÉ LÉKRITRIR',
 'info_redirection' => 'Tourné-viré (artourn sir inn somin wèb)',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Out bann zartik lé afronté',
 'info_reglage_ldap' => 'Bann lopsyon : <b>Réglaz linportasyon LDAP</b>',
 'info_renvoi_article' => '<b>Tourné-viré.</b> Lartik-la i batavan sir pazwèb-la :',

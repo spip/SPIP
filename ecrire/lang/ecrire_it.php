@@ -503,6 +503,8 @@ impossibile.</i></blockquote>',
 'info_redacteurs' => 'Redattori',
 'info_redaction_en_cours' => 'IN CORSO DI REDAZIONE',
 'info_redirection' => 'Reindirizzamento',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'I tuoi articoli rifiutati',
 'info_reglage_ldap' => 'Opzioni: <b>Parametri per l\'importazione LDAP</b>',
 'info_renvoi_article' => '<b>Reindirizzamento.</b> Quest\'articolo rimanda alla pagina:',

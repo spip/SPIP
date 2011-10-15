@@ -476,6 +476,8 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_redacteurs' => 'Redakteren',
 'info_redaction_en_cours' => 'AN DER AARBECHT',
 'info_redirection' => 'Ëmledung',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Är refuséiert Artikelen',
 'info_reglage_ldap' => 'Optiounen: <b>Astellen vum LDAP-Import</b>',
 'info_renvoi_article' => '<b>Ëmledung.</b> Dësen Artikel weist op d\'Säit:',

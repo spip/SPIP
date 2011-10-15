@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'La connexió a la base de dades ha fracassat.',
 'avis_connexion_echec_2' => 'Tornar a la pàgina precedent per verificar les dades que heu ficat.',
 'avis_connexion_echec_3' => '<b>N.B.</b> A molts dels servidors, heu de <b>demanar</b> l\'activació del vostre accés a la base de dades abans de poder-la utilitzar. Si no podeu connectar-vos, verifiqueu que heu efectuat aquest pas.',
-'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
+'avis_connexion_erreur_nom_base' => 'El nom de la base només pot contenir lletres, xifres i guions',
 'avis_connexion_ldap_echec_1' => ' La connexió amb el servidor LDAP ha caigut.',
 'avis_connexion_ldap_echec_2' => 'Tornar a la pàgina precedent per verificar les dades que heu ficat.',
 'avis_connexion_ldap_echec_3' => 'Alternativament, no utilitzeu el support LDAP per a importar els usuaris.',
@@ -118,21 +118,21 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'en_savoir_plus' => 'Per més informació',
 'entree_adresse_annuaire' => 'Adreça del directori',
 'entree_adresse_email' => 'L\'adreça electrònica ',
-'entree_adresse_email_2' => 'Adresse email', # NEW
+'entree_adresse_email_2' => 'Correu electrònic',
 'entree_base_donnee_1' => 'Adreça de la base de dades',
 'entree_base_donnee_2' => '(Sovint aquesta adreça correspon a la del vostre lloc, a vegades correspon a la menció «localhost», altres vegades es deixa totalment buida.)',
 'entree_biographie' => 'Biografia curta i en poques paraules.',
 'entree_chemin_acces' => '<b>Entrar</b> el camí d\'accés:',
 'entree_cle_pgp' => 'La vostra clau PGP',
-'entree_cle_pgp_2' => 'Clé PGP', # NEW
+'entree_cle_pgp_2' => 'Clau PGP',
 'entree_contenu_rubrique' => '(Contingut de la secció, en poques paraules.)',
 'entree_identifiants_connexion' => 'Els vostres identificadors de connexió...',
-'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
+'entree_identifiants_connexion_2' => 'Identificadors de connexió',
 'entree_informations_connexion_ldap' => 'Entreu en aquest formulari les informacions de connexió del vostre directori LDAP.
  L\'administrador del sistema o de la xarxa us pot donar aquestes informacions.
    ',
 'entree_infos_perso' => 'Qui sóu?',
-'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
+'entree_infos_perso_2' => 'Qui és l\'autor?',
 'entree_interieur_rubrique' => 'A l\'interior de la secció:',
 'entree_liens_sites' => '<b>Enllaç hipertext</b> (referència, indret a visitar...)',
 'entree_login' => 'El vostre nom d\'usuari',
@@ -145,16 +145,16 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'entree_nom_fichier' => 'Introduir el nom del fitxer @texte_compresse@:',
 'entree_nom_pseudo' => 'El vostre nom o pseudònim',
 'entree_nom_pseudo_1' => '(El vostre nom o el vostre pseudònim)',
-'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
+'entree_nom_pseudo_2' => 'Nom o pseudònim ',
 'entree_nom_site' => 'El nom del vostre lloc',
-'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
+'entree_nom_site_2' => 'Nom del lloc de l\'autor',
 'entree_nouveau_passe' => 'Una nova contrasenya',
 'entree_passe_ldap' => 'Contrasenya',
 'entree_port_annuaire' => 'Número de port del directori',
 'entree_signature' => 'Secció',
 'entree_titre_obligatoire' => '<b>Títol</b> [Obligatori]<br />',
 'entree_url' => 'L\'adreça (URL) del vostre lloc',
-'entree_url_2' => 'Adresse (URL) du site', # NEW
+'entree_url_2' => 'Adreça (URL) del lloc',
 'erreur_connect_deja_existant' => 'Ja existeix un servidor amb aquest nom',
 'erreur_nom_connect_incorrect' => 'Aquest nom de servidor no està autoritzat',
 'erreur_plugin_desinstalation_echouee' => 'La desinstal·lació del connector ha fracassat. No obstant el podeu desactivar. ',
@@ -230,8 +230,8 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_activer_cookie' => 'Podeu activar una <b>galeta de correspondència</b>, us permetrà passar fàcilment del lloc públic al lloc privat.',
 'info_admin_etre_webmestre' => 'Donar-me els drets d\'administrador',
 'info_admin_gere_rubriques' => 'Aquest administrador gestiona les següents seccions:',
-'info_admin_gere_toutes_rubriques' => 'Aquest administrador gestiona <b>totes les seccions</b>.', # MODIF
-'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
+'info_admin_gere_toutes_rubriques' => 'Aquest administrador gestiona <b>totes les seccions</b>',
+'info_admin_gere_toutes_rubriques_2' => 'Gestiono <b>totes les seccions</b>',
 'info_admin_je_suis_webmestre' => 'Sóc <b>administrador</b>',
 'info_admin_statuer_webmestre' => 'Donar a aquest administrador els drets de webmestre',
 'info_admin_webmestre' => 'Aquest administrador és <b>webmestre</b>',
@@ -307,7 +307,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_contact' => 'Contacte',
 'info_contenu_articles' => 'Contingut dels articles',
 'info_contributions' => 'Contribucions',
-'info_creation_paragraphe' => '(Per crear paràgrafs, deixeu simplement  unes línies buides.)', # MODIF
+'info_creation_paragraphe' => 'Per crear paràgrafs, deixeu simplement unes línies buides.',
 'info_creation_rubrique' => 'Abans de poder escriure articles,<br /> heu de crear com a mínim una secció.<br />',
 'info_creation_tables' => 'Creació de les taules de la base de dades',
 'info_creer_base' => '<b>Crear</b> una nova base de dades:',
@@ -372,7 +372,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_liste_redacteurs_connectes' => 'Llista de redactors connectats',
 'info_login_existant' => 'Aquest nom d\'usuari ja existeix.',
 'info_login_trop_court' => 'Nom d\'usuari massa curt.',
-'info_login_trop_court_car_pluriel' => 'El vostre usuari ha de tenir com a mínim @nb@ caràcters.', # MODIF
+'info_login_trop_court_car_pluriel' => 'L\'usuari ha de tenir com a mínim @nb@ caràcters.',
 'info_logos' => 'Els logotips',
 'info_maximum' => 'màxim:',
 'info_meme_rubrique' => 'Dins la mateixa secció',
@@ -425,7 +425,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_nouvel_article' => 'Nou article',
 'info_nouvelle_traduction' => 'Nova traducció:',
 'info_numero_article' => 'ARTICLE NÚMERO:',
-'info_obligatoire_02' => '[Obligatori]', # MODIF
+'info_obligatoire_02' => '[obligatori]',
 'info_option_accepter_visiteurs' => 'Acceptar la inscripció dels visitants del lloc públic',
 'info_option_faire_suivre' => 'Reenviar els missatges del fòrum als autors dels articles',
 'info_option_ne_pas_accepter_visiteurs' => 'Refusar la inscripció de visitants',
@@ -439,7 +439,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_par_statut' => 'per estat',
 'info_par_tri' => '\'(par @tri@)\'',
 'info_passe_trop_court' => 'Contrasenya massa curta.',
-'info_passe_trop_court_car_pluriel' => 'La vostra contrasenya ha de tenir com a mínim @nb@ caràcters.', # MODIF
+'info_passe_trop_court_car_pluriel' => 'La contrasenya ha de tenir com a mínim @nb@ caràcters.',
 'info_passes_identiques' => 'Les dues contrasenyes no són idèntiques.',
 'info_pense_bete_ancien' => 'Els vostres antics recordatoris',
 'info_plus_cinq_car' => 'més de 5 caràcters',
@@ -480,6 +480,8 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_redacteurs' => 'Redactors',
 'info_redaction_en_cours' => 'En procés de redacció',
 'info_redirection' => 'Redireccionament',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Els vostres articles rebutjats',
 'info_reglage_ldap' => 'Opcions: <b>Posta a punt de la importació LDAP</b>',
 'info_renvoi_article' => '<b>Redirecció.</b> Aquest article et porta a la pàgina:',
@@ -497,7 +499,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_site_2' => 'lloc:',
 'info_site_min' => 'lloc',
 'info_site_reference_2' => 'Lloc referenciat',
-'info_site_web' => 'LLOC WEB:', # MODIF
+'info_site_web' => 'Lloc Web:',
 'info_sites' => 'llocs',
 'info_sites_lies_mot' => 'Els llocs referenciats lligats a aquesta paraula clau',
 'info_sites_proxy' => 'Utilitzar un proxy',
@@ -506,7 +508,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_sous_titre' => 'Subtítol:',
 'info_statut_administrateur' => 'Administrador',
 'info_statut_auteur' => 'Estatus d\'aquest autor:',
-'info_statut_auteur_2' => 'Je suis', # NEW
+'info_statut_auteur_2' => 'Sóc',
 'info_statut_auteur_a_confirmer' => 'Inscripció per confirmar',
 'info_statut_auteur_autre' => 'Un altre estat:',
 'info_statut_efface' => 'Suprimit',
@@ -524,7 +526,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_texte' => 'Text',
 'info_texte_explicatif' => 'Text explicatiu',
 'info_texte_long' => '(el text és llarg: es mostra en diverses parts que seran ajuntades després de la validació.)',
-'info_texte_message' => 'Text del vostre missatge:', # MODIF
+'info_texte_message' => 'Text del vostre missatge:',
 'info_texte_message_02' => 'Text del missatge',
 'info_titre' => 'Títol:',
 'info_total' => 'total :',
@@ -581,8 +583,8 @@ amb un color que indica el seu estat:',
 'install_tables_base' => 'Taules de la base',
 'install_types_db_connus' => 'SPIP sap utilitzar <b>MySQL</b> (el més difós), <b>PostgreSQL</b> i <b>SQLite</b>.',
 'install_types_db_connus_avertissement' => 'Alerta: Diversos plugins només funcionen amb MySQL',
-'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
-'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
+'instituer_erreur_statut_a_change' => 'L\'estat ja s\'ha modificat',
+'instituer_erreur_statut_non_autorise' => 'No podeu escollir aquest estat',
 'intem_redacteur' => 'redactor',
 'intitule_licence' => 'Llicència',
 'item_accepter_inscriptions' => 'Acceptar les inscripcions',
@@ -773,8 +775,8 @@ amb un color que indica el seu estat:',
 'statut_admin_restreint' => '(admin restringida)',
 
 // T
-'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
-'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)',
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)',
 'taille_cache_image' => 'Les imatges calculades automàticament per SPIP (miniatures dels documents, títols presentats en forma gràfica, función matemàtiques en format TeX...) ocupen en el directori @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Aquest lloc Web no preveu limitar la mida del directori de la memòria cau (cache).',
 'taille_cache_maxi' => 'SPIP prova de limitar la mida del directori de la memòria cau (cache) d\'aquest lloc a aproximadament <b>@octets@</b> de dades.',
@@ -824,7 +826,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr�
 'texte_effacer_base' => 'Esborrar la base de dades SPIP',
 'texte_effacer_donnees_indexation' => 'Borrar les dades d\'indexació',
 'texte_effacer_statistiques' => 'Esborrar les estadístiques',
-'texte_en_cours_validation' => 'Els articles i breus que hi ha aquí a sota estan proposats per ser publicats. ', # MODIF
+'texte_en_cours_validation' => 'Els continguts que hi ha aquí a sota estan a l\'espera de ser validats. ',
 'texte_enrichir_mise_a_jour' => 'Podeu enriquir la compaginació del text emprant "dreceres tipogràfiques".',
 'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el directori @dossier@ ?</b><p>
  Aquests fitxers us poden servir per restringir l\'accés als autors i als administradors a altres llocs de la vostra Web (programa extern d\'estadístiques, per exemple).</p> Si no li veieu cap utilitat, podeu deixar aquesta opció en el seu valor per defecte (no crear fitxers).</p>',
@@ -928,8 +930,8 @@ el que pot provocar un lleuger alentiment de la vostra pròpia web.',
 'titre_connexion_ldap' => 'Opcions: <b>Vostre connexió LDAP</b>',
 'titre_groupe_mots' => 'GRUP DE MOTS:',
 'titre_identite_site' => 'Identitat del lloc',
-'titre_langue_article' => 'LLENGUA DE L\'ARTICLE', # MODIF
-'titre_langue_rubrique' => 'LLENGUA DE LA SECCIÓ', # MODIF
+'titre_langue_article' => 'Llengua de l\'article',
+'titre_langue_rubrique' => 'Llengua de la secció',
 'titre_langue_trad_article' => 'LLENGUA I TRADUCCIONS DE L\'ARTICLE',
 'titre_les_articles' => 'ELS ARTICLES',
 'titre_messagerie_agenda' => 'Missatgeria i agenda',

@@ -506,6 +506,8 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_redacteurs' => 'Redaktoři',
 'info_redaction_en_cours' => 'ROZPRACOVÁNO',
 'info_redirection' => 'Přesměrování',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Vaše odmítnuté články',
 'info_reglage_ldap' => 'Možnost: <b>Nastavení importu LDAP</b>', # MODIF
 'info_renvoi_article' => '<b>Přesměrování.</b> Tento článek odkazuje na stránku:', # MODIF
