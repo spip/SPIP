@@ -273,7 +273,7 @@ wird Ihre Adresse beibehalten):
 'form_prop_message_envoye' => 'Nachricht gesendet',
 'form_prop_non_enregistre' => 'Ihr Vorschlag wurde nicht gespeichert.',
 'form_prop_sujet' => 'Thema',
-'form_prop_url_site' => 'Adresse (URL) der Website', # MODIF
+'form_prop_url_site' => 'URL der der Website',
 'forum_non_inscrit' => 'Sie sind nicht eingeschrieben oder Adresse bzw. Passwort waren falsch.',
 'forum_par_auteur' => 'Nach @auteur@',
 'forum_titre_erreur' => 'Fehler...',
@@ -473,7 +473,7 @@ wird Ihre Adresse beibehalten):
 'infos_vos_pense_bete' => 'Ihre Merkzettel',
 
 // L
-'label_ajout_id_rapide' => 'Ajout rapide', # NEW
+'label_ajout_id_rapide' => 'schnell hinzufügen',
 'label_poids_fichier' => 'Größe',
 'lien_afficher_icones_seuls' => 'Nur Piktogramme anzeigen',
 'lien_afficher_texte_icones' => 'Piktogramme und Beschriftung anzeigen',
@@ -572,7 +572,7 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 'pass_nouveau_pass' => 'Neues Passwort',
 'pass_ok' => 'O.K.',
 'pass_oubli_mot' => 'Passwort vergessen',
-'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
+'pass_procedure_changer' => 'Um Ihr Paßwort zu ändern, müssen wir zunächst Ihre Identität prüfen. Bitte geben Sie die Mailadresse Ihres Accounts an.',
 'pass_quitter_fenetre' => 'Dieses Fenster verlassen',
 'pass_rappel_login' => 'Erinnerung: Ihr Login ist «@login@».',
 'pass_recevoir_mail' => 'Sie erhalten eine E-Mail mit allen Informationen um wieder Zugang zur Website zu erhalten.',
