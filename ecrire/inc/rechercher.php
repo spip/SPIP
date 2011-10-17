@@ -226,7 +226,7 @@ function remplace_en_base($recherche='', $remplace=NULL, $tables=NULL, $options=
 						$modifs[$key] = $repl;
 				}
 				if ($modifs)
-					modifier_contenu($table, $id,
+					objet_modifier_champs($table, $id,
 						array(
 							'champs' => array_keys($modifs),
 						),
