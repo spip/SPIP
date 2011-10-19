@@ -5,6 +5,7 @@
 	compteur_articles,-1
 }})
 ]
+#SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
 #SET{debut,#ENV{debutautl,#EVAL{_request("debutautl");}}}
 <input type="hidden" name="debutautl" value="#GET{debut}" />
 <B_liste_aut>
@@ -18,7 +19,7 @@ a mis a jour la valeur avec la page reelle]
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}}) #AIDER{artauteur}</strong></caption>]
 	<thead>
 		#SET{p,''}
-		<BOUCLE_lettre(AUTEURS){tout}{id_objet?}{objet}{where?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
+		<BOUCLE_lettre(AUTEURS){tout}{id_auteur IN #GET{selection}}{where?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#NOM**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
 		#SELF|parametre_url{debutautl,@#ID_AUTEUR}|ancre_url{paginationautl}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
@@ -40,7 +41,7 @@ a mis a jour la valeur avec la page reelle]
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_aut(AUTEURS){tout}{id_objet?}{objet}{where?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} autl}{!compteur_articles_filtres #ENV*{filtre_statut_articles,poubelle}}>
+	<BOUCLE_liste_aut(AUTEURS){tout}{id_auteur IN #GET{selection}}{where?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} autl}{!compteur_articles_filtres #ENV*{filtre_statut_articles,poubelle}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_AUTEUR|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
 			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,20})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>

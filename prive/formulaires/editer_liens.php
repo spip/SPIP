@@ -13,34 +13,69 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
+/**
+ * @param string $a
+ * @param string|int $b
+ * @param int|string $c
+ * @return array
+ *   ($table_source,$objet,$id_objet,$objet_lien)
+ */
+function determine_source_lien_objet($a,$b,$c){
+	$table_source = $objet_lien = $objet = $id_objet = null;
+	if (is_numeric($c) AND !is_numeric($b)){
+		$table_source = table_objet($a);
+		$objet_lien = objet_type($a);
+		$objet = objet_type($b);
+		$id_objet = $c;
+	}
+	if (is_numeric($b) AND !is_numeric($c)){
+		$table_source = table_objet($c);
+		$objet_lien = objet_type($a);
+		$objet = objet_type($a);
+		$id_objet = $b;
+	}
+
+	return array($table_source,$objet,$id_objet,$objet_lien);
+}
 
 /**
  * #FORMULAIRE_EDITER_LIENS{auteurs,article,23}
+ *   pour associer des auteurs à l'article 23, sur la table pivot spip_auteurs_liens
+ * #FORMULAIRE_EDITER_LIENS{article,23,auteurs}
+ *   pour associer des auteurs à l'article 23, sur la table pivot spip_articles_liens
+ * #FORMULAIRE_EDITER_LIENS{articles,auteur,12}
+ *   pour associer des articles à l'auteur 12, sur la table pivot spip_articles_liens
+ * #FORMULAIRE_EDITER_LIENS{auteur,12,articles}
+ *   pour associer des articles à l'auteur 12, sur la table pivot spip_auteurs_liens
  *
- * @param string $table_source
- *		table des objets associes, doit correspondre a une table xxx_liens
- * @param string $objet
- *    objet auquel associer
- * @param int $id_objet
- *		id_objet auquel associer
+ * @param string $a
+ * @param string|int $b
+ * @param int|string $c
+ * @param bool $editable
  * @return array
  */
-function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet,$editable=true){
+function formulaires_editer_liens_charger_dist($a,$b,$c,$editable=true){
+
+	list($table_source,$objet,$id_objet,$objet_lien) = determine_source_lien_objet($a,$b,$c);
+	if (!$table_source OR !$objet OR !$objet_lien)
+		return false;
+
 	$objet_source = objet_type($table_source);
 	$table_sql_source = table_objet_sql($objet_source);
 
 	// verifier existence de la table xxx_liens
 	include_spip('action/editer_liens');
-	if (!objet_associable($objet_source))
+	if (!objet_associable($objet_lien))
 		return false;
 
-	if (!$editable AND !count(objet_trouver_liens(array($objet_source=>'*'),array($objet=>'*'))))
+	if (!$editable AND !count(objet_trouver_liens(array($objet_lien=>'*'),array(($objet_lien==$objet_source?$objet:$objet_source)=>'*'))))
 		return false;
 	
 	$valeurs = array(
-		'id'=>"$table_source-$objet-$id_objet", // identifiant unique pour les id du form
+		'id'=>"$table_source-$objet-$id_objet-$objet_lien", // identifiant unique pour les id du form
 		'_vue_liee' => $table_source."_lies",
 		'_vue_ajout' => $table_source."_associer",
+		'_objet_lien' => $objet_lien,
 		'id_lien_ajoute'=>_request('id_lien_ajoute'),
 		'objet'=>$objet,
 		'id_objet'=>$id_objet,
@@ -73,17 +108,19 @@ function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet,$e
  * remplacer_lien[objet1-id1-objet2-id2]="objet3-id3-objet2-id2"
  * ou objet1-id1 est celui qu'on enleve et objet3-id3 celui qu'on ajoute
  *
- * @param string $table_source
- *		table des objets associes, doit correspondre a une table xxx_liens
- * @param string $objet
- *    objet auquel associer
- * @param int $id_objet
- *		id_objet auquel associer
+ * @param string $a
+ * @param string|int $b
+ * @param int|string $c
+ * @param bool $editable
  * @return array
  */
-function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet,$editable=true){
+function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 	$res = array('editable'=>$editable?true:false);
-	
+	list($table_source,$objet,$id_objet,$objet_lien) = determine_source_lien_objet($a,$b,$c);
+	if (!$table_source OR !$objet OR !$objet_lien)
+		return $res;
+
+
 	if (_request('tout_voir'))
 		set_request('recherche','');
 
@@ -96,7 +133,10 @@ function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet,$e
 			$objet_source = objet_type($table_source);
 			include_spip('action/editer_liens');
 			foreach($oups as $oup) {
-				objet_associer(array($objet_source=>$oup[$objet_source]), array($objet=>$oup[$objet]),$oup);
+				if ($objet_lien==$objet_source)
+					objet_associer(array($objet_source=>$oup[$objet_source]), array($objet=>$oup[$objet]),$oup);
+				else
+					objet_associer(array($objet=>$oup[$objet]), array($objet_source=>$oup[$objet_source]),$oup);
 			}
 			# oups ne persiste que pour la derniere action, si suppression
 			set_request('_oups');
@@ -127,8 +167,14 @@ function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet,$e
 				if ($lien = lien_verifier_action($k,$v)){
 					$lien = explode("-",$lien);
 					list($objet_source,$ids,$objet_lie,$idl) = $lien;
-					$oups = array_merge($oups,  objet_trouver_liens(array($objet_source=>$ids), array($objet_lie=>$idl)));
-					objet_dissocier(array($objet_source=>$ids), array($objet_lie=>$idl));
+					if ($objet_lien==$objet_source){
+						$oups = array_merge($oups,  objet_trouver_liens(array($objet_source=>$ids), array($objet_lie=>$idl)));
+						objet_dissocier(array($objet_source=>$ids), array($objet_lie=>$idl));
+					}
+					else{
+						$oups = array_merge($oups,  objet_trouver_liens(array($objet_lie=>$idl), array($objet_source=>$ids)));
+						objet_dissocier(array($objet_lie=>$idl), array($objet_source=>$ids));
+					}
 				}
 			}
 			set_request('_oups',$oups?serialize($oups):null);
@@ -136,14 +182,16 @@ function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet,$e
 		
 		if ($ajouter){
 			$ajout_ok = false;
-			$ajouter_lien = charger_fonction('ajouter_lien','action');
+			include_spip('action/editer_liens');
 			foreach($ajouter as $k=>$v){
 				if ($lien = lien_verifier_action($k,$v)){
 					$ajout_ok = true;
-					$ajouter_lien($lien);
-					$lien = explode("-",$lien);
-					list(,$id_lien_ajoute,,) = $lien;
-					set_request('id_lien_ajoute',$id_lien_ajoute);
+					list($objet1,$ids,$objet2,$idl) = explode("-",$lien);
+					if ($objet_lien==$objet1)
+						objet_associer(array($objet1=>$ids), array($objet2=>$idl));
+					else
+						objet_associer(array($objet2=>$idl), array($objet1=>$ids));
+					set_request('id_lien_ajoute',$ids);
 				}
 			}
 			# oups ne persiste que pour la derniere action, si suppression
@@ -169,9 +217,9 @@ function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet,$e
  * Si elle est indiquee dans la valeur, et que la cle est non numerique,
  * on ne la prend en compte que si un submit avec la cle a ete envoye
  *
- * @param <type> $k
- * @param <type> $v
- * @return <type>
+ * @param string $k
+ * @param string $v
+ * @return string
  */
 function lien_verifier_action($k,$v){
 	if (preg_match(",^\w+-[\w*]+-[\w*]+-[\w*]+,",$k))
