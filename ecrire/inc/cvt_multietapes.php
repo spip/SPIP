@@ -146,7 +146,8 @@ function cvtmulti_sauver_post($form, $je_suis_poste, &$valeurs){
  */
 function cvtmulti_formulaire_charger($flux){
 	#var_dump($flux['data']['_etapes']);
-	if (isset($flux['data']['_etapes'])){
+	if (is_array($flux['data'])
+	  AND isset($flux['data']['_etapes'])){
 		$form = $flux['args']['form'];
 		$je_suis_poste = $flux['args']['je_suis_poste'];
 		$nb_etapes = $flux['data']['_etapes'];
