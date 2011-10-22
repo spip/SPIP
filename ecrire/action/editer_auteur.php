@@ -243,7 +243,8 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	$champs = array();
 	$statut =	$statut_ancien = sql_getfetsel('statut','spip_auteurs','id_auteur='.intval($id_auteur));
 	
-	if (isset($c['statut']))
+	if (isset($c['statut'])
+	  AND (autoriser('modifier', 'auteur', $id_auteur,null, array('statut' => '?'))))
 		$statut = $champs['statut'] = $c['statut'];
 
 	// Restreindre avant de declarer l'auteur
@@ -255,7 +256,8 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 			$c['restreintes'] = array($c['id_parent']);
 	}
 
-	if (isset($c['webmestre']) AND ($force_webmestre OR autoriser('modifier', 'auteur', $id_auteur,null, array('webmestre' => '?'))))
+	if (isset($c['webmestre'])
+	  AND ($force_webmestre OR autoriser('modifier', 'auteur', $id_auteur,null, array('webmestre' => '?'))))
 		$champs['webmestre'] = $c['webmestre']=='oui'?'oui':'non';
 	
 	// Envoyer aux plugins
