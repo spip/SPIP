@@ -44,7 +44,7 @@ $GLOBALS['selecteur_rubrique'] = 'inc_chercher_rubrique_dist';
 
 // http://doc.spip.org/@style_menu_rubriques
 function style_menu_rubriques($i) {
-	global $browser_name, $browser_version, $spip_lang_left;
+	global $browser_name, $spip_lang_left;
 
 	$espace = '';
 	if (preg_match(",mozilla,i", $browser_name)) {
@@ -63,7 +63,6 @@ function style_menu_rubriques($i) {
 
 // http://doc.spip.org/@sous_menu_rubriques
 function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $exclus, $restreint, $type) {
-	global $browser_name, $browser_version;
 	static $decalage_secteur;
 
 	// Si on a demande l'exclusion ne pas descendre dans la rubrique courante
@@ -78,9 +77,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	// le style en fonction de la profondeur
 	list($class, $style, $espace) = style_menu_rubriques($niv);
 
-	// class='selec_rub' sauf pour contourner le bug MSIE / MacOs 9.0
-	if (!($browser_name == "MSIE" AND floor($browser_version) == "5"))
-		$class .= " selec_rub";
+	$class .= " selec_rub";
 
 	// creer l'<option> pour la rubrique $root
 
