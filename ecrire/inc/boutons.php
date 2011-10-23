@@ -39,39 +39,6 @@ class Bouton {
 }
 
 
-// http://doc.spip.org/@barre_onglets_configuration
-function barre_onglets_configuration() {
-
-	$onglets = array();
-	$onglets['contenu']=
-		  new Bouton('racine-24.png', 'onglet_contenu_site',
-			generer_url_ecrire("configurer_contenu"));
-	$onglets['interactivite']=
-		  new Bouton('auteur-6forum-24.png', 'onglet_interactivite',
-			generer_url_ecrire("config_contenu"));
-	$onglets['fonctions']=
-		  new Bouton('image-24.png', 'onglet_fonctions_avances',
-			generer_url_ecrire("config_fonctions"));
-
-	return $onglets;
-}
-
-function barre_onglets_plugins() {
-
-	$onglets=array();
-	$onglets['plugins_actifs']=
-		  new Bouton('plugin-24.png', 'plugins_actifs_liste',
-			generer_url_ecrire("admin_plugin"));
-	$onglets['admin_plugin']=
-		  new Bouton('plugin-24.png', 'plugins_liste',
-			generer_url_ecrire("admin_plugin","voir=tous"));
-	$onglets['charger_plugin']=
-		  new Bouton('spip-pack-24.png', 'plugin_titre_automatique_ajouter',
-			generer_url_ecrire("charger_plugin"));
-	return $onglets;
-}
-
-
 /**
  * definir la liste des onglets dans une page de l'interface privee
  * on passe la main au pipeline "ajouter_onglets".
@@ -79,10 +46,7 @@ function barre_onglets_plugins() {
 // http://doc.spip.org/@definir_barre_onglets
 function definir_barre_onglets($script) {
 
-	if (function_exists($f = 'barre_onglets_' . $script))
-		$onglets = $f();
-	else  $onglets=array();
-
+	$onglets=array();
 	$liste_onglets = array();
 
 	// ajouter les onglets issus des plugin via plugin.xml
