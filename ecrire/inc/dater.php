@@ -130,12 +130,12 @@ function dater_redac($id, $type, $script, $possedeDateRedac, $date_redac, $fct_a
 		_T('bouton_radio_afficher').
 	  ' :</label> ';
 
-	$masque = dater_ajax($id, $type, $script, $date_redac, $fct_ajax, 0, '_redac', $label);
+	$masque = dater_ajax($id, $type, $script, $date_redac, $fct_ajax, 0, '_redac', $label, true);
 
 	return block_parfois_visible("dateredac-$id", $invite, $masque, 'text-align: left');
 }
 
-function dater_ajax($id, $type, $script, $date, $fct_ajax, $start=0, $suffixe='', $label='')
+function dater_ajax($id, $type, $script, $date, $fct_ajax, $start=0, $suffixe='', $label='', $autre=false)
 {
 	global $spip_lang_left, $spip_lang_right, $debut_date_publication;
 
@@ -152,8 +152,8 @@ function dater_ajax($id, $type, $script, $date, $fct_ajax, $start=0, $suffixe=''
 	$js = " onchange=\"findObj_forcer('$idom').style.visibility='visible';\"";
 
 	$res = $label 
-	. afficher_jour($jour, "name='jour$suffixe' $js", false)
-	. afficher_mois($mois, "name='mois$suffixe' $js", false)
+	. afficher_jour($jour, "name='jour$suffixe' $js", $autre)
+	. afficher_mois($mois, "name='mois$suffixe' $js", $autre)
 	. afficher_annee($annee, "name='annee$suffixe' $js", $start)
 	. (($type != 'article')
 		 ? ''
