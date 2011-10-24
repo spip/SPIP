@@ -142,6 +142,7 @@ function dater_ajax($id, $type, $script, $date, $fct_ajax, $start=0, $suffixe=''
 	if (!is_string($date)) return '';
 	preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?/", $date, $regs);
 	$annee = $regs[1];
+	if ($annee > 4000) $annee -= 9000;
 	$mois = $regs[2];
 	$jour = $regs[3];
 	$heure = $regs[5];
