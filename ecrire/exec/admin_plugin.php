@@ -64,7 +64,16 @@ function admin_plug_args($quoi, $erreur, $format)
 
 	echo debut_droite('plugin', true);
 	echo gros_titre(_T('icone_admin_plugin'),'',false);
-	echo barre_onglets("plugins", $quoi=='actifs'?"plugins_actifs":"admin_plugin");
+//	echo barre_onglets("plugins", $quoi=='actifs'?"plugins_actifs":"admin_plugin");
+
+	// Barre d'onglets de premier niveau
+	echo barre_onglets("plugins", "plugins_actifs");
+	// Barre d'onglets de second niveau
+	$onglet2 = $quoi=='actifs' ? 'plugins_actifs' : 'admin_plugin';
+	echo debut_onglet('second');
+	echo onglet(_T('plugins_tous_liste'), generer_url_ecrire("admin_plugin", "voir=tous"), 'admin_plugin', $onglet2);
+	echo onglet(_T('plugins_actifs_liste'), generer_url_ecrire("admin_plugin"), 'plugins_actifs', $onglet2);
+	echo fin_onglet();
 
 	// message d'erreur au retour d'une operation
 	if ($erreur)

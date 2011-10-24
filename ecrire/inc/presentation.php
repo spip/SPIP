@@ -102,7 +102,8 @@ function afficher_objets($type, $titre_table,$requete,$formater='',$force=false)
 
 // Fonctions onglets
 // http://doc.spip.org/@debut_onglet
-function debut_onglet(){return "<div class='onglets_simple clearfix'><ul>\n";}
+// @param string $sous_classe	prend la valeur second pour definir les onglet de deuxieme niveau
+function debut_onglet($ss_classe=""){return "<div class='onglets_simple $ss_classe clearfix'><ul>\n";}
 // http://doc.spip.org/@fin_onglet
 function fin_onglet(){return "</ul></div>\n";}
 // http://doc.spip.org/@onglet
