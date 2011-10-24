@@ -76,8 +76,7 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
 			if ($assembler AND strlen($url_redirect)) {
 				spip_log("Redirige $url vers $url_redirect");
 				include_spip('inc/headers');
-				http_status(301);
-				redirige_par_entete($url_redirect);
+				redirige_par_entete($url_redirect, '', 301);
 			}
 			if (isset($nfond))
 				$fond = $nfond;
