@@ -52,6 +52,9 @@ function auteurs_edit_config($row)
 }
 
 function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
+	// auto-renseigner le nom si il n'existe pas, sans couper
+	titre_automatique('nom',array('email','login'),255);
+	// mais il reste obligatoire si on a rien trouve
 	$erreurs = formulaires_editer_objet_verifier('auteur',$id_auteur,array('nom'));
 
 	$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
