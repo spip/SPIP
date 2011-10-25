@@ -324,11 +324,24 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 			else
 				$infos_tables[$t] = renseigner_table_objet_sql($t,$infos_tables[$t]);
 		}
+		var_dump($infos_tables['spip_mots']['tables_jointures']);
 		// repercuter les proprietes generales communes a tous les objets
 		foreach(array_keys($infos_tables) as $t) {
 			foreach($all as $i=>$v)
-				if (in_array($i,array('tables_jointures','champs_versionnes')))
-					$infos_tables[$t][$i] = array_merge(isset($infos_tables[$t][$i])?$infos_tables[$t][$i]:array(),$all[$i]);
+				if (in_array($i,array('tables_jointures','champs_versionnes'))){
+					$add = $all[$i];
+					// eviter les doublons de declaration de table jointure (ex des mots sur auteurs)
+					// pour les declarations generiques avec cles numeriques
+					if ($i=='tables_jointures' AND isset($infos_tables[$t][$i]) AND count($infos_tables[$t][$i])) {
+						$doublons = array_intersect($infos_tables[$t][$i],$add);
+						foreach($doublons as $d){
+							if (is_numeric(array_search($d,$infos_tables[$t][$i]))
+								AND is_numeric($k=array_search($d,$add)))
+								unset($add[$k]);
+						}
+					}
+					$infos_tables[$t][$i] = array_merge(isset($infos_tables[$t][$i])?$infos_tables[$t][$i]:array(),$add);
+				}
 				else
 					$infos_tables[$t][$i] = array_merge_recursive(isset($infos_tables[$t][$i])?$infos_tables[$t][$i]:array(),$all[$i]);
 		}
