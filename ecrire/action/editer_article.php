@@ -77,7 +77,7 @@ function article_modifier($id_article, $set=null) {
 
 	if ($err = objet_modifier_champs('article', $id_article,
 		array(
-			'nonvide' => array('titre' => _T('info_sans_titre')),
+			'nonvide' => array('titre' => _T('info_nouvel_article')." "._T('info_numero_abbreviation').$id_article),
 			'invalideur' => $invalideur,
 			'indexation' => $indexation,
 			'date_modif' => 'date_modif' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif

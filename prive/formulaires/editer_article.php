@@ -49,23 +49,14 @@ function articles_edit_config($row)
 function formulaires_editer_article_verifier_dist($id_article='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='articles_edit_config', $row=array(), $hidden=''){
 	// auto-renseigner le titre si il n'existe pas
 	if (!_request('titre')){
-		if ($t = _request('description') OR $t=_request('chapo') OR $t=_request('texte')){
+		if ($t = _request('descriptif') OR $t=_request('chapo') OR $t=_request('texte')){
 			include_spip('inc/texte_mini');
 			set_request('titre',couper($t,50,"..."));
 		}
-		else {
-			$t = _T('info_nouvel_article');
-			$r = "$t(\s\(\d+\))?";
-			$last = sql_getfetsel('titre','spip_articles','titre REGEXP '.sql_quote($r),'','titre DESC','0,1');
-			if ($last){
-				$n = intval(ltrim(substr($last,strlen($t)),'( ')) +1;
-				$t = "$t ($n)";
-			}
-			set_request('titre',$t);
-		}
 	}
 
-	$erreurs = formulaires_editer_objet_verifier('article',$id_article,array('titre','id_parent'));
+	// on ne demande pas le titre obligatoire : il sera rempli a la volee dans editer_article si vide
+	$erreurs = formulaires_editer_objet_verifier('article',$id_article,array('id_parent'));
 	return $erreurs;
 }
 
