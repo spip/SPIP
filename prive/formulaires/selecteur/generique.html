@@ -1,0 +1,61 @@
+#SET{img_unpick, #CHEMIN_IMAGE{supprimer-12.png}}
+<script type='text/javascript'>var identifiant_selecteur = 'selecteur_#ENV{name}'; var img_unpick='#GET{img_unpick}';</script>
+<script type='text/javascript' src='#CHEMIN{formulaires/selecteur/jquery.picker.js}'></script>
+[(#REM)
+
+afficher la selection dans un ul class item_picked
+
+@param int select
+	1 => le selecteur se comporte comme un select, avec un seul choix possible
+@param string name
+	nom de l'input envoye
+@param string|array selected
+	liste de valeurs sour la forme array("rubrique|9","article|8",...) ou "rubrique|9,article|8,..."
+@param int afficher_langue
+
+]
+
+[(#REM) On commence par chercher la liste des objets disposant d'un sélecteur ]
+[(#SET{objets, [(#ENV{whitelist,#ARRAY}|selecteur_lister_objets{#ENV{blacklist,#ARRAY}})]})]
+
+<div id="selecteur_#ENV{name}">
+
+<ul class='item_picked[ (#ENV{select,''}|?{select})]'>
+<BOUCLE_selected(POUR){tableau #ENV{selected}|picker_selected}>
+	[(#SET{objet, [(#VALEUR|table_valeur{objet})]})]
+	[(#SET{id_objet, [(#VALEUR|table_valeur{id_objet})]})]
+	[(#GET{id_objet}|=={0}|non)
+	<li class="#GET{objet}">
+		<input type="hidden" name="[(#ENV{name,id_item})][(#VAL{91}|chr)][(#VAL{93}|chr)]" value="#GET{objet}|#GET{id_objet}" />
+		[(#ENV{afficher_langue,0}|oui)[&#91;(#INFO_LANG{#GET{objet},#GET{id_objet}})&#93;] ]#INFO_TITRE{#GET{objet},#GET{id_objet}}
+		[(#ENV{select,''}|non)<a href='#' onclick='jQuery(this).item_unpick();return false;'><img src='#GET{img_unpick}' alt='(<:lien_supprimer:>)' /></a>]<span class="sep">, </span>
+	</li>
+	]
+	[(#GET{id_objet}|=={0}|oui)
+	<li class='rubrique'>
+		<input type="hidden" name="[(#ENV{name,id_item})][(#VAL{91}|chr)][(#VAL{93}|chr)]" value="racine|0" />
+		<:info_racine_site:>
+		[(#ENV{select,''}|non)<a href='#' onclick='jQuery(this).item_unpick();return false;'><img src='[(#GET{img_unpick})]' alt='(<:lien_supprimer:>)' /></a>]<span class="sep">, </span>
+	</li>
+	]
+</BOUCLE_selected>
+</ul>
+
+#SET{objet, #ENV{objet,racine}}
+#SET{id_objet, #ENV{id_objet,0}}
+
+[(#REM) le container item_picker est ici pour etre voisin de item_picked ------]
+<div class='item_picker'>
+<INCLURE{fond=formulaires/selecteur/ajax, objets=#GET{objets}, objet=#GET{objet}, id_objet=#GET{id_objet}, ajax, env}>
+</div>
+
+</div>
+
+[(#ENV{sortable,'non'}|=={oui}|oui)
+<script type='text/javascript' src='#CHEMIN{formulaires/selecteur/jquery-ui-1.6.custom.js}'></script>
+<script type='text/javascript'>
+jQuery(function() {
+		jQuery("ul.item_picked").sortable();
+	});
+</script>
+]

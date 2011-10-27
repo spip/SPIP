@@ -1,0 +1,7 @@
+<BOUCLE_objets(POUR){tableau #ENV{objets}|table_valeur{afficher}}>
+[(#CHEMIN{formulaires/selecteur/lister-#ENV{quoi}-#VALEUR.html}|oui)
+	[(#SET{bouton_selectionner, [(#VALEUR|in_array{[(#ENV{objets}|table_valeur{selectionner})]}|?{' ',''})]})]
+	[[<strong>(#VALEUR|table_objet_sql|lister_tables_objets_sql|table_valeur{texte_objets}|_T)</strong>]
+	(#INCLURE{fond=formulaires/selecteur/lister-#ENV{quoi}-#VALEUR, bouton_selectionner=#GET{bouton_selectionner}, env})]
+]
+</BOUCLE_objets>
