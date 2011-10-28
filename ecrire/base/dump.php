@@ -59,7 +59,7 @@ function base_dump_dir($meta){
  * @param array $exclude
  * @return array
  */
-function base_lister_toutes_tables($serveur='', $tables=array(), $exclude = array()) {
+function base_lister_toutes_tables($serveur='', $tables=array(), $exclude = array(),$affiche_vrai_prefixe=false) {
 	spip_connect($serveur);
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
@@ -68,8 +68,9 @@ function base_lister_toutes_tables($serveur='', $tables=array(), $exclude = arra
 	$res = $tables;
 	foreach(sql_alltable(null,$serveur) as $t) {
 		if (preg_match($p, $t)) {
-			$t = preg_replace($p, 'spip', $t);
-			if (!in_array($t, $tables) AND !in_array($t, $exclude)) $res[]= $t;
+			$t1 = preg_replace($p, 'spip', $t);
+			if (!in_array($t1, $tables) AND !in_array($t1, $exclude))
+				$res[]= ($affiche_vrai_prefixe?$t:$t1);
 		}
 	}
 	sort($res);
