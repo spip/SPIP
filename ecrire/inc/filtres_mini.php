@@ -91,7 +91,7 @@ function url_absolue($url, $base='') {
 // ne s'applique qu'aux textes contenant des liens
 // http://doc.spip.org/@liens_absolus
 function liens_absolus($texte, $base='') {
-	if (preg_match_all(',(<(a|link)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS', 
+	if (preg_match_all(',(<(a|link|image)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS', 
 	$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
 			$abs = url_absolue($lien[3], $base);
