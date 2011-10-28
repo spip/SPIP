@@ -71,7 +71,7 @@ function definir_barre_onglets($script) {
 
 
 // http://doc.spip.org/@barre_onglets
-function barre_onglets($rubrique, $ongletCourant){
+function barre_onglets($rubrique, $ongletCourant, $class="barre_onglet"){
 	include_spip('inc/presentation');
 
 	$res = '';
@@ -81,7 +81,7 @@ function barre_onglets($rubrique, $ongletCourant){
 		$res .= onglet(_T($onglet->libelle), $url, $exec, $ongletCourant, $onglet->icone);
 	}
 
-	return  !$res ? '' : (debut_onglet() . $res . fin_onglet());
+	return  !$res ? '' : (debut_onglet($class) . $res . fin_onglet());
 }
 
 

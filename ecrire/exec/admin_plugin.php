@@ -67,10 +67,10 @@ function admin_plug_args($quoi, $erreur, $format)
 //	echo barre_onglets("plugins", $quoi=='actifs'?"plugins_actifs":"admin_plugin");
 
 	// Barre d'onglets de premier niveau
-	echo barre_onglets("plugins", "plugins_actifs");
+	echo barre_onglets("plugins", "plugins_actifs",'onglets_simple');
 	// Barre d'onglets de second niveau
 	$onglet2 = $quoi=='actifs' ? 'plugins_actifs' : 'admin_plugin';
-	echo debut_onglet('second');
+	echo debut_onglet('onglets_simple second');
 	echo onglet(_T('plugins_tous_liste'), generer_url_ecrire("admin_plugin", "voir=tous"), 'admin_plugin', $onglet2);
 	echo onglet(_T('plugins_actifs_liste'), generer_url_ecrire("admin_plugin"), 'plugins_actifs', $onglet2);
 	echo fin_onglet();
