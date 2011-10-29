@@ -212,7 +212,7 @@ function objet_inserer($objet, $id_parent=null) {
 		$id_auteur = (is_null(_request('id_auteur'))?$GLOBALS['visiteur_session']['id_auteur']:_request('id_auteur'));
 	  if ($id_auteur) {
 			include_spip('action/editer_auteur');
-			auteur_associer($GLOBALS['visiteur_session']['id_auteur'], array($objet=>$id));
+			auteur_associer($id_auteur, array($objet=>$id));
 	  }
 	}
 
