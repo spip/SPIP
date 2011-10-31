@@ -172,9 +172,11 @@ function paquet_finElement($phraseur, $name) {
  */
 function info_paquet_licence($phraseur, $attrs, $texte) {
 	if (isset($attrs['lien']))
-		$texte = "<a href='".$attrs['lien']."'>".$texte."</a>";
+		$lien = $attrs['lien'];
+	else
+		$lien = '';
 	$n = $phraseur->contenu['compatible'];
-	$phraseur->versions[$n]['licence'] = $texte;
+	$phraseur->versions[$n]['licence'][] = array('nom' => $texte, 'url' => $lien);
 }
 
 /**
@@ -191,18 +193,18 @@ function info_paquet_auteur($phraseur, $attrs, $texte) {
 	if (isset($attrs['mail'])){
 		if (strpos($attrs['mail'], '@'))
 			$attrs['mail'] = str_replace('@', ' AT ', $attrs['mail']);
-		$mail = ' ('.$attrs['mail'].')';
+		$mail = $attrs['mail'];
 	}
 	else
 		$mail = '';
 
 	if (isset($attrs['lien']))
-		$lien = "<a href='".$attrs['lien']."' class='spip_out'>".$texte."</a>";
+		$lien = $attrs['lien'];
 	else
-		$lien = $texte;
+		$lien = '';
 
 	$n = $phraseur->contenu['compatible'];
-	$phraseur->versions[$n]['auteur'][$texte] = $lien.$mail;
+	$phraseur->versions[$n]['auteur'][] = array('nom' => $texte, 'url' => $lien, 'mail' => $mail);
 }
 
 /**
@@ -216,12 +218,25 @@ function info_paquet_auteur($phraseur, $attrs, $texte) {
 function info_paquet_credit($phraseur, $attrs, $texte) {
 
 	if (isset($attrs['lien']))
-		$lien = "<a href='".$attrs['lien']."' class='spip_out'>".$texte."</a>";
+		$lien = $attrs['lien'];
 	else
-		$lien = $texte;
+		$lien = '';
 
 	$n = $phraseur->contenu['compatible'];
-	$phraseur->versions[$n]['credit'][$texte] = $lien;
+	$phraseur->versions[$n]['credit'][] = array('nom' => $texte, 'url' => $lien);
+}
+
+/**
+ * Cas particulier de la balise licence :
+ * transformer en lien sur url fournie dans l'attribut lien
+ *
+ * @param object $phraseur
+ * @param array $attrs
+ * @param string $texte
+ */
+function info_paquet_copyright($phraseur, $attrs, $texte) {
+	$n = $phraseur->contenu['compatible'];
+	$phraseur->versions[$n]['copyright'][] = $texte;
 }
 
 ?>
