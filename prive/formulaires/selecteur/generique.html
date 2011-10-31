@@ -44,6 +44,12 @@ afficher la selection dans un ul class item_picked
 #SET{objet, #ENV{objet,racine}}
 #SET{id_objet, #ENV{id_objet,0}}
 
+[(#REM) Attention si l'objet passé ne fait pas parti des objets adéquats, on va sur la racine ]
+[(#GET{objet}|table_objet|in_array{#GET{objets}|table_valeur{afficher}}|non)
+	#SET{objet, racine}
+	#SET{id_objet, 0}
+]
+
 [(#REM) le container item_picker est ici pour etre voisin de item_picked ------]
 <div class='item_picker'>
 <INCLURE{fond=formulaires/selecteur/ajax, objets=#GET{objets}, objet=#GET{objet}, id_objet=#GET{id_objet}, ajax, env}>
