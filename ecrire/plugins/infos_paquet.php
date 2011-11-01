@@ -227,7 +227,7 @@ function info_paquet_credit($phraseur, $attrs, $texte) {
 }
 
 /**
- * Cas particulier de la balise licence :
+ * Cas particulier de la balise copyright :
  * transformer en lien sur url fournie dans l'attribut lien
  *
  * @param object $phraseur
@@ -237,6 +237,20 @@ function info_paquet_credit($phraseur, $attrs, $texte) {
 function info_paquet_copyright($phraseur, $attrs, $texte) {
 	$n = $phraseur->contenu['compatible'];
 	$phraseur->versions[$n]['copyright'][] = $texte;
+}
+
+/**
+ * Cas particulier de la balise paquet :
+ * supprimer cet index qui ne sert a rien et ajouter la reference a la dtd
+ *
+ * @param object $phraseur
+ * @param array $attrs
+ * @param string $texte
+ */
+function info_paquet_paquet($phraseur, $attrs, $texte) {
+	$n = $phraseur->contenu['compatible'];
+	$phraseur->versions[$n]['dtd'] = "paquet";
+	unset($phraseur->versions[$n]['paquet']);
 }
 
 ?>
