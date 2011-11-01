@@ -450,13 +450,26 @@ function test_plugin_actif($plugin){
 	return ($plugin AND defined('_DIR_PLUGIN_'.strtoupper($plugin)))? true:false;
 }
 
-//
-// Traduction des textes de SPIP
-//
-// http://doc.spip.org/@_T
-function _T($texte, $args=array(), $class='') {
-
+/**
+ * Traduction des textes de SPIP
+ * http://doc.spip.org/@_T
+ *
+ * @param string $texte
+ * @param array $args
+ * @param array $options
+ *   string class : nom d'une classe a ajouter sur un span pour encapsuler la chaine
+ *   bool force : forcer un retour meme si la chaine n'a pas de traduction
+ * @return mixed|string
+ */
+function _T($texte, $args=array(), $options=array()) {
 	static $traduire=false ;
+	$o = array('class'=>'','force'=>true);
+	if ($options){
+		// support de l'ancien argument $class
+		if (is_string($options))
+			$options = array('class'=>$options);
+		$o = array_merge($o,$options);
+	}
 
  	if (!$traduire) {
 		$traduire = charger_fonction('traduire', 'inc');
@@ -477,6 +490,9 @@ function _T($texte, $args=array(), $class='') {
 	$text = $traduire($texte, $lang);
 
 	if (!strlen($text)){
+		if (!$o['force'])
+			return '';
+
 		$text = $texte;
 		// pour les chaines non traduites, assurer un service minimum
 		if (!isset($GLOBALS['test_i18n']))
@@ -486,7 +502,7 @@ function _T($texte, $args=array(), $class='') {
 		$class=null;
 	}
 
-	return _L($text, $args, $class);
+	return _L($text, $args, $o['class']);
 
 }
 
