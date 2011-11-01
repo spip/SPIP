@@ -44,6 +44,24 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 		paquet_readable_files($tree, "$dir_plugins$plug/");
 		if (!$tree['chemin'])
 			$tree['chemin'] = array(array('dir' => '')); // initialiser par defaut
+
+		// On verifie qu'il existe des balises spip qu'il faudrait rajouter dans
+		// la structure d'infos du paquet en fonction de la version spip courante
+		if (count($vxml->versions) > 1) {
+			$vspip = $GLOBALS['spip_version_branche'];
+			foreach ($vxml->versions as $_compatibilite => $_version) {
+				if (($_version['balise'] == 'spip')
+				AND (plugin_version_compatible($_compatibilite, $vspip))) {
+					// on merge les sous-balises de la balise spip avec celles de la
+					// balise paquet
+					foreach ($_version as $_index => $_balise) {
+						if ($_index AND $_index != 'balise')
+							$tree[$_index] =array_merge($tree[$_index], $_balise);
+					}
+				}
+			}
+		}
+
 		return $tree;
 	}
 	// Prendre les messages d'erreur sans les numeros de lignes
@@ -94,22 +112,28 @@ function paquet_debutElement($phraseur, $name, $attrs) {
 	if ($phraseur->err) return;
 	if (($name=='paquet') OR ($name=='spip')){
 		if ($name=='spip'){
-			$n = $attrs['compatible'];
-			$attrs = $phraseur->contenu['paquet'];
-			$attrs['compatible'] = $n;
-		} else {
+			$n = $attrs['compatibilite'];
+			$attrs = array();
+//			$attrs['compatibilite'] = $n;
+		}
+		else {
 			$n = '0';
 			$phraseur->contenu['paquet'] = $attrs;
+			$attrs['menu'] = array();
+			$attrs['chemin'] = array();
+			$attrs['necessite'] = array();
+			$attrs['lib'] = array();
+			$attrs['onglet'] = array();
+			$attrs['procure'] = array();
+			$attrs['pipeline'] = array();
+			$attrs['utilise'] = array();
+//			$attrs['auteur'] = array();
+//			$attrs['credit'] = array();
+//			$attrs['licence'] = array();
+//			$attrs['copyright'] = array();
+//			$attrs['traduire'] = array();
 		}
 		$phraseur->contenu['compatible'] = $n;
-		$attrs['lib'] = array();
-		$attrs['onglet'] = array();
-		$attrs['menu'] = array();
-		$attrs['chemin'] = array();
-		$attrs['utilise'] = array();
-		$attrs['pipeline'] = array();
-		$attrs['necessite'] = array();
-		$attrs['auteur'] = array();
 		$phraseur->versions[$phraseur->contenu['compatible']] = $attrs;
 	}
 	else
@@ -241,16 +265,29 @@ function info_paquet_copyright($phraseur, $attrs, $texte) {
 
 /**
  * Cas particulier de la balise paquet :
- * supprimer cet index qui ne sert a rien et ajouter la reference a la dtd
+ * Remplacer cet index qui ne sert a rien par un index balise=paquet et ajouter la reference a la dtd
  *
  * @param object $phraseur
  * @param array $attrs
  * @param string $texte
  */
 function info_paquet_paquet($phraseur, $attrs, $texte) {
-	$n = $phraseur->contenu['compatible'];
+	$n = 0;
 	$phraseur->versions[$n]['dtd'] = "paquet";
-	unset($phraseur->versions[$n]['paquet']);
+	$phraseur->versions[$n]['balise'] = "paquet";
+}
+
+/**
+ * Cas particulier de la balise spip :
+ * Remplacer cet index qui ne sert a rien par un index balise=spip et ajouter la reference a la dtd
+ *
+ * @param object $phraseur
+ * @param array $attrs
+ * @param string $texte
+ */
+function info_paquet_spip($phraseur, $attrs, $texte) {
+	$n = $phraseur->contenu['compatible'];
+	$phraseur->versions[$n]['balise'] = "spip";
 }
 
 ?>
