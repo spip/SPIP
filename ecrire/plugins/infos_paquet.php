@@ -52,7 +52,7 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 			foreach ($vxml->versions as $_compatibilite => $_version) {
 				if (($_version['balise'] == 'spip')
 				AND (plugin_version_compatible($_compatibilite, $vspip))) {
-					// on merge les sous-balises de la balise spip avec celles de la
+					// on merge les sous-balises de la balise spip compatible avec celles de la
 					// balise paquet
 					foreach ($_version as $_index => $_balise) {
 						if ($_index AND $_index != 'balise')
@@ -88,9 +88,7 @@ function paquet_readable_files(&$tree, $dir){
 	$prefix = $tree['prefix'];
 
 	$tree['options'] = (is_readable($dir.$f = ($prefix.'_options.php'))) ? array($f) : array();
-
 	$tree['fonctions'] = (is_readable($dir.$f = ($prefix.'_fonctions.php'))) ? array($f) : array();
-
 	$tree['install'] = (is_readable($dir.$f = ($prefix.'_administrations.php'))) ? array($f) : array();
 }
 
@@ -114,7 +112,6 @@ function paquet_debutElement($phraseur, $name, $attrs) {
 		if ($name=='spip'){
 			$n = $attrs['compatibilite'];
 			$attrs = array();
-//			$attrs['compatibilite'] = $n;
 		}
 		else {
 			$n = '0';
@@ -127,11 +124,6 @@ function paquet_debutElement($phraseur, $name, $attrs) {
 			$attrs['procure'] = array();
 			$attrs['pipeline'] = array();
 			$attrs['utilise'] = array();
-//			$attrs['auteur'] = array();
-//			$attrs['credit'] = array();
-//			$attrs['licence'] = array();
-//			$attrs['copyright'] = array();
-//			$attrs['traduire'] = array();
 		}
 		$phraseur->contenu['compatible'] = $n;
 		$phraseur->versions[$phraseur->contenu['compatible']] = $attrs;
