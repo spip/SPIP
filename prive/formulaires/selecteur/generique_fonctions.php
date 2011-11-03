@@ -75,7 +75,7 @@ function picker_selected($selected, $type=''){
 				
 				// Si on cherche un type et que c'est le bon, on renvoit un tableau que d'identifiants
 				if (is_string($type) and $type == $objet and $id_objet){
-					$select[] = $id;
+					$select[] = $id_objet;
 				}
 				else{
 					$select[] = array('objet' => $objet, 'id_objet' => $id_objet);
