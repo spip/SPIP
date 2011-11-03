@@ -590,6 +590,17 @@ function autoriser_queue_purger_dist(){
 	return autoriser('webmestre');
 }
 
+/*
+ * Autoriser l'echaffaudage de squelettes en Z
+ * dans l'espace prive : oui si on est identifie
+ * sinon il faut etre webmestre (pas de fuite d'informations publiees)
+ */
+function autoriser_echaffauder_dist($faire, $type, $id, $qui, $opts){
+	if (test_espace_prive())
+		return intval($qui['id_auteur'])?true:false;
+	else
+		return autoriser('webmestre','',$id,$qui,$opts);
+}
 
 
 /**
