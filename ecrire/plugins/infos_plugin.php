@@ -35,7 +35,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	if (isset($arbre['auteur']))
 		$ret['auteur'][] = trim(spip_xml_aplatit($arbre['auteur'])); // garder le 1er niveau en tableau mais traiter le multi possible
 	if (isset($arbre['licence']))
-		$ret['licence'] = trim(spip_xml_aplatit($arbre['licence']));
+		$ret['licence'][] = trim(spip_xml_aplatit($arbre['licence']));
 	if (isset($arbre['version']))
 		$ret['version'] = trim(spip_xml_aplatit($arbre['version']));
 	if (isset($arbre['version_base']))
