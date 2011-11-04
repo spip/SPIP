@@ -448,12 +448,22 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 		while (isset($mime_alias[$mime_type]))
 			$mime_type = $mime_alias[$mime_type];
 
-		// Si on a text/plain, c'est peut-etre que le serveur ne sait pas
+		// Si on a un mime-type insignifiant
+		// text/plain,application/octet-stream ou vide
+		// c'est peut-etre que le serveur ne sait pas
 		// ce qu'il sert ; on va tenter de detecter via l'extension de l'url
+		// ou le Content-Disposition: attachment; filename=...
 		$t = null;
-		if (($mime_type == 'text/plain' OR $mime_type == '')
-		AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
-			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1]));
+		if (in_array($mime_type,array('text/plain','','application/octet-stream'))){
+			if (!$t
+				AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
+				$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1]));
+			}
+			if (!$t
+				  AND preg_match(",^Content-Disposition:\s*attachment;\s*filename=(.*)$,Uims",$headers,$m)
+					AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $m[1], $rext)){
+				$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1]));
+			}
 		}
 
 		// Autre mime/type (ou text/plain avec fichier d'extension inconnue)
