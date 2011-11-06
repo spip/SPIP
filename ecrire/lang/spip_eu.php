@@ -227,6 +227,8 @@ Eragiketa hori egin eta gero, gauza izango zara',
 'envoi_via_le_site' => 'Gunearen bitartez egindako bidalpena',
 'erreur' => 'Errorea',
 'erreur_balise_non_fermee' => 'ez itxitako azken etiketa :',
+'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
+'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 'erreur_texte' => 'errore',
 'etape' => 'Etapa',
 

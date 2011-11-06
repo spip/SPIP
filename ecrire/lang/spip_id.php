@@ -230,6 +230,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoi_via_le_site' => 'Dikirim melalui situs',
 'erreur' => 'Kesalahan',
 'erreur_balise_non_fermee' => 'tag terakhir tidak ditutup:',
+'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
+'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 'erreur_texte' => 'kesalahan',
 'etape' => 'Étape', # NEW
 
