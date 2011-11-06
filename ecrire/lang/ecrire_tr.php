@@ -752,6 +752,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'plugin_titre_automatique' => 'Otomatik kurulum',
 'plugin_titre_automatique_ajouter' => 'Eklenti ekleyiniz',
 'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_titre_modifier' => 'Mes plugins', # NEW
 'plugin_zip_active' => 'Aktive etmek için devam ediniz',
 'plugin_zip_adresse' => 'aşağıda indirilecek eklentiye ait zip dosyasının adresini veya bir çok eklentinin adres listesini belirtiniz.',
 'plugin_zip_adresse_champ' => 'Eklentinin veya listenin adresi ',
@@ -763,7 +764,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
 'plugins_actif_un' => 'Un plugin activé.', # NEW
 'plugins_actifs' => '@count@ eklenti etkinleştirildi.',
-'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_actifs_liste' => 'Actifs', # NEW
 'plugins_compte' => '@count@ eklenti',
 'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ eklenti kullanılabilir durumda.',
@@ -771,6 +772,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'plugins_liste' => 'Plugin listesi',
 'plugins_liste_extensions' => 'Extensions', # NEW
 'plugins_recents' => 'Plugins récents.', # NEW
+'plugins_tous_liste' => 'Tous', # NEW
 'plugins_vue_hierarchie' => 'Hiyerarşi',
 'plugins_vue_liste' => 'Liste',
 'protocole_ldap' => 'Protokol sürümü :',

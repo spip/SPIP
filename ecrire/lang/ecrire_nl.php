@@ -761,6 +761,7 @@ een kleur geeft hun status aan :',
 'plugin_titre_automatique' => 'Automatische installatie',
 'plugin_titre_automatique_ajouter' => 'Een plugins toevoegen',
 'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_titre_modifier' => 'Mes plugins', # NEW
 'plugin_zip_active' => 'Gaat door om het te activeren',
 'plugin_zip_adresse' => 'geeft hieronder het adres van een bestand zip van te downloaden plugin, of nog het adres van een lijst van plugins aan.',
 'plugin_zip_adresse_champ' => 'Adres van plugin of de lijst ',
@@ -772,7 +773,7 @@ een kleur geeft hun status aan :',
 'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
 'plugins_actif_un' => 'Un plugin activé.', # NEW
 'plugins_actifs' => '@count@ plugins activeren.',
-'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_actifs_liste' => 'Plugins actifs', # MODIF
 'plugins_compte' => '@count@ plugins',
 'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ plugins beschikbaar.',
@@ -780,6 +781,7 @@ een kleur geeft hun status aan :',
 'plugins_liste' => 'Lijst van plugins',
 'plugins_liste_extensions' => 'Extensions', # NEW
 'plugins_recents' => 'Plugins récents.', # NEW
+'plugins_tous_liste' => 'Tous', # NEW
 'plugins_vue_hierarchie' => 'Hiërarchie',
 'plugins_vue_liste' => 'Lijst',
 'protocole_ldap' => 'De versie van het protocol :',

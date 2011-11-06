@@ -747,6 +747,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'plugin_titre_automatique' => 'Staliadur emgefre',
 'plugin_titre_automatique_ajouter' => 'Ouzhpennañ adveziantoù',
 'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_titre_modifier' => 'Mes plugins', # NEW
 'plugin_zip_active' => 'Kendalc\'hit evit e weredekaat',
 'plugin_zip_adresse' => 'merkit amañ a-is chomlec\'h restr zip un adveziant da bellgargañ, pe hini ul rollad adveziantoù.',
 'plugin_zip_adresse_champ' => 'Chomlec\'h an adveziant pe hini ar roll ',
@@ -758,7 +759,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
 'plugins_actif_un' => 'Un plugin activé.', # NEW
 'plugins_actifs' => '@count@ adveziant gweredekaet.',
-'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_actifs_liste' => 'Actifs', # NEW
 'plugins_compte' => '@count@ adveziant',
 'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ adveziant hegerz.',
@@ -766,6 +767,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'plugins_liste' => 'Roll an adveziantoù',
 'plugins_liste_extensions' => 'Extensions', # NEW
 'plugins_recents' => 'Plugins récents.', # NEW
+'plugins_tous_liste' => 'Tous', # NEW
 'plugins_vue_hierarchie' => 'Urzhaz',
 'plugins_vue_liste' => 'Roll',
 'protocole_ldap' => 'Stumm ar protokol :',

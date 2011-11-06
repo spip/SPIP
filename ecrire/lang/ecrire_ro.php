@@ -747,6 +747,7 @@ cu o culoare care le indică starea :',
 'plugin_titre_automatique' => 'Instalare automatică',
 'plugin_titre_automatique_ajouter' => 'Adăugaţi plug-in-uri',
 'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_titre_modifier' => 'Mes plugins', # NEW
 'plugin_zip_active' => 'Continuaţi pentru a-l activa',
 'plugin_zip_adresse' => 'indicaţi mai jos adresa unui fişier zip conţinând plug-in-ul de descărcat, sau chiar adresa unei liste de plug-in-uri.',
 'plugin_zip_adresse_champ' => 'Adresa plug-uluiin sau a listei ',
@@ -758,7 +759,7 @@ cu o culoare care le indică starea :',
 'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
 'plugins_actif_un' => 'Un plugin activé.', # NEW
 'plugins_actifs' => '@count@ plug-in-uri activate.',
-'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_actifs_liste' => 'Plugins actifs', # MODIF
 'plugins_compte' => '@count@ plug-in-uri',
 'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ plug-in-uri disponibile.',
@@ -766,6 +767,7 @@ cu o culoare care le indică starea :',
 'plugins_liste' => 'Lista plugin-urilor',
 'plugins_liste_extensions' => 'Extensions', # NEW
 'plugins_recents' => 'Plugins récents.', # NEW
+'plugins_tous_liste' => 'Tous', # NEW
 'plugins_vue_hierarchie' => 'Ierarhie',
 'plugins_vue_liste' => 'Listă',
 'protocole_ldap' => 'Versiunea protocolului :',

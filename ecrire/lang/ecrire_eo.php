@@ -747,6 +747,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'plugin_titre_automatique' => 'Aŭtomata instalo',
 'plugin_titre_automatique_ajouter' => 'Aldoni kromprogramojn',
 'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_titre_modifier' => 'Mes plugins', # NEW
 'plugin_zip_active' => 'Daŭrigu por ĝin aktivigi',
 'plugin_zip_adresse' => 'indiku ĉi-sube la retadreson de la maldensa dosiero de elŝutenda kromprogramo, aŭ la retadreson de kromprogramolisto.',
 'plugin_zip_adresse_champ' => 'Retadreso de la kromprogramo aŭ de la listo ',
@@ -758,7 +759,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
 'plugins_actif_un' => 'Un plugin activé.', # NEW
 'plugins_actifs' => '@count@ plugins activés.', # NEW
-'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_actifs_liste' => 'Plugins actifs', # MODIF
 'plugins_compte' => '@count@ plugins', # NEW
 'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ plugins disponibles.', # NEW
@@ -766,6 +767,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'plugins_liste' => 'Listo de kromprogramoj',
 'plugins_liste_extensions' => 'Extensions', # NEW
 'plugins_recents' => 'Plugins récents.', # NEW
+'plugins_tous_liste' => 'Tous', # NEW
 'plugins_vue_hierarchie' => 'Hiérarchie', # NEW
 'plugins_vue_liste' => 'Listo',
 'protocole_ldap' => 'Protokolversio :',
