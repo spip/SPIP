@@ -511,8 +511,13 @@ jQuery.spip.ajaxReload = function(blocfrag, options){
 		var callback=options.callback || null;
 		var history=options.history || false;
 		var args = options.args || {};
-		for (var key in args)
-			href = parametre_url(href,key,args[key]);
+		alert(href);
+		for (var key in args){
+			alert(key);
+			alert(args[key]);
+			href = parametre_url(href,key,args[key]==undefined?'':args[key]);
+			alert(href);
+		}
 		var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
 		// recharger sans historisation dans l'url
 		jQuery.spip.loadAjax(blocfrag, url, href, {force:true, callback:callback, history:history});
