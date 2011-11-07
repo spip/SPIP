@@ -641,10 +641,20 @@ function renseigner_table_objet_sql($table_sql,&$infos){
  * @return array
  */
 function renseigner_table_objet_interfaces($table_sql,&$infos){
-	if (!isset($infos['titre']))
-		$infos['titre'] = isset($GLOBALS['table_titre'][$infos['table_objet']]) ? $GLOBALS['table_titre'][$infos['table_objet']] : "'' as titre,'' as lang";
-	if (!isset($infos['date']))
-		$infos['date'] = isset($GLOBALS['table_date'][$infos['table_objet']]) ? $GLOBALS['table_date'][$infos['table_objet']] : '';
+	if (!isset($infos['titre'])){
+		if (isset($GLOBALS['table_titre'][$infos['table_objet']]))
+			$infos['titre'] = $GLOBALS['table_titre'][$infos['table_objet']];
+		else {
+			$infos['titre'] = ((isset($infos['field']['titre']))?"titre,":"'' as titre,");
+			$infos['titre'] .= ((isset($infos['field']['lang']))?"lang":"'' as lang");
+		}
+	}
+	if (!isset($infos['date'])){
+		if (isset($GLOBALS['table_date'][$infos['table_objet']]))
+			$infos['date'] = $GLOBALS['table_date'][$infos['table_objet']];
+		else
+			$infos['date'] = ((isset($infos['field']['date']))?"date":'');
+	}
 	if (!isset($infos['statut']))
 		$infos['statut'] = isset($GLOBALS['table_statut'][$table_sql]) ? $GLOBALS['table_statut'][$table_sql] : '';
 	if (!isset($infos['tables_jointures']))
