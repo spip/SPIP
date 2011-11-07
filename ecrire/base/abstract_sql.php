@@ -75,8 +75,8 @@ function sql_set_charset($charset,$serveur='', $option=true){
 // - option peut avoir 3 valeurs : 
 //	false -> ne pas l'executer mais la retourner, 
 //	continue -> ne pas echouer en cas de serveur sql indisponible,
-//	autre -> executer la requete.
-// Le cas "autre" est, pour une requete produite par le compilateur,
+//	true|array -> executer la requete.
+// Le cas array est, pour une requete produite par le compilateur,
 // un tableau donnnant le contexte afin d'indiquer le lieu de l'erreur au besoin
 // Retourne false en cas d'erreur, apres l'avoir denoncee.
 // Les portages doivent retourner la requete elle-meme en cas d'erreur,
