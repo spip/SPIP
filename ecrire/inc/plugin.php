@@ -465,8 +465,10 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 				$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
 				foreach($info['chemin'] as $chemin){
 					if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
-						$dir = $chemin['dir'];
+						$dir = $chemin['path'];
 						if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
+						if (strlen($dir) AND $dir=="./") $dir = '';
+						if (strlen($dir)) $dir = rtrim($dir,'/').'/';
 						if (!isset($chemin['type']) OR $chemin['type']=='public')
 							$chemins['public'][]="_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"");
 						if (!isset($chemin['type']) OR $chemin['type']=='prive')
