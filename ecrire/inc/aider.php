@@ -91,7 +91,8 @@ define('_SECTIONS_AIDE', ',<h([12])(?:\s+class="spip")?'. '>([^/]+?)(?:/(.+?))?<
 
 function aide_fichier($path, $help_server) {
 
-	$fichier_aide = _DIR_AIDE . $path;
+	$md5 = md5(serialize($help_server));
+	$fichier_aide = _DIR_AIDE . substr($md5,0,8) . "-" . $path;
 	$lastm = @filemtime($fichier_aide);
 	$lastversion = @filemtime(_DIR_RESTREINT . 'inc_version.php');
 	$here = @(is_readable($fichier_aide) AND ($lastm >= $lastversion));
