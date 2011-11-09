@@ -361,8 +361,8 @@ function aide_index_frame($var_lang_r, $lang_r, $frame, $aide, $help_server)
 	// (approximatif, mais c'est deja qqch)
 
 	$path = $spip_lang . "-aide.html";
-	$md5 = md5(serialize($help_server));
-	$fichier = _DIR_AIDE . substr($md5,0,8) . "-" . $path;
+	$md5 = md5(serialize($help_server) . $GLOBALS['meta']['plugin']);
+	$fichier = _DIR_AIDE . substr($md5,0,16) . "-" . $path;
 	$lastm = is_readable($fichier) ? filemtime($fichier) : 0;
 	$lastversion = @filemtime(_DIR_RESTREINT . 'inc_version.php');
 	if (!($lastm AND ($lastm >= $lastversion))) {
