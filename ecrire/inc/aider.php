@@ -92,7 +92,7 @@ define('_SECTIONS_AIDE', ',<h([12])(?:\s+class="spip")?'. '>([^/]+?)(?:/(.+?))?<
 function aide_fichier($path, $help_server) {
 
 	$md5 = md5(serialize($help_server));
-	$fichier_aide = _DIR_AIDE . substr($md5,0,8) . "-" . $path;
+	$fichier_aide = _DIR_AIDE . substr($md5,0,16) . "-" . $path;
 	$lastm = @filemtime($fichier_aide);
 	$lastversion = @filemtime(_DIR_RESTREINT . 'inc_version.php');
 	$here = @(is_readable($fichier_aide) AND ($lastm >= $lastversion));
@@ -103,12 +103,17 @@ function aide_fichier($path, $help_server) {
 		return array($contenu, $lastm);
 	}
 
+	// mettre en cache (tant pis si echec)
+	sous_repertoire(_DIR_AIDE,'','',true);
 	$contenu = array();
 	include_spip('inc/distant');
 	foreach ($help_server as $k => $server) {
 		// Remplacer les liens aux images par leur gestionnaire de cache
 		$url = "$server/$path";
-		$page = recuperer_page($url);
+		$local = _DIR_AIDE.substr(md5($url),0,8)."-".preg_replace(",[^\w.]+,i","_",$url);
+		$local = _DIR_RACINE . copie_locale($url, 'modif', $local);
+
+		lire_fichier($local,$page);
 		$page = aide_fixe_img($page,$server);
 		// les liens internes ne doivent pas etre deguises en externes
 		$url = parse_url($url);
@@ -159,8 +164,6 @@ function aide_fichier($path, $help_server) {
 	$contenu = '<body>' . $contenu . '</body>';
 
 	if (strlen($contenu) <= 100) return array(false, false);
-	// mettre en cache (tant pis si echec)
-	sous_repertoire(_DIR_AIDE,'','',true);
 	ecrire_fichier ($fichier_aide, $contenu);
 	return array($contenu, time());
 }
