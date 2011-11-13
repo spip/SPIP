@@ -102,6 +102,7 @@ function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $a
 		set_request('webmestre',_request('webmestre')?_request('webmestre'):'non');
 	$retour = parametre_url($retour, 'email_confirm','');
 
+	include_spip('inc/autoriser');
 	if (!autoriser('modifier','auteur',$id_auteur,null,array('email'=>'?'))){
 		$email_nouveau = _request('email');
 		set_request('email'); // vider la saisie car l'auteur n'a pas le droit de modifier cet email
