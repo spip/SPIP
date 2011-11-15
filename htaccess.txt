@@ -91,9 +91,11 @@ RewriteRule ^([1-9][0-9]*)$     spip.php?action=redirect&type=article&status=301
 ###
 
 ###
-# APIs http://site/api/xmlrpc
+# APIs
+# http://site/xmlrpc.api
+# http://site/atom.api/articles/1234
 
-RewriteRule ^api/([\w]+)(/(.*))?$ spip.php?action=$1&arg=$3 [QSA,L]
+RewriteRule ^([\w]+)\.api(/(.*))?$ spip.php?action=api_$1&arg=$3 [QSA,L]
 
 # Fin des APIs
 ###
