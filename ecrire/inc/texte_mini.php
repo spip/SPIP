@@ -165,9 +165,8 @@ $preg='') {
 			else if (function_exists($f = $f.'_dist'))
 				$echap = $f($regs);
 
-			$letexte = str_replace($regs[0],
-				code_echappement($echap, $source, $no_transform),
-				$letexte);
+			$p = strpos($letexte,$regs[0]);
+			$letexte = substr_replace($letexte,code_echappement($echap, $source, $no_transform),$p,strlen($regs[0]));
 		}
 
 	if ($no_transform)
