@@ -457,7 +457,8 @@ function balise_RANG_dist($p) {
 			$t=$desc['titre'];
 		  if (preg_match(';(^|,)([^,]*titre)(,|$);',$t,$m)){
 			  $m = explode(' ',trim($m[2]));
-		    $champ_titre = reset($m);
+			// attention, lorsque : '' as titre, '' as lang
+		    $champ_titre = trim(reset($m), "'");
 		  }
 		}
 		$_titre = champ_sql($champ_titre, $p);
