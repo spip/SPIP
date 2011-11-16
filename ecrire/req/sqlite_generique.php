@@ -1682,9 +1682,10 @@ function _sqlite_remplacements_definitions_table($query, $autoinc = false){
 		'/(big|small|medium|tiny)?int(eger)?'.$num.'/is' => 'INTEGER'
 	);
 
-	if ($autoinc OR (is_string($query) AND preg_match(',AUTO_INCREMENT,is',$query))){
+	if ($autoinc OR is_string($query)){
 		$query = preg_replace(array_keys($remplace), $remplace, $query);
-		$query = preg_replace(array_keys($remplace_autocinc), $remplace_autocinc, $query);
+		if ($autoinc OR preg_match(',AUTO_INCREMENT,is',$query)){
+			$query = preg_replace(array_keys($remplace_autocinc), $remplace_autocinc, $query);
 	}
 	elseif(is_array($query))
 		foreach($query as $k=>$q) {
