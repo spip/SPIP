@@ -53,8 +53,11 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 	$md5args = md5($arguments);
 
 	// si pas de date programee, des que possible
-	if (!$time)
+	$duplicate_where = 'status='.intval(_JQ_SCHEDULED).' AND ';
+	if (!$time){
 		$time = time();
+		$duplicate_where = ""; // ne pas dupliquer si deja le meme job en cours d'execution
+	}
 	$date = date('Y-m-d H:i:s',$time);
 
 	$set_job = array(
@@ -74,7 +77,7 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 		AND
 			$id_job = sql_getfetsel('id_job','spip_jobs',
 				$duplicate_where =
-					'status='.intval(_JQ_SCHEDULED).' AND fonction='.sql_quote($function)
+					$duplicate_where . 'fonction='.sql_quote($function)
 				.(($no_duplicate==='function_only')?'':
 				 ' AND md5args='.sql_quote($md5args).' AND inclure='.sql_quote($file)))
 		)
