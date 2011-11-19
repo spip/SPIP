@@ -1067,7 +1067,7 @@ function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 	. "<input type='hidden' name='exec' value='$script1' />"
 	. $corps
 	. (!$submit ? '' :
-	     ("<div style='text-align: $spip_lang_right'><input type='submit' value=\"".entites_html($submit)."\" /></div>"))
+	     ("<div style='text-align: $spip_lang_right'><input type='submit' value=\"".attribut_html($submit)."\" /></div>"))
 	. "</div></form>\n";
 }
 
