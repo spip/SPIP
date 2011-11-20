@@ -106,9 +106,9 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 		$taille_y = $taille;
 
 	if ($taille == 0 AND $taille_y > 0)
-		$taille = 100000; # {0,300} -> c'est 300 qui compte
+		$taille = 10000; # {0,300} -> c'est 300 qui compte
 	elseif ($taille > 0 AND $taille_y == 0)
-		$taille_y = 100000; # {300,0} -> c'est 300 qui compte
+		$taille_y = 10000; # {300,0} -> c'est 300 qui compte
 	elseif ($taille == 0 AND $taille_y == 0)
 		return '';
 
