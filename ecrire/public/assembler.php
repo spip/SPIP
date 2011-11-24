@@ -326,20 +326,13 @@ function inclure_balise_dynamique($texte, $echo=true, $contexte_compil=array())
 					array_merge($GLOBALS['page']['entetes'],$page['entetes']);
 			}
 		}
-		// on se refere a $page['contexte'] a la place
-		if (isset($page['contexte']['_pipeline'])) {
-			$pipe = is_array($page['contexte']['_pipeline'])?reset($page['contexte']['_pipeline']):$page['contexte']['_pipeline'];
-			$args = is_array($page['contexte']['_pipeline'])?end($page['contexte']['_pipeline']):array();
-			$args['contexte'] = $page['contexte'];
-			unset($args['contexte']['_pipeline']); // par precaution, meme si le risque de boucle infinie est a priori nul
-				$texte = pipeline($pipe,array(
-				  'data'=>$texte,
-				  'args'=>$args),
-					false);
-		}
-		// Le parametre _pipeline devient deprecie, remplace par _pipelines au pluriel avec une syntaxe permettant plusieurs pipelines
-		if (isset($page['contexte']['_pipelines']) and is_array($page['contexte']['_pipelines'])) {
+		// _pipelines au pluriel array('nom_pipeline' => $args...) avec une syntaxe permettant plusieurs pipelines
+		if (isset($page['contexte']['_pipelines'])
+		  AND is_array($page['contexte']['_pipelines'])
+			AND count($page['contexte']['_pipelines'])) {
 			foreach($page['contexte']['_pipelines'] as $pipe=>$args){
+				$args['contexte'] = $page['contexte'];
+				unset($args['contexte']['_pipelines']); // par precaution, meme si le risque de boucle infinie est a priori nul
 				$texte = pipeline(
 					$pipe,
 					array(
