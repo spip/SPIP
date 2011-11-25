@@ -2587,6 +2587,7 @@ function tri_champ_order($t){
  * pour la clause select
  * 'multi xxx' devient select "...." as multi
  * les autres cas ne produisent qu'une chaine vide '' en select
+ * 'hasard' devient 'rand() AS hasard' dans le select
  *
  * @param string $t
  * @return string
@@ -2597,6 +2598,9 @@ function tri_champ_select($t){
 		$t = preg_replace(',\s,','',$t);
 		$t = sql_multi($t,$GLOBALS['spip_lang']);
 		return $t;
+	}
+	if(trim($t)=='hasard'){
+		return 'rand() AS hasard';
 	}
 	return "''";
 }
