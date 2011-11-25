@@ -946,7 +946,7 @@ function critere_tri_dist($idb, &$boucles, $crit){
 	};
 	";
 	$boucle->select[] = "\".tri_champ_select(\$tri).\"";
-	$boucle->order[] = "tri_champ_order(\$tri).\$senstri";
+	$boucle->order[] = "tri_champ_order(\$tri,\$command['from']).\$senstri";
 }
 
 # Criteres de comparaison
