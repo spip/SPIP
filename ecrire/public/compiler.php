@@ -976,14 +976,6 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		if ($type != TYPE_RECURSIF) {
 			if (!$boucles[$id]->sql_serveur AND $connect)
 				$boucles[$id]->sql_serveur = $connect;
-			$show = $trouver_table($type, $boucles[$id]->sql_serveur);
-			// si la table n'existe pas avec le connecteur par defaut, 
-			// c'est peut etre une table qui necessite son connecteur dedie fourni
-			// permet une ecriture allegee (GEO) -> (geo:GEO)
-			if (!$show
-			AND $show=$trouver_table($type, strtolower($type))) {
-				$boucles[$id]->sql_serveur = strtolower($type);
-			}
 
 			// chercher dans les iterateurs du repertoire iterateur/
 			if ($g = charger_fonction(
@@ -993,41 +985,51 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			// sinon, en cas de requeteur d'un type predefini,
 			// utiliser les informations donnees par le requeteur
 			// cas "php:xx" et "data:xx".
-			} else if ($requeteur = charger_fonction($boucle->sql_serveur, 'requeteur', true)) {
+			} else if ($boucle->sql_serveur AND $requeteur = charger_fonction($boucle->sql_serveur, 'requeteur', true)) {
 				$requeteur($boucles, $boucle, $id);
 
 			// utiliser la description des champs transmis
-			} else if ($show) {
-				$boucles[$id]->show = $show;
-				// recopie les infos les plus importantes
-				$boucles[$id]->primary = $show['key']["PRIMARY KEY"];
-				$boucles[$id]->id_table = $x = preg_replace(",^spip_,","",$show['id_table']);
-				$boucles[$id]->from[$x] = $nom_table = $show['table'];
-				$boucles[$id]->iterateur = 'SQL';
-
-				$boucles[$id]->descr = &$descr;
-				if ((!$boucles[$id]->jointures)
-				  AND is_array($show['tables_jointures'])
-				  AND count($x = $show['tables_jointures']))
-					$boucles[$id]->jointures = $x;
-				if ($boucles[$id]->jointures_explicites){
-					$jointures = preg_split("/\s+/",$boucles[$id]->jointures_explicites);
-					while ($j=array_pop($jointures))
-						array_unshift($boucles[$id]->jointures,$j);
-				}
 			} else {
-				// Pas une erreur si la table est optionnelle
-				if ($boucles[$id]->table_optionnelle)
-					$boucles[$id]->type_requete = '';
-				else  {
-					$boucles[$id]->type_requete = false;
-					$boucle = $boucles[$id];
-					$x = (!$boucle->sql_serveur ? '' :
-					      ($boucle->sql_serveur . ":")) .
-					  $type;
-					$msg = array('zbug_table_inconnue',
-							array('table' => $x));
-					erreur_squelette($msg, $boucle);
+				$show = $trouver_table($type, $boucles[$id]->sql_serveur);
+				// si la table n'existe pas avec le connecteur par defaut,
+				// c'est peut etre une table qui necessite son connecteur dedie fourni
+				// permet une ecriture allegee (GEO) -> (geo:GEO)
+				if (!$show
+				AND $show=$trouver_table($type, strtolower($type))) {
+					$boucles[$id]->sql_serveur = strtolower($type);
+				}
+				if ($show) {
+					$boucles[$id]->show = $show;
+					// recopie les infos les plus importantes
+					$boucles[$id]->primary = $show['key']["PRIMARY KEY"];
+					$boucles[$id]->id_table = $x = preg_replace(",^spip_,","",$show['id_table']);
+					$boucles[$id]->from[$x] = $nom_table = $show['table'];
+					$boucles[$id]->iterateur = 'SQL';
+
+					$boucles[$id]->descr = &$descr;
+					if ((!$boucles[$id]->jointures)
+					    AND is_array($show['tables_jointures'])
+					        AND count($x = $show['tables_jointures']))
+						$boucles[$id]->jointures = $x;
+					if ($boucles[$id]->jointures_explicites){
+						$jointures = preg_split("/\s+/",$boucles[$id]->jointures_explicites);
+						while ($j=array_pop($jointures))
+							array_unshift($boucles[$id]->jointures,$j);
+					}
+				} else {
+					// Pas une erreur si la table est optionnelle
+					if ($boucles[$id]->table_optionnelle)
+						$boucles[$id]->type_requete = '';
+					else  {
+						$boucles[$id]->type_requete = false;
+						$boucle = $boucles[$id];
+						$x = (!$boucle->sql_serveur ? '' :
+							($boucle->sql_serveur . ":")) .
+						     $type;
+						$msg = array('zbug_table_inconnue',
+						             array('table' => $x));
+						erreur_squelette($msg, $boucle);
+					}
 				}
 			}
 		}
