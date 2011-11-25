@@ -27,6 +27,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $checked, $actif, $
 	$prefix = $info['prefix'];
 	$cfg = "";
 	$checkable = ($dir_plugins!==_DIR_EXTENSIONS);
+	$nom = plugin_nom($info,$dir_plugins,$plug_file);
 
 	if (!plugin_version_compatible($info['compatibilite'], $GLOBALS['spip_version_branche'])){
 		$info['slogan'] = _T('plugin_info_non_compatible_spip');
@@ -42,7 +43,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $checked, $actif, $
 	}
 	elseif (isset($GLOBALS['erreurs_activation_raw'][$dir_plugins.$plug_file])){
 		$class_li .= " error";
-		$erreur = http_img_pack("plugin-err-32.png",_T('plugin_impossible_activer', array('plugin' => $info['nom']))," class='picto_err'",_T('plugin_impossible_activer', array('plugin' => $info['nom'])))
+		$erreur = http_img_pack("plugin-err-32.png",_T('plugin_impossible_activer', array('plugin' => $nom))," class='picto_err'",_T('plugin_impossible_activer', array('plugin' => $nom)))
 		  . "<div class='erreur'>" . implode("<br />",$GLOBALS['erreurs_activation_raw'][$dir_plugins.$plug_file]) . "</div>";
 	}
 	else
@@ -59,7 +60,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $checked, $actif, $
 	. $cfg
 	. $erreur
 	. (($dir_plugins!==_DIR_EXTENSIONS AND plugin_est_installe($plug_file))
-	    ? plugin_desintalle($plug_file) : '')
+	    ? plugin_desintalle($plug_file,$nom) : '')
 	. "<div class='details'>" // pour l'ajax de exec/info_plugin
 	. (!$expose ? '' : affiche_bloc_plugin($plug_file, $info))
 	. "</div>"
@@ -105,6 +106,21 @@ function plugin_checkbox($id_input, $file, $actif)
 	. "</div>";
 }
 
+function plugin_nom($info, $dir_plugins, $plug_file){
+	$prefix = $info['prefix'];
+	$dir = "$dir_plugins$plug_file";
+	// Si dtd paquet, on traite le nom soit par son item de langue soit par sa valeur immediate a l'index "nom"
+	if ($info['dtd'] == "paquet") {
+		$nom = PtoBR(plugin_propre("{$prefix}_nom", "$dir/lang/paquet-$prefix"));
+		if (!$nom)
+			$nom = PtoBR(propre($info['nom']));
+	}
+	else
+		$nom = typo(attribut_html($info['nom']));
+
+	return trim($nom);
+}
+
 // Cartouche Resume
 function plugin_resume($info, $dir_plugins, $plug_file, $url_page){
 	$prefix = $info['prefix'];
@@ -116,14 +132,7 @@ function plugin_resume($info, $dir_plugins, $plug_file, $url_page){
 	// couper par securite
 	$slogan = couper($slogan, 80);
 
-	// Si dtd paquet, on traite le nom soit par son item de langue soit par sa valeur immediate a l'index "nom"
-	if ($info['dtd'] == "paquet") {
-		$nom = PtoBR(plugin_propre("{$prefix}_nom", "$dir/lang/paquet-$prefix"));
-		if (!$nom)
-			$nom = PtoBR(propre($info['nom']));
-	}
-	else
-		$nom = typo(attribut_html($info['nom']));
+	$nom = plugin_nom($info, $dir_plugins, $plug_file);
 
 	$url = parametre_url($url_page, "plugin", substr($dir,strlen(_DIR_RACINE)));
 
@@ -146,7 +155,7 @@ function plugin_resume($info, $dir_plugins, $plug_file, $url_page){
 	. "</div>";
 }
 
-function plugin_desintalle($plug_file){
+function plugin_desintalle($plug_file, $nom){
 
 	$action = redirige_action_auteur('desinstaller_plugin',$plug_file,'admin_plugin');
 	$text = _T('bouton_desinstaller');
@@ -155,7 +164,7 @@ function plugin_desintalle($plug_file){
 
 	return "<div class='actions'>[".
 		"<a href='$action'
-		onclick='return confirm(\"$text $file ?\\n$text2\")'>"
+		onclick='return confirm(\"$text $nom ?\\n$text2\")'>"
 		. $text
 		. "</a>]</div>"	;
 }
