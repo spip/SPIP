@@ -141,11 +141,15 @@ function inscription_nouveau($desc)
 	if (isset($desc['id_auteur']))
 		$id_auteur = $desc['id_auteur'];
 	else
-		$id_auteur = insert_auteur();
+		$id_auteur = auteur_inserer();
 
 	if (!$id_auteur) return _T('titre_probleme_technique');
 
+	include_spip('inc/autoriser');
+	// lever l'autorisation pour pouvoir modifier le statut
+	autoriser_exception('modifier','auteur',$id_auteur);
 	auteur_modifier($id_auteur, $desc);
+	autoriser_exception('modifier','auteur',$id_auteur,false);
 
 	$desc['id_auteur'] = $id_auteur;
 
