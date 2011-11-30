@@ -532,9 +532,11 @@ function majuscules($texte) {
 function taille_en_octets ($taille) {
 	if ($taille < 1024) {$taille = _T('taille_octets', array('taille' => $taille));}
 	else if ($taille < 1024*1024) {
-		$taille = _T('taille_ko', array('taille' => ((floor($taille / 102.4))/10)));
+		$taille = _T('taille_ko', array('taille' => round($taille/1024, 1)));
+	} else if ($taille < 1024*1024*1024) {
+		$taille = _T('taille_mo', array('taille' => round($taille/1024/1024, 1)));
 	} else {
-		$taille = _T('taille_mo', array('taille' => ((floor(($taille / 1024) / 102.4))/10)));
+		$taille = _T('taille_go', array('taille' => round($taille/1024/1024/1024, 2)));
 	}
 	return $taille;
 }

@@ -612,6 +612,7 @@ et vous reconnecter au site.
 // T
 'taille_ko' => '@taille@ ko',
 'taille_mo' => '@taille@ Mo',
+'taille_go' => '@taille@ Go',
 'taille_octets' => '@taille@ octets',
 'texte_actualite_site_1' => 'Quand vous serez familiarisé(e) avec l\'interface, vous pourrez cliquer sur «',
 'texte_actualite_site_2' => 'interface complète',
