@@ -689,7 +689,9 @@ function lister_tables_auxiliaires(){
  */
 function lister_tables_objets_surnoms(){
 	static $surnoms = null;
-	if (!$surnoms){
+	static $md5 = null;
+	if (!$surnoms
+	  OR $md5 != lister_tables_objets_sql('::md5')){
 		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
 		// pour compatibilite, car il faut dorenavent utiliser
 		// declarer_table_objets_sql
@@ -715,12 +717,7 @@ function lister_tables_objets_surnoms(){
 						$surnoms[$surnom] = $infos['table_objet'];
 			}
 		}
-		// si init pas fini, ne pas memoriser
-		if (!defined('_init_tables_objets_sql')){
-			$res = $surnoms;
-			$surnoms = null;
-			return $res;
-		}
+		$md5 = lister_tables_objets_sql('::md5');
 	}
 	return $surnoms;
 }
@@ -731,7 +728,9 @@ function lister_tables_objets_surnoms(){
  */
 function lister_types_surnoms(){
 	static $surnoms = null;
-	if (!$surnoms){
+	static $md5 = null;
+	if (!$surnoms
+	  OR $md5 != lister_tables_objets_sql('::md5')){
 		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
 		// pour compatibilite, car il faut dorenavent utiliser
 		// declarer_table_objets_sql
@@ -749,12 +748,7 @@ function lister_types_surnoms(){
 						$surnoms[$surnom] = $infos['type'];
 			}
 		}
-		// si init pas fini, ne pas memoriser
-		if (!defined('_init_tables_objets_sql')){
-			$res = $surnoms;
-			$surnoms = null;
-			return $res;
-		}
+		$md5 = lister_tables_objets_sql('::md5');
 	}
 	return $surnoms;
 }
