@@ -1133,13 +1133,16 @@ function urls_connect_dist($i, &$entite, $args='', $ancre='', $public=null) {
 
 // Transformer les caracteres utf8 d'une URL (farsi par ex) selon la RFC 1738
 function urlencode_1738($url) {
-	$uri = '';
-	for ($i=0; $i < strlen($url); $i++) {
-		if (ord($a = $url[$i]) > 127)
-			$a = rawurlencode($a);
-		$uri .= $a;
+	if (preg_match(',[^\x00-\x7E],sS','', $url)){
+		$uri = '';
+		for ($i=0; $i < strlen($url); $i++) {
+			if (ord($a = $url[$i]) > 127)
+				$a = rawurlencode($a);
+			$uri .= $a;
+		}
+		$url = $uri;
 	}
-	return quote_amp($uri);
+	return quote_amp($url);
 }
 
 // http://doc.spip.org/@generer_url_entite_absolue
