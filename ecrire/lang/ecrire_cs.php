@@ -299,7 +299,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>e</sup> z @liste@',
 'info_code_acces' => 'Nezapomeňte své přístupové kódy!',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-'info_compresseur_gzip' => 'It is advisable to first check if the service provider systematically compresses PHP scripts. To do this you can, for example, use the following service: @testgzip@', # NEW
+'info_compresseur_gzip' => 'It is advisable to first check if the service provider systematically compresses PHP scripts. To do this you can, for example, use the following service: @testgzip@', # MODIF
 'info_compresseur_texte' => 'If your server does not automatically compress HTML pages when sending them, you can attempt to force the compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ', # NEW
 'info_config_suivi' => 'Jedná-li se o adresu diskusní skupiny, můžete zde uvést adresu, na které se mohou účastníci webu přihlásit. Může se jednat o adresu URL (například webová stránka pro přihlášení do skupiny) nebo o elektronickou adresu s uvedením specifického předmětu (např.: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Můžete se přihlásit na mailing-list tohoto webu. Potom budete dostávat oznámení o článcích a novinkách připravených k publikování.',
@@ -332,7 +332,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ecrire_article' => 'Články můžete psát teprve, když vytvoříte alespoň jednu sekci.',
 'info_email_envoi' => 'Email pro zprávy (volitelný údaj)',
 'info_email_envoi_txt' => 'Zde uveďte adresu pro zasílání emailů (standardně se jako tato adresa použije email příjemce):',
-'info_email_webmestre' => 'Email správce webu (volitelný údaj)',
+'info_email_webmestre' => 'Email správce webu (volitelný údaj)', # MODIF
 'info_entrer_code_alphabet' => 'Zadejte kód znakové sady, která se má používat:',
 'info_envoi_email_automatique' => 'Automatické zasílání emailů',
 'info_envoyer_maintenant' => 'Odeslat nyní',
@@ -375,7 +375,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_historique_texte' => 'Sledování revizí umožňuje zachovat historii všech změn obsahu článku a zobrazit změny mezi jeho jednotlivými verzemi.',
 'info_identification_publique' => 'Vaše veřejná identita...',
 'info_image_process' => 'Nejlepší metodu tvorby náhledů zvolíte klepnutím na příslušný obrázek.',
-'info_image_process2' => '<b>Pozn.:</b> <i>Neobjeví-li se žádný obrázek, není hostitelský server vašeho webu nastaven k používání těchto nástrojů. Chcete-li je používat, spojete se s příslušnou technickou podporou a požádejte o rozšíření "GD" nebo "Imagick".</i>',
+'info_image_process2' => '<b>Pozn.:</b> <i>Neobjeví-li se žádný obrázek, není hostitelský server vašeho webu nastaven k používání těchto nástrojů. Chcete-li je používat, spojete se s příslušnou technickou podporou a požádejte o rozšíření "GD" nebo "Imagick".</i>', # MODIF
 'info_images_auto' => 'Automaticky vypočtěné obrázky',
 'info_informations_personnelles' => 'Pátý krok: <b>Osobní údaje</b>', # MODIF
 'info_inscription_automatique' => 'Automatický zápis nových redaktorů',

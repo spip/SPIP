@@ -291,7 +291,7 @@ L\'administrator dau sistèma o de la ret vos deu poder fornir
 'info_classement_2' => '<sup>nd</sup> de @liste@',
 'info_code_acces' => 'Oblidetz pas vòstrei còdes d\'accès pròpris!',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
+'info_compresseur_gzip' => 'Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_config_suivi' => 'S\'aquela adreiça correspònd a una lista de corrier, podètz indicar çai sota l\'adreiça ont lei participants au sit se pòdon inscriure. Aquela adreiça pòt èstre una URL (per exemple la pagina d\'inscripcion a la lista per lo web), o una adreiça e-mail tenent un subjècte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Vos podètz abonar a la lista de difusion d\'aquest sit. Alora recebretz per e-mail leis anoncis d\'articles e de brèvas que se prepausa a la publicacion.',
@@ -324,7 +324,7 @@ L\'administrator dau sistèma o de la ret vos deu poder fornir
 'info_ecrire_article' => 'Avans de poder escriure d\'articles, vos cau crear aumens una rubrica.',
 'info_email_envoi' => 'Adreiça e-mail de mandadís (opcionau)',
 'info_email_envoi_txt' => 'Indicatz aicí l\'adreiça d\'utilizar per enviar leis e-mails (a fauta d\'aquò, s\'utilizarà l\'adreiça destinatari coma adreiça de mandadís):',
-'info_email_webmestre' => 'Adreiça e-mail dau responsable dau sit (opcionau)',
+'info_email_webmestre' => 'Adreiça e-mail dau responsable dau sit (opcionau)', # MODIF
 'info_entrer_code_alphabet' => 'Picatz lo còde de l\'alfabet d\'utilizar:',
 'info_envoi_email_automatique' => 'Mandadís d\'e-mails automatics',
 'info_envoyer_maintenant' => 'Mandar ara',
@@ -360,7 +360,7 @@ L\'administrator dau sistèma o de la ret vos deu poder fornir
 'info_historique_texte' => 'Lo seguiment dei revisions permet de servar un istoric de totei lei modificacions que s\'es portat au contengut d\'un article, e d\'afichar lei diferéncias entre lei versions successivas.',
 'info_identification_publique' => 'Vòstra identitat publica...',
 'info_image_process' => 'Vougatz seleccionar lo melhor metòde de fabricacion dei vinhetas en clicant sus l\'imatge correspondent.',
-'info_image_process2' => '<b>N.B.</b> <i>Se ges d\'imatge apareis, aladonc lo servidor qu\'aubèrga vòstre sit l\'an pas configurat per utilizar d\'aisinas talas. Se desiratz d\'utilizar aquelei foncions, contactatz lo responsable tecnic e demandatz leis extensions «GD» o «Imagick».</i>',
+'info_image_process2' => '<b>N.B.</b> <i>Se ges d\'imatge apareis, aladonc lo servidor qu\'aubèrga vòstre sit l\'an pas configurat per utilizar d\'aisinas talas. Se desiratz d\'utilizar aquelei foncions, contactatz lo responsable tecnic e demandatz leis extensions «GD» o «Imagick».</i>', # MODIF
 'info_images_auto' => 'Imatges calculats automaticament',
 'info_informations_personnelles' => 'Cinquena estapa: <b>Informacions personalas</b>',
 'info_inscription_automatique' => 'Inscripcion automatica de redactors novèus',

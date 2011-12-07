@@ -15,26 +15,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Toegang verboden',
 'avis_article_modifie' => 'Opgelet, @nom_auteur_modif@ heeft @date_diff@  minuten geleden aan dit artikel gewerkt.',
 'avis_aucun_resultat' => 'Geen resultaat.',
-'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
+'avis_base_inaccessible' => 'Kan geen verbinding met de database @base@.',
 'avis_chemin_invalide_1' => 'De toegang die je hebt gekozen',
 'avis_chemin_invalide_2' => 'lijkt niet geldig. Gelieve terug te keren naar de vorige pagina en de ingevulde gegevens na te kijken.',
 'avis_connexion_echec_1' => 'De verbinding met de database is mislukt.',
 'avis_connexion_echec_2' => 'Keer terug naar de vorige pagina en kijk de gegevens na die je hebt ingevuld.',
 'avis_connexion_echec_3' => '<b>N.B.</b> Op veel servers dien je de activatie van je toegang tot de database te <b>vragen</b> vooraleer je ze kan gebruiken. Als je geen verbinding kan maken, kijk dan na of je deze actie hebt ondernomen..',
-'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
+'avis_connexion_erreur_nom_base' => 'De database naam kan letters, cijfers en koppeltekens',
 'avis_connexion_ldap_echec_1' => 'De verbinding met de LDAP-server is mislukt.',
 'avis_connexion_ldap_echec_2' => 'Ga terug naar de vorige pagina en kijk na of de ingevulde gegevens correct zijn.',
 'avis_connexion_ldap_echec_3' => 'Andere mogelijkheid is om de LDAP-ondersteuning om gebruikers in te voeren niet te gebruiken.',
 'avis_deplacement_rubrique' => 'Opgelet! Deze rubiek bevat @contient_breves@ brève@scb@: als je haar verplaatst, gelieve dit te bevestigen door hier het vakje aan te vinken.',
 'avis_destinataire_obligatoire' => 'Je dient een bestemmeling op te geven vooraleer dit bericht te verzenden.',
 'avis_erreur_connexion_mysql' => 'Verbinding met de SQL connectie mislukt',
-'avis_erreur_version_archive' => '<b>Opgelet! Het bestand @archive@ komt overeen met een andere
-    SPIP-versie dan deze die is geïnstalleerd.</b> Dit kan voor
- grote moeilijkheden zorgen : risico op het wissen van de databank,
- ontregeling van de website, enz. Ga niet verder met het importeren
- van het bestand. <p>Meer info kan je vinden op
+'avis_erreur_version_archive' => '<b>Aandacht! Het bestand @archive@is een
+      andere versie van SPIP dat je
+ hebt geïnstalleerd.</b> Je gaat big
+ voldoen moeilijkheden: het risico van het vernietigen van je basis
+ gegevens, de verschillende disfuncties van de site, enz.. niet bevestigen deze import vraag.<p>Meer info kan je vinden op
  <a href="@spipnet@">
-                                de documentatie van SPIP</a>.</p>', # MODIF
+                                de documentatie van SPIP</a>.</p>',
 'avis_espace_interdit' => '<b>Toegang Verboden</b><div>SPIP is reeds geïnstalleerd.',
 'avis_lecture_noms_bases_1' => 'Het installatieprogramma heeft de namen van de geïnstalleerde databanken niet kunnen lezen.',
 'avis_lecture_noms_bases_2' => 'Geen enkele database is beschikbaar, ofwel is de functie die de databases zou moeten tonen, niet geactiveerd
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'EEN BERICHT VERZENDEN',
 'bouton_envoyer_message' => 'Definitief bericht : versturen',
 'bouton_fermer' => 'Sluit',
-'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
+'bouton_mettre_a_jour_base' => 'Database update',
 'bouton_modifier' => 'Wijzigen',
 'bouton_pense_bete' => 'MEMO VOOR PERSOONLIJK GEBRUIK',
 'bouton_radio_activer_messagerie' => 'Intern berichtensysteem activeren',
@@ -112,32 +112,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Kiest een aanvullende basis',
 'connexion_ldap' => 'Aansluiten :',
 'copier_en_local' => 'Plaatselijk kopiëren',
-'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_un_auteur' => 'Maken en associëren een auteur',
 
 // D
 'date_mot_heures' => 'uur',
 
 // E
-'ecran_securite' => ' + écran de sécurité @version@', # NEW
+'ecran_securite' => '+ Beveiliging scherm @version@',
 'email' => 'e-mail',
 'email_2' => 'e-mail:',
 'en_savoir_plus' => 'Meer weten hierover',
 'entree_adresse_annuaire' => 'Plaats van het adresboek',
 'entree_adresse_email' => 'Uw e-mail adres',
-'entree_adresse_email_2' => 'Adresse email', # NEW
+'entree_adresse_email_2' => 'Emailadres',
 'entree_base_donnee_1' => 'Adres van de databank',
 'entree_base_donnee_2' => '(Vaak komt dit adres overeen met dat van je website, soms is het gewoon de vermelding«localhost» of kan je het veld blanco laten.)',
 'entree_biographie' => 'Korte biografie in enkele woorden.',
 'entree_chemin_acces' => '<b>Invullen</b> van de toegangscode :',
 'entree_cle_pgp' => 'Je PGP-sleutel',
-'entree_cle_pgp_2' => 'Clé PGP', # NEW
+'entree_cle_pgp_2' => 'PGP-sleutel',
 'entree_contenu_rubrique' => '(Inhoud van de rubriek in enkele woorden)',
 'entree_identifiants_connexion' => 'Je verbindingsgegevens...',
-'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
+'entree_identifiants_connexion_2' => 'Login',
 'entree_informations_connexion_ldap' => 'Vul hier de gegevens in om verbinding te maken met het LDAP adresboek.
   Deze gegevens kan je bekomen bij de systeem- of netwerkbeheerder.',
 'entree_infos_perso' => 'Wie ben je ?',
-'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
+'entree_infos_perso_2' => 'Wie is de auteur ?',
 'entree_interieur_rubrique' => 'In de rubriek:',
 'entree_liens_sites' => '<b>Hypertext link</b> (verwijzing, te bezoeken website ...)',
 'entree_login' => 'Je login',
@@ -150,19 +150,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_nom_fichier' => 'Vul hier de naam in van het betand @texte_compresse@:',
 'entree_nom_pseudo' => 'je naam of bijnaam',
 'entree_nom_pseudo_1' => '(je naam of bijnaam)',
-'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
+'entree_nom_pseudo_2' => 'Naam of bijnaam',
 'entree_nom_site' => 'je websitename',
-'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
+'entree_nom_site_2' => 'Naam van de site van de auteur',
 'entree_nouveau_passe' => 'nieuw paswoord',
 'entree_passe_ldap' => 'Paswoord',
 'entree_port_annuaire' => 'Het poortnummer van het adresboek',
 'entree_signature' => 'Handtekening',
 'entree_titre_obligatoire' => '<b>Titel</b> [verplicht]<br />',
 'entree_url' => 'Je website-adres (URL)',
-'entree_url_2' => 'Adresse (URL) du site', # NEW
-'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
-'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
-'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echouée. Vous pouvez néanmoins le desactiver.', # MODIF
+'entree_url_2' => 'Site Adres (URL)',
+'erreur_connect_deja_existant' => 'Een server met die naam bestaat al',
+'erreur_nom_connect_incorrect' => 'Deze server naam is niet toegestaan',
+'erreur_plugin_desinstalation_echouee' => 'Het verwijderen van de plugin is mislukt. Echter, kunt u deze uitschakelen.',
 'erreur_plugin_fichier_absent' => 'Bestand ontbreekt',
 'erreur_plugin_fichier_def_absent' => 'Definitiebestand ontbreekt',
 'erreur_plugin_nom_fonction_interdit' => 'Functienaam verboden',
@@ -222,8 +222,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Deze naam wissen',
 'icone_valider_signature' => 'Deze naam goedkeuren',
 'image_administrer_rubrique' => 'Je kan deze rubriek beheren',
-'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
-'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
+'impossible_modifier_login_auteur' => 'Kan niet veranderen login.',
+'impossible_modifier_pass_auteur' => 'Kan wachtwoord niet wijzigen.',
 'info_1_article' => '1 artikel',
 'info_1_article_syndique' => 'Gesyndiceerde 1 artikel',
 'info_1_auteur' => '1 auteur',
@@ -236,10 +236,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  tussen de het publieke en het private deel van de website.',
 'info_admin_etre_webmestre' => 'Geef me de taken van de webmaster',
 'info_admin_gere_rubriques' => 'Deze auteur beheert de volgende rubrieken :',
-'info_admin_gere_toutes_rubriques' => 'Deze auteur beheert<b>alle rubrieken</b>.', # MODIF
-'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
+'info_admin_gere_toutes_rubriques' => 'Deze beheerder beheert <b>alle onderwerpen</ b>',
+'info_admin_gere_toutes_rubriques_2' => 'Ik beheer <b>alle onderwerpen</b>',
 'info_admin_je_suis_webmestre' => 'Ik ben <b>webmestre</b>',
-'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
+'info_admin_statuer_webmestre' => 'Geef deze administrator webmaster rechten',
 'info_admin_webmestre' => 'Deze beheerder is <b>webmaster</b>',
 'info_administrateur' => 'Beheerder',
 'info_administrateur_1' => 'Beheerder',
@@ -250,7 +250,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'Je kan deze rubriek beheren',
 'info_adresse' => 'aan/naar het adres:',
 'info_adresse_url' => 'Adres (URL) van de website',
-'info_afficher_par_nb' => 'Afficher par', # NEW
+'info_afficher_par_nb' => 'Tonen',
 'info_afficher_visites' => 'Toon het aantal bezoeken voor:',
 'info_aide_en_ligne' => 'ONLINE HELP VAN SPIP',
 'info_ajout_image' => 'Als je afbeeldingen als bijlage aan een document toevoegt,
@@ -267,8 +267,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_02' => 'artikels',
 'info_articles_2' => 'Artikels',
 'info_articles_auteur' => 'Artikels van deze auteur',
-'info_articles_miens' => 'Mes articles', # NEW
-'info_articles_tous' => 'Tous les articles', # NEW
+'info_articles_miens' => 'Mijn artikelen',
+'info_articles_tous' => 'Alle artikelen',
 'info_articles_trouves' => 'Gevonden artikels',
 'info_articles_trouves_dans_texte' => 'Gevonden artikels (in de tekst)',
 'info_attente_validation' => 'Je artikels die op goedkeuring wachten',
@@ -276,7 +276,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_article_syndique' => 'Geen gesyndiceerde artikel',
 'info_aucun_auteur' => 'Geen auteur',
 'info_aucun_message' => 'Geen bericht',
-'info_aucun_rubrique' => 'Geen post', # MODIF
+'info_aucun_rubrique' => 'Geen rubriek',
 'info_aucun_site' => 'Geen site',
 'info_aucun_visiteur' => 'Geen bezoekers',
 'info_aujourdhui' => 'vandaag:',
@@ -288,7 +288,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Waarschuwing',
 'info_barre_outils' => 'met zijn werktuigen staaf ?',
 'info_base_installee' => 'De structuur van je databank is geïnstalleerd.',
-'info_bio' => 'Biographie', # NEW
+'info_bio' => 'biografie',
 'info_chapeau' => 'Kop',
 'info_chapeau_2' => 'Kop :',
 'info_chemin_acces_1' => 'Opties : <b>Toegang tot het adresboek</b>',
@@ -299,7 +299,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>de</sup> @liste@',
 'info_code_acces' => 'Vergeet je eigen toegangscode niet!',
 'info_compatibilite_html' => 'HTML-standaard te volgen',
-'info_compresseur_gzip' => '<b>N. B. :</b> Hij wordt aanbevolen om eerst te controleren of leverancier de scripts php  reeds systematisch samenperst; daarvoor, kunt u bijvoorbeeld de volgende dienst gebruiken : @testgzip@',
+'info_compresseur_gzip' => '<b>N. B. :</b> Hij wordt aanbevolen om eerst te controleren of leverancier de scripts php  reeds systematisch samenperst; daarvoor, kunt u bijvoorbeeld de volgende dienst gebruiken : @testgzip@', # MODIF
 'info_compresseur_texte' => 'Als uw server de bladzijdes HTML niet automatisch samendrukt om ze te verzenden naar de internauten, kunt u deze samendrukking proberen te forceren om het gewicht van de gedownloade bladzijdes te verminderen. <b>Aandacht</b>: dat kan bepaalde servers aanzienlijk vertragen.',
 'info_config_suivi' => 'Wanneer dit adres van een rondzendlijst is, kan je hieronder het adres opgeven waarlangs deelnemers van de site zich kunnen inschrijven. Dit adres kan een URL zijn (bvb. het webadres voor het inschrijving op de mailinglist), of een e-mailadres met een onderwerp (bvb. <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Je kan je op de mailinglijst van deze site inschrijven. Je zal dan via e-mail een aankondiging ontvangen van artikels en nieuwsberichten die voor publicatie werden voorgesteld.',
@@ -310,13 +310,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Uw versie :',
 'info_connexion_base' => 'Proef van aansluiten aan de basis',
 'info_connexion_base_donnee' => 'Aansluiten aan uw database',
-'info_connexion_ldap_ok' => 'De LDAP-verbinding is gelukt.</b><p> Je kan de volgende stap zetten.</p>', # MODIF
+'info_connexion_ldap_ok' => 'De LDAP-verbinding is gelukt. </b><p> U kunt doorgaan naar de volgende stap.</p>',
 'info_connexion_mysql' => 'Uw aansluiten SQL',
 'info_connexion_ok' => 'De verbinding is geslaagd.',
 'info_contact' => 'Contact',
 'info_contenu_articles' => 'Inhoud van de artikels',
 'info_contributions' => 'Bijdragen',
-'info_creation_paragraphe' => '(Om een nieuwe paragraaf aan te maken, laat je gewoon enkele lijnen blanco.)', # MODIF
+'info_creation_paragraphe' => 'Voor alinea\'s te maken, laat je gewoon enkele lijnen blanco.',
 'info_creation_rubrique' => 'Alvorens artikelen te kunnen schrijven,<br /> u moet een rubriek minstens creëren.<br />',
 'info_creation_tables' => 'Oprichting van tabellen in de databank',
 'info_creer_base' => '<b>Creëren</b> een nieuw databank:',
@@ -332,7 +332,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ecrire_article' => 'Alvorens een artikel te kunnen schrijven, dien je minimaal één rubriek aanmaken.',
 'info_email_envoi' => 'Verzendadres (optioneel)',
 'info_email_envoi_txt' => 'Geef hieronder het adres op dat gebruikt wordt voor het versturen van e-mails. (Standaard wordt het adres van de bestemmeling als verzendadres gebruikt.) :',
-'info_email_webmestre' => 'E-mailadres van de webmaster (optioneel)',
+'info_email_webmestre' => 'E-mailadres van de webmaster (optioneel)', # MODIF
 'info_entrer_code_alphabet' => 'Vul de alfabetcode in die je wil gebruiken:',
 'info_envoi_email_automatique' => 'Automatisch verzenden van e-mails',
 'info_envoyer_maintenant' => 'Nu versturen',
@@ -346,11 +346,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  met de aankondiging van vragen voor publicatie of goedgekeurde publicaties.',
 'info_fichiers_authent' => 'Verificatiebestand ".htpasswd"',
 'info_forums_abo_invites' => 'Je site bevat forums met abonnement; bezoekers worden dus op de publieke site verzocht zich in te schrijven.',
-'info_gauche_admin_effacer' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p> Ze geeft toegang tot verschillende onderhoudstaken. Voor sommige taken is een afzonderlijke aanmelding tot de site via FTP vereist.</p>', # MODIF
+'info_gauche_admin_effacer' => '<b>Deze pagina is alleen beschikbaar voor beheerders.</b><p> Het biedt toegang tot diverse functies van technisch onderhoud. Sommigen van hen aanleiding geven tot een specifieke verificatie proces, dat nodig heeft om FTP-toegang tot de website.</p>',
 'info_gauche_admin_tech' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p> Ze geeft toegang tot allerlei technische onderhoudstaken.
- Voor het uitvoeren van sommige taken zijn een afzonderlijke aanmelding en toegang tot je site via FTP nodig.</p>', # MODIF
-'info_gauche_admin_vider' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p> Ze geeft toegang tot allerlei technische onderhoudstaken.
- Voor het uitvoeren van sommige taken zijn een afzonderlijke aanmelding en toegang tot je site via FTP vereist.</p>', # MODIF
+ Voor het uitvoeren van sommige taken zijn een afzonderlijke aanmelding en toegang tot je site via FTP nodig.</p>',
+'info_gauche_admin_vider' => '<b>Deze pagina is alleen beschikbaar voor beheerders.</b><p> Het biedt toegang tot diverse
+ functies van technisch onderhoud. Sommigen van hen aanleiding geven tot een specifieke verificatie
+ proces, dat nodig heeft om FTP-toegang tot de website.</p>',
 'info_gauche_auteurs' => 'Je vindt hier alle auteurs van de site.
  Hun status is te herkennen aan de kleur van het icoontje (beheerder = groen; redacteur = geel).',
 'info_gauche_auteurs_exterieurs' => 'Externe auteurs, zonder toegang tot de site, zijn aangeduid met een blauw icoontje;
@@ -362,7 +363,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  publieke site vinden (forums met inschrijving).',
 'info_generation_miniatures_images' => 'Aanmaak van de miniatuurafbeeldingen',
 'info_gerer_trad' => 'De koppelingen voor vertaling beheren ?',
-'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
+'info_gerer_trad_objets' => '@objets@ : het beheer van de vertaling koppelingen',
 'info_hebergeur_desactiver_envoi_email' => 'Sommige hostingbedrijven staan het automatisch versturen van e-mails door hun servers niet toe. In dat geval zullen de volgende functionaliteiten van SPIP niet werken.',
 'info_hier' => 'gisteren:',
 'info_historique_activer' => 'Activeren van het opvolgen van de revisies',
@@ -372,7 +373,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_historique_texte' => 'Met de opvolging van de revisies is het mogelijk de geschiedenis van alle wijzigingen aan een artikel bij te houden, en de verschillende tussen opeenvolgende versies weer te geven.',
 'info_identification_publique' => 'Je publieke identiteit...',
 'info_image_process' => 'Kies de beste methode om een miniatuurafbeelding te maken door op de bijhorende afbeelding te klikken.',
-'info_image_process2' => '<b>N.B.</b> <i>Wanneer geen enkel beeld wordt getoond, betekent dit dat de server van je website niet is ingesteld om deze tools te gebruiken. Als je van deze functies gebruik wil maken, dien je de technische verantwoordelijke van de server te contacteren en te vragen naar «GD» of «Imagick» extensies.</i>',
+'info_image_process2' => '<b>N.B.</b> <i>Wanneer geen enkel beeld wordt getoond, betekent dit dat de server van je website niet is ingesteld om deze tools te gebruiken. Als je van deze functies gebruik wil maken, dien je de technische verantwoordelijke van de server te contacteren en te vragen naar «GD» of «Imagick» extensies.</i>', # MODIF
 'info_images_auto' => 'Beelden automatisch berekend',
 'info_informations_personnelles' => 'Persoonlijke gegevnes',
 'info_inscription_automatique' => 'Automatische inschrijving van nieuwe redacteurs',
@@ -385,7 +386,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_liste_redacteurs_connectes' => 'Lijst met online redacteuren',
 'info_login_existant' => 'Deze login is reeds in gebruik',
 'info_login_trop_court' => 'Login te kort.',
-'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'De login moet minstens @nb@ tekens.',
 'info_logos' => 'De logo\'s',
 'info_maximum' => 'maximum:',
 'info_meme_rubrique' => 'In dezelfde rubriek',
@@ -400,7 +401,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  site bevond.: je databank loopt hierdoor het risico
  beschadigd te worden waardoor je site niet meer zal
  functioneren.<br />{{Herinstalleer de SPIP-bestanden.}}',
-'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
+'info_modification_enregistree' => 'Uw wijziging werd geregistreerd',
 'info_modifier_auteur' => 'De auteur wijzigen :',
 'info_modifier_rubrique' => 'De rubriek wijzigen:',
 'info_modifier_titre' => 'Wijzigen : @titre@',
@@ -413,17 +414,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_multi_langues_choisies' => 'Kies hierna welke talen ter beschikking staan van de redacteurs van je site.
   Talen die al worden gebruikt (vooraan in de lijst getoond) kunnen niet geschrapt worden.
 ',
-'info_multi_objets' => '@objets@ : activer le menu de langue', # NEW
+'info_multi_objets' => '@objets@ : Activeer de taalmenu',
 'info_multi_rubriques' => 'Taalmenu toepassen op de rubrieken?',
 'info_multi_secteurs' => '... enkel voor de rubrieken in de hoofdmap?',
 'info_nb_articles' => '@nb@ artikelen',
-'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
-'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_messages' => '@nb@ messages', # NEW
-'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
-'info_nb_rubriques' => '@nb@ rubriques', # NEW
-'info_nb_sites' => '@nb@ sites', # NEW
-'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
+'info_nb_articles_syndiques' => '@nb@ gesyndiceerde artikelen',
+'info_nb_auteurs' => '@nb@ auteurs',
+'info_nb_messages' => '@nb@ berichten',
+'info_nb_mots_cles' => '@nb@ trefwoord',
+'info_nb_rubriques' => '@nb@ secties',
+'info_nb_sites' => '@nb@ sites',
+'info_nb_visiteurs' => '@nb@ bezoekers',
 'info_nom' => 'Naam',
 'info_nom_destinataire' => 'Naam van de bestemmeling',
 'info_nom_site' => 'naam van je site',
@@ -437,13 +438,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_non_envoi_liste_nouveautes' => 'De lijst met nieuwigheden niet versturen',
 'info_non_modifiable' => 'kan niet gewijzigd worden',
 'info_non_suppression_mot_cle' => 'Ik wil dit trefwoord niet verwijderen.',
-'info_note_numero' => 'Note @numero@', # NEW
+'info_note_numero' => 'Noot @numero@',
 'info_notes' => 'Opmerkingen',
 'info_nouveaux_message' => 'Nieuwe berichten',
 'info_nouvel_article' => 'Nieuw artikel',
 'info_nouvelle_traduction' => 'Nieuwe vertaling :',
 'info_numero_article' => 'ARTIKEL NUMMER:',
-'info_obligatoire_02' => '[Verplicht]', # MODIF
+'info_obligatoire_02' => '(verplicht)',
 'info_option_accepter_visiteurs' => 'Inschrijving van bezoekers van de publieke site aanvaarden',
 'info_option_faire_suivre' => 'Berichten van het forum bezorgen aan de auteurs van de artikels',
 'info_option_ne_pas_accepter_visiteurs' => 'Inschrijving van bezoekers weigeren',
@@ -457,9 +458,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_par_statut' => 'per statuut',
 'info_par_tri' => '\'(per @tri@)\'',
 'info_passe_trop_court' => 'Paswoord te kort.',
-'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Het wachtwoord moet ten minste @nb@ tekens.',
 'info_passes_identiques' => 'Beide paswoorden zijn niet identiek.',
-'info_pense_bete_ancien' => 'Voorbije memos', # MODIF
+'info_pense_bete_ancien' => 'Uw oude herinneringen',
 'info_plus_cinq_car' => 'Meer dan 5 karakters',
 'info_plus_cinq_car_2' => '(Meer dan 5 karakters)',
 'info_plus_trois_car' => '(Meer dan 3 karakters)',
@@ -490,11 +491,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  de toeganscode voor de site. Sommige hostingproviders
  blokkeren echter het versturen van e-mail vanaf hun
  servers : in dat geval is een automatische inschrijving
- niet mogelijk.</i></blockquote>',
+ niet mogelijk.</i></blockquote>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Wil je gebruik maken van de geintegreerde zoekmachine van SPIP ?
  (niet-activeren hiervan versnelt de werking van het systeem.)',
 'info_question_vignettes_referer_non' => 'Niet de vangsten van de sites van oorsprong van de bezoeken te kennen geven',
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ gewerkt aan de inhoud er @date_diff@ minuten ',
 'info_racine_site' => 'Begin van de site',
 'info_recharger_page' => 'Gelieve deze pagina binnen enkele ogenblikken te herladen.',
 'info_recherche_auteur_a_affiner' => 'Teveel resultaten voor "@cherche_auteur@" ; gelieve de zoekopdracht te verfijnen.',
@@ -506,8 +507,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redacteurs' => 'Redacteurs',
 'info_redaction_en_cours' => 'IN REDACTIE',
 'info_redirection' => 'Omleiding',
-'info_redirection_activee' => 'La redirection est activée.', # NEW
-'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
+'info_redirection_activee' => 'De omleiding is ingeschakeld.',
+'info_redirection_desactivee' => 'De redirect is verwijderd.',
 'info_refuses' => 'Uw geweigerde artikels',
 'info_reglage_ldap' => 'Opties : <b>Instellen van de LDAP invoer</b>',
 'info_renvoi_article' => '<b>Doorsturen.</b> Dit artikel verwijst naar de pagina:',
@@ -525,7 +526,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_site_2' => 'site :',
 'info_site_min' => 'site',
 'info_site_reference_2' => 'Gekoppelde site',
-'info_site_web' => 'WEBSITE :', # MODIF
+'info_site_web' => 'Site Web :',
 'info_sites' => 'sites',
 'info_sites_lies_mot' => 'Referentiesites gekoppeld aan het trefwoord ',
 'info_sites_proxy' => 'Een proxy gebruiken',
@@ -534,7 +535,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_sous_titre' => 'Ondertitel:',
 'info_statut_administrateur' => 'Administrator',
 'info_statut_auteur' => 'Statuut van deze auteur :',
-'info_statut_auteur_2' => 'Je suis', # NEW
+'info_statut_auteur_2' => 'Ik ben',
 'info_statut_auteur_a_confirmer' => 'Inschrijving bevestigen',
 'info_statut_auteur_autre' => 'Andere status :',
 'info_statut_efface' => 'Uitgewist',
@@ -552,13 +553,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_texte' => 'Tekst',
 'info_texte_explicatif' => 'Uitleg',
 'info_texte_long' => '(de tekst is lang: hij zal bijgevolg in verschillende delen verschijnen die opnieuw bij elkaar worden gezet na goedkeuring van de tekst.)',
-'info_texte_message' => 'Tekst van je bericht:', # MODIF
+'info_texte_message' => 'Tekst van je bericht',
 'info_texte_message_02' => 'Tekst van het bericht',
 'info_titre' => 'Titel:',
 'info_total' => 'totaal :',
 'info_tous_articles_en_redaction' => 'Alle artikels in redactie',
 'info_tous_articles_presents' => 'Alle gepubliceerde artikels van deze rubriek',
-'info_tous_articles_refuses' => 'Tous les articles refusés', # NEW
+'info_tous_articles_refuses' => 'Alle items afgewezen',
 'info_tous_les' => 'alle :',
 'info_tous_redacteurs' => 'Berichten voor alle redacteurs',
 'info_tout_site' => 'Volledige site',
@@ -569,16 +570,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_tout_site6' => '<b>Opgelet :</b> enkel de originele artikels worden getoond.
 Vertalingen worden gelinkt aan het origineel,
 een kleur geeft hun status aan :',
-'info_traductions' => 'Traductions', # NEW
+'info_traductions' => 'Vertalingen',
 'info_travail_colaboratif' => 'Samenwerking voor de artikels',
 'info_un_article' => 'een Artikel, ',
 'info_un_site' => 'een Website, ',
 'info_une_rubrique' => 'een Rubriek, ',
 'info_une_rubrique_02' => '1 Rubriek',
 'info_url' => 'URL :',
-'info_url_proxy' => 'URL du proxy', # NEW
+'info_url_proxy' => 'Proxy-URL',
 'info_url_site' => 'WEBSITE URL :',
-'info_url_test_proxy' => 'URL de test', # NEW
+'info_url_test_proxy' => 'URL-test',
 'info_urlref' => 'Adres van de koppeling :',
 'info_utilisation_spip' => 'Je kan het publicatiesysteem nu gebruiken...',
 'info_visites_par_mois' => 'Tonen per maand :',
@@ -586,10 +587,10 @@ een kleur geeft hun status aan :',
 'info_visiteur_2' => 'van de publieke site',
 'info_visiteurs' => 'Bezoekers',
 'info_visiteurs_02' => 'Bezoekers van de publieke site',
-'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
+'info_webmestre_forces' => 'Webmasters zijn op dit moment gedefinieerd in <tt>@file_options@</tt>.',
 'install_adresse_base_hebergeur' => '<modif>Adres van de database die door leverancier wordt toegekend',
 'install_base_ok' => 'De basis @base@ werd erkend',
-'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
+'install_connect_ok' => 'De nieuwe basis is uitgeroepen tot de server @connect@.',
 'install_echec_annonce' => 'De installatie zal wellicht mislukken of leiden tot een niet-werkende site...',
 'install_extension_mbstring' => 'SPIP functioneert niet met  :',
 'install_extension_php_obligatoire' => 'SPIP heeft de php extensie nodig :',
@@ -601,7 +602,7 @@ een kleur geeft hun status aan :',
 'install_select_langue' => 'Kies een taal en klik vervolgens op de knop  «volgende» om de installatie te beginnen.',
 'install_select_type_db' => 'Het basissoort gegevens aangeven:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL', # NEW
+'install_select_type_pg' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Basisserver van gegevens die door de leverancier wordt toegekend',
@@ -609,8 +610,8 @@ een kleur geeft hun status aan :',
 'install_tables_base' => 'Tabelen van de basis',
 'install_types_db_connus' => 'SPIP weten gebruiken <b>MySQL</b> (het meest verbreid), <b>PostgreSQL</b> en <b>SQLite</b>.',
 'install_types_db_connus_avertissement' => 'Aandacht : verschillende plugins werken slechts met MySQL',
-'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
-'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
+'instituer_erreur_statut_a_change' => 'Het statuut is gewijzigd',
+'instituer_erreur_statut_non_autorise' => 'U kunt niet kiezen voor deze status',
 'intem_redacteur' => 'redacteur',
 'intitule_licence' => 'Licentie',
 'item_accepter_inscriptions' => 'Inschrijvingen aanvaarden',
@@ -652,23 +653,23 @@ een kleur geeft hun status aan :',
 'item_publier_articles' => 'Artikels publiceren, welke ook hun publicatiedatum is.',
 'item_reponse_article' => 'Antwoord von Artikel',
 'item_utiliser_moteur_recherche' => 'De zoekmachine gebruiken',
-'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
-'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
+'item_version_html_max_html4' => 'Worden beperkt tot HTML4 op de publieke site',
+'item_version_html_max_html5' => 'Enable HTML5',
 'item_visiteur' => 'bezoeker',
 
 // J
 'jour_non_connu_nc' => 'onbekend',
 
 // L
-'label_bando_outils' => 'Barre d\'outils', # NEW
-'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-'label_bando_outils_masquer' => 'Masquer les outils', # NEW
-'label_choix_langue' => 'Selectionnez votre langue', # NEW
-'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
-'label_slogan_site' => 'Slogan du site', # NEW
-'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
-'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
-'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
+'label_bando_outils' => 'Toolbar',
+'label_bando_outils_afficher' => 'Tonen gereedschap',
+'label_bando_outils_masquer' => 'Hide tools',
+'label_choix_langue' => 'Selecteer uw taal',
+'label_nom_fichier_connect' => 'Geef de naam die wordt gebruikt voor deze server',
+'label_slogan_site' => 'Site Tag',
+'label_taille_ecran' => 'Breedte van het scherm',
+'label_texte_et_icones_navigation' => 'Navigatiemenu',
+'label_texte_et_icones_page' => 'Bekijken van de pagina',
 'ldap_correspondance' => 'erfenis van het veld @champ@',
 'ldap_correspondance_1' => 'Erfenis van de velden LDAP',
 'ldap_correspondance_2' => 'Voor elk volgend SPIP veld, de naam van het overeenkomstige veld LDAP aangeven. Leegte laten om niet het te vullen, door ruimtes of komma\'s te scheiden om verschillende LDAP velden te proberen.',
@@ -678,7 +679,7 @@ een kleur geeft hun status aan :',
 'lien_email' => 'e-mail',
 'lien_nom_site' => 'WEBSITENAME:',
 'lien_retirer_auteur' => 'Auteur verwijderen',
-'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_tous_auteurs' => 'Verwijder alle auteurs',
 'lien_retrait_particpant' => 'Deelnemer verwijderen',
 'lien_site' => 'Site',
 'lien_supprimer_rubrique' => 'Rubriek verwijderen',
@@ -689,12 +690,12 @@ een kleur geeft hun status aan :',
 'lien_trier_nombre_articles' => 'Sorteer op aantal artikels',
 'lien_trier_statut' => 'Sorteer op status',
 'lien_voir_en_ligne' => 'ONLINE BEKIJKEN:',
-'logo_article' => 'LOGO VAN HET ARTIKEL', # MODIF
-'logo_auteur' => 'LOGO VAN DE AUTEUR', # MODIF
-'logo_rubrique' => 'LOGO VAN DE RUBRIEK', # MODIF
-'logo_site' => 'LOGO VAN DE WEBSITE', # MODIF
-'logo_standard_rubrique' => 'STANDAARDLOGO VOOR RUBRIEKEN', # MODIF
-'logo_survol' => 'ZWEVEND LOGO', # MODIF
+'logo_article' => 'Logo van het artikel',
+'logo_auteur' => 'Logo van de auteur',
+'logo_rubrique' => 'Logo van de rubriek ',
+'logo_site' => 'Logo van deze site',
+'logo_standard_rubrique' => 'Logo standaard onderwerpen',
+'logo_survol' => 'Logo voor rollover',
 
 // M
 'menu_aide_installation_choix_base' => 'Databank kiezen',
@@ -706,7 +707,7 @@ een kleur geeft hun status aan :',
 'mois_non_connu' => 'Onbekend',
 
 // N
-'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
+'nouvelle_version_spip' => 'Versie @version@ van SPIP is beschikbaar',
 
 // O
 'onglet_contenu' => 'Inhoud',
@@ -722,7 +723,7 @@ een kleur geeft hun status aan :',
 'page_pas_proxy' => 'Deze bladzijde moet niet via proxy gaan',
 'pas_de_proxy_pour' => 'Desnoods geeft de machines of gebieden aan waarvoor dit proxy niet moet van toepassing zijn (bijvoorbeeld : @exemple@)',
 'plugin_charge_paquet' => 'Lading van het pak @name@',
-'plugin_charger' => 'Télécharger', # NEW
+'plugin_charger' => 'Download',
 'plugin_erreur_charger' => 'fout : onmogelijk om @zip@ te laden',
 'plugin_erreur_droit1' => 'De lijst <code>@dest@</code> is niet toegankelijk in schrift.',
 'plugin_erreur_droit2' => 'Gelieve de rechten op deze lijst (en het eventueel te creëren) controleren, of de bestanden door FTP plaatsen.',
@@ -733,7 +734,7 @@ een kleur geeft hun status aan :',
 'plugin_etat_test' => 'in test',
 'plugin_impossible_activer' => 'Onmogelijk om plugin @plugin@ te activeren',
 'plugin_info_automatique1' => 'Als u tot de automatische installatie van plugins wilt machtiging verlenen, zal willen :',
-'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez :', # NEW
+'plugin_info_automatique1_lib' => 'Als u de automatische installatie van deze bibliotheek toe te laten :',
 'plugin_info_automatique2' => 'een lijst <code>@rep@</code> creëren ;',
 'plugin_info_automatique3' => 'controleren dat de server wordt gemachtigd om in deze lijst te schrijven.',
 'plugin_info_automatique_creer' => 'om aan de wortel van de plaats te creëren.',
@@ -745,13 +746,13 @@ een kleur geeft hun status aan :',
 'plugin_info_automatique_liste_update' => 'De lijsten bijwerken',
 'plugin_info_automatique_ou' => 'om...',
 'plugin_info_automatique_select' => 'Selecteert hieronder een plugin : SPIP zal het downloaden en zal in de lijst <code>@rep@</code>  het plaatsen; als dit plugin reeds bestaat, zal hij bijgewerkt worden.',
-'plugin_info_credit' => 'Crédits', # NEW
-'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
-'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
-'plugin_info_install_ok' => 'Installation réussie', # NEW
-'plugin_info_necessite' => 'Necessite :', # NEW
-'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
+'plugin_info_credit' => 'Credits',
+'plugin_info_erreur_xml' => 'De verklaring van deze plugin is onjuist',
+'plugin_info_extension_1' => 'De onderstaande extensies zijn geladen en geactiveerd in de directory @extensions@.',
+'plugin_info_extension_2' => 'Ze zijn niet gedeactiveerd.',
+'plugin_info_install_ok' => 'Succesvolle installatie',
+'plugin_info_necessite' => 'Nodig hebben :',
+'plugin_info_non_compatible_spip' => 'Deze plugin is niet compatibel met deze versie van SPIP',
 'plugin_info_telecharger' => 'om sinds @url@ te downloaden en om te plaatsen in @rep@',
 'plugin_librairies_installees' => 'Geplaatste boekhandels',
 'plugin_necessite_lib' => 'Dit plugin vereist de boekhandel @lib@',
@@ -760,8 +761,8 @@ een kleur geeft hun status aan :',
 'plugin_source' => 'oorsprong: ',
 'plugin_titre_automatique' => 'Automatische installatie',
 'plugin_titre_automatique_ajouter' => 'Een plugins toevoegen',
-'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
-'plugin_titre_modifier' => 'Mes plugins', # NEW
+'plugin_titre_installation' => 'Het installeren van de plugin @plugin@',
+'plugin_titre_modifier' => 'Mijn plugins',
 'plugin_zip_active' => 'Gaat door om het te activeren',
 'plugin_zip_adresse' => 'geeft hieronder het adres van een bestand zip van te downloaden plugin, of nog het adres van een lijst van plugins aan.',
 'plugin_zip_adresse_champ' => 'Adres van plugin of de lijst ',
@@ -770,30 +771,30 @@ een kleur geeft hun status aan :',
 'plugin_zip_installe_rep_finie' => 'Het bestand @zip@ is unzip en werd in de lijst @rep@ geplaatst',
 'plugin_zip_installer' => 'U kunt nu het plaatsen.',
 'plugin_zip_telecharge' => 'Het bestand @zip@ werd geladen',
-'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
-'plugins_actif_un' => 'Un plugin activé.', # NEW
+'plugins_actif_aucun' => 'Geen plugins ingeschakeld.',
+'plugins_actif_un' => 'Een plugin is ingeschakeld.',
 'plugins_actifs' => '@count@ plugins activeren.',
-'plugins_actifs_liste' => 'Plugins actifs', # MODIF
+'plugins_actifs_liste' => 'Activa',
 'plugins_compte' => '@count@ plugins',
-'plugins_disponible_un' => 'Un plugin disponible.', # NEW
+'plugins_disponible_un' => 'Een plugin beschikbaar.',
 'plugins_disponibles' => '@count@ plugins beschikbaar.',
 'plugins_erreur' => 'De fout in plugins: @plugins@',
 'plugins_liste' => 'Lijst van plugins',
-'plugins_liste_extensions' => 'Extensions', # NEW
-'plugins_recents' => 'Plugins récents.', # NEW
-'plugins_tous_liste' => 'Tous', # NEW
+'plugins_liste_extensions' => 'Extensies',
+'plugins_recents' => 'Recent plugins.',
+'plugins_tous_liste' => 'Alle',
 'plugins_vue_hierarchie' => 'Hiërarchie',
 'plugins_vue_liste' => 'Lijst',
 'protocole_ldap' => 'De versie van het protocol :',
 
 // Q
-'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
-'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
-'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
-'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
-'queue_one_job_in_queue' => '1 travail en attente', # NEW
-'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste des travaux', # NEW
+'queue_executer_maintenant' => 'Nu uitvoeren',
+'queue_nb_jobs_in_queue' => '@nb@ wachtrij',
+'queue_next_job_in_nb_sec' => 'Volgende opdracht in @nb@ s',
+'queue_no_job_in_queue' => 'Geen werk in de wacht',
+'queue_one_job_in_queue' => '1 achterstand',
+'queue_purger_queue' => 'Zuiveren van de lijst van werken',
+'queue_titre' => 'Lijst van werken',
 
 // R
 'repertoire_plugins' => 'Map :',
@@ -803,8 +804,8 @@ een kleur geeft hun status aan :',
 'statut_admin_restreint' => '(beperkte toegang)',
 
 // T
-'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
-'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)',
+'tache_cron_secondes' => 'Taak CRON @function@ (alle @nb@ s)',
 'taille_cache_image' => 'De beelden door SPIP automatisch aangemaakt (icoontjes van documenten, grafisch weergegeven titels, wiskundige functies in TeX formaat...) nemen in de map @dir@ een totale plaats in van  @taille@.',
 'taille_cache_infinie' => 'De site voorziet geen beperking in de grootte van de buffermap.',
 'taille_cache_maxi' => 'SPIP probeert de omvang van de buffermap van de site te beperken tot ongeveer <b>@octets@</b> gegevens.',
@@ -831,8 +832,8 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_choix_table_prefix' => 'Voorvoegsel van de tabelen :',
 'texte_commande_vider_tables_indexation' => 'Gebruik dit commando als je de tabellen met indices wil leegmaken die door de
  zoekmachine van SPIP gebruikt worden. Zo kan je schijfruimte vrijmaken.',
-'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
+'texte_compatibilite_html' => 'U kunt vragen SPIP te produceren, op de openbare site, code compatibel met standaard <i>HTML4</i>, of laat het aan de mogelijkheden van de moderne gebruik <i>HTML5</i>.',
+'texte_compatibilite_html_attention' => 'Er is geen risico, zodat de <i>HTML5</i>, maar als je dat doet, de pagina\'s van uw site moet beginnen met het volgende te blijven geldig : <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(deze kan gecomprimeerd worden of niet)',
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elements',
@@ -854,17 +855,16 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_effacer_base' => 'Verwijder de SPIP databank',
 'texte_effacer_donnees_indexation' => 'Verwijder de geïndexeerde gegevens',
 'texte_effacer_statistiques' => 'De statistieken uitwissen',
-'texte_en_cours_validation' => 'De artikelen en berichten hieronder worden aan de publicatie voorgesteld.', # MODIF
+'texte_en_cours_validation' => 'De inhoud hieronder wachten op validatie.',
 'texte_enrichir_mise_a_jour' => 'De opmaak van een tekst kan gebeuren met behulp van de zogeheten «typografische snelkoppelingen».',
-'texte_fichier_authent' => '<b>SPIP moet hij de speciale  <tt>.htpasswd</tt>
-  en <tt>.htpasswd-admin</tt> bestanden aanmaken in de map @dossier@ ?</b><p>
- Deze bestanden zijn nuttig om de toegang tot andere delen
- van je website (zoals een extern programma voor
- statistieken, bijvoorbeeld) te beperken voor de auteurs en
- beheerders.</p><p>
+'texte_fichier_authent' => 'SPIP moet er dan speciale bestanden  <tt>.htpasswd</tt>
+  en <tt>.htpasswd-admin</tt> in de directory @dossier@ ?</b><p>
+ Deze bestanden die u kunt gebruiken om toegang te beperken tot 
+ auteurs   en bestuurders in andere delen van je site 
+   (externe programma statistieken, bijvoorbeeld).</p><p>
 Als u geen nut ervan hebt, kunt u deze keuze
  laten  aan zijn waarde per gebrek (niet een oprichting
-  bestanden).</p>', # MODIF
+  bestanden).</p>',
 'texte_informations_personnelles_1' => 'Nu zal het systeem een persoonlijke toegang tot de site voor u creëren.',
 'texte_informations_personnelles_2' => '(Nota : als het herinstallatie betreft,  en je toegangscode blijkt nog steeds te werken, kan je',
 'texte_introductif_article' => '(Inleidende tekst op het artikel.)',
@@ -966,28 +966,28 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_admin_effacer' => 'Technisch onderhoud',
 'titre_admin_tech' => 'Technisch onderhoud',
 'titre_admin_vider' => 'Technisch onderhoud',
-'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
-'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_un_auteur' => 'Voeg een auteur',
+'titre_ajouter_un_mot' => 'Voeg een trefwoord',
 'titre_cadre_afficher_article' => 'Artikels tonen',
 'titre_cadre_afficher_traductions' => 'Toon de status van de vertalingen voor de volgende talen :',
 'titre_cadre_ajouter_auteur' => 'EEN AUTEUR TOEVOEGEN :',
 'titre_cadre_interieur_rubrique' => 'In de rubriek',
 'titre_cadre_numero_auteur' => 'AUTEUR NUMMER',
-'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
+'titre_cadre_numero_objet' => '@objet@ NUMBER :',
 'titre_cadre_signature_obligatoire' => '<b>Handtekening</b> [Verplicht]<br />',
 'titre_config_contenu_notifications' => 'Kennisgevingen',
 'titre_config_contenu_prive' => 'In de particuliere ruimte',
 'titre_config_contenu_public' => 'Op de openbare site',
 'titre_config_fonctions' => 'Configuratie van de site',
-'titre_config_langage' => 'Configurer la langue', # NEW
+'titre_config_langage' => 'Stel de taal',
 'titre_configuration' => 'Configuratie van de site',
-'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
+'titre_configurer_preferences' => 'Configureer uw voorkeuren',
 'titre_conflit_edition' => 'Conflict bij de uitgave',
 'titre_connexion_ldap' => 'Opties: <b>Je LDAP-verbinding</b>',
 'titre_groupe_mots' => 'WOORDENGROEP:',
-'titre_identite_site' => 'Identité du site', # NEW
-'titre_langue_article' => 'TAAL VAN HET ATIKEL', # MODIF
-'titre_langue_rubrique' => 'TAAL VAN DE RUBRIEK', # MODIF
+'titre_identite_site' => 'Identiteit van de site',
+'titre_langue_article' => 'Taal van het artikel',
+'titre_langue_rubrique' => 'Taal van de rubriek',
 'titre_langue_trad_article' => 'TAAL EN VERTALINGEN VAN HET ARTIKEL',
 'titre_les_articles' => 'ARTIKELS',
 'titre_messagerie_agenda' => 'Besteldienst en agenda',
@@ -1023,9 +1023,9 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'trad_article_inexistant' => 'Er is geen artikel met dit nummer.',
 'trad_article_traduction' => 'Alle versies van dit artikel:',
 'trad_deja_traduit' => 'Fout: onmogelijk om dit artikel te verbinden met het gevraagde nummer.',
-'trad_delier' => 'Dit artikel niet meer koppelen aan zijn vertalingen', # MODIF
+'trad_delier' => 'Niet binden aan deze vertalingen',
 'trad_lier' => 'Dit artikel is een vertaling van artikelnummer:',
-'trad_new' => 'Een nieuwe vertaling maken van dit artikel', # MODIF
+'trad_new' => 'Voeg een nieuwe vertaling',
 
 // U
 'upload_info_mode_document' => 'Dit beeld in portfolio neerzetten',

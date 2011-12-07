@@ -306,7 +306,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_code_acces' => 'Ùn vi scurdate di i vostri còdici d\'accessu !',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Arricumandemu di verificà capunanzu sì l\'òspite cumpressa digià in autumàticu i script php;. Pè sapè la, 
-		pudete aduprà per esempiu stu serviziu : @testgzip@',
+		pudete aduprà per esempiu stu serviziu : @testgzip@', # MODIF
 'info_compresseur_texte' => 'Sì u vostru servore ùn cumpressa micca in autumàticu e pàgine HTML da mandà le à i visitori, pruvate puru à furzà a cumpressione da 
 		sminuì u pesu di e pàgine da scaricà. <b>Attenti</b> : Quessa pò ralentisce assai certi servori.',
 'info_config_suivi' => 'Sì st\'indirizzu currisponde à una mailing-list, rinsignate puru quì sottu l\'indirizzu cù chì i participanti di u situ si ponu iscrive. 
@@ -345,7 +345,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_email_envoi' => 'Indirizzu email di chì manda (micca ubbligatoriu)',
 'info_email_envoi_txt' => 'Indettà quì l\'indirizzu da aduprà per mandà l\'email (da predefinita, l\'indirizzu di u destinatariu serà usatu da indirizzu 
 		d\'inviu) :',
-'info_email_webmestre' => 'Indirizzu email di u webmaestru (micca ubbligatoriu)',
+'info_email_webmestre' => 'Indirizzu email di u webmaestru (micca ubbligatoriu)', # MODIF
 'info_entrer_code_alphabet' => 'Indettà u còdice di u santacroce da aduprà :',
 'info_envoi_email_automatique' => 'Inviu autumàticu d\'email',
 'info_envoyer_maintenant' => 'Mandà avà',
@@ -391,7 +391,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_identification_publique' => 'A vostra identità pùbblica...',
 'info_image_process' => 'Sceglite puru u mètudu preferitu per a creazione di e figurette clicchendu nant\'à l\'imàgine currispundente.',
 'info_image_process2' => '<b>N.B.</b> <i>S\'ella ùn vene nisun\'imàgine, vole dì chì a cunfigurazione di u vostru servore ùn permette l\'usu di tale 
-	funzioni gràfiche. Sè vo vulete aduprà le quantunque, cuntattate u rispunsèvule tècnicu, dumandendu li di stallà l\'estensioni "GD" o "Imagick".</i>',
+	funzioni gràfiche. Sè vo vulete aduprà le quantunque, cuntattate u rispunsèvule tècnicu, dumandendu li di stallà l\'estensioni "GD" o "Imagick".</i>', # MODIF
 'info_images_auto' => 'Imàgini create in autumàticu',
 'info_informations_personnelles' => 'Infurmazioni persunale',
 'info_inscription_automatique' => 'Iscrizzione autumàtica di nuvelli scrittori',

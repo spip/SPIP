@@ -291,7 +291,7 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_classement_2' => '. an @liste@',
 'info_code_acces' => 'Vergiesst är Login-Informatiounen nët!',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-'info_compresseur_gzip' => '<b>N.B.:</b> Kontrolléiert op ären Hebergeur PHP-Skripter kompriméiert; dir kënnt dofir dësen Service benotzen: @testgzip@',
+'info_compresseur_gzip' => '<b>N.B.:</b> Kontrolléiert op ären Hebergeur PHP-Skripter kompriméiert; dir kënnt dofir dësen Service benotzen: @testgzip@', # MODIF
 'info_compresseur_texte' => 'Wann äre Server d\'HTML-Säiten nët automatësch kompriméiert, kënnt dir probéieren eng Kompressioun ze forcéieren. <b>Opgepasst</b>: dat kann verschidde Serveren méi lues maachen.',
 'info_config_suivi' => 'Wann dës Adress eng Mailing-Lëscht ass, da kënnt dier hei d\'Adress uginn wou d\'Matarbechter vun dësem Site sech aschreiwen kënnen. Dës Adress kann eng URL sinn (z.B. d\'Internetsäit wou een sëch aschreiwen kann), oder eng Email-Adress mat engem extra Sujet (z.B.: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Dir kënnt Iech un d\'Mailing-Lëscht vun dësem Site abonnéieren. Dir kritt dann per Email d\'Annoncen vun den Artikelen a Kuerzmeldungen déi fir d\'Publikatioun proposéiert goufen.',
@@ -324,7 +324,7 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_ecrire_article' => 'Ier dier kënnt en Artikel schreiwen, musst dier op manst eng Rubrik derbäi setzen.',
 'info_email_envoi' => 'Adress vum Expediteur (optionnel)',
 'info_email_envoi_txt' => 'Gitt d\'Adress un fir Email\'en ze schécken (als Default gët d\'Adress vum Destinataire benotzt):',
-'info_email_webmestre' => 'Email-Adress vum Webmaster (optionnel)',
+'info_email_webmestre' => 'Email-Adress vum Webmaster (optionnel)', # MODIF
 'info_entrer_code_alphabet' => 'Kode vum Alphabet dat benotzt soll ginn:',
 'info_envoi_email_automatique' => 'Automatëscht Schécken vun Email\'en',
 'info_envoyer_maintenant' => 'Elo schécken',
@@ -358,7 +358,7 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gréng; Redakter =
 'info_historique_texte' => 'De Versioning erlaabt den Historique vun allen Ännerungen vun engem Artikel an d\'Uweisen vun den Ënnerscheeder tëschent de Versiounen.',
 'info_identification_publique' => 'Är öffentlëch Identitéit...',
 'info_image_process' => 'Wielt déi bescht Method fir Vignetten ze maachen an deem dier op d\'Bild klickt.',
-'info_image_process2' => '<b>N.B.</b> <i>Wan dier kee Bild gesidd, dann ass de Server nët fir dës Fonktionnalitéit konfiguréiert. Wann dir se wëllt benotzen, kontaktéiert een Techniker a froot fir d\'Extensiounen "GD" oder "Imagick".</i>',
+'info_image_process2' => '<b>N.B.</b> <i>Wan dier kee Bild gesidd, dann ass de Server nët fir dës Fonktionnalitéit konfiguréiert. Wann dir se wëllt benotzen, kontaktéiert een Techniker a froot fir d\'Extensiounen "GD" oder "Imagick".</i>', # MODIF
 'info_images_auto' => 'Automatësch berechend Biller',
 'info_informations_personnelles' => 'Perséinlëch Informatiounen',
 'info_inscription_automatique' => 'Nei Redakteren automatësch aschreiwen',

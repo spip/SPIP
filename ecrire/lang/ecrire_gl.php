@@ -297,7 +297,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>a</sup> en @liste@',
 'info_code_acces' => 'Non esquezas os teus códigos de acceso!',
 'info_compatibilite_html' => 'Norma HTML que se segue',
-'info_compresseur_gzip' => '<b>N. B. :</b> Recoméndaselle comprobar antes de nada se o aloxador comprime xa sistematicamente os  scripts php ; para iso, pode utilizar por exemplo o servizo seguinte : @testgzip@',
+'info_compresseur_gzip' => '<b>N. B. :</b> Recoméndaselle comprobar antes de nada se o aloxador comprime xa sistematicamente os  scripts php ; para iso, pode utilizar por exemplo o servizo seguinte : @testgzip@', # MODIF
 'info_compresseur_texte' => 'No caso de que o seu servidor non comprima automaticamente as páxinas html para enviarllas aos internautas, pode probar a forzar esta compresión para diminuír o peso das páxinas para descarga. <b>Alerta</b> : isto pode ralentizar considerablemente certos servidores.',
 'info_config_suivi' => 'Se este enderezo corresponde á unha lista de correo, vostede pode indicar aquí abaixo o enderezo co cal os participantes no web se poden inscribir. Este enderezo pode ser un URL (por exemplo a páxina de inscrición á lista via web), ou un enderezo de correo electrónico dotado dun asunto específico (por exemplo: <tt>@adresse_suivi@?subject=subscribirse</tt>):',
 'info_config_suivi_explication' => 'Pode subscribirse á lista de correo deste web. Recibirá entón por correo os anuncios de artigos e de breves propostas para publicación.',
@@ -330,7 +330,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ecrire_article' => 'Antes de poder escribir artigos, tes que crear, cando menos un tema ou sección.',
 'info_email_envoi' => 'Enderezo de envío de correo (opcional)',
 'info_email_envoi_txt' => 'Indique aquí o enderezo para lle enviar os correos (por defecto o enderezo destinatario será usado como enderezo de envío) :',
-'info_email_webmestre' => 'Enderezo de correo-e. do/a webmáster (opcional)',
+'info_email_webmestre' => 'Enderezo de correo-e. do/a webmáster (opcional)', # MODIF
 'info_entrer_code_alphabet' => 'Teclea o código do alfabeto a empregar:',
 'info_envoi_email_automatique' => 'Envío automático de correos-e.',
 'info_envoyer_maintenant' => 'Enviar agora',
@@ -372,7 +372,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_historique_texte' => 'O seguimento de revisións permite conservar un histórico de todas as modificacións realizadas no contido dun artigo, e de mostrar as diferenzas entre as versións sucesivas.',
 'info_identification_publique' => 'A súa identidade pública...',
 'info_image_process' => 'Probe a seleccionar o mellor método de fabricación de viñetas premendo sobre a imaxe correspondente.',
-'info_image_process2' => '<b>N.B.</b> <i>Se non aparece ningunha imaxe, significa que o servidor que aloxa o web non foi configurado para para usar tales utilidades. Se desexa empregar estas funcións, contacte co responsable técnico e solicítelle as extensións «GD» ou «Imagick».</i>',
+'info_image_process2' => '<b>N.B.</b> <i>Se non aparece ningunha imaxe, significa que o servidor que aloxa o web non foi configurado para para usar tales utilidades. Se desexa empregar estas funcións, contacte co responsable técnico e solicítelle as extensións «GD» ou «Imagick».</i>', # MODIF
 'info_images_auto' => 'Imaxes calculadas automaticamente',
 'info_informations_personnelles' => 'Datos persoais',
 'info_inscription_automatique' => 'Rexistro automático de novos redactores',
@@ -487,7 +487,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   os usuarios recibirán un correo electrónico automático
   cos seus códigos de acceso ao web privado. Algúns
   provedores desactivan o envío automático desde os seus servidores:
-  nese caso, a inscrición automática é imposible.</i></blockquote>',
+  nese caso, a inscrición automática é imposible.</i></blockquote>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Quere empregar o motor de procura integrado en SPIP?
   (desactivalo acelera o funcionamento do sistema.)',
 'info_question_vignettes_referer_non' => 'Non mostrar as capturas de webs de orixe das visitas',

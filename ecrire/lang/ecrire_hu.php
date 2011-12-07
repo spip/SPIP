@@ -297,7 +297,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_classement_2' => '<sup>.-dik</sup> összesen @liste@',
 'info_code_acces' => 'Ne felejtse el a saját hozzáférési kódjait !',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
+'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_config_suivi' => 'Ha ez a cím egy levelező listahoz tartozik, lejjebb azt a címet jelezheti, ahova a résztvevők beíratkozhatnak. Ez a cím akár URL lehet (pl. a beíratkozási oldal a Weben), vagy egy specifikus tárgyat tartalmazó email cím (pl.<tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Beíratkozhat a honlap levelező listájához. Ilyenkor emailben fogja kapni ezeket a cikkeket, híreket, melyeket javasoltak publikálásra.',
@@ -330,7 +330,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_ecrire_article' => 'Mielőbb írjon cikkeket, legalább egy rubrikát kell létrehozni.',
 'info_email_envoi' => 'Email cím küldésre (opció)',
 'info_email_envoi_txt' => 'Itt jelezze a használandó feladó címet az email küldésére (ennek híján, a címzett címét használjuk, mint feladói) :',
-'info_email_webmestre' => 'A Webmester email címe (opció)',
+'info_email_webmestre' => 'A Webmester email címe (opció)', # MODIF
 'info_entrer_code_alphabet' => 'Írja be a használandó abécé kódját :',
 'info_envoi_email_automatique' => 'Automatikus email küldés',
 'info_envoyer_maintenant' => 'Azonnali küldés',
@@ -365,7 +365,7 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_historique_texte' => 'A felülvizsgalatok megfigyelése egy cikk tartalmához nyújtott összes módosításokről tárolja az előzményeket, és megjeleníti az egymást követő változatok eltéréseket.',
 'info_identification_publique' => 'Az Ön nyilvános azonosítása...',
 'info_image_process' => 'Válasszon a bélyegképek legjobb készítesi modszerét azzal, hogy kattintson a megfelelő képre.',
-'info_image_process2' => '<b>Megjegyzés</b> <i>Ha egyetlen kép sem jelenik meg, akkor ez azt jelenti, hogy a honlapját tároló szervert nem konfigurálták olyan eszkőzök használására. Ha mégis akarja használni ezeket a funkciókat, keresse a rendszergazdát, és a «GD» vagy «Imagick» kiegészítéseket kérje.</i>',
+'info_image_process2' => '<b>Megjegyzés</b> <i>Ha egyetlen kép sem jelenik meg, akkor ez azt jelenti, hogy a honlapját tároló szervert nem konfigurálták olyan eszkőzök használására. Ha mégis akarja használni ezeket a funkciókat, keresse a rendszergazdát, és a «GD» vagy «Imagick» kiegészítéseket kérje.</i>', # MODIF
 'info_images_auto' => 'Automatikusan kalkulált képek',
 'info_informations_personnelles' => 'Ötödik lépés : <b>Személyes adatok</b>', # MODIF
 'info_inscription_automatique' => 'Új szerzők automatikus beiratkozása',

@@ -298,7 +298,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_classement_2' => '  @liste@ 外',
 'info_code_acces' => 'あなたの所有するアクセスコードを忘れないで下さい！',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
+'info_compresseur_gzip' => 'Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_config_suivi' => 'もしもこのアドレスがメーリングリストのものと一致する場合、サイト参加者が登録可能なアドレスを下記に表示することができます。記すべきアドレスは、URL（例えばWeb経由の登録ページなど）、サブジェクトを特定してあるメールアドレス (たとえば: <tt>@adresse_suivi@?subject=subscribe</tt>)がいいでしょう。',
 'info_config_suivi_explication' => 'あなたはこのサイトに関するメーリングリストに加入することが出来ます。あなたは自動送信メールによって、公表するために提出された記事、ニュースに関するアナウンスを受け取るでしょう。(訳注：フランス語？だらけ）',
@@ -331,7 +331,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_ecrire_article' => '記事を書く前に、あなたは最低１つのセクションを作らなければなりません。',
 'info_email_envoi' => '送り主のe-mailアドレス（任意）',
 'info_email_envoi_txt' => 'e-mailを送るのに使っている送り主のe-mailアドレスを入力してください（デフォルトで、受信者のアドレスは送信者のアドレスが入力してあります :',
-'info_email_webmestre' => 'ウェブマスターのe-mailアドレス（任意）',
+'info_email_webmestre' => 'ウェブマスターのe-mailアドレス（任意）', # MODIF
 'info_entrer_code_alphabet' => '使っている文字セットのコードを入力してください:',
 'info_envoi_email_automatique' => 'メールを自動送信',
 'info_envoyer_maintenant' => '今送る',
@@ -365,7 +365,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_historique_texte' => '改訂（リビジョン）の追跡で、あなたが記事のすべての変更を記録・追跡することが可能になります。前後バージョンとの記事の変更点を表示することができます。',
 'info_identification_publique' => 'あなたの公開ID...',
 'info_image_process' => 'ミニチュアを作る最も良い方法を、対応する写真の上を、クリックして選んでください。',
-'info_image_process2' => '<b>付記</b> <i>もし画像を見ることが出来なかったら、あなたのサーバーではソフトが使えるように設定してありません。もしあなたがそれらの機能を使いたいなら、プロバイダの技術サポートに«GD»か«Imagick»拡張をインストールしてもらって下さい。</i>',
+'info_image_process2' => '<b>付記</b> <i>もし画像を見ることが出来なかったら、あなたのサーバーではソフトが使えるように設定してありません。もしあなたがそれらの機能を使いたいなら、プロバイダの技術サポートに«GD»か«Imagick»拡張をインストールしてもらって下さい。</i>', # MODIF
 'info_images_auto' => '画像自動管理',
 'info_informations_personnelles' => '５番目のステップ: <b>個人情報</b>',
 'info_inscription_automatique' => '新しいエディターの登録の自動化',

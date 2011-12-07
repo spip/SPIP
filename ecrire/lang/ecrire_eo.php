@@ -296,7 +296,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>a</sup> en @liste@',
 'info_code_acces' => 'Ne forgesu viajn proprajn alir-kodojn !',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-'info_compresseur_gzip' => '<b>N. B. :</b> Estas rekomendate antaŭfare kontroli, ĉu via retgastiganto jam ĉiufoje densigas la php-skriptojn; por tio, vi povas ekzemple uzi la jenan servon : @testgzip@',
+'info_compresseur_gzip' => '<b>N. B. :</b> Estas rekomendate antaŭfare kontroli, ĉu via retgastiganto jam ĉiufoje densigas la php-skriptojn; por tio, vi povas ekzemple uzi la jenan servon : @testgzip@', # MODIF
 'info_compresseur_texte' => 'Se via servilo ne aŭtomate densigas la html-paĝojn por ilin sendi al interretanoj, vi povas provi trudi tiun densigon por malkreskigi la pezon de la elŝutitaj paĝoj. <b>Atentu</b> :  tio povas forte malrapidigi iujn servilojn.',
 'info_config_suivi' => 'Se tiu ĉi adreso estas tiu de dissendlisto, indiku ĉi-sube la adreson ĉe kiu la partoprenantoj de la retejo povos registriĝi. Tiu adreso povas esti retligilo (ekz. la paĝo por rete registriĝi en la listo), aŭ retpoŝtadreso kun specifa temo (ekz. <tt>@adresse_suivi@?subject=registrigxi</tt>):',
 'info_config_suivi_explication' => 'Vi povas aboni la dissendliston de tiu ĉi retejo. Aboninta, vi ricevos per retmesaĝoj la anoncojn pri artikoloj kaj pri fulm-informoj proponitaj por publikigo.',
@@ -329,7 +329,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ecrire_article' => 'Antaŭ ol ekhavi la eblon skribi artikolojn, vi devas krei almenaŭ unu rubrikon.',
 'info_email_envoi' => 'retpoŝtadreso por sendo (nedeviga)',
 'info_email_envoi_txt' => 'Indiku ĉi tie la adreson uzotan por sendi poŝtmesaĝojn (defaŭlte, la ricev-adreso estos uzata) :',
-'info_email_webmestre' => 'Retpoŝtadreso de la retejestro (eventuale)',
+'info_email_webmestre' => 'Retpoŝtadreso de la retejestro (eventuale)', # MODIF
 'info_entrer_code_alphabet' => 'Entajpu la kodon de la uzenda alfabeto :',
 'info_envoi_email_automatique' => 'Aŭtomata retleteroj-dissendado',
 'info_envoyer_maintenant' => 'Sendu nun',
@@ -366,7 +366,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_historique_texte' => 'La superrigardo de revizioj ebligas konservi historion de ĉiuj modifoj al la enhavo de artikolo, kaj afiŝi la diferencojn inter la sinsekvaj versioj.',
 'info_identification_publique' => 'Via publika identeco...',
 'info_image_process' => 'Bonvolu elekti la plej bonan metodon por fabriki vinjetojn musklakante laŭcele bildon.',
-'info_image_process2' => '<b>N.B.</b> <i>Se neniu bildo afiŝiĝas, tio signifas ke la servilo kiu gastigas vian retejon ne estas konfigurita por uzi tiajn ilojn. Se vi deziras uzi tiujn funkciojn, petu la «GD» aŭ «Imagick» modulojn al la teknika repondeculo.</i>',
+'info_image_process2' => '<b>N.B.</b> <i>Se neniu bildo afiŝiĝas, tio signifas ke la servilo kiu gastigas vian retejon ne estas konfigurita por uzi tiajn ilojn. Se vi deziras uzi tiujn funkciojn, petu la «GD» aŭ «Imagick» modulojn al la teknika repondeculo.</i>', # MODIF
 'info_images_auto' => 'Bildoj aŭtomate komputitaj',
 'info_informations_personnelles' => 'Personaj datenoj',
 'info_inscription_automatique' => 'Aŭtomata registriĝado de novaj redaktantoj',

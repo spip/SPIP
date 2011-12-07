@@ -294,7 +294,7 @@ französischen SPIP-Dokumentation</a>.',
 'info_classement_2' => 'von @liste@',
 'info_code_acces' => 'Vergessen Sie ihre Zugangsdaten nicht!',
 'info_compatibilite_html' => 'Zu respektierende HTML Norm',
-'info_compresseur_gzip' => '<b>N.B.:</b> Wir empfehlen zu testen, ob der Provider bereits PHP-Skripte komprimiert. Dazu können Sie den Dienst @testgzip@ nutzen.',
+'info_compresseur_gzip' => '<b>N.B.:</b> Wir empfehlen zu testen, ob der Provider bereits PHP-Skripte komprimiert. Dazu können Sie den Dienst @testgzip@ nutzen.', # MODIF
 'info_compresseur_texte' => 'Falls Ihr Server HTML Seiten nicht automatisch für die Übertragung zum Websurfer komprimiert, können Sie hier versuchen, die Kompression zu erzeingen und so die Datenmenge der übertragenen Seiten zu reduzieren. <b>Achtung</b> : Diese Einstellung kann manche Server merklich verlangsamen.',
 'info_config_suivi' => 'Wenn es sich bei dieser Adresse um eine Mailing-Liste handelt, können Sie unten die Adresse angeben, unter der sich Teilnehmer der Website anmelden können. Es kann sich um den URL einer Webseite handeln (die ein Anmeldeformular enthält) oder um eine E-Mail Adresse mit angehängtem Parameter (z.B. <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Sie können die Mailing-Liste dieser Website abonnieren. Sie werden dann per E-Mail über neu zur Veröffentlichung vorgeschlagene Artikel informiert.',
@@ -327,7 +327,7 @@ französischen SPIP-Dokumentation</a>.',
 'info_ecrire_article' => 'Bevor Sie Artikel schreiben könnnen, müssen Sie mindestens eine Rubrik anlegen.',
 'info_email_envoi' => 'Absenderadresse (freiwillige Angabe)',
 'info_email_envoi_txt' => 'Geben Sie hier die Absenderadresse der E-Mails an (ohne diese Angabe wird die Empfängeradresse als Absender eingetragen). ',
-'info_email_webmestre' => 'E-Mail des Webmasters (freiwillige Angabe)',
+'info_email_webmestre' => 'E-Mail des Webmasters (freiwillige Angabe)', # MODIF
 'info_entrer_code_alphabet' => 'Geben Sie die Bezeichnung des gewünschten Zeichensatz an: ',
 'info_envoi_email_automatique' => 'Automatischer Mailversand',
 'info_envoyer_maintenant' => 'Jetzt schicken',
@@ -361,7 +361,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_historique_texte' => 'Die Versionskontrolle ermöglicht es, alle Änderungen an einem Artikel aufzuzeichnen und die Unterschiede zwischen aufeinander folgenden Versionen anzuzeigen.',
 'info_identification_publique' => 'Ihre öffentliche Identität ...',
 'info_image_process' => 'Bitte wählen Sie das beste Verfahren zum Generieren der Miniaturbilder, indem Sie auf ein Bild klicken.',
-'info_image_process2' => '<b>Bemerkung:</b> <i>Wenn kein Bild angezeigt wird, ist der Server ihrer Website nicht für die Verwendung solcher Werkzeuge eingerichtet. Wenn Sie diese Funktionen nutzen möchten, wenden Sie sich bitte an den verantwortlichen Techniker und bitten ihn, die Erweiterungen «GD» oder «Imagick» einzurichten.</i>',
+'info_image_process2' => '<b>Bemerkung:</b> <i>Wenn kein Bild angezeigt wird, ist der Server ihrer Website nicht für die Verwendung solcher Werkzeuge eingerichtet. Wenn Sie diese Funktionen nutzen möchten, wenden Sie sich bitte an den verantwortlichen Techniker und bitten ihn, die Erweiterungen «GD» oder «Imagick» einzurichten.</i>', # MODIF
 'info_images_auto' => 'automatisch berechnete Bilder',
 'info_informations_personnelles' => 'Persönliche Informationen',
 'info_inscription_automatique' => 'Automatische Anmeldung neuer Redakteure',
@@ -468,7 +468,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
  <blockquote><i>Nach der Anmeldung erhalten die neuen Redakteure automatisch
  eine E-Mail mit ihren Zugangsdaten. Manche Webhoster unterbinden den Mailversand
  von ihren Webservern aus.
- In diesem Fall funktioniert die automatische Anmeldung nicht.',
+ In diesem Fall funktioniert die automatische Anmeldung nicht.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Wollen Sie die integrierte Suchfunktion von SPIP verwenden? (ohne Suchfunktion wird Ihr System schneller.)',
 'info_question_vignettes_referer_non' => 'Keine Thumbnails der Herkunftswebsites anzeigen',
 'info_qui_edite' => '@nom_auteur_modif@ hat vor  @date_diff@ an diesem Objekt gearbeitet.',
@@ -483,8 +483,8 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_redacteurs' => 'Redakteure',
 'info_redaction_en_cours' => 'IN BEARBEITUNG',
 'info_redirection' => 'Umleitung',
-'info_redirection_activee' => 'La redirection est activée.', # NEW
-'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
+'info_redirection_activee' => 'Die Weiterleitung ist aktiviert.',
+'info_redirection_desactivee' => 'Die Weiterleitung wurde abgeschaltet.',
 'info_refuses' => 'Ihre abgelehnten Artikel',
 'info_reglage_ldap' => 'Optionen: <b>LDAP-Import Einstellungen</b>',
 'info_renvoi_article' => '<b>Umleitung.</b> Dieser Artikel zeigt auf die Seite: ',
@@ -738,7 +738,7 @@ in einer Farbe, die den Status anzeigt :',
 'plugin_titre_automatique' => 'Automatische Installation',
 'plugin_titre_automatique_ajouter' => 'Plugins hinzufügen',
 'plugin_titre_installation' => 'Installation des Plugins @plugin@',
-'plugin_titre_modifier' => 'Mes plugins', # NEW
+'plugin_titre_modifier' => 'Meine Plugins',
 'plugin_zip_active' => 'Weiter zum Aktivieren',
 'plugin_zip_adresse' => 'Geben Sie hier die Adresse einer ZIP-Datei, die das Plugin enthält, oder die Adresse einer Plugin-Liste an.',
 'plugin_zip_adresse_champ' => 'Adresse des Plugins oder der Liste ',
@@ -750,7 +750,7 @@ in einer Farbe, die den Status anzeigt :',
 'plugins_actif_aucun' => 'Kein aktives Plugin.',
 'plugins_actif_un' => 'Ein aktives Plugin.',
 'plugins_actifs' => '@count@ aktive Plugins.',
-'plugins_actifs_liste' => 'Aktive Plugins', # MODIF
+'plugins_actifs_liste' => 'Aktiv',
 'plugins_compte' => '@count@ Plugins',
 'plugins_disponible_un' => 'Ein Plugin verfügbar.',
 'plugins_disponibles' => '@count@ verfügbare Plugins.',
@@ -758,7 +758,7 @@ in einer Farbe, die den Status anzeigt :',
 'plugins_liste' => 'Installierte Plugins',
 'plugins_liste_extensions' => 'Erweiterungen',
 'plugins_recents' => 'Neueste Plugins.',
-'plugins_tous_liste' => 'Tous', # NEW
+'plugins_tous_liste' => 'Alle',
 'plugins_vue_hierarchie' => 'Hierarchie',
 'plugins_vue_liste' => 'Liste',
 'protocole_ldap' => 'Version des Protokolls:',

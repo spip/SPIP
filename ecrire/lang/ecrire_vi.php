@@ -290,7 +290,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_classement_2' => ' trong số @liste@',
 'info_code_acces' => 'Đừng quên mã số để vào của bạn!',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
+'info_compresseur_gzip' => 'Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_config_suivi' => 'Nếu địa chỉ này là của một mailing list,  bạn cho biết địa chỉ để ghi danh. Địa chỉ ghi danh có thể là URL (thí dụ trang ghi danh qua web), hay địa chỉ email có ghi rõ tựa đề (subject). Thí dụ: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Bạn có thể ghi danh vào mailing list dưới đây, nếu bạn muốn nhận thông tin các bài được nộp vào trang web này.',
@@ -323,7 +323,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_ecrire_article' => 'Để có thể soạn một bài vở, bạn phải lập ra một đề mục trước đã. <Trước khi có thể viết bài, bạn phải lập ra ít nhất một đề mục.',
 'info_email_envoi' => 'Địa chỉ email của người gửi (không bắt buộc)',
 'info_email_envoi_txt' => 'Đánh vào địa chỉ người gửi để gửi email (theo định sẵn, thì địa chỉ người nhận sẽ được dùng làm địa chỉ gửi) :',
-'info_email_webmestre' => 'Địa chỉ email của webmaster (không bắt buộc) ',
+'info_email_webmestre' => 'Địa chỉ email của webmaster (không bắt buộc) ', # MODIF
 'info_entrer_code_alphabet' => 'Cho biết bảng mã sử dụng: ',
 'info_envoi_email_automatique' => 'Gửi email tự động',
 'info_envoyer_maintenant' => 'Gửi bây giờ',
@@ -356,7 +356,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_historique_texte' => 'Nối tiếp sửa đổi cho phép bạn theo dõi những sửa đổi của một bài và cho thấy sự khác biệt giữa các ấn bản được sửa.',
 'info_identification_publique' => 'Danh tánh công cộng của bạn...',
 'info_image_process' => 'Xin chọn cách tạo ra hình trang trí bằng bấm trên hình đẹp nhất.',
-'info_image_process2' => '<b>N.B.</b> <i>Nếu bạn không thấy hình nào cả có nghĩa là máy chủ chưa được thiết trí để sử dụng hình. Nếu bạn muốn dùng hình, liên lạc với nhóm phụ trách kỹ thuật của công ty cung cấp dịch vụ để yêu cầu có extension «GD» hay «Imagick».</i>',
+'info_image_process2' => '<b>N.B.</b> <i>Nếu bạn không thấy hình nào cả có nghĩa là máy chủ chưa được thiết trí để sử dụng hình. Nếu bạn muốn dùng hình, liên lạc với nhóm phụ trách kỹ thuật của công ty cung cấp dịch vụ để yêu cầu có extension «GD» hay «Imagick».</i>', # MODIF
 'info_images_auto' => 'Hình được tự tính',
 'info_informations_personnelles' => 'Bước thứ năm: <b>Dữ kiện cá nhân</b>',
 'info_inscription_automatique' => 'Tự động ghi danh các chủ bút mới',
