@@ -605,6 +605,7 @@ sera ignorée) :
 'suivant' => 'sonraki',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ kb',
 'taille_mo' => '@taille@ Mb',
 'taille_octets' => '@taille@ bayt',

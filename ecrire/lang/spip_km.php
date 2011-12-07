@@ -590,6 +590,7 @@ sera ignorée) :
 'suivant' => 'បន្ទាប់',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ គីឡូបៃ',
 'taille_mo' => '@taille@ មេកាបៃ',
 'taille_octets' => '@taille@ បៃ',

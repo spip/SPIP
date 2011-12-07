@@ -601,6 +601,7 @@ Bạn cho vào mật mã mới để vào lại trang web.', # MODIF
 'suivant' => 'kế tiếp',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ kb',
 'taille_mo' => '@taille@ Mb',
 'taille_octets' => '@taille@ bytes',

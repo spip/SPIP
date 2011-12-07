@@ -611,6 +611,7 @@ ak tounyen déyé konekte sou sit-la.
 'suivant' => 'swivan',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ ko',
 'taille_mo' => '@taille@ Mo',
 'taille_octets' => '@taille@ oktè',

@@ -612,6 +612,7 @@ sera ignorée) :
 'suivant' => '次へ',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ kb',
 'taille_mo' => '@taille@ Mb',
 'taille_octets' => '@taille@ bytes',

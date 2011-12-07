@@ -107,14 +107,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_mois_9' => '@j@ de @nommois@',
 'date_demain' => 'amanhã',
 'date_fmt_heures_minutes' => '@h@h@m@min',
-'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
+'date_fmt_heures_minutes_court' => '@h@h@m@',
 'date_fmt_jour_heure' => '@jour@ - @heure@',
 'date_fmt_jour_mois' => '@jour@ de @nommois@',
 'date_fmt_jour_mois_annee' => '@jour@ de @nommois@ de @annee@',
 'date_fmt_mois_annee' => '@nommois@ de @annee@',
 'date_fmt_nomjour_date' => '@nomjour@ de @date@',
-'date_fmt_periode_from' => 'Du', # NEW
-'date_fmt_periode_to' => 'au', # NEW
+'date_fmt_periode_from' => 'De',
+'date_fmt_periode_to' => 'para',
 'date_heures' => 'horas',
 'date_hier' => 'ontem',
 'date_il_y_a' => 'à @delai@',
@@ -225,8 +225,8 @@ Verifique se as maiúsculas e minúsuculas destes diretórios coincidem exatamen
 'envoi_via_le_site' => 'Envio pelo site',
 'erreur' => 'Erro',
 'erreur_balise_non_fermee' => 'Última tag em aberto:',
-'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
+'erreur_technique_enregistrement_champs' => 'A technical error prevented the right registration of the field @champs@.', # NEW
+'erreur_technique_enregistrement_impossible' => 'A technical error prevented the registration.', # NEW
 'erreur_texte' => 'erro(s)',
 'etape' => 'Etapa',
 
@@ -246,7 +246,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 'form_email_non_valide' => 'Seu endereço de e-mail não é válido.',
 'form_forum_access_refuse' => 'Você não tem mais acesso a este site.',
 'form_forum_bonjour' => 'Bom dia @nom@,',
-'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
+'form_forum_confirmer_email' => 'Para confirmar o seu endereço de e-mail, clique neste link: @url_confirm@',
 'form_forum_email_deja_enregistre' => 'Este endereço de e-mail já está cadastrado, você pode usar a sua senha habitual.',
 'form_forum_identifiant_mail' => 'Seu novo login foi enviado por e-mail.',
 'form_forum_identifiants' => 'Identificadores pessoais',
@@ -472,8 +472,8 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 'infos_vos_pense_bete' => 'Seus lembretes',
 
 // L
-'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-'label_poids_fichier' => 'Taille', # NEW
+'label_ajout_id_rapide' => '<NEW>Ajout rapide', # NEW
+'label_poids_fichier' => 'Tamanho',
 'lien_afficher_icones_seuls' => 'Exibir apenas os ícones',
 'lien_afficher_texte_icones' => 'Exibir ícones e texto',
 'lien_afficher_texte_seul' => 'Exibir apenas o texto',
@@ -574,7 +574,7 @@ e reconectar-se com o site.
 'pass_nouveau_pass' => 'Nova senha',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Esquecimento de senha',
-'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
+'pass_procedure_changer' => '<NEW>Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Fechar esta janela',
 'pass_rappel_login' => 'Lembrete: seu login é «@login@».',
 'pass_recevoir_mail' => 'Você receberá um e-mail explicando como você pode recuperar o acesso ao site.',
@@ -597,6 +597,7 @@ e reconectar-se com o site.
 'suivant' => 'seguinte',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ KB',
 'taille_mo' => '@taille@ MB',
 'taille_octets' => ' @taille@ bytes',

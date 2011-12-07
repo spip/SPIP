@@ -598,6 +598,7 @@ Tamo mozete unijeti novu lozinku i ponovo se prijaviti na stranicu.
 'suivant' => 'Naprijed',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ kb',
 'taille_mo' => '@taille@ Mb',
 'taille_octets' => '@taille@ bit',

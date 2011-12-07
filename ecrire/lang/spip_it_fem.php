@@ -610,6 +610,7 @@ e riconnetterti all\'area riservata.
 'suivant' => 'successivo',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ Kb',
 'taille_mo' => '@taille@ Mb',
 'taille_octets' => '@taille@ byte',

@@ -604,6 +604,7 @@ kevreañ en-dro ouzh al lec\'hienn.
 'suivant' => 'war-lerc\'h',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ ke',
 'taille_mo' => '@taille@ Me',
 'taille_octets' => '@taille@ eizhbit',

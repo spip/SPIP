@@ -613,6 +613,7 @@ sera ignorée) :
 'suivant' => '后一个',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ kb',
 'taille_mo' => '@taille@ Mb',
 'taille_octets' => '@taille@字符',

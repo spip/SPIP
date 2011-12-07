@@ -227,8 +227,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoi_via_le_site' => 'إرسال عبر الموقع',
 'erreur' => 'خطأ',
 'erreur_balise_non_fermee' => 'آخر علامة غير مغلقة:',
-'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
+'erreur_technique_enregistrement_champs' => 'خطأ تقني منع التسجيل السليم للحقل @champs@. ',
+'erreur_technique_enregistrement_impossible' => 'خطأ تقني منع التسجيل.',
 'erreur_texte' => 'خطأ (أخطاء)',
 'etape' => 'خطوة',
 
@@ -612,6 +612,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'suivant' => 'التالي',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ كيلوبايت',
 'taille_mo' => '@taille@ ميغابايت',
 'taille_octets' => '@taille@ بايت',

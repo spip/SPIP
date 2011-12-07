@@ -582,6 +582,7 @@ sera ignorée) :
 'suivant' => '​နောက်တစ်ခု',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ kb',
 'taille_mo' => '@taille@ Mb',
 'taille_octets' => '@taille@ bytes',

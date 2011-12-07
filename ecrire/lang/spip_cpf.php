@@ -616,6 +616,7 @@ Aprésa, ou i poura mèt in nouvo modpas
 'suivant' => 'dèryèr',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ ko',
 'taille_mo' => '@taille@ Mo',
 'taille_octets' => '@taille@  bann zokté',

@@ -607,6 +607,7 @@ Veţi putea după aceea alege o nouă parolă şi veţi putea să vă reconecta�
 'suivant' => 'următorul',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ ko',
 'taille_mo' => '@taille@ MB',
 'taille_octets' => '@taille@ octeţi',

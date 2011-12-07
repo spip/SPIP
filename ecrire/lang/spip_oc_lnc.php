@@ -612,6 +612,7 @@ e vos tornar connectar al sit.
 'suivant' => 'seguent',
 
 // T
+'taille_go' => '@taille@ Go', # NEW
 'taille_ko' => '@taille@ Ko',
 'taille_mo' => '@taille@ Mo',
 'taille_octets' => '@taille@ octets',
