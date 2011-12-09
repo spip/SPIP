@@ -133,12 +133,13 @@ function lister_tables_noexport(){
 		#'spip_versions_fragments'
 		);
 
+	$EXPORT_tables_noexport = pipeline('lister_tables_noexport',$EXPORT_tables_noexport);
 	return $EXPORT_tables_noexport;
 }
 
 /**
  * Lister les tables non importables par defaut
- * (liste completable par le pipeline lister_tables_noexport
+ * (liste completable par le pipeline lister_tables_noimport
  *
  * @staticvar array $IMPORT_tables_noimport
  * @return array
