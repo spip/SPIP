@@ -490,6 +490,41 @@ function sql_version($serveur='', $option=true) {
 	return ($row['n']);
 }
 
+/**
+ * Informe si le moteur SQL prefere utiliser des transactions
+ * (Utile pour sqlite)
+**/
+function sql_preferer_transaction($serveur='', $option=true) {
+	$f = sql_serveur('preferer_transaction', $serveur,  'continue');
+	if (!is_string($f) OR !$f) return false;
+	$r = $f($serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
+};
+
+/**
+ * Demarre une transaction
+**/
+function sql_demarrer_transaction($serveur='', $option=true) {
+	$f = sql_serveur('demarrer_transaction', $serveur,  'continue');
+	if (!is_string($f) OR !$f) return false;
+	$r = $f($serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
+};
+
+/**
+ * Termine une transaction
+**/
+function sql_terminer_transaction($serveur='', $option=true) {
+	$f = sql_serveur('terminer_transaction', $serveur,  'continue');
+	if (!is_string($f) OR !$f) return false;
+	$r = $f($serveur, $option!==false);
+	if ($r === false) spip_sql_erreur($serveur);
+	return $r;
+};
+
+
 // prend une chaine sur l'aphabet hexa
 // et retourne sa representation numerique:
 // FF ==> 0xFF en MySQL mais x'FF' en PG
