@@ -235,6 +235,7 @@ function declarer_interfaces(){
 	$table_des_traitements['TITRE'][]= _TRAITEMENT_TYPO_SANS_NUMERO;
 	$table_des_traitements['TYPE'][]= _TRAITEMENT_TYPO;
 	$table_des_traitements['DESCRIPTIF_SITE_SPIP'][]= _TRAITEMENT_RACCOURCIS;
+	$table_des_traitements['SLOGAN_SITE_SPIP'][]= _TRAITEMENT_TYPO;
 	$table_des_traitements['ENV'][]= 'entites_html(%s,true)';
 
 	// valeur par defaut pour les balises non listees ci-dessus
