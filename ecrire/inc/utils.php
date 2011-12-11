@@ -565,7 +565,7 @@ function spip_timer($t='rien', $raw = false) {
 			$s = sprintf("%d ", $x = floor($p/1000));
 			$p -= ($x*1000);
 		}
-		return $s . sprintf("%.3f ms", $p);
+		return $s . sprintf($s?"%07.3f ms":"%.3f ms", $p);
 	}
 }
 
