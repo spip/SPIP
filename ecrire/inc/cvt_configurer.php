@@ -168,35 +168,10 @@ function cvtconf_configurer_stocker($form,$valeurs,$store) {
 	if (!isset($GLOBALS[$table]))
 		lire_metas($table);
 
-	// le casier peut etre de la forme casierprincipal/sous/casier
-	// on ecrit donc au bon endroit sans perdre les autres sous casier freres
-	if ($casier) {
-		$c = explode('/',$casier);
-		$casier_principal = array_shift($c);
-		$st = isset($GLOBALS[$table][$casier_principal])?$GLOBALS[$table][$casier_principal]:array();
-		if (is_string($st) AND (count($c) OR is_array($store))) {
-			$st = unserialize($st);
-			if ($st===false)
-				$st=array();
-		}
-		$sc = &$st;
-		while (count($c) AND $cc=reset($c)) {
-			// creer l'entree si elle n'existe pas
-			if (!isset($sc[$cc]))
-				$sc[$cc] = array();
-			$sc = &$sc[$cc];
-			array_shift($c);
-		}
-		if (is_array($sc) AND count($sc))
-			$sc = array_merge($sc,$store);
-		else
-			$sc = $store;
-		$store = array($casier_principal => serialize($st));
-	}
-
 	$prefixe = ($prefixe?$prefixe.'_':'');
+	$casier = ($casier) ? rtrim($casier,'/').'/' : ""; // final, sinon rien
 	foreach($store as $k=>$v){
-		ecrire_meta($prefixe.$k, $v, true, $table);
+		ecrire_config("/$table/$prefixe$casier$k", $v);
 		if (_request('var_mode')=='configurer' AND autoriser('webmestre')){
 			$trace .= "<br />table $table : ".$prefixe.$k." = $v;";
 		}
