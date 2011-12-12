@@ -26,9 +26,12 @@
 .liste-plugins .liste-items .item {position:relative;padding-#ENV{left}:76px; padding-#ENV{right}: 10px;}
 .liste-plugins .liste-items .item.actif {background:#eee;}
 .liste-plugins .liste-items .item.actif:hover {background:#e8e8e8;}
-.liste-plugins .liste-items .item.on {background:[#(#ENV{claire}|couleur_eclaircir)];}
+.liste-plugins .liste-items .item.inactif,
 .liste-plugins .liste-items .item.disabled {filter:alpha(opacity=60); -moz-opacity:0.6; opacity: 0.6;}
+.liste-plugins .liste-items .item.inactif:hover {filter:alpha(opacity=100); -moz-opacity:1; opacity: 1;}
+.liste-plugins .liste-items .item.on {background:[#(#ENV{claire}|couleur_eclaircir)];}
 .liste-plugins .liste-items .item.error {margin:0;background-image:none;}
+.liste-plugins .liste-items .item.disabled:hover {filter:alpha(opacity=60); -moz-opacity:0.6; opacity: 0.6;}
 
 .liste-plugins .liste-items .item .resume {min-height:32px;}
 
