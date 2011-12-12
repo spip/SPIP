@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -601,7 +601,7 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 'taille_ko' => '@taille@ kB',
 'taille_mo' => '@taille@ MB',
 'taille_octets' => '@taille@ Byte',
-'texte_actualite_site_1' => 'Wenn Sie sich mit der Oberfl&auml;che des Redaktionssystems vertraut gemacht haben, k&ouml;nnen Sie „',
+'texte_actualite_site_1' => 'Wenn Sie sich mit der Oberfläche des Redaktionssystems vertraut gemacht haben, können Sie „',
 'texte_actualite_site_2' => 'den Expertenmodus aktivieren,',
 'texte_actualite_site_3' => 'um zusätzliche Funktionen zu nutzen.',
 'texte_creation_automatique_vignette' => 'Diese Website generiert automatisch Vorschaubilder. Wenn Sie Bilder in den Formaten @gd_formats@ mit diesem Formular installieren, werden Vorschaubilder mit den maximalen Diemsionen @taille_preview@ Pixel angelegt.',

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -50,10 +50,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_e_accent_aigu' => 'Mä  jach\'aptata E jach\'at arsuriyimpi uchantaña',
 'barre_eo' => 'Mä E O ukana uchantaña',
 'barre_eo_maj' => 'Mä E O jach\'aptat ukana uchantaña',
-'barre_euro' => 'Chimpu uchantaña &amp;#8364,',
+'barre_euro' => 'Chimpu uchantaña &#8364,',
 'barre_gras' => '{{Ch\'iyaritat}} uskuña',
 'barre_guillemets' => '«comillas»kama uskuña',
-'barre_guillemets_simples' => '&amp;#8220kama uskuña; comillas de segundo nivel&amp;#65533',
+'barre_guillemets_simples' => '&#8220kama uskuña; comillas de segundo nivel&#65533',
 'barre_intertitre' => '{inter título} ukan mayjt\'ayaña',
 'barre_italic' => '{K\'umtat} uskuña',
 'barre_lien' => 'Mayjt\'ayañan [chinu jach\'a sawu-http://...]',

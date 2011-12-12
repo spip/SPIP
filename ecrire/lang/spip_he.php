@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_euro' => 'הכנסת הסמל €',
 'barre_gras' => '{{הבלטה}}',
 'barre_guillemets' => '« מרכאות »',
-'barre_guillemets_simples' => '”&#1502;&#1512;&#1499;&#1488;&#1493;&#1514; &#1508;&#1513;&#1493;&#1496;&#1493;&#1514;&#147;',
+'barre_guillemets_simples' => '”מרכאות פשוטות',
 'barre_intertitre' => 'הפוך ל {{{בין כותרת}}}',
 'barre_italic' => 'הפוך ל{נטוי}',
 'barre_lien' => 'הפוך לקישור',

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_article' => 'Modificaţi articolul',
 'admin_modifier_auteur' => 'Modificaţi autorul',
 'admin_modifier_breve' => 'Modificaţi ştirea',
-'admin_modifier_mot' => 'Modifica&#355;i cuvântul cheie',
+'admin_modifier_mot' => 'Modificaţi cuvântul cheie',
 'admin_modifier_rubrique' => 'Modificaţi rubrica',
 'admin_recalculer' => 'Recalculaţi această pagină',
 'afficher_calendrier' => 'Afişaţi calendarul',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_euro' => 'Inseraţi simbolul €',
 'barre_gras' => 'Transformaţi în litere {{aldine}} (îngroşate)',
 'barre_guillemets' => 'Înconjuraţi cu « ghilimele »',
-'barre_guillemets_simples' => '&Icirc;nconjura&#355;i cu “ghilimele de nivel secund”',
+'barre_guillemets_simples' => 'Înconjuraţi cu “ghilimele de nivel secund”',
 'barre_intertitre' => 'Transformaţi în {{{inter-titlu}}}',
 'barre_italic' => 'Transformaţi în litere {{italice}} (înclinate)',
 'barre_lien' => 'Transformaţi în [legătură hipertext->http://...]',

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_aide' => 'Mi zan wékwin lɛ̂ bo ná ɖo blo titomɛ mitɔn ɖo',
 'barre_e_accent_aigu' => 'mi ze wékwin asi E  démɛ',
 'barre_eo' => 'mi ze wékwin asi E  ɖo l\'o',
-'barre_eo_maj' => 'mi ze w&eacute;kwin asi E  &#598;o l’o daxo &#596; m&#603;', # MODIF
+'barre_eo_maj' => 'mi ze wékwin asi E  ɖo l’o daxo ɔ mɛ', # MODIF
 'barre_euro' => 'mi ze wékwin  é lɔ € ɖémɛ ',
 'barre_gras' => 'mi ze ɖo kpinkpɛnmɛ',
 'barre_guillemets' => 'mi ze « ɖiɖɔtɔ » sɔ lilɛ ɖo',
@@ -252,8 +252,8 @@ sera ignorée) :
 'form_forum_message_auto' => 'é lɔ ɔ wɛn càcà wɛ',
 'form_forum_pass' => 'cávì :',
 'form_forum_probleme_mail' => 'Xó ɖò e-mailù ɔ wú : vlàvò ɔ ɖéxlɛ yì á',
-'form_forum_voici1' => '&#598;&eacute;xl&#603; mi&#768; t&#596;n l&#603; m&igrave; by&#596; gblogbloj&iacute; @ny&igrave;k&#596;_gblogbloj&iacute;_supipu@ ‘’ges&iacute;_gblogbloj&iacute;@', # MODIF
-'form_forum_voici2' => '&#598;&eacute;xl&#603; mi&#768; t&#596;n l&#603; m&igrave; n&aacute; &#598;&oacute; wl w&egrave;kp&aacute; &#598;&oacute; gblogbloj&iacute; @ny&igrave;k&#596;_gblogbloj&iacute;_supipu@ ‘’ges&iacute;_gblogbloj&iacute;@', # MODIF
+'form_forum_voici1' => 'ɖéxlɛ mì tɔn lɛ mì byɔ gblogblojí @nyìkɔ_gblogblojí_supipu@ ‘’gesí_gblogblojí@', # MODIF
+'form_forum_voici2' => 'ɖéxlɛ mì tɔn lɛ mì ná ɖó wl wèkpá ɖó gblogblojí @nyìkɔ_gblogblojí_supipu@ ‘’gesí_gblogblojí@', # MODIF
 'form_indiquer_email' => 'mī kɛnklɛn bó ná gèsí kpó e-mailù kpó',
 'form_indiquer_nom' => 'mī ná nyìkɔ mí tɔn ',
 'form_indiquer_nom_site' => 'mī ná gblogblojí mí tɔn sín nyìkɔ ',

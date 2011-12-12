@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'プログラミングエラーです。この機能はこの前後関係で呼び出されるべきではありません。', # MODIF
 'avis_erreur_mysql' => 'SQLのエラーです。', # MODIF
 'avis_erreur_sauvegarde' => 'バックアップエラーです　(@type@ @id_objet@)!',
-'avis_erreur_visiteur' => 'ƒvƒ‰ƒCƒx[ƒgƒXƒy[ƒXƒAƒNƒZƒX‚&Igrave;&Ucirc;‚&Eacute;ƒGƒ‰[‚&ordf;&#148;&shy;&para;‚&micro;‚&Uuml;‚&micro;‚&frac12;',
+'avis_erreur_visiteur' => 'ƒvƒ‰ƒCƒx[ƒgƒXƒy[ƒXƒAƒNƒZƒX‚ÌÛ‚ÉƒGƒ‰[‚ª­¶‚µ‚Ü‚µ‚½',
 
 // B
 'barre_a_accent_grave' => 'アクセント記号つきの大文字Aを挿入してください。',
@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => '週めくりカレンダー',
 'choix_couleur_interface' => '?',
 'choix_interface' => '??????????',
-'colonne' => '—&#147;',
+'colonne' => '—',
 'confirm_changer_statut' => '承認を必要とします: あなたはこの記事のステータスの変更を要求しました。このまま続けてもいいですか？',
 'correcte' => '正しい',
 
@@ -156,14 +156,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jour_2_abbr' => '??',
 'date_jour_2_initiale' => 'ŒŽ',
 'date_jour_3' => '火曜日',
-'date_jour_3_abbr' => '‰&Icirc;',
-'date_jour_3_initiale' => '‰&Icirc;',
+'date_jour_3_abbr' => '‰Î',
+'date_jour_3_initiale' => '‰Î',
 'date_jour_4' => '水曜日',
 'date_jour_4_abbr' => '…',
 'date_jour_4_initiale' => '…',
 'date_jour_5' => '木曜日',
-'date_jour_5_abbr' => '–&Oslash;',
-'date_jour_5_initiale' => '–&Oslash;',
+'date_jour_5_abbr' => '–Ø',
+'date_jour_5_initiale' => '–Ø',
 'date_jour_6' => '金曜日',
 'date_jour_6_abbr' => '??',
 'date_jour_6_initiale' => '?',
@@ -501,7 +501,7 @@ sera ignorée) :
 'lien_visite_site' => 'このサイトを訪問',
 'lien_visites' => '@visites@訪問',
 'lien_voir_auteur' => 'この著者を調べる',
-'ligne' => '—&ntilde;',
+'ligne' => '—ñ',
 'login' => 'Connexion', # NEW
 'login_acces_prive' => 'プライベートエリアへアクセスする',
 'login_autre_identifiant' => '他のIDで接続する',

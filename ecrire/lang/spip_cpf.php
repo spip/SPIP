@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_euro' => 'Mèt lo sinbol €',
 'barre_gras' => 'Pou ékri {{an gro}}',
 'barre_guillemets' => 'Pou mèt bann « giymé fransé »',
-'barre_guillemets_simples' => 'Pou m&egrave; bann „giym&eacute;“',
+'barre_guillemets_simples' => 'Pou mè bann „giymé“',
 'barre_intertitre' => 'Mèt sa-la kom in {{{lintèrtitr}}}',
 'barre_italic' => 'Mèt sa-la an {litalik}',
 'barre_lien' => 'Mèt sa-la kom in [gatir wèb->http://...]',
