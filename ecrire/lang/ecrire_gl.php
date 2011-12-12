@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'Non tes acceso a esta mensaxe.',
 'avis_non_acces_page' => 'Non tes acceso a esta páxina.',
 'avis_operation_echec' => 'Fallou a operación.',
-'avis_operation_impossible' => 'Operaci&amp;oacute;n impos&amp;iacute;bel',
+'avis_operation_impossible' => 'Operaci&oacute;n impos&iacute;bel',
 'avis_probleme_archive' => 'Problema de leitura do ficheiro @archive@',
 'avis_suppression_base' => 'ATENCIÓN, a supresión dos datos é irreversible',
 'avis_version_mysql' => 'A súa versión de SQL (@version_mysql@) non permite a auto-reparación das táboas da base de datos.',
@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_redirection' => 'Artigos virtuais',
 'config_titre_base_sup' => 'Declaración dunha base suplementaria',
 'config_titre_base_sup_choix' => 'Escolla unha base de datos suplementaria',
-'connexion_ldap' => 'Conexi&amp;oacute;n :',
+'connexion_ldap' => 'Conexi&oacute;n :',
 'copier_en_local' => 'Copiar en local',
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
 
@@ -127,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_base_donnee_1' => 'Enderezo da base de datos',
 'entree_base_donnee_2' => '(Moitas veces este enderezo corresponde ao do teu web, ás veces correspóndese coa mención «localhost», e outras pódese deixar baleiro.)',
 'entree_biographie' => 'Curta biografía en catro verbas.',
-'entree_chemin_acces' => '<b>Introduce</b> o cami&amp;ntilde;o de acceso :',
+'entree_chemin_acces' => '<b>Introduce</b> o cami&ntilde;o de acceso :',
 'entree_cle_pgp' => 'A túa chave GPG',
 'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Contido do tema en poucas palabras.)',
@@ -156,7 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_passe_ldap' => 'Chave',
 'entree_port_annuaire' => 'O número de porto da guía',
 'entree_signature' => 'Sinatura',
-'entree_titre_obligatoire' => '<b>T&amp;iacute;tulo</b> [Obrigado]<br />',
+'entree_titre_obligatoire' => '<b>T&iacute;tulo</b> [Obrigado]<br />',
 'entree_url' => 'O enderezo (URL) do teu web',
 'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Xa existe un servidor con ese nome',
@@ -289,9 +289,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_bio' => 'Biographie', # NEW
 'info_chapeau' => 'Cabeceira',
 'info_chapeau_2' => 'Cabeceira:',
-'info_chemin_acces_1' => 'Opci&amp;oacute;ns: <b>Cami&amp;ntilde;o de acceso ao anuario</b>',
+'info_chemin_acces_1' => 'Opci&oacute;ns: <b>Cami&ntilde;o de acceso ao anuario</b>',
 'info_chemin_acces_2' => 'En adiante, terá que configurar a vía de acceso ás informacións na guía. Esta información é indispensable para ler os perfís de redactores gardados na guía.',
-'info_chemin_acces_annuaire' => 'Opci&amp;oacute;ns: <b>Cami&amp;ntilde;o de acceso ao anuario</b>',
+'info_chemin_acces_annuaire' => 'Opci&oacute;ns: <b>Cami&ntilde;o de acceso ao anuario</b>',
 'info_choix_base' => 'Terceira etapa:',
 'info_classement_1' => '<sup>o</sup> en @liste@',
 'info_classement_2' => '<sup>a</sup> en @liste@',
@@ -315,7 +315,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contenu_articles' => 'Contido dos artigos',
 'info_contributions' => 'Contribucións',
 'info_creation_paragraphe' => '(Para crear parágrafos, simplemente deixe liñas baleiras.)', # MODIF
-'info_creation_rubrique' => 'Antes de poder escribir artigos,<br /> ten que crear, cando menos un tema ou secci&amp;oacute;n.<br />',
+'info_creation_rubrique' => 'Antes de poder escribir artigos,<br /> ten que crear, cando menos un tema ou secci&oacute;n.<br />',
 'info_creation_tables' => 'Creación das táboas da base de datos',
 'info_creer_base' => '<b>Crear</b> unha nova base de datos:',
 'info_dans_rubrique' => 'No tema:',
@@ -395,10 +395,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_message_technique' => 'Mensaxe técnica:',
 'info_messagerie_interne' => 'mensaxería interna',
 'info_mise_a_niveau_base' => 'posta ao día da súa base SQL',
-'info_mise_a_niveau_base_2' => '{{Atención!}} Instalou unha versi&amp;oacute;n
-  de ficheiros SPIP {anterior} &amp;aacute; que tiña instalada
-  antes neste web: a s&amp;uacute;a base de datos pode que se perdese
-  e o seu web xa non funcionar&amp;oacute;.<br />{{Reinstale os
+'info_mise_a_niveau_base_2' => '{{Atención!}} Instalou unha versi&oacute;n
+  de ficheiros SPIP {anterior} &aacute; que tiña instalada
+  antes neste web: a s&uacute;a base de datos pode que se perdese
+  e o seu web xa non funcionar&oacute;.<br />{{Reinstale os
   ficheiros de SPIP.}}',
 'info_modification_enregistree' => 'O modificación rexistrouse',
 'info_modifier_auteur' => 'Modificar o autor:',
@@ -491,7 +491,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Quere empregar o motor de procura integrado en SPIP?
   (desactivalo acelera o funcionamento do sistema.)',
 'info_question_vignettes_referer_non' => 'Non mostrar as capturas de webs de orixe das visitas',
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Raíz do web',
 'info_recharger_page' => 'Recarga a páxina nuns intres.',
 'info_recherche_auteur_a_affiner' => 'Resultados de máis para "@cherche_auteur@"; por favor, afine a súa procura.',
@@ -506,8 +506,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redirection_activee' => 'La redirection est activée.', # NEW
 'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Os teus artigos rexeitados',
-'info_reglage_ldap' => 'Opci&amp;oacute;ns: <b>Axustes da importaci&amp;oacute;n LDAP</b>',
-'info_renvoi_article' => '<b>Redirecci&amp;oacute;n.</b> Este artigo reenv&amp;iacute; &amp;aacute; p&amp;aacute;xina:',
+'info_reglage_ldap' => 'Opci&oacute;ns: <b>Axustes da importaci&oacute;n LDAP</b>',
+'info_renvoi_article' => '<b>Redirecci&oacute;n.</b> Este artigo reenv&iacute; &aacute; p&aacute;xina:',
 'info_reserve_admin' => 'Só o equipo de xestión pode modificar este enderezo.',
 'info_restreindre_rubrique' => 'Restrinxir a xestión ó tema:',
 'info_resultat_recherche' => 'Resultados da procura:',
@@ -594,7 +594,7 @@ cunha cor que indica o seu estado :',
 'install_nom_base_hebergeur' => 'Nome da base atribuída polo aloxador :',
 'install_pas_table' => 'Base actualemente sen táboas',
 'install_pass_base_hebergeur' => 'Chave de conexión atribuída polo aloxador',
-'install_php_version' => 'Versi&amp;oacute;n de PHP @version@ insuficiente (m&amp;iacute;nima = @minimum@)',
+'install_php_version' => 'Versi&oacute;n de PHP @version@ insuficiente (m&iacute;nima = @minimum@)',
 'install_select_langue' => 'Selecciona un idioma e preme o botón «seguinte» para comezar co proceso de instalación.',
 'install_select_type_db' => 'Indique o tipo de base de datos :',
 'install_select_type_mysql' => 'MySQL',
@@ -781,7 +781,7 @@ cunha cor que indica o seu estado :',
 'plugins_tous_liste' => 'Tous', # NEW
 'plugins_vue_hierarchie' => 'Xerarquía',
 'plugins_vue_liste' => 'Listaxe',
-'protocole_ldap' => 'Versi&amp;oacute;n do protocolo :',
+'protocole_ldap' => 'Versi&oacute;n do protocolo :',
 
 // Q
 'queue_executer_maintenant' => 'Executar as tarefas de mantemento',
@@ -829,7 +829,7 @@ cunha cor que indica o seu estado :',
 'texte_auteurs' => 'A AUTORÍA',
 'texte_choix_base_1' => 'Elixe a túa base:',
 'texte_choix_base_2' => 'O servidor SQL contén varias bases de datos.',
-'texte_choix_base_3' => '<b>Seleccione</b> aqu&amp;iacute; a que lle dese o seu provedor:',
+'texte_choix_base_3' => '<b>Seleccione</b> aqu&iacute; a que lle dese o seu provedor:',
 'texte_choix_table_prefix' => 'Prefixo das táboas :',
 'texte_commande_vider_tables_indexation' => 'empregue este comando para baleirar as táboas
   de indexado empregadas polo motor de procura integrado no Spip.
@@ -845,7 +845,7 @@ cunha cor que indica o seu estado :',
 'texte_contenu_articles' => 'Dependendo da maquetación adoptada para o seu web, pode decidir
   non empregar certos elementos dos artigos. Use esta lista para indicar cales serán os elementos dispoñibles.',
 'texte_crash_base' => 'Se a base de datos ten algún problema, podes tentar unha reparación automática.',
-'texte_creer_rubrique' => 'Antes de poder escribir artigos<br/>, ten que crear un tema ou secci&amp;oacute;n.',
+'texte_creer_rubrique' => 'Antes de poder escribir artigos<br/>, ten que crear un tema ou secci&oacute;n.',
 'texte_date_creation_article' => 'DATA DE CREACIÓN DO ARTIGO',
 'texte_date_publication_anterieure' => 'Data de redacción anterior :',
 'texte_date_publication_anterieure_nonaffichee' => 'Non mostrar data de redacción anterior.',
@@ -941,7 +941,7 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'texte_tenter_reparation' => 'Tentar unha reparación da base de datos',
 'texte_test_proxy' => 'Para probar o proxy, indique o enderezo do web que queira testear.',
 'texte_titre_02' => 'Título:',
-'texte_titre_obligatoire' => '<b>T&amp;iacute;tulo</b> [Obrigado]',
+'texte_titre_obligatoire' => '<b>T&iacute;tulo</b> [Obrigado]',
 'texte_travail_article' => '@nom_auteur_modif@ traballou neste artigo hai @date_diff@ minutos',
 'texte_travail_collaboratif' => 'Se é habitual que varias persoas traballen nun
   artigo ao mesmo tempo, o sistema pode mostrar os artigos 

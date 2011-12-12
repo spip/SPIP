@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'affichage' => 'Visa',
 'aide_non_disponible' => 'Den här delen av direkthjälpen finns inte i det aktuella språket',
 'auteur' => 'Redaktör',
-'avis_acces_interdit' => 'Tilltr&amp;auml;de f&amp;ouml;rbjudet.',
+'avis_acces_interdit' => 'Tilltr&auml;de f&ouml;rbjudet.',
 'avis_article_modifie' => 'Varning, @nom_auteur_modif@ har arbetat på den här artikeln för @date_diff@ minuter sen',
 'avis_aucun_resultat' => 'Hittade inga resultat',
 'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
@@ -493,7 +493,7 @@ funktioner hos SPIP inte användas.',
 'info_question_utilisation_moteur_recherche' => 'Vill du använda SPIPŽs integrerade sökfunktion?
  (Att stänga av den ökar systemets prestanda.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Sajtens bas',
 'info_recharger_page' => 'Var vänlig och uppdatera sidan om en liten stund.',
 'info_recherche_auteur_a_affiner' => 'För många resultat för "@cherche_auteur@"; Var vänlig och avgränsa sökningen mer.',

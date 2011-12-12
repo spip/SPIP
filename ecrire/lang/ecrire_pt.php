@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -496,7 +496,7 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 'info_question_utilisation_moteur_recherche' => 'Deseja utilizar o motor integrado de pesquisa a SPIP ?
 (desactivá-lo acelera o funcionamento do sistema)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Raiz do sítio',
 'info_recharger_page' => 'Favor voltar a carregar esta página daqui a pouco.',
 'info_recherche_auteur_a_affiner' => 'Demasiados resultados para "@cherche_auteur@" ; favor afinar a pesquisa.',
@@ -577,7 +577,7 @@ numa cor que indica o seu estado:',
 'info_un_site' => 'um sítio',
 'info_une_rubrique' => 'uma rubrica,',
 'info_une_rubrique_02' => '1 rubrica',
-'info_url' => 'URL :', # MODIF
+'info_url' => 'URL :', # MODIF
 'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL DO SÍTIO :', # MODIF
 'info_url_test_proxy' => 'URL de test', # NEW

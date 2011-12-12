@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -485,7 +485,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_question_utilisation_moteur_recherche' => 'SPIP\'in entegre arama motorunu kullanmak istiyor musunuz ?
                (onu durdurmak sistemin işleyişini hızlandırır)',
 'info_question_vignettes_referer_non' => 'Ziyaretlerin yapıldığı kaynak sitelerden alıntıları gösterme',
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Sitenin kökü',
 'info_recharger_page' => 'Lütfen bu sayfayı az sonra tekrar yükleyiniz.',
 'info_recherche_auteur_a_affiner' => '"@cherche_auteur@" için çok fazla sonuç alındı ; lütfen aramayı ayrıntılayınız.',

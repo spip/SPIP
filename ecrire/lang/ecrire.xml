@@ -1,0 +1,98 @@
+<traduction module="ecrire" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
+	<langue code="ar">
+		<traducteur nom="kandalaft" />
+	</langue>
+	<langue code="ast">
+		<traducteur nom="xuacu" />
+	</langue>
+	<langue code="bg" />
+	<langue code="br" />
+	<langue code="bs" />
+	<langue code="ca">
+		<traducteur nom="merce" />
+	</langue>
+	<langue code="co" />
+	<langue code="cpf" />
+	<langue code="cpf_hat" />
+	<langue code="cs" />
+	<langue code="da" />
+	<langue code="de">
+		<traducteur nom="klaus" />
+		<traducteur nom="filou" />
+	</langue>
+	<langue code="en">
+		<traducteur nom="squonk" />
+		<traducteur nom="paolo2" />
+		<traducteur nom="filou" />
+		<traducteur nom="kandalaft" />
+		<traducteur nom="mark_baber" />
+		<traducteur nom="jaro" />
+	</langue>
+	<langue code="en_hx" />
+	<langue code="eo">
+		<traducteur nom="filou" />
+	</langue>
+	<langue code="es">
+		<traducteur nom="severo" />
+		<traducteur nom="davood" />
+	</langue>
+	<langue code="eu">
+		<traducteur nom="otalazt" />
+	</langue>
+	<langue code="fa">
+		<traducteur nom="filou" />
+		<traducteur nom="davood" />
+	</langue>
+	<langue code="fon" />
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+		<traducteur nom="orlammd" />
+	</langue>
+	<langue code="gl">
+		<traducteur nom="webmaster3" />
+	</langue>
+	<langue code="hu" />
+	<langue code="id" />
+	<langue code="is" />
+	<langue code="it">
+		<traducteur nom="jaro" />
+	</langue>
+	<langue code="it_fem" />
+	<langue code="ja" />
+	<langue code="km" />
+	<langue code="lb" />
+	<langue code="my" />
+	<langue code="nl">
+		<traducteur nom="michelpossoz" />
+	</langue>
+	<langue code="no" />
+	<langue code="oc_auv" />
+	<langue code="oc_gsc" />
+	<langue code="oc_lms" />
+	<langue code="oc_lnc" />
+	<langue code="oc_ni" />
+	<langue code="oc_ni_la" />
+	<langue code="oc_prv" />
+	<langue code="oc_va" />
+	<langue code="pl" />
+	<langue code="pt">
+		<traducteur nom="rporto" />
+	</langue>
+	<langue code="pt_br">
+		<traducteur nom="rporto" />
+		<traducteur nom="filou" />
+	</langue>
+	<langue code="ro">
+		<traducteur nom="vmurariu" />
+	</langue>
+	<langue code="ru">
+		<traducteur nom="papa_troll" />
+	</langue>
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
+	<langue code="sv" />
+	<langue code="tr" />
+	<langue code="vi" />
+	<langue code="zh" />
+</traduction>

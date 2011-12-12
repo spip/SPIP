@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -477,7 +477,7 @@ D\'unes albergadors autorizan pas lo mandadís d\'e-mails dempuèi lors servidor
  impossibla.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilizar lo cercador integrat a SPIP? (lo desactivar abriva lo foncionament del sistèma.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Raiç del sit',
 'info_recharger_page' => 'Volgatz tornar cargar aquela pagina dins un momenton.',
 'info_recherche_auteur_a_affiner' => 'Tròp de resultats per "@cherche_auteur@"; volgatz afinar la cèrca.',

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -317,7 +317,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_derniers_articles_publies' => 'آخرين مقاله هاى منتشر شده شما در اينترنت',
 'info_desactiver_messagerie_personnelle' => 'شما ميتوانيد پيامگير شخصى تان را روى اين سايت فعال يا غير فعال كنيد',
 'info_descriptif' => ':توصيف',
-'info_desinstaller_plugin' => '&#1583;&#1575;&#1583;&#1607; &#1607;&#1575; &#1585;&#1575; &#1581;&#1584;&#1601; &#1608; plugin &#1585;&#1575; &#1594;&#1740;&#1585; &#1601;&#1593;&#1575;&#1604; &#1705;&#1606;&#1740;&#1583;',
+'info_desinstaller_plugin' => 'داده ها را حذف و plugin را غیر فعال کنید',
 'info_discussion_cours' => 'در حال بحث',
 'info_ecrire_article' => 'پيش از نوشتن مقاله، شما ميبايد دست كم يك بخش درست كنيد.',
 'info_email_envoi' => 'آدرس ايميل برای ارسال (اختياری)',

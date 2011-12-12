@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -504,7 +504,7 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 'info_site_2' => 'tokia :',
 'info_site_min' => 'tokia',
 'info_site_reference_2' => 'Toki erreferientziatua',
-'info_site_web' => 'WEB GUNEA :', # MODIF
+'info_site_web' => 'WEB GUNEA :',
 'info_sites' => 'guneak',
 'info_sites_lies_mot' => 'Gako-hitz honi lotutako gune erreferientziatuak',
 'info_sites_proxy' => 'Proxy bat erabili',

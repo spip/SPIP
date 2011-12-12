@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -477,7 +477,7 @@ a felhasználók automatikus emailt kapnak,
 'info_question_utilisation_moteur_recherche' => 'Kivánja-e használni az SPIP integrált kereső motorját ?
  (annak inaktiválása gyorsítja a rendszer működését.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Honlap teteje',
 'info_recharger_page' => 'Legyen szíves újratölteni ezt az oldalt egy kis idő múlva.',
 'info_recherche_auteur_a_affiner' => 'Túl sok eredmény erre "@cherche_auteur@" ; legyen szíves szükíteni a keresést.',
@@ -508,7 +508,7 @@ a felhasználók automatikus emailt kapnak,
 'info_site_2' => 'honlap :',
 'info_site_min' => 'honlap',
 'info_site_reference_2' => 'Felvett honlap',
-'info_site_web' => 'HONLAP :', # MODIF
+'info_site_web' => 'HONLAP  :', # MODIF
 'info_sites' => 'honlapok',
 'info_sites_lies_mot' => 'A kulcsszóhoz kötött felvett honlapok',
 'info_sites_proxy' => 'Proxy használata',

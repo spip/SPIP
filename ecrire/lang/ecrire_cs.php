@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.org
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -494,7 +494,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_question_utilisation_moteur_recherche' => 'Chcete používat vyhledávač, který je součástí systému SPIP?
  (je-li vyhledávač vypnut, zrychluje to chod systému.)',
 'info_question_vignettes_referer_non' => 'Do not show the screenshots of the originating sites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Kořenový adresář webu',
 'info_recharger_page' => 'Za okamžik zkuste stránku znovu nahrát.',
 'info_recherche_auteur_a_affiner' => 'Pro "@cherche_auteur@" bylo nalezeno příliš mnoho výsledků. Upřesněte vyhledávací kritéria.',
@@ -543,7 +543,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_statut_utilisateurs_2' => 'Zadejte statut, který mají osoby uvedené v adresáři LDAP, když se poprvé připojí. Tuto hodnotu můžete u každého jednotlivého autora následně změnit.',
 'info_suivi_activite' => 'Sledování redaktorské činnosti',
 'info_surtitre' => 'Nadřízený nadpis:',
-'info_syndication_integrale_1' => 'V&aacute;&#353; web nab&iacute;z&iacute; soubory pro syndikaci (viz &#147;<a href="@url@">@titre@</a>”).',
+'info_syndication_integrale_1' => 'Váš web nabízí soubory pro syndikaci (viz <a href="@url@">@titre@</a>”).',
 'info_syndication_integrale_2' => 'Chcete poslat celé články, nebo jen prvních pár set znaků jako shrnutí?',
 'info_table_prefix' => 'It is possible to change the prefix of the names of the database tables. (you need to do this if you are installing several sites in the same database). The prefix must be written in unaccented, lower-case letters without any spaces.', # NEW
 'info_taille_maximale_images' => 'SPIP is going to test the maximum size of image (in millions of pixels) which it can treat.<br /> Images bigger than this will not be reduced.', # NEW
