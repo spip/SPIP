@@ -95,7 +95,7 @@ function lire_config($cfg='', $def=null, $unserialize=true) {
 	// Brancher sur methodes externes si besoin
 	if ($cfg AND $p=strpos($cfg,'::')){
 		$methode = substr($cfg,0,$p);
-		$lire_config = charger_fonction('lire_config',$methode);
+		$lire_config = charger_fonction($methode, 'lire_config');
 		return $lire_config(substr($cfg,$p+2),$def,$unserialize);
 	}
 
@@ -136,7 +136,7 @@ function lire_config($cfg='', $def=null, $unserialize=true) {
  * @param bool $unserialize
  * @return mixed
  */
-function metapack_lire_config_dist($cfg='', $def=null, $unserialize=true) {
+function lire_config_metapack_dist($cfg='', $def=null, $unserialize=true) {
 	return lire_config($cfg, $def, $unserialize);
 }
 
@@ -152,7 +152,7 @@ function ecrire_config($cfg,$store) {
 	// Brancher sur methodes externes si besoin
 	if ($cfg AND $p=strpos($cfg,'::')){
 		$methode = substr($cfg,0,$p);
-		$ecrire_config = charger_fonction('ecrire_config',$methode);
+		$ecrire_config = charger_fonction($methode, 'ecrire_config');
 		return $ecrire_config(substr($cfg,$p+2),$store);
 	}
 	
@@ -252,7 +252,7 @@ function ecrire_config($cfg,$store) {
  * @param mixed $store
  * @return bool
  */
-function metapack_ecrire_config($cfg,$store) {
+function ecrire_config_metapack_dist($cfg,$store) {
 	// cas particulier en metapack::
 	// si on ecrit une chaine deja serializee, il faut la reserializer pour la rendre
 	// intacte en sortie ...
