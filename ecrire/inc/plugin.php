@@ -371,7 +371,7 @@ function plugin_controler_lib($lib, $url)
 		include_spip('inc/charger_plugin');
 		$url = '<br />'	. bouton_telechargement_plugin($url, 'lib');
 	}*/
-	return _T('plugin_necessite_lib', array('lib'=>$lib)) . $url;
+	return _T('plugin_necessite_lib', array('lib'=>$lib)) . " <a href='$url'>$url</a>";
 }
 
 // Pour compatibilite et lisibilite du code
