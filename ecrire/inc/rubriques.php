@@ -320,6 +320,8 @@ function calculer_langues_utilisees ($serveur='') {
 			$boucle->serveur = $serveur;
 			$boucle->select[] = "DISTINCT lang";
 			$boucle->from[$desc['table_objet']] = $t;
+			$boucle = pipeline('pre_boucle', $boucle);
+			
 			if (isset($desc['statut'])
 		    AND $desc['statut']){
 				instituer_boucle($boucle, false);
