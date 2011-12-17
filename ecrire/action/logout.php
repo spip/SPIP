@@ -19,7 +19,7 @@ function action_logout_dist()
 {
 	global $visiteur_session, $ignore_auth_http;
 	$logout =_request('logout');
-	$url = _request('url');
+	$url = securiser_redirect_action(_request('url'));
 	// cas particulier, logout dans l'espace public
 	if ($logout == 'public' AND !$url)
 		$url = url_de_base();
