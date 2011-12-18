@@ -32,7 +32,8 @@ function _sqlite_init_functions(&$sqlite){
 		
 		'DATE_FORMAT'	=> array( '_sqlite_func_strftime'		,2),
 		'DAYOFMONTH'	=> array( '_sqlite_func_dayofmonth'		,1),
-		
+
+		'EXTRAIRE_MULTI' => array( '_sqlite_func_extraire_multi', 2), // specifique a SPIP/sql_multi()
 		'EXP'			=> array( 'exp'							,1),//exponentielle
 		'FIND_IN_SET'	=> array( '_sqlite_func_find_in_set'	,2),
 		'FLOOR'      => array( '_sqlite_func_floor', 1), // absent de sqlite2
@@ -198,6 +199,19 @@ function _sqlite_func_month ($d) {
 function _sqlite_func_preg_replace($quoi, $cherche, $remplace) {
 	$return = preg_replace('%'.$cherche.'%', $remplace, $quoi);
 	#spip_log("preg_replace : $quoi, $cherche, $remplace, $return",'sqlite.'._LOG_DEBUG);
+	return $return;
+}
+
+/**
+ * Extrait une langue d'un texte <multi>[fr] xxx [en] yyy</multi>
+ * 
+ * @param string $quoi le texte contenant ou non un multi
+ * @param string $lang la langue a extraire
+ * @return string, l'extrait trouve.
+**/
+function _sqlite_func_extraire_multi($quoi, $lang) {
+	$cherche = "<multi>.*[\[]" . $lang . "[\]]([^\[]*).*</multi>";  
+	$return = preg_replace('%'.$cherche.'%sS', '$1', $quoi);
 	return $return;
 }
 
