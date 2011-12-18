@@ -417,12 +417,34 @@ function critere_parinverse($idb, &$boucles, $crit, $sens = ''){
 			$par = $par->texte;
 			// par multi champ
 			if (preg_match(",^multi[\s]*(.*)$,", $par, $m)){
-				$texte = $boucle->id_table.'.'.trim($m[1]);
+				$champ = trim($m[1]);
+				// par multi L1.champ
+				if (strpos($champ, '.')) {
+					$cle = '';
+				// par multi champ (champ sur une autre table)
+				} elseif (!array_key_exists($champ, $boucle->show['field'])){
+					$cle = trouver_jointure_champ($champ, $boucle);
+				// par multi champ (champ dans la table en cours)
+				} else {
+					$cle = $boucle->id_table;
+				}
+				$texte = $cle.'.'.$champ;
 				$boucle->select[] = "\".sql_multi('".$texte."', \$GLOBALS['spip_lang']).\"";
 				$order = "'multi'";
 				// par num champ(, suite)
-			} else if (preg_match(",^num (.*)$,m", $par, $m)){
-				$texte = '0+'.$boucle->id_table.'.'.trim($m[1]);
+			} else if (preg_match(",^num (.*)$,m", $par, $m)) {
+				$champ = trim($m[1]);
+				// par num L1.champ
+				if (strpos($champ, '.')) {
+					$cle = '';
+				// par num champ (champ sur une autre table)
+				} elseif (!array_key_exists($champ, $boucle->show['field'])){
+					$cle = trouver_jointure_champ($champ, $boucle);
+				// par num champ (champ dans la table en cours)
+				} else {
+					$cle = $boucle->id_table;
+				}
+				$texte = '0+'. $cle . '.' . $champ;
 				$suite = calculer_liste($tri, array(), $boucles, $boucle->id_parent);
 				if ($suite!=="''")
 					$texte = "\" . ((\$x = $suite) ? ('$texte' . \$x) : '0')"." . \"";
