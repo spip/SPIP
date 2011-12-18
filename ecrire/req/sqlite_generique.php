@@ -959,12 +959,7 @@ function spip_sqlite_listdbs($serveur = '', $requeter = true){
 
 // http://doc.spip.org/@spip_sqlite_multi
 function spip_sqlite_multi($objet, $lang){
-	/*$r = "PREG_REPLACE("
-	     .$objet
-	     .",'<multi>.*[\[]"
-	     .$lang
-	     ."[\]]([^\[]*).*</multi>', '$1') AS multi";*/
-	 $r = "EXTRAIRE_MULTI(" . $objet . ", '" . $lang . "') AS multi";
+	$r = "EXTRAIRE_MULTI(" . $objet . ", '" . $lang . "') AS multi";
 	return $r;
 }
 
