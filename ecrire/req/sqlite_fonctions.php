@@ -167,12 +167,8 @@ function _sqlite_func_instr ($s, $search) {
 
 // http://doc.spip.org/@_sqlite_func_least
 function _sqlite_func_least () {
-	$numargs = func_num_args();
 	$arg_list = func_get_args();
-	$least=$arg_list[0];
-	for ($i = 0; $i < $numargs; $i++) {
-		if ($arg_list[$i] < $least) $least=$arg_list[$i];
-	}
+    $least = min($arg_list);
 	#spip_log("Passage avec LEAST : $least",'debug');
 	return $least;
 }
@@ -234,9 +230,16 @@ function _sqlite_func_strftime($date, $conv){
 	return strftime($conv, $date);	
 }
 
-// http://doc.spip.org/@_sqlite_func_to_days
+/**
+ * Nombre de jour entre 0000-00-00 et $d
+ * http://doc.spip.org/@_sqlite_func_to_days
+ * cf http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_to-days
+ * @param string $d
+ * @return int
+ */
 function _sqlite_func_to_days ($d) {
-	$result = date("z", _sqlite_func_unix_timestamp($d));
+    $offset = 719528; // nb de jour entre 0000-00-00 et timestamp 0=1970-01-01
+	$result = $offset+(int)ceil(_sqlite_func_unix_timestamp($d)/(24*3600));
 	#spip_log("Passage avec TO_DAYS : $d, $result",'debug');
 	return $result;
 }
