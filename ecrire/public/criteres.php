@@ -428,7 +428,8 @@ function critere_parinverse($idb, &$boucles, $crit, $sens = ''){
 				} else {
 					$cle = $boucle->id_table;
 				}
-				$texte = $cle.'.'.$champ;
+				if ($cle) { $cle .= '.'; }
+				$texte = $cle.$champ;
 				$boucle->select[] = "\".sql_multi('".$texte."', \$GLOBALS['spip_lang']).\"";
 				$order = "'multi'";
 				// par num champ(, suite)
@@ -444,7 +445,8 @@ function critere_parinverse($idb, &$boucles, $crit, $sens = ''){
 				} else {
 					$cle = $boucle->id_table;
 				}
-				$texte = '0+'. $cle . '.' . $champ;
+				if ($cle) { $cle .= '.'; }
+				$texte = '0+'. $cle . $champ;
 				$suite = calculer_liste($tri, array(), $boucles, $boucle->id_parent);
 				if ($suite!=="''")
 					$texte = "\" . ((\$x = $suite) ? ('$texte' . \$x) : '0')"." . \"";
