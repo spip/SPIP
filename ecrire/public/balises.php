@@ -130,8 +130,8 @@ function balise_DATE_MODIF_dist ($p) {
 // http://doc.spip.org/@balise_DATE_NOUVEAUTES_dist
 function balise_DATE_NOUVEAUTES_dist($p) {
 	$p->code = "((\$GLOBALS['meta']['quoi_de_neuf'] == 'oui'
-	AND @is_readable(_DIR_TMP . 'mail.lock')) ?
-	@filemtime(_DIR_TMP . 'mail.lock') :
+	AND isset(\$GLOBALS['meta']['dernier_envoi_neuf'])) ?
+	\$GLOBALS['meta']['dernier_envoi_neuf'] :
 	\"'0000-00-00'\")";
 	$p->interdire_scripts = false;
 	return $p;
