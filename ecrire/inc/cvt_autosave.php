@@ -80,7 +80,8 @@ function cvtautosave_formulaire_traiter($flux){
 		if (!defined('_AUTOSAVE_GB_DELAY')) define('_AUTOSAVE_GB_DELAY',72*3600);
 		$time_too_old = time() - _AUTOSAVE_GB_DELAY;
 		// purger aussi toutes les vieilles autosave
-		foreach($GLOBALS['visiteur_session'] as $k=>$v){
+		$session = $GLOBALS['visiteur_session'];
+		foreach($session as $k=>$v){
 			if (strncmp($k,'session_autosave_',17)==0){
 				$timestamp = 0;
 				if (preg_match(",&__timestamp=(\d+)$,",$v,$m)){
