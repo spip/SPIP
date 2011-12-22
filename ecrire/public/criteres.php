@@ -1221,7 +1221,7 @@ function primary_doublee($decompose, $table){
  * @param  $col
  * @param  $desc
  * @param  $cond
- * @param bool $checkarrivee
+ * @param bool|string $checkarrivee
  * @return mixed|string
  */
 function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $checkarrivee = false){
@@ -1231,6 +1231,7 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $c
 	// et qu'on est la
 	// il faut privilegier la jointure directe en 2 etapes spip_mots_liens, spip_mots
 	if ($checkarrivee
+		AND is_string($checkarrivee)
 	    AND $a = table_objet($checkarrivee)
 	        AND in_array($a.'_liens', $joints)
 	){
