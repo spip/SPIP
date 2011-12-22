@@ -158,7 +158,7 @@ $.fn.ajaxSubmit = function(options) {
 
 	var fileAPI = !!(hasFileInputs && fileInputs.get(0).files && window.FormData);
 	log("fileAPI :" + fileAPI);
-	var shouldUseFrame = (hasFileInputs || multipart) && !fileAPI;
+	var shouldUseFrame = (hasFileInputs || multipart) /*&& !fileAPI*/; /* fileAPI bug sous tous les navs dans cette version */
 
 	// options.iframe allows user to force iframe mode
 	// 06-NOV-09: now defaulting to iframe mode if file input is detected
