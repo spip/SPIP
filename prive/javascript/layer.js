@@ -62,10 +62,10 @@ function slide_horizontal (couche, slide, align, depart, etape ) {
 
 function changerhighlight (couche) {
 	jQuery(couche)
-	.removeClass('off')
+	.addClass('on')
 	.siblings()
 		.not(couche)
-		.addClass('off');
+		.removeClass('on');
 }
 
 function aff_selection (arg, idom, url, event) {
@@ -311,9 +311,10 @@ function charger_node_url(myUrl, Field, jjscript, img, event)
 	if (url_chargee[myUrl]) {
 			var el = jQuery(Field).html(url_chargee[myUrl])[0];
 			retour_id_url(el, jjscript);
-			triggerAjaxLoad(el);
+			jQuery.spip.triggerAjaxLoad(el);
 			return false; 
-	  } else {
+	}
+	else {
 		if (img) img.style.visibility = "visible";
 		if (xhr_actifs[Field]) { xhr_actifs[Field].aborted = true;xhr_actifs[Field].abort(); }
 		xhr_actifs[Field] = AjaxSqueezeNode(myUrl,

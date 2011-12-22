@@ -78,7 +78,7 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 			. "\"";
 
 			$ret .= "<div class='"
-			. (($id == $next) ? "highlight" : "highlight off")
+			. (($id == $next) ? "item on" : "item")
 			. "'><div class='"
 			. $classe1
 			. "'><div$classe2><a"
