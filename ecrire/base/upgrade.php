@@ -156,7 +156,7 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='m
 		if (isset($maj['create'])){
 			if (!isset($GLOBALS[$table_meta][$nom_meta_base_version])){
 				// installation : on ne fait que l'operation create
-				$maj = array("0.0.1"=>$maj['create']);
+				$maj = array("init"=>$maj['create']);
 				// et on lui ajoute un appel a inc/config
 				// pour creer les metas par defaut
 				$config = charger_fonction('config','inc');
@@ -165,8 +165,11 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='m
 			// dans tous les cas enlever cet index du tableau
 			unset($maj['create']);
 		}
-		include_spip('inc/plugin'); // pour spip_version_compare
-		uksort($maj,'spip_version_compare');
+		// si init, deja dans le bon ordre
+		if (!isset($maj['init'])){
+			include_spip('inc/plugin'); // pour spip_version_compare
+			uksort($maj,'spip_version_compare');
+		}
 
 		// la redirection se fait par defaut sur la page d'administration des plugins
 		// sauf lorsque nous sommes sur l'installation de SPIP
@@ -287,8 +290,9 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect=
 	reset($maj);
 	while (list($v,)=each($maj)) {
 		// si une maj pour cette version
-		if (spip_version_compare($v,$installee,'>')
-			AND spip_version_compare($v,$cible,'<=')) {
+		if ($v=='init' OR
+			(spip_version_compare($v,$installee,'>')
+			AND spip_version_compare($v,$cible,'<='))) {
 			if ($debut_page)
 				maj_debut_page($v,$meta,$table);
 			echo "MAJ $v";
