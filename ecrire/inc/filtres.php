@@ -925,6 +925,10 @@ function affdate_base($numdate, $vue, $options = array()) {
 			return $annee;
 
 	case 'nom_mois':
+		$param = ((isset($options['param']) AND $options['param']) ? '_'.$options['param'] : '');
+		if ($param and $mois) {
+			return _T('date_mois_'.$mois.$param);
+		}
 		return $nommois;
 
 	case 'mois':
@@ -980,8 +984,9 @@ function mois($numdate) {
 }
 
 // http://doc.spip.org/@nom_mois
-function nom_mois($numdate) {
-	return affdate_base($numdate, 'nom_mois');
+function nom_mois($numdate, $forme='') {
+	if(!($forme == 'abbr')) $forme = '';
+	return affdate_base($numdate, 'nom_mois', $forme);
 }
 
 // http://doc.spip.org/@annee
