@@ -296,12 +296,12 @@ function supprimer_repertoire($dir) {
 	foreach (scandir($dir) as $item) {
 		if ($item == '.' || $item == '..') continue;
 		if (!supprimer_repertoire($dir . "/" . $item)) {
-			chmod($dir . "/" . $item, 0777);
+			@chmod($dir . "/" . $item, 0777);
 			if (!supprimer_repertoire($dir . "/" . $item)) return false;
 		};
 	}
 	
-	return rmdir($dir);
+	return @rmdir($dir);
 }
 
 	
