@@ -9,7 +9,7 @@
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
 	[(#ID_OBJET|oui)
-	[(#GET{redirect}|icone_verticale{[(#ID_OBJET|?{[(#OBJET|objet_info{texte_retour}|_T)],<:icone_retour:>})],#OBJET|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[(#GET{redirect}|icone_verticale{[(#OBJET|objet_info{texte_retour}|_T)],#OBJET|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 	]
 	[
 		[(#OBJET|objet_info{#ID_OBJET|?{texte_modifier,texte_creer}}|_T)]
