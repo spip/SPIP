@@ -31,6 +31,7 @@
 						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">
+								<input type="hidden" name="#GET{name}_check" value="1" />
 								<input type="checkbox" name="#GET{name}" id="#GET{name}_oui" value="oui"
 								[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:info_multi_secteurs:></label>
 							</div>
