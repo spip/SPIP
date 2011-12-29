@@ -51,8 +51,23 @@ $GLOBALS['aider_index'] = array(
 
 				);
 
-// http://doc.spip.org/@inc_aider_dist
-function inc_aider_dist($aide='', $skel='', $env=array()) {
+
+
+/**
+ * Generer un lien d'aide (icone + lien)
+ *
+ * @param string $aide
+ * 		cle d'identification de l'aide souhaitee
+ * @param strink $skel
+ * 		Nom du squelette qui appelle ce bouton d'aide
+ * @param array $env
+ * 		Environnement du squelette
+ * @param bool $aide_spip_directe
+ * 		false : Le lien genere est relatif a notre site (par defaut)
+ * 		true : Le lien est realise sur spip.net/aide/ directement ...
+ * @return 
+**/
+function inc_aider_dist($aide='', $skel='', $env=array(), $aide_spip_directe = false) {
 	global $spip_lang, $aider_index;
 
 	if (($skel = basename($skel))
@@ -60,9 +75,21 @@ function inc_aider_dist($aide='', $skel='', $env=array()) {
 	AND isset($aider_index[$skel][$aide]))
 		$aide = $aider_index[$skel][$aide];
 
-	$args = "aide=$aide&var_lang=$spip_lang";
+	if ($aide_spip_directe) {
+		// on suppose que spip.net est le premier present
+		// dans la liste des serveurs. C'est forcement le cas
+		// a l'installation tout du moins
+		$help_server = $GLOBALS['help_server'];
+		$url = array_shift($help_server) . '/';
+		$url = parametre_url($url, 'exec', 'aide');
+		$url = parametre_url($url, 'aide', $aide);
+		$url = parametre_url($url, 'var_lang', $spip_lang);
+	} else {
+		$args = "aide=$aide&var_lang=$spip_lang";
+		$url = generer_url_ecrire("aide", $args);
+	}
 	
-	return aider_icone(generer_url_ecrire("aide", $args));
+	return aider_icone($url);
 }
 
 function aider_icone($url)
