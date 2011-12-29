@@ -51,14 +51,19 @@ function plugins_get_infos_dist($plug=false, $reload=false, $dir = _DIR_PLUGINS,
 		foreach($plug as $nom)
 		  $res |= plugins_get_infos_un($nom, $reload, $dir, $cache);
 		// Nettoyer le cache des vieux plugins qui ne sont plus la
-		if ($clean_old){
-			foreach(array_keys($cache[$dir]) as $p)
-				if (!in_array($p,$plug))
+		if ($clean_old and count($cache[$dir])) {
+			foreach (array_keys($cache[$dir]) as $p) {
+				if (!in_array($p,$plug)) {
 					unset($cache[$dir][$p]);
+				}
+			}
 		}
 	}
 	if ($res) {
 		ecrire_fichier($filecache, serialize($cache));
+	}
+	if (!isset($cache[$dir])) {
+		return array();
 	}
 	return is_string($plug) ? $cache[$dir][$plug] : $cache[$dir];
 }
