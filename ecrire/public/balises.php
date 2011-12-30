@@ -671,7 +671,7 @@ function balise_ENV_dist($p, $src = NULL) {
 			$src = '@$Pile[0]';
 		}
 		if ($_sinon) {
-			$p->code = "table_valeur($src, (string)$_nom, $_sinon)";
+			$p->code = "sinon(table_valeur($src, (string)$_nom), $_sinon)";
 		} else {
 			$p->code = "table_valeur($src, (string)$_nom)";
 		}
