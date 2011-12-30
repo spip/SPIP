@@ -620,6 +620,12 @@ function balise_CHEMIN_IMAGE_dist($p) {
  * La syntaxe #ENV{toto, valeur par defaut}
  * renverra 'valeur par defaut' si $toto est vide
  *
+ * La recherche de la cle s'appuyant sur la fonction table_valeur
+ * il est possible de demander un sous element d'un tableau
+ * #ENV{toto/sous/element, valeur par defaut} retournera l'equivalent de
+ * #ENV{toto}|table_valeur{sous/element} c'est a dire en quelque sorte
+ * $env['toto']['sous']['element'] s'il existe, sinon la valeur par defaut.
+ *
  * Si le tableau est vide on renvoie '' (utile pour #SESSION)
  *
  * Enfin, la balise utilisee seule #ENV retourne le tableau complet
@@ -661,17 +667,13 @@ function balise_ENV_dist($p, $src = NULL) {
 			$p->code = '@serialize($Pile[0])';
 		}
 	} else {
-		// admet deux arguments : nom de variable, valeur par defaut si vide
-		if ($src) {
-			$p->code = 'is_array($a = ('.$src.')) ? $a[(string)'.$_nom.'] : ""';
-		} else {
-			$p->code = '@$Pile[0][(string)' . $_nom . ']';
+		if (!$src) {
+			$src = '@$Pile[0]';
 		}
-
 		if ($_sinon) {
-			$p->code = 'sinon(' . $p->code . ",$_sinon)";
+			$p->code = "table_valeur($src, (string)$_nom, $_sinon)";
 		} else {
-			$p->code = '('.$p->code.')';
+			$p->code = "table_valeur($src, (string)$_nom)";
 		}
 	}
 	#$p->interdire_scripts = true;
