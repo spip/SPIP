@@ -699,7 +699,10 @@ function debusquer_entete($titre, $corps)
 	  . "' type='text/css' />" .
 	  "</head>\n" .
 	  "<body style='margin:0 10px;'>\n" .
-	  "<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'>" .
+	  "<div id='spip-debug-hide' style='position: absolute; top: 0px; z-index: 1000; right:0px;'>" .
+	  		"<a href='#' onClick=\"x = document.getElementById('spip-debug-header'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = ''); return false;\"> + / - </a>" .
+	  "</div>" .
+	  "<div id='spip-debug-header' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:0px;right:10px;'>" .
 	  $corps .
 	  inclure_balise_dynamique(balise_FORMULAIRE_ADMIN_dyn('spip-admin-float', $debug_objets), false) .
 	  '</div></body></html>';
