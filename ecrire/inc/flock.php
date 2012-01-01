@@ -291,7 +291,7 @@ function spip_unlink($f) {
  */
 function supprimer_repertoire($dir) {
 	if (!file_exists($dir)) return true;
-	if (!is_dir($dir) || is_link($dir)) return unlink($dir);
+	if (!is_dir($dir) || is_link($dir)) return @unlink($dir);
 	
 	foreach (scandir($dir) as $item) {
 		if ($item == '.' || $item == '..') continue;
