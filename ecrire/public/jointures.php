@@ -73,7 +73,9 @@ function trouver_champs_decomposes($champ, $desc){
  * @param array $arrivee
  *   sous la forme (nom de la table, description de la table)
  * @param string $col
+ *  	colonne cible de la jointure
  * @param bool $cond
+ *     flag pour savoir si le critere est conditionnel ou non
  * @return string
  */
 function calculer_jointure(&$boucle, $depart, $arrivee, $col = '', $cond = false, $max_liens=5){
@@ -482,17 +484,35 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 }
 
 /**
- * http://doc.spip.org/@trouver_jointure_champ
+ * Cherche a ajouter la possibilite d'interroger un champ sql
+ * dans une boucle. Cela construira les jointures necessaires
+ * si une possibilite est trouve et retournera le nom de
+ * l'alias de la table contenant ce champ
+ * (L2 par exemple pour 'spip_mots AS L2' dans le FROM),
  *
+ * 
  * @param string $champ
+ * 		Nom du champ cherche (exemple id_article)
  * @param object $boucle
+ * 		Informations connues de la boucle
+ * @param array $jointures
+ * 		Liste des tables parcourues (articles, mots) pour retrouver le champ sql
+ * 		et calculer la jointure correspondante.
+ * 		En son absence et par defaut, on utilise la liste des jointures connues
+ * 		par SPIP pour la table en question ($boucle->jointures)
+ * @param bool $cond
+ *     flag pour savoir si le critere est conditionnel ou non
+ * 
  * @return string
  */
-function trouver_jointure_champ($champ, &$boucle){
-	$cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);
+function trouver_jointure_champ($champ, &$boucle, $jointures = false, $cond = false) {
+	if ($jointures === false) {
+		$jointures = $boucle->jointures;
+	}
+	$cle = trouver_champ_exterieur($champ, $jointures, $boucle);
 	if ($cle){
 		$desc = $boucle->show;
-		$cle = calculer_jointure($boucle, array($desc['id_table'], $desc), $cle, false);
+		$cle = calculer_jointure($boucle, array($desc['id_table'], $desc), $cle, $cond);
 	}
 	if ($cle) return $cle;
 	spip_log("trouver_jointure_champ: $champ inconnu");
