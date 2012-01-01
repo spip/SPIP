@@ -982,9 +982,11 @@ function calculer_critere_DEFAUT_dist($idb, &$boucles, $crit){
 		return calculer_critere_parties($idb, $boucles, $crit);
 
 	$r = calculer_critere_infixe($idb, $boucles, $crit);
-
 	if (!$r){
-		return (array('zbug_critere_inconnu', array('critere' => $crit->op)));
+	#	// on produit une erreur seulement si le critere n'a pas de '?'
+	#	if (!$crit->cond) {
+			return (array('zbug_critere_inconnu', array('critere' => $crit->op)));
+	#	}
 	} else calculer_critere_DEFAUT_args($idb, $boucles, $crit, $r);
 }
 
