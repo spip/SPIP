@@ -1,9 +1,9 @@
 <traduction module="public" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
 	<langue code="ar">
-		<traducteur nom="kandalaft" />
+		<traducteur nom="George" />
 	</langue>
 	<langue code="ast">
-		<traducteur nom="xuacu" />
+		<traducteur nom="Xuacu" />
 	</langue>
 	<langue code="ay" />
 	<langue code="ber_tam" />
@@ -19,15 +19,13 @@
 	<langue code="cs" />
 	<langue code="da" />
 	<langue code="de">
-		<traducteur nom="klaus" />
+		<traducteur nom="klaus++" />
 	</langue>
-	<langue code="el">
-		<traducteur nom="yann7" />
-	</langue>
+	<langue code="el" />
 	<langue code="en">
-		<traducteur nom="squonk" />
+		<traducteur nom="sQuonk" />
 		<traducteur nom="jaro" />
-		<traducteur nom="kandalaft" />
+		<traducteur nom="George" />
 	</langue>
 	<langue code="en_hx" />
 	<langue code="eo" />
@@ -39,7 +37,7 @@
 		<traducteur nom="otalazt" />
 	</langue>
 	<langue code="fa">
-		<traducteur nom="davood" />
+		<traducteur nom="Davood Hossein" />
 	</langue>
 	<langue code="ff" />
 	<langue code="fi" />
@@ -67,7 +65,7 @@
 	<langue code="nb" />
 	<langue code="ne" />
 	<langue code="nl">
-		<traducteur nom="michelpossoz" />
+		<traducteur nom="mpossoz" />
 	</langue>
 	<langue code="oci_va" />
 	<langue code="oc_auv" />
@@ -82,7 +80,7 @@
 	<langue code="pl" />
 	<langue code="pt" />
 	<langue code="pt_br">
-		<traducteur nom="rporto" />
+		<traducteur nom="Ricardo Porto" />
 	</langue>
 	<langue code="rn" />
 	<langue code="ro">
@@ -90,7 +88,7 @@
 	</langue>
 	<langue code="roa" />
 	<langue code="ru">
-		<traducteur nom="papa_troll" />
+		<traducteur nom="Serge Markitanenko" />
 	</langue>
 	<langue code="sc" />
 	<langue code="sh_cyrl" />
