@@ -492,7 +492,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Хотите ли Вы использовать поисковую систему, интегрированную в SPIP?
  (Её отключение ускоряет работу системы.)',
 'info_question_vignettes_referer_non' => 'Не показывать изображения главной страницы',
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Корень сайта',
 'info_recharger_page' => 'Пожалуйста перезагрузите эту страницу через несколько минут.',
 'info_recherche_auteur_a_affiner' => 'Слишком много результатов для "@cherche_auteur"; пожалуйста уточните запрос.',

@@ -477,7 +477,7 @@ Daubuns aubergaders n\'autorizan pas lo mandadís d\'e-mails dempuish los lors s
  impossibla.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'E desiratz d\'utilizar lo cercader integrat a SPIP? (lo desactivar qu\'accelèra lo foncionament deu sistèma.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Arradit deu sit',
 'info_recharger_page' => 'Volhatz tornar cargar aquera pagina dens un momenton.',
 'info_recherche_auteur_a_affiner' => 'Tròp de resultats entà "@cherche_auteur@"; volhatz afinar la cèrca.',

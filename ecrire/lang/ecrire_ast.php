@@ -499,7 +499,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_question_utilisation_moteur_recherche' => '¿Quies utilizar el motor de restolar integráu con SPIP?
  (desactivalu acelera el funcionamientu del sistema.)',
 'info_question_vignettes_referer_non' => 'Nun amosar les captures de los sitios d\'orixe de les visites',
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Raiz del sitiu',
 'info_recharger_page' => 'Ties que recargar esta páxina nunos instantes.',
 'info_recherche_auteur_a_affiner' => 'Hai resultaos asgaya pa "@cherche_auteur@", apurre más criterios a la gueta.',

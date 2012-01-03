@@ -494,7 +494,7 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
 'info_question_utilisation_moteur_recherche' => 'Eske w vle itilize motè pou chèche de SPIP ?
  (enlèv ali ke rann sistèm pli rapid ek soup.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Rasin sit-la',
 'info_recharger_page' => 'Tapri rochaj paj la nan kèk minit.',
 'info_recherche_auteur_a_affiner' => 'Genyen trò rezilta pou "@cherche_auteur@" ; tanpri souple fè yon nouvo chèche pli prési.',

@@ -494,7 +494,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_question_utilisation_moteur_recherche' => 'Chcete používat vyhledávač, který je součástí systému SPIP?
  (je-li vyhledávač vypnut, zrychluje to chod systému.)',
 'info_question_vignettes_referer_non' => 'Do not show the screenshots of the originating sites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Kořenový adresář webu',
 'info_recharger_page' => 'Za okamžik zkuste stránku znovu nahrát.',
 'info_recherche_auteur_a_affiner' => 'Pro "@cherche_auteur@" bylo nalezeno příliš mnoho výsledků. Upřesněte vyhledávací kritéria.',

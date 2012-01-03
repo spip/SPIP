@@ -481,7 +481,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Ĉu vi deziras uzi la SPIP-internan serĉilon ?
  (malaktivigi ĝin rapidigas la funkciadon de la sistemo.)',
 'info_question_vignettes_referer_non' => 'Ne vidigi de kiuj retejoj venas vizitantoj',
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Radiko de la retejo',
 'info_recharger_page' => 'Bonvolu refreŝigi tiun ĉi paĝon post momento.',
 'info_recherche_auteur_a_affiner' => 'Tro da rezultoj por "@cherche_auteur@"; bonvolu fajnigi la serĉokriteriojn.',

@@ -512,7 +512,7 @@ sak i dégrèn lanvwa bann limèl sir zot bann servèr : dann kala, linskrisyon
 'info_question_utilisation_moteur_recherche' => 'Indik si ou vé ansèrv lo rodèr-dodan SPIP
 (si ou défalk ali, lo sistèm lé pli rapid.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Rasin lo sitwèb',
 'info_recharger_page' => 'Mersi rosarz lapazwèb-la disi inn ti moman.',
 'info_recherche_auteur_a_affiner' => 'Néna trod bann rézilta pou "@cherche_auteur@" ; mersi kadr myé kosa i rod.',

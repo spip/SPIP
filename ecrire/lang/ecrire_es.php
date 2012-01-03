@@ -465,7 +465,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_question_inscription_nouveaux_redacteurs' => '¿Se aceptan inscripciones de nuevas redactoras y redactores a partir del sitio público? Si se acepta, las personas que visitan el sitio podrán inscribirse desde un formulario automatizado y accederán entonces al espacio privado para proponer sus propios artículos. <blockquote><i>Durante la fase de inscripción, reciben un correo electrónico automático que les indica sus códigos de acceso al sitio privado. Ciertos proveedores de hospedaje desactivan el envío de correos electrónicos desde sus servidores: en tal caso, se hace imposible la inscripción automática. ', # MODIF
 'info_question_utilisation_moteur_recherche' => '¿Deseas utilizar el motor de búsqueda integrado de SPIP? (desactivarlo agiliza el sitio)',
 'info_question_vignettes_referer_non' => 'No mostrar las capturas de los sitios de origen de las visitas',
-'info_qui_edite' => '@nom_auteur_modif@ trabajó sobre este contenido hace @date_diff@ minutos',
+'info_qui_edite' => '@nom_auteur_modif@ trabajó sobre este contenido hace @date_diff@ minutos', # MODIF
 'info_racine_site' => 'Raíz del sitio',
 'info_recharger_page' => 'Por favor recargue esta página dentro de un momento',
 'info_recherche_auteur_a_affiner' => 'Hay demasiados resultados para "@cherche_auteur@", por favor restrinja los criterios.',

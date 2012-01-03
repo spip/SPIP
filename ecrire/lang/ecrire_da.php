@@ -478,7 +478,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Ønsker du at anvende den søgefunktion, der findes i SPIP?
 	(At fravælge søgefunktionen gør webstedet hurtigere.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 'info_racine_site' => 'Top',
 'info_recharger_page' => 'Vær venlig at genindlæse denne side om et øjeblik.',
 'info_recherche_auteur_a_affiner' => 'For mange resultater fundet til "@cherche_auteur@"; vær venlig at afgrænse søgningen mere.',

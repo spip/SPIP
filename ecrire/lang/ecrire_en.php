@@ -28,18 +28,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Warning! This section contains @contient_breves@ news item@scb@: if you move it, please check this box to confirm.',
 'avis_destinataire_obligatoire' => 'To send a message, you must select a recipient.',
 'avis_erreur_connexion_mysql' => 'SQL connection error',
-'avis_erreur_version_archive' => '<b>Warning! The file @archive@ was created by
-    a version of SPIP other than the one you have
-    installed.</b> You are likely to encounter
-    serious problems, including destroying your database,
-    or serious site malfunctions. Do not
-    submit this import request.<p>For more
-    information, please see <a href="@spipnet@">
-    the SPIP documentation</a>.</p>',
+'avis_erreur_version_archive' => '<b>Warning! The file @archive@ was created by a version of SPIP other than the one you have installed.</b>
+You are likely to encounter serious problems, including destroying your database, or serious site malfunctions.
+Do not submit this import request.<p>For more information, please see <a href="@spipnet@">the SPIP documentation</a>.</p>',
 'avis_espace_interdit' => '<b>Forbidden area</b><div>SPIP is already installed.</div>',
 'avis_lecture_noms_bases_1' => 'The installer could not read the names of any databases already installed.',
-'avis_lecture_noms_bases_2' => 'Either no database is available, or the option for listing databases was disabled
-  for security reasons (which is the case with a lot of hosting services).',
+'avis_lecture_noms_bases_2' => 'Either no database is available, or the option for listing databases was disabled for security reasons (which is the case with a lot of hosting services).',
 'avis_lecture_noms_bases_3' => 'In the second case, it is possible that a database named after your login would be usable:',
 'avis_non_acces_message' => 'You do not have access to this message.',
 'avis_non_acces_page' => 'You do not have access to this page.',
@@ -138,7 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_informations_connexion_ldap' => 'Please fill this form with the LDAP connection information provided by your system or network administrator.',
 'entree_infos_perso' => 'Who are you?',
 'entree_infos_perso_2' => 'Who is the author?',
-'entree_interieur_rubrique' => 'In section:',
+'entree_interieur_rubrique' => 'In the section:',
 'entree_liens_sites' => '<b>Hyperlink</b> (reference, site to visit etc.)',
 'entree_login' => 'Your login',
 'entree_login_connexion_1' => 'Connection login',
@@ -152,7 +146,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_nom_pseudo_1' => '(Your name or alias)',
 'entree_nom_pseudo_2' => 'Name or alias',
 'entree_nom_site' => 'Name of your site',
-'entree_nom_site_2' => 'Author\'s site name',
+'entree_nom_site_2' => 'Name of the author\'s site',
 'entree_nouveau_passe' => 'New password',
 'entree_passe_ldap' => 'Password',
 'entree_port_annuaire' => 'Port number of the directory',
@@ -162,7 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_url_2' => 'Site URL',
 'erreur_connect_deja_existant' => 'There is already a server with that name ',
 'erreur_nom_connect_incorrect' => 'Server name not allowed',
-'erreur_plugin_desinstalation_echouee' => 'The plugin uninstallation failed. However, you may deactivate it.',
+'erreur_plugin_desinstalation_echouee' => 'Uninstallation of the plugin failed. However, you may deactivate it.',
 'erreur_plugin_fichier_absent' => 'File missing',
 'erreur_plugin_fichier_def_absent' => 'Definition file missing',
 'erreur_plugin_nom_fonction_interdit' => 'Prohibited function name',
@@ -494,7 +488,7 @@ via FTP.</p>',
 'info_question_utilisation_moteur_recherche' => 'Do you wish to use SPIP\'s integrated search engine?
  (Disabling it speeds up system performance.)',
 'info_question_vignettes_referer_non' => 'Do not show screenshots of referring sites',
-'info_qui_edite' => '@nom_auteur_modif@ worked on the contents @date_diff@ minutes ago',
+'info_qui_edite' => '@nom_auteur_modif@ worked on the contents @date_diff@ minutes ago', # MODIF
 'info_racine_site' => 'Site root',
 'info_recharger_page' => 'Please wait a few moments, then reload this page.',
 'info_recherche_auteur_a_affiner' => 'Too many results for "@cherche_auteur@"; please refine your search.',
