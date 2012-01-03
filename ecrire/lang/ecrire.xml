@@ -2,10 +2,8 @@
 	<langue code="ar">
 		<traducteur nom="kandalaft" />
 		<traducteur nom="George" />
-		<traducteur nom="kandalaft" />
-		<traducteur nom=" &lt;multi&gt;[ar]جورج قندلف" />
-		<traducteur nom="kandalaft" />
-		<traducteur nom=" &lt;multi&gt;[fr]George[ar]" />
+		<traducteur nom="&lt;multi&gt;[ar]جورج قندلف" />
+		<traducteur nom="&lt;multi&gt;[fr]George[ar]" />
 	</langue>
 	<langue code="ast">
 		<traducteur nom="xuacu" />
