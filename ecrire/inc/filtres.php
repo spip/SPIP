@@ -2284,36 +2284,60 @@ function filtre_puce_statut_dist($statut,$objet,$id_objet=0,$id_parent=0){
  */
 function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 	if (is_string($c)
-	AND !is_null(@unserialize($c)))
+	AND !is_null(@unserialize($c))) {
 		$c = unserialize($c);
+	}
 
 	// supprimer les parametres debut_x
 	// pour que la pagination ajax ne soit pas plantee
 	// si on charge la page &debut_x=1 : car alors en cliquant sur l'item 0,
 	// le debut_x=0 n'existe pas, et on resterait sur 1
-	foreach ($c as $k => $v)
-		if (strpos($k,'debut_') === 0)
+	foreach ($c as $k => $v) {
+		if (strpos($k,'debut_') === 0) {
 			unset($c[$k]);
-
+		}
+	}
+	
 	if (!function_exists('calculer_cle_action'))
 		include_spip("inc/securiser_action");
 	$cle = calculer_cle_action($form.(is_array($c)?serialize($c):$c));
 	$c = serialize(array($c,$cle));
 
-	if ((defined('_CACHE_CONTEXTES_AJAX') AND _CACHE_CONTEXTES_AJAX)
-		AND $dir = sous_repertoire(_DIR_CACHE, 'contextes')) {
+	// on ne stocke pas les contextes dans des fichiers caches
+	// par defaut, sauf si cette configuration a ete forcee
+	// OU que la longueur de l''argument generee est plus long
+	// que ce que telere Suhosin.
+	$cache_contextes_ajax = (defined('_CACHE_CONTEXTES_AJAX') AND _CACHE_CONTEXTES_AJAX);
+
+	if (!$cache_contextes_ajax) {
+		$env = $c;
+		if (function_exists('gzdeflate') && function_exists('gzinflate')) {
+			$env = gzdeflate($env);
+		}
+		$env = _xor($env);
+		$env = base64_encode($env);
+		// tester Suhosin et la valeur maximale des variables en GET...
+		if ($max_len = @ini_get('suhosin.get.max_value_length')
+		and $max_len < ($len = strlen($env))) {
+			$cache_contextes_ajax = true;
+			spip_log("Contextes AJAX forces en fichiers !"
+				. " Cela arrive lorsque la valeur du contexte"
+				. " depasse la longueur maximale autorisee par Suhosin"
+				. " ($max_len) dans 'suhosin.get.max_value_length'. Ici : $len."
+				. " Vous devriez modifier les parametres de Suhosin"
+				. " pour accepter au moins 1024 caracteres.", _LOG_AVERTISSEMENT);
+		}
+	}
+	
+	if ($cache_contextes_ajax) {
+		$dir = sous_repertoire(_DIR_CACHE, 'contextes');
 		// stocker les contextes sur disque et ne passer qu'un hash dans l'url
 		$md5 = md5($c);
 		ecrire_fichier("$dir/c$md5",$c);
-		$c = $md5;
-	} else {
-		if (function_exists('gzdeflate') && function_exists('gzinflate'))
-			$c = gzdeflate($c);
-		$c = _xor($c);
-		$c = base64_encode($c);
-	}
+		$env = $md5;
+	} 
 	
-	if ($emboite === NULL) return $c;
+	if ($emboite === NULL) return $env;
 	if (!trim($emboite)) return "";
 	// toujours encoder l'url source dans le bloc ajax
 	$r = self();
@@ -2323,7 +2347,7 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 		$class .= ' ajax-id-'.$ajaxid;
 	}
 	$compl = "aria-live='polite' aria-atomic='true' ";
-	return "<div class='$class' ".$compl."data-ajax-env='$c'$r>\n$emboite</div><!--ajaxbloc-->\n";
+	return "<div class='$class' ".$compl."data-ajax-env='$env'$r>\n$emboite</div><!--ajaxbloc-->\n";
 }
 
 // la procedure inverse de encoder_contexte_ajax()
