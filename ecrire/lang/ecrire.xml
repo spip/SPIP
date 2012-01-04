@@ -1,7 +1,6 @@
 <traduction module="ecrire" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
 	<langue code="ar">
 		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
-		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
 	<langue code="ast">
@@ -28,7 +27,6 @@
 		<traducteur nom="Fil" lien="http://trad.spip.org/auteur/fil" />
 		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
