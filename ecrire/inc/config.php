@@ -205,10 +205,6 @@ function ecrire_config($cfg,$store) {
 			if (!$sous AND !count($st))
 				$st = null;
 		}
-		// si ce casier est un tableau et qu'on veut stocker un tableau,
-		// faire un merge
-		elseif (is_array($store) AND is_array($sc) AND count($sc))
-			$sc = array_merge($sc,$store);
 		// dans tous les autres cas, on ecrase
 		else
 			$sc = $store;
