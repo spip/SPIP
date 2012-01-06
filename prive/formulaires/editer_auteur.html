@@ -42,7 +42,7 @@
 				statut
 		]
 		[(#AUTORISER{modifier,auteur,#ID_AUTEUR,'',#ARRAY{statut,'?'}}|oui)
-			<li class='editer_statut'>
+		<li class='editer editer_statut'>
 			#INCLURE{fond=formulaires/inc-instituer_auteur,statut=#ENV**{statut,#EVAL{_STATUT_AUTEUR_CREATION}},id_auteur,webmestre}
 		</li>]
 		[(#REM)
