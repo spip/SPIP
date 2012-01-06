@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Acuèlh dau sit',
-'article' => 'Article', # NEW
+'article' => 'Articles',
 'articles' => 'Articles',
 'articles_auteur' => 'Articles d\'aquel autor',
 'articles_populaires' => 'Lu articles mai populars',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Li a minga de sit à-n-aquela adreça ',
 'aucune_breve' => 'Li a minga de brèva à-n-aquela adreça ',
 'aucune_rubrique' => 'Li a minga de rubrica à-n-aquela adreça ',
-'auteur' => 'Auteur', # NEW
+'auteur' => 'Autor',
 'autres' => 'Autres',
 'autres_breves' => 'Autri brèvas',
 'autres_groupes_mots_clefs' => 'Autres grops de mòts claus',
@@ -65,9 +65,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Dins la mema rubrica',
 'memes_auteurs' => 'Dei memes autors',
 'message' => 'Messatge',
-'messages_forum' => 'Messatges de fòro', # MODIF
+'messages_forum' => 'Messatges',
 'messages_recents' => 'Lu messatges de fòros mai recents',
-'mots_clef' => 'Mot-clé', # NEW
+'mots_clef' => 'Mòt-clau',
 'mots_clefs' => 'Mòts claus',
 'mots_clefs_meme_groupe' => 'Mòts claus dins lo meme grop',
 
@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Vequí la letra d\'informacion dau sit',
-'texte_lettre_information_2' => 'Aquela letra recensa lu articles e brèvas publicats despí', # MODIF
+'texte_lettre_information_2' => 'Aquela letra recensa li noveutas publicadi despí',
 
 // V
 'ver_imprimer' => 'Version d\'estampar',
