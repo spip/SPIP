@@ -64,10 +64,9 @@ function admin_plug_args($quoi, $erreur, $format)
 
 	echo debut_droite('plugin', true);
 	echo gros_titre(_T('icone_admin_plugin'),'',false);
-//	echo barre_onglets("plugins", $quoi=='actifs'?"plugins_actifs":"admin_plugin");
 
 	// Barre d'onglets de premier niveau
-	echo barre_onglets("plugins", "plugins_actifs",'onglets_simple');
+	echo barre_onglets("plugins", "plugins_actifs");
 	// Barre d'onglets de second niveau
 	$onglet2 = $quoi=='actifs' ? 'plugins_actifs' : 'admin_plugin';
 	echo debut_onglet('onglets_simple second');
