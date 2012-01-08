@@ -78,7 +78,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	// passer par objet_type pour avoir les alias
 	// et supprimer les _
-	$type = str_replace('_','',  $faire=='menu'?$type:objet_type($type,false));
+	$type = str_replace('_','',  strncmp($type,"_",1)==0?$type:objet_type($type,false));
 
 	// Si une exception a ete decretee plus haut dans le code, l'appliquer
 	if (isset($GLOBALS['autoriser_exception'][$faire][$type][$id])
