@@ -86,8 +86,12 @@ function analyser_dtd($loc, $avail, &$dtc)
 	// (utile aussi pour le resultat de la compil)
 	$file = sous_repertoire(_DIR_CACHE_XML);
 	// si DTD locale, ignorer ce repertoire pour le moment
-	if ($avail == 'SYSTEM')
-	  $file = find_in_path($loc);
+	if ($avail == 'SYSTEM'){
+		$file = $loc;
+		if (_DIR_RACINE AND strncmp($file,_DIR_RACINE,strlen(_DIR_RACINE))==0)
+			$file = substr($file,strlen(_DIR_RACINE));
+	  $file = find_in_path($file);
+	}
 	else {
 	  $file .= preg_replace('/[^\w.]/','_', $loc);
 	}
