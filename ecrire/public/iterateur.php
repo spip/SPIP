@@ -217,7 +217,7 @@ class IterDecorator extends FilterIterator {
 					unset($where[$k]);
 					$menage = true;
 				}
-				// traiter {cle IN a,b} ou {valeur !IN a,b}				
+				// traiter {cle IN a,b} ou {valeur !IN a,b}
 				// prendre en compte le cas particulier de sous-requetes
 				// produites par sql_in quand plus de 255 valeurs passees a IN
 				if (preg_match_all(',\s+IN\s+(\(.*\)),', $op, $s_req)) {
@@ -242,7 +242,7 @@ class IterDecorator extends FilterIterator {
 				if (count($v) == 1) {
 					continue;
 				}
-				if (count($v) == 2) {
+				if (count($v) == 2 and is_array($v[1])) {
 					$this->ajouter_filtre($v[1][1], $v[1][0], $v[1][2], 'NOT');
 				}
 				if (count($v) == 3) {
