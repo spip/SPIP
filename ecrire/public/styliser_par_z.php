@@ -45,24 +45,25 @@ function public_styliser_par_z_dist($flux){
 			$apl_constant = '_Z_AJAX_PARALLEL_LOAD';
 			$page = _SPIP_PAGE;
 			$echaffauder = charger_fonction('echaffauder','public',true);
-		  define('_ZCORE_EXCLURE_PATH','prive|'.rtrim(_DIR_PLUGIN_DIST,'/'));
+			define('_ZCORE_EXCLURE_PATH','prive|'.rtrim(_DIR_PLUGIN_DIST,'/'));
 		}
 	  $prepend = (defined('_Z_PREPEND_PATH')?_Z_PREPEND_PATH:"");
 	}
 	$z_contenu = reset($z_blocs); // contenu par defaut
 
 	$fond = $flux['args']['fond'];
+
 	if ($prepend OR strncmp($fond,$prefix_path,$prefix_length)==0) {
 		$fond = substr($fond, $prefix_length);
 		$squelette = $flux['data'];
 		$ext = $flux['args']['ext'];
-
 		// Ajax Parallel loading : ne pas calculer le bloc, mais renvoyer un js qui le loadera en ajax
 		if (defined('_Z_AJAX_PARALLEL_LOAD_OK')
 			AND $dir = explode('/',$fond)
 			AND count($dir)==2 // pas un sous repertoire
 			AND $dir = reset($dir)
 			AND in_array($dir,$z_blocs) // verifier deja qu'on est dans un bloc Z
+			AND defined($apl_constant)
 			AND in_array($dir,explode(',',constant($apl_constant))) // et dans un demande en APL
 			AND $pipe = z_trouver_bloc($prefix_path.$prepend,$dir,'z_apl',$ext) // et qui contient le squelette APL
 			){
