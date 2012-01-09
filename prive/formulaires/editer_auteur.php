@@ -63,6 +63,7 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 
 	if ($email = _request('email')){
 		include_spip('inc/filtres');
+		include_spip('inc/autoriser');
 		// un redacteur qui modifie son email n'a pas le droit de le vider si il y en avait un
 		if (!autoriser('modifier','auteur',$id_auteur,null,array('email'=>'?'))
 			AND $GLOBALS['visiteur_session']['id_auteur']==$id_auteur
