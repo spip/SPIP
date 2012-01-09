@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Cercar',
 'bouton_choisir' => 'Chausir',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Telecargar', # MODIF
+'bouton_download' => 'Descargar',
 'bouton_enregistrer' => 'Registrar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar la messatgeria interna',
 'bouton_radio_envoi_annonces' => 'Mandar lu anoncis editoriaus',
@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Mandar pas la tièra dei novetats',
 'bouton_recharger_page' => 'tornar cargar aquela pàgina',
 'bouton_telecharger' => 'Descargar',
-'bouton_upload' => 'Descargar', # MODIF
+'bouton_upload' => 'Telecargar',
 'bouton_valider' => 'Validar',
 
 // C
@@ -278,7 +278,7 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'form_prop_message_envoye' => 'Messatge mandat',
 'form_prop_non_enregistre' => 'La voastra proposicion es pas estada registrada.',
 'form_prop_sujet' => 'Subjècte',
-'form_prop_url_site' => 'Adreça (URL) dau sit', # MODIF
+'form_prop_url_site' => 'Adreça URL dau sit',
 'forum_non_inscrit' => 'Siètz pas inscrich(a), ò l\'adreça ò lo mòt de santa Clara son erronèus.',
 'forum_par_auteur' => 'da @auteur@',
 'forum_titre_erreur' => 'Error...',
@@ -325,7 +325,7 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'icone_tous_articles' => 'Toi lu voastres articles',
 'icone_tous_auteur' => 'Toi lu autors',
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-'icone_visiter_site' => 'Visitar', # MODIF
+'icone_visiter_site' => 'Veire lo site public',
 'icone_voir_en_ligne' => 'Veire en linha',
 'img_indisponible' => 'imatge indisponible',
 'impossible' => 'impossible',
@@ -348,7 +348,7 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'info_articles_a_valider' => 'Lu articles de validar',
 'info_articles_nb' => '@nb@ articles', # NEW
 'info_articles_proposes' => 'Articles prepauats',
-'info_articles_un' => '1 article', # NEW
+'info_articles_un' => '1 article',
 'info_auteurs_nombre' => 'autor(s)',
 'info_authentification_ftp' => 'autentificacion (per FTP).',
 'info_breves_2' => 'brèvas',
@@ -357,9 +357,9 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'info_connexion_refusee' => 'Connexion refusada',
 'info_contact_developpeur' => 'Vorgatz contactar un desvolopaire.',
 'info_contenance' => 'Aqueu sit compren :',
-'info_contribution' => 'contribucions de fòro', # MODIF
+'info_contribution' => 'contribucions',
 'info_copyright' => 'es un logiciau liure distribuit @lien_gpl@.',
-'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.', # MODIF
+'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href="@spipnet@">@spipnet_affiche@</a>.',
 'info_copyright_gpl' => 'sota licença GPL',
 'info_cours_edition' => 'Lu voastres articles en cors de redacion',
 'info_creer_repertoire' => 'Vorgatz crear un fichier ò un repertòri nomat',
@@ -475,7 +475,7 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'info_vignette_personnalisee' => 'Vinheta personalisada',
 'info_visite' => 'visita:',
 'info_vos_rendez_vous' => 'Lu voastres rendètz-vos à venir',
-'infos_vos_pense_bete' => 'Li voastri nòtas de renembrança ', # MODIF
+'infos_vos_pense_bete' => 'Li voastri nòtas de renembrança ',
 
 // L
 'label_ajout_id_rapide' => 'Ajout rapide', # NEW
@@ -484,7 +484,7 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'lien_afficher_texte_icones' => 'Far paréisser li icònas e lo tèxt',
 'lien_afficher_texte_seul' => 'Far paréisser lo tèxt solet',
 'lien_liberer' => 'liberar',
-'lien_liberer_tous' => 'liberatz aquelu articles', # MODIF
+'lien_liberer_tous' => 'Liberar tot',
 'lien_nouvea_pense_bete' => 'NOVÈLA NÒTA DE RENEMBRANÇA ',
 'lien_nouveau_message' => 'MESSATGE NOVÈU',
 'lien_nouvelle_annonce' => 'ANONCI NOVÈU',
@@ -509,7 +509,7 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'login_espace_prive' => 'espaci privat',
 'login_identifiant_inconnu' => 'L\'identificant « @login@ » es desconoissut.',
 'login_login' => 'Login :',
-'login_login2' => 'Login (identificant de connexion au sit) :', # MODIF
+'login_login2' => 'Login ò adreça email:',
 'login_login_pass_incorrect' => '(Login ò mòt de santa Clara incorret.)',
 'login_motpasseoublie' => 'mòt de Santa Clara oblidat ?',
 'login_non_securise' => 'Mèfi, qu\'aqueu formulari es pas securisat.
@@ -662,7 +662,7 @@ e vos tornar connectar au sit.
 'titre_statistiques' => 'Estatisticas dau sit',
 'titre_titre_document' => 'Titre dau document :',
 'todo' => 'De venir',
-'trad_reference' => '(article de referença)', # MODIF
+'trad_reference' => '(referença dei reviradas)',
 
 // Z
 'zbug_balise_b_aval' => ' : balisa B en aval',

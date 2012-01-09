@@ -612,7 +612,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'suivant' => 'التالي',
 
 // T
-'taille_go' => '@taille@ Go', # NEW
+'taille_go' => '@taille@ غيغابايت',
 'taille_ko' => '@taille@ كيلوبايت',
 'taille_mo' => '@taille@ ميغابايت',
 'taille_octets' => '@taille@ بايت',
