@@ -294,7 +294,7 @@ französischen SPIP-Dokumentation</a>.',
 'info_classement_2' => 'von @liste@',
 'info_code_acces' => 'Vergessen Sie ihre Zugangsdaten nicht!',
 'info_compatibilite_html' => 'Zu respektierende HTML Norm',
-'info_compresseur_gzip' => '<b>N.B.:</b> Wir empfehlen zu testen, ob der Provider bereits PHP-Skripte komprimiert. Dazu können Sie den Dienst @testgzip@ nutzen.', # MODIF
+'info_compresseur_gzip' => 'Wir empfehlen vorab zu testen, ob der Provider bereits PHP-Skripte komprimiert. Dazu können Sie z.B. den Dienst @testgzip@ nutzen.', # Ma primière traduction avec trad.spip.org - mercin kent1 ! MODIF
 'info_compresseur_texte' => 'Falls Ihr Server HTML Seiten nicht automatisch für die Übertragung zum Websurfer komprimiert, können Sie hier versuchen, die Kompression zu erzeingen und so die Datenmenge der übertragenen Seiten zu reduzieren. <b>Achtung</b> : Diese Einstellung kann manche Server merklich verlangsamen.',
 'info_config_suivi' => 'Wenn es sich bei dieser Adresse um eine Mailing-Liste handelt, können Sie unten die Adresse angeben, unter der sich Teilnehmer der Website anmelden können. Es kann sich um den URL einer Webseite handeln (die ein Anmeldeformular enthält) oder um eine E-Mail Adresse mit angehängtem Parameter (z.B. <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Sie können die Mailing-Liste dieser Website abonnieren. Sie werden dann per E-Mail über neu zur Veröffentlichung vorgeschlagene Artikel informiert.',
