@@ -172,7 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_version_manquant' => 'Versie van de ontbrekende plugin',
 
 // H
-'htaccess_a_simuler' => 'Waarschuwing: De configuratie van de HTTP-server negeert @htaccess@ bestanden . Te zorgen voor goede beveiliging, moet u deze configuratie te veranderen op dit, of dat de constanten @constantes@ (definieerbaar in het bestand mes_options.php) hebben waarde als directories buiten @document_root@. ', # MODIF
+'htaccess_a_simuler' => 'Waarschuwing: De configuratie van de HTTP-server negeert @htaccess@ bestanden . Te zorgen voor goede beveiliging, moet u deze configuratie te veranderen op dit, of dat de constanten @constantes@ (definieerbaar in het bestand mes_options.php) hebben waarde als directories buiten @document_root@. ', # Je ne vois pas la modif ! La trad reste valable.
 'htaccess_inoperant' => 'htaccess niet werkt',
 
 // I
@@ -373,7 +373,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_historique_texte' => 'Met de opvolging van de revisies is het mogelijk de geschiedenis van alle wijzigingen aan een artikel bij te houden, en de verschillende tussen opeenvolgende versies weer te geven.',
 'info_identification_publique' => 'Je publieke identiteit...',
 'info_image_process' => 'Kies de beste methode om een miniatuurafbeelding te maken door op de bijhorende afbeelding te klikken.',
-'info_image_process2' => '<b>N.B.</b> <i>Wanneer geen enkel beeld wordt getoond, betekent dit dat de server van je website niet is ingesteld om deze tools te gebruiken. Als je van deze functies gebruik wil maken, dien je de technische verantwoordelijke van de server te contacteren en te vragen naar «GD» of «Imagick» extensies.</i>', # MODIF
+'info_image_process2' => 'Wanneer geen enkel beeld wordt getoond, betekent dit dat de server van je website niet is ingesteld om deze tools te gebruiken. Als je van deze functies gebruik wil maken, dien je de technische verantwoordelijke van de server te contacteren en te vragen naar «GD» of «Imagick» extensies.',
 'info_images_auto' => 'Beelden automatisch berekend',
 'info_informations_personnelles' => 'Persoonlijke gegevnes',
 'info_inscription_automatique' => 'Automatische inschrijving van nieuwe redacteurs',
@@ -486,12 +486,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  de publieke site? Indien wel, dan kunnen bezoekers
  zich via een geautomatiseerd formulier inschrijven en
  toegang krijgen tot de privé-ruimte om zelf artikels
- voor te stellen.<blockquote><i>Bij inschrijving zal een
+ voor te stellen. <div class="notice">Bij inschrijving zal een
  gebruiker een automatische e-mail ontvangen met daarin
  de toeganscode voor de site. Sommige hostingproviders
  blokkeren echter het versturen van e-mail vanaf hun
  servers : in dat geval is een automatische inschrijving
- niet mogelijk.</i></blockquote>', # MODIF
+ niet mogelijk.</div>',
 'info_question_utilisation_moteur_recherche' => 'Wil je gebruik maken van de geintegreerde zoekmachine van SPIP ?
  (niet-activeren hiervan versnelt de werking van het systeem.)',
 'info_question_vignettes_referer_non' => 'Niet de vangsten van de sites van oorsprong van de bezoeken te kennen geven',
@@ -889,7 +889,7 @@ Als u geen nut ervan hebt, kunt u deze keuze
 'texte_non_compresse' => '<i>niet gecomprimeerd</i> (de server ondersteunt deze functionaliteit niet)',
 'texte_nouveau_message' => 'Nieuw bericht',
 'texte_nouvelle_version_spip_1' => 'Je hebt een nieuwe versie van SPIP geïnstalleerd.',
-'texte_nouvelle_version_spip_2' => 'Deze nieuwe SPIP-versie vereist een  grondiger update dan gewoonlijk. Als je webmaster bent van deze site, verwijder dan het bestand @connect@ en herneem de installatie om de verbindingsgegevens met de databank te vernieuwen.<p> (NB. : als je je verbindingsgegevens niet meer kent, kan je best eerst een blik werpen op het bestand @connect@ alvorens het te verwijderen...)</p>', # MODIF
+'texte_nouvelle_version_spip_2' => 'Deze nieuwe SPIP-versie vereist een  grondiger update dan gewoonlijk. Als je webmaster bent van deze site, verwijder dan het bestand @connect@ en herneem de installatie om de verbindingsgegevens met de databank te vernieuwen.<p> (NB. : als je je verbindingsgegevens niet meer kent, kan je best eerst een blik werpen op het bestand @connect@ alvorens het te verwijderen...)</p>', # Pas de modif trouvée, la trad reste valable.
 'texte_operation_echec' => 'Ga terug naar de vorige pagina, selecteer een andere gegevensbank of maak een nieuwe aan. Kijk nog eens alle gegevens na die je van je provider hebt ontvangen.',
 'texte_plus_trois_car' => 'meer dan 3 karakters',
 'texte_plusieurs_articles' => 'Meerdere auteurs gevonden voor "@cherche_auteur@":',
