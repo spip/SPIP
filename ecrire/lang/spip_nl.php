@@ -613,7 +613,7 @@ opnieuw verbinding maken met de site
 'suivant' => 'volgende',
 
 // T
-'taille_go' => '@taille@ Go', # NEW
+'taille_go' => '@taille@ Go',
 'taille_ko' => '@taille@ kB',
 'taille_mo' => '@taille@ MB',
 'taille_octets' => '@taille@ bytes',
