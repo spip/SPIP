@@ -65,6 +65,7 @@ function formulaires_editer_mot_verifier_dist($id_mot='new', $id_groupe=0, $reto
 			$erreurs['titre'] =
 						_T('avis_doublon_mot_cle')
 						." <input type='hidden' name='confirm_titre_mot' value='1' />";
+			set_request('edit','oui');
 	}
 	return $erreurs;
 }
