@@ -95,6 +95,22 @@ function notifications_envoyer_mails($emails, $texte, $sujet="", $from = "", $he
 }
 
 /**
+ * Notifier un evenement sur un objet
+ * recupere le fond designe dans $modele,
+ * prend la premiere ligne comme sujet
+ * et l'interprete pour envoyer l'email
+ *
+ * @param int $id_objet
+ * @param string $type_objet
+ * @param string $modele
+ */
+function email_notification_objet($id_objet, $type_objet, $modele) {
+	$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
+	$id_type = id_table_objet($type_objet);
+	return recuperer_fond($modele,array($id_type=>$id_objet,"id"=>$id_objet));
+}
+
+/**
  * Notifier un evenement sur un article
  * recupere le fond designe dans $modele,
  * prend la premiere ligne comme sujet
