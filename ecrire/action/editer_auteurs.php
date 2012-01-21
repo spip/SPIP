@@ -58,10 +58,7 @@ function action_editer_auteurs_dist() {
 			# renvoyer un formulaire de choix
 				redirige_par_entete("$redirect&cherche_auteur=$cherche&ids=" . join(',',$res)  . $ancre);
 
-		} else {
-			include_spip('inc/actions');
-			ajax_retour("action_editer_auteur: $arg faux");exit;
-		}
+		} else redirige_par_entete("$redirect&ids=-1");
 	} else spip_log("action_editer_auteur: $arg pas compris");
 }
 
