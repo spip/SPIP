@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'activer_plugin' => 'Aktiv plegin an',
-'affichage' => '<NEW>Afichaje',
+'affichage' => 'Afichaje', # NEW
 'aide_non_disponible' => 'Pati-a bourad la se pa disponib ankò andan lanng la.',
 'auteur' => 'Lotè :',
 'avis_acces_interdit' => 'Entèdiksyon riv isit .',
@@ -849,9 +849,11 @@ lenstalasyon SPIP pou w kreye yon lòt nouvo baz ak son promyé laksé komandè'
    otomatik.',
 'texte_creer_rubrique' => 'Avan w kapab ékri tout atik la,<br /> fòk w kreye yon ribrik dabò.',
 'texte_date_creation_article' => 'LADAT KRÉASYON LARTIK-LA :',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Ladat redaksyon davan :',
 'texte_date_publication_anterieure_nonaffichee' => 'Pa afiche yon dat redaksyon déyè.',
 'texte_date_publication_article' => 'LADAT PIBLIKASYON AN LIY :',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Dékrisyon pétisyon nan',
 'texte_descriptif_rapide' => 'Dekrisyon taptap',
 'texte_effacer_base' => 'Efase labazdoné SPIP',

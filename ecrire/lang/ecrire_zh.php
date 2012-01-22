@@ -306,7 +306,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_conflit_edition_votre_version' => 'Votre version :', # NEW
 'info_connexion_base' => '第二步: <b>试图连接到数据库</b>', # MODIF
 'info_connexion_base_donnee' => 'Connexion à votre base de données', # NEW
-'info_connexion_ldap_ok' => '<MODIF><b>你的 LDAP 连接成功.</b><p> 你可进行下一步操作.', # MODIF
+'info_connexion_ldap_ok' => '<b>你的 LDAP 连接成功.</b><p> 你可进行下一步操作.', # MODIF
 'info_connexion_mysql' => '第一步: <b>你的 SQL 连接</b>', # MODIF
 'info_connexion_ok' => '连接成功.',
 'info_contact' => '联系',
@@ -343,19 +343,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   确认的声明.',
 'info_fichiers_authent' => '认证文件 ".htpasswd"',
 'info_forums_abo_invites' => '您的网站包含要求注册的公共论坛；所以公共网站的访客将被要求注册。',
-'info_gauche_admin_effacer' => '<MODIF><b>只有管理员才有权访问该页.</b><p> 它提供访问不同的技术维护任务. 其中有些需要特殊认证，必须通过FTP访问站点.', # MODIF
+'info_gauche_admin_effacer' => '<b>只有管理员才有权访问该页.</b><p> 它提供访问不同的技术维护任务. 其中有些需要特殊认证，必须通过FTP访问站点.', # MODIF
 'info_gauche_admin_tech' => '<b>只有管理者才有权访问这页.</b><p> 它提供多种多种
 维护任务. 它们有一些需更高的认证
 (通过FTP访问站点).', # MODIF
 'info_gauche_admin_vider' => '<b>只有管理者才有权访问这页.</b><p> 它提供多种维护任务
 . 它们有一些需更高的认证
 (通过FTP访问站点).', # MODIF
-'info_gauche_auteurs' => '<MODIF>你将找到站点所有的作者.
- 每一个的状态用路标的颜色标识(作者 = 绿色; 管理员 = 黄色).',
+'info_gauche_auteurs' => '你将找到站点所有的作者.
+ 每一个的状态用路标的颜色标识(作者 = 绿色; 管理员 = 黄色).', # MODIF
 'info_gauche_auteurs_exterieurs' => '外部作者用蓝色图标标识, 不能访问站点; 通过垃圾箱删除作者.',
 'info_gauche_messagerie' => '消息允许你在作者中交换消息, 为保护备忘录(给个人用的) 或在主页私有区上显示声明(如果你是管理者).',
 'info_gauche_numero_auteur' => '作者号:',
-'info_gauche_statistiques_referers' => '<MODIF>页面显示 <i>引用</i>列表, 例如. 包含你站点的链接, 只有今天: 列表每24小时都要更新.',
+'info_gauche_statistiques_referers' => '页面显示 <i>引用</i>列表, 例如. 包含你站点的链接, 只有今天: 列表每24小时都要更新.', # MODIF
 'info_gauche_visiteurs_enregistres' => '在这儿你将找到在站点公共区
  注册的访问者(订阅论坛).',
 'info_generation_miniatures_images' => '产生像册',
@@ -497,7 +497,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_recharger_page' => '请重新载入该页.',
 'info_recherche_auteur_a_affiner' => '太多结果"@cherche_auteur@"; 请重定义搜索.',
 'info_recherche_auteur_ok' => '几个编辑者找到了 "@cherche_auteur@":',
-'info_recherche_auteur_zero' => '<MODIF><b> "@cherche_auteur@"没有结果.',
+'info_recherche_auteur_zero' => '<b> "@cherche_auteur@"没有结果.', # MODIF
 'info_recommencer' => '请再试.',
 'info_redacteur_1' => 'Rédacteur',
 'info_redacteur_2' => '有权访问私有区 (<i>推荐</i>)',
@@ -821,7 +821,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_article_virtuel' => '虚文章',
 'texte_article_virtuel_reference' => '<b>虚文章 :</b>在SPIP中引用文档, 但是重定向到其它的URL. 移去链接, 删除以下 URL.',
 'texte_aucun_resultat_auteur' => '"@cherche_auteur@"没有结果.',
-'texte_auteur_messagerie' => '<MODIF>站点能连续监控连接编辑列表, 它允许实时交换信息 (如果以上消息被禁, 连接编辑列表自身禁用). 你能决定不出现在列表中 (其他用户在列表中" 无法 "看到你）',
+'texte_auteur_messagerie' => '站点能连续监控连接编辑列表, 它允许实时交换信息 (如果以上消息被禁, 连接编辑列表自身禁用). 你能决定不出现在列表中 (其他用户在列表中" 无法 "看到你）', # MODIF
 'texte_auteur_messagerie_1' => '本站点开放注册会员的短消息及私人论坛的交流.您可以选择不参与讨论交流.',
 'texte_auteurs' => '作者',
 'texte_choix_base_1' => '选择你的数据库:',
@@ -847,9 +847,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
    它.',
 'texte_creer_rubrique' => '在写文章前,<br />您必须创建一个专栏.', # MODIF
 'texte_date_creation_article' => '创建文章日期:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => '更早的出版日期', # MODIF
 'texte_date_publication_anterieure_nonaffichee' => '隐藏更早的出版日期.', # MODIF
-'texte_date_publication_article' => '<MODIF>在线出版日期:',
+'texte_date_publication_article' => '在线出版日期:', # MODIF
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => '请求说明',
 'texte_descriptif_rapide' => '主要描述',
 'texte_effacer_base' => '删除SPIP 数据库',

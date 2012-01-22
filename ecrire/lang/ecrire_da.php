@@ -829,9 +829,11 @@ i en farve, der angiver deres status:',
 'texte_crash_base' => 'Hvis din database er brudt ned, kan du her forsøge en automatisk genopbygning.',
 'texte_creer_rubrique' => 'Før du kan skrive artikler,<br /> skal du oprette et afsnit.',
 'texte_date_creation_article' => 'DATO FOR OPRETTELSE AF ARTIKLEN:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'DATO FOR TIDLIGERE OFFENTLIGGØRELSE',
 'texte_date_publication_anterieure_nonaffichee' => 'Skjul dato for tidligere offentliggørelse.',
 'texte_date_publication_article' => 'DATO FOR ONLINE OFFENTLIGGØRELSE:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Beskrivelse af appellen',
 'texte_descriptif_rapide' => 'Kort beskrivelse',
 'texte_effacer_base' => 'Slet SPIP databasen',

@@ -846,9 +846,11 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 			secara otomatis.',
 'texte_creer_rubrique' => 'Sebelum dapat menulis artikel,<BR> anda harus membuat sebuah bagian.',
 'texte_date_creation_article' => 'TANGGAL PENULISAN ARTIKEL:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Tanggal publikasi awal:',
 'texte_date_publication_anterieure_nonaffichee' => 'Sembunyikan data publikasi awal.',
 'texte_date_publication_article' => 'TANGGAL PUBLIKASI ONLINE:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Deskripsi petisi',
 'texte_descriptif_rapide' => 'Deskripsi singkat',
 'texte_effacer_base' => 'Hapus database SPIP',

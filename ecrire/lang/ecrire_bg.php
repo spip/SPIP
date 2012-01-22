@@ -851,9 +851,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
    автоматично.',
 'texte_creer_rubrique' => 'Преди да пишете статии,<br /> трябва да създадете рубрика.',
 'texte_date_creation_article' => 'ДАТА НА СЪЗДАВАНЕ НА СТАТИЯТА:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Дата на предишно публикуване:',
 'texte_date_publication_anterieure_nonaffichee' => 'Скриване датата на предишно публикуване.',
 'texte_date_publication_article' => 'ДАТА НА ПУБЛИКУВАНЕ В ИНТЕРНЕТ:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Описание на молбите',
 'texte_descriptif_rapide' => 'Кратко описание',
 'texte_effacer_base' => 'Изтриване на базата данни СПИП',

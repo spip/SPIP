@@ -820,9 +820,11 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr�
 'texte_crash_base' => 'Si la bbdd ha deixat de funcionar correctament, es pot intentar fer una reparació automàtica.',
 'texte_creer_rubrique' => 'Abans de poder escriure els articles, <br /> heu de crear una secció.',
 'texte_date_creation_article' => 'DATA DE CREACIÓ DE L\'ARTICLE :',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Data de redacció anterior:',
 'texte_date_publication_anterieure_nonaffichee' => 'No publicar els articles de data de redacció anterior.',
 'texte_date_publication_article' => 'DATA DE PUBLICACIÓ EN LÍNIA :',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Descripció de la petició',
 'texte_descriptif_rapide' => 'Descripció ràpida',
 'texte_effacer_base' => 'Esborrar la base de dades SPIP',

@@ -821,9 +821,11 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_crash_base' => 'もしあなたのデータベースが壊れたら、あなたは自動的に復元に挑戦することが出来ます。',
 'texte_creer_rubrique' => '記事を書き始める前に、<br /> あなたはセクションを作らなければなりません。',
 'texte_date_creation_article' => '記事が作られた日時:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => '公開前の日付:',
 'texte_date_publication_anterieure_nonaffichee' => '公表前の日時を隠す。',
 'texte_date_publication_article' => 'オンラインに公表された日時:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => '署名内容の説明',
 'texte_descriptif_rapide' => '短い記述',
 'texte_effacer_base' => 'SPIPデータベースを削除',

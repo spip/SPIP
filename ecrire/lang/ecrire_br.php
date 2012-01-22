@@ -832,9 +832,11 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
 'texte_crash_base' => 'Ma\'z eo sac\'het ho tiaz titouroù e c\'hellit klask ratreañ en un doare emgefreek.',
 'texte_creer_rubrique' => 'A-raok gallout skrivañ pennadoù<br /> e rankit krouiñ ur rubrikenn.',
 'texte_date_creation_article' => 'DEIZIAD KROUIÑ AR PENNAD :',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'DEIZIAD EMBANN KENT :',
 'texte_date_publication_anterieure_nonaffichee' => 'Na ziskouez an deiziad embann kent.',
 'texte_date_publication_article' => 'DEIZIAD EMBANN ENLINENN :',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Deskrivadur ar sinadeg',
 'texte_descriptif_rapide' => 'Berr-ha-berr',
 'texte_effacer_base' => 'Diverkañ diaz titouroù SPIP',

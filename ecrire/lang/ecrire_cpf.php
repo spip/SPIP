@@ -865,9 +865,11 @@ Anserv lalist anba-la pou kadr byin sak lé disponib.',
  dégréné, éséy aranz ali otomatikman.',
 'texte_creer_rubrique' => 'Lé nésésèr ou kré innn rubrik avand ou<br /> pé ékri inn lartik. ',
 'texte_date_creation_article' => ' LADAT LAKRÉASYON LARTIK :',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Dat li té pibliyé avan :',
 'texte_date_publication_anterieure_nonaffichee' => 'Afis pa okinn dat pou in rédaksyon avan.',
 'texte_date_publication_article' => 'LADAT LAPIBLIKASYON AN LIYN :',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Dékri inn pé kosa ifo sinyé',
 'texte_descriptif_rapide' => 'Dékri vitman kosa i lé',
 'texte_effacer_base' => 'Dégrèn bazdodné SPIP',

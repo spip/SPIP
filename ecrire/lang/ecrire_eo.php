@@ -835,9 +835,11 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
    aŭtomatan riparon.',
 'texte_creer_rubrique' => 'Antaŭ ol povi skribi artikolojn,<br /> vi devas krei rubrikon.',
 'texte_date_creation_article' => 'KREO-DATO DE LA ARTIKOLO :',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'DATO DE ANTAŬA REDAKTO :',
 'texte_date_publication_anterieure_nonaffichee' => 'Ne afiŝi daton de antaŭa redakto.',
 'texte_date_publication_article' => 'DATO DE RETA PUBLIKIGO :',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Priskribo de petskribo',
 'texte_descriptif_rapide' => 'Konciza priskribo',
 'texte_effacer_base' => 'Forviŝi la SPIP-datenbazon',

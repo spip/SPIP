@@ -850,9 +850,11 @@ que alguns elementos dos artigos não são utilizados.
  automática.',
 'texte_creer_rubrique' => 'Antes de poder escrever artigos, <br /> deve criar uma rubrica.', # MODIF
 'texte_date_creation_article' => 'DATA DE CRIAÇÃO DO ARTIGO:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Data de redacção anterior :',
 'texte_date_publication_anterieure_nonaffichee' => 'Não exibir a data de redacção anterior',
 'texte_date_publication_article' => 'DATA DE PUBLICAÇÃO ONLINE:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Descrição do abaixo-assinado',
 'texte_descriptif_rapide' => 'Descrição rápida',
 'texte_effacer_base' => 'Apagar a base de dados SPIP',

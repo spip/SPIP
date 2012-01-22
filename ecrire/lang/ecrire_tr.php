@@ -841,9 +841,11 @@ yaratabilir. Bu da otomatik olarak bir galeri
               otomatik tamiri deneyebilirsiniz. ',
 'texte_creer_rubrique' => 'Makale yazabilmek için önce bir bölüm yaratmanız gerekmektedir.',
 'texte_date_creation_article' => 'MAKALENİN YAYIN TARİHİ :',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Bir önceki düzeltme tarihi :',
 'texte_date_publication_anterieure_nonaffichee' => 'Yayın tarihini görüntüleme',
 'texte_date_publication_article' => 'ÇEVRİMİÇİ YAYINLANMA TARİHİ:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Dilekçenin tanımı',
 'texte_descriptif_rapide' => 'Hızlı tanım',
 'texte_effacer_base' => 'SPIP veritabanını sil',

@@ -830,9 +830,11 @@ una color indica lor estat:',
  automatica.',
 'texte_creer_rubrique' => 'Abans de poder escriure d\'articles,<br /> devètz crear una rubrica.',
 'texte_date_creation_article' => 'DATA DE CREACION DE L\'ARTICLE:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Data de redaccion anteriora:',
 'texte_date_publication_anterieure_nonaffichee' => 'Afichar pas cap de data de redaccion anteriora.',
 'texte_date_publication_article' => 'DATA DE PUBLICACION EN LINHA :',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Descriptiu de la peticion',
 'texte_descriptif_rapide' => 'Descriptiu rapid',
 'texte_effacer_base' => 'Escafar la basa de donadas SPIP',

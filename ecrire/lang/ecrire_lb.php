@@ -810,9 +810,11 @@ Benotzt d\'Lëscht hei drënner fir unzegin wéi eng Elementer e kann benotzen.'
 'texte_crash_base' => 'Wann är Datebank ofgestiertz ass, da kënnt dër eng automatesch Reparatur probéieren.',
 'texte_creer_rubrique' => 'Ier dër kënnt en Artikel schreiwen, musst dër eng Rubrik derbäi setzen.',
 'texte_date_creation_article' => 'ARTIKEL DERBÄI GESAT DEN:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'ÉISCHTEN REDAKTIOUNS-DATUM:',
 'texte_date_publication_anterieure_nonaffichee' => 'Éischten Redaktiouns-Datum nët weisen.',
 'texte_date_publication_article' => 'PUBLIZÉIRT DEN:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Beschreiwung vun der Petitioun',
 'texte_descriptif_rapide' => 'Kuerz Beschreiwung',
 'texte_effacer_base' => 'D\'SPIP-Datebank läschen',

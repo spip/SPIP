@@ -1,7 +1,6 @@
 <traduction module="ecrire" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
 	<langue code="ar">
-		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
-		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+		<traducteur nom="George" lien="http://trad.spip.org/auteur/george" />
 	</langue>
 	<langue code="ast">
 		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
@@ -25,7 +24,7 @@
 		<traducteur nom="sQuonk" lien="http://trad.spip.org/auteur/squonk" />
 		<traducteur nom="Paolo" lien="http://trad.spip.org/auteur/paolo" />
 		<traducteur nom="Fil" lien="http://trad.spip.org/auteur/fil" />
-		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="George" lien="http://trad.spip.org/auteur/george" />
 		<traducteur nom="Mark" lien="http://trad.spip.org/auteur/mark" />
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
@@ -57,7 +56,6 @@
 	</langue>
 	<langue code="hu" />
 	<langue code="id" />
-	<langue code="is" />
 	<langue code="it" />
 	<langue code="it_fem" />
 	<langue code="ja" />
@@ -67,8 +65,8 @@
 	<langue code="nl">
 		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="http://trad.spip.org/auteur/suske" />
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
-	<langue code="no" />
 	<langue code="oc_auv" />
 	<langue code="oc_gsc" />
 	<langue code="oc_lms" />

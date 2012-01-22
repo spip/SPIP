@@ -854,9 +854,11 @@ reinstalación de SPIP pa crear una nueva base igual que un primer accesu d\'alm
    automática.',
 'texte_creer_rubrique' => 'Enantes que puedas escribir artículos,<br /> tienes que crear una estaya.',
 'texte_date_creation_article' => 'FECHA DE CREACIÓN DE L\'ARTÍCULU:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Fecha de redaición anterior:',
 'texte_date_publication_anterieure_nonaffichee' => 'Nun amosar fecha de redaición anterior.',
 'texte_date_publication_article' => 'FECHA D\'ESPUBLIZAMIENTU EN LLINIA:',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Descripción de la solicitú',
 'texte_descriptif_rapide' => 'Descripción rápida',
 'texte_effacer_base' => 'Desaniciar la base de datos SPIP',

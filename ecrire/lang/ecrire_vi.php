@@ -808,9 +808,11 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_crash_base' => 'Nếu database bị hư, bạn có thể tìm cách sửa chữa tự động.',
 'texte_creer_rubrique' => 'Để viết bài,<br />bạn phải lập ra một đề mục. ',
 'texte_date_creation_article' => 'NGÀY VIẾT BÀI:',
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 'texte_date_publication_anterieure' => 'Ngày phát hành truớc đó :',
 'texte_date_publication_anterieure_nonaffichee' => 'Dấu ngày phát hành trước đó.',
 'texte_date_publication_article' => 'NGÀY ĐĂNG TẢI ONLINE :',
+'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 'texte_descriptif_petition' => 'Mô tả Thỉnh nguyện thư',
 'texte_descriptif_rapide' => 'Tóm lược',
 'texte_effacer_base' => 'Xóa database SPIP',
