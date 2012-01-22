@@ -851,10 +851,12 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 			crashé, vous pouvez tenter une réparation
 			automatique.',
 'texte_creer_rubrique' => 'Avant de pouvoir écrire des articles,<br /> vous devez créer une rubrique.',
-'texte_date_creation_article' => 'DATE DE CRÉATION DE L\'ARTICLE :', # on ajoute le ":"
+'texte_date_creation_article' => 'DATE DE CRÉATION DE L\'ARTICLE :', # OBSOLETE
+'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":"
 'texte_date_publication_anterieure' => 'Date de rédaction antérieure :',
 'texte_date_publication_anterieure_nonaffichee' => 'Ne pas afficher de date de rédaction antérieure.',
-'texte_date_publication_article' => 'DATE DE PUBLICATION EN LIGNE :',
+'texte_date_publication_article' => 'DATE DE PUBLICATION EN LIGNE :', # OBSOLETE
+'texte_date_publication_objet' => 'Date de publication en ligne :',
 'texte_descriptif_petition' => 'Descriptif de la pétition',
 'texte_descriptif_rapide' => 'Descriptif rapide',
 'texte_effacer_base' => 'Effacer la base de données SPIP',
