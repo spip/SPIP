@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_breve' => 'Gen pa oken tinouvèl sou ladrès la',
 'aucune_rubrique' => 'Gen pa oken ribrik sou ladrès la',
 'auteur' => 'Auteur', # NEW
-'autres' => '<NEW>Ot',
+'autres' => 'Ot', # NEW
 'autres_breves' => 'Lòt tinouvèl yo',
 'autres_groupes_mots_clefs' => 'Lòt gwoup mokle yo',
 'autres_sites' => 'Lòt sit yo',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'commenter_site' => 'Lès yon komantè sou sit la',
 'contact' => 'Contact', # NEW
-'copie_document_impossible' => '<NEW>Pa ka kopye dokiman la',
+'copie_document_impossible' => 'Pa ka kopye dokiman la', # NEW
 
 // D
 'date' => 'Dat',

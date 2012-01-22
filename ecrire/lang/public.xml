@@ -1,6 +1,6 @@
 <traduction module="public" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
 	<langue code="ar">
-		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="George" lien="http://trad.spip.org/auteur/george" />
 	</langue>
 	<langue code="ast">
 		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
@@ -25,7 +25,7 @@
 	<langue code="en">
 		<traducteur nom="sQuonk" lien="http://trad.spip.org/auteur/squonk" />
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
-		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="George" lien="http://trad.spip.org/auteur/george" />
 	</langue>
 	<langue code="en_hx" />
 	<langue code="eo" />
@@ -53,7 +53,6 @@
 	<langue code="hr" />
 	<langue code="hu" />
 	<langue code="id" />
-	<langue code="isl" />
 	<langue code="it" />
 	<langue code="it_fem" />
 	<langue code="iu" />
@@ -63,12 +62,10 @@
 	<langue code="lb" />
 	<langue code="lt" />
 	<langue code="my" />
-	<langue code="nb" />
 	<langue code="ne" />
 	<langue code="nl">
 		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
 	</langue>
-	<langue code="oci_va" />
 	<langue code="oc_auv" />
 	<langue code="oc_gsc" />
 	<langue code="oc_lms" />
@@ -77,7 +74,6 @@
 		<traducteur nom="Bastian" lien="http://trad.spip.org/auteur/bastian" />
 	</langue>
 	<langue code="oc_ni_la" />
-	<langue code="oc_pro" />
 	<langue code="oc_prv" />
 	<langue code="oc_va" />
 	<langue code="pl" />
