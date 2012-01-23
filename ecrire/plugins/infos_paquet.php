@@ -89,7 +89,7 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
  * @return void
  */
 function paquet_readable_files(&$tree, $dir){
-	$prefix = $tree['prefix'];
+	$prefix = strtolower($tree['prefix']);
 
 	$tree['options'] = (is_readable($dir.$f = ($prefix.'_options.php'))) ? array($f) : array();
 	$tree['fonctions'] = (is_readable($dir.$f = ($prefix.'_fonctions.php'))) ? array($f) : array();
