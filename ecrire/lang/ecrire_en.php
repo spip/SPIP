@@ -843,11 +843,11 @@ reinstall SPIP, create a new database and a new administrator account.',
    automatically.',
 'texte_creer_rubrique' => 'Before writing any articles,<br /> you must create a section.',
 'texte_date_creation_article' => 'ARTICLE CREATION DATE:',
-'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
+'texte_date_creation_objet' => 'Creation date:', # on ajoute le ":"
 'texte_date_publication_anterieure' => 'Date first published:',
 'texte_date_publication_anterieure_nonaffichee' => 'Hide previous publication date.',
 'texte_date_publication_article' => 'PUBLISHED ON:',
-'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
+'texte_date_publication_objet' => 'Published on:',
 'texte_descriptif_petition' => 'Petition description',
 'texte_descriptif_rapide' => 'Brief description',
 'texte_effacer_base' => 'Delete the SPIP database',
