@@ -15,6 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	static $test_repertoire = array();
 	static $compteur = array();
+	static $debugverb = ""; // pour ne pas le recalculer au reappel
 	global $nombre_de_logs, $taille_des_logs;
 
 	if (is_null($logname) OR !is_string($logname))
@@ -48,8 +49,19 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	// accepter spip_log( Array )
 	if (!is_string($message)) $message = var_export($message, true);
 
+	if (!$debugverb AND defined('_LOG_FILELINE') AND _LOG_FILELINE){
+		$debug = debug_backtrace();
+		$l = $debug[1]['line'];
+		$fi = $debug[1]['file'];
+		if (strncmp($fi,_ROOT_RACINE,strlen(_ROOT_RACINE))==0)
+			$fi = substr($fi,strlen(_ROOT_RACINE));
+		$fu = $debug[2]['function'];
+		$debugverb = "$fi:L$l:$fu"."():";
+	}
+
 	$m = date("M d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '
 	  //distinguer les logs prives et publics dans les grep
+		. $debugverb
 		. (test_espace_prive()?':Pri:':':Pub:')
 		.preg_replace("/\n*$/", "\n", $message);
 
@@ -78,6 +90,7 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	if ($logname !== _FILE_LOG
 	  AND defined('_FILE_LOG'))
 		inc_log_dist($logname=='maj' ? 'cf maj.log' : $message);
+	$debugverb = "";
 }
 
 ?>
