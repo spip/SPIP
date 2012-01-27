@@ -604,13 +604,16 @@ function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
 						unset($GLOBALS['spip_pipeline'][$nom]);
 					}
 					$nom = $nomlower;
+					// une action vide est une declaration qui ne doit pas etre compilee !
 					if (!isset($GLOBALS['spip_pipeline'][$nom])) // creer le pipeline eventuel
 						$GLOBALS['spip_pipeline'][$nom]="";
-					if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
-						$GLOBALS['spip_pipeline'][$nom] = preg_replace(",(\|\||$),","|$prefix$action\\1",$GLOBALS['spip_pipeline'][$nom],1);
-					if (isset($pipe['inclure'])){
-						$GLOBALS['spip_matrice']["$prefix$action"] =
-							"$root_dir_type:$plug/".$pipe['inclure'];
+					if ($action){
+						if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
+							$GLOBALS['spip_pipeline'][$nom] = preg_replace(",(\|\||$),","|$prefix$action\\1",$GLOBALS['spip_pipeline'][$nom],1);
+						if (isset($pipe['inclure'])){
+							$GLOBALS['spip_matrice']["$prefix$action"] =
+								"$root_dir_type:$plug/".$pipe['inclure'];
+						}
 					}
 				}
 			}
