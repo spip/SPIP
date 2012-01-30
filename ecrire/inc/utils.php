@@ -285,13 +285,21 @@ function tester_url_absolue($url){
 	return preg_match(";^([a-z]+:)?//;Uims",trim($url))?true:false;
 }
 
-//
-// Prend une URL et lui ajoute/retire un parametre.
-// Exemples : [(#SELF|parametre_url{suite,18})] (ajout)
-//            [(#SELF|parametre_url{suite,''})] (supprime)
-//            [(#SELF|parametre_url{suite})]    (prend $suite dans la _request)
-//            [(#SELF|parametre_url{suite[],1})] (tableaux valeurs multiples)
-// http://doc.spip.org/@parametre_url
+/**
+ * Prend une URL et lui ajoute/retire un parametre.
+ * Exemples : [(#SELF|parametre_url{suite,18})] (ajout)
+ *            [(#SELF|parametre_url{suite,''})] (supprime)
+ *            [(#SELF|parametre_url{suite})]    (prend $suite dans la _request)
+ *            [(#SELF|parametre_url{suite[],1})] (tableaux valeurs multiples)
+ *
+ * http://doc.spip.org/@parametre_url
+ *
+ * @param string $url
+ * @param string $c
+ * @param string|array $v
+ * @param string $sep
+ * @return string
+ */
 function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 
 	// lever l'#ancre
