@@ -52,7 +52,7 @@ function action_activer_plugins_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
 
-	if (!autoriser('configurer', 'plugins'))
+	if (!autoriser('configurer', '_plugins'))
 		die('erreur');
 	// forcer la maj des meta pour les cas de modif de numero de version base via phpmyadmin
 	lire_metas();
