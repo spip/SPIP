@@ -1,6 +1,6 @@
 [(#SET{defaut_tri,#ARRAY{
 	date,#ENV{date_sens,-1},
-	titre,1,
+	num titre,1,
 	id_rubrique,1,
 	points,-1
 }})
@@ -12,7 +12,7 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
-			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
 			<th class='langue' scope='col'></th>
 			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_rubrique,<:info_numero_abbreviation:>,ajax})]</th>
