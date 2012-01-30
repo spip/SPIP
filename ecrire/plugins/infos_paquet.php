@@ -30,7 +30,7 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 	);
 
 	$valider_xml = charger_fonction('valider', 'xml');
-	$vxml = $valider_xml($desc, false, $process, 'paquet.dtd');
+	$vxml = $valider_xml($desc, false, $process, 'paquet.dtd', "utf-8");
 	if (!$vxml->err){
 		// On veut toutes les variantes selon la version de SPIP
 		if (!$plug)

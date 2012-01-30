@@ -151,8 +151,10 @@ function coordonnees_erreur($phraseur, $msg)
 }
 
 // http://doc.spip.org/@xml_sax_dist
-function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='')
+function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='', $charset=null)
 {
+	if (is_null($charset))
+		$charset = $GLOBALS['meta']['charset'];
 	if ($apply) {
 		ob_start();
 		if (is_array($apply))
@@ -191,7 +193,7 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='')
 		return $indenter_xml($page, $apply);
 	}
 
-	$xml_parser = xml_parser_create($GLOBALS['meta']['charset']);
+	$xml_parser = xml_parser_create($charset);
 
 	xml_set_element_handler($xml_parser,
 			array($phraseur, "debutElement"),
