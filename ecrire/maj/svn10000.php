@@ -245,4 +245,8 @@ $GLOBALS['maj'][15827] = array(array('upgrade_types_documents'));
 // IP en 40 caracteres pour IP v6
 $GLOBALS['maj'][15828] = array(array('sql_alter',"TABLE spip_forum CHANGE `ip` `ip` VARCHAR(40) DEFAULT '' NOT NULL"));
 
+// Type de fichiers : epub
+$GLOBALS['maj'][18946] = array(array('upgrade_types_documents'));
+
+
 ?>

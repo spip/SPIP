@@ -415,7 +415,7 @@ $spip_version_branche = "2.1.12";
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
 $spip_version_code = 15375;
 // version de la base SQL (= numero SVN de sa derniere modif, a verifier dans le fichier ecrire/maj/sv10000.php)
-$spip_version_base = 15828;
+$spip_version_base = 18946;
 
 // version de l'interface a la base
 $spip_sql_version = 1;
@@ -520,6 +520,6 @@ if (!headers_sent())
 	else // header minimal
 		@header(_HEADER_COMPOSED_BY . " @ www.spip.net");
 
-# spip_log($_SERVER['REQUEST_METHOD'].' '.self() . ' - '._FILE_CONNECT);
+ spip_log($_SERVER['REQUEST_METHOD'].' '.self() . ' - '._FILE_CONNECT);
 
 ?>
