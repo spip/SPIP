@@ -520,6 +520,6 @@ if (!headers_sent())
 	else // header minimal
 		@header(_HEADER_COMPOSED_BY . " @ www.spip.net");
 
- spip_log($_SERVER['REQUEST_METHOD'].' '.self() . ' - '._FILE_CONNECT);
+# spip_log($_SERVER['REQUEST_METHOD'].' '.self() . ' - '._FILE_CONNECT);
 
 ?>
