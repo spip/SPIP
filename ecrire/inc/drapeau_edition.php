@@ -118,6 +118,7 @@ function liste_drapeau_edition ($id_auteur) {
 		foreach ($data as $id => $auteurs)
 		{
 			if (isset($auteurs[$id_auteur])
+			AND is_array($auteurs[$id_auteur]) // precaution
 			AND (array_pop($auteurs[$id_auteur]) > time()-3600)) {
 				$objets_ouverts[] = array(
 					'objet'=>$objet,
