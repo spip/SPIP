@@ -91,7 +91,6 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	  aide ("suiviforum"),
 	  "</p>";
 
-	$img = http_img_pack('feed.png', 'RSS', '', 'RSS');
 	$url = bouton_spip_rss('forums_public', array("id_article" => $id_article));
 
 	echo "<div style='text-align: $spip_lang_right;'>", $url, "</div>";
