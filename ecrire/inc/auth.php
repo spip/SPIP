@@ -259,8 +259,8 @@ function auth_init_droits($row)
 		return $row;
 
 	// autoriser('ecrire') ne laisse passer que les Admin et les Redac
+
 	auth_trace($row);
-	session_set('en_ligne', $row['quand']);
 
 	// Administrateurs
 	if ($connect_statut == '0minirezo') {
