@@ -393,6 +393,12 @@ $GLOBALS['maj'][18597] = array(
 	array('maj_propager_les_secteurs'),
 );
 
+$GLOBALS['maj'][18955] = array(
+	array('sql_alter',"TABLE auteurs_liens ADD id_objet (id_objet)"),
+	array('sql_alter',"TABLE auteurs_liens ADD objet (objet)"),
+);
+
+
 function maj_propager_les_secteurs(){
 	include_spip('inc/rubriques');
 	propager_les_secteurs();
