@@ -206,9 +206,23 @@ function _sqlite_func_preg_replace($quoi, $cherche, $remplace) {
  * @return string, l'extrait trouve.
 **/
 function _sqlite_func_extraire_multi($quoi, $lang) {
-	$cherche = "<multi>.*[\[]" . $lang . "[\]]([^\[]*).*</multi>";  
-	$return = preg_replace('%'.$cherche.'%sS', '$1', $quoi);
-	return $return;
+	if (!defined('_EXTRAIRE_MULTI'))
+		include_spip('inc/filtres');
+	if (!function_exists('approcher_langue'))
+		include_spip('inc/lang');
+	if (preg_match_all(_EXTRAIRE_MULTI, $quoi, $regs, PREG_SET_ORDER)) {
+		foreach ($regs as $reg) {
+			// chercher la version de la langue courante
+			$trads = extraire_trads($reg[1]);
+			if ($l = approcher_langue($trads, $lang)) {
+				$trad = $trads[$l];
+			} else {
+				$trad = reset($trads);
+			}
+			$quoi = str_replace($reg[0], $trad, $quoi);
+		}
+	}
+	return $quoi;
 }
 
 
