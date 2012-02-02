@@ -301,6 +301,9 @@ function tester_url_absolue($url){
  * @return string
  */
 function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
+	// requete erronnee : plusieurs variable dans $c et aucun $v
+	if (strpos($c,"|")!==false AND is_null($v))
+		return null;
 
 	// lever l'#ancre
 	if (preg_match(',^([^#]*)(#.*)$,', $url, $r)) {
@@ -319,6 +322,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	$regexp = ',^(' . str_replace('[]','\[\]',$c) . '[[]?[]]?)(=.*)?$,';
 	$ajouts = array_flip(explode('|',$c));
 	$u = is_array($v) ? $v : rawurlencode($v);
+	$testv = (is_array($v)?count($v):strlen($v));
 	// lire les variables et agir
 	foreach ($url as $n => $val) {
 		if (preg_match($regexp, urldecode($val), $r)) {
@@ -326,7 +330,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 				return $r[2]?substr($r[2],1):'';
 			}
 			// suppression
-			elseif (!strlen($v)) {
+			elseif (!$testv) {
 				unset($url[$n]);
 			}
 	// Ajout. Pour une variable, remplacer au meme endroit,
@@ -343,7 +347,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	AND $args = func_get_args()
 	AND count($args)==2)
 		return $v;
-	elseif (strlen($v)) {
+	elseif ($testv) {
 		foreach($ajouts as $k => $n) {
 		  if (!is_array($v))
 		    $url[] = $k .'=' . $u;
