@@ -45,7 +45,7 @@ function public_styliser_par_z_dist($flux){
 			$apl_constant = '_Z_AJAX_PARALLEL_LOAD';
 			$page = _SPIP_PAGE;
 			$echaffauder = charger_fonction('echaffauder','public',true);
-			define('_ZCORE_EXCLURE_PATH','prive|'.rtrim(_DIR_PLUGIN_DIST,'/'));
+			define('_ZCORE_EXCLURE_PATH','\bprive|\b'.rtrim(_DIR_PLUGIN_DIST,'/'));
 		}
 	  $prepend = (defined('_Z_PREPEND_PATH')?_Z_PREPEND_PATH:"");
 	}
