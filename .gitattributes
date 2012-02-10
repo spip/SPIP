@@ -474,6 +474,7 @@ prive/javascript/ui/i18n/jquery.ui.datepicker-bg.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-bs.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-ca.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-cs.js -text
+prive/javascript/ui/i18n/jquery.ui.datepicker-cy-GB.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-da.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-de.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-el.js -text
@@ -498,12 +499,16 @@ prive/javascript/ui/i18n/jquery.ui.datepicker-id.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-is.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-it.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-ja.js -text
+prive/javascript/ui/i18n/jquery.ui.datepicker-kk.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-ko.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-kz.js -text
+prive/javascript/ui/i18n/jquery.ui.datepicker-lb.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-lt.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-lv.js -text
+prive/javascript/ui/i18n/jquery.ui.datepicker-mk.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-ml.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-ms.js -text
+prive/javascript/ui/i18n/jquery.ui.datepicker-nl-BE.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-nl.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-no.js -text
 prive/javascript/ui/i18n/jquery.ui.datepicker-pl.js -text
