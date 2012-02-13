@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => '​ធ្វើ​អោយសកម្ម plugin',
 'affichage' => 'បង្ហាញចេញ',
 'aide_non_disponible' => 'ផ្នែក​នេះ នៃជំនួយ លើអិនរើណែត គ្មានស្រាប់ សំរាប់ភាសានេះ។',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'អ្នកនិពន្ធ៖',
 'avis_acces_interdit' => 'ការ​ចូល​ទៅ ត្រូវ​បាន​ហាម។',
 'avis_article_modifie' => 'ប្រយត្ន, @nom_auteur_modif@ )បានធ្វើការ លើអត្ថបទ​នេះ បាន @date_diff@ នាទី',

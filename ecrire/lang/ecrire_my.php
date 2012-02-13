@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'ထပ်ထည့်သည့် pluginကို အ​တည်ပြုရန်',
 'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => 'ယခုသုံးသော ဘာသာဖြင့်ရှာဖွေ၍မရသေးပါ',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'ရေးသားသူ',
 'avis_acces_interdit' => '​ဝင်ရောက်သုံးစွဲခွင့်တားမြစ်ထားသည်',
 'avis_article_modifie' => 'သတိပေးချက်၊ လွန်ခဲ့သော မိနစ် @date_diff@ တွင် @nom_auteur_modif@ သည် ဆေင်းပါးတွင် အလုပ်လုပ်ခဲ့ပြီးဖြစ်သည်',

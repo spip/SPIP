@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Plugin\'i etkinleştir',
 'affichage' => 'Gösterim',
 'aide_non_disponible' => 'Çevrimiçi yardımın bu kısmı henüz bu dile çevrilmemiş.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Yazar :',
 'avis_acces_interdit' => 'Erişim yasak.',
 'avis_article_modifie' => 'Dikkat, @nom_auteur_modif@ bu metin üzerinde @date_diff@ dakika önce çalıştı',

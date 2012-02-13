@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Activer le plugin', # NEW
 'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => 'Akpaxwé élɔ sín àlɔgɔ kó sɔgbè ɖò àtɛ ɔ jí ɖò gbè é lɔ mɛ a ',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Auteur :', # NEW
 'avis_acces_interdit' => 'Alì ɖè a',
 'avis_article_modifie' => 'Vlɛ, @nom_auteur_modif@ nyowlántɔ é wàzɔ ɖò wêmá é lɔ jí ɔ @date_diff@ ɖò cɛjúmɛ ɔ .',

@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Activate plugin', # NEW
 'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => 'Phần giúp đỡ này chưa được dịch sang ngôn ngữ này.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Author:', # NEW
 'avis_acces_interdit' => 'Quý vị không có quyền vào đây.',
 'avis_article_modifie' => 'Coi chừng, @nom_auteur_modif@ vừa sửa bài này cách đây @date_diff@ phút',

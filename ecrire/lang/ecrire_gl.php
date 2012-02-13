@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Activar o módulo',
 'affichage' => 'Presentación',
 'aide_non_disponible' => 'Esta parte da axuda en liña aínda non está dispoñible nesta lingua.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Autor :',
 'avis_acces_interdit' => 'Acceso prohibido.',
 'avis_article_modifie' => 'Atención, @nom_auteur_modif@ estaba traballando neste artigo hai @date_diff@ minutos',

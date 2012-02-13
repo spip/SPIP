@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Aktiv plegin an',
 'affichage' => 'Afichaje', # NEW
 'aide_non_disponible' => 'Pati-a bourad la se pa disponib ankò andan lanng la.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Lotè :',
 'avis_acces_interdit' => 'Entèdiksyon riv isit .',
 'avis_article_modifie' => 'Atansyon, @nom_auteur_modif@ te travaye sou atik-la  @date_diff@ minit pase',

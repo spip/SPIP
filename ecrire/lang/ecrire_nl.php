@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Plugin activeren',
 'affichage' => 'Display',
 'aide_non_disponible' => 'Dit deel van de online handleiding is nog niet beschikbaar in het Nederlands.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Auteur :',
 'avis_acces_interdit' => 'Toegang verboden',
 'avis_article_modifie' => 'Opgelet, @nom_auteur_modif@ heeft @date_diff@  minuten geleden aan dit artikel gewerkt.',

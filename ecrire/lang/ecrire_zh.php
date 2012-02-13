@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Activer le plugin', # NEW
 'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => '这部分在线帮助尚无中文版本.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Auteur :', # NEW
 'avis_acces_interdit' => '限制访问.',
 'avis_article_modifie' => '警告, @nom_auteur_modif@在@date_diff@分钟前修改过此文',

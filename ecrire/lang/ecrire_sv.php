@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Aktivera insticksmodulen',
 'affichage' => 'Visa',
 'aide_non_disponible' => 'Den här delen av direkthjälpen finns inte i det aktuella språket',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Redaktör',
 'avis_acces_interdit' => 'Tilltr&auml;de f&ouml;rbjudet.',
 'avis_article_modifie' => 'Varning, @nom_auteur_modif@ har arbetat på den här artikeln för @date_diff@ minuter sen',

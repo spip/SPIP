@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Plugina aktibatu',
 'affichage' => 'Ikuspegia',
 'aide_non_disponible' => 'On line delakoaren laguntza-atal hau prestatzekoa dago hizkuntza honetan.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Egilea :',
 'avis_acces_interdit' => 'Sarrera Debekatua',
 'avis_article_modifie' => 'Adi egon,(@nom_auteur_modif@) lan honetan aritu zen orain dela (@date_diff@)minutu.',
