@@ -363,7 +363,7 @@ function message_erreur_404 ($erreur= "", $code='404 Not Found') {
 	if ($deja) return "erreur";
 	$deja = true;
 	$contexte_inclus = array(
-		'erreur' => _T($erreur),
+		'erreur' => $erreur?_T($erreur):"",
 		'code' => $code,
 		'lang' => $GLOBALS['spip_lang']
 	);
