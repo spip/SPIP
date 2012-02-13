@@ -45,6 +45,7 @@
 	<langue code="fon" />
 	<langue code="fr" />
 	<langue code="fr_tu">
+		<traducteur nom="RealET" lien="http://trad.spip.org/auteur/realet" />
 		<traducteur nom="orlammd" lien="http://trad.spip.org/auteur/orlammd" />
 	</langue>
 	<langue code="ft_tu" />
