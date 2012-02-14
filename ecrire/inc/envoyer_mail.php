@@ -133,8 +133,10 @@ function inc_envoyer_mail_dist($destinataire, $sujet, $corps, $from = "", $heade
 	if (defined('_TEST_EMAIL_DEST')) {
 		if (!_TEST_EMAIL_DEST)
 			return false;
-		else
+		else {
+			$texte = "Dest : $destinataire\r\n" . $texte;
 			$destinataire = _TEST_EMAIL_DEST;
+		}
 	}
 
 	return @mail($destinataire, $sujet, $texte, $headers);
