@@ -601,6 +601,8 @@ prive/objets/liste/objets-trad.html -text
 prive/objets/liste/objets-trad_fonctions.php -text
 prive/objets/liste/objets.html -text
 prive/objets/liste/rubriques.html -text
+prive/objets/liste/rubriques_associer.html -text
+prive/objets/liste/rubriques_lies.html -text
 prive/objets/liste/visiteurs.html -text
 prive/objets/liste/visiteurs_fonctions.php -text
 prive/puce_prive.gif -text
