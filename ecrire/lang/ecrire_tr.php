@@ -112,6 +112,7 @@ Bu ithal istemini onaylamayın.
 'connexion_ldap' => 'Bağlantı :',
 'copier_en_local' => 'Yerel olarak kopyala',
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'saat ',
@@ -667,10 +668,13 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'lien_ajout_destinataire' => 'Bu alıcıyı ekle',
 'lien_ajouter_auteur' => 'Bu yazarın ekle',
 'lien_ajouter_participant' => 'Bir katılımcıyı ekle',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'e-posta ',
 'lien_nom_site' => 'SİTENİN ADI : ',
 'lien_retirer_auteur' => 'Yazarı sil',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'bu katılımcıyı sil',
 'lien_site' => 'site',
 'lien_supprimer_rubrique' => 'bu bölümü sil',
@@ -926,6 +930,7 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_admin_vider' => 'Teknik bakım ',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Makaleleri göster',
 'titre_cadre_afficher_traductions' => 'Aşağıdaki dillerin çevirilerinin durumunu göster :',
 'titre_cadre_ajouter_auteur' => 'BİR YAZAR EKLE :',

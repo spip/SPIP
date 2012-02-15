@@ -115,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'timer',
@@ -660,10 +661,13 @@ i en farve, der angiver deres status:',
 'lien_ajout_destinataire' => 'Tilføj denne modtager',
 'lien_ajouter_auteur' => 'Tilføj denne forfatter',
 'lien_ajouter_participant' => 'Tilføj modtager',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'e-mail',
 'lien_nom_site' => 'WEBSTEDETS NAVN:',
 'lien_retirer_auteur' => 'Fjern forfatter',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'fjern denne modtager',
 'lien_site' => 'websted',
 'lien_supprimer_rubrique' => 'slet dette afsnit',
@@ -946,6 +950,7 @@ i en farve, der angiver deres status:',
 'titre_admin_vider' => 'Teknisk vedligeholdelse',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Vis artikler som er',
 'titre_cadre_afficher_traductions' => 'Vis oversættelsesstatus for følgende sprog:',
 'titre_cadre_ajouter_auteur' => 'TILFØJ FORFATTER:',

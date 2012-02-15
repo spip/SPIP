@@ -114,6 +114,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'órák',
@@ -659,10 +660,13 @@ ami állapotát jelzi :',
 'lien_ajout_destinataire' => 'A címzett hozzáadása',
 'lien_ajouter_auteur' => 'A szerző hozzáadása',
 'lien_ajouter_participant' => 'Egy résztvevő hozzáadása',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'email',
 'lien_nom_site' => 'HONLAP NEVE :',
 'lien_retirer_auteur' => 'A szerző eltávolítása',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'a résztvevő eltávolítása',
 'lien_site' => 'honlap',
 'lien_supprimer_rubrique' => 'a rovat törlése',
@@ -946,6 +950,7 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_admin_vider' => 'Műszaki karbantartás',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Cikkek megjelenítése',
 'titre_cadre_afficher_traductions' => 'A fordítások állápotának megjelenítése a következő nyelvekről :',
 'titre_cadre_ajouter_auteur' => 'ÚJ SZERZŐ :',

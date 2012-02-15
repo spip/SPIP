@@ -109,6 +109,7 @@ la documentacion d\'SPIP</a>.', # MODIF
 'connexion_ldap' => 'Connexion :', # NEW
 'copier_en_local' => 'Copier en local', # NEW
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'òras',
@@ -659,10 +660,13 @@ ua color qu\'indica lo lor estat:',
 'lien_ajout_destinataire' => 'Ajustar aqueth destinatari',
 'lien_ajouter_auteur' => 'Ajustar aqueth autor',
 'lien_ajouter_participant' => 'Ajustar un participant',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'e-mail',
 'lien_nom_site' => 'NOM DEU SIT:',
 'lien_retirer_auteur' => 'Tirar l\'autor',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'Tirar aqueth participant',
 'lien_site' => 'sit',
 'lien_supprimer_rubrique' => 'suprimir aquera rubrica',
@@ -972,6 +976,7 @@ s\'avetz modificat de bèth pro lo grafisme o l\'estructura deu sit.',
 'titre_admin_vider' => 'Mantienença tecnica',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Afichar los articles',
 'titre_cadre_afficher_traductions' => 'Afichar l\'estat de las arreviradas tà las lengas seguentas:',
 'titre_cadre_ajouter_auteur' => 'AJUSTAR UN AUTOR:',

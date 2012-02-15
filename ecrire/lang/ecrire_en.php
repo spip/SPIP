@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Activate plugin',
 'affichage' => 'Display',
 'aide_non_disponible' => 'This part of the online help is not yet available in this language.',
-'annuler_recherche' => 'Annuler la recherche', # NEW
+'annuler_recherche' => 'Cancel the search',
 'auteur' => 'Author:',
 'avis_acces_interdit' => 'Access forbidden.',
 'avis_article_modifie' => 'Warning: @nom_auteur_modif@ modified this article @date_diff@ minutes ago',
@@ -109,6 +109,7 @@ Do not submit this import request.<p>For more information, please see <a href="@
 'connexion_ldap' => 'Connection:',
 'copier_en_local' => 'Copy to local site',
 'creer_et_associer_un_auteur' => 'Create and associate an author',
+'creer_et_associer_une_rubrique' => 'Create and link a section',
 
 // D
 'date_mot_heures' => 'H',
@@ -670,10 +671,13 @@ and their status is colour-coded:',
 'lien_ajout_destinataire' => 'Add this recipient',
 'lien_ajouter_auteur' => 'Add this author',
 'lien_ajouter_participant' => 'Add a participant',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'email',
 'lien_nom_site' => 'SITE NAME:',
 'lien_retirer_auteur' => 'Remove author',
+'lien_retirer_rubrique' => 'Remove the section',
 'lien_retirer_tous_auteurs' => 'Remove all authors',
+'lien_retirer_toutes_rubriques' => 'Remove all sections',
 'lien_retrait_particpant' => 'remove this participant',
 'lien_site' => 'site',
 'lien_supprimer_rubrique' => 'delete this section',
@@ -968,6 +972,7 @@ you can perform searches on syndicated sites and
 'titre_admin_vider' => 'Technical maintenance',
 'titre_ajouter_un_auteur' => 'Add an author',
 'titre_ajouter_un_mot' => 'Add a keyword',
+'titre_ajouter_une_rubrique' => 'Add a section',
 'titre_cadre_afficher_article' => 'Show the articles:',
 'titre_cadre_afficher_traductions' => 'Display the translation status for these languages:',
 'titre_cadre_ajouter_auteur' => 'ADD AN AUTHOR:',

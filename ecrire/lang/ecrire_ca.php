@@ -108,6 +108,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'connexion_ldap' => 'Connexió:',
 'copier_en_local' => 'Copiar en local',
 'creer_et_associer_un_auteur' => 'Crear i associar un autor',
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'hores',
@@ -650,10 +651,13 @@ amb un color que indica el seu estat:',
 'lien_ajout_destinataire' => 'Afegir aquest destinatari',
 'lien_ajouter_auteur' => 'Afegir aquest autor',
 'lien_ajouter_participant' => 'Afegir un participant',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'correu electrònic',
 'lien_nom_site' => 'NOM DEL LLOC:',
 'lien_retirer_auteur' => 'Retirar aquest autor',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirar tots els autors',
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'retirar aquest participant',
 'lien_site' => 'lloc',
 'lien_supprimer_rubrique' => 'suprimir aquesta secció',
@@ -917,6 +921,7 @@ el que pot provocar un lleuger alentiment de la vostra pròpia web.',
 'titre_admin_vider' => 'Manteniment tècnic',
 'titre_ajouter_un_auteur' => 'Afegir un autor',
 'titre_ajouter_un_mot' => 'Afegir una paraula clau',
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Afegir els articles',
 'titre_cadre_afficher_traductions' => 'Mostrar l\'estat de les traduccions per les següents llengües:',
 'titre_cadre_ajouter_auteur' => 'AFEGIR UN AUTOR:',

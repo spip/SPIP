@@ -115,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Połączenie:',
 'copier_en_local' => 'Skopiuj lokalnie',
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'godz.',
@@ -676,10 +677,13 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 'lien_ajout_destinataire' => 'Dodaj odbiorcę',
 'lien_ajouter_auteur' => 'Dodaj autora',
 'lien_ajouter_participant' => 'Dodaj uczestnika',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'e-mail',
 'lien_nom_site' => 'NAZWA STRONY:',
 'lien_retirer_auteur' => 'Usuń autora',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'usuń uczestnika',
 'lien_site' => 'strona',
 'lien_supprimer_rubrique' => 'usuń ten dział',
@@ -974,6 +978,7 @@ wyszukiwania w dołączonej stronie.', # MODIF
 'titre_admin_vider' => 'Konserwacja techniczna',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Pokaż artykuły:',
 'titre_cadre_afficher_traductions' => 'Wyświetl stan przekładów dla następujących języków:',
 'titre_cadre_ajouter_auteur' => 'DODAJ ARTYKUŁY:',

@@ -111,6 +111,7 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 'connexion_ldap' => 'Kevreañ :',
 'copier_en_local' => 'Eilañ en diabarzh',
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'eur',
@@ -662,10 +663,13 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 'lien_ajout_destinataire' => 'Ouzhpennañ an degemerer-mañ',
 'lien_ajouter_auteur' => 'Ouzhpennañ ar skridaozer-mañ',
 'lien_ajouter_participant' => 'Ouzhpennañ ur perzhiad',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'postel',
 'lien_nom_site' => 'ANV AL LEC\'HIENN :',
 'lien_retirer_auteur' => 'Lemel ar skridaozer',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'lemel ar perzhiad-mañ',
 'lien_site' => 'lec\'hienn',
 'lien_supprimer_rubrique' => 'diverkañ ar rubrikenn-mañ',
@@ -936,6 +940,7 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
 'titre_admin_vider' => 'Trezalc\'h teknikel',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Diskouez ar pennadoù',
 'titre_cadre_afficher_traductions' => 'Diskouez stad an troidigezhioù evit ar yezhoù-mañ :',
 'titre_cadre_ajouter_auteur' => 'OUZHPENNAÑ UR SKRIDAOZER :',

@@ -113,6 +113,7 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'connexion_ldap' => 'ldapuppkoppling:',
 'copier_en_local' => 'Kopiera till den lokala sajten',
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'h',
@@ -675,10 +676,13 @@ med en färg som visar deras status:',
 'lien_ajout_destinataire' => 'Lägg till som mottagare',
 'lien_ajouter_auteur' => 'Lätt till redaktören',
 'lien_ajouter_participant' => 'Lägg till en deltagare',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'e-post',
 'lien_nom_site' => 'SAJTENS NAMN:',
 'lien_retirer_auteur' => 'Ta bort redaktören',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'ta bort deltagaren',
 'lien_site' => 'sajt',
 'lien_supprimer_rubrique' => 'ta bort den här avdelningen',
@@ -978,6 +982,7 @@ you can perform searches on sites and
 'titre_admin_vider' => 'Tekniskt underhåll',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Visa artiklarna:',
 'titre_cadre_afficher_traductions' => 'Visa status för översättningen för följande språk:',
 'titre_cadre_ajouter_auteur' => 'LÄGG TILL EN REDAKTÖR:',

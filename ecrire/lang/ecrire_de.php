@@ -114,6 +114,7 @@ französischen SPIP-Dokumentation</a>.',
 'connexion_ldap' => 'Verbindung:',
 'copier_en_local' => 'Lokale Koipe',
 'creer_et_associer_un_auteur' => 'Autor anlegen und zuordnen',
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'Stunden',
@@ -653,10 +654,13 @@ in einer Farbe, die den Status anzeigt :',
 'lien_ajout_destinataire' => 'Empfänger hinzufügen',
 'lien_ajouter_auteur' => 'Autor hinzufügen',
 'lien_ajouter_participant' => 'Teilnehmer hinzufügen',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'E-Mail',
 'lien_nom_site' => 'NAME DER WEBSITE:',
 'lien_retirer_auteur' => 'Autor entfernen',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Alle Autoren entfernen',
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'Teilnehmer entfernen',
 'lien_site' => 'Website',
 'lien_supprimer_rubrique' => 'Rubrik löschen',
@@ -911,6 +915,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'titre_admin_vider' => 'Wartung',
 'titre_ajouter_un_auteur' => 'Autor hinzufügen',
 'titre_ajouter_un_mot' => 'Schlagwort hinzufügen',
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Artikel anzeigen',
 'titre_cadre_afficher_traductions' => 'Stand der Übersetzungen für diese Sprachen anzeigen',
 'titre_cadre_ajouter_auteur' => 'AUTOR HINZUFÜGEN: ',

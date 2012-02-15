@@ -110,6 +110,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'connexion_ldap' => 'Connection:', # NEW
 'copier_en_local' => 'Copy to local site', # NEW
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'Giờ',
@@ -643,10 +644,13 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'lien_ajout_destinataire' => 'Thêm người nhận này',
 'lien_ajouter_auteur' => 'Thêm tác giả này',
 'lien_ajouter_participant' => 'Thêm một tham dự viên',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'email',
 'lien_nom_site' => 'TÊN WEBSITE:',
 'lien_retirer_auteur' => 'Loại bỏ tác giả',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'Loại bỏ tham dự viên này',
 'lien_site' => 'website',
 'lien_supprimer_rubrique' => 'xóa đề mục này',
@@ -904,6 +908,7 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_admin_vider' => 'Bảo trì kỹ thuật',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Liệt kê những bài',
 'titre_cadre_afficher_traductions' => 'Cho xem tình trạng dịch thuật của ngôn ngữ này.',
 'titre_cadre_ajouter_auteur' => 'THÊM MỘT TÁC GIẢ:',

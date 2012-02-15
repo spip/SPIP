@@ -113,6 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Conexi&oacute;n :',
 'copier_en_local' => 'Copiar en local',
 'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'horas',
@@ -673,10 +674,13 @@ cunha cor que indica o seu estado :',
 'lien_ajout_destinataire' => 'Engadir destinatari@',
 'lien_ajouter_auteur' => 'Engadir autor/a',
 'lien_ajouter_participant' => 'Engadir participante',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'correo-e.',
 'lien_nom_site' => 'NOME DO WEB:',
 'lien_retirer_auteur' => 'Retirar esta persoa',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Retirar todos os autores',
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'retirar participante',
 'lien_site' => 'web',
 'lien_supprimer_rubrique' => 'Suprimir este tema',
@@ -972,6 +976,7 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'titre_admin_vider' => 'Mantemento técnico',
 'titre_ajouter_un_auteur' => 'Engadir un autor',
 'titre_ajouter_un_mot' => 'Engadir unha palabra-clave',
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Mostrar os artigos',
 'titre_cadre_afficher_traductions' => 'Fixar o estado das traducións para as seguintes linguas :',
 'titre_cadre_ajouter_auteur' => 'ENGADIR UN/UNHA AUTOR/A:',

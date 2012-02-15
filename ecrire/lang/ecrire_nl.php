@@ -114,6 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Aansluiten :',
 'copier_en_local' => 'Plaatselijk kopiëren',
 'creer_et_associer_un_auteur' => 'Maken en associëren een auteur',
+'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 // D
 'date_mot_heures' => 'uur',
@@ -677,10 +678,13 @@ een kleur geeft hun status aan :',
 'lien_ajout_destinataire' => 'Voeg deze bestemmeling toe',
 'lien_ajouter_auteur' => 'Voeg deze auteur toe',
 'lien_ajouter_participant' => 'Voeg nieuwe deelnemer toe',
+'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 'lien_email' => 'e-mail',
 'lien_nom_site' => 'WEBSITENAME:',
 'lien_retirer_auteur' => 'Auteur verwijderen',
+'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 'lien_retirer_tous_auteurs' => 'Verwijder alle auteurs',
+'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 'lien_retrait_particpant' => 'Deelnemer verwijderen',
 'lien_site' => 'Site',
 'lien_supprimer_rubrique' => 'Rubriek verwijderen',
@@ -963,6 +967,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_admin_vider' => 'Technisch onderhoud',
 'titre_ajouter_un_auteur' => 'Voeg een auteur',
 'titre_ajouter_un_mot' => 'Voeg een trefwoord',
+'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 'titre_cadre_afficher_article' => 'Artikels tonen',
 'titre_cadre_afficher_traductions' => 'Toon de status van de vertalingen voor de volgende talen :',
 'titre_cadre_ajouter_auteur' => 'EEN AUTEUR TOEVOEGEN :',
