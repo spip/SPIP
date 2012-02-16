@@ -7,115 +7,115 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
-'accueil_site' => 'Pocetna stranica',
-'article' => 'Article', # NEW
-'articles' => 'Clanci',
-'articles_auteur' => 'Clanci ovog autora',
-'articles_populaires' => 'Najpopularniji clanci',
-'articles_rubrique' => 'Clanci iz ove rubrike',
-'aucun_article' => 'Ne postoje clanci na ovoj adresi',
-'aucun_auteur' => 'Ne postoje autori na ovoj adresi',
-'aucun_site' => 'Ne postoje stranice na ovoj adresi',
-'aucune_breve' => 'Ne postoje novosti na ovoj adresi',
-'aucune_rubrique' => 'Ne postoje rubrike na ovoj adresi',
-'auteur' => 'Auteur', # NEW
-'autres' => 'Autres', # NEW
-'autres_breves' => 'Ostale kratke poruke',
-'autres_groupes_mots_clefs' => 'Ostale grupe kljucnih rijeci',
-'autres_sites' => 'Ostale stranice',
+	// A
+	'accueil_site' => 'Pocetna stranica',
+	'article' => 'Article', # NEW
+	'articles' => 'Clanci',
+	'articles_auteur' => 'Clanci ovog autora',
+	'articles_populaires' => 'Najpopularniji clanci',
+	'articles_rubrique' => 'Clanci iz ove rubrike',
+	'aucun_article' => 'Ne postoje clanci na ovoj adresi',
+	'aucun_auteur' => 'Ne postoje autori na ovoj adresi',
+	'aucun_site' => 'Ne postoje stranice na ovoj adresi',
+	'aucune_breve' => 'Ne postoje novosti na ovoj adresi',
+	'aucune_rubrique' => 'Ne postoje rubrike na ovoj adresi',
+	'auteur' => 'Auteur', # NEW
+	'autres' => 'Autres', # NEW
+	'autres_breves' => 'Ostale kratke poruke',
+	'autres_groupes_mots_clefs' => 'Ostale grupe kljucnih rijeci',
+	'autres_sites' => 'Ostale stranice',
 
-// B
-'bonjour' => 'Dobar dan',
+	// B
+	'bonjour' => 'Dobar dan',
 
-// C
-'commenter_site' => 'Dodaj komentar',
-'contact' => 'Contact', # NEW
-'copie_document_impossible' => 'Impossible de copier le document', # NEW
+	// C
+	'commenter_site' => 'Dodaj komentar',
+	'contact' => 'Contact', # NEW
+	'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
-// D
-'date' => 'Datum',
-'dernier_ajout' => 'Posljednje dodavanje',
-'dernieres_breves' => 'Posljednje kratke poruke',
-'derniers_articles' => 'Posljedni clanci',
-'derniers_commentaires' => 'Posljednji komentari',
-'derniers_messages_forum' => 'Posljednje poruke u forumu',
+	// D
+	'date' => 'Datum',
+	'dernier_ajout' => 'Posljednje dodavanje',
+	'dernieres_breves' => 'Posljednje kratke poruke',
+	'derniers_articles' => 'Posljedni clanci',
+	'derniers_commentaires' => 'Posljednji komentari',
+	'derniers_messages_forum' => 'Posljednje poruke u forumu',
 
-// E
-'edition_mode_texte' => 'Obradjivanje u text modu',
-'en_reponse' => 'Odgovor za:',
-'en_resume' => 'Rezime',
-'envoyer_message' => 'Posalji poruku',
-'espace_prive' => 'Privatni prostor',
+	// E
+	'edition_mode_texte' => 'Obradjivanje u text modu',
+	'en_reponse' => 'Odgovor za:',
+	'en_resume' => 'Rezime',
+	'envoyer_message' => 'Posalji poruku',
+	'espace_prive' => 'Privatni prostor',
 
-// F
-'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
+	// F
+	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
 
-// H
-'hierarchie_site' => 'Hierarhija stranice',
+	// H
+	'hierarchie_site' => 'Hierarhija stranice',
 
-// J
-'jours' => 'Dani',
+	// J
+	'jours' => 'Dani',
 
-// L
-'lien_connecter' => 'Se connecter', # NEW
+	// L
+	'lien_connecter' => 'Se connecter', # NEW
 
-// M
-'meme_auteur' => 'Isti autor',
-'meme_rubrique' => 'U istoj rubrici',
-'memes_auteurs' => 'Isti autori',
-'message' => 'Poruka',
-'messages_forum' => 'Poruke iz foruma', # MODIF
-'messages_recents' => 'Recentne poruke iz foruma',
-'mots_clef' => 'Mot-clé', # NEW
-'mots_clefs' => 'Kljucne rijeci',
-'mots_clefs_meme_groupe' => 'Kljucne rijeci u istoj grupi',
+	// M
+	'meme_auteur' => 'Isti autor',
+	'meme_rubrique' => 'U istoj rubrici',
+	'memes_auteurs' => 'Isti autori',
+	'message' => 'Poruka',
+	'messages_forum' => 'Poruke iz foruma', # MODIF
+	'messages_recents' => 'Recentne poruke iz foruma',
+	'mots_clef' => 'Mot-clé', # NEW
+	'mots_clefs' => 'Kljucne rijeci',
+	'mots_clefs_meme_groupe' => 'Kljucne rijeci u istoj grupi',
 
-// N
-'navigation' => 'Navigacija',
-'nom' => 'Ime',
-'nouveautes' => 'Novosti',
-'nouveautes_web' => 'Novosti na webu',
-'nouveaux_articles' => 'Novi clanci',
-'nouvelles_breves' => 'Nove kratke poruke',
+	// N
+	'navigation' => 'Navigacija',
+	'nom' => 'Ime',
+	'nouveautes' => 'Novosti',
+	'nouveautes_web' => 'Novosti na webu',
+	'nouveaux_articles' => 'Novi clanci',
+	'nouvelles_breves' => 'Nove kratke poruke',
 
-// P
-'page_precedente' => 'prethodna stranica',
-'page_suivante' => 'sljedeca stranica',
-'par_auteur' => 'od ',
-'participer_site' => 'Mozete aktivno ucestvovati i predlagati clanke tako sto ce te se registrovati (ispod). Odmah cete primiti e-mail sa vasom lozinkom za ptistup na privatnu stranicu.',
-'plan_site' => 'Plan stranice',
-'popularite' => 'Popularnosti',
-'poster_message' => 'Posalji poruku',
-'proposer_site' => 'Mozete predloziti dodavanje stranice u ovu rubriku',
+	// P
+	'page_precedente' => 'prethodna stranica',
+	'page_suivante' => 'sljedeca stranica',
+	'par_auteur' => 'od ',
+	'participer_site' => 'Mozete aktivno ucestvovati i predlagati clanke tako sto ce te se registrovati (ispod). Odmah cete primiti e-mail sa vasom lozinkom za ptistup na privatnu stranicu.',
+	'plan_site' => 'Plan stranice',
+	'popularite' => 'Popularnosti',
+	'poster_message' => 'Posalji poruku',
+	'proposer_site' => 'Mozete predloziti dodavanje stranice u ovu rubriku',
 
-// R
-'repondre_article' => 'Odgovori na ovaj clanak',
-'repondre_breve' => 'Odgovori na ovu kratku poruku',
-'resultats_recherche' => 'Rezultati pretrage',
-'retour_debut_forums' => 'Nazad na pocetak foruma',
-'rubrique' => 'Rubrika',
-'rubriques' => 'Rubrike',
+	// R
+	'repondre_article' => 'Odgovori na ovaj clanak',
+	'repondre_breve' => 'Odgovori na ovu kratku poruku',
+	'resultats_recherche' => 'Rezultati pretrage',
+	'retour_debut_forums' => 'Nazad na pocetak foruma',
+	'rubrique' => 'Rubrika',
+	'rubriques' => 'Rubrike',
 
-// S
-'signatures_petition' => 'Potpisi',
-'site_realise_avec_spip' => 'Stranica realizovana sa SPIP-om',
-'sites_web' => 'Web stranice',
-'sous_rubriques' => 'Podrubrike',
-'spam' => 'Spam', # NEW
-'suite' => 'nastavi',
-'sur_web' => 'Na web-u',
-'syndiquer_rubrique' => 'Sindikuj ovu rubriku',
-'syndiquer_site' => 'Sindikuj cijelu stranicu',
+	// S
+	'signatures_petition' => 'Potpisi',
+	'site_realise_avec_spip' => 'Stranica realizovana sa SPIP-om',
+	'sites_web' => 'Web stranice',
+	'sous_rubriques' => 'Podrubrike',
+	'spam' => 'Spam', # NEW
+	'suite' => 'nastavi',
+	'sur_web' => 'Na web-u',
+	'syndiquer_rubrique' => 'Sindikuj ovu rubriku',
+	'syndiquer_site' => 'Sindikuj cijelu stranicu',
 
-// T
-'texte_lettre_information' => 'Ovo je newsletter stranice',
-'texte_lettre_information_2' => 'Ovo pismo koje rezimira clanke i kratke poruke objavljene od', # MODIF
+	// T
+	'texte_lettre_information' => 'Ovo je newsletter stranice',
+	'texte_lettre_information_2' => 'Ovo pismo koje rezimira clanke i kratke poruke objavljene od', # MODIF
 
-// V
-'ver_imprimer' => 'Verzija za printanje',
-'voir_en_ligne' => 'Pogledati online',
-'voir_squelette' => 'voir le squelette de cette page' # NEW
+	// V
+	'ver_imprimer' => 'Verzija za printanje',
+	'voir_en_ligne' => 'Pogledati online',
+	'voir_squelette' => 'voir le squelette de cette page' # NEW
 );
 
 ?>
