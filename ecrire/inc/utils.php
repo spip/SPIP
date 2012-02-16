@@ -415,9 +415,14 @@ function nettoyer_uri()
 // http://doc.spip.org/@self
 function self($amp = '&amp;', $root = false) {
 	$url = nettoyer_uri();
-	if (!$root AND (!defined('_SET_HTML_BASE') OR !_SET_HTML_BASE OR !$GLOBALS['profondeur_url']))
+	if (!$root
+		AND (
+			// si pas de profondeur on peut tronquer
+			$GLOBALS['profondeur_url']<(_DIR_RESTREINT?1:2)
+			// sinon c'est OK si _SET_HTML_BASE a ete force a false
+			OR (defined('_SET_HTML_BASE') AND !_SET_HTML_BASE))
+		)
 		$url = preg_replace(',^[^?]*/,', '', $url);
-
 	// ajouter le cas echeant les variables _POST['id_...']
 	foreach ($_POST as $v => $c)
 		if (substr($v,0,3) == 'id_')
