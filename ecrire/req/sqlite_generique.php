@@ -989,21 +989,18 @@ function spip_sqlite_optimize($table, $serveur = '', $requeter = true){
 
 // avoir le meme comportement que _q()
 function spip_sqlite_quote($v, $type = ''){
-	if (is_array($v)) return join(",", array_map('spip_sqlite_quote', $v));
-	if (is_int($v)) return strval($v);
-	if (strncmp($v, '0x', 2)==0 AND ctype_xdigit(substr($v, 2))) return hexdec(substr($v, 2));
-	if ($type==='int' AND !$v) return '0';
-
-	if (function_exists('sqlite_escape_string')){
-		return "'".sqlite_escape_string($v)."'";
+	if ($type) {
+		if (!is_array($v))
+			return _sqlite_calculer_cite($v,$type);
+		// si c'est un tableau, le parcourir en propageant le type
+		foreach($v as $k=>$r)
+			$v[$k] = spip_sqlite_quote($r, $type);
+		return $v;
 	}
-
-	// trouver un link sqlite3 pour faire l'echappement
-	foreach ($GLOBALS['connexions'] as $s){
-		if (_sqlite_is_version(3, $l = $s['link'])){
-			return $l->quote($v);
-		}
-	}
+	// si on ne connait pas le type, s'en remettre a _q :
+	// on ne fera pas mieux
+	else
+		return _q($v);
 }
 
 
@@ -1332,7 +1329,18 @@ function _sqlite_calculer_cite($v, $type){
 		if (ctype_xdigit(substr($v, 2)) AND strncmp($v, '0x', 2)==0)
 			return hexdec(substr($v, 2));
 	}
-	return spip_sqlite_quote($v,$type);
+
+	if (function_exists('sqlite_escape_string')){
+		return "'".sqlite_escape_string($v)."'";
+	}
+
+	// trouver un link sqlite3 pour faire l'echappement
+	foreach ($GLOBALS['connexions'] as $s){
+		if (_sqlite_is_version(3, $l = $s['link'])){
+			return $l->quote($v);
+		}
+	}
+	return  ("'" . addslashes($v) . "'");
 }
 
 
