@@ -853,8 +853,9 @@ function spip_get_lock($nom, $timeout = 0) {
 	define('_LOCK_TIME', intval(time()/3600-316982));
 
 	$connexion = &$GLOBALS['connexions'][0];
+	$bd = $connexion['db'];
 	$prefixe = $connexion['prefixe'];
-	$nom = "$bd:$prefix:$nom" .  _LOCK_TIME;
+	$nom = "$bd:$prefixe:$nom" .  _LOCK_TIME;
 
 	$connexion['last'] = $q = "SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n";
 	$q = @sql_fetch(mysql_query($q));
@@ -866,8 +867,9 @@ function spip_get_lock($nom, $timeout = 0) {
 function spip_release_lock($nom) {
 
 	$connexion = &$GLOBALS['connexions'][0];
+	$bd = $connexion['db'];
 	$prefixe = $connexion['prefixe'];
-	$nom = "$bd:$prefix:$nom" . _LOCK_TIME;
+	$nom = "$bd:$prefixe:$nom" . _LOCK_TIME;
 
 	$connexion['last'] = $q = "SELECT RELEASE_LOCK(" . _q($nom) . ")";
 	@mysql_query($q);
