@@ -128,7 +128,9 @@ function quete_rubrique_fond($contexte) {
 		$l = array_diff($l,array('rubrique'));
 		array_unshift($l, 'rubrique');
 		foreach($l as $objet){
-			$liste_objets[id_table_objet($objet)] = $objet;
+			$id = id_table_objet($objet);
+			if (!isset($liste_objets[$id]))
+				$liste_objets[$id] = objet_type($objet,false);
 		}
 	}
 	$c = array_intersect_key($contexte,$liste_objets);
