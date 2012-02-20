@@ -826,7 +826,8 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 
 // http://doc.spip.org/@spip_mysql_cite
 function spip_mysql_cite($v, $type) {
-	if(is_null($v)) return 'NULL'; // null php se traduit en NULL SQL
+	if(is_null($v)
+		AND stripos($type,"NOT NULL")===false) return 'NULL'; // null php se traduit en NULL SQL
 	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v))
 		return $v;
 	if (sql_test_int($type)) {
