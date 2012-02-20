@@ -486,7 +486,17 @@ function spip_sqlite_create_index($nom, $table, $champs, $unique='', $serveur = 
 		if ($champs[0]=="(") $champs = substr($champs, 1, -1);
 		$champs = array($champs);
 	}
-	$query = "CREATE ".($unique?"UNIQUE ":"")."INDEX $nom ON $table (".join(',', $champs).")";
+
+	$ifnotexists = "";
+	if (_sqlite_is_version(2, '', $serveur)){
+		/* simuler le IF EXISTS - version 2 */
+		$a = spip_sqlite_showtable($table, $serveur);
+		if (isset($a['key']['KEY '.$nom])) return true;
+	} else {
+		$ifnotexists = ' IF NOT EXISTS';
+	}
+
+	$query = "CREATE ".($unique?"UNIQUE ":"")."INDEX$ifnotexists $nom ON $table (".join(',', $champs).")";
 	$res = spip_sqlite_query($query, $serveur, $requeter);
 	if (!$requeter) return $res;
 	if ($res)
