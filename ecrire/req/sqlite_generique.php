@@ -12,10 +12,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// infos :
-// il ne faut pas avoir de PDO::CONSTANTE dans ce fichier sinon php4 se tue !
-// idem, il ne faut pas de $obj->toto()->toto sinon php4 se tue !
-
 # todo : get/set_caracteres ?
 
 
@@ -1165,7 +1161,11 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 			$fields = array();
 			$keys   = array();
 
-
+			// enlever les contenus des valeurs DEFAULT 'xxx' qui pourraient perturber
+			// par exemple s'il contiennent une virgule.
+			// /!\ cela peut aussi echapper le nom des champs si la table a eu des operations avec SQLite Manager !
+			list($dec, $echaps) = query_echappe_textes($dec);
+			
 			// separer toutes les descriptions de champs, separes par des virgules
 			# /!\ explode peut exploser aussi DECIMAL(10,2) !
 			foreach (explode(",", $dec) as $v){
@@ -1173,15 +1173,16 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 				// trim car 'Sqlite Manager' (plugin Firefox) utilise des guillemets
 				// lorsqu'on modifie une table avec cet outil.
 				// possible que d'autres fassent de meme.
-				$k = trim(strtolower($r[1]), '"'); // nom du champ
+				$k = trim(strtolower(query_reinjecte_textes($r[1], $echaps)), '"'); // nom du champ
+				$def = query_reinjecte_textes($r[2], $echaps); // valeur du champ
 				
 				# rustine pour DECIMAL(10,2)
 				if (false !== strpos($k, ')')) {
-					$fields[$k_precedent] .= ',' . $k . ' ' . $r[2];
+					$fields[$k_precedent] .= ',' . $k . ' ' . $def;
 					continue;
 				}
 				
-				$fields[$k] = $r[2];
+				$fields[$k] = $def;
 				$k_precedent = $k;
 				
 				// la primary key peut etre dans une des descriptions de champs
