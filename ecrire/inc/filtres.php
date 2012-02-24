@@ -1275,8 +1275,8 @@ function post_autobr($texte, $delim="\n_ ") {
 		$suite = substr($suite, $t);
 		$car = substr($suite, 0, 1);
 		if (($car<>'-') AND ($car<>'_') AND ($car<>"\n") AND ($car<>"|") AND ($car<>"}")
-		AND !preg_match(',^\s*(\n|</?(quote|div)|$),S',($suite))
-		AND !preg_match(',</?(quote|div)> *$,iS', $debut)) {
+		AND !preg_match(',^\s*(\n|</?(quote|div|dl|dt|dd)|$),S',($suite))
+		AND !preg_match(',</?(quote|div|dl|dt|dd)> *$,iS', $debut)) {
 			$debut .= $delim;
 		} else
 			$debut .= "\n";
