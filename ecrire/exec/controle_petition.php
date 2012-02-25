@@ -29,7 +29,10 @@ function exec_controle_petition_dist()
 function exec_controle_petition_args($id_article, $type, $date, $debut, $id_signature, $pas=NULL)
 {
 	if ($id_signature) {
-		$id_article = sql_getfetsel("id_article", "spip_signatures", "id_signature=$id_signature");
+		$r = sql_fetsel("id_article, statut", "spip_signatures", "id_signature=$id_signature");
+		$id_article = $r['id_article'];
+		$s = $r['statut'];
+		$type = ($s=='publie' OR $s=='poubelle') ? 'public' : 'interne';
 		$where = '(id_signature=' . sql_quote($id_signature) . ') AND ';
 	} else 	$where = '';
 	if ($id_article AND !($titre = sql_getfetsel("titre", "spip_articles", "id_article=$id_article"))) {
