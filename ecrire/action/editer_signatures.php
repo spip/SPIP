@@ -80,7 +80,7 @@ function action_editer_signatures_relance($id_article)
 	$url = generer_url_entite_absolue($id_article, 'article','','',true);
 	list($titre, $url) = signature_langue($id_article, $url);
 
-	$query = sql_select('*', 'spip_signatures', "id_article=$id_article AND NOT (statut='publie' OR statut='poubelle')", 'ad_email');
+	$query = sql_select('*', 'spip_signatures', "id_article=$id_article AND NOT (statut='publie' OR statut='poubelle') AND date_time <  DATE_SUB(NOW(), INTERVAL 1 DAY)", 'ad_email');
 	while ($r = sql_fetch($query)) 
 		signature_demande_confirmation($id_article, $url, $r['nom_email'], $r['ad_email'], $r['nom_site'], $r['url_site'], $r['message'], $titre, $r['statut']);
 }
