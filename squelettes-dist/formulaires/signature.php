@@ -316,7 +316,12 @@ function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url,
 	if (!strlen($statut))
 		$statut = signature_test_pass();
 
-	return signature_demande_confirmation($id_article, $url_page, $nom, $mail, $site, $url, $msg, $titre, $statut);
+	list($sujet, $corps) =  signature_demande_confirmation($id_article, $url_page, $nom, $site, $url, $msg, $titre, $statut);
+
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
+	if ($envoyer_mail($mail, $sujet, $corps))
+		return _T('form_pet_envoi_mail_confirmation',array('email'=>$mail));
+	return false; # erreur d'envoi de l'email
 }
 
 function signature_langue($id_article, $url_page)
@@ -332,24 +337,19 @@ function signature_langue($id_article, $url_page)
 	return array($titre, $url_page);
 }
 
-function signature_demande_confirmation($id_article, $url_page, $nom, $mail, $site, $url, $msg, $titre, $statut)
+function signature_demande_confirmation($id_article, $url_page, $nom, $site, $url, $msg, $titre, $statut)
 {
 	$url_page = parametre_url($url_page, 'var_confirm', $statut, '&')
 	. "#sp$id_article";
 
-	$r = _T('form_pet_mail_confirmation',
-		 array('titre' => $titre,
-		       'nom_email' => $nom,
-		       'nom_site' => $site,
-		       'url_site' => $url, 
-		       'url' => $url_page,
-		       'message' => $msg));
-
-	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	if ($envoyer_mail($mail, _T('form_pet_confirmation')." ". $titre, $r))
-		return _T('form_pet_envoi_mail_confirmation',array('email'=>$mail));
-
-	return false; # erreur d'envoi de l'email
+	return array(_T('form_pet_confirmation')." ". $titre, 
+		     _T('form_pet_mail_confirmation',
+			 array('titre' => $titre,
+			       'nom_email' => $nom,
+			       'nom_site' => $site,
+			       'url_site' => $url, 
+			       'url' => $url_page,
+			       'message' => $msg)));
 }
 
 // Pour eviter le recours a un verrou (qui bloque l'acces a la base),

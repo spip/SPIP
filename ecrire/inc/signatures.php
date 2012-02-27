@@ -99,15 +99,8 @@ function signatures_edit($script, $id, $arg, $row) {
 		if (!$nom_site) $nom_site = _T('info_site');
 		$res .= "<div class='site'><span class='spip_x-small'>"._T('info_site_web')."</span> <a href='$url_site'>$nom_site</a></div>\n";
 		}
-	if ($ad_email) {
-		$res .= "<div class='ad_email'><span class='spip_x-small'>"
-			._T('info_adresse_email')
-			."</span> "
-			. (!email_valide($ad_email)
-			   ? $ad_email :
-			   ("<a href='mailto:" . attribut_html($ad_email) . "'>$ad_email</a>"))
-			. "</div>\n";
-	}
+
+	if ($ad_email) $res .= signatures_edit_mail($id_article, $ad_email, $row);
 
 	$res .= "<div class='texte'>" . message_de_signature($row) . "</div>";
 		
@@ -143,5 +136,32 @@ function signatures_edit($script, $id, $arg, $row) {
 	}
 
 	return $res;
+}
+
+function signatures_edit_mail($id_article, $ad_email, $row) {
+
+	$email = attribut_html($ad_email);
+	if (email_valide($ad_email)) {
+		if ($row['statut'] != 'publie'
+		AND autoriser('modererpetition', 'article', $id_article)) {
+			include_spip('formulaires/signature');
+			$url = generer_url_entite_absolue($id_article, 'article','','',true);
+			list($titre, $url) = signature_langue($id_article, $url);
+
+			list($sujet, $corps) = signature_demande_confirmation($id_article, $url, $row['nom_email'], $row['nom_site'], $row['url_site'], $row['message'], $titre, $row['statut']);
+
+			include_spip('inc/filtres');
+			$sujet = rawurlencode(filtrer_entites($sujet));
+			$corps = rawurlencode(filtrer_entites($corps));
+			$corps = "?subject=$sujet&amp;body=$corps";
+		} else $corps = '';
+		$email = "<a href=\"mailto:$ad_email$corps\">$email</a>";
+	}
+	return "<div class='ad_email'><span class='spip_x-small'>"
+			._T('info_adresse_email')
+			."</span> "
+			. $email
+			. "</div>\n";
+
 }
 ?>
