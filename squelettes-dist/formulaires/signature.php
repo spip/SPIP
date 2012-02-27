@@ -113,7 +113,7 @@ function formulaires_signature_verifier_dist($id_article, $petition, $texte, $si
 }
 
 function formulaires_signature_traiter_dist($id_article, $petition, $texte, $site_obli, $message) {
-	$reponse = _T('form_pet_probleme_technique');
+
 	include_spip('base/abstract_sql');
 	if (spip_connect()) {
 		$controler_signature = charger_fonction('controler_signature', 'inc');
@@ -121,7 +121,7 @@ function formulaires_signature_traiter_dist($id_article, $petition, $texte, $sit
 		_request('session_nom'), _request('session_email'),
 		_request('message'), _request('signature_nom_site'),
 		_request('signature_url_site'), _request('url_page'));
-	}
+	} else 	$reponse = _T('form_pet_probleme_technique');
 
 	return array('message_ok'=>$reponse);
 }
@@ -307,21 +307,33 @@ function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url,
 			_T('form_pet_signature_validee');
 	}
 
-
 	//
 	// Cas normal : envoi d'une demande de confirmation
 	//
-	$row = sql_fetsel('titre,lang', 'spip_articles', "id_article=$id_article");
-	$lang = lang_select($row['lang']);
-	$titre = textebrut(typo($row['titre']));
-	if ($lang) lang_select();
+
+	list($titre, $url_page) = signature_langue($id_article, $url_page);
 
 	if (!strlen($statut))
 		$statut = signature_test_pass();
 
+	return signature_demande_confirmation($id_article, $url_page, $nom, $mail, $site, $url, $msg, $titre, $statut);
+}
+
+function signature_langue($id_article, $url_page)
+{
+	$row = sql_fetsel('titre,lang', 'spip_articles', "id_article=$id_article");
+	$lang = lang_select($row['lang']);
+	$titre = textebrut(typo($row['titre']));
+
+	if ($lang) lang_select();
 	if ($lang != $GLOBALS['meta']['langue_site'])
 		  $url_page = parametre_url($url_page, "lang", $lang,'&');
 
+	return array($titre, $url_page);
+}
+
+function signature_demande_confirmation($id_article, $url_page, $nom, $mail, $site, $url, $msg, $titre, $statut)
+{
 	$url_page = parametre_url($url_page, 'var_confirm', $statut, '&')
 	. "#sp$id_article";
 
@@ -333,9 +345,8 @@ function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url,
 		       'url' => $url_page,
 		       'message' => $msg));
 
-	$titre = _T('form_pet_confirmation')." ". $titre;
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	if ($envoyer_mail($mail,$titre, $r))
+	if ($envoyer_mail($mail, _T('form_pet_confirmation')." ". $titre, $r))
 		return _T('form_pet_envoi_mail_confirmation',array('email'=>$mail));
 
 	return false; # erreur d'envoi de l'email

@@ -63,32 +63,38 @@ function controle_petition_args($id_article, $type, $date, $debut, $titre, $wher
 	$res = $signatures('controle_petition', $id_article, $debut, $pas, $where, $order, $type);
 
 	if (_AJAX) {
-			ajax_retour($res);
+		ajax_retour($res);
 	} else {
-
-		if (autoriser('modererpetition')
-		OR (
-			$id_article > 0
-			AND autoriser('modererpetition', 'article', $id_article)
-			))
-			$ong = controle_petition_onglet($id_article, $debut, $type, '');
-		else {
-			$type = 'public';
-			$ong = '';
-		}
-		controle_petition_page($id_article, $titre, $ong, $res);
+		$count = ($type != 'interne') ? 0 : sql_countsel("spip_signatures", $where);
+		controle_petition_page($id_article, $type, $res, $count);
 	}
 }
 
 // http://doc.spip.org/@controle_petition_page
-function controle_petition_page($id_article, $titre,  $ong, $corps)
+function controle_petition_page($id_article, $type,  $corps, $count)
 {
-	if ($id_article) {
-		$a =  generer_url_ecrire("statistiques_visites","id_article=$id_article");
-		$rac = "<br /><br /><br /><br /><br />" .
-		bloc_des_raccourcis(icone_horizontale(_T('icone_statistiques_visites'),$a, "statistiques-24.gif","rien.gif", false));
+	$args = array();
+	$rac = $titre = '';
 
-		$titre = "<a href='" .
+	if (!(autoriser('modererpetition')
+	OR (
+		$id_article > 0
+		AND autoriser('modererpetition', 'article', $id_article)
+	    ))) {
+		$ong = '';
+	} else {
+		$ong = controle_petition_onglet($id_article, $debut, $type, '');
+		if ($id_article) {
+			$h = generer_url_ecrire("statistiques_visites","id_article=$id_article");
+			$rac = icone_horizontale(_T('icone_statistiques_visites'), $h, "statistiques-24.gif","rien.gif", false);
+			if ($type == 'interne') {
+
+				$h = redirige_action_auteur('editer_signatures', $id_article . 'A', 'controle_petition', "id_article=$id_article&type=interne");
+				$rac .= icone_horizontale(_T('icone_relancer_signataire') . " ($count)", $h, "envoi-message-24.gif","rien.gif", false);
+			}
+			$rac = "<br /><br /><br /><br /><br />" . bloc_des_raccourcis($rac);
+
+			$titre = "<a href='" .
 			generer_url_entite($id_article,'article') .
 			"'>" .
 			typo($titre) .
@@ -98,15 +104,12 @@ function controle_petition_page($id_article, $titre,  $ong, $corps)
 			$id_article .
 			")</span>";
 
-		if (!sql_countsel('spip_petitions', "id_article=$id_article"))
-			$titre .= '<br >' . _T('info_petition_close');
+			if (!sql_countsel('spip_petitions', "id_article=$id_article"))
+				$titre .= '<br >' . _T('info_petition_close');
 
-		$args = array('id_article' => $id_article);
-	} else  {
-		$args = array();
-		$rac = $titre = '';
+			$args = array('id_article' => $id_article);
+		}
 	}
-
 	$head = _T('titre_page_controle_petition');
 	$idom = "editer_signature-" . $id_article;
 	$commencer_page = charger_fonction('commencer_page', 'inc');
