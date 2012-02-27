@@ -197,7 +197,7 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
-	$styles = array(array('arial11', 7), array('arial11'), array('arial1'), array('arial1'), array('arial1 centered', 100), array('arial1', 38));
+	$styles = array(array('arial11', 7), array('arial11'), array('arial1'), array('arial1'), array('arial1 centered', 100), array('arial1', 42));
 
 	$tableau = array(); // ne sert pas ici
 	return $presenter_liste($requete, $skel, $tableau, $arg, $force, $styles, $tmp_var, $titre, icone_table($type));
