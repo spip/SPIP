@@ -268,8 +268,11 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 
 	else
 	if (strpos("\n".$texte, "\n|")===false
-	AND strlen($texte) > 2.5*$longueur)
+	  AND strlen($texte) > 2.5*$longueur){
+		if (strpos($texte,"<multi")!==false)
+			$texte = extraire_multi($texte);
 		$texte = couper($texte, 2*$longueur);
+	}
 
 	// ne pas tenir compte des notes
 	if ($notes = charger_fonction('notes', 'inc', true))
