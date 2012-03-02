@@ -602,7 +602,7 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 	if ($user) $user = urlencode($user[0]).":".urlencode($user[1]);
 
 	if ($http_proxy) {
-		$path = "$scheme://"
+		$path = (($scheme=='ssl') ? 'https://' : "$scheme://")
 			. (!$user ? '' : "$user@")
 			. "$host" . (($port != 80) ? ":$port" : "") . $path;
 		$t2 = @parse_url($http_proxy);
