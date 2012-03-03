@@ -64,6 +64,7 @@
 	<langue code="id" />
 	<langue code="it" url="http://trad.spip.org/tradlang_module/spip?lang_cible=it">
 		<traducteur nom="Cap" lien="http://trad.spip.org/auteur/cap" />
+		<traducteur nom="phante" lien="http://trad.spip.org/auteur/phante" />
 	</langue>
 	<langue code="it_fem" />
 	<langue code="ja" url="http://trad.spip.org/tradlang_module/spip?lang_cible=ja">
