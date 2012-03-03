@@ -444,9 +444,9 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	// sauf se degrader
 	if ($id == $qui['id_auteur'] && $opt['statut'])
 		return false;
-	// et modifier un webmestre si il ne l'est pas lui meme
-	// si les webmestres sont fixes par constante (securite)
-	elseif (defined('_ID_WEBMESTRES') OR !autoriser('webmestre'))
+	// et toucher au statut webmestre si il ne l'est pas lui meme
+	// ou si les webmestres sont fixes par constante (securite)
+	elseif ($opt['webmestre'] AND (defined('_ID_WEBMESTRES') OR !autoriser('webmestre')))
 		return false;
 	// et modifier un webmestre si il ne l'est pas lui meme
 	elseif (autoriser('webmestre','',0,$id) AND !autoriser('webmestre'))
