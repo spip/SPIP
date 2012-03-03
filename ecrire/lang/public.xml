@@ -54,7 +54,9 @@
 	<langue code="hr" />
 	<langue code="hu" />
 	<langue code="id" />
-	<langue code="it" />
+	<langue code="it" url="http://trad.spip.org/tradlang_module/public?lang_cible=it">
+		<traducteur nom="phante" lien="http://trad.spip.org/auteur/phante" />
+	</langue>
 	<langue code="it_fem" />
 	<langue code="iu" />
 	<langue code="ja" />
