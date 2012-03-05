@@ -321,6 +321,7 @@ function critere_logo_dist($idb, &$boucles, $crit){
 	$c = "sql_in('".
 	     $boucle->id_table.'.'.$boucle->primary
 	     ."', lister_objets_avec_logos('".$boucle->primary."'), '')";
+
 	if ($crit->cond) $c = "($arg ? $c : 1)";
 
 	if ($not)
@@ -368,7 +369,7 @@ function critere_collecte_dist($idb, &$boucles, $crit){
 		if ($n && (strpos($boucle->order[$n-1], 'COLLATE')===false))
 			$boucle->order[$n-1] .= " . ".$boucle->modificateur['collate'];
 	} else
-		return (array('zbug_critere_inconnu', array('critere' => $crit->op." $n")));
+		return (array('zbug_critere_inconnu', array('critere' => $crit->op." ".count($boucles[$idb]->order))));
 }
 
 // http://doc.spip.org/@calculer_critere_arg_dynamique
@@ -1156,7 +1157,14 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 	// gestion par les plugins des jointures tordues 
 	// pas automatiques mais necessaires
 	$table_sql = table_objet_sql($table);
-	if (is_array($exceptions_des_jointures[$table_sql])){
+	if (is_array($exceptions_des_jointures[$table_sql])
+	  AND
+			(
+			isset($exceptions_des_jointures[$table_sql][$col])
+			OR
+			isset($exceptions_des_jointures[$table_sql][''])
+			)
+		){
 		$t = $exceptions_des_jointures[$table_sql];
 		$index = isset($t[$col])
 			? $t[$col] : (isset($t['']) ? $t[''] : array());
