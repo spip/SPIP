@@ -993,20 +993,22 @@ function spip_sqlite_optimize($table, $serveur = '', $requeter = true){
 }
 
 
-// avoir le meme comportement que _q()
+//
+/**
+ * echapper une valeur selon son type ou au mieux
+ * comme le fait _q() mais pour sqlite avec ses specificites
+ *
+ * @param string|array|number $v
+ * @param string $type
+ * @return array|string|number
+ */
 function spip_sqlite_quote($v, $type = ''){
-	if ($type) {
 		if (!is_array($v))
 			return _sqlite_calculer_cite($v,$type);
 		// si c'est un tableau, le parcourir en propageant le type
 		foreach($v as $k=>$r)
 			$v[$k] = spip_sqlite_quote($r, $type);
 		return $v;
-	}
-	// si on ne connait pas le type, s'en remettre a _q :
-	// on ne fera pas mieux
-	else
-		return _q($v);
 }
 
 
@@ -1338,23 +1340,30 @@ function _sqlite_link($serveur = ''){
  * renvoie les bons echappements (pas sur les fonctions now())
  * http://doc.spip.org/@_sqlite_calculer_cite
  *
- * @param  $v
- * @param  $type
- * @return number
+ * @param string|array|number $v
+ * @param string $type
+ * @return string|array|number
  */
 function _sqlite_calculer_cite($v, $type){
-	if(is_null($v)
-		AND stripos($type,"NOT NULL")===false) return 'NULL'; // null php se traduit en NULL SQL
+	if ($type){
+		if(is_null($v)
+			AND stripos($type,"NOT NULL")===false) return 'NULL'; // null php se traduit en NULL SQL
 
-	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v))
-		return $v;
-	if (sql_test_int($type)){
-		if (is_numeric($v))
+		if (sql_test_date($type) AND preg_match('/^\w+\(/', $v))
 			return $v;
-		elseif (ctype_xdigit(substr($v, 2)) AND strncmp($v, '0x', 2)==0)
-			return hexdec(substr($v, 2));
-		else
-			return intval($v);
+		if (sql_test_int($type)){
+			if (is_numeric($v))
+				return $v;
+			elseif (ctype_xdigit(substr($v, 2)) AND strncmp($v, '0x', 2)==0)
+				return hexdec(substr($v, 2));
+			else
+				return intval($v);
+		}
+	}
+	else {
+		// si on ne connait pas le type on le deduit de $v autant que possible
+		if (is_numeric($v))
+			return strval($v);
 	}
 
 	if (function_exists('sqlite_escape_string')){
@@ -1367,7 +1376,10 @@ function _sqlite_calculer_cite($v, $type){
 			return $l->quote($v);
 		}
 	}
-	return  ("'" . addslashes($v) . "'");
+
+	// echapper les ' en ''
+	spip_log("Pas de methode sqlite_escape_string ni ->quote pour echapper","sqlite."._LOG_INFO_IMPORTANTE);
+	return  ("'" . str_replace("'","''",$v) . "'");
 }
 
 
