@@ -16,7 +16,7 @@
 				[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}|icone_verticale{[(#OBJET|objet_info{texte_modifier}|_T)],#OBJET|objet_info{icone_objet},edit,right ajax preload})]
 			]
 			[(#ID_OBJET|afficher_qui_edite{#OBJET}|oui)
-				[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}|icone_verticale{#ID_OBJET|afficher_qui_edite{#OBJET},warning-24,'',right ajax preload})]
+				[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}|icone_verticale{#ID_OBJET|afficher_qui_edite{#OBJET},warning-24,'',right edition_deja ajax preload})]
 			]
 		]
 		<h1>[(#INFO_TITRE{#OBJET,#ID_OBJET}|recuperer_numero). ](#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{<:info_sans_titre:>})[(#OBJET|objet_icone|inserer_attribut{class,cadre-icone})]</h1>
@@ -36,7 +36,7 @@
 			[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}|icone_verticale{[(#OBJET|objet_info{texte_modifier}|_T)],#OBJET|objet_info{icone_objet},edit,right ajax preload})]
 		]
 		[(#ID_OBJET|afficher_qui_edite{#OBJET}|oui)
-			[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}|icone_verticale{#ID_OBJET|afficher_qui_edite{#OBJET},warning-24,'',right ajax preload})]
+			[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}|icone_verticale{#ID_OBJET|afficher_qui_edite{#OBJET},warning-24,'',right edition_deja ajax preload})]
 		]
 	]
 

@@ -38,7 +38,7 @@
 .icone.clearright {clear:#ENV{right};}
 
 /* icone verticale : precision necessaire pour IEx */
-.icone.verticale.left,.icone.verticale.right {width:72px;}
+.lte7 .icone.verticale.left,.lte7 .icone.verticale.right {width:72px;}
 
 /* icone horizontale */
 .icone.horizontale {}
@@ -74,6 +74,9 @@
 /* cas particuliers */
 .icone.verticale.historique-24 { width: 90px; }
 .icone.verticale.suivi-forum-24 { width: 100px; }
+
+.icone.verticale.edition_deja,.icone.verticale.edition_deja a,.icone.verticale.edition_deja a b {width: 100px;}
+.icone.verticale.edition_deja a b {height: [(#ENV{line-height}|mult{3}|div{#GET{iconfontsize}})em];}
 
 /* icone en bord haut du cadre */
 .cadre-icone {position: absolute; top: -16px; #ENV{left}: 10px;z-index:1;}

@@ -7,7 +7,7 @@
 			[(#URL_ECRIRE{auteur_edit,id_auteur=#ID_AUTEUR}|icone_verticale{<:admin_modifier_auteur:>,auteur,edit,right ajax preload})]
 		]
 		[(#ID_AUTEUR|afficher_qui_edite{auteur}|oui)
-			[(#URL_ECRIRE{auteur_edit,id_auteur=#ID_AUTEUR}|icone_verticale{#ID_AUTEUR|afficher_qui_edite{auteur},warning-24,'',right ajax preload})]
+			[(#URL_ECRIRE{auteur_edit,id_auteur=#ID_AUTEUR}|icone_verticale{#ID_AUTEUR|afficher_qui_edite{auteur},warning-24,'',right edition_deja ajax preload})]
 		]
 	]
 	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{auteur-24.png}|balise_img{auteur,cadre-icone})]</h1>
