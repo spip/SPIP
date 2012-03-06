@@ -445,7 +445,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('style_prive_defaut.css'))
+	  . url_absolue(find_in_path('prive/style_prive_defaut.css'))
 	. '" id="cssprivee" />'  . "\n"
 
 	// CSS calendrier
@@ -454,20 +454,20 @@ function envoi_link($nom_site_spip, $minipres=false) {
 		. url_absolue(find_in_path('agenda.css')) .'" />' . "\n"
 		: '')
 
-	// CSS imprimante (masque des trucs, a completer)
+	// CSS des raccourcis
 	. '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('spip_style.css'))
+	  . url_absolue(find_in_path('prive/spip_style.css'))
 	. '" media="all" />' . "\n"
 
 	// CSS imprimante (masque des trucs, a completer)
 	. '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('spip_style_print.css'))
+	  . url_absolue(find_in_path('prive/spip_style_print.css'))
 	. '" media="print" />' . "\n"
 
 	// CSS "visible au chargement" differente selon js actif ou non
 
 	. '<link rel="stylesheet" type="text/css" href="'
-	  . url_absolue(find_in_path('spip_style_'
+	  . url_absolue(find_in_path('prive/spip_style_'
 				     . (_SPIP_AJAX ? 'invisible' : 'visible')
 				     . '.css'))
 	.'" />' . "\n"
@@ -482,7 +482,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 
 	// CSS optionelle minipres
 	. ($minipres?'<link rel="stylesheet" type="text/css" href="'
-	   . url_absolue(find_in_path('minipres.css')).'" />' . "\n":"");
+	   . url_absolue(find_in_path('prive/minipres.css')).'" />' . "\n":"");
 
 	$favicon = find_in_path('spip.ico');
 
