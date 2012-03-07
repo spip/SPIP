@@ -356,6 +356,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_creer_repertoire' => 'خواهشمند است كه يك فايل يا يك فهرست بنام  بسازيد: ',
 	'info_creer_repertoire_2' => 'در داخل زير بخش <b>@repertoire@</b> سپس :',
 	'info_creer_vignette' => 'ساخت خودكار تصاوير كوچك',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'باز كنيد',
 	'info_descriptif_nombre' => ': توصيف',
 	'info_description' => ': توصيف',

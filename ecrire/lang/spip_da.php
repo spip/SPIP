@@ -365,6 +365,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Opret en fil eller et katalog med navnet:',
 	'info_creer_repertoire_2' => 'i underkataloget <b>@repertoire@</b>, og derefter', # MODIF
 	'info_creer_vignette' => 'création automatique de la vignette', # NEW
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Luk op',
 	'info_descriptif_nombre' => 'beskrivelse(r):',
 	'info_description' => 'Beskrivelse:',

@@ -361,6 +361,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Kreirajte dokument ili direktorij pod imenom:',
 	'info_creer_repertoire_2' => 'Unutar podirektorija<b>ecrire/data/</b>, zatim:',
 	'info_creer_vignette' => 'automatska kreacija vinjete',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Otvori',
 	'info_descriptif_nombre' => 'opis/i:',
 	'info_description' => 'Opis:',

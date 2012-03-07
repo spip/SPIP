@@ -364,6 +364,7 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 	'info_creer_repertoire' => 'Utwórz plik lub katalog o nazwie:',
 	'info_creer_repertoire_2' => 'w podkatalogu <b>@repertoire@</b>, a następnie:',
 	'info_creer_vignette' => 'generowanie miniaturki',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Rozwiń',
 	'info_descriptif_nombre' => 'opis(y):',
 	'info_description' => 'Opis:',

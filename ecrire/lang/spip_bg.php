@@ -367,6 +367,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Моля, създайте файл или директория, наречена:',
 	'info_creer_repertoire_2' => 'в под-директорията <b>@repertoire@</b>, след това',
 	'info_creer_vignette' => 'автоматично създаване на умален образ',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Сгъване',
 	'info_descriptif_nombre' => 'описание(я):',
 	'info_description' => 'Описание:',

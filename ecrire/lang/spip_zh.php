@@ -364,6 +364,7 @@ sera ignorée) :
 	'info_creer_repertoire' => '请创建一个文件或目录叫:',
 	'info_creer_repertoire_2' => '在<b>@repertoire@</b>子目录内部，然后 ：',
 	'info_creer_vignette' => '自动产生图标',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => '展开',
 	'info_descriptif_nombre' => '描述:',
 	'info_description' => '描述:',

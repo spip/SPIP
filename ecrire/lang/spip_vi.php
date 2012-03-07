@@ -365,6 +365,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Xin lập ra một hồ sơ hay một ngăn mang tên:',
 	'info_creer_repertoire_2' => 'trong ngăn phụ <b>@repertoire@</b>, kế đó', # MODIF
 	'info_creer_vignette' => 'tự động tạo ra các hình mẫu nhỏ',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Mở ra',
 	'info_descriptif_nombre' => 'Mô tả:',
 	'info_description' => 'Tóm lược:',

@@ -370,6 +370,7 @@ en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 	'info_creer_repertoire' => 'Mä q\'ipi jan ukjax mä imañ q\'ipi akham sutin uñstayañamaxa',
 	'info_creer_repertoire_2' => 'jach\'a q\'ipina <b>@repertoire@</b>, ukatxa ',
 	'info_creer_vignette' => 'Jisk\'itat justupak uñstayawi',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Janatataña',
 	'info_descriptif_nombre' => 'Uñicht\'ayawinaka:',
 	'info_description' => 'Uñicht\'ayawi:',

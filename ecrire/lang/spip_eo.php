@@ -364,6 +364,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Bonvolu krei dosieron aŭ dosierujon kies nomo estu :',
 	'info_creer_repertoire_2' => 'ene de la subdosierujo <b>@repertoire@</b>, kaj :',
 	'info_creer_vignette' => 'aŭtomata kreo de la vinjeto',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Malfaldi',
 	'info_descriptif_nombre' => 'priskribo(j) :',
 	'info_description' => 'Priskribo :',

@@ -365,6 +365,7 @@ deu sit "@nom_site_spip@" (@adresse_site@):', # MODIF
 	'info_creer_repertoire' => 'Volhatz crear un fichièr o un repertòri nomentat',
 	'info_creer_repertoire_2' => 'laguens lo sosrepertòri   <b>@repertoire@</b>, puish:', # MODIF
 	'info_creer_vignette' => 'creacion automatica de la vinheta',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Desplegar',
 	'info_descriptif_nombre' => 'descriptiu(s):',
 	'info_description' => 'Descripcion:',

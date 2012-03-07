@@ -365,6 +365,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Favor criar um ficheiro ou um repertório chamado :',
 	'info_creer_repertoire_2' => 'dentro do sub-repertório <b>@repertoire@</b>, depois :', # MODIF
 	'info_creer_vignette' => 'criação automática do ícone',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Desenvolver',
 	'info_descriptif_nombre' => 'descritivo(s) :',
 	'info_description' => 'Descrição :',

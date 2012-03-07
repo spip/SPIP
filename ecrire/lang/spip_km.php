@@ -361,6 +361,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'សូម​បង្កើត មួយ​ឯកសារ ឬ មួយ​បញ្ជី​រាយ​នាម ដែលបានដាក់ឈ្មោះ​៖',
 	'info_creer_repertoire_2' => '​ខាងក្នុង​បញ្ជី​រាយ​នាម​រង <b>@repertoire@</b>, រួច៖',
 	'info_creer_vignette' => 'ការ​បង្កើត​​ស្វ័យប្រវត្ដិ​ នៃ​គំនូស​ព្រាង',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'លាចេញ',
 	'info_descriptif_nombre' => 'ជា ការពិពណ៌នា៖',
 	'info_description' => 'ការពិពណ៌នា ៖',

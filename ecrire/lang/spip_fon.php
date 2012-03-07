@@ -356,6 +356,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'mi kɛnklɛn bó gbètàxókplé bó ná nyíkɔ ɛ:',
 	'info_creer_repertoire_2' => 'àkpáxwé', # MODIF
 	'info_creer_vignette' => 'Kunɖéwémá càca',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'mi vlɔn',
 	'info_descriptif_nombre' => 'ɖìɖèmɛ:',
 	'info_description' => 'ɖìɖèmɛ:',

@@ -357,6 +357,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'ဖိုင် သို့မဟုတ် ဖိုင်တွဲကိုဖန်တီးပါ',
 	'info_creer_repertoire_2' => '<b>@repertoire@</b>ရဲ့အထဲမှာ၊ ပြီးတော့',
 	'info_creer_vignette' => 'အလိုအလျှောက်ဖန်တီးသော နမူနာပုံ',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'ဖွင့်ချသည်',
 	'info_descriptif_nombre' => 'ဖော်ပြချက်(များ)',
 	'info_description' => 'ဖော်ပြချက်',

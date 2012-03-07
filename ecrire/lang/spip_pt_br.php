@@ -359,6 +359,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 	'info_creer_repertoire' => 'Por favor, crie um arquivo ou diretório com o nome:',
 	'info_creer_repertoire_2' => 'dentro do subdiretório <b>@repertoire@</b>, e depois:',
 	'info_creer_vignette' => 'criação automática do ícone',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Expandir',
 	'info_descriptif_nombre' => 'descrição(ões):',
 	'info_description' => 'Resumo:',
