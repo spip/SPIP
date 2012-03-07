@@ -47,7 +47,11 @@ a mis a jour la valeur avec la page reelle]
 			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,20})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
 			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
 			<td class='nombre'>[(#COMPTEUR_ARTICLES|singulier_ou_pluriel{info_1_article,info_nb_articles})][<br /><span>(#PIPELINE{'compter_contributions_auteur',#ARRAY{args,#ARRAY{id_auteur,#ID_AUTEUR},data,#ARRAY{}}}|implode{'<br />'})</span>]</td>
-			<td class='action'><button class="button link delete" name="supprimer_lien[auteur-#ID_AUTEUR-#OBJET-#ID_OBJET]" value="X"><:lien_retirer_auteur:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></td>
+			<td class='action'>
+				[(#ENV{editable}|oui)
+				<button class="button link delete" name="supprimer_lien&#91;auteur-#ID_AUTEUR-#OBJET-#ID_OBJET&#93;" value="X"><:lien_retirer_auteur:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
 		</tr>
 	</BOUCLE_liste_aut>
 	</tbody>
