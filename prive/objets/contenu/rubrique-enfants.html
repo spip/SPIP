@@ -33,7 +33,7 @@
 	[(#INCLURE{fond=prive/objets/liste/articles,titre=<:info_tous_articles_presents:>,statut=publie,id_rubrique,par=date,ajax,env}
 		|sinon{#INCLURE{fond=prive/objets/liste/articles,titre=<:info_tous_articles_refuses:>,statut=refuse,id_rubrique,par=date,ajax,env}})]
 ]
-<BOUCLE_verifierrub(RUBRIQUES){id_rubrique}{statut==.*}{0,1}>
+<BOUCLE_verifierrub(RUBRIQUES){id_rubrique}{statut==.*}{si #AUTORISER{creerarticledans,rubrique,#ID_RUBRIQUE}}{0,1}>
 	[(#URL_ECRIRE{article_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique}}|icone_verticale{<:icone_ecrire_article:>,article,new,right})]
 	<div class="nettoyeur"></div>
 </BOUCLE_verifierrub>
