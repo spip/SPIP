@@ -1,4 +1,4 @@
-<body class="#ENV{type-page,page}[(#ENV{type-page,page}|match{_edit$}|oui)edition][ #ENV{type-page,page}_(#ENV{composition,''})] [(#REM|init_body_class)]">
+<body class="#ENV{type-page,page}[(#ENV{type-page,page}|match{_edit$}|oui)edition][ #ENV{type-page,page}_(#ENV{composition,''})][ (#SESSION{statut})][ auteur_(#SESSION{id_auteur})] [(#REM|init_body_class)]">
 	<INCLURE{fond=prive/squelettes/inclure/barre-nav,lang,recherche,plugins=(#REM|parametres_css_prive)}>
 	<div id="page">
 		<INCLURE{fond=prive/objets/liste/auteurs_enligne}>
