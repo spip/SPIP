@@ -2521,7 +2521,7 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction="", $class=""
 		. "</a></span>\n";
 
 	else
-		return bouton_action("$icone<b>$texte</b>",$lien,"icone s$size $class",$javascript,$title);
+		return bouton_action("$icone<b>$texte</b>",$lien,"icone s$size $class",$javascript,$alt);
 }
 
 function icone_base($lien, $texte, $fond, $fonction="", $class="",$javascript=""){
