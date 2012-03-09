@@ -404,8 +404,18 @@ function fichier_copie_locale($source) {
 		if (file_exists(_DIR_RACINE  . $f))
 		  return $f;
 	}
+
 	// Ping  pour voir si son extension est connue et autorisee
-	$path_parts = recuperer_infos_distantes($source,0,false) ;
+	// avec mise en cache du resultat du ping
+
+	$cache = sous_repertoire(_DIR_CACHE,'rid').md5($source);
+	if (!@file_exists($cache)
+	OR !$path_parts = @unserialize(spip_file_get_contents($cache))
+	OR _request('var_mode') == 'recalcul'
+	) {
+		$path_parts = recuperer_infos_distantes($source,0,false) ;
+		ecrire_fichier($cache, serialize($path_parts));
+	}
 	$ext = $path_parts ? $path_parts['extension'] : '';
 	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=".sql_quote($ext))) {
 		return nom_fichier_copie_locale($source, $ext);
