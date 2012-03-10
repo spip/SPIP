@@ -616,26 +616,27 @@ function critere_agenda_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
 	$date = $boucle->id_table.".$date";
 
+	$quote_end = ",'".$boucle->sql_serveur."','text'";
 	if ($type=='jour')
 		$boucle->where[] = array("'='", "'DATE_FORMAT($date, \'%Y%m%d\')'",
-		                         ("sql_quote($annee . $mois . $jour)"));
+		                         ("sql_quote($annee . $mois . $jour$quote_end)"));
 	elseif ($type=='mois')
 		$boucle->where[] = array("'='", "'DATE_FORMAT($date, \'%Y%m\')'",
-		                         ("sql_quote($annee . $mois)"));
+		                         ("sql_quote($annee . $mois$quote_end)"));
 	elseif ($type=='semaine')
 		$boucle->where[] = array("'AND'",
 		                         array("'>='",
 		                               "'DATE_FORMAT($date, \'%Y%m%d\')'",
-		                               ("date_debut_semaine($annee, $mois, $jour)")),
+		                               ("date_debut_semaine($annee, $mois, $jour$quote_end)")),
 		                         array("'<='",
 		                               "'DATE_FORMAT($date, \'%Y%m%d\')'",
-		                               ("date_fin_semaine($annee, $mois, $jour)")));
+		                               ("date_fin_semaine($annee, $mois, $jour$quote_end)")));
 	elseif (count($crit->param)>2)
 		$boucle->where[] = array("'AND'",
 		                         array("'>='",
 		                               "'DATE_FORMAT($date, \'%Y%m%d\')'",
-		                               ("sql_quote($annee . $mois . $jour)")),
-		                         array("'<='", "'DATE_FORMAT($date, \'%Y%m%d\')'", ("sql_quote($annee2 . $mois2 . $jour2)")));
+		                               ("sql_quote($annee . $mois . $jour$quote_end)")),
+		                         array("'<='", "'DATE_FORMAT($date, \'%Y%m%d\')'", ("sql_quote($annee2 . $mois2 . $jour2$quote_end)")));
 	// sinon on prend tout
 }
 
