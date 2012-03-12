@@ -89,6 +89,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 // Documents distants : pas trop de verifications bloquantes, mais un test
 // via une requete HEAD pour savoir si la ressource existe (non 404), si le
 // content-type est connu, et si possible recuperer la taille, voire plus.
+
 	if ($mode == 'distant') {
 		include_spip('inc/distant');
 		if ($a = recuperer_infos_distantes($source)) {
@@ -120,9 +121,12 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 
 		preg_match(",^(.*)\.([^.]+)$,", $nom_envoye, $match);
 		@list(,$titre,$ext) = $match;
+		// les navigateur devraient savoir que ceci est mime-type text
+		if (!$ext AND (strtolower($nom_envoye) === 'makefile'))
+		  $ext = 'txt';
 		// securite : pas de . en dehors de celui separant l'extension
 		// sinon il est possible d'injecter du php dans un toto.php.txt
-		$nom_envoye = str_replace('.','-',$titre).'.'.$ext;
+		else $nom_envoye = str_replace('.','-',$titre).'.'.$ext;
 		if ($titrer) {
 			$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
 		} else $titre = '';
@@ -475,13 +479,14 @@ function fixer_extension_document($doc) {
 	"extension=" . sql_quote(corriger_extension($r[1])))) {
 		$extension = $t['extension'];
 		$name = preg_replace(',[.][^.]*$,', '', $doc['name']).'.'.$extension;
+	} else {
+		// les navigateur devraient savoir que ceci est mime-type text
+		if (strtolower($name) === 'makefile') $doc['type'] = 'txt';
+		if ($t = sql_getfetsel("extension", "spip_types_documents",
+				 "mime_type=" . sql_quote($doc['type']))) {
+		  $name = preg_replace(',[.][^.]*$,', '', $doc['name']).'.'.$t;
+		}
 	}
-	else if ($t = sql_fetsel("extension", "spip_types_documents",
-	"mime_type=" . sql_quote($doc['type']))) {
-		$extension = $t['extension'];
-		$name = preg_replace(',[.][^.]*$,', '', $doc['name']).'.'.$extension;
-	}
-
 	return array($extension,$name);
 }
 
