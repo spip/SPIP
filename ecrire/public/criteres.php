@@ -1661,7 +1661,7 @@ function critere_DATA_datapath_dist($idb, &$boucles, $crit){
  */
 function critere_si_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
-	$boucle->hash .= '$command[\'si\'] = array();'."\n";
+	$boucle->hash .= 'if (!isset($command[\'si\'])) $command[\'si\'] = array();'."\n";
 	if ($crit->param){
 		foreach ($crit->param as $param){
 			$boucle->hash .= '
