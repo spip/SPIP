@@ -71,12 +71,16 @@ function formulaires_configurer_annonces_traiter_dist(){
 		if (!is_null($v=_request($m)))
 			ecrire_meta($m, $v);
 
+	$res['message_ok'] = _T('config_info_enregistree');
 	// provoquer l'envoi des nouveautes en supprimant le fichier lock
 	if (_request('envoi_now')) {
-		spip_unlink(_DIR_TMP . 'mail.lock');
+		effacer_meta('dernier_envoi_neuf');
+		$id_job = job_queue_add("mail","Test Envoi des nouveautes",array(),"genie/");
+		include_spip('inc/queue');
+		queue_schedule(array($id_job));
+		$res['message_ok'] .= "<br />"._L("La liste des nouveautés a été envoyée");
 	}
 
-	$res['message_ok'] = _T('config_info_enregistree');
 	return $res;
 }
 
