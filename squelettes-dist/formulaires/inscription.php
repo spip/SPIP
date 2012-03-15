@@ -28,11 +28,7 @@ function formulaires_inscription_charger_dist($mode='', $id=0) {
 		return false;
 	
 	$valeurs = array('nom_inscription'=>'','mail_inscription'=>'', 'id'=>$id);
-	if ($mode=='1comite')
-		$valeurs['_commentaire'] = _T('pass_espace_prive_bla');
-	else 
-		$valeurs['_commentaire'] = _T('pass_forum_bla');
-
+	
 	return $valeurs;
 }
 
