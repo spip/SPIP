@@ -27,7 +27,7 @@ function formulaires_inscription_charger_dist($mode='', $id=0) {
 	if(isset($visiteur_session['statut']) && ($visiteur_session['statut'] <= $mode))
 		return false;
 	
-	$valeurs = array('nom_inscription'=>'','mail_inscription'=>'', 'id'=>$id);
+	$valeurs = array('nom_inscription'=>'','mail_inscription'=>'', 'id'=>$id, '_mode'=>$mode);
 	
 	return $valeurs;
 }

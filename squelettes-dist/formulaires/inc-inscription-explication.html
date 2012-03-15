@@ -1,0 +1,5 @@
+[(#REM) on affiche plus ce message en cas d'erreur pour eviter d'allonger trop le formulaire]
+[(#ENV*{message_erreur}|non)
+[<legend class="mode"><:pass_vousinscrire:></legend>
+<p class="explication mode">(#ENV{_mode}|=={1comite}|?{<:pass_espace_prive_bla:>,<:pass_forum_bla:>})</p>]
+]

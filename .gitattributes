@@ -1016,6 +1016,7 @@ prive/xhtml-symbol.ent -text
 /spip.png -text
 squelettes-dist/favicon.ico.html -text
 squelettes-dist/formulaires/ecrire_auteur.php -text
+squelettes-dist/formulaires/inc-inscription-explication.html -text
 squelettes-dist/formulaires/inscription.php -text
 squelettes-dist/formulaires/mot_de_passe.html -text
 squelettes-dist/formulaires/mot_de_passe.php -text
