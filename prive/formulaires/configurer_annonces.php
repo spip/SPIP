@@ -75,7 +75,7 @@ function formulaires_configurer_annonces_traiter_dist(){
 	// provoquer l'envoi des nouveautes en supprimant le fichier lock
 	if (_request('envoi_now')) {
 		effacer_meta('dernier_envoi_neuf');
-		$id_job = job_queue_add("mail","Test Envoi des nouveautes",array(),"genie/");
+		$id_job = job_queue_add("mail","Test Envoi des nouveautes",array(0),"genie/");
 		include_spip('inc/queue');
 		queue_schedule(array($id_job));
 		$res['message_ok'] .= "<br />"._T("info_liste_nouveautes_envoyee");
