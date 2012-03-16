@@ -367,6 +367,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'زبانهاى سايت',
 	'info_ldap_ok' => 'گواهى درستى LDAP مستقر شده',
 	'info_lien_hypertexte' => ': پيوند هايپرتكست',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'فهرست نويسنده گان روى خط',
 	'info_login_existant' => '.موجود ميباشد login اين',
 	'info_login_trop_court' => 'بيش از اندازه كوتاه Login .',

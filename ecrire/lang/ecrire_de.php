@@ -373,6 +373,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 	'info_langues' => 'Sprachen der Website',
 	'info_ldap_ok' => 'Die LDAP-Authentifizierung ist installiert.',
 	'info_lien_hypertexte' => 'Hyperlink:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Liste der zur Zeit angemeldeten Redakteure',
 	'info_login_existant' => 'Dieses Login ist bereits vergeben.',
 	'info_login_trop_court' => 'Login zu kurz.',

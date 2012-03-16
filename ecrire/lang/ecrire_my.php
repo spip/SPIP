@@ -365,6 +365,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'ဝက်ဘ်ဆိုက်ဘာသာစကားများ',
 	'info_ldap_ok' => 'LDAP မှန်ကန်မှု စစ်ဆေးခြင်းကို စတင်ထည့်သွင်းနေသည်',
 	'info_lien_hypertexte' => 'ဆက်နွယ်မှု',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'ဆက်သွယ်သည့် စာတည်းစာရင်းများ',
 	'info_login_existant' => 'ဝင်ရောက်မှုကို ပိတ်ပင်ထားပြီး',
 	'info_login_trop_court' => 'ဝင်ရောက်မှုတိုလွန်းသည်',

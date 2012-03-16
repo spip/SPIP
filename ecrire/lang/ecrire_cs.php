@@ -387,6 +387,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_langues' => 'Jazyk webu',
 	'info_ldap_ok' => 'Byla nainstalována autentifikace LDAP.',
 	'info_lien_hypertexte' => 'Hypertextový odkaz:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Seznam připojených redaktorů',
 	'info_login_existant' => 'Toto uživatelské jméno již existuje.',
 	'info_login_trop_court' => 'Uživatelské jeméno je příliš krátké.',

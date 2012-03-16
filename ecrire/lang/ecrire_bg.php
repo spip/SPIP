@@ -389,6 +389,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'Езици на сайта',
 	'info_ldap_ok' => 'Инсталирана е аутентификация за LDAP.',
 	'info_lien_hypertexte' => 'Хипертекстова препратка:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Списък на свързаните редактори',
 	'info_login_existant' => 'Потребителското име вече съществува.',
 	'info_login_trop_court' => 'Потребителското име е твърде кратко.',

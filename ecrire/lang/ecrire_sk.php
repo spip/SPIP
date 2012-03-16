@@ -386,6 +386,7 @@ cez FTP.</p>',
 	'info_langues' => 'Jazyky stránky',
 	'info_ldap_ok' => 'Autentifikácia cez LDAP je nainštalovaná.',
 	'info_lien_hypertexte' => 'Hypertextový odkaz:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Zoznam redaktorov online',
 	'info_login_existant' => 'Toto prihlasovacie meno už existuje.',
 	'info_login_trop_court' => 'Prihlasovacie meno je príliš krátke.',

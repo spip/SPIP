@@ -379,6 +379,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_langues' => 'Sitenin dilleri',
 	'info_ldap_ok' => 'LDAP tasdiki kuruldu.',
 	'info_lien_hypertexte' => 'Hipermetin bağı :',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Bağlanan yazarlar',
 	'info_login_existant' => 'Bu kullanıcı ismi zaten var.',
 	'info_login_trop_court' => 'Kullanıcı ismi çok kısa.',

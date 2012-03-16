@@ -377,6 +377,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 	'info_langues' => 'サイトの言語',
 	'info_ldap_ok' => 'LDAP認証はインストールされています。',
 	'info_lien_hypertexte' => 'リンク:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => '接続中のエディターのリスト',
 	'info_login_existant' => 'このIDは既に使われています。',
 	'info_login_trop_court' => 'ログインIDが短すぎます。',

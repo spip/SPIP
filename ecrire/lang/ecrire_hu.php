@@ -377,6 +377,7 @@ a törölt szerzők pedig kukával vannak jelölve.',
 	'info_langues' => 'A honlap nyelvei',
 	'info_ldap_ok' => 'Az LDAP azonosítás telepítve van.',
 	'info_lien_hypertexte' => 'Hiperhivatkozás :',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Jelenleg csatlakozott szerzők listája',
 	'info_login_existant' => 'Ez a login már létezik.',
 	'info_login_trop_court' => 'A login túl rövid.',

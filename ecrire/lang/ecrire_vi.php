@@ -368,6 +368,7 @@ Hồ sơ SPIP</a>.', # MODIF
 	'info_langues' => 'Ngôn ngữ của website',
 	'info_ldap_ok' => 'Đặc điểm xác nhận LDAP được thiết trí.',
 	'info_lien_hypertexte' => 'Điểm kết nối:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Danh sách các chủ bút đang nối vào',
 	'info_login_existant' => 'Login này đã có.',
 	'info_login_trop_court' => 'Login ngắn quá.',

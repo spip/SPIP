@@ -377,6 +377,7 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 	'info_langues' => 'Yezhoù al lec\'hienn',
 	'info_ldap_ok' => 'Staliet eo ar gwiriekaat LDAP.',
 	'info_lien_hypertexte' => 'Liamm gourskrid :',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Roll ar skridaozerien kevreet',
 	'info_login_existant' => 'C\'hoazh ez eus eus ar ger kevreañ-mañ.',
 	'info_login_trop_court' => 'Re verr eo ar ger-kevreañ.',

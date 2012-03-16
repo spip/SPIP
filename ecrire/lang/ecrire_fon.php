@@ -365,6 +365,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'Gbè gblogblojí ɔ tɔn',
 	'info_ldap_ok' => 'jíjlɛmɛ.',
 	'info_lien_hypertexte' => 'càcàdó :',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'nyɔwlátɔ é ɖò kânú é',
 	'info_login_existant' => 'nyíkɔ é lɔ kòɖè.',
 	'info_login_trop_court' => 'nyíkɔ̂ hwè.',

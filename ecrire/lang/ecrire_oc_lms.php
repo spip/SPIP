@@ -372,6 +372,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 	'info_langues' => 'Lengas dau sit',
 	'info_ldap_ok' => 'L\'autentificacion LDAP es installada.',
 	'info_lien_hypertexte' => 'Liam ipertext:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Tiera daus redactors connectats',
 	'info_login_existant' => 'Queu login ja existís.',
 	'info_login_trop_court' => 'Login tròp cort.',

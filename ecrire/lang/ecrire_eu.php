@@ -375,6 +375,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 	'info_langues' => 'Gunearen hizkuntzak',
 	'info_ldap_ok' => 'LDAP autentikazioa instalatuta dago.',
 	'info_lien_hypertexte' => 'Hipertestu lotura:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Konektatuak dauden erredaktoreen zerrenda',
 	'info_login_existant' => 'Login hori dagoeneko existitzen da.',
 	'info_login_trop_court' => 'Login hori laburregia da',

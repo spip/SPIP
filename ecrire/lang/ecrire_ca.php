@@ -371,6 +371,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'info_langues' => 'Idiomes del lloc',
 	'info_ldap_ok' => 'L\'autenticació LDAP està instal·lada.',
 	'info_lien_hypertexte' => 'Enllaç hipertext:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Llista de redactors connectats',
 	'info_login_existant' => 'Aquest nom d\'usuari ja existeix.',
 	'info_login_trop_court' => 'Nom d\'usuari massa curt.',

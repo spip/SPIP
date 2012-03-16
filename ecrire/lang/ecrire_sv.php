@@ -385,6 +385,7 @@ funktioner hos SPIP inte användas.',
 	'info_langues' => 'Sajtens språk',
 	'info_ldap_ok' => 'L\'authentification LDAP est installée.', # NEW
 	'info_lien_hypertexte' => 'Hyperlänk:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Inlogggade redaktörer',
 	'info_login_existant' => 'Användarnamnet finns redan.',
 	'info_login_trop_court' => 'Användarnamnet är för kort.',

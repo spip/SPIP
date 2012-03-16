@@ -407,6 +407,7 @@ SPIP anba-la, i sava pa marsé.',
 	'info_langues' => 'Bann lang lo sitwèb',
 	'info_ldap_ok' => 'Lotantifikasyon LDAP li lé  instalé.',
 	'info_lien_hypertexte' => 'gatiraz wèb :',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Fil bann lotèr an liyn',
 	'info_login_existant' => 'Nondkod-la li lé déza anservi.',
 	'info_login_trop_court' => 'Nondkod-la lé takini : ékart ali.',

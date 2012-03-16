@@ -383,6 +383,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'Bahasa-bahasa situs',
 	'info_ldap_ok' => 'Ototentikasi LDAP diinstal.',
 	'info_lien_hypertexte' => 'Tautan web:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Daftar editor-editor terkoneksi',
 	'info_login_existant' => 'Log masuk ini sudah ada.',
 	'info_login_trop_court' => 'Log masuk terlalu pendek.',

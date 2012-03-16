@@ -384,6 +384,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => '站点语言',
 	'info_ldap_ok' => 'LDAP 验证已安装.',
 	'info_lien_hypertexte' => '超链接:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => '列出连接的编辑者',
 	'info_login_existant' => '这个登录名已经存在.',
 	'info_login_trop_court' => '登录名太短.',

@@ -370,6 +370,7 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gréng; Redakter =
 	'info_langues' => 'Sproochen vum Site',
 	'info_ldap_ok' => 'D\'Umeldung iwwer LDAP ass installéiert.',
 	'info_lien_hypertexte' => 'Link:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Lëscht vun den ugemelden Redakteren',
 	'info_login_existant' => 'Dëse Login gët ët schon.',
 	'info_login_trop_court' => 'De Login ass ze kuerz.',

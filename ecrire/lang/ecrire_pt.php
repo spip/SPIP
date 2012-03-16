@@ -388,6 +388,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 	'info_langues' => 'Línguas do sítio',
 	'info_ldap_ok' => 'A autenticação LDAP está instalada.',
 	'info_lien_hypertexte' => 'Vínculo hipertexto :',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Lista dos redactores ligados',
 	'info_login_existant' => 'Este login já existe.',
 	'info_login_trop_court' => 'Login demasiado curto.',

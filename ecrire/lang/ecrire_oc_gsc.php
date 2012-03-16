@@ -372,6 +372,7 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 	'info_langues' => 'Lengas deu sit',
 	'info_ldap_ok' => 'L\'autentificacion LDAP qu\'ei installada.',
 	'info_lien_hypertexte' => 'Ligam ipertèxt:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Tèra deus redactors connectats',
 	'info_login_existant' => 'Aqueth login ja qu\'existeish.',
 	'info_login_trop_court' => 'Login tròp cort.',

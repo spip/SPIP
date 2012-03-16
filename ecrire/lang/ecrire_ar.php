@@ -391,6 +391,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'لغات الموقع',
 	'info_ldap_ok' => 'تم تثبيت تحقق LDAP .',
 	'info_lien_hypertexte' => 'وصلة هايبرتكست:',
+	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'قائمة المحررين المتصلين',
 	'info_login_existant' => 'هذا المعرّف موجود سابقاً.',
 	'info_login_trop_court' => 'معرّف الدخول قصيز جداً.',
