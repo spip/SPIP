@@ -366,7 +366,7 @@ function plugin_necessite($n, $liste) {
  * 		L'éventuelle version minimum de la dependance.
  * @return string.
  * 		Vide si ok,
- * 		Message d'erreur la dependance est absente.
+ * 		Message d'erreur lorsque la dependance est absente.
 **/
 function plugin_controler_necessite($liste, $nom, $version)
 {
