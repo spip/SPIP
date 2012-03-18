@@ -754,6 +754,7 @@ Le traduzioni sono associate all\'originale,
 	'plugin_librairies_installees' => 'Librerie installate',
 	'plugin_necessite_lib' => 'Questa estensione richiede la libreria @lib@',
 	'plugin_necessite_plugin' => 'Necessita l\'estensione @plugin@ con almeno la versione @version@.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Necessita SPIP con almeno la versione @version@.',
 	'plugin_source' => 'origine: ',
 	'plugin_titre_automatique' => 'Installazione automatica',

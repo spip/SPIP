@@ -724,6 +724,7 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 	'plugin_librairies_installees' => 'Librairies installées', # NEW
 	'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
 	'plugin_necessite_plugin' => 'Nécessite le plugin @plugin@ en version @version@ minimum.', # NEW
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Nécessite SPIP en version @version@ minimum.', # NEW
 	'plugin_source' => 'source: ', # NEW
 	'plugin_titre_automatique' => 'Installation automatique', # NEW

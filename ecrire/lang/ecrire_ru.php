@@ -759,6 +759,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_librairies_installees' => 'Установленные библиотеки',
 	'plugin_necessite_lib' => 'Для этого плагина необходима библиотека  @lib@',
 	'plugin_necessite_plugin' => 'Для этого плагина необходим @plugin@  @version@ или новее.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Для этого плагина требуется SPIP @version@ или новее.',
 	'plugin_source' => 'источник: ',
 	'plugin_titre_automatique' => 'Автоматическая установка',

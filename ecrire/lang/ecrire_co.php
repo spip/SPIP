@@ -781,6 +781,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 	'plugin_librairies_installees' => 'Librerie stallate',
 	'plugin_necessite_lib' => 'Stu plugin richere a libreria @lib@',
 	'plugin_necessite_plugin' => 'Richere u plugin @plugin@ cù omancu a versione @version@.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Richere SPIP cù omancu a versione @version@.',
 	'plugin_source' => 'urìgine: ',
 	'plugin_titre_automatique' => 'Stallazione autumàtica',

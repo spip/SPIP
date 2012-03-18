@@ -739,6 +739,7 @@ in einer Farbe, die den Status anzeigt :',
 	'plugin_librairies_installees' => 'Installierte Bibliotheken',
 	'plugin_necessite_lib' => 'Dieses Plugin benötigt die Bibliothek @lib@',
 	'plugin_necessite_plugin' => 'Benötigt mindestens Version @version@ des Plugin @plugin@.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Benötigt mindestens Version @version@ von SPIP.',
 	'plugin_source' => 'Quelle: ',
 	'plugin_titre_automatique' => 'Automatische Installation',

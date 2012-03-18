@@ -753,6 +753,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'plugin_librairies_installees' => 'Kurulu kütüphaneler',
 	'plugin_necessite_lib' => 'Bu eklenti @lib@ kütüphanesini gerektirir',
 	'plugin_necessite_plugin' => '@plugin@ plugin\'inin en az @version@ sürümünü gerektirir.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'SPIP\'in en az @version@ sürümünü gerektirir.',
 	'plugin_source' => 'kaynak: ',
 	'plugin_titre_automatique' => 'Otomatik kurulum',

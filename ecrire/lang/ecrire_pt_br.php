@@ -730,6 +730,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'plugin_librairies_installees' => 'Bibliotecas instaladas',
 	'plugin_necessite_lib' => 'Este plugin precisa da biblioteca @lib@',
 	'plugin_necessite_plugin' => 'É necessário o plugin @plugin@ na versão @version@, pelo menos.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'É necessário o SPIP na versão @version@, pelo menos.',
 	'plugin_source' => 'fonte: ',
 	'plugin_titre_automatique' => 'Instalação automática',

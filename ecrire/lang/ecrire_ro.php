@@ -748,6 +748,7 @@ cu o culoare care le indică starea :',
 	'plugin_librairies_installees' => 'Librăriile instalate',
 	'plugin_necessite_lib' => 'Acest plug-in are nevoie de librăria @lib@',
 	'plugin_necessite_plugin' => 'Necesită plugin-ul @plugin@ cu versiunea @version@ minim.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Are nevoie de SPIP cu versiunea @version@ minim.',
 	'plugin_source' => 'sursa: ',
 	'plugin_titre_automatique' => 'Instalare automatică',

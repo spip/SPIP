@@ -729,6 +729,7 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 	'plugin_librairies_installees' => 'Librairies installées', # NEW
 	'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
 	'plugin_necessite_plugin' => 'Version @version@ or newer of the plugin @plugin@ is required.', # NEW
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'SPIP version @version@ or newer is required.', # NEW
 	'plugin_source' => 'source: ', # NEW
 	'plugin_titre_automatique' => 'Installation automatique', # NEW

@@ -767,6 +767,7 @@ con una color que indica el estáu:',
 	'plugin_librairies_installees' => 'Llibreríes instaláes',
 	'plugin_necessite_lib' => 'Esti plugin necesita la llibrería @lib@',
 	'plugin_necessite_plugin' => 'Necesita el plugin @plugin@ en versión @version@ mínimo.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Necesita SPIP en versión @version@ mínimo.',
 	'plugin_source' => 'fonte: ',
 	'plugin_titre_automatique' => 'Instalación automática',

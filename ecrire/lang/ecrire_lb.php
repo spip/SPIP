@@ -730,6 +730,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'plugin_librairies_installees' => 'Installéiert Librairie\'en',
 	'plugin_necessite_lib' => 'Dëse Plugin brauch d\'Librairie @lib@',
 	'plugin_necessite_plugin' => 'De Plugin @plugin@ muss mindestens op der Versioun @version@ sinn.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'SPIP muss mindestens op der Versioun @version@ sinn.',
 	'plugin_source' => 'Quell: ',
 	'plugin_titre_automatique' => 'Automatësch Installatioun',

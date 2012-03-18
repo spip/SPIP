@@ -726,6 +726,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_librairies_installees' => 'آرشيو‌هاي نصب‌ شده',
 	'plugin_necessite_lib' => 'اين پلاگين به آرشيو @lib@ نياز دارد',
 	'plugin_necessite_plugin' => 'به plugin @plugin@ نسخه ی @version@ نیاز دارید',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'به اسپیپ نسخه ی @version@ نیاز دارید.',
 	'plugin_source' => 'منبع: ',
 	'plugin_titre_automatique' => 'نصب خودكار ',
