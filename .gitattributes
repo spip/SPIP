@@ -137,6 +137,7 @@ ecrire/inc/plugin.php -text
 ecrire/inc/precharger_article.php -text
 ecrire/inc/precharger_objet.php -text
 ecrire/inc/prepare_recherche.php -text
+ecrire/inc/preselectionner_parent_nouvel_objet.php -text
 ecrire/inc/presentation_mini.php -text
 ecrire/inc/presenter_enfants.php -text
 ecrire/inc/puce_statut.php -text
