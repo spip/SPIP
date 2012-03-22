@@ -118,7 +118,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	# premier choix = neant
 	# si auteur (rubriques restreintes)
 	# ou si creation avec id_rubrique=0
-	if ($type == 'auteur' OR !$id_rubrique)
+	elseif ($type == 'auteur' OR !$id_rubrique)
 		$data[0] = '&nbsp;';
 
 	//
@@ -139,6 +139,14 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 			if ($id_rubrique == $r['id_rubrique']) $id_parent = $r['id_parent'];
 		}
 	}
+
+	// si une seule rubrique comme choix possible,
+	// inutile de mettre le selecteur sur un choix vide par defaut
+	if (count($data)==2
+	  AND isset($data[0])
+	  AND $type!='auteur'
+	  AND !$id_rubrique)
+		unset($data[0]);
 
 
 	$opt = sous_menu_rubriques($id_rubrique,0, 0,$data,$enfants,$idem, $restreint, $type);
