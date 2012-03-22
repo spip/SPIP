@@ -318,13 +318,15 @@ function sql_drop_view($table, $exist='', $serveur='', $option=true)
 // http://doc.spip.org/@sql_showbase
 function sql_showbase($spip=NULL, $serveur='', $option=true)
 {
+	$f = sql_serveur('showbase', $serveur,  $option==='continue' OR $option===false);
+	if (!is_string($f) OR !$f) return false;
+
+	// la globale n'est remplie qu'apres l'appel de sql_serveur.
 	if ($spip == NULL){
 		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 		$spip = $connexion['prefixe'] . '\_%';
 	}
-	
-	$f = sql_serveur('showbase', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
+
 	return $f($spip, $serveur, $option!==false);
 }
 
@@ -339,14 +341,16 @@ function sql_alltable($spip=NULL, $serveur='', $option=true)
 // http://doc.spip.org/@sql_showtable
 function sql_showtable($table, $table_spip = false, $serveur='', $option=true)
 {
+	$f = sql_serveur('showtable', $serveur,  $option==='continue' OR $option===false);
+	if (!is_string($f) OR !$f) return false;
+
+	// la globale n'est remplie qu'apres l'appel de sql_serveur.
 	if ($table_spip){
 		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 		$prefixe = $connexion['prefixe'];
 		$vraie_table = preg_replace('/^spip/', $prefixe, $table);
 	} else $vraie_table = $table;
-	
-	$f = sql_serveur('showtable', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
+
 	$f = $f($vraie_table, $serveur, $option!==false);
 	if (!$f) return array();
 	if (isset($GLOBALS['tables_principales'][$table]['join']))
