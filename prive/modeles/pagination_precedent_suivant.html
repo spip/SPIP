@@ -2,18 +2,29 @@
 #SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},10}}
 #SET{premiere, #GET{bornes}|reset}
 #SET{derniere, #GET{bornes}|end}
-#SET{separateur,#ENV{separateur,'|'}}
-#SET{i,#ENV{page_courante}|moins{1}}
+#SET{sep,#ENV{separateur,' | '}}
+	[<span
+	class='label'>(#ENV{label,''})</span>][
 
-[(#ENV{page_courante}|>{1}|oui)
-	[(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })]
-	[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}|ancre_url{#ENV{ancre}}|lien_ou_expose{<:public:page_precedente:>,#ENV{page_courante}|=={1},lien_pagination,'',nofollow})]
+	(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })
 
-	[(#ENV{page_courante}|<{#ENV{nombre_pages}}|oui)
-		[<span class='sep separateur'>(#GET*{separateur})</span>]
-	]
-]
-[(#ENV{page_courante}|<{#ENV{nombre_pages}}|oui)
-	[(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })]
-	[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}|ancre_url{#ENV{ancre}}|lien_ou_expose{<:public:page_suivante:>,#ENV{page_courante}|=={#ENV{nombre_pages}},lien_pagination,'',nofollow})]
-]
+	][<span
+	class="prev[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url}
+	|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
+	|ancre_url{#ENV{ancre}}
+	|lien_ou_expose{#ENV{label_precedent,<:public:page_precedente:>},#ENV{page_courante}|<={1},'lien_pagination','',nofollow}
+	|inserer_attribut{rel,prev}
+	)[<span (#ENV{page_courante}|<{#ENV{nombre_pages}}|et{#GET*{sep}}|oui)
+	class='sep'>#GET*{sep}</span>]</span>][
+
+	(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })
+
+	][<span
+	class="next[(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled]">[<span (#ENV{page_courante}|>={#ENV{nombre_pages}}|et{#GET*{sep}}|oui)
+		class='sep'>#GET*{sep}</span>](#ENV{url}
+	|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
+	|ancre_url{#ENV{ancre}}
+	|lien_ou_expose{#ENV{label_suivant,<:public:page_suivante:>},#ENV{page_courante}|>={#ENV{nombre_pages}},'lien_pagination','',nofollow}
+	|inserer_attribut{rel,next}
+	)</span>]
+</B_pages>

@@ -14,7 +14,7 @@
 	class="prev[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url}
 	|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
 	|ancre_url{#ENV{ancre}}
-	|lien_ou_expose{<:public:page_precedente:>,#ENV{page_courante}|<={1},'lien_pagination','',nofollow}
+	|lien_ou_expose{#ENV{label_precedent,<:public:page_precedente:>},#ENV{page_courante}|<={1},'lien_pagination','',nofollow}
 	|inserer_attribut{rel,prev}
 	)[<span
 	class='sep'>(#GET*{sep})</span>]</span>]<span
@@ -46,7 +46,7 @@
 	class="next[(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled]">[<span class='sep'>(#GET*{sep})</span>](#ENV{url}
 	|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
 	|ancre_url{#ENV{ancre}}
-	|lien_ou_expose{<:public:page_suivante:>,#ENV{page_courante}|>={#ENV{nombre_pages}},'lien_pagination','',nofollow}
+	|lien_ou_expose{#ENV{label_suivant,<:public:page_suivante:>},#ENV{page_courante}|>={#ENV{nombre_pages}},'lien_pagination','',nofollow}
 	|inserer_attribut{rel,next}
 	)</span>]
 </B_pages>
