@@ -168,11 +168,14 @@ class IterateurDATA implements Iterator {
 		if (isset($this->command['liste'])) {
 			$this->select_liste();
 		}
+		if (isset($this->command['enum'])) {
+			$this->select_enum();
+		}
 
 		// Si a ce stade on n'a pas de table, il y a un bug
 		if (!is_array($this->tableau)) {
 			$this->err = true;
-			spip_log("erreur datasource ".$src);
+			spip_log("erreur datasource ".var_export($command,true));
 		}
 
 		// {datapath query.results}
@@ -313,6 +316,27 @@ class IterateurDATA implements Iterator {
 			}
 		}
 		$this->tableau = $this->command['liste'];
+	}
+
+	/**
+	 * Retourne un tableau donne depuis un critere liste
+	 * Critere {enum Xmin, Xmax}
+	 *
+	**/
+	protected function select_enum() {
+		# s'il n'y a qu'une valeur dans la liste, sans doute une #BALISE
+		if (!isset($this->command['enum'][1])) {
+			if (!is_array($this->command['enum'][0])) {
+				$this->command['enum'] = explode(',', $this->command['enum'][0]);
+			} else {
+				$this->command['enum'] = $this->command['enum'][0];
+			}
+		}
+		if (count($this->command['enum'])>=3)
+			$enum = range(array_shift($this->command['enum']),array_shift($this->command['enum']),array_shift($this->command['enum']));
+		else
+			$enum = range(array_shift($this->command['enum']),array_shift($this->command['enum']));
+		$this->tableau = $enum;
 	}
 
 

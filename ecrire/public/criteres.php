@@ -1636,6 +1636,22 @@ function critere_DATA_liste_dist($idb, &$boucles, $crit){
 }
 
 /**
+ * Passer un enum min max a l'iterateur DATA
+ * (DATA){enum Xmin, Xmax}
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_DATA_enum_dist($idb, &$boucles, $crit){
+	$boucle = &$boucles[$idb];
+	$boucle->hash .= "\n\t".'$command[\'enum\'] = array();'."\n";
+	foreach ($crit->param as $param){
+		$boucle->hash .= "\t".'$command[\'enum\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).";\n";
+	}
+}
+
+/**
  * Extraire un chemin d'un tableau de donnees
  * (DATA){datapath query.results}
  *
