@@ -1,0 +1,39 @@
+[(#REM) Signer la petition ]
+#FORMULAIRE_SIGNATURE
+
+[(#REM) Signatures de la petition ]
+<B_signatures>
+<form method='get' action='#SELF'>
+<div id="signatures">[(#SELF|form_hidden)]
+	#ANCRE_PAGINATION
+	<h2 class="offscreen"><:signatures_petition:></h2>
+	<table summary="<:signatures_petition:>" class="spip">
+	<caption>#GRAND_TOTAL <:signatures_petition:></caption>
+		<thead>
+			<th class="signature-date"><a href='[(#SELF|parametre_url{tri,date_time}|parametre_url{tri_inverse,''})]#signatures' title="<:lien_trier_date:>"><:date:></a></th>
+			<th class="signature-nom"><a href='[(#SELF|parametre_url{tri,nom_email}|parametre_url{tri_inverse,''})]#signatures' title="<:lien_trier_nom:>"><:nom:></a></th>
+			[(#REM) Afficher la colonne des messages si autorises ]
+			<BOUCLE_signature-message-th(PETITIONS){id_article}{message=oui}>
+			<th class="signature-message"><:message:></th>
+			</BOUCLE_signature-message-th>
+		</thead>
+		<BOUCLE_signatures(SIGNATURES) {id_article} {pagination #ENV{pagination, 20} } {recherche ?#ENV{recherche_signatures}} {!par #ENV{tri}}{par #ENV{tri_inverse}} {!par #ENV{tri,#ENV{tri_inverse}}|?{'',date_time}}>
+		<tr[ class="(#COMPTEUR_BOUCLE|alterner{odd,even})"] id='id_signature#ID_SIGNATURE'>
+			<td class="signature-date"><small>[(#DATE|affdate_jourcourt)]</small></td>
+			<td class="signature-nom"><strong class="#EDIT{qui}">#NOM</strong>[ <small class="#EDIT{hyperlien}"><a href="(#URL_SITE)"[ title="(#NOM_SITE|attribut_html|couper{80})"] class="spip_out"><:site_web:></a></small>]</td>
+			[(#REM) Afficher la colonne des messages si autorises ]
+			<BOUCLE_signature-message-td(PETITIONS){id_article}{message=oui}> </BOUCLE_signature-message-td>
+			<td class="signature-message #EDIT{message}">[(#MESSAGE|PtoBR)]</td>
+			</B_signature-message-td>
+		</tr>
+		</BOUCLE_signatures>
+	</table>
+	[<p class="pagination">(#PAGINATION)</p>]
+	[(#REM) Afficher un moteur de recherche si plus de 50 signatures
+	ou s'il etait deja present au coup d'avant]
+	[(#ENV{recherche_signatures}|?{31,#_signatures:GRAND_TOTAL}|>{50}|oui)
+	<div class="formulaire_spip formulaire_recherche" id="formulaire_recherche_signatures"><label for="recherche_signatures"><:petitions:signatures_recherche_label:></label> <input type="text" class="text" size="10" name="recherche_signatures" id="recherche_signatures" value=""/> <input type="submit" class="submit" value="<:info_rechercher:>" /></div>
+	]
+</div><!--#signatures-->
+</form>
+</B_signatures>

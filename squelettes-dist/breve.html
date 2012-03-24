@@ -1,0 +1,88 @@
+<BOUCLE_principale(BREVES) {id_breve}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+[<link rel="canonical" href="(#URL_BREVE|url_absolue)" />]
+<INCLURE{fond=inclure/head} />
+[(#REM) Lien vers le flux RSS des breves ]
+<link rel="alternate" type="application/rss+xml" title="<:dernieres_breves:>" href="#URL_PAGE{backend-breves}" />
+</head>
+
+<body class="pas_surlignable page_breve">
+<div class="page">
+
+	<INCLURE{fond=inclure/header} />
+	<INCLURE{fond=inclure/nav,env} />
+	#FORMULAIRE_RECHERCHE
+	
+	<div class="main">
+		[(#REM) Contenu principal : corps de la breve ]
+		<div class="wrapper">
+		<div class="content" id="content">
+			<p class="arbo"><a href="#URL_SITE_SPIP/" ><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+	
+			<div class="cartouche">
+				<h1 class="#EDIT{titre}">[(#LOGO_BREVE_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
+				<p class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr></p>
+			</div>
+			
+			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+			[<hr /><p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<div class="notes"><hr />(#NOTES)</div>]
+			
+			[(#REM) Forum de la breve
+			NB : pour desactiver les forums de breve, supprimez simplement les lignes ci-dessous ]
+			<a href="#forum" name="forum" id="forum"></a>
+			<INCLURE{fond=inclure/forum, id_breve} />
+			[<h2><:forum:form_pet_message_commentaire:></h2>
+			(#FORMULAIRE_FORUM)]
+	
+		</div><!--.content-->
+		</div><!--.wrapper-->
+	
+		<div class="aside">
+	
+			<INCLURE{fond=inclure/navsub, id_rubrique} />
+	
+			[(#REM) Breves dans la meme rubrique ]
+			<B_breves>
+			<div class="menu menu_breves">
+				<h2><:autres_breves:></h2>
+				<ul>
+					<BOUCLE_breves(BREVES) {id_rubrique} {!par date} {0,10}>
+					<li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_BREVE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_breves>
+				</ul>
+			</div>
+			</B_breves>
+	
+			[(#REM) Menu de navigation mots-cles ]
+			<B_mots>
+			<div class="menu">
+				<h2><:mots_clefs:></h2>
+				<ul>
+				<BOUCLE_mots(MOTS) {id_breve} {par titre}>
+					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+				</BOUCLE_mots>
+				</ul>
+			</div>
+			</B_mots>
+			
+		</div><!--.aside-->
+	</div><!--.main-->
+
+	<INCLURE{fond=inclure/footer,self=#SELF} />
+
+</div><!--.page-->
+</body>
+</html>
+</BOUCLE_principale>[(#INCLURE{fond=404, erreur=<:aucune_breve:>})]
+<//B_principale>

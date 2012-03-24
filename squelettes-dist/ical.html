@@ -1,0 +1,30 @@
+#HTTP_HEADER{Content-Type: text/calendar; charset:#CHARSET}
+BEGIN:VCALENDAR
+CALSCALE:GREGORIAN
+PRODID: SPIP http://www.spip.net
+VERSION:2.0
+X-WR-CALNAME;VALUE=TEXT:[(#NOM_SITE_SPIP|filtrer_ical)]
+X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]
+<BOUCLE_articles(ARTICLES){!par date}{0,100}>
+BEGIN:VEVENT
+SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]]
+UID:article#ID_ARTICLE @ [(#URL_SITE_SPIP|filtrer_ical)]
+DTSTAMP:[(#DATE|date_ical)]
+DTSTART:[(#DATE|date_ical)]
+DTEND:[(#DATE|date_ical{60})]
+CATEGORIES:<:articles|filtrer_ical:>
+URL:[(#URL_ARTICLE|url_absolue)]
+STATUS:CONFIRMED
+END:VEVENT</BOUCLE_articles><BOUCLE_breves(BREVES){!par date}{0,100}>
+BEGIN:VEVENT
+SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]]
+UID:breve#ID_BREVE @ [(#URL_SITE_SPIP|filtrer_ical)]
+DTSTAMP:[(#DATE|date_ical)]
+DTSTART:[(#DATE|date_ical)]
+DTEND:[(#DATE|date_ical{60})]
+CATEGORIES:<:breves|filtrer_ical:>
+URL:[(#URL_BREVE|url_absolue)]
+STATUS:CONFIRMED
+END:VEVENT
+</BOUCLE_breves>
+END:VCALENDAR
