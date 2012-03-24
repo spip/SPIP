@@ -97,7 +97,7 @@ function tester_compatibilite_hebergement() {
 	$p = phpversion();
 	if (preg_match(',^([0-9]+)\.([0-9]+)\.([0-9]+),', $p, $regs)) {
 		$php = array($regs[1], $regs[2], $regs[3]);
-		$m = '4.0.8';
+		$m = '5.1.0';
 		$min = explode('.', $m);
 		if ($php[0]<$min[0]
 		OR ($php[0]==$min[0] AND $php[1]<$min[1])
@@ -125,13 +125,14 @@ function tester_compatibilite_hebergement() {
 		. "mbstring.func_overload=$a - <a href='http://www.php.net/mb_string'>mb_string</a>.<br /><small>";
 
 	if ($err) {
-			echo "<p class='verdana1 spip_large'><b>"._T('avis_attention').'</b></p><p>'._T('install_echec_annonce')."</p><ul>";
-		while (list(,$e) = each ($err))
-			echo "<li>$e</li>\n";
+			echo "<div class='error'>"
+				."<h3>"._T('avis_attention').'</h3><p>'._T('install_echec_annonce')."</p><ul class='spip'>";
+			foreach($err as $e)
+				echo "<li><strong>$e</strong></li>\n";
 
 		# a priori ici on pourrait die(), mais il faut laisser la possibilite
 		# de forcer malgre tout (pour tester, ou si bug de detection)
-		echo "</ul><hr />\n";
+		echo "</ul></div>\n";
 	}
 }
 
