@@ -31,7 +31,6 @@ local/*.jpg
 local/cache-*
 local/chargeur
 /mutualisation
-/plugins
 /sites
 /squelettes
 /themes
