@@ -813,6 +813,7 @@ sanm in koulèr i présiz son léta :',
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -833,7 +834,8 @@ sanm in koulèr i présiz son léta :',
 	'taille_cache_image' => 'Ban zimaz sak SPIP i pé kalkilé otomatikman (tite-zimaz dann dokiman, bann non i prézant grafikman, bann fonkson matématik dan forma TeX...)  zot i prann andan répertwar @dir@ in léspas total sat i ariv @taille@.',
 	'taille_cache_infinie' => 'Sit-la li di pas ryin si tay lo répèrtwar <code>CACHE/</code>.',
 	'taille_cache_maxi' => 'SPIP li sar esayé armèn lo tay lo répertwar <code>CACHE/</code> pou lo sit-la environ <b>@octets@</b> bann doné.',
-	'taille_cache_octets' => 'Lo ty lo CACHE li lé astèr de @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Lo ty lo CACHE li lé astèr de @octets@.', # MODIF
 	'taille_cache_vide' => 'Lo kas lé vid.',
 	'taille_repertoire_cache' => 'Tay lo répertwar kas',
 	'text_article_propose_publication' => 'Lartik-la lé propozé pou lapiblikasyon. Ézit pa donn out manyèr vwar dann forom lartik-la (anba lapaz).', # MODIF

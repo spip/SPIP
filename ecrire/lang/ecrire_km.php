@@ -768,6 +768,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -788,7 +789,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'taille_cache_image' => 'រូបភាព ត្រូវបានគណនា ស្វ័យប្រវត្តិ ដោយ SPIP (​ទំរង់សង្ខេប ឯកសារ, ចំណងជើង ត្រូវបានបង្ហាញ ជាក្រាភិក, អនុគមគណិត ជាទំរង់ TeX) មានសរុប @taille@ ​ក្នុង​ថតឯកសារ @dir@ ។',
 	'taille_cache_infinie' => 'សៃថ៍នេះ គ្មានកំណត់ ទំហំថតឯកសារ របស់សតិភ្ជាប់។',
 	'taille_cache_maxi' => 'SPIP កំពុង​ព្យាយាម​កំណត់​នូវ​ទំហំ​នៃ​ថត (directory) លាក់ខ្លួន​ទៅ​តាម​ទំហំ​ប្រហាក់ប្រហែល​នៃ <b>@octets@</b> របស់​ទិន្នន័យ​។',
-	'taille_cache_octets' => 'ទំហំ​ថត​លាក់ខ្លួន​គឺ @octets@ ថ្មីៗ​។',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'ទំហំ​ថត​លាក់ខ្លួន​គឺ @octets@ ថ្មីៗ​។', # MODIF
 	'taille_cache_vide' => 'ថត​លាក់ខ្លួន​ទទេ​។',
 	'taille_repertoire_cache' => 'ទំហំ​បច្ចុប្បន្ន​នៃ​ថត​លាក់ខ្លួន​។',
 	'text_article_propose_publication' => 'អត្ថបទ ត្រូវបានស្នើបោះផ្សាយ។',

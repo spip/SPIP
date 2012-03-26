@@ -778,6 +778,7 @@ ami állapotát jelzi :',
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -798,7 +799,8 @@ ami állapotát jelzi :',
 	'taille_cache_image' => 'Az SPIP által kalkulált képek (dok. bélyegképei, grafikusan megjelenő címek, TeX formatumú matek függvények...) @taille@ méretű helyet foglalnak a @dir@ nevű mappában.',
 	'taille_cache_infinie' => 'Ennél a honlapnál nincs méretkorlátozás a <code>CACHE/</code> mappában.',
 	'taille_cache_maxi' => 'SPIP próbálja korlátozni a <code>CACHE/</code> mappa méretét kb. <b>@octets@</b> méretre.',
-	'taille_cache_octets' => 'A cache mérete jelenleg @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'A cache mérete jelenleg @octets@.', # MODIF
 	'taille_cache_vide' => 'A cache üres.',
 	'taille_repertoire_cache' => 'Cache mappa mérete',
 	'text_article_propose_publication' => 'Publikálásra javasolt cikk. Ne habozzon hozzászólni a cikkhez kötött fórum segítségével (az oldal végén).', # MODIF

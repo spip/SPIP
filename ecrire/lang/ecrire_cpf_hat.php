@@ -795,6 +795,7 @@ nan yon koulè ki bay lestati ali :',
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -815,7 +816,8 @@ nan yon koulè ki bay lestati ali :',
 	'taille_cache_image' => 'Tout imaj ki SPIP kav kalkile otomatikman (viyèt nan dokiman, kouman li rele ki pwézanté nan foma gwafik, tout fonksyon matematik nan foma TeX...) yo ka okipe nan répètwar @dir@ lespas total ki @taille@.',
 	'taille_cache_infinie' => 'Genyen pa oken limit pou latay répertwar CACHE.',
 	'taille_cache_maxi' => 'SPIP ka eseye limite latay répertwar CACHE sit-la, alantou <b>@octets@</b> pou tout doné .',
-	'taille_cache_octets' => 'Tay pou kach se aster @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Tay pou kach se aster @octets@.', # MODIF
 	'taille_cache_vide' => 'Kach-la se vid.',
 	'taille_repertoire_cache' => 'Latay répertwar kach',
 	'text_article_propose_publication' => 'Atik ki pwopoze pou fé parèt. Ezit pas bay lavi aou nan fowom ki jwen atik-la (anba lapaj).', # MODIF

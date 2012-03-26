@@ -770,6 +770,7 @@ una color indica lo sieu estat :',
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -790,7 +791,8 @@ una color indica lo sieu estat :',
 	'taille_cache_image' => 'Lu imatges que SPIP a calculat automaticament (vinhetas dei documents, títols presentats en forma gràfica, foncions matematiqui en format TeX...) ocupon dins lo repertòri @dir@ un totau de @taille@.',
 	'taille_cache_infinie' => 'Aquèu site prevei pas de limitacion de talha dau repertòri de l\'amagador.',
 	'taille_cache_maxi' => 'SPIP prova de limitar la talha dau repertòri de l\'amagador d\'aqueu sit à circa <b>@octets@</b> de donadas.',
-	'taille_cache_octets' => 'Aüra la talha de l\'amagador despassa @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Aüra la talha de l\'amagador despassa @octets@.', # MODIF
 	'taille_cache_vide' => 'L\'amagador es vuèi.',
 	'taille_repertoire_cache' => 'Talha dau repertòri amagador',
 	'text_article_propose_publication' => 'Article prepauat per la publicacion.',

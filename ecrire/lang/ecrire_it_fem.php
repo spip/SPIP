@@ -788,6 +788,7 @@ Le traduzioni sono associate all\'originale,
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -808,7 +809,8 @@ Le traduzioni sono associate all\'originale,
 	'taille_cache_image' => 'Le immagini elaborate automaticamente da SPIP (icone dei documenti, titoli in formato grafico, funzioni matematiche in formato TeX...) occupano nella cartella @dir@ in tutto @taille@.',
 	'taille_cache_infinie' => 'Questo sito non prevede limiti alle dimensioni della cartella della cache.',
 	'taille_cache_maxi' => 'SPIP tenta di limitare le dimensioni della cartella della cache di questo sito a circa <b>@octets@</b> di dati.',
-	'taille_cache_octets' => 'La cartella della cache occupa attualmente @octets@ su disco.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'La cartella della cache occupa attualmente @octets@ su disco.', # MODIF
 	'taille_cache_vide' => 'La cache è vuota.',
 	'taille_repertoire_cache' => 'Dimensioni della cartella di cache',
 	'text_article_propose_publication' => 'Articolo proposto per la pubblicazione. ',

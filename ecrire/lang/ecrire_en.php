@@ -789,11 +789,12 @@ and their status is colour-coded:',
 
 	// Q
 	'queue_executer_maintenant' => 'Run now',
+	'queue_info_purger' => 'You can delete all pending jobs and reset the list of periodic tasks',
 	'queue_nb_jobs_in_queue' => '@nb@ tasks in queue',
 	'queue_next_job_in_nb_sec' => 'Next job in @nb@ s',
 	'queue_no_job_in_queue' => 'No pending tasks',
 	'queue_one_job_in_queue' => '1 job in queue',
-	'queue_purger_queue' => 'Purge job queue',
+	'queue_purger_queue' => 'Reset the job queue',
 	'queue_titre' => 'List of tasks',
 
 	// R
@@ -809,7 +810,8 @@ and their status is colour-coded:',
 	'taille_cache_image' => 'The images calculated automatically by SPIP (thumbnails, titles transformed into graphics, mathematical formulae in TeX format, etc.) take up a total of @taille@ in the @dir@ directory.',
 	'taille_cache_infinie' => 'This site does not have any fixed limit for the size of the cache.',
 	'taille_cache_maxi' => 'SPIP will try to limit the size of the cache directory to approximately <b>@octets@</b>.',
-	'taille_cache_octets' => 'The size of the cache is currently @octets@.',
+	'taille_cache_moins_de' => 'The cache size is less than @octets@.',
+	'taille_cache_octets' => 'The size of the cache is currently around @octets@.',
 	'taille_cache_vide' => 'The cache is empty.',
 	'taille_repertoire_cache' => 'Current cache size ',
 	'text_article_propose_publication' => 'Article submitted for publication.',

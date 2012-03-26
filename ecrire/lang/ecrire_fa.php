@@ -367,7 +367,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'زبانهاى سايت',
 	'info_ldap_ok' => 'گواهى درستى LDAP مستقر شده',
 	'info_lien_hypertexte' => ': پيوند هايپرتكست',
-	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
+	'info_liste_nouveautes_envoyee' => 'فهرست تازه‌ها ارسال شده است',
 	'info_liste_redacteurs_connectes' => 'فهرست نويسنده گان روى خط',
 	'info_login_existant' => '.موجود ميباشد login اين',
 	'info_login_trop_court' => 'بيش از اندازه كوتاه Login .',
@@ -463,7 +463,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_question_utilisation_moteur_recherche' => 'آيا مايل هستيد كه از موتور جستجوى اسپيپ استفاده كنيد ؟
  (غير فعال كردن آن سرعت سيستم را افزايش ميدهد)',
 	'info_question_vignettes_referer_non' => 'گيراندازي‌هاي سايت‌هاي مبداء بازديد‌كنندگان را نشان ندادن',
-	'info_qui_edite' => ' چند دقيقه پيش اصلاحات شما روي@nom_auteur_modif@ در مورد نوشته‌ي @date_diff@ جواب داد', # MODIF
+	'info_qui_edite' => '@nom_auteur_modif@ روي اين مطلب @date_diff@ كار كرده است.',
 	'info_racine_site' => 'ريشه سايت',
 	'info_recharger_page' => 'خواهشمند است اين صفحه را تا چند لحظه بعد دوباره شارژ كنيد',
 	'info_recherche_auteur_a_affiner' => 'پاسخهاى بيشمار براى "@cherche_auteur@" ;خواهشمند است پرسشتان را بهتر مطرح كنيد.',
@@ -726,7 +726,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_librairies_installees' => 'آرشيو‌هاي نصب‌ شده',
 	'plugin_necessite_lib' => 'اين پلاگين به آرشيو @lib@ نياز دارد',
 	'plugin_necessite_plugin' => 'به plugin @plugin@ نسخه ی @version@ نیاز دارید',
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
+	'plugin_necessite_plugin_sans_version' => 'پلاگين @plugin@ لازم است ',
 	'plugin_necessite_spip' => 'به اسپیپ نسخه ی @version@ نیاز دارید.',
 	'plugin_source' => 'منبع: ',
 	'plugin_titre_automatique' => 'نصب خودكار ',
@@ -759,11 +759,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'اجرا حالا',
+	'queue_info_purger' => 'مي‌‌توانيد تمام كارهاي در انتظار را حذف كنيد و فهرست را با كارهاي دوره‌اي بازتنظيم كنيد',
 	'queue_nb_jobs_in_queue' => '@nb@ وظيفه در صف ',
 	'queue_next_job_in_nb_sec' => 'وظيفه‌ي بعدي در  @nb@ امين',
 	'queue_no_job_in_queue' => 'وظيفه‌اي در دست اجرا نيست',
 	'queue_one_job_in_queue' => '1 وظيفه در صف',
-	'queue_purger_queue' => 'پاكسازي صف وظيفه‌ها',
+	'queue_purger_queue' => 'بازتنظيم فهرست كارها',
 	'queue_titre' => 'فهرست وظيفه‌ها',
 
 	// R
@@ -779,7 +780,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'taille_cache_image' => 'اندازه ى تصاوير, كه توسط اسپيپ حساب شده ( تصاوير كوچك اسناد, عناوين گرافيكى عرضه شده, كاربردهاى رياضى با فرمهاى TeX...) در رپرتوار @dir@جمعا @taille@ را اشغال ميكنند.',
 	'taille_cache_infinie' => 'اين سايت محدوديت اندازه ى رپرتوار Cache را پيش بينى نميكند.',
 	'taille_cache_maxi' => 'اسپيپ سعى در محدود كردن اندازه ى رپرتوار Cache به اين اندازه دارد <b>@octets@</b>.',
-	'taille_cache_octets' => 'اندازه ى فايل پنهان در حال حاضر @octets@.',
+	'taille_cache_moins_de' => 'اندازه‌ي حافظه‌ي پنهان كمتر از@octets@ است.',
+	'taille_cache_octets' => ' اندازه ى فايل پنهان در حال حاضر تقريبا @octets@ است.  ',
 	'taille_cache_vide' => 'فايل پنهان خالى است.',
 	'taille_repertoire_cache' => 'اندازه ى فايل پنهان',
 	'text_article_propose_publication' => ' مقاله‌ى پيشنهادى براى انتشار.',

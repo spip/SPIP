@@ -795,6 +795,7 @@ ukazuje jejich stav:',
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -815,7 +816,8 @@ ukazuje jejich stav:',
 	'taille_cache_image' => 'Obrázky, automaticky vypočtené systémem SPIP (náhledy dokumentů, názvy zobrazené graficky, matematické funkce ve formátu TeX...) zabírají v adresáři @dir@ celkem @taille@.',
 	'taille_cache_infinie' => 'Maximální velikost adresáře pro vyrovnávací pamět není na tomto webu omezena.',
 	'taille_cache_maxi' => 'Systém SPIP se snaží omezit velikost adresáře vyrovnávací paměti (cache) tohoto webu na cca <b>@octets@</b> bajtů.',
-	'taille_cache_octets' => 'Velikost cache je v současnosti @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Velikost cache je v současnosti @octets@.', # MODIF
 	'taille_cache_vide' => 'Cache je prázdná.',
 	'taille_repertoire_cache' => 'Velikost adresáře cache',
 	'text_article_propose_publication' => 'Články připravené k publikování. Neváhejte přidat svůj názor prostřednictvím diskusního fóra, jež je připojeno ke každému článku (na spodním okraji stránky).', # MODIF

@@ -781,6 +781,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -801,7 +802,8 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'taille_cache_image' => 'La bildoj aŭtomate komputitaj de SPIP (vijnetoj de dokumentoj, titoloj prezentitaj laŭ grafika formo, matematikaj funkcioj laŭ TeX-formato...) okupas en dosierujo @dir@ spacon je @taille@.',
 	'taille_cache_infinie' => 'Tiu retejo ne ebligas limigi memorspacon de stapla dosierujo.',
 	'taille_cache_maxi' => 'SPIP provas limigi memorspacon de stapla dosierujo po cirkaŭ <b>@octets@</b> da datenoj.',
-	'taille_cache_octets' => 'Memorspaco de la staplo estas nun @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Memorspaco de la staplo estas nun @octets@.', # MODIF
 	'taille_cache_vide' => 'La staplo estas malplena.',
 	'taille_repertoire_cache' => 'Memorspaco de stapla dosierujo',
 	'text_article_propose_publication' => 'Artikolo proponita por publikigo. Ne hezitu doni vian opinion pere de la forumo ligita kun tiu ĉi artikolo (malsupre de la paĝo).', # MODIF

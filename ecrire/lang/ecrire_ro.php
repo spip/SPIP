@@ -781,6 +781,7 @@ cu o culoare care le indică starea :',
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -801,7 +802,8 @@ cu o culoare care le indică starea :',
 	'taille_cache_image' => 'Imaginile calculate automat de către SPIP (viniete de documente, titluri prezentate sub formă grafică, funcţii matematice în format TeX...) ocupă în directorul @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'Acest site nu prevede limitarea mărimii directorului <code>CACHE/</code>.',
 	'taille_cache_maxi' => 'SPIP încearcă să limiteze mărimea directorului <code>CACHE/</code> al acestui site la aproximativ <b>@octets@</b> octeţi de date.',
-	'taille_cache_octets' => 'Mărimea tamponului este acum de @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Mărimea tamponului este acum de @octets@.', # MODIF
 	'taille_cache_vide' => 'Tamponul este gol.',
 	'taille_repertoire_cache' => 'Mărimea directorului de tampon',
 	'text_article_propose_publication' => 'Articol propus pentru publicare. ',

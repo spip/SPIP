@@ -786,6 +786,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -806,7 +807,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'taille_cache_image' => 'SPIP tarafından otomatik olarak hesaplanan resimler (doküman ikonları, grafik olarak gösterilen başlıklar, TeX biçimindeki matematik işlevler...) @dir@ dizininde toplam @taille@ yer tutuyor.',
 	'taille_cache_infinie' => 'Bu site <code>önbellek (CACHE)</code> dizininin boyutu için herhangi bir sınır öngörmüyor.',
 	'taille_cache_maxi' => 'SPIP, bu sitenin <code>önbellek (CACHE)</code> dizininin boyutunu yaklaşık @octets@ lik veriyle sınırlamaya çalışıyor.',
-	'taille_cache_octets' => 'Önbelleğin ölçüsü şu anda @octets@ dir.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Önbelleğin ölçüsü şu anda @octets@ dir.', # MODIF
 	'taille_cache_vide' => 'Ön bellek boş.',
 	'taille_repertoire_cache' => 'Ön bellek dizininin boyutu',
 	'text_article_propose_publication' => 'Yayın için önerilen makale. ',

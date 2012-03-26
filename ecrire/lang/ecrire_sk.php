@@ -790,11 +790,12 @@ a stav ich spracovania je označený farbou:',
 
 	// Q
 	'queue_executer_maintenant' => 'Spustiť teraz',
+	'queue_info_purger' => 'Môžete vymazať všetky čakajúce úlohy a obnoviť zoznam pravidelných úloh na pôvodné hodnoty',
 	'queue_nb_jobs_in_queue' => '@nb@ úloh v rade',
 	'queue_next_job_in_nb_sec' => 'Ďalšia úloha o @nb@ s.',
 	'queue_no_job_in_queue' => 'Žiadne nevykonané úlohy',
 	'queue_one_job_in_queue' => '1 úloha v rade',
-	'queue_purger_queue' => 'Vymazať rad úloh',
+	'queue_purger_queue' => 'Obnoviť rad úloh',
 	'queue_titre' => 'Zoznam úloh',
 
 	// R
@@ -810,7 +811,8 @@ a stav ich spracovania je označený farbou:',
 	'taille_cache_image' => 'Obrázky, ktoré SPIP automaticky obnoví (miniatúry, názvy zmenené na grafiku, matematické vzorce vo formáte TeX, atď.) zaberajú spolu v priečinku @dir@ @taille@ .',
 	'taille_cache_infinie' => 'Táto stránka nemá žiaden pevný limit pre veľkosť cache.',
 	'taille_cache_maxi' => 'SPIP sa bude snažiť obmedziť veľkosť priečinka cache na približne <b>@octets@.</b>',
-	'taille_cache_octets' => 'Veľkosť cache je teraz @octets@.',
+	'taille_cache_moins_de' => 'Veľkosť cache je menej ako @octets@.',
+	'taille_cache_octets' => 'Veľkosť cache je teraz približne @octets@.',
 	'taille_cache_vide' => 'Cache je prázdna.',
 	'taille_repertoire_cache' => 'Aktuálna veľkosť cache',
 	'text_article_propose_publication' => 'Článok bol odoslaný na publikovanie.',

@@ -762,6 +762,7 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -782,7 +783,8 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 	'taille_cache_image' => 'Các hình được tính toán tự động bởi SPIP (hình nhỏ, tựa đề được đổi thành hình, công thức toán học dưới dạng TeX, v.v...) chiếm tổng cộng @taille@ trong ngăn @dir@.',
 	'taille_cache_infinie' => 'Trang web không có giới hạn khổ của ngăn <code>CACHE/</code>.', # MODIF
 	'taille_cache_maxi' => 'SPIP sẽ giới hạn khổ của ngăn <code>CACHE/</code> vào khoảng <b>@octets@</b> dữ liệu.', # MODIF
-	'taille_cache_octets' => 'Khổ của cache hiện thời là @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Khổ của cache hiện thời là @octets@.', # MODIF
 	'taille_cache_vide' => 'Cache trống rỗng.',
 	'taille_repertoire_cache' => 'Khổ hiện thời của cache',
 	'text_article_propose_publication' => 'Bài nộp để chuẩn bị phát hành. Xin đừng ngần ngại cho ý kiến của bạn qua diễn đàn đính kèm theo bài này (ở cuối trang).', # MODIF

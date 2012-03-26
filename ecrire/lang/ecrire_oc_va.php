@@ -778,6 +778,7 @@ una color indica lor estat:',
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -798,7 +799,8 @@ una color indica lor estat:',
 	'taille_cache_image' => 'Los imatges qu\'SPIP a calculat automaticament (vinhetas dels documents, títols presentats en forma grafica, foncions matematicas en format TeX...) ocupan dins lo repertòri @dir@ un totau de @taille@.',
 	'taille_cache_infinie' => 'Aqueu sit prevei ges de limitacion de talha dau repertòri <code>CACHE/</code>.',
 	'taille_cache_maxi' => 'SPIP assaia de limitar la talha dau repertòri <code>CACHE/</code> d\'aqueu sit a <b>@octets@</b> de donaas environ.',
-	'taille_cache_octets' => 'Aüra la talha de l\'escondeor compassa @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Aüra la talha de l\'escondeor compassa @octets@.', # MODIF
 	'taille_cache_vide' => 'L\'escondeor es vueid.',
 	'taille_repertoire_cache' => 'Talha dau repertòri escondeor',
 	'text_article_propose_publication' => 'Article prepausat per la publicacion. Esitetz pas de donar vòstre avís gràcias au forum estachat a aquel article (en bas de pagina).', # MODIF

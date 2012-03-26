@@ -763,6 +763,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -783,7 +784,8 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'taille_cache_image' => 'Déi automatësch berechent Biller (Vignetten vun Dokumenter, graphesch Titelen, mathematesch Formelen am TeX-Format...) brauchen am Répertoire @dir@ eng Plaz vun @taille@.',
 	'taille_cache_infinie' => 'De Cache vun dësem Site ass nët an der Gréisst limitéiert.',
 	'taille_cache_maxi' => 'SPIP probéiert d\'Gréisst vum Cache vun dësem Site op ongeféier <b>@octets@</b> ze limitéieren.',
-	'taille_cache_octets' => 'D\'Gréisst vum Cache ass elo @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'D\'Gréisst vum Cache ass elo @octets@.', # MODIF
 	'taille_cache_vide' => 'De Cache ass eidel.',
 	'taille_repertoire_cache' => 'Gréisst vum Cache-Dossier',
 	'text_article_propose_publication' => 'Fir d\'Publikatioun proposéierten Artikel.',
