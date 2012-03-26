@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil_site' => 'ទំព័រដើម នៃសៃថ៍',
+	'accueil_site' => 'ទំព័រដើម នៃសៃថ៍', # MODIF
 	'article' => 'Article', # NEW
 	'articles' => 'អត្ថបទ',
 	'articles_auteur' => 'អត្ថបទ​ របស់​អ្នកនិពន្ធ​នេះ',

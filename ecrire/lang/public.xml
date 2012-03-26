@@ -24,6 +24,7 @@
 	<langue code="el" />
 	<langue code="en" url="http://trad.spip.org/tradlang_module/public?lang_cible=en">
 		<traducteur nom="sQuonk" lien="http://trad.spip.org/auteur/squonk" />
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
 		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 	</langue>

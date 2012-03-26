@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil_site' => 'Prima pagină',
+	'accueil_site' => 'Prima pagină', # MODIF
 	'article' => 'Articol',
 	'articles' => 'Articole',
 	'articles_auteur' => 'Articole de acelaşi autor',
