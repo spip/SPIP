@@ -204,6 +204,8 @@ function generer_url_ecrire_objet($objet,$id, $args='', $ancre='', $public=null,
 		return generer_url_entite_absolue($id, $objet, $args, $ancre, $connect);
 	}
 	$a = id_table_objet($objet) . "=" . intval($id);
+	if (!function_exists('objet_info'))
+		include_spip('inc/filtres');
 	return generer_url_ecrire(objet_info($objet,'url_voir'), $a . ($args ? "&$args" : '')). ($ancre ? "#$ancre" : '');
 }
 
