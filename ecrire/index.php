@@ -105,6 +105,7 @@ elseif (isset($GLOBALS['meta']["admin"])) {
 		if ($var_f != $exec) {
 			spip_log("Le script $var_f lance par $n se substitue a $exec");
 			$exec = $var_f;
+			set_request('exec', $exec);
 		}
 	}
 }
@@ -138,7 +139,6 @@ if ($var_f = _request('transformer_xml')) {
 	set_request('var_url', $exec);
 	$exec = $var_f;
 }
-
 if ($var_f = tester_url_ecrire($exec)) {
 	$var_f = charger_fonction ($var_f);
 	$var_f(); // at last
