@@ -12,16 +12,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Definir les niveaux de log
-if (!defined('_LOG_HS')) define('_LOG_HS', 0);
-if (!defined('_LOG_ALERTE_ROUGE')) define('_LOG_ALERTE_ROUGE', 1);
-if (!defined('_LOG_CRITIQUE')) define('_LOG_CRITIQUE', 2);
-if (!defined('_LOG_ERREUR')) define('_LOG_ERREUR', 3);
-if (!defined('_LOG_AVERTISSEMENT')) define('_LOG_AVERTISSEMENT', 4);
-if (!defined('_LOG_INFO_IMPORTANTE')) define ('_LOG_INFO_IMPORTANTE', 5);
-if (!defined('_LOG_INFO')) define('_LOG_INFO', 6);
-if (!defined('_LOG_DEBUG')) define('_LOG_DEBUG', 7);
-
 //
 // Utilitaires indispensables autour du serveur Http.
 //
@@ -1478,8 +1468,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (!defined('_FILE_CONNECT')) define('_FILE_CONNECT',
 		(@is_readable($f = _DIR_CONNECT . _FILE_CONNECT_INS . '.php') ? $f
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php') ? $f
-	:	(_EXTENSION_PHP AND @is_readable($f = _DIR_RESTREINT . 'inc_connect'._EXTENSION_PHP) ? $f
-	:	false))));
+	:	false)));
 
 	// Le fichier de reglages des droits
 	if (!defined('_FILE_CHMOD_INS')) define('_FILE_CHMOD_INS', 'chmod');
@@ -1551,15 +1540,9 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	@set_magic_quotes_runtime(0);
 
 	// Si les variables sont passees en global par le serveur,
-	// ou si on veut la compatibilite php3
 	// il faut faire quelques verifications de base
-	if ($x = test_valeur_serveur(@ini_get('register_globals'))
-	OR  _FEED_GLOBALS) {
-		// ne pas desinfecter les globales en profondeur car elle contient aussi les
-		// precedentes, qui seraient desinfectees 2 fois.
-		spip_desinfecte($GLOBALS,false);
-		if (include_spip('inc/php3'))
-			spip_register_globals($x);
+	if (test_valeur_serveur(@ini_get('register_globals'))) {
+		die ('Veuillez desactiver register_globals<br>.htaccess : php_flag register_globals off');
 	}
 
 	// appliquer le cookie_prefix

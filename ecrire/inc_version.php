@@ -16,13 +16,6 @@ define('_ECRIRE_INC_VERSION', "1");
 
 # masquer les eventuelles erreurs sur les premiers define
 error_reporting(E_ALL ^ E_NOTICE);
-# compatibilite anciennes versions
-# si vous avez encore un fichier .php3, redefinissez a ".php3"
-# concerne mes_options.php3 / mes_fonctions.php3 / inc_connect.php3
-#define('_EXTENSION_PHP', '.php3');
-define('_EXTENSION_PHP', '');
-#mettre a true pour compatibilite PHP3
-define('_FEED_GLOBALS', false);
 
 # version PHP minimum exigee (cf. inc/utils)
 define ('_PHP_MIN', '5.1.0');
@@ -83,8 +76,7 @@ if (!defined('_NOM_CONFIG')) define('_NOM_CONFIG', 'mes_options');
 
 // Son emplacement absolu si on le trouve
 if (@file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php')
-OR (@file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . '.php'))
-OR (_EXTENSION_PHP AND @file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . _EXTENSION_PHP))) {
+OR (@file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . '.php'))) {
 	define('_FILE_OPTIONS', $f);
 } else define('_FILE_OPTIONS', '');
 
@@ -115,6 +107,18 @@ AND @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_secu
 # comment on logge, defaut 4 tmp/spip.log de 100k, 0 ou 0 suppriment le log
 $nombre_de_logs = 4;
 $taille_des_logs = 100;
+
+// Definir les niveaux de log
+defined('_LOG_HS') || define('_LOG_HS', 0);
+defined('_LOG_ALERTE_ROUGE') || define('_LOG_ALERTE_ROUGE', 1);
+defined('_LOG_CRITIQUE') || define('_LOG_CRITIQUE', 2);
+defined('_LOG_ERREUR') || define('_LOG_ERREUR', 3);
+defined('_LOG_AVERTISSEMENT') || define('_LOG_AVERTISSEMENT', 4);
+defined('_LOG_INFO_IMPORTANTE') || define ('_LOG_INFO_IMPORTANTE', 5);
+defined('_LOG_INFO') || define('_LOG_INFO', 6);
+defined('_LOG_DEBUG') || define('_LOG_DEBUG', 7);
+
+// on peut definir _LOG_FILTRE_GRAVITE dans mes_options.php
 
 // Prefixe des tables dans la base de donnees
 // (a modifier pour avoir plusieurs sites SPIP dans une seule base)
@@ -324,6 +328,9 @@ if (_FILE_OPTIONS) {include_once _FILE_OPTIONS;}
 if (!defined('E_DEPRECATED')) define('E_DEPRECATED', 8192); // compatibilite PHP 5.3
 if (!defined('SPIP_ERREUR_REPORT')) define('SPIP_ERREUR_REPORT', E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 error_reporting(SPIP_ERREUR_REPORT);
+
+// niveau de log par defaut
+defined('_LOG_FILTRE_GRAVITE') || define('_LOG_FILTRE_GRAVITE', _LOG_DEBUG);
 
 // Initialisations critiques non surchargeables par les plugins
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES

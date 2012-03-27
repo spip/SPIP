@@ -140,8 +140,7 @@ function squelette_obsolete($skel, $squelette) {
 	// ne verifier la date de mes_fonctions et mes_options qu'une seule fois
 	// par hit
 	if (is_null($date_change)){
-		if (@file_exists($fonc = 'mes_fonctions.php')
-			OR (_EXTENSION_PHP AND @file_exists($fonc = 'mes_fonctions'._EXTENSION_PHP)))
+		if (@file_exists($fonc = 'mes_fonctions.php'))
 			$date_change = @filemtime($fonc); # compatibilite
 		if (defined('_FILE_OPTIONS'))
 			$date_change = max($date_change,@filemtime(_FILE_OPTIONS));
