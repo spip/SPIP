@@ -191,8 +191,7 @@ function spip_log($message=NULL, $name=NULL) {
 	if (!isset($regs[2]) OR !$niveau = $regs[2])
 		$niveau = _LOG_INFO;
 
-	if ($niveau <= 
-	(defined('_LOG_FILTRE_GRAVITE')?_LOG_FILTRE_GRAVITE:_LOG_DEBUG)) {
+	if ($niveau <= _LOG_FILTRE_GRAVITE)) {
 		if (!$pre){
 			$pre = array(
 				_LOG_HS=>'HS:',
@@ -1496,9 +1495,6 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// La taille des Log
 	if (!defined('_MAX_LOG')) define('_MAX_LOG', 100);
-
-	// niveau maxi d'enregistrement des logs
-	if (!defined('_LOG_FILTRE_GRAVITE')) define('_LOG_FILTRE_GRAVITE', 5);
 
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
