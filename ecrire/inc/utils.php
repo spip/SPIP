@@ -191,7 +191,7 @@ function spip_log($message=NULL, $name=NULL) {
 	if (!isset($regs[2]) OR !$niveau = $regs[2])
 		$niveau = _LOG_INFO;
 
-	if ($niveau <= _LOG_FILTRE_GRAVITE)) {
+	if ($niveau <= _LOG_FILTRE_GRAVITE) {
 		if (!$pre){
 			$pre = array(
 				_LOG_HS=>'HS:',
