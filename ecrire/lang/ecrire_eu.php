@@ -588,8 +588,8 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'install_serveur_hebergeur' => 'Aterbetzaileak emandako datu-base zerbitzaria',
 	'install_table_prefix_hebergeur' => 'Aterbetzaileak emandako mahaiaren aurrizkia :',
 	'install_tables_base' => 'Baseko mahaiak',
-	'install_types_db_connus' => 'SPIPek <b>MySQL</b> (erabiliena), <b>PostgreSQL</b> eta <b>SQLite</b> badakizka erabiltzen.',
-	'install_types_db_connus_avertissement' => 'Kontuz : plugin zonbaitzu MySQL-ekin baizik ibiltzen dira',
+	'install_types_db_connus' => 'SPIPek <b>MySQL</b> (erabiliena), <b>PostgreSQL</b> eta <b>SQLite</b> badakizka erabiltzen.', # MODIF
+	'install_types_db_connus_avertissement' => 'Kontuz : plugin zonbaitzu MySQL-ekin baizik ibiltzen dira', # MODIF
 	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
 	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'idazlaria',

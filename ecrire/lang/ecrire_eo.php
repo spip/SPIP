@@ -596,8 +596,8 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'install_serveur_hebergeur' => 'Servilo de datumbazo atribuita de la retgastiganto',
 	'install_table_prefix_hebergeur' => 'Prefikso de la tabelo atribuita de la retejgastiganto :',
 	'install_tables_base' => 'Tabeloj de la datumbazo',
-	'install_types_db_connus' => 'SPIP scipovas uzi <b>MySQL</b> (la plej kutime uzatan), <b>PostgreSQL</b> kaj <b>SQLite</b>.',
-	'install_types_db_connus_avertissement' => 'Atentu : pluraj kromprogramoj funkcias nur per MySQL',
+	'install_types_db_connus' => 'SPIP scipovas uzi <b>MySQL</b> (la plej kutime uzatan), <b>PostgreSQL</b> kaj <b>SQLite</b>.', # MODIF
+	'install_types_db_connus_avertissement' => 'Atentu : pluraj kromprogramoj funkcias nur per MySQL', # MODIF
 	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
 	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'redaktanto',

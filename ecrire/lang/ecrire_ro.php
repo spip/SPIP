@@ -596,8 +596,8 @@ cu o culoare care le indică starea :',
 	'install_serveur_hebergeur' => 'Server de bază de date atribuit de către provider',
 	'install_table_prefix_hebergeur' => 'Prefix-ul tabelelor furnizat de provider :',
 	'install_tables_base' => 'Tabelele bazei',
-	'install_types_db_connus' => 'SPIP ştie să folosească <b>MySQL</b> (cel mai răspândit), <b>PostgreSQL</b> şi <b>SQLite</b>.',
-	'install_types_db_connus_avertissement' => 'Atenţie : mai multe plug-in-uri nu funcţionează decât cu MySQL',
+	'install_types_db_connus' => 'SPIP ştie să folosească <b>MySQL</b> (cel mai răspândit), <b>PostgreSQL</b> şi <b>SQLite</b>.', # MODIF
+	'install_types_db_connus_avertissement' => 'Atenţie : mai multe plug-in-uri nu funcţionează decât cu MySQL', # MODIF
 	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
 	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'redactor',

@@ -587,8 +587,8 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'install_serveur_hebergeur' => 'Servidor de base de datos asignado por tu proveedor',
 	'install_table_prefix_hebergeur' => 'Prefijo de la tabla asignada por el proveedor :',
 	'install_tables_base' => 'Tablas de la base',
-	'install_types_db_connus' => 'SPIP sabe utilizar <b>MySQL</b> (el más extendido), <b>PostgreSQL</b> y <b>SQLite</b>.',
-	'install_types_db_connus_avertissement' => 'Atención: varios plugins sólo funcionan con MySQL',
+	'install_types_db_connus' => 'SPIP sabe utilizar <b>MySQL</b> (el más extendido), <b>PostgreSQL</b> y <b>SQLite</b>.', # MODIF
+	'install_types_db_connus_avertissement' => 'Atención: varios plugins sólo funcionan con MySQL', # MODIF
 	'instituer_erreur_statut_a_change' => 'El estatuto ya fue modificado',
 	'instituer_erreur_statut_non_autorise' => 'No puedes elegir este estatuto',
 	'intem_redacteur' => 'redactor/a',
@@ -730,8 +730,8 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'plugin_info_automatique_select' => 'Selecciona un plugin de aquí: SPIP lo descargará y lo instalará en la carpeta <code>@rep@</code>; si el plugin ya existe, se actualizará.',
 	'plugin_info_credit' => 'Créditos',
 	'plugin_info_erreur_xml' => 'La declaración de este plugin es incorrecta',
-	'plugin_info_extension_1' => 'Las extensiones siguientes se cargan y se activan en la carpeta @extensions@.',
-	'plugin_info_extension_2' => 'Ellas no son desactivables.',
+	'plugin_info_extension_1' => 'Las extensiones siguientes se cargan y se activan en la carpeta @extensions@.', # MODIF
+	'plugin_info_extension_2' => 'Ellas no son desactivables.', # MODIF
 	'plugin_info_install_ok' => 'Instalación exitosa',
 	'plugin_info_necessite' => 'Necesita:',
 	'plugin_info_non_compatible_spip' => 'Este plugin no es compatible con esta versión de SPIP',
@@ -763,7 +763,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'plugins_disponibles' => '@count@ plugins disponibles.',
 	'plugins_erreur' => 'Error en los plugins: @plugins@',
 	'plugins_liste' => 'Lista de plugins',
-	'plugins_liste_extensions' => 'Extensiones',
+	'plugins_liste_extensions' => 'Extensiones', # MODIF
 	'plugins_recents' => 'Plugins recientes.',
 	'plugins_tous_liste' => 'Todos',
 	'plugins_vue_hierarchie' => 'Jerarquía',

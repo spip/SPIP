@@ -596,8 +596,8 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	'install_serveur_hebergeur' => 'Servijer diaz titouroù lakaet gant an herberc\'hier',
 	'install_table_prefix_hebergeur' => 'Rakger an diaz roet gant an herberc\'hier :',
 	'install_tables_base' => 'Taolennoù en diaz',
-	'install_types_db_connus' => 'Gallout a ra SPIP ober gant <b>MySQL</b> (an hini implijetañ), <b>PostgreSQL</b> ha <b>SQLite</b>.',
-	'install_types_db_connus_avertissement' => 'Diwallit : meur a adveziant ne\'z eont en-dro nemet gant MySQL',
+	'install_types_db_connus' => 'Gallout a ra SPIP ober gant <b>MySQL</b> (an hini implijetañ), <b>PostgreSQL</b> ha <b>SQLite</b>.', # MODIF
+	'install_types_db_connus_avertissement' => 'Diwallit : meur a adveziant ne\'z eont en-dro nemet gant MySQL', # MODIF
 	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
 	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'skridaozer',

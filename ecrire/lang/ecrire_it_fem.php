@@ -603,8 +603,8 @@ Le traduzioni sono associate all\'originale,
 	'install_serveur_hebergeur' => 'Server del database attribuito dall\'hoster',
 	'install_table_prefix_hebergeur' => 'Prefisso della tabella attribuito dal provider:',
 	'install_tables_base' => 'Tabelle del database',
-	'install_types_db_connus' => 'SPIP può utilizzare <b>MySQL</b> (il più diffuso), <b>PostgreSQL</b> e <b>SQLite</b>.',
-	'install_types_db_connus_avertissement' => 'Attenzione: numerosi plug-in funziano solamente con MySQL',
+	'install_types_db_connus' => 'SPIP può utilizzare <b>MySQL</b> (il più diffuso), <b>PostgreSQL</b> e <b>SQLite</b>.', # MODIF
+	'install_types_db_connus_avertissement' => 'Attenzione: numerosi plug-in funziano solamente con MySQL', # MODIF
 	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
 	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'redattrice',
