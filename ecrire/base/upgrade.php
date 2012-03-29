@@ -70,9 +70,10 @@ function base_upgrade_dist($titre='', $reprise='')
  * http://doc.spip.org/@maj_base
  *
  * @param int $version_cible
+ * @param string $redirect
  * @return array|bool
  */
-function maj_base($version_cible = 0) {
+function maj_base($version_cible = 0, $redirect = '') {
 	global $spip_version_base;
 
 	$version_installee = @$GLOBALS['meta']['version_installee'];
@@ -120,7 +121,7 @@ function maj_base($version_cible = 0) {
 
 	include_spip('maj/svn10000');
 	ksort($GLOBALS['maj']);
-	$res = maj_while($version_installee, $cible, $GLOBALS['maj'], 'version_installee','meta', '', true);
+	$res = maj_while($version_installee, $cible, $GLOBALS['maj'], 'version_installee','meta', $redirect, true);
 	if ($res) {
 		if (!is_array($res))
 			spip_log("Pb d'acces SQL a la mise a jour","maj."._LOG_INFO_ERREUR);
