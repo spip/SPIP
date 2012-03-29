@@ -174,7 +174,8 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='m
 
 		// la redirection se fait par defaut sur la page d'administration des plugins
 		// sauf lorsque nous sommes sur l'installation de SPIP
-		$redirect = generer_url_ecrire('admin_plugin');
+		// ou define _REDIRECT_MAJ_PLUGIN
+		$redirect = (defined('_REDIRECT_MAJ_PLUGIN')?_REDIRECT_MAJ_PLUGIN:generer_url_ecrire('admin_plugin'));
 		if (defined('_ECRIRE_INSTALL')) {
 			$redirect = parametre_url(generer_url_ecrire('install'),'etape', _request('etape'));
 		}
