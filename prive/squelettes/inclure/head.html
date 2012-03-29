@@ -14,6 +14,7 @@ function test_accepte_ajax(){jQuery.ajax({"url":"[(#URL_ECRIRE{test_ajax,js=1}|r
 var stat = [(#CONFIG{activer_statistiques}|=={non}|?{0,1})];
 var confirm_changer_statut = '<:confirm_changer_statut|html2unicode|addslashes|unicode_to_javascript:>';
 /*]]>*/</script>
+<meta name="viewport" content="width=device-width" />
 [<link rel="stylesheet" type="text/css" href="(#VAL{reset.css}|find_in_theme|url_absolue)" id="csspriveereset" />]
 #PIPELINE{header_prive_css,''}
 [<!--
