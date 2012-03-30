@@ -201,14 +201,6 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 		}
 	}
 
-
-	// Si on est admin, poser le cookie de correspondance
-	if ($GLOBALS['auteur_session']['statut'] == '0minirezo') {
-		include_spip('inc/cookie');
-		spip_setcookie('spip_admin', '@'.$GLOBALS['auteur_session']['login'],
-		time() + 7 * 24 * 3600);
-	}
-
 	// Si on est connecte, envoyer vers la destination
 	if ($cible AND ($cible!=self())) {
 		if (!headers_sent() AND !$_GET['var_mode']) {

@@ -202,18 +202,10 @@ function auth_init_droits($row)
 	unset($GLOBALS['visiteur_session']['alea_actuel']);
 	unset($GLOBALS['visiteur_session']['alea_futur']);
 
-	// rajouter les sessions meme en mode auth_http
-	// pour permettre les connexions multiples et identifier les visiteurs
+	// creer la session au besoin
 	if (!isset($_COOKIE['spip_session'])) {
 		$session = charger_fonction('session', 'inc');
-		if ($spip_session = $session($row)) {
-			include_spip('inc/cookie');
-			spip_setcookie(
-				'spip_session',
-				$_COOKIE['spip_session'] = $spip_session,
-				time() + 3600 * 24 * 14
-			);
-		}
+		$spip_session = $session($row);
 	}
 
 	// reinjecter les preferences_auteur apres le reset de spip_session
