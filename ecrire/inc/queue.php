@@ -498,11 +498,12 @@ function queue_affichage_cron(){
 
 	// il y a des taches en attentes
 
+	$url_cron = generer_url_action('cron','',false,true);
+
 	// Si fsockopen est possible, on lance le cron via un socket
 	// en asynchrone
 	if(function_exists('fsockopen')){
-		$url = generer_url_action('cron','',false,true);
-		$parts=parse_url($url);
+		$parts=parse_url($url_cron);
 
 		$fp = @fsockopen($parts['host'],
 	        isset($parts['port'])?$parts['port']:80,
@@ -520,11 +521,25 @@ function queue_affichage_cron(){
 	}
 
 	// ici lancer le cron par un CURL asynchrone si CURL est présent
-	// TBD
+	if (function_exists("curl_init")){
+		//setting the curl parameters.
+		$ch = curl_init($url_cron);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// cf bug : http://www.php.net/manual/en/function.curl-setopt.php#104597
+		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+		// valeur mini pour que la requete soit lancee
+		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 100);
+		// lancer
+		curl_exec($ch);
+		// fermer
+		curl_close($ch);
+		return $texte;
+	}
 
 	// si deja force, on retourne sans rien
 	if (defined('_DIRECT_CRON_FORCE'))
 		return $texte;
+
 	// si c'est un bot
 	// inutile de faire un appel par image background,
 	// on force un appel direct en fin de hit
