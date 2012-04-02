@@ -31,7 +31,7 @@ function formulaires_configurer_preferences_charger_dist(){
 		$valeurs['couleurs_url'][$i] = generer_url_public('style_prive.css','ltr='
 				. $GLOBALS['spip_lang_left'] . '&'
 				. $couleurs($k));
-		$valeurs['couleurs'][$i++] = $c['couleur_foncee'];
+		$valeurs['couleurs'][$i++] = $c;
 	}
 
 	$valeurs['imessage'] = $GLOBALS['visiteur_session']['imessage'];

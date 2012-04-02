@@ -2,7 +2,7 @@
 <h3 class='titrem'><:titre_configurer_preferences:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[(#ENV{editable})
+
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
@@ -74,106 +74,19 @@
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:titre_changer_couleur_interface:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
-				]<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={1}|oui)checked="checked" ]value="1"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{1})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_1"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 1" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{1})];" /></label>
-				</div>
+				]<BOUCLE_couleurs(POUR){tableau #ENV{couleurs}}>
 				<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={2}|oui)checked="checked" ]value="2"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{2})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_2"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 2" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{2})];" /></label>
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_#CLE'[(#ENV{#GET{name}}|=={#CLE}|oui)checked="checked" ]value="#CLE"
+					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{#CLE})]').appendTo(jQuery('head'));" />
+					<label for="[(#GET{name})]_#CLE">
+						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[#(#VALEUR{couleur_foncee}|couleur_foncer)];" />
+						<img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 1" width="16" height="16" style="background-color:[(#VALEUR{couleur_foncee})];" />
+						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[(#VALEUR{couleur_claire})];" />
+						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[#(#VALEUR{couleur_claire}|couleur_eclaircir)];" />
+						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[#(#VALEUR{couleur_claire}|couleur_eclaircir{0.75})];" />
+					</label>
 				</div>
-				<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_3'[(#ENV{#GET{name}}|=={3}|oui)checked="checked" ]value="3"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{3})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_3"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 3" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{3})];" /></label>
-				</div>
-				<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_4'[(#ENV{#GET{name}}|=={4}|oui)checked="checked" ]value="4"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{4})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_4"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 4" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{4})];" /></label>
-				</div>
-				<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_5'[(#ENV{#GET{name}}|=={5}|oui)checked="checked" ]value="5"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{5})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_5"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 5" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{5})];" /></label>
-				</div>
-				<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_6'[(#ENV{#GET{name}}|=={6}|oui)checked="checked" ]value="6"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{6})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_6"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 6" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{6})];" /></label>
-				</div>
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_7'[(#ENV{#GET{name}}|=={7}|oui)checked="checked" ]value="7"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{7})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_7"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 7" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{7});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_8'[(#ENV{#GET{name}}|=={8}|oui)checked="checked" ]value="8"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{8})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_8"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 8" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{8});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_9'[(#ENV{#GET{name}}|=={9}|oui)checked="checked" ]value="9"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{9})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_9"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 9" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{9});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_10'[(#ENV{#GET{name}}|=={10}|oui)checked="checked" ]value="10"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{10})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_10"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 10" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{10});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_11'[(#ENV{#GET{name}}|=={11}|oui)checked="checked" ]value="11"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{11})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_11"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 11" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{11});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_12'[(#ENV{#GET{name}}|=={12}|oui)checked="checked" ]value="12"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{12})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_12"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 12" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{12});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_13'[(#ENV{#GET{name}}|=={13}|oui)checked="checked" ]value="13"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{13})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_13"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 13" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{13});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_14'[(#ENV{#GET{name}}|=={14}|oui)checked="checked" ]value="14"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{14})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_14"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 14" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{14});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_15'[(#ENV{#GET{name}}|=={15}|oui)checked="checked" ]value="15"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{15})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_15"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 15" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{15});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_16'[(#ENV{#GET{name}}|=={16}|oui)checked="checked" ]value="16"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{16})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_16"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 16" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{16});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_17'[(#ENV{#GET{name}}|=={17}|oui)checked="checked" ]value="17"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{17})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_17"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 17" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{17});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_18'[(#ENV{#GET{name}}|=={18}|oui)checked="checked" ]value="18"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{18})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_18"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 18" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{18});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_19'[(#ENV{#GET{name}}|=={19}|oui)checked="checked" ]value="19"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{19})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_19"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 19" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{19});" /></label>
-				</div>]
-				[<div class="choix">
-					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_20'[(#ENV{#GET{name}}|=={20}|oui)checked="checked" ]value="20"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{20})]').appendTo(jQuery('head'));" />
-					<label for="[(#GET{name})]_20"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 20" width="16" height="16" style="background-color:(#ENV{couleurs}|table_valeur{20});" /></label>
-				</div>]
+				</BOUCLE_couleurs>
 			</li>
 			<li class="editer editer_imessage">
 				<label><:info_liste_redacteurs_connectes:></label>
@@ -192,7 +105,6 @@
 		<!--extra-->
 		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
-	]
 	<script type="text/javascript">
 		jQuery(document).ready(function(){
 			jQuery('div.formulaire_#FORM form input.radio').bind('change',function(){jQuery(this).parents('form').submit();});
