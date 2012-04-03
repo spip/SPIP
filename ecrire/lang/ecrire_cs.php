@@ -753,7 +753,7 @@ ukazuje jejich stav:',
 	'plugin_info_automatique_select' => 'Select a plugin below: SPIP will load it and will install it in the <code>@rep@</code> directory. If the plugin already exists, it will be updated.', # NEW
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
+	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
@@ -786,7 +786,7 @@ ukazuje jejich stav:',
 	'plugins_disponibles' => '@count@ available plugins.', # NEW
 	'plugins_erreur' => 'Error in the plugins: @plugins@', # NEW
 	'plugins_liste' => 'Seznam pluginů',
-	'plugins_liste_extensions' => 'Extensions', # NEW
+	'plugins_liste_dist' => 'Extensions', # NEW
 	'plugins_recents' => 'Plugins récents.', # NEW
 	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Hierarchy', # NEW

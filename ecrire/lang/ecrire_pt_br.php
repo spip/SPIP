@@ -721,7 +721,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'plugin_info_automatique_select' => 'Selecione abaixo um plugin: O SPIP o transferirá e o instalará no diretório <code>@rep@</code>; se o plugin já existir, será atualizado.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'As extensões abaixo são carregadas e ativadas no diretório @extensions@.', # MODIF
+	'plugin_info_extension_1' => 'As extensões abaixo são carregadas e ativadas no diretório @plugins_dist@.', # MODIF
 	'plugin_info_extension_2' => 'Elas não são desativáveis.', # MODIF
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
@@ -754,7 +754,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'plugins_disponibles' => '@count@ plugins disponiveis.',
 	'plugins_erreur' => 'Erro nos plugins: @plugins@',
 	'plugins_liste' => 'Lista dos plugins',
-	'plugins_liste_extensions' => 'Extensões', # MODIF
+	'plugins_liste_dist' => 'Extensões', # MODIF
 	'plugins_recents' => 'Plugins recentes.',
 	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Hierarquia',

@@ -744,7 +744,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'plugin_info_automatique_select' => 'Aşağıdan bir eklenti seçiniz : SPIP o eklentiyi indirecek ve <code>@rep@</code> dizinine kuracaktır ; eğer bu eklenti zaten kurulu ise güncellenecektir.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
+	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
@@ -777,7 +777,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'plugins_disponibles' => '@count@ eklenti kullanılabilir durumda.',
 	'plugins_erreur' => 'Eklentilerde hata var : @plugins@',
 	'plugins_liste' => 'Plugin listesi',
-	'plugins_liste_extensions' => 'Extensions', # NEW
+	'plugins_liste_dist' => 'Extensions', # NEW
 	'plugins_recents' => 'Plugins récents.', # NEW
 	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Hiyerarşi',

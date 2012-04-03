@@ -730,7 +730,7 @@ in einer Farbe, die den Status anzeigt :',
 	'plugin_info_automatique_select' => 'Wählen Sie ein Plugin aus. SPIP wird es herunterladen und im Verzeichnis <code>@rep@</code> installieren. Falls das Plugin bereits installiert ist, wird es auf den neuesten Stand gebracht.',
 	'plugin_info_credit' => 'Beteiligte',
 	'plugin_info_erreur_xml' => 'Die Deklaration dieses Plugins ist nicht korrekt.',
-	'plugin_info_extension_1' => 'Diese Erweiterungen liegen im Verzeichnis @extensions@ und sind aktiviert.', # MODIF
+	'plugin_info_extension_1' => 'Diese Erweiterungen liegen im Verzeichnis @plugins_dist@ und sind aktiviert.', # MODIF
 	'plugin_info_extension_2' => 'Man kann sie nicht deaktivieren.', # MODIF
 	'plugin_info_install_ok' => 'Installation war erfolgreich.',
 	'plugin_info_necessite' => 'Erfordert:',
@@ -763,7 +763,7 @@ in einer Farbe, die den Status anzeigt :',
 	'plugins_disponibles' => '@count@ verfügbare Plugins.',
 	'plugins_erreur' => 'Fehler in den Plugins: @plugins@',
 	'plugins_liste' => 'Installierte Plugins',
-	'plugins_liste_extensions' => 'Erweiterungen', # MODIF
+	'plugins_liste_dist' => 'Erweiterungen', # MODIF
 	'plugins_recents' => 'Neueste Plugins.',
 	'plugins_tous_liste' => 'Alle',
 	'plugins_vue_hierarchie' => 'Hierarchie',

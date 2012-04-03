@@ -745,7 +745,7 @@ Le traduzioni sono associate all\'originale,
 	'plugin_info_automatique_select' => 'Selezionata un\'estensione qui sotto: SPIP la scaricherà e la installerà nella cartella <code>@rep@</code>; se questo estensione è già presente verrà aggiornata.',
 	'plugin_info_credit' => 'Crediti',
 	'plugin_info_erreur_xml' => 'La dichiarazione del plugin è sbagliata',
-	'plugin_info_extension_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @extensions@.', # MODIF
+	'plugin_info_extension_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @plugins_dist@.', # MODIF
 	'plugin_info_extension_2' => 'Questo non pu&ugrave; essere disinstallato.', # MODIF
 	'plugin_info_install_ok' => 'Installazione completata con successo',
 	'plugin_info_necessite' => 'Richiesto :',
@@ -778,7 +778,7 @@ Le traduzioni sono associate all\'originale,
 	'plugins_disponibles' => '@count@ plug-in disponibili.',
 	'plugins_erreur' => 'Errore nei plug-in: @plugins@',
 	'plugins_liste' => 'Elenco dei plugin',
-	'plugins_liste_extensions' => 'Estensioni', # MODIF
+	'plugins_liste_dist' => 'Estensioni', # MODIF
 	'plugins_recents' => 'Plugin aggiunti recentemente',
 	'plugins_tous_liste' => 'Tutto',
 	'plugins_vue_hierarchie' => 'Struttura gerarchica',

@@ -750,7 +750,7 @@ cunha cor que indica o seu estado :',
 	'plugin_info_automatique_select' => 'Seleccione a seguir un módulo : SPIP  descargarao e instalarao no cartafol <code>@rep@</code> ; si o módulo xa existe será actualizado.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'As extensións seguintes cárganse e actívanse no cartafol @extensions@.', # MODIF
+	'plugin_info_extension_1' => 'As extensións seguintes cárganse e actívanse no cartafol @plugins_dist@.', # MODIF
 	'plugin_info_extension_2' => 'Non son desactivables', # MODIF
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
@@ -783,7 +783,7 @@ cunha cor que indica o seu estado :',
 	'plugins_disponibles' => '@count@ módulos dispoñibles.',
 	'plugins_erreur' => 'Erro nos módulos : @plugins@',
 	'plugins_liste' => 'Lista de módulos',
-	'plugins_liste_extensions' => 'Extensións', # MODIF
+	'plugins_liste_dist' => 'Extensións', # MODIF
 	'plugins_recents' => 'Módulos recentes.',
 	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Xerarquía',
