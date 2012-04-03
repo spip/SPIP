@@ -171,13 +171,12 @@ function formulaires_dater_traiter_dist($objet, $id_objet, $retour=''){
 
 		$set = array();
 
-		include_spip('inc/date');
 		if (!$d = dater_recuperer_date_saisie(_request('date_jour')))
 			$d = array(date('Y'),date('m'),date('d'));
 		if (!$h = dater_recuperer_heure_saisie(_request('date_heure')))
 			$h = array(0,0);
 
-		$set[$champ_date] = format_mysql_date($d[0], $d[1], $d[2], $h[0], $h[1]);
+		$set[$champ_date] = sql_format_date($d[0], $d[1], $d[2], $h[0], $h[1]);
 
 		if (isset($desc['field']['date_redac'])){
 			if (!_request('date_redac_jour') OR _request('sans_redac'))
