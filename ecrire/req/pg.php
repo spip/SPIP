@@ -432,7 +432,12 @@ function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 function spip_pg_listdbs($serveur) {
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$link = $connexion['link'];
-	return spip_pg_query_simple($link, "select * From pg_database");
+	$dbs = array();
+	$res = spip_pg_query_simple($link, "select * From pg_database");
+	while ($row = pg_fetch_array($res, NULL, PGSQL_NUM))
+		$dbs[] = reset($row);
+
+	return $dbs;
 }
 
 // http://doc.spip.org/@spip_pg_select

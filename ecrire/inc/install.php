@@ -419,19 +419,10 @@ function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 // http://doc.spip.org/@install_etape_liste_bases
 function install_etape_liste_bases($server_db, $login_db, $disabled=array())
 {
-	$result = sql_listdbs($server_db);
-	if (!$result) return '';
+	$bases = $checked = array();
+	$noms = sql_listdbs($server_db);
+	if (!$noms) return '';
 
-	$bases = $checked = $noms = array();
-
-	// si sqlite : result est deja un tableau
-	if (is_array($result)){
-		$noms = $result;
-	} else {
-		while ($row = sql_fetch($result, $server_db)) {
-			$noms[] = array_shift($row);
-		}
-	}
 	foreach ($noms as $nom){
 		$id = htmlspecialchars($nom);
 		$dis = in_array($nom, $disabled) ? " disabled='disabled'" : '';
