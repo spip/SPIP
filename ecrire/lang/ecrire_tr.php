@@ -744,11 +744,11 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'plugin_info_automatique_select' => 'Aşağıdan bir eklenti seçiniz : SPIP o eklentiyi indirecek ve <code>@rep@</code> dizinine kuracaktır ; eğer bu eklenti zaten kurulu ise güncellenecektir.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
-	'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
 	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
+	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
+	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => '@url@ adresinden indirmeye ve @rep@ dizinine yüklemeye',
 	'plugin_librairies_installees' => 'Kurulu kütüphaneler',
 	'plugin_necessite_lib' => 'Bu eklenti @lib@ kütüphanesini gerektirir',

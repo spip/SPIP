@@ -739,11 +739,11 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	'plugin_info_automatique_select' => 'Diuzit un adveziant amañ a-is : pellgarget e vo gant SPIP ha staliet er c\'havlec\'h <code>@rep@</code> ; ma\'z eus eus an adveziant-mañ c\'hoazh e vo hizivaet.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
-	'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
 	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
+	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
+	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'da bellgargañ adal @url@ ha da staliañ e @rep@',
 	'plugin_librairies_installees' => 'Levraouegoù bet staliet',
 	'plugin_necessite_lib' => 'Ezhomm en deus an adveziant-mañ eus al levraoueg @lib@',

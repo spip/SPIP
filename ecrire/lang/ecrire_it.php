@@ -745,11 +745,11 @@ Le traduzioni sono associate all\'originale,
 	'plugin_info_automatique_select' => 'Selezionata un\'estensione qui sotto: SPIP la scaricherà e la installerà nella cartella <code>@rep@</code>; se questo estensione è già presente verrà aggiornata.',
 	'plugin_info_credit' => 'Crediti',
 	'plugin_info_erreur_xml' => 'La dichiarazione del plugin è sbagliata',
-	'plugin_info_extension_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @plugins_dist@.', # MODIF
-	'plugin_info_extension_2' => 'Questo non pu&ugrave; essere disinstallato.', # MODIF
 	'plugin_info_install_ok' => 'Installazione completata con successo',
 	'plugin_info_necessite' => 'Richiesto :',
 	'plugin_info_non_compatible_spip' => 'Questo plugin è incompatibile con questa versione di SPIP',
+	'plugin_info_plugins_dist_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @plugins_dist@.', # MODIF
+	'plugin_info_plugins_dist_2' => 'Questo non pu&ugrave; essere disinstallato.', # MODIF
 	'plugin_info_telecharger' => 'da scaricare da @url@ e da installare in @rep@',
 	'plugin_librairies_installees' => 'Librerie installate',
 	'plugin_necessite_lib' => 'Questa estensione richiede la libreria @lib@',
