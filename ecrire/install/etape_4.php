@@ -36,7 +36,7 @@ function install_etape_4_dist()
 
 
 	echo "<p>"
-			._T('plugin_info_plugins_dist_1', array('extensions' => joli_repertoire(_DIR_PLUGINS_DIST)))
+			._T('plugin_info_plugins_dist_1', array('plugins_dist' => "<tt>".joli_repertoire(_DIR_PLUGINS_DIST)."</tt>"))
 			."</p>";
 
 	// installer les extensions
