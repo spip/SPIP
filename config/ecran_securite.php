@@ -242,7 +242,7 @@ if (
 	AND _IS_BOT
 	AND $_SERVER['REQUEST_METHOD'] === 'GET'
 	AND (
-		(function_exists('sys_getloadavg') AND $load = array_shift(sys_getloadavg()))
+		(function_exists('sys_getloadavg') AND $load = sys_getloadavg() AND $load = array_shift($load))
 		OR (@is_readable('/proc/loadavg') AND $load = floatval(file_get_contents('/proc/loadavg')))
 	)
 	AND $load > _ECRAN_SECURITE_LOAD // eviter l'evaluation suivante si de toute facon le load est inferieur a la limite
