@@ -36,13 +36,13 @@ function install_etape_4_dist()
 
 
 	echo "<p>"
-			._T('plugin_info_extension_1', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))
+			._T('plugin_info_plugins_dist_1', array('extensions' => joli_repertoire(_DIR_PLUGINS_DIST)))
 			."</p>";
 
 	// installer les extensions
 	include_spip('inc/plugin');
 	$afficher = charger_fonction("afficher_liste",'plugins');
-	echo $afficher(self(), liste_plugin_files(_DIR_EXTENSIONS),array(), array(), _DIR_EXTENSIONS,'afficher_nom_plugin');
+	echo $afficher(self(), liste_plugin_files(_DIR_PLUGINS_DIST),array(), array(), _DIR_PLUGINS_DIST,'afficher_nom_plugin');
 
 	plugin_installes_meta();
 

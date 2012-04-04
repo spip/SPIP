@@ -26,7 +26,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $checked, $actif, $
 	$info = $get_infos($plug_file, $force_reload, $dir_plugins);
 	$prefix = $info['prefix'];
 	$cfg = "";
-	$checkable = ($dir_plugins!==_DIR_EXTENSIONS);
+	$checkable = ($dir_plugins!==_DIR_PLUGINS_DIST);
 	$nom = plugin_nom($info,$dir_plugins,$plug_file);
 
 	if (!plugin_version_compatible($info['compatibilite'], $GLOBALS['spip_version_branche'])){
@@ -59,7 +59,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $checked, $actif, $
 	.  plugin_resume($info, $dir_plugins, $plug_file, $url_page)
 	. $cfg
 	. $erreur
-	. (($dir_plugins!==_DIR_EXTENSIONS AND plugin_est_installe($plug_file))
+	. (($dir_plugins!==_DIR_PLUGINS_DIST AND plugin_est_installe($plug_file))
 	    ? plugin_desintalle($plug_file,$nom) : '')
 	. "<div class='details'>" // pour l'ajax de exec/info_plugin
 	. (!$expose ? '' : affiche_bloc_plugin($plug_file, $info))

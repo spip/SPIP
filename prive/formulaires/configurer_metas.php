@@ -69,7 +69,7 @@ function formulaires_configurer_metas_recense($form, $opt='')
 // Attention a l'ordre:
 // si l'un des 3 est un sous-rep d'un autre, le mettre avant.
 
-define('_EXTRAIRE_PLUGIN', '@(' .  _DIR_PLUGINS_AUTO . '|' . _DIR_PLUGINS . '|' . _DIR_EXTENSIONS .')/?([^/]+)/@');
+define('_EXTRAIRE_PLUGIN', '@(' .  _DIR_PLUGINS_AUTO . '|' . _DIR_PLUGINS . '|' . _DIR_PLUGINS_DIST .')/?([^/]+)/@');
 
 // Recuperer la version compilee de plugin.xml et normaliser
 // Si ce n'est pas un plugin, dire qu'il faut prendre la table std des meta.

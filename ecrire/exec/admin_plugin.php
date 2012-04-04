@@ -134,7 +134,7 @@ function admin_plug_args($quoi, $erreur, $format)
 	echo fin_cadre_trait_couleur(true);
 
 	if ($quoi=='actifs')
-		echo affiche_les_extensions($actifs);
+		echo affiche_les_plugins_verrouilles($actifs);
 	echo "</div>";
 	
 	echo 	http_script("
@@ -173,19 +173,19 @@ function admin_plug_args($quoi, $erreur, $format)
 	echo fin_gauche(), fin_page();
 }
 
-function affiche_les_extensions($actifs)
+function affiche_les_plugins_verrouilles($actifs)
 {
-	if ((!$liste = liste_plugin_files(_DIR_EXTENSIONS))) return '';
+	if ((!$liste = liste_plugin_files(_DIR_PLUGINS_DIST))) return '';
 
 	$afficher = charger_fonction("afficher_liste",'plugins');
-	$liste = $afficher(self(), $liste, array(), $actifs, _DIR_EXTENSIONS);
+	$liste = $afficher(self(), $liste, array(), $actifs, _DIR_PLUGINS_DIST);
 
 	return 
-		"<div id='extensions'>"
-		. debut_cadre_trait_couleur('',true,'',_T('plugins_liste_extensions'), 'liste_extensions')
+		"<div id='plugins_dist'>"
+		. debut_cadre_trait_couleur('',true,'',_T('plugins_liste_dist'), 'liste_plugins_dist')
 		. "<p>"
-		. _T('plugin_info_extension_1', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))
-		. '<br />'. _T('plugin_info_extension_2')
+		. _T('plugin_info_plugins_dist_1', array('plugins_dist' => joli_repertoire(_DIR_PLUGINS_DIST)))
+		. '<br />'. _T('plugin_info_plugins_dist_2')
 		. "</p>"
 		. $liste
 		. fin_cadre_trait_couleur(true)

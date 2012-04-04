@@ -19,7 +19,7 @@ define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 include_spip('plugins/installer');
 
 // lecture des sous repertoire plugin existants
-// $dir_plugins pour forcer un repertoire (ex: _DIR_EXTENSIONS)
+// $dir_plugins pour forcer un repertoire (ex: _DIR_PLUGINS_DIST)
 // _DIR_PLUGINS_SUPPL pour aller en chercher ailleurs
 // (chemins relatifs a la racine du site, separes par des ":")
 // http://doc.spip.org/@liste_plugin_files
@@ -147,11 +147,11 @@ function plugin_version_compatible($intervalle,$version){
 // http://doc.spip.org/@liste_plugin_valides
 function liste_plugin_valides($liste_plug, $force = false)
 {
-	$liste_ext = liste_plugin_files(_DIR_EXTENSIONS);
+	$liste_ext = liste_plugin_files(_DIR_PLUGINS_DIST);
 	$get_infos = charger_fonction('get_infos','plugins');
 	$infos = array(
 		// lister les extensions qui sont automatiquement actives
-		'_DIR_EXTENSIONS' => $get_infos($liste_ext, $force, _DIR_EXTENSIONS),
+		'_DIR_PLUGINS_DIST' => $get_infos($liste_ext, $force, _DIR_PLUGINS_DIST),
 		'_DIR_PLUGINS' => $get_infos($liste_plug, $force, _DIR_PLUGINS)
 		       );
 
@@ -170,8 +170,8 @@ function liste_plugin_valides($liste_plug, $force = false)
 	);
 
 	foreach($liste_ext as $plug){
-	  if (isset($infos['_DIR_EXTENSIONS'][$plug]))
-	    plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_EXTENSIONS');
+	  if (isset($infos['_DIR_PLUGINS_DIST'][$plug]))
+	    plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS_DIST');
 	}
 	foreach($liste_plug as $plug) {
 	  if (isset($infos['_DIR_PLUGINS'][$plug]))
