@@ -733,16 +733,15 @@ function plugin_installes_meta()
 					$meta_plug_installes[] = $plug;
 				if (is_array($infos)){
 					list($ok, $trace) = $infos['install_test'];
-					echo  "<div class='install-plugins "
-					      . ($ok ? 'success' : 'error')
-					      . "'><div>"
-					      ._T('plugin_titre_installation',
-					          array('plugin' => typo($infos['nom'])))
-					      .'</div>'
+					include_spip('inc/filtres_boites');
+					echo  "<div class='install-plugins svp_retour'>"
+						  .boite_ouvrir(_T('plugin_titre_installation', array('plugin' => typo($infos['nom']))), ($ok ? 'success' : 'error'))
 					      .$trace
 					      ."<div class='result'>"
 					      .($ok ? _T("plugin_info_install_ok") : _T("avis_operation_echec"))
-					      ."</div></div>";
+					      ."</div>"
+					      .boite_fermer()
+					      ."</div>";
 				}
 			}
 		}
