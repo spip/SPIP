@@ -123,7 +123,7 @@ select { font-size: 120%; }
 .install-plugins.success + .install-plugins.success {margin-top: 0;border-top: 0;}
 .install-plugins.error + .install-plugins.error {margin-top: 0;border-top: 0;}
 .install-plugins .result {display:block;position:absolute;top:10px;right:10px;font-weight:bold;}
-.install-plugins.success {display: none;} /* ne pas afficher les installations ok mais seulement les echecs */
+.install-plugins .success {display: none;} /* ne pas afficher les installations ok mais seulement les echecs */
 
 /* Page de login
 ---------------------------------------------- */
