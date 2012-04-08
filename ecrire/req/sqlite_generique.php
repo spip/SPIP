@@ -1749,7 +1749,7 @@ function _sqlite_remplacements_definitions_table($query, $autoinc = false){
 	// quelques remplacements
 	$num = "(\s*\([0-9]*\))?";
 	$enum = "(\s*\([^\)]*\))?";
-var_dump($query);
+
 	$remplace = array(
 		'/enum'.$enum.'/is' => 'VARCHAR(255)',
 		'/binary/is' => '',
