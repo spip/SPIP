@@ -751,7 +751,7 @@ a stav ich spracovania je označený farbou:',
 	'plugin_info_install_ok' => 'Inštalácia úspešná',
 	'plugin_info_necessite' => 'Treba:',
 	'plugin_info_non_compatible_spip' => 'Tento zásuvný modul nie je kompatibilný s touto verziou SPIPu',
-	'plugin_info_plugins_dist_1' => 'Do priečinka @plugins_dist@ boli nahrané a sú tam aktivované tieto zásuvné moduly.',
+	'plugin_info_plugins_dist_1' => 'Do priečinka @plugins_dist@ boli nahrané a sú tam aktivované tieto zásuvné moduly.', # MODIF
 	'plugin_info_plugins_dist_2' => 'Nedajú sa deaktivovať.',
 	'plugin_info_telecharger' => 'spustiť z @url@ a nainštalovať na @rep@',
 	'plugin_librairies_installees' => 'Nainštalované knižnice',

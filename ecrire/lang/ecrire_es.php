@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'Activar el plugin',
 	'affichage' => 'Visualización',
 	'aide_non_disponible' => 'Esta parte de la ayuda en línea aún no está disponible en este idioma.',
-	'annuler_recherche' => 'Annuler la recherche', # NEW
+	'annuler_recherche' => 'Anular la búsqueda',
 	'auteur' => 'Autor:',
 	'avis_acces_interdit' => 'Acceso prohibido.',
 	'avis_article_modifie' => 'Atención, @nom_auteur_modif@ trabajó en este artículo hace @date_diff@ minutos.',
@@ -112,7 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'connexion_ldap' => 'Conexión:',
 	'copier_en_local' => 'Copiar en local',
 	'creer_et_associer_un_auteur' => 'Crear y asociar un autor',
-	'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
+	'creer_et_associer_une_rubrique' => 'Crear y asociar una sección',
 
 	// D
 	'date_mot_heures' => 'horas',
@@ -371,7 +371,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'Idiomas del sitio',
 	'info_ldap_ok' => 'La autentificación LDAP está instalada.',
 	'info_lien_hypertexte' => 'Enlace hipertexto:',
-	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
+	'info_liste_nouveautes_envoyee' => 'La lista de novedades ha sido enviada',
 	'info_liste_redacteurs_connectes' => 'Lista de redactores y redactoras conectadas',
 	'info_login_existant' => 'Ese login ya existe',
 	'info_login_trop_court' => 'Login muy corto',
@@ -587,8 +587,8 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'install_serveur_hebergeur' => 'Servidor de base de datos asignado por tu proveedor',
 	'install_table_prefix_hebergeur' => 'Prefijo de la tabla asignada por el proveedor :',
 	'install_tables_base' => 'Tablas de la base',
-	'install_types_db_connus' => 'SPIP sabe utilizar <b>MySQL</b> (el más extendido), <b>PostgreSQL</b> y <b>SQLite</b>.', # MODIF
-	'install_types_db_connus_avertissement' => 'Atención: varios plugins sólo funcionan con MySQL', # MODIF
+	'install_types_db_connus' => 'SPIP sabe utilizar <b>MySQL</b> (el formato más extendido) y <b>SQLite</b>.',
+	'install_types_db_connus_avertissement' => 'También se propone el soporte para <b>PostgreSQL</b> en modo experimental.',
 	'instituer_erreur_statut_a_change' => 'El estatuto ya fue modificado',
 	'instituer_erreur_statut_non_autorise' => 'No puedes elegir este estatuto',
 	'intem_redacteur' => 'redactor/a',
@@ -655,13 +655,13 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'lien_ajout_destinataire' => 'Añadir este destinatario o destinataria',
 	'lien_ajouter_auteur' => 'Añadir esta autor/a',
 	'lien_ajouter_participant' => 'Añadir un/una participante',
-	'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
+	'lien_ajouter_une_rubrique' => 'Añadir esta sección',
 	'lien_email' => 'correo electrónico',
 	'lien_nom_site' => 'Nombre del sitio',
 	'lien_retirer_auteur' => 'Retirar esta autor/a',
-	'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
+	'lien_retirer_rubrique' => 'Retirar la sección',
 	'lien_retirer_tous_auteurs' => 'Quitar todos los autores',
-	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
+	'lien_retirer_toutes_rubriques' => 'Retirar todas las secciones',
 	'lien_retrait_particpant' => 'Retirar este/esta participante',
 	'lien_site' => 'sitio',
 	'lien_supprimer_rubrique' => 'Suprimir esta sección',
@@ -733,13 +733,13 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'plugin_info_install_ok' => 'Instalación exitosa',
 	'plugin_info_necessite' => 'Necesita:',
 	'plugin_info_non_compatible_spip' => 'Este plugin no es compatible con esta versión de SPIP',
-	'plugin_info_plugins_dist_1' => 'Las extensiones siguientes se cargan y se activan en la carpeta @plugins_dist@.', # MODIF
-	'plugin_info_plugins_dist_2' => 'Ellas no son desactivables.', # MODIF
+	'plugin_info_plugins_dist_1' => 'Las plugins siguientes se cargan y se activan en la carpeta @plugins_dist@.', # MODIF
+	'plugin_info_plugins_dist_2' => 'No pueden desactivarse.',
 	'plugin_info_telecharger' => 'se descargará de @url@ y se instalará en @rep@',
 	'plugin_librairies_installees' => 'Bibliotecas instaladas',
 	'plugin_necessite_lib' => 'Este plugin necesita la biblioteca @lib@',
 	'plugin_necessite_plugin' => 'Necesita el plugin @plugin@ con versión @version@ por lo menos.',
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
+	'plugin_necessite_plugin_sans_version' => 'Necesita el plugin @plugin@',
 	'plugin_necessite_spip' => 'Necesita como mínimo un SPIP de versión @version@.',
 	'plugin_source' => 'fuente: ',
 	'plugin_titre_automatique' => 'Instalación automática',
@@ -763,7 +763,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'plugins_disponibles' => '@count@ plugins disponibles.',
 	'plugins_erreur' => 'Error en los plugins: @plugins@',
 	'plugins_liste' => 'Lista de plugins',
-	'plugins_liste_dist' => 'Extensiones', # MODIF
+	'plugins_liste_dist' => 'Plugins cerrados',
 	'plugins_recents' => 'Plugins recientes.',
 	'plugins_tous_liste' => 'Todos',
 	'plugins_vue_hierarchie' => 'Jerarquía',
@@ -772,12 +772,12 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 
 	// Q
 	'queue_executer_maintenant' => 'Ejecutar ahora',
-	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
+	'queue_info_purger' => 'Puedes eliminar todos los trabajos pendientes y reinicializar la lista con los trabajos periódicos',
 	'queue_nb_jobs_in_queue' => '@nb@ trabajos en esperanza',
 	'queue_next_job_in_nb_sec' => 'Próximo trabajo en @nb@ s',
 	'queue_no_job_in_queue' => 'Ningún trabajo en esperanza',
 	'queue_one_job_in_queue' => '1 trabajo en esperanza',
-	'queue_purger_queue' => 'Purgar la lista de trabajos', # MODIF
+	'queue_purger_queue' => 'Purgar la lista de trabajos',
 	'queue_titre' => 'Lista de trabajos',
 
 	// R
@@ -793,8 +793,8 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'taille_cache_image' => 'Las imágenes calculadas automáticamente por SPIP (miniaturas de documentos, títulos presentados en forma gráfica, fórmulas matemáticas en formato TeX...) ocupan en el directorio @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'En este sitio no se limita el tamaño de la carpeta de cache.',
 	'taille_cache_maxi' => 'SPIP intenta limitar el tamaño de la carpeta de cache de este sitio a unos <b>@octets@</b> de datos.',
-	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
-	'taille_cache_octets' => 'El tamaño de la cache es actualmente de @octets@.', # MODIF
+	'taille_cache_moins_de' => 'El tamaño de la cache es menor a @octets@.',
+	'taille_cache_octets' => 'El tamaño de la caché es actualmente de @octets@.',
 	'taille_cache_vide' => 'La cache está vacía.',
 	'taille_repertoire_cache' => 'Tamaño de la carpeta cache',
 	'text_article_propose_publication' => 'Artículo propuesto para su publicación.',
@@ -827,11 +827,11 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'texte_crash_base' => 'Si la base tiene un problema, se puede intentar aquí de repararla.',
 	'texte_creer_rubrique' => 'Antes de poder escribir artículos,<br /> debes crear una sección.',
 	'texte_date_creation_article' => 'FECHA DE CREACIÓN DEL ARTÍCULO:',
-	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
+	'texte_date_creation_objet' => 'Fecha de creación:', # on ajoute le ":"
 	'texte_date_publication_anterieure' => 'Fecha de redacción anterior:',
 	'texte_date_publication_anterieure_nonaffichee' => 'No mostrar fecha de redacción anterior.',
 	'texte_date_publication_article' => 'Fecha de publicación en línea:',
-	'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
+	'texte_date_publication_objet' => 'Fecha de publicación en línea:',
 	'texte_descriptif_petition' => 'Descripción de la petición',
 	'texte_descriptif_rapide' => 'Descripción rápida',
 	'texte_effacer_base' => 'Borrar la base de datos SPIP',
@@ -922,7 +922,7 @@ títulos y las descripciones de los artículos. <br />- Un segundo método, much
 	'titre_admin_vider' => 'Mantenimiento técnico',
 	'titre_ajouter_un_auteur' => 'Añadir una autora',
 	'titre_ajouter_un_mot' => 'Añadir una palabra-clave',
-	'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
+	'titre_ajouter_une_rubrique' => 'Añadir una sección',
 	'titre_cadre_afficher_article' => 'Mostrar los artículos',
 	'titre_cadre_afficher_traductions' => 'Mostrar el estado de las traducciones para los idiomas siguientes:',
 	'titre_cadre_ajouter_auteur' => 'Añadir un autor',
