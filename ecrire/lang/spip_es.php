@@ -364,7 +364,7 @@ en el sitio "@nom_site_spip@" (@adresse_login@):',
 	'info_creer_repertoire' => 'Debes crear un archivo o una carpeta llamada',
 	'info_creer_repertoire_2' => 'en el directorio <b>@repertoire@</b>, y luego',
 	'info_creer_vignette' => 'creación automática de la miniatura',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
+	'info_creerdansrubrique_non_autorise' => 'No tienes los derechos suficientes para crear contenidos dentro de esta sección',
 	'info_deplier' => 'Desplegar',
 	'info_descriptif_nombre' => 'descripcción(es):',
 	'info_description' => 'Descripción:',
