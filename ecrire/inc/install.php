@@ -107,7 +107,7 @@ function tester_compatibilite_hebergement() {
 
 	// Il faut une base de donnees tout de meme ...
 	$serveurs = install_select_serveur();
-	if ($serveurs OR !count($serveurs))
+	if (!$serveurs)
 		$err[] = _T('install_extension_php_obligatoire')
 		. " <a href='http://www.php.net/mysql'>MYSQL</a>"
 		. "| <a href='http://www.php.net/pgsql'>PostgreSQL</a>"
