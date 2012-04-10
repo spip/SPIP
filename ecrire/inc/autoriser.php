@@ -456,7 +456,7 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	elseif ($opt['webmestre'] AND (defined('_ID_WEBMESTRES') OR !autoriser('webmestre')))
 		return false;
 	// et modifier un webmestre si il ne l'est pas lui meme
-	elseif (autoriser('webmestre','',0,$id) AND !autoriser('webmestre'))
+	elseif (intval($id) AND autoriser('webmestre','',0,$id) AND !autoriser('webmestre'))
 		return false;
 	else
 		return true;
