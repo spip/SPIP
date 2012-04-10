@@ -852,7 +852,12 @@ function lister_themes_prives(){
 		if (!defined('_SPIP_THEME_PRIVE'))
 			define('_SPIP_THEME_PRIVE', 'spip');
 		$themes = array(_SPIP_THEME_PRIVE);
-		$prefs = $GLOBALS['visiteur_session']['prefs'];
+		// lors d'une installation neuve, prefs n'est pas definie.
+		if (isset($GLOBALS['visiteur_session']['prefs'])) {
+			$prefs = isset($GLOBALS['visiteur_session']['prefs']);
+		} else {
+			$prefs = array();
+		}
 		if (is_string($prefs))
 			$prefs = unserialize($GLOBALS['visiteur_session']['prefs']);
 		if (
