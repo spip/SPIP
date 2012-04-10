@@ -733,7 +733,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'plugin_info_install_ok' => 'Instalación exitosa',
 	'plugin_info_necessite' => 'Necesita:',
 	'plugin_info_non_compatible_spip' => 'Este plugin no es compatible con esta versión de SPIP',
-	'plugin_info_plugins_dist_1' => 'Las plugins siguientes se cargan y se activan en la carpeta @plugins_dist@.', # MODIF
+	'plugin_info_plugins_dist_1' => 'Las plugins siguientes se cargan y se activan en la carpeta @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'No pueden desactivarse.',
 	'plugin_info_telecharger' => 'se descargará de @url@ y se instalará en @rep@',
 	'plugin_librairies_installees' => 'Bibliotecas instaladas',
