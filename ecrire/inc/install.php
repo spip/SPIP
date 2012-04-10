@@ -106,9 +106,8 @@ function tester_compatibilite_hebergement() {
 	}
 
 	// Il faut une base de donnees tout de meme ...
-	if (!function_exists('mysql_query')
-	AND !function_exists('pg_connect')
-	AND !function_exists('sqlite_open'))
+	$serveurs = install_select_serveur();
+	if ($serveurs OR !count($serveurs))
 		$err[] = _T('install_extension_php_obligatoire')
 		. " <a href='http://www.php.net/mysql'>MYSQL</a>"
 		. "| <a href='http://www.php.net/pgsql'>PostgreSQL</a>"
