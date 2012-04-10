@@ -57,9 +57,9 @@
 /* ----- error, success, notice (extends box) ----- */
 .box.error, .box.success, .box.notice {padding:0;backround-image:none;}
 .error .inner,.success .inner,.notice .inner{border:2px solid;font-weight: normal;color:#333;}
-.error .bd,.success .bd,.notice .bd {padding-left:40px;min-height:24px;background-repeat:no-repeat;background-position: 2px 5px;}
-.box.error .hd,.box.success .hd,.box.notice .hd {padding-left:40px;}
-.error .ft,.success .ft,.notice .ft {padding-left:40px;}
+.error .bd,.success .bd,.notice .bd {padding-[(#ENV{left})]:40px;min-height:24px;background-repeat:no-repeat;background-position: 2px 5px;}
+.box.error .hd,.box.success .hd,.box.notice .hd {padding-[(#ENV{left})]:40px;}
+.error .ft,.success .ft,.notice .ft {padding-[(#ENV{left})]:40px;}
 .box.error .ft,.box.success .ft,.box.notice .ft {border-color:#ddd;background-color:#eee;}
 
 .success .inner{color: #264409;border-color: #C6D880;background-color:#E6EFC2;}
