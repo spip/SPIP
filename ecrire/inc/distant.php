@@ -16,7 +16,8 @@ if (!defined('_INC_DISTANT_VERSION_HTTP')) define('_INC_DISTANT_VERSION_HTTP', "
 if (!defined('_INC_DISTANT_CONTENT_ENCODING')) define('_INC_DISTANT_CONTENT_ENCODING', "gzip");
 if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP-' .$GLOBALS['spip_version_affichee']. " (" .$GLOBALS['home_server']. ")");
 
-define('_REGEXP_COPIE_LOCALE', ',' . $GLOBALS['meta']['adresse_site']
+define('_REGEXP_COPIE_LOCALE', ',' . 
+       preg_replace('@^https?:@', 'https?:', $GLOBALS['meta']['adresse_site'])
        . "/?spip.php[?]action=acceder_document.*file=(.*)$,");
 
 //@define('_COPIE_LOCALE_MAX_SIZE',2097152); // poids (inc/utils l'a fait)
@@ -34,7 +35,7 @@ define('_REGEXP_COPIE_LOCALE', ',' . $GLOBALS['meta']['adresse_site']
 function copie_locale($source, $mode='auto') {
 
 	// si c'est la protection de soi-meme, retourner le path
-	if (preg_match(_REGEXP_COPIE_LOCALE, $source, $local))
+	if ($mode !== 'force' AND preg_match(_REGEXP_COPIE_LOCALE, $source, $local))
 		return substr(_DIR_IMG,strlen(_DIR_RACINE)) . urldecode($local[1]);
 
 	$local = fichier_copie_locale($source);
