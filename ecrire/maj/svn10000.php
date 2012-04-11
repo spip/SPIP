@@ -404,4 +404,79 @@ function maj_propager_les_secteurs(){
 	propager_les_secteurs();
 }
 
+
+function maj_collation_sqlite(){
+
+
+	include_spip('base/dump');
+	$tables = base_lister_toutes_tables();
+
+	// rien a faire si base non sqlite
+	if (strncmp($GLOBALS['connexions'][0]['type'],'sqlite',6)!==0)
+		return;
+
+	$trouver_table = charger_fonction('trouver_table','base');
+	// forcer le vidage de cache
+	$trouver_table('');
+
+	// cas particulier spip_auteurs : retablir le collate binary sur le login
+	$desc = $trouver_table("spip_auteurs");
+	spip_log("spip_auteurs : ".var_export($desc['field'],true),"maj."._LOG_INFO_IMPORTANTE);
+	if (stripos($desc['field']['login'],"BINARY")===false){
+		spip_log("Retablir champ login BINARY sur table spip_auteurs","maj");
+		sql_alter("table spip_auteurs change login login VARCHAR(255) BINARY");
+		$trouver_table('');
+		$new_desc = $trouver_table("spip_auteurs");
+		spip_log("Apres conversion spip_auteurs : ".var_export($new_desc['field'],true),"maj."._LOG_INFO_IMPORTANTE);
+	}
+
+	foreach ($tables as $table){
+		if (time() >= _TIME_OUT) return;
+		if ($desc = $trouver_table($table)){
+			$desc_collate = _sqlite_remplacements_definitions_table($desc['field']);
+			if ($d=array_diff($desc['field'],$desc_collate)){
+				spip_log("Table $table COLLATE incorrects","maj");
+
+				// cas particulier spip_urls :
+				// supprimer les doublons avant conversion sinon echec (on garde les urls les plus recentes)
+				if ($table=='spip_urls'){
+					// par date DESC pour conserver les urls les plus recentes
+					$data = sql_allfetsel("*","spip_urls",'','','date DESC');
+					$urls = array();
+					foreach ($data as $d){
+						$key = $d['id_parent']."::".strtolower($d['url']);
+						if (!isset($urls[$key]))
+							$urls[$key] = true;
+						else {
+							spip_log("Suppression doublon dans spip_urls avant conversion : ".serialize($d),"maj."._LOG_INFO_IMPORTANTE);
+							sql_delete("spip_urls","id_parent=".sql_quote($d['id_parent'])." AND url=".sql_quote($d['url']));
+						}
+					}
+				}
+				foreach ($desc['field'] as $field=>$type){
+					if ($desc['field'][$field]!==$desc_collate[$field]){
+						spip_log("Conversion COLLATE table $table","maj."._LOG_INFO_IMPORTANTE);
+						sql_alter("table $table change $field $field ".$desc_collate[$field]);
+						$trouver_table('');
+						$new_desc = $trouver_table($table);
+						spip_log("Apres conversion $table : ".var_export($new_desc['field'],true),"maj."._LOG_INFO_IMPORTANTE);
+						continue 2; // inutile de continuer pour cette table : un seul alter remet tout a jour en sqlite
+					}
+				}
+			}
+		}
+	}
+
+	// forcer le vidage de cache
+	$trouver_table('');
+
+}
+
+
+$GLOBALS['maj'][19236] = array(
+	array('sql_updateq','spip_meta',array('impt'=>'oui'),"nom='version_installee"), // version base principale
+	array('sql_updateq','spip_meta',array('impt'=>'oui'),"nom LIKE '%_base_version"),  // version base plugins
+	array('maj_collation_sqlite'),
+);
+
 ?>
