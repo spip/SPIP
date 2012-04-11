@@ -1752,8 +1752,7 @@ function _sqlite_remplacements_definitions_table($query, $autoinc = false){
 
 	$remplace = array(
 		'/enum'.$enum.'/is' => 'VARCHAR(255)',
-		'/binary/is' => '',
-		'/COLLATE \w+_bin/is' => '',
+		'/COLLATE \w+_bin/is' => 'COLLATE BINARY',
 		'/COLLATE \w+_ci/is' => 'COLLATE NOCASE',
 		'/auto_increment/is' => '',
 		'/(timestamp .* )ON .*$/is' => '\\1',
@@ -1772,15 +1771,38 @@ function _sqlite_remplacements_definitions_table($query, $autoinc = false){
 		$query = preg_replace(array_keys($remplace), $remplace, $query);
 		if ($autoinc OR preg_match(',AUTO_INCREMENT,is',$query))
 			$query = preg_replace(array_keys($remplace_autocinc), $remplace_autocinc, $query);
+		else
+			$query = _sqlite_collate_ci($query);
 	}
-	elseif(is_array($query))
+	elseif(is_array($query)){
 		foreach($query as $k=>$q) {
 			$autoinc = preg_match(',AUTO_INCREMENT,is',$q);
 			$query[$k] = preg_replace(array_keys($remplace), $remplace, $query[$k]);
 			if ($autoinc)
 				$query[$k] = preg_replace(array_keys($remplace_autocinc), $remplace_autocinc, $query[$k]);
+			else
+				$query[$k] = _sqlite_collate_ci($query[$k]);
 		}
+	}
+
 	return $query;
+}
+
+/**
+ * Definir la collation d'un champ en fonction de si une collation est deja explicite
+ * et du par defaut que l'on veut NOCASE
+ * @param string $champ
+ * @return string
+ */
+function _sqlite_collate_ci($champ){
+	if (stripos($champ,"COLLATE")!==false)
+		return $champ;
+	if (stripos($champ,"BINARY")!==false)
+		return str_ireplace("BINARY","COLLATE BINARY",$champ);
+	if (preg_match(",^(char|varchar|(long|small|medium|tiny)?text),i",$champ))
+		return $champ . " COLLATE NOCASE";
+
+	return $champ;
 }
 
 
