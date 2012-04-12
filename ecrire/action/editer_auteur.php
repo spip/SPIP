@@ -224,23 +224,14 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	if (!$id_auteur=intval($id_auteur))
 		return false;
 	$erreurs = array(); // contiendra les differentes erreurs a traduire par _T()
-	// commencer par traiter les cas particuliers des logins et pass
-	// avant le changement de statut eventuel
-	if (isset($c['login']) OR isset($c['pass'])){
-		$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
-		include_spip('inc/auth');
-		if (isset($c['login']) AND strlen($c['login']))
-			if (!auth_modifier_login($auth_methode, $c['login'], $id_auteur))
-				$erreurs[] = 'ecrire:impossible_modifier_login_auteur';
-		if (isset($c['pass']) AND strlen($c['pass'])){
-			$c['login'] = sql_getfetsel('login','spip_auteurs','id_auteur='.intval($id_auteur));
-			if (!auth_modifier_pass($auth_methode, $c['login'], $c['pass'], $id_auteur))
-				$erreurs[] = 'ecrire:impossible_modifier_pass_auteur';
-		}
-	}
-
-	
 	$champs = array();
+
+	// les memoriser pour les faire passer dans le pipeline pre_edition
+	if (isset($c['login']) AND strlen($c['login']))
+		$champs['login'] = $c['login'];
+	if (isset($c['pass']) AND strlen($c['pass']))
+		$champs['pass'] = $c['pass'];
+
 	$statut =	$statut_ancien = sql_getfetsel('statut','spip_auteurs','id_auteur='.intval($id_auteur));
 	
 	if (isset($c['statut'])
@@ -282,12 +273,30 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 		auteur_associer($id_auteur,array('rubrique'=>$rubriques));
 	}
 
+	$flag_ecrire_acces = false;
+	// commencer par traiter les cas particuliers des logins et pass
+	// avant les autres ecritures en base
+	if (isset($champs['login']) OR isset($champs['pass'])){
+		$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
+		include_spip('inc/auth');
+		if (isset($champs['login']) AND strlen($champs['login']))
+			if (!auth_modifier_login($auth_methode, $champs['login'], $id_auteur))
+				$erreurs[] = 'ecrire:impossible_modifier_login_auteur';
+		if (isset($champs['pass']) AND strlen($champs['pass'])){
+			$champs['login'] = sql_getfetsel('login','spip_auteurs','id_auteur='.intval($id_auteur));
+			if (!auth_modifier_pass($auth_methode, $champs['login'], $champs['pass'], $id_auteur))
+				$erreurs[] = 'ecrire:impossible_modifier_pass_auteur';
+		}
+		unset($champs['login']);
+		unset($champs['pass']);
+		$flag_ecrire_acces = true;
+	}
+
 	if (!count($champs)) return implode(' ', array_map('_T', $erreurs));
 	sql_updateq('spip_auteurs', $champs , 'id_auteur='.$id_auteur);
 
 	// .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
-	if (isset($champs['login'])
-	  OR isset($champs['pass'])
+	if ($flag_ecrire_acces
 	  OR isset($champs['statut'])
 	  ) {
 		include_spip('inc/acces');
