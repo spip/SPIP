@@ -220,6 +220,8 @@ function auth_init_droits($row)
 		$GLOBALS['visiteur_session']['prefs']["display_outils"] = "oui";
 	}
 
+	$GLOBALS['visiteur_session'] = pipeline('preparer_visiteur_session',array('args'=>array('row'=>$row),'data'=>$GLOBALS['visiteur_session']));
+
 	// Etablir les droits selon le codage attendu
 	// dans ecrire/index.php ecrire/prive.php
 
