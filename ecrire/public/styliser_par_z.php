@@ -26,7 +26,7 @@ function public_styliser_par_z_dist($flux){
 	static $apl_constant;
 	static $page;
 	static $disponible = array();
-	static $echaffauder;
+	static $echafauder;
 	static $prepend = "";
 
 	if (!isset($prefix_path)) {
@@ -36,7 +36,7 @@ function public_styliser_par_z_dist($flux){
 			$prefix_length = strlen($prefix_path);
 			$apl_constant = '_ECRIRE_AJAX_PARALLEL_LOAD';
 			$page = 'exec';
-			$echaffauder = charger_fonction('echaffauder','prive',true);
+			$echafauder = charger_fonction('echafauder','prive',true);
 			define('_ZCORE_EXCLURE_PATH','');
 		}
 		else {
@@ -44,7 +44,7 @@ function public_styliser_par_z_dist($flux){
 			$prefix_length = 0;
 			$apl_constant = '_Z_AJAX_PARALLEL_LOAD';
 			$page = _SPIP_PAGE;
-			$echaffauder = charger_fonction('echaffauder','public',true);
+			$echafauder = charger_fonction('echafauder','public',true);
 			define('_ZCORE_EXCLURE_PATH','\bprive|\bsquelettes-dist'.(defined('_DIR_PLUGIN_DIST')?'|\b'.rtrim(_DIR_PLUGIN_DIST,'/'):''));
 		}
 	  $prepend = (defined('_Z_PREPEND_PATH')?_Z_PREPEND_PATH:"");
@@ -74,7 +74,7 @@ function public_styliser_par_z_dist($flux){
 		// surcharger aussi les squelettes venant de squelettes-dist/
 		if ($squelette AND !z_fond_valide($squelette)){
 			$squelette = "";
-		  $echaffauder = "";
+		  $echafauder = "";
 		}
 	  if ($prepend){
 		  $squelette = substr(find_in_path($prefix_path.$prepend."$fond.$ext"), 0, - strlen(".$ext"));
@@ -96,13 +96,13 @@ function public_styliser_par_z_dist($flux){
 				// se brancher sur contenu/xx si il existe
 				// ou si c'est un objet spip, associe a une table, utiliser le fond homonyme
 				if (!isset($disponible[$fond]))
-					$disponible[$fond] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,$fond,$ext,$echaffauder);
+					$disponible[$fond] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,$fond,$ext,$echafauder);
 
 				if ($disponible[$fond])
 					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
 			}
 
-			// echaffaudage :
+			// echafaudage :
 			// si c'est un fond de contenu d'un objet en base
 			// generer un fond automatique a la volee pour les webmestres
 			elseif (strncmp($fond, "$z_contenu/", strlen($z_contenu)+1)==0){
@@ -110,25 +110,25 @@ function public_styliser_par_z_dist($flux){
 				if (($type=='page') AND isset($flux['args']['contexte'][$page]))
 					$type = $flux['args']['contexte'][$page];
 				if (!isset($disponible[$type]))
-					$disponible[$type] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,$type,$ext,$echaffauder);
+					$disponible[$type] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,$type,$ext,$echafauder);
 				if (is_string($disponible[$type])) {
 					$flux['data'] = $disponible[$type];
 				}
-				elseif ($echaffauder
+				elseif ($echafauder
 					AND include_spip('inc/autoriser')
 					AND isset($GLOBALS['visiteur_session']['statut']) // performance
-					AND autoriser('echaffauder',$type)
+					AND autoriser('echafauder',$type)
 					AND $is = $disponible[$type]
 					AND is_array($is)) {
-					$flux['data'] = $echaffauder($type,$is[0],$is[1],$is[2],$ext);
+					$flux['data'] = $echafauder($type,$is[0],$is[1],$is[2],$ext);
 				}
 				else{
-					$flux['data'] = ($disponible['404'] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,'404',$ext,$echaffauder));
+					$flux['data'] = ($disponible['404'] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,'404',$ext,$echafauder));
 				}
 			}
 
 			// sinon, si on demande un fond non trouve dans un des autres blocs
-			// et si il y a bien un contenu correspondant ou echaffaudable
+			// et si il y a bien un contenu correspondant ou echafaudable
 			// se rabbatre sur le dist.html du bloc concerne
 			else{
 				if ( $dir = explode('/',$fond)
@@ -139,7 +139,7 @@ function public_styliser_par_z_dist($flux){
 					if (($type=='page') AND isset($flux['args']['contexte'][$page]))
 						$type = $flux['args']['contexte'][$page];
 					if ($type!=='page' AND !isset($disponible[$type]))
-						$disponible[$type] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,$type,$ext,$echaffauder);
+						$disponible[$type] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,$type,$ext,$echafauder);
 					if ($type=='page' OR $disponible[$type])
 						$flux['data'] = z_trouver_bloc($prefix_path.$prepend,$dir,'dist',$ext);
 				}
@@ -194,19 +194,19 @@ function z_blocs($espace_prive=false) {
 
 /**
  * Verifier qu'un type a un contenu disponible,
- * soit parcequ'il a un fond, soit parce qu'il est echaffaudable
+ * soit parcequ'il a un fond, soit parce qu'il est echafaudable
  *
  * @param string $prefix_path
  * @param string $z_contenu
  * @param string $type
  * @param string $ext
- * @param bool $echaffauder
+ * @param bool $echafauder
  * @return mixed
  */
-function z_contenu_disponible($prefix_path,$z_contenu,$type,$ext,$echaffauder=true){
+function z_contenu_disponible($prefix_path,$z_contenu,$type,$ext,$echafauder=true){
 	if ($d = z_trouver_bloc($prefix_path,$z_contenu,$type,$ext))
 		return $d;
-	return $echaffauder?z_echaffaudable($type):false;
+	return $echafauder?z_echafaudable($type):false;
 }
 
 function z_fond_valide($squelette){
@@ -242,32 +242,32 @@ function z_trouver_bloc($prefix_path,$bloc,$fond,$ext){
 	return "";
 }
 /**
- * Tester si un type est echaffaudable
+ * Tester si un type est echafaudable
  * cad si il correspond bien a un objet en base
  *
- * @staticvar array $echaffaudable
+ * @staticvar array $echafaudable
  * @param string $type
  * @return bool
  */
-function z_echaffaudable($type){
+function z_echafaudable($type){
 	static $pages = null;
-	static $echaffaudable = array();
-	if (isset($echaffaudable[$type]))
-		return $echaffaudable[$type];
+	static $echafaudable = array();
+	if (isset($echafaudable[$type]))
+		return $echafaudable[$type];
 	if (preg_match(',[^\w],',$type))
-		return $echaffaudable[$type] = false;
+		return $echafaudable[$type] = false;
 
 	if (test_espace_prive()){
 		if (!function_exists('trouver_objet_exec'))
 			include_spip('inc/pipelines_ecrire');
 		if ($e=trouver_objet_exec($type)){
-			return $echaffaudable[$type] = array($e['table'],$e['table_objet_sql'],$e);
+			return $echafaudable[$type] = array($e['table'],$e['table_objet_sql'],$e);
 		}
 		else {
 			// peut etre c'est un exec=types qui liste tous les objets "type"
 			if (($t=objet_type($type,false))!==$type
 			  AND $e=trouver_objet_exec($t)){
-				return $echaffaudable[$type] = array($e['table'],$e['table_objet_sql'],$t);
+				return $echafaudable[$type] = array($e['table'],$e['table_objet_sql'],$t);
 			}
 		}
 	}
@@ -279,20 +279,20 @@ function z_echaffaudable($type){
 				if ($d['page']) $pages[$d['page']] = array($d['table_objet'],$t);
 		}
 		if (!isset($pages[$type]))
-			return $echaffaudable[$type] = false;
+			return $echafaudable[$type] = false;
 		if (count($pages[$type])==2){
 			$trouver_table = charger_fonction('trouver_table','base');
 			$pages[$type][] = $trouver_table(reset($pages[$type]));
 		}
-		return $echaffaudable[$type] = $pages[$type];
+		return $echafaudable[$type] = $pages[$type];
 	}
-	return $echaffaudable[$type] = false;
+	return $echafaudable[$type] = false;
 }
 
 
 /**
  * Generer a la volee un fond a partir d'un contenu connu
- * tous les squelettes d'echafaudage du prive sont en fait explicites dans prive/echaffaudage
+ * tous les squelettes d'echafaudage du prive sont en fait explicites dans prive/echafaudage
  * on ne fait qu'un mini squelette d'inclusion pour reecrire les variables d'env
  *
  * @param string $type
@@ -302,7 +302,7 @@ function z_echaffaudable($type){
  * @param string $ext
  * @return string
  */
-function prive_echaffauder_dist($exec,$table,$table_sql,$desc_exec,$ext){
+function prive_echafauder_dist($exec,$table,$table_sql,$desc_exec,$ext){
 	$scaffold = "";
 
 	// page objet ou objet_edit
