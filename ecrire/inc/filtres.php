@@ -2976,8 +2976,9 @@ function sinon_interdire_acces($ok=false, $url='', $statut=0){
 	if ($ok) return '';
 	
 	// Vider tous les tampons
-	while (ob_get_level())
-		ob_end_clean();
+	$level = @ob_get_level();
+	while ($level--)
+		@ob_end_clean();
 	
 	include_spip('inc/headers');
 	$statut = intval($statut);
