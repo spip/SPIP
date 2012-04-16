@@ -659,7 +659,7 @@ function calculer_critere_parties($idb, &$boucles, $crit){
 		$mode = (($op=='/') ? '/' :
 			(($a11=='n') ? '-' : '+').(($a21=='n') ? '-' : '+'));
 		// cas simple {0,#ENV{truc}} compilons le en LIMIT :
-		if ($a11!=='n' AND $a21!=='n' AND $mode="++" AND $op==','){
+		if ($a11!=='n' AND $a21!=='n' AND $mode=="++" AND $op==','){
 			$boucle->limit =
 				(is_numeric($a11)?"'$a11'":$a11)
 				.".','."
