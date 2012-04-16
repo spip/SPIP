@@ -59,6 +59,7 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 		$recherche = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, MAX_AUTEURS_PAR_PAGE, $nombre_auteurs,$cherche);
 
 		if ($cherche){
+			$cherche = htmlspecialchars($cherche);
 			if (count($auteurs))
 				$recherche = "<h3>". _T('info_resultat_recherche')." &laquo;$cherche&raquo;</h3>" . $recherche;
 			else
