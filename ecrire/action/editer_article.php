@@ -209,7 +209,7 @@ function article_instituer($id_article, $c, $calcul_rub=true) {
 		// ou si l'article est deja date dans le futur
 		// En cas de proposition d'un article (mais pas depublication), idem
 		if ($champs['statut'] == 'publie'
-		 OR ($champs['statut'] == 'prop' AND !in_array($statut_ancien, array('publie', 'prop')))
+		 OR ($champs['statut'] == 'prop' AND ($d OR !in_array($statut_ancien, array('publie', 'prop'))))
 		) {
 			if ($d OR strtotime($d=$date)>time())
 				$champs['date'] = $date = $d;
@@ -232,7 +232,7 @@ function article_instituer($id_article, $c, $calcul_rub=true) {
 		AND !autoriser('publierdans', 'rubrique', $id_rubrique))
 			$champs['statut'] = 'prop';
 	}
-
+var_dump($champs);
 
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',
