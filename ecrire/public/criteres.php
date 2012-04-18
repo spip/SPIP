@@ -1111,7 +1111,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 	) {
 		$r = calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_alias, $table);
 		if (!$r) return '';
-		list($col, $col_alias, $table, $where_complement) = $r;
+		list($col, $col_alias, $table, $where_complement, $desc) = $r;
 	}
 
 	// Dans tous les cas,
@@ -1235,7 +1235,7 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 		$where = primary_doublee($e, $table);
 	}
 
-	return array($col, $col_alias, $table, $where);
+	return array($col, $col_alias, $table, $where, $desc);
 }
 
 // Ne pas appliquer sql_quote lors de la compilation,
