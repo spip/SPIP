@@ -1124,11 +1124,21 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 		// prendre en compte le debug ou la valeur arrive avec un commentaire PHP en debut
 		if (preg_match(",^\\A(\s*//.*?$\s*)?\"'(-?\d+)'\"\\z,ms", $val[0], $r))
 			$val[0] = $r[1].'"'.sql_quote($r[2],$boucle->sql_serveur,(isset($desc['field'][$col])?$desc['field'][$col]:'int NOT NULL')).'"';
-		elseif (preg_match('/^sql_quote[(]([^,]*?)(,[^)]*)?[)]\s*$/m', $val[0], $r)) {
-			$r = $r[1].($r[2] ? $r[2] : ",''").",'".(isset($desc['field'][$col])?addslashes($desc['field'][$col]):'int NOT NULL')."'";
+
+		// sinon expliciter les
+		// sql_quote(truc) en sql_quote(truc,'',type)
+		// sql_quote(truc,serveur) en sql_quote(truc,serveur,type)
+		// sans toucher aux
+		// sql_quote(truc,'','varchar(10) DEFAULT \'oui\' COLLATE NOCASE')
+		// sql_quote(truc,'','varchar')
+		elseif (preg_match('/\Asql_quote[(](.*?)(,[^)]*?)?(,[^)]*(?:\(\d+\)[^)]*)?)?[)]\s*\z/ms', $val[0], $r)
+			// si pas deja un type
+		  AND !$r[3]) {
+			$r = $r[1]
+				.($r[2] ? $r[2] : ",''")
+				.",'".(isset($desc['field'][$col])?addslashes($desc['field'][$col]):'int NOT NULL')."'";
 			$val[0] = "sql_quote($r)";
 		}
-
 	}
 	// Indicateur pour permettre aux fonctionx boucle_X de modifier 
 	// leurs requetes par defaut, notamment le champ statut
