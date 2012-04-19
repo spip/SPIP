@@ -161,7 +161,7 @@ function objet_inserer($objet, $id_parent=null) {
 	// dans les rubriques, on essaie avec la langue de l'auteur,
 	// ou a defaut celle de la rubrique
 	// Sinon c'est la langue de la rubrique qui est choisie + heritee
-	if ($GLOBALS['meta']['multi_objets'] AND in_array($table_sql, explode(',', $GLOBALS['meta']['multi_objets']))) {
+	if (isset($desc['field']['lang']) AND $GLOBALS['meta']['multi_objets'] AND in_array($table_sql, explode(',', $GLOBALS['meta']['multi_objets']))) {
 		lang_select($GLOBALS['visiteur_session']['lang']);
 		if (in_array($GLOBALS['spip_lang'],
 		explode(',', $GLOBALS['meta']['langues_multilingue']))) {
