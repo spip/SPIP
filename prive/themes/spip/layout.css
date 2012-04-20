@@ -21,7 +21,7 @@ div.messages-alertes {text-align: right;background: #fff;padding: 5px;width: 770
 
 /* une seule colonne centrale */
 .pleine_largeur #navigation,.pleine_largeur #extra {display:none;}
-.pleine_largeur #contenu {margin-left:0;width:100%;}
+.pleine_largeur #contenu {margin-left:0 !important;width:100% !important;}
 
 /* les formulaires sont en 600px en config large */
 body.large.edition #contenu,
