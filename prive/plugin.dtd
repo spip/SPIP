@@ -32,7 +32,7 @@
 
 <!ENTITY % CATEGORY "(auteur|communication|date|divers|edition|maintenance|multimedia|navigation|outil|performance|squelette|statistique|theme)">
 
-<!ENTITY % CONTENT "auteur|install|options|fonctions|licence|lien|bouton|chemin|necessite|onglet|pipeline|utilise|traduire" >
+<!ENTITY % CONTENT "auteur|install|options|fonctions|licence|lien|bouton|chemin|necessite|onglet|pipeline|procure|utilise|traduire" >
 
 <!-- balise ne devant figurer qu'une seule fois sous la balise plugin -->
 
@@ -87,6 +87,12 @@
 >
 
 <!ELEMENT pipeline (action|nom|inclure)*>
+
+<!ELEMENT procure EMPTY>
+<!ATTLIST procure
+          id %NAME; #REQUIRED
+          version %VNUM; #IMPLIED
+>
 
 <!ELEMENT bouton (url|args|icone|titre)*>
 <!ATTLIST bouton
