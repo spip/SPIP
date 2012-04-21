@@ -1544,7 +1544,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// Si les variables sont passees en global par le serveur,
 	// il faut faire quelques verifications de base
 	$avertir_register_globals = false;
-	if (true OR test_valeur_serveur(@ini_get('register_globals'))) {
+	if (test_valeur_serveur(@ini_get('register_globals'))) {
 		// ne pas desinfecter les globales en profondeur car elle contient aussi les
 		// precedentes, qui seraient desinfectees 2 fois.
 		spip_desinfecte($GLOBALS,false);
