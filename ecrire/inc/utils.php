@@ -1543,8 +1543,15 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Si les variables sont passees en global par le serveur,
 	// il faut faire quelques verifications de base
-	if (test_valeur_serveur(@ini_get('register_globals'))) {
-		die ('Veuillez desactiver register_globals<br>.htaccess : php_flag register_globals off');
+	$avertir_register_globals = false;
+	if (true OR test_valeur_serveur(@ini_get('register_globals'))) {
+		// ne pas desinfecter les globales en profondeur car elle contient aussi les
+		// precedentes, qui seraient desinfectees 2 fois.
+		spip_desinfecte($GLOBALS,false);
+		if (include_spip('inc/php3'))
+			spip_register_globals(true);
+
+		$avertir_register_globals = true;
 	}
 
 	// appliquer le cookie_prefix
@@ -1582,6 +1589,10 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// charge aussi effacer_meta et ecrire_meta
 	$inc_meta = charger_fonction('meta', 'inc');
 	$inc_meta();
+
+	// on a pas pu le faire plus tot
+	if  ($avertir_register_globals)
+		avertir_auteurs("register_globals",_L("Probl&egrave;me de s&eacute;curit&eacute; : register_globals=on; dans php.ini &agrave; corriger."));
 
 	// nombre de repertoires depuis la racine
 	// on compare a l'adresse de spip.php : $_SERVER["SCRIPT_NAME"]
@@ -2168,4 +2179,25 @@ function spip_fetch_array($r, $t=NULL) {
 	}
 }
 
+/**
+ * Poser une alerte qui sera affiche aux auteurs de bon statut ('' = tous)
+ * au prochain passage dans l'espace prive
+ * chaque alerte doit avoir un nom pour eviter duplication a chaque hit
+ * les alertes affichees une fois sont effacees
+ *
+ * @param string $nom
+ * @param string $message
+ * @param string $statut
+ */
+function avertir_auteurs($nom,$message, $statut=''){
+	$alertes = $GLOBALS['meta']['message_alertes_auteurs'];
+	if (!$alertes
+		OR !is_array($alertes = unserialize($alertes)))
+		$alertes = array();
+
+	if (!isset($alertes[$statut]))
+		$alertes[$statut] = array();
+	$alertes[$statut][$nom] = $message;
+	ecrire_meta("message_alertes_auteurs",serialize($alertes));
+}
 ?>
