@@ -347,7 +347,7 @@ class IterateurDATA implements Iterator {
 	**/
 	protected function select_datapath() {
 		list(,$base) = each($this->command['datapath']);
-		if (strlen($base = trim($base))) {
+		if (strlen($base = ltrim(trim($base),"/"))) {
 			$this->tableau = table_valeur($this->tableau, $base);
 			if (!is_array($this->tableau)) {
 				$this->tableau = array();
