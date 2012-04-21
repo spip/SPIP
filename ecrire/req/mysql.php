@@ -325,9 +325,10 @@ function spip_mysql_selectdb($db) {
 // http://doc.spip.org/@spip_mysql_listdbs
 function spip_mysql_listdbs($serveur='',$requeter=true) {
 	$dbs = array();
-	$res = spip_mysql_query("SHOW DATABASES");
-	while($row = mysql_fetch_assoc($res))
-		$dbs[] = $row['Database'];
+	if ($res = spip_mysql_query("SHOW DATABASES")){
+		while($row = mysql_fetch_assoc($res))
+			$dbs[] = $row['Database'];
+	}
 	return $dbs;
 }
 
