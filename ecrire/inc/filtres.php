@@ -2309,11 +2309,15 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 	// OU que la longueur de l''argument generee est plus long
 	// que ce que telere Suhosin.
 	$cache_contextes_ajax = (defined('_CACHE_CONTEXTES_AJAX') AND _CACHE_CONTEXTES_AJAX);
-
 	if (!$cache_contextes_ajax) {
 		$env = $c;
 		if (function_exists('gzdeflate') && function_exists('gzinflate')) {
 			$env = gzdeflate($env);
+			// http://core.spip.org/issues/2667 | https://bugs.php.net/bug.php?id=61287
+			if (substr(phpversion(),0,5) == '5.4.0' AND !@gzinflate($env)) {
+				$cache_contextes_ajax = true;
+				spip_log("Contextes AJAX forces en fichiers ! Erreur PHP 5.4.0", _LOG_AVERTISSEMENT);
+			}
 		}
 		$env = _xor($env);
 		$env = base64_encode($env);
