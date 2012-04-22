@@ -182,9 +182,8 @@ function liste_plugin_valides($liste_plug, $force = false)
 	// mais surchargeables (on peut activer un plugin qui procure ca pour l'ameliorer,
 	// donc avec le meme prefixe)
 	foreach($infos['_DIR_RESTREINT']['']['procure'] as $procure) {
-		$p = strtoupper($procure['id']);
+		$p = strtoupper($procure['nom']);
 		if (!isset($liste_non_classee[$p])){
-			$procure['nom'] = $procure['id'];
 			$procure['etat'] = '?';
 			$procure['dir_type'] = '_DIR_RESTREINT';
 			$procure['dir'] = '';

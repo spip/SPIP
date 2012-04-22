@@ -75,7 +75,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	$ret['necessite'] = $necessite['necessite'];
 	$ret['lib'] = $necessite['lib'];
 	$ret['utilise'] = info_plugin_normalise_utilise($arbre['utilise']);
-	$ret['procure'] = $arbre['procure'];
+	$ret['procure'] = info_plugin_normalise_procure($arbre['procure']);
 
 	$ret['chemin'] = $arbre['path'];
 	if (isset($arbre['pipeline']))
@@ -136,6 +136,19 @@ function info_plugin_normalise_utilise($utilise) {
 			$id = $need['id'];
 			$v = $need['version'];
 			$res[]= array('nom' => $id, 'id' => $id, 'version' => $v, 'compatibilite' => $v);
+		}
+	}
+	return $res;
+}
+
+function info_plugin_normalise_procure($procure) {
+	$res = array();
+
+	if (is_array($procure)) {
+		foreach($procure as $need){
+			$id = $need['id'];
+			$v = $need['version'];
+			$res[]= array('nom' => $id, 'id' => $id, 'version' => $v);
 		}
 	}
 	return $res;
