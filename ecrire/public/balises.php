@@ -441,7 +441,7 @@ function balise_LESAUTEURS_dist ($p) {
  * @return object
  */
 function balise_RANG_dist($p) {
-	$b = $p->id_boucle;
+	$b = index_boucle($p);
 	if ($b === '') {
 		$msg = array('zbug_champ_hors_boucle',
 				array('champ' => '#RANG')
@@ -449,7 +449,7 @@ function balise_RANG_dist($p) {
 		erreur_squelette($msg, $p);
 	}
 	else {
-		$boucle = &$p->boucles[$p->id_boucle];
+		$boucle = &$p->boucles[$b];
 		$trouver_table = charger_fonction('trouver_table','base');
 		$desc = $trouver_table($boucle->id_table);
 		if (isset($desc['titre'])){
@@ -457,6 +457,8 @@ function balise_RANG_dist($p) {
 		  if (preg_match(';(^|,)([^,]*titre)(,|$);',$t,$m)){
 			  $m = preg_replace(",as\s+titre$,i","",$m[2]);
 			  $m = trim($m) . " AS titre_rang";
+			  if (strpos($m,"(")===false)
+				  $m = $boucle->id_table . ".$m";
 
 			  $boucle->select[] = $m;
 			  $_titre = '$Pile[$SP][\'titre_rang\']';
