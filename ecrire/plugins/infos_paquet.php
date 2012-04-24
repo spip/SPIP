@@ -305,4 +305,17 @@ function info_paquet_spip($phraseur, $attrs, $texte) {
 	$phraseur->versions[$n]['balise'] = "spip";
 }
 
+
+/**
+ * Pipelines : plusieurs declarations possibles pour un meme pipeline
+ *
+ * @param $phraseur
+ * @param $attrs
+ * @param $texte
+ */
+function info_paquet_pipeline($phraseur, $attrs, $texte) {
+	$n = $phraseur->contenu['compatible'];
+	$phraseur->versions[$n]['pipeline'][] = $attrs;
+}
+
 ?>
