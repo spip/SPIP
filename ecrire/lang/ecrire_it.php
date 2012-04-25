@@ -386,7 +386,7 @@ dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate n
 	'info_langues' => 'Lingua del sito',
 	'info_ldap_ok' => 'L\'autenticazione LDAP è installata.',
 	'info_lien_hypertexte' => 'Link ipertestuale:',
-	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
+	'info_liste_nouveautes_envoyee' => 'La lista delle novità è stata inviata',
 	'info_liste_redacteurs_connectes' => 'Elenco dei redattori collegati',
 	'info_login_existant' => 'Questo login esiste già.',
 	'info_login_trop_court' => 'Login troppo corto.',
@@ -602,8 +602,8 @@ Le traduzioni sono associate all\'originale,
 	'install_serveur_hebergeur' => 'Server del database attribuito dall\'hoster',
 	'install_table_prefix_hebergeur' => 'Prefisso della tabella attribuito dal provider:',
 	'install_tables_base' => 'Tabelle del database',
-	'install_types_db_connus' => 'SPIP può utilizzare <b>MySQL</b> (il più diffuso), <b>PostgreSQL</b> e <b>SQLite</b>.', # MODIF
-	'install_types_db_connus_avertissement' => 'Attenzione: numerosi plug-in funziano solamente con MySQL', # MODIF
+	'install_types_db_connus' => 'SPIP può utilizzare <b>MySQL</b> (il più diffuso) e <b>SQLite</b>.',
+	'install_types_db_connus_avertissement' => 'Il supporto a <b>PostgreSQL</b> è proposto a titolo sperimentale.',
 	'instituer_erreur_statut_a_change' => 'Lo status è già stato modificato',
 	'instituer_erreur_statut_non_autorise' => 'Non puoi selezionare questo stato',
 	'intem_redacteur' => 'redattore',
@@ -748,13 +748,13 @@ Le traduzioni sono associate all\'originale,
 	'plugin_info_install_ok' => 'Installazione completata con successo',
 	'plugin_info_necessite' => 'Richiesto :',
 	'plugin_info_non_compatible_spip' => 'Questo plugin è incompatibile con questa versione di SPIP',
-	'plugin_info_plugins_dist_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @plugins_dist@.', # MODIF
-	'plugin_info_plugins_dist_2' => 'Questo non pu&ugrave; essere disinstallato.', # MODIF
+	'plugin_info_plugins_dist_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @plugins_dist@.',
+	'plugin_info_plugins_dist_2' => 'Questi non possono essere disabilitati.',
 	'plugin_info_telecharger' => 'da scaricare da @url@ e da installare in @rep@',
 	'plugin_librairies_installees' => 'Librerie installate',
 	'plugin_necessite_lib' => 'Questa estensione richiede la libreria @lib@',
 	'plugin_necessite_plugin' => 'Necessita l\'estensione @plugin@ con almeno la versione @version@.',
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
+	'plugin_necessite_plugin_sans_version' => 'Necessita del plugin @plugin@',
 	'plugin_necessite_spip' => 'Necessita SPIP con almeno la versione @version@.',
 	'plugin_source' => 'origine: ',
 	'plugin_titre_automatique' => 'Installazione automatica',
@@ -778,7 +778,7 @@ Le traduzioni sono associate all\'originale,
 	'plugins_disponibles' => '@count@ plug-in disponibili.',
 	'plugins_erreur' => 'Errore nei plug-in: @plugins@',
 	'plugins_liste' => 'Elenco dei plugin',
-	'plugins_liste_dist' => 'Estensioni', # MODIF
+	'plugins_liste_dist' => 'Plugin bloccato',
 	'plugins_recents' => 'Plugin aggiunti recentemente',
 	'plugins_tous_liste' => 'Tutto',
 	'plugins_vue_hierarchie' => 'Struttura gerarchica',
@@ -787,12 +787,12 @@ Le traduzioni sono associate all\'originale,
 
 	// Q
 	'queue_executer_maintenant' => 'Esegui adesso',
-	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
+	'queue_info_purger' => 'È possibile eliminare tutti i lavori in sospeso e reinizializzare lista con delle elaborazioni periodiche',
 	'queue_nb_jobs_in_queue' => '@nb@ processi in coda',
 	'queue_next_job_in_nb_sec' => 'Prossimo processo in @nb@ s',
 	'queue_no_job_in_queue' => 'Nessun processo appeso',
 	'queue_one_job_in_queue' => '1 processo in coda',
-	'queue_purger_queue' => 'Pulisci la coda dei processi', # MODIF
+	'queue_purger_queue' => 'Pulisci la coda dei processi',
 	'queue_titre' => 'Lista dei processi',
 
 	// R
@@ -808,8 +808,8 @@ Le traduzioni sono associate all\'originale,
 	'taille_cache_image' => 'Le immagini elaborate automaticamente da SPIP (icone dei documenti, titoli in formato grafico, funzioni matematiche in formato TeX...) occupano nella cartella @dir@ in tutto @taille@.',
 	'taille_cache_infinie' => 'Questo sito non prevede limiti alle dimensioni della cartella della cache.',
 	'taille_cache_maxi' => 'SPIP tenta di limitare le dimensioni della cartella della cache di questo sito a circa <b>@octets@</b> di dati.',
-	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
-	'taille_cache_octets' => 'La cartella della cache occupa attualmente @octets@ su disco.', # MODIF
+	'taille_cache_moins_de' => 'La dimensione della cache è inferiore a @octets@.',
+	'taille_cache_octets' => 'La cartella della cache occupa attualmente @octets@ su disco.',
 	'taille_cache_vide' => 'La cache è vuota.',
 	'taille_repertoire_cache' => 'Dimensioni della cartella di cache',
 	'text_article_propose_publication' => 'Articolo proposto per la pubblicazione. ',
