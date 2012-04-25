@@ -232,7 +232,6 @@ ecrire/notifications/article_propose.html -text
 ecrire/notifications/article_publie.html -text
 ecrire/notifications/article_valide.html -text
 ecrire/notifications/instituerarticle.php -text
-ecrire/plugin.xml -text
 ecrire/plugins/afficher_liste.php -text
 ecrire/plugins/afficher_nom_plugin.php -text
 ecrire/plugins/afficher_plugin.php -text
