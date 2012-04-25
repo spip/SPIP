@@ -33,7 +33,7 @@ var iframeHandler = function(data,jForm,success) {
           zip_form
           .find("form")
             .async_upload(function(res,s){
-              success(res,s,jForm);
+              success(res,s,'',jForm);
             });
           jForm.after(zip_form[0]);
           return false;  
