@@ -364,7 +364,7 @@ indirizzo qui sotto. (Altrimenti la tua richiesta sarà ignorata.):
 	'info_creer_repertoire' => 'Creare un file o una cartella chiamata:',
 	'info_creer_repertoire_2' => 'all\'interno della sottocartella <b>@repertoire@</b>, poi:',
 	'info_creer_vignette' => 'creazione automatica dell\'anteprima',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
+	'info_creerdansrubrique_non_autorise' => 'Non si dispone di diritti sufficienti per creare contenuti in questa rubrica',
 	'info_deplier' => 'Espandi',
 	'info_descriptif_nombre' => 'descrizione(i):',
 	'info_description' => 'Descrizione:',
