@@ -15,10 +15,11 @@
 
 (function($){
 	$.fn.autosave = function(opt) {
-		opt = $.extend(opt,{
+		opt = $.extend({
+			url: window.location,
 			confirm: false,
 			confirmstring: 'Sauvegarder ?'
-		});
+		},opt);
 		var save_changed = function(){
 			$('form.autosavechanged')
 			.each(function(){
@@ -27,7 +28,7 @@
 					// ajoutons un timestamp
 					var d=new Date();
 					contenu = contenu + "&__timestamp=" + d.getTime();
-					$.post(window.location, {
+					$.post(opt.url, {
 						'action': 'session',
 						'var': 'autosave_' + $('input[name=autosave]', this).val(),
 						'val': contenu
@@ -38,8 +39,12 @@
 		$(window)
 		.bind('unload',save_changed);
 		return this
-		.bind('change keyup', function() {
+		.bind('keyup', function() {
 			$(this).addClass('autosavechanged');
+		})
+		.bind('change', function() {
+			$(this).addClass('autosavechanged');
+			save_changed();
 		})
 		.bind('submit',function() {
 			save_changed();
