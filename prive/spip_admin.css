@@ -24,16 +24,16 @@ a:active.spip-admin-boutons,
 #spip-debug, #spip-debug-header { background-color: #f0f0f0; font-family: Verdana, Geneva, sans-serif; position:absolute;top:20px;left:0;width:100%;height:100%;z-index:10000; font-size:1em; text-align:left; }
 #spip-debug ul table { font-size: 80%; }
 #spip-debug fieldset { background-color: #fff; font-family: Courier, "Courier New", monospace; font-size: 12px; margin-bottom: 1em; display: block; }
-#spip-debug fieldset fieldset { background-color: #ccf; font-family: Verdana, Geneva, sans-serif; font-size: 80%; }
+#spip-debug fieldset fieldset { background-color: #ccf; font-family: Verdana, Geneva, sans-serif; font-size: 80%; width:95%;}
 #spip-debug legend { background-color: #fff; border: solid 1px #f00; padding: 1px 1em; font-family: Verdana, Geneva, sans-serif; font-weight: bold; display: block; text-transform: none; }
 #spip-debug fieldset fieldset legend { border: solid 1px #00F; font-weight: normal; }
 #spip-debug a { text-decoration: none; color: blue; }
 #spip-debug a:hover { text-decoration: underline; color: red; }
-#spip-debug fieldset table {font-size: inherit;}
+#spip-debug fieldset table {font-size: inherit; line-height:.8em;}
 
 #debug_boucle fieldset { background-color: #ccf; }
 #debug_boucle fieldset fieldset { background-color: #fff; font-family: Verdana, Geneva, sans-serif; padding: 0.5em 1.5em; }
-#spip-debug code { background-color: #ccf;}
+#spip-debug code { background-color: #ccf; line-height:1em;}
 
 #spip-boucles { min-height: 200px; max-height: 50%; margin: 0 0 1em 0; padding: .5em 0; overflow: -moz-scrollbars-vertical; overflow-y: auto; border-top: 1px solid #39F; border-bottom: 2px solid #666; }
 
