@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.0.9'); // 29 mars 2012
+define('_ECRAN_SECURITE', '1.1.0'); // 28 avril  2012
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -86,6 +86,10 @@ AND !preg_match(',^[\w-]+$,', (string)$_REQUEST['exec']))
 if (isset($_REQUEST['cherche_auteur'])
 AND preg_match(',[<],', (string)$_REQUEST['cherche_auteur']))
 	$ecran_securite_raison = "cherche_auteur";
+if (isset($_REQUEST['exec'])
+AND $_REQUEST['exec'] == 'auteurs'
+AND preg_match(',[<],', (string)$_REQUEST['recherche']))
+	$ecran_securite_raison = "recherche";
 if (isset($_REQUEST['action'])
 AND $_REQUEST['action'] == 'configurer') {
 	if (@file_exists('inc_version.php')
@@ -211,6 +215,9 @@ if (isset($_REQUEST['reinstall'])
 AND $_REQUEST['reinstall'] == 'oui')
 	$ecran_securite_raison = 'reinstall=oui';
 
+/* echappement xss referer */
+if (isset($_SERVER['HTTP_REFERER']))
+	$_SERVER['HTTP_REFERER'] = strtr($_SERVER['HTTP_REFERER'], '<>"\'', '[]##');
 
 /*
  * S'il y a une raison de mourir, mourons
@@ -242,7 +249,7 @@ if (
 	AND _IS_BOT
 	AND $_SERVER['REQUEST_METHOD'] === 'GET'
 	AND (
-		(function_exists('sys_getloadavg') AND $load = sys_getloadavg() AND $load = array_shift($load))
+		(function_exists('sys_getloadavg') AND $load = array_shift(sys_getloadavg()))
 		OR (@is_readable('/proc/loadavg') AND $load = floatval(file_get_contents('/proc/loadavg')))
 	)
 	AND $load > _ECRAN_SECURITE_LOAD // eviter l'evaluation suivante si de toute facon le load est inferieur a la limite
