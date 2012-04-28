@@ -88,7 +88,7 @@ function public_debusquer_dist($message = '', $lieu = ''){
 	$mode = _request('var_mode_affiche');
 	$self = str_replace("\\'", '&#39;', self());
 	$self = parametre_url($self, 'var_mode', 'debug');
-
+	
 	$res = debusquer_bandeau($tableau_des_erreurs)
 		. '<br />'
 		. debusquer_squelette($fonc, $mode, $self);
@@ -455,6 +455,7 @@ function debusquer_squelette($fonc, $mode, $self){
 	return !trim($texte) ? '' : (
 		"<div id='spip-debug'>$res"
 			. "<div id='debug_boucle'><fieldset$id><legend>"
+			. "<a href='".$self."#f_".substr($fonc, 0, 37)."'> &#8593; </a>"
 			. $legend
 			. "</legend>"
 			. $texte
@@ -562,7 +563,7 @@ function debusquer_navigation_squelettes($self){
 		$nav = !$boucles ? '' : debusquer_navigation_boucles($boucles, $nom, $self, $sourcefile);
 		$temps = !isset($debug_objets['profile'][$sourcefile]) ? '' : _T('zbug_profile', array('time' => $debug_objets['profile'][$sourcefile]));
 
-		$res .= "<fieldset><legend>"
+		$res .= "<fieldset id='f_".$nom."'><legend>"
 			. $t_skel
 			. ' '
 			. $sourcefile
