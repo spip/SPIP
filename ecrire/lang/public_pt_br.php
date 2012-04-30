@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil_site' => 'Página inicial', # MODIF
+	'accueil_site' => 'Página inicial',
 	'article' => 'Matéria',
 	'articles' => 'Matérias',
 	'articles_auteur' => 'Matérias deste autor',
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Comentar este site',
-	'contact' => 'Contact', # NEW
+	'contact' => 'Contato',
 	'copie_document_impossible' => 'Não foi possível copiar o documento',
 
 	// D
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meme_rubrique' => 'Na mesma seção',
 	'memes_auteurs' => 'Dos mesmos autores',
 	'message' => 'Mensagem',
-	'messages_forum' => 'Mensagens de fórum', # MODIF
+	'messages_forum' => 'Mensagens',
 	'messages_recents' => 'Mensagens de fórum mais recentes',
 	'mots_clef' => 'Palavra-chave',
 	'mots_clefs' => 'Palavras-chave',
@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_lettre_information' => 'Esta é a mensagem de informação do site',
-	'texte_lettre_information_2' => 'Esta mensagem compila as matérias e as notas publicadas desde', # MODIF
+	'texte_lettre_information_2' => 'Esta mensagem compila as novidades publicadas desde',
 
 	// V
 	'ver_imprimer' => 'Versão para impressão',
