@@ -27,11 +27,7 @@ function f_jQuery_prive ($texte) {
 			'prive/javascript/jquery.cookie.js',
 			'prive/javascript/spip_barre.js',
 		));
-	$jqueryui_plugins = jqueryui_dependances(pipeline('jqueryui_plugins',
-		array(
-			'jquery.ui.core',
-		)));
-	foreach (array_unique(array_merge($jquery_plugins,$jqueryui_plugins)) as $script)
+	foreach (array_unique($jquery_plugins) as $script)
 		if ($script = find_in_path($script))
 			$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
 	// inserer avant le premier script externe ou a la fin

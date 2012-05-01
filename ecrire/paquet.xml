@@ -86,7 +86,6 @@
 	<pipeline nom="insert_head" action="f_jQuery" inclure="inc/pipelines.php" />
 	<pipeline nom="insert_head_css" action="" />
 	<pipeline nom="jquery_plugins" action="" />
-	<pipeline nom="jqueryui_plugins" action="" />
 	<pipeline nom="lister_tables_noerase" action="" />
 	<pipeline nom="lister_tables_noexport" action="" />
 	<pipeline nom="lister_tables_noimport" action="" />
@@ -131,7 +130,6 @@
 
 	<procure nom="iterateurs" version="0.6.1" />
 	<procure nom="queue" version="0.6.6" />
-	<procure nom="jqueryui" version="1.8.19" />
 
 	<menu nom="menu_accueil" titre="icone_accueil" icone="images/accueil-48.png" action="accueil" />
 	<menu nom="menu_edition" titre="icone_edition" icone="images/edition-48.png" action="navigation" parametres="menu=menu_edition" />
