@@ -93,6 +93,7 @@ function f_boite_infos($flux) {
  * par une insertion au bon endroit quand le contenu de depart n'est pas vide
  * 
  * @param array $flux
+ * @return array
  */
 function f_afficher_blocs_ecrire($flux) {
 	static $o=array();
