@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'Plugina aktibatu',
 	'affichage' => 'Ikuspegia',
 	'aide_non_disponible' => 'On line delakoaren laguntza-atal hau prestatzekoa dago hizkuntza honetan.',
-	'annuler_recherche' => 'Annuler la recherche', # NEW
+	'annuler_recherche' => 'Bilaketa ezeztatu',
 	'auteur' => 'Egilea :',
 	'avis_acces_interdit' => 'Sarrera Debekatua',
 	'avis_article_modifie' => 'Adi egon,(@nom_auteur_modif@) lan honetan aritu zen orain dela (@date_diff@)minutu.',
@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_connexion_echec_1' => 'SQL zerbitzariarekiko lokarriak huts egin du.',
 	'avis_connexion_echec_2' => 'Itzul zaitez aurreko orrialdera eta egiazta itzazu sartutako informazioak.',
 	'avis_connexion_echec_3' => 'KONTUZ: Zerbitzari askotan, erabili ahal izan aurretik SQL baserako sarreraren aktibatzea eskatu behar da. Ezin baduzu konektatu, egiaztaezazu tramite hori bete duzula.',
-	'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
+	'avis_connexion_erreur_nom_base' => 'Basearen izenak hizkiak, zifrak eta marratxoak soilik eduki ditzazke',
 	'avis_connexion_ldap_echec_1' => 'LDAP zerbitzariarekiko lokarriak huts egin du',
 	'avis_connexion_ldap_echec_2' => 'Itzul zaitez aurreko orrialdera eta egiazta itzazu sartutako informazioak.',
 	'avis_connexion_ldap_echec_3' => 'Horren ordez, erabiltzaileak inportatzeko ez erabili LDAP euskarria.',
@@ -112,7 +112,7 @@ Ez balidatu inportazio galdera hau.
 	'connexion_ldap' => 'Konexioa :',
 	'copier_en_local' => 'Lokalean kopiatu',
 	'creer_et_associer_un_auteur' => 'Autore bat sortu eta lotu',
-	'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
+	'creer_et_associer_une_rubrique' => 'Atal bat sortu eta elkartu',
 
 	// D
 	'date_mot_heures' => 'orduak',
@@ -124,19 +124,19 @@ Ez balidatu inportazio galdera hau.
 	'en_savoir_plus' => 'Gehiago jakin',
 	'entree_adresse_annuaire' => 'Urtekariaren helbidea',
 	'entree_adresse_email' => 'Zureposta elektronikoa',
-	'entree_adresse_email_2' => 'Adresse email', # NEW
+	'entree_adresse_email_2' => 'Helbide elektronikoa',
 	'entree_base_donnee_1' => 'Datu-basearen helbidea',
 	'entree_base_donnee_2' => '(Askotan helbide honek zure gunearekin bat dator, batzutan «localhost»arekin etabestetan, guztiz husturik geratzen da.)',
 	'entree_biographie' => 'Biografia labur bat, hitzgutxitan...',
 	'entree_chemin_acces' => 'Sartu sarbidearen bidea:',
 	'entree_cle_pgp' => 'Zure PGPkodea',
-	'entree_cle_pgp_2' => 'Clé PGP', # NEW
+	'entree_cle_pgp_2' => 'PGP giltza',
 	'entree_contenu_rubrique' => '(Atalaren edukia, hitz gutxitan)',
 	'entree_identifiants_connexion' => 'Zure lokarri-identifikadoreak...',
-	'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
+	'entree_identifiants_connexion_2' => 'Saioa hasteko izena',
 	'entree_informations_connexion_ldap' => 'LDAPurtekariarekiko lokarri-informazioak bete itzazu formulario honetan. Halakoinformazioak sarearen edo sistemaren administratzaileak aditzera emango dizkizu.',
 	'entree_infos_perso' => 'Nor zara zu?',
-	'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
+	'entree_infos_perso_2' => 'Nor da egilea ?',
 	'entree_interieur_rubrique' => 'Atalarenbarruan...',
 	'entree_liens_sites' => 'Hipertestu lotura (bisita-leku erreferentzia) ',
 	'entree_login' => 'Zure login-a',
@@ -149,16 +149,16 @@ Ez balidatu inportazio galdera hau.
 	'entree_nom_fichier' => '@texte_compresse@fitxategiaren izenaz bete',
 	'entree_nom_pseudo' => 'Zure izen edo goitizena',
 	'entree_nom_pseudo_1' => '(Zure izen edo goitizena)',
-	'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
+	'entree_nom_pseudo_2' => 'Izen edo ezizena',
 	'entree_nom_site' => 'Zuretokiaren izena',
-	'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
+	'entree_nom_site_2' => 'Egilearen gunearen izena',
 	'entree_nouveau_passe' => 'Pasahitz berria',
 	'entree_passe_ldap' => 'Zure pasahitza',
 	'entree_port_annuaire' => 'Urtekariaren atakaren zenbakia',
 	'entree_signature' => 'Sinadura',
 	'entree_titre_obligatoire' => '<b>Izenburua</b> [Derrigorrezko]<br />',
 	'entree_url' => 'Zure lekuaren (URL) helbidea',
-	'entree_url_2' => 'Adresse (URL) du site', # NEW
+	'entree_url_2' => 'Gunearen helbidea (URL)',
 	'erreur_connect_deja_existant' => 'Izen bereko zerbitzari bat badago jadanik',
 	'erreur_nom_connect_incorrect' => 'Zerbitzari izen hori debekatua da',
 	'erreur_plugin_desinstalation_echouee' => 'Pluginaren desinstalazioak huts egin du. Halere, desaktibatzen ahal duzu.',
@@ -236,8 +236,8 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'info_activer_cookie' => 'Egokitasun-"cookie" bat aktibatu dezakezu; horrek aukera emango dizu orrialdeakeguneratzeko, eta jendaurreko ataletik erredakziora errazki aldatzeko ere.',
 	'info_admin_etre_webmestre' => 'Web-arduradun eskubideak nire kontuari ezarri',
 	'info_admin_gere_rubriques' => 'Pertsona horrek honako atal hauek administratzenditu:',
-	'info_admin_gere_toutes_rubriques' => 'Administratzaile honek atal guztiakkudeatzen ditu.', # MODIF
-	'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
+	'info_admin_gere_toutes_rubriques' => 'Administratzaile honek <b>atal guztiak</b> kudeatzen ditu.',
+	'info_admin_gere_toutes_rubriques_2' => '<b>Atal guztiak</b> kudeatzen ditut',
 	'info_admin_je_suis_webmestre' => '<b>web-arduradun</b> naiz.',
 	'info_admin_statuer_webmestre' => 'Administratzaile honi Web-arduradun eskubideak eman',
 	'info_admin_webmestre' => 'Administratzaile hau <b>Web-arduradun</b> da.',
@@ -296,7 +296,7 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'info_classement_2' => '.@zerrendan@',
 	'info_code_acces' => 'Zure sarbide kodeak ezahaztu !',
 	'info_compatibilite_html' => 'Segitu beharreko HTML normak',
-	'info_compresseur_gzip' => '<b>N. B. :</b> Aterbetazileak ez dituenez jadanik php script-ak konprimitzen baieztatzea gomendatua da ; horretarako serbitsu hau erabiltzen ahal dezakezu : @testgzip@', # MODIF
+	'info_compresseur_gzip' => '<b>N. B. :</b> Aterbetazileak ez dituenez jadanik php script-ak konprimitzen baieztatzea gomendatua da; horretarako zerbitsu hau erabil dezakezu : @testgzip@',
 	'info_compresseur_texte' => 'Zure sareburuak ez baditu automatikoki html orrialdeak konprimitzen erabiltzaileari igortzeko, konpresioa bortxatzen entsegatzen ahal zira deskargatutako orrien pisua ttipitzeko.<b>Kontuz</b> : teknika hunek zoinbeit sareburu zinez moteltzen ahal ditu.',
 	'info_config_suivi' => 'Helbide hau korreo lista bati baldin ba dagokio, hemen azpian bere bitartez tokiarenparte-hartzaileek inskripzioa egin dezaketen helbidea jar dezakezu. Helbide hau URLbat izan daiteke ( adibidez web-aren bitartez izena emateko orria), edo e-mail helbidebat gai zehatz batekin (adibidez: @adresse_suivi@?subject=subscribe):',
 	'info_config_suivi_explication' => 'Gune honetako posta-zerrendan harpidetza egindezakezu. Argitalpenerako proposaturiko artikuluen eta berri laburren iragarpenakjasoko dituzu posta elektronikoz.',
@@ -313,7 +313,7 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'info_contact' => 'Kontaktua',
 	'info_contenu_articles' => 'Artikuluen edukia',
 	'info_contributions' => 'Parte hartzeak',
-	'info_creation_paragraphe' => '(Paragrafoak sortzeko, utzi lerro hutsak.)', # MODIF
+	'info_creation_paragraphe' => 'Paragrafoak sortzeko, lerro hutsak utz itzazu.',
 	'info_creation_rubrique' => 'Artikuluak idatzi baino lehen Atal bat sortu behar duzu.',
 	'info_creation_tables' => 'Laugarren etapa: Basearen taulak sortzea',
 	'info_creer_base' => 'Datu base berri bat sortu:',
@@ -329,7 +329,7 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'info_ecrire_article' => 'Artikuluak idatzi aurretik, atal bat sortu behar duzu.',
 	'info_email_envoi' => 'Bidalketarako posta-helbidea (aukeran)',
 	'info_email_envoi_txt' => 'Adierazi hemen emailak bidaltzeko erabili behar den helbidea (bestela, helbide hartzailea erabiliko da bidalketa-helbide gisa) :',
-	'info_email_webmestre' => 'Webmaster-aren posta elektronikoko helbidea (aukerazkoa)', # MODIF
+	'info_email_webmestre' => 'Web-arduradunaren helbide elektronikoa',
 	'info_entrer_code_alphabet' => 'Sar ezazu erabiliko den alfabetoaren kodea',
 	'info_envoi_email_automatique' => 'Mezu elektronikoen bidalketa automatikoa',
 	'info_envoyer_maintenant' => 'Orain bidali',
@@ -365,7 +365,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 	'info_historique_texte' => 'Berrikuspenen jarraipenak artikulu baten edukiari egindako aldaketa guztien historia gordetzen eta geroko bertsioen arteko desberdintasunak bistaratzen uzten du.',
 	'info_identification_publique' => 'Zurenortasun publikoa...',
 	'info_image_process' => 'Mesedez aukeratu biñetak egitekomodurik onena dagokion irudian klikatuz.',
-	'info_image_process2' => '<b>N.B.</b> Ez bada irudirik agertzen, orduan zure gunea ostatatzen duen zerbitzaria ez dago konfiguratuta tresna horiek erabiltzeko. Funtzio horiek erabili nahi badituzu, arduradun teknikoarekin kontaktatu eta «GD» edo «Imagick» luzapenak eskatu.', # MODIF
+	'info_image_process2' => '<b>N.B.</b> Ez bada irudirik agertzen, orduan zure gunea ostatatzen duen zerbitzaria ez da tresna horiek erabiltzeko konfiguratua. Funtzio horiek erabili nahi badituzu, arduradun teknikoa kontakta ezazu eta «GD» edo «Imagick» luzapenak eska itzaizkiozu.',
 	'info_images_auto' => 'Automatikoki kalkulatutako irudiak',
 	'info_informations_personnelles' => 'Bosgarren etapa : Datu pertsonalak',
 	'info_inscription_automatique' => 'Pertsona berrien izen-emate automatikoa',
@@ -379,7 +379,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 	'info_liste_redacteurs_connectes' => 'Konektatuak dauden erredaktoreen zerrenda',
 	'info_login_existant' => 'Login hori dagoeneko existitzen da.',
 	'info_login_trop_court' => 'Login hori laburregia da',
-	'info_login_trop_court_car_pluriel' => 'Zure loginak @nb@ karaktere bederen eduki behar ditu.', # MODIF
+	'info_login_trop_court_car_pluriel' => 'Zure loginak @nb@ karaktere bederen eduki behar ditu.',
 	'info_logos' => 'Logoak',
 	'info_maximum' => 'gehienez:',
 	'info_meme_rubrique' => 'Atal berean',
@@ -430,7 +430,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 	'info_nouvel_article' => 'Artikulu berria',
 	'info_nouvelle_traduction' => 'Itzulpen berria:',
 	'info_numero_article' => 'Artikulua:',
-	'info_obligatoire_02' => '[Nahitaezkoa]', # MODIF
+	'info_obligatoire_02' => '(nahitaezkoa)',
 	'info_option_accepter_visiteurs' => 'Gune publikoko bisitarien inskripzioa onartu',
 	'info_option_faire_suivre' => 'Foroetako mezuak artikuluen idazleei jarraituak izateaegin',
 	'info_option_ne_pas_accepter_visiteurs' => 'Bisitarien inskripzioa ezetsi',
@@ -444,7 +444,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 	'info_par_statut' => 'egoeraren arabera',
 	'info_par_tri' => '\'(par @tri@)\'',
 	'info_passe_trop_court' => 'Pasahitz laburregia.',
-	'info_passe_trop_court_car_pluriel' => 'Zure pasahitzak @nb@ karaktere bederen eduki behar ditu.', # MODIF
+	'info_passe_trop_court_car_pluriel' => 'Zure pasahitzak @nb@ karaktere bederen eduki behar ditu.',
 	'info_passes_identiques' => 'Pasahitzak ezberdinak dira',
 	'info_pense_bete_ancien' => 'Zure ohartarapen zaharrak',
 	'info_plus_cinq_car' => '5 karaktere baino gehiago',
@@ -467,16 +467,16 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 	'info_publier' => 'Argitaratu',
 	'info_publies' => 'Zure artikuluargitaratuak',
 	'info_question_accepter_visiteurs' => 'Zure tokiaren egituretan gunepribaturako baimenik gabeko bisitanteen errejistroa aurreikusia baldin badago, aukerahau aktibatu egin beharko duzu:',
-	'info_question_inscription_nouveaux_redacteurs' => 'Gune publikotik idazlari berrien inskripzioak onartzen dituzu ?
+	'info_question_inscription_nouveaux_redacteurs' => 'Gune publikotik idazle berrien inskripzioak onartzen dituzu ?
 Onartzen badituzu, bisitariak inprimaki automatizatu batetik harpidetu ahal izango dira eta orduan eremu pribatuan sartuko dira beren artikuluak proposatzeko.
 
-Inskribatzean, erabiltzaileek mezu elektroniko automatiko bat jasotzen dute gune pribaturako sarbide-kodeak emanez.
+<div class="notice">Inskribatzean, erabiltzaileek mezu elektroniko automatiko bat jasotzen dute eremu pribaturako sarbide-kodeekin.
 
-Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarietatik : kasu honetan, inskripzio automatikoa ezinezkoa da.', # MODIF
+Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarietatik : kasu honetan, inskripzio automatikoa ezinezkoa da.</div>',
 	'info_question_utilisation_moteur_recherche' => 'SPIP-ean integratutako bilatzailea erabili nahi duzu ?
 (desaktibapenak sistemaren funtzionamendua bizkortzen du.)',
 	'info_question_vignettes_referer_non' => 'Bisiten jatorrien guneen kapturak ez erakutsi',
-	'info_qui_edite' => '@nom_auteur_modif@ eduki hau landu du duela  @date_diff@ minutu', # MODIF
+	'info_qui_edite' => '@nom_auteur_modif@ eduki hau landu du duela  @date_diff@ minutu',
 	'info_racine_site' => 'Gunearen erroa',
 	'info_recharger_page' => 'Mesedez orrialde hau berriz kargatu minutu batzuk barru.',
 	'info_recherche_auteur_a_affiner' => 'Emaitza gehiegi "@cherche_auteur@"-rako ; mesedez bilaketa doitu.',
@@ -488,8 +488,8 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 	'info_redacteurs' => 'Idazleak',
 	'info_redaction_en_cours' => 'Idaztekobidean',
 	'info_redirection' => 'Birbidirekzioa',
-	'info_redirection_activee' => 'La redirection est activée.', # NEW
-	'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
+	'info_redirection_activee' => 'Birbideratzea aktibatua da.',
+	'info_redirection_desactivee' => 'Birbideratzea kendua izan da.',
 	'info_refuses' => 'Zure artikulu ezetsiak',
 	'info_reglage_ldap' => 'Aukerak : LDAP inportazioaren konfigurazioa',
 	'info_renvoi_article' => 'Birbidirekzioa. Artikulu hau orrialdera itzultzen da:',
@@ -516,7 +516,7 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 	'info_sous_titre' => 'Azpititulua :',
 	'info_statut_administrateur' => 'Administratzailea',
 	'info_statut_auteur' => 'Egile honen estatusa:',
-	'info_statut_auteur_2' => 'Je suis', # NEW
+	'info_statut_auteur_2' => 'Nor naizen',
 	'info_statut_auteur_a_confirmer' => 'Izen-ematea baieztatzekoa',
 	'info_statut_auteur_autre' => 'Beste egoera :',
 	'info_statut_efface' => 'Ezabatuta',
@@ -534,13 +534,13 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 	'info_texte' => 'Testua',
 	'info_texte_explicatif' => 'Testu esplikatiboa',
 	'info_texte_long' => '(testua luzea da : beraz, balidazio ondoren berriz elkartuko diren zati askotan agertzen da.)',
-	'info_texte_message' => 'Zure mezuaren testua :', # MODIF
+	'info_texte_message' => 'Zure mezuaren testua',
 	'info_texte_message_02' => 'Mezuaren testua',
 	'info_titre' => 'Titulua :',
 	'info_total' => 'guztira :',
 	'info_tous_articles_en_redaction' => 'Artikulu guztiak idazteko bidean',
 	'info_tous_articles_presents' => 'Argitaratutako artikulu guztiak eremu honetan',
-	'info_tous_articles_refuses' => 'Tous les articles refusés', # NEW
+	'info_tous_articles_refuses' => 'Errefusatutako artikulu guztiak',
 	'info_tous_les' => 'guztiak :',
 	'info_tous_redacteurs' => 'Idazlari guztientzako abisuak',
 	'info_tout_site' => 'Gune guztia',
@@ -550,16 +550,16 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 	'info_tout_site5' => 'Artikulu originala.',
 	'info_tout_site6' => '<b>Erne :</b> bakarrik artikulu originalak bistaratzen dira.
 Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore batean :',
-	'info_traductions' => 'Traductions', # NEW
+	'info_traductions' => 'Itzulpenak',
 	'info_travail_colaboratif' => 'Artikuluei buruzko lan kolaboratiboa',
 	'info_un_article' => 'artikulu bat,',
 	'info_un_site' => 'gune bat,',
 	'info_une_rubrique' => 'atal bat,',
 	'info_une_rubrique_02' => 'atal bat',
 	'info_url' => 'URL ',
-	'info_url_proxy' => 'URL du proxy', # NEW
+	'info_url_proxy' => 'proxy-aren URLa',
 	'info_url_site' => 'Gunearen URL-a',
-	'info_url_test_proxy' => 'URL de test', # NEW
+	'info_url_test_proxy' => 'Entseguendako URLa',
 	'info_urlref' => 'Hipertestu lotura:',
 	'info_utilisation_spip' => 'Lagundutakoargitaratze sistema erabiltzen has zaitezke...',
 	'info_visites_par_mois' => 'Bisitak hilabeteko :',
@@ -582,14 +582,14 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'install_select_langue' => 'Hizkuntza bat aukeratu eta « hurrengoa » botoian klikatu instalazio-prozedura hasteko.',
 	'install_select_type_db' => 'Zehaztu datu-base mota :',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_pg' => 'PostgreSQL', # NEW
+	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
 	'install_serveur_hebergeur' => 'Aterbetzaileak emandako datu-base zerbitzaria',
 	'install_table_prefix_hebergeur' => 'Aterbetzaileak emandako mahaiaren aurrizkia :',
 	'install_tables_base' => 'Baseko mahaiak',
-	'install_types_db_connus' => 'SPIPek <b>MySQL</b> (erabiliena), <b>PostgreSQL</b> eta <b>SQLite</b> badakizka erabiltzen.', # MODIF
-	'install_types_db_connus_avertissement' => 'Kontuz : plugin zonbaitzu MySQL-ekin baizik ibiltzen dira', # MODIF
+	'install_types_db_connus' => 'SPIPek <b>MySQL</b> (erabiliena) eta <b>SQLite</b> badakizka erabiltzen.',
+	'install_types_db_connus_avertissement' => '<b>PostgreSQL</b> euskarria proposatua da ere, esperientzia gisa',
 	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
 	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'idazlaria',
@@ -634,21 +634,21 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'item_reponse_article' => 'Artikuluari erantzuna',
 	'item_utiliser_moteur_recherche' => 'Bilaketa-motorra erabili',
 	'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
-	'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
+	'item_version_html_max_html5' => 'HTML5 baimendu',
 	'item_visiteur' => 'bisitaria',
 
 	// J
 	'jour_non_connu_nc' => 'e.e.',
 
 	// L
-	'label_bando_outils' => 'Barre d\'outils', # NEW
-	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
+	'label_bando_outils' => 'Tresna barra',
+	'label_bando_outils_afficher' => 'Tresnak erakutsi',
 	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
-	'label_choix_langue' => 'Selectionnez votre langue', # NEW
+	'label_choix_langue' => 'Hizkuntza aukera ezazu',
 	'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
-	'label_slogan_site' => 'Slogan du site', # NEW
+	'label_slogan_site' => 'Gunearen lema',
 	'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
-	'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+	'label_texte_et_icones_navigation' => 'Nabigazio menua',
 	'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 	'ldap_correspondance' => 'héritage du champ @champ@', # NEW
 	'ldap_correspondance_1' => 'Héritage des champs LDAP', # NEW
@@ -656,11 +656,11 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'lien_ajout_destinataire' => 'Jasotzaile hau erantsi',
 	'lien_ajouter_auteur' => 'Egile hau erantsi',
 	'lien_ajouter_participant' => 'Parte-hartzaile bat erantsi',
-	'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
+	'lien_ajouter_une_rubrique' => 'Atal hau gehitu',
 	'lien_email' => 'posta elektronikoa',
 	'lien_nom_site' => 'Lekuaren izena',
 	'lien_retirer_auteur' => 'Egile hau baztertu',
-	'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
+	'lien_retirer_rubrique' => 'Atala kendu',
 	'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 	'lien_retrait_particpant' => 'Parte-hartzailehau baztertu',
@@ -673,12 +673,12 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'lien_trier_nombre_articles' => 'Artikuluen izenagatik sailkatu',
 	'lien_trier_statut' => 'Estatusagatik sailkatu',
 	'lien_voir_en_ligne' => 'LINEAN IKUSI :',
-	'logo_article' => 'Artikuluaren logotipoa...', # MODIF
-	'logo_auteur' => 'EGILEAREN LOGOA', # MODIF
-	'logo_rubrique' => 'ATALAREN LOGOA', # MODIF
-	'logo_site' => 'GUNEAREN LOGOA', # MODIF
-	'logo_standard_rubrique' => 'ATALEN LOGO ESTANDARRA', # MODIF
-	'logo_survol' => 'LOGOA BEGIRATUAGATIK', # MODIF
+	'logo_article' => 'Artikuluaren logotipoa...',
+	'logo_auteur' => 'Egilearen logotipoa',
+	'logo_rubrique' => 'Atalaren logotipoa',
+	'logo_site' => 'Gunearen logoa',
+	'logo_standard_rubrique' => 'Atalen logo estandarra',
+	'logo_survol' => 'Gainetik pasatzerako logotipoa',
 
 	// M
 	'menu_aide_installation_choix_base' => 'Zure basearen aukera',
@@ -740,13 +740,13 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugin_librairies_installees' => 'Instalatutako liburutegiak',
 	'plugin_necessite_lib' => 'plugin hunek @lib@ liburutegia beharesten du.',
 	'plugin_necessite_plugin' => 'Beharretsia : @plugin@ plugina @version@ bertsio minimoarekin.',
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
+	'plugin_necessite_plugin_sans_version' => '@plugin@ plugina behar du.',
 	'plugin_necessite_spip' => 'SPIPen @version@ bertsio minimoa behar du.',
 	'plugin_source' => 'iturria: ',
 	'plugin_titre_automatique' => 'Instalazio automatikoa',
 	'plugin_titre_automatique_ajouter' => 'Plugin batzu gehitu',
 	'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
-	'plugin_titre_modifier' => 'Mes plugins', # NEW
+	'plugin_titre_modifier' => 'Nire pluginak',
 	'plugin_zip_active' => 'Aktibatzeko, segitu',
 	'plugin_zip_adresse' => 'Hemen zehaz eazu deskargatu nahi duzun plugin  baten zip fitxategiaren helbidea, edo plugin zerrenda baten helbidea.',
 	'plugin_zip_adresse_champ' => 'pluginaren edo zerrendaren helbidea ',
@@ -760,13 +760,13 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugins_actifs' => '@count@ plugin aktibatuak.',
 	'plugins_actifs_liste' => 'Actifs', # NEW
 	'plugins_compte' => '@count@ plugin',
-	'plugins_disponible_un' => 'Un plugin disponible.', # NEW
+	'plugins_disponible_un' => 'Plugin bat eskuragarri.',
 	'plugins_disponibles' => '@count@ plugin erabilgarriak',
 	'plugins_erreur' => 'Errorea pluginetan : @plugins@',
 	'plugins_liste' => 'Pluginen zerrenda',
 	'plugins_liste_dist' => 'Extensions', # NEW
 	'plugins_recents' => 'Plugins récents.', # NEW
-	'plugins_tous_liste' => 'Tous', # NEW
+	'plugins_tous_liste' => 'Denak',
 	'plugins_vue_hierarchie' => 'Hierarkia',
 	'plugins_vue_liste' => 'Zerrenda',
 	'protocole_ldap' => 'Protokoloaren bersioa :',
@@ -795,7 +795,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'taille_cache_infinie' => 'Gune honek ez du ezartzen CACHE direktorioaren tamaina-mugaketarik.',
 	'taille_cache_maxi' => 'SPIP-ek gune honen CACHE direktorioaren tamaina mugatzen saiatzen da @octets@ datura gutxi gora-behera.',
 	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
-	'taille_cache_octets' => 'Cachearen tamaina orain @octets@-koa da.', # MODIF
+	'taille_cache_octets' => 'Cache-aren tamaina orain @octets@-koa da.',
 	'taille_cache_vide' => 'Cachea hutsik dago.',
 	'taille_repertoire_cache' => 'Cache direktorioaren tamaina',
 	'text_article_propose_publication' => 'Argitarapenerako proposatutako artikulua.',
@@ -839,11 +839,11 @@ zure ostapen zuzkitzaileak SQL jasaten badu, han aurkitu beharko zenituzke SQL z
 	'texte_effacer_base' => 'Ezabatu SPIP datu-basea',
 	'texte_effacer_donnees_indexation' => 'Indexazio datak ezabatu',
 	'texte_effacer_statistiques' => 'Estatistikak ezabatu',
-	'texte_en_cours_validation' => 'Azpiko artikuluak eta berri laburrak argitarapenerako proposatuta daude.', # MODIF
+	'texte_en_cours_validation' => 'Azpiko edukiak argitarapenerako proposatuta daude.',
 	'texte_enrichir_mise_a_jour' => 'Zure testuaren formatua aberastu dezakezu,"tipografia-lasterbideak" erabiliz',
-	'texte_fichier_authent' => 'SPIP-ek sortu behar al ditu.htpasswd et .htpasswd-admin fitxategi bereziak ecrire/data/ direktorioan
-Fitxategi hauek egileei eta administrazaileei zure guneko inguru batzutan (adibidez, kanpoko estatistika-programa) sarbidea murrizteko balio ahal dute.
-Ez baduzu baliagarritasunik, aukera hau bere balio lehenetsiari utzi ahal diozu (fitxategien sortzerik ez).', # MODIF
+	'texte_fichier_authent' => '<b>SPIP-ek sortu behar ote ditu <tt>.htpasswd</tt> et <tt>.htpasswd-admin</tt> fitxategi bereziak @dossier@ direktorioan ?</b>
+<p>Fitxategi hauek egileei eta administrazaileei zure guneko inguru batzutan (adibidez, kanpoko estatistika-programa) sarbidea murrizteko baliatzen ahal ditzakezu.</p>
+<p>Ez bazaizu baliagarri, aukera hau bere lehentasunezko balioan utz dezakezu (fitxategien sortzerik ez).</p>',
 	'texte_informations_personnelles_1' => 'Sistemak oraintokirako norberako sarrera sortuko du.',
 	'texte_informations_personnelles_2' => '(Oharra : berrinstalazio batez ari bagara, eta zure sarbidea beti funtzionatzen duela, ahal duzu',
 	'texte_introductif_article' => '(Artikuluaren sarrera.)',
@@ -869,7 +869,7 @@ beraz komando hau salbuespenezkomodurako bakarrik da probetxugarria.',
 	'texte_non_compresse' => 'konpresiorikgabe (zure zerbitzariak ez du funtzionalitate hau jasaten)',
 	'texte_nouveau_message' => 'Mezu berria',
 	'texte_nouvelle_version_spip_1' => 'SPIPren bertsio berri bat instalatu duzu.',
-	'texte_nouvelle_version_spip_2' => 'Bertsioberri honek ohiko eguneratze osoago bat behar du. Guneko web arduraduna bazara,mesedez ecrire direktorioko inc_connect.php3 fitxategia ezabatu eta instalazioariberriro ekin zure konexio-parametroak eguneratzeko datu-basean.(NB. : zure konexio-parametroak ahaztu badituzu, inc_connect.php3 fitxategiagainbegiratu ezabatu aurretik...)', # MODIF
+	'texte_nouvelle_version_spip_2' => 'Bertsio berri honek ohikoa baino osoago den eguneratze bat behar du. Gunearen web-arduraduna bazara, otoi @connect@ fitxategia ezaba ezazu eta instalazioari berriro ekin iezaiozu zure datu-basearekilako konexio-parametroak eguneratzeko. (NB. : zure konexio-parametroak ahaztu badituzu, @connect@ fitxategia begira ezazu ezabatu aurretik...)',
 	'texte_operation_echec' => 'Lehengo orriraitzuli, beste base bat aukeratu edo base berri bat sortu. Zure ostapen zuzkitzaileakemandako argibideak egiaztatu.',
 	'texte_plus_trois_car' => '3 karakter baino gehiago',
 	'texte_plusieurs_articles' => '"@cherche_auteur@" irizpiderako autore bat bainogehiago aurkitu egin dira:',
@@ -885,9 +885,8 @@ Orokorrean, aukera hau hutsik geratuko da.',
 	'texte_recapitiule_liste_documents' => 'Orri honek ataletan sartu dituzun dokumentu lista osoa erakusten du. Dokumentu bakoitzaren argibideak aldatzeko, erabili bere ataleko lotura.',
 	'texte_recuperer_base' => 'Datuen Basea konpondu',
 	'texte_reference_mais_redirige' => 'Zure tokianerreferentziatutako artikulua eta beste URL batengana berzuzenduta.',
-	'texte_requetes_echouent' => 'SQL eskaera batzuk sistematikoki huts egiten dutenean eta badirudi ez dagoelaarrazoirik,posible da datu basea bera huts egiten ari dela. SQL-k gaitasun bat daukabere taulak konpontzeko istripu baten erruz hondatuak izan direnean. 
-Hemenkonponketa hau egiten saia zaitezke; huts eginez gero, gorde emaitzaren kopia bat,posible baita huts egitearen aztarnak izatea... 
-Arazoa berriro gertatzen baldin bada, zureostatu-sariaren hornitzailearekin kontaktuan jarri.', # MODIF
+	'texte_requetes_echouent' => '<b>SQL eskaera batzuk sistematikoki eta agerian dagoen arrazoirik gabe huts egiten dutenean, datu-basea berarengatik izatea posible da.<b><p>Zure SQL zerbitzariak bere taulak konpontzeko gaitasun bat dauka istripu baten erruz hondatuak izan direnean. Hemen konponketa hau egiten saia zaitezke; huts eginez gero, gorde emaitzaren kopia bat, posible baita huts egitearen aztarnak izatea...</p><p>
+Arazoa berriro gertatzen baldin bada, zure aterbetzailearekin harremanetan jar zaitez.</p>',
 	'texte_selection_langue_principale' => 'Jarraian tokiaren "hizkuntza nagusia" aukeradezakezu. Aukera honek ez du behartzen - zorionez!- artikuluak aukeratutakohizkuntzan idaztera, baina, besteak beste, gauza hauek zehaztu ahal dira:Besteak adierazi ezean, toki publikoan dataren formatua;Testuak errepikatzeko SPIP-ek erabili behar duen motor tipografikoaren natura;Toki publikoaren formularioetan erabilitako hizkuntza;Besteak adierazi ezean, gune pribatuan erakutsitako hizkuntza.',
 	'texte_sous_titre' => 'Azpititulua',
 	'texte_statistiques_visites' => '(barra ilunak : igandea / kurbailuna : ertainaren eboluzioa)',
@@ -929,7 +928,7 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 	'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 	'titre_cadre_signature_obligatoire' => 'Izenpetzea [Derrigorrezkoa]',
 	'titre_config_contenu_notifications' => 'Notifications', # NEW
-	'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
+	'titre_config_contenu_prive' => 'Eremu pribatuan',
 	'titre_config_contenu_public' => 'Sur le site public', # NEW
 	'titre_config_fonctions' => 'Tokiaren konfigurazioa',
 	'titre_config_langage' => 'Configurer la langue', # NEW
@@ -939,8 +938,8 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 	'titre_connexion_ldap' => 'Aukerak: zure LDAP konexioa',
 	'titre_groupe_mots' => 'Hitzen taldea',
 	'titre_identite_site' => 'Identité du site', # NEW
-	'titre_langue_article' => 'ARTIKULUKOHIZKUNTZA', # MODIF
-	'titre_langue_rubrique' => 'ATALAREN HIZKUNTZA', # MODIF
+	'titre_langue_article' => 'Artikuluaren hizkuntza',
+	'titre_langue_rubrique' => 'Atalaren hizkuntza',
 	'titre_langue_trad_article' => 'ARTIKULUKO HIZKUNTZA ETA ITZULPENAK',
 	'titre_les_articles' => 'Artikuluak',
 	'titre_messagerie_agenda' => 'Mezutegia eta agenda',
@@ -976,12 +975,12 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 	'trad_article_inexistant' => 'Zenbaki horrekin ez dago artikulurik',
 	'trad_article_traduction' => 'Artikulu honen bertsio guztiak:',
 	'trad_deja_traduit' => 'Errorea : Artikulu hau ezin da eskatutako zenbakiari lotu.',
-	'trad_delier' => 'Jada ez lotuartikulu hau bere itzulpenekin ', # MODIF
+	'trad_delier' => 'Itzulpen hauetarik deslotu',
 	'trad_lier' => 'Artikulu hau artikuluaren itzulpena da',
-	'trad_new' => 'Artikulu honen itzulpen berria idatzi', # MODIF
+	'trad_new' => 'Artikulu honen itzulpen berria idatzi',
 
 	// U
-	'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
+	'upload_info_mode_document' => 'Irudi hau portfolioan ezarri',
 	'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
 	'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.', # NEW
 	'utf8_convert_avertissement' => 'Vous vous apprêtez à convertir le contenu de votre base de données (articles, brèves, etc) du jeu de caractères <b>@orig@</b> vers le jeu de caractères <b>@charset@</b>.', # NEW

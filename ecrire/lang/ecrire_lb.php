@@ -421,7 +421,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'info_non_modifiable' => 'kann nët geännert ginn',
 	'info_non_suppression_mot_cle' => 'ech kann dëst Schlësselwuert nët läschen.',
 	'info_note_numero' => 'Note @numero@', # NEW
-	'info_notes' => 'Notizen',
+	'info_notes' => 'Anmerkungen', # war als "Notizen" übersetzt
 	'info_nouveaux_message' => 'Nei Messagen',
 	'info_nouvel_article' => 'Neien Artikel',
 	'info_nouvelle_traduction' => 'Nei Iwwersetzung:',
