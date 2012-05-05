@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil_site' => 'Ataria', # MODIF
+	'accueil_site' => 'Ataria',
 	'article' => 'Artikulu',
 	'articles' => 'Artikuluak',
 	'articles_auteur' => 'Egile honen artikuluak',
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Guneari buruz iruzkina egin',
-	'contact' => 'Contact', # NEW
+	'contact' => 'Harremanetarako',
 	'copie_document_impossible' => 'Dokumentua ezin da kopiatu',
 
 	// D
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meme_rubrique' => 'Atal berean',
 	'memes_auteurs' => 'Egile beretik',
 	'message' => 'Mezua',
-	'messages_forum' => 'Foroetako mezuak', # MODIF
+	'messages_forum' => 'Mezuak',
 	'messages_recents' => 'Foroetako azken mezuak',
 	'mots_clef' => 'Gako-hitz',
 	'mots_clefs' => 'Gako-hitz',
