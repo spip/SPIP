@@ -62,23 +62,35 @@ function expression_recherche($recherche, $options) {
 	include_spip('inc/charsets');
 	$recherche = trim(translitteration($recherche));
 
-	// s'il y a plusieurs mots il faut les chercher tous : oblige REGEXP
-	$recherche = preg_replace(',\s+,'.$u, '|', $recherche);
+	$is_preg = false;
+	if (substr($recherche,0,1)=='/' AND substr($recherche,-1,1)=='/'){
+		// c'est une preg
+		$preg = $recherche.$options['preg_flags'];
+		$is_preg = true;
+	}
+	else{
+		// s'il y a plusieurs mots il faut les chercher tous : oblige REGEXP
+		if (preg_match(",\s+,".$u, $recherche)){
+			$is_preg = true;
+			$recherche = preg_replace(',\s+,'.$u, '|', $recherche);
+		}
 
-	$preg = '/'.str_replace('/', '\\/', $recherche).'/' . $options['preg_flags'];
+		$preg = '/'.str_replace('/', '\\/', $recherche).'/' . $options['preg_flags'];
+	}
+
 	// Si la chaine est inactive, on va utiliser LIKE pour aller plus vite
 	// ou si l'expression reguliere est invalide
-	if (preg_quote($recherche, '/') == $recherche
-	OR (@preg_match($preg,'')===FALSE) ) {
+	if (!$is_preg
+	  OR (@preg_match($preg,'')===FALSE) ) {
 		$methode = 'LIKE';
 		$u = $GLOBALS['meta']['pcre_u'];
-		// eviter les parentheses qui interferent avec pcre par la suite (dans le preg_match_all) s'il y a des reponses
+		// eviter les parentheses et autres caractères qui interferent avec pcre par la suite (dans le preg_match_all) s'il y a des reponses
 		$recherche = str_replace(
-			array('(',')','?','[', ']'),
-			array('\(','\)','[?]', '\[', '\]'),
+			array('(',')','?','[', ']', '+', '*', '/'),
+			array('\(','\)','[?]', '\[', '\]', '\+', '\*', '\/'),
 			$recherche);
 		$recherche_mod = $recherche;
-		
+
 		// echapper les % et _
 		$q = str_replace(array('%','_'), array('\%', '\_'), trim($recherche));
 		// les expressions entre " " sont un mot a chercher tel quel
@@ -105,7 +117,7 @@ function expression_recherche($recherche, $options) {
 
 	} else {
 		$methode = 'REGEXP';
-		$q = sql_quote($recherche);
+		$q = sql_quote(substr($recherche,1,-1));
 	}
 
 	return array($methode, $q, $preg);
