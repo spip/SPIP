@@ -2743,9 +2743,10 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 			return $objets[$type_objet] = false;
 
 		// Si on demande le titre, on le gere en interne
+		$champ_titre = "";
 		if ($demande_titre){
-			$champ_titre = isset($desc['titre'])?$desc['titre']:'titre';
-			$champ_titre = ", $champ_titre";
+			// si pas de titre declare mais champ titre, il sera peuple par le select *
+			$champ_titre = (!empty($desc['titre'])) ? ', ' . $desc['titre']:'';
 		}
 		include_spip('base/abstract_sql');
 		include_spip('base/connect_sql');
@@ -2756,25 +2757,26 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 		);
 	}
 
-	if ($demande_titre)
-		$info_generee = $objets[$type_objet][$id_objet]['titre'];
-	// Si la fonction generer_TRUC_entite existe, on l'utilise
+	// Si la fonction generer_TRUC_TYPE existe, on l'utilise pour formater $info_generee
+	if ($generer = charger_fonction("generer_${info}_${type_objet}", '', true))
+		$info_generee = $generer($id_objet, $objets[$type_objet][$id_objet]);
+	// Si la fonction generer_TRUC_entite existe, on l'utilise pour formater $info_generee
 	else if ($generer = charger_fonction("generer_${info}_entite", '', true))
 		$info_generee = $generer($id_objet, $type_objet, $objets[$type_objet][$id_objet]);
-	// Sinon on prend le champ SQL
+	// Sinon on prend directement le champ SQL tel quel
 	else
-		$info_generee = $objets[$type_objet][$id_objet][$info];
+		$info_generee = (isset($objets[$type_objet][$id_objet][$info])?$objets[$type_objet][$id_objet][$info]:'');
 
 	// On va ensuite chercher les traitements automatiques a faire
-	$maj = strtoupper($info);
-	$traitement = $table_des_traitements[$maj];
+	$champ = strtoupper($info);
+	$traitement = $table_des_traitements[$champ];
 	$table_objet = table_objet($type_objet);
 
 	if (!$etoile
 		AND is_array($traitement)
 	  AND (isset($traitement[$table_objet]) OR isset($traitement[0]))){
 		$traitement = $traitement[isset($traitement[$table_objet]) ? $table_objet : 0];
-		$traitement = str_replace('%s', '"'.str_replace('"', '\\"', $info_generee).'"', $traitement);
+		$traitement = str_replace('%s', "'".texte_script($info_generee)."'", $traitement);
 		eval("\$info_generee = $traitement;");
 	}
 
