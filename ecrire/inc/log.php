@@ -36,7 +36,7 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 
 	if (!isset($test_repertoire[$d = dirname($logfile)])) {
 		$test_repertoire[$d] = false; // eviter une recursivite en cas d'erreur de sous_repertoire
-		$test_repertoire[$d] = sous_repertoire($d, '', false, true);
+		$test_repertoire[$d] = (@is_dir($d)?true:(function_exists('sous_repertoire')?sous_repertoire($d, '', false, true):false));
 	}
 
 	// si spip_log() dans mes_options, ou repertoire log/ non present, poser dans tmp/
