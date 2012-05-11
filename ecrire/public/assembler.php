@@ -127,9 +127,13 @@ function assembler($fond, $connect='') {
 			// produire la page : peut mettre a jour $lastmodified
 			$produire_page = charger_fonction('produire_page','public');
 			$page = $produire_page($fond, $GLOBALS['contexte'], $use_cache, $chemin_cache, NULL, $page, $lastmodified, $connect);
-			if ($page === '')
-				erreur_squelette(_T('info_erreur_squelette2',
-					array('fichier'=>htmlspecialchars($fond).'.'._EXTENSION_SQUELETTES)));
+			if ($page === '') {
+				$erreur = _T('info_erreur_squelette2',
+					array('fichier'=>htmlspecialchars($fond).'.'._EXTENSION_SQUELETTES));
+				erreur_squelette($erreur);
+				// eviter des erreurs strictes ensuite sur $page['cle'] en PHP >= 5.4
+				$page = array('texte' => '', 'erreur' => $erreur);
+			}
 		}
 
 		if ($page AND $chemin_cache) $page['cache'] = $chemin_cache;
