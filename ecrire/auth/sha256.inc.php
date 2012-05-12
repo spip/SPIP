@@ -213,7 +213,6 @@ if (!class_exists('nanoSha2'))
 					for($i = 0; $i < count($ords) * $this->bytesString; $i += $this->bytesString)
 						$bin[$i>>5] |= ($ords[$i / $this->bytesString] & $mask) << (24 - $i%32);
 					$bin[] = $length*$this->bytesString;
-					var_dump($bin);
 					return $bin;
 				}
 
