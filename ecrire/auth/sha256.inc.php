@@ -207,11 +207,13 @@ if (!class_exists('nanoSha2'))
 					$npad = $npad/$this->bytesString;
 					$length = count($ords);
 					$ords[] = 0x80; // append the "1" bit followed by 7 0's
-					$ords = array_pad($ords,ceil(($length+32/$this->bytesString)/$npad)*$npad-32/$this->bytesString,0);
+					$pad = ceil(($length+1+32/$this->bytesString)/$npad)*$npad-32/$this->bytesString;
+					$ords = array_pad($ords,$pad,0);
 					$mask = (1 << $this->bytesString) - 1;
 					for($i = 0; $i < count($ords) * $this->bytesString; $i += $this->bytesString)
 						$bin[$i>>5] |= ($ords[$i / $this->bytesString] & $mask) << (24 - $i%32);
 					$bin[] = $length*$this->bytesString;
+					var_dump($bin);
 					return $bin;
 				}
 

@@ -25,7 +25,7 @@ function core_sha256 (m, l) {
     var T1, T2;
     /* append padding */
     m[l >> 5] |= 0x80 << (24 - l % 32);
-    m[((l + 64 >> 9) << 4) + 15] = l;
+    m[((l + 32 >> 9) << 4) + 15] = l;
     for ( var i = 0; i<m.length; i+=16 ) {
         a = HASH[0]; b = HASH[1]; c = HASH[2]; d = HASH[3]; e = HASH[4]; f = HASH[5]; g = HASH[6]; h = HASH[7];
         for ( var j = 0; j<64; j++) {
