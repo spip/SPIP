@@ -358,7 +358,7 @@ class IterateurDATA implements Iterator {
 	}
 
 	/**
-	 * Ordonner les resurltats
+	 * Ordonner les resultats
 	 * {par x}
 	 * 
 	**/
@@ -366,7 +366,8 @@ class IterateurDATA implements Iterator {
 		$sortfunc = '';
 		$aleas = 0;
 		foreach($this->command['orderby'] as $tri) {
-			if (preg_match(',^\.?([/\w]+)( DESC)?$,iS', $tri, $r)) {
+			// virer le / initial pour les criteres de la forme {par /xx}
+			if (preg_match(',^\.?([/\w]+)( DESC)?$,iS', ltrim($tri, '/'), $r)) {
 				// tri par cle
 				if ($r[1] == 'cle'){
 					if ($r[2])
@@ -414,7 +415,8 @@ class IterateurDATA implements Iterator {
 	 * 
 	**/
 	protected function select_groupby() {
-		if (strlen($fusion = $this->command['groupby'][0])) {
+		// virer le / initial pour les criteres de la forme {fusion /xx}
+		if (strlen($fusion = ltrim($this->command['groupby'][0], '/'))) {
 			$vu = array();
 			foreach($this->tableau as $k => $v) {
 				$val = table_valeur($v, $fusion);
