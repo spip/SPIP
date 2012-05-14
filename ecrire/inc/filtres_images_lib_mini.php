@@ -104,6 +104,18 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		$source = $img;
 		$img = "<img src='$source' />";
 	}
+	# gerer img src="data:....base64"
+	else if (preg_match('@^data:image/(jpe?g|png|gif);base64,(.*)$@isS', $source, $regs)) {
+		$local = sous_repertoire(_DIR_VAR,'image-data').md5($regs[2]).'.'.str_replace('jpeg', 'jpg', $regs[1]);
+		if (!file_exists($local)) {
+			ecrire_fichier($local, base64_decode($regs[2]));
+		}
+		$source = $local;
+		$img = inserer_attribut($img, 'src', $source);
+		# eviter les mauvaises surprises lors de conversions de format
+		$img = inserer_attribut($img, 'width', '');
+		$img = inserer_attribut($img, 'height', '');
+	}
 
 	// les protocoles web prennent au moins 3 lettres
 	if (preg_match(';^(\w{3,7}://);', $source)){
