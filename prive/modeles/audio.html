@@ -3,8 +3,8 @@
 	style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#ENV{largeur}|max{120})px]']>
 <object	data='#URL_DOCUMENT' 
 	type='#MIME_TYPE'
-	width='#ENV{largeur, #LARGEUR}'
-	height='#ENV{hauteur, #HAUTEUR}' >
+	width='#ENV{largeur, 150}'
+	height='#ENV{hauteur, 20}' >
 	<param name='src' value='#URL_DOCUMENT' />
 	[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
 	[(#ENV*|env_to_params)]
