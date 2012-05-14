@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************************\
+/* *************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
  *  Copyright (c) 2001-2012                                                *
@@ -10,6 +10,13 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier contient les fonctions gerant
+ * les instructions SQL pour MySQL
+ *
+ * @package SQL\MySQL
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // fonction pour la premiere connexion a un serveur MySQL
@@ -310,7 +317,16 @@ function traite_query($query, $db='', $prefixe='') {
 	return $r;
 }
 
-// http://doc.spip.org/@spip_mysql_selectdb
+/**
+ * Selectionne une base de donnees
+ *
+ * @param string $nom
+ * 		Nom de la base a utiliser
+ * 
+ * @return bool
+ * 		True cas de success.
+ * 		False en cas d'erreur.
+**/
 function spip_mysql_selectdb($db) {
 	$ok = mysql_select_db($db);
 	if (!$ok)
@@ -319,10 +335,21 @@ function spip_mysql_selectdb($db) {
 }
 
 
-// Retourne les bases accessibles
-// Attention on n'a pas toujours les droits
-
-// http://doc.spip.org/@spip_mysql_listdbs
+/**
+ * Retourne les bases de donnees accessibles 
+ *
+ * Retourne un tableau du nom de toutes les bases de donnees
+ * accessibles avec les permissions de l'utilisateur SQL
+ * de cette connexion.
+ * Attention on n'a pas toujours les droits !
+ * 
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool $requeter
+ * 		Inutilise
+ * @return array
+ * 		Liste de noms de bases de donnees
+**/
 function spip_mysql_listdbs($serveur='',$requeter=true) {
 	$dbs = array();
 	if ($res = spip_mysql_query("SHOW DATABASES")){
@@ -392,10 +419,12 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 
 
 /**
- * $query est une requete ou une liste de champs
+ * Adapte pour Mysql la declaration SQL d'une colonne d'une table
  *
- * @param  $query
- * @return mixed
+ * @param string $query
+ * 		Definition SQL d'un champ de table
+ * @return string
+ * 		Definition SQL adaptee pour MySQL d'un champ de table
  */
 function _mysql_remplacements_definitions_table($query){
 	// quelques remplacements

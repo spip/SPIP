@@ -321,7 +321,7 @@ function sql_alter($q, $serveur='', $option=true) {
  * 		- true -> executer la requete
  * 		- continue -> ne pas echouer en cas de serveur sql indisponible
  * 
- * @ return array
+ * @return array
  * 		Tableau de cles (colonnes SQL ou alias) / valeurs (valeurs dans la colonne de la table ou calculee)
  * 		presentant une ligne de resultat d'une selection 
  */
@@ -348,7 +348,7 @@ function sql_fetch($res, $serveur='', $option=true) {
  * 		- true -> executer la requete
  * 		- continue -> ne pas echouer en cas de serveur sql indisponible
  * 
- * @ return array
+ * @return array
  * 		Tableau contenant les enregistrements.
  * 		Chaque entree du tableau est un autre tableau
  * 		de cles (colonnes SQL ou alias) / valeurs (valeurs dans la colonne de la table ou calculee)
@@ -397,7 +397,27 @@ function sql_seek($res, $row_number, $serveur='', $option=true) {
 	return $r;
 }
 
-// http://doc.spip.org/@sql_listdbs
+
+/**
+ * Liste des bases de donnees accessibles
+ *
+ * Retourne un tableau du nom de toutes les bases de donnees
+ * accessibles avec les permissions de l'utilisateur SQL
+ * de cette connexion.
+ * Attention on n'a pas toujours les droits !
+ *
+ * @api
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool|string $option
+ * 		Peut avoir 2 valeurs : 
+ * 		- true -> executer la requete
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible
+ * 
+ * @return array|bool
+ * 		Tableau contenant chaque nom de base de donnees.
+ * 		False en cas d'erreur.
+**/
 function sql_listdbs($serveur='', $option=true) {
 	$f = sql_serveur('listdbs', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
@@ -406,7 +426,24 @@ function sql_listdbs($serveur='', $option=true) {
 	return $r;
 }
 
-// http://doc.spip.org/@sql_selectdb
+
+/**
+ * Demande d'utiliser d'une base de donnees
+ *
+ * @api
+ * @param string $nom
+ * 		Nom de la base a utiliser
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool|string $option
+ * 		Peut avoir 2 valeurs : 
+ * 		- true -> executer la requete
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible
+ * 
+ * @return bool|string
+ * 		True ou nom de la base en cas de success.
+ * 		False en cas d'erreur.
+**/
 function sql_selectdb($nom, $serveur='', $option=true)
 {
 	$f = sql_serveur('selectdb', $serveur,  $option==='continue' OR $option===false);
