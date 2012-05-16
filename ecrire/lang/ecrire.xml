@@ -53,6 +53,7 @@
 		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
 		<traducteur nom="RealET" lien="http://trad.spip.org/auteur/realet" />
 		<traducteur nom="orlammd" lien="http://trad.spip.org/auteur/orlammd" />
+		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
 	<langue code="gl" url="http://trad.spip.org/tradlang_module/ecrire_?lang_cible=gl">
 		<traducteur nom="Antón Méixome" lien="http://trad.spip.org/auteur/anton-meixome" />

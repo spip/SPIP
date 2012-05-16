@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'Plugin aktivieren',
 	'affichage' => 'Anzeigen',
 	'aide_non_disponible' => 'Teil der Online-Hilfe in dieser Sprache noch nicht verfügbar.',
-	'annuler_recherche' => 'Annuler la recherche', # NEW
+	'annuler_recherche' => 'Sucheingabe löschen',
 	'auteur' => 'Autor:',
 	'avis_acces_interdit' => 'Zugang verweigert.',
 	'avis_article_modifie' => 'Achtung, @nom_auteur_modif@ hat vor @date_diff@ Minute(n) an diesem Artikel gearbeitet.',
@@ -114,7 +114,7 @@ französischen SPIP-Dokumentation</a>.',
 	'connexion_ldap' => 'Verbindung:',
 	'copier_en_local' => 'Lokale Koipe',
 	'creer_et_associer_un_auteur' => 'Autor anlegen und zuordnen',
-	'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
+	'creer_et_associer_une_rubrique' => 'Neue Rubrik anlegen und zuordnen',
 
 	// D
 	'date_mot_heures' => 'Stunden',
@@ -373,7 +373,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 	'info_langues' => 'Sprachen der Website',
 	'info_ldap_ok' => 'Die LDAP-Authentifizierung ist installiert.',
 	'info_lien_hypertexte' => 'Hyperlink:',
-	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
+	'info_liste_nouveautes_envoyee' => 'Die Liste der Neuerscheinungen wurde versand.',
 	'info_liste_redacteurs_connectes' => 'Liste der zur Zeit angemeldeten Redakteure',
 	'info_login_existant' => 'Dieses Login ist bereits vergeben.',
 	'info_login_trop_court' => 'Login zu kurz.',
@@ -734,7 +734,7 @@ in einer Farbe, die den Status anzeigt :',
 	'plugin_info_necessite' => 'Erfordert:',
 	'plugin_info_non_compatible_spip' => 'Dieses Plugin ist nicht mit SPIP kompatibel.',
 	'plugin_info_plugins_dist_1' => 'Diese Erweiterungen liegen im Verzeichnis @plugins_dist@ und werden dort aktiviert.',
-	'plugin_info_plugins_dist_2' => 'Man kann sie nicht deaktivieren.', # MODIF
+	'plugin_info_plugins_dist_2' => 'Man kann sie nicht deaktivieren.',
 	'plugin_info_telecharger' => 'herunterladen von @url@ und in @rep@ installieren',
 	'plugin_librairies_installees' => 'Installierte Bibliotheken',
 	'plugin_necessite_lib' => 'Dieses Plugin benötigt die Bibliothek @lib@',
@@ -772,12 +772,12 @@ in einer Farbe, die den Status anzeigt :',
 
 	// Q
 	'queue_executer_maintenant' => 'Jetzt ausführen',
-	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
+	'queue_info_purger' => 'Sie können alle anstehenden Jobs löschen und so die Liste der regelmäßigen Jobs neu initialisieren.',
 	'queue_nb_jobs_in_queue' => '@nb@ Jobs in der Warteschlange',
 	'queue_next_job_in_nb_sec' => 'Nächster Job in @nb@ s',
 	'queue_no_job_in_queue' => 'Keine Aufgaben in der Warteschlange',
 	'queue_one_job_in_queue' => '1 Job in der Warteschlange',
-	'queue_purger_queue' => 'Jobliste löschen', # MODIF
+	'queue_purger_queue' => 'Jobliste löschen',
 	'queue_titre' => 'Jobliste',
 
 	// R
@@ -794,7 +794,7 @@ in einer Farbe, die den Status anzeigt :',
 	'taille_cache_infinie' => 'Die Grösse des <code>CACHE/</code> dieser Website wird nicht begrenzt.',
 	'taille_cache_maxi' => 'SPIP versucht die Grösse des <code>CACHE/</code> der Website auf ca. <b>@octets@</b> Byte zu begrenzen.',
 	'taille_cache_moins_de' => 'Die Größe des Caches beträgt mindestens  @octets@.',
-	'taille_cache_octets' => 'Aktuelle Grösse des Cache: @octets@ Byte', # MODIF
+	'taille_cache_octets' => 'Aktuelle Grösse des Cache: @octets@ Byte',
 	'taille_cache_vide' => 'Der Cache ist leer.',
 	'taille_repertoire_cache' => 'Grösse des Cache-Verzeichnis',
 	'text_article_propose_publication' => 'Dieser Artikel ist zur Veröffentlichung vorgeschlagen.',
