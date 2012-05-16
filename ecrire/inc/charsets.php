@@ -771,6 +771,23 @@ function spip_substr_manuelle($c, $start, $length = NULL) {
 	return spip_substr_manuelle($c, 0, spip_strlen($c)+$length);
 }
 
+/**
+ * version utf-8 d'ucfirst
+ * @param $c string
+ * @return $c string La chaine avec une majuscule sur le premier mot 
+ */
+function spip_ucfirst($c){
+	// Si ce n'est pas utf-8, utiliser ucfirst 
+	if ($GLOBALS['meta']['charset'] != 'utf-8')
+		return ucfirst($c);
+	// Si on n'a pas mb_* on utilise ucfirst
+	if (!init_mb_string())
+		return ucfirst($c);
+	
+	$lettre1 = mb_strtoupper(spip_substr($c,0,1));
+	return $lettre1.spip_substr($c,1);
+}
+
 // http://doc.spip.org/@spip_strlen
 function spip_strlen($c) {
 	// Si ce n'est pas utf-8, utiliser strlen
