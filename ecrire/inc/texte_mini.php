@@ -247,7 +247,7 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	if (	$offset<$length
 			&& ($p_tag_ouvrant = strpos($texte,'<',$offset))!==NULL){
 		$p_tag_fermant = strpos($texte,'>',$offset);
-		if ($p_tag_fermant<$p_tag_ouvrant)
+		if ($p_tag_fermant && ($p_tag_fermant<$p_tag_ouvrant))
 			$offset = $p_tag_fermant+1; // prolonger la coupe jusqu'au tag fermant suivant eventuel
 	}
 	$texte = substr($texte, 0, $offset); /* eviter de travailler sur 10ko pour extraire 150 caracteres */
