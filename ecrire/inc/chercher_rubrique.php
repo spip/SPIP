@@ -103,7 +103,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	if ($niv == 1
 	AND $decalage_secteur++
 	AND $type != 'breve')
-		$r = "<option value='$root'></option>\n".$r;
+		$r = "<option value='0'></option>\n".$r;
 
 	// et voila le travail
 	return $r.$sous;
