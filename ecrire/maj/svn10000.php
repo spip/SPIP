@@ -474,8 +474,8 @@ function maj_collation_sqlite(){
 
 
 $GLOBALS['maj'][19236] = array(
-	array('sql_updateq','spip_meta',array('impt'=>'oui'),"nom='version_installee"), // version base principale
-	array('sql_updateq','spip_meta',array('impt'=>'oui'),"nom LIKE '%_base_version"),  // version base plugins
+	array('sql_updateq','spip_meta',array('impt'=>'oui'),"nom='version_installee'"), // version base principale
+	array('sql_updateq','spip_meta',array('impt'=>'oui'),"nom LIKE '%_base_version'"),  // version base plugins
 	array('maj_collation_sqlite'),
 );
 

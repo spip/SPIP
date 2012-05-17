@@ -520,7 +520,8 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 	elseif (isset($restreint[$id_auteur])) return $restreint[$id_auteur];
 
 	$rubriques = array();
-	if ($GLOBALS['meta']['version_installee']>16428
+	if (
+		(!isset($GLOBALS['meta']['version_installee']) OR $GLOBALS['meta']['version_installee']>16428)
 	  AND $r = sql_allfetsel('id_objet', 'spip_auteurs_liens', "id_auteur=".intval($id_auteur)." AND objet='rubrique' AND id_objet!=0")
 	  AND count($r)) {
 		$r = array_map('reset',$r);
