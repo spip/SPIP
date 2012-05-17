@@ -790,6 +790,9 @@ function spip_ucfirst($c){
 
 // http://doc.spip.org/@spip_strlen
 function spip_strlen($c) {
+	// On transforme les sauts de ligne pour ne pas compter deux caractères
+	$c = str_replace("\r\n", "\n", $c);
+	
 	// Si ce n'est pas utf-8, utiliser strlen
 	if ($GLOBALS['meta']['charset'] != 'utf-8')
 		return strlen($c);
