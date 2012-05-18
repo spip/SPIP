@@ -905,8 +905,8 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 		façon normale (depuis l\'interface SPIP) sont automatiquement
 		réindexés : cette commande n\'est donc utile que de façon exceptionnelle.',
 	'texte_moteur_recherche_non_active' => 'Le moteur de recherche n\'est pas activé.',
-	'texte_multilinguisme' => 'Si vous souhaitez gérer des articles en plusieurs langues, avec une navigation complexe, vous pouvez ajouter un menu de sélection de langue sur les articles et/ou sur les rubriques, en fonction de l\'organisation de votre site.',
-	'texte_multilinguisme_trad' => 'Vous pouvez également activer un système de gestion de liens entre les différentes traductions d\'un article.',
+	'texte_multilinguisme' => 'Si vous souhaitez gérer des objets en plusieurs langues, avec une navigation complexe, vous pouvez ajouter un menu de sélection de langue sur ces objets, en fonction de l\'organisation de votre site.',
+	'texte_multilinguisme_trad' => 'Vous pouvez également activer un système de gestion de liens entre les différentes traductions sur certains objets.',
 	'texte_non_compresse' => '<i>non compressé</i> (votre serveur ne supportant pas cette fonctionnalité)',
 	'texte_nouveau_message' => 'Nouveau message',
 	'texte_nouvelle_version_spip_1' => 'Vous avez installé une nouvelle version de SPIP.',
