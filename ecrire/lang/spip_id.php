@@ -421,7 +421,7 @@ sera ignorée) :
 	'info_mois_courant' => 'Selama bulan:',
 	'info_mot_cle_ajoute' => 'Kata kunci berikut ditambahkan ke',
 	'info_multi_herit' => 'Bahasa standar',
-	'info_multi_langues_soulignees' => '<u>Bahasa yang digarisbawahi</u> menyediakan terjemahan untuk semua teks tatap muka. Jika anda memilih bahasa-bahasa ini, sebagian besar elemen situs umum (tanggal-tanggal, formulir-formulir) akan diterjemahkan secara otomatis. Untuk bahasa yang tidak bergaris bawah, elemen-elemen tersebut akan muncul dalam bahasa utama situs.',
+	'info_multi_langues_soulignees' => '<u>Bahasa yang digarisbawahi</u> menyediakan terjemahan untuk semua teks tatap muka. Jika anda memilih bahasa-bahasa ini, sebagian besar elemen situs umum (tanggal-tanggal, formulir-formulir) akan diterjemahkan secara otomatis. Untuk bahasa yang tidak bergaris bawah, elemen-elemen tersebut akan muncul dalam bahasa utama situs.', # MODIF
 	'info_multilinguisme' => 'Multi bahasa',
 	'info_nom_non_utilisateurs_connectes' => 'Nama anda tidak muncul di daftar pengguna yang terkoneksi.',
 	'info_nom_utilisateurs_connectes' => 'Nama anda muncul dalam daftar pengguna yang terkoneksi.',

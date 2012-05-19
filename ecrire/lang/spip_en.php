@@ -418,7 +418,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 	'info_mois_courant' => 'During the month:',
 	'info_mot_cle_ajoute' => 'The following keyword was added to',
 	'info_multi_herit' => 'Default language',
-	'info_multi_langues_soulignees' => 'The <u>languages underlined</u> provide translations for all the interface texts. If you select these languages, many elements of the public site (dates, forms) will be translated automatically. As for the languages that are not underlined, those elements will be displayed using the site\'s default language.',
+	'info_multi_langues_soulignees' => 'The <u>languages underlined</u> provide translations for all the interface texts. If you select these languages, many elements of the public site (dates, forms) will be translated automatically. As for the languages that are not underlined, those elements will be displayed using the site\'s default language.', # MODIF
 	'info_multilinguisme' => 'Multilingual',
 	'info_nom_non_utilisateurs_connectes' => 'Your name does not appear in the list of users online.',
 	'info_nom_utilisateurs_connectes' => 'Your name appears in the list of users online.',

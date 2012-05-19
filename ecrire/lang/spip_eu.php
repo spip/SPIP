@@ -417,7 +417,7 @@ Basea konpontzen saiatu, edo zure ostalaitzea kontaktatu.',
 	'info_multi_herit' => 'Hizkuntza lehenetsia',
 	'info_multi_langues_soulignees' => '<u>Azpimarratutako</u> hizkuntzek interfazeko testu guztien itzulpen bat eskaintzen dute. 
 Hizkuntzak horiek hautatzen badituzu, leku publikoko elementu batzuk (datak, inprimakiak) automatikoki itzuliko dira.
-Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agertuko dira.',
+Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agertuko dira.', # MODIF
 	'info_multilinguisme' => 'Hizkuntzaniztasuna',
 	'info_nom_non_utilisateurs_connectes' => 'Zure izena ez da ageri konektatutako pertsonen zerrendan',
 	'info_nom_utilisateurs_connectes' => 'Zure izena konektatuta dauden pertsonen zerrendan ageri da.',

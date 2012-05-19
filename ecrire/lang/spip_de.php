@@ -416,7 +416,7 @@ wird Ihre Adresse beibehalten):
 	'info_mois_courant' => 'Im Lauf des Monats:',
 	'info_mot_cle_ajoute' => 'Das folgende Wort wurde hinzugefügt zu',
 	'info_multi_herit' => 'Standardsprache',
-	'info_multi_langues_soulignees' => 'Die Texte des Interface sind vollständig in die <u>unterstrichenen Sprachen</u> übersetzt. Wenn Sie eine von ihnen wählen, werden viele Elemente der Website automatisch übersetzt (Datumsangaben, Formulare usw.). In den nicht unterstrichenen Sprachen werden diese Elemente in der Hauptsprache der Website angezeigt.',
+	'info_multi_langues_soulignees' => 'Die Texte des Interface sind vollständig in die <u>unterstrichenen Sprachen</u> übersetzt. Wenn Sie eine von ihnen wählen, werden viele Elemente der Website automatisch übersetzt (Datumsangaben, Formulare usw.). In den nicht unterstrichenen Sprachen werden diese Elemente in der Hauptsprache der Website angezeigt.', # MODIF
 	'info_multilinguisme' => 'Mehrsprachigkeit',
 	'info_nom_non_utilisateurs_connectes' => 'Ihr Name wird nicht in der Liste der zur Zeit eingelogten Nutzer angezeigt.',
 	'info_nom_utilisateurs_connectes' => 'Ihr Name wird in der Liste der angemeldeten Nutzer angezeigt.',

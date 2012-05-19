@@ -418,7 +418,7 @@ en el sitio "@nom_site_spip@" (@adresse_login@):',
 	'info_mois_courant' => 'En el mes actual de: ',
 	'info_mot_cle_ajoute' => 'La palabra clave siguiente ha sido añadida al artículo',
 	'info_multi_herit' => 'Idioma por omisión',
-	'info_multi_langues_soulignees' => 'Los <u>idiomas subrayados</u> disponen de una traducción los textos de la interfaz. Si los seleccionas, diversos elementos del sitio público (fechas, formularios) serán traducidos automáticamente. En los idiomas no subrayados, dichos elementos aparecerán en la lengua principal del sitio.',
+	'info_multi_langues_soulignees' => 'Los <u>idiomas subrayados</u> disponen de una traducción los textos de la interfaz. Si los seleccionas, diversos elementos del sitio público (fechas, formularios) serán traducidos automáticamente. En los idiomas no subrayados, dichos elementos aparecerán en la lengua principal del sitio.', # MODIF
 	'info_multilinguisme' => 'Multilingüismo',
 	'info_nom_non_utilisateurs_connectes' => 'Tu nombre no aparece en la lista de personas conectadas',
 	'info_nom_utilisateurs_connectes' => 'Tu nombre aparece en la lista de personas conectadas.',

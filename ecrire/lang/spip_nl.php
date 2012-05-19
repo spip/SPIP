@@ -418,7 +418,7 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 	'info_mois_courant' => 'Gedurende de maand :',
 	'info_mot_cle_ajoute' => 'Het volgende trefwoord is toegevoegd aan ',
 	'info_multi_herit' => 'Standaardtaal',
-	'info_multi_langues_soulignees' => 'De <u>onderlijnde talen</u> zijn alle teksten van de interface vertaald.  Als je een van deze talen kiest, worden automatisch heel wat gegevens (data, formulieren) van de publieke site zullen automatisch vertaald worden. Voor de niet-onderlijnde talen zullen deze gegevens in de hoofdtaal van de site verschijnen.',
+	'info_multi_langues_soulignees' => 'De <u>onderlijnde talen</u> zijn alle teksten van de interface vertaald.  Als je een van deze talen kiest, worden automatisch heel wat gegevens (data, formulieren) van de publieke site zullen automatisch vertaald worden. Voor de niet-onderlijnde talen zullen deze gegevens in de hoofdtaal van de site verschijnen.', # MODIF
 	'info_multilinguisme' => 'Meertaligheid',
 	'info_nom_non_utilisateurs_connectes' => 'Je naam komt niet in de lijst van de redacteuren die online zijn.',
 	'info_nom_utilisateurs_connectes' => 'Je naam komt in de lijst van de redacteuren die online zijn.',

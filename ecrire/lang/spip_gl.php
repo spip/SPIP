@@ -419,7 +419,7 @@ do web "@nom_site_spip@" (@adresse_site@):',
 	'info_mois_courant' => 'Neste mes:',
 	'info_mot_cle_ajoute' => 'A seguinte palabra-clave foi engadida a',
 	'info_multi_herit' => 'Lingua predeterminada',
-	'info_multi_langues_soulignees' => 'As <u>linguas subliñadas</u> benefícianse dunha tradución de todos os textos da interface. Se vostede selecciona estas linguas, haberá numerosos elementos do web público (datos, formularios)que serán automaticamente traducidos. Para as linguas non subliñadas, estes elementos aparecerán na lingua principal do web.',
+	'info_multi_langues_soulignees' => 'As <u>linguas subliñadas</u> benefícianse dunha tradución de todos os textos da interface. Se vostede selecciona estas linguas, haberá numerosos elementos do web público (datos, formularios)que serán automaticamente traducidos. Para as linguas non subliñadas, estes elementos aparecerán na lingua principal do web.', # MODIF
 	'info_multilinguisme' => 'Multilingüismo',
 	'info_nom_non_utilisateurs_connectes' => 'O seu nome non aparece na lista de persoas conectadas.',
 	'info_nom_utilisateurs_connectes' => 'O seu nome aparece na lista de persoas conectadas.',
