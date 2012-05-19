@@ -858,8 +858,8 @@ in einer Farbe, die den Status anzeigt :',
 	'texte_modifier_article' => 'Artikel bearbeiten:',
 	'texte_moteur_recherche_active' => '<b>Die integrierte Suchmaschine ist eingeschaltet.</b> Damit können Sie eine erneute Erfassung aller Seiten erzwingen, wenn Sie z.B. wesentliche Änderungen am Inhalt und Layout Ihrer Site gemacht haben oder eine Sicherungskopie eingespielt haben. Dokumente, die im SPIP Redaktionssystem eingegeben werden, erfasst die Suchmaschine automatisch. Sie benötigen diese Funktion deshalb nur in Ausnahmefällen.',
 	'texte_moteur_recherche_non_active' => 'Suchmaschine ist abgeschaltet.',
-	'texte_multilinguisme' => 'Wenn Sie Artikel in mehreren Sprachen mit entsprecher komplexer Navigation verwalten möchten, können Sie den Rubriken und/oder den Artikeln ein Menü zur Sprachauswahl hinzufügen. Diese Funktion ist abhängig von der Struktur Ihrer Website.',
-	'texte_multilinguisme_trad' => 'Sie können auch ein System zur automatischen Verlinkung der verschiedenen Sprachversionen eines Artikels aktivieren.',
+	'texte_multilinguisme' => 'Wenn Sie Artikel in mehreren Sprachen mit entsprecher komplexer Navigation verwalten möchten, können Sie den Rubriken und/oder den Artikeln ein Menü zur Sprachauswahl hinzufügen. Diese Funktion ist abhängig von der Struktur Ihrer Website.', # MODIF
+	'texte_multilinguisme_trad' => 'Sie können auch ein System zur automatischen Verlinkung der verschiedenen Sprachversionen eines Artikels aktivieren.', # MODIF
 	'texte_non_compresse' => '<i>unkomprimiert</i> (ihr Server unterstützt diese Funktion nicht)',
 	'texte_nouveau_message' => 'Neue Nachricht',
 	'texte_nouvelle_version_spip_1' => 'Sie haben eine neue Version von SPIP installiert.',

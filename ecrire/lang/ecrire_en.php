@@ -896,8 +896,8 @@ reinstall SPIP, create a new database and a new administrator account.',
   the normal way (via the SPIP interface) are automatically
   reindexed. This command is therefore only useful in exceptional circumstances.',
 	'texte_moteur_recherche_non_active' => 'The search engine is not enabled.',
-	'texte_multilinguisme' => 'If you want to manage articles in several languages, you can add a language selection menu to articles and/or sections, depending to the organisation of your site. This will result in a more complex site hierarchy.',
-	'texte_multilinguisme_trad' => 'You can also enable a system for managing links between the various translations of an article.',
+	'texte_multilinguisme' => 'If you want to manage articles in several languages, you can add a language selection menu to articles and/or sections, depending to the organisation of your site. This will result in a more complex site hierarchy.', # MODIF
+	'texte_multilinguisme_trad' => 'You can also enable a system for managing links between the various translations of an article.', # MODIF
 	'texte_non_compresse' => '<i>uncompressed</i> (your server does not support this feature)',
 	'texte_nouveau_message' => 'New message',
 	'texte_nouvelle_version_spip_1' => 'You have just installed a new version of SPIP.',

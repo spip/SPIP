@@ -877,8 +877,8 @@ SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy 
  ha gyors újraindexálást szeretne (például egy mentés resztaurálása után).
  Jegyezze meg, hogy a rendesen (az SPIP    felületen) módosított dokumentumok automatikusan vannak újra indexelve : ez a parancs tehát csak rendkivül esetben hasznos.',
 	'texte_moteur_recherche_non_active' => 'A kereső motor nincs aktiválva.',
-	'texte_multilinguisme' => 'Amennyiben több nyelvű cikkeket szeretne kezelni, komplex böngészés mellett, egy nyelvi menüt lehet tenni a cikkekhez és/vagy a rovatokhoz, a honlapja felépítésétől függően.',
-	'texte_multilinguisme_trad' => 'Egy linkeket kezelő rendszert is lehet aktiválni egy cikk különböző fordításai között.',
+	'texte_multilinguisme' => 'Amennyiben több nyelvű cikkeket szeretne kezelni, komplex böngészés mellett, egy nyelvi menüt lehet tenni a cikkekhez és/vagy a rovatokhoz, a honlapja felépítésétől függően.', # MODIF
+	'texte_multilinguisme_trad' => 'Egy linkeket kezelő rendszert is lehet aktiválni egy cikk különböző fordításai között.', # MODIF
 	'texte_non_compresse' => '<i>nincs tömörítve</i> (az Ön szervere nem él azzal a lehetőséggel)',
 	'texte_nouveau_message' => 'Új üzenet',
 	'texte_nouvelle_version_spip_1' => 'Az SPIP egyik újabb verzióját telepítette.',

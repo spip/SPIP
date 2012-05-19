@@ -862,8 +862,8 @@ Utiliza este formulario con precaución...',
 	'texte_modifier_article' => 'Modificar el artículo:',
 	'texte_moteur_recherche_active' => '<b>El motor de búsqueda está activado.</b> Utiliza este comando si deseas proceder a una reindexación rápida (después de la restauración de una copia de respaldo, por ejemplo). Nota que los documentos modificados de modo normal (mediante la interfaz SPIP) se vuelven a indexar automáticamente: esta orden sólo es útil excepcionalmente.',
 	'texte_moteur_recherche_non_active' => 'El motor de búsqueda no está activado.',
-	'texte_multilinguisme' => 'Si deseas manejar artículos en varios idiomas, con una navegación compleja, puedes agregar un menú de selección de lengua para los artículos y/o para las secciones en función de la organización de tu sitio.',
-	'texte_multilinguisme_trad' => 'También puedes activar un sistema de enlaces entre las diferentes traducciones de un artículo. ',
+	'texte_multilinguisme' => 'Si deseas manejar artículos en varios idiomas, con una navegación compleja, puedes agregar un menú de selección de lengua para los artículos y/o para las secciones en función de la organización de tu sitio.', # MODIF
+	'texte_multilinguisme_trad' => 'También puedes activar un sistema de enlaces entre las diferentes traducciones de un artículo. ', # MODIF
 	'texte_non_compresse' => '<i>no comprimido</i> (tu servidor no soporta esta funcionalidad)',
 	'texte_nouveau_message' => 'Nuevo mensaje',
 	'texte_nouvelle_version_spip_1' => 'Has instalado una versión nueva de SPIP.',

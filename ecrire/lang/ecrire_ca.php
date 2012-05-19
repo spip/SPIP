@@ -865,8 +865,8 @@ Useu aquest formulari amb precaució...',
  d\'una còpia de seguretat, per exemple). Heu d\'adonar-vos que els documents modificats de forma normal(des de la interfície d\'SPIP) són automàticament
 reindexats: aquesta comanda no és útil només que de manera excepcional.',
 	'texte_moteur_recherche_non_active' => 'El motor de recerca no està activat.',
-	'texte_multilinguisme' => 'Si es desitja es pot generar els articles es diversos idiomes, amb una navegació complexa, es pot també afegir un menú per seleccionar l\'idioma dels articles i/o de les seccions, en funció de l\'organització del lloc web.',
-	'texte_multilinguisme_trad' => 'Es pot igualment activar un sistema de gestió d\'enllaços entre les diferents traduccions d\'un article.',
+	'texte_multilinguisme' => 'Si es desitja es pot generar els articles es diversos idiomes, amb una navegació complexa, es pot també afegir un menú per seleccionar l\'idioma dels articles i/o de les seccions, en funció de l\'organització del lloc web.', # MODIF
+	'texte_multilinguisme_trad' => 'Es pot igualment activar un sistema de gestió d\'enllaços entre les diferents traduccions d\'un article.', # MODIF
 	'texte_non_compresse' => ' <i>no comprimit</i> (el servidor no suporta aquesta funcionalitat)',
 	'texte_nouveau_message' => 'Missatge nou',
 	'texte_nouvelle_version_spip_1' => 'Heu instal.lat una nova versió d\'SPIP.',

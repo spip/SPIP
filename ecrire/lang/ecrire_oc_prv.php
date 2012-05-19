@@ -890,8 +890,8 @@ una color indica lor estat:',
   biais normau (a partir de l\'interfàcia SPIP) se tornan indexar
   automaticament: donc aquesta comanda es utila ren que d\'un biais excepcionau.',
 	'texte_moteur_recherche_non_active' => 'Lo cercador es pas activat.',
-	'texte_multilinguisme' => 'Se desiratz de gerir d\'articles en mai d\'una lenga, amb una navigacion complèxa, podètz apondre un menut per chausir la lenga deis articles e/o dei rubricas, en foncion de l\'organizacion de vòstre sit.',
-	'texte_multilinguisme_trad' => 'Podètz tanben activar un sistèma de gestion dei liames entre lei diferentei reviradas d\'un article.',
+	'texte_multilinguisme' => 'Se desiratz de gerir d\'articles en mai d\'una lenga, amb una navigacion complèxa, podètz apondre un menut per chausir la lenga deis articles e/o dei rubricas, en foncion de l\'organizacion de vòstre sit.', # MODIF
+	'texte_multilinguisme_trad' => 'Podètz tanben activar un sistèma de gestion dei liames entre lei diferentei reviradas d\'un article.', # MODIF
 	'texte_non_compresse' => '<i>non comprimit</i> (per amòr que vòstre servidor supòrta pas aquela foncionalitat)',
 	'texte_nouveau_message' => 'Messatge nòu',
 	'texte_nouvelle_version_spip_1' => 'Avètz installada una version novèla d\'SPIP.',

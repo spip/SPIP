@@ -879,8 +879,8 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
   (goude assevel ur savete, da skouer). O-unan e vez advenegeret an teulioù kemmet en un doare reizh
   (adalek etrefas SPIP) : setu n\'eus d\'ober gant an urzhiad-mañ nemet e degouezhioù divoutin.',
 	'texte_moteur_recherche_non_active' => 'N\'eo ket gweredekaet al lusker enklask.',
-	'texte_multilinguisme' => 'Mar fell deoc\'h merañ pennadoù e meur a yezh, dre un doare merdeiñ kemplezh, e c\'hellit ouzhpennañ ul lañser dibab yezhoù war ar pennadoù ha/pe war ar rubrikennoù, hervez ar mod m\'eo aozet ho lec\'hienn.',
-	'texte_multilinguisme_trad' => 'Gallout a rit gweredekaat ur reizhiad merañ liammoù etre troidigezhioù disheñvel ar pennadoù ivez.',
+	'texte_multilinguisme' => 'Mar fell deoc\'h merañ pennadoù e meur a yezh, dre un doare merdeiñ kemplezh, e c\'hellit ouzhpennañ ul lañser dibab yezhoù war ar pennadoù ha/pe war ar rubrikennoù, hervez ar mod m\'eo aozet ho lec\'hienn.', # MODIF
+	'texte_multilinguisme_trad' => 'Gallout a rit gweredekaat ur reizhiad merañ liammoù etre troidigezhioù disheñvel ar pennadoù ivez.', # MODIF
 	'texte_non_compresse' => '<i>ket gwasket</i> (ne vez ket skoret an arc\'hwel-se gant ho servijer)',
 	'texte_nouveau_message' => 'Kemennadenn nevez',
 	'texte_nouvelle_version_spip_1' => 'Ur stumm nevez eus SPIP zo bet staliet ganeoc\'h.',

@@ -842,8 +842,8 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 	'texte_modifier_article' => 'Izmijeni clanak:',
 	'texte_moteur_recherche_active' => '<b>Motor za pretragu je  aktivan.</b> Koristite se ovom komandom ako zelite pristupiti brze reindeksacije (npr. nakon pohranjivanja).  Dokumenti koji su izmijenjeni na normalan nacin (prema SPIP rasoredu) su reindeksovani automatski: dakle, ova komanda je korisna samo u iznimnim slucajevima.',
 	'texte_moteur_recherche_non_active' => 'Motor za pretragu nije aktiviran.',
-	'texte_multilinguisme' => 'Ako zelita obradjivati clanke na vise jezika, sa kompleksnom navigacijom, u organizaciju vase  stranice mozete dodati meni za odabir jezika u clancima i/ili  rubrikama.',
-	'texte_multilinguisme_trad' => 'Svakako mozete aktivirati sistem sa obradjivanje linkova izmedju razlicitih prevoda  clanaka.',
+	'texte_multilinguisme' => 'Ako zelita obradjivati clanke na vise jezika, sa kompleksnom navigacijom, u organizaciju vase  stranice mozete dodati meni za odabir jezika u clancima i/ili  rubrikama.', # MODIF
+	'texte_multilinguisme_trad' => 'Svakako mozete aktivirati sistem sa obradjivanje linkova izmedju razlicitih prevoda  clanaka.', # MODIF
 	'texte_non_compresse' => '<i>nije kompresovan</i> (vas server ne podrzava ovu funkciju)',
 	'texte_nouveau_message' => 'Nova poruka',
 	'texte_nouvelle_version_spip_1' => 'Instalirali ste novu verziju SPIP-a.',

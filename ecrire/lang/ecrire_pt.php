@@ -910,8 +910,8 @@ de uma salvaguarda por exemplo). Note que os documentos modificados de
  maneira normal (a partir da interface SPIP) são automaticamente
  reindexados : este comando portanto só é útil de maneira excepcional',
 	'texte_moteur_recherche_non_active' => 'O motor de pesquisa não está activado.',
-	'texte_multilinguisme' => 'Se desejar gerir artigos em muitas línguas, com uma navegação complexa, pode acrescentar um menu de língua aos artigos e/ou nas rubricas, em função da organização do seu sítio.',
-	'texte_multilinguisme_trad' => 'Pode também activar um sistema de gestão de laços entre as diferentes traduções de um artigo.',
+	'texte_multilinguisme' => 'Se desejar gerir artigos em muitas línguas, com uma navegação complexa, pode acrescentar um menu de língua aos artigos e/ou nas rubricas, em função da organização do seu sítio.', # MODIF
+	'texte_multilinguisme_trad' => 'Pode também activar um sistema de gestão de laços entre as diferentes traduções de um artigo.', # MODIF
 	'texte_non_compresse' => '<i>não comprimido</i> ( o seu sezrvidor não suporta esta funcionalidade)',
 	'texte_nouveau_message' => 'Nova mensagem',
 	'texte_nouvelle_version_spip_1' => 'Instalou uma nova versão de SPIP.',

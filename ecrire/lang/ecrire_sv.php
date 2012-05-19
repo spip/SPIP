@@ -900,8 +900,8 @@ installera om SPIP för att skapa en ny databas och den första administratören
   det normala sättet (från gränssnittet i SPIP ) automatiskt
   indexeras igen: därför är kommandot bara användbart i speciella omständigheter.',
 	'texte_moteur_recherche_non_active' => 'Sökfunktionen är inte aktiverad.',
-	'texte_multilinguisme' => 'Om du vill hantera artiklar på flera språk, med en avancerad navigering, kan du lägga till en option för språkval i artiklar och avdelningar, i enlighet med sajtens struktur.',
-	'texte_multilinguisme_trad' => 'Dessutom kan du aktivera ett system för länkhantering av de olika översättningarna av en artikel.',
+	'texte_multilinguisme' => 'Om du vill hantera artiklar på flera språk, med en avancerad navigering, kan du lägga till en option för språkval i artiklar och avdelningar, i enlighet med sajtens struktur.', # MODIF
+	'texte_multilinguisme_trad' => 'Dessutom kan du aktivera ett system för länkhantering av de olika översättningarna av en artikel.', # MODIF
 	'texte_non_compresse' => '<i>okomprimerad</i> (din server stöder inte denna funktion)',
 	'texte_nouveau_message' => 'Nytt meddelande',
 	'texte_nouvelle_version_spip_1' => 'Du har installerat en ny version av SPIP.',

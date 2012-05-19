@@ -874,8 +874,8 @@ una color indica lo sieu estat :',
   maniera normala (a partir de l\'interfaça SPIP) se tornan indexar
   automaticament: donc aquesta comanda es utila solament d\'un biais excepcionau.',
 	'texte_moteur_recherche_non_active' => 'Lo motor de recerca es pas activat.',
-	'texte_multilinguisme' => 'Se desiratz gerar d\'articles en mai d\'una lenga, emb una navigacion complèxa, podètz apondre un menut per chausir la lenga dei articles e/ò dei rubricas, en foncion de l\'organisacion dau voastre sit.',
-	'texte_multilinguisme_trad' => 'Podètz tanben activar un sistema de gestion dei ligams entre li diferentes reviradas d\'un article.',
+	'texte_multilinguisme' => 'Se desiratz gerar d\'articles en mai d\'una lenga, emb una navigacion complèxa, podètz apondre un menut per chausir la lenga dei articles e/ò dei rubricas, en foncion de l\'organisacion dau voastre sit.', # MODIF
+	'texte_multilinguisme_trad' => 'Podètz tanben activar un sistema de gestion dei ligams entre li diferentes reviradas d\'un article.', # MODIF
 	'texte_non_compresse' => '<i>non comprimit</i> (lo voastre servidor supoarta pas aquela foncionalitat)',
 	'texte_nouveau_message' => 'Messatge novèu',
 	'texte_nouvelle_version_spip_1' => 'Avètz installat una novèla version de SPIP.',
