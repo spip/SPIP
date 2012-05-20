@@ -105,6 +105,12 @@ function tester_compatibilite_hebergement() {
 			$err[] = _T('install_php_version', array('version' => $p,  'minimum' => $m));
 	}
 
+	// Si on n'a pas la bonne version de PHP, c'est la fin
+	if ($err) 
+		die("<div class='error'>" 
+		. "<h3>"._T('avis_attention').'</h3><p>'._T('install_echec_annonce')."</p><ul class='spip'>"
+		. "<li><strong>{$err[0]}</strong></li>\n</ul></div>");
+
 	// Il faut une base de donnees tout de meme ...
 	$serveurs = install_select_serveur();
 	if (!$serveurs)
