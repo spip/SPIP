@@ -114,7 +114,8 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 	// si la mise en file d'attente du job echoue,
 	// il ne faut pas perdre l'execution de la fonction
 	// on la lance immediatement, c'est un fallback
-	else {
+	// sauf en cas d'upgrade necessaire (table spip_jobs inexistante)
+	elseif($GLOBALS['meta']['version_installee']==$GLOBALS['spip_version_base']) {
 		$set_job['id_job'] = 0;
 		queue_start_job($set_job);
 	}
@@ -520,7 +521,7 @@ function queue_affichage_cron(){
 		}
 	}
 
-	// ici lancer le cron par un CURL asynchrone si CURL est présent
+	// ici lancer le cron par un CURL asynchrone si CURL est prï¿½sent
 	if (function_exists("curl_init")){
 		//setting the curl parameters.
 		$ch = curl_init($url_cron);

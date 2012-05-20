@@ -792,7 +792,7 @@ function spip_mysql_count($r, $serveur='',$requeter=true) {
  * @return bool
  */
 function spip_mysql_free($r, $serveur='',$requeter=true) {
-	return mysql_free_result($r);
+	return (is_resource($r)?mysql_free_result($r):false);
 }
 
 // http://doc.spip.org/@spip_mysql_insert
