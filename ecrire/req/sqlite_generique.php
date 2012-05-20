@@ -2075,7 +2075,7 @@ class sqlite_requeteur {
 		# spip_log("requete: $this->serveur >> $query",'sqlite.'._LOG_DEBUG); // boum ? pourquoi ?
 		if ($this->link){
 			// memoriser la derniere erreur PHP vue
-			$e = error_get_last();
+			$e = (function_exists('error_get_last')?error_get_last():"");
 			// sauver la derniere requete
 			$GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['last'] = $query;
 
@@ -2103,7 +2103,7 @@ class sqlite_requeteur {
 			}
 
 			// loger les warnings/erreurs eventuels de sqlite remontant dans PHP
-			if ($err = error_get_last() AND $err!=$e){
+			if ($err = (function_exists('error_get_last')?error_get_last():"") AND $err!=$e){
 				$err = strip_tags($err['message'])." in ".$err['file']." line ".$err['line'];
 				spip_log("$err - ".$query, 'sqlite.'._LOG_ERREUR);
 			}

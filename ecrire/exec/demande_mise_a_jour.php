@@ -36,6 +36,8 @@ function exec_demande_mise_a_jour_dist() {
 	     "<p>"._T('info_administrateur_site_01')."</p>";
 	echo bouton_action(_T('bouton_mettre_a_jour_base'),generer_url_ecrire("upgrade","reinstall=non"));
 	echo boite_fermer();
+	// masquer les erreurs sql sur cette page car proviennent de la base pas a jour !
+	echo '<style type="text/css">#debug-nav {display: none;}</style>';
 	echo fin_grand_cadre(true);
 	echo fin_page();
 }
