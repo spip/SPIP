@@ -1081,6 +1081,8 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 	$d = date("Y-m-d", $date_debut);
 	$f = date("Y-m-d", $date_fin);
 	$h = ($horaire==='oui' OR $horaire===true);
+	$hd = _T('date_fmt_heures_minutes_court', array('h'=> date("H",$date_debut), 'm'=> date("i",$date_debut)));
+	$hf = _T('date_fmt_heures_minutes_court', array('h'=> date("H",$date_fin), 'm'=> date("i",$date_fin)));
 
 	if ($d==$f)
 	{ // meme jour
@@ -1126,18 +1128,11 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 		$s = _T('date_fmt_periode',array('date_debut' => $date_debut,'date_fin'=>$date_fin));
 	}
 	else {
-		if ((date("Y",$date_debut))==date("Y",$date_fin))
-		{ // meme annee, mois et jours differents
-			$date_debut = affdate_jourcourt($d,date("Y",$date_debut));
-		}
-		else
-		{ // tout different
-			$date_debut = $affdate($d);
-		}
+		$date_debut = affdate($d);
 		if ($h)
 			$date_debut = _T('date_fmt_jour_heure',array('jour'=>$date_debut,'heure'=>$hd));
 		
-		$date_fin = $affdate($f);
+		$date_fin = affdate($f);
 		if ($h) 
 			$date_fin = _T('date_fmt_jour_heure',array('jour'=>$date_fin,'heure'=>$hf));
 		
