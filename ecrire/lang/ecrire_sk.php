@@ -897,8 +897,8 @@ preinštalovať SPIP, vytvoriť novú databázu a nový účet pre administrát
   bežným spôsobom (cez rozhranie SPIPu) sa automaticky
   preindexujú. Preto je tento príkaz užitočný iba za zvláštnych okolností.',
 	'texte_moteur_recherche_non_active' => 'Vyhľadávač nie je aktivovaný.',
-	'texte_multilinguisme' => 'Ak chcete mať články v niekoľkých jazykoch, môžete menu na výber jazyka pridať do článkov a/lebo rubrík v závislosti od organizácie vašej stránky. To bude mať za následok zložitejšiu hierarchiu stránky.', # MODIF
-	'texte_multilinguisme_trad' => 'Môžete tiež aktivovať systém na správu prepojení medzi rôznymi prekladmi článku.', # MODIF
+	'texte_multilinguisme' => 'Ak chcete mať redakčné objekty v rôznych jazykoch, môžete do nich pridať menu na výber jazyka v závislosti od organizácie vašej stránky.',
+	'texte_multilinguisme_trad' => 'Môžete tiež aktivovať systém na správu prepojení medzi rôznymi prekladmi niektorých objektov.',
 	'texte_non_compresse' => '<i>rozbalené</i> (váš server nepodporuje túto funkciu)',
 	'texte_nouveau_message' => 'Nová správa',
 	'texte_nouvelle_version_spip_1' => 'Práve ste nainštalovali novú verziu SPIPu.',
