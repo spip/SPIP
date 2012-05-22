@@ -35,7 +35,7 @@ function plugins_get_infos_dist($plug=false, $reload=false, $dir = _DIR_PLUGINS,
 		if (!is_array($cache)) $cache = array();
 	}
 
-	if (_VAR_MODE=='recalcul')
+	if (defined('_VAR_MODE') AND _VAR_MODE=='recalcul')
 		$reload = true;
 
 	if ($plug===false) {
