@@ -136,7 +136,7 @@ function quete_rubrique_fond($contexte) {
 	$c = array_intersect_key($contexte,$liste_objets);
 	if (!count($c)) return false;
 
-	$c = array_map(intval,$c);
+	$c = array_map('intval',$c);
 	$s = serialize($c);
 	if (isset($quete[$s]))
 		return $quete[$s];
