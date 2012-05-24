@@ -70,9 +70,22 @@ function copie_locale($source, $mode = 'auto', $local = null){
 		return $local;
 
 	if ($mode=='modif' OR !$t){
-		$res = recuperer_page($source, $localrac, false, _COPIE_LOCALE_MAX_SIZE, '', '', false, $t ? filemtime($localrac) : '');
+		// passer par un fichier temporaire unique pour gerer les echecs en cours de recuperation
+		// et des eventuelles recuperations concurantes
+		include_spip("inc/acces");
+		$localractmp = "$localrac.".creer_uniqid().".tmp";
+		$res = recuperer_page($source, $localractmp, false, _COPIE_LOCALE_MAX_SIZE, '', '', false, $t ? filemtime($localrac) : '');
+		if ($res) {
+			// si OK on supprime l'ancien fichier et on renomme
+			spip_log("copie_locale : recuperation $source sur $localractmp taille $res OK, renommage en $localrac");
+			spip_unlink($localrac);
+			@rename($localractmp, $localrac);
+		} else {
+			// sinon on supprime le fichier temporaire qui a echoue et qui est sans doute corrompu...
+			spip_log("copie_locale : Echec recuperation $source sur $localractmp, fichier supprime",_LOG_INFO_IMPORTANTE);
+			spip_unlink($localractmp);
+		}
 		if (!$res) return $t ? $local : false;
-#		spip_log ('ecrire copie locale '.$localrac." taille $res");
 
 		// pour une eventuelle indexation
 		pipeline('post_edition',
