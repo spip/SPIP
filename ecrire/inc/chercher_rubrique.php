@@ -99,12 +99,6 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	if ($restreint AND !autoriser('publierdans','rubrique',$root))
 		return $sous;
 
-	// sauter un cran pour les secteurs (sauf premier)
-	if ($niv == 1
-	AND $decalage_secteur++
-	AND $type != 'breve')
-		$r = "<option value='0'></option>\n".$r;
-
 	// et voila le travail
 	return $r.$sous;
 }
