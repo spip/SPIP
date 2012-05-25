@@ -151,6 +151,16 @@ $preg='') {
 	if (!is_string($letexte) or !strlen($letexte))
 		return $letexte;
 
+	// si le texte recu est long PCRE risque d'exploser, on
+	// fait donc un mic-mac pour augmenter pcre.backtrack_limit
+	if (($len = strlen($letexte)) > 100000) {
+		if (!$old = @ini_get('pcre.backtrack_limit')) $old = 100000;
+		if ($len > $old) {
+			$a = @ini_set('pcre.backtrack_limit', $len);
+			spip_log("ini_set pcre.backtrack_limit=$len ($old)");
+		}
+	}
+
 	if (($preg OR strpos($letexte,"<")!==false)
 	  AND preg_match_all($preg ? $preg : _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER))
 		foreach ($matches as $regs) {
