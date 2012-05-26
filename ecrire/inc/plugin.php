@@ -115,11 +115,27 @@ function is_plugin_dir($dir,$dir_plugins = null){
 	return '';
 }
 
-// Regexp d'extraction des informations d'un inetervalle de compatibilite
+// Regexp d'extraction des informations d'un intervalle de compatibilité
 define('_EXTRAIRE_INTERVALLE', ',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,');
 
-// http://doc.spip.org/@plugin_version_compatible
-function plugin_version_compatible($intervalle,$version){
+/**
+ * Teste si le numéro de version d'un plugin est dans un intervalle donné.
+ *
+ * Cette fonction peut être volontairement trompée (phase de développement) :
+ * voir commentaire infra sur l'utilisation de la constante _DEV_PLUGINS
+ *
+ * @param string $intervalle
+ * 		Un intervalle entre 2 versions. ex: [2.0.0-dev;2.1.*]
+ * @param string $version
+ * 		Un numéro de version. ex: 3.1.99]
+ * @param string $avec_quoi
+ * 		Ce avec quoi est testée la compatibilité. par défaut ('')
+ * 		avec SPIP, quelques fois ('plug') avec un autre plugin (cas
+ * 		des 'necessite'.
+ * @return bool
+ * 		True si dans l'intervalle, false sinon.
+**/
+function plugin_version_compatible($intervalle, $version, $avec_quoi = '') {
 
 	if (!strlen($intervalle)) return true;
 	if (!preg_match(_EXTRAIRE_INTERVALLE,$intervalle,$regs)) return false;
@@ -129,9 +145,13 @@ function plugin_version_compatible($intervalle,$version){
 	$maximum = $regs[2];
 
 	//  si une borne de compatibilité supérieure a été définie (dans
-	//  mes_options.php, sous la forme : define('_DEV_PLUGINS', '3.1.*');
-	//  on l'utilise (phase de dev, de test...)
-	if (defined('_DEV_PLUGINS')) $maximum = _DEV_PLUGINS.']';
+	//  mes_options.php, sous la forme : define('_DEV_PLUGINS', '3.1.99');
+	//  on l'utilise (phase de dev, de test...) mais *que* en cas de comparaison
+	//  avec la version de SPIP (ne nuit donc pas aux tests de necessite
+	//  entre plugins)
+	if (defined('_DEV_PLUGINS') && $avec_quoi == '') {
+		$maximum = _DEV_PLUGINS.']';
+	}
 
 	$minimum_inc = $intervalle{0}=="[";
 	$maximum_inc = substr($intervalle,-1)=="]";
@@ -283,7 +303,7 @@ function plugin_trier($infos, $liste_non_classee)
 			// on ne peut inserer qu'apres eux
 			foreach($info1['necessite'] as $need){
 			  $nom = strtoupper($need['nom']);
-			  if (!isset($liste[$nom]) OR !plugin_version_compatible($need['version'],$liste[$nom]['version'])) {
+			  if (!isset($liste[$nom]) OR !plugin_version_compatible($need['version'],$liste[$nom]['version'],'plug')) {
 			      $info1 = false;
 			      break;
 			  }
@@ -295,7 +315,7 @@ function plugin_trier($infos, $liste_non_classee)
 			  $nom = strtoupper($need['nom']);
 			  if (isset($toute_la_liste[$nom])) {
 			    if (!isset($liste[$nom]) OR 
-				!plugin_version_compatible($need['version'],$liste[$nom]['version'])) {
+				!plugin_version_compatible($need['version'],$liste[$nom]['version'],'plug')) {
 			      $info1 = false;
 			      break;
 			    }
@@ -389,7 +409,7 @@ function plugin_necessite($n, $liste) {
 **/
 function plugin_controler_necessite($liste, $nom, $version)
 {
-	if (isset($liste[$nom]) AND plugin_version_compatible($version,$liste[$nom]['version'])) {
+	if (isset($liste[$nom]) AND plugin_version_compatible($version,$liste[$nom]['version'],'plug')) {
 		return '';
 	}
 	// retrouver le minimum
