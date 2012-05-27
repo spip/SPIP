@@ -130,8 +130,8 @@ define('_EXTRAIRE_INTERVALLE', ',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*
  * 		Un numéro de version. ex: 3.1.99]
  * @param string $avec_quoi
  * 		Ce avec quoi est testée la compatibilité. par défaut ('')
- * 		avec SPIP, quelques fois ('plug') avec un autre plugin (cas
- * 		des 'necessite'.
+ * 		avec un plugin (cas des 'necessite'), parfois ('spip')
+ * 		avec SPIP.
  * @return bool
  * 		True si dans l'intervalle, false sinon.
 **/
@@ -149,7 +149,7 @@ function plugin_version_compatible($intervalle, $version, $avec_quoi = '') {
 	//  on l'utilise (phase de dev, de test...) mais *que* en cas de comparaison
 	//  avec la version de SPIP (ne nuit donc pas aux tests de necessite
 	//  entre plugins)
-	if (defined('_DEV_PLUGINS') && $avec_quoi == '') {
+	if (defined('_DEV_PLUGINS') && $avec_quoi == 'spip') {
 		$maximum = _DEV_PLUGINS.']';
 	}
 
@@ -230,7 +230,7 @@ function plugin_valide_resume(&$liste, $plug, $infos, $dir)
 	$i = $infos[$dir][$plug];
 	if (isset($i['erreur']) AND $i['erreur'])
 		return;
-	if (!plugin_version_compatible($i['compatibilite'], $GLOBALS['spip_version_branche']))
+	if (!plugin_version_compatible($i['compatibilite'], $GLOBALS['spip_version_branche'],'spip'))
 		return;
 	$p = strtoupper($i['prefix']);
 	if (!isset($liste[$p]) 
@@ -303,7 +303,7 @@ function plugin_trier($infos, $liste_non_classee)
 			// on ne peut inserer qu'apres eux
 			foreach($info1['necessite'] as $need){
 			  $nom = strtoupper($need['nom']);
-			  if (!isset($liste[$nom]) OR !plugin_version_compatible($need['version'],$liste[$nom]['version'],'plug')) {
+			  if (!isset($liste[$nom]) OR !plugin_version_compatible($need['version'],$liste[$nom]['version'])) {
 			      $info1 = false;
 			      break;
 			  }
@@ -315,7 +315,7 @@ function plugin_trier($infos, $liste_non_classee)
 			  $nom = strtoupper($need['nom']);
 			  if (isset($toute_la_liste[$nom])) {
 			    if (!isset($liste[$nom]) OR 
-				!plugin_version_compatible($need['version'],$liste[$nom]['version'],'plug')) {
+				!plugin_version_compatible($need['version'],$liste[$nom]['version'])) {
 			      $info1 = false;
 			      break;
 			    }
@@ -409,7 +409,7 @@ function plugin_necessite($n, $liste) {
 **/
 function plugin_controler_necessite($liste, $nom, $version)
 {
-	if (isset($liste[$nom]) AND plugin_version_compatible($version,$liste[$nom]['version'],'plug')) {
+	if (isset($liste[$nom]) AND plugin_version_compatible($version,$liste[$nom]['version'])) {
 		return '';
 	}
 	// retrouver le minimum
@@ -542,7 +542,7 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 			if ($prefix!=="SPIP"){
 				$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
 				foreach($info['chemin'] as $chemin){
-					if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
+					if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'],'spip')){
 						$dir = $chemin['path'];
 						if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
 						if (strlen($dir) AND $dir=="./") $dir = '';

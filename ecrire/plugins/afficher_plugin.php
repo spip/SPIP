@@ -29,7 +29,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $checked, $actif, $
 	$checkable = ($dir_plugins!==_DIR_PLUGINS_DIST);
 	$nom = plugin_nom($info,$dir_plugins,$plug_file);
 
-	if (!plugin_version_compatible($info['compatibilite'], $GLOBALS['spip_version_branche'])){
+	if (!plugin_version_compatible($info['compatibilite'], $GLOBALS['spip_version_branche'],'spip')){
 		$info['slogan'] = _T('plugin_info_non_compatible_spip');
 		$erreur = http_img_pack("plugin-dis-32.png",_T('plugin_info_non_compatible_spip')," class='picto_err'",_T('plugin_info_non_compatible_spip'));
 		$class_li .= " disabled";
