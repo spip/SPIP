@@ -20,7 +20,7 @@
 #navigation .sous_navigation {margin-top:[(#ENV{margin-bottom}|mult{1.5})em]}
 /* exec=admin_plugin */
 .liste-plugins.formulaire_spip {border:0;background:none;padding:0;}
-.liste-plugins .liens {padding:6px;background:#ddd; margin-left: -6px; margin-right: -7px;}
+.liste-plugins .liens {padding:6px;background:#ddd; margin-#ENV{left}: -6px; margin-#ENV{right}: -7px;}
 #liste_plugins .boutons { margin: -6px; }
 .liste-plugins .liste-items {margin-left: -6px; margin-right: -6px;}
 .liste-plugins .liste-items .item {position:relative;padding-#ENV{left}:76px; padding-#ENV{right}: 10px;}
@@ -48,7 +48,7 @@
 .liste-plugins .liste-items .item:hover .actions {visibility:visible;}
 
 .liste-plugins .liste-items .item .picto_err,
-.liste-plugins .liste-items .item .cfg_link { position:absolute; right:4px; top:4px; }
+.liste-plugins .liste-items .item .cfg_link { position:absolute; #ENV{right}:4px; top:4px; }
 
 .liste-plugins .liste-items .item .details dl {float:#ENV{left};width:62%;margin-bottom:0;}
 .liste-plugins .liste-items .item .details dl.tech {float:#ENV{right}; width:32%;font-size:0.9em;word-wrap:break-word;text-align:#ENV{right};}
