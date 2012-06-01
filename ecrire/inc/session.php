@@ -67,13 +67,14 @@ function supprimer_sessions($id_auteur, $toutes=true, $actives=true) {
 
 	spip_log("supprimer sessions auteur $id_auteur");
 	if ($toutes OR $id_auteur!==$GLOBALS['visiteur_session']['id_auteur']) {
-		$dir = opendir(_DIR_SESSIONS);
-		$t = time()  - (4*_RENOUVELLE_ALEA);
-		while(($f = readdir($dir)) !== false) {
-			if (preg_match(",^[^\d-]*(-?\d+)_\w{32}\.php[3]?$,", $f, $regs)){
-				$f = _DIR_SESSIONS . $f;
-				if (($actives AND $regs[1] == $id_auteur) OR ($t > filemtime($f)))
-					spip_unlink($f);
+		if ($dir = opendir(_DIR_SESSIONS)){
+			$t = time()  - (4*_RENOUVELLE_ALEA);
+			while(($f = readdir($dir)) !== false) {
+				if (preg_match(",^[^\d-]*(-?\d+)_\w{32}\.php[3]?$,", $f, $regs)){
+					$f = _DIR_SESSIONS . $f;
+					if (($actives AND $regs[1] == $id_auteur) OR ($t > filemtime($f)))
+						spip_unlink($f);
+				}
 			}
 		}
 	}
