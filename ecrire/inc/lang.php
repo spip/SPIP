@@ -276,9 +276,10 @@ function verifier_lang_url() {
 // http://doc.spip.org/@utiliser_langue_site
 function utiliser_langue_site() {
 	if (isset($GLOBALS['meta']['langue_site'])
+	  AND isset($GLOBALS['spip_lang'])
 	  AND $GLOBALS['spip_lang']!=$GLOBALS['meta']['langue_site'])
 		return changer_langue($GLOBALS['meta']['langue_site']);//@:install
-	return $GLOBALS['spip_lang'];
+	return isset($GLOBALS['spip_lang']) ? $GLOBALS['spip_lang'] : '';
 }
 
 // http://doc.spip.org/@utiliser_langue_visiteur

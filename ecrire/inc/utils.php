@@ -484,7 +484,7 @@ function _T($texte, $args=array(), $options=array()) {
 	
 	// On peut passer explicitement la langue dans le tableau
 	// On utilise le même nom de variable que la globale
-	if ($args['spip_lang']){
+	if (isset($args['spip_lang'])){
 		$lang = $args['spip_lang'];
 		// On l'enleve pour ne pas le passer au remplacement
 		unset($args['spip_lang']);
@@ -1933,7 +1933,7 @@ function lang_select ($lang=NULL) {
 	else {
 		array_push($pile_langues, $GLOBALS['spip_lang']);
 	}
-	if ($lang == $GLOBALS['spip_lang'])
+	if (isset($GLOBALS['spip_lang']) AND $lang == $GLOBALS['spip_lang'])
 		return $lang;
 	changer_langue($lang);
 	return $lang;

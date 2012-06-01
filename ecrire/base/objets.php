@@ -650,7 +650,7 @@ function renseigner_table_objet_sql($table_sql,&$infos){
  */
 function renseigner_table_objet_interfaces($table_sql,&$infos){
 	if (!isset($infos['titre'])){
-		if (isset($GLOBALS['table_titre'][$infos['table_objet']]))
+		if (isset($infos['table_objet']) AND isset($GLOBALS['table_titre'][$infos['table_objet']]))
 			$infos['titre'] = $GLOBALS['table_titre'][$infos['table_objet']];
 		else {
 			$infos['titre'] = ((isset($infos['field']['titre']))?"titre,":"'' as titre,");
