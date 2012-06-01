@@ -357,7 +357,7 @@ k rôznym funkciám údržby. Niektoré z nich si vyžadujú špeciálne prihl�
 cez FTP.</p>',
 	'info_gauche_auteurs' => 'Tu nájdete všetkých autorov stránky.
  Funkcia každého z nich je označená farbou ikony (administrátor = zelená, redaktor = žltá).',
-	'info_gauche_auteurs_exterieurs' => 'Externí autori bez prístupu na stránku sú označení modrou farbou, odstránení autori obrázkom koša.',
+	'info_gauche_auteurs_exterieurs' => 'Externí autori bez prístupu na stránku sú označení modrou farbou, odstránení autori obrázkom koša.', # MODIF
 	'info_gauche_messagerie' => 'Odkazovač vám umožní posielať správy v rámci redakcie, ukladať si pri­pomienky (pre osobnú potrebu) alebo zobrazovať oznamy na úvodnej stránke súkromnej zóny (ak ste administrátor).',
 	'info_gauche_numero_auteur' => 'AUTOR ČÍSLO',
 	'info_gauche_statistiques_referers' => 'Na tejto stránke je zoznam <i>refererov,</i> t.j. stránok, na ktorých sú odkazy na vašu vlastnú stránku zo včerajška a dneška. Tento zoznam sa obnovuje každých 24 hodín.',

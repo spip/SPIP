@@ -341,7 +341,7 @@ Hồ sơ SPIP</a>.', # MODIF
 	'info_gauche_admin_tech' => '<b>Chỉ có quản trị viên được phép vào trang này.</b><p> Nơi đây cho phép bạn thực hiện một số công việc bảo trì. Một số việc cần phải có chứng nhận đặc biệt, cần phải dùng FTP để vào trang web.</p>', # MODIF
 	'info_gauche_admin_vider' => '<b>Chỉ có quản trị viên được phép vào trang này.</b><p> Nơi đây cho phép bạn thực hiện một số công việc bảo trì. Một số việc cần phải có chứng nhận đặc biệt, và cần phải dùng FTP để vào trang web.</p>', # MODIF
 	'info_gauche_auteurs' => 'Danh sách tất cả tác giả được liệt kê nơi đây. Trách nhiệm của mỗi người được biểu hiện qua màu của icon (chủ bút=màu xanh lá cây; quản lý=màu vàng).',
-	'info_gauche_auteurs_exterieurs' => 'Các tác giả bên ngoài (không được phép vào trang web) được biểu hiện bằng icon màu xanh dương; Tác giả nào bị xóa tên được biểu hiện bằng icon thùng rác.',
+	'info_gauche_auteurs_exterieurs' => 'Các tác giả bên ngoài (không được phép vào trang web) được biểu hiện bằng icon màu xanh dương; Tác giả nào bị xóa tên được biểu hiện bằng icon thùng rác.', # MODIF
 	'info_gauche_messagerie' => 'Phương tiện thư tín cho phép bạn trao đổi thư tín giữa các chủ bút với nhau, lưu trữ bản ghi nhớ (để sử dụng riêng) hoặc hiển thị thông báo trên trang nhà của vùng riêng (nếu bạn là người quản trị).',
 	'info_gauche_numero_auteur' => 'SỐ THỨ TỰ TÁC GIẢ:',
 	'info_gauche_statistiques_referers' => 'Trang này liệt kê danh sách <i>referrers</i>, tức là các trang có chứa điểm nối đến trang của bạn, chỉ cho hôm nay mà thôi: thật ra danh sách này được soạn mỗi 24 giờ.',

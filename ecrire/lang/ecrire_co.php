@@ -371,7 +371,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_auteurs' => 'Truverete quì tutti l\'autori di u situ.
 U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amministratore = verde).',
 	'info_gauche_auteurs_exterieurs' => 'L\'autori esterni, senza accessu à u situ, sò signalati da un\'icona turchina ;
-		l\'autori sguassati da una rumènzula.',
+		l\'autori sguassati da una rumènzula.', # MODIF
 	'info_gauche_messagerie' => 'A messageria vi permette di scambià messagi trà scrittori, di tene vi certi mementi(à usu propriu persunale) 
   o di pubblicà annunci in a pàgina d\'accogliu di u spaziu privatu (sè vo site amministratore).',
 	'info_gauche_numero_auteur' => 'AUTORE NÙMERU',

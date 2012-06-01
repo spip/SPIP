@@ -350,7 +350,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 	'info_gauche_auteurs' => 'Vi trovos ĉi tie ĉiujn aŭtorojn de la retejo. Ilia statuso estas indikita per koloro de sia piktogramo (mastrumanto = verda, redaktanto = flava).',
 	'info_gauche_auteurs_exterieurs' => 'La eksteraj aŭtoroj, sen alireblo al la retejo, estas indikitaj per blua piktogramo ;
- la aŭtoroj forviŝitaj per bildo de rubujo.',
+ la aŭtoroj forviŝitaj per bildo de rubujo.', # MODIF
 	'info_gauche_messagerie' => 'La mesaĝilo ebligas al vi interŝanĝi mesaĝojn inter aŭtoroj, konservi memorigilojn (por via propra uzado) aŭ afiŝi anoncojn ĉe la hejmpaĝo de la privata spaco (se vi estas mastrumanto).',
 	'info_gauche_numero_auteur' => 'AŬTORA NUMERO',
 	'info_gauche_statistiques_referers' => 'Tiu paĝo prezentas la liston de la  <i>referencoj</i>, tio estas retejoj enhavantaj ligilojn al via propra retejo, nur koncerne hieraŭ kaj hodiaŭ : tiu listo estas prastatigita ĉiujn 24 horojn.',

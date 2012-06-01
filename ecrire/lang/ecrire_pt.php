@@ -358,7 +358,7 @@ ou da rede',
 	'info_gauche_auteurs' => 'Encontrará aqui todos os autores do site.
 Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde; redactor = amarelo).',
 	'info_gauche_auteurs_exterieurs' => 'Os autores externos, sem acesso ao sítio, são indicados por um ícone azul ;
- os autores apagados, por um caixote de lixo.',
+ os autores apagados, por um caixote de lixo.', # MODIF
 	'info_gauche_messagerie' => 'A caixa de correio permite-lhe trocar mensagens entre redactores, conservar memorandos (para o seu uso pessoal) ou exibir anúncios na página de abertura do espaço privado ( se for administrador).',
 	'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
 	'info_gauche_statistiques_referers' => 'Esta página apresenta a lista dos  <i>referers</i>, ou seja, dos sites que contêm links para o seu site, unicamente para ontem e hoje; esta lista é actualizada a cada 24 horas.',

@@ -353,7 +353,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_admin_vider' => '<b>Hanya administrator yang memiliki akses ke halaman ini.</b><p> Halaman ini memberikan akses ke berbagai tugas pemeliharaan teknis. Beberapa di antaranya memerlukan proses ototentikasi tersendiri yang membutuhkan akses FTP ke situs web.</p>', # MODIF
 	'info_gauche_auteurs' => 'Anda akan menemukan seluruh penulis situs di sini.
  Status dari setiap penulis ditunjukkan oleh warna icon (administrator = hijau; editor = kuning).',
-	'info_gauche_auteurs_exterieurs' => 'Penulis eksternal, tanpa akses ke situs, ditunjukkan oleh icon biru; penulis yang dihapus oleh icon warna keranjang sampah.',
+	'info_gauche_auteurs_exterieurs' => 'Penulis eksternal, tanpa akses ke situs, ditunjukkan oleh icon biru; penulis yang dihapus oleh icon warna keranjang sampah.', # MODIF
 	'info_gauche_messagerie' => 'Sistem pesan mengizinkan anda bertukar pesan dengan sesama editor, untuk menyimpan memo (untuk keperluan pribadi anda) atau untuk menampilkan pengumuman di halaman depan area pribadi (jika anda seorang administrator).',
 	'info_gauche_numero_auteur' => 'NOMOR PENULIS:',
 	'info_gauche_statistiques_referers' => 'Halaman ini menampilkan daftar <i>pereferensi</I>, yakni situs-situs yang memuat tautan ke situs anda, hanya untuk kemarin dan hari ini: sesungguhnya daftar ini diperbaharui setiap 24 jam.',

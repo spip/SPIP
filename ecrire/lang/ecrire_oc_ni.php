@@ -341,7 +341,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 	'info_gauche_admin_vider' => '<b>A-n-aquela pàgina, son que lu responsables dau sit que li poadon accedir.</b><p> Dona accès ai diferenti foncions de mantenença tecnica. D\'unas d\'entre eli implicon un procèssus d\'autentificacion especific, que necessita d\'aver un accès FTP au sit web.</p>', # MODIF
 	'info_gauche_auteurs' => 'Trobaretz aquí toi lu autors dau sit.
  Lo sieu estatut es indicat per la color dei icònas sieui (administrator : verd; redactor : jaune).',
-	'info_gauche_auteurs_exterieurs' => 'Lu autors exteriors, sensa accès au sit, son indicats per una icòna blu; lu autors escafats per una bordilhier.',
+	'info_gauche_auteurs_exterieurs' => 'Lu autors exteriors, sensa accès au sit, son indicats per una icòna blu; lu autors escafats per una bordilhier.', # MODIF
 	'info_gauche_messagerie' => 'La messatgeria vos permete d\'escambiar de messatges entre redactors, de conservar de nòtas de renembrança (per lo voastre usatge personau) ò d\'afichar d\'anoncis sus la pàgina d\'acuèlh de l\'espaci privat (se siètz administrator).',
 	'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
 	'info_gauche_statistiques_referers' => 'Aquela pàgina presenta la tiera dei <i>referits</i>, es è dire dei sits que contenon d\'estacs que menon drech au voastre sit, ma unicament per ièr e encuèi : de fach aquela tiera es actualisada cada 24 oras.',

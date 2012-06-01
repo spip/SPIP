@@ -361,7 +361,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_gauche_auteurs' => 'Equí s\'alcuentren tolos autores del sitiu.
  El so estatutu vien indicáu pola color de l\'iconu (alministrador = verde; redactor = mariellu).',
 	'info_gauche_auteurs_exterieurs' => 'Los autores esternos, ensin accesu al sitiu, vienen indicaos con un iconu azul;
-  los autores esborráos con un calderu de basoria.',
+  los autores esborráos con un calderu de basoria.', # MODIF
 	'info_gauche_messagerie' => 'La mensaxería permite mandase mensaxes ente redactores, conservar recordatorioss (pa usu personal) o amosar anuncies na páxina principal de l\'espaciu priváu (si yes alministrador).',
 	'info_gauche_numero_auteur' => 'AUTOR NÚMBERU',
 	'info_gauche_statistiques_referers' => 'Esta páxina presenta la llista de los <i>referers</i>, que son sitios que contienen enllaces que apunten pa esti mesmu sitiu, namái d\'ayeri y de güei; esta llista ponse a cero cada 24 hores.',

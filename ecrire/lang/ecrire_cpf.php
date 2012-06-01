@@ -378,7 +378,7 @@ néséser pou sanz inn sizé sir lo sit.', # MODIF
 	'info_gauche_admin_vider' => '<b>Pazwèb-la, lé sèlman ouvèr pou inndé responsab lo sit.</b><p> Li donn laksé sir bann fonksyon pou lantrotyen tèknik. Nana désertin sak i domann aou fé zwé inn prosésus spésyal pou lotantifikasyon. Dann ka-la inn laksé FTP lé néséser pou sanz inn sizé sir lo sit.', # MODIF
 	'info_gauche_auteurs' => 'Ou va trouv tèrla tout bann lotèr lo sitwèb.
  Bann drwa pou bann dalon lé kadré èk la koulèr likonn azot (komandèr= vèr;lotèr = zonn).',
-	'info_gauche_auteurs_exterieurs' => 'Bann lotèr-déor, sak nana pwinn laksé sir lo sitwèb, lé présizé èk inn likonn blé ; bann lotèr dégréné lé kadré èk inn korbéy.',
+	'info_gauche_auteurs_exterieurs' => 'Bann lotèr-déor, sak nana pwinn laksé sir lo sitwèb, lé présizé èk inn likonn blé ; bann lotèr dégréné lé kadré èk inn korbéy.', # MODIF
 	'info_gauche_messagerie' => 'Kazmodékri-la i permé azot mèt ansanm pou lanvwa inndé modékri antrozot, gard out prop bann gardandèt, ou byin sa ankor : afis tout bann zanons sir pazlakèy dann zéspas privé (si ou lé komandèr).',
 	'info_gauche_numero_auteur' => 'LOTÈR NIMÉRO',
 	'info_gauche_statistiques_referers' => 'Pazwèb-la i prézant lo fil <i>bann référèr</i>, ou poutoudir lo fil bann sit sak i gatir out prop sitwèb. Rannkont-la lé selman valab po yèr é zordi : fil-la i ropat zéro tout bann 24H.',

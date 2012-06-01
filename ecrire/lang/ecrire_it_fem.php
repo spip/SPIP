@@ -353,7 +353,7 @@ pubblicazione e di convalida degli articoli.',
 	'info_gauche_auteurs' => 'Elenco di tutte le autrici del sito.
 Il loro status è indicato dal colore dell\'icona (redattrice = giallo; amministratrice = verde).',
 	'info_gauche_auteurs_exterieurs' => 'Le autrici esterne, senza accesso al sito, sono indicate da un\'icona blu;
-le autrici eliminate, invece, da un cestino.',
+le autrici eliminate, invece, da un cestino.', # MODIF
 	'info_gauche_messagerie' => 'Il sistema di messaggistica permette di scambiare dei messaggi tra redattrici, di conservare dei memo (promemoria ad uso personale) o di pubblicare degli annunci nel pannello di controllo dell\'area riservata (se sei amministratrice).',
 	'info_gauche_numero_auteur' => 'AUTRICE NUMERO',
 	'info_gauche_statistiques_referers' => 'Questa pagina presenta un elenco dei siti che contengono link verso il tuo (<i>referrer</i>). Questo elenco è valido però solo per oggi essendo azzerato ogni 24 ore.',

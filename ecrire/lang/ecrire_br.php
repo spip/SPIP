@@ -350,7 +350,7 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 	'info_gauche_auteurs' => 'Amañ e kavot an holl dud a skriv war al lec\'hienn.
  Diouzh liv o skeudennig e c\'hellit gouzout o c\'harg resis (merour=gwer; skridaozer=melen).',
 	'info_gauche_auteurs_exterieurs' => 'E glaz emañ diskouezet ar skridaozerien diavaez, hep moned ouzh al lec\'hienn ;
-  Gant ur pod-lastez eo aroueziet ar re bet diverket.',
+  Gant ur pod-lastez eo aroueziet ar re bet diverket.', # MODIF
 	'info_gauche_messagerie' => 'Dre ar postelerezh e c\'hellit eskemm kemennadennoù gant skridaozerien all, derc\'hel notennigoù-eñvor, pe, ma\'z oc\'h merour, skignañ kemennoù war bajenn degemer al lodenn brevez.',
 	'info_gauche_numero_auteur' => 'SKRIDAOZER NIVERENN',
 	'info_gauche_statistiques_referers' => 'War ar bajenn-mañ emañ roll ar <i>referers</i>, da lavaret eo al lec\'hiennoù enno liammoù a gas davet ho lec\'hienn deoc\'h, evit dec\'h hag hiziv hepken. Riñset e vez ar roll-mañ bemdez.',

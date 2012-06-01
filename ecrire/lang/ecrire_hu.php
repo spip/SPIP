@@ -350,7 +350,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'info_gauche_auteurs' => 'Itt található a honlap összes szerzője.
  Saját státuszuk az ikon színe szerint van jelölve ( adminisztrátor = zöld; szerző = sárga).',
 	'info_gauche_auteurs_exterieurs' => 'A külső szerzők, melyek nem férhetnek a honlaphoz, kék ikonnal vannak jelölve ;
-a törölt szerzők pedig kukával vannak jelölve.',
+a törölt szerzők pedig kukával vannak jelölve.', # MODIF
 	'info_gauche_messagerie' => 'A levelezés lehetővé tesz szerzők közti üzenetcserét, emlékeztetők (saját használatra) megtartását, vagy hírdetések megjelenítését a privát rész főoldalán (amennyiben Ön adminisztrátor).',
 	'info_gauche_numero_auteur' => 'SZERZŐ SZÁMA',
 	'info_gauche_statistiques_referers' => 'Ez az oldal a <i>referers</i> listáját mutat, vagyis olyan honlapokat, melyeken az Ön honlapjához hivatkozó linkek találhatók, de csak a tegnapi és a mai napra : ez a lista nullázva van 24 óra után.',

@@ -343,7 +343,7 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 	'info_gauche_admin_vider' => '<b>Dës Säit ass fir déi Responsabel vum Site reservéiert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een sëch iwwer FTP identifizéieren kënnen.</p>', # MODIF
 	'info_gauche_auteurs' => 'Hei fannt dir all d\'Auteur\'en vum Site.
 Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gréng; Redakter = giel).',
-	'info_gauche_auteurs_exterieurs' => 'Déi extern Auteuren ouni Zougang zum Site sinn mat enger bloer Ikone markéiert, déi geläschten Auteuren mat enger Dreckskëscht.',
+	'info_gauche_auteurs_exterieurs' => 'Déi extern Auteuren ouni Zougang zum Site sinn mat enger bloer Ikone markéiert, déi geläschten Auteuren mat enger Dreckskëscht.', # MODIF
 	'info_gauche_messagerie' => 'D\'Messagerie erlaabt Iech Messagen un d\'Redakteren ze schécken, privat Notizen ze maachen oder Annoncen op d\'Startsäit vum privaten Deel ze sätzen (wann dër Administrateur sidd).',
 	'info_gauche_numero_auteur' => 'AUTEUR NUMMER',
 	'info_gauche_statistiques_referers' => 'Dës Säit weist d\'Lëscht vun de <i>Referer</i>, déi Siten wou e Link op ären Site geklickt gouf, awer nëmmen fir haut: dës Lëscht gët all 24 Stonnen op Null gesaat.',

@@ -349,7 +349,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_gauche_admin_tech' => 'Bu sayfa sadece site yetkililerinin erişimine izin verir. Çeşitli teknik bakım işlevlerine erişim vermektedir. Bunlardan bazıları, Web sitesine bir FTP erişimi gerektiren özel bir tasdik sürecine yol açar.', # MODIF
 	'info_gauche_admin_vider' => 'Bu sayfa sadece site yetkililerinin erişimine izin verir. Çeşitli teknik bakım işlevlerine erişim vermektedir. Bunlardan bazıları, Web sitesine bir FTP erişimi gerektiren, özel bir tasdik sürecine yol açar.', # MODIF
 	'info_gauche_auteurs' => 'Burada tüm site yazarlarını bulacaksınız. Statüleri simgelerinin rengi ile belirtilmiştir (yönetici = yeşil; yazı işleri = sarı).',
-	'info_gauche_auteurs_exterieurs' => 'Siteye erişimi olmayan dış yazarlar, mavi bir simgeyle belirtilmiştir ; silinen yazarlar ise bir çöp kutusu ile belirtilmiştir.',
+	'info_gauche_auteurs_exterieurs' => 'Siteye erişimi olmayan dış yazarlar, mavi bir simgeyle belirtilmiştir ; silinen yazarlar ise bir çöp kutusu ile belirtilmiştir.', # MODIF
 	'info_gauche_messagerie' => 'Mesajlaşma sizin yazarlar ile ileti alışverişinde bulunmanızı, hatırlatmaları saklamanızı (kişisel amaçlı) veya özel alanın erişim sayfasına duyuru koymanızı sağlar (yöneticiyseniz).',
 	'info_gauche_numero_auteur' => 'YAZAR NUMARASI',
 	'info_gauche_statistiques_referers' => 'Bu sayfa atıflar listesini, yani sizin sitenize yönlendiren bağlar bulunduran sitelerin listesini sunar, ancak sadece dün ve bugün içindir ; bu liste her 24 saatte bir sıfırlanır.',
