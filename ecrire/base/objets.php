@@ -658,7 +658,7 @@ function renseigner_table_objet_interfaces($table_sql,&$infos){
 		}
 	}
 	if (!isset($infos['date'])){
-		if (isset($GLOBALS['table_date'][$infos['table_objet']]))
+		if (isset($infos['table_objet']) and isset($GLOBALS['table_date'][$infos['table_objet']]))
 			$infos['date'] = $GLOBALS['table_date'][$infos['table_objet']];
 		else
 			$infos['date'] = ((isset($infos['field']['date']))?"date":'');
