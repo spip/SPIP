@@ -27,7 +27,9 @@ class IterFactory{
 		if (isset($command['si'])) {
 			foreach ($command['si'] as $si) {
 				if (!$si) {
-					return new IterDecorator(new EmptyIterator(), $command, $info);
+					// $command pour boucle SQL peut generer des erreurs de compilation
+					// s'il est transmis alors qu'on est dans un iterateur vide
+					return new IterDecorator(new EmptyIterator(), array(), $info);
 				}
 			}
 		}
