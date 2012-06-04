@@ -33,6 +33,7 @@ function traiter_appels_actions(){
 		include_spip('inc/autoriser');
 		include_spip('inc/headers');
 		include_spip('inc/actions');
+		include_spip('inc/lang'); // des actions peuvent appeler _T
 		// si l'action est provoque par un hit {ajax}
 		// il faut transmettre l'env ajax au redirect
 		// on le met avant dans la query string au cas ou l'action fait elle meme sa redirection
