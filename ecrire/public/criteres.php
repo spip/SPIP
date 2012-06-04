@@ -103,7 +103,7 @@ function critere_doublons_dist($idb, &$boucles, $crit){
 // http://www.spip.net/@lang_select
 // http://doc.spip.org/@critere_lang_select_dist
 function critere_lang_select_dist($idb, &$boucles, $crit){
-	if (!($param = $crit->param[1][0]->texte)) $param = 'oui';
+	if (!isset($crit->param[1][0]) OR !($param = $crit->param[1][0]->texte)) $param = 'oui';
 	if ($crit->not) $param = ($param=='oui') ? 'non' : 'oui';
 	$boucle = &$boucles[$idb];
 	$boucle->lang_select = $param;

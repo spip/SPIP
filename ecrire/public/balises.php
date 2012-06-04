@@ -574,7 +574,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	$modif = ($type[0]!=="'") ? "'debut'.$type"
 	  : ("'debut" .substr($type,1));
 
-	$p->code = sprintf(CODE_PAGINATION, $f_pagination,$b, $type, $modif, $pas, $liste, ($__modele ? $__modele : "''"), _q($connect), $code_contexte);
+	$p->code = sprintf(CODE_PAGINATION, $f_pagination, $b, $type, $modif, $pas, $liste, ((isset($__modele) and $__modele) ? $__modele : "''"), _q($connect), $code_contexte);
 
 	$p->boucles[$b]->numrows = true;
 	$p->interdire_scripts = false;
