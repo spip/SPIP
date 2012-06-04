@@ -80,8 +80,9 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	// Admins restreints, on construit ici (pas generique mais...)
 	// le tableau de toutes leurs rubriques (y compris les sous-rubriques)
-	if (_ADMINS_RESTREINTS AND is_array($qui))
-		$qui['restreint'] = liste_rubriques_auteur($qui['id_auteur']);
+	if (_ADMINS_RESTREINTS AND is_array($qui)) {
+		$qui['restreint'] = isset($qui['id_auteur']) ? liste_rubriques_auteur($qui['id_auteur']) : array();
+	}
 
 	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id (" . (isset($qui['nom']) ? $qui['nom'] : '') . ") ?");
 

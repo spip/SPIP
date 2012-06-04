@@ -124,6 +124,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 
 	if ($config_fonc)
 		$contexte['config'] = $config = $config_fonc($contexte);
+	if (!isset($config['lignes'])) $config['lignes'] = 0;
 	$att_text = " class='textarea' "
 	. " rows='"
 	. ($config['lignes'] +15)

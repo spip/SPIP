@@ -2953,7 +2953,7 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
 	// mettre a jour le fichier si il n'existe pas
 	// ou trop ancien
 	if (!file_exists($filename)
-		OR ($cache['lastmodified'] AND filemtime($filename)<$cache['lastmodified'])
+		OR (isset($cache['lastmodified']) AND $cache['lastmodified'] AND filemtime($filename)<$cache['lastmodified'])
 		OR _VAR_MODE=='recalcul') 
 	{
 		$contenu = $cache['texte'];

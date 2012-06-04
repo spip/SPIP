@@ -1063,7 +1063,7 @@ function sql_in($val, $valeurs, $not='', $serveur='', $option=true) {
 		$f = sql_serveur('quote', $serveur, true);
 		if (!is_string($f) OR !$f) return false;
 		$valeurs = join(',', array_map($f, array_unique($valeurs)));
-	} elseif ($valeurs[0]===',') $valeurs = substr($valeurs,1);
+	} elseif (isset($valeurs[0]) AND $valeurs[0]===',') $valeurs = substr($valeurs,1);
 	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
 
 	$f = sql_serveur('in', $serveur,  $option==='continue' OR $option===false);
