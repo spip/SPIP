@@ -67,6 +67,7 @@ function code_echappement($rempl, $source='', $no_transform=false, $mode=NULL) {
 
 	// Decouper en morceaux, base64 a des probleme selon la taille de la pile
 	$taille = 30000;
+	$return = "";
 	for($i = 0; $i < strlen($rempl); $i += $taille) {
 		// Convertir en base64 et cacher dans un attribut
 		// utiliser les " pour eviter le re-encodage de ' et &#8217
