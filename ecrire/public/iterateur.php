@@ -117,6 +117,13 @@ class IterDecorator extends FilterIterator {
 	protected $fetched=0;
 
 	/**
+	 * Y a t'il une erreur ?
+	 * 
+	 * @var bool
+	**/
+	protected $err = false;
+
+	/**
 	 * Drapeau a activer en cas d'echec
 	 * (select SQL errone, non chargement des DATA, etc)
 	 */
@@ -146,7 +153,10 @@ class IterDecorator extends FilterIterator {
 			$this->calculer_filtres();
 		}
 
-		$this->err = $this->iter->err;
+		// emptyIterator critere {si} faux n'a pas d'erreur !
+		if (isset($this->iter->err)) {
+			$this->err = $this->iter->err;
+		}
 
 		$this->total = $this->count();
 	}
@@ -254,7 +264,7 @@ class IterDecorator extends FilterIterator {
 		}
 
 		// critere {2,7}
-		if ($this->command['limit']) {
+		if (isset($this->command['limit']) AND $this->command['limit']) {
 			$limit = explode(',',$this->command['limit']);
 			$this->offset = $limit[0];
 			$this->limit = $limit[1];
