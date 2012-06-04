@@ -423,16 +423,17 @@ function champs_traitements ($p) {
 	}
 
 	if (is_array($ps)) {
-	  // Recuperer le type de boucle (articles, DATA) et la table SQL sur laquelle elle porte
+		// Recuperer le type de boucle (articles, DATA) et la table SQL sur laquelle elle porte
 		$idb = index_boucle($p);
-		$type_requete = $p->boucles[$idb]->type_requete;
+		// mais on peut aussi etre hors boucle. Se mefier.
+		$type_requete = isset($p->boucles[$idb]->type_requete) ? $p->boucles[$idb]->type_requete : false;
 		$table_sql = isset($p->boucles[$idb]->show['table_sql'])?$p->boucles[$idb]->show['table_sql']:false;
 
 		// le traitement peut n'etre defini que pour une table en particulier "spip_articles"
 		if ($table_sql AND isset($ps[$table_sql]))
 			$ps = $ps[$table_sql];
 		// ou pour une boucle en particulier "DATA","articles"
-		elseif (isset($ps[$type_requete]))
+		elseif ($type_requete AND isset($ps[$type_requete]))
 			$ps = $ps[$type_requete];
 		// ou pour indiferrement quelle que soit la boucle
 		elseif(isset($ps[0]))

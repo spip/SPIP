@@ -89,7 +89,7 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 				$position = (isset($infos['position']) and $infos['position']) ? $infos['position'] : count($boutons_admin);
 				$boutons_admin = array_slice($boutons_admin,0,$position)
 				+array($id=> new Bouton(
-					($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
+					($icones AND isset($infos['icone']) AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
 					$infos['titre'],	// titre
 					(isset($infos['action']) AND $infos['action'])?$infos['action']:null,
 					(isset($infos['parametres']) AND $infos['parametres'])?$infos['parametres']:null

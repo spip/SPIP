@@ -455,7 +455,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	$count = '';
 	if (!$boucle->select) {
-		if (!$boucle->numrows OR $boucle->limit OR $boucle_mode_partie OR $boucle->group)
+		if (!$boucle->numrows OR $boucle->limit OR $boucle->mode_partie OR $boucle->group)
 			$count = '1';
 		else $count = 'count(*)';
 		$boucles[$id_boucle]->select[]= $count; 
@@ -897,6 +897,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	$squelette = transcoder_page($squelette);
 
 	// rendre inertes les echappements de #[](){}<>
+	$i = 0;
 	while(false !== strpos($squelette, $inerte = '-INERTE'.$i)) $i++;
 	$squelette = preg_replace_callback(',\\\\([#[()\]{}<>]),',
 		create_function('$a', "return '$inerte-'.ord(\$a[1]).'-';"), $squelette, -1, $esc);

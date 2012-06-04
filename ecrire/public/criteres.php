@@ -1135,9 +1135,9 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 		// sql_quote(truc,'','varchar')
 		elseif (preg_match('/\Asql_quote[(](.*?)(,[^)]*?)?(,[^)]*(?:\(\d+\)[^)]*)?)?[)]\s*\z/ms', $val[0], $r)
 			// si pas deja un type
-		  AND !$r[3]) {
+		  AND (!isset($r[3]) OR !$r[3])) {
 			$r = $r[1]
-				.($r[2] ? $r[2] : ",''")
+				.((isset($r[2]) AND $r[2]) ? $r[2] : ",''")
 				.",'".(isset($desc['field'][$col_vraie])?addslashes($desc['field'][$col_vraie]):'int NOT NULL')."'";
 			$val[0] = "sql_quote($r)";
 		}
@@ -1179,7 +1179,8 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 	// gestion par les plugins des jointures tordues 
 	// pas automatiques mais necessaires
 	$table_sql = table_objet_sql($table);
-	if (is_array($exceptions_des_jointures[$table_sql])
+	if (isset($exceptions_des_jointures[$table_sql])
+	  AND is_array($exceptions_des_jointures[$table_sql])
 	  AND
 			(
 			isset($exceptions_des_jointures[$table_sql][$col])
