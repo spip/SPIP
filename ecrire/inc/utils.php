@@ -490,7 +490,13 @@ function _T($texte, $args=array(), $options=array()) {
 		unset($args['spip_lang']);
 	}
 	// Sinon on prend la langue du contexte
-	else{
+	else {
+		// [fixme] dans certains cas d'ajax, la globale n'est pas presente
+		// c'est peut etre un probleme plus en amont.
+		if (!isset($GLOBALS['spip_lang'])) {
+			include_spip('inc/lang');
+			utiliser_langue_visiteur();
+		}
 		$lang = $GLOBALS['spip_lang'];
 	}
 	$text = $traduire($texte, $lang);
