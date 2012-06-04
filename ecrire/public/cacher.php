@@ -311,7 +311,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 			include_spip('inc/invalideur');
 			retire_caches($chemin_cache); # API invalideur inutile
 			supprimer_fichier(_DIR_CACHE.$chemin_cache);
-			if ($chemin_cache_session)
+			if (isset($chemin_cache_session) and $chemin_cache_session)
 				supprimer_fichier(_DIR_CACHE.$chemin_cache_session);
 		}
 	}
@@ -327,7 +327,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		include_spip('inc/invalideur');
 		retire_caches($chemin_cache); # API invalideur inutile
 		supprimer_fichier(_DIR_CACHE.$chemin_cache);
-		if ($chemin_cache_session)
+		if (isset($chemin_cache_session) and $chemin_cache_session)
 			supprimer_fichier(_DIR_CACHE.$chemin_cache_session);
 	}
 
@@ -341,7 +341,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// determiner la validite de la page
 	if ($page) {
-		$use_cache = cache_valide($page, $page['lastmodified']);
+		$use_cache = cache_valide($page, isset($page['lastmodified']) ? $page['lastmodified'] : 0);
 		// le contexte implicite n'est pas stocke dans le cache, mais il y a equivalence
 		// par le nom du cache. On le reinjecte donc ici pour utilisation eventuelle au calcul
 		$page['contexte_implicite'] = $contexte_implicite;
