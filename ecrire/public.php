@@ -133,7 +133,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) AND $GLOBALS['_INC_PUBLIC']) {
 
 	$affiche_boutons_admin = ($html AND ((
 		isset($_COOKIE['spip_admin'])
-		AND !$flag_preserver
+		AND (!isset($flag_preserver) OR !$flag_preserver)
 				   ) OR $debug));
 
 	if ($affiche_boutons_admin)

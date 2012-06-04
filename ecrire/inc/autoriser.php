@@ -83,7 +83,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if (_ADMINS_RESTREINTS AND is_array($qui))
 		$qui['restreint'] = liste_rubriques_auteur($qui['id_auteur']);
 
-	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id ($qui[nom]) ?");
+	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id (" . (isset($qui['nom']) ? $qui['nom'] : '') . ") ?");
 
 	// passer par objet_type pour avoir les alias
 	// et supprimer les _
@@ -122,7 +122,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		}
 	}
 
-	if (_DEBUG_AUTORISER) spip_log("$f($faire,$type,$id,$qui[nom]): ".($a?'OK':'niet'));
+	if (_DEBUG_AUTORISER) spip_log("$f($faire,$type,$id," . (isset($qui['nom']) ? $qui['nom'] : '') . "): ".($a?'OK':'niet'));
 
 	return $a;
 }

@@ -210,8 +210,10 @@ if (!class_exists('nanoSha2'))
 					$pad = ceil(($length+1+32/$this->bytesString)/$npad)*$npad-32/$this->bytesString;
 					$ords = array_pad($ords,$pad,0);
 					$mask = (1 << $this->bytesString) - 1;
-					for($i = 0; $i < count($ords) * $this->bytesString; $i += $this->bytesString)
+					for($i = 0; $i < count($ords) * $this->bytesString; $i += $this->bytesString) {
+						if (!isset($bin[$i>>5])) { $bin[$i>>5] = 0; } // pour eviter des notices.
 						$bin[$i>>5] |= ($ords[$i / $this->bytesString] & $mask) << (24 - $i%32);
+					}
 					$bin[] = $length*$this->bytesString;
 					return $bin;
 				}
