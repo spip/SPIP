@@ -18,12 +18,14 @@ include_spip('base/objets');
 function inc_icone_renommer_dist($fond,$fonction){
 	$size = 24;
 	if (preg_match("/(?:-([0-9]{1,3}))?([.](gif|png))?$/i",$fond,$match)
-		AND ($match[0] OR $match[1])) {
-		if ($match[1])
+		AND ((isset($match[0]) AND $match[0]) OR (isset($match[1]) AND $match[1]))) {
+		if (isset($match[1]) AND $match[1]) {
 			$size = $match[1];
+		}
 		$type = substr($fond,0,-strlen($match[0]));
-		if (!$match[2])
+		if (!isset($match[2]) OR !$match[2]) {
 			$fond .= ".png";
+		}
 	}
 	else {
 		$type = $fond;

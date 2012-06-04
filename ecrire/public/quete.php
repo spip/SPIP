@@ -61,7 +61,7 @@ function quete_parent_lang($table,$id,$connect=''){
 		if ($cache_quete[$connect][$table]['_select'])
 			$cache_quete[$connect][$table][$id] = sql_fetsel($cache_quete[$connect][$table]['_select'], $table,$cache_quete[$connect][$table]['_id']."=".intval($id),'','','','',$connect);
 	}
-	return $cache_quete[$connect][$table][$id];
+	return isset($cache_quete[$connect][$table][$id]) ? $cache_quete[$connect][$table][$id] : null;
 }
 
 
@@ -129,7 +129,8 @@ function quete_condition_postdates($champ_date, $serveur='') {
 	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW)
 		return "1=1";
 	return
-	  ($GLOBALS['meta']['date_prochain_postdate'] > time())
+	  (isset($GLOBALS['meta']['date_prochain_postdate'])
+	     AND $GLOBALS['meta']['date_prochain_postdate'] > time())
 			? "$champ_date<".sql_quote(date('Y-m-d H:i:s',$GLOBALS['meta']['date_prochain_postdate']),$serveur)
 	    : "1=1" ;
 }
