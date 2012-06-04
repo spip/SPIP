@@ -256,9 +256,9 @@ function instituer_boucle(&$boucle, $echapper=true){
 					$date = $id.'.'.preg_replace(',\W,','',$s['post_date']); // securite
 					array_unshift($boucle->where,
 						$echapper ?
-							"\nquete_condition_postdates('$date',"._q($boucle->serveur).")"
+							"\nquete_condition_postdates('$date',"._q($boucle->sql_serveur).")"
 						:
-							quete_condition_postdates($date,$boucle->serveur)
+							quete_condition_postdates($date,$boucle->sql_serveur)
 					);
 				}
 				array_unshift($boucle->where,
@@ -266,9 +266,9 @@ function instituer_boucle(&$boucle, $echapper=true){
 						"\nquete_condition_statut('$mstatut',"
 							. _q($s['previsu']).","
 							._q($s['publie']).","
-							._q($boucle->serveur).")"
+							._q($boucle->sql_serveur).")"
 					:
-						quete_condition_statut($mstatut,$s['previsu'],$s['publie'],$boucle->serveur)
+						quete_condition_statut($mstatut,$s['previsu'],$s['publie'],$boucle->sql_serveur)
 				);
 			}
 		}
