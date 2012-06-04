@@ -67,6 +67,20 @@ class IterateurDATA implements Iterator {
 	protected $valeur = null;
 
 	/**
+	 * Erreur presente ? 
+	 *
+	 * @var bool
+	**/
+	public $err = false;
+
+	/**
+	 * Calcul du total des elements 
+	 *
+	 * @var int|null
+	**/
+	public $total = null;
+
+	/**
 	 * Constructeur
 	 *
 	 * @param  $command
@@ -181,6 +195,7 @@ class IterateurDATA implements Iterator {
 		// {datapath query.results}
 		// extraire le chemin "query.results" du tableau de donnees
 		if (!$this->err
+		AND isset($this->command['datapath'])
 		AND is_array($this->command['datapath'])) {
 			$this->select_datapath();
 		}
@@ -218,6 +233,7 @@ class IterateurDATA implements Iterator {
 		$src = $this->command['source'][0];
 
 		# avons-nous un cache dispo ?
+		$cle = null;
 		if (is_string($src))
 			$cle = 'datasource_'.md5($this->command['sourcemode'].':'.var_export($this->command['source'],true));
 
@@ -279,7 +295,7 @@ class IterateurDATA implements Iterator {
 			if (!is_array($this->tableau))
 				$this->err = true;
 
-			if (!$this->err AND $ttl>0)
+			if (!$this->err AND isset($ttl) and $ttl>0)
 				$this->cache_set($cle, $ttl);
 
 		}
