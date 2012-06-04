@@ -605,7 +605,7 @@ function calculer_select ($select = array(), $from = array(),
 		if (!$menage
 		OR isset($afrom[$cle])
 		OR calculer_jointnul($cle, $select)
-		OR calculer_jointnul($cle, array_diff($join,array($cle=>$join[$cle])))
+		OR calculer_jointnul($cle, array_diff_key($join, array($cle=>$join[$cle])))
 		OR calculer_jointnul($cle, $having)
 		OR calculer_jointnul($cle, $where_simples)) {
 			// corriger les references non explicites dans select
