@@ -2103,15 +2103,17 @@ function trouve_modele($nom) {
  */
 function trouver_fond($nom, $dir='', $pathinfo = false) {
 	$f = find_in_path($nom.'.'. _EXTENSION_SQUELETTES, $dir?rtrim($dir,'/').'/':'');
-  if (!$pathinfo) return $f;
-  // renvoyer un tableau detaille si $pathinfo==true
+	if (!$pathinfo) return $f;
+	// renvoyer un tableau detaille si $pathinfo==true
 	$p = pathinfo($f);
-  if (!$p['extension'])
-	  $p['extension'] = _EXTENSION_SQUELETTES;
-  if (!$p['filename'])
-	   $p['filename'] = ($p['basename']?substr($p['basename'],0,-strlen($p['extension'])-1):'');
+	if (!isset($p['extension']) OR !$p['extension']) {
+		$p['extension'] = _EXTENSION_SQUELETTES;
+	}
+	if (!isset($p['extension']) OR !$p['filename']) {
+		$p['filename'] = ($p['basename']?substr($p['basename'],0,-strlen($p['extension'])-1):'');
+	}
 	$p['fond'] = ($f?substr($f,0,-strlen($p['extension'])-1):'');
-  return $p;
+	return $p;
 }
 
 function tester_url_ecrire($nom){

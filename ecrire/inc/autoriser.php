@@ -15,15 +15,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('base/abstract_sql');
 
 # faut-il tracer les autorisations dans tmp/spip.log ?
-define ('_DEBUG_AUTORISER', false);
+defined('_DEBUG_AUTORISER') || define('_DEBUG_AUTORISER', false);
 
 // Constantes surchargeables, cf. plugin autorite
 // false pour ignorer la notion d'admin restreint # todo: une option a activer
-define('_ADMINS_RESTREINTS', true);
+defined('_ADMINS_RESTREINTS') || define('_ADMINS_RESTREINTS', true);
 // statut par defaut a la creation
-define('_STATUT_AUTEUR_CREATION', '1comite');
+defined('_STATUT_AUTEUR_CREATION') || define('_STATUT_AUTEUR_CREATION', '1comite');
 // statuts associables a des rubriques (separes par des virgules)
-define('_STATUT_AUTEUR_RUBRIQUE', _ADMINS_RESTREINTS ? '0minirezo' : '');
+defined('_STATUT_AUTEUR_RUBRIQUE') || define('_STATUT_AUTEUR_RUBRIQUE', _ADMINS_RESTREINTS ? '0minirezo' : '');
 
 // mes_fonctions peut aussi declarer des autorisations, donc il faut donc le charger
 if ($f = find_in_path('mes_fonctions.php')) {
