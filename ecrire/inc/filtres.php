@@ -2954,7 +2954,7 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
 	// ou trop ancien
 	if (!file_exists($filename)
 		OR (isset($cache['lastmodified']) AND $cache['lastmodified'] AND filemtime($filename)<$cache['lastmodified'])
-		OR _VAR_MODE=='recalcul') 
+		OR (defined('_VAR_MODE') AND _VAR_MODE=='recalcul')) 
 	{
 		$contenu = $cache['texte'];
 		// passer les urls en absolu si c'est une css
