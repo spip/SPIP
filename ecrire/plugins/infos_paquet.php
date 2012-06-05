@@ -297,6 +297,19 @@ function info_paquet_paquet($phraseur, $attrs, $texte) {
 }
 
 /**
+ * Cas particulier sur la balise traduire :
+ * Elle n'a pas de 'nom' 
+ *
+ * @param object $phraseur
+ * @param array $attrs
+ * @param string $texte
+**/
+function info_paquet_traduire($phraseur, $attrs, $texte) {
+	$n = $phraseur->contenu['compatible'];
+	$phraseur->versions[$n]['traduire'][] = $attrs;
+}
+
+/**
  * Cas particulier de la balise spip :
  * Remplacer cet index qui ne sert a rien par un index balise=spip et ajouter la reference a la dtd
  *
