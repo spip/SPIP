@@ -69,7 +69,9 @@ if (isset($GLOBALS['_INC_PUBLIC']) AND $GLOBALS['_INC_PUBLIC']) {
 	if ($fond == 'login')
 		$forcer_lang = true;
 
-	if (isset($forcer_lang) AND $forcer_lang AND ($forcer_lang!=='non') AND !_request('action')) {
+	if (isset($forcer_lang) AND $forcer_lang AND ($forcer_lang!=='non')
+		AND !_request('action')
+		AND $_SERVER['REQUEST_METHOD'] != 'POST') {
 		include_spip('inc/lang');
 		verifier_lang_url();
 	}
