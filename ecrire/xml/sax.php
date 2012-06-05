@@ -211,7 +211,9 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='', $charset
 	xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
 
 	$phraseur->sax = $xml_parser;
-	$phraseur->entete = $entete;
+	if (isset($entete)) {
+		$phraseur->entete = $entete;
+	}
 	$phraseur->page = $page;
 	$phraseur->dtc = $dtc;
 	$phraseur->phraserTout($xml_parser, $page);

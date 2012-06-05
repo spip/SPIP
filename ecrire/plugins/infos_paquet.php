@@ -163,10 +163,13 @@ function paquet_finElement($phraseur, $name) {
 	if ($phraseur->err) return;
 	$n = $phraseur->contenu['compatible'];
 
-	if (is_array($phraseur->versions[$n][$name][0])){
+	if (isset($phraseur->versions[$n][$name][0]) AND is_array($phraseur->versions[$n][$name][0])){
 		$attrs = $phraseur->versions[$n][$name][0];
 		unset($phraseur->versions[$n][$name][0]);
+	} else {
+		$attrs = array();
 	}
+
 	$texte = $phraseur->versions[$n][''];
 	$phraseur->versions[$n][''] = '';
 
@@ -176,6 +179,7 @@ function paquet_finElement($phraseur, $name) {
 	elseif (!$attrs)
 		$phraseur->versions[$n][$name] = $texte;
 	else {
+		// Traitement generique. Si $attrs['nom'] n'existe pas, ce n'est pas normal ici
 		$phraseur->versions[$n][$name][$attrs['nom']] = $attrs;
 		#	  echo("<br>pour $name $n " . $attrs['nom']); var_dump($phraseur->versions[$n]);
 	}
