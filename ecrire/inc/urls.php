@@ -70,7 +70,7 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
 	if ($renommer) {
 		$a = $renommer($url, $fond, $contexte);
 		if (is_array($a)) {
-			list($ncontexte, $type, $url_redirect, $nfond) = $a;
+			list($ncontexte, $type, $url_redirect, $nfond) = array_pad($a, 4, null);
 			if ($url_redirect == $url)
 				$url_redirect = ""; // securite pour eviter une redirection infinie
 			if ($assembler AND strlen($url_redirect)) {
