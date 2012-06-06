@@ -33,6 +33,7 @@ function formulaires_configurer_articles_charger_dist(){
 
 function formulaires_configurer_articles_traiter_dist(){
 	$res = array('editable'=>true);
+	$purger_skel = false;
 	// Purger les squelettes si un changement de meta les affecte
 	if ($i = _request('post_dates') AND ($i != $GLOBALS['meta']["post_dates"]))
 		$purger_skel = true;

@@ -84,7 +84,7 @@ function url_vignette_choix($process){
 				return '';
 			break;
 		case 'netpbm':
-			if (_PNMSCALE_COMMAND=='')
+			if (!defined('_PNMSCALE_COMMAND') OR _PNMSCALE_COMMAND=='')
 				return '';
 			break;
 		case 'imagick':
@@ -92,7 +92,7 @@ function url_vignette_choix($process){
 				return '';
 			break;
 		case 'convert':
-			if (_CONVERT_COMMAND=='')
+			if (!defined('_CONVERT_COMMAND') OR _CONVERT_COMMAND=='')
 				return '';
 			break;
 	}

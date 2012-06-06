@@ -12,11 +12,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/presentation');
+include_spip('inc/config');
 
 function formulaires_configurer_relayeur_charger_dist(){
 	$valeurs = array(
-			'http_proxy' => no_password_proxy_url($GLOBALS['meta']['http_proxy']),
-			'http_noproxy' => $GLOBALS['meta']['http_noproxy'],
+			'http_proxy' =>no_password_proxy_url(lire_config('http_proxy', '')),
+			'http_noproxy' => lire_config('http_noproxy', ''),
 			'test_proxy' => 'http://www.spip.net/',
 			);
 
@@ -25,7 +26,7 @@ function formulaires_configurer_relayeur_charger_dist(){
 
 function formulaires_configurer_relayeur_verifier_dist(){
 	$erreurs = array();
-	$http_proxy = relayeur_saisie_ou_config(_request('http_proxy'), $GLOBALS['meta']['http_proxy']);
+	$http_proxy = relayeur_saisie_ou_config(_request('http_proxy'), lire_config('http_proxy', ''));
 	$http_noproxy = _request('http_noproxy');
 
 	if ($http_proxy AND !preg_match(",https?://,", $http_proxy)){
@@ -74,7 +75,7 @@ function formulaires_configurer_relayeur_verifier_dist(){
 function formulaires_configurer_relayeur_traiter_dist(){
 	$res = array('editable'=>true);
 
-	$http_proxy = relayeur_saisie_ou_config(_request('http_proxy'), $GLOBALS['meta']['http_proxy']);
+	$http_proxy = relayeur_saisie_ou_config(_request('http_proxy'), lire_config('http_proxy', ''));
 	$http_noproxy = _request('http_noproxy');
 	if ($http_proxy !== NULL)
 		ecrire_meta('http_proxy', $http_proxy);
@@ -125,7 +126,9 @@ function glue_url ($url){
 // Ne pas afficher la partie 'password' du proxy
 // http://doc.spip.org/@no_password_proxy_url
 function no_password_proxy_url($http_proxy) {
-	if ($p = @parse_url($http_proxy)
+	if ($http_proxy
+	AND $p = @parse_url($http_proxy)
+	AND isset($p['pass'])
 	AND $p['pass']) {
 		$p['pass'] = '****';
 		$http_proxy = glue_url($p);

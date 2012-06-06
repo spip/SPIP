@@ -258,6 +258,7 @@ function propager_les_secteurs()
 function calculer_langues_rubriques_etape() {
 	$s = sql_select("A.id_rubrique AS id_rubrique, R.lang AS lang", "spip_rubriques AS A, spip_rubriques AS R", "A.id_parent = R.id_rubrique AND A.langue_choisie != 'oui' AND R.lang<>'' AND R.lang<>A.lang");
 
+	$t = false;
 	while ($row = sql_fetch($s)) {
 		$id_rubrique = $row['id_rubrique'];
 		$t = sql_updateq('spip_rubriques', array('lang' => $row['lang'], 'langue_choisie'=>'non'), "id_rubrique=$id_rubrique");
