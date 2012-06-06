@@ -531,7 +531,7 @@ jQuery.spip.ajaxReload = function(blocfrag, options){
 		var history=options.history || false;
 		var args = options.args || {};
 		for (var key in args)
-			href = parametre_url(href,key,args[key]==undefined?'':args[key]);
+			href = parametre_url(href,key,args[key]==undefined?'':args[key],'&',args[key]==undefined?false:true);
 		var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
 		// recharger sans historisation dans l'url
 		jQuery.spip.loadAjax(blocfrag, url, href, {force:true, callback:callback, history:history});
@@ -775,8 +775,11 @@ jQuery.fn.animateAppend = function(callback){
  *   valeur
  * @param sep
  *  separateur '&' par defaut
+ * @param force_vide
+ *  si true et v='' insere &k= dans l'url au lieu de supprimer le k (false par defaut)
+ *  permet de vider une valeur dans une requete ajax (dans un reload)
  */
-function parametre_url(url,c,v,sep){
+function parametre_url(url,c,v,sep,force_vide){
 	// Si l'URL n'est pas une chaine, on ne peut pas travailler dessus et on quitte
 	if (typeof(url) == 'undefined'){
 		url = '';
@@ -832,7 +835,7 @@ function parametre_url(url,c,v,sep){
 
 	if (v==null) return v; // rien de trouve
 	// traiter les parametres pas encore trouves
-	if (v || v.length) {
+	if (v || v.length || force_vide) {
 		ajouts = "="+ajouts.join("=")+"=";
 		var all=c.split('|');
 		for (n=0;n<all.length;n++){
