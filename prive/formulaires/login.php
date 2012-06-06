@@ -73,7 +73,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 		$res = $traiter($cible, $login, $prive);
 		$valeurs = array_merge($valeurs,$res);
 
-		if ($res['redirect']){
+		if (isset($res['redirect']) and $res['redirect']){
 			include_spip('inc/headers');
 			# preparer un lien pour quand redirige_formulaire ne fonctionne pas
 			$valeurs['_deja_loge'] = inserer_attribut(
@@ -207,7 +207,7 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 			include_spip('inc/headers');
 			$res['redirect'] = $cible;
 		} else {
-			$res['message_ok'] .= inserer_attribut(
+			$res['message_ok'] = inserer_attribut(
 				"<a>" . _T('login_par_ici') . "</a>",
 				'href', $cible
 			);
