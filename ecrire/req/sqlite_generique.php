@@ -67,11 +67,6 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $
 		return false;
 	}
 
-	// chargement des constantes
-	// il ne faut pas definir les constantes avant d'avoir charge les modules sqlite
-	$define = "spip_sqlite".$sqlite_version."_constantes";
-	$define();
-
 	$ok = false;
 	if (!$db){
 		// si pas de db ->
@@ -1867,7 +1862,8 @@ function _sqlite_requete_create($nom, $champs, $cles, $autoinc = false, $tempora
 	// il faut passer par des create index
 	// Il gere par contre primary key !
 	// Soit la PK est definie dans les cles, soit dans un champs
-	if (!$c = $cles[$pk = "PRIMARY KEY"]){
+	$c = ""; // le champ de cle primaire
+	if (!isset($cles[$pk = "PRIMARY KEY"]) OR !$c = $cles[$pk]){
 		foreach ($champs as $k => $v){
 			if (false!==stripos($v, $pk)){
 				$c = $k;
