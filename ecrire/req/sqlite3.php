@@ -18,19 +18,21 @@ include_spip('req/sqlite_generique');
 
 $GLOBALS['spip_sqlite3_functions_1'] = _sqlite_ref_fonctions();
 
-/**
- * Constantes pour SQLite 3
-**/
-define('SPIP_SQLITE3_ASSOC', constant('PDO::FETCH_ASSOC'));
-define('SPIP_SQLITE3_NUM', constant('PDO::FETCH_NUM'));
-define('SPIP_SQLITE3_BOTH', constant('PDO::FETCH_BOTH'));
-
 
 // http://doc.spip.org/@req_sqlite3_dist
 function req_sqlite3_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 	return req_sqlite_dist($addr, $port, $login, $pass, $db, $prefixe, $sqlite_version=3);
 }
 
+
+// http://doc.spip.org/@spip_sqlite3_constantes
+function spip_sqlite3_constantes(){
+	if (!defined('SPIP_SQLITE3_ASSOC')) {
+		define('SPIP_SQLITE3_ASSOC', PDO::FETCH_ASSOC);
+		define('SPIP_SQLITE3_NUM',   PDO::FETCH_NUM);
+		define('SPIP_SQLITE3_BOTH',  PDO::FETCH_BOTH);
+	}
+}
 
 function spip_versions_sqlite3()
 {
