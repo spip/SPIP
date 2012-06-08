@@ -1,6 +1,6 @@
 <traduction module="public" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
 	<langue code="ar" url="http://trad.spip.org/tradlang_module/public?lang_cible=ar">
-		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="&lt;span lang=&#039;fr&#039;&gt;George&lt;/span&gt;" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="ast" url="http://trad.spip.org/tradlang_module/public?lang_cible=ast">
 		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
@@ -26,7 +26,7 @@
 		<traducteur nom="sQuonk" lien="http://trad.spip.org/auteur/squonk" />
 		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
-		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="&lt;span lang=&#039;fr&#039;&gt;George&lt;/span&gt;" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="en_hx" />
 	<langue code="eo" />
