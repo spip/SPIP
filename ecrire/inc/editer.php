@@ -321,7 +321,7 @@ function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') 
 				'spip_table_objet' => $spip_table_objet,
 				'type' =>$type,
 				'id_objet' => $id,
-				'champs' => isset($options['champs'])?$options['champs']:array(),
+				'champs' => isset($options['champs'])?$options['champs']:array(), // [doc] c'est quoi ?
 				'action' => 'controler'
 			),
 			'data' => $champs
@@ -348,7 +348,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	// On elimine les donnees non modifiees par le formulaire (mais
 	// potentiellement modifiees entre temps par un autre utilisateur)
 	foreach ($champs as $key => $val) {
-		if ($m = $ctr[$prefix.$key]) {
+		if (isset($ctr[$prefix.$key]) AND $m = $ctr[$prefix.$key]) {
 			if ($m == md5($val))
 				unset ($champs[$key]);
 		}
@@ -371,7 +371,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	// de conflit.
 	$ctrh = $ctrq = $conflits = array();
 	foreach (array_keys($champs) as $key) {
-		if ($m = $ctr[$prefix.$key]) {
+		if (isset($ctr[$prefix.$key]) AND $m = $ctr[$prefix.$key]) {
 			$ctrh[$key] = $m;
 			$ctrq[] = $key;
 		}

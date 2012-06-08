@@ -73,7 +73,7 @@ function creer_repertoire_documents($ext) {
 
 	// Cette variable de configuration peut etre posee par un plugin
 	// par exemple acces_restreint
-	if ($GLOBALS['meta']["creer_htaccess"] == 'oui') {
+	if (isset($GLOBALS['meta']["creer_htaccess"]) AND $GLOBALS['meta']["creer_htaccess"] == 'oui') {
 		include_spip('inc/acces');
 		verifier_htaccess($rep);
 	}

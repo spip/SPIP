@@ -99,10 +99,13 @@ function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur=''
 	unset($c['id_secteur']);
 
 	// Gerer les champs non vides
-	if (is_array($options['nonvide']))
-	foreach ($options['nonvide'] as $champ => $sinon)
-		if ($c[$champ] === '')
-			$c[$champ] = $sinon;
+	if (isset($options['nonvide']) AND is_array($options['nonvide'])) {
+		foreach ($options['nonvide'] as $champ => $sinon) {
+			if ($c[$champ] === '') {
+				$c[$champ] = $sinon;
+			}
+		}
+	}
 
 
 	// N'accepter que les champs qui existent
@@ -125,7 +128,7 @@ function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur=''
 				'spip_table_objet' => $spip_table_objet,
 				'type' =>$objet,
 				'id_objet' => $id_objet,
-				'champs' => $options['champs'],
+				'champs' => isset($options['champs']) ? $options['champs'] : array(), // [doc] c'est quoi ?
 				'serveur' => $serveur,
 				'action' => 'modifier'
 			),
@@ -172,7 +175,7 @@ function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur=''
 		// la modif peut avoir lieu
 
 		// faut-il ajouter date_modif ?
-		if ($options['date_modif']
+		if (isset($options['date_modif']) AND $options['date_modif']
 		AND !isset($champs[$options['date_modif']]))
 			$champs[$options['date_modif']] = date('Y-m-d H:i:s');
 
@@ -220,7 +223,7 @@ function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur=''
 					'spip_table_objet' => $spip_table_objet,
 					'type' =>$objet,
 					'id_objet' => $id_objet,
-					'champs' => $options['champs'],
+					'champs' => isset($options['champs']) ? $options['champs'] : array(), // [doc] kesako ?
 					'serveur' => $serveur,
 					'action' => 'modifier'
 				),
