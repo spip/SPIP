@@ -110,7 +110,9 @@ function f_afficher_blocs_ecrire($flux) {
 			$flux['data']['texte'] = pipeline('affiche_droite',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte'])).liste_objets_bloques($exec,$flux['args']['contexte']);
 		}
 		elseif ($fond=="prive/squelettes/hierarchie/$exec" AND $o[$exec]) {
-			$flux['data']['texte'] = pipeline('affiche_hierarchie',array('args'=>array('objet'=>$o[$exec]['type'],'id_objet'=>intval($flux['args']['contexte'][$o[$exec]['id_table_objet']])),'data'=>$flux['data']['texte']));
+			// id non defini sur les formulaire de nouveaux objets
+			$id = isset($flux['args']['contexte'][$o[$exec]['id_table_objet']]) ? intval($flux['args']['contexte'][$o[$exec]['id_table_objet']]) : 0;
+			$flux['data']['texte'] = pipeline('affiche_hierarchie',array('args'=>array('objet'=>$o[$exec]['type'],'id_objet'=>$id),'data'=>$flux['data']['texte']));
 		}
 		elseif ($fond=="prive/squelettes/contenu/$exec"){
 			if (!strpos($flux['data']['texte'],"<!--affiche_milieu-->"))
