@@ -114,7 +114,7 @@ function info_plugin_normalise_necessite($necessite) {
 	if (is_array($necessite)) {
 		foreach($necessite as $need) {
 			$id = $need['id'];
-			$v = $need['version'];
+			$v = isset($need['version']) ? $need['version'] : '';
 			
 			// Necessite SPIP version x ?
 			if (strtoupper($id)=='SPIP') {
@@ -134,7 +134,7 @@ function info_plugin_normalise_utilise($utilise) {
 	if (is_array($utilise)) {
 		foreach($utilise as $need){
 			$id = $need['id'];
-			$v = $need['version'];
+			$v = isset($need['version']) ? $need['version'] : '' ;
 			$res[]= array('nom' => $id, 'id' => $id, 'version' => $v, 'compatibilite' => $v);
 		}
 	}
