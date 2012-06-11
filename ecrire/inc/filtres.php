@@ -148,7 +148,7 @@ $GLOBALS['spip_matrice']['filtre_audio_x_pn_realaudio'] = 'inc/filtres_mime.php'
 // charge les fonctions graphiques et applique celle demandee
 // http://doc.spip.org/@filtrer
 function filtrer($filtre) {
-	if (is_string($f = $GLOBALS['spip_matrice'][$filtre])){
+	if (isset($GLOBALS['spip_matrice'][$filtre]) and is_string($f = $GLOBALS['spip_matrice'][$filtre])){
 		find_in_path($f,'', true);
 		$GLOBALS['spip_matrice'][$filtre] = true;
 	}
