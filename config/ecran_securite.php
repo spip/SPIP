@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.1.0'); // 28 avril  2012
+define('_ECRAN_SECURITE', '1.1.1'); // 11 juin  2012
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -50,14 +50,14 @@ foreach ($GLOBALS as $var => $val)
  */
 $cjpeg_command='';
 
-/*     - controle la variable lang, var_recherche, aide (XSS)
+/*     - controle de quelques variables (XSS)
  *
  */
-foreach(array('lang', 'var_recherche', 'aide', 'var_lang_r', 'lang_r') as $var) {
+foreach(array('lang', 'var_recherche', 'aide', 'var_lang_r', 'lang_r', 'var_ajax_ancre') as $var) {
 	if (isset($_GET[$var]))
-		$_REQUEST[$var] = $GLOBALS[$var] = $_GET[$var] = preg_replace(',[^\w-]+,',' ',(string)$_GET[$var]);
+		$_REQUEST[$var] = $GLOBALS[$var] = $_GET[$var] = preg_replace(',[^\w\,/#&;-]+,',' ',(string)$_GET[$var]);
 	if (isset($_POST[$var]))
-		$_REQUEST[$var] = $GLOBALS[$var] = $_POST[$var] = preg_replace(',[^\w-]+,',' ',(string)$_POST[$var]);
+		$_REQUEST[$var] = $GLOBALS[$var] = $_POST[$var] = preg_replace(',[^\w\,/#&;-]+,',' ',(string)$_POST[$var]);
 }
 
 /*     - filtre l'acces a spip_acces_doc (injection SQL en 1.8.2x)
