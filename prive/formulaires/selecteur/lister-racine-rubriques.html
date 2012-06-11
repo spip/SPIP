@@ -1,6 +1,6 @@
 #SET{p,pagination_racine_rubriques}
 <B_enfants>
-[<p class="pagination">(#PAGINATION)</p>]
+[<p class="pagination">(#PAGINATION{prive})</p>]
 <ul class="items">
 <BOUCLE_enfants(RUBRIQUES){id_parent=0}{statut?}{id_secteur?}{pagination 100 #GET{p}}{par num titre, titre}>
 	<li class="rubrique">
