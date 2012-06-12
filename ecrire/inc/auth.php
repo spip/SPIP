@@ -132,9 +132,16 @@ function auth_mode()
 	// Essayer auth http si significatif
 	// (ignorer les login d'intranet independants de spip)
 	if (!$ignore_auth_http) {
-		if (isset($_SERVER['PHP_AUTH_USER'])
-		AND isset($_SERVER['PHP_AUTH_PW'])) {
-			if ($r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
+		if (
+			(isset($_SERVER['PHP_AUTH_USER']) AND isset($_SERVER['PHP_AUTH_PW'])
+						AND $r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']))
+			OR
+			// Si auth http differtente de basic, PHP_AUTH_PW
+			// est indisponible mais tentons quand meme pour
+			// autocreation via LDAP
+			(isset($_SERVER['REMOTE_USER'])
+						AND $r = lire_php_auth($_SERVER['PHP_AUTH_USER'] = $_SERVER['REMOTE_USER'], ''))
+			) {
 				if (!$id_auteur) {
 					$_SERVER['PHP_AUTH_PW'] = '';
 					$auth_can_disconnect = true;
@@ -149,10 +156,10 @@ function auth_mode()
 					$id_auteur = '';
 					} */
 				}
-			}
+		}
 		// Authentification .htaccess old style, car .htaccess semble
 		// souvent definir *aussi* PHP_AUTH_USER et PHP_AUTH_PW
-		} else if (isset($_SERVER['REMOTE_USER']))
+		else if (isset($_SERVER['REMOTE_USER']))
 			$connect_login = $_SERVER['REMOTE_USER'];
 	}
 
