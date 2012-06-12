@@ -197,14 +197,19 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 					$results = array();
 				if (!isset($results[$id]))
 					$results[$id] = array();
-				if ($joint['score'])
+				if (isset($joint['score']) and $joint['score']) {
 					$results[$id]['score'] += $joint['score'];
-				if ($joint['champs'])
-				foreach($joint['champs'] as $c => $val)
-					$results[$id]['champs'][$table_liee.'.'.$c] = $val;
-				if ($joint['matches'])
-				foreach($joint['matches'] as $c => $val)
-					$results[$id]['matches'][$table_liee.'.'.$c] = $val;
+				}
+				if (isset($joint['champs']) and $joint['champs']) {
+					foreach($joint['champs'] as $c => $val) {
+						$results[$id]['champs'][$table_liee.'.'.$c] = $val;
+					}
+				}
+				if (isset($joint['matches']) and $joint['matches']) {
+						foreach($joint['matches'] as $c => $val) {
+						$results[$id]['matches'][$table_liee.'.'.$c] = $val;
+					}
+				}
 			}
 		}
 	}
