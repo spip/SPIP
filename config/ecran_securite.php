@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.1.1'); // 11 juin  2012
+define('_ECRAN_SECURITE', '1.1.2'); // 12 juin  2012
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -218,6 +218,13 @@ AND $_REQUEST['reinstall'] == 'oui')
 /* echappement xss referer */
 if (isset($_SERVER['HTTP_REFERER']))
 	$_SERVER['HTTP_REFERER'] = strtr($_SERVER['HTTP_REFERER'], '<>"\'', '[]##');
+
+/* Reinjection des cles en html dans l'admin r19561 */
+if (strpos($_SERVER['REQUEST_URI'],"ecrire/")!==false){
+	$zzzz=implode("",array_keys($_REQUEST));
+	if (strlen($zzzz)!=strcspn($zzzz,'<>"\''))
+		$ecran_securite_raison = 'Cle incorrecte en $_REQUEST';
+}
 
 /*
  * S'il y a une raison de mourir, mourons
