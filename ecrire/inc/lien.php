@@ -54,7 +54,13 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 		$class = "spip_mail";
 	elseif (preg_match('/^<html>/',$texte)) # cf traiter_lien_explicite
 		$class = "spip_url spip_out";
-	elseif (!$class) $class = "spip_out"; # si pas spip_in|spip_glossaire
+	elseif (!$class) {
+	        # spip_out sur les URLs externes
+	        if (preg_match(',^\w+://,iS', $lien)
+	        AND strncasecmp($lien, url_de_base(), strlen(url_de_base()))
+	        )
+                $class = "spip_out"; # si pas spip_in|spip_glossaire
+        }
 
 	// Si l'objet n'est pas de la langue courante, on ajoute hreflang
 	if (!$hlang AND $lang!==$GLOBALS['spip_lang'])
