@@ -357,7 +357,7 @@ eseguibile grazie a un accesso FTP.</p>',
 	'info_gauche_auteurs' => 'Elenco di tutti gli autori del sito.
 Il loro status è indicato dal colore dell\'icona (redattore = giallo; amministratore = verde).',
 	'info_gauche_auteurs_exterieurs' => 'Gli autori esterni, senza accesso al sito, sono indicati da un\'icona blu;
-gli autori eliminati, invece, da un cestino.', # MODIF
+gli autori eliminati da un\'icona grigia.',
 	'info_gauche_messagerie' => 'Il sistema di messaggistica permette di scambiare dei messaggi tra redattori, di conservare dei memo (promemoria ad uso personale) o di pubblicare degli annunci nel pannello di controllo dell\'area riservata (se sei amministratore).',
 	'info_gauche_numero_auteur' => 'AUTORE NUMERO',
 	'info_gauche_statistiques_referers' => 'Questa pagina presenta un elenco dei siti che contengono link verso il tuo (<i>referrer</i>). Questo elenco è valido però solo per oggi essendo azzerato ogni 24 ore.',
