@@ -57,7 +57,7 @@ function public_debusquer_dist($message = '', $lieu = ''){
 		set_request('var_mode', 'debug');
 		$GLOBALS['bouton_admin_debug'] = true;
 		// Permettre a la compil de continuer
-		if (is_object($lieu) AND !$lieu->code)
+		if (is_object($lieu) AND (!isset($lieu->code) OR !$lieu->code))
 			$lieu->code = "''";
 		// forcer l'appel au debusqueur en cas de boucles infernales
 		$urgence = (_DEBUG_MAX_SQUELETTE_ERREURS AND count($tableau_des_erreurs)>_DEBUG_MAX_SQUELETTE_ERREURS);
@@ -412,7 +412,7 @@ function debusquer_squelette($fonc, $mode, $self){
 	global $debug_objets;
 
 	if ($mode!=='validation'){
-		if ($debug_objets['sourcefile']){
+		if (isset($debug_objets['sourcefile']) and $debug_objets['sourcefile']){
 			$res = "<div id='spip-boucles'>\n"
 				. debusquer_navigation_squelettes($self)
 				. "</div>";
