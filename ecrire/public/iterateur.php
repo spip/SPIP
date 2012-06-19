@@ -158,7 +158,8 @@ class IterDecorator extends FilterIterator {
 			$this->err = $this->iter->err;
 		}
 
-		$this->total = $this->count();
+		// pas d'init a priori, le calcul ne sera fait qu'en cas de besoin (provoque une double requete souvent inutile en sqlite)
+		//$this->total = $this->count();
 	}
 
 
