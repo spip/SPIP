@@ -402,7 +402,7 @@ function alertes_auteur($id_auteur) {
 			$alertes[] = _T('plugins_erreur', array('plugins' => $msg));
 	}
 
-	$a = $GLOBALS['meta']['message_alertes_auteurs'];
+	$a = isset($GLOBALS['meta']['message_alertes_auteurs']) ? $GLOBALS['meta']['message_alertes_auteurs'] : '';
 	if ($a
 		AND is_array($a = unserialize($a))
 	  AND count($a)){
