@@ -33,23 +33,27 @@ function date_picker_options(){
 		selectOtherMonths: true
 	};
 }
-
+function date_picker_init(){
+	jQuery('input.date').not('.datePicker')
+		.addClass('datePicker').each(function(){
+			var options = {showOn: 'button'};
+			if (jQuery(this).attr('data-startDate'))
+				options.minDate = jQuery(this).attr('data-startDate');
+			if (jQuery(this).attr('data-endDate'))
+				options.maxDate = jQuery(this).attr('data-endDate');
+			jQuery(this)
+				.datepicker(jQuery.extend(date_picker_options(),options))
+				.trigger('datePickerLoaded');
+		});
+	jQuery("input.heure").not('.timePicker').addClass('timePicker').timePicker();
+}
+var date_picker_loading;
 if (window.jQuery){
 	jQuery(function(){
-		if (jQuery('input.date,input.heure').length)
-			jQuery.getScript('#PRODUIRE{fond=formulaires/dateur/jquery.dateur.js}',function(){
-				jQuery('input.date')
-					.addClass('datePicker')
-					.datepicker(jQuery.extend(date_picker_options(),
-						{
-						showOn: 'button'[,
-						minDate:'(#ENV{startDate})'][,
-						maxDate:'(#ENV{endDate})']
-						})
-					)
-					.trigger('datePickerLoaded');
-				jQuery("input.heure").addClass('timePicker').timePicker();
-			});
+		if (jQuery('input.date,input.heure').length && !date_picker_loading){
+			date_picker_loading = true; // inutile de loader deux fois
+			jQuery.getScript('#PRODUIRE{fond=formulaires/dateur/jquery.dateur.js}',date_picker_init);
+		}
 	});
 }
 /*]]>*/</script>
