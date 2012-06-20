@@ -40,13 +40,13 @@ function determine_source_lien_objet($a,$b,$c){
 
 /**
  * #FORMULAIRE_EDITER_LIENS{auteurs,article,23}
- *   pour associer des auteurs à l'article 23, sur la table pivot spip_auteurs_liens
+ *   pour associer des auteurs Ã  l'article 23, sur la table pivot spip_auteurs_liens
  * #FORMULAIRE_EDITER_LIENS{article,23,auteurs}
- *   pour associer des auteurs à l'article 23, sur la table pivot spip_articles_liens
+ *   pour associer des auteurs Ã  l'article 23, sur la table pivot spip_articles_liens
  * #FORMULAIRE_EDITER_LIENS{articles,auteur,12}
- *   pour associer des articles à l'auteur 12, sur la table pivot spip_articles_liens
+ *   pour associer des articles Ã  l'auteur 12, sur la table pivot spip_articles_liens
  * #FORMULAIRE_EDITER_LIENS{auteur,12,articles}
- *   pour associer des articles à l'auteur 12, sur la table pivot spip_auteurs_liens
+ *   pour associer des articles Ã  l'auteur 12, sur la table pivot spip_auteurs_liens
  *
  * @param string $a
  * @param string|int $b
@@ -68,7 +68,7 @@ function formulaires_editer_liens_charger_dist($a,$b,$c,$editable=true){
 	if (!objet_associable($objet_lien))
 		return false;
 	
-	// L'éditabilité :) est définie par un test permanent (par exemple "associermots") ET le 4ème argument
+	// L'Ã©ditabilitÃ© :) est dÃ©finie par un test permanent (par exemple "associermots") ET le 4Ã¨me argument
 	$editable = ($editable and autoriser('associer'.$table_source, $objet, $id_objet));
 	
 	if (!$editable AND !count(objet_trouver_liens(array($objet_lien=>'*'),array(($objet_lien==$objet_source?$objet:$objet_source)=>'*'))))

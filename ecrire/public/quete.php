@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('base/abstract_sql');
 
 /**
- * retourne l'url de redirection d'un article virtuel, seulement si il est publié
+ * retourne l'url de redirection d'un article virtuel, seulement si il est publiÃ©
  * http://doc.spip.org/@quete_chapo
  *
  * @param $id_article
