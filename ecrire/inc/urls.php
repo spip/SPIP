@@ -49,7 +49,8 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
 	$save = array(@$GLOBALS['fond'],@$GLOBALS['contexte'],@$_SERVER['REDIRECT_url_propre'],@$_ENV['url_propre']);
 	if (is_null($current_base)){
 		include_spip('inc/filtres_mini');
-		$current_base = url_absolue('./');
+		// le decodage des urls se fait toujours par rapport au site public
+		$current_base = url_absolue(_DIR_RACINE?_DIR_RACINE:'./');
 	}
 	if (strncmp($url,$current_base,strlen($current_base))==0)
 		$url = substr($url,strlen($current_base));
