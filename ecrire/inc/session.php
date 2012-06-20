@@ -103,6 +103,10 @@ function ajouter_session($auteur) {
 			time() + $duree
 			);
 		spip_log("ajoute session $fichier_session cookie $duree");
+
+		// purger au passage les vieux fichiers de session
+		supprimer_sessions(-1);
+
 		return $_COOKIE['spip_session'];
 	}
 }
