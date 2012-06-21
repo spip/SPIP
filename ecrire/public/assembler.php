@@ -517,19 +517,24 @@ function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 
 // http://doc.spip.org/@page_base_href
 function page_base_href(&$texte){
-	if (!defined('_SET_HTML_BASE'))
-		// si la profondeur est superieure a 1
-		// est que ce n'est pas une url page ni une url action
-		// activer par defaut
-		define('_SET_HTML_BASE',
-			$GLOBALS['profondeur_url'] >= (_DIR_RESTREINT?1:2)
-			AND _request(_SPIP_PAGE) !== 'login'
-			AND !_request('action'));
+	static $set_html_base = null;
+	if (is_null($set_html_base)){
+		if (!defined('_SET_HTML_BASE'))
+			// si la profondeur est superieure a 1
+			// est que ce n'est pas une url page ni une url action
+			// activer par defaut
+			$set_html_base = ((
+				$GLOBALS['profondeur_url'] >= (_DIR_RESTREINT?1:2)
+				AND _request(_SPIP_PAGE) !== 'login'
+				AND !_request('action'))?true:false);
+		else
+			$set_html_base = _SET_HTML_BASE;
+	}
 
-	if (_SET_HTML_BASE
-	AND isset($GLOBALS['html']) AND $GLOBALS['html']
-	AND $GLOBALS['profondeur_url']>0
-	AND ($poshead = strpos($texte,'</head>'))!==FALSE){
+	if ($set_html_base
+	  AND isset($GLOBALS['html']) AND $GLOBALS['html']
+	  AND $GLOBALS['profondeur_url']>0
+	  AND ($poshead = strpos($texte,'</head>'))!==FALSE){
 		$head = substr($texte,0,$poshead);
 		$insert = false;
 		if (strpos($head, '<base')===false) 
