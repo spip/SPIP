@@ -882,7 +882,7 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
   à sa valeur par défaut (pas de création
   des fichiers).</p>',
 	'texte_informations_personnelles_1' => 'Le système va maintenant vous créer un accès personnalisé au site.',
-	'texte_informations_personnelles_2' => '(Note : s\'il s\'agit d\'une réinstallation, et que votre accès marche toujours, vous pouvez',
+	'texte_informations_personnelles_2' => '(Note : il s\'agit d\'une réinstallation, si votre accès marche toujours vous pouvez',
 	'texte_introductif_article' => '(Texte introductif de l\'article.)',
 	'texte_jeu_caractere' => 'Il est conseillé d\'employer, sur votre site, l\'alphabet universel (<tt>utf-8</tt>) : celui-ci permet l\'affichage de textes dans toutes les langues, et ne pose plus de problèmes de compatibilité avec les navigateurs modernes.',
 	'texte_jeu_caractere_2' => 'Attention : ce réglage ne provoque pas la conversion des textes déjà enregistrés dans la base de données.',
