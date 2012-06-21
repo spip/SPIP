@@ -470,9 +470,9 @@ function debusquer_squelette($fonc, $mode, $self){
 // http://doc.spip.org/@emboite_texte
 function emboite_texte($res, $fonc = '', $self = ''){
 	$errs = $res->err;
-	$texte = $res->entete . ($errs ? $errs : $res->page);
+	$texte = $res->entete . ($errs ? '' : $res->page);
 
-	if (!$texte)
+	if (!$texte and !$errs)
 		return array(ancre_texte('', array('', '')), false);
 	if (!$errs)
 		return array(ancre_texte($texte, array('', '')), true);
