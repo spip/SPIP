@@ -19,8 +19,16 @@ include_spip('inc/texte'); //inclue inc/lang et inc/filtres
 // Presentation des pages d'installation et d'erreurs
 //
 
-// http://doc.spip.org/@install_debut_html
-function install_debut_html($titre = 'AUTO', $onLoad = '') {
+/**
+ * http://doc.spip.org/@install_debut_html
+ *
+ * @param string $titre
+ * @param string $onLoad
+ * @param bool $all_inline
+ *   inliner les css et js dans la page (limiter le nombre de hits)
+ * @return string
+ */
+function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) {
 	global $spip_lang_right,$spip_lang_left;
 	
 	utiliser_langue_visiteur();
@@ -34,7 +42,29 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	# lors de l'installation
 	if (!headers_sent())
 		header('Content-Type: text/html; charset=utf-8');
-	
+
+	$css = "";
+	$files = array('reset.css','clear.css','minipres.css');
+	if ($all_inline){
+		// inliner les CSS (optimisation de la page minipres qui passe en un seul hit a la demande)
+		foreach ($files as $name){
+			$file = direction_css(find_in_theme($name));
+			if (function_exists("compacte"))
+				$file = compacte($file);
+			else
+				$file = url_absolue_css($file); // precaution
+			lire_fichier($file,$c);
+			$css .= $c;
+		}
+		$css = "<style type='text/css'>".$css."</style>";
+	}
+	else{
+		foreach ($files as $name){
+			$file = direction_css(find_in_theme($name));
+			$css .= "<link rel='stylesheet' href='$file' type='text/css' />\n";
+		}
+	}
+
 	// au cas ou minipres() est appele avant spip_initialisation_suite()
 	if (!defined('_DOCTYPE_ECRIRE')) define('_DOCTYPE_ECRIRE', '');
 	return  _DOCTYPE_ECRIRE.
@@ -42,10 +72,8 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 		"<head>\n".
 		"<title>".
 		textebrut($titre).
-		"</title>
-		<link rel='stylesheet' href='".direction_css(find_in_theme('reset.css'))."' type='text/css' />\n" .
-		"<link rel='stylesheet' href='".direction_css(find_in_theme('clear.css'))."' type='text/css' />\n" .
-		"<link rel='stylesheet' href='".direction_css(find_in_theme('minipres.css'))."' type='text/css' />\n" .
+		"</title>\n".
+		$css .
 "</head>
 <body".$onLoad." class='minipres'>
 	<div id='minipres'>
@@ -60,8 +88,21 @@ function install_fin_html() {
 	return "\n\t</div>\n\t</div>\n</body>\n</html>";
 }
 
-// http://doc.spip.org/@minipres
-function minipres($titre='', $corps="", $onload='')
+
+/**
+ * http://doc.spip.org/@minipres
+ *
+ * @param string $titre
+ *   titre de la page
+ * @param string $corps
+ *   corps de la page
+ * @param string $onload
+ *   attribut onload de <body>
+ * @param bool $all_inline
+ *   inliner les css et js dans la page (limiter le nombre de hits)
+ * @return string
+ */
+function minipres($titre='', $corps="", $onload='', $all_inline = false)
 {
 	if (!defined('_AJAX')) define('_AJAX', false); // par securite
 	if (!$titre) {
@@ -84,7 +125,7 @@ function minipres($titre='', $corps="", $onload='')
 	}
 
 	if (!_AJAX)
-		return install_debut_html($titre, $onload)
+		return install_debut_html($titre, $onload, $all_inline)
 		. $corps
 		. install_fin_html();
 	else {
