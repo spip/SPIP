@@ -255,7 +255,7 @@ function verifier_session($change=false) {
  * @return mixed
  */
 function session_get($nom) {
-	return $GLOBALS['visiteur_session'][$nom];
+	return isset($GLOBALS['visiteur_session'][$nom]) ? $GLOBALS['visiteur_session'][$nom] : null;
 }
 
 
