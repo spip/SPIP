@@ -876,7 +876,7 @@ lenstalasyon SPIP pou w kreye yon lòt nouvo baz ak son promyé laksé komandè'
   (pwogwam lestatistik, pa egsanp).</p><p>
   W kapab sere lopsyon an nan valè otomatik (pou pa kreye tou fichye la), si li pa itil aw.  </p>', # MODIF
 	'texte_informations_personnelles_1' => 'Sistèm ke jodiya kreye yon laksé pèsonalizé pou w.',
-	'texte_informations_personnelles_2' => '(Gad : si genyen yon lòt enstalasyon ak laksé aw ka mache ankò, w kapab',
+	'texte_informations_personnelles_2' => '(Gad : si genyen yon lòt enstalasyon ak laksé aw ka mache ankò, w kapab', # MODIF
 	'texte_introductif_article' => '(Tèks lentwodiksyon latik.)',
 	'texte_jeu_caractere' => 'Lopsyon-an se itil si sitweb-la afiche kèk alfabe diferan lalfabé
  romin (ou « oksidantal ») ek tout alfabe komsa.

@@ -834,7 +834,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 Estes arquivos podem servir para restringir o acesso aos autores e administradores em outras áreas do seu site (programas externos de estatísticas, por exemplo).</p><p>
 Se eles não forem úteis, você poderá deixar esta opção com o seu valor padrão (sem criar os arquivos).</p>',
 	'texte_informations_personnelles_1' => 'O sistema vai criar agora um acesso personalizado ao site.',
-	'texte_informations_personnelles_2' => '(Nota: se se trata de uma reinstalação, e os seus acessos funcionam sem problemas, você pode',
+	'texte_informations_personnelles_2' => '(Nota: se se trata de uma reinstalação, e os seus acessos funcionam sem problemas, você pode', # MODIF
 	'texte_introductif_article' => '(Texto introdutório da matéria.)',
 	'texte_jeu_caractere' => 'É aconselhável usar no seu site o alfabeto universal (<tt>utf-8</tt>): ele permite a exibição de textos em todos os idiomas, e não tem problemas de compatibilidade com os navegadores modernos.',
 	'texte_jeu_caractere_2' => 'Atenção: esta opção não provoca a conversão dos textos já gravados na base de dados.',

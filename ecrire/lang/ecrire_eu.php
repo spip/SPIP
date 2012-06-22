@@ -845,7 +845,7 @@ zure ostapen zuzkitzaileak SQL jasaten badu, han aurkitu beharko zenituzke SQL z
 <p>Fitxategi hauek egileei eta administrazaileei zure guneko inguru batzutan (adibidez, kanpoko estatistika-programa) sarbidea murrizteko baliatzen ahal ditzakezu.</p>
 <p>Ez bazaizu baliagarri, aukera hau bere lehentasunezko balioan utz dezakezu (fitxategien sortzerik ez).</p>',
 	'texte_informations_personnelles_1' => 'Sistemak oraintokirako norberako sarrera sortuko du.',
-	'texte_informations_personnelles_2' => '(Oharra : berrinstalazio batez ari bagara, eta zure sarbidea beti funtzionatzen duela, ahal duzu',
+	'texte_informations_personnelles_2' => '(Oharra : berrinstalazio batez ari bagara, eta zure sarbidea beti funtzionatzen duela, ahal duzu', # MODIF
 	'texte_introductif_article' => '(Artikuluaren sarrera.)',
 	'texte_jeu_caractere' => 'Aukera hau probetxugarria da zure guneak alfabeto erromatarreko (edo « mendebaldarrekoa ») alfabetodesberdinak eta bere eratorriak erakutsi behar baditu. Kasu honetan, komenigarria izango litzatekekonfigurazio lehenetsia aldatzea karaktere-joko egoki baterako ; kasu guztietan probak egiteagomendatzen dizugu irtenbide on bat aurkitzeko. Parametro hau aldatzen baduzu,ez ahaztu ondorioko gune publikoa egokitzen (#CHARSET marka).',
 	'texte_jeu_caractere_2' => 'Konfigurazio honek ez du atzeraeraginezko efekturik. Beraz,dagoeneko sartutako testuak gaizki bistaratu ahal dira konfigurazioaren aldaketa batenondorioz. Kasu guztietan, kalteri gabe aurreko konfiguraziora itzuli ahalizango zara.',

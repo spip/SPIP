@@ -899,7 +899,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 	Sti schedari ponu ghjuvà pè limità l\'accessu à l\'autori è à l\'amministratori in certe parti di u situ (per esempiu, per un prugrammu esternu
 	di statìstiche).<p> Sè vo ùn ne avete bisognu, lasciate puru u valore predefinitu (nisuna creazione di schedariu).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'U sistema v\'hà da creà un accessu persunale à u situ.',
-	'texte_informations_personnelles_2' => '(Nota : s\'ellu si tratta di ristallazione è chì u vostru accessu viaghja sempre, pudete puru',
+	'texte_informations_personnelles_2' => '(Nota : s\'ellu si tratta di ristallazione è chì u vostru accessu viaghja sempre, pudete puru', # MODIF
 	'texte_introductif_article' => 'Testu d\'intruduzzione di l\'artìculu',
 	'texte_jeu_caractere' => 'Hè cunsigliatu d\'aduprà pè u vostru situ u santacroce universale (<tt>utf-8</tt>) : permette di vede i testi
 		in tutte e lingue è ùn pone più prublemi di cumpatibilità cù i navigatori muderni.',

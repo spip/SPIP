@@ -831,7 +831,7 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 	'texte_enrichir_mise_a_jour' => 'Bạn có thể trình bày văn bản gọn đẹp hơn bằng cách dùng những <b>«lối xếp bài tắt»</b>.',
 	'texte_fichier_authent' => 'SPIP có nên lập ra hồ sơ đặc biệt <tt>.htpasswd</tt> và <tt>.htpasswd-admin</tt> trong thư mục @dossier@?</b><p> Hai hồ sơ này dùng để giới hạn các tác giả và quản lý viên ra/vào các nơi khác trong website.<p>Nếu bạn chưa từng sử dụng đặc tính này, hãy để nguyên lựa chọn này với các giá trị định sẵn (không lập ra hồ sơ). ', # MODIF
 	'texte_informations_personnelles_1' => 'Hệ thống sẽ cung cấp cho bạn lối ra/vào website.',
-	'texte_informations_personnelles_2' => '(Ghi chú: nếu đây là tái thiết trí, và việc ra/vào của bạn vẫn bình thường, bạn tiếp tục vậy ',
+	'texte_informations_personnelles_2' => '(Ghi chú: nếu đây là tái thiết trí, và việc ra/vào của bạn vẫn bình thường, bạn tiếp tục vậy ', # MODIF
 	'texte_introductif_article' => '(Lời mở đầu cho bài viết.) ',
 	'texte_jeu_caractere' => 'Chọn lựa này thích hợp nếu website bạn dùng ngôn ngữ khác với mẫu tự latinh (tức "western") và các ngôn ngữ cùng hệ.
  Trong trường hợp này, phải chọn một bộ mã khác. Và cũng nên nhớ sửa đổi website để thích ứng (<tt>#CHARSET</tt> tag).', # MODIF

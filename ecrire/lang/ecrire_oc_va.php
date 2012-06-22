@@ -860,7 +860,7 @@ una color indica lor estat:',
   a sa valor predefinia (ges de creacion
   dels fichiers).', # MODIF
 	'texte_informations_personnelles_1' => 'Aüra lo sistèma vos crearà un accès personalizat au sit.',
-	'texte_informations_personnelles_2' => '(Nòta: se s\'agís d\'una reïnstallacion, e se vòstre accès fonciona encara, poètz',
+	'texte_informations_personnelles_2' => '(Nòta: se s\'agís d\'una reïnstallacion, e se vòstre accès fonciona encara, poètz', # MODIF
 	'texte_introductif_article' => '(Tèxt introductiu de l\'article.)',
 	'texte_jeu_caractere' => 'Aquesta opcion es utila se vòstre sit deu afichar d\'alfabets
  diferents de l\'alfabet latin (o "occidentau") e sos derivats.

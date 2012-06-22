@@ -892,7 +892,7 @@ Fisyé-la, li pé èd aou pou limit laksé désertinn lotèr ou minm bann komand
 (pa égsanp : zot i sra pa kav lir lo program-déor pou sifklé bann vizit).<p>
 Si fisyé-la, li sèr pa ryen sir out sitwèb, lès la valèr otomatik pou lopsyon-la (dann ka-la, lo fisyé, li sra pa kréé).', # MODIF
 	'texte_informations_personnelles_1' => 'Astèr lo sistèm i sra pou kré aou inn laksé personalizé si lo sitwèb.',
-	'texte_informations_personnelles_2' => '(Gèt byin tousa : si néna inn nouvèl linstalasyon é si laksé i mars touzour, i pé ',
+	'texte_informations_personnelles_2' => '(Gèt byin tousa : si néna inn nouvèl linstalasyon é si laksé i mars touzour, i pé ', # MODIF
 	'texte_introductif_article' => '(Tèks pour anbèk lartik.)',
 	'texte_jeu_caractere' => 'Ni konsey a ou anserv, pou out sit, lalfabé inivérsel (<tt>utf-8</tt>) : li permé afisé in teks ek tout bann lang, sank ou gigny okinn larlik ek la konpatinilité d ban navigatèr modern.',
 	'texte_jeu_caractere_2' => 'Réglaz-la la pwinnd léfé sir sak ou la déza mi an liyn dann tan dèryèr. Akoz sa minm, néna inn riks bann tèks déza prézan sir lo sit, i afis pa zot-minm byin korèkman. Pwatan, lé pa inn gro larlik, akoz ou pé touzour rebrous-somin èk lo réglaz davan.',

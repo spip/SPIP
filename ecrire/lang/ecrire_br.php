@@ -860,7 +860,7 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
   Ma n\'hoc\'h eus ket ezhomm d\'hen ober e c\'hellit lezel an traoù evel m\'emaint lakaet dre-ziouer
   (ne vo ket krouet ar restroù).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Bremañ e vo krouet gant ar reizhiad ur moned personel d\'al lec\'hienn evidoc\'h.',
-	'texte_informations_personnelles_2' => '(Notenn : m\'emaoc\'h oc\'h adstaliañ SPIP hag ez a c\'hoazh ho moned kozh en-dro e c\'hellit ',
+	'texte_informations_personnelles_2' => '(Notenn : m\'emaoc\'h oc\'h adstaliañ SPIP hag ez a c\'hoazh ho moned kozh en-dro e c\'hellit ', # MODIF
 	'texte_introductif_article' => '(Testenn digeriñ ar pennad)',
 	'texte_jeu_caractere' => 'Gant al lizherenneg hollvedel (<tt>utf-8</tt>) oc\'h aliet d\'ober  : aotren a ra diskwel testennoù en holl yezhoù, ha ne sav kudenn kenglotañ ebet ken gant ar merdeerioù a-vremañ.',
 	'texte_jeu_caractere_2' => 'Diwallit : o kemmañ an dra-se, ne vo ket amdroet an testennoù bet enrollet war an diaz titouroù betek-henn.',

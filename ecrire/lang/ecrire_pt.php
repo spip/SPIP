@@ -879,7 +879,7 @@ e administradores em outros lugares do seu sites
 no seu valor por defeito (não há criação 
  dos ficheiros).', # MODIF
 	'texte_informations_personnelles_1' => 'O sistema vai agora criar-lhe um acesso personalizado ao sítio',
-	'texte_informations_personnelles_2' => '(Nota : se se tratar de uma reinstalação e se o seu acesso continua funcional, pode',
+	'texte_informations_personnelles_2' => '(Nota : se se tratar de uma reinstalação e se o seu acesso continua funcional, pode', # MODIF
 	'texte_introductif_article' => '(Texto introdutório do artigo.)',
 	'texte_jeu_caractere' => 'Esta opção é útil se o seu sítio precisa de exibir alfabetos
  diferentes do alfabeto romano ( ou  « ocidental ») e seus derivados.

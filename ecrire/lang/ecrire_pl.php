@@ -877,7 +877,7 @@ zreinstalować SPIP w celu utworzenia nowej bazy danych i dostępu pierwszego ad
   Jeśli nie chcesz z nich korzystać, możesz pozostawić tą opcję
   w nienaruszonej postaci (te pliki nie zostaną stworzone).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'System stworzy teraz spersonalizowany dostep do serwisu.',
-	'texte_informations_personnelles_2' => '(Informacja: jeśli jest to reinstalacja, a Twój dostęp wciąż działa, możesz',
+	'texte_informations_personnelles_2' => '(Informacja: jeśli jest to reinstalacja, a Twój dostęp wciąż działa, możesz', # MODIF
 	'texte_introductif_article' => '(Tekst wprowadzający do artykułu.)',
 	'texte_jeu_caractere' => 'Zaleca się używania uniwersalnego kodowania (<tt>utf-8</tt>), co pozwala na wyświetlanie tekstów we wszystkich językach i jest kompatybilne ze wszystkimi współczesnymi przeglądarkami.',
 	'texte_jeu_caractere_2' => 'Uwaga: te ustawienia nie powodują konwersji tekstów już zapisanych w bazie danych.',

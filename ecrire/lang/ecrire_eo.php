@@ -864,7 +864,7 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
   je ĝia defaŭlta valoro (neniu dosier-kreo).
 ', # MODIF
 	'texte_informations_personnelles_1' => 'La sistemo kreos por vi nun personan alireblon al la retejo.',
-	'texte_informations_personnelles_2' => '(Noto: se temas pri reinstalo kaj se via aliro daŭre funkcias, vi povas',
+	'texte_informations_personnelles_2' => '(Noto: se temas pri reinstalo kaj se via aliro daŭre funkcias, vi povas', # MODIF
 	'texte_introductif_article' => '(Enkonduka teksto al la artikolo.)',
 	'texte_jeu_caractere' => 'Ni konsilas al vi uzi, en via retejo, universalan alfabeton (<tt>utf-8</tt>) : tio ebligas afiŝadon de tekstoj en ĉiuj lingvoj kaj solvas problemojn de kongrueco se vi uzas modernajn retumilojn.',
 	'texte_jeu_caractere_2' => 'Atentu : tiu agordo ne konvertas tekstojn jam registritajn en la datenbazo.',

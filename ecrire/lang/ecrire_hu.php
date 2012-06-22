@@ -857,7 +857,7 @@ SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy 
   Ha nem kell, ezt az opciót ki lehet hagyni
   az alapértelmezett értékkel (nincs fájllétrehozás).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Most a rendszer fog létrehozni egy személyes hozzáférést Önnek.',
-	'texte_informations_personnelles_2' => '(Megjegyzés : ha újratelepítésról van szó, és még mindig megy a hozzáférése, akkor',
+	'texte_informations_personnelles_2' => '(Megjegyzés : ha újratelepítésról van szó, és még mindig megy a hozzáférése, akkor', # MODIF
 	'texte_introductif_article' => '(A cikk bevezető szövege.)',
 	'texte_jeu_caractere' => 'Az Őn honlapján ajánlott az univerzális abécé (<tt>utf-8</tt>) használata :az összes nyelv megjelenítését teszi lehetővé, és már nem okoz kompatibilitási problemát a korszerű böngészőkkel.',
 	'texte_jeu_caractere_2' => 'Vigyázat: E beállítás nem végzi az adatbázisban már meglévő szövegek konvertálását.',

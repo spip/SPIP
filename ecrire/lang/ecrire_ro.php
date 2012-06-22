@@ -862,7 +862,7 @@ reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces a
   Dacă nu vedeţi utilitatea unui astfel de mecanism de protecţie, puteţi lăsa această opţiune
   la valoare ei implicită (fără crearea de fişiere).', # MODIF
 	'texte_informations_personnelles_1' => 'Sistemul vă va crea acum un acces personalizat la site.',
-	'texte_informations_personnelles_2' => '(Notă : dacă este vorba de o reinstalare, şi dacă accesul dumneavoastră merge încă, puteţi',
+	'texte_informations_personnelles_2' => '(Notă : dacă este vorba de o reinstalare, şi dacă accesul dumneavoastră merge încă, puteţi', # MODIF
 	'texte_introductif_article' => '(Text introductiv al articolului.)',
 	'texte_jeu_caractere' => 'Este recomandabil să folosiţi, pentru site-ul dumneavoastră, alfabetul universal (<tt>utf-8</tt>) : acesta permite afişarea textelor în toate limbile şi nu pune probleme de compatibilitate navigatoarelor moderne.',
 	'texte_jeu_caractere_2' => 'Atenţie: acest reglaj reglaj nu are efect retroactiv şi nu converteşte textele deja înregistrate în baza de date.',

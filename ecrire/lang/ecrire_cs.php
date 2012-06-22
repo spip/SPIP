@@ -877,7 +877,7 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
   Nechcete-li tyto soubory používat, můžete ponechat výchozí hodnotu
   (nevytvářet soubory).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Systém pro vás nyní vytvoří vlastní přístup k webu.',
-	'texte_informations_personnelles_2' => '(Poznámka: pokud se jedná o opakovanou instalaci a váš přístup je stále funkční, můžete',
+	'texte_informations_personnelles_2' => '(Poznámka: pokud se jedná o opakovanou instalaci a váš přístup je stále funkční, můžete', # MODIF
 	'texte_introductif_article' => '(Úvodní text článku.)',
 	'texte_jeu_caractere' => 'Doporučujeme použít univerzální abecedu Unicode (<tt>utf-8</tt>) pro váš web, která umožňuje zobrazit texty v jakémkoli jazyce. Žádný moderní prohlížeč s Unicode nemá potíže.',
 	'texte_jeu_caractere_2' => 'Toto nastavení nezmění texty, které jsou již uloženy v databázi.',

@@ -856,7 +856,7 @@ i en farve, der angiver deres status:',
 		(f.eks. et eksternt statistikprogram).<p>
 		Hvis du ikke har benyttet sådanne filer før, kan du vælge standardværdien (ingen filoprettelse).', # MODIF
 	'texte_informations_personnelles_1' => 'Systemet vil give dig en tilpasset adgang til webstedet.',
-	'texte_informations_personnelles_2' => '(Bemærk: hvis det er en geninstallation og din adgang stadig fungerer, kan du',
+	'texte_informations_personnelles_2' => '(Bemærk: hvis det er en geninstallation og din adgang stadig fungerer, kan du', # MODIF
 	'texte_introductif_article' => '(Introduktion til artiklen)',
 	'texte_jeu_caractere' => 'Denne indstilling er nyttig, hvis dit websted viser andre alfabeter end det latinske alfabet (dvs. det «vestlige») og dets afledninger. 
  I så fald skal standardindstillingen ændres til et passende tegnsæt. Vi anbefaler dig at prøve med forskellige indstillinger for at finde den bedste løsning. Husk også at tilpasse webstedet tilsvarende (<tt>#CHARSET</tt> parameteren).',
