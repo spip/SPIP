@@ -305,7 +305,7 @@ function actualiser_sessions($auteur) {
 	$GLOBALS['visiteur_session'] = $sauve;
 
 	// si c'est le meme, rafraichir les valeurs
-	if ($auteur['id_auteur'] == $sauve['id_auteur'])
+	if (isset($sauve['id_auteur']) and $auteur['id_auteur'] == $sauve['id_auteur'])
 		verifier_session();
 }
 
