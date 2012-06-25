@@ -542,29 +542,14 @@ function spip_sqlite_count($r, $serveur = '', $requeter = true){
 		// (link,requete) a compter
 		if (is_array($r->spipSqliteRowCount)){
 			list($link,$query) = $r->spipSqliteRowCount;
-			// methode 1
-			spip_timer();
-			$l = $link->query($query);
-			$i = 0;
-			while ($l->fetch()) $i++;
-			$r->spipSqliteRowCount = $i;
-			$db = "$i (".spip_timer().") | ";
-			// methode 2
-			spip_timer();
-			// pas de order by pour compter !
-			$query = preg_replace(",ORDER BY .*(LIMIT|HAVING|$),Uims","\\1",$query);
+			// amelioration possible a tester intensivement : pas de order by pour compter !
+			// $query = preg_replace(",ORDER BY .+(LIMIT\s|HAVING\s|GROUP BY\s|$),Uims","\\1",$query);
 			$query = "SELECT count(*) as zzzzsqlitecount FROM ($query)";
 			$l = $link->query($query);
 			$i = 0;
 			if ($l AND $z = $l->fetch())
 				$i = $z['zzzzsqlitecount'];
-			$db .= "$i (".spip_timer().")";
-			if ($i!=$r->spipSqliteRowCount){
-				echo "Erreur comptage par methode 2 : <tt>$query</tt>";
-				var_dump($db);
-				spip_log("Erreur comptage par methode 2 $db : $query","sqlitecounterr."._LOG_ERREUR);
-			}
-			spip_log("$db","sqlitecount");
+			$r->spipSqliteRowCount = $i;
 		}
 		if (isset($r->spipSqliteRowCount)){
 			// Ce compte est faux s'il y a des limit dans la requete :(
