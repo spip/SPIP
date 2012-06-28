@@ -627,10 +627,10 @@ function critere_agenda_dist($idb, &$boucles, $crit){
 		$boucle->where[] = array("'AND'",
 		                         array("'>='",
 		                               "'DATE_FORMAT($date, \'%Y%m%d\')'",
-		                               ("date_debut_semaine($annee, $mois, $jour$quote_end)")),
+		                               ("date_debut_semaine($annee, $mois, $jour)")),
 		                         array("'<='",
 		                               "'DATE_FORMAT($date, \'%Y%m%d\')'",
-		                               ("date_fin_semaine($annee, $mois, $jour$quote_end)")));
+		                               ("date_fin_semaine($annee, $mois, $jour)")));
 	elseif (count($crit->param)>2)
 		$boucle->where[] = array("'AND'",
 		                         array("'>='",
