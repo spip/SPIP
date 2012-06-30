@@ -29,10 +29,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_deplacement_rubrique' => 'Opgepasst! Dës Rubrik huet @contient_breves@ brève@scb@: wann der se réckelt, klickt dëst Konfirmatiouns-Feld un.',
 	'avis_destinataire_obligatoire' => 'Dir musst dën Empfänger uginn ier der dësen Message fortschéckt.',
 	'avis_erreur_connexion_mysql' => 'Fehler bei der SQL-Verbindung',
-	'avis_erreur_version_archive' => 'Opgepasst! De Fichier @archive@ korrespondéiert zu enger anerer SPIP-Versioun wéi déi installéiert.
+	'avis_erreur_version_archive' => '<b>Opgepasst! De Fichier @archive@ korrespondéiert zu enger anerer SPIP-Versioun wéi déi installéiert.</b>
 Dir kommt an grouss Schwieregkeeten:
-Risiko dass är Datebank zerstéiert gët, generellen Disfonktionnement vum Site, asw. Bestätegt dësen Import nët.<p>Fir méi Informatiounen kuckt an <a href="@spipnet@">
-der Dokumentatioun vu SPIP</a>.</p>', # MODIF
+Risiko dass är Datebank zerstéiert gëtt, generellen Disfonktionnement vum Site, asw. Bestätegt dësen Import net.<p>Fir méi Informatiounen kuckt an <a href="@spipnet@">
+der Dokumentatioun vu SPIP</a>.</p>',
 	'avis_espace_interdit' => '<b>Gespaarten Deel</b><p>SPIP ass schon installéiert.</p>',
 	'avis_lecture_noms_bases_1' => 'Den Installatiouns-Programm konnt d\'Nimm vun den installéiertent Datebanken nët liesen.',
 	'avis_lecture_noms_bases_2' => 'Etweder steet keng Datebank zur Verfügung, oder d\'Fonktioun fir d\'Datebanken opzelëschten ass aus Sëcherheetsgrënn ausgeschalt ginn (dat ass esou bei villen Provider\'en).',
@@ -233,7 +233,7 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 	'info_activer_cookie' => 'Dir kënnt e <b>Korrespondenz-Cookie</b> aktivéieren, dien Iech erlaabt einfach vum öffentlëchen op de privaten Site ze wiesselen.',
 	'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 	'info_admin_gere_rubriques' => 'Dësen Administrateur kënmert sëch ëm folgend Rubriken:',
-	'info_admin_gere_toutes_rubriques' => 'Dësen Administrateur këmmert sëch ëm <b>all Rubriken</b>.', # MODIF
+	'info_admin_gere_toutes_rubriques' => 'Dësen Administrateur këmmert sech ëm <b>all Rubriken</b>',
 	'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 	'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 	'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
@@ -293,7 +293,7 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 	'info_classement_2' => '. an @liste@',
 	'info_code_acces' => 'Vergiesst är Login-Informatiounen nët!',
 	'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-	'info_compresseur_gzip' => '<b>N.B.:</b> Kontrolléiert op ären Hebergeur PHP-Skripter kompriméiert; dir kënnt dofir dësen Service benotzen: @testgzip@', # MODIF
+	'info_compresseur_gzip' => 'Mir roden Iech fir d\'éischt ze kontrolléiren op ären Hebergeur d\'PHP-Skripter net schonns systematesch kompriméiert; dir kënnt dofir z.B. dësen Service benotzen: @testgzip@',
 	'info_compresseur_texte' => 'Wann äre Server d\'HTML-Säiten nët automatësch kompriméiert, kënnt dir probéieren eng Kompressioun ze forcéieren. <b>Opgepasst</b>: dat kann verschidde Serveren méi lues maachen.',
 	'info_config_suivi' => 'Wann dës Adress eng Mailing-Lëscht ass, da kënnt dier hei d\'Adress uginn wou d\'Matarbechter vun dësem Site sech aschreiwen kënnen. Dës Adress kann eng URL sinn (z.B. d\'Internetsäit wou een sëch aschreiwen kann), oder eng Email-Adress mat engem extra Sujet (z.B.: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => 'Dir kënnt Iech un d\'Mailing-Lëscht vun dësem Site abonnéieren. Dir kritt dann per Email d\'Annoncen vun den Artikelen a Kuerzmeldungen déi fir d\'Publikatioun proposéiert goufen.',
@@ -304,13 +304,13 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 	'info_conflit_edition_votre_version' => 'Är Versioun:',
 	'info_connexion_base' => 'Versichen mat der Datebank ze verbannen',
 	'info_connexion_base_donnee' => 'Verbannen mat ärer Datebank',
-	'info_connexion_ldap_ok' => 'D\'LDAP-Verbindung huet geklappt.</b><p>Weider bei de nächsten Schrëtt.</p>', # MODIF
+	'info_connexion_ldap_ok' => 'D\'Ubannen un LDAP huet fonktionnéiert.</b><p>Weider bei de nächsten Schrëtt.</p>',
 	'info_connexion_mysql' => 'Är SQL-Verbindung',
 	'info_connexion_ok' => 'D\'Verbindung huet geklappt.',
 	'info_contact' => 'Kontakt',
 	'info_contenu_articles' => 'Inhalt vun den Artikelen',
 	'info_contributions' => 'Contributions', # NEW
-	'info_creation_paragraphe' => '(Fir e neien Abschnitt, loosst einfach eng eidel Zeil.)', # MODIF
+	'info_creation_paragraphe' => 'Fir nei Abschnitter, loosst einfach eidel Zeilen.',
 	'info_creation_rubrique' => 'Ier dër kënnt en Artikel schreiwen<br />musst dër op manst eng Rubrik derbäi setzen.<br />',
 	'info_creation_tables' => 'Tabellen an d\'Datebank schreiwen',
 	'info_creer_base' => 'Eng nei Datebank <b>uleen</b>:',
@@ -326,7 +326,7 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 	'info_ecrire_article' => 'Ier dier kënnt en Artikel schreiwen, musst dier op manst eng Rubrik derbäi setzen.',
 	'info_email_envoi' => 'Adress vum Expediteur (optionnel)',
 	'info_email_envoi_txt' => 'Gitt d\'Adress un fir Email\'en ze schécken (als Default gët d\'Adress vum Destinataire benotzt):',
-	'info_email_webmestre' => 'Email-Adress vum Webmaster (optionnel)', # MODIF
+	'info_email_webmestre' => 'Email-Adress vum Webmaster',
 	'info_entrer_code_alphabet' => 'Kode vum Alphabet dat benotzt soll ginn:',
 	'info_envoi_email_automatique' => 'Automatëscht Schécken vun Email\'en',
 	'info_envoyer_maintenant' => 'Elo schécken',
@@ -338,9 +338,9 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 	'info_facilite_suivi_activite' => 'Fir déi editorial Aktivitéiten ze verfolgen, kann SPIP d\'Demanden fir Artikelen ze publizéieren oder d\'Validatiounen un eng Mailing-Lëscht vun de Redakteren schécken.',
 	'info_fichiers_authent' => 'Identifikatiouns-Fichier\'en ".htpasswd"',
 	'info_forums_abo_invites' => 'Äre Site huet Forum\'en wou een sech umelden muss; d\'Visiteuren ginn also agelueden sëch ze enregistréieren.',
-	'info_gauche_admin_effacer' => '<b>Dës Säit ass fir déi Responsabel vum Site reservéiert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een sëch iwwer FTP identifizéieren kënnen.</p>', # MODIF
-	'info_gauche_admin_tech' => '<b>Dës Säit ass fir déi Responsabel vum Site reservéiert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een sëch iwwer FTP identifizéieren kënnen.</p>', # MODIF
-	'info_gauche_admin_vider' => '<b>Dës Säit ass fir déi Responsabel vum Site reservéiert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een sëch iwwer FTP identifizéieren kënnen.</p>', # MODIF
+	'info_gauche_admin_effacer' => '<b>Dës Säit ass fir déi Responsabel vum Site reservéiert.</b><p>Si erlaabt technesch Maintenance-Aarbechten duerchzeféieren. Fir verschiddene vun deene Prozeduren muss een sech iwwer FTP identifizéieren kënnen.</p>',
+	'info_gauche_admin_tech' => '<b>Dës Säit ass fir déi Responsabel vum Site reservéiert.</b><p>Si erlaabt technesch Maintenance-Aarbechten duerchzeféieren. Fir verschiddene vun deene Prozeduren muss een sech iwwer FTP identifizéieren kënnen.</p>',
+	'info_gauche_admin_vider' => '<b>Dës Säit ass fir déi Responsabel vum Site reservéiert.</b><p>Si erlaabt technesch Maintenance-Aarbechten duerchzeféieren. Fir verschiddene vun deene Prozeduren muss een sech iwwer FTP identifizéieren kënnen.</p>',
 	'info_gauche_auteurs' => 'Hei fannt dir all d\'Auteur\'en vum Site.
 Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gréng; Redakter = giel).',
 	'info_gauche_auteurs_exterieurs' => 'Déi extern Auteuren ouni Zougang zum Site sinn mat enger bloer Ikone markéiert, déi geläschten Auteuren mat enger Dreckskëscht.', # MODIF
@@ -426,7 +426,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'info_nouvel_article' => 'Neien Artikel',
 	'info_nouvelle_traduction' => 'Nei Iwwersetzung:',
 	'info_numero_article' => 'ARTIKEL NUMMER:',
-	'info_obligatoire_02' => '[Obligatoresch]', # MODIF
+	'info_obligatoire_02' => '(obligatoresch)',
 	'info_option_accepter_visiteurs' => 'D\'Aschreiwung vu Visiteuren unhuelen',
 	'info_option_faire_suivre' => 'D\'Messagen vun de Forum\'en un d\'Auteuren vun den Artikelen schécken',
 	'info_option_ne_pas_accepter_visiteurs' => 'D\'Aschreiwung vu Visiteuren refuséieren',
@@ -442,7 +442,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'info_passe_trop_court' => 'Passwuert ze kuerz.',
 	'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 	'info_passes_identiques' => 'Déi zwee Passwierder si nët selwecht.',
-	'info_pense_bete_ancien' => 'Är al Notizen', # MODIF
+	'info_pense_bete_ancien' => 'Är al Notizen',
 	'info_plus_cinq_car' => 'méi wéi 5 Buchstawen',
 	'info_plus_cinq_car_2' => '(Méi wéi 5 Buchstawen)',
 	'info_plus_trois_car' => '(Méi wéi 3 Buchstawen)',
@@ -467,7 +467,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'info_question_utilisation_moteur_recherche' => 'Wëllt dir de Sich-Motor vu SPIP benotzen?
 (ausschalten mëcht de System méi séier.)',
 	'info_question_vignettes_referer_non' => 'D\'Preview vun den Ausgangs-Site nët weisen',
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
+	'info_qui_edite' => 'Den Auteur @nom_auteur_modif@ huet virun @date_diff@ Minutten un dësem Inhalt geschafft',
 	'info_racine_site' => 'Wuerzel vum Site',
 	'info_recharger_page' => 'Lued dës Säit an e puer Sekonnen nei.',
 	'info_recherche_auteur_a_affiner' => 'Zevill Resultater fir "@cherche_auteur@"; verbessert är Sich.',
@@ -498,7 +498,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'info_site_2' => 'Site:',
 	'info_site_min' => 'Site',
 	'info_site_reference_2' => 'Referenzéierten Site',
-	'info_site_web' => 'SITE:', # MODIF
+	'info_site_web' => 'Website:',
 	'info_sites' => 'Siten',
 	'info_sites_lies_mot' => 'Un dëst Schlësselwuert gebonnen referenzéiert Siten',
 	'info_sites_proxy' => 'Proxy benotzen',
@@ -525,7 +525,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'info_texte' => 'Text',
 	'info_texte_explicatif' => 'Erklärung',
 	'info_texte_long' => '(den Text ass laang: en ass an e puer Stécker déi bei der Validatioun zesummen gepecht ginn.)',
-	'info_texte_message' => 'Text vun ärem Message:', # MODIF
+	'info_texte_message' => 'Text vun ärem Message',
 	'info_texte_message_02' => 'Text vun ärem Message',
 	'info_titre' => 'Titel:',
 	'info_total' => 'Total:',
@@ -578,8 +578,8 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'install_serveur_hebergeur' => 'Datebankserver vum Hosting zougewisen',
 	'install_table_prefix_hebergeur' => 'Préfixe vun den Tafelen deen dir vum Hosting krut:',
 	'install_tables_base' => 'Datebanktabellen',
-	'install_types_db_connus' => 'SPIP kann <b>MySQL</b> (am wäiteste verbreed), <b>PostgreSQL</b> an <b>SQLite</b> benotzen.', # MODIF
-	'install_types_db_connus_avertissement' => 'Opgepasst: verschidde Plugin\'en fonktionnéiere nëmmen mat MySQL', # MODIF
+	'install_types_db_connus' => 'SPIP ka <b>MySQL</b> (am wäiteste verbreet) an <b>SQLite</b> benotzen.',
+	'install_types_db_connus_avertissement' => '<b>PostgreSQL</b> ass och op experimenteller Basis méiglech',
 	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
 	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'Redakter',
@@ -663,12 +663,12 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'lien_trier_nombre_articles' => 'No Zuel vun den Artikelen sortéiren',
 	'lien_trier_statut' => 'No Status sortéieren',
 	'lien_voir_en_ligne' => 'ONLINE KUCKEN:',
-	'logo_article' => 'LOGO VUM ARTIKEL', # MODIF
-	'logo_auteur' => 'LOGO VUM AUTEUR', # MODIF
-	'logo_rubrique' => 'LOGO VUN DER RUBRIK', # MODIF
-	'logo_site' => 'LOGO VUM SITE', # MODIF
-	'logo_standard_rubrique' => 'STANDARD-LOGO VUN DE RUBRIKEN', # MODIF
-	'logo_survol' => 'LOGO FIR DE MOUSEOVER', # MODIF
+	'logo_article' => 'Logo vum Artikel',
+	'logo_auteur' => 'Logo vum Auteur',
+	'logo_rubrique' => 'Logo vun der Rubrik',
+	'logo_site' => 'Logo vun dësem Site',
+	'logo_standard_rubrique' => 'Standard-Logo vun de Rubriken',
+	'logo_survol' => 'Logo fir de MouseOver',
 
 	// M
 	'menu_aide_installation_choix_base' => 'Wiel vun ärer Datebank',
@@ -785,7 +785,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 	'taille_cache_infinie' => 'De Cache vun dësem Site ass nët an der Gréisst limitéiert.',
 	'taille_cache_maxi' => 'SPIP probéiert d\'Gréisst vum Cache vun dësem Site op ongeféier <b>@octets@</b> ze limitéieren.',
 	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
-	'taille_cache_octets' => 'D\'Gréisst vum Cache ass elo @octets@.', # MODIF
+	'taille_cache_octets' => 'D\'Gréisst vum Cache ass momentan ongeféier @octets@.',
 	'taille_cache_vide' => 'De Cache ass eidel.',
 	'taille_repertoire_cache' => 'Gréisst vum Cache-Dossier',
 	'text_article_propose_publication' => 'Fir d\'Publikatioun proposéierten Artikel.',
@@ -829,13 +829,13 @@ Benotzt d\'Lëscht hei drënner fir unzegin wéi eng Elementer e kann benotzen.'
 	'texte_effacer_base' => 'D\'SPIP-Datebank läschen',
 	'texte_effacer_donnees_indexation' => 'Den Index läschen',
 	'texte_effacer_statistiques' => 'Statistik läschen',
-	'texte_en_cours_validation' => 'Dës Artikelen a Kuerzmeldungen sinn fir d\'Publikatioun proposéiert.', # MODIF
+	'texte_en_cours_validation' => 'Déi Inhalter hei drënner waarden op d\'Verëffentlechung.',
 	'texte_enrichir_mise_a_jour' => 'Dir kënnt de Layout verbesseren mat "typographeschen Ofkiirzungen".',
 	'texte_fichier_authent' => '<b>Soll SPIP déi speziell Fichier\'en <tt>.htpasswd</tt> an <tt>.htpasswd-admin</tt> am Dossier @dossier@ maachen?</b><p>
 Dës Fichier\'en kënnen den Zougang vun den Redakteren an Administrateuren op verschidden Deeler vum Site kontrolléieren (z.B. externe Statistik-Program).</p><p>
 Wann dir dat nët braucht, da loosst dës Optioun op sengem Default (kéng Fichier\'en maachen).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'De System gët Iech elo e personnaliséierten Zougang zum Site.',
-	'texte_informations_personnelles_2' => '(N.B.: wann ët eng Re-Installatioun ass, a wann ären Zougang nach fonktionnéiert,', # MODIF
+	'texte_informations_personnelles_2' => '(N.B.: Wann äre Login bei dëser Re-Installatioun nach fonctionnéiert, da kënnt Dier',
 	'texte_introductif_article' => '(Aleedung vum Artikel.)',
 	'texte_jeu_caractere' => 'Mir roden Iech ob ärem Site dat universalt Alphabet (<tt>UTF-8</tt>) ze gebrauchen: ët kann d\'Texter an allen Sproochen uweisen, an huet keng Kompatibilitéits-Problemer méi mat de moderne Browser\'en.',
 	'texte_jeu_caractere_2' => 'Opgepasst: Dës Astellung mecht kéng Conversioun vun den Texter déi schons an der Datebank sinn.',
@@ -854,7 +854,7 @@ Elo muss d\'Datebank vum Site ugepasst ginn.',
 	'texte_moteur_recherche_active' => '<b>De Sich-Motor ass ageschalt.</b> Benotzt dës Prozedur fir eng séier Indexatioun (z.B. no enger Restauratioun). Déi normal Ännerungen (iwwer de SPIP-Interface) ginn automatësch nei indexéiert: dës Prozedur ass nëmmen an aussergewéinlechen Fäll néideg.',
 	'texte_moteur_recherche_non_active' => 'De Sich-Motor ass ausgeschalt.',
 	'texte_multilinguisme' => 'Wann dir Artikelen a méi Sproochen mat enger komplexer Navigatioun wëllt benotzen, da kënnt dir e Menu fir d\'Sproochwiel bei den Artikelen an/oder de Rubriken aschalten, je no Organisatioun vun ärem Site.', # MODIF
-	'texte_multilinguisme_trad' => 'Dir kënnt och eng Gestioun vun de Linken tëschent den Iwwersetzungen vun engem Artikel aschalten.', # MODIF
+	'texte_multilinguisme_trad' => 'Dir kënnt och eng Gestioun vun de Linken tëschent den Iwwersetzungen vu verschidden Objekter aschalten.',
 	'texte_non_compresse' => '<i>nët kompriméiert</i> (äre Server erlaabt dat nët)',
 	'texte_nouveau_message' => 'Neie Message',
 	'texte_nouvelle_version_spip_1' => 'Dir hut eng nei Versioun vu SPIP installéiert.',
@@ -925,8 +925,8 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 	'titre_connexion_ldap' => 'Optiounen: <b>Är LDAP-Verbindung</b>',
 	'titre_groupe_mots' => 'WUERT-GRUPP:',
 	'titre_identite_site' => 'Identité du site', # NEW
-	'titre_langue_article' => 'SPROOCH VUM ARTIKEL', # MODIF
-	'titre_langue_rubrique' => 'SPROOCH VUN DER RUBRIK', # MODIF
+	'titre_langue_article' => 'Sprooch vum Artikel',
+	'titre_langue_rubrique' => 'Sprooch vun der Rubrik',
 	'titre_langue_trad_article' => 'SPROOCH AN IWWERSETZUNGEN VUM ARTIKEL',
 	'titre_les_articles' => 'D\'ARTIKELEN',
 	'titre_messagerie_agenda' => 'Messagerie an Agenda',
@@ -962,9 +962,9 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 	'trad_article_inexistant' => 'Ët gët keen Artikel mat där Nummer.',
 	'trad_article_traduction' => 'All d\'Versiounen vun dësem Artikel:',
 	'trad_deja_traduit' => 'Fehler: Onméiglech dësen Artikel un déi gefrote Nummer ze bannen.',
-	'trad_delier' => 'Dësen Artikel nët méi un seng Iwwersetzungen bannen', # MODIF
+	'trad_delier' => 'Dës Iwwersetzunge net méi verbannen',
 	'trad_lier' => 'Dësen Artikel ass eng Iwwersetzung vum Artikel Nummer:',
-	'trad_new' => 'Eng nei Iwwersetzung vun dësem Artikel schreiwen', # MODIF
+	'trad_new' => 'Eng nei Iwwersetzung schreiwen',
 
 	// U
 	'upload_info_mode_document' => 'Dëst Bild am Portfolio ofleen',
