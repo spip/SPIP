@@ -1190,7 +1190,9 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 			return "";
 		else {
 			$dec = $r[1];
-			if (preg_match("/^(.*?),([^,]*KEY.*)$/s", $dec, $r)){
+			// extraction d'une KEY éventuelle en prenant garde de ne pas
+			// relever un champ dont le nom finit par KEY
+			if (preg_match("/^(.*?),([^,]*KEY[ (].*)$/s", $dec, $r)){
 				$namedkeys = $r[2];
 				$dec = $r[1];
 			}

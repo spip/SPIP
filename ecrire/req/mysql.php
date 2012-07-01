@@ -632,16 +632,18 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 
 	list(,$a) = mysql_fetch_array($s ,MYSQL_NUM);
 	if (preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r)){
-		$dec = $r[1];
-		if (preg_match("/^(.*?),([^,]*KEY.*)$/s", $dec, $r)) {
+		$desc = $r[1];
+		// extraction d'une KEY éventuelle en prenant garde de ne pas
+		// relever un champ dont le nom finit par KEY
+		if (preg_match("/^(.*?),([^,]*KEY[ (].*)$/s", $desc, $r)) {
 		  $namedkeys = $r[2];
-		  $dec = $r[1];
+		  $desc = $r[1];
 		}
 		else 
 		  $namedkeys = "";
 
 		$fields = array();
-		foreach(preg_split("/,\s*`/",$dec) as $v) {
+		foreach(preg_split("/,\s*`/",$desc) as $v) {
 		  preg_match("/^\s*`?([^`]*)`\s*(.*)/",$v,$r);
 		  $fields[strtolower($r[1])] = $r[2];
 		}
