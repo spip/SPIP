@@ -634,7 +634,7 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 	if (preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r)){
 		$desc = $r[1];
 		// extraction d'une KEY éventuelle en prenant garde de ne pas
-		// relever un champ dont le nom finit par KEY
+		// relever un champ dont le nom contient KEY (ex. ID_WHISKEY)
 		if (preg_match("/^(.*?),([^,]*KEY[ (].*)$/s", $desc, $r)) {
 		  $namedkeys = $r[2];
 		  $desc = $r[1];
