@@ -969,6 +969,8 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 
 	$secondes = spip_timer('calcul_skel');
 	spip_log("COMPIL ($secondes) [$sourcefile] $nom.php");
+	// $connect n'est pas sûr : on nettoie
+	$connect = preg_replace(',[^\w],', '', $connect);
 
 	// Assimiler la fct principale a une boucle anonyme, c'est plus simple
 	$code = new Boucle;
