@@ -17,7 +17,7 @@
 <!--affiche_milieu-->
 
 [(#ENV{email_confirm}|oui)
-#BOITE_OUVRIR{'','notice'}<p><:form_auteur_envoi_mail_confirmation{email=#EMAIL}:></p>#BOITE_FERMER
+#BOITE_OUVRIR{'','notice'}<p><:form_auteur_envoi_mail_confirmation{email=#ENV{email_confirm}}:></p>#BOITE_FERMER
 ]
 [(#ENV{email_modif}|oui)
 #BOITE_OUVRIR{'','success'}<p><:form_auteur_email_modifie:></p>#BOITE_FERMER
