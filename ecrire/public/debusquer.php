@@ -403,7 +403,7 @@ function ancre_texte($texte, $fautifs = array(), $nocpt = false){
 		. "\$(this).parent().find('a').toggle();"
 		. '" title="'
 		. _T('masquer_colonne')
-		. '" >'
+		. '" style="cursor: pointer;">'
 		. ($nocpt ? '' : _T('info_numero_abbreviation'))
 		. "</div>
 	" . $res . "</div>\n";
