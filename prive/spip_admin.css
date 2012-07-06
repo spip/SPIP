@@ -30,9 +30,11 @@ a:active.spip-admin-boutons,
 #spip-debug fieldset fieldset legend { border: solid 1px #00F; font-weight: normal; }
 #spip-debug a { text-decoration: none; color: blue; }
 #spip-debug a:hover { text-decoration: underline; background-color: transparent; color: red; }
-#spip-debug fieldset table {font-family: Courier,"Courier New",monospace; font-size: 12px; line-height:.3em; margin-bottom: 0; }
-    
+#spip-debug fieldset table {font-family: Courier,"Courier New",monospace; font-size: 12px; line-height:.7em; margin-bottom: 0; }
+#spip-debug fieldset table th, #spip-debug fieldset table td, #spip-debug fieldset table caption {padding: 0.5em; }
+
 #debug_boucle fieldset { background-color: #ccf; padding-bottom: 1em; line-height: 1.5em; }
+#debug_boucle fieldset div { width: 80%; }
 #debug_boucle fieldset fieldset { background-color: #fff; font-family: Verdana, Geneva, sans-serif; padding: 0.5em 1.5em; }
 #spip-debug code { background-color: #ccf; line-height:1.3em;}
 
