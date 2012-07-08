@@ -114,7 +114,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
  * 
  * Ajoute les clés
  * - 'nom' (= id)
- * - 'comptaibilite' (= version)
+ * - 'compatibilite' (= version)
  *
  * @param array $utilise
  * 		Liste des necessite trouvés pour le plugin
@@ -146,7 +146,7 @@ function info_plugin_normalise_necessite($necessite) {
  * 
  * Ajoute les clés
  * - 'nom' (= id)
- * - 'comptaibilite' (= version)
+ * - 'compatibilite' (= version)
  *
  * @param array $utilise
  * 		Liste des utilise trouvés pour le plugin
