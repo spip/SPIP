@@ -159,7 +159,8 @@ function spip_query_db($query, $serveur='',$requeter=true) {
  * @param bool $requeter
  * @return array|null|resource|string
  *
- */function spip_mysql_query($query, $serveur='',$requeter=true) {
+ */
+function spip_mysql_query($query, $serveur='',$requeter=true) {
 
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$prefixe = $connexion['prefixe'];

@@ -116,18 +116,22 @@ function public_debusquer_dist($message = '', $lieu = ''){
 
 function debusquer_compose_message($msg){
 	if (is_array($msg)){
-		// sqlite renvoit des erreurs alpha num
-		if (!is_numeric($msg[0]) AND count($msg)==2)
+		// si c'est un texte, c'est une traduction a faire, mais
+		// sqlite renvoit aussi des erreurs alpha num (mais avec 3 arguments)
+		if (!is_numeric($msg[0]) AND count($msg)==2) {
 			// message avec argument: instancier
 			$msg = _T($msg[0], $msg[1], 'spip-debug-arg');
-		else
+		} else {
 			// message SQL: interpreter
 			$msg = debusquer_requete($msg);
+		}
 	}
 	// [fixme] le fond n'est pas la si on n'est pas dans un squelette
 	// cela dit, ca serait bien d'indiquer tout de meme d'ou vient l'erreur
 	$fond = isset($GLOBALS['fond']) ? $GLOBALS['fond']  : "";
-	spip_log("Debug: " . $msg . " (" . $fond . ")");
+	// une erreur critique sort $message en array
+	$debug = is_array($msg) ? $msg[1] : $msg;
+	spip_log("Debug: " . $debug . " (" . $fond . ")");
 	return $msg;
 }
 
@@ -227,24 +231,38 @@ function debusquer_navigation($tableau, $caption = '', $id = 'debug-nav'){
 		. "</table>";
 }
 
-//
-// Si une boucle cree des soucis, on peut afficher la requete fautive
-// avec son code d'erreur
-//
 
+/**
+ * Retourne le texte d'un message d'erreur de requête 
+ *
+ * Si une boucle cree des soucis, on peut afficher la requete fautive
+ * avec son code d'erreur
+ *
+ * @param array $message
+ * 		Description du message en 3 éléments :
+ * 		- numéro d'erreur
+ * 		- texte de l'erreur
+ * 		- requête en erreur
+ * @return string|array
+ * 		Retourne le texte de l'erreur a afficher
+ * 		ou un tableau si l'erreur est critique
+**/
 function debusquer_requete($message){
 	list($errno, $msg, $query) = $message;
+
+	// [fixme] ces écritures mélangent divers syntaxe des moteurs SQL
+	// il serait plus prudent certainement d'avoir une fonction d'analyse par moteur
 	if (preg_match(',err(no|code):?[[:space:]]*([0-9]+),i', $msg, $regs)){
 		$errno = $regs[2];
-
 	}
-	elseif (($errno==1030 OR $errno<=1026)
+	elseif (is_numeric($errno) and ($errno==1030 OR $errno<=1026)
 		AND preg_match(',[^[:alnum:]]([0-9]+)[^[:alnum:]],', $msg, $regs)
-	)
+	) {
 		$errno = $regs[1];
+	}
 
 	// Erreur systeme
-	if ($errno>0 AND $errno<200){
+	if (is_numeric($errno) and $errno>0 AND $errno<200){
 		$retour = "<tt><br /><br /><blink>"
 			. _T('info_erreur_systeme', array('errsys' => $errno))
 			. "</blink><br />\n<b>"
@@ -254,8 +272,8 @@ function debusquer_requete($message){
 		spip_log("Erreur systeme $errno");
 		return array($retour, '');
 	}
-	// Requete erronee
 
+	// Requete erronee
 	$err = "<b>" . _T('avis_erreur_mysql') . " $errno</b><br /><tt>\n"
 		. htmlspecialchars($msg)
 		. "\n<br /><span style='color: red'><b>"
@@ -265,6 +283,8 @@ function debusquer_requete($message){
 
 	return $err;
 }
+
+
 
 // http://doc.spip.org/@trouve_boucle_debug
 function trouve_boucle_debug($n, $nom, $debut = 0, $boucle = ""){
