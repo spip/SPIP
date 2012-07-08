@@ -76,8 +76,8 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	$ret['lib'] = $necessite['lib'];
 	$ret['utilise'] = info_plugin_normalise_utilise($arbre['utilise']);
 	$ret['procure'] = info_plugin_normalise_procure($arbre['procure']);
+	$ret['chemin']  = info_plugin_normalise_chemin($arbre['path']);
 
-	$ret['chemin'] = $arbre['path'];
 	if (isset($arbre['pipeline']))
 		$ret['pipeline'] = $arbre['pipeline'];
 
@@ -100,6 +100,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 
 	return $ret;
 }
+
 // Un attribut de nom "id" a une signification particuliere en XML
 // qui ne correspond pas a l'utilissation qu'en font les plugin.xml
 // Pour eviter de complexifier la lecture de paquet.xml
@@ -108,6 +109,18 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 // pour compatibilite, mais seul le premier est disponible quand on lit
 // un paquet.xml, "id" devant etre considere comme obsolete
 
+/**
+ * Normaliser les description des necessite
+ * 
+ * Ajoute les clés
+ * - 'nom' (= id)
+ * - 'comptaibilite' (= version)
+ *
+ * @param array $utilise
+ * 		Liste des necessite trouvés pour le plugin
+ * @return array
+ * 		Liste des necessite modifiés.
+ */
 function info_plugin_normalise_necessite($necessite) {
 	$res = array('necessite' => array(), 'lib' => array());
 
@@ -128,6 +141,18 @@ function info_plugin_normalise_necessite($necessite) {
 	return $res;
 }
 
+/**
+ * Normaliser la description des utilise
+ * 
+ * Ajoute les clés
+ * - 'nom' (= id)
+ * - 'comptaibilite' (= version)
+ *
+ * @param array $utilise
+ * 		Liste des utilise trouvés pour le plugin
+ * @return array
+ * 		Liste des utilise modifiés.
+ */
 function info_plugin_normalise_utilise($utilise) {
 	$res = array();
 
@@ -141,6 +166,16 @@ function info_plugin_normalise_utilise($utilise) {
 	return $res;
 }
 
+/**
+ * Normaliser la description des procurations
+ * 
+ * Ajoute la cle 'nom' (= id)
+ *
+ * @param array $procure
+ * 		Liste des procure trouvés pour le plugin
+ * @return array
+ * 		Liste des procure modifiés.
+ */
 function info_plugin_normalise_procure($procure) {
 	$res = array();
 
@@ -154,4 +189,25 @@ function info_plugin_normalise_procure($procure) {
 	return $res;
 }
 
+/**
+ * Normaliser la description du chemin
+ * 
+ * Ajoute le clés 'path' (= dir)
+ *
+ * @param array $chemins
+ * 		Liste des chemins trouvés pour le plugin
+ * @return array
+ * 		Liste des chemins modifiés.
+ */
+function info_plugin_normalise_chemin($chemins) {
+	$res = array();
+
+	if (is_array($chemins)) {
+		foreach ($chemins as $c) {
+			$c['path'] = $c['dir'];
+			$res[] = $c;
+		}
+	}
+	return $res;
+}
 ?>
