@@ -33,7 +33,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $charset
  *     Charset à charger
  *     Par défaut (AUTO), utilise le charset défini dans la configuration du site
- * @return string|false
+ * @return string|bool
  *     Nom du charset
  *     false si le charset n'est pas décrit dans le répertoire charsets/
 **/
@@ -191,10 +191,22 @@ function plage_punct_unicode() {
 	return '\xE2(\x80[\x80-\xBF]|\x81[\x80-\xAF])';
 }
 
-// corriger caracteres non-conformes : 128-159
-// cf. charsets/iso-8859-1.php (qu'on recopie ici pour aller plus vite)
-// on peut passer un charset cible en parametre pour accelerer le passage iso-8859-1 -> autre charset
-// http://doc.spip.org/@corriger_caracteres_windows
+/**
+ * Corriger des caractères non-conformes : 128-159
+ *
+ * Cf. charsets/iso-8859-1.php (qu'on recopie ici pour aller plus vite)
+ * On peut passer un charset cible en parametre pour accelerer le passage iso-8859-1 -> autre charset
+ * 
+ * @param string $texte
+ *     Le texte à corriger
+ * @param string $charset
+ *     Charset d'origine du texte
+ *     Par défaut (AUTO) utilise le charset défini dans la configuration du site
+ * @param string $charset_cible
+ *     Charset de destination (unicode par défaut)
+ * @return string
+ *     Texte corrigé
+**/
 function corriger_caracteres_windows($texte, $charset='AUTO', $charset_cible='unicode') {
 	static $trans;
 	
