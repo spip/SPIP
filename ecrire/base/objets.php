@@ -423,11 +423,13 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 
 
 /**
- * Charge les tables principales du Core
+ * Déclare les tables principales du Core
  *
  * Tables principales, hors objets éditoriaux.
- * 
- * return void
+ *
+ * @param array $tables_principales
+ *     Description des tables principales déjà déclarées
+ * @return void
 **/
 function base_serial(&$tables_principales){
 
@@ -456,9 +458,11 @@ function base_serial(&$tables_principales){
 
 
 /**
- * Charge les tables auxiliaires du Core
- * 
- * return void
+ * Déclare les tables auxiliaires du Core
+ *
+ * @param array $tables_auxiliaires
+ *     Description des tables auxiliaires déjà déclarées
+ * @return void
 **/
 function base_auxiliaires(&$tables_auxiliaires){
 $spip_resultats = array(
@@ -815,6 +819,8 @@ function lister_types_surnoms(){
  * @param string $type
  *     Nom de la table SQL (le plus souvent)
  *     Tolère un nom de clé primaire.
+ * @param string $serveur
+ *     Nom du connecteur
  * @return string
  *     Nom de l'objet
 **/
@@ -849,6 +855,8 @@ function table_objet($type,$serveur='') {
  * @param string $type
  *     Nom ou type de l'objet
  *     Tolère un nom de clé primaire.
+ * @param string $serveur
+ *     Nom du connecteur
  * @return string
  *     Nom de la table SQL
 **/
@@ -885,6 +893,8 @@ function table_objet_sql($type,$serveur='') {
  * @api
  * @param string $type
  *     Nom de la table SQL ou de l'objet
+ * @param string $serveur
+ *     Nom du connecteur
  * @return string
  *     Nom de la clé primaire
 **/
@@ -913,8 +923,10 @@ function id_table_objet($type,$serveur='') {
  * - id_article    -> article
  *
  * @api
- * @param string $type
- *     Nom de la table SQL ou de l'objet
+ * @param string $table_objet
+ *     Nom de l'objet ou de la table SQL
+ * @param string $serveur
+ *     Nom du connecteur
  * @return string
  *     Type de l'objet
 **/
