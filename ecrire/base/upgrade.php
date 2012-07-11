@@ -134,15 +134,34 @@ function maj_base($version_cible = 0, $redirect = '') {
 }
 
 /**
- * MAJ d'un plugin de SPIP
- * appelee par la fonction de maj d'un plugin
- * on lui fournit un tableau de fonctions elementaires
+ * Mise à jour d'un plugin de SPIP
+ * 
+ * Fonction appelée par la fonction de maj d'un plugin.
+ * On lui fournit un tableau de fonctions élementaires
  * dont l'indice est la version
  * 
  * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @param string $version_cible
+ *     Version du schéma de données dans le plugin (déclaré dans paquet.xml)
  * @param array $maj
+ *     Tableau d'actions à faire à l'installation (clé 'create') et pour chaque
+ *     version intermédiaire entre la version actuelle du schéma du plugin dans SPIP
+ *     et la version du schéma déclaré dans le plugin (ex. clé '1.1.0').
+ *     
+ *     Chaque valeur est un tableau contenant une liste de fonctions à exécuter,
+ *     cette liste étant elle-même un tableau avec premier paramètre le nom de la fonction
+ *     et les suivant les paramètres à lui passer
+ *     @example
+ *        array(
+ *            'create' => array(
+ *                array('maj_tables', array('spip_rubriques', 'spip_articles')),
+ *                array('creer_base)),
+ *            '1.1.0' => array(
+ *                array('sql_alter', 'TABLE spip_articles ADD INDEX truc (truc)'))
+ *        )
  * @param string $table_meta
+ *     Nom de la table meta (sans le prefixe spip_) dans laquelle trouver la meta $nom_meta_base_version
  * @return void
  */
 function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='meta'){
