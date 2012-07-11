@@ -17,7 +17,7 @@
  * à la conversion de textes dans différents charsets et
  * propose des fonctions émulant la librairie mb si elle est absente
  * 
- * @package Texte/Charsets
+ * @package Texte\Charsets
 **/
 
 // securité
@@ -32,7 +32,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * 
  * @param string $charset
  *     Charset à charger
- *     Par défaut (AUTO), utilise le charset défini dans la configuration du site
+ *     Par défaut (AUTO), utilise le charset du site
  * @return string|bool
  *     Nom du charset
  *     false si le charset n'est pas décrit dans le répertoire charsets/
@@ -201,7 +201,7 @@ function plage_punct_unicode() {
  *     Le texte à corriger
  * @param string $charset
  *     Charset d'origine du texte
- *     Par défaut (AUTO) utilise le charset défini dans la configuration du site
+ *     Par défaut (AUTO) utilise le charset du site
  * @param string $charset_cible
  *     Charset de destination (unicode par défaut)
  * @return string
@@ -340,7 +340,7 @@ function mathml2unicode($texte) {
  *     Texte à convertir
  * @param string $charset
  *     Charset actuel du texte
- *     Par défaut (AUTO), le charset est celui indiqué dans la configuration du site.
+ *     Par défaut (AUTO), le charset est celui du site.
  * @return string
  *     Texte converti en unicode
 **/
@@ -399,11 +399,21 @@ function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 	}
 }
 
-//
-// Transforme les entites unicode &#129; dans le charset specifie
-// Attention on ne transforme pas les entites < &#128; car si elles
-// ont ete encodees ainsi c'est a dessein
-// http://doc.spip.org/@unicode2charset
+
+/**
+ * Transforme les entites unicode &#129; dans le charset specifie
+ *
+ * Attention on ne transforme pas les entites < &#128; car si elles
+ * ont ete encodees ainsi c'est a dessein
+ * 
+ * @param string $texte
+ *     Texte unicode à transformer
+ * @param string $charset
+ *     Charset à appliquer au texte
+ *     Par défaut (AUTO), le charset sera celui du site.
+ * @return string
+ *     Texte transformé dans le charset souhaité
+**/
 function unicode2charset($texte, $charset='AUTO') {
 	static $CHARSET_REVERSE;
 	static $trans = array();
@@ -445,9 +455,19 @@ function unicode2charset($texte, $charset='AUTO') {
 }
 
 
-// Importer un texte depuis un charset externe vers le charset du site
-// (les caracteres non resolus sont transformes en &#123;)
-// http://doc.spip.org/@importer_charset
+/**
+ * Importer un texte depuis un charset externe vers le charset du site
+ *
+ * Les caracteres non resolus sont transformes en &#123;
+ * 
+ * @param string $texte
+ *     Texte unicode à importer
+ * @param string $charset
+ *     Charset d'origine du texte
+ *     Par défaut (AUTO), le charset d'origine est celui du site.
+ * @return string
+ *     Texte transformé dans le charset site
+**/
 function importer_charset($texte, $charset = 'AUTO') {
 	static $trans = array();
 	// on traite le cas le plus frequent iso-8859-1 vers utf directement pour aller plus vite !
@@ -477,8 +497,17 @@ function importer_charset($texte, $charset = 'AUTO') {
 	return unicode2charset(charset2unicode($texte, $charset));
 }
 
-// UTF-8
-// http://doc.spip.org/@utf_8_to_unicode
+
+/**
+ * Transforme un texte UTF-8 en unicode 
+ *
+ * Utilise la librairie mb si présente
+ * 
+ * @param string $source
+ *    Texte UTF-8 à transformer
+ * @return string
+ *    Texte transformé en unicode
+**/
 function utf_8_to_unicode($source) {
 
 	// mb_string : methode rapide
@@ -566,11 +595,20 @@ function utf_8_to_unicode($source) {
 	return $encodedString;
 }
 
-// UTF-32 ne sert plus que si on passe par iconv, c'est-a-dire quand
-// mb_string est absente ou ne connait pas notre charset
-// mais on l'optimise quand meme par mb_string
-// => tout ca sera osolete quand on sera surs d'avoir mb_string
-// http://doc.spip.org/@utf_32_to_unicode
+/**
+ * Transforme un texte UTF-32 en unicode 
+ *
+ * UTF-32 ne sert plus que si on passe par iconv, c'est-a-dire quand
+ * mb_string est absente ou ne connait pas notre charset.
+ *
+ * Mais on l'optimise quand meme par mb_string
+ * => tout ca sera osolete quand on sera surs d'avoir mb_string
+ * 
+ * @param string $source
+ *    Texte UTF-8 à transformer
+ * @return string
+ *    Texte transformé en unicode
+**/
 function utf_32_to_unicode($source) {
 
 	// mb_string : methode rapide
@@ -597,8 +635,18 @@ function utf_32_to_unicode($source) {
 
 }
 
-// Ce bloc provient de php.net, auteur Ronen
-// http://doc.spip.org/@caractere_utf_8
+
+/**
+ * Transforme un numéro unicode en caractère utf-8
+ * 
+ * Ce bloc provient de php.net
+ * @author Ronen
+ * 
+ * @param int $num
+ *    Numéro de l'entité unicode
+ * @return char
+ *    Caractère utf8 si trouvé, '' sinon
+**/
 function caractere_utf_8($num) {
 	if($num<128)
 		return chr($num);
