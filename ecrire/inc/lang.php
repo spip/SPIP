@@ -10,13 +10,30 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des langues et choix de langue 
+ *
+ * @package SPIP\Langue
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-//
-// Changer la langue courante
-//
-// http://doc.spip.org/@changer_langue
+
+/**
+ * Changer la langue courante
+ *
+ * Définit la langue utilisée par la langue désignée
+ * si elle fait partie des langues utilisables dans le site.
+ *
+ * Cette fonction définit les globales :
+ * spip_lang, spip_lang_rtl, spip_lang_right, spip_lang_left
+ * 
+ * @param string $lang
+ *     La langue à utiliser
+ * @return string|bool
+ *     string : La langue qui a été utilisée si trouvée
+ *     false : aucune langue ne correspondait à la demande
+**/
 function changer_langue($lang) {
 	global $spip_lang_rtl, $spip_lang_right, $spip_lang_left;
 
@@ -186,20 +203,19 @@ function select_langues($nom_select, $change, $options, $label="")
 
 /**
  * Lister les langues disponibles
- * en fonction du premier argument $nom_select,
- * on renvoie des listes differentes :
- * var_lang ou changer_lang :
- *   liste des langues selectionnees dans la config multilinguisme
- * var_lang_ecrire :
- *   toutes les langues presentes en fichier de langue
  *
- * renvoie dans un tableau la liste triee des langues
+ * Retourne un tableau de langue utilisables, triées par code de langue,
+ * mais pas le même tableau en fonction du paramètre $nom_select.
  * 
- * http://doc.spip.org/@liste_options_langues
- *
  * @param string $nom_select
- *   name du select
+ *     Attribut name du select
+ *     Selon son nom, retourne une liste différente :
+ *     - var_lang ou changer_lang :
+ *         liste des langues sélectionnées dans la config multilinguisme
+ *     - var_lang_ecrire :
+ *         toutes les langues présentes en fichier de langue
  * @return array
+ *     Liste des langues
  */
 function liste_options_langues($nom_select) {
 
@@ -231,12 +247,16 @@ function liste_options_langues($nom_select) {
 }
 
 
-//
-// Cette fonction est appelee depuis public/global si on a installe
-// la variable de personnalisation $forcer_lang ; elle renvoie le brouteur
-// si necessaire vers l'URL xxxx?lang=ll
-//
-// http://doc.spip.org/@verifier_lang_url
+
+/**
+ * Redirige sur la bonne langue lorsque l'option forcer_lang est active
+ * 
+ * Cette fonction est appelee depuis ecrire/public.php si on a installé
+ * la variable de personnalisation $forcer_lang ; elle renvoie le brouteur
+ * si necessaire vers l'URL xxxx?lang=ll
+ *
+ * @return void
+**/
 function verifier_lang_url() {
 	global $spip_lang;
 
@@ -270,10 +290,15 @@ function verifier_lang_url() {
 }
 
 
-//
-// Selection de langue haut niveau
-//
-// http://doc.spip.org/@utiliser_langue_site
+/**
+ * Utilise la langue du site
+ *
+ * Change la langue en cours d'utilisation par la langue du site
+ * si ce n'est pas déjà le cas.
+ *
+ * @return string
+ *     La langue sélectionnée
+**/
 function utiliser_langue_site() {
 	if (isset($GLOBALS['meta']['langue_site'])
 	  AND isset($GLOBALS['spip_lang'])
@@ -282,12 +307,24 @@ function utiliser_langue_site() {
 	return isset($GLOBALS['spip_lang']) ? $GLOBALS['spip_lang'] : '';
 }
 
-// http://doc.spip.org/@utiliser_langue_visiteur
+/**
+ * Initialise la langue pour un visiteur du site 
+ *
+ * La langue est choisie dans cet ordre :
+ * - Dans le cookie 'spip_lang' ou 'spip_lang_ecrire' s'il existe (selon l'espace public ou privé).
+ * - Sinon dans la session du visiteur.
+ * - Sinon dans une des langues définie en préférence du navigateur
+ * - Sinon la langue du site
+ * 
+ * @return string
+ *     La langue utilisée
+**/
 function utiliser_langue_visiteur() {
 
 	$l = (!test_espace_prive()  ? 'spip_lang' : 'spip_lang_ecrire');
 	if (isset($_COOKIE[$l]))
-		if (changer_langue($l = $_COOKIE[$l])) return $l;
+		if (changer_langue($l = $_COOKIE[$l]))
+			return $l;
 
 	if (isset($GLOBALS['visiteur_session']['lang']))
 		if (changer_langue($l = $GLOBALS['visiteur_session']['lang']))
@@ -295,16 +332,28 @@ function utiliser_langue_visiteur() {
 
 	foreach (explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $s)  {
 		if (preg_match('#^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$#i', trim($s), $r)) {
-			if (changer_langue($l=strtolower($r[1]))) return $l;
+			if (changer_langue($l=strtolower($r[1])))
+				return $l;
 		}
 	}
 
 	return utiliser_langue_site();
 }
 
-// Une fonction qui donne le repertoire ou trouver des fichiers de langue
-// note : pourrait en donner une liste... complique
-// http://doc.spip.org/@repertoire_lang
+
+/**
+ * Retourne le répertoire contenant le module de langue indiqué
+ * 
+ * Note : pourrait en donner une liste... compliqué
+ * 
+ * @param string $module
+ *     Nom du module de lang
+ * @param string $lang
+ *     Langue du module de langue
+ * @return string
+ *     Adresse du répertoire contenant le module
+ *     Retourne ecrire/lang/ s'il rien ne semble correspondre.
+**/
 function repertoire_lang($module='spip', $lang='fr') {
 	# valeur forcee (par ex.sur spip.net), old style, a faire disparaitre
 	if (defined('_DIR_LANG'))
@@ -318,16 +367,23 @@ function repertoire_lang($module='spip', $lang='fr') {
 	return _DIR_RESTREINT . 'lang/';
 }
 
-//
-// Initialisation des meta
-// - langues proposees
-// - langue site
-//
-// http://doc.spip.org/@init_langues
+
+/**
+ * Initialisation des listes de langues
+ *
+ * Initialise les métas :
+ * - langues_proposees : liste des traductions disponibles
+ * - langue_site       : langue par défaut du site
+ *
+ * Lorsque ces métas n'existent pas encore (c'est à dire à l'installation),
+ * elles sont calculées en obtenant la liste des langues
+ * dans les fichiers de lang 
+ * 
+ * @return void
+**/
 function init_langues() {
 
 	// liste des langues dans les meta, sauf a l'install
-
 	$all_langs = @$GLOBALS['meta']['langues_proposees'];
 
 	$tout = array();
@@ -349,7 +405,7 @@ function init_langues() {
 		}
 	}
 	if (!isset($GLOBALS['meta']['langue_site'])) {
-// Initialisation : le francais si dispo, sinon la premiere langue trouvee
+		// Initialisation : le francais si dispo, sinon la premiere langue trouvee
 		$GLOBALS['meta']['langue_site'] = $tout =
 		(!$all_langs OR (strpos(',fr,',",$all_langs,")!==false))
 		  ? 'fr' :  substr($all_langs,0,strpos($all_langs,','));
@@ -357,13 +413,24 @@ function init_langues() {
 	}
 }
 
-// http://doc.spip.org/@html_lang_attributes
+/**
+ * Retourne une balise <html>
+ *
+ * Retourne une balise HTML contenant les attributs 'lang' et 'dir'
+ * définis sur la langue en cours d'utilisation,
+ * ainsi que des classes CSS de ces du nom de la langue et direction choisie.
+ *
+ * @return string
+ *     Code html de la balise <html>
+**/
 function html_lang_attributes()
 {
 	$lang = $GLOBALS['spip_lang'];
 	$dir = ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr');
 	return  "<html class='$dir $lang no-js' xmlns='http://www.w3.org/1999/xhtml' lang='$lang' dir='$dir'>\n" ;
 }
+
+// initialise les globales (liste des langue, langue du site, spip_lang...)
 init_langues();
 utiliser_langue_site();
 ?>
