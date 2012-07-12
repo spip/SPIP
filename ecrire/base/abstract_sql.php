@@ -581,7 +581,24 @@ function sql_drop_view($table, $exist='', $serveur='', $option=true)
 	return $r;
 }
 
-// http://doc.spip.org/@sql_showbase
+/**
+ * Retourne une ressource de la liste des tables de la base de données 
+ *
+ * @api
+ * @param string $spip
+ *     Filtre sur tables retournées
+ *     - NULL : retourne les tables SPIP uniquement (tables préfixées avec le préfixe de la connexion)
+ *     - '%' : retourne toutes les tables de la base
+ * @param string $serveur
+ *     Le nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs : 
+ *     - false -> ne pas l'executer mais la retourner, 
+ *     - continue -> ne pas echouer en cas de serveur sql indisponible,
+ *     - true -> executer la requete.
+ * @return ressource
+ *     Ressource à utiliser avec sql_fetch()
+**/
 function sql_showbase($spip=NULL, $serveur='', $option=true)
 {
 	$f = sql_serveur('showbase', $serveur,  $option==='continue' OR $option===false);
@@ -596,6 +613,25 @@ function sql_showbase($spip=NULL, $serveur='', $option=true)
 	return $f($spip, $serveur, $option!==false);
 }
 
+/**
+ * Retourne la liste des tables SQL
+ *
+ * @api
+ * @uses sql_showbase()
+ * @param string $spip
+ *     Filtre sur tables retournées
+ *     - NULL : retourne les tables SPIP uniquement (tables préfixées avec le préfixe de la connexion)
+ *     - '%' : retourne toutes les tables de la base
+ * @param string $serveur
+ *     Le nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs : 
+ *     - false -> ne pas l'executer mais la retourner, 
+ *     - continue -> ne pas echouer en cas de serveur sql indisponible,
+ *     - true -> executer la requete.
+ * @return array
+ *     Liste des tables SQL
+**/
 function sql_alltable($spip=NULL, $serveur='', $option=true)
 {
 	$q = sql_showbase($spip, $serveur, $option);
