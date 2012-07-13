@@ -271,7 +271,9 @@ function insert_rubrique($id_parent) {
  * @deprecated
  *     Utiliser rubrique_modifier()
  * @see rubrique_modifier()
- * 
+ *
+ * @param int $id_rubrique
+ *     Identifiant de la rubrique à instituer
  * @param array|null $set
  *     Tableau qu'on peut proposer en lieu et place de _request()
  * @return bool|string
@@ -283,7 +285,7 @@ function revisions_rubriques($id_rubrique, $set=null) {
 	return rubrique_modifier($id_rubrique,$set);
 }
 
-/*
+/**
  * Institue une rubrique (change son parent)
  *
  * @deprecated
@@ -297,7 +299,7 @@ function revisions_rubriques($id_rubrique, $set=null) {
  * @return string
  *     Chaine vide : aucune erreur
  *     Chaîne : Texte du message d'erreur
-*/
+**/
 function instituer_rubrique($id_rubrique, $c) {
 	return rubrique_instituer($id_rubrique, $c);
 }
