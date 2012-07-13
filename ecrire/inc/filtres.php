@@ -2813,8 +2813,7 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 	  AND (isset($traitement[$table_objet]) OR isset($traitement[0]))){
 		$traitement = $traitement[isset($traitement[$table_objet]) ? $table_objet : 0];
 		$traitement = str_replace('%s', "'".texte_script($info_generee)."'", $traitement);
-		// [fixme]
-		// $connect et $Pile[0] font souvent partie des traitements.
+		// FIXME: $connect et $Pile[0] font souvent partie des traitements.
 		// on les definit pour eviter des notices, mais ce fonctionnement est a ameliorer !
 		$connect = ""; $Pile = array(0 => array());
 		eval("\$info_generee = $traitement;");
