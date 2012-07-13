@@ -212,7 +212,7 @@ class IterDecorator extends FilterIterator {
 	private function calculer_filtres() {
 		
 		// Issu de calculer_select() de public/composer L.519
-		// [todo] externaliser...
+		// TODO: externaliser...
 		//
 		// retirer les criteres vides:
 		// {X ?} avec X absent de l'URL
@@ -285,7 +285,7 @@ class IterDecorator extends FilterIterator {
 				return;
 			}
 		}
-		# [todo ?] analyser le filtre pour refuser ce qu'on ne sait pas traiter ?
+		// TODO: analyser le filtre pour refuser ce qu'on ne sait pas traiter ?
 		# mais c'est normalement deja opere par calculer_critere_infixe()
 		# qui regarde la description 'desc' (en casse reelle d'ailleurs : {isDir=1}
 		# ne sera pas vu si l'on a defini desc['field']['isdir'] pour que #ISDIR soit present.

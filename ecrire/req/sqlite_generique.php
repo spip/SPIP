@@ -19,7 +19,7 @@
  
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-# todo : get/set_caracteres ?
+// TODO: get/set_caracteres ?
 
 
 /*

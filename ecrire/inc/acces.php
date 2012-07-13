@@ -170,7 +170,7 @@ function ecrire_acces() {
 	# remarque : ici on laisse passer les "nouveau" de maniere a leur permettre
 	# de devenir redacteur le cas echeant (auth http)... a nettoyer
 	// attention, il faut au prealable se connecter a la base (necessaire car utilise par install)
-	# TODO : factoriser avec auth/spip qui fait deja ce job et generaliser le test spip_connect_ldap()
+	// TODO: factoriser avec auth/spip qui fait deja ce job et generaliser le test spip_connect_ldap()
 
 	if (spip_connect_ldap()) return;
 	$p1 = ''; // login:htpass pour tous

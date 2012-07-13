@@ -10,19 +10,33 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'API autoriser et fonctions d'autorisations de SPIP
+ *
+ * @package SPIP\Autorisations
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
-# faut-il tracer les autorisations dans tmp/spip.log ?
+/**
+ * Tracer les autorisations dans tmp/spip.log pour débug ?
+ */
 defined('_DEBUG_AUTORISER') || define('_DEBUG_AUTORISER', false);
 
 // Constantes surchargeables, cf. plugin autorite
-// false pour ignorer la notion d'admin restreint # todo: une option a activer
+
+/**
+ * Gérer les admins restreints ?
+ * 
+ * @todo une option à activer
+ */
 defined('_ADMINS_RESTREINTS') || define('_ADMINS_RESTREINTS', true);
-// statut par defaut a la creation
+
+/** Statut par defaut à la creation */
 defined('_STATUT_AUTEUR_CREATION') || define('_STATUT_AUTEUR_CREATION', '1comite');
-// statuts associables a des rubriques (separes par des virgules)
+
+/** statuts associables a des rubriques (separes par des virgules) */
 defined('_STATUT_AUTEUR_RUBRIQUE') || define('_STATUT_AUTEUR_RUBRIQUE', _ADMINS_RESTREINTS ? '0minirezo' : '');
 
 // mes_fonctions peut aussi declarer des autorisations, donc il faut donc le charger
@@ -32,9 +46,42 @@ if ($f = find_in_path('mes_fonctions.php')) {
 }
 
 
-// surcharge possible de autoriser(), sinon autoriser_dist()
+/**
+ * Autoriser une action
+ * 
+ * Teste si une personne (par défaut le visiteur en cours) peut effectuer
+ * une certaine action. Cette fonction est le point d'entrée de toutes
+ * les autorisations.
+ *
+ * La fonction se charge d'appeler des fonctions d'autorisations spécifiques
+ * aux actions demandées si elles existent. Elle cherche donc les fonctions
+ * dans cet ordre :
+ * - autoriser_{type}_{faire}, sinon avec _dist
+ * - autoriser_{type}, sinon avec _dist
+ * - autoriser_{faire}, sinon avec _dist
+ * - autoriser_{defaut}, sinon avec _dist
+ * 
+ * Seul le premier argument est obligatoire
+ *
+ * @api
+ * @see autoriser_dist()
+ * 
+ * @param string $faire
+ *   une action ('modifier', 'publier'...)
+ * @param string $type
+ *   type d'objet ou nom de table ('article')
+ * @param int $id
+ *   id de l'objet sur lequel on veut agir
+ * @param null|int|array $qui
+ *   - si null on prend alors visiteur_session
+ *   - un id_auteur (on regarde dans la base)
+ *   - un tableau auteur complet, y compris [restreint]
+ * @param null|array $opt
+ *   options sous forme de tableau associatif
+ * @return bool
+ *   true si la personne peut effectuer l'action
+ */
 if (!function_exists('autoriser')) {
-// http://doc.spip.org/@autoriser
 	function autoriser() {
 		// Charger les fonctions d'autorisation supplementaires
 		static $pipe;
@@ -47,13 +94,12 @@ if (!function_exists('autoriser')) {
 
 
 /**
- * API pour une fonction generique d'autorisation :
- * (par exemple pour preciser si l'autorisation concerne tel ou tel champ)
- *
- * Seul le premier argument est obligatoire
- *
- * http://doc.spip.org/@autoriser_dist
- *
+ * Autoriser une action
+ * 
+ * Voir autoriser() pour une description complète
+ * 
+ * @see autoriser()
+ * 
  * @param string $faire
  *   une action ('modifier', 'publier'...)
  * @param string $type
@@ -67,6 +113,7 @@ if (!function_exists('autoriser')) {
  * @param null|array $opt
  *   options sous forme de tableau associatif
  * @return bool
+ *   true si la personne peut effectuer l'action
  */
 function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
