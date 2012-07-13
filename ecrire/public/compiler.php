@@ -1110,7 +1110,9 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		$id = strval($id); // attention au type dans index_pile
 		$type = $boucle->type_requete;
 		if ($type AND $type != TYPE_RECURSIF) {
+			$res = '';
 			if ($boucle->param) {
+				// retourne un tableau en cas d'erreur
 				$res = calculer_criteres($id, $boucles);
 			}
 			$descr['id_mere'] = $id;
@@ -1122,8 +1124,9 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			// Si les criteres se sont mal compiles
 			// ne pas tenter d'assembler le code final
 			// (mais compiler le corps pour detection d'erreurs)
-			if (is_array($res))
+			if (is_array($res)) {
 				$boucles[$id]->type_requete = false;
+			}
 		}
 	}
 
