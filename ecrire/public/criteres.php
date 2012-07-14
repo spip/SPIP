@@ -88,8 +88,11 @@ function critere_exclus_dist($idb, &$boucles, $crit){
 /**
  * Compile le critère {doublons} ou {unique}
  *
- * Attention: boucle->doublons désigne une variable qu'on affecte
+ * Ce critères enlève de la boucle les éléments déjà sauvegardés
+ * dans un précédent critère {doublon} sur une boucle de même table.
  *
+ * Il est possible de spécifier un nom au doublon tel que {doublons sommaire}
+ * 
  * @link http://www.spip.net/@doublons
  * 
  * @param string $idb
@@ -105,37 +108,49 @@ function critere_doublons_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
 	$primary = $boucle->primary;
 
+	// la table nécessite une clé primaire, non composée
 	if (!$primary OR strpos($primary, ',')){
 		return (array('zbug_doublon_sur_table_sans_cle_primaire'));
 	}
 
 	$not = ($crit->not ? '' : 'NOT');
 
-	$nom = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-	// mettre un tableau pour que ce ne soit pas vu comme une constante
+	// le doublon s'applique sur un type de boucle (article)
+	$nom = "'" . $boucle->type_requete. "'";
 
-	$nom = "'".
-	       $boucle->type_requete.
-	       "'".
-	       ($nom=="''" ? '' : " . $nom");
+	// compléter le nom avec un nom précisé {doublons nom}
+	// on obtient $nom = "'article' . 'nom'"
+	if (isset($crit->param[0])) {
+		$nom .= "." . calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	}
 
-	$debutdoub = '$doublons['
-	             .(!$not ? '' : ($boucle->doublons."[]= "));
+	// on crée un sql_in avec la clé primaire de la table
+	// et la collection des doublons déjà emmagasinés dans le tableau
+	// $doublons et son index, ici $nom
 
-	$findoub = "($nom)]";
+	// debut du code "sql_in('articles.id_article', "
+	$debut_in = "sql_in('".$boucle->id_table.'.'.$primary."', ";
+	// lecture des données du doublon "$doublons[$doublon_index[] = "
+	// Attention : boucle->doublons désigne une variable qu'on affecte
+	$debut_doub = '$doublons[' . (!$not ? '' : ($boucle->doublons."[]= "));
 
-	$debin = "sql_in('".$boucle->id_table.'.'.$primary."', ";
+	// le debut complet du code des doublons
+	$debut_doub = $debut_in . $debut_doub;
 
-	$suitin = $debin.$debutdoub;
+	// nom du doublon "('article' . 'nom')]"
+	$fin_doub = "($nom)]";
 
-	// si autre critere doublon, fusionner pour avoir un seul In
-	foreach ($boucle->where as $k => $w){
-		if (strpos($w[0], $suitin)===0){
-			$boucle->where[$k][0] = $debin.$debutdoub.$findoub.' . '.substr($w[0], strlen($debin));
+	// si on trouve un autre critère doublon,
+	// on fusionne pour avoir un seul IN, et on s'en va !
+	foreach ($boucle->where as $k => $w) {
+		if (strpos($w[0], $debut_doub)===0) {
+			$boucle->where[$k][0] = $debut_doub . $fin_doub.' . '.substr($w[0], strlen($debut_in));
 			return;
 		}
 	}
-	$boucle->where[] = array($suitin.$findoub.", '".$not."')");
+
+	// mettre l'ensemble dans un tableau pour que ce ne soit pas vu comme une constante
+	$boucle->where[] = array($debut_doub . $fin_doub.", '".$not."')");
 
 
 	# la ligne suivante avait l'intention d'eviter une collecte deja faite
