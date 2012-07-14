@@ -179,7 +179,7 @@ function balise_SPIP_VERSION_dist($p) {
  * @param array $p
  * 		Pile au niveau de la balise
  * @return array
- * 		Pile complete par le code a generer
+ * 		Pile complétée par le code à générer
 **/
 function balise_NOM_SITE_dist($p) {
 	if (!$p->etoile) {
@@ -1145,14 +1145,21 @@ function balise_GET_dist($p) {
 }
 
 
-// #DOUBLONS{mots} ou #DOUBLONS{mots,famille}
-// donne l'etat des doublons (MOTS) a cet endroit
-// sous forme de tableau d'id_mot  array(1,2,3,...)
-// #DOUBLONS tout seul donne la liste brute de tous les doublons
-// #DOUBLONS*{mots} donne la chaine brute ",1,2,3,..."
-// (changera si la gestion des doublons evolue)
-//
-// http://doc.spip.org/@balise_DOUBLONS_dist
+/**
+ * Compile la balise #DOUBLONS
+ * 
+ * #DOUBLONS{mots} ou #DOUBLONS{mots,famille}
+ * donne l'etat des doublons (MOTS) a cet endroit
+ * sous forme de tableau d'id_mot  array(1,2,3,...)
+ * #DOUBLONS tout seul donne la liste brute de tous les doublons
+ * #DOUBLONS*{mots} donne la chaine brute ",1,2,3,..."
+ * (changera si la gestion des doublons evolue)
+ * 
+ * @param array $p
+ * 		Pile au niveau de la balise
+ * @return array
+ * 		Pile complétée par le code à générer
+**/
 function balise_DOUBLONS_dist($p) {
 	if ($type = interprete_argument_balise(1,$p)) {
 		if ($famille = interprete_argument_balise(2,$p))
