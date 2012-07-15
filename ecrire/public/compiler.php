@@ -11,15 +11,17 @@
 \***************************************************************************/
 
 
-//
-// Fichier principal du compilateur de squelettes
-//
+/**
+ * Fichier principal du compilateur de squelettes
+ *
+ * @package SPIP\Compilateur\Compilation
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// reperer un code ne calculant rien, meme avec commentaire
+/** Repérer un code ne calculant rien, meme avec commentaire */
 define('CODE_MONOTONE', ",^(\n//[^\n]*\n)?\(?'([^'])*'\)?$,");
-// s'il faut commenter le code produit
+/** Indique s'il faut commenter le code produit */
 define('CODE_COMMENTE', true);
 
 // definition des structures de donnees
@@ -113,12 +115,25 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 	return $l;
 }
 
-//
-// Calculer un <INCLURE()>
-// code pour un squelette (aussi pour #INCLURE, #MODELE #LES_AUTEURS)
+/**
+ * Code d'appel à un <INCLURE()>
+ *
+ * Code PHP pour un squelette (aussi pour #INCLURE, #MODELE #LES_AUTEURS)
+ */
 define('CODE_RECUPERER_FOND', 'recuperer_fond(%s, %s, array(%s), %s)');
 
-// http://doc.spip.org/@calculer_inclure
+/**
+ * Compile une inclusion <INCLURE> ou #INCLURE
+ *
+ * @param Inclure $p
+ *     Description de l'inclusion (AST au niveau de l'inclure)
+ * @param array $boucles
+ *     AST du squelette
+ * @param string $id_boucle
+ *     Identifiant de la boucle contenant l'inclure
+ * @return string
+ *     Code PHP appelant l'inclusion
+**/
 function calculer_inclure($p, &$boucles, $id_boucle) {
 
 	$_contexte = argumenter_inclure($p->param, false, $p, $boucles, $id_boucle, true, '', true);
@@ -182,8 +197,18 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 }
 
 
+/**
+ * Gérer les statuts declarés pour cette table
+ *
+ * S'il existe des statuts sur cette table, déclarés dans la description
+ * d'un objet éditorial, applique leurs contraintes
+ *
+ * @param Boucle $boucle
+ *     Descrition de la boucle
+ * @param bool $echapper
+ *     true pour échapper le code créé
+ */
 function instituer_boucle(&$boucle, $echapper=true){
-	// gerer les statuts si declares pour cette table
 	/*
 	$show['statut'][] = array(
 		'champ'=>'statut',  // champ de la table sur lequel porte le filtrage par le statut
@@ -207,8 +232,7 @@ function instituer_boucle(&$boucle, $echapper=true){
 
 	champstatut est alors le champ statut sur la tablen
 	dans les jointures, clen peut etre un tableau pour une jointure complexe : array('id_objet','id_article','objet','article')
-	*/
-
+*/
 	$id_table = $boucle->id_table;
 	$show = $boucle->show;
 	if (isset($show['statut']) AND $show['statut']){
