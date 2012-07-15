@@ -601,6 +601,20 @@ function calculer_requete_sql($boucle)
 		. $d;
 }
 
+/**
+ * Retourne une chaîne des informations du contexte de compilation
+ *
+ * Retourne la source, le nom, l'identifiant de boucle, la ligne, la langue
+ * de l'élément dans une chaîne.
+ *
+ * @see reconstruire_contexte_compil()
+ * 
+ * @param Object $p
+ *     Objet de l'AST dont on mémorise le contexte
+ * @return string
+ *     Informations du contexte séparés par des virgules,
+ *     qui peut être utilisé pour la production d'un tableau array()
+**/
 function memoriser_contexte_compil($p) {
 	return join(',', array(
 		_q($p->descr['sourcefile']),
@@ -610,6 +624,20 @@ function memoriser_contexte_compil($p) {
 		'$GLOBALS[\'spip_lang\']'));
 }
 
+/**
+ * Reconstruit un contexte de compilation 
+ *
+ * Pour un tableau d'information de contexte donné,
+ * retourne un objet Contexte (objet générique de l'AST)
+ * avec ces informations
+ *
+ * @see memoriser_contexte_compil()
+ * 
+ * @param array $context_compil
+ *     Tableau des informations du contexte
+ * @return Contexte
+ *     Objet Contexte
+**/
 function reconstruire_contexte_compil($context_compil)
 {
 	if (!is_array($context_compil)) return $context_compil;

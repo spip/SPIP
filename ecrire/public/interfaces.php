@@ -10,13 +10,19 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Définition des noeuds de l'arbre de syntaxe abstraite
+ *
+ * @package SPIP\Compilateur\AST
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-// Definition des noeuds de l'arbre de syntaxe abstraite
 
-// http://doc.spip.org/@Texte
+/**
+ *  Description d'un texte
+**/
 class Texte {
 	var $type = 'texte';
 	var $texte;
@@ -24,7 +30,9 @@ class Texte {
 	var $ligne = 0;
 }
 
-// http://doc.spip.org/@Inclure
+/**
+ *  Description d'une inclusion de squelette
+**/
 class Inclure {
 	var $type = 'include';
 	var $texte;
@@ -33,10 +41,10 @@ class Inclure {
 	var $param = array();  //  valeurs des params
 }
 
-//
-// encodage d'une boucle SPIP en un objet PHP
-//
-// http://doc.spip.org/@Boucle
+
+/**
+ * Description d'une boucle
+**/
 class Boucle {
 	var $type = 'boucle';
 	var $id_boucle;
@@ -91,9 +99,11 @@ class Boucle {
 	var $lien = false;
 }
 
-// sous-noeud du precedent
-
-// http://doc.spip.org/@Critere
+/**
+ * Description d'un critère de boucle
+ *
+ * Sous-noeud de Boucle
+**/
 class Critere {
 	var $op;
 	var $not;
@@ -102,7 +112,9 @@ class Critere {
 	var $ligne = 0;
 }
 
-// http://doc.spip.org/@Champ
+/**
+ * Description d'un champ (balise SPIP)
+**/
 class Champ {
 	var $type = 'champ';
 	var $nom_champ;
@@ -131,7 +143,9 @@ class Champ {
 }
 
 
-// http://doc.spip.org/@Idiome
+/**
+ * Description d'une chaîne de langue
+**/
 class Idiome {
 	var $type = 'idiome';
 	var $nom_champ = ""; // la chaine a traduire
@@ -152,15 +166,24 @@ class Idiome {
 	var $ligne = 0;
 }
 
-// http://doc.spip.org/@Polyglotte
+/**
+ * Description d'un texte polyglotte (<multi>)
+**/
 class Polyglotte {
 	var $type = 'polyglotte';
 	var $traductions = array(); // les textes ou choisir
 	var $ligne = 0;
 }
 
-// Une structure necessaire au traitement d'erreur a l'execution
-// Le champ code est inutilise, mais harmonise le traitement d'erreurs.
+/**
+ * Description d'un contexte de compilation
+ *
+ * Objet simple pour stocker le nom du fichier, la ligne, la boucle
+ * permettant entre autre de localiser le lieu d'une erreur de compilation
+ * 
+ * Cette structure est nécessaire au traitement d'erreur à l'exécution
+ * Le champ code est inutilise, mais harmonise le traitement d'erreurs.
+ */
 class Contexte {
 	var $descr = array();
 	var $id_boucle = '';
@@ -169,6 +192,7 @@ class Contexte {
 	var $code = '';
 }
 
+
 global $table_criteres_infixes;
 $table_criteres_infixes = array('<', '>', '<=', '>=', '==', '===', '!=', '!==', '<>',  '?');
 
@@ -176,15 +200,16 @@ global $exception_des_connect;
 $exception_des_connect[] = ''; // ne pas transmettre le connect='' par les inclure
 
 
-//
+
 /**
- * Declarer les interfaces de la base pour le compilateur
+ * Déclarer les interfaces de la base pour le compilateur
+ * 
  * On utilise une fonction qui initialise les valeurs,
- * sans ecraser d'eventuelles predefinition dans mes_options
+ * sans écraser d'eventuelles prédéfinition dans mes_options
  * et les envoie dans un pipeline
  * pour les plugins
  *
- * http://doc.spip.org/@declarer_interfaces
+ * @link http://doc.spip.org/@declarer_interfaces
  *
  * @return void
  */
