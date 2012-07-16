@@ -10,10 +10,23 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion du formulaire d'édition de liens 
+ *
+ * @package SPIP\Formulaires
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
+ * Retrouve la source et l'objet de la liaison
+ *
+ * À partir des 3 premiers paramètres transmis au formulaire,
+ * la fonction retrouve :
+ * - l'objet dont on utilise sa table de liaison (table_source)
+ * - l'objet et id_objet sur qui on lie des éléments (objet, id_objet)
+ * - l'objet que l'on veut lier dessus (objet_lien)
+ * 
  * @param string $a
  * @param string|int $b
  * @param int|string $c
@@ -22,12 +35,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function determine_source_lien_objet($a,$b,$c){
 	$table_source = $objet_lien = $objet = $id_objet = null;
+	// auteurs, article, 23 :
+	// associer des auteurs à l'article 23, sur la table pivot spip_auteurs_liens
 	if (is_numeric($c) AND !is_numeric($b)){
 		$table_source = table_objet($a);
 		$objet_lien = objet_type($a);
 		$objet = objet_type($b);
 		$id_objet = $c;
 	}
+	// article, 23, auteurs
+	// associer des auteurs à l'article 23, sur la table pivot spip_articles_liens
 	if (is_numeric($b) AND !is_numeric($c)){
 		$table_source = table_objet($c);
 		$objet_lien = objet_type($a);
@@ -39,6 +56,8 @@ function determine_source_lien_objet($a,$b,$c){
 }
 
 /**
+ * Chargement du formulaire d'édition de liens
+ *
  * #FORMULAIRE_EDITER_LIENS{auteurs,article,23}
  *   pour associer des auteurs à l'article 23, sur la table pivot spip_auteurs_liens
  * #FORMULAIRE_EDITER_LIENS{article,23,auteurs}
@@ -96,7 +115,8 @@ function formulaires_editer_liens_charger_dist($a,$b,$c,$editable=true){
 }
 
 /**
- * Traiter le post des informations d'edition de liens
+ * Traiter le post des informations d'édition de liens
+ * 
  * Les formulaires postent dans trois variables ajouter_lien et supprimer_lien
  * et remplacer_lien
  *
@@ -211,18 +231,20 @@ function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 
 
 /**
+ * Retrouver l'action de liaision demandée
+ * 
  * Les formulaires envoient une action dans un tableau ajouter_lien
  * ou supprimer_lien
- * L'action est de la forme
- * objet1-id1-objet2-id2
+ * 
+ * L'action est de la forme : objet1-id1-objet2-id2
  *
- * L'action peut etre indiquee dans la cle, ou dans la valeur
- * Si elle est indiquee dans la valeur, et que la cle est non numerique,
- * on ne la prend en compte que si un submit avec la cle a ete envoye
+ * L'action peut-être indiquée dans la clé ou dans la valeur.
+ * Si elle est indiquee dans la valeur et que la clé est non numérique,
+ * on ne la prend en compte que si un submit avec la clé a été envoyé
  *
- * @param string $k
- * @param string $v
- * @return string
+ * @param string $k Clé du tableau
+ * @param string $v Valeur du tableau
+ * @return string Action demandée si trouvée, sinon ''
  */
 function lien_verifier_action($k,$v){
 	if (preg_match(",^\w+-[\w*]+-[\w*]+-[\w*]+,",$k))
