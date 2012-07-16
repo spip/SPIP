@@ -173,9 +173,27 @@ function critere_doublons_dist($idb, &$boucles, $crit){
 	#	if ($crit->not) $boucle->doublons = "";
 }
 
-// {lang_select}
-// http://www.spip.net/@lang_select
-// http://doc.spip.org/@critere_lang_select_dist
+
+/**
+ * Compile le critère {lang_select}
+ *
+ * Permet de restreindre ou non une boucle en affichant uniquement
+ * les éléments dans la langue en cours. Certaines boucles
+ * tel que articles et rubriques restreignent par défaut sur la langue
+ * en cours.
+ * 
+ * Sans définir de valeur au critère, celui-ci utilise 'oui' comme
+ * valeur par défaut.
+ * 
+ * @param string $idb
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @param array $crit
+ *     Paramètres du critère dans cette boucle
+ * @return
+ *     AST complété de la gestion du critère
+**/
 function critere_lang_select_dist($idb, &$boucles, $crit){
 	if (!isset($crit->param[1][0]) OR !($param = $crit->param[1][0]->texte)) $param = 'oui';
 	if ($crit->not) $param = ($param=='oui') ? 'non' : 'oui';
