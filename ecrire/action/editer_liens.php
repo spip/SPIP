@@ -10,20 +10,26 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * API d'édition de liens
+ *
+ * @package SPIP\Liens\API
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-/**
- * API
- */
+
 
 /**
- * Teste l'existence de la table xxx_liens et renvoie celle ci precedee
- * de la cle primaire.
- * Renvoie false si l'objet n'est pas associable.
+ * Teste l'existence de la table de liaison xxx_liens d'un objet
  *
+ * @api
  * @param string $objet
+ *     Objet à tester
  * @return array|bool
+ *     - false si l'objet n'est pas associable.
+ *     - array(clé primaire, nom de la table de lien) si associable
  */
 function objet_associable($objet){
 	$trouver_table = charger_fonction('trouver_table','base');
@@ -41,7 +47,8 @@ function objet_associable($objet){
 }
 
 /**
- * Associer un ou des objets a des objets listes
+ * Associer un ou des objets à des objets listés
+ * 
  * $objets_source et $objets_lies sont de la forme
  * array($objet=>$id_objets,...)
  * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
@@ -54,7 +61,8 @@ function objet_associable($objet){
  * on peut passer optionnellement une qualification du (des) lien(s) qui sera
  * alors appliquee dans la foulee.
  * En cas de lot de liens, c'est la meme qualification qui est appliquee a tous
- *
+ * 
+ * @api
  * @param array $objets_source
  * @param array|string $objets_lies
  * @param array $qualif
@@ -71,7 +79,8 @@ function objet_associer($objets_source, $objets_lies, $qualif = null){
 
 
 /**
- * Dissocier un (ou des) objet(s)  des objets listes
+ * Dissocier un (ou des) objet(s)  des objets listés
+ * 
  * $objets_source et $objets sont de la forme
  * array($objet=>$id_objets,...)
  * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
@@ -83,7 +92,7 @@ function objet_associer($objets_source, $objets_lies, $qualif = null){
  * un * pour $objet,$id_objet permet de traiter par lot
  * seul le type de l'objet source ne peut pas accepter de joker et doit etre explicite
  *
- *
+ * @api
  * @param array $objets_source
  * @param array|string $objets_lies
  * @return bool|int
@@ -95,7 +104,8 @@ function objet_dissocier($objets_source,$objets_lies){
 
 
 /**
- * Qualifier le lien entre un (ou des) objet(s) et des objets listes
+ * Qualifier le lien entre un (ou des) objet(s) et des objets listés
+ * 
  * $objets_source et $objets sont de la forme
  * array($objet=>$id_objets,...)
  * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
@@ -107,6 +117,7 @@ function objet_dissocier($objets_source,$objets_lies){
  * un * pour $objet,$id_objet permet de traiter par lot
  * seul le type de l'objet source ne peut pas accepter de joker et doit etre explicite
  *
+ * @api
  * @param array $objets_source
  * @param array|string $objets_lies
  * @param array $qualif
@@ -119,6 +130,7 @@ function objet_qualifier_liens($objets_source,$objets_lies,$qualif){
 
 /**
  * Trouver les liens entre objets
+ * 
  * $objets_source et $objets sont de la forme
  * array($objet=>$id_objets,...)
  * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
@@ -139,7 +151,7 @@ function objet_qualifier_liens($objets_source,$objets_lies,$qualif){
  *         'document'=>23,'article'=>12)
  * )
  * 
- *
+ * @api
  * @param array $objets_source
  * @param array|string $objets_lies
  * @return array
@@ -151,6 +163,7 @@ function objet_trouver_liens($objets_source,$objets_lies){
 
 /**
  * Nettoyer les liens morts vers des objets qui n'existent plus
+ * 
  * $objets_source et $objets sont de la forme
  * array($objet=>$id_objets,...)
  * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
@@ -161,7 +174,8 @@ function objet_trouver_liens($objets_source,$objets_lies){
  *
  * un * pour $objet,$id_objet permet de traiter par lot
  * seul le type de l'objet source ne peut pas accepter de joker et doit etre explicite
- *
+ * 
+ * @api
  * @param array $objets_source
  * @param array|string $objets_lies
  * @return int
@@ -175,12 +189,12 @@ function objet_optimiser_liens($objets_source,$objets_lies){
  * Dupliquer tous les liens entrant ou sortants d'un objet
  * vers un autre (meme type d'objet, mais id different)
  *
- * Renvoie le nombre de liens copies
- * 
+ * @api
  * @param string $objet
  * @param int $id_source
  * @param int $id_cible
  * @return int
+ *     Nombre de liens copiés
  */
 function objet_dupliquer_liens($objet,$id_source,$id_cible){
 	include_spip('base/objets');
@@ -213,8 +227,8 @@ function objet_dupliquer_liens($objet,$id_source,$id_cible){
 
 
 /**
- * Fonction generique
- * appliquer une operation de liaison entre un ou des objets et des objets listes
+ * Fonction générique qui
+ * applique une operation de liaison entre un ou des objets et des objets listés
  * $objets_source et $objets_lies sont de la forme
  * array($objet=>$id_objets,...)
  * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
@@ -227,6 +241,7 @@ function objet_dupliquer_liens($objet,$id_source,$id_cible){
  * alors appliquee dans la foulee.
  * En cas de lot de liens, c'est la meme qualification qui est appliquee a tous
  *
+ * @internal
  * @param string $operation
  * @param array $objets_source
  * @param array $objets_lies
@@ -269,7 +284,7 @@ function objet_traiter_liaisons($operation,$objets_source,$objets_lies, $set = n
 
 /**
  * Sous fonction insertion
- * qui traite les liens pour un objet source dont la cle primaire
+ * qui traite les liens pour un objet source dont la clé primaire
  * et la table de lien sont fournies
  * 
  * $objets et de la forme
@@ -277,6 +292,7 @@ function objet_traiter_liaisons($operation,$objets_source,$objets_lies, $set = n
  *
  * Retourne le nombre d'insertions realisees
  *
+ * @internal
  * @param string $objet_source
  * @param string $primary
  * @param sgring $table_lien
@@ -343,6 +359,7 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 /**
  * Fabriquer la condition where en tenant compte des jokers *
  *
+ * @internal
  * @param string $primary
  * @param int|string|array $id_source
  * @param string $objet
@@ -384,13 +401,14 @@ function lien_where($primary, $id_source, $objet, $id_objet){
 
 /**
  * Sous fonction suppression
- * qui traite les liens pour un objet source dont la cle primaire
+ * qui traite les liens pour un objet source dont la clé primaire
  * et la table de lien sont fournies
  *
  * $objets et de la forme
  * array($objet=>$id_objets,...)
  * un * pour $id,$objet,$id_objets permet de traiter par lot
  *
+ * @internal
  * @param string $objet_source
  * @param string $primary
  * @param sgring $table_lien
@@ -464,13 +482,14 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 /**
  * Sous fonction optimisation
  * qui nettoie les liens morts (vers un objet inexistant)
- * pour un objet source dont la cle primaire
+ * pour un objet source dont la clé primaire
  * et la table de lien sont fournies
  *
  * $objets et de la forme
  * array($objet=>$id_objets,...)
  * un * pour $id,$objet,$id_objets permet de traiter par lot
  *
+ * @internal
  * @param string $objet_source
  * @param string $primary
  * @param sgring $table_lien
@@ -526,7 +545,7 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
 
 /**
  * Sous fonction qualification
- * qui traite les liens pour un objet source dont la cle primaire
+ * qui traite les liens pour un objet source dont la clé primaire
  * et la table de lien sont fournies
  *
  * $objets et de la forme
@@ -536,6 +555,7 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
  * exemple :
  * $qualif = array('vu'=>'oui');
  *
+ * @internal
  * @param string $objet_source
  * @param string $primary
  * @param sgring $table_lien
@@ -574,7 +594,7 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 
 /**
  * Sous fonction trouver
- * qui cherche les liens pour un objet source dont la cle primaire
+ * qui cherche les liens pour un objet source dont la clé primaire
  * et la table de lien sont fournies
  *
  * $objets et de la forme
@@ -582,6 +602,7 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
  * un * pour $id,$objet,$id_objets permet de traiter par lot
  *
  *
+ * @internal
  * @param string $objet_source
  * @param string $primary
  * @param sgring $table_lien
@@ -607,8 +628,9 @@ function lien_find($objet_source,$primary,$table_lien,$id,$objets){
 }
 
 /**
- * Propager la date_modif sur les objets dont un lien a ete modifie
+ * Propager la date_modif sur les objets dont un lien a été modifié
  *
+ * @internal
  * @param string $objet
  * @param array|int $ids
  */
