@@ -544,8 +544,19 @@ function autoriser_article_voir_dist($faire, $type, $id, $qui, $opt){
 		     AND auteurs_article($id, "id_auteur=".$qui['id_auteur']));
 }
 
-// Voir un objet
-// http://doc.spip.org/@autoriser_voir_dist
+
+/**
+ * Autorisation de voir un objet
+ *
+ * Tout est visible par défaut, sauf les auteurs où il faut au moins être rédacteur.
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	# securite, mais on aurait pas du arriver ici !
 	if (function_exists($f='autoriser_'.$type.'_voir') OR function_exists($f='autoriser_'.$type.'_voir_dist')){
@@ -561,11 +572,23 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
-// Est-on webmestre ? Signifie qu'on n'a meme pas besoin de passer par ftp
-// pour modifier les fichiers, cf. notamment inc/admin
-// = rien ni personne sauf definition de
-// a l'avenir peut-etre autoriser "admin numero 1" ou une interface de selection
-// http://doc.spip.org/@autoriser_webmestre_dist
+
+/**
+ * Autorisation de webmestre
+ *
+ * Est-on webmestre ? Signifie qu'on n'a même pas besoin de passer par ftp
+ * pour modifier les fichiers, cf. notamment inc/admin
+ * 
+ * Soit la liste des webmestres est définie via une constante _ID_WEBMESTRES,
+ * soit on regarde l'état "webmestre" de l'auteur
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_webmestre_dist($faire, $type, $id, $qui, $opt) {
 	return
 		(defined('_ID_WEBMESTRES')?
@@ -576,8 +599,18 @@ function autoriser_webmestre_dist($faire, $type, $id, $qui, $opt) {
 		;
 }
 
-// Configurer le site => idem autorisation par defaut
-// http://doc.spip.org/@autoriser_configurer_dist
+/**
+ * Autorisation Configurer le site
+ *
+ * Il faut être administrateur complet
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_configurer_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo'
@@ -585,18 +618,36 @@ function autoriser_configurer_dist($faire, $type, $id, $qui, $opt) {
 		;
 }
 
-// Effectuer un backup ?
-// admins y compris restreints
-// http://doc.spip.org/@autoriser_sauvegarder_dist
+/**
+ * Autorisation de sauvegarder la base de données
+ *
+ * Il faut être administrateur (y compris restreint)
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_sauvegarder_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo'
 		;
 }
 
-// Effacer la base de donnees ?
-// webmestres seulement
-// http://doc.spip.org/@autoriser_detruire_dist
+/**
+ * Autorisation d'effacer la base de données
+ *
+ * Il faut être webmestre
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_detruire_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('webmestre', null, null, $qui, $opt);
@@ -668,7 +719,7 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 		return false;
 	// et toucher au statut webmestre si il ne l'est pas lui meme
 	// ou si les webmestres sont fixes par constante (securite)
-	elseif ($opt['webmestre'] AND (defined('_ID_WEBMESTRES') OR !autoriser('webmestre')))
+	elseif (isset($opt['webmestre']) AND $opt['webmestre'] AND (defined('_ID_WEBMESTRES') OR !autoriser('webmestre')))
 		return false;
 	// et modifier un webmestre si il ne l'est pas lui meme
 	elseif (intval($id) AND autoriser('webmestre','',0,$id) AND !autoriser('webmestre'))
