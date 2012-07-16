@@ -237,7 +237,7 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	$statut =	$statut_ancien = sql_getfetsel('statut','spip_auteurs','id_auteur='.intval($id_auteur));
 	
 	if (isset($c['statut'])
-	  AND (autoriser('modifier', 'auteur', $id_auteur,null, array('statut' => '?'))))
+	  AND (autoriser('modifier', 'auteur', $id_auteur,null, array('statut' => $c['statut']))))
 		$statut = $champs['statut'] = $c['statut'];
 
 	// Restreindre avant de declarer l'auteur
