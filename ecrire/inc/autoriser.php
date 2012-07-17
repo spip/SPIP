@@ -46,6 +46,7 @@ if ($f = find_in_path('mes_fonctions.php')) {
 }
 
 
+if (!function_exists('autoriser')) {
 /**
  * Autoriser une action
  * 
@@ -81,8 +82,7 @@ if ($f = find_in_path('mes_fonctions.php')) {
  * @return bool
  *   true si la personne peut effectuer l'action
  */
-if (!function_exists('autoriser')) {
-	function autoriser() {
+	function autoriser($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		// Charger les fonctions d'autorisation supplementaires
 		static $pipe;
 		if (!isset($pipe)) { $pipe = 1; pipeline('autoriser'); }
@@ -862,8 +862,8 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_modifierurl_dist($faire, $quoi, $id, $qui, $opt) {
-	return autoriser('modifier', $quoi, $id, $qui, $opt);
+function autoriser_modifierurl_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('modifier', $type, $id, $qui, $opt);
 }
 
 /**
@@ -878,7 +878,7 @@ function autoriser_modifierurl_dist($faire, $quoi, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_rubrique_previsualiser_dist($faire,$quoi,$id,$qui,$opts){
+function autoriser_rubrique_previsualiser_dist($faire,$type,$id,$qui,$opt){
 	return autoriser('previsualiser');
 }
 
@@ -894,8 +894,8 @@ function autoriser_rubrique_previsualiser_dist($faire,$quoi,$id,$qui,$opts){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_rubrique_iconifier_dist($faire,$quoi,$id,$qui,$opts){
-	return autoriser('publierdans', 'rubrique', $id, $qui, $opts);
+function autoriser_rubrique_iconifier_dist($faire,$type,$id,$qui,$opt){
+	return autoriser('publierdans', 'rubrique', $id, $qui, $opt);
 }
 
 /**
@@ -910,7 +910,7 @@ function autoriser_rubrique_iconifier_dist($faire,$quoi,$id,$qui,$opts){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_auteur_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+function autoriser_auteur_iconifier_dist($faire,$type,$id,$qui,$opt){
  return (($id == $qui['id_auteur']) OR
  		(($qui['statut'] == '0minirezo') AND !$qui['restreint']));
 }
@@ -927,9 +927,9 @@ function autoriser_auteur_iconifier_dist($faire,$quoi,$id,$qui,$opts){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+function autoriser_iconifier_dist($faire,$type,$id,$qui,$opt){
 	// par defaut, on a le droit d'iconifier si on a le droit de modifier
-	return autoriser('modifier', $quoi, $id, $qui, $opts);
+	return autoriser('modifier', $type, $id, $qui, $opt);
 }
 
 
@@ -975,7 +975,7 @@ function autoriser_niet_dist($faire, $type, $id, $qui, $opt) { return false; }
  * @param  array  $opt   Options de cette autorisation
  * @return bool          false
 **/
-function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opts) {
+function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opt) {
 	if (!autoriser('detruire') OR _request('reinstall'))
 		return false;
 
@@ -994,7 +994,7 @@ function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opts) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_infosperso_onglet_dist($faire,$quoi,$id,$qui,$opts) {
+function autoriser_infosperso_onglet_dist($faire,$type,$id,$qui,$opt) {
 	return true;
 }
 
@@ -1010,7 +1010,7 @@ function autoriser_infosperso_onglet_dist($faire,$quoi,$id,$qui,$opts) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_configurerlangage_onglet_dist($faire,$quoi,$id,$qui,$opts) {
+function autoriser_configurerlangage_onglet_dist($faire,$type,$id,$qui,$opt) {
 	return true;
 }
 
@@ -1026,7 +1026,7 @@ function autoriser_configurerlangage_onglet_dist($faire,$quoi,$id,$qui,$opts) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_configurerpreferences_onglet_dist($faire,$quoi,$id,$qui,$opts) {
+function autoriser_configurerpreferences_onglet_dist($faire,$type,$id,$qui,$opt) {
 	return true;
 }
 
@@ -1042,7 +1042,7 @@ function autoriser_configurerpreferences_onglet_dist($faire,$quoi,$id,$qui,$opts
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_auteurs_menu_dist($faire, $type, $id, $qui, $opts){return true;}
+function autoriser_auteurs_menu_dist($faire, $type, $id, $qui, $opt){return true;}
 
 /**
  * Autorisation de voir le menu articles
@@ -1056,7 +1056,7 @@ function autoriser_auteurs_menu_dist($faire, $type, $id, $qui, $opts){return tru
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_articles_menu_dist($faire, $type, $id, $qui, $opts){return true;}
+function autoriser_articles_menu_dist($faire, $type, $id, $qui, $opt){return true;}
 
 /**
  * Autorisation de voir le menu rubriques
@@ -1070,7 +1070,7 @@ function autoriser_articles_menu_dist($faire, $type, $id, $qui, $opts){return tr
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_rubriques_menu_dist($faire, $type, $id, $qui, $opts){return true;}
+function autoriser_rubriques_menu_dist($faire, $type, $id, $qui, $opt){return true;}
 
 /**
  * Autorisation de voir le menu articlecreer 
@@ -1084,7 +1084,7 @@ function autoriser_rubriques_menu_dist($faire, $type, $id, $qui, $opts){return t
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_articlecreer_menu_dist($faire, $type, $id, $qui, $opts){
+function autoriser_articlecreer_menu_dist($faire, $type, $id, $qui, $opt){
 	return sql_countsel('spip_rubriques')>0;
 }
 
@@ -1100,7 +1100,7 @@ function autoriser_articlecreer_menu_dist($faire, $type, $id, $qui, $opts){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_suiviedito_menu_dist($faire, $type, $id, $qui, $opts){
+function autoriser_suiviedito_menu_dist($faire, $type, $id, $qui, $opt){
 	return $qui['statut']=='0minirezo';
 }
 
@@ -1116,7 +1116,7 @@ function autoriser_suiviedito_menu_dist($faire, $type, $id, $qui, $opts){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_synchro_menu_dist($faire, $type, $id, $qui, $opts){
+function autoriser_synchro_menu_dist($faire, $type, $id, $qui, $opt){
 	return $qui['statut']=='0minirezo';
 }
 
@@ -1132,7 +1132,7 @@ function autoriser_synchro_menu_dist($faire, $type, $id, $qui, $opts){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_queue_purger_dist(){
+function autoriser_queue_purger_dist($faire, $type, $id, $qui, $opt){
 	return autoriser('webmestre');
 }
 
@@ -1150,11 +1150,11 @@ function autoriser_queue_purger_dist(){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_echafauder_dist($faire, $type, $id, $qui, $opts){
+function autoriser_echafauder_dist($faire, $type, $id, $qui, $opt){
 	if (test_espace_prive())
 		return intval($qui['id_auteur'])?true:false;
 	else
-		return autoriser('webmestre','',$id,$qui,$opts);
+		return autoriser('webmestre','',$id,$qui,$opt);
 }
 
 
