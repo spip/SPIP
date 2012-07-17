@@ -2903,12 +2903,13 @@ function objet_icone($objet,$taille=24){
 
 /**
  * Fonction de secours pour inserer le head_css de facon conditionnelle
- * appelee en filtre sur le squelette qui contient #INSERT_HEAD
- * elle verifie l'absence eventuelle de #INSERT_HEAD_CSS et y suplee si besoin
- * pour assurer la compat avec les squelettes qui n'utilisent pas
  * 
- * @param string $flux
- * @return void
+ * Appelée en filtre sur le squelette qui contient #INSERT_HEAD,
+ * elle vérifie l'absence éventuelle de #INSERT_HEAD_CSS et y suplée si besoin
+ * pour assurer la compat avec les squelettes qui n'utilisent pas.
+ * 
+ * @param string $flux Code HTML
+ * @return string      Code HTML
  */
 function insert_head_css_conditionnel($flux){
 	if (strpos($flux,'<!-- insert_head_css -->')===false
