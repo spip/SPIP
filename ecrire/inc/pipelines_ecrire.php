@@ -10,10 +10,34 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions déclarés dans des pipelines (espace privé)
+ *
+ * @package SPIP\Pipelines
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Inserer jQuery pour ecrire/
-// http://doc.spip.org/@f_jQuery
+
+/**
+ * Inserer jQuery et ses plugins pour l'espace privé
+ *
+ * La fonction ajoute les balises scripts dans le texte qui appelent
+ * les scripts jQuery ainsi que certains de ses plugins. La liste
+ * des js chargée peut être complété par le pipeline 'jquery_plugins'
+ *
+ * Cette fonction est appelée par le pipeline header_prive
+ * 
+ * @internal
+ *     Ne pas vérifier ici qu'on ne doublonne pas #INSERT_HEAD
+ *     car cela empeche un double appel (multi calcul en cache cool,
+ *     ou erreur de l'espace privé)
+ *
+ * @see f_jQuery()
+ * @link http://doc.spip.org/@f_jQuery
+ * 
+ * @param string $texte    Contenu qui sera inséré dans le head HTML
+ * @return string          Contenu complété des scripts javascripts, dont jQuery
+**/
 function f_jQuery_prive ($texte) {
 	$x = '';
 	$jquery_plugins = pipeline('jquery_plugins',
@@ -42,8 +66,9 @@ function f_jQuery_prive ($texte) {
 
 
 /**
- * Ajout automatique du title dans les pages du prive en squelette
- * appelle dans le pipeline affichage_final_prive
+ * Ajout automatique du title dans les pages du privé en squelette
+ * 
+ * Appellé dans le pipeline affichage_final_prive
  *
  * @param string $texte
  * @return string

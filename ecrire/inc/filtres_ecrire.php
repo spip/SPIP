@@ -481,9 +481,10 @@ function afficher_plus_info($lien, $titre="+", $titre_lien="") {
 }
 
 /**
- * Lister les id objet_source associes a l'objet id_objet
+ * Lister les id objet_source associés à l'objet id_objet
  * via la table de lien objet_lien
- * Utilise pour les listes de #FORMULAIRE_EDITER_LIENS
+ * 
+ * Utilisé pour les listes de #FORMULAIRE_EDITER_LIENS
  *
  * @param string $objet_source
  * @param string $objet

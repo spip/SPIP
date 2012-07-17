@@ -10,16 +10,37 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions déclarés dans des pipelines (espace public)
+ *
+ * @package SPIP\Pipelines
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 if (test_espace_prive())
 	include_spip('inc/pipelines_ecrire');
 
 
-// Inserer jQuery
-// ne pas verifier ici qu'on ne doublonne pas #INSERT_HEAD
-// car cela empeche un double appel (multi calcul en cache cool,
-// ou erreur de l'espace prive)
-// http://doc.spip.org/@f_jQuery
+
+/**
+ * Inserer jQuery et ses plugins
+ *
+ * La fonction ajoute les balises scripts dans le texte qui appelent
+ * les scripts jQuery ainsi que certains de ses plugins. La liste
+ * des js chargée peut être complété par le pipeline 'jquery_plugins'
+ *
+ * Cette fonction est appelée par le pipeline insert_head
+ * 
+ * @internal
+ *     Ne pas vérifier ici qu'on ne doublonne pas #INSERT_HEAD
+ *     car cela empeche un double appel (multi calcul en cache cool,
+ *     ou erreur de l'espace privé)
+ *
+ * @see f_jQuery_prive()
+ * @link http://doc.spip.org/@f_jQuery
+ * 
+ * @param string $texte    Contenu qui sera inséré dans le head HTML
+ * @return string          Contenu complété des scripts javascripts, dont jQuery
+**/
 function f_jQuery ($texte) {
 	$x = '';
 	$jquery_plugins = pipeline('jquery_plugins',
