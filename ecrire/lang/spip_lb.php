@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Dëst Schlësselwuert änneren',
 	'admin_modifier_rubrique' => 'Dës Rubrik änneren',
 	'admin_recalculer' => 'Dës Säit nei berechnen',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
+	'afficher_calendrier' => 'Kalenner weisen',
 	'afficher_trad' => 'Iwersetzunge weisen',
 	'alerte_maj_impossible' => '<b>Alarm!</b> Den Update vun der SQL-Datekank op d\'Versioun @version@ ass onméiglech, villäicht wéint engem Problem mat den Ännerungs-Rechter vun der Datebank. Kontaktéiert weg ären Provider.',
 	'alerte_modif_info_concourante' => 'OPGEPASST: Dës Informatioun ass geännert ginn. Déi aktuell Valeur ass:',
@@ -64,8 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_changer' => 'Änneren',
 	'bouton_chercher' => 'Sichen',
 	'bouton_choisir' => 'Auswielen',
-	'bouton_deplacer' => 'Déplacer', # NEW
-	'bouton_download' => 'Eroflueden', # MODIF
+	'bouton_deplacer' => 'Réckelen',
+	'bouton_download' => 'Eroflueden',
 	'bouton_enregistrer' => 'Späicheren',
 	'bouton_radio_desactiver_messagerie_interne' => 'Déi intern Messagerie ausschalten',
 	'bouton_radio_envoi_annonces' => 'Editorial Annoncen schécken',
@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_radio_non_envoi_liste_nouveautes' => 'Keng Lëscht vun de Neiegkeeten schécken',
 	'bouton_recharger_page' => 'dës Säit nei lueden',
 	'bouton_telecharger' => 'Eroplueden',
-	'bouton_upload' => 'Eroplueden', # MODIF
+	'bouton_upload' => 'Eroplueden',
 	'bouton_valider' => 'Validéieren',
 
 	// C
@@ -107,20 +107,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@. @nommois@',
 	'date_demain' => 'muer',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
+	'date_fmt_heures_minutes_court' => '@h@h@m@',
+	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ um @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
+	'date_fmt_jour_heure_debut_fin' => '@jour@ vu @heure_debut@ bis @heure_fin@ Auer',
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ vu @heure_debut@@dtabbr@ bis @dtstart@@heure_fin@@dtend@',
 	'date_fmt_jour_mois' => '@jour@. @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@. @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
+	'date_fmt_nomjour' => '@nomjour@ @date@',
 	'date_fmt_nomjour_date' => '@nomjour@, den @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
+	'date_fmt_periode' => 'Vum @date_debut@. bis den @date_fin@.',
+	'date_fmt_periode_abbr' => 'Vum @dtart@@date_debut@@dtabbr@. bis den @dtend@@date_fin@@dtabbr@.',
+	'date_fmt_periode_from' => 'Vum',
+	'date_fmt_periode_to' => 'bis den',
 	'date_heures' => 'Stonnen',
 	'date_hier' => 'gëschter',
 	'date_il_y_a' => 'virun @delai@',
@@ -181,39 +181,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'Méint',
 	'date_mois_1' => 'Januar',
 	'date_mois_10' => 'Oktober',
-	'date_mois_10_abbr' => 'oct.', # NEW
+	'date_mois_10_abbr' => 'Okt.',
 	'date_mois_11' => 'November',
-	'date_mois_11_abbr' => 'nov.', # NEW
+	'date_mois_11_abbr' => 'Nov.',
 	'date_mois_12' => 'Dezember',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
+	'date_mois_12_abbr' => 'Dez.',
+	'date_mois_1_abbr' => 'Jan.',
 	'date_mois_2' => 'Februar',
-	'date_mois_2_abbr' => 'févr.', # NEW
+	'date_mois_2_abbr' => 'Feb.',
 	'date_mois_3' => 'März',
-	'date_mois_3_abbr' => 'mars', # NEW
+	'date_mois_3_abbr' => 'März',
 	'date_mois_4' => 'Abrël',
-	'date_mois_4_abbr' => 'avr.', # NEW
+	'date_mois_4_abbr' => 'Abr.',
 	'date_mois_5' => 'Mee',
-	'date_mois_5_abbr' => 'mai', # NEW
+	'date_mois_5_abbr' => 'Mee',
 	'date_mois_6' => 'Juni',
-	'date_mois_6_abbr' => 'juin', # NEW
+	'date_mois_6_abbr' => 'Juni',
 	'date_mois_7' => 'Juli',
-	'date_mois_7_abbr' => 'juil.', # NEW
+	'date_mois_7_abbr' => 'Juli',
 	'date_mois_8' => 'August',
-	'date_mois_8_abbr' => 'août', # NEW
+	'date_mois_8_abbr' => 'Aug.',
 	'date_mois_9' => 'September',
-	'date_mois_9_abbr' => 'sept.', # NEW
+	'date_mois_9_abbr' => 'Sep.',
 	'date_saison_1' => 'Wanter',
 	'date_saison_2' => 'Fréijor',
 	'date_saison_3' => 'Summer',
 	'date_saison_4' => 'Hierscht',
-	'date_secondes' => 'secondes', # NEW
+	'date_secondes' => 'Sekonnen',
 	'date_semaines' => 'Wochen',
 	'date_un_mois' => 'mois', # NEW
-	'date_une_heure' => 'heure', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'seconde', # NEW
-	'date_une_semaine' => 'semaine', # NEW
+	'date_une_heure' => 'Stonn',
+	'date_une_minute' => 'Minutt',
+	'date_une_seconde' => 'Sekonn',
+	'date_une_semaine' => 'Woch',
 	'dirs_commencer' => ' fir d\'Installatioun richteg unzefänken',
 	'dirs_preliminaire' => 'Fir d\'éischt: <b>Régléiert d\'Zougangs-Rechter</b>',
 	'dirs_probleme_droits' => 'Problem mat den Zougangs-Rechter',
@@ -226,23 +226,23 @@ wann dat nët de Fall ass, ännert de Numm vun den Dossier\'en mat ärer FTP-Sof
 <p>Fir dat ze verbesseren, benotzt ären FTP-Client fir d\'Zougangsrechter vun jidfer Dossier anzestellen.
 Dës Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 <p>Wann dat gemaach ass, da kënnt dier ',
-	'double_occurrence' => 'Kënnt duebel fir', # MODIF
+	'double_occurrence' => '@balise@ ass duebel',
 
 	// E
 	'en_cours' => 'am gaangen',
 	'envoi_via_le_site' => 'Via ären Site schécken',
 	'erreur' => 'Fehler',
 	'erreur_balise_non_fermee' => 'Läschten Tag deen nët zou ass:',
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
+	'erreur_technique_enregistrement_champs' => 'En technesche Problem verhënnert d\'Späichere vum Feld @champs@.',
+	'erreur_technique_enregistrement_impossible' => 'En technesche Problem verhënnert d\'Späicheren.',
 	'erreur_texte' => 'Fehler(en)',
 	'etape' => 'Etape',
 
 	// F
 	'fichier_introuvable' => 'De Fichier @fichier@ kann nët font ginn',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
+	'form_auteur_confirmation' => 'Bestätegt äer Email-Adress.',
+	'form_auteur_email_modifie' => 'Äer Email-Adress ass geännert.',
+	'form_auteur_envoi_mail_confirmation' => 'En Email ass un @email@ geschéckt ginn. Dir musst op d\'Url surfen déi an deem Email uginn ass fir är Email-Adress ze bestätegen.',
 	'form_auteur_mail_confirmation' => 'Bonjour,
 
 Vous avez demandé à changer votre adresse email.
@@ -251,7 +251,7 @@ l\'adresse ci-dessous (dans le cas contraire, votre demande
 sera ignorée) :
 
     @url@
-', # NEW
+',
 	'form_deja_inscrit' => 'Dir sidd schon ugemelt.',
 	'form_email_non_valide' => 'Är Email-Adress ass nët richteg.',
 	'form_forum_access_refuse' => 'Dir hutt keen Zougang méi zu dësem Site.',
@@ -282,7 +282,7 @@ sera ignorée) :
 	'form_prop_message_envoye' => 'Message geschéckt',
 	'form_prop_non_enregistre' => 'Är Propose ass nët enregistréiert ginn.',
 	'form_prop_sujet' => 'Sujet',
-	'form_prop_url_site' => 'Adress (URL) vum Site', # MODIF
+	'form_prop_url_site' => 'Adress (URL) vum Site',
 	'forum_non_inscrit' => 'Dir sidd nët ugemellt, oder d\'Adress oder d\'Passwuert si falsch.',
 	'forum_par_auteur' => 'No @auteur@',
 	'forum_titre_erreur' => 'Fehler...',
@@ -329,7 +329,7 @@ sera ignorée) :
 	'icone_tous_articles' => 'All är Artikelen',
 	'icone_tous_auteur' => 'All d\'Auteuren',
 	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-	'icone_visiter_site' => 'Ukucken', # MODIF
+	'icone_visiter_site' => 'Den ëffentleche Site weisen',
 	'icone_voir_en_ligne' => 'Online weisen',
 	'img_indisponible' => 'Bild fehlt',
 	'impossible' => 'onméiglech',
@@ -361,9 +361,9 @@ sera ignorée) :
 	'info_connexion_refusee' => 'D\'Verbindung gouf refuséiert.',
 	'info_contact_developpeur' => 'Kontaktéiert w.e.g. en Développeur.',
 	'info_contenance' => 'Dëse Site huet:',
-	'info_contribution' => 'Beiträg an de Forum\'en', # MODIF
+	'info_contribution' => 'Bäiträg',
 	'info_copyright' => '@spip@ ass eng fräi Software déi ënner @lien_gpl@ verdeelt gët.',
-	'info_copyright_doc' => 'Fir méi Informatiounen, kuckt op <a href="@spipnet@">http://www.spip.net/lb</a>.', # MODIF
+	'info_copyright_doc' => 'Fir méi Informatioune, kuckt de Site <a href="@spipnet@">@spipnet_affiche@</a>.',
 	'info_copyright_gpl' => 'ënner GPL-Lizenz',
 	'info_cours_edition' => 'Är Artikelen an der Aarbecht',
 	'info_creer_repertoire' => 'Setzt e Fichier oder Dossier mat dësem Numm derbäi:',
@@ -423,7 +423,7 @@ oder kontaktéiert äre Provider.</span>',
 	'info_mois_courant' => 'An dësem Mount:',
 	'info_mot_cle_ajoute' => 'D\'Schlësselwuert gouf derbäi gesat bei',
 	'info_multi_herit' => 'Haapt-Sprooch',
-	'info_multi_langues_soulignees' => 'Déi <u>ënnerstrache Sproochen</u> hun eng komplett Iwersetzung vum Interface. Wann dier dës Sprooche wielt, da ginn vill Elementer vum öffentlëche Site (Datumen, Formulairen) automatesch iwersaat. Bei de nët ënnerstrache Sproochen erschéngen dës Elementer an der Haaptsprooch vum Site.', # MODIF
+	'info_multi_langues_soulignees' => 'Déi <u>ënnerstrache Sproochen</u> hunn en Interface deen komplett oder deelweis iwwersat ass. Wann dier dës Sprooche wielt, da gi vill Elementer vum ëffentleche Site (Datumen, Formulairen) automatesch iwwersat. Bei de net ënnerstrache Sproochen erschéngen dës Elementer an der Haaptsprooch vum Site.',
 	'info_multilinguisme' => 'Verschidden Sproochen',
 	'info_nom_non_utilisateurs_connectes' => 'Äre Numm ass nët op der Lëscht vun den ugemelden Benotzer.',
 	'info_nom_utilisateurs_connectes' => 'Äre Numm kënnt op d\'Lëscht vun den ugemelten Benotzer.',
@@ -480,7 +480,7 @@ oder kontaktéiert äre Provider.</span>',
 	'info_vignette_personnalisee' => 'Personnaliséiert Vignette',
 	'info_visite' => 'Visite:',
 	'info_vos_rendez_vous' => 'Är Rendez-vous\'en',
-	'infos_vos_pense_bete' => 'Är Notizen', # MODIF
+	'infos_vos_pense_bete' => 'Är Notizen',
 
 	// L
 	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
@@ -489,7 +489,7 @@ oder kontaktéiert äre Provider.</span>',
 	'lien_afficher_texte_icones' => 'D\'Ikonen an d\'Texter weisen',
 	'lien_afficher_texte_seul' => 'Nëmmen d\'Texter weisen',
 	'lien_liberer' => 'fräi ginn',
-	'lien_liberer_tous' => 'dës Artikelen fräi ginn', # MODIF
+	'lien_liberer_tous' => 'Alles fräi ginn',
 	'lien_nouvea_pense_bete' => 'NEI NOTIZ',
 	'lien_nouveau_message' => 'NEIE MESSAGE',
 	'lien_nouvelle_annonce' => 'NEI ANNONCE',
@@ -514,7 +514,7 @@ oder kontaktéiert äre Provider.</span>',
 	'login_espace_prive' => 'privaten Deel',
 	'login_identifiant_inconnu' => 'De Login « @login@ » ass nët bekannt.',
 	'login_login' => 'Login:',
-	'login_login2' => 'Login (Identifikatioun fir dëse Site):', # MODIF
+	'login_login2' => 'Login',
 	'login_login_pass_incorrect' => '(Login oder Passwuert falsch.)',
 	'login_motpasseoublie' => 'Passwuert vergiess?',
 	'login_non_securise' => 'Opgepasst, dëse Formulaire ass nët gesëchert.
@@ -651,38 +651,38 @@ Probéiert ',
 	'titre_statistiques' => 'Statistik vum Site',
 	'titre_titre_document' => 'Titel vum Dokument:',
 	'todo' => 'kënnt nach',
-	'trad_reference' => '(Referenz-Artikel)', # MODIF
+	'trad_reference' => '(Referenz vun den Iwwersetzungen)',
 
 	// Z
 	'zbug_balise_b_aval' => ': B-Tag drënner',
-	'zbug_balise_inexistante' => 'Feeler @from@: den Tag #@balise@ gëtt et net', # MODIF
+	'zbug_balise_inexistante' => 'Tag @balise@ falsch deklaréiert vir @from@',
 	'zbug_balise_sans_argument' => 'Argument feelt am Tag @balise@',
 	'zbug_boucle' => '-eidel-',
-	'zbug_boucle_recursive_undef' => 'Rekursiv Boucle nët definéiert', # MODIF
+	'zbug_boucle_recursive_undef' => 'Rekursiv Boucle nët definéiert: @nom@',
 	'zbug_calcul' => 'Berechnung',
 	'zbug_champ_hors_boucle' => 'Feld @champ@ ausserhalb vun der Boucle',
-	'zbug_champ_hors_motif' => 'Feld @champ@ ausserhalb vun enger Boucle mam Motiv @motif@', # MODIF
+	'zbug_champ_hors_motif' => 'Feld @champ@ ausserhalb vun engem Kontext @motif@',
 	'zbug_code' => '-Code-',
-	'zbug_critere_inconnu' => 'Onbekannten Critère @critere@', # MODIF
-	'zbug_distant_interdit' => 'extern verbueden', # MODIF
-	'zbug_doublon_table_sans_cle_primaire' => 'Duebel Valeuren an enger Tabell ouni atomaren primairen Schlëssel', # MODIF
-	'zbug_doublon_table_sans_index' => 'Verduebelung an enger Tabell ouni Index', # MODIF
-	'zbug_erreur_boucle_double' => 'BOUCLE@id@: duebel Definitioun', # MODIF
-	'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: Schluss-Tag fehlt', # MODIF
-	'zbug_erreur_boucle_syntaxe' => 'Falsch Syntax vun der Schleef', # MODIF
+	'zbug_critere_inconnu' => 'Onbekannte Critère @critere@',
+	'zbug_distant_interdit' => 'Extern verbueden',
+	'zbug_doublon_table_sans_cle_primaire' => 'Duebel Valeuren an enger Tabell ouni atomare primäre Schlëssel',
+	'zbug_doublon_table_sans_index' => 'Verdueblung an enger Tabell ouni Index',
+	'zbug_erreur_boucle_double' => 'Duebel Definitioun vun der Boucle @id@',
+	'zbug_erreur_boucle_fermant' => 'Boucle @id@ net zougemaach',
+	'zbug_erreur_boucle_syntaxe' => 'Falsch Syntax vun der Boucle @id@',
 	'zbug_erreur_compilation' => 'Kompilatiouns-Fehler',
-	'zbug_erreur_execution_page' => 'Fehler beim Berechnen vun der Säit', # MODIF
-	'zbug_erreur_filtre' => 'Fehler: Filter <b>"@filtre@"</b> nët definéiert', # MODIF
-	'zbug_erreur_meme_parent' => '{meme_parent} ass just fir d\'Bouclen (FORUMS) oder (RUBRIQUES)', # MODIF
+	'zbug_erreur_execution_page' => 'Ausféierung-Fehler',
+	'zbug_erreur_filtre' => 'Filter @filtre@ nët definéiert',
+	'zbug_erreur_meme_parent' => 'De Critère {meme_parent} ass just fir d\'Boucle (FORUMS) oder (RUBRIQUES)',
 	'zbug_erreur_squelette' => 'Fehler am Skelett',
 	'zbug_hors_compilation' => 'Ausserhalb vun der Compilatioun',
 	'zbug_info_erreur_squelette' => 'Fehler um Site',
-	'zbug_inversion_ordre_inexistant' => 'Inversioun vun enger Uerdnung déi ët nët gëtt', # MODIF
-	'zbug_pagination_sans_critere' => '#PAGINATION ouni {pagination}-Critère oder an ënger rekursiver Schläif gebraucht', # MODIF
-	'zbug_parametres_inclus_incorrects' => 'Falsch Parameteren fir d\'Inclusioun', # MODIF
+	'zbug_inversion_ordre_inexistant' => 'Inversioun vun enger Uerdnung déi et net gëtt',
+	'zbug_pagination_sans_critere' => 'Tag #PAGINATION ouni Critère {pagination} oder an enger rekursiver Boucle benotzt',
+	'zbug_parametres_inclus_incorrects' => 'Falschen Inclusiouns-Parameter: @param@',
 	'zbug_profile' => 'Rechenzäit: @time@',
 	'zbug_resultat' => '-eidel-',
-	'zbug_serveur_indefini' => 'SQL-Server nët definéiert', # MODIF
+	'zbug_serveur_indefini' => 'SQL-Serveur net definéiert',
 	'zbug_statistiques' => 'Statistik vun den SQL-Query\'en, klasséiert no der Längt',
 	'zbug_table_inconnue' => 'Onbekannten SQL-Tabell "@table@"',
 	'zxml_connus_attributs' => 'Bekannten Attributer',
