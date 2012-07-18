@@ -377,8 +377,15 @@ function critere_meme_parent_dist($idb, &$boucles, $crit){
  * Sélectionne dans une boucle les éléments appartenant à une branche d'une rubrique
  * 
  * Calcule une branche d'une rubrique et conditionne la boucle avec.
- * Cherche l'identifiant de la rubrique dans les boucles parentes ou par jointure
- * et calcule la liste des identifiants de rubrique de toute la branche
+ * 
+ * Cherche l'identifiant de la rubrique en premier paramètre du critère {branche XX}
+ * s'il est renseigné, sinon, sans paramètre ({branche} tout court) dans les
+ * boucles parentes. On calcule avec lui la liste des identifiants
+ * de rubrique de toute la branche.
+ *
+ * La boucle qui possède ce critère cherche une liaison possible avec
+ * la colonne id_rubrique, et tentera de trouver une jointure avec une autre
+ * table si c'est nécessaire pour l'obtenir.
  *
  * @link http://www.spip.net/@branche
  * 
@@ -386,7 +393,7 @@ function critere_meme_parent_dist($idb, &$boucles, $crit){
  * 		Identifiant de la boucle
  * @param array $boucles
  * 		AST du squelette
- * @param array $crit
+ * @param Critere $crit
  * 		Paramètres du critère dans cette boucle
  * @return
  * 		AST complété de la condition where au niveau de la boucle,
@@ -396,7 +403,13 @@ function critere_branche_dist($idb, &$boucles, $crit){
 
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
-	$arg = calculer_argument_precedent($idb, 'id_rubrique', $boucles);
+	// prendre en priorite un identifiant en parametre {branche XX}
+	if (isset($crit->param[0])) {
+		$arg = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	// sinon on le prend chez une boucle parente
+	} else {
+		$arg = kwote(calculer_argument_precedent($idb, 'id_rubrique', $boucles));
+	}
 
 	//Trouver une jointure
 	$champ = "id_rubrique";
