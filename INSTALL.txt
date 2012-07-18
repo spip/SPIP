@@ -4,7 +4,7 @@
 Rendez-vous avec votre navigateur sur la page ecrire/
 pour commencer l'installation de votre site SPIP.
 
-Votre serveur Web doit offrir php (version > 5.1.0) et MySQL.
+Votre serveur Web doit offrir php (version > 5.1.0) et MySQL ou SQLite.
 
 Pour permettre a SPIP de gerer de belles adresses (URL),
 vous devrez probablement renommer le fichier htaccess.txt
