@@ -74,7 +74,9 @@
 		<traducteur nom="Cap" lien="http://trad.spip.org/auteur/cap" />
 	</langue>
 	<langue code="km" />
-	<langue code="la" />
+	<langue code="la" url="http://trad.spip.org/tradlang_module/spip?lang_cible=la">
+		<traducteur nom="jwander" lien="http://trad.spip.org/auteur/jwander" />
+	</langue>
 	<langue code="lb" url="http://trad.spip.org/tradlang_module/spip?lang_cible=lb">
 		<traducteur nom="jwander" lien="http://trad.spip.org/auteur/jwander" />
 	</langue>

@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'0_mainteneur' => 'jim.wanderscheid bei gmail Punkt com',
 
 	// A
-	'access_interface_graphique' => 'Zerëck bei de kompletten graphëschen Interface',
+	'access_interface_graphique' => 'Zeréck bei de komplette grapheschen Interface',
 	'access_mode_texte' => 'Vereinfachten Text-Interface weisen',
 	'admin_debug' => 'debug',
 	'admin_modifier_article' => 'Dësen Artikel änneren',
@@ -22,10 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_breve' => 'Dës Kuerzmeldung änneren',
 	'admin_modifier_mot' => 'Dëst Schlësselwuert änneren',
 	'admin_modifier_rubrique' => 'Dës Rubrik änneren',
-	'admin_recalculer' => 'Dës Säit nei berechnen',
+	'admin_recalculer' => 'Dës Säit nei rechnen',
 	'afficher_calendrier' => 'Kalenner weisen',
-	'afficher_trad' => 'Iwersetzunge weisen',
-	'alerte_maj_impossible' => '<b>Alarm!</b> Den Update vun der SQL-Datekank op d\'Versioun @version@ ass onméiglech, villäicht wéint engem Problem mat den Ännerungs-Rechter vun der Datebank. Kontaktéiert weg ären Provider.',
+	'afficher_trad' => 'Iwwersetzunge weisen',
+	'alerte_maj_impossible' => '<b>Alarm!</b> Den Update vun der SQL-Datekank op d\'Versioun @version@ ass onméiglech, villäicht wéint engem Problem mat den Verännerungs-Rechter vun der Datebank. Kontaktéiert w.e.g. äre Provider.',
 	'alerte_modif_info_concourante' => 'OPGEPASST: Dës Informatioun ass geännert ginn. Déi aktuell Valeur ass:',
 	'analyse_xml' => 'XML-Analyse',
 	'annuler' => 'Ofbriechen',
@@ -34,32 +34,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_archive_incorrect' => 'de Backup-Fichier ass kee SPIP-Fichier',
 	'avis_archive_invalide' => 'de Backup-Fichier ass ongülteg',
 	'avis_attention' => 'OPGEPASST!',
-	'avis_champ_incorrect_type_objet' => 'Falschen Feldnumm @name@ fir en Objekt vum Typ @type@',
-	'avis_colonne_inexistante' => 'D\'Kolonn @col@ existéiert nët',
+	'avis_champ_incorrect_type_objet' => 'Falsche Feldnumm @name@ fir en Objet vum Typ @type@',
+	'avis_colonne_inexistante' => 'D\'Kolonn @col@ existéiert net',
 	'avis_erreur' => 'Fehler: kuckt hei driwwer',
 	'avis_erreur_connexion' => 'Verbindungs-Fehler',
 	'avis_erreur_cookie' => 'Problem mat dem Cookie',
-	'avis_erreur_fonction_contexte' => 'Programm-Fehler. Dës Fonktioun därf nët an dësem Kontext opgeruff ginn.',
+	'avis_erreur_fonction_contexte' => 'Programm-Fehler. Dës Fonctioun däerf net an dësem Kontext opgeruff ginn.',
 	'avis_erreur_mysql' => 'SQL-Fehler',
 	'avis_erreur_sauvegarde' => 'Fehler am Backup (@type@ @id_objet@)!',
 	'avis_erreur_visiteur' => 'Zougangs-Problem zum privaten Deel',
 
 	// B
 	'barre_a_accent_grave' => 'E groussen A accent grave afügen',
-	'barre_aide' => 'Benotzt dës typografesch Ofkiirzungen fir äre Layout ze verbesseren',
+	'barre_aide' => 'Benotzt dës typografesch Ofkierzungen fir äre Layout ze verbesseren',
 	'barre_e_accent_aigu' => 'E groussen E accent aigu afügen',
 	'barre_eo' => 'E verbonnenen oe afügen',
 	'barre_eo_maj' => 'E groussen verbonnenen OE afügen',
 	'barre_euro' => 'En €-Symbol afügen',
 	'barre_gras' => '{{Fett}} maachen',
-	'barre_guillemets' => 'Tëschent franzéisch Anführungszeechen sätzen',
-	'barre_guillemets_simples' => 'Tëschent däitsch Anführungszeechen sätzen',
+	'barre_guillemets' => 'Tëschent franséisch Anführungszeeche setzen',
+	'barre_guillemets_simples' => 'Tëschent däitsch Anführungszeeche setzen',
 	'barre_intertitre' => 'An eng {{{Iwwerschrëft}}} änneren',
 	'barre_italic' => '{Kursiv} maachen',
 	'barre_lien' => 'An e [Link->http://...] änneren',
 	'barre_lien_input' => 'Gidd d\'Adress vum Link un (dir kënnt eng Internet-Adress ënner der Form http://www.site.lu/asw oder einfach d\'Nummer vun engem Artikel vun dësem Site uginn.',
 	'barre_note' => 'An eng [[Foussnote]] änneren',
-	'barre_paragraphe' => 'Paragraph derbäi setzen',
+	'barre_paragraphe' => 'Paragraphe derbäi setzen',
 	'barre_quote' => '<quote>Citatioun</quote> vun engem Text',
 	'bouton_changer' => 'Änneren',
 	'bouton_chercher' => 'Sichen',
@@ -74,19 +74,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_recharger_page' => 'dës Säit nei lueden',
 	'bouton_telecharger' => 'Eroplueden',
 	'bouton_upload' => 'Eroplueden',
-	'bouton_valider' => 'Validéieren',
+	'bouton_valider' => 'Bestätegen',
 
 	// C
 	'cal_apresmidi' => 'Nomëtteg',
 	'cal_jour_entier' => 'Ganzen Dag',
-	'cal_matin' => 'Muerges',
+	'cal_matin' => 'Mueres',
 	'cal_par_jour' => 'Kalenner vum Dag',
 	'cal_par_mois' => 'Kalenner vum Mount',
 	'cal_par_semaine' => 'Kalenner vun der Woch',
-	'choix_couleur_interface' => 'Farw',
+	'choix_couleur_interface' => 'Faarf',
 	'choix_interface' => 'Wiel vum Interface',
 	'colonne' => 'Kolonn',
-	'confirm_changer_statut' => 'Opgepasst, dir wëllt de Status vun dësem Element änneren. Wëllt dir weiderfueren?',
+	'confirm_changer_statut' => 'Opgepasst, dir wëllt den Zoustand vun dësem Element änneren. Wëllt dir weiderfueren?',
 	'correcte' => 'richteg',
 
 	// D
@@ -176,8 +176,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jour_7' => 'Samschdeg',
 	'date_jour_7_abbr' => 'Sam.',
 	'date_jour_7_initiale' => 'S.',
-	'date_jours' => 'Deg',
-	'date_minutes' => 'Minuten',
+	'date_jours' => 'Deeg',
+	'date_minutes' => 'Minutten',
 	'date_mois' => 'Méint',
 	'date_mois_1' => 'Januar',
 	'date_mois_10' => 'Oktober',
@@ -209,21 +209,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_saison_4' => 'Hierscht',
 	'date_secondes' => 'Sekonnen',
 	'date_semaines' => 'Wochen',
-	'date_un_mois' => 'mois', # NEW
+	'date_un_mois' => 'Mount',
 	'date_une_heure' => 'Stonn',
 	'date_une_minute' => 'Minutt',
 	'date_une_seconde' => 'Sekonn',
 	'date_une_semaine' => 'Woch',
 	'dirs_commencer' => ' fir d\'Installatioun richteg unzefänken',
-	'dirs_preliminaire' => 'Fir d\'éischt: <b>Régléiert d\'Zougangs-Rechter</b>',
-	'dirs_probleme_droits' => 'Problem mat den Zougangs-Rechter',
-	'dirs_repertoires_absents' => '<p><b>Dës Dossier\'en konnten nët fonnt ginn:</b></p><ul>@bad_dirs@.</ul>
-<p>Warscheinlëch ass dat e Problem vu Grouss- oder Kleng-Schreiwen.
-Kontrolléiert op déi grouss an déi kleng Buchstawen mat deem wat hei ugewisen gët iwwerteneenstëmmen;
-wann dat nët de Fall ass, ännert de Numm vun den Dossier\'en mat ärer FTP-Software fir de Fehler ze verbesseren.
+	'dirs_preliminaire' => 'Fir d\'éischt: <b>Regléiert d\'Zougangsberechtegung</b>',
+	'dirs_probleme_droits' => 'Problem mat der Zougangsberechtegung',
+	'dirs_repertoires_absents' => '<p><b>Dës Dossier\'en konnten net fonnt ginn:</b></p><ul>@bad_dirs@.</ul>
+<p>Wahrscheinlech ass dat e Problem vu Grouss- oder Kleng-Schreiwen.
+Kontrolléiert op déi grouss an déi kleng Buschtawen mat deem wat hei ugewisen gëtt iwwerteneestëmmen;
+wann dat net de Fall ass, ännert de Numm vun den Dossier\'en mat ärer FTP-Software fir de Fehler ze verbesseren.
 <p>Wann dat gemaach ass, da kënnt dier',
-	'dirs_repertoires_suivants' => '<p><b>Dës Dossier\'en kënnen nët beschriwwen ginn:</b></p><ul>@bad_dirs@.</ul>
-<p>Fir dat ze verbesseren, benotzt ären FTP-Client fir d\'Zougangsrechter vun jidfer Dossier anzestellen.
+	'dirs_repertoires_suivants' => '<p><b>Dës Dossier\'en kënnen net beschriwwen ginn:</b></p><ul>@bad_dirs@.</ul>
+<p>Fir dat ze verbesseren, benotzt ären FTP-Client fir d\'Zougangsberechtegung vun jidder Dossier anzestellen.
 Dës Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 <p>Wann dat gemaach ass, da kënnt dier ',
 	'double_occurrence' => '@balise@ ass duebel',
@@ -232,16 +232,16 @@ Dës Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 	'en_cours' => 'am gaangen',
 	'envoi_via_le_site' => 'Via ären Site schécken',
 	'erreur' => 'Fehler',
-	'erreur_balise_non_fermee' => 'Läschten Tag deen nët zou ass:',
+	'erreur_balise_non_fermee' => 'Läschten Tag deen net zou ass:',
 	'erreur_technique_enregistrement_champs' => 'En technesche Problem verhënnert d\'Späichere vum Feld @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'En technesche Problem verhënnert d\'Späicheren.',
 	'erreur_texte' => 'Fehler(en)',
 	'etape' => 'Etape',
 
 	// F
-	'fichier_introuvable' => 'De Fichier @fichier@ kann nët font ginn',
-	'form_auteur_confirmation' => 'Bestätegt äer Email-Adress.',
-	'form_auteur_email_modifie' => 'Äer Email-Adress ass geännert.',
+	'fichier_introuvable' => 'De Fichier @fichier@ kann net fonnt ginn',
+	'form_auteur_confirmation' => 'Bestätegt är Email-Adress.',
+	'form_auteur_email_modifie' => 'Är Email-Adress ass geännert.',
 	'form_auteur_envoi_mail_confirmation' => 'En Email ass un @email@ geschéckt ginn. Dir musst op d\'Url surfen déi an deem Email uginn ass fir är Email-Adress ze bestätegen.',
 	'form_auteur_mail_confirmation' => 'Bonjour,
 
@@ -256,7 +256,7 @@ sera ignorée) :
 	'form_email_non_valide' => 'Är Email-Adress ass nët richteg.',
 	'form_forum_access_refuse' => 'Dir hutt keen Zougang méi zu dësem Site.',
 	'form_forum_bonjour' => 'Moien @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
+	'form_forum_confirmer_email' => 'Fir är Email-Adress ze bestätegen, surft op dës Adress: @url_confirm@',
 	'form_forum_email_deja_enregistre' => 'Dës Email-Adress ass schon ageschriwen, dir kënnt also ärt normadt Passwuert benotzen.',
 	'form_forum_identifiant_mail' => 'Äre neie Login gouf Iech lo grad per Email geschéckt.',
 	'form_forum_identifiants' => 'Perséinlech Identifikatiounen',
@@ -328,7 +328,7 @@ sera ignorée) :
 	'icone_supprimer_image' => 'Dëst Bild läschen',
 	'icone_tous_articles' => 'All är Artikelen',
 	'icone_tous_auteur' => 'All d\'Auteuren',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
+	'icone_tous_visiteur' => 'All d\'Visiteuren',
 	'icone_visiter_site' => 'Den ëffentleche Site weisen',
 	'icone_voir_en_ligne' => 'Online weisen',
 	'img_indisponible' => 'Bild fehlt',
@@ -350,14 +350,14 @@ sera ignorée) :
 	'info_article_supprime' => 'Geläschten Artikel',
 	'info_articles' => 'Artikelen',
 	'info_articles_a_valider' => 'Artikelen fir ze validéieren',
-	'info_articles_nb' => '@nb@ articles', # NEW
+	'info_articles_nb' => '@nb@ Artikelen',
 	'info_articles_proposes' => 'Proposéiert Artikelen',
-	'info_articles_un' => '1 article', # NEW
+	'info_articles_un' => '1 Artikel',
 	'info_auteurs_nombre' => 'Auteur(en):',
 	'info_authentification_ftp' => 'Umeldung (per FTP).',
 	'info_breves_2' => 'Kuerzmeldungen',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
+	'info_breves_nb' => '@nb@ Kurzmeldungen',
+	'info_breves_un' => '1 Kurzmeldung',
 	'info_connexion_refusee' => 'D\'Verbindung gouf refuséiert.',
 	'info_contact_developpeur' => 'Kontaktéiert w.e.g. en Développeur.',
 	'info_contenance' => 'Dëse Site huet:',
@@ -369,14 +369,14 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Setzt e Fichier oder Dossier mat dësem Numm derbäi:',
 	'info_creer_repertoire_2' => 'am Dossier <b>ecrire/data</b>, dann:',
 	'info_creer_vignette' => 'Automatësch Vignetten maachen',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
+	'info_creerdansrubrique_non_autorise' => 'Dir hutt net genuch Rechter fir an dëser Rubrik Inhalt derbäi ze setzen',
 	'info_deplier' => 'Opklappen',
 	'info_descriptif_nombre' => 'Beschreiwung(en):',
 	'info_description' => 'Beschreiwung:',
 	'info_description_2' => 'Beschreiwung:',
 	'info_dimension' => 'Gréisst:',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
+	'info_documents_nb' => '@nb@ Dokumenter',
+	'info_documents_un' => '1 Dokument',
 	'info_ecire_message_prive' => 'E privaten Message schécken',
 	'info_email_invalide' => 'Falsch Email-Adress.',
 	'info_en_cours_validation' => 'Är Artikelen an der Aarbecht',
@@ -412,12 +412,13 @@ oder kontaktéiert äre Provider.</span>',
 	'info_largeur_vignette' => '@largeur_vignette@ × @hauteur_vignette@ Pixel',
 	'info_les_auteurs_1' => 'vun @les_auteurs@',
 	'info_logo_format_interdit' => 'Nëmmen d\'Logoen mam Format @formats@ ginn ugeholl.',
-	'info_logo_max_poids' => 'D\'Logoen mussen manner wéi @maxi@ hun (dëse Fichier huet @actuel@).',
+	'info_logo_max_poids' => 'D\'Logoen mussen manner wéi @maxi@ hun (dëse
+ Fichier huet @actuel@).',
 	'info_mail_fournisseur' => 'numm@provider.lu',
 	'info_message_2' => 'MESSAGE',
 	'info_message_supprime' => 'MESSAGE GELÄSCHT',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
+	'info_messages_nb' => '@nb@ Messagen',
+	'info_messages_un' => '1 Message',
 	'info_mise_en_ligne' => 'Publikatiouns-Datum:',
 	'info_modification_parametres_securite' => 'Ännerung vun de Sëcherheets-Parameteren',
 	'info_mois_courant' => 'An dësem Mount:',
@@ -455,13 +456,13 @@ oder kontaktéiert äre Provider.</span>',
 	'info_rechercher' => 'Sichen',
 	'info_rechercher_02' => 'Sichen:',
 	'info_remplacer_vignette' => 'D\'Vignette duerch e speziellen Logo ersätzen:',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
+	'info_rubriques_nb' => '@nb@ Rubriken',
+	'info_rubriques_un' => '1 Rubrik',
 	'info_sans_titre_2' => 'ouni Titel',
 	'info_selectionner_fichier' => 'Dir kënnt e Fichier aus dem Dossier @upload@ wielen',
 	'info_selectionner_fichier_2' => 'Wielt e Fichier:',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
+	'info_sites_nb' => '@nb@ Websiten',
+	'info_sites_un' => '1 Website',
 	'info_supprimer_vignette' => 'Vignette läschen',
 	'info_symbole_bleu' => 'Dat <b>blot</b> Symbol weist eng <b>Notiz</b>: also e perséinlechen Message.',
 	'info_symbole_jaune' => 'Dat <b>gielt</b> Symbol weist eng <b>Annonce un all d\'Redakteren</b>, ännerbar duerch d\'Administrateuren, a sichtbar vun allen Redakteren.',
@@ -483,8 +484,8 @@ oder kontaktéiert äre Provider.</span>',
 	'infos_vos_pense_bete' => 'Är Notizen',
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
+	'label_ajout_id_rapide' => 'Schnell-Ännerung',
+	'label_poids_fichier' => 'Gréisst',
 	'lien_afficher_icones_seuls' => 'Nëmmen d\'Ikonen weisen',
 	'lien_afficher_texte_icones' => 'D\'Ikonen an d\'Texter weisen',
 	'lien_afficher_texte_seul' => 'Nëmmen d\'Texter weisen',
@@ -529,7 +530,7 @@ Wann dir nët wëllt dat ärt Passwuert ka um Internet ofgefaangen ginn, aktivé
 	'login_retour_site' => 'Zerëck op den öffentlëche Site',
 	'login_retoursitepublic' => 'zerëck op den öffentlëche Site',
 	'login_sans_cookiie' => 'Umeldung ouni Cookie',
-	'login_securise' => 'Login sécurisé', # NEW
+	'login_securise' => 'Séchere Login',
 	'login_sinscrire' => 'sëch aschreiwen',
 	'login_test_navigateur' => 'Browser/Login-Test',
 	'login_verifiez_navigateur' => '(Kontrolléiert op äre Browser d\'Passwuert nët gespäichert huet...)',
@@ -583,12 +584,13 @@ Dir kënnt do e neit Passwuert agin an Iech um Site umelden.
 	'pass_nouveau_pass' => 'Neit Passwuert',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Vergiessen vum Passwuert',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
+	'pass_procedure_changer' => 'Mir mussen är Identitéit kontrolléieren fir äert Passwuert ze änneren. Dofir gitt ons d\'Email-Adress un déi zu ärem Login gehéiert.',
 	'pass_quitter_fenetre' => 'Dës Fënster zoumaachen',
 	'pass_rappel_login' => 'Rappel: är Identifikatioun (Login) ass "@login@".',
 	'pass_recevoir_mail' => 'Dir kritt e Message mat Instruktiounen fir den Zougang zum Site erëm ze kréien.',
 	'pass_retour_public' => 'Zerëck op den öffentlëchen Site',
-	'pass_rien_a_faire_ici' => 'Hei gët ët näischt ze dinn.',
+	'pass_rien_a_faire_ici' => 'Hei gët ët näischt
+ ze dinn.',
 	'pass_vousinscrire' => 'Iech op dësem Site aschreiwen',
 	'precedent' => 'Zerëck',
 	'previsualisation' => 'Prévisualisatioun',
@@ -606,7 +608,7 @@ Dir kënnt do e neit Passwuert agin an Iech um Site umelden.
 	'suivant' => 'Weider',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
+	'taille_go' => '@taille@ GB',
 	'taille_ko' => '@taille@ kB',
 	'taille_mo' => '@taille@ MB',
 	'taille_octets' => '@taille@ Byte',
