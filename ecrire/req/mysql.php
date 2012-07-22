@@ -291,8 +291,14 @@ function traite_query($query, $db='', $prefixe='') {
 	} else {
 		$suite = strstr($query, $regs[0]);
 		$query = substr($query, 0, -strlen($suite));
-		if (preg_match('/^(.*?)([(]\s*SELECT\b.*)$/si', $suite, $r)) {
-		  $suite = $r[1] . traite_query($r[2], $db, $prefixe);
+		// propager le prefixe en cas de requete imbriquee
+		// il faut alors echapper les chaine avant de le faire, pour ne pas risquer de
+		// modifier une requete qui est en fait juste du texte dans un champ
+		if (stripos($suite,"SELECT")!==false) {
+			list($suite,$textes) = query_echappe_textes($suite);
+			if (preg_match('/^(.*?)([(]\s*SELECT\b.*)$/si', $suite, $r))
+		    $suite = $r[1] . traite_query($r[2], $db, $prefixe);
+			$suite = query_reinjecte_textes($suite, $textes);
 		}
 	}
 	$r = preg_replace(_SQL_PREFIXE_TABLE, '\1'.$pref, $query) . $suite;

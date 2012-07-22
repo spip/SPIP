@@ -1666,7 +1666,6 @@ class sqlite_traiter_requete{
 	
 	// Pour les corrections a effectuer sur les requetes :
 	var $textes = array(); 	// array(code=>'texte') trouvé
-	var $codeEchappements = "%@##@%";
 	
 	
 	// constructeur
@@ -1749,16 +1748,13 @@ class sqlite_traiter_requete{
 	// enleve les textes, transforme la requete pour quelle soit
 	// bien interpretee par sqlite, puis remet les textes
 	// la fonction affecte $this->query
-// http://doc.spip.org/@traduire_requete
+	// http://doc.spip.org/@traduire_requete
 	function traduire_requete(){
 		//
 		// 1) Protection des textes en les remplacant par des codes
 		//
-		// enlever les echappements ''
-		$this->query = str_replace("''", $this->codeEchappements, $this->query);
-		// enlever les 'textes'
-		$this->textes = array(); // vider 
-		$this->query = preg_replace_callback("/('[^']*')/", array(&$this, '_remplacerTexteParCode'), $this->query);
+		// enlever les 'textes' et initialiser avec
+		list($this->query, $textes) = query_echappe_textes($this->query);
 		
 		//
 		// 2) Corrections de la requete
@@ -1859,12 +1855,12 @@ class sqlite_traiter_requete{
 		//
 		// 3) Remise en place des textes d'origine
 		//
-		// remettre les 'textes'
-		foreach ($this->textes as $cle=>$val){
-			$this->query = str_replace($cle, $val, $this->query);
-		}
-		// remettre les echappements ''
-		$this->query = str_replace($this->codeEchappements,"''",$this->query);
+		// Correction Antiquotes et echappements
+		// ` => rien
+		if (strpos($this->query,'`')!==false)
+			$this->query = str_replace('`','', $this->query);
+
+		$this->query = query_reinjecte_textes($this->query, $textes);
 	}
 	
 
