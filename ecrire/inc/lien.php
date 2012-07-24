@@ -174,7 +174,7 @@ define('_RACCOURCI_ATTRIBUTS', '/^(.*?)([|]([^<>]*?))?([{]([a-z_]*)[}])?$/');
 // http://doc.spip.org/@traiter_raccourci_lien_atts
 function traiter_raccourci_lien_atts($texte) {
 
-	$bulle = $hlang = '';
+	$bulle = $hlang = false;
 	// title et hreflang donnes par le raccourci ?
 	if (preg_match(_RACCOURCI_ATTRIBUTS, $texte, $m)) {
 
@@ -551,6 +551,7 @@ function traiter_raccourci_glossaire($texte)
 			$gloss = $m[1] ? ('#' . $m[1]) : '';
 			$t = $r[1] . $r[2] . $r[5];
 			list($t, $bulle, $hlang) = traiter_raccourci_lien_atts($t);
+			if ($bulle===false) $bulle = $m[1];
 			$t = unicode2charset(charset2unicode($t), 'utf-8');
 			$ref = $lien("glose$_n$gloss", $t, 'spip_glossaire', $bulle, $hlang);
 			$texte = str_replace($regs[0], $ref, $texte);
