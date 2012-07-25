@@ -39,12 +39,13 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 	$valeurs['_langue'] = '';
 	$langue_parent = '';
 	$id_parent = '';
-	if (isset($valeurs['id_rubrique']) OR isset($valeurs['id_parent'])){
+	if (isset($valeurs['id_rubrique']))
 		$id_parent = $valeurs['id_rubrique'];
-		if (isset($valeurs['id_parent']))
-			$id_parent = $valeurs['id_parent'];
+	if (isset($valeurs['id_parent']))
+		 $id_parent = $valeurs['id_parent'];	
+	if ($id_parent)
 		$langue_parent = sql_getfetsel("lang", "spip_rubriques", "id_rubrique=".intval($id_parent));
-	}
+	
 	if (!$langue_parent)
 		$langue_parent = $GLOBALS['meta']['langue_site'];
 	if ($valeurs['editable']){
