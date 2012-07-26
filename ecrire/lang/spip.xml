@@ -1,132 +1,132 @@
-<traduction module="spip" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.org/tradlang_module/spip?lang_cible=ar">
-		<traducteur nom="&lt;span lang=&#039;fr&#039;&gt;George&lt;/span&gt;" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+<traduction module="spip" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ar">
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="ast" url="http://trad.spip.org/tradlang_module/spip?lang_cible=ast">
-		<traducteur nom="Xuacu" lien="http://trad.spip.org/auteur/xuacu" />
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ast">
+		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
-	<langue code="ay" url="http://trad.spip.org/tradlang_module/spip?lang_cible=ay">
-		<traducteur nom="gaspard" lien="http://trad.spip.org/auteur/gaspard" />
+	<langue code="ay" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ay">
+		<traducteur nom="gaspard" lien="http://trad.spip.net/auteur/gaspard" />
 	</langue>
 	<langue code="bg" />
 	<langue code="br" />
 	<langue code="bs" />
-	<langue code="ca" url="http://trad.spip.org/tradlang_module/spip?lang_cible=ca">
-		<traducteur nom="merce" lien="http://trad.spip.org/auteur/merce" />
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ca">
+		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
 	<langue code="co" />
 	<langue code="cpf" />
 	<langue code="cpf_hat" />
 	<langue code="cs" />
 	<langue code="da" />
-	<langue code="de" url="http://trad.spip.org/tradlang_module/spip?lang_cible=de">
-		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
-		<traducteur nom="Benjamin Tricault" lien="http://trad.spip.org/auteur/benjamin-tricault" />
+	<langue code="de" url="http://trad.spip.net/tradlang_module/spip?lang_cible=de">
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+		<traducteur nom="Benjamin Tricault" lien="http://trad.spip.net/auteur/benjamin-tricault" />
 	</langue>
-	<langue code="el" url="http://trad.spip.org/tradlang_module/spip?lang_cible=el">
-		<traducteur nom="Yannick Bailly" lien="http://trad.spip.org/auteur/yannick-bailly" />
+	<langue code="el" url="http://trad.spip.net/tradlang_module/spip?lang_cible=el">
+		<traducteur nom="Yannick Bailly" lien="http://trad.spip.net/auteur/yannick-bailly" />
 	</langue>
-	<langue code="en" url="http://trad.spip.org/tradlang_module/spip?lang_cible=en">
-		<traducteur nom="sQuonk" lien="http://trad.spip.org/auteur/squonk" />
-		<traducteur nom="&lt;span lang=&#039;fr&#039;&gt;George&lt;/span&gt;" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
-		<traducteur nom="Paolo" lien="http://trad.spip.org/auteur/paolo" />
-		<traducteur nom="Fil" lien="http://trad.spip.org/auteur/fil" />
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
-		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/spip?lang_cible=en">
+		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
+		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="en_hx" />
 	<langue code="eo" />
-	<langue code="es" url="http://trad.spip.org/tradlang_module/spip?lang_cible=es">
-		<traducteur nom="severo" lien="http://trad.spip.org/auteur/severo" />
-		<traducteur nom="dani" lien="http://trad.spip.org/auteur/dani" />
-		<traducteur nom="jotacese" lien="http://trad.spip.org/auteur/jotacese" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/spip?lang_cible=es">
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
+		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
+		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
 	</langue>
-	<langue code="eu" url="http://trad.spip.org/tradlang_module/spip?lang_cible=eu">
-		<traducteur nom="otalazt" lien="http://trad.spip.org/auteur/otalazt" />
+	<langue code="eu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=eu">
+		<traducteur nom="otalazt" lien="http://trad.spip.net/auteur/otalazt" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.org/tradlang_module/spip?lang_cible=fa">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fi" />
 	<langue code="fon" />
 	<langue code="fr" />
-	<langue code="fr_tu" url="http://trad.spip.org/tradlang_module/spip?lang_cible=fr_tu">
-		<traducteur nom="beatnick" lien="http://trad.spip.org/auteur/beatnick" />
-		<traducteur nom="RealET" lien="http://trad.spip.org/auteur/realet" />
-		<traducteur nom="orlammd" lien="http://trad.spip.org/auteur/orlammd" />
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_tu">
+		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
+		<traducteur nom="RealET" lien="http://trad.spip.net/auteur/realet" />
+		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 	</langue>
-	<langue code="gl" url="http://trad.spip.org/tradlang_module/spip?lang_cible=gl">
-		<traducteur nom="Antón Méixome" lien="http://trad.spip.org/auteur/anton-meixome" />
+	<langue code="gl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=gl">
+		<traducteur nom="Antón Méixome" lien="http://trad.spip.net/auteur/anton-meixome" />
 	</langue>
-	<langue code="hac" url="http://trad.spip.org/tradlang_module/spip?lang_cible=hac">
-		<traducteur nom="akomarani" lien="http://trad.spip.org/auteur/akomarani" />
+	<langue code="hac" url="http://trad.spip.net/tradlang_module/spip?lang_cible=hac">
+		<traducteur nom="akomarani" lien="http://trad.spip.net/auteur/akomarani" />
 	</langue>
 	<langue code="he" />
 	<langue code="hr" />
 	<langue code="hu" />
 	<langue code="id" />
-	<langue code="it" url="http://trad.spip.org/tradlang_module/spip?lang_cible=it">
-		<traducteur nom="Cap" lien="http://trad.spip.org/auteur/cap" />
-		<traducteur nom="phante" lien="http://trad.spip.org/auteur/phante" />
+	<langue code="it" url="http://trad.spip.net/tradlang_module/spip?lang_cible=it">
+		<traducteur nom="Cap" lien="http://trad.spip.net/auteur/cap" />
+		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 	</langue>
 	<langue code="it_fem" />
-	<langue code="ja" url="http://trad.spip.org/tradlang_module/spip?lang_cible=ja">
-		<traducteur nom="Cap" lien="http://trad.spip.org/auteur/cap" />
+	<langue code="ja" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ja">
+		<traducteur nom="Cap" lien="http://trad.spip.net/auteur/cap" />
 	</langue>
 	<langue code="km" />
-	<langue code="la" url="http://trad.spip.org/tradlang_module/spip?lang_cible=la">
-		<traducteur nom="jwander" lien="http://trad.spip.org/auteur/jwander" />
+	<langue code="la" url="http://trad.spip.net/tradlang_module/spip?lang_cible=la">
+		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
 	</langue>
-	<langue code="lb" url="http://trad.spip.org/tradlang_module/spip?lang_cible=lb">
-		<traducteur nom="jwander" lien="http://trad.spip.org/auteur/jwander" />
+	<langue code="lb" url="http://trad.spip.net/tradlang_module/spip?lang_cible=lb">
+		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
 	</langue>
 	<langue code="lt" />
 	<langue code="my" />
 	<langue code="nap" />
 	<langue code="nb" />
 	<langue code="ne" />
-	<langue code="nl" url="http://trad.spip.org/tradlang_module/spip?lang_cible=nl">
-		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
-		<traducteur nom="Suske" lien="http://trad.spip.org/auteur/suske" />
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=nl">
+		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
+		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
 	<langue code="oc_auv" />
 	<langue code="oc_gsc" />
 	<langue code="oc_lms" />
 	<langue code="oc_lnc" />
-	<langue code="oc_ni" url="http://trad.spip.org/tradlang_module/spip?lang_cible=oc_ni">
-		<traducteur nom="Bastian" lien="http://trad.spip.org/auteur/bastian" />
+	<langue code="oc_ni" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_ni">
+		<traducteur nom="Bastian" lien="http://trad.spip.net/auteur/bastian" />
 	</langue>
 	<langue code="oc_ni_la" />
 	<langue code="oc_prv" />
 	<langue code="oc_va" />
-	<langue code="pl" url="http://trad.spip.org/tradlang_module/spip?lang_cible=pl">
-		<traducteur nom="Dominik Paszkiewicz" lien="http://trad.spip.org/auteur/dominik-pologne" />
+	<langue code="pl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=pl">
+		<traducteur nom="Dominik Paszkiewicz" lien="http://trad.spip.net/auteur/dominik-pologne" />
 	</langue>
-	<langue code="pt" url="http://trad.spip.org/tradlang_module/spip?lang_cible=pt">
-		<traducteur nom="Fernando Ferreira" lien="http://trad.spip.org/auteur/fernando-ferreira" />
+	<langue code="pt" url="http://trad.spip.net/tradlang_module/spip?lang_cible=pt">
+		<traducteur nom="Fernando Ferreira" lien="http://trad.spip.net/auteur/fernando-ferreira" />
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.org/tradlang_module/spip?lang_cible=pt_br">
-		<traducteur nom="Ricardo Porto" lien="http://trad.spip.org/auteur/ricardo-porto" />
-		<traducteur nom="joao1315" lien="http://trad.spip.org/auteur/joao1315" />
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/spip?lang_cible=pt_br">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
+		<traducteur nom="joao1315" lien="http://trad.spip.net/auteur/joao1315" />
 	</langue>
-	<langue code="ro" url="http://trad.spip.org/tradlang_module/spip?lang_cible=ro">
-		<traducteur nom="vmurariu" lien="http://trad.spip.org/auteur/vmurariu" />
+	<langue code="ro" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ro">
+		<traducteur nom="vmurariu" lien="http://trad.spip.net/auteur/vmurariu" />
 	</langue>
 	<langue code="roa" />
-	<langue code="ru" url="http://trad.spip.org/tradlang_module/spip?lang_cible=ru">
-		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.org/auteur/serge-markitanenko" />
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ru">
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.org/tradlang_module/spip?lang_cible=sk">
-		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/spip?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
-	<langue code="sq" url="http://trad.spip.org/tradlang_module/spip?lang_cible=sq">
-		<traducteur nom="minijack" lien="http://trad.spip.org/auteur/minijack" />
+	<langue code="sq" url="http://trad.spip.net/tradlang_module/spip?lang_cible=sq">
+		<traducteur nom="minijack" lien="http://trad.spip.net/auteur/minijack" />
 	</langue>
 	<langue code="sv" />
 	<langue code="tr" />
 	<langue code="vi" />
-	<langue code="wo" url="http://trad.spip.org/tradlang_module/spip?lang_cible=wo">
-		<traducteur nom="usufaati" lien="http://trad.spip.org/auteur/usufaati" />
+	<langue code="wo" url="http://trad.spip.net/tradlang_module/spip?lang_cible=wo">
+		<traducteur nom="usufaati" lien="http://trad.spip.net/auteur/usufaati" />
 	</langue>
 	<langue code="zh" />
 </traduction>
