@@ -45,7 +45,7 @@ function date_picker_init(){
 				.datepicker(jQuery.extend(date_picker_options(),options))
 				.trigger('datePickerLoaded');
 		});
-	jQuery("input.heure").not('.timePicker').addClass('timePicker').timePicker();
+	jQuery("input.heure").not('.timePicker').addClass('timePicker').timePicker({step:#ENV{heure_pas,30}});
 }
 var date_picker_loading;
 if (window.jQuery){
