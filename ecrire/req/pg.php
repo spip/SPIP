@@ -1064,7 +1064,7 @@ function spip_pg_quote($v, $type='')
 		return spip_pg_cite($v,$type);
 	// si c'est un tableau, le parcourir en propageant le type
 	foreach($v as $k=>$r)
-		$v[$k] = spip_sqlite_quote($r, $type);
+		$v[$k] = spip_pg_quote($r, $type);
 	return join(",", $v);
 }
 
