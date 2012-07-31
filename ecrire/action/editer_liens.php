@@ -522,7 +522,7 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
 					$e = sql_delete($table_lien, array("$primary=".$row['id'],"id_objet=".$row['id_objet'],"objet=".sql_quote($type)));
 					if ($e!=false){
 						$dels+=$e;
-						spip_log("Entree ".$row['id']."/".$row['id_objet']."/$type supprimee dans la table $table_lien");
+						spip_log("Entree ".$row['id']."/".$row['id_objet']."/$type supprimee dans la table $table_lien",_LOG_INFO_IMPORTANTE);
 					}
 				}
 			}
