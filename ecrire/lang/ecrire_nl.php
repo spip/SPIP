@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'Plugin activeren',
 	'affichage' => 'Display',
 	'aide_non_disponible' => 'Dit deel van de online handleiding is nog niet beschikbaar in het Nederlands.',
-	'annuler_recherche' => 'Annuler la recherche', # NEW
+	'annuler_recherche' => 'Zoeken stoppen',
 	'auteur' => 'Auteur :',
 	'avis_acces_interdit' => 'Toegang verboden',
 	'avis_article_modifie' => 'Opgelet, @nom_auteur_modif@ heeft @date_diff@  minuten geleden aan dit artikel gewerkt.',
@@ -107,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'connexion_ldap' => 'Aansluiten :',
 	'copier_en_local' => 'Plaatselijk kopiëren',
 	'creer_et_associer_un_auteur' => 'Maken en associëren een auteur',
-	'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
+	'creer_et_associer_une_rubrique' => 'Een rubriek aanmaken en koppelen',
 
 	// D
 	'date_mot_heures' => 'uur',
@@ -342,8 +342,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  proces, dat nodig heeft om FTP-toegang tot de website.</p>',
 	'info_gauche_auteurs' => 'Je vindt hier alle auteurs van de site.
  Hun status is te herkennen aan de kleur van het icoontje (beheerder = groen; redacteur = geel).',
-	'info_gauche_auteurs_exterieurs' => 'Externe auteurs, zonder toegang tot de site, zijn aangeduid met een blauw icoontje;
-  Gewiste auteurs hebben een vuilnisbakje naast hun naam staan.', # MODIF
+	'info_gauche_auteurs_exterieurs' => 'Externe auteurs, zonder toegang tot de site, zijn aangeduid met een blauw icoontje,
+gewiste auteurs met een grijze.',
 	'info_gauche_messagerie' => 'Het berichtensysteem laat toe om berichten uit te wisselen tussen redacteurs, memo\'s (voor persoonlijk gebruik) te bewaren of aankondigingen te tonen op de beginpagina van de privé-ruimte (als je beheerder bent).',
 	'info_gauche_numero_auteur' => 'NUMMER AUTEUR',
 	'info_gauche_statistiques_referers' => 'Deze pagina toont een lijst met <i>referers</i>, tw. sites die een koppeling bevatten naar je eigen site, enkel voor vandaag en gisteren: de lijst wordt elke 24 uur opnieuw aangemaakt.',
@@ -371,7 +371,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'Talen van de site',
 	'info_ldap_ok' => 'De LDAP-autentificatie is geïnstalleerd',
 	'info_lien_hypertexte' => 'Hypertekst koppeling :',
-	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
+	'info_liste_nouveautes_envoyee' => 'Het nieuwighedenlijst werd opgestuurd',
 	'info_liste_redacteurs_connectes' => 'Lijst met online redacteuren',
 	'info_login_existant' => 'Deze login is reeds in gebruik',
 	'info_login_trop_court' => 'Login te kort.',
@@ -573,7 +573,7 @@ een kleur geeft hun status aan :',
 	'info_visiteurs' => 'Bezoekers',
 	'info_visiteurs_02' => 'Bezoekers van de publieke site',
 	'info_webmestre_forces' => 'Webmasters zijn op dit moment gedefinieerd in <tt>@file_options@</tt>.',
-	'install_adresse_base_hebergeur' => 'Adres van de database die door leverancier wordt toegekend', # MODIF
+	'install_adresse_base_hebergeur' => 'Adres van de database die door leverancier wordt toegekend',
 	'install_base_ok' => 'De basis @base@ werd erkend',
 	'install_connect_ok' => 'De nieuwe basis is uitgeroepen tot de server @connect@.',
 	'install_echec_annonce' => 'De installatie zal wellicht mislukken of leiden tot een niet-werkende site...',
@@ -661,13 +661,13 @@ een kleur geeft hun status aan :',
 	'lien_ajout_destinataire' => 'Voeg deze bestemmeling toe',
 	'lien_ajouter_auteur' => 'Voeg deze auteur toe',
 	'lien_ajouter_participant' => 'Voeg nieuwe deelnemer toe',
-	'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
+	'lien_ajouter_une_rubrique' => 'Dit rubriek bijvoegen',
 	'lien_email' => 'e-mail',
 	'lien_nom_site' => 'WEBSITENAME:',
 	'lien_retirer_auteur' => 'Auteur verwijderen',
-	'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
+	'lien_retirer_rubrique' => 'Rubriek uittrekken',
 	'lien_retirer_tous_auteurs' => 'Verwijder alle auteurs',
-	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
+	'lien_retirer_toutes_rubriques' => 'Alle rubrieken uittrekken',
 	'lien_retrait_particpant' => 'Deelnemer verwijderen',
 	'lien_site' => 'Site',
 	'lien_supprimer_rubrique' => 'Rubriek verwijderen',
@@ -745,7 +745,7 @@ een kleur geeft hun status aan :',
 	'plugin_librairies_installees' => 'Geplaatste boekhandels',
 	'plugin_necessite_lib' => 'Dit plugin vereist de boekhandel @lib@',
 	'plugin_necessite_plugin' => 'Vereist plugin @plugin@ in versie minimale @version@.',
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
+	'plugin_necessite_plugin_sans_version' => 'Vereist de plugin @plugin@ ',
 	'plugin_necessite_spip' => 'Vereist SPIP in versie minimale @version@.',
 	'plugin_source' => 'oorsprong: ',
 	'plugin_titre_automatique' => 'Automatische installatie',
@@ -778,7 +778,7 @@ een kleur geeft hun status aan :',
 
 	// Q
 	'queue_executer_maintenant' => 'Nu uitvoeren',
-	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
+	'queue_info_purger' => 'U kunt alle werken in afwachting verwijderen en het lijst van periodieke werken herstarten',
 	'queue_nb_jobs_in_queue' => '@nb@ wachtrij',
 	'queue_next_job_in_nb_sec' => 'Volgende opdracht in @nb@ s',
 	'queue_no_job_in_queue' => 'Geen werk in de wacht',
@@ -799,7 +799,7 @@ een kleur geeft hun status aan :',
 	'taille_cache_image' => 'De beelden door SPIP automatisch aangemaakt (icoontjes van documenten, grafisch weergegeven titels, wiskundige functies in TeX formaat...) nemen in de map @dir@ een totale plaats in van  @taille@.',
 	'taille_cache_infinie' => 'De site voorziet geen beperking in de grootte van de buffermap.',
 	'taille_cache_maxi' => 'SPIP probeert de omvang van de buffermap van de site te beperken tot ongeveer <b>@octets@</b> gegevens.',
-	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_moins_de' => 'De cache is kleiner dans @octets@.',
 	'taille_cache_octets' => 'De grootte van de buffer bedraagt momenteel @octets@.', # MODIF
 	'taille_cache_vide' => 'De buffer is leeg.',
 	'taille_repertoire_cache' => 'Grootte van het bufferbestand',
@@ -842,7 +842,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 	'texte_date_publication_anterieure' => 'Datum van eerdere redactie :',
 	'texte_date_publication_anterieure_nonaffichee' => 'Verberg de datum van eerdere redactie.',
 	'texte_date_publication_article' => 'DATUM VAN ONLINE PUBLICATIE :',
-	'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
+	'texte_date_publication_objet' => 'Datum van het online zetten :',
 	'texte_descriptif_petition' => 'Beschrijving van de petitie.',
 	'texte_descriptif_rapide' => 'Korte beschrijving.',
 	'texte_effacer_base' => 'Verwijder de SPIP databank',
@@ -953,7 +953,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 	'titre_admin_vider' => 'Technisch onderhoud',
 	'titre_ajouter_un_auteur' => 'Voeg een auteur',
 	'titre_ajouter_un_mot' => 'Voeg een trefwoord',
-	'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
+	'titre_ajouter_une_rubrique' => 'Een rubriek toevoegen',
 	'titre_cadre_afficher_article' => 'Artikels tonen',
 	'titre_cadre_afficher_traductions' => 'Toon de status van de vertalingen voor de volgende talen :',
 	'titre_cadre_ajouter_auteur' => 'EEN AUTEUR TOEVOEGEN :',

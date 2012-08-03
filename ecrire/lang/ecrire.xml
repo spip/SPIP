@@ -76,8 +76,8 @@
 	</langue>
 	<langue code="my" />
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=nl">
-		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
+		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="oc_auv" />
