@@ -471,10 +471,11 @@ function balise_RANG_dist($p) {
 		$_rang = champ_sql('rang', $p, '');
 
 		// si pas trouve de champ sql rang :
-		if (!$_rang){
+		if (!$_rang OR $_rang == "''"){
 			$boucle = &$p->boucles[$b];
 			$trouver_table = charger_fonction('trouver_table','base');
 			$desc = $trouver_table($boucle->id_table);
+			$_titre = ''; # où extraire le numero ?
 			if (isset($desc['titre'])){
 				$t=$desc['titre'];
 			  if (preg_match(';(^|,)([^,]*titre)(,|$);',$t,$m)){
