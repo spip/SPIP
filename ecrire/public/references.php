@@ -116,12 +116,9 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null) {
  * @return string
  */
 function index_compose($conditionnel,$defaut){
-	// si on passe defaut = '', ne pas générer d'erreur de compilation.
-	if (!$defaut and !strlen($defaut)) {
-		$defaut = "''";
-	}
 	while ($c = array_pop($conditionnel))
-		$defaut = "($c:($defaut))";
+		// si on passe defaut = '', ne pas générer d'erreur de compilation.
+		$defaut = "($c:(".($defaut?$defaut:"''")."))";
 	return $defaut;
 }
 
