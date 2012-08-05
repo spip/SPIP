@@ -60,9 +60,11 @@ function index_boucle($p){
  *   indique que le nom de la boucle explicite dans la balise #_nomboucletruc:CHAMP
  * @param string $defaut
  *   code par defaut si champ pas trouve dans l'index. @$Pile[0][$nom_champ] si non fourni
+ * @param bool $remonte_pile
+ *   permettre de remonter la pile des boucles ou non (dans ce cas on ne cherche que ds la 1ere boucle englobante)
  * @return string
  */
-function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null) {
+function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null, $remonte_pile=true) {
 	if (!is_string($defaut))
 		$defaut = '@$Pile[0][\''. strtolower($nom_champ) . '\']';
 
@@ -94,10 +96,15 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null) {
 
 			$conditionnel[] = "isset($champ)?$champ";
 		}
-		#	spip_log("On remonte vers $i");
-		// Sinon on remonte d'un cran
-		$idb = $boucles[$idb]->id_parent;
-		$i++;
+
+		if ($remonte_pile){
+			#	spip_log("On remonte vers $i");
+			// Sinon on remonte d'un cran
+			$idb = $boucles[$idb]->id_parent;
+			$i++;
+		}
+		else
+			$idb = null;
 	}
 
 	#	spip_log("Pas vu $nom_champ");
@@ -227,12 +234,14 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
  *   champ recherch�
  * @param object $p
  *   contexte de compilation
- * @param bool $joker
- *   flag pour autoriser ou non le champ joker * des iterateurs DATA
+ * @param bool $defaut
+ *   valeur par defaut si rien trouve dans la pile (si null, on prend le #ENV)
+ * @param bool $remonte_pile
+ *   permettre de remonter dans la pile des boucles pour trouver le champ
  * @return string
  */
-function champ_sql($champ, $p, $defaut = null) {
-	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle, $defaut);
+function champ_sql($champ, $p, $defaut = null, $remonte_pile = true) {
+	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle, $defaut, $remonte_pile);
 }
 
 // cette fonction sert d'API pour demander une balise Spip avec filtres
