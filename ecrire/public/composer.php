@@ -455,7 +455,21 @@ function nettoyer_env_doublons($envd) {
 	return $envd;
 }
 
-// http://doc.spip.org/@match_self
+/**
+ * Cherche la présence d'un opérateur SELF ou SUBSELECT
+ *
+ * Cherche dans l'index 0 d'un tableau, la valeur SELF ou SUBSELECT
+ * indiquant pour une expression WHERE de boucle que nous sommes
+ * face à une sous-requête.
+ *
+ * Cherche de manière récursive également dans les autres valeurs si celles-ci
+ * sont des tableaux
+ *
+ * @param string|array $w
+ *     Description d'une condition WHERE de boucle (ou une partie de cette description)
+ * @return string|bool
+ *     Opérateur trouvé (SELF ou SUBSELECT) sinon false.
+**/
 function match_self($w){
 	if (is_string($w)) return false;
 	if (is_array($w)) {
@@ -465,7 +479,19 @@ function match_self($w){
 	}
 	return false;
 }
-// http://doc.spip.org/@remplace_sous_requete
+
+/**
+ * Remplace une condition décrivant une sous requête par son code 
+ *
+ * @param array|string $w
+ *     Description d'une condition WHERE de boucle (ou une partie de cette description)
+ *     qui possède une description de sous-requête
+ * @param string $sousrequete
+ *     Code PHP de la sous requête (qui doit remplacer la description)
+ * @return array|string
+ *     Tableau de description du WHERE dont la description de sous-requête
+ *     est remplacée par son code.
+**/
 function remplace_sous_requete($w,$sousrequete){
 	if (is_array($w)) {
 		if (in_array(reset($w),array("SELF","SUBSELECT"))) return $sousrequete;
@@ -474,7 +500,17 @@ function remplace_sous_requete($w,$sousrequete){
 	}
 	return $w;
 }
-// http://doc.spip.org/@trouver_sous_requetes
+
+/**
+ * Sépare les conditions de boucles simples de celles possédant des sous-requêtes.
+ *
+ * @param array
+ *     Description d'une condition WHERE de boucle
+ * @return array
+ *     Liste de 2 tableaux :
+ *     - Conditions simples (ne possédant pas de sous requêtes)
+ *     - Conditions avec des sous requêtes
+**/
 function trouver_sous_requetes($where){
 	$where_simples = array();
 	$where_sous = array();

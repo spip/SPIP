@@ -585,11 +585,13 @@ function calculer_requete_sql($boucle)
 				  $boucle->limit));
 	$init[] = calculer_dec('having', calculer_dump_array($boucle->having));
 	$s = $d = "";
+	// l'index 0 de $i indique si l'affectation est statique (contenu)
+	// ou recalculée à chaque passage (vide)
 	foreach ($init as $i){
 		if (reset($i))
-			$s .= "\n\t\t".end($i);
+			$s .= "\n\t\t".end($i); # statique
 		else
-			$d .= "\n\t".end($i);
+			$d .= "\n\t".end($i); # dynamique
 	}
 
 	return ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
@@ -650,7 +652,27 @@ function reconstruire_contexte_compil($context_compil)
 	return $p;
 }
 
-// http://doc.spip.org/@calculer_dec
+/**
+ * Calcule le code d'affectation d'une valeur à une commande de boucle
+ *
+ * Décrit le code qui complète le tableau $command qui servira entre autres
+ * à l'itérateur. Pour un nom de commande donnée et un code PHP décrivant
+ * ou récupérant une valeur, on retourne le code PHP qui fait l'affectation.
+ *
+ * L'index 0 du tableau retourné indique, lorsqu'il n'est pas vide, que l'affectation
+ * de la variable pourra être statique (c'est à dire qu'il ne dépend
+ * pas d'une quelconque variable PHP), et donc attribué une fois pour toutes
+ * quelque soit le nombre d'appels de la boucle.
+ * 
+ * @param string $nom
+ *    Nom de la commande
+ * @param string $val
+ *    Code PHP décrivant la valeur à affecter
+ * @return array
+ *    - index 0 : Code pour une affectation statique. Si non rempli, la propriété devra
+ *                être ré-affectée à chaque appel de la boucle.
+ *    - index 1 : Code de l'affectation
+**/
 function calculer_dec($nom, $val)
 {
 	$static = 'if (!isset($command[\''.$nom.'\'])) ';
@@ -666,13 +688,29 @@ function calculer_dec($nom, $val)
 			AND $test = preg_replace(",'[^']*',UimsS","",$test) // supprimer les chaines qui peuvent contenir des fonctions SQL qui ne genent pas
 			AND preg_match(",\w+\s*\(,UimsS",$test,$regs) // tester la presence de fonctions restantes
 		)*/
-	)
+	) {
 		$static = "";
+	}
 
 	return array($static,'$command[\''.$nom.'\'] = ' . $val . ';');
 }
 
-// http://doc.spip.org/@calculer_dump_array
+/**
+ * Calcule l'expression PHP décrivant un tableau complexe (ou une chaîne)
+ *
+ * Lorsqu'un tableau est transmis, reconstruit de quoi créer le tableau
+ * en code PHP (une sorte de var_export) en appelant pour chaque valeur
+ * cette fonction de manière récursive.
+ * 
+ * Si le premier index (0) du tableau est "'?'", retourne un code
+ * de test entre les 3 autres valeurs (v1 ? v2 : v3). Les valeurs
+ * pouvant être des tableaux aussi.
+ * 
+ * @param mixed $a
+ *     Les données dont on veut construire un équivalent de var_export
+ * @return string
+ *     Expression PHP décrivant un texte ou un tableau
+**/
 function calculer_dump_array($a)
 {
   if (!is_array($a)) return $a ;
@@ -697,7 +735,14 @@ function calculer_dump_join($a)
   return 'array(' . substr($res,2) . ')';
 }
 
-// http://doc.spip.org/@calculer_from
+/**
+ * Calcule l'expression PHP décrivant les informations FROM d'une boucle
+ *
+ * @param Boucle $boucle
+ *     Description de la boucle
+ * @return string
+ *     Code PHP construisant un tableau des alias et noms des tables du FROM
+**/
 function calculer_from(&$boucle)
 {
   $res = "";
@@ -705,7 +750,15 @@ function calculer_from(&$boucle)
   return 'array(' . substr($res,1) . ')';
 }
 
-// http://doc.spip.org/@calculer_from_type
+/**
+ * Calcule l'expression PHP décrivant des informations de type de jointure
+ * pour un alias de table connu dans le FROM
+ * 
+ * @param Boucle $boucle
+ *     Description de la boucle
+ * @return string
+ *     Code PHP construisant un tableau des alias et type de jointure du FROM
+**/
 function calculer_from_type(&$boucle)
 {
   $res = "";
