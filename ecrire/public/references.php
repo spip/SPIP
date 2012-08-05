@@ -71,10 +71,13 @@ function index_boucle($p){
  * @param null|string $defaut
  *     Code par defaut si le champ n'est pas trouvé dans l'index.
  *     Utilise @$Pile[0][$nom_champ] si non fourni
+ * @param bool $remonte_pile
+ *     Permettre de remonter la pile des boucles ou non (dans ce cas on
+ *     ne cherche que danss la 1ère boucle englobante)
  * @return string
  *     Code PHP pour obtenir le champ SQL
  */
-function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null) {
+function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null, $remonte_pile=true) {
 	if (!is_string($defaut))
 		$defaut = '@$Pile[0][\''. strtolower($nom_champ) . '\']';
 
@@ -114,10 +117,15 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null) {
 			// dans une boucle, il est pris, sinon on le cherche dans le parent...
 			$conditionnel[] = "isset($champ)?$champ";
 		}
-		#	spip_log("On remonte vers $i");
-		// Sinon on remonte d'un cran
-		$idb = $boucles[$idb]->id_parent;
-		$i++;
+
+		if ($remonte_pile){
+			#	spip_log("On remonte vers $i");
+			// Sinon on remonte d'un cran
+			$idb = $boucles[$idb]->id_parent;
+			$i++;
+		}
+		else
+			$idb = null;
 	}
 
 	#	spip_log("Pas vu $nom_champ");
@@ -137,12 +145,9 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null) {
  * @return string              Code PHP complet de recherche d'un champ
  */
 function index_compose($conditionnel,$defaut) {
-	// si on passe defaut = '', ne pas générer d'erreur de compilation.
-	if (!$defaut and !strlen($defaut)) {
-		$defaut = "''";
-	}
 	while ($c = array_pop($conditionnel)) {
-		$defaut = "($c:($defaut))";
+		// si on passe defaut = '', ne pas générer d'erreur de compilation.
+		$defaut = "($c:(".($defaut?$defaut:"''")."))";
 	}
 	return $defaut;
 }
@@ -320,11 +325,13 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
  *     des boucles parentes. Sans précision, il sera pris dans l'environnement
  *     du squelette.
  *     Passer $defaut = '' pour ne pas prendre l'environnement.
+ * @param bool $remonte_pile
+ *     Permettre de remonter dans la pile des boucles pour trouver le champ
  * @return string
  *     Code PHP pour retrouver le champ
  */
-function champ_sql($champ, $p, $defaut = null) {
-	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle, $defaut);
+function champ_sql($champ, $p, $defaut = null, $remonte_pile = true) {
+	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle, $defaut, $remonte_pile);
 }
 
 // cette fonction sert d'API pour demander une balise Spip avec filtres
