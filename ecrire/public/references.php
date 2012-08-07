@@ -691,12 +691,19 @@ function compose_filtres_args($p, $args, $sep)
 	return $arglist;
 }
 
-//
-// Reserve les champs necessaires a la comparaison avec le contexte donne par
-// la boucle parente ; attention en recursif il faut les reserver chez soi-meme
-// ET chez sa maman
-// 
-// http://doc.spip.org/@calculer_argument_precedent
+
+/**
+ * Réserve les champs necessaires à la comparaison avec le contexte donné par
+ * la boucle parente.
+ *
+ * Attention en recursif il faut les réserver chez soi-même ET chez sa maman
+ *
+ * @param string $idb          Identifiant de la boucle
+ * @param string $nom_champ    
+ * @param array $boucles       AST du squelette
+ * @param null|string $defaut  
+ * @return 
+**/
 function calculer_argument_precedent($idb, $nom_champ, &$boucles, $defaut=null) {
 
 	// si recursif, forcer l'extraction du champ SQL mais ignorer le code
