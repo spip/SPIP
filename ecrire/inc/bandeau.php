@@ -41,7 +41,7 @@ function definir_barre_contexte($contexte = null){
 /**
  * definir la liste des boutons du haut et de ses sous-menus
  * On defini les boutons a metrtre selon les droits de l'utilisateur
- * puis on balance le tout au pipeline "ajouter_boutons" pour que des plugins
+ * puis on balance le tout au pipeline "ajouter_menus" pour que des plugins
  * puissent y mettre leur grain de sel
  *
  * @param array $contexte
