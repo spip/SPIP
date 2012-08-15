@@ -593,8 +593,8 @@ een kleur geeft hun status aan :',
 	'install_serveur_hebergeur' => 'Basisserver van gegevens die door de leverancier wordt toegekend',
 	'install_table_prefix_hebergeur' => 'Het voorvoegsel van tafel dat door de leverancier wordt toegekend:',
 	'install_tables_base' => 'Tabelen van de basis',
-	'install_types_db_connus' => 'SPIP weten gebruiken <b>MySQL</b> (het meest verbreid), <b>PostgreSQL</b> en <b>SQLite</b>.', # MODIF
-	'install_types_db_connus_avertissement' => 'Aandacht : verschillende plugins werken slechts met MySQL', # MODIF
+	'install_types_db_connus' => 'SPIP kan <b>MySQL</b> (het meest verbreid), <b>PostgreSQL</b> en <b>SQLite</b> gebruiken.',
+	'install_types_db_connus_avertissement' => '<b>PostgreSQL</b>support  wordt ter experiment voorgesteld.',
 	'instituer_erreur_statut_a_change' => 'Het statuut is gewijzigd',
 	'instituer_erreur_statut_non_autorise' => 'U kunt niet kiezen voor deze status',
 	'intem_redacteur' => 'redacteur',
@@ -739,8 +739,8 @@ een kleur geeft hun status aan :',
 	'plugin_info_install_ok' => 'Succesvolle installatie',
 	'plugin_info_necessite' => 'Nodig hebben :',
 	'plugin_info_non_compatible_spip' => 'Deze plugin is niet compatibel met deze versie van SPIP',
-	'plugin_info_plugins_dist_1' => 'De onderstaande extensies zijn geladen en geactiveerd in de directory @plugins_dist@.', # MODIF
-	'plugin_info_plugins_dist_2' => 'Ze zijn niet gedeactiveerd.', # MODIF
+	'plugin_info_plugins_dist_1' => 'De onderstaande plugins zijn geladen en geactiveerd in de directory @plugins_dist@.', # extensies zijn speciaale plugins geleeverd met spip-core om een gebruikbare SPIP pakket te bouwen
+	'plugin_info_plugins_dist_2' => 'Ze zijn niet te deactiveren.',
 	'plugin_info_telecharger' => 'om sinds @url@ te downloaden en om te plaatsen in @rep@',
 	'plugin_librairies_installees' => 'Geplaatste boekhandels',
 	'plugin_necessite_lib' => 'Dit plugin vereist de boekhandel @lib@',
@@ -769,7 +769,7 @@ een kleur geeft hun status aan :',
 	'plugins_disponibles' => '@count@ plugins beschikbaar.',
 	'plugins_erreur' => 'De fout in plugins: @plugins@',
 	'plugins_liste' => 'Lijst van plugins',
-	'plugins_liste_dist' => 'Extensies', # MODIF
+	'plugins_liste_dist' => 'Opgesloten plugins', # "locked" in english
 	'plugins_recents' => 'Recent plugins.',
 	'plugins_tous_liste' => 'Alle',
 	'plugins_vue_hierarchie' => 'Hiërarchie',
@@ -783,7 +783,7 @@ een kleur geeft hun status aan :',
 	'queue_next_job_in_nb_sec' => 'Volgende opdracht in @nb@ s',
 	'queue_no_job_in_queue' => 'Geen werk in de wacht',
 	'queue_one_job_in_queue' => '1 achterstand',
-	'queue_purger_queue' => 'Zuiveren van de lijst van werken', # MODIF
+	'queue_purger_queue' => 'De werkenlijst leegmaken',
 	'queue_titre' => 'Lijst van werken',
 
 	// R
@@ -800,7 +800,7 @@ een kleur geeft hun status aan :',
 	'taille_cache_infinie' => 'De site voorziet geen beperking in de grootte van de buffermap.',
 	'taille_cache_maxi' => 'SPIP probeert de omvang van de buffermap van de site te beperken tot ongeveer <b>@octets@</b> gegevens.',
 	'taille_cache_moins_de' => 'De cache is kleiner dans @octets@.',
-	'taille_cache_octets' => 'De grootte van de buffer bedraagt momenteel @octets@.', # MODIF
+	'taille_cache_octets' => 'De grootte van de buffer bedraagt momenteel @octets@.',
 	'taille_cache_vide' => 'De buffer is leeg.',
 	'taille_repertoire_cache' => 'Grootte van het bufferbestand',
 	'text_article_propose_publication' => 'Artikel voorgesteld voor de publicatie.',
@@ -838,7 +838,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
   kan je een automatisch herstel proberen.',
 	'texte_creer_rubrique' => 'Alvorens artikelen te kunnen schrijven, <br/> moet u een rubriek creëren.',
 	'texte_date_creation_article' => 'DATUM VAN AANMAKEN VAN HET ARTIKEL:',
-	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
+	'texte_date_creation_objet' => 'Scheppingsdatum :', # on ajoute le &quot;:&quot;
 	'texte_date_publication_anterieure' => 'Datum van eerdere redactie :',
 	'texte_date_publication_anterieure_nonaffichee' => 'Verberg de datum van eerdere redactie.',
 	'texte_date_publication_article' => 'DATUM VAN ONLINE PUBLICATIE :',
@@ -859,7 +859,7 @@ Als u geen nut ervan hebt, kunt u deze keuze
  laten  aan zijn waarde per gebrek (niet een oprichting
   bestanden).</p>',
 	'texte_informations_personnelles_1' => 'Nu zal het systeem een persoonlijke toegang tot de site voor u creëren.',
-	'texte_informations_personnelles_2' => '(Nota : als het herinstallatie betreft,  en je toegangscode blijkt nog steeds te werken, kan je', # MODIF
+	'texte_informations_personnelles_2' => '(Nota : als het herinstallatie betreft,  en je toegangscode blijkt nog steeds te werken, kan je',
 	'texte_introductif_article' => '(Inleidende tekst op het artikel.)',
 	'texte_jeu_caractere' => 'Het is aan te raden op je site het universele alfabet (<tt>utf-8</tt>) te gebruiken :dit laat de weergave van teksten toe in alle talen en stelt geen compatibilieitsprobleemet de recente bladerprogramma\'s.',
 	'texte_jeu_caractere_2' => 'Opgelet : deze instelling zal teksten die reeds werden ingevoerd in de gegevensbank niet omzetten.',
@@ -877,8 +877,8 @@ Als u geen nut ervan hebt, kunt u deze keuze
 	'texte_modifier_article' => 'Wijzigen artikel:',
 	'texte_moteur_recherche_active' => '<b>De zoekmotor is geactiveerd.</b> Voer deze taak uit als je een snelle herindexatie wil doorvoeren (na het terugzetten van een reservekopie bijvoorbeeld). Documenten die via de normale weg worden gewijzigd (vanaf de SPIP interface) worden automatisch geherindexeerd: deze taak is dus enkel nuttig in uitzonderlijke omstandigheden.',
 	'texte_moteur_recherche_non_active' => 'De zoekmachine is niet geactiveerd.',
-	'texte_multilinguisme' => 'Als je graag artikels in verschillende talen zou willen beheren, met een complexe navigatie, kan je een taalkeuzemenu toevoegen bij de artikels en/of de rubrieken, i.f.v de organisatie van je site.', # MODIF
-	'texte_multilinguisme_trad' => 'Je kan eveneens een systeem in werking stellen voor het beheer van koppelingen tussen de verschillende versies van een artikel.', # MODIF
+	'texte_multilinguisme' => 'Als je graag objecten in verschillende talen zou willen beheren, met een complexe navigatie, kan je een taalkeuzemenu toevoegen bij deze objecten, i.f.v de organisatie van je site.',
+	'texte_multilinguisme_trad' => 'Je kan eveneens een systeem in werking stellen voor het beheer van koppelingen tussen de verschillende vertalingen van de objecten.',
 	'texte_non_compresse' => '<i>niet gecomprimeerd</i> (de server ondersteunt deze functionaliteit niet)',
 	'texte_nouveau_message' => 'Nieuw bericht',
 	'texte_nouvelle_version_spip_1' => 'Je hebt een nieuwe versie van SPIP geïnstalleerd.',
