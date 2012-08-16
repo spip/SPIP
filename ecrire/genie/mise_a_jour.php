@@ -59,7 +59,7 @@ function info_maj ($dir, $file, $version){
 
 	if (!$page) return "";
 	return "<a class='info_maj_spip' href='"._VERSIONS_SERVEUR."$dir' title='$page'>" .
-	    _T('nouvelles_versions') .
+		_T('nouvelle_version_spip',array('version'=>$page)) .
 	    '</a>';
 }
 
