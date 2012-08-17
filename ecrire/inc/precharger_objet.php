@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Préchargement les formulaires d'édition d'objets, notament pour les traductions
+ *
+ * @package SPIP\Core\Objets
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/autoriser'); // necessaire si appel de l'espace public
@@ -17,17 +23,24 @@ include_spip('inc/autoriser'); // necessaire si appel de l'espace public
 
 
 /**
- * Retourne les valeurs a charger pour un formulaire d'edition d'un objet
- * Lors d'une creation, certains champs peuvent être preremplis (c'est le cas des traductions) 
+ * Retourne les valeurs à charger pour un formulaire d'édition d'un objet
  *
- * @param string $type Type d'objet (article,breve...)
- * @param string|int $id_objet, Identifiant de l'objet, ou "new" pour une creation
- * @param int $id_rubrique, identifiant eventuel de la rubrique parente
- * @param int $lier_trad, identifiant eventuel de la traduction de reference
- * @param string $champ_titre, nom de la colonne SQL de l'objet donnant le titre :
- *                             pas ideal ? on devrait pouvoir le savoir
- *                             dans la declaration de l'objet
- * @return array couples cles / valeurs des champs du formulaire à charger.
+ * Lors d'une création, certains champs peuvent être préremplis
+ * (c'est le cas des traductions) 
+ *
+ * @param string $type
+ *     Type d'objet (article, breve...)
+ * @param string|int $id_objet
+ *     Identifiant de l'objet, ou "new" pour une création
+ * @param int $id_rubrique
+ *     Identifiant éventuel de la rubrique parente
+ * @param int $lier_trad
+ *     Identifiant éventuel de la traduction de référence
+ * @param string $champ_titre
+ *     Nom de la colonne SQL de l'objet donnant le titre : pas vraiment idéal !
+ *     On devrait pouvoir le savoir dans la déclaration de l'objet
+ * @return array
+ *     Couples clés / valeurs des champs du formulaire à charger.
 **/
 function precharger_objet($type, $id_objet, $id_rubrique=0, $lier_trad=0, $champ_titre = 'titre') {
 	global $connect_id_rubrique, $spip_lang;
@@ -97,16 +110,21 @@ function precharger_objet($type, $id_objet, $id_rubrique=0, $lier_trad=0, $champ
 
 
 /**
- * Recupere les valeurs d'une traduction de reference pour la creation
- * d'un objet (preremplissage du formulaire). 
+ * Récupère les valeurs d'une traduction de référence pour la création
+ * d'un objet (préremplissage du formulaire). 
  *
- * @param string $type Type d'objet (article,breve...)
- * @param string|int $id_objet, Identifiant de l'objet, ou "new" pour une creation
- * @param int $id_rubrique, identifiant eventuel de la rubrique parente
- * @param int $lier_trad, identifiant eventuel de la traduction de reference
- * @param string $champ_titre, nom de la colonne SQL de l'objet donnant le titre
- * 
- * @return array couples cles / valeurs des champs du formulaire à charger
+ * @param string $type
+ *     Type d'objet (article, breve...)
+ * @param string|int $id_objet
+ *     Identifiant de l'objet, ou "new" pour une création
+ * @param int $id_rubrique
+ *     Identifiant éventuel de la rubrique parente
+ * @param int $lier_trad
+ *     Identifiant éventuel de la traduction de référence
+ * @param string $champ_titre
+ *     Nom de la colonne SQL de l'objet donnant le titre
+ * @return array
+ *     Couples clés / valeurs des champs du formulaire à charger
 **/
 function precharger_traduction_objet($type, $id_objet, $id_rubrique=0, $lier_trad=0, $champ_titre = 'titre') {
 	$table = table_objet_sql($type);

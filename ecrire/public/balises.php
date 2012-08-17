@@ -10,12 +10,17 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-// Ce fichier regroupe la quasi totalite des definitions de #BALISES de spip
-// Pour chaque balise, il est possible de surcharger, dans mes_fonctions,
-// la fonction balise_TOTO_dist par une fonction balise_TOTO() respectant la
-// meme API :
-// elle recoit en entree un objet de classe CHAMP, le modifie et le retourne.
-// Cette classe est definie dans public/interfaces
+/**
+ * Ce fichier regroupe la quasi totalité des définitions de #BALISES de SPIP.
+ * 
+ * Pour chaque balise, il est possible de surcharger, dans son fichier
+ * mes_fonctions.php, la fonction balise_TOTO_dist par une fonction
+ * balise_TOTO() respectant la même API : elle recoit en entrée un objet
+ * de classe CHAMP, le modifie et le retourne. Cette classe est definie
+ * dans public/interfaces.
+ * 
+ * @package SPIP\Core\Compilateur\Balises
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

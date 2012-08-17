@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions pour l'affichage des informations de plugins
+ *
+ * @package SPIP\Core\Plugins
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/charsets');
 include_spip('inc/texte');
@@ -169,6 +175,16 @@ function plugin_desintalle($plug_file, $nom){
 		. "</a>]</div>"	;
 }
 
+/**
+ * Traduit un type d'état de plugin
+ *
+ * Si l'état n'existe pas, prendra par défaut 'developpement'
+ *
+ * @param string $etat
+ *     Le type d'état (stable, test, ...)
+ * @return string
+ *     Traduction de l'état dans la langue en cours
+**/
 function plugin_etat_en_clair($etat){
 	if (!in_array($etat,array('stable','test','experimental')))
 		$etat = 'developpement';
