@@ -77,7 +77,35 @@ function formulaires_editer_objet_verifier($type,$id='new', $oblis = array()){
 	return $erreurs;
 }
 
-// http://doc.spip.org/@formulaires_editer_objet_charger
+/**
+ * Construit les valeurs de chargement d'un formulaire d'édition d'objet éditorial
+ * 
+ * @api
+ * 
+ * @param string $type
+ *     Type d'objet
+ * @param int|string $id
+ *     Identifiant de l'objet à éditer, 'new' pour un nouvel objet
+ * @param int $id_parent
+ *     Identifiant de l'objet parent
+ * @param int $lier_trad
+ *     Identifiant de l'objet servant de source à une nouvelle traduction
+ * @param string $retour
+ *     URL de redirection après les traitements
+ * @param string $config_fonc
+ *     Nom de fonction appelée au chargement permettant d'ajouter des
+ *     valeurs de configurations dans l'environnement du formulaire
+ * @param array $row
+ *     Ligne SQL de l'objet édité, si connu.
+ *     En absence, les données sont chargées depuis l'objet en base s'il existe
+ *     ou depuis l'objet source d'une traduction si c'est un nouvel objet
+ *     (et une traduction).
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés (input hidden)
+ *     du formulaire.
+ * @return array
+ *     Environnement du formulaire.
+**/
 function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden=''){
 	$table_objet = table_objet($type);
 	$table_objet_sql = table_objet_sql($type);

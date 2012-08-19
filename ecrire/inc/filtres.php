@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Déclaration de filtres pour les squelettes 
+ *
+ * @package SPIP\Core\Filtres
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/charsets');
@@ -2277,22 +2282,58 @@ function filtre_info_plugin_dist($plugin, $type_info) {
 }
 
 
-// http://doc.spip.org/@puce_changement_statut
+/**
+ * Affiche la puce statut d'un objet, avec un menu rapide pour changer
+ * de statut si possibilité de l'avoir
+ *
+ * @see inc_puce_statut_dist()
+ *
+ * @filtre puce_changement_statut
+ * 
+ * @param int $id_objet
+ *     Identifiant de l'objet
+ * @param string $statut
+ *     Statut actuel de l'objet
+ * @param int $id_rubrique
+ *     Identifiant du parent
+ * @param string $type
+ *     Type d'objet
+ * @param bool $ajax
+ *     Indique s'il ne faut renvoyer que le coeur du menu car on est
+ *     dans une requete ajax suite à un post de changement rapide
+ * @return string
+ *     Code HTML de l'image de puce de statut à insérer (et du menu de changement si présent)
+ */
 function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=false){
 	$puce_statut = charger_fonction('puce_statut','inc');
 	return $puce_statut($id_objet, $statut, $id_rubrique, $type, $ajax);
 }
 
+
 /**
- * [(#STATUT|puce_statut{article})] affiche une puce passive
- * [(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})] affiche une puce avec changement rapide
+ * Affiche la puce statut d'un objet, avec un menu rapide pour changer
+ * de statut si possibilité de l'avoir
  *
- * utilisable sur tout objet qui a declare
+ * Utilisable sur tout objet qui a declaré ses statuts
+ *
+ * @example
+ *     [(#STATUT|puce_statut{article})] affiche une puce passive
+ *     [(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})] affiche une puce avec changement rapide
+ *
+ * @see inc_puce_statut_dist()
+ *
+ * @filtre puce_statut
+ * 
  * @param string $statut
+ *     Statut actuel de l'objet
  * @param string $objet
+ *     Type d'objet
  * @param int $id_objet
+ *     Identifiant de l'objet
  * @param int $id_parent
+ *     Identifiant du parent
  * @return string
+ *     Code HTML de l'image de puce de statut à insérer (et du menu de changement si présent)
  */
 function filtre_puce_statut_dist($statut,$objet,$id_objet=0,$id_parent=0){
 	static $puce_statut = null;
@@ -2875,10 +2916,14 @@ function objet_info($objet,$info){
 
 /**
  * Filtre pour afficher 'Aucun truc' ou '1 truc' ou 'N trucs'
- * avec la bonne chaine de langue en fonction de l'objet utilise
- * @param  $nb
- * @param  $objet
+ * avec la bonne chaîne de langue en fonction de l'objet utilisé
+ * 
+ * @param int $nb
+ *     Nombre d'éléments
+ * @param string $objet
+ *     Objet
  * @return mixed|string
+ *     Texte traduit du comptage, tel que '3 articles'
  */
 function objet_afficher_nb($nb, $objet){
 	if (!$nb)

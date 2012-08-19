@@ -10,11 +10,25 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des optimisations de la base de donnée en cron 
+ *
+ * @package SPIP\Core\Genie\Optimiser
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
-// http://doc.spip.org/@genie_optimiser_dist
+/**
+ * Cron d'optimisation de la base de données
+ *
+ * Tache appelée régulièrement
+ * 
+ * @param int $t
+ *     Timestamp de la date de dernier appel de la tâche
+ * @return int
+ *     Timestamp de la date du prochain appel de la tâche
+**/
 function genie_optimiser_dist($t) {
 
 	optimiser_base_une_table();
@@ -27,14 +41,33 @@ function genie_optimiser_dist($t) {
 	return -(mktime(2,0,0) + rand(0, 3600*4));
 }
 
-// heure de reference pour le garbage collector = 24h auparavant
-// http://doc.spip.org/@optimiser_base
+/**
+ * Optimise la base de données
+ *
+ * Supprime les relicats d'éléments qui ont disparu
+ *
+ * @note
+ *     Heure de référence pour le garbage collector = 24h auparavant
+ * @param int $attente
+ *     Attente entre 2 exécutions de la tache en secondes
+ * @return void
+**/
 function optimiser_base($attente = 86400) {
 	optimiser_base_disparus($attente);
 }
 
 
-// http://doc.spip.org/@optimiser_base_une_table
+/**
+ * Lance une requête d'optimisation sur une des tables SQL de la
+ * base de données.
+ *
+ * À chaque appel, une nouvelle table est optimisée (la suivante dans la
+ * liste par rapport à la dernière fois).
+ * 
+ * @see sql_optimize()
+ * 
+ * @global int $GLOBALS['meta']['optimiser_table'] 
+**/
 function optimiser_base_une_table() {
 
 	$tables = array();
@@ -57,14 +90,28 @@ function optimiser_base_une_table() {
 	}
 }
 
-// mysql < 4.0 refuse les requetes DELETE multi table 
-// et elles ont une syntaxe differente entre 4.0 et 4.1
-// On passe donc par un SELECT puis DELETE avec IN 
 
-// Utilitaire exploitant le SELECT et appliquant DELETE
-// L'index du SELECT doit s'appeler "id"
-
-// http://doc.spip.org/@optimiser_sansref
+/**
+ * Supprime des enregistrements d'une table SQL dont les ids à supprimer
+ * se trouvent dans les résultats de ressource SQL transmise, sous la colonne 'id'
+ *
+ * @note
+ *     Mysql < 4.0 refuse les requetes DELETE multi table
+ *     et elles ont une syntaxe differente entre 4.0 et 4.1
+ *     On passe donc par un SELECT puis DELETE avec IN
+ *     
+ * @param string $table
+ *     Nom de la table SQL, exemple : spip_articles
+ * @param string $id
+ *     Nom de la clé primaire de la table, exemple : id_article
+ * @param Resource $sel
+ *     Ressource SQL issue d'une sélection (sql_select) et contenant une
+ *     colonne 'id' ayant l'identifiant de la clé primaire à supprimer
+ * @param string $and
+ *     Condition AND à appliquer en plus sur la requête de suppression
+ * @return int
+ *     Nombre de suppressions
+**/
 function optimiser_sansref($table, $id, $sel, $and="")
 {
 	$in = array();
@@ -78,12 +125,23 @@ function optimiser_sansref($table, $id, $sel, $and="")
 	return count($in);
 }
 
-// Nomenclature des liens morts entre les tables,
-// suite a la suppresion d'articles, d'auteurs etc
-// Maintenant que MySQL 5 a des Cascades on pourrait faire autrement
-// mais on garde la compatibilite avec les versions precedentes.
 
-// http://doc.spip.org/@optimiser_base_disparus
+/**
+ * Suppression des liens morts entre tables
+ *
+ * Supprime des liens morts entre tables suite à la suppression d'articles,
+ * d'auteurs, etc...
+ *
+ * @note
+ *     Maintenant que MySQL 5 a des Cascades on pourrait faire autrement
+ *     mais on garde la compatibilité avec les versions précédentes.
+ *
+ * @pipeline_appel optimiser_base_disparus
+ * 
+ * @param int $attente
+ *     Attente entre 2 exécutions de la tache en secondes
+ * @return void
+**/
 function optimiser_base_disparus($attente = 86400) {
 
 	# format = 20060610110141, si on veut forcer une optimisation tout de suite
@@ -133,7 +191,16 @@ function optimiser_base_disparus($attente = 86400) {
 	# au mail de confirmation (45 jours pour repondre, ca devrait suffire)
 	sql_delete("spip_auteurs", "statut='nouveau' AND maj < ". sql_quote(date('Y-m-d', time()-45*24*3600)));
 
-
+	/**
+	 * Permet aux plugins de compléter l'optimisation suite aux éléments disparus
+	 *
+	 * L'index 'data' est un entier indiquant le nombre d'optimisations
+	 * qui ont été réalisées (par exemple le nombre de suppressions faites)
+	 * et qui doit être incrémenté par les fonctions
+	 * utilisant ce pipeline si elles suppriment des éléments.
+	 * 
+	 * @pipeline_appel optimiser_base_disparus
+	 */
 	$n = pipeline('optimiser_base_disparus', array(
 			'args'=>array(
 				'attente' => $attente,
