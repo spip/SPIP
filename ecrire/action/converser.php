@@ -14,10 +14,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/cookie');
 
-// changer de langue: pas de secu si espace public ou login ou installation
-// mais alors on n'accede pas a la base, on pose seulement le cookie.
-
-// http://doc.spip.org/@action_converser_dist
+/**
+ * Point d'entrée pour changer de langue
+ * 
+ * pas de secu si espace public ou login ou installation
+ * mais alors on n'accede pas a la base, on pose seulement le cookie.
+ * 
+ * @link http://doc.spip.org/@action_converser_dist
+ * @return void
+ */
 function action_converser_dist()
 {
 	$update_session = false;
@@ -35,6 +40,15 @@ function action_converser_dist()
 	redirige_par_entete($redirect, true);
 }
 
+/**
+ * Cette fonction prépare le travail de changement de langue
+ * en récupérant la bonne variable de langue
+ * 
+ * @link http://doc.spip.org/@action_converser_changer_langue
+ * @global array $GLOBALS['visiteur_session']
+ * @param bool $update_session 
+ * @return string
+ */
 function action_converser_changer_langue($update_session){
 	if ($lang = _request('var_lang'))
 		action_converser_post($lang);
@@ -56,7 +70,14 @@ function action_converser_changer_langue($update_session){
 	return $lang;
 }
 
-// http://doc.spip.org/@action_converser_post
+/**
+ * Cette fonction effectue le travail de changement de langue
+ * 
+ * @link http://doc.spip.org/@action_converser_post
+ * @param string $lang 
+ * @param bool $ecrire 
+ * @return void
+ */
 function action_converser_post($lang, $ecrire=false)
 {
 	if ($lang) {

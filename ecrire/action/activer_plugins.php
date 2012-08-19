@@ -12,8 +12,14 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// mise a jour des donnees si envoi via formulaire
-// http://doc.spip.org/@enregistre_modif_plugin
+/**
+ * mise a jour des donnees si envoi via formulaire
+ * 
+ * @link http://doc.spip.org/@enregistre_modif_plugin 
+ * @global array $GLOBALS['visiteur_session']
+ * @global array $GLOBALS['meta']
+ * @return void
+ */
 function enregistre_modif_plugin(){
 	include_spip('inc/plugin');
   // recuperer les plugins dans l'ordre des $_POST
@@ -46,7 +52,12 @@ function enregistre_modif_plugin(){
 	ecrire_meta('plugins_interessants', serialize($plugins_interessants2));
 }
 
-// http://doc.spip.org/@action_activer_plugins_dist
+/**
+ * Fonction d'initialisation : vérifie les droits et met à jour les méta avant de lancer l'activation des plugins
+ * 
+ * @link http://doc.spip.org/@action_activer_plugins_dist
+ * @return void
+ */
 function action_activer_plugins_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');

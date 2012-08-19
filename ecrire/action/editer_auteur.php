@@ -12,7 +12,14 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@action_editer_auteur_dist
+/**
+ * Editer ou créer un auteur
+ * 
+ * @link http://doc.spip.org/@action_editer_auteur_dist
+ * @global array $GLOBALS['visiteur_session']
+ * @param array $arg 
+ * @return array 
+ */
 function action_editer_auteur_dist($arg=null) {
 
 	if (is_null($arg)){
@@ -51,6 +58,7 @@ function action_editer_auteur_dist($arg=null) {
 
 /**
  * Inserer un auteur en base
+ * 
  * @param string $source
  * @return int
  */
@@ -152,9 +160,9 @@ function auteur_modifier($id_auteur, $set = null, $force_update=false) {
 /**
  * Associer un auteur a des objets listes sous forme
  * array($objet=>$id_objets,...)
- * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
+ * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type.
  *
- * on peut passer optionnellement une qualification du (des) lien(s) qui sera
+ * On peut passer optionnellement une qualification du (des) lien(s) qui sera
  * alors appliquee dans la foulee.
  * En cas de lot de liens, c'est la meme qualification qui est appliquee a tous
  *
@@ -171,6 +179,7 @@ function auteur_associer($id_auteur,$objets, $qualif = null){
 
 /**
  * Ancien nommage pour compatibilite
+ * 
  * @param int $id_auteur
  * @param array $c
  * @return string
@@ -180,7 +189,7 @@ function auteur_referent($id_auteur,$c){
 }
 
 /**
- * Dossocier un auteur des objets listes sous forme
+ * Dissocier un auteur des objets listes sous forme
  * array($objet=>$id_objets,...)
  * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
  *
@@ -199,6 +208,7 @@ function auteur_dissocier($id_auteur,$objets){
  * Qualifier le lien d'un auteur avec les objets listes
  * array($objet=>$id_objets,...)
  * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
+ * 
  * exemple :
  * $c = array('vu'=>'oui');
  * un * pour $id_auteur,$objet,$id_objet permet de traiter par lot
@@ -216,7 +226,8 @@ function auteur_qualifier($id_auteur,$objets,$qualif){
 
 /**
  * Modifier le statut d'un auteur, ou son login/pass
- * http://doc.spip.org/@instituer_auteur
+ * 
+ * @link http://doc.spip.org/@instituer_auteur
  * @param  $id_auteur
  * @param  $c
  * @param bool $force_webmestre

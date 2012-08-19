@@ -12,7 +12,13 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@action_instituer_collaboration_dist
+/**
+ * Lever les blocages d'édition pour l'utilisateur courant
+ * 
+ * @global array $GLOBALS['visiteur_session']
+ * @link http://doc.spip.org/@action_instituer_collaboration_dist
+ * @return void
+ */
 function action_debloquer_edition_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
