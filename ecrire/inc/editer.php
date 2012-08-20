@@ -10,10 +10,51 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions d'aide à l'édition d'objet éditoriaux. 
+ *
+ * @package SPIP\Core\Edition
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('base/abstract_sql');
 
-// http://doc.spip.org/@formulaires_editer_objet_traiter
+/**
+ * Effectue les traitements d'un formulaire d'édition d'objet éditorial
+ *
+ * Exécute une action d'édition spécifique au type d'objet s'il elle existe
+ * (fonction action_editer_$type), sinon exécute l'action générique
+ * d'édition d'objet (action_editer_objet_dist())
+ *
+ * Si une traduction était demandée, crée le lien avec l'objet qui est
+ * traduit.
+ *
+ * @api
+ * @see action_editer_objet_dist()
+ * 
+ * @param string $type
+ *     Type d'objet
+ * @param int|string $id
+ *     Identifiant de l'objet à éditer, 'new' pour un nouvel objet
+ * @param int $id_parent
+ *     Identifiant de l'objet parent
+ * @param int $lier_trad
+ *     Identifiant de l'objet servant de source à une nouvelle traduction
+ * @param string $retour
+ *     URL de redirection après les traitements
+ * @param string $config_fonc
+ *     Nom de fonction appelée au chargement permettant d'ajouter des
+ *     valeurs de configurations dans l'environnement du formulaire
+ * @param array $row
+ *     Ligne SQL de l'objet édité, si connu.
+ *     En absence, les données sont chargées depuis l'objet en base s'il existe
+ *     ou depuis l'objet source d'une traduction si c'est un nouvel objet
+ *     (et une traduction).
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés (input hidden)
+ *     du formulaire.
+ * @return array
+ *     Retour des traitements.
+**/
 function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden=''){
 
 	$res = array();
@@ -56,7 +97,26 @@ function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_
 	return $res;
 }
 
-// http://doc.spip.org/@formulaires_editer_objet_verifier
+/**
+ * Teste les erreurs de validation d'un formulaire d'édition d'objet éditorial
+ *
+ * La fonction teste que :
+ * - il n'y a pas de conflit d'édition sur un ou plusieurs champs (c'est à
+ *   dire que personne d'autre n'a modifié le champ entre le moment où on
+ *   a saisi et le moment où on a validé le formulaire
+ * - tous les champs obligatoires (listés dans $oblis) sont remplis.
+ * 
+ * @api
+ * 
+ * @param string $type
+ *     Type d'objet
+ * @param int|string $id
+ *     Identifiant de l'objet à éditer, 'new' pour un nouvel objet
+ * @param array $oblis
+ *     Liste de champs obligatoires : ils doivent avoir un contenu posté.
+ * @return array
+ *     Tableau des erreurs
+**/
 function formulaires_editer_objet_verifier($type,$id='new', $oblis = array()){
 	$erreurs = array();
 	if (intval($id)) {
@@ -79,6 +139,17 @@ function formulaires_editer_objet_verifier($type,$id='new', $oblis = array()){
 
 /**
  * Construit les valeurs de chargement d'un formulaire d'édition d'objet éditorial
+ *
+ * La fonction calcule les valeurs qui seront transmises à l'environnement
+ * du formulaire pour son affichage. Ces valeurs sont les champs de l'objet
+ * éditorial d'une part, mais aussi d'autres calculant la clé d'action,
+ * les pipelines devant faire transiter le contenu HTML du formulaire,
+ * ainsi que différents champs cachés utilisés ensuite dans les traitements.
+ *
+ * Lorsqu'une création d'objet est demandée, ou lorsqu'on demande une traduction
+ * d'un autre, la fonction tente de précharger le contenu de l'objet en
+ * utilisant une fonction inc_precharger_{type}_dist permettant par exemple
+ * de remplir le contenu avec du texte, notamment avec la traduction source.
  * 
  * @api
  * 
@@ -247,14 +318,18 @@ function editer_texte_recolle($texte, $att_text)
 }
 
 /**
- * Determiner un titre automatique si non renseigne,
- * a partir des champs textes de contenu
+ * Déterminer un titre automatique si non renseigné,
+ * à partir des champs textes de contenu
  *
+ * Les textes et le titre sont pris dans les champs postés (via _request())
+ * et le titre calculé est de même affecté en tant que champ posté.
+ * 
  * @param string $champ_titre
- *   nom du champ titre
+ *     Nom du champ titre
  * @param array $champs_contenu
- *   liste des champs contenu textuels
+ *     Liste des champs contenu textuels
  * @param int $longueur
+ *     Longueur de coupe du texte
  * @return void
  */
 function titre_automatique($champ_titre,$champs_contenu,$longueur=50){
@@ -271,9 +346,25 @@ function titre_automatique($champ_titre,$champs_contenu,$longueur=50){
 	}
 }
 
-// Produit la liste des md5 d'un tableau de donnees, sous forme
-// de inputs html
-// http://doc.spip.org/@controles_md5
+/**
+ * Calcule des clés de contrôles md5 d'un tableau de données.
+ * 
+ * Produit la liste des md5 d'un tableau de données, normalement un
+ * tableau des colonnes/valeurs d'un objet éditorial.
+ * 
+ * @param array $data
+ *      Couples (colonne => valeur). La valeur est un entier ou un texte.
+ * @param string $prefixe
+ *      Préfixe à appliquer sur les noms des clés de contrôles, devant le
+ *      nom de la colonne
+ * @param string $format
+ *      - html : Retourne les contrôles sous forme de input hidden pour un formulaire
+ *      - autre : Retourne le tableau ('$prefixe$colonne => md5)
+ * @return bool|string|array
+ *      - false si pas $data n'est pas un tableau
+ *      - string (avec format html) : contrôles dans des input hidden
+ *      - array sinon couples ('$prefixe$colonne => md5)
+**/
 function controles_md5($data, $prefixe='ctr_', $format='html'){
 	if (!is_array($data))
 		return false;
@@ -299,7 +390,41 @@ function controles_md5($data, $prefixe='ctr_', $format='html'){
 		return $ctr;
 }
 
-// http://doc.spip.org/@controler_contenu
+/**
+ * Contrôle les contenus postés d'un objet en vérifiant qu'il n'y a pas
+ * de conflit d'édition
+ *
+ * Repère les conflits d'édition sur un ou plusieurs champs. C'est à
+ * dire lorsqu'une autre personne a modifié le champ entre le moment où on
+ * a édité notre formulaire et le moment où on a validé le formulaire
+ *
+ * @param string $type
+ *     Type d'objet
+ * @param int $id
+ *     Identifiant de l'objet
+ * @param array $options
+ *     Tableau d'options. Accèpte les index :
+ *     - nonvide : Couples (colonne => valeur par défaut). Tous les champs
+ *       postés qui sont vides, s'il y en a dans cette option, sont remplacés
+ *       par la valeur indiquée
+ *     - prefix : Préfixe des clés de contrôles ('ctr_' par défaut). Une clé
+ *       de controle tel que 'ctr_titre' contient le md5 du titre au moment
+ *       de l'édition.
+ * @param array|bool $c
+ *     Tableau de couples (colonne=>valeur) à tester.
+ *     Non renseigné, la fonction prend toutes les colonne de l'objet via
+ *     _request()
+ * @param string $serveur
+ *     Nom du connecteur de base de données
+ * @return bool|null|array
+ *     False si aucun champ posté.
+ *     Null si aucune modification sur les champs.
+ *     Tableau vide si aucun de conflit d'édition.
+ *     Tableau (clé => tableau du conflit). L'index est la colonne en conflit,
+ *     la valeur un tableau avec 2 index :
+ *     - base : le contenu du champ en base
+ *     - post : le contenu posté
+**/
 function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') {
 	include_spip('inc/filtres');
 
@@ -333,8 +458,7 @@ function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') 
 			$c[$champ] = $sinon;
 
 	// N'accepter que les champs qui existent
-	// TODO: ici aussi on peut valider les contenus
-	// en fonction du type
+	// [TODO] ici aussi on peut valider les contenus en fonction du type
 	$champs = array();
 	foreach($desc['field'] as $champ => $ignore)
 		if (isset($c[$champ]))
@@ -367,9 +491,32 @@ function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') 
 	return $conflits;
 }
 
-// Controle la liste des md5 envoyes, supprime les inchanges,
-// signale les modifies depuis telle date
-// http://doc.spip.org/@controler_md5
+
+/**
+ * Contrôle la liste des md5 envoyés, supprime les inchangés,
+ * signale les modifiés depuis telle date
+ * 
+ * @param array $champs
+ *     Couples des champs saisis dans le formulaire (colonne => valeur postée)
+ * @param array $ctr
+ *     Tableau contenant les clés de contrôles. Couples (clé => md5)
+ * @param string $type
+ *     Type d'objet
+ * @param int $id
+ *     Identifiant de l'objet
+ * @param string $serveur
+ *     Nom du connecteur de base de données
+ * @param string $prefix
+ *     Préfixe des clés de contrôles : le nom du champ est préfixé de cette valeur
+ *     dans le tableau $ctr pour retrouver son md5.
+ * @return null|array
+ *     Null si aucun champ ou aucune modification sur les champs
+ *     Tableau vide si aucune erreur de contrôle.
+ *     Tableau (clé => tableau du conflit). L'index est la colonne en conflit,
+ *     la valeur un tableau avec 2 index :
+ *     - base : le contenu du champ en base
+ *     - post : le contenu posté
+**/
 function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	$table_objet = table_objet($type);
 	$spip_table_objet = table_objet_sql($type);
