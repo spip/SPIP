@@ -13,7 +13,7 @@
 /**
  * Fonctions déclarées dans des pipelines (espace privé)
  *
- * @package SPIP\Pipelines
+ * @package SPIP\Core\Pipelines
 **/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

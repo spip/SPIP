@@ -13,7 +13,7 @@
 /**
  * Gestion des queues de travaux
  *
- * @package SPIP\Queue
+ * @package SPIP\Core\Queue
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

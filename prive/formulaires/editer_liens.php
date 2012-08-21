@@ -13,7 +13,7 @@
 /**
  * Gestion du formulaire d'édition de liens 
  *
- * @package SPIP\Formulaires
+ * @package SPIP\Core\Formulaires
 **/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

@@ -13,7 +13,7 @@
 /**
  * Gestion de l'installation de SPIP
  *
- * @package SPIP\Installation
+ * @package SPIP\Core\Installation
 **/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

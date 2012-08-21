@@ -13,7 +13,7 @@
 /**
  * API d'édition de liens
  *
- * @package SPIP\Liens\API
+ * @package SPIP\Core\Liens\API
  */
  
 if (!defined('_ECRIRE_INC_VERSION')) return;

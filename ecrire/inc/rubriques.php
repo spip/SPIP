@@ -13,7 +13,7 @@
 /**
  * Fichier gérant l'actualisation et le suivi des rubriques, et de leurs branches
  *
- * @package SPIP\Rubriques
+ * @package SPIP\Core\Rubriques
  */
  
 if (!defined('_ECRIRE_INC_VERSION')) return;

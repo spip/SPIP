@@ -17,7 +17,7 @@
  * à la conversion de textes dans différents charsets et
  * propose des fonctions émulant la librairie mb si elle est absente
  * 
- * @package SPIP\Texte\Charsets
+ * @package SPIP\Core\Texte\Charsets
 **/
 
 // securité

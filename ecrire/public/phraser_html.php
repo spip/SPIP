@@ -16,7 +16,7 @@
  * Ce fichier transforme un squelette en un tableau d'objets de classe Boucle
  * il est chargé par un include calculé pour permettre différentes syntaxes en entrée
  * 
- * @package SPIP\Compilateur\Phraseur
+ * @package SPIP\Core\Compilateur\Phraseur
 **/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

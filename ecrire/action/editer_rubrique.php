@@ -13,7 +13,7 @@
 /**
  * Fonctions de modifications des rubriques
  *
- * @package SPIP\Rubriques\Modifications
+ * @package SPIP\Core\Rubriques\Modifications
  */
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

@@ -13,7 +13,7 @@
 /**
  * Définition des noeuds de l'arbre de syntaxe abstraite
  *
- * @package SPIP\Compilateur\AST
+ * @package SPIP\Core\Compilateur\AST
 **/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -29,7 +29,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Le champ code est inutilisé dans cette classe seule, mais harmonise
  * le traitement d'erreurs.
  *
- * @package SPIP\Compilateur\AST
+ * @package SPIP\Core\Compilateur\AST
  */
 class Contexte {
 	/**
@@ -75,7 +75,7 @@ class Contexte {
 /**
  * Description d'un texte
  *
- * @package SPIP\Compilateur\AST
+ * @package SPIP\Core\Compilateur\AST
 **/
 class Texte {
 	/**
@@ -111,7 +111,7 @@ class Texte {
 /**
  * Description d'une inclusion de squelette
  *
- * @package SPIP\Compilateur\AST
+ * @package SPIP\Core\Compilateur\AST
 **/
 class Inclure {
 	/**
@@ -152,7 +152,7 @@ class Inclure {
 /**
  * Description d'une boucle
  *
- * @package SPIP\Compilateur\AST
+ * @package SPIP\Core\Compilateur\AST
 **/
 class Boucle {
 	/**
@@ -466,7 +466,7 @@ class Boucle {
  *
  * Sous-noeud de Boucle
  *
- * @package SPIP\Compilateur\AST
+ * @package SPIP\Core\Compilateur\AST
 **/
 class Critere {
 	/**
@@ -505,7 +505,7 @@ class Critere {
 /**
  * Description d'un champ (balise SPIP)
  *
- * @package SPIP\Compilateur\AST
+ * @package SPIP\Core\Compilateur\AST
 **/
 class Champ {
 	/**
@@ -708,7 +708,7 @@ class Idiome {
 /**
  * Description d'un texte polyglotte (<multi>)
  *
- * @package SPIP\Compilateur\AST
+ * @package SPIP\Core\Compilateur\AST
 **/
 class Polyglotte {
 	/**

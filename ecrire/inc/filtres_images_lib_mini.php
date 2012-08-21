@@ -14,7 +14,7 @@
  * Ce fichier contient les fonctions utilisées
  * par les fonctions-filtres de traitement d'image.
  *
- * @package SPIP\image
+ * @package SPIP\Core\Filtres\Images
  */
 
 

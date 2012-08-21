@@ -13,7 +13,7 @@
 /**
  * Gestion de l'obtention des descriptions de tables SQL
  *
- * @package SPIP\SQL\Tables
+ * @package SPIP\Core\SQL\Tables
 **/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('base/objets');
