@@ -32,31 +32,32 @@ include_spip('base/dump');
 function exec_export_all_dist(){
 	$rub = intval(_request('id_parent'));
 	$meta = base_dump_meta_name($rub);
-
+	utiliser_langue_visiteur();
 	if (!isset($GLOBALS['meta'][$meta])){
 		// c'est un demarrage en arrivee directe depuis exec=admin_tech
 		// on initialise  (mais si c'est le validateur, ne rien faire)
 		if ($GLOBALS['exec'] == 'valider_xml') return;
-		exec_export_all_args($meta, $rub, _request('gz'));
+		$gz = _request('gz');
+		$archive = exec_export_all_args($rub, $gz);
+		$tables = export_all_start($meta, $archive, $rub, _request('export'));
+		ecrire_meta($meta, serialize(array($gz, $archive, $rub, $tables, 1, 0)), 'non');
+		// rub=$rub sert AUSSI a distinguer cette redirection
+		// d'avec l'appel initial sinon FireFox croit malin
+		// d'optimiser la redirection
+		$url = generer_url_ecrire('export_all',"rub=$rub", true);
+	} else {
+		// appels suivants
+		$export = charger_fonction('export', 'inc');
+		$arg = $export($meta);
+		// Si retour de $export c'est fini; dernier appel pour ramasser
+		// et produire l'en tete du fichier a partir de l'espace public
+		$url = generer_action_auteur("export_all",$arg,'',true, true, true);
 	}
-
-	$export = charger_fonction('export', 'inc');
-	$arg = $export($meta);
-	@list(, $gz, $archive, $rub, $version) = explode(',', $arg);
-
-	// quand on sort de $export c'est qu'on a fini
-	export_all_end($meta,$archive);
-
 	include_spip('inc/headers');
-	redirige_par_entete(generer_action_auteur("export_all",$arg,'',true, true));
-
+	redirige_par_entete($url);
 }
 
-// L'en tete du fichier doit etre cree a partir de l'espace public
-// Ici on construit la liste des tables pour confirmation.
-// Envoi automatique en cas d'inaction (sauf si appel incorrect $nom=NULL)
-
-function exec_export_all_args($meta, $rub, $gz){
+function exec_export_all_args($rub, $gz){
 
 	$gz = $gz ? '.gz' : '';
 	$nom = $gz 
@@ -64,27 +65,16 @@ function exec_export_all_args($meta, $rub, $gz){
 	:  _request('nom_sauvegarde');
 
 	if (!preg_match(',^[\w_][\w_.]*$,', $nom)) $nom = 'dump';
-	$archive = $nom . '.xml' . $gz;
-
-	// si pas de tables listees en post, utiliser la liste par defaut
-	if (!$tables = _request('export'))
-		list($tables,) = base_liste_table_for_dump(lister_tables_noexport());
-
-	export_all_start($meta, $gz, $archive, $rub, _VERSION_ARCHIVE, $tables);
-	
+	return $nom . '.xml' . $gz;
 }
 
+// Ici on construit la liste des tables pour confirmation.
 
-function export_all_start($meta, $gz, $archive, $rub, $version, $tables){
+function export_all_start($meta, $archive, $rub, $tables){
 
-	// determine upload va aussi initialiser l'index "restreint"
-	$maindir = determine_upload();
-	if (!$GLOBALS['visiteur_session']['restreint'])
-		$maindir = _DIR_DUMP;
-	$dir = sous_repertoire($maindir, $meta);
-	$file = $dir . $archive;
-
-	utiliser_langue_visiteur();
+	// si pas de tables listees en post, utiliser la liste par defaut
+	if (!$tables)
+		list($tables,) = base_liste_table_for_dump(lister_tables_noexport());
 
 	// en mode partiel, commencer par les articles et les rubriques
 	// pour savoir quelles parties des autres tables sont a sauver
@@ -98,44 +88,7 @@ function export_all_start($meta, $gz, $archive, $rub, $version, $tables){
 			array_unshift($tables, 'spip_articles');
 		}
 	}
-	// creer l'en tete du fichier et retourner dans l'espace prive
-	ecrire_fichier($file, export_entete($version),false);
-	$v = serialize(array($gz, $archive, $rub, $tables, 1, 0));
-	ecrire_meta($meta, $v, 'non');
-	include_spip('inc/headers');
-		// rub=$rub sert AUSSI a distinguer cette redirection
-		// d'avec l'appel initial sinon FireFox croit malin
-		// d'optimiser la redirection
-	redirige_url_ecrire('export_all',"rub=$rub");
-
-
+	return $tables;
 }
-
-function export_all_end($meta, $archive){
-	$dir = base_dump_dir($meta);
-	$file = $dir . $archive;
-	ecrire_fichier($file, export_enpied(),false,false);
-}
-
-// http://doc.spip.org/@export_entete
-function export_entete($version_archive)
-{
-	return
-"<" . "?xml version=\"1.0\" encoding=\"".
-$GLOBALS['meta']['charset']."\"?".">\n" .
-"<SPIP
-	version=\"" . $GLOBALS['spip_version_affichee'] . "\"
-	version_base=\"" . $GLOBALS['spip_version_base'] . "\"
-	version_archive=\"" . $version_archive . "\"
-	adresse_site=\"" .  $GLOBALS['meta']["adresse_site"] . "\"
-	dir_img=\"" . _DIR_IMG . "\"
-	dir_logos=\"" . _DIR_LOGOS . "\"
->\n";
-}
-
-
-// production de l'entete du fichier d'archive
-// http://doc.spip.org/@export_enpied
-function export_enpied () { return  "</SPIP>\n";}
 
 ?>
