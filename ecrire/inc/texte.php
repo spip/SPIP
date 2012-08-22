@@ -593,6 +593,7 @@ function traiter_tableau($bloc) {
 	// Traiter chaque ligne
 	$reg_line1 = ',^(\|(' . _RACCOURCI_TH_SPAN . '))+$,sS';
 	$reg_line_all = ',^'  . _RACCOURCI_TH_SPAN . '$,sS';
+	$num_cols = 0;
 	foreach ($regs[1] as $ligne) {
 		$l ++;
 
@@ -610,7 +611,8 @@ function traiter_tableau($bloc) {
 				preg_match_all('/\|([^|]*)/S', $ligne, $cols);
 				$ligne='';$cols= $cols[1];
 				$colspan=1;
-				for($c=count($cols)-1; $c>=0; $c--) {
+				$num_cols = count($cols);
+				for($c=$num_cols-1; $c>=0; $c--) {
 					$attr='';
 					if($cols[$c]=='<') {
 					  $colspan++;
@@ -646,7 +648,7 @@ function traiter_tableau($bloc) {
 	// du nombre de colonnes dans la premiere ligne.
 	// Reperer egalement les colonnes numeriques pour les cadrer a droite
 	$rowspans = $numeric = array();
-	$n = count($lignes[0]);
+	$n = $num_cols ? $num_cols : count($lignes[0]);
 	$k = count($lignes);
 	// distinguer les colonnes numeriques a point ou a virgule,
 	// pour les alignements eventuels sur "," ou "."
