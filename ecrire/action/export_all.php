@@ -27,15 +27,16 @@ function action_export_all_dist()
 	$file = ramasse_parties($rub, $archive, $meta);
 	$size = !$file ? 0 : @(!file_exists($file) ? 0 : filesize($file));
 	$metatable = $meta . '_tables';
+	$tables = isset($GLOBALS['meta'][$metatable])?unserialize($GLOBALS['meta'][$metatable]):array();
+	effacer_meta($metatable);
+	effacer_meta($meta);
 	utiliser_langue_visiteur();
 	if (!$size)
 		$corps = _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
 	else {
-		$tables_sauvegardees = isset($GLOBALS['meta'][$metatable])?unserialize($GLOBALS['meta'][$metatable]):array();
-		$corps = export_all_report($file, $rub, $size, $tables_sauvegardees);
+		$corps = export_all_report_size($file, $rub, $size, generer_url_ecrire())
+		.  export_all_report_tables($tables);
 	}
-	effacer_meta($metatable);
-	effacer_meta($meta);
 	include_spip('inc/minipres');
 	echo minipres(_T('info_sauvegarde'), $corps);
 }
@@ -107,7 +108,7 @@ $GLOBALS['meta']['charset']."\"?".">\n" .
 // http://doc.spip.org/@export_enpied
 function export_enpied () { return  "</SPIP>\n";}
 
-function export_all_report($dest, $rub, $size, $tables_sauvegardees)
+function export_all_report_size($dest, $rub, $size, $retour)
 {
 	global $spip_lang_left,$spip_lang_right;
 
@@ -129,23 +130,30 @@ function export_all_report($dest, $rub, $size, $tables_sauvegardees)
 			$titre = _T('info_sauvegarde_reussi_02',
 			      array('archive' => ':<br /><b>'.joli_repertoire($dest)."</b> ($n)"));
 
-	// afficher la liste des tables qu'on a sauvegarde
 	include_spip('inc/filtres');
-	sort($tables_sauvegardees);
-	$n = floor(count($tables_sauvegardees)/2);
-
 	return "<p style='text-align: $spip_lang_left'>".
 			  $titre .
-			  " <a href='" . generer_url_ecrire() . "'>".
+			  " <a href='" . $retour . "'>".
 			_T('info_sauvegarde_reussi_03')
 			. "</a> "
 			._T('info_sauvegarde_reussi_04')
 			. "</p>\n"
-			. "<div style='text-align: $spip_lang_right'>"
-			. bouton_action(_T("retour"), generer_url_ecrire())
-			. "</div>"
-			. "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,0,$n)) . "</li></ul></div>"
-		  . "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,$n)) . "</li></ul></div>"
-		  . "<div class='nettoyeur'></div>";
+			.  "<div style='text-align: $spip_lang_right'>"
+			. bouton_action(_T("retour"), $retour)
+			. "</div>" ;
+}
+
+function export_all_report_tables($tables_sauvegardees)
+{
+	sort($tables_sauvegardees);
+	$n = floor(count($tables_sauvegardees)/2);
+
+	return "<div style='width:49%;float:left;'><ul><li>"
+	. join('</li><li>', array_slice($tables_sauvegardees,0,$n))
+	. "</li></ul></div>"
+	. "<div style='width:49%;float:left;'><ul><li>"
+	. join('</li><li>', array_slice($tables_sauvegardees,$n))
+	. "</li></ul></div>"
+	. "<div class='nettoyeur'></div>";
 }
 ?>
