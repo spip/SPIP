@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_interface' => 'choix  de l\'interface', # NEW
 	'colonne' => 'Colonne', # NEW
 	'confirm_changer_statut' => 'Atencion, avetz demandat de chamjar l\'estatut de quel element. Desiratz de contunhar? ',
-	'correcte' => 'correcte', # chaine utilis&eacute;e dans le debugueur : "validation .. impossible" ou "validation .. correcte" NEW
+	'correcte' => 'correcte', # chaine utilisée dans le debugueur : "validation .. impossible" ou "validation .. correcte" NEW
 
 	// D
 	'date_aujourdhui' => 'uei',

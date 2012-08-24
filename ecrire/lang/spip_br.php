@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'0_mainteneur' => 'Malo Morvan (malomorvan@yahoo.fr)',
 
 	// A
-	'access_interface_graphique' => 'Distreiñ d\'an etrefas grafek klok', # Gwelloc'h e vije ober gant etrefas evit trei&ntilde; interface; he&ntilde;veldra, grafek zo kalz komprenusoc'h eget kevrega&ntilde;. Dreist-holl e vez komprenet gant an holl hag en implij ema&ntilde; gant kalz a dud
+	'access_interface_graphique' => 'Distreiñ d\'an etrefas grafek klok', # Gwelloc'h e vije ober gant etrefas evit treiñ interface; heñveldra, grafek zo kalz komprenusoc'h eget kevregañ. Dreist-holl e vez komprenet gant an holl hag en implij emañ gant kalz a dud
 	'access_mode_texte' => 'diskouez an etrefas testenn eeun',
 	'admin_debug' => 'dizreinañ',
 	'admin_modifier_article' => 'Kemmañ ar pennad-mañ',
@@ -582,7 +582,7 @@ Kit d\'ar chomlec\'h-mañ :
 Neuze e c\'hellot merkañ ur ger-tremen nevez ha
 kevreañ en-dro ouzh al lec\'hienn.
 
-', # Connecter : gwelloc'h eo ober gant kevrea&ntilde; zo muioc'h en implij gant an dud. Kevrea&ntilde; ouzh ar genrouedad hag all.
+', # Connecter : gwelloc'h eo ober gant kevreañ zo muioc'h en implij gant an dud. Kevreañ ouzh ar genrouedad hag all.
 	'pass_mot_oublie' => 'Ankouaet ar ger-tremen',
 	'pass_nouveau_enregistre' => 'Enrollet eo bet ho ker-tremen nevez.',
 	'pass_nouveau_pass' => 'Ger-tremen nevez',
@@ -659,7 +659,7 @@ Aliet oc\'h da chom hep kemmañ tra ebet e-keit ha n\'oc\'h ket boas ouzh SPIP.
 	'titre_publier_document' => 'EMBANN UN TEUL ER RUBRIKENN-MAÑ',
 	'titre_signatures_attente' => 'Sinadurioù a c\'hortoz bezañ kadarnaet',
 	'titre_signatures_confirmees' => 'Sinadurioù bet gwiriekaet',
-	'titre_statistiques' => 'Stadegoù al lec\'hienn', # Stadego&ugrave;, termen skoueriekaet gant TermBret evit Statistiques.
+	'titre_statistiques' => 'Stadegoù al lec\'hienn', # Stadegoù, termen skoueriekaet gant TermBret evit Statistiques.
 	'titre_titre_document' => 'Titl an teul :',
 	'todo' => 'da zont',
 	'trad_reference' => '(pennad orin)', # MODIF
