@@ -75,8 +75,7 @@ function base_import_all_dist($titre='', $reprise=false)
 	include_spip('inc/rubriques');
 	calculer_rubriques();
 	if (!$res) ecrire_acces();	// Mise a jour du fichier htpasswd
-	// revenir a l'accueil pour finir
-	affiche_progression_javascript('100 %', 0);
+	affiche_progression_javascript('100 %', 0, '', $request['retour']);
 }
 
 // http://doc.spip.org/@import_all_milieu

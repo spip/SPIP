@@ -460,7 +460,7 @@ function import_affiche_javascript($taille)
 
 
 // http://doc.spip.org/@affiche_progression_javascript
-function affiche_progression_javascript($abs_pos,$size, $table="") {
+function affiche_progression_javascript($abs_pos,$size, $table="", $retour='') {
 
 	include_spip('inc/charsets');
 	echo "\n<script type='text/javascript'><!--\n";
@@ -472,8 +472,9 @@ function affiche_progression_javascript($abs_pos,$size, $table="") {
 			echo "document.progression.recharge.value='".str_replace("'", "\\'", unicode_to_javascript(html2unicode(_T('avis_erreur').": $x")))." ';\n";
 		}
 		else {
+			if (!$retour) $retour = self();
 			echo "document.progression.recharge.value='".str_replace("'", "\\'", unicode_to_javascript(html2unicode(_T('info_fini'))))."';\n";
-			echo "window.setTimeout('location.href=\"".self()."\";',0);";
+			echo "window.setTimeout('location.href=\"$retour\";',0);";
 		}
 	}
 	else {
