@@ -28,7 +28,6 @@ include_spip('inc/headers');
  *
  */
 
-
 // Restauration d'une base. Comme ca peut etre interrompu pour cause
 // de Timeout, un javascript relance automatiquement (cf inc/import.php)
 // Comme il peut relancer une action qui vient de se terminer,
@@ -38,60 +37,68 @@ include_spip('inc/headers');
 // http://doc.spip.org/@exec_import_all_dist
 function exec_import_all_dist()
 {
+	// permettre l'appel en GET
+	if (!$_POST) $_POST = $_GET;
 	$archive=_request('archive');
 	if (!strlen($archive)) {
 		$_POST['archive'] = $archive = _request('archive_perso');
 	}
+	exec_import_all_args($archive);
+}
 
-	// si on arrive ici en debut d'operation
+function exec_import_all_args($archive)
+{
 	if ($archive) {
+		// On arrive ici en debut d'operation
+		// Est-ce une fusion ou un ecrasement ?
+		$insert = _request('insertion'); 
+		if (!$insert AND !autoriser('detruire'))
+			export_all_abort();
 		$dir = import_queldir();
 		$_POST['dir'] = $dir;
 		// voir si un message d'avertissement est necessaire
 		$commentaire = verifier_sauvegarde($dir . $archive);
-
-		// est-ce une fusion de base au lieu d'un ecrasement ?
-		$insert = _request('insertion'); 
-	}
-	// sinon, si on a bien la meta qui donne l'etat d'avancement
-	// on est en cours d'operation
-	elseif (isset($GLOBALS['meta']['import_all'])) {
-		$request = @unserialize($GLOBALS['meta']['import_all']);
+	} else {
+		// sinon, si on a bien la meta qui donne l'etat d'avancement
+		// on est en cours d'operation
 		// Tester si l'archive est toujous la:
 		// ca sert pour forcer a sortir d'une restauration inachevee
-		if (is_readable($request['dir'] . $request['archive'])) {
+
+		if (!isset($GLOBALS['meta']['import_all'])
+		OR (!$request = @unserialize($GLOBALS['meta']['import_all']))
+		OR (!is_readable($request['dir'] . $request['archive']))) {
+			// on ne sait pas quoi importer, il faut sortir de la
+			export_all_abort();
+		}
 			$archive = $request['archive'];
 			$insert = $request['insertion'];
 			$commentaire = '';
-		}
 	}
-
-	if ($archive) {
-	  // il faut changer cette chaine depuis qu'on fait aussi de la fusion
-	  // _T('info_restauration_sauvegarde', 
-		$action = _T($insert
+	$action = _T($insert
 			     ? 'info_restauration_sauvegarde_insert' 
 			     : 'info_restauration_sauvegarde',
 			     array('archive' => $archive));
-		$admin = charger_fonction('admin', 'inc');
-		echo $admin('import_all', $action, $commentaire, !$insert);
-	}
-	// on ne sait pas quoi importer, il faut sortir de la
-	// sauf s'il s'agit du validateur (a ameliorer)
-	elseif (_request('exec') <> 'valider_xml')  {
-		include_spip('base/import_all');
-		import_all_fin(array());
-		include_spip('inc/import');
-		detruit_restaurateur();
-		effacer_meta('admin');
-		// et verifier la session
-		include_spip('inc/auth');
-		if (!$auteur = auth_retrouver_login($GLOBALS['visiteur_session']['login'])
-			OR $auteur['id_auteur']!=$GLOBALS['visiteur_session']['id_auteur'])
+	$admin = charger_fonction('admin', 'inc');
+	echo $admin('import_all', $action, $commentaire, !$insert);
+}
+
+function export_all_abort()
+{
+	// evacuer la fausse erreur du cas du validateur en boucle.
+	if (_request('exec') == 'valider_xml')  return;
+	include_spip('base/import_all');
+	import_all_fin(array());
+	include_spip('inc/import');
+	detruit_restaurateur();
+	effacer_meta('admin');
+	// et verifier la session
+	include_spip('inc/auth');
+	$login = auth_retrouver_login($GLOBALS['visiteur_session']['login']);
+	$id_auteur = sql_getfetsel('id_auteur', 'spip_auteurs', 'login=' . sql_quote($login));
+	if ($GLOBALS['visiteur_session']['id_auteur'] != $id_auteur)
 			auth_deloger();
-		else
+	else
 			redirige_url_ecrire();
-	}
 }
 
 // http://doc.spip.org/@import_queldir
