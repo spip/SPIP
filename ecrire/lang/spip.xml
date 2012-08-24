@@ -86,6 +86,7 @@
 	<langue code="nb" />
 	<langue code="ne" />
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=nl">
+		<traducteur nom="gerbrand" lien="http://trad.spip.net/auteur/gerbrand" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
