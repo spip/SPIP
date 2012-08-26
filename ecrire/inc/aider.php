@@ -66,21 +66,23 @@ function inc_aider_dist($aide='', $skel='', $env=array()) {
 	return aider_icone(generer_url_ecrire("aide_index", $args));
 }
 
-function aider_icone($url)
+function aider_icone($url, $clic= '')
 {
 	global $spip_lang, $spip_lang_rtl;
 
-	$t = _T('titre_image_aide');
-
+	if (!$clic) {
+		$t = _T('titre_image_aide');
+		$clic = http_img_pack("aide-12".aide_lang_dir($spip_lang,$spip_lang_rtl).".png",
+			_T('info_image_aide'),
+		      " title=\"$t\" class='aide'");
+	}
 	return "\n&nbsp;<a class='aide'\nhref='"
 	.  $url
 	. "'\nonclick=\"javascript:window.open(this.href,"
 	. "'spip_aide', "
 	. "'scrollbars=yes, resizable=yes, width=740, height=580'); "
 	. "return false;\">"
-	. http_img_pack("aide-12".aide_lang_dir($spip_lang,$spip_lang_rtl).".png",
-			_T('info_image_aide'),
-			" title=\"$t\" class='aide'")
+	. $clic
 	. "</a>";
 }
 
