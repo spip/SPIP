@@ -54,6 +54,7 @@
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="RealET" lien="http://trad.spip.net/auteur/realet" />
 		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
+		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 	</langue>
 	<langue code="gl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=gl">
 		<traducteur nom="Antón Méixome" lien="http://trad.spip.net/auteur/anton-meixome" />
