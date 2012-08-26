@@ -47,10 +47,10 @@
 	<langue code="fon" />
 	<langue code="fr" />
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/public?lang_cible=fr_tu">
+		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 		<traducteur nom="RealET" lien="http://trad.spip.net/auteur/realet" />
 		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 	</langue>
-	<langue code="ft_tu" />
 	<langue code="gl" />
 	<langue code="hac" url="http://trad.spip.net/tradlang_module/public?lang_cible=hac">
 		<traducteur nom="akomarani" lien="http://trad.spip.net/auteur/akomarani" />
