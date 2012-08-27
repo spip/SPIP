@@ -746,7 +746,7 @@ Le traduzioni sono associate all\'originale,
 	'plugin_info_credit' => 'Crediti',
 	'plugin_info_erreur_xml' => 'La dichiarazione del plugin è sbagliata',
 	'plugin_info_install_ok' => 'Installazione completata con successo',
-	'plugin_info_necessite' => 'Richiesto :',
+	'plugin_info_necessite' => 'Richiesto :', # MODIF
 	'plugin_info_non_compatible_spip' => 'Questo plugin è incompatibile con questa versione di SPIP',
 	'plugin_info_plugins_dist_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Questi non possono essere disabilitati.',

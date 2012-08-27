@@ -728,7 +728,7 @@ amb un color que indica el seu estat:',
 	'plugin_info_credit' => 'Crèdits',
 	'plugin_info_erreur_xml' => 'La declaració d\'aquest connector és incorrecta',
 	'plugin_info_install_ok' => 'Instal·lació correcta',
-	'plugin_info_necessite' => 'Necessita:',
+	'plugin_info_necessite' => 'Necessita:', # MODIF
 	'plugin_info_non_compatible_spip' => 'Aquest connector no és compatible amb aquesta versió d\'SPIP',
 	'plugin_info_plugins_dist_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @plugins_dist@.', # MODIF
 	'plugin_info_plugins_dist_2' => 'No es poden desactivar.', # MODIF

@@ -722,7 +722,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'plugin_info_credit' => 'Créditos',
 	'plugin_info_erreur_xml' => 'A declaração deste plugin está incorreta',
 	'plugin_info_install_ok' => 'Instalação bem sucedida',
-	'plugin_info_necessite' => 'Precisa de:',
+	'plugin_info_necessite' => 'Precisa de:', # MODIF
 	'plugin_info_non_compatible_spip' => 'Este plugin não é compatível com esta versão do SPIP',
 	'plugin_info_plugins_dist_1' => 'Os plugins abaixo são carregados e ativados no diretório @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Eles não são desativáveis.',

@@ -738,7 +738,7 @@ een kleur geeft hun status aan :',
 	'plugin_info_credit' => 'Credits',
 	'plugin_info_erreur_xml' => 'De verklaring van deze plugin is onjuist',
 	'plugin_info_install_ok' => 'Succesvolle installatie',
-	'plugin_info_necessite' => 'Nodig hebben :',
+	'plugin_info_necessite' => 'Nodig hebben :', # MODIF
 	'plugin_info_non_compatible_spip' => 'Deze plugin is niet compatibel met deze versie van SPIP',
 	'plugin_info_plugins_dist_1' => 'De onderstaande plugins zijn geladen en geactiveerd in de directory @plugins_dist@.', # extensies zijn speciaale plugins geleeverd met spip-core om een gebruikbare SPIP pakket te bouwen
 	'plugin_info_plugins_dist_2' => 'Ze zijn niet te deactiveren.',
