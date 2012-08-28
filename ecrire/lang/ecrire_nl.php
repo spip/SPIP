@@ -839,17 +839,17 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
   kan je een automatisch herstel proberen.',
 	'texte_creer_rubrique' => 'Alvorens artikelen te kunnen schrijven, <br/> moet u een rubriek creëren.',
 	'texte_date_creation_article' => 'DATUM VAN AANMAKEN VAN HET ARTIKEL:',
-	'texte_date_creation_objet' => 'Scheppingsdatum :', # on ajoute le &quot;:&quot;
+	'texte_date_creation_objet' => 'Aanmaakdatum :', # on ajoute le &quot;:&quot;
 	'texte_date_publication_anterieure' => 'Datum van eerdere redactie :',
 	'texte_date_publication_anterieure_nonaffichee' => 'Verberg de datum van eerdere redactie.',
 	'texte_date_publication_article' => 'DATUM VAN ONLINE PUBLICATIE :',
-	'texte_date_publication_objet' => 'Datum van het online zetten :',
+	'texte_date_publication_objet' => 'Datum van online publicatie :',
 	'texte_descriptif_petition' => 'Beschrijving van de petitie.',
 	'texte_descriptif_rapide' => 'Korte beschrijving.',
 	'texte_effacer_base' => 'Verwijder de SPIP databank',
 	'texte_effacer_donnees_indexation' => 'Verwijder de geïndexeerde gegevens',
-	'texte_effacer_statistiques' => 'De statistieken uitwissen',
-	'texte_en_cours_validation' => 'De inhoud hieronder wachten op validatie.',
+	'texte_effacer_statistiques' => 'De statistieken wissen',
+	'texte_en_cours_validation' => 'De inhouden hieronder wachten op goedkeuring.',
 	'texte_enrichir_mise_a_jour' => 'De opmaak van een tekst kan gebeuren met behulp van de zogeheten «typografische snelkoppelingen».',
 	'texte_fichier_authent' => 'SPIP moet er dan speciale bestanden  <tt>.htpasswd</tt>
   en <tt>.htpasswd-admin</tt> in de directory @dossier@ ?</b><p>
