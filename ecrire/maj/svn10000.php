@@ -248,5 +248,7 @@ $GLOBALS['maj'][15828] = array(array('sql_alter',"TABLE spip_forum CHANGE `ip` `
 // Type de fichiers : epub r18946 renumerote
 $GLOBALS['maj'][15829] = array(array('upgrade_types_documents'));
 
+// Type de fichiers : voir r19856 (version hors tronc: numerotation derogatoire)
+$GLOBALS['maj'][15830] = array(array('upgrade_types_documents'));
 
 ?>
