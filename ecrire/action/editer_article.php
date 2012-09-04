@@ -239,7 +239,8 @@ function article_instituer($id_article, $c, $calcul_rub=true) {
 
 	// Verifier que la rubrique demandee existe et est differente
 	// de la rubrique actuelle
-	if ($id_parent = $c['id_parent']
+	if (isset($c['id_parent'])
+	AND $id_parent = $c['id_parent']
 	AND $id_parent != $id_rubrique
 	AND (sql_fetsel('1', "spip_rubriques", "id_rubrique=$id_parent"))) {
 		$champs['id_rubrique'] = $id_parent;
