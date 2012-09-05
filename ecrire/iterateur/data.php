@@ -384,6 +384,8 @@ class IterateurDATA implements Iterator {
 		foreach($this->command['orderby'] as $tri) {
 			// virer le / initial pour les criteres de la forme {par /xx}
 			if (preg_match(',^\.?([/\w]+)( DESC)?$,iS', ltrim($tri, '/'), $r)) {
+				$r = array_pad($r, 3, null);
+
 				// tri par cle
 				if ($r[1] == 'cle'){
 					if (isset($r2) and $r[2])
