@@ -227,7 +227,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Процедура описана в инструкции по установке.</p>
 
 ',
-	'double_occurrence' => 'Тэг @balise@ встречается дважды',
+	'double_occurrence' => 'Тег @balise@ встречается дважды',
 
 	// E
 	'en_cours' => 'выполняется',
@@ -369,8 +369,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_copyright_doc' => 'Больше информации о SPIP <a href="@spipnet@">@spipnet_affiche@</a>.',
 	'info_copyright_gpl' => 'под лицензией GPL.',
 	'info_cours_edition' => 'В работе',
-	'info_creer_repertoire' => 'Пожалуйста создайте файл или директорию с названием:',
-	'info_creer_repertoire_2' => 'в поддиректории <b>@repertoire@</b>, потом ',
+	'info_creer_repertoire' => 'Создайте файл или папку с названием:',
+	'info_creer_repertoire_2' => 'в подразделе <b>@repertoire@</b>, затем ',
 	'info_creer_vignette' => 'автоматическое создание миниатюр изображений',
 	'info_creerdansrubrique_non_autorise' => 'У вас недостаточно прав чтобы создавать материалы в этом разделе',
 	'info_deplier' => 'Откройте',
@@ -403,7 +403,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_installer_ftp' => 'Вы можете переписать файлы по FTP в папку @upload@, что бы использовать их в дальнейшей работе. ',
 	'info_installer_images' => 'Вы можете добавлять изображения в форматах JPEG, GIF или PNG.',
 	'info_installer_images_dossier' => 'Добавьте изображения в папку  @upload@ для использования их в этом меню.',
-	'info_interface_complete' => 'Полный интерфейс',
+	'info_interface_complete' => 'полный интерфейс',
 	'info_interface_simple' => 'Упрощенный интерфейс',
 	'info_joindre_document_article' => 'Вы можете добавить к вашей статье документы ',
 	'info_joindre_document_rubrique' => 'Вы можете добавить документы к этому разделу',
@@ -530,9 +530,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_preferez_refuser' => '<b>Если Вы хотите отказываться от cookies </b>, есть другой метод входа на сайт (менее безопасный):',
 	'login_recharger' => 'перегрузить страницу',
 	'login_rester_identifie' => 'Не спрашивать в течение нескольких дней',
-	'login_retour_public' => 'Вернуться к основному сайту',
-	'login_retour_site' => 'Вернуться к основному сайту',
-	'login_retoursitepublic' => 'вернуться к основному сайту',
+	'login_retour_public' => 'На главную страницу сайта',
+	'login_retour_site' => 'На главную страницу сайта',
+	'login_retoursitepublic' => 'на главную страницу сайта',
 	'login_sans_cookiie' => 'Идентификация без cookie',
 	'login_securise' => 'Безопасный вход',
 	'login_sinscrire' => 'регистрация',
