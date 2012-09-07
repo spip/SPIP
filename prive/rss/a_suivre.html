@@ -13,7 +13,7 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 $rss['[(#DATE|date_ical)]'] .= '
 	<item>
 		<title><:info_article_propose|texte_backendq:> : [(#TITRE|texte_backendq)]</title>
-		<link>[(#URL_ECRIRE{articles, id_article=#ID_ARTICLE}|url_absolue|texte_backendq)]</link>
+		<link>[(#URL_ECRIRE{article, id_article=#ID_ARTICLE}|url_absolue|texte_backendq)]</link>
 		<guid isPermaLink="true">[(#URL_ECRIRE{articles, id_article=#ID_ARTICLE}|url_absolue|texte_backendq)]</guid>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
@@ -26,7 +26,7 @@ $rss['[(#DATE|date_ical)]'] .= '
 $rss['[(#DATE|date_ical)]'] .= '
 	<item>
 		<title><:breves:titre_breve_proposee|texte_backendq:> : [(#TITRE|texte_backendq)]</title>
-		<link>[(#URL_ECRIRE{breves_voir, id_breve=#ID_BREVE}|url_absolue|texte_backendq)]</link>
+		<link>[(#URL_ECRIRE{breve, id_breve=#ID_BREVE}|url_absolue|texte_backendq)]</link>
 		<guid isPermaLink="true">[(#URL_ECRIRE{breves_voir, id_breve=#ID_BREVE}|url_absolue|texte_backendq)]</guid>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
@@ -38,7 +38,7 @@ $rss['[(#DATE|date_ical)]'] .= '
 $rss['[(#DATE|date_ical)]'] .= '
 	<item>
 		<title><:sites:info_site_attente|texte_backendq:> : [(#TITRE|texte_backendq)]</title>
-		<link>[(#URL_ECRIRE{sites, id_syndic=#ID_SYNDIC}|url_absolue|texte_backendq)]</link>
+		<link>[(#URL_ECRIRE{site, id_syndic=#ID_SYNDIC}|url_absolue|texte_backendq)]</link>
 		<guid isPermaLink="true">[(#URL_ECRIRE{sites, id_syndic=#ID_SYNDIC}|url_absolue|texte_backendq)]</guid>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
