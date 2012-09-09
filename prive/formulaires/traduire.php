@@ -131,8 +131,9 @@ function formulaires_traduire_traiter_dist($objet, $id_objet, $retour='', $tradu
 		}
 	}
 	$res['editable'] = true;
-	if (!$res['message_erreur'])
+	if (!isset($res['message_erreur']))
 		set_request('annuler','annuler'); // provoquer la fermeture du forumlaire
+
 	return $res;
 }
 
