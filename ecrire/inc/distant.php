@@ -35,9 +35,10 @@ define('_REGEXP_COPIE_LOCALE', ',' .
 function copie_locale($source, $mode='auto') {
 
 	// si c'est la protection de soi-meme, retourner le path
-	if ($mode !== 'force' AND preg_match(_REGEXP_COPIE_LOCALE, $source, $local))
-		return substr(_DIR_IMG,strlen(_DIR_RACINE)) . urldecode($local[1]);
-
+	if ($mode !== 'force' AND preg_match(_REGEXP_COPIE_LOCALE, $source, $local)) {
+		$source = substr(_DIR_IMG,strlen(_DIR_RACINE)) . urldecode($local[1]);
+		return @file_exists($source) ? $source : false;
+	}
 	$local = fichier_copie_locale($source);
 	$localrac = _DIR_RACINE.$local;
 	$t = ($mode=='force') ? false  : @file_exists($localrac);
