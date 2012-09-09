@@ -11,9 +11,9 @@
 \***************************************************************************/
 
 /**
- * Fonctions de modifications des rubriques
- *
- * @package SPIP\Core\Rubriques\Modifications
+ * Gestion de l'action editer_rubrique et de l'API d'édition des rubriques
+ * 
+ * @package SPIP\Core\Rubriques\Edition
  */
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

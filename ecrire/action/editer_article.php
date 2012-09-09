@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action editer_article et de l'API d'édition d'un article
+ * 
+ * @package SPIP\Core\Articles\Edition
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**

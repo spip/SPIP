@@ -10,21 +10,31 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion du formulaire de traduction
+ *
+ * @package SPIP\Core\Formulaires
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
 
 /**
- * Charger les donnes de #FORMULAIRE_TRADUIRE
+ * Charger les données de #FORMULAIRE_TRADUIRE
  *
  * @param string $objet
+ *     Type d'objet
  * @param int $id_objet
+ *     Identifiant de l'objet
  * @param string $retour
- *   url de retour
+ *     URL de retour
  * @param bool $traduire
- *   permet de desactiver la gestion de traduction sur un objet ayant id_trad
+ *     Permet de désactiver la gestion de traduction sur un objet ayant id_trad
  * @return array|bool
+ *     False si l'identifiant n'est pas numérique ou si l'objet n'a pas de langue
+ *     Contexte à transmettre au squelette du formulaire sinon
  */
 function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $traduire = true){
 	if (!intval($id_objet))
@@ -42,7 +52,7 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 	if (isset($valeurs['id_rubrique']))
 		$id_parent = $valeurs['id_rubrique'];
 	if (isset($valeurs['id_parent']))
-		 $id_parent = $valeurs['id_parent'];	
+		 $id_parent = $valeurs['id_parent'];
 	if ($id_parent)
 		$langue_parent = sql_getfetsel("lang", "spip_rubriques", "id_rubrique=".intval($id_parent));
 	
@@ -76,13 +86,18 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 }
 
 /**
- * Verifier les saisies des valeurs du #FORMULAIRE_TRADUIRE
+ * Vérifier les saisies des valeurs du #FORMULAIRE_TRADUIRE
  *
  * @param string $objet
+ *     Type d'objet
  * @param int $id_objet
+ *     Identifiant de l'objet
  * @param string $retour
+ *     URL de retour
  * @param bool $traduire
+ *     Permet de désactiver la gestion de traduction sur un objet ayant id_trad
  * @return array
+ *     Erreurs des saisies
  */
 function formulaires_traduire_verifier_dist($objet, $id_objet, $retour='', $traduire = true){
 	$erreurs = formulaires_editer_objet_verifier($objet,$id_objet,array('changer_lang'));
@@ -104,10 +119,17 @@ function formulaires_traduire_verifier_dist($objet, $id_objet, $retour='', $trad
 
 /**
  * Enregistrer en base les saisies du #FORMULAIRE_TRADUIRE
- * @param  $objet
- * @param  $id_objet
+ *
+ * @param string $objet
+ *     Type d'objet
+ * @param int $id_objet
+ *     Identifiant de l'objet
  * @param string $retour
+ *     URL de retour
+ * @param bool $traduire
+ *     Permet de désactiver la gestion de traduction sur un objet ayant id_trad
  * @return array
+ *     Retour des traitements
  */
 function formulaires_traduire_traiter_dist($objet, $id_objet, $retour='', $traduire = true){
 	$res = array();
