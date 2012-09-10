@@ -1,12 +1,13 @@
 [<h1 class="grostitre"><:info_resultat_recherche:> &laquo;(#ENV{recherche})&raquo;</h1>]
 [(#ENV{recherche}|non)<h1 class="grostitre"><:info_rechercher:></h1>]
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
-
-<BOUCLE_tables(POUR){tableau #REM|liste_des_champs}{cle!=breve}{cle!=forum}{cle!=syndic_article}{si #ENV{recherche}}>[
+<BOUCLE_tables(POUR){tableau #REM|liste_des_champs}
+	{cle!=breve}{cle!=forum}{cle!=syndic_article}
+	{si #ENV{recherche}}>[
 	(#SET{table,#CLE|table_objet})][
 	(#SET{statut,[(#CLE|=={article}|?{[(#SESSION{statut}|statuts_articles_visibles)],''})]})
-	][(#GET{table}|trouver_fond{prive/objets/liste/}|?{#INCLURE{fond=prive/objets/liste/#GET{table},recherche=#ENV{recherche},statut=#GET{statut},par=points}})
+	][(#GET{table}|trouver_fond{prive/objets/liste/}
+		|?{#INCLURE{fond=prive/objets/liste/#GET{table},env,recherche=#ENV{recherche},statut=#GET{statut},par=points}})
 ]</BOUCLE_tables>
 [(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}}|wrap{'<h3>'})]
 <//B_tables>
