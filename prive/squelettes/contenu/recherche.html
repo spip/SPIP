@@ -1,6 +1,8 @@
 [<h1 class="grostitre"><:info_resultat_recherche:> &laquo;(#ENV{recherche})&raquo;</h1>]
 [(#ENV{recherche}|non)<h1 class="grostitre"><:info_rechercher:></h1>]
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
+
 <BOUCLE_tables(POUR){tableau #REM|liste_des_champs}
 	{cle!=breve}{cle!=forum}{cle!=syndic_article}
 	{si #ENV{recherche}}>[
