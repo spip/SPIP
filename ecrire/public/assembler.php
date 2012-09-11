@@ -44,6 +44,7 @@ function assembler($fond, $connect='') {
 	if (!$chemin_cache || !$lastmodified) $lastmodified = time();
 
 	$headers_only = ($_SERVER['REQUEST_METHOD'] == 'HEAD');
+	$calculer_page = true;
 
 	// Pour les pages non-dynamiques (indiquees par #CACHE{duree,cache-client})
 	// une perennite valide a meme reponse qu'une requete HEAD (par defaut les
@@ -62,13 +63,13 @@ function assembler($fond, $connect='') {
 		if (trim($since) == gmdate("D, d M Y H:i:s", $lastmodified)) {
 			$page['status'] = 304;
 			$headers_only = true;
+			$calculer_page = false;
 		}
 	}
 
 	// Si requete HEAD ou Last-modified compatible, ignorer le texte
 	// et pas de content-type (pour contrer le bouton admin de inc-public)
-	if ($headers_only) {
-		$page['entetes']["Connection"] = "close";
+	if (!$calculer_page) {
 		$page['texte'] = "";
 	} else {
 		// si la page est prise dans le cache
@@ -142,6 +143,10 @@ function assembler($fond, $connect='') {
 	AND !isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
 	AND !isset($page['entetes']["Last-Modified"]))
 		$page['entetes']["Last-Modified"]=gmdate("D, d M Y H:i:s", $lastmodified)." GMT";
+
+	// fermer la connexion apres les headers si requete HEAD
+	if ($headers_only)
+		$page['entetes']["Connection"] = "close";
 
 	return $page;
 }
