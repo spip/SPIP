@@ -13,8 +13,17 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-// La fonction de notification de base, qui dispatche le travail
-// http://doc.spip.org/@inc_notifications_dist
+/**
+ * La fonction de notification de base, qui dispatche le travail
+ * http://doc.spip.org/@inc_notifications_dist
+ *
+ * @param string $quoi
+ *   evenement de notification
+ * @param int $id
+ *   id de l'objet en relation avec l'evenement
+ * @param array $options
+ *   options de notification, interpretees en fonction de la notification
+ */
 function inc_notifications_dist($quoi, $id=0, $options=array()) {
 
 	// charger les fichiers qui veulent ajouter des definitions
@@ -56,6 +65,8 @@ function notifications_nettoyer_emails(&$emails, $exclure = array()){
  * @param array/string $emails
  * @param string $texte
  * @param string $sujet
+ * @param string $from
+ * @param string $headers
  */
 function notifications_envoyer_mails($emails, $texte, $sujet="", $from = "", $headers = ""){
 	// rien a faire si pas de texte !
@@ -68,7 +79,40 @@ function notifications_envoyer_mails($emails, $texte, $sujet="", $from = "", $he
 
 	notifications_nettoyer_emails($emails);
 
+	// tester si le mail est deja en html
+	if (!strlen($sujet)
+	  AND strpos($texte,"<")!==false // eviter les tests suivants si possible
+		AND $ttrim = trim($texte)
+		AND substr($ttrim,0,1)=="<"
+	  AND substr($ttrim,-1,1)==">"
+	  AND stripos($ttrim,"</html>")!==false){
+
+		// dans ce cas on ruse un peu : extraire le sujet du title
+		if (preg_match(",<title>(.*)</title>,Uims",$texte,$m))
+			$sujet = $m[1];
+		else {
+			// fallback, on prend le body si on le trouve
+			if (preg_match(",<body[^>]*>(.*)</body>,Uims",$texte,$m))
+				$ttrim = $m[1];
+
+			// et on extrait la premiere ligne de vrai texte...
+			// nettoyer le html et les retours chariots
+			$ttrim = textebrut($ttrim);
+			$ttrim = str_replace("\r\n", "\r", $ttrim);
+			$ttrim = str_replace("\r", "\n", $ttrim);
+			// decouper
+			$ttrim = explode("\n",trim($ttrim));
+			// extraire la premiere ligne de texte brut
+			$sujet = array_shift($ttrim);
+		}
+
+		// si besoin on ajoute le content-type dans les headers
+		if (stripos($headers,"Content-Type")===false)
+			$headers .= "Content-Type: text/html\n";
+	}
+
 	// si le sujet est vide, extraire la premiere ligne du corps
+	// du mail qui est donc du texte
 	if (!strlen($sujet)){
 		// nettoyer un peu les retours chariots
 		$texte = str_replace("\r\n", "\r", $texte);
@@ -101,6 +145,7 @@ function notifications_envoyer_mails($emails, $texte, $sujet="", $from = "", $he
  * @param int $id_objet
  * @param string $type_objet
  * @param string $modele
+ * @return string
  */
 function email_notification_objet($id_objet, $type_objet, $modele) {
 	$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
@@ -116,6 +161,7 @@ function email_notification_objet($id_objet, $type_objet, $modele) {
  *
  * @param int $id_article
  * @param string $modele
+ * @return string
  */
 function email_notification_article($id_article, $modele) {
 	$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
