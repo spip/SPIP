@@ -10,9 +10,28 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions d'affichage pour l'espace privé (hors squelettes)
+ *
+ * @package SPIP\Core\Affichage
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@echo_log
+/**
+ * Affiche un code html (echo) et log l'affichage car cet echo est anormal !
+ * 
+ * Signale une fonction qui devrait retourner un contenu mais effectue
+ * un echo à la place pour compatibilité ascendante
+ *
+ * @deprecated
+ *     Utiliser des squelettes pour l'affichage !
+ * 
+ * @param string $f
+ *     Nom de la fonction
+ * @param string $ret
+ *     Code HTML à afficher
+ * @return void
+**/
 function echo_log($f, $ret) {
 	spip_log("Page " . self() . " function $f: echo ".substr($ret,0,50)."...",'echo');
 	echo
@@ -20,11 +39,17 @@ function echo_log($f, $ret) {
 		. $ret;
 }
 
-// Cadre centre (haut de page)
-// http://doc.spip.org/@debut_grand_cadre
-function debut_grand_cadre(){	return "\n<div class='table_page'>\n";}
-// http://doc.spip.org/@fin_grand_cadre
-function fin_grand_cadre(){	return "\n</div>";}
+/**
+ * Retourne le code HTML d'un début de cadre pour le centre de page (haut de page)
+ * @return string Code HTML
+ */
+function debut_grand_cadre(){ return "\n<div class='table_page'>\n";}
+
+/**
+ * Retourne le code HTML d'une fin de cadre pour le centre de page (haut de page)
+ * @return string Code HTML
+ */
+function fin_grand_cadre(){ return "\n</div>";}
 
 // Debut de la colonne de gauche
 // div navigation fermee par creer_colonne_droite qui ouvre
@@ -32,18 +57,34 @@ function fin_grand_cadre(){	return "\n</div>";}
 // div contenu lui-meme ferme par fin_gauche() ainsi que
 // div conteneur
 // http://doc.spip.org/@debut_gauche
-function debut_gauche() {	return "<div id='conteneur' class=''>\n<div id='navigation'>\n";}
-// http://doc.spip.org/@fin_gauche
+/**
+ * Retourne le code HTML du début de la colonne gauche
+ * @return string Code HTML
+ */
+function debut_gauche() {	return "<div id='conteneur' class=''>\n<div id='navigation' class='lat' role='contentinfo'>\n";}
+
+/**
+ * Retourne le code HTML de la fin de la colonne
+ * @return string Code HTML
+ */
 function fin_gauche(){return "</div></div><br class='nettoyeur' />";}
-// http://doc.spip.org/@creer_colonne_droite
+
+/**
+ * Retourne le code HTML du changement de colonne (passer de la gauche à la droite)
+ * @return string Code HTML
+ */
 function creer_colonne_droite(){
 	static $deja_colonne_droite;
 	if ($GLOBALS['spip_ecran']!='large' OR $deja_colonne_droite) return '';
 	$deja_colonne_droite = true;
-	return "\n</div><div id='extra'>";
+	return "\n</div><div id='extra' class='lat' role='complementary'>";
 }
-// http://doc.spip.org/@debut_droite
-function debut_droite($rubrique="") {
+
+/**
+ * Retourne le code HTML de la colonne droite et du centre de page
+ * @return string Code HTML
+ */
+function debut_droite() {
 	return liste_objets_bloques(_request('exec'))
 	  . creer_colonne_droite()
 	  . "</div>"
