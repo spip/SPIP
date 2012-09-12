@@ -212,12 +212,12 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour=''){
  * @return Array
  */
 function formulaire_editer_logo_get_sources(){
-	if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
+	if (!$_FILES) $_FILES = isset($GLOBALS['HTTP_POST_FILES']) ? $GLOBALS['HTTP_POST_FILES'] : array();
 	if (!is_array($_FILES)) return array();
 	
 	$sources = array();
 	foreach(array('on','off') as $etat) {
-		if ($_FILES['logo_'.$etat]['error'] == 0) {
+		if (isset($_FILES['logo_'.$etat]) AND $_FILES['logo_'.$etat]['error'] == 0) {
 			$sources[$etat] = $_FILES['logo_'.$etat];
 		}
 	}
