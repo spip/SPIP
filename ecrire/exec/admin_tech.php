@@ -91,9 +91,11 @@ function exec_admin_tech_args($tables)
 	if ($form) {
 		if (preg_match('@^<select([^>]*)>(\s*<option[^>]*)>([^[<]+)(.*)$@s', $form, $r)) {
 			$form = "<select onchange='x=this.options[this.options.selectedIndex].firstChild.data.match(/\w+/); findObj_forcer(\"znom_sauvegarde\").value=x[0]; findObj_forcer(\"nom_sauvegarde\").value=x[0];'" . $r[1] . '>' . $r[2] . " selected='selected'>" . $r[3] . $r[4];
-			$file = trim($r[3]);
+			if ($GLOBALS['connect_id_rubrique'])
+				$file = trim($r[3]);
 		} elseif (preg_match('@^<input[^>]*>([^[<]+)@', $form, $r))
-			$file = trim($r[1]);
+			if ($GLOBALS['connect_id_rubrique'])
+				$file = trim($r[1]);
 
 		$res .= "\n<label for='id_parent'>" .
 			  _T('texte_admin_tech_04') .
