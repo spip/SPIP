@@ -1499,8 +1499,18 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 		return $att;
 }
 
-// modifier (ou inserer) un attribut html dans une balise
-// http://doc.spip.org/@inserer_attribut
+/**
+ * modifier (ou inserer) un attribut html dans une balise
+ *
+ * http://doc.spip.org/@inserer_attribut
+ *
+ * @param string $balise
+ * @param string $attribut
+ * @param string $val
+ * @param bool $proteger
+ * @param bool $vider
+ * @return string
+ */
 function inserer_attribut($balise, $attribut, $val, $proteger=true, $vider=false) {
 	// preparer l'attribut
 	// supprimer les &nbsp; etc mais pas les balises html
