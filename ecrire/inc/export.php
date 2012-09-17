@@ -21,13 +21,15 @@ function inc_export_dist($meta)
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$save = unserialize($GLOBALS['meta'][$meta]);
-		if ($dir = export_repertoire($meta, $save))
-			export_trace($save, $dir, $meta);
-		else {
-			list($gz, $archive, $rub) = $save;
-			return "end,$gz,$archive,$rub"; // c'est fini !
+		while (true) {
+			$save = unserialize($GLOBALS['meta'][$meta]);
+			if ($dir = export_repertoire($meta, $save))
+				export_trace($save, $dir, $meta);
+			else break;
 		}
+		list($gz, $archive, $rub) = $save;
+		// retour a exec_export_all qui renverra sur action_export_all
+		return "end,$gz,$archive,$rub";
 	}
 }
 
