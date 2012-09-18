@@ -146,12 +146,12 @@ a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
  */
 
 /* Listes SPIP */
-ul.spip,.formulaire_spip ul.spip { list-style: square; margin-bottom:#ENV{margin-bottom};}
-ul.spip ul { list-style: circle; }
-ol.spip { list-style: decimal; margin-bottom:#ENV{margin-bottom};}
+ul.spip,.formulaire_spip ul.spip, #conteneur ul.spip { list-style: square; margin-bottom:#ENV{margin-bottom};}
+ul.spip ul, #conteneur ul.spip ul { list-style: circle; }
+ol.spip, #conteneur ol.spip { list-style: decimal; margin-bottom:#ENV{margin-bottom};}
 
-ul.spip li, ol.spip li, .formulaire_spip ul.spip li {margin-#ENV{left}:#ENV{text-indent};}
-ul.spip li li, ol.spip li li, .formulaire_spip ul.spip li li {margin-#ENV{left}:[(#ENV{text-indent}|div{2})px];}
+ul.spip li, ol.spip li, #conteneur ul.spip li  {margin-#ENV{left}:#ENV{text-indent};}
+ul.spip li li, ol.spip li li, #conteneur ul.spip li li {margin-#ENV{left}:[(#ENV{text-indent}|div{2})px];}
 
 /* Citations, code et poesie */
 /*blockquote.spip { margin: 2em 0; padding-left: 1em; border-left: 0.30em solid; }
