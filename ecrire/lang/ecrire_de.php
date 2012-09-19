@@ -731,7 +731,7 @@ in einer Farbe, die den Status anzeigt :',
 	'plugin_info_credit' => 'Beteiligte',
 	'plugin_info_erreur_xml' => 'Die Deklaration dieses Plugins ist nicht korrekt.',
 	'plugin_info_install_ok' => 'Installation war erfolgreich.',
-	'plugin_info_necessite' => 'Erfordert:', # MODIF
+	'plugin_info_necessite' => 'Erfordert:',
 	'plugin_info_non_compatible_spip' => 'Dieses Plugin ist nicht mit SPIP kompatibel.',
 	'plugin_info_plugins_dist_1' => 'Diese Erweiterungen liegen im Verzeichnis @plugins_dist@ und werden dort aktiviert.',
 	'plugin_info_plugins_dist_2' => 'Man kann sie nicht deaktivieren.',
