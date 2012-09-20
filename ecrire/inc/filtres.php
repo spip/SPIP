@@ -3070,6 +3070,22 @@ function filtre_nettoyer_titre_email_dist($titre){
 	return nettoyer_titre_email($titre);
 }
 
+/**
+ * Afficher le sélecteur de rubrique
+ *
+ * Il permet de placer un objet dans la hiérarchie des rubriques de SPIP
+ *
+ * @param string $titre
+ * @param int $id_objet
+ * @param int $id_parent
+ * @param string $objet
+ * @param int $id_secteur
+ * @param bool $restreint
+ * @param bool $actionable
+ *   true : fournit le selecteur dans un form directement postable
+ * @param bool $retour_sans_cadre
+ * @return string
+ */
 function filtre_chercher_rubrique_dist($titre,$id_objet, $id_parent, $objet, $id_secteur, $restreint,$actionable = false, $retour_sans_cadre=false){
 	include_spip('inc/filtres_ecrire');
 	return chercher_rubrique($titre,$id_objet, $id_parent, $objet, $id_secteur, $restreint,$actionable, $retour_sans_cadre);
