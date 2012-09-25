@@ -25,8 +25,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // car rien ne garantit que le .htaccess soit identique. A approfondir
 
 // http://doc.spip.org/@generer_generer_url
-function generer_generer_url($type, $p)
-{
+function generer_generer_url($type, $p){
 	$_id = interprete_argument_balise(1,$p);
 
 	if (!$_id) {
@@ -79,6 +78,7 @@ function balise_URL__dist($p) {
 		$nom = strtolower($nom);
 		$code = generer_generer_url(substr($nom,4), $p);
 		$code = champ_sql($nom, $p, $code);
+		$p->code = $code;
 		if (!$p->etoile)
 			$p->code = "vider_url($code)";
 		$p->interdire_scripts = false;
