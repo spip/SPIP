@@ -25,11 +25,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // car rien ne garantit que le .htaccess soit identique. A approfondir
 
 // http://doc.spip.org/@generer_generer_url
-function generer_generer_url($type, $p)
-{
+function generer_generer_url($type, $p){
 	$_id = interprete_argument_balise(1,$p);
 
-	if (!$_id) $_id = champ_sql('id_' . $type, $p);
+	if (!$_id) {
+		$primary = id_table_objet($type);
+		$_id = champ_sql($primary, $p);
+	}
 
 	return generer_generer_url_arg($type, $p, $_id);
 }
@@ -76,6 +78,7 @@ function balise_URL__dist($p) {
 		$nom = strtolower($nom);
 		$code = generer_generer_url(substr($nom,4), $p);
 		$code = champ_sql($nom, $p, $code);
+		$p->code = $code;
 		if (!$p->etoile)
 			$p->code = "vider_url($code)";
 		$p->interdire_scripts = false;
@@ -91,7 +94,9 @@ function balise_URL_ARTICLE_dist($p) {
 		$code = champ_sql('url', $p);
 	} else  $code = generer_generer_url('article', $p);
 
-	$p->code = "vider_url($code)";
+	$p->code = $code;
+	if (!$p->etoile)
+		$p->code = "vider_url($code)";
 	$p->interdire_scripts = false;
 	return $p;
 }
