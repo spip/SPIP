@@ -2,7 +2,7 @@
 	[(#ENV{_publiable}|non|et{#ENV{statut}|=={prepa}|oui})
 	<p class="small"><:texte_proposer_publication:></p>
 	]
-	<div class="formulaire_spip formulaire_editer formulaire_instituer formulaire_#FORM formulaire_#FORM-#ENV{_objet} formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}">
+	<div class="formulaire_spip formulaire_editer formulaire_instituer[ formulaire_#FORM formulaire_#FORM-(#ENV{_objet})][ formulaire_#FORM-#ENV{_objet}-(#ENV{_id_objet})]">
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 		[(#ENV{editable})
