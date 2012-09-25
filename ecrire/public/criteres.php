@@ -677,7 +677,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens = ''){
 						} else	 $order = "'".$t.'.'.$r[2]."'";
 					} else {
 						$desc = $boucle->show;
-						if ($desc['field'][$par])
+						if (isset($desc['field'][$par]))
 							$par = $boucle->id_table.".".$par;
 						// sinon tant pis, ca doit etre un champ synthetise (cf points)
 						$order = "'$par'";
