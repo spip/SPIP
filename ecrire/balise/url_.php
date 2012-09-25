@@ -29,7 +29,10 @@ function generer_generer_url($type, $p)
 {
 	$_id = interprete_argument_balise(1,$p);
 
-	if (!$_id) $_id = champ_sql('id_' . $type, $p);
+	if (!$_id) {
+		$primary = id_table_objet($type);
+		$_id = champ_sql($primary, $p);
+	}
 
 	return generer_generer_url_arg($type, $p, $_id);
 }
