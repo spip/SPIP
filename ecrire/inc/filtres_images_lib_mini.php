@@ -979,7 +979,7 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 		// de l'image, de facon a tromper le cache du navigateur
 		// quand on fait supprimer/reuploader un logo
 		// (pas de filemtime si SAFE MODE)
-		$date = test_espace_prive() ? ('?date='.$date) : '';
+		$date = test_espace_prive() ? ('?'.$date) : '';
 		return _image_ecrire_tag($image,array('src'=>"$logo$date",'width'=>$destWidth,'height'=>$destHeight));
 	}
 	else
