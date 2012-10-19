@@ -311,7 +311,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_conflit_edition_votre_version' => 'La tua versione:',
 	'info_connexion_base' => 'Prova di connessione al database',
 	'info_connexion_base_donnee' => 'Connessione al proprio database',
-	'info_connexion_ldap_ok' => 'La connessione LDAP è riuscita.</b><p> È possibile passare alla fase successiva.</p>',
+	'info_connexion_ldap_ok' => 'La connessione LDAP è riuscita.</b><p> È possibile passare alla fase successiva.</p>', # MODIF
 	'info_connexion_mysql' => 'La connessione a SQL',
 	'info_connexion_ok' => 'La connessione è riuscita.',
 	'info_contact' => 'Contatti',

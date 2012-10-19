@@ -303,7 +303,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'info_conflit_edition_votre_version' => 'La vostra versió:',
 	'info_connexion_base' => 'Intent de connexió a la base de dades',
 	'info_connexion_base_donnee' => 'Connexió amb la vostra base de dades',
-	'info_connexion_ldap_ok' => 'La connexió LDAP ha reeixit.</b><p> Podeu passar a la següent etapa.</p>',
+	'info_connexion_ldap_ok' => 'La connexió LDAP ha reeixit.</b><p> Podeu passar a la següent etapa.</p>', # MODIF
 	'info_connexion_mysql' => 'La vostra connexió SQL',
 	'info_connexion_ok' => 'La connexió ha reexit.',
 	'info_contact' => 'Contacte',

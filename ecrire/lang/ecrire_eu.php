@@ -307,7 +307,7 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'info_conflit_edition_votre_version' => 'Zure bersioa :',
 	'info_connexion_base' => 'Bigarren etapa: basera konektatzeko saialdia ',
 	'info_connexion_base_donnee' => 'Zure datu-basearekin konexioa',
-	'info_connexion_ldap_ok' => 'LDAP konexioak funtzionatu egin du.<p>Hurrengo urratsera pasa zaitezke.</p>',
+	'info_connexion_ldap_ok' => 'LDAP konexioak funtzionatu egin du.<p>Hurrengo urratsera pasa zaitezke.</p>', # MODIF
 	'info_connexion_mysql' => 'Lehenengo etapa: Zure SQL konexioa',
 	'info_connexion_ok' => 'Konexioa ondo dabil',
 	'info_contact' => 'Kontaktua',

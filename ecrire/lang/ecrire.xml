@@ -32,6 +32,7 @@
 	</langue>
 	<langue code="en_hx" />
 	<langue code="eo" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=eo">
+		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
 		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
 		<traducteur nom="frederik" lien="http://trad.spip.net/auteur/frederik" />
 	</langue>
