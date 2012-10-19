@@ -515,7 +515,7 @@ sera ignorée) :
 	'login_espace_prive' => 'privata spaco',
 	'login_identifiant_inconnu' => 'La salutnomo « @login@ » estas nekonata.',
 	'login_login' => 'Salutnomo:',
-	'login_login2' => 'Salutnomo (ensalutilo por konektiĝi al la retejo) :', # MODIF
+	'login_login2' => 'Salutnomo aŭ retpoŝtadreso :',
 	'login_login_pass_incorrect' => '(Salutnomo aŭ pasvorto ne valida.)',
 	'login_motpasseoublie' => 'ĉu pasvorto forgesita ?',
 	'login_non_securise' => 'Atentu, tiu formularo ne estas sekurigita;.
