@@ -1603,11 +1603,11 @@ function calculer_vieux_in($params){
 // http://doc.spip.org/@calculer_critere_infixe_date
 function calculer_critere_infixe_date($idb, &$boucles, $col){
 	if (!preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,", $col, $regs)) return '';
-
 	$boucle = $boucles[$idb];
 	$table = $boucle->show;
-	if (!$table['date']) return '';
-	$pred = $date_orig = $table['date'];
+	
+	if (!$table['date'] && !isset($GLOBALS['table_date'][$table['id_table']])) return '';
+	$pred = $date_orig = isset($GLOBALS['table_date'][$table['id_table']])? $GLOBALS['table_date'][$table['id_table']] : $table['date'];
 	$col = $regs[1];
 	if (isset($regs[3]) AND $suite = $regs[3]){
 		# Recherche de l'existence du champ date_xxxx,
