@@ -159,7 +159,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'entree_url_2' => 'Adreça (URL) del lloc',
 	'erreur_connect_deja_existant' => 'Ja existeix un servidor amb aquest nom',
 	'erreur_nom_connect_incorrect' => 'Aquest nom de servidor no està autoritzat',
-	'erreur_plugin_desinstalation_echouee' => 'La desinstal·lació del connector ha fracassat. No obstant el podeu desactivar. ',
+	'erreur_plugin_desinstalation_echouee' => 'La desinstal·lació del connector ha fracassat. No obstant el podeu desactivar. ', # MODIF
 	'erreur_plugin_fichier_absent' => 'Fitxer absent',
 	'erreur_plugin_fichier_def_absent' => 'Fitxer de definició absent',
 	'erreur_plugin_nom_fonction_interdit' => 'Nom de funció prohibit',

@@ -161,7 +161,7 @@ Ez balidatu inportazio galdera hau.
 	'entree_url_2' => 'Gunearen helbidea (URL)',
 	'erreur_connect_deja_existant' => 'Izen bereko zerbitzari bat badago jadanik',
 	'erreur_nom_connect_incorrect' => 'Zerbitzari izen hori debekatua da',
-	'erreur_plugin_desinstalation_echouee' => 'Pluginaren desinstalazioak huts egin du. Halere, desaktibatzen ahal duzu.',
+	'erreur_plugin_desinstalation_echouee' => 'Pluginaren desinstalazioak huts egin du. Halere, desaktibatzen ahal duzu.', # MODIF
 	'erreur_plugin_fichier_absent' => 'Fitxategia ez dago',
 	'erreur_plugin_fichier_def_absent' => 'Definizio fitxategia ez dago',
 	'erreur_plugin_nom_fonction_interdit' => 'Funtzio izena debekatuta',

@@ -159,7 +159,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 	'entree_url_2' => 'Endereço (URL) do site',
 	'erreur_connect_deja_existant' => 'Já existe um servidor com esse nome',
 	'erreur_nom_connect_incorrect' => 'Este nome de servidor não é autorizado',
-	'erreur_plugin_desinstalation_echouee' => 'A desinstalação do plugin falhou. No entanto, você pode desativá-lo.',
+	'erreur_plugin_desinstalation_echouee' => 'A desinstalação do plugin falhou. No entanto, você pode desativá-lo.', # MODIF
 	'erreur_plugin_fichier_absent' => 'Arquivo ausente',
 	'erreur_plugin_fichier_def_absent' => 'Arquivo de definição ausente',
 	'erreur_plugin_nom_fonction_interdit' => 'Nome de função não permitido',

@@ -164,7 +164,7 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 	'entree_url_2' => 'Indirizzo del sito',
 	'erreur_connect_deja_existant' => 'Esista già un server con quel nome',
 	'erreur_nom_connect_incorrect' => 'Nome del server non consentito',
-	'erreur_plugin_desinstalation_echouee' => 'La disinstallazione del plugin è fallita. In ogni caso potete disattivarlo.',
+	'erreur_plugin_desinstalation_echouee' => 'La disinstallazione del plugin è fallita. In ogni caso potete disattivarlo.', # MODIF
 	'erreur_plugin_fichier_absent' => 'File non presente',
 	'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
 	'erreur_plugin_nom_fonction_interdit' => 'Nome di funzione non possibile',
