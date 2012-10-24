@@ -470,7 +470,7 @@ wird Ihre Adresse beibehalten):
 	'info_tous_resultats_enregistres' => ' [alle Ergebnisse sind erfasst]',
 	'info_tout_afficher' => 'Alles zeigen',
 	'info_travaux_texte' => 'Diese Website ist noch nicht fertig eingerichtet. Schauen Sie später mal wieder rein ...',
-	'info_travaux_titre' => 'Website im Aufbau',
+	'info_travaux_titre' => 'Website in Bearbeitung',
 	'info_trop_resultat' => 'Zu viele Ergebnisse für “@cherche_mot”. Bitte präzisieren Sie Ihre Suchbegriffe.',
 	'info_utilisation_messagerie_interne' => 'Sie verwenden das interne Nachrichtensystem der Website. ',
 	'info_valider_lien' => 'Link freigeben',
