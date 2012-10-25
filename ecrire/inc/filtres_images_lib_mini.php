@@ -253,6 +253,10 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 			reconstruire_image_intermediaire($fichier);
 		}
 	}
+
+	if ($creer)
+		spip_log("filtre image ".($fonction_creation?reset($fonction_creation):'')."[$effet] sur $fichier","images"._LOG_DEBUG);
+
 	// TODO: si une image png est nommee .jpg, le reconnaitre avec le bon $f
 	$ret["fonction_imagecreatefrom"] = "_imagecreatefrom".$term_fonction;
 	$ret["fichier"] = $fichier;
