@@ -161,9 +161,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre_obligatoire' => '<b>Titolo</b> [Deviga]<br />',
 	'entree_url' => 'Retadreso de via retejo',
 	'entree_url_2' => 'Retadreso de la retejo',
-	'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
-	'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
-	'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
+	'erreur_connect_deja_existant' => 'Servilo jam ekzistas kun tiu nomo',
+	'erreur_nom_connect_incorrect' => 'Tiu servilonomo ne estas permesita',
+	'erreur_plugin_desinstalation_echouee' => 'La malinstalo de la kromprogramo malsukcesis.
+Tamen vi povas malŝalti ĝin.',
 	'erreur_plugin_fichier_absent' => 'Foresta dosiero',
 	'erreur_plugin_fichier_def_absent' => 'Difina dosiero forestas',
 	'erreur_plugin_nom_fonction_interdit' => 'Malpermesata funkcio-nomo',
