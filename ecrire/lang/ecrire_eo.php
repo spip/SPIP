@@ -218,14 +218,14 @@ Tamen vi povas malŝalti ĝin.',
 	'icone_retour' => 'Reen',
 	'icone_retour_article' => 'Reen al la artikolo',
 	'icone_squelette' => 'Skeletoj',
-	'icone_suivi_publication' => 'Suivi de la publication', # NEW
+	'icone_suivi_publication' => 'Superrigardo de la publikigo',
 	'icone_supprimer_cookie' => 'Forviŝi la por-korespondan kuketon ',
 	'icone_supprimer_rubrique' => 'Forviŝi tiun rubrikon',
 	'icone_supprimer_signature' => 'Forviŝi tiun subskribon',
 	'icone_valider_signature' => 'Validigi tiun subskribon',
 	'image_administrer_rubrique' => 'Vi povas mastrumi tiun rubrikon',
-	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
-	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
+	'impossible_modifier_login_auteur' => 'Ne eblas modifi la salutnomo.',
+	'impossible_modifier_pass_auteur' => 'Ne eblas modifi la pasvorto.',
 	'info_1_article' => '1 artikolo',
 	'info_1_article_syndique' => '1 abonligita artikolo',
 	'info_1_auteur' => '1 aŭtoro',
@@ -235,12 +235,12 @@ Tamen vi povas malŝalti ĝin.',
 	'info_1_site' => '1 retejo',
 	'info_1_visiteur' => '1 vizitanto',
 	'info_activer_cookie' => 'Vi povas aktivigi <b>por-korespondan kuketon</b>. Tio ebligos al vi facile iri de la publika spaco al la privata.',
-	'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
+	'info_admin_etre_webmestre' => 'Doni al mi la rajtoj de retejestro',
 	'info_admin_gere_rubriques' => 'Tiu mastrumanto mastrumas la jenajn rubrikojn:',
 	'info_admin_gere_toutes_rubriques' => 'Tiu mastrumanto mastrumas <b>ĉiujn rubrikojn</b>.',
 	'info_admin_gere_toutes_rubriques_2' => 'Mi mastrumas <b>ĉiujn rubrikojn</b>',
 	'info_admin_je_suis_webmestre' => 'Mi estas <b>retejestro</b>',
-	'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
+	'info_admin_statuer_webmestre' => 'Doni al tiu mastrumanto la rajtoj de retejestro',
 	'info_admin_webmestre' => 'Tiu mastrumanto estas <b>retejestro</b>',
 	'info_administrateur' => 'Mastrumanto',
 	'info_administrateur_1' => 'Mastrumanto',
@@ -251,7 +251,7 @@ Tamen vi povas malŝalti ĝin.',
 	'info_administrer_rubrique' => 'Vi povas mastrumi tiun rubrikon',
 	'info_adresse' => 'ĉe la adreso :',
 	'info_adresse_url' => 'Retadreso (URL) de la publika retejo',
-	'info_afficher_par_nb' => 'Afficher par', # NEW
+	'info_afficher_par_nb' => 'Afiŝi per',
 	'info_afficher_visites' => 'Afiŝi la vizitojn de :',
 	'info_aide_en_ligne' => 'Reta SPIP-helpilo',
 	'info_ajout_image' => 'Kiam vi ligas bildojn kiel alkroĉitajn dokumentojn al artikolo,
@@ -298,7 +298,7 @@ Tamen vi povas malŝalti ĝin.',
 	'info_classement_1' => '<sup>a</sup> en @liste@',
 	'info_classement_2' => '<sup>a</sup> en @liste@',
 	'info_code_acces' => 'Ne forgesu viajn proprajn alir-kodojn !',
-	'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
+	'info_compatibilite_html' => 'Sekvi la HTML-normon',
 	'info_compresseur_gzip' => 'Estas rekomendate antaŭfare kontroli, ĉu via retgastiganto jam ĉiufoje densigas la php-skriptojn; por tio, vi povas ekzemple uzi la jenan servon : @testgzip@',
 	'info_compresseur_texte' => 'Se via servilo ne aŭtomate densigas la html-paĝojn por ilin sendi al interretanoj, vi povas provi trudi tiun densigon por malkreskigi la pezon de la elŝutitaj paĝoj. <b>Atentu</b> :  tio povas forte malrapidigi iujn servilojn.',
 	'info_config_suivi' => 'Se tiu ĉi adreso estas tiu de dissendlisto, indiku ĉi-sube la adreson ĉe kiu la partoprenantoj de la retejo povos registriĝi. Tiu adreso povas esti retligilo (ekz. la paĝo por rete registriĝi en la listo), aŭ retpoŝtadreso kun specifa temo (ekz. <tt>@adresse_suivi@?subject=registrigxi</tt>):',
@@ -315,7 +315,7 @@ Tamen vi povas malŝalti ĝin.',
 	'info_connexion_ok' => 'La konektiĝo sukcesis.',
 	'info_contact' => 'Kontakt-adreso',
 	'info_contenu_articles' => 'Enhavo de la artikoloj',
-	'info_contributions' => 'Contributions', # NEW
+	'info_contributions' => 'Kontribuaĵoj',
 	'info_creation_paragraphe' => 'Por krei malplenajn paragrafojn, simple lasu malplenajn liniojn.',
 	'info_creation_rubrique' => 'Antaŭ ol skribi artikolojn,<br /> vi kreu almenaŭ po unu rubrikon.<br />',
 	'info_creation_tables' => 'Kreo de la datentabeloj',
@@ -339,7 +339,7 @@ Tamen vi povas malŝalti ĝin.',
 	'info_etape_suivante' => 'Ek al posta etapo',
 	'info_etape_suivante_1' => 'Vi povas paŝi al posta etapo.',
 	'info_etape_suivante_2' => 'Vi povas paŝi al posta etapo.',
-	'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
+	'info_exceptions_proxy' => 'Escepto por la prokura servilo',
 	'info_exportation_base' => 'Eksporto de la datenbazo al @archive@',
 	'info_facilite_suivi_activite' => 'Por faciligi la kontrolon de la reteja ĉefartikola aktiveco, SPIP povas transdoni per retmesaĝoj - ekzemple al dissendlisto de redaktantoj - la anoncon pri publikig-petoj kaj validig-petoj de artikoloj.',
 	'info_fichiers_authent' => 'Aŭtentokontrolaj dosieroj « .htpasswd »',
@@ -379,11 +379,11 @@ postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_langues' => 'Lingvoj de la retejo',
 	'info_ldap_ok' => 'La LDAP-aŭtentokontrolilo estas instalita.',
 	'info_lien_hypertexte' => 'Hiperligilo:',
-	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
+	'info_liste_nouveautes_envoyee' => 'La listo de novaĵoj estis sendita',
 	'info_liste_redacteurs_connectes' => 'Listo de la konektitaj redaktantoj',
 	'info_login_existant' => 'Tiu salutnomo jam ekzistas.',
 	'info_login_trop_court' => 'Tro mallonga salutnomo.',
-	'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
+	'info_login_trop_court_car_pluriel' => 'La salutnomo devas enhavi almenaŭ @nb@ signojn.',
 	'info_logos' => 'La vinjetoj',
 	'info_maximum' => 'maksimumo :',
 	'info_meme_rubrique' => 'En la sama rubriko',
@@ -395,7 +395,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_mise_a_niveau_base' => 'alniveligo de via SQL-datenbazo',
 	'info_mise_a_niveau_base_2' => '{{Atentu!}} Vi ĵus instalis version de la SPIP-dosieroj {pli malnovan} ol tiun, kiu estis instalita antaŭe ĉe via retejo: eblas ke via datenbazo perdiĝos kaj ke via retejo ne plu funkcios.<br />{{Reinstalu la
  SPIP-dosierojn.}}',
-	'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
+	'info_modification_enregistree' => 'Via modifo estis registrita',
 	'info_modifier_auteur' => 'Modifi tiun ĉi aŭtoron :',
 	'info_modifier_rubrique' => 'Modifi la rubrikon:',
 	'info_modifier_titre' => 'Modifi: @titre@',
@@ -450,7 +450,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_par_statut' => 'laŭ statuso',
 	'info_par_tri' => '\'(laŭ @tri@)\'',
 	'info_passe_trop_court' => 'Pasvorto tro mallonga.',
-	'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
+	'info_passe_trop_court_car_pluriel' => 'La pasvorto devas enhavi almenaŭ @nb@ signojn.',
 	'info_passes_identiques' => 'Ambaŭ pasvortoj ne samas.',
 	'info_pense_bete_ancien' => 'Viaj malnovaj memorigiloj',
 	'info_plus_cinq_car' => 'pli ol 5 signoj',
@@ -497,8 +497,8 @@ postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_redacteurs' => 'Redaktantoj',
 	'info_redaction_en_cours' => 'REDAKTATA',
 	'info_redirection' => 'Alidirektigo',
-	'info_redirection_activee' => 'La redirection est activée.', # NEW
-	'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
+	'info_redirection_activee' => 'La alidirektigo estas aktiva.',
+	'info_redirection_desactivee' => 'La alidirektigo estis forigita.',
 	'info_refuses' => 'Viaj rifuzitaj artikoloj',
 	'info_reglage_ldap' => 'Opcioj: <b>Agordo de la LDAP-elŝuto</b>',
 	'info_renvoi_article' => '<b>Alidirektigo.</b> Tiu artikolo alidirektas al la paĝo:',
@@ -549,7 +549,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_total' => 'totalo :',
 	'info_tous_articles_en_redaction' => 'Ĉiuj artikoloj redaktataj',
 	'info_tous_articles_presents' => 'Ĉiuj artikoloj publikigitaj en tiu ĉi rubriko',
-	'info_tous_articles_refuses' => 'Tous les articles refusés', # NEW
+	'info_tous_articles_refuses' => 'Ĉiuj artikoloj rifuzitaj',
 	'info_tous_les' => 'ĉiuj :',
 	'info_tous_redacteurs' => 'Anoncoj al ĉiuj redaktantoj',
 	'info_tout_site' => 'La tuta retejo',
@@ -559,16 +559,16 @@ postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_tout_site5' => 'Originala artikolo.',
 	'info_tout_site6' => '<b>Atentu :</b> nur la originalaj artikoloj estas afiŝitaj.
 La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton :',
-	'info_traductions' => 'Traductions', # NEW
+	'info_traductions' => 'Tradukoj',
 	'info_travail_colaboratif' => 'Kunlaborado pri la artikoloj',
 	'info_un_article' => 'unu artikolo,',
 	'info_un_site' => 'retejo,',
 	'info_une_rubrique' => 'unu rubriko,',
 	'info_une_rubrique_02' => '1 rubriko',
 	'info_url' => 'URL :',
-	'info_url_proxy' => 'URL du proxy', # NEW
+	'info_url_proxy' => 'URL de la prokura servilo',
 	'info_url_site' => 'RETEJO-URL :',
-	'info_url_test_proxy' => 'URL de test', # NEW
+	'info_url_test_proxy' => 'URL de testo',
 	'info_urlref' => 'Hiperligilo :',
 	'info_utilisation_spip' => 'Vi povas nun ekuzi la asistatan publikigilon...',
 	'info_visites_par_mois' => 'Afiŝado laŭ monato :',
@@ -576,7 +576,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'info_visiteur_2' => 'de la publika spaco',
 	'info_visiteurs' => 'Vizitantoj',
 	'info_visiteurs_02' => 'Vizitantoj de la publika spaco',
-	'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
+	'info_webmestre_forces' => 'La retejestroj nune estas difinita en <tt>@file_options@</tt>.',
 	'install_adresse_base_hebergeur' => 'Adreso de la datenbazo atribuita de la retejgastiganto',
 	'install_base_ok' => 'La datumbazo @base@ estis rekonita',
 	'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
@@ -591,7 +591,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'install_select_langue' => 'Elektu lingvon kaj poste musklaku la butonon « sekvanta » por lanĉi la instal-proceduron.',
 	'install_select_type_db' => 'Indiku la datumbazan tipon :',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_pg' => 'PostgreSQL', # NEW
+	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
 	'install_serveur_hebergeur' => 'Servilo de datumbazo atribuita de la retgastiganto',
@@ -599,10 +599,10 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'install_tables_base' => 'Tabeloj de la datumbazo',
 	'install_types_db_connus' => 'SPIP scipovas uzi <b>MySQL</b> (la plej kutime uzatan) kaj <b>SQLite</b>.',
 	'install_types_db_connus_avertissement' => 'La uzado de <b>PostgreSQL</b> estas ankaŭ proponita kiel eksperimenta',
-	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
-	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
+	'instituer_erreur_statut_a_change' => 'La statuso jam estis modifita',
+	'instituer_erreur_statut_non_autorise' => 'Vi ne povas elekti tiun statuson',
 	'intem_redacteur' => 'redaktanto',
-	'intitule_licence' => 'Licence', # NEW
+	'intitule_licence' => 'Licenco',
 	'item_accepter_inscriptions' => 'Akcepti la registropetojn',
 	'item_activer_messages_avertissement' => 'Aktivigi la averto-mesaĝojn',
 	'item_administrateur_2' => 'mastrumanto',
@@ -650,9 +650,9 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'jour_non_connu_nc' => 'ne konata',
 
 	// L
-	'label_bando_outils' => 'Barre d\'outils', # NEW
-	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+	'label_bando_outils' => 'Ilobreto',
+	'label_bando_outils_afficher' => 'Afiŝi la ilojn',
+	'label_bando_outils_masquer' => 'Kaŝi la ilojn',
 	'label_choix_langue' => 'Selectionnez votre langue', # NEW
 	'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
 	'label_slogan_site' => 'Slogan du site', # NEW
