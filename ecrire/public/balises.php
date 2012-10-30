@@ -1390,7 +1390,8 @@ function balise_BOUTON_ACTION_dist($p){
 		array_pop($args);
 	$args = implode(",",$args);
 
-	$p->code = "bouton_action($args)";
+	$bouton_action = chercher_filtre("bouton_action");
+	$p->code = "$bouton_action($args)";
 	$p->interdire_scripts = false;
 	return $p;
 }
