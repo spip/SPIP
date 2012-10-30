@@ -77,10 +77,16 @@ function admin_repair_tables() {
 
 	$connexion = $GLOBALS['connexions'][0];
 	$prefixe = $connexion['prefixe'];
-	$res1 = sql_showbase();
+	$rows = array();
+	if ($res1 = sql_showbase()){
+		while ($r = sql_fetch($res1))
+			$rows[] = $r;
+		sql_free($res1);
+	}
+
 	$res = "";
-	if ($res1) {
-		while ($r = sql_fetch($res1)) {
+	if (count($rows)) {
+		while ($r = array_shift($rows)) {
 			$tab = array_shift($r);
 
 			$class = "";
@@ -98,17 +104,17 @@ function admin_repair_tables() {
 			maj_tables($tab);
 
 			$count = sql_countsel($tab);
-	
+
 			if ($count>1)
 				$m .= "("._T('texte_compte_elements', array('count' => $count)).")\n";
 			else if ($count==1)
 				$m .= "("._T('texte_compte_element', array('count' => $count)).")\n";
 			else
 				$m .= "("._T('texte_vide').")\n";
-	
+
 			if ($result_repair
-			  AND $msg = join(" ", sql_fetch($result_repair)) . ' '
-				AND strpos($msg, ' OK ')==FALSE){
+				AND $msg = join(" ", is_resource($result_repair)?sql_fetch($result_repair):$result_repair) . ' '
+				AND strpos($msg, ' OK ')===FALSE){
 				$class = " class='notice'";
 				$m .= "<br /><tt>".htmlentities($msg)."</tt>\n";
 			}

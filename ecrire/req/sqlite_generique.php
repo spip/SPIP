@@ -1064,6 +1064,56 @@ function spip_sqlite_date_proche($champ, $interval, $unite){
 	return "($champ $op datetime('".date("Y-m-d H:i:s")."', '$interval $unite'))";
 }
 
+/**
+ * http://doc.spip.org/@spip_sqlite_repair
+ *
+ * pas de fonction native repair dans sqlite, mais on profite pour verifier que tous les champs (text|char) ont bien une clause DEFAULT
+ *
+ * @param $table
+ * @param string $serveur
+ * @param bool $requeter
+ * @return array|null|resource|string
+ */
+function spip_sqlite_repair($table, $serveur='',$requeter=true)
+{
+	if ($desc = spip_sqlite_showtable($table, $serveur)
+	  AND isset($desc['field'])
+	  AND is_array($desc['field'])){
+		foreach ($desc['field'] as $c => $d){
+			if (preg_match(",^(tinytext|mediumtext|text|longtext|varchar|char),i",$d)
+			  AND stripos($d,"NOT NULL")!==false
+			  AND stripos($d,"DEFAULT")===false
+				/* pas touche aux cles primaires */
+			  AND (!isset($desc['key']['PRIMARY KEY']) OR $desc['key']['PRIMARY KEY']!==$c)
+				){
+				spip_sqlite_alter($q="TABLE $table CHANGE $c $c $d DEFAULT ''",$serveur);
+				spip_log("ALTER $q","repair"._LOG_INFO_IMPORTANTE);
+			}
+			if (preg_match(",^(INTEGER),i",$d)
+			  AND stripos($d,"NOT NULL")!==false
+			  AND stripos($d,"DEFAULT")===false
+				/* pas touche aux cles primaires */
+			  AND (!isset($desc['key']['PRIMARY KEY']) OR $desc['key']['PRIMARY KEY']!==$c)
+				){
+				spip_sqlite_alter($q="TABLE $table CHANGE $c $c $d DEFAULT '0'",$serveur);
+				spip_log("ALTER $q","repair"._LOG_INFO_IMPORTANTE);
+			}
+			if (preg_match(",^(datetime),i",$d)
+			  AND stripos($d,"NOT NULL")!==false
+			  AND stripos($d,"DEFAULT")===false
+				/* pas touche aux cles primaires */
+			  AND (!isset($desc['key']['PRIMARY KEY']) OR $desc['key']['PRIMARY KEY']!==$c)
+				){
+				spip_sqlite_alter($q="TABLE $table CHANGE $c $c $d DEFAULT '0000-00-00 00:00:00'",$serveur);
+				spip_log("ALTER $q","repair"._LOG_INFO_IMPORTANTE);
+			}
+		}
+		return array(" OK ");
+	}
+	return array(" ERROR ");
+}
+
+
 
 // http://doc.spip.org/@spip_sqlite_replace
 function spip_sqlite_replace($table, $couples, $desc = array(), $serveur = '', $requeter = true){
@@ -1786,6 +1836,7 @@ function _sqlite_ref_fonctions(){
 		'optimize' => 'spip_sqlite_optimize',
 		'query' => 'spip_sqlite_query',
 		'quote' => 'spip_sqlite_quote',
+		'repair' => 'spip_sqlite_repair',
 		'replace' => 'spip_sqlite_replace',
 		'replace_multi' => 'spip_sqlite_replace_multi',
 		'select' => 'spip_sqlite_select',
