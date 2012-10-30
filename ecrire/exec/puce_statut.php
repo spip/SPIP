@@ -29,7 +29,11 @@ function exec_puce_statut_args($id, $type)
 	  AND $d['statut_textes_instituer']) {
 		$prim = id_table_objet($type);
 		$id = intval($id);
-		$r = sql_fetsel("id_rubrique,statut", $table_objet_sql, "$prim=$id");
+		if (isset($d['field']['id_rubrique']))
+			$select = "id_rubrique,statut";
+		else
+			$select = "0 as id_rubrique,statut";
+		$r = sql_fetsel($select, $table_objet_sql, "$prim=$id");
 		$statut = $r['statut'];
 		$id_rubrique = $r['id_rubrique'];
 	}
