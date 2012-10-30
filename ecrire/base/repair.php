@@ -82,8 +82,9 @@ function admin_repair_tables() {
 	if ($res1) {
 		while ($r = sql_fetch($res1)) {
 			$tab = array_shift($r);
-	
-			$res .= "<div><strong>$tab</strong> ";
+
+			$class = "";
+			$m = "<strong>$tab</strong> ";
 			spip_log("Repare $tab", _LOG_INFO_IMPORTANTE);
 			// supprimer la meta avant de lancer la reparation
 			// car le repair peut etre long ; on ne veut pas boucler
@@ -92,27 +93,29 @@ function admin_repair_tables() {
 				$result_repair = sql_repair($tab);
 				if (!$result_repair) return false;
 			}
-			else {
-				// si pas de repair, essayer quand meme de maj la table
-				maj_tables($tab);
-			}
+
+			// essayer de maj la table (creation de champs manquants)
+			maj_tables($tab);
 
 			$count = sql_countsel($tab);
 	
 			if ($count>1)
-				$res .= "("._T('texte_compte_elements', array('count' => $count)).")\n";
+				$m .= "("._T('texte_compte_elements', array('count' => $count)).")\n";
 			else if ($count==1)
-				$res .= "("._T('texte_compte_element', array('count' => $count)).")\n";
+				$m .= "("._T('texte_compte_element', array('count' => $count)).")\n";
 			else
-				$res .= "("._T('texte_vide').")\n";
+				$m .= "("._T('texte_vide').")\n";
 	
 			if ($result_repair
 			  AND $msg = join(" ", sql_fetch($result_repair)) . ' '
-				AND strpos($msg, ' OK ')==FALSE)
-				$res .= "<pre><span style='color: red; font-weight: bold;'>".htmlentities($msg)."</span></pre>\n";
+				AND strpos($msg, ' OK ')==FALSE){
+				$class = " class='notice'";
+				$m .= "<br /><tt>".htmlentities($msg)."</tt>\n";
+			}
 			else
-				$res .= " "._T('texte_table_ok');
-			$res .="</div>";
+				$m .= " "._T('texte_table_ok');
+
+			$res .="<div$class>$m</div>";
 	  }
 	}
 	return $res;
