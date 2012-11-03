@@ -63,7 +63,7 @@
   // define( 'PCLZIP_TEMPORARY_DIR', '/temp/' );
   // define( 'PCLZIP_TEMPORARY_DIR', 'C:/Temp/' );
   if (!defined('PCLZIP_TEMPORARY_DIR')) {
-    define( 'PCLZIP_TEMPORARY_DIR', '' );
+    define( 'PCLZIP_TEMPORARY_DIR', _DIR_TMP );
   }
 
   // ----- Optional threshold ratio for use of temporary files
