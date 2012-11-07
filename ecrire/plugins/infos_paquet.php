@@ -147,7 +147,7 @@ function paquet_debutElement($phraseur, $name, $attrs) {
  */
 function paquet_textElement($phraseur, $data) {
 	xml_textElement($phraseur, $data);
-	if ($phraseur->err OR !($data = trim($data))) return;
+	if ($phraseur->err OR !(trim($data))) return;
 	$phraseur->versions[$phraseur->contenu['compatible']][''] .= $data;
 }
 
@@ -170,7 +170,7 @@ function paquet_finElement($phraseur, $name) {
 		$attrs = array();
 	}
 
-	$texte = $phraseur->versions[$n][''];
+	$texte = trim($phraseur->versions[$n]['']);
 	$phraseur->versions[$n][''] = '';
 
 	$f = 'info_paquet_'.$name;
