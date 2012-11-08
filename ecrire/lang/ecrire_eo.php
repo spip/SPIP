@@ -659,8 +659,8 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'label_taille_ecran' => 'Larĝo de la ekrano',
 	'label_texte_et_icones_navigation' => 'Naviga menuo',
 	'label_texte_et_icones_page' => 'Afiŝado en paĝo',
-	'ldap_correspondance' => 'héritage du champ @champ@', # NEW
-	'ldap_correspondance_1' => 'Héritage des champs LDAP', # NEW
+	'ldap_correspondance' => 'heredado de la kampo @champ@',
+	'ldap_correspondance_1' => 'Heredadoj de LDAP-kampoj',
 	'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 	'lien_ajout_destinataire' => 'Aldoni tiun adresaton',
 	'lien_ajouter_auteur' => 'Aldoni tiun aŭtoron',
@@ -700,7 +700,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'mois_non_connu' => 'nekonata',
 
 	// N
-	'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
+	'nouvelle_version_spip' => 'SPIP-versio @version@ estas disponebla',
 
 	// O
 	'onglet_contenu' => 'Enhavo',
@@ -741,7 +741,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'plugin_info_automatique_select' => 'Elektu ĉi-sube kromprogramon : SPIP elŝutos ĝin kaj instalos ĝin en la dosierujo <code>@rep@</code> ; se tiu ĉi kromprogramo jam ekzistas, ĝi estos ĝisdatigita.',
 	'plugin_info_credit' => 'Kreditoj',
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_install_ok' => 'Installation réussie', # NEW
+	'plugin_info_install_ok' => 'Sukcesa instalado',
 	'plugin_info_necessite' => 'Necesas:',
 	'plugin_info_non_compatible_spip' => 'Tiu ĉi kromprogramo ne estas kongrua kun tiu SPIP-versio',
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
