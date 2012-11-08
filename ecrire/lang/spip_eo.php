@@ -684,7 +684,7 @@ sub la respondeco de la ĉefa retejestro .</b>',
 	'zbug_boucle_recursive_undef' => 'nedifinita rekursia iteracio', # MODIF
 	'zbug_calcul' => 'komputado',
 	'zbug_champ_hors_boucle' => 'Kampo @champ@ eksteras iteracion',
-	'zbug_champ_hors_motif' => 'Kampo @champ@ eksteras iteracion, kies formo estas @motif@', # MODIF
+	'zbug_champ_hors_motif' => 'Kampo @champ@ eksteras kontekston @motif@',
 	'zbug_code' => 'kodo',
 	'zbug_critere_inconnu' => 'nekonata kriterio @critere@', # MODIF
 	'zbug_distant_interdit' => 'ago ĉe tiu ekstera datenbazo malpermesata', # MODIF
