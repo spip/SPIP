@@ -999,25 +999,43 @@ function balise_CACHE_dist($p) {
 }
 
 
-//
-// #INSERT_HEAD
-// pour permettre aux plugins d'inserer des styles, js ou autre
-// dans l'entete sans modification du squelette
-// les css doivent etre inserees de preference par #INSERT_HEAD_CSS
-// pour en faciliter la surcharge
-//
-// http://doc.spip.org/@balise_INSERT_HEAD_dist
+/**
+ * #INSERT_HEAD
+ * pour permettre aux plugins d'inserer des styles, js ou autre
+ * dans l'entete sans modification du squelette
+ * les css doivent etre inserees de preference par #INSERT_HEAD_CSS
+ * pour en faciliter la surcharge
+ *
+ * on insere ici aussi un morceau de PHP qui verifiera a l'execution que le pipeline insert_head_css a bien ete vu
+ * et dans le cas contraire l'appelera. Permet de ne pas oublier les css de #INSERT_HEAD_CSS meme si cette balise
+ * n'est pas presente.
+ * Il faut mettre ce php avant le insert_head car le compresseur y mets ensuite un php du meme type pour collecter
+ * CSS et JS, et on ne veut pas qu'il rate les css inserees en fallback par insert_head_css_conditionnel
+ *
+ * http://doc.spip.org/@balise_INSERT_HEAD_dist
+ *
+ * @param object $p
+ * @return object
+ */
 function balise_INSERT_HEAD_dist($p) {
-	$p->code = "pipeline('insert_head','<!-- insert_head -->')";
-	$p->code .= '. \'<'
+	$p->code = '\'<'
 		.'?php header("X-Spip-Filtre: \'.'
 			.'\'insert_head_css_conditionnel\''
 		. " . '\"); ?'.'>'";
+	$p->code = ". pipeline('insert_head','<!-- insert_head -->')";
 	$p->interdire_scripts = false;
 	return $p;
 }
 
-// http://doc.spip.org/@balise_INSERT_HEAD_CSS_dist
+/**
+ * homologue de #INSERT_HEAD pour les CSS
+ * (et par extension pour le js inline qui doit preferentiellement etre insere avant les CSS car bloquant sinon)
+ *
+ * http://doc.spip.org/@balise_INSERT_HEAD_CSS_dist
+ *
+ * @param object $p
+ * @return object
+ */
 function balise_INSERT_HEAD_CSS_dist($p) {
 	$p->code = "pipeline('insert_head_css','<!-- insert_head_css -->')";
 	$p->interdire_scripts = false;
