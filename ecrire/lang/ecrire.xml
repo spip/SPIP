@@ -51,7 +51,9 @@
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fon" />
-	<langue code="fr" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr">
+		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
+	</langue>
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="RealET" lien="http://trad.spip.net/auteur/realet" />

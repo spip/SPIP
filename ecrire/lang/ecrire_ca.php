@@ -785,8 +785,8 @@ amb un color que indica el seu estat:',
 	'statut_admin_restreint' => '(admin restringida)',
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)',
-	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)',
+	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # MODIF
+	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # MODIF
 	'taille_cache_image' => 'Les imatges calculades automàticament per SPIP (miniatures dels documents, títols presentats en forma gràfica, función matemàtiques en format TeX...) ocupen en el directori @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'Aquest lloc Web no preveu limitar la mida del directori de la memòria cau (cache).',
 	'taille_cache_maxi' => 'SPIP prova de limitar la mida del directori de la memòria cau (cache) d\'aquest lloc a aproximadament <b>@octets@</b> de dades.',

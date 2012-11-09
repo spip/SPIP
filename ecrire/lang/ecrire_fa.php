@@ -759,7 +759,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'اجرا حالا',
-	'queue_info_purger' => 'مي‌‌توانيد تمام كارهاي در انتظار را حذف كنيد و فهرست را با كارهاي دوره‌اي بازتنظيم كنيد',
+	'queue_info_purger' => 'مي‌‌توانيد تمام كارهاي در انتظار را حذف كنيد و فهرست را با كارهاي دوره‌اي بازتنظيم كنيد', # MODIF
 	'queue_nb_jobs_in_queue' => '@nb@ وظيفه در صف ',
 	'queue_next_job_in_nb_sec' => 'وظيفه‌ي بعدي در  @nb@ امين',
 	'queue_no_job_in_queue' => 'وظيفه‌اي در دست اجرا نيست',
@@ -775,8 +775,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_admin_restreint' => '(اداره محدود)',
 
 	// T
-	'tache_cron_asap' => 'وظيفه‌ي CRON @function@ (ASAP)',
-	'tache_cron_secondes' => 'وظيفه‌ي CRON @function@ (تمام @nb@)',
+	'tache_cron_asap' => 'وظيفه‌ي CRON @function@ (ASAP)', # MODIF
+	'tache_cron_secondes' => 'وظيفه‌ي CRON @function@ (تمام @nb@)', # MODIF
 	'taille_cache_image' => 'اندازه ى تصاوير, كه توسط اسپيپ حساب شده ( تصاوير كوچك اسناد, عناوين گرافيكى عرضه شده, كاربردهاى رياضى با فرمهاى TeX...) در رپرتوار @dir@جمعا @taille@ را اشغال ميكنند.',
 	'taille_cache_infinie' => 'اين سايت محدوديت اندازه ى رپرتوار Cache را پيش بينى نميكند.',
 	'taille_cache_maxi' => 'اسپيپ سعى در محدود كردن اندازه ى رپرتوار Cache به اين اندازه دارد <b>@octets@</b>.',

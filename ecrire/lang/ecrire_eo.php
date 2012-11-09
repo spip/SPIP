@@ -174,7 +174,7 @@ Tamen vi povas malŝalti ĝin.',
 	'erreur_plugin_version_manquant' => 'Kromprogramo-versio mankas',
 
 	// H
-	'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
+	'htaccess_a_simuler' => 'Averto: la agordo de vian HTTP-servilo ignoras dosierojn @htaccess@. Por certigi taŭgan sekureco, vi devas ŝanĝi la agordon pri tio, aŭ ke konstantoj @constantes@ (difinebla en la dosiero mes_options.php) havas kiel valoro dosierujojn ekstere de @document_root@.',
 	'htaccess_inoperant' => 'senefika htaccess',
 
 	// I
@@ -661,7 +661,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'label_texte_et_icones_page' => 'Afiŝado en paĝo',
 	'ldap_correspondance' => 'heredado de la kampo @champ@',
 	'ldap_correspondance_1' => 'Heredadoj de LDAP-kampoj',
-	'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
+	'ldap_correspondance_2' => 'Por ĉiuj jenaj SPIP-kampoj, indiki la nomo de la rilata LDAP-kampo. Lasi malplenan por ne plenigis ĝin, apartigi per spacoj aŭ komoj por provi plurajn LDAP-kampoj.',
 	'lien_ajout_destinataire' => 'Aldoni tiun adresaton',
 	'lien_ajouter_auteur' => 'Aldoni tiun aŭtoron',
 	'lien_ajouter_participant' => 'Aldoni partoprenanton',
@@ -727,7 +727,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'plugin_etat_test' => 'testata',
 	'plugin_impossible_activer' => 'Ne eblas aktivigi la kromprogramon @plugin@',
 	'plugin_info_automatique1' => 'Se vi deziras permesi la aŭtomatan instaladon de kromprogramoj, bonvolu :',
-	'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez :', # NEW
+	'plugin_info_automatique1_lib' => 'Se vi deziras permesi aŭtomata instalado de tiu biblioteko, bonvolu:',
 	'plugin_info_automatique2' => 'krei dosierujon <code>@rep@</code> ;',
 	'plugin_info_automatique3' => 'kontroli ke estas permesate al la servilo skribi en tiu ĉi dosierujo.',
 	'plugin_info_automatique_creer' => 'kreenda ĉe la reteja radiko.',
@@ -740,12 +740,12 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'plugin_info_automatique_ou' => 'aŭ...',
 	'plugin_info_automatique_select' => 'Elektu ĉi-sube kromprogramon : SPIP elŝutos ĝin kaj instalos ĝin en la dosierujo <code>@rep@</code> ; se tiu ĉi kromprogramo jam ekzistas, ĝi estos ĝisdatigita.',
 	'plugin_info_credit' => 'Kreditoj',
-	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
+	'plugin_info_erreur_xml' => 'Deklaro de tiu kromprogramo ne ĝustas',
 	'plugin_info_install_ok' => 'Sukcesa instalado',
 	'plugin_info_necessite' => 'Necesas:',
 	'plugin_info_non_compatible_spip' => 'Tiu ĉi kromprogramo ne estas kongrua kun tiu SPIP-versio',
-	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
-	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
+	'plugin_info_plugins_dist_1' => 'Kromprogramoj ĉi-sube estas ŝarĝitaj kaj aktivigitaj en la dosierujo @plugins_dist@.',
+	'plugin_info_plugins_dist_2' => 'Ili ne malaktivigas.',
 	'plugin_info_telecharger' => 'elŝutota de @url@ kaj instalota en @rep@',
 	'plugin_librairies_installees' => 'Instalitaj bibliotekoj',
 	'plugin_necessite_lib' => 'Tiu ĉi kromprogramo bezonas la bibliotekon @lib@',
@@ -755,16 +755,17 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'plugin_source' => 'fonto: ',
 	'plugin_titre_automatique' => 'Aŭtomata instalo',
 	'plugin_titre_automatique_ajouter' => 'Aldoni kromprogramojn',
-	'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+	'plugin_titre_installation' => 'Instalado de la kromprogramo @plugin@',
 	'plugin_titre_modifier' => 'Miaj kromprogramoj',
 	'plugin_zip_active' => 'Daŭrigu por ĝin aktivigi',
 	'plugin_zip_adresse' => 'indiku ĉi-sube la retadreson de la maldensa dosiero de elŝutenda kromprogramo, aŭ la retadreson de kromprogramolisto.',
 	'plugin_zip_adresse_champ' => 'Retadreso de la kromprogramo aŭ de la listo ',
-	'plugin_zip_content' => 'Il contient les fichiers suivants (@taille@),<br />prêts à installer dans le répertoire <code>@rep@</code>', # NEW
-	'plugin_zip_installe_finie' => 'Le fichier @zip@ a été décompacté et installé.', # NEW
-	'plugin_zip_installe_rep_finie' => 'Le fichier @zip@ a été décompacté et installé dans le répertoire @rep@', # NEW
-	'plugin_zip_installer' => 'Vous pouvez maintenant l\'installer.', # NEW
-	'plugin_zip_telecharge' => 'Le fichier @zip@ a été téléchargé', # NEW
+	'plugin_zip_content' => 'Ĝi enhavas la jenajn dosierojn (@taille@),
+<br />pretajn por instali en la dosierujo <code>@rep@</code>',
+	'plugin_zip_installe_finie' => 'La dosiero @zip@ estis ekstraktita kaj instalita.',
+	'plugin_zip_installe_rep_finie' => 'La dosiero @zip@ estis ekstraktita kaj instalita en la dosierujo @rep@',
+	'plugin_zip_installer' => 'Vi nun povas instali ĝin',
+	'plugin_zip_telecharge' => 'La dosiero @zip@ estis elŝutita',
 	'plugins_actif_aucun' => 'Neniu aktivata kromprogramo.',
 	'plugins_actif_un' => 'Unu aktivata kromprogramo.',
 	'plugins_actifs' => '@count@ aktivataj kromprogramoj.',
@@ -783,13 +784,13 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 
 	// Q
 	'queue_executer_maintenant' => 'Lanĉi nun',
-	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
-	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
-	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
-	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
-	'queue_one_job_in_queue' => '1 travail en attente', # NEW
-	'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-	'queue_titre' => 'Liste des travaux', # NEW
+	'queue_info_purger' => 'Vi povas forviŝi ĉiujn atendante taskojn kaj restarigi la liston kun la periodaj taskoj',
+	'queue_nb_jobs_in_queue' => '@nb@ atendante taskoj',
+	'queue_next_job_in_nb_sec' => 'Sekva tasko post @nb@ s',
+	'queue_no_job_in_queue' => 'Neniu atendante tasko',
+	'queue_one_job_in_queue' => '1 atendante tasko',
+	'queue_purger_queue' => 'Restarigi la taskliston',
+	'queue_titre' => 'Tasklisto',
 
 	// R
 	'repertoire_plugins' => 'Dosierujo :',
@@ -799,12 +800,12 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'statut_admin_restreint' => '(etrajta mastrumanto)',
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
-	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
+	'tache_cron_asap' => 'Tasko CRON @function@ (ASAP)',
+	'tache_cron_secondes' => 'Tasko CRON @function@ (ĉiuj @nb@ s)',
 	'taille_cache_image' => 'La bildoj aŭtomate komputitaj de SPIP (vijnetoj de dokumentoj, titoloj prezentitaj laŭ grafika formo, matematikaj funkcioj laŭ TeX-formato...) okupas en dosierujo @dir@ spacon je @taille@.',
 	'taille_cache_infinie' => 'Tiu retejo ne ebligas limigi memorspacon de stapla dosierujo.',
 	'taille_cache_maxi' => 'SPIP provas limigi memorspacon de stapla dosierujo po cirkaŭ <b>@octets@</b> da datenoj.',
-	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_moins_de' => 'Memorspaco de la staplo estas malpli ol @octets@.',
 	'taille_cache_octets' => 'Memorspaco de la staplo estas nun proksimume @octets@.',
 	'taille_cache_vide' => 'La staplo estas malplena.',
 	'taille_repertoire_cache' => 'Memorspaco de stapla dosierujo',
@@ -830,12 +831,13 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 	'texte_commande_vider_tables_indexation' => 'Uzu tiun komandon por malplenigi la indeksajn tabelojn uzatajn
    de la SPIP-integrita serĉilo. Tio ebligos al vi
    gajni diskospacon.',
-	'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-	'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
+	'texte_compatibilite_html' => 'Vi povas peti SPIP por produkti en la publika spaco, kodon kongruan kun <i>HTML4</ i>, aŭ rajtigi ĝin por uzi la pli modernaj eblecoj de la  <i>HTML5</ i>.',
+	'texte_compatibilite_html_attention' => 'Estas neniu risko aktivigi la opcion <i>HTML5</i>, sed se vi faras, la paĝoj de via retejo devos komenciĝi per la sekva mencio por resti valida : <code>&lt;!DOCTYPE html&gt;</code>.
+',
 	'texte_compresse_ou_non' => '(tiu ĉi povas aŭ ne esti densigita)',
 	'texte_compte_element' => '@count@ elemento',
 	'texte_compte_elements' => '@count@ elementoj',
-	'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
+	'texte_conflit_edition_correction' => 'Bonvolu kontroli ĉi-sube la diferencojn inter ambaŭ versioj de la teksto, vi povas ankaŭ kopii viajn ŝanĝojn, poste restartu.',
 	'texte_connexion_mysql' => 'Konsultu la informojn donitajn de via retgastiganto : en ili, vi trovos la ensalutilojn necesajn por konektiĝi al la servilo de datumbazo kiun li proponas.',
 	'texte_contenu_article' => '(Kelkvorta enhavo-priskribo de la artikolo.)',
 	'texte_contenu_articles' => 'Laŭ la modelo adoptita por via retejo, vi povas decidi
@@ -846,11 +848,11 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
    aŭtomatan riparon.',
 	'texte_creer_rubrique' => 'Antaŭ ol povi skribi artikolojn,<br /> vi devas krei rubrikon.',
 	'texte_date_creation_article' => 'KREO-DATO DE LA ARTIKOLO :',
-	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
+	'texte_date_creation_objet' => 'Kreo-dato :', # on ajoute le ":"
 	'texte_date_publication_anterieure' => 'DATO DE ANTAŬA REDAKTO :',
 	'texte_date_publication_anterieure_nonaffichee' => 'Ne afiŝi daton de antaŭa redakto.',
 	'texte_date_publication_article' => 'DATO DE RETA PUBLIKIGO :',
-	'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
+	'texte_date_publication_objet' => 'Dato de reta publikigo :',
 	'texte_descriptif_petition' => 'Priskribo de petskribo',
 	'texte_descriptif_rapide' => 'Konciza priskribo',
 	'texte_effacer_base' => 'Forviŝi la SPIP-datenbazon',
@@ -878,7 +880,7 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 	'texte_login_precaution' => 'Atentu ! Tio ĉi estas la salutnomo laŭ kiu vi ensalutis.
  Uzu tiun ĉi formularon prudente...',
 	'texte_message_edit' => 'Atentu : tiu ĉi mesaĝo povas esti modifita de ĉiuj mastrumantoj de la retejo, kaj estas videbla de ĉiuj redaktantoj. Uzu la anoncojn nur por sciigi eventojn gravajn pri la vivo de la retejo.',
-	'texte_messagerie_agenda' => 'Une messagerie permet aux rédacteurs du site de communiquer entre eux directement dans l’espace privé du site. Elle est associée à un agenda.', # NEW
+	'texte_messagerie_agenda' => 'Mesaĝado permesas al retejaj redaktantoj komuniki inter si rekte en la privata spaco de la retejo. Ĝi estas asociita kun agendo.',
 	'texte_mise_a_niveau_base_1' => 'Vi ĵus ĝisdatigis la SPIP-dosierojn.
  Necesas nun alniveligi la datenbazon
  de la retejo.',
@@ -985,17 +987,17 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 	'titre_cadre_numero_auteur' => 'AŬTORO NUMERO',
 	'titre_cadre_numero_objet' => '@objet@ NUMERO :',
 	'titre_cadre_signature_obligatoire' => '<b>Subskribo</b> [deviga]<br />',
-	'titre_config_contenu_notifications' => 'Notifications', # NEW
+	'titre_config_contenu_notifications' => 'Avizoj',
 	'titre_config_contenu_prive' => 'En la privata spaco',
 	'titre_config_contenu_public' => 'Ĉe la publika retejo',
 	'titre_config_fonctions' => 'Agordo de la retejo',
 	'titre_config_langage' => 'Agordi la lingvon',
 	'titre_configuration' => 'Agordo de la retejo',
 	'titre_configurer_preferences' => 'Agordi viajn preferojn',
-	'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
+	'titre_conflit_edition' => 'Konflikto dum redaktado',
 	'titre_connexion_ldap' => 'Opcioj: <b>Via konekto LDAP</b>',
 	'titre_groupe_mots' => 'GRUPO DE VORTOJ:',
-	'titre_identite_site' => 'Identité du site', # NEW
+	'titre_identite_site' => 'Identeco de la retejo',
 	'titre_langue_article' => 'Lingvo de la artikolo',
 	'titre_langue_rubrique' => 'Lingvo de la rubriko',
 	'titre_langue_trad_article' => 'LINGVO KAJ TRADUKOJ DE LA ARTIKOLO',
@@ -1038,8 +1040,8 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 	'trad_new' => 'Skribi novan tradukon',
 
 	// U
-	'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
-	'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
+	'upload_info_mode_document' => 'Enmeti tiun bildon en la bildteko',
+	'upload_info_mode_image' => 'Eltiri tiun bildon de la bildteko',
 	'utf8_convert_attendez' => 'Atendu kelkajn momentojn kaj refreŝigu tiun paĝon.',
 	'utf8_convert_avertissement' => 'Vi estas konvertonta la enhavon de via datenbazo (artikoloj, fulm-informoj, ktp...) kun la litertiparo <b>@orig@</b> al la litertiparo <b>@charset@</b>.',
 	'utf8_convert_backup' => 'Antaŭe, ne forgesu fari kompletan savkopion de via retejo. Vi devos ankaŭ kontroli, ke viaj skeletoj kaj lingvaj dosieroj kungruas kun @charset@.',

@@ -779,7 +779,7 @@ een kleur geeft hun status aan :',
 
 	// Q
 	'queue_executer_maintenant' => 'Nu uitvoeren',
-	'queue_info_purger' => 'U kunt alle werken in afwachting verwijderen en het lijst van periodieke werken herstarten',
+	'queue_info_purger' => 'U kunt alle werken in afwachting verwijderen en het lijst van periodieke werken herstarten', # MODIF
 	'queue_nb_jobs_in_queue' => '@nb@ wachtrij',
 	'queue_next_job_in_nb_sec' => 'Volgende opdracht in @nb@ s',
 	'queue_no_job_in_queue' => 'Geen werk in de wacht',
@@ -795,8 +795,8 @@ een kleur geeft hun status aan :',
 	'statut_admin_restreint' => '(beperkte toegang)',
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)',
-	'tache_cron_secondes' => 'Taak CRON @function@ (alle @nb@ s)',
+	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # MODIF
+	'tache_cron_secondes' => 'Taak CRON @function@ (alle @nb@ s)', # MODIF
 	'taille_cache_image' => 'De beelden door SPIP automatisch aangemaakt (icoontjes van documenten, grafisch weergegeven titels, wiskundige functies in TeX formaat...) nemen in de map @dir@ een totale plaats in van  @taille@.',
 	'taille_cache_infinie' => 'De site voorziet geen beperking in de grootte van de buffermap.',
 	'taille_cache_maxi' => 'SPIP probeert de omvang van de buffermap van de site te beperken tot ongeveer <b>@octets@</b> gegevens.',

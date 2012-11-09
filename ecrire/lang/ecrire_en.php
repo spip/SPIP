@@ -789,7 +789,7 @@ and their status is colour-coded:',
 
 	// Q
 	'queue_executer_maintenant' => 'Run now',
-	'queue_info_purger' => 'You can delete all pending jobs and reset the list of periodic tasks',
+	'queue_info_purger' => 'You can delete all pending jobs and reset the list of periodic tasks', # MODIF
 	'queue_nb_jobs_in_queue' => '@nb@ tasks in queue',
 	'queue_next_job_in_nb_sec' => 'Next job in @nb@ s',
 	'queue_no_job_in_queue' => 'No pending tasks',
@@ -805,8 +805,8 @@ and their status is colour-coded:',
 	'statut_admin_restreint' => '(restricted admin)',
 
 	// T
-	'tache_cron_asap' => 'CRON task @function@ (ASAP)',
-	'tache_cron_secondes' => 'CRON task @function@ (every @nb@ s)',
+	'tache_cron_asap' => 'CRON task @function@ (ASAP)', # MODIF
+	'tache_cron_secondes' => 'CRON task @function@ (every @nb@ s)', # MODIF
 	'taille_cache_image' => 'The images calculated automatically by SPIP (thumbnails, titles transformed into graphics, mathematical formulae in TeX format, etc.) take up a total of @taille@ in the @dir@ directory.',
 	'taille_cache_infinie' => 'This site does not have any fixed limit for the size of the cache.',
 	'taille_cache_maxi' => 'SPIP will try to limit the size of the cache directory to approximately <b>@octets@</b>.',
