@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil_site' => 'Hejmpaĝo', # MODIF
-	'article' => 'Article', # NEW
+	'accueil_site' => 'Hejmpaĝo',
+	'article' => 'Artikolo',
 	'articles' => 'Artikoloj',
 	'articles_auteur' => 'Artikoloj de tiu aŭtoro',
 	'articles_populaires' => 'La plej popularaj artikoloj',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Neniu retejo ĉe tiu adreso',
 	'aucune_breve' => 'Neniu fulm-informo ĉe tiu adreso',
 	'aucune_rubrique' => 'Neniu rubriko ĉe tiu adreso',
-	'auteur' => 'Auteur', # NEW
+	'auteur' => 'Aŭtoro',
 	'autres' => 'Aliaj',
 	'autres_breves' => 'Neniu fulm-informo',
 	'autres_groupes_mots_clefs' => 'Aliaj grupoj de ŝlosilvortoj',
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Komenti tiun retejon',
-	'contact' => 'Contact', # NEW
+	'contact' => 'Kontakto',
 	'copie_document_impossible' => 'Estas neeble kopii la dokumenton',
 
 	// D
@@ -65,9 +65,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meme_rubrique' => 'En la sama rubriko',
 	'memes_auteurs' => 'De samaj aŭtoroj',
 	'message' => 'Mesaĝo',
-	'messages_forum' => 'Forum-mesaĝoj', # MODIF
+	'messages_forum' => 'Mesaĝoj',
 	'messages_recents' => 'La plej freŝaj forum-mesaĝoj',
-	'mots_clef' => 'Mot-clé', # NEW
+	'mots_clef' => 'Ŝlosilvorto',
 	'mots_clefs' => 'Ŝlosilvortoj',
 	'mots_clefs_meme_groupe' => 'Ŝlosilvortoj en la sama grupo',
 
@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_lettre_information' => 'Jen la reteja inform-letero',
-	'texte_lettre_information_2' => 'Tiu letero enkalkulas artikolojn la kaj fulm-informojn publikigitajn de', # MODIF
+	'texte_lettre_information_2' => 'Tiu letero enkalkulas la novaĵojn publikigitajn de',
 
 	// V
 	'ver_imprimer' => 'Elprintota versio',
