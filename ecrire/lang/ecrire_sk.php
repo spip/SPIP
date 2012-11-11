@@ -790,7 +790,7 @@ a stav ich spracovania je označený farbou:',
 
 	// Q
 	'queue_executer_maintenant' => 'Spustiť teraz',
-	'queue_info_purger' => 'Môžete vymazať všetky čakajúce úlohy a obnoviť zoznam pravidelných úloh na pôvodné hodnoty', # MODIF
+	'queue_info_purger' => 'Môžete vymazať všetky čakajúce úlohy a zaplniť zoznam pravidelnými úlohami',
 	'queue_nb_jobs_in_queue' => '@nb@ úloh v rade',
 	'queue_next_job_in_nb_sec' => 'Ďalšia úloha o @nb@ s.',
 	'queue_no_job_in_queue' => 'Žiadne nevykonané úlohy',
@@ -806,8 +806,8 @@ a stav ich spracovania je označený farbou:',
 	'statut_admin_restreint' => '(administrátor s obmedzeniami)',
 
 	// T
-	'tache_cron_asap' => 'Zaplátať funkciu CRON @function@ (ASAP)', # MODIF
-	'tache_cron_secondes' => 'Zaplátať funkciu CRON @function@ (všetky @nb@-y)', # MODIF
+	'tache_cron_asap' => 'Funkcia CRON @function@ (ihneď)',
+	'tache_cron_secondes' => 'Funkcia CRON @function@ (všetkých @nb@)',
 	'taille_cache_image' => 'Obrázky, ktoré SPIP automaticky obnoví (miniatúry, názvy zmenené na grafiku, matematické vzorce vo formáte TeX, atď.) zaberajú spolu v priečinku @dir@ @taille@ .',
 	'taille_cache_infinie' => 'Táto stránka nemá žiaden pevný limit pre veľkosť cache.',
 	'taille_cache_maxi' => 'SPIP sa bude snažiť obmedziť veľkosť priečinka cache na približne <b>@octets@.</b>',
