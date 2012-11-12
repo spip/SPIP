@@ -243,21 +243,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier_introuvable' => 'Netrovebla dosiero @fichier@ ',
 	'form_auteur_confirmation' => 'Konfirmu vian retpoŝtadreso',
 	'form_auteur_email_modifie' => 'Via retpoŝtadreso estis modifita.',
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
+	'form_auteur_envoi_mail_confirmation' => 'Konfirmretmesaĝo estis sendita al @email@. Vi devu viziti la menciita retadreso en la retmesaĝo por validigi vian retpoŝtadreson.',
+	'form_auteur_mail_confirmation' => 'Saluton,
 
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
+Vi petis ŝanĝi vian retpoŝtadreson.
+Por konfirmi vian novan retadreson, simple ensaluti al
+la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 
-    @url@
-', # NEW
+    @url@',
 	'form_deja_inscrit' => 'Vi estas jam registrita.',
 	'form_email_non_valide' => 'Via retpoŝtadreso ne validas.',
 	'form_forum_access_refuse' => 'Vi ne plu havas alir-rajton al tiu retejo.',
 	'form_forum_bonjour' => 'Saluton @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
+	'form_forum_confirmer_email' => 'Por konfirmi vian retpoŝtadreson, iru al tiu retadreso : @url_confirm@',
 	'form_forum_email_deja_enregistre' => 'Tiu ĉi retpoŝtadreso estas jam registrita, vi povas do uzi vian kutiman pasvorton.',
 	'form_forum_identifiant_mail' => 'Via nova ensalutilo estis ĵus al vi sendita per retletero.',
 	'form_forum_identifiants' => 'Personaj ensalutiloj',
@@ -370,7 +368,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Bonvolu krei dosieron aŭ dosierujon kies nomo estu :',
 	'info_creer_repertoire_2' => 'ene de la subdosierujo <b>@repertoire@</b>, kaj :',
 	'info_creer_vignette' => 'aŭtomata kreo de la vinjeto',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
+	'info_creerdansrubrique_non_autorise' => 'Vi ne havas sufiĉajn rajtojn por krei enhavo en ĉi tiu rubriko',
 	'info_deplier' => 'Malfaldi',
 	'info_descriptif_nombre' => 'priskribo(j) :',
 	'info_description' => 'Priskribo :',
@@ -595,7 +593,7 @@ kaj ensaluti.
 	'pass_nouveau_pass' => 'Nova pasvorto',
 	'pass_ok' => 'JES',
 	'pass_oubli_mot' => 'Pasvorto-forgeso',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
+	'pass_procedure_changer' => 'Por ŝanĝi vian pasvorton, ni unue devas kontroli vian identecon. Por tio, specifu al ni la asociitan retpoŝtadreson el via konto.',
 	'pass_quitter_fenetre' => 'Forlasi tiun fenestron',
 	'pass_rappel_login' => 'Memoru: via ensalutilo (salutnomo) estas « @login@ ».',
 	'pass_recevoir_mail' => 'Vi ricevos retmesaĝon indikantan al vi kiel retrovi vian aliron al la retejo.',
