@@ -156,7 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_url_2' => 'Adress (URL) vum Site',
 	'erreur_connect_deja_existant' => 'Et gëtt schonns e Server mat dësem Numm',
 	'erreur_nom_connect_incorrect' => 'Dëse Server-Numm ass net erlaabt',
-	'erreur_plugin_desinstalation_echouee' => 'Desinstallatioun vum Plugin ass feelgeschloen. Dir kënnt en awer ausschalten.', # MODIF
+	'erreur_plugin_desinstalation_echouee' => 'Desinstallatioun vum Plugin ass feelgeschloen. Dir kënnt en awer ausschalten.',
 	'erreur_plugin_fichier_absent' => 'Fichier fehlt',
 	'erreur_plugin_fichier_def_absent' => 'Definitiouns-Fichier fehlt',
 	'erreur_plugin_nom_fonction_interdit' => 'Fonktiouns-Numm verbueden',
@@ -300,7 +300,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_conflit_edition_votre_version' => 'Är Versioun:',
 	'info_connexion_base' => 'Versiche mat der Datebank ze verbannen',
 	'info_connexion_base_donnee' => 'Verbanne mat ärer Datebank',
-	'info_connexion_ldap_ok' => 'D\'Ubannen un LDAP huet fonctionnéiert.</b><p>Weider bei de nächste Schrëtt.</p>', # MODIF
+	'info_connexion_ldap_ok' => '<b>D\'Ubannen un LDAP huet fonctionnéiert.</b><p>Weider bei de nächste Schrëtt.</p>',
 	'info_connexion_mysql' => 'Är SQL-Verbindung',
 	'info_connexion_ok' => 'D\'Verbindung huet geklappt.',
 	'info_contact' => 'Kontakt',
@@ -715,7 +715,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_info_credit' => 'Krediter',
 	'plugin_info_erreur_xml' => 'D\'Deklaratioun vun dësem Plugin ass falsch',
 	'plugin_info_install_ok' => 'D\'Ariichten huet geklappt',
-	'plugin_info_necessite' => 'Brauch:', # MODIF
+	'plugin_info_necessite' => 'Brauch:',
 	'plugin_info_non_compatible_spip' => 'Dëse Plugin ass mat der heiter SPIP-Versioun net kompatibel',
 	'plugin_info_plugins_dist_1' => 'Déi hei Plugine sinn an den Dossier @plugins_dist@ gelueden an ageschalt.',
 	'plugin_info_plugins_dist_2' => 'Si kënne net ausgeschalt ginn.',
@@ -756,7 +756,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'Elo ausféieren',
-	'queue_info_purger' => 'Dir kënnt all Aarbechten déi nach ustinn läschen an d\'Lëscht mat de periodeschen Aarbechten nei starten', # MODIF
+	'queue_info_purger' => 'Dir kënnt all Aarbechten déi nach ustinn läschen an d\'Lëscht mat de periodeschen Aarbechten nei starten',
 	'queue_nb_jobs_in_queue' => '@nb@ Aarbechten an der Waardeschläif',
 	'queue_next_job_in_nb_sec' => 'Nächst Aarbecht an @nb@ s',
 	'queue_no_job_in_queue' => 'Kéng Aarbecht an der Waardeschläif',
@@ -772,8 +772,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_admin_restreint' => '(restriktiven Admin)',
 
 	// T
-	'tache_cron_asap' => 'CRON-Aarbecht @function@ (ASAP)', # MODIF
-	'tache_cron_secondes' => 'CRON-Aarbecht @function@ (all @nb@ s)', # MODIF
+	'tache_cron_asap' => 'CRON-Aarbecht @function@ (ASAP)',
+	'tache_cron_secondes' => 'CRON-Aarbecht @function@ (all @nb@ s)',
 	'taille_cache_image' => 'Déi automatësch berechent Biller (Vignette vun Dokumenter, graphesch Titelen, mathematesch Formelen am TeX-Format...) brauchen am Dossier @dir@ eng Plaz vun @taille@.',
 	'taille_cache_infinie' => 'De Cache vun dësem Site ass net an der Gréisst beschränkt.',
 	'taille_cache_maxi' => 'SPIP probéiert d\'Gréisst vum Cache vun dësem Site op ongeféier <b>@octets@</b> ze beschränken.',
