@@ -9,7 +9,7 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 	<description></description>
 	<language>[(#LANG|texte_backend)]</language>
 <BOUCLE_RSS(SIGNATURES){!par date}{0,50}{id_article ?}
- ><BOUCLE_A(ARTICLES){id_article}>
+ ><BOUCLE_A(ARTICLES){id_petition}>
 	<item>
 		<title>[(#TITRE|texte_backend)]</title>
 		<link>[(#URL_ARTICLE|url_absolue|texte_backend)]</link>
