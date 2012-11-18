@@ -101,7 +101,9 @@ function base_trouver_table_dist($nom, $serveur=''){
 			if (isset($tables_auxiliaires['spip_' .$nom])) {
 				$nom_sql = 'spip_' . $nom;
 				$fdesc = &$tables_auxiliaires[$nom_sql];
-			}  # table locale a cote de SPIP, comme non SPIP:
+			} else {  # table locale a cote de SPIP, comme non SPIP:
+				$fdesc = array();
+			}
 		}
 
 		// faut il interpreter le prefixe 'spip_' ?
