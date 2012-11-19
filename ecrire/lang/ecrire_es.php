@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'affichage' => 'Visualización',
 	'aide_non_disponible' => 'Esta parte de la ayuda en línea aún no está disponible en este idioma.',
 	'annuler_recherche' => 'Anular la búsqueda',
-	'auteur' => 'Autor:',
+	'auteur' => 'Autor/a:',
 	'avis_acces_interdit' => 'Acceso prohibido.',
 	'avis_article_modifie' => 'Atención, @nom_auteur_modif@ trabajó en este artículo hace @date_diff@ minutos.',
 	'avis_aucun_resultat' => 'Ningún resultado.',
@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_url_2' => 'Dirección (URL) del sitio',
 	'erreur_connect_deja_existant' => 'Ya existe un servidor con este nombre',
 	'erreur_nom_connect_incorrect' => 'Este nombre de servidor no esta autorizado',
-	'erreur_plugin_desinstalation_echouee' => 'La desinstalación del plugin fracasó.No obstante, puedes desactivarlo.', # MODIF
+	'erreur_plugin_desinstalation_echouee' => 'La desinstalación del plugin fracasó.No obstante, puedes desactivarlo.',
 	'erreur_plugin_fichier_absent' => 'Archivo inexistente ',
 	'erreur_plugin_fichier_def_absent' => 'Archivo de definición inexistente',
 	'erreur_plugin_nom_fonction_interdit' => 'Nombre de función prohibido',
@@ -305,7 +305,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_conflit_edition_votre_version' => 'Su versión :',
 	'info_connexion_base' => 'Intento de conexión a la base',
 	'info_connexion_base_donnee' => 'Conexión a tu base de datos',
-	'info_connexion_ldap_ok' => 'Se logró la conexión LDAP.</b><p> Puedes pasar a la etapa siguiente.</b>', # MODIF
+	'info_connexion_ldap_ok' => '<b>Se logró la conexión LDAP.</b><p> Puedes pasar a la etapa siguiente.</p>',
 	'info_connexion_mysql' => 'Tu conexión SQL',
 	'info_connexion_ok' => 'La conexión ha funcionado.',
 	'info_contact' => 'Contacto',
@@ -772,7 +772,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 
 	// Q
 	'queue_executer_maintenant' => 'Ejecutar ahora',
-	'queue_info_purger' => 'Puedes eliminar todos los trabajos pendientes y reinicializar la lista con los trabajos periódicos', # MODIF
+	'queue_info_purger' => 'Puedes eliminar todos los trabajos pendientes y reinicializar la lista con los trabajos periódicos',
 	'queue_nb_jobs_in_queue' => '@nb@ trabajos en espera',
 	'queue_next_job_in_nb_sec' => 'Próximo trabajo en @nb@ s',
 	'queue_no_job_in_queue' => 'Ningún trabajo en espera',
@@ -788,8 +788,8 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'statut_admin_restreint' => '(administrador restringido)',
 
 	// T
-	'tache_cron_asap' => 'Tarea CRON @function@ (ASAP)', # MODIF
-	'tache_cron_secondes' => 'Tarea CRON @function@ (cada @nb@ s)', # MODIF
+	'tache_cron_asap' => 'Tarea CRON @function@ (ASAP)',
+	'tache_cron_secondes' => 'Tarea CRON @function@ (cada @nb@ s)',
 	'taille_cache_image' => 'Las imágenes calculadas automáticamente por SPIP (miniaturas de documentos, títulos presentados en forma gráfica, fórmulas matemáticas en formato TeX...) ocupan en el directorio @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'En este sitio no se limita el tamaño de la carpeta de cache.',
 	'taille_cache_maxi' => 'SPIP intenta limitar el tamaño de la carpeta de cache de este sitio a unos <b>@octets@</b> de datos.',
@@ -815,7 +815,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'texte_choix_base_3' => '<b>Selecciona</b> aquí la que te fue atribuída por tu proveedor de hospedaje:',
 	'texte_choix_table_prefix' => 'Prefijo de las tablas:',
 	'texte_commande_vider_tables_indexation' => 'Utilice esta comanda para vaciar las tablas de indexación del motor de búsqueda integrado de SPIP. Permite ganar espacio en el disco.',
-	'texte_compatibilite_html' => 'Puede elegir si quiere que SPIP produzca, en el sitio público, un código compatible con la norma <i>HTML4</i>, o si prefiere usar las posibilidades más modernas de <i>HTML5</i>.',
+	'texte_compatibilite_html' => 'Puedes elegir si quieres que SPIP produzca, en el sitio público, un código compatible con la norma <i>HTML4</i>, o si prefieres usar las posibilidades más modernas de <i>HTML5</i>.',
 	'texte_compatibilite_html_attention' => 'No hay ningún riesgo en activar la opción <i>HTML5</i>, pero entonces las páginas de su sitio tienen que empezar por la mención siguiente (para ser válidas): <code>&lt;!DOCTYPE html&gt;</code>.',
 	'texte_compresse_ou_non' => '(comprimido o no)',
 	'texte_compte_element' => '@count@ elemento',

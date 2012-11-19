@@ -37,8 +37,8 @@
 		<traducteur nom="frederik" lien="http://trad.spip.net/auteur/frederik" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=es">
-		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 		<traducteur nom="Nathan" lien="http://trad.spip.net/auteur/nathan" />
 		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />

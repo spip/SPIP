@@ -800,7 +800,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'تنفيذ الآن',
-	'queue_info_purger' => 'يمكنك حذف كل الأعمال في الانتظار وتأصيل لائحة الأعمال الدورية', # MODIF
+	'queue_info_purger' => 'يمكنك حذف كل الأعمال في الانتظار وتأصيل لائحة الأعمال الدورية',
 	'queue_nb_jobs_in_queue' => '@nb@ عمل بالانتظار',
 	'queue_next_job_in_nb_sec' => 'العمل القادم خلال @nb@ ثانية',
 	'queue_no_job_in_queue' => 'لا توجد أعمال بالانتظار',
@@ -816,8 +816,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_admin_restreint' => ')إدارة محدودة(',
 
 	// T
-	'tache_cron_asap' => 'مهمة CRON @function@ (في أسرع وقت)', # MODIF
-	'tache_cron_secondes' => 'مهمةCRON @function@ (كل @nb@ ثانية)', # MODIF
+	'tache_cron_asap' => 'مهمة CRON @function@ (في أسرع وقت)',
+	'tache_cron_secondes' => 'مهمةCRON @function@ (كل @nb@ ثانية)',
 	'taille_cache_image' => 'تحتل الصور التي حسبها SPIP آلياً (مصغرات مستندات، عناوين معروضة كصور، دالات رياضية بتنسيق TeX...) مساحة اجمالية تبلغ @taille@ في الدليل @dir@.',
 	'taille_cache_infinie' => 'لا يضع هذا الموقع اي حدود لحجم دليل الذاكرة المخبأة.',
 	'taille_cache_maxi' => 'يحاول SPIP الحد من حجم دليل الذاكرة المخبأة في هذا الموقع لكي لا يتعدى <b>@octets@</b> من البيانات.',
