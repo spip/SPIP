@@ -51,7 +51,7 @@ item_picked et picker doivent seulement etre voisins
 			picked = picker.siblings('ul.item_picked');
 		}
 		var select = picked.is('.select');
-		var obligatoire = picked.is('obligatoire');
+		var obligatoire = picked.is('.obligatoire');
 		if (select)
 			picked.html('');
 		else
@@ -65,8 +65,8 @@ item_picked et picker doivent seulement etre voisins
 				picked.append('<li class="last on '+type+'">'
 				+'<input type="hidden" name="'+name+'[]" value="'+id_item+'"/>'
 				+ title
-				+((select&&obligatoire)?"":" <a href='#' onclick='jQuery(this).item_unpick();return false;'>"
-				  +"<img src='"+img_unpick+"' /></a>"
+				+((select&&obligatoire)?"":" <a tile='"+selecteur_label_supprimer+"' href='#' onclick='jQuery(this).item_unpick();return false;'>"
+				  +"<img alt='"+selecteur_label_supprimer+"' src='"+img_unpick+"' /></a>"
 				  )
 				+'<span class="sep">, </span></li>').removeClass('changing').stopAnimeajax();
 				// masquer le selecteur apres un pick

@@ -2,21 +2,21 @@
 
 [(#REM) Afficher un bouton ajax Modifier a la premiere fois ]
 [(#ENV{picker,''}|non)
-<div class='picker_bouton'>&#91;<a href='[(#SELF|parametre_url{picker,1})]' class='ajax'>#GET{bouton_modif}</a>&#93;</div>
+<div class='picker_bouton'>&#91;<a href='[(#SELF|parametre_url{picker,1})]' class="ajax nohistory">#GET{bouton_modif}</a>&#93;</div>
 ]
 
 [(#REM) Afficher un bouton Fermer/Modifier ensuite ]
 [(#ENV{picker,''}|oui)
 <div class='picker_bouton'>
-&#91;<a
-	class='close'
-	href='[(#SELF|parametre_url{picker,0})]'
+<a
+	class="close"
+	href="[(#SELF|parametre_url{picker,0})]"
 	onclick="jQuery(this).parent().picker_toggle();return false;"
 ><:bouton_fermer:></a><a
-	class='edit'
-	href='[(#SELF|parametre_url{picker,1})]' 
+	class="edit"
+	href="[(#SELF|parametre_url{picker,1})]" 
 	onclick="jQuery(this).parent().picker_toggle();return false;"
-	style='display:none;'>#GET{bouton_modif}</a>&#93;
+	style="display:none;">#GET{bouton_modif}</a>
 </div>
 
 [(#REM) et enfin le navigateur ------]

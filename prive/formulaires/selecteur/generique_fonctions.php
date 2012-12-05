@@ -4,13 +4,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /*
  * Fournit la liste des objets ayant un sélecteur
- * Concrètement, va chercher tous les formulaires/selecteur/hierarchie-truc.html
+ * Concrètement, va chercher tous les formulaires/selecteur/hierarchie-trucs.html
  * Ensuite on ajoute les parents obligatoires éventuels
+ *
+ * @param array $whitelist Liste blanche décrivant les objets à lister
+ * @param array $blacklist Liste noire décrivant les objets à ne pas lister
+ * @return array Retourne un tableau de deux entrées listant les objets à lister et les objets sélectionnables
+ *    selectionner : tableau des objets que l'on pourra sélectionner (avec un +)
+ *    afficher : tableau des objets à afficher (mais pas forcément sélectionnables)
  */
 function selecteur_lister_objets($whitelist=array(), $blacklist=array()){
-	$liste = find_all_in_path('formulaires/selecteur/', 'hierarchie-[\w]+[.]html$');
+	static $liste_selecteurs, $liste_parents;
+	
+	if (!$liste_selecteurs){
+		$liste_selecteurs = find_all_in_path('formulaires/selecteur/', 'hierarchie-[\w]+[.]html$');
+	}
 	$objets_selectionner = array();
-	foreach ($liste as $fichier=>$chemin){
+	foreach ($liste_selecteurs as $fichier=>$chemin){
 		$objets_selectionner[] = preg_replace('/^hierarchie-([\w]+)[.]html$/', '$1', $fichier);
 	}
 	
@@ -27,10 +37,13 @@ function selecteur_lister_objets($whitelist=array(), $blacklist=array()){
 	
 	// Ensuite on cherche ce qu'on doit afficher : au moins ceux qu'on peut sélectionner
 	$objets_afficher = $objets_selectionner;
+	
 	// Il faut alors chercher d'éventuels parents obligatoires :
 	// lister-trucs-bidules.html => on doit afficher des "trucs" pour trouver des "bidules"
-	$liste = find_all_in_path('formulaires/selecteur/', 'lister-[\w]+-[\w]+[.]html$');
-	foreach ($liste as $fichier=>$chemin){
+	if (!$liste_parents){
+		$liste_parents = find_all_in_path('formulaires/selecteur/', 'lister-[\w]+-[\w]+[.]html$');
+	}
+	foreach ($liste_parents as $fichier=>$chemin){
 		preg_match('/^lister-([\w]+)-([\w]+)[.]html$/', $fichier, $captures);
 		$parent = $captures[1];
 		$type = $captures[2];
