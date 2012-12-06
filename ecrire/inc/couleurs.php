@@ -102,14 +102,17 @@ onblur="changestyle(\'bandeauinterface\');"';
 			'<a href="'
 			  . generer_action_auteur('preferer',"couleur:$key",$ret)
 				. '"'
-			. ' rel="'.generer_url_public('style_prive','ltr='
+
+			  . ' title="'.generer_url_public('style_prive','ltr='
 				. $GLOBALS['spip_lang_left'] . '&'
 				. inc_couleurs_dist($key)).'"'
 			  . $evt
 			.'>'
 			. http_img_pack("rien.gif",
-					_T('choix_couleur_interface') . $key,
-					"width='8' height='8' style='margin: 1px; background-color: "	. $val['couleur_claire'] . ";'")
+					 $key,
+					"width='8' height='8' style='margin: 1px; background-color: "	. $val['couleur_claire'] . ";'",
+					_T('titre_changer_couleur_interface') . " $key"
+)
 			. "</a>";
 		}
 
@@ -124,7 +127,7 @@ onblur="changestyle(\'bandeauinterface\');"';
 				$('head>link#cssprivee')
 				.clone()
 				.removeAttr('id')
-				.attr('href', $(this).attr('rel'))
+				.attr('href', $(this).attr('title'))
 				.appendTo($('head'));
 
 				$.get($(this).attr('href'));
