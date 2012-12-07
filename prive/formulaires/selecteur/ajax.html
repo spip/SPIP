@@ -2,12 +2,12 @@
 
 [(#REM) Afficher un bouton ajax Modifier a la premiere fois ]
 [(#ENV{picker,''}|non)
-<div class='picker_bouton'>&#91;<a href='[(#SELF|parametre_url{picker,1})]' class="ajax nohistory">#GET{bouton_modif}</a>&#93;</div>
+<div class='picker_bouton'><a href='[(#SELF|parametre_url{picker,1})]' class="ajax nohistory">#GET{bouton_modif}</a></div>
 ]
 
 [(#REM) Afficher un bouton Fermer/Modifier ensuite ]
 [(#ENV{picker,''}|oui)
-<div class='picker_bouton'>
+<div class="picker_bouton">
 <a
 	class="close"
 	href="[(#SELF|parametre_url{picker,0})]"
@@ -19,8 +19,8 @@
 	style="display:none;">#GET{bouton_modif}</a>
 </div>
 
-[(#REM) et enfin le navigateur ------]
-<div class='browser'>
+[(#REM) et enfin le navigateur (et l'ajout rapide) ------]
+<div class="browser">
 	<div class="choix choix_rapide">
 		<label for="picker_rapide_#ENV{name}"><:label_ajout_id_rapide:></label>
 		<input type="text" value="" id="picker_rapide_#ENV{name}" size="10" />
@@ -62,6 +62,8 @@
 	[(#ENV{objet}|=={racine}|ou{#ENV{id_objet}|=={0}}|non)
 		[(#SET{skel, [(#ENV{objet}|table_objet)]})]
 	]
+	<div class="navigateur">
 	<INCLURE{fond=formulaires/selecteur/hierarchie-#GET{skel}, env}>
+	</div>
 </div>
 ]
