@@ -44,7 +44,7 @@ item_picked et picker doivent seulement etre voisins
 	}
 
 	jQuery.fn.item_pick = function(id_item,name,title,type){
-		var label_supprimer = (typeof selecteur_label_supprimer != 'undefined') ? : selecteur_label_supprimer : 'del';
+		var label_supprimer = (typeof selecteur_label_supprimer != 'undefined') ? selecteur_label_supprimer : 'del';
 		var picker = this.parents('.item_picker');
 		var picked = picker.siblings('ul.item_picked');
 		if (!picked.length) {
