@@ -31,9 +31,8 @@
 					jQuery.ajax({
 						dataType: 'json',
 						url: '[(#URL_PAGE{ajax_selecteur})]',
-						data: {
-							rubriques: '#ENV{rubriques}',
-							articles: '#ENV{articles}',
+						data: {	
+							objets:[(#ENV{objets/selectionner}|json_encode|sinon{\[\]}),]
 							ref: jQuery('#picker_rapide_#ENV{name}').attr('value')
 						},
 						success: function(r, statut, xhr){
