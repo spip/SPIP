@@ -56,7 +56,8 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 			}
 			if ($files) {
 				$res = valider_dir($files, $ext, $url);
-				list($err, $terr, $res) = valider_resultats($res, $ext === 'html');
+				$mode = (($ext === 'html') AND substr_count($dir, '/') <= 1);
+				list($err, $terr, $res) = valider_resultats($res, $mode);
 				$err = '<br /><h2>' . $terr . " " . _T('erreur_texte') . " ($err/" . count($files) .')</h2>';
 				$res = $err . $res;
 			} else {
@@ -81,6 +82,11 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 			$transformer_xml = charger_fonction('valider', 'xml');
 			$onfocus = "this.value='" . addslashes($url) . "';";
 			if (preg_match(',^[a-z][0-9a-z_]*$,i', $url)) {
+				if (($dir=='exec') AND (tester_url_ecrire($url) == 'fond')) {
+					include_spip('exec/fond');
+					$args = array($url, array());
+					$url = 'fond_args';
+				}
 				$res = $transformer_xml(charger_fonction($url, $dir), $args);
 				$url_aff = valider_pseudo_url($dir, $script);
 			} else {
@@ -227,10 +233,11 @@ function valider_skel($transformer_xml, $file, $dir, $ext)
 		$script = $file;
 	} else {
 		$script = basename($file,'.html');
-		// pas de validation solitaire pour les squelettes internes, a revoir.
+		// les squelettes en sous-repertoire sont problematiques,
+		// traitons au moins le cas prive/exec
 		if (substr_count($dir, '/') <= 1) {
 			$url = generer_url_public($script, $contexte);
-		} else 	$url = '';
+		} else 	$url = valider_pseudo_url(basename($dir), basename($file, '.html'), $contexte);
 		$composer = charger_fonction('composer', 'public');
 		list($skel_nom, $skel_code) = $composer($text, 'html', 'html', $file);
 
@@ -292,6 +299,7 @@ function valider_dir($files, $ext, $dir)
 	$res = array();
 	$transformer_xml = charger_fonction('valider', 'xml');
 	$valideur = $ext=='php' ? 'valider_script' : 'valider_skel' ;
+	include_spip('public/assembler');
 	foreach($files as $f) {
 		spip_timer($f);
 		$val = $valideur($transformer_xml, $f, $dir, $ext);
