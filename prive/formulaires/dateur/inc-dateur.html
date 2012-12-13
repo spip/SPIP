@@ -52,7 +52,10 @@ if (window.jQuery){
 	jQuery(function(){
 		if (jQuery('input.date,input.heure').length && !date_picker_loading){
 			date_picker_loading = true; // inutile de loader deux fois
-			jQuery.getScript('#PRODUIRE{fond=formulaires/dateur/jquery.dateur.js}',date_picker_init);
+			jQuery.getScript('#PRODUIRE{fond=formulaires/dateur/jquery.dateur.js}').done(function(){
+				date_picker_init();
+				onAjaxLoad(date_picker_init);
+			});
 		}
 	});
 }
