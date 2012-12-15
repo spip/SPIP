@@ -561,7 +561,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
   s uveden&iacute;m p&#345;&iacute;stupov&yacute;ch &uacute;daj&#367; k priv&aacute;tn&iacute; &#269;&aacute;sti.
   N&#283;kte&#345;&iacute; poskytovatel&eacute; prostoru pro web odes&iacute;l&aacute;n&iacute; email&#367; ze sv&yacute;ch server&#367;
   vyp&iacute;naj&iacute;. Automatick&eacute; p&#345;ihl&aacute;&#353;en&iacute; je v takov&eacute;m p&#345;&iacute;pad&#283;
-  nemo&#382;n&eacute;.', # MODIF
+  nemo&#382;n&eacute;.</i></blockquote>', # MODIF
 'info_question_mots_cles' => 'Chcete na va&#353;em webu pou&#382;&iacute;vat kl&iacute;&#269;ov&aacute; slova?',
 'info_question_proposer_site' => 'Kdo m&#367;&#382;e navrhovat odkazy na weby?',
 'info_question_utilisation_moteur_recherche' => 'Chcete pou&#382;&iacute;vat vyhled&aacute;va&#269;, kter&yacute; je sou&#269;&aacute;st&iacute; syst&eacute;mu SPIP?

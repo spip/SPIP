@@ -543,7 +543,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
   la uzantoj ricevos a&#365;tomate senditan retmesa&#285;on kun siaj
   alir-kodoj al la privata spaco. Iuj
   retejgastigantoj malaktivigas la sendadon de retleteroj el siaj
-  serviloj&nbsp;: tiukaze la a&#365;tomata ali&#285;o ne eblos.', # MODIF
+  serviloj&nbsp;: tiukaze la a&#365;tomata ali&#285;o ne eblos.</i></blockquote>', # MODIF
 'info_question_mots_cles' => '&#264;u vi deziras uzi &#349;losilvortojn &#265;e via retejo&nbsp;?',
 'info_question_proposer_site' => 'Kiu povas proponi referencigitajn retejojn&nbsp;?',
 'info_question_utilisation_moteur_recherche' => '&#264;u vi deziras uzi la SPIP-internan ser&#265;ilon&nbsp;?

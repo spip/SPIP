@@ -518,7 +518,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
  <blockquote><i>Nach der Anmeldung erhalten die neuen Redakteure automatisch
  eine E-Mail mit ihren Zugangsdaten. Manche Webhoster unterbinden den Mailversand
  von ihren Webservern aus.
- In diesem Fall funktioniert die automatische Anmeldung nicht.',
+ In diesem Fall funktioniert die automatische Anmeldung nicht.</i></blockquote>',
 'info_question_mots_cles' => 'M&ouml;chten Sie Schlagworte f&uuml;r Ihre Website verwenden?',
 'info_question_proposer_site' => 'Wer darf Websites zur Verlinkung vorschlagen?',
 'info_question_utilisation_moteur_recherche' => 'Wollen Sie die integrierte Suchfunktion von SPIP verwenden? (ohne Suchfunktion wird Ihr System schneller.)',

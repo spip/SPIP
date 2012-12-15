@@ -540,7 +540,7 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
  prepauar d\'articles.<blockquote><i> Durant la fasa d\'inscripcion, lu utilizaires recebon un e-mail automatic
  que li dona un c&ograve;de d\'acc&egrave;s au sit privat.
 D\'unu aubergadors non autorizan lo mandad&iacute;s d\'e-mails desp&iacute; lu sieus servidors: en aqueu cas, l\'inscripcion automatica es
- impossibla.', # MODIF
+ impossibla.</i></blockquote>', # MODIF
 'info_question_mots_cles' => 'Desiratz d\'utilizar lu mots clau sus lo v&ograve;stre sit?',
 'info_question_proposer_site' => 'Cu p&ograve;u prepausar de sits referenciats?',
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilizar lo cercador integrat a SPIP? (lo desactivar abriva lo foncionament dau sist&egrave;ma.)',

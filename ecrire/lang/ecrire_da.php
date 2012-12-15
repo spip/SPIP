@@ -535,7 +535,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 		og derefter f&aring; adgang til det private omr&aring;de, hvor de kan vedligeholde deres egne artikler.
 		<blockquote><i>Under tilmeldingen modtager brugerne en automatisk dannet e-mail med deres adgangskode til det
 		private websted. Nogle webhoteller tillader ikke at der sendes e-mails fra deres servere. I s&aring; fald kan automatisk
-		tilmelding ikke finde sted.', # MODIF
+		tilmelding ikke finde sted.</i></blockquote>', # MODIF
 'info_question_mots_cles' => '&Oslash;nsker du at bruge n&oslash;gleord p&aring; webstedet?',
 'info_question_proposer_site' => 'Hvem kan foresl&aring; henvisninger til websteder?',
 'info_question_utilisation_moteur_recherche' => '&Oslash;nsker du at anvende den s&oslash;gefunktion, der findes i SPIP?

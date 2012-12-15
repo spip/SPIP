@@ -540,7 +540,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
  perpausar articles.<blockquote><i> Durant la fasa d\'inscripcion, los utilizaires que receben un e-mail automatic
  qui\'us balha un c&ograve;de d\'acc&egrave;s au sit privat.
 Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los lors serviders: en aqueth cas, l\'inscripcion automatica qu\'ei
- impossibla.', # MODIF
+ impossibla.</i></blockquote>', # MODIF
 'info_question_mots_cles' => 'E desiratz d\'utilizar los mots clau suu v&ograve;ste sit?',
 'info_question_proposer_site' => 'Qui p&ograve;t perpausar sits referenciats?',
 'info_question_utilisation_moteur_recherche' => 'E desiratz d\'utilizar lo cercader integrat a SPIP? (lo desactivar qu\'accel&egrave;ra lo foncionament deu sist&egrave;ma.)',

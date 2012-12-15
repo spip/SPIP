@@ -539,7 +539,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   care le va furniza codurile de acces la site-ul privat. Anumi&#355;i
   furnizori de hosting dezactiveaz&#259; trimiterea de email-uri de pe
   server-ele lor&nbsp;: &icirc;n acest caz &icirc;nscrierea automatic&#259; este
-  imposibil&#259;.', # MODIF
+  imposibil&#259;.</i></blockquote>', # MODIF
 'info_question_mots_cles' => 'Dori&#355;i s&#259; utiliza&#355;i cuvintele-cheie pe site-ul dumneavoastr&#259;&nbsp;?',
 'info_question_proposer_site' => 'Cine poate propune site-uri referen&#355;iate&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Dori&#355;i s&#259; utiliza&#355;i motorul de c&#259;utare integrat &icirc;n SPIP&nbsp;?

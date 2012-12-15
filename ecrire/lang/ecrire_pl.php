@@ -561,7 +561,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   has&#322;a dost&#281;pu do strefy prywatnej. Niekt&oacute;re serwisy hostingowe
   wy&#322;&#261;czaj&#261; mo&#380;liwo&#347;&#263; wysy&#322;ania maili z ich
   serwer&oacute;w&nbsp;: w tym przypadku automatyczne zapisanie si&#281; jest
-  niemo&#380;liwe.', # MODIF
+  niemo&#380;liwe.</i></blockquote>', # MODIF
 'info_question_mots_cles' => 'Czy na Twojej stronie maj&#261; by&#263; stosowane s&#322;owa kluczowe?',
 'info_question_proposer_site' => 'Kto mo&#380;e proponowa&#263; zlinkowane strony&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Czy &#380;yczysz sobie skorzysta&#263; z wyszukiwarki wewn&#281;trznej SPIP&nbsp;?
