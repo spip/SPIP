@@ -200,8 +200,8 @@ function supprimer_sessions($id_auteur) {
 		if (!preg_match(",^\D*(\d+)_\w{32}\.php[3]?$,", $e, $r))
 			continue;
 		$f = _DIR_SESSIONS . $e;
-		if (($id_auteur AND ($r[1] == $id_auteur))
-		OR ($t > filemtime($f))) {
+		if (file_exists($f) AND (($id_auteur AND ($r[1] == $id_auteur))
+		OR ($t > filemtime($f)))) {
 			spip_unlink($f);
 			$i++;
 		}

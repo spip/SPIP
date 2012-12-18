@@ -147,7 +147,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 	if (@file_exists($f = $fichier)){
 		list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
-		$date_src = @filemtime($f);
+		$date_src = filemtime($f);
 	}
 	elseif (@file_exists($f = "$fichier.src")
 		AND lire_fichier($f,$valeurs)
@@ -322,7 +322,7 @@ function _image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 		if (@file_exists($valeurs['fichier_dest'])){
 			// dans tous les cas mettre a jour la taille de l'image finale
 			list ($valeurs["hauteur_dest"],$valeurs["largeur_dest"]) = taille_image($valeurs['fichier_dest']);
-			$valeurs['date'] = @filemtime($valeurs['fichier_dest']); // pour la retrouver apres disparition
+			$valeurs['date'] = filemtime($valeurs['fichier_dest']); // pour la retrouver apres disparition
 			ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
 		}
 		
@@ -671,7 +671,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 	
 	$retour['fichier'] = $vignette;
 	$retour['format'] = $format;
-	$retour['date'] = @filemtime($vignette);
+	$retour['date'] = (file_exists($vignette)) ? filemtime($vignette) : 0;
 	
 	// renvoyer l'image
 	return $retour;

@@ -27,7 +27,7 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
 
 	if (lire_fichier($file, $r)) {
-		if (!$grammaire) return array();
+		if (!$grammaire OR !file_exists($grammaire)) return array();
 		if (($avail == 'SYSTEM') AND filemtime($file) < filemtime($grammaire))
 				$r = false;
 	}
