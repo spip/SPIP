@@ -147,7 +147,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 
 	if (@file_exists($f = $fichier)){
 		list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
-		$date_src = @@filemtime($f);
+		$date_src = @filemtime($f);
 	}
 	elseif (@file_exists($f = "$fichier.src")
 		AND lire_fichier($f,$valeurs)
@@ -211,7 +211,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	}
 	else {
 		if (@file_exists($f = $fichier_dest)){
-			if (@filemtime($f)>=$date_src)
+			if (filemtime($f)>=$date_src)
 				$creer = false;
 		}
 		else if (@file_exists($f = "$fichier_dest.src")
@@ -322,7 +322,7 @@ function _image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 		if (@file_exists($valeurs['fichier_dest'])){
 			// dans tous les cas mettre a jour la taille de l'image finale
 			list ($valeurs["hauteur_dest"],$valeurs["largeur_dest"]) = taille_image($valeurs['fichier_dest']);
-			$valeurs['date'] = @@filemtime($valeurs['fichier_dest']); // pour la retrouver apres disparition
+			$valeurs['date'] = @filemtime($valeurs['fichier_dest']); // pour la retrouver apres disparition
 			ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
 		}
 		
@@ -510,7 +510,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 
 	// utiliser le cache ?
 	if (!$test_cache_only)
-	if ($force OR !$vignette OR (@@filemtime($vignette) < @filemtime($image))) {
+	if ($force OR !$vignette OR (@filemtime($vignette) < @filemtime($image))) {
 
 		$creation = true;
 		// calculer la taille
@@ -671,7 +671,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 	
 	$retour['fichier'] = $vignette;
 	$retour['format'] = $format;
-	$retour['date'] = @@filemtime($vignette);
+	$retour['date'] = @filemtime($vignette);
 	
 	// renvoyer l'image
 	return $retour;
@@ -805,7 +805,7 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 		// dans l'espace prive mettre un timestamp sur l'adresse 
 		// de l'image, de facon a tromper le cache du navigateur
 		// quand on fait supprimer/reuploader un logo
-		// (pas de @filemtime si SAFE MODE)
+		// (pas de filemtime si SAFE MODE)
 		$date = test_espace_prive() ? ('?date='.$date) : '';
 		return _image_ecrire_tag($image,array('src'=>"$logo$date",'width'=>$destWidth,'height'=>$destHeight));
 	}

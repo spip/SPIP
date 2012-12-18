@@ -47,7 +47,7 @@ function action_acceder_document_dist() {
 		} else {
 
 			// ETag pour gerer le status 304
-			$ETag = md5($file . ': '. @filemtime($file));
+			$ETag = md5($file . ': '. filemtime($file));
 			if (isset($_SERVER['HTTP_IF_NONE_MATCH'])
 			AND $_SERVER['HTTP_IF_NONE_MATCH'] == $ETag) {
 				http_status(304); // Not modified
