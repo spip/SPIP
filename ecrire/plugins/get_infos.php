@@ -36,16 +36,16 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 		}
 		if (!is_array($cache)) $cache = array();
 	} 
-	$force_reload |= !isset($cache[$dir_plugins][$plug]['filemtime']);
+	$force_reload |= !isset($cache[$dir_plugins][$plug]['@filemtime']);
  
 	$desc = "$dir_plugins$plug/$filename";
 	if (!file_exists($desc))
 		return false;
-	$time = intval(@filemtime($desc));
+	$time = intval(@@filemtime($desc));
 
 	if (!$force_reload
 	AND ($time > 0)
-	AND ($time <= $cache[$dir_plugins][$plug]['filemtime'])) {
+	AND ($time <= $cache[$dir_plugins][$plug]['@filemtime'])) {
 		return $cache[$dir_plugins][$plug];
 	}
 
@@ -58,7 +58,7 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 
 	$ret = array('nom' => charset2unicode(spip_xml_aplatit($arbre['nom'])),
 		     'version' => trim(end($arbre['version'])),
-		     'filemtime' => $time
+		     '@filemtime' => $time
 		     );
 
 	if (isset($arbre['auteur']))

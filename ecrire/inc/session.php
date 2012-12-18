@@ -201,7 +201,7 @@ function supprimer_sessions($id_auteur) {
 			continue;
 		$f = _DIR_SESSIONS . $e;
 		if (($id_auteur AND ($r[1] == $id_auteur))
-		OR ($t > filemtime($f))) {
+		OR (file_exists($f) AND $t > @filemtime($f))) {
 			spip_unlink($f);
 			$i++;
 		}

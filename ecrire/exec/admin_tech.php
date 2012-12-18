@@ -179,7 +179,7 @@ function admin_sauvegardes($dir_dump, $tri)
 	$i = 0;
 	foreach($liste_dump as $fichier){
 		$i++;
-		$d = filemtime($fichier);
+		$d = @filemtime($fichier);
 		$t = filesize($fichier);
 		$s = ($fichier==$selected);
 		$class = 'row_'.alterner($i, 'even', 'odd');

@@ -462,7 +462,7 @@ function spip_timer($t='rien', $raw = false) {
 function spip_touch($fichier, $duree=0, $touch=true) {
 	if ($duree) {
 		clearstatcache();
-		if ((@$f=filemtime($fichier)) AND ($f >= time() - $duree))
+		if ((@$f=@filemtime($fichier)) AND ($f >= time() - $duree))
 			return false;
 	}
 	if ($touch!==false) {
