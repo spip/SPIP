@@ -537,10 +537,10 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz que de redactors nov&egrave;us s\'inscrigan
  a partir dau sit public? S\'o acceptatz, lu vesitaires si porr&agrave;n inscriure
  gaug a un formulari automatizat e alora accedir&agrave;n a l\'espaci privat per
- prepauar d\'articles.<blockquote><i> Durant la fasa d\'inscripcion, lu utilizaires recebon un e-mail automatic
+ prepauar d\'articles.<blockquote><div><i> Durant la fasa d\'inscripcion, lu utilizaires recebon un e-mail automatic
  que li dona un c&ograve;de d\'acc&egrave;s au sit privat.
 D\'unu aubergadors non autorizan lo mandad&iacute;s d\'e-mails desp&iacute; lu sieus servidors: en aqueu cas, l\'inscripcion automatica es
- impossibla.</i></blockquote>', # MODIF
+ impossibla.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Desiratz d\'utilizar lu mots clau sus lo v&ograve;stre sit?',
 'info_question_proposer_site' => 'Cu p&ograve;u prepausar de sits referenciats?',
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilizar lo cercador integrat a SPIP? (lo desactivar abriva lo foncionament dau sist&egrave;ma.)',
@@ -1109,9 +1109,9 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'texte_sur_titre' => 'Sobret&iacute;tol',
 'texte_syndication' => 'Si p&ograve;u recuperar automaticament, quora un sit web o permete, 
   la tiera dei novetats. Per aqu&ograve; far, vos cau activar la sindicacion. 
-  <blockquote><i>D\'unu aubergadors non activan aquela foncionalitat; 
+  <blockquote><div><i>D\'unu aubergadors non activan aquela foncionalitat; 
   en aqueu cas, non porretz utilizar la sindicacion de contengut
-  desp&iacute; lo v&ograve;stre sit.</i></blockquote>', # MODIF
+  desp&iacute; lo v&ograve;stre sit.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': aquesta taula es condrecha.',
 'texte_tables_indexation_vides' => 'Li taulas d\'indexacion dau motor son vueii.',
 'texte_tentative_recuperation' => 'Assai de reparacion',

@@ -539,11 +539,11 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_question_inscription_nouveaux_redacteurs' => '&#264;u vi akceptas la registri&#285;adon de novaj redaktantoj ekde
   la publika spaco&nbsp;? Se vi akceptas tion, la vizitantoj povos registri&#285;i
   per a&#365;tomata ali&#285;ilo kaj tiam aliros al la privata spaco por
-  proponi siajn proprajn artikolojn. <blockquote><i>Dum la ali&#285;o,
+  proponi siajn proprajn artikolojn. <blockquote><div><i>Dum la ali&#285;o,
   la uzantoj ricevos a&#365;tomate senditan retmesa&#285;on kun siaj
   alir-kodoj al la privata spaco. Iuj
   retejgastigantoj malaktivigas la sendadon de retleteroj el siaj
-  serviloj&nbsp;: tiukaze la a&#365;tomata ali&#285;o ne eblos.</i></blockquote>', # MODIF
+  serviloj&nbsp;: tiukaze la a&#365;tomata ali&#285;o ne eblos.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => '&#264;u vi deziras uzi &#349;losilvortojn &#265;e via retejo&nbsp;?',
 'info_question_proposer_site' => 'Kiu povas proponi referencigitajn retejojn&nbsp;?',
 'info_question_utilisation_moteur_recherche' => '&#264;u vi deziras uzi la SPIP-internan ser&#265;ilon&nbsp;?
@@ -1109,9 +1109,9 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'texte_sur_titre' => 'Surtitolo',
 'texte_syndication' => 'Eblas elpreni a&#365;tomate la liston de nova&#309;oj de iu retejo,
   se tiu retejo tion permesas. Por tio, vi devas aktivigi la abonrilaton.
-  <blockquote><i>Iuj retgastigantoj malaktivigas tiun funkcion&nbsp;;
+  <blockquote><div><i>Iuj retgastigantoj malaktivigas tiun funkcion&nbsp;;
   tiukaze vi ne povas abonligi la enhavon
-  ekde via retejo.</i></blockquote>', # MODIF
+  ekde via retejo.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': tiu tabelo estas en ordo.',
 'texte_tables_indexation_vides' => 'La indeksaj tabeloj de la ser&#265;ilo estas malplenaj.',
 'texte_tentative_recuperation' => 'Ripar-provo',

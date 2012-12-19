@@ -544,9 +544,9 @@ yaratabilir. Bu da otomatik olarak bir galeri
     E&#287;er kabul ediyorsan&#305;z, ziyaret&ccedil;iler otomatik
     bir form ile kaydolabilecek ve kendi makalelerini
     &ouml;nermek &uuml;zere &ouml;zel alana eri&#351;eceklerdir. 
-<blockquote><i>Kay&#305;t a&#351;amas&#305;nda,    kullan&#305;c&#305;lara,  &ouml;zel siteye eri&#351;im &#351;ifresi veren bir otomatik
+<blockquote><div><i>Kay&#305;t a&#351;amas&#305;nda,    kullan&#305;c&#305;lara,  &ouml;zel siteye eri&#351;im &#351;ifresi veren bir otomatik
     e-posta g&ouml;nderilir. Baz&#305; Hizmet bilgisayarlar&#305; kendi sunucular&#305;ndan
-    e-posta yollanmas&#305;n&#305; durduruyorlar&nbsp;: bu durumda otomatik kay&#305;t olanaks&#305;zd&#305;r.</i></blockquote>', # MODIF
+    e-posta yollanmas&#305;n&#305; durduruyorlar&nbsp;: bu durumda otomatik kay&#305;t olanaks&#305;zd&#305;r.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Sitenizde anahtar s&ouml;zc&uuml;k kullanmak istiyor musunuz ?',
 'info_question_proposer_site' => 'Kim at&#305;fta bulunulan siteler &ouml;nerebilir ?',
 'info_question_utilisation_moteur_recherche' => 'SPIP\'in entegre arama motorunu kullanmak istiyor musunuz ?

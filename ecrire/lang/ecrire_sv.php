@@ -548,12 +548,12 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptez-vous les inscriptions de nouveaux r&eacute;dacteurs &agrave;
   partir du site public&nbsp;? Si vous acceptez, les visiteurs pourront s\'inscrire
   depuis un formulaire automatis&eacute; et acc&eacute;deront alors &agrave; l\'espace priv&eacute; pour
-  proposer leurs propres articles. <blockquote><i>Lors de la phase d\'inscription,
+  proposer leurs propres articles. <blockquote><div><i>Lors de la phase d\'inscription,
   les utilisateurs re&ccedil;oivent un courrier &eacute;lectronique automatique
   leur fournissant leurs codes d\'acc&egrave;s au site priv&eacute;. Certains
   h&eacute;bergeurs d&eacute;sactivent l\'envoi de mails depuis leurs
   serveurs&nbsp;: dans ce cas, l\'inscription automatique est
-  impossible.</i></blockquote>', # MODIF
+  impossible.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Vill du anv&auml;nsda nyckelord i din sajt?',
 'info_question_proposer_site' => 'Vem kan f&ouml;resl&aring; l&auml;nkar till sajter?',
 'info_question_utilisation_moteur_recherche' => 'Vill du anv&auml;nda SPIP&#381;s integrerade s&ouml;kfunktion?
@@ -1117,9 +1117,9 @@ gjort viktiga f&ouml;r&auml;ndringar i sajtens utseende eller struktur.',
 'texte_sur_titre' => '&Ouml;vertitel',
 'texte_syndication' => 'If a site allows it, it is possible to retrieve automatically
 		the list of its latest material. To achieve this, you must activate the syndication. 
-		<blockquote><i>Some hosts disable this function; 
+		<blockquote><div><i>Some hosts disable this function; 
 		in this case, you cannot use the content syndication
-		from your site.</i></blockquote>', # MODIF
+		from your site.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': den h&auml;r tabellen &auml;r OK.',
 'texte_tables_indexation_vides' => 'Indextabellerna &auml;r tomma.',
 'texte_tentative_recuperation' => 'Reparationsf&ouml;rs&ouml;k',

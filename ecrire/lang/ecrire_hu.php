@@ -536,10 +536,10 @@ a t&ouml;r&ouml;lt szerz&#337;k pedig kuk&aacute;val vannak jel&ouml;lve.',
 'info_question_activer_compresseur' => 'Voulez-vous activer la compression du flux HTTP ?', # NEW
 'info_question_gerer_statistiques' => 'A honlap kezeljen-e st&aacute;tisztik&aacute;kat a l&aacute;t&oacute;gat&aacute;sokr&oacute;l&nbsp;?',
 'info_question_inscription_nouveaux_redacteurs' => 'Elfogadja-e az &uacute;j szerz&#337;k be&iacute;ratkoz&aacute;s&aacute;t a nyilvanos honlapr&oacute;l&nbsp;? Amennyiben elfogadja, akkor a l&aacute;togat&oacute;k be&iacute;ratkozhatnak
-  egy automatiz&aacute;lt &#369;rlapon &eacute;s majd hozz&aacute;f&eacute;rnek a priv&aacute;t r&eacute;szre, saj&aacute;t cikkei javaslatt&eacute;tel&eacute;re. <blockquote><i>A be&iacute;ratkoz&aacute;si f&aacute;zis sor&aacute;n,
+  egy automatiz&aacute;lt &#369;rlapon &eacute;s majd hozz&aacute;f&eacute;rnek a priv&aacute;t r&eacute;szre, saj&aacute;t cikkei javaslatt&eacute;tel&eacute;re. <blockquote><div><i>A be&iacute;ratkoz&aacute;si f&aacute;zis sor&aacute;n,
 a felhaszn&aacute;l&oacute;k automatikus emailt kapnak,
   mely a priv&aacute;t reszhez sz&uuml;ks&eacute;ges hozz&aacute;f&eacute;r&eacute;si k&oacute;dokat tartalmazza.
- Bizonyos szolg&aacute;ltat&oacute;k inaktiv&aacute;lj&aacute;k az emailk&uuml;ld&eacute;st a szerver&uuml;kr&#337;l&nbsp;: ilyen esetben lehetetlen az automatikus be&iacute;ratkoz&aacute;s.</i></blockquote>', # MODIF
+ Bizonyos szolg&aacute;ltat&oacute;k inaktiv&aacute;lj&aacute;k az emailk&uuml;ld&eacute;st a szerver&uuml;kr&#337;l&nbsp;: ilyen esetben lehetetlen az automatikus be&iacute;ratkoz&aacute;s.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Kiv&aacute;nja-e haszn&aacute;lni a kulcsszavakat a honlapj&aacute;n&nbsp;?',
 'info_question_proposer_site' => 'Ki aj&aacute;nlhat fel felvetend&#337; honlapokat&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Kiv&aacute;nja-e haszn&aacute;lni az SPIP integr&aacute;lt keres&#337; motorj&aacute;t&nbsp;?
@@ -1080,9 +1080,9 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 'texte_sur_titre' => 'Fels&#337; c&iacute;m',
 'texte_syndication' => 'Ha a honlap megengedi,akkor automatikusan lehet szerezni &uacute;jdons&aacute;gait list&aacute;j&aacute;t.
   Ez&eacute;rt kell aktiv&aacute;lni a szindik&aacute;l&aacute;st.
-  <blockquote><i>Egyes szolg&aacute;ltat&oacute;k kikapcsolj&aacute;k ezt a lehet&#337;s&eacute;get&nbsp;; 
+  <blockquote><div><i>Egyes szolg&aacute;ltat&oacute;k kikapcsolj&aacute;k ezt a lehet&#337;s&eacute;get&nbsp;; 
   ilyen esetben, nem haszn&aacute;lhatja a tartalomszindik&aacute;l&aacute;st
-  az &Ouml;n honlapj&aacute;r&oacute;l.</i></blockquote>', # MODIF
+  az &Ouml;n honlapj&aacute;r&oacute;l.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': ez a t&aacute;bla rendben van.',
 'texte_tables_indexation_vides' => 'A motor index&aacute;l&aacute;si t&aacute;blai &uuml;resek.',
 'texte_tentative_recuperation' => 'Jav&iacute;t&aacute;si kis&eacute;rlet',

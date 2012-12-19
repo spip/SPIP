@@ -552,12 +552,12 @@ De publieke forums kunnen per artikel toegestaan worden
  de publieke site? Indien wel, dan kunnen bezoekers
  zich via een geautomatiseerd formulier inschrijven en
  toegang krijgen tot de priv&eacute;-ruimte om zelf artikels
- voor te stellen.<blockquote><i>Bij inschrijving zal een
+ voor te stellen.<blockquote><div><i>Bij inschrijving zal een
  gebruiker een automatische e-mail ontvangen met daarin
  de toeganscode voor de site. Sommige hostingproviders
  blokkeren echter het versturen van e-mail vanaf hun
  servers : in dat geval is een automatische inschrijving
- niet mogelijk.</i></blockquote>',
+ niet mogelijk.</i></div></blockquote>',
 'info_question_mots_cles' => 'Wil je gebruik maken van trefwoorden op je site?',
 'info_question_proposer_site' => 'Wie kan referentiesites voorstellen?',
 'info_question_utilisation_moteur_recherche' => 'Wil je gebruik maken van de geintegreerde zoekmachine van SPIP ?
@@ -1114,9 +1114,9 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'texte_syndication' => 'Het is mogelijk om van een site automatisch een lijst met
  nieuws, als de website het toelaat, binnen te halen.
  Hiervoor dien je de syndicatie (nieuwsovername) te
- activeren. <blockquote><i>Sommige hostingproviders laten
+ activeren. <blockquote><div><i>Sommige hostingproviders laten
  dit niet toe; in dat geval kan je geen nieuwsovername
- vanaf je site laten gebeuren.</i></blockquote>',
+ vanaf je site laten gebeuren.</i></div></blockquote>',
 'texte_table_ok' => ': deze tabel is OK.',
 'texte_tables_indexation_vides' => 'De indices van de zoekmachine zijn leeggemaakt.',
 'texte_tentative_recuperation' => 'Poging tot herstel.',

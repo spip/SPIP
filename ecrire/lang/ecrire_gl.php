@@ -556,7 +556,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   os usuarios recibir&aacute;n un correo electr&oacute;nico autom&aacute;tico
   cos seus c&oacute;digos de acceso ao web privado. Alg&uacute;ns
   provedores desactivan o env&iacute;o autom&aacute;tico desde os seus servidores:
-  nese caso, a inscrici&oacute;n autom&aacute;tica &eacute; imposible.</i></blockquote>',
+  nese caso, a inscrici&oacute;n autom&aacute;tica &eacute; imposible.</i></div></blockquote>',
 'info_question_mots_cles' => 'Quere empregar as palabras chave neste seu web?',
 'info_question_proposer_site' => 'Quen pode propor os webs referidos?',
 'info_question_utilisation_moteur_recherche' => 'Quere empregar o motor de procura integrado en SPIP?
@@ -1118,9 +1118,9 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
 'texte_sur_titre' => 'Sobret&iacute;tulo',
 'texte_syndication' => 'P&oacute;dese recuperar automaticamente, e sempre que o sitio web o permita, 
   a s&uacute;a lista de novidades. Para isto, ten que activar a afiliaci&oacute;n.
-  <blockquote><i>Alg&uacute;ns aloxadores desactivan esta funcionalidade;
+  <blockquote><div><i>Alg&uacute;ns aloxadores desactivan esta funcionalidade;
   nese caso, non poder&aacute; empregar a afiliaci&oacute;n de contido
-  dende o seu web.</i></blockquote>',
+  dende o seu web.</i></div></blockquote>',
 'texte_table_ok' => ': esta t&aacute;boa est&aacute; ben.',
 'texte_tables_indexation_vides' => 'As t&aacute;boas de indexaci&oacute;n do motor est&aacute;n baleiras.',
 'texte_tentative_recuperation' => 'Tentativa de reparaci&oacute;n',

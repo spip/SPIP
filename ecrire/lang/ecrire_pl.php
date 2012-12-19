@@ -556,12 +556,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_inscription_nouveaux_redacteurs' => 'Czy akceptujesz mo&#380;liwo&#347;&#263; dodawania nowych redaktor&oacute;w
   za po&#347;rednictwem stron publicznych&nbsp;? Je&#347;li tak, odwiedz&#261;cy b&#281;d&#281; mogli si&#281; zapisa&#263;
   za pomoc&#261; zautomatyzowanego formularza i b&#281;d&#261; mieli dost&#281;p do strefy prywatnej, gdzie
-  b&#281;d&#261; proponowa&#263; w&#322;asne artyku&#322;y. <blockquote><i>W trakcie procesu zapisywania,
+  b&#281;d&#261; proponowa&#263; w&#322;asne artyku&#322;y. <blockquote><div><i>W trakcie procesu zapisywania,
   u&#380;ytkownik otrzyma automatycznie mailem
   has&#322;a dost&#281;pu do strefy prywatnej. Niekt&oacute;re serwisy hostingowe
   wy&#322;&#261;czaj&#261; mo&#380;liwo&#347;&#263; wysy&#322;ania maili z ich
   serwer&oacute;w&nbsp;: w tym przypadku automatyczne zapisanie si&#281; jest
-  niemo&#380;liwe.</i></blockquote>', # MODIF
+  niemo&#380;liwe.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Czy na Twojej stronie maj&#261; by&#263; stosowane s&#322;owa kluczowe?',
 'info_question_proposer_site' => 'Kto mo&#380;e proponowa&#263; zlinkowane strony&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Czy &#380;yczysz sobie skorzysta&#263; z wyszukiwarki wewn&#281;trznej SPIP&nbsp;?
@@ -1119,8 +1119,8 @@ od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru 
 'texte_sur_titre' => 'Nadtytu&#322;',
 'texte_syndication' => 'Je&#347;li dany serwis na to pozwala, jest mo&#380;liwo&#347;&#263; wyci&#261;gni&#281;cia z niego 
   listy news&oacute;w. Aby skorzysta&#263; z tej funkcji musisz w&#322;&#261;czy&#263; <i>syndykacj&#281; ?</i>. 
-  <blockquote><i>Niekt&oacute;re serwery maj&#261; tak&#261; mo&#380;liwo&#347;&#263; wy&#322;&#261;czon&#261;&nbsp;; 
-  w&oacute;wczas nie mo&#380;esz u&#380;ywa&#263; syndykacji przy u&#380;yciu swojej strony.</i></blockquote>', # MODIF
+  <blockquote><div><i>Niekt&oacute;re serwery maj&#261; tak&#261; mo&#380;liwo&#347;&#263; wy&#322;&#261;czon&#261;&nbsp;; 
+  w&oacute;wczas nie mo&#380;esz u&#380;ywa&#263; syndykacji przy u&#380;yciu swojej strony.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': ta tabela dzia&#322;a poprawnie.',
 'texte_tables_indexation_vides' => 'Tabele indeksowania wyszukiwarki s&#261; puste.',
 'texte_tentative_recuperation' => 'Pr&oacute;ba naprawy',

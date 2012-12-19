@@ -534,10 +534,10 @@ Risklo&ugrave; zo e vefe distrujet ho tiaz titouro&ugrave; pe ne\'z afe ket en-d
 'info_question_inscription_nouveaux_redacteurs' => 'Hag aotren a rit e c\'hellfe skridaozerien nevez en em enrolla&ntilde; adalek al lec\'hienn foran&nbsp;?
   Ma asantit e c\'hello ar weladennerien en em enskriva&ntilde; adalek ur furmskrid emgefreek, 
   ha gouest e vint neuze da dizhout al lodenn brevez evit kinnig o fennado&ugrave; dezho o-unan.
-  <blockquote><i>Da vare an enrolla&ntilde; e vez kaset ur postel emgefreek d\'ar skridaozerien
+  <blockquote><div><i>Da vare an enrolla&ntilde; e vez kaset ur postel emgefreek d\'ar skridaozerien
   enna&ntilde; ar c\'hodo&ugrave; da c\'hallout dont tre el lec\'hienn.
   Gant herberc\'herien zo e vez difennet kas postelio&ugrave; adalek o servijerio&ugrave;,
-  en degouezh-se ne vo ket posupl en em enrolla&ntilde; ent emgefre.</i></blockquote>',
+  en degouezh-se ne vo ket posupl en em enrolla&ntilde; ent emgefre.</i></div></blockquote>',
 'info_question_mots_cles' => 'Ha c\'hoant hoc\'h eus ober gant ar gerio&ugrave;-stur war ho lec\'hienn&nbsp;?',
 'info_question_proposer_site' => 'Piv a c\'hall kinnig lec\'hienno&ugrave; menegeret&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Ha c\'hoant hoc\'h eus da ober gant lusker enklask diabarzh SPIP&nbsp;?
@@ -1065,8 +1065,8 @@ Gallout a ra restro&ugrave;-se beza&ntilde; menegeret er pennad, pe diskwelet a-
 'texte_sur_titre' => 'Ustitl',
 'texte_syndication' => 'Pa vez aotreet gant ul lec\'hienn Web eo posupl adtapout en un doare emgefre roll an nevezinti.
   Evit se eo dav gweredekaat ar sindikadur.
-  <blockquote><i>Herberc\'hierien a ziweredeka an arc\'hwel-se&nbsp;; 
-  neuze n\'hallit ket implijout ar sindikadur adalek ho lec\'hienn.</i></blockquote>',
+  <blockquote><div><i>Herberc\'hierien a ziweredeka an arc\'hwel-se&nbsp;; 
+  neuze n\'hallit ket implijout ar sindikadur adalek ho lec\'hienn.</i></div></blockquote>',
 'texte_table_ok' => ': kudenn ebet gant an daolenn-ma&ntilde;.',
 'texte_tables_indexation_vides' => 'Goullo eo taolenno&ugrave; menegeri&ntilde; al lusker.',
 'texte_tentative_recuperation' => 'Taol-esa evit ratrea&ntilde;',

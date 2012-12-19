@@ -534,12 +534,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_inscription_nouveaux_redacteurs' => 'Accepta&#355;i &icirc;nscrierea de noi redactori
   &icirc;n partea public&#259; a site-ului&nbsp;? Dac&#259; accepta&#355;i, vizitatorii vor putea s&#259; se &icirc;nscrie
   cu ajutorul unui formular automatizat &#351;i vor putea avea acces la spa&#355;iul privat pentru a propune
-  propriile lor articole. <blockquote><i>Ca urmare a procesului de &icirc;nscriere,
+  propriile lor articole. <blockquote><div><i>Ca urmare a procesului de &icirc;nscriere,
   utilizatorii vor primi un email automatic
   care le va furniza codurile de acces la site-ul privat. Anumi&#355;i
   furnizori de hosting dezactiveaz&#259; trimiterea de email-uri de pe
   server-ele lor&nbsp;: &icirc;n acest caz &icirc;nscrierea automatic&#259; este
-  imposibil&#259;.</i></blockquote>', # MODIF
+  imposibil&#259;.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Dori&#355;i s&#259; utiliza&#355;i cuvintele-cheie pe site-ul dumneavoastr&#259;&nbsp;?',
 'info_question_proposer_site' => 'Cine poate propune site-uri referen&#355;iate&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Dori&#355;i s&#259; utiliza&#355;i motorul de c&#259;utare integrat &icirc;n SPIP&nbsp;?
@@ -1079,8 +1079,8 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'texte_sur_titre' => 'Supra-titlu',
 'texte_syndication' => 'Este posibil&#259; recuperarea &icirc;m mod automat, pentru site-urile de Web care o permit, 
   a listei nout&#259;&#355;ilor lor. Pentru aceasta trebuie s&#259; activa&#355;i sindicalizarea. 
-  <blockquote><i>Anumi&#355;i furnizori dezactiveaz&#259; aceast&#259; func&#355;ionalitate&nbsp;;
-  &icirc;n acest caz, nu ve&#355;i putea folosi sindicalizarea con&#355;inutului &icirc;n site-ul dumneavoastr&#259;.</i></blockquote>',
+  <blockquote><div><i>Anumi&#355;i furnizori dezactiveaz&#259; aceast&#259; func&#355;ionalitate&nbsp;;
+  &icirc;n acest caz, nu ve&#355;i putea folosi sindicalizarea con&#355;inutului &icirc;n site-ul dumneavoastr&#259;.</i></div></blockquote>',
 'texte_table_ok' => ': aceast&#259; tabel&#259; este OK.',
 'texte_tables_indexation_vides' => 'Tabelele de indexare ale motorului sunt goale.',
 'texte_tentative_recuperation' => 'Tentativ&#259; de recuperare',
