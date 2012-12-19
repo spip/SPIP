@@ -72,10 +72,9 @@ function statistiques_lang_ok()
 
 	$result = sql_select("lang, SUM(".$critere.") AS cnt", "spip_articles", "statut='publie' ", "lang");
 		
-	echo "\n<table cellpadding='2' cellspacing='0' border='0' width='100%' style='border: 1px solid #aaaaaa;'>";
 	$ifond = 1;
-		
 	$visites_abs = 0;
+	$res = '';
 	while ($row = sql_fetch($result)) {
 
 		$lang = $row['lang'];
@@ -92,23 +91,24 @@ function statistiques_lang_ok()
 					$couleur="eeeeee";
 				}
 	
-				echo "\n<tr style='background-color: $couleur'>";
+				$res .= "\n<tr style='background-color: $couleur'>";
 				$dir=lang_dir($lang,'',' dir="rtl"');
-				echo "<td style='width: 100%; border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir><span style='float: $spip_lang_right;'>$pourcent%</span>".traduire_nom_langue($lang)."</span></td>";
+				$res .= "<td style='width: 100%; border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir><span style='float: $spip_lang_right;'>$pourcent%</span>".traduire_nom_langue($lang)."</span></td>";
 				
-				echo "<td style='border-bottom: 1px solid #cccccc;'>";
-				echo "\n<table cellpadding='0' cellspacing='0' border='0' width='".($taille+5)."'>";
-				echo "\n<tr><td style='align:$spip_lang_right; background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
-				if ($visites_abs > 0) echo "<img src='" . chemin_image('rien.gif') . "' width='$visites_abs' height='8' alt=' ' />";
-				if ($visites>0) echo "<img src='" . chemin_image('rien.gif') . "' class='couleur_langue' style='border: 0px;' width='$visites' height='8' alt=' ' />";
-				echo "</td></tr></table>\n";
+				$res .= "<td style='border-bottom: 1px solid #cccccc;'>";
+				$res .= "\n<table cellpadding='0' cellspacing='0' border='0' width='".($taille+5)."'>";
+				$res .= "\n<tr><td style='align:$spip_lang_right; background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
+				if ($visites_abs > 0) $res .= "<img src='" . chemin_image('rien.gif') . "' width='$visites_abs' height='8' alt=' ' />";
+				if ($visites>0) $res .= "<img src='" . chemin_image('rien.gif') . "' class='couleur_langue' style='border: 0px;' width='$visites' height='8' alt=' ' />";
+				$res .= "</td></tr></table>\n";
 	
-				echo "</td>";
-				echo "</tr>";
+				$res .= "</td>";
+				$res .= "</tr>";
 				$visites_abs += $visites;
 		}
 	}
-	echo "</table>\n";
+	if ($res)
+		echo "\n<table cellpadding='2' cellspacing='0' border='0' width='100%' style='border: 1px solid #aaaaaa;'>", $res, "</table>\n";
 
 
 //echo "<p><span class='verdana1 spip_medium'>"._T('texte_signification')."</span>";

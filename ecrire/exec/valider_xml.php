@@ -194,7 +194,7 @@ function valider_script($transformer_xml, $script, $dir, $ext, $args=true)
 
 	if (strpos($texte, "id='minipres'")
 	AND ($g = charger_fonction($script . '_args', $dir, true))) {
-		$args = array(1, 'id_article', 1);
+		$args = array(1, 'id_article', 1, 0);
 		list($texte, $err) = $transformer_xml($g, $args);
 		$appel = 'id_article=1&type=id_article&id=1';
 	}

@@ -116,7 +116,7 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	echo "<td>" . http_img_pack('rien.gif', " ", "width='10'") ."</td>\n";
 	echo "<td style='width: 100%'>";
 	echo _T('texte_messages_publics');
-	echo "<a href='$url'>".gros_titre($titre,'', false)."</a>";
+	echo gros_titre("<a href='$url'>$titre</a>",'', false);
 	echo "</td></tr></table>";
 }
 ?>
