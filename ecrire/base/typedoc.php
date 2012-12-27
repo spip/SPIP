@@ -390,7 +390,8 @@ $tables_mime = array(
 		'application/x-ogg' => 'application/ogg',
 		'video/mp4' => 'application/mp4',
 		'video/flv' => 'video/x-flv',
-		'audio/3gpp' => 'video/3gpp'
+		'audio/3gpp' => 'video/3gpp',
+		'image/jpg' => 'image/jpeg'
 	);
 
 ?>
