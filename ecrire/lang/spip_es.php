@@ -244,12 +244,11 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 	'form_auteur_envoi_mail_confirmation' => 'Se te acaba de enviar un mensaje de confirmación a @email@. Tienes que visitar la página web indicada en ese mensaje para validar tu dirección de correo.',
 	'form_auteur_mail_confirmation' => 'Hola,
 
-Has solicitado cambiar tu dirección de correo.
-Para confirmar tu nueva dirección, alcanza con visitar la página
-siguiente:
+Ha solicitado cambiar su dirección de correo electrónico.
+Para confirmar su nueva dirección, haga clic en el siguiente enlace:
 
     @url@
-Caso contrario, la solicitud será simplemente ignorada.
+En caso contrario, la solicitud será ignorada.
 ',
 	'form_deja_inscrit' => 'Ya estás inscrito.',
 	'form_email_non_valide' => 'La dirección de correo electrónico no es válida.',
