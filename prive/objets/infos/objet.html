@@ -3,6 +3,6 @@
 <div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>[(#ENV{id}|generer_info_entite{#ENV{type},[(#ENV{type}|id_table_objet)],'**'})]</p></div>
 
 
-[(#FORMULAIRE_INSTITUER_OBJET{#ENV{type},#ENV{id}})]
+[(#FORMULAIRE_INSTITUER_OBJET{#ENV{type},#ENV{id},'',#ENV{type}|objet_info{editable}})]
 
 </div>
