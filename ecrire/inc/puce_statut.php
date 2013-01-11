@@ -300,7 +300,8 @@ function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='articl
 		$ajax_node = " class='imgstatut$type$id'";
 
 
-	$inser_puce = http_img_pack($src,statut_titre($type, $statut),$ajax_node);
+	$t = statut_titre($type, $statut);
+	$inser_puce = http_img_pack($src,$t,$ajax_node,$t);
 
 	if (!$ajax_node)
 		return $inser_puce;
