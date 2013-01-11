@@ -123,9 +123,8 @@ function assembler($fond, $connect='') {
 				AND _VAR_MODE != 'debug'
 				AND !isset($page['entetes']['Location']) // cette page realise une redirection, donc pas d'erreur
 				) {
-				  $code = ($page !== false) ?
-				    '404 Not Found' : '503 Service Unavailable';
-				  $page = message_erreur_404('', $code);
+					$contexte['fond_erreur'] = $fond;
+				  $page = message_page_indisponible($page, $contexte);
 				}
 				// pas de cache client en mode 'observation'
 				if (defined('_VAR_MODE') AND _VAR_MODE) {
@@ -366,18 +365,32 @@ function inclure_balise_dynamique($texte, $echo=true, $contexte_compil=array())
 
 }
 
-// http://doc.spip.org/@message_erreur_404
-function message_erreur_404 ($erreur= "", $code='404 Not Found') {
+// http://doc.spip.org/@message_page_indisponible
+function message_page_indisponible ($page, $contexte) {
 	static $deja = false;
 	if ($deja) return "erreur";
-	$deja = true;
-	$contexte_inclus = array(
-		'erreur' => $erreur?_T($erreur):"",
-		'code' => $code,
-		'lang' => $GLOBALS['spip_lang']
+	$codes = array(
+		'404' => '404 Not Found',
+		'503' => '503 Service Unavailable',
 	);
-	$page = inclure_page('404', $contexte_inclus);
-	$page['status'] = intval($code);
+
+	$contexte['status'] = ($page !== false) ? '404' : '503';
+	$contexte['code'] = $codes[$contexte['status']];
+	$contexte['fond'] = '404'; // gere les 2 erreurs
+	if (!isset($contexte['lang']))
+		$contexte['lang'] = $GLOBALS['spip_lang'];
+
+	$deja = true;
+	// passer aux plugins qui peuvent decider d'une page d'erreur plus pertinent
+	// ex restriction d'acces => 401
+	$contexte = pipeline('page_indisponible',$contexte);
+
+	// produire la page d'erreur
+	$page = inclure_page($contexte['fond'], $contexte);
+	if (!$page)
+		$page = inclure_page('404', $contexte);
+	$page['status'] = $contexte['status'];
+
 	return $page;
 }
 
