@@ -129,13 +129,14 @@ function objet_modifier($objet, $id, $set=null) {
  * Insere en base un objet generique
  * 
  * @param string $objet
- * @param id $id_parent
+ * @param int $id_parent
+ * @param array|null $set
  * @global array $GLOBALS['visiteur_session']
  * @global array $GLOBALS['meta']
  * @global string $GLOBALS['spip_lang']
  * @return bool|int
  */
-function objet_inserer($objet, $id_parent=null) {
+function objet_inserer($objet, $id_parent=null, $set=null) {
 	if (include_spip('action/editer_'.$objet)
 	  AND function_exists($inserer = $objet."_inserer"))
 		return $inserer($id_parent);
@@ -188,6 +189,9 @@ function objet_inserer($objet, $id_parent=null) {
 	if ((isset($desc['date']) AND $d=$desc['date']) OR isset($desc['field'][$d='date']))
 		$champs[$d] = date('Y-m-d H:i:s');
 
+	if ($set)
+		$champs = array_merge($champs, $set);
+
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',
 		array(
@@ -200,27 +204,29 @@ function objet_inserer($objet, $id_parent=null) {
 
 	$id = sql_insertq($table_sql, $champs);
 
-	pipeline('post_insertion',
-		array(
-			'args' => array(
-				'table' => $table_sql,
-				'id_objet' => $id,
-			),
-			'data' => $champs
-		)
-	);
+	if ($id){
+		pipeline('post_insertion',
+			array(
+				'args' => array(
+					'table' => $table_sql,
+					'id_objet' => $id,
+				),
+				'data' => $champs
+			)
+		);
 
-	// controler si le serveur n'a pas renvoye une erreur
-	// et associer l'auteur sinon
-	// si la table n'a pas deja un champ id_auteur
-	// et si le form n'a pas poste un id_auteur (meme vide, ce qui sert a annuler cette auto association)
-	if ($id > 0
-	  AND !isset($desc['field']['id_auteur'])){
-		$id_auteur = (is_null(_request('id_auteur'))?$GLOBALS['visiteur_session']['id_auteur']:_request('id_auteur'));
-	  if ($id_auteur) {
-			include_spip('action/editer_auteur');
-			auteur_associer($id_auteur, array($objet=>$id));
-	  }
+		// controler si le serveur n'a pas renvoye une erreur
+		// et associer l'auteur sinon
+		// si la table n'a pas deja un champ id_auteur
+		// et si le form n'a pas poste un id_auteur (meme vide, ce qui sert a annuler cette auto association)
+		if ($id > 0
+		  AND !isset($desc['field']['id_auteur'])){
+			$id_auteur = (is_null(_request('id_auteur'))?$GLOBALS['visiteur_session']['id_auteur']:_request('id_auteur'));
+		  if ($id_auteur) {
+				include_spip('action/editer_auteur');
+				auteur_associer($id_auteur, array($objet=>$id));
+		  }
+		}
 	}
 
 	return $id;
@@ -274,7 +280,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 	$champs = array();
 
 	$d = ($date AND isset($c[$champ_date]))?$c[$champ_date]:null;
-	$s = (isset($c['statut']))?$c['statut']:$statut;
+	$s = (isset($desc['field']['statut']) AND isset($c['statut']))?$c['statut']:$statut;
 
 	// cf autorisations dans inc/instituer_objet
 	if ($s != $statut OR ($d AND $d != $date)) {
