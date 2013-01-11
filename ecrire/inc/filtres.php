@@ -2871,16 +2871,16 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 	// On va ensuite chercher les traitements automatiques a faire
 	$champ = strtoupper($info);
 	$traitement = isset($table_des_traitements[$champ]) ? $table_des_traitements[$champ] : false;
-	$table_objet = table_objet($type_objet);
+	$table_sql = table_objet_sql($type_objet);
 
 	if (!$etoile
 		AND is_array($traitement)
-	  AND (isset($traitement[$table_objet]) OR isset($traitement[0]))){
-		$traitement = $traitement[isset($traitement[$table_objet]) ? $table_objet : 0];
+	  AND (isset($traitement[$table_sql]) OR isset($traitement[0]))){
+		$traitement = $traitement[isset($traitement[$table_sql]) ? $table_sql : 0];
 		$traitement = str_replace('%s', "'".texte_script($info_generee)."'", $traitement);
 		// FIXME: $connect et $Pile[0] font souvent partie des traitements.
 		// on les definit pour eviter des notices, mais ce fonctionnement est a ameliorer !
-		$connect = ""; $Pile = array(0 => array());
+		$connect = ""; $Pile = array(0 => array('id_objet'=>$id_objet,'objet'=>$type_objet));
 		eval("\$info_generee = $traitement;");
 	}
 
