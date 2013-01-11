@@ -503,6 +503,8 @@ function spip_sqlite_create_index($nom, $table, $champs, $unique='', $serveur = 
 	if (!is_array($champs)){
 		if ($champs[0]=="(") $champs = substr($champs, 1, -1);
 		$champs = array($champs);
+		// supprimer l'info de longueur d'index mysql en fin de champ
+		$champs = preg_replace(",\(\d+\)$,","",$champs);
 	}
 
 	$ifnotexists = "";
