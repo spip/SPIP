@@ -20,6 +20,10 @@ include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@creer_ou_upgrader_table
 function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='') {
+
+spip_log($table,'maj');
+spip_log($desc,'maj');
+
 	$sql_desc = $upgrade ? sql_showtable($table,true,$serveur) : false;
 	if (!$sql_desc)
 		sql_create($table, $desc['field'], $desc['key'], $autoinc, false, $serveur);
