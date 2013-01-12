@@ -133,8 +133,6 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 	// renvoyer la requete inerte si demandee
 	if (!$requeter) return $query;
 
-	$z = time()+microtime();
-
 	if (isset($_GET['var_profile'])) {
 		include_spip('public/tracer');
 		$t = trace_query_start();
@@ -142,10 +140,6 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
  
 	$connexion['last'] = $query;
 	$r = $link ? mysql_query($query, $link) : mysql_query($query);
-
-	if ($z AND ($z=intval(100*(time()+microtime()-$z)))>0) {
-		spip_log(($z/100).'s; '.$query, 'slow');
-	}
 
 	if ($e = spip_mysql_errno($serveur))	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query, $serveur); // et du fautif
@@ -551,11 +545,7 @@ function spip_mysql_errno($serveur='',$requeter=true) {
 	// 2013 Lost connection to MySQL server during query
 	if (in_array($s, array(2006,2013)))
 		define('spip_interdire_cache', true);
-
-	if ($s) {
-		$k = debug_backtrace();
-		spip_log("Erreur mysql $s ".var_export($k,1));
-	}
+	if ($s) spip_log("Erreur mysql $s");
 	return $s;
 }
 
