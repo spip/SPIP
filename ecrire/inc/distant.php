@@ -197,12 +197,10 @@ function recuperer_page($url, $trans=false, $get_headers=false,
 
 	// dix tentatives maximum en cas d'entetes 301...
 	for ($i=0;$i<10;$i++) {
-		$tmp = _DIR_TMP.'copielocale.'.getmypid();
-		$url = recuperer_lapage($url, $tmp, $get, $taille_max, $datas, $refuser_gz, $date_verif, $uri_referer);
+		$url = recuperer_lapage($url, $trans, $get, $taille_max, $datas, $refuser_gz, $date_verif, $uri_referer);
 		if (!$url) return false;
 		if (is_array($url)) {
 			list($headers, $result) = $url;
-			rename($tmp,$trans);
 			return ($get_headers ? $headers."\n" : '').$result;
 		} else spip_log("recuperer page recommence sur $url");
 	}
@@ -288,7 +286,12 @@ function recuperer_body($f, $taille_max=1048576, $fichier='')
 	$taille = 0;
 	$result = '';
 	if ($fichier){
-		$fp = spip_fopen_lock($fichier, 'w',LOCK_EX);
+		spip_fopen_lock($fichier.'.lock', 'w', LOCK_EX);
+		if (file_exists($fichier)) {
+			unlink ($fichier.'.lock');
+			return spip_file_get_contents($fichier);
+		}
+		$fp = spip_fopen_lock($fichier.'.tmp', 'w',LOCK_EX);
 		if (!$fp) return false;
 		$result = 0; // on renvoie la taille du fichier
 	}
@@ -302,8 +305,11 @@ function recuperer_body($f, $taille_max=1048576, $fichier='')
 		else
 			$result .= $res;
 	}
-	if ($fp)
+	if ($fp) {
 		spip_fclose_unlock($fp);
+		rename($fichier.'.tmp', $fichier);
+		unlink ($fichier.'.lock');
+	}
 	return $result;
 }
 
