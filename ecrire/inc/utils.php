@@ -1805,7 +1805,7 @@ function init_var_mode(){
 							// basculer sur les criteres de preview dans les boucles
 							if (!defined('_VAR_PREVIEW')) define('_VAR_PREVIEW',true);
 							// forcer le calcul
-							if (!defined('_VAR_MODE')) define('_VAR_MODE','recalcul');
+							if (!defined('_VAR_MODE')) define('_VAR_MODE','calcul');
 							// et ne pas enregistrer de cache
 							if (!defined('_VAR_NOCACHE')) define('_VAR_NOCACHE',true);
 							break;
