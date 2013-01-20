@@ -117,18 +117,6 @@ if (isset($GLOBALS['_INC_PUBLIC']) AND $GLOBALS['_INC_PUBLIC']) {
 		$html = preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
 	}
 
-	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW AND $html) {
-		include_spip('inc/filtres'); // pour http_img_pack
-		$x = "<div class='spip-previsu' "
-		     . http_style_background('preview-32.png')
-		     . ">"
-		     . _T('previsualisation')
-		     . "</div>";
-		if (!$pos = strpos($page['texte'], '</body>'))
-			$pos = strlen($page['texte']);
-		$page['texte'] = substr_replace($page['texte'], $x, $pos, 0);
-	}
-
 	// Tester si on est admin et il y a des choses supplementaires a dire
 	// type tableau pour y mettre des choses au besoin.
 	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
