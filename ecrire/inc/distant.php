@@ -73,19 +73,12 @@ function copie_locale($source, $mode = 'auto', $local = null){
 		// passer par un fichier temporaire unique pour gerer les echecs en cours de recuperation
 		// et des eventuelles recuperations concurantes
 		include_spip("inc/acces");
-		$localractmp = "$localrac.".creer_uniqid().".tmp";
-		$res = recuperer_page($source, $localractmp, false, _COPIE_LOCALE_MAX_SIZE, '', '', false, $t ? filemtime($localrac) : '');
-		if ($res) {
-			// si OK on supprime l'ancien fichier et on renomme
-			spip_log("copie_locale : recuperation $source sur $localractmp taille $res OK, renommage en $localrac");
-			spip_unlink($localrac);
-			@rename($localractmp, $localrac);
-		} else {
-			// sinon on supprime le fichier temporaire qui a echoue et qui est sans doute corrompu...
-			spip_log("copie_locale : Echec recuperation $source sur $localractmp, fichier supprime",_LOG_INFO_IMPORTANTE);
-			spip_unlink($localractmp);
+		$res = recuperer_page($source, $localrac, false, _COPIE_LOCALE_MAX_SIZE, '', '', false, $t ? filemtime($localrac) : '');
+		if (!$res) {
+			spip_log("copie_locale : Echec recuperation $source sur $localrac",_LOG_INFO_IMPORTANTE);
+			return false;
 		}
-		if (!$res) return $t ? $local : false;
+		spip_log("copie_locale : recuperation $source sur $localrac taille $res OK");
 
 		// pour une eventuelle indexation
 		pipeline('post_edition',
@@ -315,7 +308,12 @@ function recuperer_body($f, $taille_max = 1048576, $fichier = ''){
 	$result = '';
 	$fp = false;
 	if ($fichier){
-		$fp = spip_fopen_lock($fichier, 'w', LOCK_EX);
+		include_spip("inc/acces");
+		$tmpfile = "$fichier.".creer_uniqid().".tmp";
+		$fp = spip_fopen_lock($tmpfile, 'w', LOCK_EX);
+		if (!$fp AND file_exists($fichier)){
+			return filesize($fichier);
+		}
 		if (!$fp)
 			return false;
 		$result = 0; // on renvoie la taille du fichier
@@ -330,8 +328,13 @@ function recuperer_body($f, $taille_max = 1048576, $fichier = ''){
 		else
 			$result .= $res;
 	}
-	if ($fp)
+	if ($fp){
 		spip_fclose_unlock($fp);
+		spip_unlink($fichier);
+		@rename($tmpfile, $fichier);
+		if (!file_exists($fichier))
+			return false;
+	}
 	return $result;
 }
 
