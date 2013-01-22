@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -14,24 +14,33 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if (!defined('_INC_DISTANT_VERSION_HTTP')) define('_INC_DISTANT_VERSION_HTTP', "HTTP/1.0");
 if (!defined('_INC_DISTANT_CONTENT_ENCODING')) define('_INC_DISTANT_CONTENT_ENCODING', "gzip");
-if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP-' .$GLOBALS['spip_version_affichee']. " (" .$GLOBALS['home_server']. ")");
+if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP-' . $GLOBALS['spip_version_affichee'] . " (" . $GLOBALS['home_server'] . ")");
 
 define('_REGEXP_COPIE_LOCALE', ',' . 
        preg_replace('@^https?:@', 'https?:', $GLOBALS['meta']['adresse_site'])
        . "/?spip.php[?]action=acceder_document.*file=(.*)$,");
 
 //@define('_COPIE_LOCALE_MAX_SIZE',2097152); // poids (inc/utils l'a fait)
-//
-// Cree au besoin la copie locale d'un fichier distant
-// mode = 'test' - ne faire que tester
-// mode = 'auto' - charger au besoin
-// mode = 'modif' - Si deja present, ne charger que si If-Modified-Since
-// mode = 'force' - charger toujours (mettre a jour)
-//
-// Prend en argument un chemin relatif au rep racine, ou une URL
-// Renvoie un chemin relatif au rep racine, ou false
-//
-// http://doc.spip.org/@copie_locale
+
+/**
+ * Cree au besoin la copie locale d'un fichier distant
+ *
+ *
+ * Prend en argument un chemin relatif au rep racine, ou une URL
+ * Renvoie un chemin relatif au rep racine, ou false
+ *
+ * http://doc.spip.org/@copie_locale
+ *
+ * @param $source
+ * @param string $mode
+ *   'test' - ne faire que tester
+ *   'auto' - charger au besoin
+ *   'modif' - Si deja present, ne charger que si If-Modified-Since
+ *   'force' - charger toujours (mettre a jour)
+ * @param string $local
+ *   permet de specifier le nom du fichier local (stockage d'un cache par exemple, et non document IMG)
+ * @return bool|string
+ */
 function copie_locale($source, $mode='auto') {
 
 	// si c'est la protection de soi-meme, retourner le path
@@ -44,7 +53,7 @@ function copie_locale($source, $mode='auto') {
 	$t = ($mode=='force') ? false  : @file_exists($localrac);
 
 	// test d'existence du fichier
-	if ($mode == 'test') return $t ? $local : '';
+	if ($mode=='test') return $t ? $local : '';
 
 	// si $local = '' c'est un fichier refuse par fichier_copie_locale(),
 	// par exemple un fichier qui ne figure pas dans nos documents ;
@@ -52,25 +61,38 @@ function copie_locale($source, $mode='auto') {
 	if (!$local) return false;
 
 	// sinon voir si on doit/peut le telecharger
-	if ($local == $source OR !preg_match(',^\w+://,', $source)) 
+	if ($local==$source OR !preg_match(',^\w+://,', $source))
 		return $local;
 
-	if ($mode=='modif' OR !$t) {
-		$res = recuperer_page($source, $localrac,false,_COPIE_LOCALE_MAX_SIZE, '','',false, $t ? filemtime($localrac) : '');
+	if ($mode=='modif' OR !$t){
+		// passer par un fichier temporaire unique pour gerer les echecs en cours de recuperation
+		// et des eventuelles recuperations concurantes
+		include_spip("inc/acces");
+		$localractmp = "$localrac.".creer_uniqid().".tmp";
+		$res = recuperer_page($source, $localractmp, false, _COPIE_LOCALE_MAX_SIZE, '', '', false, $t ? filemtime($localrac) : '');
+		if ($res) {
+			// si OK on supprime l'ancien fichier et on renomme
+			spip_log("copie_locale : recuperation $source sur $localractmp taille $res OK, renommage en $localrac");
+			spip_unlink($localrac);
+			@rename($localractmp, $localrac);
+		} else {
+			// sinon on supprime le fichier temporaire qui a echoue et qui est sans doute corrompu...
+			spip_log("copie_locale : Echec recuperation $source sur $localractmp, fichier supprime",_LOG_INFO_IMPORTANTE);
+			spip_unlink($localractmp);
+		}
 		if (!$res) return $t ? $local : false;
-#		spip_log ('ecrire copie locale '.$localrac." taille $res");
-			
+
 		// pour une eventuelle indexation
 		pipeline('post_edition',
-				array(
-					'args' => array(
-						'operation' => 'copie_locale',
-						'source' => $source,
-						'fichier' => $local
-					),
-					'data' => null
-				)
-			);
+			array(
+				'args' => array(
+					'operation' => 'copie_locale',
+					'source' => $source,
+					'fichier' => $local
+				),
+				'data' => null
+			)
+		);
 	}
 
 	return $local;
@@ -89,34 +111,34 @@ function prepare_donnees_post($donnees, $boundary = '') {
 		$donnees = str_replace("\r\n","\n",$donnees);
 		$donnees = str_replace("\r","\n",$donnees);
 		// un double retour a la ligne signifie la fin de l'entete et le debut des donnees
-		$p = strpos($donnees,"\n\n");
-  	if ($p!==FALSE){
-  		$entete = str_replace("\n","\r\n",substr($donnees,0,$p+1));
-  		$donnees = substr($donnees,$p+2);
-  	}
-		$chaine = str_replace("\n","\r\n",$donnees);
-  }
-  else {
-	  /* boundary automatique */
-	  // Si on a plus de 500 octects de donnees, on "boundarise"
-	  if($boundary === '') {
-	    $taille = 0;
-	    foreach ($donnees as $cle => $valeur) {
-	  		if (is_array($valeur)) {
-	  			foreach ($valeur as $val2) {
-	          $taille += strlen($val2);
-	        }
-	      } else {
-	        // faut-il utiliser spip_strlen() dans inc/charsets ?
-	        $taille += strlen($valeur);
-	      }
-	    }
-	    if($taille>500) {
-	      $boundary = substr(md5(rand().'spip'), 0, 8);
-	    }
-	  }
+		$p = strpos($donnees, "\n\n");
+		if ($p!==FALSE){
+			$entete = str_replace("\n", "\r\n", substr($donnees, 0, $p+1));
+			$donnees = substr($donnees, $p+2);
+		}
+		$chaine = str_replace("\n", "\r\n", $donnees);
+	}
+	else {
+		/* boundary automatique */
+		// Si on a plus de 500 octects de donnees, on "boundarise"
+		if ($boundary===''){
+			$taille = 0;
+			foreach ($donnees as $cle => $valeur){
+				if (is_array($valeur)){
+					foreach ($valeur as $val2){
+						$taille += strlen($val2);
+					}
+				} else {
+					// faut-il utiliser spip_strlen() dans inc/charsets ?
+					$taille += strlen($valeur);
+				}
+			}
+			if ($taille>500){
+				$boundary = substr(md5(rand() . 'spip'), 0, 8);
+			}
+		}
 
-		if(is_string($boundary) and strlen($boundary)) {
+		if (is_string($boundary) and strlen($boundary)){
 			// fabrique une chaine HTTP pour un POST avec boundary
 			$entete = "Content-Type: multipart/form-data; boundary=$boundary\r\n";
 			$chaine = '';
@@ -148,7 +170,7 @@ function prepare_donnees_post($donnees, $boundary = '') {
 				$chaine = $donnees;
 			}
 		}
-  }
+	}
 	return array($entete, $chaine);
 }
 
@@ -169,22 +191,22 @@ function prepare_donnees_post($donnees, $boundary = '') {
 //   dans lequel on ecrit directement la page
 // * si c'est true/null ca correspond a une demande d'encodage/charset
 // http://doc.spip.org/@recuperer_page
-function recuperer_page($url, $trans=false, $get_headers=false,
-	$taille_max = null, $datas='', $boundary='', $refuser_gz = false,
-	$date_verif = '', $uri_referer = '') {
+function recuperer_page($url, $trans = false, $get_headers = false,
+                        $taille_max = null, $datas = '', $boundary = '', $refuser_gz = false,
+                        $date_verif = '', $uri_referer = ''){
 	$gz = false;
 
 	// $copy = copier le fichier ?
-	$copy = (is_string($trans) AND strlen($trans) > 5); // eviter "false" :-)
+	$copy = (is_string($trans) AND strlen($trans)>5); // eviter "false" :-)
 
 	if (is_null($taille_max))
 		$taille_max = $copy ? _COPIE_LOCALE_MAX_SIZE : 1048576;
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http://
 	$url = preg_replace(',^feed://,i', 'http://', $url);
-	if (!preg_match(',^[a-z]+://,i', $url)) $url = 'http://'.$url;
+	if (!preg_match(',^[a-z]+://,i', $url)) $url = 'http://' . $url;
 
-	if ($taille_max == 0)
+	if ($taille_max==0)
 		$get = 'HEAD';
 	else
 		$get = 'GET';
@@ -192,16 +214,16 @@ function recuperer_page($url, $trans=false, $get_headers=false,
 	if (!empty($datas)) {
 		$get = 'POST';
 		list($type, $postdata) = prepare_donnees_post($datas, $boundary);
-		$datas = $type . 'Content-Length: '.strlen($postdata)."\r\n\r\n".$postdata;
+		$datas = $type . 'Content-Length: ' . strlen($postdata) . "\r\n\r\n" . $postdata;
 	}
 
 	// dix tentatives maximum en cas d'entetes 301...
-	for ($i=0;$i<10;$i++) {
+	for ($i = 0; $i<10; $i++){
 		$url = recuperer_lapage($url, $trans, $get, $taille_max, $datas, $refuser_gz, $date_verif, $uri_referer);
 		if (!$url) return false;
-		if (is_array($url)) {
+		if (is_array($url)){
 			list($headers, $result) = $url;
-			return ($get_headers ? $headers."\n" : '').$result;
+			return ($get_headers ? $headers . "\n" : '') . $result;
 		} else spip_log("recuperer page recommence sur $url");
 	}
 }
@@ -211,10 +233,9 @@ function recuperer_page($url, $trans=false, $get_headers=false,
 // si $trans est null -> on ne veut que les headers
 // si $trans est une chaine, c'est un nom de fichier pour ecrire directement dedans
 // http://doc.spip.org/@recuperer_lapage
-function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576, $datas='', $refuser_gz = false, $date_verif = '', $uri_referer = '')
-{
+function recuperer_lapage($url, $trans = false, $get = 'GET', $taille_max = 1048576, $datas = '', $refuser_gz = false, $date_verif = '', $uri_referer = ''){
 	// $copy = copier le fichier ?
-	$copy = (is_string($trans) AND strlen($trans) > 5); // eviter "false" :-)
+	$copy = (is_string($trans) AND strlen($trans)>5); // eviter "false" :-)
 
 	// si on ecrit directement dans un fichier, pour ne pas manipuler
 	// en memoire refuser gz
@@ -223,7 +244,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 
 	// ouvrir la connexion et envoyer la requete et ses en-tetes
 	list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer, $datas, _INC_DISTANT_VERSION_HTTP, $date_verif);
-	if (!$f) {
+	if (!$f){
 		spip_log("ECHEC init_http $url");
 		return false;
 	}
@@ -234,18 +255,20 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 		$headers = '';
 	else {
 		$headers = recuperer_entetes($f, $date_verif);
-		if (is_numeric($headers)) {
+		if (is_numeric($headers)){
 			fclose($f);
 			// Chinoisierie inexplicable pour contrer 
 			// les actions liberticides de l'empire du milieu
-			if ($headers) {
+			if ($headers){
 				spip_log("HTTP status $headers pour $url");
 				return false;
-			} elseif ($result = @file_get_contents($url))
-			    return array('', $result);
-			else return false;
+			}
+			elseif ($result = @file_get_contents($url))
+				return array('', $result);
+			else
+				return false;
 		}
-		if (!is_array($headers)) { // cas Location
+		if (!is_array($headers)){ // cas Location
 			fclose($f);
 			include_spip('inc/filtres');
 			return suivre_lien($url, $headers);
@@ -253,63 +276,57 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 		$headers = join('', $headers);
 	}
 
-	if ($trans === NULL) return array($headers, '');
+	if ($trans===NULL) return array($headers, '');
 
 	// s'il faut deballer, le faire via un fichier temporaire
 	// sinon la memoire explose pour les gros flux
 
 	$gz = preg_match(",\bContent-Encoding: .*gzip,is", $headers) ?
-		(_DIR_TMP.md5(uniqid(mt_rand())).'.tmp.gz') : '';
-	  
+		(_DIR_TMP . md5(uniqid(mt_rand())) . '.tmp.gz') : '';
+
 #	spip_log("entete ($trans $copy $gz)\n$headers"); 
 	$result = recuperer_body($f, $taille_max, $gz ? $gz : ($copy ? $trans : ''));
 	fclose($f);
-	if (!$result) return array($headers, $result);
+	if (!$result)
+		return array($headers, $result);
 
 	// Decompresser au besoin
-	if ($gz) {
+	if ($gz){
 		$result = join('', gzfile($gz));
 		supprimer_fichier($gz);
 	}
 	// Faut-il l'importer dans notre charset local ?
-	if ($trans === true) {
+	if ($trans===true){
 		include_spip('inc/charsets');
-		$result = transcoder_page ($result, $headers);
+		$result = transcoder_page($result, $headers);
 	}
 
 	return array($headers, $result);
 }
 
 // http://doc.spip.org/@recuperer_body
-function recuperer_body($f, $taille_max=1048576, $fichier='')
-{
+function recuperer_body($f, $taille_max = 1048576, $fichier = ''){
 	$taille = 0;
 	$result = '';
+	$fp = false;
 	if ($fichier){
-		spip_fopen_lock($fichier.'.lock', 'w', LOCK_EX);
-		if (file_exists($fichier)) {
-			unlink ($fichier.'.lock');
-			return spip_file_get_contents($fichier);
-		}
-		$fp = spip_fopen_lock($fichier.'.tmp', 'w',LOCK_EX);
-		if (!$fp) return false;
+		$fp = spip_fopen_lock($fichier, 'w', LOCK_EX);
+		if (!$fp)
+			return false;
 		$result = 0; // on renvoie la taille du fichier
 	}
 	while (!feof($f) AND $taille<$taille_max){
 		$res = fread($f, 16384);
 		$taille += strlen($res);
 		if ($fp){
-			fwrite($fp,$res);
+			fwrite($fp, $res);
 			$result = $taille;
 		}
 		else
 			$result .= $res;
 	}
-	if ($fp) {
+	if ($fp)
 		spip_fclose_unlock($fp);
-		rename($fichier.'.tmp', $fichier);
-		unlink ($fichier.'.lock');
-	}
 	return $result;
 }
 
@@ -319,25 +336,24 @@ function recuperer_body($f, $taille_max=1048576, $fichier='')
 // le tableau des entetes dans tous les autres cas
 
 // http://doc.spip.org/@recuperer_entetes
-function recuperer_entetes($f, $date_verif='')
-{
+function recuperer_entetes($f, $date_verif = ''){
 	$s = @trim(fgets($f, 16384));
 
-	if (!preg_match(',^HTTP/[0-9]+\.[0-9]+ ([0-9]+),', $s, $r)) {
+	if (!preg_match(',^HTTP/[0-9]+\.[0-9]+ ([0-9]+),', $s, $r)){
 		return 0;
 	}
 	$status = intval($r[1]);
 	$headers = array();
 	$not_modif = $location = false;
-	while ($s = trim(fgets($f, 16384))) {
-		$headers[]= $s."\n";
+	while ($s = trim(fgets($f, 16384))){
+		$headers[] = $s . "\n";
 		preg_match(',^([^:]*): *(.*)$,i', $s, $r);
-		list(,$d, $v) = $r;
-		if (strtolower(trim($d)) == 'location' AND $status >= 300 AND $status < 400) {
+		list(, $d, $v) = $r;
+		if (strtolower(trim($d))=='location' AND $status>=300 AND $status<400){
 			$location = $v;
 		}
-		elseif ($date_verif AND ($d == 'Last-Modified')) {
-			if ($date_verif>=strtotime($v)) {
+		elseif ($date_verif AND ($d=='Last-Modified')) {
+			if ($date_verif>=strtotime($v)){
 				//Cas ou la page distante n'a pas bouge depuis
 				//la derniere visite
 				$not_modif = true;
@@ -345,8 +361,10 @@ function recuperer_entetes($f, $date_verif='')
 		}
 	}
 
-	if ($location) return $location;
-	if ($status != 200 or $not_modif) return $status;
+	if ($location)
+		return $location;
+	if ($status!=200 or $not_modif)
+		return $status;
 	return $headers;
 }
 
@@ -355,47 +373,50 @@ function recuperer_entetes($f, $date_verif='')
 // mais la tout de suite je ne trouve pas l'idee, etant donne les limitations
 // des filesystems
 // http://doc.spip.org/@nom_fichier_copie_locale
-function nom_fichier_copie_locale($source, $extension) {
-
-	include_spip('inc/getdocument');
+function nom_fichier_copie_locale($source, $extension){
+	if (version_compare($spip_version_branche,"3.0.0") < 0)
+		include_spip('inc/getdocument');
+	else
+		include_spip('inc/documents');
 	$d = creer_repertoire_documents('distant'); # IMG/distant/
 	$d = sous_repertoire($d, $extension); # IMG/distant/pdf/
 
 	// on se place tout le temps comme si on etait a la racine
 	if (_DIR_RACINE)
-		$d = preg_replace(',^'.preg_quote(_DIR_RACINE).',', '', $d);
+		$d = preg_replace(',^' . preg_quote(_DIR_RACINE) . ',', '', $d);
 
 	$m = md5($source);
 
 	return $d
-	. substr(preg_replace(',[^\w-],', '', basename($source)).'-'.$m,0,12)
-	. substr($m,0,4)
-	. ".$extension";
+		. substr(preg_replace(',[^\w-],', '', basename($source)) . '-' . $m, 0, 12)
+		. substr($m, 0, 4)
+		. ".$extension";
 }
 
 //
 // Donne le nom de la copie locale de la source
 //
 // http://doc.spip.org/@fichier_copie_locale
-function fichier_copie_locale($source) {
+function fichier_copie_locale($source){
 	// Si c'est deja local pas de souci
-	if (!preg_match(',^\w+://,', $source)) {
+	if (!preg_match(',^\w+://,', $source)){
 		if (_DIR_RACINE)
-			$source = preg_replace(',^'.preg_quote(_DIR_RACINE).',', '', $source);
+			$source = preg_replace(',^' . preg_quote(_DIR_RACINE) . ',', '', $source);
 		return $source;
 	}
-	
+
 	// optimisation : on regarde si on peut deviner l'extension dans l'url et si le fichier
 	// a deja ete copie en local avec cette extension
 	// dans ce cas elle est fiable, pas la peine de requeter en base
 	$path_parts = pathinfo($source);
 	$ext = $path_parts ? $path_parts['extension'] : '';
 	if ($ext
-		AND preg_match(',^\w+$,',$ext) // pas de php?truc=1&...
-	  AND $f=nom_fichier_copie_locale($source, $ext)
-	  AND file_exists(_DIR_RACINE . $f))
-	  return $f;
-	
+	AND preg_match(',^\w+$,', $ext) // pas de php?truc=1&...
+	AND $f = nom_fichier_copie_locale($source, $ext)
+	AND file_exists(_DIR_RACINE . $f)
+	)
+		return $f;
+
 
 	// Si c'est deja dans la table des documents,
 	// ramener le nom de sa copie potentielle
@@ -410,25 +431,25 @@ function fichier_copie_locale($source) {
 
 	$ext = $path_parts ? $path_parts['extension'] : '';
 
-	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=".sql_quote($ext))) {
+	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=" . sql_quote($ext))){
 		$f = nom_fichier_copie_locale($source, $ext);
-		if (file_exists(_DIR_RACINE  . $f))
-		  return $f;
+		if (file_exists(_DIR_RACINE . $f))
+			return $f;
 	}
 
 	// Ping  pour voir si son extension est connue et autorisee
 	// avec mise en cache du resultat du ping
 
-	$cache = sous_repertoire(_DIR_CACHE,'rid').md5($source);
+	$cache = sous_repertoire(_DIR_CACHE, 'rid') . md5($source);
 	if (!@file_exists($cache)
-	OR !$path_parts = @unserialize(spip_file_get_contents($cache))
-	OR _request('var_mode') == 'recalcul'
-	) {
-		$path_parts = recuperer_infos_distantes($source,0,false) ;
+		OR !$path_parts = @unserialize(spip_file_get_contents($cache))
+		OR _request('var_mode')=='recalcul'
+	){
+		$path_parts = recuperer_infos_distantes($source, 0, false);
 		ecrire_fichier($cache, serialize($path_parts));
 	}
 	$ext = $path_parts ? $path_parts['extension'] : '';
-	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=".sql_quote($ext))) {
+	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=" . sql_quote($ext))){
 		return nom_fichier_copie_locale($source, $ext);
 	}
 	spip_log("pas de copie locale pour $source");
@@ -446,7 +467,7 @@ function fichier_copie_locale($source) {
 #$a['fichier'] = chaine
 
 // http://doc.spip.org/@recuperer_infos_distantes
-function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = true) {
+function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image = true){
 
 	# charger les alias des types mime
 	include_spip('base/typedoc');
@@ -457,7 +478,7 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 	// On va directement charger le debut des images et des fichiers html,
 	// de maniere a attrapper le maximum d'infos (titre, taille, etc). Si
 	// ca echoue l'utilisateur devra les entrer...
-	if ($headers = recuperer_page($source, false, true, $max, '', '', true)) {
+	if ($headers = recuperer_page($source, false, true, $max, '', '', true)){
 		list($headers, $a['body']) = preg_split(',\n\n,', $headers, 2);
 
 		if (preg_match(",\nContent-Type: *([^[:space:];]*),i", "\n$headers", $regs))
@@ -475,15 +496,17 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 		// ce qu'il sert ; on va tenter de detecter via l'extension de l'url
 		// ou le Content-Disposition: attachment; filename=...
 		$t = null;
-		if (in_array($mime_type,array('text/plain','','application/octet-stream'))){
+		if (in_array($mime_type, array('text/plain', '', 'application/octet-stream'))){
 			if (!$t
-				AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
-				$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1]));
+				AND preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $source, $rext)
+			){
+				$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1],'','text'));
 			}
 			if (!$t
-				  AND preg_match(",^Content-Disposition:\s*attachment;\s*filename=(.*)$,Uims",$headers,$m)
-					AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $m[1], $rext)){
-				$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1]));
+				AND preg_match(",^Content-Disposition:\s*attachment;\s*filename=(.*)$,Uims", $headers, $m)
+				AND preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $m[1], $rext)
+			){
+				$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1],'','text'));
 			}
 		}
 
@@ -494,14 +517,15 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 		// Toujours rien ? (ex: audio/x-ogg au lieu de application/ogg)
 		// On essaie de nouveau avec l'extension
 		if (!$t
-		AND $mime_type != 'text/plain'
-		AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
-			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1]));
+			AND $mime_type!='text/plain'
+			AND preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $source, $rext)
+		){
+			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1],'','text')); # eviter xxx.3 => 3gp (> SPIP 3)
 		}
 
 
-		if ($t) {
-			spip_log("mime-type $mime_type ok, extension ".$t['extension']);
+		if ($t){
+			spip_log("mime-type $mime_type ok, extension " . $t['extension']);
 			$a['extension'] = $t['extension'];
 		} else {
 			# par defaut on retombe sur '.bin' si c'est autorise
@@ -512,26 +536,28 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 		}
 
 		if (preg_match(",\nContent-Length: *([^[:space:]]*),i",
-			"\n$headers", $regs))
+			"\n$headers", $regs)
+		)
 			$a['taille'] = intval($regs[1]);
 	}
 
 	// Echec avec HEAD, on tente avec GET
-	if (!$a AND !$max) {
+	if (!$a AND !$max){
 		spip_log("tenter GET $source");
 		$a = recuperer_infos_distantes($source, 1024*1024);
 	}
 
 	// S'il s'agit d'une image pas trop grosse ou d'un fichier html, on va aller
 	// recharger le document en GET et recuperer des donnees supplementaires...
-	if (preg_match(',^image/(jpeg|gif|png|swf),', $mime_type)) {
-		if ($max == 0
-		AND $a['taille'] < 1024*1024
-		AND (strpos($GLOBALS['meta']['formats_graphiques'],$a['extension'])!==false)
-		AND $charger_si_petite_image) {
+	if (preg_match(',^image/(jpeg|gif|png|swf),', $mime_type)){
+		if ($max==0
+			AND $a['taille']<1024*1024
+				AND (strpos($GLOBALS['meta']['formats_graphiques'], $a['extension'])!==false)
+					AND $charger_si_petite_image
+		){
 			$a = recuperer_infos_distantes($source, 1024*1024);
 		}
-		else if ($a['body']) {
+		else if ($a['body']){
 			$a['fichier'] = _DIR_RACINE . nom_fichier_copie_locale($source, $a['extension']);
 			ecrire_fichier($a['fichier'], $a['body']);
 			$size_image = @getimagesize($a['fichier']);
@@ -543,36 +569,47 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 
 	// Fichier swf, si on n'a pas la taille, on va mettre 425x350 par defaut
 	// ce sera mieux que 0x0
-	if ($a['extension'] == 'swf'
-	AND !$a['largeur']) {
+	if ($a AND $a['extension']=='swf'
+		AND !$a['largeur']
+	){
 		$a['largeur'] = 425;
 		$a['hauteur'] = 350;
 	}
 
-	if ($mime_type == 'text/html') {
+	if ($mime_type=='text/html'){
 		include_spip('inc/filtres');
 		$page = recuperer_page($source, true, false, 1024*1024);
-		if(preg_match(',<title>(.*?)</title>,ims', $page, $regs))
+		if (preg_match(',<title>(.*?)</title>,ims', $page, $regs))
 			$a['titre'] = corriger_caracteres(trim($regs[1]));
-			if (!$a['taille']) $a['taille'] = strlen($page); # a peu pres
+		if (!$a['taille']) $a['taille'] = strlen($page); # a peu pres
 	}
 
 	return $a;
 }
 
 
-// http://doc.spip.org/@need_proxy
-function need_proxy($host)
-{
-	$http_proxy = @$GLOBALS['meta']["http_proxy"];
-	$http_noproxy = @$GLOBALS['meta']["http_noproxy"];
+/**
+ * Tester si un host peut etre recuperer directement ou doit passer par un proxy
+ * on peut passer en parametre le proxy et la liste des host exclus,
+ * pour les besoins des tests, lors de la configuration
+ *
+ * @param string $host
+ * @param string $http_proxy
+ * @param string $http_noproxy
+ * @return string
+ */
+function need_proxy($host, $http_proxy = null, $http_noproxy = null){
+	if (is_null($http_proxy))
+		$http_proxy = @$GLOBALS['meta']["http_proxy"];
+	if (is_null($http_noproxy))
+		$http_noproxy = @$GLOBALS['meta']["http_noproxy"];
 
-	$domain = substr($host,strpos($host,'.'));
+	$domain = substr($host, strpos($host, '.'));
 
 	return ($http_proxy
-	AND (strpos(" $http_noproxy ", " $host ") === false
-	     AND (strpos(" $http_noproxy ", " $domain ") === false)))
-	? $http_proxy : '';
+		AND (strpos(" $http_noproxy ", " $host ")===false
+		AND (strpos(" $http_noproxy ", " $domain ")===false)))
+		? $http_proxy : '';
 }
 
 //
@@ -580,58 +617,66 @@ function need_proxy($host)
 // retourne le descripteur sur lequel lire la reponse
 //
 // http://doc.spip.org/@init_http
-function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0", $date='') {
-	$user = $via_proxy = $proxy_user = ''; 
+function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = "", $vers = "HTTP/1.0", $date = ''){
+	$user = $via_proxy = $proxy_user = '';
 	$fopen = false;
 
 	$t = @parse_url($url);
 	$host = $t['host'];
-	if ($t['scheme'] == 'http') {
-		$scheme = 'http'; $noproxy = '';
-	} elseif ($t['scheme'] == 'https') {
-		$scheme = 'ssl'; $noproxy = 'ssl://';
+	if ($t['scheme']=='http'){
+		$scheme = 'http';
+		$noproxy = '';
+	} elseif ($t['scheme']=='https') {
+		$scheme = 'ssl';
+		$noproxy = 'ssl://';
 		if (!isset($t['port']) || !($port = $t['port'])) $t['port'] = 443;
 	}
 	else {
-		$scheme = $t['scheme']; $noproxy = $scheme.'://';
+		$scheme = $t['scheme'];
+		$noproxy = $scheme . '://';
 	}
 	if (isset($t['user']))
 		$user = array($t['user'], $t['pass']);
 
 	if (!isset($t['port']) || !($port = $t['port'])) $port = 80;
 	if (!isset($t['path']) || !($path = $t['path'])) $path = "/";
-	if (@$t['query']) $path .= "?" .$t['query'];
+	if (@$t['query']) $path .= "?" . $t['query'];
 
 	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers, $date);
-	if (!$f) {
-	  // fallback : fopen
-		if (!_request('tester_proxy')) {
+	if (!$f){
+		// fallback : fopen
+		if (!_request('tester_proxy')){
 			$f = @fopen($url, "rb");
 			spip_log("connexion vers $url par simple fopen");
 			$fopen = true;
-		} else $f = false;// echec total
+		}
+		else
+			$f = false;
+		// echec total
 	}
 
 	return array($f, $fopen);
 }
 
 // http://doc.spip.org/@lance_requete
-function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0", $date='') {
+function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz = false, $referer = '', $datas = "", $vers = "HTTP/1.0", $date = ''){
 
 	$proxy_user = '';
 	$http_proxy = need_proxy($host);
-	if ($user) $user = urlencode($user[0]).":".urlencode($user[1]);
+	if ($user) $user = urlencode($user[0]) . ":" . urlencode($user[1]);
 
-	if ($http_proxy) {
+	if ($http_proxy){
 		$path = (($scheme=='ssl') ? 'https://' : "$scheme://")
 			. (!$user ? '' : "$user@")
-			. "$host" . (($port != 80) ? ":$port" : "") . $path;
+			. "$host" . (($port!=80) ? ":$port" : "") . $path;
 		$t2 = @parse_url($http_proxy);
 		$first_host = $t2['host'];
 		if (!($port = $t2['port'])) $port = 80;
 		if ($t2['user'])
 			$proxy_user = base64_encode($t2['user'] . ":" . $t2['pass']);
-	} else $first_host = $noproxy.$host;
+	}
+	else
+		$first_host = $noproxy . $host;
 
 	$f = @fsockopen($first_host, $port);
 	spip_log("Recuperer $path sur $first_host:$port par $f");
@@ -640,14 +685,14 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 	$site = $GLOBALS['meta']["adresse_site"];
 
 	$req = "$method $path $vers\r\n"
-	. "Host: $host\r\n"
-	. "User-Agent: " . _INC_DISTANT_USER_AGENT . "\r\n"
-	. ($refuse_gz ? '' : ("Accept-Encoding: " . _INC_DISTANT_CONTENT_ENCODING . "\r\n"))
-	. (!$site ? '' : "Referer: $site/$referer\r\n")
-	. (!$date ? '' : "If-Modified-Since: " . (gmdate("D, d M Y H:i:s", $date)  ." GMT\r\n"))
-	. (!$user ? '' : ("Authorization: Basic " . base64_encode($user) ."\r\n"))
-	. (!$proxy_user ? '' : "Proxy-Authorization: Basic $proxy_user\r\n")
-	. (!strpos($vers, '1.1') ? '' : "Keep-Alive: 300\r\nConnection: keep-alive\r\n");
+		. "Host: $host\r\n"
+		. "User-Agent: " . _INC_DISTANT_USER_AGENT . "\r\n"
+		. ($refuse_gz ? '' : ("Accept-Encoding: " . _INC_DISTANT_CONTENT_ENCODING . "\r\n"))
+		. (!$site ? '' : "Referer: $site/$referer\r\n")
+		. (!$date ? '' : "If-Modified-Since: " . (gmdate("D, d M Y H:i:s", $date) . " GMT\r\n"))
+		. (!$user ? '' : ("Authorization: Basic " . base64_encode($user) . "\r\n"))
+		. (!$proxy_user ? '' : "Proxy-Authorization: Basic $proxy_user\r\n")
+		. (!strpos($vers, '1.1') ? '' : "Keep-Alive: 300\r\nConnection: keep-alive\r\n");
 
 #	spip_log("Requete\n$req");
 	fputs($f, $req);
