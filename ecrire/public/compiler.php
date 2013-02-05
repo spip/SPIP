@@ -207,8 +207,10 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
  *     Descrition de la boucle
  * @param bool $echapper
  *     true pour échapper le code créé
+ * @param bool $ignore_previsu
+ *     true pour ne tester que le cas publie et ignorer l'eventuel var_mode=preview de la page
  */
-function instituer_boucle(&$boucle, $echapper=true){
+function instituer_boucle(&$boucle, $echapper=true, $ignore_previsu=false){
 	/*
 	$show['statut'][] = array(
 		'champ'=>'statut',  // champ de la table sur lequel porte le filtrage par le statut
@@ -288,11 +290,11 @@ function instituer_boucle(&$boucle, $echapper=true){
 				array_unshift($boucle->where,
 					$echapper ?
 						"\nquete_condition_statut('$mstatut',"
-							. _q($s['previsu']).","
+							. _q($ignore_previsu?$s['publie']:$s['previsu']).","
 							._q($s['publie']).","
 							._q($boucle->sql_serveur).")"
 					:
-						quete_condition_statut($mstatut,$s['previsu'],$s['publie'],$boucle->sql_serveur)
+						quete_condition_statut($mstatut,$ignore_previsu?$s['publie']:$s['previsu'],$s['publie'],$boucle->sql_serveur)
 				);
 			}
 		}
