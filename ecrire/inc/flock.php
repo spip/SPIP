@@ -376,7 +376,7 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 		raler_fichier($base . '/.ok');
 	}
 	spip_log("faux sous-repertoire $base${subdir}");
-	return $baseaff.($dirs[$base.$subdirs] = "${subdir}_");
+	return $baseaff.($dirs[$base.$subdir] = "${subdir}_");
 }
 
 //
