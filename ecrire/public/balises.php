@@ -11,12 +11,12 @@
 \***************************************************************************/
 
 /**
- * Ce fichier regroupe la quasi totalité des définitions de #BALISES de SPIP.
+ * Ce fichier regroupe la quasi totalité des définitions de `#BALISES` de SPIP.
  * 
  * Pour chaque balise, il est possible de surcharger, dans son fichier
- * mes_fonctions.php, la fonction balise_TOTO_dist par une fonction
- * balise_TOTO() respectant la même API : elle recoit en entrée un objet
- * de classe CHAMP, le modifie et le retourne. Cette classe est definie
+ * mes_fonctions.php, la fonction `balise_TOTO_dist()` par une fonction
+ * `balise_TOTO()` respectant la même API : elle reçoit en entrée un objet
+ * de classe `Champ`, le modifie et le retourne. Cette classe est définie
  * dans public/interfaces.
  * 
  * @package SPIP\Core\Compilateur\Balises
@@ -24,7 +24,23 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@interprete_argument_balise
+/**
+ * Retourne le code PHP d'un argument de balise s'il est présent
+ *
+ * @example
+ *     ```
+ *     // Retourne le premier argument de la balise
+ *     // #BALISE{premier,deuxieme}
+ *     $arg = interprete_argument_balise(1,$p);
+ *     ```
+ * 
+ * @param int $n
+ *     Numéro de l'argument
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return string|null
+ *     Code PHP si cet argument est présent, sinon null
+**/
 function interprete_argument_balise($n,$p) {
 	if (($p->param) && (!$p->param[0][0]) && (count($p->param[0])>$n))
 		return calculer_liste($p->param[0][$n],
@@ -168,23 +184,23 @@ function balise_SPIP_VERSION_dist($p) {
 
 
 /**
- * Affiche le nom du site.
+ * Compile la balise `NOM_SITE` qui affiche le nom du site.
  *
  * Affiche le nom du site ou sinon l'URL ou le titre de l'objet
- * Utiliser #NOM_SITE* pour avoir le nom du site ou rien.
+ * Utiliser `#NOM_SITE*` pour avoir le nom du site ou rien.
  *
- * Cette balise interroge les colonnes 'nom_site' ou 'url_site'
+ * Cette balise interroge les colonnes `nom_site` ou `url_site`
  * dans la boucle la plus proche.
  *
  * @example
- * 		<code>
- * 			<a href="#URL_SITE">#NOM_SITE</a>
- * 		</code>
+ *     ```
+ *     <a href="#URL_SITE">#NOM_SITE</a>
+ *     ```
  *
  * @param Champ $p
- * 		Pile au niveau de la balise
+ *     Pile au niveau de la balise
  * @return Champ
- * 		Pile complétée par le code à générer
+ *     Pile complétée par le code à générer
 **/
 function balise_NOM_SITE_dist($p) {
 	if (!$p->etoile) {
@@ -355,17 +371,17 @@ function balise_FIN_SURLIGNE_dist($p) {
 
 
 /**
- * Compile la balise #INTRODUCTION
+ * Compile la balise `#INTRODUCTION`
  *
  * Retourne une introduction d'un objet éditorial, c'est à dire les 600
  * premiers caractères environ du champ 'texte' de l'objet ou le contenu
- * indiqué entre <intro> et </intro> de ce même champ.
+ * indiqué entre `<intro>` et `</intro>` de ce même champ.
  *
- * Pour les articles, l'introduction utilisée est celle du champ 'descriptif'
- * s'il est renseigné, sinon il est pris dans les champs 'chapo' et 'texte' et
+ * Pour les articles, l'introduction utilisée est celle du champ `descriptif`
+ * s'il est renseigné, sinon il est pris dans les champs `chapo` et `texte` et
  * est par défaut limité à 500 caractères.
  *
- * Pour les rubriques, l'introduction utilisée est celle du champ 'descriptif'
+ * Pour les rubriques, l'introduction utilisée est celle du champ `descriptif`
  * s'il est renseigné, sinon du champ texte.
  *
  * La balise accèpte 1 paramètre indiquant la longueur en nombre de caractères
@@ -373,8 +389,10 @@ function balise_FIN_SURLIGNE_dist($p) {
  *
  * @see filtre_introduction_dist()
  * @example
+ *     ```
  *     #INTRODUCTION
  *     #INTRODUCTION{300}
+ *     ```
  *
  * @balise introduction
  * @link http://www.spip.net/@introduction
@@ -441,15 +459,17 @@ function balise_LANG_dist ($p) {
 }
 
 /**
- * #LESAUTEURS
- * affiche la liste des auteurs d'un objet
- * soit le champs lesauteurs existe dans la table et à ce moment là, retourne son contenu
- * soit la balise appelle le modele lesauteurs.html en lui passant le couple
- * objet/id_objet dans son environnement
+ * Compile la balise `#LESAUTEURS` chargée d'afficher la liste des auteurs d'un objet
  * 
- * http://www.spip.net/fr_article902.html
- * http://www.spip.net/fr_article911.html
- * http://doc.spip.org/@balise_LESAUTEURS_dist
+ * - Soit le champ `lesauteurs` existe dans la table et à ce moment là,
+ *   la balise retourne son contenu,
+ * - soit la balise appelle le modele `lesauteurs.html` en lui passant
+ *   le couple `objet` et `id_objet` dans son environnement.
+ *
+ * @balise LESAUTEURS
+ * @link http://www.spip.net/3966 Description de la balise
+ * @link http://www.spip.net/902 Description de la boucle ARTICLES
+ * @link http://www.spip.net/911 Description de la boucle SYNDIC_ARTICLES
  * 
  * @param Champ $p
  *     Pile au niveau de la balise
@@ -494,20 +514,26 @@ function balise_LESAUTEURS_dist ($p) {
 
 
 /**
- * #RANG
- * affiche le "numero de l'objet" quand on l'a titre '1. Premier article';
- * ceci est transitoire afin de preparer une migration vers un vrai systeme de
- * tri des articles dans une rubrique (et plus si affinites)
- * la balise permet d'extraire le numero masque par |supprimer_numero
- * la balise recupere le champ declare dans la globale table_titre
- * ou a defaut le champ 'titre'
+ * Compile la balise `#RANG` chargée d'afficher le numéro de l'objet
+ * 
+ * Affiche le « numero de l'objet ». Soit `1` quand on a un titre `1. Premier article`.
+ * 
+ * Ceci est transitoire afin de préparer une migration vers un vrai système de
+ * tri des articles dans une rubrique (et plus si affinités).
+ * La balise permet d'extraire le numero masqué par le filtre `supprimer_numero`.
+ * 
+ * La balise recupère le champ declaré dans la définition `table_titre`
+ * de l'objet, ou à defaut du champ `titre`
  *
- * si un champ rang existe, il est pris en priorite
+ * Si un champ `rang` existe, il est pris en priorité.
  *
- * http://doc.spip.org/@balise_RANG_dist
+ * @balise RANG
+ * @link http://www.spip.net/5495
  *
- * @param object $p
- * @return object
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_RANG_dist($p) {
 	$b = index_boucle($p);
@@ -705,40 +731,36 @@ function balise_CHEMIN_IMAGE_dist($p) {
 
 
 /**
- * La balise #ENV permet de recuperer
- * le contexte d'environnement transmis au calcul d'un squelette,
- * par exemple #ENV{id_rubrique}
+ * Compile la balise `#ENV` qui permet de récupérer le contexte d'environnement
+ * transmis à un squelette.
  *
- * La syntaxe #ENV{toto, valeur par defaut}
- * renverra 'valeur par defaut' si $toto est vide
+ * La syntaxe `#ENV{toto, valeur par defaut}`
+ * renverra `valeur par defaut` si `$toto` est vide.
  *
- * La recherche de la cle s'appuyant sur la fonction table_valeur
- * il est possible de demander un sous element d'un tableau
- * #ENV{toto/sous/element, valeur par defaut} retournera l'equivalent de
- * #ENV{toto}|table_valeur{sous/element} c'est a dire en quelque sorte
- * $env['toto']['sous']['element'] s'il existe, sinon la valeur par defaut.
+ * La recherche de la clé s'appuyant sur la fonction `table_valeur`
+ * il est possible de demander un sous élément d'un tableau :
+ * `#ENV{toto/sous/element, valeur par defaut}` retournera l'équivalent de
+ * `#ENV{toto}|table_valeur{sous/element}` c'est-à-dire en quelque sorte
+ * `$env['toto']['sous']['element']` s'il existe, sinon la valeur par défaut.
  *
- * Si le tableau est vide on renvoie '' (utile pour #SESSION)
+ * Si le tableau est vide on renvoie `''` (utile pour `#SESSION`)
  *
- * Enfin, la balise utilisee seule #ENV retourne le tableau complet
- * de l'environnement. A noter que ce tableau est retourne serialise.
+ * Enfin, la balise utilisée seule `#ENV` retourne le tableau complet
+ * de l'environnement. À noter que ce tableau est retourné sérialisé.
  *
- * 
- * En standard est applique |entites_html, mais si l'etoile est
- * utilisee pour desactiver les filtres par defaut, par exemple avec
- * [(#ENV*{toto})] , il *faut* s'assurer de la securite
- * anti-javascript, par exemple en filtrant avec |safehtml : [(#ENV*{toto}|safehtml)]
+ * En standard est appliqué le filtre `entites_html`, mais si l'étoile est
+ * utilisée pour désactiver les filtres par défaut, par exemple avec
+ * `[(#ENV*{toto})]` , il *faut* s'assurer de la sécurité
+ * anti-javascript, par exemple en filtrant avec `safehtml` : `[(#ENV*{toto}|safehtml)]`
  * 
  *
  * @param Champ $p
- * 		Pile ; arbre de syntaxe abstrait positionne au niveau de la balise.
- *
+ *     Pile ; arbre de syntaxe abstrait positionné au niveau de la balise.
  * @param array $src
- * 		Tableau dans lequel chercher la cle demandee en parametre de la balise.
- * 		Par defaut prend dans le contexte du squelette.
- *  
+ *     Tableau dans lequel chercher la clé demandée en paramètre de la balise.
+ *     Par defaut prend dans le contexte du squelette.
  * @return Champ $p
- * 		Pile completee du code PHP d'execution de la balise
+ *     Pile completée du code PHP d'exécution de la balise
 **/
 function balise_ENV_dist($p, $src = NULL) {
 
@@ -774,20 +796,27 @@ function balise_ENV_dist($p, $src = NULL) {
 }
 
 /**
- * #CONFIG retourne lire_config()
- * les reglages du site
+ * Compile la balise `#CONFIG` qui retourne une valeur de configuration
  *
- * Par exemple #CONFIG{gerer_trad} donne 'oui' ou 'non' selon le reglage
- * Le 3eme argument permet de controler la serialisation du resultat
- * (mais ne sert que pour le depot 'meta') qui doit parfois deserialiser
+ * Cette balise appelle la fonction `lire_config()` pour obtenir les
+ * configurations du site.
  *
- * ex: |in_array{#CONFIG{toto,#ARRAY,1}}.
+ * Par exemple `#CONFIG{gerer_trad}` donne 'oui ou 'non' selon le réglage.
  *
- * Ceci n'affecte pas d'autres depots et |in_array{#CONFIG{toto/,#ARRAY}} sera equivalent
- * #CONFIG{/tablemeta/champ,defaut} lit la valeur de 'champ' dans la table des meta 'tablemeta'
+ * Le 3ème argument permet de contrôler la sérialisation du résultat
+ * (mais ne sert que pour le dépot `meta`) qui doit parfois désérialiser,
+ * par exemple avec `|in_array{#CONFIG{toto,#ARRAY,1}}`. Ceci n'affecte
+ * pas d'autres dépots et `|in_array{#CONFIG{toto/,#ARRAY}}` sera
+ * équivalent.
  *
- * @param  Object $p  Arbre syntaxique du compilo
- * @return Object
+ * Òn peut appeler d'autres tables que `spip_meta` avec un
+ * `#CONFIG{/infos/champ,defaut}` qui lit la valeur de `champ`
+ * dans une table des meta qui serait `spip_infos`
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise.
+ * @return Champ $p
+ *     Pile completée du code PHP d'exécution de la balise
  */
 function balise_CONFIG_dist($p) {
 	if (!$arg = interprete_argument_balise(1,$p)) {
@@ -1019,22 +1048,31 @@ function balise_CACHE_dist($p) {
 
 
 /**
- * #INSERT_HEAD
- * pour permettre aux plugins d'inserer des styles, js ou autre
- * dans l'entete sans modification du squelette
- * les css doivent etre inserees de preference par #INSERT_HEAD_CSS
- * pour en faciliter la surcharge
+ * Compile la balise `#INSERT_HEAD` permettant d'insérer du contenu dans
+ * le `<head>` d'une page HTML
+ * 
+ * La balise permet aux plugins d'insérer des styles, js ou autre
+ * dans l'entête sans modification du squelette.
+ * Les css doivent être inserées de préférence par `#INSERT_HEAD_CSS`
+ * pour en faciliter la surcharge.
  *
- * on insere ici aussi un morceau de PHP qui verifiera a l'execution que le pipeline insert_head_css a bien ete vu
- * et dans le cas contraire l'appelera. Permet de ne pas oublier les css de #INSERT_HEAD_CSS meme si cette balise
- * n'est pas presente.
- * Il faut mettre ce php avant le insert_head car le compresseur y mets ensuite un php du meme type pour collecter
- * CSS et JS, et on ne veut pas qu'il rate les css inserees en fallback par insert_head_css_conditionnel
+ * On insère ici aussi un morceau de PHP qui verifiera à l'exécution
+ * que le pipeline `insert_head_css` a bien été vu
+ * et dans le cas contraire l'appelera. Ceal permet de ne pas oublier
+ * les css de `#INSERT_HEAD_CSS` même si cette balise n'est pas presente.
+ * 
+ * Il faut mettre ce php avant le `insert_head` car le compresseur y mets
+ * ensuite un php du meme type pour collecter
+ * CSS et JS, et on ne veut pas qu'il rate les css insérées en fallback
+ * par `insert_head_css_conditionnel`.
  *
- * http://doc.spip.org/@balise_INSERT_HEAD_dist
+ * @link http://www.spip.net/4629
+ * @see balise_INSERT_HEAD_CSS_dist()
  *
- * @param object $p
- * @return object
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_INSERT_HEAD_dist($p) {
 	$p->code = '\'<'
@@ -1047,13 +1085,18 @@ function balise_INSERT_HEAD_dist($p) {
 }
 
 /**
- * homologue de #INSERT_HEAD pour les CSS
- * (et par extension pour le js inline qui doit preferentiellement etre insere avant les CSS car bloquant sinon)
+ * Compile la balise `#INSERT_HEAD_CSS` homologue de `#INSERT_HEAD` pour les CSS
+ * 
+ * Et par extension pour le JS inline qui doit préférentiellement
+ * être inséré avant les CSS car bloquant sinon.
  *
- * http://doc.spip.org/@balise_INSERT_HEAD_CSS_dist
+ * @link http://www.spip.net/4605
+ * @see balise_INSERT_HEAD_dist()
  *
- * @param object $p
- * @return object
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_INSERT_HEAD_CSS_dist($p) {
 	$p->code = "pipeline('insert_head_css','<!-- insert_head_css -->')";
@@ -1218,19 +1261,19 @@ function balise_GET_dist($p) {
 
 
 /**
- * Compile la balise #DOUBLONS
+ * Compile la balise `#DOUBLONS` qui redonne les doublons enregistrés
  * 
- * #DOUBLONS{mots} ou #DOUBLONS{mots,famille}
- * donne l'etat des doublons (MOTS) a cet endroit
- * sous forme de tableau d'id_mot  array(1,2,3,...)
- * #DOUBLONS tout seul donne la liste brute de tous les doublons
- * #DOUBLONS*{mots} donne la chaine brute ",1,2,3,..."
- * (changera si la gestion des doublons evolue)
+ * - `#DOUBLONS{mots}` ou `#DOUBLONS{mots,famille}`
+ *   donne l'état des doublons `(MOTS)` à cet endroit
+ *   sous forme de tableau d'id_mot comme `array(1,2,3,...)`
+ * - `#DOUBLONS` tout seul donne la liste brute de tous les doublons
+ * - `#DOUBLONS*{mots}` donne la chaine brute `,1,2,3,...`
+ *   (changera si la gestion des doublons evolue)
  * 
  * @param Champ $p
- * 		Pile au niveau de la balise
+ *     Pile au niveau de la balise
  * @return Champ
- * 		Pile complétée par le code à générer
+ *     Pile complétée par le code à générer
 **/
 function balise_DOUBLONS_dist($p) {
 	if ($type = interprete_argument_balise(1,$p)) {
@@ -1319,10 +1362,17 @@ function balise_ARRAY_dist($p) {
 }
 
 /**
- * #LISTE{a,b,c,d,e} cree un array avec les valeurs, sans preciser les cles
+ * Compile la balise `#LISTE` qui crée un tableau PHP avec les valeurs, sans préciser les clés
  *
- * @param <type> $p
- * @return <type>
+ * @example
+ *    ```
+ *    #LISTE{a,b,c,d,e} 
+ *    ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_LISTE_dist($p) {
 	$_code = array();
@@ -1401,18 +1451,28 @@ function balise_ACTION_FORMULAIRE($p){
 
 
 /**
- * Generer un bouton d'action en post, ajaxable
- * a utiliser a la place des liens action_auteur, sous la forme
- * #BOUTON_ACTION{libelle,url}
- * ou
- * #BOUTON_ACTION{libelle,url,ajax} pour que l'action soit ajax comme un lien class='ajax'
- * ou
- * #BOUTON_ACTION{libelle,url,ajax,message_confirmation} pour utiliser un message de confirmation
+ * Compile la balise `#BOUTON_ACTION` qui génère un bouton d'action en post, ajaxable
  * 
- * #BOUTON_ACTION{libelle[,url[,ajax[,message_confirmation[,title[,callback]]]]]}
+ * Cette balise s'utilise à la place des liens `action_auteur`, sous la forme
  *
- * @param unknown_type $p
- * @return unknown
+ * - `#BOUTON_ACTION{libelle,url}`
+ * - ou `#BOUTON_ACTION{libelle,url,ajax}` pour que l'action soit ajax comme un lien `class='ajax'`
+ * - ou `#BOUTON_ACTION{libelle,url,ajax,message_confirmation}` pour utiliser un message de confirmation
+ * - ou encore `#BOUTON_ACTION{libelle[,url[,ajax[,message_confirmation[,title[,callback]]]]]}`
+ *
+ * @balise BOUTON_ACTION
+ * @link http://www.spip.net/4583
+ * @example
+ *     ```
+ *     [(#AUTORISER{reparer,base})
+ *        [(#BOUTON_ACTION{<:bouton_tenter_recuperation:>,#URL_ECRIRE{base_repair}})]
+ *     ]
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_BOUTON_ACTION_dist($p){
 
@@ -1454,13 +1514,25 @@ function balise_HTML5_dist($p) {
 
 
 /**
- * #TRI{champ[,libelle]}
- * champ prend > ou < pour afficher le lien de changement de sens
- * croissant ou decroissant (> < indiquent un sens par une fleche)
+ * Compile la balise `#TRI` permettant d'afficher un lien de changement d'ordre de tri
+ * d'une colonne de la boucle
+ * 
+ * La balise `#TRI{champ[,libelle]}` champ prend `>` ou `<` pour afficher
+ * le lien de changement de sens croissant ou decroissant (`>` `<` indiquent
+ * un sens par une flèche)
  *
- * @param unknown_type $p
- * @param unknown_type $liste
- * @return unknown
+ * @balise TRI
+ * @example
+ *     ```
+ *     <th>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @param string $liste
+ *     Inutilisé
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_TRI_dist($p, $liste='true') {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
@@ -1519,15 +1591,20 @@ function balise_TRI_dist($p, $liste='true') {
 
 
 /**
- * #SAUTER{n} permet de sauter en avant n resultats dans une boucle
+ * Compile la balise `#SAUTER{n}` qui permet de sauter en avant n resultats dans une boucle
+ * 
  * La balise modifie le compteur courant de la boucle, mais pas les autres
  * champs qui restent les valeurs de la boucle avant le saut. Il est donc
- * preferable d'utiliser la balise juste avant la fermeture </BOUCLE>
+ * preferable d'utiliser la balise juste avant la fermeture `</BOUCLE>`
  *
- * L'argument n doit etre superieur a zero sinon la balise ne fait rien
+ * L'argument `n` doit être supérieur à zéro sinon la balise ne fait rien
  *
- * @param <type> $p
- * @return <type>
+ * @balise SAUTER
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_SAUTER_dist($p){
 	$id_boucle = $p->id_boucle;
@@ -1550,10 +1627,21 @@ function balise_SAUTER_dist($p){
 
 
 /**
- * Savoir si on objet est publie ou non
+ * Compile la balise `#PUBLIE` qui indique si un objet est publié ou non
  *
- * @param <type> $p
- * @return <type>
+ * @balise PUBLIE
+ * @link http://www.spip.net/5545
+ * @see objet_test_si_publie()
+ * @example
+ *     ```
+ *     #PUBLIE : porte sur la boucle en cours
+ *     [(#PUBLIE{article, 3}|oui) ... ] : pour l'objet indiqué
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_PUBLIE_dist($p) {
 	if (!$_type = interprete_argument_balise(1,$p)){
@@ -1571,19 +1659,29 @@ function balise_PUBLIE_dist($p) {
 }
 
 /**
- * #PRODUIRE
- * generer un fichier statique a partir d'un squelette SPIP
+ * Compile la balise `#PRODUIRE` qui génère un fichier statique à partir
+ * d'un squelette SPIP
  *
- * Le format du fichier sera extrait de la preextension du squelette (typo.css.html, messcripts.js.html)
- * ou par l'argument format=css ou format=js passe en argument.
+ * Le format du fichier sera extrait de la pre-extension du squelette
+ * (typo.css.html, messcripts.js.html)
+ * ou par l'argument `format=css` ou `format=js` passé en argument.
  *
- * Si pas de format detectable, on utilise .html, comme pour les squelettes
+ * S'il n'y a pas de format détectable, on utilise `.html`, comme pour les squelettes.
  *
- * <link rel="stylesheet" type="text/css" href="#PRODUIRE{fond=css/macss.css,couleur=ffffff}" />
- * la syntaxe de la balise est la meme que celle de #INCLURE
+ * La syntaxe de la balise est la même que celle de `#INCLURE`.
  *
- * @param object $p
- * @return object
+ * @balise PRODUIRE
+ * @see balise_INCLURE_dist()
+ * @link http://www.spip.net/5505
+ * @example
+ *     ```
+ *     <link rel="stylesheet" type="text/css" href="#PRODUIRE{fond=css/macss.css,couleur=ffffff}" />
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_PRODUIRE_dist($p){
 	$balise_inclure = charger_fonction('INCLURE','balise');
@@ -1595,11 +1693,19 @@ function balise_PRODUIRE_dist($p){
 }
 
 /**
- * Definir la largeur d'ecran dans l'espace prive
- * #LARGEUR_ECRAN{pleine_largeur}
+ * Compile la balise `#LARGEUR_ECRAN` qui définit la largeur d'écran
+ * dans l'espace privé
+ *
+ * @balise LARGEUR_ECRAN
+ * @example
+ *     ```
+ *     #LARGEUR_ECRAN{pleine_largeur}
+ *     ```
  * 
- * @param  $p
- * @return
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_LARGEUR_ECRAN_dist($p){
 	$_class = interprete_argument_balise(1,$p);
