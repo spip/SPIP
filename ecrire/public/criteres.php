@@ -218,7 +218,7 @@ function critere_debut_dist($idb, &$boucles, $crit){
 
 
 /**
- * Compile le critère {pagination}
+ * Compile le critère `pagination` qui demande à paginer une boucle.
  *
  * Demande à paginer la boucle pour n'afficher qu'une partie des résultats,
  * et gère l'affichage de la partie de page demandée par debut_xx dans
@@ -226,13 +226,19 @@ function critere_debut_dist($idb, &$boucles, $crit){
  *
  * Le premier paramètre indique le nombre d'éléments par page, le second,
  * rarement utilisé permet de définir le nom de la variable désignant la
- * page demandée (debut_xx), qui par défaut utilise l'identifiant de la boucle.
- * 
+ * page demandée (`debut_xx`), qui par défaut utilise l'identifiant de la boucle.
+ *
+ * @critere pagination
+ * @see balise_PAGINATION_dist()
+ * @link http://www.spip.net/3367 Le système de pagination
+ * @link http://www.spip.net/4867 Le critère pagination
  * @example
+ *     ```
  *     {pagination}
  *     {pagination 20}
  *     {pagination #ENV{pages,5}} etc
  *     {pagination 20 #ENV{truc,chose}} pour utiliser la variable debut_#ENV{truc,chose}
+ *     ```
  * 
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
@@ -285,12 +291,14 @@ function critere_pagination_dist($idb, &$boucles, $crit){
 
 
 /**
- * Compile le critère {recherche}
- *
- * Permet de sélectionner des résultats d'une recherche.
+ * Compile le critère `recherche` qui permet de sélectionner des résultats
+ * d'une recherche.
  * 
- * Le texte cherché est pris dans le premier paramètre {recherche xx}
- * ou à défaut dans la clé 'recherche' de l'environnement du squelette.
+ * Le texte cherché est pris dans le premier paramètre `{recherche xx}`
+ * ou à défaut dans la clé `recherche` de l'environnement du squelette.
+ *
+ * @critere recherche
+ * @link http://www.spip.net/3878
  * 
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette

@@ -495,8 +495,9 @@ function recuperer_numero($texte) {
 }
 
 /**
- * Suppression basique et brutale de tous les tags `<...>`
+ * Suppression basique et brutale de tous les tags
  *
+ * Supprime tous les tags `<...>`.
  * Utilisé fréquemment pour écrire des RSS.
  * 
  * @filtre supprimer_tags
@@ -525,7 +526,9 @@ function supprimer_tags($texte, $rempl = "") {
 }
 
 /**
- * Convertit les chevrons `<...>` en la version lisible en HTML
+ * Convertit les chevrons de tag en version lisible en HTML
+ *
+ * Transforme les chevrons de tag `<...>` en entité HTML.
  *
  * @filtre echapper_tags
  * @link http://www.spip.net/5515
@@ -534,8 +537,6 @@ function supprimer_tags($texte, $rempl = "") {
  *     <pre>[(#TEXTE|echapper_tags)]</pre>
  *     ```
  *
- * 
- * 
  * @param string $texte
  *     Texte à échapper
  * @param string $rempl
@@ -1988,12 +1989,36 @@ function filtre_find($array, $val) {
 }
 
 
-//
-// fonction standard de calcul de la balise #PAGINATION
-// on peut la surcharger en definissant filtre_pagination dans mes_fonctions
-//
-
-// http://doc.spip.org/@filtre_pagination_dist
+/**
+ * Filtre calculant une pagination, utilisé par la balise `#PAGINATION`
+ *
+ * Le filtre cherche le modèle `pagination.html` par défaut, mais peut
+ * chercher un modèle de pagination particulier avec l'argument `$modele`.
+ * S'il `$modele='prive'`, le filtre cherchera le modèle `pagination_prive.html`.
+ * 
+ * @filtre pagination
+ * @see balise_PAGINATION_dist()
+ * 
+ * @param int $total
+ *     Nombre total d'éléments
+ * @param string $nom
+ *     Nom identifiant la pagination
+ * @param int $position
+ *     Page à afficher (tel que la 3è page)
+ * @param int $pas
+ *     Nombre d'éléments par page
+ * @param bool $liste
+ *     - True pour afficher toute la liste des éléments,
+ *     - False pour n'afficher que l'ancre
+ * @param string $modele
+ *     Nom spécifique du modèle de pagination
+ * @param string $connect
+ *     Nom du connecteur à la base de données
+ * @param array $env
+ *     Environnement à transmettre au modèle
+ * @return string
+ *     Code HTML de la pagination
+**/
 function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $modele='', $connect='', $env=array()) {
 	static $ancres = array();
 	if ($pas<1) return '';
@@ -3268,14 +3293,25 @@ function filtre_chercher_rubrique_dist($titre,$id_objet, $id_parent, $objet, $id
 /**
  * Rediriger une page suivant une autorisation,
  * et ce, n'importe où dans un squelette, même dans les inclusions.
- * Exemple :
- * [(#AUTORISER{non}|sinon_interdire_acces)]
- * [(#AUTORISER{non}|sinon_interdire_acces{#URL_PAGE{login}, 401})]
  *
- * @param bool $ok Indique si l'on doit rediriger ou pas
- * @param string $url Adresse vers laquelle rediriger
- * @param int $statut Statut HTML avec lequel on redirigera
- * @return string
+ * En l'absence de redirection indiquée, la fonction redirige par défaut
+ * sur une 403 dans l'espace privé et 404 dans l'espace public.
+ * 
+ * @example
+ *     ```
+ *     [(#AUTORISER{non}|sinon_interdire_acces)]
+ *     [(#AUTORISER{non}|sinon_interdire_acces{#URL_PAGE{login}, 401})]
+ *     ```
+ *
+ * @filtre sinon_interdire_acces
+ * @param bool $ok
+ *     Indique si l'on doit rediriger ou pas
+ * @param string $url
+ *     Adresse vers laquelle rediriger
+ * @param int $statut
+ *     Statut HTML avec lequel on redirigera
+ * @return string|void
+ *     Chaîne vide si l'accès est autorisé
  */
 function sinon_interdire_acces($ok=false, $url='', $statut=0){
 	if ($ok) return '';
