@@ -88,9 +88,12 @@ function public_styliser_par_z_dist($flux){
 		if (!$squelette){
 
 			// si on est sur un ?page=XX non trouve
-			if ($flux['args']['contexte'][$page] == $fond 
-				OR $flux['args']['contexte']['type-page'] == $fond
-				OR ($fond=='sommaire' AND !$flux['args']['contexte'][$page])) {
+			if ((isset($flux['args']['contexte'][$page])
+					AND $flux['args']['contexte'][$page] == $fond)
+				OR (isset($flux['args']['contexte']['type-page'])
+					AND $flux['args']['contexte']['type-page'] == $fond)
+				OR ($fond=='sommaire'
+					AND (!isset($flux['args']['contexte'][$page]) OR !$flux['args']['contexte'][$page]))) {
 
 				// si on est sur un ?page=XX non trouve
 				// se brancher sur contenu/xx si il existe
