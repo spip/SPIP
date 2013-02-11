@@ -10,14 +10,21 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
+/**
+ * Gestion de la sélection d'un squelette depuis son nom parmi les
+ * chemins connus de SPIP, dans un contexte de type Z
+ *
+ * Recherche par exemple `contenu\xx` et en absence utilisera `contenu\dist`
+ *
+ * @package SPIP\Core\Public\Styliser
+**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Fonction Page automatique a partir de contenu/xx
+ * Recherche automatique d'un squelette Page à partir de `contenu/xx`
  *
- * @param array $flux
- * @return array
+ * @param array $flux Données du pipeline
+ * @return array Données modifiées du pipeline
  */
 function public_styliser_par_z_dist($flux){
 	static $prefix_path=null;
@@ -196,7 +203,7 @@ function z_blocs($espace_prive=false) {
 }
 
 /**
- * Verifier qu'un type a un contenu disponible,
+ * Vérifie qu'un type à un contenu disponible,
  * soit parcequ'il a un fond, soit parce qu'il est echafaudable
  *
  * @param string $prefix_path
@@ -212,6 +219,16 @@ function z_contenu_disponible($prefix_path,$z_contenu,$type,$ext,$echafauder=tru
 	return $echafauder?z_echafaudable($type):false;
 }
 
+/**
+ * Teste si le fond de squelette trouvé est autorisé
+ *
+ * Compare le chemin du squelette trouvé avec les chemins exclus connus.
+ * 
+ * @param string $squelette
+ *   Un chemin de squelette
+ * @return bool
+ *   `true` si on peut l'utiliser, `false` sinon.
+**/
 function z_fond_valide($squelette){
 	if (!_ZCORE_EXCLURE_PATH
 		OR !preg_match(',('._ZCORE_EXCLURE_PATH.')/,',$squelette))
@@ -220,10 +237,8 @@ function z_fond_valide($squelette){
 }
 
 /**
- * Trouver un bloc qui peut etre sous le nom
- * contenu/article.html
- * ou
- * contenu/contenu.article.html
+ * Trouve un bloc qui peut être sous le nom
+ * `contenu/article.html` ou `contenu/contenu.article.html`
  *
  * @param string $prefix_path
  *	chemin de base qui prefixe la recherche
@@ -244,9 +259,10 @@ function z_trouver_bloc($prefix_path,$bloc,$fond,$ext){
 	}
 	return "";
 }
+
 /**
  * Tester si un type est echafaudable
- * cad si il correspond bien a un objet en base
+ * c'est à dire s'il correspond bien à un objet en base
  *
  * @staticvar array $echafaudable
  * @param string $type
@@ -298,10 +314,10 @@ function z_echafaudable($type){
  * tous les squelettes d'echafaudage du prive sont en fait explicites dans prive/echafaudage
  * on ne fait qu'un mini squelette d'inclusion pour reecrire les variables d'env
  *
- * @param string $type
+ * @param string $exec
  * @param string $table
  * @param string $table_sql
- * @param array $desc
+ * @param array $desc_exec
  * @param string $ext
  * @return string
  */
