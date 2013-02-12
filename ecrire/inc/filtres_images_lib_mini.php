@@ -365,20 +365,22 @@ function _imagecreatefromgif($filename){
  * @param string $fichier
  * 		Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.png).
  * @return bool
- * 		false si l'image créée a une largeur nulle ;
+ * 		false si l'image créée a une largeur nulle ou n'existe pas ;
  * 		true si une image est bien retournée.
  */
 function _image_imagepng($img, $fichier) {
 	if (!function_exists('imagepng')) return false;
 	$tmp = $fichier.".tmp";
 	$ret = imagepng($img,$tmp);
+	if(file_exists($tmp)){
+		$taille_test = getimagesize($tmp);
+		if ($taille_test[0] < 1) return false;
 	
-	$taille_test = getimagesize($tmp);
-	if ($taille_test[0] < 1) return false;
-
-	spip_unlink($fichier); // le fichier peut deja exister
-	@rename($tmp, $fichier);
-	return $ret;
+		spip_unlink($fichier); // le fichier peut deja exister
+		@rename($tmp, $fichier);
+		return $ret;
+	}
+	return false;
 }
 
 /**
@@ -390,21 +392,22 @@ function _image_imagepng($img, $fichier) {
  * @param string $fichier
  * 		Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.gif).
  * @return bool
- * 		false si l'image créée a une largeur nulle ;
+ * 		false si l'image créée a une largeur nulle ou n'existe pas ;
  * 		true si une image est bien retournée.
  */
 function _image_imagegif($img,$fichier) {
 	if  (!function_exists('imagegif')) return false;
 	$tmp = $fichier.".tmp";
 	$ret = imagegif($img,$tmp);
-
-	$taille_test = getimagesize($tmp);
-	if ($taille_test[0] < 1) return false;
-
-
-	spip_unlink($fichier); // le fichier peut deja exister
-	@rename($tmp, $fichier);
-	return $ret;
+	if(file_exists($tmp)){
+		$taille_test = getimagesize($tmp);
+		if ($taille_test[0] < 1) return false;
+		
+		spip_unlink($fichier); // le fichier peut deja exister
+		@rename($tmp, $fichier);
+		return $ret;
+	}
+	return false;
 }
 
 /**
@@ -421,7 +424,7 @@ function _image_imagegif($img,$fichier) {
  * 		valeur (85) de la constante _IMG_GD_QUALITE (modifiable depuis
  * 		mes_options.php).
  * @return bool
- * 		false si l'image créée a une largeur nulle ;
+ * 		false si l'image créée a une largeur nulle ou n'existe pas ;
  * 		true si une image est bien retournée.
  */
 function _image_imagejpg($img,$fichier,$qualite=_IMG_GD_QUALITE) {
@@ -429,12 +432,15 @@ function _image_imagejpg($img,$fichier,$qualite=_IMG_GD_QUALITE) {
 	$tmp = $fichier.".tmp";
 	$ret = imagejpeg($img,$tmp, $qualite);
 
-	$taille_test = getimagesize($tmp);
-	if ($taille_test[0] < 1) return false;
+	if(file_exists($tmp)){
+		$taille_test = getimagesize($tmp);
+		if ($taille_test[0] < 1) return false;
 
-	spip_unlink($fichier); // le fichier peut deja exister
-	@rename($tmp, $fichier);
-	return $ret;
+		spip_unlink($fichier); // le fichier peut deja exister
+		@rename($tmp, $fichier);
+		return $ret;
+	}
+	return false;
 }
 
 /**
