@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 /**
- * Ce fichier gère le bandeau supérieur de l'espace privé
+ * Ce fichier gère l'obtention de données distantes
  * 
  * @package SPIP\Core\Distant
 **/
@@ -47,6 +47,12 @@ define('_REGEXP_COPIE_LOCALE', ',' .
  */
 function copie_locale($source, $mode='auto', $local = null) {
 
+	// si c'est la protection de soi-meme, retourner le path
+	if ($mode !== 'force' AND preg_match(_REGEXP_COPIE_LOCALE, $source, $match)) {
+		$source = substr(_DIR_IMG,strlen(_DIR_RACINE)) . urldecode($match[1]);
+		return @file_exists($source) ? $source : false;
+	}
+
 	if (is_null($local))
 		$local = fichier_copie_locale($source);
 	else {
@@ -55,11 +61,6 @@ function copie_locale($source, $mode='auto', $local = null) {
 		}
 	}
 
-	// si c'est la protection de soi-meme, retourner le path
-	if ($mode !== 'force' AND preg_match(_REGEXP_COPIE_LOCALE, $source, $local)) {
-		$source = substr(_DIR_IMG,strlen(_DIR_RACINE)) . urldecode($local[1]);
-		return @file_exists($source) ? $source : false;
-	}
 
 	$localrac = _DIR_RACINE.$local;
 	$t = ($mode=='force') ? false  : @file_exists($localrac);
