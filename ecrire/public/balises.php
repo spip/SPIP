@@ -128,11 +128,26 @@ function balise_PUCE_dist($p) {
 	return $p;
 }
 
-// #DATE
-// Cette fonction sait aller chercher dans le contexte general
-// quand #DATE est en dehors des boucles
-// http://www.spip.net/fr_article1971.html
-// http://doc.spip.org/@balise_DATE_dist
+
+/**
+ * Compile la balise `#DATE` qui retourne la date de mise en ligne
+ *
+ * Cette balise retourne soit le champ `date` d'une table si elle est
+ * utilisée dans une boucle, sinon la date de calcul du squelette.
+ *
+ * @balise DATE
+ * @link http://www.spip.net/4336 Balise DATE
+ * @link http://www.spip.net/1971 La gestion des dates
+ * @example
+ *     ```
+ *     <td>[(#DATE|affdate_jourcourt)]</td>
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise.
+ * @return Champ
+ *     Pile completée du code PHP d'exécution de la balise
+ */
 function balise_DATE_dist ($p) {
 	$d = champ_sql('date', $p);
 #	if ($d === "@\$Pile[0]['date']")
@@ -141,9 +156,22 @@ function balise_DATE_dist ($p) {
 	return $p;
 }
 
-// #DATE_REDAC
-// http://www.spip.net/fr_article1971.html
-// http://doc.spip.org/@balise_DATE_REDAC_dist
+
+/**
+ * Compile la balise `#DATE_REDAC` qui retourne la date de première publication
+ *
+ * Cette balise retourne le champ `date_redac` d'une table
+ *
+ * @balise DATE_REDAC
+ * @link http://www.spip.net/3858 Balises DATE_MODIF et DATE_REDAC
+ * @link http://www.spip.net/1971 La gestion des dates
+ * @see balise_DATE_MODIF_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise.
+ * @return Champ
+ *     Pile completée du code PHP d'exécution de la balise
+ */
 function balise_DATE_REDAC_dist ($p) {
 	$d = champ_sql('date_redac', $p);
 #	if ($d === "@\$Pile[0]['date_redac']")
@@ -153,18 +181,41 @@ function balise_DATE_REDAC_dist ($p) {
 	return $p;
 }
 
-// #DATE_MODIF
-// http://www.spip.net/fr_article1971.html
-// http://doc.spip.org/@balise_DATE_MODIF_dist
+/**
+ * Compile la balise `#DATE_MODIF` qui retourne la date de dernière modification
+ *
+ * Cette balise retourne le champ `date_modif` d'une table
+ *
+ * @balise DATE_MODIF
+ * @link http://www.spip.net/3858 Balises DATE_MODIF et DATE_REDAC
+ * @link http://www.spip.net/1971 La gestion des dates
+ * @see balise_DATE_REDAC_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise.
+ * @return Champ
+ *     Pile completée du code PHP d'exécution de la balise
+ */
 function balise_DATE_MODIF_dist ($p) {
 	$p->code = champ_sql('date_modif', $p);
 	$p->interdire_scripts = false;
 	return $p;
 }
 
-// #DATE_NOUVEAUTES
-// http://www.spip.net/fr_article1971.html
-// http://doc.spip.org/@balise_DATE_NOUVEAUTES_dist
+/**
+ * Compile la balise `#DATE_NOUVEAUTES` indiquant la date de dernier envoi
+ * du mail de nouveautés
+ *
+ * @balise DATE_NOUVEAUTES
+ * @link http://www.spip.net/4337 Balise DATE_NOUVEAUTES
+ * @link http://www.spip.net/1971 La gestion des dates
+ * @see balise_DATE_REDAC_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise.
+ * @return Champ
+ *     Pile completée du code PHP d'exécution de la balise
+ */
 function balise_DATE_NOUVEAUTES_dist($p) {
 	$p->code = "((\$GLOBALS['meta']['quoi_de_neuf'] == 'oui'
 	AND isset(\$GLOBALS['meta']['dernier_envoi_neuf'])) ?
@@ -174,7 +225,21 @@ function balise_DATE_NOUVEAUTES_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_DOSSIER_SQUELETTE_dist
+
+/**
+ * Compile la balise `#DOSSIER_SQUELETTE` retournant le chemin vers le
+ * répertoire de squelettes actuellement utilisé
+ *
+ * @balise DOSSIER_SQUELETTE
+ * @deprecated Utiliser `#CHEMIN`
+ * @link http://www.spip.net/4627
+ * @see balise_CHEMIN_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise.
+ * @return Champ
+ *     Pile completée du code PHP d'exécution de la balise
+ */
 function balise_DOSSIER_SQUELETTE_dist($p) {
 	$code = substr(addslashes(dirname($p->descr['sourcefile'])), strlen(_DIR_RACINE));
 	$p->code = "_DIR_RACINE . '$code'" .
@@ -182,7 +247,17 @@ function balise_DOSSIER_SQUELETTE_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_SQUELETTE_dist
+/**
+ * Compile la balise `#SQUELETTE` retournant le chemin du squelette courant
+ *
+ * @balise SQUELETTE
+ * @link http://www.spip.net/4027
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise.
+ * @return Champ
+ *     Pile completée du code PHP d'exécution de la balise
+ */
 function balise_SQUELETTE_dist($p) {
 	$code = addslashes($p->descr['sourcefile']);
 	$p->code = "'$code'" .
@@ -190,7 +265,21 @@ function balise_SQUELETTE_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_SPIP_VERSION_dist
+/**
+ * Compile la balise `#SPIP_VERSION` qui affiche la version de SPIP
+ *
+ * @balise SPIP_VERSION
+ * @see spip_version()
+ * @example
+ *     ```
+ *     <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise.
+ * @return Champ
+ *     Pile completée du code PHP d'exécution de la balise
+ */
 function balise_SPIP_VERSION_dist($p) {
 	$p->code = "spip_version()";
 	$p->interdire_scripts = false;
@@ -905,7 +994,7 @@ function balise_CHEMIN_IMAGE_dist($p) {
  * @param array $src
  *     Tableau dans lequel chercher la clé demandée en paramètre de la balise.
  *     Par defaut prend dans le contexte du squelette.
- * @return Champ $p
+ * @return Champ
  *     Pile completée du code PHP d'exécution de la balise
 **/
 function balise_ENV_dist($p, $src = NULL) {
@@ -959,9 +1048,12 @@ function balise_ENV_dist($p, $src = NULL) {
  * `#CONFIG{/infos/champ,defaut}` qui lit la valeur de `champ`
  * dans une table des meta qui serait `spip_infos`
  *
+ * @balise CONFIG
+ * @link http://www.spip.net/4335
+ * 
  * @param Champ $p
  *     Pile au niveau de la balise.
- * @return Champ $p
+ * @return Champ
  *     Pile completée du code PHP d'exécution de la balise
  */
 function balise_CONFIG_dist($p) {
@@ -978,7 +1070,24 @@ function balise_CONFIG_dist($p) {
 }
 
 
-// http://doc.spip.org/@balise_CONNECT_dist
+/**
+ * Compile la balise `#CONNECT` qui retourne le nom du connecteur
+ * de base de données
+ *
+ * Retourne le nom du connecteur de base de données utilisé (le nom
+ * du fichier `config/xx.php` sans l'extension, utilisé pour calculer
+ * les données du squelette).
+ *
+ * Retourne `NULL` si le connecteur utilisé est celui par défaut de SPIP
+ * (connect.php), sinon retourne son nom.
+ *
+ * @balise CONNECT
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise.
+ * @return Champ
+ *     Pile completée du code PHP d'exécution de la balise
+ */
 function balise_CONNECT_dist($p) {
 	$p->code = '($connect ? $connect : NULL)';
 	$p->interdire_scripts = false;
