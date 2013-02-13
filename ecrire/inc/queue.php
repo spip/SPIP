@@ -506,7 +506,7 @@ function queue_affichage_cron(){
 		return $texte;
 
 	// ne pas relancer si on vient de lancer dans la meme seconde par un hit concurent
-	if (file_exists($lock=_DIR_TMP."cron.lock") AND !@filemtime($lock)<$_SERVER['REQUEST_TIME'])
+	if (file_exists($lock=_DIR_TMP."cron.lock") AND !(@filemtime($lock)<$_SERVER['REQUEST_TIME']))
 		return $texte;
 	@touch($lock);
 
