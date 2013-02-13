@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier gère le bandeau supérieur de l'espace privé
+ * 
+ * @package SPIP\Core\Distant
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if (!defined('_INC_DISTANT_VERSION_HTTP')) define('_INC_DISTANT_VERSION_HTTP', "HTTP/1.0");
@@ -23,13 +28,12 @@ define('_REGEXP_COPIE_LOCALE', ',' .
 //@define('_COPIE_LOCALE_MAX_SIZE',2097152); // poids (inc/utils l'a fait)
 
 /**
- * Cree au besoin la copie locale d'un fichier distant
- *
+ * Crée au besoin la copie locale d'un fichier distant
  *
  * Prend en argument un chemin relatif au rep racine, ou une URL
  * Renvoie un chemin relatif au rep racine, ou false
  *
- * http://doc.spip.org/@copie_locale
+ * @link http://www.spip.net/4155
  *
  * @param $source
  * @param string $mode
@@ -41,14 +45,22 @@ define('_REGEXP_COPIE_LOCALE', ',' .
  *   permet de specifier le nom du fichier local (stockage d'un cache par exemple, et non document IMG)
  * @return bool|string
  */
-function copie_locale($source, $mode='auto') {
+function copie_locale($source, $mode='auto', $local = null) {
+
+	if (is_null($local))
+		$local = fichier_copie_locale($source);
+	else {
+		if (_DIR_RACINE AND strncmp(_DIR_RACINE, $local, strlen(_DIR_RACINE))==0) {
+			$local = substr($local, strlen(_DIR_RACINE));
+		}
+	}
 
 	// si c'est la protection de soi-meme, retourner le path
 	if ($mode !== 'force' AND preg_match(_REGEXP_COPIE_LOCALE, $source, $local)) {
 		$source = substr(_DIR_IMG,strlen(_DIR_RACINE)) . urldecode($local[1]);
 		return @file_exists($source) ? $source : false;
 	}
-	$local = fichier_copie_locale($source);
+
 	$localrac = _DIR_RACINE.$local;
 	$t = ($mode=='force') ? false  : @file_exists($localrac);
 
