@@ -405,14 +405,14 @@ function traite_query($query, $db='', $prefixe='') {
 }
 
 /**
- * Selectionne une base de donnees
+ * Sélectionne une base de données
  *
- * @param string $nom
- * 		Nom de la base a utiliser
+ * @param string $db
+ *     Nom de la base à utiliser
  * 
  * @return bool
- * 		True cas de success.
- * 		False en cas d'erreur.
+ *     - True cas de succès.
+ *     - False en cas d'erreur.
 **/
 function spip_mysql_selectdb($db) {
 	$ok = mysql_select_db($db);

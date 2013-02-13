@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Calculs des informations contenues dans un plugin.xml
+ *
+ * @package SPIP\Core\Plugins
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // lecture d'un texte ecrit en pseudo-xml issu d'un fichier plugin.xml
@@ -101,25 +107,28 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	return $ret;
 }
 
-// Un attribut de nom "id" a une signification particuliere en XML
-// qui ne correspond pas a l'utilissation qu'en font les plugin.xml
-// Pour eviter de complexifier la lecture de paquet.xml
-// qui n'est pour rien dans cette bevue, on doublonne l'information
-// sous les deux index "nom" et "id" dans l'arbre de syntaxe abstraite
-// pour compatibilite, mais seul le premier est disponible quand on lit
-// un paquet.xml, "id" devant etre considere comme obsolete
 
 /**
- * Normaliser les description des necessite
+ * Normaliser les description des balises `necessite`
  * 
  * Ajoute les clés
  * - 'nom' (= id)
  * - 'compatibilite' (= version)
  *
- * @param array $utilise
- * 		Liste des necessite trouvés pour le plugin
+ * @note
+ *   Un attribut de nom "id" à une signification particulière en XML
+ *   qui ne correspond pas à l'utilissation qu'en font les plugin.xml.
+ *   
+ *   Pour éviter de complexifier la lecture de paquet.xml
+ *   qui n'est pour rien dans cette bévue, on doublonne l'information
+ *   sous les deux index "nom" et "id" dans l'arbre de syntaxe abstraite
+ *   pour compatibilité, mais seul le premier est disponible quand on lit
+ *   un paquet.xml, "id" devant être considéré comme obsolète.
+ *
+ * @param array $necessite
+ *     Liste des necessite trouvés pour le plugin
  * @return array
- * 		Liste des necessite modifiés.
+ *     Liste des necessite modifiés.
  */
 function info_plugin_normalise_necessite($necessite) {
 	$res = array('necessite' => array(), 'lib' => array());

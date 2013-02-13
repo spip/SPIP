@@ -10,20 +10,33 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion d'une sécurisation des squelettes
+ *
+ * Une surcharge de ce fichier pourrait permettre :
+ * 
+ * - de limiter l'utilisation des filtres à l'aide d'une liste blanche ou liste noire,
+ * - de rendre inactif le PHP écrit dans les squelettes
+ * - de refuser l'inclusion de fichier PHP dans les squelettes
+ *
+ * @package SPIP\Core\Compilateur\Sandbox
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Composer le code d'execution d'un texte
- * en principe juste un echappement de guillemets
+ * Composer le code d'exécution d'un texte
+ * 
+ * En principe juste un echappement de guillemets
  * sauf si on veut aussi echapper et interdire les scripts serveurs
- * dans les squelette
+ * dans les squelettes
  *
  * @param string $texte
- * @param string $code
- * @param string $arglist
- * @param Object $p
+ *     Texte à composer
+ * @param Champ $p
+ *     Balise qui appelle ce texte
  * @return string
+ *     Texte 
  */
 function sandbox_composer_texte($texte, &$p){
 	$code = "'".str_replace(array("\\","'"),array("\\\\","\\'"), $texte)."'";
@@ -32,12 +45,13 @@ function sandbox_composer_texte($texte, &$p){
 
 
 /**
- * Composer le code d'execution d'un filtre
+ * Composer le code d'exécution d'un filtre
  *
  * @param string $fonc
  * @param string $code
  * @param string $arglist
- * @param Object $p
+ * @param Champ $p
+ *     Balise qui appelle ce filtre
  * @return string
  */
 function sandbox_composer_filtre($fonc, $code, $arglist, &$p){
@@ -68,7 +82,8 @@ include $path;
  * Composer le code d'inclusion PHP
  *
  * @param string $fichier
- * @param Object $p
+ * @param Champ $p
+ *     Balise créant l'inclusion
  * @return string
  */
 function sandbox_composer_inclure_php($fichier, &$p){
@@ -82,10 +97,11 @@ function sandbox_composer_inclure_php($fichier, &$p){
 }
 
 /**
- * Composer le code se securisation anti script
+ * Composer le code de sécurisation anti script
  *
  * @param string $code
- * @param Object $p
+ * @param Champ $p
+ *     Balise sur laquelle s'applique le filtre
  * @return string
  */
 function sandbox_composer_interdire_scripts($code, &$p){
@@ -105,13 +121,14 @@ function sandbox_composer_interdire_scripts($code, &$p){
 
 /**
  * Appliquer des filtres sur un squelette complet
- * la fonction peut plusieurs tableaux de filtres a partir du 3eme argument
- * qui seront appliques dans l'ordre
+ * 
+ * La fonction accèpte plusieurs tableaux de filtres à partir du 3ème argument
+ * qui seront appliqués dans l'ordre
  *
  * @param array $skel
  * @param string $corps
  * @param array $filtres
- * @param array ...
+ *     Tableau de filtres à appliquer.
  * @return mixed|string
  */
 function sandbox_filtrer_squelette($skel, $corps, $filtres){
@@ -139,7 +156,21 @@ function sandbox_filtrer_squelette($skel, $corps, $filtres){
 }
 
 
-// http://doc.spip.org/@echapper_php_callback
+/**
+ * Callback pour échapper du code PHP
+ *
+ * Rappeler la fonction sans paramètre pour obtenir les substitutions réalisées.
+ * 
+ * @param array|null $r
+ *
+ *     - array : ce sont les captures de la regex à échapper
+ *     - NULL : demande à dépiler tous les échappements réalisés
+ * 
+ * @return string|array
+ * 
+ *     - string : hash de substitution du code php lorsque `$r` est un array
+ *     - array : Liste( liste des codes PHP, liste des substitutions )
+**/
 function echapper_php_callback($r=null) {
 	static $src = array();
 	static $dst = array();

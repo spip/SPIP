@@ -10,26 +10,31 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de la sélection d'un squelette depuis son nom parmi les
+ * chemins connus de SPIP
+ *
+ * Recherche par exemple `contenu\xx` et en absence utilisera `contenu\dist`
+ *
+ * @package SPIP\Core\Public\Styliser
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
 /**
- * Determiner le squelette qui sera utilise pour rendre la page ou le bloc
- * a partir de $fond et du $contetxe
+ * Déterminer le squelette qui sera utilisé pour rendre la page ou le bloc
+ * à partir de `$fond` et du `$contetxe`
  * 
- * Actuellement tous les squelettes se terminent par .html
+ * Actuellement tous les squelettes se terminent par `.html`
  * pour des raisons historiques, ce qui est trompeur
  *
  * @param string $fond
  * @param array $contexte
  * @param string $lang
  * @param string $connect
- * @param string $ext
  * @return array
- *
- * http://doc.spip.org/@public_styliser_dist
  */
 function public_styliser_dist($fond, $contexte, $lang='', $connect='') {
 	static $styliser_par_z;
@@ -78,6 +83,21 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='') {
 	return array($squelette, $ext, $ext, "$squelette.$ext");
 }
 
+/**
+ * Cherche à échafauder un squelette générique pour un objet éditorial si
+ * aucun squelette approprié n'a été trouvé
+ *
+ * Échaffaude seulement pour des appels à `prive/objets/liste/` ou
+ * `prive/objets/contenu/` pour lesquels aucun squelette n'a été trouvé,
+ * et uniquement si l'on est dans l'espace privé.
+ *
+ * @see prive_echafauder_dist()
+ * 
+ * @param array $flux
+ *     Données du pipeline styliser
+ * @return array
+ *     Données du pipeline styliser
+**/
 function styliser_par_objets($flux){
 	if (test_espace_prive()
 		AND !$squelette = $flux['data']
@@ -103,15 +123,13 @@ function styliser_par_objets($flux){
 }
 
 /**
- * Calcul de la rubrique associee a la requete
- * (selection de squelette specifique par id_rubrique & lang)
+ * Calcul de la rubrique associée à la requête
+ * (sélection de squelette spécifique par id_rubrique & lang)
  *
- * attention, on repete cela a chaque inclusion,
+ * Êttention, on repète cela à chaque inclusion,
  * on optimise donc pour ne faire la recherche qu'une fois
  * par contexte semblable du point de vue des id_xx
- *
- * http://doc.spip.org/@quete_rubrique_fond
- *
+ * 
  * @staticvar array $liste_objets
  * @param array $contexte
  * @return array

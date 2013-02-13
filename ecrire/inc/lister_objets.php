@@ -10,20 +10,32 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de listes d'objets
+ *
+ * @package SPIP\Core\Listes
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 
 /**
- * affichage des liste d'objets
- * surcharge pour aiguiller vers la mise en skel
+ * Affichage des liste d'objets
+ * 
+ * Surcharge pour aiguiller vers la mise en squelettes des listes
  *
+ * @deprecated Créer ou utiliser un squelette dans `prive/objets/liste/`
+ *   pour la table en question et l'appeler avec une inclusion.
+ * 
  * @param string $vue
- * @param string $titre
- * @param array $requete
- * @param string $formater
+ *     Nom de l'objet
+ * @param array $contexte
+ *     Contexte du squelette
  * @param bool $force
+ *     Si `true` le titre est affiché même s'il n'y a aucun élément dans la liste.
  * @return string
+ *     Code HTML de la liste
  */
 function inc_lister_objets_dist($vue, $contexte=array(), $force=false){
 	$res = ""; // debug

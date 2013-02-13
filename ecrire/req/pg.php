@@ -422,18 +422,18 @@ function spip_pg_explain($query, $serveur='',$requeter=true){
 
 
 /**
- * Selectionne une base de donnees
+ * Sélectionne une base de données
  *
- * @param string $nom
- * 		Nom de la base a utiliser
+ * @param string $db
+ *     Nom de la base à utiliser
  * @param string $serveur
- * 		Nom du connecteur
+ *     Nom du connecteur
  * @param bool $requeter
- * 		Inutilise
+ *     Inutilisé
  * 
  * @return bool|string
- * 		Nom de la base en cas de success.
- * 		False en cas d'erreur.
+ *     - Nom de la base en cas de succès.
+ *     - False en cas d'erreur.
 **/
 function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 	// se connecter a la base indiquee

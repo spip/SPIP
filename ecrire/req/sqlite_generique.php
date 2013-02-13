@@ -1177,18 +1177,18 @@ function spip_sqlite_select($select, $from, $where = '', $groupby = '', $orderby
 
 
 /**
- * Selectionne un fichier de base de donnees
+ * Sélectionne un fichier de base de données
  *
- * @param string $nom
- * 		Nom de la base a utiliser
+ * @param string $db
+ *     Nom de la base à utiliser
  * @param string $serveur
- * 		Nom du connecteur
+ *     Nom du connecteur
  * @param bool $requeter
- * 		Inutilise
+ *     Inutilise
  * 
  * @return bool|string
- * 		Nom de la base en cas de success.
- * 		False en cas d'erreur.
+ *     - Nom de la base en cas de success.
+ *     - False en cas d'erreur.
 **/
 function spip_sqlite_selectdb($db, $serveur = '', $requeter = true){
 	_sqlite_init();
@@ -1635,27 +1635,36 @@ function _sqlite_charger_version($version = ''){
 
 
 /**
- * Gestion des requetes ALTER non reconnues de SQLite :
- * ALTER TABLE table DROP column
- * ALTER TABLE table CHANGE [COLUMN] columnA columnB definition
- * ALTER TABLE table MODIFY column definition
- * ALTER TABLE table ADD|DROP PRIMARY KEY
+ * Gestion des requêtes ALTER non reconnues de SQLite
  *
- * (MODIFY transforme en CHANGE columnA columnA) par spip_sqlite_alter()
+ * Requêtes non reconnues :
  *
- * 1) creer une table B avec le nouveau format souhaite
- * 2) copier la table d'origine A vers B
- * 3) supprimer la table A
- * 4) renommer la table B en A
- * 5) remettre les index (qui sont supprimes avec la table A)
+ *     ALTER TABLE table DROP column
+ *     ALTER TABLE table CHANGE [COLUMN] columnA columnB definition
+ *     ALTER TABLE table MODIFY column definition
+ *     ALTER TABLE table ADD|DROP PRIMARY KEY
  *
- * http://doc.spip.org/@_sqlite_modifier_table
+ * `MODIFY` est transformé en `CHANGE columnA columnA` par spip_sqlite_alter()
  *
- * @param string/array $table : nom_table, array(nom_table=>nom_futur)
- * @param string/array $col : nom_colonne, array(nom_colonne=>nom_futur)
- * @param array $opt : options comme les tables spip, qui sera merge a la table creee : array('field'=>array('nom'=>'syntaxe', ...), 'key'=>array('KEY nom'=>'colonne', ...))
- * @param string $serveur : nom de la connexion sql en cours
+ * 1) Créer une table B avec le nouveau format souhaité
+ * 2) Copier la table d'origine A vers B
+ * 3) Supprimer la table A
+ * 4) Renommer la table B en A
+ * 5) Remettre les index (qui sont supprimés avec la table A)
  *
+ * @param string|array $table
+ *     - string : Nom de la table table,
+ *     - array : couple (nom de la table => nom futur)
+ * @param string|array $colonne
+ *     - string : nom de la colonne,
+ *     - array : couple (nom de la colonne => nom futur)
+ * @param array $opt
+ *     options comme les tables SPIP, qui sera mergé à la table créee :
+ *     `array('field'=>array('nom'=>'syntaxe', ...), 'key'=>array('KEY nom'=>'colonne', ...))`
+ * @param string $serveur
+ *     Nom de la connexion SQL en cours
+ * @return bool
+ *     true si OK, false sinon.
  */
 function _sqlite_modifier_table($table, $colonne, $opt = array(), $serveur = ''){
 
@@ -2122,11 +2131,12 @@ class spip_sqlite {
 }
 
 /*
- * Classe pour partager les lancements de requete
- * instanciee une fois par $serveur
- * - peut corriger la syntaxe des requetes pour la conformite a sqlite
- * - peut tracer les requetes
+ * Classe pour partager les lancements de requête
  * 
+ * Instanciée une fois par `$serveur` :
+ * 
+ * - peut corriger la syntaxe des requêtes pour la conformité à SQLite
+ * - peut tracer les requêtes
  */
 class sqlite_requeteur {
 	var $query = ''; // la requete
@@ -2139,10 +2149,8 @@ class sqlite_requeteur {
 	var $sqlite_version = ''; // Version de sqlite (2 ou 3)
 
 	/**
-	 * constructeur
-	 * http://doc.spip.org/@sqlite_traiter_requete
+	 * Constructeur
 	 *
-	 * @param  $query
 	 * @param string $serveur
 	 * @return bool
 	 */
@@ -2165,10 +2173,12 @@ class sqlite_requeteur {
 	}
 
 	/**
-	 * lancer la requete $query,
-	 * faire le tracage si demande
-	 * http://doc.spip.org/@executer_requete
+	 * Lancer la requête transmise et faire le tracage si demandé
 	 *
+	 * @param string $query
+	 *     Requête à exécuter
+	 * @param bool|null $tracer
+	 *     true pour tracer la requête
 	 * @return bool|SQLiteResult
 	 */
 	function executer_requete($query, $tracer=null){
