@@ -214,7 +214,19 @@ function balise_LANG_DIR_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_PUCE_dist
+
+/**
+ * Compile la balise `#PUCE` affichant une puce
+ * 
+ * @balise PUCE
+ * @link http://www.spip.net/4628
+ * @see definir_puce()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_PUCE_dist($p) {
 	$p->code = "definir_puce()";
 	$p->interdire_scripts = false;
@@ -382,7 +394,7 @@ function balise_SPIP_VERSION_dist($p) {
 
 
 /**
- * Compile la balise `NOM_SITE` qui affiche le nom du site.
+ * Compile la balise `#NOM_SITE` qui affiche le nom du site.
  *
  * Affiche le nom du site ou sinon l'URL ou le titre de l'objet
  * Utiliser `#NOM_SITE*` pour avoir le nom du site ou rien.
@@ -413,7 +425,19 @@ function balise_NOM_SITE_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_NOTES_dist
+
+/**
+ * Compile la balise `#NOTE` qui affiche les notes de bas de page
+ *
+ * @balise NOTES
+ * @link http://www.spip.net/3964
+ * @see calculer_notes()
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_NOTES_dist($p) {
 	// Recuperer les notes
 	$p->code = 'calculer_notes()';
@@ -421,7 +445,24 @@ function balise_NOTES_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_RECHERCHE_dist
+
+/**
+ * Compile la balise `#RECHERCHE` qui retourne le terme de recherche demandé
+ *
+ * Retourne un terme demandé en recherche, en le prenant dans _request()
+ * sous la clé `recherche`.
+ *
+ * @balise RECHERCHE
+ * @example
+ *     ```
+ *     <h3>Recherche de : #RECHERCHE</h3>
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_RECHERCHE_dist($p) {
 	$p->code = 'entites_html(_request("recherche"))';
 	$p->interdire_scripts = false;

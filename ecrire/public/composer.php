@@ -422,9 +422,18 @@ function lister_objets_avec_logos ($type) {
 	return join(',',$logos);
 }
 
-// fonction appelee par la balise #NOTES
-// Renvoyer l'etat courant des notes, le purger et en preparer un nouveau
-// http://doc.spip.org/@calculer_notes
+
+/**
+ * Renvoie l'état courant des notes, le purge et en prépare un nouveau
+ *
+ * Fonction appelée par la balise `#NOTES`
+ * 
+ * @see balise_NOTES_dist()
+ * @see inc_notes_dist()
+ *
+ * @return string
+ *     Code HTML des notes
+**/
 function calculer_notes() {
 	$r='';
 	if ($notes = charger_fonction('notes', 'inc', true)) {

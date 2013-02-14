@@ -142,7 +142,7 @@ function boite_ouvrir($titre, $class='', $head_class='', $id=""){
  * 
  * Peut-être surchargé par `filtre_boite_pied_dist` ou `filtre_boite_pied`
  *
- * @filtre boite_ouvrir
+ * @filtre boite_pied
  * @see balise_BOITE_PIED_dist() qui utilise ce filtre
  * @param string $class
  *     Classes CSS de la boîte
@@ -161,7 +161,7 @@ function boite_pied($class='act'){
  * 
  * Peut-être surchargé par `filtre_boite_fermer_dist` ou `filtre_boite_fermer`
  *
- * @filtre boite_ouvrir
+ * @filtre boite_fermer
  * @see balise_BOITE_FERMER_dist() qui utilise ce filtre
  * @return string
  *     HTML de fin de la boîte

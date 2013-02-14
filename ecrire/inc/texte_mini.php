@@ -10,14 +10,31 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des textes et échappements (fonctions d'usages fréquents)
+ *
+ * @package SPIP\Core\Texte
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/filtres');
 include_spip('inc/lang');
 
-// On initialise la puce pour eviter find_in_path() a chaque rencontre de \n-
-// Mais attention elle depend de la direction et de X_fonctions.php, ainsi que
-// de l'espace choisi (public/prive)
-// http://doc.spip.org/@definir_puce
+
+/**
+ * Retourne une image d'une puce
+ *
+ * Le nom de l'image est déterminé par la globale 'puce' ou 'puce_prive'
+ * ou les mêmes suffixées de '_rtl' pour ce type de langues.
+ * 
+ * @note
+ *     On initialise la puce pour éviter `find_in_path()` à chaque rencontre de `\n-`
+ *     Mais attention elle depend de la direction et de X_fonctions.php, ainsi que
+ *     de l'espace choisi (public/prive)
+ * 
+ * @return string
+ *     Code HTML de la puce
+**/
 function definir_puce() {
 
 	// Attention au sens, qui n'est pas defini de la meme facon dans
@@ -248,7 +265,28 @@ function echappe_retour_modeles($letexte, $interdire_scripts=false)
 }
 
 
-// http://doc.spip.org/@couper
+/**
+ * Coupe un texte à une certaine longueur.
+ *
+ * Il essaie de ne pas couper les mots et enlève le formatage du texte.
+ * Si le texte original est plus long que l’extrait coupé, alors des points
+ * de suite sont ajoutés à l'extrait, tel que ` (...)`.
+ *
+ * @note
+ *     Les points de suite ne sont pas ajoutés sur les extraits
+ *     très courts.
+ *
+ * @filtre couper
+ * @link http://www.spip.net/4275
+ * 
+ * @param string $texte
+ *     Texte à couper
+ * @param int $taille
+ *     Taille de la coupe
+ * @param string $suite
+ *     Points de suite ajoutés.
+ * @return 
+**/
 function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	if (!($length=strlen($texte)) OR $taille <= 0) return '';
 	$offset = 400 + 2*$taille;
@@ -364,8 +402,23 @@ function echapper_faux_tags($letexte){
   return $letexte;
 }
 
-// Securite : utiliser SafeHTML s'il est present dans ecrire/safehtml/
-// http://doc.spip.org/@safehtml
+
+/**
+ * Sécurise un texte HTML 
+ *
+ * Échappe le code PHP et JS.
+ * Applique en plus safehtml si un plugin le définit dans inc/safehtml.php
+ *
+ * Permet de protéger les textes issus d'une origine douteuse (forums, syndications...)
+ *
+ * @filtre safehtml
+ * @link http://www.spip.net/4310
+ * 
+ * @param string $t
+ *      Texte à sécuriser
+ * @return string
+ *      Texte sécurisé
+**/
 function safehtml($t) {
 	static $safehtml;
 
@@ -387,11 +440,23 @@ function safehtml($t) {
 }
 
 
-// fonction en cas de texte extrait d'un serveur distant:
-// on ne sait pas (encore) rapatrier les documents joints
-// Sert aussi a nettoyer un texte qu'on veut mettre dans un <a> etc.
-// TODO: gerer les modeles ?
-// http://doc.spip.org/@supprime_img
+/**
+ * Supprime les modèles d'image d'un texte
+ *
+ * Fonction en cas de texte extrait d'un serveur distant:
+ * on ne sait pas (encore) rapatrier les documents joints
+ * Sert aussi à nettoyer un texte qu'on veut mettre dans un `<a>` etc.
+ *
+ * @todo
+ *     gérer les autres modèles ?
+ * 
+ * @param string $letexte
+ *     Texte à nettoyer
+ * @param string|null $message
+ *     Message de remplacement pour chaque image enlevée
+ * @return string
+ *     Texte sans les modèles d'image
+**/
 function supprime_img($letexte, $message=NULL) {
 	if ($message===NULL) $message = '(' . _T('img_indisponible') . ')';
 	return preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'\s*/?'.'>,i',
