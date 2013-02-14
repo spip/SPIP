@@ -100,7 +100,10 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
  *     Erreurs des saisies
  */
 function formulaires_traduire_verifier_dist($objet, $id_objet, $retour='', $traduire = true){
-	$erreurs = formulaires_editer_objet_verifier($objet,$id_objet,array('changer_lang'));
+	$erreurs = array();
+	if (!_request('annuler') and !_request('supprimer_trad') and !_request('id_trad')) {
+		$erreurs = formulaires_editer_objet_verifier($objet,$id_objet,array('changer_lang'));
+	}
 
 	// si id_trad fourni, verifier que cela ne conflicte pas avec un id_trad existant
 	// et que ca reference bien un objet existant

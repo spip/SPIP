@@ -16,12 +16,14 @@
 				[(#ENV{langue}|?{[(#ENV{langue}|traduire_nom_langue)],[((#ENV{langue_parent}|traduire_nom_langue))]})]
 				[(#ENV{langue_choisie}|=={oui}|non)(<:info_multi_herit:>)]
 				</span>
-				[(#ENV{_langue}|oui)[<span class="toggle_box_link"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>&#91;<a href="#"
+				[(#ENV{_langue}|ou{#ENV{_traduire}}|oui)
+					<span class="toggle_box_link"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>&#91;<a href="#"
 						onclick="var f=jQuery(this).parents('form').eq(0);f.find('li .input').show('fast').siblings('span').hide('fast');f.find('.boutons,.new_trad,.editer_id_trad').show('fast');f.find('#changer_lang').eq(0).focus();return false;"
 						><:bouton_changer:></a>&#93;</span>
-				<span class="input[(#ENV{_saisie_en_cours}|non)none-js]">
-				<select name="changer_lang" id="changer_lang">(#INCLURE{fond=formulaires/inc-options-langues,name=changer_lang,default=#ENV**{_langue},herit=#ENV**{langue_parent}})</select>
-				</span>]]
+					[(#ENV{_langue}|oui)
+					[<span class="input[(#ENV{_saisie_en_cours}|non)none-js]">
+					<select name="changer_lang" id="changer_lang">(#INCLURE{fond=formulaires/inc-options-langues,name=changer_lang,default=#ENV**{_langue},herit=#ENV**{langue_parent}})</select>
+					</span>]]]
 			</li>
 			[(#ENV{_traduire}|oui)
 				[(#ENV{_lister_id_trad}|oui)
