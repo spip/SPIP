@@ -481,18 +481,46 @@ function calculer_balise_expose($p, $on, $off)
 }
 
 
-// Debut et fin de surlignage auto des mots de la recherche
-// on insere une balise Span avec une classe sans spec:
-// c'est transparent s'il n'y a pas de recherche,
-// sinon elles seront remplacees par les fontions de inc_surligne
 
-// http://doc.spip.org/@balise_DEBUT_SURLIGNE_dist
+/**
+ * Compile la balise `#DEBUT_SURLIGNE` qui permettait le surlignage
+ * des mots d'une recherche
+ *
+ * @note
+ *     Cette balise n'a plus d'effet depuis r9343
+ * 
+ * @balise DEBUT_SURLIGNE
+ * @see balise_FIN_SURLIGNE_dist()
+ * @deprecated Utiliser les classes CSS `surlignable` ou `pas_surlignable`
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_DEBUT_SURLIGNE_dist($p) {
 	include_spip('inc/surligne');
 	$p->code = "'<!-- " . MARQUEUR_SURLIGNE . " -->'";
 	return $p;
 }
-// http://doc.spip.org/@balise_FIN_SURLIGNE_dist
+
+
+/**
+ * Compile la balise `#FIN_SURLIGNE` qui arrêtait le surlignage
+ * des mots d'une recherche
+ *
+ * @note
+ *     Cette balise n'a plus d'effet depuis r9343
+ * 
+ * @balise FIN_SURLIGNE
+ * @see balise_DEBUT_SURLIGNE_dist()
+ * @deprecated Utiliser les classes CSS `surlignable` ou `pas_surlignable`
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_FIN_SURLIGNE_dist($p) {
 	include_spip('inc/surligne');
 	$p->code = "'<!-- " . MARQUEUR_FSURLIGNE . "-->'";
