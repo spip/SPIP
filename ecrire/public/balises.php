@@ -18,6 +18,9 @@
  * `balise_TOTO()` respectant la même API : elle reçoit en entrée un objet
  * de classe `Champ`, le modifie et le retourne. Cette classe est définie
  * dans public/interfaces.
+ *
+ * Des balises dites «dynamiques» sont également déclarées dans le
+ * répertoire ecrire/balise/
  * 
  * @package SPIP\Core\Compilateur\Balises
 **/
@@ -50,24 +53,59 @@ function interprete_argument_balise($n,$p) {
 	else
 		return NULL;
 }
+
+
 //
-// Definition des balises
+// Définition des balises
 //
-// http://doc.spip.org/@balise_NOM_SITE_SPIP_dist
+
+/**
+ * Compile la balise `#NOM_SITE_SPIP` retournant le nom du site
+ *
+ * @balise NOM_SITE_SPIP
+ * @link http://www.spip.net/4622
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_NOM_SITE_SPIP_dist($p) {
 	$p->code = "\$GLOBALS['meta']['nom_site']";
 	#$p->interdire_scripts = true;
 	return $p;
 }
 
-// http://doc.spip.org/@balise_EMAIL_WEBMASTER_dist
+/**
+ * Compile la balise `#EMAIL_WEBMASTER` retournant l'adresse courriel
+ * du webmestre
+ *
+ * @balise EMAIL_WEBMASTER
+ * @link http://www.spip.net/4586
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_EMAIL_WEBMASTER_dist($p) {
 	$p->code = "\$GLOBALS['meta']['email_webmaster']";
 	#$p->interdire_scripts = true;
 	return $p;
 }
 
-// http://doc.spip.org/@balise_DESCRIPTIF_SITE_SPIP_dist
+/**
+ * Compile la balise `#DESCRIPTIF_SITE_SPIP` qui retourne le descriptif
+ * du site !
+ *
+ * @balise DESCRIPTIF_SITE_SPIP
+ * @link http://www.spip.net/4338
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_DESCRIPTIF_SITE_SPIP_dist($p) {
 	$p->code = "\$GLOBALS['meta']['descriptif_site']";
 	#$p->interdire_scripts = true;
@@ -97,7 +135,27 @@ function balise_CHARSET_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_LANG_LEFT_dist
+/**
+ * Compile la balise `#LANG_LEFT` retournant 'left' si la langue s'écrit
+ * de gauche à droite, sinon 'right'
+ *
+ * @note
+ *     Peut servir à l'écriture de code CSS dans un squelette, mais
+ *     pour inclure un fichier css, il vaut mieux utiliser le filtre
+ *     `direction_css` si on le souhaite sensible à la langue utilisé.
+ * 
+ * @balise LANG_LEFT
+ * @link http://www.spip.net/4625
+ * @see lang_dir()
+ * @see balise_LANG_RIGHT_dist()
+ * @see balise_LANG_DIR_dist()
+ * @see direction_css()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_LANG_LEFT_dist($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "lang_dir($_lang, 'left','right')";
@@ -105,7 +163,22 @@ function balise_LANG_LEFT_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_LANG_RIGHT_dist
+/**
+ * Compile la balise `#LANG_RIGHT` retournant 'right' si la langue s'écrit
+ * de gauche à droite, sinon 'left'
+ * 
+ * @balise LANG_RIGHT
+ * @link http://www.spip.net/4625
+ * @see lang_dir()
+ * @see balise_LANG_LEFT_dist()
+ * @see balise_LANG_DIR_dist()
+ * @see direction_css()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_LANG_RIGHT_dist($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "lang_dir($_lang, 'right','left')";
@@ -113,7 +186,27 @@ function balise_LANG_RIGHT_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_LANG_DIR_dist
+/**
+ * Compile la balise `#LANG_DIR` retournant 'ltr' si la langue s'écrit
+ * de gauche à droite, sinon 'rtl'
+ * 
+ * @balise LANG_DIR
+ * @link http://www.spip.net/4625
+ * @see lang_dir()
+ * @see balise_LANG_LEFT_dist()
+ * @see balise_LANG_RIGHT_dist()
+ * @example
+ *     ```
+ *     <html dir="#LANG_DIR" lang="#LANG"
+ *         xmlns="http://www.w3.org/1999/xhtml"
+ *         xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js">
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_LANG_DIR_dist($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "lang_dir($_lang, 'ltr','rtl')";

@@ -2068,11 +2068,31 @@ function urls_absolues_css($contenu, $source) {
 		), $contenu);
 }
 
-// recuperere le chemin d'une css existante et :
-// 1. regarde si une css inversee droite-gauche existe dans le meme repertoire
-// 2. sinon la cree (ou la recree) dans _DIR_VAR/cache_css/
-// SI on lui donne a manger une feuille nommee _rtl.css il va faire l'inverse
-// http://doc.spip.org/@direction_css
+
+/**
+ * Inverse le code CSS (left <--> right) d'une feuille de style CSS
+ *
+ * Récupère le chemin d'une CSS existante et :
+ *
+ * 1. regarde si une CSS inversée droite-gauche existe dans le meme répertoire
+ * 2. sinon la crée (ou la recrée) dans `_DIR_VAR/cache_css/`
+ *
+ * Si on lui donne à manger une feuille nommée `*_rtl.css` il va faire l'inverse.
+ *
+ * @filtre direction_css
+ * @example
+ *     ```
+ *     [<link rel="stylesheet" href="(#CHEMIN{css/perso.css}|direction_css)" type="text/css" />]
+ *     ```
+ * @param string $css
+ *     Chemin vers le fichier CSS
+ * @param string $voulue
+ *     Permet de forcer le sens voulu (en indiquant `ltr`, `rtl` ou un
+ *     code de langue). En absence, prend le sens de la langue en cours.
+ * 
+ * @return string
+ *     Chemin du fichier CSS inversé
+**/
 function direction_css ($css, $voulue='') {
 	if (!preg_match(',(_rtl)?\.css$,i', $css, $r)) return $css;
 
