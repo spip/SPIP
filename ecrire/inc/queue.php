@@ -321,7 +321,7 @@ function queue_schedule($force_jobs = null){
 				#spip_log("JQ schedule job ".$nbj." OK",'jq');
 				// on reinsert dans la base aussitot avec un status=_JQ_PENDING
 				$row['status'] = _JQ_PENDING;
-				$row['date'] = $time;
+				$row['date'] = date('Y-m-d H:i:s',$time);
 				sql_insertq('spip_jobs', $row);
 
 				// on a la main sur le job :
@@ -362,7 +362,7 @@ function queue_close_job(&$row,$time,$result=0){
 		include_spip('inc/genie');
 		if ($result<0)
 			// relancer tout de suite, mais en baissant la priorite
-			queue_genie_replan_job($row['fonction'],$periode,0-$result/*last*/,0/*ASAP*/,$row['priorite']-1);
+			queue_genie_replan_job($row['fonction'],$periode,$time,time(),$row['priorite']-1);
 		else
 			// relancer avec la periode prevue
 			queue_genie_replan_job($row['fonction'],$periode,$time);
