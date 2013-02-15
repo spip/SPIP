@@ -4,19 +4,15 @@
 <ul class="items">
 <BOUCLE_enfants(RUBRIQUES){id_parent=#ENV{id_rubrique}}{statut?}{id_secteur?}{pagination 100 #GET{p}}{par num titre, titre}>
 	<li class="rubrique">
-		[(#ENV{bouton_selectionner}|oui)<a
+		<a
+			class="ouvrir ajax nohistory"
+			href="[(#SELF|parametre_url{objet,rubrique}|parametre_url{id_objet,#ID_RUBRIQUE})]"
+		>#TITRE</a>[(#ENV{bouton_selectionner}|oui)<a
+			title="<:bouton_choisir:> : [(#TITRE|attribut_html|couper{80})]"
+			class="choisir"
 			href="#"
 			onclick="jQuery(this).item_pick('rubrique|#ID_RUBRIQUE','#ENV{name,id_item}','#TITRE','rubrique');return false;"
-		><img
-		class="add"
-		src="#CHEMIN_IMAGE{ajouter-16.png}"
-		alt="ajouter"
-		width="16"
-		height="16"
-		/></a>]#TITRE<a
-		class="ajax"
-		href="[(#SELF|parametre_url{objet,rubrique}|parametre_url{id_objet,#ID_RUBRIQUE})]"><img
-		class="ouvrir" src="#CHEMIN_IMAGE{fleche-droite-16.png}" alt="" /></a>
+		><:bouton_choisir:></a>]
 	</li>
 </BOUCLE_enfants>
 </ul>

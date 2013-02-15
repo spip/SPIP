@@ -1,28 +1,10 @@
 <BOUCLE_rub(RUBRIQUES){tout}{id_rubrique=#ENV{id_objet}}{statut?}>
 	<div class="chemin">
-		<a href="[(#SELF|parametre_url{objet,racine}|parametre_url{id_objet,0})]" class="ajax"><:info_racine_site:></a>
-		<BOUCLE_chemin(HIERARCHIE){id_rubrique}> &gt; <a href="[(#SELF|parametre_url{id_objet,#ID_RUBRIQUE})]" class="ajax">#TITRE</a></BOUCLE_chemin> &gt; <strong class="on">#TITRE</strong>
+		<a href="[(#SELF|parametre_url{objet,racine}|parametre_url{id_objet,0})]" class="ajax nohistory"><:info_racine_site:></a><span class="sep divider">
+		&gt; </span><BOUCLE_chemin(HIERARCHIE){id_rubrique}><a href="[(#SELF|parametre_url{id_objet,#ID_RUBRIQUE})]" class="ajax nohistory">#TITRE</a><span class="sep divider">
+		&gt; </span></BOUCLE_chemin><h3 class="on">#TITRE</h3>
 	</div>
-	<B_contenu>
-	[(#REM) afficher la racine si la profondeur le permet]
-	<BOUCLE_test_racine(CONDITION){si (#_contenu:GRAND_TOTAL|<{#_contenu:TOTAL_BOUCLE}|oui)}>
-	<div class="frame[ total_(#_contenu:GRAND_TOTAL|max{#_contenu:TOTAL_BOUCLE|moins{1}})] frame_0">
-		<h2>
-			[(#ENV{racine}|oui)
-			<a href="#" onclick="jQuery(this).item_pick('racine|0','#ENV{name,id_item}','<:info_racine_site:>','racine');return false;">
-			<img class="add" src="#CHEMIN_IMAGE{ajouter-16.png}" alt="ajouter" width="16" height="16" />
-			</a>
-			]
-			<:info_racine_site:>
-		</h2>
-		#INCLURE{fond=formulaires/selecteur/lister, quoi=racine, env}
-	</div>
-	</BOUCLE_test_racine>
-	<BOUCLE_contenu(HIERARCHIE){id_rubrique}{tout}{n-4,4}>
-	<div class="frame[ total_(#GRAND_TOTAL|min{#TOTAL_BOUCLE|moins{1}})][ frame_(#COMPTEUR_BOUCLE|moins{#GRAND_TOTAL|plus{1}|max{#TOTAL_BOUCLE}}|plus{#TOTAL_BOUCLE})]">
-		<a href="[(#SELF|parametre_url{id_objet,#ID_PARENT|?{#ID_PARENT,0}})]" class="frame_close ajax"><img src="#CHEMIN_IMAGE{fermer-16}" alt="fermer" width="16" height="16" /></a>
-		<h2><a class="ajax" href="[(#SELF|parametre_url{id_objet,#ID_RUBRIQUE})]">#TITRE</a></h2>
+	<div class="liste">
 		#INCLURE{fond=formulaires/selecteur/lister, quoi=rubriques, id_rubrique, env}
 	</div>
-	</BOUCLE_contenu>
 </BOUCLE_rub>
