@@ -527,13 +527,43 @@ function balise_TOTAL_BOUCLE_dist($p) {
 	return $p;
 }
 
-// Si on est hors d'une boucle {recherche}, ne pas "prendre" cette balise
-// http://doc.spip.org/@balise_POINTS_dist
+
+/**
+ * Compile la balise `#POINTS` qui affiche la pertinence des résultats
+ *
+ * Retourne le calcul `points` réalisé par le critère `recherche`.
+ * Cette balise nécessite donc la présence de ce critère.
+ * 
+ * @balise POINTS
+ * @link http://www.spip.net/903 Boucles et balises de recherche
+ * @see critere_recherche_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_POINTS_dist($p) {
 	return rindex_pile($p, 'points', 'recherche');
 }
 
-// http://doc.spip.org/@balise_POPULARITE_ABSOLUE_dist
+
+/**
+ * Compile la balise `#POPULARITE_ABSOLUE` qui affiche la popularité absolue
+ *
+ * Cela correspond à la popularité quotidienne de l'article
+ * 
+ * @balise POPULARITE_ABSOLUE
+ * @link http://www.spip.net/1846 La popularité
+ * @see balise_POPULARITE_dist()
+ * @see balise_POPULARITE_MAX_dist()
+ * @see balise_POPULARITE_SITE_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_POPULARITE_ABSOLUE_dist($p) {
 	$p->code = 'ceil(' .
 	champ_sql('popularite', $p) .
@@ -542,14 +572,45 @@ function balise_POPULARITE_ABSOLUE_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_POPULARITE_SITE_dist
+/**
+ * Compile la balise `#POPULARITE_SITE` qui affiche la popularité du site
+ *
+ * La popularité du site est la somme de toutes les popularités absolues.
+ *
+ * @balise POPULARITE_SITE
+ * @link http://www.spip.net/1846 La popularité
+ * @see balise_POPULARITE_ABSOLUE_dist()
+ * @see balise_POPULARITE_dist()
+ * @see balise_POPULARITE_MAX_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_POPULARITE_SITE_dist($p) {
 	$p->code = 'ceil($GLOBALS["meta"][\'popularite_total\'])';
 	$p->interdire_scripts = false;
 	return $p;
 }
 
-// http://doc.spip.org/@balise_POPULARITE_MAX_dist
+/**
+ * Compile la balise `#POPULARITE_MAX` qui affiche la popularité maximum
+ * parmis les popularités des articles
+ *
+ * Cela correspond à la popularité quotidienne de l'article
+ * 
+ * @balise POPULARITE_MAX
+ * @link http://www.spip.net/1846 La popularité
+ * @see balise_POPULARITE_ABSOLUE_dist()
+ * @see balise_POPULARITE_dist()
+ * @see balise_POPULARITE_SITE_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_POPULARITE_MAX_dist($p) {
 	$p->code = 'ceil($GLOBALS["meta"][\'popularite_max\'])';
 	$p->interdire_scripts = false;
@@ -874,9 +935,23 @@ function balise_RANG_dist($p) {
 }
 
 
-// #POPULARITE
-// http://www.spip.net/fr_article1846.html
-// http://doc.spip.org/@balise_POPULARITE_dist
+/**
+ * Compile la balise `#POPULARITE` qui affiche la popularité relative.
+ * 
+ * C'est à dire le pourcentage de la fréquentation de l'article
+ * (la popularité absolue) par rapport à la popularité maximum.
+ *
+ * @balise POPULARITE
+ * @link http://www.spip.net/1846 La popularité
+ * @see balise_POPULARITE_ABSOLUE_dist()
+ * @see balise_POPULARITE_MAX_dist()
+ * @see balise_POPULARITE_SITE_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_POPULARITE_dist ($p) {
 	$_popularite = champ_sql('popularite', $p);
 	$p->code = "(ceil(min(100, 100 * $_popularite

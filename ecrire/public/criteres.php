@@ -299,6 +299,7 @@ function critere_pagination_dist($idb, &$boucles, $crit){
  *
  * @critere recherche
  * @link http://www.spip.net/3878
+ * @see inc_prepare_recherche_dist()
  * 
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette

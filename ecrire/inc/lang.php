@@ -210,6 +210,7 @@ function select_langues($nom_select, $change, $options, $label="")
  * @param string $nom_select
  *     Attribut name du select
  *     Selon son nom, retourne une liste différente :
+ * 
  *     - var_lang ou changer_lang :
  *         liste des langues sélectionnées dans la config multilinguisme
  *     - var_lang_ecrire :

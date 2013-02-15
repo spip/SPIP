@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des préparatifs de recherches
+ *
+ * @package SPIP\Core\Recherche
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -17,12 +22,11 @@ include_spip('inc/rechercher');
 if (!defined('_DELAI_CACHE_resultats')) define('_DELAI_CACHE_resultats', 600);
 
 /**
- * Preparer les listes id_article IN (...) pour les parties WHERE
- * et points =  des requetes du moteur de recherche
- * http://doc.spip.org/@inc_prepare_recherche_dist
+ * Préparer les listes `id_article IN (...)` pour les parties WHERE
+ * et calcul des `points` pour la partie SELECT des requêtes du moteur de recherche
  * 
- * Le parametre $serveur est utilise pour savoir sur quelle base on cherche
- * mais l'index des resultats est toujours stock� sur le serveur principal
+ * Le paramètre $serveur est utilisé pour savoir sur quelle base on cherche
+ * mais l'index des résultats est toujours stocké sur le serveur principal
  * car on ne sait pas si la base distante dispose d'une table spip_resultats
  * ni meme si on aurait le droit d'ecrire dedans
  *

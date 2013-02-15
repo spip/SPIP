@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des recherches
+ *
+ * @package SPIP\Core\Recherche
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
