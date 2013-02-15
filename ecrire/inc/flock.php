@@ -372,11 +372,11 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 		if ($tantpis) return '';
 		if (!_DIR_RESTREINT)
 			$base = preg_replace(',^' . _DIR_RACINE .',', '',$base);
-		if ($test) $base .= $subdir;
-		raler_fichier($base . '/.ok');
+		$base .= $subdir;
+		raler_fichier($base . ($test?'/.ok':'/dir_test.php'));
 	}
 	spip_log("faux sous-repertoire $base${subdir}");
-	return $baseaff.($dirs[$base.$subdirs] = "${subdir}_");
+	return $baseaff.($dirs[$base.$subdir] = "${subdir}_");
 }
 
 //
