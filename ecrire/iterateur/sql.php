@@ -10,11 +10,19 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'itérateur SQL
+ *
+ * @package SPIP\Core\Iterateur\SQL
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Iterateur SQL
+ * Itérateur SQL
+ *
+ * Permet d'itérer sur des données en base de données
  */
 class IterateurSQL implements Iterator {
 

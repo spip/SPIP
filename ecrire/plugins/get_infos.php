@@ -10,16 +10,24 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Obtention des description des plugins locaux
+ *
+ * @package SPIP\Core\Plugins
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * lecture du fichier de configuration d'un plugin
+ * Lecture du fichier de configuration d'un plugin
  *
  * @staticvar string $filecache
  * @staticvar array $cache
+ * 
  * @param string|array|bool $plug
  * @param bool $reload
  * @param string $dir
+ * @param bool $clean_old
  * @return array
  */
 function plugins_get_infos_dist($plug=false, $reload=false, $dir = _DIR_PLUGINS, $clean_old=false){

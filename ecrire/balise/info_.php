@@ -10,13 +10,31 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'authentification par SPIP
+ *
+ * @package SPIP\Core\Compilateur\Balises
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Generer n'importe quel info pour un objet : #INFO_TITRE{article, #ENV{id_article}}
- * Utilise la fonction generer_info_entite() de inc/filtres
- * se reporter a sa documentation
- * 
+ * Compile la balise dynamique `#INFO_xx` qui génère n'importe quelle
+ * information pour un objet
+ *
+ * Signature : `#INFO_n{objet,id_objet}` où n est une colonne sur la table
+ * SQL de l'objet.
+ *
+ * @balise INFO_
+ * @uses generer_info_entite()
+ * @example
+ *     ```
+ *     #INFO_TITRE{article, #ENV{id_article}}
+ *     ```
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_INFO__dist($p){
 	$info = $p->nom_champ;

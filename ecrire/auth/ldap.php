@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'authentification par LDAP
+ *
+ * @package SPIP\Core\Authentification\Ldap
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Authentifie via LDAP et retourne la ligne SQL decrivant l'utilisateur si ok
@@ -45,7 +51,6 @@ if (!isset($GLOBALS['ldap_attributes']) OR !is_array($GLOBALS['ldap_attributes']
  * @param bool $phpauth
  * @return string
  */
-// http://doc.spip.org/@inc_auth_ldap_dist
 function auth_ldap_dist ($login, $pass, $serveur='', $phpauth=false) {
 
 	#spip_log("ldap $login " . ($pass ? "mdp fourni" : "mdp absent"));
@@ -87,8 +92,9 @@ function auth_ldap_dist ($login, $pass, $serveur='', $phpauth=false) {
 }
 
 /**
- * Connexion a l'annuaire LDAP
- * Il faut passer par spip_connect() pour avoir les info
+ * Connexion à l'annuaire LDAP
+ * 
+ * Il faut passer par `spip_connect()` pour avoir les info
  * donc potentiellement indiquer un serveur
  * meme si dans les fait cet argument est toujours vide
  *
@@ -117,14 +123,14 @@ function auth_ldap_connect($serveur='') {
 }
 
 /**
- * Retrouver un login, et verifier son pass si demande par $checkpass
+ * Retrouver un login, et vérifier son pass si demandé par `$checkpass`
  *
  * @param string $login
  * @param string $pass
  * @param bool $checkpass
  * @param string $serveur
  * @return string
- *	le login trouve ou chaine vide si non trouve
+ *    Le login trouvé ou chaine vide si non trouvé
  */
 function auth_ldap_search($login, $pass, $checkpass=true, $serveur=''){
 	// Securite anti-injection et contre un serveur LDAP laxiste
@@ -168,7 +174,8 @@ function auth_ldap_search($login, $pass, $checkpass=true, $serveur=''){
 }
 
 /**
- * Retrouver un dn
+ * Retrouver un DN depuis LDAP
+ * 
  * @param string $dn
  * @param array $desc
  * @param string $serveur
@@ -207,7 +214,7 @@ function auth_ldap_retrouver($dn, $desc=array(), $serveur='')
 
 
 /**
- * Retrouver le login de quelqu'un qui cherche a se loger
+ * Retrouver le login de quelqu'un qui cherche à se loger
  *
  * @param string $login
  * @param string $serveur
@@ -219,19 +226,20 @@ function auth_ldap_retrouver_login($login, $serveur='')
 }
 
 /**
- * Verification de la validite d'un mot de passe pour le mode d'auth concerne
- * c'est ici que se font eventuellement les verifications de longueur mini/maxi
+ * Vérification de la validité d'un mot de passe pour le mode d'auth concerné
+ * 
+ * C'est ici que se font éventuellement les vérifications de longueur mini/maxi
  * ou de force.
  *
- * @param string $new_pass
  * @param string $login
- *  le login de l'auteur : permet de verifier que pass et login sont differents
- *  meme a la creation lorsque l'auteur n'existe pas encore
+ *   Le login de l'auteur : permet de vérifier que pass et login sont différents
+ *   même à la creation lorsque l'auteur n'existe pas encore
+ * @param string $new_pass
  * @param int $id_auteur
- *  si auteur existant deja
+ *   Si auteur existant déjà
  * @param string $serveur
  * @return string
- *  message d'erreur si login non valide, chaine vide sinon
+ *   Message d'erreur si login non valide, chaîne vide sinon
  */
 function auth_ldap_verifier_pass($login, $new_pass, $id_auteur=0, $serveur=''){
     include_spip('auth/spip');
@@ -241,16 +249,19 @@ function auth_ldap_verifier_pass($login, $new_pass, $id_auteur=0, $serveur=''){
 /**
  * Informer du droit de modifier ou non le pass
  *
- * On ne peut pas détecter a l'avance si l'autorisation sera donnee, il
+ * On ne peut pas détecter à l'avance si l'autorisation sera donnée, il
  * faudra informer l'utilisateur a posteriori si la modif n'a pas pu se
  * faire.
+ * 
  * @param string $serveur
  * @return bool
- *  pour un auteur LDAP, a priori toujours true, a conditiion que le serveur
- *  l'autorise: par exemple, pour OpenLDAP il faut avoir dans slapd.conf:
+ *   Pour un auteur LDAP, a priori toujours true, à conditiion que le serveur
+ *   l'autorise: par exemple, pour OpenLDAP il faut avoir dans slapd.conf:
+ *   ```
  *    access to attr=userPassword
  *       by self write
  *       ...
+ *   ```
  */
 function auth_ldap_autoriser_modifier_pass($serveur=''){
     return true;
@@ -259,15 +270,16 @@ function auth_ldap_autoriser_modifier_pass($serveur=''){
 /**
  * Fonction de modification du mot de passe
  *
- * On se bind au LDAP cette fois sous l'identite de l'utilisateur, car le
- * compte generique defini dans config/ldap.php n'a generalement pas (et
+ * On se bind au LDAP cette fois sous l'identité de l'utilisateur, car le
+ * compte générique defini dans config/ldap.php n'a généralement pas (et
  * ne devrait pas avoir) les droits suffisants pour faire la modification.
+ * 
  * @param $login
  * @param $new_pass
  * @param $id_auteur
  * @param string $serveur
  * @return bool
- *  informe du succes ou de l'echec du changement du mot de passe
+ *    Informe du succès ou de l'echec du changement du mot de passe
  */
 function auth_ldap_modifier_pass($login, $new_pass, $id_auteur, $serveur=''){
     if (is_null($new_pass) OR auth_ldap_verifier_pass($login, $new_pass,$id_auteur,$serveur)!='') {
