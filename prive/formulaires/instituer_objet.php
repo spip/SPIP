@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion du formulaire d'institution (changement de statut) d'un objet
+ *
+ * @package SPIP\Core\Formulaires
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/editer');
@@ -17,7 +23,8 @@ include_spip('inc/autoriser');
 include_spip('inc/puce_statut');
 
 /**
- * filtres les statuts utilisable selon les droits de publication
+ * Filtres les statuts utilisable selon les droits de publication
+ * 
  * @param array $desc
  * @param bool $publiable
  * @return array
@@ -35,11 +42,22 @@ function lister_statuts_proposes($desc,$publiable = true){
 }
 
 /**
- * Charger #FORMULAIRE_INSTITUER_OBJET
+ * Chargement du formulaire instituer objet
+ *
+ * @uses formulaires_editer_objet_charger()
+ * 
  * @param string $objet
+ *     Type d'objet
  * @param int $id_objet
+ *     Identifiant de l'objet
  * @param string $retour
+ *     URL de redirection après le traitement
+ * @param bool $editable
+ *     Indique si le statut est éditable ou non.
+ *     Dans tous les cas, si l'on n'a pas la permission de modifier l'objet,
+ *     cette option sera mise à false.
  * @return array|bool
+ *     Environnement du formulaire ou false si aucun affichage à faire.
  */
 function formulaires_instituer_objet_charger_dist($objet,$id_objet,$retour="",$editable = true){
 	$editable = ($editable?true:false);
@@ -85,11 +103,20 @@ function formulaires_instituer_objet_charger_dist($objet,$id_objet,$retour="",$e
 }
 
 /**
- * Verifier #FORMULAIRE_INSTITUER_OBJET
+ * Vérifications du formulaire instituer objet
+ *
+ * @uses formulaires_editer_objet_charger()
+ * 
  * @param string $objet
+ *     Type d'objet
  * @param int $id_objet
+ *     Identifiant de l'objet
  * @param string $retour
+ *     URL de redirection après le traitement
+ * @param bool $editable
+ *     Indique si le statut est éditable ou non.
  * @return array
+ *     Tableau des erreurs
  */
 function formulaires_instituer_objet_verifier_dist($objet,$id_objet,$retour="",$editable = true){
 	$erreurs = array();
@@ -119,11 +146,18 @@ function formulaires_instituer_objet_verifier_dist($objet,$id_objet,$retour="",$
 }
 
 /**
- * Traiter #FORMULAIRE_INSTITUER_OBJET
+ * Traitements du formulaire instituer objet
+ * 
  * @param string $objet
+ *     Type d'objet
  * @param int $id_objet
+ *     Identifiant de l'objet
  * @param string $retour
+ *     URL de redirection après le traitement
+ * @param bool $editable
+ *     Indique si le statut est éditable ou non.
  * @return array
+ *     Retour des traitements
  */
 function formulaires_instituer_objet_traiter_dist($objet,$id_objet,$retour="",$editable = true){
 

@@ -10,8 +10,31 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion du formulaire de date
+ *
+ * @package SPIP\Core\Formulaires
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+
+/**
+ * Chargement du formulaire d'édition d'une date
+ *
+ * @param string $objet
+ *     Type d'objet
+ * @param int $id_objet
+ *     Identifiant de l'objet
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param array|string $options
+ *     Options. Si string, unserialize pour obtenir un tableau.
+ *
+ *     - date_redac : Permet de modifier en plus la date de rédaction antérieure
+ * @return array
+ *     Environnement du formulaire
+**/
 function formulaires_dater_charger_dist($objet, $id_objet, $retour='', $options=array()){
 
 	$objet = objet_type($objet);
@@ -103,6 +126,20 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour='', $options=
 	return $valeurs;
 }
 
+/**
+ * Formate la date
+ *
+ * @param string|int $jour
+ *     Numéro du jour
+ * @param string|int $mois
+ *     Numéro du mois
+ * @param string|int $annee
+ *     Année
+ * @param string $sep
+ *     Séparateur
+ * @return string
+ *     Date formatée tel que `02/10/2012`
+**/
 function dater_formater_saisie_jour($jour,$mois,$annee,$sep="/"){
 	$annee = str_pad($annee,4,'0',STR_PAD_LEFT);
 	if (intval($jour)){
@@ -116,26 +153,41 @@ function dater_formater_saisie_jour($jour,$mois,$annee,$sep="/"){
 	}
 	return $annee;
 }
+
 /**
- * Identifier le formulaire en faisant abstraction des parametres qui
- * ne representent pas l'objet edite
- */
+ * Identifier le formulaire en faisant abstraction des paramètres qui
+ * ne représentent pas l'objet edité
+ * 
+ * @param string $objet
+ *     Type d'objet
+ * @param int $id_objet
+ *     Identifiant de l'objet
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param array|string $options
+ *     Options.
+ * @return string
+ *     Hash du formulaire
+**/
 function formulaires_dater_identifier_dist($objet, $id_objet, $retour='', $options=array()){
 	return serialize(array($objet, $id_objet));
 }
 
 /**
- * Verification avant traitement
- *
- * On verifie que l'upload s'est bien passe et
- * que le document recu est une image (d'apres son extension)
+ * Vérifications avant traitements du formulaire d'édition d'une date
  *
  * @param string $objet
- * @param integer $id_objet
+ *     Type d'objet
+ * @param int $id_objet
+ *     Identifiant de l'objet
  * @param string $retour
- * @return Array Tableau des erreurs
+ *     URL de redirection après le traitement
+ * @param array|string $options
+ *     Options.
+ * @return Array
+ *     Tableau des erreurs
  */
-function formulaires_dater_verifier_dist($objet, $id_objet, $retour=''){
+function formulaires_dater_verifier_dist($objet, $id_objet, $retour='', $options=array()){
 	$erreurs = array();
 
 	foreach(array('date','date_redac') as $k)
@@ -151,14 +203,20 @@ function formulaires_dater_verifier_dist($objet, $id_objet, $retour=''){
 }
 
 /**
- * Traitement 
+ * Traitement du formulaire d'édition d'une date
  *
  * @param string $objet
- * @param integer $id_objet
+ *     Type d'objet
+ * @param int $id_objet
+ *     Identifiant de l'objet
  * @param string $retour
+ *     URL de redirection après le traitement
+ * @param array|string $options
+ *     Options.
  * @return Array
+ *     Retours des traitements
  */
-function formulaires_dater_traiter_dist($objet, $id_objet, $retour=''){
+function formulaires_dater_traiter_dist($objet, $id_objet, $retour='', $options=array()){
 	$res = array('editable'=>' ');
 
 	if (_request('changer')){
@@ -208,7 +266,7 @@ function formulaires_dater_traiter_dist($objet, $id_objet, $retour=''){
 }
 
 /**
- * Recuperer annee,mois,jour sur la date saisie
+ * Récupérer annee,mois,jour sur la date saisie
  * @param string $post
  * @return array
  */
@@ -222,7 +280,7 @@ function dater_recuperer_date_saisie($post) {
 }
 
 /**
- * Recuperer heures,minutes sur l'heure saisie
+ * Récupérer heures,minutes sur l'heure saisie
  * @param string $post
  * @return array
  */

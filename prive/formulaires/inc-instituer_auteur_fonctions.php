@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Fonction pour le squelette du même nom
+ *
+ * @package SPIP\Core\Formulaires
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
@@ -8,7 +13,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param int $id_auteur
  * @param string $label
+ * @param string $sel_css
+ *     Sélecteur CSS déterminant le conteneur de l'input reçevant les rubriques sélectionnées
+ * @param string $img_remove
+ *     Balise `<img...>` pour enlever des rubriques
  * @return string
+ *     Code HTML et javascript
  */
 function choisir_rubriques_admin_restreint($id_auteur,$label='', $sel_css="#liste_rubriques_restreintes", $img_remove="") {
 	global $spip_lang;

@@ -25,7 +25,7 @@ include_spip('inc/editer');
 /**
  * Chargement du formulaire d'édition d'article
  *
- * @see formulaires_editer_objet_charger()
+ * @uses formulaires_editer_objet_charger()
  * 
  * @param int|string $id_article
  *     Identifiant de l'article. 'new' pour une nouvel article.
@@ -101,7 +101,8 @@ function articles_edit_config($row)
 /**
  * Vérifications du formulaire d'édition d'article
  *
- * @see formulaires_editer_objet_verifier()
+ * @uses formulaires_editer_objet_verifier()
+ * 
  * @param int|string $id_article
  *     Identifiant de l'article. 'new' pour une nouvel article.
  * @param int $id_rubrique
@@ -136,7 +137,8 @@ function formulaires_editer_article_verifier_dist($id_article='new', $id_rubriqu
 /**
  * Traitements du formulaire d'édition d'article
  *
- * @see formulaires_editer_objet_traiter()
+ * @uses formulaires_editer_objet_traiter()
+ * 
  * @param int|string $id_article
  *     Identifiant de l'article. 'new' pour une nouvel article.
  * @param int $id_rubrique
@@ -152,7 +154,7 @@ function formulaires_editer_article_verifier_dist($id_article='new', $id_rubriqu
  * @param string $hidden
  *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  * @return array
- *     Erreurs du formulaire
+ *     Retours des traitements
 **/
 function formulaires_editer_article_traiter_dist($id_article='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='articles_edit_config', $row=array(), $hidden=''){
 	// ici on ignore changer_lang qui est poste en cas de trad,
