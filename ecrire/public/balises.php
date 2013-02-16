@@ -617,7 +617,63 @@ function balise_POPULARITE_MAX_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_EXPOSE_dist
+
+/**
+ * Compile la balise `#VALEUR` retournant le champ `valeur`
+ *
+ * Utile dans une boucle DATA pour retourner une valeur.
+ * 
+ * @balise VALEUR
+ * @link http://www.spip.net/5546 #CLE et #VALEUR
+ * @see table_valeur()
+ * @example
+ *     ```
+ *     #VALEUR renvoie le champ valeur
+ *     #VALEUR{x} renvoie #VALEUR|table_valeur{x},
+ *        équivalent à #X (si X n'est pas une balise spéficique à SPIP)
+ *     #VALEUR{a/b} renvoie #VALEUR|table_valeur{a/b}
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
+function balise_VALEUR_dist($p) {
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	$p->code = index_pile($p->id_boucle, 'valeur', $p->boucles, $b);;
+	if (($v = interprete_argument_balise(1,$p))!==NULL){
+		$p->code = 'table_valeur('.$p->code.', '.$v.')';
+	}
+	$p->interdire_scripts = true;
+	return $p;
+}
+
+/**
+ * Compile la balise `#EXPOSE` qui met en évidence l'élément sur lequel
+ * la page se trouve
+ *
+ * Expose dans une boucle l'élément de la page sur laquelle on se trouve,
+ * en retournant `on` si l'élément correspond à la page, une chaîne vide sinon.
+ *
+ * On peut passer les paramètres à faire retourner par la balise.
+ * 
+ * @example
+ *     ```
+ *     <a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>
+ *     <a href="#URL_ARTICLE"[ class="(#EXPOSE{actif})"]>
+ *     <a href="#URL_ARTICLE"[ class="(#EXPOSE{on,off})"]>
+ *     ```
+ *
+ * @balise EXPOSE
+ * @link http://www.spip.net/2319 Exposer un article
+ * @uses calculer_balise_expose()
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_EXPOSE_dist($p) {
 	$on = "'on'";
 	$off= "''";
@@ -630,21 +686,20 @@ function balise_EXPOSE_dist($p) {
 	return calculer_balise_expose($p, $on, $off);
 }
 
-// #VALEUR renvoie le champ valeur
-// #VALEUR{x} renvoie #VALEUR|table_valeur{x}
-// #VALEUR{a/b} renvoie #VALEUR|table_valeur{a/b}
-// http://doc.spip.org/@balise_VALEUR_dist
-function balise_VALEUR_dist($p) {
-	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
-	$p->code = index_pile($p->id_boucle, 'valeur', $p->boucles, $b);;
-	if (($v = interprete_argument_balise(1,$p))!==NULL){
-		$p->code = 'table_valeur('.$p->code.', '.$v.')';
-	}
-	$p->interdire_scripts = true;
-	return $p;
-}
-
-// http://doc.spip.org/@calculer_balise_expose
+/**
+ * Calcul de la balise expose
+ *
+ * @see calcul_exposer()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @param string $on
+ *     Texte à afficher si l'élément est exposé (code à écrire tel que "'on'")
+ * @param string $off
+ *     Texte à afficher si l'élément n'est pas exposé (code à écrire tel que "''")
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function calculer_balise_expose($p, $on, $off)
 {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
@@ -797,11 +852,21 @@ function balise_INTRODUCTION_dist($p) {
 }
 
 
-// #LANG
-// affiche la langue de l'objet (ou superieure), et a defaut la langue courante
-// (celle du site ou celle qui a ete passee dans l'URL par le visiteur)
-// #LANG* n'affiche rien si aucune langue n'est trouvee dans le sql/le contexte
-// http://doc.spip.org/@balise_LANG_dist
+/**
+ * Compile la balise `#LANG` qui affiche la langue de l'objet (ou d'une boucle supérieure),
+ * et à defaut la langue courante
+ *
+ * La langue courante est celle du site ou celle qui a été passée dans l'URL par le visiteur.
+ * L'étoile `#LANG*` n'affiche rien si aucune langue n'est trouvée dans le SQL ou le contexte.
+ * 
+ * @balise LANG
+ * @link http://www.spip.net/3864
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_LANG_dist ($p) {
 	$_lang = champ_sql('lang', $p);
 	if (!$p->etoile)
@@ -1331,13 +1396,30 @@ function balise_CONNECT_dist($p) {
 	return $p;
 }
 
-//
-// #SESSION
-// Cette balise est un tableau des donnees du visiteur (nom, email etc)
-// Si elle est invoquee, elle leve un drapeau dans le fichier cache, qui
-// permet a public/cacher d'invalider le cache si le visiteur suivant n'a
-// pas la meme session
-// http://doc.spip.org/@balise_SESSION_dist
+
+/**
+ * Compile la balise `#SESSION` qui permet d’accéder aux informations
+ * liées au visiteur authentifié et de différencier automatiquement
+ * le cache en fonction du visiteur.
+ *
+ * Cette balise est un tableau des données du visiteur (nom, email etc).
+ * Si elle est invoquée, elle lève un drapeau dans le fichier cache, qui
+ * permet à public/cacher de créer un cache différent par visiteur
+ *
+ * @balise SESSION
+ * @link http://www.spip.net/3979
+ * @see balise_AUTORISER_dist()
+ * @see balise_SESSION_SET_dist()
+ * @example
+ *     ```
+ *     #SESSION{nom}
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise.
+ * @return Champ
+ *     Pile completée du code PHP d'exécution de la balise
+**/
 function balise_SESSION_dist($p) {
 	$p->descr['session'] = true;
 
@@ -1349,10 +1431,25 @@ function balise_SESSION_dist($p) {
 	return $p;
 }
 
-//
-// #SESSION_SET{x,y}
-// Ajoute x=y dans la session du visiteur
-// http://doc.spip.org/@balise_SESSION_SET_dist
+
+/**
+ * Compile la balise `#SESSION_SET` qui d’insérer dans la session
+ * des données supplémentaires
+ * 
+ * @balise SESSION
+ * @link http://www.spip.net/3984
+ * @see balise_AUTORISER_dist()
+ * @see balise_SESSION_SET_dist()
+ * @example
+ *     ```
+ *     #SESSION_SET{x,y} ajoute x=y dans la session du visiteur
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise.
+ * @return Champ
+ *     Pile completée du code PHP d'exécution de la balise
+**/
 function balise_SESSION_SET_dist($p) {
 	$_nom = interprete_argument_balise(1,$p);
 	$_val = interprete_argument_balise(2,$p);
@@ -1367,19 +1464,33 @@ function balise_SESSION_SET_dist($p) {
 }
 
 
-
-
-//
-// #EVAL{...}
-// evalue un code php ; a utiliser avec precaution :-)
-//
-// rq: #EVAL{code} produit eval('return code;')
-// mais si le code est une expression sans balise, on se dispense
-// de passer par une construction si compliquee, et le code est
-// passe tel quel (entre parentheses, et protege par interdire_scripts)
-// Exemples : #EVAL**{6+9} #EVAL**{_DIR_IMG_PACK} #EVAL{'date("Y-m-d")'}
-// #EVAL{'str_replace("r","z", "roger")'}  (attention les "'" sont interdits)
-// http://doc.spip.org/@balise_EVAL_dist
+/**
+ * Compile la balise `#EVAL` qui évalue un code PHP
+ *
+ * À utiliser avec précautions !
+ *
+ * @balise EVAL
+ * @link http://www.spip.net/4587
+ * @example
+ *     ```
+ *     #EVAL{6+9}
+ *     #EVAL{_DIR_IMG_PACK}
+ *     #EVAL{'date("Y-m-d")'}
+ *     #EVAL{$_SERVER['REQUEST_URI']}
+ *     #EVAL{'str_replace("r","z", "roger")'}  (attention les "'" sont interdits)
+ *     ```
+ *
+ * @note
+ *     `#EVAL{code}` produit `eval('return code;')`
+ *      mais si le code est une expression sans balise, on se dispense
+ *      de passer par une construction si compliquée, et le code est
+ *      passé tel quel (entre parenthèses, et protégé par interdire_scripts)
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise.
+ * @return Champ
+ *     Pile completée du code PHP d'exécution de la balise
+**/
 function balise_EVAL_dist($p) {
 	$php = interprete_argument_balise(1,$p);
 	if ($php) {
@@ -1439,9 +1550,28 @@ function balise_CHAMP_SQL_dist($p){
 	return $p;
 }
 
-// #VAL{x} renvoie 'x' (permet d'appliquer un filtre a une chaine)
-// Attention #VAL{1,2} renvoie '1', indiquer #VAL{'1,2'}
-// http://doc.spip.org/@balise_VAL_dist
+/**
+ * Compile la balise `#VAL` qui retourne simplement le premier argument
+ * qui lui est transmis
+ *
+ * Cela permet d'appliquer un filtre à une chaîne de caractère
+ * 
+ * @balise VAL
+ * @link http://www.spip.net/4026
+ * @example
+ *     ```
+ *     #VAL retourne ''
+ *     #VAL{x} retourne 'x'
+ *     #VAL{1,2} renvoie '1' (2 est considéré comme un autre paramètre)
+ *     #VAL{'1,2'} renvoie '1,2'
+ *     [(#VAL{a_suivre}|bouton_spip_rss)]
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_VAL_dist($p){
 	$p->code = interprete_argument_balise(1,$p);
 	if (!strlen($p->code))
@@ -1449,15 +1579,49 @@ function balise_VAL_dist($p){
 	$p->interdire_scripts = false;
 	return $p;
 }
-// #NOOP est un alias pour regler #948, ne pas documenter
-// http://doc.spip.org/@balise_NOOP_dist
+
+/**
+ * Compile la balise `#NOOP`, alias (déprécié) de `#VAL`
+ *
+ * Alias pour regler #948. Ne plus utiliser.
+ * 
+ * @balise NOOP
+ * @see balise_VAL_dist()
+ * @deprecated Utiliser #VAL
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_NOOP_dist($p) { return balise_VAL_dist($p); }
 
-//
-// #REM
-// pour les remarques : renvoie toujours ''
-//
-// http://doc.spip.org/@balise_REM_dist
+
+/**
+ * Compile la balise `#REM` servant à commenter du texte
+ *
+ * Retourne toujours une chaîne vide.
+ * 
+ * @balise REM
+ * @link http://www.spip.net/4578
+ * @example
+ *     ```
+ *     [(#REM)
+ *       Ceci est une remarque ou un commentaire,
+ *       non affiché dans le code généré
+ *     ]
+ *     ```
+ * 
+ * @note
+ *     La balise `#REM` n'empêche pas l'exécution des balises SPIP contenues
+ *     dedans (elle ne sert pas à commenter du code pour empêcher son
+ *     exécution).
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_REM_dist($p) {
 	$p->code="''";
 	$p->interdire_scripts = false;
@@ -1465,13 +1629,24 @@ function balise_REM_dist($p) {
 }
 
 
-//
-// #HTTP_HEADER
-// pour les entetes de retour http
-// Ne fonctionne pas sur les INCLURE !
-// #HTTP_HEADER{Content-Type: text/css}
-//
-// http://doc.spip.org/@balise_HTTP_HEADER_dist
+/**
+ * Compile la balise `#HTTP_HEADER` envoyant des entêtes de retour HTTP
+ *
+ * Doit être placée en tête de fichier et ne fonctionne pas dans une
+ * inclusion.
+ * 
+ * @balise HTTP_HEADER
+ * @link http://www.spip.net/4631
+ * @example
+ *     ```
+ *     #HTTP_HEADER{Content-Type: text/csv; charset=#CHARSET} 
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_HTTP_HEADER_dist($p) {
 
 	$header = interprete_argument_balise(1,$p);
@@ -1485,9 +1660,27 @@ function balise_HTTP_HEADER_dist($p) {
 	return $p;
 }
 
-// Filtre a appliquer a l'ensemble de la page une fois calculee
-// (filtrage fait au niveau du squelette, et sans s'appliquer aux <INCLURE>)
-// http://doc.spip.org/@balise_FILTRE_dist
+
+/**
+ * Compile la balise `#FILTRE` qui exécute un filtre à l'ensemble du squelette
+ * une fois calculé.
+ *
+ * Le filtrage se fait au niveau du squelette, sans s'appliquer aux `<INCLURE>`.
+ * Plusieurs filtres peuvent être indiqués, séparés par des barres verticales `|`
+ * 
+ * @balise FILTRE
+ * @link http://www.spip.net/4894
+ * @example
+ *     ```
+ *     #FILTRE{compacte_head}
+ *     #FILTRE{supprimer_tags|filtrer_entites|trim}
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_FILTRE_dist($p) {
 	if ($p->param) {
 		$args = array();
