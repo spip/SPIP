@@ -2018,13 +2018,25 @@ function balise_DOUBLONS_dist($p) {
 }
 
 
-//
-// #PIPELINE
-// pour permettre aux plugins d'inserer des sorties de pipeline dans un squelette
-// #PIPELINE{insert_body}
-// #PIPELINE{insert_body,flux}
-//
-// http://doc.spip.org/@balise_PIPELINE_dist
+
+/**
+ * Compile la balise `#PIPELINE` pour permettre d'insérer des sorties de
+ * pipeline dans un squelette
+ *
+ * @balise PIPELINE
+ * @see pipeline()
+ * @example
+ *     ```
+ *     #PIPELINE{nom}
+ *     #PIPELINE{nom,données}
+ *     #PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{type,rubrique,id,#ENV{id_rubrique}}}}
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_PIPELINE_dist($p) {
 	$_pipe = interprete_argument_balise(1,$p);
 	if (!$_pipe) {
@@ -2039,11 +2051,27 @@ function balise_PIPELINE_dist($p) {
 	return $p;
 }
 
-//
-// #EDIT
-// une balise qui ne fait rien, pour surcharge par le plugin widgets
-//
-// http://doc.spip.org/@balise_EDIT_dist
+
+/**
+ * Compile la balise `#EDIT` qui ne fait rien dans SPIP
+ *
+ * Cette balise ne retourne rien mais permet d'indiquer, pour certains plugins
+ * qui redéfinissent cette balise, le nom du champ SQL (ou le nom d'un contrôleur)
+ * correspondant à ce qui est édité. Cela sert particulièrement au plugin Crayons.
+ * Ainsi en absence du plugin, la balise est toujours reconnue (mais n'a aucune action).
+ * 
+ * @balise EDIT
+ * @link http://www.spip.net/4584
+ * @example
+ *     ```
+ *     [<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_EDIT_dist($p) {
 	$p->code = "''";
 	$p->interdire_scripts = false;
@@ -2051,15 +2079,25 @@ function balise_EDIT_dist($p) {
 }
 
 
-//
-// #TOTAL_UNIQUE
-// pour recuperer le nombre d'elements affiches par l'intermediaire du filtre
-// |unique
-// usage:
-// #TOTAL_UNIQUE afiche le nombre de #BALISE|unique
-// #TOTAL_UNIQUE{famille} afiche le nombre de #BALISE|unique{famille}
-//
-// http://doc.spip.org/@balise_TOTAL_UNIQUE_dist
+
+/**
+ * Compile la balise `#TOTAL_UNIQUE` qui récupère le nombre d'éléments
+ * différents affichés par le filtre `unique`
+ *
+ * @balise TOTAL_UNIQUE
+ * @link http://www.spip.net/4374
+ * @see unique()
+ * @example
+ *     ```
+ *     #TOTAL_UNIQUE affiche le nombre de #BALISE|unique
+ *     #TOTAL_UNIQUE{famille} afiche le nombre de #BALISE|unique{famille}
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_TOTAL_UNIQUE_dist($p) {
 	$_famille = interprete_argument_balise(1,$p);
 	$_famille = $_famille ? $_famille : "''";
@@ -2167,9 +2205,26 @@ function balise_AUTORISER_dist($p) {
 	return $p;
 }
 
-// Appelle la fonction info_plugin
-// Afficher des informations sur les plugins dans le site public
-// http://doc.spip.org/@balise_PLUGIN_dist
+
+/**
+ * Compile la balise `#PLUGIN` qui permet d’afficher les informations d'un plugin actif
+ *
+ * @balise PLUGIN
+ * @see filtre_info_plugin_dist()
+ * @link http://www.spip.net/4591
+ * @example
+ *     ```
+ *     #PLUGIN Retourne la liste sérialisée des préfixes de plugins actifs
+ *     #PLUGIN{prefixe} Renvoie true si le plugin avec ce préfixe est actif
+ *     #PLUGIN{prefixe, x} Renvoie l'information x du plugin (s'il est actif)
+ *     #PLUGIN{prefixe, tout} Renvoie toutes les informations du plugin (s'il est actif)
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_PLUGIN_dist($p) {
 	$plugin = interprete_argument_balise(1,$p);
 	$plugin = isset($plugin) ? str_replace('\'', '"', $plugin) : '""';
@@ -2290,16 +2345,46 @@ function balise_BOUTON_ACTION_dist($p){
 
 
 
+/**
+ * Compile la balise `#SLOGAN_SITE_SPIP` qui retourne le slogan du site
+ * 
+ * @balise SLOGAN_SITE_SPIP
+ * @example
+ *     ```
+ *     [<p id="slogan">(#SLOGAN_SITE_SPIP)</p>]
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+ */
 function balise_SLOGAN_SITE_SPIP_dist($p) {
 	$p->code = "\$GLOBALS['meta']['slogan_site']";
 	#$p->interdire_scripts = true;
 	return $p;
 }
 
-// #HTML5
-// Renvoie ' ' si le webmestre souhaite que SPIP genere du code (X)HTML5 sur
-// le site public, et '' si le code doit etre strictement compatible HTML4
-// http://doc.spip.org/@balise_HTML5_dist
+
+/**
+ * Compile la balise `#HTML5` indiquant si l'espace public peut utiliser du HTML5
+ *
+ * Renvoie `' '` si le webmestre souhaite que SPIP génère du code (X)HTML5 sur
+ * le site public, et `''` si le code doit être strictement compatible HTML4
+ * 
+ * @balise HTML5
+ * @uses html5_permis()
+ * @example
+ *     ```
+ *     [(#HTML5) required="required"]
+ *     <input[ (#HTML5|?{type="email",type="text"})] ... />
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+ */
 function balise_HTML5_dist($p) {
 	$p->code = html5_permis() ? "' '" : "''";
 	$p->interdire_scripts = false;

@@ -1549,16 +1549,48 @@ function extraire_trads($bloc) {
 	return $trads;
 }
 
-//
-// Ce filtre retourne la donnee si c'est la premiere fois qu'il la voit ;
-// possibilite de gerer differentes "familles" de donnees |unique{famille}
-# |unique{famille,1} affiche le nombre d'elements affiches (preferer toutefois #TOTAL_UNIQUE)
-# ameliorations possibles :
-# 1) si la donnee est grosse, mettre son md5 comme cle
-# 2) purger $mem quand on change de squelette (sinon bug inclusions)
-//
-// http://www.spip.net/@unique
-// http://doc.spip.org/@unique
+
+/**
+ * Retourne la donnée si c'est la première fois qu'il la voit
+ *
+ * Il est possible de gérer différentes "familles" de données avec
+ * le second paramètre.
+ * 
+ * @filtre unique
+ * @link http://www.spip.net/4320
+ * @used-by balise_TOTAL_UNIQUE_dist()
+ * @example
+ *     ```
+ *     [(#ID_SECTEUR|unique)] 
+ *     [(#ID_SECTEUR|unique{tete})] n'a pas d'incidence sur
+ *     [(#ID_SECTEUR|unique{pied})]
+ *     [(#ID_SECTEUR|unique{pied,1})] affiche le nombre d'éléments.
+ *     Préférer totefois #TOTAL_UNIQUE{pied}
+ *     ```
+ *
+ * @todo
+ *    Ameliorations possibles :
+ *
+ *    1) si la donnée est grosse, mettre son md5 comme clé
+ *    2) purger $mem quand on change de squelette (sinon bug inclusions)
+ * 
+ * @param string $donnee
+ *      Donnée que l'on souhaite unique
+ * @param string $famille
+ *      Famille de stockage (1 unique donnée par famille)
+ *
+ *      - _spip_raz_ : (interne) Vide la pile de mémoire et la retourne
+ *      - _spip_set_ : (interne) Affecte la pile de mémoire avec la donnée
+ * @param bool $cpt
+ *      True pour obtenir le nombre d'éléments différents stockés
+ * @return string|int|array|null|void
+ *
+ *      - string : Donnée si c'est la première fois qu'elle est vue
+ *      - void : si la donnée a déjà été vue
+ *      - int : si l'on demande le nombre d'éléments
+ *      - array (interne) : si on dépile 
+ *      - null (interne) : si on empile
+**/
 function unique($donnee, $famille='', $cpt = false) {
 	static $mem = array();
 	// permettre de vider la pile et de la restaurer
@@ -2455,12 +2487,26 @@ function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
 	return $texte;
 }
 
-// renvoie la liste des plugins actifs du site
-// si le premier parametre est un prefix de cette liste, renvoie vrai, faux sinon
-// la valeur du second parametre si celui-ci renvoie a une information connue
-// cf liste_plugin_actifs() pour connaitre les informations affichables
-// appelee par la balise #PLUGIN
-// http://doc.spip.org/@filtre_info_plugin_dist
+
+/**
+ * Obtient des informations sur les plugins actifs
+ *
+ * @filtre info_plugin
+ * @used-by balise_PLUGIN_dist() Appelé par la balise #PLUGN
+ * @uses liste_plugin_actifs() Voir liste_plugin_actifs() pour connaître les informations affichables
+ * 
+ * @param string $plugin
+ *     Préfixe du plugin ou chaîne vide
+ * @param string $type_info
+ *     Type d'info demandée
+ * @return array|string|bool
+ *
+ *     - Liste sérialisée des préfixe de plugins actifs (si $plugin = '')
+ *     - Suivant $type_info, avec $plugin un préfixe
+ *         - est_actif : renvoie true s'il est actif, false sinon
+ *         - x : retourne l'information x du plugin si présente (et plugin actif)
+ *         - tout : retourne toutes les informations du plugin actif
+**/
 function filtre_info_plugin_dist($plugin, $type_info) {
 	include_spip('inc/plugin');
 	$plugin = strtoupper($plugin);
