@@ -1187,12 +1187,30 @@ function balise_GRAND_TOTAL_dist($p) {
 	return $p;
 }
 
-// Reference a l'URL de la page courante
-// Attention dans un INCLURE() ou une balise dynamique on n'a pas le droit de
-// mettre en cache #SELF car il peut correspondre a une autre page (attaque XSS)
-// (Dans ce cas faire <INCLURE{self=#SELF}> pour differencier les caches.)
-// http://www.spip.net/@self
-// http://doc.spip.org/@balise_SELF_dist
+
+/**
+ * Compile la balise `#SELF` qui retourne l’URL de la page appelée.
+ *
+ * Cette URL est nettoyée des variables propres à l’exécution de SPIP
+ * tel que `var_mode`.
+ *
+ * @note
+ *     Attention dans un `INCLURE()` ou une balise dynamique, on n'a pas le droit de
+ *     mettre en cache `#SELF` car il peut correspondre à une autre page (attaque XSS)
+ *     (Dans ce cas faire <INCLURE{self=#SELF}> pour différencier les caches.)  
+ * 
+ * @balise SELF
+ * @link http://www.spip.net/4574
+ * @example
+ *     ```
+ *     <a href="[(#SELF|parametre_url{id_mot,#ID_MOT})]">...
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_SELF_dist($p) {
 	$p->code = 'self()';
 	$p->interdire_scripts = false;
@@ -1828,20 +1846,55 @@ function balise_INSERT_HEAD_CSS_dist($p) {
 	$p->interdire_scripts = false;
 	return $p;
 }
-//
-// #INCLURE statique
-// l'inclusion est realisee au calcul du squelette, pas au service
-// ainsi le produit du squelette peut etre utilise en entree de filtres a suivre
-// on peut faire un #INCLURE{fichier} sans squelette
-// (Incompatible avec les balises dynamiques)
-// http://doc.spip.org/@balise_INCLUDE_dist
+
+/**
+ * Compile la balise `#INCLUDE` alias de `#INCLURE`
+ *
+ * @balise INCLUDE
+ * @see balise_INCLURE_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_INCLUDE_dist($p) {
 	if(function_exists('balise_INCLURE'))
 		return balise_INCLURE($p);
 	else
 		return balise_INCLURE_dist($p);
 }
-// http://doc.spip.org/@balise_INCLURE_dist
+
+/**
+ * Compile la balise `#INCLURE` qui inclut un résultat de squelette
+ *
+ * Signature : `[(#INCLURE{fond=nom_du_squelette, argument, argument=xx})]`
+ *
+ * L'argument `env` permet de transmettre tout l'environnement du squelette
+ * en cours au squelette inclus.
+ * 
+ * On parle d’inclusion « statique » car le résultat de compilation est
+ * ajouté au squelette en cours, dans le même fichier de cache.
+ * Cette balise est donc différente d’une inclusion « dynamique » avec
+ * `<INCLURE.../>` qui, elle, crée un fichier de cache séparé
+ * (avec une durée de cache qui lui est propre).
+ *
+ * L'inclusion est realisée au calcul du squelette, pas au service
+ * ainsi le produit du squelette peut être utilisé en entrée de filtres
+ * à suivre. On peut faire un `#INCLURE{fichier}` sans squelette
+ * (Incompatible avec les balises dynamiques).
+ * 
+ * @balise INCLURE
+ * @example
+ *     ```
+ *     [(#INCLURE{fond=inclure/documents,id_article, env})]
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_INCLURE_dist($p) {
 	$id_boucle = $p->id_boucle;
 	// la lang n'est pas passe de facon automatique par argumenter
@@ -1898,8 +1951,29 @@ function balise_INCLURE_dist($p) {
 	return $p;
 }
 
-// Inclure un modele : #MODELE{modele, params}
-// http://doc.spip.org/@balise_MODELE_dist
+
+/**
+ * Compile la balise `#MODELE` qui inclut un résultat de squelette de modèle
+ *
+ * `#MODELE{nom}` insère le résultat d’un squelette contenu dans le
+ * répertoire `modeles/`. L’identifiant de la boucle parente est transmis
+ * par défaut avec le paramètre `id` à cette inclusion.
+ *
+ * Des arguments supplémentaires peuvent être transmis :
+ * `[(#MODELE{nom, argument=xx, argument})]`
+ * 
+ * @balise MODELE
+ * @see balise_INCLURE_dist()
+ * @example
+ *     ```
+ *     #MODELE{article_traductions}
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_MODELE_dist($p) {
 
 	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $p->id_boucle, false);
@@ -1951,12 +2025,26 @@ function balise_MODELE_dist($p) {
 	return $p;
 }
 
-//
-// #SET
-// Affecte une variable locale au squelette
-// #SET{nom,valeur}
-// la balise renvoie la valeur
-// http://doc.spip.org/@balise_SET_dist
+
+/**
+ * Compile la balise `#SET` qui affecte une variable locale au squelette
+ *
+ * Signature : `#SET{cle,valeur}`
+ *
+ * @balise SET
+ * @link http://www.spip.net/3990 Balises #SET et #GET
+ * @see balise_GET_dist()
+ * @example
+ *     ```
+ *     #SET{nb,5}
+ *     #GET{nb} // affiche 5
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_SET_dist($p){
 	$_nom = interprete_argument_balise(1,$p);
 	$_val = interprete_argument_balise(2,$p);
@@ -1970,12 +2058,32 @@ function balise_SET_dist($p){
 	return $p;
 }
 
-//
-// #GET
-// Recupere une variable locale au squelette
-// #GET{nom,defaut} renvoie defaut si la variable nom n'a pas ete affectee
-//
-// http://doc.spip.org/@balise_GET_dist
+
+/**
+ * Compile la balise `#GET` qui récupère une variable locale au squelette
+ *
+ * Signature : `#GET{cle[,defaut]}`
+ *
+ * La clé peut obtenir des sous clés séparés par des `/`
+ * 
+ * @balise GET
+ * @link http://www.spip.net/3990 Balises #SET et #GET
+ * @see balise_SET_dist()
+ * @example
+ *     ```
+ *     #SET{nb,5}
+ *     #GET{nb} affiche 5
+ *     #GET{nb,3} affiche la valeur de nb, sinon 3
+ *
+ *     #SET{nb,#ARRAY{boucles,3}}
+ *     #GET{nb/boucles} affiche 3, équivalent à #GET{nb}|table_valeur{boucles}
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_GET_dist($p) {
 	$p->interdire_scripts = false; // le contenu vient de #SET, donc il est de confiance
 	if (function_exists('balise_ENV'))
@@ -1994,6 +2102,9 @@ function balise_GET_dist($p) {
  * - `#DOUBLONS` tout seul donne la liste brute de tous les doublons
  * - `#DOUBLONS*{mots}` donne la chaine brute `,1,2,3,...`
  *   (changera si la gestion des doublons evolue)
+ *
+ * @balise DOUBLONS
+ * @link http://www.spip.net/4123
  * 
  * @param Champ $p
  *     Pile au niveau de la balise

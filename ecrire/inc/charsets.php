@@ -912,6 +912,7 @@ function transcoder_page($texte, $headers='') {
  *
  * @link http://fr.php.net/manual/fr/function.mb-substr.php
  * @link http://www.php.net/manual/fr/function.substr.php
+ * @uses spip_substr_manuelle() si les fonctions php mb sont absentes
  * 
  * @param string $c         Le texte
  * @param int $start        Début
@@ -947,7 +948,6 @@ function spip_substr($c, $start=0, $length = NULL) {
  * Version manuelle de substr utf8, pour php vieux et/ou mal installe
  *
  * @link http://fr.php.net/manual/fr/function.mb-substr.php
- * @used-by spip_substr()
  * 
  * @param string $c         Le texte
  * @param int $start        Début
