@@ -98,7 +98,22 @@ function chercher_filtre($fonc, $default=NULL) {
 	return $default;
 }
 
-// http://doc.spip.org/@appliquer_filtre
+/**
+ * Applique un filtre
+ * 
+ * Fonction générique qui prend en argument l’objet (texte, etc) à modifier
+ * et le nom du filtre. Retrouve les arguments du filtre demandé dans les arguments
+ * transmis à cette fonction, via func_get_args().
+ *
+ * @see filtrer() Assez proche
+ * 
+ * @param string $arg
+ *     Texte sur lequel appliquer le filtre
+ * @param string $filtre
+ *     Nom du filtre a appliquer
+ * @return string
+ *     Texte avec le filtre appliqué. Chaîne vide si le filtre n'est pas trouvé.
+**/
 function appliquer_filtre($arg, $filtre) {
 	$f = chercher_filtre($filtre);
 	if (!$f)
@@ -111,7 +126,18 @@ function appliquer_filtre($arg, $filtre) {
 	return call_user_func_array($f,$args);
 }
 
-// http://doc.spip.org/@spip_version
+/**
+ * Retourne la version de SPIP
+ *
+ * Si l'on retrouve un numéro de révision SVN, il est ajouté entre crochets.
+ * Si effectivement le SPIP est installé par SVN, 'SVN' est ajouté avant sa révision.
+ * 
+ * @global spip_version_affichee Contient la version de SPIP
+ * @uses version_svn_courante() Pour trouver le numéro de révision SVN
+ * 
+ * @return string
+ *     Version de SPIP
+**/
 function spip_version() {
 	$version = $GLOBALS['spip_version_affichee'];
 	if ($svn_revision = version_svn_courante(_DIR_RACINE))
@@ -120,11 +146,20 @@ function spip_version() {
 }
 
 
-//
-// Mention de la revision SVN courante de l'espace restreint standard
-// (numero non garanti pour l'espace public et en cas de mutualisation)
-// on est negatif si on est sur .svn, et positif si on utilise svn.revision
-// http://doc.spip.org/@version_svn_courante
+/**
+ * Retrouve un numéro de révision SVN d'un répertoire
+ *
+ * Mention de la révision SVN courante d'un répertoire
+ * Retourne un nombre négatif si on est sur .svn, et positif si on utilise svn.revision
+ * 
+ * @param string $dir Chemin du répertoire
+ * @return int
+ *
+ *     - 0 si aucune info trouvée
+ *     - NN (entier) si info trouvée par svn.revision (créé par le générateur de paquet Zip)
+ *     - -NN (entier) si info trouvée par .svn/entries
+ * 
+**/
 function version_svn_courante($dir) {
 	if (!$dir) $dir = '.';
 
@@ -175,8 +210,22 @@ $GLOBALS['spip_matrice']['filtre_text_html_dist'] = 'inc/filtres_mime.php';
 $GLOBALS['spip_matrice']['filtre_audio_x_pn_realaudio'] = 'inc/filtres_mime.php';
 
 
-// charge les fonctions graphiques et applique celle demandee
-// http://doc.spip.org/@filtrer
+
+/**
+ * Charge et exécute un filtre (graphique ou non)
+ *
+ * Recherche la fonction prévue pour un filtre (qui peut être un filtre graphique `image_*`)
+ * et l'exécute avec les arguments transmis à la fonction, obtenus avec `func_get_args()`
+ *
+ * @api
+ * @uses image_filtrer() Pour un filtre image
+ * @uses chercher_filtre() Pour un autre filtre
+ * 
+ * @param string $filtre
+ *     Nom du filtre à appliquer
+ * @return string
+ *     Code HTML retourné par le filtre
+**/
 function filtrer($filtre) {
 	if (isset($GLOBALS['spip_matrice'][$filtre]) and is_string($f = $GLOBALS['spip_matrice'][$filtre])){
 		find_in_path($f,'', true);
@@ -197,13 +246,30 @@ function filtrer($filtre) {
 	}
 }
 
-// fonction generique d'entree des filtres images
-// accepte en entree un texte complet, un img-log (produit par #LOGO_XX),
-// un tag <img ...> complet, ou encore un nom de fichier *local* (passer
-// le filtre |copie_locale si on veut l'appliquer a un document)
-// applique le filtre demande a chacune des occurrences
 
-// http://doc.spip.org/@image_filtrer
+/**
+ * Exécute un filtre image
+ *
+ * Fonction générique d'entrée des filtres images.
+ * Accepte en entrée :
+ *
+ * - un texte complet,
+ * - un img-log (produit par #LOGO_XX),
+ * - un tag `<img ...>` complet,
+ * - un nom de fichier *local* (passer le filtre `|copie_locale` si on veut
+ *   l'appliquer à un document distant).
+ *
+ * Applique le filtre demande à chacune des occurrences
+ * 
+ * @param array $args
+ *     Liste des arguments :
+ *
+ *     - le premier est le nom du filtre image à appliquer
+ *     - le second est le texte sur lequel on applique le filtre
+ *     - les suivants sont les arguments du filtre image souhaité.
+ * @return string
+ *     Texte qui a reçu les filtres
+**/
 function image_filtrer($args){
 	$filtre = array_shift($args); # enlever $filtre
 	$texte = array_shift($args);
@@ -264,11 +330,17 @@ function image_filtrer($args){
 	return $texte;
 }
 
-//
-// Retourner taille d'une image
-// pour les filtres |largeur et |hauteur
-//
-// http://doc.spip.org/@taille_image
+
+/**
+ * Retourne les tailles d'une image
+ *
+ * Pour les filtres `largeur` et `hauteur`
+ * 
+ * @param string $img
+ *     Balise HTML `<img ... />` ou chemin de l'image (qui peut être une URL distante).
+ * @return array
+ *     Liste (hauteur, largeur) en pixels
+**/
 function taille_image($img) {
 
 	static $largeur_img =array(), $hauteur_img= array();
@@ -315,13 +387,40 @@ function taille_image($img) {
 	}
 	return array($srcHeight, $srcWidth);
 }
-// http://doc.spip.org/@largeur
+
+
+/**
+ * Retourne la largeur d'une image
+ *
+ * @filtre largeur
+ * @link http://www.spip.net/4296
+ * @uses taille_image()
+ * @see hauteur()
+ * 
+ * @param string $img
+ *     Balise HTML `<img ... />` ou chemin de l'image (qui peut être une URL distante).
+ * @return int|null
+ *     Largeur en pixels, NULL ou 0 si aucune image.
+**/
 function largeur($img) {
 	if (!$img) return;
 	list ($h,$l) = taille_image($img);
 	return $l;
 }
-// http://doc.spip.org/@hauteur
+
+/**
+ * Retourne la hauteur d'une image
+ *
+ * @filtre hauteur
+ * @link http://www.spip.net/4291
+ * @uses taille_image()
+ * @see largeur()
+ * 
+ * @param string $img
+ *     Balise HTML `<img ... />` ou chemin de l'image (qui peut être une URL distante).
+ * @return int|null
+ *     Hauteur en pixels, NULL ou 0 si aucune image.
+**/
 function hauteur($img) {
 	if (!$img) return;
 	list ($h,$l) = taille_image($img);
@@ -354,10 +453,19 @@ function proteger_amp($texte){
 	return str_replace('&','&amp;',$texte);
 }
 
-//
+
 /**
- * http://doc.spip.org/@entites_html
+ * Échappe en entités HTML certains caractères d'un texte
+ * 
+ * Traduira un code HTML en transformant en entités HTML les caractères
+ * en dehors du charset de la page ainsi que les `"`, `<` et `>`.
  *
+ * Ceci permet d’insérer le texte d’une balise dans un `<textarea> </textarea>`
+ * sans dommages.
+ *
+ * @filtre entites_html
+ * @link http://www.spip.net/4280
+ * 
  * @param string $texte
  *   chaine a echapper
  * @param bool $tout
@@ -378,8 +486,21 @@ function entites_html($texte, $tout=false, $quote=true) {
 		return corriger_entites_html($texte);
 }
 
-// Transformer les &eacute; dans le charset local
-// http://doc.spip.org/@filtrer_entites
+/**
+ * Convertit les caractères spéciaux HTML dans le charset du site.
+ *
+ * @exemple
+ *     Si le charset de votre site est `utf-8`, `&eacute;` ou `&#233;`
+ *     sera transformé en `é`
+ *
+ * @filtre filtrer_entites
+ * @link http://www.spip.net/5513
+ * 
+ * @param string $texte
+ *     Texte à convertir
+ * @return string
+ *     Texte converti
+**/
 function filtrer_entites($texte) {
 	if (strpos($texte,'&') === false) return $texte;
 	// filtrer
@@ -1916,18 +2037,48 @@ function extraire_balises($texte, $tag='a') {
 		return array();
 }
 
-// comme in_array mais renvoie son 3e arg si le 2er arg n'est pas un tableau
-// prend ' ' comme representant de vrai et '' de faux
-
-// http://doc.spip.org/@in_any
+/**
+ * Indique si le premier argument est contenu dans le second 
+ *
+ * Cette fonction est proche de `in_array()` en PHP avec comme principale
+ * différence qu'elle ne crée pas d'erreur si le second argument n'est pas
+ * un tableau (dans ce cas elle tentera de le désérialiser, et sinon retournera
+ * la valeur par défaut transmise).
+ *
+ * @param string $val
+ *     Valeur à chercher dans le tableau
+ * @param array|string $vals
+ *     Tableau des valeurs. S'il ce n'est pas un tableau qui est transmis,
+ *     la fonction tente de la désérialiser.
+ * @param string $def
+ *     Valeur par défaut retournée si `$vals` n'est pas un tableau.
+ * @return string
+ *     - ' ' si la valeur cherchée est dans le tableau
+ *     - '' si la valeur n'est pas dans le tableau
+ *     - `$def` si on n'a pas transmis de tableau
+**/
 function in_any($val, $vals, $def='') {
 	if (!is_array($vals) AND $v=unserialize($vals)) $vals = $v;
   return (!is_array($vals) ? $def : (in_array($val, $vals) ? ' ' : ''));
 }
 
-// valeur_numerique("3*2") => 6
-// n'accepte que les *, + et - (a ameliorer si on l'utilise vraiment)
-// http://doc.spip.org/@valeur_numerique
+
+/**
+ * Retourne le résultat d'une expression mathématique simple
+ *
+ * N'accepte que les *, + et - (à ameliorer si on l'utilise vraiment).
+ * 
+ * @filtre valeur_numerique
+ * @example
+ *      ```
+ *      valeur_numerique("3*2") retourne 6
+ *      ```
+ * 
+ * @param string $expr
+ *     Expression mathématique `nombre operateur nombre` comme `3*2`
+ * @return int
+ *     Résultat du calcul
+**/
 function valeur_numerique($expr) {
 	$a = 0;
 	if (preg_match(',^[0-9]+(\s*[+*-]\s*[0-9]+)*$,S', trim($expr)))
@@ -1935,7 +2086,21 @@ function valeur_numerique($expr) {
 	return intval($a);
 }
 
-// http://doc.spip.org/@regledetrois
+/**
+ * Retourne un calcul de règle de trois
+ *
+ * @filtre regledetrois
+ * @example
+ *     ```
+ *     [(#VAL{6}|regledetrois{4,3})] retourne 8
+ *     ```
+ * 
+ * @param int $a
+ * @param int $b
+ * @param int $c
+ * @return int
+ *      Retourne `$a*$b/$c`
+**/
 function regledetrois($a,$b,$c)
 {
   return round($a*$b/$c);
@@ -2407,9 +2572,19 @@ function env_to_attributs ($texte, $ignore_params=array()) {
 	return $texte;
 }
 
-// Concatener des chaines
-// #TEXTE|concat{texte1,texte2,...}
-// http://doc.spip.org/@concat
+
+/**
+ * Concatène des chaînes
+ * 
+ * @filtre concat
+ * @link http://www.spip.net/4150
+ * @example
+ *     ```
+ *     #TEXTE|concat{texte1,texte2,...}
+ *     ```
+ *
+ * @return string Chaînes concaténés
+**/
 function concat(){
 	$args = func_get_args();
 	return join('', $args);
@@ -3172,8 +3347,12 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 }
 
 /**
- * Wrap un texte avec des balises
- * wrap('mot','<b>') => '<b>mot</b>'
+ * Englobe (Wrap) un texte avec des balises
+ * 
+ * @example
+ *      ```
+ *      wrap('mot','<b>') => '<b>mot</b>'
+ *      ```
  * @param string $texte
  * @param string $wrap
  * @return string
