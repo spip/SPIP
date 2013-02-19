@@ -10,9 +10,24 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action desinstaller_plugin
+ * 
+ * @package SPIP\Core\Plugins
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@action_desinstaller_plugin_dist
+/**
+ * Action de désinstallation d'un plugin
+ *
+ * L'argument attendu est le préfixe du plugin à désinstaller.
+ * 
+ * @uses plugins_installer_dist()
+ * 
+ * @global array visiteur_session
+ * @return void
+ */
 function action_desinstaller_plugin_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');

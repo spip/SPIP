@@ -10,20 +10,37 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion du cache et des invalidations de cache
+ *
+ * @package SPIP\Core\Cache
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/serial');
 
-# estime la taille moyenne d'un fichier cache, pour ne pas les regarder (10ko)
+/** Estime la taille moyenne d'un fichier cache, pour ne pas les regarder (10ko) */
 define('_TAILLE_MOYENNE_FICHIER_CACHE', 1024 * 10);
-# si un fichier n'a pas servi (fileatime) depuis plus d'une heure, on se sent
-# en droit de l'eliminer
+/**
+ * Si un fichier n'a pas servi (fileatime) depuis plus d'une heure, on se sent
+ * en droit de l'éliminer
+ */
 define('_AGE_CACHE_ATIME', 3600);
 
-// Donne le nombre de fichiers dans un repertoire (plat, pour aller vite)
-// false si erreur
-// http://doc.spip.org/@nombre_de_fichiers_repertoire
+/**
+ * Calcul le nombre de fichiers à la racine d'un répertoire ainsi qu'une
+ * approximation de la taille du répertoire
+ *
+ * On ne calcule que la racine pour pour aller vite.
+ * 
+ * @param string $dir Chemin du répertoire
+ * @param string $nb_estim_taille Nombre de fichiers maximum pour estimer la taille
+ * @return bool|array
+ *
+ *     - false si le répertoire ne peut pas être ouvert
+ *     - array(nombre de fichiers, approximation de la taille en octet) sinon
+**/
 function nombre_de_fichiers_repertoire($dir,$nb_estim_taille = 20) {
 	$taille = 0; // mesurer la taille de N fichiers au hasard dans le repertoire
 	$nb = $nb_estim_taille;
@@ -41,9 +58,15 @@ function nombre_de_fichiers_repertoire($dir,$nb_estim_taille = 20) {
 	return array($total,$taille?$taille/($nb_estim_taille-$nb):_TAILLE_MOYENNE_FICHIER_CACHE);
 }
 
-// Indique la taille du repertoire cache ; pour de gros volumes,
-// impossible d'ouvrir chaque fichier, on y va donc a l'estime
-// http://doc.spip.org/@taille_du_cache
+
+/**
+ * Évalue approximativement la taille du cache
+ *
+ * Pour de gros volumes, impossible d'ouvrir chaque fichier,
+ * on y va donc à l'estime !
+ *
+ * @return int Taille approximative en octets
+**/
 function taille_du_cache() {
 	$total = 0;
 	$taille = 0;
@@ -57,11 +80,29 @@ function taille_du_cache() {
 	return $total * $taille / 16;
 }
 
-// Invalider les caches lies a telle condition
-// les invalideurs sont de la forme 'objet/id_objet'
-// la condition est generalement "id='objet/id_objet'"
-// ici on se contente de noter la date de mise a jour dans les metas
-// http://doc.spip.org/@suivre_invalideur
+
+/**
+ * Invalider les caches liés à telle condition
+ *
+ * Les invalideurs sont de la forme 'objet/id_objet'.
+ * La condition est géneralement "id='objet/id_objet'".
+ *
+ * Ici on se contente de noter la date de mise à jour dans les metas,
+ * pour le type d'objet en question (non utilisé cependant) et pour
+ * tout le site (sur la meta `derniere_modif`)
+ *
+ * @global derniere_modif_invalide
+ *     Par défaut à `true`, la meta `derniere_modif` est systématiquement
+ *     calculée dès qu'un invalideur se présente. Cette globale peut
+ *     être mise à `false` (aucun changement sur `derniere_modif`) ou
+ *     sur une liste de type d'objets (changements uniquement lorsqu'une
+ *     modification d'un des objets se présente).
+ *     
+ * @param string $cond
+ *     Condition d'invalidation
+ * @param bool $modif
+ *     Inutilisé
+**/
 function suivre_invalideur($cond, $modif=true) {
 	if (!$modif)
 		return;
@@ -88,12 +129,25 @@ function suivre_invalideur($cond, $modif=true) {
 
 
 
-// Utilisee pour vider le cache depuis l'espace prive
-// (ou juste les squelettes si un changement de config le necessite)
-// si $atime est passee en argument, ne pas supprimer ce qui a servi
-// plus recemment que cette date (via fileatime)
-// retourne le nombre de fichiers supprimes
-// http://doc.spip.org/@purger_repertoire
+
+/**
+ * Purge un répertoire de ses fichiers
+ *
+ * Utilisée entre autres pour vider le cache depuis l'espace privé
+ *
+ * @uses supprimer_fichier()
+ * 
+ * @param string $dir
+ *     Chemin du répertoire à purger
+ * @param array $options
+ *     Tableau des options. Peut être :
+ *
+ *     - atime : timestamp pour ne supprimer que les fichiers antérieurs
+ *       à cette date (via fileatime)
+ *     - limit : nombre maximum de suppressions
+ * @return int
+ *     Nombre de fichiers supprimés
+**/
 function purger_repertoire($dir, $options=array()) {
 	$handle = @opendir($dir);
 	if (!$handle) return;

@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action confirmer_inscription
+ * 
+ * @package SPIP\Core\Inscription
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**

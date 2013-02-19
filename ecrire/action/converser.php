@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action converser qui permet changer de langue
+ *
+ * @package SPIP\Core\Langue
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/cookie');
@@ -17,10 +22,9 @@ include_spip('inc/cookie');
 /**
  * Point d'entrée pour changer de langue
  * 
- * pas de secu si espace public ou login ou installation
- * mais alors on n'accede pas a la base, on pose seulement le cookie.
- * 
- * @link http://doc.spip.org/@action_converser_dist
+ * Pas de secu si espace public ou login ou installation
+ * mais alors on n'accède pas à la base, on pose seulement le cookie.
+ *
  * @return void
  */
 function action_converser_dist()
@@ -44,7 +48,6 @@ function action_converser_dist()
  * Cette fonction prépare le travail de changement de langue
  * en récupérant la bonne variable de langue
  * 
- * @link http://doc.spip.org/@action_converser_changer_langue
  * @global array $GLOBALS['visiteur_session']
  * @param bool $update_session 
  * @return string
@@ -73,7 +76,6 @@ function action_converser_changer_langue($update_session){
 /**
  * Cette fonction effectue le travail de changement de langue
  * 
- * @link http://doc.spip.org/@action_converser_post
  * @param string $lang 
  * @param bool $ecrire 
  * @return void

@@ -10,19 +10,24 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action cookie
+ * 
+ * @package SPIP\Core\Inscription
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 include_spip('inc/cookie');
 
 /**
- * Cette fonction traite les cookies posés au moment de d'authentification standard
+ * Cette fonction traite les cookies posés au moment de l'authentification standard
  * ou vérifie que l'authentification HTTP est correcte
  * 
- * @link http://doc.spip.org/@action_cookie_dist
- * @param string $set_cookie_admin 
- * @param string $change_session 
- * @global bool $GLOBALS['ignore_auth_http']
+ * @global bool ignore_auth_http
+ * @param string|null $set_cookie_admin 
+ * @param string|null $change_session 
  * @return void
  */
 function action_cookie_dist($set_cookie_admin=null, $change_session = null) {

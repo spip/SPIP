@@ -10,15 +10,28 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action editer_article et de l'API d'édition d'un article
+ * 
+ * @package SPIP\Core\Auteurs\Edition
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Editer ou créer un auteur
+ * Éditer ou créer un auteur
+ *
+ * Si aucun identifiant d'auteur n'est donné, on crée alors un nouvel auteur.
  * 
- * @link http://doc.spip.org/@action_editer_auteur_dist
- * @global array $GLOBALS['visiteur_session']
- * @param array $arg 
- * @return array 
+ * @global array visiteur_session
+ * @uses auteur_inserer()
+ * @uses auteur_modifier()
+ * 
+ * @param array|null $arg
+ *     Identifiant de l'auteur. En absence utilise l'argument
+ *     de l'action sécurisée.
+ * @return array
+ *     Liste (identifiant de l'auteur, Texte d'erreur éventuel)
  */
 function action_editer_auteur_dist($arg=null) {
 
@@ -57,10 +70,15 @@ function action_editer_auteur_dist($arg=null) {
 }
 
 /**
- * Inserer un auteur en base
+ * Insérer un auteur en base
+ *
+ * @pipeline_appel pre_insertion
+ * @pipeline_appel post_insertion
  * 
- * @param string $source
+ * @param string|null $source
+ *     D'où provient l'auteur créé ? par défaut 'spip', mais peut être 'ldap' ou autre.
  * @return int
+ *     Identifiant de l'auteur créé
  */
 function auteur_inserer($source=null) {
 
@@ -96,14 +114,23 @@ function auteur_inserer($source=null) {
 
 
 /**
+ * Modifier un auteur
+ * 
  * Appelle toutes les fonctions de modification d'un auteur
  *
  * @param int $id_auteur
- * @param array $set
+ *     Identifiant de l'auteur
+ * @param array|null $set
+ *     Couples (colonne => valeur) de données à modifier.
+ *     En leur absence, on cherche les données dans les champs éditables
+ *     qui ont été postés (via collecter_requests())
  * @param bool $force_update
- *   permet de forcer la maj en base des champs fournis, sans passer par instancier
- *   utilise par auth/spip
- * @return string
+ *   Permet de forcer la maj en base des champs fournis, sans passer par instancier.
+ *   Utilise par auth/spip
+ * @return string|null
+ *
+ *     - Chaîne vide si aucune erreur,
+ *     - Chaîne contenant un texte d'erreur sinon.
  */
 function auteur_modifier($id_auteur, $set = null, $force_update=false) {
 
@@ -158,17 +185,20 @@ function auteur_modifier($id_auteur, $set = null, $force_update=false) {
 }
 
 /**
- * Associer un auteur a des objets listes sous forme
- * array($objet=>$id_objets,...)
- * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type.
+ * Associer un auteur à des objets listés
  *
- * On peut passer optionnellement une qualification du (des) lien(s) qui sera
- * alors appliquee dans la foulee.
- * En cas de lot de liens, c'est la meme qualification qui est appliquee a tous
- *
+ * @uses objet_associer()
+ * 
  * @param int $id_auteur
+ *     Identifiant de l'auteur
  * @param array $objets
- * @param array $qualif
+ *     Liste sous la forme `array($objet=>$id_objets,...)`. 
+ *     `$id_objets` peut lui-même être un scalaire ou un tableau pour une liste
+ *     d'objets du même type.
+ * @param array|null $qualif
+ *     Optionnellement indique une qualification du (des) lien(s) qui sera
+ *     alors appliquée dans la foulée.
+ *     En cas de lot de liens, c'est la même qualification qui est appliquée à tous
  * @return string
  */
 function auteur_associer($id_auteur,$objets, $qualif = null){
@@ -178,7 +208,10 @@ function auteur_associer($id_auteur,$objets, $qualif = null){
 
 
 /**
- * Ancien nommage pour compatibilite
+ * Ancien nommage pour compatibilité
+ *
+ * @deprecated Utiliser auteur_associer()
+ * @see auteur_associer()
  * 
  * @param int $id_auteur
  * @param array $c
@@ -189,14 +222,18 @@ function auteur_referent($id_auteur,$c){
 }
 
 /**
- * Dissocier un auteur des objets listes sous forme
- * array($objet=>$id_objets,...)
- * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
+ * Dissocier un auteur des objets listés
  *
- * un * pour $id_auteur,$objet,$id_objet permet de traiter par lot
- *
+ * @uses objet_dissocier()
+ * 
  * @param int $id_auteur
+ *     Identifiant de l'auteur
  * @param array $objets
+ *     Liste sous la forme `array($objet=>$id_objets,...)`. 
+ *     `$id_objets` peut lui-même être un scalaire ou un tableau pour une liste
+ *     d'objets du même type.
+ *
+ *     Un `*` pour $id_auteur,$objet,$id_objet permet de traiter par lot
  * @return string
  */
 function auteur_dissocier($id_auteur,$objets){
@@ -205,17 +242,20 @@ function auteur_dissocier($id_auteur,$objets){
 }
 
 /**
- * Qualifier le lien d'un auteur avec les objets listes
- * array($objet=>$id_objets,...)
- * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
+ * Qualifier le lien d'un auteur avec les objets listés
  * 
- * exemple :
- * $c = array('vu'=>'oui');
- * un * pour $id_auteur,$objet,$id_objet permet de traiter par lot
- *
+ * @uses objet_qualifier_liens()
+ * 
  * @param int $id_auteur
+ *     Identifiant de l'auteur
  * @param array $objets
+ *     Liste sous la forme `array($objet=>$id_objets,...)`. 
+ *     `$id_objets` peut lui-même être un scalaire ou un tableau pour une liste
+ *     d'objets du même type.
+ *
+ *     Un `*` pour $id_auteur,$objet,$id_objet permet de traiter par lot
  * @param array $qualif
+ *     Couples (colonne, valeur) tel que `array('vu'=>'oui');`
  * @return bool|int
  */
 function auteur_qualifier($id_auteur,$objets,$qualif){
@@ -226,11 +266,16 @@ function auteur_qualifier($id_auteur,$objets,$qualif){
 
 /**
  * Modifier le statut d'un auteur, ou son login/pass
+ *
+ * @pipeline_appel pre_edition
+ * @pipeline_appel post_edition
  * 
- * @link http://doc.spip.org/@instituer_auteur
- * @param  $id_auteur
- * @param  $c
+ * @param int $id_auteur
+ *     Identifiant de l'auteur
+ * @param array $c
+ *     Couples (colonne => valeur) des données à instituer
  * @param bool $force_webmestre
+ *     Autoriser un auteur à passer webmestre (force l'autorisation)
  * @return bool|string
  */
 function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
@@ -346,18 +391,62 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 }
 
 
+// Fonctions Dépréciées
+// --------------------
 
 
+/**
+ * Insertion d'un auteur
+ *
+ * @deprecated Utiliser auteur_inserer()
+ * @see auteur_inserer()
+ * 
+ * @param string|null $source
+ * @return int
+ */
 function insert_auteur($source=null) {
 	return auteur_inserer($source);
 }
+
+/**
+ * Modification d'un auteur
+ *
+ * @deprecated Utiliser auteur_modifier()
+ * @see auteur_modifier()
+ * 
+ * @param int $id_auteur
+ * @param array|null $set
+ * @return string|null
+ */
 function auteurs_set($id_auteur, $set = null) {
 	return auteur_modifier($id_auteur,$set);
 }
+
+/**
+ * Modifier le statut d'un auteur, ou son login/pass
+ *
+ * @deprecated Utiliser auteur_instituer()
+ * @see auteur_instituer()
+ * 
+ * @param int $id_auteur
+ * @param array $c
+ * @param bool $force_webmestre
+ * @return bool|string
+ */
 function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
 	return auteur_instituer($id_auteur,$c,$force_webmestre);
 }
-// http://doc.spip.org/@revision_auteur
+
+/**
+ * Créer une révision d'un auteur
+ *
+ * @deprecated Utiliser auteur_modifier()
+ * @see auteur_modifier()
+ * 
+ * @param int $id_auteur
+ * @param array $c
+ * @return string|null
+ */
 function revision_auteur($id_auteur, $c=false) {
 	return auteur_modifier($id_auteur,$c);
 }

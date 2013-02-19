@@ -10,9 +10,32 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action purger pour nettoyer le cache
+ *
+ * @package SPIP\Core\Cache
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@action_purger_dist
+/**
+ * Action de purge du cache
+ *
+ * L'argument peut être :
+ *
+ * - inhibe_cache : inhibe le cache pendant 24h
+ * - reactive_cache : enlève l'inhibition du cache
+ * - cache : nettoie tous les caches (sauf celui des vignettes)
+ * - squelettes : nettoie le cache de compilation des squelettes
+ * - vignettes : nettoie le cache des vignettes (et compressions css/js)
+ *
+ * @pipeline_appel trig_purger
+ * @uses supprime_invalideurs()
+ * @uses purger_repertoire()
+ * 
+ * @param string|null $arg
+ *     Argument attendu. En absence utilise l'argument
+ *     de l'action sécurisée.
+ */
 function action_purger_dist($arg=null)
 {
 	if (is_null($arg)) {

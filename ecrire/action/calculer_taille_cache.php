@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action calculer_taille_cache
+ *
+ * @package SPIP\Core\Cache
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
@@ -17,7 +22,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Calculer la taille du cache ou du cache image pour l'afficher en ajax sur la page d'admin de SPIP
  *
+ * Si l'argument reçu est 'images', c'est la taille du cache _DIR_VAR qui est calculé,
+ * sinon celle du cache des squelettes (approximation)
+ * 
  * @param string|null $arg
+ *     Argument attendu. En absence utilise l'argument
+ *     de l'action sécurisée.
  */
 function action_calculer_taille_cache_dist($arg=null){
 	if (is_null($arg)){
@@ -64,10 +74,8 @@ function action_calculer_taille_cache_dist($arg=null){
 /**
  * Calculer la taille d'un dossier, sous dossiers inclus
  *
- * http://doc.spip.org/@calculer_taille_dossier
- *
- * @param $dir
- * @return int
+ * @param string $dir Répertoire dont on souhaite évaluer la taille
+ * @return int Taille en octets
  */
 function calculer_taille_dossier ($dir) {
 	$handle = @opendir($dir);
