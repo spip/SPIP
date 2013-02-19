@@ -10,9 +10,30 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Recherche de logo
+ *
+ * @package SPIP\Core\Logos
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@inc_chercher_logo_dist
+/**
+ * Cherche le logo d'un élément d'objet
+ *
+ * @global formats_logos Extensions possibles des logos
+ * @uses type_du_logo()
+ * 
+ * @param int $id
+ *     Identifiant de l'objet
+ * @param string $_id_objet
+ *     Nom de la clé primaire de l'objet
+ * @param string $mode
+ *     Mode de survol du logo désiré (on ou off)
+ * @return array
+ *
+ *     - Liste (chemin du fichier, répertoire de logos, extension du logo, date de modification)
+ *     - array vide aucun logo trouvé.
+**/
 function inc_chercher_logo_dist($id, $_id_objet, $mode='on') {
 	global $formats_logos;
 	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
@@ -29,7 +50,20 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode='on') {
 	return array();
 }
 
-// http://doc.spip.org/@type_du_logo
+/**
+ * Retourne le type de logo tel que `art` depuis le nom de clé primaire
+ * de l'objet
+ *
+ * C'est par défaut le type d'objet, mais il existe des exceptions historiques
+ * déclarées par la globale `$table_logos`
+ *
+ * @global table_logos Exceptions des types de logo
+ * 
+ * @param string $_id_objet
+ *     Nom de la clé primaire de l'objet
+ * @return string
+ *     Type du logo
+**/
 function type_du_logo($_id_objet) {
 	return isset($GLOBALS['table_logos'][$_id_objet])
 		? $GLOBALS['table_logos'][$_id_objet]

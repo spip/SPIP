@@ -242,7 +242,7 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
  * L'introduction est prise dans le descriptif s'il est renseigné,
  * sinon elle est calculée depuis le texte : à ce moment là,
  * l'introduction est prise dans le contenu entre les balises
- * <intro> et </intro> si présentes, sinon en coupant le
+ * `<intro>` et `</intro>` si présentes, sinon en coupant le
  * texte à la taille indiquée.
  * 
  * Cette fonction est utilisée par la balise #INTRODUCTION
@@ -318,9 +318,7 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 // Balises dynamiques
 //
 
-// elles sont traitees comme des inclusions
-// http://doc.spip.org/@synthetiser_balise_dynamique
-
+/** Code PHP pour inclure une balise dynamique à l'exécution d'une page */
 define('CODE_INCLURE_BALISE', '<' . '?php 
 include_once("./" . _DIR_RACINE . "%s");
 if ($lang_select = "%s") $lang_select = lang_select($lang_select);
@@ -329,7 +327,23 @@ if ($lang_select) lang_select();
 ?'
        .'>');
 
-
+/**
+ * Synthétise une balise dynamique : crée l'appel à l'inclusion
+ * en transmettant les arguments calculés et le contexte de compilation.
+ *
+ * @uses argumenter_squelette() Pour calculer les arguments de l'inclusion
+ * 
+ * @param string $nom
+ *     Nom de la balise dynamique
+ * @param array $args
+ *     Liste des arguments calculés
+ * @param string $file
+ *     Chemin du fichier de squelette à inclure
+ * @param array $context_compil
+ *     Tableau d'informations sur la compilation
+ * @return string
+ *     Code PHP pour inclure le squelette de la balise dynamique
+**/
 function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 	$r = sprintf(CODE_INCLURE_BALISE,
 	       $file,
@@ -340,7 +354,19 @@ function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 	return $r;
 }
 
-// http://doc.spip.org/@argumenter_squelette
+/**
+ * Crée le code PHP pour transmettre des arguments (généralement pour une inclusion)
+ *
+ * @param array|string $v
+ *     Arguments à transmettre :
+ *
+ *    - string : un simple texte à faire écrire
+ *    - array : couples ('nom' => 'valeur') liste des arguments et leur valeur
+ * @return string
+ *
+ *    - Code PHP créant le tableau des arguments à transmettre,
+ *    - ou texte entre quote `'` (si `$v` était une chaîne)
+**/
 function argumenter_squelette($v) {
 
 	if (!is_array($v))
@@ -353,8 +379,33 @@ function argumenter_squelette($v) {
 	}
 }
 
-// verifier leurs arguments et filtres, et calculer le code a inclure
-// http://doc.spip.org/@executer_balise_dynamique
+
+/**
+ * Calcule et retourne le code PHP retourné par l'exécution d'une balise
+ * dynamique.
+ *
+ * Vérifier les arguments et filtres et calcule le code PHP à inclure.
+ *
+ * - charge le fichier PHP de la balise dynamique dans le répertoire
+ *   `balise/`, soit du nom complet de la balise, soit d'un nom générique
+ *    (comme 'formulaire_.php'). Dans ce dernier cas, le nom de la balise
+ *    est ajouté en premier argument.
+ * - appelle une éventuelle fonction de traitement des arguments `balise_NOM_stat()`
+ * - crée le code PHP de la balise si une fonction `balise_NOM_dyn()` (ou variantes)
+ *   est effectivement trouvée.
+ *
+ * @uses synthetiser_balise_dynamique()
+ *     Pour calculer le code PHP d'inclusion produit
+ *
+ * @param string $nom
+ *     Nom de la balise dynamique
+ * @param array $args
+ *     Liste des arguments calculés de la balise
+ * @param array $context_compil
+ *     Tableau d'informations sur la compilation
+ * @return string
+ *     Code PHP d'exécutant l'inclusion du squelette (ou texte) de la balise dynamique
+**/
 function executer_balise_dynamique($nom, $args, $context_compil) {
 	$p = strpos($nom,"_");
 	$nomfonction = $nom;
@@ -401,7 +452,16 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	return synthetiser_balise_dynamique($nomfonction, $r, $file, $context_compil);
 }
 
-// http://doc.spip.org/@lister_objets_avec_logos
+/**
+ * Retourne pour une clé primaire d'objet donnée les identifiants ayant un logo
+ *
+ * @uses type_du_logo() Pour calculer le nom du logo
+ * 
+ * @param string $type
+ *     Nom de la clé primaire de l'objet
+ * @return string
+ *     Liste des identifiants ayant un logo (séparés par une virgule)
+**/
 function lister_objets_avec_logos ($type) {
 	global $formats_logos;
 	$logos = array();
@@ -429,7 +489,7 @@ function lister_objets_avec_logos ($type) {
  * Fonction appelée par la balise `#NOTES`
  * 
  * @see balise_NOTES_dist()
- * @see inc_notes_dist()
+ * @uses inc_notes_dist()
  *
  * @return string
  *     Code HTML des notes
@@ -540,6 +600,7 @@ function remplace_sous_requete($w,$sousrequete){
  *     Description d'une condition WHERE de boucle
  * @return array
  *     Liste de 2 tableaux :
+ * 
  *     - Conditions simples (ne possédant pas de sous requêtes)
  *     - Conditions avec des sous requêtes
 **/

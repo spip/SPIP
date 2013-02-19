@@ -23,16 +23,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Retrouve à quelle boucle appartient une balise, utile dans le cas
  * où une référence explicite est demandée
  * 
- * #MABALISE : l'index est celui de la première boucle englobante
- * #_autreboucle:MABALISE : l'index est celui de la boucle _autreboucle si elle est bien englobante
- * 
- * Dans une balise dynamique ou calculée :
- * $idb = index_boucle($p);
+ * - `#MABALISE` : l'index est celui de la première boucle englobante
+ * - `#_autreboucle:MABALISE` : l'index est celui de la boucle _autreboucle si elle est bien englobante
+ *
+ * @example
+ *     Dans une balise dynamique ou calculée :
+ *     ```
+ *     $idb = index_boucle($p);
+ *     ```
  *
  * @param Champ $p    AST au niveau de la balise
  * @return string
- *     Identifiant de la boucle possédant ce champ.
- *     '' si une référence explicite incorrecte est envoyée
+ *
+ *     - Identifiant de la boucle possédant ce champ.
+ *     - '' si une référence explicite incorrecte est envoyée
  */
 function index_boucle($p){
 
@@ -156,6 +160,7 @@ function index_compose($conditionnel,$defaut) {
  * Cherche un champ dans une boucle
  *
  * Le champ peut être :
+ * 
  * - un alias d'un autre : il faut alors le calculer, éventuellement en
  *   construisant une jointure.
  * - présent dans la table : on l'utilise
@@ -256,7 +261,8 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles, &$joker) {
  * @param array  $desc       Description de la table SQL de la boucle
  * @param string $nom_champ  Nom du champ original demandé
  * @param array  $excep
- *     Description de l'exception pour ce champ. Peut être
+ *     Description de l'exception pour ce champ. Peut être :
+ * 
  *     - string : nom du champ véritable dans la table
  *     - array :
  *         - liste (table, champ) indique que le véritable champ
@@ -334,24 +340,59 @@ function champ_sql($champ, $p, $defaut = null, $remonte_pile = true) {
 	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle, $defaut, $remonte_pile);
 }
 
-// cette fonction sert d'API pour demander une balise Spip avec filtres
 
-// http://doc.spip.org/@calculer_champ
+/**
+ * Calcule et retourne le code PHP d'exécution d'une balise SPIP et des ses filtres
+ *
+ * Cette fonction qui sert d'API au compilateur demande à calculer
+ * le code PHP d'une balise, puis lui applique les filtres (automatiques
+ * et décrits dans le squelette)
+ *
+ * @uses calculer_balise()
+ * @uses applique_filtres()
+ * 
+ * @param Champ $p
+ *     AST au niveau de la balise
+ * @return string
+ *     Code PHP pour d'exécution de la balise et de ses filtres
+**/
 function calculer_champ($p) {
 	$p = calculer_balise($p->nom_champ, $p);
 	return applique_filtres($p);
 }
 
-// Cette fonction sert d'API pour demander une balise SPIP sans filtres.
-// Pour une balise nommmee NOM, elle demande a charger_fonction de chercher
-// s'il existe une fonction balise_NOM ou balise_NOM_dist
-// eventuellement en chargeant le fichier balise/NOM.php.
-// Si la balise est de la forme PREFIXE_SUFFIXE (cf LOGO_* et URL_*)
-// elle fait de meme avec juste le PREFIXE.
-// Si pas de fonction, c'est une reference a une colonne de table SQL connue.
-// Les surcharges des colonnes SQL via charger_fonction sont donc possibles.
 
-// http://doc.spip.org/@calculer_balise
+/**
+ * Calcule et retourne le code PHP d'exécution d'une balise SPIP
+ *
+ * Cette fonction qui sert d'API au compilateur demande à calculer
+ * le code PHP d'une balise (cette fonction ne calcule pas les éventuels
+ * filtres de la balise).
+ *
+ * Pour une balise nommmée `NOM`, elle demande à `charger_fonction()` de chercher
+ * s'il existe une fonction `balise_NOM` ou `balise_NOM_dist`
+ * éventuellement en chargeant le fichier `balise/NOM.php.`
+ *
+ * Si la balise est de la forme `PREFIXE_SUFFIXE` (cf `LOGO_*` et `URL_*`)
+ * elle fait de même avec juste le `PREFIXE`.
+ *
+ * S'il n'y a pas de fonction trouvée, on considère la balise comme une référence
+ * à une colonne de table SQL connue, sinon à l'environnement (cf. `calculer_balise_DEFAUT_dist()`).
+ *
+ * Les surcharges des colonnes SQL via charger_fonction sont donc possibles.
+ *
+ * @uses calculer_balise_DEFAUT_dist()
+ *     Lorsqu'aucune fonction spécifique n'est trouvée.
+ * @see charger_fonction()
+ *     Pour la recherche des fonctions de balises
+ * 
+ * @param string $nom
+ *     Nom de la balise
+ * @param Champ $p
+ *     AST au niveau de la balise
+ * @return string
+ *     Code PHP pour d'exécution de la balise et de ses filtres
+**/
 function calculer_balise($nom, $p) {
 
 	// S'agit-t-il d'une balise_XXXX[_dist]() ?
@@ -375,6 +416,29 @@ function calculer_balise($nom, $p) {
 	return $f($nom, $p);
 }
 
+
+/**
+ * Calcule et retourne le code PHP d'exécution d'une balise SPIP non déclarée
+ *
+ * Cette fonction demande à calculer le code PHP d'une balise qui
+ * n'a pas de fonction spécifique.
+ * 
+ * On considère la balise comme une référence à une colonne de table SQL
+ * connue, sinon à l'environnement.
+
+ * @uses index_pile()
+ *     Pour la recherche de la balise comme colonne SQL ou comme environnement
+ * @note
+ *     Le texte de la balise est retourné si il ressemble à une couleur
+ *     et qu'aucun champ correspondant n'a été trouvé, comme `#CCAABB`
+ * 
+ * @param string $nom
+ *     Nom de la balise
+ * @param Champ $p
+ *     AST au niveau de la balise
+ * @return string
+ *     Code PHP pour d'exécution de la balise et de ses filtres
+**/
 function calculer_balise_DEFAUT_dist($nom, $p) {
 
 	// ca pourrait etre un champ SQL homonyme,
@@ -408,20 +472,44 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 }
 
 
-//
-// Traduction des balises dynamiques, notamment les "formulaire_*"
-// Inclusion du fichier associe a son nom, qui contient la fonction homonyme
-// donnant les arguments a chercher dans la pile, et qui sont donc compiles.
-// On leur adjoint les arguments explicites de la balise (cf #LOGIN{url})
-// et d'eventuelles valeurs transmises d'autorite par la balise.
-// (cf http://trac.rezo.net/trac/spip/ticket/1728)
-// La fonction nommee ci-dessous recevra a l'execution la valeur de tout ca.
 
+/** Code PHP d'exécution d'une balise dynamique */
 define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
 	array(%s%s),
 	array(%s%s))");
 
-// http://doc.spip.org/@calculer_balise_dynamique
+
+/**
+ * Calcule le code PHP d'exécution d'une balise SPIP dynamique
+ *
+ * Calcule les balises dynamiques, notamment les `formulaire_*`.
+ * 
+ * Inclut le fichier associé à son nom, qui contient la fonction homonyme
+ * donnant les arguments à chercher dans la pile, et qui sont donc compilés.
+ *
+ * On leur adjoint les arguments explicites de la balise (cf `#LOGIN{url}`)
+ * et d'éventuelles valeurs transmises d'autorité par la balise.
+ * (cf http://core.spip.org/issues/1728)
+ * 
+ * La fonction `executer_balise_dynamique()` définie par la
+ * constante `CODE_EXECUTER_BALISE` recevra à l'exécution la valeur de tout ca.
+ *
+ * @uses collecter_balise_dynamique()
+ *     Qui calcule le code d'exécution de chaque argument de la balise
+ * @see executer_balise_dynamique()
+ *     Code PHP produit qui chargera les fonctions de la balise dynamique à l'exécution,
+ *     appelée avec les arguments calculés.
+ * @param Champ $p
+ *     AST au niveau de la balise
+ * @param string $nom
+ *     Nom de la balise dynamique
+ * @param array $l
+ *     Liste des noms d'arguments (balises) à collecter
+ * @param array $supp
+ *     Liste de données supplémentaires à transmettre au code d'exécution.
+ * @return Champ
+ *     Balise complétée de son code d'exécution
+**/
 function calculer_balise_dynamique($p, $nom, $l, $supp=array()) {
 
 	if (!balise_distante_interdite($p)) {
@@ -452,13 +540,32 @@ function calculer_balise_dynamique($p, $nom, $l, $supp=array()) {
 	return $p;
 }
 
-// Construction du tableau des arguments d'une balise dynamique.
-// Ces arguments peuvent etre eux-meme des balises (cf FORMULAIRE_SIGNATURE)
-// mais gare au bouclage (on peut s'aider de $nom pour le reperer au besoin)
-// En revanche ils n'ont pas de filtres, donc on appelle calculer_balise qui
-// ne s'occupe pas de ce qu'il y a dans $p (mais qui va y ecrire le code)
 
-// http://doc.spip.org/@collecter_balise_dynamique
+/**
+ * Construction du tableau des arguments d'une balise dynamique.
+ *
+ * Pour chaque argument (un nom de balise), crée le code PHP qui le calculera.
+ * 
+ * @note
+ *     Ces arguments peuvent être eux-même des balises (cf FORMULAIRE_SIGNATURE)
+ *     mais gare au bouclage (on peut s'aider de `$nom` pour le réperer au besoin)
+ * 
+ *     En revanche ils n'ont pas de filtres, donc on appelle `calculer_balise()` qui
+ *     ne s'occupe pas de ce qu'il y a dans `$p` (mais qui va y ecrire le code)
+ *
+ * @uses calculer_balise()
+ *     Pour obtenir le code d'éxécution de chaque argument.
+ * 
+ * @param array $l
+ *     Liste des noms d'arguments (balises) à collecter (chaque argument
+ *     de la balise dynamique est considéré comme étant un nom de balise)
+ * @param Champ $p
+ *     AST au niveau de la balise
+ * @param string $nom
+ *     Nom de la balise
+ * @return array
+ *     Liste des codes PHP d'éxecution des balises collectées
+**/
 function collecter_balise_dynamique($l, &$p, $nom) {
 	$args = array();
 	foreach($l as $c) { $x = calculer_balise($c, $p); $args[] = $x->code;}
@@ -471,7 +578,7 @@ function collecter_balise_dynamique($l, &$p, $nom) {
 /**
  * Récuperer le nom du serveur
  * 
- * Mais pas si c'est un serveur specifique derogatoire
+ * Mais pas si c'est un serveur spécifique dérogatoire
  * 
  * @param Champ $p
  *     AST positionné sur la balise
@@ -499,15 +606,16 @@ function trouver_nom_serveur_distant($p) {
  * La fonction loge une erreur si la balise est utilisée sur une
  * base distante et retourne false dans ce cas.
  * 
- * Note :
- * Il faudrait savoir traiter les formulaires en local
- * tout en appelant le serveur SQL distant.
- * En attendant, cette fonction permet de refuser une authentification
- * sur qqch qui n'a rien a voir.
+ * @note
+ *     Il faudrait savoir traiter les formulaires en local
+ *     tout en appelant le serveur SQL distant.
+ *     En attendant, cette fonction permet de refuser une authentification
+ *     sur quelque-chose qui n'a rien a voir.
  * 
  * @param Champ $p
  *     AST positionné sur la balise
  * @return bool
+ * 
  *     - true : La balise est autorisée
  *     - false : La balise est interdite car le serveur est distant
 **/
