@@ -34,13 +34,14 @@ define('_REGEXP_COPIE_LOCALE', ',' .
  * Renvoie un chemin relatif au rep racine, ou false
  *
  * @link http://www.spip.net/4155
+ * @pipeline_appel post_edition
  *
- * @param $source
+ * @param string $source
  * @param string $mode
- *   'test' - ne faire que tester
- *   'auto' - charger au besoin
- *   'modif' - Si deja present, ne charger que si If-Modified-Since
- *   'force' - charger toujours (mettre a jour)
+ *   - 'test' - ne faire que tester
+ *   - 'auto' - charger au besoin
+ *   - 'modif' - Si deja present, ne charger que si If-Modified-Since
+ *   - 'force' - charger toujours (mettre a jour)
  * @param string $local
  *   permet de specifier le nom du fichier local (stockage d'un cache par exemple, et non document IMG)
  * @return bool|string
@@ -187,23 +188,41 @@ function prepare_donnees_post($donnees, $boundary = '') {
 	return array($entete, $chaine);
 }
 
-//
-// Recupere une page sur le net
-// et au besoin l'encode dans le charset local
-//
-// options : get_headers si on veut recuperer les entetes
-// taille_max : arreter le contenu au-dela (0 = seulement les entetes ==>HEAD)
-// Par defaut taille_max = 1Mo.
-// datas, une chaine ou un tableau pour faire un POST de donnees
-// boundary, pour forcer l'envoi par cette methode
-// et refuser_gz pour forcer le refus de la compression (cas des serveurs orthographiques)
-// date_verif, un timestamp unix pour arreter la recuperation si la page distante n'a pas ete modifiee depuis une date donnee
-// uri_referer, preciser un referer different
-// Le second argument ($trans) :
-// * si c'est une chaine longue, alors c'est un nom de fichier
-//   dans lequel on ecrit directement la page
-// * si c'est true/null ca correspond a une demande d'encodage/charset
-// http://doc.spip.org/@recuperer_page
+
+/**
+ * Récupère une page sur le net et au besoin l'encode dans le charset local
+ *
+ * Gère les redirections de page (301) sur l'URL demandée (maximum 10 redirections)
+ * 
+ * @uses prepare_donnees_post()
+ * @uses recuperer_lapage()
+ * 
+ * @param string $url
+ *     URL de la page à récupérer
+ * @param bool|string $trans
+ *     - chaîne longue : c'est un nom de fichier (nom pour sa copie locale)
+ *     - true : demande d'encodage/charset
+ *     - null : ne retourner que les headers
+ * @param bool $get_headers
+ *     Si on veut récupérer les entêtes
+ * @param int|bool $taille_max
+ *     Arrêter le contenu au-delà (0 = seulement les entetes ==> requête HEAD).
+ *     Par defaut taille_max = 1Mo.
+ * @param string|array $datas
+ *     Pour faire un POST de données
+ * @param string $boundary
+ *     Pour forcer l'envoi par cette méthode
+ * @param bool $refuser_gz
+ *     Pour forcer le refus de la compression (cas des serveurs orthographiques)
+ * @param string $date_verif
+ *     Un timestamp unix pour arrêter la récuperation si la page distante
+ *     n'a pas été modifiée depuis une date donnée
+ * @param string $uri_referer
+ *     Pour préciser un référer différent
+ * @return string|bool
+ *     - Code de la page obtenue (avec ou sans entête)
+ *     - false si la page n'a pu être récupérée
+**/
 function recuperer_page($url, $trans = false, $get_headers = false,
                         $taille_max = null, $datas = '', $boundary = '', $refuser_gz = false,
                         $date_verif = '', $uri_referer = ''){
@@ -241,11 +260,40 @@ function recuperer_page($url, $trans = false, $get_headers = false,
 	}
 }
 
-// args comme ci-dessus (presque)
-// retourne l'URL en cas de 301, un tableau (entete, corps) si ok, false sinon
-// si $trans est null -> on ne veut que les headers
-// si $trans est une chaine, c'est un nom de fichier pour ecrire directement dedans
-// http://doc.spip.org/@recuperer_lapage
+
+/**
+ * Récupère une page sur le net et au besoin l'encode dans le charset local
+ *
+ * @uses init_http()
+ * @uses recuperer_entetes()
+ * @uses recuperer_body()
+ * @uses transcoder_page()
+ * 
+ * @param string $url
+ *     URL de la page à récupérer
+ * @param bool|null|string $trans
+ *     - chaîne longue : c'est un nom de fichier (nom pour sa copie locale)
+ *     - true : demande d'encodage/charset
+ *     - null : ne retourner que les headers
+ * @param string $get
+ *     Type de requête HTTP à faire (HEAD, GET ou POST)
+ * @param int|bool $taille_max
+ *     Arrêter le contenu au-delà (0 = seulement les entetes ==> requête HEAD).
+ *     Par defaut taille_max = 1Mo.
+ * @param string|array $datas
+ *     Pour faire un POST de données
+ * @param bool $refuser_gz
+ *     Pour forcer le refus de la compression (cas des serveurs orthographiques)
+ * @param string $date_verif
+ *     Un timestamp unix pour arrêter la récuperation si la page distante
+ *     n'a pas été modifiée depuis une date donnée
+ * @param string $uri_referer
+ *     Pour préciser un référer différent
+ * @return string|array|bool
+ *     - Retourne l'URL en cas de 301,
+ *     - Un tableau (entête, corps) si ok,
+ *     - false sinon
+**/
 function recuperer_lapage($url, $trans = false, $get = 'GET', $taille_max = 1048576, $datas = '', $refuser_gz = false, $date_verif = '', $uri_referer = ''){
 	// $copy = copier le fichier ?
 	$copy = (is_string($trans) AND strlen($trans)>5); // eviter "false" :-)
