@@ -205,7 +205,7 @@ function prepare_donnees_post($donnees, $boundary = '') {
  *     - null : ne retourner que les headers
  * @param bool $get_headers
  *     Si on veut récupérer les entêtes
- * @param int|bool $taille_max
+ * @param int|null $taille_max
  *     Arrêter le contenu au-delà (0 = seulement les entetes ==> requête HEAD).
  *     Par defaut taille_max = 1Mo.
  * @param string|array $datas
@@ -391,12 +391,21 @@ function recuperer_body($f, $taille_max = 1048576, $fichier = ''){
 	return $result;
 }
 
-// Lit les entetes de reponse HTTP sur la socket $f et retourne:
-// la valeur (chaine) de l'en-tete Location si on l'a trouvee
-// la valeur (numerique) du statut si different de 200, notamment Not-Modified
-// le tableau des entetes dans tous les autres cas
 
-// http://doc.spip.org/@recuperer_entetes
+/**
+ * Retourne les informations d'entête HTTP d'un socket
+ *
+ * Lit les entêtes de reponse HTTP sur la socket $f
+ * 
+ * @param resource $f
+ *     Socket d'un fichier (issu de fopen)
+ * @param string $date_verif
+ *     Pour tester une date de dernière modification
+ * @return string|int|array
+ *     - la valeur (chaîne) de l'en-tete Location si on l'a trouvée
+ *     - la valeur (numerique) du statut si different de 200, notamment Not-Modified
+ *     - le tableau des entetes dans tous les autres cas
+**/
 function recuperer_entetes($f, $date_verif = ''){
 	$s = @trim(fgets($f, 16384));
 
@@ -429,16 +438,27 @@ function recuperer_entetes($f, $date_verif = ''){
 	return $headers;
 }
 
-// Si on doit conserver une copie locale des fichiers distants, autant que ca
-// soit a un endroit canonique -- si ca peut etre bijectif c'est encore mieux,
-// mais la tout de suite je ne trouve pas l'idee, etant donne les limitations
-// des filesystems
-// http://doc.spip.org/@nom_fichier_copie_locale
+
+/**
+ * Calcule le nom canonique d'une copie local d'un fichier distant
+ *
+ * Si on doit conserver une copie locale des fichiers distants, autant que ca
+ * soit à un endroit canonique
+ *
+ * @note
+ *   Si ca peut être bijectif c'est encore mieux,
+ *   mais là tout de suite je ne trouve pas l'idee, étant donné les limitations
+ *   des filesystems
+ * 
+ * @param string $source
+ *     URL de la source
+ * @param string $extension
+ *     Extension du fichier
+ * @return string
+ *     Nom du fichier pour copie locale
+**/
 function nom_fichier_copie_locale($source, $extension){
-	if (version_compare($spip_version_branche,"3.0.0") < 0)
-		include_spip('inc/getdocument');
-	else
-		include_spip('inc/documents');
+	include_spip('inc/documents');
 	$d = creer_repertoire_documents('distant'); # IMG/distant/
 	$d = sous_repertoire($d, $extension); # IMG/distant/pdf/
 
@@ -454,10 +474,21 @@ function nom_fichier_copie_locale($source, $extension){
 		. ".$extension";
 }
 
-//
-// Donne le nom de la copie locale de la source
-//
-// http://doc.spip.org/@fichier_copie_locale
+
+/**
+ * Donne le nom de la copie locale de la source
+ *
+ * Soit obtient l'extension du fichier directement de l'URL de la source,
+ * soit tente de le calculer.
+ *
+ * @uses nom_fichier_copie_locale()
+ * @uses recuperer_infos_distantes()
+ * 
+ * @param string $source
+ *      URL de la source distante
+ * @return string
+ *      Nom du fichier calculé
+**/
 function fichier_copie_locale($source){
 	// Si c'est deja local pas de souci
 	if (!preg_match(',^\w+://,', $source)){
@@ -517,17 +548,27 @@ function fichier_copie_locale($source){
 }
 
 
-// Recuperer les infos d'un document distant, sans trop le telecharger
-#$a['body'] = chaine
-#$a['type_image'] = booleen
-#$a['titre'] = chaine
-#$a['largeur'] = intval
-#$a['hauteur'] = intval
-#$a['taille'] = intval
-#$a['extension'] = chaine
-#$a['fichier'] = chaine
-
-// http://doc.spip.org/@recuperer_infos_distantes
+/**
+ * Récupérer les infos d'un document distant, sans trop le télécharger
+ *
+ * @param string $source
+ *     URL de la source
+ * @param int $max
+ *     Taille maximum du fichier à télécharger
+ * @param bool $charger_si_petite_image
+ *     Pour télécharger le document s'il est petit
+ * @return array
+ *     Couples des informations obtenues parmis :
+ *
+ *     - 'body' = chaine
+ *     - 'type_image' = booleen
+ *     - 'titre' = chaine
+ *     - 'largeur' = intval
+ *     - 'hauteur' = intval
+ *     - 'taille' = intval
+ *     - 'extension' = chaine
+ *     - 'fichier' = chaine
+**/
 function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image = true){
 
 	# charger les alias des types mime
