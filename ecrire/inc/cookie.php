@@ -13,7 +13,7 @@
 /**
  * Gestion des cookies
  *
- * @param SPIP\Core\Cookies
+ * @package SPIP\Core\Cookies
 **/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -33,7 +33,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Durée de vie du cookie en secondes
  * @param string $path
  *     Chemin sur lequel le cookie sera disponible
- * @param string $domaine
+ * @param string $domain
  *     Domaine à partir duquel le cookie est disponible
  * @param bool $secure
  *     cookie sécurisé ou non ?

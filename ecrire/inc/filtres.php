@@ -858,8 +858,25 @@ function taille_en_octets ($taille) {
 }
 
 
-// Rend une chaine utilisable sans dommage comme attribut HTML
-// http://doc.spip.org/@attribut_html
+/**
+ * Rend une chaine utilisable sans dommage comme attribut HTML
+ *
+ * @filtre attribut_html
+ * @link http://www.spip.net/4282
+ * @uses textebrut()
+ * @uses texte_backend()
+ * @example
+ *     ```
+ *     <a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+ *     ```
+ * 
+ * @param string $texte
+ *     Texte à mettre en attribut
+ * @param bool $textebrut
+ *     Passe le texte en texte brut ?
+ * @return string
+ *     Texte prêt pour être utilisé en attribut HTML
+**/
 function attribut_html($texte,$textebrut = true) {
 	$u = $GLOBALS['meta']['pcre_u'];
 	if ($textebrut)
@@ -1345,7 +1362,30 @@ function saison($numdate) {
 	return affdate_base($numdate, 'saison');
 }
 
-// http://doc.spip.org/@affdate
+/**
+ * Formate une date
+ *
+ * @filtre affdate
+ * @link http://www.spip.net/4129
+ * @uses affdate_base()
+ * @example
+ *     En PHP
+ *     ```
+ *     affdate("2008-10-11 14:08:45") affiche "11 octobre 2008"
+ *     ```
+ *     En squelettes
+ *     ```
+ *     [(#DATE|affdate)]
+ *     [(#DATE|affdate{Y-m-d})]
+ *     ```
+ *
+ * @param string $numdate
+ *     Une écriture de date
+ * @param string $format
+ *     Type de format souhaité ou expression pour `strtotime()` tel que `Y-m-d h:i:s`
+ * @return string
+ *     La date formatée
+**/
 function affdate($numdate, $format='entier') {
 	return affdate_base($numdate, $format);
 }
@@ -1360,7 +1400,20 @@ function affdate_jourcourt($numdate, $annee_courante=null) {
 	return affdate_base($numdate, 'jourcourt', array('annee_courante'=>$annee_courante));
 }
 
-// http://doc.spip.org/@affdate_mois_annee
+/**
+ * Retourne le mois en toute lettre et l’année d'une date
+ *
+ * Ne retourne pas le jour donc.
+ * 
+ * @filtre affdate_mois_annee
+ * @link http://www.spip.net/4132
+ * @uses affdate_base()
+ *
+ * @param string $numdate
+ *     Une écriture de date
+ * @return string
+ *     La date formatée
+**/
 function affdate_mois_annee($numdate) {
 	return affdate_base($numdate, 'mois_annee');
 }

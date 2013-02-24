@@ -27,15 +27,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Charge en mémoire la liste des caractères d'un charset
  *
- * Charsets supportes en natif : voir les tables dans ecrire/charsets/
- * Les autres charsets sont supportes via mbstring()
+ * Charsets supportés en natif : voir les tables dans ecrire/charsets/
+ * Les autres charsets sont supportés via mbstring()
  * 
  * @param string $charset
- *     Charset à charger
+ *     Charset à charger.
  *     Par défaut (AUTO), utilise le charset du site
  * @return string|bool
- *     Nom du charset
- *     false si le charset n'est pas décrit dans le répertoire charsets/
+ *     - Nom du charset
+ *     - false si le charset n'est pas décrit dans le répertoire charsets/
 **/
 function load_charset ($charset = 'AUTO') {
 	if ($charset == 'AUTO')
@@ -66,7 +66,7 @@ function load_charset ($charset = 'AUTO') {
 
 
 /**
- * Verifier qu'on peut utiliser mb_string
+ * Vérifier qu'on peut utiliser mb_string
  *
  * @return bool
  *     true si toutes les fonctions mb nécessaires sont présentes
