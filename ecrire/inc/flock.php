@@ -10,8 +10,14 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de recherche et d'écriture de répertoire ou fichiers
+ *
+ * @package SPIP\Core\Flock
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // ajouter define('_CREER_DIR_PLAT', true); dans mes_options pour restaurer
 // le fonctionnement des faux repertoires en .plat
 define('_CREER_DIR_PLAT', false);
@@ -306,14 +312,32 @@ function supprimer_repertoire($dir) {
 	return @rmdir($dir);
 }
 
-	
-//
-// Retourne $base/${subdir}/ si le sous-repertoire peut etre cree,
-// $base/${subdir}_ sinon ; $nobase signale qu'on ne veut pas de $base/
-// On peut aussi ne donner qu'un seul argument,
-// subdir valant alors ce qui suit le dernier / dans $base
-//
-// http://doc.spip.org/@sous_repertoire
+
+/**
+ * Crée un sous répertoire
+ *
+ * Retourne `$base/${subdir}/` si le sous-repertoire peut être crée,
+ * `$base/${subdir}_` sinon.
+ *
+ * @example
+ *     ```
+ *     sous_repertoire(_DIR_CACHE, 'demo');
+ *     sous_repertoire(_DIR_CACHE . '/demo');
+ *     ```
+ * 
+ * @param string $base
+ *     - Chemin du répertoire parent (avec $subdir)
+ *     - sinon chemin du répertoire à créer
+ * @param string $subdir
+ *     - Nom du sous répertoire à créer,
+ *     - non transmis, `$subdir` vaut alors ce qui suit le dernier `/` dans `$base`
+ * @param bool $nobase
+ *     true pour ne pas avoir le chemin du parent `$base/` dans le retour
+ * @param bool $tantpis
+ *     true pour ne pas raler en cas de non création du répertoire
+ * @return string
+ *     Chemin du répertoire créé. 
+**/
 function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 	static $dirs = array();
 
