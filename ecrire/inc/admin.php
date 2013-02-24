@@ -10,13 +10,39 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion d'administration d'un SPIP
+ *
+ * @param SPIP\Core\Admin
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// demande/verifie le droit de creation de repertoire par le demandeur;
-// memorise dans les meta que ce script est en cours d'execution
-// si elle y est deja c'est qu'il y a eu suspension du script, on reprend.
 
-// http://doc.spip.org/@inc_admin_dist
+/**
+ * Teste qu'un utilisateur a des droits sur les fichiers du site et
+ * exécute l'action (en base) demandée si c'est le cas.
+ * 
+ * Demande / vérifie le droit de création de répertoire par le demandeur;
+ * Mémorise dans les meta que ce script est en cours d'execution.
+ * Ii elle y est déjà c'est qu'il y a eu suspension du script, on reprend.
+ *
+ * @uses debut_admin()
+ * @uses admin_verifie_session()
+ * @uses fin_admin()
+ * 
+ * @param string $script
+ *     Script d'action (en base) à exécuter si on a des droits d'accès aux fichiers
+ * @param string $titre
+ *     Titre de l'action demandée
+ * @param string $comment
+ *     Commentaire supplémentaire
+ * @param bool $anonymous
+ *     ?
+ * @return string
+ *     Code HTML de la page (pour vérifier les droits),
+ *     sinon code HTML de la page après le traitement effectué.
+**/
 function inc_admin_dist($script, $titre, $comment='', $anonymous=false)
 {
 	$reprise = true;
@@ -37,22 +63,34 @@ function inc_admin_dist($script, $titre, $comment='', $anonymous=false)
 	return '';
 }
 
-// Gestion dans la meta "admin" du script d'administation demande,
-// pour eviter des executions en parallele, notamment apres Time-Out.
-// Cette meta contient le nom du script et, a un hachage pres, du demandeur.
-// Le code de ecrire/index.php devie toute demande d'execution d'un script
-// vers le script d'administration indique par cette meta si elle est l�.
-// Au niveau de la fonction inc_admin, on controle la meta 'admin'.
-// Si la meta n'est pas la, 
-//	c'est le debut on la cree.
-// Sinon, si le hachage actuel est le meme que celui en base, 
-//	c'est une reprise, on continue
-// Sinon, si le hachage differe a cause du connecte,
-// 	c'est une arrivee inoppotune, on refuse sa connexion.
-// Enfin, si hachage differe pour une autre raison
-// 	c'est que l'operation se passe mal, on la stoppe
 
-// http://doc.spip.org/@admin_verifie_session
+/**
+ * Gestion dans la meta "admin" du script d'administation demandé,
+ * pour éviter des exécutions en parallèle, notamment après Time-Out.
+ *
+ * Cette meta contient le nom du script et, à un hachage près, du demandeur.
+ * Le code de ecrire/index.php dévie toute demande d'exécution d'un script
+ * vers le script d'administration indiqué par cette meta si elle est là.
+ *
+ * Au niveau de la fonction inc_admin, on controle la meta 'admin'.
+ *
+ * - Si la meta n'est pas là, c'est le début on la crée.
+ * - Sinon, si le hachage actuel est le même que celui en base,
+ *   c'est une reprise, on continue.
+ * - Sinon, si le hachage diffère à cause du connect, c'est une arrivée
+ *   inoppotune, on refuse sa connexion.
+ * - Enfin, si hachage diffère pour une autre raison, c'est que l'operation
+ *   se passe mal, on la stoppe
+ *
+ * @uses fichier_admin()
+ * 
+ * @param string $script
+ *     Script d'action (en base)
+ * @param bool $anonymous
+ *     ?
+ * @return string
+ *     Code HTML si message d'erreur, '' sinon;
+ */
 function admin_verifie_session($script, $anonymous=false) {
 
 	include_spip('base/abstract_sql');
@@ -80,7 +118,15 @@ function admin_verifie_session($script, $anonymous=false) {
 	return '';
 }
 
-// http://doc.spip.org/@dir_admin
+/**
+ * Retourne l'emplacement du répertoire où sera testé l'accès utilisateur
+ *
+ * Dans le répertoire temporaire si on est admin, sinon dans le répertoire
+ * de transfert des admins restreints
+ * 
+ * @return string
+ *     Chemin du répertoire.
+**/
 function dir_admin()
 {
 	if (autoriser('configurer')) {
@@ -90,17 +136,48 @@ function dir_admin()
 	}
 }
 
-// http://doc.spip.org/@fichier_admin
+
+/**
+ * Retourne le nom d'un fichier de teste d'authentification par accès
+ * aux fichiers
+ *
+ * Le nom calculé est un hash basé sur l’heure, l’action et l’auteur.
+ *
+ * @param string $action
+ *     Nom du script d'action (en base)
+ * @param string $pref
+ *     Préfixe au nom du fichier calculé
+ * @return string
+ *     Nom du fichier
+**/
 function fichier_admin($action, $pref='admin_') {
 
 	return $pref . 
 	  substr(md5($action.(time() & ~2047).$GLOBALS['visiteur_session']['login']), 0, 10);
 }
 
-// demande la creation d'un repertoire et sort
-// ou retourne sans rien faire si repertoire deja la.
-
-// http://doc.spip.org/@debut_admin
+/**
+ * Demande la création d'un répertoire (pour tester l'accès de l'utilisateur)
+ * et sort ou quitte sans rien faire si le répertoire est déjà là.
+ *
+ * Si l'on est webmestre, la plupart des actions n'ont pas besoin
+ * de tester la création du répertoire (toutes sauf repair ou delete_all).
+ * On considère qu'un webmestre a déjà du prouver ses droits sur les fichiers.
+ * Dans ce cas, on quitte sans rien faire également.
+ * 
+ * @uses dir_admin()
+ * @uses fichier_admin()
+ * 
+ * @param string $script
+ *     Script d'action (en base) à exécuter ensuite
+ * @param string $action
+ *     Titre de l'action demandée
+ * @param string $corps
+ *     Commentaire supplémentaire
+ * @return string
+ *     Code HTML de la page (pour vérifier les droits),
+ *     sinon chaîne vide si déjà fait.
+**/
 function debut_admin($script, $action='', $corps='') {
 
 	if ((!$action) || (!autoriser('chargerftp'))) {
@@ -165,7 +242,13 @@ function debut_admin($script, $action='', $corps='') {
 	}
 }
 
-// http://doc.spip.org/@fin_admin
+/**
+ * Clôture la phase d'administration en supprimant le répertoire
+ * testant l'accès au fichiers ainsi que les metas d'exécution
+ *
+ * @param string $action
+ *     Nom de l'action (en base) qui a été exécutée
+**/
 function fin_admin($action) {
 	$signal = dir_admin() . fichier_admin($action);
 	spip_unlink($signal);
@@ -176,7 +259,21 @@ function fin_admin($action) {
 	}
 }
 
-// http://doc.spip.org/@copy_request
+/**
+ * Génère un formulaire avec les données postées
+ *
+ * Chaque donnée est mise en input hidden pour
+ * les soumettre avec la validation du formulaire.
+ *
+ * @param string $script
+ *     Nom du script (pour l'espace privé) de destination
+ * @param string $suite
+ *     Corps du formulaire
+ * @param string $submit
+ *     Texte du bouton de validation
+ * @return string
+ *     Code HTML du formulaire
+**/
 function copy_request($script, $suite, $submit='')
 {
 	include_spip('inc/filtres');

@@ -13,19 +13,22 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * interface d'appel:
- * - au moins un argument: retourne une URL ou un formulaire securises
- * - sans argument: verifie la securite et retourne _request('arg'), ou exit.
+ * Génère ou vérifie une action sécurisée
+ * 
+ * Interface d'appel:
  *
- * http://doc.spip.org/@inc_securiser_action_dist
+ * - au moins un argument: retourne une URL ou un formulaire securisés
+ * - sans argument : vérifie la sécurité et retourne `_request('arg')`, ou exit.
+ *
+ * @uses securiser_action_auteur() Pour produire l'URL ou le formulaire
  *
  * @param string $action
  * @param string $arg
  * @param string $redirect
  * @param bool|int|string $mode
- *   -1 : renvoyer action, arg et hash sous forme de array()
- *   true ou false : renvoyer une url, avec &amp; (false) ou & (true)
- *   string : renvoyer un formulaire
+ *   - -1 : renvoyer action, arg et hash sous forme de array()
+ *   - true ou false : renvoyer une url, avec &amp; (false) ou & (true)
+ *   - string : renvoyer un formulaire
  * @param string|int $att
  *   id_auteur pour lequel generer l'action en mode url ou array()
  *   atributs du formulaire en mode formulaire
@@ -49,10 +52,16 @@ function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=fals
 }
 
 /**
- * Attention: PHP applique urldecode sur $_GET mais pas sur $_POST
- * cf http://fr.php.net/urldecode#48481
- * http://doc.spip.org/@securiser_action_auteur
+ * Retourne une URL ou un formulaire sécurisés
  *
+ * @note
+ *   Attention: PHP applique urldecode sur $_GET mais pas sur $_POST
+ *   cf http://fr.php.net/urldecode#48481
+ *   http://doc.spip.org/@securiser_action_auteur
+ *
+ * @uses calculer_action_auteur()
+ * @uses generer_form_action()
+ * 
  * @param string $action
  * @param string $arg
  * @param string $redirect
@@ -93,8 +102,6 @@ function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att=
 
 /**
  * Caracteriser un auteur : l'auteur loge si $id_auteur=null
- *
- * http://doc.spip.org/@caracteriser_auteur
  *
  * @param int|null $id_auteur
  * @return array
@@ -142,8 +149,6 @@ function caracteriser_auteur($id_auteur=null) {
  * utilisee pour generer des urls personelles pour executer une action qui modifie la base
  * et verifier la legitimite de l'appel a l'action
  *
- * http://doc.spip.org/@_action_auteur
- *
  * @param string $action
  * @param int $id_auteur
  * @param string $pass
@@ -174,7 +179,6 @@ function _action_auteur($action, $id_auteur, $pass, $alea) {
 
 /**
  * Calculer le hash qui signe une action pour un auteur
- * http://doc.spip.org/@calculer_action_auteur
  *
  * @param string $action
  * @param int|null $id_auteur
@@ -189,7 +193,6 @@ function calculer_action_auteur($action, $id_auteur=null) {
 /**
  * Verifier le hash de signature d'une action
  * toujours exclusivement pour l'auteur en cours
- * http://doc.spip.org/@verifier_action_auteur
  *
  * @param $action
  * @param $hash
@@ -214,8 +217,6 @@ function verifier_action_auteur($action, $hash) {
  * Le secret du site doit rester aussi secret que possible, et est eternel
  * On ne doit pas l'exporter
  *
- * http://doc.spip.org/@secret_du_site
- *
  * @return string
  */
 function secret_du_site() {
@@ -235,7 +236,6 @@ function secret_du_site() {
 
 /**
  * Calculer une signature valable pour une action et pour le site
- * http://doc.spip.org/@calculer_cle_action
  *
  * @param string $action
  * @return string
@@ -249,7 +249,6 @@ function calculer_cle_action($action) {
 
 /**
  * Verifier la cle de signature d'une action valable pour le site
- * http://doc.spip.org/@verifier_cle_action
  *
  * @param string $action
  * @param string $cle

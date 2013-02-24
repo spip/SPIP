@@ -894,8 +894,17 @@ function extraire_date($texte) {
 		return $regs[1]."-".sprintf("%02d", $regs[2])."-01";
 }
 
-// Maquiller une adresse e-mail
-// http://doc.spip.org/@antispam
+ 
+/**
+ * Maquiller une adresse e-mail
+ *
+ * Remplace `@` par 3 caractères aléatoires.
+ * 
+ * @uses creer_pass_aleatoire()
+ * 
+ * @param string $texte Adresse email
+ * @return string Adresse email maquillée
+**/
 function antispam($texte) {
 	include_spip('inc/acces');
 	$masque = creer_pass_aleatoire(3);
@@ -1480,12 +1489,12 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 }
 
 /**
- * Alignements en HTML (Old-style, preferer CSS)
- * Cette fonction ne cree pas de paragraphe
+ * Alignements en HTML (Old-style, préférer CSS)
+ * 
+ * Cette fonction ne crée pas de paragraphe
  *
- * http://doc.spip.org/@aligner
- *
- * @param  $letexte
+ * @deprecated Utiliser CSS
+ * @param string $letexte
  * @param string $justif
  * @return string
  */
@@ -1500,16 +1509,49 @@ function aligner($letexte, $justif='') {
 
 	return $letexte;
 }
-// http://doc.spip.org/@justifier
+
+/**
+ * Justifie en HTML (Old-style, préférer CSS)
+ * @deprecated Utiliser CSS
+ * @uses aligner()
+ * @param string $letexte
+ * @return string
+ */
 function justifier($letexte) { return aligner($letexte,'justify');}
-// http://doc.spip.org/@aligner_droite
+
+/**
+ * Aligne à droite en HTML (Old-style, préférer CSS)
+ * @deprecated Utiliser CSS
+ * @uses aligner()
+ * @param string $letexte
+ * @return string
+ */
 function aligner_droite($letexte) { return aligner($letexte,'right');}
-// http://doc.spip.org/@aligner_gauche
+
+/**
+ * Aligne à gauche en HTML (Old-style, préférer CSS)
+ * @deprecated Utiliser CSS
+ * @uses aligner()
+ * @param string $letexte
+ * @return string
+ */
 function aligner_gauche($letexte) {return aligner($letexte,'left');}
-// http://doc.spip.org/@centrer
+
+/**
+ * Centre en HTML (Old-style, préférer CSS)
+ * @deprecated Utiliser CSS
+ * @uses aligner()
+ * @param string $letexte
+ * @return string
+ */
 function centrer($letexte) {return aligner($letexte,'center');}
 
-// http://doc.spip.org/@style_align
+/**
+ * Retourne un texte de style CSS aligné sur la langue en cours
+ * @deprecated
+ * @param unknown $bof
+ * @return string Style CSS
+**/
 function style_align($bof) {
 	global $spip_lang_left;
 	return "text-align: $spip_lang_left";
