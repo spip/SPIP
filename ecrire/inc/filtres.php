@@ -1977,7 +1977,18 @@ function inserer_attribut($balise, $attribut, $val, $proteger=true, $vider=false
 	return $balise;
 }
 
-// http://doc.spip.org/@vider_attribut
+/**
+ * Supprime un attribut HTML 
+ *
+ * @filtre vider_attribut
+ * @link http://www.spip.net/4142
+ * @uses inserer_attribut()
+ * @see extraire_attribut()
+ * 
+ * @param string $balise Code HTML de l'élément
+ * @param string $attribut Nom de l'attribut à enlever
+ * @return string Code HTML sans l'attribut
+**/
 function vider_attribut ($balise, $attribut) {
 	return inserer_attribut($balise, $attribut, '', false, true);
 }

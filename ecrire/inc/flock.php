@@ -124,11 +124,29 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 	return false;
 }
 
-//
-// Ecrire un fichier de maniere un peu sure
-//
-// zippe les fichiers .gz
-// http://doc.spip.org/@ecrire_fichier
+
+/**
+ * Écrit un fichier de manière un peu sûre
+ *
+ * Cette écriture s’exécute de façon sécurisée en posant un verrou sur
+ * le fichier avant sa modification. Les fichiers .gz sont compressés.
+ * 
+ * @uses raler_fichier() Si le fichier n'a pu peut être écrit
+ * @see lire_fichier()
+ * @see supprimer_fichier()
+ * 
+ * @param string $fichier
+ *     Chemin du fichier
+ * @param string $contenu
+ *     Contenu à écrire
+ * @param bool $ignorer_echec
+ *     - true pour ne pas raler en cas d'erreur
+ *     - false affichera un message si on est webmestre
+ * @param bool $truncate
+ *     Écriture avec troncation ?
+ * @return bool
+ *     - true si l’écriture s’est déroulée sans problème.
+**/
 function ecrire_fichier ($fichier, $contenu, $ignorer_echec = false, $truncate=true) {
 
 	#spip_timer('ecrire_fichier');
@@ -226,7 +244,17 @@ function lire_fichier_securise ($fichier, &$contenu, $options=false) {
 	return $res;
 }
 
-// http://doc.spip.org/@raler_fichier
+/**
+ * Affiche un message d’erreur bloquant, indiquant qu’il n’est pas possible de créer
+ * le fichier à cause des droits sur le répertoire parent au fichier.
+ *
+ * Arrête le script PHP par un exit;
+ *
+ * @uses minipres() Pour afficher le message
+ * 
+ * @param string $fichier
+ *     Chemin du fichier
+**/
 function raler_fichier($fichier)
 {
 	include_spip('inc/minipres');
