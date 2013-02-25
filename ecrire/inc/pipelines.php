@@ -31,12 +31,13 @@ if (test_espace_prive())
  * Cette fonction est appelée par le pipeline insert_head
  * 
  * @internal
- *     Ne pas vérifier ici qu'on ne doublonne pas #INSERT_HEAD
+ *     Ne pas vérifier ici qu'on ne doublonne pas `#INSERT_HEAD`
  *     car cela empêche un double appel (multi calcul en cache cool,
  *     ou erreur de l'espace privé)
  *
  * @see f_jQuery_prive()
- * @link http://doc.spip.org/@f_jQuery
+ * @pipeline insert_head
+ * @pipeline_appel jquery_plugins
  * 
  * @param string $texte    Contenu qui sera inséré dans le head HTML
  * @return string          Contenu qui sera inséré dans le head HTML
@@ -69,6 +70,8 @@ function f_jQuery ($texte) {
  * définie à true) dans un texte HTML
  *
  * Cette fonction est appelée par le pipeline affichage_final
+ *
+ * @pipeline affichage_final
  * 
  * @param string $texte   Contenu de la page envoyée au navigateur
  * @return string         Contenu de la page envoyée au navigateur
@@ -92,6 +95,8 @@ function f_surligne ($texte) {
  * définie à true.
  *
  * Cette fonction est appelée par le pipeline affichage_final
+ * 
+ * @pipeline affichage_final
  * 
  * @param string $texte   Contenu de la page envoyée au navigateur
  * @return string         Contenu de la page envoyée au navigateur
@@ -124,14 +129,16 @@ function f_tidy ($texte) {
 
 
 /**
- * Offre #INSERT_HEAD sur tous les squelettes (bourrin)
+ * Offre `#INSERT_HEAD` sur tous les squelettes (bourrin)
  *
  * À activer dans mes_options via :
- * $GLOBALS['spip_pipeline']['affichage_final'] .= '|f_insert_head';
+ * `$GLOBALS['spip_pipeline']['affichage_final'] .= '|f_insert_head';`
  *
  * Ajoute le contenu du pipeline insert head dans la page HTML
  * si cela n'a pas été fait.
  *
+ * @pipeline_appel insert_head
+ * 
  * @param string $texte   Contenu de la page envoyée au navigateur
  * @return string         Contenu de la page envoyée au navigateur
 **/
@@ -156,7 +163,8 @@ function f_insert_head($texte) {
  * Insérer au besoin les boutons admins
  * 
  * Cette fonction est appelée par le pipeline affichage_final
- *
+ * @pipeline affichage_final
+ * 
  * @param string $texte   Contenu de la page envoyée au navigateur
  * @return string         Contenu de la page envoyée au navigateur
 **/
@@ -192,6 +200,7 @@ function f_admin ($texte) {
  * Cette fonction est appelée par le pipeline recuperer_fond 
  *
  * @see f_afficher_blocs_ecrire()
+ * @pipeline recuperer_fond
  * 
  * @param  array $flux  Description et contenu de l'inclusion
  * @return array $flux  Description et contenu de l'inclusion

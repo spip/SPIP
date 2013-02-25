@@ -1228,12 +1228,14 @@ function spip_versions_mysql() {
 	return function_exists('mysql_query');
 }
 
-// Tester si mysql ne veut pas du nom de la base dans les requetes
 
-// http://doc.spip.org/@test_rappel_nom_base_mysql
 /**
- * @param $server_db
+ * Tester si mysql ne veut pas du nom de la base dans les requêtes
+ * 
+ * @param string $server_db
  * @return string
+ *     - chaîne vide si nom de la base utile
+ *     - chaîne : code compilé pour le faire désactiver par SPIP sinon
  */
 function test_rappel_nom_base_mysql($server_db)
 {

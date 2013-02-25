@@ -637,6 +637,8 @@ function sql_drop_view($table, $exist='', $serveur='', $option=true)
  * Retourne une ressource de la liste des tables de la base de données 
  *
  * @api
+ * @see sql_alltable()
+ * 
  * @param string $spip
  *     Filtre sur tables retournées
  *     - NULL : retourne les tables SPIP uniquement (tables préfixées avec le préfixe de la connexion)
