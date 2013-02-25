@@ -816,8 +816,25 @@ function quote_amp($u) {
 		"&amp;",$u);
 }
 
-// Production d'une balise Script valide
-// http://doc.spip.org/@http_script
+
+/**
+ * Produit une balise `<script>` valide
+ *
+ * @example
+ *     ```
+ *     echo http_script('alert("ok");');
+ *     echo http_script('','js/jquery.js');
+ *     ```
+ * 
+ * @param string $script
+ *     Code source du script
+ * @param string $src
+ *     Permet de faire appel à un fichier javascript distant
+ * @param string $noscript
+ *     Contenu de la balise  `<noscript>`
+ * @return string
+ *     Balise HTML `<script>` et son contenu
+**/
 function http_script($script, $src='', $noscript='') {
 	static $done = array();
 
