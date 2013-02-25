@@ -256,7 +256,8 @@ function sql_get_select($select = array(), $from = array(), $where = array(),
  * @param string $serveur
  * 		Le serveur sollicite (pour retrouver la connexion)
  * @param bool|string $option
- * 		Peut avoir 3 valeurs : 
+ * 		Peut avoir 3 valeurs :
+ * 
  * 		- false -> ne pas l'executer mais la retourner, 
  * 		- continue -> ne pas echouer en cas de serveur sql indisponible,
  * 		- true -> executer la requete.
@@ -433,17 +434,18 @@ function sql_listdbs($serveur='', $option=true) {
  *
  * @api
  * @param string $nom
- * 		Nom de la base a utiliser
+ *     Nom de la base a utiliser
  * @param string $serveur
- * 		Nom du connecteur
+ *     Nom du connecteur
  * @param bool|string $option
- * 		Peut avoir 2 valeurs : 
- * 		- true -> executer la requete
- * 		- continue -> ne pas echouer en cas de serveur sql indisponible
+ *     Peut avoir 2 valeurs :
+ * 
+ *     - true -> executer la requete
+ *     - continue -> ne pas echouer en cas de serveur sql indisponible
  * 
  * @return bool|string
- * 		True ou nom de la base en cas de success.
- * 		False en cas d'erreur.
+ *     - True ou nom de la base en cas de success.
+ *     - False en cas d'erreur.
 **/
 function sql_selectdb($nom, $serveur='', $option=true)
 {
@@ -496,7 +498,37 @@ function sql_insertq($table, $couples=array(), $desc=array(), $serveur='', $opti
 	return $r;
 }
 
-// http://doc.spip.org/@sql_insertq_multi
+/**
+ * Insère plusieurs lignes d'un coup dans une table
+ *
+ * Insère en une opération plusieurs éléments au schéma identique
+ * dans une table de la base de données. Lorsque les portages le permettent,
+ * ils utilisent une seule requête SQL pour réaliser l’ajout.
+ *
+ * @api
+ * @see sql_insertq()
+ * 
+ * @param string $table
+ *     Nom de la table SQL
+ * @param array $couples
+ *     Tableau de tableaux associatifs (nom => valeur)
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
+ * 
+ * @return bool|string
+ *     - True en cas de succès,
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function sql_insertq_multi($table, $couples=array(), $desc=array(), $serveur='', $option=true)
 {
 	$f = sql_serveur('insertq_multi', $serveur,  $option==='continue' OR $option===false);
@@ -680,11 +712,30 @@ function sql_create_base($nom, $serveur='', $option=true)
 	return $r;
 }
 
-// Fonction pour creer une vue 
-// nom : nom de la vue,
-// select_query : une requete select, idealement cree avec $req = sql_select()
-// (en mettant $option du sql_select a false pour recuperer la requete)
-// http://doc.spip.org/@sql_create_view
+
+/**
+ * Crée une vue SQL
+ *
+ * @api
+ * @see sql_get_select() Pour obtenir le texte de la requête SELECT pour créer la vue.
+ * 
+ * @param string $nom
+ *     Nom de la vue
+ * @param string $select_query
+ *     Une requête SELECT, idéalement crée avec `sql_get_select(...)`
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
+ * @return bool|string
+ *     - true si succès,
+ *     - texte de la requête si demandé
+ *     - false en cas d'échec.
+**/
 function sql_create_view($nom, $select_query, $serveur='', $option=true) {
 	$f = sql_serveur('create_view', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
