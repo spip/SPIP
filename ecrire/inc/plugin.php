@@ -757,6 +757,14 @@ function plugin_est_installe($plug_path){
 }
 
 
+/**
+ * Parcours les plugins activés et appelle leurs fonctions d'installation si elles existent.
+ *
+ * Elle ajoute ensuite les plugins qui ont été installés dans la valeur "plugin_installes"
+ * de la table meta. Cette meta ne contient que les noms des plugins qui ont une version_base.
+ *
+ * @uses plugins_installer_dist()
+**/
 function plugin_installes_meta()
 {
 	$installer_plugins = charger_fonction('installer', 'plugins');

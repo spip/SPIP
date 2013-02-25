@@ -238,12 +238,21 @@ function sql_get_select($select = array(), $from = array(), $where = array(),
 
 
 /**
- * Retourne le nombre de lignes d'une selection
+ * Retourne le nombre de lignes d'une sélection
  *
- * Ramene seulement et tout de suite le nombre de lignes
- * Pas de colonne ni de tri a donner donc.
+ * Ramène seulement et tout de suite le nombre de lignes
+ * Pas de colonne ni de tri à donner donc.
  *
  * @api
+ * @see sql_count()
+ * @example
+ *     ```
+ *     if (sql_countsel('spip_mots_liens', array(
+ *         "objet=".sql_quote('article'),
+ *         "id_article=".sql_quote($id_article)) > 0) {
+ *             // ...
+ *     }
+ *     ```
  * 
  * @param array|string $from
  * 		Tables a consulter (From)
@@ -263,8 +272,8 @@ function sql_get_select($select = array(), $from = array(), $where = array(),
  * 		- true -> executer la requete.
  *
  * @return int|bool
- * 		Nombre de lignes de resultat
- * 		ou false en cas d'erreur
+ *     - Nombre de lignes de resultat
+ *     - ou false en cas d'erreur
  *
 **/
 function sql_countsel($from = array(), $where = array(),
@@ -278,13 +287,15 @@ function sql_countsel($from = array(), $where = array(),
 }
 
 /**
- * Modifie la structure de la base de donnees
+ * Modifie la structure de la base de données
  *
- * Effectue une operation ALTER.
+ * Effectue une opération ALTER.
  *
  * @example
- * 		<code>sql_alter('DROP COLUMN supprimer');</code>
- *
+ *     ```
+ *     sql_alter('DROP COLUMN supprimer');
+ *     ```
+ * 
  * @api
  * @param string $q
  * 		La requete a executer (sans la preceder de 'ALTER ')
@@ -456,7 +467,27 @@ function sql_selectdb($nom, $serveur='', $option=true)
 	return $r;
 }
 
-// http://doc.spip.org/@sql_count
+/**
+ * Retourne le nombre de lignes d’une ressource de sélection obtenue
+ * avec `sql_select()`
+ *
+ * @api
+ * @see sql_select()
+ * @see sql_countsel()
+ *
+ * @param Ressource $res
+ *     Ressource SQL
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 2 valeurs :
+ * 
+ *     - true -> executer la requete
+ *     - continue -> ne pas echouer en cas de serveur sql indisponible
+ * @return bool|string
+ *     - int Nombre de lignes,
+ *     - false en cas d'erreur.
+**/
 function sql_count($res, $serveur='', $option=true)
 {
 	$f = sql_serveur('count', $serveur,  $option==='continue' OR $option===false);
@@ -474,11 +505,40 @@ function sql_free($res, $serveur='', $option=true)
 	return $f($res);
 }
 
-// Cette fonction ne garantit pas une portabilite totale
-//  ===> lui preferer la suivante.
-// Elle est fournie pour permettre l'actualisation de vieux codes 
-// par un Sed brutal qui peut donner des resultats provisoirement acceptables
-// http://doc.spip.org/@sql_insert
+
+/**
+ * Insère une ligne dans une table 
+ *
+ * @see sql_insertq()
+ * @see sql_quote()
+ * @note
+ *   Cette fonction ne garantit pas une portabilité totale,
+ *   et n'est là que pour faciliter des migrations de vieux scripts.
+ *   Préférer sql_insertq.
+ * 
+ * @param string $table
+ *     Nom de la table SQL
+ * @param string $noms
+ *     Liste des colonnes impactées,
+ * @param string $valeurs
+ *     Liste des valeurs,
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
+ * 
+ * @return bool|string
+ *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='', $option=true)
 {
 	$f = sql_serveur('insert', $serveur,  $option==='continue' OR $option===false);
@@ -488,7 +548,37 @@ function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='', $option
 	return $r;
 }
 
-// http://doc.spip.org/@sql_insertq
+/**
+ * Insère une ligne dans une table
+ *
+ * Protègera chaque valeur comme sql_quote.
+ * 
+ * @api
+ * @see sql_insert()
+ * @see sql_insertq_multi()
+ * @see sql_quote()
+ * 
+ * @param string $table
+ *     Nom de la table SQL
+ * @param array $couples
+ *     Tableau (nom => valeur)
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
+ * 
+ * @return bool|string
+ *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function sql_insertq($table, $couples=array(), $desc=array(), $serveur='', $option=true)
 {
 	$f = sql_serveur('insertq', $serveur,  $option==='continue' OR $option===false);
@@ -561,7 +651,33 @@ function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='', $optio
 	return $r;
 }
 
-// http://doc.spip.org/@sql_delete
+/**
+ * Supprime des enregistrements d'une table
+ *
+ * @example
+ *     ```
+ *     sql_delete('spip_articles', 'id_article='.sql_quote($id_article));
+ *     ```
+ *
+ * @api
+ * @param string $table
+ *     Nom de la table SQL
+ * @param string|array $where
+ *     Conditions à vérifier
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
+ * 
+ * @return bool|string
+ *     - int : nombre de suppressions réalisées,
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function sql_delete($table, $where='', $serveur='', $option=true)
 {
 	$f = sql_serveur('delete', $serveur,  $option==='continue' OR $option===false);
@@ -571,7 +687,38 @@ function sql_delete($table, $where='', $serveur='', $option=true)
 	return $r;
 }
 
-// http://doc.spip.org/@sql_replace
+/**
+ * Insère où met à jour une entrée d’une table SQL
+ *
+ * La clé ou les cles primaires doivent être présentes dans les données insérés.
+ * La fonction effectue une protection automatique des données.
+ * 
+ * Préférez sql_insertq() et sql_updateq().
+ * 
+ * @see sql_insertq()
+ * @see sql_updateq()
+ * 
+ * @param string $table
+ *     Nom de la table SQL
+ * @param array $couples
+ *     Couples colonne / valeur à modifier,
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
+ * 
+ * @return bool|string
+ *     - true si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function sql_replace($table, $couples, $desc=array(), $serveur='', $option=true)
 {
 	$f = sql_serveur('replace', $serveur,  $option==='continue' OR $option===false);
@@ -694,7 +841,34 @@ function sql_alltable($spip=NULL, $serveur='', $option=true)
 	return $r;
 }
 
-// http://doc.spip.org/@sql_showtable
+/**
+ * Retourne la liste (et description) des colonnes et key d’une table SQL
+ *
+ * @note
+ *     Dans la plupart des situations, il vaut mieux utiliser directement
+ *     la fonction trouver_table() qui possède un cache.
+ * 
+ * @api
+ * @see base_trouver_table_dist()
+ * 
+ * @param string $table
+ *     Nom de la table SQL
+ * @param bool $table_spip
+ *     true pour remplacer automatiquement « spip » par le vrai préfixe de table
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs : 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - 'continue' : ne pas échouer en cas de serveur SQL indisponible,
+ *     - true : exécuter la requete.
+ * @return bool|array
+ *     - false en cas d'echec
+ *     - sinon array : Tableau avec
+ *       - 'field' => array(colonne => description)
+ *       - 'key' => array(type => key)
+ *       - 'join' => array() // jointures, si déclarées.
+**/
 function sql_showtable($table, $table_spip = false, $serveur='', $option=true)
 {
 	$f = sql_serveur('showtable', $serveur,  $option==='continue' OR $option===false);
@@ -847,20 +1021,21 @@ function sql_query($ins, $serveur='', $option=true) {
 }
 
 /**
- * Retourne la premiere ligne d'une selection
+ * Retourne la première ligne d'une sélection
  * 
- * Retourne la premiere ligne de resultat d'une selection
- * comme si l'on appelait successivement sql_select() puis sql_fetch()
+ * Retourne la première ligne de résultat d'une sélection
+ * comme si l'on appelait successivement `sql_select()` puis `sql_fetch()`
  * 
  * @example
- * 		<code>
- * 		$art = sql_fetsel(array('id_rubrique','id_secteur'), 'spip_articles', 'id_article='.sql_quote($id_article));
- *		$id_rubrique = $art['id_rubrique'];
- * 		</code>
+ *     ```
+ *     $art = sql_fetsel(array('id_rubrique','id_secteur'), 'spip_articles', 'id_article='.sql_quote($id_article));
+ *     $id_rubrique = $art['id_rubrique'];
+ *     ```
  * 
  * @api
  * @uses sql_select()
  * @uses sql_fetch()
+ * @see sql_getfetsel()
  * 
  * @param array|string $select
  * 		Liste des champs a recuperer (Select)
@@ -885,10 +1060,8 @@ function sql_query($ins, $serveur='', $option=true) {
  * 		- false -> ne pas l'executer mais la retourner.
  * 
  * @return array
- * 		Tableau de la premiere ligne de resultat de la selection
- * 		{@example
- * 			<code>array('id_rubrique' => 1, 'id_secteur' => 2)</code>
- * 		}
+ *     Tableau de la premiere ligne de resultat de la selection tel que
+ *     `array('id_rubrique' => 1, 'id_secteur' => 2)`
  *
 **/
 function sql_fetsel($select = array(), $from = array(), $where = array(),

@@ -75,7 +75,43 @@ function image_select($img,$width_min=0, $height_min=0, $width_max=10000, $heigh
 }
 
 
-// http://doc.spip.org/@image_passe_partout
+
+/**
+ * Réduit les images à une taille maximale (chevauchant un rectangle)
+ *
+ * L'image possède un côté réduit dans les dimensions indiquées et
+ * l'autre côté (hauteur ou largeur) de l'image peut être plus grand
+ * que les dimensions du rectangle.
+ * 
+ * Alors que image_reduire produit la plus petite image tenant dans un
+ * rectangle, image_passe_partout produit la plus grande image qui
+ * remplit ce rectangle.
+ *
+ * @example
+ *     ```
+ *     [(#FICHIER
+ *       |image_passe_partout{70,70}
+ *       |image_recadre{70,70,center})]
+ *     ```
+ * @link http://www.spip.net/4562
+ * @see image_reduire()
+ *
+ * @param string $img
+ *     Chemin de l'image ou texte
+ * @param int $taille_x
+ *     - Largeur maximale en pixels désirée
+ *     - -1 prend la taille de réduction des vignettes par défaut
+ *     - 0 la taille s'adapte à la largeur
+ * @param int $taille_y
+ *     - Hauteur maximale en pixels désirée
+ *     - -1 pour prendre pareil que la largeur
+ *     - 0 la taille s'adapte à la hauteur
+ * @param bool $force
+ * @param bool $cherche_image
+ * @param string $process
+ * @return string
+ *     Code HTML de l'image ou du texte.
+**/
 function image_passe_partout($img,$taille_x = -1, $taille_y = -1,$force = false,$cherche_image=false,$process='AUTO'){
 	if (!$img) return '';
 	list ($hauteur,$largeur) = taille_image($img);
@@ -96,7 +132,39 @@ function image_passe_partout($img,$taille_x = -1, $taille_y = -1,$force = false,
 	return process_image_reduire($fonction,$img,$destWidth,$destHeight,$force,$cherche_image,$process);
 }
 
-// http://doc.spip.org/@image_reduire
+/**
+ * Réduit les images à une taille maximale (inscrite dans un rectangle)
+ * 
+ * L'image possède un côté dans les dimensions indiquées et
+ * l'autre côté (hauteur ou largeur) de l'image peut être plus petit
+ * que les dimensions du rectangle.
+ *
+ * Peut être utilisé pour réduire toutes les images d'un texte.
+ *
+ * @example
+ *     ```
+ *     [(#LOGO_ARTICLE|image_reduire{130})]
+ *     [(#TEXTE|image_reduire{600,0})]
+ *     ```
+ * @see image_reduire_par()
+ * @see image_passe_partout()
+ *
+ * @param string $img
+ *     Chemin de l'image ou texte
+ * @param int $taille
+ *     - Largeur maximale en pixels désirée
+ *     - -1 prend la taille de réduction des vignettes par défaut
+ *     - 0 la taille s'adapte à la largeur
+ * @param int $taille_y
+ *     - Hauteur maximale en pixels désirée
+ *     - -1 pour prendre pareil que la largeur
+ *     - 0 la taille s'adapte à la hauteur
+ * @param bool $force
+ * @param bool $cherche_image
+ * @param string $process
+ * @return string
+ *     Code HTML de l'image ou du texte.
+**/
 function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherche_image=false, $process='AUTO') {
 	// Determiner la taille x,y maxi
 	// prendre le reglage de previsu par defaut
@@ -116,8 +184,20 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 	return process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_image,$process);
 }
 
-// Reduire une image d'un certain facteur
-// http://doc.spip.org/@image_reduire_par
+
+/**
+ * Réduit les images d'un certain facteur
+ * 
+ * @see image_reduire()
+ *
+ * @param string $img
+ *     Chemin de l'image ou texte
+ * @param int $val
+ *     Facteur de réduction
+ * @param bool $force
+ * @return string
+ *     Code HTML de l'image ou du texte.
+**/
 function image_reduire_par ($img, $val=1, $force=false) {
 	list ($hauteur,$largeur) = taille_image($img);
 

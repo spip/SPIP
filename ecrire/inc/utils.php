@@ -1612,7 +1612,21 @@ function generer_url_prive($script, $args="", $no_entities=false) {
 // 1) on peut ainsi memoriser le signet comme si c'etait un GET
 // 2) ca suit http://en.wikipedia.org/wiki/Representational_State_Transfer
 
-// http://doc.spip.org/@generer_form_ecrire
+/**
+ * Retourne un formulaire (POST par défaut) vers un script exec
+ * de l’interface privée
+ *
+ * @param string $script
+ *     Nom de la page exec
+ * @param string $corps
+ *     Contenu du formulaire
+ * @param string $atts
+ *     Si présent, remplace les arguments par défaut (method=post) par ceux indiqués
+ * @param string $submit
+ *     Si indiqué, un bouton de soumission est créé avec texte sa valeur.
+ * @return string
+ *     Code HTML du formulaire
+**/
 function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 	global $spip_lang_right;
 
@@ -1632,7 +1646,7 @@ function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 }
 
 /**
- * Generer un formulaire pour lancer une action vers $script
+ * Générer un formulaire pour lancer une action vers $script
  *
  * Attention, JS/Ajax n'aime pas le melange de param GET/POST
  * On n'applique pas la recommandation ci-dessus pour les scripts publics
