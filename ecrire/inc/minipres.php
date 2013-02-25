@@ -10,23 +10,28 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Présentation des pages d'installation et d'erreurs
+ *
+ * @package SPIP\Core\Minipres 
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/headers');
 include_spip('inc/texte'); //inclue inc/lang et inc/filtres
 
-//
-// Presentation des pages d'installation et d'erreurs
-//
 
 /**
- * http://doc.spip.org/@install_debut_html
- *
+ * Retourne le début d'une page HTML minimale (de type installation ou erreur)
+ * 
  * @param string $titre
+ *    Titre. `AUTO`, indique que l'on est dans le processus d'installation de SPIP
  * @param string $onLoad
+ *    Attributs pour la balise `<body>`
  * @param bool $all_inline
- *   inliner les css et js dans la page (limiter le nombre de hits)
+ *    Inliner les css et js dans la page (limiter le nombre de hits)
  * @return string
+ *    Code HTML
  */
 function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) {
 	global $spip_lang_right,$spip_lang_left;
@@ -84,24 +89,47 @@ function install_debut_html($titre = 'AUTO', $onLoad = '', $all_inline = false) 
 	<div>\n";
 }
 
-// http://doc.spip.org/@install_fin_html
+/**
+ * Retourne la fin d'une page HTML minimale (de type installation ou erreur)
+ *
+ * @return string Code HTML
+ */
 function install_fin_html() {
 	return "\n\t</div>\n\t</div>\n</body>\n</html>";
 }
 
 
 /**
- * http://doc.spip.org/@minipres
+ * Retourne une page HTML contenant, dans une présentation minimale,
+ * le contenu transmis dans `$titre` et `$corps`.
+ * 
+ * Appelée pour afficher un message d’erreur (l’utilisateur n’a pas
+ * accès à cette page par exemple).
  *
+ * Lorsqu’aucun argument n’est transmis, un header 403 est renvoyé,
+ * ainsi qu’un message indiquant une interdiction d’accès.
+ *
+ * @example
+ *   ```
+ *   include_spip('inc/minipres');
+ *   if (!autoriser('configurer')) {
+ *      echo minipres();
+ *      exit;
+ *   }
+ *   ```
+ * @uses install_debut_html()
+ * @uses install_fin_html()
+ * 
  * @param string $titre
- *   titre de la page
+ *   Titre de la page
  * @param string $corps
- *   corps de la page
+ *   Corps de la page
  * @param string $onload
- *   attribut onload de <body>
+ *   Attribut onload de `<body>`
  * @param bool $all_inline
- *   inliner les css et js dans la page (limiter le nombre de hits)
+ *   Inliner les css et js dans la page (limiter le nombre de hits)
  * @return string
+ *   HTML de la page
  */
 function minipres($titre='', $corps="", $onload='', $all_inline = false)
 {

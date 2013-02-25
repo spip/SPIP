@@ -285,7 +285,8 @@ function echappe_retour_modeles($letexte, $interdire_scripts=false)
  *     Taille de la coupe
  * @param string $suite
  *     Points de suite ajoutés.
- * @return 
+ * @return string
+ *     Texte coupé
 **/
 function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	if (!($length=strlen($texte)) OR $taille <= 0) return '';

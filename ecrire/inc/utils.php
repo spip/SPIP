@@ -2025,7 +2025,9 @@ function spip_session($force = false) {
 
 
 /**
- * Aide, aussi depuis l'espace prive a present.
+ * Retourne un lien vers une aide
+ * 
+ * Aide, aussi depuis l'espace privé à présent.
  * Surchargeable mais pas d'erreur fatale si indisponible.
  * 
  * @param string $aide
@@ -2035,14 +2037,16 @@ function spip_session($force = false) {
  * 		ou une url distante [directement sur spip.net]
  * @return Lien sur une icone d'aide
 **/
-// http://doc.spip.org/@aide
 function aide($aide='', $distante = false) {
 		$aider = charger_fonction('aider', 'inc', true);
 	return $aider ?  $aider($aide, '', array(), $distante) : '';
 }
 
-// normalement il faudrait creer exec/info.php, mais pour mettre juste ca:
-// http://doc.spip.org/@exec_info_dist
+/**
+ * Page `exec=info` : retourne le contenu de la fonction php `phpinfo()`
+ * 
+ * Si l’utiliseur est un administrateur.
+ */
 function exec_info_dist() {
 	global $connect_statut;
 	if ($connect_statut == '0minirezo')
@@ -2058,14 +2062,14 @@ function exec_info_dist() {
  * administrateur authentifié lors d'une visite de la page en erreur 
  *
  * @param bool|string|array $message
- * 		- Message d'erreur (string|array)
- * 		- false pour retourner le texte des messages d'erreurs
- * 		- vide pour afficher les messages d'erreurs
+ *     - Message d'erreur (string|array)
+ *     - false pour retourner le texte des messages d'erreurs
+ *     - vide pour afficher les messages d'erreurs
  * @param string|array|object $lieu
- * 		Lieu d'origine de l'erreur
+ *     Lieu d'origine de l'erreur
  * @return null|string
- * 		Rien dans la plupart des cas
- * 		- string si $message à false.
+ *     - Rien dans la plupart des cas
+ *     - string si $message à false.
 **/
 function erreur_squelette($message='', $lieu='') {
 	$debusquer = charger_fonction('debusquer', 'public');
