@@ -18,10 +18,23 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// envoyer le navigateur sur une nouvelle adresse
-// en evitant les attaques par la redirection (souvent indique par 1 $_GET)
 
-// http://doc.spip.org/@redirige_par_entete
+/**
+ * Envoyer le navigateur sur une nouvelle adresse
+ *
+ * Le tout en évitant les attaques par la redirection (souvent indique par un `$_GET`)
+ *
+ * @example
+ *     ```
+ *     $redirect = parametre_url(urldecode(_request('redirect')),'id_article=' . $id_article);
+ *     include_spip('inc/headers');
+ *     redirige_par_entete($redirect); 
+ *     ```
+ *  
+ * @param string $url URL de redirection
+ * @param string $equiv ?
+ * @param int $status Code de redirection (301 ou 302)
+**/
 function redirige_par_entete($url, $equiv='', $status = 302) {
 	if (!in_array($status,array(301,302)))
 		$status = 302;

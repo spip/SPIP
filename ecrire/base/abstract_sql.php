@@ -600,6 +600,8 @@ function sql_replace_multi($table, $tab_couples, $desc=array(), $serveur='', $op
  *     Nom de la table
  * @param string $exist
  *     true pour ajouter un test sur l'existence de la table, false sinon
+ * @param string $serveur
+ *     Nom du connecteur
  * @param bool|string $option
  *     Peut avoir 3 valeurs :
  * 

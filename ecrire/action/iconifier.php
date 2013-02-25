@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * L'entree par l'action ne sert plus qu'a une retro compat eventuelle
- * le #FORMULAIRE_EDITER_LOGO utilise action_spip_image_ajouter_dist
+ * le `#FORMULAIRE_EDITER_LOGO` utilise action_spip_image_ajouter_dist
  */
 function action_iconifier_dist()
 {
@@ -48,9 +48,26 @@ function action_spip_image_effacer_dist($arg) {
 // Ajouter un logo
 //
 
-// $source = $_FILES[0]
-// $dest = arton12.xxx
-// http://doc.spip.org/@action_spip_image_ajouter_dist
+
+/**
+ * Permet d'ajouter un logo sur un objet, dont on passe le nom 
+ * 
+ * @example
+ *     ```
+ *     $logo = &$_FILES['logo_propose'];
+ *     include_spip('action/iconifier');
+ *     $spip_image_ajouter = charger_fonction('spip_image_ajouter','action');
+ *     $spip_image_ajouter('arton'.$id_article,true,$logo);
+ *     ```
+ * 
+ * @param string $arg
+ *     Nom de l'image pour l'objet tel que `arton4`
+ * @param bool $sousaction2
+ *     - false pour prendre automatiquement le logo dans `$_FILES`
+ *     - true pour le passer en 3e paramètre
+ * @param string $source
+ *     Chemin du logo uploadé sur le serveur en attente d'utilisation
+**/
 function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 	global $formats_logos;
 

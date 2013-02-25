@@ -87,15 +87,46 @@ function include_once_check($file){
 	return false;
 }
 
-//
-// la fonction cherchant un fichier PHP dans le SPIP_PATH
-//
-// http://doc.spip.org/@include_spip
+
+/**
+ * Inclut un fichier PHP (en le cherchant dans les chemins)
+ * 
+ * @api
+ * @uses find_in_path()
+ * @example
+ *     ```
+ *     include_spip('inc/texte');
+ *     ```
+ * 
+ * @param string $f
+ *     Nom du fichier (sans l'extension)
+ * @param bool $include
+ *     - true pour inclure le fichier,
+ *     - false ne fait que le chercher
+ * @return string|bool
+ *     - false : fichier introuvable
+ *     - string : chemin du fichier trouvé
+**/
 function include_spip($f, $include = true) {
 	return find_in_path($f . '.php', '', $include);
 }
 
-
+/**
+ * Requiert un fichier PHP (en le cherchant dans les chemins)
+ * 
+ * @uses find_in_path()
+ * @see include_spip()
+ * @example
+ *     ```
+ *     require_spip('inc/texte');
+ *     ```
+ * 
+ * @param string $f
+ *     Nom du fichier (sans l'extension)
+ * @return string|bool
+ *     - false : fichier introuvable
+ *     - string : chemin du fichier trouvé
+**/
 function require_spip($f) {
 	return find_in_path($f . '.php', '', 'required');
 }
@@ -864,13 +895,39 @@ function texte_script($texte) {
 	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
 }
 
-// Chaque appel a cette fonction ajoute un repertoire en tete du chemin courant (path)
-// si un repertoire lui est passe en parametre
-// retourne le chemin courant sinon, sous forme de array.
-// Si l'argument est de la forme dir1:dir2:dir3, ces 3 chemins sont places en tete
-// du path, dans cet ordre.
-// Exception: si un $dossier_squelette est defini, il reste en tete, pour raison historique
-// http://doc.spip.org/@_chemin
+
+/**
+ * Gestion des chemins (ou path) de recherche de fichiers par SPIP
+ *
+ * Empile de nouveaux chemins (à la suite de ceux déjà présent, mais avant
+ * le répertoire squelettes ou les dossiers squelettes), si un reéertoire
+ * (ou liste de répertoires séparés par `:`) lui est passé en paramètre.
+ *
+ * Ainsi, si l'argument est de la forme `dir1:dir2:dir3`, ces 3 chemins sont placés
+ * en tete du path, dans cet ordre (hormis squelettes & la globale
+ * $dossier_squelette si definie qui resteront devant)
+ * 
+ * Retourne dans tous les cas la liste des chemins.
+ *
+ * @note
+ *     Cette fonction est appelée à plusieurs endroits et crée une liste
+ *     de chemins finale à peu près de la sorte :
+ * 
+ *     - dossiers squelettes (si globale précisée)
+ *     - squelettes/
+ *     - plugins (en fonction de leurs dépendances) : ceux qui dépendent
+ *       d'un plugin sont devant eux (ils peuvent surcharger leurs fichiers)
+ *     - racine du site
+ *     - squelettes-dist/
+ *     - prive/
+ *     - ecrire/
+ * 
+ * @param string $dir_path
+ *     - Répertoire(s) à empiler au path
+ *     - '' provoque un recalcul des chemins.
+ * @return array
+ *     Liste des chemins, par ordre de priorité.
+**/
 function _chemin($dir_path=NULL){
 	static $path_base = NULL;
 	static $path_full = NULL;
@@ -924,7 +981,15 @@ function _chemin($dir_path=NULL){
 	return $path_full;
 }
 
-// http://doc.spip.org/@creer_chemin
+/**
+ * Retourne la liste des chemins connus de SPIP, dans l'ordre de priorité
+ *
+ * Recalcule la liste si le nom ou liste de dossier squelettes a changé.
+ *
+ * @uses _chemin()
+ * 
+ * @return array Liste de chemins
+**/
 function creer_chemin() {
 	$path_a = _chemin();
 	static $c = '';
@@ -1021,7 +1086,33 @@ function chemin_image($icone){
 $GLOBALS['path_sig'] = '';
 $GLOBALS['path_files'] = null;
 
-// http://doc.spip.org/@find_in_path
+/**
+ * Recherche un fichier dans les chemins de SPIP (squelettes, plugins, core)
+ *
+ * Retournera le premier fichier trouvé (ayant la plus haute priorité donc),
+ * suivant l'ordre des chemins connus de SPIP. 
+ * 
+ * @api
+ * @see charger_fonctions()
+ * @uses creer_chemin() Pour la liste des chemins.
+ * @example
+ *     ```
+ *     $f = find_in_path('css/perso.css');
+ *     $f = find_in_path('perso.css', 'css');
+ *     ```
+ * 
+ * @param string $file
+ *     Fichier recherché
+ * @param string $dirname
+ *     Répertoire éventuel de recherche (est aussi extrait automatiquement de $file)
+ * @param bool|string $include
+ *     - false : ne fait rien de plus
+ *     - true : inclut le fichier (include_once)
+ *     - 'require' : idem, mais tue le script avec une erreur si le fichier n'est pas trouvé.
+ * @return string|bool
+ *     - string : chemin du fichier trouvé
+ *     - false : fichier introuvable
+**/
 function find_in_path ($file, $dirname='', $include=false) {
 	static $dirs=array();
 	static $inc = array(); # cf http://trac.rezo.net/trac/spip/changeset/14743
@@ -1396,8 +1487,6 @@ function url_de_($http,$host,$request,$prof=0){
  *     - false : l’URL sera complète et contiendra l’URL du site
  *     - true : l’URL sera relavive.
  *     - string : on transmet l'url à la fonction
- * @param string $action
- *     - Fichier d'exécution public (spip.php par défaut)
  * @return string URL
 **/
 function generer_url_ecrire($script='', $args="", $no_entities=false, $rel=false) {
