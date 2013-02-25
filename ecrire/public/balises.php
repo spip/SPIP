@@ -30,6 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Retourne le code PHP d'un argument de balise s'il est présent
  *
+ * @uses calculer_liste()
  * @example
  *     ```
  *     // Retourne le premier argument de la balise

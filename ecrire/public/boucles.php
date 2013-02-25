@@ -38,8 +38,10 @@ function boucle_DEFAUT_dist($id_boucle, &$boucles) {
 /**
  * Compile une boucle récursive
  * 
- * <BOUCLE(BOUCLE)>
+ * `<BOUCLE(BOUCLE)>`
  *
+ * @link http://www.spip.net/914
+ * 
  * @param string $id_boucle
  *     Identifiant de la boucle
  * @param array $boucles
@@ -55,9 +57,11 @@ function boucle_BOUCLE_dist($id_boucle, &$boucles) {
 /**
  * Compile une boucle HIERARCHIE
  * 
- * <BOUCLE(HIERARCHIE)>
+ * La boucle `<BOUCLE(HIERARCHIE)>` retourne la liste des RUBRIQUES
+ * qui mènent de la racine du site à la rubrique ou à l’article en cours.
  *
  * Cette boucle (aliasée sur la table RUBRIQUES)
+ * 
  * - recherche un id_rubrique dans les boucles parentes,
  * - extrait sa hiérarchie, en prenant ou non la rubrique en cours en fonction du critère {tout}
  * - crée une condition WHERE avec ces identifiants ansi qu'une clause ORDER
@@ -65,6 +69,8 @@ function boucle_BOUCLE_dist($id_boucle, &$boucles) {
  *
  * Le code compilé calculant la hierarchie est ajouté au tout début de la
  * fonction de boucle et quitte la boucle si aucune rubrique n'est trouvée.
+ *
+ * @link http://www.spip.net/913
  *
  * @param string $id_boucle
  *     Identifiant de la boucle
