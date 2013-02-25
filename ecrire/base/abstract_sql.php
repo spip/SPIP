@@ -298,18 +298,21 @@ function sql_countsel($from = array(), $where = array(),
  * 
  * @api
  * @param string $q
- * 		La requete a executer (sans la preceder de 'ALTER ')
+ *     La requête à exécuter (sans la préceder de 'ALTER ')
  * @param string $serveur
- * 		Le serveur sollicite (pour retrouver la connexion)
+ *     Le serveur sollicite (pour retrouver la connexion)
  * @param bool|string $option
- * 		Peut avoir 2 valeurs : 
- * 		- true -> executer la requete
- * 		- continue -> ne pas echouer en cas de serveur sql indisponible
+ *     Peut avoir 2 valeurs :
+ * 
+ *     - true : exécuter la requete
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return mixed
- * 		2 possibilites :
- * 		- Incertain en cas d'execution correcte de la requete
- * 		- false en cas de serveur indiponible ou d'erreur
- * 		Ce retour n'est pas pertinent pour savoir si l'operation est correctement realisee.
+ *     2 possibilités :
+ * 
+ *     - Incertain en cas d'exécution correcte de la requête
+ *     - false en cas de serveur indiponible ou d'erreur
+ * 
+ *     Ce retour n'est pas pertinent pour savoir si l'opération est correctement réalisée.
 **/
 function sql_alter($q, $serveur='', $option=true) {
 	$f = sql_serveur('alter', $serveur,  $option==='continue' OR $option===false);
@@ -557,6 +560,12 @@ function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='', $option
  * @see sql_insert()
  * @see sql_insertq_multi()
  * @see sql_quote()
+ * @see objet_inserer()
+ * @example
+ *     ```
+ *     $titre = _request('titre');
+ *     $id = sql_insertq('spip_rubriques', array('titre' => $titre));
+ *     ```
  * 
  * @param string $table
  *     Nom de la table SQL
@@ -641,7 +650,44 @@ function sql_update($table, $exp, $where='', $desc=array(), $serveur='', $option
 // Update est presque toujours appelee sur des constantes ou des dates
 // Cette fonction est donc plus utile que la precedente,d'autant qu'elle
 // permet de gerer les differences de representation des constantes.
-// http://doc.spip.org/@sql_updateq
+
+/**
+ * Met à jour du contenu d’une table SQL
+ *
+ * Le contenu transmis à la fonction est protégé automatiquement
+ * comme sql_quote().
+ *
+ * @api
+ * @see sql_quote()
+ * @see sql_update()
+ * @example
+ *     ```
+ *     sql_updateq('table', array('colonne' => $valeur), 'id_table=' . intval($id_table));
+ *     sql_updateq("spip_auteurs", array("statut" => '6forum'), "id_auteur=$id_auteur") ;
+ *     ```
+ *
+ * @param string $table
+ *     Nom de la table SQL
+ * @param array $exp
+ *     Couples (colonne => valeur)
+ * @param array|string $where
+ *     Conditions à vérifier
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
+ * @return bool|string
+ *     - true si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='', $option=true)
 {
 	$f = sql_serveur('updateq', $serveur,  $option==='continue' OR $option===false);
@@ -858,7 +904,8 @@ function sql_alltable($spip=NULL, $serveur='', $option=true)
  * @param string $serveur
  *     Nom du connecteur
  * @param bool|string $option
- *     Peut avoir 3 valeurs : 
+ *     Peut avoir 3 valeurs :
+ * 
  *     - false : ne pas l'exécuter mais la retourner, 
  *     - 'continue' : ne pas échouer en cas de serveur SQL indisponible,
  *     - true : exécuter la requete.
@@ -890,7 +937,47 @@ function sql_showtable($table, $table_spip = false, $serveur='', $option=true)
 	return $f;
 }
 
-// http://doc.spip.org/@sql_create
+/**
+ * Crée une table dans la base de données
+ *
+ * @api
+ * @example
+ *     ```
+ *     sql_create("spip_tables",
+ *       array(
+ *           "id_table" => "bigint(20) NOT NULL default '0'",
+ *           "colonne1"=> "varchar(3) NOT NULL default 'oui'",
+ *           "colonne2"=> "text NOT NULL default ''"
+ *        ),
+ *        array(
+ *           'PRIMARY KEY' => "id_table",
+ *           'KEY colonne1' => "colonne1"
+ *        )
+ *     );
+ *     ```
+ * 
+ * @param string $nom
+ *     Nom de la table
+ * @param array $champs
+ *     Couples (colonne => description)
+ * @param array $cles
+ *     Clé (nomdelaclef => champ)
+ * @param bool $autoinc
+ *     Si un champ est clef primaire est numérique alors la propriété
+ *     d’autoincrémentation sera ajoutée
+ * @param bool $temporary
+ *     true pour créer une table temporaire (au sens SQL)
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - 'continue' : ne pas échouer en cas de serveur SQL indisponible,
+ *     - true : exécuter la requete.
+ * @return bool
+ *     true si succès, false en cas d'echec
+**/
 function sql_create($nom, $champs, $cles=array(), $autoinc=false, $temporary=false, $serveur='', $option=true) {
 	$f = sql_serveur('create', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
