@@ -10,13 +10,36 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Présentation de l'interface privee (exec PHP), début du HTML
+ *
+ * @package SPIP\Core\Presentation
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-//
-// Presentation de l'interface privee, debut du HTML
-//
-
-// http://doc.spip.org/@inc_commencer_page_dist
+/**
+ * Débute une page HTML pour l'espace privé
+ *
+ * Préferer l'usage des squelettes prive/squelettes/.
+ *
+ * @uses init_entete()
+ * @uses init_body()
+ * @example
+ *     ```
+ *     $commencer_page = charger_fonction('commencer_page','inc');
+ *     echo $commencer_page($titre);
+ *     ```
+ * 
+ * @param string $titre Titre de la page
+ * @param string $rubrique ?
+ * @param string $sous_rubrique ?
+ * @param string $id_rubrique ?
+ * @param bool $menu ?
+ * @param bool $minipres ?
+ * @param bool $alertes ?
+ * @return string Code HTML
+**/
 function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "",$menu=true,$minipres=false, $alertes = true) {
 	global $connect_id_auteur;
 
