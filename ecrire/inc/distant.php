@@ -348,6 +348,79 @@ function recuperer_url($url, $options = array()){
 }
 
 /**
+ * Recuperer une URL si on l'a pas deja dans un cache fichier
+ * le delai de cache est fourni par l'option delai_cache
+ * les autres options et le format de retour sont identiques a recuperer_url_cache
+ * @uses recuperer_url()
+ *
+ * @param string $url
+ * @param array $options
+ *   int delai_cache : anciennete acceptable pour le contenu (en seconde)
+ * @return array|bool|mixed
+ */
+function recuperer_url_cache($url, $options = array()){
+	if (!defined('_DELAI_RECUPERER_URL_CACHE')) define('_DELAI_RECUPERER_URL_CACHE',3600);
+	$default = array(
+		'transcoder' => false,
+		'methode' => 'GET',
+		'taille_max' => null,
+		'datas' => '',
+		'boundary' => '',
+		'refuser_gz' => false,
+		'if_modified_since' => '',
+		'uri_referer' => '',
+		'file' => '',
+		'follow_location' => 10,
+		'version_http' => _INC_DISTANT_VERSION_HTTP,
+		'delai_cache' => _DELAI_RECUPERER_URL_CACHE,
+	);
+	$options = array_merge($default,$options);
+
+	// cas ou il n'est pas possible de cacher
+	if (!empty($options['data']) OR $options['methode']=='POST')
+		return recuperer_url($url,$options);
+
+	// ne pas tenter plusieurs fois la meme url en erreur (non cachee donc)
+	static $errors = array();
+	if (isset($errors[$url]))
+		return $errors[$url];
+
+	$sig = $options;
+	unset($sig['if_modified_since']);
+	unset($sig['delai_cache']);
+
+  $dir = sous_repertoire(_DIR_CACHE,'curl');
+  $cache = md5(serialize($sig))."-".substr(preg_replace(",\W+,","_",$url),80);
+  $sub = sous_repertoire($dir,substr($cache,0,2));
+	$cache = "$sub$cache";
+
+	$res = false;
+	$is_cached = file_exists($cache);
+  if ($is_cached
+    AND (filemtime($cache)>$_SERVER['REQUEST_TIME']-$options['delai_cache'])){
+		lire_fichier($cache,$res);
+		if ($res = unserialize($res)){
+			// mettre le last_modified et le status=304 ?
+		}
+  }
+	if (!$res){
+    $res = recuperer_url($url, $options);
+	  // ne pas recharger cette url non cachee dans le meme hit puisque non disponible
+	  if(!$res){
+		  if ($is_cached){
+			  // on a pas reussi a recuperer mais on avait un cache : l'utiliser
+			  lire_fichier($cache,$res);
+			  $res = unserialize($res);
+		  }
+		  return $errors[$url] = $res;
+	  }
+	  ecrire_fichier($cache,serialize($res));
+  }
+
+  return $res;
+}
+
+/**
  * Obosolete : Récupère une page sur le net et au besoin l'encode dans le charset local
  *
  * Gère les redirections de page (301) sur l'URL demandée (maximum 10 redirections)
