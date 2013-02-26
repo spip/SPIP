@@ -1,5 +1,5 @@
 [(#ENV{quoi}|in_array{#ENV{objets/selectionner}}|ou{#ENV{quoi}|=={racine}|et{#ENV{racine}|oui}})
-[(#SET{titre,[(#ENV{quoi}|=={racine}|?{<:info_racine_site:>,#INFO_TITRE{#ENV{quoi},#ENV{id_objet}}})]})]
+[(#SET{titre,[(#ENV{quoi}|=={racine}|?{[(#ENV{label_racine,<:info_racine_site:>})],#INFO_TITRE{#ENV{quoi},#ENV{id_objet}}})]})]
 <a
 	href="#"
 	class="choisir_ici"
