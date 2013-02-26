@@ -643,9 +643,10 @@ function inc_atom_to_array_dist($u) {
  * @return array|bool
  */
 function inc_glob_to_array_dist($u) {
-	return (array) glob($u,
+	$a = glob($u,
 		GLOB_MARK | GLOB_NOSORT | GLOB_BRACE
 	);
+	return $a ? $a : array();
 }
 
 /**
