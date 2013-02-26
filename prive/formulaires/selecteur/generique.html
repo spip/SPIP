@@ -36,7 +36,7 @@ afficher la selection dans un ul class item_picked
 	[(#GET{id_objet}|=={0}|oui)
 	<li class='rubrique'>
 		<input type="hidden" name="[(#ENV{name,id_item})][(#VAL{91}|chr)][(#VAL{93}|chr)]" value="racine|0" />
-		<:info_racine_site:>
+		[(#ENV{label_racine,<:info_racine_site:>})]
 		[(#ENV{select,''}|non)<a href='#' onclick='jQuery(this).item_unpick();return false;'><img src='[(#GET{img_unpick})]' alt='(<:lien_supprimer:>)' /></a>]<span class="sep">, </span>
 	</li>
 	]
