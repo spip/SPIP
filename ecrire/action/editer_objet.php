@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion générique de modification des objets éditoriaux
+ *
+ * @package SPIP\Core\Edition
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**

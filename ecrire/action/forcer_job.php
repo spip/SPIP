@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Action pour exécuter un job en attente, tout de suite
+ *
+ * @package SPIP\Core\Job
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
