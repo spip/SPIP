@@ -188,31 +188,40 @@ function objet_optimiser_liens($objets_source,$objets_lies){
 /**
  * Dupliquer tous les liens entrant ou sortants d'un objet
  * vers un autre (meme type d'objet, mais id different)
+ * si $types est fourni, seuls les liens depuis/vers les types listes seront copies
+ * si $exclure_types est fourni, les liens depuis/vers les types listes seront ignores
  *
  * @api
  * @param string $objet
  * @param int $id_source
  * @param int $id_cible
+ * @param array $types
+ * @param array $exclure_types
  * @return int
  *     Nombre de liens copiés
  */
-function objet_dupliquer_liens($objet,$id_source,$id_cible){
+function objet_dupliquer_liens($objet,$id_source,$id_cible,$types=null,$exclure_types=null){
 	include_spip('base/objets');
 	$tables = lister_tables_objets_sql();
 	$n = 0;
 	foreach($tables as $table_sql => $infos){
-		if (objet_associable($infos['type'])){
-			$liens = (($infos['type']==$objet)?
-					objet_trouver_liens(array($objet=>$id_source),'*')
-				:
-					objet_trouver_liens(array($infos['type']=>'*'),array($objet=>$id_source)));
-			foreach($liens as $lien){
-				$n++;
-				if ($infos['type']==$objet){
-					objet_associer(array($objet=>$id_cible),array($lien['objet']=>$lien[$lien['objet']]),$lien);
-				}
-				else {
-					objet_associer(array($infos['type']=>$lien[$infos['type']]),array($objet=>$id_cible),$lien);
+		if (
+			(is_null($types) OR in_array($infos['type'],$types))
+			AND (is_null($exclure_types) OR !in_array($infos['type'],$exclure_types))
+			){
+			if (objet_associable($infos['type'])){
+				$liens = (($infos['type']==$objet)?
+						objet_trouver_liens(array($objet=>$id_source),'*')
+					:
+						objet_trouver_liens(array($infos['type']=>'*'),array($objet=>$id_source)));
+				foreach($liens as $lien){
+					$n++;
+					if ($infos['type']==$objet){
+						objet_associer(array($objet=>$id_cible),array($lien['objet']=>$lien[$lien['objet']]),$lien);
+					}
+					else {
+						objet_associer(array($infos['type']=>$lien[$infos['type']]),array($objet=>$id_cible),$lien);
+					}
 				}
 			}
 		}
