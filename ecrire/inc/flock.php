@@ -301,11 +301,17 @@ function raler_fichier($fichier)
 	exit;
 }
 
-//
-// Retourne Vrai si son premier argument a ete cree il y a moins de N secondes
-//
 
-// http://doc.spip.org/@jeune_fichier
+/**
+ * Teste si un fichier est récent (moins de n secondes)
+ *
+ * @param string $fichier
+ *     Chemin du fichier
+ * @param int $n
+ *     Âge testé, en secondes
+ * @return bool
+ *     - true si récent, false sinon
+ */
 function jeune_fichier($fichier, $n)
 {
 	if (!file_exists($fichier)) return false;
