@@ -334,8 +334,12 @@ function supprimer_fichier($fichier, $lock=true) {
 	return @unlink($fichier);
 }
 
-// Supprimer brutalement, si le fichier existe
-// http://doc.spip.org/@spip_unlink
+/**
+ * Supprimer brutalement un fichier, s'il existe
+ *
+ * @param string $f
+ *     Chemin du fichier
+ */
 function spip_unlink($f) {
 	if (!is_dir($f))
 		supprimer_fichier($f,false);
