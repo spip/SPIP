@@ -10,19 +10,24 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des notifications
+ *
+ * @package SPIP\Core\Notifications
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
  * La fonction de notification de base, qui dispatche le travail
- * http://doc.spip.org/@inc_notifications_dist
  *
+ * @api
  * @param string $quoi
- *   evenement de notification
+ *   Événement de notification
  * @param int $id
- *   id de l'objet en relation avec l'evenement
+ *   id de l'objet en relation avec l'événement
  * @param array $options
- *   options de notification, interpretees en fonction de la notification
+ *   Options de notification, interprétées en fonction de la notification
  */
 function inc_notifications_dist($quoi, $id=0, $options=array()) {
 
@@ -39,10 +44,11 @@ function inc_notifications_dist($quoi, $id=0, $options=array()) {
 }
 
 /**
- * Nettoyage des emails avant un envoi
- * on passe par reference pour la perf
+ * Néttoyage des emails avant un envoi
  *
- * les emails liste par $eclure seront exclus de la liste
+ * On passe par référence pour la perf
+ *
+ * les emails liste par $exclure seront exclus de la liste
  *
  * @param array $emails
  * @param array $exclure
@@ -60,9 +66,10 @@ function notifications_nettoyer_emails(&$emails, $exclure = array()){
 
 /**
  * Envoyer un email de notification
- * Le sujet peut etre vide, dans ce cas il reprendra la premiere ligne non vide du texte
+ * 
+ * Le sujet peut être vide, dans ce cas il reprendra la première ligne non vide du texte
  *
- * @param array/string $emails
+ * @param array|string $emails
  * @param string $texte
  * @param string $sujet
  * @param string $from
@@ -137,10 +144,11 @@ function notifications_envoyer_mails($emails, $texte, $sujet="", $from = "", $he
 }
 
 /**
- * Notifier un evenement sur un objet
- * recupere le fond designe dans $modele,
- * prend la premiere ligne comme sujet
- * et l'interprete pour envoyer l'email
+ * Notifier un événement sur un objet
+ * 
+ * Récupère le fond désigné dans $modele,
+ * prend la première ligne comme sujet
+ * et l'interprète pour envoyer l'email
  *
  * @param int $id_objet
  * @param string $type_objet
@@ -154,10 +162,11 @@ function email_notification_objet($id_objet, $type_objet, $modele) {
 }
 
 /**
- * Notifier un evenement sur un article
- * recupere le fond designe dans $modele,
- * prend la premiere ligne comme sujet
- * et l'interprete pour envoyer l'email
+ * Notifier un événement sur un article
+ * 
+ * Récupère le fond désigné dans $modele,
+ * prend la première ligne comme sujet
+ * et l'interprète pour envoyer l'email
  *
  * @param int $id_article
  * @param string $modele
@@ -169,8 +178,12 @@ function email_notification_article($id_article, $modele) {
 	return recuperer_fond($modele,array('id_article'=>$id_article));
 }
 
-// Compatibilite, ne plus utiliser
-// http://doc.spip.org/@notifier_publication_article
+/**
+ * Notifier la publication d'un article
+ *
+ * @deprecated Ne plus utiliser
+ * @param int $id_article
+**/
 function notifier_publication_article($id_article) {
 	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
 		$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
@@ -179,8 +192,12 @@ function notifier_publication_article($id_article) {
 	}
 }
 
-// Compatibilite, ne plus utiliser
-// http://doc.spip.org/@notifier_proposition_article
+/**
+ * Notifier la proposition d'un article
+ *
+ * @deprecated Ne plus utiliser
+ * @param int $id_article
+**/
 function notifier_proposition_article($id_article) {
 	if ($GLOBALS['meta']["suivi_edito"] == "oui") {
 		$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
