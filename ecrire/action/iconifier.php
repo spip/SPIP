@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action iconifier pour ajouter des logos
+ *
+ * @package SPIP\Core\Logos
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
