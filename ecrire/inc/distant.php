@@ -544,7 +544,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 	// Echec avec HEAD, on tente avec GET
 	if (!$a AND !$max){
 		spip_log("tenter GET $source");
-		$a = recuperer_infos_distantes($source, _COPIE_LOCALE_MAX_SIZE);
+		$a = recuperer_infos_distantes($source, 1024*1024);
 	}
 
 	// S'il s'agit d'une image pas trop grosse ou d'un fichier html, on va aller
@@ -557,7 +557,9 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 		){
 			$a = recuperer_infos_distantes($source, 1024*1024);
 		}
-		else if ($a['body']){
+		else if ($a['body']
+		AND $a['taille'] < 1024*1024
+		) {
 			$a['fichier'] = _DIR_RACINE . nom_fichier_copie_locale($source, $a['extension']);
 			ecrire_fichier($a['fichier'], $a['body']);
 			$size_image = @getimagesize($a['fichier']);
