@@ -33,8 +33,10 @@ error_reporting(E_ALL ^ E_NOTICE);
 /** version PHP minimum exigee (cf. inc/utils) */
 define ('_PHP_MIN', '5.1.0');
 
-/** le nom du repertoire ecrire/ */
-if (!defined('_DIR_RESTREINT_ABS')) define('_DIR_RESTREINT_ABS', 'ecrire/');
+if (!defined('_DIR_RESTREINT_ABS')) {
+	/** le nom du repertoire ecrire/ */
+	define('_DIR_RESTREINT_ABS', 'ecrire/');
+}
 
 /** Chemin relatif pour aller dans ecrire
  *  vide si on est dans ecrire, 'ecrire/' sinon */
@@ -102,12 +104,15 @@ OR (@file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . '.php'))) {
 	define('_FILE_OPTIONS', $f);
 } else define('_FILE_OPTIONS', '');
 
+if (!defined('MODULES_IDIOMES')) {
 /**
  * Modules par défaut pour la traduction.
  * 
  * Constante utilisée par le compilateur et le décompilateur
- * sa valeur etant traitée par inc_traduire_dist */
-if (!defined('MODULES_IDIOMES')) define('MODULES_IDIOMES', 'public|spip|ecrire');
+ * sa valeur etant traitée par inc_traduire_dist
+ */
+	define('MODULES_IDIOMES', 'public|spip|ecrire');
+}
 
 // *** Fin des define *** //
 
@@ -347,14 +352,15 @@ require_once _ROOT_RESTREINT . 'base/connect_sql.php';
 
 if (_FILE_OPTIONS) {include_once _FILE_OPTIONS;}
 
-/** Compatibilite PHP 5.3 */
-if (!defined('E_DEPRECATED')) define('E_DEPRECATED', 8192);
-/** Masquer les warning */
-if (!defined('SPIP_ERREUR_REPORT')) define('SPIP_ERREUR_REPORT', E_ALL ^ E_NOTICE ^ E_DEPRECATED);
+if (!defined('E_DEPRECATED')) {
+	/** Compatibilite PHP 5.3 */
+	define('E_DEPRECATED', 8192);
+}
+if (!defined('SPIP_ERREUR_REPORT')) {
+	/** Masquer les warning */
+	define('SPIP_ERREUR_REPORT', E_ALL ^ E_NOTICE ^ E_DEPRECATED);
+}
 error_reporting(SPIP_ERREUR_REPORT);
-
-/** niveau maxi d'enregistrement des logs */
-defined('_LOG_FILTRE_GRAVITE') || define('_LOG_FILTRE_GRAVITE', _LOG_INFO_IMPORTANTE);
 
 // Initialisations critiques non surchargeables par les plugins
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
@@ -387,11 +393,19 @@ if (@is_readable(_CACHE_PLUGINS_OPT) AND @is_readable(_CACHE_PLUGINS_PATH)){
 	// de chargement des plugins et des pipelines
 	actualise_plugins_actifs();
 }
+
 // Initialisations non critiques surchargeables par les plugins
 spip_initialisation_suite();
 
-if (!defined('_OUTILS_DEVELOPPEURS'))
-	define('_OUTILS_DEVELOPPEURS',false);
+if (!defined('_LOG_FILTRE_GRAVITE')) {
+	/** niveau maxi d'enregistrement des logs */
+	define('_LOG_FILTRE_GRAVITE', _LOG_INFO_IMPORTANTE);
+}
+
+if (!defined('_OUTILS_DEVELOPPEURS')) {
+	/** Activer des outils pour développeurs ? */
+	define('_OUTILS_DEVELOPPEURS', false);
+}
 
 // charger systematiquement inc/autoriser dans l'espace restreint
 if (test_espace_prive())
