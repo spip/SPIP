@@ -464,7 +464,7 @@ function phraser_vieux(&$champ)
  * pour construire un critère (objet Critere) de boucle.
  * 
  * Un critère a une description plus fine que le paramètre original
- * car on en extrait certaines informations tel que la n'égation et l'opérateur
+ * car on en extrait certaines informations tel que la négation et l'opérateur
  * utilisé s'il y a.
  * 
  * La fonction en profite pour déclarer des modificateurs de boucles
@@ -489,35 +489,37 @@ function phraser_criteres($params, &$result) {
 		$var = $v[1][0];
 		$param = ($var->type != 'texte') ? "" : $var->texte;
 		if ((count($v) > 2) && (!preg_match(",[^A-Za-z]IN[^A-Za-z],i",$param)))
-		  {
-// plus d'un argument et pas le critere IN:
-// detecter comme on peut si c'est le critere implicite LIMIT debut, fin
-
+		{
+			// plus d'un argument et pas le critere IN:
+			// detecter comme on peut si c'est le critere implicite LIMIT debut, fin
 			if ($var->type != 'texte'
 			OR preg_match("/^(n|n-|(n-)?\d+)$/S", $param)) {
-			  $op = ',';
-			  $not = "";
+				$op = ',';
+				$not = "";
 			} else {
-			  // Le debut du premier argument est l'operateur
-			  preg_match("/^([!]?)([a-zA-Z][a-zA-Z0-9]*)[[:space:]]*(.*)$/ms", $param, $m);
-			  $op = $m[2];
-			  $not = $m[1];
-			  // virer le premier argument,
-			  // et mettre son reliquat eventuel
-			  // Recopier pour ne pas alterer le texte source
-			  // utile au debusqueur
-			  if ($m[3]) {
-			    // une maniere tres sale de supprimer les "' autour de {critere "xxx","yyy"}
-			    if (preg_match(',^(["\'])(.*)\1$,', $m[3])) {
-			    	$c = null;
-			    	eval ('$c = '.$m[3].';');
-			    	if (isset($c))
-			    		$m[3] = $c;
-			    }
-			    $texte = new Texte;
-			    $texte->texte = $m[3]; 
-			    $v[1][0]= $texte;
-			  } else array_shift($v[1]);
+				// Le debut du premier argument est l'operateur
+				preg_match("/^([!]?)([a-zA-Z][a-zA-Z0-9]*)[[:space:]]*(.*)$/ms", $param, $m);
+				$op = $m[2];
+				$not = $m[1];
+				// virer le premier argument,
+				// et mettre son reliquat eventuel
+				// Recopier pour ne pas alterer le texte source
+				// utile au debusqueur
+				if ($m[3]) {
+					// une maniere tres sale de supprimer les "' autour de {critere "xxx","yyy"}
+					if (preg_match(',^(["\'])(.*)\1$,', $m[3])) {
+						$c = null;
+						eval ('$c = '.$m[3].';');
+						if (isset($c)) {
+							$m[3] = $c;
+						}
+					}
+					$texte = new Texte;
+					$texte->texte = $m[3]; 
+					$v[1][0]= $texte;
+				} else {
+					array_shift($v[1]);
+				}
 			}
 			array_shift($v); // $v[O] est vide
 			$crit = new Critere;
@@ -526,102 +528,109 @@ function phraser_criteres($params, &$result) {
 			$crit->exclus ="";
 			$crit->param = $v;
 			$args[] = $crit;
-		  } else {
-		  if ($var->type != 'texte') {
-		    // cas 1 seul arg ne commencant pas par du texte brut: 
-		    // erreur ou critere infixe "/"
-		    if (($v[1][1]->type != 'texte') || (trim($v[1][1]->texte) !='/')) {
-			$err_ci = array('zbug_critere_inconnu', 
-					array('critere' => $var->nom_champ));
-			erreur_squelette($err_ci, $result);
-		    } else {
-		      $crit = new Critere;
-		      $crit->op = '/';
-		      $crit->not = "";
-		      $crit->exclus ="";
-		      $crit->param = array(array($v[1][0]),array($v[1][2]));
-		      $args[] = $crit;
-		    }
-		  } else {
-	// traiter qq lexemes particuliers pour faciliter la suite
-	// les separateurs
-			if ($var->apres)
-				$result->separateur[] = $param;
-			elseif (($param == 'tout') OR ($param == 'tous'))
-				$result->modificateur['tout'] = true;
-			elseif ($param == 'plat') 
-				$result->modificateur['plat'] = true;
+		} else {
+			if ($var->type != 'texte') {
+				// cas 1 seul arg ne commencant pas par du texte brut: 
+				// erreur ou critere infixe "/"
+				if (($v[1][1]->type != 'texte') || (trim($v[1][1]->texte) !='/')) {
+					$err_ci = array('zbug_critere_inconnu', 
+						array('critere' => $var->nom_champ));
+					erreur_squelette($err_ci, $result);
+				} else {
+					$crit = new Critere;
+					$crit->op = '/';
+					$crit->not = "";
+					$crit->exclus ="";
+					$crit->param = array(array($v[1][0]),array($v[1][2]));
+					$args[] = $crit;
+				}
+			} else {
+				// traiter qq lexemes particuliers pour faciliter la suite
+				// les separateurs
+				if ($var->apres)
+					$result->separateur[] = $param;
+				elseif (($param == 'tout') OR ($param == 'tous'))
+					$result->modificateur['tout'] = true;
+				elseif ($param == 'plat') 
+					$result->modificateur['plat'] = true;
 
-			// Boucle hierarchie, analyser le critere id_rubrique ou non
-			// afin, dans les cas autres que {id_rubrique}, de
-			// forcer {tout} pour avoir la rubrique mere...
-			elseif (strcasecmp($type, 'hierarchie')==0 AND !preg_match(",^id_rubrique\b,",$param)) {
-				$result->modificateur['tout'] = true;
+				// Boucle hierarchie, analyser le critere id_rubrique ou non
+				// afin, dans les cas autres que {id_rubrique}, de
+				// forcer {tout} pour avoir la rubrique mere...
+				elseif (strcasecmp($type, 'hierarchie')==0 AND !preg_match(",^id_rubrique\b,",$param)) {
+					$result->modificateur['tout'] = true;
+				}
+				elseif (strcasecmp($type, 'hierarchie')==0 AND $param=="id_rubrique") {
+					// rien a faire sur {id_rubrique} tout seul
+				} else {
+					// pas d'emplacement statique, faut un dynamique
+					// mais il y a 2 cas qui ont les 2 !
+					if (($param == 'unique') || (preg_match(',^!?doublons *,', $param))) {
+						// cette variable sera inseree dans le code
+						// et son nom sert d'indicateur des maintenant
+						$result->doublons = '$doublons_index';
+						if ($param == 'unique') $param = 'doublons';
+					}
+					elseif ($param == 'recherche') {
+						// meme chose (a cause de #nom_de_boucle:URL_*)
+						$result->hash = ' ';
+					}
+
+					if (preg_match(',^ *([0-9-]+) *(/) *(.+) *$,', $param, $m)) {
+						$crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
+					}
+					elseif (preg_match(',^([!]?)(' . CHAMP_SQL_PLUS_FONC . 
+							')[[:space:]]*(\??)(!?)(<=?|>=?|==?|\b(?:IN|LIKE)\b)(.*)$,is', $param, $m))
+					{
+						$a2 = trim($m[8]);
+						if ($a2 AND ($a2[0]=="'" OR $a2[0]=='"') AND ($a2[0]==substr($a2,-1))) {
+							$a2 = substr($a2,1,-1);
+						}
+						$crit = phraser_critere_infixe($m[2], $a2, $v,
+								(($m[2] == 'lang_select') ? $m[2] : $m[7]),
+								$m[6], $m[5]);
+						$crit->exclus = $m[1];
+					}
+					elseif (preg_match("/^([!]?)\s*(" .
+						CHAMP_SQL_PLUS_FONC .
+						")\s*(\??)(.*)$/is", $param, $m))
+					{
+						// contient aussi les comparaisons implicites !
+						// Comme ci-dessus: 
+						// le premier arg contient l'operateur
+						array_shift($v);
+						if ($m[6]) {
+							$v[0][0] = new Texte;
+							$v[0][0]->texte = $m[6];
+						} else {
+							array_shift($v[0]);
+							if (!$v[0]) array_shift($v);
+						}
+						$crit = new Critere;
+						$crit->op = $m[2];
+						$crit->param = $v;
+						$crit->not = $m[1];
+						$crit->cond = $m[5];
+					} else {
+						$err_ci = array('zbug_critere_inconnu', 
+							array('critere' => $param));
+						erreur_squelette($err_ci, $result);
+					}
+
+					if ((!preg_match(',^!?doublons *,', $param)) || $crit->not) {
+						$args[] = $crit;
+					} else {
+						$doublons[] = $crit;
+					}
+				}
 			}
-			elseif (strcasecmp($type, 'hierarchie')==0 AND $param=="id_rubrique") {
-				// rien a faire sur {id_rubrique} tout seul
-			}
-			else {
-			  // pas d'emplacement statique, faut un dynamique
-			  /// mais il y a 2 cas qui ont les 2 !
-			  if (($param == 'unique') || (preg_match(',^!?doublons *,', $param)))
-			    {
-			      // cette variable sera inseree dans le code
-			      // et son nom sert d'indicateur des maintenant
-			      $result->doublons = '$doublons_index';
-			      if ($param == 'unique') $param = 'doublons';
-			    }
-			  elseif ($param == 'recherche')
-			    // meme chose (a cause de #nom_de_boucle:URL_*)
-			      $result->hash = ' ';
-			  if (preg_match(',^ *([0-9-]+) *(/) *(.+) *$,', $param, $m)) {
-			    $crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
-			  } elseif (preg_match(',^([!]?)(' . CHAMP_SQL_PLUS_FONC . 
-					 ')[[:space:]]*(\??)(!?)(<=?|>=?|==?|\b(?:IN|LIKE)\b)(.*)$,is', $param, $m)) {
-			    $a2 = trim($m[8]);
-			    if ($a2 AND ($a2[0]=="'" OR $a2[0]=='"') AND ($a2[0]==substr($a2,-1)))
-			      $a2 = substr($a2,1,-1);
-			    $crit = phraser_critere_infixe($m[2], $a2, $v,
-							   (($m[2] == 'lang_select') ? $m[2] : $m[7]),
-							   $m[6], $m[5]);
-					$crit->exclus = $m[1];
-			  } elseif (preg_match("/^([!]?)\s*(" .
-					       CHAMP_SQL_PLUS_FONC .
-					       ")\s*(\??)(.*)$/is", $param, $m)) {
-		  // contient aussi les comparaisons implicites !
-			    // Comme ci-dessus: 
-			    // le premier arg contient l'operateur
-			    array_shift($v);
-			    if ($m[6]) {
-			      $v[0][0] = new Texte;
-			      $v[0][0]->texte = $m[6];
-			    } else {
-			      array_shift($v[0]);
-			      if (!$v[0]) array_shift($v);
-			    }
-			    $crit = new Critere;
-			    $crit->op = $m[2];
-			    $crit->param = $v;
-			    $crit->not = $m[1];
-			    $crit->cond = $m[5];
-			  }
-			  else {
-			 	$err_ci = array('zbug_critere_inconnu', 
-					array('critere' => $param));
-				erreur_squelette($err_ci, $result);
-			  }
-			  if ((!preg_match(',^!?doublons *,', $param)) || $crit->not)
-			    $args[] = $crit;
-			  else 
-			    $doublons[] = $crit;
-			}
-		  }
 		}
 	}
 	// les doublons non nies doivent etre le dernier critere
 	// pour que la variable $doublon_index ait la bonne valeur
 	// cf critere_doublon
 	if ($doublons) $args= array_merge($args, $doublons);
+
 	// Si erreur, laisser la chaine dans ce champ pour le HTTP 503
 	if (!$err_ci) $result->criteres = $args;
 }
