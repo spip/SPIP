@@ -246,9 +246,11 @@ function afficher_qui_edite($id_objet,$objet){
  * Lister les statuts des auteurs
  *
  * @param string $quoi
- *   redacteurs : retourne les statuts des auteurs au moins redacteur, tels que defini par AUTEURS_MIN_REDAC
- *   visiteurs : retourne les statuts des autres auteurs, cad les visiteurs et autres statuts perso
- *   tous : retourne tous les statuts connus
+ *   - redacteurs : retourne les statuts des auteurs au moins redacteur,
+ *     tels que defini par AUTEURS_MIN_REDAC
+ *   - visiteurs : retourne les statuts des autres auteurs, cad les visiteurs
+ *     et autres statuts perso
+ *   - tous : retourne tous les statuts connus
  * @param bool $en_base
  *   si true, ne retourne strictement que les status existants en base
  *   dans tous les cas, les statuts existants en base sont inclus
