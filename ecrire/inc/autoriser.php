@@ -718,29 +718,34 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	// Un redacteur peut modifier ses propres donnees mais ni son login/email
 	// ni son statut (qui sont le cas echeant passes comme option)
 	if ($qui['statut'] == '1comite') {
-		if ($opt['webmestre'])
+		if (isset($opt['webmestre']) and $opt['webmestre']) {
 			return false;
-		elseif ($opt['statut'] OR $opt['restreintes'] OR $opt['email'])
+		} elseif ((isset($opt['statut']) and $opt['statut'])
+		  OR (isset($opt['restreintes']) and $opt['restreintes'])
+		  OR $opt['email']) {
 			return false;
-		elseif ($id == $qui['id_auteur'])
+		} elseif ($id == $qui['id_auteur']) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 
 	// Un admin restreint peut modifier/creer un auteur non-admin mais il
 	// n'a le droit ni de le promouvoir admin, ni de changer les rubriques
 	if ($qui['restreint']) {
-		if ($opt['webmestre'])
+		if (isset($opt['webmestre']) and $opt['webmestre']) {
 			return false;
-		elseif ($opt['statut'] == '0minirezo' OR $opt['restreintes'])
+		} elseif ((isset($opt['statut']) AND ($opt['statut'] == '0minirezo'))
+		  OR (isset($opt['restreintes']) and $opt['restreintes'])) {
 			return false;
-		else {
+		} else {
 			if ($id == $qui['id_auteur']) {
-				if ($opt['statut'])
+				if (isset($opt['statut']) and $opt['statut']) {
 					return false;
-				else
+				} else {
 					return true;
+				}
 			}
 			else if ($id_auteur = intval($id)) {
 				$t = sql_fetsel("statut", "spip_auteurs", "id_auteur=$id_auteur");
