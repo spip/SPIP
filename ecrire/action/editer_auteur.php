@@ -298,7 +298,7 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 
 	// Restreindre avant de declarer l'auteur
 	// (section critique sur les droits)
-	if ($c['id_parent']) {
+	if (isset($c['id_parent']) and $c['id_parent']) {
 		if (is_array($c['restreintes']))
 			$c['restreintes'][] = $c['id_parent'];
 		else
