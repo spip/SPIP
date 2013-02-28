@@ -164,6 +164,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) AND $GLOBALS['_INC_PUBLIC']) {
 		// en cas d'erreur, retester l'affichage
 		if ($html AND ($affiche_boutons_admin OR $debug)) {
 			$var_mode_affiche = _request('var_mode_affiche');
+			$var_mode_objet   = _request('var_mode_objet');
 			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
 			echo erreur_squelette(false);
 		}
