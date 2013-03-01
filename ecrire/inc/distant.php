@@ -460,7 +460,7 @@ function recuperer_page($url, $trans = false, $get_headers = false,
 	// $copy = copier le fichier ?
 	$copy = (is_string($trans) AND strlen($trans)>5); // eviter "false" :-)
 
-	if ($taille_max==0)
+	if (!is_null($taille_max) and ($taille_max == 0))
 		$get = 'HEAD';
 	else
 		$get = 'GET';
