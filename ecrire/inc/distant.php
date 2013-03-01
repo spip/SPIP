@@ -465,11 +465,9 @@ function recuperer_page($url, $trans = false, $get_headers = false,
 	else
 		$get = 'GET';
 
-	// dix tentatives maximum en cas d'entetes 301...
-	$res = recuperer_url($url,array(
+	$options = array(
 		'transcoder' => $trans===true,
 		'methode' => $get,
-		'taille_max' => $taille_max,
 		'datas' => $datas,
 		'boundary' => $boundary,
 		'refuser_gz' => $refuser_gz,
@@ -477,7 +475,11 @@ function recuperer_page($url, $trans = false, $get_headers = false,
 		'uri_referer' => $uri_referer,
 		'file' => $copy?$trans:'',
 		'follow_location' => 10,
-	));
+	);
+	if (!is_null($taille_max))
+		$options['taille_max']=$taille_max;
+	// dix tentatives maximum en cas d'entetes 301...
+	$res = recuperer_url($url,$options);
 	if (!$res) return false;
 	if ($res['status']!==200) return false;
 	if ($get_headers) return $res['headers']."\n".$res['page'];
@@ -526,18 +528,20 @@ function recuperer_lapage($url, $trans = false, $get = 'GET', $taille_max = 1048
 	if ($copy)
 		$refuser_gz = true;
 
-	// dix tentatives maximum en cas d'entetes 301...
-	$res = recuperer_url($url,array(
+	$options = array(
 		'transcoder' => $trans===true,
 		'methode' => $get,
-		'taille_max' => $taille_max,
 		'datas' => $datas,
 		'refuser_gz' => $refuser_gz,
 		'if_modified_since' => $date_verif,
 		'uri_referer' => $uri_referer,
 		'file' => $copy?$trans:'',
 		'follow_location' => false,
-	));
+	);
+	if (!is_null($taille_max))
+		$options['taille_max']=$taille_max;
+	// dix tentatives maximum en cas d'entetes 301...
+	$res = recuperer_url($url,$options);
 
 	if ($res)
 		return false;
