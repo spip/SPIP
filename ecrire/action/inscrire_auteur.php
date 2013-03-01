@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'inscription d'un auteur
+ *
+ * @package SPIP\Core\Inscription
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
@@ -241,14 +246,13 @@ function creer_pass_pour_auteur($id_auteur) {
 }
 
 /**
- * Un filtre pour determiner le nom du mode des librement inscrits,
- * a l'aide de la liste globale des statuts (tableau mode => nom du mode)
+ * Détermine le nom du mode des librement inscrits,
+ * à l'aide de la liste globale des statuts (tableau mode => nom du mode)
+ * 
  * Utile pour le formulaire d'inscription.
- * Si un mode est fourni, verifier que la configuration l'accepte.
- * Si mode inconnu laisser faire, c'est une extension non std
- * mais verifier que la syntaxe est compatible avec SQL
- *
- * http://doc.spip.org/@tester_config
+ * Si un mode est fourni, vérifier que la configuration l'accepte.
+ * Si mode inconnu laisser faire, c'est une extension non standart
+ * mais vérifier que la syntaxe est compatible avec SQL
  *
  * @param string $statut_tmp
  * @return string

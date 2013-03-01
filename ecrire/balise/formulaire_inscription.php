@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier gère la balise dynamique `#FORMULAIRE_INSCRIPTION`
+ * 
+ * @package SPIP\Core\Inscription
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
@@ -17,30 +23,42 @@ include_spip('inc/filtres');
 
 // Balise independante du contexte
 
-/**
- * http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION
- *
- * @param object $p
- * @return mixed
- */
-function balise_FORMULAIRE_INSCRIPTION ($p) {
 
+/**
+ * Compile la balise dynamique `#FORMULAIRE_INSCRIPTION` qui affiche
+ * un formulaire d'inscription au site
+ *
+ * @balise FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE}
+ * @example
+ *     ```
+ *     #FORMULAIRE_INSCRIPTION
+ *     #FORMULAIRE_INSCRIPTION
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée du code compilé
+**/
+function balise_FORMULAIRE_INSCRIPTION ($p) {
 	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', array());
 }
 
 /**
- * http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_stat
- *
- * [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
+ * Calculs de paramètres de contexte automatiques pour la balise FORMULAIRE_INSCRIPTION
+ * 
+ * `[(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]`
  *
  * @param array $args
- *   args[0] un statut d'auteur (redacteur par defaut)
- *   args[1] indique la rubrique eventuelle de proposition
+ *   - args[0] un statut d'auteur (redacteur par defaut)
+ *   - args[1] indique la rubrique eventuelle de proposition
  * @param array $context_compil
  * @return array|string
+ *   - Liste (statut, id) si un mode d'inscription est possible
+ *   - chaîne vide sinon.
  */
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
-	list($mode, $id) = $args;
+	list($mode, $id) = array_pad($args, 2, null);
 	$mode = tester_config($id, $mode);
 	return $mode ? array($mode, $id) : '';
 }
