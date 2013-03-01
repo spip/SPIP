@@ -2196,6 +2196,8 @@ function afficher_tags($tags, $rels='tag,directory') {
  * Passe un `<enclosure url="fichier" length="5588242" type="audio/mpeg"/>`
  * au format microformat `<a rel="enclosure" href="fichier" ...>fichier</a>`.
  *
+ * Peut recevoir un `<link` ou un `<media:content` parfois.
+ * 
  * Attention : `length="zz"` devient `title="zz"`, pour rester conforme.
  * 
  * @filtre enclosure2microformat
@@ -2208,7 +2210,10 @@ function enclosure2microformat($e) {
 	if (!$url = filtrer_entites(extraire_attribut($e, 'url')))
 		$url = filtrer_entites(extraire_attribut($e, 'href'));
 	$type = extraire_attribut($e, 'type');
-	$length = extraire_attribut($e, 'length');
+	if (!$length = extraire_attribut($e, 'length')) {
+		# <media:content : longeur dans fileSize. On tente.
+		$length = extraire_attribut($e, 'fileSize');
+	}
 	$fichier = basename($url);
 	return '<a rel="enclosure"'
 		. ($url? ' href="'.htmlspecialchars($url).'"' : '')
