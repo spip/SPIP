@@ -568,7 +568,7 @@ function texte_backend($texte) {
 	$texte = charset2unicode($texte);
 
 	// Caracteres problematiques en iso-latin 1
-	if ($GLOBALS['meta']['charset'] == 'iso-8859-1') {
+	if (isset($GLOBALS['meta']['charset']) and $GLOBALS['meta']['charset'] == 'iso-8859-1') {
 		$texte = str_replace(chr(156), '&#156;', $texte);
 		$texte = str_replace(chr(140), '&#140;', $texte);
 		$texte = str_replace(chr(159), '&#159;', $texte);

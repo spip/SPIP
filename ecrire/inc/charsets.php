@@ -23,6 +23,8 @@
 // securité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+// se faciliter la lecture du charset
+include_spip('inc/config');
 
 /**
  * Charge en mémoire la liste des caractères d'un charset
@@ -84,7 +86,7 @@ function init_mb_string() {
 		AND function_exists('mb_encode_mimeheader')
 		AND function_exists('mb_encode_numericentity')
 		AND function_exists('mb_decode_numericentity')
-		AND mb_detect_order($GLOBALS['meta']['charset'])
+		AND mb_detect_order(lire_config('charset', _DEFAULT_CHARSET))
 		) {
 			mb_internal_encoding('utf-8');
 			$mb = 1;
@@ -214,7 +216,9 @@ function corriger_caracteres_windows($texte, $charset='AUTO', $charset_cible='un
 		return array_map('corriger_caracteres_windows', $texte);
 	}
 	
-	if ($charset=='AUTO') $charset = $GLOBALS['meta']['charset'];
+	if ($charset=='AUTO') {
+		$charset = lire_config('charset', _DEFAULT_CHARSET);
+	}
 	if ($charset == 'utf-8') {
 		$p = chr(194);
 		if (strpos($texte,$p)==false)
@@ -347,8 +351,9 @@ function mathml2unicode($texte) {
 function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 	static $trans;
 
-	if ($charset == 'AUTO')
-		$charset = $GLOBALS['meta']['charset'];
+	if ($charset == 'AUTO') {
+		$charset = lire_config('charset', _DEFAULT_CHARSET);
+	}
 
 	if ($charset == '') $charset = 'iso-8859-1';
 	$charset = strtolower($charset);
@@ -418,8 +423,9 @@ function unicode2charset($texte, $charset='AUTO') {
 	static $CHARSET_REVERSE;
 	static $trans = array();
 	
-	if ($charset == 'AUTO')
-		$charset = $GLOBALS['meta']['charset'];
+	if ($charset == 'AUTO') {
+		$charset = lire_config('charset', _DEFAULT_CHARSET);
+	}
 
 	switch($charset) {
 	case 'utf-8':
@@ -1056,7 +1062,7 @@ if (!isset($GLOBALS['meta']['pcre_u'])
   OR (isset($_GET['var_mode']) AND !isset($_GET['var_profile']))) {
 	include_spip('inc/meta');
 	ecrire_meta('pcre_u',
-		$u = ($GLOBALS['meta']['charset'] == 'utf-8'
+		$u = (lire_config('charset', _DEFAULT_CHARSET)
 		AND test_pcre_unicode())
 			? 'u' :''
 	);

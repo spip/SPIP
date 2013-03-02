@@ -65,7 +65,7 @@ function suivre_lien($url, $lien) {
 	if (preg_match(',^(mailto|javascript):,iS', $lien))
 		return $lien;
 	if (preg_match(';^((?:[a-z]{3,7}:)?//.*?)(/.*)?$;iS', $lien, $r)) {
-		$r = array_pad($r, 2, null);
+		$r = array_pad($r, 3, null);
 		return $r[1].resolve_path($r[2]);
 	}
 

@@ -54,9 +54,13 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 	static $infos_tables = null;
 	static $md5 = null;
 	static $plugin_hash = null;
+
+	// plugins hash connu ? non si _CACHE_PLUGINS_OPT est pas encore chargé.
+	$_PLUGINS_HASH = defined('_PLUGINS_HASH') ? _PLUGINS_HASH : '!_CACHE_PLUGINS_OPT';
+
 	// prealablement recuperer les tables_principales
 	if (is_null($infos_tables)
-	  OR $plugin_hash!==_PLUGINS_HASH){
+	  OR $plugin_hash!==$_PLUGINS_HASH){
 		// pas de reentrance (cas base/serial)
 		if ($deja_la) {
 			spip_log ("Re-entrance anormale sur lister_tables_objets_sql :"
@@ -64,7 +68,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 			return ($table_sql==="::md5"?$md5:array());
 		}
 		$deja_la = true;
-		$plugin_hash = _PLUGINS_HASH; // avant de lancer les pipelines
+		$plugin_hash = $_PLUGINS_HASH; // avant de lancer les pipelines
 
 		// recuperer les declarations explicites ancienne mode
 		// qui servent a completer declarer_tables_objets_sql

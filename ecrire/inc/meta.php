@@ -72,10 +72,12 @@ function lire_metas($table='meta') {
 			$GLOBALS[$table][$row['nom']] = $row['valeur'];
         sql_free($result);
 
-		if (!$GLOBALS[$table]['charset']
+		if (!isset($GLOBALS[$table]['charset'])
+		  OR !$GLOBALS[$table]['charset']
 		  OR $GLOBALS[$table]['charset']=='_DEFAULT_CHARSET' // hum, correction d'un bug ayant abime quelques install
-		)
+		) {
 			ecrire_meta('charset', _DEFAULT_CHARSET, NULL, $table);
+		}
 
 		// noter cette table de configuration dans les meta de SPIP
 		if ($table!=='meta') {

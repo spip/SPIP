@@ -459,7 +459,7 @@ function actualise_metas($liste_meta)
 	sql_updateq('spip_meta',array('impt'=>'non'),sql_in('nom',$meta_serveur));
 
 	while (list($nom, $valeur) = each($liste_meta)) {
-		if (!$GLOBALS['meta'][$nom]) {
+		if (!isset($GLOBALS['meta'][$nom]) OR !$GLOBALS['meta'][$nom]) {
 			ecrire_meta($nom, $valeur);
 		}
 	}
