@@ -53,7 +53,7 @@ function exec_admin_declarer_dist()
 // http://doc.spip.org/@autres_bases
 function autres_bases()
 {
-	$tables =  bases_referencees(_FILE_CONNECT_TMP);
+	$tables =  bases_referencees(_FILE_CONNECT);
 
 	if ($tables)
 		$tables = "<br /><br /><fieldset style='margin-bottom: 10px;'>"
