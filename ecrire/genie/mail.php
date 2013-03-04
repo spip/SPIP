@@ -32,29 +32,23 @@ function genie_mail_dist($t) {
 	if (!isset($GLOBALS['meta']['dernier_envoi_neuf']))
 		ecrire_meta('dernier_envoi_neuf',date('Y-m-d H:i:s',$now - (3600 * 24 * $jours_neuf)));
 
-	$page = recuperer_fond('nouveautes',array('date'=>$GLOBALS['meta']['dernier_envoi_neuf'],'jours_neuf'=>$jours_neuf));
-	# en une seule passe avec un squelette textuel:
-	# 1ere ligne = sujet
-	# lignes suivantes jusqu'a la premiere blanche: headers SMTP
+	$page = recuperer_fond('nouveautes',array('date'=>$GLOBALS['meta']['dernier_envoi_neuf'],'jours_neuf'=>$jours_neuf),array('raw'=>true));
 
-	$page = stripslashes(trim($page));
-	$page = preg_replace(",\r\n?,", "\n", $page);
-	$p = strpos($page,"\n\n");
-	$s = strpos($page,"\n");
-	if ($p AND $s) {
-		if ($p>$s)
-			$headers = substr($page,$s+1,$p-$s);
-		$sujet_nouveautes = substr($page,0,$s);
-		$mail_nouveautes = trim(substr($page,$p+2));
-	}
+	if (strlen(trim($page['texte']))){
+		// recuperer les entetes envoyes par #HTTP_HEADER
+		$headers = "";
+		if (isset($page['entetes']) AND count($page['entetes'])){
+			foreach ($page['entetes'] as $k => $v)
+				$headers .= (strlen($v)?"$k: $v":$k)."\n";
+		}
 
-	if (strlen($mail_nouveautes) > 10) {
-		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
-		$envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes, '', $headers);
+		include_spip("inc/notifications");
+		notifications_envoyer_mails($adresse_neuf,$page['texte'],"","",$headers);
 		ecrire_meta('dernier_envoi_neuf',date('Y-m-d H:i:s',$now));
 	}
 	else
 		spip_log("mail nouveautes : rien de neuf depuis $jours_neuf jours");
+
 	return 1;
 }
 
