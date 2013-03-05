@@ -158,7 +158,7 @@ function picker_identifie_id_rapide($ref, $rubriques_ou_objets=false, $articles=
 function test_enfants_rubrique($id_rubrique,$types=array()){
 	static $has_child = array();
 	if (!isset($has_child[$id_rubrique])){
-		$types = array_filter($types);
+		$types = (is_array($types)?array_filter($types):array());
 		// recuperer tous les freres et soeurs de la rubrique visee
 		$id_parent = sql_getfetsel('id_parent','spip_rubriques','id_rubrique='.intval($id_rubrique));
 		$fratrie = sql_allfetsel('id_rubrique','spip_rubriques','id_parent='.intval($id_parent));
