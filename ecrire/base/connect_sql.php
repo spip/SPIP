@@ -107,7 +107,10 @@ function spip_connect($serveur='', $version='') {
 			return false;
 		}
 	} else	{
+		// spip_meta n'existe pas toujours dans la base
+		// C'est le cas d'un dump sqlite par exemple 
 		if ($connexions[$index]['spip_connect_version']
+		AND sql_showtable('spip_meta', true, $serveur)
 		AND $r = sql_getfetsel('valeur', 'spip_meta', "nom='charset_sql_connexion'",'','','','',$serveur))
 			$charset = $r;
 		else $charset = -1;
