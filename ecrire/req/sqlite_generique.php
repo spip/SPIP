@@ -408,6 +408,18 @@ function spip_sqlite_create($nom, $champs, $cles, $autoinc = false, $temporary =
 	// il faut donc les faire creer ensuite
 	if (!$requeter) return $res;
 
+	if (!$res AND $requeter) {
+		// Cas de SQLITE < version 3.3 
+		// "IF NOT EXISTS" n'est pas encore implemente, il faut utiliser une methode plus "old school" 
+		// http://www.sqlite.org/changes.html
+		$query = str_replace('IF NOT EXISTS','',$query); 
+		if ($r = spip_sqlite_query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='$nom'",$serveur) 
+		    AND spip_sqlite_count($r,serveur) === "0") {
+			$res = spip_sqlite_query($query, $serveur, $requeter);
+		}
+	}
+
+
 	$ok = $res ? true : false;
 	if ($ok){
 		foreach ($cles as $k => $v){
