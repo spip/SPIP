@@ -81,7 +81,10 @@ function lire_metas($table='meta') {
 
 		// noter cette table de configuration dans les meta de SPIP
 		if ($table!=='meta') {
-			$liste = unserialize($GLOBALS['meta']['tables_config']);
+			$liste = array();
+			if (isset($GLOBALS['meta']['tables_config'])) {
+				$liste = unserialize($GLOBALS['meta']['tables_config']);
+			}
 			if (!$liste)
 				$liste = array();
 			if (!in_array($table, $liste)) {
@@ -90,7 +93,7 @@ function lire_metas($table='meta') {
 			}
 		}
 	}
-	return $GLOBALS[$table];
+	return isset($GLOBALS[$table]) ? $GLOBALS[$table] : null;
 }
 
 
@@ -175,7 +178,9 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 
 	// ne pas invalider le cache si affectation a l'identique
 	// (tant pis si impt aurait du changer)
-	if ($row AND $valeur == $row['valeur'] AND $GLOBALS[$table][$nom] == $valeur) return;
+	if ($row AND $valeur == $row['valeur']
+		AND isset($GLOBALS[$table][$nom])
+		AND $GLOBALS[$table][$nom] == $valeur) return;
 
 	$GLOBALS[$table][$nom] = $valeur;
 	// cf effacer pour comprendre le double touch

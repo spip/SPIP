@@ -292,6 +292,9 @@ function objet_traiter_liaisons($operation,$objets_source,$objets_lies, $set = n
  *
  * Retourne le nombre d'insertions realisees
  *
+ * @pipeline appel pre_edition_lien
+ * @pipeline appel post_edition_lien
+ * 
  * @internal
  * @param string $objet_source
  * @param string $primary
@@ -408,6 +411,9 @@ function lien_where($primary, $id_source, $objet, $id_objet){
  * array($objet=>$id_objets,...)
  * un * pour $id,$objet,$id_objets permet de traiter par lot
  *
+ * @pipeline appel pre_edition_lien
+ * @pipeline appel post_edition_lien
+ * 
  * @internal
  * @param string $objet_source
  * @param string $primary
