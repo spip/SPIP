@@ -515,10 +515,10 @@ function spip_sqlite_create_index($nom, $table, $champs, $unique='', $serveur = 
 	}
 
 	$ifnotexists = "";
-	$version = sql_fetch(sql_query("select sqlite_version() AS sqlite_version",$serveur),$erveur);
+	$version = spip_sqlite_fetch(spip_sqlite_query("select sqlite_version() AS sqlite_version",$serveur),'',$serveur);
 	if (!function_exists('spip_version_compare')) include_spip('plugins/installer');
 
-	if ($version AND spip_version_compare($version['sqlite_version'],'3.3','>')) {
+	if ($version AND spip_version_compare($version['sqlite_version'],'3.3.0','>=')) {
 		$ifnotexists = ' IF NOT EXISTS';
 	} else {
 		/* simuler le IF EXISTS - version 2 et sqlite < 3.3a */
@@ -2034,10 +2034,10 @@ function _sqlite_requete_create($nom, $champs, $cles, $autoinc = false, $tempora
 	$ifnotexists = "";
 	if ($_ifnotexists){
 
-		$version = sql_fetch(sql_query("select sqlite_version() AS sqlite_version",$serveur),$erveur);
+		$version = spip_sqlite_fetch(spip_sqlite_query("select sqlite_version() AS sqlite_version",$serveur),'',$serveur);
 		if (!function_exists('spip_version_compare')) include_spip('plugins/installer');
 
-		if ($version AND spip_version_compare($version['sqlite_version'],'3.3','>')) {
+		if ($version AND spip_version_compare($version['sqlite_version'],'3.3.0','>=')) {
 			$ifnotexists = ' IF NOT EXISTS';
 		} else {
 			/* simuler le IF EXISTS - version 2 et sqlite < 3.3a */
