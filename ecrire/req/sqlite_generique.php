@@ -408,18 +408,6 @@ function spip_sqlite_create($nom, $champs, $cles, $autoinc = false, $temporary =
 	// il faut donc les faire creer ensuite
 	if (!$requeter) return $res;
 
-	if (!$res AND $requeter) {
-		// Cas de SQLITE < version 3.3 
-		// "IF NOT EXISTS" n'est pas encore implemente, il faut utiliser une methode plus "old school" 
-		// http://www.sqlite.org/changes.html
-		$query = str_replace('IF NOT EXISTS','',$query); 
-		if ($r = spip_sqlite_query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='$nom'",$serveur) 
-		    AND spip_sqlite_count($r,$serveur) === "0") {
-			$res = spip_sqlite_query($query, $serveur, $requeter);
-		}
-	}
-
-
 	$ok = $res ? true : false;
 	if ($ok){
 		foreach ($cles as $k => $v){
@@ -527,12 +515,15 @@ function spip_sqlite_create_index($nom, $table, $champs, $unique='', $serveur = 
 	}
 
 	$ifnotexists = "";
-	if (_sqlite_is_version(2, '', $serveur)){
-		/* simuler le IF EXISTS - version 2 */
+	$version = sql_fetch(sql_query("select sqlite_version() AS sqlite_version",$serveur),$erveur);
+	if (!function_exists('spip_version_compare')) include_spip('plugins/installer');
+
+	if ($version AND spip_version_compare($version['sqlite_version'],'3.3','>')) {
+		$ifnotexists = ' IF NOT EXISTS';
+	} else {
+		/* simuler le IF EXISTS - version 2 et sqlite < 3.3a */
 		$a = spip_sqlite_showtable($table, $serveur);
 		if (isset($a['key']['KEY '.$nom])) return true;
-	} else {
-		$ifnotexists = ' IF NOT EXISTS';
 	}
 
 	$query = "CREATE ".($unique?"UNIQUE ":"")."INDEX$ifnotexists $nom ON $table (".join(',', $champs).")";
@@ -2042,15 +2033,18 @@ function _sqlite_requete_create($nom, $champs, $cles, $autoinc = false, $tempora
 
 	$ifnotexists = "";
 	if ($_ifnotexists){
-		// simuler le IF NOT EXISTS - version 2 
-		if (_sqlite_is_version(2, '', $serveur)){
-			$a = spip_sqlite_showtable($nom, $serveur);
-			if ($a) return false;
-		}
-			// sinon l'ajouter en version 3
-		else {
+
+		$version = sql_fetch(sql_query("select sqlite_version() AS sqlite_version",$serveur),$erveur);
+		if (!function_exists('spip_version_compare')) include_spip('plugins/installer');
+
+		if ($version AND spip_version_compare($version['sqlite_version'],'3.3','>')) {
 			$ifnotexists = ' IF NOT EXISTS';
+		} else {
+			/* simuler le IF EXISTS - version 2 et sqlite < 3.3a */
+			$a = spip_sqlite_showtable($table, $serveur);
+			if (isset($a['key']['KEY '.$nom])) return true;
 		}
+
 	}
 
 	$temporary = $temporary ? ' TEMPORARY' : '';
