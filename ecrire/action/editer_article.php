@@ -166,9 +166,14 @@ function article_inserer($id_rubrique) {
 	);
 
 	// controler si le serveur n'a pas renvoye une erreur
-	if ($id_article > 0 AND $GLOBALS['visiteur_session']['id_auteur']) {
-		include_spip('action/editer_auteur');
-		auteur_associer($GLOBALS['visiteur_session']['id_auteur'], array('article'=>$id_article));
+	if ($id_article > 0){
+		$id_auteur = ((is_null(_request('id_auteur')) AND isset($GLOBALS['visiteur_session']['id_auteur']))?
+			$GLOBALS['visiteur_session']['id_auteur']
+			:_request('id_auteur'));
+		if ($id_auteur){
+			include_spip('action/editer_auteur');
+			auteur_associer($GLOBALS['visiteur_session']['id_auteur'], array('article'=>$id_article));
+		}
 	}
 
 	return $id_article;
