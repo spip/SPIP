@@ -17,7 +17,7 @@ include_spip('inc/install');
 function formulaires_declarer_bases_charger_dist(){
 	list($adresse_db, $login_db, $pass_db, $sel, $server_db) = analyse_fichier_connection(_FILE_CONNECT);
 
-	$deja = bases_referencees(_FILE_CONNECT_TMP);
+	$deja = bases_referencees(_FILE_CONNECT);
 	// proposer un nom de connect si pas encore saisi
 	$nom_connect = "";
 	if (defined('_DECLARER_choix_db')){
