@@ -40,10 +40,10 @@ function formulaires_configurer_identite_verifier_dist(){
 
 function formulaires_configurer_identite_traiter_dist(){
 	include_spip('inc/config');
-	set_request('adresse_site',appliquer_adresse_site(_request('adresse_site')));
-
 	$adresse_site = isset($GLOBALS['meta']['adresse_site'])?$GLOBALS['meta']['adresse_site']:'';
 	if (_request('adresse_site')!= $adresse_site) refuser_traiter_formulaire_ajax();
+
+	set_request('adresse_site',appliquer_adresse_site(_request('adresse_site')));
 
 	include_spip('inc/meta');
 	foreach(array('nom_site','slogan_site','descriptif_site','email_webmaster') as $k)
