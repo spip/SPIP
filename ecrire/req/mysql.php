@@ -351,12 +351,16 @@ function calculer_mysql_where($v)
 	}
 }
 
-// http://doc.spip.org/@calculer_mysql_expression
 /**
- * @param $expression
- * @param $v
- * @param string $join
- * @return string
+ * Calcule un expression pour une requête, en cumulant chaque élément
+ * avec l'opérateur de liaison ($join) indiqué
+ * 
+ * Renvoie grosso modo "$expression join($join, $v)"
+ * 
+ * @param string $expression Mot clé de l'expression, tel que "WHERE" ou "ORDER BY"
+ * @param array|string $v    Données de l'expression
+ * @param string $join       Si les données sont un tableau, elles seront groupées par cette jointure
+ * @return string            Texte de l'expression, une partie donc, du texte la requête.
  */
 function calculer_mysql_expression($expression, $v, $join = 'AND'){
 	if (empty($v))
@@ -374,10 +378,11 @@ function calculer_mysql_expression($expression, $v, $join = 'AND'){
 	}
 }
 
-// http://doc.spip.org/@spip_mysql_select_as
 /**
- * @param $args
- * @return string
+ * Renvoie des `nom AS alias`
+ * 
+ * @param array $args
+ * @return string Sélection de colonnes pour une clause SELECT
  */
 function spip_mysql_select_as($args)
 {
@@ -386,26 +391,26 @@ function spip_mysql_select_as($args)
 		if (substr($k,-1)=='@') {
 			// c'est une jointure qui se refere au from precedent
 			// pas de virgule
-		  $res .= '  ' . $v ;
+			$res .= '  ' . $v ;
 		}
 		else {
-		  if (!is_numeric($k)) {
-		  	$p = strpos($v, " ");
-			if ($p)
-			  $v = substr($v,0,$p) . " AS `$k`" . substr($v,$p);
-			else $v .= " AS `$k`";
-		  }
-		      
-		  $res .= ', ' . $v ;
+			if (!is_numeric($k)) {
+				$p = strpos($v, " ");
+				if ($p)
+					$v = substr($v,0,$p) . " AS `$k`" . substr($v,$p);
+				else $v .= " AS `$k`";
+			}
+			$res .= ', ' . $v ;
 		}
 	}
 	return substr($res,2);
 }
 
-//
-// Changer les noms des tables ($table_prefix)
-// Quand tous les appels SQL seront abstraits on pourra l'ameliorer
-
+/**
+ * Changer les noms des tables ($table_prefix)
+ * 
+ * TODO: Quand tous les appels SQL seront abstraits on pourra l'améliorer
+ */
 define('_SQL_PREFIXE_TABLE', '/([,\s])spip_/S');
 
 /**
@@ -475,11 +480,11 @@ function spip_mysql_selectdb($db) {
  * Attention on n'a pas toujours les droits !
  * 
  * @param string $serveur
- * 		Nom du connecteur
+ *     Nom du connecteur
  * @param bool $requeter
- * 		Inutilise
+ *     Inutilisé
  * @return array
- * 		Liste de noms de bases de donnees
+ *     Liste de noms de bases de données
 **/
 function spip_mysql_listdbs($serveur='',$requeter=true) {
 	$dbs = array();
@@ -490,23 +495,23 @@ function spip_mysql_listdbs($serveur='',$requeter=true) {
 	return $dbs;
 }
 
-// Fonction de creation d'une table SQL nommee $nom
-// a partir de 2 tableaux PHP :
-// champs: champ => type
-// cles: type-de-cle => champ(s)
-// si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
-// Le nom des caches doit etre inferieur a 64 caracteres
-
-// http://doc.spip.org/@spip_mysql_create
 /**
- * @param $nom
- * @param $champs
- * @param $cles
- * @param bool $autoinc
- * @param bool $temporary
- * @param string $serveur
- * @param bool $requeter
+ * Crée une table SQL
+ *
+ * Crée une table SQL nommee `$nom` à partir des 2 tableaux `$champs` et `$cles`
+ *
+ * @note Le nom des caches doit être inferieur à 64 caractères
+ * 
+ * @param string $nom      Nom de la table SQL
+ * @param array $champs    Couples (champ => description SQL)
+ * @param array $cles      Couples (type de clé => champ(s) de la clé)
+ * @param bool $autoinc    True pour ajouter un auto-incrément sur la Primary Key
+ * @param bool $temporary  True pour créer une table temporaire
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   inutilisé
  * @return array|null|resource|string
+ *     - null si champs ou cles n'est pas un tableau
+ *     - true si la requête réussie, false sinon.
  */
 function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='',$requeter=true) {
 
@@ -561,12 +566,12 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 
 
 /**
- * Adapte pour Mysql la declaration SQL d'une colonne d'une table
+ * Adapte pour Mysql la déclaration SQL d'une colonne d'une table
  *
  * @param string $query
- * 		Definition SQL d'un champ de table
+ *     Définition SQL d'un champ de table
  * @return string
- * 		Definition SQL adaptee pour MySQL d'un champ de table
+ *     Définition SQL adaptée pour MySQL d'un champ de table
  */
 function _mysql_remplacements_definitions_table($query){
 	// quelques remplacements
@@ -582,24 +587,33 @@ function _mysql_remplacements_definitions_table($query){
 }
 
 /**
- * @param $nom
- * @param string $serveur
- * @param bool $requeter
- * @return array|null|resource|string
- */
+ * Crée une base de données MySQL
+ *
+ * @param string $nom      Nom de la base (sans l'extension de fichier)
+ * @param string $serveur  Nom de la connexion
+ * @param bool   $requeter Exécuter la requête, sinon la retourner
+ * @return bool true si la base est créee.
+ **/
 function spip_mysql_create_base($nom, $serveur='',$requeter=true) {
   return spip_mysql_query("CREATE DATABASE `$nom`", $serveur, $requeter);
 }
 
 
 /**
- * Fonction de création d'une vue SQL nommée $nom
+ * Crée une vue SQL nommée `$nom`
  * 
  * @param string $nom
+ *    Nom de la vue à creer
  * @param string $query_select
+ *     Texte de la requête de sélection servant de base à la vue
  * @param string $serveur
+ *     Nom du connecteur
  * @param bool $requeter
- * @return array|bool|null|resource|string
+ *     Effectuer la requete, sinon la retourner
+ * @return bool|string
+ *     - true si la vue est créée
+ *     - false si erreur ou si la vue existe déja
+ *     - string texte de la requête si $requeter vaut false
  */
 function spip_mysql_create_view($nom, $query_select, $serveur='',$requeter=true) {
 	if (!$query_select) return false;
@@ -614,13 +628,16 @@ function spip_mysql_create_view($nom, $query_select, $serveur='',$requeter=true)
 }
 
 
-// http://doc.spip.org/@spip_mysql_drop_table
 /**
- * @param $table
- * @param string $exist
- * @param string $serveur
- * @param bool $requeter
- * @return array|null|resource|string
+ * Supprime une table SQL
+ * 
+ * @param string $table    Nom de la table SQL
+ * @param string $exist    True pour ajouter un test d'existence avant de supprimer
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - string Texte de la requête si demandé
+ *     - true si la requête a réussie, false sinon
  */
 function spip_mysql_drop_table($table, $exist='', $serveur='',$requeter=true)
 {
@@ -628,14 +645,16 @@ function spip_mysql_drop_table($table, $exist='', $serveur='',$requeter=true)
 	return spip_mysql_query("DROP TABLE$exist $table", $serveur, $requeter);
 }
 
-// supprime une vue 
-// http://doc.spip.org/@spip_mysql_drop_view
 /**
- * @param $view
- * @param string $exist
- * @param string $serveur
- * @param bool $requeter
- * @return array|null|resource|string
+ * Supprime une vue SQL
+ * 
+ * @param string $view     Nom de la vue SQL
+ * @param string $exist    True pour ajouter un test d'existence avant de supprimer
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - string Texte de la requête si demandé
+ *     - true si la requête a réussie, false sinon
  */
 function spip_mysql_drop_view($view, $exist='', $serveur='',$requeter=true) {
 	if ($exist) $exist =" IF EXISTS";
@@ -660,12 +679,17 @@ function spip_mysql_showbase($match, $serveur='',$requeter=true)
 	return spip_mysql_query("SHOW TABLES LIKE " . _q($match), $serveur, $requeter);
 }
 
-// http://doc.spip.org/@spip_mysql_repair
 /**
- * @param $table
- * @param string $serveur
- * @param bool $requeter
- * @return array|null|resource|string
+ * Répare une table SQL
+ *
+ * Utilise `REPAIR TABLE ...` de MySQL
+ * 
+ * @param string $table    Nom de la table SQL
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - string Texte de la requête si demandée,
+ *     - true si la requête a réussie, false sinon
  */
 function spip_mysql_repair($table, $serveur='',$requeter=true)
 {
