@@ -147,7 +147,15 @@ function spip_sqlite_query($query, $serveur = '', $requeter = true){
 
 /* ordre alphabetique pour les autres */
 
-// http://doc.spip.org/@spip_sqlite_alter
+/**
+ * Modifie une structure de table SQLite
+ * 
+ * @param string $query    Requête SQL (sans 'ALTER ')
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   inutilisé
+ * @return bool
+ *     False si erreur dans l'exécution, true sinon
+ */
 function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 
 	$query = spip_sqlite_query("ALTER $query", $serveur, false);
@@ -758,7 +766,17 @@ function spip_sqlite_errno($serveur = ''){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_explain
+/**
+ * Retourne une explication de requête (Explain) SQLite
+ * 
+ * @param string $squery   Texte de la requête
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @return array|string|bool
+ *     - array : Tableau de l'explication
+ *     - string si on retourne le texte de la requête
+ *     - false si on a pas pu avoir d'explication
+ */
 function spip_sqlite_explain($query, $serveur = '', $requeter = true){
 	if (strpos(ltrim($query), 'SELECT')!==0) return array();
 
@@ -825,7 +843,16 @@ function spip_sqlite_free(&$r, $serveur = '', $requeter = true){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_get_charset
+/**
+ * Teste si le charset indiqué est disponible sur le serveur SQL (aucune action ici)
+ *
+ * Cette fonction n'a aucune action actuellement
+ * 
+ * @param array|string $charset Nom du charset à tester.
+ * @param string $serveur       Nom de la connexion
+ * @param bool $requeter        inutilisé
+ * @return void
+ */
 function spip_sqlite_get_charset($charset = array(), $serveur = '', $requeter = true){
 	//$c = !$charset ? '' : (" LIKE "._q($charset['charset']));
 	//return spip_sqlite_fetch(sqlite_query(_sqlite_link($serveur), "SHOW CHARACTER SET$c"), NULL, $serveur);
@@ -1185,7 +1212,28 @@ function spip_sqlite_replace_multi($table, $tab_couples, $desc = array(), $serve
 }
 
 
-// http://doc.spip.org/@spip_sqlite_select
+/**
+ * Exécute une requête de sélection avec SQLite
+ *
+ * Instance de sql_select (voir ses specs).
+ *
+ * @see sql_select()
+ * 
+ * @param string|array $select   Champs sélectionnés
+ * @param string|array $from     Tables sélectionnées
+ * @param string|array $where    Contraintes
+ * @param string|array $groupby  Regroupements
+ * @param string|array $orderby  Tris
+ * @param string $limit          Limites de résultats
+ * @param string|array $having   Contraintes posts sélections
+ * @param string $serveur        Nom de la connexion
+ * @param bool $requeter         Exécuter la requête, sinon la retourner
+ * @return array|bool|resource|string
+ *     - string : Texte de la requête si on ne l'exécute pas
+ *     - ressource si requête exécutée, ressource pour fetch()
+ *     - false si la requête exécutée a ratée
+ *     - array  : Tableau décrivant requête et temps d'exécution si var_profile actif pour tracer.
+ */
 function spip_sqlite_select($select, $from, $where = '', $groupby = '', $orderby = '', $limit = '', $having = '', $serveur = '', $requeter = true){
 
 	// version() n'est pas connu de sqlite
@@ -1255,7 +1303,16 @@ function spip_sqlite_selectdb($db, $serveur = '', $requeter = true){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_set_charset
+/**
+ * Définit un charset pour la connexion avec SQLite (aucune action ici)
+ *
+ * Cette fonction n'a aucune action actuellement.
+ * 
+ * @param string $charset Charset à appliquer
+ * @param string $serveur Nom de la connexion
+ * @param bool $requeter  inutilisé
+ * @return void
+ */
 function spip_sqlite_set_charset($charset, $serveur = '', $requeter = true){
 	# spip_log("Gestion charset sql a ecrire : "."SET NAMES "._q($charset), 'sqlite.'._LOG_ERREUR);
 	# return spip_sqlite_query("SET NAMES ". spip_sqlite_quote($charset), $serveur); //<-- Passe pas !
@@ -1490,15 +1547,13 @@ function _sqlite_is_version($version = '', $link = '', $serveur = '', $requeter 
 
 
 /**
- * retrouver un link
- * http://doc.spip.org/@_sqlite_link
- *
- * @param string $serveur
- * @return
+ * Retrouver un link d'une connexion SQLite
+ * 
+ * @param string $serveur Nom du serveur
+ * @return Object Information de connexion pour SQLite
  */
 function _sqlite_link($serveur = ''){
-	$link = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
-	return $link;
+	return &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
 }
 
 
@@ -1579,11 +1634,15 @@ function _sqlite_calculer_expression($expression, $v, $join = 'AND'){
 
 
 /**
- * pour conversion 0+x ? (pas la peine en sqlite)
- * http://doc.spip.org/@_sqlite_calculer_order
+ * Prépare une clause order by
  *
- * @param  $orderby
- * @return string
+ * Regroupe en texte les éléments si un tableau est donné
+ *
+ * @note
+ *   Pas besoin de conversion pour 0+x comme il faudrait pour mysql.
+ *
+ * @param string|array $orderby Texte du orderby à préparer
+ * @return string Texte du orderby préparé
  */
 function _sqlite_calculer_order($orderby){
 	return (is_array($orderby)) ? join(", ", $orderby) : $orderby;
@@ -1615,11 +1674,22 @@ function _sqlite_calculer_select_as($args){
 
 
 /**
- * renvoie les bonnes parentheses pour des where imbriquees
- * http://doc.spip.org/@_sqlite_calculer_where
+ * Prépare une clause WHERE pour SQLite
  *
- * @param  $v
- * @return array|mixed|string
+ * Retourne une chaîne avec les bonnes parenthèses pour la 
+ * contrainte indiquée, au format donnée par le compilateur
+ * 
+ * @param array|string $v
+ *     Description des contraintes
+ *     - string : Texte du where
+ *     - sinon tableau : A et B peuvent être de type string ou array,
+ *       OP et C sont de type string :
+ *       - array(A) : A est le texte du where
+ *       - array(OP, A) : contrainte OP( A )
+ *       - array(OP, A, B) : contrainte (A OP B)
+ *       - array(OP, A, B, C) : contrainte (A OP (B) : C)
+ * @return string
+ *     Contrainte pour clause WHERE
  */
 function _sqlite_calculer_where($v){
 	if (!is_array($v))
@@ -2134,6 +2204,18 @@ class spip_sqlite {
 		return spip_sqlite::$requeteurs[$serveur];
 	}
 
+	/**
+	 * Prépare le texte d'une requête avant son exécution
+	 *
+	 * Adapte la requête au format plus ou moins MySQL par un format
+	 * compris de SQLite.
+	 * 
+	 * Change les préfixes de tables SPIP par ceux véritables
+	 * 
+	 * @param string $query     Requête à préparer
+	 * @param string $serveur   Nom de la connexion
+	 * @return string           Requête préparée
+	 */
 	static function traduire_requete($query, $serveur){
 		$requeteur = spip_sqlite::requeteur($serveur);
 		$traducteur = new sqlite_traducteur($query, $requeteur->prefixe,$requeteur->sqlite_version);
@@ -2302,6 +2384,13 @@ class sqlite_traducteur {
 	// Pour les corrections a effectuer sur les requetes :
 	var $textes = array(); // array(code=>'texte') trouvé
 
+	/**
+	 * Constructeur
+	 *
+	 * @param string $query     Requête à préparer
+	 * @param string $prefixe   Prefixe des tables à utiliser
+	 * @param string $sqlite_version Version SQLite (2 ou 3)
+	 */
 	function sqlite_traducteur($query, $prefixe, $sqlite_version){
 		$this->query = $query;
 		$this->prefixe = $prefixe;
@@ -2309,13 +2398,11 @@ class sqlite_traducteur {
 	}
 
 	/**
-	 * transformer la requete pour sqlite
-	 * enleve les textes, transforme la requete pour quelle soit
-	 * bien interpretee par sqlite, puis remet les textes
-	 * la fonction affecte $this->query
-	 * http://doc.spip.org/@traduire_requete
-	 *
-	 * @return void
+	 * Transformer la requete pour SQLite
+	 * 
+	 * Enlève les textes, transforme la requête pour quelle soit
+	 * bien interprétée par SQLite, puis remet les textes
+	 * la fonction affecte `$this->query`
 	 */
 	function traduire_requete(){
 		//
@@ -2433,12 +2520,11 @@ class sqlite_traducteur {
 
 
 	/**
-	 * les callbacks
-	 * remplacer DATE_ / INTERVAL par DATE...strtotime
-	 * http://doc.spip.org/@_remplacerDateParTime
-	 *
-	 * @param  $matches
-	 * @return string
+	 * Callback pour remplacer `DATE_` / `INTERVAL`
+	 * par `DATE ... strtotime`
+	 * 
+	 * @param array $matches Captures
+	 * @return string Texte de date compris par SQLite
 	 */
 	function _remplacerDateParTime($matches){
 		$op = strtoupper($matches[1]=='ADD') ? '+' : '-';
@@ -2446,11 +2532,11 @@ class sqlite_traducteur {
 	}
 
 	/**
-	 * callback ou l'on remplace FIELD(table,i,j,k...) par CASE WHEN table=i THEN n ... ELSE 0 END
-	 * http://doc.spip.org/@_remplacerFieldParCase
-	 *
-	 * @param  $matches
-	 * @return string
+	 * Callback pour remplacer `FIELD(table,i,j,k...)`
+	 * par `CASE WHEN table=i THEN n ... ELSE 0 END`
+	 * 
+	 * @param array $matches Captures
+	 * @return string Texte de liste ordonnée compris par SQLite
 	 */
 	function _remplacerFieldParCase($matches){
 		$fields = substr($matches[0], 6, -1); // ne recuperer que l'interieur X de field(X)

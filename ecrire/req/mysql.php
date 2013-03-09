@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 /**
- * Ce fichier contient les fonctions gerant
+ * Ce fichier contient les fonctions gérant
  * les instructions SQL pour MySQL
  *
  * @package SPIP\Core\SQL\MySQL
@@ -19,19 +19,20 @@
  
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// fonction pour la premiere connexion a un serveur MySQL
 
-// http://doc.spip.org/@req_mysql_dist
 /**
- * @param $host
- * @param $port
- * @param $login
- * @param $pass
- * @param string $db
- * @param string $prefixe
+ * Crée la première connexion à un serveur MySQL
+ * 
+ * @param string $host     Chemin du serveur
+ * @param int $port        Port de connexion
+ * @param string $login    Nom d'utilisateur
+ * @param string $pass     Mot de passe
+ * @param string $db       Nom de la base
+ * @param string $prefixe  Préfixe des tables SPIP
  * @return array|bool
+ *     - false si la connexion a échoué
+ *     - tableau décrivant la connexion sinon
  */
-
 function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 	if (!charger_php_extension('mysql')) return false;
 	if ($port > 0) $host = "$host:$port";
@@ -112,15 +113,16 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 'utf-8'=>array('charset'=>'utf8','collation'=>'utf8_general_ci'))
 		);
 
-// http://doc.spip.org/@spip_mysql_set_charset
+
 /**
- * @param $charset
- * @param string $serveur
- * @param bool $requeter
- * @param bool $requeter
- * @return resource
+ * Définit un charset pour la connexion avec Mysql
+ * 
+ * @param string $charset Charset à appliquer
+ * @param string $serveur Nom de la connexion
+ * @param bool $requeter  inutilisé
+ * @return resource       Ressource de résultats pour fetch()
  */
-function spip_mysql_set_charset($charset, $serveur='',$requeter=true,$requeter=true){
+function spip_mysql_set_charset($charset, $serveur='',$requeter=true){
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	spip_log("changement de charset sql : "."SET NAMES "._q($charset), _LOG_DEBUG);
 	return mysql_query($connexion['last'] = "SET NAMES "._q($charset));
@@ -131,9 +133,9 @@ function spip_mysql_set_charset($charset, $serveur='',$requeter=true,$requeter=t
  * Teste si le charset indiqué est disponible sur le serveur SQL
  * 
  * @param array|string $charset Nom du charset à tester.
- * @param string $serveur
- * @param bool $requeter
- * @return array
+ * @param string $serveur       Nom de la connexion
+ * @param bool $requeter        inutilisé
+ * @return array                Description du charset (son nom est dans 'charset')
  */
 function spip_mysql_get_charset($charset=array(), $serveur='',$requeter=true){
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
@@ -143,22 +145,31 @@ function spip_mysql_get_charset($charset=array(), $serveur='',$requeter=true){
 	return spip_mysql_fetch(mysql_query($c), NULL, $serveur);
 }
 
-// obsolete, ne plus utiliser
-// http://doc.spip.org/@spip_query_db
+/**
+ * Exécute une requête Mysql (obsolète, ne plus utiliser)
+ * 
+ * @deprecated Utiliser sql_query() ou autres
+ * 
+ * @param string $query    Requête
+ * @param string $serveur  Nom de la connexion
+ * @param bool   $requeter Exécuter la requête, sinon la retourner
+ * @return Resource        Ressource pour fetch()
+**/
 function spip_query_db($query, $serveur='',$requeter=true) {
 	return spip_mysql_query($query, $serveur, $requeter);
 }
 
-// Fonction de requete generale, munie d'une trace a la demande
 
-// http://doc.spip.org/@spip_mysql_query
 /**
-
- * @param $query
- * @param string $serveur
- * @param bool $requeter
- * @return array|null|resource|string
- *
+ * Exécute une requête MySQL, munie d'une trace à la demande
+ * 
+ * @param string $query    Requête
+ * @param string $serveur  Nom de la connexion
+ * @param bool   $requeter Exécuter la requête, sinon la retourner
+ * @return array|resource|string|bool
+ *     - string : Texte de la requête si on ne l'exécute pas
+ *     - ressource|bool : Si requête exécutée
+ *     - array : Tableau décrivant requête et temps d'exécution si var_profile actif pour tracer.
  */
 function spip_mysql_query($query, $serveur='',$requeter=true) {
 
@@ -185,12 +196,16 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
 }
 
-// http://doc.spip.org/@spip_mysql_alter
 /**
- * @param $query
- * @param string $serveur
- * @param bool $requeter
- * @return array|null|resource|string
+ * Modifie une structure de table MySQL
+ * 
+ * @param string $query    Requête SQL (sans 'ALTER ')
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @return array|bool|string
+ *     - string : Texte de la requête si on ne l'exécute pas
+ *     - bool   : Si requête exécutée
+ *     - array  : Tableau décrivant requête et temps d'exécution si var_profile actif pour tracer.
  */
 function spip_mysql_alter($query, $serveur='',$requeter=true){
 	// ici on supprime les ` entourant le nom de table pour permettre
@@ -200,24 +215,26 @@ function spip_mysql_alter($query, $serveur='',$requeter=true){
 	return spip_mysql_query("ALTER ".$query, $serveur, $requeter); # i.e. que PG se debrouille
 }
 
-// http://doc.spip.org/@spip_mysql_optimize
 /**
- * @param $table
- * @param string $serveur
- * @param bool $requeter
- * @return bool
+ * Optimise une table MySQL
+ * 
+ * @param string $table    Nom de la table
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   inutilisé
+ * @return bool            Toujours true
  */
 function spip_mysql_optimize($table, $serveur='',$requeter=true){
 	spip_mysql_query("OPTIMIZE TABLE ". $table);
 	return true;
 }
 
-// http://doc.spip.org/@spip_mysql_explain
 /**
- * @param $query
- * @param string $serveur
- * @param bool $requeter
- * @return array
+ * Retourne une explication de requête (Explain) MySQL
+ * 
+ * @param string $squery   Texte de la requête
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   inutilisé
+ * @return array           Tableau de l'explication
  */
 function spip_mysql_explain($query, $serveur='',$requeter=true){
 	if (strpos(ltrim($query), 'SELECT') !== 0) return array();
@@ -230,27 +247,35 @@ function spip_mysql_explain($query, $serveur='',$requeter=true){
 	$r = $link ? mysql_query($query, $link) : mysql_query($query);
 	return spip_mysql_fetch($r, NULL, $serveur);
 }
-// fonction  instance de sql_select, voir ses specs dans abstract.php
-// traite_query pourrait y etre fait d'avance ce serait moins cher
-// Les \n et \t sont utiles au debusqueur.
 
 
-// http://doc.spip.org/@spip_mysql_select
 /**
- * @param $select
- * @param $from
- * @param string $where
- * @param string $groupby
- * @param string $orderby
- * @param string $limit
- * @param string $having
- * @param string $serveur
- * @param bool $requeter
- * @return array|null|resource|string
+ * Exécute une requête de sélection avec MySQL
+ *
+ * Instance de sql_select (voir ses specs).
+ *
+ * @see sql_select()
+ * @note
+ *     Les `\n` et `\t` sont utiles au debusqueur.
+ * 
+ * @param string|array $select   Champs sélectionnés
+ * @param string|array $from     Tables sélectionnées
+ * @param string|array $where    Contraintes
+ * @param string|array $groupby  Regroupements
+ * @param string|array $orderby  Tris
+ * @param string $limit          Limites de résultats
+ * @param string|array $having   Contraintes posts sélections
+ * @param string $serveur        Nom de la connexion
+ * @param bool $requeter         Exécuter la requête, sinon la retourner
+ * @return array|bool|resource|string
+ *     - string : Texte de la requête si on ne l'exécute pas
+ *     - ressource si requête exécutée, ressource pour fetch()
+ *     - false si la requête exécutée a ratée
+ *     - array  : Tableau décrivant requête et temps d'exécution si var_profile actif pour tracer.
  */
 function spip_mysql_select($select, $from, $where='',
-			   $groupby='', $orderby='', $limit='', $having='',
-			   $serveur='',$requeter=true) {
+			$groupby='', $orderby='', $limit='', $having='',
+			$serveur='',$requeter=true) {
 
 
 	$from = (!is_array($from) ? $from : spip_mysql_select_as($from));
@@ -269,14 +294,17 @@ function spip_mysql_select($select, $from, $where='',
 	return $r ? $r : $query;
 }
 
-// 0+x avec un champ x commencant par des chiffres est converti par MySQL
-// en le nombre qui commence x.
-// Pas portable malheureusement, on laisse pour le moment.
-
-// http://doc.spip.org/@spip_mysql_order
 /**
- * @param $orderby
- * @return string
+ * Prépare une clause order by
+ *
+ * Regroupe en texte les éléments si un tableau est donné
+ *
+ * @note
+ *   0+x avec un champ x commencant par des chiffres est converti par MySQL
+ *   en le nombre qui commence x. Pas portable malheureusement, on laisse pour le moment.
+ * 
+ * @param string|array $orderby Texte du orderby à préparer
+ * @return string Texte du orderby préparé
  */
 function spip_mysql_order($orderby)
 {
@@ -284,10 +312,23 @@ function spip_mysql_order($orderby)
 }
 
 
-// http://doc.spip.org/@calculer_mysql_where
 /**
- * @param $v
- * @return array|mixed|string
+ * Prépare une clause WHERE pour MySQL
+ *
+ * Retourne une chaîne avec les bonnes parenthèses pour la 
+ * contrainte indiquée, au format donnée par le compilateur
+ * 
+ * @param array|string $v
+ *     Description des contraintes
+ *     - string : Texte du where
+ *     - sinon tableau : A et B peuvent être de type string ou array,
+ *       OP et C sont de type string :
+ *       - array(A) : A est le texte du where
+ *       - array(OP, A) : contrainte OP( A )
+ *       - array(OP, A, B) : contrainte (A OP B)
+ *       - array(OP, A, B, C) : contrainte (A OP (B) : C)
+ * @return string
+ *     Contrainte pour clause WHERE
  */
 function calculer_mysql_where($v)
 {
@@ -367,12 +408,15 @@ function spip_mysql_select_as($args)
 
 define('_SQL_PREFIXE_TABLE', '/([,\s])spip_/S');
 
-// http://doc.spip.org/@traite_query
 /**
- * @param $query
- * @param string $db
- * @param string $prefixe
- * @return array|null|string
+ * Prépare le texte d'une requête avant son exécution
+ *
+ * Change les préfixes de tables SPIP par ceux véritables
+ * 
+ * @param string $query     Requête à préparer
+ * @param string $db        Nom de la base de donnée
+ * @param string $prefixe   Préfixe de tables à appliquer
+ * @return string           Requête préparée
  */
 function traite_query($query, $db='', $prefixe='') {
 
