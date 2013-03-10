@@ -28,11 +28,11 @@ include_spip('inc/filtres');
  * Compile la balise dynamique `#FORMULAIRE_INSCRIPTION` qui affiche
  * un formulaire d'inscription au site
  *
- * @balise FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE}
+ * @balise FORMULAIRE_INSCRIPTION
  * @example
  *     ```
  *     #FORMULAIRE_INSCRIPTION
- *     #FORMULAIRE_INSCRIPTION
+ *     #FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE}
  *     ```
  *
  * @param Champ $p
