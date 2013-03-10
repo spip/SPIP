@@ -488,7 +488,7 @@ function spip_mysql_selectdb($db) {
 **/
 function spip_mysql_listdbs($serveur='',$requeter=true) {
 	$dbs = array();
-	if ($res = spip_mysql_query("SHOW DATABASES")){
+	if ($res = spip_mysql_query("SHOW DATABASES", $serveur)){
 		while($row = mysql_fetch_assoc($res))
 			$dbs[] = $row['Database'];
 	}
@@ -522,7 +522,7 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 	if (!is_array($champs) || !is_array($cles)) 
 		return;
 
-	$res = spip_mysql_query("SELECT version() as v");
+	$res = spip_mysql_query("SELECT version() as v", $serveur);
 	if ($row = mysql_fetch_array($res)
 	 && (version_compare($row['v'],'5.0','>=')))
 		spip_mysql_query("SET sql_mode=''");
