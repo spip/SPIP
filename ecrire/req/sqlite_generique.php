@@ -546,15 +546,17 @@ function spip_sqlite_create_index($nom, $table, $champs, $unique='', $serveur = 
 }
 
 /**
- * en PDO/sqlite3, il faut calculer le count par une requete count(*)
+ * Retourne le nombre de lignes d’une ressource de sélection obtenue
+ * avec `sql_select()`
+ * 
+ * En PDO/sqlite3, il faut calculer le count par une requete count(*)
  * pour les resultats de SELECT
  * cela est fait sans spip_sqlite_query()
- * http://doc.spip.org/@spip_sqlite_count
  *
- * @param  $r
- * @param string $serveur
- * @param bool $requeter
- * @return int
+ * @param Ressource|Object $r  Ressource de résultat
+ * @param string $serveur      Nom de la connexion
+ * @param bool $requeter       Inutilisé
+ * @return int                 Nombre de lignes
  */
 function spip_sqlite_count($r, $serveur = '', $requeter = true){
 	if (!$r) return 0;
@@ -587,7 +589,20 @@ function spip_sqlite_count($r, $serveur = '', $requeter = true){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_countsel
+/**
+ * Retourne le nombre de lignes d'une sélection
+ *
+ * @param array|string $from     Tables à consulter (From)
+ * @param array|string $where    Conditions a remplir (Where)
+ * @param array|string $groupby  Critère de regroupement (Group by)
+ * @param array $having          Tableau des des post-conditions à remplir (Having)
+ * @param string $serveur        Nom de la connexion
+ * @param bool $requeter         Exécuter la requête, sinon la retourner
+ * @return int|bool|string
+ *     - String Texte de la requête si demandé
+ *     - int Nombre de lignes
+ *     - false si la requête a échouée
+**/
 function spip_sqlite_countsel($from = array(), $where = array(), $groupby = '', $having = array(), $serveur = '', $requeter = true){
 	$c = !$groupby ? '*' : ('DISTINCT '.(is_string($groupby) ? $groupby : join(',', $groupby)));
 	$r = spip_sqlite_select("COUNT($c)", $from, $where, '', '', '',
@@ -783,7 +798,7 @@ function spip_sqlite_errno($serveur = ''){
 /**
  * Retourne une explication de requête (Explain) SQLite
  * 
- * @param string $squery   Texte de la requête
+ * @param string $query    Texte de la requête
  * @param string $serveur  Nom de la connexion
  * @param bool $requeter   Exécuter la requête, sinon la retourner
  * @return array|string|bool
@@ -804,7 +819,17 @@ function spip_sqlite_explain($query, $serveur = '', $requeter = true){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_fetch
+/**
+ * Rècupère une ligne de résultat
+ *
+ * Récupère la ligne suivante d'une ressource de résultat
+ * 
+ * @param Ressource $r     Ressource de résultat (issu de sql_select)
+ * @param string $t        Structure de résultat attendu (défaut ASSOC)
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Inutilisé
+ * @return array           Ligne de résultat
+ */
 function spip_sqlite_fetch($r, $t = '', $serveur = '', $requeter = true){
 
 	$link = _sqlite_link($serveur);
@@ -832,7 +857,15 @@ function spip_sqlite_fetch($r, $t = '', $serveur = '', $requeter = true){
 	return $retour;
 }
 
-
+/**
+ * Place le pointeur de résultat sur la position indiquée
+ *
+ * @param Ressource $r     Ressource de résultat
+ * @param int $row_number  Position. Déplacer le pointeur à cette ligne
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Inutilisé
+ * @return bool True si déplacement réussi, false sinon.
+**/
 function spip_sqlite_seek($r, $row_number, $serveur = '', $requeter = true){
 	if ($r){
 		$link = _sqlite_link($serveur);
@@ -849,7 +882,17 @@ function spip_sqlite_seek($r, $row_number, $serveur = '', $requeter = true){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_free
+/**
+ * Libère une ressource de résultat
+ *
+ * Indique à SQLite de libérer de sa mémoire la ressoucre de résultat indiquée
+ * car on n'a plus besoin de l'utiliser.
+ * 
+ * @param Ressource|Object $r  Ressource de résultat
+ * @param string $serveur      Nom de la connexion
+ * @param bool $requeter       Inutilisé
+ * @return bool                True si réussi
+ */
 function spip_sqlite_free(&$r, $serveur = '', $requeter = true){
 	unset($r);
 	return true;
@@ -1367,7 +1410,24 @@ function spip_sqlite_showbase($match, $serveur = '', $requeter = true){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_showtable
+/**
+ * Obtient la description d'une table ou vue SQLite
+ *
+ * Récupère la définition d'une table ou d'une vue avec colonnes, indexes, etc.
+ * au même format que la définition des tables SPIP, c'est à dire
+ * un tableau avec les clés
+ *
+ * - `field` (tableau colonne => description SQL) et
+ * - `key` (tableau type de clé => colonnes)
+ * 
+ * @param string $nom_table  Nom de la table SQL
+ * @param string $serveur    Nom de la connexion
+ * @param bool $requeter     Exécuter la requête, sinon la retourner
+ * @return array|string
+ *     - chaîne vide si pas de description obtenue
+ *     - string Texte de la requête si demandé
+ *     - array description de la table sinon
+ */
 function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 	$query =
 		'SELECT sql, type FROM'
