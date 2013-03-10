@@ -1178,15 +1178,29 @@ function spip_mysql_replace($table, $couples, $desc=array(), $serveur='',$requet
 
 
 /**
- * Retourne l'instruction SQL pour obtenir le texte d'un champ contenant
- * une balise `<multi>` dans la langue indiquée
+ * Insère où met à jour des entrées d’une table SQL
  *
- * Cette sélection est mise dans l'alias `multi` (instruction AS multi).
- *
- * @param string $objet Colonne ayant le texte
- * @param string $lang  Langue à extraire
- * @return string       Texte de sélection pour la requête
- */
+ * La clé ou les cles primaires doivent être présentes dans les données insérés.
+ * La fonction effectue une protection automatique des données.
+ * 
+ * Préférez insertq_multi et sql_updateq
+ * 
+ * @param string $table
+ *     Nom de la table SQL
+ * @param array $tab_couples
+ *     Tableau de tableau (colonne / valeur à modifier),
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $requeter
+ *     Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - true si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function spip_mysql_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true) {
 	$cles = "(" . join(',',array_keys($tab_couples[0])). ')';
 	$valeurs = array();
@@ -1364,11 +1378,12 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 	return spip_mysql_in($val, $valeurs, $not);
 }
 
-// http://doc.spip.org/@spip_mysql_cite
 /**
- * @param $v
- * @param $type
- * @return int|string
+ * Renvoie les bons echappements (mais pas sur les fonctions comme NOW())
+ *
+ * @param string|number $v   Texte ou nombre à échapper
+ * @param string $type       Type de donnée attendue, description SQL de la colonne de destination
+ * @return string|number     Texte ou nombre échappé
  */
 function spip_mysql_cite($v, $type) {
 	if(is_null($v)
@@ -1389,15 +1404,20 @@ function spip_mysql_cite($v, $type) {
 // Ces deux fonctions n'ont pas d'equivalent exact PostGres
 // et ne sont la que pour compatibilite avec les extensions de SPIP < 1.9.3
 
-//
-// Poser un verrou local a un SPIP donne
-// Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
-//
-// http://doc.spip.org/@spip_get_lock
 /**
- * @param $nom
+ * Poser un verrou SQL local 
+ *
+ * Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
+ *
+ * @deprecated Pas d'équivalence actuellement en dehors de MySQL
+ * @see spip_release_lock()
+ * 
+ * @param string $nom
+ *     Inutilisé. Le nom est calculé en fonction de la connexion principale
  * @param int $timeout
- * @return mixed
+ * @return string|bool
+ *     - Nom du verrou si réussite,
+ *     - false sinon
  */
 function spip_get_lock($nom, $timeout = 0) {
 
@@ -1414,9 +1434,18 @@ function spip_get_lock($nom, $timeout = 0) {
 	return $q['n'];
 }
 
-// http://doc.spip.org/@spip_release_lock
+
 /**
- * @param $nom
+ * Relâcher un verrou SQL local 
+ * 
+ * @deprecated Pas d'équivalence actuellement en dehors de MySQL
+ * @see spip_get_lock
+ * 
+ * @param string $nom
+ *     Inutilisé. Le nom est calculé en fonction de la connexion principale
+ * @param int $timeout
+ * @return string|bool
+ *     True si réussite, false sinon.
  */
 function spip_release_lock($nom) {
 
@@ -1429,10 +1458,11 @@ function spip_release_lock($nom) {
 	@mysql_query($q);
 }
 
-// Renvoie false si on n'a pas les fonctions mysql (pour l'install)
-// http://doc.spip.org/@spip_versions_mysql
 /**
+ * Teste si on a les fonctions MySQLi (pour l'install)
+ * 
  * @return bool
+ *     True si on a les fonctions, false sinon
  */
 function spip_versions_mysql() {
 	charger_php_extension('mysql');
@@ -1464,10 +1494,16 @@ function test_rappel_nom_base_mysql($server_db)
 	}
 }
 
-// http://doc.spip.org/@test_sql_mode_mysql
+
 /**
- * @param $server_db
+ * Teste si on peut changer les modes de MySQL
+ *
+ * @link http://dev.mysql.com/doc/refman/5.0/fr/server-sql-mode.html
+ * 
+ * @param string $server_db  Nom de la connexion
  * @return string
+ *     - chaîne vide si on ne peut pas appliquer de mode
+ *     - chaîne : code compilé pour l'indiquer le résultat du test à SPIP
  */
 function test_sql_mode_mysql($server_db){
 	$res = sql_select("version() as v",'','','','','','',$server_db);
