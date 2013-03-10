@@ -828,7 +828,40 @@ function sql_replace($table, $couples, $desc=array(), $serveur='', $option=true)
 }
 
 
-// http://doc.spip.org/@sql_replace_multi
+
+/**
+ * Insère où met à jour des entrées d’une table SQL
+ *
+ * La clé ou les cles primaires doivent être présentes dans les données insérés.
+ * La fonction effectue une protection automatique des données.
+ * 
+ * Préférez sql_insertq_multi() et sql_updateq().
+ * 
+ * @see sql_insertq_multi()
+ * @see sql_updateq()
+ * @see sql_replace()
+ * 
+ * @param string $table
+ *     Nom de la table SQL
+ * @param array $tab_couples
+ *     Tableau de tableau (colonne / valeur à modifier),
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
+ * 
+ * @return bool|string
+ *     - true si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function sql_replace_multi($table, $tab_couples, $desc=array(), $serveur='', $option=true)
 {
 	$f = sql_serveur('replace_multi', $serveur,  $option==='continue' OR $option===false);
@@ -1117,7 +1150,31 @@ function sql_create_view($nom, $select_query, $serveur='', $option=true) {
 	return $r;
 }
 
-// http://doc.spip.org/@sql_multi
+/**
+ * Retourne l'instruction SQL pour obtenir le texte d'un champ contenant
+ * une balise `<multi>` dans la langue indiquée
+ *
+ * Cette sélection est mise dans l'alias `multi` (instruction AS multi).
+ *
+ * @example
+ *     ```
+ *     $t = sql_multi('chapo', 'fr');
+ *     ```
+ * @api
+ * @param string $objet
+ *     Colonne ayant le texte
+ * @param string $lang
+ *     Langue à extraire
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 2 valeurs :
+ * 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
+ * @return string
+ *     Texte de sélection pour la requête
+ */
 function sql_multi($sel, $lang, $serveur='', $option=true)
 {
 	$f = sql_serveur('multi', $serveur,  $option==='continue' OR $option===false);
@@ -1537,23 +1594,23 @@ function sql_terminer_transaction($serveur='', $option=true) {
 
 
 /**
- * Prepare une chaine hexadecimale
+ * Prépare une chaine hexadécimale
  * 
- * Prend une chaine sur l'aphabet hexa
- * et retourne sa representation numerique attendue par le serveur SQL.
+ * Prend une chaîne sur l'aphabet hexa
+ * et retourne sa représentation numérique attendue par le serveur SQL.
  * Par exemple : FF ==> 0xFF en MySQL mais x'FF' en PG
  *
  * @api
  * @param string $val
- * 		Chaine hexadecimale
+ *     Chaine hexadécimale
  * @param string $serveur
- * 		Nom du connecteur
+ *     Nom du connecteur
  * @param bool|string $option
- * 		Peut avoir 2 valeurs : 
- * 		- true pour executer la demande.
- * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
+ *     Peut avoir 2 valeurs : 
+ *     - true pour exécuter la demande.
+ *     - 'continue' pour ne pas échouer en cas de serveur SQL indisponible.
  * @return string
- * 		Retourne la valeur hexadecimale attendue par le serveur SQL
+ *     Valeur hexadécimale attendue par le serveur SQL
 **/
 function sql_hex($val, $serveur='', $option=true)
 {
@@ -1575,14 +1632,14 @@ function sql_hex($val, $serveur='', $option=true)
  *
  * @api
  * @param string $val
- * 		Chaine a echapper
+ *     Chaine à echapper
  * @param string $serveur
- * 		Nom du connecteur
+ *     Nom du connecteur
  * @param string $type
- * 		Peut contenir une declaration de type de champ SQL
- * 		{@example <code>int NOT NULL</code>} qui sert alors aussi a calculer le type d'echappement
+ *     Peut contenir une declaration de type de champ SQL
+ *     Exemple : `int NOT NULL` qui sert alors aussi à calculer le type d'échappement
  * @return string
- * 		La chaine echappee
+ *     La chaine echappee
 **/
 function sql_quote($val, $serveur='', $type='')
 {
@@ -1591,6 +1648,27 @@ function sql_quote($val, $serveur='', $type='')
 	return $f($val, $type);
 }
 
+/**
+ * Tester si une date est proche de la valeur d'un champ
+ *
+ * @api
+ * @param string $champ
+ *     Nom du champ a tester
+ * @param int $interval
+ *     Valeur de l'intervalle : -1, 4, ...
+ * @param string $unite
+ *     Utité utilisée (DAY, MONTH, YEAR, ...)
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool|string $options
+ *     Peut avoir 2 valeurs :
+ * 
+ *     - true pour exécuter la demande.
+ *     - 'continue' pour ne pas échouer en cas de serveur SQL indisponible.
+ * @return string|bool
+ *     - string : Expression SQL
+ *     - false si le serveur SQL est indisponible
+ **/
 function sql_date_proche($champ, $interval, $unite, $serveur='', $option=true)
 {
 	$f = sql_serveur('date_proche', $serveur, true);

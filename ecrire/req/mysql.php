@@ -1121,14 +1121,18 @@ function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur=
 			$serveur, $requeter);
 }
 
-// http://doc.spip.org/@spip_mysql_delete
 /**
- * @param $table
- * @param string $where
- * @param string $serveur
- * @param bool $requeter
- * @return array|bool|int|null|resource|string
- */
+ * Supprime des enregistrements d'une table
+ *
+ * @param string $table         Nom de la table SQL
+ * @param string|array $where   Conditions à vérifier
+ * @param string $serveur       Nom du connecteur
+ * @param bool $requeter        Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - int : nombre de suppressions réalisées,
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function spip_mysql_delete($table, $where='', $serveur='',$requeter=true) {
 	$res = spip_mysql_query(
 			  calculer_mysql_expression('DELETE FROM', $table, ',')
@@ -1144,28 +1148,44 @@ function spip_mysql_delete($table, $where='', $serveur='',$requeter=true) {
 		return false;
 }
 
-// http://doc.spip.org/@spip_mysql_replace
 /**
- * @param $table
- * @param $couples
+ * Insère où met à jour une entrée d’une table SQL
+ *
+ * La clé ou les cles primaires doivent être présentes dans les données insérés.
+ * La fonction effectue une protection automatique des données.
+ *
+ * Préférer à cette fonction updateq ou insertq.
+ * 
+ * @param string $table
+ *     Nom de la table SQL
+ * @param array $couples
+ *     Couples colonne / valeur à modifier,
  * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
  * @param string $serveur
+ *     Nom du connecteur
  * @param bool $requeter
- * @return array|null|resource|string
- */
+ *     Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - true si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function spip_mysql_replace($table, $couples, $desc=array(), $serveur='',$requeter=true) {
 	return spip_mysql_query("REPLACE $table (" . join(',',array_keys($couples)) . ') VALUES (' .join(',',array_map('_q', $couples)) . ')', $serveur, $requeter);
 }
 
 
-// http://doc.spip.org/@spip_mysql_replace_multi
 /**
- * @param $table
- * @param $tab_couples
- * @param array $desc
- * @param string $serveur
- * @param bool $requeter
- * @return array|null|resource|string
+ * Retourne l'instruction SQL pour obtenir le texte d'un champ contenant
+ * une balise `<multi>` dans la langue indiquée
+ *
+ * Cette sélection est mise dans l'alias `multi` (instruction AS multi).
+ *
+ * @param string $objet Colonne ayant le texte
+ * @param string $lang  Langue à extraire
+ * @return string       Texte de sélection pour la requête
  */
 function spip_mysql_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true) {
 	$cles = "(" . join(',',array_keys($tab_couples[0])). ')';
@@ -1178,15 +1198,16 @@ function spip_mysql_replace_multi($table, $tab_couples, $desc=array(), $serveur=
 }
 
 
-// http://doc.spip.org/@spip_mysql_multi
 /**
-
- * @param $objet
- * @param $lang
- * @return string
+ * Retourne l'instruction SQL pour obtenir le texte d'un champ contenant
+ * une balise `<multi>` dans la langue indiquée
  *
+ * Cette sélection est mise dans l'alias `multi` (instruction AS multi).
+ *
+ * @param string $objet Colonne ayant le texte
+ * @param string $lang  Langue à extraire
+ * @return string       Texte de sélection pour la requête
  */
-
 function spip_mysql_multi ($objet, $lang) {
 	$lengthlang = strlen("[$lang]");
 	$posmulti = "INSTR(".$objet.", '<multi>')";
@@ -1216,20 +1237,32 @@ function spip_mysql_multi ($objet, $lang) {
 	return $retour;
 }
 
-// http://doc.spip.org/@spip_mysql_hex
 /**
- * @param $v
+ * Prépare une chaîne hexadécimale
+ * 
+ * Par exemple : FF ==> 0xFF en MySQL
+ * 
+ * @param string $v
+ *     Chaine hexadecimale
  * @return string
- */
+ *     Valeur hexadécimale pour MySQL
+**/
 function spip_mysql_hex($v)
 {
 	return "0x" . $v;
 }
 
 /**
- * @param $v
+ * Échapper une valeur selon son type ou au mieux
+ * comme le fait `_q()` mais pour MySQL avec ses spécificités
+ *
+ * @param string|array|number $v
+ *     Texte, nombre ou tableau à échapper
  * @param string $type
- * @return array|int|string
+ *     Description du type attendu
+ *    (par exemple description SQL de la colonne recevant la donnée)
+ * @return string|number
+ *    Donnée prête à être utilisée par le gestionnaire SQL
  */
 function spip_mysql_quote($v, $type='') {
 	if ($type) {
@@ -1247,11 +1280,17 @@ function spip_mysql_quote($v, $type='') {
 }
 
 /**
- * @param $champ
- * @param $interval
- * @param $unite
+ * Tester si une date est proche de la valeur d'un champ
+ *
+ * @param string $champ
+ *     Nom du champ a tester
+ * @param int $interval
+ *     Valeur de l'intervalle : -1, 4, ...
+ * @param string $unite
+ *     Utité utilisée (DAY, MONTH, YEAR, ...)
  * @return string
- */
+ *     Expression SQL
+ **/
 function spip_mysql_date_proche($champ, $interval, $unite)
 {
 	return '('
@@ -1267,18 +1306,25 @@ function spip_mysql_date_proche($champ, $interval, $unite)
 	. '))';
 }
 
-//
-// IN (...) est limite a 255 elements, d'ou cette fonction assistante
-//
-// http://doc.spip.org/@spip_mysql_in
 /**
- * @param $val
- * @param $valeurs
+ * Retourne une expression IN pour le gestionnaire de base de données
+ *
+ * IN (...) est limité à 255 éléments, d'où cette fonction assistante
+ *
+ * @param string $val
+ *     Colonne SQL sur laquelle appliquer le test
+ * @param string|array $valeurs
+ *     Liste des valeurs possibles (séparés par des virgules si string)
  * @param string $not
+ *     - '' sélectionne les éléments correspondant aux valeurs
+ *     - 'NOT' inverse en sélectionnant les éléments ne correspondant pas aux valeurs
  * @param string $serveur
+ *     Nom du connecteur
  * @param bool $requeter
+ *     Inutilisé
  * @return string
- */
+ *     Expression de requête SQL
+**/
 function spip_mysql_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
 	$n = $i = 0;
 	$in_sql ="";
@@ -1297,13 +1343,18 @@ function spip_mysql_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
 	return "($in_sql)";
 }
 
-// pour compatibilite. Ne plus utiliser.
-// http://doc.spip.org/@calcul_mysql_in
+
 /**
- * @param $val
- * @param $valeurs
- * @param string $not
- * @return string
+ * Retourne une expression IN pour le gestionnaire de base de données
+ *
+ * Pour compatibilité. Ne plus utiliser.
+ * 
+ * @deprecated Utiliser sql_in()
+ * 
+ * @param string $val           Nom de la colonne
+ * @param string|array $valeurs Valeurs
+ * @param string $not           NOT pour inverser
+ * @return string               Expression de requête SQL
  */
 function calcul_mysql_in($val, $valeurs, $not='') {
 	if (is_array($valeurs))
