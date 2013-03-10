@@ -942,7 +942,28 @@ function spip_sqlite_in($val, $valeurs, $not = '', $serveur = '', $requeter = tr
 }
 
 
-// http://doc.spip.org/@spip_sqlite_insert
+/**
+ * Insère une ligne dans une table 
+ *
+ * @param string $table
+ *     Nom de la table SQL
+ * @param string $champs
+ *     Liste des colonnes impactées,
+ * @param string $valeurs
+ *     Liste des valeurs,
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $requeter
+ *     Exécuter la requête, sinon la retourner
+ * @return bool|string|int|array
+ *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur,
+ *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
+**/
 function spip_sqlite_insert($table, $champs, $valeurs, $desc = '', $serveur = '', $requeter = true){
 
 	$query = "INSERT INTO $table ".($champs ? "$champs VALUES $valeurs" : "DEFAULT VALUES");
@@ -960,7 +981,26 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc = '', $serveur = ''
 }
 
 
-// http://doc.spip.org/@spip_sqlite_insertq
+/**
+ * Insère une ligne dans une table, en protégeant chaque valeur
+ *
+ * @param string $table
+ *     Nom de la table SQL
+ * @param string $couples
+ *    Couples (colonne => valeur)
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $requeter
+ *     Exécuter la requête, sinon la retourner
+ * @return bool|string|int|array
+ *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur,
+ *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
+**/
 function spip_sqlite_insertq($table, $couples = array(), $desc = array(), $serveur = '', $requeter = true){
 	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) die("$table insertion sans description");
@@ -983,7 +1023,25 @@ function spip_sqlite_insertq($table, $couples = array(), $desc = array(), $serve
 }
 
 
-// http://doc.spip.org/@spip_sqlite_insertq_multi
+/**
+ * Insère plusieurs lignes d'un coup dans une table
+ *
+ * @param string $table
+ *     Nom de la table SQL
+ * @param array $tab_couples
+ *     Tableau de tableaux associatifs (colonne => valeur)
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $requeter
+ *     Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - True en cas de succès,
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function spip_sqlite_insertq_multi($table, $tab_couples = array(), $desc = array(), $serveur = '', $requeter = true){
 	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) die("$table insertion sans description");
@@ -1631,7 +1689,8 @@ function _sqlite_is_version($version = '', $link = '', $serveur = '', $requeter 
  * @return Object Information de connexion pour SQLite
  */
 function _sqlite_link($serveur = ''){
-	return &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+	$link = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+	return $link;
 }
 
 
