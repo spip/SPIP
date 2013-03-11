@@ -581,6 +581,7 @@ in einer Farbe, die den Status anzeigt :',
 	'install_select_langue' => 'Wählen Sie eine Sprache aus und klicken Sie auf «Weiter», um die Installation zu starten.',
 	'install_select_type_db' => 'Geben Sie den Typ der Datenbank an:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

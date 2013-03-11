@@ -599,6 +599,7 @@ a stav ich spracovania je označený farbou:',
 	'install_select_langue' => 'Vyberte si jazyk a potom kliknite na tlačidlo „Ďalej“, aby sa mohla spustiť inštalácia.',
 	'install_select_type_db' => 'Uveďte typ databázy:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

@@ -578,6 +578,7 @@ amb un color que indica el seu estat:',
 	'install_select_langue' => 'Seleccioneu un idioma i després feu un clic en el botó « següent » per iniciar el procés d\'instal·lació.',
 	'install_select_type_db' => 'Indicar el tipus de base de dades:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

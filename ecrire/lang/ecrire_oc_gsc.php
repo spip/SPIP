@@ -587,6 +587,7 @@ ua color qu\'indica lo lor estat:',
 	'install_select_langue' => 'Seleccionatz ua lenga puish clicatz lo boton «seguent» entà aviar la procedura d\'installacion.',
 	'install_select_type_db' => 'Indiquer le type de base de données :', # NEW
 	'install_select_type_mysql' => 'MySQL', # NEW
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2', # NEW
 	'install_select_type_sqlite3' => 'SQLite 3', # NEW

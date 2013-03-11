@@ -568,6 +568,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_select_langue' => 'يك زبان را انتخاب كنيد سپس روى دكمه  "بعدى" كليك كنيد، روند استقرار برنامه بكار خواهد افتاد',
 	'install_select_type_db' => 'نوع پايگاه داده‌ها را تعيين كردن',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

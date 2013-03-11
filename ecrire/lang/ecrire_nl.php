@@ -588,6 +588,7 @@ een kleur geeft hun status aan :',
 	'install_select_langue' => 'Kies een taal en klik vervolgens op de knop  «volgende» om de installatie te beginnen.',
 	'install_select_type_db' => 'Het basissoort gegevens aangeven:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

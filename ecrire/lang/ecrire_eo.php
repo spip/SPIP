@@ -591,6 +591,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'install_select_langue' => 'Elektu lingvon kaj poste musklaku la butonon « sekvanta » por lanĉi la instal-proceduron.',
 	'install_select_type_db' => 'Indiku la datumbazan tipon :',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

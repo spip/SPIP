@@ -577,6 +577,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_select_langue' => 'ជ្រើសយក មួយ​ភាសា រួច​ចុចលើប្រអប់ « បន្ទាប់ » ដើម្បី​ផ្ដើម ដំណើរតំលើង។',
 	'install_select_type_db' => 'Indiquer le type de base de données :', # NEW
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

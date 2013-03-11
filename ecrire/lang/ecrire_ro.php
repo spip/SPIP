@@ -590,6 +590,7 @@ cu o culoare care le indică starea :',
 	'install_select_langue' => 'Selecţionaţi o limbă şi faceţi click pe butonul « următorul » pentru a lansa procedura de instalare.',
 	'install_select_type_db' => 'Indicaţi tipul bazei de date :',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
