@@ -172,7 +172,7 @@ function article_inserer($id_rubrique) {
 			:_request('id_auteur'));
 		if ($id_auteur){
 			include_spip('action/editer_auteur');
-			auteur_associer($GLOBALS['visiteur_session']['id_auteur'], array('article'=>$id_article));
+			auteur_associer($id_auteur, array('article'=>$id_article));
 		}
 	}
 
