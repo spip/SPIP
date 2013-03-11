@@ -214,6 +214,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 
 		// eluder une eventuelle clause before|after|first inutilisable
 		$defr = rtrim(preg_replace('/(BEFORE|AFTER|FIRST)(.*)$/is', '', $def));
+		$defo = $defr; // garder la def d'origine pour certains cas
 		// remplacer les definitions venant de mysql
 		$defr = _sqlite_remplacements_definitions_table($defr);
 
@@ -253,8 +254,10 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 
 			case 'CHANGE COLUMN':
 			case 'CHANGE':
-				// recuperer le nom de la future colonne 
-				$def = trim($def);
+				// recuperer le nom de la future colonne
+			  // on reprend la def d'origine car _sqlite_modifier_table va refaire la translation
+			  // en tenant compte de la cle primaire (ce qui est mieux)
+				$def = trim($defo);
 				$colonne_destination = substr($def, 0, strpos($def, ' '));
 				$def = substr($def, strlen($colonne_destination)+1);
 
@@ -268,10 +271,12 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 				break;
 
 			case 'MODIFY':
+			  // on reprend la def d'origine car _sqlite_modifier_table va refaire la translation
+			  // en tenant compte de la cle primaire (ce qui est mieux)
 				if (!_sqlite_modifier_table(
 					$table,
 					$colonne_origine,
-					array('field' => array($colonne_origine => $def)),
+					array('field' => array($colonne_origine => $defo)),
 					$serveur)){
 					return false;
 				}
@@ -1244,6 +1249,7 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 
 			// separer toutes les descriptions de champs, separes par des virgules
 			# /!\ explode peut exploser aussi DECIMAL(10,2) !
+			$k_precedent = null;
 			foreach (explode(",", $desc) as $v){
 
 				preg_match("/^\s*([^\s]+)\s+(.*)/", $v, $r);
@@ -1682,12 +1688,15 @@ function _sqlite_modifier_table($table, $colonne, $opt = array(), $serveur = '')
 
 	// copier dans destination (si differente de origine), sinon tmp
 	$table_copie = ($meme_table) ? $table_tmp : $table_destination;
+	$autoinc = (isset($keys['PRIMARY KEY'])
+					AND stripos($keys['PRIMARY KEY'],',')===false
+					AND stripos($fields[$keys['PRIMARY KEY']],'default')===false);
 
 	if ($q = _sqlite_requete_create(
 		$table_copie,
 		$fields,
 		$keys,
-		$autoinc = false,
+		$autoinc,
 		$temporary = false,
 		$ifnotexists = true,
 		$serveur)){
@@ -1714,7 +1723,7 @@ function _sqlite_modifier_table($table, $colonne, $opt = array(), $serveur = '')
 				$table_destination,
 				$fields,
 				$keys,
-				$autoinc = false,
+				$autoinc,
 				$temporary = false,
 				$ifnotexists = false, // la table existe puisqu'on est dans une transaction
 				$serveur);
@@ -1837,32 +1846,42 @@ function _sqlite_remplacements_definitions_table($query, $autoinc = false){
 		'/(timestamp .* )ON .*$/is' => '\\1',
 		'/character set \w+/is' => '',
 		'/((big|small|medium|tiny)?int(eger)?)'.$num.'\s*unsigned/is' => '\\1 UNSIGNED',
-		'/(text\s+not\s+null)\s*$/is' => "\\1 DEFAULT ''",
-		//		'/((big|small|medium|tiny)?int(eger)?'.$num.'\s+not\s+null)\s*$/is' => "\\1 DEFAULT 0", // utile ?
+		'/(text\s+not\s+null(\s+collate\s+\w+)?)\s*$/is' => "\\1 DEFAULT ''",
+		'/((char|varchar)'.$num.'\s+not\s+null(\s+collate\s+\w+)?)\s*$/is' => "\\1 DEFAULT ''",
+		'/(datetime\s+not\s+null)\s*$/is' => "\\1 DEFAULT '0000-00-00 00:00:00'",
+		'/(date\s+not\s+null)\s*$/is' => "\\1 DEFAULT '0000-00-00'",
 	);
 
 	// pour l'autoincrement, il faut des INTEGER NOT NULL PRIMARY KEY
 	$remplace_autocinc = array(
 		'/(big|small|medium|tiny)?int(eger)?'.$num.'/is' => 'INTEGER'
 	);
+	// pour les int non autoincrement, il faut un DEFAULT
+	$remplace_nonautocinc = array(
+		'/((big|small|medium|tiny)?int(eger)?'.$num.'\s+not\s+null)\s*$/is' => "\\1 DEFAULT 0",
+	);
 
-	if ($autoinc OR is_string($query)){
+	if (is_string($query)){
 		$query = preg_replace(array_keys($remplace), $remplace, $query);
 		if ($autoinc OR preg_match(',AUTO_INCREMENT,is',$query))
 			$query = preg_replace(array_keys($remplace_autocinc), $remplace_autocinc, $query);
-		$query = (is_array($query)?array_map('_sqlite_collate_ci',$query):_sqlite_collate_ci($query));
+		else{
+			$query = preg_replace(array_keys($remplace_nonautocinc), $remplace_nonautocinc, $query);
+			$query = _sqlite_collate_ci($query);
+		}
 	}
 	elseif(is_array($query)){
 		foreach($query as $k=>$q) {
-			$autoinc = preg_match(',AUTO_INCREMENT,is',$q);
+			$ai = ($autoinc?$k==$autoinc:preg_match(',AUTO_INCREMENT,is',$q));
 			$query[$k] = preg_replace(array_keys($remplace), $remplace, $query[$k]);
-			if ($autoinc)
+			if ($ai)
 				$query[$k] = preg_replace(array_keys($remplace_autocinc), $remplace_autocinc, $query[$k]);
-			else
+			else{
+				$query[$k] = preg_replace(array_keys($remplace_nonautocinc), $remplace_nonautocinc, $query[$k]);
 				$query[$k] = _sqlite_collate_ci($query[$k]);
+			}
 		}
 	}
-
 	return $query;
 }
 
@@ -1924,8 +1943,13 @@ function _sqlite_requete_create($nom, $champs, $cles, $autoinc = false, $tempora
 		}
 	}
 	if ($c) $keys = "\n\t\t$pk ($c)";
+	// Pas de DEFAULT 0 sur les cles primaires en auto-increment
+	if (isset($champs[$c])
+		AND stripos($champs[$c],"default 0")!==false){
+		$champs[$c] = trim(str_ireplace("default 0","",$champs[$c]));
+	}
 
-	$champs = _sqlite_remplacements_definitions_table($champs, $autoinc);
+	$champs = _sqlite_remplacements_definitions_table($champs, $autoinc?$c:false);
 	foreach ($champs as $k => $v){
 		$query .= "$s\n\t\t$k $v";
 		$s = ",";
