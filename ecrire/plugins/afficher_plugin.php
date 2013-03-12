@@ -61,14 +61,14 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $checked, $actif, $
 	$class_li .= ($actif?" actif":"") . ($expose?" on":"");
 	return "<li id='$prefix$id' class='$class_li'>"
 	. ((!$checkable AND !$checked)
-	   ? '': plugin_checkbox(++$id_input, $plug_file, $checked))
+	   ? '': plugin_checkbox(++$id_input, $dir_plugins.$plug_file, $checked))
 	.  plugin_resume($info, $dir_plugins, $plug_file, $url_page)
 	. $cfg
 	. $erreur
 	. (($dir_plugins!==_DIR_PLUGINS_DIST AND plugin_est_installe($plug_file))
-	    ? plugin_desintalle($plug_file,$nom) : '')
+	    ? plugin_desintalle($plug_file,$nom,$dir_plugins) : '')
 	. "<div class='details'>" // pour l'ajax de exec/info_plugin
-	. (!$expose ? '' : affiche_bloc_plugin($plug_file, $info))
+	. (!$expose ? '' : affiche_bloc_plugin($plug_file, $info, $dir_plugins))
 	. "</div>"
 	."</li>";
 }
@@ -161,9 +161,11 @@ function plugin_resume($info, $dir_plugins, $plug_file, $url_page){
 	. "</div>";
 }
 
-function plugin_desintalle($plug_file, $nom){
+function plugin_desintalle($plug_file, $nom, $dir_plugins=null){
+	if (!$dir_plugins)
+		$dir_plugins = _DIR_PLUGINS;
 
-	$action = redirige_action_auteur('desinstaller_plugin',$plug_file,'admin_plugin');
+	$action = redirige_action_auteur('desinstaller_plugin',"$dir_plugins::$plug_file",'admin_plugin');
 	$text = _T('bouton_desinstaller');
 	$text2 = _T('info_desinstaller_plugin');
 	$file = basename($plug_file);
