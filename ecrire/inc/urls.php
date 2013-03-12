@@ -59,7 +59,7 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
 	static $current_base = null;
 	// les anciennes fonctions modifient directement les globales
 	// on les sauve avant l'appel, et on les retablit apres !
-	$save = array(@$GLOBALS['fond'],@$GLOBALS['contexte'],@$_SERVER['REDIRECT_url_propre'],@$_ENV['url_propre']);
+	$save = array(@$GLOBALS['fond'],@$GLOBALS['contexte'],@$_SERVER['REDIRECT_url_propre'],@$_ENV['url_propre'],$GLOBALS['profondeur_url']);
 	if (is_null($current_base)){
 		include_spip('inc/filtres_mini');
 		// le decodage des urls se fait toujours par rapport au site public
@@ -74,11 +74,12 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
 	if (!$assembler) {
 		unset($_SERVER['REDIRECT_url_propre']);
 		unset($_ENV['url_propre']);
+		$GLOBALS['profondeur_url'] = count(explode('/',$url))-1;
 	}
 
 	
 	$url_redirect = "";
-	$renommer = generer_url_entite();
+	$renommer = generer_url_entite('','','','',true);
 	if (!$renommer AND !function_exists('recuperer_parametres_url'))
 		$renommer = charger_fonction('page','urls'); // fallback pour decoder l'url
 	if ($renommer) {
@@ -116,7 +117,7 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
 	}
 
 	// retablir les globales
-	list($GLOBALS['fond'],$GLOBALS['contexte'],$_SERVER['REDIRECT_url_propre'],$_ENV['url_propre']) = $save;
+	list($GLOBALS['fond'],$GLOBALS['contexte'],$_SERVER['REDIRECT_url_propre'],$_ENV['url_propre'],$GLOBALS['profondeur_url']) = $save;
 	
 	// vider les globales url propres qui ne doivent plus etre utilisees en cas
 	// d'inversion url => objet
