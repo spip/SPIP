@@ -227,7 +227,9 @@ function objet_inserer($objet, $id_parent=null, $set=null) {
 		// et si le form n'a pas poste un id_auteur (meme vide, ce qui sert a annuler cette auto association)
 		if ($id > 0
 		  AND !isset($desc['field']['id_auteur'])){
-			$id_auteur = (is_null(_request('id_auteur'))?$GLOBALS['visiteur_session']['id_auteur']:_request('id_auteur'));
+			$id_auteur = ((is_null(_request('id_auteur')) AND isset($GLOBALS['visiteur_session']['id_auteur']))?
+				$GLOBALS['visiteur_session']['id_auteur']
+				:_request('id_auteur'));
 		  if ($id_auteur) {
 				include_spip('action/editer_auteur');
 				auteur_associer($id_auteur, array($objet=>$id));
