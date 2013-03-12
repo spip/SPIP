@@ -46,7 +46,12 @@
 </div>
 <script type="text/javascript">
 	function update_select(statut_default){
-		jQuery(this).attr('style',jQuery(this.options[this.selectedIndex]).attr('style')).closest('form').find('.boutons').css('visibility',this.options[this.selectedIndex].value==statut_default?'hidden':'visible');
+		var selected = this.options[this.selectedIndex];
+		var boutons = jQuery(this).attr('style',jQuery(selected).attr('style')).closest('form').find('.boutons');
+		if (selected.value!=statut_default)
+			boutons.css('visibility','visible').show('fast');
+		else
+			boutons.css('visibility','hidden')
 	}
 	jQuery(function(){
 		jQuery(".formulaire_#FORM .show select")
