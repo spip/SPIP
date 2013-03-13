@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=sk
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -312,7 +312,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_conflit_edition_votre_version' => 'Vaša verzia:',
 	'info_connexion_base' => 'Systém sa snaží pripojiť k databáze',
 	'info_connexion_base_donnee' => 'Pripojenie k databáze',
-	'info_connexion_ldap_ok' => 'Podarilo sa pripojiť k LDAP.</b><p>Môžete prejsť na ďalší krok.</p>',
+	'info_connexion_ldap_ok' => 'Pripojenie k LDAP bolo úspešné.</b><p>Môžete prejsť na ďalší krok.</p>',
 	'info_connexion_mysql' => 'Pripojenie k SQL',
 	'info_connexion_ok' => 'Pripojenie úspešné.',
 	'info_contact' => 'Kontakt',
@@ -599,6 +599,7 @@ a stav ich spracovania je označený farbou:',
 	'install_select_langue' => 'Vyberte si jazyk a potom kliknite na tlačidlo „Ďalej“, aby sa mohla spustiť inštalácia.',
 	'install_select_type_db' => 'Uveďte typ databázy:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -749,7 +750,7 @@ a stav ich spracovania je označený farbou:',
 	'plugin_info_credit' => 'Poďakovanie',
 	'plugin_info_erreur_xml' => 'Deklarácia tohto zásuvného modulu nie je správna',
 	'plugin_info_install_ok' => 'Inštalácia úspešná',
-	'plugin_info_necessite' => 'Treba:',
+	'plugin_info_necessite' => 'Potrebuje:',
 	'plugin_info_non_compatible_spip' => 'Tento zásuvný modul nie je kompatibilný s touto verziou SPIPu',
 	'plugin_info_plugins_dist_1' => 'Do priečinka @plugins_dist@ boli nahrané a boli v ňom aktivované tieto zásuvné moduly.',
 	'plugin_info_plugins_dist_2' => 'Nedajú sa deaktivovať.',
@@ -790,7 +791,7 @@ a stav ich spracovania je označený farbou:',
 
 	// Q
 	'queue_executer_maintenant' => 'Spustiť teraz',
-	'queue_info_purger' => 'Môžete vymazať všetky čakajúce úlohy a obnoviť zoznam pravidelných úloh na pôvodné hodnoty',
+	'queue_info_purger' => 'Môžete vymazať všetky čakajúce úlohy a zaplniť zoznam pravidelnými úlohami',
 	'queue_nb_jobs_in_queue' => '@nb@ úloh v rade',
 	'queue_next_job_in_nb_sec' => 'Ďalšia úloha o @nb@ s.',
 	'queue_no_job_in_queue' => 'Žiadne nevykonané úlohy',
@@ -806,8 +807,8 @@ a stav ich spracovania je označený farbou:',
 	'statut_admin_restreint' => '(administrátor s obmedzeniami)',
 
 	// T
-	'tache_cron_asap' => 'Zaplátať funkciu CRON @function@ (ASAP)',
-	'tache_cron_secondes' => 'Zaplátať funkciu CRON @function@ (všetky @nb@-y)',
+	'tache_cron_asap' => 'Funkcia CRON @function@ (ihneď)',
+	'tache_cron_secondes' => 'Funkcia CRON @function@ (všetkých @nb@)',
 	'taille_cache_image' => 'Obrázky, ktoré SPIP automaticky obnoví (miniatúry, názvy zmenené na grafiku, matematické vzorce vo formáte TeX, atď.) zaberajú spolu v priečinku @dir@ @taille@ .',
 	'taille_cache_infinie' => 'Táto stránka nemá žiaden pevný limit pre veľkosť cache.',
 	'taille_cache_maxi' => 'SPIP sa bude snažiť obmedziť veľkosť priečinka cache na približne <b>@octets@.</b>',

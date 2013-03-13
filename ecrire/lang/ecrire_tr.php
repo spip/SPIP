@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=tr
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=tr
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -595,6 +595,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'install_select_langue' => 'Bir dil seçiniz, sonra « bir sonraki » düğmesini tıklayıp yükleme işlemini başlatınız.',
 	'install_select_type_db' => 'Veri tabanının tipini belirtiniz :',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

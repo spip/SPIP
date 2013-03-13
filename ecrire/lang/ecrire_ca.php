@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=ca
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ca
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -159,7 +159,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'entree_url_2' => 'Adreça (URL) del lloc',
 	'erreur_connect_deja_existant' => 'Ja existeix un servidor amb aquest nom',
 	'erreur_nom_connect_incorrect' => 'Aquest nom de servidor no està autoritzat',
-	'erreur_plugin_desinstalation_echouee' => 'La desinstal·lació del connector ha fracassat. No obstant el podeu desactivar. ',
+	'erreur_plugin_desinstalation_echouee' => 'La desinstal·lació del connector ha fracassat. No obstant el podeu desactivar. ', # MODIF
 	'erreur_plugin_fichier_absent' => 'Fitxer absent',
 	'erreur_plugin_fichier_def_absent' => 'Fitxer de definició absent',
 	'erreur_plugin_nom_fonction_interdit' => 'Nom de funció prohibit',
@@ -303,7 +303,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'info_conflit_edition_votre_version' => 'La vostra versió:',
 	'info_connexion_base' => 'Intent de connexió a la base de dades',
 	'info_connexion_base_donnee' => 'Connexió amb la vostra base de dades',
-	'info_connexion_ldap_ok' => 'La connexió LDAP ha reeixit.</b><p> Podeu passar a la següent etapa.</p>',
+	'info_connexion_ldap_ok' => 'La connexió LDAP ha reeixit.</b><p> Podeu passar a la següent etapa.</p>', # MODIF
 	'info_connexion_mysql' => 'La vostra connexió SQL',
 	'info_connexion_ok' => 'La connexió ha reexit.',
 	'info_contact' => 'Contacte',
@@ -578,6 +578,7 @@ amb un color que indica el seu estat:',
 	'install_select_langue' => 'Seleccioneu un idioma i després feu un clic en el botó « següent » per iniciar el procés d\'instal·lació.',
 	'install_select_type_db' => 'Indicar el tipus de base de dades:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -728,7 +729,7 @@ amb un color que indica el seu estat:',
 	'plugin_info_credit' => 'Crèdits',
 	'plugin_info_erreur_xml' => 'La declaració d\'aquest connector és incorrecta',
 	'plugin_info_install_ok' => 'Instal·lació correcta',
-	'plugin_info_necessite' => 'Necessita:',
+	'plugin_info_necessite' => 'Necessita:', # MODIF
 	'plugin_info_non_compatible_spip' => 'Aquest connector no és compatible amb aquesta versió d\'SPIP',
 	'plugin_info_plugins_dist_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @plugins_dist@.', # MODIF
 	'plugin_info_plugins_dist_2' => 'No es poden desactivar.', # MODIF
@@ -785,8 +786,8 @@ amb un color que indica el seu estat:',
 	'statut_admin_restreint' => '(admin restringida)',
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)',
-	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)',
+	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # MODIF
+	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # MODIF
 	'taille_cache_image' => 'Les imatges calculades automàticament per SPIP (miniatures dels documents, títols presentats en forma gràfica, función matemàtiques en format TeX...) ocupen en el directori @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'Aquest lloc Web no preveu limitar la mida del directori de la memòria cau (cache).',
 	'taille_cache_maxi' => 'SPIP prova de limitar la mida del directori de la memòria cau (cache) d\'aquest lloc a aproximadament <b>@octets@</b> de dades.',

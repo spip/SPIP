@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=en
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -306,7 +306,7 @@ Do not submit this import request.<p>For more information, please see <a href="@
 	'info_conflit_edition_votre_version' => 'Your version:',
 	'info_connexion_base' => 'Trying to connect to database',
 	'info_connexion_base_donnee' => 'Connection to your database',
-	'info_connexion_ldap_ok' => 'LDAP connection succeeded.</b><p> You can go to the next step.</p>',
+	'info_connexion_ldap_ok' => '<b>LDAP connection succeeded.</b><p> You can go to the next step.</p>',
 	'info_connexion_mysql' => 'Your SQL connection',
 	'info_connexion_ok' => 'Connection succeeded.',
 	'info_contact' => 'Contact',
@@ -598,6 +598,7 @@ and their status is colour-coded:',
 	'install_select_langue' => 'Select a language, then click on "next" to start installation.',
 	'install_select_type_db' => 'Indicate the type of database:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi',
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -748,7 +749,7 @@ and their status is colour-coded:',
 	'plugin_info_credit' => 'Credits',
 	'plugin_info_erreur_xml' => 'Incorrect declaration of the plugin',
 	'plugin_info_install_ok' => 'Installation successful',
-	'plugin_info_necessite' => 'Required:',
+	'plugin_info_necessite' => 'Requires:',
 	'plugin_info_non_compatible_spip' => 'This plugin is incompatible with this version of SPIP',
 	'plugin_info_plugins_dist_1' => 'The following plugins are loaded and activated in the @plugins_dist@ directory.',
 	'plugin_info_plugins_dist_2' => 'They cannot be disabled.',

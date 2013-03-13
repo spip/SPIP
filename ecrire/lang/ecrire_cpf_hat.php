@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=cpf_hat
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=cpf_hat
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -604,6 +604,7 @@ nan yon koulè ki bay lestati ali :',
 	'install_select_langue' => 'Chwazi yon lang ak piye sou bouton « swivan » pou dmare prosédi-lenstalasyon.',
 	'install_select_type_db' => 'Indiquer le type de base de données :', # NEW
 	'install_select_type_mysql' => 'MySQL', # NEW
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2', # NEW
 	'install_select_type_sqlite3' => 'SQLite 3', # NEW

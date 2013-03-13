@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=it
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=it
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -311,7 +311,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_conflit_edition_votre_version' => 'La tua versione:',
 	'info_connexion_base' => 'Prova di connessione al database',
 	'info_connexion_base_donnee' => 'Connessione al proprio database',
-	'info_connexion_ldap_ok' => 'La connessione LDAP è riuscita.</b><p> È possibile passare alla fase successiva.</p>',
+	'info_connexion_ldap_ok' => '<b>La connessione LDAP è riuscita.</b><p> È possibile passare alla fase successiva.</p>',
 	'info_connexion_mysql' => 'La connessione a SQL',
 	'info_connexion_ok' => 'La connessione è riuscita.',
 	'info_contact' => 'Contatti',
@@ -596,6 +596,7 @@ Le traduzioni sono associate all\'originale,
 	'install_select_langue' => 'Seleziona una lingua e poi clicca sul bottone « Avanti » per lanciare la procedura di installazione.',
 	'install_select_type_db' => 'Indicare il tipo di database:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -746,7 +747,7 @@ Le traduzioni sono associate all\'originale,
 	'plugin_info_credit' => 'Crediti',
 	'plugin_info_erreur_xml' => 'La dichiarazione del plugin è sbagliata',
 	'plugin_info_install_ok' => 'Installazione completata con successo',
-	'plugin_info_necessite' => 'Richiesto :',
+	'plugin_info_necessite' => 'Richiesto :',
 	'plugin_info_non_compatible_spip' => 'Questo plugin è incompatibile con questa versione di SPIP',
 	'plugin_info_plugins_dist_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Questi non possono essere disabilitati.',

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=ar
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ar
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -609,6 +609,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_select_langue' => 'إختر لغة ثم انقر على الزر« التالي»  للبدء بعملية التثبيت.',
 	'install_select_type_db' => 'تحديد نوع قاعدة البيانات:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi',
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

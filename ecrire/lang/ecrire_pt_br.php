@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=pt_br
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=pt_br
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -303,7 +303,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 	'info_conflit_edition_votre_version' => 'A sua versão:',
 	'info_connexion_base' => 'Teste de conexão com a base',
 	'info_connexion_base_donnee' => 'Conexão à sua base de dados',
-	'info_connexion_ldap_ok' => 'A conexão LDAP foi efetuada.</b><p>Você pode passar para o próximo passo.</p>',
+	'info_connexion_ldap_ok' => '<b>A conexão LDAP foi efetuada.</b><p>Você pode passar para o próximo passo.</p>',
 	'info_connexion_mysql' => 'Sua conexão SQL',
 	'info_connexion_ok' => 'A conexão foi obtida.',
 	'info_contact' => 'Contato',
@@ -572,6 +572,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'install_select_langue' => 'Escolha um idioma e clique no botão «avançar» para iniciar o procedimento de instalação.',
 	'install_select_type_db' => 'Indicar o tipo de base de dados:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -722,7 +723,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'plugin_info_credit' => 'Créditos',
 	'plugin_info_erreur_xml' => 'A declaração deste plugin está incorreta',
 	'plugin_info_install_ok' => 'Instalação bem sucedida',
-	'plugin_info_necessite' => 'Precisa de:',
+	'plugin_info_necessite' => 'Requer:',
 	'plugin_info_non_compatible_spip' => 'Este plugin não é compatível com esta versão do SPIP',
 	'plugin_info_plugins_dist_1' => 'Os plugins abaixo são carregados e ativados no diretório @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Eles não são desativáveis.',
@@ -763,7 +764,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 
 	// Q
 	'queue_executer_maintenant' => 'Executar agora',
-	'queue_info_purger' => 'Você pode excluir todas as tarefas em espera e reinstalar a lista com as tarefas periódicas',
+	'queue_info_purger' => 'Você pode excluir todas as tarefas em espera e reinicializar a lista com as tarefas periódicas',
 	'queue_nb_jobs_in_queue' => '@nb@ trabalhos em espera',
 	'queue_next_job_in_nb_sec' => 'Próximo trabalho em @nb@ s',
 	'queue_no_job_in_queue' => 'Nenhum tarefa em espera',
@@ -834,7 +835,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 Estes arquivos podem servir para restringir o acesso aos autores e administradores em outras áreas do seu site (programas externos de estatísticas, por exemplo).</p><p>
 Se eles não forem úteis, você poderá deixar esta opção com o seu valor padrão (sem criar os arquivos).</p>',
 	'texte_informations_personnelles_1' => 'O sistema vai criar agora um acesso personalizado ao site.',
-	'texte_informations_personnelles_2' => '(Nota: se se trata de uma reinstalação, e os seus acessos funcionam sem problemas, você pode', # MODIF
+	'texte_informations_personnelles_2' => '(Nota: trata-se de uma reinstalação, se o seu acesso funciona corretamente, você pode',
 	'texte_introductif_article' => '(Texto introdutório da matéria.)',
 	'texte_jeu_caractere' => 'É aconselhável usar no seu site o alfabeto universal (<tt>utf-8</tt>): ele permite a exibição de textos em todos os idiomas, e não tem problemas de compatibilidade com os navegadores modernos.',
 	'texte_jeu_caractere_2' => 'Atenção: esta opção não provoca a conversão dos textos já gravados na base de dados.',

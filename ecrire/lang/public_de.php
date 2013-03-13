@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/public?lang_cible=de
+// extrait automatiquement de http://trad.spip.net/tradlang_module/public?lang_cible=de
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -80,8 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouvelles_breves' => 'Neue Meldungen',
 
 	// P
-	'page_precedente' => 'vorherige Seite',
-	'page_suivante' => 'nachfolgende Seite',
+	'page_precedente' => 'vorige Seite',
+	'page_suivante' => 'nächste Seite',
 	'par_auteur' => 'von ',
 	'participer_site' => 'Sie können bei dieser Website mitmachen, wenn Sie sich anmelden. Sie erhalten sofort eine E-Mail mit den Zugangsdaten zum Redaktionssystem.',
 	'plan_site' => 'Sitemap',

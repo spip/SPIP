@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/spip?lang_cible=oc_lms
+// extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=oc_lms
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_interface' => 'choix  de l\'interface', # NEW
 	'colonne' => 'Colonne', # NEW
 	'confirm_changer_statut' => 'Atencion, avetz demandat de chamjar l\'estatut de quel element. Desiratz de contunhar? ',
-	'correcte' => 'correcte', # chaine utilis&eacute;e dans le debugueur : "validation .. impossible" ou "validation .. correcte" NEW
+	'correcte' => 'correcte', # chaine utilisée dans le debugueur : "validation .. impossible" ou "validation .. correcte" NEW
 
 	// D
 	'date_aujourdhui' => 'uei',

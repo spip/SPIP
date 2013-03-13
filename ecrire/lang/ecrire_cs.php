@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=cs
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=cs
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -604,6 +604,7 @@ ukazuje jejich stav:',
 	'install_select_langue' => 'Zvolte jazyk a spusťte instalaci klepnutím na tlačítko "Další".',
 	'install_select_type_db' => 'Indicate the type of database:', # NEW
 	'install_select_type_mysql' => 'MySQL', # NEW
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2', # NEW
 	'install_select_type_sqlite3' => 'SQLite 3', # NEW

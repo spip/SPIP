@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=de
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=de
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -163,7 +163,7 @@ französischen SPIP-Dokumentation</a>.',
 	'entree_url_2' => 'Adresse (URL) der Website',
 	'erreur_connect_deja_existant' => 'Ein Server mit diesem Namen existiert bereits.',
 	'erreur_nom_connect_incorrect' => 'Dieser Servername ist nicht zulässig.',
-	'erreur_plugin_desinstalation_echouee' => 'Das Plugin konnte nicht deinstalliert werden. Sie müssen es auf jeden Fall deaktivieren.',
+	'erreur_plugin_desinstalation_echouee' => 'Das Deinstallieren des Plugins ist fehlgeschlagen. Sie können es jedoch deaktivieren.',
 	'erreur_plugin_fichier_absent' => 'Datei nicht vorhanden',
 	'erreur_plugin_fichier_def_absent' => 'Definitionsdatei nicht vorhanden',
 	'erreur_plugin_nom_fonction_interdit' => 'Unzulässiger Funktionsname',
@@ -307,7 +307,7 @@ französischen SPIP-Dokumentation</a>.',
 	'info_conflit_edition_votre_version' => 'Ihre Fassung:',
 	'info_connexion_base' => 'Test der Verbindung zur Datenbank',
 	'info_connexion_base_donnee' => 'Verbindung mit Ihrer Datenbank',
-	'info_connexion_ldap_ok' => 'Die LDAP-Verbindung wurde hergestellt.</b><p> Sie können mit dem nächsten Schritt fortfahren.',
+	'info_connexion_ldap_ok' => 'Die LDAP-Verbindung wurde hergestellt.</b><p> Sie können mit dem nächsten Schritt fortfahren.</p>',
 	'info_connexion_mysql' => 'Verbindung zur SQL-Datenbank',
 	'info_connexion_ok' => 'Die Verbindung wurde hergestellt.',
 	'info_contact' => 'Kontakt',
@@ -581,6 +581,7 @@ in einer Farbe, die den Status anzeigt :',
 	'install_select_langue' => 'Wählen Sie eine Sprache aus und klicken Sie auf «Weiter», um die Installation zu starten.',
 	'install_select_type_db' => 'Geben Sie den Typ der Datenbank an:',
 	'install_select_type_mysql' => 'MySQL',
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -772,7 +773,7 @@ in einer Farbe, die den Status anzeigt :',
 
 	// Q
 	'queue_executer_maintenant' => 'Jetzt ausführen',
-	'queue_info_purger' => 'Sie können alle anstehenden Jobs löschen und so die Liste der regelmäßigen Jobs neu initialisieren.',
+	'queue_info_purger' => 'Sie können alle anstehenden Jobs löschen und so die Liste der regelmäßigen Jobs neu initialisieren.', # MODIF
 	'queue_nb_jobs_in_queue' => '@nb@ Jobs in der Warteschlange',
 	'queue_next_job_in_nb_sec' => 'Nächster Job in @nb@ s',
 	'queue_no_job_in_queue' => 'Keine Aufgaben in der Warteschlange',
@@ -788,8 +789,8 @@ in einer Farbe, die den Status anzeigt :',
 	'statut_admin_restreint' => '(Rubrik-Admin)',
 
 	// T
-	'tache_cron_asap' => 'Cronjob @function@ (unverzüglich)',
-	'tache_cron_secondes' => 'Cronjob @function@ (alle @nb@ Sekunden)',
+	'tache_cron_asap' => 'Cronjob @function@ (unverzüglich)', # MODIF
+	'tache_cron_secondes' => 'Cronjob @function@ (alle @nb@ Sekunden)', # MODIF
 	'taille_cache_image' => 'Dei von SPIP automatisch berechneten Grafiken (Icons für Dokumente, als Grafiken gespeicherte Titel, mathematische Ausdrücke im Format TeX...) belegen insgesamt @taille@ im Verzeichnis @dir@.',
 	'taille_cache_infinie' => 'Die Grösse des <code>CACHE/</code> dieser Website wird nicht begrenzt.',
 	'taille_cache_maxi' => 'SPIP versucht die Grösse des <code>CACHE/</code> der Website auf ca. <b>@octets@</b> Byte zu begrenzen.',
@@ -841,7 +842,7 @@ in einer Farbe, die den Status anzeigt :',
 	'texte_enrichir_mise_a_jour' => 'Sie können Ihren Text ansprechend gestalten, indem Sie die typografischen Abkürzungen verwenden.',
 	'texte_fichier_authent' => '<b>Soll SPIP die Dateien <tt>.htpasswd</tt> und <tt>.htpasswd-admin</tt> im Verzeichnis @dossier@ anlegen?</b><p>
  Mit diesen Dateien können Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschränken.</p><p>Wenn Sie diese Möglickeit nicht nutzen, könnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.</p>',
-	'texte_informations_personnelles_1' => 'Das System nun persönliche Zugangsdaten für Sie anlegen.',
+	'texte_informations_personnelles_1' => 'Das System wird nun persönliche Zugangsdaten für Sie anlegen.',
 	'texte_informations_personnelles_2' => '(Hinweis: Wenn Sie die Site erneut installieren, und Ihre Zugangsdaten funktionieren, können Sie',
 	'texte_introductif_article' => '(Einleitender Text des Artikels.)',
 	'texte_jeu_caractere' => 'Es empfiehlt sich, das Universalalphabet (<tt>utf-8</tt>) für ihre Website zu verwenden. Es ermöglicht die Darstellung der Zeichen aller Sprachen und wird nunmehr von allen modernen Webbrowsern unterstützt.',
@@ -937,7 +938,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 	'titre_conflit_edition' => 'Bearbeitungskonflikt',
 	'titre_connexion_ldap' => 'Optionen: <b>LDAP-Verbindung</b>',
 	'titre_groupe_mots' => 'KATEGORIE:',
-	'titre_identite_site' => 'Identität der Website',
+	'titre_identite_site' => 'Name der Website', # &quot;Identité du site&quot; war &quot;Identität der Website&quot;, jetzt &quot;Name der Website&quot;, auch möglich &quot;Websitebezeichnung&quot; o.ä.
 	'titre_langue_article' => 'Sprache des Artikels',
 	'titre_langue_rubrique' => 'Sprache der Rubrik',
 	'titre_langue_trad_article' => 'SPRACHE UND ÜBERSETZUNGEN DES ARTIKELS',

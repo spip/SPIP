@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/ecrire_?lang_cible=pt
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=pt
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -606,6 +606,7 @@ numa cor que indica o seu estado:',
 	'install_select_langue' => 'Seleccione uma língua e depois clique no botão " seguinte " para lançar o procedimento de instalação.',
 	'install_select_type_db' => 'Indiquer le type de base de données :', # NEW
 	'install_select_type_mysql' => 'MySQL', # NEW
+	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2', # NEW
 	'install_select_type_sqlite3' => 'SQLite 3', # NEW
