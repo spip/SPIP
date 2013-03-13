@@ -172,7 +172,7 @@ function _sqlite_func_least () {
 
 // http://doc.spip.org/@_sqlite_func_left
 function _sqlite_func_left ($s, $lenght) {
-    return substr($s,$lenght);
+    return substr($s,0,$lenght);
 }
 
 
