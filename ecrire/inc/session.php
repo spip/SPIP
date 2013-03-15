@@ -211,7 +211,7 @@ function supprimer_sessions($id_auteur) {
 		verifier_session();
 		spip_unlink(fichier_session('alea_ephemere', true));
 	}
-	spip_log("destruction des $i fichiers de session de $id_auteur et 0");
+	if ($i) spip_log("destruction des $i fichiers de session de $id_auteur et 0");
 	// forcer le recalcul de la session courante
 	spip_session(true);
 }
