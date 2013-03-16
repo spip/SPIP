@@ -807,6 +807,20 @@ function lister_types_surnoms(){
 	return $surnoms;
 }
 
+function lister_tables_spip($serveur=''){
+	static $tables = array();
+	if (!isset($tables[$serveur])){
+		$tables[$serveur] = array();
+		$ts = sql_alltable(null,$serveur); // toutes les tables "spip_" (ou prefixe perso)
+		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+		$spip = $connexion['prefixe'] . '_';
+		foreach ($ts as $t){
+			$t = substr($t,strlen($spip));
+			$tables[$serveur]["spip_$t"] = $t;
+		}
+	}
+	return $tables[$serveur];
+}
  
 /**
  * Retrouve le nom d'objet à partir de la table
@@ -832,13 +846,21 @@ function table_objet($type,$serveur='') {
 		return $surnoms[$type];
 
 	if ($serveur!==false){
+		$t=lister_tables_spip($serveur);
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		if ($desc = $trouver_table(rtrim($type,'s')."s",$serveur))
+		$typetrim = rtrim($type,'s')."s";
+		if (
+		  (isset($t[$typetrim]) OR in_array($typetrim,$t))
+		  AND ($desc = $trouver_table(rtrim($type,'s')."s",$serveur))
+		  )
 			return $desc['id_table'];
-		elseif ($desc = $trouver_table($type,$serveur))
+		elseif (
+			(isset($t[$type]) OR in_array($type,$t))
+			AND ($desc = $trouver_table($type,$serveur))
+		  )
 			return $desc['id_table'];
 
-		spip_log( 'table_objet('.$type.') calculee sans verification', _LOG_AVERTISSEMENT);
+		spip_log( 'table_objet('.$type.') calculee sans verification');
 	}
 
 	return rtrim($type,'s')."s"; # cas historique ne devant plus servir, sauf si $serveur=false
@@ -874,9 +896,12 @@ function table_objet_sql($type,$serveur='') {
 		if (isset($infos_tables["spip_$nom"]))
 			$nom = "spip_$nom";
 		elseif($serveur!==false) {
-			$trouver_table = charger_fonction('trouver_table', 'base');
-			if ($desc = $trouver_table($nom,$serveur))
-				return $desc['table_sql'];
+			$t=lister_tables_spip($serveur);
+			if (isset($t[$nom]) OR in_array($nom,$t)){
+				$trouver_table = charger_fonction('trouver_table', 'base');
+				if ($desc = $trouver_table($nom,$serveur))
+					return $desc['table_sql'];
+			}
 		}
 	}
 
@@ -905,14 +930,19 @@ function id_table_objet($type,$serveur='') {
 	$t = table_objet($type);
 	if (!$trouver_table)
 		$trouver_table = charger_fonction('trouver_table', 'base');
-	$desc = $trouver_table($t,$serveur);
-	if (isset($desc['key']['PRIMARY KEY']))
-		return $desc['key']['PRIMARY KEY'];
-	if (!$desc OR isset($desc['field']["id_$type"]))
-		return "id_$type";
-	// sinon renvoyer le premier champ de la table...
-	$keys = array_keys($desc['field']);
-	return array_shift($keys);
+
+	$ts=lister_tables_spip($serveur);
+	if (in_array($t,$ts)){
+		$desc = $trouver_table($t,$serveur);
+		if (isset($desc['key']['PRIMARY KEY']))
+			return $desc['key']['PRIMARY KEY'];
+		if (!$desc OR isset($desc['field']["id_$type"]))
+			return "id_$type";
+		// sinon renvoyer le premier champ de la table...
+		$keys = array_keys($desc['field']);
+		return array_shift($keys);
+	}
+	return "id_$type";
 }
 
 /**
@@ -963,12 +993,14 @@ function objet_type($table_objet, $serveur=''){
 	// une declaration jeu => jeux, journal => journaux
 	// dans le pipeline declarer_tables_objets_surnoms
 	$trouver_table = charger_fonction('trouver_table', 'base');
-	if ($desc = $trouver_table($table_objet)
-		 OR $desc = $trouver_table(table_objet($type),$serveur)){
-		// si le type est declare : bingo !
-		if (isset($desc['type']))
+	$ts=lister_tables_spip($serveur);
+	if (in_array($table_objet,$ts))
+		$desc = $trouver_table($table_objet);
+	if (!$desc AND in_array($table_objet=table_objet($type,$serveur),$ts))
+		$desc = $trouver_table($table_objet,$serveur);
+	// si le type est declare : bingo !
+	if ($desc AND isset($desc['type']))
 			return $desc['type'];
-	}
 
 	// on a fait ce qu'on a pu
 	return $type;
