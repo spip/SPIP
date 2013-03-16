@@ -194,6 +194,7 @@ function import_translate_std_dist($values, $table, $desc, $request, $atts) {
 	  switch($k) {
 	  case 'id_secteur': $type = 'id_rubrique'; break;
 	  case 'id_thread': $type = 'id_forum'; break;
+	  case 'id_vignette': $type = 'id_document'; break;
 	  case 'id_parent': $type =
 	      isset($values['id_forum']) ? 'id_forum' : 'id_rubrique'; break;
 	  default: $type = $k;
