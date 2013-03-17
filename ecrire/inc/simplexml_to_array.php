@@ -17,7 +17,7 @@ function inc_simplexml_to_array_dist($obj, $utiliser_namespace='false') {
 
 	// Cette fonction getDocNamespaces() est longue sur de gros xml. On permet donc
 	// de l'activer ou pas suivant le contenu supposé du XML
-	if ($obj AND is_object($obj)) {
+	if (is_object($obj)) {
 		if ($utiliser_namespace)
 			$namespace = $obj->getDocNamespaces(true);
 		$namespace[NULL] = NULL;
