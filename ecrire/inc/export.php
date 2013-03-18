@@ -272,11 +272,11 @@ function inc_export_xml($row, $table, $prim) {
 	. join("\n", $row)
 	. "\n</$table>\n\n";
 }
+
 // dit si Row est exportable, 
 // en particulier quand on se restreint a certaines rubriques
-// Attention, la table articles doit etre au debut 
-// et la table document_articles avant la table documents
-// (faudrait blinder, c'est un bug potentiel)
+// La table des documents doit etre apres celle des liens de doc
+// elle-meme apres celle des objets auxquels elle lie ces documents.
 
 // http://doc.spip.org/@export_select
 function export_select($row, $les_rubriques, $les_meres) {
@@ -286,7 +286,7 @@ function export_select($row, $les_rubriques, $les_meres) {
 	if (isset($row['impt']) AND $row['impt'] !='oui') return false;
 	if (!$les_rubriques) return true;
 
-	// numero de rubrique non determinant pour les forums (0 � 99%)
+	// numero de rubrique non determinant pour les forums (0 a 99%)
 	if (isset($row['id_rubrique']) AND $row['id_rubrique']) {
 		if (in_array($row['id_rubrique'], $les_rubriques)) {
 			if (isset($row['id_article']))

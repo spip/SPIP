@@ -42,7 +42,6 @@ function exec_export_all_dist(){
 
 function exec_export_all_init($rub, $gz, $tables, $serveur='', $save=''){
 	$meta = base_dump_meta_name($rub);
-	spip_log("exec_export_all_init($meta $rub, $gz, $tables, $serveur, $save" . isset($GLOBALS['meta'][$meta]));
 	utiliser_langue_visiteur();
 	if (!isset($GLOBALS['meta'][$meta])){
 		// c'est un demarrage en arrivee directe depuis exec=admin_tech
@@ -97,6 +96,10 @@ function export_all_start($meta, $archive, $rub, $tables){
 		if ($t = array_search('spip_articles', $tables)) {
 			unset($tables[$t]);
 			array_unshift($tables, 'spip_articles');
+		}
+		if ($t = array_search('spip_documents', $tables)) {
+			unset($tables[$t]);
+			array_push($tables, 'spip_documents');
 		}
 	}
 	return $tables;
