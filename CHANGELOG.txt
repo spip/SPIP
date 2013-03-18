@@ -1,6 +1,8 @@
-SPIP-Core spip-3.0.5 -> spip-3.0.6  12 mars 2013
+
+SPIP-Core spip-3.0.5 -> spip-3.0.6  18 mars 2013
 -------------------------------------------------------------
 
+r19904 | ben       |  (jeu. 13 sept. 2012) | préparons gentillement cette nouvelle version
 r19906 | ben       |  (jeu. 13 sept. 2012) | Pour l'instant on s'en sert pas mais prenons dès maintenant les bonnes habitudes (tonton)
 r19907 | cedric    |  (jeu. 13 sept. 2012) | Eviter un notice (ou warning sur certaines config ?) lors de l'inscription ou toute modif en base anonyme (LuisSpeciale)
 r19914 | b_b       |  (ven. 14 sept. 2012) | réparer l'ajout rapide dans le selecteur/navigateur de rubriques par report de http://zone.spip.org/trac/spip-zone/changeset/55785/ : spécifier le dataType pour la requête ajax (compat jquery 1.6)
@@ -123,10 +125,82 @@ r20271 | ben       |  (lun. 11 mars 2013) | Associer vraiment l'auteur calculé 
 r20272 | cedric    |  (lun. 11 mars 2013) | un modele pour le mail de rappel de mot de passe
 r20273 | cedric    |  (lun. 11 mars 2013) | pas de : dans le mail hard-codé actuel
 r20275 | cedric    |  (mar. 12 mars 2013) | suite de r20028 : prendre en compte la constante _DIR_PLUGINS_SUPPL (quand elle est definie) dans l'affichage de la liste des plugins, dans l'activation et la desinstallation.
+r20297 | ben       |  (mar. 12 mars 2013) | Ceci ressemble étrangement à un commit de préparation de SPIP 3.0.6 ... affaire à suivre
+r20298 | ben       |  (mer. 13 mars 2013) | report de lang : :~/svn/spip/ecrire/lang vers :~/svn/spip/branches/spip-3.0/ecrire:lang ... 3.0.6 en préparation
+r20299 | cedric    |  (mer. 13 mars 2013) | oups : en SQL LEFT('foobar',4) donne 'foob' et non 'ar' comme le faisait la fonction adaptée pour SQLite (https://dev.mysql.com/doc/refman/5.0/en/string-functions.html#function_left)
+r20300 | cedric    |  (mer. 13 mars 2013) | LEFT est un mot clé reservé (LEFT JOIN) du coup la définition d'une fonction LEFT(truc,x) n'est pas possible. On la nomme _LEFT et on remplace les LEFT( en _LEFT( lors de la traduction de la requete
+r20302 | eric      |  (mer. 13 mars 2013) | Une nouvelle fonction pour convertir un objet SimpleXML en un tableau PHP. COntribution issue de http://www.php.net/manual/pt_BR/book.simplexml.php#108688 et adaptée pour gérer les namespaces en option.
+r20305 | cedric    |  (ven. 15 mars 2013) | Regression fonctionnelle : dans SPIP < 3 une recherche sur un nombre entier produisait la liste des objets avec cet ID et pas une recherche sur le nombre. On rétablit (mathieu, habbon)
+r20310 | cedric    |  (sam. 16 mars 2013) | #2914 : @unlink superflu voir nefaste car @rename ecrase la cible si besoin
+r20311 | cedric    |  (sam. 16 mars 2013) | Reparer le decodage des urls ./?rubrique12 etc... et ne pas injecter type ou type-page dans form_hidden (répare les tests sur form_hidden)
+r20312 | cedric    |  (sam. 16 mars 2013) | eviter trouver_table() sur une table inconnue et une erreur SQL quand on fait objet_type(), table_objet(), table_objet_sql() ou id_table_objet().Reduire l'importance du log correspondant.Il semble y avoir de quoi optimiser tout cela en utilisant la liste des tables au lieu de passer par trouver_table. On touche a minima ici pour ne rien casser
+r20314 | eric      |  (dim. 17 mars 2013) | Point trop n'en faut des tests.
+r20316 | cedric    |  (lun. 18 mars 2013) | r20311 avait cassé le décodage des urls sur un nom de domaine homonyme (donc non nettoyé par les du dessus). On corrige pour rétblir le fonctionnement antérieur dans ce cas, même si il n'est probablement pas idéal (vu sur le décodage des urls de doc de contrib qui sont encore en http://www.spip-contrib.net/)
+r20317 | ben       |  (lun. 18 mars 2013) | Un ptit update de langue avant la sortie finale de la 3.0.6
 
-SPIP-plugins-dist spip-3.0.5 -> spip-3.0.6  12 mars 2013
+SPIP-plugins-dist spip-3.0.5 -> spip-3.0.6  18 mars 2013
 -------------------------------------------------------------
 
+r65793 | marcimat  |  (mer. 12 sept. 2012) | Report de r65971 (correction de noms de variables).Commande utiliséesvn merge -r 65790:HEAD plugins/grenier branches/spip-3.0/plugins/grenierCette commande est à préférer plutot que de supprimer la branche et copier le trunk (cédric).
+r65851 | cedric    |  (ven. 14 sept. 2012) | Ne pas confondre un simple "<" avec un raccourci ressource en embarquant par erreur la balise html qui suit(Ferme http://core.spip.org/issues/2854)
+r65852 | cedric    |  (ven. 14 sept. 2012) | Sans le var_dump dans le depot precedent
+r65911 | cedric    |  (dim. 16 sept. 2012) | Ferme http://core.spip.org/issues/2857 et enleve le debug qui etait resté d'un précédent bugfix
+r65914 | cedric    |  (dim. 16 sept. 2012) | Report de r65910
+r65951 | cedric    |  (lun. 17 sept. 2012) | Petit bug dans les urls de notification vers le forum des admins
+r66054 | cedric    |  (mer. 19 sept. 2012) | Utiliser la declaration des champs_editables pour permettre l'extension de la table par declaration (et il faudrait refactorer le code d'insertion/modification en base des forum sur le modele de l'api editer_objet)
+r66056 | cedric    |  (mer. 19 sept. 2012) | utiliser collecter_request (notamment ne pas prendre en compte les champs non postés=null)
+r66091 | cedric    |  (jeu. 20 sept. 2012) | Eviter un bug lors de la soumission ajax du formulaire (jQuery pas defini dans l'iframe du post)
+r66093 | cedric    |  (jeu. 20 sept. 2012) | Reparer l'alerte qui se declenchait a tort sous safari après post du message, et qui ne se déclenchait pas du tout sous Chrome
+r66239 | cedric    |  (mar. 25 sept. 2012) | On peut ajouter une liste de documents de la mediatheque par designation d'un intervale (243-245 ou doc243-doc243)On peut combiner valeurs uniques et intervales en une seule saisie:132,243-245,257-279,323
+r66277 | cedric    |  (mer. 26 sept. 2012) | 2 coquilles sur le formulaire de recherche :variable indefiniegarder la class search meme si on est pas en HTML5
+r66318 | real3t    |  (ven. 28 sept. 2012) | À la demande de Pascal23, la colonne de droite des stats ne doit pas exclure les éléments trouvés précédemment : ça n'a rien à voir.
+r66464 | cedric    |  (mer. 03 oct. 2012) | Post publication des articles : les documents ne prenaient pas le bon statut&date associes (Ferme https://core.spip.org/issues/2849)
+r66776 | cedric    |  (sam. 13 oct. 2012) | coquilles dans les declaration de chaine de langue !
+r66948 | kent1     |  (sam. 20 oct. 2012) | Report de r66947:inc/charsets et non inc/charset
+r66950 | kent1     |  (sam. 20 oct. 2012) | Report de r66949 : On corrige l'index id_objet qui était sur la colonne id_versionOn ajoute deux index sur id_version et objetOn passe en 1.7.2 et le shema en 1.1.3
+r66990 | kent1     |  (dim. 21 oct. 2012) | Vérifier si un fichier existe et n'est pas de taille 0 au début de l'ajout de document, avant la copie du fichier, évite d'avoir de mauvaises surprises avec des fichiers mal uploadés de taille 0.
+r66992 | tcharlss  |  (dim. 21 oct. 2012) | variable $L (luminosité) au lieu de $V (valeur).Ca provoquait une erreur avec une saturation égale à 0.
+r67127 | tcharlss  |  (jeu. 25 oct. 2012) | incrémentation suite au commit précédent.-> variable $L (luminosité) au lieu de $V (valeur)
+r67198 | b_b       |  (sam. 27 oct. 2012) | réparer generer_url_forum_dist() qui ne renvoyait rien vu qu'on ne lui passait pas le bon argument
+r67225 | tcharlss  |  (dim. 28 oct. 2012) | 1sAjout de quelques modes de fusion au filtre image_masque,  tirés des formules indiquées sur wikipedia : https://en.wikipedia.org/wiki/Blend_modesMême nomenclature et mêmes résultats que ceux de GIMP.- ecran: effet inverse de 'produit' -> l'image resultante est plus claire- superposer: combine les modes 'produit' et 'ecran' -> les parties claires sont eclaircies, les parties sombres assombries.- lumiere_dure: equivalent a 'superposer', sauf que l'image du bas et du haut sont inversees.- teinte: utilise la teinte du masque- saturation: utilise la saturation du masque- valeur: utilise la valeur du masqueComme ce n'est pas un ajout majeur, on incrémente que le dernier chiffre pour la version.
+r67235 | cedric    |  (lun. 29 oct. 2012) | Ajouter un DEFAULT sur 'permanent' et 'champs' car peut poser problème sur certains sites SQLite migrés depuis mySQL (qui ont attrapés au passage une clause NOT NULL)Gerer le 'permanent' dans le sens inverse : on tag 'non' quand c'est une revision fusionnable, et rien sinon (le cas le plus courant), et on teste l'absence de 'non' pour forcer la creation d'une nouvelle revision. Cela évite de peupler la base pour rien, et evite des bugs après réparation de base sur le permanent problematique
+r67345 | cedric    |  (mer. 31 oct. 2012) | Ne jamais appeler en direct generer_url_document_dist mais passer par un charger_fonction approprié
+r67424 | eric      |  (ven. 02 nov. 2012) | Corrige le ticket [SVP - Anomalie #2895].Il manquait un include_spip de la liste des langues.
+r67489 | eric      |  (lun. 05 nov. 2012) | Correction de la détermination des branches SPIP lorsque la borne max contient des étoiles.Ajout dans le dépot de test d'une archive de ce type.
+r67632 | cedric    |  (ven. 09 nov. 2012) | mode_force=image permet de forcer l'affichage comme si #MODE=imagemode_force=document permet de forcer l'affichage comme si #MODE=documentPermet par exemple a un squelette d'ignorer le mode=document d'une image sans forker les modeles, ce qui est mieux pour l'avenir et la maintenabilité(en attendant la refonte générique de ces modeles et leur insensibilité au mode)
+r67734 | cedric    |  (mer. 14 nov. 2012) | La suppression a tort du retour ligne qui suit les commentaires // provoque un bug quand celui ci est en fin d'une ligne sans point-virgule, ce qui est une pratique courante dans les js de Bootstrap (hugues)
+r67763 | kent1     |  (ven. 16 nov. 2012) | report de r67761:Un index sur id_groupe
+r67802 | kent1     |  (lun. 19 nov. 2012) | report de r67801On passe en version 2.7.37
+r68017 | bmarne    |  (jeu. 29 nov. 2012) | report de r68012 et r68016 depuis le trunk vers la branche 3.0
+r68051 | kent1     |  (sam. 01 déc. 2012) | report de r68050_DIR_PLUGINS_SUPPL et pas _DIR_PLUGINS_SUPP
+r68052 | kent1     |  (sam. 01 déc. 2012) | On n'a plus besoin de gérer ces problèmes de constantes, _DIR_PLUGINS_SUPPL est géré comme un répertoire normal de plugins
+r68053 | kent1     |  (sam. 01 déc. 2012) | Incrément de version 0.80.9, meilleure gestion de _DIR_PLUGINS_SUPPL
+r68054 | eric      |  (sam. 01 déc. 2012) | Création d'un autorisation "ajouter plugins" pour les pages ajouter plugins et ajouter dépôts. Par défaut cette autorisation correspond à autoriser webmestre comme actuellement.Il est donc possible pour un mutu, par exemple, de désactiver l'ajout des plugins dans les sites esclaves et de le réserver au site maitre.
+r68058 | eric      |  (dim. 02 déc. 2012) | On améliore le commit précédent sur l'autorisation en prenant en compte le define de feu STEP _AUTORISER_TELECHARGER_PLUGINS. Ainsi, il suffit de positionner ce define à false pour les sites esclaves d'une mutu et l'autorisation d'ajouter un plugin leur sera retirée correctement.
+r68060 | eric      |  (dim. 02 déc. 2012) | Oubli de l'incrément.
+r68096 | cedric    |  (lun. 03 déc. 2012) | Lorsqu'un zip ne contient aucun fichier uploadable (type acceptable) alors il faut simplement le charger en zip joint plutot qu'annoncer une erreur erronée de fichier non trouvé (equipement)
+r68098 | cedric    |  (lun. 03 déc. 2012) | revert de r66990 qui empêche tout upload de document sur les serveurs sécurisés par open_basedir (Il n'est pas possible de lire le fichier ni sa taille tant qu'on ne l'a pas déplacé via move_uploaded_file)
+r68123 | kent1     |  (mar. 04 déc. 2012) | On revient sur r66990 qui a été revert par r68098Après déplacement du fichier dans IMG/, on regarde si on peut récupérer une taille du fichier, si on ne peut pas, c'est qu'il fait 0 octets et donc corrompu (ou problématique et inutile)On ajoute cette vérification sur la génération du zip (au cas où)
+r68367 | marcimat  |  (mer. 12 déc. 2012) | Report de r68366 : Tolérer que certains commentaires HTML ne soient pas supprimés, s'ils commencent par <!--keepme:
+r68383 | marcimat  |  (jeu. 13 déc. 2012) | Lorsqu'on affiche l'agenda interne dans l'espace public, via :<INCLURE{fond=prive/squelettes/contenu/calendrier,env} />il est alors de bon ton d'afficher, comme dans le privé, ses propres rendez-vous ou annonces, si l'on est connecté. Pour ça, il faut s'appuyer sur l'id_auteur de la session et non sur cette globale ayant l'id_auteur uniquement dans l'espace privé.
+r68389 | marcimat  |  (ven. 14 déc. 2012) | On sépare l'algorythme de conversion des messages vers le format fullcalendar dans des fonctions spécifiques pour permettre des réutilisations par des plugins. Cela dit, les quetes ne retournent pas le même format de données, ce qui est déjà très perturbant, mais provient d'un code maintenant ancien qu'il faudra peut être un jour réuniformiser.
+r68412 | chankalan |  (dim. 16 déc. 2012) | résout #2920
+r68452 | cedric    |  (mar. 18 déc. 2012) | Report de r68451 qui merge et optimise r68412 et r63222
+r68472 | cedric    |  (mer. 19 déc. 2012) | Retours de message du formulaire d'inscription : quand c'est une erreur afficher un message d'erreur. Quand c'est un succes, fournir en retour l'id_auteur inscrit pour les pipelines/plugins
+r68480 | cedric    |  (mer. 19 déc. 2012) | ajouter une valeur par defaut pour chaque type de champ ainsi qu'un type de champ oui/non en checkbox
+r68491 | cedric    |  (mer. 19 déc. 2012) | eviter un warning (seds)
+r68636 | cedric    |  (sam. 29 déc. 2012) | le input.texte et le input.sumit sont séparés par un espace, ce qui n'était pas le cas en SPIP 2.x pour permettre un rendu collé au besoin. On rétablit a priori, mais vérifier que ça ne cause pas de soucis
+r68671 | cedric    |  (jeu. 03 janv. 2013) | #2531 : segmentation fault dans le traitement des listeson essaye de simplifier la regexpPar ailleurs petit bug possible : on passe toujours dans le close() il faut donc toujours passer dans le init() sinon on ne sait pas ce qui sera ferme. Corrolaire, on enleve le if_matchJ'ai tente sans effet :- la suppression des static et remplacement en globales- le dispatching des 3 etats du switch dans les 3 fonctions
+r68672 | cedric    |  (jeu. 03 janv. 2013) | #2531 : sur spip-contrib, avec un cas test de message de forum qui reproduit le segfault a chaque fois,le seul fix fiable qui marche est un appel a charger_fonction dans le init().Aucune explication a l'horizon en ce qui me concerne, a voir si cela regle le bug dans les autres cas decrits par #2531Commentaire de test utilise sur contrib :"En ce qui me concerne je n'ai effectivement pas le temps de faire la migration de ce plugin en SPIP 3, alors toute aide est la bienvenue!Quelques pistes:-* pour générer un paquet.xml remplaçant le plugin.xml le plus simple est d'utiliser le plugin Plugonet (http://plugins.spip.net/plugonet.html ou svn://zone.spip.org/spip-zone/_plugins_/plugonet)-* pour ce qui est des spécificités des plugins de SPIP 3 voir la doc rassemblée sur http://contrib.spip.net/Migrer-un-plugin-vers-spip-3-* pour ce qui est de la logistique de développement j'ai fait le passage en  branches sur la zone:-** la version pour SPIP 2.* est désormais dans svn://zone.spip.org/spip-zone/_plugins_/gallery2/branches/version_spip2-** tu peux donc bosser directement sur la version de dev: svn://zone.spip.org/spip-zone/_plugins_/gallery2/trunk"(Evidement ce meme message ne provoque par le bug sur un site standard en local)
+r68800 | cedric    |  (lun. 07 janv. 2013) | Suite a http://core.spip.org/projects/spip/repository/revisions/20070 qui est un report oublie d'une fonctionnalite de SPIP 2.1 il ne faut pas appeler la page 404 depuis les squelettes car cela empeche un plugin d'utiliser une 401 en cas de contenu interdit par exemple.Corrolairement on deplace le calcul des messages d'erreur par defaut dans la page 404
+r69009 | cedric    |  (mar. 15 janv. 2013) | versionner les wheels cachees pour eviter un bug en cas de modification sensible lors d'un upgrade (kent1)
+r69190 | cedric    |  (mar. 22 janv. 2013) | Report de la version _core_/plugins/compresseur @ 69181 par cp. Inclue notamment PHPDoc et r68095 qui prend en charge les directives @import lors de la compression CSS
+r69196 | rasta     |  (mar. 22 janv. 2013) | {tout} n'est pas un critère, du coup même avec {tout} il y avait toujours le filtrage par "mode". On rétablit le comportement attendu (et du coup on peut bien utiliser les modèles de documents, insertion, etc, avec des documents dont le mode n'est pas connu).
+r69229 | guytarr   |  (mer. 23 janv. 2013) | report de r69026 dans cette branche aussi
+r69232 | guytarr   |  (mer. 23 janv. 2013) | oups (cerdic)
+r69240 | kent1     |  (mer. 23 janv. 2013) | Suite de http://core.spip.org/projects/spip/repository/revisions/20116 On passe dorénavant objet/id_objet à ce modèleCe que je ne comprends pas c'est pourquoi ce modèle est dans le plugin dist car vraiment indispensable à une balise définie dans le core le plus nu de SPIP
+r69326 | jack31    |  (jeu. 24 janv. 2013) | Avant de tout casser un essai sur les brèves :remplacer Copyright (c) 2001-2012 par Copyright (c) 2001-2013
+r69327 | jack31    |  (jeu. 24 janv. 2013) | On est en 2013 !
 r69331 | marcimat  |  (jeu. 24 janv. 2013) | Correction d'une partie du bug de @import url(https://fonts.googleapis.com/css?family=Ubuntu);Le protocole peut ne pas être impliciteIl reste que le CSS de l'URL n'est pas recopié dans local car cette URL n'a pas de .css, entrainant encore une erreur de squelette.
 r69332 | marcimat  |  (jeu. 24 janv. 2013) | Correction du bug de @import url(https://fonts.googleapis.com/css?family=Ubuntu);Le protocole peut ne pas être implicite, d'une part, mais s'il est explicite, on considère qu'on ne peut pas décider de faire l'extraction des données par le serveur. Effectivement, dans ce cas, google retourne un CSS différent en fonction du navigateur, or ici, c'est le serveur qui intéroge l'url (cerdic).Chaque @import distant est replacé au début du contenu css. En espérant que cette correction est correcte :)
 r69333 | jack31    |  (jeu. 24 janv. 2013) | On est en 2013 (suite)+ http://trad.spip.net/ au lieu de http://trad.spip.org
@@ -162,6 +236,11 @@ r70540 | b_b       |  (sam. 09 mars 2013) | r70144 en mieux, appliquer une marge
 r70587 | cedric    |  (lun. 11 mars 2013) | espaces insécables
 r70608 | cedric    |  (lun. 11 mars 2013) | Utiliser le modeles/mail_oubli pour composer l'email de rappel de mot de passe, plutot que le composer en dur dans le code PHP
 r70632 | cedric    |  (mar. 12 mars 2013) | la class boxInline permet de demander l'option {inline:true} sans passer par le js
+r70657 | cedric    |  (mer. 13 mars 2013) | increment version suite a r70632
+r70666 | ben       |  (mer. 13 mars 2013) |  lang des plugins
+r70853 | cedric    |  (dim. 17 mars 2013) | Corriger le test consecutivement a r66992 (le test était buggué comme la fonction)
+r70865 | ben       |  (lun. 18 mars 2013) | Un ptit update de langue avant la sortie finale de la 3.0.6
+
 
 SPIP-core spip-3.0.4 -> spip-3.0.5
 --------------------------------- 
