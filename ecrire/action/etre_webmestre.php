@@ -44,6 +44,10 @@ function action_etre_webmestre_dist() {
 
 }
 
+/**
+ * Passe l'administrateur connecté en webmestre.
+ * @return void
+ */
 function base_etre_webmestre_dist() {
 	if ($GLOBALS['visiteur_session']['statut']=='0minirezo' AND $GLOBALS['visiteur_session']['webmestre']!=='oui') {
 		include_spip('action/editer_auteur');

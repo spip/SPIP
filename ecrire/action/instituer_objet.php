@@ -10,12 +10,19 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Action pour instituer un objet avec les puces rapides
+ * 
+ * @package SPIP\Core\PuceStatut
+ */
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Instituer un objet avec les puces rapides
  * @param null|string $arg
- * @return 
+ *     Chaîne "objet id statut". En absence utilise l'argument
+ *     de l'action sécurisée.
  */
 function action_instituer_objet_dist($arg=null) {
 

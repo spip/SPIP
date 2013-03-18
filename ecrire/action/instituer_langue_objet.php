@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Action des changements de langue des objets éditoriaux
+ *
+ * @package SPIP\Core\Edition
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**

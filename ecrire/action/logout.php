@@ -20,7 +20,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/cookie');
 
-// http://doc.spip.org/@action_logout_dist
+/**
+ * Déconnecte l'utilisateur en cours
+ *
+ * Déconnecte l'utilisateur en cours et le redirige sur l'URL indiquée par
+ * l'argument de l'action sécurisée, et sinon sur la page d'accueil
+ * de l'espace public.
+**/
 function action_logout_dist()
 {
 	global $visiteur_session, $ignore_auth_http;

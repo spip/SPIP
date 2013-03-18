@@ -10,9 +10,17 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Action des changements de langue des rubriques
+ *
+ * @package SPIP\Core\Edition
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@action_instituer_langue_rubrique_dist
+/**
+ * Modifie la langue d'une rubrique
+**/
 function action_instituer_langue_rubrique_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');

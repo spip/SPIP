@@ -43,7 +43,12 @@ function action_iconifier_dist()
 	}
 }
 
-// http://doc.spip.org/@action_spip_image_effacer_dist
+/**
+ * Supprime un fichier de logo
+ *
+ * @param string $arg Fichier de logo (tel que `arton20.png`)
+ * @return void
+**/
 function action_spip_image_effacer_dist($arg) {
 
 	if (!strstr($arg, ".."))
