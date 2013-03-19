@@ -91,7 +91,24 @@ function debut_droite() {
 	  . "\n<div id='contenu'>";
 }
 
-// http://doc.spip.org/@liste_articles_bloques
+/**
+ * Retourne la liste des objets édités récemment (si les drapeaux d'édition sont actifs)
+ *
+ * Si notre page est une page d'édition d'un objet, on déclare au passage l'auteur
+ * comme éditant l'objet
+ *
+ * @uses signale_edition()
+ * @uses liste_drapeau_edition()
+ * 
+ * @param string $exec
+ *     Nom de la page exec en cours
+ * @param array $contexte
+ *     Contexte de la page
+ * @param array|null $auteur
+ *     Session de l'auteur. Sera prise sur l'auteur connecté si non indiquée.
+ * @return string
+ *     Code HTML
+**/
 function liste_objets_bloques($exec,$contexte=array(),$auteur=null){
 	$res = '';
 	if ($GLOBALS['meta']["articles_modif"] != "non") {
@@ -115,9 +132,16 @@ function liste_objets_bloques($exec,$contexte=array(),$auteur=null){
 	return $res;
 }
 
-// Fin de page de l'interface privee.
-// Elle comporte une image invisible declenchant une tache de fond
-// http://doc.spip.org/@fin_page
+
+/**
+ * Retourne le code HTML de fin de page de l'interface privée.
+ * 
+ * Elle génère au passage un appel pour déclencher les tâches cron
+ *
+ * @see f_queue() Pour l'appel au cron
+ * 
+ * @return string Code HTML
+**/
 function fin_page(){
 	include_spip('inc/pipelines');
 	// avec &var_profile=1 on a le tableau de mesures SQL
@@ -134,6 +158,17 @@ function fin_page(){
 	return f_queue($t);
 }
 
+/**
+ * Retourne des tests javascript à exécuter
+ *
+ * - Teste que javascript est actif : si non, un hit sur exec=test_ajax est généré
+ * - Rejoue la session si demandé (par verifier_session() si l'ip a changé)
+ *
+ * @see exec_test_ajax_dist()
+ * @see verifier_session()
+ *
+ * @return string Code HTML
+**/
 function html_tests_js(){
 	if (_SPIP_AJAX AND !defined('_TESTER_NOSCRIPT')) {
 	  // pour le pied de page (deja defini si on est validation XML)
@@ -147,6 +182,11 @@ function html_tests_js(){
 	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '');
 }
 
+/**
+ * Retourne la liste des mises à jour de SPIP possibles
+ *
+ * @return string Texte présentant la liste des mises à jour existantes
+**/
 function info_maj_spip(){
 
 	$maj = $GLOBALS['meta']['info_maj_spip'];
