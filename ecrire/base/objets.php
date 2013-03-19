@@ -811,6 +811,8 @@ function lister_tables_spip($serveur=''){
 	static $tables = array();
 	if (!isset($tables[$serveur])){
 		$tables[$serveur] = array();
+		if (!function_exists("sql_alltable"))
+			include_spip("base/abstract_sql");
 		$ts = sql_alltable(null,$serveur); // toutes les tables "spip_" (ou prefixe perso)
 		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 		$spip = $connexion['prefixe'] . '_';
