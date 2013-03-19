@@ -103,7 +103,7 @@ function spip_cookie_envoye($set = '') {
  * ils appellent simplement `$_COOKIE['spip_xx']` qui sera forcément
  * la bonne donnée.
  * 
- * @param string $cookie_prefixe
+ * @param string $cookie_prefix
  *     Préfixe des cookies de SPIP
 **/
 function recuperer_cookies_spip($cookie_prefix) {

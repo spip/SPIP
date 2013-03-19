@@ -56,7 +56,7 @@ function fin_grand_cadre(){ return "\n</div>";}
 // div extra lui-meme ferme par debut_droite qui ouvre
 // div contenu lui-meme ferme par fin_gauche() ainsi que
 // div conteneur
-// http://doc.spip.org/@debut_gauche
+
 /**
  * Retourne le code HTML du début de la colonne gauche
  * @return string Code HTML
@@ -207,7 +207,12 @@ function info_maj_spip(){
 	return "$maj<br />";
 }
 
-// http://doc.spip.org/@info_copyright
+/**
+ * Retourne les informations de copyright (version de SPIP, de l'écran de sécurité)
+ * pour le pied de page de l'espace privé
+ *
+ * @return string Code HTML
+**/
 function info_copyright() {
 	global $spip_version_affichee, $spip_lang;
 
@@ -236,7 +241,17 @@ function info_copyright() {
 
 }
 
-// http://doc.spip.org/@formulaire_recherche
+/**
+ * Retourne un formulaire de recherche pour l'espace privé
+ *
+ * Préférez l'usage en squelettes via la balise `#FORMULAIRE_RECHERCHE_ECRIRE`.
+ *
+ * @see formulaires_recherche_ecrire_charger_dist()
+ * 
+ * @param string $page        Nom de la page exec
+ * @param string $complement  Code HTML supplémentaire
+ * @return string             Code HTML
+**/
 function formulaire_recherche($page, $complement=""){
 	$recherche = _request('recherche');
 	$recherche_aff = entites_html($recherche);
