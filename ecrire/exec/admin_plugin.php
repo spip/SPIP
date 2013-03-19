@@ -117,7 +117,7 @@ function exec_admin_plugin_dist($retour='') {
 						_T('plugins_actif_aucun')
 						)."</h3>";
 
-	$sub = "\n<div class='boutons' style='display:none;'>"
+	$sub = "\n<div class='boutons'>"
 	.  "<input type='submit' class='submit save' value='"._T('bouton_enregistrer')
 	."' />"
 	. "</div>";
@@ -158,6 +158,7 @@ function exec_admin_plugin_dist($retour='') {
 	
 	echo 	http_script("
 	jQuery(function(){
+		jQuery('#plugins .boutons').hide();
 		jQuery('.plugins li.item a[rel=info]').click(function(){
 			var li = jQuery(this).parents('li').eq(0);
 			var prefix = li.find('input.checkbox').attr('name');
