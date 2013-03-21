@@ -543,22 +543,34 @@ function calculer_select ($select = array(), $from = array(),
 			array_push($where_simples,$sous[2]);
 			$wheresub = array($sous[2],'0=0'); // pour accepter une string et forcer a faire le menage car on a surement simplifie select et where
 			$jsub = $join;
+			// trouver les jointures utiles a
 			// reinjecter dans le where de la sous requete les conditions supplementaires des jointures qui y sont mentionnees
 			// ie L1.objet='article'
-			foreach ($join as $cle=>$wj){
-				if (count($wj)==4  AND strpos(calculer_where_to_string($sous[2]),"{$cle}.")!==FALSE){
-					$wheresub[] = $wj[3];
-					unset($jsub[$cle][3]);
+			// on construit le where une fois, puis on ajoute les where complentaires si besoin, et on reconstruit le where en fonction
+			$i = 0;
+			do {
+				$where[$k] = remplace_sous_requete($w,"(".calculer_select(
+				array($sous[1]." AS id"),
+				$from,
+				$from_type,
+				$wheresub,
+				$jsub,
+				array(),array(),'',
+				$having,$table,$id,$serveur,false).")");
+				if (!$i){
+					$i = 1;
+					$wherestring = calculer_where_to_string($where[$k]);
+					foreach ($join as $cle=>$wj){
+						if (count($wj)==4
+							AND strpos($wherestring,"{$cle}.")!==FALSE
+						){
+							$i = 0;
+							$wheresub[] = $wj[3];
+							unset($jsub[$cle][3]);
+						}
+					}
 				}
-			}
-			$where[$k] = remplace_sous_requete($w,"(".calculer_select(
-			array($sous[1]." AS id"),
-			$from,
-			$from_type,
-			$wheresub,
-			$jsub,
-			array(),array(),'',
-			$having,$table,$id,$serveur,false).")");
+			} while ($i++<1);
 		}
 		if ($sous[0]=='SUBSELECT') {
 			// c'est une sous requete explicite sous la forme identique a sql_select : (SUBSELECT,$select,$from,$where,$groupby,$orderby,$limit,$having)
