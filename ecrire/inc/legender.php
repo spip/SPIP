@@ -73,8 +73,8 @@ function legender_entete($document)
 {
 	$titre = $document['titre'];
 	$entete = basename($document['fichier']);
-	if (($n=strlen($entete)) > 20)
-		$entete = substr($entete, 0, 7)."...".substr($entete, $n-7, $n);
+	if (strlen($entete) > 20)
+		$entete = substr($entete, 0, 20)."...";
 	if (strlen($titre))
 		$entete = "<strong>". lignes_longues(typo($titre),25) . "</strong>";
 	return sinon($entete,_T('info_sans_titre'));
