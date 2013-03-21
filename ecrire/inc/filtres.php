@@ -2424,7 +2424,9 @@ function form_hidden($action) {
 	// d'abord avec celles de l'url
 	if (false !== ($p = strpos($action, '?'))) {
 		foreach(preg_split('/&(amp;)?/S',substr($action,$p+1)) as $c){
-			list($var,$val) = explode('=', $c, 2);
+			$c = explode('=', $c, 2);
+			$var = array_shift($c);
+			$val = array_shift($c);
 			if ($var) {
 				$val =  rawurldecode($val);
 				$var =  rawurldecode($var); // decoder les [] eventuels
