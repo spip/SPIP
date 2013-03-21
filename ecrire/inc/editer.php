@@ -477,7 +477,8 @@ function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') 
 				'type' =>$type,
 				'id_objet' => $id,
 				'champs' => isset($options['champs'])?$options['champs']:array(), // [doc] c'est quoi ?
-				'action' => 'controler'
+				'action' => 'controler',
+				'serveur' => $serveur,
 			),
 			'data' => $champs
 		)
