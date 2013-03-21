@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Strona główna', # MODIF
-	'article' => 'Article', # NEW
+	'article' => 'Artykuł',
 	'articles' => 'Artykuły',
 	'articles_auteur' => 'Artykuły napisane przez tego autora',
 	'articles_populaires' => 'Najbardziej popularne artykuły',
@@ -19,8 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Nie ma żadnej strony pod tym adresem',
 	'aucune_breve' => 'Nie ma żadnego newsa pod tym adresem ',
 	'aucune_rubrique' => 'Nie ma żadnego działu pod tym adresem',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
+	'auteur' => 'Autor',
+	'autres' => 'Inne',
 	'autres_breves' => 'Reszta aktualności',
 	'autres_groupes_mots_clefs' => 'Inne grupy słów kluczowych',
 	'autres_sites' => 'Inne strony',
@@ -30,8 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Dodaj komentarz na temat strony',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
+	'contact' => 'Kontakt',
+	'copie_document_impossible' => 'Kopiowanie tego dokumentu jest uniemożliwione',
 
 	// D
 	'date' => 'Data',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'espace_prive' => 'Strefa prywatna',
 
 	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
+	'formats_acceptes' => 'Ważne formaty: @formats@.',
 
 	// H
 	'hierarchie_site' => 'Mapa strony',
@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'jours' => 'dni',
 
 	// L
-	'lien_connecter' => 'Se connecter', # NEW
+	'lien_connecter' => 'Zaloguj się',
 
 	// M
 	'meme_auteur' => 'Ten sam autor',
@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Wiadomość',
 	'messages_forum' => 'Wiadomości na forum', # MODIF
 	'messages_recents' => 'Najnowsze wiadomości na forum',
-	'mots_clef' => 'Mot-clé', # NEW
+	'mots_clef' => 'Słowo kluczowe',
 	'mots_clefs' => 'Słowa kluczowe',
 	'mots_clefs_meme_groupe' => 'Słowa kluczowe z tej samej grupy',
 
@@ -102,7 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'Strona zrealizowana przy pomocy SPIP',
 	'sites_web' => 'Strony internetowe',
 	'sous_rubriques' => 'Pod-działy',
-	'spam' => 'Spam', # NEW
+	'spam' => 'Spam',
 	'suite' => 'więcej',
 	'sur_web' => 'W internecie',
 	'syndiquer_rubrique' => 'Ten dział',

@@ -90,7 +90,9 @@
 	<langue code="oc_ni_la" />
 	<langue code="oc_prv" />
 	<langue code="oc_va" />
-	<langue code="pl" />
+	<langue code="pl" url="http://trad.spip.net/tradlang_module/public?lang_cible=pl">
+		<traducteur nom="Karolina Anna" lien="http://trad.spip.net/auteur/karolina-anna" />
+	</langue>
 	<langue code="pt" />
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/public?lang_cible=pt_br">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
