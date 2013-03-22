@@ -29,14 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_deplacement_rubrique' => 'Uwaga! Ten dział zawiera @contient_breves@ news@scb@: jeśli chcesz go przenieść, proszę zaznacz to okienko.',
 	'avis_destinataire_obligatoire' => 'Aby wysłać tę wiadomość, musisz wybrać odbiorcę.',
 	'avis_erreur_connexion_mysql' => 'Błąd połączenia z SQL', # MODIF
-	'avis_erreur_version_archive' => '<b>Ostrzeżenie! Plik @archive@ odpowiada
-    wersji SPIP innej, niż
-    zainstalowana przez Ciebie.</b> Wiąże się to z poważnymi
-    trudnościami: ryzykiem zniszczenia Twojej bazy danych,
-    zakłóceniami funkcjonowania Twojej strony, etc. Nie
-    spełniaj żądania importu.<p>Więcej
-    informacji na <a href="@spipnet@">
-                                 w dokumentacji SPIP</a>.', # MODIF
+	'avis_erreur_version_archive' => '<b>Ostrzeżenie! Plik @archive@ odpowiada innej wersji SPIP od tej na Twoim systemie.</b> Wiąże się to z poważnymi trudnościami: ryzykiem zniszczenia Twojej bazy danych, zakłóceniami funkcjonowania Twojej strony, etc. Nie spełniaj żądania importu.<p>Więcej informacji na <a href="@spipnet@"> w dokumentacji SPIP</a>.</p>', # MODIF
 	'avis_espace_interdit' => '<b>Dostęp zabroniony</b><div>SPIP jest już zainstalowany.</div>',
 	'avis_lecture_noms_bases_1' => 'Program instalacyjny nie może odczytać nazw instalowanych baz danych.',
 	'avis_lecture_noms_bases_2' => 'Żadna baza danych nie jest dostępna, lub funkcja listingu baz danych nie działa
