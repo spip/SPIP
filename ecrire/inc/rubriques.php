@@ -33,6 +33,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * 
  * Tout cela devrait passer en SQL, sous forme de Cascade SQL.
  *
+ * @uses depublier_branche_rubrique_if()
+ * @uses calculer_prochain_postdate()
+ * @uses publier_branche_rubrique()
+ * 
  * @param int $id_rubrique
  *     Identifiant de la rubrique
  * @param array $modifs
@@ -114,6 +118,7 @@ function publier_branche_rubrique($id_rubrique)
  * Fonction à appeler lorsqu'on dépublie ou supprime quelque chose
  * dans une rubrique. 
  *
+ * @uses depublier_rubrique_if()
  * @todo Le nom de la fonction est trompeur, vu que la fonction remonte dans la hierarchie !
  * 
  * @param int $id_rubrique
@@ -140,6 +145,8 @@ function depublier_branche_rubrique_if($id_rubrique){
 
 /**
  * Dépublier une rubrique si aucun contenu publié connu n'est trouvé dedans
+ *
+ * @pipeline_appel objet_compte_enfants
  * 
  * @param int $id_rubrique
  *     Identifiant de la rubrique à tester
@@ -206,6 +213,10 @@ function depublier_rubrique_if($id_rubrique,$date=null){
  * resultantes et remet de la coherence au cas où la base importée en manquait
  * 
  * Cette fonction doit etre invoquée sans processus concurrent potentiel.
+ *
+ * @uses calculer_rubriques_publiees()
+ * @uses calculer_langues_utilisees()
+ * @uses calculer_prochain_postdate()
  * 
  * @return void
 **/
@@ -227,12 +238,13 @@ function calculer_rubriques() {
 
 
 /**
- *  
- * Recalcule l'ensemble des donnees associees a l'arborescence des rubriques
+ * Recalcule l'ensemble des données associées à l'arborescence des rubriques
  * 
  * Attention, faute de SQL transactionnel on travaille sur
  * des champs temporaires afin de ne pas casser la base
  * pendant la demi seconde de recalculs
+ *
+ * @pipeline_appel calculer_rubriques
  * 
  * @return void
 **/
@@ -281,6 +293,8 @@ function calculer_rubriques_publiees() {
  *
  * Cherche les rubriques ayant des id_secteur ou profondeurs ne correspondant pas
  * avec leur parent, et les met à jour. De même avec les articles et leur id_secteur
+ *
+ * @pipeline_appel trig_propager_les_secteurs
  * 
  * @return void
 **/
@@ -343,6 +357,9 @@ function calculer_langues_rubriques_etape() {
  * (langue_choisie différent de 'oui') en les rebasant sur la langue
  * de la rubrique parente lorsque ce n'est pas le cas.
  *
+ * @uses calculer_langues_rubriques_etape()
+ * @pipeline_appel trig_calculer_langues_rubriques
+ * 
  * @return void 
 **/
 function calculer_langues_rubriques() {
@@ -370,7 +387,7 @@ function calculer_langues_rubriques() {
 
 
 /**
- * Calcule la liste des langues reellement utilisees dans le site public
+ * Calcule la liste des langues réellement utilisées dans le site public
  *
  * La recherche de langue est effectuée en recréant une boucle pour chaque
  * objet éditorial gérant des langues de sorte que les éléments non publiés
@@ -568,6 +585,9 @@ function inc_calcul_hierarchie_in_dist($id) {
  *
  * Appelée lorsqu'un (ou plusieurs) article post-daté arrive à terme
  * ou est redaté
+ *
+ * @uses publier_branche_rubrique()
+ * @pipeline_appel trig_calculer_prochain_postdate
  * 
  * @param bool $check
  *     true pour affecter le statut des rubriques concernées.

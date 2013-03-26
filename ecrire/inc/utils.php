@@ -1990,8 +1990,14 @@ function spip_initialisation_suite() {
 	if (!defined('_ACCESS_FILE_NAME')) define('_ACCESS_FILE_NAME', '.htaccess');
 	if (!defined('_AUTH_USER_FILE')) define('_AUTH_USER_FILE', '.htpasswd');
 	if (!defined('_SPIP_DUMP')) define('_SPIP_DUMP', 'dump@nom_site@@stamp@.xml');
-	if (!defined('_CACHE_RUBRIQUES')) define('_CACHE_RUBRIQUES', _DIR_TMP.'menu-rubriques-cache.txt');
-	if (!defined('_CACHE_RUBRIQUES_MAX')) define('_CACHE_RUBRIQUES_MAX', 500);
+	if (!defined('_CACHE_RUBRIQUES')) {
+		/** Fichier cache pour le navigateur de rubrique du bandeau */
+		define('_CACHE_RUBRIQUES', _DIR_TMP.'menu-rubriques-cache.txt');
+	}
+	if (!defined('_CACHE_RUBRIQUES_MAX')) {
+		/** Nombre maxi de rubriques enfants affichées pour chaque rubrique du navigateur de rubrique du bandeau */
+		define('_CACHE_RUBRIQUES_MAX', 500);
+	}
 
 	if (!defined('_EXTENSION_SQUELETTES')) define('_EXTENSION_SQUELETTES', 'html');
 

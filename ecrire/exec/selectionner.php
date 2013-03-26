@@ -10,13 +10,20 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion le l'affichage du sélecteur de rubrique AJAX
+ *
+ * @package SPIP\Core\Rubriques
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 
-# afficher un mini-navigateur de rubriques
-
-// http://doc.spip.org/@exec_selectionner_dist
+/**
+ * Affichage du sélecteur (mini-navigateur) de rubrique AJAX
+ *
+ * @uses inc_selectionner_dist()
+**/
 function exec_selectionner_dist()
 {
 	$id = intval(_request('id'));

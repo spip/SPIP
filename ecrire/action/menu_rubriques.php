@@ -10,12 +10,27 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action d'affichage du navigateur de rubrique du bandeau
+ *
+ * @package SPIP\Core\Rubriques 
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/autoriser');
 include_spip('inc/texte');
 include_spip('inc/filtres');
 
+/**
+ * Action d'affichage en ajax du navigateur de rubrique du bandeau 
+ *
+ * @uses gen_liste_rubriques()
+ * @uses menu_rubriques()
+ * 
+ * @return string
+ *     Code HTML présentant la liste des rubriques
+**/
 function action_menu_rubriques_dist() {
 
 	// si pas acces a ecrire, pas acces au menu
@@ -45,6 +60,16 @@ function action_menu_rubriques_dist() {
 	}
 }
 
+/**
+ * Retourne une liste HTML des rubriques et rubriques enfants
+ *
+ * @param bool $complet
+ *     - false pour n'avoir que le bouton racine «plan du site»
+ *     - true pour avoir l'ensemble des rubriques en plus
+ * 
+ * @return string
+ *     Code HTML présentant la liste des rubriques
+**/
 function menu_rubriques($complet = true){
 	$ret = "<li class='toutsite'><a href='".generer_url_ecrire('plan')."'>"._T('info_tout_site')."</a></li>";
 
@@ -79,7 +104,21 @@ function menu_rubriques($complet = true){
 	return $ret;
 }
 
-// http://doc.spip.org/@bandeau_rubrique
+/**
+ * Retourne une liste HTML des rubriques enfants d'une rubrique
+ *
+ * @uses extraire_article()
+ * 
+ * @param int $id_rubrique
+ *     Identifiant de la rubrique parente
+ * @param string $titre_rubrique
+ *     Titre de cette rubrique
+ * @param int $zdecal
+ *     Décalage vertical, en nombre d'élément
+ * 
+ * @return string
+ *     Code HTML présentant la liste des rubriques
+**/
 function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal) {
 	static $zmax = 6;
 
@@ -121,12 +160,34 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal) {
 }
 
 
-// http://doc.spip.org/@extraire_article
+/**
+ * Obtient la liste des rubriques enfants d'une rubrique, prise dans le cache
+ * du navigateur de rubrique
+ *
+ * @see gen_liste_rubriques() pour le calcul du cache
+ * 
+ * @param int $id_p
+ *     Identifiant de la rubrique parente des articles
+ * @param array $t
+ *     Cache des rubriques
+ * @return array
+ *     Liste des rubriques enfants de la rubrique (et leur titre)
+**/
 function extraire_article($id_p, $t) {
 	return array_key_exists($id_p, $t) ?  $t[$id_p]: array();
 }
 
-// http://doc.spip.org/@gen_liste_rubriques
+/**
+ * Génère le cache de la liste des rubriques pour la navigation du bandeau
+ *
+ * Le cache, qui comprend pour chaque rubrique ses rubriques enfants et leur titre, est :
+ *
+ * - réactualisé en fonction de la meta `date_calcul_rubriques`
+ * - mis en cache dans le fichier défini par la constante `_CACHE_RUBRIQUES`
+ * - stocké également dans la globale `db_art_cache`
+ * 
+ * @return bool true.
+**/
 function gen_liste_rubriques() {
 
 	include_spip('inc/config');

@@ -67,6 +67,8 @@ function parametres_css_prive(){
  *
  * Il permet de placer un objet dans la hiérarchie des rubriques de SPIP
  *
+ * @uses inc_chercher_rubrique_dist()
+ * 
  * @param string $titre
  * @param int $id_objet
  * @param int $id_parent
