@@ -153,7 +153,7 @@
 	<menu nom="menu_configuration" titre="icone_configuration" icone="images/configuration-48.png" action="navigation" parametres="menu=menu_configuration" />
 	<menu nom="configurer_identite" titre="titre_identite_site" parent="menu_configuration" icone="images/identite-16.png" action="configurer_identite" />
 	<menu nom="configurer_langue" titre="info_langue_principale" parent="menu_configuration" icone="images/langue-16.png" />
-	<menu nom="configurer_multilang" titre="info_multilinguisme" parent="menu_configuration" icone="images/traduction-16.png" />
+	<menu nom="configurer_multilinguisme" titre="info_multilinguisme" parent="menu_configuration" icone="images/traduction-16.png" />
 	<menu nom="configurer_contenu" titre="onglet_contenu_site" parent="menu_configuration" icone="images/config-contenu-16.png" />
 	<menu nom="configurer_interactions" titre="onglet_interactivite" parent="menu_configuration" icone="images/config-interaction-16.png" />
 	<menu nom="configurer_avancees" titre="onglet_fonctions_avances" parent="menu_configuration" icone="images/configuration-16.png" />
