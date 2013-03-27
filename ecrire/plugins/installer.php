@@ -63,6 +63,10 @@ function plugins_installer_dist($plug, $action, $dir_type='_DIR_PLUGINS')
 	if ($action == 'uninstall') $test = !$test;
 	// Si deja fait, on ne dit rien
 	if ($test)  return true;
+	// Si install et que l'on a la meta d'installation, c'est un upgrade
+	if($action == 'install' && !is_null(lire_meta($infos['prefix'].'_base_version')))
+		$infos['upgrade'] = true;
+
 	// executer l'installation ou l'inverse
 	// et renvoyer la trace (mais il faudrait passer en AJAX plutot)
 	ob_start(); 
