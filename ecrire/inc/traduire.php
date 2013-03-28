@@ -10,17 +10,30 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Outils pour la traduction et recherche de traductions
+ *
+ * @package SPIP\Core\Traductions
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Rechercher tous les lang/file dans le path
- * qui seront ensuite charges dans l'ordre du path
- * version dediee et optimisee pour cet usage de find_in_path
+ * qui seront ensuite chargés dans l'ordre du path
+ * 
+ * Version dédiée et optimisée pour cet usage de find_in_path
  *
- * @staticvar <type> $dirs
- * @param <type> $file
- * @param <type> $dirname
- * @return <type>
+ * @see find_in_path()
+ * 
+ * @staticvar array $dirs
+ * 
+ * @param string $file
+ *     Nom du fichier cherché, tel que `mots_fr.php`
+ * @param string $dirname
+ *     Nom du répertoire de recherche
+ * @return array
+ *     Liste des fichiers de langue trouvés, dans l'ordre des chemins
  */
 function find_langs_in_path ($file, $dirname='lang') {
 	static $dirs=array();
@@ -36,10 +49,18 @@ function find_langs_in_path ($file, $dirname='lang') {
 	}
 	return array_reverse($liste);
 }
-//
-// Charger un fichier langue
-//
-// http://doc.spip.org/@chercher_module_lang
+
+/**
+ * Recherche le ou les fichiers de langue d'un module de langue
+ *
+ * @param string $module
+ *     Nom du module de langue, tel que `mots` ou `ecrire`
+ * @param string $lang
+ *     Langue dont on veut obtenir les traductions.
+ *     Paramètre optionnel uniquement si le module est `local`
+ * @return array
+ *     Liste des fichiers touvés pour ce module et cette langue.
+**/
 function chercher_module_lang($module, $lang = '') {
 	if ($lang)
 		$lang = '_'.$lang;
@@ -56,7 +77,23 @@ function chercher_module_lang($module, $lang = '') {
 		: false;
 }
 
-// http://doc.spip.org/@charger_langue
+/**
+ * Charge en mémoire les couples cle/traduction d'un module de langue
+ * et une langue donnée
+ *
+ * Interprête un fichier de langue pour le module et la langue désignée
+ * s'il existe, et sinon se rabat soit sur la langue principale du site
+ * (définie par la meta `langue_site`), soit sur le français.
+ *
+ * Définit la globale `idx_lang` qui sert à la lecture du fichier de langue
+ * (include) et aux surcharges via `surcharger_langue()`
+ * 
+ * @uses chercher_module_lang()
+ * @uses surcharger_langue()
+ * 
+ * @param string $lang     Code de langue
+ * @param string $module   Nom du module de langue
+**/
 function charger_langue($lang, $module = 'spip') {
 	if ($lang AND $fichiers_lang = chercher_module_lang($module, $lang)) {
 		$GLOBALS['idx_lang']='i18n_'.$module.'_'.$lang;
@@ -82,10 +119,22 @@ function charger_langue($lang, $module = 'spip') {
 	}
 }
 
-//
-// Surcharger le fichier de langue courant avec un ou plusieurs autre (tordu, hein...)
-//
-// http://doc.spip.org/@surcharger_langue
+/**
+ * Surcharger le fichier de langue courant avec un ou plusieurs autres
+ *
+ * Charge chaque fichier de langue dont les chemins sont transmis et
+ * surcharge les infos de cette langue/module déjà connues par les nouvelles
+ * données chargées. Seule les clés nouvelles ou modifiées par la
+ * surcharge sont impactées (les clés non présentes dans la surcharge
+ * ne sont pas supprimées !).
+ *
+ * La fonction suppose la présence de la globale `idx_lang` indiquant
+ * la destination des couples de traduction, de la forme
+ * `i18n_${module}_${lang}`
+ *
+ * @param array $fichiers
+ *    Liste des chemins de fichiers de langue à surcharger.
+**/
 function surcharger_langue($fichiers) {
 	static $surcharges = array();
 	if (!isset($GLOBALS['idx_lang'])) return;
@@ -110,10 +159,40 @@ function surcharger_langue($fichiers) {
 	}
 }
 
-//
-// Traduire une chaine internationalisee
-//
-// http://doc.spip.org/@inc_traduire_dist
+
+/**
+ * Traduire une chaine internationalisée
+ *
+ * Lorsque la langue demandée n'a pas de traduction pour la clé de langue
+ * transmise, la fonction cherche alors la traduction dans la langue
+ * principale du site (défini par la meta `langue_site`), puis, à défaut
+ * dans la langue française.
+ *
+ * Les traductions sont cherchées dans les modules de langue indiqués.
+ * Par exemple le module `mots` dans la clé `mots:titre_mot`, pour une
+ * traduction `es` (espagnol) provoquera une recherche dans tous les fichiers
+ * `lang\mots_es.php`.
+ *
+ * Des surcharges locales peuvent être présentes également
+ * dans les fichiers `lang/local_es.php` ou `lang/local.php`
+ *
+ * @note
+ *   Les couples clé/traductions déjà connus sont sauvés en interne
+ *   dans les globales `i18n_${module}_${lang}` tel que `i18n_mots_es`
+ *   et sont également sauvés dans la variable statique `deja_vu`
+ *   de cette fonction.
+ * 
+ * @uses charger_langue()
+ * @uses chercher_module_lang()
+ * @uses surcharger_langue()
+ * 
+ * @param string $ori
+ *     Clé de traduction, tel que `bouton_enregistrer` ou `mots:titre_mot`
+ * @param string $lang
+ *     Code de langue, la traduction doit se faire si possible dans cette langue
+ * @return string
+ *     Traduction demandée. Chaîne vide si aucune traduction trouvée.
+**/
 function inc_traduire_dist($ori, $lang) {
 	static $deja_vu = array();
 	static $local = array();
