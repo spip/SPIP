@@ -721,6 +721,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_info_plugins_dist_1' => 'Déi hei Plugine sinn an den Dossier @plugins_dist@ gelueden an ageschalt.',
 	'plugin_info_plugins_dist_2' => 'Si kënne net ausgeschalt ginn.',
 	'plugin_info_telecharger' => 'Eroflueden vun @url@ an Ariichten an @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Installéiert Librairie\'en',
 	'plugin_necessite_lib' => 'Dëse Plugin brauch d\'Librairie @lib@',
 	'plugin_necessite_plugin' => 'De Plugin @plugin@ muss mindestens op der Versioun @version@ sinn.',

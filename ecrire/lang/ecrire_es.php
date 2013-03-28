@@ -737,6 +737,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'plugin_info_plugins_dist_1' => 'Las plugins siguientes se cargan y se activan en la carpeta @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'No pueden desactivarse.',
 	'plugin_info_telecharger' => 'se descargará de @url@ y se instalará en @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Bibliotecas instaladas',
 	'plugin_necessite_lib' => 'Este plugin necesita la biblioteca @lib@',
 	'plugin_necessite_plugin' => 'Necesita el plugin @plugin@ con versión @version@ por lo menos.',

@@ -728,6 +728,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'plugin_info_plugins_dist_1' => 'Os plugins abaixo são carregados e ativados no diretório @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Eles não são desativáveis.',
 	'plugin_info_telecharger' => 'transferir de @url@ e instalar em @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Bibliotecas instaladas',
 	'plugin_necessite_lib' => 'Este plugin precisa da biblioteca @lib@',
 	'plugin_necessite_plugin' => 'É necessário o plugin @plugin@ na versão @version@, pelo menos.',

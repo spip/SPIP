@@ -752,6 +752,7 @@ Le traduzioni sono associate all\'originale,
 	'plugin_info_plugins_dist_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Questi non possono essere disabilitati.',
 	'plugin_info_telecharger' => 'da scaricare da @url@ e da installare in @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librerie installate',
 	'plugin_necessite_lib' => 'Questa estensione richiede la libreria @lib@',
 	'plugin_necessite_plugin' => 'Necessita l\'estensione @plugin@ con almeno la versione @version@.',

@@ -760,6 +760,7 @@ ukazuje jejich stav:',
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'load from @url@ and install to @rep@', # NEW
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Installed libraries', # NEW
 	'plugin_necessite_lib' => 'This plugin requires the library @lib@', # NEW
 	'plugin_necessite_plugin' => 'Version @version@ or newer of the plugin @plugin@ is required.', # NEW

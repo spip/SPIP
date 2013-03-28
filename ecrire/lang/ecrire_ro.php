@@ -746,6 +746,7 @@ cu o culoare care le indică starea :',
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'de descărcat de la @url@ şi de instalat în @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librăriile instalate',
 	'plugin_necessite_lib' => 'Acest plug-in are nevoie de librăria @lib@',
 	'plugin_necessite_plugin' => 'Necesită plugin-ul @plugin@ cu versiunea @version@ minim.',

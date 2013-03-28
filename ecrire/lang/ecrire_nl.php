@@ -744,6 +744,7 @@ een kleur geeft hun status aan :',
 	'plugin_info_plugins_dist_1' => 'De onderstaande plugins zijn geladen en geactiveerd in de directory @plugins_dist@.', # extensies zijn speciaale plugins geleeverd met spip-core om een gebruikbare SPIP pakket te bouwen
 	'plugin_info_plugins_dist_2' => 'Ze zijn niet te deactiveren.',
 	'plugin_info_telecharger' => 'om sinds @url@ te downloaden en om te plaatsen in @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Geplaatste boekhandels',
 	'plugin_necessite_lib' => 'Dit plugin vereist de boekhandel @lib@',
 	'plugin_necessite_plugin' => 'Vereist plugin @plugin@ in versie minimale @version@.',

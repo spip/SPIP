@@ -734,6 +734,7 @@ amb un color que indica el seu estat:',
 	'plugin_info_plugins_dist_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @plugins_dist@.', # MODIF
 	'plugin_info_plugins_dist_2' => 'No es poden desactivar.', # MODIF
 	'plugin_info_telecharger' => 'baixar-lo des de @url@ i instal·lar-lo a @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Llibreries instal·lades',
 	'plugin_necessite_lib' => 'Aquest plugin necessita la llibreria @lib@',
 	'plugin_necessite_plugin' => 'Requereix el plugin @plugin@ com a mínim en la versió @version@.',

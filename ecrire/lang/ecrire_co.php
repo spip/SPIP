@@ -779,6 +779,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'da scaricà da @url@ è da stallà in @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librerie stallate',
 	'plugin_necessite_lib' => 'Stu plugin richere a libreria @lib@',
 	'plugin_necessite_plugin' => 'Richere u plugin @plugin@ cù omancu a versione @version@.',

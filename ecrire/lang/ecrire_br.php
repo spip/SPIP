@@ -746,6 +746,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	'plugin_info_plugins_dist_1' => 'Karget ha gweredek eo an askouezioù-mañ er c\'havlec\'h @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Diweredekaus ez int',
 	'plugin_info_telecharger' => 'da bellgargañ adal @url@ ha da staliañ e @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Levraouegoù bet staliet',
 	'plugin_necessite_lib' => 'Ezhomm en deus an adveziant-mañ eus al levraoueg @lib@',
 	'plugin_necessite_plugin' => 'Ezhomm en deus eus an adveziant @plugin@ e stumm @version@ d\'an nebeutañ.',

@@ -753,6 +753,7 @@ Le traduzioni sono associate all\'originale,
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'da scaricare da @url@ e da installare in @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librerie installate',
 	'plugin_necessite_lib' => 'Questo plug-in richiede la libreria @lib@',
 	'plugin_necessite_plugin' => 'Necessita il plug-in @plugin@ con almeno la versione @version@.',

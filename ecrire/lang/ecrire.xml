@@ -59,11 +59,11 @@
 	</langue>
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr_tu">
 		<traducteur nom="Astalaseven" lien="http://trad.spip.net/auteur/astalaseven" />
-		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
-		<traducteur nom="RealET" lien="http://trad.spip.net/auteur/realet" />
-		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
+		<traducteur nom="RealET" lien="http://trad.spip.net/auteur/realet" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
+		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Nathan" lien="http://trad.spip.net/auteur/nathan" />
 	</langue>
@@ -85,9 +85,9 @@
 	</langue>
 	<langue code="my" />
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=nl">
-		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 		<traducteur nom="gerbrand" lien="http://trad.spip.net/auteur/gerbrand" />
+		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="oc_auv" />

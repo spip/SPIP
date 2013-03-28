@@ -93,7 +93,7 @@ Ez balidatu inportazio galdera hau.
 	'cache_mode_compresse' => 'Cacheko fitxategiak modu konprimituan gorde dira.',
 	'cache_mode_non_compresse' => 'Cacheko fitxategiak ez dira gorde modu konprimituan.',
 	'cache_modifiable_webmestre' => 'Parametra hauek tokiaren administratzaileak aldatzen ahal ditu.',
-	'calendrier_synchro' => 'Agenda-software bateragarri bat erabiltzen baduzu <b>iCal</b>, leku honen gaurkotasun-editorialarekin sinkronizatu dezakezu.',
+	'calendrier_synchro' => 'Agenda-software bateragarri bat erabiltzen baduzu <b>iCal</b>, gune honen gaurkotasun-editorialarekin sinkroniza dezakezu.',
 	'config_activer_champs' => 'Ondorengo eremuak aktibatu',
 	'config_choix_base_sup' => 'Zerbitzari honetan datu base bat zehaztu',
 	'config_erreur_base_sup' => 'SPIPek ez dauka sartzerik datu base erabilgarrien zerrendan',
@@ -179,11 +179,11 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	// I
 	'ical_info1' => 'Lekuarenbizitzarekin harremanetan egoteko dauden zenbait modu orrialde honetan aurkeztendira.',
 	'ical_info2' => 'Teknika guzti hauen buruzko informazio gehiago lortzeko, <a href="@spipnet@">SPIP dokumentazioa</a> kontsulta dezakezu.',
-	'ical_info_calendrier' => 'Bi egutegidituzu eskura. Lehena leku-planoa da, bertan argitaratutako artikulu guztiak adieraztendirelarik. Bigarrenak iragarki editorialak eta zure azken mezu pribatuak ditu: zukbakarrik ikus dezakezu gako-hitz pertsonal baten bidez, gako-hitza edozein unean aldatudaiteke zure pasahitza aldatzen baduzu.',
+	'ical_info_calendrier' => 'Bi egutegi dituzu eskura. Lehena gunearen planoa da, bertan argitaratutako artikulu guztiak adierazten direlarik. Bigarrenak iragarki editorialak eta zure azken mezu pribatuak ditu: zuk bakarrik ikus dezakezu gako pertsonal baten bidez, gakoa edozein unean alda dezakezularik zure pasahitza aldatuz.',
 	'ical_methode_http' => 'Deskargatu',
 	'ical_methode_webcal' => 'Sinkronizazioa (webcal://)',
-	'ical_texte_js' => 'Leku honetanberriki argitaratutako artikuluak, Javascript lerro baten bidez, zurea den edozein lekutanikus ditzakezu.',
-	'ical_texte_prive' => 'Egutegi hau erabat pertsonala da eta leku honenekintza editorial pribatuen berri ematen du (eginkizunak, hitzordu pertsonalak,artikuluak eta proposatutako berri laburrak,..)',
+	'ical_texte_js' => 'Gune honetan berriki argitaratutako artikuluak, zure edo edozeinen gunean ikus ditzakezu, Javascript lerro baten bidez.',
+	'ical_texte_prive' => 'Egutegi hau erabat pertsonala da eta gune honen ekintza editorial pribatuen berri ematen du (eginkizunak, hitzordu pertsonalak, artikuluak eta proposatutako berri-laburrak,..)',
 	'ical_texte_public' => 'Egutegi honi eskerleku honetako ekintza publikoen jarraipena egin daiteke (artikuluak eta berri laburrak)',
 	'ical_texte_rss' => 'Leku honen nobedadeak XML/RSS (Rich Site Summary)formatuko edozein fitxategi irakurgailuz sindikatu ditzakezu. Halaber SPIP-ak bestelekuetan argitaratutako nobedadeak irakur ditzake baldin eta leku horiek truke-formatubateragarria (sindikatutako lekuak) erabiltzen badute.',
 	'ical_titre_js' => 'Javascript',
@@ -738,6 +738,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => '@url@ helbidetik deskargatu beharra, eta @rep@ direktorioan instalatzekoa',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Instalatutako liburutegiak',
 	'plugin_necessite_lib' => 'plugin hunek @lib@ liburutegia beharesten du.',
 	'plugin_necessite_plugin' => 'Beharretsia : @plugin@ plugina @version@ bertsio minimoarekin.',

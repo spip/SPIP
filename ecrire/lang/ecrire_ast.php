@@ -765,6 +765,7 @@ con una color que indica el estáu:',
 	'plugin_info_plugins_dist_1' => 'Les estensiones darréu se carguen y s\'activen nel direutoriu @plugins_dist@.', # MODIF
 	'plugin_info_plugins_dist_2' => 'Estes nun pueden desactivase.', # MODIF
 	'plugin_info_telecharger' => 'a descargar de @url@ y a instalar en @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Llibreríes instaláes',
 	'plugin_necessite_lib' => 'Esti plugin necesita la llibrería @lib@',
 	'plugin_necessite_plugin' => 'Necesita el plugin @plugin@ en versión @version@ mínimo.',

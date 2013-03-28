@@ -753,6 +753,7 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'plugin_info_plugins_dist_1' => 'Następujące wtyczki są załadowane i uruchomione w katalogu @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Nie mogą zostać wyłączone.',
 	'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Biblioteka programistyczna została zainstalowana',
 	'plugin_necessite_lib' => 'Ta wtyczka wymaga biblioteki programistycznej @lib@',
 	'plugin_necessite_plugin' => 'Potrzeba pluginu @plugin@ co najmniej w wersji @version@.',
