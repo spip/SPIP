@@ -82,7 +82,7 @@ function inc_formater_article_dist($row, $own='')
 	. "'"
 	. (!$descriptif ? '': (' title="'.attribut_html(typo($descriptif)).'"'))
 	. " $dir>"
-	. typo($titre ? $titre : _T('ecrire:info_sans_titre'))
+	. typo(strlen($titre) ? $titre : _T('ecrire:info_sans_titre'))
 	. "</a>"
 	. $lang
 	. $petition
