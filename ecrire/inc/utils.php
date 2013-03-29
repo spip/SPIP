@@ -465,14 +465,18 @@ function ancre_url($url, $ancre) {
 	return $url . (strlen($ancre) ? '#'. $ancre : '');
 }
 
-//
-// pour le nom du cache, les types_urls et self
-//
-// http://doc.spip.org/@nettoyer_uri
-function nettoyer_uri()
+/**
+ * pour le nom du cache, les types_urls et self
+ * http://doc.spip.org/@nettoyer_uri
+ *
+ * @param string|null $reset
+ * @return string
+ */
+function nettoyer_uri($reset = null)
 {
 	static $done = false;
 	static $propre = '';
+	if (!is_null($reset)) return $propre=$reset;
 	if ($done) return $propre;
 	$done = true;
 
@@ -1416,20 +1420,32 @@ function test_valeur_serveur($truc) {
 //
 // Fonctions de fabrication des URL des scripts de Spip
 //
-
-// l'URL de base du site, sans se fier a meta(adresse_site) qui
-// peut etre fausse (sites a plusieurs noms d'hotes, deplacements, erreurs)
-// Note : la globale $profondeur_url doit etre initialisee de maniere a
-// indiquer le nombre de sous-repertoires de l'url courante par rapport a la
-// racine de SPIP : par exemple, sur ecrire/ elle vaut 1, sur sedna/ 1, et a
-// la racine 0. Sur url/perso/ elle vaut 2
-// http://doc.spip.org/@url_de_base
-function url_de_base() {
+/**
+ * l'URL de base du site, sans se fier a meta(adresse_site) qui
+ * peut etre fausse (sites a plusieurs noms d'hotes, deplacements, erreurs)
+ * Note : la globale $profondeur_url doit etre initialisee de maniere a
+ * indiquer le nombre de sous-repertoires de l'url courante par rapport a la
+ * racine de SPIP : par exemple, sur ecrire/ elle vaut 1, sur sedna/ 1, et a
+ * la racine 0. Sur url/perso/ elle vaut 2
+ * http://doc.spip.org/@url_de_base
+ *
+ * @param int|boo|array $profondeur
+ *    si non renseignee : retourne l'url pour la profondeur $GLOBALS['profondeur_url']
+ *    si int : indique que l'on veut l'url pour la prondeur indiquee
+ *    si bool : retourne le tableau static complet
+ *    si array : reinitialise le tableau static complet avec la valeur fournie
+ * @return string|array
+ */
+function url_de_base($profondeur=null) {
 
 	static $url = array();
+	if (is_array($profondeur)) return $url = $profondeur;
+	if ($profondeur===false) return $url;
 
-	if (isset($url[$GLOBALS['profondeur_url']]))
-		return $url[$GLOBALS['profondeur_url']];
+	if (is_null($profondeur)) $profondeur = $GLOBALS['profondeur_url'];
+
+	if (isset($url[$profondeur]))
+		return $url[$profondeur];
 
 	$http = (
 		(isset($_SERVER["SCRIPT_URI"]) AND
@@ -1456,9 +1472,9 @@ function url_de_base() {
 		}
 	}
 
-	$url[$GLOBALS['profondeur_url']] = url_de_($http,$host,$GLOBALS['REQUEST_URI'],$GLOBALS['profondeur_url']);
+	$url[$profondeur] = url_de_($http,$host,$GLOBALS['REQUEST_URI'],$profondeur);
 
-	return $url[$GLOBALS['profondeur_url']];
+	return $url[$profondeur];
 }
 /**
  * fonction testable de construction d'une url appelee par url_de_base()
