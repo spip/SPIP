@@ -915,8 +915,9 @@ function balise_LESAUTEURS_dist ($p) {
 			$id_table_objet = 'id_article';
 		}
 		else{
-			$connect = $p->boucles[$p->id_boucle]->sql_serveur;
-			$type_boucle = $p->boucles[$p->id_boucle]->type_requete;
+			$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+			$connect = $p->boucles[$b]->sql_serveur;
+			$type_boucle = $p->boucles[$b]->type_requete;
 			$objet = objet_type($type_boucle);
 			$id_table_objet = id_table_objet($type_boucle);
 		}
