@@ -1,7 +1,7 @@
 <paquet
 	prefix="spip"
 	categorie="outil"
-	version="3.0.5"
+	version="3.0.7"
 	etat="dev"
 	compatibilite="];["
 	schema="19268"
@@ -125,6 +125,7 @@
 	<pipeline nom="rechercher_liste_des_jointures" action="" />
 	<pipeline nom="recuperer_fond" action="f_recuperer_fond" inclure="inc/pipelines.php" />
 	<pipeline nom="styliser" action="cvtmulti_styliser" inclure="inc/cvt_multietapes.php" />
+	<pipeline nom="traduire" action="" />
 	<pipeline nom="trig_auth_trace" action="" />
 	<pipeline nom="trig_calculer_prochain_postdate" action="" />
 	<pipeline nom="trig_calculer_langues_rubriques" action="" />
