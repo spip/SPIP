@@ -2273,6 +2273,11 @@ class sqlite_traducteur {
 			$this->query = str_replace('LEFT(','_LEFT(',$this->query);
 		}
 
+		if (strpos($this->query, 'TIMESTAMPDIFF(')!==false){
+			$this->query = preg_replace('/TIMESTAMPDIFF\(\s*([^,]*)\s*,/Uims',"TIMESTAMPDIFF('\\1',",$this->query);
+		}
+
+
 		// Correction Using
 		// USING (non reconnu en sqlite2)
 		// problematique car la jointure ne se fait pas du coup.
