@@ -18,10 +18,18 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// ajouter define('_CREER_DIR_PLAT', true); dans mes_options pour restaurer
-// le fonctionnement des faux repertoires en .plat
+
+/**
+ * Autoriser la création de faux répertoires ?
+ *
+ * Ajouter `define('_CREER_DIR_PLAT', true);` dans mes_options pour restaurer
+ * le fonctionnement des faux répertoires en `.plat`
+ */
 define('_CREER_DIR_PLAT', false);
-if (!defined('_TEST_FILE_EXISTS')) define('_TEST_FILE_EXISTS', preg_match(',(online|free)[.]fr$,', isset($_ENV["HTTP_HOST"]) ? $_ENV["HTTP_HOST"] : ""));
+if (!defined('_TEST_FILE_EXISTS')) {
+	/** Permettre d'éviter des tests file_exists sur certains hébergeurs */
+	define('_TEST_FILE_EXISTS', preg_match(',(online|free)[.]fr$,', isset($_ENV["HTTP_HOST"]) ? $_ENV["HTTP_HOST"] : ""));
+}
 
 #define('_SPIP_LOCK_MODE',0); // ne pas utiliser de lock (deconseille)
 #define('_SPIP_LOCK_MODE',1); // utiliser le flock php
@@ -89,7 +97,15 @@ function spip_fclose_unlock($handle){
 }
 
 
-// http://doc.spip.org/@spip_file_get_contents
+/**
+ * Retourne le contenu d'un fichier, même si celui ci est compréssé
+ * avec une extension en `.gz`
+ * 
+ * @param string $fichier
+ *     Chemin du fichier
+ * @return string
+ *     Contenu du fichier
+**/
 function spip_file_get_contents ($fichier) {
 	if (substr($fichier, -3) != '.gz') {
 		if (function_exists('file_get_contents')
@@ -108,11 +124,28 @@ function spip_file_get_contents ($fichier) {
 	return is_array($contenu)?join('', $contenu):(string)$contenu;
 }
 
-// options = array(
-// 'phpcheck' => 'oui' # verifier qu'on a bien du php
-// dezippe automatiquement les fichiers .gz
-// http://doc.spip.org/@lire_fichier
-function lire_fichier ($fichier, &$contenu, $options=false) {
+
+/**
+ * Lit un fichier et place son contenu dans le paramètre transmis.
+ *
+ * Décompresse automatiquement les fichiers `.gz`
+ *
+ * @uses spip_fopen_lock()
+ * @uses spip_file_get_contents()
+ * @uses spip_fclose_unlock()
+ * 
+ * @param string $fichier
+ *     Chemin du fichier
+ * @param string $contenu
+ *     Le contenu du fichier sera placé dans cette variable
+ * @param array $options
+ *     Options tel que :
+ *
+ *     - 'phpcheck' => 'oui' : vérifie qu'on a bien du php
+ * @return bool
+ *     true si l'opération a réussie, false sinon.
+**/
+function lire_fichier ($fichier, &$contenu, $options=array()) {
 	$contenu = '';
 	// inutile car si le fichier n'existe pas, le lock va renvoyer false juste apres
 	// economisons donc les acces disque, sauf chez free qui rale pour un rien
@@ -140,7 +173,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 
 		// Verifications
 		$ok = true;
-		if ($options['phpcheck'] == 'oui')
+		if (isset($options['phpcheck']) and $options['phpcheck'] == 'oui')
 			$ok &= (preg_match(",[?]>\n?$,", $contenu));
 
 		#spip_log("$fread $fichier ".spip_timer('lire_fichier'));
@@ -246,12 +279,20 @@ function ecrire_fichier ($fichier, $contenu, $ignorer_echec = false, $truncate=t
 }
 
 /**
- * Ecrire un contenu dans un fichier encapsule en php pour en empecher l'acces en l'absence
- * de htaccess
+ * Écrire un contenu dans un fichier encapsulé en PHP pour en empêcher l'accès en l'absence
+ * de fichier htaccess
+ *
+ * @uses ecrire_fichier()
+ * 
  * @param string $fichier
- * @param <type> $contenu
- * @param <type> $ecrire_quand_meme
- * @param <type> $truncate 
+ *     Chemin du fichier
+ * @param string $contenu
+ *     Contenu à écrire
+ * @param bool $ecrire_quand_meme
+ *     - true pour ne pas raler en cas d'erreur
+ *     - false affichera un message si on est webmestre
+ * @param bool $truncate
+ *     Écriture avec troncation ?
  */
 function ecrire_fichier_securise ($fichier, $contenu, $ecrire_quand_meme = false, $truncate=true) {
 	if (substr($fichier,-4) !== '.php')
@@ -261,12 +302,22 @@ function ecrire_fichier_securise ($fichier, $contenu, $ecrire_quand_meme = false
 }
 
 /**
- * Lire un fichier encapsule en php
- * @param <type> $fichier
- * @param <type> $contenu
- * @param <type> $options 
+ * Lire un fichier encapsulé en PHP
+ *
+ * @uses lire_fichier()
+ * 
+ * @param string $fichier
+ *     Chemin du fichier
+ * @param string $contenu
+ *     Le contenu du fichier sera placé dans cette variable
+ * @param array $options
+ *     Options tel que :
+ *
+ *     - 'phpcheck' => 'oui' : vérifie qu'on a bien du php
+ * @return bool
+ *     true si l'opération a réussie, false sinon.
  */
-function lire_fichier_securise ($fichier, &$contenu, $options=false) {
+function lire_fichier_securise ($fichier, &$contenu, $options=array()) {
 	if ($res = lire_fichier($fichier,$contenu,$options)){
 		$contenu = substr($contenu,strlen("<"."?php die ('Acces interdit'); ?".">\n"));
 	}
@@ -367,7 +418,7 @@ function spip_unlink($f) {
 /*
  * Suppression complete d'un repertoire.
  *
- * http://www.php.net/manual/en/function.rmdir.php#92050
+ * @link http://www.php.net/manual/en/function.rmdir.php#92050
  *
  * @param string $dir Chemin du repertoire
  * @return bool Suppression reussie.
@@ -478,19 +529,35 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 	return $baseaff.($dirs[$base.$subdir] = "${subdir}_");
 }
 
-//
-// Cette fonction parcourt recursivement le repertoire $dir, et renvoie les
-// fichiers dont le chemin verifie le pattern (preg) donne en argument.
-// En cas d'echec retourne un array() vide
-//
-// Usage: array preg_files('ecrire/data/', '[.]lock$');
-//
-// Attention, afin de conserver la compatibilite avec les repertoires '.plat'
-// si $dir = 'rep/sous_rep_' au lieu de 'rep/sous_rep/' on scanne 'rep/' et on
-// applique un pattern '^rep/sous_rep_'
-// si $recurs vaut false, la fonction ne descend pas dans les sus repertoires
-//
-// http://doc.spip.org/@preg_files
+
+/**
+ * Parcourt récursivement le repertoire `$dir`, et renvoie les
+ * fichiers dont le chemin vérifie le pattern (preg) donné en argument.
+ *
+ * En cas d'echec retourne un `array()` vide
+ *
+ * @example
+ *     ```
+ *     $x = preg_files('ecrire/data/', '[.]lock$');
+ *     // $x array()
+ *     ```
+ * 
+ * @note
+ *   Attention, afin de conserver la compatibilite avec les repertoires '.plat'
+ *   si `$dir = 'rep/sous_rep_'` au lieu de `rep/sous_rep/` on scanne `rep/` et on
+ *   applique un pattern `^rep/sous_rep_`
+ * 
+ * @param string $dir
+ *     Répertoire à parcourir
+ * @param int|string $pattern
+ *     Expression régulière pour trouver des fichiers, tel que `[.]lock$`
+ * @param int $maxfiles
+ *     Nombre de fichiers maximums retournés
+ * @param array $recurs
+ *     false pour ne pas descendre dans les sous répertoires
+ * @return array
+ *     Chemins des fichiers trouvés.
+**/
 function preg_files($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=array()) {
 	$nbfiles = 0;
 	if ($pattern == -1)
