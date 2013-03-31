@@ -287,6 +287,10 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			)
 		);
 
+		if (strlen($a['fichier']) > 255) {
+			spip_log("Upload avec nom > 255 : " . $a['fichier']);
+			return;
+		}
 		$id = sql_insertq("spip_documents", $a);
 
 		pipeline('post_insertion',
