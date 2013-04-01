@@ -211,7 +211,7 @@ function debusquer_navigation($tableau, $caption = '', $id = 'debug-nav'){
 	}
 
 	return "\n<table id='$id'>"
-		. "<caption>"
+		. "<caption onclick=\"jQuery(this).parent().toggle();\">"
 		. $caption
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
