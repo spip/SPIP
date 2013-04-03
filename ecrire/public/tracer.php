@@ -134,15 +134,13 @@ function chrono_requete($temps)
 		  . join('',$t[$k]);
 	}
 
-	$navigation = 
-	  _T('zbug_statistiques')
-	  . "<table style='text-align: left; border: 1px solid;'><tr><td>"
+	$navigation = array(_T('zbug_statistiques'),
+	  "<tr><td>"
 		. join("</td></tr>\n<tr><td>", $d)
 	  . "</td></tr>\n"
 	  .  (# _request('var_mode_objet') ? '' : 
-	     ("<tr><td>" .  count($temps) . "</td><td>" . _T('info_total') . '</td><td class="time">' . $total . "</td><td></td></tr>"))
-	  . "</table>";
-
+	     ("<tr><td>" .  count($temps) . "</td><td>" . _T('info_total') . '</td><td class="time">' . $total . "</td><td></td></tr>")));
+	  
 	return array($temps, $navigation);
 }
 
