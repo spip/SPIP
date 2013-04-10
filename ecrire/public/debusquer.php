@@ -35,7 +35,7 @@ include_spip('public/decompiler');
  *
  * Sert pour les tests unitaires
  */
-define('_DEBUG_MAX_SQUELETTE_ERREURS', 9);
+defined('_DEBUG_MAX_SQUELETTE_ERREURS') || define('_DEBUG_MAX_SQUELETTE_ERREURS', 9);
 
 //
 // Point d'entree general, 
@@ -138,7 +138,7 @@ function debusquer_compose_message($msg){
 function debusquer_bandeau($erreurs){
 
 	if (!empty($erreurs)){
-		$n = count($erreurs) . ' ' . _T('zbug_erreur_squelette');
+		$n = array(count($erreurs) . ' ' . _T('zbug_erreur_squelette'));
 		return debusquer_navigation($erreurs, $n);
 	}
 	elseif (!empty($GLOBALS['tableau_des_temps'])) {
@@ -170,7 +170,7 @@ function debusquer_contexte($env){
 // Affichage du tableau des erreurs ou des temps de calcul
 // Cliquer sur les numeros en premiere colonne permet de voir le code
 
-function debusquer_navigation($tableau, $caption = '', $id = 'debug-nav'){
+function debusquer_navigation($tableau, $caption = array(), $id = 'debug-nav') {
 
 	if (_request('exec')=='valider_xml') return '';
 	$GLOBALS['bouton_admin_debug'] = true;
@@ -211,15 +211,17 @@ function debusquer_navigation($tableau, $caption = '', $id = 'debug-nav'){
 	}
 
 	return "\n<table id='$id'>"
-		. "<caption onclick=\"jQuery(this).parent().toggle();\">"
-		. $caption
+		. "<caption onclick=\"x = document.getElementById('$id'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = '');\">"
+		. $caption[0]
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
 		. "</caption>"
+		//  fausse caption du chrono (mais vraie nav)
+		. (!empty($caption[1]) ? $caption[1] : '')
 		. "<tr><th>"
 		. _T('numero')
 		. "</th><th>"
-		. _T('message')
+		. _T('public:message')
 		. "</th><th>"
 		. _T('squelette')
 		. "</th><th>"
@@ -363,16 +365,13 @@ function reference_boucle_debug($n, $nom, $self){
 // affiche un texte avec numero de ligne et ancre.
 
 // http://doc.spip.org/@ancre_texte
-function ancre_texte($texte, $fautifs = array(), $nocpt = false){
+function ancre_texte($texte, $fautifs = array(), $nocpt = false) {
+
 	$var_mode_ligne = _request('var_mode_ligne');
 	if ($var_mode_ligne) $fautifs[] = array($var_mode_ligne);
 	$res = '';
 
-	$s = highlight_string(str_replace('</script>', '</@@@@@>', $texte), true);
-
-	$s = str_replace('/@@@@@', '/script', // bug de highlight_string
-		str_replace('</font>', '</span>',
-			str_replace('<font color="', '<span style="color: ', $s)));
+	$s = highlight_string($texte, true);
 	if (substr($s, 0, 6)=='<code>'){
 		$s = substr($s, 6);
 		$res = '<code>';
@@ -407,8 +406,8 @@ function ancre_texte($texte, $fautifs = array(), $nocpt = false){
 			// tentative de pointer sur la colonne fautive;
 			// marche pas car highlight_string rajoute des entites. A revoir.
 			// $m = $flignes[$i][0];
-			//  $ligne = substr($ligne, 0, $m-1) .
-			//  sprintf($formaterr, substr($ligne,$m));
+			// $ligne = substr($ligne, 0, $m-1) .
+			// sprintf($formaterr, substr($ligne,$m));
 			$bg = $formaterr;
 		} else {
 			$indexmesg = $ancre;
@@ -419,8 +418,8 @@ function ancre_texte($texte, $fautifs = array(), $nocpt = false){
 	}
 
 	return "<div id='T$ancre'>"
-		. '<div onclick="javascript:'
-		. "\$(this).parent().find('a').toggle();"
+		. '<div onclick="'
+		. "jQuery(this).parent().find('a').toggle();"
 		. '" title="'
 		. _T('masquer_colonne')
 		. '" style="cursor: pointer;">'
@@ -456,7 +455,7 @@ function debusquer_squelette($fonc, $mode, $self){
 		}
 		else {
 			if (strlen(trim($res))) {
-				return "<div id='spip-debug'>$res</div>";
+				return "<img src='".chemin_image('compat-16.png')."' alt='afficher-masquer le debug' id='spip-debug-toggle' onclick=\"x = document.getElementById('spip-debug'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = '');\" /><div id='spip-debug'>$res</div>";
 			} else {
 				// cas de l'appel sur erreur: montre la page
 				return isset($GLOBALS['debug_objets']['resultat']['tout'])
@@ -481,7 +480,7 @@ function debusquer_squelette($fonc, $mode, $self){
 		$res = $id = '';
 	}
 	return !trim($texte) ? '' : (
-		"<div id='spip-debug'>$res"
+		"<img src='".chemin_image('compat-16.png')."' alt='afficher-masquer le debug' id='spip-debug-toggle' onclick=\"x = document.getElementById('spip-debug'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = '');\" /><div id='spip-debug'>$res"
 			. "<div id='debug_boucle'><fieldset$id><legend>"
 			. "<a href='".$self."#f_".substr($fonc, 0, 37)."'> &#8593; "
 			. ($legend ? $legend : $mode)
@@ -743,10 +742,7 @@ function debusquer_entete($titre, $corps){
 		. "' type='text/css' />" .
 		"</head>\n" .
 		"<body style='margin:0 10px;'>\n" .
-		"<div id='spip-debug-hide' style='position: absolute; top: 0px; z-index: 1000; right:0px;'>" .
-		"<a href='#' onClick=\"x = document.getElementById('spip-debug-header'); (x.style.display == '' ? x.style.display = 'none' : x.style.display = ''); return false;\"> + / - </a>" .
-		"</div>" .
-		"<div id='spip-debug-header' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:0px;right:10px;'>" .
+		"<div id='spip-debug-header'>" .
 		$corps .
 		inclure_balise_dynamique(balise_FORMULAIRE_ADMIN_dyn('spip-admin-float', $debug_objets), false) .
 		'</div></body></html>';
