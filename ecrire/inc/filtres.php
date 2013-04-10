@@ -111,13 +111,20 @@ function chercher_filtre($fonc, $default=NULL) {
  *     Texte sur lequel appliquer le filtre
  * @param string $filtre
  *     Nom du filtre a appliquer
+ * @param string $force
+ *     La fonction doit-elle retourner le texte ou rien ?
  * @return string
- *     Texte avec le filtre appliqué. Chaîne vide si le filtre n'est pas trouvé.
+ *     Texte avec le filtre appliqué s'il a été trouvé,
+ *     Texte sans le filtre appliqué s'il n'a pas été trouvé et que $force n'a
+*       pas été fourni,
+ *     Chaîne vide si le filtre n'a pas été trouvé et que $force a été fourni.
 **/
-function appliquer_filtre($arg, $filtre) {
+function appliquer_filtre($arg, $filtre, $force=NULL) {
 	$f = chercher_filtre($filtre);
-	if (!$f)
-		return ''; // ou faut-il retourner $arg inchange == filtre_identite?
+	if (!$f) {
+		if (!$force) return '';
+		else return $arg;
+	}
 
 	$args = func_get_args();
 	array_shift($args); // enlever $arg
