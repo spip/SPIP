@@ -171,18 +171,20 @@ function balise_URL_PAGE_dist($p) {
 
 //
 // #URL_ECRIRE{rubriques} -> ecrire/?exec=rubriques
-//
+// #URL_ECRIRE*  meme chose, mais sans convertir les & en &amp;
 // http://doc.spip.org/@balise_URL_ECRIRE_dist
 function balise_URL_ECRIRE_dist($p) {
 
 	$code = interprete_argument_balise(1,$p);
 	if (!$code)
 		$fonc = "''";
-	else{
+	else {
 		$fonc = $code;
 		$args = interprete_argument_balise(2,$p);
-		if ($args != "''" && $args!==NULL)
-			$fonc .= ',' . $args;
+		if ($args === NULL) $args = "''";
+		$noentities = $p->etoile ? ", true" : '';
+		if (($args != "''")  OR $noentities)
+			$fonc .= ",$args$noentities";
 	}
 	$p->code = 'generer_url_ecrire(' . $fonc .')';
 	$p->interdire_scripts = false;
