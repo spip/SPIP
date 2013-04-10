@@ -755,7 +755,7 @@ a stav ich spracovania je označený farbou:',
 	'plugin_info_plugins_dist_1' => 'Do priečinka @plugins_dist@ boli nahrané a boli v ňom aktivované tieto zásuvné moduly.',
 	'plugin_info_plugins_dist_2' => 'Nedajú sa deaktivovať.',
 	'plugin_info_telecharger' => 'spustiť z @url@ a nainštalovať na @rep@',
-	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
+	'plugin_info_upgrade_ok' => 'Úspešná aktualizácia',
 	'plugin_librairies_installees' => 'Nainštalované knižnice',
 	'plugin_necessite_lib' => 'Tento zásuvný modul potrebuje knižnicu @lib@',
 	'plugin_necessite_plugin' => 'Vyžaduje sa verzia @version@ alebo novšia verzia zásuvného modulu @plugin@.',
