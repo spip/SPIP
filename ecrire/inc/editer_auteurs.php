@@ -32,7 +32,7 @@ function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titr
 	$aff_les_auteurs = afficher_auteurs_objet($type, $id, $flag, '', $script_edit_objet, $arg_ajax);
 	
 	if ($flag) {
-		$futurs = ajouter_auteurs_objet($type, $id, '',$script_edit_objet, $arg_ajax);
+		$futurs = ajouter_auteurs_objet($type, $id, '',$script_edit_objet, $arg_ajax, $cherche_auteur);
 	} else $futurs = '';
 
 	$ldap = isset($GLOBALS['meta']['ldap_statut_import']) ?
@@ -227,7 +227,7 @@ function ajouter_auteur_un($row, $own) {
 }
 
 // http://doc.spip.org/@ajouter_auteurs_objet
-function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_ajax)
+function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_ajax, $valeur='')
 {
 	if (!$determiner_non_auteurs = charger_fonction('determiner_non_auteurs_'.$type,'inc',true))
 		$determiner_non_auteurs = 'determiner_non_auteurs';
@@ -248,7 +248,7 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 		$sel = "$text<select name='$new' id='$new' size='1' style='width:150px;' onchange=\"$js\">$all</select>";
 		$clic = _T('bouton_ajouter');
 	} else if  ((_SPIP_AJAX < 1) OR ($all >= _SPIP_SELECT_MAX_AUTEURS)) {
-		  $sel = "$text <input type='text' name='cherche_auteur' id='$new' onclick=\"$js\" value='' size='20' />";
+	  $sel = "$text <input type='text' name='cherche_auteur' id='$new' onclick=\"$js\" value=\"" . entites_html($valeur) . "\" size='20' />";
 		  $clic = _T('bouton_chercher');
 	} else {
 		$sel = selecteur_auteur_ajax($type, $id, $js, $text, $idom);
