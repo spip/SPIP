@@ -1,6 +1,5 @@
 SPIP-Core spip-3.0.7 -> spip-3.0.8  17 avril 2013
 -------------------------------------------------------------
-
 r20355 | cedric    |  (sam. 23 mars 2013)  | 1sReport oublie et tardif de r15574 : nettoyer_uri() cache son resultat dans une static. On introduit un argument permettant de la reseter a une valeur fournieurl_de_base() cache son resultat dans un tableau static, indexe en fonction de la globale profondeur_url :on introduit un argument  qui permet :- en passant une valeur entiere, de calculer l'url pour cette profondeur- en passant un array(), de reinitialiser la static en cache a cette valeur- en passant false, de recuperer la staticsi aucune valeur n'est fournie, c'est la globale profondeur_url qui est utilisee, comme auparavant.Ces deux modifications permettent de sauvegarder/restaurer le contexte de l'url dans laquelle une page est calculee (pour un calcul differe)+ PHPDoc sur les deux fonctions
 r20359 | suske     |  (mer. 27 mars 2013)  | report de 20358 - le rédac ne peut plus mettre une redirection quand l'article est publié
 r20361 | suske     |  (mer. 27 mars 2013)  | report de 20360
@@ -26,7 +25,6 @@ r20419 | ben       |  (mer. 17 avril 2013) | report de langues Pre 3.0.8
 
 SPIP-plugins-dist spip-3.0.7 -> spip-3.0.8  17 avril 2013
 -------------------------------------------------------------
-
 r71097 | guytarr   |  (mar. 26 mars 2013)  | report de r71094 et r71096 (Suske, denisb)
 r71135 | kent1     |  (mer. 27 mars 2013)  | Report de r71134Ne pas pouvoir ajouter des libs dans _DIR_LIB si on n'est pas autorisé à "plugins_ajouter"Bien éviter l'affichage des boutons d'ajouts dans le formulaireVersion 0.80.13 (par contre)
 r71263 | guytarr   |  (ven. 29 mars 2013)  | include manquant (_Eric_)
@@ -62,7 +60,7 @@ r72033 | b_b       |  (dim. 14 avril 2013) | report de r72032 : http://core.spip
 r72035 | b_b       |  (dim. 14 avril 2013) | report de r72034 : http://core.spip.org/issues/2976 un rédacteur ne doit pas pouvroi créer d'annonce
 r72067 | marcimat  |  (mar. 16 avril 2013) | Report de r72066. Nom incorrect du fichier d'un compagnon, et en plus un var_dump trainait dedans.
 r72121 | ben       |  (mer. 17 avril 2013) | report de langues Pre 3.0.8
-
+r72123 | b_b       |  (mer. 17 avril 2013) | report de r72040 : tentons de fixer  http://core.spip.org/issues/2977 : mapper sur la bonne autorisation pour la supression de message + fix du critère destinataire pour ne pas afficher les messages de l'auteur dans sa boite de réception
 
 SPIP-Core spip-3.0.6 -> spip-3.0.7  22 mars 2013
 -------------------------------------------------------------
