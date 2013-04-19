@@ -50,6 +50,8 @@ la documentacion d\'SPIP</a>.', # MODIF
 	'bouton_ajouter_participant' => 'AJUSTAR UN PARTICIPANT:',
 	'bouton_annonce' => 'ANONCI',
 	'bouton_annuler' => 'Annuler', # NEW
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'possibilitat de mandar un messatge',
 	'bouton_checkbox_indiquer_site' => 'indicar obligatòriament un sit web',
 	'bouton_checkbox_signature_unique_email' => 'sonque ua signatura per adreiça e-mail',
@@ -283,6 +285,7 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'L\'estructura de la vòsta basa de dadas qu\'ei installada.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Capèth',
 	'info_chapeau_2' => 'Capèth:',
 	'info_chemin_acces_1' => 'Opcions: <b>camin d\'accès dens l\'annuari</b>',

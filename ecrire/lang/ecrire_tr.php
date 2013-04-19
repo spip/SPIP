@@ -53,6 +53,8 @@ Bu ithal istemini onaylamayın.
 	'bouton_ajouter_participant' => 'BİR KATILIMCI EKLE :',
 	'bouton_annonce' => 'DUYURU',
 	'bouton_annuler' => 'İptal',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'ileti gönderme olanağı',
 	'bouton_checkbox_indiquer_site' => 'bir Web sitesi belirtmek zorundasınız',
 	'bouton_checkbox_signature_unique_email' => 'e-posta adresi başına sadece bir imza',
@@ -288,6 +290,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_barre_outils' => 'alet çubuğuyla birlikte mi ?',
 	'info_base_installee' => 'Veritabanınızın yapısı kuruldu.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Giriş',
 	'info_chapeau_2' => 'Giriş :',
 	'info_chemin_acces_1' => 'Seçenekler : <b>Rehbere erişim yolu</b>',

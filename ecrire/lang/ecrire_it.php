@@ -55,6 +55,8 @@ disattivata per motivi sicurezza (verifica con l\'amministratore di sistema).',
 	'bouton_ajouter_participant' => 'AGGIUNGI UN UTENTE:',
 	'bouton_annonce' => 'ANNUNCIO',
 	'bouton_annuler' => 'Annulla',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'possibilità di inviare un messaggio',
 	'bouton_checkbox_indiquer_site' => 'indicare obbligatoriamente un sito Web',
 	'bouton_checkbox_signature_unique_email' => 'una sola adesione per indirizzo email',
@@ -290,6 +292,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_barre_outils' => 'con la barra degli strumenti?',
 	'info_base_installee' => 'La struttura del vostro database è installata.',
 	'info_bio' => 'Biografia',
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Introduzione',
 	'info_chapeau_2' => 'Introduzione:',
 	'info_chemin_acces_1' => 'Opzioni: <b>Percorso d\'accesso ai dati nell\'elenco</b>',

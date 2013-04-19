@@ -57,6 +57,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_participant' => 'ACRESCENTAR UM PARTICIPANTE :',
 	'bouton_annonce' => 'ANÚNCIO',
 	'bouton_annuler' => 'Annuler', # NEW
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'possibilidade de mandar uma mensagem',
 	'bouton_checkbox_indiquer_site' => 'indicar obrigatoriamente um sítio Web',
 	'bouton_checkbox_signature_unique_email' => 'uma única assinatura por endereço email',
@@ -294,6 +296,7 @@ ou da rede',
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'A estrutura da sua base de dados está instalada',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Cabeçalho',
 	'info_chapeau_2' => 'Cabeçalho :',
 	'info_chemin_acces_1' => 'Opções : <b>Caminho de acesso no anuário</b>', # MODIF

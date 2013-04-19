@@ -51,6 +51,8 @@ Hồ sơ SPIP</a>.', # MODIF
 	'bouton_ajouter_participant' => 'THÊM MỘT THAM DỰ VIÊN:',
 	'bouton_annonce' => 'THÔNG BÁO',
 	'bouton_annuler' => 'Cancel', # NEW
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'Có thể viết vài chữ ',
 	'bouton_checkbox_indiquer_site' => 'Qúy vị phải ghi tên một trang Web',
 	'bouton_checkbox_signature_unique_email' => 'Chỉ một chữ ký cho một địa chỉ email ',
@@ -282,6 +284,7 @@ Hồ sơ SPIP</a>.', # MODIF
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'Cấu trúc database của bạn đã được thiết trí.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Dẫn nhập',
 	'info_chapeau_2' => 'Dẫn nhập:',
 	'info_chemin_acces_1' => ' Chọn lựa: <b>ngõ vào trong thư mục</b>',
