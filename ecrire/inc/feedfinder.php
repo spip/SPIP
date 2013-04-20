@@ -1,162 +1,174 @@
 <?php
-
+/**
+ * adaptation en php de feedfinder.py :
+ *
+ * """Ultra-liberal feed finder, de Mark Pilgrim
+ * <http://diveintomark.org/projects/feed_finder/>
+ * Par: courcy.michael@wanadoo.fr
+ *
+ * adaptation en php, je ne reprends qu'une partie de cette algorithme
+ *
+ * 0) A chaque etape on verifie si les feed indiques sont reellement des feeds
+ * 1) Si l'uri passe est un feed on retourne le resultat tout simplement
+ * 2) Si le header de la page contient des balises LINK qui renvoient vers des feed on les retourne
+ * 3) on cherche les liens <a> qui se termine par  ".rss", ".rdf", ".xml", ou ".atom"
+ * 4) on cherche les liens <a> contenant "rss", "rdf", "xml", ou "atom"
+ *
+ * j'integre pas l'interrogation  avec xml_rpc de syndic8, mais on peut le faire assez facilement
+ * dans la phase de test sur differentes url je n'ai constate aucune diffrerence entre les reponses 
+ * donnees par feedfinder.py et les miennes donc je ne suis pas sur de voir l'interet
+ *
+ * Je ne me preoccupe pas comme l'auteur de savoir si mes liens de feed sont sur le meme serveur ou pas
+ *
+ * exemple d'utilisation
+ * 
+ * print_r (get_feed_from_url("http://willy.boerland.com/myblog/"));
+ * 
+ * on obtient
+ * 
+ * Array
+ * (
+ *   [0] => http://willy.boerland.com/myblog/atom/feed
+ *   [1] => http://willy.boerland.com/myblog/blogapi/rsd
+ *   [2] => http://willy.boerland.com/myblog/rss.xml
+ *   [3] => http://willy.boerland.com/myblog/node/feed
+ * )
+ */
 if (!defined('_ECRIRE_INC_VERSION')) return;
-
-/**********************************
-adaptation en php de feedfinder.py :
-
-"""Ultra-liberal feed finder, de Mark Pilgrim
-<http://diveintomark.org/projects/feed_finder/>
-
-Par: courcy.michael@wanadoo.fr
-
-adaptation en php, je ne reprends qu'une partie de cette algorithme
-
-0) A chaque etape on verifie si les feed indiques sont reellement des feeds
-1) Si l'uri passe est un feed on retourne le resultat tout simplement
-2) Si le header de la page contient des balises LINK qui renvoient vers des feed on les retourne
-3) on cherche les liens <a> qui se termine par  ".rss", ".rdf", ".xml", ou ".atom"
-4) on cherche les liens <a> contenant "rss", "rdf", "xml", ou "atom"
-
-j'integre pas l'interrogation  avec xml_rpc de syndic8, mais on peut le faire assez facilement
-dans la phase de test sur differentes url je n'ai constate aucune diffrerence entre les reponses 
-donnees par feedfinder.py et les miennes donc je ne suis pas sur de voir l'interet
-
-Je ne me preoccupe pas comme l'auteur de savoir si mes liens de feed sont sur le meme serveur ou pas
-
-exemple d'utilisation
-
-print_r (get_feed_from_url("http://willy.boerland.com/myblog/"));
-
-on obtient
-
-Array
-(
-    [0] => http://willy.boerland.com/myblog/atom/feed
-    [1] => http://willy.boerland.com/myblog/blogapi/rsd
-    [2] => http://willy.boerland.com/myblog/rss.xml
-    [3] => http://willy.boerland.com/myblog/node/feed
-)
-
-*****************************************************************/
 
 $verif_complete = 0; //mettez le a 1 si vous voulez controler la validite des feed trouves mais le temps d'execution
                      //est alors plus long
 
-//une fonction qui permet de si un lien est un feed ou nom, si c'est un feed elle retourne son type
-//si c'est pas un feed elle retourne 0, cette verification est evidemment tres tres legere
-// http://doc.spip.org/@is_feed
+/**
+ * une fonction qui permet de si un lien est un feed ou nom, 
+ * si c'est un feed elle retourne son type, si c'est pas un feed elle retourne 0, 
+ * cette verification est évidemment très très légère
+ * 
+ * @param string $url
+ * 		URL à analyser
+ * @return string|0 
+ * 		Retourne son type (rss|atom|rdf) ou 0 si pas feed
+ */
 function is_feed($url){
 
-	# methode SPIP
+	/**
+	 * méthode SPIP
+	 */
 	if (function_exists('recuperer_page')) {
 		$buffer = recuperer_page($url);
 		if (preg_match("/<(\w*) .*/", $buffer, $matches)){
-                //ici on detecte la premiere balise
-                $type_feed = $matches[1];
-                switch ($type_feed) {
-                       case "rss": return "rss";
-                       case "feed": return "atom";
-                       case "rdf": return "rdf";
-                }
+			//ici on detecte la premiere balise
+			$type_feed = $matches[1];
+			switch ($type_feed) {
+				case "rss": return "rss";
+				case "feed": return "atom";
+				case "rdf": return "rdf";
+			}
 		}
-        return '';
+		return '';
 	}
 
-      $fp = @fopen($url, "r");
-      if (!$fp ) {
-           return 0;
-      }
-      //verifion la nature de ce fichier
-      while (!feof($fp)) {
-           $buffer = fgets($fp, 4096);
-           if (preg_match("/<(\w*) .*/", $buffer, $matches)){
-                //ici on detecte la premiere balise
-                $type_feed = $matches[1];
-                switch ($type_feed) {
-                       case "rss": fclose($fp); return "rss";
-                       case "feed": fclose($fp); return "atom";
-                       case "rdf": fclose($fp); return "rdf";
-                       default : fclose($fp); return 0;
-                }
-           }
-      }
+	$fp = @fopen($url, "r");
+	if (!$fp )
+		return 0;
+	//verifion la nature de ce fichier
+	while (!feof($fp)) {
+		$buffer = fgets($fp, 4096);
+		if (preg_match("/<(\w*) .*/", $buffer, $matches)){
+			//ici on detecte la premiere balise
+			$type_feed = $matches[1];
+			switch ($type_feed) {
+				case "rss": fclose($fp); return "rss";
+				case "feed": fclose($fp); return "atom";
+				case "rdf": fclose($fp); return "rdf";
+				default : fclose($fp); return 0;
+			}
+		}
+	}
 }
 
 /*****************test is_feed******************************
-echo is_feed("http://spip-contrib.net/backend" _EXTENSIO_PHP") . "<br />"; //retourne rss
+echo is_feed("http://contrib.spip.net/spip.php?page=backend" _EXTENSIO_PHP") . "<br />"; //retourne rss
 echo is_feed("http://liberation.fr/rss.php") . "<br />"; //retourne rss
 echo is_feed("http://liberation.fr/rss.php") . "<br />"; //retourne rss
 echo is_feed("http://willy.boerland.com/myblog/atom/feed") //retourne atom
 echo is_feed("http://spip.net/") . "<br />"; //retoune 0
-//pas trouver d'exmples avec rdf j'ai encore du mal a saisir ce que rdf apporte de plus que rss
-//mais bon j'ai pas aprofondi
 ************************************************************/
 
-//fonction sans finesse mais efficace
-//on parcourt ligne par ligne a la recherche de balise <a> ou <link>
-//si dans le corps de celle-ci on trouve les mots rss, xml, atom ou rdf
-//alors on recupere la valeur href='<url>', on adapte celle-ci si elle
-//est relative et on verifie que c'est bien un feed si oui on l'ajoute
-//au tableau des feed si on ne trouve rien ou si aucun feed est trouve on retourne 
-//un tableau vide
-// http://doc.spip.org/@get_feed_from_url
+/**
+ * fonction sans finesse mais efficace
+ * on parcourt ligne par ligne a la recherche de balise <a> ou <link>
+ * si dans le corps de celle-ci on trouve les mots rss, xml, atom ou rdf
+ * alors on recupere la valeur href='<url>', on adapte celle-ci si elle
+ * est relative et on verifie que c'est bien un feed si oui on l'ajoute
+ * au tableau des feed si on ne trouve rien ou si aucun feed est trouve on retourne 
+ * un tableau vide
+ * 
+ * @param string $url
+ * 		L'URL à analyser
+ * @param $buffer
+ * @return array $feed_list
+ * 		Le tableau des feed trouvés dans la page
+ */
 function get_feed_from_url($url, $buffer=false){
-         global $verif_complete;
-         //j'ai prevenu ce sera pas fin
-         if (!preg_match("/^http:\/\/.*/", $url)) $url = "http://www." . $url;
-         if (!$buffer) $buffer = @file_get_contents($url);
+	global $verif_complete;
+	//j'ai prevenu ce sera pas fin
+	if (!preg_match("/^http:\/\/.*/", $url)) $url = "http://www." . $url;
+	if (!$buffer) $buffer = @file_get_contents($url);
 
-         $feed_list = array();
-         //extraction des <link>
-         if (preg_match_all("/<link [^>]*>/i", $buffer, $matches)){
-                    //y a t-y rss atom rdf ou xml dans ces balises
-                    foreach($matches[0] as $link){
-                      if ( (strpos($link, "rss")
-                         || strpos($link, "rdf")
-                         || strpos($link, "atom")
-                         || strpos($link, "xml"))
-                         && !strpos($link,'opensearch') ){
-                            //voila un candidat on va extraire sa partie href et la placer dans notre tableau
-                            if (preg_match("/href=['|\"]?([^\s'\"]*)['|\"]?/",$link,$matches2)){
-                                 //on aura pris soin de verifier si ce lien est relatif d'en faire un absolu
-                                 if (!preg_match("/^http:\/\/.*/", $matches2[1])){
-                                        $matches2[1] = concat_url($url,$matches2[1]);
-                                 }
-                                 if($verif_complete){
-                                        if (is_feed($matches2[1])) $feed_list[] = $matches2[1];
-                                 }else  $feed_list[] = $matches2[1];
-                            }
-                      }
-                    }
-                    //print_r($matches);
-         }
-         //extraction des <a>
-         if (preg_match_all("/<a [^>]*>/i", $buffer, $matches)){
-                    //y a t-y rss atom rdf ou xml dans ces balises
-                    foreach($matches[0] as $link){
-                       if ( (strpos($link, "rss")
-                         || strpos($link, "rdf")
-                         || strpos($link, "atom")
-                         || strpos($link, "xml"))
-						 && !strpos($link,'opensearch')){
-                            //voila un candidat on va extraire sa partie href et la placer dans notre tableau
-                            if (preg_match("/href=['|\"]?([^\s'\"]*)['|\"]?/",$link,$matches2)){
-                                 //on aura pris soin de verifier si ce lien est relatif d'en faire un absolu
-                                 if (!preg_match("/^http:\/\/.*/", $matches2[1])){
-                                        $matches2[1] = concat_url($url,$matches2[1]);
-                                 }
-                                 if($verif_complete){
-                                        if (is_feed($matches2[1])) $feed_list[] = $matches2[1];
-                                 }else  $feed_list[] = $matches2[1];
-                            }
-                       }
-                    }
-         }
-         return $feed_list;
+	$feed_list = array();
+	//extraction des <link>
+	if (preg_match_all("/<link [^>]*>/i", $buffer, $matches)){
+		//y a t-y rss atom rdf ou xml dans ces balises
+		foreach($matches[0] as $link){
+			if ((strpos($link, "rss")
+				|| strpos($link, "rdf")
+				|| strpos($link, "atom")
+				|| strpos($link, "xml"))
+				&& !strpos($link,'opensearch')){
+				//voila un candidat on va extraire sa partie href et la placer dans notre tableau
+				if (preg_match("/href=['|\"]?([^\s'\"]*)['|\"]?/",$link,$matches2)){
+ 					//on aura pris soin de verifier si ce lien est relatif d'en faire un absolu
+					if (!preg_match("/^http:\/\/.*/", $matches2[1])){
+						$matches2[1] = concat_url($url,$matches2[1]);
+					}
+					if($verif_complete){
+						if (is_feed($matches2[1])) $feed_list[] = $matches2[1];
+             		}
+             		else
+             			$feed_list[] = $matches2[1];
+				}
+			}
+		}
+	}
+	//extraction des <a>
+	if (preg_match_all("/<a [^>]*>/i", $buffer, $matches)){
+		//y a t-y rss atom rdf ou xml dans ces balises
+		foreach($matches[0] as $link){
+			if ((strpos($link, "rss")
+				|| strpos($link, "rdf")
+				|| strpos($link, "atom")
+				|| strpos($link, "xml"))
+				&& !strpos($link,'opensearch')){
+				//voila un candidat on va extraire sa partie href et la placer dans notre tableau
+				if (preg_match("/href=['|\"]?([^\s'\"]*)['|\"]?/",$link,$matches2)){
+	 				//on aura pris soin de verifier si ce lien est relatif d'en faire un absolu
+					if (!preg_match("/^http:\/\/.*/", $matches2[1])){
+						$matches2[1] = concat_url($url,$matches2[1]);
+					}
+					if($verif_complete){
+						if (is_feed($matches2[1])) $feed_list[] = $matches2[1];
+					}
+					else
+						$feed_list[] = $matches2[1];
+				}
+			}
+		}
+	}
+	return $feed_list;
 }
 /************************************ getFeed ****************************
-print_r (get_feed_from_url("spip-contrib.net"));
+print_r (get_feed_from_url("contrib.spip.net"));
 print_r (get_feed_from_url("http://liberation.fr/"));
 print_r (get_feed_from_url("cnn.com"));
 print_r (get_feed_from_url("http://willy.boerland.com/myblog/"));
@@ -186,21 +198,24 @@ Array
 )
 ************************************************************************/
 
-//petite fonction qui prend en charge les problemes de double slash
-//qunad on concatene les lien 
-// http://doc.spip.org/@concat_url
+/**
+ * petite fonction qui prend en charge les problèmes de double slash
+ * quand on concatène les liens  
+ */
 function concat_url($url1, $path){
-	# methode spip
+	/**
+	 * méthode spip
+	 */ 
 	if(function_exists('suivre_lien')) {
 		return suivre_lien($url1,$path);
 	}
-        $url = $url1 . "/" . $path;
-        //cette operation peut tres facilement avoir genere // ou /// 
-        $url = str_replace("///", "/", $url);
-        $url = str_replace("//", "/", $url); 
-        //cas particulier de http://
-        $url = str_replace("http:/", "http://", $url);
-        return $url;
+	$url = $url1 . "/" . $path;
+	//cette operation peut tres facilement avoir genere // ou /// 
+	$url = str_replace("///", "/", $url);
+	$url = str_replace("//", "/", $url); 
+	//cas particulier de http://
+	$url = str_replace("http:/", "http://", $url);
+	return $url;
 }
 
 /****************************test concat**********************
@@ -209,8 +224,4 @@ echo concat_url("http://spip.net/" , "ecrire")."<br />";
 echo concat_url("http://spip.net" , "/ecrire")."<br />";
 echo concat_url("http://spip.net/" , "/ecrire")."<br />";
 *************************************************************/
-
-
-
-
 ?>
