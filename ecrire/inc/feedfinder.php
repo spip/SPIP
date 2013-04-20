@@ -112,10 +112,11 @@ function get_feed_from_url($url, $buffer=false){
          if (preg_match_all("/<link [^>]*>/i", $buffer, $matches)){
                     //y a t-y rss atom rdf ou xml dans ces balises
                     foreach($matches[0] as $link){
-                      if (  strpos($link, "rss")
+                      if ( (strpos($link, "rss")
                          || strpos($link, "rdf")
                          || strpos($link, "atom")
-                         || strpos($link, "xml") ){
+                         || strpos($link, "xml"))
+                         && !strpos($link,'opensearch') ){
                             //voila un candidat on va extraire sa partie href et la placer dans notre tableau
                             if (preg_match("/href=['|\"]?([^\s'\"]*)['|\"]?/",$link,$matches2)){
                                  //on aura pris soin de verifier si ce lien est relatif d'en faire un absolu
@@ -134,10 +135,11 @@ function get_feed_from_url($url, $buffer=false){
          if (preg_match_all("/<a [^>]*>/i", $buffer, $matches)){
                     //y a t-y rss atom rdf ou xml dans ces balises
                     foreach($matches[0] as $link){
-                       if (  strpos($link, "rss")
+                       if ( (strpos($link, "rss")
                          || strpos($link, "rdf")
                          || strpos($link, "atom")
-                         || strpos($link, "xml") ){
+                         || strpos($link, "xml"))
+						 && !strpos($link,'opensearch')){
                             //voila un candidat on va extraire sa partie href et la placer dans notre tableau
                             if (preg_match("/href=['|\"]?([^\s'\"]*)['|\"]?/",$link,$matches2)){
                                  //on aura pris soin de verifier si ce lien est relatif d'en faire un absolu
