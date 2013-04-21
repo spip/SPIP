@@ -1,3 +1,24 @@
+
+SPIP-Core spip-2.1.20 -> spip-2.1.21  21 avril 2013
+-------------------------------------------------------------
+r20332 | esj       |  (lun. 18 mars 2013)  | Tres vieux bug dans l'export partiel de base: le commentaire ci-dessous modifié disait bien qu'il fallait veiller à avoir la table des documents liés aux articles avant la table des documents. Cet avertissement a été ignoré à un moment, probablement quand on est passé à une table des liens générique. De fait, l'export partiel avait toujours une liste de documents vide.
+r20334 | b_b       |  (mar. 19 mars 2013)  | Ferme #2961 : cacher le bouton de la page d'admin des plugins avec du js et non des css
+r20343 | esj       |  (jeu. 21 mars 2013)  | Affichage du bloc de document: lorsqu'un nom est trop long, il déborde du cadre et s'affiche sur le formulaire de saisie à côté. C'est particulièrement le cas pour les documents distants. Comme ce nom est répété en bas du document, on affiche que le domaine de l'URL en haut. Quant au nom en bas dont seul le début et la fin sont écrits lorsqu'il est trop long, il vaut mieux écrire un début plus long et pas la fin, puisque celle-ci est l'extension du fichier, information déjà donnée 2 fois par le type de document et son logo.
+r20350 | marcimat  |  (ven. 22 mars 2013)  | Report de 71003 : Validité XHTML, suite de r70994  qui ne convenait pas ! (freebsnet)
+r20386 | esj       |  (ven. 29 mars 2013)  | Je serai surpris que l'accessibilité recommande que le lien vers un article, au lieu d'être limité à son titre, engloble un icône qui n'a rien à voir mais possède un autre "title" que le descriptif de l'article, le logo de l'article déporté par un Float, avec visuellement parfois entre le titre et logo le nom de la langue qui n'est pas cliquable, et le mot "pétition" qui est clicable mais pour un autre lien. Ouf. On limite au seul titre de l'article.
+r20387 | esj       |  (ven. 29 mars 2013)  | Distinguer le titre '0' d'un titre vide (Fil).
+r20396 | esj       |  (dim. 31 mars 2013)  | Lorsque le chemin à un document (notamment un distant) dépasse 255 caractères, le dire et refuser de le charger, plutôt que de le mettre en base avec un nom tronqué qui ne sert qu'à tromper l'utilisateur.
+r20403 | b_b       |  (mer. 03 avril 2013) | syntaxe actualisée pour #LOGO_
+r20407 | esj       |  (lun. 08 avril 2013) | Deux problèmes dans le squelette du calendrier privé, avec conséquence: * quelques chaînes n'étaient pas soumises au filtre encodant les entités XML (que ICS ne connait pas), c'était très laid; * les URL avaient le caractère & encodé sous forme d'entité XML, ce qui les rendaient inopérantes sous ICS.Le dernier point a nécessité d'aligner la balise URL_ECRIRE sur URL_PAGE: si elles ont un étoile, &  ne sont pas encodées.
+r20409 | b_b       |  (mar. 09 avril 2013) | report de r2043 : On remplace thumbshots.com qui demande maintenant une inscription par apercite.fr. On supprime aussi girafa qui a disparu depuis longtemps.
+r20418 | esj       |  (mar. 16 avril 2013) | Lorsque l'algorithme de mot ressemblant ne trouve rien, remettre la saisie dans l'attribut "value" pour pouvoir rejouer rapidement le formulaire d'ajout d'auteur après correction.
+
+SPIP-plugins-dist spip-2.1.20 -> spip-2.1.21  21 avril 2013
+-------------------------------------------------------------
+r71028 | suske     |  (sam. 23 mars 2013) | S'il vous plait (http://comments.gmane.org/gmane.comp.web.spip.zone/31692)
+
+
+
 SPIP-Core spip-2.1.19 -> spip-2.1.20  18 mars 2013
 -------------------------------------------------------------
 
