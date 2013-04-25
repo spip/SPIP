@@ -71,7 +71,7 @@ function fast_find_plugin_dirs($dir, $max_prof=100) {
 	}
 
 	foreach($subdirs as $d){
-		$fichiers = array_merge($fichiers,fast_find_plugin_dirs("$d/",--$max_prof));
+		$fichiers = array_merge($fichiers,fast_find_plugin_dirs("$d/",$max_prof-1));
 	}
 	return $fichiers;
 }
