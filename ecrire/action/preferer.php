@@ -10,10 +10,29 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion (obsolète) des préférences d'un auteur
+ *
+ * Utilisé uniquement par ecrire/oo/index.php
+ * Pour le reste, cela se passe par formulaires/configurer_preferences.
+ *
+ * @see ecrire/oo/index.php
+ * @see prive/formulaires/configurer_preferences.php
+ * 
+ * @package SPIP\Core\Auteurs\Preferences
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-// http://doc.spip.org/@action_preferer_dist
+/**
+ * Action de sauvegarde des préférences d'un auteur
+ *
+ * Définit une préférence d'un auteur pour l'affichage dans l'espace privé.
+ * 
+ * @deprecated
+ * @see prive/formulaires/configurer_preferences.php
+**/
 function action_preferer_dist() {
 	//
 	// Preferences de presentation de l'espace prive

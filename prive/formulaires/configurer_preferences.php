@@ -10,8 +10,24 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Formulaire de configuration des préférences auteurs dans l'espace privé
+ *
+ * Ces préférences sont stockées dans la clé `prefs` dans la session de l'auteur
+ * en tant que tableau, ainsi que dans la colonne SQL `prefs` de spip_auteurs
+ * sous forme sérialisée.
+ * 
+ * @package SPIP\Core\Formulaires
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Chargement du formulaire de préférences d'un auteur dans l'espace privé
+ *
+ * @return array
+ *     Environnement du formulaire
+**/
 function formulaires_configurer_preferences_charger_dist(){
 	// travailler sur des meta fraiches
 	include_spip('inc/meta');
@@ -38,6 +54,12 @@ function formulaires_configurer_preferences_charger_dist(){
 	return $valeurs;
 }
 
+/**
+ * Traitements du formulaire de préférences d'un auteur dans l'espace privé
+ *
+ * @return array
+ *     Retours des traitements
+**/
 function formulaires_configurer_preferences_traiter_dist(){
 
 	if ($couleur = _request('couleur')) {
