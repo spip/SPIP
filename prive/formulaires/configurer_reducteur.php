@@ -10,8 +10,21 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Formulaire de configuration pour choisir la librairie graphique
+ * et les tailles de redimensionnement des vignettes
+ * 
+ * @package SPIP\Core\Formulaires
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Chargement du formulaire de configuration de la librairie graphique
+ *
+ * @return array
+ *     Environnement du formulaire
+**/
 function formulaires_configurer_reducteur_charger_dist(){
 	foreach(array(
 		"image_process",
@@ -28,6 +41,12 @@ function formulaires_configurer_reducteur_charger_dist(){
 }
 
 
+/**
+ * Traitements du formulaire de configuration de la librairie graphique
+ *
+ * @return array
+ *     Retours des traitements
+**/
 function formulaires_configurer_reducteur_traiter_dist(){
 	$res = array('editable'=>true);
 
@@ -72,6 +91,15 @@ function formulaires_configurer_reducteur_traiter_dist(){
 	return $res;
 }
 
+/**
+ * Indique si une librairie graphique peut être utilisée et retourne alors
+ * une URL pour tester la librairie
+ *
+ * @param string $process
+ *     Code de la libriairie, parmi gd2, gd1, netpbm, imagick ou convert
+ * @return string
+ *     URL d'action pour tester la librairie graphique en créant une vignette
+**/
 function url_vignette_choix($process){
 	switch ($process){
 		case 'gd2':

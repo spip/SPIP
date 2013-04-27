@@ -10,12 +10,25 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion d'une action ajoutant une variable dans une session SPIP
+ *
+ * @package SPIP\Core\Sessions
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Pour poser une variable de session
-// poster sur cette action en indiquant var/val
-// reponse : json contenant toutes les variables publiques de la session
-// http://doc.spip.org/@action_session_dist
+/**
+ * Action pour poser une variable de session SPIP
+ *
+ * Poster sur cette action en indiquant les clés `var` et `val`
+ * 
+ * Utilisé par exemple par le script javascript 'autosave' pour sauvegarder
+ * les formulaires en cours d'édition
+ *
+ * @todo
+ *   Envoyer en réponse : json contenant toutes les variables publiques de la session
+**/
 function action_session_dist()
 {
 	if ($var = _request('var')

@@ -10,10 +10,23 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action testant une librairie graphique
+ * 
+ * @package SPIP\Core\Configurer
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Tester nos capacites
-// http://doc.spip.org/@action_tester_dist
+/**
+ * Tester les capacités du serveur à utiliser une librairie graphique
+ *
+ * L'argument transmis dans la clé `arg` est le type de librairie parmi
+ * gd2, gd1, netpbm, imagick ou convert
+ * 
+ * L'action crée une vignette en utilisant la librairie indiquée puis
+ * redirige sur l'image ainsi créée (sinon sur une image d'echec).
+**/
 function action_tester_dist() {
 	$arg = _request('arg');
 

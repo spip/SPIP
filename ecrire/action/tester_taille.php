@@ -10,9 +10,28 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action testant, pour la librairie graphique GD2, la taille
+ * maximale des images qu'il est capable de traiter
+ * 
+ * @package SPIP\Core\Configurer
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/headers');
 
+/**
+ * Interception très probable d'une impossibilité de créer l'image demandée
+ * dans le buffer de ob_start()
+ *
+ * Si c'est le cas, on redirige sur la page prévue, testant un autre cas
+ * de traitement
+ * 
+ * @param string $output
+ *     Sortie du buffer
+ * @return string
+ *     Sortie du buffer
+**/
 function action_tester_taille_error_handler($output)
 {
 	// on est ici, donc echec lors de la creation de l'image
@@ -23,8 +42,18 @@ function action_tester_taille_error_handler($output)
 }
 
 
-// Tester nos capacites a creer des images avec GD2 (taille memoire)
-// http://doc.spip.org/@action_tester_taille_dist
+/**
+ * Tester nos capacités à redimensionner des images avec GD2 (taille mémoire)
+ *
+ * Ce test par dichotomie permet de calculer la taille (en pixels) de la
+ * plus grande image traitable. Ce test se relance jusqu'à trouver cette
+ * taille.
+ * 
+ * La clé `arg` attendue est une chaîne indiquant les valeurs minimum et
+ * maximum de taille à tester tel que '3000' (maximum) ou '3000-5000'
+ * (minimum-maximum)
+ * 
+**/
 function action_tester_taille_dist() {
 	
 	if (!autoriser('configurer'))
