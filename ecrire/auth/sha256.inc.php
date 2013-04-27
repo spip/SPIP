@@ -394,47 +394,6 @@ if (!class_exists('nanoSha2'))
     }
 }
 
-if (!function_exists('str_split'))
-{
-    /**
-     * Splits a string into an array of strings with specified length.
-     * Compatability with older verions of PHP
-     *
-     * @param string $string Chaîne
-     * @param int $split_length Longueur de coupe
-     * @return array
-     */
-    function str_split($string, $split_length = 1)
-    {
-	      $result = array();
-        $sign = ($split_length < 0) ? -1 : 1;
-        $strlen = strlen($string);
-        $split_length = abs($split_length);
-
-        if (($split_length == 0) || ($strlen == 0)) {
-            $result = false;
-        } elseif ($split_length >= $strlen) {
-            $result[] = $string;
-        } else {
-            $length = $split_length;
-
-            for ($i = 0; $i < $strlen; $i++)
-            {
-                $i = (($sign < 0) ? $i + $length : $i);
-                $result[] = substr($string, $sign*$i, $length);
-                $i--;
-                $i = (($sign < 0) ? $i : $i + $length);
-
-                $length = (($i + $split_length) > $strlen)
-                          ? ($strlen - ($i + 1))
-                          : $split_length;
-            }
-        }
-
-        return $result;
-    }
-}
-
 /**
  * Main routine called from an application using this include.
  *
@@ -454,6 +413,7 @@ function _nano_sha256($str, $ig_func = true) {
     $obj = new nanoSha2((defined('_NANO_SHA2_UPPER')) ? true : false);
     return $obj->hash($str, $ig_func);
 }
+
 // 2009-07-23: Added check for function as the Suhosin plugin adds this routine.
 if (!function_exists('sha256')) {
 	/**
