@@ -817,6 +817,16 @@ function lister_types_surnoms(){
 	return $surnoms;
 }
 
+/**
+ * Retourne la liste des tables SQL qui concernent SPIP
+ *
+ * Cette liste n'est calculée qu'une fois par serveur pour l'ensemble du hit
+ * 
+ * @param string $serveur
+ *     Nom du fichier de connexion à la base de données
+ * @return array
+ *     Couples (nom de la table SQL => même nom, sans 'spip_' devant)
+**/
 function lister_tables_spip($serveur=''){
 	static $tables = array();
 	if (!isset($tables[$serveur])){

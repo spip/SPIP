@@ -10,37 +10,27 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Affichage des boutons d'administration
+ *
+ * @package SPIP\Core\Administration
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Inserer la feuille de style selon les normes, dans le <head>
-// puis les boutons
-// Feuilles de style admin : d'abord la CSS officielle, puis la perso
-
-
-// Compatibilite : on utilise stripos/strripos() qui n'existent pas en php4
-if (!function_exists('strripos')) {
-// http://doc.spip.org/@strripos
-	function strripos($botte, $aiguille) {
-		if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@is',
-		$botte, $regs)) { 
-			return strlen($regs[1]);
-		}
-		return false;
-	}
-}
-if (!function_exists('stripos')) {
-// http://doc.spip.org/@stripos
-	function stripos($botte, $aiguille) {
-		if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU',
-		$botte, $regs)) { 
-			return strlen($regs[1]);
-		}
-		return false;
-	}
-}
-
-// http://doc.spip.org/@affiche_boutons_admin
+/**
+ * Ajoute les boutons d'administration de la page s'ils n'y sont pas déjà
+ *
+ * Insère la feuille de style selon les normes, dans le `<head>`
+ * puis les boutons.
+ *
+ * Feuilles de style admin : d'abord la CSS officielle, puis la perso
+ * 
+ * @param string $contenu
+ *     Contenu HTML de la page qui va être envoyée au navigateur
+ * @return string
+ *     Contenu HTML, avec boutons d'administrations et sa CSS
+**/
 function affiche_boutons_admin($contenu) {
 	include_spip('inc/filtres');
 

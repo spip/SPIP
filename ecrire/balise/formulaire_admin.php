@@ -10,28 +10,75 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier gère la balise dynamique `#FORMULAIRE_ADMIN`
+ * 
+ * @package SPIP\Core\Formulaires
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@balise_FORMULAIRE_ADMIN
+/**
+ * Compile la balise dynamique `#FORMULAIRE_ADMIN` qui des boutons
+ * d'administration dans l'espace public
+ *
+ * Cette balise permet de placer les boutons d'administrations dans un
+ * endroit spécifique du site. Si cette balise n'est pas présente, les boutons
+ * seront automatiquement ajoutés par SPIP si l'auteur a activé le
+ * cookie de correspondance.
+ * 
+ * @balise FORMULAIRE_ADMIN
+ * @see f_admin()
+ * @example
+ *     ```
+ *     #FORMULAIRE_ADMIN
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée du code compilé
+**/
 function balise_FORMULAIRE_ADMIN ($p) {
 	return calculer_balise_dynamique($p,'FORMULAIRE_ADMIN', array());
 }
 
-# on ne peut rien dire au moment de l'execution du squelette
-
-// http://doc.spip.org/@balise_FORMULAIRE_ADMIN_stat
+/**
+ * Calculs de paramètres de contexte automatiques pour la balise FORMULAIRE_ADMIN
+ * 
+ * On ne peut rien dire au moment de l'execution du squelette
+ *
+ * @param array $args
+ *   - Classe CSS éventuelle
+ * @param array $context_compil
+ * @return array|string
+ *   - Liste (statut, id) si un mode d'inscription est possible
+ *   - chaîne vide sinon.
+ */
 function balise_FORMULAIRE_ADMIN_stat($args, $context_compil) {
 	return $args;
 }
 
-# les boutons admin sont mis d'autorite si absents
-# donc une variable statique controle si FORMULAIRE_ADMIN a ete vu.
-# Toutefois, si c'est le debuger qui appelle,
-# il peut avoir recopie le code dans ses donnees et il faut le lui refounir.
-# Pas question de recompiler: ca fait boucler !
-# Le debuger transmet donc ses donnees, et cette balise y retrouve son petit.
 
-// http://doc.spip.org/@balise_FORMULAIRE_ADMIN_dyn
+/**
+ * Retourne le squelette d'affichage et le contexte de la balise FORMULAIRE_ADMIN
+ *
+ * @note
+ *   Les boutons admin sont mis d'autorité si absents
+ *   donc une variable statique contrôle si FORMULAIRE_ADMIN a été vu.
+ * 
+ *   Toutefois, si c'est le debuger qui appelle, il peut avoir recopié
+ *   le code dans ses données et il faut le lui refounir.
+ *   Pas question de recompiler: ca fait boucler !
+ *   Le debuger transmet donc ses données, et cette balise y retrouve son petit.
+ * 
+ * @param string $float
+ *     Classe CSS éventuelle
+ * @param string|array $debug
+ *     Informations sur la page contenant une erreur de compilation
+ * @return array
+ *     Liste : Chemin du squelette, durée du cache, contexte
+**/
 function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 
 	global $use_cache;
@@ -87,12 +134,20 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	return array('formulaires/administration', 0, $env);
 }
 
-// Afficher le bouton 'Modifier ce...' 
-// s'il y a un $id_XXX defini globalement par spip_register_globals
-// Attention a l'ordre dans la boucle:
-//	on ne veut pas la rubrique si un autre bouton est possible
 
-// http://doc.spip.org/@admin_objet
+/**
+ * Préparer le contexte d'environnement pour les boutons
+ *
+ * Permettra d'afficher le bouton 'Modifier ce...' s'il y a un
+ * `$id_XXX` défini globalement par `spip_register_globals`
+ *
+ * @note
+ *   Attention à l'ordre dans la boucle:
+ *   on ne veut pas la rubrique si un autre bouton est possible
+ * 
+ * @return array
+ *     Tableau de l'environnement calculé
+**/
 function admin_objet()
 {
 	include_spip('inc/urls');
@@ -132,7 +187,19 @@ function admin_objet()
 }
 
 
-// http://doc.spip.org/@admin_preview
+/**
+ * Détermine si l'élément est previsualisable
+ *
+ * @param string $type
+ *     Type d'objet
+ * @param int $id
+ *     Identifinant de l'objet
+ * @param array|null $desc
+ *     Description de la table
+ * @return string|array
+ *     - Chaine vide si on est déjà en prévisu ou si pas de previsualisation possible
+ *     - Tableau d'un élément sinon.
+**/
 function admin_preview($type, $id, $desc=null)
 {
 	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW) return '';
@@ -155,11 +222,13 @@ function admin_preview($type, $id, $desc=null)
 	return sql_fetsel('1', table_objet_sql($type), id_table_objet($type)."=".$id." AND ($notpub)");
 }
 
-//
-// Regler les boutons dans la langue de l'admin (sinon tant pis)
-//
 
-// http://doc.spip.org/@admin_lang
+/**
+ * Régler les boutons dans la langue de l'admin (sinon tant pis)
+ *
+ * @return string
+ *     Code de langue
+**/
 function admin_lang()
 {
 	$alang = sql_getfetsel('lang', 'spip_auteurs', "login=" . sql_quote(preg_replace(',^@,','',@$_COOKIE['spip_admin'])));
@@ -171,7 +240,11 @@ function admin_lang()
 	return $alang;
 }
 
-// http://doc.spip.org/@admin_valider
+/**
+ * Retourne une URL vers un validateur
+ *
+ * @return string
+**/
 function admin_valider()
 {
 	global $xhtml;
@@ -183,7 +256,11 @@ function admin_valider()
 		 . rawurlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
 }
 
-// http://doc.spip.org/@admin_debug
+/**
+ * Retourne une URL vers le mode debug, si l'utilisateur a le droit, et si c'est utile
+ *
+ * @return string
+**/
 function admin_debug()
 {
 	return ((

@@ -163,7 +163,9 @@ function f_insert_head($texte) {
  * Insérer au besoin les boutons admins
  * 
  * Cette fonction est appelée par le pipeline affichage_final
+ *
  * @pipeline affichage_final
+ * @uses affiche_boutons_admin()
  * 
  * @param string $texte   Contenu de la page envoyée au navigateur
  * @return string         Contenu de la page envoyée au navigateur
