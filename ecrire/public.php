@@ -133,24 +133,10 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		$html = preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
 	}
 
-	if ($var_preview AND $html) {
-		include_spip('inc/filtres'); // pour http_img_pack
-		$x = _T('previsualisation');
-		$x = http_img_pack('naviguer-site.png', $x) . '&nbsp;' . majuscules($x); 
-		$x = "<div class='spip-previsu'>$x</div>";
-		if (!$pos = strpos($page['texte'], '</body>'))
-			$pos = strlen($page['texte']);
-		$page['texte'] = substr_replace($page['texte'], $x, $pos, 0);
-	}
-
-	$affiche_boutons_admin = ($html AND ((
-		isset($_COOKIE['spip_admin'])
-		AND !$flag_preserver
-				   ) OR $debug));
+	$affiche_boutons_admin = ($debug OR ($html AND isset($_COOKIE['spip_admin']) AND !$flag_preserver));
 
 	if ($affiche_boutons_admin)
 		include_spip('balise/formulaire_admin');
-
 
 
  	// decompte des visites, on peut forcer a oui ou non avec le header X-Spip-Visites
@@ -163,24 +149,17 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	// Execution de la page calculee
 
-
 	// traitements sur les entetes avant envoi
 	// peut servir pour le plugin de stats
 	$page['entetes'] = pipeline('affichage_entetes_final', $page['entetes']);
 
-
-	// 1. Cas d'une page contenant uniquement du HTML :
-	if ($page['process_ins'] == 'html') {
-		envoyer_entetes($page['entetes']);
-	}
-
-	// 2. Cas d'une page contenant du PHP :
+	if ($page['process_ins'] != 'html') {
+	// Cas d'une page contenant du PHP :
 	// Attention cette partie eval() doit imperativement
 	// etre declenchee dans l'espace des globales (donc pas
 	// dans une fonction).
-	else {
-		// sinon, inclure_balise_dynamique nous enverra peut-etre
-		// quelques en-tetes de plus (voire qq envoyes directement)
+	// inclure_balise_dynamique nous enverra peut-etre
+	// quelques en-tetes de plus (voire qq envoyes directement)
 
 		// restaurer l'etat des notes
 		if (isset($page['notes']) AND $page['notes']){
@@ -189,21 +168,28 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		}
 		ob_start(); 
 		xml_hack($page, true);
-		$res = eval('?' . '>' . $page['texte']);
+		$page['process_ins'] = eval('?' . '>' . $page['texte']);
 		$page['texte'] = ob_get_contents(); 
 		xml_hack($page);
 		ob_end_clean();
-
-		envoyer_entetes($page['entetes']);
-		// en cas d'erreur lors du eval,
-		// la memoriser dans le tableau des erreurs
-
-		if ($res === false) {
-			$msg = array('zbug_erreur_execution_page');
-			erreur_squelette($msg);
-		}
 	}
 
+	if ($var_preview
+	AND $var_preview = charger_fonction('previsualisation', 'public', true)) {
+		$page = $var_preview($page);
+		// Cette variable a ete calculee trop tot
+		// on laisse son calcul ci-dessus pour compatibilite
+		// bien que l'enlever a l'air sans incidence
+		$html = preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
+	}
+	envoyer_entetes($page['entetes']);
+
+	// en cas d'erreur lors du eval,
+	// la memoriser dans le tableau des erreurs
+	if ($page['process_ins'] === false) {
+			$msg = array('zbug_erreur_execution_page');
+			erreur_squelette($msg);
+	}
 	//
 	// Post-traitements
 	//

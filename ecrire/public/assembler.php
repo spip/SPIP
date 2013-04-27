@@ -686,6 +686,19 @@ function page_base_href(&$texte){
 	}
 }
 
+function public_previsualisation_dist($page)
+{
+	if (preg_match(',^\s*text/html,',$page['entetes']['Content-Type'])) {
+		include_spip('inc/filtres'); // pour http_img_pack
+		$x = _T('previsualisation');
+		$x = http_img_pack('naviguer-site.png', $x) . '&nbsp;' . majuscules($x); 
+		$x = "<div class='spip-previsu'>$x</div>";
+		if (!$pos = strpos($page['texte'], '</body>'))
+			$pos = strlen($page['texte']);
+		$page['texte'] = substr_replace($page['texte'], $x, $pos, 0);
+	}
+	return $page;
+}
 
 // Envoyer les entetes, en retenant ceux qui sont a usage interne
 // et demarrent par X-Spip-...
