@@ -70,15 +70,20 @@
  */
 if (!class_exists('nanoSha2'))
 {
-	/**
-	 * Classe de calcul d'un SHA
-	 */
+    /**
+     * Classe de calcul d'un SHA
+     */
     class nanoSha2
     {
         // php 4 - 5 compatable class properties
+        /** Le résultat doit être passé en majuscule ?
+         * @var bool */
         var     $toUpper;
+        /** 32 ou 64 bits ?
+         * @var int */
         var     $platform;
-				var		  $bytesString = 16;
+        /** bytes par caractères */
+        var     $bytesString = 16;
 
         /**
          * Php 4 - 6 compatable constructor
@@ -155,103 +160,155 @@ if (!class_exists('nanoSha2'))
             return (int)$x >> (int)$n;
         }
 
+        /** ROTR
+         * @param unknown $x
+         * @param unknown $n
+         * @return int */
         function ROTR($x, $n) { return (int)(($this->SHR($x, $n) | ($x << (32-$n)) & 0xFFFFFFFF)); }
+
+        /** Ch
+         * @param unknown $x
+         * @param unknown $y
+         * @param unknown $z
+         * @return unknown */
         function Ch($x, $y, $z) { return ($x & $y) ^ ((~$x) & $z); }
+
+        /** Maj
+         * @param unknown $x
+         * @param unknown $y
+         * @param unknown $z
+         * @return unknown */
         function Maj($x, $y, $z) { return ($x & $y) ^ ($x & $z) ^ ($y & $z); }
+
+        /** Sigma0
+         * @param unknown $x
+         * @return int */
         function Sigma0($x) { return (int) ($this->ROTR($x, 2)^$this->ROTR($x, 13)^$this->ROTR($x, 22)); }
+
+        /** Sigma1
+         * @param unknown $x
+         * @return int */
         function Sigma1($x) { return (int) ($this->ROTR($x, 6)^$this->ROTR($x, 11)^$this->ROTR($x, 25)); }
+
+        /** Sigma_0
+         * @param unknown $x
+         * @return int */
         function sigma_0($x) { return (int) ($this->ROTR($x, 7)^$this->ROTR($x, 18)^$this->SHR($x, 3)); }
+
+        /** Sigma_1
+         * @param unknown $x
+         * @return int */
         function sigma_1($x) { return (int) ($this->ROTR($x, 17)^$this->ROTR($x, 19)^$this->SHR($x, 10)); }
 
+        /** String 2 ord UTF8
+         * @param string $s
+         * @param int $byteSize
+         * @return array
+        **/
+        function string2ordUTF8($s,&$byteSize){
+            $chars = array();
+            // par defaut sur 8bits
+            $byteSize = 8;
+            $i = 0;
+            while ($i<strlen($s)){
+                $chars[] = $this->ordUTF8($s, $i, $bytes);
+                $i+=$bytes;
+                // mais si un char necessite 16bits, on passe tout sur 16
+                // sinon on ne concorde pas avec le lecture de la chaine en js
+                // et le sha256 js
+                if ($bytes>1) $byteSize = 16;
+            }
+            return $chars;
+        }
 
-				function string2ordUTF8($s,&$byteSize){
-					$chars = array();
-					// par defaut sur 8bits
-					$byteSize = 8;
-					$i = 0;
-					while ($i<strlen($s)){
-						$chars[] = $this->ordUTF8($s, $i, $bytes);
-						$i+=$bytes;
-						// mais si un char necessite 16bits, on passe tout sur 16
-						// sinon on ne concorde pas avec le lecture de la chaine en js
-						// et le sha256 js
-						if ($bytes>1) $byteSize = 16;
-					}
-					return $chars;
-				}
+        /** Ord UTF8
+         * @param string $c
+         * @param int $index
+         * @param int $bytes
+         * @return unknown
+        **/
+        function ordUTF8($c, $index = 0, &$bytes)
+        {
+            $len = strlen($c);
+            $bytes = 0;
 
-				function ordUTF8($c, $index = 0, &$bytes)
-				{
-					$len = strlen($c);
-					$bytes = 0;
+            if ($index >= $len)
+                return false;
 
-					if ($index >= $len)
-						return false;
+            $h = ord($c{$index});
 
-					$h = ord($c{$index});
+            if ($h <= 0x7F) {
+                $bytes = 1;
+                return $h;
+            }
+            else if ($h < 0xC2){
+                // pas utf mais renvoyer quand meme ce qu'on a
+                $bytes = 1;
+                return $h;
+            }
+            else if ($h <= 0xDF && $index < $len - 1) {
+                $bytes = 2;
+                return ($h & 0x1F) <<  6 | (ord($c{$index + 1}) & 0x3F);
+            }
+            else if ($h <= 0xEF && $index < $len - 2) {
+                $bytes = 3;
+                return ($h & 0x0F) << 12 | (ord($c{$index + 1}) & 0x3F) << 6
+                                                                 | (ord($c{$index + 2}) & 0x3F);
+            }
+            else if ($h <= 0xF4 && $index < $len - 3) {
+                $bytes = 4;
+                return ($h & 0x0F) << 18 | (ord($c{$index + 1}) & 0x3F) << 12
+                                                                 | (ord($c{$index + 2}) & 0x3F) << 6
+                                                                 | (ord($c{$index + 3}) & 0x3F);
+            }
+            else {
+                // pas utf mais renvoyer quand meme ce qu'on a
+                $bytes = 1;
+                return $h;
+            }
+        }
 
-					if ($h <= 0x7F) {
-						$bytes = 1;
-						return $h;
-					}
-					else if ($h < 0xC2){
-						// pas utf mais renvoyer quand meme ce qu'on a
-						$bytes = 1;
-						return $h;
-					}
-					else if ($h <= 0xDF && $index < $len - 1) {
-						$bytes = 2;
-						return ($h & 0x1F) <<  6 | (ord($c{$index + 1}) & 0x3F);
-					}
-					else if ($h <= 0xEF && $index < $len - 2) {
-						$bytes = 3;
-						return ($h & 0x0F) << 12 | (ord($c{$index + 1}) & 0x3F) << 6
-																		 | (ord($c{$index + 2}) & 0x3F);
-					}
-					else if ($h <= 0xF4 && $index < $len - 3) {
-						$bytes = 4;
-						return ($h & 0x0F) << 18 | (ord($c{$index + 1}) & 0x3F) << 12
-																		 | (ord($c{$index + 2}) & 0x3F) << 6
-																		 | (ord($c{$index + 3}) & 0x3F);
-					}
-					else {
-						// pas utf mais renvoyer quand meme ce qu'on a
-						$bytes = 1;
-						return $h;
-					}
-				}
+        /** String 2 bin int 
+         * @param string $str
+         * @param int $npad
+         * @return int[]
+        **/
+        function string2binint ($str,$npad=512) {
+            $bin = array();
+            $ords = $this->string2ordUTF8($str,$this->bytesString);
+            $npad = $npad/$this->bytesString;
+            $length = count($ords);
+            $ords[] = 0x80; // append the "1" bit followed by 7 0's
+            $pad = ceil(($length+1+32/$this->bytesString)/$npad)*$npad-32/$this->bytesString;
+            $ords = array_pad($ords,$pad,0);
+            $mask = (1 << $this->bytesString) - 1;
+            for($i = 0; $i < count($ords) * $this->bytesString; $i += $this->bytesString) {
+                if (!isset($bin[$i>>5])) { $bin[$i>>5] = 0; } // pour eviter des notices.
+                $bin[$i>>5] |= ($ords[$i / $this->bytesString] & $mask) << (24 - $i%32);
+            }
+            $bin[] = $length*$this->bytesString;
+            return $bin;
+        }
 
-				function string2binint ($str,$npad=512) {
-					$bin = array();
-					$ords = $this->string2ordUTF8($str,$this->bytesString);
-					$npad = $npad/$this->bytesString;
-					$length = count($ords);
-					$ords[] = 0x80; // append the "1" bit followed by 7 0's
-					$pad = ceil(($length+1+32/$this->bytesString)/$npad)*$npad-32/$this->bytesString;
-					$ords = array_pad($ords,$pad,0);
-					$mask = (1 << $this->bytesString) - 1;
-					for($i = 0; $i < count($ords) * $this->bytesString; $i += $this->bytesString) {
-						if (!isset($bin[$i>>5])) { $bin[$i>>5] = 0; } // pour eviter des notices.
-						$bin[$i>>5] |= ($ords[$i / $this->bytesString] & $mask) << (24 - $i%32);
-					}
-					$bin[] = $length*$this->bytesString;
-					return $bin;
-				}
-
-				function array_split($a, $n) {
-					$split = array();
-					while (count($a)>$n) {
-						$s = array();
-						for($i = 0;$i<$n;$i++)
-							$s[] = array_shift($a);
-						$split[] = $s;
-					}
-					if (count($a)){
-						$a = array_pad($a,$n,0);
-						$split[] = $a;
-					}
-					return $split;
-				}
+        /** Array split
+         * @param array $a
+         * @param int $n
+         * @return array
+        **/
+        function array_split($a, $n) {
+            $split = array();
+            while (count($a)>$n) {
+                $s = array();
+                for($i = 0;$i<$n;$i++)
+                    $s[] = array_shift($a);
+                $split[] = $s;
+            }
+            if (count($a)){
+                $a = array_pad($a,$n,0);
+                $split[] = $a;
+            }
+            return $split;
+        }
 
         /**
          * Process and return the hash.
@@ -416,12 +473,12 @@ function _nano_sha256($str, $ig_func = true) {
 
 // 2009-07-23: Added check for function as the Suhosin plugin adds this routine.
 if (!function_exists('sha256')) {
-	/**
-	 * Calcul du SHA256
-	 * @param string $str Chaîne dont on veut calculer le SHA
-	 * @param bool $ig_func
-	 * @return string Le SHA de la chaîne
-	 */
+    /**
+     * Calcul du SHA256
+     * @param string $str Chaîne dont on veut calculer le SHA
+     * @param bool $ig_func
+     * @return string Le SHA de la chaîne
+     */
     function sha256($str, $ig_func = true) { return _nano_sha256($str, $ig_func); }
 }
 
