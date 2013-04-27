@@ -88,6 +88,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'info_nb_objets' => 'info_nb_articles',
 				'texte_logo_objet' => 'logo_article',
 				'texte_langue_objet' => 'titre_langue_article',
+				'texte_definir_comme_traduction_objet' => 'trad_lier',
 				'titre' => 'titre, lang',
 				'date' => 'date',
 				'principale' => 'oui',
@@ -534,35 +535,36 @@ $tables_auxiliaires['spip_jobs_liens'] = array(
  * Auto remplissage des informations non explicites
  * sur un objet d'une table sql
  *
- * table_objet
- * table_objet_surnoms
- * type
- * type_surnoms
- * url_voir
- * url_edit
- * icone_objet
+ * - table_objet
+ * - table_objet_surnoms
+ * - type
+ * - type_surnoms
+ * - url_voir
+ * - url_edit
+ * - icone_objet
  *
- * texte_retour
- * texte_modifier
- * texte_creer
- * texte_creer_associer
- * texte_ajouter
- * texte_objets
- * texte_objet
+ * - texte_retour
+ * - texte_modifier
+ * - texte_creer
+ * - texte_creer_associer
+ * - texte_ajouter
+ * - texte_objets
+ * - texte_objet
  *
- * info_aucun_objet
- * info_1_objet
- * info_nb_objets
+ * - info_aucun_objet
+ * - info_1_objet
+ * - info_nb_objets
  *
- * texte_logo_objet
- * texte_langue_objet
+ * - texte_logo_objet
+ * - texte_langue_objet
+ * - texte_definir_comme_traduction_objet
  *
- * principale
- * champs_contenu : utlise pour generer l'affichage par defaut du contenu
- * editable
- * champs_editables : utilise pour prendre en compte le post lors de l'edition
+ * - principale
+ * - champs_contenu : utlisé pour générer l'affichage par défaut du contenu
+ * - editable
+ * - champs_editables : utilisé pour prendre en compte le post lors de l'édition
  * 
- * champs_versionnes
+ * - champs_versionnes
  *
  * L'objet doit définir de lui même ces champs pour gérer des statuts :
  *     - statut
@@ -572,10 +574,10 @@ $tables_auxiliaires['spip_jobs_liens'] = array(
  *     - texte_changer_statut
  *     - aide_changer_statut
  *
- * modeles : permet de declarer les modeles associes a cet objet
+ * - modeles : permet de declarer les modeles associes a cet objet
  * 
- * les infos non renseignees sont auto deduites par conventions
- * ou laissees vides
+ * Les infos non renseignées sont auto-déduites par conventions
+ * ou laissées vides
  *
  * @param string $table_sql
  * @param array $infos
@@ -646,6 +648,9 @@ function renseigner_table_objet_sql($table_sql,&$infos){
 		$infos['texte_logo_objet'] = $infos['type'].':'.'titre_logo_'.$infos['type'];
 	if (!isset($infos['texte_langue_objet']))  // objet:texte_langue_objet "Langue de ce X"
 		$infos['texte_langue_objet'] = $infos['type'].':'.'titre_langue_'.$infos['type'];
+	if (!isset($infos['texte_definir_comme_traduction_objet']))  // "Ce X est une traduction du X numéro :"
+		$infos['texte_definir_comme_traduction_objet'] = $infos['type'].':'.'texte_definir_comme_traduction_'.$infos['type'];
+
 
 	// objet:info_aucun_objet
 	if (!isset($infos['info_aucun_objet']))
