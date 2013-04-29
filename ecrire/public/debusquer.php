@@ -651,7 +651,7 @@ function debusquer_navigation_boucles($boucles, $nom_skel, $self, $nom_source){
 				"</td><td>\n" .
 				$req .
 				"</td><td>\n" .
-				$crit .
+				htmlspecialchars($crit) .
 				"</td></tr>";
 		}
 	}
