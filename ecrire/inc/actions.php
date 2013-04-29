@@ -21,11 +21,11 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 }
 
 // http://doc.spip.org/@redirige_action_auteur
-function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts='') {
+function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts='', $public=false) {
 
 	$r = _DIR_RESTREINT . generer_url_ecrire($ret, $gra, true, true);
 
-	return generer_action_auteur($action, $arg, $r, $mode, $atts);
+	return generer_action_auteur($action, $arg, $r, $mode, $atts, $public);
 }
 
 // http://doc.spip.org/@redirige_action_post
