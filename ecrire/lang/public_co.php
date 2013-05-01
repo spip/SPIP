@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Accogliu di u situ', # MODIF
-	'article' => 'Article', # NEW
+	'article' => 'Artìculu',
 	'articles' => 'Artìculi',
 	'articles_auteur' => 'Artìculi di st\'autore',
 	'articles_populaires' => 'Artìculi i più pupulari',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Ùn ci hè situ à st\'indirizzu',
 	'aucune_breve' => 'Ùn ci hè dispacciu à st\'indirizzu',
 	'aucune_rubrique' => 'Ùn ci hè rùbbrica à st\'indirizzu',
-	'auteur' => 'Auteur', # NEW
+	'auteur' => 'Autore',
 	'autres' => 'Altri',
 	'autres_breves' => 'Altri dispacci',
 	'autres_groupes_mots_clefs' => 'Altri gruppi di segni',
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Cummentà stu situ',
-	'contact' => 'Contact', # NEW
+	'contact' => 'Cuntattu',
 	'copie_document_impossible' => 'Impussìbule di cupià u ducumentu',
 
 	// D
