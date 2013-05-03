@@ -17,6 +17,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 //
 // http://doc.spip.org/@spip_setcookie
 function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='', $secure='') {
+	// liste des cookies en httponly (a passer en define si besoin)
+	$httponly = in_array($name, explode(' ', 'spip_session'));
+
 	$name = preg_replace ('/^spip_/', $GLOBALS['cookie_prefix'].'_', $name);
 	if ($path == 'AUTO')
 		$path = defined('_COOKIE_PATH')?_COOKIE_PATH:preg_replace(',^\w+://[^/]*,', '', url_de_base());
@@ -24,9 +27,6 @@ function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='
 		$domain = _COOKIE_DOMAIN;
 
 	#spip_log("cookie('$name', '$value', '$expire', '$path', '$domain', '$secure', '$httponly'");
-
-	// liste des cookies en httponly (a passer en define si besoin)
-	$httponly = in_array($name, explode(' ', 'spip_session'));
 
 	$a =
 	($httponly AND strnatcmp(phpversion(),'5.2.0') >= 0) ?
