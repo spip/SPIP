@@ -659,6 +659,7 @@ e vos tornar connectar au sit.
 	'titre_image_auteur_supprime' => 'Autor suprimit',
 	'titre_image_redacteur' => 'Redactor sensa accès',
 	'titre_image_redacteur_02' => 'Redactor',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitaire',
 	'titre_joindre_document' => 'JÓNHER UN DOCUMENT',
 	'titre_mots_cles' => 'MÒTS CLAUS',

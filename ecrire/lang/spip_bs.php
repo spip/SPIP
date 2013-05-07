@@ -639,6 +639,7 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 	'titre_image_auteur_supprime' => 'Autor izbrisan',
 	'titre_image_redacteur' => 'Urednik bez pristupa',
 	'titre_image_redacteur_02' => 'Urednik',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Posjetioc',
 	'titre_joindre_document' => 'PRIDRUZI DOKUMENT',
 	'titre_mots_cles' => 'KLJUCNE RIJECI',

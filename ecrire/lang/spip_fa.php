@@ -624,6 +624,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_image_auteur_supprime' => 'نويسنده حذف شده',
 	'titre_image_redacteur' => 'نويسنده بدون حق دسترسى',
 	'titre_image_redacteur_02' => 'نويسنده',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'بازديد كننده',
 	'titre_joindre_document' => 'يك سند اضافه كنيد',
 	'titre_mots_cles' => 'واژه-كليدها',

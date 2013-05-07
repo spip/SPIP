@@ -664,6 +664,7 @@ Intenta',
 	'titre_image_auteur_supprime' => 'Autor desaniciáu',
 	'titre_image_redacteur' => 'Redactor ensin accesu',
 	'titre_image_redacteur_02' => 'Redactor',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitante',
 	'titre_joindre_document' => 'AMESTAR UN DOCUMENTU',
 	'titre_mots_cles' => 'PALLABRES-CLAVE',

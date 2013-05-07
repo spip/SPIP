@@ -666,6 +666,7 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => 'Авторът е изтрит',
 	'titre_image_redacteur' => 'Редактор без достъп',
 	'titre_image_redacteur_02' => 'Редактор',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Посетител',
 	'titre_joindre_document' => 'ПРИЛАГАНЕ НА ДОКУМЕНТ',
 	'titre_mots_cles' => 'КЛЮЧОВИ ДУМИ',

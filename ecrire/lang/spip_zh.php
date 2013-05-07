@@ -664,6 +664,7 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => '删除的作者',
 	'titre_image_redacteur' => '不能访问的编辑者',
 	'titre_image_redacteur_02' => '编辑者',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => '访问者',
 	'titre_joindre_document' => '附加文档',
 	'titre_mots_cles' => '关键词',

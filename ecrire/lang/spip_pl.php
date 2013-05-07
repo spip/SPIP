@@ -661,6 +661,7 @@ a następnie sprawdź czy obrazki pojawiają się zawsze w artykułach.',
 	'titre_image_auteur_supprime' => 'Autor usunięty',
 	'titre_image_redacteur' => 'Redaktor bez dostępu',
 	'titre_image_redacteur_02' => 'Redaktor',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Odwiedzający',
 	'titre_joindre_document' => 'ZAŁĄCZ DOKUMENT',
 	'titre_mots_cles' => 'SŁOWA KLUCZOWE',

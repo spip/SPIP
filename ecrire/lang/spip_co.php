@@ -660,6 +660,7 @@ Puderete tandu inserisce un nuvellu password
 	'titre_image_auteur_supprime' => 'Autore sguassatu',
 	'titre_image_redacteur' => 'Scrittore senza accessu',
 	'titre_image_redacteur_02' => 'Scrittore',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitore',
 	'titre_joindre_document' => 'ALLEà UN DUCUMENTU',
 	'titre_mots_cles' => 'SEGNI',

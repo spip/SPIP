@@ -640,6 +640,7 @@ Probéiert ',
 	'titre_image_auteur_supprime' => 'Geläschten Auteur',
 	'titre_image_redacteur' => 'Redakter ouni Zougang',
 	'titre_image_redacteur_02' => 'Redakter',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visiteur',
 	'titre_joindre_document' => 'DOKUMENT BÄIFLÉCKEN',
 	'titre_mots_cles' => 'SCHLËSSELWIERDER',

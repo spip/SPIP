@@ -639,6 +639,7 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 	'titre_image_auteur_supprime' => 'gelöschter Autor',
 	'titre_image_redacteur' => 'Redakteur ohne Systemzugang',
 	'titre_image_redacteur_02' => 'Redakteur',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Besucher',
 	'titre_joindre_document' => 'DOKUMENT ANFÜGEN',
 	'titre_mots_cles' => 'SCHLAGWORTE',
