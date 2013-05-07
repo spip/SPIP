@@ -68,12 +68,15 @@ function generer_action_auteur($action, $arg, $redirect = "", $mode = false, $at
  *     - true ou false : renvoyer une url, avec `&amp;` (false) ou `&` (true)
  *     - string : renvoyer un formulaire
  * @param string $atts ?
+ * @param bool $public
+ *     true produit une URL d'espace public
+ *     false (par défaut) produit une URL d'espace privé
  * @return string
  *     Code HTML du formulaire
  */
-function redirige_action_auteur($action, $arg, $ret, $gra = '', $mode = false, $atts = ''){
-	$r = _DIR_RESTREINT.generer_url_ecrire($ret, $gra, true, true);
-	return generer_action_auteur($action, $arg, $r, $mode, $atts);
+function redirige_action_auteur($action, $arg, $ret, $gra = '', $mode = false, $atts = '', $public = false){
+	$r = ($public ? _DIR_RESTREINT_ABS : _DIR_RESTREINT) .generer_url_ecrire($ret, $gra, true, $public);
+	return generer_action_auteur($action, $arg, $r, $mode, $atts, $public);
 }
 
 // http://doc.spip.org/@redirige_action_post
