@@ -189,7 +189,17 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 	} else $t = 0 ;
  
 	$connexion['last'] = $query;
-	$r = $link ? mysql_query($query, $link) : mysql_query($query);
+
+	// ajouter un debug utile dans log/mysql-slow.log ?
+	$debug = (!defined('_DEBUG_SLOW_QUERIES') || !_DEBUG_SLOW_QUERIES)
+		? ''
+		:	' /* '
+			.str_replace('*/','@/',
+				$_SERVER['REQUEST_URI'].' + '.$GLOBALS['ip']
+			)
+			.' */';
+
+	$r = $link ? mysql_query($query.$debug, $link) : mysql_query($query.$debug);
 
 	if ($e = spip_mysql_errno($serveur))	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query, $serveur); // et du fautif
