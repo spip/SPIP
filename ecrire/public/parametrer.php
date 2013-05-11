@@ -217,18 +217,21 @@ function tester_redirection($fond, $contexte, $connect)
 				// passer en url absolue car cette redirection pourra
 				// etre utilisee dans un contexte d'url qui change
 				// y compris url arbo
+				$status = 302;
+				if (defined('_STATUS_REDIRECTION_VIRTUEL'))
+					$status=_STATUS_REDIRECTION_VIRTUEL;
 				if (!preg_match(',^\w+:,', $url)) {
 					include_spip('inc/filtres_mini');
 					$url = url_absolue($url);
 				}
 				$url = str_replace('&amp;', '&', $url);
 				return array('texte' => "<"
-				. "?php header('Location: "
+				. "?php include_spip('inc/headers');redirige_par_entete('"
 				. texte_script($url)
-				. "'); echo '"
-				.  addslashes($url)
-				. "'.\"\n\"?" . ">",
-					'process_ins' => 'php');
+				. "','',$status);"
+				. "?" . ">",
+					'process_ins' => 'php',
+				  'status' => $status);
 			}
 		}
 	}
