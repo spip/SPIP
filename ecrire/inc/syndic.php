@@ -148,7 +148,8 @@ function analyser_backend($rss, $url_syndic='') {
 		// (note: ca pourrait etre defini site par site, mais ca risque d'etre
 		// plus lourd que vraiment utile)
 		if ($GLOBALS['controler_dates_rss']) {
-			if ($la_date > time() + 48 * 3600)
+			if (!$la_date
+				OR $la_date > time() + 48 * 3600)
 				$la_date = time();
 		}
 
