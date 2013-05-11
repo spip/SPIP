@@ -38,7 +38,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function redirige_par_entete($url, $equiv='', $status = 302) {
 	if (!in_array($status,array(301,302)))
 		$status = 302;
-	
+
 	$url = trim(strtr($url, "\n\r", "  "));
 	# en theorie on devrait faire ca tout le temps, mais quand la chaine
 	# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
@@ -46,6 +46,12 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 		$url = url_de_base().$url;
 	if ($url[0]=='#')
 		$url = self('&').$url;
+	# si profondeur non nulle et url relative, il faut la passer en absolue
+	if ($GLOBALS['profondeur_url']>(_DIR_RESTREINT?1:2)
+		AND !preg_match(",^(\w+:)?//,",$url)){
+		include_spip("inc/filtres_mini");
+		$url = url_absolue($url);
+	}
 
 	if ($x = _request('transformer_xml'))
 		$url = parametre_url($url, 'transformer_xml', $x, '&');
