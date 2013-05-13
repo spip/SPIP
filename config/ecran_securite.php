@@ -23,8 +23,12 @@ if (isset($_GET['test_ecran_securite']))
 if (!defined('_IS_BOT'))
 	define('_IS_BOT',
 		isset($_SERVER['HTTP_USER_AGENT'])
-		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex|INA dlweb|EC2LinkFinder|80legs,i',
-			(string) $_SERVER['HTTP_USER_AGENT'])
+		AND preg_match(
+	    // mots generiques
+	    ',bot|slurp|crawler|spider|webvac|yandex|'
+	    // UA plus cibles
+	    . '80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|Google|INA dlweb|Java VM|LiteFinder|Lycos|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
+	    . ',i',(string) $_SERVER['HTTP_USER_AGENT'])
 	);
 
 /*
