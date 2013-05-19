@@ -136,6 +136,9 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 	$auth_methode = ($auth_methode ? $auth_methode : 'spip');
 	include_spip('inc/auth');
 
+	if (!nom_acceptable(_request('nom'))) {
+		$erreurs['nom'] = _T("info_nom_pas_conforme");
+	}
 	if ($email = _request('email')){
 		include_spip('inc/filtres');
 		include_spip('inc/autoriser');
