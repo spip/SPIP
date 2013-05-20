@@ -438,6 +438,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 	'info_nb_visiteurs' => '@nb@ visitantes',
 	'info_nom' => 'Nome',
 	'info_nom_destinataire' => 'Nome del destinatariu',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nome del to sitiu',
 	'info_nombre_articles' => '@nb_articles@ artículos,',
 	'info_nombre_partcipants' => 'PARTICIPANTES NEL DISCUTINIU:',

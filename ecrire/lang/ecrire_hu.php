@@ -420,6 +420,7 @@ a törölt szerzők pedig kukával vannak jelölve.', # MODIF
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Név',
 	'info_nom_destinataire' => 'Címzett neve',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Az Ön honlapja neve',
 	'info_nombre_articles' => '@nb_articles@ cikk,',
 	'info_nombre_partcipants' => 'A VITA RÉSZTVEVŐI :',

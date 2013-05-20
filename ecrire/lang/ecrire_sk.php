@@ -433,6 +433,7 @@ cez FTP.</p>',
 	'info_nb_visiteurs' => 'návštevníkov: @nb@',
 	'info_nom' => 'Meno',
 	'info_nom_destinataire' => 'Meno príjemcu',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Názov vašej stránky',
 	'info_nombre_articles' => 'článkov: @nb_articles@,',
 	'info_nombre_partcipants' => 'ÚČASTNÍCI TEJTO DISKUSIE:',

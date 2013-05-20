@@ -455,6 +455,7 @@ fisyé SPIP.}}',
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Non',
 	'info_nom_destinataire' => 'Non lo korespondan',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Lo non out sitwèb ',
 	'info_nombre_articles' => '@nb_articles@ bann zartik,',
 	'info_nombre_partcipants' => 'BANN DALON DANN KOZMAN:',

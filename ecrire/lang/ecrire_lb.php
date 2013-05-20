@@ -407,6 +407,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_visiteurs' => '@nb@ Visiteuren',
 	'info_nom' => 'Numm',
 	'info_nom_destinataire' => 'Numm vum Destinataire',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Numm vun ärem Site',
 	'info_nombre_articles' => '@nb_articles@ Artikelen,',
 	'info_nombre_partcipants' => 'HUELEN UN DER DISKUSSIOUN DEEL:',

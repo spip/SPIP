@@ -411,6 +411,7 @@ Hồ sơ SPIP</a>.', # MODIF
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Tên',
 	'info_nom_destinataire' => 'Tên người nhận',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Tên website của bạn',
 	'info_nombre_articles' => '@nb_articles@ bài,',
 	'info_nombre_partcipants' => 'THAM DỰ VIÊN VÀO CUỘC THẢO LUẬN:',

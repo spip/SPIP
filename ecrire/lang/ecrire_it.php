@@ -431,6 +431,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 	'info_nb_visiteurs' => '@nb@ visitatori',
 	'info_nom' => 'Nome',
 	'info_nom_destinataire' => 'Nome del destinatario',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nome del tuo sito',
 	'info_nombre_articles' => '@nb_articles@ articoli,',
 	'info_nombre_partcipants' => 'PARTECIPANTI ALLA DISCUSSIONE:',

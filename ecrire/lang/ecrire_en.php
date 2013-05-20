@@ -428,6 +428,7 @@ via FTP.</p>',
 	'info_nb_visiteurs' => '@nb@ visitors',
 	'info_nom' => 'Name',
 	'info_nom_destinataire' => 'Name of recipient',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Name of your site',
 	'info_nombre_articles' => '@nb_articles@ articles,',
 	'info_nombre_partcipants' => 'PARTICIPANTS IN THIS DISCUSSION:',

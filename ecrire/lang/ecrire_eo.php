@@ -423,6 +423,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_nb_visiteurs' => '@nb@ vizitantoj',
 	'info_nom' => 'Nomo',
 	'info_nom_destinataire' => 'Nomo de la adresato',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nomo de via retejo',
 	'info_nombre_articles' => '@nb_articles@ artikoloj,',
 	'info_nombre_partcipants' => 'PARTOPRENANTOJ EN LA DISKUTO:',

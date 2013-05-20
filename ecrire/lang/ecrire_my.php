@@ -407,6 +407,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'အမည်',
 	'info_nom_destinataire' => 'ပါဝင်သူအမည်',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'သင့်ဝက်ဘ်ဆိုက်နာမည်',
 	'info_nombre_articles' => '@nb_articles@ ဆောင်းပါးများ',
 	'info_nombre_partcipants' => 'ဆွေးနွေးမှုတွင် ပါဝင်သူများ',

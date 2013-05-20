@@ -434,6 +434,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Jméno',
 	'info_nom_destinataire' => 'Jméno příjemce',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Název webu',
 	'info_nombre_articles' => '@nb_articles@ články,',
 	'info_nombre_partcipants' => 'ÚČASTNÍCI DISKUSE:',

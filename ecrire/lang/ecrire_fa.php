@@ -409,6 +409,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_visiteurs' => '@nb@ بازديد‌كننده',
 	'info_nom' => 'نام',
 	'info_nom_destinataire' => 'نام گيرنده',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'نام سايتتان',
 	'info_nombre_articles' => 'مقاله @nb_articles@ ',
 	'info_nombre_partcipants' => ':شركت كنند گان در اين گفتگو',

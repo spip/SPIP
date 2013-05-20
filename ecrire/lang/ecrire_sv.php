@@ -432,6 +432,7 @@ funktioner hos SPIP inte användas.',
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Namn',
 	'info_nom_destinataire' => 'Mottagarens namn',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Din sajts namn',
 	'info_nombre_articles' => '@nb_articles@ artiklar,',
 	'info_nombre_partcipants' => 'DELTAGARE I DISKUSSIONEN:',

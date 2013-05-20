@@ -417,6 +417,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 	'info_nb_visiteurs' => '@nb@ bisitari',
 	'info_nom' => 'Izena',
 	'info_nom_destinataire' => 'Hartzailearen izena',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Zure gunearen izena',
 	'info_nombre_articles' => '@nb_articles@ artikulu,',
 	'info_nombre_partcipants' => 'Debatean parte-hartzaile...',

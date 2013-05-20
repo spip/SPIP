@@ -416,6 +416,7 @@ gewiste auteurs met een grijze.',
 	'info_nb_visiteurs' => '@nb@ bezoekers',
 	'info_nom' => 'Naam',
 	'info_nom_destinataire' => 'Naam van de bestemmeling',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'naam van je site',
 	'info_nombre_articles' => '@nb_articles@ artikels,',
 	'info_nombre_partcipants' => 'DEELNEMERS AAN DE DISCUSSIE :',

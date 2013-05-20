@@ -435,6 +435,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Nome',
 	'info_nom_destinataire' => 'Nome do destinatário',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nome do seu sítio',
 	'info_nombre_articles' => '@nb_articles@ artigos,',
 	'info_nombre_partcipants' => 'PARTICIPANTES NA DISCUSSÃO :',
