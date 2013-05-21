@@ -1,4 +1,79 @@
 
+SPIP-Core spip-3.0.8 -> spip-3.0.9  21 mai 2013
+-------------------------------------------------------------
+
+r20427 | kent1     |  (jeu. 18 avril 2013) | report de c20426Du texte en dur dans le privé qui se transforme en chaînes de langue.
+r20428 | b_b       |  (jeu. 18 avril 2013) | une accolade de trop dans r20427
+r20430 | kent1     |  (sam. 20 avril 2013) | les link opensearch ne sont pas des feeds, ils ne fournissent rien donc évitons de les récupérer
+r20432 | kent1     |  (sam. 20 avril 2013) | Petit refactoring avant dispartion de ce fichier
+r20435 | kent1     |  (sam. 20 avril 2013) | Report de c20434Fichier devenu non nécessaire depuis longtemps => déplacé dans le plugin sites
+r20441 | kent1     |  (mer. 24 avril 2013) | Report de c20440On concatène les deux js obligatoires du login en 1 que l'on minifie pour éviter deux requètes
+r20443 | b_b       |  (jeu. 25 avril 2013) | report de r20442 / retour sur r18418 : SPIP 3 premium, le SPIP qui vous permet d'utiliser plus de 100 plugins !
+r20452 | marcimat  |  (sam. 27 avril 2013) | Report de r20451 : Proposer la clé 'texte_definir_comme_traduction_objet' dans la déclaration de l'objet éditorial pour définir la chaîne «Ce X est une traduction du X numéro :» qui pour l'instant s'affichait systématiquement avec le texte 'article' erroné. On mappe pour les articles la chaîne de langue déjà existante.Ainsi «tradrub» ou d'autres plugins ayant des objets éditoriaux avec traductions peuvent définir les bons textes (fa_b, denisb)
+r20456 | cedric    |  (dim. 28 avril 2013) | chargement non bloquant en utilisant getScript
+r20457 | cedric    |  (dim. 28 avril 2013) | Chargement non bloquant (utiliser getScript qui est asynchrone)
+r20458 | denisb    |  (lun. 29 avril 2013) | abstract_sql.php : report de r20438 (esj). éviter quelques logs d'erreur.
+r20460 | denisb    |  (lun. 29 avril 2013) | debusquer.php : évitons d'interpréter les critères de boucle<pre>(comme par exemple  : {"<br />"} )</pre>
+r20467 | cedric    |  (mer. 01 mai 2013) | quand on cree un objet, prendre le premier statut declare si dispo, sinon prepa (plus generique)
+r20468 | cedric    |  (ven. 03 mai 2013) | Optimiser #PRODUIRE :- on ne reecrit le fichier que quand il change effectivement en passant par un fichier intermediaire .last (evite le renouvellement inutile des timestamp, qui produisent des feuilles compilees inutilement)- quand on reecrit le fichier il faut appeler clearstatcache() sur ce fichier, sinon PHP ressert le vieux timestamp jusqu'a la fin du hit, et il faut recharger 2 fois la page pour avoir la mise a jour(realet,ne0futur)
+r20476 | cedric    |  (ven. 03 mai 2013) | Ferme #2960 : comparer le nom du cookie avant remplacement du prefixe pour determiner httponly
+r20477 | cedric    |  (ven. 03 mai 2013) | ferme #2877 : r19544 avait mal interprete le test sur le define, qui sert a interdire l'utilisation de CONVERT ou PBM, pas a l'autoriser
+r20478 | cedric    |  (ven. 03 mai 2013) | Ferme #2912 : ne pas casser un critere {annee=2013} sur une table avec un champ année+ notice PHP potentielle
+r20479 | rasta     |  (ven. 03 mai 2013) | L'icône d'un objet peut avoir été déclarée explicitement, donc c'est cette info qu'on utilise.
+r20481 | cedric    |  (ven. 03 mai 2013) | Ferme #2953 : puce dans le plan de site
+r20482 | cedric    |  (ven. 03 mai 2013) | Ferme #2949. Report de r20232 r20233 r20235 r20236 : support de IF NOT EXISTS en fonction de la bonne version de SQLite
+r20484 | denisb    |  (lun. 06 mai 2013) | chercher_rubrique.php : accessibilité ; ajouter un alt explicite sur la loupe qui affiche la liste des rubriques ; ajout de la chaîne de langue correspondante (résout #2990).
+r20486 | fil       |  (lun. 06 mai 2013) | profiler les boucles dans tmp/profiler.log si leur temps de calcul depasse un certain seuil (a fixer avec define('_BOUCLE_PROFILER', 5000); par exemple pour 5 secondes).report de http://zone.spip.org/trac/spip-zone/changeset/72578
+r20488 | fil       |  (lun. 06 mai 2013) | report de [20483] : si un login n'existe pas, plutot que de piocher les infos sur un autre login (au risque de fournir la photo d'un auteur sans lien lorsqu'on se trompe dans son email), inventer une reponse credible a base de secret_du_site(), de la date du jour, et du login
+r20489 | fil       |  (lun. 06 mai 2013) | ajouter un debug utile dans log/mysql-slow.log ; avec {{{define('_DEBUG_SLOW_QUERIES', true);}}} dans mes_optionsreport de [20487]
+r20490 | denisb    |  (mar. 07 mai 2013) | suite de r20484 : soyons plus générique, le sélecteur peut servir pour autre chose que des rubriques.
+r20494 | cedric    |  (mar. 07 mai 2013) | Articles virtuels : faire une redirection propre via la fonction redirige_par_entetes(), qui explicite le status 302 par defaut (il etait indetermine dans le code precedent).La constante _STATUS_REDIRECTION_VIRTUEL permet par ailleurs de personaliser ce status en le passant en 301 systématique par exemple.
+r20495 | denisb    |  (mar. 07 mai 2013) | inc/actions.php : Le paramètre optionnel "public", forçant la construction d'URL dans l'espace public, apparu dans generer_action_auteur lors de r12798 et r13014, doit être aussi proposé dans la redirige_action_auteur qui appelle celle-ci, autrement ça oblige à la réécrire à chaque fois.. report de r20462 (esj)
+r20497 | denisb    |  (mar. 07 mai 2013) | inc/actions.php : oupsss. report du oupsss  r20463 (esj)
+r20499 | b_b       |  (mer. 08 mai 2013) | report de r20498 : icône cfg en 24px, ferme #2992
+r20509 | cedric    |  (sam. 11 mai 2013) | ferme #2913 : zone clicable sur l'icone "Modifier ce.." lorsque la configuration des urls est activée
+r20512 | cedric    |  (sam. 11 mai 2013) | Ferme #2910 : quand l'url courante est profonde (url arbo) les redirections relatives étaient ambigues.Il se trouve que le Location était "souvent" bien interprété sur les forums mais c'était un coup de chance et foirait dans d'autres cas. Le lien http fournit dans le HTML était lui toujours mal interprété.On lève l'ambiguité en transformant en url absolue dès que la profondeur courante est supérieure à la normale et que l'url de redirection est relative. Il faudrait généraliser ce passage en absolu en branche 3.1
+r20515 | cedric    |  (dim. 12 mai 2013) | chaine de langue manquante sur l'upgrade des plugins
+r20516 | cedric    |  (dim. 12 mai 2013) | Ferme #2948 : quand une rubrique est selectionnée, il faut l'afficher dans le select, même si on a pas le droit d'y déplacer un article
+r20518 | denisb    |  (dim. 12 mai 2013) | typographie/fr.php : ne pas ajouter d'insécable devant : si ce : est suivi de : (cas des adresses ipv6). résout #2931
+r20519 | cedric    |  (dim. 12 mai 2013) | Ferme #2804 : les post AJAX sur un site iso-truc sont présumés en utf et importés dans le charset local par _request(). Mais ce n'est pas forcément le cas et le test de la preg n'est pas fiable, ce qui supprime des accents bien encodés a tort. On complète le test par un is_utf8() plus fiable ce qui résoud mon cas test sur edition d'un document, titre : "titre avé un accent"A noter que le bug n'était pas systématique sur un même site (certains post passant sans problème, d'autres non). Cela peut venir du type de formulaire qui est posté parfois par une iframe en cas d'upload.
+r20520 | cedric    |  (lun. 13 mai 2013) | #2999 et http://forum.spip.net/fr_247990.html : liste plus exhaustive et complete des UA des bots, car ceux qu'on laisse passer faussent les stats (surestimées)  Source : commentaires en bas de http://wanderr.com/jay/detect-crawlers-with-php-faster/2009/04/08/ (version optimisée/factorée, on ne garde que les UA qui ne matchent pas les mots-clés génériques en début de liste)
+r20521 | cedric    |  (lun. 13 mai 2013) | et incrémenter l'écran
+r20522 | ben       |  (mar. 14 mai 2013) |  ferme #3003
+r20523 | cedric    |  (mar. 14 mai 2013) | #2999 : la definition de _IS_BOT par le core est un fall-back si l'ecran de securite n'a pas ete appelé. C'est la definition de l'ecran, plus a jour, qui est prioritaire.
+r20525 | denisb    |  (ven. 17 mai 2013) | prive/formulaires/login.html : ajout de la variable lang dans le lien vers le formulaire de rappel du mot de passe. ferme #3005
+r20529 | denisb    |  (ven. 17 mai 2013) | prive/spip_pass.html : report de r20528 (suite de r20526)
+r20531 | denisb    |  (sam. 18 mai 2013) | prive/squelettes/inclure/head.html : report de r20530 - ne pas casser l'affichage du plan de site dans le privé.
+r20534 | cedric    |  (lun. 20 mai 2013) | Ferme #3002 : lorsque la table des rubriques est mal formée et contient une branche morte ou une reference circulaire dans les parents, la fonction propager_les_secteurs() tourne en boucle infinie.Correction :- proteger de ce risque par un maxiter initialisé par le nombre de rubriques de la table- revoir l'algo de mise a jour en procedant de proche en proche, par profondeur croissante et non pas "tant qu'il y a une rubrique mal rangee".Cela permet de plus de detecter le cas d'une table rubrique mal formee et de produire un log en consequence
+r20535 | cedric    |  (mar. 21 mai 2013) | complement a r20534 : optimiser les updates en les faisant par groupe de rubriques de meme secteur poser un id_secteur=0 sur toutes les rubriques hors hierarchie si il y en a (references circulaires, parents qui n'existent plus)
+r20536 | cedric    |  (mar. 21 mai 2013) | Ferme #3004 : se proteger des references circulaires dans la table des rubriques dans la boucle HIERARCHIEPlutot qu'un code specifique, on utilise la fonction generique calcul_hierarchie_in() que l'on modifie pour tenir compte de ce cas limite. Pour etre homogene, on inverse l'ordre des rubriques qu'elle renvoie.
+
+SPIP-plugins-dist spip-3.0.8 -> spip-3.0.9  21 mai 2013
+-------------------------------------------------------------
+
+r72198 | kent1     |  (sam. 20 avril 2013) | report de z72197Permettre à un plugin utilisant les révisions à spécifier les labels des champs sous révision via un nouveau pipeline "revisions_chercher_label"La valeur par défaut sera toujours la même qu'auparavantVersion 1.7.4
+r72205 | kent1     |  (sam. 20 avril 2013) | Report de z72204Déplacement du fichier depuis le core, il n'est utile que via ce plugin
+r72287 | suske     |  (mer. 24 avril 2013) | Aérer la navigation dans la thickbox (permet d'avoir plus de 100 images). Ferme http://core.spip.org/issues/2983 . Report de r72286
+r72335 | kent1     |  (jeu. 25 avril 2013) | Report de z72334Ajout de la prise en compte de l'extension ".tar"Version 2.7.45Version de schéma 1.2.4
+r72422 | cedric    |  (lun. 29 avril 2013) | eviter un notice/warning
+r72555 | cedric    |  (ven. 03 mai 2013) | Ferme http://core.spip.org/issues/2955 : certains criteres ne se compilent pas bien {logo}, {recherche}... les ajouters aux exceptions+ utiliser #CHAMP_SQL{} systématiquement pour eviter homonymie malheureuse
+r72557 | cedric    |  (ven. 03 mai 2013) | Ferme #2912 : ne pas casser un critere {annee=2013} sur une table avec un champ année
+r72562 | cedric    |  (ven. 03 mai 2013) | clear_stat_cache pour que le timestamp soit a jour dans la page construite dans ce hit
+r72609 | denisb    |  (mar. 07 mai 2013) | signature.html : permettre aux pétitions de bénéficier d'un permalink pour s'y retrouver malgré les paginations
+r72715 | cedric    |  (ven. 10 mai 2013) | Lisibilité et ergo des statistiques (Tetue)- echelle axe des Y à droite (près des mesures les plus récentes)- legende en dessous des graphes, en ligne- Titre en fer a gauche, regroupé avec les actions de pagination- graphe des mois depuis l'origine du site par defaut (graphe des jours inchangé sur 90jours)- axe des X : date humainement lisible (15 janvier au lieu de 15/01/2013)- eviter les effets de gradients sur les barres ça gene le lisibilité. On met en plein avec une très légere transparence pour ne presque pas distinguer border et background- le gris des weekend était a peine visible sur certains ecrans, on le fonce- la barre des changement d'année est de largeur 1 mois sur le graphe des mois- ne pas masquer l'explication car elle n'est pas visible- hierarchie de l'info dans le tableau des résumésUn peu de refactoring js en utilisant closest('.graphique') au lieu d'enchainer les .parent() qui rendent le code peu robuste
+r72716 | cedric    |  (ven. 10 mai 2013) | Lisibilité et ergo des statistiques- page des referers : reduire la largeur de la colonne gauche pour eviter cette impression de texte centré  (Tetue)- mettre la miniature en float:right, et reduire sa taille
+r72717 | cedric    |  (ven. 10 mai 2013) | Lisibilité et ergo des statistiques : reparer l'affichage de la repartition par rubrique qui etait tout cassé car construit avec des table dans des tables dans des tables... heritant toutes des styles par defaut (Tetue)
+r72733 | cedric    |  (sam. 11 mai 2013) | http://core.spip.org/issues/2889 :Certaines dates de flux ont formatees dans la langue du flux et non en anglais. On essaye de remplacer le nom des mois par le nom anglais pour interpreter la dateCertaines dates finissent par UT au lieu de UTC qui bloque la conversion par strtotime, on corrige si necessaireQuand on a pas reussi a lire la date, il faut forcer a la date du jour et pas laisser 1970
+r72744 | cedric    |  (sam. 11 mai 2013) | Reparer la largeur totale de la barre dans les sous rubriques : elle reprend la largeur correspondant au nombre de visites de la branche parente+ ajustements de style sur la page
+r72763 | cedric    |  (dim. 12 mai 2013) | mise a jour de la librairie Minify_HTML
+r72767 | cedric    |  (dim. 12 mai 2013) | Ferme https://core.spip.org/issues/2787 : la librairie Minify_HTML note en TODO qu'elle doit prendre en compte les attributs avec multiples retour ligne. En attendant une solution générale, on echappe les <input> pour ne pas fausser ce qui est posté en hidden lors de la previsu
+r72774 | denisb    |  (dim. 12 mai 2013) | textwheel : ne pas ajouter d'insécable devant : si ce : est suivi de : (cas des adresses ipv6).
+r72909 | kent1     |  (mar. 21 mai 2013) | Indentation
+r72917 | cedric    |  (mar. 21 mai 2013) | http://core.spip.org/issues/3004 : se proteger des references circulaires dans les rubriques lorsqu'on stylise (et on protege avec une profondeur maxi de 10000 dans tous les cas)
+r72918 | cedric    |  (mar. 21 mai 2013) | nettoyer_raccourcis_typo() supprime les raccourcis d'ancres
+
+
+
 SPIP-Core spip-3.0.7 -> spip-3.0.8  17 avril 2013
 -------------------------------------------------------------
 r20355 | cedric    |  (sam. 23 mars 2013)  | 1sReport oublie et tardif de r15574 : nettoyer_uri() cache son resultat dans une static. On introduit un argument permettant de la reseter a une valeur fournieurl_de_base() cache son resultat dans un tableau static, indexe en fonction de la globale profondeur_url :on introduit un argument  qui permet :- en passant une valeur entiere, de calculer l'url pour cette profondeur- en passant un array(), de reinitialiser la static en cache a cette valeur- en passant false, de recuperer la staticsi aucune valeur n'est fournie, c'est la globale profondeur_url qui est utilisee, comme auparavant.Ces deux modifications permettent de sauvegarder/restaurer le contexte de l'url dans laquelle une page est calculee (pour un calcul differe)+ PHPDoc sur les deux fonctions
