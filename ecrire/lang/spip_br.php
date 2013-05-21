@@ -652,6 +652,7 @@ Aliet oc\'h da chom hep kemmañ tra ebet e-keit ha n\'oc\'h ket boas ouzh SPIP.
 	'titre_image_auteur_supprime' => 'Skridaozer bet diverket',
 	'titre_image_redacteur' => 'Skridaozer hep aotre moned',
 	'titre_image_redacteur_02' => 'Skridaozer',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Gweladenner',
 	'titre_joindre_document' => 'STAGAÑ UN TEUL',
 	'titre_mots_cles' => 'GERIOÙ-STUR',

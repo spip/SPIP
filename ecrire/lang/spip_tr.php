@@ -646,6 +646,7 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => 'Silinmiş yazar',
 	'titre_image_redacteur' => 'Erişim hakkı olmayan yazar',
 	'titre_image_redacteur_02' => 'Yazar',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Ziyaretçi',
 	'titre_joindre_document' => 'BİR BELGE EKLE',
 	'titre_mots_cles' => 'ANAHTAR SÖZCÜKLER',

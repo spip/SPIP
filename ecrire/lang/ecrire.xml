@@ -13,38 +13,43 @@
 	<langue code="ca" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ca">
 		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
-	<langue code="co" />
+	<langue code="co" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=co">
+		<traducteur nom="tavamig" lien="http://trad.spip.net/auteur/tavamig" />
+	</langue>
 	<langue code="cpf" />
 	<langue code="cpf_hat" />
 	<langue code="cs" />
 	<langue code="da" />
 	<langue code="de" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=de">
-		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=en">
-		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
-		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
-		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="Jennie Hughes" lien="http://trad.spip.net/auteur/jennie-hughes" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
+		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
 	<langue code="en_hx" />
 	<langue code="eo" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=eo">
-		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
 		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
 		<traducteur nom="frederik" lien="http://trad.spip.net/auteur/frederik" />
+		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=es">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
-		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
-		<traducteur nom="Nathan" lien="http://trad.spip.net/auteur/nathan" />
-		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
+		<traducteur nom="Nathan" lien="http://trad.spip.net/auteur/nathan" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
 	<langue code="eu" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=eu">
 		<traducteur nom="otalazt" lien="http://trad.spip.net/auteur/otalazt" />
@@ -59,13 +64,13 @@
 	</langue>
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr_tu">
 		<traducteur nom="Astalaseven" lien="http://trad.spip.net/auteur/astalaseven" />
-		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
-		<traducteur nom="RealET" lien="http://trad.spip.net/auteur/realet" />
-		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Nathan" lien="http://trad.spip.net/auteur/nathan" />
+		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
+		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
+		<traducteur nom="RealET" lien="http://trad.spip.net/auteur/realet" />
 	</langue>
 	<langue code="gl" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=gl">
 		<traducteur nom="Antón Méixome" lien="http://trad.spip.net/auteur/anton-meixome" />
@@ -73,8 +78,8 @@
 	<langue code="hu" />
 	<langue code="id" />
 	<langue code="it" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=it">
-		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 		<traducteur nom="cam.lafit" lien="http://trad.spip.net/auteur/cam-lafit" />
+		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 	</langue>
 	<langue code="it_fem" />
 	<langue code="ja" />
@@ -85,10 +90,10 @@
 	</langue>
 	<langue code="my" />
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=nl">
-		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
-		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 		<traducteur nom="gerbrand" lien="http://trad.spip.net/auteur/gerbrand" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
+		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
 	<langue code="oc_auv" />
 	<langue code="oc_gsc" />
@@ -100,13 +105,14 @@
 	<langue code="oc_va" />
 	<langue code="pl" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=pl">
 		<traducteur nom="Karolina Anna" lien="http://trad.spip.net/auteur/karolina-anna" />
+		<traducteur nom="keycheck" lien="http://trad.spip.net/auteur/keycheck" />
 	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=pt">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=pt_br">
-		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="ro" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ro">
 		<traducteur nom="vmurariu" lien="http://trad.spip.net/auteur/vmurariu" />

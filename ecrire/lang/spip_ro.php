@@ -654,6 +654,7 @@ Veţi putea după aceea alege o nouă parolă şi veţi putea să vă reconecta�
 	'titre_image_auteur_supprime' => 'Autor suprimat',
 	'titre_image_redacteur' => 'Redactor fără acces',
 	'titre_image_redacteur_02' => 'Redactor',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Vizitator',
 	'titre_joindre_document' => 'ATAŞAŢI DOCUMENT',
 	'titre_mots_cles' => 'CUVINTE-CHEIE',

@@ -655,6 +655,7 @@ och koppla upp dig mot sajten igen.
 	'titre_image_auteur_supprime' => 'Redaktören raderad',
 	'titre_image_redacteur' => 'Redaktör utan behörighet',
 	'titre_image_redacteur_02' => 'Redaktör',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Besökare',
 	'titre_joindre_document' => 'BIFOGA ETT DOKUMENT',
 	'titre_mots_cles' => 'NYCKELORD',

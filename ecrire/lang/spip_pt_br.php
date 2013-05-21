@@ -640,6 +640,7 @@ Tente se',
 	'titre_image_auteur_supprime' => 'Autor excluído',
 	'titre_image_redacteur' => 'Redator sem acesso',
 	'titre_image_redacteur_02' => 'Redator',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitante',
 	'titre_joindre_document' => 'INCLUIR UM DOCUMENTO',
 	'titre_mots_cles' => 'PALAVRAS-CHAVE',

@@ -51,6 +51,8 @@ Hồ sơ SPIP</a>.', # MODIF
 	'bouton_ajouter_participant' => 'THÊM MỘT THAM DỰ VIÊN:',
 	'bouton_annonce' => 'THÔNG BÁO',
 	'bouton_annuler' => 'Cancel', # NEW
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'Có thể viết vài chữ ',
 	'bouton_checkbox_indiquer_site' => 'Qúy vị phải ghi tên một trang Web',
 	'bouton_checkbox_signature_unique_email' => 'Chỉ một chữ ký cho một địa chỉ email ',
@@ -282,6 +284,7 @@ Hồ sơ SPIP</a>.', # MODIF
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'Cấu trúc database của bạn đã được thiết trí.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Dẫn nhập',
 	'info_chapeau_2' => 'Dẫn nhập:',
 	'info_chemin_acces_1' => ' Chọn lựa: <b>ngõ vào trong thư mục</b>',
@@ -408,6 +411,7 @@ Hồ sơ SPIP</a>.', # MODIF
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Tên',
 	'info_nom_destinataire' => 'Tên người nhận',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Tên website của bạn',
 	'info_nombre_articles' => '@nb_articles@ bài,',
 	'info_nombre_partcipants' => 'THAM DỰ VIÊN VÀO CUỘC THẢO LUẬN:',
@@ -727,6 +731,7 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librairies installées', # NEW
 	'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
 	'plugin_necessite_plugin' => 'Version @version@ or newer of the plugin @plugin@ is required.', # NEW

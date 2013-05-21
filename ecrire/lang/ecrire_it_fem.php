@@ -54,6 +54,8 @@ disattivata per motivi sicurezza (verifica con l\'amministratrice di sistema).',
 	'bouton_ajouter_participant' => 'AGGIUNGI UNA UTENTE:',
 	'bouton_annonce' => 'ANNUNCIO',
 	'bouton_annuler' => 'Annulla',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'possibilità di inviare un messaggio',
 	'bouton_checkbox_indiquer_site' => 'indicare obbligatoriamente un sito Web',
 	'bouton_checkbox_signature_unique_email' => 'una sola adesione per indirizzo email',
@@ -289,6 +291,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_barre_outils' => 'con la barra degli strumenti?',
 	'info_base_installee' => 'La struttura del vostro database è installata.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Introduzione',
 	'info_chapeau_2' => 'Introduzione:',
 	'info_chemin_acces_1' => 'Opzioni: <b>Percorso d\'accesso ai dati nell\'elenco</b>',
@@ -424,6 +427,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Nome',
 	'info_nom_destinataire' => 'Nome del destinatario',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nome del tuo sito',
 	'info_nombre_articles' => '@nb_articles@ articoli,',
 	'info_nombre_partcipants' => 'PARTECIPANTI ALLA DISCUSSIONE:',
@@ -753,6 +757,7 @@ Le traduzioni sono associate all\'originale,
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'da scaricare da @url@ e da installare in @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librerie installate',
 	'plugin_necessite_lib' => 'Questo plug-in richiede la libreria @lib@',
 	'plugin_necessite_plugin' => 'Necessita il plug-in @plugin@ con almeno la versione @version@.',

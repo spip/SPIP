@@ -650,6 +650,7 @@ og igen få adgang til webstedet.', # MODIF
 	'titre_image_auteur_supprime' => 'Forfatter slettet',
 	'titre_image_redacteur' => 'Forfatter uden adgang',
 	'titre_image_redacteur_02' => 'Forfatter',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Besøgende',
 	'titre_joindre_document' => 'VEDHÆFT DOKUMENT',
 	'titre_mots_cles' => 'NØGLEORD',

@@ -55,6 +55,8 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'bouton_ajouter_participant' => 'ÚJ RÉSZTVEVŐ :',
 	'bouton_annonce' => 'HÍRDETÉS',
 	'bouton_annuler' => 'Annuler', # NEW
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'Lehetőség üzenetküldéshez',
 	'bouton_checkbox_indiquer_site' => 'Honlapot kötelezően kell kijelölni',
 	'bouton_checkbox_signature_unique_email' => 'csak egy aláírás emailcímenként',
@@ -289,6 +291,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'Az Ön adatbázisának struktúrája telepítve van.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Bevezető',
 	'info_chapeau_2' => 'Bevezető :',
 	'info_chemin_acces_1' => 'Opciók : <b>Elérési út a címtárban</b>', # MODIF
@@ -417,6 +420,7 @@ a törölt szerzők pedig kukával vannak jelölve.', # MODIF
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Név',
 	'info_nom_destinataire' => 'Címzett neve',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Az Ön honlapja neve',
 	'info_nombre_articles' => '@nb_articles@ cikk,',
 	'info_nombre_partcipants' => 'A VITA RÉSZTVEVŐI :',
@@ -743,6 +747,7 @@ ami állapotát jelzi :',
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librairies installées', # NEW
 	'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
 	'plugin_necessite_plugin' => 'Nécessite le plugin @plugin@ en version @version@ minimum.', # NEW

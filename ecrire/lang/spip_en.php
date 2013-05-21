@@ -663,6 +663,7 @@ and log in to the site.
 	'titre_image_auteur_supprime' => 'Author deleted',
 	'titre_image_redacteur' => 'Editor without access',
 	'titre_image_redacteur_02' => 'Editor',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitor',
 	'titre_joindre_document' => 'ATTACH A DOCUMENT',
 	'titre_mots_cles' => 'KEYWORDS',

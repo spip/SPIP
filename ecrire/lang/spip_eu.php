@@ -108,17 +108,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_demain' => 'bihar',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
+	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@@heure@-etan',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
+	'date_fmt_jour_heure_debut_fin' => '@jour@-an @heure_debut@-tik @heure_fin@-ra',
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@-an @heure_debut@@dtabbr@-tik @dtstart@@heure_fin@@dtend@-ra',
 	'date_fmt_jour_mois' => '@nommois@ren @jour@a',
 	'date_fmt_jour_mois_annee' => '@annee@-ko @nommois@ren @jour@a',
 	'date_fmt_mois_annee' => '@annee@-ko @nommois@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
+	'date_fmt_nomjour' => '@nomjour@ @date@',
 	'date_fmt_nomjour_date' => '@nomjour@ @date@-a',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
+	'date_fmt_periode' => '@date_debut@-tik @date_fin@-ra',
+	'date_fmt_periode_abbr' => '@dtart@@date_debut@@dtabbr@-tik @dtend@@date_fin@@dtabbr@-ra',
 	'date_fmt_periode_from' => 'Noiztik',
 	'date_fmt_periode_to' => 'Nora',
 	'date_heures' => 'orduak',
@@ -422,8 +422,8 @@ Basea konpontzen saiatu, edo zure ostalaitzea kontaktatu.',
 	'info_mot_cle_ajoute' => 'Hurrengo gako-hitza artikulura gehitua izan da',
 	'info_multi_herit' => 'Hizkuntza lehenetsia',
 	'info_multi_langues_soulignees' => '<u>Azpimarratutako</u> hizkuntzek interfazeko testu guztien itzulpen bat eskaintzen dute. 
-Hizkuntzak horiek hautatzen badituzu, leku publikoko elementu batzuk (datak, inprimakiak) automatikoki itzuliko dira.
-Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agertuko dira.', # MODIF
+Hizkuntzak horiek hautatzen badituzu, eremu publikoko elementu batzuk (datak, inprimakiak) automatikoki itzuliko dira.
+Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agertuko dira.',
 	'info_multilinguisme' => 'Hizkuntzaniztasuna',
 	'info_nom_non_utilisateurs_connectes' => 'Zure izena ez da ageri konektatutako pertsonen zerrendan',
 	'info_nom_utilisateurs_connectes' => 'Zure izena konektatuta dauden pertsonen zerrendan ageri da.',
@@ -641,6 +641,7 @@ Modu orokorrean, orrialde hauetako kudeaketa zure guneko web arduradun nagusiari
 	'titre_image_auteur_supprime' => 'Egile ezabatuta',
 	'titre_image_redacteur' => 'Baimenik gabeko idazlaria',
 	'titre_image_redacteur_02' => 'Idazlaria',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Bisitaria',
 	'titre_joindre_document' => 'Dokumentu bat erantsi',
 	'titre_mots_cles' => 'Gako-hitzak',

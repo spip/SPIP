@@ -62,6 +62,8 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 	'bouton_ajouter_participant' => 'AZOUT INN DALON :',
 	'bouton_annonce' => 'ZANONS',
 	'bouton_annuler' => 'Annuler', # NEW
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'lé posib anvway inn modékri.',
 	'bouton_checkbox_indiquer_site' => 'a zot lé nésésèr mèt lo non dinn sitwèb',
 	'bouton_checkbox_signature_unique_email' => 'inn sèl sinyatir po inn ladrès imèl',
@@ -317,6 +319,7 @@ inn liv-zimaz (sédir inn galri).',
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'Lastriktir out bazdodné lé instalé.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Sapo',
 	'info_chapeau_2' => 'Sapo :',
 	'info_chemin_acces_1' => 'Bann lopsyon : <b>Somin laksè dann karné</b>',
@@ -452,6 +455,7 @@ fisyé SPIP.}}',
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Non',
 	'info_nom_destinataire' => 'Non lo korespondan',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Lo non out sitwèb ',
 	'info_nombre_articles' => '@nb_articles@ bann zartik,',
 	'info_nombre_partcipants' => 'BANN DALON DANN KOZMAN:',
@@ -778,6 +782,7 @@ sanm in koulèr i présiz son léta :',
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librairies installées', # NEW
 	'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
 	'plugin_necessite_plugin' => 'Nécessite le plugin @plugin@ en version @version@ minimum.', # NEW

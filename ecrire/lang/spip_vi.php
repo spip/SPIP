@@ -641,6 +641,7 @@ Nếu bạn đem vào những hình ảnh trong dạng  @gd_formats@, chúng s�
 	'titre_image_auteur_supprime' => 'Tác giả bị xoá',
 	'titre_image_redacteur' => 'Tác giả không có quyền',
 	'titre_image_redacteur_02' => 'Tác giả',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Khách',
 	'titre_joindre_document' => 'ĐÍNH KÈM MỘT HỒ SƠ',
 	'titre_mots_cles' => 'TỪ THEN CHỐT',

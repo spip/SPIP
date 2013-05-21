@@ -667,6 +667,7 @@ opnieuw verbinding maken met de site
 	'titre_image_auteur_supprime' => 'Auteur gewist',
 	'titre_image_redacteur' => 'Redacteur zonder toegang',
 	'titre_image_redacteur_02' => 'Redacteur',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Bezoeker',
 	'titre_joindre_document' => 'Document toevoegen',
 	'titre_mots_cles' => 'TREFWOORDEN',

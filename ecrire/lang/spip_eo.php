@@ -662,6 +662,7 @@ sub la respondeco de la ĉefa retejestro .</b>',
 	'titre_image_auteur_supprime' => 'Aŭtoro forigita',
 	'titre_image_redacteur' => 'Redaktanto sen alireblo',
 	'titre_image_redacteur_02' => 'Redaktanto',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Vizitanto',
 	'titre_joindre_document' => 'ALDONI DOKUMENTON',
 	'titre_mots_cles' => 'ŜLOSILVORTOJ',

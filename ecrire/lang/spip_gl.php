@@ -661,6 +661,7 @@ e reconectar co web.
 	'titre_image_auteur_supprime' => 'Autor/a suprimido',
 	'titre_image_redacteur' => 'Redactor/a sen acceso',
 	'titre_image_redacteur_02' => 'Redactor/a',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitante',
 	'titre_joindre_document' => 'ANEXAR UN DOCUMENTO',
 	'titre_mots_cles' => 'PALABRAS-CLAVE',

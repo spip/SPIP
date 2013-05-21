@@ -666,6 +666,7 @@ aou lès lazéstyon do bann paz-la pou lo wèbmèt prinsipal.</b>', # MODIF
 	'titre_image_auteur_supprime' => 'Lotèr lé dégréné',
 	'titre_image_redacteur' => 'Lotèr san laksé',
 	'titre_image_redacteur_02' => 'Lotèr',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Vizitèr',
 	'titre_joindre_document' => 'POU ZWIND INN DOKIMAN',
 	'titre_mots_cles' => 'BANN MOLAKLÉ',

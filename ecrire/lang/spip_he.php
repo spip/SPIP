@@ -668,6 +668,7 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => 'מחבר נמחק',
 	'titre_image_redacteur' => 'כותב ללא כניסה',
 	'titre_image_redacteur_02' => 'מחבר',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'מבקר',
 	'titre_joindre_document' => 'צירוף מסמך',
 	'titre_mots_cles' => 'מילות מפתח',

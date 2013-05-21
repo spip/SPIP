@@ -630,6 +630,7 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => 'បានលុបចេញ អ្នកនិពន្ធ',
 	'titre_image_redacteur' => 'អ្នកតែងអត្ថបទ គ្មានការចូលទៅ',
 	'titre_image_redacteur_02' => 'អ្នកតែងអត្ថបទ',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'អ្នក​ទស្សនា',
 	'titre_joindre_document' => 'ភ្ជាប់​ មួយឯកសារ',
 	'titre_mots_cles' => 'ពាក្យ​គន្លឹះ',

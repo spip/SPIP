@@ -49,6 +49,8 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'bouton_ajouter_participant' => 'AFEGIR UN PARTICIPANT :',
 	'bouton_annonce' => 'ANUNCI',
 	'bouton_annuler' => 'Anul·lar',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'possibilitat d\'enviar un missatge',
 	'bouton_checkbox_indiquer_site' => 'indicar obligatòriament un lloc Web',
 	'bouton_checkbox_signature_unique_email' => 'una sola signatura per adreça electrònica ',
@@ -282,6 +284,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'info_barre_outils' => 'amb la seva barra d\'eines?',
 	'info_base_installee' => 'L\'estructura de la vostra bases de dades s\'ha instal·lat.',
 	'info_bio' => 'Biografia',
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Encapçalament',
 	'info_chapeau_2' => 'Encapçalament:',
 	'info_chemin_acces_1' => 'Opcions: <b>Camí d\'accés al directori</b>',
@@ -411,6 +414,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'info_nb_visiteurs' => '@nb@ visitants',
 	'info_nom' => 'Nom',
 	'info_nom_destinataire' => 'Nom del destinatari',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nom del vostre lloc',
 	'info_nombre_articles' => '@nb_articles@ articles,',
 	'info_nombre_partcipants' => 'PARTICIPANTS A LA DISCUSSIÓ:',
@@ -734,6 +738,7 @@ amb un color que indica el seu estat:',
 	'plugin_info_plugins_dist_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @plugins_dist@.', # MODIF
 	'plugin_info_plugins_dist_2' => 'No es poden desactivar.', # MODIF
 	'plugin_info_telecharger' => 'baixar-lo des de @url@ i instal·lar-lo a @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Llibreries instal·lades',
 	'plugin_necessite_lib' => 'Aquest plugin necessita la llibreria @lib@',
 	'plugin_necessite_plugin' => 'Requereix el plugin @plugin@ com a mínim en la versió @version@.',
