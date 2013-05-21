@@ -681,10 +681,11 @@ function recuperer_numero($texte) {
  *     Texte converti
 **/
 function supprimer_tags($texte, $rempl = "") {
-	$texte = preg_replace(",<[^>]*>,US", $rempl, $texte);
-	// ne pas oublier un < final non ferme
+	$texte = preg_replace(",<(!--|\w|/)[^>]*>,US", $rempl, $texte);
+	// ne pas oublier un < final non ferme car coupe
+	$texte = preg_replace(",<(!--|\w|/).*$,US", $rempl, $texte);
 	// mais qui peut aussi etre un simple signe plus petit que
-	$texte = str_replace('<', ' ', $texte);
+	$texte = str_replace('<', '&lt;', $texte);
 	return $texte;
 }
 
