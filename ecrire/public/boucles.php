@@ -51,18 +51,15 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$boucle->hierarchie = 'if (!($id_rubrique = intval('
 	. calculer_argument_precedent($boucle->id_boucle, 'id_rubrique', $boucles)
 	. ")))\n\t\treturn '';\n\t"
-	. '$hierarchie = '
-	. (isset($boucle->modificateur['tout']) ? '",$id_rubrique"' : "''")
-	. ";\n\t"
-	. 'while ($id_rubrique = sql_getfetsel("id_parent","spip_rubriques","id_rubrique=" . $id_rubrique,"","","", "", $connect)) { 
-		$hierarchie = ",$id_rubrique$hierarchie";
-	}
-	if (!$hierarchie) return "";
-	$hierarchie = substr($hierarchie,1);';
+	. "include_spip('inc/rubriques');\n\t"
+	. '$hierarchie = calcul_hierarchie_in($id_rubrique,'
+	. (isset($boucle->modificateur['tout']) ? 'true':'false')
+	. ");\n\t"
+	. 'if (!$hierarchie) return "";'."\n\t";
 
 	$boucle->where[]= array("'IN'", "'$id_table'", '"($hierarchie)"');
 
-        $order = "FIELD($id_table, \$hierarchie)";
+	$order = "FIELD($id_table, \$hierarchie)";
 	if (!isset($boucle->default_order[0]) OR $boucle->default_order[0] != " DESC")
 		$boucle->default_order[] = "\"$order\"";
 	else
