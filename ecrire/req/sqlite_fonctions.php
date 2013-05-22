@@ -27,7 +27,7 @@ function _sqlite_init_functions(&$sqlite){
 
 	
 	$fonctions = array(
-		'CONCAT'		=> array( '_sqlite_func_concat'			,2),
+		'CONCAT'		=> array( '_sqlite_func_concat'			,-1),
 		'CEIL'      => array( '_sqlite_func_ceil', 1), // absent de sqlite2
 		
 		'DATE_FORMAT'	=> array( '_sqlite_func_strftime'		,2),
