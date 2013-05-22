@@ -10,14 +10,46 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions génériques pour les balises `#LOGO_XXXX`
+ *
+ * @package SPIP\Core\Compilateur\Balises
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-//
-// Fonction des balises #LOGO_XXXX
-// (les balises portant ce type de nom sont traitees en bloc ici)
-//
 
-// http://doc.spip.org/@balise_LOGO__dist
+/**
+ * Compile la balise dynamique `#LOGO_xx` qui retourne le code HTML
+ * pour afficher l'image de logo d'un objet éditorial de SPIP.
+ *
+ * Le type d'objet est récupéré dans le nom de la balise, tel que
+ * `LOGO_ARTICLE` ou `LOGO_SITE`.
+ *
+ * Ces balises ont quelques options :
+ * 
+ * - La balise peut aussi demander explicitement le logo normal ou de survol,
+ *   avec `LOGO_ARTICLE_NORMAL` ou `LOGO_ARTICLE_SURVOL`.
+ * - On peut demander un logo de rubrique en absence de logo sur l'objet éditorial
+ *   demandé avec `LOGO_ARTICLE_RUBRIQUE`
+ * - `LOGO_ARTICLE*` ajoute un lien sur l'image du logo vers l'objet éditorial
+ * - `LOGO_ARTICLE**` retourne le nom du fichier de logo.
+ * - `LOGO_ARTICLE{right}`. Valeurs possibles : top left right center bottom
+ * - `LOGO_DOCUMENT{icone}`. Valeurs possibles : auto icone apercu vignette
+ * - `LOGO_ARTICLE{200, 0}`. Redimensionnement indiqué
+ * 
+ * @balise LOGO_
+ * @use logo_survol()
+ * @example
+ *     ```
+ *     #LOGO_ARTICLE
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+ */
 function balise_LOGO__dist ($p) {
 
 	preg_match(",^LOGO_([A-Z_]+?)(|_NORMAL|_SURVOL|_RUBRIQUE)$,i", $p->nom_champ, $regs);
@@ -31,8 +63,9 @@ function balise_LOGO__dist ($p) {
 	}
 
 	$id_objet = id_table_objet($type);
-	if (!isset($_id_objet) OR !$_id_objet)
+	if (!isset($_id_objet)) {
 		$_id_objet = champ_sql($id_objet, $p);
+	}
 
 	$fichier = ($p->etoile === '**') ? -1 : 0;
 	$coord = array();
@@ -95,6 +128,29 @@ function balise_LOGO__dist ($p) {
 	return $p;
 }
 
+/**
+ * Calcule le code HTML pour l'image d'un logo
+ *
+ * @param string $id_objet
+ *     Nom de la clé primaire de l'objet (id_article, ...)
+ * @param string $_id_objet
+ *     Code pour la compilation permettant de récupérer la valeur de l'identifiant
+ * @param string $type
+ *     Type d'objet
+ * @param string $align
+ *     Alignement demandé du logo
+ * @param int $fichier
+ *     - -1 pour retourner juste le chemin de l'image
+ *     - 0 pour retourner le code HTML de l'image
+ * @param string $lien
+ *     Lien pour encadrer l'image avec si présent
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @param string $suite
+ *     Suite éventuelle de la balise logo, telle que `_SURVOL`, `_NORMAL` ou `_RUBRIQUE`.
+ * @return string
+ *     Code compilé retournant le chemin du logo ou le code HTML du logo.
+**/
 function logo_survol($id_objet, $_id_objet, $type, $align, $fichier, $lien, $p, $suite)
 {
 	$code = "quete_logo('$id_objet', '" .

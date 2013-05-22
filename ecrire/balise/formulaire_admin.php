@@ -51,6 +51,7 @@ function balise_FORMULAIRE_ADMIN ($p) {
  * @param array $args
  *   - Classe CSS éventuelle
  * @param array $context_compil
+ *   Tableau d'informations sur la compilation
  * @return array|string
  *   - Liste (statut, id) si un mode d'inscription est possible
  *   - chaîne vide sinon.

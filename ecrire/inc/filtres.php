@@ -2003,7 +2003,9 @@ function vider_attribut ($balise, $attribut) {
 
 
 /**
- * Un filtre pour déterminer le nom du satut des inscrits
+ * Un filtre pour déterminer le nom du statut des inscrits
+ *
+ * @use tester_statut_inscription()
  * 
  * @param void $dummy
  * @param string $mode

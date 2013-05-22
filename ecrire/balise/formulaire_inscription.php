@@ -46,13 +46,18 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 
 /**
  * Calculs de paramètres de contexte automatiques pour la balise FORMULAIRE_INSCRIPTION
- * 
- * `[(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]`
+ *
+ * @example
+ *     ```
+ *     [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
+ *     ```
+ * @use tester_config()
  *
  * @param array $args
  *   - args[0] un statut d'auteur (redacteur par defaut)
  *   - args[1] indique la rubrique eventuelle de proposition
  * @param array $context_compil
+ *   Tableau d'informations sur la compilation
  * @return array|string
  *   - Liste (statut, id) si un mode d'inscription est possible
  *   - chaîne vide sinon.
