@@ -31,8 +31,8 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 // http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_stat
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
 	list($mode, $focus, $id) = $args;
-	$mode = tester_config($id, $mode);
-	return $mode ? array($mode, $focus, $id) : '';
+	include_spip('inc/autoriser');
+	return autoriser('inscrire', $mode, $id) ? $args : false;
 }
 
 ?>

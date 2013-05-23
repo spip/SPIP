@@ -746,6 +746,25 @@ function autoriser_iconifier_dist($faire,$quoi,$id,$qui,$opts){
 	return $droit;
 }
 
+// Autorisation des inscriptions libres
+// a l'aide de la liste globale des statuts (tableau mode => nom du mode)
+
+// http://doc.spip.org/@tester_config
+function autoriser_inscrire($faire, $quoi, $id, $qui, $opt){
+
+	switch (array_search($quoi, $GLOBALS['liste_des_statuts'])) {
+
+	case 'info_redacteurs' :
+	  return ($GLOBALS['meta']['accepter_inscriptions'] == 'oui');
+
+	case 'info_visiteurs' :
+	  return ($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo');
+
+	default:
+	  return false;
+	}
+}
+
 // Deux fonctions sans surprise pour permettre les tests
 // Dire toujours OK
 // http://doc.spip.org/@autoriser_ok_dist
