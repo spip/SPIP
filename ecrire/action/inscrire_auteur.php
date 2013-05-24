@@ -241,39 +241,16 @@ function creer_pass_pour_auteur($id_auteur) {
 }
 
 /**
- * Un filtre pour determiner le nom du mode des librement inscrits,
- * a l'aide de la liste globale des statuts (tableau mode => nom du mode)
- * Utile pour le formulaire d'inscription.
- * Si un mode est fourni, verifier que la configuration l'accepte.
- * Si mode inconnu laisser faire, c'est une extension non std
- * mais verifier que la syntaxe est compatible avec SQL
+ * @deprecated a virer en 3.1 car pas utilise dans les squelettes
  *
- * http://doc.spip.org/@tester_config
+ * voir l'autorisation correspondante
  *
  * @param string $statut_tmp
  * @return string
  */
 function tester_statut_inscription($statut_tmp){
-	$s = array_search($statut_tmp, $GLOBALS['liste_des_statuts']);
-	switch ($s) {
-
-	case 'info_redacteurs' :
-	  return (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? $statut_tmp : '');
-
-	case 'info_visiteurs' :
-	  return (($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo') ? $statut_tmp : '');
-
-	default:
-	  if ($statut_tmp AND $statut_tmp == addslashes($statut_tmp)){
-		  include_spip("inc/autoriser");
-		  return autoriser("inscrireauteur",$statut_tmp)?$statut_tmp:"";
-	  }
-	  if ($GLOBALS['meta']["accepter_inscriptions"] == "oui")
-	    return $GLOBALS['liste_des_statuts']['info_redacteurs'];
-	  if ($GLOBALS['meta']["accepter_visiteurs"] == "oui")
-	    return $GLOBALS['liste_des_statuts']['info_visiteurs'];
-	  return '';
-	}
+	include_spip('inc/autoriser');
+	return autoriser('inscrireauteur', $statut_tmp) ? $statut_tmp : '';
 }
 
 
@@ -292,8 +269,10 @@ function confirmer_statut_inscription($auteur){
 	// securite
 	if ($auteur['statut'] != 'nouveau') return $auteur;
 
-	if (!($s = tester_statut_inscription($auteur['prefs'])))
+	include_spip('inc/autoriser');
+	if (!autoriser('inscrireauteur', $auteur['prefs']))
 		return $auteur;
+	$s = $auteur['prefs'];
 
 	include_spip('inc/autoriser');
 	// accorder l'autorisation de modif du statut auteur

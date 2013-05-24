@@ -41,8 +41,17 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
  */
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
 	list($mode, $id) = $args;
-	$mode = tester_config($id, $mode);
-	return $mode ? array($mode, $id) : '';
+
+	if (!$mode){
+		if ($GLOBALS['meta']["accepter_inscriptions"] == "oui")
+			$mode = "1comite";
+		elseif (($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo')){
+			$mode = "6forum";
+		}
+	}
+
+	include_spip('inc/autoriser');
+	return autoriser('inscrireauteur', $mode, $id) ? array($mode, $id) : '';
 }
 
 ?>

@@ -1268,4 +1268,36 @@ function verifier_table_non_vide($table='spip_rubriques') {
 		 $done[$table] = sql_countsel($table)>0;
 	return $done[$table];
 }
+
+/**
+ * Une autorisation determiner la possibilite de s'inscire pour un statut et un id_rubrique,
+ * a l'aide de la liste globale des statuts (tableau mode => nom du mode)
+ * Utile pour le formulaire d'inscription.
+ * Par defaut, seuls 6forum et 1comite possibles, les autres sont en false
+ * pour un nouveau mode il suffit de definir l'autorisation specifique
+ *
+ * @param $faire
+ * @param $quoi
+ *   statut auteur demande
+ * @param $id
+ *   id_rubrique eventuel (pas utilise ici, utilise dans des usages persos)
+ * @param $qui
+ * @param $opt
+ * @return bool
+ */
+function autoriser_inscrireauteur_dist($faire, $quoi, $id, $qui, $opt){
+
+	$s = array_search($quoi, $GLOBALS['liste_des_statuts']);
+	switch ($s) {
+
+		case 'info_redacteurs' :
+		  return ($GLOBALS['meta']['accepter_inscriptions'] == 'oui');
+
+		case 'info_visiteurs' :
+		  return ($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo');
+
+	}
+
+	return false;
+}
 ?>
