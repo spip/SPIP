@@ -201,8 +201,9 @@ function test_login($nom, $mail) {
 
 
 /**
- * construction du mail envoyant les identifiants
- * fonction redefinissable qui doit retourner un tableau
+ * Construction du mail envoyant les identifiants
+ * 
+ * Fonction redefinissable qui doit retourner un tableau
  * dont les elements seront les arguments de inc_envoyer_mail
  *
  * @param array $desc
@@ -240,20 +241,6 @@ function creer_pass_pour_auteur($id_auteur) {
 	auteur_instituer($id_auteur, array('pass'=>$pass));
 	return $pass;
 }
-
-/**
- * @deprecated a virer en 3.1 car pas utilise dans les squelettes
- *
- * voir l'autorisation correspondante
- *
- * @param string $statut_tmp
- * @return string
- */
-function tester_statut_inscription($statut_tmp){
-	include_spip('inc/autoriser');
-	return autoriser('inscrireauteur', $statut_tmp) ? $statut_tmp : '';
-}
-
 
 /**
  * Un nouvel inscrit prend son statut definitif a la 1ere connexion.
