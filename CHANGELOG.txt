@@ -1,7 +1,5 @@
-
-SPIP-Core spip-3.0.8 -> spip-3.0.9  21 mai 2013
+SPIP-Core spip-3.0.8 -> spip-3.0.9  24 mai 2013
 -------------------------------------------------------------
-
 r20427 | kent1     |  (jeu. 18 avril 2013) | report de c20426Du texte en dur dans le privé qui se transforme en chaînes de langue.
 r20428 | b_b       |  (jeu. 18 avril 2013) | une accolade de trop dans r20427
 r20430 | kent1     |  (sam. 20 avril 2013) | les link opensearch ne sont pas des feeds, ils ne fournissent rien donc évitons de les récupérer
@@ -47,10 +45,17 @@ r20531 | denisb    |  (sam. 18 mai 2013) | prive/squelettes/inclure/head.html : 
 r20534 | cedric    |  (lun. 20 mai 2013) | Ferme #3002 : lorsque la table des rubriques est mal formée et contient une branche morte ou une reference circulaire dans les parents, la fonction propager_les_secteurs() tourne en boucle infinie.Correction :- proteger de ce risque par un maxiter initialisé par le nombre de rubriques de la table- revoir l'algo de mise a jour en procedant de proche en proche, par profondeur croissante et non pas "tant qu'il y a une rubrique mal rangee".Cela permet de plus de detecter le cas d'une table rubrique mal formee et de produire un log en consequence
 r20535 | cedric    |  (mar. 21 mai 2013) | complement a r20534 : optimiser les updates en les faisant par groupe de rubriques de meme secteur poser un id_secteur=0 sur toutes les rubriques hors hierarchie si il y en a (references circulaires, parents qui n'existent plus)
 r20536 | cedric    |  (mar. 21 mai 2013) | Ferme #3004 : se proteger des references circulaires dans la table des rubriques dans la boucle HIERARCHIEPlutot qu'un code specifique, on utilise la fonction generique calcul_hierarchie_in() que l'on modifie pour tenir compte de ce cas limite. Pour etre homogene, on inverse l'ordre des rubriques qu'elle renvoie.
+r20538 | ben       |  (mar. 21 mai 2013) | Langues (pre 3.0.9)
+r20539 | ben       |  (mar. 21 mai 2013) | preparation SPIP 3.0.9
+r20540 | cedric    |  (mer. 22 mai 2013) | Inscription d'un auteur : le commentaire dit "Si mode inconnu laisser faire, c'est une extension non std", mais passer quand meme par une autorisation, qui par défaut sera a false (puisque l'auteur est non connu, donc non identifié, il n'a aucun droit par defaut).Il suffit que autoriser("inscrireauteur","xxx") renvoie true pour permettre l'inscription d'un auteur avec le statut xxx
+r20544 | cedric    |  (mer. 22 mai 2013) | Revert de r20389 car TIMESTAMPDIFF pas supporte par Mysql 4.x, on garde l'optimisation dans la branche 3.1
+r20545 | cedric    |  (mer. 22 mai 2013) | si on utilise un plugin avec 'use strict mode;' $.ajax plante dedans car .caller n'est pas disponible. Proteger avec un try.catch
+r20547 | marcimat  |  (mer. 22 mai 2013) | Report de r20546 : La fonction «concat» de sql peut avoir plus de 2 arguments. Indiquons cela aussi à SQLite.
+r20562 | cedric    |  (ven. 24 mai 2013) | Report adapté de r20552, r20555 et r20560 : deleguer dans tous les cas l'autorisation de s'inscrire à autoriser("inscrireauteur",$mode,$id), Mais si aucun mode n'est fourni sur le #FORMULAIRE_INSCRIPTION, on choisit le meilleur possible parmi 1comite ou 6forum.
+r20568 | ben       |  (ven. 24 mai 2013) | report de lang
 
-SPIP-plugins-dist spip-3.0.8 -> spip-3.0.9  21 mai 2013
+SPIP-plugins-dist spip-3.0.8 -> spip-3.0.9  24 mai 2013
 -------------------------------------------------------------
-
 r72198 | kent1     |  (sam. 20 avril 2013) | report de z72197Permettre à un plugin utilisant les révisions à spécifier les labels des champs sous révision via un nouveau pipeline "revisions_chercher_label"La valeur par défaut sera toujours la même qu'auparavantVersion 1.7.4
 r72205 | kent1     |  (sam. 20 avril 2013) | Report de z72204Déplacement du fichier depuis le core, il n'est utile que via ce plugin
 r72287 | suske     |  (mer. 24 avril 2013) | Aérer la navigation dans la thickbox (permet d'avoir plus de 100 images). Ferme http://core.spip.org/issues/2983 . Report de r72286
@@ -71,7 +76,12 @@ r72774 | denisb    |  (dim. 12 mai 2013) | textwheel : ne pas ajouter d'insécab
 r72909 | kent1     |  (mar. 21 mai 2013) | Indentation
 r72917 | cedric    |  (mar. 21 mai 2013) | http://core.spip.org/issues/3004 : se proteger des references circulaires dans les rubriques lorsqu'on stylise (et on protege avec une profondeur maxi de 10000 dans tous les cas)
 r72918 | cedric    |  (mar. 21 mai 2013) | nettoyer_raccourcis_typo() supprime les raccourcis d'ancres
-
+r72925 | ben       |  (mar. 21 mai 2013) | Langues (pre 3.0.9)
+r72967 | b_b       |  (jeu. 23 mai 2013) | report de r72966 : déjà retrouve ses accents
+r72978 | cedric    |  (ven. 24 mai 2013) | Comme pour apple-touch-icon, pousser dans le cache stocké au format texte du binaire issu d'un fichier image est perilleux et casse parfois. On remplace par un readfile PHP.
+r72982 | cedric    |  (ven. 24 mai 2013) | Report adapté de r20552, r20555 et r20560 : deleguer dans tous les cas l'autorisation de s'inscrire à autoriser("inscrireauteur",$mode,$id), Mais si aucun mode n'est fourni sur le #FORMULAIRE_INSCRIPTION, on choisit le meilleur possible parmi 1comite ou 6forum.Complément à http://core.spip.org/projects/spip/repository/revisions/20562
+r72983 | cedric    |  (ven. 24 mai 2013) | oups erreur dans r72982, je revert a la version precedente
+r72987 | ben       |  (ven. 24 mai 2013) | report de lang
 
 
 SPIP-Core spip-3.0.7 -> spip-3.0.8  17 avril 2013
