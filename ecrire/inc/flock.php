@@ -284,6 +284,16 @@ function spip_unlink($f) {
 	}
 }
 
+/**
+ * clearstatcache adapte a la version PHP
+ * @param bool $clear_realpath_cache
+ * @param null $filename
+ */
+function spip_clearstatcache($clear_realpath_cache = false, $filename=null){
+	return (version_compare(PHP_VERSION, '5.3.0') >= 0)?
+		clearstatcache($clear_realpath_cache,$filename):clearstatcache();
+}
+
 /*
  * Suppression complete d'un repertoire.
  *
