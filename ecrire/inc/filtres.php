@@ -1525,7 +1525,7 @@ function vider_attribut ($balise, $attribut) {
 function tester_config($id, $mode='') {
 
 	include_spip('inc/autoriser');
-	return autoriser('inscrire', $mode, $id) ? $mode : '';
+	return autoriser('inscrireauteur', $mode, $id) ? $mode : '';
 }
 
 //
