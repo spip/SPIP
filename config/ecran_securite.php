@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.1.6'); // 13 mai 2013
+define('_ECRAN_SECURITE', '1.1.7'); // 24 mai 2013
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -69,6 +69,14 @@ foreach(array('lang', 'var_recherche', 'aide', 'var_lang_r', 'lang_r', 'var_ajax
 if (preg_match(',^(.*/)?spip_acces_doc\.,', (string)$_SERVER['REQUEST_URI'])) {
 	$file = addslashes((string)$_GET['file']);
 }
+
+/*
+ * Pas d'inscription abusive
+ */
+if (isset($_REQUEST['mode']) AND isset($_REQUEST['page'])
+AND !in_array($_REQUEST['mode'],array("6forum","1comite"))
+AND $_REQUEST['page'] == "identifiants")
+	$ecran_securite_raison = "identifiants";
 
 /*
  * Agenda joue à l'injection php
