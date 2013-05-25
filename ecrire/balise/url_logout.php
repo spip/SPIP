@@ -54,7 +54,7 @@ function balise_URL_LOGOUT_stat ($args, $context_compil) {
 }
 
 /**
- * Exécution de la balise dynamique `#LOGIN_LOGOUT`
+ * Exécution de la balise dynamique `#URL_LOGOUT`
  *
  * Retourne une URL de déconnexion uniquement si le visiteur est connecté.
  *

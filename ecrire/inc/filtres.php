@@ -460,8 +460,8 @@ function corriger_entites_html($texte) {
  * que les `&amp;eacute;` en `&eacute;`
  *
  * Identique à `corriger_entites_html()` en corrigeant aussi les
- * `&amp;eacute;` en `&eacute;
- * `
+ * `&amp;eacute;` en `&eacute;`
+ * 
  * @see corriger_entites_html()
  * @param string $texte
  * @return string
