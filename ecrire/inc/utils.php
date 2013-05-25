@@ -313,8 +313,12 @@ function _request($var, $c=false) {
 	AND isset($GLOBALS['meta']['charset'])
 	AND $GLOBALS['meta']['charset'] != 'utf-8'
 	AND is_string($a)
-	AND preg_match(',[\x80-\xFF],', $a)) {
-		include_spip('inc/charsets');
+	// check rapide mais pas fiable
+	AND preg_match(',[\x80-\xFF],', $a)
+	// check fiable
+	AND include_spip('inc/charsets')
+	AND is_utf8($a)
+	) {
 		return importer_charset($a, 'utf-8');
 	}
 
