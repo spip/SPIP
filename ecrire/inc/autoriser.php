@@ -1290,7 +1290,7 @@ function verifier_table_non_vide($table='spip_rubriques') {
  * spécifique.
  *
  * @param  string $faire Action demandée
- * @param  string $type  Statut demandé
+ * @param  string $quoi  Statut demandé
  * @param  int    $id    Identifiant éventuel, par exemple de rubrique
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation

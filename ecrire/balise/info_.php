@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 /**
- * Gestion de l'authentification par SPIP
+ * Fonctions génériques pour les balises `#INFO_XXXX`
  *
  * @package SPIP\Core\Compilateur\Balises
 **/
@@ -26,6 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * SQL de l'objet.
  *
  * @balise INFO_
+ * @link http://www.spip.net/5544
  * @uses generer_info_entite()
  * @example
  *     ```

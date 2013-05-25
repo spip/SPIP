@@ -1241,16 +1241,20 @@ function save_path_cache(){
 
 
 /**
- * Trouve tous les fichiers du path correspondants a un pattern
- * pour un nom de fichier donne, ne retourne que le premier qui sera trouve
- * par un find_in_path
+ * Trouve tous les fichiers du path correspondants à un pattern
+ * 
+ * Pour un nom de fichier donné, ne retourne que le premier qui sera trouvé
+ * par un `find_in_path()`
  *
+ * @api
+ * @use creer_chemin()
+ * @use preg_files()
+ * 
  * @param string $dir
  * @param string $pattern
  * @param bool $recurs
  * @return array
  */
-// http://doc.spip.org/@find_all_in_path
 function find_all_in_path($dir,$pattern, $recurs=false){
 	$liste_fichiers=array();
 	$maxfiles = 10000;
@@ -1284,11 +1288,9 @@ function autoriser_sans_cookie($nom)
 }
 
 /**
- * Fonction codant et decodant les URLS des objets SQL mis en page par SPIP
+ * Fonction codant et décodant les URLs des objets SQL mis en page par SPIP
  *
- * http://doc.spip.org/@generer_url_entite
- *
- *
+ * @api
  * @param string $id
  *   numero de la cle primaire si nombre, URL a decoder si pas numerique
  * @param string $entite
@@ -1383,7 +1385,12 @@ function urls_connect_dist($i, &$entite, $args='', $ancre='', $public=null) {
 }
 
 
-// Transformer les caracteres utf8 d'une URL (farsi par ex) selon la RFC 1738
+/**
+ * Transformer les caractères utf8 d'une URL (farsi par exemple) selon la RFC 1738
+ *
+ * @param string $url
+ * @return string
+ */
 function urlencode_1738($url) {
 	if (preg_match(',[^\x00-\x7E],sS', $url)){
 		$uri = '';

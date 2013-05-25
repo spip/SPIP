@@ -435,21 +435,37 @@ function hauteur($img) {
 }
 
 
-// Echappement des entites HTML avec correction des entites "brutes"
-// (generees par les butineurs lorsqu'on rentre des caracteres n'appartenant
-// pas au charset de la page [iso-8859-1 par defaut])
-//
-// Attention on limite cette correction aux caracteres "hauts" (en fait > 99
-// pour aller plus vite que le > 127 qui serait logique), de maniere a
-// preserver des echappements de caracteres "bas" (par exemple [ ou ")
-// et au cas particulier de &amp; qui devient &amp;amp; dans les url
-// http://doc.spip.org/@corriger_entites_html
+/**
+ * Échappement des entités HTML avec correction des entités « brutes »
+ *
+ * Ces entités peuvent être générées par les butineurs lorsqu'on rentre des
+ * caractères n'appartenant pas au charset de la page [iso-8859-1 par défaut]
+ *
+ * Attention on limite cette correction aux caracteres « hauts » (en fait > 99
+ * pour aller plus vite que le > 127 qui serait logique), de manière à
+ * préserver des eéhappements de caractères « bas » (par exemple `[` ou `"`)
+ * et au cas particulier de `&amp;` qui devient `&amp;amp;` dans les URL
+ *
+ * @see corriger_toutes_entites_html()
+ * @param string $texte
+ * @return string
+**/
 function corriger_entites_html($texte) {
 	if (strpos($texte,'&amp;') === false) return $texte;
 	return preg_replace(',&amp;(#[0-9][0-9][0-9]+;|amp;),iS', '&\1', $texte);
 }
-// idem mais corriger aussi les &amp;eacute; en &eacute;
-// http://doc.spip.org/@corriger_toutes_entites_html
+
+/**
+ * Échappement des entités HTML avec correction des entités « brutes » ainsi
+ * que les `&amp;eacute;` en `&eacute;`
+ *
+ * Identique à `corriger_entites_html()` en corrigeant aussi les
+ * `&amp;eacute;` en `&eacute;
+ * `
+ * @see corriger_entites_html()
+ * @param string $texte
+ * @return string
+**/
 function corriger_toutes_entites_html($texte) {
 	if (strpos($texte,'&amp;') === false) return $texte;
 	return preg_replace(',&amp;(#?[a-z0-9]+;),iS', '&\1', $texte);
@@ -472,6 +488,12 @@ function proteger_amp($texte){
  *
  * @filtre entites_html
  * @link http://www.spip.net/4280
+ * 
+ * @use echappe_html()
+ * @use echappe_retour()
+ * @use proteger_amp()
+ * @use corriger_toutes_html()
+ * @use corriger_toutes_entites_html()
  * 
  * @param string $texte
  *   chaine a echapper
@@ -895,9 +917,22 @@ function attribut_html($texte,$textebrut = true) {
 	return preg_replace(array("/&(amp;|#38;)/","/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/"),array("&","&#38;") , $texte);
 }
 
-// Vider les url nulles comme 'http://' ou 'mailto:'
-// et leur appliquer un htmlspecialchars() + gerer les &amp;
-// http://doc.spip.org/@vider_url
+
+/**
+ * Vider les URL nulles
+ *
+ * - Vide les URL vides comme `http://` ou `mailto:` (sans rien d'autre)
+ * - échappe les entités et gère les `&amp;`
+ *
+ * @use entites_html()
+ * 
+ * @param string $url
+ *     URL à vérifier et échapper
+ * @param bool $entites
+ *     `true` pour échapper les entités HTML.
+ * @return string
+ *     URL ou chaîne vide
+**/
 function vider_url($url, $entites = true) {
 	# un message pour abs_url
 	$GLOBALS['mode_abs_url'] = 'url';
