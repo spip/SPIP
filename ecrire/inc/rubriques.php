@@ -552,13 +552,15 @@ function calcul_branche_in($id) {
  * @see inc_calcul_hierarchie_in_dist()
  * @param string|int|array $id
  *     Identifiant de la, ou des rubriques dont on veut obtenir les hierarchies
+ * @param bool $tout
+ *     inclure la rubrique de depart dans la hierarchie ou non
  * @return string
  *     Liste des identifiants séparés par des virgules,
  *     incluant les rubriques transmises et toutes leurs parentées
  */
-function calcul_hierarchie_in($id) {
+function calcul_hierarchie_in($id, $tout=true) {
 	$calcul_hierarchie_in = charger_fonction('calcul_hierarchie_in','inc');
-	return $calcul_hierarchie_in($id);
+	return $calcul_hierarchie_in($id, $tout);
 }
 
 
@@ -589,13 +591,14 @@ function inc_calcul_branche_in_dist($id) {
 	$branche = $r = $id;
 
 	// On ajoute une generation (les filles de la generation precedente)
-	// jusqu'a epuisement
-	while ($filles = sql_allfetsel(
+	// jusqu'a epuisement, en se protegeant des references circulaires
+	$maxiter = 10000;
+	while ($maxiter-- AND $filles = sql_allfetsel(
 					'id_rubrique',
 					'spip_rubriques',
-					sql_in('id_parent', $r)." AND ". sql_in('id_rubrique', $r, 'NOT')
+					sql_in('id_parent', $r) ." AND ". sql_in('id_rubrique', $r, 'NOT')
 					)) {
-		$r = join(',', array_map('array_shift', $filles));
+		$r = join(',', array_map('reset', $filles));
 		$branche .= ',' . $r;
 	}
 
@@ -615,11 +618,13 @@ function inc_calcul_branche_in_dist($id) {
  *
  * @param string|int|array $id
  *     Identifiant de la, ou des rubriques dont on veut obtenir les hierarchies
+ * @param bool $tout
+ *     inclure la rubrique de depart dans la hierarchie ou non
  * @return string
  *     Liste des identifiants séparés par des virgules,
  *     incluant les rubriques transmises et toutes leurs parentées
  */
-function inc_calcul_hierarchie_in_dist($id) {
+function inc_calcul_hierarchie_in_dist($id, $tout=true) {
 	static $b = array();
 
 	// normaliser $id qui a pu arriver comme un array, comme un entier, ou comme une chaine NN,NN,NN
@@ -628,14 +633,19 @@ function inc_calcul_hierarchie_in_dist($id) {
 	if (isset($b[$id]))
 		return $b[$id];
 
-	// Notre branche commence par la rubrique de depart
-	$hier = $id;
+	// Notre branche commence par la rubrique de depart si $tout=true
+	$hier = $tout?$id:"";
 
 	// On ajoute une generation (les filles de la generation precedente)
-	// jusqu'a epuisement
-	while ($parents = sql_allfetsel('id_parent', 'spip_rubriques',sql_in('id_rubrique', $id))) {
+	// jusqu'a epuisement, en se protegeant des references circulaires
+	$maxiter = 10000;
+	while ($maxiter-- AND $parents = sql_allfetsel(
+			'id_parent',
+			'spip_rubriques',
+			sql_in('id_rubrique', $id) ." AND ". sql_in('id_parent',$hier,'NOT')
+		  )) {
 		$id = join(',', array_map('reset', $parents));
-		$hier .= ',' . $id;
+		$hier = $id.(strlen($hier)?','.$hier:'');
 	}
 
 	# securite pour ne pas plomber la conso memoire sur les sites prolifiques
