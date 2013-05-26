@@ -32,7 +32,7 @@ define('CHAMP_ETENDU', '/\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]/S'
 
 define('BALISE_INCLURE','/<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?/S');
 define('BALISE_POLYGLOTTE',',<multi>(.*)</multi>,Uims');
-define('BALISE_IDIOMES',',<:(([a-z0-9_]+):)?([a-z0-9_]*)({([^\|=>]*=[^\|>]*)})?((\|[^>]*)?:>),iS');
+define('BALISE_IDIOMES',',<:(([a-z0-9_]+):)?([a-z0-9_]*)({([^\|=>]*=[^>]*)})?((\|[^>]*)?:>),iS');
 define('BALISE_IDIOMES_ARGS', '@^\s*([^= ]*)\s*=\s*((' . NOM_DE_CHAMP . '[{][^}]*})?[^,]*)\s*,?\s*@s');
 
 define('SQL_ARGS', '(\([^)]*\))');
@@ -133,7 +133,7 @@ function phraser_idiomes($texte,$ligne,$result) {
 		$args = array();
 		$largs = $match[5];
 		while (preg_match(BALISE_IDIOMES_ARGS, $largs, $r)) {
-			$args[$r[1]] = phraser_champs($r[2], 0, array());
+			$args[$r[1]] = phraser_champs($r[2], 0, array(), true);
 			$largs = substr($largs, strlen($r[0]));
 		}
 		$champ->arg = $args;
@@ -148,7 +148,7 @@ function phraser_idiomes($texte,$ligne,$result) {
 }
 
 // http://doc.spip.org/@phraser_champs
-function phraser_champs($texte,$ligne,$result) {
+function phraser_champs($texte,$ligne,$result, $filtre=false) {
 	while (preg_match("/".NOM_DE_CHAMP."/S", $texte, $match)) {
 	  $p = strpos($texte, $match[0]);
 	  $suite = substr($texte,$p+strlen($match[0]));
@@ -177,6 +177,12 @@ function phraser_champs($texte,$ligne,$result) {
 			}
 		*/
 		} else $texte = $suite;
+		if ($filtre) while ($texte[0]=='|') {
+			$result = phraser_args($texte, '', '', $result, $champ);
+			$args = $champ->apres ;
+			$champ->apres = '';
+			$texte = $args[0];
+		  }
 		phraser_vieux($champ);
 		$result[] = $champ;
 	  } else {
