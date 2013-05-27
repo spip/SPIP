@@ -1,3 +1,17 @@
+SPIP-Core spip-3.0.9 -> spip-3.0.10  27 mai 2013
+-------------------------------------------------------------
+r20572 | cedric    |  (ven. 24 mai 2013) | Version 1.1.7 (Identifiants)
+r20576 | cedric    |  (ven. 24 mai 2013) | amelioration de r20562 : si le mode n'est pas fourni, on teste 1comite puis 6forum et on renvoit celui qui est autorise. Evite la duplication de code (Emmanuel)
+r20577 | cedric    |  (ven. 24 mai 2013) | clearstatcache() n'accepte des arguments qu'a partir de PHP 5.3.0. Comme on l'utilise a quelques endroits, on prévoit un wrapper spip_clearstatcache() qui appelle l'une ou l'autre syntaxe selon la version de PHP.
+r20593 | cedric    |  (dim. 26 mai 2013) | Logout en 2 étapes pour eviter les CSRF (g0uZ)
+r20595 | eric      |  (dim. 26 mai 2013) | Mise au point du paquet.xml pour la release 3.0.10 à venir (numéro de version et état).
+r20596 | eric      |  (dim. 26 mai 2013) | Mise à jour du numéro de version 3.0.10 (suite).
+
+SPIP-plugins-dist spip-3.0.9 -> spip-3.0.10  27 mai 2013
+-------------------------------------------------------------
+r72994 | cedric    |  (ven. 24 mai 2013) | l'argument focus a été supprimé
+r72995 | cedric    |  (ven. 24 mai 2013) | utiliser spip_clearstatcache() qui tient compte de la version de PHP.
+
 SPIP-Core spip-3.0.8 -> spip-3.0.9  24 mai 2013
 -------------------------------------------------------------
 r20427 | kent1     |  (jeu. 18 avril 2013) | report de c20426Du texte en dur dans le privé qui se transforme en chaînes de langue.
