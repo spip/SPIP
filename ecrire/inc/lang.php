@@ -141,9 +141,10 @@ function lang_typo($lang='') {
 // avec les memes typo et direction dans l'espace prive que dans le public
 // http://doc.spip.org/@changer_typo
 function changer_typo($lang = '') {
-	global $lang_objet;
-
-	return $lang_objet = $lang ? $lang : $GLOBALS['meta']['langue_site'];
+	if ($lang)
+		$GLOBALS['lang_objet'] = $lang;
+	else
+		unset($GLOBALS['lang_objet']);
 }
 
 //

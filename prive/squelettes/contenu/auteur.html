@@ -1,5 +1,6 @@
 [(#AUTORISER{voir,auteur,#ID_AUTEUR}|sinon_interdire_acces)]
 <BOUCLE_auteur(AUTEURS){id_auteur}{statut==.*}{si #ENV{exec}|=={auteur}}>
+[(#LANG|changer_typo)]
 [(#BOITE_OUVRIR{[
 				
 	[(#AUTORISER{modifier,auteur,#ID_AUTEUR})
@@ -13,7 +14,7 @@
 	]
 	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{auteur-24.png}|balise_img{auteur,cadre-icone})]</h1>
 ],simple fiche_objet})]
-
+[(#REM|changer_typo)]
 <!--affiche_milieu-->
 
 [(#ENV{email_confirm}|oui)
