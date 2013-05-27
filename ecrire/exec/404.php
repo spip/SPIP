@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion d'affichage de page introuvable
+ * @package SPIP\Core\Exec
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**

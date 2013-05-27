@@ -132,35 +132,37 @@ function sql_set_charset($charset,$serveur='', $option=true){
  * @see sql_fetch()      Pour boucler sur les resultats de cette fonction
  * 
  * @param array|string $select
- * 		Liste des champs a recuperer (Select)
+ *     Liste des champs a recuperer (Select)
  * @param array|string $from
- * 		Tables a consulter (From)
+ *     Tables a consulter (From)
  * @param array|string $where
- * 		Conditions a remplir (Where)
+ *     Conditions a remplir (Where)
  * @param array|string $groupby
- * 		Critere de regroupement (Group by)
+ *     Critere de regroupement (Group by)
  * @param array|string $orderby
- * 		Tableau de classement (Order By)
+ *     Tableau de classement (Order By)
  * @param string $limit
- * 		Critere de limite (Limit)
+ *     Critere de limite (Limit)
  * @param array $having
- * 		Tableau des des post-conditions a remplir (Having)
+ *     Tableau des des post-conditions a remplir (Having)
  * @param string $serveur
- * 		Le serveur sollicite (pour retrouver la connexion)
+ *     Le serveur sollicite (pour retrouver la connexion)
  * @param bool|string $option
- * 		Peut avoir 3 valeurs :
- * 		- false -> ne pas l'executer mais la retourner, 
- * 		- continue -> ne pas echouer en cas de serveur sql indisponible,
- * 		- true|array -> executer la requete.
- * 		Le cas array est, pour une requete produite par le compilateur,
- * 		un tableau donnnant le contexte afin d'indiquer le lieu de l'erreur au besoin
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false -> ne pas l'exécuter mais la retourner, 
+ *     - continue -> ne pas echouer en cas de serveur sql indisponible,
+ *     - true|array -> executer la requête.
+ *     Le cas array est, pour une requete produite par le compilateur,
+ *     un tableau donnnant le contexte afin d'indiquer le lieu de l'erreur au besoin
  *
  * 
  * @return mixed
- * 		Ressource SQL
- * 		- Ressource SQL pour sql_fetch, si la requete est correcte
- * 		- false en cas d'erreur
- * 		- Chaine contenant la requete avec $option=false
+ *     Ressource SQL
+ * 
+ *     - Ressource SQL pour sql_fetch, si la requete est correcte
+ *     - false en cas d'erreur
+ *     - Chaine contenant la requete avec $option=false
  * 
  * Retourne false en cas d'erreur, apres l'avoir denoncee.
  * Les portages doivent retourner la requete elle-meme en cas d'erreur,
@@ -1375,10 +1377,10 @@ function sql_fetsel($select = array(), $from = array(), $where = array(),
  * comme si l'on appelait successivement sql_select() puis while(sql_fetch())
  * 
  * @example
- * 		<code>
+ * 		```
  * 		$rubs = sql_allfetsel('id_rubrique', 'spip_articles', 'id_secteur='.sql_quote($id_secteur));
  *		// $rubs = array(array('id_rubrique'=>1), array('id_rubrique'=>3, ...)
- * 		</code>
+ * 		```
  * 
  * @api
  * @uses sql_select()
@@ -1410,13 +1412,13 @@ function sql_fetsel($select = array(), $from = array(), $where = array(),
  * 		Tableau de toutes les lignes de resultat de la selection
  * 		Chaque entree contient un tableau des elements demandees dans le SELECT.
  * 		{@example
- * 			<code>
+ * 			```
  * 			array(
  * 				array('id_rubrique' => 1, 'id_secteur' => 2)
  * 				array('id_rubrique' => 4, 'id_secteur' => 2)
  * 				...
  * 			)
- * 			</code>
+ * 			```
  * 		}
  *
 **/
@@ -1512,11 +1514,11 @@ function sql_version($serveur='', $option=true) {
  * de verifier que le moteur prefere utiliser des transactions dans ce cas.
  *
  * @example
- * 		<code>
+ * 		```
  * 		if (sql_preferer_transaction()) {
  * 			sql_demarrer_transaction();
  * 		}
- * 		</code>
+ * 		```
  *
  * @api
  * @see sql_demarrer_transaction()
@@ -1541,7 +1543,7 @@ function sql_preferer_transaction($serveur='', $option=true) {
 };
 
 /**
- * Demarre une transaction
+ * Démarre une transaction
  *
  * @api
  * @see sql_terminer_transaction() Pour cloturer la transaction
@@ -1549,7 +1551,8 @@ function sql_preferer_transaction($serveur='', $option=true) {
  * @param string $serveur
  * 		Nom du connecteur
  * @param bool|string $option
- * 		Peut avoir 3 valeurs : 
+ * 		Peut avoir 3 valeurs :
+ * 
  * 		- true pour executer la requete.
  * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
  * 		- false pour obtenir le code de la requete
@@ -1575,7 +1578,8 @@ function sql_demarrer_transaction($serveur='', $option=true) {
  * @param string $serveur
  * 		Nom du connecteur
  * @param bool|string $option
- * 		Peut avoir 3 valeurs : 
+ * 		Peut avoir 3 valeurs :
+ * 
  * 		- true pour executer la requete.
  * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
  * 		- false pour obtenir le code de la requete
@@ -1606,7 +1610,8 @@ function sql_terminer_transaction($serveur='', $option=true) {
  * @param string $serveur
  *     Nom du connecteur
  * @param bool|string $option
- *     Peut avoir 2 valeurs : 
+ *     Peut avoir 2 valeurs :
+ * 
  *     - true pour exécuter la demande.
  *     - 'continue' pour ne pas échouer en cas de serveur SQL indisponible.
  * @return string
@@ -1636,7 +1641,7 @@ function sql_hex($val, $serveur='', $option=true)
  * @param string $serveur
  *     Nom du connecteur
  * @param string $type
- *     Peut contenir une declaration de type de champ SQL
+ *     Peut contenir une declaration de type de champ SQL.
  *     Exemple : `int NOT NULL` qui sert alors aussi à calculer le type d'échappement
  * @return string
  *     La chaine echappee
@@ -1683,7 +1688,7 @@ function sql_date_proche($champ, $interval, $unite, $serveur='', $option=true)
  * les éléments d'une colonne qui appartiennent à une liste donnée
  *
  * @example
- *     sql_in('id_rubrique', array(3,4,5))
+ *     `sql_in('id_rubrique', array(3,4,5))`
  *     retourne approximativement «id_rubrique IN (3,4,5)» selon ce qu'attend
  *     le gestionnaire de base de donnée du connecteur en cours.
  *
@@ -1698,7 +1703,8 @@ function sql_date_proche($champ, $interval, $unite, $serveur='', $option=true)
  * @param string $serveur
  *   Nom du connecteur
  * @param bool|string $option
- *   Peut avoir 2 valeurs : 
+ *   Peut avoir 2 valeurs :
+ * 
  *   - continue -> ne pas echouer en cas de serveur sql indisponible
  *   - true ou false -> retourne l'expression
  * @return string
@@ -1717,10 +1723,42 @@ function sql_in($val, $valeurs, $not='', $serveur='', $option=true) {
 	return $f($val, $valeurs, $not, $serveur, $option!==false);
 }
 
-// Penser a dire dans la description du serveur 
-// s'il accepte les requetes imbriquees afin d'optimiser ca
 
-// http://doc.spip.org/@sql_in_select
+/**
+ * Retourne une expression IN pour le gestionnaire de base de données
+ * à partir d'une sélection de données
+ *
+ * Sélectionne les données (comme sql_select()) et prépare avec l'expression IN
+ *
+ * @see sql_select()
+ * @see sql_in()
+ * @note
+ *   Penser à dire dans la description du serveur
+ *   s'il accepte les requêtes imbriquées afin d'optimiser ca
+ *
+ * @api
+ * @param string $val
+ *     Colonne SQL sur laquelle appliquer le test
+ * @param array|string $select
+ *     Liste des champs à récupérer (Select).
+ *     La donnée extraite est le premier élément de la sélection.
+ * @param array|string $from
+ *     Tables a consulter (From)
+ * @param array|string $where
+ *     Conditions a remplir (Where)
+ * @param array|string $groupby
+ *     Critere de regroupement (Group by)
+ * @param array|string $orderby
+ *     Tableau de classement (Order By)
+ * @param string $limit
+ *     Critere de limite (Limit)
+ * @param array $having
+ *     Tableau des des post-conditions a remplir (Having)
+ * @param string $serveur
+ *     Nom du connecteur
+ * @return string
+ *     Expression de requête SQL
+**/
 function sql_in_select($in, $select, $from = array(), $where = array(),
 		    $groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur='')
 {
@@ -1732,10 +1770,11 @@ function sql_in_select($in, $select, $from = array(), $where = array(),
 }
 
 /**
- * Implementation securisee du saut en avant,
- * qui ne depend pas de la disponibilite de la fonction sql_seek
- * ne fait rien pour une valeur negative ou nulle de $saut
- * retourne la position apres le saut
+ * Implémentation sécurisée du saut en avant.
+ * 
+ * Ne dépend pas de la disponibilité de la fonction `sql_seek()`.
+ * Ne fait rien pour une valeur négative ou nulle de `$saut`.
+ * Retourne la position après le saut
  *
  * @see sql_seek()
  * 
@@ -1775,13 +1814,42 @@ function sql_skip($res, $pos, $saut, $count, $serveur='', $option=true){
 	return $pos;
 }
 
-// http://doc.spip.org/@sql_test_int
+
+/**
+ * Teste qu'une description de champ SQL est de type entier
+ *
+ * @api
+ * @see sql_test_date() pour tester les champs de date
+ * 
+ * @param string $type
+ *     Description de la colonne SQL
+ * @param string $serveur
+ *    Nom du connecteur
+ * @param bool $option
+ *     Inutilisé
+ * @return bool
+ *     True si le champ est de type entier
+ */
 function sql_test_int($type, $serveur='', $option=true)
 {
   return preg_match('/^(TINYINT|SMALLINT|MEDIUMINT|INT|INTEGER|BIGINT)/i',trim($type));
 }
 
-// http://doc.spip.org/@sql_test_date
+/**
+ * Teste qu'une description de champ SQL est de type entier
+ *
+ * @api
+ * @see sql_test_int() pour tester les champs d'entiers
+ * 
+ * @param string $type
+ *     Description de la colonne SQL
+ * @param string $serveur
+ *    Nom du connecteur
+ * @param bool $option
+ *     Inutilisé
+ * @return bool
+ *     True si le champ est de type entier
+ */
 function sql_test_date($type, $serveur='', $option=true)
 {
   return preg_match('/^(DATE|DATETIME|TIMESTAMP|TIME)/i',trim($type));
