@@ -10,9 +10,28 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Réparation de la base de donnée
+ *
+ * @package SPIP\Core\SQL\Reparation
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@base_admin_repair_dist
+/**
+ * Action de réparation de la base de données
+ *
+ * Tente de réparer les tables, recalcule les héritages et secteurs
+ * de rubriques. Affiche les erreurs s'il y en a eu.
+ *
+ * @pipeline_appel base_admin_repair
+ * @use admin_repair_tables()
+ * @use calculer_rubriques()
+ * @use propager_les_secteurs()
+ * 
+ * @param string $titre   Inutilisé
+ * @param string $reprise Inutilisé
+**/
 function base_repair_dist($titre='', $reprise='') {
 
 	$res = admin_repair_tables();
@@ -26,10 +45,17 @@ function base_repair_dist($titre='', $reprise='') {
 	include_spip('inc/minipres');
 	$res .= pipeline('base_admin_repair',$res);
 	echo minipres(_T('texte_tentative_recuperation'),
-	$res . generer_form_ecrire('accueil', '','',_T('public:accueil_site')));
+		$res . generer_form_ecrire('accueil', '','',_T('public:accueil_site')));
 }
 
-// http://doc.spip.org/@admin_repair_plat
+/**
+ * Réparer les documents stockés dans des faux répertoires .plat
+ *
+ * @deprecated Les fichiers .plat ne sont plus utilisés. Cette fonction n'est plus appelée depuis r14292
+ * @todo À supprimer ou déplacer dans le plugin Medias.
+ * 
+ * @return string Description des changements de chemins des documents
+**/
 function admin_repair_plat(){
 	spip_log( "verification des documents joints", _LOG_INFO_IMPORTANTE);
 	$out = "";
@@ -66,7 +92,15 @@ function admin_repair_plat(){
 	return $out;
 }
 
-// http://doc.spip.org/@admin_repair_tables
+/**
+ * Exécute une réparation de la base de données
+ *
+ * Crée les tables et les champs manquants.
+ * Applique sur les tables un REPAIR en SQL (si le serveur SQL l'accepte).
+ * 
+ * @return string
+ *     Code HTML expliquant les actions réalisées
+**/
 function admin_repair_tables() {
 
 	$repair = sql_repair('repair', NULL, 'continue');
