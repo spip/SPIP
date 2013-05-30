@@ -1,7 +1,13 @@
 <?php
 
-// cp1250 - Mathieu Lutfy - ref.
-// http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1250.TXT
+/**
+ * Déclaration des correspondances entre charsets cp1250 (europe centrale et de l'est) et unicode
+ *
+ * @author Mathieu Lutfy
+ * @link http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1250.TXT
+ *
+ * @package SPIP\Core\Charsets
+**/
 
 $GLOBALS['CHARSET']['cp1250'] = array (
 0x80 => 0x20AC, 0x82 => 0x201A,

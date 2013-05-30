@@ -10,14 +10,19 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des mises à jour de SPIP, versions >= 1.9.3-dev
+ *
+ * Cette version de SPIP introduit une nouvelle gestion des
+ * mises à jour par tableau
+ *
+ * On la fait coincider rétroactivement avec l'état de la 1.9.2
+ * L'index numérique entier est multiplié par 1000 (resultat < SVN c'est ok)
+ * 
+ * @package SPIP\Core\SQL\Upgrade
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*--------------------------------------------------------------------- */
-/*		Nouvelle gestion des MAJ (par tableau)			*/
-/*--------------------------------------------------------------------- */
-
-// on la fait coincider retroactivement avec l'etat de la 1.9.2
-// => l'index numerique entier est la * par 1000 (resultat < SVN c'est ok)
 
 	// FLV est incrustable, la MAJ precedente l'avait oublie
 $GLOBALS['maj'][1931] = array(
@@ -38,15 +43,16 @@ $GLOBALS['maj'][1932] = array(
 	array('spip_query', "DROP TABLE spip_tmp"),
 	);
 
-
-// Retrait de _DIR_IMG dans le champ fichier de la table des doc
+/**
+ * Mise à jour 1_934 : Retrait de `_DIR_IMG` dans le champ fichier de la table des doc
+**/
 function maj_1_934 () {
 		// attention, en cas de mutualisation _DIR_IMG contient quelque chose comme sites/urldusite/IMG/
   	// essayons en ne prenant que le dernier segment
   	$dir_img = basename(_DIR_IMG).'/';
 	  $res = spip_query("SELECT fichier FROM spip_documents WHERE fichier LIKE " . _q($dir_img . '%') . " LIMIT 0,1");
 	  if (!$row = spip_fetch_array($res)){
-	  	//�sinon on essaye avec le chemin complet
+	  	//Êsinon on essaye avec le chemin complet
 			// il faut donc verifier qu'on a bien le bon nom de repertoire
 		  $dir_img = substr(_DIR_IMG,strlen(_DIR_RACINE));
 	  }
@@ -56,6 +62,9 @@ function maj_1_934 () {
 
 $GLOBALS['maj'][1934] = array(array('maj_1_934'));
 
+/**
+ * Mise à jour 1_935 : calcul du nouveau champ 'vu' sur les associations documents_xx 
+**/
 function maj_1_935 () {
 	include_spip('inc/texte');
 	foreach(array('article'=>'id_article','rubrique'=>'id_rubrique','breve'=>'id_breve') as $type => $id_table_objet){
@@ -82,7 +91,13 @@ $GLOBALS['maj'][1935] = array(
 	);
 
 
-// http://doc.spip.org/@convertir_un_champ_blob_en_text
+/**
+ * Convertit un champ de type `blob` en champ de type `text`
+ *
+ * @param string $table Nom de la table
+ * @param string $champ Nom du champ dans la table
+ * @param string $type  Type de champ de destination, par exemple `LONGTEXT`
+**/
 function convertir_un_champ_blob_en_text($table,$champ,$type){
 	// precaution : definir le charset par defaut de la table, car c'est lui qui prevaut
 	// et il faut qu'il corresponde au charset de la connexion qui est celui
@@ -121,7 +136,9 @@ $GLOBALS['maj'][1937] = array(
 	array('convertir_un_champ_blob_en_text',"spip_ortho_cache","suggest","TEXT"),
 	);
 
-
+/**
+ * Mise à jour 1_938 : suppression des id_type de documents, remplacés par extension
+**/
 function maj_1_938 () {
 	$res = sql_select('extension','spip_documents',"extension='' OR extension is NULL");
 	if ($n = sql_count($res)) {
@@ -342,7 +359,11 @@ $GLOBALS['maj'][1949] = array(
     array('sql_alter', "TABLE spip_versions DROP INDEX `id_auteur`")
 	);
 
-
+/**
+ * Mise à jour 1_950 : Gestion du prefixe pour la table des urls
+ * 
+ * @param float $installee Numéro de version actuellement installée
+**/
 function maj_1_950($installee) {
   // oubli de gerer le prefixe lors l'introduction de l'abstraction
   // => Relancer les MAJ concernees si la version dont on part les avait fait
@@ -388,10 +409,12 @@ $GLOBALS['maj'][1951] = array(
 	);
 
 
-// Transformation des documents :
-// - image => mode=image
-// - vignette => mode=vignette
-
+/**
+ * Mise à jour 1_952 : Transformation des documents
+ *
+ * - image => mode=image
+ * - vignette => mode=vignette
+**/
 function maj_1_952() {
 
 	$ok = sql_alter("TABLE spip_documents CHANGE `mode` `mode` enum('vignette','image','document') DEFAULT NULL");

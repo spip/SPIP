@@ -10,9 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+/**
+ * Déclaration des correspondances entre charsets iso-8859-9 (Turc) et unicode
+ *
+ * @author <alexis@nds.k12.tr>
+ * 
+ * @package SPIP\Core\Charsets
+**/
 
-// iso latin 9 - Turc <alexis@nds.k12.tr>
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 load_charset('iso-8859-1');
 

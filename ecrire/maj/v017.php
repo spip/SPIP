@@ -10,8 +10,19 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des mises à jour de SPIP, versions 1.7*
+ * 
+ * @package SPIP\Core\SQL\Upgrade
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Mises à jour de SPIP n°017
+ * 
+ * @param float $version_installee Version actuelle
+ * @param float $version_cible     Version de destination
+**/
 function maj_v017_dist($version_installee, $version_cible)
 {
 	if (upgrade_vers(1.702, $version_installee, $version_cible)) {

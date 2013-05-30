@@ -1,6 +1,10 @@
 <?php
 
-# charset iso-8859-1
+/**
+ * Déclaration des correspondances entre charsets iso-8859-1 et unicode
+ *
+ * @package SPIP\Core\Charsets
+**/
 
 $GLOBALS['CHARSET']['iso-8859-1'] = array (
 

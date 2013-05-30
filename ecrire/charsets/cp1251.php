@@ -1,6 +1,12 @@
 <?php
 
-// cyrillic - ref. http://czyborra.com/charsets/cyrillic.html
+/**
+ * Déclaration des correspondances entre charsets cp1251 (cyrillic) et unicode
+ *
+ * @link http://czyborra.com/charsets/cyrillic.html
+ *
+ * @package SPIP\Core\Charsets
+**/
 
 $GLOBALS['CHARSET']['cp1251'] = array (
 0x80=>0x0402, 0x81=>0x0403, 0x82=>0x201A, 0x83=>0x0453, 0x84=>0x201E,

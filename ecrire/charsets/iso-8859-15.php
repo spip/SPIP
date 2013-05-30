@@ -10,9 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+/**
+ * Déclaration des correspondances entre charsets iso-8859-15 et unicode
+ *
+ * @author Gaetan Ryckeboer <gryckeboer@virtual-net.fr>
+ * 
+ * @package SPIP\Core\Charsets
+**/
 
-// iso latin 15 - Gaetan Ryckeboer <gryckeboer@virtual-net.fr>
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 load_charset('iso-8859-1');
 
