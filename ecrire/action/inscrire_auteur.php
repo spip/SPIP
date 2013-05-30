@@ -241,16 +241,24 @@ function creer_pass_pour_auteur($id_auteur) {
 }
 
 /**
- * @deprecated a virer en 3.1 car pas utilise dans les squelettes
- *
- * voir l'autorisation correspondante
+ * Determine le statut d'inscription :
+ * si $statut_tmp fourni, verifie qu'il est autorise
+ * sinon determine le meilleur statut possible et le renvoie
  *
  * @param string $statut_tmp
+ * @param int $id
  * @return string
  */
-function tester_statut_inscription($statut_tmp){
+function tester_statut_inscription($statut_tmp, $id){
 	include_spip('inc/autoriser');
-	return autoriser('inscrireauteur', $statut_tmp) ? $statut_tmp : '';
+	if ($statut_tmp)
+		return autoriser('inscrireauteur', $statut_tmp, $id) ? $statut_tmp : '';
+	elseif (
+		   autoriser('inscrireauteur', $statut_tmp = "1comite", $id)
+	  OR autoriser('inscrireauteur', $statut_tmp = "6forum", $id))
+		return $statut_tmp;
+
+	return '';
 }
 
 
