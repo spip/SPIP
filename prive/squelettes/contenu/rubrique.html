@@ -1,5 +1,6 @@
 [(#AUTORISER{voir,rubrique,#ID_RUBRIQUE}|sinon_interdire_acces)]
 <BOUCLE_rubrique(RUBRIQUES){id_rubrique}{statut?}{si #ENV{exec}|=={rubrique}}>
+[(#LANG|changer_typo)]
 [(#BOITE_OUVRIR{[
 				
 	[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
@@ -13,7 +14,7 @@
 	]
 	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{#ID_PARENT|?{rubrique-24.png,secteur-24.png}}|balise_img{rubrique,cadre-icone})]</h1>
 ],simple fiche_objet})]
-
+[(#REM|changer_typo)]
 <div id="wysiwyg">
 <INCLURE{fond=prive/objets/contenu/rubrique,id=#ID_RUBRIQUE,id_rubrique=#ID_RUBRIQUE,ajax=wysiwyg,wysiwyg=1}>
 </div>

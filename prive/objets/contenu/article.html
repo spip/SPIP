@@ -1,4 +1,5 @@
 <BOUCLE_afficher_contenu(ARTICLES){id_article=#ENV{id}}{statut?}>[(#ENV{virtuel,''}|non|ou{#VIRTUEL|lien_article_virtuel|non})
+[(#LANG|changer_typo)]
 <div class="champ contenu_surtitre[ (#SURTITRE*|strlen|?{'',vide})]">
 <div class='label'><:texte_sur_titre:></div>
 <div dir='#LANG_DIR' class='#EDIT{surtitre} surtitre'>#SURTITRE</div>
@@ -35,6 +36,7 @@
 <div class='label'><:info_notes:></div>
 <div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
 </div>]
+[(#REM|changer_typo)]
 ][(#ENV{virtuel,''}|oui)[
 #BOITE_OUVRIR{'',info center}
 	<p><:info_renvoi_article:></p>
