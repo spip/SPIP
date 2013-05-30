@@ -10,23 +10,32 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Mise à jour de la base de données
+ *
+ * @package SPIP\Core\SQL\Upgrade
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Programme de mise a jour des tables SQL lors d'un chgt de version.
- * L'entree dans cette fonction est reservee au maj de SPIP coeur
+ * Programme de mise à jour des tables SQL lors d'un changement de version.
+ * 
+ * L'entrée dans cette fonction est reservée aux mises à jour de SPIP coeur.
  *
- * Marche aussi pour les plugins en appelant directement la fonction maj_plugin
+ * Marche aussi pour les plugins en appelant directement la fonction `maj_plugin`
  * Pour que ceux-ci profitent aussi de la reprise sur interruption,
- * ils doivent simplement indiquer leur numero de version installee dans une meta
- * et fournir le tableau maj a la fonction maj_plugin.
- * La reprise sur timeout se fait alors par la page admin_plugin et jamais par ici
+ * ils doivent simplement indiquer leur numero de version installée dans une meta
+ * et fournir le tableau `$maj` à la fonction `maj_plugin`.
+ * La reprise sur timeout se fait alors par la page admin_plugin et jamais par ici.
  *
- * http://doc.spip.org/@base_upgrade_dist
- *
+ * @use creer_base()
+ * @use maj_base()
+ * @use auth_synchroniser_distant()
+ * 
  * @param string $titre
- * @param string $reprise
- * @return
+ * @param string $reprise Inutilisé
+ * @return void
  */
 function base_upgrade_dist($titre='', $reprise='')
 {
@@ -65,10 +74,17 @@ function base_upgrade_dist($titre='', $reprise='')
 }
 
 /**
- * MAJ de base de SPIP
+ * Mise à jour de base de SPIP
  *
- * http://doc.spip.org/@maj_base
+ * Exécute toutes les fonctions de mises à jour de SPIP nécessaires,
+ * en fonction de la meta `version_installee` indiquant le numéro de
+ * schéma actuel de la base de données.
  *
+ * Les fonctions de mises à jour se trouvent dans `ecrire/maj/`
+ * 
+ * @use upgrade_test()
+ * @use maj_while()
+ * 
  * @param int $version_cible
  * @param string $redirect
  * @return array|bool
@@ -136,30 +152,36 @@ function maj_base($version_cible = 0, $redirect = '') {
 /**
  * Mise à jour d'un plugin de SPIP
  * 
- * Fonction appelée par la fonction de maj d'un plugin.
+ * Fonction appelée par la fonction de mise à jour d'un plugin.
  * On lui fournit un tableau de fonctions élementaires
- * dont l'indice est la version
+ * dont l'indice est la version.
+ *
+ * @use maj_while()
  * 
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @param string $version_cible
  *     Version du schéma de données dans le plugin (déclaré dans paquet.xml)
  * @param array $maj
- *     Tableau d'actions à faire à l'installation (clé 'create') et pour chaque
+ *     Tableau d'actions à faire à l'installation (clé `create`) et pour chaque
  *     version intermédiaire entre la version actuelle du schéma du plugin dans SPIP
- *     et la version du schéma déclaré dans le plugin (ex. clé '1.1.0').
- *     
+ *     et la version du schéma déclaré dans le plugin (ex. clé `1.1.0`).
+ *
  *     Chaque valeur est un tableau contenant une liste de fonctions à exécuter,
  *     cette liste étant elle-même un tableau avec premier paramètre le nom de la fonction
  *     et les suivant les paramètres à lui passer
- *     @example
- *        array(
- *            'create' => array(
- *                array('maj_tables', array('spip_rubriques', 'spip_articles')),
- *                array('creer_base)),
- *            '1.1.0' => array(
- *                array('sql_alter', 'TABLE spip_articles ADD INDEX truc (truc)'))
- *        )
+ *
+ *     Exemple :
+ * 
+ *         ```
+ *         array(
+ *             'create' => array(
+ *                 array('maj_tables', array('spip_rubriques', 'spip_articles')),
+ *                 array('creer_base)),
+ *             '1.1.0' => array(
+ *                 array('sql_alter', 'TABLE spip_articles ADD INDEX truc (truc)'))
+ *         )
+ *         ```
  * @param string $table_meta
  *     Nom de la table meta (sans le prefixe spip_) dans laquelle trouver la meta $nom_meta_base_version
  * @return void
@@ -211,16 +233,19 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='m
 }
 
 /**
- * Relancer le hit de maj avant timeout
- * si pas de redirect fourni, on redirige vers exec=upgrade pour finir
- * ce qui doit etre une maj SPIP
+ * Relancer le hit de mise à jour avant timeout
+ * 
+ * si pas de redirect fourni, on redirige vers `exec=upgrade` pour finir
+ * ce qui doit être une mise à jour SPIP
+ *
+ * @use redirige_formulaire()
  * 
  * @param string $meta
  * @param string $table
  * @param string $redirect
  * @return void
  */
-function relance_maj($meta,$table,$redirect=''){
+function relance_maj($meta, $table, $redirect=''){
 	include_spip('inc/headers');
 	if (!$redirect){
 		// recuperer la valeur installee en cours
@@ -235,13 +260,13 @@ function relance_maj($meta,$table,$redirect=''){
 }
 
 /**
- * Initialiser la page pour l'affichage des progres de l'upgrade
- * uniquement si la page n'a pas deja ete initilalisee
+ * Initialiser la page pour l'affichage des progrès de l'upgrade
+ * uniquement si la page n'a pas déjà été initilalisée
  * 
  * @param string $installee
  * @param string $meta
  * @param string $table
- * @return
+ * @return void
  */
 function maj_debut_page($installee,$meta,$table){
 	static $done = false;
@@ -261,40 +286,52 @@ function maj_debut_page($installee,$meta,$table){
 	$done = true;
 }
 
+/**
+ * Durée en secondes pour relancer les scripts de mises à jour, x secondes
+ * avant que la durée d'exécution du script provoque un timeout
+ *
+ * @var int
+**/
 define('_UPGRADE_TIME_OUT', 20);
 
 /**
- * A partir des > 1.926 (i.e SPIP > 1.9.2), cette fonction gere les MAJ.
- * Se relancer soi-meme pour eviter l'interruption pendant une operation SQL
- * (qu'on espere pas trop longue chacune)
- * evidemment en ecrivant dans la meta a quel numero on en est.
+ * Gestion des mises à jour de SPIP et des plugins
+ * 
+ * À partir des versions > 1.926 (i.e SPIP > 1.9.2), cette fonction gere les MAJ.
+ * 
+ * Se relancer soi-même pour éviter l'interruption pendant une operation SQL
+ * (qu'on espère pas trop longue chacune) évidemment en ecrivant dans la meta
+ * à quel numero on en est.
  *
- * Cette fonction peut servir aux plugins qui doivent donner comme arguments:
- * 1. le numero de version courant (numero de version 1.2.3 ou entier)
- * 2. le numero de version a atteindre (numero de version 1.2.3 ou entier)
- * 3. le tableau des instructions de mise a jour a executer
- * Pour profiter du mecanisme de reprise sur interruption il faut de plus
+ * Cette fonction peut servir aux plugins qui doivent donner comme arguments :
+ * 
+ * 1. le numero de version courant (numéro de version 1.2.3 ou entier)
+ * 2. le numero de version à atteindre (numéro de version 1.2.3 ou entier)
+ * 3. le tableau des instructions de mise à jour à exécuter
+ *    Pour profiter du mécanisme de reprise sur interruption il faut de plus
  * 4. le nom de la meta permettant de retrouver tout ca
- * 5. la table des meta ou elle se trouve ($table_prefix . '_meta' par defaut)
- * (cf debut de fichier)
- * en cas d'echec, cette fonction retourne un tableau (etape,sous-etape)
- * sinon elle retourne un tableau vide
+ * 5. la table des meta ou elle se trouve (`$table_prefix . '_meta'` par défaut)
+ *    (cf début de fichier)
  *
- * les fonctions sql_xx appelees lors des maj sont supposees atomiques et ne sont pas relancees
- * en cas de timeout
- * mais les fonctions specifiques sont relancees jusqu'a ce qu'elles finissent
- * elles doivent donc s'assurer de progresser a chaque reprise
+ * les fonctions `sql_xx` appelées lors des mises à jour sont supposées
+ * atomiques et ne sont pas relancées en cas de timeout, mais les fonctions
+ * spécifiques sont relancées jusqu'à ce qu'elles finissent.
+ * Elles doivent donc s'assurer de progresser à chaque reprise.
  *
- * http://doc.spip.org/@maj_while
- *
- * @param  $installee
- * @param  $cible
- * @param  $maj
+ * @use maj_debut_page()
+ * @use serie_alter()
+ * @use relance_maj()
+ * 
+ * @param string $installee
+ * @param string $cible
+ * @param array $maj
  * @param string $meta
  * @param string $table
  * @param string $redirect
  * @param bool $debut_page
  * @return array
+ *    - tableau (étape, sous-étape) en cas d'échec,
+ *    - tableau vide sinon.
  */
 function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect='', $debut_page = false)
 {
@@ -305,9 +342,16 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect=
 	include_spip('inc/plugin'); // pour spip_version_compare
 	$n = 0;
 	$time = time();
-	// definir le timeout qui peut etre utilise dans les fonctions
-	// de maj qui durent trop longtemps
-	define('_TIME_OUT',$time+_UPGRADE_TIME_OUT);
+
+	/**
+	 * Définir le timeout qui peut-être utilisé dans les fonctions
+	 * de mises à jour qui durent trop longtemps
+	 *
+	 * À utiliser tel que : `if (time() >= _TIME_OUT)`
+	 *
+	 * @var int
+	 */
+	define('_TIME_OUT', $time + _UPGRADE_TIME_OUT);
 
 	reset($maj);
 	while (list($v,)=each($maj)) {
@@ -341,11 +385,12 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect=
 }
 
 /**
- * Appliquer une serie de chgt qui risquent de partir en timeout
- * (Alter cree une copie temporaire d'une table, c'est lourd)
+ * Appliquer une serie de changements qui risquent de partir en timeout
  *
- * http://doc.spip.org/@serie_alter
+ * Alter crée une copie temporaire d'une table, c'est lourd.
  *
+ * @use relance_maj()
+ * 
  * @param string $serie
  *   numero de version upgrade
  * @param array $q
@@ -402,17 +447,33 @@ function serie_alter($serie, $q = array(), $meta='', $table='meta', $redirect=''
 
 
 
-// La fonction a appeler dans le tableau global $maj 
-// quand on rajoute des types MIME. cf par exemple la 1.953
-
-// http://doc.spip.org/@upgrade_types_documents
+/**
+ * Mise à jour des types MIME de documents
+ *
+ * Fonction utilisé par les vieilles mises à jour de SPIP, à appeler dans
+ * le tableau `$maj` quand on rajoute des types MIME. Remplacé actuellement
+ * par le plugin Medias.
+ *
+ * @deprecated Utiliser directement `creer_base_types_doc()` du plugin Medias
+ * @example
+ *     ```
+ *     $GLOBALS['maj'][1953] = array(array('upgrade_types_documents'));
+ * 
+ *     ```
+ * @use creer_base_types_doc()
+ * 
+**/
 function upgrade_types_documents() {
 	if (include_spip('base/medias')
 	AND function_exists('creer_base_types_doc'))
 		creer_base_types_doc();
 }
 
-// http://doc.spip.org/@upgrade_test
+/**
+ * Vérifie qu'il est possible d'ajouter une colonne à une table SQL
+ *
+ * @return bool True si possible.
+**/
 function upgrade_test() {
 	sql_drop_table("spip_test", true);
 	sql_create("spip_test", array('a' => 'int'));
@@ -427,8 +488,17 @@ function upgrade_test() {
 	return $result;
 }
 
-// pour versions <= 1.926
-// http://doc.spip.org/@maj_version
+/**
+ * Mise à jour des versions de SPIP < 1.926
+ *
+ * @deprecated Utiliser `maj_plugin()` ou la globale `maj` pour le core.
+ * @see maj_plugin()
+ * @see maj_base()
+ * 
+ * @param float $version
+ * @param bool $test
+ * @return void
+**/
 function maj_version ($version, $test = true) {
 	if ($test) {
 		if ($version>=1.922)
@@ -445,8 +515,18 @@ function maj_version ($version, $test = true) {
 	}
 }
 
-// pour versions <= 1.926
-// http://doc.spip.org/@upgrade_vers
+/**
+ * Teste de mise à jour des versions de SPIP < 1.926
+ *
+ * @deprecated Utiliser `maj_plugin()` ou la globale `maj` pour le core.
+ * @see maj_plugin()
+ * @see maj_base()
+ * 
+ * @param float $version
+ * @param float $version_installee
+ * @param int $version_cible
+ * @return bool true si la mise à jour doit se réaliser
+**/
 function upgrade_vers($version, $version_installee, $version_cible = 0){
 	return ($version_installee<$version
 		AND (($version_cible>=$version) OR ($version_cible==0))
