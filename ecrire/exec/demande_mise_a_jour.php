@@ -10,10 +10,22 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+
+/**
+ * Gestion d'affichage de la page de demande de mise à jour de la base de données
+ *
+ * Chargé depuis ecrire/index.php lorsque les numéros de versions de base
+ * entre les fichiers et la meta ne sont pas identiques.
+ * 
+ * @package SPIP\Core\Exec
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-// http://doc.spip.org/@exec_demande_mise_a_jour_dist
+/**
+ * Demander à mettre à jour la base de données
+ */
 function exec_demande_mise_a_jour_dist() {
 	// on fait la verif du path avant tout,
 	// et l'installation des qu'on est dans la colonne principale

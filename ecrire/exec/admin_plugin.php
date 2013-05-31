@@ -24,8 +24,15 @@ include_spip('inc/layer');
 include_spip('inc/actions');
 include_spip('inc/securiser_action');
 
-// http://doc.spip.org/@exec_admin_plugin_dist
-function exec_admin_plugin_dist($retour='') {
+/**
+ * Affichage de la page de gestion des plugins
+ *
+ * Relance la page si des plugins ont été modifiés, sinon affiche la liste.
+ * 
+ * @use actualise_plugins_actifs()
+ * @param string $retour Inutilisé
+ */
+ function exec_admin_plugin_dist($retour='') {
 
 	if (!autoriser('configurer', '_plugins')) {
 		include_spip('inc/minipres');
@@ -46,6 +53,27 @@ function exec_admin_plugin_dist($retour='') {
 	}
 }
 
+/**
+ * Affichage spécifique de la page de gestion des plugins 
+ *
+ * Affiche la liste des plugins demandés et les erreurs éventuelles.
+ *
+ * @use plugin_donne_erreurs()
+ * @use liste_chemin_plugin()
+ * @use plugin_installes_meta()
+ * @use affiche_les_plugins_verrouilles()
+ * 
+ * @pipeline_appel affiche_gauche
+ * @pipeline_appel affiche_droit
+ * @pipeline_appel affiche_milieu
+ * 
+ * @param string $quoi
+ *     Quels plugins afficher ? actifs, ou autre
+ * @param string $erreur
+ *     Erreur éventuelle à afficher
+ * @param string $format
+ *     Format d'affichage (liste ou arborescence)
+**/
 function admin_plug_args($quoi, $erreur, $format)
 {
 	if (!$quoi) $quoi = 'actifs';
@@ -191,6 +219,16 @@ function admin_plug_args($quoi, $erreur, $format)
 	echo fin_gauche(), fin_page();
 }
 
+/**
+ * Crée le code HTML de la liste des plugins verrouillés
+ *
+ * @use liste_plugin_files()
+ * 
+ * @param array $actifs
+ *     Liste des plugins actifs
+ * @return string
+ *     Code HTML
+**/
 function affiche_les_plugins_verrouilles($actifs)
 {
 	if ((!$liste = liste_plugin_files(_DIR_PLUGINS_DIST))) return '';
@@ -211,9 +249,11 @@ function affiche_les_plugins_verrouilles($actifs)
 }
 
 /**
- * Afficher la liste des librairies presentes
+ * Crée le code HTML de la liste des librairies présentes
  *
- * @return <type>
+ * @use liste_librairies()
+ * 
+ * @return string Code HTML
  */
 function afficher_librairies(){
 
@@ -231,11 +271,10 @@ function afficher_librairies(){
 
 /**
  * Faire la liste des librairies disponibles
- * retourne un array ( nom de la lib => repertoire , ... )
- *
+ * 
  * @return array
+ *     Tableau (nom de la lib => repertoire , ...)
  */
-// http://doc.spip.org/@liste_librairies
 function liste_librairies() {
 	$libs = array();
 	foreach (array_reverse(creer_chemin()) as $d) {

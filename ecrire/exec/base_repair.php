@@ -10,18 +10,24 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion d'affichage de la page de réparation de la base de données
+ * 
+ * ## REMARQUE IMPORTANTE : SÉCURITÉ
+ * 
+ * Ce systeme de réparation doit pouvoir fonctionner même si
+ * la table spip_auteurs est en panne : index.php n'appelle donc pas
+ * inc_auth ; seule l'authentification FTP est exigée.
+ *
+ * @package SPIP\Core\Exec
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*
- * REMARQUE IMPORTANTE : SECURITE
- * Ce systeme de reparation doit pouvoir fonctionner meme si
- * la table spip_auteurs est en panne : index.php n'appelle donc pas
- * inc_auth ; seule l'authentification ftp est exigee
- *
- */
+
 
 /**
- * Reparer la base de donnees
+ * Réparer la base de données
  */
 function exec_base_repair_dist()
 {
