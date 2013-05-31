@@ -102,6 +102,44 @@ if(!jQuery.spip.load_handlers) {
 
 }
 
+/* jQuery.browser */
+jQuery.uaMatch = function( ua ) {
+	ua = ua.toLowerCase();
+
+	var match = /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+		/(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+		/(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
+		/(msie) ([\w.]+)/.exec( ua ) ||
+		ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
+		[];
+
+	return {
+		browser: match[ 1 ] || "",
+		version: match[ 2 ] || "0"
+	};
+};
+
+// Don't clobber any existing jQuery.browser in case it's different
+if ( !jQuery.browser ) {
+	matched = jQuery.uaMatch( navigator.userAgent );
+	browser = {};
+
+	if ( matched.browser ) {
+		browser[ matched.browser ] = true;
+		browser.version = matched.version;
+	}
+
+	// Chrome is Webkit, but Webkit is also Safari.
+	if ( browser.chrome ) {
+		browser.webkit = true;
+	} else if ( browser.webkit ) {
+		browser.safari = true;
+	}
+
+	jQuery.browser = browser;
+}
+
+
 /**
  * if not fully visible, scroll the page to position
  * target block at the top of page
@@ -271,8 +309,8 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					// a supprimer ?
 					jQuery.spip.updateReaderBuffer();
 				}
-			},
-			iframe: jQuery.browser.msie
+			}/*,
+			iframe: jQuery.browser.msie*/
 		})
 		// previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
 		// mais le marquer comme ayant l'ajax au cas ou on reinjecte du contenu ajax dedans
@@ -626,8 +664,8 @@ jQuery.fn.ajaxbloc = function() {
 				success: function(c){
 					jQuery.spip.on_ajax_loaded(blocfrag,c);
 					jQuery.spip.preloaded_urls = {}; // on vide le cache des urls car on a fait une action en bdd
-				},
-				iframe: jQuery.browser.msie
+				}/*,
+				iframe: jQuery.browser.msie*/
 			})
 			.addClass('bind-ajax') // previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
 			;
