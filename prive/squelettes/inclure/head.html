@@ -13,23 +13,24 @@ function test_accepte_ajax(){jQuery.ajax({"url":"[(#URL_ECRIRE{test_ajax,js=1}|r
 ]var ajax_image_searching = '<img src="#CHEMIN_IMAGE{searching.gif}" alt="" />';
 var stat = [(#CONFIG{activer_statistiques}|=={non}|?{0,1})];
 var confirm_changer_statut = '<:confirm_changer_statut|html2unicode|addslashes|unicode_to_javascript:>';
+var error_on_ajaxform='<:erreur_technique_ajaxform|html2unicode|addslashes|unicode_to_javascript:>';
 /*]]>*/</script>
 <meta name="viewport" content="width=device-width" />
-[<link rel="stylesheet" type="text/css" href="(#VAL{reset.css}|find_in_theme|url_absolue)" id="csspriveereset" />]
+[<link rel="stylesheet" type="text/css" href="(#VAL{reset.css}|find_in_theme|timestamp|url_absolue)" id="csspriveereset" />]
 #PIPELINE{header_prive_css,''}
 [<!--
 (#REM) CSS de secours en cas de non fonct de la suivante
--->][<link rel="stylesheet" type="text/css" href="(#VAL{style_prive_defaut.css}|find_in_theme|url_absolue)" id="csspriveedef" />]
+-->][<link rel="stylesheet" type="text/css" href="(#VAL{style_prive_defaut.css}|find_in_theme|timestamp|url_absolue)" id="csspriveedef" />]
 [<!--
 (#REM) spip-admin pour le debug
--->][<link rel="stylesheet" type="text/css" href="(#CHEMIN{spip_admin.css}|url_absolue)"/>]
+-->][<link rel="stylesheet" type="text/css" href="(#CHEMIN{spip_admin.css}|timestamp|url_absolue)"/>]
 [<!--
 (#REM) CSS espace prive : la vraie
 -->]<link rel="stylesheet" type="text/css" href="#URL_PAGE{style_prive.css,#ENV{paramcss}}" />
 [<!--
 (#REM) CSS optionelle minipres
 -->][(#ENV{minipres,''}|oui)
-[<link rel="stylesheet" type="text/css" href="(#CHEMIN{minipres.css}|url_absolue)" />]
+[<link rel="stylesheet" type="text/css" href="(#CHEMIN{minipres.css}|timestamp|url_absolue)" />]
 ][<!--
 (#REM) Favicon
 -->][<link rel="shortcut icon" href="(#CHEMIN{spip.ico}|url_absolue)" type="image/x-icon" />]
@@ -40,7 +41,7 @@ var confirm_changer_statut = '<:confirm_changer_statut|html2unicode|addslashes|u
 <link rel="alternate" type="application/rss+xml" title="<:info_breves_03|attribut_html:>" href="#URL_PAGE{backend-breves}" />
 ]
 
-[<script type="text/javascript" src="(#CHEMIN{prive/javascript/layer_old.js})"></script>]
-[<script type="text/javascript" src="(#CHEMIN{prive/javascript/layer.js})"></script>]
-[<script type="text/javascript" src="(#CHEMIN{prive/javascript/presentation.js})"></script>]
-[<script type="text/javascript" src="(#CHEMIN{prive/javascript/gadgets.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{prive/javascript/layer_old.js}|timestamp)"></script>]
+[<script type="text/javascript" src="(#CHEMIN{prive/javascript/layer.js}|timestamp)"></script>]
+[<script type="text/javascript" src="(#CHEMIN{prive/javascript/presentation.js}|timestamp)"></script>]
+[<script type="text/javascript" src="(#CHEMIN{prive/javascript/gadgets.js}|timestamp)"></script>]
