@@ -233,6 +233,7 @@ Eragiketa hori egin eta gero, gauza izango zara',
 	'envoi_via_le_site' => 'Gunearen bitartez egindako bidalpena',
 	'erreur' => 'Errorea',
 	'erreur_balise_non_fermee' => 'ez itxitako azken etiketa :',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Arazo tekniko batek @champs@ eremuaren grabaketa trabatu du.',
 	'erreur_technique_enregistrement_impossible' => 'Arazo tekniko batek grabaketa trabatu du.',
 	'erreur_texte' => 'errore',

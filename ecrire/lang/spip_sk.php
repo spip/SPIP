@@ -233,6 +233,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Poslané cez stránku',
 	'erreur' => 'Chyba',
 	'erreur_balise_non_fermee' => 'posledný tag nie je uzavretý:',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Technická chyba zabránila správnemu uloženiu poľa @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Uloženiu zabránila technická chyba.',
 	'erreur_texte' => 'Chyba (-y)',
@@ -663,7 +664,7 @@ a znova sa prihlásiť na stránku.
 	'titre_image_auteur_supprime' => 'Odstránený autor',
 	'titre_image_redacteur' => 'Redaktor bez prístupu',
 	'titre_image_redacteur_02' => 'Redaktor',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
+	'titre_image_selecteur' => 'Zobraziť zoznam',
 	'titre_image_visiteur' => 'Návštevník',
 	'titre_joindre_document' => 'PRIPOJIŤ DOKUMENT',
 	'titre_mots_cles' => 'KĽÚČOVÉ SLOVÁ',

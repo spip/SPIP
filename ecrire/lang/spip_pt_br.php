@@ -231,6 +231,7 @@ Verifique se as maiúsculas e minúsuculas destes diretórios coincidem exatamen
 	'envoi_via_le_site' => 'Envio pelo site',
 	'erreur' => 'Erro',
 	'erreur_balise_non_fermee' => 'Última tag em aberto:',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Um erro técnico impediu a gravação correta do campo @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Um erro técnico impediu a gravação.',
 	'erreur_texte' => 'erro(s)',
