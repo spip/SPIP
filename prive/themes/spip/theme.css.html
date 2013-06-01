@@ -172,9 +172,9 @@ h3.titrem {font-size: 1em;line-height: 125%;padding-top: 7px;padding-bottom: 7px
 #chemin {}
 #chemin .bouton_deplacer {font-size: 10px;color: ##GET{lien};-webkit-opacity:0.6;-moz-opacity:0.6;opacity:0.6;filter:alpha(opacity=60);}
 #chemin:hover .bouton_deplacer {-webkit-opacity:1.0;-moz-opacity:1.0;opacity:1.0;filter:alpha(opacity=100);}
-.box .inner {-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;position:relative;}
+.box, .box .inner  {-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
 .note {border: 0;}
-.notice {border: 0;}
+.box.error,.box.success,.box.notice {border: 0;}
 
 .box_mediabox .formulaire_spip.formulaire_recherche {position: relative;border: 0px;width: 170px;background-color: transparent;}
 .box_mediabox .formulaire_spip.formulaire_recherche input.text {background-color: #777;border: 0;border: 1px solid #999;font-size: 0.9em;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;padding-right: 22px;width: 100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;*behavior: url(http://localhost:8888/fraich30/plugins/css_imbriques/boxsizing.htc);position:relative;}
