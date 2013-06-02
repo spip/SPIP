@@ -8,15 +8,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activer_plugin' => 'Activer le plugin', # NEW
-	'affichage' => 'Affichage', # NEW
+	'activer_plugin' => 'Activar o plugin',
+	'affichage' => 'Mostrar', # MODIF
 	'aide_non_disponible' => 'Esta parte da ajuda em linha ainda não está disponível nesta língua ',
-	'annuler_recherche' => 'Annuler la recherche', # NEW
-	'auteur' => 'Auteur :', # NEW
+	'annuler_recherche' => 'Cancelar a pesquisa',
+	'auteur' => 'Autor',
 	'avis_acces_interdit' => 'Accesso proibido ',
 	'avis_article_modifie' => 'Atenção, @nom_auteur_modif@  trabalhou neste artigo há @date_diff@ minutes',
 	'avis_aucun_resultat' => 'Nenhum resultado ',
-	'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
+	'avis_base_inaccessible' => 'Impossible de se conectar à base de dados @base@.', # MODIF
 	'avis_chemin_invalide_1' => 'O caminho que escolheu ',
 	'avis_chemin_invalide_2' => 'não parece válido. Favor volte à página anterior e verifique as informações fornecidas. ',
 	'avis_connexion_echec_1' => 'A ligação ao servidor  SQL falhou.', # MODIF
@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_envoi_message_02' => 'MANDAR UMA MENSAGEM',
 	'bouton_envoyer_message' => 'Mensagem definitiva: mandar',
 	'bouton_fermer' => 'Fermer', # NEW
-	'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
+	'bouton_mettre_a_jour_base' => 'Actualizar a base de dados',
 	'bouton_modifier' => 'Modificar',
 	'bouton_pense_bete' => 'MEMORANDO DE USO PESSOAL',
 	'bouton_radio_activer_messagerie' => 'Activar a caixa do correio interno',
@@ -100,8 +100,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cache_mode_non_compresse' => 'Os ficheiros da cache são gravados em modo não comprimido.',
 	'cache_modifiable_webmestre' => 'Este parâmetro é modificável pelo webmaster do site.',
 	'calendrier_synchro' => 'Se utilizar um software de agenda compatível <b>iCal</b>, pode sincronizá-lo com as informações deste sítio.',
-	'config_activer_champs' => 'Activer les champs suivants', # NEW
-	'config_choix_base_sup' => 'indiquer une base sur ce serveur', # NEW
+	'config_activer_champs' => 'Activar os campos seguintes',
+	'config_choix_base_sup' => 'Escolher uma base de dados neste servidor',
 	'config_erreur_base_sup' => 'SPIP n\'a pas accès à la liste des bases accessibles', # NEW
 	'config_info_base_sup' => 'Si vous avez d\'autres bases de données à interroger à travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les déclarer. Si vous laissez certains champs vides, les identifiants de connexion à la base principale seront utilisés.', # NEW
 	'config_info_base_sup_disponibles' => 'Bases supplémentaires déjà interrogeables:', # NEW
@@ -307,7 +307,7 @@ ou da rede',
 	'info_classement_2' => '<sup>e</sup> no @liste@',
 	'info_code_acces' => 'Não se esqueça dos seus próprios códigos de acesso !',
 	'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
+	'info_compresseur_gzip' => '<b>N. B. :</b> Recomenda-se que verifique primeiro se o seu fornecedor comprime sistematicamente linguagem PHP.  Para isso, pode usar um serviço como @testgzip@',
 	'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 	'info_config_suivi' => 'Se este endereço corresponder a uma mailing-list, pode indicar, a seguir, o endereço no qual os participantes no sítio podem inscrever-se. Este endereço pode ser uma URL (por exemplo a página de inscrição na lista pela Web), ou um endereço email com um assunto específico (por exemplo: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => ' Pode assinar a  mailing-list deste sítio. Receberá então, por correio electrónico, os anúncios de artigos e de notícias propostos para publicação.',
@@ -503,7 +503,7 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 	'info_question_utilisation_moteur_recherche' => 'Deseja utilizar o motor integrado de pesquisa a SPIP ?
 (desactivá-lo acelera o funcionamento do sistema)',
 	'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
+	'info_qui_edite' => '@nom_auteur_modif@ modificou o conteúdo há @date_diff@ minutos',
 	'info_racine_site' => 'Raiz do sítio',
 	'info_recharger_page' => 'Favor voltar a carregar esta página daqui a pouco.',
 	'info_recherche_auteur_a_affiner' => 'Demasiados resultados para "@cherche_auteur@" ; favor afinar a pesquisa.',
@@ -788,7 +788,7 @@ numa cor que indica o seu estado:',
 	'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
 	'plugins_actif_un' => 'Un plugin activé.', # NEW
 	'plugins_actifs' => '@count@ plugins activés.', # NEW
-	'plugins_actifs_liste' => 'Plugins actifs', # MODIF
+	'plugins_actifs_liste' => 'Activados',
 	'plugins_compte' => '@count@ plugins', # NEW
 	'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 	'plugins_disponibles' => '@count@ plugins disponibles.', # NEW
