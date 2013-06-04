@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activer_plugin' => 'Activar o plugin', # MODIF
+	'activer_plugin' => 'Activar o plugin',
 	'affichage' => 'Mostrar', # MODIF
 	'aide_non_disponible' => 'Esta parte da ajuda em linha ainda não está disponível nesta língua ',
 	'annuler_recherche' => 'Cancelar a pesquisa',
@@ -103,7 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_activer_champs' => 'Activar os campos seguintes',
 	'config_choix_base_sup' => 'Escolher uma base de dados neste servidor',
 	'config_erreur_base_sup' => 'SPIP não tem acesso à lista de bases de dados disponíveis', # MODIF
-	'config_info_base_sup' => 'Si vous avez d\'autres bases de données à interroger à travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les déclarer. Si vous laissez certains champs vides, les identifiants de connexion à la base principale seront utilisés.', # NEW
+	'config_info_base_sup' => 'Se precisar de indagar outras bases de dados usando SPIP, quer seja neste servidor SQL ou noutro, use este formulário para as declarar. Se deixar alguns campos por preencher, os identificadores de conexão à base de dados principal serão usados.', # MODIF
 	'config_info_base_sup_disponibles' => 'Bases supplémentaires déjà interrogeables:', # NEW
 	'config_info_enregistree' => 'A nova configuração foi guardada', # MODIF
 	'config_info_logos' => 'Chaque élément du site peut avoir un logo, ainsi qu\'un « logo de survol »', # NEW
@@ -113,12 +113,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_info_logos_utiliser_survol_non' => 'Ne pas utiliser les logos de survol', # NEW
 	'config_info_redirection' => 'En activant cette option, vous pourrez créer des articles virtuels, simples références d\'articles publiés sur d\'autres sites ou hors de SPIP.', # NEW
 	'config_redirection' => 'Artigos virtuais', # MODIF
-	'config_titre_base_sup' => 'Déclaration d\'une base supplémentaire', # NEW
+	'config_titre_base_sup' => 'Declaração de uma base de dados suplementar', # MODIF
 	'config_titre_base_sup_choix' => 'Escolher uma base de dados suplementar', # MODIF
 	'connexion_ldap' => 'Conexão:', # MODIF
 	'copier_en_local' => 'Copier en local', # NEW
-	'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
-	'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
+	'creer_et_associer_un_auteur' => 'Criar e associar um autor', # MODIF
+	'creer_et_associer_une_rubrique' => 'Criar e associar uma rubrica', # MODIF
 
 	// D
 	'date_mot_heures' => 'horas',
@@ -127,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ecran_securite' => ' + écran de segurança @version@', # MODIF
 	'email' => 'email',
 	'email_2' => 'email :',
-	'en_savoir_plus' => 'En savoir plus', # NEW
+	'en_savoir_plus' => 'Para saber mais', # MODIF
 	'entree_adresse_annuaire' => 'Endereço do anuário',
 	'entree_adresse_email' => 'O seu endereço email',
 	'entree_adresse_email_2' => 'Endereço electrónico', # MODIF
@@ -139,7 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_cle_pgp_2' => 'Chave PGP', # MODIF
 	'entree_contenu_rubrique' => '(Conteúdo da rubrica em poucas palavras.)',
 	'entree_identifiants_connexion' => 'Os seus identificadores de ligação',
-	'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
+	'entree_identifiants_connexion_2' => 'Identifcadores de conexão', # MODIF
 	'entree_informations_connexion_ldap' => 'Favor pôr neste formulário as informações de ligação ao seu anuário LDAP.
 Essas informações devem poder ser fornecidas pelo administrador do sistema,
 ou da rede',
@@ -167,20 +167,20 @@ ou da rede',
 	'entree_titre_obligatoire' => '<b>Título</b> [Obrigatório]<br />', # MODIF
 	'entree_url' => 'O endereço (URL) do seu sítio',
 	'entree_url_2' => 'Adresse (URL) du site', # NEW
-	'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
-	'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
-	'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
-	'erreur_plugin_fichier_absent' => 'Fichier absent', # NEW
-	'erreur_plugin_fichier_def_absent' => 'Fichier de définition absent', # NEW
-	'erreur_plugin_nom_fonction_interdit' => 'Nom de fonction interdit', # NEW
-	'erreur_plugin_nom_manquant' => 'Nom du plugin manquant', # NEW
+	'erreur_connect_deja_existant' => 'Já existe um servidor com esse nome', # MODIF
+	'erreur_nom_connect_incorrect' => 'O nome de servidor não é autorizado', # MODIF
+	'erreur_plugin_desinstalation_echouee' => 'A desinstalação do plugin falhou. No entanto, pode desactivá-lo.', # MODIF
+	'erreur_plugin_fichier_absent' => 'Ficheiro inexistente', # MODIF
+	'erreur_plugin_fichier_def_absent' => 'Ficheiro de definição inexistente', # MODIF
+	'erreur_plugin_nom_fonction_interdit' => 'Nome de função interdito', # MODIF
+	'erreur_plugin_nom_manquant' => 'Nome de plugin inexistente', # MODIF
 	'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non défini', # NEW
-	'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; manquant dans le fichier de définition', # NEW
-	'erreur_plugin_version_manquant' => 'Version du plugin manquante', # NEW
+	'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; inexistente no ficheiro de definição', # MODIF
+	'erreur_plugin_version_manquant' => 'Versão de plugin inexistente', # MODIF
 
 	// H
-	'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
-	'htaccess_inoperant' => 'htaccess inopérant', # NEW
+	'htaccess_a_simuler' => 'Atenção: a configuração do servidor HTTP ignora @htaccess@. Para garantir uma boa segurança, deve alterar esta configuração. Alternativamente, deve assegurar que as constantes @constantes@ (dfiníveis no ficheiro mes_options.php) têm como valores diretórios fora de @document_root@.', # MODIF
+	'htaccess_inoperant' => 'htaccess inoperacional', # MODIF
 
 	// I
 	'ical_info1' => 'Esta página apresenta muitos métodos para permanecer em contacto com a vida deste sítio.',
@@ -195,31 +195,31 @@ ou da rede',
 	'ical_titre_js' => 'Javascript',
 	'ical_titre_mailing' => 'Mailing-list',
 	'ical_titre_rss' => 'Ficheiros « backend »', # MODIF
-	'icone_accueil' => 'Accueil', # NEW
+	'icone_accueil' => 'Início', # MODIF
 	'icone_activer_cookie' => 'Activar o cookie de correspondência',
-	'icone_activite' => 'Activité', # NEW
-	'icone_admin_plugin' => 'Gestion des plugins', # NEW
-	'icone_administration' => 'Maintenance', # NEW
+	'icone_activite' => 'Actividade', # MODIF
+	'icone_admin_plugin' => 'Gerir plugins', # MODIF
+	'icone_administration' => 'Manutenção', # MODIF
 	'icone_afficher_auteurs' => 'Exibir os autores',
 	'icone_afficher_visiteurs' => 'Exibir os visitantes',
 	'icone_arret_discussion' => 'Não voltar a participar nesta discussão',
 	'icone_calendrier' => 'Calendário',
-	'icone_configuration' => 'Configuration', # NEW
+	'icone_configuration' => 'Configuração', # MODIF
 	'icone_creer_auteur' => 'Criar um novo autor e associá-lo a este artigo',
 	'icone_creer_mot_cle' => 'Criar uma nova palavra-chave e vinculá-la a este artigo',
 	'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
 	'icone_creer_mot_cle_site' => 'Créer un nouveau mot-clé et le lier à ce site', # NEW
 	'icone_creer_rubrique_2' => 'Criar uma nova rubrica',
-	'icone_edition' => 'Édition', # NEW
+	'icone_edition' => 'Editar', # MODIF
 	'icone_envoyer_message' => 'Enviar esta mensagem',
-	'icone_ma_langue' => 'Ma langue', # NEW
+	'icone_ma_langue' => 'Idioma', # MODIF
 	'icone_mes_infos' => 'Mes informations', # NEW
-	'icone_mes_preferences' => 'Mes préférences', # NEW
+	'icone_mes_preferences' => 'Preferências', # MODIF
 	'icone_modifier_article' => 'Modificar este artigo',
 	'icone_modifier_message' => 'Modificar esta mensagem',
 	'icone_modifier_rubrique' => 'Modificar esta rubrica',
 	'icone_publication' => 'Publication', # NEW
-	'icone_relancer_signataire' => 'Relancer le signataire', # NEW
+	'icone_relancer_signataire' => 'Contactar o signatário novamente', # MODIF
 	'icone_retour' => 'voltar',
 	'icone_retour_article' => 'Voltar ao artigo',
 	'icone_squelette' => 'Squelettes', # NEW
