@@ -104,7 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_choix_base_sup' => 'Escolher uma base de dados neste servidor',
 	'config_erreur_base_sup' => 'SPIP não tem acesso à lista de bases de dados disponíveis', # MODIF
 	'config_info_base_sup' => 'Se precisar de indagar outras bases de dados usando SPIP, quer seja neste servidor SQL ou noutro, use este formulário para as declarar. Se deixar alguns campos por preencher, os identificadores de conexão à base de dados principal serão usados.', # MODIF
-	'config_info_base_sup_disponibles' => 'Bases de dados adicionais que se podem interrogar:', # MODIF
+	'config_info_base_sup_disponibles' => 'Bases de dados adicionais que se podem consultar:',
 	'config_info_enregistree' => 'A nova configuração foi guardada', # MODIF
 	'config_info_logos' => 'Cada elemento do site pode ter o seu próprio logo assim como um « mover o rato sobre o logo »', # MODIF
 	'config_info_logos_utiliser' => 'Utilizar os logos', # MODIF
@@ -207,8 +207,8 @@ ou da rede',
 	'icone_configuration' => 'Configuração', # MODIF
 	'icone_creer_auteur' => 'Criar um novo autor e associá-lo a este artigo',
 	'icone_creer_mot_cle' => 'Criar uma nova palavra-chave e vinculá-la a este artigo',
-	'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
-	'icone_creer_mot_cle_site' => 'Créer un nouveau mot-clé et le lier à ce site', # NEW
+	'icone_creer_mot_cle_rubrique' => 'Criar uma nova palavra-chave e ligá-la a esta rubrica',
+	'icone_creer_mot_cle_site' => 'Criar uma nova palavra-chave e ligá-la a este site',
 	'icone_creer_rubrique_2' => 'Criar uma nova rubrica',
 	'icone_edition' => 'Editar', # MODIF
 	'icone_envoyer_message' => 'Enviar esta mensagem',
@@ -218,7 +218,7 @@ ou da rede',
 	'icone_modifier_article' => 'Modificar este artigo',
 	'icone_modifier_message' => 'Modificar esta mensagem',
 	'icone_modifier_rubrique' => 'Modificar esta rubrica',
-	'icone_publication' => 'Publication', # NEW
+	'icone_publication' => 'Publicação',
 	'icone_relancer_signataire' => 'Contactar o signatário novamente', # MODIF
 	'icone_retour' => 'voltar',
 	'icone_retour_article' => 'Voltar ao artigo',
@@ -229,7 +229,7 @@ ou da rede',
 	'icone_supprimer_signature' => 'Suprimir esta assinatura',
 	'icone_valider_signature' => 'Validar esta assinatura',
 	'image_administrer_rubrique' => 'Pode administrar esta rubrica',
-	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+	'impossible_modifier_login_auteur' => 'Impossível alterar o login.',
 	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 	'info_1_article' => '1 artigo',
 	'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -1021,7 +1021,7 @@ ao SPIP pesquisar igualmente no texto dos
 	'titre_connexion_ldap' => 'Opções: <b>Sua ligação LDAP</b>',
 	'titre_groupe_mots' => 'GRUPO DE PALAVRAS :',
 	'titre_identite_site' => 'Identité du site', # NEW
-	'titre_langue_article' => 'LÍNGUA DO ARTIGO ', # MODIF
+	'titre_langue_article' => 'IDIOMA DO ARTIGO ',
 	'titre_langue_rubrique' => 'LÍNGUA DA RUBRICA', # MODIF
 	'titre_langue_trad_article' => 'LÍNGUA E TRADUÇÕES DO ARTIGO',
 	'titre_les_articles' => 'OS ARTIGOS',
@@ -1057,10 +1057,10 @@ ao SPIP pesquisar igualmente no texto dos
 	'tls_ldap' => 'Transport Layer Security :', # NEW
 	'trad_article_inexistant' => 'Não há artigo com este número',
 	'trad_article_traduction' => 'Todas as versões deste artigo :',
-	'trad_deja_traduit' => 'Este artigo é já uma tradução do presente artigo.', # MODIF
-	'trad_delier' => 'Não voltar a ligar este artigo a estas traduções', # MODIF
+	'trad_deja_traduit' => 'Erro: impossível ligar este artigo ao número solicitado.',
+	'trad_delier' => 'Não voltar a ligar este artigo a estas traduções',
 	'trad_lier' => 'Este artigo é uma tradução do artigo número :',
-	'trad_new' => 'Escrever uma nova tradução deste artigo', # MODIF
+	'trad_new' => 'Escrever uma nova tradução deste artigo',
 
 	// U
 	'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
