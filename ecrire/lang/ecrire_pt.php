@@ -213,7 +213,7 @@ ou da rede',
 	'icone_edition' => 'Editar', # MODIF
 	'icone_envoyer_message' => 'Enviar esta mensagem',
 	'icone_ma_langue' => 'Idioma', # MODIF
-	'icone_mes_infos' => 'Mes informations', # NEW
+	'icone_mes_infos' => 'Minhas informações',
 	'icone_mes_preferences' => 'Preferências', # MODIF
 	'icone_modifier_article' => 'Modificar este artigo',
 	'icone_modifier_message' => 'Modificar esta mensagem',
@@ -222,7 +222,7 @@ ou da rede',
 	'icone_relancer_signataire' => 'Contactar o signatário novamente', # MODIF
 	'icone_retour' => 'voltar',
 	'icone_retour_article' => 'Voltar ao artigo',
-	'icone_squelette' => 'Squelettes', # NEW
+	'icone_squelette' => 'Modelos',
 	'icone_suivi_publication' => 'Suivi de la publication', # NEW
 	'icone_supprimer_cookie' => 'Suprimir o cookie de correspondência',
 	'icone_supprimer_rubrique' => 'Suprimir esta rubrica',
@@ -230,24 +230,24 @@ ou da rede',
 	'icone_valider_signature' => 'Validar esta assinatura',
 	'image_administrer_rubrique' => 'Pode administrar esta rubrica',
 	'impossible_modifier_login_auteur' => 'Impossível alterar o login.',
-	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
+	'impossible_modifier_pass_auteur' => 'Impossível alterar a palavra-passe.',
 	'info_1_article' => '1 artigo',
 	'info_1_article_syndique' => '1 article syndiqué', # NEW
-	'info_1_auteur' => '1 auteur', # NEW
-	'info_1_message' => '1 message', # NEW
-	'info_1_mot_cle' => '1 mot-clé', # NEW
-	'info_1_rubrique' => '1 rubrique', # NEW
+	'info_1_auteur' => '1 autor',
+	'info_1_message' => '1 mensagem',
+	'info_1_mot_cle' => '1 palavra-chave',
+	'info_1_rubrique' => '1 rubrica',
 	'info_1_site' => '1 sítio',
-	'info_1_visiteur' => '1 visiteur', # NEW
+	'info_1_visiteur' => '1 visitante',
 	'info_activer_cookie' => 'Pode activar um <b>cookie de correspondência</b>, o que lhe
  permitirá passar facilmente do sítio público ao sítio privado ',
 	'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 	'info_admin_gere_rubriques' => 'Este administrador gere as seguintes rubricas:',
 	'info_admin_gere_toutes_rubriques' => 'Este administrador gere <b>todas as rubricas</b>.', # MODIF
-	'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
+	'info_admin_gere_toutes_rubriques_2' => 'Eu administro <b>todas as rubricas</b>',
 	'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 	'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
-	'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
+	'info_admin_webmestre' => 'Este administrador é <b>webmestre</b>',
 	'info_administrateur' => 'Administrador',
 	'info_administrateur_1' => 'Administrador',
 	'info_administrateur_2' => 'do sítio (<i>utilize com precaução</i>)',
@@ -257,7 +257,7 @@ ou da rede',
 	'info_administrer_rubrique' => 'Pode administrar esta rubrica',
 	'info_adresse' => 'ao endereço :',
 	'info_adresse_url' => 'Endereço (URL) do sítio público',
-	'info_afficher_par_nb' => 'Afficher par', # NEW
+	'info_afficher_par_nb' => 'Mostrar ',
 	'info_afficher_visites' => 'Exibir as visitas para :',
 	'info_aide_en_ligne' => 'Ajuda em linha SPIP',
 	'info_ajout_image' => 'Quando acrescentar imagens como documentos ligados a um artigo,
@@ -275,7 +275,7 @@ ou da rede',
 	'info_articles_2' => 'Artigos',
 	'info_articles_auteur' => 'Os artigos deste autor',
 	'info_articles_miens' => 'Mes articles', # NEW
-	'info_articles_tous' => 'Tous les articles', # NEW
+	'info_articles_tous' => 'Todos os artigos',
 	'info_articles_trouves' => 'Artigos encontrados',
 	'info_articles_trouves_dans_texte' => 'Artigos encontrados (no texto)',
 	'info_attente_validation' => 'Os seus artigos à espera de validação',
@@ -295,7 +295,7 @@ ou da rede',
 	'info_avertissement' => 'Aviso',
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'A estrutura da sua base de dados está instalada',
-	'info_bio' => 'Biographie', # NEW
+	'info_bio' => 'Biografia',
 	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Cabeçalho',
 	'info_chapeau_2' => 'Cabeçalho :',
@@ -1022,7 +1022,7 @@ ao SPIP pesquisar igualmente no texto dos
 	'titre_groupe_mots' => 'GRUPO DE PALAVRAS :',
 	'titre_identite_site' => 'Identité du site', # NEW
 	'titre_langue_article' => 'IDIOMA DO ARTIGO ',
-	'titre_langue_rubrique' => 'LÍNGUA DA RUBRICA', # MODIF
+	'titre_langue_rubrique' => 'Idioma da rubrica',
 	'titre_langue_trad_article' => 'LÍNGUA E TRADUÇÕES DO ARTIGO',
 	'titre_les_articles' => 'OS ARTIGOS',
 	'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW
