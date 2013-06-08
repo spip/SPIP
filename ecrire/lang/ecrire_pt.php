@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_acces_interdit' => 'Accesso proibido ',
 	'avis_article_modifie' => 'Atenção, @nom_auteur_modif@  trabalhou neste artigo há @date_diff@ minutes',
 	'avis_aucun_resultat' => 'Nenhum resultado ',
-	'avis_base_inaccessible' => 'Impossible de se conectar à base de dados @base@.', # MODIF
+	'avis_base_inaccessible' => 'Impossível conectar-se à base de dados @base@.',
 	'avis_chemin_invalide_1' => 'O caminho que escolheu ',
 	'avis_chemin_invalide_2' => 'não parece válido. Favor volte à página anterior e verifique as informações fornecidas. ',
 	'avis_connexion_echec_1' => 'A ligação ao servidor  SQL falhou.', # MODIF
@@ -245,7 +245,7 @@ ou da rede',
 	'info_admin_gere_rubriques' => 'Este administrador gere as seguintes rubricas:',
 	'info_admin_gere_toutes_rubriques' => 'Este administrador gere <b>todas as rubricas</b>.', # MODIF
 	'info_admin_gere_toutes_rubriques_2' => 'Eu administro <b>todas as rubricas</b>',
-	'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
+	'info_admin_je_suis_webmestre' => 'Eu sou <b>webmaster</b>',
 	'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
 	'info_admin_webmestre' => 'Este administrador é <b>webmestre</b>',
 	'info_administrateur' => 'Administrador',
@@ -274,7 +274,7 @@ ou da rede',
 	'info_articles_02' => 'artigos',
 	'info_articles_2' => 'Artigos',
 	'info_articles_auteur' => 'Os artigos deste autor',
-	'info_articles_miens' => 'Mes articles', # NEW
+	'info_articles_miens' => 'Os meus artigos',
 	'info_articles_tous' => 'Todos os artigos',
 	'info_articles_trouves' => 'Artigos encontrados',
 	'info_articles_trouves_dans_texte' => 'Artigos encontrados (no texto)',
