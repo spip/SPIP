@@ -167,7 +167,7 @@ ou da rede',
 	'entree_titre_obligatoire' => '<b>Título</b> [Obrigatório]<br />', # MODIF
 	'entree_url' => 'O endereço (URL) do seu sítio',
 	'entree_url_2' => 'Endereço (URL) do site', # MODIF
-	'erreur_connect_deja_existant' => 'Já existe um servidor com esse nome', # MODIF
+	'erreur_connect_deja_existant' => 'Já existe um servidor com esse nome',
 	'erreur_nom_connect_incorrect' => 'O nome de servidor não é autorizado', # MODIF
 	'erreur_plugin_desinstalation_echouee' => 'A desinstalação do plugin falhou. No entanto, pode desactivá-lo.', # MODIF
 	'erreur_plugin_fichier_absent' => 'Ficheiro inexistente', # MODIF
@@ -281,7 +281,7 @@ ou da rede',
 	'info_attente_validation' => 'Os seus artigos à espera de validação',
 	'info_aucun_article' => 'Aucun article', # NEW
 	'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
-	'info_aucun_auteur' => 'Aucun auteur', # NEW
+	'info_aucun_auteur' => 'Nenhum autor', # MODIF
 	'info_aucun_message' => 'Aucun message', # NEW
 	'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 	'info_aucun_site' => 'Aucun site', # NEW
@@ -314,7 +314,7 @@ ou da rede',
 	'info_confirmer_passe' => 'Confirmar esta nova palavra-passe',
 	'info_conflit_edition_avis_non_sauvegarde' => 'Attention, les champs suivants ont été modifiés par ailleurs. Vos modifications sur ces champs n\'ont donc pas été enregistrées.', # NEW
 	'info_conflit_edition_differences' => 'Différences :', # NEW
-	'info_conflit_edition_version_enregistree' => 'La version enregistrée :', # NEW
+	'info_conflit_edition_version_enregistree' => 'Versão guardada :',
 	'info_conflit_edition_votre_version' => 'Votre version :', # NEW
 	'info_connexion_base' => 'Segunda etapa: <b>Teste de ligação à base</b>', # MODIF
 	'info_connexion_base_donnee' => 'Connexion à votre base de données', # NEW
