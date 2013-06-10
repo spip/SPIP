@@ -306,6 +306,11 @@ function maj_liens($pivot,$l='') {
 		if (isset($champs[$primary])) unset($champs[$primary]);
 
 		$champs = array_keys($champs);
+		// ne garder que les champs qui existent sur la table destination
+		if ($desc_cible = $trouver_table($liens)){
+			$champs = array_intersect($champs,array_keys($desc_cible['field']));
+		}
+
 		$champs[] = "$primary as id_objet";
 		$champs[] = "'$objet' as objet";
 		$champs = implode(', ',$champs);
