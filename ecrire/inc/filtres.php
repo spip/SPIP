@@ -512,6 +512,29 @@ function liens_ouvrants ($texte) {
 		"<a \\1 target=\"_blank\">", $texte);
 }
 
+/**
+ * Ajouter un attribut rel="nofollow" sur tous les liens d'un texte
+ * @param string $texte
+ * @return string
+ */
+function liens_nofollow($texte) {
+	if (stripos($texte,"<a")===false)
+		return $texte;
+
+	if (preg_match_all(",<a\b[^>]*>,UimsS",$texte, $regs, PREG_PATTERN_ORDER)){
+		foreach($regs[0] as $a){
+			$rel = extraire_attribut($a,"rel");
+			if (strpos($rel,"nofollow")===false){
+				$rel = "nofollow" . ($rel?" $rel":"");
+				$anofollow = inserer_attribut($a,"rel",$rel);
+				$texte = str_replace($a,$anofollow,$texte);
+			}
+		}
+	}
+
+	return $texte;
+}
+
 // Transformer les sauts de paragraphe en simples passages a la ligne
 // http://doc.spip.org/@PtoBR
 function PtoBR($texte){
