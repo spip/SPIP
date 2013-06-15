@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_plugin' => 'Activar o plugin',
-	'affichage' => 'Mostrar', # MODIF
+	'affichage' => 'Mostrar',
 	'aide_non_disponible' => 'Esta parte da ajuda em linha ainda não está disponível nesta língua ',
 	'annuler_recherche' => 'Cancelar a pesquisa',
 	'auteur' => 'Autor',
@@ -19,16 +19,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_base_inaccessible' => 'Impossível conectar-se à base de dados @base@.',
 	'avis_chemin_invalide_1' => 'O caminho que escolheu ',
 	'avis_chemin_invalide_2' => 'não parece válido. Favor volte à página anterior e verifique as informações fornecidas. ',
-	'avis_connexion_echec_1' => 'A ligação ao servidor  SQL falhou.', # MODIF
+	'avis_connexion_echec_1' => 'A ligação ao servidor SQL falhou.',
 	'avis_connexion_echec_2' => 'Volte à página anterior e verifique as informações que forneceu ',
-	'avis_connexion_echec_3' => '<b>N.B.</b> Em diversos servidores, precisa <b>solicitar</b> a activação do seu acesso à base de dados SQL antes de poder utilizá-la. Se não consegue ligar-se, verifique se efectuou esse pedido.', # MODIF
+	'avis_connexion_echec_3' => '<b>N.B.</b> Em diversos servidores, precisa <b>solicitar</b> a activação do seu acesso à base de dados SQL antes de poder utilizá-la. Se não consegue ligar-se à sua base de dados, verifique se efectuou esse pedido.',
 	'avis_connexion_erreur_nom_base' => 'O nome da base de dados só pode conter letras, números e hífen.', # MODIF
 	'avis_connexion_ldap_echec_1' => 'A ligação ao servidor LDAP falhou',
 	'avis_connexion_ldap_echec_2' => 'Volte à página anterior e verifique as informações que forneceu ',
 	'avis_connexion_ldap_echec_3' => 'Alternativamente, não utilize o suporte LDAP para importar utilizadores.',
 	'avis_deplacement_rubrique' => 'Atenção ! Esta rubrica contém @contient_breves@ informação@scb@ : se a deslocar, favor confirmá-lo nesta caixa',
 	'avis_destinataire_obligatoire' => 'Deve indicar um destinatário antes de mandar esta mensagem.',
-	'avis_erreur_connexion_mysql' => 'Erro de ligação SQL', # MODIF
+	'avis_erreur_connexion_mysql' => 'Erro de ligação SQL',
 	'avis_erreur_version_archive' => '<b>Atenção! O ficheiro @archive@ corresponde a
     uma versão de SPIP diferente da que
     tem instalada.</b> Enfrentará grandes
@@ -107,8 +107,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_info_base_sup_disponibles' => 'Bases de dados adicionais que se podem consultar:',
 	'config_info_enregistree' => 'A nova configuração foi guardada', # MODIF
 	'config_info_logos' => 'Cada elemento do site pode ter o seu próprio logo assim como um « mover o rato sobre o logo »', # MODIF
-	'config_info_logos_utiliser' => 'Utilizar os logos', # MODIF
-	'config_info_logos_utiliser_non' => 'Não utilizar os logos', # MODIF
+	'config_info_logos_utiliser' => 'Utilizar os logos',
+	'config_info_logos_utiliser_non' => 'Não utilizar os logos',
 	'config_info_logos_utiliser_survol' => 'Usar os logos de "mover o rato sobre o logo"', # MODIF
 	'config_info_logos_utiliser_survol_non' => 'Não usar os logos de "mover o rato sobre o logo"', # MODIF
 	'config_info_redirection' => 'Activando esta opção, pode criar artigos virtuais, que são referências simples a artigos publicados noutros sites, não necessariamente usando SPIP.', # MODIF
