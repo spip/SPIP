@@ -232,7 +232,7 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 	'envoi_via_le_site' => 'Envío a través del sitio',
 	'erreur' => 'Error',
 	'erreur_balise_non_fermee' => 'última baliza no cerrada:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
+	'erreur_technique_ajaxform' => '¡Vaya! Un error inesperado ha impedido enviar el formulario. Puede intentarlo de nuevo. ',
 	'erreur_technique_enregistrement_champs' => 'Un erreor técnico impidió guardar correctamente el campo @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Un erreor técnico impidió guardar los datos.',
 	'erreur_texte' => 'error(es)',
@@ -646,7 +646,7 @@ Intenta',
 	'titre_image_auteur_supprime' => 'Autor suprimido',
 	'titre_image_redacteur' => 'Redactor o redactora sin acceso',
 	'titre_image_redacteur_02' => 'Redactor o redactora',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
+	'titre_image_selecteur' => 'Mostrar la lista',
 	'titre_image_visiteur' => 'Visitante',
 	'titre_joindre_document' => 'Añadir un documento',
 	'titre_mots_cles' => 'Palabras clave',
