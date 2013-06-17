@@ -792,7 +792,8 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 
 	// S
 	'sans_heure' => 'ordurik gabe',
-	'statut_admin_restreint' => '(admin mugatua)',
+	'statut_admin_restreint' => '(admin mugatua)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW

@@ -800,7 +800,8 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 
 	// S
 	'sans_heure' => 'hep eur',
-	'statut_admin_restreint' => '(merour strishaet)',
+	'statut_admin_restreint' => '(merour strishaet)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Lodenn labour CRON @function@ (ASAP)',

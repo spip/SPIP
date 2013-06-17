@@ -819,7 +819,8 @@ con una color que indica el estáu:',
 
 	// S
 	'sans_heure' => 'ensin hora',
-	'statut_admin_restreint' => '(almin llendau)',
+	'statut_admin_restreint' => '(almin llendau)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW

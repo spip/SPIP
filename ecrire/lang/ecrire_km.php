@@ -787,7 +787,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sans_heure' => 'sans heure', # NEW
-	'statut_admin_restreint' => '(​អ្នកគ្រប់គ្រង​ប្រព័ន្ធ​ដែល​ត្រូវ​ហាមឃាត់​)',
+	'statut_admin_restreint' => '(​អ្នកគ្រប់គ្រង​ប្រព័ន្ធ​ដែល​ត្រូវ​ហាមឃាត់​)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW

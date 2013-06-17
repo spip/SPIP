@@ -788,7 +788,8 @@ amb un color que indica el seu estat:',
 
 	// S
 	'sans_heure' => 'sense hora',
-	'statut_admin_restreint' => '(admin restringida)',
+	'statut_admin_restreint' => '(admin restringida)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # MODIF
