@@ -129,7 +129,7 @@ function traiter_appels_inclusions_ajax(){
 			http_status(403);
 			$texte = _L('signature ajax bloc incorrecte');
 		}
-		ajax_retour($texte);
+		ajax_retour($texte, false);
 		return true; // on a fini le hit
 	}
 	return false;	
