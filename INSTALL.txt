@@ -1,5 +1,5 @@
 
-###### Installation de SPIP #####
+###### Installation de SPIP ######
 
 Rendez-vous avec votre navigateur sur la page ecrire/
 pour commencer l'installation de votre site SPIP.
