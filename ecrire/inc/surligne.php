@@ -46,6 +46,7 @@ function surligner_mots($page, $surcharge_surligne = '') {
 			include_spip('inc/charsets');
 			if (!is_utf8($surcharge_surligne)) $surcharge_surligne = utf8_encode($surcharge_surligne);
 		}
+		$surcharge_surligne = preg_replace(',\*$,', '', trim($surcharge_surligne)); # supprimer un * final
 	}
 	foreach ($surlignejs_engines as $engine)
 		if ($surcharge_surligne || (preg_match($engine[0], $ref) && preg_match($engine[1], $ref))){
