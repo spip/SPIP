@@ -808,8 +808,8 @@ and their status is colour-coded:',
 
 	// S
 	'sans_heure' => 'time not specified',
-	'statut_admin_restreint' => '(restricted admin)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
+	'statut_admin_restreint' => 'restricted admin',
+	'statut_webmestre' => 'webmaster',
 
 	// T
 	'tache_cron_asap' => 'CRON task @function@ (ASAP)',
