@@ -124,7 +124,7 @@ function session_set($nom, $val=null) {
 // Lire une valeur dans la session SPIP
 // http://doc.spip.org/@session_get
 function session_get($nom) {
-	return $GLOBALS['visiteur_session'][$nom];
+	return isset($GLOBALS['visiteur_session'][$nom]) ? $GLOBALS['visiteur_session'][$nom] : null;
 }
 
 // Quand on modifie une fiche auteur on appelle cette fonction qui va
