@@ -197,7 +197,7 @@ function inc_traduire_dist($ori, $lang) {
 	static $deja_vu = array();
 	static $local = array();
 
-	if (isset($deja_vu[$lang][$ori]))
+	if (isset($deja_vu[$lang][$ori]) AND (_request('var_mode') != 'traduction'))
 		return $deja_vu[$lang][$ori];
 
 	// modules demandes explicitement <xxx|yyy|zzz:code> cf MODULES_IDIOMES
@@ -241,12 +241,17 @@ function inc_traduire_dist($ori, $lang) {
 
 	// Retour aux sources si la chaine est absente dans la langue cible ;
 	// on essaie d'abord la langue du site, puis a defaut la langue fr
+	$langue_retenue = $lang;
 	if (!strlen($text)
 	AND $lang !== 'fr') {
-		if ($lang !== $GLOBALS['meta']['langue_site'])
+		if ($lang !== $GLOBALS['meta']['langue_site']) {
 			$text = inc_traduire_dist($ori, $GLOBALS['meta']['langue_site']);
-		else 
+			$langue_retenue = (!strlen($text) ? $GLOBALS['meta']['langue_site'] : '');
+		}
+		else {
 			$text = inc_traduire_dist($ori, 'fr');
+			$langue_retenue = (!strlen($text) ? 'fr' : '');
+		}
 	}
 
 	// Supprimer la mention <NEW> ou <MODIF>
@@ -261,7 +266,14 @@ function inc_traduire_dist($ori, $lang) {
 		$text = charset2unicode($text,'utf-8');
 	}
 
-	$deja_vu[$lang][$ori] = $text;
+	if (_request('var_mode') == 'traduction') {
+		if ($text)  {
+			$text = '<span lang=' . $langue_retenue . ' style=background-color:#cde0ed;color:#0000ff; title=' . $ori . '(' . $langue_retenue . ')>' . $text . '</span>';
+		}
+	}
+	else {
+		$deja_vu[$lang][$ori] = $text;
+	}
 
 	return $text;
 }
