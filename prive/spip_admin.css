@@ -87,3 +87,6 @@ spip-debug-toggle {position:absolute; top:4px; right:80px; width:24px;height:20p
 /* Couleurs et design de la previsu */
 .spip-previsu { background-color: #333; color: #eeeeee;font-size: 18px; text-transform: uppercase;position: absolute; top: 0px; left: 0px;padding: 10px 50px; background-position: 5px 5px;background-repeat: no-repeat;display:block;opacity: 0.8;-moz-opacity: 0.8;filter: alpha(opacity=80);}
 
+/* Debug des traductions */
+.debug-traduction {background-color: #cde0ed; color:#0000ff;}
+.erreur-traduction {background-color: #fbe3e4; color: #8a1f11;}

@@ -268,7 +268,7 @@ function inc_traduire_dist($ori, $lang) {
 
 	if (_request('var_mode') == 'traduction') {
 		if ($text)  {
-			$text = '<span lang=' . $langue_retenue . ' style=background-color:#cde0ed;color:#0000ff; title=' . $ori . '(' . $langue_retenue . ')>' . $text . '</span>';
+			$text = '<span lang=' . $langue_retenue . ' class=debug-traduction title=' . $ori . '(' . $langue_retenue . ')>' . $text . '</span>';
 		}
 	}
 	else {

@@ -667,7 +667,7 @@ function _L($text, $args=array(), $class=null) {
 	}
 
 	if (($GLOBALS['test_i18n'] OR (_request('var_mode') == 'traduction')) AND $class===null)
-		return "<blink style=color:red;>$text</blink>";
+		return "<span class=erreur-traduction>$text</span>";
 	else
 		return $text;
 }
