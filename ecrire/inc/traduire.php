@@ -204,9 +204,11 @@ function inc_traduire_dist($ori, $lang) {
 	if (strpos($ori,':')) {
 		list($modules,$code) = explode(':',$ori,2);
 		$modules = explode('|', $modules);
+		$ori_complet = $ori;
 	} else {
 		$modules = array('spip', 'ecrire');
 		$code = $ori;
+		$ori_complet = implode('|', $modules) . ':' . $ori;
 	}
 
 	$text = '';
@@ -234,6 +236,7 @@ function inc_traduire_dist($ori, $lang) {
 		}
 
 		if (isset($GLOBALS[$var][$code])) {
+			$module_retenu = $module;
 			$text = $GLOBALS[$var][$code];
 			break;
 		}
@@ -268,7 +271,9 @@ function inc_traduire_dist($ori, $lang) {
 
 	if (_request('var_mode') == 'traduction') {
 		if ($text)  {
-			$text = '<span lang=' . $langue_retenue . ' class=debug-traduction title=' . $ori . '(' . $langue_retenue . ')>' . $text . '</span>';
+			$classe = 'debug-traduction' . ($module_retenu == 'ecrire' ? '-prive' : '');
+			$text = '<span lang=' . $langue_retenue . ' class=' . $classe . ' title=' . $ori_complet . '(' . $langue_retenue . ')>' . $text . '</span>';
+			$text = str_replace($module_retenu, "*$module_retenu*", $text);
 		}
 	}
 	else {

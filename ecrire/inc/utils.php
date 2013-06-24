@@ -618,7 +618,7 @@ function _T($texte, $args=array(), $options=array()) {
 		$text = $texte;
 
 		// pour les chaines non traduites, assurer un service minimum
-		if (!$GLOBALS['test_i18n'])
+		if (!$GLOBALS['test_i18n'] AND (_request('var_mode') != 'traduction'))
 			$text = str_replace('_', ' ',
 				 (($n = strpos($text,':')) === false ? $texte :
 					substr($texte, $n+1)));
@@ -667,7 +667,7 @@ function _L($text, $args=array(), $class=null) {
 	}
 
 	if (($GLOBALS['test_i18n'] OR (_request('var_mode') == 'traduction')) AND $class===null)
-		return "<span class=erreur-traduction>$text</span>";
+		return "<span class=debug-traduction-erreur>$text</span>";
 	else
 		return $text;
 }
