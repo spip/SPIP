@@ -233,7 +233,7 @@ di ciascuna di queste cartelle. La procedura è spiegata in dettaglio nella guid
 	'envoi_via_le_site' => 'Invio tramite il sito',
 	'erreur' => 'Errore',
 	'erreur_balise_non_fermee' => 'ultimo tag non chiuso:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
+	'erreur_technique_ajaxform' => 'Ops. Un\'errore inaspettato non ti consente di inviare il form. Puoi provare di nuovo.',
 	'erreur_technique_enregistrement_champs' => 'Un errore tecnico ha impedito la corretta registrazione del campo @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Un errore tecnico ha impedito la registrazione.',
 	'erreur_texte' => 'errore/i',
@@ -660,7 +660,7 @@ funzionamento del sito. Non intervenire finché non conosci bene i meccanismi de
 	'titre_image_auteur_supprime' => 'Autore eliminato',
 	'titre_image_redacteur' => 'Redattore senza accesso',
 	'titre_image_redacteur_02' => 'Redattore',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
+	'titre_image_selecteur' => 'Mostra la lista',
 	'titre_image_visiteur' => 'Visitatore',
 	'titre_joindre_document' => 'ALLEGA UN DOCUMENTO',
 	'titre_mots_cles' => 'PAROLE CHIAVE',
