@@ -512,7 +512,7 @@ function _T($texte, $args=array(), $options=array()) {
 		$text = $texte;
 
 		// pour les chaines non traduites, assurer un service minimum
-		if (!$GLOBALS['test_i18n'])
+		if (!$GLOBALS['test_i18n'] AND (_request('var_mode') != 'traduction'))
 			$text = str_replace('_', ' ',
 				 (($n = strpos($text,':')) === false ? $texte :
 					substr($texte, $n+1)));
@@ -541,8 +541,8 @@ function _L($text, $args=array(), $class=null) {
 		if ($args) spip_log("$f:  variables inutilisees " . join(', ', array_keys($args)),_LOG_DEBUG);
 	}
 
-	if ($GLOBALS['test_i18n'] AND $class===null)
-		return "<blink style='color:red;'>$text</blink>";
+	if (($GLOBALS['test_i18n'] OR (_request('var_mode') == 'traduction')) AND $class===null)
+		return "<span class=debug-traduction-erreur>$text</span>";
 	else
 		return $text;
 }
@@ -1813,7 +1813,7 @@ function init_var_mode(){
 				if (!defined('_VAR_MODE')) define('_VAR_MODE',$_GET['var_mode']);
 			}
 			// preview, debug, blocs, urls et images necessitent une autorisation
-			else if (in_array($_GET['var_mode'],array('preview','debug','inclure','urls','images'))) {
+			else if (in_array($_GET['var_mode'],array('preview','debug','inclure','urls','images','traduction'))) {
 				include_spip('inc/autoriser');
 				if (autoriser(
 					($_GET['var_mode'] == 'preview')
@@ -1821,6 +1821,12 @@ function init_var_mode(){
 						: 'debug'
 				)) {
 					switch($_GET['var_mode']){
+						case 'traduction':
+							// forcer le calcul pour passer dans traduire
+							if (!defined('_VAR_MODE')) define('_VAR_MODE','calcul');
+							// et ne pas enregistrer de cache pour ne pas trainer les surlignages sur d'autres pages
+							if (!defined('_VAR_NOCACHE')) define('_VAR_NOCACHE',true);
+							break;
 						case 'preview':
 							// basculer sur les criteres de preview dans les boucles
 							if (!defined('_VAR_PREVIEW')) define('_VAR_PREVIEW',true);
