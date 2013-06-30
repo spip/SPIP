@@ -17,6 +17,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/filtres');
+include_spip('inc/texte');
 
 /**
  * Protéger les saisies d'un champ de formulaire
@@ -37,7 +38,12 @@ function protege_champ($texte){
 		// ne pas corrompre une valeur serialize
 		if ((preg_match(",^[abis]:\d+[:;],", $texte) AND unserialize($texte)!=false) OR is_null($texte))
 			return $texte;
-		$texte = entites_html($texte);
+		if (is_string($texte)
+			AND $texte
+			AND strpbrk($texte, "&\"'<>")!==false
+			) {
+				$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'),ENT_QUOTES);
+		}
 	}
 	return $texte;
 }
