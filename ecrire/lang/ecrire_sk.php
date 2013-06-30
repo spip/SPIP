@@ -136,7 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_chemin_acces' => '<b>Zadajte</b> umiestnenie:',
 	'entree_cle_pgp' => 'Váš kľúč PGP',
 	'entree_cle_pgp_2' => 'Kľúč PGP',
-	'entree_contenu_rubrique' => '(Stručný popis obsahu tejto rubriky.)',
+	'entree_contenu_rubrique' => '(Stručný obsah tejto rubriky.)',
 	'entree_identifiants_connexion' => 'Vaše prihlasovacie údaje...',
 	'entree_identifiants_connexion_2' => 'Prihlasovacie údaje',
 	'entree_informations_connexion_ldap' => 'Do tohto formulára, prosím, uveďte údaje na pripojenie k LDAP, ktoré vám poskytol správca systému alebo siete.',
@@ -331,7 +331,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_derniere_etape' => 'Hotovo!',
 	'info_derniers_articles_publies' => 'Vaše najnovšie publikované články',
 	'info_desactiver_messagerie_personnelle' => 'Odkazovač môžete na tejto stránke aktivovať alebo deaktivovať.',
-	'info_descriptif' => 'Popis:',
+	'info_descriptif' => 'Opis:',
 	'info_desinstaller_plugin' => ' deaktivuje zásuvný modul a odstráni údaje',
 	'info_discussion_cours' => 'Aktuálne diskusie',
 	'info_ecrire_article' => 'Predtým, ako napíšete nejaké články, musíte vytvoriť aspoň jednu rubriku.',
@@ -851,7 +851,7 @@ preinštalovať SPIP, vytvoriť novú databázu a nový účet pre administrát
 	'texte_compte_elements' => '@count@ prvkov',
 	'texte_conflit_edition_correction' => 'Prosím, porovnajte rozdiely medzi týmito dvoma verziami. Môžete si tiež skopírovať svoje zmeny a začať odznova.',
 	'texte_connexion_mysql' => 'Prečítajte si informácie od poskytovateľa webhostingu. Mali by obsahovať kódy na pripojenie k serveru SQL.',
-	'texte_contenu_article' => '(Stručný popis článku.)',
+	'texte_contenu_article' => '(Stručný obsah článku.)',
 	'texte_contenu_articles' => 'V závislosti od vzhľadu svojej stránky sa môžete rozhodnúť,
   že niektoré časti článkov sa nebudú používať.
   Na výber častí, ktoré majú byť k dispozícii, použite tento zoznam.',
@@ -865,8 +865,8 @@ preinštalovať SPIP, vytvoriť novú databázu a nový účet pre administrát
 	'texte_date_publication_anterieure_nonaffichee' => 'Skryť dátum predchádzajúceho publikovania.',
 	'texte_date_publication_article' => 'PUBLIKOVANÝ DŇA:',
 	'texte_date_publication_objet' => 'Dátum publikovania online:',
-	'texte_descriptif_petition' => 'Popis petície',
-	'texte_descriptif_rapide' => 'Stručný popis',
+	'texte_descriptif_petition' => 'Opis petície',
+	'texte_descriptif_rapide' => 'Stručný opis',
 	'texte_effacer_base' => 'Vymazať databázu SPIPu',
 	'texte_effacer_donnees_indexation' => 'Zmazať údaje o indexovaní',
 	'texte_effacer_statistiques' => 'Vymazať štatistiky',
@@ -968,7 +968,7 @@ v cache SPIPu. To si vynúti obnovenie každej stránky vášho webu, čo je u�
     syndikované stránky a články
  môžete prehľadávať rôznymi spôsobmi. <br />
     Najjednoduchší spôsob vyhľadávania je
-    podľa názvov a popisov článkov. <br />
+    podľa názvov a opisov článkov. <br />
     Druhý, rýchlejší, umožňuje
 SPIPu vyhľadávať aj na stránkach,
     na ktoré sa odkazuje. Ak odkazujete
