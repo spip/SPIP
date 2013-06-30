@@ -3947,10 +3947,12 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
  * [(#CHEMIN{monfichier}|timestamp)]
  *
  * @param string $fichier
+ * 		Le chemin du fichier sur lequel on souhaite ajouter le timestamp
  * @return string
+ * 		$fichier auquel on a ajouté le timestamp 
  */
 function timestamp($fichier){
-	if (!$fichier) return $fichier;
+	if (!file_exists($fichier)) return $fichier;
 	$m = filemtime($fichier);
 	return "$fichier?$m";
 }
