@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 0
 	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-	'0_langue' => 'português [pt]',
+	'0_langue' => 'Português [pt]',
 	'0_liste' => 'spip-dev@rezo.net',
 	'0_mainteneur' => 'spip-dev@rezo.net',
 
@@ -36,12 +36,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_attention' => ' ATENÇÂO!',
 	'avis_champ_incorrect_type_objet' => 'Nome de campo incorrecto @name@ para objecto de tipo @type@',
 	'avis_colonne_inexistante' => 'A coluna  @col@ não existe',
-	'avis_erreur' => 'Erro: ver mais acima ',
+	'avis_erreur' => 'Erro: ver mais abaixo',
 	'avis_erreur_connexion' => 'Erro de ligação ',
 	'avis_erreur_cookie' => 'problema de cookie',
-	'avis_erreur_fonction_contexte' => 'Erro de programação. Não se deve chamar esta função neste contexto.',
+	'avis_erreur_fonction_contexte' => 'Erro de programação. Não se pode chamar esta função neste contexto.',
 	'avis_erreur_mysql' => 'Erro SQL', # MODIF
-	'avis_erreur_sauvegarde' => 'Erro na salvaguarda  (@type@ @id_objet@) !',
+	'avis_erreur_sauvegarde' => 'Erro na cópia de segurança  (@type@ @id_objet@) !',
 	'avis_erreur_visiteur' => 'Problème d\'accès à l\'espace privé', # NEW
 
 	// B
@@ -52,29 +52,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_eo_maj' => 'Inserir um E no O maiúsculo',
 	'barre_euro' => 'Inserir o símbolo €',
 	'barre_gras' => '  Escrever em {{negro}}',
-	'barre_guillemets' => 'Cercar por "aspas" ',
-	'barre_guillemets_simples' => 'Cercar por "aspas de segundo nível" ',
+	'barre_guillemets' => 'Colocar entre "aspas" ',
+	'barre_guillemets_simples' => 'Colocar entre \'aspas simples\'',
 	'barre_intertitre' => 'Transfomar em  {{{intertítulo}}} ',
 	'barre_italic' => 'Pôr em itálico ',
 	'barre_lien' => 'Transformar em [ligação hipertexto->http://...]',
-	'barre_lien_input' => 'Favor indicar o endereço da sua ligação (pode indicar um endereço Web sob a forma  http://www.monsite/com ou simplesmente indicar o número de um artigo deste sítio.) ',
+	'barre_lien_input' => 'Por favor indique o endereço da sua ligação (pode indicar um endereço Web sob a forma  http://www.monsite/com ou simplesmente indicar o número de um artigo deste sítio.) ',
 	'barre_note' => 'Transformar em  [[Nota de rodapé ]]',
 	'barre_paragraphe' => 'Créer un paragraphe', # NEW
 	'barre_quote' => '<quote>Citar uma  mensagem</quote>',
-	'bouton_changer' => 'Mudar',
+	'bouton_changer' => 'Modificar',
 	'bouton_chercher' => 'Procurar',
-	'bouton_choisir' => 'Escolher',
+	'bouton_choisir' => 'Seleccionar',
 	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'Télécharger', # MODIF
-	'bouton_enregistrer' => 'Gravar',
+	'bouton_enregistrer' => 'Guardar',
 	'bouton_radio_desactiver_messagerie_interne' => 'Desactivar a caixa de correio interno',
 	'bouton_radio_envoi_annonces' => 'Enviar os anúncios editoriais',
 	'bouton_radio_non_envoi_annonces' => 'Não enviar anúncios',
 	'bouton_radio_non_envoi_liste_nouveautes' => 'Não enviar a lista das novidades',
 	'bouton_recharger_page' => 'recarregar esta página',
-	'bouton_telecharger' => 'Telecarregar',
+	'bouton_telecharger' => 'Carregar',
 	'bouton_upload' => 'Telecarregar', # MODIF
-	'bouton_valider' => 'Validar',
+	'bouton_valider' => 'Submeter',
 
 	// C
 	'cal_apresmidi' => 'tarde',

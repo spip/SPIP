@@ -114,6 +114,7 @@
 		<traducteur nom="Dominik Paszkiewicz" lien="http://trad.spip.net/auteur/dominik-pologne" />
 	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/spip?lang_cible=pt">
+		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />
 		<traducteur nom="Fernando Ferreira" lien="http://trad.spip.net/auteur/fernando-ferreira" />
 	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/spip?lang_cible=pt_br">
