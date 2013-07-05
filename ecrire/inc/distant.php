@@ -20,6 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 if (!defined('_INC_DISTANT_VERSION_HTTP')) define('_INC_DISTANT_VERSION_HTTP', "HTTP/1.0");
 if (!defined('_INC_DISTANT_CONTENT_ENCODING')) define('_INC_DISTANT_CONTENT_ENCODING', "gzip");
 if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP-' . $GLOBALS['spip_version_affichee'] . " (" . $GLOBALS['home_server'] . ")");
+if (!defined('_INC_DISTANT_MAX_SIZE')) define('_INC_DISTANT_MAX_SIZE',2097152);
 
 define('_REGEXP_COPIE_LOCALE', ',' . 
        preg_replace('@^https?:@', 'https?:', $GLOBALS['meta']['adresse_site'])
@@ -206,7 +207,7 @@ function recuperer_page($url, $trans = false, $get_headers = false,
 	$copy = (is_string($trans) AND strlen($trans)>5); // eviter "false" :-)
 
 	if (is_null($taille_max))
-		$taille_max = $copy ? _COPIE_LOCALE_MAX_SIZE : 1048576;
+		$taille_max = $copy ? _COPIE_LOCALE_MAX_SIZE : _INC_DISTANT_MAX_SIZE;
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http://
 	$url = preg_replace(',^feed://,i', 'http://', $url);
@@ -239,7 +240,7 @@ function recuperer_page($url, $trans = false, $get_headers = false,
 // si $trans est null -> on ne veut que les headers
 // si $trans est une chaine, c'est un nom de fichier pour ecrire directement dedans
 // http://doc.spip.org/@recuperer_lapage
-function recuperer_lapage($url, $trans = false, $get = 'GET', $taille_max = 1048576, $datas = '', $refuser_gz = false, $date_verif = '', $uri_referer = ''){
+function recuperer_lapage($url, $trans = false, $get = 'GET', $taille_max = _INC_DISTANT_MAX_SIZE, $datas = '', $refuser_gz = false, $date_verif = '', $uri_referer = ''){
 	// $copy = copier le fichier ?
 	$copy = (is_string($trans) AND strlen($trans)>5); // eviter "false" :-)
 
@@ -311,7 +312,7 @@ function recuperer_lapage($url, $trans = false, $get = 'GET', $taille_max = 1048
 }
 
 // http://doc.spip.org/@recuperer_body
-function recuperer_body($f, $taille_max = 1048576, $fichier = ''){
+function recuperer_body($f, $taille_max = _INC_DISTANT_MAX_SIZE, $fichier = ''){
 	$taille = 0;
 	$result = '';
 	$fp = false;
@@ -558,18 +559,18 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 	// Echec avec HEAD, on tente avec GET
 	if (!$a AND !$max){
 		spip_log("tenter GET $source");
-		$a = recuperer_infos_distantes($source, 1024*1024);
+		$a = recuperer_infos_distantes($source, _INC_DISTANT_MAX_SIZE);
 	}
 
 	// S'il s'agit d'une image pas trop grosse ou d'un fichier html, on va aller
 	// recharger le document en GET et recuperer des donnees supplementaires...
 	if (preg_match(',^image/(jpeg|gif|png|swf),', $mime_type)){
 		if ($max==0
-			AND $a['taille']<1024*1024
+			AND $a['taille']<_INC_DISTANT_MAX_SIZE
 				AND (strpos($GLOBALS['meta']['formats_graphiques'], $a['extension'])!==false)
 					AND $charger_si_petite_image
 		){
-			$a = recuperer_infos_distantes($source, 1024*1024);
+			$a = recuperer_infos_distantes($source, _INC_DISTANT_MAX_SIZE);
 		}
 		else if ($a['body']){
 			$a['fichier'] = _DIR_RACINE . nom_fichier_copie_locale($source, $a['extension']);
@@ -592,7 +593,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 
 	if ($mime_type=='text/html'){
 		include_spip('inc/filtres');
-		$page = recuperer_page($source, true, false, 1024*1024);
+		$page = recuperer_page($source, true, false, _INC_DISTANT_MAX_SIZE);
 		if (preg_match(',<title>(.*?)</title>,ims', $page, $regs))
 			$a['titre'] = corriger_caracteres(trim($regs[1]));
 		if (!$a['taille']) $a['taille'] = strlen($page); # a peu pres
