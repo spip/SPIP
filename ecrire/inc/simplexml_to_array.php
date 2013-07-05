@@ -43,9 +43,14 @@ function xmlObjToArr($obj, $utiliser_namespace=false) {
 	// Cette fonction getDocNamespaces() est longue sur de gros xml. On permet donc
 	// de l'activer ou pas suivant le contenu supposé du XML
 	if (is_object($obj)) {
-		if ($utiliser_namespace)
-			$namespace = $obj->getDocNamespaces(true);
-		$namespace[NULL] = NULL;
+		if (is_array($utiliser_namespace)){
+			$namespace = $utiliser_namespace;
+		}
+		else {
+			if ($utiliser_namespace)
+				$namespace = $obj->getDocNamespaces(true);
+			$namespace[NULL] = NULL;
+		}
 
 		$name = strtolower((string)$obj->getName());
 		$text = trim((string)$obj);
@@ -76,7 +81,7 @@ function xmlObjToArr($obj, $utiliser_namespace=false) {
 				if( !empty($ns) ) {
 					$childName = $ns.':'.$childName;
 				}
-				$children[$childName][] = xmlObjToArr($child);
+				$children[$childName][] = xmlObjToArr($child, $namespace);
 			}
 		}
 
