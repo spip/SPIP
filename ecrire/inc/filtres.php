@@ -2925,20 +2925,54 @@ function wrap($texte,$wrap) {
 }
 
 
-// afficher proprement n'importe quoi
-// en cas de table profonde, l'option $join ne s'applique qu'au plus haut niveau
-// c'est VOULU !  Exemple : [(#VALEUR|print{<hr />})] va afficher de gros blocs
-// separes par des lignes, avec a l'interieur des trucs separes par des virgules
-function filtre_print_dist($u, $join=', ') {
-	if (is_string($u))
-		return typo($u);
+/**
+ * afficher proprement n'importe quoi
+ * On affiche in fine un pseudo-yaml qui premet de lire humainement les tableaux et de s'y reperer
+ *
+ * Les textes sont retournes avec simplement mise en forme typo
+ *
+ * le $join sert a separer les items d'un tableau, c'est en general un \n ou <br /> selon si on fait du html ou du texte
+ * les tableaux-listes (qui n'ont que des cles numeriques), sont affiches sous forme de liste separee par des virgules :
+ * c'est VOULU !
+ *
+ * @param $u
+ * @param string $join
+ * @param int $indent
+ * @return array|mixed|string
+ */
+function filtre_print_dist($u, $join="<br />", $indent=0) {
+	if (is_string($u)){
+		$u = typo($u);
+		return $u;
+	}
 
-	if (is_array($u))
-		return join($join, array_map('filtre_print_dist', $u));
-
+	// caster $u en array si besoin
 	if (is_object($u))
-		return join($join, array_map('filtre_print_dist', (array) $u));
+		$u = (array) $u;
 
+	if (is_array($u)){
+		$out = "";
+		// toutes les cles sont numeriques ?
+		// et aucun enfant n'est un tableau
+		// liste simple separee par des virgules
+		$numeric_keys = array_map('is_numeric',array_keys($u));
+		$array_values = array_map('is_array',$u);
+		$object_values = array_map('is_object',$u);
+		if (array_sum($numeric_keys)==count($numeric_keys)
+		  AND !array_sum($array_values)
+		  AND !array_sum($object_values)){
+			return join(", ", array_map('filtre_print_dist', $u));
+		}
+
+		// sinon on passe a la ligne et on indente
+		$i_str = str_pad("",$indent," ");
+		foreach($u as $k => $v){
+			$out .= $join . $i_str . "$k: " . filtre_print_dist($v,$join,$indent+2);
+		}
+		return $out;
+	}
+
+	// on sait pas quoi faire...
 	return $u;
 }
 
