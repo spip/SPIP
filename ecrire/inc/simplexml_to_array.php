@@ -1,17 +1,42 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2013                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+
+
+
+/**
+ * Transforme un texte XML en tableau PHP
+ * @param  string $u
+ * @param bool $utiliser_namespace
+ * @return array
+ */
+function inc_simplexml_to_array_dist($u, $utiliser_namespace=false){
+	$u = simplexml_load_string($u);
+	return array('root'=>@xmlObjToArr($u, $utiliser_namespace));
+}
 
 
 /**
  * Transforme un objet SimpleXML en tableau PHP
+ * http://www.php.net/manual/pt_BR/book.simplexml.php#108688
+ * xaviered at gmail dot com 17-May-2012 07:00
  *
  * @param object $obj
+ * @param bool $utiliser_namespace
  * @return array
 **/
-// http://www.php.net/manual/pt_BR/book.simplexml.php#108688
-// xaviered at gmail dot com 17-May-2012 07:00
-function inc_simplexml_to_array_dist($obj, $utiliser_namespace='false') {
+function xmlObjToArr($obj, $utiliser_namespace=false) {
 
 	$tableau = array();
 
@@ -51,7 +76,7 @@ function inc_simplexml_to_array_dist($obj, $utiliser_namespace='false') {
 				if( !empty($ns) ) {
 					$childName = $ns.':'.$childName;
 				}
-				$children[$childName][] = inc_simplexml_to_array_dist($child);
+				$children[$childName][] = xmlObjToArr($child);
 			}
 		}
 
