@@ -77,7 +77,7 @@
 				]<BOUCLE_couleurs(POUR){tableau #ENV{couleurs}}>
 				<div class="choix">
 					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_#CLE'[(#ENV{#GET{name}}|=={#CLE}|oui)checked="checked" ]value="#CLE"
-					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{#CLE})]').appendTo(jQuery('head'));" />
+					onchange="if (this.checked) jQuery('head>link#csspriveedef').clone().removeAttr('id').attr('href', '[(#ENV{_couleurs_url}|table_valeur{#CLE})]').appendTo(jQuery('head'));" />
 					<label for="[(#GET{name})]_#CLE">
 						<img src="#CHEMIN{rien.gif}" alt="" width="16" height="16" style="background-color:[#(#VALEUR{couleur_foncee}|couleur_foncer)];" />
 						<img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 1" width="16" height="16" style="background-color:[(#VALEUR{couleur_foncee})];" />
