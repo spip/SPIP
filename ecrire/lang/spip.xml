@@ -140,5 +140,7 @@
 	<langue code="wo" url="http://trad.spip.net/tradlang_module/spip?lang_cible=wo">
 		<traducteur nom="usufaati" lien="http://trad.spip.net/auteur/usufaati" />
 	</langue>
-	<langue code="zh" />
+	<langue code="zh" url="http://trad.spip.net/tradlang_module/spip?lang_cible=zh">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
 </traduction>
