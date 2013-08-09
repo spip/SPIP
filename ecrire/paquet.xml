@@ -1,8 +1,8 @@
 <paquet
 	prefix="spip"
 	categorie="outil"
-	version="3.0.11"
-	etat="stable"
+	version="3.0.12"
+	etat="DEV"
 	compatibilite="];["
 	schema="19268"
 	documentation="http://www.spip.net"
