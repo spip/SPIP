@@ -44,6 +44,7 @@
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=es">
+		<traducteur nom="alf" lien="http://trad.spip.net/auteur/alf" />
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
@@ -62,6 +63,7 @@
 	<langue code="fon" />
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr">
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr_tu">
 		<traducteur nom="Astalaseven" lien="http://trad.spip.net/auteur/astalaseven" />
@@ -100,7 +102,9 @@
 	<langue code="oc_gsc" />
 	<langue code="oc_lms" />
 	<langue code="oc_lnc" />
-	<langue code="oc_ni" />
+	<langue code="oc_ni" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni">
+		<traducteur nom="Bastian" lien="http://trad.spip.net/auteur/bastian" />
+	</langue>
 	<langue code="oc_ni_la" />
 	<langue code="oc_prv" />
 	<langue code="oc_va" />
@@ -109,6 +113,7 @@
 		<traducteur nom="keycheck" lien="http://trad.spip.net/auteur/keycheck" />
 	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=pt">
+		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=pt_br">
@@ -127,5 +132,7 @@
 	<langue code="sv" />
 	<langue code="tr" />
 	<langue code="vi" />
-	<langue code="zh" />
+	<langue code="zh" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=zh">
+		<traducteur nom="Chia Kiah Yeen" lien="http://trad.spip.net/auteur/chia-kiah-yeen" />
+	</langue>
 </traduction>

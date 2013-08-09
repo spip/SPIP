@@ -817,7 +817,8 @@ dans une couleur qui indique leur état :',
 
 	// S
 	'sans_heure' => 'sans heure',
-	'statut_admin_restreint' => '(admin restreint)',
+	'statut_admin_restreint' => 'admin restreint',
+	'statut_webmestre' => 'webmestre',
 
 	// T
 	'tache_cron_asap' => 'Tâche CRON @function@ (ASAP)',

@@ -781,7 +781,8 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 
 	// S
 	'sans_heure' => 'sans heure', # NEW
-	'statut_admin_restreint' => '(Quản trị viên có giới hạn)',
+	'statut_admin_restreint' => '(Quản trị viên có giới hạn)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW

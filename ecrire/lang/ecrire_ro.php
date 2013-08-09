@@ -800,7 +800,8 @@ cu o culoare care le indică starea :',
 
 	// S
 	'sans_heure' => 'fără oră',
-	'statut_admin_restreint' => '(administrator cu drepturi restrânse)',
+	'statut_admin_restreint' => '(administrator cu drepturi restrânse)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW

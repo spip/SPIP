@@ -29,6 +29,7 @@
 		<traducteur nom="Yannick Bailly" lien="http://trad.spip.net/auteur/yannick-bailly" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/spip?lang_cible=en">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
@@ -54,7 +55,9 @@
 	</langue>
 	<langue code="fi" />
 	<langue code="fon" />
-	<langue code="fr" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	</langue>
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
@@ -111,6 +114,7 @@
 		<traducteur nom="Dominik Paszkiewicz" lien="http://trad.spip.net/auteur/dominik-pologne" />
 	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/spip?lang_cible=pt">
+		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />
 		<traducteur nom="Fernando Ferreira" lien="http://trad.spip.net/auteur/fernando-ferreira" />
 	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/spip?lang_cible=pt_br">
@@ -136,5 +140,7 @@
 	<langue code="wo" url="http://trad.spip.net/tradlang_module/spip?lang_cible=wo">
 		<traducteur nom="usufaati" lien="http://trad.spip.net/auteur/usufaati" />
 	</langue>
-	<langue code="zh" />
+	<langue code="zh" url="http://trad.spip.net/tradlang_module/spip?lang_cible=zh">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
 </traduction>

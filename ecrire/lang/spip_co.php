@@ -235,6 +235,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Invià à traversu u situ',
 	'erreur' => 'Errore',
 	'erreur_balise_non_fermee' => 'ùltima balisa micca chjosa :',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Per via d\'un errore tècnicu, u campu @champs@ ùn hè micca statu arregistratu.',
 	'erreur_technique_enregistrement_impossible' => 'Per via d\'un errore tècnicu, l\'arregistramentu ùn hè micca statu fattu.',
 	'erreur_texte' => 'errore/i',

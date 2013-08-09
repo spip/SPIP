@@ -814,6 +814,7 @@ med en färg som visar deras status:',
 	// S
 	'sans_heure' => 'sans heure', # NEW
 	'statut_admin_restreint' => '(admin restreint)', # NEW
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW

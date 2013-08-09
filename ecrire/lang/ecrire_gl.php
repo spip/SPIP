@@ -811,7 +811,8 @@ cunha cor que indica o seu estado :',
 
 	// S
 	'sans_heure' => 'sen hora',
-	'statut_admin_restreint' => '(admin restrinxido)',
+	'statut_admin_restreint' => '(admin restrinxido)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
