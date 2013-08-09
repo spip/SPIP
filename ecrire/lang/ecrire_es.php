@@ -791,7 +791,8 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 
 	// S
 	'sans_heure' => 'sin hora',
-	'statut_admin_restreint' => '(administrador restringido)',
+	'statut_admin_restreint' => 'administrador restringido',
+	'statut_webmestre' => 'webmaster',
 
 	// T
 	'tache_cron_asap' => 'Tarea CRON @function@ (ASAP)',
@@ -998,7 +999,7 @@ títulos y las descripciones de los artículos. <br />- Un segundo método, much
 	'utf8_convert_erreur_orig' => 'Error: el juego de caracteres no está soportado.',
 	'utf8_convert_termine' => '¡Se terminó!',
 	'utf8_convert_timeout' => '<b>Importante:</b> en caso de <i>timeout</i> del servidor, vuelve a cargar la página hasta que indique «terminado».',
-	'utf8_convert_verifier' => 'Ahora debes ir a vaciar la cache y verificar que todo funciona bien en las páginas públicas del sitio. En caso de graves problemas, un respaldo de los datos fue realizado (al formato SQL) en la carpeta @rep@.',
+	'utf8_convert_verifier' => 'Ahora debes ir a vaciar la cache y verificar que todo funciona bien en las páginas públicas del sitio. En caso de graves problemas, un respaldo de los datos fue realizado (al formato SQL) en la carpeta @rep@.', # Respaldo de los datos quiere decir copia de seguridad, por si alguien no lo sabe. Se puede decir de las dos maneras.
 	'utf8_convertir_votre_site' => 'Convertir tu sitio en utf-8',
 
 	// V

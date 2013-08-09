@@ -805,7 +805,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 
 	// S
 	'sans_heure' => 'saatsiz',
-	'statut_admin_restreint' => '(sınırlı yönetici)',
+	'statut_admin_restreint' => '(sınırlı yönetici)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW

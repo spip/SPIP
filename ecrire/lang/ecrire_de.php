@@ -55,8 +55,8 @@ französischen SPIP-Dokumentation</a>.',
 	'bouton_ajouter_participant' => 'TEILNEHMER HINZUFÜGEN:',
 	'bouton_annonce' => 'ANKÜNDIGUNG',
 	'bouton_annuler' => 'Abbrechen',
-	'bouton_cache_activer' => 'Réactiver le cache', # NEW
-	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
+	'bouton_cache_activer' => 'Cache aktivieren',
+	'bouton_cache_desactiver' => 'Cache vorübergehend abschalten',
 	'bouton_checkbox_envoi_message' => 'Verschicken einer Nachricht ermöglichen',
 	'bouton_checkbox_indiquer_site' => 'obligatorische Angabe einer Website',
 	'bouton_checkbox_signature_unique_email' => 'eine einzige Unterschrift pro E-Mail Adresse',
@@ -232,7 +232,7 @@ französischen SPIP-Dokumentation</a>.',
 	'info_1_auteur' => '1 Autor',
 	'info_1_message' => '1 Nachricht',
 	'info_1_mot_cle' => '1 Schlagwort',
-	'info_1_rubrique' => '1 Schlagwort',
+	'info_1_rubrique' => '1 Rubrik',
 	'info_1_site' => '1 Website',
 	'info_1_visiteur' => '1 Besucher',
 	'info_activer_cookie' => 'Sie können ein <b>Verwaltungs-Cookie</b> setzen. Es erlaubt Ihnen, Artikel und Rubriken direkt aus der Website zu bearbeiten.',
@@ -288,7 +288,7 @@ französischen SPIP-Dokumentation</a>.',
 	'info_barre_outils' => 'mit Symbolleiste?',
 	'info_base_installee' => 'Die Struktur Ihrer Datenbank wurde angelegt.',
 	'info_bio' => 'Biographie',
-	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
+	'info_cache_desactive' => 'Der Cache ist vorübergehend abgeschaltet.',
 	'info_chapeau' => 'Kopf',
 	'info_chapeau_2' => 'Kopf:',
 	'info_chemin_acces_1' => 'Optionen: <b>Pfad im Verzeichnis</b>',
@@ -415,7 +415,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 	'info_nb_visiteurs' => '@nb@ Besucher',
 	'info_nom' => 'Name',
 	'info_nom_destinataire' => 'Name des Empfängers',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
+	'info_nom_pas_conforme' => 'HTNL-Tags sind nicht zugelassen.',
 	'info_nom_site' => 'Name Ihrer Website',
 	'info_nombre_articles' => '@nb_articles@ Artikel,',
 	'info_nombre_partcipants' => 'TEILNEHMER DER DISKUSSION:',
@@ -778,7 +778,7 @@ in einer Farbe, die den Status anzeigt :',
 
 	// Q
 	'queue_executer_maintenant' => 'Jetzt ausführen',
-	'queue_info_purger' => 'Sie können alle anstehenden Jobs löschen und so die Liste der regelmäßigen Jobs neu initialisieren.', # MODIF
+	'queue_info_purger' => 'Sie können alle anstehenden Jobs löschen und so die Liste der regelmäßigen Jobs neu initialisieren.',
 	'queue_nb_jobs_in_queue' => '@nb@ Jobs in der Warteschlange',
 	'queue_next_job_in_nb_sec' => 'Nächster Job in @nb@ s',
 	'queue_no_job_in_queue' => 'Keine Aufgaben in der Warteschlange',
@@ -791,11 +791,12 @@ in einer Farbe, die den Status anzeigt :',
 
 	// S
 	'sans_heure' => 'Ohne Zeit',
-	'statut_admin_restreint' => '(Rubrik-Admin)',
+	'statut_admin_restreint' => 'Rubrik-Admin',
+	'statut_webmestre' => 'Webmaster',
 
 	// T
-	'tache_cron_asap' => 'Cronjob @function@ (unverzüglich)', # MODIF
-	'tache_cron_secondes' => 'Cronjob @function@ (alle @nb@ Sekunden)', # MODIF
+	'tache_cron_asap' => 'Cronjob @function@ (unverzüglich)',
+	'tache_cron_secondes' => 'Cronjob @function@ (alle @nb@ Sekunden)',
 	'taille_cache_image' => 'Dei von SPIP automatisch berechneten Grafiken (Icons für Dokumente, als Grafiken gespeicherte Titel, mathematische Ausdrücke im Format TeX...) belegen insgesamt @taille@ im Verzeichnis @dir@.',
 	'taille_cache_infinie' => 'Die Grösse des <code>CACHE/</code> dieser Website wird nicht begrenzt.',
 	'taille_cache_maxi' => 'SPIP versucht die Grösse des <code>CACHE/</code> der Website auf ca. <b>@octets@</b> Byte zu begrenzen.',

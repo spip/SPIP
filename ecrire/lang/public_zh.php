@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => '主页', # MODIF
-	'article' => 'Article', # NEW
+	'article' => '文章', # MODIF
 	'articles' => '文章',
 	'articles_auteur' => '该作者的文章',
 	'articles_populaires' => '热门文章',
@@ -19,8 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => '该地址下没有站点',
 	'aucune_breve' => '该地址下没有简要',
 	'aucune_rubrique' => '该地址下没有专栏',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
+	'auteur' => '作者', # MODIF
+	'autres' => '其它', # MODIF
 	'autres_breves' => '其它简要',
 	'autres_groupes_mots_clefs' => '其它关键词组',
 	'autres_sites' => '其它站点',
@@ -30,8 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => '评论站点',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
+	'contact' => '联络', # MODIF
+	'copie_document_impossible' => '不能复制文件', # MODIF
 
 	// D
 	'date' => '日期',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'espace_prive' => '私有区',
 
 	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
+	'formats_acceptes' => ' 合格的格式: @formats@.', # MODIF
 
 	// H
 	'hierarchie_site' => '站点层次',
@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'jours' => '天',
 
 	// L
-	'lien_connecter' => 'Se connecter', # NEW
+	'lien_connecter' => '登陆', # MODIF
 
 	// M
 	'meme_auteur' => '同一作者',
@@ -102,7 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => '使用SPIP建立的站点',
 	'sites_web' => '网站',
 	'sous_rubriques' => '子专栏',
-	'spam' => 'Spam', # NEW
+	'spam' => '垃圾邮件', # MODIF
 	'suite' => '继续',
 	'sur_web' => '在网上',
 	'syndiquer_rubrique' => '联合该专栏',

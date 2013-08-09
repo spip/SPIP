@@ -807,7 +807,8 @@ Le traduzioni sono associate all\'originale,
 
 	// S
 	'sans_heure' => 'ora mancante',
-	'statut_admin_restreint' => '(ammin parziale)',
+	'statut_admin_restreint' => '(ammin parziale)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW

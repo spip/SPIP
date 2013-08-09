@@ -234,6 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Sendo tra la retejo',
 	'erreur' => 'Eraro',
 	'erreur_balise_non_fermee' => 'lasta ne fermita marko :',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Teknika eraro neebligis la ĝustan registradon de la kampo @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Teknika eraro neebligis la registradon.',
 	'erreur_texte' => 'eraro(j)',

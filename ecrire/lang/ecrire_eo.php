@@ -803,7 +803,8 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 
 	// S
 	'sans_heure' => 'sen horo',
-	'statut_admin_restreint' => '(etrajta mastrumanto)',
+	'statut_admin_restreint' => '(etrajta mastrumanto)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tasko CRON @function@ (ASAP)',

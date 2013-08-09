@@ -807,7 +807,8 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 
 	// S
 	'sans_heure' => 'Czas nie określony',
-	'statut_admin_restreint' => '(admin z ograniczeniami)',
+	'statut_admin_restreint' => '(admin z ograniczeniami)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
