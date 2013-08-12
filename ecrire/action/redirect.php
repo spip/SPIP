@@ -17,12 +17,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function action_redirect_dist()
 {
 	$type = _request('type');
-	if (!preg_match('/^\w+$/', $type)) return;
 	if ($m = _request('var_mode')) {
 		$GLOBALS['var_urls'] = true; // forcer la mise a jour de l'url de cet objet !
 		$m = 'var_mode='.urlencode($m);
 	}
-	$h = generer_url_entite_absolue(intval(_request('id')), $type, $m, '', true);
+	if (preg_match('/^\w+$/', $type))
+		$h = generer_url_entite_absolue(intval(_request('id')), $type, $m, '', true);
+	elseif (($page = _request('page')) AND preg_match('/^\w+$/', $page))
+		$h = generer_url_public($page, '', true);
+	else return;
+
 	$status = '302';
 	if (_request('status') AND _request('status')=='301')
 		$status = '301';
