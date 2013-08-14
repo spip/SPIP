@@ -1444,6 +1444,11 @@ function extraire_trads($bloc) {
 	return $trads;
 }
 
+// Calculer l'initiale d'un nom
+function initiale($nom){
+	return spip_substr(trim(strtoupper(extraire_multi($nom))),0,1);
+}
+
 //
 // Ce filtre retourne la donnee si c'est la premiere fois qu'il la voit ;
 // possibilite de gerer differentes "familles" de donnees |unique{famille}
