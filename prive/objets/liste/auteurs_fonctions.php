@@ -66,16 +66,6 @@ function balise_COMPTEUR_ARTICLES_dist($p) {
 
 
 /**
- * Calculer l'initiale d'un nom
- *
- * @param string $nom
- * @return string L'initiale en majuscule
- */
-function initiale($nom){
-	return spip_substr(trim(strtoupper($nom)),0,1);
-}
-
-/**
  * Afficher l'initiale pour la navigation par lettres
  *
  * @staticvar string $memo
