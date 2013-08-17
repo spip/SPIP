@@ -354,8 +354,11 @@ function balise_URL_ACTION_AUTEUR_dist($p) {
 	if ($args != "''" && $args!==NULL)
 		$p->code .= ",".$args;
 	$redirect = interprete_argument_balise(3,$p);
-	if ($redirect != "''" && $redirect!==NULL)
+	if ($redirect != "''" && $redirect!==NULL) {
+		if ($args == "''" || $args===NULL)
+			$p->code .= ",".$args;
 		$p->code .= ",".$redirect;
+	}
 
 	$p->code = "generer_action_auteur(" . $p->code . ")";
 	$p->interdire_scripts = false;
