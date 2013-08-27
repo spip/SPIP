@@ -1365,50 +1365,50 @@ function spip_initialisation_suite() {
 	if ($too_late++) return;
 
 	// taille mini des login
-	define('_LOGIN_TROP_COURT', 4);
+	if (!defined('_LOGIN_TROP_COURT')) define('_LOGIN_TROP_COURT', 4);
 
 	// la taille maxi des logos (0 : pas de limite)
-	define('_LOGO_MAX_SIZE', 0); # poids en ko
-	define('_LOGO_MAX_WIDTH', 0); # largeur en pixels
-	define('_LOGO_MAX_HEIGHT', 0); # hauteur en pixels
+	if (!defined('_LOGO_MAX_SIZE')) define('_LOGO_MAX_SIZE', 0); # poids en ko
+	if (!defined('_LOGO_MAX_WIDTH')) define('_LOGO_MAX_WIDTH', 0); # largeur en pixels
+	if (!defined('_LOGO_MAX_HEIGHT')) define('_LOGO_MAX_HEIGHT', 0); # hauteur en pixels
 
-	define('_DOC_MAX_SIZE', 0); # poids en ko
+	if (!defined('_DOC_MAX_SIZE')) define('_DOC_MAX_SIZE', 0); # poids en ko
 
-	define('_IMG_MAX_SIZE', 0); # poids en ko
-	define('_IMG_MAX_WIDTH', 0); # largeur en pixels
-	define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
+	if (!defined('_IMG_MAX_SIZE')) define('_IMG_MAX_SIZE', 0); # poids en ko
+	if (!defined('_IMG_MAX_WIDTH')) define('_IMG_MAX_WIDTH', 0); # largeur en pixels
+	if (!defined('_IMG_MAX_HEIGHT')) define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
 
-	define('_COPIE_LOCALE_MAX_SIZE',16777216); // poids en octet
+	if (!defined('_COPIE_LOCALE_MAX_SIZE')) define('_COPIE_LOCALE_MAX_SIZE',16777216); // poids en octet
 
 	// qq chaines standard
-	define('_ACCESS_FILE_NAME', '.htaccess');
-	define('_AUTH_USER_FILE', '.htpasswd');
-	define('_SPIP_DUMP', 'dump@nom_site@@stamp@.xml');
-	define('_CACHE_RUBRIQUES', _DIR_TMP.'menu-rubriques-cache.txt');
-	define('_CACHE_RUBRIQUES_MAX', 500);
+	if (!defined('_ACCESS_FILE_NAME')) define('_ACCESS_FILE_NAME', '.htaccess');
+	if (!defined('_AUTH_USER_FILE')) define('_AUTH_USER_FILE', '.htpasswd');
+	if (!defined('_SPIP_DUMP')) define('_SPIP_DUMP', 'dump@nom_site@@stamp@.xml');
+	if (!defined('_CACHE_RUBRIQUES')) define('_CACHE_RUBRIQUES', _DIR_TMP.'menu-rubriques-cache.txt');
+	if (!defined('_CACHE_RUBRIQUES_MAX')) define('_CACHE_RUBRIQUES_MAX', 500);
 
-	define('_EXTENSION_SQUELETTES', 'html');
+	if (!defined('_EXTENSION_SQUELETTES')) define('_EXTENSION_SQUELETTES', 'html');
 
-	define('_DOCTYPE_ECRIRE',
+	if (!defined('_DOCTYPE_ECRIRE')) define('_DOCTYPE_ECRIRE',
 		// "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
 		//"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n");
 		"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>\n");
 	       // "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1 //EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>\n");
-	define('_DOCTYPE_AIDE',
+	if (!defined('_DOCTYPE_AIDE')) define('_DOCTYPE_AIDE',
 	       "<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Frameset//EN' 'http://www.w3.org/TR/1999/REC-html401-19991224/frameset.dtd'>");
 
 	// L'adresse de base du site ; on peut mettre '' si la racine est geree par
 	// le script de l'espace public, alias  index.php
-	define('_SPIP_SCRIPT', 'spip.php');
+	if (!defined('_SPIP_SCRIPT')) define('_SPIP_SCRIPT', 'spip.php');
 	// argument page, personalisable en cas de conflit avec un autre script
-	define('_SPIP_PAGE', 'page');
+	if (!defined('_SPIP_PAGE')) define('_SPIP_PAGE', 'page');
 
 	// le script de l'espace prive
 	// Mettre a "index.php" si DirectoryIndex ne le fait pas ou pb connexes:
 	// les anciens IIS n'acceptent pas les POST sur ecrire/ (#419)
 	// meme pb sur thttpd cf. http://forum.spip.org/fr_184153.html
 
-	define('_SPIP_ECRIRE_SCRIPT', // true ? #decommenter ici et commenter la
+	if (!defined('_SPIP_ECRIRE_SCRIPT')) define('_SPIP_ECRIRE_SCRIPT', // true ? #decommenter ici et commenter la
 	       preg_match(',IIS|thttpd,',$_SERVER['SERVER_SOFTWARE']) ?
 	       'index.php' : '');
 
@@ -1442,8 +1442,8 @@ function spip_initialisation_suite() {
 	# nombre de pixels maxi pour calcul de la vignette avec gd
 	# au dela de 5500000 on considere que php n'est pas limite en memoire pour cette operation
 	# les configurations limitees en memoire ont un seuil plutot vers 1MPixel
-	define('_IMG_GD_MAX_PIXELS', (isset($GLOBALS['meta']['max_taille_vignettes'])&&$GLOBALS['meta']['max_taille_vignettes']<5500000)?$GLOBALS['meta']['max_taille_vignettes']:0);
-	define('_IMG_GD_QUALITE', 85);
+	if (!defined('_IMG_GD_MAX_PIXELS')) define('_IMG_GD_MAX_PIXELS', (isset($GLOBALS['meta']['max_taille_vignettes'])&&$GLOBALS['meta']['max_taille_vignettes']<5500000)?$GLOBALS['meta']['max_taille_vignettes']:0);
+	if (!defined('_IMG_GD_QUALITE')) define('_IMG_GD_QUALITE', 85);
 
 	if (!defined('_MEMORY_LIMIT_MIN')) define('_MEMORY_LIMIT_MIN', 16);
 	// si on est dans l'espace prive et si le besoin est superieur a 8Mo (qui est vraiment le standard)
