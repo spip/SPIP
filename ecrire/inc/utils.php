@@ -1601,8 +1601,10 @@ function get_spip_script($default='') {
  * 
  * @param string $script
  *     Nom de la page
- * @param string $args
- *     Arguments à transmettre, tel que `arg1=yy&arg2=zz`
+ * @param string|array $args
+ *     Arguments à transmettre a l'URL,
+ *      soit sous la forme d'un string tel que `arg1=yy&arg2=zz`
+ *      soit sous la forme d'un array tel que array( `arg1` => `yy`, `arg2` => `zz` )
  * @param bool $no_entities
  *     Si false : transforme les `&` en `&amp;`
  * @param bool $rel
