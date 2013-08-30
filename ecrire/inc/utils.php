@@ -1128,7 +1128,7 @@ $GLOBALS['path_files'] = null;
  * suivant l'ordre des chemins connus de SPIP. 
  * 
  * @api
- * @see charger_fonctions()
+ * @see charger_fonction()
  * @uses creer_chemin() Pour la liste des chemins.
  * @example
  *     ```
@@ -1256,8 +1256,8 @@ function save_path_cache(){
  * par un `find_in_path()`
  *
  * @api
- * @use creer_chemin()
- * @use preg_files()
+ * @uses creer_chemin()
+ * @uses preg_files()
  * 
  * @param string $dir
  * @param string $pattern
