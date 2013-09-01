@@ -33,7 +33,19 @@ function exec_valider_xml_dist()
 	} else valider_xml_ok(_request('var_url'), _request('ext'), intval(_request('limit')), _request('recur'));
 }
 
-// http://doc.spip.org/@valider_xml_ok
+/**
+ * Vérifie le formatage d'un xml
+ * 
+ * @see valider_resultats()
+ * @see valider_dir()
+ * @see valider_pseudo_url()
+ * 
+ * @param string $url
+ * @param string $req_ext
+ * @param int $limit
+ * @param array|bool $rec
+ * 
+**/
 function valider_xml_ok($url, $req_ext, $limit, $rec)
 {
 	$url = urldecode($url);
@@ -113,7 +125,14 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 	  fin_page();
 }
 
-// http://doc.spip.org/@valider_resultats
+/**
+ * 
+ * Vérifie la conformité du xml, élément par élément.
+ *  
+ * @param array $res
+ * @param string $mode
+ * @return array
+**/
 function valider_resultats($res, $mode)
 {
 	$i = $j = 0;

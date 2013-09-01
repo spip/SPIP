@@ -10,12 +10,22 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de la recherche
+ * 
+ * @package SPIP\Core\Rechercher
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 include_spip('inc/texte');
 
-// http://doc.spip.org/@exec_rechercher_dist
+/**
+ * Prépare la fonction de recherche
+ * 
+ * @uses exec_rechercher_args() Formate le rendu de la recherche.
+**/
 function exec_rechercher_dist()
 {
 	$id = intval(_request('id'));
@@ -29,7 +39,18 @@ function exec_rechercher_dist()
 	ajax_retour($r);
 }
 
-// http://doc.spip.org/@exec_rechercher_args
+/**
+ * 
+ * @see calcul_branche_in()
+ * @see proposer_item()
+ * 
+ * @param int $id
+ * @param string $type
+ * @param string|int|array $exclus
+ * @param string|bool $rac
+ * @param string $do
+ * @return string
+**/
 function exec_rechercher_args($id, $type, $exclus, $rac, $do)
 {
 	if (!$do) $do = 'aff';
@@ -100,7 +121,15 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do)
 // car cela qui indique qu'un seul resultat a ete trouve.
 // ==> attention a composer le message d'erreur avec au moins 2 balises
 
-// http://doc.spip.org/@proposer_item
+/**
+ * 
+ * @param array $ids
+ * @param array|string $titles
+ * @param string|bool $rac
+ * @param string $type
+ * @param string $do
+ * @return string
+**/
 function proposer_item ($ids, $titles, $rac, $type, $do)
 {
 
