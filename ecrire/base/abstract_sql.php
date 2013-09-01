@@ -330,7 +330,7 @@ function sql_alter($q, $serveur='', $option=true) {
  * Retourne un resultat d'une ressource obtenue avec sql_select()
  *
  * @api
- * @param mixed
+ * @param mixed $res
  * 		Ressource retournee par sql_select()
  * @param string $serveur
  * 		Le nom du connecteur
@@ -357,7 +357,7 @@ function sql_fetch($res, $serveur='', $option=true) {
  * dans un tableau
  *
  * @api
- * @param mixed
+ * @param mixed $res
  * 		Ressource retournee par sql_select()
  * @param string $serveur
  * 		Le nom du connecteur
