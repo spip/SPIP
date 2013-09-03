@@ -23,7 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
  * Compile la balise dynamique `#LOGIN_PUBLIC` qui permet d'afficher le
  * formulaire de connexion vers l'espace public
  * 
- * @balise LOGIN_PUBLIC
+ * @balise
  * @deprecated Utiliser `#FORMULAIRE_LOGIN`
  * 
  * @param Champ $p

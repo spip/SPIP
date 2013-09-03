@@ -52,7 +52,7 @@ function critere_compteur_articles_filtres_dist($idb, &$boucles, $crit, $left=fa
  *
  * Nécessite le critère `compteur_articles_filtres`
  * 
- * @balise COMPTEUR_ARTICLES
+ * @balise
  * @see critere_compteur_articles_filtres_dist()
  * 
  * @param Champ $p

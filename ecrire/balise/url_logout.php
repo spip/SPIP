@@ -22,7 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Compile la balise dynamique `#URL_LOGOUT` qui génère une URL permettant
  * de déconnecter l'auteur actuellement connecté
  * 
- * @balise URL_LOGOUT
+ * @balise
  * @example
  *     ```
  *     [<a href="(#URL_LOGOUT)">déconnexion</a>]

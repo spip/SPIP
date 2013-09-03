@@ -589,7 +589,7 @@ function ramasse_miettes($fichier){
  * Ce filtre est automatiquement appelé à la fin d'une série de filtres
  * d'images dans un squelette.
  * 
- * @filtre image_graver
+ * @filtre
  * @link http://doc.spip.org/@image_graver
  * 
  * @uses reconstruire_image_intermediaire()

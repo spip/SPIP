@@ -104,7 +104,7 @@ function generer_generer_url_arg($type, $p, $_id)
  * tel que `balise_URL_ARTICLE_dist()`, la fonction l'utilisera. Sinon,
  * on calcule une URL de façon générique.
  * 
- * @balise URL_
+ * @balise
  * @uses generer_generer_url()
  * @example
  *     ```
@@ -144,7 +144,7 @@ function balise_URL__dist($p) {
  * Retourne l'URL (locale) d'un article mais retourne dans le cas
  * d'un article syndiqué (boucle SYNDIC_ARTICLES), son URL distante d'origine.
  * 
- * @balise URL_ARTICLE
+ * @balise
  * @uses generer_generer_url()
  * @link http://www.spip.net/3963
  * @example
@@ -177,7 +177,7 @@ function balise_URL_ARTICLE_dist($p) {
  * Génère une URL spécifique si la colonne SQL `url_site` est trouvée
  * (par exemple lien hypertexte d'un article), sinon l'URL d'un site syndiqué
  * 
- * @balise URL_SITE
+ * @balise
  * @uses generer_generer_url()
  * @see calculer_url()
  * @link http://www.spip.net/3861
@@ -209,7 +209,7 @@ function balise_URL_SITE_dist($p)
  * Compile la balise `#URL_SITE_SPIP` qui retourne l'URL du site
  * telle que définie dans la configuration
  *
- * @balise URL_SITE_SPIP
+ * @balise
  * @link http://www.spip.net/4623
  * 
  * @param Champ $p
@@ -233,7 +233,7 @@ function balise_URL_SITE_SPIP_dist($p) {
  * - `#URL_PAGE` sans argument retourne l'URL courante.
  * - `#URL_PAGE*` retourne l'URL sans convertir les `&` en `&amp;`
  * 
- * @balise URL_PAGE
+ * @balise
  * @link http://www.spip.net/4630
  * @see generer_url_public()
  * @example
@@ -291,7 +291,7 @@ function balise_URL_PAGE_dist($p) {
  * - `#URL_ECRIRE` génère l'url pour la page d'accueil de l'espace privé
  * - `#URL_ECRIRE*` retourne l'URL sans convertir les `&` en `&amp;`
  * 
- * @balise URL_ECRIRE
+ * @balise
  * @link http://www.spip.net/5566
  * @see generer_url_ecrire()
  * @example
@@ -333,7 +333,7 @@ function balise_URL_ECRIRE_dist($p) {
  * - l'argument transmis à l'action (une chaîne de caractère)
  * - une éventuelle URL de redirection qui sert une fois l'action réalisée
  * 
- * @balise URL_ACTION_AUTEUR
+ * @balise
  * @see generer_action_auteur()
  * @example
  *     ```

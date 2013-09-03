@@ -50,7 +50,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *   on ne peut rien dire sur l'existence du squelette lors de la compil.
  *   On pourrait toutefois traiter le cas de l'argument qui est une constante.
  *
- * @balise CONFIGURER_METAS
+ * @balise
  * @deprecated Utiliser `#FORMULAIRE_CONFIGURER_XX`
  * @param Champ $p
  *     Pile au niveau de la balise

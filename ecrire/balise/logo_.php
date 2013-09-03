@@ -38,7 +38,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * - `LOGO_DOCUMENT{icone}`. Valeurs possibles : auto icone apercu vignette
  * - `LOGO_ARTICLE{200, 0}`. Redimensionnement indiqué
  * 
- * @balise LOGO_
+ * @balise
  * @uses logo_survol()
  * @example
  *     ```

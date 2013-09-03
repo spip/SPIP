@@ -23,7 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
  * Compile la balise dynamique `#LOGIN_PRIVE` qui permet d'afficher le
  * formulaire de connexion vers l'espace privé
  * 
- * @balise LOGIN_PRIVE
+ * @balise
  * @deprecated Utiliser `#FORMULAIRE_LOGIN`
  * 
  * @param Champ $p

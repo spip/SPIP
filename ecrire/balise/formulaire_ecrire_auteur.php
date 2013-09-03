@@ -31,7 +31,7 @@ include_spip('base/abstract_sql');
  * sont transmis au formulaire CVT (mais ils ne seront pas dévoilés
  * au visiteur).
  * 
- * @balise FORMULAIRE_ECRIRE_AUTEUR
+ * @balise
  * 
  * @param Champ $p
  *     Pile au niveau de la balise

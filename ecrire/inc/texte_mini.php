@@ -276,7 +276,7 @@ function echappe_retour_modeles($letexte, $interdire_scripts=false)
  *     Les points de suite ne sont pas ajoutés sur les extraits
  *     très courts.
  *
- * @filtre couper
+ * @filtre
  * @link http://www.spip.net/4275
  * 
  * @param string $texte
@@ -412,7 +412,7 @@ function echapper_faux_tags($letexte){
  *
  * Permet de protéger les textes issus d'une origine douteuse (forums, syndications...)
  *
- * @filtre safehtml
+ * @filtre
  * @link http://www.spip.net/4310
  * 
  * @param string $t

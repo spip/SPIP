@@ -375,7 +375,7 @@ function tester_url_absolue($url){
 /**
  * Prend une URL et lui ajoute/retire un paramètre
  *
- * @filtre parametre_url
+ * @filtre
  * @link http://www.spip.net/4255
  * @example
  *     ```
