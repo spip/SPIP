@@ -640,8 +640,7 @@ function inc_calcul_hierarchie_in_dist($id, $tout=true) {
 		return $tout ? (strlen($b[$id]) ? $b[$id] . ",$id" : $id) : "";
 	}
 
-	// Notre branche commence par la rubrique de depart si $tout=true
-	$hier = $tout?$id:"";
+	$hier = "";
 
 	// On ajoute une generation (les filles de la generation precedente)
 	// jusqu'a epuisement, en se protegeant des references circulaires
