@@ -652,7 +652,7 @@ function inc_calcul_hierarchie_in_dist($id, $tout=true) {
 		$ids_nouveaux_parents = join(',', array_map('reset', $parents));
 		$hier = $ids_nouveaux_parents.(strlen($hier)?','.$hier:'');
 	}
-
+	$id = $ids_nouveaux_parents;
 	# securite pour ne pas plomber la conso memoire sur les sites prolifiques
 	if (strlen($hier)<10000)
 		$b[$id] = $hier;
