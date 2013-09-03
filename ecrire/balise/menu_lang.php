@@ -60,7 +60,7 @@ function balise_MENU_LANG_stat ($args, $context_compil) {
 /**
  * Exécution de la balise dynamique `#MENU_LANG`
  *
- * @use menu_lang_pour_tous()
+ * @uses menu_lang_pour_tous()
  * @note
  *   Normalement `$opt` sera toujours non vide suite au test ci-dessus
  * 

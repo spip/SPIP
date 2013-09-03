@@ -340,7 +340,7 @@ class IterateurDATA implements Iterator {
 	 * 
 	 * Critère `{liste X1, X2, X3}`
 	 *
-	 * @see critere_liste_dist()
+	 * @see critere_DATA_liste_dist()
 	 * 
 	**/
 	protected function select_liste() {

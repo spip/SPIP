@@ -1451,7 +1451,7 @@ function spip_get_lock($nom, $timeout = 0) {
  * Relâcher un verrou SQL local 
  * 
  * @deprecated Pas d'équivalence actuellement en dehors de MySQL
- * @see spip_get_lock
+ * @see spip_get_lock()
  * 
  * @param string $nom
  *     Inutilisé. Le nom est calculé en fonction de la connexion principale

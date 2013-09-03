@@ -29,7 +29,7 @@ include_spip('inc/securiser_action');
  *
  * Relance la page si des plugins ont été modifiés, sinon affiche la liste.
  * 
- * @use actualise_plugins_actifs()
+ * @uses actualise_plugins_actifs()
  * @param string $retour Inutilisé
  */
  function exec_admin_plugin_dist($retour='') {
@@ -58,10 +58,10 @@ include_spip('inc/securiser_action');
  *
  * Affiche la liste des plugins demandés et les erreurs éventuelles.
  *
- * @use plugin_donne_erreurs()
- * @use liste_chemin_plugin()
- * @use plugin_installes_meta()
- * @use affiche_les_plugins_verrouilles()
+ * @uses plugin_donne_erreurs()
+ * @uses liste_chemin_plugin()
+ * @uses plugin_installes_meta()
+ * @uses affiche_les_plugins_verrouilles()
  * 
  * @pipeline_appel affiche_gauche
  * @pipeline_appel affiche_droit
@@ -222,7 +222,7 @@ function admin_plug_args($quoi, $erreur, $format)
 /**
  * Crée le code HTML de la liste des plugins verrouillés
  *
- * @use liste_plugin_files()
+ * @uses liste_plugin_files()
  * 
  * @param array $actifs
  *     Liste des plugins actifs
@@ -251,7 +251,7 @@ function affiche_les_plugins_verrouilles($actifs)
 /**
  * Crée le code HTML de la liste des librairies présentes
  *
- * @use liste_librairies()
+ * @uses liste_librairies()
  * 
  * @return string Code HTML
  */

@@ -45,7 +45,7 @@ $GLOBALS['liste_verrous'] = array();
  *
  * @link http://php.net/manual/fr/function.flock.php pour le type de verrou.
  * @see _SPIP_LOCK_MODE
- * @see spip_fopen_unlock()
+ * @see spip_fclose_unlock()
  * @uses spip_nfslock() si _SPIP_LOCK_MODE = 2.
  * 
  * @param string $fichier

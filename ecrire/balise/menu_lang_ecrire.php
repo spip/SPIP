@@ -61,7 +61,7 @@ function balise_MENU_LANG_ECRIRE_stat ($args, $context_compil) {
 /**
  * Exécution de la balise dynamique `#MENU_LANG_ECRIRE`
  *
- * @use menu_lang_pour_tous()
+ * @uses menu_lang_pour_tous()
  * @note
  *   Normalement `$opt` sera toujours non vide suite au test ci-dessus
  * 
@@ -80,7 +80,7 @@ function balise_MENU_LANG_ECRIRE_dyn($opt) {
  *
  * Le changement de langue se fait par l'appel à l'action `converser`
  * 
- * @use lang_select()
+ * @uses lang_select()
  * @see action_converser_dist()
  * 
  * @param string $nom

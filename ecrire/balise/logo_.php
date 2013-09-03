@@ -39,7 +39,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * - `LOGO_ARTICLE{200, 0}`. Redimensionnement indiqué
  * 
  * @balise LOGO_
- * @use logo_survol()
+ * @uses logo_survol()
  * @example
  *     ```
  *     #LOGO_ARTICLE

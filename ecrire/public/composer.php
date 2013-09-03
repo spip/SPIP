@@ -596,11 +596,10 @@ function remplace_sous_requete($w,$sousrequete){
 /**
  * Sépare les conditions de boucles simples de celles possédant des sous-requêtes.
  *
- * @param array
+ * @param array $where
  *     Description d'une condition WHERE de boucle
  * @return array
  *     Liste de 2 tableaux :
- * 
  *     - Conditions simples (ne possédant pas de sous requêtes)
  *     - Conditions avec des sous requêtes
 **/

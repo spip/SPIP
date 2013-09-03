@@ -40,9 +40,9 @@ function is_url_prive($cible){
  *
  * Si on est déjà connecté, on redirige directement sur l'URL cible !
  *
- * @use auth_informer_login()
- * @use is_url_prive()
- * @use login_auth_http()
+ * @uses auth_informer_login()
+ * @uses is_url_prive()
+ * @uses login_auth_http()
  * 
  * @param string $cible
  *     URL de destination après identification.
@@ -50,7 +50,7 @@ function is_url_prive($cible){
  *     après connexion sur le squelette public de l'auteur qui se connecte.
  * @param string $login
  *     Login de la personne à identifier (si connu)
- * @param null|bool
+ * @param null|bool $prive
  *     Identifier pour l'espace privé (true), public (false)
  *     ou automatiquement (null) en fonction de la destination de l'URL cible.
  * @return array
@@ -164,9 +164,9 @@ function login_auth_http()
  *
  * Connecte la personne si l'identification réussie.
  * 
- * @use auth_identifier_login()
- * @use auth_loger()
- * @use login_autoriser()
+ * @uses auth_identifier_login()
+ * @uses auth_loger()
+ * @uses login_autoriser()
  * 
  * @param string $cible
  *     URL de destination après identification.
@@ -174,7 +174,7 @@ function login_auth_http()
  *     après connexion sur le squelette public de l'auteur qui se connecte.
  * @param string $login
  *     Login de la personne à identifier (si connu)
- * @param null|bool
+ * @param null|bool $prive
  *     Identifier pour l'espace privé (true), public (false)
  *     ou automatiquement (null) en fonction de la destination de l'URL cible.
  * @return array
@@ -261,7 +261,7 @@ function login_autoriser()
  *     après connexion sur le squelette public de l'auteur qui se connecte.
  * @param string $login
  *     Login de la personne à identifier (si connu)
- * @param null|bool
+ * @param null|bool $prive
  *     Identifier pour l'espace privé (true), public (false)
  *     ou automatiquement (null) en fonction de la destination de l'URL cible.
  * @return array

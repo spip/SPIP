@@ -877,7 +877,7 @@ function sql_replace_multi($table, $tab_couples, $desc=array(), $serveur='', $op
  * Supprime une table SQL (structure et données)
  *
  * @api
- * @see sql_create_table()
+ * @see sql_create()
  * @see sql_drop_view()
  * 
  * @param string $table
@@ -1124,7 +1124,7 @@ function sql_create_base($nom, $serveur='', $option=true)
  *
  * @api
  * @see sql_drop_view()
- * @see sql_create_table()
+ * @see sql_create()
  * @see sql_get_select() Pour obtenir le texte de la requête SELECT pour créer la vue.
  * 
  * @param string $nom

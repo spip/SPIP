@@ -51,7 +51,7 @@ $GLOBALS['maj'][11268] = array(array('maj_11268'));
 /**
  * Mise à jour 11276 : réparer les éventuelles tables spip_documents
  * en se fondant sur l'extension de la colonne fichier
- * @use maj_1_938()
+ * @uses maj_1_938()
 **/
 function maj_11276 () {
 	include_spip('maj/v019');
@@ -303,8 +303,8 @@ $GLOBALS['maj'][16428] = array(
  *
  * Supprime la table au vieux format une fois les données transférées.
  * 
- * @use creer_ou_upgrader_table()
- * @use maj_liens_insertq_multi_check()
+ * @uses creer_ou_upgrader_table()
+ * @uses maj_liens_insertq_multi_check()
  * 
  * @param string $pivot
  *     Nom de la table pivot, tel que `auteur`
@@ -458,7 +458,7 @@ $GLOBALS['maj'][18955] = array(
 
 /**
  * Mise à jour pour recalculer les secteurs des rubriques
- * @use propager_les_secteurs()
+ * @uses propager_les_secteurs()
 **/
 function maj_propager_les_secteurs(){
 	include_spip('inc/rubriques');
@@ -469,8 +469,8 @@ function maj_propager_les_secteurs(){
  * Mise à jour des bdd SQLite pour réparer les collation des champs texte
  * pour les passer en NOCASE
  * 
- * @use base_lister_toutes_tables()
- * @use _sqlite_remplacements_definitions_table()
+ * @uses base_lister_toutes_tables()
+ * @uses _sqlite_remplacements_definitions_table()
 **/
 function maj_collation_sqlite(){
 

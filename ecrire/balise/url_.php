@@ -26,7 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Utilise le premier paramètre de la balise d'URL comme identifiant d'objet
  * s'il est donné, sinon le prendra dans un champ d'une boucle englobante.
  * 
- * @use generer_generer_url_arg()
+ * @uses generer_generer_url_arg()
  * @param string $type
  *     Type d'objet
  * @param Champ $p

@@ -145,6 +145,8 @@ function require_spip($f) {
 }
 
 /**
+ * Exécute une fonction (appellée par un pipeline) avec la donnée transmise.
+ * 
  * Un pipeline est lie a une action et une valeur
  * chaque element du pipeline est autorise a modifier la valeur
  * le pipeline execute les elements disponibles pour cette action,
@@ -157,12 +159,12 @@ function require_spip($f) {
  * 
  * on passe $val par reference pour limiter les allocations memoire
  * 
- * @param string $fond
- * 		Nom de la fonction appelée par le pipeline
+ * @param string $fonc
+ *     Nom de la fonction appelée par le pipeline
  * @param string|array $val
- * 		Les paramètres du pipeline, son environnement
+ *     Les paramètres du pipeline, son environnement
  * @return string|array $val
- * 		Les paramètres du pipeline modifiés
+ *     Les paramètres du pipeline modifiés
 **/
 function minipipe($fonc,&$val){
 	// fonction

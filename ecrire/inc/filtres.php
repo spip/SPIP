@@ -489,11 +489,11 @@ function proteger_amp($texte){
  * @filtre entites_html
  * @link http://www.spip.net/4280
  * 
- * @use echappe_html()
- * @use echappe_retour()
- * @use proteger_amp()
- * @use corriger_toutes_html()
- * @use corriger_toutes_entites_html()
+ * @uses echappe_html()
+ * @uses echappe_retour()
+ * @uses proteger_amp()
+ * @uses corriger_toutes_html()
+ * @uses corriger_toutes_entites_html()
  * 
  * @param string $texte
  *   chaine a echapper
@@ -614,7 +614,7 @@ function texte_backend($texte) {
  *
  * Comme texte_backend(), mais avec addslashes final pour squelettes avec PHP (rss)
  * 
- * @uses texte_backend
+ * @uses texte_backend()
  * @filtre texte_backendq
  * 
  * @param string $texte
@@ -837,14 +837,13 @@ function PtoBR($texte){
  * Ne devrait plus être utilisé et fait directement en CSS par un style
  * `word-wrap:break-word;`
  * 
- * @see http://www.alsacreations.com/tuto/lire/1038-gerer-debordement-contenu-css.html
- *
  * @note
  *   Pour assurer la compatibilité du filtre, on encapsule le contenu par
  *   un `div` ou `span` portant ce style CSS inline.
  * 
  * @filtre lignes_longues
  * @link http://www.spip.net/4298
+ * @link http://www.alsacreations.com/tuto/lire/1038-gerer-debordement-contenu-css.html
  * @deprecated Utiliser le style CSS `word-wrap:break-word;`
  * 
  * @param string $texte Texte
@@ -947,7 +946,7 @@ function attribut_html($texte,$textebrut = true) {
  * - Vide les URL vides comme `http://` ou `mailto:` (sans rien d'autre)
  * - échappe les entités et gère les `&amp;`
  *
- * @use entites_html()
+ * @uses entites_html()
  * 
  * @param string $url
  *     URL à vérifier et échapper
@@ -3505,7 +3504,7 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction="", $class=""
 /**
  * Crée un lien ayant une icone
  *
- * @use prepare_icone_base()
+ * @uses prepare_icone_base()
  * 
  * @param string $texte
  *     Texte du lien

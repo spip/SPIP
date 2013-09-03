@@ -148,7 +148,7 @@ function redirige_formulaire($url, $equiv = '', $format='message') {
  * 
  * @param string $script
  *     Nom de la page privée (exec)
- * @param string args
+ * @param string $args
  *     Arguments à transmettre. Exemple `etape=1&autre=oui`
  * @param string $equiv
  * @return void
@@ -162,7 +162,7 @@ function redirige_url_ecrire($script='', $args='', $equiv='') {
  *
  * Ainsi `http_status(301)` enverra le message `301 Moved Permanently`.
  * 
- * @uses header() de PHP
+ * @link http://php.net/manual/fr/function.header.php Fonction header() de PHP utilisée ici
  * 
  * @param int $status
  *     Code d'erreur
