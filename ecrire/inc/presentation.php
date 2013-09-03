@@ -125,7 +125,34 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	 . "</li>";
 }
 
-// http://doc.spip.org/@icone_inline
+/**
+ * Crée un lien précédé d'une icone au dessus du texte
+ *
+ * @uses icone_base()
+ * @see filtre_icone_verticale_dist() Pour l'usage en tant que filtre
+ *
+ * @example
+ *     ```
+ *     $icone = icone_verticale(_T('sites:info_sites_referencer'),
+ *         generer_url_ecrire('site_edit', "id_rubrique=$id_rubrique"),
+ *         "site-24.png", "new", 'right')
+ *     ```
+ * 
+ * @param string $texte
+ *     Texte du lien
+ * @param string $lien
+ *     URL du lien
+ * @param string $fond
+ *     Objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
+ * @param string $fonction
+ *     Fonction du lien (`edit`, `new`, `del`)
+ * @param string $align
+ *     Classe CSS, tel que `left`, `right` pour définir un alignement
+ * @param string $javascript
+ *     Javascript ajouté sur le lien
+ * @return string
+ *     Code HTML du lien
+**/
 function icone_verticale($texte, $lien, $fond, $fonction="", $align="", $javascript=""){
 	// cas d'ajax_action_auteur: faut defaire le boulot
 	// (il faudrait fusionner avec le cas $javascript)
@@ -137,7 +164,27 @@ function icone_verticale($texte, $lien, $fond, $fonction="", $align="", $javascr
 	return icone_base($lien, $texte, $fond, $fonction,"verticale $align",$javascript);
 }
 
-// http://doc.spip.org/@icone_horizontale
+/**
+ * Crée un lien précédé d'une icone horizontale
+ *
+ * @uses icone_base()
+ * @see filtre_icone_horizontale_dist() Pour l'usage en tant que filtre
+ *
+ * @param string $texte
+ *     Texte du lien
+ * @param string $lien
+ *     URL du lien
+ * @param string $fond
+ *     Objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
+ * @param string $fonction
+ *     Fonction du lien (`edit`, `new`, `del`)
+ * @param string $dummy
+ *     Inutilisé
+ * @param string $javascript
+ *     Javascript ajouté sur le lien
+ * @return string
+ *     Code HTML du lien
+**/
 function icone_horizontale($texte, $lien, $fond, $fonction="", $dummy="", $javascript="") {
 	$retour = '';
 	// cas d'ajax_action_auteur: faut defaire le boulot
