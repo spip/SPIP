@@ -42,7 +42,7 @@ function protege_champ($texte){
 			AND $texte
 			AND strpbrk($texte, "&\"'<>")!==false
 			) {
-				$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'),ENT_QUOTES);
+				$texte = htmlspecialchars($texte,ENT_QUOTES);
 		}
 	}
 	return $texte;
