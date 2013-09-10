@@ -52,8 +52,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 	'bouton_ajouter_participant' => 'OUZHPENNAÑ UR PERZHIAD :',
 	'bouton_annonce' => 'KEMENN',
 	'bouton_annuler' => 'Nullañ',
-	'bouton_cache_activer' => 'Réactiver le cache', # NEW
-	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'galloud da gas ur gemennadenn',
 	'bouton_checkbox_indiquer_site' => 'merkañ ul lec\'hienn web dre ret',
 	'bouton_checkbox_signature_unique_email' => 'ur sinadur hepken dre chomlec\'h postel ',
@@ -289,7 +287,6 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 	'info_barre_outils' => 'gant e varrenn ostilhoù ?',
 	'info_base_installee' => 'Staliet eo framm ho tiaz-titouroù.',
 	'info_bio' => 'Buhezskrid',
-	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Tog',
 	'info_chapeau_2' => 'Tog :',
 	'info_chemin_acces_1' => 'Dibarzhioù : <b>hent moned er rollad tud</b>',
@@ -421,7 +418,6 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 	'info_nb_visiteurs' => '@nb@ gweladennerion',
 	'info_nom' => 'Anv',
 	'info_nom_destinataire' => 'Anv an degemerer',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Anv ho lec\'hienn',
 	'info_nombre_articles' => '@nb_articles@ pennad,',
 	'info_nombre_partcipants' => 'PERZHIDI ER GAOZ :',
@@ -594,7 +590,6 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	'install_select_langue' => 'Diuzit ur yezh, ha klikit war « War-lerc\'h » evit kregiñ gant ar staliañ.',
 	'install_select_type_db' => 'Merkit ar seurt diaz titouroù :',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -750,7 +745,6 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	'plugin_info_plugins_dist_1' => 'Karget ha gweredek eo an askouezioù-mañ er c\'havlec\'h @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Diweredekaus ez int',
 	'plugin_info_telecharger' => 'da bellgargañ adal @url@ ha da staliañ e @rep@',
-	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Levraouegoù bet staliet',
 	'plugin_necessite_lib' => 'Ezhomm en deus an adveziant-mañ eus al levraoueg @lib@',
 	'plugin_necessite_plugin' => 'Ezhomm en deus eus an adveziant @plugin@ e stumm @version@ d\'an nebeutañ.',
@@ -801,7 +795,6 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	// S
 	'sans_heure' => 'hep eur',
 	'statut_admin_restreint' => '(merour strishaet)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Lodenn labour CRON @function@ (ASAP)',
