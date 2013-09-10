@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Hlavní strana', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Články',
 	'articles_auteur' => 'Články tohoto autora',
 	'articles_populaires' => 'Nejčtenější články',
@@ -19,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Na této adrese není žádný odkaz',
 	'aucune_breve' => 'Na této adrese není žádná novinka',
 	'aucune_rubrique' => 'Na této adrese není žádná rubrika',
-	'auteur' => 'Auteur', # NEW
 	'autres' => 'Ostatní',
 	'autres_breves' => 'Další novinky',
 	'autres_groupes_mots_clefs' => 'Další skupiny klíčových slov',
@@ -30,7 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Komentář k tomuto odkazu',
-	'contact' => 'Contact', # NEW
 	'copie_document_impossible' => 'Dokument není možné kopírovat',
 
 	// D
@@ -67,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Zpráva',
 	'messages_forum' => 'Zprávy v diskusním fóru', # MODIF
 	'messages_recents' => 'Poslední zprávy v diskusních fórech',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Klíčová slova',
 	'mots_clefs_meme_groupe' => 'Klíčová slova ve stejné skupině',
 

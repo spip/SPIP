@@ -67,7 +67,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => '消息',
 	'messages_forum' => '论坛消息', # MODIF
 	'messages_recents' => '最近论坛消息',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => '关键词',
 	'mots_clefs_meme_groupe' => '同组关键词',
 
@@ -87,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plan_site' => '站点地图',
 	'popularite' => '热点',
 	'poster_message' => '发表消息',
-	'proposer_site' => 'Vous pouvez proposer un site à ajouter dans cette rubrique :', # NEW
 
 	// R
 	'repondre_article' => '回复文章',
@@ -114,8 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'ver_imprimer' => '打印版本',
-	'voir_en_ligne' => '在线预览',
-	'voir_squelette' => 'voir le squelette de cette page' # NEW
+	'voir_en_ligne' => '在线预览'
 );
 
 ?>

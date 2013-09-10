@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'ראשי', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'מאמרים',
 	'articles_auteur' => 'מאמרים של אותו המחבר',
 	'articles_populaires' => 'המאמרים הפופולרים ביותר ',
@@ -19,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'אין אתר בכתובת זו',
 	'aucune_breve' => 'אין מבזק בכתובת זו',
 	'aucune_rubrique' => 'אין מדור בכתובת זו',
-	'auteur' => 'Auteur', # NEW
 	'autres' => 'אחר',
 	'autres_breves' => 'מבזקים אחרים',
 	'autres_groupes_mots_clefs' => 'קבוצות אחרות של מילות מפתח',
@@ -30,7 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'הוספת תגובה לאתר',
-	'contact' => 'Contact', # NEW
 	'copie_document_impossible' => 'לא מצליח להעתיק מסמך',
 
 	// D
@@ -67,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'הודעה',
 	'messages_forum' => 'הודעות הפורום', # MODIF
 	'messages_recents' => 'ההודעות החדשות בפורום',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'מילות מפתח',
 	'mots_clefs_meme_groupe' => 'מילות מפתח מאותה קבוצה',
 

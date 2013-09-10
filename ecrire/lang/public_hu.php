@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Főoldal', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Cikkek',
 	'articles_auteur' => 'E szerző cikkei',
 	'articles_populaires' => 'Legnépszerűbb cikkek',
@@ -19,8 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Nincs honlap ezen a címen',
 	'aucune_breve' => 'Nincs hír ezen a címen',
 	'aucune_rubrique' => 'Nincs rovat ezen a címen',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
 	'autres_breves' => 'Egyéb hírek',
 	'autres_groupes_mots_clefs' => 'Egyéb kulcsszó csoportok',
 	'autres_sites' => 'Egyéb honlapok',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Hozzászólás a honlapról',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 	// D
 	'date' => 'Dátum',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'Üzenet küldés',
 	'espace_prive' => 'Privát rész',
 
-	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'A honlap felépítése',
 
 	// J
 	'jours' => 'napok',
-
-	// L
-	'lien_connecter' => 'Se connecter', # NEW
 
 	// M
 	'meme_auteur' => 'Ugyanettől a szerzőtől',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Üzenet',
 	'messages_forum' => 'Fórum üzenetei', # MODIF
 	'messages_recents' => 'A fórumok legfríssebb üzenetei',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Kulcsszavak',
 	'mots_clefs_meme_groupe' => 'Kulcsszavak ugyanabban a csoportban',
 
@@ -102,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'A honlap SPIP segítségével készült',
 	'sites_web' => 'Honlapok',
 	'sous_rubriques' => 'Alsóbb rovatok',
-	'spam' => 'Spam', # NEW
 	'suite' => 'folytatás',
 	'sur_web' => 'Valahol a Weben',
 	'syndiquer_rubrique' => 'A rovat szindikálása',
@@ -114,8 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'ver_imprimer' => 'Nyomtatható változat',
-	'voir_en_ligne' => 'Látni élőben',
-	'voir_squelette' => 'télécharger le squelette de cette page' # NEW
+	'voir_en_ligne' => 'Látni élőben'
 );
 
 ?>

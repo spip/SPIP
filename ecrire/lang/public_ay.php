@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Uñnaq qamawita', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Qillqatanaka',
 	'articles_auteur' => 'Qillqirin aka qillqatanakapa',
 	'articles_populaires' => 'Uñt\'at qillqatanaka',
@@ -19,8 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Aka utxawinx ni kuna qamawins utjkiti',
 	'aucune_breve' => 'Aka utxawinx ni kuna jisk\'aptatas utjkiti',
 	'aucune_rubrique' => 'Aka utxawinx ni kuna t\'aqas utjkiti',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Otros', # NEW
 	'autres_breves' => 'Yaqha jisk\'aptatanaka',
 	'autres_groupes_mots_clefs' => 'Imt\'aw arunakata yaqha tamanaka',
 	'autres_sites' => 'Yaqha qamawinaka',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Aka qamawxat aruskipt\'aña',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Imposible copiar el documento', # NEW
 
 	// D
 	'date' => 'Uru',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'Ma yatiyaw apayaña',
 	'espace_prive' => 'Ch\'usawx jark\'ata',
 
-	// F
-	'formats_acceptes' => 'Formatos aceptados: @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'Qamawita kamachiñawi',
 
 	// J
 	'jours' => 'Urunaka',
-
-	// L
-	'lien_connecter' => 'Conectarse', # NEW
 
 	// M
 	'meme_auteur' => 'Pachpa qillqirita',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Yatiyawi',
 	'messages_forum' => 'Aruskipawit yatiyawinaka', # MODIF
 	'messages_recents' => 'Amuyt\'awit jichhak amuyt\'awinaka',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Imt\'at arunaka',
 	'mots_clefs_meme_groupe' => 'Pachpa taman imt\'at arunaka',
 
@@ -102,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'Qamaw SPIP ukamp lurata',
 	'sites_web' => 'web qamawinaka',
 	'sous_rubriques' => 'Jutir t\'aqa',
-	'spam' => 'Spam', # NEW
 	'suite' => 'Sarantaskakiña',
 	'sur_web' => 'Web ukata',
 	'syndiquer_rubrique' => 'Aka t\'aqa apxasiña',

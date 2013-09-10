@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Lakey lo sit', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Bann zartik',
 	'articles_auteur' => 'Bann zartik lotèr-la',
 	'articles_populaires' => 'Bann zartik sak lé pli popilèr',
@@ -19,8 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Néna pa okin sitwèb si ladrès-la',
 	'aucune_breve' => 'Néna pa okin titnouvèl si ladrès-la',
 	'aucune_rubrique' => 'Néna pa okinn ribrik si ladrès-la',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
 	'autres_breves' => 'Bann zot tite-nouvèl',
 	'autres_groupes_mots_clefs' => 'Bann zot bann molaklé',
 	'autres_sites' => 'Bann zot sitwèb',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Donn out lavi si lo sit-la',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 	// D
 	'date' => 'Ladat',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'Po anvwayé inn modékri',
 	'espace_prive' => 'Léspas privé',
 
-	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'Bardrin lo sitwèb',
 
 	// J
 	'jours' => 'bann zour',
-
-	// L
-	'lien_connecter' => 'Se connecter', # NEW
 
 	// M
 	'meme_auteur' => 'Pa lotèr minm sa-minm',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Modékri',
 	'messages_forum' => 'Bann modékri andann forom', # MODIF
 	'messages_recents' => 'Bann modékri la finn mèt an dernyé andan forom',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Bann molaklé',
 	'mots_clefs_meme_groupe' => 'Bann molaklé andann lo minm bann sa-minm',
 
@@ -102,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'Sit-la ni la fé èk SPIP',
 	'sites_web' => 'Bann sitwèb',
 	'sous_rubriques' => 'Bann souribrik',
-	'spam' => 'Spam', # NEW
 	'suite' => 'laswit',
 	'sur_web' => 'Si lo wèb',
 	'syndiquer_rubrique' => 'Po sindiké ribrik-la',

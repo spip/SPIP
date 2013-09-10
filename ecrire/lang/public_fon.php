@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Hɔntogbo', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Wekpa lɛ̂',
 	'articles_auteur' => 'Nyɔwlantɔ é lɔ sin wekpa lɛ̂',
 	'articles_populaires' => 'wekpa lɛ̂  ê to bi tùn yé',
@@ -19,8 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Gblogbloji ɖē̄  do  gesi é lɔ ji a',
 	'aucune_breve' => 'Xogbè kléwun ɖē̄  do  gesi é lɔ ji a',
 	'aucune_rubrique' => 'ɖiɖɛ ɖē̄ do gesi é lɔ ji a ',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
 	'autres_breves' => 'Xogbè kléwun de vo',
 	'autres_groupes_mots_clefs' => 'Xota bɛ dokpɔ lɛ̂ ',
 	'autres_sites' => 'Gblogbloji ɖē̄ vo lɛ̂',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'wlɔkànnú xo lɛ̂',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 	// D
 	'date' => 'Azan',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'Sɛ wɛn do ',
 	'espace_prive' => 'tɛnkandovo',
 
-	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'Tito gblogbloji ɔ tɔn',
 
 	// J
 	'jours' => 'Azan lɛ̂',
-
-	// L
-	'lien_connecter' => 'Se connecter', # NEW
 
 	// M
 	'meme_auteur' => 'Nyɔwlantɔ ɖokpo ɔ',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Wɛn',
 	'messages_forum' => 'wɛn pkékplé ɔ tɔn lê', # MODIF
 	'messages_recents' => 'wɛn gùdógùdotɔn pkékplé ɔ tɔn lê',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'xótá lɛ̂',
 	'mots_clefs_meme_groupe' => 'xótá akpa ɖokpó ɔ lɛ̂ tɔn',
 
@@ -102,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'Kpo alɔgɔ Supipu tɔn kpó wɛ gblogblojí ɔ nyí wiwa',
 	'sites_web' => 'Atɛ lɛ̂',
 	'sous_rubriques' => 'Akpa xwé',
-	'spam' => 'Spam', # NEW
 	'suite' => 'Bɔ ɖé wu tɔn',
 	'sur_web' => 'ɖò atɛ ɔ  jì',
 	'syndiquer_rubrique' => 'Zê aceji do akpa é lɔ jí',
