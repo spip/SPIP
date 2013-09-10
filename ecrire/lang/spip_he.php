@@ -23,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'תיקון מילת המפתח',
 	'admin_modifier_rubrique' => 'תיקון המדור',
 	'admin_recalculer' => 'רענון הדף',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => 'הצג תרגומים',
 	'alerte_maj_impossible' => '<b>אזהרה !</b> עדכון של בסיס הנתונים SQL לגרסה @version@ אין אפשרות, אולי בגלל בעיית זכות הגישה לבסיס הנתונים. אנא צור קשר עם המאכסן שלך.',
 	'alerte_modif_info_concourante' => 'אזהרה: מידע כבר נשתנה במקום אחר. הערך הוא עכשיו :',
@@ -64,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_changer' => 'תיקון',
 	'bouton_chercher' => 'חיפוש',
 	'bouton_choisir' => 'בחר',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'הורדה', # MODIF
 	'bouton_enregistrer' => 'שמור',
 	'bouton_radio_desactiver_messagerie_interne' => 'ביטול ההתכתבות הפנימית',
@@ -107,20 +105,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ ב@nommois@',
 	'date_demain' => 'מחר',
 	'date_fmt_heures_minutes' => '@h@:@m@',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ בשעה @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ ב@nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ ב@nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'ב@nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'שעות',
 	'date_hier' => 'אתמול',
 	'date_il_y_a' => 'יש @delai@',
@@ -181,28 +170,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'חודשים',
 	'date_mois_1' => 'ינואר',
 	'date_mois_10' => 'אוקטובר',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'נובמבר',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'דצמבר',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'פברואר',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'מרץ',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'אפריל',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'מאי',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'יוני',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'יולי',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'אוגוסט',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'ספטמבר',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'חורף',
 	'date_saison_2' => 'אביב',
 	'date_saison_3' => 'קיץ',
@@ -236,31 +213,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'שליחה דרך האתר',
 	'erreur' => 'שגיאה',
 	'erreur_balise_non_fermee' => 'התאג האחרון אינו נגמר :',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'שגיאות',
 	'etape' => 'שלב',
 
 	// F
 	'fichier_introuvable' => 'לא נמצא הקובץ @fichier@',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'אתה כבר רשום.',
 	'form_email_non_valide' => 'כתובת הדוא"ל שלך לא מתאימה.',
 	'form_forum_access_refuse' => 'הכניסה לאתר אסורה לך.',
 	'form_forum_bonjour' => 'שלום @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'כתובת הדוא"ל הזאת כבר רשומה במערכת, כתוצאה מכך הינך יכול להשתמש בסיסמתך הרגילה.',
 	'form_forum_identifiant_mail' => 'המזהה החדש נשלח אליך בדוא"ל.',
 	'form_forum_identifiants' => 'פרטים אישיים',
@@ -334,7 +295,6 @@ sera ignorée) :
 	'icone_supprimer_image' => 'מחק תמונה זו',
 	'icone_tous_articles' => 'כל המאמרים שלך',
 	'icone_tous_auteur' => 'כל המחברים',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'בקר את האתר', # MODIF
 	'icone_voir_en_ligne' => 'השקפת אונליין',
 	'img_indisponible' => 'תמונה לא נמצאת',
@@ -356,14 +316,10 @@ sera ignorée) :
 	'info_article_supprime' => 'מאמר נמחק',
 	'info_articles' => 'מאמרים',
 	'info_articles_a_valider' => 'לתת תוקף למאמרים',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'מאמרי נטענו',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => ':(מחבר(ים',
 	'info_authentification_ftp' => '.(.אישור (על ידי אף.טי.פי',
 	'info_breves_2' => 'מבזקים',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'החיבור מסורב',
 	'info_contact_developpeur' => '.אנא צור קשר עם המפתח',
 	'info_contenance' => ':האתר הזה מכיל',
@@ -375,14 +331,11 @@ sera ignorée) :
 	'info_creer_repertoire' => ':נא צור קובץ או ספרייה אשר נקראת',
 	'info_creer_repertoire_2' => 'בתוך מדור משנה <b>@repertoire@</b>, ואחרי כן:',
 	'info_creer_vignette' => 'יצירה אוטמטית של הגפנית',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'להבהיר',
 	'info_descriptif_nombre' => ':(תיאור(ים',
 	'info_description' => ':תיאור',
 	'info_description_2' => ':תיאור',
 	'info_dimension' => ':גודל',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'כתוב הודעה אישית',
 	'info_email_invalide' => '.כתובת דוא"ל שגויה',
 	'info_en_cours_validation' => 'המאמרים שלך בהתקדמות',
@@ -422,8 +375,6 @@ sera ignorée) :
 	'info_mail_fournisseur' => 'you@isp.com',
 	'info_message_2' => 'הודעה',
 	'info_message_supprime' => 'הודעה נמחקה',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => ':תאריך של פרסום ברשת',
 	'info_modification_parametres_securite' => 'שינוי הפרמטרים של האבטחה',
 	'info_mois_courant' => ':במשך החודש',
@@ -461,13 +412,9 @@ sera ignorée) :
 	'info_rechercher' => 'חיפוש',
 	'info_rechercher_02' => ':חיפוש',
 	'info_remplacer_vignette' => 'החלפת הגפנית שבברירת מחדל ללוגו מותאם :',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'ללא כותרת',
 	'info_selectionner_fichier' => 'בחירת קובץ בתיקיה @upload@',
 	'info_selectionner_fichier_2' => 'בחירת קובץ :',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'מחיקת הגפנית',
 	'info_symbole_bleu' => 'הסימן <b>הכחול</b> מציין <b>תזכיר</b> אחד : כלומר הודעה לשימושך האישי.',
 	'info_symbole_jaune' => 'הסימן <b>הצהוב</b> מציין <b>מודעה לכל העורכים </b>: כל מנהלן יכול לערוך אותה, וכל העורכים יכולים לראות אותה.',
@@ -489,8 +436,6 @@ sera ignorée) :
 	'infos_vos_pense_bete' => 'התזכירים שלך', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'הצג צלמיות בלבד',
 	'lien_afficher_texte_icones' => 'הצג צלמיות וטקסט',
 	'lien_afficher_texte_seul' => 'הצג טקסט בלבד',
@@ -537,7 +482,6 @@ sera ignorée) :
 	'login_retour_site' => 'חזור לאתר הציבורי',
 	'login_retoursitepublic' => 'חזור לאתר הציבורי',
 	'login_sans_cookiie' => 'חיובר ללא עוגיה',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'הרשמה',
 	'login_test_navigateur' => 'מבחן הדפדפן /חיבור מחדש',
 	'login_verifiez_navigateur' => '(בכל זאת נא לבדוק שהדפדפן שלך לא זכר את הסיסמה...)',
@@ -600,7 +544,6 @@ sera ignorée) :
 	'pass_nouveau_pass' => 'סיסמה חדשה',
 	'pass_ok' => 'סיסמה נכונה',
 	'pass_oubli_mot' => 'שכיחת הסיסמה',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'סגור את החלון',
 	'pass_rappel_login' => 'לתשומת לבך : שם משתמש שלך הינו « @login@ ».',
 	'pass_recevoir_mail' => 'תקבל בקרוב דוא"ל שמסביר לך איך לקבל שוב את כניסתך לאתר.',
@@ -623,7 +566,6 @@ sera ignorée) :
 	'suivant' => 'הבא',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ KB',
 	'taille_mo' => '@taille@ MB',
 	'taille_octets' => '@taille@ בייטים',
@@ -669,7 +611,6 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => 'מחבר נמחק',
 	'titre_image_redacteur' => 'כותב ללא כניסה',
 	'titre_image_redacteur_02' => 'מחבר',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'מבקר',
 	'titre_joindre_document' => 'צירוף מסמך',
 	'titre_mots_cles' => 'מילות מפתח',

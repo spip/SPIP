@@ -23,12 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'このキーワードを修正',
 	'admin_modifier_rubrique' => 'このセクションを修正',
 	'admin_recalculer' => 'ページの再読み込み',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => '???????',
 	'alerte_maj_impossible' => '<b>警告</b> My SQLは、データベースを@version@ にアップデート出来ませんでした。 データベースのアクセス権に問題があると思われます。インターネットサービスプロバイダにお問い合わせください。', # MODIF
 	'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifié par ailleurs. La valeur actuelle est :', # MODIF
 	'analyse_xml' => 'XML解析',
-	'annuler' => 'Annuler', # NEW
 	'antispam_champ_vide' => '??????????????????',
 	'articles_recents' => 'もっとも新しい記事',
 	'avis_archive_incorrect' => 'その圧縮ファイルは、SPIP用ファイルではありません。',
@@ -59,12 +57,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_lien' => 'ハイパーリンクの差込 [リンク先->http://...]',
 	'barre_lien_input' => 'あなたのハイパーリンクの目標を入力してください (あなたはフォームのURLにhttp://mysite.com、あるいは単純にこのサイトの記事番号を与えてもよいです)。',
 	'barre_note' => '変える [[Footnote]]',
-	'barre_paragraphe' => 'Créer un paragraphe', # NEW
 	'barre_quote' => '<quote>メッセージへ引用符</quote>',
 	'bouton_changer' => '修正する',
 	'bouton_chercher' => '検索',
 	'bouton_choisir' => '選択',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'Télécharger', # MODIF
 	'bouton_enregistrer' => '保存',
 	'bouton_radio_desactiver_messagerie_interne' => '内部のメッセージ交換を停止',
@@ -107,20 +103,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@nommois@月@j@日',
 	'date_demain' => '明日',
 	'date_fmt_heures_minutes' => '@h@時@m@分',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@の@heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@nommois@月@jour@日',
 	'date_fmt_jour_mois_annee' => '@annee@年@nommois@月@jour@日',
 	'date_fmt_mois_annee' => '@annee@年@nommois@月',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => '@date@@nomjour@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => '時間',
 	'date_hier' => '昨日',
 	'date_il_y_a' => '@delai@前',
@@ -181,28 +168,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'ヶ月',
 	'date_mois_1' => '1',
 	'date_mois_10' => '10',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => '11',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => '12',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => '2',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => '3',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => '4',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => '5',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => '6',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => '7',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => '8',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => '9',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => '冬',
 	'date_saison_2' => '春',
 	'date_saison_3' => '夏',
@@ -212,7 +187,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_un_mois' => '月',
 	'date_une_heure' => '時間',
 	'date_une_minute' => '分',
-	'date_une_seconde' => 'seconde', # NEW
 	'date_une_semaine' => '週間',
 	'dirs_commencer' => ' 本当にインストールを始めるために',
 	'dirs_preliminaire' => '下準備: <b>アクセス権限を設定</b>',
@@ -232,35 +206,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'double_occurrence' => 'Double occurrence', # MODIF
 
 	// E
-	'en_cours' => 'en cours', # NEW
 	'envoi_via_le_site' => 'サイト経由で送信',
 	'erreur' => 'ƒGƒ‰[',
-	'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
-	'erreur_texte' => 'erreur(s)', # NEW
-	'etape' => 'Étape', # NEW
 
 	// F
 	'fichier_introuvable' => '見つからなかったファイル: @fichier@',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'あなたは既に登録されています。',
 	'form_email_non_valide' => 'あなたのe-mailアドレスは有効ではありません。',
 	'form_forum_access_refuse' => 'あなたはもう、このサイトへアクセスすることができません。',
 	'form_forum_bonjour' => '素晴らしい日を @nom@、',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'このe-mailアドレスは登録済みです、従って、あなたはいつものパスワードを使うことが出来ます。',
 	'form_forum_identifiant_mail' => 'あなたの新しいIDは、ちょうど今、e-mailであなたに送られたところです。',
 	'form_forum_identifiants' => '個人ID',
@@ -334,7 +288,6 @@ sera ignorée) :
 	'icone_supprimer_image' => 'この画像を削除',
 	'icone_tous_articles' => 'あなたのすべての記事',
 	'icone_tous_auteur' => 'すべての著者たち',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'サイトを訪れる', # MODIF
 	'icone_voir_en_ligne' => 'オンラインで見る',
 	'img_indisponible' => '利用できないイメージ',
@@ -356,14 +309,10 @@ sera ignorée) :
 	'info_article_supprime' => '消した記事',
 	'info_articles' => '記事',
 	'info_articles_a_valider' => '検査済み記事',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => '提出された記事',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => '著者(たち):',
 	'info_authentification_ftp' => '認証 (FTPによって)。',
 	'info_breves_2' => 'ニュース',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => '接続が拒否された',
 	'info_contact_developpeur' => '開発者に連絡を取って下さい。',
 	'info_contenance' => 'このサイトのコンテンツ:',
@@ -375,14 +324,11 @@ sera ignorée) :
 	'info_creer_repertoire' => '呼び出されたファイルかディレクトリを作って下さい:',
 	'info_creer_repertoire_2' => 'サブディレクトリ <b>@repertoire@</b>内、それから', # MODIF
 	'info_creer_vignette' => '自動的に作成されたサムネイル',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => '示す',
 	'info_descriptif_nombre' => '記述:',
 	'info_description' => '記述:',
 	'info_description_2' => '記述:',
 	'info_dimension' => 'サイズ:',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'プライベートなメッセージを書く',
 	'info_email_invalide' => '無効なe-mailアドレス。',
 	'info_en_cours_validation' => '進行中のあなたの記事',
@@ -422,8 +368,6 @@ sera ignorée) :
 	'info_mail_fournisseur' => 'you@isp.com',
 	'info_message_2' => 'メッセージ',
 	'info_message_supprime' => 'メッセージは削除された',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'オンラインに公表された日付:',
 	'info_modification_parametres_securite' => 'セキュリティパラメータの変更',
 	'info_mois_courant' => 'その月:',
@@ -439,10 +383,8 @@ sera ignorée) :
 	'info_nouveau_message' => 'あなたに１通メッセージが届いています',
 	'info_nouveaux_messages' => 'あなたに@total_messages@通のメッセージが来ています',
 	'info_numero_abbreviation' => 'No',
-	'info_obligatoire' => 'Cette information est obligatoire', # NEW
 	'info_pense_bete' => 'メモ',
 	'info_petit_ecran' => '小さく表示',
-	'info_petition_close' => 'Pétition close', # NEW
 	'info_pixels' => 'ピクセル',
 	'info_plusieurs_mots_trouves' => '"@cherche_mot@"についていくつかのキーワードが見つかった:',
 	'info_portfolio_automatique' => '自動作成の代表作品集:',
@@ -461,13 +403,9 @@ sera ignorée) :
 	'info_rechercher' => 'サイト内検索',
 	'info_rechercher_02' => '検索 :',
 	'info_remplacer_vignette' => 'カスタマイズしたロゴによってデフォルトのビネット(半身像、写真)を置き換える:',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => '無名',
 	'info_selectionner_fichier' => 'あなたは@upload@フォルダのファイルを選択することが出来ます。', # MODIF
 	'info_selectionner_fichier_2' => '選択したファイル:',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'ビネット(半身像、模様)を削除',
 	'info_symbole_bleu' => '<b>青</b>のシンボルは、<b>メモ</b>を表します: すなわちあなたが個人的に使用するメッセージ', # MODIF
 	'info_symbole_jaune' => '<b>黄色</b>のシンボルは、<b>すべてのエディターへのアナウンス</b>: それはすべての管理者が編集でき、すべてのエディターに見えます。', # MODIF
@@ -489,8 +427,6 @@ sera ignorée) :
 	'infos_vos_pense_bete' => 'あなたのメモ', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'アイコン表示のみ',
 	'lien_afficher_texte_icones' => 'アイコンとテキストの表示',
 	'lien_afficher_texte_seul' => 'テキスト表示のみ',
@@ -510,7 +446,6 @@ sera ignorée) :
 	'lien_visites' => '@visites@訪問',
 	'lien_voir_auteur' => 'この著者を調べる',
 	'ligne' => '—ñ',
-	'login' => 'Connexion', # NEW
 	'login_acces_prive' => 'プライベートエリアへアクセスする',
 	'login_autre_identifiant' => '他のIDで接続する',
 	'login_cookie_accepte' => 'クッキーを許可するようにあなたのブラウザを設定してください（少なくともこのサイトの）。',
@@ -537,22 +472,17 @@ sera ignorée) :
 	'login_retour_site' => 'パブリックなサイトへ戻る',
 	'login_retoursitepublic' => 'パブリックなサイトへ戻る',
 	'login_sans_cookiie' => 'クッキーなしで認証',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => '登録',
 	'login_test_navigateur' => 'ブラウザが再接続を試みている',
 	'login_verifiez_navigateur' => '(しかし、あなたのブラウザがあなたのパスワードを記憶しなかったかどうか確かめて下さい...)',
 
 	// M
-	'masquer_colonne' => 'Masquer cette colonne', # NEW
-	'masquer_trad' => 'masquer les traductions', # NEW
 	'module_fichiers_langues' => '言語ファイル',
 
 	// N
 	'navigateur_pas_redirige' => 'もし、あなたのブラウザがリダイレクトしないなら、続けるためにここをクリックして下さい。',
-	'numero' => 'Numéro', # NEW
 
 	// O
-	'occurence' => 'Occurrence', # NEW
 	'onglet_affacer_base' => 'データベースの削除',
 	'onglet_auteur' => '著者',
 	'onglet_contenu_site' => 'そのサイトのコンテンツ',
@@ -597,7 +527,6 @@ sera ignorée) :
 	'pass_nouveau_pass' => '新しいパスワード',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'パスワードを忘れている',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'このウィンドウを終了する',
 	'pass_rappel_login' => 'リマインダー: あなたのID (ログインID) は " @login@ "。',
 	'pass_recevoir_mail' => 'あなたは、このサイトへどのようにアクセスできるかの説明を、e-mailで受け取るでしょう。',
@@ -608,11 +537,7 @@ sera ignorée) :
 	'previsualisation' => 'プレビュー',
 	'previsualiser' => 'プレビューを表示する',
 
-	// R
-	'retour' => 'Retour', # NEW
-
 	// S
-	'spip_conforme_dtd' => 'SPIP considère ce document comme conforme à son DOCTYPE :', # NEW
 	'squelette' => 'テンプレート',
 	'squelette_inclus_ligne' => 'template, lineを含んでいます',
 	'squelette_ligne' => 'template, line',
@@ -620,7 +545,6 @@ sera ignorée) :
 	'suivant' => '次へ',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ kb',
 	'taille_mo' => '@taille@ Mb',
 	'taille_octets' => '@taille@ bytes',
@@ -637,7 +561,6 @@ sera ignorée) :
       慎重にこの参照に注意します、
       また最後にまだ記事に画像が現れることを
       確認して下さい。', # MODIF
-	'texte_erreur_visiteur' => 'Vous avez tenté d\'accéder à l\'espace privé avec un login qui ne le permet pas.', # NEW
 	'texte_inc_auth_1' => 'あなたはあなた自身をログインID
   <b>@auth_login@</b>と思っていますが、それはデータベースに存在しません(もう)。
   Try to', # MODIF
@@ -666,26 +589,20 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => '削除された著者',
 	'titre_image_redacteur' => 'アクセス無しのエディタ',
 	'titre_image_redacteur_02' => '編集者',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => '訪問者',
 	'titre_joindre_document' => 'ドキュメントを置く',
 	'titre_mots_cles' => 'キーワード',
 	'titre_probleme_technique' => '警告: 技術的な問題 (SQL server) サイトのこの部分へのアクセスを防ぎます。<p>あなたの理解に感謝します。', # MODIF
 	'titre_publier_document' => 'このセクションで文章を公開する',
-	'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-	'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 	'titre_statistiques' => 'サイトの統計',
 	'titre_titre_document' => '文章のタイトル:',
-	'todo' => 'à venir', # NEW
 	'trad_reference' => '(参考記事)', # MODIF
 
 	// Z
 	'zbug_balise_b_aval' => ': Bタグはループ内で遅すぎる',
 	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
-	'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 	'zbug_boucle' => 'ループ',
 	'zbug_boucle_recursive_undef' => '未定義な回帰的なループ', # MODIF
-	'zbug_calcul' => 'calcul', # NEW
 	'zbug_champ_hors_boucle' => 'ループ外の @champ@ フィールド',
 	'zbug_champ_hors_motif' => 'ループ外の @champ@ フィールドは @motif@ とタグされた', # MODIF
 	'zbug_code' => 'コード',
@@ -696,37 +613,17 @@ sera ignorée) :
 	'zbug_erreur_boucle_double' => '歪んでいる@id@: ２重登録', # MODIF
 	'zbug_erreur_boucle_fermant' => '歪んでいる@id@: 欠けている終了タグ', # MODIF
 	'zbug_erreur_boucle_syntaxe' => '間違ったループ (歪んだ) 構文 ', # MODIF
-	'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
 	'zbug_erreur_execution_page' => 'ページの計算でエラー', # MODIF
 	'zbug_erreur_filtre' => 'エラー - 未定義のフィルター: <b>"@filtre@"</b>', # MODIF
 	'zbug_erreur_meme_parent' => '{meme_parent} only applies to loops (FORUMS) and (RUBRIQUES)', # MODIF
 	'zbug_erreur_squelette' => 'テンプレート内でエラー',
-	'zbug_hors_compilation' => 'Hors Compilation', # NEW
 	'zbug_info_erreur_squelette' => 'サイトのエラー',
 	'zbug_inversion_ordre_inexistant' => '実在しない命令の逆転', # MODIF
 	'zbug_pagination_sans_critere' => '#PAGINATION sans critère {pagination} ou employé dans une boucle recursive', # MODIF
 	'zbug_parametres_inclus_incorrects' => 'インクルードのパラメタが間違っている', # MODIF
-	'zbug_profile' => 'Temps de calcul : @time@', # NEW
 	'zbug_resultat' => '結果',
 	'zbug_serveur_indefini' => '未定義のSQL server', # MODIF
-	'zbug_statistiques' => 'Statistiques des requêtes SQL classées par durée', # NEW
-	'zbug_table_inconnue' => 'SQLテーブル "@table@" は見つからない',
-	'zxml_connus_attributs' => 'attributs connus', # NEW
-	'zxml_de' => 'de', # NEW
-	'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
-	'zxml_inconnu_balise' => 'balise inconnue', # NEW
-	'zxml_inconnu_entite' => 'entité inconnue', # NEW
-	'zxml_inconnu_id' => 'ID inconnu', # NEW
-	'zxml_mais_de' => 'mais de', # NEW
-	'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
-	'zxml_non_fils' => 'n\'est pas un fils de', # NEW
-	'zxml_nonvide_balise' => 'balise non vide', # NEW
-	'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans', # NEW
-	'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
-	'zxml_survoler' => 'survoler pour voir les corrects', # NEW
-	'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
-	'zxml_vide_balise' => 'balise vide', # NEW
-	'zxml_vu' => 'vu auparavant' # NEW
+	'zbug_table_inconnue' => 'SQLテーブル "@table@" は見つからない'
 );
 
 ?>

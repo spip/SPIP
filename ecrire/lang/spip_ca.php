@@ -108,17 +108,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_demain' => 'demà',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ a les @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jourmois@',
 	'date_fmt_jour_mois_annee' => '@jourmois@ de @annee@',
 	'date_fmt_mois_annee' => '@nommois@ de @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'el @nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
 	'date_fmt_periode_from' => 'Del',
 	'date_fmt_periode_to' => 'al',
 	'date_heures' => 'hores',
@@ -230,9 +224,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Enviament per mitjà del lloc Web',
 	'erreur' => 'Error',
 	'erreur_balise_non_fermee' => 'última etiqueta sense tancar:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'error(s)',
 	'etape' => 'Etapa',
 
@@ -366,7 +357,6 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 	'info_creer_repertoire' => 'Creeu un fitxer o un directori anomenat:',
 	'info_creer_repertoire_2' => 'a l\'interior del subdirectori <b>@repertoire@</b>, després:',
 	'info_creer_vignette' => 'creació automàtica de la miniatura',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Desplegar',
 	'info_descriptif_nombre' => 'descripció(ns):',
 	'info_description' => 'Descripció:',
@@ -604,7 +594,6 @@ i tornar-vos a connectar al lloc.
 	'suivant' => 'següent',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ kB',
 	'taille_mo' => '@taille@ MB',
 	'taille_octets' => '@taille@ bytes',
@@ -644,7 +633,6 @@ i tornar-vos a connectar al lloc.
 	'titre_image_auteur_supprime' => 'Autor/a suprimit/da',
 	'titre_image_redacteur' => 'Redactor/a sense accés',
 	'titre_image_redacteur_02' => 'Redactor/a',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitant',
 	'titre_joindre_document' => 'INTRODUIR UN DOCUMENT',
 	'titre_mots_cles' => 'PARAULES CLAU',
