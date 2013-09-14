@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://trac.rezo.net/spip/spip/ecrire/lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/ecrire_?lang_cible=fr_fem
+// ** ne pas modifier le fichier **
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -10,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'affichage' => 'Affichage',
 	'aide_non_disponible' => 'Cette partie de l\'aide en ligne n\'est pas encore disponible dans cette langue.',
 	'annuler_recherche' => 'Annuler la recherche',
-	'auteure' => 'Auteure :',
+	'auteur' => 'Auteure :',
 	'avis_acces_interdit' => 'Accès interdit.',
 	'avis_article_modifie' => 'Attention, @nom_auteur_modif@ a travaillé sur cet article il y a @date_diff@ minutes',
 	'avis_aucun_resultat' => 'Aucun résultat.',
@@ -867,7 +869,7 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 			crashé, vous pouvez tenter une réparation
 			automatique.',
 	'texte_creer_rubrique' => 'Avant de pouvoir écrire des articles,<br /> vous devez créer une rubrique.',
-	'texte_date_creation_article' => 'DATE DE CRÉATION DE L\'ARTICLE :', # on ajoute le ":"
+	'texte_date_creation_article' => 'DATE DE CRÉATION DE L\'ARTICLE :',
 	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":"
 	'texte_date_publication_anterieure' => 'Date de rédaction antérieure :',
 	'texte_date_publication_anterieure_nonaffichee' => 'Ne pas afficher de date de rédaction antérieure.',
