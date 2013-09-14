@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://trac.rezo.net/spip/spip/ecrire/lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=fr_fem
+// ** ne pas modifier le fichier **
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -85,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_interface' => 'choix  de l\'interface',
 	'colonne' => 'Colonne',
 	'confirm_changer_statut' => 'Attention, vous avez demandé à changer le statut de cet élément. Souhaitez-vous continuer?',
-	'correcte' => 'correcte', # chaine utilisée dans le debugueur : "validation .. impossible" ou "validation .. correcte"
+	'correcte' => 'correcte',
 
 	// D
 	'date_aujourdhui' => 'aujourd\'hui',
@@ -688,7 +690,7 @@ et vous reconnecter au site.
 	'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'un contexte @motif@',
 	'zbug_code' => 'code',
 	'zbug_critere_inconnu' => 'Critère inconnu @critere@',
-	'zbug_distant_interdit' => 'Externe interdit', # Contexte : une base de données "externe", pas gérée par SPIP, mais que SPIP 1.8 sait utiliser dans ses boucles -- seul problèmes certaines manipulations sont interdites sur ces bases-là.
+	'zbug_distant_interdit' => 'Externe interdit',
 	'zbug_doublon_table_sans_cle_primaire' => 'Doublons sur une table sans clef primaire atomique',
 	'zbug_doublon_table_sans_index' => 'Doublons sur une table sans index',
 	'zbug_erreur_boucle_double' => 'Double définition de la boucle @id@',
