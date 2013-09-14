@@ -66,6 +66,9 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/public?lang_cible=fr" total="78" traduits="78" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="fr_fem" url="http://trad.spip.net/tradlang_module/public?lang_cible=fr_fem" total="78" traduits="78" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/public?lang_cible=fr_tu" total="78" traduits="78" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
