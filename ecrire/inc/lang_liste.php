@@ -71,6 +71,7 @@ $GLOBALS['codes_langues'] = array(
 	'fo' => "f&#248;royskt",
 	'fon' => "fongb&egrave;",
 	'fr' => "fran&#231;ais",
+	'fr_fem' => "fran&#231;ais f&#233;minin",
 	'fr_sc' => "schtroumpf",
 	'fr_lpc' => "langue parl&#233;e compl&#233;t&#233;e",
 	'fr_lsf' => "langue des signes fran&#231;aise",
