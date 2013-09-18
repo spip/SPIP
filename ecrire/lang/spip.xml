@@ -58,6 +58,8 @@
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
+	<langue code="fr_fem" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_fem" total="631" traduits="631" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
