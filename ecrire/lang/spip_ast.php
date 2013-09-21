@@ -23,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Camudar esta pallabra-clave',
 	'admin_modifier_rubrique' => 'Iguar la estaya',
 	'admin_recalculer' => 'Recalcular esta páxina',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => 'amosar les tornes',
 	'alerte_maj_impossible' => '<b>¡Alerta!</b> El remocique de la base SQL a la versión @version@ nun ye posible, seique por un problema de permisos pa camudar la base de datos. Contauta col to agospiamientu web.',
 	'alerte_modif_info_concourante' => 'ATENCIÓN: Esta información camudose n\'otru llugar. El valor actual ye:',
@@ -107,20 +106,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ de @nommois@',
 	'date_demain' => 'mañana',
 	'date_fmt_heures_minutes' => '@h@h.@m@min.',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ a les @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ de @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ de @nommois@ de @annee@',
 	'date_fmt_mois_annee' => '@nommois@ de @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'el @nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'hores',
 	'date_hier' => 'ayeri',
 	'date_il_y_a' => 'hai @delai@',
@@ -181,28 +171,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'meses',
 	'date_mois_1' => 'xineru',
 	'date_mois_10' => 'ochobre',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'payares',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'avientu',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'febreru',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'marzu',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'abril',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'mayu',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'xunu',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'xunetu',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'agostu',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'setiembre',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'iviernu',
 	'date_saison_2' => 'primavera',
 	'date_saison_3' => 'branu',
@@ -233,9 +211,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Unviu mandándose del sitiu',
 	'erreur' => 'Error',
 	'erreur_balise_non_fermee' => 'cabera baliza nun pesllada:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'fallu(os)',
 	'etape' => 'Etapa',
 
@@ -257,7 +232,6 @@ s\'encaboxará) :
 	'form_email_non_valide' => 'Les señes de corréu electrónicu nun son válides.',
 	'form_forum_access_refuse' => 'Ya nun ties accesu a esti sitiu.',
 	'form_forum_bonjour' => 'Hola, @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Estes señes de corréu electrónicu ya tan rexistráes; poro, puedes usar la to contraseña normal.',
 	'form_forum_identifiant_mail' => 'La to nueva identificación ta acabante d\'unviase por email.',
 	'form_forum_identifiants' => 'Identificación personal',
@@ -372,7 +346,6 @@ sitiu "@nom_site_spip@" (@adresse_login@):',
 	'info_creer_repertoire' => 'Debes crear un ficheru o un direutoriu nomáu:',
 	'info_creer_repertoire_2' => 'dientro\'l direutoriu <b>@repertoire@</b>, y llueu:',
 	'info_creer_vignette' => 'creación automática de la viñeta',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Desplegar',
 	'info_descriptif_nombre' => 'descripción(es):',
 	'info_description' => 'Descripción:',
@@ -486,8 +459,6 @@ sitiu "@nom_site_spip@" (@adresse_login@):',
 	'infos_vos_pense_bete' => 'Los tos recordatorios',
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Amosar namái los iconos',
 	'lien_afficher_texte_icones' => 'Amosar los iconos y el testu',
 	'lien_afficher_texte_seul' => 'Amosar sólo el testu',
@@ -597,7 +568,6 @@ pa volver a coneutate al sitiu.
 	'pass_nouveau_pass' => 'Contraseña nueva',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Contraseña escaecida',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Zarrar esta ventana',
 	'pass_rappel_login' => 'Recuerda: la to identidá (login) ye « @login@ ».',
 	'pass_recevoir_mail' => 'Vas recibir un email que te indica cómo volver a tener accesu al sitiu.',
@@ -620,7 +590,6 @@ pa volver a coneutate al sitiu.
 	'suivant' => 'siguiente',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ KB',
 	'taille_mo' => '@taille@ MB',
 	'taille_octets' => '@taille@ bytes',
@@ -665,7 +634,6 @@ Intenta',
 	'titre_image_auteur_supprime' => 'Autor desaniciáu',
 	'titre_image_redacteur' => 'Redactor ensin accesu',
 	'titre_image_redacteur_02' => 'Redactor',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitante',
 	'titre_joindre_document' => 'AMESTAR UN DOCUMENTU',
 	'titre_mots_cles' => 'PALLABRES-CLAVE',

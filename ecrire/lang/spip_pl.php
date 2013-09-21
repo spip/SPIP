@@ -107,20 +107,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ września',
 	'date_demain' => 'jutro',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ o @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jourmois@',
 	'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => '@date@ @nomjour@ ',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'godziny',
 	'date_hier' => 'wczoraj',
 	'date_il_y_a' => 'jest @delai@',
@@ -233,9 +224,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Wyślij ze strony',
 	'erreur' => 'Błąd',
 	'erreur_balise_non_fermee' => 'ostatni znacznik nie jest zamknięty :',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'błąd/błędy',
 	'etape' => 'Etap',
 
@@ -359,7 +347,6 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 	'info_authentification_ftp' => 'Uwierzytelnienie (poprzez FTP).',
 	'info_breves_2' => 'newsy',
 	'info_breves_nb' => '@nb@ newsów',
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'Brak połączenia',
 	'info_contact_developpeur' => 'Proszę skontaktować się z deweloperem.',
 	'info_contenance' => 'Ta strona zawiera:',
@@ -371,14 +358,11 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 	'info_creer_repertoire' => 'Utwórz plik lub katalog o nazwie:',
 	'info_creer_repertoire_2' => 'w podkatalogu <b>@repertoire@</b>, a następnie:',
 	'info_creer_vignette' => 'generowanie miniaturki',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Rozwiń',
 	'info_descriptif_nombre' => 'opis(y):',
 	'info_description' => 'Opis:',
 	'info_description_2' => 'Opis:',
 	'info_dimension' => 'Rozmiar:',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'Napisz prywatną wiadomość',
 	'info_email_invalide' => 'Nieprawidłowy adres e-mail.',
 	'info_en_cours_validation' => 'Twoje artykuły są w trakcie redagowania',
@@ -418,8 +402,6 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 	'info_mail_fournisseur' => 'you@isp.com',
 	'info_message_2' => 'WIADOMOŚĆ',
 	'info_message_supprime' => 'WIADOMOŚĆ USUNIĘTA',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'Data publikacji online:',
 	'info_modification_parametres_securite' => 'modyfikacja parametrów bezpieczeństwa',
 	'info_mois_courant' => 'Bieżący miesiąc:',
@@ -435,10 +417,8 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 	'info_nouveau_message' => 'MASZ NOWĄ WIADOMOŚĆ',
 	'info_nouveaux_messages' => 'MASZ @total_messages@ NOWYCH WIADOMOŚCI',
 	'info_numero_abbreviation' => 'N° ',
-	'info_obligatoire' => 'Cette information est obligatoire', # NEW
 	'info_pense_bete' => 'NOTATKA',
 	'info_petit_ecran' => 'Małe okno',
-	'info_petition_close' => 'Pétition close', # NEW
 	'info_pixels' => 'piksele',
 	'info_plusieurs_mots_trouves' => 'Kilkanaście słów kluczowych zostało znalezionych dla "@cherche_mot@":',
 	'info_portfolio_automatique' => 'Automatyczne portfolio:',
@@ -457,13 +437,9 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 	'info_rechercher' => 'Szukaj',
 	'info_rechercher_02' => 'Szukaj:',
 	'info_remplacer_vignette' => 'Zamień domyślną miniaturkę na wybrane przez ciebie logo :',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'bez tytułu',
 	'info_selectionner_fichier' => 'Możesz wybrać plik z folderu @upload@',
 	'info_selectionner_fichier_2' => 'Wybierz plik:',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'usuń winietę',
 	'info_symbole_bleu' => 'Symbol <b>niebieski</b> oznacza  <b>notatkę</b>: n.p. wiadomość do prywatnego użytku.',
 	'info_symbole_jaune' => 'Symbol <b>żółty</b> oznacza <b>zawiadomienie dla wszystkich redaktorów</b>: może być opublikowana przez wszystkich administratorów, i jest widoczna dla wszystkich redaktorów.',
@@ -485,8 +461,6 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 	'infos_vos_pense_bete' => 'Twoje notatki', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Pokazuj tylko ikonki',
 	'lien_afficher_texte_icones' => 'POkazuj ikonki i tekst',
 	'lien_afficher_texte_seul' => 'Pokazuj tylko tekst',
@@ -532,13 +506,11 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 	'login_retour_site' => 'Powrót do strony publicznej',
 	'login_retoursitepublic' => 'Powrót do strony publicznej',
 	'login_sans_cookiie' => 'Identyfikacja bez cookie',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'rejestracja',
 	'login_test_navigateur' => 'test przeglądarki/łącz ponownie',
 	'login_verifiez_navigateur' => '(Sprawdź czy Twoja przeglądarka nie zapamiętała hasła...)',
 
 	// M
-	'masquer_colonne' => 'Masquer cette colonne', # NEW
 	'masquer_trad' => 'ukryj tlumaczenia',
 	'module_fichiers_langues' => 'Pliki językowe',
 
@@ -595,7 +567,6 @@ można ponownie połączyć się ze stroną.
 	'pass_nouveau_pass' => 'Nowe hasło',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Zapomnienie hasła',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Zamknij okno',
 	'pass_rappel_login' => 'Przypomnienie : twój identyfikator (login) to « @login@ ».',
 	'pass_recevoir_mail' => 'Otrzymasz e-mail wyjaśniający jak możesz odzyskać dostęp do strony.',
@@ -618,7 +589,6 @@ można ponownie połączyć się ze stroną.
 	'suivant' => 'następny',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ kb',
 	'taille_mo' => '@taille@ Mb',
 	'taille_octets' => '@taille@ bytes',
@@ -662,26 +632,20 @@ a następnie sprawdź czy obrazki pojawiają się zawsze w artykułach.',
 	'titre_image_auteur_supprime' => 'Autor usunięty',
 	'titre_image_redacteur' => 'Redaktor bez dostępu',
 	'titre_image_redacteur_02' => 'Redaktor',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Odwiedzający',
 	'titre_joindre_document' => 'ZAŁĄCZ DOKUMENT',
 	'titre_mots_cles' => 'SŁOWA KLUCZOWE',
 	'titre_probleme_technique' => 'Uwaga: problem techniczny (serwer SQL) blokuje dostęp do tej części strony. Dziękujemy za zrozumienie.',
 	'titre_publier_document' => 'PUBLIKUJ DOKUMENT W TYM DZIALE',
-	'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-	'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 	'titre_statistiques' => 'Statystyki strony',
 	'titre_titre_document' => 'Tytuł dokumentu:',
-	'todo' => 'à venir', # NEW
 	'trad_reference' => '(artykuł wzorcowy)', # MODIF
 
 	// Z
 	'zbug_balise_b_aval' => ' : balise B en aval',
 	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
-	'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 	'zbug_boucle' => 'pętla',
 	'zbug_boucle_recursive_undef' => 'pętla rekursywna nie została zdefiniowana', # MODIF
-	'zbug_calcul' => 'calcul', # NEW
 	'zbug_champ_hors_boucle' => 'Pole @champ@ jest bez pętli',
 	'zbug_champ_hors_motif' => 'Pole @champ@ jest poza pętlą @motif@', # MODIF
 	'zbug_code' => 'kod',
@@ -697,7 +661,6 @@ a następnie sprawdź czy obrazki pojawiają się zawsze w artykułach.',
 	'zbug_erreur_filtre' => 'Błąd : filtr <b>« @filtre@ »</b> nie zdefiniowany', # MODIF
 	'zbug_erreur_meme_parent' => '{meme_parent} stosuje się wyłącznie do pętli (FORUMS) i (RUBRIQUES)', # MODIF
 	'zbug_erreur_squelette' => 'Błąd (błędy) w szkielecie',
-	'zbug_hors_compilation' => 'Hors Compilation', # NEW
 	'zbug_info_erreur_squelette' => 'Błąd na stronie',
 	'zbug_inversion_ordre_inexistant' => 'odwrócenie nieistniejącego uporządkowania', # MODIF
 	'zbug_pagination_sans_critere' => '#PAGINATION bez kryterium {pagination} lub użyta w pętli rekursywnej', # MODIF
@@ -705,7 +668,6 @@ a następnie sprawdź czy obrazki pojawiają się zawsze w artykułach.',
 	'zbug_profile' => 'Czas przeliczania: @time@',
 	'zbug_resultat' => 'wynik',
 	'zbug_serveur_indefini' => 'serwer SQL niezdefiniowany', # MODIF
-	'zbug_statistiques' => 'Statistiques des requêtes SQL classées par durée', # NEW
 	'zbug_table_inconnue' => 'Tabela SQL « @table@ » nieznana',
 	'zxml_connus_attributs' => 'znane atrybuty',
 	'zxml_de' => 'z',

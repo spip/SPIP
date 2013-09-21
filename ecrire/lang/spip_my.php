@@ -23,12 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'ဤစာစုကို ပြန်ပြင်ပါ',
 	'admin_modifier_rubrique' => 'ဤအပိုင်းကို ပြန်ပြင်ပါ',
 	'admin_recalculer' => 'ဤစာမျက်နှာကို ပြန်ဖွင့်ပါ',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => 'ဘာသာပြန်ကို ပြပါ',
 	'alerte_maj_impossible' => '<b>သတိပေးချက်!</b> MySQL မူကွဲ @version@သို့ မြင့်တင်ရန် အ​ဆင်မ​ပြေပါ၊ ခွင့်ပြုချက် ပြသနာကြောင့် ဖြစ်နိုင်ပါသည်။ သင့် ISPကိုဆက်သွယ်ပါ',
-	'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifiée par ailleurs. La valeur actuelle est :', # NEW
 	'analyse_xml' => 'XML parsing',
-	'annuler' => 'Annuler', # NEW
 	'antispam_champ_vide' => 'ဤနေရာကို ချန်လပ်ထားပေးပါ',
 	'articles_recents' => 'အသစ်ဆုံး ဆောင်းပါးများ',
 	'avis_archive_incorrect' => 'ဖိုင်တွဲသည် SPIP ဖိုင်အမျိုးအ​စား မဟုတ်ပါ',
@@ -59,12 +56,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_lien' => '[hyperlink->http://...]သို့ပြောင်းပါ',
 	'barre_lien_input' => 'သင့် hyperlink လိပ်စာကိုထည့်ပါ (နမူနာ၊ http://www.mysite.com ဒီဝက်ဘ်ဆိုက်ပေါ်ရှိ ဆောင်းပါး နံပါတ်ကို ထည့်သွင်းပါ)',
 	'barre_note' => '[[Footnote]]သို့ပြန်သွားပါ',
-	'barre_paragraphe' => 'Créer un paragraphe', # NEW
 	'barre_quote' => '<quote>စာစောင်ကို ကုဒ်လုပ်ပါ</quote>',
 	'bouton_changer' => 'ပြုပြင်ရန်',
 	'bouton_chercher' => 'ရှာဖွေရန်',
 	'bouton_choisir' => 'ရွေးချယ်ရန်',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'Télécharger', # MODIF
 	'bouton_enregistrer' => 'သိမ်းဆည်းရန်',
 	'bouton_radio_desactiver_messagerie_interne' => 'အတွင်းသတင်းစကား ပေးပို့ခြင်းတားမြစ်ရန်',
@@ -107,20 +102,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ @nommois@',
 	'date_demain' => 'မနက်ဖြန်',
 	'date_fmt_heures_minutes' => '@h@:@m@',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ မှ @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jourmois@',
 	'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => '@nomjour@ @date@ မှာ',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'အ​ချိန်နာရီ',
 	'date_hier' => 'မနေ့က',
 	'date_il_y_a' => '@delai@ လွန်​အချိန်မှာ',
@@ -181,39 +167,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'လများ',
 	'date_mois_1' => 'ရန္နဝါရီ',
 	'date_mois_10' => 'အောက်တိုဘာ',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'နိုဝင်ဘာ',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'ဒီဇင်ဘာ',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'ဖေ​​ဖော်ဝါရီ',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'မတ်',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'ဧပြီ',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'မေ',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'ဇွန်',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'ဇူလိုင်',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'ဩဂုတ်',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'စက်တင်ဘာ',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'ဆောင်းရာသီ',
 	'date_saison_2' => 'နွေဦးရာသီ',
 	'date_saison_3' => 'နွေရာသီ',
 	'date_saison_4' => 'မိုးရာသီ',
-	'date_secondes' => 'secondes', # NEW
 	'date_semaines' => 'အ​ပတ်များ',
-	'date_un_mois' => 'mois', # NEW
-	'date_une_heure' => 'heure', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'seconde', # NEW
-	'date_une_semaine' => 'semaine', # NEW
 	'dirs_commencer' => '​ထည့်သွင်းခြင်းကို တကယ်လုပ်ရန်',
 	'dirs_preliminaire' => 'ရှေးဦးမှတ်ချက်၊ <b>လုပ်ပိုင်ခွင့်ကို ​အရင်ဦးဆုံး သတ်မှတ်ပါ</b>',
 	'dirs_probleme_droits' => 'လုပ်ပိုင်ခွင့် ပြသနာရှိနေသည်',
@@ -223,35 +191,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'double_occurrence' => '​အဖြစ်အပျက် နှစ်ခု', # MODIF
 
 	// E
-	'en_cours' => 'en cours', # NEW
 	'envoi_via_le_site' => 'ဝက်ဘ်ဆိုက်မှတဆင့် ပေးပို့ပါ',
 	'erreur' => 'အမှားအယွင်း',
 	'erreur_balise_non_fermee' => 'နောက်ဆုံး တေးမှတ်ချက် ပိတ်မထားပါ',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'အမှား(များ)',
-	'etape' => 'Étape', # NEW
 
 	// F
 	'fichier_introuvable' => '@fichier@ဖိုင်မတွေ့ရပါ',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'သင်မှတ်ပုံတင်ထားပြီးပြီ',
 	'form_email_non_valide' => 'သင့်အီးမေးလ် မှန်ကန်မှုမရှိပါ',
 	'form_forum_access_refuse' => 'ဤဝက်ဘ်ဆိုက်ထဲသို့ ဝင်​ခွင့် သင့်မှာမရှိတော့ပါ',
 	'form_forum_bonjour' => 'မင်္ဂလာပါ @nom@',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'ဤအီးမေးလ်သည် မှတ်ပုံတင်ထားပြီးဖြစ်ပါတယ်၊ ပုံမှန်စကားဝှက်ကို အသုံးပြုနိုင်ပါသည်',
 	'form_forum_identifiant_mail' => 'သင့်အမှတ်အသားသစ်ကို အီးမေးလ်မှတဆင့် ပို့ထားပြီးပြီ',
 	'form_forum_identifiants' => 'ကိုယ်ပိုင် အမှတ်အသား',
@@ -323,7 +273,6 @@ sera ignorée) :
 	'icone_supprimer_image' => 'ဤပုံကိုပယ်ဖျက်ရန်',
 	'icone_tous_articles' => 'ဆောင်းပါးများအားလုံး',
 	'icone_tous_auteur' => 'စာရေးသူများအားလုံး',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'ဆိုက်ကိုသွားလည်ပါ', # MODIF
 	'icone_voir_en_ligne' => 'အွန်လိုင်းတွင်ကြည့်ရှုရန်',
 	'img_indisponible' => 'ပုံမရနိုင်ပါ',
@@ -345,14 +294,10 @@ sera ignorée) :
 	'info_article_supprime' => 'ဆောင်းပါးပယ်ဖျက်ပြီး',
 	'info_articles' => 'ဆောင်းပါး',
 	'info_articles_a_valider' => 'ဆောင်းပါးများကို ပြန်လည်အတည်ပြုရန်',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'ဆောင်းပါးတင်သွင်းပြီး',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => 'စာရေးသူ(များ)',
 	'info_authentification_ftp' => 'စမ်းစစ်အတည်ပြုခြင်း(FTP မှ)',
 	'info_breves_2' => 'သတင်း',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'ဆက်သွယ်ရန်ကြိုးစားမှု ငြင်းပယ်ခံရသည်',
 	'info_contact_developpeur' => 'တီထွင်သူကိုဆက်သွယ်ပါ',
 	'info_contenance' => 'ဆိုက်ထဲပါဝင်သည့် အရာများမှာ၊',
@@ -364,14 +309,11 @@ sera ignorée) :
 	'info_creer_repertoire' => 'ဖိုင် သို့မဟုတ် ဖိုင်တွဲကိုဖန်တီးပါ',
 	'info_creer_repertoire_2' => '<b>@repertoire@</b>ရဲ့အထဲမှာ၊ ပြီးတော့',
 	'info_creer_vignette' => 'အလိုအလျှောက်ဖန်တီးသော နမူနာပုံ',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'ဖွင့်ချသည်',
 	'info_descriptif_nombre' => 'ဖော်ပြချက်(များ)',
 	'info_description' => 'ဖော်ပြချက်',
 	'info_description_2' => 'ဖော်ပြချက်',
 	'info_dimension' => 'အရွယ်အစား',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'ကိုယ်ရေးကိုတာ သတင်းစကား',
 	'info_email_invalide' => 'မရှိသေးသော အီးမေးလ်လိပ်စာ',
 	'info_en_cours_validation' => 'သင့်ဆောင်းပါးများသည် ပြင်ဆင်နေဆဲဖြစ်သည်',
@@ -410,8 +352,6 @@ sera ignorée) :
 	'info_mail_fournisseur' => 'you@isp.com',
 	'info_message_2' => 'သတင်းစာစောင်',
 	'info_message_supprime' => 'စာစောင်ပယ်ဖျက်ပြီး',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'အွန်လိုင်းထုတ်ဝေသည့်ရက်စွဲ',
 	'info_modification_parametres_securite' => 'လုံခြုံရေးဆိုင်ရာ အချက်အလက်များ ပြင်ဆင်ရန်',
 	'info_mois_courant' => 'လအတွင်း',
@@ -427,10 +367,8 @@ sera ignorée) :
 	'info_nouveau_message' => 'သင့်မှာစာစောင် အသစ်ရှိပါသည်',
 	'info_nouveaux_messages' => 'သင့်မှာစာစောင် အသစ် @total_messages@ ရောက်နေပါသည်',
 	'info_numero_abbreviation' => 'မဟုတ်ဘူး',
-	'info_obligatoire' => 'Cette information est obligatoire', # NEW
 	'info_pense_bete' => 'မှတ်တမ်း',
 	'info_petit_ecran' => 'ဖော်ပြမှုအသေး',
-	'info_petition_close' => 'Pétition close', # NEW
 	'info_pixels' => 'pixels',
 	'info_plusieurs_mots_trouves' => '\\"@cherche_mot@\\" အတွက် စကားစုအမြောက်အများ တွေ့ရှိပါသည်',
 	'info_portfolio_automatique' => 'အလိုအလျှောက်ရွေးချယ်မှု',
@@ -449,13 +387,9 @@ sera ignorée) :
 	'info_rechercher' => 'ရှာဖွေရန်',
 	'info_rechercher_02' => 'ရှာဖွေရန်',
 	'info_remplacer_vignette' => 'ပေးထားသော လိုဂိုဒီရိုင်းကို သင်နှစ်သက်သော ဒီရိုင်းနှင့်အစားထိုးပါ',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'ခေါင်းစဉ်မရှိ​သေးပါ',
 	'info_selectionner_fichier' => 'ဖိုင်များကို @upload@မှရွေးချယ်ရရှိနိုင်ပါသည်',
 	'info_selectionner_fichier_2' => 'ဖိုင်ရွေးချယ်ပါ',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'ဒီရိုင်းဆင်မြန်းခြင်းကို ပယ်ဖျက်ရန်',
 	'info_symbole_bleu' => 'အပြာရောင် သ​င်္ကေတသည် မှတ်ချက်ကိုဖော်ပြသည်။ ဥပမာ၊ ကိုယ်ရေးကိုတာ စာစောင် စသည်ဖြင့်',
 	'info_symbole_jaune' => 'အဝါရောင် သ​င်္ကေတသည် စာတည်းအဖွဲ့သားအားလုံးသို့ ​ကြေငြာချက်များဖြစ်သည်။ စာတည်းအဖွဲ့သား အားလုံးမှ တည်းဖြတ်နိုင်ပြီး၊ ​ဤ​အဖွဲ့သား အားလုံးသို့ မြင်သာအောင်ပြနိုင်သည်။',
@@ -477,8 +411,6 @@ sera ignorée) :
 	'infos_vos_pense_bete' => 'သင့်မှတ်တမ်းများ', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'ရုပ်ပုံသက်သက်ကိုပြပေးပါ',
 	'lien_afficher_texte_icones' => 'စာသားကိုပြပေးပါ',
 	'lien_afficher_texte_seul' => 'စာသားသက်သက်ကိုပြပေးပါ',
@@ -498,7 +430,6 @@ sera ignorée) :
 	'lien_visites' => '@visites@ လာလည်သွားသည်',
 	'lien_voir_auteur' => 'ဒီစာရေးသူကိုစစ်ဆေးပါ',
 	'ligne' => 'လိုင်း',
-	'login' => 'Connexion', # NEW
 	'login_acces_prive' => 'ကိုယ်ပိုင်ကန့်သတ်နေရာကို သွားပါ',
 	'login_autre_identifiant' => 'တခြား IDကိုသုံးပါ',
 	'login_cookie_accepte' => 'သင့် browser မှ ဤဆိုက်ကို လက်ခံအောင်လုပ်​ပေးပါ',
@@ -522,13 +453,11 @@ sera ignorée) :
 	'login_retour_site' => 'အများဆိုင် စာမျက်နှာသို့ ပြန်သွားရန်',
 	'login_retoursitepublic' => 'အများဆိုင် စာမျက်နှာသို့ ပြန်သွားရန်',
 	'login_sans_cookiie' => 'cookie မပါအမှတ်အသား',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'မှတ်ပုံတင်ရန်',
 	'login_test_navigateur' => 'စမ်းသပ်ရန်',
 	'login_verifiez_navigateur' => '(သင့် browser မှ သင့်စကားဝှက်ကို မမှတ်မိပါ)',
 
 	// M
-	'masquer_colonne' => 'Masquer cette colonne', # NEW
 	'masquer_trad' => 'ဘာသာပြန်ကို ဝှက်ထားရန်',
 	'module_fichiers_langues' => 'ဘာသာစကားဆိုင်ရာဖိုင်များ',
 
@@ -567,7 +496,6 @@ sera ignorée) :
 	'pass_nouveau_pass' => 'စကားဝှက်အသစ်',
 	'pass_ok' => 'အိုကေတယ်',
 	'pass_oubli_mot' => 'စကားဝှက်မေ့နေတယ်',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'ဤစာမျက်နှာကိုပိတ်ပါ',
 	'pass_rappel_login' => 'နိုးဆော်ချက်၊ သင့်​အမှတ်အသားကတော့ \\"@login@\\"',
 	'pass_recevoir_mail' => 'သင့်ဝက်ဘ်ဆိုက်ထဲကို ဘယ်လိုပြန်လည် ဝင်ရောက်လို့ရမလဲ ဆိုတာကို အီးမေးလ်ရောက်လာပါလိမ့်မယ်',
@@ -578,9 +506,6 @@ sera ignorée) :
 	'previsualisation' => 'ကြိုတင်ကြည့်ရှုရန်',
 	'previsualiser' => 'ကြိုတင်ကြည့်ရှုရန် ပြပေးပါ',
 
-	// R
-	'retour' => 'Retour', # NEW
-
 	// S
 	'spip_conforme_dtd' => 'SPIP စာမျက်နှာသည် DOCTYPE စနစ်နှင့်ကိုက်ညီမှု ရှိကြောင်းတွေ့ရှိရသည်',
 	'squelette' => 'စာမျက်နှာပုံစံခွက်',
@@ -590,7 +515,6 @@ sera ignorée) :
 	'suivant' => '​နောက်တစ်ခု',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ kb',
 	'taille_mo' => '@taille@ Mb',
 	'taille_octets' => '@taille@ bytes',
@@ -622,32 +546,24 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => 'စာရေးသူကို ပယ်ဖျက်ပြီးဖြစ်သည်',
 	'titre_image_redacteur' => 'ဝင်ခွင့်မရှိဘဲနှင့် တည်းဖြတ်နိုင်သူ',
 	'titre_image_redacteur_02' => 'စာတည်း',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'လာလည်သူ',
 	'titre_joindre_document' => 'ပူးတွဲစာ တင်သွင်းရန်',
 	'titre_mots_cles' => 'စကားစု',
 	'titre_probleme_technique' => 'သတိပေးချက်၊ ဤနေရာသို့ ဝင်ရောက်ခွင့်ကို ​တားမြစ်ထားပါသည်၊ နားလည်မှုအတွက် ကျေးဇူးတင်ပါသည်။',
 	'titre_publier_document' => 'ဤအခန်းကဏ္ဍထဲမှ ဆောင်းပါးများကို ထုတ်ဝေပါ',
-	'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-	'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 	'titre_statistiques' => 'ဆိုက်လာလည်မှုစရင်း',
 	'titre_titre_document' => 'စာမျက်နှာခေါင်းစဉ်',
-	'todo' => 'à venir', # NEW
 	'trad_reference' => '(အညွှန်းဆောင်းပါး)', # MODIF
 
 	// Z
 	'zbug_balise_b_aval' => ': B tag too late in loop',
-	'zbug_balise_inexistante' => 'Balise @balise@ mal déclarée pour @from@', # NEW
-	'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 	'zbug_boucle' => 'loop',
 	'zbug_boucle_recursive_undef' => 'undefined recursive loop', # MODIF
-	'zbug_calcul' => 'calcul', # NEW
 	'zbug_champ_hors_boucle' => 'Field @champ@ outside loop',
 	'zbug_champ_hors_motif' => 'Field @champ@ outside loop tagged @motif@', # MODIF
 	'zbug_code' => 'ကုဒ်',
 	'zbug_critere_inconnu' => 'အမည်မသိ စံညွှန်း @critere@', # MODIF
 	'zbug_distant_interdit' => 'ပြင်ပ ​အချက်အလက် တားမြစ်ထားသည်', # MODIF
-	'zbug_doublon_table_sans_cle_primaire' => 'Doublons sur une table sans clef primaire atomique', # NEW
 	'zbug_doublon_table_sans_index' => 'စာညွှန်းတွင်မပါဘဲနှင့် ဇယားတွင် နှစ်ခါပါဝင်သည်', # MODIF
 	'zbug_erreur_boucle_double' => 'BOUCLE@id@ နှစ်ခါထပ်နေသော အဓိပ္ပါယ်ဖွင့်ဆိုချက်', # MODIF
 	'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: အပိတ်တေးမှတ်ချက် မရှိဖြစ်ခြင်း', # MODIF
@@ -657,15 +573,12 @@ sera ignorée) :
 	'zbug_erreur_filtre' => 'အမှားအယွင်း၊ ဖော်ပြမထားသော စမ်းစစ်ချက် <b>\\"@filtre@\\"</b>', # MODIF
 	'zbug_erreur_meme_parent' => '{meme_parent} only applies to loops (FORUMS) and (RUBRIQUES)', # MODIF
 	'zbug_erreur_squelette' => 'စာမျက်နှာ ပုံစံခွက်ထဲမှ အမှားအယွင်းများ',
-	'zbug_hors_compilation' => 'Hors Compilation', # NEW
 	'zbug_info_erreur_squelette' => 'ُဆိုက်ထဲအမှားအယွင်း',
 	'zbug_inversion_ordre_inexistant' => 'မရှိဘူး​​​သော စာစဉ်မှု', # MODIF
 	'zbug_pagination_sans_critere' => '#PAGINATION tag without {pagination} criterion, or used in a recursive loop', # MODIF
 	'zbug_parametres_inclus_incorrects' => 'ထပ်မံဖြည့်စွပ်ချက် အမှား', # MODIF
-	'zbug_profile' => 'Temps de calcul : @time@', # NEW
 	'zbug_resultat' => 'ရှာဖွေမှု ရလဒ်',
 	'zbug_serveur_indefini' => 'ဖော်ပြခြင်းမရှိသော SQL ဆာဗာ', # MODIF
-	'zbug_statistiques' => 'Statistiques des requêtes SQL classées par durée', # NEW
 	'zbug_table_inconnue' => '​အမည်မသိ SQL ဇယား \\"@table@\\"',
 	'zxml_connus_attributs' => '​အမည်မသိ ​အရည်အသွေးများ',
 	'zxml_de' => 'မှ',

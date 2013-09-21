@@ -23,12 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Промяна на ключовата дума',
 	'admin_modifier_rubrique' => 'Промяна на рубриката',
 	'admin_recalculer' => 'Презареждане на страницата',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
-	'afficher_trad' => 'afficher les traductions', # NEW
 	'alerte_maj_impossible' => '<b>Внимание!</b> Базата данни SQL не бе обновена във версия @version@, вероятно поради проблем с правата за достъп.',
-	'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifiée par ailleurs. La valeur actuelle est :', # NEW
 	'analyse_xml' => 'Анализиране на XML',
-	'annuler' => 'Annuler', # NEW
 	'antispam_champ_vide' => 'Оставете полето празно:',
 	'articles_recents' => 'Най-новите публикувани статии',
 	'avis_archive_incorrect' => 'Файлът, който архивирате не е разрешен в СПИП',
@@ -42,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_fonction_contexte' => 'Грешка в програмата. Тази команда не трябва да се извиква в този контекст.',
 	'avis_erreur_mysql' => 'Грешка в базата данни SQL',
 	'avis_erreur_sauvegarde' => 'Грешка при съхраняване (@type@ @id_objet@)!',
-	'avis_erreur_visiteur' => 'Problème d\'accès à l\'espace privé', # NEW
 
 	// B
 	'barre_a_accent_grave' => 'Впишете главно А с тежко ударение',
@@ -59,12 +54,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_lien' => 'Превръщане в [препратка->http://...]',
 	'barre_lien_input' => 'Моля, впишете препратката в хипертекст (може да напишете Интернет адреса във формата http://www.mysite.com или просто номера на статията от този сайт).',
 	'barre_note' => 'Включване режим на [[забележка под линия (footnote)]]',
-	'barre_paragraphe' => 'Créer un paragraphe', # NEW
 	'barre_quote' => '<quote>Цитат на съобщение</quote>',
 	'bouton_changer' => 'Изпращане',
 	'bouton_chercher' => 'Търсене',
 	'bouton_choisir' => 'Избор',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'Télécharger', # MODIF
 	'bouton_enregistrer' => 'Записване',
 	'bouton_radio_desactiver_messagerie_interne' => 'Без система за вътрешни съобщения',
@@ -83,9 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cal_par_jour' => 'дневен календар',
 	'cal_par_mois' => 'месечен календар',
 	'cal_par_semaine' => 'седмичен календар',
-	'choix_couleur_interface' => 'couleur ', # NEW
-	'choix_interface' => 'choix  de l\'interface', # NEW
-	'colonne' => 'Colonne', # NEW
 	'confirm_changer_statut' => 'Изисква се потвърждение: Задали сте промяна на статуса на статията. Желаете ли до продължите?',
 	'correcte' => 'правилно',
 
@@ -107,20 +97,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ @nommois@',
 	'date_demain' => 'утре',
 	'date_fmt_heures_minutes' => '@h@ч.@m@мин.',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ в @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'На @nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'часа',
 	'date_hier' => 'вчера',
 	'date_il_y_a' => 'преди @delai@',
@@ -156,64 +137,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jnum8' => '8ми',
 	'date_jnum9' => '9ти',
 	'date_jour_1' => 'неделя',
-	'date_jour_1_abbr' => 'dim.', # NEW
-	'date_jour_1_initiale' => 'd.', # NEW
 	'date_jour_2' => 'понеделник',
-	'date_jour_2_abbr' => 'lun.', # NEW
-	'date_jour_2_initiale' => 'l.', # NEW
 	'date_jour_3' => 'вторник',
-	'date_jour_3_abbr' => 'mar.', # NEW
-	'date_jour_3_initiale' => 'm.', # NEW
 	'date_jour_4' => 'сряда',
-	'date_jour_4_abbr' => 'mer.', # NEW
-	'date_jour_4_initiale' => 'm.', # NEW
 	'date_jour_5' => 'четвъртък',
-	'date_jour_5_abbr' => 'jeu.', # NEW
-	'date_jour_5_initiale' => 'j.', # NEW
 	'date_jour_6' => 'петък',
-	'date_jour_6_abbr' => 'ven.', # NEW
-	'date_jour_6_initiale' => 'v.', # NEW
 	'date_jour_7' => 'събота',
-	'date_jour_7_abbr' => 'sam.', # NEW
-	'date_jour_7_initiale' => 's.', # NEW
 	'date_jours' => 'дни',
 	'date_minutes' => 'минути',
 	'date_mois' => 'месеца',
 	'date_mois_1' => 'януари',
 	'date_mois_10' => 'октомври',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'ноември',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'декември',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'февруари',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'март',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'април',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'май',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'юни',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'юли',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'август',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'септември',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'зима',
 	'date_saison_2' => 'пролет',
 	'date_saison_3' => 'лято',
 	'date_saison_4' => 'есен',
-	'date_secondes' => 'secondes', # NEW
 	'date_semaines' => 'седмици',
-	'date_un_mois' => 'mois', # NEW
-	'date_une_heure' => 'heure', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'seconde', # NEW
-	'date_une_semaine' => 'semaine', # NEW
 	'dirs_commencer' => ' за започване на инсталацията',
 	'dirs_preliminaire' => 'Предварително: <b>Поправете правата за достъп</b>',
 	'dirs_probleme_droits' => 'Проблем с правата на достъп',
@@ -228,38 +177,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
   на всяка една от директориите. Процедурата е описана подробно в потребителския наръчник.
   <p>След като приключите с тази операция можете да ', # MODIF
-	'double_occurrence' => 'Double occurrence de @balise@', # NEW
 
 	// E
-	'en_cours' => 'en cours', # NEW
 	'envoi_via_le_site' => 'Изпращане през сайта',
-	'erreur' => 'Erreur', # NEW
-	'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
-	'erreur_texte' => 'erreur(s)', # NEW
-	'etape' => 'Étape', # NEW
 
 	// F
 	'fichier_introuvable' => 'Файлът: @fichier@ не бе намерен',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'Вече сте регистриран(а).',
 	'form_email_non_valide' => 'Неалиден електронен адрес.',
 	'form_forum_access_refuse' => 'Преустановен достъп до сайта',
 	'form_forum_bonjour' => 'Добър ден, @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Този електронен адрес е вече регистриран; за по-нататъшен достъп използвайте обичайната си парола. ',
 	'form_forum_identifiant_mail' => 'Новото Ви име за достъп бе изпратено по електронна поща.',
 	'form_forum_identifiants' => 'Лични идентификатори ',
@@ -333,7 +260,6 @@ sera ignorée) :
 	'icone_supprimer_image' => 'Изтриване на изображението',
 	'icone_tous_articles' => 'Всички Ваши статии',
 	'icone_tous_auteur' => 'Всички автори',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'Посещаване на сайта', # MODIF
 	'icone_voir_en_ligne' => 'Изглед на сайта',
 	'img_indisponible' => 'изображението липсва',
@@ -355,14 +281,10 @@ sera ignorée) :
 	'info_article_supprime' => 'Изтрита статия',
 	'info_articles' => 'Статии',
 	'info_articles_a_valider' => 'Статии, чакащи одобрение за публикуване',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'Изпратени статии',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => 'автор(и):',
 	'info_authentification_ftp' => 'Удостоверяване автентичността (чрез FTP).',
 	'info_breves_2' => 'новини',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'Забранено свързване',
 	'info_contact_developpeur' => 'Моля, свържете се с някой разработчик.',
 	'info_contenance' => 'Сайтът съдържа:',
@@ -374,14 +296,11 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Моля, създайте файл или директория, наречена:',
 	'info_creer_repertoire_2' => 'в под-директорията <b>@repertoire@</b>, след това',
 	'info_creer_vignette' => 'автоматично създаване на умален образ',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Сгъване',
 	'info_descriptif_nombre' => 'описание(я):',
 	'info_description' => 'Описание:',
 	'info_description_2' => 'Описание:',
 	'info_dimension' => 'Размер:',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'Писане на лично съобщение',
 	'info_email_invalide' => 'Погрешен електронен адрес.',
 	'info_en_cours_validation' => 'Статии в процес на обработка',
@@ -421,8 +340,6 @@ sera ignorée) :
 	'info_mail_fournisseur' => 'Вие@isp.com',
 	'info_message_2' => 'СЪОБЩЕНИЕ',
 	'info_message_supprime' => 'СЪОБЩЕНИЕТО Е ИЗТРИТО',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'Дата на публикация:',
 	'info_modification_parametres_securite' => 'промяна настройките на параметрите за сигурност',
 	'info_mois_courant' => 'През месеца:',
@@ -438,10 +355,8 @@ sera ignorée) :
 	'info_nouveau_message' => 'ИМАТЕ НОВО СЪОБЩЕНИЕ',
 	'info_nouveaux_messages' => 'ИМАТЕ @total_messages@ НОВИ СЪОБЩЕНИЯ',
 	'info_numero_abbreviation' => 'Не',
-	'info_obligatoire' => 'Cette information est obligatoire', # NEW
 	'info_pense_bete' => 'БЕЛЕЖКА',
 	'info_petit_ecran' => 'Малък дисплей',
-	'info_petition_close' => 'Pétition close', # NEW
 	'info_pixels' => 'пиксели',
 	'info_plusieurs_mots_trouves' => 'Бяха намерени няколко ключови думи за @cherche_mot@:',
 	'info_portfolio_automatique' => 'Автоматична папка за документи:',
@@ -460,13 +375,9 @@ sera ignorée) :
 	'info_rechercher' => 'Търсене',
 	'info_rechercher_02' => 'Търсене:',
 	'info_remplacer_vignette' => 'Смяна на винетката по подразбиране с лого по избор:',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'без заглавие',
 	'info_selectionner_fichier' => 'Избиране на файл от папка @upload@',
 	'info_selectionner_fichier_2' => 'Изберете файл:',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'изтриване на винетката',
 	'info_symbole_bleu' => 'Символът <b>синьо</b> указва <b>бележка</b>: т.е. съобщение за лично ползване.',
 	'info_symbole_jaune' => 'Символът <b>жълто</b> указва  <b>съобщение към всички редактори</b>: то може да се вписва само от администратори и да се вижда от всички редактори.',
@@ -488,8 +399,6 @@ sera ignorée) :
 	'infos_vos_pense_bete' => 'Лични бележки', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Показване само на икони',
 	'lien_afficher_texte_icones' => 'Показване икони и текст',
 	'lien_afficher_texte_seul' => 'Показване само на текст',
@@ -508,8 +417,6 @@ sera ignorée) :
 	'lien_visite_site' => 'посещаване на сайта',
 	'lien_visites' => '@visites@ посещения',
 	'lien_voir_auteur' => 'Проверка на автора',
-	'ligne' => 'Ligne', # NEW
-	'login' => 'Connexion', # NEW
 	'login_acces_prive' => 'достъп до личната зона',
 	'login_autre_identifiant' => 'свързване с друго потребителско име',
 	'login_cookie_accepte' => 'Моля, настройте Интернет навигатора да приеме cookie (поне за този сайт).',
@@ -539,22 +446,17 @@ sera ignorée) :
 	'login_retour_site' => 'Обратно към публичния сайт',
 	'login_retoursitepublic' => 'обратно към публичния сайт',
 	'login_sans_cookiie' => 'Идентификация без cookie',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'регистрирация',
 	'login_test_navigateur' => 'тест на навигатор/повторно свързване',
 	'login_verifiez_navigateur' => '(Въпреки това, убедете се, че навигаторът не е запаметил Вашата парола...)',
 
 	// M
-	'masquer_colonne' => 'Masquer cette colonne', # NEW
-	'masquer_trad' => 'masquer les traductions', # NEW
 	'module_fichiers_langues' => 'Езикови файлове',
 
 	// N
 	'navigateur_pas_redirige' => 'Ако интернет-навигаторът не Ви пренасочи, натиснете тук, за да продължите.',
-	'numero' => 'Numéro', # NEW
 
 	// O
-	'occurence' => 'Occurrence', # NEW
 	'onglet_affacer_base' => 'Изтриване на базата данни',
 	'onglet_auteur' => 'Авторът',
 	'onglet_contenu_site' => 'Съдържание на сайта',
@@ -601,7 +503,6 @@ sera ignorée) :
 	'pass_nouveau_pass' => 'Нова парола',
 	'pass_ok' => 'Изпращане',
 	'pass_oubli_mot' => 'Забравена парола',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Затваряне на прозореца',
 	'pass_rappel_login' => 'Напомняне: Вашето потребителско име (идентификатор) е @login@.',
 	'pass_recevoir_mail' => 'Ще получите писмо с инструкции за това, как
@@ -613,11 +514,7 @@ sera ignorée) :
 	'previsualisation' => 'Предварителен преглед',
 	'previsualiser' => 'Показване на предварителния преглед',
 
-	// R
-	'retour' => 'Retour', # NEW
-
 	// S
-	'spip_conforme_dtd' => 'SPIP considère ce document comme conforme à son DOCTYPE :', # NEW
 	'squelette' => 'шаблон',
 	'squelette_inclus_ligne' => 'включен шаблон, ред',
 	'squelette_ligne' => 'шаблон, ред',
@@ -625,7 +522,6 @@ sera ignorée) :
 	'suivant' => 'следващ',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ KB',
 	'taille_mo' => '@taille@ MB',
 	'taille_octets' => '@taille@ байта',
@@ -642,7 +538,6 @@ sera ignorée) :
       Отбележете внимателно тази връзка; повторете процедурата по актуализация
       и се уверете, че изображението все още е приложено
       към статиите.',
-	'texte_erreur_visiteur' => 'Vous avez tenté d\'accéder à l\'espace privé avec un login qui ne le permet pas.', # NEW
 	'texte_inc_auth_1' => 'Вие се идентифицирате с потребителско име
   <b>@auth_login@</b>, но то (вече) не съществува в базата данни. 
   Опитайте да', # MODIF
@@ -667,67 +562,37 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => 'Авторът е изтрит',
 	'titre_image_redacteur' => 'Редактор без достъп',
 	'titre_image_redacteur_02' => 'Редактор',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Посетител',
 	'titre_joindre_document' => 'ПРИЛАГАНЕ НА ДОКУМЕНТ',
 	'titre_mots_cles' => 'КЛЮЧОВИ ДУМИ',
 	'titre_probleme_technique' => 'Предупреждение: технически проблем (сървъра SQL) затруднява достъпа до тази част от сайта.<p>Благодарим за разбирането.',
 	'titre_publier_document' => 'ПУБЛИКУВАНЕ НА ДОКУМЕНТ В ТАЗИ РУБРИКА',
-	'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-	'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 	'titre_statistiques' => 'Страница на статистиката',
 	'titre_titre_document' => 'Наименование на документа:',
-	'todo' => 'à venir', # NEW
 	'trad_reference' => '(свързване на статия)', # MODIF
 
 	// Z
 	'zbug_balise_b_aval' => ': Таг "B" се явява прекалено къно в цикъла',
-	'zbug_balise_inexistante' => 'Balise @balise@ mal déclarée pour @from@', # NEW
-	'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 	'zbug_boucle' => 'цикъл',
 	'zbug_boucle_recursive_undef' => 'неопределен рекурсивен цикъл', # MODIF
-	'zbug_calcul' => 'calcul', # NEW
 	'zbug_champ_hors_boucle' => 'Полето @champ@ е извън цикъла',
 	'zbug_champ_hors_motif' => 'Полето @champ@ извън цикъла е с елемент @motif@', # MODIF
 	'zbug_code' => 'код',
 	'zbug_critere_inconnu' => 'непознат критерий @critere@', # MODIF
 	'zbug_distant_interdit' => 'забрана за външни данни', # MODIF
-	'zbug_doublon_table_sans_cle_primaire' => 'Doublons sur une table sans clef primaire atomique', # NEW
-	'zbug_doublon_table_sans_index' => 'Doublons sur une table sans index', # NEW
 	'zbug_erreur_boucle_double' => 'BOUCLE@id@: двойна дефиниция', # MODIF
 	'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: липсва затварящ "таг" (<>)', # MODIF
 	'zbug_erreur_boucle_syntaxe' => 'Неправилен синтакс на цикъл (BOUCLE)', # MODIF
-	'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
 	'zbug_erreur_execution_page' => 'грешка при задаване на страницата', # MODIF
 	'zbug_erreur_filtre' => 'Грешка: неопределен филтър: <b>@filtre@</b>', # MODIF
 	'zbug_erreur_meme_parent' => '{meme_parent} се отнася само за циклите (FORUMS) и (RUBRIQUES)', # MODIF
 	'zbug_erreur_squelette' => 'Грешка(и) в шаблона',
-	'zbug_hors_compilation' => 'Hors Compilation', # NEW
 	'zbug_info_erreur_squelette' => 'ُГрешка на сайта',
 	'zbug_inversion_ordre_inexistant' => 'обръщане в несъществуващ ред', # MODIF
-	'zbug_pagination_sans_critere' => 'Balise #PAGINATION sans critère {pagination} ou employé dans une boucle recursive', # NEW
 	'zbug_parametres_inclus_incorrects' => 'Погрешни параметри за включване', # MODIF
-	'zbug_profile' => 'Temps de calcul : @time@', # NEW
 	'zbug_resultat' => 'резултат',
 	'zbug_serveur_indefini' => 'неопределен сървър SQL', # MODIF
-	'zbug_statistiques' => 'Statistiques des requêtes SQL classées par durée', # NEW
-	'zbug_table_inconnue' => 'Непозната таблица от типа SQL: "@table@"',
-	'zxml_connus_attributs' => 'attributs connus', # NEW
-	'zxml_de' => 'de', # NEW
-	'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
-	'zxml_inconnu_balise' => 'balise inconnue', # NEW
-	'zxml_inconnu_entite' => 'entité inconnue', # NEW
-	'zxml_inconnu_id' => 'ID inconnu', # NEW
-	'zxml_mais_de' => 'mais de', # NEW
-	'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
-	'zxml_non_fils' => 'n\'est pas un fils de', # NEW
-	'zxml_nonvide_balise' => 'balise non vide', # NEW
-	'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans', # NEW
-	'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
-	'zxml_survoler' => 'survoler pour voir les corrects', # NEW
-	'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
-	'zxml_vide_balise' => 'balise vide', # NEW
-	'zxml_vu' => 'vu auparavant' # NEW
+	'zbug_table_inconnue' => 'Непозната таблица от типа SQL: "@table@"'
 );
 
 ?>

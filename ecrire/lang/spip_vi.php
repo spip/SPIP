@@ -23,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Sửa đổi từ then chốt này',
 	'admin_modifier_rubrique' => 'Sửa đổi đề mục này',
 	'admin_recalculer' => 'Cập nhật trang này',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => 'xem các bản dịch',
 	'alerte_maj_impossible' => '<b>Báo Động!</b> Không cập nhật database SQL lên ấn bản @version@ được, có thể là  vì không đủ quyền hạn. Xin liên lạc với ISP.',
 	'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifié par ailleurs. La valeur actuelle est :', # MODIF
@@ -42,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_fonction_contexte' => 'Có lỗi programming. Function này không nên dùng trong bối cảnh này.', # MODIF
 	'avis_erreur_mysql' => 'Có Lỗi-SQL', # MODIF
 	'avis_erreur_sauvegarde' => 'Lỗi trong backup (@type@ @id_objet@)!',
-	'avis_erreur_visiteur' => 'Problème d\'accès à l\'espace privé', # NEW
 
 	// B
 	'barre_a_accent_grave' => 'Đánh vào chữ À',
@@ -59,12 +57,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_lien' => 'Đổi thành [hyperlink-&gt;http://...]',
 	'barre_lien_input' => 'Xin cho vào địa chỉ hyperlink (bạn có thể dùng Internet URL trong dạng http://www.mysite.com/ hoặc là số bài của trang web này).',
 	'barre_note' => 'Đổi thành [[Ghi chú]]',
-	'barre_paragraphe' => 'Créer un paragraphe', # NEW
 	'barre_quote' => '<quote>Trích dẫn một đoạn văn</quote>',
 	'bouton_changer' => 'Thay đổi',
 	'bouton_chercher' => 'Tìm',
 	'bouton_choisir' => 'Chọn',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'Télécharger', # MODIF
 	'bouton_enregistrer' => 'Lưu Trữ',
 	'bouton_radio_desactiver_messagerie_interne' => 'Không sử dụng thư tín nội bộ ',
@@ -107,20 +103,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ @nommois@',
 	'date_demain' => 'ngày mai',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ vào lúc @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@, @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'vào @nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'giờ',
 	'date_hier' => 'hôm qua',
 	'date_il_y_a' => 'cách đây @delai@',
@@ -181,39 +168,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'tháng',
 	'date_mois_1' => 'Tháng Giêng',
 	'date_mois_10' => 'Tháng Mười',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'Tháng Mười Một',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'Tháng Mười Hai',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'Tháng Hai',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'Tháng Ba',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'Tháng Tư',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'Tháng Năm',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'Tháng Sáu',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'Tháng Bảy',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'Tháng Tám',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'Tháng Chín',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'mùa đông',
 	'date_saison_2' => 'mùa xuân',
 	'date_saison_3' => 'mùa hè',
 	'date_saison_4' => 'mùa thu',
-	'date_secondes' => 'secondes', # NEW
 	'date_semaines' => 'tuần',
-	'date_un_mois' => 'mois', # NEW
-	'date_une_heure' => 'heure', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'seconde', # NEW
-	'date_une_semaine' => 'semaine', # NEW
 	'dirs_commencer' => ' để thực sự bắt đầu việc thiết trí',
 	'dirs_preliminaire' => 'Tiên khởi: <b>Thiết kế quyền hạn ra/vô</b>',
 	'dirs_probleme_droits' => 'Có vấn đề với quyền hạn ra/vô',
@@ -229,35 +198,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'double_occurrence' => 'Hai lần', # MODIF
 
 	// E
-	'en_cours' => 'en cours', # NEW
 	'envoi_via_le_site' => 'Gửi từ trang web',
 	'erreur' => 'Lỗi',
 	'erreur_balise_non_fermee' => 'tag cuối cùng chưa đóng:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'lỗi',
-	'etape' => 'Étape', # NEW
 
 	// F
 	'fichier_introuvable' => 'Không tìm rà hồ sơ @fichier@',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'Bạn đã ghi danh rồi.',
 	'form_email_non_valide' => 'Địa chỉ email của bạn không đúng.',
 	'form_forum_access_refuse' => 'Bạn không có quyền vào trang web này nữa.',
 	'form_forum_bonjour' => 'Chào bạn @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Địa chỉ email này đã dùng ghi danh rồi, bạn có thể dùng mật mã của bạn.',
 	'form_forum_identifiant_mail' => 'Danh tánh (ID) mới của bạn đã được gửi bằng email.',
 	'form_forum_identifiants' => 'Danh tánh (ID) cá nhân',
@@ -331,7 +282,6 @@ sera ignorée) :
 	'icone_supprimer_image' => 'Xóa hình này',
 	'icone_tous_articles' => 'Tất cả bài vở của bạn',
 	'icone_tous_auteur' => 'Các tác giả',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'Trở về trang nhà', # MODIF
 	'icone_voir_en_ligne' => 'Xem online',
 	'img_indisponible' => 'hình không có',
@@ -353,14 +303,10 @@ sera ignorée) :
 	'info_article_supprime' => 'Bài đã xóa',
 	'info_articles' => 'Bài',
 	'info_articles_a_valider' => 'Những bài chờ thông qua',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'Bài vở đã nộp',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => 'tác giả:',
 	'info_authentification_ftp' => 'Xác nhận (dùng FTP).',
 	'info_breves_2' => 'tin ngắn',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'Không nối vào được',
 	'info_contact_developpeur' => 'Xin liên lạc với lập trình viên.',
 	'info_contenance' => 'Website có:',
@@ -372,14 +318,11 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Xin lập ra một hồ sơ hay một ngăn mang tên:',
 	'info_creer_repertoire_2' => 'trong ngăn phụ <b>@repertoire@</b>, kế đó', # MODIF
 	'info_creer_vignette' => 'tự động tạo ra các hình mẫu nhỏ',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Mở ra',
 	'info_descriptif_nombre' => 'Mô tả:',
 	'info_description' => 'Tóm lược:',
 	'info_description_2' => 'Tóm lược:',
 	'info_dimension' => 'Khổ:',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'Viết thư tín riêng',
 	'info_email_invalide' => 'Địa chỉ email không đúng.',
 	'info_en_cours_validation' => 'Bài viết đang soạn',
@@ -419,8 +362,6 @@ sera ignorée) :
 	'info_mail_fournisseur' => ' you@isp.com',
 	'info_message_2' => 'THƯ TÍN',
 	'info_message_supprime' => 'THƯ TÍN ĐƯỢC XÓA',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'Ngày đăng tải online:',
 	'info_modification_parametres_securite' => 'Sửa đổi các thông số an ninh',
 	'info_mois_courant' => 'Trong tháng:',
@@ -436,10 +377,8 @@ sera ignorée) :
 	'info_nouveau_message' => 'CÓ THƯ TÍN MỚI',
 	'info_nouveaux_messages' => 'BẠN CÓ @total_messages@ THƯ TÍN MỚI',
 	'info_numero_abbreviation' => 'Số ',
-	'info_obligatoire' => 'Cette information est obligatoire', # NEW
 	'info_pense_bete' => 'GHI NHỚ',
 	'info_petit_ecran' => 'Xem dạng nhỏ',
-	'info_petition_close' => 'Pétition close', # NEW
 	'info_pixels' => 'chấm',
 	'info_plusieurs_mots_trouves' => 'Tìm thấy một số từ then chốt cho "@cherche_mot@":',
 	'info_portfolio_automatique' => 'Portfolio tự động:',
@@ -458,13 +397,9 @@ sera ignorée) :
 	'info_rechercher' => 'Tìm kiếm',
 	'info_rechercher_02' => 'Tìm:',
 	'info_remplacer_vignette' => 'Thay thế hình xem trước định sẵn bằng logo riêng:',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'không tựa đề',
 	'info_selectionner_fichier' => 'Bạn có thể chọn một hồ trơ trong ngăn @upload@', # MODIF
 	'info_selectionner_fichier_2' => 'Chọn một hồ sơ:',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'xóa hình nhỏ xem trước',
 	'info_symbole_bleu' => 'Ký hiệu <b>xanh dương</b> cho biết <b>bản ghi nhớ</b>: tức là thư tín cho riêng bạn.', # MODIF
 	'info_symbole_jaune' => 'Ký hiệu <b>vàng</b> cho biết <b>thông báo đến tất cả chủ bút</b>: tất cả chủ bút có thể sửa đổi được, và chủ bút nào cũng nhìn thấy được.', # MODIF
@@ -486,8 +421,6 @@ sera ignorée) :
 	'infos_vos_pense_bete' => 'Bản ghi nhớ của bạn', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Xem icon mà thôi',
 	'lien_afficher_texte_icones' => 'Xem icon và chữ',
 	'lien_afficher_texte_seul' => 'Xem chữ mà thôi',
@@ -533,13 +466,11 @@ sera ignorée) :
 	'login_retour_site' => 'Trở lại trang web công cộng',
 	'login_retoursitepublic' => 'trở lại trang web công cộng',
 	'login_sans_cookiie' => 'Nhận diện không cần cookie',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'ghi danh',
 	'login_test_navigateur' => 'thử browser/nối lại',
 	'login_verifiez_navigateur' => '(Tuy nhiên, kiểm lại để biết là browser không có nhớ mật mã của bạn...)',
 
 	// M
-	'masquer_colonne' => 'Masquer cette colonne', # NEW
 	'masquer_trad' => 'dấu các bản dịch',
 	'module_fichiers_langues' => 'Hồ sơ ngôn ngữ',
 
@@ -586,7 +517,6 @@ Bạn cho vào mật mã mới để vào lại trang web.', # MODIF
 	'pass_nouveau_pass' => 'Mật mã mới',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Quên mật mã',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Rời bỏ khung đó',
 	'pass_rappel_login' => 'Lưu ý: login của bạn là "@login@".',
 	'pass_recevoir_mail' => 'Bạn sẽ nhận qua email chi tiết chỉ dẫn cách thu hồi phép ra/vô trang web.',
@@ -609,7 +539,6 @@ Bạn cho vào mật mã mới để vào lại trang web.', # MODIF
 	'suivant' => 'kế tiếp',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ kb',
 	'taille_mo' => '@taille@ Mb',
 	'taille_octets' => '@taille@ bytes',
@@ -620,7 +549,6 @@ Bạn cho vào mật mã mới để vào lại trang web.', # MODIF
 Nếu bạn đem vào những hình ảnh trong dạng  @gd_formats@, chúng sẽ có hình mẫu với khổ tối đa là @taille_preview@ chấm. ',
 	'texte_documents_associes' => 'Các tài liệu sau đây có liên đới với bài này, nhưng chúng không được độn trực tiếp vào. Dựa theo bố trí của website, chúng trông như là tài liệu đính kèm. ',
 	'texte_erreur_mise_niveau_base' => 'Có lỗi database trong lúc nâng cấp. Hình <b>@fichier@</b> không chuyển vô được trong (bài @id_article@).<p> Hãy lưu ý cho kỹ lời nhắn này, thử lại việc nâng cấp, và cuối cùng kiểm lại xem hình có hiện ra trong bài không. ', # MODIF
-	'texte_erreur_visiteur' => 'Vous avez tenté d\'accéder à l\'espace privé avec un login qui ne le permet pas.', # NEW
 	'texte_inc_auth_1' => 'Bạn bảo rằng login của bạn là <b>@auth_login@</b>, nhưng login này không có trong database. Tìm cách', # MODIF
 	'texte_inc_auth_2' => 'nối lại',
 	'texte_inc_auth_3' => 'bằng cách ra khỏi và khởi động lại browser, nếu cần thiết.',
@@ -642,26 +570,20 @@ Nếu bạn đem vào những hình ảnh trong dạng  @gd_formats@, chúng s�
 	'titre_image_auteur_supprime' => 'Tác giả bị xoá',
 	'titre_image_redacteur' => 'Tác giả không có quyền',
 	'titre_image_redacteur_02' => 'Tác giả',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Khách',
 	'titre_joindre_document' => 'ĐÍNH KÈM MỘT HỒ SƠ',
 	'titre_mots_cles' => 'TỪ THEN CHỐT',
 	'titre_probleme_technique' => 'Báo động: trục trặc kỹ thuật (SQL server) thành ra không vào được chỗ này của trang web.<p>Xin thông cảm.', # MODIF
 	'titre_publier_document' => 'PHÁT HÀNH MỘT TÀI LIỆU TRONG ĐỀ MỤC NÀY',
-	'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-	'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 	'titre_statistiques' => 'Thống Kê',
 	'titre_titre_document' => 'Tựa bài:',
-	'todo' => 'à venir', # NEW
 	'trad_reference' => '(bài nối kết)', # MODIF
 
 	// Z
 	'zbug_balise_b_aval' => ': B tag too late in loop',
 	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
-	'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 	'zbug_boucle' => 'loop',
 	'zbug_boucle_recursive_undef' => 'undefined recursive loop', # MODIF
-	'zbug_calcul' => 'calcul', # NEW
 	'zbug_champ_hors_boucle' => 'Field @champ@ outside loop',
 	'zbug_champ_hors_motif' => 'Field @champ@ outside loop tagged @motif@', # MODIF
 	'zbug_code' => 'mã',
@@ -672,12 +594,10 @@ Nếu bạn đem vào những hình ảnh trong dạng  @gd_formats@, chúng s�
 	'zbug_erreur_boucle_double' => 'BOUCLE@id@: Chỉ được dùng một lần ', # MODIF
 	'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: chưa dược dóng lại ', # MODIF
 	'zbug_erreur_boucle_syntaxe' => 'Cách viết vòng (boucle) này không đúng.', # MODIF
-	'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
 	'zbug_erreur_execution_page' => 'error in page calculation', # MODIF
 	'zbug_erreur_filtre' => 'Sai lầm : Bạn chưa xác định bộ lọc (filtre) <b>« @filtre@ »</b> nầy. ', # MODIF
 	'zbug_erreur_meme_parent' => '{meme_parent} only applies to loops (FORUMS) and (RUBRIQUES)', # MODIF
 	'zbug_erreur_squelette' => 'Error(s) in template',
-	'zbug_hors_compilation' => 'Hors Compilation', # NEW
 	'zbug_info_erreur_squelette' => 'Có lỗi trên Website',
 	'zbug_inversion_ordre_inexistant' => 'reversal of nonexistent order', # MODIF
 	'zbug_pagination_sans_critere' => '#PAGINATION sans critère {pagination} ou employé dans une boucle recursive', # MODIF
@@ -685,23 +605,9 @@ Nếu bạn đem vào những hình ảnh trong dạng  @gd_formats@, chúng s�
 	'zbug_profile' => 'Thời gian tính toán: @time@',
 	'zbug_resultat' => 'kết quả',
 	'zbug_serveur_indefini' => 'undefined SQL server', # MODIF
-	'zbug_statistiques' => 'Statistiques des requêtes SQL classées par durée', # NEW
 	'zbug_table_inconnue' => 'Unknown SQL table "@table@"',
-	'zxml_connus_attributs' => 'attributs connus', # NEW
-	'zxml_de' => 'de', # NEW
-	'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
-	'zxml_inconnu_balise' => 'balise inconnue', # NEW
-	'zxml_inconnu_entite' => 'entité inconnue', # NEW
 	'zxml_inconnu_id' => 'chi tiết ID không biết',
-	'zxml_mais_de' => 'mais de', # NEW
-	'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
-	'zxml_non_fils' => 'n\'est pas un fils de', # NEW
-	'zxml_nonvide_balise' => 'balise non vide', # NEW
-	'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans', # NEW
-	'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
 	'zxml_survoler' => 'để xem chi tiết đúng, di chuyển con chuột lên trên',
-	'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
-	'zxml_vide_balise' => 'balise vide', # NEW
 	'zxml_vu' => 'đã thấy trước đây'
 );
 

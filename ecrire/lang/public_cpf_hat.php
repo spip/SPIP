@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Akey sit la', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Atik yo',
 	'articles_auteur' => 'Tout atik lotè a',
 	'articles_populaires' => 'Atik yo ki plis popilè',
@@ -19,8 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Gen pa oken sit sou ladrès la',
 	'aucune_breve' => 'Gen pa oken tinouvèl sou ladrès la',
 	'aucune_rubrique' => 'Gen pa oken ribrik sou ladrès la',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Ot', # NEW
 	'autres_breves' => 'Lòt tinouvèl yo',
 	'autres_groupes_mots_clefs' => 'Lòt gwoup mokle yo',
 	'autres_sites' => 'Lòt sit yo',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Lès yon komantè sou sit la',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Pa ka kopye dokiman la', # NEW
 
 	// D
 	'date' => 'Dat',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'Voye yon mesaj',
 	'espace_prive' => 'Espas privé',
 
-	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'Estrikti sit sa-a',
 
 	// J
 	'jours' => 'jou yo',
-
-	// L
-	'lien_connecter' => 'Se connecter', # NEW
 
 	// M
 	'meme_auteur' => 'Mèm lotè ki ekri ankò',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Mesaj',
 	'messages_forum' => 'Mesaj yo nan fowom ', # MODIF
 	'messages_recents' => 'Mesaj yo nan fowom ki plis resan',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Mokle yo',
 	'mots_clefs_meme_groupe' => 'Mokle yo nan mèm gwoup',
 
@@ -102,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'Sit la  se sit ki te fè ak SPIP',
 	'sites_web' => 'Sitwèb yo',
 	'sous_rubriques' => 'Souribrik yo',
-	'spam' => 'Spam', # NEW
 	'suite' => 'swit',
 	'sur_web' => 'Sou wèb',
 	'syndiquer_rubrique' => 'Sindike ribrik la',

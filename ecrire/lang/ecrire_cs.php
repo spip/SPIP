@@ -11,18 +11,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'Aktivovat plugin',
 	'affichage' => 'Zobrazit',
 	'aide_non_disponible' => 'Tato část vestavěné nápovědy není ještě v tomto jazykovém znění k dispozici.',
-	'annuler_recherche' => 'Annuler la recherche', # NEW
 	'auteur' => 'Autor:',
 	'avis_acces_interdit' => 'Přístup zakázán.',
 	'avis_article_modifie' => 'Varování: Na tomto článku pracoval před @date_diff@ minutou/minutami @nom_auteur_modif@.',
 	'avis_aucun_resultat' => 'Nenalezeny žádné výsledky.',
-	'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
 	'avis_chemin_invalide_1' => 'Zvolili jste cestu',
 	'avis_chemin_invalide_2' => 'nejspíš neplatnou. Vraťte se na předchozí stránku a zkontrolujte zadané údaje.',
 	'avis_connexion_echec_1' => 'Spojení k serveru SQL selhalo.', # MODIF
 	'avis_connexion_echec_2' => 'Vraťte se na předchozí stránku a zkontrolujte zadané údaje.',
 	'avis_connexion_echec_3' => '<b>Pozn.:</b> V mnoha případech musíte nejprve <b>požádat</b> o aktivaci přístupu k databázi SQL a teprve potém ji můžete používat. Nemůžete-li se připojit, zkontrolujte, zda jste tento požadavek opravdu zadali.', # MODIF
-	'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 	'avis_connexion_ldap_echec_1' => 'Selhalo připojení k serveru LDAP.',
 	'avis_connexion_ldap_echec_2' => 'Vraťte se na předchozí stránku a zkontrolujte zadané údaje.',
 	'avis_connexion_ldap_echec_3' => 'Případně při importu uživatelů nepoužívejte podporu LDAP.',
@@ -44,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_non_acces_message' => 'K této zprávě nemáte přístup.',
 	'avis_non_acces_page' => 'K této stránce nemáte přístup.',
 	'avis_operation_echec' => 'Došlo k selhání operace.',
-	'avis_operation_impossible' => 'Operation impossible', # NEW
 	'avis_probleme_archive' => 'Chyba při čtení ze souboru @archive@',
 	'avis_suppression_base' => 'VAROVÁNÍ! Odstranění dat je nevratné',
 	'avis_version_mysql' => 'Ve vaší verzi databáze SQL (@version_mysql@) nelze automaticky opravovat databázové tabulky.', # MODIF
@@ -54,22 +50,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter' => 'Přidat',
 	'bouton_ajouter_participant' => 'PŘIDAT ÚČASTNÍKA:',
 	'bouton_annonce' => 'OZNÁMENÍ',
-	'bouton_annuler' => 'Cancel', # NEW
-	'bouton_cache_activer' => 'Réactiver le cache', # NEW
-	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'možnost odeslat zprávu',
 	'bouton_checkbox_indiquer_site' => 'Musíte zadat název webu',
 	'bouton_checkbox_signature_unique_email' => 'pouze jeden podpis na jednu elektronickou adresu',
 	'bouton_checkbox_signature_unique_site' => 'pouze jeden podpis na jeden web',
 	'bouton_demande_publication' => 'Požádat o zveřejnění článku',
 	'bouton_desactive_tout' => 'Vše vypnout',
-	'bouton_desinstaller' => 'Uninstall', # NEW
 	'bouton_effacer_index' => 'Odstranit indexování',
 	'bouton_effacer_tout' => 'Odstranit vše',
 	'bouton_envoi_message_02' => 'ODESLAT ZPRÁVU',
 	'bouton_envoyer_message' => 'Konečná zpráva: odeslat',
-	'bouton_fermer' => 'Fermer', # NEW
-	'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 	'bouton_modifier' => 'Změnit',
 	'bouton_pense_bete' => 'INTERNÍ POZNÁMKA',
 	'bouton_radio_activer_messagerie' => 'Zapnout interní systém zpráv',
@@ -98,50 +88,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cache_mode_non_compresse' => 'Soubory cache jsou uloženy nekomprimovaně.',
 	'cache_modifiable_webmestre' => 'Tento parametr může měnit správce webu.',
 	'calendrier_synchro' => 'Používáte-li kompatibilní kalendář <b>iCal</b>, můžete jej synchnizovat s údaji na tomto webu.',
-	'config_activer_champs' => 'Activate the following fields', # NEW
-	'config_choix_base_sup' => 'Name a database on this server', # NEW
-	'config_erreur_base_sup' => 'SPIP does not have access to the available databases', # NEW
-	'config_info_base_sup' => 'If you need to query other databases using SPIP, whether on the same SQL server or elsewhere, use the form below to declare them. If you leave some fields empty, then the connection details to the main database will be used.', # NEW
-	'config_info_base_sup_disponibles' => 'Additional databases to which queries may be sent:', # NEW
-	'config_info_enregistree' => 'The new configuration has been saved', # NEW
-	'config_info_logos' => 'Each element of the site can have its logo and also a "mouseover" logo', # NEW
-	'config_info_logos_utiliser' => 'Use logos', # NEW
-	'config_info_logos_utiliser_non' => 'Do not use logos', # NEW
-	'config_info_logos_utiliser_survol' => 'Use "mouseover" logos', # NEW
-	'config_info_logos_utiliser_survol_non' => 'Do not use "mouseover" logos', # NEW
-	'config_info_redirection' => 'By activating this option you can create virtual articles, which are simply references to articles published on other sites whether SPIP sites or not.', # NEW
-	'config_redirection' => 'Virtual articles', # NEW
-	'config_titre_base_sup' => 'Declaration of an additional database', # NEW
-	'config_titre_base_sup_choix' => 'Choose an additional database', # NEW
-	'connexion_ldap' => 'Connection:', # NEW
-	'copier_en_local' => 'Copy to local site', # NEW
-	'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
-	'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 	// D
 	'date_mot_heures' => 'hodina',
 
 	// E
-	'ecran_securite' => ' + écran de sécurité @version@', # NEW
 	'email' => 'e-mail',
 	'email_2' => 'email:',
-	'en_savoir_plus' => 'En savoir plus', # NEW
 	'entree_adresse_annuaire' => 'Adresa seznamu',
 	'entree_adresse_email' => 'Váš email',
-	'entree_adresse_email_2' => 'Adresse email', # NEW
 	'entree_base_donnee_1' => 'Adresa databáze',
 	'entree_base_donnee_2' => '(Tato adresa většinou odpovídá adrese vašeho webu někdy výrazu "localhost", někdy je prázdná.)',
 	'entree_biographie' => 'Stručný životopis.',
 	'entree_chemin_acces' => '<b>Zadejte</b> cestu:', # MODIF
 	'entree_cle_pgp' => 'Váš klíč PGP',
-	'entree_cle_pgp_2' => 'Clé PGP', # NEW
 	'entree_contenu_rubrique' => '(Stručný obsah sekce.)',
 	'entree_identifiants_connexion' => 'Vaše přihlašovací údaje pro připojení...',
-	'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 	'entree_informations_connexion_ldap' => 'Zde zadejte údaje pro připojení k adresáří LDAP.
  Tyto údaje by vám měl sdělit správce systému nebo sítě.',
 	'entree_infos_perso' => 'Kdo jste?',
-	'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 	'entree_interieur_rubrique' => 'Uvnitř sekce:',
 	'entree_liens_sites' => '<b>Hypertextový odkaz</b> (odkaz, web, který se má navštívit...)', # MODIF
 	'entree_login' => 'Vaše přihlašovací údaje',
@@ -154,19 +119,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nom_fichier' => 'Zadejte název souboru @texte_compresse@:',
 	'entree_nom_pseudo' => 'Vaše jeméno nebo přezdívka',
 	'entree_nom_pseudo_1' => '(Vaše jméno nebo přezdívka)',
-	'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 	'entree_nom_site' => 'Název vašeho webu',
-	'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 	'entree_nouveau_passe' => 'Nové heslo',
 	'entree_passe_ldap' => 'Heslo',
 	'entree_port_annuaire' => 'Číslo portu adresáře',
 	'entree_signature' => 'Podpis',
 	'entree_titre_obligatoire' => '<b>Titul</b> [povinný údaj]<br />', # MODIF
 	'entree_url' => 'Adresa (URL) vašeho webu',
-	'entree_url_2' => 'Adresse (URL) du site', # NEW
-	'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
-	'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
-	'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
 	'erreur_plugin_fichier_absent' => 'Soubor chybí',
 	'erreur_plugin_fichier_def_absent' => 'Chybí definiční soubor',
 	'erreur_plugin_nom_fonction_interdit' => 'Zakázané jméno funkce',
@@ -174,10 +133,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_plugin_prefix_manquant' => 'Jmenný prostor pluginu není definovaný',
 	'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; chybí v definičním souboru',
 	'erreur_plugin_version_manquant' => 'Chybí informace o verzi pluginu',
-
-	// H
-	'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
-	'htaccess_inoperant' => 'htaccess inopérant', # NEW
 
 	// I
 	'ical_info1' => 'Tato stránka umožňuje zůstat v kontaktu s děním na tomto webu několika způsoby.',
@@ -192,59 +147,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_titre_js' => 'Javascript',
 	'ical_titre_mailing' => 'Seznam pro rozesílání emailů',
 	'ical_titre_rss' => 'Syndikační soubory',
-	'icone_accueil' => 'Accueil', # NEW
 	'icone_activer_cookie' => 'Nastavit cookie',
-	'icone_activite' => 'Activité', # NEW
 	'icone_admin_plugin' => 'Spravovat pluginy',
-	'icone_administration' => 'Maintenance', # NEW
 	'icone_afficher_auteurs' => 'Zobrazit autory',
 	'icone_afficher_visiteurs' => 'Zobrazit návštěvníky',
 	'icone_arret_discussion' => 'Ukončit účast v diskusi',
 	'icone_calendrier' => 'Kalendář',
-	'icone_configuration' => 'Configuration', # NEW
 	'icone_creer_auteur' => 'Vytvořit nového autora a spojit ho s tímto článkem',
 	'icone_creer_mot_cle' => 'Zadejte nové klíčové slovo a spojte jej s tímto článkem',
-	'icone_creer_mot_cle_rubrique' => 'Create a new keyword and attach it to this section', # NEW
-	'icone_creer_mot_cle_site' => 'Create a new keyword and attach it to this site', # NEW
 	'icone_creer_rubrique_2' => 'Vytvořit novou sekci',
-	'icone_edition' => 'Édition', # NEW
 	'icone_envoyer_message' => 'Odeslat zprávu',
-	'icone_ma_langue' => 'Ma langue', # NEW
-	'icone_mes_infos' => 'Mes informations', # NEW
-	'icone_mes_preferences' => 'Mes préférences', # NEW
 	'icone_modifier_article' => 'Změnit článek',
 	'icone_modifier_message' => 'Změnit zprávu',
 	'icone_modifier_rubrique' => 'Změnit sekci',
-	'icone_publication' => 'Publication', # NEW
-	'icone_relancer_signataire' => 'Contact the signatory again', # NEW
 	'icone_retour' => 'Zpět',
 	'icone_retour_article' => 'Zpět k článku',
-	'icone_squelette' => 'Squelettes', # NEW
-	'icone_suivi_publication' => 'Suivi de la publication', # NEW
 	'icone_supprimer_cookie' => 'Smazat cookie',
 	'icone_supprimer_rubrique' => 'Odstranit sekci',
 	'icone_supprimer_signature' => 'Odstranit podpis',
 	'icone_valider_signature' => 'Potvrdit podpis',
 	'image_administrer_rubrique' => 'Máte právo správy této sekce',
-	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
-	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 	'info_1_article' => '1 článek',
-	'info_1_article_syndique' => '1 article syndiqué', # NEW
-	'info_1_auteur' => '1 auteur', # NEW
-	'info_1_message' => '1 message', # NEW
-	'info_1_mot_cle' => '1 mot-clé', # NEW
-	'info_1_rubrique' => '1 rubrique', # NEW
 	'info_1_site' => '1 web',
-	'info_1_visiteur' => '1 visiteur', # NEW
 	'info_activer_cookie' => 'Můžete nastavit <b>administrátorské cookie</b>, které vám dovolí
  snadno přecházet mezi prohlížením webu a jeho editací.',
-	'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 	'info_admin_gere_rubriques' => 'Tento správce ospovídá za následující sekce:',
 	'info_admin_gere_toutes_rubriques' => 'Tento správce odpovídá ua <b>všechny sekce</b>.', # MODIF
-	'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
-	'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
-	'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
-	'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 	'info_administrateur' => 'Správce',
 	'info_administrateur_1' => 'Správce',
 	'info_administrateur_2' => 'webu (<i>používat opatrně</i>)',
@@ -254,7 +182,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_administrer_rubrique' => 'Máte právo správy této sekce',
 	'info_adresse' => 'na adrese:',
 	'info_adresse_url' => 'Adresa URL veřejného webu',
-	'info_afficher_par_nb' => 'Afficher par', # NEW
 	'info_afficher_visites' => 'Zobrazit návštěvy:',
 	'info_aide_en_ligne' => 'Nápověda online systému SPIP',
 	'info_ajout_image' => 'Přikládáte-li k článku obrázky jako dokumenty,
@@ -271,18 +198,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_articles_02' => 'články',
 	'info_articles_2' => 'Články',
 	'info_articles_auteur' => 'Články tohoto autora',
-	'info_articles_miens' => 'Mes articles', # NEW
-	'info_articles_tous' => 'Tous les articles', # NEW
 	'info_articles_trouves' => 'Nalezené články',
 	'info_articles_trouves_dans_texte' => 'Nalezené články (v textu)',
 	'info_attente_validation' => 'Vaše články čekající na schválení',
-	'info_aucun_article' => 'Aucun article', # NEW
-	'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
-	'info_aucun_auteur' => 'Aucun auteur', # NEW
-	'info_aucun_message' => 'Aucun message', # NEW
-	'info_aucun_rubrique' => 'Aucune rubrique', # NEW
-	'info_aucun_site' => 'Aucun site', # NEW
-	'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 	'info_aujourdhui' => 'dnes:',
 	'info_auteur_message' => 'AUTOR ZPRÁVY:',
 	'info_auteurs' => 'Autoři',
@@ -290,10 +208,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_auteurs_trouves' => 'Nalezení autoři',
 	'info_authentification_externe' => 'Externí autentifikace',
 	'info_avertissement' => 'Upozornění',
-	'info_barre_outils' => 'with its toolbar?', # NEW
 	'info_base_installee' => 'Struktura vaší databáze byla nainstalována.',
-	'info_bio' => 'Biographie', # NEW
-	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Stříška',
 	'info_chapeau_2' => 'Stříška:',
 	'info_chemin_acces_1' => 'Volitelný údaj: <b>Přístup k adresáři</b>', # MODIF
@@ -303,24 +218,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_classement_1' => 'z @liste@',
 	'info_classement_2' => '<sup>e</sup> z @liste@',
 	'info_code_acces' => 'Nezapomeňte své přístupové kódy!',
-	'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 	'info_compresseur_gzip' => 'It is advisable to first check if the service provider systematically compresses PHP scripts. To do this you can, for example, use the following service: @testgzip@', # MODIF
-	'info_compresseur_texte' => 'If your server does not automatically compress HTML pages when sending them, you can attempt to force the compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ', # NEW
 	'info_config_suivi' => 'Jedná-li se o adresu diskusní skupiny, můžete zde uvést adresu, na které se mohou účastníci webu přihlásit. Může se jednat o adresu URL (například webová stránka pro přihlášení do skupiny) nebo o elektronickou adresu s uvedením specifického předmětu (např.: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => 'Můžete se přihlásit na mailing-list tohoto webu. Potom budete dostávat oznámení o článcích a novinkách připravených k publikování.',
 	'info_confirmer_passe' => 'Potvrdit nové heslo:',
-	'info_conflit_edition_avis_non_sauvegarde' => 'Caution: the following fields have been modified elsewhere. Your changes to these fields have therefore not been saved.', # NEW
-	'info_conflit_edition_differences' => 'Differences:', # NEW
-	'info_conflit_edition_version_enregistree' => 'Saved version:', # NEW
-	'info_conflit_edition_votre_version' => 'Your version:', # NEW
 	'info_connexion_base' => 'Druhý krok : <b>Pokus o připojení k databázi</b>', # MODIF
-	'info_connexion_base_donnee' => 'Connection to your database', # NEW
 	'info_connexion_ldap_ok' => 'Připojení k LDAP bylo úspěšné.</b><p> Můžete přistoupit k dalšímu kroku.</p>', # MODIF
 	'info_connexion_mysql' => 'První krok: <b>Připojení k databázi SQL</b>', # MODIF
 	'info_connexion_ok' => 'Spojení bylo úspěšné.',
 	'info_contact' => 'Kontakt',
 	'info_contenu_articles' => 'Obsah článků',
-	'info_contributions' => 'Contributions', # NEW
 	'info_creation_paragraphe' => '(Odstavce vytvoříte ponecháním volných řádků.)', # MODIF
 	'info_creation_rubrique' => 'Články můžete psát teprve,<br /> když vytvoříte alespoň jednu sekci.<br />', # MODIF
 	'info_creation_tables' => 'Čtvrtý krok: <b>Vytvoření databázových tabulek</b>', # MODIF
@@ -332,7 +239,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_derniers_articles_publies' => 'Vaše poslední publikované články.',
 	'info_desactiver_messagerie_personnelle' => 'U tohoto webu můžete zapnout nebo vypnout systém interních zpráv.',
 	'info_descriptif' => 'Popis:',
-	'info_desinstaller_plugin' => 'deletes the data and deactivates the plugin', # NEW
 	'info_discussion_cours' => 'Probíhající diskuse',
 	'info_ecrire_article' => 'Články můžete psát teprve, když vytvoříte alespoň jednu sekci.',
 	'info_email_envoi' => 'Email pro zprávy (volitelný údaj)',
@@ -344,7 +250,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_etape_suivante' => 'Přejít k dalšímu kroku',
 	'info_etape_suivante_1' => 'Můžete přejít k dalšímu kroku.',
 	'info_etape_suivante_2' => 'Můžete přejít k dalšímu kroku.',
-	'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 	'info_exportation_base' => 'export databáze do @archive@',
 	'info_facilite_suivi_activite' => 'Systém SPIP může zasílat elektronické zprávy
   (např. do diskusní skupiny redaktorů) oznamující žádosti o zveřejnění
@@ -368,7 +273,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
  ve veřejné části webu (diskusní skupiny, do kterých je nutno se přihlásit).',
 	'info_generation_miniatures_images' => 'Generování náhledů',
 	'info_gerer_trad' => 'Správa odkazů na překlad?',
-	'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 	'info_hebergeur_desactiver_envoi_email' => 'Někteří poskytovatelé prostoru pro web (hostitelé)
   mají vypnuté automatické zasílání emailů ze svých serverů.
   Níže uvedené funkce systému SPIP pak nelze používat.',
@@ -390,12 +294,9 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_langues' => 'Jazyk webu',
 	'info_ldap_ok' => 'Byla nainstalována autentifikace LDAP.',
 	'info_lien_hypertexte' => 'Hypertextový odkaz:',
-	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Seznam připojených redaktorů',
 	'info_login_existant' => 'Toto uživatelské jméno již existuje.',
 	'info_login_trop_court' => 'Uživatelské jeméno je příliš krátké.',
-	'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
-	'info_logos' => 'The logos', # NEW
 	'info_maximum' => 'maximum:',
 	'info_meme_rubrique' => 'Ve stejné sekci',
 	'info_message' => 'Zpráva z',
@@ -409,8 +310,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
   vystavujete se riziku ztráty databáze a nefunkčnosti vašeho webu. 
              <br />{{Nainstalujte znovu
   soubor systému SPIP.}}', # MODIF
-	'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
-	'info_modifier_auteur' => 'Edit author details:', # NEW
 	'info_modifier_rubrique' => 'Změnit sekci:',
 	'info_modifier_titre' => 'Změnit: @titre@',
 	'info_mon_site_spip' => 'Můj web SPIP',
@@ -421,20 +320,10 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_multi_cet_article' => 'Jazyk článku:',
 	'info_multi_langues_choisies' => 'Dále zvolte jazyk, který bude k dispozici redaktorům tohoto webu.
   Jazyky, které se již v rámci webu používají (zobrazené na počátku), nelze vypnout.',
-	'info_multi_objets' => '@objets@ : activer le menu de langue', # NEW
 	'info_multi_rubriques' => 'Zapnout nabídku nazyků v sekcích?',
 	'info_multi_secteurs' => '... pouze u sekcí v kořenovém adresáři?',
-	'info_nb_articles' => '@nb@ articles', # NEW
-	'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
-	'info_nb_auteurs' => '@nb@ auteurs', # NEW
-	'info_nb_messages' => '@nb@ messages', # NEW
-	'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
-	'info_nb_rubriques' => '@nb@ rubriques', # NEW
-	'info_nb_sites' => '@nb@ sites', # NEW
-	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Jméno',
 	'info_nom_destinataire' => 'Jméno příjemce',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Název webu',
 	'info_nombre_articles' => '@nb_articles@ články,',
 	'info_nombre_partcipants' => 'ÚČASTNÍCI DISKUSE:',
@@ -445,7 +334,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_non_envoi_liste_nouveautes' => 'Nezasílat seznam novinek',
 	'info_non_modifiable' => 'nelze změnit',
 	'info_non_suppression_mot_cle' => 'nechci odstanit toto klíčové slovo.',
-	'info_note_numero' => 'Note @numero@', # NEW
 	'info_notes' => 'Poznámky',
 	'info_nouveaux_message' => 'Nové zprávy',
 	'info_nouvel_article' => 'Nový článek',
@@ -465,7 +353,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_par_statut' => 'podle stavu',
 	'info_par_tri' => '\'(podle @tri@)\'',
 	'info_passe_trop_court' => 'Heslo je příliš krátké.',
-	'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 	'info_passes_identiques' => 'Zadaná hesla nesouhlasí.',
 	'info_pense_bete_ancien' => 'Staré interní poznámky', # MODIF
 	'info_plus_cinq_car' => 'vice než 5 znaků',
@@ -484,7 +371,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_procedez_par_etape' => 'postupujte krok za krokem',
 	'info_procedure_maj_version' => 'pro úpravu nové verze systému SPIP je třeba spustit aktualizaci
  databáze.',
-	'info_proxy_ok' => 'Test of the proxy successful.', # NEW
 	'info_ps' => 'P.S.',
 	'info_publier' => 'zveřejnit',
 	'info_publies' => 'Vaše články publikované online',
@@ -500,7 +386,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
   nemožné.', # MODIF
 	'info_question_utilisation_moteur_recherche' => 'Chcete používat vyhledávač, který je součástí systému SPIP?
  (je-li vyhledávač vypnut, zrychluje to chod systému.)',
-	'info_question_vignettes_referer_non' => 'Do not show the screenshots of the originating sites', # NEW
 	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Kořenový adresář webu',
 	'info_recharger_page' => 'Za okamžik zkuste stránku znovu nahrát.',
@@ -513,8 +398,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_redacteurs' => 'Redaktoři',
 	'info_redaction_en_cours' => 'ROZPRACOVÁNO',
 	'info_redirection' => 'Přesměrování',
-	'info_redirection_activee' => 'La redirection est activée.', # NEW
-	'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 	'info_refuses' => 'Vaše odmítnuté články',
 	'info_reglage_ldap' => 'Možnost: <b>Nastavení importu LDAP</b>', # MODIF
 	'info_renvoi_article' => '<b>Přesměrování.</b> Tento článek odkazuje na stránku:', # MODIF
@@ -541,7 +424,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_sous_titre' => 'Dílčí nadpis:',
 	'info_statut_administrateur' => 'Správce',
 	'info_statut_auteur' => 'Statut autora:', # MODIF
-	'info_statut_auteur_2' => 'Je suis', # NEW
 	'info_statut_auteur_a_confirmer' => 'Registrace k potvrzení',
 	'info_statut_auteur_autre' => 'Další status:',
 	'info_statut_efface' => 'Odstraněno',
@@ -552,8 +434,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_surtitre' => 'Nadřízený nadpis:',
 	'info_syndication_integrale_1' => 'Váš web nabízí soubory pro syndikaci (viz <a href="@url@">@titre@</a>”).',
 	'info_syndication_integrale_2' => 'Chcete poslat celé články, nebo jen prvních pár set znaků jako shrnutí?',
-	'info_table_prefix' => 'It is possible to change the prefix of the names of the database tables. (you need to do this if you are installing several sites in the same database). The prefix must be written in unaccented, lower-case letters without any spaces.', # NEW
-	'info_taille_maximale_images' => 'SPIP is going to test the maximum size of image (in millions of pixels) which it can treat.<br /> Images bigger than this will not be reduced.', # NEW
 	'info_taille_maximale_vignette' => 'Maximální velikost náhledů generovaných systémem:',
 	'info_terminer_installation' => 'Nyní můžete ukončit standardní instalaci.',
 	'info_texte' => 'Text',
@@ -565,7 +445,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_total' => 'celkem:',
 	'info_tous_articles_en_redaction' => 'Všechny rozpracované články',
 	'info_tous_articles_presents' => 'Všechny články publikované v této rubrice.',
-	'info_tous_articles_refuses' => 'Tous les articles refusés', # NEW
 	'info_tous_les' => 'všechny:',
 	'info_tous_redacteurs' => 'Zpráva pro všechny redaktory',
 	'info_tout_site' => 'Celý web',
@@ -576,16 +455,13 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_tout_site6' => '<b>Pozor:</b> zobrazeny jsou pouze původní články.
 Překlady jsou spojeny s originálem a barva
 ukazuje jejich stav:',
-	'info_traductions' => 'Traductions', # NEW
 	'info_travail_colaboratif' => 'Spolupráce na článku',
 	'info_un_article' => 'článek, ',
 	'info_un_site' => 'jeden web, ',
 	'info_une_rubrique' => 'jedna sekce, ',
 	'info_une_rubrique_02' => '1 sekce',
 	'info_url' => 'URL:',
-	'info_url_proxy' => 'URL du proxy', # NEW
 	'info_url_site' => 'URL WEBU:',
-	'info_url_test_proxy' => 'URL de test', # NEW
 	'info_urlref' => 'Hypertextový odkaz:',
 	'info_utilisation_spip' => 'Nyní můžete začít používat redakční systém...',
 	'info_visites_par_mois' => 'Zobrazení po měsících:',
@@ -593,34 +469,11 @@ ukazuje jejich stav:',
 	'info_visiteur_2' => 'z veřejného webu',
 	'info_visiteurs' => 'Návštěvníci',
 	'info_visiteurs_02' => 'Návštěvníci z veřejného webu',
-	'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
-	'install_adresse_base_hebergeur' => 'Database address attributed by the service provider', # NEW
-	'install_base_ok' => 'The base @base@ was identified', # NEW
-	'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 	'install_echec_annonce' => 'Instalace se nejspíš nezdaří, resp. jejím výsledkem bude nefunkční web...',
 	'install_extension_mbstring' => 'Systém SPIP nefunguje s:',
 	'install_extension_php_obligatoire' => 'Systém SPIP vyžaduje rozšíření php:',
-	'install_login_base_hebergeur' => 'Login attributed by the service provider', # NEW
-	'install_nom_base_hebergeur' => 'Database name attributed by the service provider:', # NEW
-	'install_pas_table' => 'The database has no table yet', # NEW
-	'install_pass_base_hebergeur' => 'Connection password attributed by the service provider', # NEW
-	'install_php_version' => 'The PHP version @version@ is too old (minimum = @minimum@)', # NEW
 	'install_select_langue' => 'Zvolte jazyk a spusťte instalaci klepnutím na tlačítko "Další".',
-	'install_select_type_db' => 'Indicate the type of database:', # NEW
-	'install_select_type_mysql' => 'MySQL', # NEW
-	'install_select_type_mysqli' => 'MySQLi', # NEW
-	'install_select_type_pg' => 'PostgreSQL', # NEW
-	'install_select_type_sqlite2' => 'SQLite 2', # NEW
-	'install_select_type_sqlite3' => 'SQLite 3', # NEW
-	'install_serveur_hebergeur' => 'Database server attributed by the service provider', # NEW
-	'install_table_prefix_hebergeur' => 'Table prefix attributed by the service provider:', # NEW
-	'install_tables_base' => 'Tables of the database', # NEW
-	'install_types_db_connus' => 'SPIP can use <b>MySQL</b> (the most common), <b>PostgreSQL</b> and <b>SQLite</b>.', # NEW
-	'install_types_db_connus_avertissement' => 'N.B.: some plugins only function with MySQL', # NEW
-	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
-	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'redaktor',
-	'intitule_licence' => 'License', # NEW
 	'item_accepter_inscriptions' => 'Schválit přihlášky',
 	'item_activer_messages_avertissement' => 'Zapnout upozornění',
 	'item_administrateur_2' => 'správce',
@@ -636,7 +489,6 @@ ukazuje jejich stav:',
 	'item_creer_fichiers_authent' => 'Vytvořit soubory .htpasswd',
 	'item_limiter_recherche' => 'Omezit vyhledávání na údaje obsažené na vašem webu',
 	'item_login' => 'Uživatelské jméno',
-	'item_messagerie_agenda' => 'Activate the messaging sytem and the calendar', # NEW
 	'item_mots_cles_association_articles' => 'k článkům,',
 	'item_mots_cles_association_rubriques' => 'k sekcím',
 	'item_mots_cles_association_sites' => 'k webům, na něž existují odkazy nabo k syndikovaným webům.',
@@ -647,11 +499,9 @@ ukazuje jejich stav:',
 	'item_non_autoriser_documents_joints' => 'Nepovolit dokumenty v článcích',
 	'item_non_autoriser_documents_joints_rubriques' => 'Nepovolit dokumenty v sekcích',
 	'item_non_autoriser_syndication_integrale' => 'Poslat pouze shrnutí',
-	'item_non_compresseur' => 'Deactivate compression', # NEW
 	'item_non_creer_fichiers_authent' => 'Nevytvářet tyto soubory',
 	'item_non_gerer_statistiques' => 'Bez správy statistik',
 	'item_non_limiter_recherche' => 'Rozšířit hledání na obsah webů, na něž vedou odkazy',
-	'item_non_messagerie_agenda' => 'Deactivate the messaging system and the calendar', # NEW
 	'item_non_publier_articles' => 'Nezveřejňovat články před stanoveným datem.',
 	'item_non_utiliser_moteur_recherche' => 'Nepoužívat vyhledávač',
 	'item_nouvel_auteur' => 'Nový autor',
@@ -660,42 +510,23 @@ ukazuje jejich stav:',
 	'item_publier_articles' => 'Zveřejnit články bez ohledu na datum.',
 	'item_reponse_article' => 'Odpověď na článek',
 	'item_utiliser_moteur_recherche' => 'Používat vyhledávač',
-	'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
-	'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 	'item_visiteur' => 'návštěvník',
 
 	// J
 	'jour_non_connu_nc' => 'neuvedeno',
 
 	// L
-	'label_bando_outils' => 'Barre d\'outils', # NEW
-	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
-	'label_choix_langue' => 'Selectionnez votre langue', # NEW
-	'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
-	'label_slogan_site' => 'Slogan du site', # NEW
-	'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
-	'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
-	'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
-	'ldap_correspondance' => 'héritage du champ @champ@', # NEW
-	'ldap_correspondance_1' => 'Héritage des champs LDAP', # NEW
-	'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 	'lien_ajout_destinataire' => 'Přidat příjemce',
 	'lien_ajouter_auteur' => 'Přidat autora',
 	'lien_ajouter_participant' => 'Přidat účastníka',
-	'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 	'lien_email' => 'email',
 	'lien_nom_site' => 'NÁZEV WEBU:',
 	'lien_retirer_auteur' => 'Odstanit autora',
-	'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
-	'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
-	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 	'lien_retrait_particpant' => 'odstranit účastníka',
 	'lien_site' => 'web',
 	'lien_supprimer_rubrique' => 'zrušit sekci',
 	'lien_tout_deplier' => 'Rozbalit vše',
 	'lien_tout_replier' => 'Sbalit vše',
-	'lien_tout_supprimer' => 'Delete all', # NEW
 	'lien_trier_nom' => 'Třídit podle jména',
 	'lien_trier_nombre_articles' => 'Třídit podle čísel článků',
 	'lien_trier_statut' => 'Třídit podle stavu',
@@ -716,114 +547,26 @@ ukazuje jejich stav:',
 	'module_texte_traduction' => 'Jazykový soubor " @module@ " existuje v těchto verzích:',
 	'mois_non_connu' => 'není známo',
 
-	// N
-	'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
-
 	// O
-	'onglet_contenu' => 'Contents', # NEW
-	'onglet_declarer_une_autre_base' => 'Declare another database', # NEW
-	'onglet_discuter' => 'Discuss', # NEW
-	'onglet_documents' => 'Documents', # NEW
-	'onglet_interactivite' => 'Interactivity', # NEW
-	'onglet_proprietes' => 'Properties', # NEW
 	'onglet_repartition_actuelle' => 'nyní',
-	'onglet_sous_rubriques' => 'Sub-sections', # NEW
 
 	// P
-	'page_pas_proxy' => 'This page shouldn\'t go through the proxy', # NEW
-	'pas_de_proxy_pour' => 'If necessary, indicate for which machines or domains this proxy should not apply (for example: @exemple@)', # NEW
-	'plugin_charge_paquet' => 'Loading the archive file @name@', # NEW
-	'plugin_charger' => 'Télécharger', # NEW
-	'plugin_erreur_charger' => 'error: impossible to load @zip@', # NEW
-	'plugin_erreur_droit1' => 'The directory <code>@dest@</code> cannot be written to.', # NEW
-	'plugin_erreur_droit2' => 'Please check the write permissions for this directory (and create the directory if necessary). Alternatively, install the files by FTP.', # NEW
-	'plugin_erreur_zip' => 'pclzip failure: error @status@', # NEW
 	'plugin_etat_developpement' => 'upravuje se',
 	'plugin_etat_experimental' => 'experimentalní',
 	'plugin_etat_stable' => 'stabilní',
 	'plugin_etat_test' => 'testovací verze',
-	'plugin_impossible_activer' => 'Impossible to activate the plugin  @plugin@', # NEW
-	'plugin_info_automatique1' => 'If you wish to authorise the automatic installation of plugins, please:', # NEW
-	'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez :', # NEW
-	'plugin_info_automatique2' => 'Create a directory <code>@rep@</code> ;', # NEW
-	'plugin_info_automatique3' => 'Check that the server has the permissions to write in this directory.', # NEW
-	'plugin_info_automatique_creer' => 'to create at the root of the website.', # NEW
-	'plugin_info_automatique_exemples' => 'examples:', # NEW
-	'plugin_info_automatique_ftp' => 'You may install plugins by FTP in the  <tt>@rep@</tt> directory', # NEW
-	'plugin_info_automatique_lib' => 'Some plugins require to be able to load files into the <code>lib/</code> directory. This directory should be created, if necessary, at the root of the website.', # NEW
-	'plugin_info_automatique_liste' => 'Your plugins lists:', # NEW
-	'plugin_info_automatique_liste_officielle' => 'official plugins', # NEW
-	'plugin_info_automatique_liste_update' => 'Update the lists', # NEW
-	'plugin_info_automatique_ou' => 'or...', # NEW
-	'plugin_info_automatique_select' => 'Select a plugin below: SPIP will load it and will install it in the <code>@rep@</code> directory. If the plugin already exists, it will be updated.', # NEW
-	'plugin_info_credit' => 'Crédits', # NEW
-	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_install_ok' => 'Installation réussie', # NEW
-	'plugin_info_necessite' => 'Necessite :', # NEW
-	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
-	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
-	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
-	'plugin_info_telecharger' => 'load from @url@ and install to @rep@', # NEW
-	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
-	'plugin_librairies_installees' => 'Installed libraries', # NEW
-	'plugin_necessite_lib' => 'This plugin requires the library @lib@', # NEW
-	'plugin_necessite_plugin' => 'Version @version@ or newer of the plugin @plugin@ is required.', # NEW
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
-	'plugin_necessite_spip' => 'SPIP version @version@ or newer is required.', # NEW
-	'plugin_source' => 'source: ', # NEW
-	'plugin_titre_automatique' => 'Automatic installation', # NEW
-	'plugin_titre_automatique_ajouter' => 'Add plugins', # NEW
-	'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
-	'plugin_titre_modifier' => 'Mes plugins', # NEW
-	'plugin_zip_active' => 'Continue in order to activate', # NEW
-	'plugin_zip_adresse' => 'Below, give the address of a zip file of a plugin to be loaded, or else the address of a list of plugins.', # NEW
-	'plugin_zip_adresse_champ' => 'Address of the plugin or of the list ', # NEW
-	'plugin_zip_content' => 'It contains the following files(@taille@),<br />ready to be installed in the <code>@rep@</code> directory', # NEW
-	'plugin_zip_installe_finie' => 'The file @zip@ has been unpacked and installed.', # NEW
-	'plugin_zip_installe_rep_finie' => 'The file @zip@ has been unpacked and installed in the @rep@ directory', # NEW
-	'plugin_zip_installer' => 'You can install it now.', # NEW
-	'plugin_zip_telecharge' => 'The file @zip@ has been loaded', # NEW
-	'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
-	'plugins_actif_un' => 'Un plugin activé.', # NEW
-	'plugins_actifs' => '@count@ active plugins.', # NEW
-	'plugins_actifs_liste' => 'Actifs', # NEW
-	'plugins_compte' => '@count@ plugins', # NEW
-	'plugins_disponible_un' => 'Un plugin disponible.', # NEW
-	'plugins_disponibles' => '@count@ available plugins.', # NEW
-	'plugins_erreur' => 'Error in the plugins: @plugins@', # NEW
 	'plugins_liste' => 'Seznam pluginů',
-	'plugins_liste_dist' => 'Extensions', # NEW
-	'plugins_recents' => 'Plugins récents.', # NEW
-	'plugins_tous_liste' => 'Tous', # NEW
-	'plugins_vue_hierarchie' => 'Hierarchy', # NEW
-	'plugins_vue_liste' => 'List', # NEW
-	'protocole_ldap' => 'Protocol version:', # NEW
-
-	// Q
-	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
-	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
-	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
-	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
-	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
-	'queue_one_job_in_queue' => '1 travail en attente', # NEW
-	'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-	'queue_titre' => 'Liste des travaux', # NEW
 
 	// R
 	'repertoire_plugins' => 'Adresář:',
 
 	// S
-	'sans_heure' => 'time unspecified', # NEW
 	'statut_admin_restreint' => '(admin - vyhrazeno)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
-	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 	'taille_cache_image' => 'Obrázky, automaticky vypočtené systémem SPIP (náhledy dokumentů, názvy zobrazené graficky, matematické funkce ve formátu TeX...) zabírají v adresáři @dir@ celkem @taille@.',
 	'taille_cache_infinie' => 'Maximální velikost adresáře pro vyrovnávací pamět není na tomto webu omezena.',
 	'taille_cache_maxi' => 'Systém SPIP se snaží omezit velikost adresáře vyrovnávací paměti (cache) tohoto webu na cca <b>@octets@</b> bajtů.',
-	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
 	'taille_cache_octets' => 'Velikost cache je v současnosti @octets@.', # MODIF
 	'taille_cache_vide' => 'Cache je prázdná.',
 	'taille_repertoire_cache' => 'Velikost adresáře cache',
@@ -845,16 +588,12 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 	'texte_choix_base_1' => 'Zvolte databázi:',
 	'texte_choix_base_2' => 'Na serveru SQL je několik databází.', # MODIF
 	'texte_choix_base_3' => '<b>Zvolte</b> databázi, která vám byla přidělena poskytovatelem webového prostoru:', # MODIF
-	'texte_choix_table_prefix' => 'Prefix for tables:', # NEW
 	'texte_commande_vider_tables_indexation' => 'Tento příkaz slouží k vyčištění indexových tabulek, které používá
    vyhledávač, jenž je součástí systému SPIP. Umožní vám získat více
    místa na disku.',
-	'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-	'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 	'texte_compresse_ou_non' => '(může ale nemusí být komprimováno)',
 	'texte_compte_element' => '@count@ prvek',
 	'texte_compte_elements' => '@count@ prvky',
-	'texte_conflit_edition_correction' => 'Please check check below the differences between the two versions. You can thus copy your changes and re-begin.', # NEW
 	'texte_connexion_mysql' => 'Zkontrolujte informace od vašeho poskytovatele webového prostoru: mělo by tam být uvedeno, zda podporuje databázi SQL a přístupové kódy pro připojení k serveru SQL.', # MODIF
 	'texte_contenu_article' => '(Obsah článku v několika slovech.)',
 	'texte_contenu_articles' => 'Na základě šablony svého webu se můžete rozhodnout, že některé prvky
@@ -864,16 +603,13 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
    můžete zkusit její automatickou obnovu.',
 	'texte_creer_rubrique' => 'Než můžete začít psát články,<br /> musíte vytvořit sekci.', # MODIF
 	'texte_date_creation_article' => 'DATUM NAPSÁNÍ ČLÁNKU:',
-	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 	'texte_date_publication_anterieure' => 'Datum poslední úpravy:',
 	'texte_date_publication_anterieure_nonaffichee' => 'Nezobrazovat datum poslední úpravy.',
 	'texte_date_publication_article' => 'DATUM ZVEŘEJNĚNÍ ONLINE:',
-	'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 	'texte_descriptif_petition' => 'Popis petice',
 	'texte_descriptif_rapide' => 'Stručný popis',
 	'texte_effacer_base' => 'Odstranit databázi SPIP',
 	'texte_effacer_donnees_indexation' => 'Odstranit indexy',
-	'texte_effacer_statistiques' => 'Delete the statistics', # NEW
 	'texte_en_cours_validation' => 'Následující články a novinky jsou připraveny k publikaci. Neváhejte připojit svůj názor prostřednictvím diskusního fóra, jež je k nim připojeno.', # MODIF
 	'texte_enrichir_mise_a_jour' => 'Zalamování textu můžete rozšířit pomocí "typografických zkratek".',
 	'texte_fichier_authent' => '<b>Má systém SPIP vytvořit speciální soubory <tt>.htpasswd</tt>
@@ -896,7 +632,6 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 	'texte_login_precaution' => 'Pozor! Pod tímto uživatelským jménem jste právě přihlášeni!
  Tento formulář používejte opatrně...',
 	'texte_message_edit' => 'Pozor! Tuto zprávu může měnit kdokoli ze správců webu. Zobrazuje se všem redaktorům. Oznámení používejte pouze, pokud chcete zveřejnit významné události týkající se činnosti webu.',
-	'texte_messagerie_agenda' => 'A messaging system allows the authors of the site to communicate directly in the editing area of the site. It is linked to a calendar.', # NEW
 	'texte_mise_a_niveau_base_1' => 'Aktualizovali jste soubory systému SPIP.
  Nyní musíte aktualizovat databázi webu.',
 	'texte_modifier_article' => 'Změnit článek:',
@@ -984,32 +719,20 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 	'titre_admin_effacer' => 'Technická údržba',
 	'titre_admin_tech' => 'Technická údržba',
 	'titre_admin_vider' => 'Technická údržba',
-	'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
-	'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-	'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 	'titre_cadre_afficher_article' => 'Zobrazit články',
 	'titre_cadre_afficher_traductions' => 'Zobrazit stav překladu v následujících jazycích:',
 	'titre_cadre_ajouter_auteur' => 'PŘIDAT AUTORA:',
 	'titre_cadre_interieur_rubrique' => 'V rámci sekce',
 	'titre_cadre_numero_auteur' => 'ČÍSLO AUTORA',
-	'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 	'titre_cadre_signature_obligatoire' => '<b>Podpis</b> [povinný údaj]<br />', # MODIF
-	'titre_config_contenu_notifications' => 'Notifications', # NEW
-	'titre_config_contenu_prive' => 'In the editing area', # NEW
-	'titre_config_contenu_public' => 'On the public site', # NEW
 	'titre_config_fonctions' => 'Nastavení webu',
-	'titre_config_langage' => 'Configurer la langue', # NEW
 	'titre_configuration' => 'Nastavení webu',
-	'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
-	'titre_conflit_edition' => 'Conflict while editing', # NEW
 	'titre_connexion_ldap' => 'Možnost: <b>Vaše připojení LDAP</b>',
 	'titre_groupe_mots' => 'SKUPINA SLOV:',
-	'titre_identite_site' => 'Identité du site', # NEW
 	'titre_langue_article' => 'JAZYK ČLÁNKU', # MODIF
 	'titre_langue_rubrique' => 'JAZYK SEKCE', # MODIF
 	'titre_langue_trad_article' => 'JAZYK ČLÁNKU A JEHO PŘEKLADŮ',
 	'titre_les_articles' => 'ČLÁNKY',
-	'titre_messagerie_agenda' => 'Messaging system and calendar', # NEW
 	'titre_naviguer_dans_le_site' => 'Procházet webem...',
 	'titre_nouvelle_rubrique' => 'Nová sekce',
 	'titre_numero_rubrique' => 'SEKCE ČÍSLO:',
@@ -1030,8 +753,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 	'titre_page_messagerie' => 'Váš systém zpráv',
 	'titre_page_recherche' => 'Výsledky vyhledávání @recherche@',
 	'titre_page_statistiques_referers' => 'Statistiky (příchozí odkazy)',
-	'titre_page_statistiques_signatures_jour' => 'Signatures count by day', # NEW
-	'titre_page_statistiques_signatures_mois' => 'Signatures count by month', # NEW
 	'titre_page_upgrade' => 'Aktualizace systému SPIP',
 	'titre_publication_articles_post_dates' => 'Zveřejnění post-datovaných článků',
 	'titre_referencer_site' => 'Zadat odkaz na web:',
@@ -1047,8 +768,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 	'trad_new' => 'Nově přeložit článek', # MODIF
 
 	// U
-	'upload_info_mode_document' => 'Place this image in the portfolio', # NEW
-	'upload_info_mode_image' => 'Remove this image from the portfolio', # NEW
 	'utf8_convert_attendez' => 'Počkejte několik sekund a potom znovu načtěte tuto stránku.',
 	'utf8_convert_avertissement' => 'Nyní zkonvertujete obsah databáze (články, novinky, ...) ze znakové sady <b>@orig@</b> do znakové sady  <b>@charset@</b>.',
 	'utf8_convert_backup' => 'Nezapomeňte nejprve udělat kompletní zálohu vašeho webu. Rovněž zkontrolujte, zda jsou vaše šablony a jazykové soubory kompatibilní se znakovou sadou @charset@. ',

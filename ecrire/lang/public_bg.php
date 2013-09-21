@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Начало', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Статии',
 	'articles_auteur' => 'Статии на автора',
 	'articles_populaires' => 'Най-популярните статии',
@@ -19,8 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'На този адрес не бе намерен сайт',
 	'aucune_breve' => 'На този адрес не бяха намерени новини',
 	'aucune_rubrique' => 'На този адрес не бе намерена рубрика',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
 	'autres_breves' => 'Други новини',
 	'autres_groupes_mots_clefs' => 'Други групи от ключови думи',
 	'autres_sites' => 'Други сайтове',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Коментар на сайта',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 	// D
 	'date' => 'Дата',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'Изпращане на съобщение',
 	'espace_prive' => 'Лична зона',
 
-	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'Структура на сайта',
 
 	// J
 	'jours' => 'дни',
-
-	// L
-	'lien_connecter' => 'Se connecter', # NEW
 
 	// M
 	'meme_auteur' => 'От същия автор',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Съобщение',
 	'messages_forum' => 'Съобщения в форума', # MODIF
 	'messages_recents' => 'Най-новите съобщения от форума',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Ключови думи',
 	'mots_clefs_meme_groupe' => 'Ключови думи от същата група',
 
@@ -102,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'Сайт под СПИП',
 	'sites_web' => 'Интернет сайтове',
 	'sous_rubriques' => 'Подрубрики',
-	'spam' => 'Spam', # NEW
 	'suite' => 'продължава',
 	'sur_web' => 'В мрежата',
 	'syndiquer_rubrique' => 'Обединяване на тази рубрика',

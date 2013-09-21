@@ -428,7 +428,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_visiteurs' => '@nb@ посетителей',
 	'info_nom' => 'Имя',
 	'info_nom_destinataire' => 'Имя получателя',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Название Вашего сайта',
 	'info_nombre_articles' => '@nb_articles@ статьи,',
 	'info_nombre_partcipants' => 'УЧАСТНИКИ ОБСУЖДЕНИЯ:',
@@ -800,7 +799,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'sans_heure' => 'время неопределено',
 	'statut_admin_restreint' => '(ограниченный администратор)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'CRON @function@ (ASAP)',

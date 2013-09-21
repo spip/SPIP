@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Hjemmeside', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Artikler',
 	'articles_auteur' => 'Denne forfatters artikler',
 	'articles_populaires' => 'De mest læste artikler',
@@ -19,8 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Der er intet websted på denne adresse',
 	'aucune_breve' => 'Der er ingen nyhed på denne adresse',
 	'aucune_rubrique' => 'Der er ikke noget afsnit på denne adresse',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
 	'autres_breves' => 'Andre nyheder',
 	'autres_groupes_mots_clefs' => 'Andre grupper af nøgleord',
 	'autres_sites' => 'Andre websteder',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Kommentar til dette websted',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 	// D
 	'date' => 'Dato',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'Lav indlæg',
 	'espace_prive' => 'Privat område',
 
-	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'Webstedets struktur',
 
 	// J
 	'jours' => 'dage',
-
-	// L
-	'lien_connecter' => 'Se connecter', # NEW
 
 	// M
 	'meme_auteur' => 'Af samme forfatter',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Indlæg',
 	'messages_forum' => 'Forumindlæg', # MODIF
 	'messages_recents' => 'Seneste forumindlæg',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Nøgleord',
 	'mots_clefs_meme_groupe' => 'Nøgleord i samme gruppe',
 
@@ -87,7 +75,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plan_site' => 'Indholdsoversigt',
 	'popularite' => 'Popularitet',
 	'poster_message' => 'Indlæg',
-	'proposer_site' => 'Vous pouvez proposer un site à ajouter dans cette rubrique :', # NEW
 
 	// R
 	'repondre_article' => 'Lav et svar til denne artikel',
@@ -102,7 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'Websted lavet med SPIP',
 	'sites_web' => 'Websteder',
 	'sous_rubriques' => 'Underafsnit',
-	'spam' => 'Spam', # NEW
 	'suite' => 'fortsæt',
 	'sur_web' => 'På Internettet',
 	'syndiquer_rubrique' => 'Syndiker dette afsnit',

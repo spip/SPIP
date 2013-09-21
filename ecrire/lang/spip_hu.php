@@ -23,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Kulcsszó módosítása',
 	'admin_modifier_rubrique' => 'Rovat módosítása',
 	'admin_recalculer' => 'Oldal frissítése',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => 'fordítások megjelenítése',
 	'alerte_maj_impossible' => '<b>Hiba !</b> A SQL adatbázis frissítése a @version@ verzió felé nem lehtséges, talán adatbázishoz való módosítási jogosultság miatt. Ilyenkor a tárhely adminisztrátorához kell fordulni.',
 	'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifié par ailleurs. La valeur actuelle est :', # MODIF
@@ -64,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_changer' => 'Módosítás',
 	'bouton_chercher' => 'Keresés',
 	'bouton_choisir' => 'Kiválasztás',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'Download', # MODIF
 	'bouton_enregistrer' => 'Mentés',
 	'bouton_radio_desactiver_messagerie_interne' => 'Belső üzenetek letiltása',
@@ -107,20 +105,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ @nommois@',
 	'date_demain' => 'holnap',
 	'date_fmt_heures_minutes' => '@h@:@m@',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@nommois@ @jour@',
 	'date_fmt_jour_mois_annee' => '@annee@. @nommois@ @jour@  ',
 	'date_fmt_mois_annee' => '@annee@. @nommois@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => '@date@ @nomjour@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'óra',
 	'date_hier' => 'tegnap',
 	'date_il_y_a' => 'ezelőtt @delai@',
@@ -181,39 +170,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'hónap',
 	'date_mois_1' => 'január',
 	'date_mois_10' => 'október',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'november',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'december',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'február',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'március',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'április',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'május',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'június',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'július',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'augusztus',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'szeptember',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'tél',
 	'date_saison_2' => 'tavasz',
 	'date_saison_3' => 'nyár',
 	'date_saison_4' => 'ősz',
-	'date_secondes' => 'seconds', # NEW
 	'date_semaines' => 'hét',
-	'date_un_mois' => 'month', # NEW
-	'date_une_heure' => 'hour', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'second', # NEW
-	'date_une_semaine' => 'week', # NEW
 	'dirs_commencer' => ' ahhoz, hogy valóban kezdhesse a telepítést',
 	'dirs_preliminaire' => 'Bevezetés: <b>Hozzáférési jogok beállítása</b>',
 	'dirs_probleme_droits' => 'Jogosultsági hiba',
@@ -229,34 +200,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'double_occurrence' => 'Két előfordulás', # MODIF
 
 	// E
-	'en_cours' => 'processing', # NEW
 	'envoi_via_le_site' => 'Küldés a honlapon keresztül',
 	'erreur' => 'Hiba',
 	'erreur_balise_non_fermee' => 'az utolsó tag nincs lezárva:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'hiba',
-	'etape' => 'Stage', # NEW
 
 	// F
 	'fichier_introuvable' => 'A(z) @fichier@ fájl nem található',
-	'form_auteur_confirmation' => 'Please confirm your email address', # NEW
-	'form_auteur_email_modifie' => 'Your email address has been changed.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'A confirmation email has been sent to @email@. You need to visit the URL mentioned in this message in order to validate your email address.', # NEW
-	'form_auteur_mail_confirmation' => 'Hello,
-
-You have asked to change your email address.
-To confirm your new address, you need to connect to
-the address below. (Otherwise your request will be ignored.):
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'Ön már regisztrált.',
 	'form_email_non_valide' => 'A megadott e-mail cím érvénytelen.',
 	'form_forum_access_refuse' => 'Önnek már nincs hozzáférése ehhez az oldalhoz.',
 	'form_forum_bonjour' => 'Üdvözöljük, @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Ez az email cím már regisztrálva van, tehát használhatja a szokásos jelszavát.',
 	'form_forum_identifiant_mail' => 'Új azonosítóját elküldtük az e-mail címére.',
 	'form_forum_identifiants' => 'Személyes azonosítók',
@@ -329,7 +283,6 @@ the address below. (Otherwise your request will be ignored.):
 	'icone_supprimer_image' => 'A kép törlése',
 	'icone_tous_articles' => 'Az összes cikkei',
 	'icone_tous_auteur' => 'Az összes szerző',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'Látogatás', # MODIF
 	'icone_voir_en_ligne' => 'Nézni élőben',
 	'img_indisponible' => 'hiányzó kép',
@@ -351,14 +304,10 @@ the address below. (Otherwise your request will be ignored.):
 	'info_article_supprime' => 'Törölt cikk',
 	'info_articles' => 'Cikkek',
 	'info_articles_a_valider' => 'Jóváhagyandó cikkek',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'Javasolt cikkek',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => 'szerző(k) :',
 	'info_authentification_ftp' => 'Autentifikálás (FTP-vel).',
 	'info_breves_2' => 'hírek',
-	'info_breves_nb' => '@nb@ news items', # NEW
-	'info_breves_un' => '1 news item', # NEW
 	'info_connexion_refusee' => 'Csatlakozás tagadva',
 	'info_contact_developpeur' => 'Keressen egy fejlesztőt.',
 	'info_contenance' => 'A honlap tartalmazza :',
@@ -370,14 +319,11 @@ the address below. (Otherwise your request will be ignored.):
 	'info_creer_repertoire' => 'Hozzon létre fájlt, vagy mappát, melynek a neve :',
 	'info_creer_repertoire_2' => 'az almappán <b>@repertoire@</b> belül, ezútán :',
 	'info_creer_vignette' => 'a bélyegkép automatikus létrehozása',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Kibontás',
 	'info_descriptif_nombre' => 'Rövid ismertető(k) :',
 	'info_description' => 'Leírás :',
 	'info_description_2' => 'Leírás :',
 	'info_dimension' => 'Méretek :',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'Magán üzenet írása',
 	'info_email_invalide' => 'Érvénytelen email cím.',
 	'info_en_cours_validation' => 'Az Ön szerkesztés alatti cikkei',
@@ -417,8 +363,6 @@ the address below. (Otherwise your request will be ignored.):
 	'info_mail_fournisseur' => 'önmaga@szolgaltato.com',
 	'info_message_2' => 'ÜZENET',
 	'info_message_supprime' => 'ÜZENET TÖRÖLVE',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'Publikálás időpontja :',
 	'info_modification_parametres_securite' => 'biztonsági paraméterek módosítása',
 	'info_mois_courant' => 'A hónap folyamán :',
@@ -434,7 +378,6 @@ the address below. (Otherwise your request will be ignored.):
 	'info_nouveau_message' => 'ÖNNEK ÚJ ÜZENETE VAN',
 	'info_nouveaux_messages' => 'ÖNNEK @total_messages@ ÚJ ÜZENETE VAN',
 	'info_numero_abbreviation' => 'sz. ',
-	'info_obligatoire' => 'This information is required', # NEW
 	'info_pense_bete' => 'EMLÉKEZTET?',
 	'info_petit_ecran' => 'Kisebb képerny?',
 	'info_petition_close' => 'Kérelem lezárva',
@@ -456,13 +399,9 @@ the address below. (Otherwise your request will be ignored.):
 	'info_rechercher' => 'Keresés',
 	'info_rechercher_02' => 'Keresés :',
 	'info_remplacer_vignette' => 'Az alapértelmezett bélyegkép helyettesítése egy személyes logoval :',
-	'info_rubriques_nb' => '@nb@ sections', # NEW
-	'info_rubriques_un' => '1 section', # NEW
 	'info_sans_titre_2' => 'cím nélkül',
 	'info_selectionner_fichier' => 'Kijelölhet egy fájlt az @upload@ mappából',
 	'info_selectionner_fichier_2' => 'Válasszon egy fájlt :',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'a bélyegkép törlése',
 	'info_symbole_bleu' => 'A <b>kék</b> jel <b>emlékeztetőt</b> jelez: vagyis egy személyes jellegű üzenetet.', # MODIF
 	'info_symbole_jaune' => 'A <b>sárga</b> jel <b>minden szerzőnek szóló hírt</b> jelez : minden adminisztrátor módosíthatja, és minden szerző láthatja.', # MODIF
@@ -484,8 +423,6 @@ the address below. (Otherwise your request will be ignored.):
 	'infos_vos_pense_bete' => 'Az Ön emlékeztetői', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Csak az ikonok megjelenítése',
 	'lien_afficher_texte_icones' => 'Ikonok és szöveg megjelenítése',
 	'lien_afficher_texte_seul' => 'Csak a szöveg megjelenítése',
@@ -531,7 +468,6 @@ the address below. (Otherwise your request will be ignored.):
 	'login_retour_site' => 'Vissza a nyilvános honlapra',
 	'login_retoursitepublic' => 'vissza a nyilvános honlapra',
 	'login_sans_cookiie' => 'Süti (cookie) nélküli azonosítás',
-	'login_securise' => 'Secured login', # NEW
 	'login_sinscrire' => 'beíratkozás',
 	'login_test_navigateur' => 'böngésző teszt/újracsatlakozás',
 	'login_verifiez_navigateur' => '(Azonban ellenőrizze, hogy a bongészó nem memorizálta-e a jelszót...)',
@@ -590,7 +526,6 @@ Akkor újabb jelszót tud beírni
 	'pass_nouveau_pass' => 'Új jelszó',
 	'pass_ok' => 'Rendben',
 	'pass_oubli_mot' => 'Jelszó elvesztése',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Kilépni az ablakból',
 	'pass_rappel_login' => 'Emlékeztető : az Ön azonosítója (login) « @login@ ».',
 	'pass_recevoir_mail' => 'Hamarosan olyan emailt fog kapni, ami mutatja hogyan lehet visszaszerezni a hozzáférést a honlapra.',
@@ -613,7 +548,6 @@ Akkor újabb jelszót tud beírni
 	'suivant' => 'következő',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ ko',
 	'taille_mo' => '@taille@ Mo',
 	'taille_octets' => '@taille@ byte',
@@ -656,7 +590,6 @@ Próbáljon', # MODIF
 	'titre_image_auteur_supprime' => 'Szerző törölve',
 	'titre_image_redacteur' => 'Hozzáférés nélküli szerző',
 	'titre_image_redacteur_02' => 'Szerző',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Vendég',
 	'titre_joindre_document' => 'DOKUMENTUM CSATOLÁSA',
 	'titre_mots_cles' => 'KULCSSZAVAK',
@@ -666,7 +599,6 @@ Próbáljon', # MODIF
 	'titre_signatures_confirmees' => 'Érvényesített aláírások',
 	'titre_statistiques' => 'A honlap statisztikai',
 	'titre_titre_document' => 'Dokumentum címe :',
-	'todo' => 'to come', # NEW
 	'trad_reference' => '(eredeti cikk)', # MODIF
 
 	// Z

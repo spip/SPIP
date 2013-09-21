@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'ပင်မစာမျက်နှာ', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'ဆောင်းပါးများ',
 	'articles_auteur' => 'ဤစာရေးသူ၏ ​ဆောင်းပါများ',
 	'articles_populaires' => 'အဖတ်ရဆုံး ဆောင်းပါးများ',
@@ -19,8 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'ဒီလိပ်စာနှင့် ဝဘ်ဆိုက် မရှိပါ',
 	'aucune_breve' => 'ဒီလိပ်စာနှင့် သတင်း မရှိပါ',
 	'aucune_rubrique' => 'ဒီလိပ်စာနှင့် အခန်းကဏ္ဍ မရှိပါ',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
 	'autres_breves' => 'တခြားသတင်း',
 	'autres_groupes_mots_clefs' => 'တခြားစကားစု',
 	'autres_sites' => 'တခြားဝဘ်ဆိုက်များ',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'ဝဘ်ဆိုက်ပေါ် မှတ်ချက်များ',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 	// D
 	'date' => 'နေ့စွဲ',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'အ​ချက်အလက်များ ပို့ရန်',
 	'espace_prive' => 'ကိုယ်ပိုင်ကန့်သတ်နေရာ',
 
-	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'ဝဘ်ဆိုက်ဆင်းသက်မှု',
 
 	// J
 	'jours' => 'နေ့ရက်များ',
-
-	// L
-	'lien_connecter' => 'Se connecter', # NEW
 
 	// M
 	'meme_auteur' => 'နဂိုစာရေးသူ',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'အ​ချက်အလက်',
 	'messages_forum' => 'ဖိုရမ်အချက်အလက်များ', # MODIF
 	'messages_recents' => 'နောက်ဆုံးရ ဖိုရမ်အချက်အလက်များ',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'စကားစုများ',
 	'mots_clefs_meme_groupe' => 'အုပ်စုတူ စကားစုများ',
 
@@ -102,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'SPIPနှင့်ပြူလုပ်သော ဝဘ်ဆိုက်များ',
 	'sites_web' => 'ဝဘ်ဆိုက်များ',
 	'sous_rubriques' => 'အခန်းကဏ္ဍခွဲ',
-	'spam' => 'Spam', # NEW
 	'suite' => 'ဆက်လက်ပြီး',
 	'sur_web' => 'ဝဘ်ဆိုက်ပေါ်မှာ',
 	'syndiquer_rubrique' => 'အ​ခန်းကဏ္ဍတူအုပ်စု',

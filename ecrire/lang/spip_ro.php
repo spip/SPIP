@@ -108,17 +108,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_demain' => 'mâine',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ la @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => '@nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
 	'date_fmt_periode_from' => 'De la',
 	'date_fmt_periode_to' => 'la',
 	'date_heures' => 'ore',
@@ -233,9 +227,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Trimitere via site',
 	'erreur' => 'Eroare',
 	'erreur_balise_non_fermee' => 'ultima baliză (tag) ne-închisă:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'eroare(i)',
 	'etape' => 'Etapă',
 
@@ -371,7 +362,6 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 	'info_creer_repertoire' => 'Vă rugăm să creaţi un fișier sau un director numit :',
 	'info_creer_repertoire_2' => 'sub directorul <b>@repertoire@</b>, apoi :',
 	'info_creer_vignette' => 'crearea viniétei în mod automat ',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Desfaceţi',
 	'info_descriptif_nombre' => 'descriere(i) :',
 	'info_description' => 'Descriere :',
@@ -485,7 +475,6 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 	'infos_vos_pense_bete' => 'Ciornele dumneavoastră',
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 	'label_poids_fichier' => 'Mărime',
 	'lien_afficher_icones_seuls' => 'Afişaţi doar iconiţe',
 	'lien_afficher_texte_icones' => 'Afişaţi iconiţe şi text',
@@ -592,7 +581,6 @@ Veţi putea după aceea alege o nouă parolă şi veţi putea să vă reconecta�
 	'pass_nouveau_pass' => 'Parolă nouă',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Parolă uitată',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Părăsiţi această fereastră',
 	'pass_rappel_login' => 'Atenţie : identificatorul dumneavoastră (login) este « @login@ ».',
 	'pass_recevoir_mail' => 'Veţi primi în curând un email care vă va indica cum puteţi să recuperaţi accesul la site.',
@@ -615,7 +603,6 @@ Veţi putea după aceea alege o nouă parolă şi veţi putea să vă reconecta�
 	'suivant' => 'următorul',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ ko',
 	'taille_mo' => '@taille@ MB',
 	'taille_octets' => '@taille@ octeţi',
@@ -655,7 +642,6 @@ Veţi putea după aceea alege o nouă parolă şi veţi putea să vă reconecta�
 	'titre_image_auteur_supprime' => 'Autor suprimat',
 	'titre_image_redacteur' => 'Redactor fără acces',
 	'titre_image_redacteur_02' => 'Redactor',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Vizitator',
 	'titre_joindre_document' => 'ATAŞAŢI DOCUMENT',
 	'titre_mots_cles' => 'CUVINTE-CHEIE',

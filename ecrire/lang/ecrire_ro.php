@@ -11,7 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'Activaţi plugin-ul',
 	'affichage' => 'Afişaj',
 	'aide_non_disponible' => 'Această parte din Help înca nu e disponibilă în această limbă',
-	'annuler_recherche' => 'Annuler la recherche', # NEW
 	'auteur' => 'Autor :',
 	'avis_acces_interdit' => 'Accesul interzis.',
 	'avis_article_modifie' => 'Atenţie, @nom_auteur_modif@ a lucrat la acest articol în urmă cu @date_diff@ minute',
@@ -22,7 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_connexion_echec_1' => 'Conexiunea la baza de date a eşuat.',
 	'avis_connexion_echec_2' => 'Reveniţi la pagina anterioară şi verificaţi datele completate.',
 	'avis_connexion_echec_3' => '<b>Nota Bene</b> Pe multe servere, trebuie să <b>cereţi</b> activarea accesului la baza de date inainte de a o putea utiliza. Dacă nu reuşiţi să vă conectaţi, verificaţi că aţi efectuat această operaţie.',
-	'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 	'avis_connexion_ldap_echec_1' => 'Conexiunea la serverul LDAP a eşuat.',
 	'avis_connexion_ldap_echec_2' => 'Reveniţi la pagina anterioară şi verificaţi datele completate.',
 	'avis_connexion_ldap_echec_3' => 'Ca alternativă, importaţi utilizatorii fără să folosiţi suportul LDAP.',
@@ -48,8 +46,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_participant' => 'ADĂUGAŢI UN PARTICIPANT :',
 	'bouton_annonce' => 'ANUNŢ',
 	'bouton_annuler' => 'Anulaţi',
-	'bouton_cache_activer' => 'Réactiver le cache', # NEW
-	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'posibilitate de trimitere mesaj',
 	'bouton_checkbox_indiquer_site' => 'indicare obligatorie a unui site Web',
 	'bouton_checkbox_signature_unique_email' => 'o singură semnătura pe adresă email',
@@ -108,8 +104,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_titre_base_sup_choix' => 'Alegeţi o bază de date suplimentară',
 	'connexion_ldap' => 'Conexiune :',
 	'copier_en_local' => 'Copiaţi în local',
-	'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
-	'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 	// D
 	'date_mot_heures' => 'ore',
@@ -121,20 +115,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'en_savoir_plus' => 'Vreau să ştiu mai multe',
 	'entree_adresse_annuaire' => 'Adresa anuarului',
 	'entree_adresse_email' => 'Adresa dumneavoastră de email',
-	'entree_adresse_email_2' => 'Adresse email', # NEW
 	'entree_base_donnee_1' => 'Adresa bazei de date',
 	'entree_base_donnee_2' => '(Deseori această adresă corespunde cu cea a site-ului dumneavoastră, câteodata ea corespunde menţiunii «localhost», iar câteodată este lăsată complet goală.)',
 	'entree_biographie' => 'O scurta biografie în câteva cuvinte.',
 	'entree_chemin_acces' => '<b>Introduceţi</b> calea de acces :',
 	'entree_cle_pgp' => 'Cheia dumneavoastră PGP',
-	'entree_cle_pgp_2' => 'Clé PGP', # NEW
 	'entree_contenu_rubrique' => '(Conţinutul rubricii în câteva cuvinte.)',
 	'entree_identifiants_connexion' => 'Identificatorii dumneavoastră de acces...',
-	'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 	'entree_informations_connexion_ldap' => 'Vă rugăm să furnizaţi în acest formular informaţiile de conectare la anuarul LDAP.
  Aceste informaţii ar trebui să poată fi furnizate de către administratorul dumneavoastră de sistem sau reţea.',
 	'entree_infos_perso' => 'Cine sunteţi dumneavoastra ?',
-	'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 	'entree_interieur_rubrique' => 'În interiorul rubricii :',
 	'entree_liens_sites' => '<b>Legătură hipertext</b> (referinţă, site de vizitat...)',
 	'entree_login' => 'Login-ul dumneavoastră',
@@ -147,16 +137,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nom_fichier' => 'Vă rugăm să introduceţi numele fişierului @texte_compresse@:',
 	'entree_nom_pseudo' => 'Numele sau pseudonimul dumneavoastră',
 	'entree_nom_pseudo_1' => '(Numele sau pseudonimul dumneavoastră)',
-	'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 	'entree_nom_site' => 'Numele site-ului dumneavoastră',
-	'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 	'entree_nouveau_passe' => 'Noua parolă',
 	'entree_passe_ldap' => 'Parola',
 	'entree_port_annuaire' => 'Numărul de port al anuarului',
 	'entree_signature' => 'Semnatură',
 	'entree_titre_obligatoire' => '<b>Titlu</b> [Obligatoriu]<br />',
 	'entree_url' => 'Adresa (URL) site-ului dumneavoastră',
-	'entree_url_2' => 'Adresse (URL) du site', # NEW
 	'erreur_connect_deja_existant' => 'Un server cu acest nume există deja',
 	'erreur_nom_connect_incorrect' => 'Acest nume de server nu este autorizat',
 	'erreur_plugin_desinstalation_echouee' => 'Dezinstalarea plugin-ului a eşuat. Puteţi totuşi să îl dezactivaţi.', # MODIF
@@ -219,8 +206,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_supprimer_signature' => 'Ştergeţi această semnătură',
 	'icone_valider_signature' => 'Validaţi această semnătură',
 	'image_administrer_rubrique' => 'Puteţi administra această rubrică',
-	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
-	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 	'info_1_article' => '1 articol',
 	'info_1_article_syndique' => '1 articol sindicat',
 	'info_1_auteur' => '1 autor',
@@ -234,7 +219,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_admin_etre_webmestre' => 'Daţi-mi drepturi de webmaster',
 	'info_admin_gere_rubriques' => 'Acest administrator gestionează rubricile următoare :',
 	'info_admin_gere_toutes_rubriques' => 'Acest administrator gestionează <b>toate rubricile</b>.', # MODIF
-	'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 	'info_admin_je_suis_webmestre' => 'Sunt <b>webmaster</b>',
 	'info_admin_statuer_webmestre' => 'Daţi acestui administrator drepturi de webmaster',
 	'info_admin_webmestre' => 'Acest administrator este <b>webmaster</b>',
@@ -247,7 +231,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_administrer_rubrique' => 'Puteţi administra această rubrică',
 	'info_adresse' => 'la adresa :',
 	'info_adresse_url' => 'Adresa (URL) a site-ului public',
-	'info_afficher_par_nb' => 'Afficher par', # NEW
 	'info_afficher_visites' => 'Afişează vizitele pentru :',
 	'info_aide_en_ligne' => 'Ajutor SPIP în linie',
 	'info_ajout_image' => 'Când adăugaţi imagini ca documente ataşate unui articol, SPIP poate crea pentru dvs. viniéte ale imaginilor introduse. Aceasta permite de exemplu crearea automată a unei galerii sau a unui portofoliu.',
@@ -282,8 +265,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_avertissement' => 'Avertisment',
 	'info_barre_outils' => 'cu toolbar-ul său ?',
 	'info_base_installee' => 'Structura bazei dumneavoastră de date a fost instalată.',
-	'info_bio' => 'Biographie', # NEW
-	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Introducere',
 	'info_chapeau_2' => 'Introducere :',
 	'info_chemin_acces_1' => 'Opţiuni: <b>Calea de acces în anuar</b>',
@@ -310,7 +291,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_connexion_ok' => 'Conexiunea a reuşit.',
 	'info_contact' => 'Contact',
 	'info_contenu_articles' => 'Conţinutul articolelor',
-	'info_contributions' => 'Contributions', # NEW
 	'info_creation_paragraphe' => '(Pentru a crea paragrafe, lăsaţi pur şi simplu liniile goale.)', # MODIF
 	'info_creation_rubrique' => 'Înainte de a putea scrie articole,<br /> trebuie să creaţi cel puţin o rubrică.<br />',
 	'info_creation_tables' => 'Crearea tabelelor bazei de date',
@@ -334,7 +314,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_etape_suivante' => 'Treceţi la etapa următoare',
 	'info_etape_suivante_1' => 'Nu puteţi trece la etapa următoare.',
 	'info_etape_suivante_2' => 'Puteţi trece la etapa următoare.',
-	'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 	'info_exportation_base' => 'exportul bazei de date către @archive@',
 	'info_facilite_suivi_activite' => 'Pentru a uşura urmărirea activităţii editoriale a site-ului, SPIP poate trimite prin email cererile de publicare şi de validare a articolelor. De exemplu, destinatarul poate fi o listă de distribuţie a redacţiei.',
 	'info_fichiers_authent' => 'Fişiere de autentificare « .htpasswd »',
@@ -353,7 +332,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 în spaţiul public al site-ului (forum-urile pe bază de abonament).',
 	'info_generation_miniatures_images' => 'Generarea de miniaturi ale imaginilor',
 	'info_gerer_trad' => 'Gestionaţi legăturile de traducere ?',
-	'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 	'info_hebergeur_desactiver_envoi_email' => 'Anumiţi furnizori de servicii de hosting dezactivează trimiterea automată de
   email-uri de pe server-ele lor. În acest caz, funcţiile următoare
   din SPIP nu sunt disponibile.',
@@ -375,11 +353,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues' => 'Limbile site-ului',
 	'info_ldap_ok' => 'Autentificarea LDAP a fost instalată.',
 	'info_lien_hypertexte' => 'Legătură hipertext :',
-	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Lista redactorilor conectaţi',
 	'info_login_existant' => 'Acest login există déjà.',
 	'info_login_trop_court' => 'Login prea scurt.',
-	'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 	'info_logos' => 'Logo-urile',
 	'info_maximum' => 'maxim :',
 	'info_meme_rubrique' => 'În aceeaşi rubrică',
@@ -394,7 +370,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   baza dumneavoastră de date riscă să fie
   pierdută şi site-ul dumneavoastră nu va mai funcţiona.
 {{Reinstalaţi fişierele originale SPIP.}}',
-	'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 	'info_modifier_auteur' => 'Modificaţi autorul :',
 	'info_modifier_rubrique' => 'Modificaţi rubrica :',
 	'info_modifier_titre' => 'Modificaţi : @titre@',
@@ -406,20 +381,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_multi_cet_article' => 'Limba acestui articol :',
 	'info_multi_langues_choisies' => 'Vă rugăm să selecţionaţi aici limbile aflate la dispoziţia redactorilor site-ului dumneavoastră.
   Limbile deja folosite în cadrul site-ului (afişate primele) nu pot fi dezactivate.',
-	'info_multi_objets' => '@objets@ : activer le menu de langue', # NEW
 	'info_multi_rubriques' => 'Activaţi meniul de limbă în cadrul rubricilor ?',
 	'info_multi_secteurs' => '... doar pentru rubricile situate sub rădăcină ?',
-	'info_nb_articles' => '@nb@ articles', # NEW
-	'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
-	'info_nb_auteurs' => '@nb@ auteurs', # NEW
-	'info_nb_messages' => '@nb@ messages', # NEW
-	'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
-	'info_nb_rubriques' => '@nb@ rubriques', # NEW
-	'info_nb_sites' => '@nb@ sites', # NEW
-	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Nume',
 	'info_nom_destinataire' => 'Numele destinatarului',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Numele site-ului dumneavoastră',
 	'info_nombre_articles' => '@nb_articles@ articole,',
 	'info_nombre_partcipants' => 'PARTICIPANŢII LA DISCUŢIE :',
@@ -430,7 +395,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_non_envoi_liste_nouveautes' => 'Nu trimiteţi la lista noutăţilor',
 	'info_non_modifiable' => 'nu poate fi modificat(ă)',
 	'info_non_suppression_mot_cle' => 'nu doresc să şterg acest cuvânt-cheie.',
-	'info_note_numero' => 'Note @numero@', # NEW
 	'info_notes' => 'Note',
 	'info_nouveaux_message' => 'Mesaje noi',
 	'info_nouvel_article' => 'Articol nou',
@@ -450,7 +414,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_par_statut' => 'după statut',
 	'info_par_tri' => '\'(după @tri@)\'',
 	'info_passe_trop_court' => 'Parolă prea scurtă.',
-	'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 	'info_passes_identiques' => 'Cele două parole nu sunt identice.',
 	'info_pense_bete_ancien' => 'Vechile dumneavoastră ciorne', # MODIF
 	'info_plus_cinq_car' => 'mai mult de 5 caractere',
@@ -498,8 +461,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_redacteurs' => 'Redactori',
 	'info_redaction_en_cours' => 'ÎN REDACTARE',
 	'info_redirection' => 'Redirijare',
-	'info_redirection_activee' => 'La redirection est activée.', # NEW
-	'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 	'info_refuses' => 'Articolele dumneavoastră refuzate',
 	'info_reglage_ldap' => 'Opţiuni : <b>Reglajele importului LDAP</b>',
 	'info_renvoi_article' => '<b>Redirijare.</b> Acest articol trimite la pagina:',
@@ -526,7 +487,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sous_titre' => 'Subtitlu :',
 	'info_statut_administrateur' => 'Administrator',
 	'info_statut_auteur' => 'Starea acestui autor :',
-	'info_statut_auteur_2' => 'Je suis', # NEW
 	'info_statut_auteur_a_confirmer' => 'Inscriere de confirmat',
 	'info_statut_auteur_autre' => 'Alt statut :',
 	'info_statut_efface' => 'Şters',
@@ -551,7 +511,6 @@ Imaginile cu dimensiuni mai mari nu vor fi reduse.',
 	'info_total' => 'total :',
 	'info_tous_articles_en_redaction' => 'Toate articolele în curs de redactare',
 	'info_tous_articles_presents' => 'Toate articolele publicate în această rubrică',
-	'info_tous_articles_refuses' => 'Tous les articles refusés', # NEW
 	'info_tous_les' => 'toate :',
 	'info_tous_redacteurs' => 'Anunţuri către toţi redactorii',
 	'info_tout_site' => 'Tot site-ul',
@@ -562,16 +521,13 @@ Imaginile cu dimensiuni mai mari nu vor fi reduse.',
 	'info_tout_site6' => '<b>Atenţie :</b> doar articolele originale sunt afişate.
 Traducerile sunt asociate originalului,
 cu o culoare care le indică starea :',
-	'info_traductions' => 'Traductions', # NEW
 	'info_travail_colaboratif' => 'Lucru colaborativ cu articolele',
 	'info_un_article' => 'un articol,',
 	'info_un_site' => 'un site,',
 	'info_une_rubrique' => 'o rubrică,',
 	'info_une_rubrique_02' => '1 rubrică',
 	'info_url' => 'URL :',
-	'info_url_proxy' => 'URL du proxy', # NEW
 	'info_url_site' => 'URL SITE :',
-	'info_url_test_proxy' => 'URL de test', # NEW
 	'info_urlref' => 'Legătură hipertext :',
 	'info_utilisation_spip' => 'Puteţi începe acum să folosiţi sistemul de publicare asistată...',
 	'info_visites_par_mois' => 'Afişare pe lună :',
@@ -579,10 +535,8 @@ cu o culoare care le indică starea :',
 	'info_visiteur_2' => ' al site-ului public',
 	'info_visiteurs' => 'Vizitatori',
 	'info_visiteurs_02' => 'Vizitatorii site-ului public',
-	'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 	'install_adresse_base_hebergeur' => 'Adresa bazei de date furnizată de provider',
 	'install_base_ok' => 'Baza @base@ fost recunoscută',
-	'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 	'install_echec_annonce' => 'Instalarea va eşua probabil sau va conduce la un site nefuncţional...',
 	'install_extension_mbstring' => 'SPIP nu foncţionează cu :',
 	'install_extension_php_obligatoire' => 'SPIP are nevoie de extensia php :',
@@ -594,8 +548,6 @@ cu o culoare care le indică starea :',
 	'install_select_langue' => 'Selecţionaţi o limbă şi faceţi click pe butonul « următorul » pentru a lansa procedura de instalare.',
 	'install_select_type_db' => 'Indicaţi tipul bazei de date :',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_mysqli' => 'MySQLi', # NEW
-	'install_select_type_pg' => 'PostgreSQL', # NEW
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
 	'install_serveur_hebergeur' => 'Server de bază de date atribuit de către provider',
@@ -603,8 +555,6 @@ cu o culoare care le indică starea :',
 	'install_tables_base' => 'Tabelele bazei',
 	'install_types_db_connus' => 'SPIP ştie să folosească <b>MySQL</b> (cel mai răspândit), <b>PostgreSQL</b> şi <b>SQLite</b>.', # MODIF
 	'install_types_db_connus_avertissement' => 'Atenţie : mai multe plug-in-uri nu funcţionează decât cu MySQL', # MODIF
-	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
-	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'redactor',
 	'intitule_licence' => 'Licenţă',
 	'item_accepter_inscriptions' => 'Acceptaţi înscrierile',
@@ -646,36 +596,18 @@ cu o culoare care le indică starea :',
 	'item_publier_articles' => 'Publicaţi articolele indiferent de data lor de publicare.',
 	'item_reponse_article' => 'Răspuns la articolul',
 	'item_utiliser_moteur_recherche' => 'Utilizaţi motorul de căutare',
-	'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
-	'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 	'item_visiteur' => 'vizitator',
 
 	// J
 	'jour_non_connu_nc' => 'necunoscut',
 
 	// L
-	'label_bando_outils' => 'Barre d\'outils', # NEW
-	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
-	'label_choix_langue' => 'Selectionnez votre langue', # NEW
-	'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
-	'label_slogan_site' => 'Slogan du site', # NEW
-	'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
-	'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
-	'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
-	'ldap_correspondance' => 'héritage du champ @champ@', # NEW
-	'ldap_correspondance_1' => 'Héritage des champs LDAP', # NEW
-	'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 	'lien_ajout_destinataire' => 'Adăugaţi acest destinatar',
 	'lien_ajouter_auteur' => 'Adăugaţi acest autor',
 	'lien_ajouter_participant' => 'Adăugaţi un participant',
-	'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 	'lien_email' => 'email',
 	'lien_nom_site' => 'NUME SITE :',
 	'lien_retirer_auteur' => 'Retrageţi autorul',
-	'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
-	'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
-	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 	'lien_retrait_particpant' => 'retrageţi acest participant',
 	'lien_site' => 'site',
 	'lien_supprimer_rubrique' => 'ştergeţi această rubrică',
@@ -702,9 +634,6 @@ cu o culoare care le indică starea :',
 	'module_texte_traduction' => 'Fişierul de limbă « @module@ » este disponibil în :',
 	'mois_non_connu' => 'necunoscut',
 
-	// N
-	'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
-
 	// O
 	'onglet_contenu' => 'Conţinut',
 	'onglet_declarer_une_autre_base' => 'Declaraţi o altă bază de date',
@@ -719,7 +648,6 @@ cu o culoare care le indică starea :',
 	'page_pas_proxy' => 'Această pagină nu trebuie să treacă prin proxy',
 	'pas_de_proxy_pour' => 'În caz de nevoie, indicaţi maşinile sau domeniile pentru care acest proxy nu trebuie folosit (de exemplu : @exemple@)',
 	'plugin_charge_paquet' => 'Încărcarea pachetului @name@',
-	'plugin_charger' => 'Télécharger', # NEW
 	'plugin_erreur_charger' => 'eroare : imposibil de încărcat @zip@',
 	'plugin_erreur_droit1' => 'Directorul <code>@dest@</code> nu este accesibil pentru operaţii de scriere.',
 	'plugin_erreur_droit2' => 'Vă rugăm să verificaţi drepturile în acest director (şi să îl creaţi, în cazul în care nu există) sau să instalaţi fişierele prin FTP.',
@@ -730,7 +658,6 @@ cu o culoare care le indică starea :',
 	'plugin_etat_test' => 'în test',
 	'plugin_impossible_activer' => 'Imposibil de activat plugin-ul @plugin@',
 	'plugin_info_automatique1' => 'Dacă vreţi să autorizaţi instalarea automată a plug-in-urilor, vă rugăm să :',
-	'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez :', # NEW
 	'plugin_info_automatique2' => 'creaţi un director <code>@rep@</code> ;',
 	'plugin_info_automatique3' => 'verificaţi că server-ul este autorizat să scrie în acest director.',
 	'plugin_info_automatique_creer' => 'de creat în directorul rădăcină al site-ului.',
@@ -742,25 +669,14 @@ cu o culoare care le indică starea :',
 	'plugin_info_automatique_liste_update' => 'Aduceţi listele la zi',
 	'plugin_info_automatique_ou' => 'sau...',
 	'plugin_info_automatique_select' => 'Selecţionaţi mai jos un plug-in : SPIP o să îl descarce şi îl va instala în directorul <code>@rep@</code> ; dacă acest plug-in există deja, el va fi adus la zi.',
-	'plugin_info_credit' => 'Crédits', # NEW
-	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_install_ok' => 'Installation réussie', # NEW
-	'plugin_info_necessite' => 'Necessite :', # NEW
-	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
-	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
-	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'de descărcat de la @url@ şi de instalat în @rep@',
-	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librăriile instalate',
 	'plugin_necessite_lib' => 'Acest plug-in are nevoie de librăria @lib@',
 	'plugin_necessite_plugin' => 'Necesită plugin-ul @plugin@ cu versiunea @version@ minim.',
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Are nevoie de SPIP cu versiunea @version@ minim.',
 	'plugin_source' => 'sursa: ',
 	'plugin_titre_automatique' => 'Instalare automatică',
 	'plugin_titre_automatique_ajouter' => 'Adăugaţi plug-in-uri',
-	'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
-	'plugin_titre_modifier' => 'Mes plugins', # NEW
 	'plugin_zip_active' => 'Continuaţi pentru a-l activa',
 	'plugin_zip_adresse' => 'indicaţi mai jos adresa unui fişier zip conţinând plug-in-ul de descărcat, sau chiar adresa unei liste de plug-in-uri.',
 	'plugin_zip_adresse_champ' => 'Adresa plug-uluiin sau a listei ',
@@ -769,30 +685,17 @@ cu o culoare care le indică starea :',
 	'plugin_zip_installe_rep_finie' => 'Fişierul @zip@ a fost decomprimat şi instalat în directorul @rep@',
 	'plugin_zip_installer' => 'Puteţi acum să îl instalaţi.',
 	'plugin_zip_telecharge' => 'Fişierul @zip@ a fost descărcat',
-	'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
-	'plugins_actif_un' => 'Un plugin activé.', # NEW
 	'plugins_actifs' => '@count@ plug-in-uri activate.',
 	'plugins_actifs_liste' => 'Plugins actifs', # MODIF
 	'plugins_compte' => '@count@ plug-in-uri',
-	'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 	'plugins_disponibles' => '@count@ plug-in-uri disponibile.',
 	'plugins_erreur' => 'Eroare în plug-in-urile : @plugins@',
 	'plugins_liste' => 'Lista plugin-urilor',
-	'plugins_liste_dist' => 'Extensions', # NEW
-	'plugins_recents' => 'Plugins récents.', # NEW
-	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Ierarhie',
 	'plugins_vue_liste' => 'Listă',
 	'protocole_ldap' => 'Versiunea protocolului :',
 
 	// Q
-	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
-	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
-	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
-	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
-	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
-	'queue_one_job_in_queue' => '1 travail en attente', # NEW
-	'queue_purger_queue' => 'Purger la liste des travaux', # NEW
 	'queue_titre' => 'Liste de travaux', # MODIF
 
 	// R
@@ -801,15 +704,11 @@ cu o culoare care le indică starea :',
 	// S
 	'sans_heure' => 'fără oră',
 	'statut_admin_restreint' => '(administrator cu drepturi restrânse)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
-	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 	'taille_cache_image' => 'Imaginile calculate automat de către SPIP (viniete de documente, titluri prezentate sub formă grafică, funcţii matematice în format TeX...) ocupă în directorul @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'Acest site nu prevede limitarea mărimii directorului <code>CACHE/</code>.',
 	'taille_cache_maxi' => 'SPIP încearcă să limiteze mărimea directorului <code>CACHE/</code> al acestui site la aproximativ <b>@octets@</b> octeţi de date.',
-	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
 	'taille_cache_octets' => 'Mărimea tamponului este acum de @octets@.', # MODIF
 	'taille_cache_vide' => 'Tamponul este gol.',
 	'taille_repertoire_cache' => 'Mărimea directorului de tampon',
@@ -835,8 +734,6 @@ reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces a
 	'texte_commande_vider_tables_indexation' => 'Utilizaţi această comandă pentru a goli tabelele de indexare utilizate
    de către motorul de căutare integrat în SPIP. Această operaţie vă va permite să
    câştigaţi spaţiu pe disc.',
-	'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-	'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 	'texte_compresse_ou_non' => '(acesta poate fi comprimat sau nu)',
 	'texte_compte_element' => '@count@ element(e)',
 	'texte_compte_elements' => '@count@ element(e)',
@@ -850,11 +747,9 @@ reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces a
    puteţi încerca o reparare automată.',
 	'texte_creer_rubrique' => 'Înainte de a putea scrie articole,<br />   trebuie să creaţi o rubrică.',
 	'texte_date_creation_article' => 'DATA CREĂRII ARTICOLULUI :',
-	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 	'texte_date_publication_anterieure' => 'DATA REDACTĂRII ANTERIOARE :',
 	'texte_date_publication_anterieure_nonaffichee' => 'Nu afişaţi data redactării anterioare.',
 	'texte_date_publication_article' => 'DATA PUBLICĂRII ÎN LINIE :',
-	'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 	'texte_descriptif_petition' => 'Descrierea petiţiei',
 	'texte_descriptif_rapide' => 'Descriere pe scurt',
 	'texte_effacer_base' => 'Ştergeţi baza de date SPIP',
@@ -957,28 +852,21 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 	'titre_admin_effacer' => 'Întreţinere tehnică',
 	'titre_admin_tech' => 'Întreţinere tehnică',
 	'titre_admin_vider' => 'Întreţinere tehnică',
-	'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
-	'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
-	'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 	'titre_cadre_afficher_article' => 'Afişaţi articolele',
 	'titre_cadre_afficher_traductions' => 'Afişaţi starea traducerilor pentru limbile următoare :',
 	'titre_cadre_ajouter_auteur' => 'ADĂUGAŢI UN AUTOR :',
 	'titre_cadre_interieur_rubrique' => 'În interiorul rubricii',
 	'titre_cadre_numero_auteur' => 'AUTOR NUMĂRUL',
-	'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 	'titre_cadre_signature_obligatoire' => '<b>Semnătura</b> [Obligatorie]
 ',
 	'titre_config_contenu_notifications' => 'Notificări',
 	'titre_config_contenu_prive' => 'În spaţiul privat',
 	'titre_config_contenu_public' => 'Pe site-ul public',
 	'titre_config_fonctions' => 'Configuraţia site-ului',
-	'titre_config_langage' => 'Configurer la langue', # NEW
 	'titre_configuration' => 'Configuraţia site-ului',
-	'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 	'titre_conflit_edition' => 'Conflict în timpul editării',
 	'titre_connexion_ldap' => 'Opţiuni : <b>Conexiunea dumneavoastră LDAP</b>',
 	'titre_groupe_mots' => 'GRUP DE CUVINTE :',
-	'titre_identite_site' => 'Identité du site', # NEW
 	'titre_langue_article' => 'LIMBA ARTICOLULUI', # MODIF
 	'titre_langue_rubrique' => 'LIMBA RUBRICII', # MODIF
 	'titre_langue_trad_article' => 'LIMBA ŞI TRADUCERILE ARTICOLULUI',

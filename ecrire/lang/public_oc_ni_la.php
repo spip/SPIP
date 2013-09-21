@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Acuelh dau sit', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Articles',
 	'articles_auteur' => 'Articles d\'aquel autor',
 	'articles_populaires' => 'Lu articles mai populars',
@@ -19,8 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'I a minga de sit a aquela adreiça ',
 	'aucune_breve' => 'I a minga de brèva a aquela adreiça ',
 	'aucune_rubrique' => 'I a minga de rubrica a aquela adreiça ',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
 	'autres_breves' => 'Autri brèvas',
 	'autres_groupes_mots_clefs' => 'Autres grops de mots clau',
 	'autres_sites' => 'Autres sits',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Comentar aqueu sit',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 	// D
 	'date' => 'Data',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'Mandar un messatge',
 	'espace_prive' => 'Espaci privat',
 
-	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'Ierarquia dau sit',
 
 	// J
 	'jours' => 'jorns',
-
-	// L
-	'lien_connecter' => 'Se connecter', # NEW
 
 	// M
 	'meme_auteur' => 'Dau meteis autor',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Messatge',
 	'messages_forum' => 'Messatges de forum', # MODIF
 	'messages_recents' => 'Lu messatges de forums mai recents',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Mots clau',
 	'mots_clefs_meme_groupe' => 'Mots clau dins lo meteis grop',
 
@@ -102,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'Sit realizat emb SPIP',
 	'sites_web' => 'Sits web',
 	'sous_rubriques' => 'Sosrubricas',
-	'spam' => 'Spam', # NEW
 	'suite' => 'seguda',
 	'sur_web' => 'Sobre lo web',
 	'syndiquer_rubrique' => 'Sindicar aquela rubrica',

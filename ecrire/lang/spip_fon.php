@@ -23,13 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'ɖiɔ gbèta é lɔ',
 	'admin_modifier_rubrique' => 'ɖiɔ akpa  é lɔ',
 	'admin_recalculer' => 'mi lɛ vɔ akɔnta wekpa tɔn blo',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
-	'afficher_trad' => 'mi ni do kpon Gbe de vo lè', # NEW
 	'alerte_maj_impossible' => 'Jijladó SQL tɔn soyí ɖìdè ɖévomɛ gló, e siwu nyí ɖɔ acɛ e na  yí do ɖiɔ titomɛ ɔ wɛ zɔn. Mi tɛnkpɔ bó so alɔ xwétɔ́ mi tɔn',
-	'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifiée par ailleurs. La valeur actuelle est :', # NEW
 	'analyse_xml' => 'Ni kpon XML tri tri ton',
-	'annuler' => 'Annuler', # NEW
-	'antispam_champ_vide' => 'Mi man wlan oun dé do fi o  :', # NEW
 	'articles_recents' => 'wekpa gùdogùdotɔn lɛ̂  ',
 	'avis_archive_incorrect' => 'gbètakin xóxó é lɔ é nyi gbètakin supipu tɔn a',
 	'avis_archive_invalide' => 'gbètakɛn xoxo ɔ fɛwu a',
@@ -42,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_fonction_contexte' => 'afɔkiklɛn do titomɛ. ɖidè é lɔ do na tɔn do akpa é lɔ mɛ a', # MODIF
 	'avis_erreur_mysql' => 'afɔkiklɛn SQL tɔn',
 	'avis_erreur_sauvegarde' => 'afɔkiklɛn do wiwlihɛn ɔ mɛ(@type@ @id_objet@) !',
-	'avis_erreur_visiteur' => 'Problème d\'accès à l\'espace privé', # NEW
 
 	// B
 	'barre_a_accent_grave' => 'Mi zé wèkwin A bo xwè gbakun yi do na',
@@ -59,14 +53,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_lien' => 'mi lilɛ ɖo [lien hypertexte->http://...]',
 	'barre_lien_input' => 'Mi ɖo gesi nu gblogbloji mi tɔn ( mi siwu doxlɛ atɛ ɖo http://www.gblogblojice/com alo mi na xlɛ wékpa ɖokpo.',
 	'barre_note' => 'mi lilɛ ɖo[[Note de bas de page]]',
-	'barre_paragraphe' => 'Créer un paragraphe', # NEW
 	'barre_quote' => 'Mi xlɛ wɛn ɖokpo',
 	'bouton_changer' => 'ɖyɔ̂',
 	'bouton_chercher' => 'Bà',
 	'bouton_choisir' => 'Cyán',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'Télécharger', # MODIF
-	'bouton_enregistrer' => 'Enregistrer', # NEW
 	'bouton_radio_desactiver_messagerie_interne' => 'Mi jo wiwlanmɛ ɖo ',
 	'bouton_radio_envoi_annonces' => 'mi sɛ gbètàxojla do',
 	'bouton_radio_non_envoi_annonces' => 'mi sɛ xojla do wo ',
@@ -83,11 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cal_par_jour' => 'Tìtómɛ gbèɖókpó ɖókpó tɔn',
 	'cal_par_mois' => 'Tìtómɛ sùnɖókpó ɖókpó tɔn',
 	'cal_par_semaine' => 'Tìtómɛ vòdúngblámɛɖókpó ɖókpó tɔn',
-	'choix_couleur_interface' => 'couleur ', # NEW
-	'choix_interface' => 'choix  de l\'interface', # NEW
-	'colonne' => 'Colonne', # NEW
 	'confirm_changer_statut' => 'vlɛ mī byɔ ɖɔ é mí ján ɖyɔ nǔ é lɔ. Mì ɖò bibà ɖɔ azɔ ná lɛ vɔ yì nù kɔn a ',
-	'correcte' => 'correcte', # NEW
 
 	// D
 	'date_aujourdhui' => 'é gbé',
@@ -107,20 +94,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ @nommois@',
 	'date_demain' => 'sɔ̄',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ à @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@ sùn nyíkɔ@xwè@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'le @nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'Gàn lɛ mɛ',
 	'date_hier' => 'Sɔ̄ è wá yí ɔ ',
 	'date_il_y_a' => 'il y a @delai@',
@@ -156,64 +134,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jnum8' => 'tántɔn',
 	'date_jnum9' => 'tɛnnɛ',
 	'date_jour_1' => 'vodunzangbè',
-	'date_jour_1_abbr' => 'dim.', # NEW
-	'date_jour_1_initiale' => 'd.', # NEW
 	'date_jour_2' => 'tɛnigbè',
-	'date_jour_2_abbr' => 'lun.', # NEW
-	'date_jour_2_initiale' => 'l.', # NEW
 	'date_jour_3' => 'tâtàgbè',
-	'date_jour_3_abbr' => 'mar.', # NEW
-	'date_jour_3_initiale' => 'm.', # NEW
 	'date_jour_4' => 'azangagbè',
-	'date_jour_4_abbr' => 'mer.', # NEW
-	'date_jour_4_initiale' => 'm.', # NEW
 	'date_jour_5' => 'nyɔnúzángbè',
-	'date_jour_5_abbr' => 'jeu.', # NEW
-	'date_jour_5_initiale' => 'j.', # NEW
 	'date_jour_6' => 'axózangbè',
-	'date_jour_6_abbr' => 'ven.', # NEW
-	'date_jour_6_initiale' => 'v.', # NEW
 	'date_jour_7' => 'síɖígbè',
-	'date_jour_7_abbr' => 'sam.', # NEW
-	'date_jour_7_initiale' => 's.', # NEW
 	'date_jours' => 'azan lɛ̂',
 	'date_minutes' => 'cɛjúmɛ ',
 	'date_mois' => 'sùn',
 	'date_mois_1' => 'Alǔunsun',
 	'date_mois_10' => 'Kɔnyasun',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'Abɔxwísun',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'Wǒosun',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'Zofínkplɔsun',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'xwèjísun ',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'Lidósun',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'Nǔxwasun',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'Ayidósun',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'Liyasun',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'Avuvɔsun',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'Zǒsun',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'avìvɔ hwènú',
 	'date_saison_2' => 'plɛntân',
 	'date_saison_3' => 'hwèsívɔ hwènú',
 	'date_saison_4' => 'otɔmù',
-	'date_secondes' => 'secondes', # NEW
 	'date_semaines' => 'Vodúngbláɖòkpómɛ ',
-	'date_un_mois' => 'mois', # NEW
-	'date_une_heure' => 'heure', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'seconde', # NEW
-	'date_une_semaine' => 'semaine', # NEW
 	'dirs_commencer' => 'bó nú mī ná ɖó bɛ afɔ ɖó tè ji ɔ ',
 	'dirs_preliminaire' => 'bibɛmɛ ɔ : mī byɔ gbè hwɛ',
 	'dirs_probleme_droits' => 'Xó ɖò acɛ yíyí wú', # MODIF
@@ -222,35 +168,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'double_occurrence' => 'Double occurrence', # MODIF
 
 	// E
-	'en_cours' => 'en cours', # NEW
 	'envoi_via_le_site' => 'mī sɛ gbɔn gblògblójí ɔ jì',
-	'erreur' => 'Erreur', # NEW
-	'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
-	'erreur_texte' => 'erreur(s)', # NEW
-	'etape' => 'Étape', # NEW
 
 	// F
-	'fichier_introuvable' => 'Fichier @fichier@ introuvable', # NEW
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'mī kò ná nyìkɔ ',
 	'form_email_non_valide' => 'e-mailù mī tɔn ɔ sɔ gbè á',
 	'form_forum_access_refuse' => 'mī sɔ sǐwu yì gblogblo é lɔ jí á',
 	'form_forum_bonjour' => 'mī fɔn án @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'gesí é lɔ kó sɔ gbè, mī sǐwu zán cávì mī tɔn ',
 	'form_forum_identifiant_mail' => 'e-mailù ɖòkpó kó sɛ ɖéxlɛ mì tɔn ɖó',
 	'form_forum_identifiants' => 'ɖéxlɛ mì tɔn ',
@@ -322,11 +246,9 @@ sera ignorée) :
 	'icone_supprimer_image' => ' gbìɖí nú títɛ é lɔ',
 	'icone_tous_articles' => 'wěkpá lɛ bí',
 	'icone_tous_auteur' => 'nyɔwlántɔ lɛ bí',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'Jónɔ', # MODIF
 	'icone_voir_en_ligne' => 'Mi kpɔn ɖò àtɛ ɔ jí ',
 	'img_indisponible' => 'Yɛ ɖébú ɖò àtɛ ɔ jí a',
-	'impossible' => 'impossible', # NEW
 	'info_a_suivre' => 'mi ná kpɔn',
 	'info_acces_interdit' => 'yé ná gbè á',
 	'info_acces_refuse' => 'yé ná gbè á',
@@ -344,14 +266,10 @@ sera ignorée) :
 	'info_article_supprime' => 'gbìɖí  wěmâ',
 	'info_articles' => 'wěmâ',
 	'info_articles_a_valider' => ' sɔ kɛn nú wěmà',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'wěkpá sɔ ɖáyì',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => 'Nyɔwlántɔ (lɛ̂):',
 	'info_authentification_ftp' => 'Acɛ yíyí (FTP).',
 	'info_breves_2' => 'xó kléwún lɛ',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'cácáɖó ɔ sɔgbè á',
 	'info_contact_developpeur' => 'mi sɔ àlɔ tìtòtɔ ɔ.',
 	'info_contenance' => 'gblogblojí  élɔ ɖó:',
@@ -363,14 +281,11 @@ sera ignorée) :
 	'info_creer_repertoire' => 'mi kɛnklɛn bó gbètàxókplé bó ná nyíkɔ ɛ:',
 	'info_creer_repertoire_2' => 'àkpáxwé', # MODIF
 	'info_creer_vignette' => 'Kunɖéwémá càca',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'mi vlɔn',
 	'info_descriptif_nombre' => 'ɖìɖèmɛ:',
 	'info_description' => 'ɖìɖèmɛ:',
 	'info_description_2' => 'ɖìɖèmɛ:',
 	'info_dimension' => 'ɖìɖèmɛ:',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'wlán wɛn nú mɛ ɖê',
 	'info_email_invalide' => 'yé sɔ kɛn ná e-mailù é lɔ á.',
 	'info_en_cours_validation' => 'mi kpó ɖò wékpá lɛ wlán wɛ tion',
@@ -408,8 +323,6 @@ sera ignorée) :
 	'info_mail_fournisseur' => 'miɖê @nátɔ.com',
 	'info_message_2' => 'wɛn',
 	'info_message_supprime' => 'yè súsú wɛn',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'Azán bíbló tɔn:',
 	'info_modification_parametres_securite' => 'ɖìɖyɔ',
 	'info_mois_courant' => 'sún ɖòkpó ɔ mɛ:',
@@ -425,10 +338,8 @@ sera ignorée) :
 	'info_nouveau_message' => 'mi ɖò wɛn yɔyɔ ɖévó',
 	'info_nouveaux_messages' => '@total_messages@ wɛn yɔyɔ',
 	'info_numero_abbreviation' => 'N° ',
-	'info_obligatoire' => 'Cette information est obligatoire', # NEW
 	'info_pense_bete' => 'Lìntámɛ-Agúɖàgɔ',
 	'info_petit_ecran' => 'Atɛ kpɛví',
-	'info_petition_close' => 'Pétition close', # NEW
 	'info_pixels' => 'cíkícíkí',
 	'info_plusieurs_mots_trouves' => 'Yé mɔ gbètákɛn gégé"@cherche_mot@":',
 	'info_portfolio_automatique' => 'Portfolio càcà :',
@@ -447,13 +358,9 @@ sera ignorée) :
 	'info_rechercher' => 'Bìbà',
 	'info_rechercher_02' => 'Bìbà :',
 	'info_remplacer_vignette' => 'mi ɖyo syɔ :',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'Xótá ɖè á',
 	'info_selectionner_fichier' => 'Mi síwú cyán gbètákɛn <i>cyán</i>', # MODIF
 	'info_selectionner_fichier_2' => 'Mi cyán gbètákɛn :',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'gbìdí  ɖìɖè ɔ ',
 	'info_symbole_bleu' => 'kwínnɔ xlɛ gɔgúnɔ: é nyí wɛn mi ɖɛ ɖésú tɔn', # MODIF
 	'info_symbole_jaune' => 'kwín  júnɔ nɔ xlɛ tìtòtɔ kpó nyɔwlántɔn hɛn ná ɖyɔ ', # MODIF
@@ -475,8 +382,6 @@ sera ignorée) :
 	'infos_vos_pense_bete' => 'tàmɛ lìn àgúɖágɔ', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'jònɔ',
 	'lien_afficher_texte_icones' => 'xlɛ wémà lɛ',
 	'lien_afficher_texte_seul' => 'xlɛ wémà lɛ',
@@ -495,8 +400,6 @@ sera ignorée) :
 	'lien_visite_site' => 'mi bà jɔ gblogblojí ɔ  é lɔ',
 	'lien_visites' => '@visites@ jònɔ bìbà lɛ',
 	'lien_voir_auteur' => 'mi kpɔ nyɔwlántɔ é lɔ',
-	'ligne' => 'Ligne', # NEW
-	'login' => 'Connexion', # NEW
 	'login_acces_prive' => 'àcɛ sɔ byɔ tɛnkánɖóvò',
 	'login_autre_identifiant' => 'wlìalɔ sɔ gbɔn nyíkɔ ɖévò mɛ',
 	'login_cookie_accepte' => 'mi tɛnkpɔn nú sàɖìdìtɔ mí lɛ ní xlɛ xógbè é lɔ lɛ .',
@@ -520,22 +423,17 @@ sera ignorée) :
 	'login_retour_site' => 'Mi lɛkɔ yì gblogblojí ɔ ',
 	'login_retoursitepublic' => 'Mi lɛkɔ yì gblogblojí ɔ ',
 	'login_sans_cookiie' => 'Mi sɔ xlɛ bó jò koki lɛ ɖó',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'Ná nyíkɔ ',
 	'login_test_navigateur' => 'ɖèxlɛtɔ/àlɔwlí ɖévó',
 	'login_verifiez_navigateur' => '(mi kpɔn ɖɔ ɖèxlɛtɔ yí gbètákɛn à jí ...)',
 
 	// M
-	'masquer_colonne' => 'Masquer cette colonne', # NEW
-	'masquer_trad' => 'masquer les traductions', # NEW
 	'module_fichiers_langues' => 'gbè lɛ sín wěmà ',
 
 	// N
 	'navigateur_pas_redirige' => 'nú ɖéxlɛ mi tɔn má tɔn á, mi zín fí bó  lɛ vɔ yì.',
-	'numero' => 'Numéro', # NEW
 
 	// O
-	'occurence' => 'Occurrence', # NEW
 	'onglet_affacer_base' => 'mi sùnsùn xóxòkplé lɛ ',
 	'onglet_auteur' => 'nyɔwlántɔ ɔ ',
 	'onglet_contenu_site' => 'gblògblòjí sín àɖɔmɛ ',
@@ -573,7 +471,6 @@ Nú mi ná ɖó mɔ nɔtɛn gblogblojí  é lɔ tɔn  mi yì
 	'pass_nouveau_pass' => 'Mi sɔ càvì ɖévó',
 	'pass_ok' => 'bà yí',
 	'pass_oubli_mot' => 'mi yɔn càvì ɔ',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'jó flècè é lɔ ɖó',
 	'pass_rappel_login' => 'nyíkɔ mi tɔn  « @login@ ».',
 	'pass_recevoir_mail' => 'mi ná sɛ wɛn ɖê ná ɖɔ ɖé mi ná byɔ gblogblojí gbɔn é .',
@@ -584,19 +481,11 @@ Nú mi ná ɖó mɔ nɔtɛn gblogblojí  é lɔ tɔn  mi yì
 	'previsualisation' => 'kpɔn',
 	'previsualiser' => 'kpɔn',
 
-	// R
-	'retour' => 'Retour', # NEW
-
 	// S
-	'spip_conforme_dtd' => 'SPIP considère ce document comme conforme à son DOCTYPE :', # NEW
-	'squelette' => 'squelette', # NEW
-	'squelette_inclus_ligne' => 'squelette inclus, ligne', # NEW
-	'squelette_ligne' => 'squelette, ligne', # NEW
 	'stats_visites_et_popularite' => '@visites@ jónɔ  ; tòbítùn : @popularite@',
 	'suivant' => 'E jà wè',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ ko',
 	'taille_mo' => '@taille@ Mo',
 	'taille_octets' => '@taille@ octets',
@@ -606,7 +495,6 @@ Nú mi ná ɖó mɔ nɔtɛn gblogblojí  é lɔ tɔn  mi yì
 	'texte_creation_automatique_vignette' => 'wlíhɛn/ lɛvɔ xóxòkplé blóɖóBɛ̂ ê é ɖò gbàví ɔ mɛ bí sínZé gɔ ná wěmámɛYé mɔ àyì ɖé ɖó wékwín é lɔ wú áYé sɔ mɔ ɖê ná nɔ kpɔn wékwín sín winwlán gànjí ɔ ɖó sùpípùmɛ.Amɔ có nú mi ná sɔ wěmà mi tɔn ɖé xlɛ hún mi ván núkún ɖémɛ ɖésú hwɛ @gd_formats@, wékwín ɖê yé mà tùn à lɛ ɔ ɖò vɔvɔmɛ. Zìn yé bó kpɔn àyì é yè b ɖó yèwú ɔ@taille_preview@ ',
 	'texte_documents_associes' => 'mi sɔ yí gblogblo é lɔ jí áyé hùn fí nú mɛ bí ámi byɔ ɖɔ é mi ná ɖɔ xó ɖò kplékplé ɔ mɛmi sɔ e-mailú mi tɔn xlɛ Wɛn é lɔ wɛn càcà wɛ .',
 	'texte_erreur_mise_niveau_base' => 'xó kléwun lɛ wěmà kléwún ɖé lɛ wɛbɔ yé nɔ zɔn bɔ xó lɛ nɔ yí àtɛjí gànmɛgànmɛmi sɔ xóxòkplégbàví mi tɔn mɔnɔ hɛnmi cyían ɖê jɛ ɖéwú ɔ', # MODIF
-	'texte_erreur_visiteur' => 'Vous avez tenté d\'accéder à l\'espace privé avec un login qui ne le permet pas.', # NEW
 	'texte_inc_auth_1' => 'mi kó mɔ mi @auth_login@àmɔ mi sɔ ɖò xóxòkplégbàví ɔ mɛ á', # MODIF
 	'texte_inc_auth_2' => 'mi lɛ vɔ yí kànjí',
 	'texte_inc_auth_3' => ', vlàvò nú mi gòsínbò dózò nú ɖéxlɛtɔ mi tɔn  ',
@@ -628,67 +516,39 @@ Nú mi ná ɖó mɔ nɔtɛn gblogblojí  é lɔ tɔn  mi yì
 	'titre_image_auteur_supprime' => 'nyɔwlántɔn ɖê yé sùnsùn',
 	'titre_image_redacteur' => 'nyɔwlántɔn  mà ɖò àcɛ',
 	'titre_image_redacteur_02' => 'nyɔwlántɔn  ',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Jónɔ',
 	'titre_joindre_document' => 'Zé wěmà gɔná ',
 	'titre_mots_cles' => 'gbètákɛn',
 	'titre_probleme_technique' => 'mɛɖé sɔ sí byɔ fínɛ á.',
 	'titre_publier_document' => 'mi sɔ wěmà xlɛ ɖò àkpáxwé lɔ jí',
-	'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-	'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 	'titre_statistiques' => 'akɔŋtá gblogblojí  ɔ tɔn ',
 	'titre_titre_document' => 'xótá wěmà tɔn  :',
-	'todo' => 'à venir', # NEW
 	'trad_reference' => '(wékpá jɔ wékpá)', # MODIF
 
 	// Z
 	'zbug_balise_b_aval' => ' :Dògbó B ɖò fìfómɛ',
-	'zbug_balise_inexistante' => 'Balise @balise@ mal déclarée pour @from@', # NEW
-	'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 	'zbug_boucle' => 'Fífómɛ bìbɛmɛ',
 	'zbug_boucle_recursive_undef' => 'Afɔ Fífómɛ bìbɛmɛ nɔ wà hwɛhwɛ yè mà sɔ ɖáyì é', # MODIF
-	'zbug_calcul' => 'calcul', # NEW
 	'zbug_champ_hors_boucle' => 'Tɛnmɛ  @champ@ é ɖò vò nú  Fífómɛ bìbɛmɛ',
 	'zbug_champ_hors_motif' => 'Tɛnmɛ @champ@ é ɖò vò nú  Fífómɛ bìbɛmɛ @motif@', # MODIF
 	'zbug_code' => 'Awòkɛn',
 	'zbug_critere_inconnu' => 'Sɛnxwì yè mà tùn@critere@', # MODIF
 	'zbug_distant_interdit' => 'Yè gbɛ ê má ɖò nù ɖé mɛ a', # MODIF
-	'zbug_doublon_table_sans_cle_primaire' => 'Doublons sur une table sans clef primaire atomique', # NEW
 	'zbug_doublon_table_sans_index' => 'doublons sur une table sans index', # MODIF
 	'zbug_erreur_boucle_double' => 'tòbòtòbò@id@:tímɛ àzɔn wè', # MODIF
 	'zbug_erreur_boucle_fermant' => 'tòbòtòbò@:cávì é nú ɔ ɖè á', # MODIF
 	'zbug_erreur_boucle_syntaxe' => 'tòbòtòbò ɔ sɔ gbè á', # MODIF
-	'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
 	'zbug_erreur_execution_page' => 'Afɔkílɛn ɖò àzɔ wìwàmɛ', # MODIF
 	'zbug_erreur_filtre' => 'klɛn àfɔ ', # MODIF
 	'zbug_erreur_meme_parent' => '{Nû_ɖòkpó ɔ} Fífómɛ bìbɛmɛ kɛɖɛ wɛ yè nɔ bló ná(Kplékplé lɛ) kabi (Akpáxwé lɛ)', # MODIF
 	'zbug_erreur_squelette' => 'Afɔkílɛn (lɛ) ɖò tìtòmɛ ò mɛ ',
-	'zbug_hors_compilation' => 'Hors Compilation', # NEW
 	'zbug_info_erreur_squelette' => 'àfɔkiklɛn ɖò gblogblojí',
 	'zbug_inversion_ordre_inexistant' => 'Adà lílɛ nú wàlɔ é kó tíìn é', # MODIF
 	'zbug_pagination_sans_critere' => '#PAGINATION sans critère {pagination} ou employé dans une boucle recursive', # MODIF
 	'zbug_parametres_inclus_incorrects' => ' wàlɔ yíyìɖémɛ  ɔ tɔn lɛ jlɔ à ', # MODIF
-	'zbug_profile' => 'Temps de calcul : @time@', # NEW
 	'zbug_resultat' => 'Gbètà',
 	'zbug_serveur_indefini' => 'Mɔxwìtíxwìtítàtɔ SQL tɔn ê mà tɛɖɛ é jì a ', # MODIF
-	'zbug_statistiques' => 'Statistiques des requêtes SQL classées par durée', # NEW
-	'zbug_table_inconnue' => 'Tìtòmɛ  SQL « @table@ »yè mà tùn',
-	'zxml_connus_attributs' => 'attributs connus', # NEW
-	'zxml_de' => 'de', # NEW
-	'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
-	'zxml_inconnu_balise' => 'balise inconnue', # NEW
-	'zxml_inconnu_entite' => 'entité inconnue', # NEW
-	'zxml_inconnu_id' => 'ID inconnu', # NEW
-	'zxml_mais_de' => 'mais de', # NEW
-	'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
-	'zxml_non_fils' => 'n\'est pas un fils de', # NEW
-	'zxml_nonvide_balise' => 'balise non vide', # NEW
-	'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans', # NEW
-	'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
-	'zxml_survoler' => 'survoler pour voir les corrects', # NEW
-	'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
-	'zxml_vide_balise' => 'balise vide', # NEW
-	'zxml_vu' => 'vu auparavant' # NEW
+	'zbug_table_inconnue' => 'Tìtòmɛ  SQL « @table@ »yè mà tùn'
 );
 
 ?>
