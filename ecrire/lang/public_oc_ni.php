@@ -11,11 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accueil_site' => 'Acuèlh dau sit', # MODIF
 	'article' => 'Article',
 	'articles' => 'Articles',
-	'articles_auteur' => 'Articles d\'aquel autor',
+	'articles_auteur' => 'Articles d’aquel autor',
 	'articles_populaires' => 'Lu articles mai populars',
-	'articles_rubrique' => 'Articles d\'aquela rubrica',
-	'aucun_article' => 'Li a minga d\'article à-n-aquela adreça ',
-	'aucun_auteur' => 'Li a minga d\'autor à-n-aquela adreça ',
+	'articles_rubrique' => 'Articles d’aquela rubrica',
+	'aucun_article' => 'Li a minga d’article à-n-aquela adreça ',
+	'aucun_auteur' => 'Li a minga d’autor à-n-aquela adreça ',
 	'aucun_site' => 'Li a minga de sit à-n-aquela adreça ',
 	'aucune_breve' => 'Li a minga de brèva à-n-aquela adreça ',
 	'aucune_rubrique' => 'Li a minga de rubrica à-n-aquela adreça ',
@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'pàgina anteriora',
 	'page_suivante' => 'pàgina seguenta',
 	'par_auteur' => 'da',
-	'participer_site' => 'Podètz participar à la vida d\'aqueu sit e prepauar lu voastres articles en vos inscrivent çai sota. Receberètz un e-mail que v\'indicarà lu voastres còdes per accedir à l\'espaci privat dau sit.',
+	'participer_site' => 'Podètz participar à la vida d’aqueu sit e prepauar lu voastres articles en vos inscrivent çai sota. Receberètz un e-mail que v’indicarà lu voastres còdes per accedir à l’espaci privat dau sit.',
 	'plan_site' => 'Plan dau sit',
 	'popularite' => 'Popularitat',
 	'poster_message' => 'Postar un messatge',
@@ -109,13 +109,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'syndiquer_site' => 'Sindicar tot lo sit',
 
 	// T
-	'texte_lettre_information' => 'Vequí la letra d\'informacion dau sit',
+	'texte_lettre_information' => 'Vequí la letra d’informacion dau sit',
 	'texte_lettre_information_2' => 'Aquela letra recensa li noveutas publicadi despí',
 
 	// V
-	'ver_imprimer' => 'Version d\'estampar',
+	'ver_imprimer' => 'Version d’estampar',
 	'voir_en_ligne' => 'Vejatz en linha',
-	'voir_squelette' => 'Veire l\'esqueleta d\'aquela pàgina'
+	'voir_squelette' => 'Veire l’esqueleta d’aquela pàgina'
 );
 
 ?>

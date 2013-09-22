@@ -10,11 +10,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'accueil_site' => 'Acuèlh del sit', # MODIF
 	'articles' => 'Articles',
-	'articles_auteur' => 'Articles d\'aquel autor',
+	'articles_auteur' => 'Articles d’aquel autor',
 	'articles_populaires' => 'Los articles mai populars',
-	'articles_rubrique' => 'Articles d\'aquela rubrica',
-	'aucun_article' => 'I a pas cap d\'article a aquela adreiça ',
-	'aucun_auteur' => 'I a pas cap d\'autor a aquela adreiça ',
+	'articles_rubrique' => 'Articles d’aquela rubrica',
+	'aucun_article' => 'I a pas cap d’article a aquela adreiça ',
+	'aucun_auteur' => 'I a pas cap d’autor a aquela adreiça ',
 	'aucun_site' => 'I a pas cap de sit a aquela adreiça ',
 	'aucune_breve' => 'I a pas cap de brèva a aquela adreiça ',
 	'aucune_rubrique' => 'I a pas cap de rubrica a aquela adreiça ',
@@ -71,11 +71,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'pagina precedenta',
 	'page_suivante' => 'pagina seguenta',
 	'par_auteur' => 'per ',
-	'participer_site' => 'Podètz participar a la vida d\'aquel sit e prepausar los articles vòstres en vos inscriure çai jos. Recebretz còp sec un e-mail que vos indicarà vòstres còdes per accedir a l\'espaci privat del sit.',
+	'participer_site' => 'Podètz participar a la vida d’aquel sit e prepausar los articles vòstres en vos inscriure çai jos. Recebretz còp sec un e-mail que vos indicarà vòstres còdes per accedir a l’espaci privat del sit.',
 	'plan_site' => 'Plan del sit',
 	'popularite' => 'Popularitat',
 	'poster_message' => 'Postar un messatge',
-	'proposer_site' => 'Podètz prepausar un sit d\'apondre a aquesta rubrica:',
+	'proposer_site' => 'Podètz prepausar un sit d’apondre a aquesta rubrica:',
 
 	// R
 	'repondre_article' => 'Respondre a aquel article',
@@ -96,13 +96,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'syndiquer_site' => 'Sindicar tot lo sit',
 
 	// T
-	'texte_lettre_information' => 'Vaicí la letra d\'informacion del sit',
+	'texte_lettre_information' => 'Vaicí la letra d’informacion del sit',
 	'texte_lettre_information_2' => 'Aquela letra recensa los articles e brèvas publicats dempuèi', # MODIF
 
 	// V
-	'ver_imprimer' => 'Version d\'estampar',
+	'ver_imprimer' => 'Version d’estampar',
 	'voir_en_ligne' => 'Vejatz en linha',
-	'voir_squelette' => 'veire l\'esqueleta d\'aquela pagina'
+	'voir_squelette' => 'veire l’esqueleta d’aquela pagina'
 );
 
 ?>

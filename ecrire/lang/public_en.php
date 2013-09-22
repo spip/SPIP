@@ -74,8 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'navigation' => 'Browsing',
 	'nom' => 'Name',
-	'nouveautes' => 'What\'s new',
-	'nouveautes_web' => 'What\'s new on the Web',
+	'nouveautes' => 'What’s new',
+	'nouveautes_web' => 'What’s new on the Web',
 	'nouveaux_articles' => 'New articles',
 	'nouvelles_breves' => 'Latest news items',
 

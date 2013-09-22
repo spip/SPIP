@@ -14,11 +14,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_auteur' => 'Articles de cette auteure',
 	'articles_populaires' => 'Articles les plus populaires',
 	'articles_rubrique' => 'Articles de cette rubrique',
-	'aucun_article' => 'Il n\'y a pas d\'article à cette adresse',
-	'aucun_auteur' => 'Il n\'y a pas d\'auteure à cette adresse',
-	'aucun_site' => 'Il n\'y a pas de site à cette adresse',
-	'aucune_breve' => 'Il n\'y a pas de brève à cette adresse',
-	'aucune_rubrique' => 'Il n\'y a pas de rubrique à cette adresse',
+	'aucun_article' => 'Il n’y a pas d’article à cette adresse',
+	'aucun_auteur' => 'Il n’y a pas d’auteure à cette adresse',
+	'aucun_site' => 'Il n’y a pas de site à cette adresse',
+	'aucune_breve' => 'Il n’y a pas de brève à cette adresse',
+	'aucune_rubrique' => 'Il n’y a pas de rubrique à cette adresse',
 	'auteur' => 'Auteure',
 	'autres' => 'Autres',
 	'autres_breves' => 'Autres brèves',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'espace_prive' => 'Espace privé',
 
 	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.',
+	'formats_acceptes' => 'Formats acceptés : @formats@.',
 
 	// H
 	'hierarchie_site' => 'Hiérarchie du site',
@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'page précédente',
 	'page_suivante' => 'page suivante',
 	'par_auteur' => 'par ',
-	'participer_site' => 'Vous pouvez participer à la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez immédiatement un email vous indiquant vos codes d\'accès à l\'espace privé du site.',
+	'participer_site' => 'Vous pouvez participer à la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez immédiatement un email vous indiquant vos codes d’accès à l’espace privé du site.',
 	'plan_site' => 'Plan du site',
 	'popularite' => 'Popularité',
 	'poster_message' => 'Poster un message',
@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'syndiquer_site' => 'Syndiquer tout le site',
 
 	// T
-	'texte_lettre_information' => 'Voici la lettre d\'information du site',
+	'texte_lettre_information' => 'Voici la lettre d’information du site',
 	'texte_lettre_information_2' => 'Cette lettre recense les nouveautés publiées depuis',
 
 	// V
