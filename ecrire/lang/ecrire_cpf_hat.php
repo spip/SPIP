@@ -218,7 +218,7 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 	'info_classement_1' => '<sup>ye</sup> sou @liste@',
 	'info_classement_2' => '<sup>em</sup> sou @liste@',
 	'info_code_acces' => 'Oubliy pa kod laksè w-a, pou w mèm !',
-	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
+	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l’hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
 	'info_config_suivi' => 'Si ladrès-la ap koresponn yon lis-limèl, w kap enskri isit anba ladès tout patisapan sou sit-la yon ke kap enskri a y. Ladrès-la pétèt se yon URL (pa egsanp lapaj lenskrisyon sou lalis-limèl pa Web-la), osnon yon ladrès limèl ki gen yon sijé spécifik (pa egsanp: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => 'W kap enskri w pou ou gen lalis-limèl sit-la. Ou ke gen alò yon limèl pou rankont tout anons pou atik-la ek tinouvèl nan sit-la ki pwopozé pou piblikasyon.',
 	'info_confirmer_passe' => 'Konfime nouvo modpas-la :',
@@ -317,7 +317,7 @@ pa mache mèm.<br />{{Fòk w instal ankò
 	'info_multi_cet_article' => 'Lalanng atik la :',
 	'info_multi_langues_choisies' => 'Mèsi chwazi lang redaktè kapab itilize
   genyen inposib kraze lang sa-yo ki deja itilize sou sit-la (yo afiche premyé).',
-	'info_multi_rubriques' => 'Eske gen bezwen mèt meni lalanng sou ribrik yo  ?',
+	'info_multi_rubriques' => 'Eske gen bezwen mèt meni lalanng sou ribrik yo ?',
 	'info_multi_secteurs' => '... sèlman sou ribrik andan rasin sit la ?',
 	'info_nom' => 'Kouman i rele',
 	'info_nom_destinataire' => 'Kouman destinatè i rele',
@@ -691,9 +691,9 @@ Bagay-la pémè, pa egsanp, fòse rekalkil tout paj sa-yo, apré plizyè gro cha
 	'texte_unpack' => 'téléchajman dènyè vèsyon',
 	'texte_utilisation_moteur_syndiques' => 'Kan w itilize motè-rechèche andodan SPIP, w kapab chèche
     sou sit ak atik sendiké yo nan dé manyè diféran.
- <br /><img src=\'puce.gif\'> Pli senp se chèche sèlman kouman atik yo rele (tit yo)
+ <br /><img src=’puce.gif’> Pli senp se chèche sèlman kouman atik yo rele (tit yo)
 ou nan dékripsyon atik sa-yo
-     <br /><img src=\'puce.gif\'>
+     <br /><img src=’puce.gif’>
     Dèzyèm métod, pli pwisan, se fè
     SPIP chèche ositou nan tèks tout sit referansé yo.
    Si w ka referanse yon sit

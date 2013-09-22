@@ -444,7 +444,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 	'info_par_nom' => 'nach Namen',
 	'info_par_nombre_article' => 'nach Anzahl der Artikel',
 	'info_par_statut' => 'nach Status',
-	'info_par_tri' => '\'(nach @tri@)\'',
+	'info_par_tri' => '’(nach @tri@)’',
 	'info_passe_trop_court' => 'Passwort zu kurz.',
 	'info_passe_trop_court_car_pluriel' => 'Das Passwort muss mindestens @nb@ Zeichen haben.',
 	'info_passes_identiques' => 'Die zwei Passworte stimmen nicht überein.',
@@ -470,7 +470,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 	'info_publies' => 'Ihre veröffentlichten Artikel',
 	'info_question_accepter_visiteurs' => 'Bitte aktivieren Sie die folgende Option, wenn sich Besucher Ihrer Website als <i>Leser ohne Zugang zum Redaktionssystem</i> anmelden können.',
 	'info_question_inscription_nouveaux_redacteurs' => 'Möchten Sie, dass sich neue Redakteure vom öffentlichen Bereich
- aus anmelden können?  Wenn Sie es wollen, können sich Besucher über ein automatisch
+ aus anmelden können? Wenn Sie es wollen, können sich Besucher über ein automatisch
  erstelltes Formular anmelden und Artikel vorschlagen.
  <div class="notice">Nach der Anmeldung erhalten die neuen Redakteure automatisch
  eine E-Mail mit ihren Zugangsdaten. Manche Webhoster unterbinden den Mailversand

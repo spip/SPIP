@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_lecture_noms_bases_1' => 'O programa de instalação não conseguiu ler os nomes das bases de dados instaladas. ',
 	'avis_lecture_noms_bases_2' => 'Ou nenhuma base de dados está disponível, ou a função que permite listá-las foi desactivada
 por razões de segurança (o que é o caso em muitos serviços de hospedagem).  ',
-	'avis_lecture_noms_bases_3' => 'Na segunda alternativa, é provável que uma base tendo o  seu nome de login seja utilizável  :',
+	'avis_lecture_noms_bases_3' => 'Na segunda alternativa, é provável que uma base tendo o  seu nome de login seja utilizável :',
 	'avis_non_acces_message' => 'Não tem acesso a esta mensagem. ',
 	'avis_non_acces_page' => 'Não tem acesso a esta página. ',
 	'avis_operation_echec' => 'A operação falhou. ',
@@ -464,7 +464,7 @@ os autores apagados, por um ícone cinzento.',
 	'info_par_nom' => 'por nome',
 	'info_par_nombre_article' => 'por número de artigos',
 	'info_par_statut' => 'por estado',
-	'info_par_tri' => '\'(por @tri@)\'',
+	'info_par_tri' => '’(por @tri@)’',
 	'info_passe_trop_court' => 'Palavra-passe demasiado curta.',
 	'info_passe_trop_court_car_pluriel' => 'A palavra-passe deve conter pelo menos @nb@ caracteres.',
 	'info_passes_identiques' => 'As duas palavras-passe não são idênticas.',
@@ -965,9 +965,9 @@ a fim de evitar as modificações simultâneas.
 	'texte_trop_resultats_auteurs' => 'Demasiados resultados para "@cherche_auteur@" ; por favor afine a pesquisa.',
 	'texte_unpack' => 'telecarregamento da última versão',
 	'texte_utilisation_moteur_syndiques' => 'Quando utilizar o motor integrado de pesquisa  em SPIP, pode efectuar as pesquisas nos sítios e nos artigos vinculados de duas maneiras
- diferentes. <br /><img src=\'puce.gif\'> A mais
+ diferentes. <br /><img src=’puce.gif’> A mais
  simples consiste em pesquisar unicamente nos títulos e descrições dos artigos. 
-<br /><img src=\'puce.gif\'>
+<br /><img src=’puce.gif’>
  Um segundo método, muito mais poderoso, permite ao SPIP pesquisar igualmente no texto dos
  sítios referenciados. Se referenciar
  um sítio, SPIP vai então efectuar a

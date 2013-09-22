@@ -252,7 +252,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hier' => 'i går:',
 	'info_identification_publique' => 'Din offentlige identitet...',
 	'info_image_process' => 'Vælg den bedste metode til at skabe miniaturebilleder ved at klikke på det korresponderende billede.',
-	'info_image_process2' => '<b>N.B.</b> <i>If you can\'t see any image, then your server is not configured to use such tools. If you want to use these features, contact your provider\'s technical support and ask for the «GD» or «Imagick» extensions to be installed.</i>', # MODIF
+	'info_image_process2' => '<b>N.B.</b> <i>If you can’t see any image, then your server is not configured to use such tools. If you want to use these features, contact your provider’s technical support and ask for the «GD» or «Imagick» extensions to be installed.</i>', # MODIF
 	'info_informations_personnelles' => 'Femte trin: <b>Personlig information</b>',
 	'info_inscription_automatique' => 'Automatisk registrering af nye redaktører',
 	'info_jeu_caractere' => 'Webstedets tegnsæt',
@@ -502,7 +502,7 @@ i en farve, der angiver deres status:',
 	'texte_annuaire_ldap_1' => 'Hvis du har adgang til et LDAP-katalog, kan du anvende det til automatisk at importere brugere i SPIP.',
 	'texte_article_statut' => 'Denne artikel er:',
 	'texte_article_virtuel' => 'Virtuel artikel',
-	'texte_article_virtuel_reference' => '<b>Virtuel artikel:</b> fremstår som en artikel på dit websted, men viderestiller til en anden URL. Slet URL\'en for at fjerne viderestillingen.',
+	'texte_article_virtuel_reference' => '<b>Virtuel artikel:</b> fremstår som en artikel på dit websted, men viderestiller til en anden URL. Slet URL’en for at fjerne viderestillingen.',
 	'texte_aucun_resultat_auteur' => 'Ingen resultater til "@cherche_auteur@".',
 	'texte_auteur_messagerie' => 'Dette websted kan løbende holde øje med, hvilke redaktører der er logget ind. Dette muliggør realtidsudveksling af meddelelser (hvis udveksling af meddelser ovenfor er fravalgt, vedligeholdes oversigten over redaktører, der er online, heller ikke). Du kan vælge ikke at være synlig i oversigten (du er så «usynlig» for andre brugere).',
 	'texte_auteur_messagerie_1' => 'Dette websted tillader udveksling af meddelelser og oprettelse af private diskussionsforummer mellem deltagere på webstedet. Du kan vælge ikke at deltage i udvekslingen.',
@@ -510,7 +510,7 @@ i en farve, der angiver deres status:',
 	'texte_choix_base_1' => 'Vælg database:',
 	'texte_choix_base_2' => 'SQL server indeholder et antal databaser.',
 	'texte_choix_base_3' => '<b>Vælg</b> vælg nedenfor den database, som webhotellet har tildelt dig:',
-	'texte_commande_vider_tables_indexation' => 'Brug denne kommando til at tømme de indekstabeller, som benyttes af SPIP\'s indbyggede søgefunktion.
+	'texte_commande_vider_tables_indexation' => 'Brug denne kommando til at tømme de indekstabeller, som benyttes af SPIP’s indbyggede søgefunktion.
 			Derved kan du spare diskplads.',
 	'texte_compresse_ou_non' => '(denne kan være komprimeret eller ikke)',
 	'texte_compte_element' => '@count@ element',
@@ -549,11 +549,11 @@ i en farve, der angiver deres status:',
 	'texte_login_precaution' => 'Advarsel! Dette er den login, du er koblet på med nu.
 	Brug denne formular med forsigtighed ...',
 	'texte_message_edit' => 'Advarsel: Denne meddelelse kan ændres af alle webstedets administratorer, og den er synlig for alle redaktører. Benyt kun annonceringer til at gøre opmærksom på vigtige begivenheder på webstedet.',
-	'texte_mise_a_niveau_base_1' => 'Du har netop opdateret SPIP\'s filer.
+	'texte_mise_a_niveau_base_1' => 'Du har netop opdateret SPIP’s filer.
 	Du skal nu opdatere webstedets database.',
 	'texte_modifier_article' => 'Ret artiklen:',
 	'texte_moteur_recherche_active' => '<b>Søgefunktionen er valgt til.</b> Brug denne kommando, hvis du ønsker at udføre en hurtig reindeksering
-		(f.eks. efter at have indlæst en sikkerhedskopi). Bemærk, at dokumenter der ændres normalt (f.eks. fra SPIP\'s brugergrænseflade)
+		(f.eks. efter at have indlæst en sikkerhedskopi). Bemærk, at dokumenter der ændres normalt (f.eks. fra SPIP’s brugergrænseflade)
 		automatisk indekseres igen: derfor er denne kommando kun nyttig under ekstraordinære omstændigheder.',
 	'texte_moteur_recherche_non_active' => 'Søgefunktionen er valgt fra.',
 	'texte_multilinguisme' => 'Hvis du ønsker at administrere artikler på flere sprog med den deraf følgende større kompleksitet, kan du forsyne afsnit og/eller artikler med en sprogvalgsmenu. Denne funktion er afhængig af strukturen på websiden.', # MODIF
@@ -599,7 +599,7 @@ i en farve, der angiver deres status:',
 	'texte_statut_attente_validation' => 'afventer godkendelse',
 	'texte_statut_publies' => 'offentliggjort online',
 	'texte_statut_refuses' => 'afvist',
-	'texte_suppression_fichiers' => 'Brug denne kommando til at slette alle filer i SPIP\'s cache.
+	'texte_suppression_fichiers' => 'Brug denne kommando til at slette alle filer i SPIP’s cache.
 		Dette giver dig bl.a. mulighed for at gennemtvinge opdatering af alle sider i tilfælde af 
 		at du har lavet væsentlige grafiske eller strukturelle ændringer på webstedet.',
 	'texte_sur_titre' => 'Hovedoverskrift',
@@ -607,7 +607,7 @@ i en farve, der angiver deres status:',
 	'texte_tables_indexation_vides' => 'Søgefunktionens indekstabeller er tomme.',
 	'texte_tentative_recuperation' => 'Reparationsforsøg',
 	'texte_tenter_reparation' => 'Forsøg på at reparere databasen',
-	'texte_test_proxy' => 'For at afprøve proxy\'en, kan du indtaste adressen på et websted som du ønsker at teste.',
+	'texte_test_proxy' => 'For at afprøve proxy’en, kan du indtaste adressen på et websted som du ønsker at teste.',
 	'texte_titre_02' => 'Emne:',
 	'texte_titre_obligatoire' => '<b>Overskrift</b> [Obligatorisk]',
 	'texte_travail_article' => '@nom_auteur_modif@ har arbejdet på denne artikel for @date_diff@ minutter siden',
@@ -616,9 +616,9 @@ i en farve, der angiver deres status:',
 		slået fra for at undgå utidige advarselsmeddelelser.',
 	'texte_trop_resultats_auteurs' => 'For mange resultater til "@cherche_auteur@"; vær venlig at afgrænse søgningen yderligere.',
 	'texte_unpack' => 'download af seneste version',
-	'texte_utilisation_moteur_syndiques' => 'Hvis du benytter SPIP\'s indbyggede søgefunktion, kan du på forskellig vis foretage
-		søgninger på websteder og i syndikerede artikler. <br /><img src=\'puce.gif\'> Den enkleste består i kun at 
-		søge i artiklernes overskrifter og beskrivelser. <br /><img src=\'puce.gif\'> 
+	'texte_utilisation_moteur_syndiques' => 'Hvis du benytter SPIP’s indbyggede søgefunktion, kan du på forskellig vis foretage
+		søgninger på websteder og i syndikerede artikler. <br /><img src=’puce.gif’> Den enkleste består i kun at 
+		søge i artiklernes overskrifter og beskrivelser. <br /><img src=’puce.gif’> 
 		En anden metode, som er stærkere, lader SPIP søge i teksten på de websteder, der henvises til. 
 		Hvis du henviser til et websted, vil SPIP selv søge i dens tekst.', # MODIF
 	'texte_utilisation_moteur_syndiques_2' => 'Denne metode tvinger SPIP til jævnligt at besøge webstedet, hvilket kan koste 
