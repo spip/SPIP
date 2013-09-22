@@ -541,7 +541,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'module_raccourci' => 'Кратка команда',
 	'module_texte_affiche' => 'Показан текст',
 	'module_texte_explicatif' => 'Можете да впишете следните кратки команди в шаблоните на сайта си. Те ще бъдат автоматично преведени на различни езици, за които има езиков файл.',
-	'module_texte_traduction' => 'Езиковият файл ,, @module@ \'\' е достъпен на:',
+	'module_texte_traduction' => 'Езиковият файл ,, @module@ ’’ е достъпен на:',
 	'mois_non_connu' => 'непознат',
 
 	// O

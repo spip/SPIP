@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_a_accent_grave' => 'Mi zé wèkwin A bo xwè gbakun yi do na',
 	'barre_aide' => 'Mi zan wékwin lɛ̂ bo ná ɖo blo titomɛ mitɔn ɖo',
 	'barre_e_accent_aigu' => 'mi ze wékwin asi E  démɛ',
-	'barre_eo' => 'mi ze wékwin asi E  ɖo l\'o',
+	'barre_eo' => 'mi ze wékwin asi E  ɖo l’o',
 	'barre_eo_maj' => 'mi ze wékwin asi E  ɖo l’o daxo ɔ mɛ', # MODIF
 	'barre_euro' => 'mi ze wékwin  é lɔ € ɖémɛ ',
 	'barre_gras' => 'mi ze ɖo kpinkpɛnmɛ',
@@ -451,7 +451,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pass_erreur' => 'klɛn àfɔ ',
 	'pass_erreur_acces_refuse' => 'klɛn àfɔ  mi sɔ yí gblogbloé lɔ jí á',
 	'pass_erreur_code_inconnu' => 'mi sɔ yí gblogbloé lɔ jí á',
-	'pass_erreur_non_enregistre' => 'klɛn àfɔ  l\'adresse <tt>@email_oubli@</tt> ɖò fí á.',
+	'pass_erreur_non_enregistre' => 'klɛn àfɔ  l’adresse <tt>@email_oubli@</tt> ɖò fí á.',
 	'pass_erreur_non_valide' => 'klɛn àfɔ <tt>@email_oubli@</tt> ɖò fí á !',
 	'pass_erreur_probleme_technique' => 'klɛn àfɔ  ɖò fí á',
 	'pass_espace_prive_bla' => 'yé hùn fí nú mɛ bí á
@@ -482,7 +482,7 @@ Nú mi ná ɖó mɔ nɔtɛn gblogblojí  é lɔ tɔn  mi yì
 	'previsualiser' => 'kpɔn',
 
 	// S
-	'stats_visites_et_popularite' => '@visites@ jónɔ  ; tòbítùn : @popularite@',
+	'stats_visites_et_popularite' => '@visites@ jónɔ ; tòbítùn : @popularite@',
 	'suivant' => 'E jà wè',
 
 	// T
@@ -522,7 +522,7 @@ Nú mi ná ɖó mɔ nɔtɛn gblogblojí  é lɔ tɔn  mi yì
 	'titre_probleme_technique' => 'mɛɖé sɔ sí byɔ fínɛ á.',
 	'titre_publier_document' => 'mi sɔ wěmà xlɛ ɖò àkpáxwé lɔ jí',
 	'titre_statistiques' => 'akɔŋtá gblogblojí  ɔ tɔn ',
-	'titre_titre_document' => 'xótá wěmà tɔn  :',
+	'titre_titre_document' => 'xótá wěmà tɔn :',
 	'trad_reference' => '(wékpá jɔ wékpá)', # MODIF
 
 	// Z

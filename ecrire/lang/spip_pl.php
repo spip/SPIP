@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_attention' => 'UWAGA !',
 	'avis_champ_incorrect_type_objet' => 'Nieprawiłowa nazwa pola @name@ dla obiektu typu @type@',
 	'avis_colonne_inexistante' => 'Kolumna @col@ nie istnieje',
-	'avis_erreur' => 'Błąd: zobacz poniżej\';',
+	'avis_erreur' => 'Błąd: zobacz poniżej’;',
 	'avis_erreur_connexion' => 'Błąd połączenia',
 	'avis_erreur_cookie' => 'problem z cookie',
 	'avis_erreur_fonction_contexte' => 'Błąd programistyczny. Ta funkcja nie powinna być wywoływana w tym kontekście.',
@@ -372,7 +372,7 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 	'info_erreur_squelette2' => 'Żaden szkielet <b>@fichier@</b> nie jest dostępny ...',
 	'info_erreur_systeme' => 'Błąd systemu (errno @errsys@)',
 	'info_erreur_systeme2' => 'Albo dysk twardy jest pełny albo uszkodzona jest baza danych. <br />
- <font color=\'red\'>Spróbuj <a href=\'@script@\'>naprawić bazę danych</a>,
+ <font color=’red’>Spróbuj <a href=’@script@’>naprawić bazę danych</a>,
  lub skontaktuj się z administratorem serwera.</font>',
 	'info_fini' => 'Zakończono!',
 	'info_format_image' => 'Formaty plików obrazków, które mogą być używane do tworzenia minitaturek : @gd_formats@.',
@@ -643,7 +643,7 @@ a następnie sprawdź czy obrazki pojawiają się zawsze w artykułach.',
 
 	// Z
 	'zbug_balise_b_aval' => ' : balise B en aval',
-	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
+	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n’existe pas', # MODIF
 	'zbug_boucle' => 'pętla',
 	'zbug_boucle_recursive_undef' => 'pętla rekursywna nie została zdefiniowana', # MODIF
 	'zbug_champ_hors_boucle' => 'Pole @champ@ jest bez pętli',

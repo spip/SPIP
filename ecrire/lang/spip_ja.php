@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_euro' => '「€」記号を入れてください。',
 	'barre_gras' => '太字にする {{ボールド}}',
 	'barre_guillemets' => '"２重引用符"の間の場所',
-	'barre_guillemets_simples' => '\'一重引用符\'の間の場所',
+	'barre_guillemets_simples' => '’一重引用符’の間の場所',
 	'barre_intertitre' => '変える {{{subheading}}}',
 	'barre_italic' => '{イタリック} にする',
 	'barre_lien' => 'ハイパーリンクの差込 [リンク先->http://...]',
@@ -338,7 +338,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'テンプレートが入手不可能 <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'システムエラー (エラー番号 @errsys@)',
 	'info_erreur_systeme2' => 'ハードディスクがいっぱいか、データベースがダメージを受けている。<br />
- <font color=\'red\'>試してみて <a href=\'@script@\'>データベースの修復</a>,
+ <font color=’red’>試してみて <a href=’@script@’>データベースの修復</a>,
  それかあなたのホストに問い合わせてください。</font>', # MODIF
 	'info_fini' => '終わった！',
 	'info_format_image' => 'ビネット(半身写真、模様等)の作成に使える画像のフォーマット: @gd_formats@。',
@@ -600,7 +600,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zbug_balise_b_aval' => ': Bタグはループ内で遅すぎる',
-	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
+	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n’existe pas', # MODIF
 	'zbug_boucle' => 'ループ',
 	'zbug_boucle_recursive_undef' => '未定義な回帰的なループ', # MODIF
 	'zbug_champ_hors_boucle' => 'ループ外の @champ@ フィールド',

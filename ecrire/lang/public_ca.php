@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accueil_site' => 'Arrel de la web', # MODIF
 	'article' => 'Article',
 	'articles' => 'Articles',
-	'articles_auteur' => 'Articles d\'aquest autor',
+	'articles_auteur' => 'Articles d’aquest autor',
 	'articles_populaires' => 'Els articles més populars',
-	'articles_rubrique' => 'Articles d\'aquesta secció',
+	'articles_rubrique' => 'Articles d’aquesta secció',
 	'aucun_article' => 'No hi ha cap article en aquesta adreça',
 	'aucun_auteur' => 'No hi ha cap autor/a a aquesta adreça',
 	'aucun_site' => 'No hi ha cap lloc web en aquesta adreça',
@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'pàgina anterior',
 	'page_suivante' => 'pàgina següent',
 	'par_auteur' => 'per ',
-	'participer_site' => 'Podeu participar en la vida d\'aquest lloc web i proposar els vostres articles si ompliu la inscripció que hi ha a continuació. Immediatament rebreu un correu electrònic indicant-vos els codis d\'accés a l\'espai privat de la web.',
+	'participer_site' => 'Podeu participar en la vida d’aquest lloc web i proposar els vostres articles si ompliu la inscripció que hi ha a continuació. Immediatament rebreu un correu electrònic indicant-vos els codis d’accés a l’espai privat de la web.',
 	'plan_site' => 'Mapa del lloc Web',
 	'popularite' => 'Popularitat',
 	'poster_message' => 'Escriure un missatge',
@@ -99,7 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'signatures_petition' => 'Signatures',
-	'site_realise_avec_spip' => 'Lloc Web fet amb l\'SPIP',
+	'site_realise_avec_spip' => 'Lloc Web fet amb l’SPIP',
 	'sites_web' => 'Llocs Web',
 	'sous_rubriques' => 'Subseccions',
 	'spam' => 'Spam',
@@ -115,7 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'ver_imprimer' => 'Versió per imprimir',
 	'voir_en_ligne' => 'Veure en línia',
-	'voir_squelette' => 'descarregar l\'esquelet d\'aquesta pàgina'
+	'voir_squelette' => 'descarregar l’esquelet d’aquesta pàgina'
 );
 
 ?>

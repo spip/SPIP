@@ -14,26 +14,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'0_mainteneur' => 'spip-dev@rezo.net',
 
 	// A
-	'access_interface_graphique' => 'Ritornu à l\'interfaccia gràfica sana',
-	'access_mode_texte' => 'Fà cumparisce l\'interfaccia testu simplificata',
+	'access_interface_graphique' => 'Ritornu à l’interfaccia gràfica sana',
+	'access_mode_texte' => 'Fà cumparisce l’interfaccia testu simplificata',
 	'admin_debug' => 'debug',
-	'admin_modifier_article' => 'Mudificà st\'artìculu',
-	'admin_modifier_auteur' => 'Mudificà st\'autore',
+	'admin_modifier_article' => 'Mudificà st’artìculu',
+	'admin_modifier_auteur' => 'Mudificà st’autore',
 	'admin_modifier_breve' => 'Mudificà stu dispacciu',
 	'admin_modifier_mot' => 'Mudificà stu segnu',
 	'admin_modifier_rubrique' => 'Mudificà sta rùbbrica',
 	'admin_recalculer' => 'Ricaricà sta pàgina',
-	'afficher_calendrier' => 'Mustrà l\'almanaccu',
+	'afficher_calendrier' => 'Mustrà l’almanaccu',
 	'afficher_trad' => 'fà cumparisce e traduzzioni',
-	'alerte_maj_impossible' => '<b>Attenti !</b> Ùn hè pussìbule l\'aghjurnamentu di a basa SQL versu a versione @version@, 
-	forse per via d\'un prublemu cù i dirittu di mudìficazione in a basa di dati. Cuntattate puru u vostru òspite.',
-	'alerte_modif_info_concourante' => 'ATTENTI : St\'infurmazione hè stata mudificata in listessu mentre. U valore attuale hè :',
+	'alerte_maj_impossible' => '<b>Attenti !</b> Ùn hè pussìbule l’aghjurnamentu di a basa SQL versu a versione @version@, 
+	forse per via d’un prublemu cù i dirittu di mudìficazione in a basa di dati. Cuntattate puru u vostru òspite.',
+	'alerte_modif_info_concourante' => 'ATTENTI : St’infurmazione hè stata mudificata in listessu mentre. U valore attuale hè :',
 	'analyse_xml' => 'Anàlisi XML',
 	'annuler' => 'Annullà',
 	'antispam_champ_vide' => 'Lasciate puru stu campu viotu :',
-	'articles_recents' => 'L\'ùltimi artìculi',
-	'avis_archive_incorrect' => 'u schedariu d\'archiviu ùn hè micca un schedariu SPIP',
-	'avis_archive_invalide' => 'u schedariu d\'archiviu ùn hè micca vàlidu',
+	'articles_recents' => 'L’ùltimi artìculi',
+	'avis_archive_incorrect' => 'u schedariu d’archiviu ùn hè micca un schedariu SPIP',
+	'avis_archive_invalide' => 'u schedariu d’archiviu ùn hè micca vàlidu',
 	'avis_attention' => 'ATTENTI !',
 	'avis_champ_incorrect_type_objet' => 'Nome di campu sbagliatu @name@ per oggettu di tippu @type@',
 	'avis_colonne_inexistante' => 'A culonna @col@ ùn esiste micca',
@@ -43,14 +43,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_fonction_contexte' => 'Errore di prugramazione. Ùn deve esse chjamata sta funzione in tale cuntestu.',
 	'avis_erreur_mysql' => 'Errore SQL',
 	'avis_erreur_sauvegarde' => 'Errore durante u salvamentu (@type@ @id_objet@) !',
-	'avis_erreur_visiteur' => 'Problemu d\'accessu à u spaziu privatu',
+	'avis_erreur_visiteur' => 'Problemu d’accessu à u spaziu privatu',
 
 	// B
-	'barre_a_accent_grave' => 'Inserisce un A maiùsculu cù l\'aletta à falà',
-	'barre_aide' => 'Aduprate puru l\'accurtatoghji tipugràfichi pè arricchisce a paginatura',
-	'barre_e_accent_aigu' => 'Inserisce un E maiùsculu cù l\'aletta à cullà',
-	'barre_eo' => 'Inserisce un E in l\'O',
-	'barre_eo_maj' => 'Inserisce un E in l\'O maiùsculu',
+	'barre_a_accent_grave' => 'Inserisce un A maiùsculu cù l’aletta à falà',
+	'barre_aide' => 'Aduprate puru l’accurtatoghji tipugràfichi pè arricchisce a paginatura',
+	'barre_e_accent_aigu' => 'Inserisce un E maiùsculu cù l’aletta à cullà',
+	'barre_eo' => 'Inserisce un E in l’O',
+	'barre_eo_maj' => 'Inserisce un E in l’O maiùsculu',
 	'barre_euro' => 'Inserisce u sìmbulu €',
 	'barre_gras' => 'Mette in {{grassu}}',
 	'barre_guillemets' => 'Mette trà « virgulette »',
@@ -58,8 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_intertitre' => 'Scambià in {{{infratìtulu}}}',
 	'barre_italic' => 'Mette in {itàlicu}',
 	'barre_lien' => 'Scambià in [lea ipertestu->http://...]',
-	'barre_lien_input' => 'Rinsignate puru l\'indirizzu di a vostra lea (pudete dà un indirizzu web di forma http://www.umositu.com o 
-	indettate solu u nùmeru d\'un artìculu di stu situ.',
+	'barre_lien_input' => 'Rinsignate puru l’indirizzu di a vostra lea (pudete dà un indirizzu web di forma http://www.umositu.com o 
+	indettate solu u nùmeru d’un artìculu di stu situ.',
 	'barre_note' => 'Scambià in [[Nota di fondu di pàgina]]',
 	'barre_paragraphe' => 'Creà un paragrafu',
 	'barre_quote' => '<quote>Cità un messagiu</quote>',
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_download' => 'Scaricà', # MODIF
 	'bouton_enregistrer' => 'Arregistrà',
 	'bouton_radio_desactiver_messagerie_interne' => 'Disattivà a mesageria interna',
-	'bouton_radio_envoi_annonces' => 'Mandà l\'annunci edituriali',
+	'bouton_radio_envoi_annonces' => 'Mandà l’annunci edituriali',
 	'bouton_radio_non_envoi_annonces' => 'Ùn mandà micca annunci',
 	'bouton_radio_non_envoi_liste_nouveautes' => 'Ùn mandà micca a lista di a nuvità',
 	'bouton_recharger_page' => 'ricaricà sta pàgina',
@@ -86,9 +86,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cal_par_mois' => 'almanaccu pè mese',
 	'cal_par_semaine' => 'almanaccu pè settimana',
 	'choix_couleur_interface' => 'culore ',
-	'choix_interface' => 'scelta di l\'interfaccia',
+	'choix_interface' => 'scelta di l’interfaccia',
 	'colonne' => 'Culonna',
-	'confirm_changer_statut' => 'Attenti, avete dumandate di scambià u statu di st\'elementu. Vulete cuntinuà ?',
+	'confirm_changer_statut' => 'Attenti, avete dumandate di scambià u statu di st’elementu. Vulete cuntinuà ?',
 	'correcte' => 'curretta', # chaine utilisée dans le debugueur : "validation .. impossible" ou "validation .. correcte"
 
 	// D
@@ -96,16 +96,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_avant_jc' => 'nanzu Ghj.C.',
 	'date_dans' => 'in @delai@',
 	'date_de_mois_1' => '@j@ di @nommois@',
-	'date_de_mois_10' => '@j@ d\'@nommois@',
+	'date_de_mois_10' => '@j@ d’@nommois@',
 	'date_de_mois_11' => '@j@ di @nommois@',
 	'date_de_mois_12' => '@j@ di @nommois@',
 	'date_de_mois_2' => '@j@ di @nommois@',
 	'date_de_mois_3' => '@j@ di @nommois@',
-	'date_de_mois_4' => '@j@ d\'@nommois@',
+	'date_de_mois_4' => '@j@ d’@nommois@',
 	'date_de_mois_5' => '@j@ di @nommois@',
 	'date_de_mois_6' => '@j@ di @nommois@',
 	'date_de_mois_7' => '@j@ di @nommois@',
-	'date_de_mois_8' => '@j@ d\'@nommois@',
+	'date_de_mois_8' => '@j@ d’@nommois@',
 	'date_de_mois_9' => '@j@ di @nommois@',
 	'date_demain' => 'dumane',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
@@ -214,15 +214,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_une_seconde' => 'seconda',
 	'date_une_semaine' => 'settimana',
 	'dirs_commencer' => ' di modu à principià veramente a stallazione',
-	'dirs_preliminaire' => 'Prima di tuttu : <b>Scioglie i diritti d\'accessu</b>',
-	'dirs_probleme_droits' => 'Problemu di diritti d\'accessu',
+	'dirs_preliminaire' => 'Prima di tuttu : <b>Scioglie i diritti d’accessu</b>',
+	'dirs_probleme_droits' => 'Problemu di diritti d’accessu',
 	'dirs_repertoires_absents' => '<p><b>I seguenti cartulari ùn sò micca stati trovi :</b></p><ul>@bad_dirs@</ul>
 	<p>Pò esse quessa cagiunata da un prublemu di gattiva messa in forma di lèttere maiùscule o minùscule.
-	Verificate puru chì e minùscule è maiùscule di sti cartulari s\'accordanu cù ciò chì cumparisce quì sopra;
-	s\'ella ùn hè cusì, rinumate i cartulari cù u vostru cliente FTP di modu à curregge u sbagliu.</p>
+	Verificate puru chì e minùscule è maiùscule di sti cartulari s’accordanu cù ciò chì cumparisce quì sopra;
+	s’ella ùn hè cusì, rinumate i cartulari cù u vostru cliente FTP di modu à curregge u sbagliu.</p>
 	<p>Fatta quessa, puderete ',
 	'dirs_repertoires_suivants' => '<p><b>I seguenti cartulari ùn sò micca accessìbuli in scrittura :</b></p> <ul>@bad_dirs@</ul>
-	<p>Pè curregge la, dauprate puru u vostru cliente FTP pè scioglie i diritti d\'accessu à ognunu di sti cartulari.
+	<p>Pè curregge la, dauprate puru u vostru cliente FTP pè scioglie i diritti d’accessu à ognunu di sti cartulari.
 	A prucedura hè spiegata in ditagliu in a guida di stallazione.</p>
 	<p>Fatta quessa, puderete ',
 	'double_occurrence' => 'In doppiu',
@@ -232,20 +232,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Invià à traversu u situ',
 	'erreur' => 'Errore',
 	'erreur_balise_non_fermee' => 'ùltima balisa micca chjosa :',
-	'erreur_technique_enregistrement_champs' => 'Per via d\'un errore tècnicu, u campu @champs@ ùn hè micca statu arregistratu.',
-	'erreur_technique_enregistrement_impossible' => 'Per via d\'un errore tècnicu, l\'arregistramentu ùn hè micca statu fattu.',
+	'erreur_technique_enregistrement_champs' => 'Per via d’un errore tècnicu, u campu @champs@ ùn hè micca statu arregistratu.',
+	'erreur_technique_enregistrement_impossible' => 'Per via d’un errore tècnicu, l’arregistramentu ùn hè micca statu fattu.',
 	'erreur_texte' => 'errore/i',
 	'etape' => 'Tappa',
 
 	// F
 	'fichier_introuvable' => 'Schedariu @fichier@ inesistente',
-	'form_auteur_confirmation' => 'Cunfirmate l\'indirizzu mail',
+	'form_auteur_confirmation' => 'Cunfirmate l’indirizzu mail',
 	'form_auteur_email_modifie' => 'Hè statu mudificatu u vostru indirizzu mail.',
 	'form_deja_inscrit' => 'Site digià iscrittu.',
 	'form_email_non_valide' => 'Ùn hè vàlidu u vostru indirizzu email.',
 	'form_forum_access_refuse' => 'Ùn avete più accessu à stu situ.',
 	'form_forum_bonjour' => 'Bonghjornu, o @nom@,',
-	'form_forum_email_deja_enregistre' => 'St\'indirizzu email hè digià arregistratu, pudete puru usà u vostru password abbituale.',
+	'form_forum_email_deja_enregistre' => 'St’indirizzu email hè digià arregistratu, pudete puru usà u vostru password abbituale.',
 	'form_forum_identifiant_mail' => 'U vostru nuvellu còdice vi hè statu mandatu avà per email.',
 	'form_forum_identifiants' => 'Còdici persunali',
 	'form_forum_indiquer_nom_email' => 'Rinsignate quì u vostru nome è u vostru indirizzu email. Da quì à pocu vi ghjunghjerà u vostru còdice persunale, per email.',
@@ -254,13 +254,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_forum_pass' => 'password :',
 	'form_forum_probleme_mail' => 'Problemu di mail : Ùn pò micca esse mandatu u còdice.',
 	'form_forum_voici1' => 'Eccu i vostri còdici da pudè participà à a vita di u situ "@nom_site_spip@" (@adresse_site@) :',
-	'form_forum_voici2' => 'Eccu i vostri còdici da pudè prupone artìculi nant\'à u situ "@nom_site_spip@" (@adresse_login@) :',
+	'form_forum_voici2' => 'Eccu i vostri còdici da pudè prupone artìculi nant’à u situ "@nom_site_spip@" (@adresse_login@) :',
 	'form_indiquer_email' => 'Rinsignate puru u vostru indirizzu email.',
 	'form_indiquer_nom' => 'Rinsignate puru u vostru nome.',
 	'form_indiquer_nom_site' => 'Rinsignate puru u nome di u vostru situ.',
 	'form_pet_deja_enregistre' => 'Hè digià arregistratu stu situ',
 	'form_pet_signature_pasprise' => 'Ùn hè stata pigliata in contu a vostra zifra.',
-	'form_prop_confirmer_envoi' => 'Cunfirmate l\'inviu',
+	'form_prop_confirmer_envoi' => 'Cunfirmate l’inviu',
 	'form_prop_description' => 'Discrizzione/Cummentu',
 	'form_prop_enregistre' => 'Hè stata arregistrata a vostra pruposta. Cumpariscerà in ligna dopu cunvalidazione da i respunsèvuli di stu situ.',
 	'form_prop_envoyer' => 'Mandà un messagiu',
@@ -271,13 +271,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_prop_non_enregistre' => 'Ùn hè micca stata arregistrata a vostra pruposta.',
 	'form_prop_sujet' => 'Sugettu',
 	'form_prop_url_site' => 'Indirizzu (URL) di u situ', # MODIF
-	'forum_non_inscrit' => 'Ùn site micca iscrittu, o l\'indirizzu o u password sò sbagliati.',
+	'forum_non_inscrit' => 'Ùn site micca iscrittu, o l’indirizzu o u password sò sbagliati.',
 	'forum_par_auteur' => 'da @auteur@',
 	'forum_titre_erreur' => 'Errore ...',
 
 	// I
-	'ical_texte_rss_articles' => 'U schedariu «backend» di l\'artìculi di stu situ si trova à l\'indirizzu :',
-	'ical_texte_rss_articles2' => 'Pudete dinò ottene schedari «backend» pè l\'artìculi d\'ogni rùbbrica di u situ :',
+	'ical_texte_rss_articles' => 'U schedariu «backend» di l’artìculi di stu situ si trova à l’indirizzu :',
+	'ical_texte_rss_articles2' => 'Pudete dinò ottene schedari «backend» pè l’artìculi d’ogni rùbbrica di u situ :',
 	'ical_texte_rss_breves' => 'Esiste dinò un schedariu chì cuntene i dispacci di u situ. Indettendu un nùmeru di rùbbrica, ottenerete solu i dispacci
 		di sta rùbbrica.',
 	'icone_a_suivre' => 'Cuntrollu',
@@ -312,11 +312,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_suivi_activite' => 'Seguità a vita di u situ',
 	'icone_suivi_actualite' => 'Evuluzione di u situ',
 	'icone_suivi_pettions' => 'Seguità/gestisce e petizioni',
-	'icone_suivi_revisions' => 'Mudìfiche di l\'artìculi',
+	'icone_suivi_revisions' => 'Mudìfiche di l’artìculi',
 	'icone_supprimer_document' => 'Sguassà stu ducumentu',
-	'icone_supprimer_image' => 'Sguassà st\'imàgine',
+	'icone_supprimer_image' => 'Sguassà st’imàgine',
 	'icone_tous_articles' => 'Tutti i vostri artìculi',
-	'icone_tous_auteur' => 'Tutti l\'autori',
+	'icone_tous_auteur' => 'Tutti l’autori',
 	'icone_tous_visiteur' => 'Tutti i visitori',
 	'icone_visiter_site' => 'Situ pùbblicu', # MODIF
 	'icone_voir_en_ligne' => 'Vede in ligna',
@@ -338,7 +338,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_article_refuse' => 'Artìculu rifiutatu',
 	'info_article_supprime' => 'Artìculu sguassatu',
 	'info_articles' => 'Artìculi',
-	'info_articles_a_valider' => 'L\'artìculi da cunvalidà',
+	'info_articles_a_valider' => 'L’artìculi da cunvalidà',
 	'info_articles_nb' => '@nb@ artìculi',
 	'info_articles_proposes' => 'Artìculi pruposti',
 	'info_articles_un' => '1 artìculu',
@@ -350,11 +350,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_contenance' => 'Stu situ cuntene :',
 	'info_contribution' => 'contributi di foru', # MODIF
 	'info_copyright' => '@spip@ hè un prugrammu lìberu distribuitu @lien_gpl@.',
-	'info_copyright_doc' => 'Per sapè ne di più, visitate puru u situ <a href=\'http://www.spip.net/fr\'>http://www.spip.net/fr</a>.', # MODIF
+	'info_copyright_doc' => 'Per sapè ne di più, visitate puru u situ <a href=’http://www.spip.net/fr’>http://www.spip.net/fr</a>.', # MODIF
 	'info_copyright_gpl' => 'sottu licenza GPL',
 	'info_cours_edition' => 'I vostri artìculi in corsu di scrittura',
 	'info_creer_repertoire' => 'Create puru un schedariu o un cartulare chjamatu :',
-	'info_creer_repertoire_2' => 'à l\'internu di u sottucartulare <b>@repertoire@</b>, poi :',
+	'info_creer_repertoire_2' => 'à l’internu di u sottucartulare <b>@repertoire@</b>, poi :',
 	'info_creer_vignette' => 'creazione autumàtica di a figuretta',
 	'info_deplier' => 'Spalancà',
 	'info_descriptif_nombre' => 'descrittivu/i :',
@@ -365,15 +365,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_email_invalide' => 'Indirizzu email invàlida.',
 	'info_en_cours_validation' => 'I vostri artìculi in corsu di scrittura',
 	'info_en_ligne' => 'Attualmente in ligna :',
-	'info_envoyer_message_prive' => 'Mandà un messagiu privatu à st\'autore',
+	'info_envoyer_message_prive' => 'Mandà un messagiu privatu à st’autore',
 	'info_erreur_requete' => 'Errore in a richiesta :',
 	'info_erreur_squelette2' => 'ùn hè dispunìbule nisun mudellu <b>@fichier@</b> ...',
 	'info_erreur_systeme' => 'Errore sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'Forse hè colmu u discu duru, o puru hè scundisata a basa di dati. <br />
-	<font color=\'red\'>Pruvate puru di <a href=\'@script@\'>riparà a basa</a>,
+	<font color=’red’>Pruvate puru di <a href=’@script@’>riparà a basa</a>,
 	o cuntattate u vostru òspite.</font>',
 	'info_fini' => 'Hè fatta !',
-	'info_format_image' => 'Forme d\'imàgini chì ponu esse usate da creà figurette : @gd_formats@.',
+	'info_format_image' => 'Forme d’imàgini chì ponu esse usate da creà figurette : @gd_formats@.',
 	'info_format_non_defini' => 'forma indefinita',
 	'info_grand_ecran' => 'Screnu maiò',
 	'info_image_aide' => 'AIUTU',
@@ -386,10 +386,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_installer_images_dossier' => 'Stallà imàgini in u cartulare @upload@ da pudè li sceglie da quì.',
 	'info_interface_complete' => 'interfaccia sana',
 	'info_interface_simple' => 'Interfaccia simplificata',
-	'info_joindre_document_article' => 'Pudete puru alleà à st\'artìculu ducumenti di tippu',
+	'info_joindre_document_article' => 'Pudete puru alleà à st’artìculu ducumenti di tippu',
 	'info_joindre_document_rubrique' => 'Pudete puru aghjunghje in sta rùbbrica ducumenti di tippu',
 	'info_joindre_documents_article' => 'Pudete puru alleà à u vostru artìculu ducumenti di tippu :',
-	'info_l_article' => 'l\'artìculu',
+	'info_l_article' => 'l’artìculu',
 	'info_la_breve' => 'u dispacciu',
 	'info_la_rubrique' => 'a rùbbrica',
 	'info_langue_principale' => 'Lingua principale di u situ',
@@ -407,34 +407,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_mois_courant' => 'In stu mese :',
 	'info_mot_cle_ajoute' => 'U segnu hè statu aghjuntu à',
 	'info_multi_herit' => 'Lingua predefinita',
-	'info_multi_langues_soulignees' => 'E <u>lingue sottufrisgiate</u> godenu d\'una traduzzione di tutti i testi di l\'interfaccia. 
+	'info_multi_langues_soulignees' => 'E <u>lingue sottufrisgiate</u> godenu d’una traduzzione di tutti i testi di l’interfaccia. 
 		Sè vo sceglite ste lingue, seranu tradutti in autumàticu assai elementi di u situ pùbblicu (date, furmulari, ...). 
-		Per e lingue micca sottufrisgiate, st\'elementi cumparisceranu in a lingua principale di u situ.', # MODIF
+		Per e lingue micca sottufrisgiate, st’elementi cumparisceranu in a lingua principale di u situ.', # MODIF
 	'info_multilinguisme' => 'Multilinguìsimu',
-	'info_nom_non_utilisateurs_connectes' => 'U vostru nome ùn cumparisce micca in a lista di l\'utilizatori cunnessi.',
-	'info_nom_utilisateurs_connectes' => 'U vostru nome cumparisce in a lista di l\'utilizatori cunnessi.',
+	'info_nom_non_utilisateurs_connectes' => 'U vostru nome ùn cumparisce micca in a lista di l’utilizatori cunnessi.',
+	'info_nom_utilisateurs_connectes' => 'U vostru nome cumparisce in a lista di l’utilizatori cunnessi.',
 	'info_nombre_en_ligne' => 'Attualmente in ligna :',
 	'info_non_resultat' => 'Nisunu risultatu per "@cherche_mot@"',
 	'info_non_utilisation_messagerie' => 'ùn usate micca a messageria interna di stu situ.',
 	'info_nouveau_message' => 'AVETE UN NUVELLU MESSAGIU',
 	'info_nouveaux_messages' => 'AVETE @total_messages@ NUVELLI MESSAGI',
 	'info_numero_abbreviation' => 'N° ',
-	'info_obligatoire' => 'Hè ubbligatoria st\'infurmazione',
+	'info_obligatoire' => 'Hè ubbligatoria st’infurmazione',
 	'info_pense_bete' => 'MEMENTU',
 	'info_petit_ecran' => 'Pìcculu screnu',
 	'info_petition_close' => 'Petizione chjosa',
 	'info_pixels' => 'pixels',
 	'info_plusieurs_mots_trouves' => 'Parechji segni trovi per "@cherche_mot@":',
 	'info_portfolio_automatique' => 'Purtafogliu autumàticu :',
-	'info_premier_resultat' => '[@debut_limit@ primi risultati nant\'à @total@]',
-	'info_premier_resultat_sur' => '[@debut_limit@ primi risultati nant\'à @total@]',
+	'info_premier_resultat' => '[@debut_limit@ primi risultati nant’à @total@]',
+	'info_premier_resultat_sur' => '[@debut_limit@ primi risultati nant’à @total@]',
 	'info_propose_1' => '[@nom_site_spip@] Prupone : @titre@',
 	'info_propose_2' => 'Artìculu prupostu
 ---------------',
-	'info_propose_3' => 'L\'artìculu "@titre@" hè prupostu à a pubblicazione.',
+	'info_propose_3' => 'L’artìculu "@titre@" hè prupostu à a pubblicazione.',
 	'info_propose_4' => 'Site puru invitatu à vene è cunsultà lu per dà u vostru parè',
-	'info_propose_5' => 'in u foru à ellu assuciatu. Hè dispunìbule à l\'indirizzu :',
-	'info_publie_01' => 'L\'article "@titre@" hè statu cunvalidatu da @connect_nom@.',
+	'info_propose_5' => 'in u foru à ellu assuciatu. Hè dispunìbule à l’indirizzu :',
+	'info_publie_01' => 'L’article "@titre@" hè statu cunvalidatu da @connect_nom@.',
 	'info_publie_1' => '[@nom_site_spip@] PUBBLICATU : @titre@',
 	'info_publie_2' => 'Artìculu pubblicatu
 --------------',
@@ -450,7 +450,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sites_un' => '1 situ',
 	'info_supprimer_vignette' => 'sguassà a figuretta',
 	'info_symbole_bleu' => 'U sìmbulu <b>turchinu</b> indetta un <b>mementu</b>: vale à dì un messagiu à usu persunale vostru.',
-	'info_symbole_jaune' => 'U sìmbulu <b>giallu</b> indetta un <b>annunciu à tuttu i scrittori</b> : mudifichèvule da tutti l\'amministratori, è visìbule da tutti i scrittori.',
+	'info_symbole_jaune' => 'U sìmbulu <b>giallu</b> indetta un <b>annunciu à tuttu i scrittori</b> : mudifichèvule da tutti l’amministratori, è visìbule da tutti i scrittori.',
 	'info_symbole_vert' => 'U sìmbulu <b>verde</b> indetta <b>messagi scambiati cù altri utilizatori</b> di u situ.',
 	'info_telecharger_nouveau_logo' => 'Scaricà un nuvellu logo :',
 	'info_telecharger_ordinateur' => 'Scaricà da u vostru urdinatore :',
@@ -461,7 +461,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_trop_resultat' => 'Troppu risultati per "@cherche_mot@" ; Precisate puru a ricerca.',
 	'info_utilisation_messagerie_interne' => 'Usate a messageria interna di u situ.',
 	'info_valider_lien' => 'cunvalidà sta lea',
-	'info_verifier_image' => ', verificate puru ch\'elle sò state trasferite cum\'ellu ci vole e vostre imàgini.',
+	'info_verifier_image' => ', verificate puru ch’elle sò state trasferite cum’ellu ci vole e vostre imàgini.',
 	'info_vignette_defaut' => 'Figuretta predefinita',
 	'info_vignette_personnalisee' => 'Figuretta persunalizata',
 	'info_visite' => 'vìsita :',
@@ -470,11 +470,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_poids_fichier' => 'Taglia',
-	'lien_afficher_icones_seuls' => 'Fà cumparisce solu l\'icone',
-	'lien_afficher_texte_icones' => 'Fà cumparisce l\'icone cù u testu',
+	'lien_afficher_icones_seuls' => 'Fà cumparisce solu l’icone',
+	'lien_afficher_texte_icones' => 'Fà cumparisce l’icone cù u testu',
 	'lien_afficher_texte_seul' => 'Fà cumparisce solu u testu',
 	'lien_liberer' => 'liberà',
-	'lien_liberer_tous' => 'liberà st\'artìculi', # MODIF
+	'lien_liberer_tous' => 'liberà st’artìculi', # MODIF
 	'lien_nouvea_pense_bete' => 'NUVELLU MEMENTU',
 	'lien_nouveau_message' => 'NUVELLU MESSAGIU',
 	'lien_nouvelle_annonce' => 'NUVELLU ANNUNCIU',
@@ -487,13 +487,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_tout_afficher' => 'Fà cumparisce tuttu',
 	'lien_visite_site' => 'visità stu situ',
 	'lien_visites' => '@visites@ vìsite',
-	'lien_voir_auteur' => 'Vede st\'autore',
+	'lien_voir_auteur' => 'Vede st’autore',
 	'ligne' => 'Ligna',
 	'login' => 'Cunnessione',
 	'login_acces_prive' => 'accessu à u spaziu privatu',
 	'login_autre_identifiant' => 'cunnette si cù un altru còdice',
-	'login_cookie_accepte' => 'Parametrate puru u vostru navigatore di manera ch\'ellu l\'accetti (omancu per u situ).',
-	'login_cookie_oblige' => 'Duvite accettà i cookies da pudè identificà vi di modu sicuru nant\'à stu situ.',
+	'login_cookie_accepte' => 'Parametrate puru u vostru navigatore di manera ch’ellu l’accetti (omancu per u situ).',
+	'login_cookie_oblige' => 'Duvite accettà i cookies da pudè identificà vi di modu sicuru nant’à stu situ.',
 	'login_deconnexion_ok' => 'Scunnessione compia.',
 	'login_erreur_pass' => 'Errore di password.',
 	'login_espace_prive' => 'spaziu privatu',
@@ -503,12 +503,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_login_pass_incorrect' => '(Login o password sbagliatu.)',
 	'login_motpasseoublie' => 'password dimenticatu ?',
 	'login_non_securise' => 'Attenti, stu furmulariu ùn hè micca sicurizatu.
-			Sè vo ùn vulete chì u vostru password possi esse chjappu nant\'à a rete, attivate puru Javascript
+			Sè vo ùn vulete chì u vostru password possi esse chjappu nant’à a rete, attivate puru Javascript
 			in u vostru navigatore è',
 	'login_nouvelle_tentative' => 'Nuvella Prova',
 	'login_par_ici' => 'Site arregistratu ... per quindi ...',
 	'login_pass2' => 'Password :',
-	'login_preferez_refuser' => '<b>Sè vo preferite rifiutà i cookies</b>, v\'hè dispostu un altru mètudu di cunnessione (sicurizata di menu) :',
+	'login_preferez_refuser' => '<b>Sè vo preferite rifiutà i cookies</b>, v’hè dispostu un altru mètudu di cunnessione (sicurizata di menu) :',
 	'login_recharger' => 'ricaricà sta pàgina',
 	'login_rester_identifie' => 'Firmà cunnessi qualchì ghjornu',
 	'login_retour_public' => 'Ritornu à u situ pùbblicu',
@@ -525,13 +525,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'module_fichiers_langues' => 'Schedari di lingua',
 
 	// N
-	'navigateur_pas_redirige' => 'S\'ellu ùn hè rindirizzatu u vostru navigatore, cliccate puru quì per cuntinuà.',
+	'navigateur_pas_redirige' => 'S’ellu ùn hè rindirizzatu u vostru navigatore, cliccate puru quì per cuntinuà.',
 	'numero' => 'Nùmeru',
 
 	// O
 	'occurence' => 'Occurenza',
 	'onglet_affacer_base' => 'Sguassà a basa',
-	'onglet_auteur' => 'L\'autore',
+	'onglet_auteur' => 'L’autore',
 	'onglet_contenu_site' => 'Cuntenutu di u situ',
 	'onglet_evolution_visite_mod' => 'Evuluzione',
 	'onglet_fonctions_avances' => 'Funzioni avanzate',
@@ -547,19 +547,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pass_erreur' => 'Errore',
 	'pass_erreur_acces_refuse' => '<b>Errore :</b> ùn avete più accessu à stu situ.',
 	'pass_erreur_code_inconnu' => '<b>Errore :</b> stu còdice ùn currisponde à nisun utilizatore chì abbia acessu à stu situ.',
-	'pass_erreur_non_enregistre' => '<b>Errore :</b> l\'indirizzu <tt>@email_oubli@</tt> ùn hè micca arregistrata in stu situ.',
-	'pass_erreur_non_valide' => '<b>Errore :</b> st\'email <tt>@email_oubli@</tt> ùn hè micca vàlidu !',
-	'pass_erreur_probleme_technique' => '<b>Errore :</b> per via d\'un prublemu tècnicu, ùn pò micca esse mandatu l\'email.',
+	'pass_erreur_non_enregistre' => '<b>Errore :</b> l’indirizzu <tt>@email_oubli@</tt> ùn hè micca arregistrata in stu situ.',
+	'pass_erreur_non_valide' => '<b>Errore :</b> st’email <tt>@email_oubli@</tt> ùn hè micca vàlidu !',
+	'pass_erreur_probleme_technique' => '<b>Errore :</b> per via d’un prublemu tècnicu, ùn pò micca esse mandatu l’email.',
 	'pass_espace_prive_bla' => 'U spaziu privatu di stu situ hè apertu à i visitori, dopu iscritti. Arregistratu chè vo serete, 
-		puderete puru cunsultà l\'artìculi in corsu di scrittura, prupone artìculi è participà à tutti i fori.',
-	'pass_forum_bla' => 'Avete dumandatu à intervene nant\'à un foru riservatu à i visitori arregistrati.',
-	'pass_indiquez_cidessous' => 'Rinsignate puru quì sottu l\'indirizzu email cun chì erate digià arregistratu. Riceverete un email 
+		puderete puru cunsultà l’artìculi in corsu di scrittura, prupone artìculi è participà à tutti i fori.',
+	'pass_forum_bla' => 'Avete dumandatu à intervene nant’à un foru riservatu à i visitori arregistrati.',
+	'pass_indiquez_cidessous' => 'Rinsignate puru quì sottu l’indirizzu email cun chì erate digià arregistratu. Riceverete un email 
 			spieghendu vi cumu fà pè ricuarà u vostru accessu.',
 	'pass_mail_passcookie' => '(què hè un messagiu autumàticu)
 Pè ricuarà u vostru accessu à u situ
 @nom_site_spip@ (@adresse_site@)
 
-Andate puru à l\'indirizzu  :
+Andate puru à l’indirizzu  :
 
     @sendcookie@
 
@@ -577,7 +577,7 @@ Puderete tandu inserisce un nuvellu password
 	'pass_recevoir_mail' => 'Avete da riceve un email spieghendu vi cumu ricuarà u vostru accessu à u situ.',
 	'pass_retour_public' => 'Ritornu à u situ pùbblicu',
 	'pass_rien_a_faire_ici' => 'Nunda à fà quì.',
-	'pass_vousinscrire' => 'Iscrive vi nant\'à u situ',
+	'pass_vousinscrire' => 'Iscrive vi nant’à u situ',
 	'precedent' => 'precedente',
 	'previsualisation' => 'Vista in antìcipu',
 	'previsualiser' => 'Vede in antìcipu',
@@ -597,32 +597,32 @@ Puderete tandu inserisce un nuvellu password
 	'taille_ko' => '@taille@ ko',
 	'taille_mo' => '@taille@ Mo',
 	'taille_octets' => '@taille@ oct',
-	'texte_actualite_site_1' => 'Quand\'è vo serete pù pràticu cù l\'interfaccia, puderete cliccà nant\'à «',
+	'texte_actualite_site_1' => 'Quand’è vo serete pù pràticu cù l’interfaccia, puderete cliccà nant’à «',
 	'texte_actualite_site_2' => 'interfaccia sana',
 	'texte_actualite_site_3' => '» pè pudè apre di più pussibulità.',
-	'texte_creation_automatique_vignette' => 'Hè attivata nant\'à u situ a creazione di figurette pè a vista in antìcipu. 
+	'texte_creation_automatique_vignette' => 'Hè attivata nant’à u situ a creazione di figurette pè a vista in antìcipu. 
 				Sè vo stallate imàgini di furmatu/i @gd_formats@ usendu stu furmulariu, 
-				seranu accumpagnate da una figuretta d\'una taglia màsima di @taille_preview@ pixels.',
-	'texte_documents_associes' => 'I seguenti ducumenti sò assuciati à l\'artìculu,
+				seranu accumpagnate da una figuretta d’una taglia màsima di @taille_preview@ pixels.',
+	'texte_documents_associes' => 'I seguenti ducumenti sò assuciati à l’artìculu,
 				ma ùn sò micca stati direttamente inseriti.
-				Secondu cum\'ella hè definita a paginatura di u situ pùbblicu,
-				puderanu cumparisce cum\'è ducumenti alleati.',
+				Secondu cum’ella hè definita a paginatura di u situ pùbblicu,
+				puderanu cumparisce cum’è ducumenti alleati.',
 	'texte_erreur_mise_niveau_base' => 'Errore di basa di dati durante a messa à livellu.
-		L\'imàgine <b>@fichier@</b> ùn hè passata (artìculu @id_article@).
-		Tenite bè à mente sta riferenza, pruvate torna a messa à livellu, è infine verificate chì l\'imàgini
-		cumpariscanu sempre in l\'artìculi.',
-	'texte_erreur_visiteur' => 'Avete pruvatu d\'accede à u spaziu privatu cù un login chì ùn a permette micca.',
+		L’imàgine <b>@fichier@</b> ùn hè passata (artìculu @id_article@).
+		Tenite bè à mente sta riferenza, pruvate torna a messa à livellu, è infine verificate chì l’imàgini
+		cumpariscanu sempre in l’artìculi.',
+	'texte_erreur_visiteur' => 'Avete pruvatu d’accede à u spaziu privatu cù un login chì ùn a permette micca.',
 	'texte_inc_auth_1' => 'Site identificatu cù u login <b>@auth_login@</b>, ma questu ùn esiste micca/più in a basa.
 		Pruvate à',
 	'texte_inc_auth_2' => 'cunnette vi torna',
 	'texte_inc_auth_3' => ', dopu esse esciutu; poi aprite torna u navigatore.',
-	'texte_inc_config' => 'E mudìfiche fatte in ste pàgine pesanu assai nant\'à u funziunamentu di u vostru situ. 
-  Vi cunsigliemu d\'ùn fà ci interventi fintantu chì ùn serete abbastanza pràticu cù u funziunamentu di u sistema SPIP. <br /><br />
-  <b>sia cum\'ella sia, hè arricumandatu assai di lascià a gestione di ste pàgine à u webmaestru di u vostru situ.</b>',
+	'texte_inc_config' => 'E mudìfiche fatte in ste pàgine pesanu assai nant’à u funziunamentu di u vostru situ. 
+  Vi cunsigliemu d’ùn fà ci interventi fintantu chì ùn serete abbastanza pràticu cù u funziunamentu di u sistema SPIP. <br /><br />
+  <b>sia cum’ella sia, hè arricumandatu assai di lascià a gestione di ste pàgine à u webmaestru di u vostru situ.</b>',
 	'texte_inc_meta_1' => 'U sistema hà scontru un errore mentre a scrittura di u schedariu <code>@fichier@</code>. 
 			Intantu chè amministratore di u situ,',
 	'texte_inc_meta_2' => 'verificate puru i diritti di scrittura',
-	'texte_inc_meta_3' => 'nant\'à u cartulare <code>@repertoire@</code>.',
+	'texte_inc_meta_3' => 'nant’à u cartulare <code>@repertoire@</code>.',
 	'texte_statut_en_cours_redaction' => 'in corsu di scrittura',
 	'texte_statut_poubelle' => 'à a rumènzula',
 	'texte_statut_propose_evaluation' => 'prupostu à a valutazione',
@@ -630,17 +630,17 @@ Puderete tandu inserisce un nuvellu password
 	'texte_statut_refuse' => 'rifiutatu',
 	'titre_ajouter_mot_cle' => 'AGHJUNGHJE UN SEGNU :',
 	'titre_cadre_raccourcis' => 'ACCURTATOGHJI :',
-	'titre_changer_couleur_interface' => 'Scambià u culore di l\'interfaccia',
-	'titre_image_admin_article' => 'Pudete amministrà st\'artìculu',
+	'titre_changer_couleur_interface' => 'Scambià u culore di l’interfaccia',
+	'titre_image_admin_article' => 'Pudete amministrà st’artìculu',
 	'titre_image_administrateur' => 'Amministratore',
-	'titre_image_aide' => 'Aiutu nant\'à st\'elementu',
+	'titre_image_aide' => 'Aiutu nant’à st’elementu',
 	'titre_image_auteur_supprime' => 'Autore sguassatu',
 	'titre_image_redacteur' => 'Scrittore senza accessu',
 	'titre_image_redacteur_02' => 'Scrittore',
 	'titre_image_visiteur' => 'Visitore',
 	'titre_joindre_document' => 'ALLEà UN DUCUMENTU',
 	'titre_mots_cles' => 'SEGNI',
-	'titre_probleme_technique' => 'Attenti : un prublemu tècnicu (servore SQL) impedisce l\'accessu à sta parte di u situ.',
+	'titre_probleme_technique' => 'Attenti : un prublemu tècnicu (servore SQL) impedisce l’accessu à sta parte di u situ.',
 	'titre_publier_document' => 'PUBBLICà UN DUCUMENTU IN STA RÙBBRICA',
 	'titre_signatures_attente' => 'Zifre in attesa di cunvalidazione',
 	'titre_signatures_confirmees' => 'Zifre cunfirmate',
@@ -652,12 +652,12 @@ Puderete tandu inserisce un nuvellu password
 	// Z
 	'zbug_balise_b_aval' => ' : balisa B più in dà',
 	'zbug_balise_inexistante' => 'errore @from@: a balisa #@balise@ ùn esiste micca',
-	'zbug_balise_sans_argument' => 'Ci manca l\'argumentu in a balisa @balise@',
+	'zbug_balise_sans_argument' => 'Ci manca l’argumentu in a balisa @balise@',
 	'zbug_boucle' => 'cìculu',
 	'zbug_boucle_recursive_undef' => 'cìculu ricursivu indefinitu',
 	'zbug_calcul' => 'càlculu',
 	'zbug_champ_hors_boucle' => 'Campu @champ@ hors boucle',
-	'zbug_champ_hors_motif' => 'Campu @champ@ hors d\'une boucle de motif @motif@',
+	'zbug_champ_hors_motif' => 'Campu @champ@ hors d’une boucle de motif @motif@',
 	'zbug_code' => 'còdice',
 	'zbug_critere_inconnu' => 'criteriu scunnisciutu @critere@',
 	'zbug_distant_interdit' => 'esternu interdettu', # Contexte : une base de données "externe", pas gérée par SPIP, mais que SPIP 1.8 sait utiliser dans ses boucles -- seul problèmes certaines manipulations sont interdites sur ces bases-là.
@@ -667,15 +667,15 @@ Puderete tandu inserisce un nuvellu password
 	'zbug_erreur_boucle_fermant' => 'CìCULU@id@: ci manca u tag di chjusura',
 	'zbug_erreur_boucle_syntaxe' => 'Sintassa di cìculu sbagliata',
 	'zbug_erreur_compilation' => 'Errore di cumpilazione',
-	'zbug_erreur_execution_page' => 'errore d\'eseguimentu di a pàgina',
+	'zbug_erreur_execution_page' => 'errore d’eseguimentu di a pàgina',
 	'zbug_erreur_filtre' => 'Errore : stacciu <b>« @filtre@ »</b> indefinitu',
 	'zbug_erreur_meme_parent' => '{meme_parent} pò esse appiecatu solu à i cìculi (FORI) o (RùBBRICHE)',
 	'zbug_erreur_squelette' => 'Errore/i in u mudellu',
 	'zbug_hors_compilation' => 'Fora di cumpilazione',
-	'zbug_info_erreur_squelette' => 'Errore nant\'à u situ',
-	'zbug_inversion_ordre_inexistant' => 'inversione d\'un òrdine inesistente',
+	'zbug_info_erreur_squelette' => 'Errore nant’à u situ',
+	'zbug_inversion_ordre_inexistant' => 'inversione d’un òrdine inesistente',
 	'zbug_pagination_sans_critere' => '#PAGINATION senza criteriu {pagination} o puru impiegatu in un cìculu ricursivu',
-	'zbug_parametres_inclus_incorrects' => 'Paràmetri d\'inclusione sbagliati',
+	'zbug_parametres_inclus_incorrects' => 'Paràmetri d’inclusione sbagliati',
 	'zbug_profile' => 'Tempu di càlculu : @time@',
 	'zbug_resultat' => 'risultatu',
 	'zbug_serveur_indefini' => 'servore SQL indefinitu',
@@ -694,7 +694,7 @@ Puderete tandu inserisce un nuvellu password
 	'zxml_obligatoire_attribut' => 'attributu ubbligatoriu ma inesistente in',
 	'zxml_succession_fils_incorrecte' => 'eredità di i figlioli sbagliata',
 	'zxml_survoler' => 'passà sopra cù u topu pè vede quelli curretti',
-	'zxml_valeur_attribut' => 'valore di l\'attributu',
+	'zxml_valeur_attribut' => 'valore di l’attributu',
 	'zxml_vide_balise' => 'balisa viota',
 	'zxml_vu' => 'vistu prima'
 );

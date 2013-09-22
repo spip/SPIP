@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'afficher_calendrier' => 'Montri la kalendaro',
 	'afficher_trad' => 'afiŝi la tradukojn',
 	'alerte_maj_impossible' => '<b>Alarmo !</b> La ĝisdatigo de la SQL-datenbazo al versio @version@ ne eblas pro datenbazo-modif-rajtaj kialoj. Bonvolu kontakti vian retgastiganton.',
-	'alerte_modif_info_concourante' => 'ATENTU : Tiu ĉi informo estis modifita de alia homo. La nuna stato estas :',
+	'alerte_modif_info_concourante' => 'ATENTU : Tiu ĉi informo estis modifita de alia homo. La nuna stato estas :',
 	'analyse_xml' => 'XML analizo',
 	'annuler' => 'Nuligi',
 	'antispam_champ_vide' => 'Bonvolu forlasi tiun tajpujon malplena :',
@@ -36,12 +36,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_attention' => 'ATENTU !',
 	'avis_champ_incorrect_type_objet' => 'Erara tajpuja nomo @name@ por la objekto de tipo @type@',
 	'avis_colonne_inexistante' => 'La kolumno @col@ ne ekzistas',
-	'avis_erreur' => 'Eraro: vidu ĉi-sube',
+	'avis_erreur' => 'Eraro : vidu ĉi-sube',
 	'avis_erreur_connexion' => 'Konekt-eraro',
 	'avis_erreur_cookie' => 'kuketo-problemo',
 	'avis_erreur_fonction_contexte' => 'Program-eraro. Tiu funkcio ne alvokeblas en tiu ĉi kunteksto.',
 	'avis_erreur_mysql' => 'SQL-eraro',
-	'avis_erreur_sauvegarde' => 'Konservo-eraro (@type@ @id_objet@)! ',
+	'avis_erreur_sauvegarde' => 'Konservo-eraro (@type@ @id_objet@) ! ',
 	'avis_erreur_visiteur' => 'Alir-problemo al la privata spaco',
 
 	// B
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_eo_maj' => 'Entajpi E en la ĉeflitero O',
 	'barre_euro' => 'Entajpi la simbolon €',
 	'barre_gras' => '{{Grasigi}}',
-	'barre_guillemets' => 'Flanki per « citiloj »',
+	'barre_guillemets' => 'Flanki per « citiloj »',
 	'barre_guillemets_simples' => 'Flanki per simplaj citiloj',
 	'barre_intertitre' => '{{{Intertitoligi}}}',
 	'barre_italic' => '{Kursivigi}',
@@ -86,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_couleur_interface' => 'koloro',
 	'choix_interface' => 'elekto de interfaco',
 	'colonne' => 'Kolumno',
-	'confirm_changer_statut' => 'Atentu, vi petis por ŝanĝi la statuton de tiu elemento. Ĉu vi deziras daŭrigi ?',
+	'confirm_changer_statut' => 'Atentu, vi petis por ŝanĝi la statuton de tiu elemento. Ĉu vi deziras daŭrigi ?',
 	'correcte' => 'korekta',
 
 	// D
@@ -215,11 +215,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_une_seconde' => 'sekundo',
 	'date_une_semaine' => 'semajno',
 	'dirs_commencer' => ' por vere komenci la instalprocezon',
-	'dirs_preliminaire' => 'Antaŭfaro: <b>Difinu la alir-rajtojn</b>',
+	'dirs_preliminaire' => 'Antaŭfaro : <b>Difinu la alir-rajtojn</b>',
 	'dirs_probleme_droits' => 'Alir-rajta problemo',
 	'dirs_repertoires_absents' => '<b>La jenaj dosierujoj ne estas trovitaj : <ul>@bad_dirs@.</ul> </b>
   <p>La problemo verŝajne rilatas al majuskligo de literoj.
-  Kontrolu ke la majuskloj ja kongruas kun tio kio estas afiŝita ĉi-supre;
+  Kontrolu ke la majuskloj ja kongruas kun tio kio estas afiŝita ĉi-supre ;
   se ili ne kongruas, bonvolu renomi la dosierujon per via FTP-programo por korekti la eraron.
 </p><p>Post tio, vi povos</p>',
 	'dirs_repertoires_suivants' => '<b>La jenaj dosierujoj ne estas skribe modifeblaj : 
@@ -233,7 +233,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'en_cours' => 'okazanta',
 	'envoi_via_le_site' => 'Sendo tra la retejo',
 	'erreur' => 'Eraro',
-	'erreur_balise_non_fermee' => 'lasta ne fermita marko :',
+	'erreur_balise_non_fermee' => 'lasta ne fermita marko :',
 	'erreur_technique_enregistrement_champs' => 'Teknika eraro neebligis la ĝustan registradon de la kampo @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Teknika eraro neebligis la registradon.',
 	'erreur_texte' => 'eraro(j)',
@@ -248,24 +248,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 Vi petis ŝanĝi vian retpoŝtadreson.
 Por konfirmi vian novan retadreson, simple ensaluti al
-la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
+la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 
     @url@',
 	'form_deja_inscrit' => 'Vi estas jam registrita.',
 	'form_email_non_valide' => 'Via retpoŝtadreso ne validas.',
 	'form_forum_access_refuse' => 'Vi ne plu havas alir-rajton al tiu retejo.',
 	'form_forum_bonjour' => 'Saluton @nom@,',
-	'form_forum_confirmer_email' => 'Por konfirmi vian retpoŝtadreson, iru al tiu retadreso : @url_confirm@',
+	'form_forum_confirmer_email' => 'Por konfirmi vian retpoŝtadreson, iru al tiu retadreso : @url_confirm@',
 	'form_forum_email_deja_enregistre' => 'Tiu ĉi retpoŝtadreso estas jam registrita, vi povas do uzi vian kutiman pasvorton.',
 	'form_forum_identifiant_mail' => 'Via nova ensalutilo estis ĵus al vi sendita per retletero.',
 	'form_forum_identifiants' => 'Personaj ensalutiloj',
 	'form_forum_indiquer_nom_email' => 'Indiku ĉi tie vian nomon kaj retpoŝtadreson. Via persona ensalutilo rapide alvenos al vi retletere.',
-	'form_forum_login' => 'salutnomo :',
+	'form_forum_login' => 'salutnomo :',
 	'form_forum_message_auto' => '(tio estas aŭtomata mesaĝo)',
-	'form_forum_pass' => 'pasvorto :',
+	'form_forum_pass' => 'pasvorto :',
 	'form_forum_probleme_mail' => 'Retpoŝta problemo : la ensalutilo ne sendeblas.',
-	'form_forum_voici1' => 'Jen viaj ensalutiloj por partopreni la vivon de la retejo "@nom_site_spip@" (@adresse_site@):',
-	'form_forum_voici2' => 'Jen estas viaj ensalutiloj por proponi artikolojn ĉe la retejo "@nom_site_spip@" (@adresse_login@):',
+	'form_forum_voici1' => 'Jen viaj ensalutiloj por partopreni la vivon de la retejo "@nom_site_spip@" (@adresse_site@) :',
+	'form_forum_voici2' => 'Jen estas viaj ensalutiloj por proponi artikolojn ĉe la retejo "@nom_site_spip@" (@adresse_login@) :',
 	'form_indiquer_email' => 'Bonvolu indiki vian retpoŝtadreson.',
 	'form_indiquer_nom' => 'Bonvolu indiki vian nomon.',
 	'form_indiquer_nom_site' => 'Bonvolu indiki la nomon de via retejo.',
@@ -287,8 +287,8 @@ la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 	'forum_titre_erreur' => 'Eraro...',
 
 	// I
-	'ical_texte_rss_articles' => 'La abondosiero (backend-dosiero) de la artikoloj de tiu retejo troveblas ĉe la retadreso :',
-	'ical_texte_rss_articles2' => 'Sube, vi povas trovi abonligojn por gvati evoluadon de artikoloj el ĉiu rubriko de la retejo:',
+	'ical_texte_rss_articles' => 'La abondosiero (backend-dosiero) de la artikoloj de tiu retejo troveblas ĉe la retadreso :',
+	'ical_texte_rss_articles2' => 'Sube, vi povas trovi abonligojn por gvati evoluadon de artikoloj el ĉiu rubriko de la retejo :',
 	'ical_texte_rss_breves' => 'Krome ekzistas dosiero enhavanta ĉiujn fulm-informojn de la retejo. Precizigante la rubriko-numeron, vi ricevos nur la fulm-informojn el tiu rubriko.',
 	'icone_a_suivre' => 'Stabejo',
 	'icone_admin_site' => 'Reteja administrado',
@@ -335,10 +335,10 @@ la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 	'info_a_suivre' => 'STABEJO »',
 	'info_acces_interdit' => 'Malpermesata aliro',
 	'info_acces_refuse' => 'Rifuzita aliro',
-	'info_action' => 'Ago : @action@',
+	'info_action' => 'Ago : @action@',
 	'info_administrer_rubriques' => 'Vi povas mastrumi tiun rubrikon kaj ties subrubrikojn',
 	'info_adresse_non_indiquee' => 'Vi indikis neniun adreson por testi !',
-	'info_aide' => 'HELPO:',
+	'info_aide' => 'HELPO :',
 	'info_ajouter_mot' => 'Aldoni tiun vorton',
 	'info_annonce' => 'ANONCO',
 	'info_annonces_generales' => 'Ĝeneralaj anoncoj :',
@@ -381,19 +381,19 @@ la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 	'info_en_cours_validation' => 'Viaj redaktataj artikoloj',
 	'info_en_ligne' => 'Nun ĉerete :',
 	'info_envoyer_message_prive' => 'Sendi privatan mesaĝon al tiu ĉi aŭtoro',
-	'info_erreur_requete' => 'Eraro en la peto: ',
+	'info_erreur_requete' => 'Eraro en la peto : ',
 	'info_erreur_squelette2' => 'Neniu skeleto <b>@fichier@</b> disponeblas...',
 	'info_erreur_systeme' => 'Sistemo-eraro (errno @errsys@)',
 	'info_erreur_systeme2' => 'Eble la fiksdisko plenas, aŭ la datenbazo estas difektita. <br />
- <font color=\'red\'>Provu<a href=\'@script@\'>ripari la datenbazon</a>,
+ <font color=’red’>Provu<a href=’@script@’>ripari la datenbazon</a>,
  aŭ kontaktu vian retgastiganton.</font></br>',
-	'info_fini' => 'Finite !',
+	'info_fini' => 'Finite !',
 	'info_format_image' => 'Bildaj formatoj uzeblaj por krei vinjetojn : @gd_formats@.',
 	'info_format_non_defini' => 'nedefinita formato',
 	'info_grand_ecran' => 'Granda ekrano',
 	'info_image_aide' => 'HELPILO',
 	'info_image_process_titre' => 'Metodo pri vinjet-farado',
-	'info_impossible_lire_page' => '<b>Eraro!</b> Ne eblas legi la paĝon <tt> <html>@test_proxy@</html> </tt> tra la prokura servilo <tt>',
+	'info_impossible_lire_page' => '<b>Eraro !</b> Ne eblas legi la paĝon <tt> <html>@test_proxy@</html> </tt> tra la prokura servilo <tt>',
 	'info_installation_systeme_publication' => 'Instalo de la publikiga sistemo...',
 	'info_installer_documents' => 'Vi povas aŭtomate instali ĉiujn dokumentojn troviĝantajn en la dosiero @upload@.',
 	'info_installer_ftp' => 'Kiel mastrumanto, vi povas instali (FTP-e) dosierojn en la dosierujon @upload@ kaj poste rekte selekti ilin ĉi tie.',
@@ -419,7 +419,7 @@ la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 	'info_messages_un' => '1 mesaĝo',
 	'info_mise_en_ligne' => 'Dato de ĉeretigo : ',
 	'info_modification_parametres_securite' => 'modifoj de la sekuraj parametroj',
-	'info_mois_courant' => 'En la kuranta monato :',
+	'info_mois_courant' => 'En la kuranta monato :',
 	'info_mot_cle_ajoute' => 'La jena ŝlosilvorto estas ligita kun',
 	'info_multi_herit' => 'Defaŭlta lingvo',
 	'info_multi_langues_soulignees' => 'Por la <u>substrekitaj lingvoj</u>, ĉiuj tekstoj de la interfaco estas tute aŭ parte tradukitaj. Kiam vi elektas tiujn lingvojn, multaj elementoj de la publika retejo (datenoj, formularoj) estos aŭtomate tradukitaj. Por la nesubstrekitaj lingvoj, tiuj elementoj afiŝiĝos en la ĉefa lingvo de la retejo.',
@@ -437,18 +437,18 @@ la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 	'info_petit_ecran' => 'Eta ekrano',
 	'info_petition_close' => 'Petskribo fermita',
 	'info_pixels' => 'bilderoj',
-	'info_plusieurs_mots_trouves' => 'Pluraj ŝlosilvortoj trovitaj por "@cherche_mot@":',
+	'info_plusieurs_mots_trouves' => 'Pluraj ŝlosilvortoj trovitaj por "@cherche_mot@" :',
 	'info_portfolio_automatique' => 'Aŭtomata bildaro :',
 	'info_premier_resultat' => '[@debut_limit@ unuaj rezultoj el @total@]',
 	'info_premier_resultat_sur' => '[@debut_limit@ unuaj rezultoj el @total@]',
-	'info_propose_1' => '[@nom_site_spip@] Proponas: @titre@',
+	'info_propose_1' => '[@nom_site_spip@] Proponas : @titre@',
 	'info_propose_2' => 'Proponita artikolo
 ---------------',
 	'info_propose_3' => 'La artikolo "@titre@" estas proponita por publikigo.',
 	'info_propose_4' => 'Vi estas petata konsulti ĝin kaj doni vian opinion',
-	'info_propose_5' => 'en la forumo ligita al ĝi. Ĝi estas disponebla el la adreso:',
+	'info_propose_5' => 'en la forumo ligita al ĝi. Ĝi estas disponebla el la adreso :',
 	'info_publie_01' => 'La artikolo "@titre@" estis validigita de @connect_nom@.',
-	'info_publie_1' => '[@nom_site_spip@] PUBLIKIGAS: @titre@',
+	'info_publie_1' => '[@nom_site_spip@] PUBLIKIGAS : @titre@',
 	'info_publie_2' => 'Artikolo publikigita
 --------------',
 	'info_rechercher' => 'Serĉi',
@@ -462,7 +462,7 @@ la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 	'info_sites_nb' => '@nb@ retejoj',
 	'info_sites_un' => '1 retejo',
 	'info_supprimer_vignette' => 'forigi la vinjeton',
-	'info_symbole_bleu' => 'La <b>blua</b> simbolo indikas <b>memorigilon</b> : tio estas al vi persone adresata memoriga mesaĝo.',
+	'info_symbole_bleu' => 'La <b>blua</b> simbolo indikas <b>memorigilon</b> : tio estas al vi persone adresata memoriga mesaĝo.',
 	'info_symbole_jaune' => 'La <b>flava</b> simbolo indikas <b>anoncon al ĉiuj redaktantoj</b> : modifebla de ĉiuj mastrumantoj, kaj videbla de ĉiuj redaktantoj.',
 	'info_symbole_vert' => 'La <b>verda</b> simbolo indikas la <b>mesaĝojn interŝanĝitajn kun aliaj uzantoj</b> de la retejo.',
 	'info_telecharger_nouveau_logo' => 'Alŝuti novan vinjeton :',
@@ -471,13 +471,13 @@ la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 	'info_tout_afficher' => 'Ĉion afiŝi',
 	'info_travaux_texte' => 'Tiu retejo ne jam estas konfigurita. Bonvolu reveni poste...',
 	'info_travaux_titre' => 'Retejo prilaborata ',
-	'info_trop_resultat' => 'Tro da rezultoj por "@cherche_mot@"; bonvolu fajnigi la serĉokriteriojn.',
+	'info_trop_resultat' => 'Tro da rezultoj por "@cherche_mot@" ; bonvolu fajnigi la serĉokriteriojn.',
 	'info_utilisation_messagerie_interne' => 'Vi uzas la internan poŝton de tiu ĉi retejo.',
 	'info_valider_lien' => 'validigi tiun ĉi ligilon',
 	'info_verifier_image' => ', bonvolu kontroli ĉu viaj bildoj estas trafe transigitaj.',
 	'info_vignette_defaut' => 'Defaŭlta vinjeto',
 	'info_vignette_personnalisee' => 'Persona vinjeto',
-	'info_visite' => 'vizito :',
+	'info_visite' => 'vizito :',
 	'info_vos_rendez_vous' => 'Viaj estontaj rendevuoj',
 	'infos_vos_pense_bete' => 'Viaj memorigiloj',
 
@@ -511,12 +511,12 @@ la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 	'login_deconnexion_ok' => 'Elsalutinta.',
 	'login_erreur_pass' => 'Pasvort-eraro.',
 	'login_espace_prive' => 'privata spaco',
-	'login_identifiant_inconnu' => 'La salutnomo « @login@ » estas nekonata.',
-	'login_login' => 'Salutnomo:',
-	'login_login2' => 'Salutnomo aŭ retpoŝtadreso :',
+	'login_identifiant_inconnu' => 'La salutnomo « @login@ » estas nekonata.',
+	'login_login' => 'Salutnomo :',
+	'login_login2' => 'Salutnomo aŭ retpoŝtadreso :',
 	'login_login_pass_incorrect' => '(Salutnomo aŭ pasvorto ne valida.)',
 	'login_motpasseoublie' => 'ĉu pasvorto forgesita ?',
-	'login_non_securise' => 'Atentu, tiu formularo ne estas sekurigita;.
+	'login_non_securise' => 'Atentu, tiu formularo ne estas sekurigita ;.
    Se vi ne volas ke via pasvorto estu fraŭde
    interkaptita ĉe la reto, bonvolu aktivigi
    Javascript-on en via retumilo',
@@ -559,13 +559,13 @@ la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 	'onglet_vider_cache' => 'Malplenigi la staplon',
 
 	// P
-	'pass_choix_pass' => 'Bonvolu elekti vian novan pasvorton:',
+	'pass_choix_pass' => 'Bonvolu elekti vian novan pasvorton :',
 	'pass_erreur' => 'Eraro',
-	'pass_erreur_acces_refuse' => '<b>Eraro:</b> vi ne plu havas aliron al tiu retejo.',
-	'pass_erreur_code_inconnu' => '<b>Eraro:</b> tiu kodo kongruas kun neniu el la vizitantoj rajtantaj aliri tiun ĉi retejon.',
-	'pass_erreur_non_enregistre' => '<b>Eraro :</b> la retpoŝtadreso <tt>@email_oubli@</tt> ne estas registrita ĉi tie.',
-	'pass_erreur_non_valide' => '<b>Eraro :</b> tiu retpoŝtadreso <tt>@email_oubli@</tt> ne validas!',
-	'pass_erreur_probleme_technique' => '<b>Eraro :</b> pro teknika problemo, la retmesaĝo ne povas esti sendata.',
+	'pass_erreur_acces_refuse' => '<b>Eraro :</b> vi ne plu havas aliron al tiu retejo.',
+	'pass_erreur_code_inconnu' => '<b>Eraro :</b> tiu kodo kongruas kun neniu el la vizitantoj rajtantaj aliri tiun ĉi retejon.',
+	'pass_erreur_non_enregistre' => '<b>Eraro :</b> la retpoŝtadreso <tt>@email_oubli@</tt> ne estas registrita ĉi tie.',
+	'pass_erreur_non_valide' => '<b>Eraro :</b> tiu retpoŝtadreso <tt>@email_oubli@</tt> ne validas !',
+	'pass_erreur_probleme_technique' => '<b>Eraro :</b> pro teknika problemo, la retmesaĝo ne povas esti sendata.',
 	'pass_espace_prive_bla' => 'La privata spaco de tiu ĉi retejo estas malfermita al
   vizitantoj, post ties registriĝo. Tio farita, vi povos
   konsulti la redaktatajn artikolojn, proponi artikolojn
@@ -580,7 +580,7 @@ la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 Por reakiri alireblon al la retejo
 @nom_site_spip@ (@adresse_site@)
 
-Bonvolu iri al la jena adreso:
+Bonvolu iri al la jena adreso :
 
     @sendcookie@
 
@@ -595,7 +595,7 @@ kaj ensaluti.
 	'pass_oubli_mot' => 'Pasvorto-forgeso',
 	'pass_procedure_changer' => 'Por ŝanĝi vian pasvorton, ni unue devas kontroli vian identecon. Por tio, specifu al ni la asociitan retpoŝtadreson el via konto.',
 	'pass_quitter_fenetre' => 'Forlasi tiun fenestron',
-	'pass_rappel_login' => 'Memoru: via ensalutilo (salutnomo) estas « @login@ ».',
+	'pass_rappel_login' => 'Memoru : via ensalutilo (salutnomo) estas « @login@ ».',
 	'pass_recevoir_mail' => 'Vi ricevos retmesaĝon indikantan al vi kiel retrovi vian aliron al la retejo.',
 	'pass_retour_public' => 'Reen al la publika spaco',
 	'pass_rien_a_faire_ici' => 'Nenion por fari ĉi tie.',
@@ -608,7 +608,7 @@ kaj ensaluti.
 	'retour' => 'Reen',
 
 	// S
-	'spip_conforme_dtd' => 'SPIP konsideras tiun dokumenton konforma al sia DOCTYPE :',
+	'spip_conforme_dtd' => 'SPIP konsideras tiun dokumenton konforma al sia DOCTYPE :',
 	'squelette' => 'skeleto',
 	'squelette_inclus_ligne' => 'skeleto inkluzivita, linio',
 	'squelette_ligne' => 'skeleto, linio',
@@ -620,9 +620,9 @@ kaj ensaluti.
 	'taille_ko' => '@taille@ kb',
 	'taille_mo' => '@taille@ Mb',
 	'taille_octets' => '@taille@ bitokoj',
-	'texte_actualite_site_1' => 'Kiam vi estos kutimiĝinta kun la interfaco, vi povos musklaki sur «',
+	'texte_actualite_site_1' => 'Kiam vi estos kutimiĝinta kun la interfaco, vi povos musklaki sur « ',
 	'texte_actualite_site_2' => 'kompleta interfaco',
-	'texte_actualite_site_3' => '» por malfermi pliajn eblecojn.',
+	'texte_actualite_site_3' => ' » por malfermi pliajn eblecojn.',
 	'texte_creation_automatique_vignette' => 'La aŭtomata kreado de antaŭrigardaj vinjetoj estas aktivigita ĉe tiu ĉi retejo. Se vi instalas pere de tiu ĉi formularo bildojn je la formato(j) @gd_formats@, ili estos akompanataj de vinjeto kun maksimuma grandeco de @taille_preview@ bilderoj.',
 	'texte_documents_associes' => 'La sekvantaj dokumentoj estas asociitaj al la artikolo,
     sed ili ne estis rekte enmetitaj en ĝin.
@@ -653,8 +653,8 @@ sub la respondeco de la ĉefa retejestro .</b>',
 	'texte_statut_propose_evaluation' => 'proponita por taksado',
 	'texte_statut_publie' => 'rete publikigita',
 	'texte_statut_refuse' => 'rifuzita',
-	'titre_ajouter_mot_cle' => 'ALDONI ŜLOSILVORTON:',
-	'titre_cadre_raccourcis' => 'RAPIDAJ ALIROJ:',
+	'titre_ajouter_mot_cle' => 'ALDONI ŜLOSILVORTON :',
+	'titre_cadre_raccourcis' => 'RAPIDAJ ALIROJ :',
 	'titre_changer_couleur_interface' => 'Ŝanĝi la koloron de la interfaco',
 	'titre_image_admin_article' => 'Vi povas mastrumi tiun ĉi artikolon',
 	'titre_image_administrateur' => 'Mastrumanto',
@@ -679,7 +679,7 @@ sub la respondeco de la ĉefa retejestro .</b>',
 	'zbug_balise_inexistante' => 'Marko @balise@ malbone deklarita por @from@',
 	'zbug_balise_sans_argument' => 'Mankas argumento en la marko @balise@',
 	'zbug_boucle' => 'iteracio',
-	'zbug_boucle_recursive_undef' => 'Nedifinita rekursia iteracio : @nom@',
+	'zbug_boucle_recursive_undef' => 'Nedifinita rekursia iteracio : @nom@',
 	'zbug_calcul' => 'komputado',
 	'zbug_champ_hors_boucle' => 'Kampo @champ@ eksteras iteracion',
 	'zbug_champ_hors_motif' => 'Kampo @champ@ eksteras kontekston @motif@',
@@ -700,12 +700,12 @@ sub la respondeco de la ĉefa retejestro .</b>',
 	'zbug_info_erreur_squelette' => 'Eraro ĉe la retejo',
 	'zbug_inversion_ordre_inexistant' => 'Inversigo de ne ekzistanta ordo',
 	'zbug_pagination_sans_critere' => 'Marko #PAGINATION senkriteria {pagination} aŭ uzata en rekursia iteracio',
-	'zbug_parametres_inclus_incorrects' => 'Ne korektaj inkludaj parametroj : @param@',
+	'zbug_parametres_inclus_incorrects' => 'Ne korektaj inkludaj parametroj : @param@',
 	'zbug_profile' => 'Kalkuldaŭro : @time@',
 	'zbug_resultat' => 'rezulto',
 	'zbug_serveur_indefini' => 'Nedifinata SQL-servilo',
 	'zbug_statistiques' => 'statistikoj pri SQL-informpetoj ordigitaj laŭ daŭro',
-	'zbug_table_inconnue' => 'nekonata SQL « @table@ » tabelo',
+	'zbug_table_inconnue' => 'nekonata SQL « @table@ » tabelo',
 	'zxml_connus_attributs' => 'konataj atributoj',
 	'zxml_de' => 'de',
 	'zxml_inconnu_attribut' => 'nekonataj atributoj',

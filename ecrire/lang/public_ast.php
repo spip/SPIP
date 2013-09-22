@@ -11,10 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accueil_site' => 'Entamu del sitiu', # MODIF
 	'article' => 'Artículu',
 	'articles' => 'Artículos',
-	'articles_auteur' => 'Artículos d\'esti autor',
+	'articles_auteur' => 'Artículos d’esti autor',
 	'articles_populaires' => 'Los artículos más célebres',
-	'articles_rubrique' => 'Artículos d\'esta estaya',
-	'aucun_article' => 'N\'esta direición nun hai dengún artículu',
+	'articles_rubrique' => 'Artículos d’esta estaya',
+	'aucun_article' => 'N’esta direición nun hai dengún artículu',
 	'aucun_auteur' => 'Nesta direición nun hai dengún autor',
 	'aucun_site' => 'Nesta direición nun hai dengún sitiu',
 	'aucune_breve' => 'Nesta direición nun hai denguna breve',
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bonjour' => 'Bon día',
 
 	// C
-	'commenter_site' => 'Comentariu so\'l sitiu',
+	'commenter_site' => 'Comentariu so’l sitiu',
 	'copie_document_impossible' => 'Nun ye posible copiar el documentu',
 
 	// D
@@ -82,8 +82,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'páxina anterior',
 	'page_suivante' => 'páxina siguiente',
 	'par_auteur' => 'por ',
-	'participer_site' => 'Puedes participar na vida d\'esti sitiu y proponer los tos propios artículos apuntándote equí. Vas recibir de secute un corréu electrónicu colos tos códigos pa poder entrar nel espaciu privau del sitiu.',
-	'plan_site' => 'Mapa d\'esti sitiu',
+	'participer_site' => 'Puedes participar na vida d’esti sitiu y proponer los tos propios artículos apuntándote equí. Vas recibir de secute un corréu electrónicu colos tos códigos pa poder entrar nel espaciu privau del sitiu.',
+	'plan_site' => 'Mapa d’esti sitiu',
 	'popularite' => 'Popularidá',
 	'poster_message' => 'Unviar un mensaxe',
 	'proposer_site' => 'Puedes proponer un sitiu Web pa amestar nesta seición:',
@@ -114,7 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'ver_imprimer' => 'Versión pa imprentar',
 	'voir_en_ligne' => 'Velo en llínia',
-	'voir_squelette' => 'ver la cadarma d\'esta páxina'
+	'voir_squelette' => 'ver la cadarma d’esta páxina'
 );
 
 ?>

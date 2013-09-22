@@ -225,7 +225,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_classement_1' => ' out of @liste@',
 	'info_classement_2' => ' out of @liste@',
 	'info_code_acces' => 'កុំភ្លេច អក្សរកូដចូលទៅ ផ្ទាល់ខ្លួន របស់អ្នក!',
-	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
+	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l’hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
 	'info_config_suivi' => 'បើអាសយដ្ឋាននេះ ត្រូវតាម បញ្ជីផ្ញើមែវល៍, អ្នក អាចបង្ហាញខាងក្រោម អាសយដ្ឋាន ដែលពួកអ្នកចូលរួម សៃថ៍ អាចចុះឈ្មោះ។ អាសយដ្ឋាននេះ អាចជា មួយអាសយដ្ឋាន URL (ជា ឧទាហរ ទំព័រចុះឈ្មោះ ទៅបញ្ជី​តាមរយះវ៉ែប), ឬ អាសយដ្ឋានអ៊ីមែវល៍ បានមានប្រធានបទ ជាក់លាក់ (ជា ឧទាហរ៖ <tt>@adresse_suivi@?subject=subscribe</tt>)៖',
 	'info_config_suivi_explication' => 'អ្នក អាចជាវប្រចាំ ទៅបញ្ជីផ្ញើមែវល៍ នៃសៃថ៍នេះ។ អ្នក នឹងទទួលបាន តាមមែវល៍ រាល់ជំនូនដំណឹង នៃអត្ថបទ​និង​នៃពត៌មានខ្លី បានស្នើ សំរាប់ការបោះផ្សាយ។',
 	'info_confirmer_passe' => 'បញ្ជាក់ទទួលស្គាល់ ពាក្យសំងាត់ថ្មី៖',
@@ -356,7 +356,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_par_nom' => 'តាម​ឈ្មោះ',
 	'info_par_nombre_article' => 'តាម​ចំនួន​អត្ថបទ',
 	'info_par_statut' => 'តាម​ស្ថានភាព',
-	'info_par_tri' => '\'(by @tri@)\'',
+	'info_par_tri' => '’(by @tri@)’',
 	'info_passe_trop_court' => 'ពាក្យសំងាត់ ខ្លីពេក។',
 	'info_passes_identiques' => 'ពាក្យសំងាត់ ទាំងពីរ គ្មានដូចគ្នា។',
 	'info_pense_bete_ancien' => 'កំណត់​ហេ​ុ​ត​ចាស់​របស់​លោក​អ្នក', # MODIF
@@ -364,7 +364,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_plus_cinq_car_2' => '(​លើស​ពី ៥ អក្សរ​)',
 	'info_plus_trois_car' => '(​លើស​ពី ៣ អក្សរ​)',
 	'info_popularite' => 'ភាពពេញនិយម៖ ៖ @popularite@; ចំណូលមើល៖ @visites@',
-	'info_popularite_4' => 'ភាពប្រជាប្រិយ ៖  @popularite@; ចំណូលមើល ៖  @visites@',
+	'info_popularite_4' => 'ភាពប្រជាប្រិយ ៖ @popularite@; ចំណូលមើល ៖ @visites@',
 	'info_post_scriptum' => 'បដ្ឋនាលិខិត',
 	'info_post_scriptum_2' => 'បដ្ឋនាលិខិត',
 	'info_pour' => 'សំរាប់',
@@ -405,7 +405,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubriques_trouvees' => 'ផ្នែក ត្រូវបានរកឃើញ',
 	'info_rubriques_trouvees_dans_texte' => 'ផ្នែក​ដែល​ឃើញ​មាន (​នៅ​ក្នុង​អត្ថបទ​)',
 	'info_sans_titre' => 'គ្មាន​ចំណងជើង',
-	'info_selection_chemin_acces' => '<b>ជ្រើសយក</b> ខាងក្រោម ​ផ្លូវចូល​ទៅ​បញ្ជីឈ្មោះ  ៖',
+	'info_selection_chemin_acces' => '<b>ជ្រើសយក</b> ខាងក្រោម ​ផ្លូវចូល​ទៅ​បញ្ជីឈ្មោះ ៖',
 	'info_signatures' => 'ហត្ថលេខា',
 	'info_site' => 'សៃថ៍',
 	'info_site_2' => 'សៃថ៍៖',
@@ -750,7 +750,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'utf8_convertir_votre_site' => 'បំ​លែង​ សៃថ៍ របស់អ្នក ជា utf-8',
 
 	// V
-	'version' => 'កំណែ  ៖'
+	'version' => 'កំណែ ៖'
 );
 
 ?>
