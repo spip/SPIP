@@ -388,7 +388,7 @@ stránku "@nom_site_spip@" (@adresse_login@):',
 	'info_erreur_squelette2' => 'Žiadna dostupná šablóna <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'Chyba systému (ch. č. @errsys@)',
 	'info_erreur_systeme2' => 'Buď je plný pevný disk, alebo je poškodený databáza. <br />
- <font color=\'red\'>Poskúste sa <a href=\'@script@\'>opraviť databázu,</a>
+ <font color=’red’>Poskúste sa <a href=’@script@’>opraviť databázu,</a>
  alebo kontaktujte poskytovateľa služby.</font>',
 	'info_fini' => 'Hotovo!',
 	'info_format_image' => 'Formát obrázkov, ktorý sa použije na vytváranie miniatúr: @gd_formats@.',
@@ -467,7 +467,7 @@ stránku "@nom_site_spip@" (@adresse_login@):',
 	'info_supprimer_vignette' => 'Odstrániť miniatúru',
 	'info_symbole_bleu' => '<b>Modrá</b> označuje <b>pripo­­mien­ku,</b> čiže odkaz pre vašu osobnú potrebu.',
 	'info_symbole_jaune' => '<b>Žltá</b> označuje <b>oznam všetkým redaktorom:</b> môžu ho upravovať všetci administrátori a uvidia ho všetci redaktori.',
-	'info_symbole_vert' => '  <b>Zelená</b> označuje <b>správy, ktoré ste si vymenili s ostatnými používateľmi</b> stránky.',
+	'info_symbole_vert' => ' <b>Zelená</b> označuje <b>správy, ktoré ste si vymenili s ostatnými používateľmi</b> stránky.',
 	'info_telecharger_nouveau_logo' => 'Nahrať nové logo:',
 	'info_telecharger_ordinateur' => 'Nahrať z vášho počítača:',
 	'info_tous_resultats_enregistres' => '[všetky výsledky sa ukladajú]',

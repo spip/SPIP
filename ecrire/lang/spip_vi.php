@@ -332,7 +332,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'Không có mẫu cho trang web này. Không tìm thay hồ sơ <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'Thông báo lỗi số (errno @errsys@)',
 	'info_erreur_systeme2' => 'Đĩa cứng có thể đã đầy hay là database bị hư. <br />
- <font color=\'red\'>Xin <a href=\'@script@\'>sửa Database</a>,
+ <font color=’red’>Xin <a href=’@script@’>sửa Database</a>,
  hay liên lạc với quản trị viên máy.</font>', # MODIF
 	'info_fini' => 'Xong rồi! ',
 	'info_format_image' => 'Dạng hình dùng để lập ra hình mẫu: @gd_formats@.',
@@ -581,7 +581,7 @@ Nếu bạn đem vào những hình ảnh trong dạng  @gd_formats@, chúng s�
 
 	// Z
 	'zbug_balise_b_aval' => ': B tag too late in loop',
-	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
+	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n’existe pas', # MODIF
 	'zbug_boucle' => 'loop',
 	'zbug_boucle_recursive_undef' => 'undefined recursive loop', # MODIF
 	'zbug_champ_hors_boucle' => 'Field @champ@ outside loop',
