@@ -196,25 +196,15 @@ function balise_URL_ECRIRE_dist($p) {
 function balise_URL_ACTION_AUTEUR_dist($p) {
 	$p->descr['session'] = true;
 
-	$script = interprete_argument_balise(1, $p);
-	if (!$script OR $script == "''") {
-		$msg = array('zbug_balise_sans_argument',
-			array('balise' => ' URL_ACTION_AUTEUR'));
-		erreur_squelette($msg, $p);
-	} else {
-		$args = interprete_argument_balise(2, $p);
-		if (!$args) {
-			$args = "''";
-		}
-		$redirect = interprete_argument_balise(3, $p);
-		// cas d'un appel (squelette) avec '' comme valeur de redirection
-		if ($redirect AND $redirect == "''") {
-			$redirect = NULL;
-		}
-		if ($redirect) {
-			$redirect = ",$redirect";
-		}
-		$p->code = "generer_action_auteur($script,$args$redirect)";
+	$p->code = interprete_argument_balise(1,$p);
+	$args = interprete_argument_balise(2,$p);
+	if ($args != "''" && $args!==NULL)
+		$p->code .= ",".$args;
+	$redirect = interprete_argument_balise(3,$p);
+	if ($redirect != "''" && $redirect!==NULL) {
+		if ($args == "''" || $args===NULL)
+			$p->code .= ",''".$args;
+		$p->code .= ",".$redirect;
 	}
 
 	$p->code = "generer_action_auteur(" . $p->code . ")";
