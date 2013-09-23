@@ -207,7 +207,10 @@ function balise_URL_ACTION_AUTEUR_dist($p) {
 		$args = interprete_argument_balise(2,$p);
 		if (!$args) $args = "''";
 		$redirect = interprete_argument_balise(3,$p);
-		if ($redirect AND $redirect != "''")
+		// cas d'un appel (squelette) avec '' comme valeur de redirection
+		if ($redirect AND $redirect == "''")
+			$redirect = NULL;
+		if ($redirect)
 			$redirect = ",$redirect";
 		$p->code = "generer_action_auteur($script,$args$redirect)";
 	}
