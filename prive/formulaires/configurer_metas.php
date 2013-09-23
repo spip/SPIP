@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -64,7 +64,7 @@ function formulaires_configurer_metas_recense($form, $opt='')
 	else return array();
 }
 
-// Repertoires potentiels des plugins, ce serait bien d'avoir ça ailleurs
+// Repertoires potentiels des plugins, ce serait bien d'avoir ï¿½a ailleurs
 // ca n'est pas lie a cette balise
 // Attention a l'ordre:
 // si l'un des 3 est un sous-rep d'un autre, le mettre avant.

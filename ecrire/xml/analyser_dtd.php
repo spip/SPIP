@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -248,7 +248,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 // Dresser le tableau des filles potentielles de l'element
 // pour traquer tres vite les illegitimes.
 // Si la regle a au moins une sequence (i.e. une virgule)
-// ou n'est pas une itération (i.e. se termine par * ou +)
+// ou n'est pas une itï¿½ration (i.e. se termine par * ou +)
 // en faire une RegExp qu'on appliquera aux balises rencontrees.
 // Sinon, conserver seulement le type de l'iteration car la traque
 // aura fait l'essentiel du controle sans memorisation des balises.

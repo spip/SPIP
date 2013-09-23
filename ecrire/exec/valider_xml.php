@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -194,7 +194,7 @@ function valider_script($transformer_xml, $script, $dir, $ext)
 	// s'il y a l'attribut minipres, le test est non significatif
 	// le script necessite peut-etre des arguments, on lui en donne,
 	// en appelant la fonction _args associee si elle existe
-	// Si ca ne marche toujours pas, les arguments n'étaient pas bons
+	// Si ca ne marche toujours pas, les arguments n'ï¿½taient pas bons
 	// ou c'est une authentification pour action d'administration;
 	// tant pis, on signale le cas par un resultat negatif
 

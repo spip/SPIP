@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -329,7 +329,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	}
 
 	// $delais par defaut
-	// pour toutes les pages sans #CACHE{} hors modeles/ et espace privé
+	// pour toutes les pages sans #CACHE{} hors modeles/ et espace privï¿½
 	// qui sont a cache nul par defaut
 	if (!isset($GLOBALS['delais'])) {
 		define('_DUREE_CACHE_DEFAUT', 24*3600);
