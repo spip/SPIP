@@ -388,9 +388,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_requete' => 'خطأ في الاستفسار:',
 	'info_erreur_squelette2' => 'لا توجد صفحة نموذجية <b>@fichier@</b> متاحة...',
 	'info_erreur_systeme' => 'خطأ في النظام (خطأ رقم @errsys@)',
-	'info_erreur_systeme2' => 'قد يكون القرص الصلب ممتلئاً أو قد تكون قاعدة البيانات معطلة. <br />
-<font color=\'red\'>حاول <a href=\'@script@\'>إصلاح القاعدة</a>،
-أو الاتصال بمضيف موقعك.</font> ',
+	'info_erreur_systeme2' => 'قد يكون القرص الصلب ممتلئاً أو قد تكون قاعدة البيانات معطلة.<br />
+<font color=\'red\'>حاول <a href=\'@script@\'>إصلاح القاعدة</a>، أو الاتصال بمضيف موقعك.</font> ',
 	'info_fini' => 'انتهى!',
 	'info_format_image' => 'تنسيق ملفات الصور الذي يمكن استخدامه لإنشاء المصغرات: @gd_formats@ .',
 	'info_format_non_defini' => 'تنسيق غير معروف',

@@ -386,9 +386,8 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 	'info_erreur_requete' => 'Fout bij uitvoering van de opdracht :',
 	'info_erreur_squelette2' => 'Geen sjabloon <b>@fichier@</b> is beschikbaar...',
 	'info_erreur_systeme' => 'Systeemfout (errno @errsys@)',
-	'info_erreur_systeme2' => 'Misschien is de harde schijf vol of de gegevensbank beschadigd. <br />
- <font color=\'red\'>Probeer de <a href=\'@script@\'>de gegevensbank te herstellen</a>,
- of neem contact op met je provider.</font>',
+	'info_erreur_systeme2' => 'Misschien is de harde schijf vol of de gegevensbank beschadigd.<br />
+<font color=\'red\'>Probeer de <a href=\'@script@\'>de gegevensbank te herstellen</a>, of neem contact op met je provider.</font>',
 	'info_fini' => 'Het is gedaan !',
 	'info_format_image' => 'Beeldformaten die gebruikt kunnen worden om vignettes (miniatuurafbeeldingen) aan te maken: @gd_formats@.',
 	'info_format_non_defini' => 'Ongedefinieerd formaat',

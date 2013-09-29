@@ -321,9 +321,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_requete' => 'Fejl i forespørgsel:',
 	'info_erreur_squelette2' => 'Ingen template parat <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'System fejl (errno @errsys@)',
-	'info_erreur_systeme2' => 'Harddisken er måske fyldt eller databasen er skadet. <br />
- <font color=\'red\'>prøv <a href=\'@script@\'>at reparere databasen</a>,
-eller kontakt din internetudbyder.</font>', # MODIF
+	'info_erreur_systeme2' => 'Harddisken er måske fyldt eller databasen er skadet.<br />
+<font color=\'red\'>prøv <a href=\'@script@\'>at reparere databasen</a>, eller kontakt din internetudbyder.</font>', # MODIF
 	'info_fini' => 'Det er overstået!',
 	'info_format_image' => 'Billedformater til brug ved dannelse af piktogrammer: @gd_formats@.',
 	'info_format_non_defini' => 'ukendt format',
