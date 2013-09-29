@@ -385,7 +385,7 @@ wird Ihre Adresse beibehalten):
 	'info_erreur_squelette2' => 'Keine Vorlage <b>@fichier@</b> vorhanden ...',
 	'info_erreur_systeme' => 'Systemfahler (Fehler no. @errsys@)',
 	'info_erreur_systeme2' => 'Möglicherweise ist die Festplatte voll oder die Datenbank beschädigt. <br />
- <font color=’red’>Versuchen Sie <a href=’@script@’>die Datenbank zu reparieren</a>,
+ <font color=\'red\'>Versuchen Sie <a href=\'@script@\'>die Datenbank zu reparieren</a>,
  oder wenden Sie sich an Ihren Provider.</font>',
 	'info_fini' => 'Fertig!',
 	'info_format_image' => 'Für diese Dateiformate können Vorschaubilder erstellt werden: @gd_formats@.',

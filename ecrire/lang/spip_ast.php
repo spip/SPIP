@@ -362,7 +362,7 @@ sitiu "@nom_site_spip@" (@adresse_login@):',
 	'info_erreur_squelette2' => 'Nun hai denguna cadarma <b>@fichier@</b> disponible...',
 	'info_erreur_systeme' => 'Fallu del sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'El discu duru puede tar enllenu, o la base de datos dañada. <br />
- <font color=’red’>Tenta <a href=’@script@’>iguar la base</a>,
+ <font color=\'red\'>Tenta <a href=\'@script@\'>iguar la base</a>,
  o ponte en contautu col to agospiamientu.</font>',
 	'info_fini' => '¡Acabose!',
 	'info_format_image' => 'Formatos d’imaxe que pueden utilizase pa crear les viñetes: @gd_formats@.',

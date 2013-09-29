@@ -305,7 +305,7 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'info_erreur_squelette2' => 'Ges d’esqueleta <b>@fichier@</b> z-es disponibla...',
 	'info_erreur_systeme' => 'Error sistèma (errno @errsys@)',
 	'info_erreur_systeme2' => 'Lo disc dur es benlèu plen, o la basa de donadas degalhada. <br />
- <font color=’red’>’Sajatz de <a href=’@script@’>reparar la basa</a>,
+ <font color=\'red\'>’Sajatz de <a href=\'@script@\'>reparar la basa</a>,
  o contactatz vòstre auberjador.</font>',
 	'info_fini' => 'Quo es ’chabat!',
 	'info_format_image' => 'Formats d’imatges que se pòdon utilizar per crear de vinhetas: @gd_formats@.',

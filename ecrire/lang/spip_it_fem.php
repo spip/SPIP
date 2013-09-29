@@ -336,7 +336,7 @@ di ciascuna di queste cartelle. La procedura è spiegata in dettaglio nella guid
 	'info_erreur_squelette2' => 'Nessun modello di layout <b>@fichier@</b> trovato...',
 	'info_erreur_systeme' => 'Errore di sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'Il disco rigido potrebbe essere pieno o la base dati danneggiata. <br />
- <font color=’red’>Tenta di <a href=’@script@’>ripristinare la base dati</a>,
+ <font color=\'red\'>Tenta di <a href=\'@script@\'>ripristinare la base dati</a>,
 o contatta il tuo hoster.</font>',
 	'info_fini' => 'Finito!',
 	'info_format_image' => 'Formati di file immagine utilizzabili per la creazione delle etichette: @gd_formats@.',

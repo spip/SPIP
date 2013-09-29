@@ -333,8 +333,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_requete' => 'Kesalahan dalam query:',
 	'info_erreur_squelette2' => 'Tidak ada templat <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'Kesalahan sistem (errno @errsys@)',
-	'info_erreur_systeme2' => 'Hard disk kemungkinan penuh atau database rusak. <br>
- <font color=’red’>coba <a href=’@script@’>perbaiki database</a>,
+	'info_erreur_systeme2' => 'Hard disk kemungkinan penuh atau database rusak. <br />
+ <font color=\'red\'>coba <a href=\'@script@\'>perbaiki database</a>,
  atau hubungi hosting anda.</font>',
 	'info_fini' => 'Selesai!',
 	'info_format_image' => 'Format gambar yang digunakan untuk pembuatan gambar-gambar kecil: @gd_formats@.',

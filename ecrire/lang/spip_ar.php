@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 	'0_langue' => 'عربي [ar]',
 	'0_liste' => 'spip-dev@rezo.net',
-	'0_mainteneur' => 'جورج قندلفت (khodr1957@gmail.com)',
+	'0_mainteneur' => 'جورج قندلفت (khodr1957@gmail.com) ',
 
 	// A
 	'access_interface_graphique' => 'عودة إلى الواجهة الرسومية الكاملة',
@@ -389,7 +389,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'لا توجد صفحة نموذجية <b>@fichier@</b> متاحة...',
 	'info_erreur_systeme' => 'خطأ في النظام (خطأ رقم @errsys@)',
 	'info_erreur_systeme2' => 'قد يكون القرص الصلب ممتلئاً أو قد تكون قاعدة البيانات معطلة. <br />
-<font color=’red’>حاول <a href=’@script@’>إصلاح القاعدة</a>،
+<font color=\'red\'>حاول <a href=\'@script@\'>إصلاح القاعدة</a>،
 أو الاتصال بمضيف موقعك.</font> ',
 	'info_fini' => 'انتهى!',
 	'info_format_image' => 'تنسيق ملفات الصور الذي يمكن استخدامه لإنشاء المصغرات: @gd_formats@ .',

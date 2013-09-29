@@ -324,7 +324,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_contact_developpeur' => '.אנא צור קשר עם המפתח',
 	'info_contenance' => ':האתר הזה מכיל',
 	'info_contribution' => 'תרומת הפורום', # MODIF
-	'info_copyright' => 'תוכנה מופצת בחינם <a href=’license.txt’>under GPL license.</a>',
+	'info_copyright' => 'תוכנה מופצת בחינם <a href=\'license.txt\'>under GPL license.</a>',
 	'info_copyright_doc' => 'למידע נוסף, בקרו באתר זה <a href="@spipnet@">http://www.spip.net/en</a>.', # MODIF
 	'info_copyright_gpl' => 'תחת רשיון GPL',
 	'info_cours_edition' => 'המאמרים שלך בהתקדמות',
@@ -345,7 +345,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'אף מסגרת אינו<b>@fichier@</b> זמין',
 	'info_erreur_systeme' => 'System error (errno @errsys@)',
 	'info_erreur_systeme2' => 'דיסק קשיח מלא או נזק בבסיס הנתונים. <br />
- <font color=’red’>נסה/י <a href=’@script@’>תיקון נדבך הנתונים</a>,
+ <font color=\'red\'>נסה/י <a href=\'@script@\'>תיקון נדבך הנתונים</a>,
  או צור קשר עם המארח שלך.</font>',
 	'info_fini' => '!גמור',
 	'info_format_image' => ':פורמט התמונה משומש ליצירת גפנית @gd_formats@.',

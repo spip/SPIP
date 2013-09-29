@@ -384,7 +384,7 @@ Fir är nei Adress ze bestätegen, surft op dës URL (soss gëtt är Ufro ignor�
 	'info_erreur_squelette2' => 'Et gëtt kee Skelett <b>@fichier@</b> ...',
 	'info_erreur_systeme' => 'System-Fehler (errno @errsys@)',
 	'info_erreur_systeme2' => 'Den Harddisk ass villäicht voll oder d’Datebank futti.
-<span style=’color:#f00’>Versicht <a href=’@script@’>d’Datebank ze flécken</a>,
+<span style=\'color:#f00\'>Versicht <a href=\'@script@\'>d’Datebank ze flécken</a>,
 oder kontaktéiert äre Provider.</span>',
 	'info_fini' => 'Et ass fäerdeg!',
 	'info_format_image' => 'Bild-Formater déi kënnen benotzt ginn fir Vignetten ze maachen: @gd_formats@.',

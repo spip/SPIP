@@ -342,7 +342,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'Néna pa okin léskélèt <b>@fichier@</b> sat lé disponib...',
 	'info_erreur_systeme' => 'Kanar sistèm (errno @errsys@)',
 	'info_erreur_systeme2' => 'Lo diksodir li sré byin po èt komplètman ragoulé o labazdodné lé gaté<br />
- <font color=’red’>Anon esayé <a href=’@script@’>aranzé labaz</a>,
+ <font color=\'red\'>Anon esayé <a href=\'@script@\'>aranzé labaz</a>,
  ou kontakté out lébèrzèr.</font>', # MODIF
 	'info_fini' => 'Astèr sa lè fini !',
 	'info_format_image' => 'Bann tay-zimaz ou pé itilizé pou kré out bann vinyèt : @gd_formats@.',

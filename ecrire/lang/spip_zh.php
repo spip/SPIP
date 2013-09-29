@@ -338,8 +338,8 @@ Zhen QIN (zhen_q@21cn.com)',
 	'info_erreur_requete' => '错误查询:',
 	'info_erreur_squelette2' => '所有面板<b>@fichier@</b>均无效...',
 	'info_erreur_systeme' => '系统错误 (errno @errsys@)',
-	'info_erreur_systeme2' => '硬盘无足够空间,或数据库遭破坏。 <br />
- <font color=’red’>请试用 <a href=’@script@’>修复数据库</a>，
+	'info_erreur_systeme2' => '硬盘无足够空间,或数据库遭破坏。<br />
+ <font color=\'red\'>请试用 <a href=\'@script@\'>修复数据库</a>，
  或者联系您的管理员。</font>', # MODIF
 	'info_fini' => '完成了!',
 	'info_format_image' => '图片格式被用来创建插图: @gd_formats@.',

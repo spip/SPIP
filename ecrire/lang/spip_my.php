@@ -322,8 +322,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_requete' => 'ဆက်သွယ်မှု အမှားအယွင်း',
 	'info_erreur_squelette2' => 'မဖြစ်နိုင်သော ပုံစံစာမျက်နှာ<b>@fichier@</b>...',
 	'info_erreur_systeme' => 'စက်ပြသနာ (errno @errsys@)',
-	'info_erreur_systeme2' => 'ဟတ်ဒေးစ် ပြည့်ပြီး သို့မဟုတ် သိုလှောင်မှု ပျက်ဆီးနေသည်<br />
- <font color=’red’>သိုလှောင်မှုကို ပြုပြင်ရန် <a href=’@script@’>ကိုနှိပ်ပါ</a>၊ သို့မဟုတ် သင့်ဝက်ဘ်ဆိုက် ဆိုင်ရာများကို ဆက်သွယ်ပါ။</font>',
+	'info_erreur_systeme2' => 'ဟတ်ဒေးစ် ပြည့်ပြီး သို့မဟုတ် သိုလှောင်မှု ပျက်ဆီးနေသည်<br />
+ <font color=\'red\'>သိုလှောင်မှုကို ပြုပြင်ရန် <a href=\'@script@\'>ကိုနှိပ်ပါ</a>၊ သို့မဟုတ် သင့်ဝက်ဘ်ဆိုက် ဆိုင်ရာများကို ဆက်သွယ်ပါ။</font>',
 	'info_fini' => 'လုပ်ပြီးသွားပြီ',
 	'info_format_image' => 'ပုံစံဒီဇိုင်းစင်ရန်အတွက် ပုံရိပ် @gd_formats@',
 	'info_format_non_defini' => 'မသိသေးသော ပုံစံ',

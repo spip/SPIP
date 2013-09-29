@@ -350,7 +350,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_contenance' => 'Stu situ cuntene :',
 	'info_contribution' => 'contributi di foru', # MODIF
 	'info_copyright' => '@spip@ hè un prugrammu lìberu distribuitu @lien_gpl@.',
-	'info_copyright_doc' => 'Per sapè ne di più, visitate puru u situ <a href=’http://www.spip.net/fr’>http://www.spip.net/fr</a>.', # MODIF
+	'info_copyright_doc' => 'Per sapè ne di più, visitate puru u situ <a href=\'http://www.spip.net/fr\'>http://www.spip.net/fr</a>.', # MODIF
 	'info_copyright_gpl' => 'sottu licenza GPL',
 	'info_cours_edition' => 'I vostri artìculi in corsu di scrittura',
 	'info_creer_repertoire' => 'Create puru un schedariu o un cartulare chjamatu :',
@@ -370,7 +370,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'ùn hè dispunìbule nisun mudellu <b>@fichier@</b> ...',
 	'info_erreur_systeme' => 'Errore sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'Forse hè colmu u discu duru, o puru hè scundisata a basa di dati. <br />
-	<font color=’red’>Pruvate puru di <a href=’@script@’>riparà a basa</a>,
+	<font color=\'red\'>Pruvate puru di <a href=\'@script@\'>riparà a basa</a>,
 	o cuntattate u vostru òspite.</font>',
 	'info_fini' => 'Hè fatta !',
 	'info_format_image' => 'Forme d’imàgini chì ponu esse usate da creà figurette : @gd_formats@.',
