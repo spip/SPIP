@@ -10,13 +10,20 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion d'affichage ajax d'une rubrique sélectionnée dans le mini navigateur
+ * @package SPIP\Core\Exec
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 
-# Les informations d'une rubrique selectionnee dans le mini navigateur
-
-// http://doc.spip.org/@exec_informer_dist
+/**
+ * Affiche en ajax les informations d'une rubrique selectionnée dans le mini navigateur
+ *
+ * @uses inc_informer_dist()
+**/
 function exec_informer_dist()
 {
 	$id = intval(_request('id'));

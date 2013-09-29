@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 
 /**
- * Affichage du sélecteur (mini-navigateur) de rubrique AJAX
+ * Affichage en ajax du sélecteur (mini-navigateur) de rubrique AJAX
  *
  * @uses inc_selectionner_dist()
 **/
