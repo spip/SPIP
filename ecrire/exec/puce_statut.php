@@ -40,6 +40,9 @@ function exec_puce_statut_dist()
  * Appelle la fonction de traitement des puces statuts
  * après avoir retrouvé le statut en cours de l'objet
  * et son parent (une rubrique)
+ *
+ * @uses inc_puce_statut_dist()
+ * @uses ajax_retour()
  * 
  * @param int $id
  *     Identifiant de l'objet

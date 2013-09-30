@@ -13,13 +13,12 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Envoi du Mail des nouveautes
- * base sur le squelette nouveautes.html
+ * Envoi du Mail des nouveautés
+ * 
+ * Ce mail est basé sur le squelette nouveautes.html
  *
- * La meta dernier_envoi_neuf permet de marquer la date du dernier envoi
+ * La meta `dernier_envoi_neuf` permet de marquer la date du dernier envoi
  * et de determiner les nouveautes publiees depuis cette date
- *
- * http://doc.spip.org/@genie_mail_dist
  *
  * @param int $t
  * @return int
