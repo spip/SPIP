@@ -194,7 +194,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_classement_1' => ' @listù@',
 	'info_classement_2' => '@listù@',
 	'info_code_acces' => 'Mi mà wɔn gbètɛn mi tɔn lɛ ó!',
-	'info_config_suivi' => '<Nɛ̌ ná xà àtɛ é lɔ gbɔn 	',
 	'info_config_suivi_explication' => 'Mi hɛn ɔ mi ná á nyíkɔ ɖò fi',
 	'info_confirmer_passe' => 'Mi vɔ gbètákɛn mi tɔn sɛɖó:',
 	'info_connexion_base' => 'Nɔtɛn wè gɔ̂',
