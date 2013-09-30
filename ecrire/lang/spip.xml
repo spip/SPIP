@@ -1,5 +1,5 @@
 <traduction module="spip" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ar" total="631" traduits="631" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ar" total="631" traduits="630" relire="0" modifs="1" nouveaux="0" pourcent="99.84">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="ast" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ast" total="631" traduits="590" relire="0" modifs="9" nouveaux="32" pourcent="93.50">
@@ -12,7 +12,7 @@
 	</langue>
 	<langue code="br" url="http://trad.spip.net/tradlang_module/spip?lang_cible=br" total="631" traduits="569" relire="0" modifs="11" nouveaux="51" pourcent="90.17">
 	</langue>
-	<langue code="bs" url="http://trad.spip.net/tradlang_module/spip?lang_cible=bs" total="631" traduits="466" relire="0" modifs="43" nouveaux="122" pourcent="73.85">
+	<langue code="bs" url="http://trad.spip.net/tradlang_module/spip?lang_cible=bs" total="631" traduits="466" relire="0" modifs="42" nouveaux="123" pourcent="73.85">
 	</langue>
 	<langue code="ca" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ca" total="631" traduits="618" relire="0" modifs="1" nouveaux="12" pourcent="97.94">
 		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
@@ -59,7 +59,7 @@
 	<langue code="eu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=eu" total="631" traduits="628" relire="0" modifs="1" nouveaux="2" pourcent="99.52">
 		<traducteur nom="otalazt" lien="http://trad.spip.net/auteur/otalazt" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fa" total="631" traduits="622" relire="0" modifs="1" nouveaux="8" pourcent="98.57">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fa" total="631" traduits="621" relire="0" modifs="2" nouveaux="8" pourcent="98.42">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fi" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fi" total="631" traduits="287" relire="0" modifs="41" nouveaux="303" pourcent="45.48">
@@ -84,7 +84,7 @@
 	<langue code="hac" url="http://trad.spip.net/tradlang_module/spip?lang_cible=hac" total="631" traduits="621" relire="0" modifs="2" nouveaux="8" pourcent="98.42">
 		<traducteur nom="akomarani" lien="http://trad.spip.net/auteur/akomarani" />
 	</langue>
-	<langue code="he" url="http://trad.spip.net/tradlang_module/spip?lang_cible=he" total="631" traduits="569" relire="0" modifs="11" nouveaux="51" pourcent="90.17">
+	<langue code="he" url="http://trad.spip.net/tradlang_module/spip?lang_cible=he" total="631" traduits="568" relire="0" modifs="12" nouveaux="51" pourcent="90.02">
 	</langue>
 	<langue code="hr" url="http://trad.spip.net/tradlang_module/spip?lang_cible=hr" total="631" traduits="561" relire="0" modifs="11" nouveaux="59" pourcent="88.91">
 	</langue>
@@ -155,7 +155,7 @@
 	<langue code="ro" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ro" total="631" traduits="615" relire="0" modifs="2" nouveaux="14" pourcent="97.46">
 		<traducteur nom="vmurariu" lien="http://trad.spip.net/auteur/vmurariu" />
 	</langue>
-	<langue code="roa" url="http://trad.spip.net/tradlang_module/spip?lang_cible=roa" total="631" traduits="519" relire="0" modifs="33" nouveaux="79" pourcent="82.25">
+	<langue code="roa" url="http://trad.spip.net/tradlang_module/spip?lang_cible=roa" total="631" traduits="519" relire="0" modifs="32" nouveaux="80" pourcent="82.25">
 	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ru" total="631" traduits="629" relire="0" modifs="0" nouveaux="2" pourcent="99.68">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />

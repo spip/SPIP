@@ -372,7 +372,7 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 	'info_erreur_squelette2' => 'Żaden szkielet <b>@fichier@</b> nie jest dostępny ...',
 	'info_erreur_systeme' => 'Błąd systemu (errno @errsys@)',
 	'info_erreur_systeme2' => 'Albo dysk twardy jest pełny albo uszkodzona jest baza danych.<br />
-<font color=\'red\'>Spróbuj <a href=\'@script@\'>naprawić bazę danych</a>, lub skontaktuj się z administratorem serwera.</font>',
+<span style="color:red;">Spróbuj <a href=\'@script@\'>naprawić bazę danych</a>, lub skontaktuj się z administratorem serwera.</span>',
 	'info_fini' => 'Zakończono!',
 	'info_format_image' => 'Formaty plików obrazków, które mogą być używane do tworzenia minitaturek : @gd_formats@.',
 	'info_format_non_defini' => 'format niezdefiniowany',

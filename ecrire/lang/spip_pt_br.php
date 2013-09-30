@@ -382,7 +382,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 	'info_erreur_squelette2' => 'Nenhum template <b>@fichier@</b> está disponível...',
 	'info_erreur_systeme' => 'Erro do sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'É possível que não haja espaço livre em disco, ou que a base de dados esteja corrompida.<br />
-<font color=\'red\'>Tente <a href=\'@script@\'>reparar a base</a>, ou contate o seu serviço de hospedagem.</font>',
+<span style="color:red;">Tente <a href=\'@script@\'>reparar a base</a>, ou contate o seu serviço de hospedagem.</span>',
 	'info_fini' => 'Terminou!',
 	'info_format_image' => 'Formatos das imagens que podem ser utilizados para criar os ícones @gd_formats@.',
 	'info_format_non_defini' => 'formato não definido',

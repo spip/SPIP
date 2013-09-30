@@ -306,7 +306,7 @@ deu sit "@nom_site_spip@" (@adresse_site@):', # MODIF
 	'info_erreur_squelette2' => 'Nada esqueleta <b>@fichier@</b> n’ei pas disponibla...',
 	'info_erreur_systeme' => 'Error sistèma (errno @errsys@)',
 	'info_erreur_systeme2' => 'Lo disc dur qu’ei dilhèu plen, o la basa de dadas gastada. <br />
-<font color=\'red\'>Ensajatz de <a href=\'@script@\'>reparar la basa</a>, o contactatz lo vòste aubergader.</font>', # MODIF
+<span style="color:red;">Ensajatz de <a href=\'@script@\'>reparar la basa</a>, o contactatz lo vòste aubergader.</span>', # MODIF
 	'info_fini' => 'Qu’ei acabat!',
 	'info_format_image' => 'Formats d’imatges qui’s pòden utilizar tà crear vinhetas: @gd_formats@.',
 	'info_format_non_defini' => 'format non definit',

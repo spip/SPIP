@@ -370,7 +370,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'ùn hè dispunìbule nisun mudellu <b>@fichier@</b> ...',
 	'info_erreur_systeme' => 'Errore sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'Forse hè colmu u discu duru, o puru hè scundisata a basa di dati.<br />
-<font color=\'red\'>Pruvate puru di <a href=\'@script@\'>riparà a basa</a>, o cuntattate u vostru òspite.</font>',
+<span style="color:red;">Pruvate puru di <a href=\'@script@\'>riparà a basa</a>, o cuntattate u vostru òspite.</span>',
 	'info_fini' => 'Hè fatta !',
 	'info_format_image' => 'Forme d’imàgini chì ponu esse usate da creà figurette : @gd_formats@.',
 	'info_format_non_defini' => 'forma indefinita',

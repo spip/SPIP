@@ -346,7 +346,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_systeme' => 'System error (errno @errsys@)',
 	'info_erreur_systeme2' => 'דיסק קשיח מלא או נזק בבסיס הנתונים. <br />
  <font color=\'red\'>נסה/י <a href=\'@script@\'>תיקון נדבך הנתונים</a>,
- או צור קשר עם המארח שלך.</font>',
+ או צור קשר עם המארח שלך.</font>', # MODIF
 	'info_fini' => '!גמור',
 	'info_format_image' => ':פורמט התמונה משומש ליצירת גפנית @gd_formats@.',
 	'info_format_non_defini' => 'פורמט לא ידוע',

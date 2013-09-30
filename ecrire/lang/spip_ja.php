@@ -338,8 +338,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'テンプレートが入手不可能 <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'システムエラー (エラー番号 @errsys@)',
 	'info_erreur_systeme2' => 'ハードディスクがいっぱいか、データベースがダメージを受けている。<br />
-<font color=\'red\'>試してみて <a href=\'@script@\'>データベースの修復</a>,
- それかあなたのホストに問い合わせてください。</font>', # MODIF
+<span style="color:red;">試してみて <a href=\'@script@\'>データベースの修復</a>,
+ それかあなたのホストに問い合わせてください。</span>', # MODIF
 	'info_fini' => '終わった！',
 	'info_format_image' => 'ビネット(半身写真、模様等)の作成に使える画像のフォーマット: @gd_formats@。',
 	'info_format_non_defini' => '未定義のフォーマット',
