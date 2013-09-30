@@ -878,7 +878,7 @@ que alguns elementos dos artigos não são utilizados.
 	'texte_fichier_authent' => '<b>SPIP deverá criar os ficheiros especiais<tt>.htpasswd-admin</tt> no directório @dossier@?</b><p>
 Estes ficheiros podem servir-lhe para restringir o acesso aos autores
 e administradores a outras partes do seu sítio (por exemplo, umprograma externo de estatísticas).<p>
-Se não utilizar os ficheiros especiais, pode deixar esta opção no seu valor por defeito (não há criação de ficheiros).',
+Se não utilizar os ficheiros especiais, pode deixar esta opção no seu valor por defeito (não há criação de ficheiros).', # MODIF
 	'texte_informations_personnelles_1' => 'O sistema vai agora criar-lhe um acesso personalizado ao sítio',
 	'texte_informations_personnelles_2' => '(Nota : se se tratar de uma reinstalação e se o seu acesso continua funcional, pode',
 	'texte_introductif_article' => '(Texto introdutório do artigo.)',

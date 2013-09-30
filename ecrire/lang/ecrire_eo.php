@@ -866,7 +866,7 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
   (ekzemple, ekstera statistik-programo).</p><p>
   Se tio ne utilas al vi, vi povas lasi tiun opcion
   je ĝia defaŭlta valoro (neniu dosier-kreo).</p>
-',
+', # MODIF
 	'texte_informations_personnelles_1' => 'La sistemo kreos por vi nun personan alireblon al la retejo.',
 	'texte_informations_personnelles_2' => '(Noto : se temas pri reinstalo kaj se via aliro daŭre funkcias, vi povas',
 	'texte_introductif_article' => '(Enkonduka teksto al la artikolo.)',

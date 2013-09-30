@@ -832,7 +832,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'texte_enrichir_mise_a_jour' => 'Você pode enriquecer a diagramação do seu texto usando «atalhos tipográficos».',
 	'texte_fichier_authent' => '<b>O SPIP pode criar os arquivos especiais  <tt>.htpasswd</tt> e <tt>.htpasswd-admin</tt> no diretório @dossier@?</b><p>
 Estes arquivos podem servir para restringir o acesso aos autores e administradores em outras áreas do seu site (programas externos de estatísticas, por exemplo).</p><p>
-Se eles não forem úteis, você poderá deixar esta opção com o seu valor padrão (sem criar os arquivos).</p>',
+Se eles não forem úteis, você poderá deixar esta opção com o seu valor padrão (sem criar os arquivos).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'O sistema vai criar agora um acesso personalizado ao site.',
 	'texte_informations_personnelles_2' => '(Nota: trata-se de uma reinstalação, se o seu acesso funciona corretamente, você pode',
 	'texte_introductif_article' => '(Texto introdutório da matéria.)',

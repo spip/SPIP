@@ -832,7 +832,7 @@ cunha cor que indica o seu estado :',
   externo de estatísticas, por exemplo).</p><p>
   Se non o utiliza, pode deixar esta opción
  co seu valor predeterminado (non crear
-estes ficheiros).</p>',
+estes ficheiros).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'O sistema vaiche crear agora un acceso personalizado ao web',
 	'texte_informations_personnelles_2' => '(Nota: se se trata dunha reinstalación, e o teu acceso vai sen atrancos, podes', # MODIF
 	'texte_introductif_article' => '(Texto introdutorio do artigo.)',

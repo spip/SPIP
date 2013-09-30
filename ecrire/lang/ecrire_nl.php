@@ -865,7 +865,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
    (externe programma statistieken, bijvoorbeeld).</p><p>
 Als u geen nut ervan hebt, kunt u deze keuze
  laten  aan zijn waarde per gebrek (niet een oprichting
-  bestanden).</p>',
+  bestanden).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Nu zal het systeem een persoonlijke toegang tot de site voor u creëren.',
 	'texte_informations_personnelles_2' => '(Nota : als het herinstallatie betreft,  en je toegangscode blijkt nog steeds te werken, kan je',
 	'texte_introductif_article' => '(Inleidende tekst op het artikel.)',

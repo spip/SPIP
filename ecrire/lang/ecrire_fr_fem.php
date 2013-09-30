@@ -884,7 +884,7 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu’un premier ac
 	'texte_enrichir_mise_a_jour' => 'Vous pouvez enrichir la mise en page de votre texte en utilisant des « raccourcis typographiques ».',
 	'texte_fichier_authent' => '<b>SPIP doit-il créer les fichiers spéciaux <tt>.htpasswd</tt> et <tt>.htpasswd-admin</tt> dans le répertoire @dossier@ ?</b>
 <p>Ces fichiers peuvent vous servir à restreindre l’accès aux auteures et administratrices en d’autres endroits de votre site (programme externe de statistiques, par exemple).</p>
-<p>Si vous n’en avez pas utilité, vous pouvez laisser cette option à sa valeur par défaut (pas de création des fichiers).</p>',
+<p>Si vous n’en avez pas l’utilité, vous pouvez laisser cette option à sa valeur par défaut (pas de création des fichiers).</p>',
 	'texte_informations_personnelles_1' => 'Le système va maintenant vous créer un accès personnalisé au site.',
 	'texte_informations_personnelles_2' => '(Note : il s’agit d’une réinstallation, si votre accès marche toujours vous pouvez',
 	'texte_introductif_article' => '(Texte introductif de l’article.)',

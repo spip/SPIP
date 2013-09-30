@@ -878,7 +878,7 @@ reinstall SPIP, create a new database and a new administrator account.',
   (for instance, external statistical programme).</p><p>
   If you have no need of such files, you can keep this option
   with its default value (no file 
-  creation).</p>',
+  creation).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'The system will now  create your personal account for this site.',
 	'texte_informations_personnelles_2' => '(Note: if it is a reinstallation, if your former access is still working, you can',
 	'texte_introductif_article' => '(Introductory text for the article.)',

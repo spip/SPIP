@@ -819,7 +819,7 @@ reinstalación de SPIP pa crear una nueva base igual que un primer accesu d’al
   (al programa esternu d’estadístiques, por exemplu).</p><p>
   Si nun vas utilizalo, puedes dexar esta opción
  col so valor predetermináu (nun crear
- esos ficheros).</p>',
+ esos ficheros).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Agora el sistema va create un accesu personalizáu al sitiu.',
 	'texte_informations_personnelles_2' => '(Nota: si esto ye una reinstalación, y el to accesu siempre funciona, pues', # MODIF
 	'texte_introductif_article' => '(Testu d’introducción de l’artículu.)',
