@@ -37,6 +37,7 @@ function action_supprimer_rubrique($r)
 {
 	list(,,$id_rubrique) = $r;
 	sql_delete("spip_rubriques", "id_rubrique=$id_rubrique");
+	sql_delete("spip_mots_rubriques", "id_rubrique=$id_rubrique");
 	// Les admin restreints qui n'administraient que cette rubrique
 	// deviennent redacteurs
 	// (il y a sans doute moyen de faire ca avec un having)
