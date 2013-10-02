@@ -16,11 +16,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function typographie_fr_dist($letexte) {
 
-	static $trans;
-
+	static $trans, $cherche1, $remplace1, $cherche2, $remplace2;
 	// Nettoyer 160 = nbsp ; 187 = raquo ; 171 = laquo ; 176 = deg ;
 	// 147 = ldquo; 148 = rdquo; ' = zouli apostrophe
-	if (!$trans) {
+	if (!isset($trans)) {
 		$trans = array(
 			"'" => "&#8217;",
 			"&nbsp;" => "~",
@@ -38,36 +37,34 @@ function typographie_fr_dist($letexte) {
 		$chars_trans = explode(" ",$chars_trans);
 		foreach($chars as $k=>$r)
 			$trans[$chars_trans[$k]] = $r;
-	}
 
-	$letexte = strtr($letexte, $trans);
 
-	$cherche1 = array(
+		$cherche1 = array(
 		/* 1 */ 	'/((?:^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/S',
 		/* 2 */		'/&#187;| --?,|(?::| %)(?:\W|$)/S',
 		/* 3 */		'/([^[<(!?.])([!?][!?\.]*)/iS',
 		/* 4 */		'/&#171;|(?:M(?:M?\.|mes?|r\.?)|[MnN]&#176;) /S'
-	);
-	$remplace1 = array(
+				  );
+		$remplace1 = array(
 		/* 1 */		'\1~;',
 		/* 2 */		'~\0',
 		/* 3 */		'\1~\2',
 		/* 4 */		'\0~'
-	);
-	$letexte = preg_replace($cherche1, $remplace1, $letexte);
-	$letexte = preg_replace("/ *~+ */S", "~", $letexte);
-
-	$cherche2 = array(
+				   );
+		$cherche2 = array(
 		'/([^-\n]|^)--([^-]|$)/S',
-		',(http|https|ftp|mailto)~((://[^"\'\s\[\]\}\)<>]+)~([?]))?,S',
+		',(' ._PROTOCOLES_STD . ')~((://[^"\'\s\[\]\}\)<>]+)~([?]))?,S',
 		'/~/'
-	);
-	$remplace2 = array(
+				  );
+		$remplace2 = array(
 		'\1&mdash;\2',
 		'\1\3\4',
 		'&nbsp;'
-	);
+				   );
+	}
+	$letexte = strtr($letexte, $trans);
+	$letexte = preg_replace($cherche1, $remplace1, $letexte);
+	$letexte = preg_replace("/ *~+ */S", "~", $letexte);
 	$letexte = preg_replace($cherche2, $remplace2, $letexte);
-
 	return $letexte;
 }

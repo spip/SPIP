@@ -1468,6 +1468,9 @@ function spip_initialisation_suite() {
 		else
 			define('_INTERDIRE_COMPACTE_HEAD_ECRIRE',true); // evite une page blanche car on ne saura pas calculer la css dans ce hit
 	}
+	// Protocoles a normaliser dans les chaines de langues
+	if (!defined('_PROTOCOLES_STD'))
+		define('_PROTOCOLES_STD', 'http|https|ftp|mailto|webcal');
 
 	init_var_mode();
 }
