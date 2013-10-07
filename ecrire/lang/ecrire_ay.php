@@ -95,14 +95,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_adresse_email' => 'Aruskipayirima',
 	'entree_base_donnee_1' => 'Pirwat yatiyawinakaxa utjawi',
 	'entree_biographie' => 'Mä juk’a jakawipat qillqa, juk’a arunakampi...',
-	'entree_chemin_acces' => '&lt;b&gt;Mantaña&lt;/b&gt; mantañ thakhixa:',
+	'entree_chemin_acces' => '<b>Mantaña</b> mantañ thakhixa:',
 	'entree_cle_pgp' => 'Impt’atama PGP',
 	'entree_contenu_rubrique' => '(T’aqan utjawipa, qawqha arunakampi)',
 	'entree_identifiants_connexion' => 'Chinuw uñacht’ayirinakama...',
 	'entree_informations_connexion_ldap' => 'Aka phuqañ laphina yatiyawinak conexión ukata jach’a q’ipimaru LDAP. Uka yatiyawinakxa yatiyanitamwa apnaqir apnaqawita jan ukjax red ukata',
 	'entree_infos_perso' => '¿Khititasa?',
 	'entree_interieur_rubrique' => 'T’aqata maqhana...',
-	'entree_liens_sites' => '&lt;b&gt;Chinu jach’a sawu &lt;/b&gt;(aytata, qamaw tumpañataki, ...)',
+	'entree_liens_sites' => '<b>Chinu jach’a sawu </b>(aytata, qamaw tumpañataki, ...)',
 	'entree_login' => 'Sutichatama',
 	'entree_login_connexion_1' => 'Chinu uñacht’ayirima',
 	'entree_login_ldap' => 'Login LDAP qalltawi',
@@ -130,9 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'ical_info1' => 'Aka qamawinxa kunayman lurawinak chinusiñataki utji qamaw utjawipampi',
-	'ical_info2' => 'Aka taqpach lurawinakxat juk’amp yatxatañatakix, yatxatañatakix jan pächasimti 
-
-&lt;a href=\\&quot;\\&quot;http://www.spip.net/fr_suivi&gt;SPIP ukat qillqanakawi&lt;/a&gt;.',
+	'ical_info2' => 'Aka taqpach lurawinakxat juk’amp yatxatañatakix, yatxatañatakix jan pächasimti <a href="@spipnet@">illqanakawi</a>.', # MODIF
 	'ical_info_calendrier' => 'Pä pachachimpuw utjtam. Mayirix qamawit mä laphi uñnaqawa kunanti taqpach yatiyat qillqatank yatiyi: jumakiw uñjtax uka mä suti imt’awi ukata, ukatxa mayjt’ayasmaw kuna pachtix munktax ukja imt’awim mayjt’ayasa.',
 	'ical_methode_http' => 'Apaqaña',
 	'ical_methode_webcal' => 'Kikipawi (webcal://)',
@@ -241,7 +239,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_facilite_suivi_activite' => 'Qillqa lurawit uñch’ukiw jasachañatakix, SPIP ukax aruskipayirit apayaspa, mä tanta qillqirinakar ukhama yatiyatawinakataki yatiyawinaka ukatak mayiwinaka, ukhamarak qillqatanakat iyaw sawi.',
 	'info_fichiers_authent' => 'Chiqpach sirit q’ipinaka «.htpasswd» ',
 	'info_forums_abo_invites' => 'Qamawimax aruskipañawinakaniw qullqimp qillqatanakatakikiwa; Aka jach’a uta qamawinxa tumpirinakaru qillqayasiñataki jawthapiyi.',
-	'info_gauche_admin_effacer' => '&lt;b&gt;Aka Web qamawix qamawit apnaqirinakatakikiwa.&lt;/b&gt;&lt;p&gt; Mantayiwa kunayman uñjawinakar  askichañataki. Yaqhipanakax', # MODIF
+	'info_gauche_admin_effacer' => '<b>Aka Web qamawix qamawit apnaqirinakatakikiwa.</b><p> Mantayiwa kunayman uñjawinakar  askichañataki. Yaqhipanakax</p>', # MODIF
 	'info_gauche_auteurs' => 'Akanxa taqpach qamawit qillqirinakaw uñsti. Kunjamaskis ukxa jisk’a saltan kulurapampiw   uñacht’ayi (apnaqiri = ch’uxña, qillqiri = q’illu).',
 	'info_gauche_auteurs_exterieurs' => 'Anqajankir qillqirinakax, qamawir jan mantañaniwa, mä laram jisk’a saltampiw uñacht’ayataski; mä wayaqamp chhaqayatakis.', # MODIF
 	'info_gauche_messagerie' => 'Yatiyawirix yatiyasiwa, amtayirinak uñstyaña yatiyaw tantaru kuns apaniñapataki jan ukjax yatiyawinak yatiyaña ( apnaqir qutu ukar mayachatakis ukjax)
@@ -254,8 +252,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_historique_affiche' => 'Aka uñjat uñachayaña',
 	'info_historique_comparaison' => 'kikipawi',
 	'info_historique_desactiver' => 'Uñakipawinakat uñch’ukiwi jiwt’ayaña',
-	'info_identification_publique' => 'Uñacht’ayawima...',
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes' # MODIF
+	'info_identification_publique' => 'Uñacht’ayawima...'
 );
 
 ?>

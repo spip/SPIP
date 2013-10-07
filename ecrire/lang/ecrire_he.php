@@ -248,7 +248,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_config_suivi_explication' => 'הינך יכול להירשם לרשימת הדיוור של האתר. לאחר הרישום תקבל, על ידי דואר אלקטרוני, את המודעות באשר למאמרים ולמבזקים המוצעים לפרסום.',
 	'info_confirmer_passe' => ':אשר סיסמה חדשה',
 	'info_connexion_base' => 'שלב שני: <b>Attempting to connect to database</b>',
-	'info_connexion_ldap_ok' => 'La connexion LDAP a réussi.</b><p> Vous pouvez passer à l’étape suivante.</p>', # MODIF
 	'info_connexion_mysql' => 'שלב ראשון: <b>Your SQL connection</b>',
 	'info_connexion_ok' => '.התקשרות הצליחה',
 	'info_contact' => 'התקשר',
@@ -276,13 +275,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_etape_suivante_2' => '.הינך יכול לעבור לשלב הבא',
 	'info_exportation_base' => 'יצוא בסיס נתונים אל @archive@',
 	'info_fichiers_authent' => '".htpasswd" אישור קובץ',
-	'info_gauche_admin_effacer' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes fonctions de maintenance technique. Certaines d’entre elles donnent lieu à un processus d’authentification spécifique, qui exige d’avoir un accès FTP au site Web.</p>', # MODIF
-	'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes
-fonctions de maintenance technique. Certaines d’entre elles donnent lieu à un processus d’authentification spécifique, qui
-exige d’avoir un accès FTP au site Web.</p>', # MODIF
-	'info_gauche_admin_vider' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes
-fonctions de maintenance technique. Certaines d’entre elles donnent lieu à un processus d’authentification spécifique, qui
-exige d’avoir un accès FTP au site Web.</p>', # MODIF
 	'info_gauche_auteurs_exterieurs' => 'מחברים חיצוניים, ללא שום גישה לאתר, מצויינים על ידי סמל כחול; מחברים מחוקים על ידי פח אשפה.', # MODIF
 	'info_gauche_messagerie' => 'התכתבות מאפשרת לך להחליף הודעות בין עורכים, כדי לשמר תזכירים (לשימושך האישי) או להציג מודעות בדף הבית של (.האזור הפרטי (אם אתה אחראי',
 	'info_gauche_numero_auteur' => ':מספר מחבר',
@@ -291,7 +283,7 @@ exige d’avoir un accès FTP au site Web.</p>', # MODIF
 	'info_gerer_trad' => '?מנהל קישורי תרגום',
 	'info_hier' => ':אתמול',
 	'info_identification_publique' => '...הזהות הציבורית שלך',
-	'info_image_process2' => '<b>N.B.</b> <i>Si aucune image n’apparaît, alors le serveur qui héberge votre site n’a pas été configuré pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions «GD» ou «Imagick».</i>', # MODIF
+	'info_image_process2' => 'Si aucune image n’apparaît, alors le serveur qui héberge votre site n’a pas été configuré pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions « GD » ou « Imagick ».',
 	'info_informations_personnelles' => 'נתונים אישיים',
 	'info_inscription_automatique' => 'הרשמה אוטומטית של עורכים חדשים',
 	'info_jeu_caractere' => 'מערך תווים של האתר',
@@ -362,16 +354,6 @@ exige d’avoir un accès FTP au site Web.</p>', # MODIF
 	'info_ps' => 'נ.ב',
 	'info_publier' => 'לפרסם',
 	'info_publies' => 'המאמרים שלך מפורסמים ברשת',
-	'info_question_inscription_nouveaux_redacteurs' => 'Acceptez-vous les inscriptions de nouveaux rédacteurs à
-  partir du site public ? Si vous acceptez, les visiteurs pourront s’inscrire
-  depuis un formulaire automatisé et accéderont alors à l’espace privé pour
-  proposer leurs propres articles. <blockquote><i>Lors de la phase d’inscription,
-  les utilisateurs reçoivent un courrier électronique automatique
-  leur fournissant leurs codes d’accès au site privé. Certains
-  hébergeurs désactivent l’envoi de mails depuis leurs
-  serveurs : dans ce cas, l’inscription automatique est
-  impossible.', # MODIF
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'בסיס האתר',
 	'info_recharger_page' => '.אנא טען מחדש דף זה בעוד כמה רגעים',
 	'info_recherche_auteur_a_affiner' => 'יותר מדי תוצאות ל"@cherche_auteur@"; אנא עדן את החיפוש שלך.',
@@ -392,7 +374,6 @@ exige d’avoir un accès FTP au site Web.</p>', # MODIF
 	'info_sites' => 'אתרים',
 	'info_sous_titre' => 'כתוביות :',
 	'info_statut_administrateur' => 'מנהל',
-	'info_statut_auteur' => 'Statut de cet auteur :', # MODIF
 	'info_surtitre' => 'הכותרת למעלה:',
 	'info_texte' => 'טקסט',
 	'info_texte_message' => 'הטקסט של ההודעה שלך :', # MODIF
@@ -425,8 +406,6 @@ exige d’avoir un accès FTP au site Web.</p>', # MODIF
 	'logo_auteur' => 'למס מחבר', # MODIF
 	'logo_rubrique' => 'למס של כותרת', # MODIF
 	'logo_site' => 'למס של אתר זה', # MODIF
-	'logo_standard_rubrique' => 'LOGO STANDARD DES RUBRIQUES', # MODIF
-	'logo_survol' => 'LOGO POUR SURVOL', # MODIF
 
 	// M
 	'module_raccourci' => 'קיצור דרך',
@@ -453,46 +432,13 @@ exige d’avoir un accès FTP au site Web.</p>', # MODIF
 	'texte_auteurs' => 'המחברים',
 	'texte_compte_element' => '@count@ אלמנט',
 	'texte_compte_elements' => '@count@ אלמנטים',
-	'texte_connexion_mysql' => 'Consultez les informations fournies par votre hébergeur : vous devez y trouver, si votre hébergeur supporte SQL, les codes de connexion au serveur SQL.', # MODIF
-	'texte_en_cours_validation' => 'Les articles et brèves ci-dessous sont proposés à la publication. N’hésitez pas à donner votre avis grâce aux forums qui leur sont attachés.', # MODIF
-	'texte_fichier_authent' => '<b>SPIP doit-il créer les fichiers spéciaux <tt>.htpasswd</tt>
-  et <tt>.htpasswd-admin</tt> dans le répertoire @dossier@ ?</b><p>
-  Ces fichiers peuvent vous servir à restreindre l’accès aux auteurs
-  et administrateurs en d’autres endroits de votre site
-  (programme externe de statistiques, par exemple).</p><p>
-  Si vous n’en avez pas utilité, vous pouvez laisser cette option
-  à sa valeur par défaut (pas de création 
-  des fichiers).</p>', # MODIF
 	'texte_nouveau_message' => 'הודעה חדשה',
-	'texte_nouvelle_version_spip_2' => 'Cette nouvelle version nécessite une mise à jour plus complète qu’à l’accoutumée. Si vous êtes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l’installation afin de mettre à jour vos paramètres de connexion à la base de données.<p> (NB. : si vous avez oublié vos paramètres de connexion, jetez un œil au fichier @connect@ avant de le supprimer...)</p>', # MODIF
-	'texte_requetes_echouent' => '<b>Lorsque certaines requêtes SQL échouent
-  systématiquement et sans raison apparente, il est possible
-  que ce soit à cause de la base de données
-  elle-même.</b><p>
-  Votre serveur SQL dispose d’une faculté de réparation de ses
-  tables lorsqu’elles ont été endommagées par
-  accident. Vous pouvez ici tenter cette réparation ; en
-  cas d’échec, conservez une copie de l’affichage, qui contient
-  peut-être des indices de ce qui ne va pas...</p><p>
-  Si le problème persiste, prenez contact avec votre
-  hébergeur.</p>', # MODIF
 	'texte_sous_titre' => 'כתובית',
 	'texte_statut_attente_validation' => 'אימות ממתינים',
 	'texte_statut_publies' => 'שפורסם באינטרנט',
 	'texte_statut_refuses' => 'סירב',
 	'texte_sur_titre' => 'על כותרת',
 	'texte_titre_02' => 'כותר :',
-	'texte_utilisation_moteur_syndiques' => 'Lorsque vous utilisez le moteur de recherche intégré 
-    à SPIP, vous pouvez effectuer les recherches sur les sites et
-    les articles syndiqués de deux manières
-    différentes. <br />- La plus
-    simple consiste à rechercher uniquement dans les
-    titres et les descriptifs des articles. <br />-
-    Une seconde méthode, beaucoup plus puissante, permet
-    à SPIP de rechercher également dans le texte des
-    sites référencés . Si vous
-    référencez un site, SPIP va alors effectuer la
-    recherche dans le texte du site lui-même.', # MODIF
 	'texte_vide' => 'ריק',
 	'titre_langue_article' => 'שפת המאמר',
 	'titre_langue_rubrique' => 'שפת המדור',
