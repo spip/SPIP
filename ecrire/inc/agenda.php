@@ -372,7 +372,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		    }
 		}
 		$fond .= $ligne ? "bordure_$spip_lang_right" :'bordure_double';
-		$ligne .= "\n<td id='D$annee-$mois-$jour' class='$fond'>$res</td>";
+		$ligne .= "\n<td class='$fond'>$res</td>";
 	}
 	return  $total . ($ligne ? "\n<tr>$ligne</tr>" : '');
 }
@@ -433,7 +433,7 @@ function http_calendrier_semaine($annee, $mois, $jour, $echelle, $partie_cal, $s
 			      $evenements[$d] = !$evenements[$d] ? $r : array_merge($evenements[$d], $r);
 			$evt = http_calendrier_mois_sept($annee, $mois, $init, $init+ 6, $evenements, $script, $finurl, $ancre);
 	  	}
-	} else $evt = "<tr><td id='D$annee-$mois-$jour'>$evt</td></tr>";
+	} else $evt = "<tr><td >$evt</td></tr>";
 
 	$id = ($ancre ? $ancre : 'agenda') . "-nav";
 
@@ -519,7 +519,8 @@ function http_calendrier_semaine_sept($annee, $mois, $jour, $echelle, $partie_ca
 			  ((date("Ymd", $d) == $today) ? 
 			   " jour_encours" :
 			   " jour_gris") ) ) ;
-		$total .= "\n<td id='D$annee-$mois-$jour'>$v</td>";
+		$d = sprintf('D%4d-%02d-%02d', $annee,$mois,$j);
+		$total .= "\n<td id='$d'>$v</td>";
 	}
 	return "\n<tr class='heure'>$total</tr>";
 }
@@ -596,10 +597,10 @@ function http_calendrier_jour_sept($annee, $mois, $jour, $echelle,  $partie_cal,
 	  $mil = http_calendrier_sept_un($annee, $mois, $jour, $evenements, $script, '', $ancre);
 	  $droite = (!test_espace_prive() ? "" :http_calendrier_sept_un($annee, $mois, $jour+1,$evenements, $script, '', $ancre));
 	}
-
+	$d = sprintf('D%4d-%02d-%02d', $annee,$mois,$jour);
 	if (!test_espace_prive())
-		return "<tr class='calendrier-3jours'><td colspan='5'>$mil</td></tr>";
-	$gauche = !$gauche ? "<td colspan='3'>" : "<td>$gauche</td><td></td><td>";
+		return "<tr class='calendrier-3jours'><td id='$d' colspan='5'>$mil</td></tr>";
+	$gauche = !$gauche ? "<td colspan='3' id='$d'>" : "<td>$gauche</td><td></td><td id='$d'>";
 	return  "<tr class='calendrier-3jours'>$gauche$mil</td><td></td><td>$droite</td></tr>";
 }
 
@@ -1208,7 +1209,7 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic,
 		  $type = ($semaine ? 'semaine' : 'jour') ;
 		}
 		$corps = $fclic($script, $annee, $mois, $j,$type, '', $ancre,'', $title ,'','', $j);
-		$ligne .= "\n<td id='D$annee-$mois-$j' class='$class'>$corps</td>";
+		$ligne .= "\n<td class='$class'>$corps</td>";
 		if ($jour_semaine==7) 
 		    {
 		      if ($ligne) $total .= "\n<tr>$ligne</tr>";
