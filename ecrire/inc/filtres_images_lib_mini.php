@@ -390,8 +390,9 @@ function image_graver($img){
 }
 
 // Transforme une image a palette indexee (256 couleurs max) en "vraies" couleurs RGB
+// Existe seulement pour compatibilite avec PHP < 5.5
 // http://doc.spip.org/@imagepalettetotruecolor
- function imagepalettetotruecolor(&$img) {
+if (!function_exists("imagepalettetotruecolor")) {
 	if ($img AND !imageistruecolor($img) AND function_exists('imagecreatetruecolor')) {
 		$w = imagesx($img);
 		$h = imagesy($img);
@@ -408,6 +409,7 @@ function image_graver($img){
 
 		$img = $img1;
 	}
+}
 }
 
 // http://doc.spip.org/@image_tag_changer_taille
