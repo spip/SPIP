@@ -1125,10 +1125,7 @@ function balise_SET_dist($p){
 	if (!$_nom OR !$_val) {
 		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => 'SET'));
 		erreur_squelette($err_b_s_a, $p);
-	}
-	// affectation $_zzz inutile, mais permet de contourner un bug OpCode cache sous PHP 5.5.4
-	// cf https://bugs.php.net/bug.php?id=65845
-	else  $p->code = "vide(\$Pile['vars'][\$_zzz=(string)$_nom] = $_val)";
+	} else 	$p->code = "vide(\$Pile['vars'][$_nom] = $_val)";
 
 	$p->interdire_scripts = false; // la balise ne renvoie rien
 	return $p;
