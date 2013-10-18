@@ -47,21 +47,17 @@ function exec_sites_args($id_syndic)
 // http://doc.spip.org/@afficher_site
 function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
-	global $spip_lang_left,  
-$spip_lang_right;
+	global $spip_lang_right;
 
 	$cherche_mot = _request('cherche_mot');
 	$select_groupe = _request('select_groupe');
 	$id_secteur = $row["id_secteur"];
 	$url_site = $row["url_site"];
 	$url_syndic = $row["url_syndic"];
-	$descriptif = $row["descriptif"];
 	$syndication = $row["syndication"];
 	$statut = $row["statut"];
 	$date_heure = $row["date"];
 	$date_syndic = $row['date_syndic'];
-	$mod = $row['moderation'];
-	$extra=$row["extra"];
 
 	$flag_administrable = autoriser('modifier','site',$id_syndic);
 	$flag_editable = ($flag_administrable OR ($GLOBALS['meta']["proposer_sites"] > 0 AND ($statut == 'prop')));
@@ -219,8 +215,7 @@ function options_moderation($row) {
 	$moderation = $row['moderation'];
 	if ($moderation != 'oui') $moderation='non';
 
-	$res = '';
-	$res .= "<div style='text-align: ".$GLOBALS['spip_lang_left']."'>".
+	$res = "<div style='text-align: ".$GLOBALS['spip_lang_left']."'>".
 		  _T('syndic_choix_moderation')
 		. "<div style='padding-$spip_lang_left: 40px;'>"
 		. afficher_choix('moderation', $moderation,
@@ -283,15 +278,6 @@ function choix_feed($id_syndic, $id_rubrique, $nom_site, $row) {
 
 	if (!preg_match(',^\s*select: (.*),', $row['url_syndic'], $regs))
 		return '';
-
-	$url_site = $row["url_site"];
-	$descriptif = $row["descriptif"];
-	$statut = $row["statut"];
-
-	$date_heure = $row["date"];
-	$date_syndic = $row['date_syndic'];
-	$mod = $row['moderation'];
-	$extra=$row["extra"];
 
 	$res = "";
 
