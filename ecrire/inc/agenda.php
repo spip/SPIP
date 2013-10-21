@@ -905,17 +905,31 @@ function http_calendrier_avec_heure($evenement, $amj)
 	return "\n<div class='calendrier-arial10 calendrier-evenement $opacity'>$sum\n</div>\n"; 
 }
 
-/// Gestion du sous-tableau ATTENDEE.
-/// dans les version anterieures, ce n'etait pas un tableau
+/// Gestion du champ ATTENDEE.
+/// On admet un ID ou un mail, ou un tableau de ces choses.
+/// Si c'est un ID, on va chercher le mail dans la table des auteurs, 
+/// a defaut le nom.
+/// Dans les deux cas, si on a bien un mail, on place le pseudo-protocole mailto
 
 function construire_personne_ics($personnes)
 {
-  $r = is_array($personnes) ? $personnes : array($personnes);
-  foreach ($r as $k => $p) {
-    if ($a = email_valide($p) AND preg_match('/^[^@]+/', $a, $m))
-      $r[$k] = "<a href='mailto:$a'>".preg_replace('/[.]/', ' ', $m[0]). "</a>";
-  }
-  return join(' ', $r);
+	$r = is_array($personnes) ? $personnes : array($personnes);
+	foreach ($r as $k => $p) {
+		if (!is_numeric($p)) {
+			$mail = email_valide($p);
+			if (preg_match('/^[^@]+/', $mail, $m))
+				$r[$k] = preg_replace('/[.]/', ' ', $m[0]);
+		} else {
+			$m = sql_fetsel("email, nom", 'spip_auteurs', "id_auteur=$p");
+			if ($m) {
+			  $mail = $m['email'];
+			  $r[$k] = $m['nom'] ? $m['nom'] : ($mail ? $mail : $p);
+			}
+		}
+		if ($mail)
+			$r[$k] = "<a href='mailto:$mail'>" . $r[$k] . "</a>";
+	}
+	return join(' ', $r);
 }
 
 /// fabrique un agenda sur 3 mois. 
@@ -1517,7 +1531,7 @@ function quete_calendrier_interval_rv($avant, $apres) {
 		      $cat = 'calendrier-couleur12';
 		    else {
 		      $cat = 'calendrier-couleur9';
-		      $auteurs = array_map('array_shift', sql_allfetsel("nom", "spip_auteurs AS A LEFT JOIN spip_auteurs_messages AS L ON L.id_auteur=A.id_auteur", "(L.id_message=$id_message AND (A.id_auteur!=$connect_id_auteur))"));
+		      $auteurs = array_map('array_shift', sql_allfetsel('id_auteur', 'spip_auteurs_messages', "id_message=$id_message AND id_auteur!=$connect_id_auteur"));
 		    }
 		  }
 		}
