@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_deplacement_rubrique' => 'Dàida ! Aquela rubrica conten @contient_breves@ brèva@scb@ : se la desplaçatz, vorgatz ben faire una taca dins aquela casa de confirmacion.',
 	'avis_destinataire_obligatoire' => 'Devètz indicar un destinatari denant de mandar aqueu messatge.',
 	'avis_erreur_connexion_mysql' => 'Error de conexion SQL',
-	'avis_erreur_version_archive' => '<b>Dàida ! Lo fichier @archive@ correspoande à una autra version de SPIP qu’aquela qu’avètz installada.</b> Anatz vèrs de bèli dificultats : risca de destruccion de la voastra basa de donadas, disfoncionaments divèrs dau sit eca. Non validetz aquela demanda d’importacion. <p>Per mai d’informacions, veguètz <a href="@spipnet@">la documentacion de SPIP</a>.</p>', # MODIF
+	'avis_erreur_version_archive' => '<b>Dàida ! Lo fichier @archive@ correspoande à una autra version de SPIP qu’aquela qu’avètz installada.</b> Anatz vèrs de bèli dificultats : risca de destruccion de la voastra basa de donadas, disfoncionaments divèrs dau sit, eca. Non validetz aquela demanda d’importacion. <p>Per mai d’informacions, veguètz <a href="@spipnet@">la documentacion de SPIP</a>.</p>',
 	'avis_espace_interdit' => '<b>Espaci proïbit</b><div>SPIP es ja installat.</div>',
 	'avis_lecture_noms_bases_1' => 'Lo programa d’installacion a pas poscut lièger lu noms dei basas de donadas installadi.',
 	'avis_lecture_noms_bases_2' => 'Sia minga de basa es pas disponibla, sia la foncion que permete d’entierar li basas es estada desactivada per de rasons de seguretat (cen qu’es lo cas de plusors aubergadors).',
@@ -138,7 +138,7 @@ Aqueli informacions vos devon poder èstre provesidi per l’administrator dau s
 
 	// I
 	'ical_info1' => 'Aquela pàgina mòstra de metòdes diferents per restar en contacte emb la vida d’aqueu sit.',
-	'ical_info2' => 'Per aver mai d’informacions sobre aquelas tecnicas, esitetz pas da consultar <a href="@spipnet@">la documentacion de SPIP</a>.', # MODIF
+	'ical_info2' => 'Per aver mai d’informacions sobre aqueli tecnicas, esitètz pas de consultar <a href="@spipnet@">la documentacion de SPIP</a>.',
 	'ical_info_calendrier' => 'Li a doi calendiers à la voastra disposicion. Lo promier es un plan dau sit qu’anonça toi lu articles publicats. Lo segond conten lu anoncis editoriaus en mai dei voastres darrièrs messatges privats : vos es reservat graças à una clau personala, que la podètz modificar en tot moment en renovelant lo voastre mòt de santa Clara.',
 	'ical_methode_http' => 'Telecargament',
 	'ical_methode_webcal' => 'Sincronisacion (webcal://)',
@@ -221,12 +221,12 @@ Aqueli informacions vos devon poder èstre provesidi per l’administrator dau s
 	'info_config_suivi_explication' => 'Vos podètz abonar à la mailing-list d’aqueu sit. Receberètz per corrièr electonic li anonças dei articles e brèvas prepauats à la publication.',
 	'info_confirmer_passe' => 'Confirmar aqueu novèu mòt de santa Clara:',
 	'info_connexion_base' => 'Pròva de connexion à la basa',
-	'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><p> Podètz passar à la tapa seguenta.', # MODIF
+	'info_connexion_ldap_ok' => '<b>La connexion LDAP a capitat.</b><p> Podètz passar à la tapa seguenta.</p>',
 	'info_connexion_mysql' => 'La voastra conexion SQL',
 	'info_connexion_ok' => 'La connexion a capitat.',
 	'info_contact' => 'Contact',
 	'info_contenu_articles' => 'Contengut dei articles',
-	'info_creation_paragraphe' => '(Per crear de paragrafs, laissatz de linhas vuèii, tot simplament)', # MODIF
+	'info_creation_paragraphe' => 'Per crear de paragrafs, laissatz simplament de linhas vuèii.',
 	'info_creation_rubrique' => 'Denant de poder escriure d’articles,<br /> devètz crear aumens una rubrica.<br />',
 	'info_creation_tables' => 'Creacion dei taulas de la basa',
 	'info_creer_base' => '<b>Crear</b> una basa nòva de donadas:',
@@ -241,7 +241,7 @@ Aqueli informacions vos devon poder èstre provesidi per l’administrator dau s
 	'info_ecrire_article' => 'Denant de poder escriure d’articles, devètz aumanco crear una rubrica.',
 	'info_email_envoi' => 'Adreça e-mail de mandadís (opcionau)',
 	'info_email_envoi_txt' => 'Indicatz aquí l’adreça d’utilisar per mandar lu e-mails (a fauta d’aquò, s’utilisarà l’adreça destinatària coma adreça de mandadís):',
-	'info_email_webmestre' => 'Adreça e-mail dau responsable dau sit (opcional)', # MODIF
+	'info_email_webmestre' => 'Adreça e-mail dau oèbmestre',
 	'info_entrer_code_alphabet' => 'Ficatz lo còde de l’alfabet d’utilisar :',
 	'info_envoi_email_automatique' => 'Mandadís d’e-mails automatics',
 	'info_envoyer_maintenant' => 'Mandar aüra',
