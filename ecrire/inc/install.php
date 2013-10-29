@@ -109,8 +109,10 @@ function analyse_fichier_connection($file)
 		array_shift($regs);
 		return $regs;
 	} else {
-		$arg = '\s*\'([^\']*)\'\s*,';
-		if (preg_match("#spip_connect_db\($arg$arg$arg$arg\s*'([^']*)'\s*(?:,\s*'([^']*))?#", $s, $regs)) {
+		$ar = '\s*\'([^\']*)\'';
+		$r = '\s*,' . $ar;
+		$r = "#spip_connect_db[(]$ar$r$r$r$r(?:$r(?:$r(?:$r)?)?)?#";
+		if (preg_match($r, $s, $regs)) {
 			$regs[2] = $regs[1] . (!$regs[2] ? '' : ":$port_db;");
 			array_shift($regs);
 			array_shift($regs);
@@ -118,7 +120,7 @@ function analyse_fichier_connection($file)
 		}
 	}
 	spip_log("$file n'est pas un fichier de connexion");
-	return '';
+	return array();
 }
 
 /**
