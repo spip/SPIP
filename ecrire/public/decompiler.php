@@ -71,18 +71,15 @@ function decompiler_polyglotte($struct, $fmt='', $prof=0)
 
 function decompiler_idiome($struct, $fmt='', $prof=0)
 {
-	$module = ($struct->module == MODULES_IDIOMES)? ''
-	  : $struct->module;
-
 	$args = array();
 	foreach ($struct->arg as $k => $v) {
-		if ($k) $args[$k]= decompiler_($v, $fmt, $prof);
+		$args[$k]= public_decompiler($v, $fmt, $prof);
 	}
 
 	$filtres =  decompiler_liste($struct->param, $fmt, $prof);
 
 	$f = 'format_idiome_' . $fmt;
-	return $f($struct->nom_champ, $module, $args, $filtres, $prof);
+	return $f($struct->nom_champ, $struct->module, $args, $filtres, $prof);
 }
 
 function decompiler_champ($struct, $fmt='', $prof=0)
