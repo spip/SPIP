@@ -83,7 +83,7 @@ function liste_metas()
 		'activer_statistiques' => 'non',
 		'activer_captures_referers' => 'non',
 
-		'documents_article' => 'non',
+		'documents_article' => 'oui',
 		'documents_rubrique' => 'non',
 		'documents_date' => 'non',
 		'syndication_integrale' => 'oui',
