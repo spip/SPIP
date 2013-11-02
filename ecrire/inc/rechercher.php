@@ -74,10 +74,21 @@ function expression_recherche($recherche, $options) {
 		$is_preg = true;
 	}
 	else{
-		// s'il y a plusieurs mots il faut les chercher tous : oblige REGEXP
+		// s'il y a plusieurs mots il faut les chercher tous : oblige REGEXP,
+		// sauf ceux de moins de 4 lettres (on supprime ainsi 'le', 'les', 'un',
+		// 'une', 'des' ...)
 		if (preg_match(",\s+,".$u, $recherche)){
 			$is_preg = true;
-			$recherche = preg_replace(',\s+,'.$u, '|', $recherche);
+			$recherche_inter = '|';
+			$recherche_mots = explode(' ', $recherche);
+			foreach ($recherche_mots as $mot) {
+				if (strlen($mot) > 3) {
+					$recherche_inter .= $mot.' ';
+				}
+			}
+			// mais on cherche quand même l'expression complète, même si elle
+			// comporte des mots de moins de quatre lettres
+			$recherche = rtrim($recherche.preg_replace(',\s+,'.$u, '|', $recherche_inter), '|');
 		}
 
 		$preg = '/'.str_replace('/', '\\/', $recherche).'/' . $options['preg_flags'];
