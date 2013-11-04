@@ -384,9 +384,9 @@ la retadreso ĉi-sube (alie, via peto estos ignoritaj) :
 	'info_erreur_requete' => 'Eraro en la peto : ',
 	'info_erreur_squelette2' => 'Neniu skeleto <b>@fichier@</b> disponeblas...',
 	'info_erreur_systeme' => 'Sistemo-eraro (errno @errsys@)',
-	'info_erreur_systeme2' => 'Eble la fiksdisko plenas, aŭ la datenbazo estas difektita. <br />
- <font color=’red’>Provu<a href=’@script@’>ripari la datenbazon</a>,
- aŭ kontaktu vian retgastiganton.</font></br>',
+	'info_erreur_systeme2' => 'Eble la fiksdisko plenas, aŭ la datenbazo estas difektita.<br />
+<span style="color:red;">Provu<a href=\'@script@\'>ripari la datenbazon</a>,
+aŭ kontaktu vian retgastiganton.</span>',
 	'info_fini' => 'Finite !',
 	'info_format_image' => 'Bildaj formatoj uzeblaj por krei vinjetojn : @gd_formats@.',
 	'info_format_non_defini' => 'nedefinita formato',

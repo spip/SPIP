@@ -590,6 +590,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_url' => 'عنوان URL:',
 	'info_url_proxy' => 'عنوان URL للجهاز الوكيل',
 	'info_url_site' => 'عنوان الموقع:',
+	'info_url_site_pas_conforme' => 'عنوان URL غير صالح.',
 	'info_url_test_proxy' => 'عنوان URL للاختبار',
 	'info_urlref' => 'وصلة هايبرتكست:',
 	'info_utilisation_spip' => 'أصبح نظام النشر الآلي جاهزاً للاستخدام...',
@@ -883,8 +884,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_en_cours_validation' => 'المقالات والأخبار التالية معروضة للنشر.',
 	'texte_enrichir_mise_a_jour' => 'يمكنك استخدام «إختصارات الكتابة» لتحسين مظهر مادتك.',
 	'texte_fichier_authent' => '<b>هل يقوم SPIP بإنشاء الملفات الخاصة<tt>.htpasswd</tt>
-و<tt>.htpasswd-admin</tt> في المجلد @dossier@؟</b><p>
-تستخدم هذه الملفات للحد من دخول المؤلفين
+و<tt>.htpasswd-admin</tt> في المجلد @dossier@؟</b>
+<p>تستخدم هذه الملفات للحد من دخول المؤلفين
  والمدراء الى اجزاء اخرى من الموقع
 (تطبيقات إحصائية خارجية مثلاً).</p><p>
 إذا كنت لا تحتاج الى هذه الملفات يمكنك الإبقاء على القيمة

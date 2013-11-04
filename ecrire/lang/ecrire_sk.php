@@ -580,6 +580,7 @@ a stav ich spracovania je označený farbou:',
 	'info_url' => 'URL:',
 	'info_url_proxy' => 'Adresa proxy',
 	'info_url_site' => 'ADRESA STRÁNKY:',
+	'info_url_site_pas_conforme' => 'Adresa stránky nie je platná.',
 	'info_url_test_proxy' => 'Otestovať URL',
 	'info_urlref' => 'Hypertextový odkaz:',
 	'info_utilisation_spip' => 'SPIP je teraz pripravený na používanie',
@@ -877,7 +878,7 @@ preinštalovať SPIP, vytvoriť novú databázu a nový účet pre administrát
   Tieto súbory sa dajú použiť na obmedzenie prístupu autorom
   a administrátorom na ostatné časti vašej stránky
   (napr. externý štatistický program).</p><p>
-  Ak takéto súbory nepotrebujete, môžete ponechať túto možnosť
+  Ak to nepotrebujete, môžete nechať túto možnosť
   s predvolenou hodnotou (žiadne 
   vytváranie súborov).</p>',
 	'texte_informations_personnelles_1' => 'Systém vám teraz vytvorí osobný účet pre túto stránku.',

@@ -385,7 +385,7 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 	'info_erreur_squelette2' => 'Ez dago <b>@fichier@</b> eskeletorik erabilgarri...',
 	'info_erreur_systeme' => 'Akatsa sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'Disko gogorra beteta edo datubasea hondatuta egon daiteke.
-Basea konpontzen saiatu, edo zure ostalaitzea kontaktatu.',
+Basea konpontzen saiatu, edo zure ostalaitzea kontaktatu.', # MODIF
 	'info_fini' => 'Bukatuta!',
 	'info_format_image' => 'Miniaturendako erabil daitezkeen irudi-formatuak @gd_formats@.',
 	'info_format_non_defini' => 'formatua ez dago definitua',

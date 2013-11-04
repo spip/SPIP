@@ -294,7 +294,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_requete' => 'mi klɛn àfɔ ɖò byɔná ɔ mɛ :',
 	'info_erreur_squelette2' => 'Tìtòmɛ ɖébú ɖè á',
 	'info_erreur_systeme' => 'wàlɔ̂ jàyí)',
-	'info_erreur_systeme2' => 'mɔ̂ kú', # MODIF
 	'info_fini' => 'E vɔ!',
 	'info_format_image' => 'Nú títɛ lɛ ɖê yē zé bló gbètákɛn ná@.',
 	'info_format_non_defini' => 'ɖèxlɛ ɔ sɔ gbè á',

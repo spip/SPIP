@@ -282,7 +282,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_compatibilite_html' => 'Norma HTML a siguir',
 	'info_compresseur_gzip' => '<b>Nota:</b> Recomiéndase verificar de mano si l’agospiador ya comprime automáticamente los scripts php ; pa esto, puedes utilizar por exemplu el serviciu siguiente: @testgzip@', # MODIF
 	'info_compresseur_texte' => 'Si el to sirvidor nun comprime automáticamente les páxines html par unviales a los internautes, puedes tentar de forzar esta compresión pa amenorgar el pesu de les páxines descargáes. <b>Atención</b>: esto puede ralentizar enforma dellos sirvidores.',
-	'info_config_suivi' => 'Si estes señes corresponden a una llista de corréu, pues indicar embaxo les señes nes que pueden apuntase los participantes nel sitiu. Estes señes puen ser una URL (por exemplu la páxina d’inscripción a la llista na Rede), o unes señes d’email con un asuntu específicu (por exemplu: <tt>@señes_llista@?subject=subscribe</tt>):',
+	'info_config_suivi' => 'Si estes señes corresponden a una llista de corréu, pues indicar embaxo les señes nes que pueden apuntase los participantes nel sitiu. Estes señes puen ser una URL (por exemplu la páxina d’inscripción a la llista na Rede), o unes señes d’email con un asuntu específicu (por exemplu: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => 'Puedes soscribite a la llista de corréu d’esti sitiu. D’esti mou recibirás per corréu electrónicu los anuncios d’artículos y de breves propuestos pa espublizar.',
 	'info_confirmer_passe' => 'Confirmar esta nueva contraseña:',
 	'info_conflit_edition_avis_non_sauvegarde' => 'Atención, los campos siguientes camudáronse n’otra parte. Poro, les modificaciones dientro d’esos campos nun se grabaron.',
@@ -819,7 +819,7 @@ reinstalación de SPIP pa crear una nueva base igual que un primer accesu d’al
   (al programa esternu d’estadístiques, por exemplu).</p><p>
   Si nun vas utilizalo, puedes dexar esta opción
  col so valor predetermináu (nun crear
- esos ficheros).</p>',
+ esos ficheros).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Agora el sistema va create un accesu personalizáu al sitiu.',
 	'texte_informations_personnelles_2' => '(Nota: si esto ye una reinstalación, y el to accesu siempre funciona, pues', # MODIF
 	'texte_introductif_article' => '(Testu d’introducción de l’artículu.)',

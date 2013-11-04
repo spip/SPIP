@@ -691,9 +691,9 @@ Bagay-la pémè, pa egsanp, fòse rekalkil tout paj sa-yo, apré plizyè gro cha
 	'texte_unpack' => 'téléchajman dènyè vèsyon',
 	'texte_utilisation_moteur_syndiques' => 'Kan w itilize motè-rechèche andodan SPIP, w kapab chèche
     sou sit ak atik sendiké yo nan dé manyè diféran.
- <br /><img src=’puce.gif’> Pli senp se chèche sèlman kouman atik yo rele (tit yo)
+ <br /><img src=\'puce.gif\' /> Pli senp se chèche sèlman kouman atik yo rele (tit yo)
 ou nan dékripsyon atik sa-yo
-     <br /><img src=’puce.gif’>
+     <br /><img src=\'puce.gif\' />
     Dèzyèm métod, pli pwisan, se fè
     SPIP chèche ositou nan tèks tout sit referansé yo.
    Si w ka referanse yon sit

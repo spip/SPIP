@@ -878,7 +878,7 @@ que alguns elementos dos artigos não são utilizados.
 	'texte_fichier_authent' => '<b>SPIP deverá criar os ficheiros especiais<tt>.htpasswd-admin</tt> no directório @dossier@?</b><p>
 Estes ficheiros podem servir-lhe para restringir o acesso aos autores
 e administradores a outras partes do seu sítio (por exemplo, umprograma externo de estatísticas).<p>
-Se não utilizar os ficheiros especiais, pode deixar esta opção no seu valor por defeito (não há criação de ficheiros).',
+Se não utilizar os ficheiros especiais, pode deixar esta opção no seu valor por defeito (não há criação de ficheiros).', # MODIF
 	'texte_informations_personnelles_1' => 'O sistema vai agora criar-lhe um acesso personalizado ao sítio',
 	'texte_informations_personnelles_2' => '(Nota : se se tratar de uma reinstalação e se o seu acesso continua funcional, pode',
 	'texte_introductif_article' => '(Texto introdutório do artigo.)',
@@ -965,9 +965,9 @@ a fim de evitar as modificações simultâneas.
 	'texte_trop_resultats_auteurs' => 'Demasiados resultados para "@cherche_auteur@" ; por favor afine a pesquisa.',
 	'texte_unpack' => 'telecarregamento da última versão',
 	'texte_utilisation_moteur_syndiques' => 'Quando utilizar o motor integrado de pesquisa  em SPIP, pode efectuar as pesquisas nos sítios e nos artigos vinculados de duas maneiras
- diferentes. <br /><img src=’puce.gif’> A mais
+ diferentes. <br /><img src=\'puce.gif\' /> A mais
  simples consiste em pesquisar unicamente nos títulos e descrições dos artigos. 
-<br /><img src=’puce.gif’>
+<br /><img src=\'puce.gif\' />
  Um segundo método, muito mais poderoso, permite ao SPIP pesquisar igualmente no texto dos
  sítios referenciados. Se referenciar
  um sítio, SPIP vai então efectuar a

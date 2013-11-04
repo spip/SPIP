@@ -858,7 +858,7 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
   Gant ar restroù-se e c’hallit herzel ouzh ar re n’int ket skridaozer pe merour da vont war bajenoù all zo
   (programm stadegoù diavaez, da skouer).</p><p>
   Ma n’hoc’h eus ket ezhomm d’hen ober e c’hellit lezel an traoù evel m’emaint lakaet dre-ziouer
-  (ne vo ket krouet ar restroù).</p>',
+  (ne vo ket krouet ar restroù).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Bremañ e vo krouet gant ar reizhiad ur moned personel d’al lec’hienn evidoc’h.',
 	'texte_informations_personnelles_2' => '(Notenn : m’emaoc’h oc’h adstaliañ SPIP hag ez a c’hoazh ho moned kozh en-dro e c’hallit ',
 	'texte_introductif_article' => '(Testenn digeriñ ar pennad)',

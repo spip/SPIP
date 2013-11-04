@@ -667,9 +667,9 @@ s’avètz bravament modificat lo grafisme ò l’estructura dau sit.',
 	'texte_utilisation_moteur_syndiques' => 'Quora utilizatz lo cercador integrat 
     a SPIP, podètz far li cèrcas sobre lu sits e
     articles sindicats de doi biais
-    diferents. <br /><img src=’puce.gif’> Lo mai
+    diferents. <br /><img src=\'puce.gif\' /> Lo mai
     simple consistisse a cercar basta dins lu
-    títols e descriptius dei articles. <br /><img src=’puce.gif’>
+    títols e descriptius dei articles. <br /><img src=\'puce.gif\' />
     Lo segond biais, ben mai potent, permete
     a SPIP de cercar finda dins lo tèxt dei
     sits referenciats. 

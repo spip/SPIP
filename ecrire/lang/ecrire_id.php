@@ -127,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_passe_ldap' => 'Kata sandi',
 	'entree_port_annuaire' => 'Nomor port direktori',
 	'entree_signature' => 'Tanda tangan',
-	'entree_titre_obligatoire' => '<b>Judul</b> [Dibutuhkan]<BR>',
+	'entree_titre_obligatoire' => '<b>Judul</b> [Dibutuhkan]<br />',
 	'entree_url' => 'URL situs anda',
 	'erreur_plugin_fichier_absent' => 'Berkas hilang',
 	'erreur_plugin_fichier_def_absent' => 'Berkas definisi hilang',
@@ -231,7 +231,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_contact' => 'Kontak',
 	'info_contenu_articles' => 'Isi artikel',
 	'info_creation_paragraphe' => '(Untuk membuat paragraf, anda cukup meninggalkan baris-baris kosong.)', # MODIF
-	'info_creation_rubrique' => 'Sebelum bisa menulis artikel,<BR> anda harus membuat paling tidak satu bagian.<BR>',
+	'info_creation_rubrique' => 'Sebelum bisa menulis artikel,<br /> anda harus membuat paling tidak satu bagian.<br />',
 	'info_creation_tables' => 'Langkah keempat: <b>Pembuatan tabel-tabel database</b>',
 	'info_creer_base' => '<b>Buat</b> sebuah database baru:',
 	'info_dans_rubrique' => 'Dalam bagian:',
@@ -306,7 +306,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_mise_a_niveau_base_2' => '{{Peringatan!}} Anda telah menginstal berkas SPIP
   {yang lebih tua} daripada berkas yang terdapat sebelumnya
   di situs ini: database anda terancam hilang dan situs anda
-  tidak akan bekerja sebagaimana mestinya lagi.<br>{{Instal kembali
+  tidak akan bekerja sebagaimana mestinya lagi.<br />{{Instal kembali
   berkas-berkas SPIP}}',
 	'info_modifier_rubrique' => 'Modifikasi bagian:',
 	'info_modifier_titre' => 'Modifikasi: @titre@',
@@ -607,7 +607,7 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 	'texte_crash_base' => 'Jika database anda
 			rusak, anda dapat mencoba memperbaikinya
 			secara otomatis.',
-	'texte_creer_rubrique' => 'Sebelum dapat menulis artikel,<BR> anda harus membuat sebuah bagian.',
+	'texte_creer_rubrique' => 'Sebelum dapat menulis artikel,<br /> anda harus membuat sebuah bagian.',
 	'texte_date_creation_article' => 'TANGGAL PENULISAN ARTIKEL:',
 	'texte_date_publication_anterieure' => 'Tanggal publikasi awal:',
 	'texte_date_publication_anterieure_nonaffichee' => 'Sembunyikan data publikasi awal.',
@@ -660,7 +660,7 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 	'texte_plusieurs_articles' => 'Sejumla penulis ditemukan untuk "@cherche_auteur@":',
 	'texte_port_annuaire' => '(Nilai standar dipakai pada umumnya.)',
 	'texte_presente_plugin' => 'Halaman ini menampilkan daftar plugin yang tersedia di situs. Aktifkan plugin yang anda butuhkan dengan memberi tanda di kotak yang bersangkutan.',
-	'texte_proposer_publication' => 'Ketika artikel anda selesai ditulis,<br> anda dapat mengirimkannya untuk publikasi.',
+	'texte_proposer_publication' => 'Ketika artikel anda selesai ditulis,<br /> anda dapat mengirimkannya untuk publikasi.',
 	'texte_proxy' => 'Dalam beberapa kasus (intranet, jaringan pribadi...),
 		<i>proxy HTTP</i> perlu digunakan untuk menjangkau situs-situs tersindikasi.
 		Kalau memang ada proxy, masukkan alamat di bawah,
@@ -715,7 +715,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
   Opsi ini dinonaktifkan secara standar untuk menghindri pesan-pesan peringatan yang tidak perlu.',
 	'texte_trop_resultats_auteurs' => 'Terlalu banyak hasil untuk "@cherche_auteur@"; silakan perbaiki pencarian anda.',
 	'texte_unpack' => 'mengunduh versi terakhir',
-	'texte_utilisation_moteur_syndiques' => 'Ketika anda menggunakan mesin pencari SPIP, anda dapat melakukan pencarian di situs dan artikel yang tersindikasi dala dua cara yang berbeda. <br>- Cara termudah adalah mencari hanya di judul dan deskripsi artikel. <br>- Kedua, cara yang lebih bagus, selain di atas juga mencari dalam teks situs-situs referensi. Jika anda mereferensi sebuah situs, SPIP akan melakukan pencarian di teks situs tersebut.', # MODIF
+	'texte_utilisation_moteur_syndiques' => 'Ketika anda menggunakan mesin pencari SPIP, anda dapat melakukan pencarian di situs dan artikel yang tersindikasi dala dua cara yang berbeda. <br />- Cara termudah adalah mencari hanya di judul dan deskripsi artikel. <br />- Kedua, cara yang lebih bagus, selain di atas juga mencari dalam teks situs-situs referensi. Jika anda mereferensi sebuah situs, SPIP akan melakukan pencarian di teks situs tersebut.', # MODIF
 	'texte_utilisation_moteur_syndiques_2' => 'Metode ini memaksa SPIP untuk mengunjungi situs-situs referensi secara teratur, yang mungkin dapat menurunkan kinerja situs anda.',
 	'texte_vide' => 'kosong',
 	'texte_vider_cache' => 'Kosongkan cache',
@@ -727,7 +727,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 	'titre_cadre_ajouter_auteur' => 'TAMBAH SEORANG PENULIS:',
 	'titre_cadre_interieur_rubrique' => 'Dalam bagian',
 	'titre_cadre_numero_auteur' => 'NOMOR PENULIS',
-	'titre_cadre_signature_obligatoire' => '<b>Tanda tangan</B> [Dibutuhkan]<BR>',
+	'titre_cadre_signature_obligatoire' => '<b>Tanda tangan</b> [Dibutuhkan]<br />',
 	'titre_config_fonctions' => 'Konfigurasi situs',
 	'titre_configuration' => 'Konfigurasi situs',
 	'titre_connexion_ldap' => 'Opsi: <b>Koneksi LDAP anda</b>',
