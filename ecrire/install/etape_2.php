@@ -120,6 +120,7 @@ function install_etape_2_bases($login_db, $server_db)
 	$res = "<b>"._T('avis_lecture_noms_bases_1')."</b>
 		"._T('avis_lecture_noms_bases_2')."<p>";
 
+	$checked = false;
 	if ($login_db) {
 		// Si un login comporte un point, le nom de la base est plus
 		// probablement le login sans le point -- testons pour savoir
