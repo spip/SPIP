@@ -473,7 +473,7 @@ function auth_loger($auteur){
 
 	// initialiser les prefs
 	$p = $GLOBALS['visiteur_session']['prefs'];
-	$p['cnx'] = ($auteur['cookie'] == 'oui') ? 'perma' : '';
+	$p['cnx'] = (isset($auteur['cookie']) and $auteur['cookie'] == 'oui') ? 'perma' : '';
 
 	sql_updateq('spip_auteurs',
 	            array('prefs' => serialize($p)),

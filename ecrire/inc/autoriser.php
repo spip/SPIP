@@ -224,7 +224,7 @@ function autoriser_defaut_dist($faire, $type, $id, $qui, $opt) {
 
 
 /**
- * Autorisation d'accès è l'espace privé ?
+ * Autorisation d'accès à l'espace privé ?
  * 
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -234,7 +234,7 @@ function autoriser_defaut_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite'));
+	return isset($qui['statut']) and in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**
