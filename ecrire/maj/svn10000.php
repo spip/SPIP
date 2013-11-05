@@ -410,12 +410,20 @@ function maj_liens_insertq_multi_check($table,$couples,$desc=array()){
 $GLOBALS['maj'][17311] = array(
 	array('ecrire_meta',"multi_objets",implode(',',
 				 array_diff(
-					 array($GLOBALS['meta']['multi_rubriques']=='oui'?'spip_rubriques':'',$GLOBALS['meta']['multi_articles']=='oui'?'spip_articles':''),
+					 array(
+						(isset($GLOBALS['meta']['multi_rubriques']) and $GLOBALS['meta']['multi_rubriques']=='oui')
+							?'spip_rubriques':'',
+						(isset($GLOBALS['meta']['multi_articles']) and $GLOBALS['meta']['multi_articles']=='oui')
+							?'spip_articles':''
+					),
 					 array('')
 				 ))),
 	array('ecrire_meta',"gerer_trad_objets",implode(',',
 				 array_diff(
-					 array($GLOBALS['meta']['gerer_trad']=='oui'?'spip_articles':''),
+					 array(
+						(isset($GLOBALS['meta']['gerer_trad']) and $GLOBALS['meta']['gerer_trad']=='oui')
+							?'spip_articles':''
+					),
 					 array('')
 				 ))),
 );

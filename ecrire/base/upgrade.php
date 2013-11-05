@@ -190,6 +190,9 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='m
 
 	if ($table_meta!=='meta')
 		lire_metas($table_meta);
+
+	$current_version = null;
+
 	if ( (!isset($GLOBALS[$table_meta][$nom_meta_base_version]) )
 			|| (!spip_version_compare($current_version = $GLOBALS[$table_meta][$nom_meta_base_version],$version_cible,'='))){
 
@@ -343,15 +346,17 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta', $redirect=
 	$n = 0;
 	$time = time();
 
-	/**
-	 * Définir le timeout qui peut-être utilisé dans les fonctions
-	 * de mises à jour qui durent trop longtemps
-	 *
-	 * À utiliser tel que : `if (time() >= _TIME_OUT)`
-	 *
-	 * @var int
-	 */
-	define('_TIME_OUT', $time + _UPGRADE_TIME_OUT);
+	if (!defined('_TIME_OUT')) {
+		/**
+		 * Définir le timeout qui peut-être utilisé dans les fonctions
+		 * de mises à jour qui durent trop longtemps
+		 *
+		 * À utiliser tel que : `if (time() >= _TIME_OUT)`
+		 *
+		 * @var int
+		 */
+		define('_TIME_OUT', $time + _UPGRADE_TIME_OUT);
+	}
 
 	reset($maj);
 	while (list($v,)=each($maj)) {
@@ -411,7 +416,8 @@ function serie_alter($serie, $q = array(), $meta='', $table='meta', $redirect=''
 			$msg = "maj $table $meta2 etape $i";
 			if (is_array($r)
 			  AND function_exists($f = array_shift($r))) {
-				spip_log( "$msg: $f " . join(',',$r),'maj.'._LOG_INFO_IMPORTANTE);
+				// note: $r (arguments de la fonction $f) peut avoir des données tabulaires
+				spip_log( "$msg: $f " . @join(',',$r),'maj.'._LOG_INFO_IMPORTANTE);
 				// pour les fonctions atomiques sql_xx
 				// on enregistre le meta avant de lancer la fonction,
 				// de maniere a eviter de boucler sur timeout
