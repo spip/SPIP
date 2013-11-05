@@ -891,6 +891,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 	if (preg_match(',^image/(jpeg|gif|png|swf),', $mime_type)){
 		if ($max==0
 			AND $a['taille']<_INC_DISTANT_MAX_SIZE
+				AND isset($GLOBALS['meta']['formats_graphiques'])
 				AND (strpos($GLOBALS['meta']['formats_graphiques'], $a['extension'])!==false)
 					AND $charger_si_petite_image
 		){

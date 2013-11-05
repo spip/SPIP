@@ -126,6 +126,7 @@ function cache_valide(&$page, $date) {
 		// sauf pour les bots, qui utilisent toujours le cache
 		if (!_IS_BOT
 		AND $GLOBALS['derniere_modif_invalide']
+		AND isset($GLOBALS['meta']['derniere_modif'])
 		AND $date < $GLOBALS['meta']['derniere_modif'])
 			return 1;
 
