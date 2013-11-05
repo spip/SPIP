@@ -856,7 +856,9 @@ function queue_sleep_time_to_next_job($force=null) {
 		$queue_next_job_time = $force;
 
 	if ($queue_next_job_time==-1) {
-		define('_JQ_NEXT_JOB_TIME_FILENAME',_DIR_TMP . "job_queue_next.txt");
+		if (!defined('_JQ_NEXT_JOB_TIME_FILENAME')) {
+			define('_JQ_NEXT_JOB_TIME_FILENAME', _DIR_TMP . "job_queue_next.txt");
+		}
 		// utiliser un cache memoire si dispo
 		if (include_spip('inc/memoization') AND defined('_MEMOIZE_MEMORY') AND _MEMOIZE_MEMORY) {
 			$queue_next_job_time = cache_get(_JQ_NEXT_JOB_TIME_FILENAME);

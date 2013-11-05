@@ -452,7 +452,7 @@ function queue_update_next_job_time($next_time=null){
 				$nb_jobs_scheduled++;
 			// si trop de jobs en attente, on force la purge en fin de hit
 			// pour assurer le coup
-			if ($nb_jobs_scheduled>defined('_JQ_NB_JOBS_OVERFLOW')?_JQ_NB_JOBS_OVERFLOW:10000)
+			if ($nb_jobs_scheduled> (defined('_JQ_NB_JOBS_OVERFLOW')?_JQ_NB_JOBS_OVERFLOW:10000))
 				define('_DIRECT_CRON_FORCE',true);
 		}
 
