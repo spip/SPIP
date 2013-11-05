@@ -356,8 +356,6 @@ function ecrire_fichier_session($fichier, $auteur) {
 /**
  * Calculer le nom du fichier session
  *
- * http://doc.spip.org/@fichier_session
- *
  * @param string $alea
  * @param bool $tantpis
  * @return string

@@ -96,8 +96,9 @@ function taches_generales($taches_generales = array()) {
 	$taches_generales['invalideur'] = 600;
 
 	// nouveautes
-	if ($GLOBALS['meta']['adresse_neuf'] AND $GLOBALS['meta']['jours_neuf']
-	AND ($GLOBALS['meta']['quoi_de_neuf'] == 'oui'))
+	if (isset($GLOBALS['meta']['adresse_neuf']) AND $GLOBALS['meta']['adresse_neuf']
+	  AND $GLOBALS['meta']['jours_neuf']
+	  AND ($GLOBALS['meta']['quoi_de_neuf'] == 'oui'))
 		$taches_generales['mail']= 3600 * 24 * $GLOBALS['meta']['jours_neuf'];
 
 	// maintenance (ajax, verifications diverses)

@@ -2606,7 +2606,7 @@ function html5_permis() {
  * @return mixed Valeur de la meta.
 **/
 function lire_meta($nom) {
-	return $GLOBALS['meta'][$nom];
+	return isset($GLOBALS['meta'][$nom]) ? $GLOBALS['meta'][$nom] : null;
 }
 
 

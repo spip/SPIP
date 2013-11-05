@@ -477,7 +477,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 			$plugin = array_diff($plugin_valides,$plugin);
 		else $plugin = $plugin_valides;
 	}
-	$actifs_avant = $GLOBALS['meta']['plugin'];
+	$actifs_avant = isset($GLOBALS['meta']['plugin']) ? $GLOBALS['meta']['plugin'] : '';
 
 	// si une fonction de gestion de dependances existe, l'appeler ici
 	if ($ajouter_dependances = charger_fonction("ajouter_dependances","plugins",true)){
