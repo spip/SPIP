@@ -110,7 +110,7 @@ elseif (isset($GLOBALS['meta']["admin"])) {
 		if (tester_url_ecrire("base_$var_f"))
 			$var_f = "base_$var_f";
 		if ($var_f != $exec) {
-			spip_log("Le script $var_f lance par $n se substitue a $exec");
+			spip_log("Le script $var_f lance par auteur$n se substitue a l'exec $exec");
 			$exec = $var_f;
 			set_request('exec', $exec);
 		}
