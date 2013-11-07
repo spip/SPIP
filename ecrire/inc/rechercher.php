@@ -76,8 +76,9 @@ function expression_recherche($recherche, $options) {
 			$is_preg = true;
 			$recherche_inter = '|';
 			$recherche_mots = explode(' ', $recherche);
+			$min_long = defined('_RECHERCHE_MIN_CAR') ? _RECHERCHE_MIN_CAR : 3;
 			foreach ($recherche_mots as $mot) {
-				if (strlen($mot) > 3) {
+				if (strlen($mot) > $min_long) {
 					$recherche_inter .= $mot.' ';
 				}
 			}
