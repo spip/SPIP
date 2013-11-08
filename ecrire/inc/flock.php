@@ -177,9 +177,13 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 			spip_fclose_unlock($fp);
 		}
 
-	// liberer le verrou et fermer le fichier
+		// liberer le verrou et fermer le fichier
 		@chmod($fichier, _SPIP_CHMOD & 0666);
-		if ($ok) return $ok;
+		if ($ok) {
+			if (function_exists('opcache_invalidate'))
+				opcache_invalidate($fichier,true);
+			return $ok;
+		}
 	}
 
 	include_spip('inc/autoriser');
