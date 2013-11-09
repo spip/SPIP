@@ -13,14 +13,10 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-//
-// creer une boucle sur un iterateur CONDITION
-// annonce au compilo les "champs" disponibles
-//
-function iterateur_CONDITION_dist($b) {
-	$b->iterateur = 'CONDITION'; # designe la classe d'iterateur
-	$b->show = array(
-		'field' => array()
-	);
-	return $b;
+class IterateurCONDITION extends IterateurDATA
+{
+	protected function select($command)
+	{
+		$this->tableau = array(0=>1);
+	}
 }

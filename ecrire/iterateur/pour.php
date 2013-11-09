@@ -13,8 +13,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('iterateur/data');
-
 
 //
 // creer une boucle sur un iterateur POUR

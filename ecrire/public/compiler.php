@@ -1299,7 +1299,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
  * 
 **/
 function requeteur_php_dist(&$boucles, &$boucle, &$id) {
-	if (class_exists($boucle->type_requete)) {
+	if (class_exists($boucle->type_requete,false)) {
 		$g = charger_fonction('php', 'iterateur');
 		$boucles[$id] = $g($boucle, $boucle->type_requete);
 	} else {

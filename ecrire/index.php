@@ -11,7 +11,14 @@
 \***************************************************************************/
 
 define('_ESPACE_PRIVE', true);
+if (!defined('_DIR_RESTREINT_ABS')) define('_DIR_RESTREINT_ABS', './');
 if (!defined('_ECRIRE_INC_VERSION')) include 'inc_version.php';
+
+require_once _DIR_RESTREINT_ABS.'class/AutoloadClass.php';
+if (!defined('SPIP_AUTOLOAD')) {
+    spl_autoload_register(array('Autoload', 'load'));
+    define('SPIP_AUTOLOAD', true);
+}
 
 // Verification anti magic_quotes_sybase, pour qui addslashes("'") = "''"
 // On prefere la faire ici plutot que dans inc_version, c'est moins souvent et

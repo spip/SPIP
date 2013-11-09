@@ -66,7 +66,7 @@
  *       script will attempt to use the output from mhash prior to running
  *       the PHP code.
  */
-if (!class_exists('nanoSha2'))
+if (!class_exists('nanoSha2',false))
 {
     class nanoSha2
     {

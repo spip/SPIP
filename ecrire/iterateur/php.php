@@ -36,5 +36,3 @@ function iterateur_php_dist($b, $iteratorName) {
 	return $b;
 }
 
-
-?>
