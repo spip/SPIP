@@ -1,0 +1,31 @@
+--- # Syntaxe des raccourcis SPIP, version 0.0.1
+    #
+    # Si on nomme une regle, elle devient surchargeable
+
+securite-asp:
+  type: str
+  match: "<%"
+  replace: "&lt;%"
+
+securite-php:
+  type: str
+  match: "<?"
+  replace: "&lt;?"
+
+securite-script-php:
+  if_str: "<script"
+  type: preg
+  match: "/<(script\b[^>]+\blanguage\b[^\w>]+php\b)/UimsS"
+  replace: "&lt;$1"
+
+securite-js:
+  if_str: "<script"
+  type: all
+  replace: "echappe_js"
+  is_callback: Y
+
+securite-base:
+  if_str: "<base"
+  type: preg
+  match: "/<base\b/iS"
+  replace: "&lt;base"

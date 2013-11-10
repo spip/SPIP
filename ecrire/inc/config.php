@@ -440,7 +440,7 @@ function actualise_metas($liste_meta)
 		array('version_installee','adresse_site','alea_ephemere_ancien','alea_ephemere','alea_ephemere_date','langue_site','langues_proposees','date_calcul_rubriques','derniere_modif','optimiser_table','drapeau_edition','creer_preview','taille_preview','creer_htpasswd','creer_htaccess','gd_formats_read','gd_formats',
 	'netpbm_formats','formats_graphiques','image_process','plugin_header','plugin');
 	// verifier le impt=non
-	sql_updateq('spip_meta',array('impt'=>'non'),sql_in('nom',$meta_serveur));
+	Sql::updateq('spip_meta',array('impt'=>'non'),Sql::in('nom',$meta_serveur));
 
 	while (list($nom, $valeur) = each($liste_meta)) {
 		if (!$GLOBALS['meta'][$nom]) {

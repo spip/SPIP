@@ -1,0 +1,48 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_depot formulaire_editer_depot-#ENV{id_depot}">
+	<!-- <br class='bugajaxie' /> -->
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer_titre obligatoire[(#ENV**{erreurs}|table_valeur{titre}|oui) erreur]">
+				<label for="titre"><:info_titre:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+				<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,#VAL{<:svp:titre_nouveau_depot:>}})]"
+				[(#ENV{titre,''}|non)onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
+			</li>
+			<li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui) erreur]">
+				<label for="descriptif"><:info_descriptif:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
+				<textarea name='descriptif' id='descriptif'[ lang='(#LANGUE)'] rows='12' cols='40'>[(#ENV**{descriptif})]</textarea>
+		    </li>
+			<li class="fieldset">
+			<fieldset><ul>
+			<li class="editer_type[(#ENV**{erreurs}|table_valeur{type}|oui) erreur]">
+				<label><:svp:label_type_depot:></label>
+				<div class="choix">
+					<input type="radio" value="svn" id="type_svn" class="radio" name="type" [(#ENV{type, svn}|=={svn}|oui) checked="checked"] />
+					<label for="type_svn"><:svp:label_type_depot_svn:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" value="git" id="type_git" class="radio" name="type" [(#ENV{type, svn}|=={git}|oui) checked="checked"] />
+					<label for="type_git"><:svp:label_type_depot_git:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" value="manuel" id="type_manuel" class="radio" name="type" [(#ENV{type, svn}|=={manuel}|oui) checked="checked"] />
+					<label for="type_manuel"><:svp:label_type_depot_manuel:></label>
+				</div>
+			</li>
+			</ul></fieldset>
+			</li>
+		</ul>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

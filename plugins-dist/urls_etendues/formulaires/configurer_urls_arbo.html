@@ -1,0 +1,52 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><:urls:titre_type_arbo:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	#SET{fl,urls}
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{name,URLS_ARBO_MIN}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:urls:label_urls_nb_min_car:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name},#VAL{_URLS_ARBO_MIN}|constant}" id="#GET{name}"/>
+				<p class="explication"><:urls:texte_urls_nb_min_car:></p>
+			</li>
+			#SET{name,URLS_ARBO_MAX}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:urls:label_urls_nb_max_car:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name},#VAL{_URLS_ARBO_MAX}|constant}" id="#GET{name}"/>
+				<p class="explication"><:urls:texte_urls_nb_max_car:></p>
+			</li>
+			#SET{name,url_arbo_sep_id}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:urls:label_url_sep_id:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name},#VAL{_url_arbo_sep_id}|constant}" id="#GET{name}"/>
+			</li>
+			#SET{name,url_arbo_minuscules}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,1}
+				<div class="choix">
+					<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#VAL{_url_arbo_minuscules}|constant}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:urls:label_url_minuscules_1:></label>
+				</div>
+				#SET{val,0}
+				<div class="choix">
+					<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#VAL{_url_arbo_minuscules}|constant}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:urls:label_url_minuscules_0:></label>
+				</div>
+			</li>
+		</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>

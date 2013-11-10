@@ -1,0 +1,26 @@
+<paquet
+	prefix="msie_compat"
+	categorie="outil"
+	version="1.2.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/msiecompat-32.png"
+>	
+
+	<nom>Support vieux navigateurs</nom>
+	<!-- PNG et sélecteurs CSS pour les vieux navigateurs -->
+
+	<auteur>Collectif SPIP</auteur>
+	<credit lien="http://jquery.khurshid.com">Kush M. (jquery.ifixpng.js)</credit>
+	<credit lien="http://code.google.com/p/ie7-js/">Dean Edwards et al (IE7.js)</credit>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+	<licence lien="http://opensource.org/licenses/mit-license.php">MIT</licence>
+
+	<traduire module="msiecompat" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="configurer_liste_metas" inclure="msie_compat.php" />
+	<pipeline nom="affiche_milieu" inclure="msie_compat.php" />
+	<pipeline nom="insert_head" action="insert_head" inclure="msie_compat.php" />
+	<pipeline nom="ieconfig_metas" inclure="msie_compat_ieconfig.php" />
+</paquet>

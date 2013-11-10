@@ -1,0 +1,71 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_breve formulaire_editer_breve-#ENV{id_breve,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_breve' value='#ENV{id_breve}' />
+	  <ul>
+	    <li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+		    	<label for="titre"><:info_titre:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				]<input type='text' class='text' name='titre' id='titre' value="#ENV*{titre}"
+					placeholder="<:breves:titre_nouvelle_breve:>" />
+	    </li>
+
+	 	[<li class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+				<label for="id_parent"><:entree_interieur_rubrique:><em class='aide'>#AIDER{id_parent}</em></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
+				]
+				(#VAL|chercher_rubrique{#ENV{id_breve},#ENV{id_rubrique}|sinon{#ENV{id_parent}},'breve',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
+	    </li>]
+	    
+	    <li class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+	      		<label for="text_area"><:breves:entree_texte_breve:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
+				][(#ENV**{_texte_trop_long,''})
+				]<textarea name='texte' id='text_area' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'>[(#ENV**{texte})]</textarea>
+	    </li>
+	  	<li class="editer editer_liens_sites fieldset">
+			<fieldset>
+			<h3 class="legend"><:entree_liens_sites:></h3>
+			<ul>
+				<li class="editer editer_lien_titre[ (#ENV**{erreurs}|table_valeur{lien_titre}|oui)erreur]">
+						<label for="lien_titre"><:info_titre:><em class='aide'>#AIDER{lien_titre}</em></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lien_titre})</span>
+						]<input type='text' class='text' name='lien_titre' id='lien_titre' value="[(#ENV**{lien_titre})]" />
+				</li>
+				<li class="editer editer_lien_url[ (#ENV**{erreurs}|table_valeur{lien_url}|oui)erreur]">
+						<label for="lien_url"><:info_url:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lien_url})</span>
+						]<input type='text' class='text' name='lien_url' id='lien_url' value="[(#ENV**{lien_url})]" />
+				</li>
+			</ul>
+	    	</fieldset>
+	    </li>
+	    
+	    [(#SESSION{statut}|=={0minirezo}|oui)
+	    <li class="fieldset">
+			<fieldset>
+			<ul>
+			<li class="editer editer_statut obligatoire">
+				<label for='statut'><:breves:entree_breve_publiee:><em class='aide'>#AIDER{statut}</em>
+				</label><select name='statut' id='statut' size='1'>
+					<option value='prop'[(#ENV**{statut}|=={prop}|?{' selected="selected"'})] style='background-color: white'><:breves:item_breve_proposee:></option>
+					<option value='refuse'[(#ENV**{statut}|=={refuse}|?{' selected="selected"'})] class='danger'><:breves:item_breve_refusee:></option>
+					<option value='publie'[(#ENV**{statut}|=={publie}|?{' selected="selected"'})] style='background-color: #B4E8C5'><:breves:item_breve_validee:></option>
+				</select>
+			</li>
+			</ul>
+			</fieldset>
+			</li>
+			]
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

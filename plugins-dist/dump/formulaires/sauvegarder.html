@@ -1,0 +1,37 @@
+<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE
+		<input type='hidden' name='reinstall' value='non' />
+	  <ul>
+	  	#SET{name,nom_sauvegarde}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}"><:dump:label_nom_fichier_sauvegarde:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+	  	#SET{name,tables}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    [<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label><:install_tables_base:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<div class="choix">
+					<input type="checkbox" name="tout_sauvegarder" id="tout_sauvegarder" value="oui"[(#ENV{tout_sauvegarder}|oui)checked="checked"]
+								 onchange="jQuery(this).prop('checked')?jQuery('#liste_tables').hide('fast'):jQuery('#liste_tables').show('fast');" />
+					<label for="tout_sauvegarder"><:dump:tout_sauvegarder:></label>
+				</div>
+				<div id="liste_tables"[(#ENV{tout_sauvegarder}|oui)style="display:none;"]>
+				(#ENV*{_tables})
+				</div>
+	    </li>]
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:dump:texte_sauvegarde_base:>' /></p>
+	</div></form>
+	]
+</div>

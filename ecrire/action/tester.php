@@ -14,12 +14,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Tester nos capacites
 // http://doc.spip.org/@action_tester_dist
-function action_tester_dist() {
+function action_tester_dist()
+{
 	$arg = _request('arg');
 
-	$gd_formats = $gd_formats_read_gif = "";
+	$gd_formats = $gd_formats_read_gif = '';
 	// verifier les formats acceptes par GD
-	if ($arg == "gd1") {
+	if ($arg == 'gd1') {
 		// Si GD est installe et php >= 4.0.2
 		if (function_exists('imagetypes')) {
 
@@ -37,9 +38,9 @@ function action_tester_dist() {
 			}
 
 			if (imagetypes() & IMG_JPG)
-				$gd_formats[] = "jpg";
+				$gd_formats[] = 'jpg';
 			if (imagetypes() & IMG_PNG)
-				$gd_formats[] = "png";
+				$gd_formats[] = 'png';
 		}
 
 		else {	# ancienne methode de detection des formats, qui en plus
@@ -47,25 +48,25 @@ function action_tester_dist() {
 				# alors que la valeur deduite sert a identifier
 				# les formats disponibles en ecriture... (cf. inc_logos)
 
-			$gd_formats = Array();
+			$gd_formats = array();
 			if (function_exists('ImageCreateFromJPEG')) {
 				$srcImage = @ImageCreateFromJPEG(_ROOT_IMG_PACK."test.jpg");
 				if ($srcImage) {
-					$gd_formats[] = "jpg";
+					$gd_formats[] = 'jpg';
 					ImageDestroy( $srcImage );
 				}
 			}
 			if (function_exists('ImageCreateFromGIF')) {
 				$srcImage = @ImageCreateFromGIF(_ROOT_IMG_PACK."test.gif");
 				if ($srcImage) {
-					$gd_formats[] = "gif";
+					$gd_formats[] = 'gif';
 					ImageDestroy( $srcImage );
 				}
 			}
 			if (function_exists('ImageCreateFromPNG')) {
 				$srcImage = @ImageCreateFromPNG(_ROOT_IMG_PACK."test.png");
 				if ($srcImage) {
-					$gd_formats[] = "png";
+					$gd_formats[] = 'png';
 					ImageDestroy( $srcImage );
 				}
 			}
@@ -82,50 +83,50 @@ function action_tester_dist() {
 		if (_PNMSCALE_COMMAND == '') return;
 		$netpbm_formats= Array();
 
-		$jpegtopnm_command = str_replace("pnmscale",
-			"jpegtopnm", _PNMSCALE_COMMAND);
-		$pnmtojpeg_command = str_replace("pnmscale",
-			"pnmtojpeg", _PNMSCALE_COMMAND);
+		$jpegtopnm_command = str_replace('pnmscale',
+			'jpegtopnm', _PNMSCALE_COMMAND);
+		$pnmtojpeg_command = str_replace('pnmscale',
+			'pnmtojpeg', _PNMSCALE_COMMAND);
 
-		$vignette = _ROOT_IMG_PACK."test.jpg";
-		$dest = _DIR_VAR . "test-jpg.jpg";
+		$vignette = _ROOT_IMG_PACK . 'test.jpg';
+		$dest = _DIR_VAR . 'test-jpg.jpg';
 		$commande = "$jpegtopnm_command $vignette | "._PNMSCALE_COMMAND." -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
 		exec($commande);
 		if ($taille = @getimagesize($dest)) {
-			if ($taille[1] == 10) $netpbm_formats[] = "jpg";
+			if ($taille[1] == 10) $netpbm_formats[] = 'jpg';
 		}
-		$giftopnm_command = str_replace("pnmscale", "giftopnm", _PNMSCALE_COMMAND);
-		$pnmtojpeg_command = str_replace("pnmscale", "pnmtojpeg", _PNMSCALE_COMMAND);
-		$vignette = _ROOT_IMG_PACK."test.gif";
-		$dest = _DIR_VAR . "test-gif.jpg";
+		$giftopnm_command = str_replace('pnmscale', 'giftopnm', _PNMSCALE_COMMAND);
+		$pnmtojpeg_command = str_replace('pnmscale', 'pnmtojpeg', _PNMSCALE_COMMAND);
+		$vignette = _ROOT_IMG_PACK . 'test.gif';
+		$dest = _DIR_VAR . 'test-gif.jpg';
 		$commande = "$giftopnm_command $vignette | "._PNMSCALE_COMMAND." -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
 		exec($commande);
 		if ($taille = @getimagesize($dest)) {
-			if ($taille[1] == 10) $netpbm_formats[] = "gif";
+			if ($taille[1] == 10) $netpbm_formats[] = 'gif';
 		}
 
-		$pngtopnm_command = str_replace("pnmscale", "pngtopnm", _PNMSCALE_COMMAND);
-		$vignette = _ROOT_IMG_PACK."test.png";
-		$dest = _DIR_VAR . "test-gif.jpg";
+		$pngtopnm_command = str_replace('pnmscale', 'pngtopnm', _PNMSCALE_COMMAND);
+		$vignette = _ROOT_IMG_PACK . 'test.png';
+		$dest = _DIR_VAR . 'test-gif.jpg';
 		$commande = "$pngtopnm_command $vignette | "._PNMSCALE_COMMAND." -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
 		exec($commande);
 		if ($taille = @getimagesize($dest)) {
-			if ($taille[1] == 10) $netpbm_formats[] = "png";
+			if ($taille[1] == 10) $netpbm_formats[] = 'png';
 		}
 
 
 		if ($netpbm_formats)
-			$netpbm_formats = join(",", $netpbm_formats);
+			$netpbm_formats = join(',', $netpbm_formats);
 		else
 			$netpbm_formats = '';
-		ecrire_meta("netpbm_formats", $netpbm_formats);
+		ecrire_meta('netpbm_formats', $netpbm_formats);
 	}
 
 	// et maintenant envoyer la vignette de tests
-	if (in_array($arg,array("gd1","gd2","imagick","convert","netpbm"))) {
+	if (in_array($arg,array('gd1','gd2','imagick','convert','netpbm'))) {
 		include_spip('inc/filtres');
 		include_spip('inc/filtres_images_mini');
 		$taille_preview = 150;

@@ -16,11 +16,12 @@ include_spip('inc/actions');
 include_spip('inc/cookie');
 
 // http://doc.spip.org/@action_cookie_dist
-function action_cookie_dist($set_cookie_admin=null, $change_session = null) {
+function action_cookie_dist($set_cookie_admin=null, $change_session = null)
+{
 	$redirect_echec = $redirect = null;
 	$test_echec_cookie = null;
 	$url = "";
-	if (is_null($set_cookie_admin)){
+	if (is_null($set_cookie_admin)) {
 		$set_cookie_admin = _request('cookie_admin');
 		$change_session = _request('change_session');
 		$test_echec_cookie = _request('test_echec_cookie');
@@ -52,7 +53,8 @@ function action_cookie_dist($set_cookie_admin=null, $change_session = null) {
 		include_spip('inc/auth');
 		if (@$_SERVER['PHP_AUTH_USER']
 		AND @$_SERVER['PHP_AUTH_PW']
-		AND $auteur = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])){
+		AND $auteur = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']))
+		{
 			auth_loger($auteur);
 			redirige_par_entete(parametre_url($redirect,'t',time(),'&'));
 		}

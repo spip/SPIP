@@ -1,0 +1,7 @@
+<B_groupes>
+<select[ name='(#ENV{name})'][ id='(#ENV{id})']>
+<BOUCLE_groupes(GROUPES_MOTS){par titre}{tables_liees==#VAL{'(^|,)'}|concat{#ENV{table,.*},'($|,)'}}>
+<option value='#ID_GROUPE'[(#EXPOSE{' '})selected='selected']>[(#TITRE|supprimer_tags|texte_backend)]</option>
+</BOUCLE_groupes>
+</select>
+</B_groupes>

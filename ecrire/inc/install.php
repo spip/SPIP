@@ -490,7 +490,7 @@ function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 function install_etape_liste_bases($server_db, $login_db, $disabled=array())
 {
 	$bases = $checked = array();
-	$noms = sql_listdbs($server_db);
+	$noms = Sql::listdbs($server_db);
 	if (!$noms) return '';
 
 	foreach ($noms as $nom){

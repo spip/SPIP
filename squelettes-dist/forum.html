@@ -1,0 +1,59 @@
+<BOUCLE_principale(FORUMS){id_forum}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title><:forum:forum:> #ID_FORUM - [(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inclure/head} />
+<meta name="robots" content="none" />
+</head>
+
+<body class="pas_surlignable page_forum">
+<div class="page">
+
+	<INCLURE{fond=inclure/header} />
+	<INCLURE{fond=inclure/nav,env} />
+	
+    <div class="main">
+		[(#REM) Contenu principal : message de forum ]
+		<div class="wrapper">
+		<div class="content" id="content">
+			<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; ... &gt; <strong class="on"><:forum:forum:> #ID_FORUM</strong></p><!--.arbo-->
+	
+			<div class="cartouche">
+				[<h1>(#TITRE|sinon{<:forum:forum:> #ID_FORUM})</h1>]
+			</div>
+			<p class="comment-meta">
+				<small><abbr class="dtreviewed"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)][, (#DATE|heures)][:(#DATE|minutes)]</abbr>[<span class="sep">, </span><:par_auteur:> <span class="#EDIT{qui}">(#NOM|couper{80})</span>]</small>
+			</p>
+			<div class="comment-content">
+				[<div class="#EDIT{texte} comment-texte">(#TEXTE|lignes_longues)</div>]
+				[<div class="comment-notes">(#NOTES|lignes_longues)</div>]
+				[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE|attribut_html)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+				[<div class="comment-doc"><:medias:info_document:> : (#ENV{ajouter_document}|table_valeur{name})</div>]
+				<B_mots><p class="comment-mots"><:forum:forum_avez_selectionne:> <BOUCLE_mots(MOTS){id_mot IN #ENV**{ajouter_mot}}{par num type}{par type}{par num titre}{par titre}{', '}>#TITRE</BOUCLE_mots></p></B_mots>
+			</div>
+			
+			[<h2><:forum:form_pet_message_commentaire:></h2>
+			(#FORMULAIRE_FORUM)]
+	
+		</div><!--.content-->
+		</div><!--.wrapper-->
+	
+		<div class="aside">
+			<INCLURE{fond=inclure/navsub} />
+			#FORMULAIRE_RECHERCHE
+		</div><!--.aside-->
+	</div><!--.main-->
+
+	<INCLURE{fond=inclure/footer,self=#SELF} />
+
+</div><!--.page-->
+</body>
+</html>
+</BOUCLE_principale>

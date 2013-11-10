@@ -1,0 +1,9 @@
+[(#ENV{repondre}|oui)
+[(#INCLURE{fond=prive/repondre_forum, env})]
+][(#ENV{repondre}|non)
+
+[(#SELF|parametre_url{repondre,new}|icone{<:forum:icone_poster_message:>,#STATUT|=={privadm}|?{forum-interne-24.png,forum-interne-24.png},#LANG_RIGHT,'',ajax})
+<div class='clear'></div>
+]
+[(#INCLURE{fond=prive/objets/liste/participer_forum_thread, env})]
+]

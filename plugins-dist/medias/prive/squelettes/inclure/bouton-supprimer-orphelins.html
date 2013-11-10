@@ -1,0 +1,9 @@
+
+[(#SET{info_suppression,#VAL{<:medias:bouton_supprimer_tous_orphelins_confirmation:>}})]
+[(#REM) mettre directement la chaine de langue sous la forme <:medias:bouton_supprimer_tous_orphelins_confirmation{nb=#ENV{nb_orphelins}}:> ne fonctionne pas]
+<BOUCLE_docs_supprimables(DOCUMENTS){orphelins}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?}{statut ?}{media ?}{10,1}>
+</BOUCLE_docs_supprimables>
+
+<span class='tout_supprimer'>[(#BOUTON_ACTION{<:medias:bouton_supprimer_tous_orphelins:>,[(#URL_ACTION_AUTEUR{supprimer_tous_orphelins,[(#ENV{media})]/[(#ENV{distant})]/[(#ENV{statut})]/[(#ENV{sanstitre})],#SELF})],ajax,[(#GET{info_suppression}|_T{#ARRAY{nb,#ENV{nb_orphelins}}})]})]</span>
+</B_docs_supprimables>
+

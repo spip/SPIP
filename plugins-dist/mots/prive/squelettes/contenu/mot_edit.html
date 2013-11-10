@@ -1,0 +1,27 @@
+[(#ID_MOT|oui)
+	[(#AUTORISER{modifier,mot,#ID_MOT}|sinon_interdire_acces)]]
+[(#ID_MOT|non)
+	[(#AUTORISER{creer,mot,#ID_MOT,'','',#ARRAY{associer_objet,#ENV{associer_objet}}}|sinon_interdire_acces)]]
+
+#SET{retour,#ENV{redirect}|sinon{#ENV{id_mot}|?{#URL_ECRIRE{mot,id_mot=#ID_MOT},#URL_ECRIRE{mots}}}}
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_MOT|oui)
+	[(#GET{retour}|icone_verticale{<:icone_retour:>,mot,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[[(#ID_MOT|?{<:mots:info_modifier_mot:>,<:titre_ajouter_un_mot:>})]
+	<h1>(#ENV{titre,#INFO_TITRE{mot,#ID_MOT}|sinon{<:mots:texte_nouveau_mot:>}})</h1>]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_MOT|generer_url_entite{mot}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		#FORMULAIRE_EDITER_MOT{#ENV{id_mot,oui},#ENV{id_groupe},#GET{redirect},#ENV{associer_objet}}
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/if (window.jQuery) jQuery('#navigation>div,#extra>div').ajaxReload({args:{exec:'#ENV{exec}'}});/*\]\]>*/</script>
+]
+</div>
+

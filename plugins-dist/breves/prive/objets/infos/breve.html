@@ -1,0 +1,28 @@
+<BOUCLE_breve(BREVES){id_breve=#ENV{id}}{statut==.*}{!lang_select}>
+<div class='infos'>
+<div class='numero'><:breves:info_gauche_numero_breve:><p>#ID_BREVE</p></div>
+
+#FORMULAIRE_INSTITUER_OBJET{breve,#ID_BREVE}
+
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publiee(BREVES){id_breve}>
+	[(#VAL{redirect}
+		|generer_url_action{type=breve&id=#ID_BREVE}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publiee>
+	[(#AUTORISER{previsualiser,breve,#ID_BREVE,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=breve&id=#ID_BREVE}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publiee>
+
+</div>
+</BOUCLE_breve>

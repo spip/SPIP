@@ -1,0 +1,149 @@
+<BOUCLE_principale(MOTS) {id_mot}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF|couper{150}|attribut_html)" />]
+[<link rel="canonical" href="(#URL_MOT|url_absolue)" />]
+<INCLURE{fond=inclure/head} />
+[(#REM) Lien vers le flux RSS des articles du mot cle ]
+<link rel="alternate" type="application/rss+xml"[ title="(#TITRE|attribut_html)"] href="[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]" />
+</head>
+
+<body class="pas_surlignable page_mot">
+<div class="page">
+
+	<INCLURE{fond=inclure/header} />
+	<INCLURE{fond=inclure/nav,env} />
+
+    <div class="main">
+		[(#REM) Contenu principal : contenu du mot-cle ]
+		<div class="wrapper">
+		<div class="content" id="content">
+			<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:mots_clefs:><BOUCLE_ariane(GROUPES_MOTS){id_groupe}> &gt; [(#TITRE|couper{80})]</BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+	
+			<div class="cartouche">
+				[(#LOGO_MOT|image_reduire{40,*})]
+				<h1 class="#EDIT{titre}">#TITRE</h1>
+			</div>
+	
+			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+	
+			[(#REM) Articles lies au mot-cle ]
+			<B_articles>
+			<div class="menu menu_articles">
+				#ANCRE_PAGINATION
+				<h2><:articles:></h2>
+				<ul>
+					<BOUCLE_articles(ARTICLES) {id_mot} {!par popularite} {pagination 10}>
+					<li>
+						<strong><a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{40,*}) ]#TITRE</a></strong>
+						<br /><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</small>
+					</li>
+					</BOUCLE_articles>
+				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
+			</div>
+			</B_articles>
+	
+			[(#REM) Rubriques liees au mot-cle ]
+			<B_rubriques>
+			<div class="menu menu_rubriques">
+				<h2><:rubriques:></h2>
+				<ul>
+					<BOUCLE_rubriques(RUBRIQUES) {id_mot} {par titre}>
+					<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+					</BOUCLE_rubriques>
+				</ul>
+			</div>
+			</B_rubriques>
+	
+			[(#REM) Breves liees au mot-cle ]
+			<B_breves>
+			<div class="menu menu_breves">
+				<h2><:breves:breves:></h2>
+				<ul>
+					<BOUCLE_breves(BREVES) {id_mot} {par titre}>
+					<li><a href="#URL_BREVE">#TITRE</a></li>
+					</BOUCLE_breves>
+				</ul>
+			</div>
+			</B_breves>
+	
+			[(#REM) Liens des forums ]
+			<B_forums_liens>
+			<div class="menu menu_comments">
+				<h2><:messages_forum:></h2>
+				<ul>
+					<BOUCLE_forums_liens(FORUMS?) {id_mot} {plat} {!par date}>
+					[<li>[(#NOM|sinon{...})&nbsp;: ]<a href="#URL_FORUM"[ title="(#TITRE|attribut_html|couper{80})"]>(#TEXTE|couper{80})</a></li>]
+					</BOUCLE_forums_liens>
+				</ul>
+			</div>
+			</B_forums_liens>
+	
+			[(#REM) Sites web lies au mot-cle ]
+			<B_sites>
+			<div class="menu">
+				<h2><:sites_web:></h2>
+				<ul>
+					<BOUCLE_sites(SITES) {id_mot} {par nom_site}>
+					<li><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a></li>
+					</BOUCLE_sites>
+				</ul>
+			</div>
+			</B_sites>
+	
+			[<div class="notes"><hr />(#NOTES)</div>]
+	
+		</div><!--.content-->
+		</div><!--.wrapper-->
+	
+		<div class="aside">
+	
+			<INCLURE{fond=inclure/navsub} />
+			#FORMULAIRE_RECHERCHE
+			
+			[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
+			<B_mots_freres>
+			<div class="menu">
+				#ANCRE_PAGINATION
+				<h2><:mots_clefs_meme_groupe:></h2>
+				<ul>
+					<BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination 20}>
+					<li><a href="#URL_MOT"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_mots_freres>
+				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
+			</div>
+			</B_mots_freres>
+	
+			[(#REM) Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe ]
+			<B_groupes_freres>
+			<div class="menu">
+				<h2><:autres_groupes_mots_clefs:></h2>
+				<ul>
+					<BOUCLE_groupes_freres(GROUPES_MOTS) {!id_groupe} {par titre}>
+					<BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
+					<li><a href="#URL_MOT">#TYPE</a></li>
+					</BOUCLE_mot_cousin>
+					</BOUCLE_groupes_freres>
+				</ul>
+			</div>
+			</B_groupes_freres>
+			
+		</div><!--.aside-->
+	</div><!--.main-->
+
+	<INCLURE{fond=inclure/footer,self=#SELF} />
+
+</div><!--.page-->
+</body>
+</html>
+</BOUCLE_principale>

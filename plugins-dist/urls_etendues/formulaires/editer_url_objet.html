@@ -1,0 +1,23 @@
+#INCLURE{fond=prive/objets/liste/urls,type=#ENV{_objet},id_objet=#ENV{_id_objet},ajax}
+[<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,urls}
+	  <ul>
+	  	#SET{name,url}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,'obligatoire'}
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}"><:urls:label_url:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type="text" class="text" name="#GET{name}" id="#GET{name}" size="40" value="#ENV{#GET{name}}" /></li>
+			</li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>]

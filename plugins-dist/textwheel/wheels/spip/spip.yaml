@@ -1,0 +1,179 @@
+--- # Syntaxe des raccourcis SPIP, version 0.0.1
+    #
+    # Si on nomme une regle, elle devient surchargeable
+
+traiter_retours_chariots_1:
+  # Harmonise les retours chariots et mange les paragraphes html
+  if_chars: "\r"
+  match: ",\r\n?,S"
+  replace: "\n"
+  priority: -40 # avant tout
+
+traiter_retours_chariots_2:
+  if_str: "<p"
+  match: ",<p[>[:space:]],iS"
+  replace: "\n\n$0"
+  priority: -40 # avant tout
+
+traiter_retours_chariots_3:
+  if_str: "</p"
+  match: ",</p[>[:space:]],iS"
+  replace: "$0\n\n"
+  priority: -40 # avant tout
+
+init-trim:
+  # trim
+  type: all
+  is_callback: y
+  replace: trim
+  priority: -40 # avant tout
+
+init-saut:
+  type: all
+  replace: "\n$0"
+  priority: -40
+
+lignes-vides:
+  match: ",^[ \t]+$,m"
+  replace: ""
+  priority: -35 # avant les tableaux
+
+tableaux:
+  type: all
+  # included subwheel with relative filepath
+  replace: spip/spip-tableaux.yaml
+  is_wheel: Y
+  if_str: "\n|"
+  priority: -30 # avant les raccourcis
+
+listes:
+  if_str: "\n-"
+  is_wheel: Y
+  type: all
+  replace: spip/spip-listes.yaml
+  priority: -20 # avant !paragraphes
+
+echappe-tags:
+  # voir restaure-tags plus bas
+  match: ",</?[a-z!][^<>]*?[{}_-][^<>]*>,imsS"
+  if_chars: "{}_-"
+  priority: -20 # avant !paragraphes
+  is_wheel: Y
+  replace:
+    echappe-tags-sub:
+      if_match: "/[{}]|\n[_-]|--/"
+      match: ['{', '}', '_', '-']
+      replace: ["\x1\x1", "\x1\x2", "\x1\x3", "\x1\x4"]
+      type: str
+
+ligne-horizontale:
+  match: "/\n(----+|____+)/S"
+  replace: "\n\n\n<hr class=\"spip\" />\n\n\n"
+  if_chars: "\n"
+  priority: -20 # avant !paragraphes
+
+alinea:
+  match: "/\n-- */"
+  replace: "\n<br />&mdash;&nbsp;"
+  if_str: "\n--"
+  priority: -20 # avant !paragraphes
+
+puce:
+  match: "/\n- */S"
+  replace: replace_puce
+  if_str: "\n-"
+  is_callback: Y
+  priority: -20 # avant !paragraphes
+
+br:
+  match: "/\n_ +/S"
+  replace: "<br class='manualbr' />"
+  if_str: "\n_"
+  priority: -20 # avant !paragraphes
+
+abbr:
+  # raccourcis en [ABBR|abbreviation]
+  if_chars: "["
+  if_chars: "|"
+  match: "/\[([^\|\[\]>]+)\|([^\|\]\{>]+)(?:\{([a-z]+)\})?\]/S"
+  is_callback: Y
+  replace: inserer_abbr
+
+intertitres-compliques:
+  # raccourcis imbriques en {{{{..}}}}
+  # intertitres
+  match: ['/(^|[^{])[{][{][{]/S', '/[}][}][}]($|[^}])/S']
+  replace: ["$1\n\n\n<h3 class=\"spip\">", "</h3>\n\n\n$1"]
+  if_str: '}}}}'
+
+intertitres:
+  # raccourcis en {{{..}}}
+  # intertitres
+  match: ['{{{', '}}}']
+  replace: ["\n\n\n<h3 class=\"spip\">", "</h3>\n\n\n"]
+  if_str: '{{{'
+  type: str
+
+gras:
+  # raccourcis en {{..}}
+  # strong
+  match: ['{{', '}}']
+  replace: ['<strong>', '</strong>']
+  type: str
+  if_str: '{{'
+
+italiques:
+  # raccourcis en {..}
+  # strong
+  match: ['{', '}']
+  replace: ['<i>', '</i>']
+  type: str
+  if_str: '{'
+
+paragraphes:
+  # paragraphes
+  # lignes vides consecutives, br imbriques dans des p
+  # mais attention pas les br trop riches (ex: br style=clear:both)
+  match: ["/ *\n(?: *\n)+(?:<br ?\/?>)*/S", '/(?:<br\b[^>]*>){2,}\s*/S', "/(<p\b[^>]*>)\n*(?:<br ?\/?>\n*)+/S"]
+  replace: ['<p>', '<p>', '$1']
+  priority: 0
+
+quote:
+  # raccourci <quote>
+  match: ['<quote>', '</quote>']
+  replace: ['<blockquote class="spip"><p>', '</blockquote><p>']
+  if_str: '<quote>'
+  type: str
+
+intro:
+  # suppr raccourci <intro>
+  # + suppression de <intro>
+  match: ['<intro>', '</intro>']
+  replace: ['', '']
+  if_str: '<intro>'
+  type: str
+
+br-restant:
+  # eliminer les br restant en debut de texte
+  match: "@^\n<br />@S"
+  replace: ''
+  if_str: "\n<br"
+  priority: -20 # avant !paragraphes
+
+
+poesie:
+  # poesie|poetry
+  # utilise une callback
+  match: ",<poe(sie|try)>(.*)</poe(sie|try)>,UimsS"
+  replace: spip/spip-poesie.yaml
+  pick_match: 2
+  is_wheel: Y
+  if_str: '<poe'
+  priority: -40
+
+restaure-tags:
+  # voir echappe-tags ci-dessus
+  if_chars: "\x1"
+  match: ["\x1\x1", "\x1\x2", "\x1\x3", "\x1\x4"]
+  replace: ['{', '}', '_', '-']
+  type: str

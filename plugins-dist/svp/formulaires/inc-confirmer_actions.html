@@ -1,0 +1,62 @@
+
+<input type="hidden" name="_todo" class='hidden' value="[(#ENV{_todo})]" />
+
+[<div class="reponse_formulaire reponse_formulaire_erreur">
+	(#ENV**{erreurs/decideur_erreurs}|foreach{svp_presenter_actions})
+</div>]
+
+[<div id="charger_plugin_confirm">
+
+	<div class="reponse_formulaire reponse_formulaire_ok">
+		<strong><:svp:actions_demandees:></strong>
+		<ul>(#ENV**{erreurs/decideur_demandes}|foreach{svp_presenter_actions})</ul>
+	</div>
+	[<div class="reponse_formulaire reponse_formulaire_ok">
+		<strong><:svp:actions_necessaires:></strong>
+		<ul>(#ENV**{erreurs/decideur_propositions}|foreach{svp_presenter_actions})</ul>
+	</div>]
+	<p class="boutons">
+		<input type="submit" name="annuler_actions" class="submit annuler_actions" value="<:bouton_annuler:>" />
+		<input type="submit" name="valider_actions" class="submit valider_actions" value="<:bouton_valider:>" />
+	</p>
+	<script type="text/javascript">
+		[(#REM)
+			Fonctionnement du JS.
+				- overlayClose // pas de click en dehors des éléments prévus
+				
+				- onComplete   // le chargement et fait : si l'on clique les boutons du formulaire
+							   // mis dans la modale, on leur ajoute une classe 'fire'
+							   // et on lance la fermeture de la boite
+
+				- onCleanup    // avant la fermeture... on verifie que 'fire' est bien là
+							   // sinon c'est qu'on a appuyé ESC ou cliqué X
+							   // dans ce cas on met 'fire' sur annuler
+
+				- onClose	   // apres la fermeture, on clique le bouton ayant 'fire'
+						
+		]
+		<!--
+		(function($){
+			$(function(){
+				if ($.modalbox !== 'undefined') {
+					$.modalboxload('#charger_plugin_confirm', {
+						overlayClose: false, // pas de click en dehors
+						onComplete: function() {
+							$('#cboxLoadedContent .boutons .submit').click(function(){
+								$(this).addClass('fire'); $.mediaboxClose();
+							});
+						},
+						onCleanup: function() {
+							if (!$('#charger_plugin_confirm .boutons .submit.fire').length) {
+								$('#charger_plugin_confirm .boutons .submit.annuler_actions').addClass('fire');
+							}
+							$('#charger_plugin_confirm').hide();
+						},
+						onClose: function() { $('#charger_plugin_confirm .submit.fire').click(); }
+					});
+				}
+			});
+		})(jQuery);
+		-->
+	</script>
+</div>]

@@ -1,0 +1,31 @@
+#BOITE_OUVRIR{'',info}
+	<:info_gauche_messagerie:>
+#BOITE_FERMER
+
+#SET{ouvreboite,' '}
+
+[(#AUTORISER{envoyermessage,affich}|oui)
+	[(#GET{ouvreboite}|oui)
+		#BOITE_OUVRIR{'',raccourcis}
+		#SET{ouvreboite,''}
+	]
+	[(#URL_ECRIRE{message_edit,new=oui&typemes=affich}|icone_horizontale{<:organiseur:icone_ecrire_nouvelle_annonce:>,annonce-24.png,new})]
+]
+[(#AUTORISER{envoyermessage,pb}|oui)
+	[(#GET{ouvreboite}|oui)
+		#BOITE_OUVRIR{'',raccourcis}
+		#SET{ouvreboite,''}
+	]
+	[(#URL_ECRIRE{message_edit,new=oui&typemes=pb}|icone_horizontale{<:organiseur:icone_ecrire_nouveau_pensebete:>,pensebete-24.png,new})]
+]
+[(#AUTORISER{envoyermessage,normal}|oui)
+	[(#GET{ouvreboite}|oui)
+		#BOITE_OUVRIR{'',raccourcis}
+		#SET{ouvreboite,''}
+	]
+	[(#URL_ECRIRE{message_edit,new=oui}|icone_horizontale{<:organiseur:icone_ecrire_nouveau_message:>,message-24.png,new})]
+]
+[(#GET{ouvreboite}|sinon{#BOITE_FERMER})]
+
+
+<INCLURE{fond=prive/squelettes/inclure/organiseur-rappels,id_auteur=#SESSION{id_auteur},last=#SESSION{quand}} />

@@ -1,0 +1,21 @@
+<traduction module="paquet-safehtml" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_core_/plugins/safehtml/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-safehtml?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-safehtml?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
+	<langue code="fr" />
+	<langue code="it" url="http://trad.spip.net/tradlang_module/paquet-safehtml?lang_cible=it">
+		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
+	</langue>
+	<langue code="pt" url="http://trad.spip.net/tradlang_module/paquet-safehtml?lang_cible=pt">
+		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />
+	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-safehtml?lang_cible=ru">
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-safehtml?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>

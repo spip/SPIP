@@ -1,0 +1,26 @@
+[(#AUTORISER{ajouter,_plugins}|sinon_interdire_acces)]
+<h1 class="grostitre"><:icone_admin_plugin:></h1>
+
+[(#REM) <!-- Barre d'onglets de premier niveau : on reste dans l'onglet ajouter --> ]
+[(#VAL{plugins}|barre_onglets{charger_plugin})]
+
+[(#REM) <!-- Barre d'onglets de second niveau de ajouter : rechercher / depots --> ]
+<div class="onglets_simple second clearfix">
+	<ul>
+		<li><a[ href="(#URL_ECRIRE{charger_plugin})"]><:svp:titre_plugins:></a></li>
+		<li><strong><:svp:titre_depots:></strong></li>
+	</ul>
+</div>
+
+[(#REM) Liste des objets depot ]
+<INCLURE{fond=prive/objets/liste/depots, 
+	titre=<:svp:titre_liste_depots:>,
+	par=nbr_paquets,
+	pas=10,
+	affichage=complet,
+	env, ajax} />
+
+<div class="noajax">
+	[(#REM) Formulaire d'ajout d'un depot ]
+	#FORMULAIRE_AJOUTER_DEPOT
+</div>

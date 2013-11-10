@@ -1,0 +1,15 @@
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{statistique-24.png}|balise_img{'',cadre-icone})]<h1><:statistiques:titre_evolution_visite:></h1>,'simple stats'})]
+<BOUCLE_expose(ARTICLES){id_article}{statut==.*}>
+#BOITE_OUVRIR{'','note'}
+	<a class='annule_filtre' href="[(#SELF|parametre_url{id_article,''})]" title="<:info_tout_afficher|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:info_tout_afficher:>})]</a>
+	<:statistiques:titre_page_statistiques_visites:> <:info_pour:>
+	<h2 class='objet_titre'><a href='#URL_ARTICLE'>#TITRE</a></h2>
+	<a href="#URL_ECRIRE{stats_referers,id_article=#ID_ARTICLE}"><:statistiques:titre_liens_entrants:></a>
+#BOITE_FERMER
+</BOUCLE_expose>
+
+<INCLURE{fond=prive/squelettes/inclure/stats-visites-jours,ajax,env} />
+<INCLURE{fond=prive/squelettes/inclure/stats-visites-mois,ajax,env} />
+
+#BOITE_FERMER
+

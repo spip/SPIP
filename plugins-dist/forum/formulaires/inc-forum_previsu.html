@@ -1,0 +1,33 @@
+<fieldset class="previsu">
+	<legend><:previsualisation:></legend>
+	<ul>
+		<li>
+			<ul class='forum'>
+				<li class="forum-fil">
+					<div class="comment">
+						<div class="comment-meta">
+							[<strong class="comment-titre">(#ENV*{titre})</strong>]
+							[<small><:par_auteur:> <span>(#SESSION{session_nom}|safehtml|sinon{[(#SESSION{nom}|typo)]}|sinon{<span class="erreur_message blink">?</span>})</span></small>]
+						</div>
+						<div class="comment-content">
+							[<div class="comment-texte">(#ENV*{texte}|lignes_longues)</div>]
+							[<div class="comment-notes">(#ENV*{notes}|lignes_longues)</div>]
+							[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#ENV{url_site}|attribut_html)" class="spip_out">[(#ENV*{nom_site}|sinon{[(#ENV{url_site}|couper{80})]})]</a></p>]
+							[<div class="comment-doc"><:medias:info_document:> : (#ENV{ajouter_document}|table_valeur{name})</div>]
+							<B_mots><p class="comment-mots"><:forum:forum_avez_selectionne:> <BOUCLE_mots(MOTS){id_mot IN #ENV**{ajouter_mot}}{par num type}{par type}{par num titre}{par titre}{', '}>#TITRE</BOUCLE_mots></p></B_mots>
+						</div>
+					</div>
+				</li>
+			</ul>
+			[<li class="reponse_formulaire reponse error">(#ENV*{erreur})</li>]
+		</li>
+	</ul>
+	[<p class="boutons"><input type="submit" class="submit" onclick="jQuery(window).unbind();" name="confirmer_previsu_forum" value="(#ENV*{bouton})" /></p>]
+</fieldset>
+<br class="clear" />
+<script type="text/javascript">/*<![CDATA[*/
+if (window.jQuery){ jQuery(function(){
+	jQuery(window).unload(function() { alert('<:forum:forum_attention_message_non_poste|texte_script:>');jQuery(window).unbind();});
+	jQuery(window).on('beforeunload', function(){		jQuery(window).unbind();return '<:forum:forum_attention_message_non_poste|texte_script:>';	});
+});}
+/*]]>*/</script>

@@ -160,15 +160,15 @@ function test_enfants_rubrique($id_rubrique,$types=array()){
 	if (!isset($has_child[$id_rubrique])){
 		$types = (is_array($types)?array_filter($types):array());
 		// recuperer tous les freres et soeurs de la rubrique visee
-		$id_parent = sql_getfetsel('id_parent','spip_rubriques','id_rubrique='.intval($id_rubrique));
-		$fratrie = sql_allfetsel('id_rubrique','spip_rubriques','id_parent='.intval($id_parent));
+		$id_parent = Sql::getfetsel('id_parent','spip_rubriques','id_rubrique='.intval($id_rubrique));
+		$fratrie = Sql::allfetsel('id_rubrique','spip_rubriques','id_parent='.intval($id_parent));
 		$fratrie = array_map('reset',$fratrie);
-		$has = sql_allfetsel("DISTINCT id_parent","spip_rubriques",sql_in('id_parent',$fratrie));
+		$has = Sql::allfetsel("DISTINCT id_parent","spip_rubriques",Sql::in('id_parent',$fratrie));
 		$has = array_map('reset',$has);
 		$fratrie = array_diff($fratrie,$has);
 		while (count($fratrie) AND is_array($types) AND count($types)){
 			$type = array_shift($types);
-			$h = sql_allfetsel("DISTINCT id_rubrique",table_objet_sql($type),sql_in('id_rubrique',$fratrie));
+			$h = Sql::allfetsel("DISTINCT id_rubrique",table_objet_sql($type),Sql::in('id_rubrique',$fratrie));
 			$has = array_merge($has,array_map('reset',$h));
 			$fratrie = array_diff($fratrie,$h);
 		}

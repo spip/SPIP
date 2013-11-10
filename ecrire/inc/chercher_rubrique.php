@@ -24,7 +24,7 @@ define('_SPIP_SELECT_RUBRIQUES', 20); /* mettre 100000 pour desactiver ajax */
 // $idem : en mode rubrique = la rubrique soi-meme
 // http://doc.spip.org/@inc_chercher_rubrique_dist
 function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0, $do='aff') {
-	if (sql_countsel('spip_rubriques')<1)
+	if (Sql::countsel('spip_rubriques')<1)
 		return '';
 
 	// Mode sans Ajax :
@@ -32,7 +32,7 @@ function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0, $
 	// - soit parce qu'il y a peu de rubriques
 	if (_SPIP_AJAX < 1
 	OR $type == 'breve'
-	OR sql_countsel('spip_rubriques') < _SPIP_SELECT_RUBRIQUES)
+	OR Sql::countsel('spip_rubriques') < _SPIP_SELECT_RUBRIQUES)
 		return selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem);
 
 	else return selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem, $do);
@@ -119,10 +119,9 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	// creer une structure contenant toute l'arborescence
 	//
 
-	include_spip('base/abstract_sql');
-	$q = sql_select("id_rubrique, id_parent, titre, statut, lang, langue_choisie", "spip_rubriques", ($type == 'breve' ?  ' id_parent=0 ' : ''), '', "0+titre,titre");
-	while ($r = sql_fetch($q)) {
-		if (autoriser('voir','rubrique',$r['id_rubrique'])){
+	$q = Sql::select("id_rubrique, id_parent, titre, statut, lang, langue_choisie", "spip_rubriques", ($type == 'breve' ?  ' id_parent=0 ' : ''), '', "0+titre,titre");
+	while ($r = Sql::fetch($q)) {
+		if (autoriser('voir','rubrique',$r['id_rubrique'])) {
 			// titre largeur maxi a 50
 			$titre = couper(supprimer_tags(typo($r['titre']))." ", 50);
 			if ($GLOBALS['meta']['multi_rubriques'] == 'oui'
@@ -180,7 +179,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0, $do) {
 
 	if ($id_rubrique) {
-		$titre = sql_fetsel("titre", "spip_rubriques", "id_rubrique=$id_rubrique");
+		$titre = Sql::fetsel("titre", "spip_rubriques", "id_rubrique=$id_rubrique");
 		$titre = $titre['titre'];
 	} else if ($type == 'auteur')
 		$titre = '&nbsp;';

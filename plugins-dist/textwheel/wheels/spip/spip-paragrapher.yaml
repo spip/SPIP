@@ -1,0 +1,84 @@
+--- # paragrapher un texte contenant des <p> mal fermes
+    #
+
+paragrapher-init-trim:
+    # trim
+    type: all
+    is_callback: y
+    replace: trim
+
+toujours-paragrapher:
+    # Ajouter un <p> au debut pour assurer d'avoir toujours un paragraphe
+    # annuler cette regle pour revenir a l'ancien comportement de SPIP
+    type: all
+    replace: "<p>$0"
+
+toujours-ouvrir:
+    # toujours ouvrir un parapgraphe derriere une balise bloc fermante
+    if_str: "</"
+    match: ",</(?:div|pre|ul|ol|li|blockquote|h[1-6r]|t(able|[rdh]|head|body|foot|extarea)|form|object|center|marquee|address|applet|iframe|d[ltd]|script|noscript|map|button|fieldset|style)[^>]*>\s*?,UimsS"
+    replace: "$0<p>"
+
+ajouter-stop-p1:
+    # Ajouter un espace aux <p> et un "STOP P"
+    # transformer aussi les </p> existants en <p>, nettoyes ensuite
+    if_str: "<p>"
+    #if_match: ",<p\b,iS"
+    match: "/^.*$/msS"
+    replace: "<p>$0<STOP P>"
+
+ajouter-stop-p2:
+    if_str: "<"
+    #if_match: ",<p\b,iS"
+    match: ",</?p\b\s?(.*?)>,iS"
+    replace: "<STOP P><p $1>"
+
+fermer-para-preg:
+    # Fermer les paragraphes
+    # y compris sur "STOP P"
+    # en reperant les balises blocs XHTML
+    # en pure wheel : le \s* agit comme trim() et remplace reduire-blancs2
+    match: ",<p (.*)\s*<(/?)(STOP P|div|pre|ul|ol|li|blockquote|h[1-6r]|t(able|[rdh]|head|body|foot|extarea)|form|object|center|marquee|address|applet|iframe|d[ltd]|script|noscript|map|button|fieldset|style)\b,UimsS"
+    replace: "<p $1</p>\n<$2$3"
+    disabled: Y
+
+fermer-para-mano:
+    # Fermer les paragraphes
+    # en reperant les balises blocs XHTML
+    # optimise a la mano
+    type: all
+    is_callback: Y
+    replace: fermer_para_mano
+
+
+supprimer-stop-p:
+    # Supprimer les marqueurs "STOP P"
+    match: "<STOP P>"
+    replace: ''
+    type: str
+
+## inutile
+#reduire-blancs1:
+#    # Reduire les blancs dans les <p> 1/2
+#    match: ",(<p [^>]*>)\s*,UiuS"
+#    replace: "$1"
+#    disabled: Y
+
+suppr-para-vides:
+    # Supprimer les <p xx></p> vides
+    match: ",<p [^>]*>\s*</p>\s*,S"
+    replace: ""
+
+## desormais implemente sous forme du \s* de fermer-para
+#reduire-blancs2:
+#    # Reduire les blancs dans les <p> 2/2
+#    match: ",\s*</p\b,UiuS"
+#    replace: "</p"
+#    disabled: Y
+
+renommer-para-normaux:
+    # Renommer les paragraphes normaux
+    match: "<p >"
+    replace: "\n<p>"
+    type: str
+

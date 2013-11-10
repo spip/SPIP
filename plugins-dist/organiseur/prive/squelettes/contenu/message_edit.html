@@ -1,0 +1,24 @@
+[(#ENV{id_message}|intval|oui)
+	[(#AUTORISER{modifier,message,#ENV{id_message}|intval}|sinon_interdire_acces)]
+][(#ENV{id_message}|intval|non)
+	[(#AUTORISER{envoyermessage,#ENV{typemes,normal}}|sinon_interdire_acces)]
+]
+#SET{redirect,#ENV{redirect}|sinon{#ENV{id_message}|intval|?{#ENV{id_message}|intval|generer_url_entite{message},#URL_ECRIRE{messages}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,[(#ENV{id_message}|?{#INFO_TYPE{message,#ENV{id_message}},#ENV{typemes,normal}}|organiseur_icone_message)],'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[(#ENV{typemes,normal}|organiseur_texte_nouveau_message)]
+</div>
+
+#SET{redirect,#ENV{id_message}|generer_url_entite{message}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		#FORMULAIRE_EDITER_MESSAGE{#ENV{id_message,new},#ENV{typemes,normal},#GET{redirect},'oui',#ENV{to,''},#ENV{subject,''},#ENV{texte,''}}
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</div>

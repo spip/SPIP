@@ -1,0 +1,12 @@
+[(#ID_DEPOT|oui)
+	[(#REM)	<!-- Les plugins heberges par le depot et le nombre de paquets pour chaque plugin --> ]
+	[(#INCLURE{fond=prive/objets/liste/plugins,
+		titre=<:svp:titre_liste_plugins:>,
+		par=nom,
+		pas=25,
+		id_depot,
+		ajax,
+		env})]
+
+	[(#REM)	<!-- Les collections hebergees par le depot (a venir) --> ]
+]

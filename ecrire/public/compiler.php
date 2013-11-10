@@ -282,14 +282,14 @@ function instituer_boucle(&$boucle, $echapper=true, $ignore_previsu=false){
 					AND $GLOBALS['meta']["post_dates"] == 'non'){
 					$date = $id.'.'.preg_replace(',\W,','',$s['post_date']); // securite
 					array_unshift($boucle->where,
-						$echapper ?
-							"\nquete_condition_postdates('$date',"._q($boucle->sql_serveur)."$arg_ignore_previsu)"
-						:
-							quete_condition_postdates($date,$boucle->sql_serveur,$ignore_previsu)
+						$echapper
+						? "\nquete_condition_postdates('$date',"._q($boucle->sql_serveur)."$arg_ignore_previsu)"
+						: quete_condition_postdates($date,$boucle->sql_serveur,$ignore_previsu)
 					);
 				}
 				array_unshift($boucle->where,
-					$echapper ?
+					$echapper
+					?
 						"\nquete_condition_statut('$mstatut',"
 							. _q($s['previsu']).","
 							._q($s['publie']).","
@@ -374,7 +374,7 @@ function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
  * %s2: appel de calculer_select en donnant un contexte pour les cas d'erreur
  * %s3: initialisation du sous-tableau Numrows[id_boucle]
  * %s4: sauvegarde de la langue et calcul des invariants de boucle sur elle
- * %s5: boucle while sql_fetch ou str_repeat si corps monotone
+ * %s5: boucle while Sql::fetch ou str_repeat si corps monotone
  * %s6: restauration de la langue
  * %s7: liberation de la ressource, en tenant compte du serveur SQL 
  * %s8: code de trace eventuel avant le retour
@@ -1094,7 +1094,9 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			// sinon, en cas de requeteur d'un type predefini,
 			// utiliser les informations donnees par le requeteur
 			// cas "php:xx" et "data:xx".
-			} else if ($boucle->sql_serveur AND $requeteur = charger_fonction($boucle->sql_serveur, 'requeteur', true)) {
+			} else if ($boucle->sql_serveur
+			AND $requeteur = charger_fonction($boucle->sql_serveur, 'requeteur', true))
+			{
 				$requeteur($boucles, $boucle, $id);
 
 			// utiliser la description des champs transmis

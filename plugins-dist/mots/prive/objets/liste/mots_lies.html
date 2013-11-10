@@ -1,0 +1,43 @@
+[(#SET{defaut_tri,#ARRAY{
+	type,1,
+	num titre,1,
+	titre,1,
+	id_mot,1,
+	points,-1
+}})
+]
+#SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+<input type="hidden" name="debutmotl" value='#ENV{debutmotl,#EVAL{_request("debutmotl");}}' />
+<B_liste_mot>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies mots">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_mot_cle,info_nb_mots_cles}}) #AIDER{artmots}</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='type' scope='col'>[(#TRI{type,<:mots:info_dans_groupe:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_mot(MOTS){id_mot IN #GET{selection}}{id_groupe?}{where?}{tri #ENV{par,type},#GET{defaut_tri}}{par multi titre}{pagination #ENV{nb,10} motl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_MOT|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='picto'>[(#VAL|puce_statut{mot,#ID_MOT,#ID_GROUPE})]</td>
+			<td class='titre principale'>[(#LOGO_MOT|image_reduire{20,20})]<a href="[(#ID_MOT|generer_url_entite{mot})]"
+																																						title="<:info_numero_abbreviation|attribut_html:> #ID_MOT">[(#RANG). ]#TITRE</a></td>
+			<td class='type secondaire'>#TYPE</td>
+			<td class='action'><button class="button link delete" name="supprimer_lien[mot-#ID_MOT-#OBJET-#ID_OBJET]" value="X"><:mots:info_retirer_mot:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></td>
+		</tr>
+	</BOUCLE_liste_mot>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}mot-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:mots:info_retirer_mots:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_mot>
+<div class="liste-objets liste-objets-lies mots caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:mots:info_aucun_mot_cle:>}) ]#AIDER{artmots}</strong>
+</div>
+<//B_liste_mot>

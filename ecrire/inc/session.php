@@ -368,8 +368,7 @@ function ecrire_fichier_session($fichier, $auteur) {
 function fichier_session($alea, $tantpis=false) {
 
 	if (!isset($GLOBALS['meta'][$alea])) {
-		include_spip('base/abstract_sql');
-		$GLOBALS['meta'][$alea]  = sql_getfetsel('valeur', 'spip_meta', "nom=" . sql_quote($alea), '','', '', '', '', 'continue');
+		$GLOBALS['meta'][$alea]  = Sql::getfetsel('valeur', 'spip_meta', "nom=" . Sql::quote($alea), '','', '', '', '', 'continue');
 	}
 
 	if (!$GLOBALS['meta'][$alea]) {

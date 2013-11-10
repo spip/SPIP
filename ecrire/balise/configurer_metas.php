@@ -20,8 +20,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // on ne peut rien dire sur l'existence du squelette lors de la compil
 // On pourrait toutefois traiter le cas de l'argument qui est une constante.
 
-function balise_CONFIGURER_METAS_dist($p) {
-
+function balise_CONFIGURER_METAS_dist($p)
+{
 	return calculer_balise_dynamique($p, $p->nom_champ, array());
 }
 
@@ -29,8 +29,8 @@ function balise_CONFIGURER_METAS_dist($p) {
 // Pour le calcul du contexte, c'est comme la balise #FORMULAIRE_.
 // y compris le controle au retour pour faire apparaitre le message d'erreur.
 
-function balise_CONFIGURER_METAS_dyn($form) {
-
+function balise_CONFIGURER_METAS_dyn($form)
+{
 	include_spip('balise/formulaire_');
 	if (!existe_formulaire($form)) return '';
 	$args = func_get_args();

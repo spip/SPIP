@@ -1,0 +1,37 @@
+[(#AUTORISER{modererlot,petition}|oui)
+	[(#BOITE_OUVRIR{<:petitions:titre_selection_action:>,raccourcis})]
+	#SET{nb,'<b>N</b>'}
+	<div id="actiongroup">
+		<p class="status">
+			<span class="zero"><:petitions:aucune_signature:></span>
+			<span class="one none"><:petitions:une_signature:></span>
+			<span class="many none"><:petitions:nombre_signatures{nb=#GET{nb}}:></span>
+		</p>
+		<p>
+		<p>
+		<:petitions:signatures_selection:><br />
+		<a href="#" class="shortcut selectall" onclick="actiongroup.selectAll();return false;"><:petitions:signatures_toutes:></a> |
+		<a href="#" class="shortcut unselectall" onclick="actiongroup.unselectAll();return false;"><:petitions:signatures_aucune:></a> |
+		<a href="#" class="shortcut selectprop" onclick="actiongroup.selectAll($('li.statut_prop'));return false;"><:petitions:signatures_prop:></a>
+		</p>
+		<p>
+		<a href="#" class="shortcut empty" onclick="actiongroup.emptySelection();return false;">Vider la selection</a>
+		</p>
+		</p>
+		<div>
+			<button class='action' data-href='#URL_ACTION_AUTEUR{traiter_lot_signature,valider}'><:petitions:icone_valider_signature:></button><br />
+			<button class='action' data-href='#URL_ACTION_AUTEUR{traiter_lot_signature,relancer}'><:petitions:icone_relancer_signataires:></button>
+			<button class='action' data-href='#URL_ACTION_AUTEUR{traiter_lot_signature,supprimer}'><:petitions:icone_supprimer_signatures:></button>
+		</div>
+	</div>
+	<div class="success none">OK</div>
+	#BOITE_FERMER
+
+
+	<script type="text/javascript">/*<!\[CDATA\[*/
+	[(#INCLURE{prive/javascript/actiongroup.js}|appliquer_filtre{minifier_js, true})]
+	function reinit(){actiongroup.activate(jQuery("ul.liste-items.signatures >.item.signature",this));}
+	jQuery(reinit);
+	onAjaxLoad(reinit);
+	/*\]\]>*/</script>
+]

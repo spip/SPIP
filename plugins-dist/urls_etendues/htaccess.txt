@@ -1,0 +1,124 @@
+##############################################################
+# Fichier .htaccess                               SPIP v 2.0 #
+#                                                            #
+# Permet de controler les URLs et la version de php utilisee #
+# Compatible avec les URLs 'html', 'propres' et 'propres2'   #
+# Permet aussi d'effectuer la transition de .PHP 3 vers .PHP #
+#                                                            #
+# Pour utiliser ce fichier renommez-le '.htaccess' dans le   #
+# repertoire racine du site, en veillant a ne pas ecraser un #
+# .htaccess personnalise qui s'y trouverait deja             #
+#                                                            #
+# Attention certains hebergeurs desactivent tout ou partie   #
+# des fonctions du fichier .htaccess ; celui-ci est donc     #
+# indicatif - en cas de difficulte voir sur les forums SPIP  #
+##############################################################
+
+RewriteEngine On
+
+################ CONFIGURATION ######################
+
+### Configuration sous-repertoire
+# Chez la plupart des hebergeurs il faut indiquer "RewriteBase /"
+# sinon modifiez cette ligne
+
+RewriteBase /
+
+
+# SPIP version 'php' - si vous avez d'anciennes adresses en '.php[3]',
+# supprimez le '#' sur les lignes qui suivent pour rediriger les acces
+# errones vers le .php correspondant
+
+#RewriteCond %{REQUEST_FILENAME} -f
+#RewriteRule ^(.+)\.php[3]$ $1.php [QSA,L]
+
+# Fin version
+###
+
+
+################ REGLAGES PERSONNALISES ######################
+# Inscrivez ci-dessous vos reglages supplementaires
+
+
+
+
+################ GESTIONS DES URLS SPIP #######################
+
+# Deux pseudo-actions a present evacuees
+# N'y at-il pas moyen de REMPLACER un nom dans la QueryString ?
+RewriteCond %{QUERY_STRING} action=rss
+RewriteRule spip.php	spip.php?page=rss [QSA,L]
+RewriteCond %{QUERY_STRING} action=ical
+RewriteRule spip.php	spip.php?page=ical_prive [QSA,L]
+
+###
+# Si le fichier ou repertoire demande existe
+# ignorer toutes les regles qui suivent
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule "." - [skip=100]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule "." - [skip=100]
+#
+###
+
+
+###
+# Compatibilite avec les URLS "html" (pour transition sympa)
+# voir fichier ecrire/urls/html.php
+RewriteRule ^rubrique([0-9]+)(\.html)?$	spip.php?page=rubrique&id_rubrique=$1 [QSA,L]
+RewriteRule ^article([0-9]+)(\.html)?$	spip.php?page=article&id_article=$1 [QSA,L]
+RewriteRule ^breve([0-9]+)(\.html)?$	spip.php?page=breve&id_breve=$1 [QSA,L]
+RewriteRule ^mot([0-9]+)(\.html)?$		spip.php?page=mot&id_mot=$1 [QSA,L]
+RewriteRule ^auteur([0-9]+)(\.html)?$	spip.php?page=auteur&id_auteur=$1 [QSA,L]
+RewriteRule ^site([0-9]+)(\.html)?$	spip.php?page=site&id_syndic=$1 [QSA,L]
+# Compatibilite avec les anciennes URLS appelant directement des fichiers php
+RewriteRule ^(rubrique|article|breve|mot|auteur|site|agenda|backend|backend-breves|distrib|forum|ical|plan|recherche|sommaire|sommaire_texte)\.php3?$	spip.php?page=$1 [QSA,L]
+RewriteRule ^resume.php[3]?	spip.php?page=sommaire [QSA,L]
+RewriteRule ^page.php[3]?	spip.php [QSA,L]
+RewriteRule ^spip_cal\.php3?$	spip.php?page=ical_prive [QSA,L]
+RewriteRule ^spip_rss\.php3?$	spip.php?page=rss [QSA,L]
+
+
+# Fin compatibilite
+###
+
+###
+# URLs "propres", "propres2", "libres", "arbo"
+
+RewriteRule ^[^\.]+(\.html)?$		spip.php [QSA,E=url_propre:$0,L]
+
+# Fin URLs "propres" et "propres2"
+###
+
+###
+# Divers
+
+# bloquer les acces aux repertoires .svn/ (SPIP, plugins, squelettes...)
+RewriteRule ^(.*/)?\.svn/ - [F]
+
+###
+# Fichiers "standards" (si absents de la racine)
+#
+RewriteRule ^robots[.]txt$      spip.php?page=robots.txt [QSA,L]
+RewriteRule ^favicon[.]ico$      spip.php?page=favicon.ico [QSA,L]
+RewriteRule ^sitemap[.]xml$      spip.php?page=sitemap.xml [QSA,L]
+##
+
+# expirer les images (pour contourner gros bug MSIE sur le cache)
+# note : a decommenter si vous voulez tester
+#<IfModule mod_expires.c>
+# ExpiresActive on
+# ExpiresByType image/gif A3600
+# ExpiresByType image/jpeg A3600
+# ExpiresByType image/png A3600
+#</IfModule>
+
+#################################
+# gestion des erreurs 404
+# voir http://www.spip.net/fr_article3226.html
+# Pour que le serveur http renvoie les erreurs 404 vers SPIP, supprimer le '#'
+
+# ErrorDocument 404 /spip.php?page=404
+
+#
+###

@@ -1,0 +1,60 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	titre,1,
+	id_article,1,
+	points,-1
+}})
+]<B_liste_syndicart>
+#ANCRE_PAGINATION
+<div class="liste-objets syndic_articles">
+<table class='spip liste'>
+[<caption><span class="image_loading"></span><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_article_syndique,info_nb_articles_syndiques}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			[(#ENV{id_syndic,''}|non)
+			<th class='site' scope='col'>site</th>
+			]
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_syndicart(SYNDIC_ARTICLES){id_syndic_article?}{id_syndic?}{where?}{recherche?}{statut?}{id_rubrique?}{lesauteurs?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#STATUT|puce_statut{syndic_article})]</td>
+			<td class='titre principale'>[<a
+					href="(#URL_ARTICLE)"
+						title="<:info_numero_abbreviation|attribut_html:> #ID_SYNDIC_ARTICLE">#SET{a,'</a>'}]#TITRE[(#GET{a})]
+				<span class="auteurs">([(#LESAUTEURS), ][(#DATE|affdate_court)])</span>
+				[(#TAGS|afficher_enclosures)]
+				[<span class="tags"><em>(#TAGS|afficher_tags)</em></span>]
+				[<span class="source">[<a href="(#URL_SOURCE)">#SET{b,'</a>'}](#SOURCE|sinon{#URL_SOURCE})#GET{b}</span>]
+			</td>
+			[(#ENV{id_syndic,''}|non)
+			<td class='site'><a href="[(#ID_SYNDIC|generer_url_entite{site})]"
+						title="<:info_numero_abbreviation|attribut_html:> #ID_SYNDIC">#INFO_TITRE{syndic,#ID_SYNDIC}</a></td>
+			]
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='action'>[(#AUTORISER{moderer,site,#ID_SYNDIC}|oui) 
+				#SET{valider,' '}
+				[(#STATUT|=={publie}|oui)[(#BOUTON_ACTION{<:sites:info_bloquer_lien:>,#URL_ACTION_AUTEUR{instituer_syndic_article,#ID_SYNDIC_ARTICLE-refuse,#SELF},ajax})]
+				#SET{valider,''}][
+				(#STATUT|=={refuse}|oui)[(#BOUTON_ACTION{<:sites:info_retablir_lien:>,#URL_ACTION_AUTEUR{instituer_syndic_article,#ID_SYNDIC_ARTICLE-publie,#SELF},ajax})]
+				#SET{valider,''}][
+				(#STATUT|=={off}|et{#ID_SYNDIC_ARTICLE|test_syndic_article_miroir}|oui)
+				<:sites:syndic_lien_obsolete:>
+				#SET{valider,''}][(#GET{valider}|oui)
+					[(#BOUTON_ACTION{<:sites:info_retablir_lien:>,#URL_ACTION_AUTEUR{instituer_syndic_article,#ID_SYNDIC_ARTICLE-publie,#SELF},ajax})]
+				]
+			]</td>
+		</tr>
+	</BOUCLE_liste_syndicart>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_syndicart>[
+<div class="liste-objets syndic_articles caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_syndicart>

@@ -1,0 +1,25 @@
+<h1 class="grostitre"><:sites:icone_controler_syndication:></h1>
+#SET{self,#SELF|parametre_url{id_syndic_article|lesauteurs|debut_id_syndic_article,''}}
+<BOUCLE_repart(SITES){id_syndic}><a class='annule_filtre' href='[(#GET{self}|parametre_url{id_syndic,''})]' title="<:sites:tout_voir|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:sites:tout_voir:>})]</a>
+<:sites:texte_messages_publics:><h1><a href='[(#URL_SITE|ancre_url{syndic#ID_SYNDIC_ARTICLE})]'>#NOM_SITE</a></h1>
+</BOUCLE_repart>
+
+#SET{self,#SELF|parametre_url{id_syndic_article|lesauteurs|debut_id_syndic_article|statut,''}}
+
+[(#REM) Les boutons pour tout le lot de message d'un emetteur ---------------------------------------------------------]
+[(#ENV{lesauteurs})
+<a class='annule_filtre ajax' href='#GET{self}' title="<:sites:tout_voir|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:sites:tout_voir:>})]</a>
+]
+[
+<div class='source'>
+<div class='par'><:par_auteur:> (#ENV{lesauteurs})</div>
+</div>
+]
+
+[(#INCLURE{fond=prive/squelettes/inclure/boutons-filtres-statut-syndic, env})]
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF|parametre_url{debut_id_syndic_article,''},ajax}
+[<h3><:resultats_recherche:> &#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</h3>]
+<div class="nettoyeur"></div>
+
+
+<INCLURE{fond=prive/objets/liste/syndic_articles,sinon=<:sites:aucun_article_syndic:>,env} />

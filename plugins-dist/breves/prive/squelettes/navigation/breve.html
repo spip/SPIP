@@ -1,0 +1,13 @@
+<BOUCLE_nav(BREVES){id_breve}{statut?}{si #ENV{exec}|=={breve}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','breve','id',#ENV{id_breve}}}}
+#BOITE_FERMER
+
+<div class="ajax">
+#FORMULAIRE_EDITER_LOGO{breve,#ID_BREVE,'',#ENV**}
+</div>
+
+#PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,breve,id,#ID_BREVE},data,''}}
+</BOUCLE_nav>
+[(#ENV{exec}|=={breve_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/breve_edit,env} />]
+<//B_nav>

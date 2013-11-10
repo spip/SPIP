@@ -1,0 +1,92 @@
+[(#REM) Cette balise (invisible) provoque le recalcul du forum
+la premiere fois qu'un message est poste (cf. inc/invalideur). ]
+[(#PARAMETRES_FORUM|?{''})]
+#SET{prive,#ENV{quoi,public}|=={interne}|?{'^(priv|perso)','.*'}}
+
+[(#REM) Nombre total de messages ]
+<BOUCLE_decompte(FORUMS) {id_objet ?}{objet ?}{statut?}{statut==#GET{prive}}{plat} />[<h2>(#TOTAL_BOUCLE|singulier_ou_pluriel{forum:info_1_message_forum,forum:info_nb_messages_forum})</h2>]<//B_decompte>
+
+[(#REM) Messages du forum ]
+<B_forums>
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class="forum">
+
+	<BOUCLE_forums(FORUMS) {id_objet ?}{objet ?}{statut?}{statut==#GET{prive}} {!par date}{pagination 10}>
+
+	<li class="forum-fil statut_#STATUT">
+
+		<div class="forum-message">
+			<div class="forum-chapo">
+				<strong class="#EDIT{titre} forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></strong>
+				<span class='date'>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)]</span>
+				<span class='par'><:par_auteur:>
+				[
+				(#ID_AUTEUR|oui)<a href='#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}'>#MODELE{auteur_nom,id_auteur}</a>
+				][(#ID_AUTEUR|?{'',#AUTEUR})
+				][(#ID_AUTEUR|non)[<a href='mailto:#EMAIL_AUTEUR'>(#EMAIL_AUTEUR)</a>]]
+				</span>
+			</div>
+			<div class="#EDIT{texte} forum-texte">
+				[(#TEXTE|lignes_longues)]
+				[<div class='notes'>(#NOTES|lignes_longues)</div>]
+				[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+
+				<BOUCLE_doc(DOCUMENTS){id_forum}>
+				[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+					[(#MODELE{emb}|image_reduire{300})]
+				,
+					[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+				})]
+				</BOUCLE_doc>
+
+				[<p class="repondre"><a class='ajax' href="(#SELF|parametre_url{repondre,#ID_FORUM})" rel="noindex nofollow"><:forum:repondre_message:></a></p>]
+			</div>
+		</div>
+
+		<B_forums_fils>
+		<ul>
+			<BOUCLE_forums_fils(FORUMS) {id_parent} {par date}{statut?}{statut==#GET{prive}}>
+
+			<li>
+				<div class="forum-message">
+					<div class="forum-chapo">
+						<strong class="#EDIT{titre} forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></strong>
+						<span class='date'>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)]</span>
+						<span class='par'><:par_auteur:>
+						[
+						(#ID_AUTEUR|oui)<a href='#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}'>#MODELE{auteur_nom,id_auteur}</a>
+						][(#ID_AUTEUR|?{'',#AUTEUR})
+						][(#ID_AUTEUR|non)[<a href='mailto:#EMAIL_AUTEUR'>(#EMAIL_AUTEUR)</a>]]
+						</span>				
+					</div>
+					<div class="#EDIT{texte} forum-texte">
+						[(#TEXTE|lignes_longues)]
+						[<div class='notes'>(#NOTES|lignes_longues)</div>]
+						[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+
+				<BOUCLE_doc2(DOCUMENTS){id_forum}>
+				[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+					[(#MODELE{emb}|image_reduire{300})]
+				,
+					[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+				})]
+				</BOUCLE_doc2>
+
+
+						[<p class="repondre"><a class='ajax' href="(#SELF|parametre_url{repondre,#ID_FORUM})" rel="noindex nofollow"><:forum:repondre_message:></a></p>]
+					</div>
+				</div>
+
+				<BOUCLE_forums_boucle(boucle_forums_fils)></BOUCLE_forums_boucle>
+
+			</li>
+
+			</BOUCLE_forums_fils>
+		</ul>
+		</B_forums_fils>
+
+	</li>
+	</BOUCLE_forums>
+
+</ul>
+</B_forums>

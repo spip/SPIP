@@ -1,0 +1,55 @@
+[(#REM) <!-- Liste des plugins :
+	- soit integrale de l'ensemble du site
+	- soit reduite a un seul depot la page depot
+	
+	Les parametres d'environnement specifiques sont :
+	- titre     : le titre de la liste
+	- par       : le champ tri principal
+	- pas       : le pas de pagination
+	- categorie : filtrer la liste sur categorie
+	- id_depot  : filtrer la liste sur un depot
+	- recherche : critere de recherche
+	- where     : condition supplementaire construire par l'appelant (non utilisee)
+ -->]
+
+[(#SET{defaut_tri, #ARRAY{
+	nom, 1,
+	date_modif, -1,
+	prefixe, 1,
+	categorie, 1,
+	id_depot, 1}})]
+
+<B_liste_plugins>
+#ANCRE_PAGINATION
+<div class="liste-objets plugins">
+	<table class="spip liste" summary="<:svp:resume_table_plugins:>">
+	[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{svp:info_1_plugin,svp:info_nb_plugins}})</strong></caption>]
+		<thead>
+			<tr class="first_row">
+				<th class="titre principale">[(#TRI{nom, <:info_titre:>, ajax})]</th>
+				<th class="liste"><:svp:label_branches_spip:></th>
+				<th class="date secondaire">[(#TRI{date_modif, <:svp:label_modifie_le:>, ajax})]</th>
+				<th class="titre">[(#TRI{prefixe, <:svp:label_prefixe:>, ajax})]</th>
+				<th class="id">[(#TRI{id_plugin, <:info_numero_abbreviation:>, ajax})]</th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_liste_plugins(PLUGINS) {where?}{id_depot?}{categorie?}{recherche?}{tri #ENV{par, nom}, #GET{defaut_tri}}{pagination #ENV{pas, 25}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="titre principale">
+					<a[ href="(#ID_PLUGIN|generer_url_entite{plugin})"] title="<:svp:bulle_aller_plugin:>">
+						[(#NOM)]
+					</a>
+				</td>
+				<td class="liste">[(#BRANCHES_SPIP)]</td>
+				<td class="date secondaire">[(#DATE_MODIF|affdate{d-m H:i})]</td>
+				<td class="titre">[(#PREFIXE|strtolower)]</td>
+				<td class="id">[(#ID_PLUGIN)]</td>
+			</tr>
+</BOUCLE_liste_plugins>
+		</tbody>
+	</table>
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_plugins>
+<//B_liste_plugins>

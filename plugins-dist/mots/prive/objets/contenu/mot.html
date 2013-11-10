@@ -1,0 +1,18 @@
+<BOUCLE_afficher_contenu(MOTS){id_mot=#ENV{id}}{tout}>
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+<div class='label'><:info_titre:></div>
+<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+</div>
+<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+<div class='label'><:info_descriptif:></div>
+<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>[(#DESCRIPTIF|image_reduire{500,0})]</div>
+</div>
+<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+<div class='label'><:info_texte:></div>
+<div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0})]</div>
+</div>
+[<div class="champ contenu_notes">
+<div class='label'><:info_notes:></div>
+<div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
+</div>]
+</BOUCLE_afficher_contenu>

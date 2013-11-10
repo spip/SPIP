@@ -1,0 +1,9 @@
+<div class="onglets_simple clearfix">
+	<ul>
+		<li>[(#SELF|parametre_url{id_auteur,''}|lien_ou_expose{<:revisions:voir_toutes_les_revisions:>,[(#ID_AUTEUR|non)],ajax})]</li>
+		<li>[(#SELF|parametre_url{id_auteur,#SESSION{id_auteur}}|lien_ou_expose{<:revisions:voir_mes_revisions:>,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|oui)],ajax})]</li>
+	</ul>
+</div>
+<INCLURE{fond=prive/objets/liste/versions,env,ajax,sinon=<:revisions:info_aucune_revision:>} />
+
+[(#VAL{revisions}|bouton_spip_rss{#ARRAY{id_auteur,#ID_AUTEUR}})]

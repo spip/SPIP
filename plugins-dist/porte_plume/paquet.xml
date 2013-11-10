@@ -1,0 +1,33 @@
+<paquet
+	prefix="porte_plume"
+	categorie="edition"
+	version="1.12.3"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/porte-plume-32.png"
+	documentation="http://www.spip-contrib.net/Porte-plume,3117"
+>	
+
+	<nom>Porte plume</nom>
+	<!-- Une barre d'outil pour bien écrire -->
+
+	<auteur>Matthieu Marcillaud</auteur>
+	<credit lien="http://markitup.jaysalvat.com/">Jay Salvat (MarkitUp)</credit>
+	<credit lien="http://www.famfamfam.com/">FamFamFam (Icones)</credit>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<traduire module="barreoutils" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="porte_plume_barre_pre_charger" action=''/>
+	<pipeline nom="porte_plume_barre_charger" action=''/>
+	<pipeline nom="porte_plume_lien_classe_vers_icone" action=''/>
+	<pipeline nom="autoriser" inclure="porte_plume_pipelines.php" />
+	<pipeline nom="insert_head"      action="insert_head_public"    inclure="porte_plume_pipelines.php" />
+	<pipeline nom="insert_head_css"  action="insert_head_css"       inclure="porte_plume_pipelines.php" />
+	<pipeline nom="header_prive"     action="insert_head_prive"     inclure="porte_plume_pipelines.php" />
+	<pipeline nom="header_prive_css" action="insert_head_prive_css" inclure="porte_plume_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="porte_plume_pipelines.php" />
+	<pipeline nom="configurer_liste_metas" inclure="porte_plume_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="porte_plume_ieconfig.php" />
+</paquet>

@@ -1,0 +1,103 @@
+#SET{editable,#ENV{editable,oui}|=={non}|non}
+
+<div class="galerie[ media-(#ENV{media,''})]">
+	<B_galerie>
+	
+	<h2>[(#GRAND_TOTAL|singulier_ou_pluriel{#VAL{medias:un_}|concat{#ENV{media,document}},#VAL{medias:des_}|concat{#ENV{media,document},s}})]</h2>
+	<div class='pagination tri'>
+		[(#TRI{'>',#CHEMIN_IMAGE{tri-asc-16.png}|balise_img{<:par_tri_croissant:>}}) |]
+		[(#TRI{'<',#CHEMIN_IMAGE{tri-desc-16.png}|balise_img{<:par_tri_decroissant:>}}) |]
+		[(#TRI{id_document,<:medias:par_id:>}) |]
+		[(#TRI{date,<:medias:par_date:>}) |]
+		[(#TRI{taille,<:medias:par_taille:>}) |]
+		[(#TRI{largeur,<:medias:par_largeur:>}) |]
+		[(#TRI{hauteur,<:medias:par_hauteur:>}) |]
+		[(#TRI{titre,<:medias:par_titre:>}) |]
+		
+		[<:medias:label_paginer_par:> (#GRAND_TOTAL|>{100}|oui)
+			[(#SELF|parametre_url{pagination,''}|lien_ou_expose{10,#ENV{pagination,10}|=={10},ajax})]
+			[<span class="sep">|</span> (#SELF|parametre_url{pagination,50}|lien_ou_expose{50,#ENV{pagination,10}|=={50},ajax})]]
+		[(#GRAND_TOTAL|>{500}|oui)
+			[<span class="sep">|</span> (#SELF|parametre_url{pagination,100}|lien_ou_expose{100,#ENV{pagination,10}|=={100},ajax})]
+		]
+		[(#GRAND_TOTAL|>{5000}|oui)
+			[<span class="sep">|</span> (#SELF|parametre_url{pagination,500}|lien_ou_expose{500,#ENV{pagination,10}|=={500},ajax})]
+		]
+	</div>
+	[<div class="pagination">(#PAGINATION{prive})</div>]
+	<table>
+	<thead>
+		<th></th>
+		<th class="id"><:medias:id:></th>
+		<th></th>
+		<th><:medias:logo:></th>
+		<th><:medias:infos:></th>
+		<th><:medias:descriptif:></th>
+		<th></th>
+	</thead>
+	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {tri id_document,inverse}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{orphelins?}{titre==(#ENV{sanstitre}|?{'^$','.*'})}{id_vignette==(#ENV{sansvignette}|?{'^0','.*'})}{pagination #ENV{pagination,10}}>
+	<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]" id="#ENV{iddoc,media}#ID_DOCUMENT">
+		<td class='infos'>
+		[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]
+		[(#ENV{media}|non|et{#MEDIA|!={file}})[(#CHEMIN_IMAGE{media-#MEDIA|concat{-32.png}}|balise_img|inserer_attribut{alt,#VAL{medias:media_#MEDIA}|_T}|inserer_attribut{title,#VAL{medias:media_#MEDIA}|_T})]]
+		[(#GET{missing}|oui)<img src='#CHEMIN_IMAGE{document-manquant-24.png}' width='24' height='24' alt='<:medias:fichier_manquant:>' />]
+		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN_IMAGE{document-distant-24.png}' width='24' height='24' alt='<:medias:fichier_distant:>' />]
+		</td>
+		<td class="id">
+			<strong>#ID_DOCUMENT</strong>
+		</td>
+		<td class='statut'>
+		[(#ID_DOCUMENT|medias_puce_statut_document{#STATUT})]
+		</td>
+		<td class="logo">
+		#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
+		[(#MEDIA|=={image}|oui)[
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{apercu,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+		]]
+		[(#MEDIA|=={image}|non)[<div class="#EDIT{vignette} resize-250">
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{auto,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+		</div>]]
+		<div class="fichier">#GET{fichier}</div>
+		</td>
+		<td class="exif">
+			[<strong class="extension">(#EXTENSION)</strong>]
+			[<div class="dimensions">(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''})</div>]
+			[<div class="taille">(#TAILLE|taille_en_octets)</div>]
+			[<div class="date">(#DATE|affdate{d/m/Y})</div>]
+			[(#PIPELINE{afficher_metas_document,#ARRAY{args,#ARRAY{'quoi','galerie','id_document',#ID_DOCUMENT},data,''}})]
+			<B_liens>
+			[(#TOTAL_BOUCLE|>{1}|oui)
+			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:une_utilisation,medias:des_utilisations})]</a><div style='display: none;'>
+			]
+			<BOUCLE_liens(documents_liens){id_document}{'<br />'}>
+			[(#ID_OBJET|lien_objet{#OBJET})]
+			</BOUCLE_liens>
+			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
+			</B_liens>
+		</td>
+		<td class="descriptif">
+			[<strong class="titre #EDIT{titre}">(#TITRE|sinon{#VAL{<i>}|concat{<:info_sans_titre:>,'</i>'}})</strong>]
+			[<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF)</div>]
+			[<p class="credits #EDIT{credits}">(#CREDITS)</p>]
+		</td>
+		<td>
+		[(#REM) Utilisation de la galerie en mode portfolio, avec renvoi vers l'edition]
+		[(#GET{editable})
+		[(#AUTORISER{modifier,document,#ID_DOCUMENT})&#91;<a href='#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT}'><:bouton_modifier:></a>&#93;]
+		[<span class='supprimer'>(#AUTORISER{supprimer,document,#ID_DOCUMENT})[(#BOUTON_ACTION{<:medias:bouton_supprimer:>,#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF},ajax,'','',[(function(){jQuery("##ENV{iddoc,media}(#ID_DOCUMENT)").animateRemove();return true;})()]})]</span>]
+		]
+		[(#PIPELINE{document_desc_actions,#ARRAY{args,#ARRAY{id_document,#ID_DOCUMENT,position,galerie},data,''}})]
+		</td>
+	</tr>
+	</BOUCLE_galerie>
+	</table>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
+	#SET{nb_orphelins,#GRAND_TOTAL}
+	</B_galerie>
+	<h2>[(#VAL{medias:aucun_}|concat{#ENV{media,document}}|_T)]</h2>
+	<//B_galerie>
+	[(#ENV{orphelins}|et{#AUTORISER{supprimer,orphelins,'',#SESSION{id_auteur}}})
+	[(#INCLURE{fond=prive/squelettes/inclure/bouton-supprimer-orphelins,env,nb_orphelins=#GET{nb_orphelins}})]
+	]
+	</B_docs_supprimables>
+</div><!--#galerie-->

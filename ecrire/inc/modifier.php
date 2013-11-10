@@ -181,14 +181,14 @@ function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur=''
 				$id_rubrique = 0;
 				if ($desc['field']['id_rubrique']){
 					$parent = ($objet=='rubrique')?'id_parent':'id_rubrique';
-					$id_rubrique = sql_getfetsel($parent, $spip_table_objet, "$id_table_objet=".intval($id_objet));
+					$id_rubrique = Sql::getfetsel($parent, $spip_table_objet, "$id_table_objet=".intval($id_objet));
 				}
 				$instituer_langue_objet = charger_fonction('instituer_langue_objet','action');
 				$champs['lang'] = $instituer_langue_objet($objet,$id_objet, $id_rubrique, $changer_lang);
 			}
 			// on laisse 'lang' dans $champs,
 			// ca permet de passer dans le pipeline post_edition et de journaliser
-			// et ca ne gene pas qu'on refasse un sql_updateq dessus apres l'avoir
+			// et ca ne gene pas qu'on refasse un Sql::updateq dessus apres l'avoir
 			// deja pris en compte
 		}
 
@@ -200,10 +200,10 @@ function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur=''
 			$champs[$options['date_modif']] = date('Y-m-d H:i:s');
 
 		// allez on commit la modif
-		sql_updateq($spip_table_objet, $champs, "$id_table_objet=".intval($id_objet), $serveur);
+		Sql::updateq($spip_table_objet, $champs, "$id_table_objet=".intval($id_objet), $serveur);
 
 		// on verifie si elle est bien passee
-		$moof = sql_fetsel(array_keys($champs), $spip_table_objet, "$id_table_objet=".intval($id_objet), array(), array(), '', array(), $serveur);
+		$moof = Sql::fetsel(array_keys($champs), $spip_table_objet, "$id_table_objet=".intval($id_objet), array(), array(), '', array(), $serveur);
 		// si difference entre les champs, reperer les champs mal enregistres
 		if ($moof != $champs) {
 			$liste = array();

@@ -1,0 +1,24 @@
+[(#ENV{editable})
+<div class='formulaire_spip formulaire_joindre formulaire_joindre_document' id='formulaire_joindre_document-#ENV{id,new}'>
+	[(#ENV{_mode}|=={image}|oui)
+	<h3 class='titrem'>[(#CHEMIN_IMAGE{image-24.png}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:medias:bouton_remplacer_image:>,<:medias:bouton_ajouter_image:>}) #AIDER{ins_img}]</h3>
+	][(#ENV{_mode}|=={document}|oui)
+	<h3 class='titrem'>[(#CHEMIN_IMAGE{doc-24.png}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:medias:bouton_remplacer_document:>,<:medias:bouton_ajouter_document:>}) #AIDER{ins_doc}]</h3>
+	][(#ENV{_mode}|=={choix}|oui)
+	<h3 class='titrem'>[(#CHEMIN_IMAGE{doc-24.png}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:medias:bouton_remplacer_image_document:>,<:medias:bouton_ajouter_image_document:>}) #AIDER{ins_doc}]</h3>
+	]
+	<span class="image_loading"></span>
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</div>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	
+	<form action="#ENV{action}#formulaire_joindre_document-#ENV{id,new}" method="post" enctype='multipart/form-data'><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		
+		[(#INCLURE{fond=formulaires/inc-upload_document, env, mediatheque=#ENV{objet,''}|et{#ENV{id_objet,''}}|et{#ENV{proposer_media}}})]
+		
+	</div></form>
+
+</div>]
+[(#ENV{_galerie,''}|oui)
+		[(#INCLURE{fond=#ENV{_galerie}, env, ajax})]
+]

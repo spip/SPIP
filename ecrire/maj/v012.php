@@ -43,7 +43,7 @@ function maj_v012_dist($version_installee, $version_cible)
 		spip_query("ALTER TABLE spip_messages ADD id_auteur bigint(21) NOT NULL");
 		spip_query("ALTER TABLE spip_messages ADD INDEX id_auteur (id_auteur)");
 		$result = spip_query("SELECT id_auteur, id_message FROM spip_auteurs_messages WHERE statut='de'");
-		while ($row = sql_fetch($result)) {
+		while ($row = Sql::fetch($result)) {
 			$id_auteur = $row['id_auteur'];
 			$id_message = $row['id_message'];
 			spip_query("UPDATE spip_messages SET id_auteur=$id_auteur WHERE id_message=$id_message");

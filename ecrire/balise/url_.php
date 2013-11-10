@@ -25,7 +25,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // car rien ne garantit que le .htaccess soit identique. A approfondir
 
 // http://doc.spip.org/@generer_generer_url
-function generer_generer_url($type, $p){
+function generer_generer_url($type, $p)
+{
 	$_id = interprete_argument_balise(1,$p);
 
 	if (!$_id) {
@@ -41,7 +42,7 @@ function generer_generer_url_arg($type, $p, $_id)
 	if ($s = trouver_nom_serveur_distant($p)) {
 
 // si une fonction de generation des url a ete definie pour ce connect l'utiliser
-		if (function_exists($f = 'generer_generer_url_'.$s)){
+		if (function_exists($f = 'generer_generer_url_'.$s)) {
 			return $f($type, $_id, $s);
 		}
 		if (!$GLOBALS['connexions'][strtolower($s)]['spip_connect_version']) {
@@ -64,8 +65,8 @@ function generer_generer_url_arg($type, $p, $_id)
 
 
 // http://doc.spip.org/@balise_URL__dist
-function balise_URL__dist($p) {
-
+function balise_URL__dist($p)
+{
 	$nom = $p->nom_champ;
 	if ($nom === 'URL_') {
 		$msg = array('zbug_balise_sans_argument', array('balise' => ' URL_'));
@@ -87,8 +88,8 @@ function balise_URL__dist($p) {
 }
 
 // http://doc.spip.org/@balise_URL_ARTICLE_dist
-function balise_URL_ARTICLE_dist($p) {
-
+function balise_URL_ARTICLE_dist($p)
+{
 	// Cas particulier des boucles (SYNDIC_ARTICLES)
 	if ($p->type_requete == 'syndic_articles') {
 		$code = champ_sql('url', $p);
@@ -121,7 +122,8 @@ function balise_URL_SITE_dist($p)
 // (historique)
 
 // http://doc.spip.org/@balise_URL_SITE_SPIP_dist
-function balise_URL_SITE_SPIP_dist($p) {
+function balise_URL_SITE_SPIP_dist($p)
+{
 	$p->code = "sinon(\$GLOBALS['meta']['adresse_site'],'.')";
 	$p->code = "htmlspecialchars(".$p->code.")";
 	$p->interdire_scripts = false;
@@ -135,8 +137,8 @@ function balise_URL_SITE_SPIP_dist($p) {
 // Sans argument, #URL_PAGE retourne l'URL courante.
 // #URL_PAGE* retourne l'URL sans convertir les & en &amp;
 // http://doc.spip.org/@balise_URL_PAGE_dist
-function balise_URL_PAGE_dist($p) {
-
+function balise_URL_PAGE_dist($p)
+{
 	$code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
 	if ($args == NULL)
@@ -173,8 +175,8 @@ function balise_URL_PAGE_dist($p) {
 // #URL_ECRIRE{rubriques} -> ecrire/?exec=rubriques
 //
 // http://doc.spip.org/@balise_URL_ECRIRE_dist
-function balise_URL_ECRIRE_dist($p) {
-
+function balise_URL_ECRIRE_dist($p)
+{
 	$code = interprete_argument_balise(1,$p);
 	if (!$code)
 		$fonc = "''";
@@ -193,7 +195,8 @@ function balise_URL_ECRIRE_dist($p) {
 // #URL_ACTION_AUTEUR{converser,arg,redirect} -> ecrire/?action=converser&arg=arg&hash=xxx&redirect=redirect
 //
 // http://doc.spip.org/@balise_URL_ACTION_AUTEUR_dist
-function balise_URL_ACTION_AUTEUR_dist($p) {
+function balise_URL_ACTION_AUTEUR_dist($p)
+{
 	$p->descr['session'] = true;
 
 	$p->code = interprete_argument_balise(1,$p);

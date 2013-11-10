@@ -1,0 +1,68 @@
+[(#REM) <!-- Liste des depots :
+	- soit integrale de l'ensemble du site si on est dans la page depots (dans le bloc contenu)
+	- soit reduite aux autre depots que celui affiche dans la page depot (dans le bloc extra/navigation)
+	Dans ces deux cas les informations different car la taille des blocs influe sur l'affichage.
+	
+	Les parametres d'environnement specifiques sont :
+	- titre     : le titre de la liste
+	- par       : le champ tri principal
+	- pas       : le pas de pagination
+	- recherche : critere de recherche
+	- where     : condition d'exclusion du depot eventuellement en cours d'affichage (page depot)
+	- affichage : complet, tous les champs, ou simplifie, le titre et l'id pour la liste en extra/navigation
+ -->]
+
+[(#SET{defaut_tri, #ARRAY{
+	titre, 1,
+	nbr_paquets, -1,
+    nbr_plugins, -1,
+	maj, -1,
+	id_depot, 1}})]
+
+<B_liste_depots>
+#ANCRE_PAGINATION
+<div class="liste-objets depots">
+	<table class="spip liste" summary="<:svp:resume_table_depots:>">
+	[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{svp:info_1_depot,svp:info_nb_depots}})</strong></caption>]
+		<thead>
+			<tr class="first_row">
+				<th class="titre principale">[(#TRI{titre, <:info_titre:>, ajax})]</th>
+				[(#ENV{affichage}|=={complet}|oui)
+                <th class="nombre">[(#TRI{nbr_paquets, <:svp:titre_paquets:>, ajax})]</th>
+                <th class="nombre">[(#TRI{nbr_plugins, <:svp:titre_plugins:>, ajax})]</th>
+				<th class="date secondaire">[(#TRI{maj, <:svp:label_actualise_le:>, ajax})]</th>]
+				<th class="id">[(#TRI{id_depot, <:info_numero_abbreviation:>, ajax})]</th>
+				[(#ENV{affichage}|=={complet}|oui)
+				<th class="bouton">&nbsp;</th>
+				<th class="bouton">&nbsp;</th>]
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_liste_depots(DEPOTS) {where?}{recherche?}{tri #ENV{par, titre}, #GET{defaut_tri}}{pagination #ENV{pas, 5}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="titre principale">
+				[(#ENV{affichage}|=={complet}|oui)[(#LOGO_DEPOT|image_reduire{20,26})]]
+					<a[ href="(#ID_DEPOT|generer_url_entite{depot})"] title="<:svp:bulle_aller_depot:>">
+						[(#TITRE)]
+					</a>
+				</td>
+				[(#ENV{affichage}|=={complet}|oui)
+                <td class="nombre">[(#NBR_PAQUETS)]</td>
+                <td class="nombre">[(#NBR_PLUGINS)]</td>
+				<td class="date secondaire">[(#MAJ|affdate{d-m H:i})]</td>]
+				<td class="id">[(#ID_DEPOT)]</td>
+				[(#ENV{affichage}|=={complet}|oui)
+				<td class="bouton">[(#BOUTON_ACTION{<:svp:bouton_supprimer:>, #URL_ACTION_AUTEUR{supprimer_depot,#ID_DEPOT, #SELF}, '', '', <:svp:bulle_supprimer_depot:>})]</td>]
+			</tr>
+</BOUCLE_liste_depots>
+		</tbody>
+	</table>
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_depots>
+[(#ENV{affichage}|=={complet}|oui)
+	#BOITE_OUVRIR{'','notice'}
+		<p><:svp:info_aucun_depot_ajoute:></p>
+	#BOITE_FERMER
+]
+<//B_liste_depots>

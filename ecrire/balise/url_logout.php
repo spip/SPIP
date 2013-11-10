@@ -13,19 +13,22 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@balise_URL_LOGOUT
-function balise_URL_LOGOUT ($p) {return calculer_balise_dynamique($p,'URL_LOGOUT', array());
+function balise_URL_LOGOUT ($p)
+{
+	return calculer_balise_dynamique($p, 'URL_LOGOUT', array());
 }
 
 // $args[0] = url destination apres logout [(#URL_LOGOUT{url})]
 // http://doc.spip.org/@balise_URL_LOGOUT_stat
-function balise_URL_LOGOUT_stat ($args, $context_compil) {
+function balise_URL_LOGOUT_stat ($args, $context_compil)
+{
 	$url = isset($args[0]) ? $args[0] : '';
 	return array($url);
 }
 
 // http://doc.spip.org/@balise_URL_LOGOUT_dyn
-function balise_URL_LOGOUT_dyn($cible) {
-
+function balise_URL_LOGOUT_dyn($cible)
+{
 	if (!$GLOBALS['visiteur_session']['login'] AND !$GLOBALS['visiteur_session']['statut']) return '';
 
 	return generer_url_action('logout',"logout=public&url=" . rawurlencode($cible ? $cible : self('&')));

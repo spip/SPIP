@@ -1,0 +1,21 @@
+--- # Syntaxe des raccourcis SPIP, version 0.0.1
+    #
+    # Si on nomme une regle, elle devient surchargeable
+
+
+tableaux-init:
+  match: "/^\n?[|]/S"
+  replace: "\n\n|"
+
+tableaux-start:
+  match: "/\n\n+[|]/S"
+  replace: "\n\n\n\n|"
+
+tableaux-end:
+  match: "/[|](\n\n+|\n?$)/S"
+  replace: "|\n\n\n\n"
+
+tableaux-middle:
+  match: "/([^|])(\n[|].*[|]\n)([^|])/UmsS"
+  replace: replace_tableaux
+  is_callback: Y

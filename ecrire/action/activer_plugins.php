@@ -14,21 +14,22 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // mise a jour des donnees si envoi via formulaire
 // http://doc.spip.org/@enregistre_modif_plugin
-function enregistre_modif_plugin(){
+function enregistre_modif_plugin()
+{
 	include_spip('inc/plugin');
   // recuperer les plugins dans l'ordre des $_POST
 	$test = array();
-	foreach(liste_plugin_files() as $file){
+	foreach(liste_plugin_files() as $file) {
 	  $test['s'.substr(md5(_DIR_PLUGINS.$file),0,16)] = $file;
 	}
 	if (defined('_DIR_PLUGINS_SUPPL'))
-		foreach(liste_plugin_files(_DIR_PLUGINS_SUPPL) as $file){
-		  $test['s'.substr(md5(_DIR_PLUGINS_SUPPL.$file),0,16)] = $file;
+		foreach(liste_plugin_files(_DIR_PLUGINS_SUPPL) as $file) {
+			$test['s'.substr(md5(_DIR_PLUGINS_SUPPL.$file),0,16)] = $file;
 		}
 
 	$plugin=array();
 
-	foreach($_POST as $choix=>$val){
+	foreach($_POST as $choix=>$val) {
 		if (isset($test[$choix])&&$val=='O')
 			$plugin[]=$test[$choix];
 	}
@@ -52,8 +53,8 @@ function enregistre_modif_plugin(){
 }
 
 // http://doc.spip.org/@action_activer_plugins_dist
-function action_activer_plugins_dist() {
-
+function action_activer_plugins_dist()
+{
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
 

@@ -1,0 +1,62 @@
+<BOUCLE_forum(FORUMS){id_forum}{statut?}{tout}>
+#SET{self,#SELF|parametre_url{debut_forum|email_auteur|ip|id_auteur|auteur,''}}
+[(#REM) Le cartouche ---------------------------------------------------------]
+<div class='cartouche'>
+<h3 class='titre'><span class='info_statut'>[(#CHEMIN_IMAGE{[forum-statut-(#STATUT)-24.png]}|balise_img|inserer_attribut{alt,#VAL{forum:statut_}|concat{#STATUT}|_T})]</span>
+<a href='[(#GET{self}|parametre_url{debut_forum,@#ID_FORUM}|ancre_url{forum#ID_FORUM})]' title='[<:info_numero_abbreviation|attribut_html:> (#ID_FORUM)]'>[(#TITRE|sinon{<:info_sans_titre:>})]<b class="numero">#ID_FORUM</b></a></h3>
+<div class='date'>[(#DATE_HEURE|date_interface)]</div>
+
+<div class='par'><:par_auteur:>[
+(#ID_AUTEUR|oui)
+<a class='ajax' href='[(#GET{self}|parametre_url{id_auteur,#ID_AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' >#MODELE{auteur_nom,id_auteur}</a>
+
+][(#ID_AUTEUR|non)[ <a class='ajax' href='[(#GET{self}|parametre_url{auteur,#AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' >(#AUTEUR)</a>]
+
+][ &mdash; <a class='ajax' href='mailto:#EMAIL_AUTEUR' title='<:envoyer_message|attribut_html:>' >(#EMAIL_AUTEUR|email_valide|?{#EMAIL_AUTEUR})</a>
+
+][(#STATUT|!={publie}|oui)[ &mdash; IP <a class='ajax' href='[(#GET{self}|parametre_url{ip,#IP})]' title='<:forum:messages_meme_ip|attribut_html:>' >(#IP)</a>]]</div>
+
+[(#ID_PARENT|oui)
+<div class='reponse_a parent'><:forum:lien_reponse_message:> <a href="[(#SELF|parametre_url{debut_forum,@#ID_PARENT})]"><:info_numero_abbreviation:>#ID_PARENT</a></div>
+]
+#SET{voir,''}
+<BOUCLE_art(ARTICLES){id_article=#OBJET|=={article}|?{#ID_OBJET}}{id_article!=#ENV{id_article,0}}{statut!=''}><div class='reponse_a'><:forum:lien_reponse_article:> <a href='[(#ID_ARTICLE|generer_url_entite{article,'',forum#ID_FORUM, #_forum:STATUT|!={prive}})]'>#TITRE</a>#SET{voir,'</div>'}</BOUCLE_art>
+<BOUCLE_rub(RUBRIQUES){id_rubrique=#OBJET|=={rubrique}|?{#ID_OBJET}}{statut!=''}><div class='reponse_a'><:forum:lien_reponse_rubrique:> <a href='[(#ID_RUBRIQUE|generer_url_entite{rubrique,'',forum#ID_FORUM, #_forum:STATUT|!={prive}})]'>#TITRE</a>#SET{voir,'</div>'}</BOUCLE_rub>
+<BOUCLE_bre(BREVES){id_breve=#OBJET|=={breve}|?{#ID_OBJET}}{statut!=''}><div class='reponse_a'><:forum:lien_reponse_breve_2:> <a href='[(#ID_BREVE|generer_url_entite{breve,'',forum#ID_FORUM, #_forum:STATUT|!={prive}})]'>#TITRE</a>#SET{voir,'</div>'}</BOUCLE_bre>
+<BOUCLE_sit(SYNDIC){id_syndic=#OBJET|=={syndic}|?{#ID_OBJET}}><div class='reponse_a'><:forum:lien_reponse_site_reference:> <a href='[(#ID_SYNDIC|generer_url_entite{site,'','',1}|ancre_url{forum#ID_FORUM})]'>#NOM_SITE</a>#SET{voir,'</div>'}</BOUCLE_sit>
+<//B_art>
+[(#OBJET|in_array{#LISTE{article,rubrique,breve,syndic}}|non)
+<div class='reponse_a'>[(#OBJET|concat{:lien_reponse_,#OBJET}|_T)] <a href='[(#ID_OBJET|generer_url_entite{#OBJET,'',forum#ID_FORUM, #STATUT|!={prive}})]'>[(#TITRE|?{#TITRE,#NOM})]</a>
+#SET{voir,'</div>'}
+]
+[ &#91;<a href='[(#GET{self}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET})]' class="ajax"><:forum:voir_messages_objet:></a>&#93;(#GET{voir})]
+</div>
+[(#REM) Le corps ---------------------------------------------------------]
+[<div class='texte controle'>(#TEXTE|lignes_longues)</div>]
+<BOUCLE_doc(DOCUMENTS){id_forum}{tout}>
+[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+	[(#MODELE{emb}|image_reduire{150})]
+,
+	#LOGO_DOCUMENT{#URL_DOCUMENT}
+})]
+</BOUCLE_doc>
+[<div class='notes controle'>(#NOTES|lignes_longues)</div>]
+[<div class='site'><:info_url:></:info_url:><a href='#URL_SITE'>(#NOM_SITE|sinon{#URL_SITE}|lignes_longues)</a></div>]
+#SET{liens,#TITRE|extraire_balises{a}|extraire_attribut{href}}
+[<div class="urls">
+	<h4 onclick="$(this).next().toggle('fast');">[(#GET{liens}|count) ]<:forum:info_liens_titre:></h4>
+	<div class="none-js">
+	(#GET{liens}|implode{", "}|textebrut|couper{1000}|nl2br)
+	</div>
+</div>]
+#SET{liens,#TEXTE|extraire_balises{a}|extraire_attribut{href}}
+[<div class="urls">
+	<h4 onclick="$(this).next().toggle('fast');">[(#GET{liens}|count) ]<:forum:info_liens_texte:></h4>
+	<div class="none-js">
+	(#GET{liens}|implode{", "}|textebrut|couper{1000}|nl2br)
+	</div>
+</div>]
+
+[(#REM) Les boutons ---------------------------------------------------------]
+[(#INCLURE{fond=prive/modeles/forum-actions-#ENV{boutons,moderer}, id_forum, id_objet, objet, statut, self})]
+</BOUCLE_forum>

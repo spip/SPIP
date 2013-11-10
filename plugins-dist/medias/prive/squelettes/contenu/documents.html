@@ -1,0 +1,6 @@
+[(#AUTORISER{administrer,mediatheque}|sinon_interdire_acces)]
+<INCLURE{fond=prive/squelettes/inclure/mediatheque-navigation, media, iddoc=doc, ajax, env} />
+<script type="text/javascript">/*<![CDATA[*/
+var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
+[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
+/*]]>*/</script>

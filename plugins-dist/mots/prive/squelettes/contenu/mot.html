@@ -1,0 +1,36 @@
+<BOUCLE_mot(MOTS){id_mot}{tout}{si #ENV{exec}|=={mot}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,mot,#ID_MOT})
+	[(#URL_ECRIRE{mot_edit,id_mot=#ID_MOT}|icone_verticale{<:mots:icone_modifier_mot:>,mot,edit,right ajax preload})]
+	]
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{mot-24.png}|balise_img{mot,cadre-icone})]</h1>
+],simple fiche_objet})]
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/mot,id=#ID_MOT,id_mot=#ID_MOT,wysiwyg=1} />
+</div>
+
+
+<div class="liste">
+<BOUCLE_objetslies(spip_mots_liens){id_mot}{0,1}><h3><:mots:titre_objets_lies_mot:></h3></BOUCLE_objetslies>
+
+<INCLURE{fond=prive/objets/liste/rubriques,id_mot,par=titre,ajax,env} />
+<INCLURE{fond=prive/objets/liste/articles,id_mot,par=date,statut=(#SESSION{statut}|statuts_articles_visibles),ajax,env} />
+
+<BOUCLE_autresobjets(spip_mots_liens){id_mot}{objet !IN article,rubrique}{fusion objet}{par objet}>
+	#SET{table,#OBJET|table_objet}
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_mot]})]
+	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_mot}})]
+	<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_mot,ajax,env} />
+</BOUCLE_autresobjets>
+</div>
+
+#BOITE_FERMER
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,mot,id,#ID_MOT},data,'<div class="nettoyeur"></div>'}}
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_mot>
+[(#ENV**{exec}|=={mot_edit}|?{#INCLURE{fond=prive/squelettes/contenu/mot_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_mot>

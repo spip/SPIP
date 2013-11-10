@@ -1,0 +1,34 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml 
+version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+<channel[ xml:lang="(#LANG)"]>
+	<title>[(#NOM_SITE_SPIP|textebrut|texte_backend)]</title>
+	<link>#URL_SITE_SPIP/</link>
+	<description>[(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)]</description>
+	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
+
+[	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{src}|url_absolue|texte_backend)</url>
+		<link>#URL_SITE_SPIP/</link>
+		[<height>(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{width})</width>]
+	</image>
+]
+
+<BOUCLE_10recents(ARTICLES) {lang ?}{branche ?}{id_mot ?}{id_auteur ?} {par date}{inverse}{0,10}{unique}>
+<INCLURE{fond=inc-rss-item, id_article} />
+</BOUCLE_10recents>
+
+<BOUCLE_tres_recents(ARTICLES){lang ?}{branche ?}{id_mot ?}{id_auteur ?} {par date}{inverse}{age<3}{unique}>
+<INCLURE{fond=inc-rss-item, id_article} />
+</BOUCLE_tres_recents>
+
+</channel>
+
+</rss>

@@ -1,0 +1,44 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	url,1,
+	id_objet,1
+	type,1
+}})
+]<B_liste_urls>
+#ANCRE_PAGINATION
+<div class="liste-objets urls">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{urls:info_1_url,urls:info_nb_urls}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='perma' scope='col'></th>
+			<th class='url principale' scope='col'>[(#TRI{url,<:urls:label_tri_url:>,ajax})]</th>
+			<th class='objet' scope='col'>[(#TRI{type,<:urls:info_objet:>,ajax})]</th>
+			<th class='id' scope='col'><:info_numero_abbreviation:></th>
+			<th class='parent' scope='col'><:urls:info_id_parent:></th>
+			<th class='date secondaire' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class="action"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_urls(spip_urls){id_objet?}{type?}{where?}{url like #ENV{recherche,%}}{tri #ENV{par,perma},#GET{defaut_tri}}{!par date}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='perma'>[(#PERMA|?{#CHEMIN_IMAGE{cadenas-16.png}|balise_img})]</td>
+			<td class='url principale'>#URL</td>
+			<td class='objet'>[(#TYPE|objet_info{texte_objet}|_T)]</td>
+			<td class='id'>#ID_OBJET</td>
+			<td class='parent'>[(#ID_PARENT|?{#ID_PARENT})]</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='action'>[(#AUTORISER{modifier,#TYPE,#ID_OBJET})[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{supprimer-12}|balise_img{<:urls:bouton_supprimer_url:>})],[(#URL_ACTION_AUTEUR{supprimer_url,[(#ID_PARENT)-#URL],#SELF})],ajax})]]</td>
+		</tr>
+	</BOUCLE_liste_urls>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_urls>[
+<div class="liste-objets urls caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_urls>
+[(#VAL{_AJAX}|defined|oui)
+<script type="text/javascript">if (window.jQuery) jQuery(function(){jQuery('#url-#TYPE-#ID_OBJET').html('[(#ID_OBJET|generer_url_entite{#TYPE,'','',#EVAL{true}}|url_absolue|texte_script)]');})</script>
+]

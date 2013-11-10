@@ -141,12 +141,12 @@ function fabrique_jointures(&$boucle, $res, $cond = false, $desc = array(), $nom
 				$obj = "L$n.$obj";
 			// le where complementaire est envoye dans la jointure pour pouvoir etre elimine avec la jointure
 			// en cas d'optimisation
-			//$boucle->where[] = array("'='","'$obj'","sql_quote('$type')");
+			//$boucle->where[] = array("'='","'$obj'","Sql::quote('$type')");
 			$boucle->join["L$n"] =
 				$echap ?
-					array("'$id_table'", "'$j2'", "'$j1'", "'$obj='.sql_quote('$type')")
+					array("'$id_table'", "'$j2'", "'$j1'", "'$obj='.Sql::quote('$type')")
 					:
-					array($id_table, $j2, $j1, "$obj=".sql_quote($type));
+					array($id_table, $j2, $j1, "$obj=".Sql::quote($type));
 		}
 		else
 			$boucle->join["L$n"] = $echap ? array("'$id_table'", "'$j'") : array($id_table, $j);
@@ -357,7 +357,7 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu = array(), $
 
 	// sinon essayer de passer par une autre table
 	$new = $vu;
-	foreach ($boucle->jointures as $v){
+	foreach ($boucle->jointures as $v) {
 		if ($v
 		    AND !in_array($v, $vu)
 		    AND $def = $trouver_table($v, $boucle->sql_serveur)

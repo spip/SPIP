@@ -1,0 +1,68 @@
+[(#REM) <!-- Liste des paquets :
+	- soit integrale de l'ensemble du site
+	- soit reduite a un seul depot ou a un plugin
+	
+	Les parametres d'environnement specifiques sont :
+	- titre     : le titre de la liste
+	- par       : le champ tri principal
+	- pas       : le pas de pagination
+	- id_depot  : filtrer la liste sur un depot
+	- id_plugin : filtrer la liste sur un plugin
+	- recherche : critere de recherche
+	- where     : condition supplementaire construire par l'appelant (non utilisee)
+ -->]
+
+[(#SET{defaut_tri, #ARRAY{
+	nom_archive, 1,
+	date_modif, -1,
+	version, -1,
+	id_paquet, 1}})]
+
+<B_liste_paquets>
+#ANCRE_PAGINATION
+<div class="liste-objets paquets">
+	<table class="spip liste" summary="<:svp:resume_table_paquets:>">
+	[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{svp:info_1_paquet,svp:info_nb_paquets}})</strong></caption>]
+		<thead>
+			<tr class="first_row">
+				<th class="titre principale">[(#TRI{nom_archive, <:info_titre:>, ajax})]</th>
+				<th class="date secondaire">[(#TRI{date_modif, <:svp:label_modifie_le:>, ajax})]</th>
+				<th class="intervalle"><:svp:label_compatibilite_spip:></th>
+				<th class="numero">[(#TRI{version, <:svp:label_version:>, ajax})]</th>
+				<th class="lien"><:svp:label_xml_plugin:></th>
+				<th class="lien"><:svp:titre_depot:></th>
+				<th class="id">[(#TRI{id_paquet, <:info_numero_abbreviation:>, ajax})]</th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_liste_paquets(PAQUETS) {where?}{id_depot?}{id_plugin?}{recherche?}{tri #ENV{par, nom_archive}, #GET{defaut_tri}}{pagination #ENV{pas, 25}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<BOUCLE_depot_paquet(DEPOTS) {id_depot}>
+				<td class="titre principale">
+					<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#URL_ARCHIVES|concat{/}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ (#NOM_ARCHIVE)][ - (#NBO_ARCHIVE|taille_en_octets)]">
+						[(#NOM_ARCHIVE)]
+					</a>
+				</td>
+				<td class="date secondaire">[(#DATE_MODIF|affdate{d-m-y H:i})]</td>
+				<td class="intervalle">[(#COMPATIBILITE_SPIP|svp_afficher_intervalle{SPIP}|sinon{--})]</td>
+				<td class="numero">[(#_liste_paquets:VERSION)]</td>
+				<td class="lien">
+					<a class="mediabox boxIframe boxWidth-800px boxHeight-600px"[ href="(#URL_PAGE{xml,url=#URL_ARCHIVES|concat{/}|concat{#NOM_ARCHIVE|basename{.zip}}|concat{.xml}})"] title="<:svp:bulle_afficher_xml_plugin:>">
+						[(#CHEMIN_IMAGE{plugin-16.png}|balise_img{'', icone})]
+					</a>
+				</td>
+				<td class="lien">
+					<a[ href="(#ID_DEPOT|generer_url_entite{depot})"] title="<:svp:bulle_aller_depot:>">
+						[(#TITRE)]
+					</a>
+				</td>
+				<td class="id">[(#ID_PAQUET)]</td>
+			</BOUCLE_depot_paquet>
+			</tr>
+</BOUCLE_liste_paquets>
+		</tbody>
+	</table>
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_paquets>
+<//B_liste_paquets>

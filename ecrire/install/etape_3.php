@@ -13,7 +13,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/headers');
-include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@install_bases
 function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db, $sel_db, $chmod_db){
@@ -41,11 +40,11 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
 	= $GLOBALS['spip_' . $server_db .'_functions_' . $GLOBALS['spip_sql_version']];
 
-	$fquery = sql_serveur('query', $server_db);
+	$fquery = Sql::serveur('query', $server_db);
 	if ($choix_db == "new_spip") {
 		$re = ',^[a-z_][a-z_0-9-]*$,i';
 		if (preg_match($re, $sel_db))
-			sql_create_base($sel_db, $server_db);
+			Sql::create_base($sel_db, $server_db);
 		else {
 		  $re = "Le nom de la base doit correspondre a $re";
 		  spip_log($re);
@@ -67,16 +66,16 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	$GLOBALS['connexions'][$server_db]['prefixe'] = $table_prefix;
 	$GLOBALS['connexions'][$server_db]['db'] = $sel_db;
 
-	$old = sql_showbase($table_prefix  . "_meta", $server_db);
-	if ($old) $old = sql_fetch($old, $server_db);
+	$old = Sql::showbase($table_prefix  . "_meta", $server_db);
+	if ($old) $old = Sql::fetch($old, $server_db);
 	if (!$old) {
 
 		// Si possible, demander au serveur d'envoyer les textes
 		// dans le codage std de SPIP,
-		$charset = sql_get_charset(_DEFAULT_CHARSET, $server_db);
+		$charset = Sql::get_charset(_DEFAULT_CHARSET, $server_db);
 
 		if ($charset) {
-			sql_set_charset($charset['charset'], $server_db);
+			Sql::set_charset($charset['charset'], $server_db);
 			$GLOBALS['meta']['charset_sql_base'] = 
 				$charset['charset'];
 			$GLOBALS['meta']['charset_collation_sql_base'] = 
@@ -96,35 +95,35 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 			$t = array('nom' => 'charset_sql_base',
 				   'valeur' => $charset['charset'],
 				   'impt' => 'non');
-			@sql_insertq('spip_meta', $t, '', $server_db);
+			@Sql::insertq('spip_meta', $t, '', $server_db);
 			$t['nom'] = 'charset_collation_sql_base';
 			$t['valeur'] = $charset['collation'];
-			@sql_insertq('spip_meta', $t, '', $server_db);
+			@Sql::insertq('spip_meta', $t, '', $server_db);
 			$t['nom'] = 'charset_sql_connexion';
 			$t['valeur'] = $charset['charset'];
-			@sql_insertq('spip_meta', $t, '', $server_db);
+			@Sql::insertq('spip_meta', $t, '', $server_db);
 		}
 		$t = array('nom' => 'version_installee',
 			   'valeur' => $spip_version_base,
 			   'impt' => 'non');
-		@sql_insertq('spip_meta', $t, '', $server_db);
+		@Sql::insertq('spip_meta', $t, '', $server_db);
 		$t['nom'] = 'nouvelle_install';
 		$t['valeur'] = 1;
-		@sql_insertq('spip_meta', $t, '', $server_db);
+		@Sql::insertq('spip_meta', $t, '', $server_db);
 		// positionner la langue par defaut du site si un cookie de lang a ete mis
 		if (isset($_COOKIE['spip_lang_ecrire'])){
-			@sql_insertq('spip_meta', array('nom'=>'langue_site','valeur'=>$_COOKIE['spip_lang_ecrire']), '', $server_db);
+			@Sql::insertq('spip_meta', array('nom'=>'langue_site','valeur'=>$_COOKIE['spip_lang_ecrire']), '', $server_db);
 		}
 	} else {
 
 	  // pour recreer les tables disparues au besoin
 	  spip_log("Table des Meta deja la. Verification des autres.");
 	  creer_base($server_db); 
-	  $fupdateq = sql_serveur('updateq', $server_db);
+	  $fupdateq = Sql::serveur('updateq', $server_db);
 
 	  $r = $fquery("SELECT valeur FROM spip_meta WHERE nom='version_installee'", $server_db);
 
-	  if ($r) $r = sql_fetch($r, $server_db);
+	  if ($r) $r = Sql::fetch($r, $server_db);
 	  $version_installee = !$r ? 0 : (double) $r['valeur'];
 	  if (!$version_installee OR ($spip_version_base < $version_installee)) {
 	    $fupdateq('spip_meta', array('valeur'=>$spip_version_base, 'impt'=>'non'), "nom='version_installee'",'', $server_db);
@@ -300,7 +299,7 @@ function install_etape_3_dist()
 		  . (defined('_INSTALL_NAME_DB') ? ''
 		     : "\n<input type='hidden' name='sel_db' value='$sel_db' />");
 
-		$auteur_obligatoire = !sql_countsel('spip_auteurs','','','',$server_db);
+		$auteur_obligatoire = !Sql::countsel('spip_auteurs','','','',$server_db);
 
 		$res =  "<div class='success'><b>"
 		. _T('info_base_installee')

@@ -1,0 +1,32 @@
+<div class="formulaire_spip formulaire_ajouter_depot" id="formulaire_ajouter_depot">
+	<h3 class="titrem">[(#CHEMIN_IMAGE{depot-add-24.png}|balise_img{icone ajouter_depot-24,cadre-icone})]<:svp:titre_form_ajouter_depot:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<!-- <br class='bugajaxie' /> -->
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}">
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>
+			<p class="explication"><:svp:info_ajouter_depot:></p>
+			<ul>
+				<li class="editer_xml_paquets obligatoire[(#ENV{erreurs}|table_valeur{xml_paquets}|oui) erreur]">
+					<label for="xml_paquets"><:svp:label_xml_depot:></label>
+					<p class="explication">
+						<:svp:info_fichier_depot:>
+						<a class="spip_out" title="<:svp:bulle_ajouter_spipzone:>" href="http://plugins.spip.net/depots/principal.xml" onclick="$('#xml_paquets').attr('value',$(this).attr('href')).focus();return false;"><:svp:info_adresse_spipzone:></a>
+					</p>
+					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{xml_paquets})</span>]
+					<input type="text" name="xml_paquets" id="xml_paquets" value="[http://plugins.spip.net/depots/principal.xml(#VAL{depot}|svp_compter|table_valeur{depot}|=={0}|oui)]" class="text" />
+				</li>
+			</ul>
+	
+			<p class="boutons">
+				<input type="submit" class="submit" value="<:bouton_ajouter:>" />
+			</p>
+		</div>
+	</form>
+	]
+</div>

@@ -1,0 +1,20 @@
+<h1 class="grostitre"><:sites:titre_page_sites_tous:></h1>
+
+<BOUCLE_rubrique_existe(RUBRIQUES){statut?}{racine}{0, 1}>
+
+<INCLURE{fond=prive/objets/liste/sites,titre=<:sites:titre_sites_tous:>,statut=publie,par=nom_site,ajax} />
+<INCLURE{fond=prive/objets/liste/sites,titre=<:sites:titre_sites_proposes:>,statut=prop,par=nom_site,ajax} />
+
+[(#AUTORISER{creersitedans,rubrique,#ID_RUBRIQUE})
+	[(#URL_ECRIRE{site_edit}|icone_verticale{<:sites:icone_referencer_nouveau_site:>,site-24.png,new,right})]
+	<br class='nettoyeur' />
+]
+
+<!--affiche_milieu-->
+<INCLURE{fond=prive/objets/liste/sites,titre=<:sites:avis_sites_probleme_syndication:>,syndication=off,statut=publie,par=nom_site,ajax} />
+[(#AUTORISER{instituer,site}|oui)
+	<INCLURE{fond=prive/objets/liste/sites,titre=<:sites:info_sites_refuses:>,statut=refuse,par=nom_site,ajax} />
+]
+<INCLURE{fond=prive/objets/liste/syndic_articles,titre=<:sites:titre_dernier_article_syndique:>,par=date,ajax} />
+
+</BOUCLE_rubrique_existe>

@@ -1,0 +1,33 @@
+<BOUCLE_contenu_document(DOCUMENTS){id_document}>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>&gt; <:medias:objet_documents:>&gt; [<strong class="on">(#TITRE|sinon{<:info_sans_titre:>}|couper{80})</strong>]</p>
+
+<div class="cartouche">
+	<h1 class="h1 #EDIT{titre}">[(#TITRE|sinon{<:info_sans_titre:>})]</h1>
+	[<p class="soustitre">(#FICHIER)</p>]
+
+	<p class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>[, <span class="auteurs">(#CREDITS)</span>]</p>
+</div>
+
+<div class="surlignable">
+	[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
+	[<div class="#EDIT{descriptif} descriptif">(#DESCRIPTIF|image_reduire{500,0})</div>]
+</div>
+
+<div class="#EDIT{chapo} chapo">
+<:medias:label_caracteristiques:><br />
+[<span class='type'>(#TYPE_DOCUMENT) - </span>]
+<span class='taille'>[(#LARGEUR|ou{#HAUTEUR}|oui)[(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#LARGEUR,hauteur_vignette,#HAUTEUR}})] -
+				][(#TAILLE|taille_en_octets|texte_backend)]</span>
+</div>
+[(#EXTENSION|match{gif|png|jpg}|oui)
+	[(#MODELE{img,align=center,embed=oui}|image_reduire{450,0})]
+]
+[(#EXTENSION|match{gif|png|jpg}|non)
+	#MODELE{doc,align=center}
+]
+
+[<div class="notes surlignable"><h2 class="h2 pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+
+
+</BOUCLE_contenu_document>

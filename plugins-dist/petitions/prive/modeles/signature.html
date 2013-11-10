@@ -1,0 +1,33 @@
+<BOUCLE_signature(SIGNATURES){id_signature}{tout}>
+#SET{statut,#STATUT|match{^(publie|poubelle)$}|?{#STATUT,prop}}
+#SET{self,#SELF|parametre_url{debut_signature|ad_email,''}}
+[(#REM) Le cartouche ---------------------------------------------------------]
+<div class='cartouche'>
+	<h3 class='titre'>
+		<span class='info_statut'>[(#CHEMIN_IMAGE{[signature-statut-(#GET{statut})-24.png]}|balise_img|inserer_attribut{alt,#VAL{petitions:statut_}|concat{#GET{statut}}|_T})]</span>
+		<a href='[(#GET{self}|parametre_url{debut_signatures,@#ID_SIGNATURE}|ancre_url{signature#ID_SIGNATURE})]' title='[<:info_numero_abbreviation|attribut_html:> (#ID_SIGNATURE)]'>[(#NOM_EMAIL|sinon{<:petitions:sans_nom:>})]</a>
+		[(<a href='#URL_SITE'>(#NOM_SITE|sinon{#URL_SITE}|couper{80})</a>)]
+	</h3>
+
+	<div class='date'>[(#DATE|date_interface)]</div>
+	[<div class='site'><:petitions:info_site_web:> <a class='ajax' href='[(#GET{self}|parametre_url{url_site,#URL_SITE})]' title='<:petitions:signatures_meme_site|attribut_html:>' >(#NOM_SITE|sinon{#URL_SITE})</a></div>]
+	[<div class='ad_email'><:petitions:info_adresse_email:> <a class='ajax' href='[(#GET{self}|parametre_url{ad_email,#AD_EMAIL})]' title='<:petitions:signatures_meme_auteur|attribut_html:>' >(#AD_EMAIL)</a></div>]
+	<BOUCLE_art(ARTICLES){id_petition}{statut==.*}>
+		#SET{id_article,#ID_ARTICLE}
+		<div class='reponse_a'>
+			<p class="article"><:petitions:lien_reponse_article:> : <a href='[(#ID_ARTICLE|generer_url_entite{article})]'>#TITRE</a> [<a href='[(#GET{self}|parametre_url{id_article,#ID_ARTICLE})]' class="ajax"><:petitions:voir_signatures_objet:></a>]</p>
+			<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+			<p class="rubrique"><:info_dans_rubrique:> <a href='[(#ID_RUBRIQUE|generer_url_entite{rubrique})]'>#TITRE</a></p>
+			</BOUCLE_rub>
+		</div>
+		#SET{id_article,#ID_ARTICLE}
+	</BOUCLE_art>
+</div>
+
+[(#REM) Le corps ---------------------------------------------------------]
+[<div class='texte controle'>(#MESSAGE)</div>]
+
+
+[(#REM) Les boutons ---------------------------------------------------------]
+[(#INCLURE{fond=prive/modeles/signature-actions-#ENV{boutons,moderer},id_signature,id_article=#GET{id_article},statut,self})]
+</BOUCLE_signature>

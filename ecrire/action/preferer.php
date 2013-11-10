@@ -14,7 +14,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 // http://doc.spip.org/@action_preferer_dist
-function action_preferer_dist() {
+function action_preferer_dist()
+{
 	//
 	// Preferences de presentation de l'espace prive
 	//
@@ -26,8 +27,9 @@ function action_preferer_dist() {
 	if (!preg_match(",^(.+):(.*)$,", $arg, $r))
 		spip_log("action_preferer_dist: $arg pas compris");
 	else {
-	$prefs_mod = false;
-
+		$prefs_mod = false;
+	}
+	
 	list(, $op, $val) = $r;
 	if ($op == 'couleur') {
 		$GLOBALS['visiteur_session']['prefs']['couleur'] = $val;
@@ -43,7 +45,7 @@ function action_preferer_dist() {
 	}
 
 	if ($prefs_mod AND intval($GLOBALS['visiteur_session']['id_auteur']))
-		sql_updateq('spip_auteurs', array('prefs' => serialize($GLOBALS['visiteur_session']['prefs'])), "id_auteur=" .intval($GLOBALS['visiteur_session']['id_auteur']));
+		Sql::updateq('spip_auteurs', array('prefs' => serialize($GLOBALS['visiteur_session']['prefs'])), "id_auteur=" .intval($GLOBALS['visiteur_session']['id_auteur']));
 	
 	if ($op == 'spip_ecran') {
 		// Poser un cookie,
@@ -55,7 +57,5 @@ function action_preferer_dist() {
 
 	// Si modif des couleurs en ajax, redirect inutile on a change de CSS
 	if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') exit;
-
-	}
 }
 ?>

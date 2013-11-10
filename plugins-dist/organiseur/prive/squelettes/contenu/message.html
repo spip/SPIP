@@ -1,0 +1,40 @@
+[(#AUTORISER{voir,message,#ID_MESSAGE}|sinon_interdire_acces)]
+<BOUCLE_message(MESSAGES){id_message}{statut?}{si #ENV{exec}|=={message}}>
+	[(#BOITE_OUVRIR{[
+		[(#AUTORISER{modifier,message,#ID_MESSAGE}|oui)
+			[(#ID_MESSAGE|generer_url_ecrire_entite_edit{message}|icone_verticale{#TYPE|organiseur_texte_modifier_message{},#TYPE|organiseur_icone_message{24},edit,right ajax preload})]
+		]
+		<h1>[(#TITRE|recuperer_numero). ](#TITRE|sinon{<:info_sans_titre:>})[(#TYPE|organiseur_icone_message{24}|balise_img{'',cadre-icone})]</h1>
+	],simple fiche_objet})]
+
+	[(#STATUT|=={prepa}|oui)
+		#BOITE_OUVRIR{'',note center proposer}
+			<p><:organiseur:texte_message_brouillon:></p>
+			[(#BOUTON_ACTION{<:organiseur:bouton_envoyer_message_maintenant:>,#URL_ACTION_AUTEUR{envoyer_message,#ID_MESSAGE,#SELF}})]
+		#BOITE_FERMER
+	]
+	<div id="wysiwyg">
+	<INCLURE{fond=prive/objets/contenu/message,id=#ID_MESSAGE,wysiwyg=1}>
+	</div>
+
+
+	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,message,id,#ID_MESSAGE},data,'<div class="nettoyeur"></div>'}}
+
+	#BOITE_FERMER
+
+	#SET{enfants,''}
+	[(#VAL{message-enfants}|trouver_fond{prive/objets/contenu/}|oui)
+		[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/message-enfants,id_objet=#ID_MESSAGE,env})]})]
+	]
+	[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet,message,id_objet,#ID_MESSAGE},data,#GET{enfants}})]})]
+
+	[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('[(#OBJET|objet_info{url_voir})]','#navigation,#chemin');/*\]\]>*/</script>
+	]
+	<?php
+	include_spip('inc/messages');
+	messagerie_marquer_lus(#SESSION{id_auteur},#ID_MESSAGE);
+	?>
+</BOUCLE_message>
+[(#ENV**{exec}|=={message_edit}|?{#INCLURE{fond=prive/squelettes/contenu/message_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_message>

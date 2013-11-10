@@ -25,7 +25,8 @@ include_spip('base/objets');
 // A l'installation, il faut simuler l'existence de ce fichier
 
 // http://doc.spip.org/@spip_connect
-function spip_connect($serveur='', $version='') {
+function spip_connect($serveur='', $version='')
+{
 	global $connexions, $spip_sql_version;
 
 	$serveur = !is_string($serveur) ? '' : strtolower($serveur);
@@ -33,18 +34,19 @@ function spip_connect($serveur='', $version='') {
 	if (!$version) $version = $spip_sql_version;
 	if (isset($connexions[$index][$version])) return $connexions[$index];
 
-	include_spip('base/abstract_sql');
 	$install = (_request('exec') == 'install');
 
 	// Premiere connexion ?
 	if (!($old = isset($connexions[$index]))) {
 		$f = (!preg_match('/^[\w\.]*$/', $serveur))
 		? '' // nom de serveur mal ecrit
-		: ($serveur ?
-		   ( _DIR_CONNECT. $serveur . '.php') // serveur externe
-		    : (_FILE_CONNECT ? _FILE_CONNECT // serveur principal ok
-		       : ($install ? _FILE_CONNECT_TMP // init du serveur principal
-			 : ''))); // installation pas faite
+		: ($serveur
+			? (_DIR_CONNECT . $serveur . '.php') // serveur externe
+		    : (_FILE_CONNECT
+				? _FILE_CONNECT // serveur principal ok
+				: ($install
+					? _FILE_CONNECT_TMP // init du serveur principal
+					: ''))); // installation pas faite
 
 		unset($GLOBALS['db_ok']);
 		unset($GLOBALS['spip_connect_version']);
@@ -105,7 +107,7 @@ function spip_connect($serveur='', $version='') {
 		}
 	} else	{
 		if ($connexions[$index]['spip_connect_version']
-		AND $r = sql_getfetsel('valeur', 'spip_meta', "nom='charset_sql_connexion'",'','','','',$serveur))
+		AND $r = Sql::getfetsel('valeur', 'spip_meta', "nom='charset_sql_connexion'",'','','','',$serveur))
 			$charset = $r;
 		else $charset = -1;
 	}
@@ -120,9 +122,9 @@ function spip_connect($serveur='', $version='') {
 function spip_sql_erreur($serveur='')
 {
 	$connexion = spip_connect($serveur);
-	$e = sql_errno($serveur);
+	$e = Sql::errno($serveur);
 	$t = (isset($connexion['type']) ? $connexion['type'] : 'sql');
-	$m = "Erreur $e de $t: " . sql_error($serveur) . "\n" . $connexion['last'];
+	$m = "Erreur $e de $t: " . Sql::error($serveur) . "\n" . $connexion['last'];
 	$f = $t . $serveur;
 	spip_log($m, $f.'.'._LOG_ERREUR);
 }
@@ -133,7 +135,8 @@ function spip_sql_erreur($serveur='')
 // connue seulement des convertisseurs automatiques
 
 // http://doc.spip.org/@spip_connect_sql
-function spip_connect_sql($version, $ins='', $serveur='', $cont=false) {
+function spip_connect_sql($version, $ins='', $serveur='', $cont=false)
+{
 	$desc = spip_connect($serveur, $version);
 	if (function_exists($f = @$desc[$version][$ins])) return $f;
 	if ($cont) return $desc;
@@ -163,7 +166,8 @@ function spip_connect_sql($version, $ins='', $serveur='', $cont=false) {
  * @param string $auth
  * @return array
  */
-function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='', $auth='') {
+function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='', $auth='')
+{
 	global $db_ok;
 
 	// temps avant nouvelle tentative de connexion
@@ -230,7 +234,7 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 // http://doc.spip.org/@spip_connect_main
 function spip_connect_main($connexion)
 {
-	if ($GLOBALS['spip_connect_version']< 0.1 AND _DIR_RESTREINT){
+	if ($GLOBALS['spip_connect_version']< 0.1 AND _DIR_RESTREINT) {
 		include_spip('inc/headers');
 		redirige_url_ecrire('upgrade', 'reinstall=oui');
 	}
@@ -238,7 +242,7 @@ function spip_connect_main($connexion)
 	if (!($f = $connexion['select'])) return false;
 	// en cas d'erreur select retourne la requette (is_string=true donc)
 	if (!$r = $f('valeur','spip_meta', "nom='charset_sql_connexion'")
-	  OR is_string($r))
+	OR is_string($r))
 		return false;
 	if (!($f = $connexion['fetch'])) return false;
 	$r = $f($r);
@@ -246,7 +250,8 @@ function spip_connect_main($connexion)
 }
 
 // compatibilite
-function spip_connect_ldap($serveur='') {
+function spip_connect_ldap($serveur='')
+{
 	include_spip('auth/ldap');
 	return auth_ldap_connect($serveur);
 }
@@ -255,16 +260,20 @@ function spip_connect_ldap($serveur='') {
 // pour un array(1,'a',"a'") renvoie la chaine "'1','a','a\''"
 // Usage sql un peu deprecie, a remplacer par sql_quote()
 // http://doc.spip.org/@_q
-function _q ($a) {
-	return (is_numeric($a)) ? strval($a) :
-		(!is_array($a) ? ("'" . addslashes($a) . "'")
-		 : join(",", array_map('_q', $a)));
+function _q ($a)
+{
+	return (is_numeric($a))
+		? strval($a)
+		: (!is_array($a)
+			? ("'" . addslashes($a) . "'")
+			: join(",", array_map('_q', $a)));
 }
 
 
 // Recuperer le nom de la table de jointure xxxx sur l'objet yyyy
 // http://doc.spip.org/@table_jointure
-function table_jointure($x, $y) {
+function table_jointure($x, $y)
+{
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$xdesc = $trouver_table(table_objet($x));
 	$ydesc = $trouver_table(table_objet($y));
@@ -284,10 +293,11 @@ function table_jointure($x, $y) {
  * @param string $query
  * @return array
  */
-function query_echappe_textes($query){
+function query_echappe_textes($query)
+{
 	static $codeEchappements = array("''"=>"\x1@##@\x1", "\'"=>"\x2@##@\x2", "\\\""=>"\x3@##@\x3");
 	$query = str_replace(array_keys($codeEchappements), array_values($codeEchappements), $query);
-	if (preg_match_all("/((['])[^']*(\\2))|(([\"])[^\"]*(\\5))/S",$query,$textes)){
+	if (preg_match_all("/((['])[^']*(\\2))|(([\"])[^\"]*(\\5))/S",$query,$textes)) {
 		$textes = reset($textes); // indice 0 du match
 		switch(count($textes)){
 			case 0:$replace=array();break;
@@ -318,7 +328,8 @@ function query_echappe_textes($query){
  * @param array $textes
  * @return string
  */
-function query_reinjecte_textes($query, $textes){
+function query_reinjecte_textes($query, $textes)
+{
 	static $codeEchappements = array("''"=>"\x1@##@\x1", "\'"=>"\x2@##@\x2", "\\\""=>"\x3@##@\x3");
 	# debug de la substitution
 	#if (($c1=substr_count($query,"%"))!=($c2=count($textes))){
@@ -326,7 +337,7 @@ function query_reinjecte_textes($query, $textes){
 	#	spip_log("$c2 ::". var_export($textes,1),"tradquery"._LOG_ERREUR);
 	#	spip_log("ini ::". $qi,"tradquery"._LOG_ERREUR);
 	#}
-	switch (count($textes)){
+	switch (count($textes)) {
 		case 0:break;
 		case 1:$query=sprintf($query,$textes[0]);break;
 		case 2:$query=sprintf($query,$textes[0],$textes[1]);break;
@@ -346,7 +357,8 @@ function query_reinjecte_textes($query, $textes){
 
 // Pour compatibilite. Ne plus utiliser.
 // http://doc.spip.org/@spip_query
-function spip_query($query, $serveur='') {
+function spip_query($query, $serveur='')
+{
 	global $spip_sql_version;
 	$f = spip_connect_sql($spip_sql_version, 'query', $serveur, true);
 	return function_exists($f) ? $f($query, $serveur) : false;

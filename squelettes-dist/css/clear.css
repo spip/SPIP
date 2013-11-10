@@ -1,0 +1,58 @@
+/* --------------------------------------------------------------
+
+   clear.css
+   Classes pour faciliter la composition
+   Cf.: http://www.spip-contrib.net/3820
+
+-------------------------------------------------------------- */
+
+/* Blocs */
+.bloc { display: block; margin-bottom: 1.5em; }
+.box { display: block; margin-bottom: 1.5em; padding: 1.5em; background: #EEE; }
+
+/* Listes, tableaux et mosaiques */
+.first { margin-left: 0; padding-left: 0; }
+.last { margin-right: 0; padding-right: 0; }
+.top { margin-top: 0; padding-top: 0; }
+.bottom { margin-bottom: 0; padding-bottom: 0; }
+.odd {}
+.even {}
+.sep {}
+
+/* Alignements */
+.left { float: left !important; }
+.right { float: right !important; }
+.center { text-align: center; margin-right: auto; margin-left: auto; }
+
+/* Espaceur de blocs */
+.clear { clear: both; }
+br.clear, .nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
+hr.clear { visibility: hidden; }
+
+/* clearfix : http://www.positioniseverything.net/easyclearing.html */
+.clearfix:after {
+    content: "\0020";
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+    overflow: hidden;
+}
+.clearfix { display: inline-table; }
+
+/* Hides from IE-mac \*/
+.clearfix { height: 1%; }
+.clearfix { display: block; }
+/* End hide from IE-mac */
+
+/* Non visible a l'ecran */
+.offscreen, .invisible { position: absolute; left: -999em; height: 1%; }
+.hidden { visibility: hidden; }
+.none { display: none; }
+
+/* debug */
+.todo { opacity: 0.5; }
+.todo:hover { opacity: 1; }
+.blink { text-decoration: blink; }
+
+/* end */

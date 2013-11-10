@@ -1,0 +1,50 @@
+/*
+    ColorBox Core Style
+    The following rules are the styles that are consistant between themes.
+    Avoid changing this area to maintain compatability with future versions of ColorBox.
+*/
+#colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:4999; overflow:hidden;}
+#cboxOverlay{position:fixed; width:100%; height:100%;}
+#cboxMiddleLeft, #cboxBottomLeft{clear:left;}
+#cboxContent{position:relative; overflow:visible;}
+#cboxLoadedContent{overflow:auto;}
+#cboxLoadedContent iframe{display:block; width:100%; height:100%; border:0;}
+#cboxTitle{margin:0;}
+#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%;}
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
+.cboxPhoto{float:left; margin:auto; border:0; display:block;}
+.cboxIframe{width:100%; height:100%; display:block; border:0;}
+
+/* 
+    ColorBox example user style
+    The following rules are ordered and tabbed in a way that represents the
+    order/nesting of the generated HTML, so that the structure easier to understand.
+*/
+#cboxOverlay{background:transparent;}
+#colorbox{}
+    #cboxTopLeft{width:20px; height:20px; background: transparent url('images/fancy_shadow-spt1.png') no-repeat -130px bottom;}
+    #cboxTopRight{width:20px; height:20px; background: transparent url('images/fancy_shadow-spt1.png') no-repeat -50px bottom;}
+    #cboxBottomLeft{width:20px; height:20px; background: transparent url('images/fancy_shadow-spt1.png') no-repeat -130px top;}
+    #cboxBottomRight{width:20px; height:20px; background: transparent url('images/fancy_shadow-spt1.png') no-repeat -50px top;}
+    #cboxMiddleLeft{width:20px; background: transparent url('images/fancy_shadow-spt1.png') repeat-y -105px top;}
+    #cboxMiddleRight{width:20px; background: transparent url('images/fancy_shadow-spt1.png') repeat-y -75px top;}
+    #cboxTopCenter{height:20px; background: transparent url('images/fancy_shadow-spt2.png') repeat-x bottom;}
+    #cboxBottomCenter{height:20px; background: transparent url('images/fancy_shadow-spt2.png') repeat-x top;}
+    #cboxContent{background:#fff;}
+        #cboxLoadedContent{padding:10px;}
+        #cboxTitle{ position: absolute; right: 10px; left: 10px; bottom: 10px; padding: 0 10px;
+        	text-align: center; color: #fff; font-weight: bold; font-size: 0.9em; background-image: url('images/fancy_title_over.png'); }
+        #cboxCurrent{position: absolute; right: -3000em}
+        #cboxPrevious{position: absolute; top: 0; right: 15px; width: 35% ; height: 100%; text-indent:-9999px;}
+        #cboxPrevious.hover{background:url(images/fancy_right.png) right 50% no-repeat;}
+        #cboxNext{position: absolute; top: 0; left: 15px; width: 35% ; height: 100%; text-indent:-9999px;}
+        #cboxNext.hover{background:url(images/fancy_shadow-spt1.png) -170px 50% no-repeat;}
+        #cboxSlideshow{position:absolute; top: -12px; right:-15px; width: 30px; height: 30px;
+        	background:url(images/fancy_shadow-spt2.png) -120px -35px no-repeat; text-indent:-9999px;}
+        #cboxLoadingOverlay{background:#fff;}
+        #cboxLoadingGraphic{background:url(images/loading.gif) center center no-repeat;}
+        #cboxClose{position:absolute; top: -12px; left: -15px; height: 30px; width: 30px;
+        	background:url(images/fancy_shadow-spt2.png) -0px -35px no-repeat; text-indent:-9999px;}
+
+        .cboxSlideshow_on #cboxSlideshow{background-position:-80px -35px;}
+        .cboxSlideshow_off #cboxSlideshow{background-position:-120px -35px;}

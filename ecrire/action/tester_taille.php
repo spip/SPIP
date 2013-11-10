@@ -16,7 +16,7 @@ include_spip('inc/headers');
 function action_tester_taille_error_handler($output)
 {
 	// on est ici, donc echec lors de la creation de l'image
-	if ($GLOBALS['redirect']){
+	if ($GLOBALS['redirect']) {
 		return redirige_formulaire($GLOBALS['redirect']);
 	}
 	return $output;
@@ -25,8 +25,8 @@ function action_tester_taille_error_handler($output)
 
 // Tester nos capacites a creer des images avec GD2 (taille memoire)
 // http://doc.spip.org/@action_tester_taille_dist
-function action_tester_taille_dist() {
-	
+function action_tester_taille_dist()
+{
 	if (!autoriser('configurer'))
 		return;
 	
@@ -39,7 +39,7 @@ function action_tester_taille_dist() {
 		$GLOBALS['taille_min'] = reset($taille);
 
 	// si l'intervalle est assez petit, on garde la valeur min
-	if ($GLOBALS['taille_max']*$GLOBALS['taille_max']-$GLOBALS['taille_min']*$GLOBALS['taille_min']<50000){
+	if ($GLOBALS['taille_max']*$GLOBALS['taille_max']-$GLOBALS['taille_min']*$GLOBALS['taille_min']<50000) {
 		ecrire_meta('max_taille_vignettes',$t=($GLOBALS['taille_min']*$GLOBALS['taille_min'])*0.9,'non');
 		echo round($t/1000000,3).' Mpx';
 		die();
@@ -68,16 +68,16 @@ function action_tester_taille_dist() {
 	propre("<doc1>"); // charger propre avec le trairement d'un modele
 
 	$i = _request('i')+1;
-	$image_source = chemin_image("test.png");
-	$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=".$GLOBALS['taille_min']."-".$GLOBALS['taille_test']);
+	$image_source = chemin_image('test.png');
+	$GLOBALS['redirect'] = generer_url_action('tester_taille', "i=$i&arg=".$GLOBALS['taille_min'].'-'.$GLOBALS['taille_test']);
 
 	ob_start('action_tester_taille_error_handler');
-	filtrer('image_recadre',$image_source,$taille,$taille);
-	$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=$taille-".$GLOBALS['taille_max']);
+	filtrer('image_recadre', $image_source, $taille, $taille);
+	$GLOBALS['redirect'] = generer_url_action('tester_taille', "i=$i&arg=$taille-".$GLOBALS['taille_max']);
 	// si la valeur intermediaire a reussi, on teste la valeur maxi qui est peut etre sous estimee
 	$taille = $GLOBALS['taille_max'];
-	filtrer('image_recadre',$image_source,$taille,$taille);
-	$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=$taille-".$GLOBALS['taille_max']);
+	filtrer('image_recadre', $image_source, $taille, $taille);
+	$GLOBALS['redirect'] = generer_url_action(('tester_taille', "i=$i&arg=$taille-".$GLOBALS['taille_max']);
 	ob_end_clean();
 
 	// on est ici, donc pas de plantage

@@ -1,0 +1,11 @@
+<BOUCLE_nav(MOTS){id_mot}{si #ENV{exec}|=={mot}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','mot','id',#ENV{id_mot}}}}
+#BOITE_FERMER
+
+<div class="ajax">
+#FORMULAIRE_EDITER_LOGO{mot,#ID_MOT,'',#ENV**}
+</div>
+</BOUCLE_nav>
+[(#ENV{exec}|=={mot_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/mot_edit,env} />]
+<//B_nav>

@@ -12,8 +12,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('base/abstract_sql');
-
 // http://doc.spip.org/@install_etape_2_dist
 function install_etape_2_dist()
 {
@@ -70,7 +68,7 @@ function install_etape_2_dist()
 
 		spip_connect_db($adresse_db, 0, $login_db, $pass_db, '',$server_db);
 
-		echo "\n", '<!-- ',  sql_version($server_db), ' -->' ;
+		echo "\n", '<!-- ',  Sql::version($server_db), ' -->' ;
 		list($checked, $res) = install_etape_2_bases($login_db, $server_db);
 
 		$hidden = (defined('_SPIP_CHMOD')
@@ -124,9 +122,9 @@ function install_etape_2_bases($login_db, $server_db)
 		// Si un login comporte un point, le nom de la base est plus
 		// probablement le login sans le point -- testons pour savoir
 			$test_base = $login_db;
-			$ok = sql_selectdb($test_base, $server_db);
+			$ok = Sql::selectdb($test_base, $server_db);
 			$test_base2 = str_replace('.', '_', $test_base);
-			if (sql_selectdb($test_base2, $server_db)) {
+			if (Sql::selectdb($test_base2, $server_db)) {
 				$test_base = $test_base2;
 				$ok = true;
 			}

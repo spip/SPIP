@@ -24,7 +24,7 @@ class IterFactory
 	public static function create($iterateur, $command, $info=null)
 	{
 
-		// cas des SI {si expression} analises tres tot
+		// cas des SI {si expression} analyses tres tot
 		// pour eviter le chargement de tout iterateur
 		if (isset($command['si'])) {
 			foreach ($command['si'] as $si) {
@@ -39,7 +39,10 @@ class IterFactory
 		// chercher un iterateur PHP existant (par exemple dans SPL)
 		// (il faudrait passer l'argument ->sql_serveur
 		// pour etre certain qu'on est sur un "php:")
-		if (class_exists($iterateur,false)) {
+		if (class_exists($iterateur,false)
+		AND ($interfaces=class_implements($iterateur))
+		AND (!empty($interfaces['Iterateur'])))
+		{
 			$a = isset($command['args']) ? $command['args'] : array() ;
 
 			// permettre de passer un Iterateur directement {args #ITERATEUR} :
@@ -72,6 +75,7 @@ class IterFactory
 			$class = "Iterateur".$iterateur;
 			$iter = new $class($command, $info);
 		}
+
 		return new IterDecorator($iter, $command, $info);
 	}
 }

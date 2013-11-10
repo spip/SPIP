@@ -31,7 +31,7 @@ function trace_query_end($query, $start, $result, $erreur, $serveur=''){
 		trace_query_chrono($start, microtime(), $query, $result, $serveur);
 	// tracer les erreurs, sauf pour select, c'est fait dans abstract_sql
 	if ($erreur AND !preg_match('/^select\b/i', $query))
-		erreur_squelette(array(sql_errno($serveur), $erreur, $query));
+		erreur_squelette(array(Sql::errno($serveur), $erreur, $query));
 	return $result;
 }
 
@@ -60,7 +60,7 @@ function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 	$nb++;
 
 	$q = preg_replace('/([a-z)`])\s+([A-Z])/', "$1\n<br />$2",htmlentities($query));
-	$e =  sql_explain($query, $serveur);
+	$e =  Sql::explain($query, $serveur);
 	$r = str_replace('Resource id ','',(is_object($result)?get_class($result):$result));
 	$tableau_des_temps[] = array($dt, $nb, $boucle, $q, $e, $r, $contexte);
 }

@@ -39,7 +39,7 @@ function maj_v016_dist($version_installee, $version_cible)
 	if (upgrade_vers(1.604, $version_installee, $version_cible)) {
 		spip_query("ALTER TABLE spip_auteurs ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
 		$u = spip_query("SELECT * FROM spip_auteurs WHERE prefs LIKE '%spip_lang%'");
-		while ($row = sql_fetch($u)) {
+		while ($row = Sql::fetch($u)) {
 			$prefs = unserialize($row['prefs']);
 			$l = $prefs['spip_lang'];
 			unset ($prefs['spip_lang']);

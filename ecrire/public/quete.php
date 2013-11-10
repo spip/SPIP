@@ -29,7 +29,7 @@ include_spip('base/abstract_sql');
  * @return array|bool|null
  */
 function quete_virtuel($id_article, $connect) {
-	return sql_getfetsel('virtuel', 'spip_articles', array("id_article=".intval($id_article), "statut='publie'"), '','','','',$connect);
+	return Sql::getfetsel('virtuel', 'spip_articles', array("id_article=".intval($id_article), "statut='publie'"), '','','','',$connect);
 }
 
 /**
@@ -59,7 +59,7 @@ function quete_parent_lang($table,$id,$connect=''){
 			}
 		}
 		if ($cache_quete[$connect][$table]['_select'])
-			$cache_quete[$connect][$table][$id] = sql_fetsel($cache_quete[$connect][$table]['_select'], $table,$cache_quete[$connect][$table]['_id']."=".intval($id),'','','','',$connect);
+			$cache_quete[$connect][$table][$id] = Sql::fetsel($cache_quete[$connect][$table]['_select'], $table,$cache_quete[$connect][$table]['_id']."=".intval($id),'','','','',$connect);
 	}
 	return isset($cache_quete[$connect][$table][$id]) ? $cache_quete[$connect][$table][$id] : null;
 }
@@ -131,7 +131,7 @@ function quete_condition_postdates($champ_date, $serveur='', $ignore_previsu=fal
 	return
 	  (isset($GLOBALS['meta']['date_prochain_postdate'])
 	     AND $GLOBALS['meta']['date_prochain_postdate'] > time())
-			? "$champ_date<".sql_quote(date('Y-m-d H:i:s',$GLOBALS['meta']['date_prochain_postdate']),$serveur)
+			? "$champ_date<".Sql::quote(date('Y-m-d H:i:s',$GLOBALS['meta']['date_prochain_postdate']),$serveur)
 	    : "1=1" ;
 }
 
@@ -168,10 +168,10 @@ function quete_condition_statut($mstatut,$previsu,$publie, $serveur='', $ignore_
 		$liste[$k] = preg_replace(",\W,","",$v);
 	}
   if (count($liste)==1){
-		return array(($not?'<>':'='), $mstatut, sql_quote(reset($liste),$serveur));
+		return array(($not?'<>':'='), $mstatut, Sql::quote(reset($liste),$serveur));
   }
   else {
-	  return sql_in($mstatut,$liste,$not,$serveur);
+	  return Sql::in($mstatut,$liste,$not,$serveur);
   }
 }
 
@@ -185,7 +185,7 @@ function quete_condition_statut($mstatut,$previsu,$publie, $serveur='', $ignore_
  * @return array|bool|null
  */
 function quete_fichier($id_document, $serveur='') {
-	return sql_getfetsel('fichier', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
+	return Sql::getfetsel('fichier', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
 }
 
 /**
@@ -196,7 +196,7 @@ function quete_fichier($id_document, $serveur='') {
  * @return array|bool
  */
 function quete_document($id_document, $serveur='') {
-	return sql_fetsel('*', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
+	return Sql::fetsel('*', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
 }
 
 /**
@@ -209,7 +209,7 @@ function quete_document($id_document, $serveur='') {
  * @return array|bool|null
  */
 function quete_meta($nom, $serveur) {
-	return sql_getfetsel("valeur", "spip_meta", "nom=" . sql_quote($nom),
+	return Sql::getfetsel("valeur", "spip_meta", "nom=" . Sql::quote($nom),
 			     '','','','',$serveur);
 }
 
@@ -392,7 +392,7 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 				$exposer[$m][$type][$principal] = true;
 				if ($type == 'id_mot'){
 					if (!$parent) {
-						$parent = sql_getfetsel('id_groupe','spip_mots',"id_mot=" . $principal, '','','','',$connect);
+						$parent = Sql::getfetsel('id_groupe','spip_mots',"id_mot=" . $principal, '','','','',$connect);
 					}
 					if ($parent)
 						$exposer[$m]['id_groupe'][$parent] = true;

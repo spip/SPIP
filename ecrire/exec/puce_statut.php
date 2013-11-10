@@ -33,7 +33,7 @@ function exec_puce_statut_args($id, $type)
 			$select = "id_rubrique,statut";
 		else
 			$select = "0 as id_rubrique,statut";
-		$r = sql_fetsel($select, $table_objet_sql, "$prim=$id");
+		$r = Sql::fetsel($select, $table_objet_sql, "$prim=$id");
 		$statut = $r['statut'];
 		$id_rubrique = $r['id_rubrique'];
 	}

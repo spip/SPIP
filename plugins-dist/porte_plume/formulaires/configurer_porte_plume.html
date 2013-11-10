@@ -1,0 +1,30 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_#FORM' id='formulaire_configurer_#FORM'>
+	<h3 class='titrem'>[(#CHEMIN{images/porte-plume-24.png}|balise_img{'',cadre-icone})]<:barreoutils:info_porte_plume_titre:></h3>
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form action="#ENV{action}#formulaire_configurer_#FORM" method="post"><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<input type="hidden" name="_meta_casier" value="" />[(#REM) a la racine de spip_meta ]
+		
+		<p class='explication'><:barreoutils:explication_barre_outils_public:></p>
+		<p class='explication'><:barreoutils:explication_barre_outils_public_2:></p>
+		<ul>
+			<li class='editer configurer_barre_outils_public[ (#ENV**{erreurs}|table_valeur{barre_outils_public}|oui)erreur]'>
+				<label><:barreoutils:info_barre_outils_public:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{barre_outils_public})</span>]
+				<div class='choix'>
+					<input class='radio' type="radio" name="barre_outils_public" value='oui'[ (#ENV{barre_outils_public}|!={non}|oui)checked="checked"] id="barre_outils_public_oui"/>
+					<label for="barre_outils_public_oui"><:barreoutils:label_barre_outils_public_oui:></label>
+				</div>
+				<div class='choix'>
+					<input class='radio' type="radio" name="barre_outils_public" value='non'[ (#ENV{barre_outils_public}|=={non}|oui)checked="checked"] id="barre_outils_public_non"/>
+					<label for="barre_outils_public_non"><:barreoutils:label_barre_outils_public_non:></label>
+				</div>
+			</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
+	</div></form>
+
+</div>

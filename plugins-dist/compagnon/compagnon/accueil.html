@@ -1,0 +1,13 @@
+[(#ENV{fermer}|non)
+[(#SET{titre,#VAL{compagnon:c_accueil_bienvenue}|_T{#ARRAY{nom,#SESSION{nom}}}})]
+#BOITE_OUVRIR{#GET{titre},compagnon}
+
+
+
+<p><:compagnon:c_accueil_texte:></p>
+<p><:compagnon:c_accueil_texte_revenir:></p>
+#BOITE_PIED
+	<span class="target" data-target="#bando1_menu_accueil"></span>
+	[(#BOUTON_ACTION{[(#VAL|ok_aleatoire)],#URL_ACTION_AUTEUR{compagnon,compris/#ID,#SELF|parametre_url{fermer,oui}},ajax})]
+#BOITE_FERMER
+]

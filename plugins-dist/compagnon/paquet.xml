@@ -1,0 +1,26 @@
+<paquet
+	prefix="compagnon"
+	categorie="divers"
+	version="1.4.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/compagnon-32.png"
+	schema="1.0.0"
+>	
+	<nom>Compagnon</nom>
+
+	<auteur lien="http://magraine.net/">Matthieu Marcillaud</auteur>
+	<licence>GNU/GPL</licence>
+
+	<credit lien="http://www.cruzine.com/2010/10/06/animals-icon-sets/">Paul Viluda (Logo, icones)</credit>
+
+	<pipeline nom="compagnon_messages" action="" />
+	
+	<pipeline nom="compagnon_messages" inclure="compagnon_messages.php" />
+	<pipeline nom="affiche_milieu" inclure="compagnon_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="compagnon_pipelines.php" />
+	<pipeline nom="affiche_droite" inclure="compagnon_pipelines.php" />
+
+</paquet>
+
+

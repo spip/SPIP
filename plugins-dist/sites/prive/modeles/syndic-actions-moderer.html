@@ -1,0 +1,13 @@
+#SET{action,'<p class="actions moderer"><span>'}
+[(#AUTORISER{instituer,syndic_article,#ID_SYNDIC_ARTICLE})
+	[(#STATUT|in_any{#ARRAY{1,dispo,2,off}})
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:sites:icone_valider_article:>,#URL_ACTION_AUTEUR{instituer_syndic_article,#ID_SYNDIC_ARTICLE-publie,#SELF|ancre_url{syndic#ID_SYNDIC_ARTICLE}},'ajax valider'})]
+	 <br />
+	]
+	[(#STATUT|in_any{#ARRAY{0,publie,1,dispo}})
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:sites:icone_supprimer_article:>,#URL_ACTION_AUTEUR{instituer_syndic_article,#ID_SYNDIC_ARTICLE-off,#SELF|ancre_url{syndic#ID_SYNDIC_ARTICLE}},'ajax supprimer'})]
+	]
+]
+[(#GET{action}|non)</span></p>]

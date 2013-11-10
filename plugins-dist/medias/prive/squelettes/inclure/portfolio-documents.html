@@ -1,0 +1,75 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+#SET{nbdocs,0}
+<div id="portfolios">
+[(#REM) D'abord les images illustration]
+<B_illustrations>
+<h3><span class="image_loading"></span><:medias:info_illustrations:></h3>
+<div class="liste_items documents" id="illustrations">
+[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_illustrations(DOCUMENTS documents_liens types_documents){inclus=image}{mode=image}{id_objet}{objet}{par num titre,date,id_document}{pagination 50}{statut?}>
+	#MODELE{document_desc,id_document,id_objet,objet}
+</BOUCLE_illustrations>
+[(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
+[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/image,#SELF|ancre_url{illustrations}},'ajax tout_supprimer',<:ecrire:lien_tout_supprimer:> ?})]
+</div>
+#SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
+</B_illustrations>
+
+[(#REM) puis les images du portfolio]
+<B_portfolio>
+<h3><:medias:info_portfolio:></h3>
+<div class="liste_items documents" id="portfolio">
+[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_portfolio(DOCUMENTS documents_liens types_documents){inclus=image}{mode=document}{id_objet}{objet}{par num titre,date,id_document}{pagination 50}{statut?}>
+	#MODELE{document_desc,id_document,id_objet,objet}
+</BOUCLE_portfolio>
+[(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
+[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/document,#SELF|ancre_url{portfolio}},'ajax tout_supprimer',<:ecrire:lien_tout_supprimer:> ?})]
+</div>
+#SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
+</B_portfolio>
+
+[(#REM) puis les documents]
+<B_documents>
+<h3><:medias:info_documents:></h3>
+<div class="liste_items documents" id="documents">
+[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_documents(DOCUMENTS documents_liens types_documents){inclus!=image}{mode!=vignette}{id_objet}{objet}{par num titre,date,id_document}{pagination 50}{statut?}>
+	#MODELE{document_desc,id_document,id_objet,objet}
+</BOUCLE_documents>
+[(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
+[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-D/document,#SELF|ancre_url{documents}},'ajax tout_supprimer',<:ecrire:lien_tout_supprimer:> ?})]
+</div>
+#SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
+</B_documents>
+
+<script type="text/javascript">/*<![CDATA[*/
+var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
+[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
+[(#OBJET|=={rubrique}|et{#EVAL{_AJAX}}|et{#GET{nbdocs}|=={1}}|oui)
+if (window.jQuery) jQuery('#navigation .box.info').ajaxReload();]
+function check_reload_page(){
+	var reload = false;
+	if($('#illustrations').length && !$('#illustrations .item').length){
+		$('#illustrations').remove();reload = true;
+	}
+	if($('#portfolio').length && !$('#portfolio .item').length){
+		$('#portfolio').remove();reload = true;
+	}
+	if($('#documents').length && !$('#documents .item').length){
+		$('#documents').remove();reload = true;
+	}
+	if (reload) {
+		jQuery('#portfolios').ajaxReload();
+		jQuery('#navigation .box.info').ajaxReload();
+	}
+}
+if (window.jQuery) jQuery(function(){onAjaxLoad(check_reload_page);});
+/*]]>*/</script>
+</div>

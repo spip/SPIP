@@ -1,0 +1,11 @@
+<BOUCLE_extra(SITES){id_syndic}{statut?}{si #ENV{exec}|=={site}}>
+#SET{statut,#SESSION{statut}|=={0minirezo}|?{'',#ARRAY{0,prop,1,publie}}}
+#SET{where,#VAL{id_syndic!=}|concat{#ID_SYNDIC}}
+<INCLURE{fond=prive/objets/liste/sites,id_rubrique=#ID_RUBRIQUE,where=#GET{where},statut=#GET{statut},ajax} />
+
+#BOITE_OUVRIR{'','raccourcis'}
+	[(#URL_ECRIRE{sites}|icone_horizontale{<:sites:icone_voir_sites_references:>,site-24.png})]
+#BOITE_FERMER
+</BOUCLE_extra>
+[(#ENV{exec}|=={site_edit}|oui)<INCLURE{fond=prive/squelettes/extra/site_edit,env} />]
+<//B_extra>

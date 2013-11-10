@@ -1,0 +1,23 @@
+<public:component>
+<public:property name="retrait">
+<script language="JScript">
+
+function fixWidth(){
+	if (element.className == "spip_cadre") retrait = 24; 
+	else retrait = 16; 
+
+	if (element.offsetWidth) {
+		style.width = element.offsetWidth - retrait;
+	} else {
+		style.width = "90%";
+		//alert (element.parentElement.tagName);
+	}
+}
+
+var supported = /MSIE (5\.5)|[6789]/.test(navigator.userAgent) && navigator.platform == "Win32";
+if (supported) fixWidth();
+
+
+</script>
+</public:component>
+

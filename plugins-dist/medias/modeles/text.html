@@ -1,0 +1,6 @@
+<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}
+	>[<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'
+><pre>(#FICHIER|contenu_document{#ENV{charset,auto}}|echapper_tags)</pre>
+[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
+</div>
+]</BOUCLE_tous>

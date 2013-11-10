@@ -1,0 +1,66 @@
+#CACHE{0}
+<B_forum>
+<h2>[(#GRAND_TOTAL|singulier_ou_pluriel{forum:info_1_message_forum,forum:info_nb_messages_forum}|sinon{<:forum:aucun_message_forum:>})]</h2>
+[<p class="legend">
+#SET{self,#SELF|parametre_url{id_article|id_forum|email_auteur|ip|id_auteur|auteur|debut_id_forum|statut,''}}
+(#ENV{id_forum}
+	|ou{#ENV{id_rubrique}}
+	|ou{#ENV{id_article}}
+	|ou{#ENV{id_breve}}
+	|ou{#ENV{id_syndic}}
+	|ou{#ENV{id_forum}}
+	|ou{#ENV{id_message}}
+	|ou{#ENV{id_auteur}}
+	|ou{#ENV{auteur}}
+	|ou{#ENV{email_auteur}}
+	|ou{#ENV{ip}}
+	|oui)<a class='annule_filtre ajax' href='#GET{self}' title="<:forum:tout_voir|attribut_html:>"><strong><:forum:tout_voir:></strong></a>
+</p>]
+[(#REM) désactiver l'ancre de pagination qui est déjà présente dans le squelette appelant ]
+#SET{virer_ancre,#ANCRE_PAGINATION}
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_items forums'>
+	<BOUCLE_forum(FORUMS){id_forum?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?}{id_message?}{id_auteur?}{auteur?}{email_auteur?}{ip?}{!par id_forum}{pagination #ENV{pagination}}{statut?}{statut LIKE #ENV{prive}}{statut !LIKE #ENV{public}}{recherche?}>
+	<li class="item forum statut_#STATUT[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" id='forum#ID_FORUM'>
+		
+		<input type="checkbox" class="checkbox select_forum" name="forum_ids[]" value="#ID_FORUM"[(#ENV{id_forum}|oui) checked="checked"] />
+		
+		[(#REM) etrange mais en collant le code de cet inclure
+		directement ci-dessous on a pas de probleme avec le CVT
+		et les boutons forum-actions en ajax
+		[(#INCLURE{fond=prive/modeles/forum}{id_forum}{self})]
+		]
+		
+		#SET{self,#SELF|parametre_url{debut_forum|email_auteur|ip|id_auteur|auteur,''}}
+		<div class='cartouche'>
+		<h3 class='titre'><span class='info_statut'>[(#CHEMIN{#VAL{themes/spip/images/forum-statut-}|concat{#STATUT,-24.png}}|balise_img|inserer_attribut{alt,#VAL{forum:statut_}|concat{#STATUT}|_T})]</span>
+		<a href='[(#GET{self}|parametre_url{id_forum,#ID_FORUM})]' class="ajax" title='[<:info_numero_abbreviation|attribut_html:> (#ID_FORUM)]'>[(#TITRE|sinon{<:info_sans_titre:>})]</a></h3>
+		<div class='date'>[(#DATE_HEURE|date_interface)]</div>
+
+		<div class='par'><:par_auteur:>[
+		(#ID_AUTEUR|oui)
+		<a class='ajax' href='[(#GET{self}|parametre_url{id_auteur,#ID_AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' >#MODELE{auteur_nom,id_auteur}</a> &mdash;
+
+		][(#ID_AUTEUR|non)[ <a class='ajax' href='[(#GET{self}|parametre_url{auteur,#AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' >(#AUTEUR)</a> &mdash;]
+
+		][<a class='ajax' href='mailto:#EMAIL_AUTEUR' title='<:envoyer_message|attribut_html:>' >(#EMAIL_AUTEUR|email_valide|?{#EMAIL_AUTEUR})</a> &mdash;
+
+		][ IP <a class='ajax' href='[(#GET{self}|parametre_url{ip,#IP})]' title='<:forum:messages_meme_ip|attribut_html:>' >(#IP)</a>]</div>
+
+		<BOUCLE_art(ARTICLES){id_article}{id_article!=#ENV{id_article}}><div class='reponse_a'><:forum:lien_reponse_article:> <a class='ajax' href='[(#GET{self}|parametre_url{id_article,#ID_ARTICLE})]'>#TITRE</a></div></BOUCLE_art>
+		<BOUCLE_rub(RUBRIQUES){id_rubrique}><div class='reponse_a'><:forum:lien_reponse_rubrique:> <a class='ajax' href='[(#URL_RUBRIQUE|ancre_url{forum#ID_FORUM})]'>#TITRE</a></div></BOUCLE_rub>
+		<BOUCLE_bre(BREVES){id_breve}><div class='reponse_a'><:forum:lien_reponse_breve_2:> <a class='ajax' href='[(#URL_BREVE|ancre_url{forum#ID_FORUM})]'>#TITRE</a></div></BOUCLE_bre>
+		<BOUCLE_sit(BREVES){id_syndic}><div class='reponse_a'><:forum:lien_reponse_site_reference:> <a class='ajax' href='[(#URL_SITE|ancre_url{forum#ID_FORUM})]'>#NOM_SITE</a></div></BOUCLE_sit>
+		<//B_art>
+		</div>
+		[(#REM) Le corps ---------------------------------------------------------]
+		[<div class='texte'>(#TEXTE|lignes_longues)</div>]
+		[<div class='notes'>(#NOTES|lignes_longues)</div>]
+		[<div class='site'><a href='#URL_SITE'>(#NOM_SITE|sinon{#URL_SITE}|lignes_longues)</a></div>]
+		[<div class="urls">(#TITRE|extraire_balises{a}|extraire_attribut{href}|implode{", "}|textebrut|nl2br)</div>]
+		[<div class="urls">(#TEXTE|extraire_balises{a}|extraire_attribut{href}|implode{", "}|textebrut|nl2br)</div>]
+	</li>
+	</BOUCLE_forum>
+</ul>
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_forum>

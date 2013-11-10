@@ -16,15 +16,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Executer un travaille immediatement
  * @return void
  */
-function action_forcer_job_dist(){
+function action_forcer_job_dist()
+{
 	$securiser_action = charger_fonction('securiser_action','inc');
 	$id_job = $securiser_action();
 
 	if ($id_job = intval($id_job)
-		AND autoriser('forcer','job',$id_job)
-	){
+	AND autoriser('forcer','job',$id_job))
+	{
 		include_spip('inc/queue');
-		include_spip('inc/genie');
+		//include_spip('inc/genie'); en commentaire par alain
 		queue_schedule(array($id_job));
 	}
 

@@ -1,0 +1,29 @@
+<paquet
+	prefix="svp"
+	categorie="maintenance"
+	version="0.80.14"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="svp-64.png"
+	schema="0.4.0"
+	documentation="http://blog.smellup.net/spip.php?rubrique1"
+>
+
+	<nom>SVP</nom>
+	<!-- SerVeur d'information et de téléchargement des Plugins -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+	<auteur>Collectif SPIP</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/svp_declarer.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/svp_declarer.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/svp_declarer.php" />
+	<pipeline nom="taches_generales_cron" inclure="genie/svp_taches_generales_cron.php" />
+	<pipeline nom="autoriser" inclure="svp_pipelines.php" />
+	<pipeline nom="pre_boucle" inclure="svp_pipelines.php" />
+	<pipeline nom="ajouter_onglets" inclure="svp_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="svp_ieconfig.php" />
+
+</paquet>

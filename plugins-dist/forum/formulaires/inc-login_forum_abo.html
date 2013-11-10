@@ -1,0 +1,15 @@
+[(#REM)
+
+	Presenter les regles du jeu du forum sur abonnement
+	avec un lien vers la connexion / l'inscription / le rappel
+
+]
+<fieldset class="info">
+	<legend><:forum:forum:> <:forum:bouton_radio_modere_abonnement:></legend>
+	<p class="explication"><:forum:forum_vous_enregistrer:> <:forum:forum_vous_inscrire:></p>
+	<p class="retour">
+		<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]"><:login:></a>
+		[ | <a href="(#ENV{inscription})&amp;mode=6forum[(&amp;id_rubrique=(#ENV{id_rubrique})]"><:login_sinscrire:></a>]
+		[ | <a href="(#ENV{oubli})"><:login_motpasseoublie:></a>]
+	</p>
+</fieldset>

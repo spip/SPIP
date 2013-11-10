@@ -91,9 +91,9 @@ function inc_sql_to_array_dist($u) {
 	preg_match(',^(?:(\w+):)?(.*)$,S', $u, $v);
 	$serveur = (string) $v[1];
 	$req = trim($v[2]);
-	if ($s = sql_query($req, $serveur)) {
+	if ($s = Sql::query($req, $serveur)) {
 		$r = array();
-		while ($t = sql_fetch($s))
+		while ($t = Sql::fetch($s))
 			$r[] = $t;
 		return $r;
 	}

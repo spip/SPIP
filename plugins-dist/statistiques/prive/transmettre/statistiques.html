@@ -1,0 +1,10 @@
+<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}{lang_select}><?php
+if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},transmettre,#ENV{op}, #ENV{args}}|?{1,0})]) {
+?><B_statsj><:date|trim{':'}|trim:>,<:statistiques:info_visites|trim{':'}|trim:>
+<BOUCLE_statsj(DATA){source stats_visites,jour,#ENV{duree,90},#ENV{id_article}}>[(#CLE|affdate{'Y-m-d'})],[(#VALEUR{visites})]
+</BOUCLE_statsj>
+<?php
+} else {
+include_spip('inc/minipres'); 
+echo minipres();
+}?></BOUCLE0>

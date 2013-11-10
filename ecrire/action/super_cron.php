@@ -24,10 +24,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Exemple de tache cron Unix pour un appel toutes les minutes :
  * "* * * * * curl  http://www.mondomaine.tld/spip.php?action=super_cron"
  */
-function action_super_cron_dist(){
+function action_super_cron_dist()
+{
 	// Si fsockopen est possible, on lance le cron via un socket
 	// en asynchrone
-	if(function_exists('fsockopen')){
+	if(function_exists('fsockopen')) {
 		$url = generer_url_action('cron');
 		$parts=parse_url($url);
 		$fp = fsockopen($parts['host'],

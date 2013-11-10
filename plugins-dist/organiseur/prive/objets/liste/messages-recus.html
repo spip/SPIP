@@ -1,0 +1,57 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_heure,#ENV{date_sens,-1},
+	titre,1,
+	id_article,1,
+	points,-1
+}})
+]
+<BOUCLE_compte_non_lus(MESSAGES auteurs){destinataire?#ENV{destinataire}}{id_auteur?}{type!=pb}{type?}{where?}{statut?}{recherche?}{non_lu}>[(#NOM|vide)]</BOUCLE_compte_non_lus>
+#SET{nonlus,#ENV{nonlus,#TOTAL_BOUCLE}}
+<//B_compte_non_lus>
+<B_mess_rec>
+#ANCRE_PAGINATION
+<div class="liste-objets messages">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GET{nonlus}|singulier_ou_pluriel{organiseur:info_1_message_nonlu,organiseur:info_nb_messages_nonlus}
+	|sinon{#GRAND_TOTAL|singulier_ou_pluriel{info_1_message,info_nb_messages}}
+	})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='new' scope='col'></th>
+			<th class='type' scope='col'>[(#TRI{type,<span title="<:organiseur:lien_trier_type|attribut_html:>">#</span>,ajax})]</th>
+			<th class='isrv' scope='col'>[(#CHEMIN_IMAGE{heure-16.png}|balise_img{<:organiseur:info_type_message_rv:>})]</th>
+			<th class='from' scope='col'>[(#TRI{nom,<:organiseur:info_message_de:>,ajax})]</th>
+			<th class='titre principale' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='date secondaire' scope='col'>[(#TRI{date_heure,<:date:>,ajax})]</th>
+			<th class='' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_mess_rec(MESSAGES auteurs){destinataire?#ENV{destinataire}}{id_auteur?}{type?}{where?}{statut?}{recherche?}{tri #ENV{par,date_heure},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		[(#SET{vu,[(#TYPE|=={pb}|ou{#VU|match{^(oui|poub)$}})]})]
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#GET{vu}|non)new]">
+			<td class='new'>[(#GET{vu}|?{'',#CHEMIN_IMAGE{pictonew-16.png}|balise_img{<:organiseur:info_message_non_lu:>}|inserer_attribut{title,<:organiseur:info_message_non_lu:>}})]</td>
+			<td class='type'>[(#CHEMIN_IMAGE{#TYPE|organiseur_icone_message{16}}|balise_img{#VAL{organiseur:info_type_message_}|concat{#TYPE}|_T})]</td>
+			<td class='isrv'>[(#RV|=={oui}|oui)[(#CHEMIN_IMAGE{heure-16.png}|balise_img{<:organiseur:info_type_message_rv:>})]]</td>
+			<td class="from"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></td>
+			<td class='titre principale'>
+				<a
+					href="[(#ID_MESSAGE|generer_url_entite{message})]">#TITRE</a>
+			</td>
+			<td class='date secondaire'>
+				[(#RV|=={oui}|?{
+					[(#DATE_HEURE|affdate_debut_fin{#DATE_FIN,oui,abbr})]
+				,
+					[(#DATE_HEURE|affdate_jourcourt)]
+				})]
+			</td>
+			<td class=''></td>
+		</tr>
+	</BOUCLE_mess_rec>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_mess_rec>[
+<div class="liste-objets messages caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_mess_rec>

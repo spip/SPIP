@@ -1,0 +1,14 @@
+.formulaire_spip  textarea.markItUpEditor, .formulaire_spip li.editer_texte textarea {
+	width: 100%; 
+	box-sizing: border-box; 
+	-webkit-box-sizing: border-box; 
+	-moz-box-sizing: border-box;  
+	-ms-box-sizing: border-box;
+}
+
+/***************************/
+/* previsu */
+.markItUp .markItUpPreview {
+	font-size: 1.05em; 
+	line-height: 1.4em;
+}

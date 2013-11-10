@@ -10,12 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-class Spip_sqlite
+class Sqlite
 {
 	static $requeteurs = array();
 	static $transaction_en_cours = array();
 
-	public function Spip_sqlite()
+	public function Sqlite()
 	{
 	}
 
@@ -258,7 +258,7 @@ class Sqlite_traducteur
 		}
 
 		// Correction des dates avec INTERVAL
-		// utiliser sql_date_proche() de preference
+		// utiliser Sql::date_proche() de preference
 		if (strpos($this->query, 'INTERVAL')!==false) {
 			$this->query = preg_replace_callback("/DATE_(ADD|SUB)(.*)INTERVAL\s+(\d+)\s+([a-zA-Z]+)\)/U",
 			                                     array(&$this, '_remplacerDateParTime'),

@@ -1,0 +1,10 @@
+<B_mots>
+<ul class="choix_mots">
+	<BOUCLE_mots(MOTS){id_groupe} {par titre}>
+	<li class='saisie_mot'>
+	<input type="[(#ENV{unseul}|choixsiegal{oui,radio,checkbox})]" class="[(#ENV{unseul}|choixsiegal{oui,radio,checkbox})]" name="ajouter_mot[]" id="mot#ID_MOT" value="#ID_MOT" [(#ID_MOT|in_any{#ENV**{ajouter_mot}, ''}|?{'checked="checked"',''})] />
+	[<label for="mot#ID_MOT">(#TITRE|supprimer_numero)</label>]
+	</li>
+	</BOUCLE_mots>
+</ul>
+</B_mots>

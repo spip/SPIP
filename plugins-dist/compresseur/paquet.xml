@@ -1,0 +1,27 @@
+<paquet
+	prefix="compresseur"
+	categorie="performance"
+	version="1.8.6"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="images/compresseur-32.png"
+>	
+
+	<nom>Compresseur</nom>
+	<!-- Compression des css et javascript -->
+
+	<auteur>Collectif SPIP</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+	<traduire module="compresseur" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="insert_head" inclure="compresseur_pipeline.php" />
+	<pipeline nom="header_prive" inclure="compresseur_pipeline.php" />
+	<pipeline nom="declarer_filtres_squelettes" inclure="compresseur_pipeline.php" />
+	<pipeline nom="affiche_milieu" inclure="compresseur_pipeline.php" />
+	<pipeline nom="configurer_liste_metas" inclure="compresseur_pipeline.php" />
+	<pipeline nom="ieconfig_metas" inclure="compresseur_ieconfig.php" />
+
+	<utilise nom="porte_plume" compatibilite="[1.6.3;[" />
+</paquet>

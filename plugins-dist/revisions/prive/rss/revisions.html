@@ -1,0 +1,36 @@
+#CACHE{900}<B0><?php
+if (
+<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}>
+[(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]
+</BOUCLE0>
+) {
+?><?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+<channel xml:lang="[(#LANG|texte_backend)]">
+	<title>[&#91;(#NOM_SITE_SPIP|texte_backend)&#93;] RSS (<:icone_suivi_revisions|texte_backend:>)</title>
+	<link>[(#URL_ECRIRE{revisions, [id_secteur=(#ENV{id_secteur})&][id_auteur=(#ENV{id_auteur})&][lang_choisie=(#ENV{lang})]}|url_absolue|texte_backend)]</link>
+	<description></description>
+	<language>[(#LANG|texte_backend)]</language>
+<BOUCLE_RSS(VERSIONS auteurs)
+	{id_version >1}
+	{!par date}
+	{0,10}
+	{id_secteur ?}
+	{id_auteur ?}>
+	<item>
+		<title>[(#INFO_TITRE{#OBJET,#ID_OBJET}|texte_backend)] / #OBJET #ID_OBJET / <:version:> #ID_VERSION</title>
+		<link>[(#URL_ECRIRE{revision}|parametre_url{id_objet,#ID_OBJET}|parametre_url{objet,#OBJET}|parametre_url{id_version,#ID_VERSION}|url_absolue|texte_backend)]</link>
+		<guid isPermaLink="true">[(#URL_ECRIRE{revision}|parametre_url{id_objet,#ID_OBJET}|parametre_url{objet,#OBJET}|parametre_url{id_version,#ID_VERSION}|url_absolue|texte_backend)]</guid>
+		<dc:date>[(#_RSS:DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG|texte_backend)</dc:language>]
+		<dc:creator>[(#NOM|texte_backend)][ &lt;(#EMAIL|texte_backend)&gt;]</dc:creator>
+		<description><BOUCLE00(AUTEURS){id_auteur=#ENV{id}}{lang_select}>[(#ID_OBJET|revisions_diff{#OBJET,#ID_VERSION}|texte_backend)]</BOUCLE00></description>
+	</item></BOUCLE_RSS>
+</channel>
+</rss>
+<?php } ?></B0>

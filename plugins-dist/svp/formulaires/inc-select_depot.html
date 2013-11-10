@@ -1,0 +1,6 @@
+<select name="depot" id="depot">
+	<option value="tout_depot"[ (#ENV{depot}|=={tout_depot}|oui)selected="selected"]><:svp:option_depot_tout:></option>
+<BOUCLE_depots(DEPOTS) {par titre}>
+	<option[ value="(#ID_DEPOT)"][ (#ENV{depot}|=={#ID_DEPOT}|oui)selected="selected"]>#TITRE</option>
+</BOUCLE_depots>
+</select>

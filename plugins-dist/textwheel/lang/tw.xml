@@ -1,0 +1,6 @@
+<traduction module="tw" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_core_/plugins/textwheel/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/334?lang_cible=en">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+	</langue>
+	<langue code="fr" />
+</traduction>

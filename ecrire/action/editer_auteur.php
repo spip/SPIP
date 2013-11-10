@@ -13,9 +13,9 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@action_editer_auteur_dist
-function action_editer_auteur_dist($arg=null) {
-
-	if (is_null($arg)){
+function action_editer_auteur_dist($arg=null)
+{
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
@@ -24,7 +24,7 @@ function action_editer_auteur_dist($arg=null) {
 	// si id_auteur n'est pas un nombre, c'est une creation
 	if (!$id_auteur = intval($arg)) {
 
-		if (($id_auteur = auteur_inserer()) > 0){
+		if (($id_auteur = auteur_inserer()) > 0) {
 
 			# cf. GROS HACK
 			# recuperer l'eventuel logo charge avant la creation
@@ -54,8 +54,8 @@ function action_editer_auteur_dist($arg=null) {
  * @param string $source
  * @return int
  */
-function auteur_inserer($source=null) {
-
+function auteur_inserer($source=null)
+{
 	// Ce qu'on va demander comme modifications
 	$champs = array();
 	$champs['source'] = $source?$source:'spip';
@@ -73,7 +73,7 @@ function auteur_inserer($source=null) {
 			'data' => $champs
 		)
 	);
-	$id_auteur = sql_insertq("spip_auteurs", $champs);
+	$id_auteur = Sql::insertq('spip_auteurs', $champs);
 	pipeline('post_insertion',
 		array(
 			'args' => array(
@@ -97,8 +97,8 @@ function auteur_inserer($source=null) {
  *   utilise par auth/spip
  * @return string
  */
-function auteur_modifier($id_auteur, $set = null, $force_update=false) {
-
+function auteur_modifier($id_auteur, $set = null, $force_update=false)
+{
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
 	$c = collecter_requests(
@@ -119,7 +119,7 @@ function auteur_modifier($id_auteur, $set = null, $force_update=false) {
 	$session = $c;
 
 	$err = '';
-	if (!$force_update){
+	if (!$force_update) {
 		// Modification de statut, changement de rubrique ?
 		$c = collecter_requests(
 			// white list
@@ -163,7 +163,8 @@ function auteur_modifier($id_auteur, $set = null, $force_update=false) {
  * @param array $qualif
  * @return string
  */
-function auteur_associer($id_auteur,$objets, $qualif = null){
+function auteur_associer($id_auteur,$objets, $qualif = null)
+{
 	include_spip('action/editer_liens');
 	return objet_associer(array('auteur'=>$id_auteur), $objets, $qualif);
 }
@@ -175,7 +176,8 @@ function auteur_associer($id_auteur,$objets, $qualif = null){
  * @param array $c
  * @return string
  */
-function auteur_referent($id_auteur,$c){
+function auteur_referent($id_auteur,$c)
+{
 	return auteur_associer($id_auteur,$c);
 }
 
@@ -190,7 +192,8 @@ function auteur_referent($id_auteur,$c){
  * @param array $objets
  * @return string
  */
-function auteur_dissocier($id_auteur,$objets){
+function auteur_dissocier($id_auteur,$objets)
+{
 	include_spip('action/editer_liens');
 	return objet_dissocier(array('auteur'=>$id_auteur), $objets);
 }
@@ -208,7 +211,8 @@ function auteur_dissocier($id_auteur,$objets){
  * @param array $qualif
  * @return bool|int
  */
-function auteur_qualifier($id_auteur,$objets,$qualif){
+function auteur_qualifier($id_auteur,$objets,$qualif)
+{
 	include_spip('action/editer_liens');
 	return objet_qualifier_liens(array('auteur'=>$id_auteur), $objets, $qualif);
 }
@@ -222,7 +226,8 @@ function auteur_qualifier($id_auteur,$objets,$qualif){
  * @param bool $force_webmestre
  * @return bool|string
  */
-function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
+function auteur_instituer($id_auteur, $c, $force_webmestre = false)
+{
 	if (!$id_auteur=intval($id_auteur))
 		return false;
 	$erreurs = array(); // contiendra les differentes erreurs a traduire par _T()
@@ -234,10 +239,10 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	if (isset($c['pass']) AND strlen($c['pass']))
 		$champs['pass'] = $c['pass'];
 
-	$statut =	$statut_ancien = sql_getfetsel('statut','spip_auteurs','id_auteur='.intval($id_auteur));
+	$statut =	$statut_ancien = Sql::getfetsel('statut','spip_auteurs','id_auteur='.intval($id_auteur));
 	
 	if (isset($c['statut'])
-	  AND (autoriser('modifier', 'auteur', $id_auteur,null, array('statut' => $c['statut']))))
+	AND (autoriser('modifier', 'auteur', $id_auteur,null, array('statut' => $c['statut']))))
 		$statut = $champs['statut'] = $c['statut'];
 
 	// Restreindre avant de declarer l'auteur
@@ -250,7 +255,7 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	}
 
 	if (isset($c['webmestre'])
-	  AND ($force_webmestre OR autoriser('modifier', 'auteur', $id_auteur,null, array('webmestre' => '?'))))
+	AND ($force_webmestre OR autoriser('modifier', 'auteur', $id_auteur,null, array('webmestre' => '?'))))
 		$champs['webmestre'] = $c['webmestre']=='oui'?'oui':'non';
 	
 	// Envoyer aux plugins
@@ -267,7 +272,8 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	);
 	
 	if (is_array($c['restreintes'])
-	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$c['restreintes']))) {
+	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$c['restreintes'])))
+	{
 		$rubriques = array_map('intval',$c['restreintes']);
 		$rubriques = array_unique($rubriques);
 		$rubriques = array_diff($rubriques,array(0));
@@ -278,14 +284,14 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	$flag_ecrire_acces = false;
 	// commencer par traiter les cas particuliers des logins et pass
 	// avant les autres ecritures en base
-	if (isset($champs['login']) OR isset($champs['pass'])){
-		$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
+	if (isset($champs['login']) OR isset($champs['pass'])) {
+		$auth_methode = Sql::getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
 		include_spip('inc/auth');
 		if (isset($champs['login']) AND strlen($champs['login']))
 			if (!auth_modifier_login($auth_methode, $champs['login'], $id_auteur))
 				$erreurs[] = 'ecrire:impossible_modifier_login_auteur';
-		if (isset($champs['pass']) AND strlen($champs['pass'])){
-			$champs['login'] = sql_getfetsel('login','spip_auteurs','id_auteur='.intval($id_auteur));
+		if (isset($champs['pass']) AND strlen($champs['pass'])) {
+			$champs['login'] = Sql::getfetsel('login','spip_auteurs','id_auteur='.intval($id_auteur));
 			if (!auth_modifier_pass($auth_methode, $champs['login'], $champs['pass'], $id_auteur))
 				$erreurs[] = 'ecrire:impossible_modifier_pass_auteur';
 		}
@@ -295,12 +301,12 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	}
 
 	if (!count($champs)) return implode(' ', array_map('_T', $erreurs));
-	sql_updateq('spip_auteurs', $champs , 'id_auteur='.$id_auteur);
+	Sql::updateq('spip_auteurs', $champs , 'id_auteur='.$id_auteur);
 
 	// .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
 	if ($flag_ecrire_acces
-	  OR isset($champs['statut'])
-	  ) {
+	OR isset($champs['statut']))
+	{
 		include_spip('inc/acces');
 		ecrire_acces();
 	}
@@ -337,18 +343,22 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 
 
 
-function insert_auteur($source=null) {
+function insert_auteur($source=null)
+{
 	return auteur_inserer($source);
 }
-function auteurs_set($id_auteur, $set = null) {
-	return auteur_modifier($id_auteur,$set);
+function auteurs_set($id_auteur, $set = null)
+{
+	return auteur_modifier($id_auteur, $set);
 }
-function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
+function instituer_auteur($id_auteur, $c, $force_webmestre = false)
+{
 	return auteur_instituer($id_auteur,$c,$force_webmestre);
 }
 // http://doc.spip.org/@revision_auteur
-function revision_auteur($id_auteur, $c=false) {
-	return auteur_modifier($id_auteur,$c);
+function revision_auteur($id_auteur, $c=false)
+{
+	return auteur_modifier($id_auteur, $c);
 }
 
 ?>

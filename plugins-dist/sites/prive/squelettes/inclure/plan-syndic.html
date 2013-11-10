@@ -1,0 +1,15 @@
+#SET{nomp,sitrub#ID_RUBRIQUE}
+#SET{nb,50}
+<B_sites>
+	<div class="menu">
+		<h4><:sites_web:></h4>
+		[<p class="pagination">[<em>(#VAL{site}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
+		<ul class="menu-items sites syndic">
+			<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}{statut==.?}{pagination #GET{nb} #GET{nomp}}>
+				<li class="item"><a href="[(#ID_SYNDIC|generer_url_entite{site})]"
+							title="[(#VAL{site}|objet_info{texte_objet}|_T) #ID_SYNDIC]">[(#STATUT|puce_statut{site,#ID_SYNDIC,#ID_RUBRIQUE}) ][(#NOM_SITE|couper{80}|sinon{<:info_sans_titre:>})]</a></li>
+			</BOUCLE_sites>
+		</ul>
+		[<p class="pagination">[<em>(#VAL{site}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
+	</div>
+</B_sites>

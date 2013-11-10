@@ -39,15 +39,15 @@ function inc_preselectionner_parent_nouvel_objet_dist($objet, $row){
 	}
 	else {
 		// sinon la derniere rubrique cree
-		$row_rub = sql_fetsel("id_rubrique", "spip_rubriques", "", "", "id_rubrique DESC", "0,1");
+		$row_rub = Sql::fetsel("id_rubrique", "spip_rubriques", "", "", "id_rubrique DESC", "0,1");
 		$id_rubrique = $row_rub['id_rubrique'];
 	}
 	// si le choix ne convient pas, on cherche dans un secteur
 	if (!autoriser('creer'.$objet.'dans','rubrique',$id_rubrique)){
 		$id_rubrique = '';
 		// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
-		$res = sql_select("id_rubrique", "spip_rubriques", "id_parent=0");
-		while (!$id_rubrique AND $row_rub = sql_fetch($res)){
+		$res = Sql::select("id_rubrique", "spip_rubriques", "id_parent=0");
+		while (!$id_rubrique AND $row_rub = Sql::fetch($res)){
 			if (autoriser('creer'.$objet.'dans','rubrique',$row_rub['id_rubrique']))
 				$id_rubrique = $row_rub['id_rubrique'];
 		}

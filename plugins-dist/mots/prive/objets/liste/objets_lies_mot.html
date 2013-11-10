@@ -1,0 +1,34 @@
+#SET{picto,#ENV{objet}|objet_icone{16}}
+<B_objets>
+#ANCRE_PAGINATION
+<div class="liste-objets [(#ENV{objet}|objet_info{table_objet})]">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{#ENV{objet}|objet_info{info_1_objet},#ENV{objet}|objet_info{info_nb_objets}}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre principale' scope='col'><:info_titre:></th>
+			<th class='id' scope='col'><:info_numero_abbreviation:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_objets(spip_mots_liens){id_mot?}{objet?}{id_objet?}{!par id_objet}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>#GET{picto}</td>
+			<td class='titre principale'><a
+							href="[(#ID_OBJET|generer_url_entite{#OBJET})]"
+							title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET">[(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{<:info_sans_titre:>})]</a>
+			</td>
+			<td class='id'>[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|?{
+				[<a href="[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET})]">(#ID_OBJET)</a>],
+				[(#ID_OBJET)]
+			})]</td>
+		</tr>
+	</BOUCLE_objets>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_objets>[
+<div class="liste-objets [(#ENV{objet}|objet_info{table_objet})] caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_objets>

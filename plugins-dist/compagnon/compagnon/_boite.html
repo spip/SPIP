@@ -1,0 +1,10 @@
+[(#ENV{fermer}|non)
+#BOITE_OUVRIR{#ENV*{titre},compagnon}
+
+#ENV*{texte}
+
+#BOITE_PIED
+	[<span class="target" data-target="(#ENV{target,''})"></span>]
+	[(#BOUTON_ACTION{[(#VAL|ok_aleatoire)],#URL_ACTION_AUTEUR{compagnon,compris/#ID,#SELF|parametre_url{fermer,oui}},ajax})]
+#BOITE_FERMER
+]

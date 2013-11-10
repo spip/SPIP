@@ -31,7 +31,7 @@ function exec_install_dist()
 	// Mais alors il faut authentifier car ecrire/index.php l'a omis
 
 	if ($deja AND in_array($etape, array('chmod', 'sup1', 'sup2'))) {
-
+	
 		$auth = charger_fonction('auth', 'inc');
 		if (!$auth()) {
 			verifier_visiteur();

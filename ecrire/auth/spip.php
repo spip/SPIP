@@ -22,7 +22,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param bool $phpauth
  * @return array|bool
  */
-function auth_spip_dist ($login, $pass, $serveur='', $phpauth=false) {
+function auth_spip_dist ($login, $pass, $serveur='', $phpauth=false)
+{
 
 	// retrouver le login
 	$login = auth_spip_retrouver_login($login);
@@ -46,7 +47,7 @@ function auth_spip_dist ($login, $pass, $serveur='', $phpauth=false) {
 
 	// si envoi non crypte, crypter maintenant
 	elseif ($pass) {
-		$row = sql_fetsel("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login,$serveur,'text'),'','','','',$serveur);
+		$row = Sql::fetsel("alea_actuel, alea_futur", "spip_auteurs", "login=" . Sql::quote($login,$serveur,'text'),'','','','',$serveur);
 
 		if ($row) {
 			include_spip('auth/sha256.inc');
@@ -59,11 +60,11 @@ function auth_spip_dist ($login, $pass, $serveur='', $phpauth=false) {
 	// login inexistant ou mot de passe vide
 	if (!$shapass AND !$md5pass) return array();
 
-	$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login,$serveur,'text') . " AND pass=" . sql_quote($shapass,$serveur,'text') . " AND statut<>'5poubelle'",'','','','',$serveur);
+	$row = Sql::fetsel("*", "spip_auteurs", "login=" . Sql::quote($login,$serveur,'text') . " AND pass=" . Sql::quote($shapass,$serveur,'text') . " AND statut<>'5poubelle'",'','','','',$serveur);
 
 	// compat avec les anciennes bases en md5
 	if (!$row AND $md5pass)
-		$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login,$serveur,'text') . " AND pass=" . sql_quote($md5pass,$serveur,'text') . " AND statut<>'5poubelle'",'','','','',$serveur);
+		$row = Sql::fetsel("*", "spip_auteurs", "login=" . Sql::quote($login,$serveur,'text') . " AND pass=" . Sql::quote($md5pass,$serveur,'text') . " AND statut<>'5poubelle'",'','','','',$serveur);
 
 	// login/mot de passe incorrect
 	if (!$row) return array();
@@ -73,7 +74,7 @@ function auth_spip_dist ($login, $pass, $serveur='', $phpauth=false) {
 	if ($shanext AND !$phpauth) {
 
 		include_spip('inc/acces'); // pour creer_uniqid
-		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($shanext,$serveur,'text'), 'alea_futur' => sql_quote(creer_uniqid(),$serveur,'text')), "id_auteur=" . $row['id_auteur'].' AND pass IN ('.sql_quote($shapass,$serveur,'text').', '.sql_quote($md5pass,$serveur,'text').')','',$serveur);
+		@Sql::update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => Sql::quote($shanext,$serveur,'text'), 'alea_futur' => Sql::quote(creer_uniqid(),$serveur,'text')), "id_auteur=" . $row['id_auteur'].' AND pass IN ('.Sql::quote($shapass,$serveur,'text').', '.Sql::quote($md5pass,$serveur,'text').')','',$serveur);
 		// En profiter pour verifier la securite de tmp/
 		// Si elle ne fonctionne pas a l'installation, prevenir
 		if (!verifier_htaccess(_DIR_TMP) AND defined('_ECRIRE_INSTALL'))
@@ -88,11 +89,12 @@ function auth_spip_dist ($login, $pass, $serveur='', $phpauth=false) {
  * @param array $flux
  * @return array
  */
-function auth_spip_formulaire_login($flux){
+function auth_spip_formulaire_login($flux)
+{
 	// faut il encore envoyer md5 ?
 	// on regarde si il reste des pass md5 en base pour des auteurs en statut pas poubelle
 	// les hash md5 ont une longueur 32, les sha 64
-	$compat_md5 = sql_countsel("spip_auteurs", "length(pass)=32 AND statut<>'poubelle'");
+	$compat_md5 = Sql::countsel("spip_auteurs", "length(pass)=32 AND statut<>'poubelle'");
 
 	// javascript qui gere la securite du login en evitant de faire circuler le pass en clair
 	$flux['data'].=
@@ -125,7 +127,8 @@ function auth_spip_formulaire_login($flux){
  * @return bool
  *	 toujours true pour un auteur cree dans SPIP
  */
-function auth_spip_autoriser_modifier_login($serveur=''){
+function auth_spip_autoriser_modifier_login($serveur='')
+{
 	if (strlen($serveur))
 		return false; // les fonctions d'ecriture sur base distante sont encore incompletes
 	return true;
@@ -141,13 +144,14 @@ function auth_spip_autoriser_modifier_login($serveur=''){
  * @return string
  *	message d'erreur si login non valide, chaine vide sinon
  */
-function auth_spip_verifier_login($new_login, $id_auteur=0, $serveur=''){
+function auth_spip_verifier_login($new_login, $id_auteur=0, $serveur='')
+{
 	// login et mot de passe
-	if (strlen($new_login)){
+	if (strlen($new_login)) {
 		if (strlen($new_login) < _LOGIN_TROP_COURT)
 			return _T('info_login_trop_court_car_pluriel',array('nb'=>_LOGIN_TROP_COURT));
 		else {
-			$n = sql_countsel('spip_auteurs', "login=" . sql_quote($new_login) . " AND id_auteur!=".intval($id_auteur)." AND statut!='5poubelle'",'','',$serveur);
+			$n = Sql::countsel('spip_auteurs', "login=" . Sql::quote($new_login) . " AND id_auteur!=".intval($id_auteur)." AND statut!='5poubelle'",'','',$serveur);
 			if ($n)
 				return _T('info_login_existant');
 		}
@@ -163,11 +167,12 @@ function auth_spip_verifier_login($new_login, $id_auteur=0, $serveur=''){
  * @param string $serveur
  * @return bool
  */
-function auth_spip_modifier_login($new_login, $id_auteur, $serveur=''){
+function auth_spip_modifier_login($new_login, $id_auteur, $serveur='')
+{
 	if (is_null($new_login) OR auth_spip_verifier_login($new_login,$id_auteur,$serveur)!='')
 		return false;
 	if (!$id_auteur = intval($id_auteur)
-		OR !$auteur = sql_fetsel('login','spip_auteurs','id_auteur='.intval($id_auteur),'','','','',$serveur))
+		OR !$auteur = Sql::fetsel('login','spip_auteurs','id_auteur='.intval($id_auteur),'','','','',$serveur))
 		return false;
 	if ($new_login == $auteur['login'])
 		return true; // on a rien fait mais c'est bon !
@@ -175,9 +180,9 @@ function auth_spip_modifier_login($new_login, $id_auteur, $serveur=''){
 	include_spip('action/editer_auteur');
 
 	// vider le login des auteurs a la poubelle qui avaient ce meme login
-	if (strlen($new_login)){
-		$anciens = sql_allfetsel('id_auteur','spip_auteurs','login='.sql_quote($new_login,$serveur,'text')." AND statut='5poubelle'",'','','','',$serveur);
-		while ($row = array_pop($anciens)){
+	if (strlen($new_login)) {
+		$anciens = Sql::allfetsel('id_auteur','spip_auteurs','login='.Sql::quote($new_login,$serveur,'text')." AND statut='5poubelle'",'','','','',$serveur);
+		while ($row = array_pop($anciens)) {
 			auteur_modifier($row['id_auteur'], array('login'=>''), true); // manque la gestion de $serveur
 		}
 	}
@@ -195,10 +200,11 @@ function auth_spip_modifier_login($new_login, $id_auteur, $serveur=''){
  * @param string $serveur
  * @return string
  */
-function auth_spip_retrouver_login($login, $serveur=''){
+function auth_spip_retrouver_login($login, $serveur='')
+{
 	if (!strlen($login)) return null; // pas la peine de requeter
-	$l = sql_quote($login,$serveur,'text');
-	if ($r = sql_getfetsel('login', 'spip_auteurs',
+	$l = Sql::quote($login,$serveur,'text');
+	if ($r = Sql::getfetsel('login', 'spip_auteurs',
 			"statut<>'5poubelle'" .
 			" AND (length(pass)>0)" .
 			" AND (login=$l)",'','','','',$serveur))
@@ -207,7 +213,8 @@ function auth_spip_retrouver_login($login, $serveur=''){
 	// regarder s'il a saisi son nom ou son mail.
 	// Ne pas fusionner avec la requete precedente
 	// car un nom peut etre homonyme d'un autre login
-	else return sql_getfetsel('login', 'spip_auteurs',
+	else
+		return Sql::getfetsel('login', 'spip_auteurs',
 			"statut<>'5poubelle'" .
 			" AND (length(pass)>0)" .
 			" AND (login<>'' AND (nom=$l OR email=$l))",'','','','',$serveur);
@@ -226,7 +233,8 @@ function auth_spip_retrouver_login($login, $serveur=''){
  * @param string $serveur
  * @return array
  */
-function auth_spip_informer_login($infos, $row, $serveur=''){
+function auth_spip_informer_login($infos, $row, $serveur='')
+{
 
 	// pour la methode SPIP on a besoin des alea en plus pour encoder le pass avec
 	$infos['alea_actuel'] = $row['alea_actuel'];
@@ -241,7 +249,8 @@ function auth_spip_informer_login($infos, $row, $serveur=''){
  * @return bool
  *	toujours true pour un auteur cree dans SPIP
  */
-function auth_spip_autoriser_modifier_pass($serveur=''){
+function auth_spip_autoriser_modifier_pass($serveur='')
+{
 	if (strlen($serveur))
 		return false; // les fonctions d'ecriture sur base distante sont encore incompletes
 	return true;
@@ -264,7 +273,8 @@ function auth_spip_autoriser_modifier_pass($serveur=''){
  * @return string
  *	message d'erreur si login non valide, chaine vide sinon
  */
-function auth_spip_verifier_pass($login, $new_pass, $id_auteur=0, $serveur=''){
+function auth_spip_verifier_pass($login, $new_pass, $id_auteur=0, $serveur='')
+{
 	// login et mot de passe
 	if (strlen($new_pass) < _PASS_LONGUEUR_MINI)
 		return _T('info_passe_trop_court_car_pluriel',array('nb'=>_PASS_LONGUEUR_MINI));
@@ -281,12 +291,13 @@ function auth_spip_verifier_pass($login, $new_pass, $id_auteur=0, $serveur=''){
  * @param string $serveur
  * @return bool
  */
-function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur=''){
+function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur='')
+{
 	if (is_null($new_pass) OR auth_spip_verifier_pass($login, $new_pass,$id_auteur,$serveur)!='')
 		return false;
 
 	if (!$id_auteur = intval($id_auteur)
-		OR !sql_fetsel('login','spip_auteurs','id_auteur='.intval($id_auteur),'','','','',$serveur))
+		OR !Sql::fetsel('login','spip_auteurs','id_auteur='.intval($id_auteur),'','','','',$serveur))
 		return false;
 
 	$c = array();
@@ -318,7 +329,8 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur=''){
  * @param string $serveur
  * @return void
  */
-function auth_spip_synchroniser_distant($id_auteur, $champs, $options = array(), $serveur=''){
+function auth_spip_synchroniser_distant($id_auteur, $champs, $options = array(), $serveur='')
+{
 	// ne rien faire pour une base distante : on ne sait pas regenerer les htaccess
 	if (strlen($serveur))
 		return;
@@ -349,15 +361,15 @@ function auth_spip_synchroniser_distant($id_auteur, $champs, $options = array(),
 
 		$p1 = ''; // login:htpass pour tous
 		$p2 = ''; // login:htpass pour les admins
-		$s = sql_select("login, htpass, statut", "spip_auteurs", sql_in("statut",  array('1comite','0minirezo','nouveau')));
-		while ($t = sql_fetch($s)) {
+		$s = Sql::select("login, htpass, statut", "spip_auteurs", Sql::in("statut",  array('1comite','0minirezo','nouveau')));
+		while ($t = Sql::fetch($s)) {
 			if (strlen($t['login']) AND strlen($t['htpass'])) {
 				$p1 .= $t['login'].':'.$t['htpass']."\n";
 				if ($t['statut'] == '0minirezo')
 					$p2 .= $t['login'].':'.$t['htpass']."\n";
 			}
 		}
-		sql_free($s);
+		Sql::free($s);
 		if ($p1) {
 			ecrire_fichier($htpasswd, $p1);
 			ecrire_fichier($htpasswd.'-admin', $p2);

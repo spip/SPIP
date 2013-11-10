@@ -49,13 +49,13 @@ function maj_v009_dist($version_installee, $version_cible)
 	
 		$result = spip_query("SELECT DISTINCT id_article FROM spip_forum WHERE id_article!=0 AND id_parent=0");
 
-		while ($row = sql_fetch($result)) {
+		while ($row = Sql::fetch($result)) {
 			unset($forums_article);
 			$id_article = $row['id_article'];
 			$result2 = spip_query("SELECT id_forum FROM spip_forum WHERE id_article=$id_article");
 			for (;;) {
 				unset($forums);
-				while ($row2 = sql_fetch($result2)) $forums[] = $row2['id_forum'];
+				while ($row2 = Sql::fetch($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_article[] = $forums;
@@ -67,13 +67,13 @@ function maj_v009_dist($version_installee, $version_cible)
 	
 		$result = spip_query("SELECT DISTINCT id_breve FROM spip_forum WHERE id_breve!=0 AND id_parent=0");
 
-		while ($row = sql_fetch($result)) {
+		while ($row = Sql::fetch($result)) {
 			unset($forums_breve);
 			$id_breve = $row['id_breve'];
 			$result2 = spip_query("SELECT id_forum FROM spip_forum WHERE id_breve=$id_breve");
 			for (;;) {
 				unset($forums);
-				while ($row2 = sql_fetch($result2)) $forums[] = $row2['id_forum'];
+				while ($row2 = Sql::fetch($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_breve[] = $forums;
@@ -85,14 +85,14 @@ function maj_v009_dist($version_installee, $version_cible)
 	
 		$result = spip_query("SELECT DISTINCT id_rubrique FROM spip_forum WHERE id_rubrique!=0 AND id_parent=0");
 
-		while ($row = sql_fetch($result)) {
+		while ($row = Sql::fetch($result)) {
 			unset($forums_rubrique);
 			$id_rubrique = $row['id_rubrique'];
 			$result2 = spip_query("SELECT id_forum FROM spip_forum WHERE id_rubrique=$id_rubrique");
 			for (;;) {
 
 				unset($forums);
-				while ($row2 = sql_fetch($result2)) $forums[] = $row2['id_forum'];
+				while ($row2 = Sql::fetch($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_rubrique[] = $forums;
@@ -116,7 +116,7 @@ function maj_v009_dist($version_installee, $version_cible)
 		spip_query("ALTER TABLE spip_auteurs ADD htpass tinyblob NOT NULL");
 		$result = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE pass!=''");
 
-		while ($r= sql_fetch($result)) {
+		while ($r= Sql::fetch($result)) {
 			$htpass = generer_htpass($r['pass']);
 			$pass = md5($pass);
 			spip_query("UPDATE spip_auteurs SET pass='$pass', htpass='$htpass' WHERE id_auteur=" . $r['id_auteur']);

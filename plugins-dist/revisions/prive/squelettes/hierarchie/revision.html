@@ -1,0 +1,4 @@
+#SET{id_parent,#OBJET|=={rubrique}|?{#INFO_ID_PARENT{#OBJET,#ID_OBJET},#INFO_ID_RUBRIQUE{#OBJET,#ID_OBJET}}}
+[(#GET{id_parent}|ou{#OBJET|=={rubrique}}|oui)
+	<INCLURE{fond=prive/echafaudage/hierarchie/objet,objet=#OBJET,id_objet=#ID_OBJET,id_parent=#GET{id_parent},id_secteur=#INFO_ID_SECTEUR{#OBJET,#ID_OBJET},restreint=#INFO_STATUT{#OBJET,#ID_OBJET}|=={publie},editable=#AUTORISER{modifier,#OBJET,#ID_OBJET},ajax} />
+]

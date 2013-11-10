@@ -1,0 +1,56 @@
+/* --------------------------------------------------------------
+
+   form.css
+   Base pour formulaires
+   Cf.: http://www.spip-contrib.net/3820
+
+-------------------------------------------------------------- */
+
+input,textarea,select,button { font-family: inherit; font-size: 100%; font-weight: inherit; line-height: inherit; }
+
+legend { font-weight: bold; }
+
+/* Hand cursor on clickable input elements */
+input[type="submit"],input.submit,
+input[type="button"],input.button,
+input[type="image"],input.image,
+button { cursor: pointer; }
+
+textarea { overflow: auto; } /* www.sitepoint.com/blogs/2010/08/20/ie-remove-textarea-scrollbars/ */
+
+.ie fieldset { padding-top: 0; }
+.ie6 legend,
+.ie7 legend { margin-left: -7px; } /* Preciser la couleur des legend et du fond pour IE/Win */
+.ie button,
+.ie input.submit,
+.ie input.button { position: relative; }
+
+button { width: auto; overflow: visible; } /* Make buttons play nice in IE: www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+
+/* Success, info, notice and error/alert boxes (from BluePrint) */
+
+.reponse,
+.error,
+.alert, 
+.notice,
+.success, 
+.info     { padding: .8em; margin-bottom: 1.5em; border: 2px solid #ddd; }
+
+.error,
+.alert      { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
+.notice     { background: #fff6bf; color: #514721; border-color: #ffd324; }
+.success    { background: #e6efc2; color: #264409; border-color: #c6d880; }
+.info     { background: #d5edf8; color: #205791; border-color: #92cae4; }
+
+.error a,
+.alert a      { color: #8a1f11; }
+.notice a   { color: #514721; }
+.success a    { color: #264409; }
+.info a     { color: #205791; }
+
+/* Print */
+@media print {
+  form { display: none; }
+}
+
+/* end */

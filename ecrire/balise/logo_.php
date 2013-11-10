@@ -18,8 +18,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 //
 
 // http://doc.spip.org/@balise_LOGO__dist
-function balise_LOGO__dist ($p) {
-
+function balise_LOGO__dist ($p)
+{
 	preg_match(",^LOGO_([A-Z_]+?)(|_NORMAL|_SURVOL|_RUBRIQUE)$,i", $p->nom_champ, $regs);
 	$type = strtolower($regs[1]);
 	$suite_logo = $regs[2];
@@ -42,7 +42,7 @@ function balise_LOGO__dist ($p) {
 	if ($p->param AND !$p->param[0][0]) {
 		$params = $p->param[0];
 		array_shift($params);
-		foreach($params as $a) {
+		foreach ($params as $a) {
 			if ($a[0]->type === 'texte') {
 				$n = $a[0]->texte;
 				if (is_numeric($n))
@@ -65,7 +65,8 @@ function balise_LOGO__dist ($p) {
 		$lien = generer_generer_url_arg($type, $p, $_id_objet);
 	}
 
-	$connect = $p->id_boucle ?$p->boucles[$p->id_boucle]->sql_serveur :'';
+	$connect = $p->id_boucle ? $p->boucles[$p->id_boucle]->sql_serveur : '';
+	
 	if ($type == 'document') {
 		$qconnect = _q($connect);
 		$doc = "quete_document($_id_objet, $qconnect)";
@@ -118,7 +119,5 @@ function logo_survol($id_objet, $_id_objet, $type, $align, $fichier, $lien, $p, 
 	return ('(strlen($logo='.$code.')?\'<a href="\' .' . $lien . ' . \'">\' . $logo . \'</a>\':\'\')');
 
 }
-
-
 
 ?>

@@ -1,0 +1,65 @@
+<div class='formulaire_spip formulaire_#FORM' id='formulaire_#FORM'>
+[(#ENV{_controle_petition}|oui)
+[(#URL_ECRIRE{controler_petition,id_article=#ID_ARTICLE}|icone_horizontale{#ENV{_controle_petition},petition})]
+]
+#SET{petition,#ENV{petition}|et{#ENV{petition}|table_valeur{statut}|=={publie}|oui}}
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+	<form action="#ENV{action}#formulaire_configurer_forums_article_moderation" method="post"><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<ul>
+			<li class='editer configurer_change_petition[ (#ENV**{erreurs}|table_valeur{change_petition}|oui)erreur]'>
+				<label for='change_petition'><:petitions:info_fonctionnement_petition:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{change_petition})</span>
+				]<select name='change_petition' id='change_petition'>
+					<option value='off'[ (#GET{petition}|non)selected='selected']>
+					[(#GET{petition}|?{
+						[(#VAL{bouton_radio_supprimer_petition}|_T)]
+						,
+						[(#VAL{bouton_radio_pas_petition}|_T)]
+					})]
+					</option>
+					<option value='on'[ (#GET{petition}|oui)selected='selected']>
+					[(#GET{petition}|?{
+						[(#VAL{bouton_radio_petition_activee}|_T)]
+						,
+						[(#VAL{bouton_radio_activer_petition}|_T)]
+					})]
+					</option>
+				</select>
+			</li>
+			[(#GET{petition}|oui)
+			<li class="editer editer_email_unique[ (#ENV**{erreurs}|table_valeur{email_unique}|oui)erreur]">
+				<div class='choix'>
+					<input type="checkbox" name="email_unique" id="email_unique" value="oui"[ (#ENV{petition}|table_valeur{email_unique}|=={oui}|oui) checked="checked"] />
+					<label for="email_unique"><:petitions:bouton_checkbox_signature_unique_email:></label>
+				</div>
+			</li>
+			<li class="editer editer_site_obli[ (#ENV**{erreurs}|table_valeur{site_obli}|oui)erreur]">
+				<div class='choix'>
+					<input type="checkbox" name="site_obli" id="site_obli" value="oui"[ (#ENV{petition}|table_valeur{site_obli}|=={oui}|oui) checked="checked"]/>
+					<label for="site_obli"><:petitions:bouton_checkbox_indiquer_site:></label>
+				</div>
+			</li>
+			<li class="editer editer_siteunique[ (#ENV**{erreurs}|table_valeur{siteunique}|oui)erreur]">
+				<div class='choix'>
+					<input type="checkbox" name="siteunique" id="siteunique" value="oui"[ (#ENV{petition}|table_valeur{siteunique}|=={oui}|oui) checked="checked"]/>
+					<label for="siteunique"><:petitions:bouton_checkbox_signature_unique_site:></label>
+				</div>
+			</li>
+			<li class="editer editer_message[ (#ENV**{erreurs}|table_valeur{message}|oui)erreur]">
+				<div class='choix'>
+					<input type="checkbox" name="message" id="message" value="oui"[ (#ENV{petition}|table_valeur{message}|=={oui}|oui) checked="checked"]/>
+					<label for="message"><:petitions:bouton_checkbox_envoi_message:></label>
+				</div>
+			</li>
+			<li class="editer editer_texte_petition[ (#ENV**{erreurs}|table_valeur{texte_petition}|oui)erreur]">
+					<label for="texte_petition"><:petitions:texte_descriptif_petition:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte_petition})</span>
+					]<textarea name='texte_petition' id='texte_petition' rows='4' cols='10'>[(#ENV{petition}|table_valeur{texte})]</textarea>
+			</li>]
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
+	</div></form>]
+</div>

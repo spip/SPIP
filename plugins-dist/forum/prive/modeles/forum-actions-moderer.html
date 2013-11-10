@@ -1,0 +1,40 @@
+#SET{action,'<div class="actions moderer"><div>'}
+[(#SET{retour,[(#REM|test_espace_prive|?{[(#VAL{ecrire/}|concat{#SELF|replace{'./',''}})],#SELF}|ancre_url{forum#ID_FORUM})]})]
+#SET{redirect,#URL_PAGE{forum}|parametre_url{id_forum,#ID_FORUM}
+	 |parametre_url{id_objet,#ID_OBJET}
+	 |parametre_url{objet,#OBJET}
+	 |parametre_url{retour,#GET{retour}}}
+[
+(#STATUT|=={publie}|oui)
+	 #GET{action}#SET{action,''}
+	<a href="#GET{redirect}"><:forum:repondre_message:></a><span class="sep"> | </span>
+]
+[(#AUTORISER{instituer,forum,#ID_FORUM})
+	[(#STATUT|=={prop}|oui)
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:forum:icone_valider_repondre_message:>,#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-publie,#GET{redirect}},'valider'})]
+	]
+	[(#STATUT|in_any{#LISTE{off,spam,prop}})
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:forum:icone_valider_message:>,#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-publie,#SELF|ancre_url{forum#ID_FORUM}},'ajax valider'})]
+	 <br />
+	]
+	[(#STATUT|in_any{#LISTE{publie,prop}})
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:forum:icone_supprimer_message:>,#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#SELF|ancre_url{forum#ID_FORUM}},'ajax supprimer'})]
+	]
+	[(#STATUT|in_any{#LISTE{prive,privrac}})
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:forum:icone_supprimer_message:>,#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-privoff,#SELF|ancre_url{forum#ID_FORUM}},'ajax supprimer'})]
+	]
+
+	[(#STATUT|in_any{#LISTE{publie,off,prop}})
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:forum:icone_bruler_message:>,#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-spam,#SELF|ancre_url{forum#ID_FORUM}},'ajax bruler'})]
+	]
+	[(#STATUT|in_any{#LISTE{spam}})
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:forum:icone_legitimer_message:>,#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-prop,#SELF|ancre_url{forum#ID_FORUM}},'ajax proposer'})]
+	]
+]
+[(#GET{action}|non)</div></div>]

@@ -1,0 +1,11 @@
+#SET{self,#SELF|parametre_url{debut_syndic_article,''}}
+<div class='onglets_simple clearfix'>
+<ul class="statut statut_syndic_articles">
+<li>[(#GET{self}|parametre_url{statut,''}|lien_ou_expose{<:sites:articles_tous:>,#ENV{statut,''}|=={''},ajax})]</li>
+
+<BOUCLE_st(POUR){tableau #ARRAY{0,publie,1,dispo,2,off,3,refuse}}>
+	<BOUCLE_cpt(SYNDIC_ARTICLES){id_syndic?}{statut=#VALEUR}{recherche?} />
+	[(#TOTAL_BOUCLE|oui) <li class='#VALEUR'>[(#GET{self}|parametre_url{statut,#VALEUR}|lien_ou_expose{#VAL{sites:articles_#VALEUR}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#VALEUR},'ajax'})]</li>]<//B_cpt>
+</BOUCLE_st>
+</ul>
+</div>

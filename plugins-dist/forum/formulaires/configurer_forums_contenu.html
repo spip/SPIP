@@ -1,0 +1,45 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_forums_contenu' id='formulaire_configurer_forums_contenu'>
+<h3 class='titrem'>[(#CHEMIN_IMAGE{forum-public-24.png}|balise_img{'',cadre-icone})]<:forum:titre_forum:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form action="#ENV{action}#formulaire_configurer_contenu_forums" method="post"><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<ul>
+			<li class='editer configurer_champs_forums[ (#ENV**{erreurs}|table_valeur{forums_titre}|oui)erreur]'>
+				<label><:config_activer_champs:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{forums_titre})</span>
+				]<div class='choix'>
+					<input class='checkbox' type="checkbox" name="forums_titre" value='oui' [checked="(#ENV{forums_titre}|=={oui}|?{checked})"] id="forums_titre"/>
+					<label for="forums_titre"><:info_titre:></label>
+				</div>
+				<div class='choix'>
+					<input class='checkbox' type="checkbox" name="forums_texte" value='oui' [checked="(#ENV{forums_texte}|=={oui}|?{checked})"] id="forums_texte"/>
+					<label for="forums_texte"><:info_texte:></label>
+				</div>
+				[(#CONFIG{barre_outils_public}|=={oui}|oui)
+				<div class='choix'>
+					<input class='checkbox' type="checkbox" name="forums_afficher_barre" value='oui' [checked="(#ENV{forums_afficher_barre}|=={oui}|?{checked})"] id="forums_afficher_barre"/>
+					<label for="forums_afficher_barre"><:info_barre_outils:></label>
+				</div>
+				]
+				<div class='choix'>
+					<input class='checkbox' type="checkbox" name="forums_urlref" value='oui' [checked="(#ENV{forums_urlref}|=={oui}|?{checked})"] id="forums_urlref"/>
+					<label for="forums_urlref"><:info_urlref:></label>
+				</div>
+			</li>
+			[(#PLUGIN{medias}|oui)
+			<li class='editer configurer_documents_forums[ (#ENV**{erreurs}|table_valeur{formats_documents_forum}|oui)erreur]'>
+				<label for="formats_documents_forum"><:medias:titre_documents_joints:></label>
+				<div class='explication'><:forum:info_question_visiteur_ajout_document_forum:>
+				<div class='small'><:forum:info_question_visiteur_ajout_document_forum_format:></div></div>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{formats_documents_forum})</span>]
+				<input type="text" class="text" name="formats_documents_forum" id="formats_documents_forum"[ value="(#ENV{formats_documents_forum})"] size="40" />
+			</li>
+			]
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
+	</div></form>
+
+</div>

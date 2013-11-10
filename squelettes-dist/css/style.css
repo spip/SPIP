@@ -1,0 +1,182 @@
+/* --------------------------------------------------------------
+
+   Theme pour la dist de SPIP 3
+
+-------------------------------------------------------------- */
+
+/* ------------------------------------------
+/* Habillage des elements du contenu
+/* ------------------------------------------ */
+
+.arbo { clear: both; font-size: .9em; color: #DDC; }
+.arbo * { font-weight: normal; }
+
+.cartouche { margin-bottom: 1.5em; }
+.cartouche h1 { margin-bottom: 0; }
+.cartouche p { margin-bottom: 0; }
+.surtitre{}
+.soustitre {}
+abbr.published { border: 0; }
+@media print {
+	abbr[title].published:after { content: ""; }
+	abbr[title].dtreviewed:after { content: ""; }
+}
+.info-publi { margin: 1.5em 0 0; font-size: .9em; font-style: italic; }
+.traductions { font-size: .9em; }
+.traductions a[hreflang]:after { content: ''; }
+
+.chapo { font-weight: bold; }
+.texte {}
+.hyperlien { display: block; padding: 1.5em 50px; background: #EED url(img/def.png) no-repeat 25px 1.9em; font-weight: bold; }
+.ps, .notes { margin-bottom: 1.5em; }
+.notes { clear: both; font-size: .9em; }
+
+/* Listes et tableaux */
+dl.spip dt { background: url(img/def.png) no-repeat 25px .5em; }
+dl.spip dd {}
+
+table.spip caption {  background: none; border-bottom: 1px solid; text-align: left; font-weight: bold; }
+table.spip thead th { background: none; border: 1px solid; border-width: 1px 0; }
+table.spip tbody tr th,
+table.spip tr td { background: none; }
+table.spip tbody tr.odd th,
+table.spip tr.odd td { background: #EED; }
+table.spip tfoot { border-top: 1px solid; }
+
+/* Formulaires : variantes et cas particuliers
+----------------------------------------------- */
+.formulaire_spip { margin-bottom: 1.5em; }
+.aside .formulaire_spip { padding-top: 1.3em; border-top: 5px solid; }
+fieldset {
+width: 100%; margin: 0;
+-ms-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box; }
+legend { display: none; }
+label { display: block; }
+.erreur_message { display: block; }
+input.text,textarea {
+width: 100%;
+-ms-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+background-color: #EED;
+border: 4px solid #EED;
+}
+.content input.text { width: 50%; }
+textarea { width: 100%; }
+
+/* Selection des langues */
+.formulaire_menu_lang { margin: 0; padding: 0; background: none; }
+
+/* Formulaires de recherche (site / petitions) */
+.formulaire_recherche input.text { width: 10em; padding-left: 20px; background-image: url(img/recherche.png); background-repeat: no-repeat; background-position: left center; }
+.formulaire_recherche input.submit {}
+
+/* Choix des mots-clefs */
+ul.choix_mots { display: block; margin: 0; padding: 0; list-style: none; }
+ul.choix_mots li { clear: none; float: left; display: block; width: 30%; padding: 1%; }
+ul.choix_mots li label { display: inline; font-weight: normal; }
+
+.formulaire_spip .bugajaxie { display: none; } /*IE/Win*/
+
+/* Formulaire de login dans une page */
+.formulaire_login ul li { clear: left; }
+.formulaire_login .editer_password .details { display: block; }
+.formulaire_login #spip_logo_auteur { float: right; }
+
+/* Fomulaire de contact */
+.formulaire_ecrire_auteur {}
+.formulaire_ecrire_auteur .saisie_sujet_message_auteur input.text { width: 100%; }
+
+/* Habillage des forums
+---------------------------------------------- */
+
+/* Habillage des forums */
+.comments-items .comments-items {margin-left: 25px;padding-left: 20px;border-left:5px solid #ddd;}
+.comment-fil ul {}
+.comment-meta { margin: 0; font-weight: bold; }
+.comment-meta small { font-size: 100%; }
+.comment-meta abbr { border: 0; }
+.comment-meta a { color: #222; }
+.comment-meta a:focus,
+.comment-meta a:hover,
+.comment-meta a:active { color: #fff; }
+.comment-content .hyperlien { padding: 0; background: transparent; font-weight: normal; }
+
+/* Formulaire de forum */
+.formulaire_forum {}
+.formulaire_forum legend { display: none; }
+.formulaire_forum .saisie_titre input.text { width: 100% }
+.formulaire_forum .session_qui { display: none; }
+.formulaire_forum .saisie_texte .explication { font-size: .9em; font-style: italic; }
+
+/* Habillage des petitions
+---------------------------------------------- */
+#signatures {}
+#signatures td.signature-date small { white-space: nowrap; }
+#signatures .formulaire_recherche { margin: 1.5em auto; text-align: center; }
+
+/* Formulaire de signature */
+.formulaire_signature {}
+
+/* ------------------------------------------
+/* Sous-navigation et autres menus
+/* ------------------------------------------ */
+
+/* Habillage general des menus de nav */
+.menu { clear: both; margin-bottom: 1.5em; text-align: left; }
+.menu p {}
+.menu ul { margin-bottom: 1.5em; }
+.menu ul li {}
+.menu ul li ul { margin-left: 1.5em; list-style: circle; }
+
+/* Pagination */
+.pagination a,
+.pagination .on  { padding: .2em .5em; margin: 0 1px; }
+.pagination a { background: #EED; text-decoration: none; }
+.pagination .on { font-weight: bold; background: #222; color: #fff; }
+.pagination .sep { display: none; }
+
+/* Listes d'articles et extraits introductifs */
+.menu_articles li { clear: both; margin-bottom: 1.5em; }
+.menu_articles li h3,
+.menu_articles li h2 { margin: 0; }
+.menu_articles li p { margin: 0; }
+.menu_articles li small { font-style: italic; }
+.menu_articles li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
+
+.menu_breves li {}
+.menu_breves li h3 { margin: 0; }
+
+
+/* Hyperliens
+---------------------------------------------- */
+a { color: #900; text-decoration: none; }
+a:focus,
+a:hover,
+a:active { background-color: #900; color: #FFF; text-decoration: none; }
+
+/* ------------------------------------------
+/* Autres medias
+/* ------------------------------------------ */
+
+@media print {
+
+/*  Ne pas imprimer */
+.spip-admin,
+.spip-admin-float,
+.spip-previsu { display: none; }
+.repondre,
+.formulaire_spip { display: none; }
+
+/* Souligner et expliciter les liens */
+a { color: #600; text-decoration: underline !important; }
+a.spip_out:after,
+a.spip_glossaire:after,
+a.spip_mail:after { display: inline; content: " [" attr(href) "]"; }
+
+}
+
+/* end */

@@ -1,0 +1,49 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'>[(#CHEMIN_IMAGE{url-24.png}|balise_img{'','cadre-icone'})]<:urls:titre_type_urls:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	#SET{fl,urls}
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:urls:titre_type_urls:></legend>
+			<ul>
+				#SET{htaccess,'<tt>.htaccess</tt>'}
+				#SET{name,type_urls}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label><:urls:texte_type_urls:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:urls:texte_type_urls_attention{htaccess=#GET{htaccess}}:></p>
+
+					[(#ENV*{_urls_dispos}|type_url_choisir{#GET{name},#ENV{#GET{name}}})]
+
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:urls:titre_gestion_des_urls:></legend>
+			<p><:urls:explication_editer:></p>
+			<ul>
+				<!--EX10-->
+				#SET{name,urls_activer_controle}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]
+					#SET{val,oui}
+					<div class="choix">
+						<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

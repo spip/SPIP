@@ -76,14 +76,14 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 
 	$results = array();
 
-	$s = sql_select(
+	$s = Sql::select(
 		$requete['SELECT'], $requete['FROM'], $requete['WHERE'],
 		implode(" ",$requete['GROUPBY']),
 		$requete['ORDERBY'], $requete['LIMIT'],
 		$requete['HAVING'], $serveur
 	);
 
-	while ($t = sql_fetch($s,$serveur)
+	while ($t = Sql::fetch($s,$serveur)
 	AND (!isset($t['score']) OR $t['score']>0)) {
 		$id = intval($t[$_id_table]);
 
@@ -166,33 +166,33 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 				$desc_arrivee = $trouver_table($table_arrivee,$serveur);
 				// cas simple : $cle_depart dans la table_liee
 				if (isset($desc_arrivee['field'][$cle_depart])){
-					$s = sql_select("$cle_depart, $cle_arrivee", $desc_arrivee['table_sql'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
+					$s = Sql::select("$cle_depart, $cle_arrivee", $desc_arrivee['table_sql'], Sql::in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
 				}
 				// cas simple : $cle_arrivee dans la table
 				elseif (isset($desc_depart['field'][$cle_arrivee])){
-					$s = sql_select("$cle_depart, $cle_arrivee", $desc_depart['table_sql'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
+					$s = Sql::select("$cle_depart, $cle_arrivee", $desc_depart['table_sql'], Sql::in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
 				}
 				// sinon cherchons une table de liaison
 				// cas recherche principale article, objet lie document : passer par spip_documents_liens
 				elseif ($l = objet_associable($table_liee)){
 					list($primary, $table_liens) = $l;
-					$s = sql_select("id_objet as $cle_depart, $primary as $cle_arrivee", $table_liens, array("objet='$table'",sql_in($primary, array_keys($ids_trouves))), '','','','',$serveur);
+					$s = Sql::select("id_objet as $cle_depart, $primary as $cle_arrivee", $table_liens, array("objet='$table'",Sql::in($primary, array_keys($ids_trouves))), '','','','',$serveur);
 				}
 				// cas recherche principale auteur, objet lie article: passer par spip_auteurs_liens
 				elseif ($l = $depart_associable){
 					list($primary, $table_liens) = $l;
-					$s = sql_select("$primary as $cle_depart, id_objet as $cle_arrivee", $table_liens, array("objet='$table_liee'",sql_in('id_objet', array_keys($ids_trouves))), '','','','',$serveur);
+					$s = Sql::select("$primary as $cle_depart, id_objet as $cle_arrivee", $table_liens, array("objet='$table_liee'",Sql::in('id_objet', array_keys($ids_trouves))), '','','','',$serveur);
 				}
 				// cas table de liaison generique spip_xxx_yyy
 				elseif($t=$trouver_table($table_arrivee."_".$table_depart,$serveur)
 				  OR $t=$trouver_table($table_depart."_".$table_arrivee,$serveur)){
-					$s = sql_select("$cle_depart,$cle_arrivee", $t["table_sql"], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
+					$s = Sql::select("$cle_depart,$cle_arrivee", $t["table_sql"], Sql::in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
 				}
 			}
 			else
 				list($cle_depart,$cle_arrivee,$s) = $rechercher_joints($table,$table_liee,array_keys($ids_trouves), $serveur);
 
-			while ($t = is_array($s)?array_shift($s):sql_fetch($s)) {
+			while ($t = is_array($s)?array_shift($s):Sql::fetch($s)) {
 				$id = $t[$cle_depart];
 				$joint = $ids_trouves[$t[$cle_arrivee]];
 				if (!isset($results))

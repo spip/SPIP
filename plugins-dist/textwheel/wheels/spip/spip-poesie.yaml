@@ -1,0 +1,26 @@
+--- # callback pour <poesie> !spip.yaml
+
+-
+  # trim
+  type: all
+  replace: trim
+  is_callback: y
+
+-
+  # nettoyer les sauts de ligne \r
+  # (semble inutile car deja dans spip.yaml#L6)
+  match: ",\r\n?,S"
+  replace: "\n"
+-
+  # ligne contenant une espace => ligne contenant un &nbsp;
+  match: "/\n[\s]*\n/Su"
+  replace: "\n&nbsp;\n"
+-
+  # deux sauts de ligne => div
+  match: "/\n+/"
+  replace: "</div>\n<div>"
+
+-
+  # entourer avec un blockquote.spip_poesie
+  type: all
+  replace: "<blockquote class=\"spip_poesie\">\n\n<div>$0</div>\n</blockquote>\n\n"

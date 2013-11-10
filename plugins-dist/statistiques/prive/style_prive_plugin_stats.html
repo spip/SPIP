@@ -1,0 +1,95 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+
+ol.classement {list-style:decimal;margin:0;padding:0;padding-#GET{left}:40px;margin-bottom:1.5em;}
+
+
+table.visites caption, h3.caption {font-size:1.3em;font-weight:bold;text-align: center;margin:0.5em auto; clear:both;}
+.stats_visites #contenu h3.caption {float:#GET{left};margin:0.5em auto;}
+table.visites {width: 80%; margin-bottom: 1em; border-collapse: collapse; border-spacing: 0; line-height: normal;border:1px solid #999;}
+table.visites a {color:#[(#GET{foncee}|couleur_foncer)];}
+
+table.visites tr.row_first { background-color:#[(#GET{foncee}|couleur_foncer)];color:#fff;border: 1px solid #ddd; }
+table.info.visites tr.row_first { background-color:#fff;color:#000;border: 1px solid #ddd; }
+table.info.visites tr.odd td,table.info.visites tr.odd th { background-color:transparent; }
+table.visites th, table.visites td { padding: 0.20em 0.40em; text-align: #GET{left}; border: 1px solid #ddd; }
+table.visites th { vertical-align: bottom; font-weight: bold; }
+table.visites.info th { vertical-align: top; }
+table.visites tbody th { font-weight: normal; }
+table.visites .on th { font-weight: bold; }
+table.visites td { vertical-align: top; }
+table.visites td.val, table.visites td.mean, table.visites td.cumul { text-align:center; }
+
+table.visites tr.c_Sun td,
+table.visites tr.c_Sun th {background-color:#[(#GET{claire}|couleur_eclaircir)];}
+table.visites tr.c_today td,
+table.visites tr.c_today th {background-color:#eee;}
+/*
+table#visites tr.c_recap td,
+table#visites tr.c_recap th {background-color:#[(#GET{foncee}|couleur_foncer)];color:#fff;}
+*/
+
+
+/* graphique flot */
+.graphique{clear:both; overflow:hidden; margin-bottom:2em;}
+.graphResult-wrap {padding: 10px 25px;float:#GET{left};}
+.graphResult{}
+.graphInfo{float:#GET{left}; clear:#GET{left};margin-#GET{left}:20px;}
+.graphInfo td {padding: 5px;}
+.graphInfo td.legendLabel { padding-left:0; padding-right:1em; vertical-align: top;}
+.graphLegend{margin-top:0.5em; }
+.graphVignette{}
+.graphique .tickLabels {font-size: 11px !important;line-height: 14px;}
+
+.graphLegend .legendColorBox div{width:14px; height:10px;}
+.graphLegend .legendColorBox.cacher div div{position:absolute; left:-3000em;}
+
+
+.tooltip_statistiques{
+	position: absolute;
+	display: none;
+	border: 1px solid #fdd;
+	padding: 2px;
+	background-color: #fee;
+}
+
+.stats_referers .liste-items.referers li.referer {padding-left:150px;background-image: url("#CHEMIN_IMAGE{deplierhaut.gif}");background-position: 0.6925em 0.6925em;background-repeat: no-repeat;}
+.stats_referers .liste-items.referers li.referer.open {background-image: url("#CHEMIN_IMAGE{deplierbas.gif}");}
+.stats_referers .liste-items.referers li.referer span.visites {float:left;text-align:right;width:140px;margin-left:-150px;}
+.stats_referers .liste-items.referers li.referer .miniature {float:right;}
+.stats_referers .liste-items.referers li.referer .miniature img {max-width:60px;height: auto;}
+.stats_referers .liste-items.referers li.referer ul {margin-left:0;padding-left:0;}
+.stats_referers .liste-items.referers li.referer ul li {margin-left:0px;padding-left:0;}
+.stats_referers .action.plus {text-align:right;font-size:1.5em;font-weight:bold;}
+
+.stats_repartition .couleur_cumul { background: #GET{foncee}; }
+.stats_repartition .couleur_nombre { background: #GET{claire}; }
+.stats_repartition table h3,.stats_repartition table table {margin-bottom: 0;padding-bottom: 0;padding-top: 0;}
+.stats_repartition table h3 {font-size: inherit;margin-bottom: 3px;margin-top:3px;}
+.stats_repartition table {margin: 0;}
+.stats_repartition table + p,.stats_repartition .bloc_depliable + p {margin-top: 1em;}
+.stats_repartition table td {padding: 2px 5px;vertical-align: middle;}
+.stats_repartition table table td {padding: 0;}
+.stats_lang .couleur_langue { background: #GET{foncee}; }
+.stats_lang table p {padding-left:10px;margin:2px 0;}
+[(#REM)	</style>]

@@ -1,0 +1,18 @@
+#SET{self,#SELF|parametre_url{debut_signatures,''}}
+<div class='onglets_simple clearfix'>
+	<ul class="statut statut_petition">
+		<li>[(#GET{self}|parametre_url{statut,''}|lien_ou_expose{<:petitions:signatures_toutes:>,#ENV{statut,''}|=={''},ajax})]</li>
+		#SET{statut,publie}
+		<BOUCLE_cpt_1(SIGNATURES){id_article?}{statut=#GET{statut}}{recherche?} />
+		[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{petitions:signatures_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_1>
+
+		#SET{statut,prop}
+		<BOUCLE_cpt_2(SIGNATURES){id_article?}{statut !IN publie,poubelle}{recherche?} />
+		[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{petitions:signatures_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_2>
+
+		#SET{statut,poubelle}
+		<BOUCLE_cpt_3(SIGNATURES){id_article?}{statut=#GET{statut}}{recherche?} />
+		[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{petitions:signatures_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_3>
+	</ul>
+</div>
+

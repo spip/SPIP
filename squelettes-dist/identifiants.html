@@ -1,0 +1,33 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-Type: text/html[; charset=(#CHARSET)]})]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:pass_vousinscrire:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<meta name="robots" content="none" />
+<meta name="viewport" content="width=device-width" />
+<link rel="stylesheet" href="[(#VAL{reset.css}|find_in_theme|direction_css)]" type="text/css" />
+<link rel="stylesheet" href="[(#VAL{clear.css}|find_in_theme|direction_css)]" type="text/css" />
+<link rel="stylesheet" href="[(#VAL{minipres.css}|find_in_theme|direction_css)]" type="text/css" />
+<INCLURE{fond=inclure/head}>
+<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+</head>
+<body>
+<div id='minipres'>
+<h1>#NOM_SITE_SPIP</h1>
+#FORMULAIRE_INSCRIPTION{#ENV{mode},#ENV{id_rubrique}}
+<div class="quitter_fenetre">
+<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+document.write("<a href='")
+document.write((window.opener) ? "javascript:close()" : "./")
+document.write("' title='<:pass_quitter_fenetre:>'><:pass_quitter_fenetre:><" + "/a>");
+document.getElementById('oubli').focus()
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
+<noscript>
+<a href='./' title='<:pass_retour_public:>'><:pass_retour_public:></a>
+</noscript>
+</div>
+</div><!--#minipres-->
+</body>
+</html>

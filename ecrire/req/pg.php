@@ -215,8 +215,8 @@ function spip_pg_ajouter_champs_timestamp($table, $couples, $desc='', $serveur='
 function spip_pg_alter($query, $serveur='',$requeter=true) {
 	// il faudrait une regexp pour eviter de spliter ADD PRIMARY KEY (colA, colB)
 	// tout en cassant en deux alter distincts "ADD PRIMARY KEY (colA, colB), ADD INDEX (chose)"... 
-	// ou revoir l'api de sql_alter en creant un 
-	// sql_alter_table($table,array($actions));
+	// ou revoir l'api de Sql::alter en creant un 
+	// Sql::alter_table($table,array($actions));
 	if (!preg_match("/\s*((\s*IGNORE)?\s*TABLE\s*([^\s]*))\s*(.*)?/is", $query, $regs)){
 		spip_log("$query mal comprise", 'pg.'._LOG_ERREUR);
 		return false;
@@ -1030,7 +1030,7 @@ function spip_pg_sequence($table,$raw=false)
 function spip_pg_cite($v, $t){
 	if(is_null($v)) return 'NULL'; // null php se traduit en NULL SQL
 
-	if (sql_test_date($t)) {
+	if (Sql::test_date($t)) {
 		if (strpos("0123456789", $v[0]) === false)
 			return spip_pg_frommysql($v);
 		else {
@@ -1041,7 +1041,7 @@ function spip_pg_cite($v, $t){
 			return "timestamp '$v'";
 		}
 	}
-	elseif (!sql_test_int($t))
+	elseif (!Sql::test_int($t))
 		return   ("'" . pg_escape_string($v) . "'");
 	elseif (is_numeric($v) OR (strpos($v, 'CAST(') === 0))
 		return $v;
@@ -1076,7 +1076,7 @@ function spip_pg_date_proche($champ, $interval, $unite)
         . (($interval <= 0) ? '>' : '<')
         . (($interval <= 0) ? 'DATE_SUB' : 'DATE_ADD')
 	. '('
-	. sql_quote(date('Y-m-d H:i:s'))
+	. Sql::quote(date('Y-m-d H:i:s'))
 	. ', INTERVAL '
 	. (($interval > 0) ? $interval : (0-$interval))
 	. ' '
@@ -1155,7 +1155,7 @@ function spip_pg_drop_view($view, $exist='', $serveur='',$requeter=true) {
  *     true pour éxecuter la requête
  *     false pour retourner le texte de la requête.
  * @return ressource
- *     Ressource à utiliser avec sql_fetch()
+ *     Ressource à utiliser avec Sql::fetch()
 **/
 function spip_pg_showbase($match, $serveur='',$requeter=true)
 {
@@ -1288,7 +1288,7 @@ function spip_pg_create_base($nom, $serveur='',$requeter=true) {
 function spip_pg_create_view($nom, $query_select, $serveur='',$requeter=true) {
 	if (!$query_select) return false;
 	// vue deja presente
-	if (sql_showtable($nom, false, $serveur)) {
+	if (Sql::showtable($nom, false, $serveur)) {
 		if ($requeter) spip_log("Echec creation d'une vue sql ($nom) car celle-ci existe deja (serveur:$serveur)",'pg.'._LOG_ERREUR);
 		return false;
 	}

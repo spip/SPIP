@@ -53,12 +53,11 @@ function inc_admin_dist($script, $titre, $comment='', $anonymous=false)
 // 	c'est que l'operation se passe mal, on la stoppe
 
 // http://doc.spip.org/@admin_verifie_session
-function admin_verifie_session($script, $anonymous=false) {
-
-	include_spip('base/abstract_sql');
+function admin_verifie_session($script, $anonymous=false)
+{
 	$pref = sprintf("_%d_",$GLOBALS['visiteur_session']['id_auteur']);
 	$signal = fichier_admin($script, "$script$pref");
-	$valeur = sql_getfetsel('valeur', 'spip_meta', "nom='admin'");
+	$valeur = Sql::getfetsel('valeur', 'spip_meta', "nom='admin'");
 	if ($valeur === NULL) {
 		ecrire_meta('admin', $signal, 'non');
 	} else {

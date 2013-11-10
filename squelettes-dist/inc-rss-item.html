@@ -1,0 +1,55 @@
+<BOUCLE_un_article(ARTICLES){id_article}>
+	<item[ xml:lang="(#LANG)"]>
+		<title>[(#TITRE|supprimer_tags|texte_backend)]</title>
+		<link>[(#URL_ARTICLE|url_absolue)]</link>
+		[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
+
+[(#REM)
+	Le bloc qui suit diffuse les mots-cles a la mode RSS
+
+]<BOUCLE_mots_rss(MOTS){id_article}>
+		[<dc:subject>(#TITRE|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
+
+		<description>[(#INTRODUCTION|texte_backend)]
+
+[(#REM)
+	Le bloc qui suit diffuse la rubrique et les mots-cles
+	sous forme de "microformats"
+
+]<BOUCLE_rubrique_mf(RUBRIQUES){id_rubrique}>-
+[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_tags|texte_backend)&lt;/a&gt;]
+</BOUCLE_rubrique_mf><B_mots_mf>
+/ <BOUCLE_mots_mf(MOTS){id_article}{", "}>
+[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|texte_backend)&lt;/a&gt;]</BOUCLE_mots_mf>
+
+		</description>
+
+[(#REM)
+	Le bloc qui suit diffuse aussi le texte integral de l'article,
+	ce qui permet une syndication plus riche (mais plus "lourde").
+	Fonction desactivable depuis les reglages du site.
+][
+(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_ARTICLE{right}|image_reduire{150,150}|texte_backend)
+		][&lt;div class='rss_chapo'&gt;(#CHAPO|texte_backend)&lt;/div&gt;
+		][&lt;div class='rss_texte'&gt;(#TEXTE|
+			image_reduire{500,0}|texte_backend)&lt;/div&gt;
+		][&lt;div class="hyperlien"&gt;<:voir_en_ligne|html2unicode:> : &lt;a href="(#URL_SITE)" class="spip_out"&gt;[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]}|texte_backend)]&lt;/a&gt;&lt;/div&gt;
+		][&lt;hr /&gt;
+		&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;
+		][&lt;div class='rss_ps'&gt;(#PS|texte_backend)&lt;/div&gt;]
+		</content:encoded>
+]
+
+[(#REM)
+	Le bloc qui suit diffuse l'adresse des documents associes aux articles ;
+	ajouter par ex. {extension=mp3} pour limiter a un certain type de document.
+]		<BOUCLE_documents(DOCUMENTS){id_article}{mode=document}{doublons}>[
+		<enclosure url="(#URL_DOCUMENT|url_absolue|unique)"[ length="(#TAILLE)"][ type="(#MIME_TYPE)"] />]
+		</BOUCLE_documents>
+
+	</item>
+</BOUCLE_un_article>

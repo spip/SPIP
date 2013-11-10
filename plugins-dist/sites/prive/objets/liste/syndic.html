@@ -1,0 +1,52 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	nom_site,1,
+	id_syndic,1,
+	points,-1
+}})
+]<B_liste_sites>
+#ANCRE_PAGINATION
+<div class="liste-objets sites syndic">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_site,info_nb_sites}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='nom_site' scope='col'>[(#TRI{nom_site,<:sites:form_prop_nom_site:>,ajax})]</th>
+			<th class='syndication' scope='col'><:sites:info_syndication:></th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_syndic,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_sites(SYNDIC){id_syndic?}{id_mot?}{id_rubrique?}{where?}{recherche?}{statut?}{syndication?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#STATUT|puce_statut{site,#ID_SYNDIC,#ID_RUBRIQUE}) ]</td>
+			<td class='nom_site principale'>[(#LOGO_SITE|image_reduire{26,20})]
+				<a href="[(#ID_SYNDIC|generer_url_entite{site})]"
+					title="<:info_numero_abbreviation|attribut_html:> #ID_SYNDIC">#NOM_SITE</a> [<span class='visiter'>&#91;<a href='(#URL_SITE)'><:lien_visite_site:></a>&#93;</span>]
+			</td>
+			<td class='syndication'>[(#SYNDICATION|match{off|sus}|oui)
+				<span class="etat #SYNDICATION">[(#CHEMIN{puce-orange-anim.gif}|balise_img|inserer_attribut{alt,<:sites:info_panne_site_syndique:>})<:sites:info_probleme_grave:>]</span>
+			]<BOUCLE_articlesyndic(SYNDIC_ARTICLES){id_syndic}{statut==.*}{tout} />[
+				(#SYNDICATION|match{oui|off|sus}|oui)
+				[(#TOTAL_BOUCLE)] <:sites:info_syndication_articles:>
+			]<//B_articlesyndic>
+			</td>
+			<td class='date secondaire'>[
+				(#STATUT|=={prop}|non) [(#DATE|affdate_jourcourt)]][
+				(#STATUT|=={prop}|oui) <:sites:info_a_valider:>
+			]</td>
+			<td class='id'>[(#AUTORISER{modifier,site,#ID_SYNDIC}|?{
+				<a href="[(#URL_ECRIRE{site_edit,id_syndic=#ID_SYNDIC})]">#ID_SYNDIC</a>,
+				#ID_SYNDIC
+			})]</td>
+		</tr>
+	</BOUCLE_liste_sites>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_sites>[
+<div class="liste-objets sites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_sites>

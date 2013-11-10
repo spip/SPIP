@@ -1,0 +1,48 @@
+<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}>[
+
+(#REM) Cas <imageXX>	: equivalent a <imgXX> pour une image en mode image
+
+][(#INCLUS|=={image}|et{#ENV{emb,''}|non}|oui)
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
+	 style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>[
+	<a href="(#ENV{lien})"[
+		class="(#ENV{lien_class})"]>]<img src='#URL_DOCUMENT'
+		[ width="(#LARGEUR)"][ height="(#HAUTEUR)"][
+			title="(#TITRE|attribut_html)"]
+			alt="[(#TITRE|attribut_html)]" />[(#ENV{lien}|?{</a>})]</span>
+][
+
+(#REM) Cas <embXX> : on est appele ici avec emb=' ' : on veut la legende
+equivalent a un <docXX> pour une image en mode image
+
+][(#INCLUS|=={image}|et{#ENV{emb,''}|oui}|oui)
+#SET{fichier,#URL_DOCUMENT}
+#SET{width,#LARGEUR}
+#SET{height,#HAUTEUR}
+#SET{url,#ENV{lien}}
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
+			style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|max{120})]px;']>
+<dt>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#GET{url}|?{</a>})]</dt>[
+<dt class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
+<dd class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
+</dl>
+][
+
+(#REM) Cas des images qu'il faut embed (svg)
+][
+(#INCLUS|=={embed}|oui)
+<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
+style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>
+<object	data='#URL_DOCUMENT' 
+	type='#MIME_TYPE'[
+	width='(#ENV{largeur}?{'', #LARGEUR})'][
+	height='(#ENV{hauteur}?{'', #HAUTEUR})']
+	[(#ENV*|env_to_attributs)] >
+	<param name='src' value='#URL_DOCUMENT' />
+	[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
+</object>[
+<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>
+][
+<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>
+]</div>]
+</BOUCLE_tous>

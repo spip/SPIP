@@ -1,0 +1,12 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class='nettoyeur'></div>
+
+<INCLURE{fond=prive/objets/liste/messages-envoyes,id_auteur=#ENV{id_auteur},statut=prepa,titre=<:info_message_en_redaction:>,type=#ENV{typem,'tout'}|replace{tout,''},nb=10,env,ajax} />
+
+<p class="tri">
+	[(#SELF|parametre_url{typem,'tout'}|lien_ou_expose{<:info_tout_afficher:>,#ENV{typem,tout}|=={tout},ajax})]
+	| [(#SELF|parametre_url{typem,'affich'}|lien_ou_expose{<:organiseur:info_selection_annonces:>,#ENV{typem,tout}|=={affich},ajax})]
+	| [(#SELF|parametre_url{typem,'pb'}|lien_ou_expose{<:organiseur:info_selection_pensebetes:>,#ENV{typem,tout}|=={pb},ajax})]
+	| [(#SELF|parametre_url{typem,'normal'}|lien_ou_expose{<:organiseur:info_selection_messages:>,#ENV{typem,tout}|=={normal},ajax})]
+</p>
+<INCLURE{fond=prive/objets/liste/messages-envoyes,id_auteur=#ENV{id_auteur},statut=publie,sinon=<:info_aucun_message:>,type=#ENV{typem,'tout'}|replace{tout,''},nb=50,env,ajax} />

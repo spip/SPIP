@@ -1,0 +1,38 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{document-24.png}" class="cadre-icone" /><:medias:titre_documents_joints:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<p><:medias:texte_documents_joints:></p>
+	<p class="explication"><:medias:texte_documents_joints_2:></p>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{name,documents_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:medias:label_activer_document_objets:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=spip_documents}
+			</li>
+			#SET{name,documents_date}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+						[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:medias:item_autoriser_selectionner_date_en_ligne:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:medias:item_non_autoriser_selectionner_date_en_ligne:></label>
+					</div>
+			</li>
+		</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

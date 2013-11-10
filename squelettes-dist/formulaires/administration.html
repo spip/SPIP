@@ -1,0 +1,17 @@
+ <div[ class="(#ENV{divclass,spip-admin-bloc})"] id='spip-admin' dir="#LANG_DIR">[
+	<a href="(#ENV{analyser})" class="spip-admin-boutons"
+		id="analyser"><:analyse_xml:>[ ((#ENV{xhtml_error}))]</a>]
+	[(#ENV{objet}|oui)
+		[<a href="[(#ENV{voir_#ENV{objet}})]" class="spip-admin-boutons"
+		id="voir_#ENV{objet}">[(#ENV{objet}|objet_info{texte_objet}|_T)]
+			((#ENV{id_objet}))</a>]
+	]<!--extra-->[
+	<a href="(#ENV{ecrire})" class="spip-admin-boutons"
+		id="ecrire"><:espace_prive:></a>]
+	<a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]" class="spip-admin-boutons"
+		id="var_mode"><:admin_recalculer:>[(#ENV{use_cache})]</a>[
+	<a href="(#ENV{preview})" class="spip-admin-boutons"
+		id="preview"><:previsualisation:></a>][
+	<a href="(#ENV{debug})" class="spip-admin-boutons"
+		id="debug"><:admin_debug:></a>]
+</div>

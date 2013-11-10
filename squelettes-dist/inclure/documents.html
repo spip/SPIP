@@ -1,0 +1,57 @@
+[(#REM) Portfolio : album d'images ]
+<B_documents_portfolio>
+<div class="bloc clearfix" id="documents_portfolio">
+	<h2><:medias:info_portfolio:></h2>
+	<ul>
+		<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{doublons}{vu=non}>[
+		<li><a href="(#URL_DOCUMENT)" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE
+		  |url_absolue
+			|parametre_url{id_document,#ID_DOCUMENT}
+			|ancre_url{documents_portfolio}
+			)]';return false;"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
+			|image_passe_partout{90,90}
+			|image_recadre{90,90}
+			|inserer_attribut{class,spip_logos}
+			|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a></li>
+		]</BOUCLE_documents_portfolio>
+	</ul>
+</div><!--#documents_portfolio-->
+</B_documents_portfolio>
+
+[(#REM)
+	Afficher en grand le document demande dans l'URL
+]
+<BOUCLE_afficher_document(DOCUMENTS) {id_document}{id_article} {mode=document}{extension IN png,jpg,gif}>
+[(#MODELE{emb,lien=#URL_DOCUMENT}|image_reduire{500,*})]
+</BOUCLE_afficher_document>
+
+
+[(#REM)
+	Si un seul document est joint a l'article, et si le texte est vide,
+	on incruste automatiquement ce document
+]
+<BOUCLE_documents_decompte(DOCUMENTS spip_documents_liens articles) {id_article} {mode=document}{texte=''}{extension !IN gif,jpg,png} {vu=non}>
+[(#TOTAL_BOUCLE|=={1}
+	|?{[(#INCLURE{fond=modeles/emb, id_document}
+	|trim)]})]</BOUCLE_documents_decompte>
+
+
+[(#REM)
+	Sinon, liste des autres documents joints
+]
+<B_documents_joints>
+<div class="menu" id="documents_joints">
+	<h2><:medias:titre_documents_joints:></h2>
+	<ul class="spip">
+		<BOUCLE_documents_joints(DOCUMENTS) {id_article} {extension !IN gif,jpg,png} {vu=non}{par num titre, date}>[
+		<li>
+			<a href="(#URL_DOCUMENT)" type="#MIME_TYPE" class="spip_doc[ (#EXTENSION|attribut_html)]"><strong class="#EDIT{titre} titre">[(#TITRE|sinon{[(#FICHIER|basename|couper{80})]})]</strong>
+			<small class="info_document">([<abbr title="<:info_document:> #TYPE_DOCUMENT" class="ext">(#EXTENSION|strtoupper)</abbr> - ][<span>(#TAILLE|taille_en_octets)</span>])</small></a>
+			[<div class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</div>]
+		]</li>
+		</BOUCLE_documents_joints>
+	</ul>
+</div><!--#documents_joints-->
+</B_documents_joints>
+
+<//B_documents_decompte>

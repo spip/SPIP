@@ -138,7 +138,7 @@ function genie_queue_watch_dist(){
 	if ($deja_la) return; // re-entrance si l'insertion des jobs echoue (pas de table spip_jobs a l'upgrade par exemple)
 	$deja_la = true;
 	$taches = taches_generales();
-	$programmees = sql_allfetsel('fonction','spip_jobs',sql_in('fonction',array_keys($taches)));
+	$programmees = Sql::allfetsel('fonction','spip_jobs',Sql::in('fonction',array_keys($taches)));
 	$programmees = array_map('reset',$programmees);
 	foreach($taches as $tache=>$periode){
 		if (!in_array($tache,$programmees))

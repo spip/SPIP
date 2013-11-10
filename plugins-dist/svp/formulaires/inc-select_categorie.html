@@ -1,0 +1,13 @@
+<B_categories>
+<select name="categorie" id="categorie">
+	<option value="toute_categorie"[ (#ENV{categorie}|=={toute_categorie}|oui)selected="selected"]>
+		<:svp:option_categorie_toute:>
+	</option>
+<BOUCLE_categories(DATA) {source table, #SVP_CATEGORIES}>
+	[(#CLE|!={aucune}|oui) 
+	<option value="#CLE"[ (#ENV{categorie}|=={#CLE}|oui)selected="selected"]>
+		#VALEUR
+	</option>]
+</BOUCLE_categories>
+</select>
+</B_categories>

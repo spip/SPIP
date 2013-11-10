@@ -44,7 +44,7 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 	if (isset($valeurs['id_parent']))
 		 $id_parent = $valeurs['id_parent'];	
 	if ($id_parent)
-		$langue_parent = sql_getfetsel("lang", "spip_rubriques", "id_rubrique=".intval($id_parent));
+		$langue_parent = Sql::getfetsel("lang", "spip_rubriques", "id_rubrique=".intval($id_parent));
 	
 	if (!$langue_parent)
 		$langue_parent = $GLOBALS['meta']['langue_site'];
@@ -96,10 +96,10 @@ function formulaires_traduire_verifier_dist($objet, $id_objet, $retour='', $trad
 	if ($id_trad = _request('id_trad')){
 		$table_objet_sql = table_objet_sql($objet);
 		$_id_table_objet = id_table_objet($objet);
-		if (sql_getfetsel('id_trad',$table_objet_sql,"$_id_table_objet=".intval($id_objet)))
+		if (Sql::getfetsel('id_trad',$table_objet_sql,"$_id_table_objet=".intval($id_objet)))
 			 // ne devrait jamais arriver sauf concurence de saisie
 			$erreurs['id_trad'] = _L('Une traduction est deja referencee');
-		elseif (!sql_getfetsel($_id_table_objet,$table_objet_sql,"$_id_table_objet=".intval($id_trad)))
+		elseif (!Sql::getfetsel($_id_table_objet,$table_objet_sql,"$_id_table_objet=".intval($id_trad)))
 			$erreurs['id_trad'] = _L('Indiquez un contenu existant');
 	}
 	return $erreurs;
@@ -128,7 +128,7 @@ function formulaires_traduire_traiter_dist($objet, $id_objet, $retour='', $tradu
 		  AND $new_id_trad = reset($new_id_trad)){
 			$table_objet_sql = table_objet_sql($objet);
 			$_id_table_objet = id_table_objet($objet);
-			if ($id_trad = sql_getfetsel('id_trad',$table_objet_sql,"$_id_table_objet=".intval($id_objet))){
+			if ($id_trad = Sql::getfetsel('id_trad',$table_objet_sql,"$_id_table_objet=".intval($id_objet))){
 				$referencer_traduction = charger_fonction('referencer_traduction','action');
 				$referencer_traduction($objet, $id_trad, $new_id_trad);
 			}

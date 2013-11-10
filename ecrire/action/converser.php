@@ -30,17 +30,19 @@ function action_converser_dist()
 	$lang = action_converser_changer_langue($update_session);
 	$redirect = rawurldecode(_request('redirect'));
 
-	if (!$redirect) $redirect = _DIR_RESTREINT_ABS;
+	if (!$redirect)
+		$redirect = _DIR_RESTREINT_ABS;
 	$redirect = parametre_url($redirect,'lang',$lang,'&');
 	redirige_par_entete($redirect, true);
 }
 
-function action_converser_changer_langue($update_session){
+function action_converser_changer_langue($update_session)
+{
 	if ($lang = _request('var_lang'))
 		action_converser_post($lang);
 	elseif ($lang = _request('var_lang_ecrire')) {
 		if ($update_session) {
-			sql_updateq("spip_auteurs", array("lang" => $lang), "id_auteur = " . $GLOBALS['visiteur_session']['id_auteur']);
+			Sql::updateq("spip_auteurs", array("lang" => $lang), "id_auteur = " . $GLOBALS['visiteur_session']['id_auteur']);
 			$GLOBALS['visiteur_session']['lang'] = $lang;
 			$session = charger_fonction('session', 'inc');
 			if ($spip_session = $session($GLOBALS['visiteur_session'])) {

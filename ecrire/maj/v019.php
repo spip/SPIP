@@ -28,12 +28,12 @@ $GLOBALS['maj'][1931] = array(
 	// a coup de table temporaire (est-ce autorise partout... sinon
 	// tant pis, ca ne marchera que pour les forums recemment modifies)
 $GLOBALS['maj'][1932] = array(
-	array('sql_alter', "TABLE spip_forum ADD `date_thread` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"),
-	array('sql_alter', "TABLE spip_forum ADD INDEX `date_thread` (`date_thread`)"),
+	array('Sql::alter', "TABLE spip_forum ADD `date_thread` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"),
+	array('Sql::alter', "TABLE spip_forum ADD INDEX `date_thread` (`date_thread`)"),
 
 	array('spip_query', "DROP TABLE IF EXISTS spip_tmp"),
 	array('spip_query', "CREATE TABLE spip_tmp SELECT `id_thread`,MAX(`date_heure`) AS dt FROM spip_forum GROUP BY `id_thread`"),
-	array('sql_alter', "TABLE spip_tmp ADD INDEX `p` (`id_thread`)"),
+	array('Sql::alter', "TABLE spip_tmp ADD INDEX `p` (`id_thread`)"),
 	array('spip_query', "UPDATE spip_forum AS F JOIN spip_tmp AS T ON F.id_thread=T.id_thread SET F.date_thread=T.dt"),
 	array('spip_query', "DROP TABLE spip_tmp"),
 	);
@@ -62,7 +62,7 @@ function maj_1_935 () {
 		$table_objet = "$type"."s";
 		$chapo = $type=='article' ? ",a.chapo":"";
 		$res = spip_query("SELECT a.$id_table_objet,a.texte $chapo FROM spip_documents_$table_objet AS d JOIN spip_$table_objet AS a ON a.$id_table_objet=d.$id_table_objet GROUP BY $id_table_objet");
-		while ($row = sql_fetch($res)){
+		while ($row = Sql::fetch($res)){
 			$GLOBALS['doublons_documents_inclus'] = array();
 			traiter_modeles(($chapo?$row['chapo']:"").$row['texte'],true); // detecter les doublons
 			if (count($GLOBALS['doublons_documents_inclus'])){
@@ -75,9 +75,9 @@ function maj_1_935 () {
 }
 
 $GLOBALS['maj'][1935] = array(
-	array('sql_alter', "TABLE spip_documents_articles ADD `vu` ENUM('non', 'oui') DEFAULT 'non' NOT NULL"),
-	array('sql_alter', "TABLE spip_documents_rubriques ADD `vu` ENUM('non', 'oui') DEFAULT 'non' NOT NULL"),
-	array('sql_alter', "TABLE spip_documents_breves ADD `vu` ENUM('non', 'oui') DEFAULT 'non' NOT NULL"),
+	array('Sql::alter', "TABLE spip_documents_articles ADD `vu` ENUM('non', 'oui') DEFAULT 'non' NOT NULL"),
+	array('Sql::alter', "TABLE spip_documents_rubriques ADD `vu` ENUM('non', 'oui') DEFAULT 'non' NOT NULL"),
+	array('Sql::alter', "TABLE spip_documents_breves ADD `vu` ENUM('non', 'oui') DEFAULT 'non' NOT NULL"),
 	array('maj_1_935')
 	);
 
@@ -87,15 +87,15 @@ function convertir_un_champ_blob_en_text($table,$champ,$type){
 	// precaution : definir le charset par defaut de la table, car c'est lui qui prevaut
 	// et il faut qu'il corresponde au charset de la connexion qui est celui
 	// dans lequel on a ecrit le champ en blob
-	if ($charset = sql_getfetsel('@@character_set_connection')){
-		sql_alter("TABLE $table DEFAULT CHARACTER SET ".$charset);
+	if ($charset = Sql::getfetsel('@@character_set_connection')){
+		Sql::alter("TABLE $table DEFAULT CHARACTER SET ".$charset);
 	}
 	$res = spip_query("SHOW FULL COLUMNS FROM $table LIKE '$champ'");
-	if ($row = sql_fetch($res)){
+	if ($row = Sql::fetch($res)){
 		if (strtolower($row['Type'])!=strtolower($type)) {
-			$default = $row['Default']?(" DEFAULT ".sql_quote($row['Default'])):"";
+			$default = $row['Default']?(" DEFAULT ".Sql::quote($row['Default'])):"";
 			$notnull = ($row['Null']=='YES')?"":" NOT NULL";
-			sql_alter("TABLE $table CHANGE $champ $champ $type $default $notnull");
+			Sql::alter("TABLE $table CHANGE $champ $champ $type $default $notnull");
 		}
 	}
 }
@@ -123,23 +123,23 @@ $GLOBALS['maj'][1937] = array(
 
 
 function maj_1_938 () {
-	$res = sql_select('extension','spip_documents',"extension='' OR extension is NULL");
-	if ($n = sql_count($res)) {
+	$res = Sql::select('extension','spip_documents',"extension='' OR extension is NULL");
+	if ($n = Sql::count($res)) {
 		$repli = false;
 		// verifier que la colonne id_type est toujours la (update post 1.938)
-		$desc = sql_showtable('spip_documents');
+		$desc = Sql::showtable('spip_documents');
 		if (!$desc OR !isset($desc['field']['id_type']))
 			$repli = true;
 	
-		$s = sql_select('extension'.($repli?'':',id_type'),'spip_types_documents');
-		while ($t = sql_fetch($s)) {
+		$s = Sql::select('extension'.($repli?'':',id_type'),'spip_types_documents');
+		while ($t = Sql::fetch($s)) {
 			if (isset($t['id_type']))
 				spip_query("UPDATE spip_documents	SET `extension`="._q($t['extension'])	." WHERE `id_type`="._q($t['id_type']));
 			else
 				spip_query("UPDATE spip_documents	SET `extension`="._q($t['extension'])	." WHERE fichier LIKE "._q("%." . $t['extension']));
 		}
-		$res = sql_select('extension','spip_documents',"extension='' OR extension is NULL");
-		if ($n = sql_count($res))
+		$res = Sql::select('extension','spip_documents',"extension='' OR extension is NULL");
+		if ($n = Sql::count($res))
 			spip_log("Table spip_documents : Colonne extension incomplete : $n lignes vides");
 	}
 }
@@ -148,28 +148,28 @@ $GLOBALS['maj'][1938] = array(
 	// Des champs NULL a l'installation
 	// Ajouter un champ extension aux spip_documents, et le
 	// remplir avec les valeurs ad hoc
-	array('sql_alter', "TABLE spip_documents ADD `extension` VARCHAR(10) DEFAULT ''  NOT NULL "),
-	array('sql_alter', "TABLE spip_documents ADD INDEX `extension` (`extension`)"),
+	array('Sql::alter', "TABLE spip_documents ADD `extension` VARCHAR(10) DEFAULT ''  NOT NULL "),
+	array('Sql::alter', "TABLE spip_documents ADD INDEX `extension` (`extension`)"),
 	array('maj_1_938'),
 
-	array('sql_alter', "TABLE spip_documents DROP INDEX `id_type`, DROP `id_type`"),
+	array('Sql::alter', "TABLE spip_documents DROP INDEX `id_type`, DROP `id_type`"),
 		## supprimer l'autoincrement avant de supprimer la PRIMARY KEY
-	array('sql_alter', "TABLE spip_types_documents CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL ") ,
-	array('sql_alter', "TABLE spip_types_documents DROP PRIMARY KEY"),
-	array('sql_alter', "TABLE spip_types_documents DROP `id_type`"),
-	array('sql_alter', "TABLE spip_types_documents DROP INDEX `extension`"),
+	array('Sql::alter', "TABLE spip_types_documents CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL ") ,
+	array('Sql::alter', "TABLE spip_types_documents DROP PRIMARY KEY"),
+	array('Sql::alter', "TABLE spip_types_documents DROP `id_type`"),
+	array('Sql::alter', "TABLE spip_types_documents DROP INDEX `extension`"),
 
 		## recreer la PRIMARY KEY sur spip_types_documents.extension
-	array('sql_alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)"),
+	array('Sql::alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)"),
 	);
 
 $GLOBALS['maj'][1939] = array(
-	array('sql_alter', "TABLE spip_visites CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_visites_articles CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_referers CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_referers CHANGE `visites_jour` `visites_jour` INT UNSIGNED DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_referers CHANGE `visites_veille` `visites_veille` INT UNSIGNED DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_referers_articles CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL")
+	array('Sql::alter', "TABLE spip_visites CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_visites_articles CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_referers CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_referers CHANGE `visites_jour` `visites_jour` INT UNSIGNED DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_referers CHANGE `visites_veille` `visites_veille` INT UNSIGNED DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_referers_articles CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL")
 	);
 
 $GLOBALS['maj'][1940] = array(
@@ -184,162 +184,162 @@ $GLOBALS['maj'][1941] = array(
 	);
 
 $GLOBALS['maj'][1942] = array(
-	array('sql_alter', "TABLE spip_auteurs CHANGE `statut` `statut` varchar(255)  DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_breves CHANGE `statut` `statut` varchar(6)  DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_messages CHANGE `statut` `statut` varchar(6)  DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_rubriques CHANGE `statut` `statut` varchar(10) DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_rubriques CHANGE `statut_tmp` `statut_tmp` varchar(10) DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_syndic CHANGE `statut` `statut` varchar(10) DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_syndic_articles CHANGE `statut` `statut` varchar(10) DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_forum CHANGE `statut` `statut` varchar(8) DEFAULT '0' NOT NULL"),
-	array('sql_alter', "TABLE spip_signatures CHANGE `statut` `statut` varchar(10) DEFAULT '0' NOT NULL")
+	array('Sql::alter', "TABLE spip_auteurs CHANGE `statut` `statut` varchar(255)  DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_breves CHANGE `statut` `statut` varchar(6)  DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_messages CHANGE `statut` `statut` varchar(6)  DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_rubriques CHANGE `statut` `statut` varchar(10) DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_rubriques CHANGE `statut_tmp` `statut_tmp` varchar(10) DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_syndic CHANGE `statut` `statut` varchar(10) DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_syndic_articles CHANGE `statut` `statut` varchar(10) DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_forum CHANGE `statut` `statut` varchar(8) DEFAULT '0' NOT NULL"),
+	array('Sql::alter', "TABLE spip_signatures CHANGE `statut` `statut` varchar(10) DEFAULT '0' NOT NULL")
 	);
 
 
 	// suppression de l'indexation dans la version standard
 $GLOBALS['maj'][1943] = array(
-	array('sql_alter', "TABLE spip_articles DROP KEY `idx`"),
-	array('sql_alter', "TABLE spip_articles DROP `idx`"),
-	array('sql_alter', "TABLE spip_auteurs DROP KEY `idx`"),
-	array('sql_alter', "TABLE spip_auteurs DROP `idx`"),
-	array('sql_alter', "TABLE spip_breves DROP KEY `idx`"),
-	array('sql_alter', "TABLE spip_breves DROP `idx`"),
-	array('sql_alter', "TABLE spip_mots DROP KEY `idx`"),
-	array('sql_alter', "TABLE spip_mots DROP `idx`"),
-	array('sql_alter', "TABLE spip_rubriques DROP KEY `idx`"),
-	array('sql_alter', "TABLE spip_rubriques DROP `idx`"),
-#	array('sql_alter', "TABLE spip_documents DROP KEY `idx`"),
-	array('sql_alter', "TABLE spip_documents DROP `idx`"),
-	array('sql_alter', "TABLE spip_syndic DROP KEY `idx`"),
-	array('sql_alter', "TABLE spip_syndic DROP `idx`"),
-	array('sql_alter', "TABLE spip_forum DROP KEY `idx`"),
-	array('sql_alter', "TABLE spip_forum DROP `idx`"),
-	array('sql_alter', "TABLE spip_signatures DROP KEY `idx`"),
-	array('sql_alter', "TABLE spip_signatures DROP `idx`"),
+	array('Sql::alter', "TABLE spip_articles DROP KEY `idx`"),
+	array('Sql::alter', "TABLE spip_articles DROP `idx`"),
+	array('Sql::alter', "TABLE spip_auteurs DROP KEY `idx`"),
+	array('Sql::alter', "TABLE spip_auteurs DROP `idx`"),
+	array('Sql::alter', "TABLE spip_breves DROP KEY `idx`"),
+	array('Sql::alter', "TABLE spip_breves DROP `idx`"),
+	array('Sql::alter', "TABLE spip_mots DROP KEY `idx`"),
+	array('Sql::alter', "TABLE spip_mots DROP `idx`"),
+	array('Sql::alter', "TABLE spip_rubriques DROP KEY `idx`"),
+	array('Sql::alter', "TABLE spip_rubriques DROP `idx`"),
+#	array('Sql::alter', "TABLE spip_documents DROP KEY `idx`"),
+	array('Sql::alter', "TABLE spip_documents DROP `idx`"),
+	array('Sql::alter', "TABLE spip_syndic DROP KEY `idx`"),
+	array('Sql::alter', "TABLE spip_syndic DROP `idx`"),
+	array('Sql::alter', "TABLE spip_forum DROP KEY `idx`"),
+	array('Sql::alter', "TABLE spip_forum DROP `idx`"),
+	array('Sql::alter', "TABLE spip_signatures DROP KEY `idx`"),
+	array('Sql::alter', "TABLE spip_signatures DROP `idx`"),
 
 	array('spip_query', "DROP TABLE spip_index"),
 	array('spip_query', "DROP TABLE spip_index_dico"),
 	);
 
 $GLOBALS['maj'][1944] = array(
-				array('sql_alter', "TABLE spip_documents CHANGE `taille` `taille` integer"),
-				array('sql_alter', "TABLE spip_documents CHANGE `largeur` `largeur` integer"),
-				array('sql_alter', "TABLE spip_documents CHANGE `hauteur` `hauteur` integer")
+				array('Sql::alter', "TABLE spip_documents CHANGE `taille` `taille` integer"),
+				array('Sql::alter', "TABLE spip_documents CHANGE `largeur` `largeur` integer"),
+				array('Sql::alter', "TABLE spip_documents CHANGE `hauteur` `hauteur` integer")
 	);
 
 $GLOBALS['maj'][1945] = array(
-  array('sql_alter', "TABLE spip_petitions CHANGE `email_unique` `email_unique` CHAR (3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_petitions CHANGE `site_obli` `site_obli` CHAR (3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_petitions CHANGE `site_unique` `site_unique` CHAR (3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_petitions CHANGE `message` `message` CHAR (3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_petitions CHANGE `texte` `texte` LONGTEXT DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_articles CHANGE `surtitre` `surtitre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_articles CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_articles CHANGE `soustitre` `soustitre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_articles CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_articles CHANGE `chapo` `chapo` mediumtext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_articles CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_articles CHANGE `ps` `ps` mediumtext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_articles CHANGE `accepter_forum` `accepter_forum` CHAR(3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_articles CHANGE `nom_site` `nom_site` tinytext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_articles CHANGE `url_site` `url_site` VARCHAR(255) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_articles CHANGE `url_propre` `url_propre` VARCHAR(255) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_auteurs CHANGE `nom` `nom` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_auteurs CHANGE `bio` `bio` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_auteurs CHANGE `email` `email` tinytext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_auteurs CHANGE `nom_site` `nom_site` tinytext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_auteurs CHANGE `url_site` `url_site` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_auteurs CHANGE `pass` `pass` tinytext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_auteurs CHANGE `low_sec` `low_sec` tinytext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_auteurs CHANGE `pgp` `pgp` TEXT DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_auteurs CHANGE `htpass` `htpass` tinytext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_breves CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_breves CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_breves CHANGE `lien_titre` `lien_titre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_breves CHANGE `lien_url` `lien_url` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_messages CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_messages CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_messages CHANGE `type` `type` varchar(6) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_messages CHANGE `rv` `rv` varchar(3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_mots CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_mots CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_mots CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_mots CHANGE `type` `type` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_mots CHANGE `url_propre` `url_propre` VARCHAR(255) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_groupes_mots CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_groupes_mots CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_groupes_mots CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_groupes_mots CHANGE `unseul` `unseul` varchar(3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_groupes_mots CHANGE `obligatoire` `obligatoire` varchar(3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_groupes_mots CHANGE `articles` `articles` varchar(3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_groupes_mots CHANGE `breves` `breves` varchar(3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_groupes_mots CHANGE `rubriques` `rubriques` varchar(3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_groupes_mots CHANGE `syndic` `syndic` varchar(3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_groupes_mots CHANGE `minirezo` `minirezo` varchar(3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_groupes_mots CHANGE `comite` `comite` varchar(3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_groupes_mots CHANGE `forum` `forum` varchar(3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_rubriques CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_rubriques CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_rubriques CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_rubriques CHANGE `url_propre` `url_propre` VARCHAR(255) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_documents CHANGE `extension` `extension` VARCHAR(10) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_documents CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_documents CHANGE `date` `date` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"),
-    array('sql_alter', "TABLE spip_documents CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_documents CHANGE `fichier` `fichier` varchar(255) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_types_documents CHANGE `extension` `extension` varchar(10) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_types_documents CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_types_documents CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_types_documents CHANGE `mime_type` `mime_type` varchar(100) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_syndic CHANGE `nom_site` `nom_site` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_syndic CHANGE `url_site` `url_site` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_syndic CHANGE `url_syndic` `url_syndic` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_syndic CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_syndic CHANGE `url_propre` `url_propre` VARCHAR(255) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_syndic CHANGE `syndication` `syndication` VARCHAR(3) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_syndic_articles CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_syndic_articles CHANGE `url` `url` VARCHAR(255) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_syndic_articles CHANGE `lesauteurs` `lesauteurs` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_syndic_articles CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_forum CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_forum CHANGE `texte` `texte` mediumtext DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_forum CHANGE `auteur` `auteur` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_forum CHANGE `email_auteur` `email_auteur` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_forum CHANGE `nom_site` `nom_site` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_forum CHANGE `url_site` `url_site` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_forum CHANGE `ip` `ip` varchar(16) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_signatures CHANGE `nom_email` `nom_email` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_signatures CHANGE `ad_email` `ad_email` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_signatures CHANGE `nom_site` `nom_site` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_signatures CHANGE `url_site` `url_site` text DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_signatures CHANGE `message` `message` mediumtext DEFAULT '' NOT NULL")
+	array('Sql::alter', "TABLE spip_petitions CHANGE `email_unique` `email_unique` CHAR (3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_petitions CHANGE `site_obli` `site_obli` CHAR (3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_petitions CHANGE `site_unique` `site_unique` CHAR (3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_petitions CHANGE `message` `message` CHAR (3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_petitions CHANGE `texte` `texte` LONGTEXT DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_articles CHANGE `surtitre` `surtitre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_articles CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_articles CHANGE `soustitre` `soustitre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_articles CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_articles CHANGE `chapo` `chapo` mediumtext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_articles CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_articles CHANGE `ps` `ps` mediumtext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_articles CHANGE `accepter_forum` `accepter_forum` CHAR(3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_articles CHANGE `nom_site` `nom_site` tinytext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_articles CHANGE `url_site` `url_site` VARCHAR(255) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_articles CHANGE `url_propre` `url_propre` VARCHAR(255) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_auteurs CHANGE `nom` `nom` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_auteurs CHANGE `bio` `bio` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_auteurs CHANGE `email` `email` tinytext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_auteurs CHANGE `nom_site` `nom_site` tinytext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_auteurs CHANGE `url_site` `url_site` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_auteurs CHANGE `pass` `pass` tinytext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_auteurs CHANGE `low_sec` `low_sec` tinytext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_auteurs CHANGE `pgp` `pgp` TEXT DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_auteurs CHANGE `htpass` `htpass` tinytext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_breves CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_breves CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_breves CHANGE `lien_titre` `lien_titre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_breves CHANGE `lien_url` `lien_url` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_messages CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_messages CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_messages CHANGE `type` `type` varchar(6) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_messages CHANGE `rv` `rv` varchar(3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_mots CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_mots CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_mots CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_mots CHANGE `type` `type` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_mots CHANGE `url_propre` `url_propre` VARCHAR(255) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_groupes_mots CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_groupes_mots CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_groupes_mots CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_groupes_mots CHANGE `unseul` `unseul` varchar(3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_groupes_mots CHANGE `obligatoire` `obligatoire` varchar(3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_groupes_mots CHANGE `articles` `articles` varchar(3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_groupes_mots CHANGE `breves` `breves` varchar(3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_groupes_mots CHANGE `rubriques` `rubriques` varchar(3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_groupes_mots CHANGE `syndic` `syndic` varchar(3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_groupes_mots CHANGE `minirezo` `minirezo` varchar(3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_groupes_mots CHANGE `comite` `comite` varchar(3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_groupes_mots CHANGE `forum` `forum` varchar(3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_rubriques CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_rubriques CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_rubriques CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_rubriques CHANGE `url_propre` `url_propre` VARCHAR(255) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_documents CHANGE `extension` `extension` VARCHAR(10) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_documents CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_documents CHANGE `date` `date` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"),
+    array('Sql::alter', "TABLE spip_documents CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_documents CHANGE `fichier` `fichier` varchar(255) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_types_documents CHANGE `extension` `extension` varchar(10) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_types_documents CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_types_documents CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_types_documents CHANGE `mime_type` `mime_type` varchar(100) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_syndic CHANGE `nom_site` `nom_site` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_syndic CHANGE `url_site` `url_site` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_syndic CHANGE `url_syndic` `url_syndic` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_syndic CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_syndic CHANGE `url_propre` `url_propre` VARCHAR(255) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_syndic CHANGE `syndication` `syndication` VARCHAR(3) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_syndic_articles CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_syndic_articles CHANGE `url` `url` VARCHAR(255) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_syndic_articles CHANGE `lesauteurs` `lesauteurs` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_syndic_articles CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_forum CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_forum CHANGE `texte` `texte` mediumtext DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_forum CHANGE `auteur` `auteur` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_forum CHANGE `email_auteur` `email_auteur` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_forum CHANGE `nom_site` `nom_site` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_forum CHANGE `url_site` `url_site` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_forum CHANGE `ip` `ip` varchar(16) DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_signatures CHANGE `nom_email` `nom_email` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_signatures CHANGE `ad_email` `ad_email` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_signatures CHANGE `nom_site` `nom_site` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_signatures CHANGE `url_site` `url_site` text DEFAULT '' NOT NULL"),
+    array('Sql::alter', "TABLE spip_signatures CHANGE `message` `message` mediumtext DEFAULT '' NOT NULL")
   );
 
 
 $GLOBALS['maj'][1946] = array(
-    array('sql_alter', "TABLE spip_forum DROP INDEX `id_parent`"),
-    array('sql_alter', "TABLE spip_forum DROP INDEX `id_article`"),
-    array('sql_alter', "TABLE spip_forum DROP INDEX `id_breve`"),
-    array('sql_alter', "TABLE spip_forum DROP INDEX `id_syndic`"),
-    array('sql_alter', "TABLE spip_forum DROP INDEX `id_rubrique`"),
-    array('sql_alter', "TABLE spip_forum DROP INDEX `date_thread`"),
-    array('sql_alter', "TABLE spip_forum DROP INDEX `statut`"),
-    array('sql_alter', "TABLE spip_forum ADD INDEX `optimal` (`statut`,`id_parent`,`id_article`,`date_heure`,`id_breve`,`id_syndic`,`id_rubrique`)")
+    array('Sql::alter', "TABLE spip_forum DROP INDEX `id_parent`"),
+    array('Sql::alter', "TABLE spip_forum DROP INDEX `id_article`"),
+    array('Sql::alter', "TABLE spip_forum DROP INDEX `id_breve`"),
+    array('Sql::alter', "TABLE spip_forum DROP INDEX `id_syndic`"),
+    array('Sql::alter', "TABLE spip_forum DROP INDEX `id_rubrique`"),
+    array('Sql::alter', "TABLE spip_forum DROP INDEX `date_thread`"),
+    array('Sql::alter', "TABLE spip_forum DROP INDEX `statut`"),
+    array('Sql::alter', "TABLE spip_forum ADD INDEX `optimal` (`statut`,`id_parent`,`id_article`,`date_heure`,`id_breve`,`id_syndic`,`id_rubrique`)")
 	);
 
 
 $GLOBALS['maj'][1947] = array(
 
-    array('sql_alter', "TABLE spip_articles DROP INDEX `url_site`"),
-    array('sql_alter', "TABLE spip_articles DROP INDEX `date_modif`"),
-    array('sql_alter', "TABLE spip_auteurs  DROP INDEX `lang`")
+    array('Sql::alter', "TABLE spip_articles DROP INDEX `url_site`"),
+    array('Sql::alter', "TABLE spip_articles DROP INDEX `date_modif`"),
+    array('Sql::alter', "TABLE spip_auteurs  DROP INDEX `lang`")
 	);
 
 	// mauvaise manip
 $GLOBALS['maj'][1949] = array(
 
-    array('sql_alter', "TABLE spip_versions DROP INDEX `date`"),
-    array('sql_alter', "TABLE spip_versions DROP INDEX `id_auteur`")
+    array('Sql::alter', "TABLE spip_versions DROP INDEX `date`"),
+    array('Sql::alter', "TABLE spip_versions DROP INDEX `id_auteur`")
 	);
 
 
@@ -352,7 +352,7 @@ function maj_1_950($installee) {
 	global $tables_auxiliaires;
 	include_spip('base/auxiliaires');
 	$v = $tables_auxiliaires[$k='spip_urls'];
-	sql_create($k, $v['field'], $v['key'], false, false);
+	Sql::create($k, $v['field'], $v['key'], false, false);
 
 
 	foreach(array('article'=>'id_article',
@@ -365,12 +365,12 @@ function maj_1_950($installee) {
 		$date = ($type == 'breve') ? 'date_heure' :
 		  (($type == 'auteur') ? 'maj' :
 		   (($type == 'mot') ? 'maj' : 'date'));
-		$q = @sql_select("url_propre AS url, $id_objet AS id_objet, '$type' AS type, $date as date", "spip_$table", "url_propre<>''");
+		$q = @Sql::select("url_propre AS url, $id_objet AS id_objet, '$type' AS type, $date as date", "spip_$table", "url_propre<>''");
 		if (!$q) return; // anormal, mais ne pas boucler en erreur
-		while ($r = sql_fetch($q)) sql_replace('spip_urls', $r);
-		spip_log("table $table : " . sql_count($q) . " urls propres copiees");
-		sql_alter("TABLE spip_$table DROP INDEX `url_propre`");
-		sql_alter("TABLE spip_$table DROP `url_propre`");
+		while ($r = Sql::fetch($q)) Sql::replace('spip_urls', $r);
+		spip_log("table $table : " . Sql::count($q) . " urls propres copiees");
+		Sql::alter("TABLE spip_$table DROP INDEX `url_propre`");
+		Sql::alter("TABLE spip_$table DROP `url_propre`");
 	}
 }
 
@@ -384,7 +384,7 @@ $GLOBALS['maj'][1950] =  array(array('maj_1_950', $GLOBALS['meta']['version_inst
 
 $GLOBALS['maj'][1951] = array(
 
-  array('sql_alter', "TABLE spip_versions CHANGE `id_version` `id_version` bigint(21) DEFAULT 0 NOT NULL")
+  array('Sql::alter', "TABLE spip_versions CHANGE `id_version` `id_version` bigint(21) DEFAULT 0 NOT NULL")
 	);
 
 
@@ -394,18 +394,18 @@ $GLOBALS['maj'][1951] = array(
 
 function maj_1_952() {
 
-	$ok = sql_alter("TABLE spip_documents CHANGE `mode` `mode` enum('vignette','image','document') DEFAULT NULL");
+	$ok = Sql::alter("TABLE spip_documents CHANGE `mode` `mode` enum('vignette','image','document') DEFAULT NULL");
 
 	if($ok) {
 
-		$s = sql_select("v.id_document as id_document", "spip_documents as d join spip_documents as v ON d.id_vignette=v.id_document");
+		$s = Sql::select("v.id_document as id_document", "spip_documents as d join spip_documents as v ON d.id_vignette=v.id_document");
 
 		$vignettes = array();
-		while ($t = sql_fetch($s))
+		while ($t = Sql::fetch($s))
 			$vignettes[] = intval($t['id_document']);
 
 		$ok &= spip_query("UPDATE spip_documents SET `mode`='image' WHERE `mode`='vignette'");
-		$ok &= spip_query("UPDATE spip_documents SET `mode`='vignette' WHERE `mode`='image' AND ".sql_in('id_document', $vignettes));
+		$ok &= spip_query("UPDATE spip_documents SET `mode`='vignette' WHERE `mode`='image' AND ".Sql::in('id_document', $vignettes));
 	}
 	if (!$ok) die('echec sur maj_1_952()');
 }
@@ -438,7 +438,7 @@ $GLOBALS['maj'][1954] = array(
 if ($GLOBALS['meta']['version_installee'] > 1.950)
   // 1.950 lisait un bug dans auxiliaires.php corrige a present
 	$GLOBALS['maj'][1955] = array(
-		  array('sql_alter', "TABLE spip_urls CHANGE `maj` date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL")
+		  array('Sql::alter', "TABLE spip_urls CHANGE `maj` date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL")
 		  );
 
 // la mise a jour vers 1.938 contient une erreur
@@ -447,16 +447,16 @@ if ($GLOBALS['meta']['version_installee'] > 1.950)
 $GLOBALS['maj'][1938] = array(
 
 # creer un champ plus informatif, et son index
-	array('sql_alter', "TABLE spip_documents ADD `extension` VARCHAR(10) DEFAULT ''  NOT NULL "),
+	array('Sql::alter', "TABLE spip_documents ADD `extension` VARCHAR(10) DEFAULT ''  NOT NULL "),
 # recopier l'ancien champ dans le nouveau
 	array('maj_1_938'),
 # supprimer l'ancien champ et son index
-	array('sql_alter', "TABLE spip_documents DROP INDEX `id_type`, DROP `id_type`"),
+	array('Sql::alter', "TABLE spip_documents DROP INDEX `id_type`, DROP `id_type`"),
 	## supprimer l'autoincrement avant de supprimer la PRIMARY KEY
-	array('sql_alter', "TABLE spip_types_documents CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL ") ,
+	array('Sql::alter', "TABLE spip_types_documents CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL ") ,
 # le champ id_type devient superflu
-	array('sql_alter', "TABLE spip_types_documents DROP `id_type`"),
-	array('sql_alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)")
+	array('Sql::alter', "TABLE spip_types_documents DROP `id_type`"),
+	array('Sql::alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)")
 	);
 
 
@@ -464,12 +464,12 @@ $GLOBALS['maj'][1938] = array(
 // http://trac.rezo.net/trac/spip/changeset/10482
 
 $GLOBALS['maj'][1957] = array(
-	array('sql_alter', "TABLE spip_mots CHANGE `id_groupe` `id_groupe` bigint(21) DEFAULT 0 NOT NULL"),
-    array('sql_alter', "TABLE spip_documents CHANGE `mode` `mode` ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL")
+	array('Sql::alter', "TABLE spip_mots CHANGE `id_groupe` `id_groupe` bigint(21) DEFAULT 0 NOT NULL"),
+    array('Sql::alter', "TABLE spip_documents CHANGE `mode` `mode` ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL")
 	);
 
 // Ce champ est inutile et provoque une erreur a l'insertion qui l'oublie
 $GLOBALS['maj'][1958] = array(
-	array('sql_alter', "TABLE spip_referers_articles DROP date")
+	array('Sql::alter', "TABLE spip_referers_articles DROP date")
 );
 ?>

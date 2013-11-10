@@ -59,8 +59,8 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 	if (!isset($cache[$serveur][$table][$recherche])){
 		$hash_serv = ($serveur?substr(md5($serveur),0,16):'');
 		$hash = substr(md5($recherche . $table),0,16);
-		$where = "(resultats.recherche='$hash' AND resultats.table_objet=".sql_quote($table)." AND resultats.serveur='$hash_serv')";
-		$row = sql_fetsel('UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(resultats.maj) AS fraicheur','spip_resultats AS resultats',$where,'','fraicheur DESC','0,1');
+		$where = "(resultats.recherche='$hash' AND resultats.table_objet=".Sql::quote($table)." AND resultats.serveur='$hash_serv')";
+		$row = Sql::fetsel('UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(resultats.maj) AS fraicheur','spip_resultats AS resultats',$where,'','fraicheur DESC','0,1');
 		if (!$row
 		  OR ($row['fraicheur']>$delai_fraicheur)
 		  OR (defined('_VAR_MODE') AND _VAR_MODE=='recalcul')){
@@ -93,7 +93,7 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 		// et les resultats trop vieux avec une marge
 		// pas de AS resultats dans un delete (mysql)
 		$whered = str_replace(array("resultats.recherche","resultats.table_objet","resultats.serveur"),array("recherche","table_objet","serveur"),$where);
-		sql_delete('spip_resultats', 'NOT(' .sql_date_proche('maj', (0-($delai_fraicheur+100)), " SECOND") . ") OR ($whered)");
+		Sql::delete('spip_resultats', 'NOT(' .Sql::date_proche('maj', (0-($delai_fraicheur+100)), " SECOND") . ") OR ($whered)");
 
 		// inserer les resultats dans la table de cache des resultats
 		if (count($points)){
@@ -107,7 +107,7 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 					'serveur' => $hash_serv,
 				);
 			}
-			sql_insertq_multi('spip_resultats',$tab_couples,array());
+			Sql::insertq_multi('spip_resultats',$tab_couples,array());
 		}
 	}
 
@@ -115,8 +115,8 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 		if (!$serveur)
 			$cache[$serveur][$table][$recherche] = array("resultats.points AS points",$where);
 		else {
-			if (sql_countsel('spip_resultats as resultats',$where))
-			$rows = sql_allfetsel('resultats.id,resultats.points','spip_resultats as resultats',$where);
+			if (Sql::countsel('spip_resultats as resultats',$where))
+			$rows = Sql::allfetsel('resultats.id,resultats.points','spip_resultats as resultats',$where);
 			$cache[$serveur][$table][$recherche] = generer_select_where_explicites($table, $primary, $rows, $serveur);
 		}
 	}
@@ -149,7 +149,7 @@ function generer_select_where_explicites($table, $primary, $rows, $serveur){
 
 		foreach ($listes_ids as $p => $ids)
 			$select .= "+$p*(".
-			           sql_in("$table.$primary", $ids,'',$serveur)
+			           Sql::in("$table.$primary", $ids,'',$serveur)
 			           .") ";
 
 		return array("$select AS points ",calcul_mysql_in("$table.$primary",array_map('reset',$rows),'',$serveur));

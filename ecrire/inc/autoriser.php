@@ -17,8 +17,6 @@
 **/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('base/abstract_sql');
-
 /**
  * Tracer les autorisations dans tmp/spip.log pour débug ?
  */
@@ -122,7 +120,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($qui === NULL OR $qui==='')
 	  $qui = $GLOBALS['visiteur_session'] ? $GLOBALS['visiteur_session'] : array('statut' => '', 'id_auteur' =>0, 'webmestre' => 'non');
 	elseif (is_numeric($qui)) {
-		$qui = sql_fetsel("*", "spip_auteurs", "id_auteur=".$qui);
+		$qui = Sql::fetsel("*", "spip_auteurs", "id_auteur=".$qui);
 	}
 
 	// Admins restreints, on construit ici (pas generique mais...)
@@ -320,7 +318,7 @@ function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
 		if (!$desc)
 			return false;
 		if (isset($desc['field']['statut'])){
-			$statut = sql_getfetsel("statut", $desc['table'], id_table_objet($type)."=".intval($id));
+			$statut = Sql::getfetsel("statut", $desc['table'], id_table_objet($type)."=".intval($id));
 		}
 		else
 			$statut = 'publie'; // pas de statut => publie
@@ -462,10 +460,10 @@ function autoriser_rubrique_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	if (!$id = intval($id))
 		return false;
 
-	if (sql_countsel('spip_rubriques', "id_parent=".intval($id)))
+	if (Sql::countsel('spip_rubriques', "id_parent=".intval($id)))
 		return false;
 
-	if (sql_countsel('spip_articles', "id_rubrique=".intval($id)." AND (statut<>'poubelle')"))
+	if (Sql::countsel('spip_articles', "id_rubrique=".intval($id)." AND (statut<>'poubelle')"))
 		return false;
 
 	$compte = pipeline('objet_compte_enfants',array('args'=>array('objet'=>'rubrique','id_objet'=>$id),'data'=>array()));
@@ -491,7 +489,7 @@ function autoriser_rubrique_supprimer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
-	$r = sql_fetsel("id_rubrique,statut", "spip_articles", "id_article=".sql_quote($id));
+	$r = Sql::fetsel("id_rubrique,statut", "spip_articles", "id_article=".Sql::quote($id));
 
 	if (!function_exists('auteurs_article'))
 		include_spip('inc/auth'); // pour auteurs_article si espace public
@@ -523,7 +521,7 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_article_creer_dist($faire, $type, $id, $qui, $opt) {
-	return (sql_countsel('spip_rubriques')>0 AND in_array($qui['statut'], array('0minirezo', '1comite')));
+	return (Sql::countsel('spip_rubriques')>0 AND in_array($qui['statut'], array('0minirezo', '1comite')));
 }
 
 /**
@@ -549,7 +547,7 @@ function autoriser_article_voir_dist($faire, $type, $id, $qui, $opt){
 		$statut = $opt['statut'];
 	else {
 		if (!$id) return false;
-		$statut = sql_getfetsel("statut", "spip_articles", "id_article=".intval($id));
+		$statut = Sql::getfetsel("statut", "spip_articles", "id_article=".intval($id));
 	}
 
 	return
@@ -690,7 +688,7 @@ function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut'] == '0minirezo'
 		AND !$qui['restreint']) return true;
 	// "Voir en ligne" si l'auteur a un article publie
-	$n = sql_fetsel('A.id_article', 'spip_auteurs_liens AS L LEFT JOIN spip_articles AS A ON (L.objet=\'article\' AND L.id_objet=A.id_article)', "A.statut='publie' AND L.id_auteur=".sql_quote($id));
+	$n = Sql::fetsel('A.id_article', 'spip_auteurs_liens AS L LEFT JOIN spip_articles AS A ON (L.objet=\'article\' AND L.id_objet=A.id_article)', "A.statut='publie' AND L.id_auteur=".Sql::quote($id));
 	return $n ? true : false;
 }
 
@@ -770,7 +768,7 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 					return true;
 			}
 			else if ($id_auteur = intval($id)) {
-				$t = sql_fetsel("statut", "spip_auteurs", "id_auteur=$id_auteur");
+				$t = Sql::fetsel("statut", "spip_auteurs", "id_auteur=$id_auteur");
 				if ($t AND $t['statut'] != '0minirezo')
 					return true;
 				else
@@ -870,7 +868,7 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 	$rubriques = array();
 	if (
 		(!isset($GLOBALS['meta']['version_installee']) OR $GLOBALS['meta']['version_installee']>16428)
-	  AND $r = sql_allfetsel('id_objet', 'spip_auteurs_liens', "id_auteur=".intval($id_auteur)." AND objet='rubrique' AND id_objet!=0")
+	  AND $r = Sql::allfetsel('id_objet', 'spip_auteurs_liens', "id_auteur=".intval($id_auteur)." AND objet='rubrique' AND id_objet!=0")
 	  AND count($r)) {
 		$r = array_map('reset',$r);
 
@@ -1235,7 +1233,7 @@ function autoriser_echafauder_dist($faire, $type, $id, $qui, $opt){
  */
 function auteurs_article($id_article, $cond='')
 {
-	return sql_allfetsel("id_auteur", "spip_auteurs_liens", "objet='article' AND id_objet=$id_article". ($cond ? " AND $cond" : ''));
+	return Sql::allfetsel("id_auteur", "spip_auteurs_liens", "objet='article' AND id_objet=$id_article". ($cond ? " AND $cond" : ''));
 }
 
 
@@ -1265,7 +1263,7 @@ function acces_restreint_rubrique($id_rubrique) {
 function verifier_table_non_vide($table='spip_rubriques') {
 	static $done = array();
 	if (!isset($done[$table]))
-		 $done[$table] = sql_countsel($table)>0;
+		 $done[$table] = Sql::countsel($table)>0;
 	return $done[$table];
 }
 

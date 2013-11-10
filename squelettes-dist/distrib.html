@@ -1,0 +1,7 @@
+#HTTP_HEADER{Content-Type: application/x-javascript; charset=#CHARSET}
+document.write('<div class="distrib" style="background: #EEEEEE; padding: .8em; border: 1px solid #666666; color: #333333;">');
+document.write('<h3 style="font-weight: bold;"><a href="#URL_SITE_SPIP/">[(#NOM_SITE_SPIP|addslashes)]</a></h3><ul>');
+<BOUCLE_articles(ARTICLES){!par date}{0,10}>
+document.write('<li><a href="[(#URL_ARTICLE|url_absolue)]">[(#TITRE|addslashes)]</a></li>\n');
+</BOUCLE_articles>
+document.write('</ul></div>');

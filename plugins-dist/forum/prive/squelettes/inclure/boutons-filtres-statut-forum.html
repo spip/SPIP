@@ -1,0 +1,26 @@
+#SET{self,#SELF|parametre_url{debut_forum,''}}
+#SET{prive,#ENV{type_message,public}|=={interne}|?{'priv%','%'}}
+#SET{public,#ENV{type_message,public}|=={public}|?{'priv%',''}}
+#SET{vide,#ENV{type_message,public}|=={vide}|?{'','%'}}
+
+<div class='onglets_simple second clearfix'>
+<ul class="statut statut_forum">
+<li>[(#GET{self}|parametre_url{statut,''}|lien_ou_expose{<:forum:messages_tous:>,#ENV{statut,''}|=={''},ajax})]</li>
+
+#SET{statut,#ENV{type_message,public}|=={interne}|?{'prive','publie'}}
+<BOUCLE_cpt_1(FORUMS){id_forum?}{id_auteur?}{id_objet?}{objet?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?} />
+[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_1>
+
+#SET{statut,#ENV{type_message,public}|=={interne}|?{'privrac','prop'}}
+<BOUCLE_cpt_2(FORUMS){id_forum?}{id_auteur?}{id_objet?}{objet?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?} />
+[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_2>
+
+#SET{statut,#ENV{type_message,public}|=={interne}|?{'privadm','spam'}}
+<BOUCLE_cpt_3(FORUMS){id_forum?}{id_auteur?}{id_objet?}{objet?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?} />
+[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_3>
+
+#SET{statut,#ENV{type_message,public}|=={interne}|?{'privoff','off'}}
+<BOUCLE_cpt_4(FORUMS){id_forum?}{id_auteur?}{id_objet?}{objet?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?} />
+[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_4>
+</ul>
+</div>

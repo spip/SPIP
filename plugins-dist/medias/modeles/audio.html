@@ -1,0 +1,15 @@
+<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}>
+<div	class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
+	style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};] (#ENV{align,center}|=={center}|non)[width:(#ENV{largeur}|max{120})px]']>
+<object	data='#URL_DOCUMENT' 
+	type='#MIME_TYPE'
+	width='#ENV{largeur, #LARGEUR|?{#LARGEUR,150}}'
+	height='#ENV{hauteur, #HAUTEUR|?{#HAUTEUR,20}}' >
+	<param name='src' value='#URL_DOCUMENT' />
+	[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
+	[(#ENV*|env_to_params)]
+</object>
+[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>]
+[<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
+</div>
+</BOUCLE_tous>

@@ -1,0 +1,41 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	num titre,1,
+	id_document,1,
+	points,-1
+}})
+]<B_liste_doc>
+#ANCRE_PAGINATION
+<div class="liste-objets documents">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{medias:un_document,medias:des_files}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre principale' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
+			<th class='auteur' scope='col'><:auteur:></th>
+			<th class='date secondaire' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_document,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_doc(DOCUMENTS){id_document?}{id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#STATUT|puce_statut{document,#ID_DOCUMENT,#ID_RUBRIQUE})]</td>
+			<td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{20,26})]<a href="[(#ID_DOCUMENT|generer_url_entite{document})]"
+																					title="<:info_numero_abbreviation|attribut_html:> #ID_DOCUMENT">[(#RANG). ][(#TITRE|sinon{[(#FICHIER|basename)]})]</a></td>
+			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_document}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,document,#ID_DOCUMENT}|?{
+				<a href="[(#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT})]">#ID_DOCUMENT</a>,
+				#ID_DOCUMENT
+			})]</td>
+		</tr>
+	</BOUCLE_liste_doc>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
+</div>
+</B_liste_doc>[
+<div class="liste-objets documents caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_doc>

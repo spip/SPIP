@@ -1,0 +1,50 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+<BOUCLE_docslies(DOCUMENTS documents_liens types_documents){id_document}{id_objet}{objet}{statut?}>
+	<div class="item #MODE" id="doc#ID_DOCUMENT"
+			 onclick="jQuery(this).toggleClass('hover');">
+		<h3 class="titrem">[<span class="fichier">(#FICHIER*|basename)</span>]
+			<span class="image_loading"></span>
+			[<span class="#EDIT{titre} titre">(#TITRE|sinon{<i class="sanstitre"><:info_sans_titre:></i>})</span>]
+			[(#CHEMIN_IMAGE{#MODE|=={image}|?{image-24.png,doc-24.png}}|balise_img{'',cadre-icone})]
+		</h3>
+		<div class="infos">
+			[(#EXTENSION|match{gif|png|jpg}|oui) #SET{id,#ID_VIGNETTE|?{#ID_VIGNETTE,#ID_DOCUMENT}}
+			<div class="tourner">
+				[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{tourner-gauche-12.png}|balise_img{<:medias:image_tourner_gauche:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',-90'},#SELF},ajax})]
+				[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{tourner-droite-12.png}|balise_img{<:medias:image_tourner_droite:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',90'},#SELF},ajax})]
+				[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{tourner-180-12.png}|balise_img{<:medias:image_tourner_180:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',180'},#SELF},ajax})]
+			</div>
+			]
+			[(#LOGO_DOCUMENT{#URL_DOCUMENT}|image_reduire{150,150})]
+			<BOUCLE_type_doc(TYPES_DOCUMENTS){extension}>
+			[(#MODE|=={document}|oui)<div class="type">
+			[(#TITRE|sinon{#VAL{<:medias:info_document:>}|concat{' ',#EXTENSION|majuscules}})]
+				</div>
+			]
+			[(#ID_DOCUMENT|medias_raccourcis_doc{#_docslies:TITRE,#_docslies:DESCRIPTIF,#INCLUS,#LARGEUR,#HAUTEUR,#MODE,#VU,#MEDIA})]
+			</BOUCLE_type_doc>
+				[<div class="mode">(#INCLUS|=={image}|et{#EVAL{_BOUTON_MODE_IMAGE}}|oui)
+					[(#MODE|=={image}|oui)
+					[(#BOUTON_ACTION{<:medias:upload_info_mode_document:>,#URL_ACTION_AUTEUR{changer_mode_document,#ID_DOCUMENT-document,#SELF},ajax})]
+					][(#MODE|=={image}|non)
+					[(#BOUTON_ACTION{<:medias:upload_info_mode_image:>,#URL_ACTION_AUTEUR{changer_mode_document,#ID_DOCUMENT-image,#SELF},ajax})]
+					]
+				</div>]
+			<div class="actions">
+				<BOUCLE_compte(documents_liens){id_document}{0,2} />
+				[(#TOTAL_BOUCLE|=={1}|et{#AUTORISER{modifier,#OBJET,#ID_OBJET}})[(#BOUTON_ACTION{<:medias:bouton_enlever_supprimer_document:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-#ID_DOCUMENT-suppr,#SELF},ajax,<:medias:bouton_enlever_supprimer_document_confirmation:>,'',[(function(){jQuery("#doc(#ID_DOCUMENT)").animateRemove();return true;})()]})]<span>|</span>]
+				[(#ID_OBJET|<{0}|ou{#AUTORISER{modifier,#OBJET,#ID_OBJET}})[(#BOUTON_ACTION{<:medias:bouton_enlever_document:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-#ID_DOCUMENT,#SELF},ajax,'','',[(function(){jQuery("#doc(#ID_DOCUMENT)").animateRemove();return true;})()]})]<span>|</span>]
+				<a href="#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT}" target="_blank" class="editbox"><:medias:bouton_modifier_document:></a>
+				<//B_compte>
+				[(#PIPELINE{document_desc_actions,#ARRAY{args,#ARRAY{id_document,#ID_DOCUMENT,position,document_case},data,''}})]
+			</div>
+			[(#PIPELINE{afficher_metas_document,#ARRAY{args,#ARRAY{'quoi','document_case','id_document',#ID_DOCUMENT},data,''}})]
+		</div>
+	</div>
+</BOUCLE_docslies>

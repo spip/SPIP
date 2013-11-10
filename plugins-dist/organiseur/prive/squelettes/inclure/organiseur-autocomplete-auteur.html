@@ -1,0 +1,5 @@
+#HTTP_HEADER{Content-type:text/plain;charset=#CHARSET}
+#SET{q,#VAL{%}|concat{#ENV{q,''}|replace{\s+,%},%}}
+<BOUCLE_auteur(AUTEURS){nom like #GET{q}}{0,20}{tout}>[(#NOM|textebrut|replace{'\|',' '})]|#ID_AUTEUR
+</BOUCLE_auteur>[(#CONFIG{messagerie/autoriser_email}|=={oui}|oui)[(#ENV{q}|email_valide|?{#ENV{q}})|#ENV{q}
+]]<//B_auteur>

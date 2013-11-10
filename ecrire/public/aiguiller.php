@@ -31,7 +31,6 @@ function securiser_redirect_action($redirect){
 function traiter_appels_actions(){
 	// cas de l'appel qui renvoie une redirection (302) ou rien (204)
 	if ($action = _request('action')) {
-		include_spip('base/abstract_sql'); // chargement systematique pour les actions
 		include_spip('inc/autoriser');
 		include_spip('inc/headers');
 		include_spip('inc/actions');

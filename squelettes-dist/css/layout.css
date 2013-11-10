@@ -1,0 +1,91 @@
+/* --------------------------------------------------------------
+
+   layout.css
+   Disposition des blocs principaux
+   cf.: http://romy.tetue.net/structure-html-de-base
+
+-------------------------------------------------------------- */
+
+body { text-align: center; background: #FFF url(img/background.png); border-top: 5px solid; }
+.page { position: relative; width: 900px; margin: 0 auto; padding: 50px 1.5em; text-align: left;  }
+
+.header {}
+.main { padding: 1.5em 0; }
+.footer { clear: both; padding: 1.5em 0 0; border-top: 2px solid; }
+
+.wrapper { clear: both; float: left; width: 70%; overflow: hidden; }
+.content { min-height: 350px; }
+.aside { float: right; width: 25%; overflow: hidden; }
+
+
+/* Entete et barre de navigation
+------------------------------------------ */
+
+.header { padding-bottom: 1.5em; padding-right: 30%; border-bottom: 1px solid; }
+.header #logo { display: block; margin: 0; line-height: 1; font-weight: bold;  }
+.header #logo,
+.header #logo a,
+.header #logo a:hover { background: transparent; text-decoration: none; color: #222; }
+.header #slogan { margin: 0; }
+
+.formulaire_menu_lang { position: absolute; right: 0; top: .9em; display: block; width: 30%; }
+
+.nav { border: solid #222; border-width: 1px 0; }
+.nav ul {}
+.nav ul li {}
+.nav ul li a { float: left; display: block; padding: .5em 1em; border-right: 1px solid #222; text-decoration: none; }
+.nav ul li.on a { background: #EED; color: #222; font-weight: normal; }
+.nav ul li a:focus,
+.nav ul li a:hover,
+.nav ul li a:active { background: #222; color: #FFF; }
+
+#formulaire_recherche { position: absolute; top: 50px; right: 50px; border: 0; }
+
+.footer .colophon { float: left; height: 40px; width: 70%; margin: 0; }
+.footer .generator { float: right; }
+.footer .generator a { padding: 0; background: none; }
+
+/* Gabarit d'impression
+------------------------------------------ */
+@media print {
+.page,
+.wrapper,
+.content { width: auto; }
+.nav,
+.arbo,
+.aside,
+.footer { display: none; }
+}
+
+/* Affichage sur petits ecrans
+Cf.: http://www.alsacreations.com/astuce/lire/1177
+------------------------------------------ */
+@media (max-width: 640px) {
+
+/* passer tous les elements de largeur fixe en largeur automatique */
+body,
+.page,
+.header,
+.main,
+.footer,
+.wrapper,
+.content,
+.aside { width: auto !important; margin: auto !important; padding: auto !important; }
+
+.page { margin: 0; padding: 5%; }
+
+/* Passer a une seule colonne (a appliquer aux elements multi-colonnes) */
+.content,
+.aside { clear: both; float: none !important; width: auto !important; }
+.nav ul li a { float: none; border: 0; }
+#formulaire_recherche { display: none; position: static; text-align: center; }
+.arbo { display: none; }
+.footer .colophon { width: auto; float: none; }
+.footer .generator { display: none; }
+
+/* header du calendrier full-calendar */
+table.fc-header td { display: block; text-align: left; }
+
+}
+
+/* end */

@@ -1,0 +1,21 @@
+<paquet
+	prefix="dump"
+	categorie="maintenance"
+	version="1.6.7"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/base-backup-32.png"
+>	
+
+	<nom>Dump</nom>
+	<!-- Sauvegarde et restauration de la base SPIP -->
+
+	<auteur>Collectif SPIP</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+	<traduire module="dump" reference="fr" gestionnaire="salvatore" />
+
+	<menu nom="sauvegarder" titre="dump:texte_sauvegarde_base" parent="menu_administration" position="1" icone="images/base-backup-16.png" action="sauvegarder" />
+	<menu nom="restaurer" titre="dump:bouton_restaurer_base" parent="menu_administration" position="2" icone="images/base-restore-16.png" action="restaurer" />
+</paquet>

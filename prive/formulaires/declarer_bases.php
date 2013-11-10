@@ -34,7 +34,7 @@ function formulaires_declarer_bases_charger_dist(){
 		'_bases_deja' => $deja,
 		'_bases_prop' => defined('_DECLARER_serveur_db')?liste_bases(_DECLARER_serveur_db):'',
 		'_tables' => (defined('_DECLARER_serveur_db') AND defined('_DECLARER_choix_db'))?
-				$tables = sql_alltable('%', _DECLARER_serveur_db)
+				$tables = Sql::alltable('%', _DECLARER_serveur_db)
 				:
 				array(),
 		'main_db' => '',
@@ -73,7 +73,7 @@ function liste_serveurs() {
 
 function liste_bases($server_db){
 	if (is_null($server_db)
-	  OR !$result = sql_listdbs($server_db))
+	  OR !$result = Sql::listdbs($server_db))
 		return '';
 
 	$noms = array();
@@ -82,7 +82,7 @@ function liste_bases($server_db){
 	if (is_array($result)){
 		$noms = $result;
 	} else {
-		while ($row = sql_fetch($result, $server_db)) {
+		while ($row = Sql::fetch($result, $server_db)) {
 			$noms[] = reset($row);
 		}
 	}
@@ -153,7 +153,7 @@ function formulaires_declarer_bases_verifier_2_dist(){
 		$erreurs['choix_db']=_T('info_obligatoire');
 	else {
 		define('_ECRIRE_INSTALL',1); // hackons sqlite
-		if (!sql_selectdb($choix_db, _DECLARER_serveur_db))
+		if (!Sql::selectdb($choix_db, _DECLARER_serveur_db))
 			$erreurs['choix_db']=_T('avis_base_inaccessible',array('base'=>$choix_db));
 		else
 			define('_DECLARER_choix_db',$choix_db);

@@ -20,7 +20,7 @@ function maj_v014_dist($version_installee, $version_cible)
 		spip_query("UPDATE spip_mots SET type='Mots sans groupe...' WHERE type=''");
 
 		$result = spip_query("SELECT * FROM spip_mots GROUP BY type");
-		while($row = sql_fetch($result)) {
+		while($row = Sql::fetch($result)) {
 				$type = addslashes($row['type']);
 				// Old style, doit echouer
 				spip_log('ne pas tenir compte de l erreur spip_groupes_mots ci-dessous:', 'mysql');
@@ -28,7 +28,7 @@ function maj_v014_dist($version_installee, $version_cible)
 				// New style, devrait marcher
 				spip_query("INSERT INTO spip_groupes_mots 					(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)					VALUES (\"$type\", 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
 		}
-		sql_delete("spip_mots", "titre='kawax'");
+		Sql::delete("spip_mots", "titre='kawax'");
 		maj_version (1.404);
 	}
 
@@ -36,7 +36,7 @@ function maj_v014_dist($version_installee, $version_cible)
 		spip_query("ALTER TABLE spip_mots ADD id_groupe bigint(21) NOT NULL");
 	
 		$result = spip_query("SELECT * FROM spip_groupes_mots");
-		while($row = sql_fetch($result)) {
+		while($row = Sql::fetch($result)) {
 				$id_groupe = addslashes($row['id_groupe']);
 				$type = addslashes($row['titre']);
 				spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type='$type'");
@@ -51,7 +51,7 @@ function maj_v014_dist($version_installee, $version_cible)
 
 		$types = array('jpg' => 1, 'png' => 2, 'gif' => 3);
 
-		while ($row = @sql_fetch($result)) {
+		while ($row = @Sql::fetch($result)) {
 			$id_article = $row['id_article'];
 			$images = $row['images'];
 			$images = explode(",", $images);
@@ -116,7 +116,7 @@ function maj_v014_dist($version_installee, $version_cible)
 	if (upgrade_vers(1.418, $version_installee, $version_cible)) {
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE statut = '0minirezo' AND email != '' ORDER BY id_auteur LIMIT 1");
 
-		if ($webmaster = sql_fetch($result)) {
+		if ($webmaster = Sql::fetch($result)) {
 			ecrire_meta('email_webmaster', $webmaster['email']);
 		}
 		maj_version (1.418);
@@ -217,10 +217,10 @@ function maj_v014_dist($version_installee, $version_cible)
 
 	if (upgrade_vers(1.459, $version_installee, $version_cible)) {
 		$result = spip_query("SELECT type FROM spip_mots GROUP BY type");
-		while ($row = sql_fetch($result)) {
+		while ($row = Sql::fetch($result)) {
 			$type = addslashes($row['type']);
 			$res = spip_query("SELECT * FROM spip_groupes_mots WHERE titre='$type'");
-			if (sql_count($res) == 0) {
+			if (Sql::count($res) == 0) {
 				$s = spip_query("INSERT INTO spip_groupes_mots (titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum) VALUES ('$type', 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
 			  if ($id_groupe = mysql_insert_id($s))
 					spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type='$type'");
@@ -235,13 +235,13 @@ function maj_v014_dist($version_installee, $version_cible)
 		// dans la precedente version du paragraphe de maj 1.459
 		// et supprimer ceux-ci
 		$result = spip_query("SELECT * FROM spip_groupes_mots ORDER BY id_groupe");
-		while ($row = sql_fetch($result)) {
+		while ($row = Sql::fetch($result)) {
 			$titre = addslashes($row['titre']);
 			if (! $vu[$titre] ) {
 				$vu[$titre] = true;
 				$id_groupe = $row['id_groupe'];
 				spip_query("UPDATE spip_mots SET id_groupe=$id_groupe WHERE type='$titre'");
-				sql_delete("spip_groupes_mots", "titre='$titre' AND id_groupe<>$id_groupe");
+				Sql::delete("spip_groupes_mots", "titre='$titre' AND id_groupe<>$id_groupe");
 			}
 		}
 		maj_version (1.460);
@@ -262,7 +262,7 @@ function maj_v014_dist($version_installee, $version_cible)
 	// l'upgrade < 1.462 ci-dessus etait fausse, d'ou correctif
 	if (upgrade_vers(1.464, $version_installee, $version_cible) AND ($version_installee >= 1.462)) {
 		$res = spip_query("SELECT id_type, extension FROM spip_types_documents WHERE id_type NOT IN (1,2,3)");
-		while ($row = sql_fetch($res)) {
+		while ($row = Sql::fetch($res)) {
 			$extension = $row['extension'];
 			$id_type = $row['id_type'];
 			spip_query("UPDATE spip_documents SET id_type=$id_type	WHERE fichier like '%.$extension'");

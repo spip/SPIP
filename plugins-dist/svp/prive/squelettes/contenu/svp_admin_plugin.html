@@ -1,0 +1,46 @@
+[(#AUTORISER{configurer,_plugins}|sinon_interdire_acces)]
+
+[(#REM) <!-- Barre d'onglets de premier niveau --> ]
+[(#VAL{plugins}|barre_onglets{plugins_actifs})]
+
+<div class="onglets_simple second clearfix">
+	<ul class="voir">
+		<li class="first">[(#SELF|parametre_url{voir,tous}|lien_ou_expose{<:plugins_tous_liste:>,[(#ENV{voir,actif}|=={tous}|oui)],ajax})]</li>
+		<li>[(#SELF|parametre_url{voir,actif}|lien_ou_expose{<:plugins_actifs_liste:>,[(#ENV{voir,actif}|=={actif}|oui)],ajax})]</li>
+		<li>
+		[(#ENV{verrouille, non}|=={oui}|?{
+			<span class="off"><:svp:plugins_inactifs_liste:></span>,
+			[(#SELF|parametre_url{voir,inactif}|lien_ou_expose{<:svp:plugins_inactifs_liste:>,[(#ENV{voir,actif}|=={inactif}|oui)],ajax})]}
+		)]
+		</li>
+	</ul>
+	<ul class="verrouille">
+		<li class="first">[(#SELF|parametre_url{verrouille,tous}|lien_ou_expose{<:plugins_tous_liste:>,[(#ENV{verrouille,non}|=={tous}|oui)],ajax})]</li>
+		<li>
+		[(#ENV{voir,actif}|=={inactif}|?{
+			<span class="off"><:svp:plugins_verrouilles_liste:></span>,
+			[(#SELF|parametre_url{verrouille,oui}|lien_ou_expose{<:svp:plugins_verrouilles_liste:>,[(#ENV{verrouille,non}|=={oui}|oui)],ajax})]}
+		)]
+		</li>
+		<li>[(#SELF|parametre_url{verrouille,non}|lien_ou_expose{<:svp:plugins_non_verrouilles_liste:>,[(#ENV{verrouille,non}|=={non}|oui)],ajax})]</li>
+	</ul>
+</div>
+
+<div class="ajax noscroll">
+	#FORMULAIRE_ADMIN_PLUGIN{#ENV{voir},#ENV{verrouille},#ENV{id_paquet}}
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    jQuery(function(){
+		jQuery('#contenu .svp_retour').on('hover',function(){
+			if (jQuery('.box .inner .hd h3 img.close', this).length == 0) {
+				jQuery('.box .inner .hd h3', this)
+					.append("[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{class,close})]")
+					.on('click',function(){
+						jQuery(this).parents('.box').remove();
+					});
+			}
+		});
+    });
+    //]]>
+</script>

@@ -1,0 +1,24 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_mess(MESSAGES){id_message}{statut?}{tout}>
+[(#VAL{organiseur:notification_message_publie_1}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]
+
+<BOUCLE_a(AUTEURS){id_auteur}>
+<:organiseur:notification_message_recu_de{nom=#NOM}:>
+</BOUCLE_a>
+#SET{url,#URL_ECRIRE{message,id_message=#ID_MESSAGE}|url_absolue}
+<:organiseur:notification_message_lire_a_ladresse{url=#GET{url}}:>
+
+----
+
+Sujet : #TITRE
+Message :
+#TEXTE
+
+</BOUCLE_mess>
+#FILTRE{supprimer_tags|filtrer_entites|trim}

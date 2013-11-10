@@ -1,0 +1,82 @@
+[(#AUTORISER{moderer,forum}|sinon_interdire_acces)]
+[(#VAL{_INTERDIRE_TEXTE_HTML}|define{oui}|vide) Activer l'echappement du HTML dans cette page de moderation]
+<h1 class="grostitre"><:forum:titre_forum_suivi:>[(#VAL{forums_}|concat{#ENV{type_message,public}}|bouton_spip_rss)]</h1>
+
+#SET{self,#SELF|parametre_url{id_forum|email_auteur|ip|id_auteur|auteur|debut_id_forum,''}}
+
+[(#ENV{objet}|et{#ENV{id_objet}})
+#BOITE_OUVRIR{'','note'}
+	<p><:forum:texte_messages_publics:></p>
+	<a class='annule_filtre' href='[(#GET{self}|parametre_url{id_objet|objet,''})]' title="<:forum:tout_voir|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:forum:tout_voir:>})]</a>
+	<h2 class='objet_titre'><a href='[(#INFO_URL{#OBJET,#ID_OBJET}|ancre_url{forum#ID_FORUM})]'>[(#OBJET|objet_icone{16}) ][(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></h2>
+#BOITE_FERMER
+]
+
+#SET{type_message,#ENV{type_message,public}}
+[(#GET{type_message}|=={interne}|et{#AUTORISER{moderer,foruminterne}|non})
+	#SET{type_message,public}
+]
+#SET{prive,#GET{type_message}|=={interne}|?{'priv%','%'}}
+#SET{public,#GET{type_message}|=={public}|?{'priv%',''}}
+#SET{vide,#GET{type_message}|=={vide}|?{'','%'}}
+
+#SET{self,#SELF|parametre_url{id_forum|email_auteur|ip|id_auteur|auteur|debut_id_forum|statut,''}}
+<div class='onglets_simple clearfix'>
+	<ul>
+		<li>[(#GET{self}|parametre_url{type_message,public}|lien_ou_expose{<:forum:onglet_messages_publics:>,#GET{type_message}|=={public},ajax})]</li>
+		[(#AUTORISER{moderer,foruminterne}|oui)
+		<li>[(#GET{self}|parametre_url{type_message,interne}|lien_ou_expose{<:forum:onglet_messages_internes:>,#GET{type_message}|=={interne},ajax})]</li>
+		]
+		<li>[(#GET{self}|parametre_url{type_message,vide}|lien_ou_expose{<:forum:onglet_messages_vide:>,#GET{type_message}|=={vide},ajax})]</li>
+	</ul>
+</div>
+
+
+	[(#REM) Les boutons pour tout le lot de message d'un emetteur ---------------------------------------------------------]
+	[(#ENV{id_forum}|oui)
+	<a class='annule_filtre ajax' href='#GET{self}' title="<:forum:tout_voir|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:forum:tout_voir:>})]</a>
+	]
+	[(#ENV{ip}|ou{#ENV{email_auteur}}|ou{#ENV{auteur}}|ou{#ENV{id_auteur}})
+	#BOITE_OUVRIR{'','note'}
+		<div class='par'><:par_auteur:>
+			<a class='annule_filtre ajax' href='#GET{self}' title="<:forum:tout_voir|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:forum:tout_voir:>})]</a>
+
+		[
+		(#ENV{id_auteur,''}|oui)<a href='#URL_ECRIRE{auteur,id_auteur=#ENV{id_auteur}}'>#MODELE{auteur_nom,id_auteur=#ENV{id_auteur}}</a>
+		][(#ENV{id_auteur,''}|?{'',#ENV{auteur,''}})
+		][<a href='mailto:#ENV{email_auteur}'>(#ENV{email_auteur,''})</a>][IP (#ENV{ip,''})]
+		</div>
+		#SET{selection,#ENV{ip}|concat{'/',#ENV{email_auteur},'/',#ENV{id_auteur},'/',#ENV{auteur}}}
+		[(#ENV{type_message,public}|=={public}|et{#AUTORISER{instituer,forum,0}}|et{#ENV{recherche,''}|non}|et{#ENV{id_article,''}|non})
+		<p class='actions'>
+		 &#91;<a class='ajax valider' href='#URL_ACTION_AUTEUR{instituer_lot_forum,publie-#GET{selection},#SELF}'><:forum:icone_valider_messages:></a>&#93;
+		 &#91;<a class='bruler' href='#URL_ACTION_AUTEUR{instituer_lot_forum,spam-#GET{selection},#SELF}'><:forum:icone_bruler_messages:></a>&#93;
+		 &#91;<a class='ajax supprimer' href='#URL_ACTION_AUTEUR{instituer_lot_forum,off-#GET{selection},#SELF}'><:forum:icone_supprimer_messages:></a>&#93;
+		</p>
+		]
+	#BOITE_FERMER
+	]
+	
+	[(#INCLURE{fond=prive/squelettes/inclure/boutons-filtres-statut-forum, env})]
+	#FORMULAIRE_RECHERCHE_ECRIRE{#GET{self},ajax}
+	[<h2><:resultats_recherche:> &#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</h2>]
+
+<B_forum>
+	<h3>[(#GRAND_TOTAL|singulier_ou_pluriel{forum:info_1_message_forum,forum:info_nb_messages_forum}|sinon{<:forum:aucun_message_forum:>})]</h3>
+	<div class="clear"></div>
+
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
+	<ul class='liste-items forums'>
+		<BOUCLE_forum(FORUMS){id_forum?}{id_objet?}{objet?}{id_auteur?}{auteur?}{email_auteur?}{ip?}{!par id_forum}{pagination #ENV{nb,10}}{statut?}{statut LIKE #GET{prive}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?}>
+			<li class="item forum[ (#EXPOSE)] statut_#STATUT[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" id='forum#ID_FORUM' data-id='#ID_FORUM'
+							onclick="jQuery(this).toggleClass('hover');">
+			[(#INCLURE{fond=prive/modeles/forum, id_forum, self})]
+			</li>
+		</BOUCLE_forum>
+	</ul>
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
+</B_forum>
+
+	<h3><:forum:aucun_message_forum:></h3>
+
+<//B_forum>

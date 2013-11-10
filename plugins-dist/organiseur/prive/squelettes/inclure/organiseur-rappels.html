@@ -1,0 +1,36 @@
+<B_annonces>
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{annonce-24.png}|balise_img{'',cadre-icone}|concat{<:info_annonces_generales:>},simple})]
+<ul class="liste-items messages pensebetes">
+<BOUCLE_annonces(MESSAGES){type=affich}{rv!=oui}>
+	<li class="item[ (#DATE_HEURE|>{#ENV{last}}|oui) nouveau] message message-#TYPE">
+		#INCLURE{fond=prive/squelettes/inclure/organiseur-message,id_message}
+	</li>
+</BOUCLE_annonces>
+</ul>
+#BOITE_FERMER
+</B_annonces>
+
+
+<B_pb>
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{pensebete-24.png}|balise_img{'',cadre-icone}|concat{<:infos_vos_pense_bete:>},note})]
+<ul class="liste-items messages pensebetes">
+<BOUCLE_pb(MESSAGES){id_auteur}{type=pb}{rv!=oui}>
+	<li class="item[ (#DATE_HEURE|>{#ENV{last}}|oui) nouveau] message message-#TYPE">
+		#INCLURE{fond=prive/squelettes/inclure/organiseur-message,id_message}
+	</li>
+</BOUCLE_pb>
+</ul>
+#BOITE_FERMER
+</B_pb>
+
+<B_rv>
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{heure-24.png}|balise_img{'',cadre-icone}|concat{<:info_vos_rendez_vous:>},important})]
+<ul class="liste-items messages rv">
+<BOUCLE_rv(MESSAGES){destinataire #SESSION{id_auteur}}{rv=oui}{!rv_passe #ENV{date}|affdate{Y-m-d}}{par date_heure}>
+	<li class="item[ (#DATE_HEURE|>{#ENV{last}}|oui) nouveau] message message-#TYPE">
+		#INCLURE{fond=prive/squelettes/inclure/organiseur-message,id_message}
+	</li>
+</BOUCLE_rv>
+</ul>
+#BOITE_FERMER
+</B_rv>

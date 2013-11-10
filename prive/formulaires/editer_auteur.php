@@ -58,7 +58,7 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 	// mais il reste obligatoire si on a rien trouve
 	$erreurs = formulaires_editer_objet_verifier('auteur',$id_auteur,array('nom'));
 
-	$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
+	$auth_methode = Sql::getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
 	$auth_methode = ($auth_methode ? $auth_methode : 'spip');
 	include_spip('inc/auth');
 
@@ -69,7 +69,7 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 		if (!autoriser('modifier','auteur',$id_auteur,null,array('email'=>'?'))
 			AND $GLOBALS['visiteur_session']['id_auteur']==$id_auteur
 			AND !strlen(trim($email))
-			AND $email!=($email_ancien=sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur)))
+			AND $email!=($email_ancien=Sql::getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur)))
 			){
 			$erreurs['email'] = (($id_auteur==$GLOBALS['visiteur_session']['id_auteur'])?_T('form_email_non_valide'):_T('form_prop_indiquer_email'));
 		}
@@ -113,7 +113,7 @@ function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $a
 		// son clic sur l'url du message permettre de confirmer le changement
 		// et de revenir sur son profil
 		if ($GLOBALS['visiteur_session']['id_auteur']==$id_auteur
-			AND $email_nouveau!=($email_ancien=sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur)))){
+			AND $email_nouveau!=($email_ancien=Sql::getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur)))){
 			$envoyer_mail = charger_fonction('envoyer_mail','inc');
 			$texte = _T('form_auteur_mail_confirmation',
 											array('url'=>generer_action_auteur('confirmer_email', $email_nouveau,parametre_url($retour, 'email_modif','ok'))));

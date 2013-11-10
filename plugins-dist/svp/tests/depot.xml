@@ -1,0 +1,381 @@
+<depot>
+    <titre>Tests SVP</titre>
+    <descriptif>
+D&eacute;p&ocirc;t de tests
+	</descriptif>
+	<type>svn</type>
+</depot>
+
+<archives>
+<archive id="boussole.zip" dtd="paquet">
+<zip>
+	<file>boussole.zip</file>
+	<size>563367</size>
+	<date>1318946416</date>
+	<source>_plugins_/boussole</source>
+	<last_commit>2011-10-18 16:00:10</last_commit>
+</zip>
+
+<traductions>
+	<traduction module="boussole" reference="fr">
+	</traduction>
+</traductions>
+
+<paquet
+	prefix="boussole"
+	categorie="navigation"
+	version="0.6.3"
+	etat="dev"
+	compatibilite="[2.0.0;3.0.99]"
+	logo="prive/themes/spip/images/boussole_icone-64.png"
+	schema="0.1"
+	documentation="http://www.spip-contrib.net/Boussole,3688"
+>
+
+	<nom>Boussole &#224; jojo </nom>
+	<!-- Les bonnes adresses de la galaxie SPIP ou d'ailleurs ! -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/boussole_declarer.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/boussole_declarer.php" />
+	<pipeline nom="header_prive" inclure="boussole_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="boussole_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="genie/boussole_taches_generales_cron.php" />
+
+	<menu nom="boussole" titre="boussole:bouton_boussole" parent="configuration" icone="prive/themes/spip/images/boussole_icone-24.png" />
+	<menu nom="boussole_21" titre="boussole:bouton_boussole" parent="bando_squelette" icone="images/boussole_icone-16.png" />
+
+	<onglet nom="gerer" titre="boussole:onglet_boussoles" parent="boussoles" icone="prive/themes/spip/images/boussole_icone-24.png" />
+	<necessite nom="spip_bonux" />
+
+	<spip compatibilite="[2.0.0;2.0.99]">
+		<necessite nom="zcore" />
+		<pipeline nom="post_edition" inclure="boussole_pipelines.php" />
+		<pipeline nom="pre_edition" inclure="boussole_pipelines.php" />
+	</spip>
+
+	<spip compatibilite="[2.1.0;3.0.99]">
+		<necessite nom="crayons" />
+		<utilise nom="cfg"  compatibilite="[1.0.1;[" />
+	</spip>
+</paquet>
+
+<multis>
+	<nom>
+		<multi>
+		[en]Compass
+		[fr]Boussole &#224; jojo
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[en]The favorite places of the SPIP galaxy or out there!
+		[fr]Les bonnes adresses de la galaxie SPIP ou d'ailleurs !
+		</multi>
+	</slogan>
+	<description>
+		<multi>
+		[en]Install this plugin on your site and you will have access, in your skeletons, to all the sites of the SPIP Galaxy using
+		models, noisettes or the Z page provided.
+		_ For DIYers, you can also use this plugin to display your own list of sites and design your own displays.
+		[fr]Installez ce plugin sur votre site et vous aurez accès, dans vos squelettes, à l'ensemble des sites de la Galaxie SPIP en utilisant
+		les modèles, les noisettes ou la page Z proposés.
+		_ Pour les bricoleurs, vous pouvez aussi utiliser ce plugin pour afficher votre propre liste de sites et concevoir vos propres affichages.
+		</multi>
+	</description>
+</multis>
+</archive>
+
+<archive id="a2a.zip" dtd="plugin">
+<zip>
+	<file>a2a.zip</file>
+	<size>19424</size>
+	<date>1318201212</date>
+	<source>_plugins_/a2a</source>
+	<last_commit>2011-10-10 01:00:11</last_commit>
+</zip>
+<traductions>
+<traduction module="a2a" reference="fr">
+	<langue code="en" />
+	<langue code="es" />
+	<langue code="it" />
+</traduction>
+</traductions>
+
+<plugin>
+	<nom>A2A</nom>
+	<slogan>Pour lier des articles</slogan>
+	<auteur>Collectif SPIP</auteur>
+	<version>0.4.3</version>
+	<version_base>0.4</version_base>
+	<etat>stable</etat>
+	<icon>images/a2a-64.png</icon>
+	<licence>
+Creative common attribution 2
+Apache2
+Apache v2
+GPL 4
+LGPL 2
+AGPL 2
+Art libre 2
+FDLv1
+GPL v1
+GPLv2
+GPL 3
+GNU/GPL
+GNU/GPL3
+GNU/GPLv3
+GNU/GPL v2
+LGPL
+LGPL3
+LGPLv3
+LGPL v2.1
+GNU/LGPLv3
+AGPLv3
+AGPL
+GNU/AGPL 3
+FDL
+GNU/FDL
+FDLv1.1
+FDL v1.2
+FDL1.3
+Apache 2.0
+Apache  licence v2.0
+MIT licence
+MIT
+Free Art
+Free art licence
+Free art 1.3
+Art libre
+bsd
+Creative common attribution 2.0
+Creative common attribution-sharealike 2.0
+CC by
+cc by-sa
+cc by-nd
+cc by-nc
+cc by-nc-nd 3.0
+cc by-nc-sa 2.5
+	</licence>
+	<description>
+		<multi>
+		[fr]Ce plugin permet de lier des articles de fa&#231;on ponctuelle sans avoir à utiliser les mots-cl&#233;s de SPIP. Il peut &#234;tre utilis&#233; pour mettre en place des liens de type « Lire aussi ».
+		[en]This plugin allows you to link items in a timely manner without having to use keywords of SPIP. It can be used to set up links such as "See also".
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/a2a</lien>
+	<prefix>a2a</prefix>
+	<fonctions>a2a_fonctions.php</fonctions>
+	<options>a2a_options.php</options>
+	<install>base/a2a_upgrade.php</install>
+	<necessite id="SPIP" version="[2.0.9;2.1.99]" />
+	<necessite id="cfg" version="[1.14.1;]" />
+	<necessite id="spip_bonux" version="[1.8.7;]" />
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>affiche_milieu</action>
+		<inclure>a2a_pipelines.php</inclure>
+	</pipeline>
+	<categorie>navigation</categorie>
+</plugin>
+</archive>
+
+<archive id="barre_typo_generalisee.zip" dtd="plugin">
+<zip>
+	<file>barre_typo_generalisee.zip</file>
+	<size>4676</size>
+	<date>1318140004</date>
+	<source>_plugins_/barre_typo_generalisee</source>
+	<last_commit>2011-10-09 08:00:03</last_commit>
+</zip>
+
+<plugin>
+	<categorie>multimedia</categorie>
+	<version>0.6.1</version>
+	<lien>http://www.spip-contrib.net/FancyBox</lien>
+	<prefix>fancybox</prefix>
+	<icon>images/fancybox-32.png</icon>
+	<etat>stable</etat>
+
+	<nom>FancyBox</nom>
+	<auteur>b_b, [FancyBox->http://fancybox.net/]</auteur>
+	<slogan>Fen&#234;tre de dialogue ou de galerie photo</slogan>
+	<description>Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code></description>
+
+	<fonctions>fancybox_fonctions.php</fonctions>
+
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
+	<utilise id="cfg" version="[1.12;]" />
+
+	<chemin dir='' />
+	<chemin dir='spip20/' />
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>spip20/fancybox_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>fancybox_pipelines.php</inclure>
+	</pipeline>
+</plugin>
+<plugin spip='[2.1.0-beta;2.1.99]' >
+	<categorie>multimedia</categorie>
+	<version>0.6.1</version>
+	<lien>http://www.spip-contrib.net/FancyBox</lien>
+	<prefix>fancybox</prefix>
+	<icon>images/fancybox-32.png</icon>
+	<etat>stable</etat>
+
+	<nom>FancyBox</nom>
+	<auteur>b_b, [FancyBox->http://fancybox.net/]</auteur>
+	<slogan>Fen&#234;tre de dialogue ou de galerie photo</slogan>
+	<description>Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code></description>
+
+	<licence>GPL - (c) 2001-2010</licence>
+
+	<fonctions>fancybox_fonctions.php</fonctions>
+	<fonctions>toto/fancybox_fonctions_1.php</fonctions>
+	<options>fancybox_options.php</options>
+
+	<necessite id="saisies" version="[1.7.1;]" />
+	<!-- pour les boucles pour de saisies, je ne suis pas desole :p  -->
+	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="lib:jquery.fancybox-1.3.4" src="http://fancybox.googlecode.com/files/jquery.fancybox-1.3.4.zip" />
+	<utilise id="cfg" version="[1.12;]" />
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>fancybox_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>fancybox_pipelines.php</inclure>
+	</pipeline>
+</plugin>
+</archive>
+
+<archive id="saisies.zip" dtd="paquet">
+<zip>
+	<file>saisies.zip</file>
+	<size>142575</size>
+	<date>1319806806</date>
+	<source>_plugins_/saisies</source>
+	<last_commit>2011-10-28 15:00:02</last_commit>
+</zip>
+
+<traductions>
+	<traduction module="saisies" gestionnaire="salvatore" reference="fr">
+		<langue code="ca" />
+		<langue code="de">
+			<traducteur nom="klaus" />
+		</langue>
+		<langue code="en" />
+		<langue code="es">
+			<traducteur nom="severo" />
+		</langue>
+		<langue code="fa">
+			<traducteur nom="davood" />
+		</langue>
+		<langue code="fr_tu">
+			<traducteur nom="beatnick" />
+		</langue>
+		<langue code="sk">
+			<traducteur nom="jaro" />
+		</langue>
+	</traduction>
+</traductions>
+
+<paquet
+	prefix="saisies"
+	categorie="outil"
+	version="1.15.2"
+	etat="test"
+	compatibilite="[2.0.0;3.0.*]"
+	logo="images/logo_saisie_48.png"
+	documentation="http://www.spip-contrib.net/Saisies,1347"
+>
+	<nom>Saisies</nom>
+	<auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
+	<auteur>RastaPopoulos</auteur>
+	<auteur>Joseph</auteur>
+	<licence>GNU/GPL</licence>
+	<licence lien="http://mit">MIT</licence>
+	<copyright>2001-2011</copyright>
+	<credit>Lucien Cr&#233;dit</credit>
+	<credit lien="http://eliaz.net">La Morue</credit>
+
+	<traduire module="saisies" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="header_prive" inclure="saisies_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="saisies_pipelines.php" />
+	<pipeline nom="saisies_autonomes" inclure="saisies_pipelines.php" />
+	<pipeline nom="formulaire_saisies" inclure="saisies_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="saisies_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="saisies_pipelines.php" />
+	<pipeline nom="styliser" inclure="saisies_pipelines.php" />
+
+	<utilise nom="verifier" />
+	<utilise nom="spip_bonux" />
+</paquet>
+
+<multis>
+	<nom>
+		<multi>
+		[en]Entries for forms
+		[fr]Saisies pour formulaires
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[en]Create easily forms fields.
+		[fr]Écrire facilement des champs de formulaires.
+		</multi>
+	</slogan>
+	<description>
+		<multi>
+		[en]This plugin makes it easier to write form fields by providing a #SAISIE tag.
+				The generated HTML is compatible with the classification of forms
+				proposed by SPIP > 2.0 and with the configuration plugin CFG.
+		[fr]Ce plugin permet de faciliter l'écriture de champs de formulaires en proposant une
+				balise #SAISIE. Le HTML généré est compatible avec la nomenclature des formulaires
+				proposée par SPIP > 2.0 et avec le plugin de configuration CFG.
+		</multi>
+	</description>
+</multis>
+</archive>
+
+<archive id="css_imbriques.zip" dtd="paquet">
+<zip>
+	<file>css_imbriques.zip</file>
+	<size>22576</size>
+	<date>1352124002</date>
+	<source>_plugins_/css_imbriques</source>
+	<last_commit>2012-11-05 15:00:02</last_commit>
+</zip>
+
+<paquet
+	prefix="css_imbriques"
+	categorie="outil"
+	version="3.1.1"
+	documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-spip-pre-processeur-de-css"
+	etat="stable"
+	compatibilite="[3.0.0;3.*]"
+>
+	<nom>CSS imbriqu&#233;s</nom>
+
+	<auteur lien="http://www.paris-beyrouth.org">ARNO*</auteur>
+	<licence lien="http://www.gnu.org/licenses/lgpl.html">GNU/LGPL</licence>
+
+	<chemin path="/" />
+
+</paquet>
+
+
+</archive>
+</archives>

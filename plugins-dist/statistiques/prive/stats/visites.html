@@ -1,0 +1,116 @@
+<!--[if IE]>[<script type="text/javascript" src="(#CHEMIN{javascript/excanvas.js})"></script>]<![endif]-->
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.flot.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.flot.selection.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.tflot.js})"></script>]
+
+<script type="text/javascript">
+	
+function trace_stats_table(table, classes, options) {
+	$table = $(table);
+	if ($table.is(':hidden')) {
+		return true; // pas a faire ou deja fait.
+	}
+
+	// copier le titre des tableaux
+	titre = $table.find("caption").text();
+	$table.siblings('.pagination').before("<h3 class='caption'>" + titre + "</h3>");
+	$table
+
+		.wrap("<div class='" + classes + "'></div>");
+
+	// mettre les visites avec un fond colore pour le graphique
+	$table.find("thead th:eq(1)").data({fill: true, serie: 'bar', color: '#FFD845',lineWidth:0});
+	$table.find("thead th:eq(2)").data({serie: 'line', color: '#7FC4FF'});
+	$table.find("thead th:eq(3)").data({fill: true, serie: 'bar', color: '#A9DD3A',lineWidth:0});
+	
+	// mettre les previsions en premier
+	// (pour que les autres graph passent par dessus)
+	$table.find('thead tr th:first-child').after(function(){
+		return $(this).parent().find('th:eq(3)').detach();
+	});
+	$table.find('tbody tr th:first-child').after(function(){
+		return $(this).parent().find('td:last-child').detach();
+	});
+
+	params = {
+		legendeExterne:true,
+		legendeActions:true,
+		width:($('.large #page').length)?'755px':'560px', // 795px, 600px (sans le tableau de resume) ...
+		height:'250px',
+		modeDate:true,
+		zoom:true,
+		parse:{
+			axeOnTitle:true,
+			defaultSerie:{
+				bars:{show:true},
+				lines:{show:true},
+				points:{show:false}
+			}
+		},
+		flot:{
+			grid:{
+				axismargin:10
+			},
+			xaxis:{
+				labelWidth:45,
+				monthNames: [
+					'[(#VAL{2000-01-01}|nom_mois)]',
+					'[(#VAL{2000-02-01}|nom_mois)]',
+					'[(#VAL{2000-03-01}|nom_mois)]',
+					'[(#VAL{2000-04-01}|nom_mois)]',
+					'[(#VAL{2000-05-01}|nom_mois)]',
+					'[(#VAL{2000-06-01}|nom_mois)]',
+					'[(#VAL{2000-07-01}|nom_mois)]',
+					'[(#VAL{2000-08-01}|nom_mois)]',
+					'[(#VAL{2000-09-01}|nom_mois)]',
+					'[(#VAL{2000-10-01}|nom_mois)]',
+					'[(#VAL{2000-11-01}|nom_mois)]',
+					'[(#VAL{2000-12-01}|nom_mois)]'
+				]
+			},
+			yaxis:{
+				position: "right"
+			}
+		},
+		infobulle:{show:true}
+	}
+
+	$table.tFlot($.extend(true, {}, params, options));	
+}
+
+function trace_stats(){
+	trace_stats_table(
+		"#visites_quotidiennes",
+		"statistiques_visites_quotidiennes statistiques_visites",
+		{
+			grille:{weekend:true},
+			flot:{
+				xaxis:{
+					timeformat:"%d %b",
+					minTickSize: [1, "day"]
+				},
+				bars:{barWidth:24 * 60 * 60 * 1000}
+			}
+		});
+		
+	trace_stats_table(
+		"#visites_mensuelles",
+		"statistiques_visites_mensuelles statistiques_visites", {
+			grille:{years:true},
+			flot:{
+				xaxis:{
+					timeformat:"%b %y",
+					minTickSize: [1, "month"]
+				},
+				bars:{barWidth:30.4 * 24 * 60 * 60 * 1000 /* nb de jours... approximatif */}
+			}
+	});
+	
+}
+(function($){
+	$(document).ready(function(){
+		trace_stats();
+		onAjaxLoad(trace_stats);
+	});
+})(jQuery);
+</script>

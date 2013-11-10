@@ -1,0 +1,31 @@
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}#CACHE{900}<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}{lang_select}><?php
+if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
+?><?xml version="1.0" encoding="#CHARSET" ?>
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<channel xml:lang="[(#LANG|texte_backend)]">
+	<title>[&#91;(#NOM_SITE_SPIP|texte_backend)&#93; ]RSS <:forum:titre_page_forum_suivi:> (#ENV{page})</title>
+	<link>[(#URL_ECRIRE{controler_forum, type_message=#ENV{page}}|url_absolue|texte_backend)]</link>
+	<description></description>
+	<language>[(#LANG|texte_backend)]</language>
+	<BOUCLE_RSS(FORUMS){statut=spam}{tout}{!par date}>
+	<item>
+		<title>[(#TITRE|texte_backend)][ ((#STATUT|=={publie}|?{'', #STATUT}))]</title>
+		<link>[(#URL_FORUM|url_absolue|texte_backend)]</link>
+		<guid isPermaLink="true">[(#URL_ECRIRE{controler_forum, [type_message=(#ENV{page})&]debut_id_forum=#ID_FORUM}|url_absolue|texte_backend)]</guid>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG|texte_backend)</dc:language>]
+		[<thr:in-reply-to type="text/html"
+			ref="(#ID_FORUM|generer_url_forum_parent|url_absolue)"
+			href="(#ID_FORUM|generer_url_forum_parent|url_absolue)" />';
+		<dc:creator>[(#AUTEUR|texte_backend)][ &lt;(#EMAIL_AUTEUR|texte_backend)&gt;]</dc:creator>
+		<description>[ (#TEXTE|liens_absolus|texte_backend)]#NOTES</description>
+	</item></BOUCLE_RSS>
+</channel>
+</rss><?php
+} else {
+include_spip('inc/minipres'); 
+echo minipres();
+}?></BOUCLE0>
+

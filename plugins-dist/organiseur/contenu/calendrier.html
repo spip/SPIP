@@ -1,0 +1,67 @@
+<div id="calendrier-loading" style="display:none;"><:organiseur:loading:></div>
+<div id="calendrier"></div>
+<link rel='stylesheet' type='text/css' href='#CHEMIN{lib/fullcalendar/fullcalendar.css}' />
+<link rel="stylesheet" type="text/css" href="#CHEMIN{calendrier.css}" />
+<script type='text/javascript' src='#CHEMIN{lib/fullcalendar/fullcalendar.min.js}'></script>
+<script type="text/javascript">/*<![CDATA[*/
+jQuery(document).ready(function() {
+
+	// page is now ready, initialize the calendar...
+	$('#calendrier').fullCalendar({
+			editable: false,
+			events: "[(#URL_PAGE{calendrier_quete.json}|parametre_url{id_mot,#ENV{id_mot,''}}|parametre_url{id_rubrique,#ENV{id_rubrique,''}})]",
+			header: {
+				left: 'prevYear,prev,next,nextYear today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			firstDay: 1,
+			monthNames:['<:date_mois_1|attribut_html:>','<:date_mois_2|attribut_html:>','<:date_mois_3|attribut_html:>','<:date_mois_4|attribut_html:>','<:date_mois_5|attribut_html:>','<:date_mois_6|attribut_html:>','<:date_mois_7|attribut_html:>','<:date_mois_8|attribut_html:>','<:date_mois_9|attribut_html:>','<:date_mois_10|attribut_html:>','<:date_mois_11|attribut_html:>','<:date_mois_12|attribut_html:>'],
+			monthNamesShort:['<:date_mois_1_abbr|attribut_html:>','<:date_mois_2_abbr|attribut_html:>','<:date_mois_3_abbr|attribut_html:>','<:date_mois_4_abbr|attribut_html:>','<:date_mois_5_abbr|attribut_html:>','<:date_mois_6_abbr|attribut_html:>','<:date_mois_7_abbr|attribut_html:>','<:date_mois_8_abbr|attribut_html:>','<:date_mois_9_abbr|attribut_html:>','<:date_mois_10_abbr|attribut_html:>','<:date_mois_11_abbr|attribut_html:>','<:date_mois_12_abbr|attribut_html:>'],
+			dayNames:['<:date_jour_1|attribut_html:>','<:date_jour_2|attribut_html:>','<:date_jour_3|attribut_html:>','<:date_jour_4|attribut_html:>','<:date_jour_5|attribut_html:>','<:date_jour_6|attribut_html:>','<:date_jour_7|attribut_html:>'],
+			dayNamesShort:['<:date_jour_1_abbr|attribut_html:>','<:date_jour_2_abbr|attribut_html:>','<:date_jour_3_abbr|attribut_html:>','<:date_jour_4_abbr|attribut_html:>','<:date_jour_5_abbr|attribut_html:>','<:date_jour_6_abbr|attribut_html:>','<:date_jour_7_abbr|attribut_html:>'],
+			buttonText: {
+					today: '<:date_aujourdhui|attribut_html:>',
+					month: '<:organiseur:cal_par_mois|attribut_html:>',
+					day: '<:organiseur:cal_par_jour|attribut_html:>',
+					week: '<:organiseur:cal_par_semaine|attribut_html:>'
+			},
+			weekMode : 'liquid',
+			loading: function(bool) {
+				if (bool) $('#calendrier-loading').show();
+				else $('#calendrier-loading').hide();
+			},
+			timeFormat: {
+				// for agendaWeek and agendaDay
+				agenda: "H'h'mm{ - H'h'mm}", // 5h00 - 6h30
+				// for all other views
+				'': "H'h'(mm)" // 19h
+			},
+			axisFormat: "H'h'(mm)",
+			allDayText:'<:organiseur:cal_jour_entier|attribut_html:>',
+			columnFormat: {
+				month: 'ddd',    // Mon
+				week: 'ddd d/M', // Mon 9/7
+				day: 'dddd d/M'  // Monday 9/7
+			},
+			titleFormat: {
+				month: 'MMMM yyyy',                             // September 2009
+				week: "d [ MMM] [ yyyy]{ '&#8212;' d MMM yyyy}", // Sep 7 - 13 2009
+				day: 'dddd d MMM yyyy'                  // Tuesday, Sep 8, 2009
+			},
+			dayClick: function(date, allDay, jsEvent, view) {
+				if(view.name=='month'){
+					$('.fc-button-agendaWeek').click();
+					$('#calendrier').fullCalendar( 'gotoDate', date );
+				}
+				else
+					if(view.name=='agendaWeek'){
+						$('.fc-button-agendaDay').click();
+						$('#calendrier').fullCalendar( 'gotoDate', date );
+					}
+			},
+			isRTL : [(#LANG_DIR|=={rtl}|?{true,false})]
+	})
+
+});
+/*]]>*/</script>

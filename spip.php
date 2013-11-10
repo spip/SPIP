@@ -20,13 +20,5 @@ if (isset($_GET['fond'])) {
 	redirige_par_entete(generer_url_public($_GET['fond']));
 }
 
-require_once _DIR_RESTREINT_ABS.'class/AutoloadClass.php';
-if (!defined('SPIP_AUTOLOAD')) {
-    spl_autoload_register(array('Autoload', 'load'));
-    define('SPIP_AUTOLOAD', true);
-}
-
 # au travail...
 include _DIR_RESTREINT_ABS.'public.php';
-
-?>

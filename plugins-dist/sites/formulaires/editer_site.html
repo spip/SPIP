@@ -1,0 +1,91 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_site formulaire_editer_site-#ENV{id_site,nouveau}[ (#ENV**{logo}|oui)withlogo]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="notice">(#ENV*{erreurs}|table_valeur{verif_url_auto})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_syndic' value='#ENV{id_syndic}' />
+		<input type='hidden' name='syndication_old' value="#ENV**{syndication}" />
+		[<input type='hidden' name='logo' value='(#ENV**{logo,''})' />]
+		[<input type='hidden' name='format_logo' value='(#ENV**{format_logo,''})' />]
+
+
+		[<!-- Le logo auto-detecte -->
+		<div class='previsu_logo_site'>(#ENV**{logo}|image_reduire{180,999})</div>]
+
+		<ul>
+		[(#ENV{id_syndic}|intval|>{0}|sinon{#ENV{url_site}}|non)
+			[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_sites}|>{0}|oui})
+			<li class="editer editer_referencement_automatise fieldset">
+			  <fieldset>
+				  <ul>
+					  <li class="editer editer_url_auto pleine_largeur[ (#ENV**{erreurs}|table_valeur{url_auto}|oui)erreur]">
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_auto})</span>]
+							<p class="explication"><:sites:texte_referencement_automatique:></p>
+							<input type="text" name="url_auto" id="url_auto" class='text' size='40' value="[(#ENV{url_site}|sinon{http://})]" />
+					  </li>
+				  </ul>
+				  <p class="boutons"><input type='submit' class='submit' name='ajoute_url_auto' value='<:bouton_ajouter:>' /></p>
+					<p class="explication"><:sites:texte_non_fonction_referencement:></p>
+				</fieldset>
+		  </li>
+			]]
+	    <li class="editer editer_nom_site obligatoire[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
+		    	<label for="nom_site"><:sites:info_nom_site_2:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>
+		      	]<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV**{nom_site})]" />
+	    </li>
+	    <li class="editer editer_url_site obligatoire[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
+		    	<label for="url_site"><:sites:entree_adresse_site:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>
+		    	]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
+	    </li>
+
+	 		[<li class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+				<label for="titreparent"><:titre_cadre_interieur_rubrique:>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
+				]
+				</label>(#VAL|chercher_rubrique{#ENV{id_syndic},#ENV{id_rubrique}|sinon{#ENV{id_parent}},'site',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
+	    </li>]
+	    
+	    <li class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+		    	<label for="descriptif"><:sites:entree_description_site:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
+		    	]<textarea name='descriptif' id='descriptif' rows='4' cols='40'>[(#ENV**{descriptif})]</textarea>
+	    </li>
+	    [(#ENV**{config}|table_valeur{activer_syndic}|=={non}|?{'',' '})
+	    <li class="editer editer_syndications fieldset">
+			<fieldset>
+				<h3 class="legend"><img src='#CHEMIN_IMAGE{rss-16.png}' alt="<:sites:info_syndication:>" />
+				<:sites:bouton_radio_syndication:>
+				#AIDER{rubsyn}</h3>
+				<ul>
+					<li class="editer editer_syndication pleine_largeur">
+						<div class="choix">
+							<input type='radio' class="radio" name='syndication' value='non' id='syndication_non'[ (#ENV{syndication}|match{oui|off}|?{'','checked="checked"'})] />
+							<label for='syndication_non'><:sites:bouton_radio_non_syndication:></label>
+						</div>
+						<div class="choix">
+							<input type='radio' class="radio" name='syndication' value='oui' id='syndication_oui'[ (#ENV{syndication}|match{oui|off}|?{'checked="checked"'})] />
+							<label for='syndication_oui'><:sites:bouton_radio_syndication:></label>
+						</div>
+					</li>
+					<li class="editer editer_url_syndic">
+						<label for='url_syndic'><:sites:entree_adresse_fichier_syndication:>
+						</label>[(#ENV**{url_syndic}|saisie_url_syndic{url_syndic,url_syndic})]
+					</li>
+				</ul>
+			</fieldset>
+	    </li>
+	    ]
+	  </ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,20 @@
+[(#REM) <!-- Bloc de navigation du menu configuration --> ]
+#INCLURE{fond=prive/squelettes/inclure/menu-navigation,
+	menu=menu_configuration,
+	bloc=navigation,
+	env}
+
+[(#REM) <!-- Bloc d'information sur la page --> ]
+#BOITE_OUVRIR{'', info}
+	<p><:svp:info_boite_depot_gerer:></p>
+<BOUCLE_depot_existe(DEPOTS) {id_depot>0}{0,1}>
+    <div class="bouton">
+        [(#BOUTON_ACTION{
+            <:svp:bouton_actualiser_tout:>,
+                #URL_ACTION_AUTEUR{actualiser_depot, tout, #SELF},
+                '',
+                '',
+                <:svp:bulle_actualiser_tout_depot:>})]
+    </div>
+</BOUCLE_depot_existe>
+#BOITE_FERMER

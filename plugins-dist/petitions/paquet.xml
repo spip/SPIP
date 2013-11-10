@@ -1,0 +1,25 @@
+<paquet
+	prefix="petitions"
+	categorie="communication"
+	version="1.4.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/petition-32.png"
+	schema="1.1.6"
+>	
+
+	<nom>P&#233;titions</nom>
+	<!-- Gestion des pétitions dans SPIP -->
+
+	<auteur>Collectif SPIP</auteur>
+
+	<traduire module="petitions" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/petitions.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/petitions.php" />
+	<pipeline nom="autoriser" inclure="petitions_autoriser.php" />
+	<pipeline nom="afficher_config_objet" inclure="petitions_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="petitions_pipelines.php" />
+
+	<menu nom="controler_petition" titre="petitions:icone_suivi_petitions" parent="menu_activite" position="-1" icone="images/petition-16.png" />
+</paquet>

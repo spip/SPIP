@@ -39,8 +39,8 @@ function enfant_rub($collection,$debut=0,$limite=500){
 
 	$res = array();
 	
-	$result = sql_select("id_rubrique, id_parent, titre, descriptif, lang ", "spip_rubriques", "id_parent=$collection",'', '0+titre,titre',"$debut,$limite");
-	while($row=sql_fetch($result)){
+	$result = Sql::select("id_rubrique, id_parent, titre, descriptif, lang ", "spip_rubriques", "id_parent=$collection",'', '0+titre,titre',"$debut,$limite");
+	while($row=Sql::fetch($result)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=generer_info_entite($id_rubrique,'rubrique','titre'); // pour etre sur de passer par tous les traitements
@@ -97,7 +97,7 @@ function enfant_rub($collection,$debut=0,$limite=500){
  * 	Le contenu du bloc dépliable 
  */
 function sous_enfant_rub($collection2){
-	$nb = sql_countsel('spip_rubriques',"id_parent=$collection2");
+	$nb = Sql::countsel('spip_rubriques',"id_parent=$collection2");
 	
 	$retour = '';
 	$pagination = '';
@@ -115,9 +115,9 @@ function sous_enfant_rub($collection2){
 		$limite = $debut + $limite;
 	}
 	
-	$result =  sql_select("id_rubrique, id_parent, titre, lang", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre',"$debut,$limite");
+	$result =  Sql::select("id_rubrique, id_parent, titre, lang", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre',"$debut,$limite");
 	
-	while($row=sql_fetch($result)){
+	while($row=Sql::fetch($result)){
 		$id_rubrique2=$row['id_rubrique'];
 		$id_parent2=$row['id_parent'];
 		$titre2=generer_info_entite($id_rubrique2,'rubrique','titre'); // pour etre sur de passer par tous les traitements
@@ -156,7 +156,7 @@ function afficher_enfant_rub($id_rubrique=0) {
 	$debut = 0;
 	$limite = 500;
 
-	$nb = sql_countsel('spip_rubriques',"id_parent=$id_rubrique");
+	$nb = Sql::countsel('spip_rubriques',"id_parent=$id_rubrique");
 	
 	if($nb > $limite){
 		$debut = _request('debut_rubrique'.$collection2) ? _request('debut_rubrique'.$collection2) : $debut;

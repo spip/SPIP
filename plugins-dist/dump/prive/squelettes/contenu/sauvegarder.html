@@ -1,0 +1,48 @@
+[(#AUTORISER{sauvegarder}|sinon_interdire_acces)]
+#SET{fin,#ENV{status}|dump_verifie_sauvegarde_finie}
+[(#GET{fin}|non)
+	<h1 class="grostitre"><:dump:texte_sauvegarde:></h1>
+
+	#SET{dir_dump,#VAL{'<i>'}|concat{#REM|dump_repertoire|joli_repertoire{},'</i>'}}
+	#SET{dir_img,#VAL{'<i>'}|concat{#EVAL{_DIR_IMG}|joli_repertoire{},'</i>'}}
+	#SET{spipnet,#EVAL{$GLOBALS}|table_valeur{home_server}|concat{'/',#LANG,'_article1489.html'}}
+
+	#BOITE_OUVRIR{'','info'}
+	<p><:dump:texte_admin_tech_01{dossier=#GET{dir_dump},img=#GET{dir_img}}:></p>
+	<p><:dump:texte_admin_tech_02{spipnet=#GET{spipnet}}:></p>
+	#BOITE_FERMER
+
+	<div class="ajax">
+		#FORMULAIRE_SAUVEGARDER
+	</div>
+
+	[
+		(#INCLURE{fond=formulaires/inc-lister-sauvegardes,env,ajax,name='',id=sauvegarde,titre=<:dump:sauvegardes_existantes:>,download=#AUTORISER{webmestre}})
+	]
+]
+[(#GET{fin}|oui)
+	<h1><:dump:info_sauvegarde:></h1>
+
+	#SET{taille,#ENV{status}|dump_taille_sauvegarde}
+	[(#GET{taille}|non)
+	#SET{archive,#VAL{'<b>'}|concat{#ENV{status}|dump_nom_sauvegarde|joli_repertoire}|concat{'</b>'}}
+
+	#BOITE_OUVRIR{'','error'}
+	<:dump:erreur_taille_sauvegarde{fichier=#GET{archive}}:>
+	#BOITE_FERMER
+	]
+	[(#GET{taille}|oui)
+	#BOITE_OUVRIR{'','success'}
+
+	[(#SET{archive,[(#VAL{'<b>'}|concat{#ENV{status}|dump_nom_sauvegarde|joli_repertoire}|concat{'</b> ('}|concat{[(#GET{taille}|taille_en_octets)]}|concat{')'})]})]
+
+	<p>
+	<:dump:info_sauvegarde_reussi_02{archive=#GET{archive}}:> <:dump:info_sauvegarde_reussi_03:> <:dump:info_sauvegarde_reussi_04:>
+	</p>
+
+	[<h4><:dump:details_sauvegarde:></h4>
+	(#ENV{status}|dump_afficher_tables_sauvegardees)]
+	]
+	
+	#BOITE_FERMER
+]

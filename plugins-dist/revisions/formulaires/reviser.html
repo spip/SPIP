@@ -1,0 +1,58 @@
+<div class='formulaire_spip formulaire_#FORM' id='formulaire_reviser_#ENV{_objet}_#ENV{_id_objet}'>
+<h3 class='titrem'>[(#CHEMIN_IMAGE{revision-24.png}|balise_img{'',cadre-icone})]<:revisions:titre_revisions:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok none">(#ENV**{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+	<form action="#ENV{action}#formulaire_configurer_contenu_forums" method="post"><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<ul>
+			<li class='editer haut editer_id_version[ (#ENV**{erreurs}|table_valeur{id_version}|oui)erreur]'>
+				<label style="display:block"><:revisions:label_choisir_id_version:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_version})</span>]
+				<div class="choix">
+					<B_v>
+						<table class="spip diff-versions">
+							<thead>
+								<tr class="row_first">
+									<th class="id">#</th>
+									<th class="version"></th>
+									<th class="diff"></th>
+									<th class="date">Date</th>
+									<th class="auteur">Auteur</th>
+								</tr>
+							</thead>
+							<tbody>
+								<BOUCLE_v(VERSIONS){objet=#ENV{_objet}}{id_objet=#ENV{_id_objet}}{!par id_version}>
+								<tr>
+									<td class="id"><label for="id_version_#ENV{_objet}_#ENV{_id_objet}_#ID_VERSION">#ID_VERSION</label></td>
+									<td class="version">[(#COMPTEUR_BOUCLE|<{#TOTAL_BOUCLE}|oui)<input type="radio" class="radio" name="id_version" id="id_version_#ENV{_objet}_#ENV{_id_objet}_#ID_VERSION" value="#ID_VERSION" onchange="check_diff();" [(#ENV{id_version}|=={#ID_VERSION}|oui)checked="checked"] />]</td>
+									<td class="diff">[(#COMPTEUR_BOUCLE|>{1}|oui)<input type="radio" class="radio" name="id_diff" id="id_diff_#ENV{_objet}_#ENV{_id_objet}_#ID_VERSION" value="#ID_VERSION" onchange="check_version();" [(#ENV{id_diff}|=={#ID_VERSION}|oui)checked="checked"] />]</td>
+									<td class="date">[(#DATE|date_relative)]</td>
+									<td class="auteur"><BOUCLE_aut(AUTEURS){id_auteur}{si #ID_AUTEUR|is_numeric}{tout}>#NOM</BOUCLE_aut>#ID_AUTEUR<//B_aut></td>
+								</tr>
+								</BOUCLE_v>
+							</tbody>
+						</table>
+					</B_v>
+				</div>
+			</li>
+		</ul>
+		<p class='boutons'><span class="image_loading"></span><input class='submit' type="submit" name="ok" value="<:revisions:bouton_comparer:>"/></p>
+	</div></form>
+
+</div>
+<script type="text/javascript">/*<![CDATA[*/
+function check_diff(){
+	var v=jQuery('input[name=id_version]:checked');
+	var d=jQuery('input[name=id_diff]:checked');
+	if (!d.length || parseInt(d.attr('value'))>=parseInt(v.attr('value')))
+		v.parents('tr').next('tr').find('input[name=id_diff]').attr('checked','checked');
+}
+function check_version(){
+	var v=jQuery('input[name=id_version]:checked');
+	var d=jQuery('input[name=id_diff]:checked');
+	if (!v.length || parseInt(d.attr('value'))>=parseInt(v.attr('value')))
+		d.parents('tr').prev('tr').find('input[name=id_version]').attr('checked','checked');
+}
+/*]]>*/</script>

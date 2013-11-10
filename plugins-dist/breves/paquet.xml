@@ -1,0 +1,38 @@
+<paquet
+	prefix="breves"
+	categorie="edition"
+	version="1.3.5"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/breve-32.png"
+	schema="1.0.0"
+>	
+
+	<nom>Br&#232;ves</nom>
+	<!-- Gestion des brèves dans SPIP -->
+
+	<auteur>Collectif SPIP</auteur>
+
+	<traduire module="breves" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="configurer_liste_metas" inclure="breves_pipelines.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/breves.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/breves.php" />
+	<pipeline nom="autoriser" inclure="breves_autoriser.php" />
+	<pipeline nom="rubrique_encours" inclure="breves_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="breves_pipelines.php" />
+	<pipeline nom="accueil_encours" inclure="breves_pipelines.php" />
+	<pipeline nom="accueil_informations" inclure="breves_pipelines.php" />
+	<pipeline nom="objet_compte_enfants" inclure="breves_pipelines.php" />
+	<pipeline nom="trig_calculer_langues_rubriques" inclure="breves_pipelines.php" />
+	<pipeline nom="calculer_rubriques" inclure="breves_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="breves_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="breves_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="breves_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="breves_ieconfig.php" />
+
+	<utilise nom="mots" />
+
+	<menu nom="breves" titre="breves:icone_breves" parent="menu_edition" icone="images/breve-16.png" />
+	<menu nom="breve_creer" titre="breves:icone_nouvelle_breve" parent="outils_rapides" icone="images/breve-new-16.png" action="breve_edit" parametres="new=oui&amp;id_rubrique=@id_secteur@" />
+</paquet>

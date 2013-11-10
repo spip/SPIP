@@ -107,7 +107,7 @@ function expression_recherche($recherche, $options) {
 				$recherche_mod = str_replace($match,$word,$recherche_mod);
 			}
 		}
-		$q = sql_quote(
+		$q = Sql::quote(
 			"%"
 			. preg_replace(",\s+,".$u, "%", $q)
 			. "%"
@@ -117,7 +117,7 @@ function expression_recherche($recherche, $options) {
 
 	} else {
 		$methode = 'REGEXP';
-		$q = sql_quote(trim($recherche, '/'));
+		$q = Sql::quote(trim($recherche, '/'));
 	}
 
 	return array($methode, $q, $preg);
@@ -132,16 +132,16 @@ function expression_recherche($recherche, $options) {
 // - score pour retourner un score
 // On peut passer les tables, ou une chaine listant les tables souhaitees
 // http://doc.spip.org/@recherche_en_base
-function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serveur='') {
-	include_spip('base/abstract_sql');
-
+function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serveur='')
+{
 	if (!is_array($tables)) {
 		$liste = liste_des_champs();
 
 		if (is_string($tables)
-		AND $tables != '') {
+		AND $tables != '')
+		{
 			$toutes = array();
-			foreach(explode(',', $tables) as $t)
+			foreach (explode(',', $tables) as $t)
 				if (isset($liste[$t]))
 					$toutes[$t] = $liste[$t];
 			$tables = $toutes;

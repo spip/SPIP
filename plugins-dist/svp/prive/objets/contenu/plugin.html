@@ -1,0 +1,30 @@
+<BOUCLE_contenu_plugin(PLUGINS) {id_plugin=#ENV{id}}>
+<div class="champ contenu_titre[ (#NOM*|strlen|?{'',vide})]">
+	<div class='label'><:info_nom:></div>
+	<div dir='#LANG_DIR' class='titre'>#NOM</div>
+</div>
+<div class="champ contenu_soustitre[ (#PREFIXE*|strlen|?{'',vide})]">
+	<div class='label'><:label_prefixe:></div>
+	<div dir='#LANG_DIR' class='soustitre'>[(#PREFIXE|strtolower)]</div>
+</div>
+<div class="champ contenu_texte[ (#SLOGAN*|strlen|?{'',vide})]">
+	<div class='label'><:info_descriptif:></div>
+	<div dir='#LANG_DIR' class='texte'>[(#SLOGAN|sinon{#DESCRIPTION|couper{80}})]</div>
+</div>
+<div class="champ contenu_ps">
+	<div class='label'><:svp:label_categorie:>&nbsp;:</div>
+	<div dir='#LANG_DIR' class='ps'><p>[(#CATEGORIE|svp_traduire_categorie)]</p></div>
+	[<div class='label'><:svp:label_tags:>&nbsp;:</div>
+	<div dir='#LANG_DIR' class='ps'><p>(#TAGS)</p></div>]
+</div>
+<div class="champ contenu_ps">
+	<B_branches>
+	<div class='label'><:svp:label_branches_spip:>&nbsp;:</div>
+		<div class="texte">
+	<BOUCLE_branches(DATA){liste #BRANCHES_SPIP}{', '}>
+			SPIP #VALEUR
+	</BOUCLE_branches>
+		</div>
+	</B_branches>
+</div>
+</BOUCLE_contenu_plugin>

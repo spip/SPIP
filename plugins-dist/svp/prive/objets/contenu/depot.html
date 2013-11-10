@@ -1,0 +1,28 @@
+<BOUCLE_contenu_depot(DEPOTS) {id_depot=#ENV{id}}>
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<div class='label'><:info_nom:></div>
+	<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+</div>
+<div class="champ contenu_ps">
+	<div class='label'><:svp:label_xml_depot:>&nbsp;:</div>
+	<div dir='#LANG_DIR' class='#EDIT{xml_paquets} ps'>
+		<p><a href="#XML_PAQUETS" title="<:svp:bulle_telecharger_fichier_depot:>">#XML_PAQUETS</a></p>
+	</div>
+</div>
+<div class="champ contenu_ps">
+	<div class='label'><:svp:label_url_archives:>&nbsp;:</div>
+	<div dir='#LANG_DIR' class='#EDIT{url_archives} ps'><p>#URL_ARCHIVES</p></div>
+</div>
+[<div class="champ contenu_ps">
+	<div class='label'><:svp:label_type_depot:></div>
+	<div dir='#LANG_DIR' class='#EDIT{type} type'><p>(#TYPE|svp_traduire_type_depot)</p></div>
+	[<div class='label'><:svp:label_url_serveur:>&nbsp;:</div>
+	<div dir='#LANG_DIR' class='#EDIT{url_serveur} ps'><p>(#URL_SERVEUR)</p></div>]
+	[<div class='label'><:svp:label_url_brouteur:>&nbsp;:</div>
+	<div dir='#LANG_DIR' class='#EDIT{url_brouteur} ps'><p>(#URL_BROUTEUR)</p></div>]
+</div>]
+<div class="champ contenu_texte[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<div class='label'><:info_descriptif:></div>
+	<div dir='#LANG_DIR' class='#EDIT{descriptif} texte'>#DESCRIPTIF</div>
+</div>
+</BOUCLE_contenu_depot>

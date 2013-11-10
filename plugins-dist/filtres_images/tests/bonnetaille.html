@@ -1,0 +1,19 @@
+[(#REM)
+
+	Une image recadree a 50 doit faire 50.
+
+]
+[(#CHEMIN{tests/imagetest.jpg}
+        |image_passe_partout{54,54}
+        |image_recadre{50,50,center}
+        |image_aplatir{jpg,6C6C6C}
+        |extraire_attribut{width}
+        |=={50}
+        |?{'',NOK!})]
+[(#CHEMIN{tests/imagetest.jpg}
+        |image_passe_partout{54,54}
+        |image_recadre{50,50,center}
+        |image_aplatir{jpg,6C6C6C}
+        |extraire_attribut{width}
+        |=={50}
+        |?{OK,NOK!})]

@@ -1,0 +1,43 @@
+[(#REM)
+	Head standard de toutes les pages ;
+	les elements specifiques (title, description) figurent dans chaque squelette
+]
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+[(#REM) Lien vers le flux RSS du site ]
+[<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="(#URL_PAGE{backend})" />]
+
+[(#REM) 1. Base CSS ]
+<meta name="viewport" content="width=device-width" />
+[<link rel="stylesheet" href="(#CHEMIN{css/reset.css}|direction_css)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{css/font.css}|direction_css)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{css/typo.css}|direction_css)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{css/form.css}|direction_css)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{css/clear.css}|direction_css)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{css/grid.css}|direction_css)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{css/layout.css}|direction_css)" type="text/css" />]
+
+[(#REM) 2. Style SPIP et ses plugins ]
+[<link rel="stylesheet" href="(#CHEMIN{css/spip.css}|direction_css)" type="text/css" />]
+#INSERT_HEAD_CSS
+
+[(#REM) 3. Vos feuilles de style pour l'habillage du site ]
+[<link rel="stylesheet" href="(#CHEMIN{css/style.css}|direction_css)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{css/perso.css}|direction_css)" type="text/css" />]
+
+[(#REM)
+	Balise permettant aux plugins d'inserer des appels javascript ;
+	4. C'est ici que SPIP va inserer l'appel de la librairie jQuery
+	5. Et appeler a la fin compacte_head pour agreger et compacter tout le head dans des fichiers statiques si l'option est cochee dans Configuration
+]
+#INSERT_HEAD
+
+[(#REM) 6. Vos scripts ]
+[<script src="(#CHEMIN{js/script.js})" type="text/javascript"></script>]
+
+[(#REM) Fierement fabrique avec SPIP ]
+<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+
+[(#REM) Favicon ]
+[<link rel="icon" type="image/x-icon" href="(#CHEMIN{favicon.ico})" />
+[<link rel="shortcut icon" type="image/x-icon" href="(#CHEMIN{favicon.ico})" />]]

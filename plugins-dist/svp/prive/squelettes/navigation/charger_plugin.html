@@ -1,0 +1,10 @@
+[(#REM) <!-- Bloc de navigation du menu configuration --> ]
+#INCLURE{fond=prive/squelettes/inclure/menu-navigation,
+	menu=menu_configuration,
+	bloc=navigation,
+	env}
+
+[(#REM) <!-- Bloc d'information sur la page --> ]
+#BOITE_OUVRIR{'',info}
+<p><:svp:info_boite_charger_plugin:></p>
+#BOITE_FERMER

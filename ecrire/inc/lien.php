@@ -12,8 +12,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('base/abstract_sql');
-
 //
 // Production de la balise A+href a partir des raccourcis [xxx->url] etc.
 // Note : complique car c'est ici qu'on applique typo(),
@@ -168,8 +166,8 @@ function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 
 	// dans le cas d'un lien vers un doc, ajouter le type='mime/type'
 	if ($type == 'document'
-	AND $mime = sql_getfetsel('mime_type', 'spip_types_documents',
-			"extension IN (SELECT extension FROM spip_documents where id_document =".sql_quote($id).")",
+	AND $mime = Sql::getfetsel('mime_type', 'spip_types_documents',
+			"extension IN (SELECT extension FROM spip_documents where id_document =".Sql::quote($id).")",
 			'','','','',$connect)
 	)
 		$r['mime'] = $mime;
@@ -205,7 +203,7 @@ function traiter_raccourci_titre($id, $type, $connect=NULL)
 	$desc = $trouver_table(table_objet($type));
 	if (!($desc AND $s = $desc['titre'])) return array();
 	$_id = $desc['key']['PRIMARY KEY'];
-	$r = sql_fetsel($s, $desc['table'], "$_id=$id", '','','','',$connect);
+	$r = Sql::fetsel($s, $desc['table'], "$_id=$id", '','','','',$connect);
 	if (!$r) return array();
 	$r['titre'] = supprimer_numero($r['titre']);
 	if (!$r['titre']) $r['titre'] = $r['surnom'];

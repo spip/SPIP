@@ -1,0 +1,20 @@
+--- # Syntaxe des raccourcis SPIP, version 0.0.1
+    #
+    # Si on nomme une regle, elle devient surchargeable
+
+-
+  if_str: "<script"
+  match: "{<script.*?($|</script.)}isS"
+  is_wheel: y
+  replace:
+    -
+      type: all
+      replace: htmlspecialchars
+      is_callback: Y
+    -
+      type: all
+      replace: nl2br
+      is_callback: Y
+    -
+      type: all
+      replace: "<code class=\"echappe-js\">$0</code>"

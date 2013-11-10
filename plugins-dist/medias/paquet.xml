@@ -1,0 +1,47 @@
+<paquet
+	prefix="medias"
+	categorie="multimedia"
+	version="2.7.48"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/portfolio-32.png"
+	schema="1.2.4"
+>
+
+	<nom>Medias</nom>
+	<!-- Gestion des medias dans SPIP -->
+
+	<auteur>Collectif SPIP</auteur>
+	<credit>C&#233;dric Morin, Romy Duhem-Verdi&#232;re pour la m&#233;diath&#232;que</credit>
+
+	<traduire module="medias" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/medias.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/medias.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/medias.php" />
+	<pipeline nom="declarer_tables_objets_surnoms" inclure="base/medias.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/medias.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="base/medias.php" />
+	<pipeline nom="post_insertion" inclure="medias_pipelines.php" />
+	<pipeline nom="post_edition" inclure="medias_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="medias_pipelines.php" />
+	<pipeline nom="afficher_complement_objet" inclure="medias_pipelines.php" />
+	<pipeline nom="objet_compte_enfants" inclure="medias_pipelines.php" />
+	<pipeline nom="autoriser" inclure="medias_autoriser.php" />
+	<pipeline nom="boite_infos" inclure="medias_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="medias_pipelines.php" />
+	<pipeline nom="document_desc_actions" inclure="medias_pipelines.php" />
+	<pipeline nom="editer_document_actions" inclure="medias_pipelines.php" />
+	<pipeline nom="renseigner_document_distant" inclure="medias_pipelines.php" />
+	<pipeline nom="afficher_metas_document" action="" />
+	<pipeline nom="medias_documents_visibles" action="" />
+	<pipeline nom="ieconfig_metas" inclure="medias_ieconfig.php" />
+
+	<utilise nom="Z" compatibilite="[1.2.1;[" />
+	<utilise nom="mediabox" compatibilite="[0.5.0;[" />
+
+	<menu nom="documents" titre="medias:info_documents" parent="menu_edition" icone="images/portfolio-16.png" />
+
+	<chemin path="squelettes" />
+	<chemin path="" />
+</paquet>

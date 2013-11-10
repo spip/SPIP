@@ -29,7 +29,7 @@ function exec_base_repair_dist()
 	if (!spip_connect())
 		$message =  _T('titre_probleme_technique');
 	else {
-		$version_sql = sql_version();
+		$version_sql = Sql::version();
 		if (!$version_sql)
 			$message = _T('avis_erreur_connexion_mysql');
 		else {

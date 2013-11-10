@@ -21,15 +21,19 @@ function action_confirmer_email_dist()
 	$arg = $securiser_action();
 
 	include_spip('inc/filtres');
-	if ($GLOBALS['visiteur_session']['id_auteur'] AND email_valide($arg)){
+	if ($GLOBALS['visiteur_session']['id_auteur']
+		AND email_valide($arg))
+	{
 		include_spip('action/editer_auteur');
 		auteur_modifier($GLOBALS['visiteur_session']['id_auteur'],array('email'=>$arg));
 	}
 	// verifier avant de rediriger pour invalider le message de confirmation
 	// si ca n'a pas marche
-	if ($redirect = _request('redirect') AND !$arg == sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($GLOBALS['visiteur_session'])))
+	if ($redirect = _request('redirect')
+		AND !$arg == Sql::getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($GLOBALS['visiteur_session'])))
+	{
 		$GLOBALS['redirect'] = parametre_url($redirect, 'email_modif','');
-
+	}
 }
 
 ?>

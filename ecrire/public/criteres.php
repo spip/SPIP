@@ -128,12 +128,12 @@ function critere_doublons_dist($idb, &$boucles, $crit){
 	$init_comment = "\n\n\t// Initialise le(s) critère(s) doublons\n";
 	$init_code = "\tif (!isset(\$doublons[\$d = $nom])) { \$doublons[\$d] = ''; }\n";
 
-	// on crée un sql_in avec la clé primaire de la table
+	// on crée un Sql::in avec la clé primaire de la table
 	// et la collection des doublons déjà emmagasinés dans le tableau
 	// $doublons et son index, ici $nom
 
-	// debut du code "sql_in('articles.id_article', "
-	$debut_in = "sql_in('".$boucle->id_table.'.'.$primary."', ";
+	// debut du code "Sql::in('articles.id_article', "
+	$debut_in = "Sql::in('".$boucle->id_table.'.'.$primary."', ";
 	// lecture des données du doublon "$doublons[$doublon_index[] = "
 	// Attention : boucle->doublons désigne une variable qu'on affecte
 	$debut_doub = '$doublons[' . (!$not ? '' : ($boucle->doublons."[]= "));
@@ -148,7 +148,7 @@ function critere_doublons_dist($idb, &$boucles, $crit){
 	// on fusionne pour avoir un seul IN, et on s'en va !
 	foreach ($boucle->where as $k => $w) {
 		if (strpos($w[0], $debut_doub)===0) {
-			// fusionner le sql_in (du where)
+			// fusionner le Sql::in (du where)
 			$boucle->where[$k][0] = $debut_doub . $fin_doub.' . '.substr($w[0], strlen($debut_in));
 			// fusionner l'initialisation (du hash) pour faire plus joli
 			$x = strpos($boucle->hash, $init_comment);
@@ -409,12 +409,12 @@ function critere_branche_dist($idb, &$boucles, $crit){
 		if (count(trouver_champs_decomposes($champ, $desc))>1){
 			$decompose = decompose_champ_id_objet($champ);
 			$champ = array_shift($decompose);
-			$boucle->where[] = array("'='", _q($cle.".".reset($decompose)), '"'.sql_quote(end($decompose)).'"');
+			$boucle->where[] = array("'='", _q($cle.".".reset($decompose)), '"'.Sql::quote(end($decompose)).'"');
 		}
 	}
 	else $cle = $boucle->id_table;
 
-	$c = "sql_in('$cle".".$champ', calcul_branche_in($arg)"
+	$c = "Sql::in('$cle".".$champ', calcul_branche_in($arg)"
 	     .($not ? ", 'NOT'" : '').")";
 	$boucle->where[] = !$crit->cond ? $c :
 		("($arg ? $c : ".($not ? "'0=1'" : "'1=1'").')');
@@ -427,7 +427,7 @@ function critere_logo_dist($idb, &$boucles, $crit){
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
 
-	$c = "sql_in('".
+	$c = "Sql::in('".
 	     $boucle->id_table.'.'.$boucle->primary
 	     ."', lister_objets_avec_logos('".$boucle->primary."'), '')";
 
@@ -542,7 +542,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens = ''){
 				}
 				if ($cle) { $cle .= '.'; }
 				$texte = $cle.$champ;
-				$boucle->select[] = "\".sql_multi('".$texte."', \$GLOBALS['spip_lang']).\"";
+				$boucle->select[] = "\".Sql::multi('".$texte."', \$GLOBALS['spip_lang']).\"";
 				$order = "'multi'";
 				// par num champ(, suite)
 			} else if (preg_match(",^num (.*)$,m", $par, $m)) {
@@ -727,10 +727,10 @@ function critere_agenda_dist($idb, &$boucles, $crit){
 	$quote_end = ",'".$boucle->sql_serveur."','text'";
 	if ($type=='jour')
 		$boucle->where[] = array("'='", "'DATE_FORMAT($date, \'%Y%m%d\')'",
-		                         ("sql_quote($annee . $mois . $jour$quote_end)"));
+		                         ("Sql::quote($annee . $mois . $jour$quote_end)"));
 	elseif ($type=='mois')
 		$boucle->where[] = array("'='", "'DATE_FORMAT($date, \'%Y%m\')'",
-		                         ("sql_quote($annee . $mois$quote_end)"));
+		                         ("Sql::quote($annee . $mois$quote_end)"));
 	elseif ($type=='semaine')
 		$boucle->where[] = array("'AND'",
 		                         array("'>='",
@@ -743,8 +743,8 @@ function critere_agenda_dist($idb, &$boucles, $crit){
 		$boucle->where[] = array("'AND'",
 		                         array("'>='",
 		                               "'DATE_FORMAT($date, \'%Y%m%d\')'",
-		                               ("sql_quote($annee . $mois . $jour$quote_end)")),
-		                         array("'<='", "'DATE_FORMAT($date, \'%Y%m%d\')'", ("sql_quote($annee2 . $mois2 . $jour2$quote_end)")));
+		                               ("Sql::quote($annee . $mois . $jour$quote_end)")),
+		                         array("'<='", "'DATE_FORMAT($date, \'%Y%m%d\')'", ("Sql::quote($annee2 . $mois2 . $jour2$quote_end)")));
 	// sinon on prend tout
 }
 
@@ -933,9 +933,9 @@ function calculer_criteres($idb, &$boucles){
  */
 function kwote($lisp, $serveur='', $type=''){
 	if (preg_match(_CODE_QUOTE, $lisp, $r))
-		return $r[1]."\"".sql_quote(str_replace(array("\\'", "\\\\"), array("'", "\\"), $r[2]),$serveur,$type)."\"";
+		return $r[1]."\"".Sql::quote(str_replace(array("\\'", "\\\\"), array("'", "\\"), $r[2]),$serveur,$type)."\"";
 	else
-		return "sql_quote($lisp)";
+		return "Sql::quote($lisp)";
 }
 
 // Si on a une liste de valeurs dans #ENV{x}, utiliser la double etoile
@@ -985,7 +985,7 @@ function critere_IN_cas($idb, &$boucles, $crit2, $arg, $op, $val, $col){
 			if (is_numeric($r[2]))
 				$x .= "\n\t$var"."[]= $r[2];";
 			else
-				$x .= "\n\t$var"."[]= ".sql_quote($r[2]).";";
+				$x .= "\n\t$var"."[]= ".Sql::quote($r[2]).";";
 		} else {
 			// Pour permettre de passer des tableaux de valeurs
 			// on repere l'utilisation brute de #ENV**{X},
@@ -1002,10 +1002,10 @@ function critere_IN_cas($idb, &$boucles, $crit2, $arg, $op, $val, $col){
 	// et que l'on limite donc strictement aux cas necessaires :
 	// si ce n'est pas un !IN, et si il n'y a pas d'autre order dans la boucle
 	if (!$crit2){
-		$boucles[$idb]->default_order[] = "((!sql_quote($var) OR sql_quote($var)===\"''\") ? 0 : ('FIELD($arg,' . sql_quote($var) . ')'))";
+		$boucles[$idb]->default_order[] = "((!Sql::quote($var) OR Sql::quote($var)===\"''\") ? 0 : ('FIELD($arg,' . Sql::quote($var) . ')'))";
 	}
 
-	return "sql_in('$arg',sql_quote($var)".($crit2=='NOT' ? ",'NOT'" : "").")";
+	return "Sql::in('$arg',Sql::quote($var)".($crit2=='NOT' ? ",'NOT'" : "").")";
 }
 
 /**
@@ -1242,30 +1242,30 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 
 	$col_vraie = ($col_vraie?$col_vraie:$col);
 	// Dans tous les cas,
-	// virer les guillemets eventuels autour d'un int (qui sont refuses par certains SQL) et passer dans sql_quote avec le type si connu
+	// virer les guillemets eventuels autour d'un int (qui sont refuses par certains SQL) et passer dans Sql::quote avec le type si connu
 	// et int sinon si la valeur est numerique
-	// sinon introduire le vrai type du champ si connu dans le sql_quote (ou int NOT NULL sinon)
+	// sinon introduire le vrai type du champ si connu dans le Sql::quote (ou int NOT NULL sinon)
 	// Ne pas utiliser intval, PHP tronquant les Bigint de SQL
 	if ($op=='=' OR in_array($op, $table_criteres_infixes)){
 
-		// defaire le quote des int et les passer dans sql_quote avec le bon type de champ si on le connait, int sinon
+		// defaire le quote des int et les passer dans Sql::quote avec le bon type de champ si on le connait, int sinon
 		// prendre en compte le debug ou la valeur arrive avec un commentaire PHP en debut
 		if (preg_match(",^\\A(\s*//.*?$\s*)?\"'(-?\d+)'\"\\z,ms", $val[0], $r))
-			$val[0] = $r[1].'"'.sql_quote($r[2],$boucle->sql_serveur,(isset($desc['field'][$col_vraie])?$desc['field'][$col_vraie]:'int NOT NULL')).'"';
+			$val[0] = $r[1].'"'.Sql::quote($r[2],$boucle->sql_serveur,(isset($desc['field'][$col_vraie])?$desc['field'][$col_vraie]:'int NOT NULL')).'"';
 
 		// sinon expliciter les
-		// sql_quote(truc) en sql_quote(truc,'',type)
-		// sql_quote(truc,serveur) en sql_quote(truc,serveur,type)
+		// Sql::quote(truc) en Sql::quote(truc,'',type)
+		// Sql::quote(truc,serveur) en Sql::quote(truc,serveur,type)
 		// sans toucher aux
-		// sql_quote(truc,'','varchar(10) DEFAULT \'oui\' COLLATE NOCASE')
-		// sql_quote(truc,'','varchar')
-		elseif (preg_match('/\Asql_quote[(](.*?)(,[^)]*?)?(,[^)]*(?:\(\d+\)[^)]*)?)?[)]\s*\z/ms', $val[0], $r)
+		// Sql::quote(truc,'','varchar(10) DEFAULT \'oui\' COLLATE NOCASE')
+		// Squote(truc,'','varchar')
+		elseif (preg_match('/\ASql::quote[(](.*?)(,[^)]*?)?(,[^)]*(?:\(\d+\)[^)]*)?)?[)]\s*\z/ms', $val[0], $r)
 			// si pas deja un type
 		  AND (!isset($r[3]) OR !$r[3])) {
 			$r = $r[1]
 				.((isset($r[2]) AND $r[2]) ? $r[2] : ",''")
 				.",'".(isset($desc['field'][$col_vraie])?addslashes($desc['field'][$col_vraie]):'int NOT NULL')."'";
-			$val[0] = "sql_quote($r)";
+			$val[0] = "Sql::quote($r)";
 		}
 	}
 	// Indicateur pour permettre aux fonctionx boucle_X de modifier 
@@ -1367,13 +1367,13 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 	return array($col, $col_alias, $table, $where, $desc);
 }
 
-// Ne pas appliquer sql_quote lors de la compilation,
+// Ne pas appliquer Sql::quote lors de la compilation,
 // car on ne connait pas le serveur SQL, donc s'il faut \' ou ''
 
 // http://doc.spip.org/@primary_doublee
 function primary_doublee($decompose, $table){
 	$e1 = reset($decompose);
-	$e2 = "sql_quote('".end($decompose)."')";
+	$e2 = "Sql::quote('".end($decompose)."')";
 	return array("'='", "'$table.".$e1."'", $e2);
 }
 
@@ -1889,7 +1889,7 @@ function critere_noeud_dist($idb, &$boucles, $crit){
 		'id_parent';
 
 	$in = "IN";
-	$where = array("'IN'", "'$boucle->id_table."."$primary'", "'('.sql_get_select('$id_parent', '$table_sql').')'");
+	$where = array("'IN'", "'$boucle->id_table."."$primary'", "'('.Sql::get_select('$id_parent', '$table_sql').')'");
 	if ($not)
 		$where = array("'NOT'", $where);
 

@@ -1,0 +1,25 @@
+<div class="details"><BOUCLE_plugins(PAQUETS plugins){tout}{id_paquet}>
+	<dl class="description">
+		<dd class="desc">
+			[(#DESCRIPTION|extraire_multi|propre)]
+			[<em class="site">
+				<a href="(#LIEN_DOC)" class="spip_out" title="<:svp:bulle_aller_documentation:>"><:en_savoir_plus:></a>
+			</em>]
+		</dd>
+		[<dt class="auteurs"><:public:par_auteur:></dt>
+		<dd class="auteurs">(#AUTEUR*|svp_afficher_credits)</dd>]
+		[<dt class="credits"><:plugin_info_credit:></dt>
+		<dd class="credits">(#CREDIT*|svp_afficher_credits)</dd>]
+		[<dt class="licence"><:intitule_licence:></dt>
+		<dd class="licence">(#LICENCE|svp_afficher_credits{','})</dd>]
+	</dl>
+	[(#AUTORISER{webmestre}|oui)
+	<dl class="tech">
+		<dt><:version:></dt>
+		<dd>#VERSION[ SVN \[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})\]]</dd>
+		<dt><:repertoire_plugins:></dt>
+		<dd>[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|joli_repertoire)]</dd>
+		[<dt><:plugin_info_necessite:></dt>
+		<dd>(#DEPENDANCES|svp_afficher_dependances{necessite, ', '}|supprimer_tags)</dd>]
+	</dl>]
+</BOUCLE_plugins></div>

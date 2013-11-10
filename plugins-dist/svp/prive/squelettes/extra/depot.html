@@ -1,0 +1,11 @@
+<BOUCLE_extra_depot(DEPOTS){id_depot}{si #ENV{exec}|=={depot}}>
+#SET{exclusion, #VAL{id_depot!=}|concat{#ID_DEPOT}}
+<INCLURE{fond=prive/objets/liste/depots,
+	titre=<:svp:titre_liste_autres_depots:>,
+	par=titre,
+	pas=10,
+	where=#GET{exclusion},
+	affichage=simplifie,
+	env, ajax} />
+</BOUCLE_extra_depot>
+<//B_extra_depot>

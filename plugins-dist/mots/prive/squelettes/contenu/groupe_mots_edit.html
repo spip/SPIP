@@ -1,0 +1,24 @@
+[(#ID_GROUPE|oui)
+	[(#AUTORISER{modifier,groupemots,#ID_GROUPE}|sinon_interdire_acces)]]
+[(#ID_GROUPE|non)
+	[(#AUTORISER{creer,groupemots,#ID_GROUPE}|sinon_interdire_acces)]]
+
+#SET{redirect,#ENV{redirect}|sinon{#ENV{id_groupe}|?{#URL_ECRIRE{groupe_mots,id_groupe=#ID_GROUPE},#URL_ECRIRE{mots}}}}
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,groupe_mots-24.png,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[<:titre_groupe_mots:>
+	<h1>(#ENV{titre,#INFO_TITRE{groupe_mots,#ID_GROUPE}|sinon{<:mots:titre_nouveau_groupe:>}})</h1>]
+</div>
+#SET{redirect,#ENV{redirect,#ID_GROUPE|generer_url_entite{groupe_mots}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		#FORMULAIRE_EDITER_GROUPE_MOT{#ENV{id_groupe,oui},#GET{redirect}}
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/if (window.jQuery) jQuery('#navigation>div,#extra>div').ajaxReload({args:{exec:'#ENV{exec}'}});/*\]\]>*/</script>
+]
+
+</div>

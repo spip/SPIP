@@ -1,0 +1,46 @@
+<fieldset><legend><:medias:upload_fichier_zip:></legend>
+	<div class='explication'><:medias:upload_fichier_zip_texte:></div>
+	<input type='hidden' name='chemin_zip' value='#ENV{chemin_zip}' />
+	<ul>
+		<li class='editer editer_options_upload_zip[ (#ENV*{erreurs_fichier_zip}|oui)erreur]'>
+		<label><:medias:upload_fichier_zip_texte2:></label>
+		<div class='choix'>
+			<input type='radio' checked='checked' name='options_upload_zip' id='options_upload_zip_telquel' value='upload'
+			 onchange='jQuery("#editer_options_deballe_zip").slideUp();' />
+			<label for='options_upload_zip_telquel'><:medias:upload_zip_telquel:></label>
+		</div>
+		[<div class='choix'>
+			<input type='radio' name='options_upload_zip' id='options_upload_zip_deballe' value='deballe'
+			 onchange='jQuery("#editer_options_deballe_zip").slideDown();' />
+			<label for='options_upload_zip_deballe'><:medias:upload_zip_decompacter:>
+				<ol class="spip">
+					(#ENV*{liste_fichiers_zip}|joindre_liste_contenu_tailles_archive)
+				</ol>
+			</label>
+			<ul>
+				<li class='editer editer_options_deballe_zip' id='editer_options_deballe_zip'>
+					<div class='choix'>
+						<input type='checkbox' name='options_deballe_zip_conserver' id='options_deballe_zip_conserver' value='1' />
+						<label for='options_deballe_zip_conserver'><:medias:upload_zip_conserver:></label>
+					</div>
+					<div class='choix'>
+						<input type='checkbox' name='options_deballe_zip_titrer' id='options_deballe_zip_titrer' value='1' />
+						<label for='options_deballe_zip_titrer'><:medias:upload_zip_titrer:></label>
+					</div>
+					<div class='choix'>
+						<input type='checkbox' name='options_deballe_zip_mode_document' id='options_deballe_zip_mode_document' value='1' />
+						<label for='options_deballe_zip_mode_document'><:medias:upload_zip_mode_document:></label>
+					</div>
+				</li>
+			</ul>
+		</div>]
+		[
+			<div class='erreur_message'>(#ENV*{erreurs_fichier_zip}|joindre_liste_erreurs_to_li)</div>
+		]
+	</li>
+	</ul>
+	<p class='boutons'><input class='submit' type='submit' name='joindre_zip' value='<:bouton_valider|attribut_html:>' /></p>
+	<script type='text/javascript'>
+	if (window.jQuery){	jQuery(document).ready(function(){jQuery("#editer_options_deballe_zip").hide();}); }
+	</script>
+</fieldset>

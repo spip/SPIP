@@ -1,0 +1,41 @@
+<paquet
+	prefix="forum"
+	categorie="communication"
+	version="1.8.27"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/forum-32.png"
+	schema="1.2.1"
+>	
+
+	<nom>Forum</nom>
+	<!-- Gestion des forums privés et publics dans SPIP -->
+
+	<auteur>Collectif SPIP</auteur>
+
+	<traduire module="forum" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="forum_objets_depuis_env" action="" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/forum.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/forum.php" />
+	<pipeline nom="autoriser" inclure="forum_autoriser.php" />
+	<pipeline nom="notifications" inclure="inc/email_notification_forum.php" />
+	<pipeline nom="accueil_encours" inclure="forum_pipelines.php" />
+	<pipeline nom="accueil_informations" inclure="forum_pipelines.php" />
+	<pipeline nom="afficher_fiche_objet" inclure="forum_pipelines.php" />
+	<pipeline nom="afficher_config_objet" inclure="forum_pipelines.php" />
+	<pipeline nom="afficher_message_statut_objet" inclure="forum_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="forum_pipelines.php" />
+	<pipeline nom="compter_contributions_auteur" inclure="forum_pipelines.php" />
+	<pipeline nom="configurer_liste_metas" inclure="forum_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="forum_pipelines.php" />
+	<pipeline nom="pre_insertion" inclure="forum_pipelines.php" />
+	<pipeline nom="prepare_recherche" inclure="forum_pipelines.php" />
+	<pipeline nom="rubrique_encours" inclure="forum_pipelines.php" />
+	<pipeline nom="trig_supprimer_objets_lies" inclure="forum_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="forum_ieconfig.php" />
+
+	<menu nom="forum_reactions" titre="forum:icone_suivi_forums" parent="menu_activite" icone="images/forum-16.png" action="controler_forum" />
+	<menu nom="configurer_forum" titre="forum:titre_forum" parent="menu_configuration" icone="images/forum-16.png" />
+	<menu nom="forum_interne_suivi" titre="forum:titre_cadre_forum_interne" parent="outils_collaboratifs" icone="images/forum-interne-16.png" action="forum" />
+</paquet>

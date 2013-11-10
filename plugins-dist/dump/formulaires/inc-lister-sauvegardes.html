@@ -1,0 +1,41 @@
+<B_dump>
+<div class='liste-objets dump' id='#ENV{id,sauvegardes}'>
+	<table class='spip liste'>
+		<thead>
+		[<caption><strong class='caption'>(#ENV{titre,''})</strong></caption>]
+		<tr class="first_row">
+			[(#ENV{name,''}|oui)<th></th>]
+			<th scope='col'>[(#SELF|parametre_url{tri,nom}|ancre_url{##ENV{id,sauvegardes}}|lien_ou_expose{<:info_nom:>,#ENV{tri,nom}|=={nom},ajax})]</th>
+			<th scope='col'>[(#SELF|parametre_url{tri,taille}|ancre_url{##ENV{id,sauvegardes}}|lien_ou_expose{<:label_poids_fichier:>,#ENV{tri,nom}|=={taille},ajax})]</th>
+			<th scope='col'>[(#SELF|parametre_url{tri,date}|ancre_url{##ENV{id,sauvegardes}}|lien_ou_expose{<:public:date:>,#ENV{tri,nom}|=={date},ajax})]</th>
+			[(#ENV{download,''}|oui)
+			<th scope='col'></th>
+			]
+		</tr>
+		</thead>
+		<tbody>
+			<BOUCLE_dump(POUR){tableau #ENV{_dir_dump,#REM|dump_repertoire}|dump_lister_sauvegardes{#ENV{tri,nom}}}>
+				<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+					[<td><input type='radio' name="(#ENV{name,''})" value="#VALEUR{fichier}" id="dump_#COMPTEUR_BOUCLE"
+								[(#ENV{#ENV{name}}|=={#VALEUR{fichier}}|oui)checked="checked"]
+								/></td>]
+					<td class="fichier principale">
+						<label for="dump_#COMPTEUR_BOUCLE" title="[(#VALEUR{fichier}|basename{.sqlite}|attribut_html)]">[(#VALEUR{fichier}|basename{.sqlite})]</label>
+					</td>
+					<td class="taille">
+						[(#VALEUR{taille}|taille_en_octets)]
+					</td>
+					<td>
+						[(#VAL{'Y-m-d H:i:s'}|date{#VALEUR{date}}|affdate_heure)]
+					</td>
+					[(#ENV{download,''}|oui)
+					<td>
+						<a href="#URL_ACTION_AUTEUR{telecharger_dump,#VALEUR{fichier}}" title="<:bouton_download|attribut_html:>">[(#CHEMIN_IMAGE{telecharger-16.png}|balise_img{<:bouton_download:>})]</a>
+					</td>
+					]
+				</tr>
+			</BOUCLE_dump>
+		</tbody>
+	</table>
+</div>
+</B_dump>

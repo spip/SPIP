@@ -11,14 +11,8 @@
 \***************************************************************************/
 
 define('_ESPACE_PRIVE', true);
-if (!defined('_DIR_RESTREINT_ABS')) define('_DIR_RESTREINT_ABS', './');
-if (!defined('_ECRIRE_INC_VERSION')) include 'inc_version.php';
 
-require_once _DIR_RESTREINT_ABS.'class/AutoloadClass.php';
-if (!defined('SPIP_AUTOLOAD')) {
-    spl_autoload_register(array('Autoload', 'load'));
-    define('SPIP_AUTOLOAD', true);
-}
+if (!defined('_ECRIRE_INC_VERSION')) include 'inc_version.php';
 
 // Verification anti magic_quotes_sybase, pour qui addslashes("'") = "''"
 // On prefere la faire ici plutot que dans inc_version, c'est moins souvent et
@@ -79,9 +73,9 @@ if (_request('action') OR _request('var_ajax') OR _request('formulaire_action'))
 
 // Controle de la version, sauf si on est deja en train de s'en occuper
 if (!$reinstall=='oui'
-AND !_AJAX
-AND isset($GLOBALS['meta']['version_installee'])
-AND ($GLOBALS['spip_version_base'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))))
+  AND !_AJAX
+  AND isset($GLOBALS['meta']['version_installee'])
+  AND ($GLOBALS['spip_version_base'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))))
 	$exec = 'demande_mise_a_jour';
 
 // Quand une action d'administration est en cours (meta "admin"),
@@ -138,7 +132,6 @@ if (!$var_auth AND isset($_COOKIE['spip_lang_ecrire'])
   	include_spip('action/converser');
   	action_converser_post($GLOBALS['visiteur_session']['lang'],true);
 }
-
 
 // Passer la main aux outils XML a la demande (meme les redac s'ils veulent).
 // mais seulement si on a bien ete auhentifie

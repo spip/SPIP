@@ -123,8 +123,7 @@ function caracteriser_auteur($id_auteur=null) {
 	if (isset($caracterisation[$id_auteur])) return $caracterisation[$id_auteur];
 
 	if ($id_auteur) {
-		include_spip('base/abstract_sql');
-		$t = sql_fetsel("id_auteur, pass", "spip_auteurs", "id_auteur=$id_auteur");
+		$t = Sql::fetsel("id_auteur, pass", "spip_auteurs", "id_auteur=$id_auteur");
 		if ($t)
 			return $caracterisation[$id_auteur] = array($t['id_auteur'], $t['pass']);
 		include_spip('inc/minipres');
@@ -154,8 +153,7 @@ function _action_auteur($action, $id_auteur, $pass, $alea) {
 	static $sha = array();
 	if (!isset($sha[$id_auteur.$pass.$alea])){
 		if (!isset($GLOBALS['meta'][$alea]) AND _request('exec')!=='install') {
-			include_spip('base/abstract_sql');
-			$GLOBALS['meta'][$alea] = sql_getfetsel('valeur', 'spip_meta', "nom=" . sql_quote($alea));
+			$GLOBALS['meta'][$alea] = Sql::getfetsel('valeur', 'spip_meta', "nom=" . Sql::quote($alea));
 			if (!($GLOBALS['meta'][$alea])) {
 				include_spip('inc/minipres');
 				echo minipres();
@@ -219,12 +217,12 @@ function verifier_action_auteur($action, $hash) {
  * @return string
  */
 function secret_du_site() {
-	if (!isset($GLOBALS['meta']['secret_du_site'])){
-		include_spip('base/abstract_sql');
-		$GLOBALS['meta']['secret_du_site'] = sql_getfetsel('valeur', 'spip_meta', "nom='secret_du_site'");
+	if (!isset($GLOBALS['meta']['secret_du_site'])) {
+		$GLOBALS['meta']['secret_du_site'] = Sql::getfetsel('valeur', 'spip_meta', "nom='secret_du_site'");
 	}
 	if (!isset($GLOBALS['meta']['secret_du_site'])
-	  OR (strlen($GLOBALS['meta']['secret_du_site'])<64)) {
+	OR (strlen($GLOBALS['meta']['secret_du_site'])<64))
+	{
 		include_spip('inc/acces');
 		include_spip('auth/sha256.inc');
 		ecrire_meta('secret_du_site', _nano_sha256($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid()), 'non');

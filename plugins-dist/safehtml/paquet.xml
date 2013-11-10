@@ -1,0 +1,20 @@
+<paquet
+	prefix="safehtml"
+	categorie="performance"
+	version="1.4.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/safehtml-32.png"
+	documentation="http://www.ohloh.net/p/safehtml"
+>	
+
+	<nom>SafeHTML</nom>
+	<!-- Protection des forums contre le cross-site scripting -->
+
+	<auteur>Collectif SPIP</auteur>
+	<credit>Roman Ivanov</credit>
+	<credit>Pixel-Apes</credit>
+	<credit>JetStyle</credit>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+</paquet>

@@ -1,0 +1,14 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+]
+#SET{img1,#CHEMIN{tests/imagetest.jpg}|image_masque{tests/masque-305x85.png}|image_renforcement{0.1}|image_aplatir{jpg}|extraire_attribut{src}}
+#SET{img2,#CHEMIN{tests/imagetest.jpg}|image_masque{tests/masque-305x85.png}|image_renforcement{0.1}|image_aplatir{jpg}|extraire_attribut{src}}
+#SET{ok,OK}
+[(#GET{img1}|file_exists|non) Image [(#GET{img1})] inexistante <br />#SET{ok,''}]
+[(#GET{img2}|file_exists|non) Image [(#GET{img2})] inexistante <br />#SET{ok,''}]
+[(#GET{img1}|=={#GET{img2}}|non) Resultat incoherent : meme chaine de filtre produit 2 images differentes [(#GET{img1})]<>[(#GET{img2})] <br />#SET{ok,''}]
+#GET{ok}

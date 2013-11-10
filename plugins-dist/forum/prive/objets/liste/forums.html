@@ -1,0 +1,44 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_heure,#ENV{date_sens,-1},
+	titre,1,
+	id_forum,1,
+	points,-1
+}})
+]<B_liste_art>
+#ANCRE_PAGINATION
+<div class="liste-objets forums">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{forum:info_1_message_forum,forum:info_nb_messages_forum}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre principale' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='auteur' scope='col'><:auteur:></th>
+			<th class='date secondaire' scope='col'>[(#TRI{date_heure,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_forum,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_art(FORUMS){id_forum?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date_heure},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#CHEMIN_IMAGE{[forum-statut-(#STATUT)-24.png]}|balise_img|inserer_attribut{alt,#VAL{forum:statut_}|concat{#STATUT}|_T})]</td>
+			<td class='titre principale'><a href="[(#ID_FORUM|generer_url_entite{forum})]"
+																																						title="<:info_numero_abbreviation|attribut_html:> #ID_FORUM">[(#RANG). ]#TITRE</a>
+			[<div class='texte'>(#TEXTE|couper{100})</div>]
+			</td>
+			<td class='auteur'>[(#ID_AUTEUR|oui)<a
+							href='[(#ID_AUTEUR|generer_url_entite{auteur})]'>#MODELE{auteur_nom,id_auteur}</a>][(#ID_AUTEUR|non)#AUTEUR]</td>
+			<td class='date secondaire'>[(#DATE_HEURE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modererforum,#OBJET,#ID_OBJET}|?{
+				<a href="[(#URL_ECRIRE{controler_forum,debut_forum=#ID_FORUM})]">#ID_FORUM</a>,
+				#ID_FORUM
+			})]</td>
+		</tr>
+	</BOUCLE_liste_art>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_art>[
+<div class="liste-objets forums caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_art>

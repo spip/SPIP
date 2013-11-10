@@ -1,0 +1,15 @@
+[(#AUTORISER{administrer,url}|sinon_interdire_acces)]
+#SET{self,#SELF|parametre_url{debut_urls,''}}
+#SET{recherche,#ENV{recherche}|?{#VAL{%}|concat{#ENV{recherche},%},'%'}}
+[(#OBJET|non)
+<h1 class="grostitre"><:urls:liste_des_urls:></h1>]
+[<h2>(#OBJET|ucfirst) <:info_numero_abbreviation:>#ID_OBJET </h2>
+[(#VAL{91}|chr|concat{'->',#OBJET,#ID_OBJET,#VAL{93}|chr}|propre|PtoBR)]
+
+<div>\[<a href="[(#GET{self}|parametre_url{id_objet|objet,''})]"><:urls:tout_voir:></a>\]</div>
+
+<div class="nettoyeur"></div>]
+#FORMULAIRE_RECHERCHE_ECRIRE{#GET{self},ajax}
+[<h3><:resultats_recherche:> &#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</h3>]
+<div class="nettoyeur"></div>
+<INCLURE{fond=prive/objets/liste/urls,env,nb=50,recherche=#GET{recherche}} />

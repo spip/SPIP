@@ -1,0 +1,27 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_forums_contenu' id='formulaire_configurer_forums_contenu'>
+<h3 class='titrem'>[(#CHEMIN_IMAGE{revision-24.png}|balise_img{'',cadre-icone})]<:revisions:titre_form_revisions_objets:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form action="#ENV{action}#formulaire_configurer_contenu_forums" method="post"><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<ul>
+			<li class='editer long_label configurer_objets_versions[ (#ENV**{erreurs}|table_valeur{objets_versions}|oui)erreur]'>
+				<label><:revisions:label_config_revisions_objets:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{objets_versions})</span>]
+				#SET{name,objets_versions}
+				<BOUCLE_objets(POUR){tableau #REM|lister_tables_objets_sql}>[(#VALEUR*|test_objet_versionable)
+				#SET{id,#GET{name}|replace{\W,'_'}|concat{'_',#CLE}}
+				<div class="choix choix_#CLE">
+					<input type="checkbox"  id="#GET{id}" name="#GET{name}\[\]" value="#CLE"[(#CLE|in_any{#ENV{#GET{name}}})checked="checked"] />
+					<label for="#GET{id}">[(#VALEUR{texte_objets}|_T)]</label>
+				</div>
+				]</BOUCLE_objets>
+				<input type="hidden" name="#ENV{name}[]" value="" />
+			</li>
+		</ul>
+		<p class='boutons'><span class="image_loading"></span><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
+	</div></form>
+
+</div>

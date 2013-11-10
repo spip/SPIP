@@ -68,10 +68,10 @@ function creer_uniqid() {
 //
 
 // http://doc.spip.org/@renouvelle_alea
-function renouvelle_alea() {
-	if (!isset($GLOBALS['meta']['alea_ephemere'])){
-		include_spip('base/abstract_sql');
-		$GLOBALS['meta']['alea_ephemere'] = sql_getfetsel('valeur', 'spip_meta', "nom='alea_ephemere'");
+function renouvelle_alea()
+{
+	if (!isset($GLOBALS['meta']['alea_ephemere'])) {
+		$GLOBALS['meta']['alea_ephemere'] = Sql::getfetsel('valeur', 'spip_meta', "nom='alea_ephemere'");
 	}
 	ecrire_meta('alea_ephemere_ancien', @$GLOBALS['meta']['alea_ephemere'], 'non');
 	$GLOBALS['meta']['alea_ephemere'] = md5(creer_uniqid());
@@ -93,10 +93,10 @@ function low_sec($id_auteur) {
 		}
 	}
 	else {
-		$low_sec = sql_getfetsel("low_sec", "spip_auteurs", "id_auteur = $id_auteur");
+		$low_sec = Sql::getfetsel("low_sec", "spip_auteurs", "id_auteur = $id_auteur");
 		if (!$low_sec) {
 			$low_sec = creer_pass_aleatoire();
-			sql_updateq("spip_auteurs", array("low_sec" => $low_sec), "id_auteur = $id_auteur");
+			Sql::updateq("spip_auteurs", array("low_sec" => $low_sec), "id_auteur = $id_auteur");
 		}
 	}
 	return $low_sec;
@@ -139,7 +139,7 @@ function verifier_low_sec ($id_auteur, $cle, $action='') {
 // http://doc.spip.org/@effacer_low_sec
 function effacer_low_sec($id_auteur) {
 	if (!$id_auteur = intval($id_auteur)) return; // jamais trop prudent ;)
-	sql_updateq("spip_auteurs", array("low_sec" => ''), "id_auteur = $id_auteur");
+	Sql::updateq("spip_auteurs", array("low_sec" => ''), "id_auteur = $id_auteur");
 }
 
 // http://doc.spip.org/@initialiser_sel
@@ -175,8 +175,8 @@ function ecrire_acces() {
 	if (spip_connect_ldap()) return;
 	$p1 = ''; // login:htpass pour tous
 	$p2 = ''; // login:htpass pour les admins
-	$s = sql_select("login, htpass, statut", "spip_auteurs", sql_in("statut",  array('1comite','0minirezo','nouveau')));
-	while ($t = sql_fetch($s)) {
+	$s = Sql::select("login, htpass, statut", "spip_auteurs", Sql::in("statut",  array('1comite','0minirezo','nouveau')));
+	while ($t = Sql::fetch($s)) {
 		if (strlen($t['login']) AND strlen($t['htpass'])) {
 			$p1 .= $t['login'].':'.$t['htpass']."\n";
 			if ($t['statut'] == '0minirezo')
@@ -233,7 +233,7 @@ function gerer_htaccess() {
 	// Cette variable de configuration peut etre posee par un plugin
 	// par exemple acces_restreint
 	$f = ($GLOBALS['meta']['creer_htaccess'] === 'oui');
-	$dirs = sql_allfetsel('extension', 'spip_types_documents');
+	$dirs = Sql::allfetsel('extension', 'spip_types_documents');
 	$dirs[] = array('extension' => 'distant');
 	foreach($dirs as $e) {
 		if (is_dir($dir = _DIR_IMG . $e['extension'])) {

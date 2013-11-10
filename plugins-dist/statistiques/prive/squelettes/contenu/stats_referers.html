@@ -1,0 +1,58 @@
+[(#AUTORISER{voirstats}|sinon_interdire_acces)]
+<BOUCLE_expose(ARTICLES){id_article}{statut==.*}>
+#BOITE_OUVRIR{'','note'}
+	<a class='annule_filtre ajax' href="[(#SELF|parametre_url{id_article,''})]" title="<:info_tout_afficher|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:info_tout_afficher:>})]</a>
+	<:statistiques:titre_liens_entrants:> <:info_pour:>
+	<h2 class='objet_titre'><a href='#URL_ARTICLE'>#TITRE</a></h2>
+	<a href="#URL_ECRIRE{stats_visites,id_article=#ID_ARTICLE}"><:statistiques:titre_page_statistiques_visites:></a>
+#BOITE_FERMER
+</BOUCLE_expose>
+
+<div class="onglets_simple clearfix">
+	<ul>
+		<li>[(#URL_ECRIRE{stats_referers}|lien_ou_expose{<:info_tout_afficher:>,[(#ENV{jour,''}|non)],ajax})]</li>
+		[(#ENV{id_article}|non)
+		<li>[(#URL_ECRIRE{stats_referers,jour=jour}|lien_ou_expose{<:date_aujourdhui|ucfirst:>,#ENV{jour,''}|=={jour},ajax})]</li>
+		<li>[(#URL_ECRIRE{stats_referers,jour=veille}|lien_ou_expose{<:date_hier|ucfirst:>,#ENV{jour,''}|=={veille},ajax})]</li>
+		]
+	</ul>
+</div>
+<B_statsr>
+	<h1><:statistiques:onglet_origine_visites:> (#TOTAL_BOUCLE [(#TOTAL_BOUCLE|singulier_ou_pluriel{info_site,info_sites})])</h1>
+	<div class="liste">
+		[<h2>(#ENV{jour,''}|=={jour}|oui)<:date_aujourdhui|ucfirst:></h2>]
+		[<h2>(#ENV{jour,''}|=={veille}|oui)<:date_hier|ucfirst:></h2>]
+		<ul class="liste-items referers">
+			<BOUCLE_statsr(DATA){source stats_referers,#ENV{limit,100},#ENV{jour,''},#ENV{id_article}}>
+				<li class="item referer" onclick="$(this).toggleClass('open').find('.referer-detail').toggle('fast');">
+						<h3>
+							<span class="visites">[[(#VALEUR{visites}) ](#VALEUR{visites}|singulier_ou_pluriel{info_visite,statistiques:info_visites}|trim{:}|trim)]</span>
+							[(#CLE|=={(email)}|oui)
+								#CLE
+							][(#CLE|=={(email)}|non)
+								<a href="[(#VALEUR{url})]" onclick="event.stopPropagation();">[(#CLE)][<span class="miniature"><img src='(#CLE|vigneter_referer)' width="120" height="90" /></span>]</a>[(#VALEUR{visites_racine}|oui)\(#VALEUR{visites_racine}\)]</h3>
+							]
+
+						</h3>
+						<B_sous>
+							<div class="referer-detail none-js">
+								<ul>
+								<BOUCLE_sous(POUR){tableau #VALEUR{referers}}>
+									<li><a href="#VALEUR{referer}">[(#VALEUR{keywords}|?{[&laquo;&nbsp;(#VALEUR{keywords})&nbsp;&raquo;],[(#VALEUR{path})]})]</a>
+										[(#VALEUR{visites}|>{1}|oui)\(#VALEUR{visites}\)]
+										[<br />(#VALEUR{referes})]
+									</li>
+								</BOUCLE_sous>
+								</ul>
+							</div>
+						</B_sous>
+				</li>
+			</BOUCLE_statsr>
+		</ul>
+	</div>
+</B_statsr>
+	<h1><:statistiques:onglet_origine_visites:></h1>
+	[<h2>(#ENV{jour,''}|=={jour}|oui)<:date_aujourdhui|ucfirst:></h2>]
+	[<h2>(#ENV{jour,''}|=={veille}|oui)<:date_hier|ucfirst:></h2>]
+<//B_statsr>
+<p class="action plus"><a href="[(#SELF|parametre_url{limit,#ENV{limit,100}|plus{200}})]" class="ajax">+++</a></p>

@@ -1,0 +1,36 @@
+[(#REM)
+
+	Formulaire d'identification sur le forum
+	Si la session est authentifiee, on propose la deconnexion
+	Si la session n'est pas authentifiee, on presente un formulaire nom/email
+	Pour les forums sur abonnement, un squelette specifique presente les regles
+]
+<fieldset class="qui[ (#SESSION{auth}|?{session_qui,saisie_qui})]">
+<legend><:forum:forum_qui_etes_vous:></legend>
+[(#SESSION{auth}|oui)
+	[<p class='explication'><:forum:forum_votre_nom:> <strong>(#SESSION{nom}|typo)</strong> <span class="details"><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a></span></p>]
+	
+]
+[(#SESSION{auth}|non)
+	<ul>
+		<li class='editer saisie_session_nom'>
+			<label for="session_nom"><:forum:forum_votre_nom:></label>
+			<input type="text" class="text" name="session_nom" id="session_nom" value="[(#SESSION**{nom}|sinon{#SESSION**{session_nom}}|entites_html)]" size="40" autocapitalize="off" autocorrect="off" />
+			[(#CONFIG{accepter_inscriptions}|=={oui}|?{' '})
+			<span class="details"><a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow"><:lien_connecter:></a></span>
+			]
+		</li>
+		<li class='editer saisie_session_email'>
+			<label for="session_email"><:forum:forum_votre_email:></label>
+			<input type="[(#HTML5|?{email,text})]" class="text email" name="session_email" id="session_email" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" autocapitalize="off" autocorrect="off" />
+		</li>
+[(#CONFIG{forums_urlref}|!={non}|?{
+        <li class='editer saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'>
+            <label for="url_site"><:forum:forum_url:></label>
+            [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
+            <input type="[(#HTML5|?{url,text})]" class="text url" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="[(#ENV{url_site})]" autocapitalize="off" autocorrect="off" />
+        </li>
+})]
+	</ul>
+]
+</fieldset>

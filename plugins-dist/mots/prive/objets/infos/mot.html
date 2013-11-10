@@ -1,0 +1,33 @@
+<BOUCLE_info(MOTS){id_mot=#ENV{id}}>
+<div class='infos'>
+<div class='numero'><:mots:titre_gauche_mots_edit:><p>#ID_MOT</p></div>
+
+[(#AUTORISER{supprimer,mot,#ID_MOT}|oui)
+
+	#SET{utilise,#ID_MOT|objets_associes_mot{#ID_GROUPE}|implode{', '}}
+	[(#GET{utilise}|non)
+		[(#URL_ACTION_AUTEUR{supprimer_mot,#ID_MOT,#URL_ECRIRE{groupe_mots,id_groupe=#ID_GROUPE}}|bouton_action_horizontal{<:mots:info_supprimer_mot:>,mot-24.png,del})]
+	]
+	[(#GET{utilise}|oui)
+		[(#SELF|icone_horizontale{<:mots:info_supprimer_mot:>,mot-24.png,del,'',onclick="jQuery('#confirm-#ID_MOT').toggle('fast');return false;"})]
+	]
+	<div id="confirm-#ID_MOT" class="none-js">
+	#BOITE_OUVRIR{'','notice'}
+		#SET{type,#TYPE|supprimer_numero}
+		<p><:mots:info_delet_mots_cles{titre_mot=#TITRE,type_mot=#GET{type},texte_lie=#GET{utilise}}:></p>
+		[(#BOUTON_ACTION{<:mots:info_oui_suppression_mot_cle:>,#URL_ACTION_AUTEUR{supprimer_mot,#ID_MOT,#ID_GROUPE|generer_url_entite{groupe_mots}}})]
+	#BOITE_FERMER
+	</div>
+]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+][(#VAL{redirect}
+	|generer_url_action{type=mot&id=#ID_MOT}
+	|parametre_url{var_mode,calcul}
+	|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+
+</div>
+</BOUCLE_info>

@@ -1,0 +1,69 @@
+--- # Syntaxe des raccourcis SPIP, version 0.0.1
+    #
+    # Si on nomme une regle, elle devient surchargeable
+
+-
+  if_match: "/\n-[*#]/S"
+  type: all
+  is_wheel: Y
+  replace:
+
+    listes-decoupe-para:
+      match: "\n\n"
+      type: split
+      is_wheel: Y
+      replace:
+    
+        liste-check:
+          if_str: "-"
+          if_match: "/-[*#]/S"
+          is_wheel: Y
+          type: all
+          replace:
+            liste-prepend:
+              type: all
+              replace: "\n$0"
+            liste-p-init:
+              type: all
+              replace: tw_liste_init
+              is_callback: Y
+            liste-p-item:
+              # premiere parenthese ne compte pas dans la profondeur
+              # capture * deuxieme parenthese : ul
+              # capture # deuxieme parenthese : ol
+              # nombre de car dans la 2eme  parenthese = profondeur
+              match: ",(\n-)(\*+|\#+)([^*#].*)(?=(?:\z|\n-)),UsS"
+              replace: tw_liste_item
+              is_callback: Y
+            liste-p-close:
+              type: all
+              replace: tw_liste_close
+              is_callback: Y
+
+-
+  if_match: "/\n-(&nbsp;)?[\?!]\s/S"
+  type: all
+  is_wheel: Y
+  replace:
+    listes-decoupe-para2:
+      match: "\n\n"
+      type: split
+      is_wheel: Y
+      replace:
+        def-check:
+          if_str: "-"
+          if_match: "/-(&nbsp;)?[!\?]\s/S"
+          is_wheel: Y
+          type: all
+          replace:
+            def-wrap:
+              type: all
+              is_callback: Y
+              replace: tw_def_wrap
+            def-p-titre:
+              match: ",(\n-(&nbsp;)?\?\s+)(.*)(?=(\z|\n-)),UsS"
+              replace: "<dt>$3</dt>"
+            def-p-desc:
+              match: ",(\n-(&nbsp;)?!\s+)(.*)(?=(<dt>|</dl>|\z|\n-)),UsS"
+              replace: "<dd>$3</dd>"
+

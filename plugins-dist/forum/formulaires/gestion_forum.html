@@ -1,0 +1,104 @@
+<div class="formulaire_spip formulaire_gestion_forum noajax" id="formulaire_gestion_forum">
+[(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]
+<!-- <br class='bugajaxie' /> -->
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<a id="pagination_forum" class="noajax" name="pagination_forum"></a>
+[(#ENV{editable})
+<form action="#ENV{action}#formulaire_forum" method="post"><div>
+[(#ACTION_FORMULAIRE{[(#ENV{action})]})]
+
+#SET{pagination,#ENV{pagination,10}}
+#SET{prive,#ENV{select_type,public}|=={interne}|?{'priv%','%'}}
+#SET{public,#ENV{select_type,public}|=={public}|?{'priv%',''}}
+
+<input type="hidden" name="id_forum" id="id_forum" value="#ENV{id_forum}" />
+<input type="hidden" name="id_rubrique" id="id_rubrique" value="#ENV{id_rubrique}" />
+<input type="hidden" name="id_article" id="id_article" value="#ENV{id_article}" />
+<input type="hidden" name="id_breve" id="id_breve" value="#ENV{id_breve}" />
+<input type="hidden" name="id_syndic" id="id_syndic" value="#ENV{id_syndic}" />
+<input type="hidden" name="id_message" id="id_message" value="#ENV{id_message}" />
+<input type="hidden" name="id_auteur" id="id_auteur" value="#ENV{id_auteur}" />
+<input type="hidden" name="auteur" id="auteur" value="#ENV{auteur}" />
+<input type="hidden" name="email_auteur" id="email_auteur" value="#ENV{email_auteur}" />
+<input type="hidden" name="ip" id="ip" value="#ENV{ip}" />
+
+<input type="hidden" name="debut_forum" id="debut_forum" value="#ENV{debut_forum}" />
+<input type="hidden" name="pagination_ancien" id="pagination_ancien" value="#ENV{pagination,10}" />
+
+<p class="boutons">
+	<input type="submit" class="submit" name="valider" value="<:forum:icone_valider_messages:>" />
+	<input type="submit" class="submit" name="bruler" value="<:forum:icone_bruler_messages:>" />
+	<input type="submit" class="submit" name="supprimer" value="<:forum:icone_supprimer_messages:>" />
+</p>
+
+<ul>
+	<li class="gestion_forum boutons">
+		<select id="select_type" name="select_type">
+			<option value="public"[(#ENV*{select_type,public}|=={"public"}|oui) selected="selected"]><:forum:onglet_messages_publics:></option>
+			<option value="interne"[(#ENV*{select_type,public}|=={"interne"}|oui) selected="selected"]><:forum:onglet_messages_internes:></option>
+		</select>
+		<select id="select_statut" name="select_statut">
+			<option value=""><:forum:messages_tous:></option>
+			[(#GET{public}|oui)
+			<option value="publie"[(#ENV*{select_statut}|=={"publie"}|oui) selected="selected"]><:forum:messages_publie:></option>
+			<option value="prop"[(#ENV*{select_statut}|=={"prop"}|oui) selected="selected"]><:forum:messages_prop:></option>
+			<option value="spam"[(#ENV*{select_statut}|=={"spam"}|oui) selected="selected"]><:forum:messages_spam:></option>
+			<option value="off"[(#ENV*{select_statut}|=={"off"}|oui) selected="selected"]><:forum:messages_off:></option>
+			]
+			[(#GET{prive}|=={'priv%'}|oui)
+			<option value="prive"[(#ENV*{select_statut}|=={"prive"}|oui) selected="selected"]><:forum:messages_prive:></option>
+			<option value="privrac"[(#ENV*{select_statut}|=={"privrac"}|oui) selected="selected"]><:forum:messages_privrac:></option>
+			<option value="privadm"[(#ENV*{select_statut}|=={"privadm"}|oui) selected="selected"]><:forum:messages_privadm:></option>
+			<option value="privoff"[(#ENV*{select_statut}|=={"privoff"}|oui) selected="selected"]><:forum:messages_privoff:></option>
+			]
+		</select>
+		<select id="pagination" name="pagination">
+			<option value="10"[(#ENV*{pagination}|=={10}|oui) selected="selected"]>10</option>
+			<option value="50"[(#ENV*{pagination}|=={50}|oui) selected="selected"]>50</option>
+			<option value="100"[(#ENV*{pagination}|=={100}|oui) selected="selected"]>100</option>
+		</select>
+	</li>
+	<li class="gestion_forum boutons">
+		<:forum:label_selectionner:> 
+		<a href="#SELF" id="select_tous"><:forum:messages_tous:></a>
+		<a href="#SELF" id="select_aucun"><:forum:messages_aucun:></a>
+		<a href="#SELF" id="select_prop"><:forum:messages_prop:></a>
+	</li>
+	<li class="fieldset">
+		<fieldset>
+			[(#INCLURE{fond=formulaires/inc-gestion_forum_liste, statut=#ENV*{select_statut}, prive=#GET{prive}, public=#GET{public}, pagination=#GET{pagination}, env})]
+		</fieldset>
+	</li>
+</ul>
+
+<p class="boutons">
+	<input type="submit" class="submit" name="valider" value="<:forum:icone_valider_messages:>" />
+	<input type="submit" class="submit" name="bruler" value="<:forum:icone_bruler_messages:>" />
+	<input type="submit" class="submit" name="supprimer" value="<:forum:icone_supprimer_messages:>" />
+</p>
+
+</div></form>]
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+if (window.jQuery)(function($){
+	$("#select_tous").click(function(){
+		$("input.select_forum").attr("checked","checked");
+		return false;
+	});
+	$("#select_aucun").click(function(){
+		$("input.select_forum").attr("checked","");
+		return false;
+	});
+	$("#select_prop").click(function(){
+		$("input.select_forum").attr("checked","");
+		$("li.statut_prop input.select_forum").attr("checked","checked");
+		return false;
+	});
+	
+	$("#pagination, #select_type, #select_statut").change(function(){
+		$("#formulaire_gestion_forum form").submit();
+	});
+}(jQuery));
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
+</div>

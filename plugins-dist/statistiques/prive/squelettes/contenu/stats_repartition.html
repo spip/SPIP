@@ -1,0 +1,17 @@
+[(#AUTORISER{voirstats}|sinon_interdire_acces)]
+<h1 class="grostitre"><:statistiques:titre_page_statistiques:></h1>
+
+<div class="onglets_simple clearfix">
+	<ul>
+		<li>[(#URL_ECRIRE{stats_repartition}|lien_ou_expose{<:statistiques:icone_repartition_actuelle:>,[(#ENV{critere,''}|=={debut}|non)],ajax})]</li>
+		<li>[(#URL_ECRIRE{stats_repartition,critere=debut}|lien_ou_expose{<:statistiques:onglet_repartition_debut:>,[(#ENV{critere,''}|=={debut}|oui)],ajax})]</li>
+	</ul>
+</div>
+
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{repartition-24.png}|balise_img{'',cadre-icone}})]
+
+	[(#REM|intval|enfants_aff{400, 400, #ENV{critere}|=={debut}|?{visites,popularite}})]
+
+	<p><:statistiques:texte_signification:></p>
+
+#BOITE_FERMER

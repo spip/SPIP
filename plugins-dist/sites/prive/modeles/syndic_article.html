@@ -1,0 +1,20 @@
+<BOUCLE_syndic_article(SYNDIC_ARTICLES){id_syndic_article}{statut?}{tout}>
+#SET{self,#SELF|parametre_url{debut_syndic_article|email_auteur|ip|id_auteur|auteur,''}}
+[(#REM) Le cartouche ---------------------------------------------------------]
+<div class='cartouche'>
+<h3 class='titre'><span class='info_statut'>[(#CHEMIN{#VAL{images/syndic-statut-}|concat{#STATUT,-24.png}}|balise_img|inserer_attribut{alt,#VAL{sites:statut_}|concat{#STATUT}|_T})]</span>
+<a href='#syndic#ID_SYNDIC_ARTICLE' title='[<:info_numero_abbreviation|attribut_html:> (#ID_SYNDIC_ARTICLE)]'>[(#TITRE|sinon{<:info_sans_titre:>})]</a></h3>
+[<div class="lien"><a href="(#URL)"><:voir_en_ligne:></a></div>]
+<div class='date'>[(#DATE|date_interface)]</div>
+[<div class='par'><:par_auteur:> <a class='ajax' href='[(#GET{self}|parametre_url{lesauteurs,#LESAUTEURS})]' title='<:sites:articles_meme_auteur|attribut_html:>' >(#LESAUTEURS)</a> &mdash;</div>]
+
+<BOUCLE_sit(SITES){id_syndic}><div class='reponse_a'><a href='[(#URL_ECRIRE{site,id_syndic=#ID_SYNDIC})]'>#NOM_SITE</a></div></BOUCLE_sit>
+</div>
+[(#REM) Le corps ---------------------------------------------------------]
+[<div class='texte'>(#DESCRIPTIF|lignes_longues)</div>]
+[<div class='notes'>(#NOTES|lignes_longues)</div>]
+[<div class='site'><a href='#URL_SOURCE'>(#SOURCE|sinon{#URL_SOURCE}|lignes_longues)</a></div>]
+
+[(#REM) Les boutons ---------------------------------------------------------]
+[(#INCLURE{fond=prive/modeles/syndic-actions-#ENV{boutons,moderer}, id_syndic_article, id_syndic, statut, self})]
+</BOUCLE_syndic_article>

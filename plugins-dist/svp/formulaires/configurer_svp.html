@@ -1,0 +1,99 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_#FORM' id='formulaire_configurer_#FORM'>
+<h3 class='titrem'><:svp:titre_form_configurer_svp:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#SELF"><div>
+		#ACTION_FORMULAIRE
+		<fieldset>
+			<legend><:svp:fieldset_fonctionnement:></legend>
+			<ul>
+				#SET{name,mode_runtime}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label><:svp:config_activer_runtime:></label>
+					<div class='explication'><:svp:config_activer_runtime_explication:></div>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+						[(#ENV{#GET{name}}|!={non}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+						[(#ENV{#GET{name}}|=={non}|oui)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+					</div>
+				</li>
+			<ul>			
+		</fieldset>
+		<fieldset>
+			<legend><:svp:fieldset_debug:></legend>
+			<ul>
+				#SET{name,mode_pas_a_pas}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label><:svp:config_activer_pas_a_pas:></label>
+					<div class='explication'><:svp:config_activer_pas_a_pas_explication:></div>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+						[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+					</div>
+				</li>
+				
+				#SET{name,mode_log_verbeux}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label><:svp:config_activer_log_verbeux:></label>
+					<div class='explication'><:svp:config_activer_log_verbeux_explication:></div>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+						[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+					</div>
+				</li>
+				
+				#SET{name,autoriser_activer_paquets_obsoletes}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label><:svp:config_autoriser_activer_paquets_obsoletes:></label>
+					<div class='explication'><:svp:config_autoriser_activer_paquets_obsoletes_explication:></div>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+						[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+					</div>
+				</li>
+			<ul>			
+		</fieldset>
+		<fieldset>
+			<legend><:svp:fieldset_edition:></legend>
+			<ul>
+				#SET{name,depot_editable}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label><:svp:config_depot_editable:></label>
+					<div class='explication'><:svp:config_depot_editable_explication:></div>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+						[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+					</div>
+				</li>
+			<ul>			
+		</fieldset>
+		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+
+</div>

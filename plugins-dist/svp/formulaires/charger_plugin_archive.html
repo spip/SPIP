@@ -1,0 +1,30 @@
+<div class='formulaire_spip formulaire_configurer''>
+<h3 class='titrem'><:svp:titre_form_charger_plugin_archive:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#SELF"><div>
+		#ACTION_FORMULAIRE
+		[<p class='notice'>(#ENV{erreurs/confirmer})
+			<p class='boutons'><input class='submit' type="submit" name='confirmer' value="<:svp:bouton_confirmer:>" /></p>
+		</p>]
+
+		<p class='explication'><:svp:telecharger_archive_plugin_explication:></p>
+		<ul>
+			<li class="editer_archive haut obligatoire[(#ENV{erreurs/phrase}|oui) erreur]">
+				<label for="phrase"><:svp:label_archive:></label>
+				[<span class="erreur_message">(#ENV{erreurs/phrase})</span>]
+				<input type="text" name="archive" value="#ENV{archive}" class="text" />
+			</li>
+			<li class="editer_destination[(#ENV{erreurs/destination}|oui) erreur]">
+				<label for="destination"><:svp:label_destination:></label>
+				[<span class="erreur_message">(#ENV{erreurs/phrase})</span>]
+				<p class='explication'><:svp:explication_destination:></p>
+				<input type="text" name="destination" value="#ENV{destination}" class="text" />
+			</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" value="<:bouton_telecharger:>" /></p>
+	</div></form>
+
+</div>

@@ -1,0 +1,12 @@
+<BOUCLE_afficher_contenu(SYNDIC_ARTICLES){id_syndic_article=#ENV{id}}{statut?}>
+
+[<a href="(#URL_ARTICLE)">#SET{a,'</a>'}]#TITRE[(#GET{a})]
+([(#LESAUTEURS), ][(#DATE|affdate_court)])
+
+[(#TAGS|afficher_enclosures)]
+
+[<div class="descriptif">(#DESCRIPTIF|couper{600}|image_reduire{385,550})</div>]
+[<div class="tags">&nbsp;<em>(#TAGS|afficher_tags)</em></div>]
+[<div class="source">[<a href="(#URL_SOURCE)">#SET{b,'</a>'}](#SOURCE|sinon{#URL_SOURCE})#GET{b}</div>]
+
+</BOUCLE_afficher_contenu>

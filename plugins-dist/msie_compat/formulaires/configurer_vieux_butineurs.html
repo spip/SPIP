@@ -1,0 +1,53 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{msiecompat-24.png}" class="cadre-icone" /><:msiecompat:choix_titre:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<p><:msiecompat:choix_explication:></p>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{name,iecompat}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+					[(#ENV{#GET{name}}|=={non}|oui)checked="checked"] /><label for="#GET{name}_non"><:msiecompat:choix_non:></label>
+					<p></p>
+				</div>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_ifixpng" value="ifixpng"
+					[(#ENV{#GET{name}}|=={ifixpng}|oui)checked="checked"] /><label for="#GET{name}_ifixpng">iFixPng</label>
+					<p class='explication'><:msiecompat:choix_ifixpng:></p>
+
+				</div>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_IE7" value="IE7"
+					[(#ENV{#GET{name}}|=={IE7}|oui)checked="checked"] /><label for="#GET{name}_IE7">IE7.js</label>
+					<p class='explication'><:msiecompat:choix_ie7:></p>					
+				</div>
+				<div class="choix">					
+					<input type="radio" name="#GET{name}" id="#GET{name}_IE7squish" value="IE7squish"
+					[(#ENV{#GET{name}}|=={IE7squish}|oui)checked="checked"] /><label for="#GET{name}_IE7squish">IE7.js + ie7-squish.js</label>
+					<p class='explication'><:msiecompat:choix_ie7squish:></p>
+				</div>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_IE8" value="IE8"
+					[(#ENV{#GET{name}}|=={IE8}|oui)checked="checked"] /><label for="#GET{name}_IE8">IE8.js</label>
+					<p class='explication'><:msiecompat:choix_ie8:></p>
+				</div>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_IE8squish" value="IE8squish"
+					[(#ENV{#GET{name}}|=={IE8squish}|oui)checked="checked"] /><label for="#GET{name}_IE8squish">IE8.js + ie7-squish.js</label>
+				</div>
+			</li>
+		</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

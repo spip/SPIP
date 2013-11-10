@@ -1,0 +1,37 @@
+<B_test_contenu>[[(#NOM_SITE_SPIP|textebrut)]] <:nouveautes:>
+
+
+<:bonjour:>
+
+<:texte_lettre_information:> "[(#NOM_SITE_SPIP|textebrut)]" (#URL_SITE_SPIP).
+<:texte_lettre_information_2:> [(#ENV{jours_neuf})] <:jours:>.
+<BOUCLE_test_contenu(AUTEURS){0,1}{tous}><B_nv1>
+
+          <:nouveaux_articles:>
+          --------------------------
+
+<BOUCLE_nv1(ARTICLES){age_relatif<=0}{par date}{inverse}{0,30}>
+[** (#TITRE|textebrut) **]
+[<:par_auteur:> (#LESAUTEURS|textebrut)]
+[- (#DATE|affdate)]
+[
+(#INTRODUCTION|textebrut)
+]
+-> [(#URL_ARTICLE|url_absolue)]
+
+</BOUCLE_nv1><B_nv2>
+
+          <:nouvelles_breves:>
+          --------------------------
+
+<BOUCLE_nv2(BREVES){age_relatif<=0}{par date}{inverse}{0,30}>
+[* (#TITRE|textebrut) *]
+[ - (#DATE|affdate)]
+[
+(#INTRODUCTION|textebrut)
+]
+-> [(#URL_BREVE|url_absolue)]
+
+</BOUCLE_nv2></BOUCLE_test_contenu>
+
+</B_test_contenu>

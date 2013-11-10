@@ -1,0 +1,29 @@
+[(#REM)
+	Sous-navigation, ouverte sur la hierarchie courante
+
+	On fait un plan, et, quand on avance vers une rubrique,
+	on l'affiche si son parent est expose ou est la racine du site.
+	
+]
+<BOUCLE_secteur(HIERARCHIE){tout}{id_rubrique}{racine}{0,1}>
+<B_rubriques>
+<div class="menu menu_rubriques">
+	<h2>#TITRE</h2>
+	<ul>
+	<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+		<li>
+			<a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>#TITRE</a>
+			<B_sous_rubriques>
+			<ul>
+				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre}{!par date}><BOUCLE_test_expose(RUBRIQUES) {id_enfant}>#EXPOSE{' '}</BOUCLE_test_expose>
+				<li><a href="#URL_RUBRIQUE"[ class="(#EXPOSE)"]>#TITRE</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>	</li>
+				</B_test_expose></BOUCLE_sous_rubriques>
+			</ul>
+			</B_sous_rubriques>
+		</li>
+	</BOUCLE_rubriques>
+
+	</ul>
+</div>
+</B_rubriques>
+</BOUCLE_secteur>

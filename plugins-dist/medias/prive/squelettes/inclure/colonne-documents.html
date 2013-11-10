@@ -1,0 +1,16 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+<div class="liste_items documents" id="documents_joints">
+<BOUCLE_docslies(documents_liens){id_objet}{objet}>
+	#MODELE{document_case,id_document=#ID_DOCUMENT,id_objet,objet,ajax}
+</BOUCLE_docslies>
+</div>
+<script type="text/javascript">/*<![CDATA[*/
+var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
+[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
+/*]]>*/</script>

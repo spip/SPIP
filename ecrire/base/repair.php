@@ -17,7 +17,7 @@ function base_repair_dist($titre='', $reprise='') {
 
 	$res = admin_repair_tables();
 	if (!$res) {
-		$res = "<div class='error'>"._T('avis_erreur_mysql').' '.sql_errno().': '.sql_error() ."</div>\n";
+		$res = "<div class='error'>"._T('avis_erreur_mysql').' '.Sql::errno().': '.Sql::error() ."</div>\n";
 	} else {
 		include_spip('inc/rubriques');
 		calculer_rubriques();
@@ -35,9 +35,9 @@ function admin_repair_plat(){
 	$out = "";
 	$repertoire = array();
 	include_spip('inc/getdocument');
-	$res = sql_select('*','spip_documents',"fichier REGEXP CONCAT('^',extension,'[^/\]') AND distant='non'");
+	$res = Sql::select('*','spip_documents',"fichier REGEXP CONCAT('^',extension,'[^/\]') AND distant='non'");
 
-	while ($row=sql_fetch($res)){
+	while ($row=Sql::fetch($res)){
 		$ext = $row['extension'];
 		if (!$ext) {
 			spip_log("document sans extension: " . $row['id_document'], _LOG_INFO_IMPORTANTE);
@@ -56,7 +56,7 @@ function admin_repair_plat(){
 			$dest = $d . substr($src,strlen($d));
 			if (@copy(_DIR_IMG . $src, _DIR_IMG . $dest)
 			  AND file_exists(_DIR_IMG . $dest)) {
-				sql_updateq('spip_documents',array('fichier'=>$dest),'id_document='.intval($row['id_document']));
+				Sql::updateq('spip_documents',array('fichier'=>$dest),'id_document='.intval($row['id_document']));
 				spip_unlink(_DIR_IMG . $src);
 				$out .= "$src => $dest<br />";
 			}
@@ -69,7 +69,7 @@ function admin_repair_plat(){
 // http://doc.spip.org/@admin_repair_tables
 function admin_repair_tables() {
 
-	$repair = sql_repair('repair', NULL, 'continue');
+	$repair = Sql::repair('repair', NULL, 'continue');
 
 	// recreer les tables manquantes eventuelles
 	include_spip('base/create');
@@ -77,10 +77,10 @@ function admin_repair_tables() {
 
 	$connexion = $GLOBALS['connexions'][0];
 	$prefixe = $connexion['prefixe'];
-	$res1 = sql_showbase();
+	$res1 = Sql::showbase();
 	$res = "";
 	if ($res1) {
-		while ($r = sql_fetch($res1)) {
+		while ($r = Sql::fetch($res1)) {
 			$tab = array_shift($r);
 
 			$class = "";
@@ -90,14 +90,14 @@ function admin_repair_tables() {
 			// car le repair peut etre long ; on ne veut pas boucler
 			effacer_meta('admin_repair');
 			if ($repair){
-				$result_repair = sql_repair($tab);
+				$result_repair = Sql::repair($tab);
 				if (!$result_repair) return false;
 			}
 
 			// essayer de maj la table (creation de champs manquants)
 			maj_tables($tab);
 
-			$count = sql_countsel($tab);
+			$count = Sql::countsel($tab);
 	
 			if ($count>1)
 				$m .= "("._T('texte_compte_elements', array('count' => $count)).")\n";
@@ -107,8 +107,9 @@ function admin_repair_tables() {
 				$m .= "("._T('texte_vide').")\n";
 	
 			if ($result_repair
-			  AND $msg = join(" ", sql_fetch($result_repair)) . ' '
-				AND strpos($msg, ' OK ')==FALSE){
+			AND $msg = join(" ", Sql::fetch($result_repair)) . ' '
+			AND strpos($msg, ' OK ')==FALSE)
+			{
 				$class = " class='notice'";
 				$m .= "<br /><tt>".htmlentities($msg)."</tt>\n";
 			}

@@ -22,10 +22,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param array $set
  * @return array
  */
-function action_editer_objet_dist($id=null, $objet=null, $set=null) {
-
+function action_editer_objet_dist($id=null, $objet=null, $set=null)
+{
 	// appel direct depuis une url interdit
-	if (is_null($id) OR is_null($objet)){
+	if (is_null($id) OR is_null($objet)) {
 		include_spip('inc/minipres');
 		echo minipres(_T('info_acces_interdit'));
 		die();
@@ -57,9 +57,10 @@ function action_editer_objet_dist($id=null, $objet=null, $set=null) {
  * @param array|null $set
  * @return mixed|string
  */
-function objet_modifier($objet, $id, $set=null) {
+function objet_modifier($objet, $id, $set=null)
+{
 	if (include_spip('action/editer_'.$objet)
-	  AND function_exists($modifier = $objet."_modifier"))
+	AND function_exists($modifier = $objet."_modifier"))
 		return $modifier($id,$set);
 
 	$table_sql = table_objet_sql($objet);
@@ -95,7 +96,7 @@ function objet_modifier($objet, $id, $set=null) {
 	);
 
 	// Si l'objet est publie, invalider les caches et demander sa reindexation
-	if (objet_test_si_publie($objet,$id)){
+	if (objet_test_si_publie($objet,$id)) {
 		$invalideur = "id='$objet/$id'";
 		$indexation = true;
 	}
@@ -131,9 +132,10 @@ function objet_modifier($objet, $id, $set=null) {
  * @param array|null $set
  * @return bool|int
  */
-function objet_inserer($objet, $id_parent=null, $set=null) {
+function objet_inserer($objet, $id_parent=null, $set=null)
+{
 	if (include_spip('action/editer_'.$objet)
-	  AND function_exists($inserer = $objet."_inserer"))
+	AND function_exists($inserer = $objet."_inserer"))
 		return $inserer($id_parent);
 
 	$table_sql = table_objet_sql($objet);
@@ -144,15 +146,15 @@ function objet_inserer($objet, $id_parent=null, $set=null) {
 
 	$lang_rub = "";
 	$champs = array();
-	if (isset($desc['field']['id_rubrique'])){
+	if (isset($desc['field']['id_rubrique'])) {
 		// Si id_rubrique vaut 0 ou n'est pas definie, creer l'objet
 		// dans la premiere rubrique racine
 		if (!$id_rubrique = intval($id_parent)) {
-			$row = sql_fetsel("id_rubrique, id_secteur, lang", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1");
+			$row = Sql::fetsel("id_rubrique, id_secteur, lang", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1");
 			$id_rubrique = $row['id_rubrique'];
 		}
 		else
-			$row = sql_fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=".intval($id_rubrique));
+			$row = Sql::fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=".intval($id_rubrique));
 
 		$champs['id_rubrique'] = $id_rubrique;
 		if (isset($desc['field']['id_secteur']))
@@ -164,10 +166,13 @@ function objet_inserer($objet, $id_parent=null, $set=null) {
 	// dans les rubriques, on essaie avec la langue de l'auteur,
 	// ou a defaut celle de la rubrique
 	// Sinon c'est la langue de la rubrique qui est choisie + heritee
-	if (isset($desc['field']['lang']) AND $GLOBALS['meta']['multi_objets'] AND in_array($table_sql, explode(',', $GLOBALS['meta']['multi_objets']))) {
+	if (isset($desc['field']['lang'])
+	AND $GLOBALS['meta']['multi_objets']
+	AND in_array($table_sql, explode(',', $GLOBALS['meta']['multi_objets'])))
+	{
 		lang_select($GLOBALS['visiteur_session']['lang']);
-		if (in_array($GLOBALS['spip_lang'],
-		explode(',', $GLOBALS['meta']['langues_multilingue']))) {
+		if (in_array($GLOBALS['spip_lang'], explode(',', $GLOBALS['meta']['langues_multilingue'])))
+		{
 			$champs['lang'] = $GLOBALS['spip_lang'];
 			if (isset($desc['field']['langue_choisie']))
 				$champs['langue_choisie'] = 'oui';
@@ -178,8 +183,8 @@ function objet_inserer($objet, $id_parent=null, $set=null) {
 		$champs['langue_choisie'] = 'non';
 	}
 
-	if (isset($desc['field']['statut'])){
-		if (isset($desc['statut_textes_instituer'])){
+	if (isset($desc['field']['statut'])) {
+		if (isset($desc['statut_textes_instituer'])) {
 			$cles_statut = array_keys($desc['statut_textes_instituer']); 
 			$champs['statut'] = reset($cles_statut);
 		}
@@ -204,7 +209,7 @@ function objet_inserer($objet, $id_parent=null, $set=null) {
 		)
 	);
 
-	$id = sql_insertq($table_sql, $champs);
+	$id = Sql::insertq($table_sql, $champs);
 
 	if ($id){
 		pipeline('post_insertion',
@@ -222,14 +227,15 @@ function objet_inserer($objet, $id_parent=null, $set=null) {
 		// si la table n'a pas deja un champ id_auteur
 		// et si le form n'a pas poste un id_auteur (meme vide, ce qui sert a annuler cette auto association)
 		if ($id > 0
-		  AND !isset($desc['field']['id_auteur'])){
-			$id_auteur = ((is_null(_request('id_auteur')) AND isset($GLOBALS['visiteur_session']['id_auteur']))?
-				$GLOBALS['visiteur_session']['id_auteur']
-				:_request('id_auteur'));
-		  if ($id_auteur) {
+		AND !isset($desc['field']['id_auteur']))
+		{
+			$id_auteur = ((is_null(_request('id_auteur')) AND isset($GLOBALS['visiteur_session']['id_auteur']))
+				? $GLOBALS['visiteur_session']['id_auteur']
+				: _request('id_auteur'));
+			if ($id_auteur) {
 				include_spip('action/editer_auteur');
 				auteur_associer($id_auteur, array($objet=>$id));
-		  }
+			}
 		}
 	}
 
@@ -248,9 +254,10 @@ function objet_inserer($objet, $id_parent=null, $set=null) {
  * @param bool $calcul_rub
  * @return mixed|string
  */
-function objet_instituer($objet, $id, $c, $calcul_rub=true) {
+function objet_instituer($objet, $id, $c, $calcul_rub=true)
+{
 	if (include_spip('action/editer_'.$objet)
-	  AND function_exists($instituer = $objet."_instituer"))
+	AND function_exists($instituer = $objet."_instituer"))
 		return $instituer($id,$c,$calcul_rub);
 
 	$table_sql = table_objet_sql($objet);
@@ -275,7 +282,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 	$sel[] = ($champ_date ? "$champ_date as date" : "'' as date");
 	$sel[] = (isset($desc['field']['id_rubrique'])?'id_rubrique':"0 as id_rubrique");
 
-	$row = sql_fetsel($sel, $table_sql, id_table_objet($objet).'='.intval($id));
+	$row = Sql::fetsel($sel, $table_sql, id_table_objet($objet).'='.intval($id));
 
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
@@ -287,10 +294,9 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 
 	// cf autorisations dans inc/instituer_objet
 	if ($s != $statut OR ($d AND $d != $date)) {
-		if ($id_rubrique ?
-				autoriser('publierdans', 'rubrique', $id_rubrique)
-			:
-				autoriser('instituer', $objet, $id, null, array('statut'=>$s))
+		if ($id_rubrique
+			? autoriser('publierdans', 'rubrique', $id_rubrique)
+			: autoriser('instituer', $objet, $id, null, array('statut'=>$s))
 			)
 			$statut = $champs['statut'] = $s;
 		else if ($s!='publie' AND autoriser('modifier', $objet, $id))
@@ -304,9 +310,9 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 		// En cas de proposition d'un objet (mais pas depublication), idem
 		if ($champ_date) {
 			if ($champs['statut'] == 'publie'
-			 OR ($champs['statut'] == 'prop' AND !in_array($statut_ancien, array('publie', 'prop')))
-			 OR $d
-			) {
+			OR ($champs['statut'] == 'prop' AND !in_array($statut_ancien, array('publie', 'prop')))
+			OR $d)
+			{
 				if ($d OR strtotime($d=$date)>time())
 					$champs[$champ_date] = $date = $d;
 				else
@@ -318,9 +324,10 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 	// Verifier que la rubrique demandee existe et est differente
 	// de la rubrique actuelle
 	if ($id_rubrique
-	  AND $id_parent = $c['id_parent']
-	  AND $id_parent != $id_rubrique
-	  AND (sql_fetsel('1', "spip_rubriques", "id_rubrique=".intval($id_parent)))) {
+	AND $id_parent = $c['id_parent']
+	AND $id_parent != $id_rubrique
+	AND (Sql::fetsel('1', "spip_rubriques", "id_rubrique=".intval($id_parent))))
+	{
 		$champs['id_rubrique'] = $id_parent;
 
 		// si l'objet etait publie
@@ -383,7 +390,10 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications("instituer$objet", $id,
-			array('statut' => $statut, 'statut_ancien' => $statut_ancien, 'date'=>$date, 'date_ancienne' => $date_ancienne)
+			array('statut' => $statut,
+				'statut_ancien' => $statut_ancien,
+				'date'=>$date,
+				'date_ancienne' => $date_ancienne)
 		);
 	}
 
@@ -401,7 +411,8 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
  * @param bool $cond
  * @return 
  */
-function objet_editer_heritage($objet, $id, $id_rubrique, $statut, $champs, $cond=true) {
+function objet_editer_heritage($objet, $id, $id_rubrique, $statut, $champs, $cond=true)
+{
 	$table_sql = table_objet_sql($objet);
 	$trouver_table = charger_fonction('trouver_table','base');
 	$desc = $trouver_table($table_sql);
@@ -410,20 +421,20 @@ function objet_editer_heritage($objet, $id, $id_rubrique, $statut, $champs, $con
 	// changer aussi son secteur et sa langue (si heritee)
 	if (isset($champs['id_rubrique'])) {
 
-		$row_rub = sql_fetsel("id_secteur, lang", "spip_rubriques", "id_rubrique=".sql_quote($champs['id_rubrique']));
+		$row_rub = Sql::fetsel("id_secteur, lang", "spip_rubriques", "id_rubrique=".Sql::quote($champs['id_rubrique']));
 		$langue = $row_rub['lang'];
 
 		if (isset($desc['field']['id_secteur']))
 			$champs['id_secteur'] = $row_rub['id_secteur'];
 
 		if (isset($desc['field']['lang']) AND isset($desc['field']['langue_choisie']))
-			if (sql_fetsel('1', $table_sql, id_table_objet($objet)."=".intval($id)." AND langue_choisie<>'oui' AND lang<>" . sql_quote($langue))) {
+			if (Sql::fetsel('1', $table_sql, id_table_objet($objet)."=".intval($id)." AND langue_choisie<>'oui' AND lang<>" . Sql::quote($langue))) {
 				$champs['lang'] = $langue;
 			}
 	}
 
 	if (!$champs) return;
-	sql_updateq($table_sql, $champs, id_table_objet($objet).'='.intval($id));
+	Sql::updateq($table_sql, $champs, id_table_objet($objet).'='.intval($id));
 
 	// Changer le statut des rubriques concernees
 	if ($cond) {

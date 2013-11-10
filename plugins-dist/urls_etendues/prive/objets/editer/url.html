@@ -1,0 +1,18 @@
+[(#INFO_STATUT{#OBJET,#ID_OBJET}|!={prepa}|oui)
+<div class="editer_urls">
+	[<span class='link'>
+		#SET{auth,#AUTORISER{modifier,#OBJET,#ID_OBJET}}
+		[(#GET{auth})
+		<a href="#"
+		title="Modifier l'URL"
+		onclick="jQuery(this).closest('.editer_urls').find('.edition').toggle('fast').closest('.editer_urls').delay(300).toggleClass('open');return false;"
+						>]<span class="edit"><:bouton_modifier:></span><span class="url" id="url-#OBJET-#ID_OBJET">(#ID_OBJET|generer_url_entite{#OBJET,'','',#EVAL{true}}|url_absolue)</span>[(#GET{auth})</a>]</span>]
+	[(#AUTORISER{modifier,#OBJET,#ID_OBJET})
+	<div class="edition">
+		<div class="ajax">
+			#FORMULAIRE_EDITER_URL_OBJET{#OBJET,#ID_OBJET}
+		</div>
+	</div>
+	]
+</div>
+]

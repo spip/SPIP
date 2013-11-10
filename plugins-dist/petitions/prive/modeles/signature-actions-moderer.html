@@ -1,0 +1,16 @@
+#SET{action,'<div class="actions moderer"><span>'}
+[(#AUTORISER{modererpetition,article,#ID_ARTICLE})
+	[(#STATUT|=={poubelle}|oui)
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:petitions:icone_valider_signature:>,#URL_ACTION_AUTEUR{valider_signature,#ID_SIGNATURE,#SELF|ancre_url{signature#ID_SIGNATURE}},'ajax valider'})]
+	]
+	[(#STATUT|!={poubelle}|oui)
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:petitions:icone_supprimer_signature:>,#URL_ACTION_AUTEUR{supprimer_signature,#ID_SIGNATURE,#SELF|ancre_url{signature#ID_SIGNATURE}},'ajax supprimer'})]
+	]
+	[(#STATUT|in_any{#ARRAY{1,publie,2,poubelle}}|non)
+	 #GET{action}#SET{action,''}
+	 [(#BOUTON_ACTION{<:petitions:icone_relancer_signataire:>,#URL_ACTION_AUTEUR{relancer_signature,#ID_SIGNATURE,#SELF|ancre_url{signature#ID_SIGNATURE}},'ajax'})]
+	]
+]
+[(#GET{action}|non)</span></div>]

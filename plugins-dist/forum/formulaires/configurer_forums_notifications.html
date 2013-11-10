@@ -1,0 +1,39 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_forums_notifications' id='formulaire_configurer_forums_notifications'>
+<h3 class='titrem'>[(#CHEMIN_IMAGE{annonce-24.png}|balise_img{'',cadre-icone})]<:forum:info_envoi_forum:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form action="#ENV{action}#formulaire_configurer_forums_notifications" method="post"><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<p class='explication'><:forum:info_option_email:></p>
+		<ul>
+			<li class='editer configurer_prevenir_auteurs_pos[ (#ENV**{erreurs}|table_valeur{prevenir_auteurs_pos}|oui)erreur]'>
+				[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{prevenir_auteurs_pos})</span>
+				]<div class='choix'>
+					<input class='checkbox' type="checkbox" name="prevenir_auteurs_pos" value='1' [checked="(#ENV{prevenir_auteurs_pos}|?{checked})"] id="prevenir_auteurs_pos"/>
+					<label for="prevenir_auteurs_pos"><:forum:bouton_radio_modere_posteriori:></label>
+				</div>
+			</li>
+			<li class='editer configurer_prevenir_auteurs_pri[ (#ENV**{erreurs}|table_valeur{prevenir_auteurs_pri}|oui)erreur]'>
+				[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{prevenir_auteurs_pri})</span>
+				]<div class='choix'>
+					<input class='checkbox' type="checkbox" name="prevenir_auteurs_pri" value='1' [checked="(#ENV{prevenir_auteurs_pri}|?{checked})"] id="prevenir_auteurs_pri"/>
+					<label for="prevenir_auteurs_pri"><:forum:bouton_radio_modere_priori:></label>
+				</div>
+			</li>
+			<li class='editer configurer_prevenir_auteurs_abo[ (#ENV**{erreurs}|table_valeur{prevenir_auteurs_abo}|oui)erreur]'>
+				[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{prevenir_auteurs_abo})</span>
+				]<div class='choix'>
+					<input class='checkbox' type="checkbox" name="prevenir_auteurs_abo" value='1' [checked="(#ENV{prevenir_auteurs_abo}|?{checked})"] id="prevenir_auteurs_abo"/>
+					<label for="prevenir_auteurs_abo"><:forum:bouton_radio_modere_abonnement:></label>
+				</div>
+			</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
+	</div></form>
+
+</div>

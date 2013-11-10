@@ -1,0 +1,44 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+.liste-objets.syndic_articles .action button {vertical-align: top;}
+
+.onglets_simple ul.statut_syndic_articles li.publie strong,.onglets_simple ul.statut_syndic_articles li.publie a {background-image:url(#CHEMIN_IMAGE{syndic-statut-publie-24.png});padding-#ENV{left}:27px;}
+.onglets_simple ul.statut_syndic_articles li.off strong,.onglets_simple ul.statut_syndic_articles li.off a {background-image:url(#CHEMIN_IMAGE{syndic-statut-off-24.png});padding-#ENV{left}:27px;}
+.onglets_simple ul.statut_syndic_articles li.refuse strong,.onglets_simple ul.statut_syndic_articles li.refuse a {background-image:url(#CHEMIN_IMAGE{syndic-statut-poubelle-24.png});padding-#ENV{left}:27px;}
+.onglets_simple ul.statut_syndic_articles li.dispo strong,.onglets_simple ul.statut_syndic_articles li.dispo a {background-image:url(#CHEMIN_IMAGE{syndic-statut-dispo-24.png});padding-#ENV{left}:27px;}
+
+
+.controler_syndication .filtres.second {font-size:0.9em;border:0;padding-#ENV{left}:0;}
+.controler_syndication .filtres.second ul li strong,.controler_syndication .filtres.second ul li a {margin-#ENV{left}:0px;margin-#ENV{right}:5px;margin-bottom:5px;}
+.controler_syndication .filtres.second ul li strong {border:1px solid #ENV{foncee};}
+.controler_syndication .filtres.second ul li strong,.controler_syndication .filtres.second ul li a:hover {background-color:#fff;}
+
+.source {font-size:12px;font-weight:bold;background:#fff;padding:5px;border:1px solid #ENV{foncee};}
+.source .actions {font-weight:normal;}
+.annule_filtre {float:#ENV{right};}
+
+
+/**
+ * formulaire_editer_site
+ */
+
+.formulaire_editer_site.withlogo .editer_nom_site,.formulaire_editer_site.withlogo .editer_url_site {padding-#ENV{right}:200px;}
+.formulaire_editer_site .previsu_logo_site{height:1px;text-align: right;}
+
+/* Inscription du flux RSS */
+.formulaire_editer_site .editer_referencement_automatise fieldset,.formulaire_editer_site .editer_referencement_automatise .boutons{background-color:#E9E9E9;border:0;}

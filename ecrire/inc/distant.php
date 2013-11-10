@@ -436,7 +436,7 @@ function fichier_copie_locale($source){
 	// Si c'est deja dans la table des documents,
 	// ramener le nom de sa copie potentielle
 
-	$ext = sql_getfetsel("extension", "spip_documents", "fichier=" . sql_quote($source) . " AND distant='oui' AND extension <> ''");
+	$ext = Sql::getfetsel("extension", "spip_documents", "fichier=" . Sql::quote($source) . " AND distant='oui' AND extension <> ''");
 
 
 	if ($ext) return nom_fichier_copie_locale($source, $ext);
@@ -446,7 +446,7 @@ function fichier_copie_locale($source){
 
 	$ext = $path_parts ? $path_parts['extension'] : '';
 
-	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=" . sql_quote($ext))){
+	if ($ext AND Sql::getfetsel("extension", "spip_types_documents", "extension=" . Sql::quote($ext))){
 		$f = nom_fichier_copie_locale($source, $ext);
 		if (file_exists(_DIR_RACINE . $f))
 			return $f;
@@ -464,7 +464,7 @@ function fichier_copie_locale($source){
 		ecrire_fichier($cache, serialize($path_parts));
 	}
 	$ext = $path_parts ? $path_parts['extension'] : '';
-	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=" . sql_quote($ext))){
+	if ($ext AND Sql::getfetsel("extension", "spip_types_documents", "extension=" . Sql::quote($ext))){
 		return nom_fichier_copie_locale($source, $ext);
 	}
 	spip_log("pas de copie locale pour $source");
@@ -515,19 +515,19 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 			if (!$t
 				AND preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $source, $rext)
 			){
-				$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1],'','text'));
+				$t = Sql::fetsel("extension", "spip_types_documents", "extension=" . Sql::quote($rext[1],'','text'));
 			}
 			if (!$t
 				AND preg_match(",^Content-Disposition:\s*attachment;\s*filename=(.*)$,Uims", $headers, $m)
 				AND preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $m[1], $rext)
 			){
-				$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1],'','text'));
+				$t = Sql::fetsel("extension", "spip_types_documents", "extension=" . Sql::quote($rext[1],'','text'));
 			}
 		}
 
 		// Autre mime/type (ou text/plain avec fichier d'extension inconnue)
 		if (!$t)
-			$t = sql_fetsel("extension", "spip_types_documents", "mime_type=" . sql_quote($mime_type));
+			$t = Sql::fetsel("extension", "spip_types_documents", "mime_type=" . Sql::quote($mime_type));
 
 		// Toujours rien ? (ex: audio/x-ogg au lieu de application/ogg)
 		// On essaie de nouveau avec l'extension
@@ -535,7 +535,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 			AND $mime_type!='text/plain'
 			AND preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $source, $rext)
 		){
-			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1],'','text')); # eviter xxx.3 => 3gp (> SPIP 3)
+			$t = Sql::fetsel("extension", "spip_types_documents", "extension=" . Sql::quote($rext[1],'','text')); # eviter xxx.3 => 3gp (> SPIP 3)
 		}
 
 
@@ -545,7 +545,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 		} else {
 			# par defaut on retombe sur '.bin' si c'est autorise
 			spip_log("mime-type $mime_type inconnu");
-			$t = sql_fetsel("extension", "spip_types_documents", "extension='bin'");
+			$t = Sql::fetsel("extension", "spip_types_documents", "extension='bin'");
 			if (!$t) return false;
 			$a['extension'] = $t['extension'];
 		}

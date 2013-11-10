@@ -1,0 +1,15 @@
+#SET{nomp,sitrub#ID_RUBRIQUE}
+#SET{nb,50}
+<B_breves>
+	<div class="menu">
+	<h4><:breves:breves:></h4>
+	[<p class="pagination">[<em>(#VAL{breve}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
+	<ul class="menu-items breves">
+		<BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse}{statut==.?}{pagination #GET{nb} #GET{nomp}}>
+			<li class="item"><a href="[(#ID_BREVE|generer_url_entite{breve})]"
+						title="[(#VAL{breve}|objet_info{texte_objet}|_T) #ID_BREVE]">[(#STATUT|puce_statut{breve,#ID_BREVE,#ID_RUBRIQUE}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]</a></li>
+		</BOUCLE_breves>
+	</ul>
+	[<p class="pagination">[<em>(#VAL{breve}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
+	</div>
+</B_breves>

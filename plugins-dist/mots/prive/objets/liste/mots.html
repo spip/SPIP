@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	titre,1,
+	id_mot,1,
+	points,-1
+}})
+]<B_liste_mot>
+#ANCRE_PAGINATION
+<div class="liste-objets mots">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_mot_cle,info_nb_mots_cles}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='type' scope='col'>[(#TRI{type,<:mots:info_dans_groupe:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_mot,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_mot(MOTS){id_mot?}{id_groupe?}{id_rubrique?}{id_article?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>[(#VAL|puce_statut{mot,#ID_MOT,#ID_GROUPE})]</td>
+			<td class='titre principale'>[(#LOGO_MOT|image_reduire{20,26})]<a href="[(#ID_MOT|generer_url_entite{mot})]"
+																																						title="<:info_numero_abbreviation|attribut_html:> #ID_MOT">[(#RANG). ]#TITRE</a></td>
+			<td class='type secondaire'>#TYPE</td>
+			<td class='id'>[(#AUTORISER{modifier,mot,#ID_MOT}|?{
+				<a href="[(#URL_ECRIRE{mot_edit,id_mot=#ID_MOT})]">#ID_MOT</a>,
+				#ID_MOT
+			})]</td>
+		</tr>
+	</BOUCLE_liste_mot>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_mot>[
+<div class="liste-objets mots caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_mot>

@@ -33,13 +33,14 @@ function action_logout_dist()
 
 	// seul le loge peut se deloger (mais id_auteur peut valoir 0 apres une restauration avortee)
 	if (isset($GLOBALS['visiteur_session']['id_auteur']) 
-		AND is_numeric($GLOBALS['visiteur_session']['id_auteur'])
-		// des sessions anonymes avec id_auteur=0 existent, mais elle n'ont pas de statut : double check
-	  AND isset($GLOBALS['visiteur_session']['statut'])) {
-
+	AND is_numeric($GLOBALS['visiteur_session']['id_auteur'])
+	// des sessions anonymes avec id_auteur=0 existent, mais elle n'ont pas de statut : double check
+	AND isset($GLOBALS['visiteur_session']['statut']))
+	{
 		// il faut un jeton pour fermer la session (eviter les CSRF)
 		if (!$jeton = _request('jeton')
-		 OR !verifier_jeton_logout($jeton,$GLOBALS['visiteur_session'])){
+		OR !verifier_jeton_logout($jeton,$GLOBALS['visiteur_session']))
+		{
 			$jeton = generer_jeton_logout($GLOBALS['visiteur_session']);
 			$action = generer_url_action("logout","jeton=$jeton");
 			$action = parametre_url($action,'logout',_request('logout'));
@@ -65,8 +66,9 @@ function action_logout_dist()
 		// si authentification http, et que la personne est loge,
 		// pour se deconnecter, il faut proposer un nouveau formulaire de connexion http
 		if (isset($_SERVER['PHP_AUTH_USER'])
-			AND !$GLOBALS['ignore_auth_http']
-			AND $GLOBALS['auth_can_disconnect']) {
+		AND !$GLOBALS['ignore_auth_http']
+		AND $GLOBALS['auth_can_disconnect'])
+		{
 			  ask_php_auth(_T('login_deconnexion_ok'),
 				       _T('login_verifiez_navigateur'),
 				       _T('login_retour_public'),
@@ -90,11 +92,11 @@ function action_logout_dist()
  * @param null|string $alea
  * @return string
  */
-function generer_jeton_logout($session,$alea=null){
-	if (is_null($alea)){
-		if (!isset($GLOBALS['meta']['alea_ephemere'])){
-			include_spip('base/abstract_sql');
-			$GLOBALS['meta']['alea_ephemere'] = sql_getfetsel('valeur', 'spip_meta', "nom='alea_ephemere'");
+function generer_jeton_logout($session,$alea=null)
+{
+	if (is_null($alea)) {
+		if (!isset($GLOBALS['meta']['alea_ephemere'])) {
+			$GLOBALS['meta']['alea_ephemere'] = Sql::getfetsel('valeur', 'spip_meta', "nom='alea_ephemere'");
 		}
 		$alea = $GLOBALS['meta']['alea_ephemere'];
 	}
@@ -115,12 +117,12 @@ function generer_jeton_logout($session,$alea=null){
  * @param array $session
  * @return bool
  */
-function verifier_jeton_logout($jeton,$session){
+function verifier_jeton_logout($jeton,$session)
+{
 	if (generer_jeton_logout($session)===$jeton)
 		return true;
-	if (!isset($GLOBALS['meta']['alea_ephemere_ancien'])){
-		include_spip('base/abstract_sql');
-		$GLOBALS['meta']['alea_ephemere_ancien'] = sql_getfetsel('valeur', 'spip_meta', "nom='alea_ephemere_ancien'");
+	if (!isset($GLOBALS['meta']['alea_ephemere_ancien'])) {
+		$GLOBALS['meta']['alea_ephemere_ancien'] = Sql::getfetsel('valeur', 'spip_meta', "nom='alea_ephemere_ancien'");
 	}
 	if (generer_jeton_logout($session,$GLOBALS['meta']['alea_ephemere_ancien'])===$jeton)
 		return true;

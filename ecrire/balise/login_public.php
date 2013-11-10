@@ -14,7 +14,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 
 // http://doc.spip.org/@balise_LOGIN_PUBLIC
-function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
+function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC')
+{
 	return calculer_balise_dynamique($p, $nom, array('url'));
 }
 
@@ -25,12 +26,14 @@ function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
 #    <boucle(AUTEURS)>[(#LOGIN_PUBLIC{#SELF, #LOGIN})]
 
 // http://doc.spip.org/@balise_LOGIN_PUBLIC_stat
-function balise_LOGIN_PUBLIC_stat ($args, $context_compil) {
+function balise_LOGIN_PUBLIC_stat ($args, $context_compil)
+{
 	return array(isset($args[1]) ? $args[1] : $args[0], (isset($args[2]) ? $args[2] : ''));
 }
 
 // http://doc.spip.org/@balise_LOGIN_PUBLIC_dyn
-function balise_LOGIN_PUBLIC_dyn($url, $login) {
+function balise_LOGIN_PUBLIC_dyn($url, $login)
+{
 	include_spip('balise/formulaire_');
 	if (!$url 		# pas d'url passee en filtre ou dans le contexte
 	AND !$url = _request('url') # ni d'url passee par l'utilisateur

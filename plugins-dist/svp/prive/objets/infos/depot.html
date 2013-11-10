@@ -1,0 +1,29 @@
+<BOUCLE_infos_depot(DEPOTS) {id_depot=#ENV{id}}>
+<div class="infos">
+	[(#REM) <!-- La reference du depot --> ]
+	#SET{titre_info, #ENV{type}|objet_info{texte_objet}|_T}
+	<div class="numero">
+		<:titre_cadre_numero_objet{objet=#GET{titre_info}}:>
+		<p>#ID_DEPOT</p>
+	</div>
+    <div class="bouton">[(#BOUTON_ACTION{<:svp:bouton_actualiser:>, #URL_ACTION_AUTEUR{actualiser_depot,#ID_DEPOT, #SELF}, '', '', <:svp:bulle_actualiser_depot:>})]</div>
+    <div class="bouton">[(#BOUTON_ACTION{<:svp:bouton_supprimer:>, #URL_ACTION_AUTEUR{supprimer_depot,#ID_DEPOT, #URL_ECRIRE{depots}}, '', '', <:svp:bulle_supprimer_depot:>})]</div>
+
+	[(#REM) <!-- Les compteurs et l'etat d'actualisation --> ]
+	<div class="liste compteurs">
+		<ul class="liste-items">
+			<li>[(#NBR_PAQUETS|singulier_ou_pluriel{svp:info_1_paquet, svp:info_nb_paquets})]</li>
+		[(#NBR_PLUGINS|>{0}|oui)
+			<li>[(#NBR_PLUGINS|singulier_ou_pluriel{svp:info_1_plugin, svp:info_nb_plugins})]</li>
+		]
+		[(#NBR_AUTRES|>{0}|oui)
+			<li>[(#NBR_AUTRES) [(#NBR_AUTRES|singulier_ou_pluriel{svp:label_1_autre_contribution, svp:label_n_autres_contributions})]]</li>
+		]
+		</ul>
+	</div>
+	<p>[<:svp:label_actualise_le:><br />(#MAJ|affdate), [(#MAJ|affdate{H:i})]]</p>
+	
+	[(#REM) <!-- Le bouton d'affichage de la page publique du depot si un squelette public existe --> ]
+	<INCLUDE{fond=prive/squelettes/inclure/voir_en_ligne, type=#ENV{type}, id=#ID_DEPOT} />
+</div>
+</BOUCLE_infos_depot>

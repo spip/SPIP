@@ -1,0 +1,5 @@
+<div class="nettoyeur"></div>
+<INCLURE{fond=prive/objets/liste/messages-envoyes,id_auteur=#ENV{id_auteur},destinataire=#SESSION{id_auteur},statut=publie,type=normal,env,ajax} />
+<INCLURE{fond=prive/objets/liste/messages-recus,id_auteur=#SESSION{id_auteur},destinataire=#ENV{id_auteur},statut=publie,type=normal,env,ajax} />
+[(#URL_ECRIRE{message_edit,new=oui&to=#ENV{id_auteur}}|parametre_url{redirect,#SELF}|icone_verticale{<:info_envoyer_message_prive:>,message-24.png,new,right})]
+

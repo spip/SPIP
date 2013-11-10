@@ -67,7 +67,7 @@ function base_lister_toutes_tables($serveur='', $tables=array(), $exclude = arra
 
 	$p = '/^' . $prefixe . '/';
 	$res = $tables;
-	foreach(sql_alltable(null,$serveur) as $t) {
+	foreach (Sql::alltable(null,$serveur) as $t) {
 		if (preg_match($p, $t)) {
 			$t1 = preg_replace($p, 'spip', $t);
 			if (!in_array($t1, $tables) AND !in_array($t1, $exclude))
@@ -106,7 +106,7 @@ function base_saisie_tables($name, $tables, $exclude = array(), $post=null, $ser
 			. "/>\n"
 			. "<label for='$name$k'>".$t."</label>"
 			. " ("
-			. sinon(singulier_ou_pluriel(sql_countsel($t,'','','',$serveur), 'dump:une_donnee', 'dump:nb_donnees'),_T('dump:aucune_donnee'))
+			. sinon(singulier_ou_pluriel(Sql::countsel($t,'','','',$serveur), 'dump:une_donnee', 'dump:nb_donnees'),_T('dump:aucune_donnee'))
 	  		. ")";
 	}
 	return $res;
@@ -294,10 +294,10 @@ function base_vider_tables_destination_copie($tables, $exclure_tables = array(),
 				// regarder si il y a au moins un champ impt='non'
 				$desc = $trouver_table($table,$serveur);
 				if (isset($desc['field']['impt'])){
-					sql_delete($table, "impt='oui'", $serveur);
+					Sql::delete($table, "impt='oui'", $serveur);
 				}
 				else{
-					sql_delete($table, "", $serveur);
+					Sql::delete($table, "", $serveur);
 				}
 			}
 		}
@@ -307,9 +307,10 @@ function base_vider_tables_destination_copie($tables, $exclure_tables = array(),
 	// Bidouille pour garder l'acces admin actuel pendant toute la restauration
 	if ($serveur==''
 	  AND in_array('spip_auteurs',$tables)
-	  AND !in_array('spip_auteurs',$exclure_tables)) {
+	  AND !in_array('spip_auteurs',$exclure_tables))
+	{
 		base_conserver_copieur(true, $serveur);
-		sql_delete("spip_auteurs", "id_auteur>0",$serveur);
+		Sql::delete("spip_auteurs", "id_auteur>0",$serveur);
 	}
 }
 
@@ -321,16 +322,16 @@ function base_vider_tables_destination_copie($tables, $exclure_tables = array(),
  */
 function base_conserver_copieur($move = true,$serveur=''){
 	// s'asurer qu'on a pas deja fait la manip !
-	if ($GLOBALS['visiteur_session']['id_auteur']>0 AND sql_countsel("spip_auteurs", "id_auteur>0")) {
+	if ($GLOBALS['visiteur_session']['id_auteur']>0 AND Sql::countsel("spip_auteurs", "id_auteur>0")) {
 		spip_log('Conserver copieur '.$GLOBALS['visiteur_statut']['id_auteur'] . " dans id_auteur=".$GLOBALS['visiteur_statut']['id_auteur']." pour le serveur '$serveur'",'dump.'._LOG_INFO_IMPORTANTE);
-		sql_delete("spip_auteurs", "id_auteur<0",$serveur);
+		Sql::delete("spip_auteurs", "id_auteur<0",$serveur);
 		if ($move){
-			sql_updateq('spip_auteurs', array('id_auteur'=>-$GLOBALS['visiteur_session']['id_auteur']), "id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur']),array(),$serveur);
+			Sql::updateq('spip_auteurs', array('id_auteur'=>-$GLOBALS['visiteur_session']['id_auteur']), "id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur']),array(),$serveur);
 		}
 		else {
-			$row = sql_fetsel('*','spip_auteurs','id_auteur='.$GLOBALS['visiteur_session']['id_auteur'],'','','','',$serveur);
+			$row = Sql::fetsel('*','spip_auteurs','id_auteur='.$GLOBALS['visiteur_session']['id_auteur'],'','','','',$serveur);
 			$row['id_auteur'] = -$GLOBALS['visiteur_session']['id_auteur'];
-			sql_insertq('spip_auteurs',$row,array(),$serveur);
+			Sql::insertq('spip_auteurs',$row,array(),$serveur);
 		}
 	}
 }
@@ -350,13 +351,13 @@ function base_detruire_copieur_si_besoin($serveur='')
 {
 	// rien a faire si ce n'est pas le serveur principal !
 	if ($serveur=='') {
-		if (sql_countsel("spip_auteurs", "id_auteur>0")) {
+		if (Sql::countsel("spip_auteurs", "id_auteur>0")) {
 			spip_log("Detruire copieur id_auteur<0 pour le serveur '$serveur'",'dump.'._LOG_INFO_IMPORTANTE);
-			sql_delete("spip_auteurs", "id_auteur<0", $serveur);
+			Sql::delete("spip_auteurs", "id_auteur<0", $serveur);
 		}
 		else {
 			spip_log( "Restaurer copieur id_auteur<0 pour le serveur '$serveur' (aucun autre auteur en base)",'dump.'._LOG_INFO_IMPORTANTE);
-			sql_update('spip_auteurs', array('id_auteur'=>'-id_auteur'), "id_auteur<0");
+			Sql::update('spip_auteurs', array('id_auteur'=>'-id_auteur'), "id_auteur<0");
 		}
 	}
 	else
@@ -377,7 +378,7 @@ function base_detruire_copieur_si_besoin($serveur='')
 function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
 	$upgrade = false;
 	// si la table existe et qu'on est a l'init, la dropper
-	if ($desc_dest=sql_showtable($table,true,$serveur_dest) AND $init) {
+	if ($desc_dest=Sql::showtable($table,true,$serveur_dest) AND $init) {
 		if ($serveur_dest=='' AND in_array($table,array('spip_meta','spip_auteurs'))) {
 			// ne pas dropper auteurs et meta sur le serveur principal
 			// faire un simple upgrade a la place
@@ -387,13 +388,13 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
 			base_vider_tables_destination_copie(array($table),array(),$serveur_dest);
 			if ($table=='spip_meta'){
 				// virer les version base qui vont venir avec l'import
-				sql_delete($table, "nom like '%_base_version'",$serveur_dest);
+				Sql::delete($table, "nom like '%_base_version'",$serveur_dest);
 				// hum casse la base si pas version_installee a l'import ...
-				sql_delete($table, "nom='version_installee'",$serveur_dest);
+				Sql::delete($table, "nom='version_installee'",$serveur_dest);
 			}
 		}
 		else {
-			sql_drop_table($table, '', $serveur_dest);
+			Sql::drop_table($table, '', $serveur_dest);
 			spip_log( "drop table '$table' sur serveur '$serveur_dest'",'dump.'._LOG_INFO_IMPORTANTE);
 		}
 		$desc_dest = false;
@@ -403,7 +404,7 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
 		spip_log( "creation '$table' sur serveur '$serveur_dest'",'dump.'._LOG_INFO_IMPORTANTE);
 		include_spip('base/create');
 		creer_ou_upgrader_table($table, $desc, 'auto', $upgrade,$serveur_dest);
-		$desc_dest = sql_showtable($table,true,$serveur_dest);
+		$desc_dest = Sql::showtable($table,true,$serveur_dest);
 	}
 	if (!$desc_dest){
 		spip_log( "Erreur creation '$table' sur serveur '$serveur_dest'".var_export($desc,1),'dump.'._LOG_ERREUR);
@@ -534,14 +535,14 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 				while (true) {
 					$n = intval($status['tables_copiees'][$table]);
 					// on copie par lot de 400
-					$res = sql_select('*',$table,isset($where[$table])?$where[$table]:'','','',"$n,400",'',$serveur_source);
-					while ($row = sql_fetch($res,$serveur_source)){
+					$res = Sql::select('*',$table,isset($where[$table])?$where[$table]:'','','',"$n,400",'',$serveur_source);
+					while ($row = Sql::fetch($res,$serveur_source)){
 						$rows = array($row);
 						// lire un groupe de donnees si demande en option
 						// (permet un envoi par lot vers la destination)
 						if ($data_pool>0){
 							$s = strlen(serialize($row));
-							while ($s<$data_pool AND $row = sql_fetch($res,$serveur_source)){
+							while ($s<$data_pool AND $row = Sql::fetch($res,$serveur_source)){
 								$s += strlen(serialize($row));
 								$rows[]= $row;
 							}
@@ -567,7 +568,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 						return false; // on a pas fini, mais le temps imparti est ecoule
 				}
 				if ($drop_source) {
-					sql_drop_table($table,'',$serveur_source);
+					Sql::drop_table($table,'',$serveur_source);
 					spip_log( "drop $table sur serveur source '$serveur_source'",'dump.'._LOG_INFO_IMPORTANTE);
 				}
 				$status['tables_copiees'][$table]=($status['tables_copiees'][$table]?-$status['tables_copiees'][$table]:"zero");
@@ -621,14 +622,14 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 function base_inserer_copie($table,$rows,$desc_dest,$serveur_dest){
 
 	// verifier le nombre d'insertion
-	$nb1 = sql_countsel($table);
+	$nb1 = Sql::countsel($table);
 	// si l'enregistrement est deja en base, ca fera un echec ou un doublon
-	$r = sql_insertq_multi($table,$rows,$desc_dest,$serveur_dest);
-	$nb = sql_countsel($table);
+	$r = Sql::insertq_multi($table,$rows,$desc_dest,$serveur_dest);
+	$nb = Sql::countsel($table);
 	if ($nb-$nb1<count($rows)){
 		foreach($rows as $row){
 			// si l'enregistrement est deja en base, ca fera un echec ou un doublon
-			$r = sql_insertq($table,$row,$desc_dest,$serveur_dest);
+			$r = Sql::insertq($table,$row,$desc_dest,$serveur_dest);
 		}
 	}
 	return $r;

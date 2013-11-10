@@ -1,0 +1,10 @@
+<BOUCLE_info(GROUPES_MOTS){id_groupe=#ENV{id}}>
+<div class='infos'>
+<div class='numero'><:mots:titre_groupe_mots_numero:><p>#ID_GROUPE</p></div>
+
+[(#AUTORISER{supprimer,groupemots,#ID_GROUPE}|oui)
+[(#URL_ACTION_AUTEUR{supprimer_groupe_mots,#ID_GROUPE,#URL_ECRIRE{mots}}|icone_horizontale{<:mots:icone_supprimer_groupe_mots:>,groupe_mots,del})]
+]
+
+</div>
+</BOUCLE_info>

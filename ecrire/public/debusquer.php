@@ -676,9 +676,9 @@ function debusquer_source($objet, $affiche){
 		//  eviter l'affichage de milliers de lignes
 		//  personnalisation possible dans mes_options
 		$max_aff = defined('_MAX_DEBUG_AFF') ? _MAX_DEBUG_AFF : 50;
-		while ($retours_sql = sql_fetch($ress_req)){
+		while ($retours_sql = Sql::fetch($ress_req)){
 			if ($num<=$max_aff){
-				$brut_sql .= "<h3>" . ($num==1 ? $num . " sur " . sql_count($ress_req) : $num) . "</h3>";
+				$brut_sql .= "<h3>" . ($num==1 ? $num . " sur " . Sql::count($ress_req) : $num) . "</h3>";
 				$brut_sql .= "<p>";
 				foreach ($retours_sql as $key => $val){
 					$brut_sql .= "<strong>" . $key . "</strong> => " . htmlspecialchars(couper($val, 150)) . "<br />\n";

@@ -1516,9 +1516,11 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// tient compte des anciennes versions (inc_connect...)
 	if (!defined('_FILE_CONNECT_INS')) define('_FILE_CONNECT_INS', 'connect');
 	if (!defined('_FILE_CONNECT')) define('_FILE_CONNECT',
-		(@is_readable($f = _DIR_CONNECT . _FILE_CONNECT_INS . '.php') ? $f
-	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php') ? $f
-	:	false)));
+		(@is_readable($f = _DIR_CONNECT . _FILE_CONNECT_INS . '.php')
+		? $f
+		: (@is_readable($f = _DIR_RESTREINT . 'inc_connect.php')
+			? $f
+			: false)));
 
 	// Le fichier de reglages des droits
 	if (!defined('_FILE_CHMOD_INS')) define('_FILE_CHMOD_INS', 'chmod');
@@ -2252,11 +2254,12 @@ function lire_meta($nom) {
 // http://doc.spip.org/@ecrire_metas
 function ecrire_metas() {}
 
-// Fonction depreciee, cf. http://doc.spip.org/@sql_fetch
+// Fonction depreciee, cf. http://doc.spip.org/@Sql::fetch
 // http://doc.spip.org/@spip_fetch_array
-function spip_fetch_array($r, $t=NULL) {
+function spip_fetch_array($r, $t=NULL)
+{
 	if (!isset($t)) {
-		if ($r) return sql_fetch($r);
+		if ($r) return Sql::fetch($r);
 	} else {
 		if ($t=='SPIP_NUM') $t = MYSQL_NUM;
 		if ($t=='SPIP_BOTH') $t = MYSQL_BOTH;

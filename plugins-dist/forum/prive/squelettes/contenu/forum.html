@@ -1,0 +1,23 @@
+[(#AUTORISER{menu,foruminternesuivi}|sinon_interdire_acces)]
+#SET{self,#SELF}
+#SET{quoi,interne}
+[(#AUTORISER{participer,forumadmin}|non)
+<h1 class="grostitre"><:forum:titre_cadre_forum_interne:></h1>
+]
+[(#AUTORISER{participer,forumadmin}|oui)
+	#SET{quoi,#ENV{quoi,interne}}
+	<div class='onglets_simple clearfix'>
+		<ul>
+			<li>[(#GET{self}|parametre_url{quoi,''}|lien_ou_expose{<:forum:titre_cadre_forum_interne:>,#GET{quoi}|=={interne},ajax})]</li>
+			<li>[(#GET{self}|parametre_url{quoi,admin}|lien_ou_expose{<:forum:titre_cadre_forum_administrateur:>,#GET{quoi}|=={admin},ajax})]</li>
+		</ul>
+	</div>
+]
+[(#GET{quoi}|=={interne}|oui)
+<h1 class="none"><:forum:titre_cadre_forum_interne:></h1>
+<INCLURE{fond=prive/squelettes/inclure/discuter_forum, env, quoi=interne, statut=privrac, ajax} />
+]
+[(#GET{quoi}|=={admin}|et{#AUTORISER{participer,forumadmin}}|oui)
+<h1 class="none"><:forum:titre_cadre_forum_administrateur:></h1>
+<INCLURE{fond=prive/squelettes/inclure/discuter_forum, env, quoi=interne, statut=privadm, ajax} />
+]

@@ -1,0 +1,39 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_mot formulaire_editer_mot-#ENV{id_mot,nouveau}'>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_mot' value='#ENV{id_mot}' />
+	  <ul>
+	    <li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+				<label for="titre"><:mots:info_titre_mot_cle:><em class="aide">#AIDER{titre}</em></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre})]" placeholder="<:mots:texte_nouveau_mot:>" />
+	    </li>	
+	    <li class="editer editer_groupe_mot obligatoire[ (#ENV**{erreurs}|table_valeur{id_groupe}|oui)erreur]">
+				<label for="id_groupe"><:mots:info_dans_groupe:><em class="aide">#AIDER{id_groupe}</em></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_groupe})</span>
+				][(#INCLURE{fond=formulaires/selecteur_groupe_mot, id_groupe=#ENV{id_groupe}, table=#ENV{table,''}, name=id_groupe, id=id_groupe})]
+	    </li>
+	    <li class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+				<label for="descriptif"><:texte_descriptif_rapide:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
+				]<textarea name='descriptif' id='descriptif' rows='4' cols='40'>[(#ENV**{descriptif})]</textarea>
+	    </li>
+	    <li class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+				<label for="text_area"><:info_texte_explicatif:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
+				][(#ENV**{_texte_trop_long,''})
+				]<textarea name='texte' id='text_area' cols='40' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]'>[(#ENV**{texte})]</textarea>
+	    </li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

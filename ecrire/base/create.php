@@ -15,7 +15,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/acces');
 include_spip('base/objets');
 include_spip('base/typedoc');
-include_spip('base/abstract_sql');
 
 /**
  * Determiner le flag autoinc pour une table
@@ -25,7 +24,8 @@ include_spip('base/abstract_sql');
  * @param array $desc
  * @return bool
  */
-function base_determine_autoinc($table,$desc=array()){
+function base_determine_autoinc($table, $desc=array())
+{
 	if ($t=lister_tables_principales() AND isset($t[$table]))
 		$autoinc = true;
 	elseif ($t=lister_tables_auxiliaires() AND isset($t[$table]))
@@ -54,28 +54,29 @@ function base_determine_autoinc($table,$desc=array()){
  * @param string $serveur
  * @return void
  */
-function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='') {
-	$sql_desc = $upgrade ? sql_showtable($table,true,$serveur) : false;
+function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='')
+{
+	$sql_desc = $upgrade ? Sql::showtable($table,true,$serveur) : false;
 	if (!$sql_desc) {
 		if ($autoinc==='auto')
 			$autoinc = base_determine_autoinc($table,$desc);
-		sql_create($table, $desc['field'], $desc['key'], $autoinc, false, $serveur);
+		Sql::create($table, $desc['field'], $desc['key'], $autoinc, false, $serveur);
 	}
 	else {
 		// ajouter les champs manquants
 		// on ne supprime jamais les champs, car c'est dangereux
 		// c'est toujours a faire manuellement
 		$last = '';
-		foreach($desc['field'] as $field=>$type){
+		foreach ($desc['field'] as $field=>$type) {
 			if (!isset($sql_desc['field'][$field]))
-				sql_alter("TABLE $table ADD $field $type".($last?" AFTER $last":""),$serveur);
+				Sql::alter("TABLE $table ADD $field $type".($last?" AFTER $last":""),$serveur);
 			$last = $field;
 		}
-		foreach($desc['key'] as $key=>$type){
+		foreach ($desc['key'] as $key=>$type) {
 			// Ne pas oublier les cas des cles non nommees dans la declaration et qui sont retournees
 			// par le showtable sous la forme d'un index de tableau "KEY $type" et non "KEY"
 			if (!isset($sql_desc['key'][$key]) AND !isset($sql_desc['key']["$key $type"]))
-				sql_alter("TABLE $table ADD $key ($type)",$serveur);
+				Sql::alter("TABLE $table ADD $key ($type)",$serveur);
 			$last = $field;
 		}
 
@@ -107,11 +108,11 @@ function alterer_base($tables_inc, $tables_noinc, $up=false, $serveur='')
 		$old = true;
 		if (!is_array($up)) $up = array($up);
 	}
-	foreach($tables_inc as $k => $v)
+	foreach ($tables_inc as $k => $v)
 		if (!$old OR in_array($k, $up))
 			creer_ou_upgrader_table($k,$v,true,$old,$serveur);
 
-	foreach($tables_noinc as $k => $v)
+	foreach ($tables_noinc as $k => $v)
 		if (!$old OR in_array($k, $up))
 			creer_ou_upgrader_table($k,$v,false,$old,$serveur);
 }
@@ -125,8 +126,8 @@ function alterer_base($tables_inc, $tables_noinc, $up=false, $serveur='')
  * @param string $serveur
  * @return void
  */
-function creer_base($serveur='') {
-
+function creer_base($serveur='')
+{
 	// Note: les mises a jour reexecutent ce code pour s'assurer
 	// de la conformite de la base
 	// pas de panique sur  "already exists" et "duplicate entry" donc.
@@ -146,7 +147,8 @@ function creer_base($serveur='') {
  * @param string $serveur
  * @return void
  */
-function maj_tables($upgrade_tables=array(),$serveur=''){
+function maj_tables($upgrade_tables=array(),$serveur='')
+{
 	alterer_base(lister_tables_principales(),
 		     lister_tables_auxiliaires(),
 		     $upgrade_tables,

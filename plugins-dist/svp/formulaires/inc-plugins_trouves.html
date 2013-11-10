@@ -1,0 +1,78 @@
+[(#SET{plugins,#ARRAY})]
+[(#ENV{phrase}|ou{#ENV{depot}}|ou{#ENV{categorie}}|ou{#ENV{etat}}|ou{#ENV{exclusion}}|ou{#ENV{doublon}}|oui)
+	[(#SET{plugins,[(#ENV{phrase}|construire_recherche_plugins{#ENV{categorie}, #ENV{etat}, #ENV{depot}, #ENV{exclusion}, #ENV{doublon}})]})]
+	[(#SET{nb,[(#GET{plugins}|count)]})]
+	[(#SET{tri,[(#GET{phrase}|?{score,nom})]})]
+	[(#GET{nb}|oui)<p class="explication"><:svp:message_ok_plugins_trouves{nb_plugins=#GET{nb},tri=#GET{tri}}:></p>]
+	[(#GET{nb}|non)<p class="explication"><:svp:message_ok_aucun_plugin_trouve:></p>]
+]
+
+<B_plugins_trouves>
+<div class="liste plugins distants">
+	<ul class="liste-items">
+<BOUCLE_plugins_trouves(DATA) {source table, #GET{plugins}}>
+		<li class="item[(#VALEUR{installe}|oui) installe]"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
+		[(#REM) <!-- Checkbox action multiple -->]
+		[(#VALEUR{installe}|non|et{#VAL|test_plugins_auto})
+			<div class="check">
+				<input type="checkbox" class="checkbox" name="ids_paquet\[\]" value="#ID_PAQUET"
+					[(#ID_PAQUET|in_any{#ENV{ids_paquet}}) checked="checked"] />
+			</div>
+		]
+			[(#REM) <!-- Resume du plugin -->]
+			<div class="resume">
+				<h3 class="nom"><a href="#" rel="info">[(#VALEUR{nom}|extraire_multi)]</a></h3>
+				<span class="version">[(#VALEUR{version}|denormaliser_version)]</span>
+				<span class="etat">[ - (#VALEUR{etat})]</span>
+				[<span class="information"> - (#VALEUR{installe}|oui)<:svp:info_plugin_installe:></span>]
+				<div class="short">[(#VALEUR{slogan}|extraire_multi)]</div>
+				<div class="icon">[(#VALEUR{logo}|image_reduire{32})]</div>
+			</div>
+
+			[(#REM) <!-- Details du plugin -->]
+			<div class="details none-js">
+				<dl>
+					<dd class="desc">
+						[(#VALEUR{description}|extraire_multi|propre)]
+						[<em class="site">
+							<a href="(#LIEN_DOC)" class="spip_out" title="<:svp:bulle_aller_documentation:>"><:en_savoir_plus:></a>
+						</em>]
+					</dd>
+					[<dt class="auteurs"><:public:par_auteur:></dt>
+					<dd class="auteurs">(#AUTEUR*|svp_afficher_credits)</dd>]
+					[<dt class="licence"><:intitule_licence:></dt>
+					<dd class="licence">(#LICENCE|svp_afficher_credits{','})</dd>]
+				</dl>
+			</div>
+		</li>
+</BOUCLE_plugins_trouves>
+	</ul>
+</div>
+</B_plugins_trouves>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(function(){
+		jQuery('.plugins li.item a[rel=info]').click(function(){
+			var li = jQuery(this).parents('li').eq(0);
+			if (jQuery('div.details',li).toggle().is(':visible'))
+				li.addClass('on');
+			else
+				li.removeClass('on');
+			return false;
+		});
+		[(#REM) Déplier le bouton 'installer' et mettre le submit en premier dans le form
+			pour que l'appuie de la touche entree valide.
+			Le supprimer si l'on change un critere de recherche. ]
+		jQuery('.plugins li.item input.checkbox').change(function(){
+			$form = jQuery(this).parents('form').eq(0);
+			if (!$form.find('> input.submit').length) {
+				$form.find('.boutons.actions').slideDown().find('input.submit').clone().addClass('invisible').prependTo($form);
+				$form.find('.liste-recherche').change(function(){
+					jQuery(this).parents('form').eq(0).find('> input.submit').remove();
+				});
+			}
+		}); 
+	});
+//]]>
+</script>

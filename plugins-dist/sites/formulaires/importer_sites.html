@@ -1,0 +1,55 @@
+<div class="formulaire_spip formulaire_importer formulaire_#FORM">
+	<h3 class="titrem"><:sites:titre_importer_bookmarks:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<p class="explication"><:sites:texte_expliquer_import_bookmarks:></p>
+	<form method='post' action='#ENV{action}' enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			#SET{fl,sites}
+			#SET{name,fichier_import}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="file" class="text file" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</li>
+			[<li class="editer editer_parent obligatoire[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+			 <label for="titreparent"><:titre_cadre_interieur_rubrique:>[
+			 <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
+			 ]
+			 </label>(#VAL|chercher_rubrique{0,#ENV{id_parent},'site',#ENV{id_secteur},'',0,form_simple})
+			</li>]
+			#SET{name,importer_statut_publie}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</li>
+			[(#REM)
+			#SET{name,importer_les_tags}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</li>
+			]
+	  </ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:sites:bouton_importer:>' /></p>
+	</div></form>
+	]
+</div>

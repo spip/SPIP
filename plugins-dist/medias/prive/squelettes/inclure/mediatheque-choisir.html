@@ -1,0 +1,82 @@
+#SET{editable,#ENV{editable,' '}|oui}
+<div class="galerie[ media-(#ENV{media,''})]">
+	<B_galerie>
+	
+	<h3>[(#GRAND_TOTAL|singulier_ou_pluriel{#VAL{medias:un_}|concat{#ENV{media,document}},#VAL{medias:des_}|concat{#ENV{media,document},s}})]</h3>
+	<div class='pagination tri'>
+		[(#TRI{'>',#CHEMIN_IMAGE{tri-asc-16.png}|balise_img{<:par_tri_croissant:>}}) |]
+		[(#TRI{'<',#CHEMIN_IMAGE{tri-desc-16.png}|balise_img{<:par_tri_decroissant:>}}) |]
+		[(#TRI{id_document,<:medias:par_id:>}) |]
+		[(#TRI{date,<:medias:par_date:>}) |]
+		[(#TRI{taille,<:medias:par_taille:>}) |]
+		[(#TRI{largeur,<:medias:par_largeur:>}) |]
+		[(#TRI{hauteur,<:medias:par_hauteur:>}) |]
+		[(#TRI{titre,<:medias:par_titre:>}) |]
+	</div>
+	[<div class="pagination">(#PAGINATION{prive})</div>]
+	<table>
+	<thead>
+		<th></th>
+		<th class="id"><:medias:id:></th>
+		<th></th>
+		<th><:medias:logo:></th>
+		<th><:medias:infos:></th>
+		<th><:medias:descriptif:></th>
+		<th></th>
+	</thead>
+	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {tri id_document,inverse}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{orphelins?}{titre==(#ENV{sanstitre}|?{'^$','.*'})}{pagination 10}>
+	<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]" id="#ENV{iddoc,media}#ID_DOCUMENT">
+		<td class='infos'>
+		[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]
+		[(#ENV{media}|non|et{#MEDIA|!={file}})[(#CHEMIN_IMAGE{media-#MEDIA|concat{-32.png}}|balise_img|inserer_attribut{alt,#VAL{medias:media_#MEDIA}|_T}|inserer_attribut{title,#VAL{medias:media_#MEDIA}|_T})]]
+		[(#GET{missing}|oui)<img src='#CHEMIN_IMAGE{document-manquant-24.png}' width='24' height='24' alt='<:medias:fichier_manquant:>' />]
+		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN_IMAGE{document-distant-24.png}' width='24' height='24' alt='<:medias:fichier_distant:>' />]
+		</td>
+		<td class="id">
+			<strong>#ID_DOCUMENT</strong>
+		</td>
+		<td class='statut'>
+		[(#ID_DOCUMENT|medias_puce_statut_document{#STATUT})]
+		</td>
+		<td class="logo">
+		#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
+		[(#MEDIA|=={image}|oui)[
+			(#LOGO_DOCUMENT{apercu,200,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})
+		]]
+		[(#MEDIA|=={image}|non)[<div class="#EDIT{vignette} resize-250">
+			(#LOGO_DOCUMENT{auto,200,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})
+		</div>]]
+		<div class="fichier">#GET{fichier}</div>
+		</td>
+		<td class="exif">
+			[<strong class="extension">(#EXTENSION)</strong>]
+			[<div class="dimensions">(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''})</div>]
+			[<div class="taille">(#TAILLE|taille_en_octets)</div>]
+			[<div class="date">(#DATE|affdate{d/m/Y})</div>]
+			<B_liens>
+			[(#TOTAL_BOUCLE|>{1}|oui)
+			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:une_utilisation,medias:des_utilisations})]</a><div style='display: none;'>
+			]
+			<BOUCLE_liens(documents_liens){id_document}{'<br />'}>
+			[(#ID_OBJET|lien_objet{#OBJET}|inserer_attribut{target,_blank})]
+			</BOUCLE_liens>
+			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
+			</B_liens>
+		</td>
+		<td class="descriptif">
+			[<strong class="titre #EDIT{titre}">(#TITRE|sinon{#VAL{<i>}|concat{<:info_sans_titre:>,'</i>'}})</strong>]
+			[<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF)</div>]
+			[<p class="credits #EDIT{credits}">(#CREDITS)</p>]
+		</td>
+		<td>
+		[(#REM) Utilisation de la galerie en mode selecteur, avec un bouton choix qui appelle une fonction js passee en argument]
+		[<span class="choisir"><input type="submit" onclick="(#ENV{selectfunc,''})([(#ID_DOCUMENT)]);return false;" value="<:bouton_choisir|attribut_html:>" /></span>]
+		</td>
+	</tr>
+	</BOUCLE_galerie>
+	</table>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
+	</B_galerie>
+	<h3>[(#VAL{medias:aucun_}|concat{#ENV{media,document}}|_T)]</h3>
+	<//B_galerie>
+</div><!--#galerie-->

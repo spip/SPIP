@@ -31,15 +31,15 @@ function action_iconifier_dist()
 		action_spip_image_ajouter_dist($r[2], _request('sousaction2'), _request('source'));
 	else	action_spip_image_effacer_dist($r[2]);
 	
-	if(_request("iframe") == 'iframe') {
-		$redirect = urldecode($iframe_redirect)."&iframe=iframe";
+	if (_request("iframe") == 'iframe') {
+		$redirect = urldecode($iframe_redirect).'&iframe=iframe';
 		redirige_par_entete(urldecode($redirect));
 	}
 }
 
 // http://doc.spip.org/@action_spip_image_effacer_dist
-function action_spip_image_effacer_dist($arg) {
-
+function action_spip_image_effacer_dist($arg)
+{
 	if (!strstr($arg, ".."))
 		spip_unlink(_DIR_LOGOS . $arg);
 }
@@ -51,13 +51,14 @@ function action_spip_image_effacer_dist($arg) {
 // $source = $_FILES[0]
 // $dest = arton12.xxx
 // http://doc.spip.org/@action_spip_image_ajouter_dist
-function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
+function action_spip_image_ajouter_dist($arg, $sousaction2, $source)
+{
 	global $formats_logos;
 
 	include_spip('inc/documents');
 	if (!$sousaction2) {
 		if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
-		$source = (is_array($_FILES) ? array_pop($_FILES) : "");
+		$source = (is_array($_FILES) ? array_pop($_FILES) : '');
 	}
 	if (!$source)
 		spip_log("spip_image_ajouter : source inconnue");
@@ -87,7 +88,8 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 			$poids = filesize($f);
 
 			if (_LOGO_MAX_SIZE > 0
-			AND $poids > _LOGO_MAX_SIZE*1024) {
+			AND $poids > _LOGO_MAX_SIZE*1024)
+			{
 				spip_unlink ($f);
 				check_upload_error(6,
 				_T('info_logo_max_poids',
@@ -96,8 +98,8 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 			}
 
 			if (_LOGO_MAX_WIDTH * _LOGO_MAX_HEIGHT
-			AND ($size[0] > _LOGO_MAX_WIDTH
-			OR $size[1] > _LOGO_MAX_HEIGHT)) {
+			AND ($size[0] > _LOGO_MAX_WIDTH OR $size[1] > _LOGO_MAX_HEIGHT))
+			{
 				spip_unlink ($f);
 				check_upload_error(6, 
 				_T('info_logo_max_poids',

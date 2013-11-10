@@ -1,0 +1,22 @@
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','document','id',#ENV{id_document}}}}
+#BOITE_FERMER
+<div class='document_utilisations'>
+<B_liens>
+		<h3>[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:une_utilisation,medias:des_utilisations})]</h3>
+		<ul class='liste_items'>
+			<BOUCLE_liens(documents_liens){id_document}>
+			<li class='item #OBJET'>[(#CHEMIN_IMAGE{#OBJET|objet_info{icone_objet}|concat{-16.png}}|balise_img) ][(#ID_OBJET|lien_objet{#OBJET})]
+			[(#VU|=={oui}|oui)
+			[<span class='vu'>(#CHEMIN_IMAGE{document-vu-24.png}|balise_img|inserer_attribut{title,<:medias:document_vu:>}|inserer_attribut{alt,<:medias:document_vu:>})</span>]
+			]
+			[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|oui)
+				[(#BOUTON_ACTION{<:medias:bouton_enlever_document:>,[(#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-#ID_DOCUMENT--safe,#SELF})],ajax,'',''})]
+			]
+			</li>
+			</BOUCLE_liens>
+		</ul>
+</B_liens>
+<h3><:medias:aucune_utilisation:></h3>
+<//B_liens>
+</div>

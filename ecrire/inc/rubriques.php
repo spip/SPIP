@@ -98,8 +98,8 @@ function publier_branche_rubrique($id_rubrique)
 {
 	$id_pred = $id_rubrique;
 	while (true) {
-		sql_updateq('spip_rubriques', array('statut'=>'publie', 'date'=>date('Y-m-d H:i:s')), "id_rubrique=$id_rubrique");
-		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques AS R', "R.id_rubrique=$id_rubrique");
+		Sql::updateq('spip_rubriques', array('statut'=>'publie', 'date'=>date('Y-m-d H:i:s')), "id_rubrique=$id_rubrique");
+		$id_parent = Sql::getfetsel('id_parent', 'spip_rubriques AS R', "R.id_rubrique=$id_rubrique");
 		if (!$id_parent) break;
 		$id_rubrique = $id_parent;
 	} 
@@ -131,7 +131,7 @@ function depublier_branche_rubrique_if($id_rubrique){
 		if (!depublier_rubrique_if($id_pred,$date))
 			return $id_pred != $id_rubrique;
 		// passer au parent si on a depublie
-		$r = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=$id_pred");
+		$r = Sql::fetsel("id_parent", "spip_rubriques", "id_rubrique=$id_pred");
 		$id_pred = $r['id_parent'];
 	}
 
@@ -154,22 +154,22 @@ function depublier_rubrique_if($id_rubrique,$date=null){
 		$date = date('Y-m-d H:i:s');
 	}
 	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
-		" AND date <= ".sql_quote($date) : '';
+		" AND date <= ".Sql::quote($date) : '';
 
 	if (!$id_rubrique=intval($id_rubrique))
 		return false;
 
 	// verifier qu'elle existe et est bien publiee
-	$r = sql_fetsel('id_rubrique,statut','spip_rubriques',"id_rubrique=$id_rubrique");
+	$r = Sql::fetsel('id_rubrique,statut','spip_rubriques',"id_rubrique=$id_rubrique");
 	if (!$r OR $r['statut']!=='publie')
 		return false;
 
 	// On met le nombre de chaque type d'enfants dans un tableau
 	// Le type de l'objet est au pluriel
 	$compte = array(
-		'articles' => sql_countsel("spip_articles",  "id_rubrique=$id_rubrique AND statut='publie'$postdates"),
-		'rubriques' => sql_countsel("spip_rubriques",  "id_parent=$id_rubrique AND statut='publie'"),
-		'documents' => sql_countsel("spip_documents_liens",  "id_objet=$id_rubrique AND objet='rubrique'")
+		'articles' => Sql::countsel("spip_articles",  "id_rubrique=$id_rubrique AND statut='publie'$postdates"),
+		'rubriques' => Sql::countsel("spip_rubriques",  "id_parent=$id_rubrique AND statut='publie'"),
+		'documents' => Sql::countsel("spip_documents_liens",  "id_objet=$id_rubrique AND objet='rubrique'")
 	);
 	
 	// On passe le tableau des comptes dans un pipeline pour que les plugins puissent ajouter (ou retirer) des enfants
@@ -190,7 +190,7 @@ function depublier_rubrique_if($id_rubrique,$date=null){
 		if ($n)
 			return false;
 
-	sql_updateq("spip_rubriques", array("statut" => '0'), "id_rubrique=$id_rubrique");
+	Sql::updateq("spip_rubriques", array("statut" => '0'), "id_rubrique=$id_rubrique");
 #		spip_log("depublier_rubrique $id_pred");
 	return true;
 }
@@ -239,7 +239,7 @@ function calculer_rubriques() {
 function calculer_rubriques_publiees() {
 
 	// Mettre les compteurs a zero
-	sql_updateq('spip_rubriques', array('date_tmp' => '0000-00-00 00:00:00', 'statut_tmp' => 'prive'));
+	Sql::updateq('spip_rubriques', array('date_tmp' => '0000-00-00 00:00:00', 'statut_tmp' => 'prive'));
 
 	//
 	// Publier et dater les rubriques qui ont un article publie
@@ -247,11 +247,11 @@ function calculer_rubriques_publiees() {
 
 	// Afficher les articles post-dates ?
 	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
-		"AND A.date <= ".sql_quote(date('Y-m-d H:i:s')) : '';
+		"AND A.date <= ".Sql::quote(date('Y-m-d H:i:s')) : '';
 
-	$r = sql_select("R.id_rubrique AS id, max(A.date) AS date_h", "spip_rubriques AS R, spip_articles AS A", "R.id_rubrique = A.id_rubrique AND A.statut='publie' $postdates ", "R.id_rubrique");
-	while ($row = sql_fetch($r))
-		sql_updateq("spip_rubriques", array("statut_tmp" => 'publie', "date_tmp" => $row['date_h']), "id_rubrique=".$row['id']);
+	$r = Sql::select("R.id_rubrique AS id, max(A.date) AS date_h", "spip_rubriques AS R, spip_articles AS A", "R.id_rubrique = A.id_rubrique AND A.statut='publie' $postdates ", "R.id_rubrique");
+	while ($row = Sql::fetch($r))
+		Sql::updateq("spip_rubriques", array("statut_tmp" => 'publie', "date_tmp" => $row['date_h']), "id_rubrique=".$row['id']);
 
 	// point d'entree pour permettre a des plugins de gerer le statut
 	// autrement (par ex: toute rubrique est publiee des sa creation)
@@ -265,15 +265,15 @@ function calculer_rubriques_publiees() {
 	// on tourne tant que les donnees remontent vers la racine.
 	do {
 		$continuer = false;
-		$r = sql_select("R.id_rubrique AS id, max(A.date_tmp) AS date_h", "spip_rubriques AS R, spip_rubriques AS A", "R.id_rubrique = A.id_parent AND (R.date_tmp < A.date_tmp OR R.statut_tmp<>'publie') AND A.statut_tmp='publie' ", "R.id_rubrique");
-		while ($row = sql_fetch($r)) {
-		  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']),"id_rubrique=".$row['id']);
+		$r = Sql::select("R.id_rubrique AS id, max(A.date_tmp) AS date_h", "spip_rubriques AS R, spip_rubriques AS A", "R.id_rubrique = A.id_parent AND (R.date_tmp < A.date_tmp OR R.statut_tmp<>'publie') AND A.statut_tmp='publie' ", "R.id_rubrique");
+		while ($row = Sql::fetch($r)) {
+		  Sql::updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']),"id_rubrique=".$row['id']);
 			$continuer = true;
 		}
 	} while ($continuer);
 
 	// Enregistrement des modifs
-	sql_update('spip_rubriques', array('date'=>'date_tmp', 'statut'=>'statut_tmp'));
+	Sql::update('spip_rubriques', array('date'=>'date_tmp', 'statut'=>'statut_tmp'));
 }
 
 /**
@@ -290,12 +290,12 @@ function propager_les_secteurs()
 	// Profondeur 0
 	// Toutes les rubriques racines sont de profondeur 0
 	// et fixer les id_secteur des rubriques racines
-	sql_update('spip_rubriques', array('id_secteur'=>'id_rubrique','profondeur'=>0), "id_parent=0");
+	Sql::update('spip_rubriques', array('id_secteur'=>'id_rubrique','profondeur'=>0), "id_parent=0");
 	// Toute rubrique non racine est de profondeur >0
-	sql_updateq('spip_rubriques', array('profondeur'=>1), "id_parent<>0 AND profondeur=0");
+	Sql::updateq('spip_rubriques', array('profondeur'=>1), "id_parent<>0 AND profondeur=0");
 
 	// securite : pas plus d'iteration que de rubriques dans la base
-	$maxiter = sql_countsel("spip_rubriques");
+	$maxiter = Sql::countsel("spip_rubriques");
 
 	// reparer les rubriques qui n'ont pas l'id_secteur de leur parent
 	// on fait profondeur par profondeur
@@ -314,7 +314,7 @@ function propager_les_secteurs()
 		// - cela nous protege de la boucle infinie en cas de reference circulaire dans les rubriques
 		$maxiter2 = $maxiter;
 		while ($maxiter2--
-			AND $rows = sql_allfetsel(
+			AND $rows = Sql::allfetsel(
 			"A.id_rubrique AS id, R.id_secteur AS id_secteur, R.profondeur+1 as profondeur",
 			"spip_rubriques AS A JOIN spip_rubriques AS R ON A.id_parent = R.id_rubrique",
 			"R.profondeur=".intval($prof)." AND (A.id_secteur <> R.id_secteur OR A.profondeur > R.profondeur+1)",
@@ -325,33 +325,33 @@ function propager_les_secteurs()
 			while ($row = array_shift($rows)) {
 				if ($row['id_secteur']!==$id_secteur){
 					if (count($ids))
-						sql_updateq("spip_rubriques", array("id_secteur" => $id_secteur,'profondeur' => $prof+1), sql_in('id_rubrique',$ids));
+						Sql::updateq("spip_rubriques", array("id_secteur" => $id_secteur,'profondeur' => $prof+1), Sql::in('id_rubrique',$ids));
 					$id_secteur = $row['id_secteur'];
 					$ids = array();
 				}
 				$ids[] = $row['id'];
 			}
 			if (count($ids))
-				sql_updateq("spip_rubriques", array("id_secteur" => $id_secteur,'profondeur' => $prof+1), sql_in('id_rubrique',$ids));
+				Sql::updateq("spip_rubriques", array("id_secteur" => $id_secteur,'profondeur' => $prof+1), Sql::in('id_rubrique',$ids));
 		}
 
 
 		// Toutes les rubriques de profondeur $prof+1 qui n'ont pas un parent de profondeur $prof sont decalees
 		$maxiter2 = $maxiter;
 		while ($maxiter2--
-			AND $rows = sql_allfetsel(
+			AND $rows = Sql::allfetsel(
 			"id_rubrique as id",
 			"spip_rubriques",
-			"profondeur=".intval($prof+1)." AND id_parent NOT IN (".sql_get_select("zzz.id_rubrique","spip_rubriques AS zzz","zzz.profondeur=".intval($prof)).")",'','','0,100')){
+			"profondeur=".intval($prof+1)." AND id_parent NOT IN (".Sql::get_select("zzz.id_rubrique","spip_rubriques AS zzz","zzz.profondeur=".intval($prof)).")",'','','0,100')){
 			$rows = array_map('reset',$rows);
-			sql_updateq("spip_rubriques", array('profondeur' => $prof+2), sql_in("id_rubrique",$rows));
+			Sql::updateq("spip_rubriques", array('profondeur' => $prof+2), Sql::in("id_rubrique",$rows));
 		}
 
 		// ici on a fini de valider $prof+1, toutes les rubriques de prondeur 0 a $prof+1 sont OK
 		// si pas de rubrique a profondeur $prof+1 pas la peine de continuer
 		// si il reste des rubriques non vues, c'est une branche morte ou reference circulaire (base foireuse)
 		// on arrete les frais
-		if (sql_countsel("spip_rubriques","profondeur=".intval($prof+1))){
+		if (Sql::countsel("spip_rubriques","profondeur=".intval($prof+1))){
 			$prof++;
 			$continuer = true;
 		}
@@ -360,16 +360,16 @@ function propager_les_secteurs()
 
 	// loger si la table des rubriques semble foireuse
 	// et mettre un id_secteur=0 sur ces rubriques pour eviter toute selection par les boucles
-	if (sql_countsel("spip_rubriques","profondeur>".intval($prof+1))){
+	if (Sql::countsel("spip_rubriques","profondeur>".intval($prof+1))){
 		spip_log("Les rubriques de profondeur>".($prof+1)." semblent suspectes (branches morte ou reference circulaire dans les parents)",_LOG_CRITIQUE);
-		sql_update("spip_rubriques",array('id_secteur'=>0),"profondeur>".intval($prof+1));
+		Sql::update("spip_rubriques",array('id_secteur'=>0),"profondeur>".intval($prof+1));
 	}
 
 	// reparer les articles
-	$r = sql_select("A.id_article AS id, R.id_secteur AS secteur", "spip_articles AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
+	$r = Sql::select("A.id_article AS id, R.id_secteur AS secteur", "spip_articles AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
 
-	while ($row = sql_fetch($r)) {
-		sql_update("spip_articles", array("id_secteur" => $row['secteur']), "id_article=".$row['id']);
+	while ($row = Sql::fetch($r)) {
+		Sql::update("spip_articles", array("id_secteur" => $row['secteur']), "id_article=".$row['id']);
 	}
 
 	// avertir les plugins qui peuvent faire leur mises a jour egalement
@@ -388,12 +388,12 @@ function propager_les_secteurs()
  *     true si un changement a eu lieu
 **/
 function calculer_langues_rubriques_etape() {
-	$s = sql_select("A.id_rubrique AS id_rubrique, R.lang AS lang", "spip_rubriques AS A, spip_rubriques AS R", "A.id_parent = R.id_rubrique AND A.langue_choisie != 'oui' AND R.lang<>'' AND R.lang<>A.lang");
+	$s = Sql::select("A.id_rubrique AS id_rubrique, R.lang AS lang", "spip_rubriques AS A, spip_rubriques AS R", "A.id_parent = R.id_rubrique AND A.langue_choisie != 'oui' AND R.lang<>'' AND R.lang<>A.lang");
 
 	$t = false;
-	while ($row = sql_fetch($s)) {
+	while ($row = Sql::fetch($s)) {
 		$id_rubrique = $row['id_rubrique'];
-		$t = sql_updateq('spip_rubriques', array('lang' => $row['lang'], 'langue_choisie'=>'non'), "id_rubrique=$id_rubrique");
+		$t = Sql::updateq('spip_rubriques', array('lang' => $row['lang'], 'langue_choisie'=>'non'), "id_rubrique=$id_rubrique");
 	}
 
 	return $t;
@@ -414,14 +414,14 @@ function calculer_langues_rubriques_etape() {
 function calculer_langues_rubriques() {
 
 	// rubriques (recursivite)
-	sql_updateq("spip_rubriques", array("lang" => $GLOBALS['meta']['langue_site'], "langue_choisie" => 'non'), "id_parent=0 AND langue_choisie != 'oui'");
+	Sql::updateq("spip_rubriques", array("lang" => $GLOBALS['meta']['langue_site'], "langue_choisie" => 'non'), "id_parent=0 AND langue_choisie != 'oui'");
 	while (calculer_langues_rubriques_etape());
 
 	// articles
-	$s = sql_select("A.id_article AS id_article, R.lang AS lang", "spip_articles AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.langue_choisie != 'oui' AND (length(A.lang)=0 OR length(R.lang)>0) AND R.lang<>A.lang");
-	while ($row = sql_fetch($s)) {
+	$s = Sql::select("A.id_article AS id_article, R.lang AS lang", "spip_articles AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.langue_choisie != 'oui' AND (length(A.lang)=0 OR length(R.lang)>0) AND R.lang<>A.lang");
+	while ($row = Sql::fetch($s)) {
 		$id_article = $row['id_article'];
-		sql_updateq('spip_articles', array("lang"=> $row['lang'], 'langue_choisie'=>'non'), "id_article=$id_article");
+		Sql::updateq('spip_articles', array("lang"=> $row['lang'], 'langue_choisie'=>'non'), "id_article=$id_article");
 	}
 
 	if ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
@@ -482,8 +482,8 @@ function calculer_langues_utilisees ($serveur='') {
 				$res = calculer_select($boucle->select,$boucle->from,$boucle->from_type,$boucle->where,$boucle->join,$boucle->group,$boucle->order,$boucle->limit,$boucle->having,$desc['table_objet'],$desc['table_objet'],$serveur);
 			}
 			else
-				$res = sql_select(implode(',',$boucle->select),$boucle->from);
-			while ($row = sql_fetch($res)) {
+				$res = Sql::select(implode(',',$boucle->select),$boucle->from);
+			while ($row = Sql::fetch($res)) {
 				$langues[$row['lang']] = 1;
 			}
 		}
@@ -576,10 +576,10 @@ function inc_calcul_branche_in_dist($id) {
 	// On ajoute une generation (les filles de la generation precedente)
 	// jusqu'a epuisement, en se protegeant des references circulaires
 	$maxiter = 10000;
-	while ($maxiter-- AND $filles = sql_allfetsel(
+	while ($maxiter-- AND $filles = Sql::allfetsel(
 					'id_rubrique',
 					'spip_rubriques',
-					sql_in('id_parent', $r) ." AND ". sql_in('id_rubrique', $r, 'NOT')
+					Sql::in('id_parent', $r) ." AND ". Sql::in('id_rubrique', $r, 'NOT')
 					)) {
 		$r = join(',', array_map('reset', $filles));
 		$branche .= ',' . $r;
@@ -622,10 +622,10 @@ function inc_calcul_hierarchie_in_dist($id, $tout=true) {
 	// On ajoute une generation (les filles de la generation precedente)
 	// jusqu'a epuisement, en se protegeant des references circulaires
 	$maxiter = 10000;
-	while ($maxiter-- AND $parents = sql_allfetsel(
+	while ($maxiter-- AND $parents = Sql::allfetsel(
 			'id_parent',
 			'spip_rubriques',
-			sql_in('id_rubrique', $id) ." AND ". sql_in('id_parent',$hier,'NOT')
+			Sql::in('id_rubrique', $id) ." AND ". Sql::in('id_parent',$hier,'NOT')
 		  )) {
 		$id = join(',', array_map('reset', $parents));
 		$hier = $id.(strlen($hier)?','.$hier:'');
@@ -649,21 +649,23 @@ function inc_calcul_hierarchie_in_dist($id, $tout=true) {
  *     true pour affecter le statut des rubriques concernées.
  * @return void
 **/
-function calculer_prochain_postdate($check= false) {
-	include_spip('base/abstract_sql');
+function calculer_prochain_postdate($check= false)
+{
 	if ($check) {
-		$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
-			"AND A.date <= ".sql_quote(date('Y-m-d H:i:s')) : '';
+		$postdates = ($GLOBALS['meta']["post_dates"] == "non")
+			? 'AND A.date <= '.Sql::quote(date('Y-m-d H:i:s'))
+			: '';
 
-		$r = sql_select("DISTINCT A.id_rubrique AS id",
-			"spip_articles AS A LEFT JOIN spip_rubriques AS R ON A.id_rubrique=R.id_rubrique", "R.statut != 'publie' AND A.statut='publie'$postdates");
-		while ($row = sql_fetch($r))
+		$r = Sql::select("DISTINCT A.id_rubrique AS id",
+			"spip_articles AS A LEFT JOIN spip_rubriques AS R ON A.id_rubrique=R.id_rubrique",
+			"R.statut != 'publie' AND A.statut='publie'$postdates");
+		while ($row = Sql::fetch($r))
 			publier_branche_rubrique($row['id']);
 
 		pipeline('trig_calculer_prochain_postdate','');
 	}
 
-	$t = sql_fetsel("date", "spip_articles", "statut='publie' AND date > ".sql_quote(date('Y-m-d H:i:s')), "", "date", "1");
+	$t = Sql::fetsel("date", "spip_articles", "statut='publie' AND date > ".Sql::quote(date('Y-m-d H:i:s')), "", "date", "1");
 	
 	if ($t) {
 		$t =  $t['date'];
@@ -694,29 +696,29 @@ function calculer_prochain_postdate($check= false) {
  * @return int
  *     Identifiant de la rubrique la plus profonde.
  */
-function creer_rubrique_nommee($titre, $id_parent=0, $serveur='') {
-
+function creer_rubrique_nommee($titre, $id_parent=0, $serveur='')
+{
 	// eclater l'arborescence demandee
 	// echapper les </multi> et autres balises fermantes html
 	$titre = preg_replace(",</([a-z][^>]*)>,ims","<@\\1>",$titre);
 	$arbo = explode('/', preg_replace(',^/,', '', $titre));
-	include_spip('base/abstract_sql');
+
 	foreach ($arbo as $titre) {
 		// retablir les </multi> et autres balises fermantes html
 		$titre = preg_replace(",<@([a-z][^>]*)>,ims","</\\1>",$titre);
-		$r = sql_getfetsel("id_rubrique", "spip_rubriques", "titre = ".sql_quote($titre)." AND id_parent=".intval($id_parent),
+		$r = Sql::getfetsel('id_rubrique', 'spip_rubriques', 'titre = '.Sql::quote($titre).' AND id_parent='.intval($id_parent),
 		$groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur);
 		if ($r !== NULL) {
 			$id_parent = $r;
 		} else {
-			$id_rubrique = sql_insertq('spip_rubriques', array(
+			$id_rubrique = Sql::insertq('spip_rubriques', array(
 				'titre' => $titre,
 				'id_parent' => $id_parent,
 				'statut' => 'prive')
 				,$desc=array(), $serveur);
 			if ($id_parent > 0) {
-				$data = sql_fetsel("id_secteur,lang", "spip_rubriques", "id_rubrique=$id_parent",
-				$groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur);
+				$data = Sql::fetsel("id_secteur,lang", "spip_rubriques", "id_rubrique=$id_parent",
+					$groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur);
 				$id_secteur = $data['id_secteur'];
 				$lang = $data['lang'];
 			} else {
@@ -724,7 +726,7 @@ function creer_rubrique_nommee($titre, $id_parent=0, $serveur='') {
 				$lang = $GLOBALS['meta']['langue_site'];
 			}
 
-			sql_updateq('spip_rubriques', array('id_secteur'=>$id_secteur, "lang"=>$lang), "id_rubrique=$id_rubrique", $desc='', $serveur);
+			Sql::updateq('spip_rubriques', array('id_secteur'=>$id_secteur, "lang"=>$lang), "id_rubrique=$id_rubrique", $desc='', $serveur);
 
 			// pour la recursion
 			$id_parent = $id_rubrique;

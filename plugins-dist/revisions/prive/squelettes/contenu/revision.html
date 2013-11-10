@@ -1,0 +1,52 @@
+[(#AUTORISER{voirrevisions,#OBJET,#ID_OBJET}|sinon_interdire_acces)]
+<BOUCLE_lastv(VERSIONS){id_objet}{objet}{!par id_version}{0,1}>#SET{lastversion,#ID_VERSION}</BOUCLE_lastv>
+#SET{id_version,#ENV{id_version,#GET{lastversion}}}
+#SET{id_diff,#ENV{id_diff,#GET{lastversion}}|min{#GET{id_version}|moins{1}}}
+#SET{textes,#ID_OBJET|revision_comparee{#OBJET,#GET{id_version},complet,#GET{id_diff}}}
+
+[(#BOITE_OUVRIR{[
+
+	[(#ID_OBJET|oui)
+		[(#ID_OBJET|generer_url_entite{#OBJET}
+			|icone_verticale{[(#OBJET|objet_info{texte_retour}|_T)],#OBJET|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	
+	[(#AUTORISER{modifier,#OBJET,#ID_OBJET})
+		[(#GET{id_version}|=={#GET{lastversion}}|oui)
+			[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}|icone_verticale{[(#OBJET|objet_info{texte_modifier}|_T)],#OBJET|objet_info{icone_objet},edit,right})]
+		]
+		[(#GET{id_version}|=={#GET{lastversion}}|non)
+			[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}
+				|parametre_url{id_version,#GET{id_version}}
+				|icone_verticale{[(#VAL{revisions:icone_restaurer_version}|_T{#ARRAY{version,#GET{id_version}}})],revision-24.png,'edit',right})]
+		]
+	]
+	
+	<h1>[(#CHEMIN_IMAGE{diff-24.png}|balise_img{'',cadre-icone})]<:revisions:info_historique:> &laquo;&nbsp;<a
+					href="[(#ID_OBJET|generer_url_entite{#OBJET})]"
+					title="[(#OBJET|objet_info{texte_objet}|_T) ]#ID_OBJET"
+					>(#INFO_TITRE{#OBJET,#ID_OBJET})</a>&nbsp;&raquo;</h1>
+	<h2><:revisions:differences_versions{id_version=#GET{id_version},id_diff=#GET{id_diff}}:></h2>
+],simple fiche_objet_diff})]
+
+
+
+
+	[(#AUTORISER{modifier,#OBJET,#ID_OBJET})
+		[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|oui)
+			[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}
+				|parametre_url{id_version,#GET{id_diff}}
+				|icone_verticale{[(#VAL{revisions:icone_restaurer_version}|_T{#ARRAY{version,#GET{id_diff}}})],revision-24.png,'edit',right})]
+		]
+	]
+	[<div class='id_rubrique'>(#GET{textes}|table_valeur{id_rubrique})</div>]
+	[<h4 class='surtitre'>(#GET{textes}|table_valeur{surtitre})</h4>]
+	<h1>[(#INFO_STATUT{#OBJET,#ID_OBJET}|puce_statut{#OBJET}) ][(#GET{textes}|table_valeur{titre}|sinon{<:info_sans_titre:>})]</h1>
+	[<h2 class='soustitre'>(#GET{textes}|table_valeur{soustitre})</h2>]
+
+	<div class="nettoyeur"></div>
+	<div id="wysiwyg" class="revision">
+		<INCLURE{fond=prive/objets/contenu/revision,textes=#GET*{textes},env} />
+	</div>
+
+#BOITE_FERMER

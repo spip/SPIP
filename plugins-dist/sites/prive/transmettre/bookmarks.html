@@ -1,0 +1,33 @@
+#HTTP_HEADER{Content-type : text/html}
+<!DOCTYPE NETSCAPE-Bookmark-file-1>
+<!-- This is an automatically generated file.
+     It will be read and overwritten.
+     DO NOT EDIT! -->
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<TITLE>Bookmarks</TITLE>
+<H1>Bookmarks</H1>
+<B_rub>
+<DL><p>
+<BOUCLE_rub(RUBRIQUES){id_parent}>
+    <DT><H3 ADD_DATE="0" PERSONAL_TOOLBAR_FOLDER="true">[(#TITRE|texte_backend)]</H3>
+		<B_sites>
+    <DL><p>
+				<BOUCLE_sites(SITES){id_rubrique}{statut IN #ENV{statut}}><DT><A HREF="#URL_SITE" ADD_DATE="[(#DATE|strtotime)]" TAGS="<BOUCLE_tags(MOTS){id_syndic}{si #ENV{tags}}{','}>[(#TITRE|html2unicode|unicode2charset|replace{'&nbsp;',' '}|textebrut|attribut_html)]</BOUCLE_tags>">[(#NOM_SITE|html2unicode|unicode2charset|replace{'&nbsp;',' '}|textebrut)]</A>
+				[<DD>(#DESCRIPTIF|PtoBR|textebrut)
+				]</BOUCLE_sites>
+		</DL><p>
+		</B_sites>
+		<BOUCLE_ssrub(RUBRIQUES){id_parent}>
+				<DT><H3 ADD_DATE="0" PERSONAL_TOOLBAR_FOLDER="true">[(#TITRE|texte_backend)]</H3>
+				<B_sites2>
+				<DL><p>
+						<BOUCLE_sites2(SITES){id_rubrique}{statut IN #ENV{statut}}><DT><A HREF="#URL_SITE" ADD_DATE="[(#DATE|strtotime)]" TAGS="<BOUCLE_tags2(MOTS){id_syndic}{si #ENV{tags}}{','}>[(#TITRE|html2unicode|unicode2charset|replace{'&nbsp;',' '}|textebrut|attribut_html)]</BOUCLE_tags2>">[(#NOM_SITE|html2unicode|unicode2charset|replace{'&nbsp;',' '}|textebrut)]</A>
+						[<DD>(#DESCRIPTIF|PtoBR|textebrut)
+						]</BOUCLE_sites2>
+				</DL><p>
+				</B_sites2>
+				<BOUCLE_sous_rubriques(BOUCLE_ssrub)></BOUCLE_sous_rubriques>
+		</BOUCLE_ssrub>
+</BOUCLE_rub>
+</DL><p>
+</B_rub>

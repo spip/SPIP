@@ -1,0 +1,13 @@
+<div class="fake-input clearfix">
+	<span class="selected">
+		[(#REM) Premier element vide et cache qui sert de modele pour le js]
+		<span class="dest" style="display: none;"><img
+					src='#CHEMIN_IMAGE{supprimer-12.png}' width="12" height="12" onclick="jQuery(this).parent().remove();" /></span>
+	<BOUCLE_d(POUR){tableau #ENV{#ENV{name}}}>
+		<span class="dest"><input type="hidden" name="#ENV{name}[]" value="#VALEUR" />
+		<BOUCLE_a(AUTEURS){id_auteur=#VALEUR}{tout}>#NOM</BOUCLE_a>#VALEUR<//B_a>&nbsp;<img
+					src='#CHEMIN_IMAGE{supprimer-12.png}' width="12" height="12" onclick="jQuery(this).parent().remove();" /></span>
+	</BOUCLE_d>
+	</span>
+	<input type="text" class="text destinataires" data-name="#ENV{name}[]" value="" id="#GET{name}" />
+</div>

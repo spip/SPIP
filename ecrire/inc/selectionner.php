@@ -114,11 +114,11 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 }
 
 // http://doc.spip.org/@mini_hier
-function mini_hier ($id_rubrique) {
-	
+function mini_hier ($id_rubrique)
+{
 	$liste = $id_rubrique;
 	$id_rubrique = intval($id_rubrique);
-	while ($id_rubrique = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique = " . $id_rubrique))
+	while ($id_rubrique = Sql::getfetsel("id_parent", "spip_rubriques", "id_rubrique = " . $id_rubrique))
 		$liste = $id_rubrique . ",$liste";
 	return explode(',',"0,$liste");
 }

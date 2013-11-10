@@ -1,0 +1,26 @@
+<h1 class="grostitre"><:mots:titre_mots_tous:></h1>
+[(#AUTORISER{creer,groupemots}|oui)
+<p><:mots:info_creation_mots_cles|typo:> #AIDER{mots}</p>
+]
+<BOUCLE_groupes(GROUPES_MOTS){par multi titre}>[(#AUTORISER{voir,groupemots,#ID_GROUPE}|oui)
+	<div class="groupe_mots" id="groupe_mots-#ID_GROUPE">
+		[(#BOITE_OUVRIR{[[(#RANG). ](#TITRE)[(#CHEMIN_IMAGE{groupe_mots-24.png}|balise_img{'',cadre-icone})]],'simple','titrem'})]
+			[(#AUTORISER{modifier,groupemots,#ID_GROUPE})
+				[(#URL_ECRIRE{groupe_mots_edit,id_groupe=#ID_GROUPE}|icone_verticale{<:mots:icone_modif_groupe_mots:>,groupe_mots-24.png,edit,right})]
+			]
+			<div id="wysiwyg">
+			<INCLURE{fond=prive/objets/contenu/groupe_mots,id=#ID_GROUPE} />
+			</div>
+			<div class="nettoyeur"></div>
+			<INCLURE{fond=prive/objets/liste/mots-admin,id_groupe,par=titre,ajax,env} />
+			[(#AUTORISER{voir,groupemots,#ID_GROUPE})
+				[(#URL_ECRIRE{groupe_mots,id_groupe=#ID_GROUPE}
+					|icone_verticale{<:mots:icone_voir_groupe_mots:>,groupe_mots-24.png,'',left})]
+			]
+			[(#AUTORISER{creer,mot,'','',#ARRAY{id_groupe,#ID_GROUPE}})
+				[(#URL_ECRIRE{mot_edit,new=oui&id_groupe=#ID_GROUPE}|parametre_url{redirect,#SELF}
+					|icone_verticale{<:mots:icone_creation_mots_cles:>,mot-24.png,new,right})]
+			]
+		#BOITE_FERMER
+	</div>
+]</BOUCLE_groupes>

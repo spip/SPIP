@@ -1,0 +1,115 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer editer_active[ (#ENV**{erreurs}|table_valeur{active}|oui)erreur]">
+			<div class="choix">
+				<input type="checkbox" name="active" class="checkbox" id="active_on" value="oui" [(#ENV{active,oui}|=={oui}|oui) checked="checked"]
+				onchange="var t=jQuery(this).parents('li').eq(0).siblings('li.fieldset');if (jQuery(this).prop('checked')) t.show('fast'); else t.hide('fast');"
+				/>
+				<label for='active_on'><strong><:mediabox:label_active:></strong></label>
+			</div>
+		</li>
+		<li class="fieldset[(#ENV{active,oui}|=={oui}|non)none]">
+			<ul>
+				<li class="editer editer_selecteur_commun[ (#ENV**{erreurs}|table_valeur{selecteur_commun}|oui)erreur]">
+					<label for="selecteur_commun"><:mediabox:label_selecteur_commun:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_commun})</span>]
+					<p class="explication"><:mediabox:explication_selecteur:></p>
+					<input type="text" name="selecteur_commun" class="text" id="selecteur_commun" size="60" value="#ENV*{selecteur_commun}" />
+				</li>
+				<li class="editer editer_selecteur_galerie[ (#ENV**{erreurs}|table_valeur{selecteur_galerie}|oui)erreur]">
+					<label for="selecteur_galerie"><:mediabox:label_selecteur_galerie:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_galerie})</span>]
+					<p class="explication"><:mediabox:explication_selecteur_galerie:></p>
+					<input type="text" name="selecteur_galerie" class="text" id="selecteur_galerie" size="60" value="#ENV*{selecteur_galerie}" />
+				</li>
+
+				<li class="editer editer_traiter_toutes_images[ (#ENV**{erreurs}|table_valeur{traiter_toutes_images}|oui)erreur]">
+					<label><:mediabox:label_traiter_toutes_images:></label>
+					<p class="explication"><:mediabox:explication_traiter_toutes_images:></p>
+					<div class="choix">
+						<input type="radio" name="traiter_toutes_images" class="radio" id="traiter_images_on" value="oui" [(#ENV{traiter_toutes_images,oui}|=={oui}|oui) checked="checked"] />
+						<label for='traiter_images_on'><:item_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="traiter_toutes_images" class="radio" id="traiter_images_off" value="non" [(#ENV{traiter_toutes_images,oui}|=={non}|oui) checked="checked"] />
+						<label for='traiter_images_off'><:item_non:></label>
+					</div>
+				</li>
+
+				<li class="fieldset"><fieldset><legend><:mediabox:label_apparence:></legend>
+				<ul>
+					[<li class="editer editer_skin[ (#ENV**{erreurs}|table_valeur{skin}|oui)erreur]">
+						<label><:mediabox:label_skin:></label>
+						(#ENV{_skins}|box_choisir_skin{#ENV{skin}}|image_reduire{130})
+					</li>]
+					<li class="editer editer_transition[ (#ENV**{erreurs}|table_valeur{transition}|oui)erreur]">
+						<label for='transition'><:mediabox:label_transition:></label>
+						<select name="transition" id="transition">
+							<option value="elastic"[(#ENV{transition}|=={elastic}|oui)selected="selected"]><:mediabox:label_choix_transition_elastic:></option>
+							<option value="fade"[(#ENV{transition}|=={fade}|oui)selected="selected"]><:mediabox:label_choix_transition_fade:></option>
+							<option value="none"[(#ENV{transition}|=={none}|oui)selected="selected"]><:mediabox:label_choix_transition_none:></option>
+						</select>
+					</li>
+					<li class="editer editer_speed[ (#ENV**{erreurs}|table_valeur{speed}|oui)erreur]">
+						<label for='speed'><:mediabox:label_speed:></label>
+						<input type="text" name="speed" class="text" id="speed" size="10" value="#ENV*{speed}" />
+					</li>
+					<li class="editer minWidth[ (#ENV**{erreurs}|table_valeur{minWidth}|oui)erreur]">
+						<label for='minWidth'><:mediabox:label_minwidth:></label>
+						<input type="text" name="minWidth" class="text" id="minWidth" size="10" value="#ENV*{minWidth}" />
+					</li>
+					<li class="editer maxWidth[ (#ENV**{erreurs}|table_valeur{maxWidth}|oui)erreur]">
+						<label for='maxWidth'><:mediabox:label_maxwidth:></label>
+						<input type="text" name="maxWidth" class="text" id="maxWidth" size="10" value="#ENV*{maxWidth}" />
+					</li>
+					<li class="editer minHeight[ (#ENV**{erreurs}|table_valeur{minHeight}|oui)erreur]">
+						<label for='minHeight'><:mediabox:label_minheight:></label>
+						<input type="text" name="minHeight" class="text" id="minHeight" size="10" value="#ENV*{minHeight}" />
+					</li>
+					<li class="editer maxHeight[ (#ENV**{erreurs}|table_valeur{maxHeight}|oui)erreur]">
+						<label for='maxHeight'><:mediabox:label_maxheight:></label>
+						<input type="text" name="maxHeight" class="text" id="maxHeight" size="10" value="#ENV*{maxHeight}" />
+					</li>
+					<li class="editer editer_slideshow_speed[ (#ENV**{erreurs}|table_valeur{slideshow_speed}|oui)erreur]">
+						<label for='slideshow_speed'><:mediabox:label_slideshow_speed:></label>
+						<input type="text" name="slideshow_speed" class="text" id="slideshow_speed" size="10" value="#ENV*{slideshow_speed}" />
+					</li>
+					<li class="editer editer_opacite[ (#ENV**{erreurs}|table_valeur{opacite}|oui)erreur]">
+						<label for='opacite'><:mediabox:label_opacite:></label>
+						<input type="text" name="opacite" class="text" id="opacite" size="10" value="#ENV*{opacite}" />
+					</li>
+				</ul></fieldset>
+				</li>
+
+				<li class="fieldset"><fieldset><legend><:mediabox:label_splash:></legend>
+				<ul>
+					<li class="editer editer_splash_url[ (#ENV**{erreurs}|table_valeur{splash_url}|oui)erreur]">
+						<label for="splash_url"><:mediabox:label_splash_url:></label>
+						[<span class='erreur'>(#ENV**{erreurs}|table_valeur{splash_url})</span>]
+						<p class="explication"><:mediabox:explication_splash_url:></p>
+						<input type="text" name="splash_url" class="text" id="splash_url" size="60" value="#ENV*{splash_url}" />
+					</li>
+				</ul></fieldset>
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+	<p class="boutons">
+		<input type="submit" name="enregistrer" class="over" value="<:bouton_valider:>" />
+		<input type="submit" name="reinit" class="submit" value="<:mediabox:bouton_reinitialiser:>" />
+		<input type="submit" name="enregistrer" class="submit" value="<:bouton_valider:>" />
+	</p>
+</div></form>
+</div>
+<style type="text/css">
+	.editer_skin .choix input {float:#LANG_LEFT;}
+	.editer_skin .choix label img {float:#LANG_LEFT;border:1px solid #ddd;}
+	.editer_skin .choix {overflow:hidden;margin-top:10px;width:160px;margin-#LANG_RIGHT:10px;float:#LANG_LEFT;}
+</style>

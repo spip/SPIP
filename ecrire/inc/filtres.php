@@ -2803,7 +2803,7 @@ function tri_champ_select($t){
 	if(strncmp($t,'multi ',6)==0){
 		$t = substr($t,6);
 		$t = preg_replace(',\s,','',$t);
-		$t = sql_multi($t,$GLOBALS['spip_lang']);
+		$t = Sql::multi($t,$GLOBALS['spip_lang']);
 		return $t;
 	}
 	if(trim($t)=='hasard'){
@@ -2868,9 +2868,8 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 			// si pas de titre declare mais champ titre, il sera peuple par le select *
 			$champ_titre = (!empty($desc['titre'])) ? ', ' . $desc['titre']:'';
 		}
-		include_spip('base/abstract_sql');
-		include_spip('base/connect_sql');
-		$objets[$type_objet][$id_objet] = sql_fetsel(
+
+		$objets[$type_objet][$id_objet] = Sql::fetsel(
 			'*'.$champ_titre,
 			$desc['table_sql'],
 			id_table_objet($type_objet).' = '.intval($id_objet)

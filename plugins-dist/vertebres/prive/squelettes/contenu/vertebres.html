@@ -1,0 +1,13 @@
+[(#AUTORISER{webmestre}|sinon_interdire_acces)]
+[(#ENV{table}|oui)
+<INCLURE{fond=prive/vertebres:#ENV{table},env,ajax} />
+<style type="text/css">
+	th .tri {margin-top: 0;}
+	td {max-height: 200px;overflow-y: scroll;}
+</style>
+]
+
+<hr />
+<BOUCLE_t(POUR){tableau #REM|sql_alltable}{', '}>
+	<a href="#URL_ECRIRE{vertebres,table=#VALEUR}">#VALEUR</a>
+</BOUCLE_t>

@@ -19,21 +19,22 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param string|null $arg
  */
-function action_calculer_taille_cache_dist($arg=null){
-	if (is_null($arg)){
+function action_calculer_taille_cache_dist($arg=null)
+{
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
 	include_spip('inc/filtres');
 
-	if ($arg=='images'){
+	if ($arg=='images') {
 		$taille = calculer_taille_dossier(_DIR_VAR);
 		$res = _T('ecrire:taille_cache_image',
-		array(
-			'dir' => joli_repertoire(_DIR_VAR),
-			'taille' => "<b>".taille_en_octets($taille)."</b>"
-			)
-		);
+			array(
+				'dir' => joli_repertoire(_DIR_VAR),
+				'taille' => "<b>".taille_en_octets($taille)."</b>"
+				)
+			);
 	}
 	else {
 		include_spip('inc/invalideur');
@@ -44,10 +45,10 @@ function action_calculer_taille_cache_dist($arg=null){
 			+calculer_taille_dossier(_DIR_CACHE.'contextes/')
 		;
 		$taille += intval(taille_du_cache());
-		if ($taille<=150000){
+		if ($taille<=150000) {
 			$res = _T('taille_cache_vide');
 		}
-		elseif ($taille<=1024*1024){
+		elseif ($taille<=1024*1024) {
 			$res = _T('taille_cache_moins_de',array('octets'=>taille_en_octets(1024*1024)));
 		}
 		else {
@@ -69,7 +70,8 @@ function action_calculer_taille_cache_dist($arg=null){
  * @param $dir
  * @return int
  */
-function calculer_taille_dossier ($dir) {
+function calculer_taille_dossier ($dir)
+{
 	$handle = @opendir($dir);
 	if (!$handle) return 0;
 	$taille = 0;

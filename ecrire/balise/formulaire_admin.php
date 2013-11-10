@@ -13,14 +13,16 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@balise_FORMULAIRE_ADMIN
-function balise_FORMULAIRE_ADMIN ($p) {
+function balise_FORMULAIRE_ADMIN ($p)
+{
 	return calculer_balise_dynamique($p,'FORMULAIRE_ADMIN', array());
 }
 
 # on ne peut rien dire au moment de l'execution du squelette
 
 // http://doc.spip.org/@balise_FORMULAIRE_ADMIN_stat
-function balise_FORMULAIRE_ADMIN_stat($args, $context_compil) {
+function balise_FORMULAIRE_ADMIN_stat($args, $context_compil)
+{
 	return $args;
 }
 
@@ -32,8 +34,8 @@ function balise_FORMULAIRE_ADMIN_stat($args, $context_compil) {
 # Le debuger transmet donc ses donnees, et cette balise y retrouve son petit.
 
 // http://doc.spip.org/@balise_FORMULAIRE_ADMIN_dyn
-function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
-
+function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='')
+{
 	global $use_cache;
 	static $dejafait = false;
 
@@ -55,8 +57,6 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	}
 
 	include_spip('inc/autoriser');
-	include_spip('base/abstract_sql');
-
 
 	$dejafait = true;
 
@@ -105,21 +105,22 @@ function admin_objet()
 	foreach ($objets as $obj) {
 		$type = $obj;
 		if ($type==objet_type($type,false)
-			AND $_id_type = id_table_objet($type)
-			AND isset($GLOBALS['contexte'][$_id_type])
-			AND $id = $GLOBALS['contexte'][$_id_type]
-			AND !is_array($id)
-			AND $id=intval($id)) {
-			$id = sql_getfetsel($_id_type, table_objet_sql($type), "$_id_type=".intval($id));
+		AND $_id_type = id_table_objet($type)
+		AND isset($GLOBALS['contexte'][$_id_type])
+		AND $id = $GLOBALS['contexte'][$_id_type]
+		AND !is_array($id)
+		AND $id=intval($id))
+		{
+			$id = Sql::getfetsel($_id_type, table_objet_sql($type), "$_id_type=".intval($id));
 			if ($id) {
 				$env[$_id_type] = $id;
 				$env['objet'] = $type;
 				$env['id_objet'] = $id;
-				$env['voir_'.$obj] =
-				  str_replace('&amp;', '&', generer_url_entite($id,$obj,'','',false));
+				$env['voir_'.$obj] = str_replace('&amp;', '&', generer_url_entite($id,$obj,'','',false));
 				if ($desc = $trouver_table(table_objet_sql($type))
-					AND isset($desc['field']['id_rubrique'])
-					AND $type != 'rubrique') {
+				AND isset($desc['field']['id_rubrique'])
+				AND $type != 'rubrique')
+				{
 					unset($env['id_rubrique']);
 					unset($env['voir_rubrique']);
 					if (admin_preview($type, $id, $desc))
@@ -147,12 +148,12 @@ function admin_preview($type, $id, $desc=null)
 	include_spip('inc/autoriser');
 	if (!autoriser('previsualiser')) return '';
 
-	$notpub = sql_in("statut", array('prop', 'prive'));
+	$notpub = Sql::in("statut", array('prop', 'prive'));
 
 	if  ($type == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui')
-		$notpub .= " OR (statut='publie' AND date>".sql_quote(date('Y-m-d H:i:s')).")";
+		$notpub .= " OR (statut='publie' AND date>".Sql::quote(date('Y-m-d H:i:s')).")";
 
-	return sql_fetsel('1', table_objet_sql($type), id_table_objet($type)."=".$id." AND ($notpub)");
+	return Sql::fetsel('1', table_objet_sql($type), id_table_objet($type)."=".$id." AND ($notpub)");
 }
 
 //
@@ -162,7 +163,7 @@ function admin_preview($type, $id, $desc=null)
 // http://doc.spip.org/@admin_lang
 function admin_lang()
 {
-	$alang = sql_getfetsel('lang', 'spip_auteurs', "login=" . sql_quote(preg_replace(',^@,','',@$_COOKIE['spip_admin'])));
+	$alang = Sql::getfetsel('lang', 'spip_auteurs', "login=" . Sql::quote(preg_replace(',^@,','',@$_COOKIE['spip_admin'])));
 	if (!$alang) return '';
 
 	$l = lang_select($alang);
@@ -176,11 +177,10 @@ function admin_valider()
 {
 	global $xhtml;
 
-	return ((@$xhtml !== 'true') ?
-		(parametre_url(self(), 'var_mode', 'debug', '&')
-			.'&var_mode_affiche=validation') :
-		('http://validator.w3.org/check?uri='
-		 . rawurlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
+	return ((@$xhtml !== 'true')
+		? (parametre_url(self(), 'var_mode', 'debug', '&') . '&var_mode_affiche=validation')
+		: ('http://validator.w3.org/check?uri='
+			. rawurlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
 }
 
 // http://doc.spip.org/@admin_debug
@@ -195,7 +195,8 @@ function admin_debug()
 			)
 		) AND autoriser('debug')
 	  )
-	  ? parametre_url(self(),'var_mode', 'debug', '&'): '';
+	  ? parametre_url(self(),'var_mode', 'debug', '&')
+	  : '';
 }
 
 ?>

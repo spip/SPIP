@@ -1,0 +1,31 @@
+<paquet
+	prefix="mots"
+	categorie="edition"
+	version="2.4.10"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/mot-32.png"
+	schema="2.1.1"
+>	
+
+	<nom>Mots</nom>
+	<!-- Gestion des mots et groupes de mots dans SPIP -->
+
+	<auteur>Collectif SPIP</auteur>
+
+	<traduire module="mots" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="mots_indexation" action="" />
+	<pipeline nom="autoriser" inclure="mots_autoriser.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/mots.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/mots.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/mots.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="mots_pipelines.php" />
+	<pipeline nom="configurer_liste_metas" inclure="mots_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="mots_pipelines.php" />
+	<pipeline nom="post_edition" inclure="mots_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="mots_ieconfig.php" />
+
+	<menu nom="mots" titre="mots:icone_mots_cles" parent="menu_edition" icone="images/mot-16.png" action="mots" />
+	<menu nom="mot_creer" titre="mots:icone_creation_mots_cles" parent="outils_rapides" icone="images/mot-new-16.png" action="mot_edit" parametres="new=oui&amp;id_groupe=@id_groupe@" />
+</paquet>

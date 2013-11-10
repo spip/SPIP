@@ -71,7 +71,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 	// Ne plus rien faire si le compilateur n'a pas pu operer.
 	if (!$skel_code) return false;
 
-	foreach($skel_code as $id => $boucle) {
+	foreach ($skel_code as $id => $boucle) {
 		$f = $boucle->return;
 		if (@eval("return true; $f ;") ===  false) {
 		// Code syntaxiquement faux (critere etc mal programme')
@@ -573,13 +573,13 @@ function calculer_select ($select = array(), $from = array(),
 			} while ($i++<1);
 		}
 		if ($sous[0]=='SUBSELECT') {
-			// c'est une sous requete explicite sous la forme identique a sql_select : (SUBSELECT,$select,$from,$where,$groupby,$orderby,$limit,$having)
+			// c'est une sous requete explicite sous la forme identique a Sql::select : (SUBSELECT,$select,$from,$where,$groupby,$orderby,$limit,$having)
 			array_push($where_simples,$sous[3]); // est-ce utile dans ce cas ?
 			$where[$k] = remplace_sous_requete($w,"(".calculer_select(
 			$sous[1], # select
 			$sous[2], #from
 			array(), #from_type
-			$sous[3]?(is_array($sous[3])?$sous[3]:array($sous[3])):array(), #where, qui peut etre de la forme string comme dans sql_select
+			$sous[3]?(is_array($sous[3])?$sous[3]:array($sous[3])):array(), #where, qui peut etre de la forme string comme dans Sql::select
 			array(), #join
 			$sous[4]?$sous[4]:array(), #groupby
 			$sous[5]?$sous[5]:array(), #orderby
@@ -721,7 +721,7 @@ function calculer_select ($select = array(), $from = array(),
 	  $from = reinjecte_joint($afrom, $from);
 	}
 	$GLOBALS['debug']['aucasou'] = array ($table, $id, $serveur, $requeter);
-	$r = sql_select($select, $from, $where,
+	$r = Sql::select($select, $from, $where,
 		$groupby, array_filter($orderby), $limit, $having, $serveur, $requeter);
 	unset($GLOBALS['debug']['aucasou']);
 	return $r;

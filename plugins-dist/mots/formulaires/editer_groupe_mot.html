@@ -1,0 +1,60 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_groupe_mot formulaire_editer_groupe_mot-#ENV{id_groupe_mot,nouveau}'>
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_groupe' value='#ENV{id_groupe}' />
+	  <ul>
+	    <li class='editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input'>
+				<label for='titre'><:mots:info_changer_nom_groupe:><em class='aide'>#AIDER{titre}</em></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				]<input type='text' class='text' name='titre' id='titre' value='[(#ENV**{titre})]'
+				placeholder='<:mots:titre_nouveau_groupe|attribut_html:>' />
+	    </li>	
+	    <li class='editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea'>
+				<label for='descriptif'><:texte_descriptif_rapide:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
+				]<textarea name='descriptif' id='descriptif' rows='4' cols='40'>[(#ENV**{descriptif})]</textarea>
+	    </li>
+	    <li class='editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur] editer_type_textarea'>
+				<label for='text_area'><:info_texte_explicatif:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
+				][(#ENV**{_texte_trop_long,''})
+				]<textarea name='texte' id='text_area' cols='40' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]'>[(#ENV**{texte})]</textarea>
+	    </li>
+	    <li class="fieldset fieldset_config">
+	      <fieldset>
+	      <ul>
+					<li class="editer editer_groupe_mots_associer">
+						<label><:mots:info_mots_cles_association:></label>
+						<INCLURE{fond=formulaires/inc-choisir-groupemots-tables-liees,selected=#ENV*{tables_liees},name=tables_liees} />
+	    		</li>
+		    	[(#ENV{config}|table_valeur{config_precise_groupes}|=={oui}|ou{#ENV{unseul}|=={oui}}|ou{#ENV{obligatoire}|=={oui}}|oui)
+					<li class="editer editer_groupe_mots_reglage_avance">
+						<div class='choix'><input type='checkbox' class='checkbox' name='unseul' value='oui'[(#ENV{unseul}|=={oui}|oui)checked='checked'] id='unseul' /><label for='unseul'><:mots:info_selection_un_seul_mot_cle:></label></div>
+						<div class='choix'><input type='checkbox' class='checkbox' name='obligatoire' value='oui'[(#ENV{obligatoire}|=={oui}|oui)checked='checked'] id='obligatoire' /><label for='obligatoire'><:mots:avis_conseil_selection_mot_cle:></label></div>
+					</li>
+  	  		]
+					<li class="editer editer_groupe_mots_editeur">
+						<label><:mots:info_qui_attribue_mot_cle:></label>
+						<div class='choix'><input type='checkbox' class='checkbox' name='minirezo' value='oui'[(#ENV{minirezo}|=={oui}|oui)checked='checked'] id='acces_minirezo' /><label for='acces_minirezo'><:mots:bouton_checkbox_qui_attribue_mot_cle_administrateurs:></label></div>
+						<div class='choix'><input type='checkbox' class='checkbox' name='comite' value='oui'[(#ENV{comite}|=={oui}|oui)checked='checked'] id='acces_comite' /><label for='acces_comite'><:mots:bouton_checkbox_qui_attribue_mot_cle_redacteurs:></label></div>
+						[(#ENV{config}|table_valeur{forums_publics}|=={non}|non)
+							[(#ENV{config}|table_valeur{mots_cles_forums}|=={oui}|ou{#ENV{forum}|=={oui}}|oui)
+							<div class='choix'><input type='checkbox' class='checkbox' name='forum' value='oui'[(#ENV{forum}|=={oui}|oui)checked='checked'] id='acces_forum' /><label for='acces_forum'><:mots:bouton_checkbox_qui_attribue_mot_cle_visiteurs:></label></div>
+							]
+						]
+					<!--choix_acces-->
+  	  		</li>
+    		</ul></fieldset>
+	    </li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

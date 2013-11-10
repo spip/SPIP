@@ -47,7 +47,7 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour='', $options=
 		$select .= ",statut";
 
 
-	$row = sql_fetsel($select, $desc['table'], "$_id_objet=".intval($id_objet));
+	$row = Sql::fetsel($select, $desc['table'], "$_id_objet=".intval($id_objet));
 	$statut = isset($row['statut'])?$row['statut']:'publie'; // pas de statut => publie
 
 	$valeurs['editable'] = autoriser('dater',$objet,$id_objet,null,array('statut'=>$statut));
@@ -179,17 +179,17 @@ function formulaires_dater_traiter_dist($objet, $id_objet, $retour=''){
 		if (!$h = dater_recuperer_heure_saisie(_request('date_heure')))
 			$h = array(0,0);
 
-		$set[$champ_date] = sql_format_date($d[0], $d[1], $d[2], $h[0], $h[1]);
+		$set[$champ_date] = Sql::format_date($d[0], $d[1], $d[2], $h[0], $h[1]);
 
 		if (isset($desc['field']['date_redac'])){
 			if (!_request('date_redac_jour') OR _request('sans_redac'))
-				$set['date_redac'] = sql_format_date(0,0,0,0,0,0);
+				$set['date_redac'] = Sql::format_date(0,0,0,0,0,0);
 			else {
 				if (!$d = dater_recuperer_date_saisie(_request('date_redac_jour')))
 					$d = array(date('Y'),date('m'),date('d'));
 				if (!$h = dater_recuperer_heure_saisie(_request('date_redac_heure')))
 					$h = array(0,0);
-				$set['date_redac'] = sql_format_date($d[0], $d[1], $d[2], $h[0], $h[1]);
+				$set['date_redac'] = Sql::format_date($d[0], $d[1], $d[2], $h[0], $h[1]);
 			}
 		}
 		include_spip('action/editer_objet');

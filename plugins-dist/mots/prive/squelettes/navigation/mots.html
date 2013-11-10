@@ -1,0 +1,20 @@
+[(#BOITE_OUVRIR{<:mots:titre_page_mots_tous:>,info})]
+<B_nav>
+	<div class="liste">
+		<h4><:mots:titre_groupes_mots:></h4>
+		<ul class='liste-items'>
+		<BOUCLE_nav(GROUPES_MOTS){par multi titre}>[(#AUTORISER{voir,groupemots,#ID_GROUPE}|oui)
+		<li class="item"><a href='#groupe_mots-#ID_GROUPE'
+					 onclick='$(".groupe_mots").hide().filter("#groupe_mots-#ID_GROUPE").show();$(this).parent().addClass("on").siblings().removeClass("on").parent().siblings("a.tous").show();return false;'
+				>#TITRE</a></li>
+		]</BOUCLE_nav>
+		</ul>
+		<a class='tous none' href='#' onclick='$(".groupe_mots").show();$(this).siblings("ul").find(">li").removeClass("on");$(this).hide();return false;'><:mots:icone_voir_tous_mots_cles:></a>
+	</div>
+</B_nav>
+#BOITE_FERMER
+[(#AUTORISER{creer,groupemots}|oui)
+#BOITE_OUVRIR{'',raccourcis}
+	[(#URL_ECRIRE{groupe_mots_edit,new=oui}|icone_horizontale{<:mots:icone_creation_groupe_mots:>,groupe_mots,new})]
+#BOITE_FERMER
+]

@@ -1,0 +1,47 @@
+<div class="formulaire_spip formulaire_exporter formulaire_#FORM">
+	<h3 class="titrem"><:sites:titre_exporter_bookmarks:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<p class="explication"><:sites:texte_expliquer_export_bookmarks:></p>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			[<li class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+			 <label for="titreparent"><:sites:label_exporter_id_parent:>[
+			 <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
+			 ]
+			 </label>(#VAL|chercher_rubrique{0,#ENV{id_parent},'site',#ENV{id_secteur},'',0,form_simple})
+			</li>]
+			#SET{fl,sites}
+			#SET{name,exporter_publie_seulement}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</li>
+			#SET{name,exporter_avec_mots_cles}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</li>
+	  </ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:sites:bouton_exporter:>' /></p>
+	</div></form>
+	]
+</div>

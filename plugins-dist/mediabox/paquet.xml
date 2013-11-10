@@ -1,0 +1,27 @@
+<paquet
+	prefix="mediabox"
+	categorie="multimedia"
+	version="0.8.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/mediabox-32.png"
+	documentation="http://www.spip-contrib.net/MediaBox"
+>
+
+	<nom>MediaBox</nom>
+	<!-- Boîte multimédia -->
+
+	<credit lien="http://colorpowered.com/colorbox/">ColorPowered</credit>
+	<auteur>Collectif SPIP</auteur>
+
+	<traduire module="mediabox" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="insert_head_css" inclure="mediabox_pipelines.php" />
+	<pipeline nom="header_prive_css" action="insert_head_css" inclure="mediabox_pipelines.php" />
+	<pipeline nom="insert_head" inclure="mediabox_pipelines.php" />
+	<pipeline nom="jquery_plugins" inclure="mediabox_pipelines.php" />
+	<pipeline nom="header_prive" action="insert_head" inclure="mediabox_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="mediabox_ieconfig.php" />
+
+	<menu nom="mediabox" titre="mediabox:titre_menu_box" parent="menu_squelette" icone="images/mediabox-16.png" action="configurer_mediabox" />
+</paquet>

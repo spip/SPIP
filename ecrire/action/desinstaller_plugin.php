@@ -13,8 +13,8 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@action_desinstaller_plugin_dist
-function action_desinstaller_plugin_dist() {
-
+function action_desinstaller_plugin_dist()
+{
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	list($dir_plugins,$plugin) = explode("::",$arg);
@@ -28,7 +28,7 @@ function action_desinstaller_plugin_dist() {
 		ecrire_plugin_actifs(array($plugin),false,'enleve');
 		$erreur = '';
 	} else 	$erreur = 'erreur_plugin_desinstalation_echouee';
-	if ($redirect = _request('redirect')){
+	if ($redirect = _request('redirect')) {
 		include_spip('inc/headers');
 		if ($erreur)
 			$redirect = parametre_url($redirect, 'erreur',$erreur);

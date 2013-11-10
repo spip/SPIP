@@ -17,13 +17,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // ou de l'arguemnt fourni: #MENU_LANG_ECRIRE{#ENV{malangue}} 
 
 // http://doc.spip.org/@balise_MENU_LANG_ECRIRE
-function balise_MENU_LANG_ECRIRE ($p) {
+function balise_MENU_LANG_ECRIRE ($p)
+{
 	return calculer_balise_dynamique($p,'MENU_LANG_ECRIRE', array('lang'));
 }
 
 // s'il n'y a qu'une langue proposee eviter definitivement la balise ?php 
 // http://doc.spip.org/@balise_MENU_LANG_ECRIRE_stat
-function balise_MENU_LANG_ECRIRE_stat ($args, $context_compil) {
+function balise_MENU_LANG_ECRIRE_stat ($args, $context_compil)
+{
 	include_spip('inc/lang');
 	if (strpos($GLOBALS['meta']['langues_proposees'],',') === false) return '';
 	return $args;
@@ -31,12 +33,14 @@ function balise_MENU_LANG_ECRIRE_stat ($args, $context_compil) {
 
 // normalement $opt sera toujours non vide suite au test ci-dessus
 // http://doc.spip.org/@balise_MENU_LANG_ECRIRE_dyn
-function balise_MENU_LANG_ECRIRE_dyn($opt) {
+function balise_MENU_LANG_ECRIRE_dyn($opt)
+{
 	return menu_lang_pour_tous('var_lang_ecrire', $opt);
 }
 
 // http://doc.spip.org/@menu_lang_pour_tous
-function menu_lang_pour_tous($nom, $default) {
+function menu_lang_pour_tous($nom, $default)
+{
 	include_spip('inc/lang');
 
 	if ($GLOBALS['spip_lang'] <> $default) {

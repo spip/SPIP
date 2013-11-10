@@ -60,23 +60,23 @@ function maj_v018_dist($version_installee, $version_cible)
 	// function du plugin forum recopiee ici pour assurer la montee de version dans tous les cas de figure
 	function maj_v018_calculer_threads() {
 		// fixer les id_thread des debuts de discussion
-		sql_update('spip_forum', array('id_thread'=>'id_forum'), "id_parent=0");
+		Sql::update('spip_forum', array('id_thread'=>'id_forum'), "id_parent=0");
 		// reparer les messages qui n'ont pas l'id_secteur de leur parent
 		do {
 			$discussion = "0";
 			$precedent = 0;
-			$r = sql_select("fille.id_forum AS id,	maman.id_thread AS thread", 'spip_forum AS fille, spip_forum AS maman', "fille.id_parent = maman.id_forum AND fille.id_thread <> maman.id_thread",'', "thread");
-			while ($row = sql_fetch($r)) {
+			$r = Sql::select("fille.id_forum AS id,	maman.id_thread AS thread", 'spip_forum AS fille, spip_forum AS maman', "fille.id_parent = maman.id_forum AND fille.id_thread <> maman.id_thread",'', "thread");
+			while ($row = Sql::fetch($r)) {
 				if ($row['thread'] == $precedent)
 					$discussion .= "," . $row['id'];
 				else {
 					if ($precedent)
-						sql_updateq("spip_forum", array("id_thread" => $precedent), "id_forum IN ($discussion)");
+						Sql::updateq("spip_forum", array("id_thread" => $precedent), "id_forum IN ($discussion)");
 					$precedent = $row['thread'];
 					$discussion = $row['id'];
 				}
 			}
-			sql_updateq("spip_forum", array("id_thread" => $precedent), "id_forum IN ($discussion)");
+			Sql::updateq("spip_forum", array("id_thread" => $precedent), "id_forum IN ($discussion)");
 		} while ($discussion != "0");
 	}
 	if (upgrade_vers(1.805, $version_installee, $version_cible)) {
@@ -125,7 +125,7 @@ function maj_v018_dist($version_installee, $version_cible)
 
 	// Annuler les brouillons de forum jamais valides
 	if (upgrade_vers(1.810, $version_installee, $version_cible)) {
-		sql_delete("spip_forum", "statut='redac'");
+		Sql::delete("spip_forum", "statut='redac'");
 		maj_version(1.810);
 	}
 

@@ -252,11 +252,11 @@ function valider_contexte($code, $file)
 	preg_match_all('/(\S*)[$]Pile[[]0[]][[].(\w+).[]](\S*)/', $code, $r, PREG_SET_ORDER);
 	$args = array();
 	// evacuer les repetitions et les faux parametres
-	foreach($r as $v) {
+	foreach ($r as $v) {
 		list(,$f, $nom, $suite) = $v;
 		if (!in_array($nom, $exceptions)
 		AND (!isset($args[$nom]) OR !$args[$nom]))
-			$args[$nom] = ((strpos($f, 'sql_quote') !== false)
+			$args[$nom] = ((strpos($f, 'Sql::quote') !== false)
 				AND strpos($suite, "'int'") !==false);
 	}
 	$contexte= array(); // etudier l'ajout de:
@@ -273,7 +273,7 @@ function valider_contexte($code, $file)
 		  $trouver_table = charger_fonction('trouver_table', 'base');
 		  $table = $trouver_table(table_objet_sql($type));
 		  if ($table)
-		    $val = @sql_getfetsel($nom, $table['table'], '', '','',"0,1");
+		    $val = @Sql::getfetsel($nom, $table['table'], '', '','',"0,1");
 		    // porte de sortie si ca marche pas, 
 		  if (!$val) $val = 1; 
 		}

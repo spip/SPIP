@@ -1,0 +1,6 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-Type: text/html; charset=[(#VAL|pp_charset)]})]
+<div class="preview">
+[(#ENV*{data}|traitements_previsu{#ENV*{champ},#ENV*{objet}}|image_reduire{500,0}|liens_absolus)]
+[<hr style='clear:both;' /><div class="notes">(#NOTES)</div>]
+</div>

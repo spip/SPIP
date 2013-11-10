@@ -12,9 +12,8 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('base/abstract_sql');
-
-function is_url_prive($cible){
+function is_url_prive($cible)
+{
 	include_spip('inc/filtres_mini');
 	$path = parse_url(tester_url_absolue($cible)?$cible:url_absolue($cible));
 	$path = (isset($path['path'])?$path['path']:'');

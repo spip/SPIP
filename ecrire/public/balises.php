@@ -304,7 +304,7 @@ function calculer_balise_expose($p, $on, $off)
 	$key = $p->boucles[$b]->primary;
 	$type = $p->boucles[$p->id_boucle]->primary;
 	$desc = $p->boucles[$b]->show;
-	$connect = sql_quote($p->boucles[$b]->sql_serveur);
+	$connect = Sql::quote($p->boucles[$b]->sql_serveur);
 
 	if (!$key) {
 		$msg = array('zbug_champ_hors_boucle', array('champ' => '#EXPOSER'));

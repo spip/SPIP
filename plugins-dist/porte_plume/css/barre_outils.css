@@ -1,0 +1,200 @@
+.formulaire_spip  textarea.markItUpEditor,
+.formulaire_spip li.editer_texte textarea {
+	/*width: 96%;
+	clear: both;*/
+}
+
+.markItUpHeader { text-align: left; } /* fix dir=ltr */
+
+
+/* -------------------------------------------------------------------
+// markItUp! Universal MarkUp Engine, JQuery plugin
+// By Jay Salvat - http://markitup.jaysalvat.com/
+// ------------------------------------------------------------------*/
+
+
+.markItUp .markItUpHeader a,
+.markItUp .markItUpTabs a,
+.markItUp .markItUpFooter a {
+	color:#000;
+	text-decoration:none;
+}
+.markItUp  {
+	margin:5px 0 5px 0;
+	clear:both;
+    position: relative;
+}
+.markItUp .markItUpContainer  {
+	margin:0; padding:0;
+}
+.markItUp .markItUpEditor {
+	clear:both;
+	display:block;
+	overflow:auto;
+	margin: 0;
+}
+#text_area { /* cas tres particulier champs texte de spip */
+	height:300px;
+}
+.markItUp .markItUpPreviewFrame {}
+.markItUp .markItUpFooter {
+	margin:0; padding:0;
+	width:100%;
+}
+.markItUp .markItUpResizeHandle {
+	overflow:hidden;
+	width:22px; height:5px;
+	margin-left:auto;
+	margin-right:auto;
+	background-image:url(images/handle.png);
+	cursor:ns-resize;
+}
+
+/***************************/
+/* tabs */
+.markItUp .markItUpTabs {
+	text-align:right; 
+	padding:1px 1px 0;
+	margin-bottom: -2px;
+	top: 6px;
+	overflow:hidden;
+    position: absolute;
+	right: 30px;
+	clear:right;
+	z-index:5; /* Un rien plus que .markItUpPreview */
+}
+.markItUp .markItUpTabs a {
+	display:block; 
+	float:right; 
+	border:1px solid #ccc; 
+	border-bottom: 0;
+	margin:0px 1px; 
+	padding: 3px 4px 2px; 
+	background:#EEE;
+	border-radius: 5px 5px 0 0;
+}
+.markItUp .markItUpTabs a.on { background: #fff; border-bottom: 1px solid #fff; box-shadow: 1px 1px #eee inset; }
+.markItUp .markItUpTabs a:hover {background:#fff;}
+
+/***************************/
+/* previsu */
+.markItUp .markItUpPreview {
+	clear:both;
+	border:1px solid #ccc;
+	background:#fff;
+	overflow:auto;
+	padding:1em;
+	/* decaler de la hauteur de .markItUpTabs */
+	position:relative;
+	top:2.2em; 
+}
+
+/* correction des styles spip_formulaires appliques par defaut (grr) */
+.markItUp .preview p {margin-bottom:1em;}
+.markItUp .preview ul {margin-bottom:1em; margin-top:.5em;}
+.markItUp .preview li {border:none; padding:1px;}
+/* coloration code */
+.markItUp .preview .cadre ol, 
+.markItUp .preview .cadre ul {padding:.5em;}
+
+
+/***************************************************************************************/
+/* first row of buttons */
+.markItUp .markItUpHeader {
+	display: block;
+	margin: 0;
+	padding: 0;
+	background-color: #F5F5F5;
+	background: -webkit-gradient(linear, left top, left bottom, from(#F1F1F1), to(#DDD));
+	background: -moz-linear-gradient(top, #F1F1F1, #DDD);
+	border: 1px solid #ccc;
+	border-color: #F1F1F1 #EEE #CCC;
+	border-color: #ddd #ddd #ccc;
+	border-radius: 6px 6px 0 0;
+}
+.markItUp .markItUpHeader:after {
+    content: "\0020";
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+    overflow: hidden;
+}
+.lte7 .markItUp .markItUpHeader ul {height:29px;}
+.markItUp .markItUpHeader ul {
+	display: block;
+	margin: 0 !important;
+	padding: 0;
+
+}
+.markItUp .markItUpHeader ul li {
+	list-style:none;
+	float:left;
+	position:relative;
+	clear:none;
+	border:0;
+	margin:0;
+	padding:0;
+	overflow:visible;
+}
+.markItUp .markItUpHeader ul li:first-child { /* annuler un reglage des forms prive */
+	padding-top:0; 
+}
+
+.markItUp .markItUpHeader ul .markItUpDropMenu {
+	/*background:inherit url(images/menu.png) no-repeat 100% 80%;
+	padding-right:10px;*/
+	
+}
+.markItUp .markItUpHeader ul .markItUpDropMenu ul { border-left: 1px solid #CCC; }
+.markItUp .markItUpHeader ul .markItUpDropMenu li {
+	margin-right: 0;
+	padding: 0 1px 1px 0;
+	background-color: #CCC;
+}
+.markItUp .markItUpHeader ul ul a {
+	background-color: #F1F1F1;
+}
+ 
+/* next rows of buttons */
+.markItUp .markItUpHeader ul ul {
+	display:none;
+	position:absolute;
+	top: 29px; left:-1px;	
+	width:150px;
+	z-index:2;
+	padding-top:2px;
+}
+/* le padding rompt la continuite du hover sous IE7&8 */
+.lte8 .markItUp .markItUpHeader ul ul {padding-top: 0;border-top:1px solid #ccc;}
+
+.markItUp .markItUpHeader ul ul li {
+	float:left;
+}
+.markItUp .markItUpHeader ul ul .markItUpDropMenu {
+	background:#F5F5F5 url(images/submenu.png) no-repeat 50% 50%;
+}
+.markItUp .markItUpHeader ul .separateur {
+	border-left: 1px solid #d2d2d2;
+}
+.markItUp .markItUpHeader ul ul .separateur {
+	margin:0; border: 0;
+}
+
+.markItUp .markItUpHeader ul a {
+	clear: none;
+	display: block;
+	margin: 0;
+	padding: 7px 6px 6px;
+}
+.markItUp .markItUpHeader ul a:focus,
+.markItUp .markItUpHeader ul a:active { -moz-transform: translateY(1px); outline: none !important; }
+.markItUp .markItUpHeader ul a:hover { background-color: #fff; }
+.markItUp .markItUpHeader ul a em {
+	display:block;
+	background-repeat:no-repeat;
+	width:16px; height:16px;
+	text-indent:-10000px;
+}
+
+/* end */

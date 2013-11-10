@@ -1,0 +1,16 @@
+#HTTP_HEADER{Content-Type: image/png}
+#HTTP_HEADER{Content-Transfer-Encoding: binary}
+<?php
+/*
+Dans le .htaccess :
+RewriteRule ^apple-touch-icon(-(\d+x\d+))?(-precomposed)?[.]png$      spip.php?page=apple-touch-icon.png&size=$2 [QSA,L]
+*/
+$file="[(#CHEMIN{apple-touch-icon[-(#ENV{size,''})].png}|sinon{[(#LOGO_SITE_SPIP|sinon{#CHEMIN{spip.png}}
+		|image_passe_partout{[(#ENV{size,57}|intval)],[(#ENV{size,57}|intval)]}
+		|image_recadre{[(#ENV{size,57}|intval)],[(#ENV{size,57}|intval)],center}
+		|image_aplatir{png,#ffffff}|extraire_attribut{src})]})]";
+if ($cl = filesize(preg_replace(',[?].*$,','',$file))
+	header("Content-Length: ". $cl);
+
+readfile($file);
+?>

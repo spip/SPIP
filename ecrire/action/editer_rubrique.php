@@ -34,7 +34,8 @@ include_spip('inc/rubriques');
  *     Liste : identifiant de la rubrique, message d'erreur éventuel.
  *
  */
-function action_editer_rubrique_dist($arg=null) {
+function action_editer_rubrique_dist($arg=null)
+{
 
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -73,7 +74,8 @@ function action_editer_rubrique_dist($arg=null) {
  * @return int
  *     Identifiant de la rubrique crée
  */
-function rubrique_inserer($id_parent) {
+function rubrique_inserer($id_parent)
+{
 	$champs = array(
 		'titre' => _T('item_nouvelle_rubrique'),
 		'id_parent' => intval($id_parent),
@@ -89,7 +91,7 @@ function rubrique_inserer($id_parent) {
 		)
 	);
 	
-	$id_rubrique = sql_insertq("spip_rubriques", $champs);
+	$id_rubrique = Sql::insertq("spip_rubriques", $champs);
 	pipeline('post_insertion',
 		array(
 			'args' => array(
@@ -116,7 +118,8 @@ function rubrique_inserer($id_parent) {
  *     - chaîne vide : Vide si tout s'est bien passé
  *     - chaîne : Texte d'un message d'erreur
  */
-function rubrique_modifier($id_rubrique, $set=null) {
+function rubrique_modifier($id_rubrique, $set=null)
+{
 	include_spip('inc/autoriser');
 	include_spip('inc/filtres');
 
@@ -172,15 +175,14 @@ function rubrique_modifier($id_rubrique, $set=null) {
  */
 function editer_rubrique_breves($id_rubrique, $id_parent, $c=array())
 {
-	if (!sql_countsel('spip_breves', "id_rubrique=$id_rubrique"))
+	if (!Sql::countsel('spip_breves', "id_rubrique=$id_rubrique"))
 		return true;
 
 	if ($c['confirme_deplace'] != 'oui')
 		return false;
 
-	if ($id_secteur = sql_getfetsel("id_secteur",
-	"spip_rubriques", "id_rubrique=$id_parent"))
-		sql_updateq("spip_breves", array("id_rubrique" => $id_secteur), "id_rubrique=$id_rubrique");
+	if ($id_secteur = Sql::getfetsel('id_secteur', 'spip_rubriques', "id_rubrique=$id_parent"))
+		Sql::updateq("spip_breves", array("id_rubrique" => $id_secteur), "id_rubrique=$id_rubrique");
 
 	return true;
 }
@@ -202,7 +204,8 @@ function editer_rubrique_breves($id_rubrique, $id_parent, $c=array())
  *     Chaine vide : aucune erreur
  *     Chaîne : Texte du message d'erreur
  */
-function rubrique_instituer($id_rubrique, $c) {
+function rubrique_instituer($id_rubrique, $c)
+{
 	// traitement de la rubrique parente
 	// interdiction de deplacer vers ou a partir d'une rubrique
 	// qu'on n'administre pas.
@@ -213,21 +216,21 @@ function rubrique_instituer($id_rubrique, $c) {
 		if (strpos(",$id_parent,", ",$filles,") !== false)
 			spip_log("La rubrique $id_rubrique ne peut etre fille de sa descendante $id_parent");
 		else {
-			$s = sql_fetsel("id_parent, statut", "spip_rubriques", "id_rubrique=$id_rubrique");
+			$s = Sql::fetsel("id_parent, statut", "spip_rubriques", "id_rubrique=$id_rubrique");
 			$old_parent = $s['id_parent'];
 
 			if (!($id_parent != $old_parent
 			AND autoriser('publierdans', 'rubrique', $id_parent)
 			AND autoriser('creerrubriquedans', 'rubrique', $id_parent)
-			AND autoriser('publierdans', 'rubrique', $old_parent)
-			      )) {
+			AND autoriser('publierdans', 'rubrique', $old_parent)))
+			{
 				if ($s['statut'] != 'new') {
 					spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['visiteur_session']['id_auteur'] . ' '.  $GLOBALS['visiteur_session']['statut']);
 				}
 			}
 			elseif (editer_rubrique_breves($id_rubrique, $id_parent, $c)) {
 				$statut_ancien = $s['statut'];
-				sql_updateq('spip_rubriques', array('id_parent' => $id_parent), "id_rubrique=$id_rubrique");
+				Sql::updateq('spip_rubriques', array('id_parent' => $id_parent), "id_rubrique=$id_rubrique");
 
 
 				propager_les_secteurs();
@@ -260,7 +263,8 @@ function rubrique_instituer($id_rubrique, $c) {
  * @return int
  *     Identifiant de la rubrique crée
 **/
-function insert_rubrique($id_parent) {
+function insert_rubrique($id_parent)
+{
 	return rubrique_inserer($id_parent);
 }
 
@@ -281,7 +285,8 @@ function insert_rubrique($id_parent) {
  *     - chaîne vide : Vide si tout s'est bien passé
  *     - chaîne : Texte d'un message d'erreur
 **/
-function revisions_rubriques($id_rubrique, $set=null) {
+function revisions_rubriques($id_rubrique, $set=null)
+{
 	return rubrique_modifier($id_rubrique,$set);
 }
 
@@ -300,6 +305,7 @@ function revisions_rubriques($id_rubrique, $set=null) {
  *     Chaine vide : aucune erreur
  *     Chaîne : Texte du message d'erreur
 **/
-function instituer_rubrique($id_rubrique, $c) {
+function instituer_rubrique($id_rubrique, $c)
+{
 	return rubrique_instituer($id_rubrique, $c);
 }

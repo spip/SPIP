@@ -42,7 +42,8 @@ if (test_espace_prive ())
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
 // http://doc.spip.org/@public_parametrer_dist
-function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
+function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')
+{
 	static $composer,$styliser,$notes=null;
 	$page = tester_redirection($fond, $contexte, $connect);
 	if ($page) return $page;

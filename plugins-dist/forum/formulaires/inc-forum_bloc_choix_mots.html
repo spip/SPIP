@@ -1,0 +1,8 @@
+#SET{table,#VAL{'(^|,)('}|concat{#ENV{table,rienderien}}|concat{#CONFIG{mots_cles_forums}|choixsiegal{oui,'|forum',''},')(,|$)'}
+<BOUCLE_G(GROUPES_MOTS)	{tables_liees==#GET{table}}>
+[(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
+	<fieldset>
+	<legend><:mots_clefs:> : #TITRE</legend>
+		<INCLURE{fond=formulaires/inc-choix_mots, id_groupe, ajouter_mot, unseul} />
+	</fieldset>
+]</BOUCLE_G>

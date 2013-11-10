@@ -1,0 +1,59 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.onglets_simple ul.statut_petition li.publie strong,.onglets_simple ul.statut_petition li.publie a {background-image:url(#CHEMIN_IMAGE{signature-statut-publie-24.png});padding-#GET{left}:27px;}
+.onglets_simple ul.statut_petition li.poubelle strong,.onglets_simple ul.statut_petition li.poubelle a {background-image:url(#CHEMIN_IMAGE{signature-statut-poubelle-24.png});padding-#GET{left}:27px;}
+.onglets_simple ul.statut_petition li.prop strong,.onglets_simple ul.statut_petition li.prop a {background-image:url(#CHEMIN_IMAGE{signature-statut-prop-24.png});padding-#GET{left}:27px;}
+
+.controler_petition .annule_filtre {float:#GET{right};}
+.controler_petition #actiongroup button {width:100%;margin:5px 0;}
+
+/* Habillage des signatures en liste pour moderation
+---------------------------------------------- */
+ul.signatures li.item { margin: 15px 0; padding: 0 0 .8em 0; background: #eee url(#CHEMIN_IMAGE{petition-bg-item-64.png}); border: 1px solid #ccc; border-top: 8px solid #ccc; position:relative;}
+ul.signatures li.item:hover { background-color: #e9e9e9; }
+
+ul.signatures li.statut_publie { background-image: none; border-color: #9dba00; }
+ul.signatures li.statut_poubelle { background-color: #edd3d3; border-color: #ff0000; }
+ul.signatures li.statut_prop { background-color: #FFFBEF; border-color: #EFCA68; }
+
+ul.signatures li .cartouche { min-height: 30px; padding: 5px; padding-#GET{left}: 30px; border-bottom: 1px solid #eee; }
+ul.signatures li.statut_poubelle .cartouche { border-color: #edd3d3; }
+ul.signatures li.statut_prop .cartouche { border-color: #FFFBEF; }
+ul.signatures li .cartouche h3 {font-size:1.1em;margin-bottom:0.25em;}
+ul.signatures li .cartouche .date,
+ul.signatures li .cartouche .par {display:inline;}
+ul.signatures li .cartouche .info_statut {display:block;float:#GET{left};margin-#GET{left}:-30px;position:relative;display:inline;}
+ul.signatures li .cartouche .reponse_a p {margin:0;}
+ul.signatures li .cartouche .reponse_a {font-weight:bold;}
+ul.signatures li .cartouche .reponse_a a {font-weight:normal;}
+ul.signatures li .cartouche .lien_admin {display:block;}
+
+ul.signatures li.item .texte { margin: 0; padding: .8em 30px; }
+
+ul.signatures >li.item .actions.moderer {padding-top:5px;padding-bottom:5px;margin-#GET{right}:5px;background:url(#CHEMIN{images/actions-filigrane-24.png}) no-repeat bottom right;padding-#GET{right}:30px;}
+ul.signatures >li.item:hover .actions.moderer {/*background-image:none;*/}
+ul.signatures >li.item .actions.moderer > span {visibility:hidden;}
+ul.signatures >li.item:hover .actions.moderer > span,ul.signatures >li.item.hover .actions.moderer > span  {visibility:visible;}
+
+ul.signatures li .actions .supprimer input.submit {color:#cf4d4d;}
+ul.signatures li .checkbox {position:absolute;top:50%;left:1px;}

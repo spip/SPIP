@@ -12,7 +12,7 @@
 #
 
 if (defined('_ECRIRE_INC_VERSION')) return;
-define('_ECRIRE_INC_VERSION', "1");
+define('_ECRIRE_INC_VERSION', '1');
 
 # masquer les eventuelles erreurs sur les premiers define
 error_reporting(E_ALL ^ E_NOTICE);
@@ -32,6 +32,12 @@ define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 define('_ROOT_RACINE', dirname(dirname(__FILE__)).'/');
 define('_ROOT_CWD', getcwd().'/');
 define('_ROOT_RESTREINT', _ROOT_CWD . _DIR_RESTREINT);
+
+require_once _ROOT_RESTREINT.'class/AutoloadClass.php';
+if (!defined('SPIP_AUTOLOAD')) {
+    spl_autoload_register(array('Autoload', 'load'));
+    define('SPIP_AUTOLOAD', true);
+}
 
 // Icones
 # nom du dossier images

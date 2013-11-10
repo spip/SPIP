@@ -1,0 +1,73 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_forums_participants' id='formulaire_configurer_forums_participants'>
+<h3 class='titrem'>[(#CHEMIN_IMAGE{forum-interne-24.png}|balise_img{'',cadre-icone})]<:forum:info_mode_fonctionnement_defaut_forum_public:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form action="#ENV{action}#formulaire_configurer_forums_participants" method="post"><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<ul>
+			<li class='editer configurer_forums_publics[ (#ENV**{erreurs}|table_valeur{forums_publics}|oui)erreur]'>
+				[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{forums_publics})</span>
+				]<div class='choix'>
+					<input class='radio' type="radio" name="forums_publics" value='non' [checked="(#ENV{forums_publics}|=={non}?{checked})"] id="forums_publics_1"/>
+					<label for="forums_publics_1"><:forum:info_desactiver_forum_public:></label>
+				</div>
+				<div class='explication'><:forum:info_activer_forum_public:></div>
+				<div class='choix'>
+					<input class='radio' type="radio" name="forums_publics" value='posteriori' [checked="(#ENV{forums_publics}|=={posteriori}|?{checked})"] id="forums_publics_2"/>
+					<label for="forums_publics_2"><:forum:bouton_radio_publication_immediate:></label>
+				</div>
+				<div class='choix'>
+					<input class='radio' type="radio" name="forums_publics" value='priori' [checked="(#ENV{forums_publics}|=={priori}|?{checked})"] id="forums_publics_3"/>
+					<label for="forums_publics_3"><:forum:bouton_radio_moderation_priori:></label>
+				</div>
+				<div class='choix'>
+					<input class='radio' type="radio" name="forums_publics" value='abo' [checked="(#ENV{forums_publics}|=={abo}|?{checked})"] id="forums_publics_4"/>
+					<label for="forums_publics_4"><:forum:bouton_radio_enregistrement_obligatoire:></label>
+				</div>
+			</li>
+			<li id='config-options-' class='fieldset'>
+				<fieldset>
+					<legend><:info_options_avancees:></legend>
+					<ul>
+						<li class='editer configurer_forums_publics_appliquer[ (#ENV**{erreurs}|table_valeur{forums_publics_appliquer}|oui)erreur]'>
+							<label><:forum:info_appliquer_choix_moderation:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{forums_publics_appliquer})</span>
+							]
+							<div class='choix'>
+								<input class='radio' type="radio" name="forums_publics_appliquer" value='futur' checked='checked' id="forums_appliquer_futur"/>
+								<label for="forums_appliquer_futur"><:forum:bouton_radio_articles_futurs:></label>
+							</div>
+							<div class='choix'>
+								<input class='radio' type="radio" name="forums_publics_appliquer" value='saufnon' id="forums_appliquer_saufnon"/>
+								<label for="forums_appliquer_saufnon"><:forum:bouton_radio_articles_tous_sauf_forum_desactive:></label>
+							</div>
+							<div class='choix'>
+								<input class='radio' type="radio" name="forums_publics_appliquer" value='tous' id="forums_appliquer_tous"/>
+								<label for="forums_appliquer_tous"><:forum:bouton_radio_articles_tous:></label>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
+	</div></form>
+
+</div>
+<script type='text/javascript'>
+jQuery(document).ready(function(){
+	jQuery('li.configurer_forums_publics input').each(function(){
+		var checked = jQuery(this).prop('checked');
+		jQuery(this).bind('change',function(){
+			if (jQuery(this).prop('checked')==checked)
+				jQuery('#config-options-').hide();
+			else
+				jQuery('#config-options-').show();
+		});
+	});
+	jQuery('#config-options-').hide();
+});
+</script>

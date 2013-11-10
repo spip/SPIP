@@ -1,0 +1,50 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	points,-1
+}})
+]<B_liste_rev>
+#ANCRE_PAGINATION
+<div class="liste-objets versions">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{revisions:info_1_revision,revisions:info_nb_revisions}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'><span title="<:lien_trier_statut|attribut_html:>">#</span></th>
+			<th class='type' scope='col'><:revisions:objet_editorial:></th>
+			<th class='diff' scope='col'></th>
+			<th class='titre principale' scope='col'><:info_titre:></th>
+			<th class='auteur' scope='col'><:auteur:></th>
+			<th class='date secondaire' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_rev(VERSIONS){id_version>1}{objet!=''}{id_auteur?}{id_objet?}{objet?}{where?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<BOUCLE_auteur(AUTEURS){id_auteur}{si #ID_AUTEUR|is_numeric}{tout}>[(#SET{td_auteur,<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>})]
+		</BOUCLE_auteur>[(#SET{td_auteur,#ID_AUTEUR})]<//B_auteur>
+		[(#AUTORISER{voirrevisions, #OBJET, #ID_OBJET}|oui)
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class='statut'>[(#INFO_STATUT{#OBJET,#ID_OBJET}|puce_statut{#OBJET})]</td>
+				<td class="type">[(#OBJET|objet_icone{16})]</td>
+				<td class='diff'>#SET{diff,#ID_OBJET|revisions_diff{#OBJET,#ID_VERSION}}
+				[<a href="#" onclick="$(this).parent().next().find('.diff').toggle('fast');return false;" title="<:revisions:voir_differences|attribut_html:>">[(#CHEMIN_IMAGE{diff-16.png}|balise_img{<:revisions:voir_differences:>})]</a>
+				(#GET{diff}|oui)]
+				</td>
+				<td class='titre principale'><a #SET{titre,#INFO_TITRE{#OBJET,#ID_OBJET}}
+					href="[(#ENV{url_modif,#URL_ECRIRE{revision}}|parametre_url{id_objet,#ID_OBJET}|parametre_url{objet,#OBJET}|parametre_url{id_version,#ID_VERSION})]" 
+					title="<:revisions:voir_revisions{objet=#OBJET,id_objet=#ID_OBJET,titre=#GET{titre}}|attribut_html:>">#GET{titre}</a>[ ((#TITRE_VERSION))]
+					[<div class="none-js diff">
+					(#GET{diff}|safehtml)
+					</div>]
+				</td>
+				<td class='auteur'>#GET{td_auteur}</td>
+				<td class='date secondaire'>[(#DATE|date_relative)]</td>
+			</tr>
+		]
+	</BOUCLE_liste_rev>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_rev>[
+<div class="liste-objets versions caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_rev>

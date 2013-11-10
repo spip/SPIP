@@ -1,0 +1,54 @@
+#HTTP_HEADER{HTTP/1.0  #ENV{code,'404 Not Found'}}
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{Pragma: no-cache}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title><:pass_erreur:> [(#ENV{status, 404}|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inclure/head} />
+<meta name="robots" content="none" />
+</head>
+<body class="pas_surlignable page_404">
+<div class="page">
+
+	<INCLURE{fond=inclure/header} />
+	<INCLURE{fond=inclure/nav,env} />
+	
+	<div class="main">
+		<div class="wrapper">
+		<div class="content" id="content">
+			<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:pass_erreur:></strong></p>
+	
+			<div class="cartouche">
+				<h1><:pass_erreur:> [(#ENV{status, 404}|intval)]</h1>
+			</div>
+			[(#ENV{erreur}|non)
+			[(#ENV{fond_erreur}|=={article}|oui)<div class="chapo"><p><:aucun_article:></p></div>]
+			[(#ENV{fond_erreur}|=={rubrique}|oui)<div class="chapo"><p><:aucune_rubrique:></p></div>]
+			[(#ENV{fond_erreur}|=={breve}|oui)<div class="chapo"><p><:aucune_breve:></p></div>]
+			[(#ENV{fond_erreur}|=={auteur}|oui)<div class="chapo"><p><:aucun_auteur:></p></div>]
+			[(#ENV{fond_erreur}|=={site}|oui)<div class="chapo"><p><:aucun_site:></p></div>]
+			[(#ENV{fond_erreur}|=={forum}|oui)<div class="chapo"><p><:forum:aucun_message_forum:></p></div>]
+			]
+			[<div class="chapo"><p>(#ENV{erreur})</p></div>]
+	
+		</div><!--.content-->
+		</div><!--.wrapper-->
+	
+		<div class="aside">
+			<INCLURE{fond=inclure/navsub} />
+			#FORMULAIRE_RECHERCHE
+		</div><!--.aside-->
+	</div><!--.main-->
+
+	<INCLURE{fond=inclure/footer,self=#SELF} />
+
+</div><!--.page-->
+</body>
+</html>

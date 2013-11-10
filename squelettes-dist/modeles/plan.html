@@ -1,0 +1,59 @@
+[(#REM)
+	Le plan de site ci-dessous est a adapter selon les besoins.
+	En particulier, on n'aura pas necessairement besoin de tous les elements (sous-rubriques, articles, breves et sites)
+]
+<BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre}{!par date}>
+
+<h2>#TITRE</h2>
+
+[(#REM) Articles et sous-rubriques ]
+<B_articles_racine>
+<h3><:articles:></h3>
+<ul class="spip">
+	<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par num titre}{!par date}>
+	<li><a href="#URL_ARTICLE">#TITRE</a></li>
+	</BOUCLE_articles_racine>
+</ul>
+</B_articles_racine>
+
+<B_rubriques>
+<ul class="spip">
+	<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre}{!par date}>
+	<li>
+		<strong><a href="#URL_RUBRIQUE">#TITRE</a></strong>
+		
+		<B_articles>
+		<ul class="spip">
+			<BOUCLE_articles(ARTICLES) {id_rubrique} {par num titre}{!par date}>
+			<li><a href="#URL_ARTICLE">#TITRE</a></li>
+			</BOUCLE_articles>
+		</ul>
+		</B_articles>
+		
+		<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+	</li>
+	</BOUCLE_rubriques>
+</ul>
+</B_rubriques>
+
+[(#REM) Breves ]
+<B_breves>
+<h3><:breves:breves:></h3>
+<ul class="spip">
+	<BOUCLE_breves(BREVES) {id_rubrique} {!par date}>
+	<li><a href="#URL_BREVE">#TITRE</a></li>
+	</BOUCLE_breves>
+</ul>
+</B_breves>
+
+[(#REM) Sur le Web ]
+<B_sites>
+<h3><:sites_web:></h3>
+<ul class="spip">
+	<BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
+	<li><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a></li>
+	</BOUCLE_sites>
+</ul>
+</B_sites>
+
+</BOUCLE_secteurs>

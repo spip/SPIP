@@ -1,0 +1,39 @@
+<paquet
+	prefix="sites"
+	categorie="edition"
+	version="1.7.8"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/site-32.png"
+	schema="1.0.0"
+>	
+
+	<nom>Sites</nom>
+	<!-- Gestion des sites et de la syndication dans SPIP -->
+
+	<auteur>Collectif SPIP</auteur>
+
+	<traduire module="sites" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="pre_syndication" action="" />
+	<pipeline nom="post_syndication" action="" />
+	<pipeline nom="autoriser" inclure="sites_autoriser.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/sites.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/sites.php" />
+	<pipeline nom="configurer_liste_metas" inclure="sites_pipelines.php" />
+	<pipeline nom="rubrique_encours" inclure="sites_pipelines.php" />
+	<pipeline nom="accueil_encours" inclure="sites_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="sites_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="sites_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="sites_pipelines.php" />
+	<pipeline nom="calculer_rubriques" inclure="sites_pipelines.php" />
+	<pipeline nom="objet_compte_enfants" inclure="sites_pipelines.php" />
+	<pipeline nom="trig_propager_les_secteurs" inclure="sites_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="sites_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="sites_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="sites_ieconfig.php" />
+
+	<menu nom="sites" titre="icone_sites_references" parent="menu_edition" icone="images/site-16.png" action="sites" />
+	<menu nom="site_creer" titre="sites:icone_referencer_nouveau_site" parent="outils_rapides" icone="images/site-new-16.png" action="site_edit" parametres="new=oui&amp;id_rubrique=@id_rubrique@" />
+	<menu nom="controler_syndication" titre="sites:icone_controler_syndication" parent="menu_publication" position="-1" icone="images/site-16.png" />
+</paquet>

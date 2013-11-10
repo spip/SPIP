@@ -1,0 +1,65 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,#ENV{couleur_claire,edf3fe}}
+#SET{foncee,#ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/* ----- compagnon (extends box) ----- */
+.compagnon {position:relative;}
+.compagnon .inner {
+	border:2px solid ##GET{foncee};
+	border-radius:10px;
+	color:#333;
+	background:#fcfcfc url([(#CHEMIN_IMAGE{compagnon_gris-64.png}|image_sepia{#GET{foncee}|couleur_eclaircir}|extraire_attribut{src})]) -10px -10px no-repeat;
+	
+}
+.compagnon .inner .hd {padding-left:60px;}
+.compagnon .inner .bd {padding-left:60px;}
+.compagnon b{}
+.compagnon .act {
+	background-color: transparent;
+	border-top: none;
+}
+.compagnon .ft {
+	padding: 0;
+}
+.compagnon button.submit {
+	font-size:100%;
+	border:2px solid ##GET{foncee};
+	border-width:2px 0 0 2px;
+	border-radius:9px 0 9px 0;
+	box-shadow:0 0 2px ##GET{foncee};
+	background: [#(#GET{foncee}|couleur_eclaircir|couleur_eclaircir)];
+	padding:3px 4px 4px 3px;
+	cursor:pointer;
+	margin:0;
+	color: #444;
+}
+.compagnon button.submit:hover {
+	box-shadow:none;
+	background:#fcfcfc;
+}
+.compagnon .target {
+	position:absolute; bottom:5px; left:5px;
+	display:block; width:32px; height:32px;
+	background:url([(#CHEMIN_IMAGE{target-32.png}|image_sepia{#GET{foncee}|couleur_eclaircir}|extraire_attribut{src})]);
+	cursor:crosshair;
+}
+#navigation .compagnon .inner .hd {min-height:2.5em;}
+#navigation .compagnon .inner .bd {padding-left:10px;}

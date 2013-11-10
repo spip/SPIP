@@ -1,0 +1,59 @@
+<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class='titrem'><img src="#CHEMIN_IMAGE{rss-24.png}" class="cadre-icone" /><:sites:syndic_options:>#AIDER{artsyn}</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{name,moderation}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})] long_label[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:sites:syndic_choix_moderation:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:sites:info_bloquer:> (<:sites:bouton_radio_modere_priori:>)</label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:info_publier:> (<:sites:bouton_radio_modere_posteriori:>)</label>
+				</div>
+			</li>
+			#SET{name,choix_oublier}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})] long_label[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:sites:syndic_choix_oublier:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{name,miroir}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" id="#GET{name}_oui" value="oui"
+					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:sites:syndic_option_miroir:></label>
+				</div>
+				#SET{name,oubli}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" id="#GET{name}_oui" value="oui"
+					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:sites:syndic_option_oubli{mois=2}:></label>
+				</div>
+			</li>
+			#SET{name,resume}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})] long_label[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:sites:syndic_choix_resume:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:sites:syndic_option_resume_oui:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:sites:syndic_option_resume_non:></label>
+				</div>
+			</li>
+		</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,207 @@
+#CACHE{0}
+<?php
+
+include_spip('inc/svp_outiller');
+include_spip('plugins/preparer_sql_plugin');
+
+echo '<h2>TESTS FONCTION normaliser_auteur_licence()</h2>';
+// ----------------------------------------------------------------
+echo '<h3>Balise auteur</h3>';
+$b = 'auteur';
+
+$t = 'Art libre, free art';
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+$t = '[Art&#233;go->http://www.artego.fr], [C&#233;dric Morin->www.yterium.net]';
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+$t = 'Jim';
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+$t = '[Jim->http://www.tests.net]';
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+$t = '[Jim / ateliers pouet->http://www.tests.net]';
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+$t = '[Jim->Jim@toto.com]';
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+$t = 'M&#233;dard, Jim, [Edouard Lafargue->mailto:edouard@lafargue.name]';
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+$t = 'M&#233;dard, Jim GPL';
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+$t = 'M&#233;dard, Jim GPL';
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+$t = 'M&#233;dard, Jim - GPL - (c) 2001';
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+$t = "M&#233;dard, Jim - GPL (c) 2001-2010, distribu&#233; MIT - Lucien [Roger->http://www.tests.net]";
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+$t = "Camille Lafitte [Webelys->http://www.webelys.com], Cyril MARION [Ateliers CYM->http://www.cym.fr]";
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+
+// ----------------------------------------------------------------
+echo '<h3>Balise licence</h3>';
+$b = 'licence';
+
+$t = '&#169; 2007 - GNU/GPL';
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+
+
+echo '<h2>TESTS FONCTION compiler_branches_spip()</h2>';
+
+echo '<h3>Utilises, resultats incorrects, ecritures non valides -> a supprimer</h3>';
+echo '
+<table>
+	<thead>
+		<tr>
+			<th>Intervalle</th>
+			<th>Branches SPIP</th>
+		</tr>
+	</thead>
+	<tbody>';
+echo '<tr><td>[2.0.0;2.3.0-dev)</td><td>' . compiler_branches_spip('[2.0.0;2.3.0-dev)') . '</td></tr>';
+echo '<tr><td>[2.0.0;3.1.0)</td><td>' . compiler_branches_spip('[2.0.0;3.1.0)') . '</td></tr>';
+echo '<tr><td>[2.0.0;3.1.0[</td><td>' . compiler_branches_spip('[2.0.0;3.1.0[') . '</td></tr>';
+echo '<tr><td>[2.0.3;2.2.0-dev]</td><td>' . compiler_branches_spip('[2.0.3;2.2.0-dev]') . '</td></tr>';
+echo '<tr><td>[2.0.3;3.1.0)</td><td>' . compiler_branches_spip('[2.0.3;3.1.0)') . '</td></tr>';
+echo '<tr><td>[2.1;3.1.0)</td><td>' . compiler_branches_spip('[2.1;3.1.0)') . '</td></tr>';
+echo '<tr><td>[2.1.0;2.2)</td><td>' . compiler_branches_spip('[2.1.0;2.2)') . '</td></tr>';
+echo '<tr><td>[2.1.0;2.3.0-dev)</td><td>' . compiler_branches_spip('[2.1.0;2.3.0-dev)') . '</td></tr>';
+echo '<tr><td>[2.0.9;3.1.0)</td><td>' . compiler_branches_spip('[2.0.9;3.1.0)') . '</td></tr>';
+echo '<tr><td>[2.2.0-dev;]</td><td>' . compiler_branches_spip('[2.2.0-dev;]') . '</td></tr>';
+echo '<tr><td>[1.9207;]</td><td>' . compiler_branches_spip('[1.9207;]') . '</td></tr>';
+echo '<tr><td>[;1.925)</td><td>' . compiler_branches_spip('[;1.925)') . '</td></tr>';
+echo '
+	</tbody>
+</table>';
+
+echo '<h3>Utilises, resultats corrects mais ecritures non valides -> a supprimer</h3>';
+echo '
+<table>
+	<thead>
+		<tr>
+			<th>Intervalle</th>
+			<th>Branches SPIP</th>
+		</tr>
+	</thead>
+	<tbody>';
+echo '<tr><td>[1.9.2x;)</td><td>' . compiler_branches_spip('[1.9.2x;)') . '</td></tr>';
+echo '<tr><td>[1.9.3;]</td><td>' . compiler_branches_spip('[1.9.3;]') . '</td></tr>';
+echo '<tr><td>[2.1 dev;]</td><td>' . compiler_branches_spip('[2.1 dev;]') . '</td></tr>';
+echo '<tr><td>[2.1.0 dev;)</td><td>' . compiler_branches_spip('[2.1.0 dev;)') . '</td></tr>';
+echo '<tr><td>[1.9.0;2.0.99]</td><td>' . compiler_branches_spip('[1.9.0;2.0.99]') . '</td></tr>';
+echo '<tr><td>[1.9.2;1.9.3]</td><td>' . compiler_branches_spip('[1.9.2;1.9.3]') . '</td></tr>';
+echo '
+	</tbody>
+</table>';
+
+echo '<h3>Non utilises et valides</h3>';
+echo '
+<table>
+	<thead>
+		<tr>
+			<th>Intervalle</th>
+			<th>Branches SPIP</th>
+		</tr>
+	</thead>
+	<tbody>';
+echo '<tr><td>(1.9.0;1.9.2]</td><td>' . compiler_branches_spip('(1.9.0;1.9.2]') . '</td></tr>';
+echo '<tr><td>(1.9.0;2.1.9]</td><td>' . compiler_branches_spip('(1.9.0;2.1.9]') . '</td></tr>';
+echo '<tr><td>(1.9.0;2.1.9)</td><td>' . compiler_branches_spip('(1.9.0;2.1.9)') . '</td></tr>';
+echo '<tr><td>(1.9.0;2.1)</td><td>' . compiler_branches_spip('(1.9.0;2.1)') . '</td></tr>';
+echo '<tr><td>(1.9.0;)</td><td>' . compiler_branches_spip('(1.9.0;)') . '</td></tr>';
+echo '
+	</tbody>
+</table>';
+
+echo '<h3>Utilises et valides</h3>';
+echo '
+<table>
+	<thead>
+		<tr>
+			<th>Intervalle</th>
+			<th>Branches SPIP</th>
+		</tr>
+	</thead>
+	<tbody>';
+echo '<tr><td>[;]</td><td>' . compiler_branches_spip('[;]') . '</td></tr>';
+echo '<tr><td>[1.9.0;1.9.1)</td><td>' . compiler_branches_spip('[1.9.0;1.9.1)') . '</td></tr>';
+echo '<tr><td>[1.9.0;[</td><td>' . compiler_branches_spip('[1.9.0;[') . '</td></tr>';
+echo '<tr><td>[1.9.2;3.0.0-dev[</td><td>' . compiler_branches_spip('[1.9.2;3.0.0-dev[') . '</td></tr>';
+echo '<tr><td>[1.9.0;1.9.2]</td><td>' . compiler_branches_spip('[1.9.0;1.9.2]') . '</td></tr>';
+echo '<tr><td>[1.9.0;2.0.0)</td><td>' . compiler_branches_spip('[1.9.0;2.0.0)') . '</td></tr>';
+echo '<tr><td>[1.9.0;2.0.0]</td><td>' . compiler_branches_spip('[1.9.0;2.0.0]') . '</td></tr>';
+echo '<tr><td>[1.9.0;3.0.0]</td><td>' . compiler_branches_spip('[1.9.0;3.0.0]') . '</td></tr>';
+echo '<tr><td>[1.9.0;]</td><td>' . compiler_branches_spip('[1.9.0;]') . '</td></tr>';
+echo '<tr><td>[1.9.1;1.9.2]</td><td>' . compiler_branches_spip('[1.9.1;1.9.2]') . '</td></tr>';
+echo '<tr><td>[1.9.1;3.0.0]</td><td>' . compiler_branches_spip('[1.9.1;3.0.0]') . '</td></tr>';
+echo '<tr><td>[1.9.1;]</td><td>' . compiler_branches_spip('[1.9.1;]') . '</td></tr>';
+echo '<tr><td>[1.9.2;1.9.2]</td><td>' . compiler_branches_spip('[1.9.2;1.9.2]') . '</td></tr>';
+echo '<tr><td>[1.9.2;2.0.0)</td><td>' . compiler_branches_spip('[1.9.2;2.0.0)') . '</td></tr>';
+echo '<tr><td>[1.9.2;3.0.0-dev[</td><td>' . compiler_branches_spip('[1.9.2;3.0.0-dev[') . '</td></tr>';
+echo '<tr><td>[1.9.2;]</td><td>' . compiler_branches_spip('[1.9.2;]') . '</td></tr>';
+echo '<tr><td>[2.0.0;3.0.0]</td><td>' . compiler_branches_spip('[2.0.0;3.0.0]') . '</td></tr>';
+echo '<tr><td>[2.0.0;[</td><td>' . compiler_branches_spip('[2.0.0;[') . '</td></tr>';
+echo '<tr><td>[2.0.0;]</td><td>' . compiler_branches_spip('[2.0.0;]') . '</td></tr>';
+echo '<tr><td>[2.0.10;2.1)</td><td>' . compiler_branches_spip('[2.0.10;2.1)') . '</td></tr>';
+echo '<tr><td>[2.0.10;3.0.*]</td><td>' . compiler_branches_spip('[2.0.10;3.0.*]') . '</td></tr>';
+echo '<tr><td>[2.0.10;3.0.0-dev)</td><td>' . compiler_branches_spip('[2.0.10;3.0.0-dev)') . '</td></tr>';
+echo '<tr><td>[2.0.10;[</td><td>' . compiler_branches_spip('[2.0.10;[') . '</td></tr>';
+echo '<tr><td>[2.0.10;]</td><td>' . compiler_branches_spip('[2.0.10;]') . '</td></tr>';
+echo '<tr><td>[2.0.12;]</td><td>' . compiler_branches_spip('[2.0.12;]') . '</td></tr>';
+echo '<tr><td>[2.0.14;]</td><td>' . compiler_branches_spip('[2.0.14;]') . '</td></tr>';
+echo '<tr><td>[2.0.2;]</td><td>' . compiler_branches_spip('[2.0.2;]') . '</td></tr>';
+echo '<tr><td>[2.0.3;[</td><td>' . compiler_branches_spip('[2.0.3;[') . '</td></tr>';
+echo '<tr><td>[2.0.3;]</td><td>' . compiler_branches_spip('[2.0.3;]') . '</td></tr>';
+echo '<tr><td>[2.0.6;]</td><td>' . compiler_branches_spip('[2.0.6;]') . '</td></tr>';
+echo '<tr><td>[2.0.8;[</td><td>' . compiler_branches_spip('[2.0.8;[') . '</td></tr>';
+echo '<tr><td>[2.0.8;]</td><td>' . compiler_branches_spip('[2.0.8;]') . '</td></tr>';
+echo '<tr><td>[2.0.9;3.0.0]</td><td>' . compiler_branches_spip('[2.0.9;3.0.0]') . '</td></tr>';
+echo '<tr><td>[2.0.9;]</td><td>' . compiler_branches_spip('[2.0.9;]') . '</td></tr>';
+echo '<tr><td>[2.0;)</td><td>' . compiler_branches_spip('[2.0;)') . '</td></tr>';
+echo '<tr><td>[2.0;3.0.0]</td><td>' . compiler_branches_spip('[2.0;3.0.0]') . '</td></tr>';
+echo '<tr><td>[2.0;[</td><td>' . compiler_branches_spip('[2.0;[') . '</td></tr>';
+echo '<tr><td>[2.0;]</td><td>' . compiler_branches_spip('[2.0;]') . '</td></tr>';
+echo '<tr><td>[2.1.0-beta;]</td><td>' . compiler_branches_spip('[2.1.0-beta;]') . '</td></tr>';
+echo '<tr><td>[2.1.0-dev;)</td><td>' . compiler_branches_spip('[2.1.0-dev;)') . '</td></tr>';
+echo '<tr><td>[2.1.0;3.0.0-dev)</td><td>' . compiler_branches_spip('[2.1.0;3.0.0-dev)') . '</td></tr>';
+echo '<tr><td>[2.1.0;3.0.0]</td><td>' . compiler_branches_spip('[2.1.0;3.0.0]') . '</td></tr>';
+echo '<tr><td>[2.1.0;]</td><td>' . compiler_branches_spip('[2.1.0;]') . '</td></tr>';
+echo '<tr><td>[2.1.10;)</td><td>' . compiler_branches_spip('[2.1.10;)') . '</td></tr>';
+echo '<tr><td>[2.1.10;]</td><td>' . compiler_branches_spip('[2.1.10;]') . '</td></tr>';
+echo '<tr><td>[2.1.1;]</td><td>' . compiler_branches_spip('[2.1.1;]') . '</td></tr>';
+echo '<tr><td>[2.1.2;]</td><td>' . compiler_branches_spip('[2.1.2;]') . '</td></tr>';
+echo '<tr><td>[2.1.6;]</td><td>' . compiler_branches_spip('[2.1.6;]') . '</td></tr>';
+echo '<tr><td>[2.1.8;]</td><td>' . compiler_branches_spip('[2.1.8;]') . '</td></tr>';
+echo '<tr><td>[2.1;)</td><td>' . compiler_branches_spip('[2.1;)') . '</td></tr>';
+echo '<tr><td>[2.1;3.0.0-dev)</td><td>' . compiler_branches_spip('[2.1;3.0.0-dev)') . '</td></tr>';
+echo '<tr><td>[2.1;]</td><td>' . compiler_branches_spip('[2.1;]') . '</td></tr>';
+echo '<tr><td>[3.0.0-dev;]</td><td>' . compiler_branches_spip('[3.0.0-dev;]') . '</td></tr>';
+echo '<tr><td>vide</td><td>' . compiler_branches_spip('') . '</td></tr>';
+echo '
+	</tbody>
+</table>';
+
+
+?>

@@ -1,0 +1,53 @@
+<BOUCLE_document (DOCUMENTS) {id_document} {mode?} {tout}>
+[(#REM)
+
+	Modele pour <img>
+
+	Si on est en mode "image" ou "vignette", ou appele avec embed=oui,
+	on affiche l'image complete ; sinon le logo
+
+	Si un lien est passe #ENV{lien} on ajoute le a href
+	ou on truque le #URL_DOCUMENT
+	
+	Si une code de langue est passe #ENV{langue} ex: <img12|langue=en>
+	on ajoute l'attribut lang la balise img et eventuellement sur la balise a
+	
+	Dans le cas mode "image ou vignette", le contenu de l'attribut 
+	alt et title se construit selon le schema suivant : 
+	- prend la valeur de alt passe en environnement par le biais 
+	d'un parametre sur la balise ex: <img12|alt=xxx>
+	- sinon on prend le titre
+	- sinon si #ENV{lien} est passe on prend #ENV{lien} ou Document si lien vers #URL_DOCUMENT
+	- sinon alt vide
+	
+	Dans le cas mode "document", le contenu de l'attribut 
+	alt et title se construit selon le même schema a ceci pres
+	qu'on ajoute #TYPE_DOCUMENT - #TAILLE
+	sauf si #ENV{lien} est passe	
+
+]
+[(#SET{
+	image,
+		#ENV{mode_force,#MODE}|match{'image|vignette'}
+		|sinon{#ENV{embed}}
+		|oui
+})][
+
+	(#REM) image complete ?
+
+][(#GET{image})
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
+ style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] />[(#ENV{lien}|?{</a>})]</span>
+][
+
+	(#REM) sinon logo document + lien + alt + title etc
+
+][(#GET{image}|non)
+	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
+	[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
+	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
+ style='float:(#ENV{align}|match{left|right});[ width:(#GET{width})px;]']><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[
+ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ title="(#TITRE|texte_backend)"]><img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='[(#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT}|attribut_html)]' /></a></span>
+]</BOUCLE_document>

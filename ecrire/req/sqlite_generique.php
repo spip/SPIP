@@ -176,8 +176,8 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 	// 2
 	// il faudrait une regexp pour eviter de spliter ADD PRIMARY KEY (colA, colB)
 	// tout en cassant "ADD PRIMARY KEY (colA, colB), ADD INDEX (chose)"... en deux
-	// ou revoir l'api de sql_alter en creant un 
-	// sql_alter_table($table,array($actions));
+	// ou revoir l'api de Sql::alter en creant un 
+	// Sql::alter_table($table,array($actions));
 	$todo = explode(',', $suite);
 
 	// on remet les morceaux dechires ensembles... que c'est laid !
@@ -474,7 +474,7 @@ function spip_sqlite_create_base($nom, $serveur = '', $option = true){
 function spip_sqlite_create_view($nom, $query_select, $serveur = '', $requeter = true){
 	if (!$query_select) return false;
 	// vue deja presente
-	if (sql_showtable($nom, false, $serveur)){
+	if (Sql::showtable($nom, false, $serveur)){
 		spip_log("Echec creation d'une vue sql ($nom) car celle-ci existe deja (serveur:$serveur)", 'sqlite.'._LOG_ERREUR);
 		return false;
 	}
@@ -966,7 +966,7 @@ function spip_sqlite_preferer_transaction($serveur = '', $requeter = true) {
 
 /**
  * Demarre une transaction.
- * Pratique pour des sql_updateq() dans un foreach,
+ * Pratique pour des Sql::updateq() dans un foreach,
  * parfois 100* plus rapide s'ils sont nombreux en sqlite ! 
  *
 **/
@@ -1191,7 +1191,7 @@ function spip_sqlite_set_charset($charset, $serveur = '', $requeter = true){
  *     true pour éxecuter la requête
  *     false pour retourner le texte de la requête.
  * @return ressource
- *     Ressource à utiliser avec sql_fetch()
+ *     Ressource à utiliser avec Sql::fetch()
 **/
 function spip_sqlite_showbase($match, $serveur = '', $requeter = true){
 	// type est le type d'entrée : table / index / view
@@ -1306,7 +1306,7 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 		}
 		// c'est une vue, on liste les champs disponibles simplement
 	} else {
-		if ($res = sql_fetsel('*', $nom_table, '', '', '', '1', '', $serveur)){ // limit 1
+		if ($res = Sql::fetsel('*', $nom_table, '', '', '', '1', '', $serveur)){ // limit 1
 			$fields = array();
 			foreach ($res as $c => $v) $fields[$c] = '';
 			$keys = array();
@@ -1437,9 +1437,9 @@ function _sqlite_calculer_cite($v, $type){
 		if(is_null($v)
 			AND stripos($type,"NOT NULL")===false) return 'NULL'; // null php se traduit en NULL SQL
 
-		if (sql_test_date($type) AND preg_match('/^\w+\(/', $v))
+		if (Sql::test_date($type) AND preg_match('/^\w+\(/', $v))
 			return $v;
-		if (sql_test_int($type)){
+		if (Sql::test_int($type)){
 			if (is_numeric($v))
 				return $v;
 			elseif (ctype_xdigit(substr($v, 2)) AND strncmp($v, '0x', 2)==0)
@@ -1638,7 +1638,7 @@ function _sqlite_modifier_table($table, $colonne, $opt = array(), $serveur = '')
 	// on prendra directement le nom de la future table
 	$meme_table = ($table_origine==$table_destination);
 
-	$def_origine = sql_showtable($table_origine, false, $serveur);
+	$def_origine = Sql::showtable($table_origine, false, $serveur);
 	if (!$def_origine OR !isset($def_origine['field'])){
 		spip_log("Alter table impossible sur $table_origine : table non trouvee",'sqlite'._LOG_ERREUR);
 		return false;
@@ -1908,7 +1908,7 @@ function _sqlite_collate_ci($champ){
 
 /**
  * Creer la requete pour la creation d'une table
- * retourne la requete pour utilisation par sql_create() et sql_alter()
+ * retourne la requete pour utilisation par Sql::create() et Sql::alter()
  *
  * http://doc.spip.org/@_sqlite_requete_create
  *

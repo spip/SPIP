@@ -1,0 +1,52 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+
+/* * Comparaison d articles */
+.diff-para-deplace { background: #e8e8ff; }
+.diff-para-ajoute { background: #d0ffc0; color: #000; }
+.diff-para-supprime { background: #ffd0c0; color: #904040; text-decoration: line-through; }
+p>.diff-para-deplace,p>.diff-para-ajoute,p>.diff-para-supprime {display:block;}
+
+.diff-deplace { background: #e8e8ff; }
+.diff-ajoute { background: #d0ffc0; }
+.diff-supprime { background: #ffd0c0; color: #802020; text-decoration: line-through; }
+.diff-para-deplace .diff-ajoute { background: #b8ffb8; border: 1px solid #808080; }
+.diff-para-deplace .diff-supprime { background: #ffb8b8; border: 1px solid #808080; }
+.diff-para-deplace .diff-deplace { background: #b8b8ff; border: 1px solid #808080; }
+
+/* liste de versions */
+.liste-objets.versions tr > .type {width:30px;}
+.liste-objets.versions tr > .diff {width:30px;}
+.liste-objets.versions blockquote {margin-left:0;margin-right:0;padding-left:0;padding-right:0;}
+.liste-objets.versions .caption {background-image:url(#CHEMIN_IMAGE{revision-24.png});padding-#GET{left}:30px;}
+
+.revision #wysiwyg .contenu_id_rubrique {display:none;}
+.revision #wysiwyg .jointure {display:block;margin:1em 0;}
+.revision #wysiwyg .jointure .label {display:block;font-weight:bold;}
+.revision #wysiwyg .label{display:block;}
+
+.formulaire_reviser .editer_id_version .choix {margin: 0 -5px;}
+.formulaire_reviser table.spip.diff-versions {font-size: 0.85em;width: 100%;max-width: 100%;}
+.formulaire_reviser table,.formulaire_reviser table tr,.formulaire_reviser table td {border-left:0;border-right:0;}
+.formulaire_reviser table .version,.formulaire_reviser table .diff {padding:0;}
+.fiche_objet_diff .hd {border-bottom:1px solid #ddd;}

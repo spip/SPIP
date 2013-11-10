@@ -1,0 +1,96 @@
+#SET{c,#VAL{article}|classement_populaires}
+#SET{duree,#ENV{duree,0}|duree_affiche{jour}}
+
+<div class="pagination">
+	<span class="dl">
+		#SET{args,#ARRAY{id_article,#ID_ARTICLE,duree,#GET{duree}}}
+		<a href="[(#URL_PAGE{transmettre,[(#VAL{statistiques}|param_low_sec{#GET{args}, '', 'transmettre'})]})]" class="noajax"><:statistiques:csv:></a>
+	</span>
+	|
+	[<span class="duree">(#GET{duree}) <:info_jours:></span>] |
+	<a href="[(#SELF|parametre_url{duree,#GET{duree}|duree_zoom{moins}})]"
+		 class="ajax">[(#CHEMIN_IMAGE{zoomout-24.png}|balise_img{<:statistiques:info_zoom:> -})]</a>
+	<a href="[(#SELF|parametre_url{duree,#GET{duree}|duree_zoom{plus}})]"
+		 class="ajax">[(#CHEMIN_IMAGE{zoomin-24.png}|balise_img{<:statistiques:info_zoom:> +})]</a>
+</div>
+#SET{max,0}
+#SET{moy,0}
+#SET{last,0}
+#SET{lastlast,0}
+<B_statsj>
+
+	<table class='spip info visites' style="width:145px;position:absolute;#LANG_RIGHT:0px;margin-top:10px;">
+		<caption><:statistiques:resume:></caption>
+		<tbody>
+			<tr class="odd on">
+				<th><:info_maximum|trim{':'}|trim|ucfirst:></th>
+				<td class='num'>#GET{max}</td>
+			</tr>
+			<tr class="odd on">
+				<th><:info_moyenne|trim{':'}|trim|ucfirst:></th>
+				<td class='num'>[(#GET{moy}|round)]</td>
+			</tr>
+			<tr class="even">
+				<th><a href="#URL_ECRIRE{stats_referers,jour=jour}"
+								title="<:info_moyenne|trim{':'}|trim|attribut_html:>"><:info_aujourdhui|trim{':'}|trim|ucfirst:></a></th>
+				<td class='num'>#GET{last}</td>
+			</tr>
+			<tr class="even">
+				<th><a href="#URL_ECRIRE{stats_referers,jour=veille}"
+								title="<:info_moyenne|trim{':'}|trim|attribut_html:>"><:info_hier|trim{':'}|trim|ucfirst:></a></th>
+				<td class='num'>#GET{lastlast}</td>
+			</tr>
+			<BOUCLE_art(ARTICLES){id_article}{statut?}>
+				<tr class="odd">
+					<th><:statistiques:info_popularite_5|trim{':'}|trim|ucfirst:></th>
+					<td class='num'>[(#CHAMP_SQL{popularite}|round)]</td>
+				</tr>
+				<tr class="odd">
+					<th><:info_total|trim{':'}|trim|ucfirst:></th>
+					<td class='num'>[(#VISITES|round)]</td>
+				</tr>
+				<tr class="odd">
+					<th></th>
+					<td class='num'>[<strong>(#ID_ARTICLE|array_search{#GET{c}}|plus{1})</strong>[(#GET{c}|count|singulier_ou_pluriel{info_classement_1,info_classement_2,liste})]]</td>
+				</tr>
+			</BOUCLE_art>
+				<tr class="odd">
+					<th><:info_total|trim{':'}|trim|ucfirst:></th>
+					<td class='num'>[(#REM|stats_total)]</td>
+				</tr>
+				<tr class="odd">
+					<th><:statistiques:info_popularite_2|trim{':'}|trim|ucfirst:></th>
+					<td class='num'>[(#CONFIG{popularite_total}|round)]</td>
+				</tr>
+			<//B_art>
+		</tbody>
+	</table>
+	
+	<table class='visites' id='visites_quotidiennes'>
+		<caption><:statistiques:visites_journalieres:></caption>
+	  <thead>
+			<tr class='row_first'>
+				<th><:date|trim{':'}|trim:></th>
+				<th class='valeur'><:statistiques:info_visites|trim{':'}|trim:></th>
+				<th class='moyenne'><:info_moyenne|trim{':'}|trim:></th>
+				<th class='prevision'><:statistiques:info_previsions|trim{':'}|trim:></th>
+			</tr>
+		</thead>
+	  <tbody>
+		<BOUCLE_statsj(DATA){source stats_visites,jour,#GET{duree},#ENV{id_article}}>
+			<tr class="c_[(#CLE|affdate{l}|substr{0,3})][(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)c_today]">
+				<th title="[(#CLE|affdate{'Y/m/d'})]">[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{<:info_aujourdhui:>,[(#CLE|nom_jour) ][(#CLE|affdate_jourcourt)]})]</th>
+				<td class="val">#VALEUR{visites}</td>
+				<td class="mean">#VALEUR{moyenne}</td>
+				<td class="prev">#VALEUR{prevision}</td>
+			</tr>
+			#SET{max,#GET{max}|max{#VALEUR{visites}}}
+			#SET{moy,#VALEUR{moyenne}}
+			#SET{lastlast,#GET{last}}
+			#SET{last,#VALEUR{visites}}
+		</BOUCLE_statsj>
+		</tbody>
+	</table>
+
+
+</B_statsj>

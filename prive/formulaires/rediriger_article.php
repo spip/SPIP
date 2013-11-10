@@ -18,7 +18,7 @@ function formulaires_rediriger_article_charger_dist($id_article,$retour=''){
 	if (!autoriser('modifier', 'article', $id_article))
 		return false;
 
-	$row = sql_fetsel('id_article,virtuel','spip_articles','id_article='.intval($id_article));
+	$row = Sql::fetsel('id_article,virtuel','spip_articles','id_article='.intval($id_article));
 	if (!$row['id_article'])
 		return false;
 	include_spip('inc/lien');

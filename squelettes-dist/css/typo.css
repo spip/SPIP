@@ -1,0 +1,150 @@
+/* --------------------------------------------------------------
+
+   typo.css
+   Base typographique
+   Cf.: http://www.spip-contrib.net/3820
+
+-------------------------------------------------------------- */
+
+html { font-size: 100.01%; } /* pour IE < 6 */
+/* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ et http://forum.alsacreations.com/topic-4-54377-1.html */
+body { background: #FFFFFF; font: 1em/1.5em Georgia, Cambria, Times New Roman, Times, serif; color: #222222; }
+
+/* Titraille / Intertitres */
+h1,.h1,
+h2,.h2,
+h3,.h3,
+h4,.h4,
+h5,.h5,
+h6,.h6 { display: block; margin: 0; padding: 0; font-size: 100%; font-weight: normal; }
+hr { height: 1px; margin: 1.5em 0; border: 0; background: #222222; color: #222222; }
+
+h1,.h1 { font-size: 2em; line-height: 1.5; margin-bottom: .75em; }
+h2,.h2 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+h3,.h3 { font-size: 1.25em; line-height: 1.2; margin-bottom: 1.2em; }
+h4,.h4 { font-size: 1.1em; line-height: 1.364; margin-bottom: 1.364em; }
+h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6,.h6 { font-size: 1em; font-weight: bold; }
+
+/* Enrichissements typographiques */
+strong, b { font-weight: bold; }
+em, i { font-style: italic; }
+small, .small { font-size: 90%; }
+big, .big { font-size: 130%; }
+abbr[title], acronym[title] { border-bottom: .1em dotted; cursor: help; }
+@media print { abbr[title]:after { content: " (" attr(title) ")"; } }
+dfn { font-weight: bold; font-style: italic; }
+del, .del { background-color: #FFDDDD; border-color: #CC0000; color: #CC0000; text-decoration: line-through; }
+ins, .ins { background-color: #DDFFDD; border-color: #00AA00; color: #00AA00; text-decoration: none; }
+sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
+sup { vertical-align: super; }
+.ie sup { vertical-align: text-top; }
+sub { vertical-align: sub; }
+.ie sub { vertical-align: text-bottom; }
+.caps { font-variant: small-caps; }
+
+/* Listes */
+ul, ol, li, dl, dt, dd {}
+ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0; }
+
+dl dt { font-weight: bold; }
+dl dd {}
+
+/* Tableaux */
+table {}
+caption { background: #EEE; }
+th { font-weight: bold; }
+thead th { background: #DDD; }
+th,td,caption { padding: 0.75em; }
+tbody tr:nth-child(even) th,
+tbody tr:nth-child(even) td,
+tbody tr.even th,
+tbody tr.even td { background: #EEE; }
+tfoot { font-style: italic; }
+
+/* Citations, code et poesie */
+q { font-style: italic; }
+blockquote { padding: 0 50px; }
+cite { font-style: italic; }
+
+address { font-style: italic; }
+
+pre,code,kbd,samp,var,tt { font-family: 'Courier New', Courier, monospace; font-size: 1em; }
+pre { margin: 1.5em 0;
+  /* Cf.: http://perishablepress.com/press/2010/06/01/wrapping-content/ */
+  white-space: pre;           /* CSS 2.0 */
+  white-space: pre-wrap;      /* CSS 2.1 */
+  white-space: pre-line;      /* CSS 3.0 */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap;  /* HP Printers */
+  word-wrap: break-word;      /* IE 5+ */
+}
+kbd { background-color: #222222; color: #FFFFFF; }
+samp { font-weight: bold; }
+var { font-style: italic; }
+
+/* Paragraphes */
+p, .p, dl, dd, blockquote, address, pre, table, fieldset { margin-bottom: 1.5em; }
+
+/* Liens */
+a {}
+a:hover {}
+a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
+@media print {
+  a, a:visited { color: #222222; text-decoration: underline; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } /* Don't show links for images, or javascript/internal links */
+}
+
+.on { font-weight: bold; }
+
+/**
+* Print styles from HTML5 Boilerplate
+* Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+*/
+
+@media print {
+  pre, blockquote { page-break-inside: avoid; }
+  thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
+  tr, img { page-break-inside: avoid; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
+
+/**
+* Base typo sur petits ecrans
+* Cf.: http://www.alsacreations.com/astuce/lire/1177
+*/
+
+@media (max-width: 640px) {
+
+  /* fixer une largeur maximale  de 100 % aux elements potentiellement problematiques */
+  img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, video { max-width: 100% !important; }
+  /* conserver le ratio des images, necessaire car attribut height existant */
+  img { height: auto; }
+  
+  /* gestion des mots longs */
+  textarea, table, td, th, code, pre, samp { word-wrap: break-word; /* cesure forcee */ }
+  code, pre, samp { white-space: pre-line; /* passage a la ligne specifique pour les elements a chasse fixe */ }
+
+}
+
+@media screen and (max-width:640px) and (orientation: landscape) {
+  body { -webkit-text-size-adjust: 70%; }
+}
+
+/*
+
+    ATTENTION
+    L'usage de proprietes -webkit-* sans leurs contreparties
+    (-o-*, -moz-*, etc.) est fortement deconseille !
+    cf. http://www.webstandards.org/2012/02/09/call-for-action-on-vendor-prefixes/
+
+    Prenez le temps de corriger s'il vous plait : les proprietes CSS prefixees ne sont en theorie
+    destinees qu'a des fins de test.
+
+*/
+
+/* end */

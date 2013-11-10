@@ -1,0 +1,21 @@
+<paquet
+	prefix="tw"
+	categorie="edition"
+	version="0.8.17"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="textwheel-32.png"
+>	
+
+	<nom>TextWheel pour SPIP</nom>
+	<!-- Gestion de la typographie SPIP avec TextWheel -->
+
+	<auteur>Collectif SPIP</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/lgpl.html">GNU/LGPL</licence>
+
+	<pipeline nom="trig_purger" inclure="inc/textwheel.php" />
+	<pipeline nom="pre_liens" action="autoliens" inclure="inc/autoliens.php" />
+	<utilise nom="yaml" compatibilite="[1.3;[" />
+	<utilise nom="memoization" compatibilite="[0.9;[" />
+</paquet>

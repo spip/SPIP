@@ -47,9 +47,8 @@ define('_JQ_PENDING',0);
  * @return int
  *	id of job
  */
-function queue_add_job($function, $description, $arguments = array(), $file = '', $no_duplicate = false, $time=0, $priority=0){
-	include_spip('base/abstract_sql');
-
+function queue_add_job($function, $description, $arguments = array(), $file = '', $no_duplicate = false, $time=0, $priority=0)
+{
 	// cas pourri de ecrire/action/editer_site avec l'option reload=oui
 	if (defined('_GENIE_SYNDIC_NOW'))
 		$arguments['id_syndic'] = _GENIE_SYNDIC_NOW;
@@ -81,23 +80,23 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 	if (
 			$no_duplicate
 		AND
-			$id_job = sql_getfetsel('id_job','spip_jobs',
+			$id_job = Sql::getfetsel('id_job','spip_jobs',
 				$duplicate_where =
-					$duplicate_where . 'fonction='.sql_quote($function)
+					$duplicate_where . 'fonction='.Sql::quote($function)
 				.(($no_duplicate==='function_only')?'':
-				 ' AND md5args='.sql_quote($md5args).' AND inclure='.sql_quote($file)))
+				 ' AND md5args='.Sql::quote($md5args).' AND inclure='.Sql::quote($file)))
 		)
 		return $id_job;
 
-	$id_job = sql_insertq('spip_jobs',$set_job);
+	$id_job = Sql::insertq('spip_jobs',$set_job);
 	// en cas de concurrence, deux process peuvent arriver jusqu'ici en parallele
 	// avec le meme job unique a inserer. Dans ce cas, celui qui a eu l'id le plus grand
 	// doit s'effacer
 	if (
 			$no_duplicate
 		AND
-			$id_prev = sql_getfetsel('id_job','spip_jobs',"id_job<".intval($id_job)." AND $duplicate_where")){
-		sql_delete('spip_jobs','id_job='.intval($id_job));
+			$id_prev = Sql::getfetsel('id_job','spip_jobs',"id_job<".intval($id_job)." AND $duplicate_where")){
+		Sql::delete('spip_jobs','id_job='.intval($id_job));
 		return $id_prev;
 	}
 
@@ -108,7 +107,7 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 	// ie cas d'un char non acceptables sur certains type de champs
 	// qui coupe la valeur
 	if (defined('_JQ_INSERT_CHECK_ARGS') AND $id_job) {
-		$args = sql_getfetsel('args', 'spip_jobs', 'id_job='.intval($id_job));
+		$args = Sql::getfetsel('args', 'spip_jobs', 'id_job='.intval($id_job));
 		if ($args!==$arguments) {
 			spip_log('arguments job errones / longueur '.strlen($args)." vs ".strlen($arguments).' / valeur : '.var_export($arguments,true),'queue');
 		}
@@ -134,12 +133,12 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
  * 
  * @return void
  */
-function queue_purger(){
-	include_spip('base/abstract_sql');
-	sql_delete('spip_jobs');
-  sql_delete("spip_jobs_liens","id_job NOT IN (".sql_get_select("id_job","spip_jobs").")");
-  include_spip('inc/genie');
-  genie_queue_watch_dist();
+function queue_purger()
+{
+	Sql::delete('spip_jobs');
+	Sql::delete("spip_jobs_liens","id_job NOT IN (".Sql::get_select("id_job","spip_jobs").")");
+	include_spip('inc/genie');
+	genie_queue_watch_dist();
 }
 
 /**
@@ -148,11 +147,11 @@ function queue_purger(){
  *  id de la tache a retirer
  * @return bool
  */
-function queue_remove_job($id_job){
-	include_spip('base/abstract_sql');
-
-	if ($row = sql_fetsel('fonction,inclure,date','spip_jobs','id_job='.intval($id_job))
-	 AND $res = sql_delete('spip_jobs','id_job='.intval($id_job))){
+function queue_remove_job($id_job)
+{
+	if ($row = Sql::fetsel('fonction,inclure,date','spip_jobs','id_job='.intval($id_job))
+	AND $res = Sql::delete('spip_jobs','id_job='.intval($id_job)))
+	{
 		queue_unlink_job($id_job);
 		// est-ce une tache cron qu'il faut relancer ?
 		if ($periode = queue_is_cron_job($row['fonction'],$row['inclure'])){
@@ -175,18 +174,17 @@ function queue_remove_job($id_job){
  *  can be a simple array('objet'=>'article','id_objet'=>23)
  *  or an array of simple array to link multiples objet in one time
  */
-function queue_link_job($id_job,$objets){
-	include_spip('base/abstract_sql');
-
+function queue_link_job($id_job,$objets)
+{
 	if (is_array($objets) AND count($objets)){
 		if (is_array(reset($objets))){
 			foreach($objets as $k=>$o){
 				$objets[$k]['id_job'] = $id_job;
 			}
-			sql_insertq_multi('spip_jobs_liens',$objets);
+			Sql::insertq_multi('spip_jobs_liens',$objets);
 		}
 		else
-			sql_insertq('spip_jobs_liens',array_merge(array('id_job'=>$id_job),$objets));
+			Sql::insertq('spip_jobs_liens',array_merge(array('id_job'=>$id_job),$objets));
 	}
 }
 
@@ -196,10 +194,10 @@ function queue_link_job($id_job,$objets){
  * @param int $id_job
  *	id of job to unlink ibject with
  * @return int/bool
- *	result of sql_delete
+ *	result of Sql::delete
  */
 function queue_unlink_job($id_job){
-	return sql_delete("spip_jobs_liens","id_job=".intval($id_job));
+	return Sql::delete("spip_jobs_liens","id_job=".intval($id_job));
 }
 
 /**
@@ -282,8 +280,6 @@ function queue_schedule($force_jobs = null){
 		return;
 	}
 
-	include_spip('base/abstract_sql');
-
 	if (!defined('_JQ_MAX_JOBS_TIME_TO_EXECUTE')){
 		$max_time = ini_get('max_execution_time')/2;
 		// valeur conservatrice si on a pas reussi a lire le max_execution_time
@@ -305,24 +301,24 @@ function queue_schedule($force_jobs = null){
 	// lorsqu'un job cron n'a pas fini, sa priorite est descendue
 	// pour qu'il ne bloque pas les autres jobs en attente
 	if (is_array($force_jobs) AND count($force_jobs))
-		$cond = "status=".intval(_JQ_SCHEDULED)." AND ".sql_in("id_job", $force_jobs);
+		$cond = "status=".intval(_JQ_SCHEDULED)." AND ".Sql::in("id_job", $force_jobs);
 	else {
 		$now = date('Y-m-d H:i:s',$time);
-		$cond = "status=".intval(_JQ_SCHEDULED)." AND date<=".sql_quote($now);
+		$cond = "status=".intval(_JQ_SCHEDULED)." AND date<=".Sql::quote($now);
 	}
 
 	register_shutdown_function('queue_error_handler'); // recuperer les erreurs auant que possible
-	$res = sql_allfetsel('*','spip_jobs',$cond,'','priorite DESC,date','0,'.(_JQ_MAX_JOBS_EXECUTE+1));
+	$res = Sql::allfetsel('*','spip_jobs',$cond,'','priorite DESC,date','0,'.(_JQ_MAX_JOBS_EXECUTE+1));
 	do {
 		if ($row = array_shift($res)){
 			$nbj++;
-			// il faut un verrou, a base de sql_delete
-			if (sql_delete('spip_jobs',"id_job=".intval($row['id_job'])." AND status=".intval(_JQ_SCHEDULED))){
+			// il faut un verrou, a base de Sql::delete
+			if (Sql::delete('spip_jobs',"id_job=".intval($row['id_job'])." AND status=".intval(_JQ_SCHEDULED))){
 				#spip_log("JQ schedule job ".$nbj." OK",'jq');
 				// on reinsert dans la base aussitot avec un status=_JQ_PENDING
 				$row['status'] = _JQ_PENDING;
 				$row['date'] = date('Y-m-d H:i:s',$time);
-				sql_insertq('spip_jobs', $row);
+				Sql::insertq('spip_jobs', $row);
 
 				// on a la main sur le job :
 				// l'executer
@@ -368,9 +364,9 @@ function queue_close_job(&$row,$time,$result=0){
 			queue_genie_replan_job($row['fonction'],$periode,$time);
 	}
 	// purger ses liens eventuels avec des objets
-	sql_delete("spip_jobs_liens","id_job=".intval($row['id_job']));
+	Sql::delete("spip_jobs_liens","id_job=".intval($row['id_job']));
 	// supprimer le job fini
-	sql_delete('spip_jobs','id_job='.intval($row['id_job']));
+	Sql::delete('spip_jobs','id_job='.intval($row['id_job']));
 }
 
 /**
@@ -424,12 +420,11 @@ function queue_update_next_job_time($next_time=null){
 	if ($deja_la) return;
 	$deja_la = true;
 
-	include_spip('base/abstract_sql');
 	$time = time();
 
 	// traiter les jobs morts au combat (_JQ_PENDING depuis plus de 180s)
 	// pour cause de timeout ou autre erreur fatale
-	$res = sql_allfetsel("*","spip_jobs","status=".intval(_JQ_PENDING)." AND date<".sql_quote(date('Y-m-d H:i:s',$time-180)));
+	$res = Sql::allfetsel("*","spip_jobs","status=".intval(_JQ_PENDING)." AND date<".Sql::quote(date('Y-m-d H:i:s',$time-180)));
 	if (is_array($res)) {
 		foreach ($res as $row)
 			queue_close_job($row,$time);
@@ -437,7 +432,7 @@ function queue_update_next_job_time($next_time=null){
 
 	// chercher la date du prochain job si pas connu
 	if (is_null($next) OR is_null(queue_sleep_time_to_next_job())){
-		$date = sql_getfetsel('date','spip_jobs',"status=".intval(_JQ_SCHEDULED),'','date','0,1');
+		$date = Sql::getfetsel('date','spip_jobs',"status=".intval(_JQ_SCHEDULED),'','date','0,1');
 		$next = strtotime($date);
 	}
 	if (!is_null($next_time)){
@@ -447,7 +442,7 @@ function queue_update_next_job_time($next_time=null){
 
 		if ($next){
 			if (is_null($nb_jobs_scheduled))
-				$nb_jobs_scheduled = sql_countsel('spip_jobs',"status=".intval(_JQ_SCHEDULED)." AND date<".sql_quote(date('Y-m-d H:i:s',$time)));
+				$nb_jobs_scheduled = Sql::countsel('spip_jobs',"status=".intval(_JQ_SCHEDULED)." AND date<".Sql::quote(date('Y-m-d H:i:s',$time)));
 			elseif ($next<=$time)
 				$nb_jobs_scheduled++;
 			// si trop de jobs en attente, on force la purge en fin de hit

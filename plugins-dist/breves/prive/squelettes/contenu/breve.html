@@ -1,0 +1,34 @@
+<BOUCLE_breve(BREVES){id_breve}{statut?}{si #ENV{exec}|=={breve}}>
+[(#BOITE_OUVRIR{[
+				
+	[(#AUTORISER{modifier,breve,#ID_BREVE})
+				
+		[(#ID_BREVE|afficher_qui_edite{breve}|non)
+			[(#URL_ECRIRE{breve_edit,id_breve=#ID_BREVE}|icone_verticale{<:breves:icone_modifier_breve:>,breve,edit,right ajax preload})]
+		]
+		[(#ID_BREVE|afficher_qui_edite{breve}|oui)
+			[(#URL_ECRIRE{breve_edit,id_breve=#ID_BREVE}|icone_verticale{#ID_BREVE|afficher_qui_edite{breve},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{breve-24.png}|balise_img{breve,cadre-icone})]</h1>
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{breve,#ID_BREVE}
+</div>
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/breve,id=#ID_BREVE,id_breve=#ID_BREVE,wysiwyg=1} />
+</div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,breve,id,#ID_BREVE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+<script type="text/javascript">if (window.jQuery)
+jQuery(function(){jQuery('#navigation>div').ajaxReload({args:{exec:'breve'}});})
+</script>
+]
+</BOUCLE_breve>
+[(#ENV**{exec}|=={breve_edit}|?{#INCLURE{fond=prive/squelettes/contenu/breve_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_breve>

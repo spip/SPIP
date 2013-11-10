@@ -19,7 +19,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do='aff')
 {
 	include_spip('inc/texte');
 	if ($type == "rubrique") {
-		$row = sql_fetsel("titre, descriptif", "spip_rubriques", "id_rubrique = $id");
+		$row = Sql::fetsel("titre, descriptif", "spip_rubriques", "id_rubrique = $id");
 		if ($row) {
 			$titre = typo($row["titre"]);
 			$descriptif = propre($row["descriptif"]);

@@ -1,0 +1,7 @@
+<BOUCLE_ext(DOCUMENTS types_documents) {id_document} {tout}>
+[(#VAL**{emb_[(#EXTENSION)]}|trouver_fond{modeles/}|?{[(#INCLURE
+{fond=modeles/emb_[(#EXTENSION)]}{id=#ID_DOCUMENT}{env}{emb=' '}
+)],[(#INCLURE
+{fond=modeles/[(#MIME_TYPE|trouver_modele_mime)]}{id=#ID_DOCUMENT}{env}{emb=' '}
+)]})]
+</BOUCLE_ext>

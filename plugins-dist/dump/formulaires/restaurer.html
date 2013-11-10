@@ -1,0 +1,55 @@
+<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{erreurs}|table_valeur{message_confirm})</p>]
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE
+	  <ul>
+	  	#SET{name,choisi}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    [<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}"><:dump:label_nom_fichier_sauvegarde:></label>
+				(#ENV{choisi})
+				&#91;<a href="#" onclick="jQuery('li.editer_fichier,li.editer_nom_sauvegarde').show('fast');jQuery('li.editer_choisi').hide('fast');return false;"
+				><:bouton_changer:></a>&#93;
+	    </li>]
+	  	#SET{name,fichier}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    <li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{choisi}|oui)style='display:none;']>
+	    	<label for="#GET{name}"><:dump:label_selectionnez_fichier:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				[<div class="choix">
+					(#INCLURE{fond=formulaires/inc-lister-sauvegardes,env,ajax,name=fichier,id=sauvegarde,titre=<:dump:sauvegardes_existantes:>}
+					|sinon{<:dump:info_aucune_sauvegarde_trouvee:>})
+				</div>]
+	    </li>
+	  	#SET{name,nom_sauvegarde}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{choisi}|oui)style='display:none;']>
+	    	<label for="#GET{name}"><:dump:label_nom_fichier_restaurer:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}"
+					onfocus="jQuery('#dump_0').attr('checked','chedked');"/>
+				<input type="radio" name="zzz" value="" id="dump_0" style="display:none;"/>
+	    </li>
+	  	[#SET{name,tout_restaurer}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label><:install_tables_base:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<div class="choix">
+					<input type="checkbox" name="tout_restaurer" id="tout_restaurer" value="oui"[(#ENV{tout_restaurer}|oui)checked="checked"]
+								 onchange="jQuery(this).prop('checked')?jQuery('#liste_tables').hide('fast'):jQuery('#liste_tables').show('fast');" />
+					<label for="tout_restaurer"><:dump:tout_restaurer:></label>
+				</div>
+				<div id="liste_tables"[(#ENV{tout_restaurer}|oui)style="display:none;"]>
+				(#ENV**{erreurs}|table_valeur{tables})
+				</div>
+	    </li>]
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:dump:bouton_restaurer_base:>' /></p>
+	</div></form>
+	]
+</div>

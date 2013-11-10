@@ -264,7 +264,7 @@ function v019_pre193($version_installee, $version_cible)
 		/* deplacement des upload */
 		$auteurs = array();
 		$req = spip_query("SELECT `login` FROM spip_auteurs WHERE `statut` = '0minirezo'");
-		while($row = sql_fetch($req))
+		while($row = Sql::fetch($req))
 			$auteurs[] = $row['login']; 
 		$f_upload = preg_files('upload', -1, 10000, $auteurs);
 		$repertoire = _DIR_TRANSFERT;

@@ -1,0 +1,74 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{site-24.png}" class="cadre-icone" /><:sites:titre_referencement_sites:>#AIDER{reference}</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{name,activer_sites}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				[<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+					onchange="if ($(this).prop('checked')) $('li.editer_activer_sites').siblings('li').show('fast');"
+					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:sites:item_gerer_annuaire_site_web:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+					onchange="if ($(this).prop('checked')) $('li.editer_activer_sites').siblings('li').hide('fast');"
+					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:sites:item_non_gerer_annuaire_site_web:></label>
+				</div>
+			</li>
+			#SET{name,proposer_sites}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{activer_sites}|=={oui}|non)style='display:none;']>
+				<label for="#GET{name}"><:sites:info_question_proposer_site:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<select name="#GET{name}" id="#GET{name}">
+					<option value="0"[(#ENV{#GET{name}}|=={0}|oui)selected="selected"]><:item_choix_administrateurs:></option>
+					<option value="1"[(#ENV{#GET{name}}|=={1}|oui)selected="selected"]><:item_choix_redacteurs:></option>
+					<option value="2"[(#ENV{#GET{name}}|=={2}|oui)selected="selected"]><:item_choix_visiteurs:></option>
+				</select>
+			</li>
+			<li class="fieldset"[(#ENV{activer_sites}|=={oui}|non)style='display:none;']>
+				<fieldset><legend><:sites:titre_syndication:>#AIDER{rubsyn}</legend>
+					<ul>
+						#SET{name,activer_syndic}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<div class="explication"><:sites:texte_syndication:></div>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<div class="choix">
+								<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+								[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:sites:item_utiliser_syndication:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+								[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:sites:item_non_utiliser_syndication:></label>
+							</div>
+						</li>
+						#SET{name,moderation_sites}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<div class="explication"><:sites:texte_liens_sites_syndiques:></div>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<div class="choix">
+								<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+								[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:sites:item_bloquer_liens_syndiques:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+								[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:sites:item_non_bloquer_liens_syndiques:></label>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,87 @@
+<B_erreurs_xml>
+<div class='svp_retour'>
+	[(#BOITE_OUVRIR{<:svp:actions_en_erreur:>, error})]
+	<:svp:erreurs_xml:>
+	<ul>
+<BOUCLE_erreurs_xml(DATA){source tableau,#ENV{erreurs_xml}}>
+	<li>#VALEUR</li>
+</BOUCLE_erreurs_xml>
+	</ul>
+	#BOITE_FERMER
+</div>
+</B_erreurs_xml>
+<div class="formulaire_spip formulaire_admin_plugin" id="formulaire_admin_plugin">
+	<h3 class="titrem">[(#CHEMIN_IMAGE{plugin-24.png}|balise_img{icone plugin-24,cadre-icone})]<:plugins_liste:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<form method="post" action="#ENV{action}">
+		<INCLURE{fond=formulaires/inc-confirmer_actions, env} />
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="liste-plugins">
+			<fieldset>
+				<p class="explication">
+				[(#ENV{verrouille}|=={oui}|oui)
+					#SET{dir_plugins_dist,#EVAL{_DIR_PLUGINS_DIST}|joli_repertoire}
+					<:svp:info_admin_plugin_verrouille{dir_plugins_dist=#GET{dir_plugins_dist}}:>
+				][(#ENV{verrouille}|=={oui}|non)
+					[(#VAL{svp:info_admin_plugin}|concat{[_actif_(#ENV{actif, oui})], [_verrou_(#ENV{verrouille, non})]}|_T)]
+				]
+				</p>
+				<INCLURE{fond=formulaires/inc-admin_plugin,env} />
+			</fieldset>
+		</div>
+		<div class="actions_multiples">
+			[<fieldset class="boutons">(#VAL{'_DIR_PLUGINS_DIST'}|in_array{#ENV{constante,#ARRAY}}|non)
+				<p class="cocher">
+					<a href="#" id="select_tous"><:svp:tout_cocher:></a><span class="sep"> | </span>
+					<a href="#" id="select_aucun"><:svp:tout_decocher:></a><span class="sep"> | </span>
+					<a href="#" id="select_up"><:svp:tout_cocher_up:></a>
+				</p>
+				<select id="action_globale" class="action" name="action_globale">
+					[(#ENV{actif}|=={oui}|non)<option value="on"><:svp:bouton_activer:></option>]
+					[(#ENV{actif}|=={non}|non)<option value="off"><:svp:bouton_desactiver:></option>]
+					<option value="up" id="option_up"><:svp:bouton_up:></option>
+					[(#ENV{actif}|=={non}|non)<option value="stop"><:svp:bouton_desinstaller:></option>]
+				</select>
+				<input type="submit" class="submit" name="appliquer" value="<:svp:bouton_appliquer:>" />
+			</fieldset>]
+			<script type="text/javascript">
+			//<![CDATA[
+				(function($){
+					$("#select_tous").click(function(){
+						jQuery("input.select_plugin").attr("checked",true);
+						return false;
+					});
+					$("#select_aucun").click(function(){
+						$("input.select_plugin").attr("checked",false);
+						return false;
+					});
+					var cocher_plugins_up = function(){
+						if ($(".plugins li.item.up").length != 0) {
+							$("#select_up").click(function(){
+								$(".plugins li.item.up input.select_plugin").attr("checked",true);
+								$("select#action_globale>option#option_up").attr("selected","selected");
+								return false;
+							});
+						} else {
+							$("#select_up").hide();
+							$("#select_up").prev(".sep").hide();
+							$("#option_up").hide();
+						}
+					}
+					// lorsqu'il y a de nombreux plugins et comme la remontee ajax est desactivee
+					// on ne voit pas forcement les erreurs. A ce monent la, on remonte dessus.
+					var remonter_sur_erreurs = function() {
+						if ($('#formulaire_admin_plugin .reponse_formulaire_erreur').length) {
+							$(document).scrollTop($('#formulaire_admin_plugin').offset().top - 20);
+						}
+					}
+					cocher_plugins_up();
+					onAjaxLoad(cocher_plugins_up);
+					onAjaxLoad(remonter_sur_erreurs);
+				})(jQuery);
+			//]]>
+			</script>
+		</div>
+	</form>
+</div>

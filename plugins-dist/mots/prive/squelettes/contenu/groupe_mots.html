@@ -1,0 +1,35 @@
+[(#AUTORISER{voir,groupemots,#ID_GROUPE}|sinon_interdire_acces)]
+<BOUCLE_groupemots(GROUPES_MOTS){id_groupe}{tout}{si #ENV{exec}|=={groupe_mots}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,groupemots,#ID_GROUPE})
+	[(#URL_ECRIRE{groupe_mots_edit,id_groupe=#ID_GROUPE}|icone_verticale{<:mots:icone_modif_groupe_mots:>,groupe_mots-24.png,edit,right ajax preload})]
+	]
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{groupe_mots-24.png}|balise_img{groupe_mots,cadre-icone})]</h1>
+],simple fiche_objet})]
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/groupe_mots,id=#ID_GROUPE,id_groupe=#ID_GROUPE,wysiwyg=1} />
+</div>
+
+#BOITE_FERMER
+
+<BOUCLE_cpt_mot(MOTS){id_groupe} />[(#TOTAL_BOUCLE|>{10}|oui)
+<p class="tri"><:info_afficher_par_nb:> [(#SELF|parametre_url{nb,10}|lien_ou_expose{10,#ENV{nb}|=={10},ajax})]
+	[ | (#SELF|parametre_url{nb,50}|lien_ou_expose{50,#ENV{nb}|=={50},ajax})]
+	[ | (#TOTAL_BOUCLE|>{50}|oui) [(#SELF|parametre_url{nb,200}|lien_ou_expose{200,#ENV{nb}|=={200},ajax})]]
+	[ | (#TOTAL_BOUCLE|>{200}|oui) [(#SELF|parametre_url{nb,1000}|lien_ou_expose{1000,#ENV{nb}|=={1000},ajax})]]
+</p>
+]<//B_cpt_mot>
+<INCLURE{fond=prive/objets/liste/mots-admin,id_groupe,par=titre,ajax,env} />
+[(#AUTORISER{creer,mot,'','',#ARRAY{id_groupe,#ID_GROUPE}})
+	[(#URL_ECRIRE{mot_edit,new=oui&id_groupe=#ID_GROUPE}|parametre_url{redirect,#SELF}
+		|icone_verticale{<:mots:icone_creation_mots_cles:>,mot-24.png,new,right})]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,groupemots,id,#ID_GROUPE},data,'<div class="nettoyeur"></div>'}}
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_groupemots>
+[(#ENV**{exec}|=={groupe_mots_edit}|?{#INCLURE{fond=prive/squelettes/contenu/groupe_mots_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_groupemots>

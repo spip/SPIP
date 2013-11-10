@@ -83,7 +83,7 @@ function chercher_rubrique($titre,$id_objet, $id_parent, $objet, $id_secteur, $r
 	include_spip('inc/autoriser');
 	if (intval($id_objet) && !autoriser('modifier', $objet, $id_objet))
 		return "";
-	if (!sql_countsel('spip_rubriques'))
+	if (!Sql::countsel('spip_rubriques'))
 		return "";
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	$form = $chercher_rubrique($id_parent, $objet, $restreint, ($objet=='rubrique')?$id_objet:0);
@@ -96,7 +96,7 @@ function chercher_rubrique($titre,$id_objet, $id_parent, $objet, $id_secteur, $r
 	if ($objet=='rubrique') {
 		// si c'est une rubrique-secteur contenant des breves, demander la
 		// confirmation du deplacement
-		$contient_breves = sql_countsel('spip_breves', "id_rubrique=".intval($id_objet));
+		$contient_breves = Sql::countsel('spip_breves', "id_rubrique=".intval($id_objet));
 
 		if ($contient_breves > 0) {
 			$scb = ($contient_breves>1? 's':'');
@@ -142,9 +142,9 @@ function chercher_rubrique($titre,$id_objet, $id_parent, $objet, $id_secteur, $r
 function avoir_visiteurs($past=false, $accepter=true) {
 	if ($GLOBALS['meta']["forums_publics"] == 'abo') return true;
 	if ($accepter AND $GLOBALS['meta']["accepter_visiteurs"] <> 'non') return true;
-	if (sql_countsel('spip_articles', "accepter_forum='abo'"))return true;
+	if (Sql::countsel('spip_articles', "accepter_forum='abo'"))return true;
 	if (!$past) return false;
-	return sql_countsel('spip_auteurs',
+	return Sql::countsel('spip_auteurs',
 	                    "statut NOT IN ('0minirezo','1comite', '5poubelle')
 	                    AND (statut<>'nouveau' OR prefs NOT IN ('0minirezo','1comite', '5poubelle'))");
 }
@@ -165,7 +165,7 @@ function statuts_articles_visibles($statut_auteur){
 	static $auth = array();
 	if (!isset($auth[$statut_auteur])){
 		$auth[$statut_auteur] = array();
-		$statuts = array_map('reset',sql_allfetsel('distinct statut','spip_articles'));
+		$statuts = array_map('reset',Sql::allfetsel('distinct statut','spip_articles'));
 		foreach($statuts as $s){
 			if (autoriser('voir','article',0,array('statut'=>$statut_auteur),array('statut'=>$s)))
 				$auth[$statut_auteur][] = $s;
@@ -262,7 +262,7 @@ function auteurs_lister_statuts($quoi='tous',$en_base=true) {
 			$statut = AUTEURS_MIN_REDAC;
 			$statut = explode(',',$statut);
 			if ($en_base) {
-				$check = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut)));
+				$check = array_map('reset',Sql::allfetsel('DISTINCT statut','spip_auteurs',Sql::in('statut',$statut)));
 				$retire = array_diff($statut,$check);
 				$statut = array_diff($statut,$retire);
 			}
@@ -276,16 +276,16 @@ function auteurs_lister_statuts($quoi='tous',$en_base=true) {
 				// prendre aussi les statuts de la table des status qui ne sont pas dans le define
 				$statut = array_diff(array_values($GLOBALS['liste_des_statuts']),$exclus);
 			}
-			$s_complement = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$exclus,'NOT')));
+			$s_complement = array_map('reset',Sql::allfetsel('DISTINCT statut','spip_auteurs',Sql::in('statut',$exclus,'NOT')));
 			return array_unique(array_merge($statut,$s_complement));
 			break;
 		default:
 		case "tous":
 			$statut = array_values($GLOBALS['liste_des_statuts']);
-			$s_complement = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut,'NOT')));
+			$s_complement = array_map('reset',Sql::allfetsel('DISTINCT statut','spip_auteurs',Sql::in('statut',$statut,'NOT')));
 			$statut = array_merge($statut,$s_complement);
 			if ($en_base) {
-				$check = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut)));
+				$check = array_map('reset',Sql::allfetsel('DISTINCT statut','spip_auteurs',Sql::in('statut',$statut)));
 				$retire = array_diff($statut,$check);
 				$statut = array_diff($statut,$retire);
 			}
@@ -313,19 +313,19 @@ function trouver_rubrique_creer_objet($id_rubrique,$objet){
 	if (!$id_rubrique AND defined('_CHOIX_RUBRIQUE_PAR_DEFAUT') AND _CHOIX_RUBRIQUE_PAR_DEFAUT){
 		$in = !count($connect_id_rubrique)
 			? ''
-			: (" AND ".sql_in('id_rubrique', $connect_id_rubrique));
+			: (" AND ".Sql::in('id_rubrique', $connect_id_rubrique));
 
 		// on tente d'abord l'ecriture a la racine dans le cas des rubriques uniquement
 		if ($objet == 'rubrique') {
 			$id_rubrique = 0;
 		} else {
-			$id_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', "id_parent=0$in", '', "id_rubrique DESC", 1);
+			$id_rubrique = Sql::getfetsel('id_rubrique', 'spip_rubriques', "id_parent=0$in", '', "id_rubrique DESC", 1);
 		}
 		
 		if (!autoriser("creer{$objet}dans", 'rubrique', $id_rubrique)){
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
-			$res = sql_select("id_rubrique", "spip_rubriques", "id_parent=0");
-			while (!autoriser("creer{$objet}dans", 'rubrique', $id_rubrique) && $row_rub = sql_fetch($res)){
+			$res = Sql::select("id_rubrique", "spip_rubriques", "id_parent=0");
+			while (!autoriser("creer{$objet}dans", 'rubrique', $id_rubrique) && $row_rub = Sql::fetch($res)) {
 				$id_rubrique = $row_rub['id_rubrique'];
 			}
 		}

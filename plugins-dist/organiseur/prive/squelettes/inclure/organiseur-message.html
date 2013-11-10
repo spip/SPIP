@@ -1,0 +1,6 @@
+<BOUCLE_affmess(MESSAGES){id_message}{statut==.*}>
+	<strong><a href="[(#ID_MESSAGE|generer_url_entite{message})]">[(#TITRE|sinon{#TEXTE}|couper{80})]</a></strong>
+	[(#RV|=={oui}|oui)
+	<div class="rv[(#DATE_HEURE|affdate{Ymd}|=={#ENV{date}|affdate{Ymd}}|oui) on]">[(#DATE_HEURE|affdate_debut_fin{#DATE_FIN,oui,abbr})]</div>
+	]
+</BOUCLE_affmess>

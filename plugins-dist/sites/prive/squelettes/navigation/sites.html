@@ -1,0 +1,9 @@
+#SET{open,#BOITE_OUVRIR{'',raccourcis}}
+[(#AUTORISER{importer,sites})
+	[(#GET{open}|unique)]
+[(#URL_ECRIRE{sites_import}|icone_horizontale{<:sites:titre_importer_bookmarks:>,site-24.png})]
+][(#AUTORISER{exporter,sites})
+	[(#GET{open}|unique)]
+[(#URL_ECRIRE{sites_export}|icone_horizontale{<:sites:titre_exporter_bookmarks:>,site-24.png})]
+]
+[(#GET{open}|unique|?{'',#BOITE_FERMER})]

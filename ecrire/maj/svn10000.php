@@ -36,7 +36,7 @@ function maj_11268() {
 	global $tables_auxiliaires;
 	include_spip('base/auxiliaires');
 	$v = $tables_auxiliaires[$k='spip_resultats'];
-	sql_create($k, $v['field'], $v['key'], false, false);
+	Sql::create($k, $v['field'], $v['key'], false, false);
 }
 $GLOBALS['maj'][11268] = array(array('maj_11268'));
 
@@ -49,13 +49,13 @@ $GLOBALS['maj'][11276] = array(array('maj_11276'));
 
 // reparer les referers d'article, qui sont vides depuis [10572]
 function maj_11388 () {
-	$s = sql_select('referer_md5', 'spip_referers_articles', "referer='' OR referer IS NULL");
-	while ($t = sql_fetch($s)) {
-		$k = sql_fetsel('referer', 'spip_referers', 'referer_md5='.sql_quote($t['referer_md5']));
+	$s = Sql::select('referer_md5', 'spip_referers_articles', "referer='' OR referer IS NULL");
+	while ($t = Sql::fetch($s)) {
+		$k = Sql::fetsel('referer', 'spip_referers', 'referer_md5='.Sql::quote($t['referer_md5']));
 		if ($k['referer']) {
 			spip_query('UPDATE spip_referers_articles
-			SET referer='.sql_quote($k['referer']).'
-			WHERE referer_md5='.sql_quote($t['referer_md5'])
+			SET referer='.Sql::quote($k['referer']).'
+			WHERE referer_md5='.Sql::quote($t['referer_md5'])
 			." AND (referer='' OR referer IS NULL)"
 			);
 		}
@@ -69,14 +69,14 @@ function maj_11431 () {
 	// spip_query("UPDATE spip_mots AS a LEFT JOIN spip_groupes_mots AS b ON (a.id_groupe = b.id_groupe) SET a.type=b.titre");
 
 	// selection des mots cles dont le type est different du groupe
-	$res = sql_select(
+	$res = Sql::select(
 		array("a.id_mot AS id_mot", "b.titre AS type"),
 		array("spip_mots AS a LEFT JOIN spip_groupes_mots AS b ON (a.id_groupe = b.id_groupe)"),
 		array("a.type != b.titre"));
 	// mise a jour de ces mots la
 	if ($res){
-		while ($r = sql_fetch($res)){
-			sql_updateq('spip_mots', array('type'=>$r['type']), 'id_mot='.sql_quote($r['id_mot']));
+		while ($r = Sql::fetch($res)) {
+			Sql::updateq('spip_mots', array('type'=>$r['type']), 'id_mot='.Sql::quote($r['id_mot']));
 		}
 	}
 }
@@ -86,21 +86,21 @@ $GLOBALS['maj'][11431] = array(array('maj_11431'));
 // qui est parfois encore present
 function maj_11778 () {
 	// si presence id_type
-	$s = sql_showtable('spip_types_documents');
+	$s = Sql::showtable('spip_types_documents');
 	if (isset($s['field']['id_type'])) {
-		sql_alter('TABLE spip_types_documents CHANGE id_type id_type BIGINT(21) NOT NULL');
-		sql_alter('TABLE spip_types_documents DROP id_type');
-		sql_alter('TABLE spip_types_documents ADD PRIMARY KEY (extension)');
+		Sql::alter('TABLE spip_types_documents CHANGE id_type id_type BIGINT(21) NOT NULL');
+		Sql::alter('TABLE spip_types_documents DROP id_type');
+		Sql::alter('TABLE spip_types_documents ADD PRIMARY KEY (extension)');
 	}
 }
 $GLOBALS['maj'][11778] = array(array('maj_11778'));
 
 // Optimisation des forums
 function maj_11790 () {
-#	sql_alter('TABLE spip_forum DROP INDEX id_message id_message');
-	sql_alter('TABLE spip_forum ADD INDEX id_parent (id_parent)');
-	sql_alter('TABLE spip_forum ADD INDEX id_auteur (id_auteur)');
-	sql_alter('TABLE spip_forum ADD INDEX id_thread (id_thread)');
+#	Sql::alter('TABLE spip_forum DROP INDEX id_message id_message');
+	Sql::alter('TABLE spip_forum ADD INDEX id_parent (id_parent)');
+	Sql::alter('TABLE spip_forum ADD INDEX id_auteur (id_auteur)');
+	Sql::alter('TABLE spip_forum ADD INDEX id_thread (id_thread)');
 }
 
 $GLOBALS['maj'][11790] = array(array('maj_11790'));
@@ -110,13 +110,13 @@ $GLOBALS['maj'][11794] = array(); // ajout de spip_documents_forum
 
 
 $GLOBALS['maj'][11961] = array(
-array('sql_alter',"TABLE spip_groupes_mots CHANGE `tables` tables_liees text DEFAULT '' NOT NULL AFTER obligatoire"), // si tables a ete cree on le renomme
-array('sql_alter',"TABLE spip_groupes_mots ADD tables_liees text DEFAULT '' NOT NULL AFTER obligatoire"), // sinon on l'ajoute
-array('sql_update','spip_groupes_mots',array('tables_liees'=>"''"),"articles REGEXP '.*'"), // si le champ articles est encore la, on reinit la conversion
-array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'articles,')"),"articles='oui'"), // sinon ces 4 requetes ne feront rien
-array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'breves,')"),"breves='oui'"),
-array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'rubriques,')"),"rubriques='oui'"),
-array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'syndic,')"),"syndic='oui'"),
+array('Sql::alter',"TABLE spip_groupes_mots CHANGE `tables` tables_liees text DEFAULT '' NOT NULL AFTER obligatoire"), // si tables a ete cree on le renomme
+array('Sql::alter',"TABLE spip_groupes_mots ADD tables_liees text DEFAULT '' NOT NULL AFTER obligatoire"), // sinon on l'ajoute
+array('Sql::update','spip_groupes_mots',array('tables_liees'=>"''"),"articles REGEXP '.*'"), // si le champ articles est encore la, on reinit la conversion
+array('Sql::update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'articles,')"),"articles='oui'"), // sinon ces 4 requetes ne feront rien
+array('Sql::update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'breves,')"),"breves='oui'"),
+array('Sql::update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'rubriques,')"),"rubriques='oui'"),
+array('Sql::update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'syndic,')"),"syndic='oui'"),
 );
 
 
@@ -128,14 +128,14 @@ function maj_12008 () {
 	global $tables_auxiliaires;
 	include_spip('base/auxiliaires');
 	$v = $tables_auxiliaires[$k='spip_documents_liens'];
-	sql_create($k, $v['field'], $v['key'], false, false);
+	Sql::create($k, $v['field'], $v['key'], false, false);
 
 	// Recopier les donnees
 	foreach (array('article', 'breve', 'rubrique', 'auteur', 'forum') as $l) {
-		if ($s = sql_select('*', 'spip_documents_'.$l.'s')
-		OR $s = sql_select('*', 'spip_documents_'.$l)) {
+		if ($s = Sql::select('*', 'spip_documents_'.$l.'s')
+		OR $s = Sql::select('*', 'spip_documents_'.$l)) {
 			$tampon = array();
-			while ($t = sql_fetch($s)) {
+			while ($t = Sql::fetch($s)) {
 				// transformer id_xx=N en (id_objet=N, objet=xx)
 				$t['id_objet'] = $t["id_$l"];
 				$t['objet'] = $l;
@@ -143,52 +143,52 @@ function maj_12008 () {
 				unset($t['maj']);
 				$tampon[] = $t;
 				if (count($tampon)>10000) {
-					sql_insertq_multi('spip_documents_liens',$tampon);
+					Sql::insertq_multi('spip_documents_liens',$tampon);
 					$tampon = array();
 				}
 			}
 			if (count($tampon)) {
-				sql_insertq_multi('spip_documents_liens', $tampon);
+				Sql::insertq_multi('spip_documents_liens', $tampon);
 			}
 		}
 	}
 }
 
 $GLOBALS['maj'][12008] = array(
-//array('sql_drop_table',"spip_documents_liens"), // tant pis pour ceux qui ont joue a 11974
-array('sql_alter',"TABLE spip_documents_liens DROP PRIMARY KEY"),
-array('sql_alter',"TABLE spip_documents_liens ADD id_objet bigint(21) DEFAULT '0' NOT NULL AFTER id_document"),
-array('sql_alter',"TABLE spip_documents_liens ADD objet VARCHAR (25) DEFAULT '' NOT NULL AFTER id_objet"),
-array('sql_update','spip_documents_liens',array('id_objet'=>"id_article",'objet'=>"'article'"),"id_article IS NOT NULL AND id_article>0"),
-array('sql_update','spip_documents_liens',array('id_objet'=>"id_rubrique",'objet'=>"'rubrique'"),"id_rubrique IS NOT NULL AND id_rubrique>0"),
-array('sql_update','spip_documents_liens',array('id_objet'=>"id_breve",'objet'=>"'breve'"),"id_breve IS NOT NULL AND id_breve>0"),
-array('sql_update','spip_documents_liens',array('id_objet'=>"id_auteur",'objet'=>"'auteur'"),"id_auteur IS NOT NULL AND id_auteur>0"),
-array('sql_update','spip_documents_liens',array('id_objet'=>"id_forum",'objet'=>"'forum'"),"id_forum IS NOT NULL AND id_forum>0"),
-array('sql_alter',"TABLE spip_documents_liens ADD PRIMARY KEY  (id_document,id_objet,objet)"),
-array('sql_alter',"TABLE spip_documents_liens DROP id_article"),
-array('sql_alter',"TABLE spip_documents_liens DROP id_rubrique"),
-array('sql_alter',"TABLE spip_documents_liens DROP id_breve"),
-array('sql_alter',"TABLE spip_documents_liens DROP id_auteur"),
-array('sql_alter',"TABLE spip_documents_liens DROP id_forum"),
+//array('Sql::drop_table',"spip_documents_liens"), // tant pis pour ceux qui ont joue a 11974
+array('Sql::alter',"TABLE spip_documents_liens DROP PRIMARY KEY"),
+array('Sql::alter',"TABLE spip_documents_liens ADD id_objet bigint(21) DEFAULT '0' NOT NULL AFTER id_document"),
+array('Sql::alter',"TABLE spip_documents_liens ADD objet VARCHAR (25) DEFAULT '' NOT NULL AFTER id_objet"),
+array('Sql::update','spip_documents_liens',array('id_objet'=>"id_article",'objet'=>"'article'"),"id_article IS NOT NULL AND id_article>0"),
+array('Sql::update','spip_documents_liens',array('id_objet'=>"id_rubrique",'objet'=>"'rubrique'"),"id_rubrique IS NOT NULL AND id_rubrique>0"),
+array('Sql::update','spip_documents_liens',array('id_objet'=>"id_breve",'objet'=>"'breve'"),"id_breve IS NOT NULL AND id_breve>0"),
+array('Sql::update','spip_documents_liens',array('id_objet'=>"id_auteur",'objet'=>"'auteur'"),"id_auteur IS NOT NULL AND id_auteur>0"),
+array('Sql::update','spip_documents_liens',array('id_objet'=>"id_forum",'objet'=>"'forum'"),"id_forum IS NOT NULL AND id_forum>0"),
+array('Sql::alter',"TABLE spip_documents_liens ADD PRIMARY KEY  (id_document,id_objet,objet)"),
+array('Sql::alter',"TABLE spip_documents_liens DROP id_article"),
+array('Sql::alter',"TABLE spip_documents_liens DROP id_rubrique"),
+array('Sql::alter',"TABLE spip_documents_liens DROP id_breve"),
+array('Sql::alter',"TABLE spip_documents_liens DROP id_auteur"),
+array('Sql::alter',"TABLE spip_documents_liens DROP id_forum"),
 array('maj_12008'),
 );
 
 
 // destruction des tables spip_documents_articles etc, cf. 12008
 $GLOBALS['maj'][12009] = array(
-array('sql_drop_table',"spip_documents_articles"),
-array('sql_drop_table',"spip_documents_breves"),
-array('sql_drop_table',"spip_documents_rubriques"),
-array('sql_drop_table',"spip_documents_auteurs"), # plugin #FORMULAIRE_UPLOAD
-array('sql_drop_table',"spip_documents_syndic") # plugin podcast_client
+array('Sql::drop_table',"spip_documents_articles"),
+array('Sql::drop_table',"spip_documents_breves"),
+array('Sql::drop_table',"spip_documents_rubriques"),
+array('Sql::drop_table',"spip_documents_auteurs"), # plugin #FORMULAIRE_UPLOAD
+array('Sql::drop_table',"spip_documents_syndic") # plugin podcast_client
 );
 
 // destruction des champs articles breves rubriques et syndic, cf. 11961
 $GLOBALS['maj'][12010] = array(
-array('sql_alter',"TABLE spip_groupes_mots DROP articles"),
-array('sql_alter',"TABLE spip_groupes_mots DROP breves"),
-array('sql_alter',"TABLE spip_groupes_mots DROP rubriques"),
-array('sql_alter',"TABLE spip_groupes_mots DROP syndic"),
+array('Sql::alter',"TABLE spip_groupes_mots DROP articles"),
+array('Sql::alter',"TABLE spip_groupes_mots DROP breves"),
+array('Sql::alter',"TABLE spip_groupes_mots DROP rubriques"),
+array('Sql::alter',"TABLE spip_groupes_mots DROP syndic"),
 );
 
 function maj_13135 () {
@@ -208,20 +208,20 @@ $GLOBALS['maj'][13333] = array(array('upgrade_types_documents'));
 // http://archives.rezo.net/spip-zone.mbox/200903.mbox/%3Cbfc33ad70903141606q2e4c53f2k4fef6b45e611a04f@mail.gmail.com%3E
 
 $GLOBALS['maj'][13833] = array(
-array('sql_alter',"TABLE spip_documents_liens ADD INDEX objet(id_objet,objet)"))
+array('Sql::alter',"TABLE spip_documents_liens ADD INDEX objet(id_objet,objet)"))
 ;
 
 // Fin upgrade commun branche 2.0
 
 $GLOBALS['maj'][13904] = array(
-array('sql_alter',"TABLE spip_auteurs ADD webmestre varchar(3)  DEFAULT 'non' NOT NULL"),
-array('sql_update','spip_auteurs',array('webmestre'=>"'oui'"),sql_in("id_auteur",defined('_ID_WEBMESTRES')?explode(':',_ID_WEBMESTRES):(autoriser('configurer')?array($GLOBALS['visiteur_session']['id_auteur']):array(0)))) // le webmestre est celui qui fait l'upgrade si rien de defini
+array('Sql::alter',"TABLE spip_auteurs ADD webmestre varchar(3)  DEFAULT 'non' NOT NULL"),
+array('Sql::update','spip_auteurs',array('webmestre'=>"'oui'"),Sql::in("id_auteur",defined('_ID_WEBMESTRES')?explode(':',_ID_WEBMESTRES):(autoriser('configurer')?array($GLOBALS['visiteur_session']['id_auteur']):array(0)))) // le webmestre est celui qui fait l'upgrade si rien de defini
 )
 ;
 
 // sites plantes en mode "'su" au lieu de "sus"
 $GLOBALS['maj'][13929] = array(
-	array('sql_update',"spip_syndic",array('syndication'=>"'sus'"),"syndication LIKE '\\'%'")
+	array('Sql::update',"spip_syndic",array('syndication'=>"'sus'"),"syndication LIKE '\\'%'")
 );
 
 // Types de fichiers m4a/m4b/m4p/m4u/m4v/dv
@@ -238,15 +238,15 @@ if (@$GLOBALS['meta']['version_installee'] >= 14588) {
 
 	// "mode" est un mot-cle d'Oracle
 	$GLOBALS['maj'][14588] = array(
-	array('sql_alter',"TABLE spip_documents  DROP INDEX mode"),
-	array('sql_alter',"TABLE spip_documents  CHANGE mode genre ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL"),
-	array('sql_alter',"TABLE spip_documents  ADD INDEX genre(genre)")
+	array('Sql::alter',"TABLE spip_documents  DROP INDEX mode"),
+	array('Sql::alter',"TABLE spip_documents  CHANGE mode genre ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL"),
+	array('Sql::alter',"TABLE spip_documents  ADD INDEX genre(genre)")
 			       );
 	// solution moins intrusive au pb de mot-cle d'Oracle, retour avant 14588
 	$GLOBALS['maj'][14598] = array(
-	array('sql_alter',"TABLE spip_documents  DROP INDEX genre"),
-	array('sql_alter',"TABLE spip_documents  CHANGE genre mode ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL"),
-	array('sql_alter',"TABLE spip_documents  ADD INDEX mode(mode)")
+	array('Sql::alter',"TABLE spip_documents  DROP INDEX genre"),
+	array('Sql::alter',"TABLE spip_documents  CHANGE genre mode ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL"),
+	array('Sql::alter',"TABLE spip_documents  ADD INDEX mode(mode)")
 			       );
 }
 
@@ -262,11 +262,11 @@ $GLOBALS['maj'][15827] = array(array('upgrade_types_documents'));
 $GLOBALS['maj'][16428] = array(
 	array('maj_liens','auteur'), // creer la table liens
 	array('maj_liens','auteur','article'),
-	array('sql_drop_table',"spip_auteurs_articles"),
+	array('Sql::drop_table',"spip_auteurs_articles"),
 	array('maj_liens','auteur','rubrique'),
-	array('sql_drop_table',"spip_auteurs_rubriques"),
+	array('Sql::drop_table',"spip_auteurs_rubriques"),
 	array('maj_liens','auteur','message'),
-	array('sql_drop_table',"spip_auteurs_messages"),
+	array('Sql::drop_table',"spip_auteurs_messages"),
 );
 
 // Reunir en une seule table les liens de documents
@@ -317,11 +317,11 @@ function maj_liens($pivot,$l='') {
 
 		// Recopier les donnees
 		$sub_pool = 100;
-		while ($ids = array_map('reset',sql_allfetsel("$primary",$ancienne_table,'','','',"0,$sub_pool"))){
+		while ($ids = array_map('reset',Sql::allfetsel("$primary",$ancienne_table,'','','',"0,$sub_pool"))){
 			$insert = array();
 			foreach($ids as $id){
-				$n = sql_countsel($liens,"objet='$objet' AND id_objet=".intval($id));
-				while ($t = sql_allfetsel($champs, $ancienne_table,"$primary=".intval($id),'',$id_pivot,"$n,$pool")) {
+				$n = Sql::countsel($liens,"objet='$objet' AND id_objet=".intval($id));
+				while ($t = Sql::allfetsel($champs, $ancienne_table,"$primary=".intval($id),'',$id_pivot,"$n,$pool")) {
 					$n+=count($t);
 					// empiler en s'assurant a minima de l'unicite
 					while ($r = array_shift($t))
@@ -338,20 +338,20 @@ function maj_liens($pivot,$l='') {
 			}
 			if (count($insert))
 				maj_liens_insertq_multi_check($liens,$insert,$tables_auxiliaires[$liens]);
-			sql_delete ($ancienne_table, sql_in($primary,$ids));
+			Sql::delete ($ancienne_table, Sql::in($primary,$ids));
 		}
 	}
 }
 function maj_liens_insertq_multi_check($table,$couples,$desc=array()){
-	$n_before = sql_countsel($table);
-	sql_insertq_multi($table,$couples,$desc);
-	$n_after = sql_countsel($table);
+	$n_before = Sql::countsel($table);
+	Sql::insertq_multi($table,$couples,$desc);
+	$n_after = Sql::countsel($table);
 	if (($n_after-$n_before)==count($couples))
 		return;
 	// si ecart, on recommence l'insertion ligne par ligne...
 	// moins rapide mais secure : seul le couple en doublon echouera, et non toute la serie
 	foreach($couples as $c)
-		sql_insertq($table,$c,$desc);
+		Sql::insertq($table,$c,$desc);
 }
 
 $GLOBALS['maj'][17311] = array(
@@ -367,13 +367,13 @@ $GLOBALS['maj'][17311] = array(
 				 ))),
 );
 $GLOBALS['maj'][17555] = array(
-	array('sql_alter',"TABLE spip_resultats ADD table_objet varchar(30) DEFAULT '' NOT NULL"),
-	array('sql_alter',"TABLE spip_resultats ADD serveur char(16) DEFAULT '' NOT NULL"),
+	array('Sql::alter',"TABLE spip_resultats ADD table_objet varchar(30) DEFAULT '' NOT NULL"),
+	array('Sql::alter',"TABLE spip_resultats ADD serveur char(16) DEFAULT '' NOT NULL"),
 );
 
 $GLOBALS['maj'][17563] = array(
-	array('sql_alter',"TABLE spip_articles ADD virtuel VARCHAR(255) DEFAULT '' NOT NULL"),
-	array('sql_update','spip_articles',array('virtuel'=>'SUBSTRING(chapo,2)','chapo'=>"''"),"chapo LIKE '=_%'"),
+	array('Sql::alter',"TABLE spip_articles ADD virtuel VARCHAR(255) DEFAULT '' NOT NULL"),
+	array('Sql::update','spip_articles',array('virtuel'=>'SUBSTRING(chapo,2)','chapo'=>"''"),"chapo LIKE '=_%'"),
 );
 
 $GLOBALS['maj'][17577] = array(
@@ -381,26 +381,26 @@ $GLOBALS['maj'][17577] = array(
 );
 
 $GLOBALS['maj'][17743] = array(
-	array('sql_update','spip_auteurs',array('prefs'=>'bio','bio'=>"''"),"statut='nouveau' AND bio<>''"),
+	array('Sql::update','spip_auteurs',array('prefs'=>'bio','bio'=>"''"),"statut='nouveau' AND bio<>''"),
 );
 
 $GLOBALS['maj'][18219] = array(
-	array('sql_alter',"TABLE spip_rubriques DROP id_import"),
-	array('sql_alter',"TABLE spip_rubriques DROP export"),
+	array('Sql::alter',"TABLE spip_rubriques DROP id_import"),
+	array('Sql::alter',"TABLE spip_rubriques DROP export"),
 );
 
 $GLOBALS['maj'][18310] = array(
-	array('sql_alter',"TABLE spip_auteurs_liens CHANGE vu vu VARCHAR(6) DEFAULT 'non' NOT NULL"),
+	array('Sql::alter',"TABLE spip_auteurs_liens CHANGE vu vu VARCHAR(6) DEFAULT 'non' NOT NULL"),
 );
 
 $GLOBALS['maj'][18597] = array(
-	array('sql_alter',"TABLE spip_rubriques ADD profondeur smallint(5) DEFAULT '0' NOT NULL"),
+	array('Sql::alter',"TABLE spip_rubriques ADD profondeur smallint(5) DEFAULT '0' NOT NULL"),
 	array('maj_propager_les_secteurs'),
 );
 
 $GLOBALS['maj'][18955] = array(
-	array('sql_alter',"TABLE spip_auteurs_liens ADD INDEX id_objet (id_objet)"),
-	array('sql_alter',"TABLE spip_auteurs_liens ADD INDEX objet (objet)"),
+	array('Sql::alter',"TABLE spip_auteurs_liens ADD INDEX id_objet (id_objet)"),
+	array('Sql::alter',"TABLE spip_auteurs_liens ADD INDEX objet (objet)"),
 );
 
 
@@ -429,7 +429,7 @@ function maj_collation_sqlite(){
 	spip_log("spip_auteurs : ".var_export($desc['field'],true),"maj."._LOG_INFO_IMPORTANTE);
 	if (stripos($desc['field']['login'],"BINARY")===false){
 		spip_log("Retablir champ login BINARY sur table spip_auteurs","maj");
-		sql_alter("table spip_auteurs change login login VARCHAR(255) BINARY");
+		Sql::alter("table spip_auteurs change login login VARCHAR(255) BINARY");
 		$trouver_table('');
 		$new_desc = $trouver_table("spip_auteurs");
 		spip_log("Apres conversion spip_auteurs : ".var_export($new_desc['field'],true),"maj."._LOG_INFO_IMPORTANTE);
@@ -446,7 +446,7 @@ function maj_collation_sqlite(){
 				// supprimer les doublons avant conversion sinon echec (on garde les urls les plus recentes)
 				if ($table=='spip_urls'){
 					// par date DESC pour conserver les urls les plus recentes
-					$data = sql_allfetsel("*","spip_urls",'','','date DESC');
+					$data = Sql::allfetsel("*","spip_urls",'','','date DESC');
 					$urls = array();
 					foreach ($data as $d){
 						$key = $d['id_parent']."::".strtolower($d['url']);
@@ -454,14 +454,14 @@ function maj_collation_sqlite(){
 							$urls[$key] = true;
 						else {
 							spip_log("Suppression doublon dans spip_urls avant conversion : ".serialize($d),"maj."._LOG_INFO_IMPORTANTE);
-							sql_delete("spip_urls","id_parent=".sql_quote($d['id_parent'])." AND url=".sql_quote($d['url']));
+							Sql::delete("spip_urls","id_parent=".Sql::quote($d['id_parent'])." AND url=".Sql::quote($d['url']));
 						}
 					}
 				}
 				foreach ($desc['field'] as $field=>$type){
 					if ($desc['field'][$field]!==$desc_collate[$field]){
 						spip_log("Conversion COLLATE table $table","maj."._LOG_INFO_IMPORTANTE);
-						sql_alter("table $table change $field $field ".$desc_collate[$field]);
+						Sql::alter("table $table change $field $field ".$desc_collate[$field]);
 						$trouver_table('');
 						$new_desc = $trouver_table($table);
 						spip_log("Apres conversion $table : ".var_export($new_desc['field'],true),"maj."._LOG_INFO_IMPORTANTE);
@@ -479,8 +479,8 @@ function maj_collation_sqlite(){
 
 
 $GLOBALS['maj'][19236] = array(
-	array('sql_updateq','spip_meta',array('impt'=>'oui'),"nom='version_installee'"), // version base principale
-	array('sql_updateq','spip_meta',array('impt'=>'oui'),"nom LIKE '%_base_version'"),  // version base plugins
+	array('Sql::updateq','spip_meta',array('impt'=>'oui'),"nom='version_installee'"), // version base principale
+	array('Sql::updateq','spip_meta',array('impt'=>'oui'),"nom LIKE '%_base_version'"),  // version base plugins
 	array('maj_collation_sqlite'),
 );
 

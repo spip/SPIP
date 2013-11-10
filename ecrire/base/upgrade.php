@@ -87,7 +87,7 @@ function maj_base($version_cible = 0, $redirect = '') {
 	
 	spip_log("Version anterieure: $version_installee. Courante: $spip_version_base","maj."._LOG_INFO_IMPORTANTE);
 	if (!$version_installee OR ($spip_version_base < $version_installee)) {
-		sql_replace('spip_meta', 
+		Sql::replace('spip_meta', 
 		      array('nom' => 'version_installee',
 			    'valeur' => $spip_version_base,
 			    'impt' => 'non'));
@@ -414,16 +414,16 @@ function upgrade_types_documents() {
 
 // http://doc.spip.org/@upgrade_test
 function upgrade_test() {
-	sql_drop_table("spip_test", true);
-	sql_create("spip_test", array('a' => 'int'));
-	sql_alter("TABLE spip_test ADD b INT");
-	sql_insertq('spip_test', array('b' => 1), array('field'=>array('b' => 'int')));
-	$result = sql_select('b', "spip_test");
+	Sql::drop_table("spip_test", true);
+	Sql::create("spip_test", array('a' => 'int'));
+	Sql::alter("TABLE spip_test ADD b INT");
+	Sql::insertq('spip_test', array('b' => 1), array('field'=>array('b' => 'int')));
+	$result = Sql::select('b', "spip_test");
 	// ne pas garder le resultat de la requete sinon sqlite3 
 	// ne peut pas supprimer la table spip_test lors du sql_alter qui suit
 	// car cette table serait alors 'verouillee'
 	$result = $result?true:false; 
-	sql_alter("TABLE spip_test DROP b");
+	Sql::alter("TABLE spip_test DROP b");
 	return $result;
 }
 
@@ -436,7 +436,7 @@ function maj_version ($version, $test = true) {
 		else {
 			// on le fait manuellement, car ecrire_meta utilise le champs impt qui est absent sur les vieilles versions
 			$GLOBALS['meta']['version_installee'] = $version;
-			sql_updateq('spip_meta',  array('valeur' => $version), "nom=" . sql_quote('version_installee') );
+			Sql::updateq('spip_meta',  array('valeur' => $version), "nom=" . Sql::quote('version_installee') );
 		}
 		spip_log( "mise a jour de la base en $version","maj."._LOG_INFO_IMPORTANTE);
 	} else {

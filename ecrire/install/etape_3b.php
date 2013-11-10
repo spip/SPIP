@@ -80,16 +80,16 @@ function install_etape_3b_dist()
 		$shapass = _nano_sha256($alea_actuel.$pass);
 		// prelablement, creer le champ webmestre si il n'existe pas (install neuve
 		// sur une vieille base
-		$t = sql_showtable("spip_auteurs", true);
+		$t = Sql::showtable("spip_auteurs", true);
 		if (!isset($t['field']['webmestre']))
-			@sql_alter("TABLE spip_auteurs ADD webmestre varchar(3)  DEFAULT 'non' NOT NULL");
+			@Sql::alter("TABLE spip_auteurs ADD webmestre varchar(3)  DEFAULT 'non' NOT NULL");
 
-		$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "login=" . sql_quote($login));
+		$id_auteur = Sql::getfetsel("id_auteur", "spip_auteurs", "login=" . Sql::quote($login));
 		if ($id_auteur !== NULL) {
-			sql_updateq('spip_auteurs', array("nom"=> $nom, 'email'=> $email, 'login'=>$login, 'pass'=>$shapass, 'alea_actuel'=>$alea_actuel, 'alea_futur'=> $alea_futur, 'htpass'=>$htpass, 'statut'=>'0minirezo'), "id_auteur=$id_auteur");
+			Sql::updateq('spip_auteurs', array("nom"=> $nom, 'email'=> $email, 'login'=>$login, 'pass'=>$shapass, 'alea_actuel'=>$alea_actuel, 'alea_futur'=> $alea_futur, 'htpass'=>$htpass, 'statut'=>'0minirezo'), "id_auteur=$id_auteur");
 		}
 		else {
-			$id_auteur = sql_insertq('spip_auteurs', array(
+			$id_auteur = Sql::insertq('spip_auteurs', array(
 				'nom' => $nom,
 				'email' => $email,
 				'login' => $login,
@@ -100,7 +100,7 @@ function install_etape_3b_dist()
 				'statut' =>'0minirezo'));
 		}
 		// le passer webmestre separrement du reste, au cas ou l'alter n'aurait pas fonctionne
-		@sql_updateq('spip_auteurs', array('webmestre' => 'oui'), "id_auteur=$id_auteur");
+		@Sql::updateq('spip_auteurs', array('webmestre' => 'oui'), "id_auteur=$id_auteur");
 
 		// inserer email comme email webmaster principal
 		// (sauf s'il est vide: cas de la re-installation)

@@ -12,8 +12,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('base/abstract_sql');
-
 // http://doc.spip.org/@genie_optimiser_dist
 function genie_optimiser_dist($t) {
 
@@ -38,12 +36,12 @@ function optimiser_base($attente = 86400) {
 function optimiser_base_une_table() {
 
 	$tables = array();
-	$result = sql_showbase();
+	$result = Sql::showbase();
 
 	// on n'optimise qu'une seule table a chaque fois,
 	// pour ne pas vautrer le systeme
 	// lire http://dev.mysql.com/doc/refman/5.0/fr/optimize-table.html
-	while ($row = sql_fetch($result))
+	while ($row = Sql::fetch($result))
 		$tables[] = array_shift($row);
 
 	if ($tables) {
@@ -51,7 +49,7 @@ function optimiser_base_une_table() {
 		ecrire_meta('optimiser_table', $table_op);
 		$q = $tables[$table_op];
 		spip_log("debut d'optimisation de la table $q");
-		if (sql_optimize($q))
+		if (Sql::optimize($q))
 			spip_log("fin d'optimisation de la table $q");
 		else spip_log("Pas d'optimiseur necessaire");
 	}
@@ -68,11 +66,11 @@ function optimiser_base_une_table() {
 function optimiser_sansref($table, $id, $sel, $and="")
 {
 	$in = array();
-	while ($row = sql_fetch($sel)) $in[$row['id']]=true;
-	sql_free($sel);
+	while ($row = Sql::fetch($sel)) $in[$row['id']]=true;
+	Sql::free($sel);
 
 	if ($in) {
-		sql_delete($table,  sql_in($id,array_keys($in)) . ($and?" AND $and":""));
+		Sql::delete($table,  Sql::in($id,array_keys($in)) . ($and?" AND $and":""));
 		spip_log("Numeros des entrees $id supprimees dans la table $table: $in");
 	}
 	return count($in);
@@ -87,7 +85,7 @@ function optimiser_sansref($table, $id, $sel, $and="")
 function optimiser_base_disparus($attente = 86400) {
 
 	# format = 20060610110141, si on veut forcer une optimisation tout de suite
-	$mydate = sql_quote(date("Y-m-d H:i:s", time() - $attente));
+	$mydate = Sql::quote(date("Y-m-d H:i:s", time() - $attente));
 
 	$n = 0;
 
@@ -99,7 +97,7 @@ function optimiser_base_disparus($attente = 86400) {
 	# attention on controle id_rubrique>0 pour ne pas tuer les articles
 	# specialement affectes a une rubrique non-existante (plugin,
 	# cf. http://trac.rezo.net/trac/spip/ticket/1549 )
-	$res = sql_select("A.id_article AS id",
+	$res = Sql::select("A.id_article AS id",
 		        "spip_articles AS A
 		        LEFT JOIN spip_rubriques AS R
 		          ON A.id_rubrique=R.id_rubrique",
@@ -110,7 +108,7 @@ function optimiser_base_disparus($attente = 86400) {
 	$n+= optimiser_sansref('spip_articles', 'id_article', $res);
 
 	// les articles a la poubelle
-	sql_delete("spip_articles", "statut='poubelle' AND maj < $mydate");
+	Sql::delete("spip_articles", "statut='poubelle' AND maj < $mydate");
 
 	//
 	// Auteurs
@@ -122,7 +120,7 @@ function optimiser_base_disparus($attente = 86400) {
 	$n+= objet_optimiser_liens(array('auteur'=>'*'),'*');
 
 	# effacer les auteurs poubelle qui ne sont lies a rien
-	$res = sql_select("A.id_auteur AS id",
+	$res = Sql::select("A.id_auteur AS id",
 		      	"spip_auteurs AS A
 		      	LEFT JOIN spip_auteurs_liens AS L
 		          ON L.id_auteur=A.id_auteur",
@@ -133,7 +131,7 @@ function optimiser_base_disparus($attente = 86400) {
 
 	# supprimer les auteurs 'nouveau' qui n'ont jamais donne suite
 	# au mail de confirmation (45 jours pour repondre, ca devrait suffire)
-	sql_delete("spip_auteurs", "statut='nouveau' AND maj < ". sql_quote(date('Y-m-d', time()-45*24*3600)));
+	Sql::delete("spip_auteurs", "statut='nouveau' AND maj < ". Sql::quote(date('Y-m-d', time()-45*24*3600)));
 
 
 	$n = pipeline('optimiser_base_disparus', array(

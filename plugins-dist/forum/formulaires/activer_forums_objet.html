@@ -1,0 +1,26 @@
+<div class='formulaire_spip formulaire_#FORM' id='formulaire_#FORM-#ID'>
+[(#ENV{_suivi_forums}|oui)
+[(#URL_ECRIRE{controler_forum,objet=#ENV{objet}&id_objet=#ENV{id_objet}}|icone_horizontale{#ENV{_suivi_forums},forum-24.png,'',''})]
+]
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+	<form action="#ENV{action}#formulaire_configurer_forums_article_moderation" method="post"><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<ul>
+			<li class='editer configurer_accepter_forum[ (#ENV**{erreurs}|table_valeur{accepter_forum}|oui)erreur]'>
+				<label for='accepter_forum'><:forum:info_fonctionnement_forum:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{accepter_forum})</span>
+				]<select name='accepter_forum' id='accepter_forum'>
+					<option value='pos'[ (#ENV{accepter_forum}|=={pos}|oui)selected='selected']><:forum:bouton_radio_modere_posteriori:></option>
+					<option value='pri'[ (#ENV{accepter_forum}|=={pri}|oui)selected='selected']><:forum:bouton_radio_modere_priori:></option>
+					<option value='abo'[ (#ENV{accepter_forum}|=={abo}|oui)selected='selected']><:forum:bouton_radio_modere_abonnement:></option>
+					<option value='non'[ (#ENV{accepter_forum}|=={non}|oui)selected='selected']><:forum:info_pas_de_forum:></option>
+				</select>
+			</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
+	</div></form>
+]
+</div>

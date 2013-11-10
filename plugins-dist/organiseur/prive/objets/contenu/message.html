@@ -1,0 +1,38 @@
+<BOUCLE_afficher_contenu(MESSAGES){id_message=#ENV{id}}{statut?}>
+<div class="cartouche clearfix">
+<div class="champ contenu_from clearfix">
+<div class='label'><:organiseur:info_message_de:></div>
+<div dir='#LANG_DIR' class='from'><BOUCLE_from(AUTEURS){id_auteur}{tout}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>[(#LOGO_AUTEUR{60})]</BOUCLE_from></div>
+</div>
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})] clearfix">
+<div class='label'><:organiseur:info_message_objet:></div>
+<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+</div>
+<div class="champ contenu_date_heure[ (#DATE_HEURE*|strlen|?{'',vide})] clearfix">
+<div class='label'>[(#RV|=={oui}|?{<:organiseur:info_message_date_debut:>,<:organiseur:info_message_date:>})]</div>
+<div dir='#LANG_DIR' class='#EDIT{date_heure} date_heure'>[(#RV|=={oui}|oui)[(#CHEMIN_IMAGE{heure-16.png}|balise_img)] ][[(#DATE_HEURE|nom_jour)] (#DATE_HEURE|affdate_heure)]</div>
+</div>
+[(#RV|=={oui}|oui)
+<div class="champ contenu_date_fin[ (#DATE_HEURE*|strlen|?{'',vide})] clearfix">
+<div class='label'><:organiseur:info_message_date_fin:></div>
+<div dir='#LANG_DIR' class='#EDIT{date_fin} date_fin'>[(#RV|=={oui}|oui)[(#CHEMIN_IMAGE{heure-16.png}|balise_img)] ][[(#DATE_FIN|nom_jour)] (#DATE_FIN|affdate_heure)]</div>
+</div>]
+<B_d>
+<div class="champ contenu_destinataires clearfix">
+<div class='label'><:organiseur:info_message_a:></div>
+<div dir='#LANG_DIR' class='destinataires'>
+	<BOUCLE_d(POUR){tableau #DESTINATAIRES|explode{','}}{', '}><BOUCLE_a(AUTEURS){id_auteur=#VALEUR}{tout}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_a>#VALEUR<//B_a></BOUCLE_d>
+</div>
+</div>
+</B_d>
+<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+<div class='label'><:info_texte:></div>
+<div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0})]</div>
+</div>
+
+[<div class="champ contenu_notes">
+<div class='label'><:info_notes:></div>
+<div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
+</div>]
+</div>
+</BOUCLE_afficher_contenu>

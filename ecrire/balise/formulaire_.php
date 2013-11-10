@@ -31,7 +31,8 @@ include_spip('inc/texte');
  * @return string|array
  *     Saisie protégée
 **/
-function protege_champ($texte){
+function protege_champ($texte)
+{
 	if (is_array($texte))
 		$texte = array_map('protege_champ',$texte);
 	else {
@@ -39,10 +40,10 @@ function protege_champ($texte){
 		if ((preg_match(",^[abis]:\d+[:;],", $texte) AND unserialize($texte)!=false) OR is_null($texte))
 			return $texte;
 		if (is_string($texte)
-			AND $texte
-			AND strpbrk($texte, "&\"'<>")!==false
-			) {
-				$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'),ENT_QUOTES);
+		AND $texte
+		AND strpbrk($texte, "&\"'<>")!==false)
+		{
+			$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'),ENT_QUOTES);
 		}
 	}
 	return $texte;
@@ -81,14 +82,14 @@ function existe_formulaire($form)
  * @return Champ
  *     Description complétée du code compilé appelant la balise dynamique
 **/
-function balise_FORMULAIRE__dist($p) {
-
+function balise_FORMULAIRE__dist($p)
+{
 	// Cas d'un #FORMULAIRE_TOTO inexistant : renvoyer la chaine vide.
 	// mais si #FORMULAIRE_{toto} on ne peut pas savoir a la compilation, continuer
 	if (existe_formulaire($p->nom_champ)===FALSE) {
-		    $p->code = "''";
-		    $p->interdire_scripts = false;
-		    return $p;
+		$p->code = "''";
+		$p->interdire_scripts = false;
+		return $p;
 	}
 
 	// sinon renvoyer un code php dynamique
@@ -142,9 +143,10 @@ function balise_FORMULAIRE__contexte($form, $args)
 
 	$je_suis_poste = false;
 	if ($post_form = _request('formulaire_action')
-	 AND $post_form==$form
-	 AND $p = _request('formulaire_action_args')
-	 AND is_array($p = decoder_contexte_ajax($p, $post_form))) {
+	AND $post_form==$form
+	AND $p = _request('formulaire_action_args')
+	AND is_array($p = decoder_contexte_ajax($p, $post_form)))
+	{
 		// enlever le faux attribut de langue masque
 		array_shift($p);
 		if (formulaire__identifier($form, $args, $p))
@@ -184,7 +186,7 @@ function balise_FORMULAIRE__contexte($form, $args)
 	// seulement si c'est ce formulaire qui est poste
 	// ou si on le demande explicitement par le parametre _forcer_request = true
 	$dispo = ($je_suis_poste || (isset($valeurs['_forcer_request']) && $valeurs['_forcer_request']));
-	foreach(array_keys($valeurs) as $champ){
+	foreach (array_keys($valeurs) as $champ) {
 		if ($champ[0]!=='_' AND !in_array($champ, array('message_ok','message_erreur','editable'))) {
 			if ($dispo AND (($v = _request($champ))!==NULL))
 				$valeurs[$champ] = $v;
@@ -202,7 +204,7 @@ function balise_FORMULAIRE__contexte($form, $args)
 		$action = parametre_url($action,'formulaire_action_args','');
 	}
 
-	if (isset($valeurs['_action'])){
+	if (isset($valeurs['_action'])) {
 		$securiser_action = charger_fonction('securiser_action','inc');
 		$secu = $securiser_action(reset($valeurs['_action']),end($valeurs['_action']),'',-1);
 		$valeurs['_hidden'] = (isset($valeurs['_hidden'])?$valeurs['_hidden']:'') .
@@ -262,7 +264,7 @@ function formulaire__charger($form, $args, $poste)
 	);
 
 	// si $valeurs et false ou une chaine, pas de formulaire, donc pas de pipeline !
-	if (is_array($valeurs)){
+	if (is_array($valeurs)) {
 		if (!isset($valeurs['_pipelines'])) $valeurs['_pipelines']=array();
 		// l'ancien argument _pipeline devient maintenant _pipelines
 		// reinjectons le vieux _pipeline au debut de _pipelines
@@ -298,7 +300,8 @@ function formulaire__charger($form, $args, $poste)
  * @param array $p
  * @return bool
  */
-function formulaire__identifier($form, $args, $p) {
+function formulaire__identifier($form, $args, $p)
+{
 	if ($identifier_args = charger_fonction("identifier","formulaires/$form",true)) {
 		return call_user_func_array($identifier_args,$args)===call_user_func_array($identifier_args,$p);
 	}

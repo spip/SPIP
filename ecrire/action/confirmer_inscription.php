@@ -16,15 +16,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Cette action permet de confirmer une inscription
  * @return void
  */
-function action_confirmer_inscription_dist() {
+function action_confirmer_inscription_dist()
+{
 	$jeton = _request('jeton');
 	$email = _request('email');
 
 	include_spip('action/inscrire_auteur');
 	if ($auteur = auteur_verifier_jeton($jeton)
-	  AND $auteur['email']==$email
-	  AND $auteur['statut']=='nouveau'){
-
+	AND $auteur['email']==$email
+	AND $auteur['statut']=='nouveau')
+	{
 		// OK c'est un nouvel inscrit qui confirme :
 		// on le loge => ca va confirmer son statut et c'est plus sympa
 		include_spip('inc/auth');
@@ -35,9 +36,9 @@ function action_confirmer_inscription_dist() {
 
 		// si pas de redirection demandee, rediriger vers public ou prive selon le statut de l'auteur
 		// TODO: ne semble pas marcher si inscrit non visiteur, a debug
-		if (!_request('redirect')){
+		if (!_request('redirect')) {
 			// on passe id_auteur explicite pour forcer une lecture en base de toutes les infos
-			if (autoriser('ecrire','','',$auteur['id_auteur'])){
+			if (autoriser('ecrire','','',$auteur['id_auteur'])) {
 				// poser un cookie admin aussi
 				$cookie = charger_fonction('cookie','action');
 				$cookie("@".$GLOBALS['visiteur_session']['login']);
@@ -49,7 +50,7 @@ function action_confirmer_inscription_dist() {
 	}
 	else {
 		// lien perime :
-		if ($GLOBALS['visiteur_session']['id_auteur']){
+		if ($GLOBALS['visiteur_session']['id_auteur']) {
 			// on passe id_auteur explicite pour forcer une lecture en base de toutes les infos
 			if (autoriser('ecrire','','',$GLOBALS['visiteur_session']['id_auteur']))
 				$GLOBALS['redirect'] = _DIR_RESTREINT_ABS;

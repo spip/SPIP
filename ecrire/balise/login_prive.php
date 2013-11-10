@@ -14,7 +14,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 
 // http://doc.spip.org/@balise_LOGIN_PRIVE
-function balise_LOGIN_PRIVE ($p) {
+function balise_LOGIN_PRIVE ($p)
+{
 	return calculer_balise_dynamique($p, 'LOGIN_PRIVE', array('url'));
 }
 
@@ -25,12 +26,14 @@ function balise_LOGIN_PRIVE ($p) {
 #    <boucle(AUTEURS)>[(#LOGIN_PRIVE{#URL_ECRIRE, #LOGIN})]
 
 // http://doc.spip.org/@balise_LOGIN_PRIVE_stat
-function balise_LOGIN_PRIVE_stat ($args, $context_compil) {
+function balise_LOGIN_PRIVE_stat ($args, $context_compil)
+{
 	return array(isset($args[1]) ? $args[1] : $args[0], (isset($args[2]) ? $args[2] : ''));
 }
 
 // http://doc.spip.org/@balise_LOGIN_PRIVE_dyn
-function balise_LOGIN_PRIVE_dyn($url, $login) {
+function balise_LOGIN_PRIVE_dyn($url, $login)
+{
 	include_spip('balise/formulaire_');
 	if (!$url 		# pas d'url passee en filtre ou dans le contexte
 	AND !$url = _request('url') # ni d'url passee par l'utilisateur

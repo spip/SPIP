@@ -1,0 +1,20 @@
+#SET{selected,''}
+<select
+<BOUCLE_remplacer(MOTS){id_groupe}{id_mot IN #ENV{exclus}}{0,1}>
+	#SET{expose,mot-#ID_MOT-#OBJET-#ID_OBJET}
+	name="remplacer_lien[mot-#ID_MOT-#OBJET-#ID_OBJET][groupe#ID_GROUPE]"
+</BOUCLE_remplacer>
+	#SET{expose,#ENV{ajouter_lien}|table_valeur{groupe#ID_GROUPE}}}
+	#SET{selected,#GET{expose}|oui}
+	name="ajouter_lien[groupe#ID_GROUPE]"
+<//B_remplacer>
+id="ajouter_lien-groupe#ID_GROUPE"
+	onchange="jQuery(this).siblings('input.submit').css('visibility','visible');"
+>
+<option value="x">&nbsp;</option>
+<BOUCLE_mots(MOTS){id_groupe}{par num titre, multi titre}>
+	#SET{value,mot-#ID_MOT-#OBJET-#ID_OBJET}
+	<option value="#GET{value}"[(#GET{value}|=={#GET{expose}}|oui)selected="selected" class="on"]>#TITRE</option>
+</BOUCLE_mots>
+</select>
+<input type="submit" class="submit" name="groupe#ID_GROUPE" value="<:bouton_changer:>"[(#GET{selected}|non)style="visibility:hidden;"]/>

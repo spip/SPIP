@@ -1,0 +1,134 @@
+#SET{vspip, #EVAL{$GLOBALS['spip_version_branche']}}
+<B_plugins>
+<div class="liste plugins" id="liste_plugins">
+	<ul class="liste-items">
+	<BOUCLE_plugins(PAQUETS plugins){tout}{par multi nom, paquets.prefixe}{!par constante, actif}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
+		#SET{incompatible, #COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}, spip}|non}
+		#SET{verrou,#CONSTANTE|=={_DIR_PLUGINS_DIST}|oui}
+		<li class="item[ (#ACTIF|=={oui}|?{actif,inactif})][(#OBSOLETE|=={oui}|ou{#ATTENTE|=={oui}}|ou{#GET{incompatible}}|oui) disabled][(#GET{incompatible}|oui) incompatible][(#GET{verrou}|oui) verrou][(#MAJ_VERSION|oui|et{#AUTORISER{plugins_ajouter}|oui}|oui)up]"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"][ data-id_paquet="(#ID_PAQUET)"]>
+			[(#OBSOLETE|=={non}|et{#CONSTANTE|!={_DIR_PLUGINS_DIST}}|et{#GET{incompatible}|non}|ou{#ATTENTE|=={oui}}|oui)
+			<div class="check">
+				<input type="checkbox" class="checkbox select_plugin" name="ids_paquet\[\]" value="#ID_PAQUET"
+					[(#ID_PAQUET|in_any{#ENV{ids_paquet}}) checked="checked"] />
+			</div>]
+			[(#REM) si la configuration le permet, on peut activer un plugin obsolete ]
+			[(#OBSOLETE|=={oui}|et{#CONSTANTE|!={_DIR_PLUGINS_DIST}}|et{#GET{incompatible}|non}|oui)
+				[(#CONFIG{svp/autoriser_activer_paquets_obsoletes}|=={oui}|oui)
+					<div class="check">
+						<input type="checkbox" class="checkbox select_plugin" name="ids_paquet\[\]" value="#ID_PAQUET"
+							[(#ID_PAQUET|in_any{#ENV{ids_paquet}}) checked="checked"] />
+					</div>
+				]
+			]
+			[(#REM) <!-- Resume du plugin -->]
+			<div class="resume">[(#ENV{id_paquet}|=={#ID_PAQUET}|?{#SET{id_paquet,''},#SET{id_paquet,#ID_PAQUET}})]
+				<h3 class="nom"><a href="[(#SELF|parametre_url{id_paquet,#GET{id_paquet}})]" rel="info">[(#NOM|extraire_multi)]</a></h3>
+				<span class="version">[(#VERSION)]</span>
+				<span class="etat">[ - (#ETAT)]</span>
+				[(#SET{erreur,[<span class="information">(#OBSOLETE|=={oui}|oui)<:svp:info_plugin_obsolete:></span> ]})]
+				[(#SET{erreur,[(#GET{erreur}|concat{[- <span class="information">(#ATTENTE|=={oui}|et{#AUTORISER{plugins_ajouter}|non}|oui)<:svp:info_plugin_attente_dependance_interdit:></span> ]})]})]
+				[(#SET{erreur,[(#GET{erreur}|concat{[- <span class="information">(#ATTENTE|=={oui}|et{#AUTORISER{plugins_ajouter}|oui}|oui)<:svp:info_plugin_attente_dependance:></span> ]})]})]
+				[(#SET{erreur,[(#GET{erreur}|concat{[- <span class="information">(#GET{incompatible}|oui)<:svp:info_plugin_incompatible:></span>]})]})]
+				<div class="short">[(#GET{erreur}|ltrim{'-'}|sinon{#SLOGAN|extraire_multi|typo|sinon{#DESCRIPTION|extraire_multi|propre}|PtoBR|explode{'<br />'}|reset|couper{80}})]</div>
+				[(#LOGO|oui)<div class="icon">
+					[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32})]
+				</div>]
+			</div>
+			
+			<div class="actions">
+			[(#REM) on peut desactiver un plugin - qu'il soit obsolete ou pas ]
+			[(#CONSTANTE|!={_DIR_PLUGINS_DIST}|et{#GET{incompatible}|non}|oui)
+				[(#ACTIF|=={oui}|oui)
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{off})]" class="submit" value="<:svp:bouton_desactiver:>" />
+					[(#INSTALLE|=={oui}|et{#AUTORISER{webmestre}}|oui)
+						<input type="submit" name="[(#ID_PAQUET|svp_nom_action{stop})]" class="submit" value="<:svp:bouton_desinstaller:>" />
+					]
+				]
+			]
+			[(#OBSOLETE|=={non}|et{#CONSTANTE|!={_DIR_PLUGINS_DIST}}|et{#GET{incompatible}|non}|oui)
+				[(#ACTIF|=={oui}|non|ou{#ATTENTE|=={oui}})
+					[(#ACTIF|=={oui}|non|ou{#ATTENTE|=={oui}|oui|et{#AUTORISER{plugins_ajouter}|oui}}|oui)
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="submit" value="<:svp:bouton_activer:>" />]
+				]
+				[(#MAJ_VERSION|oui|et{#AUTORISER{plugins_ajouter}|oui}|oui)
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="submit" value="<:svp:bouton_up:>" />
+				]
+			]
+			[(#REM) si la configuration le permet, on peut activer un plugin obsolete ]
+			[(#OBSOLETE|=={oui}|et{#CONSTANTE|!={_DIR_PLUGINS_DIST}}|et{#GET{incompatible}|non}|oui)
+				[(#ACTIF|=={oui}|non|et{#CONFIG{svp/autoriser_activer_paquets_obsoletes}|=={oui}})
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="submit" value="<:svp:bouton_activer:>" />
+				]
+			]
+			[(#ACTIF|=={oui}|non|et{[(#SRC_ARCHIVE|couper{5}|=={auto/})]})
+				<input type="submit" name="[(#ID_PAQUET|svp_nom_action{kill})]" class="submit" value="<:svp:bouton_supprimer:>" />
+			]
+			[(#CONSTANTE|=={_DIR_PLUGINS_DIST}|oui)
+				<span class="information"><:svp:info_verrouille:></span>
+			]
+			</div>
+			[(#ACTIF|=={oui}|et{#ATTENTE|=={non}}|oui) #SET{prefixe,#PREFIXE|strtolower}
+				[(#CHEMIN_IMAGE{ok-16.png}|balise_img{<:svp:plugin_info_actif:>,picto_actif}|inserer_attribut{title,<:svp:plugin_info_actif:>})]
+				[(#INCLURE{fond=prive/squelettes/inclure/cfg,script=configurer_#GET{prefixe},nom=#NOM})]
+			]
+			[(#GET{verrou})
+				[(#CHEMIN_IMAGE{cadenas-16.png}|balise_img{<:svp:plugin_info_verrouille:>,picto_verrou}|inserer_attribut{title,<:svp:plugin_info_verrouille:>})]
+			]
+			[(#MAJ_VERSION|oui|et{#AUTORISER{plugins_ajouter}|oui}|oui)
+			[(#CHEMIN_IMAGE{update-16.png}|balise_img{<:svp:plugin_info_up:>,picto_up}|inserer_attribut{title,<:svp:plugin_info_up{version=#MAJ_VERSION}:>})]
+			]
+			[(#OBSOLETE|=={oui}|ou{#GET{incompatible}}|ou{#ATTENTE|=={oui}}|oui)
+				[(#SET{image,plugin-dis-16.png})]
+				[(#OBSOLETE|=={oui}|oui) [(#SET{err, <:svp:info_plugin_obsolete:>})]]
+				[(#GET{incompatible}|oui) [(#SET{err, <:svp:info_plugin_incompatible:>})]]
+				[(#ATTENTE|=={oui}|oui) [(#SET{image, erreur-16.png})]]
+				[(#CHEMIN_IMAGE{#GET{image}}|balise_img{#GET{err}, picto_err}|inserer_attribut{title, #GET{err}})]
+			][(#ENV{id_paquet}|=={#ID_PAQUET}|?{#SET{id_paquet,#ID_PAQUET},#SET{id_paquet,0}})]
+			[(#INCLURE{fond=prive/squelettes/inclure/plugin_detail,id_paquet=#GET{id_paquet},ajax=detail_#ID_PAQUET,env})]
+		</li>
+	</BOUCLE_plugins>
+	</ul>
+</div>
+</B_plugins>
+
+<script type="text/javascript">
+//<![CDATA[
+	(function($){
+		$('.plugins li.item a[rel=info]').click(function(){
+			var li = $(this).parents('li').eq(0);
+			var id_paquet = li.data('id_paquet');
+			// premier clic, on charge le contenu du bloc details en ajax
+			if (!$('div.details',li).html()) {
+				ajaxReload('detail_'+id_paquet, {args: {'id_paquet':id_paquet}}, {callback:function(){
+					li.addClass('on');
+				}});
+			}
+			// clics suivants, masquer ou afficher les details
+			if ($('div.details',li).toggle().is(':visible'))
+				li.addClass('on');
+			else
+				li.removeClass('on');
+			return false;
+		});
+		$('.plugins li.item input.checkbox').change(function(){
+			$(this).parents('form').eq(0).find('.boutons').slideDown();
+		});
+		/* Afficher/cacher les plugins incompatibles */
+		if (nb = $('#liste_plugins .incompatible').length) {
+			$('#liste_plugins .incompatible').hide();
+			texte_afficher = '<:svp:afficher_les_plugins_incompatibles|attribut_html:>';
+			texte_cacher = '<:svp:cacher_les_plugins_incompatibles|attribut_html:>';
+			$('#liste_plugins').before('<a id="afficher_incompatibles" href="#afficher_incompatible">' + texte_afficher + ' </a>');
+			$('#afficher_incompatibles').click(function(){
+				if ($('#liste_plugins .incompatible:visible').length) {
+					$('#liste_plugins .incompatible').hide();
+					$('#afficher_incompatibles').html(texte_afficher);
+				} else {
+					$('#liste_plugins .incompatible').show();
+					$('#afficher_incompatibles').html(texte_cacher);
+				}
+			});
+		}
+	})(jQuery);
+//]]>
+</script>

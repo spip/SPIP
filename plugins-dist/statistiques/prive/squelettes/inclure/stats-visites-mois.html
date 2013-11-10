@@ -1,0 +1,40 @@
+#SET{duree,#ENV{duree,0}|duree_affiche{mois}}
+
+<div class="pagination">
+	<span class="dl">
+		#SET{args,#ARRAY{id_article,#ID_ARTICLE,duree,#GET{duree}}}
+		<a href="[(#URL_PAGE{transmettre,[(#VAL{statistiques}|param_low_sec{#GET{args}, '', 'transmettre'})]})]" class="noajax"><:statistiques:csv:></a>
+	</span>
+	|
+	[<span class="duree">(#GET{duree}|div{30}|intval) <:date_mois:></span>] |
+	<a href="[(#SELF|parametre_url{duree,#GET{duree}|duree_zoom{moins}})]"
+		 class="ajax">[(#CHEMIN_IMAGE{zoomout-24.png}|balise_img{<:statistiques:info_zoom:> -})]</a>
+	<a href="[(#SELF|parametre_url{duree,#GET{duree}|duree_zoom{plus}})]"
+		 class="ajax">[(#CHEMIN_IMAGE{zoomin-24.png}|balise_img{<:statistiques:info_zoom:> +})]</a>
+</div>
+
+
+<B_statsm>
+	<table class='visites' id='visites_mensuelles'>
+		<caption><:statistiques:visites_mensuelles:></caption>
+	  <thead>
+			<tr class='row_first'>
+				<th><:date|trim{':'}|trim:></th>
+				<th class='valeur'><:statistiques:info_visites|trim{':'}|trim:></th>
+				<th class='moyenne'><:info_moyenne|trim{':'}|trim:></th>
+				<th class='prevision'><:statistiques:info_previsions|trim{':'}|trim:></th>
+			</tr>
+		</thead>
+	  <tbody>
+		<BOUCLE_statsm(DATA){source stats_visites,mois,#GET{duree},#ENV{id_article}}>
+			<tr class="c_[(#CLE|affdate{l}|substr{0,3})][(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)c_today]">
+				<th title="[(#CLE|affdate{'Y/m/01'})]">[(#CLE|affdate_mois_annee)]</th>
+				<td class="val">#VALEUR{visites}</td>
+				<td class="mean">[(#VALEUR{moyenne}|round)]</td>
+				<td class="prev">[(#VALEUR{prevision})]</td>
+			</tr>
+		</BOUCLE_statsm>
+		</tbody>
+	</table>
+</B_statsm>
+

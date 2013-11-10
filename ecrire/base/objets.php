@@ -465,7 +465,8 @@ function base_serial(&$tables_principales){
  *     Description des tables auxiliaires déjà déclarées
  * @return void
 **/
-function base_auxiliaires(&$tables_auxiliaires){
+function base_auxiliaires(&$tables_auxiliaires)
+{
 $spip_resultats = array(
  		"recherche"	=> "char(16) DEFAULT '' NOT NULL",
 		"id"	=> "INT UNSIGNED NOT NULL",
@@ -812,16 +813,15 @@ function lister_types_surnoms(){
 	return $surnoms;
 }
 
-function lister_tables_spip($serveur=''){
+function lister_tables_spip($serveur='')
+{
 	static $tables = array();
-	if (!isset($tables[$serveur])){
+	if (!isset($tables[$serveur])) {
 		$tables[$serveur] = array();
-		if (!function_exists("sql_alltable"))
-			include_spip("base/abstract_sql");
-		$ts = sql_alltable(null,$serveur); // toutes les tables "spip_" (ou prefixe perso)
+		$ts = Sql::alltable(null,$serveur); // toutes les tables "spip_" (ou prefixe perso)
 		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 		$spip = $connexion['prefixe'] . '_';
-		foreach ($ts as $t){
+		foreach ($ts as $t) {
 			$t = substr($t,strlen($spip));
 			$tables[$serveur]["spip_$t"] = $t;
 		}
@@ -1052,7 +1052,7 @@ function objet_test_si_publie($objet,$id_objet, $serveur=''){
 		include_spip('public/composer');
 		instituer_boucle($boucle, false, true);
 		$res = calculer_select($boucle->select,$boucle->from,$boucle->from_type,$boucle->where,$boucle->join,$boucle->group,$boucle->order,$boucle->limit,$boucle->having,$table_objet,$id_table,$serveur);
-		if (sql_fetch($res))
+		if (Sql::fetch($res))
 			return true;
 		return false;
 	}

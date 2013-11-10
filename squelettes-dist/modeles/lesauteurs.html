@@ -1,0 +1,10 @@
+[(#REM)
+
+	Affiche la liste des auteurs d'un objet, séparés par des virgules
+	
+	Modele pour la balise #LESAUTEURS, dans le cas des auteurs d'un objet
+	(pour un objet ayant un champ lesauteurs dans la base, la balise affiche directement la valeur du champ)
+	
+]
+<BOUCLE_auteurs(AUTEURS){id_objet}{objet}{par nom}{", "}>
+<span class="vcard author"><a class="url fn spip_in" href="#URL_AUTEUR">#NOM</a></span></BOUCLE_auteurs>

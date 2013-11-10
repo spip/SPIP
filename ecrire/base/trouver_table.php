@@ -142,7 +142,7 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 	if (!isset($connexion['tables'][$nom_sql])) {
 
 		// La *vraie* base a la priorite
-		$desc = sql_showtable($nom_sql, $table_spip, $serveur);
+		$desc = Sql::showtable($nom_sql, $table_spip, $serveur);
 		if (!$desc OR !$desc['field']) {
 			if (!$fdesc) {
 				spip_log("trouver_table: table inconnue '$serveur' '$nom'",_LOG_INFO_IMPORTANTE);

@@ -11,7 +11,6 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
-include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@formulaires_editer_objet_traiter
 function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden=''){
@@ -88,7 +87,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		if  (!$new OR $lier_trad) {
 			if ($select = charger_fonction("precharger_" . $type, 'inc', true))
 				$row = $select($id, $id_parent, $lier_trad);
-			else $row = sql_fetsel('*',$table_objet_sql,$id_table_objet."=".intval($id));
+			else $row = Sql::fetsel('*',$table_objet_sql,$id_table_objet."=".intval($id));
 			if (!$new)
 				$md5 = controles_md5($row);
 		}
@@ -361,7 +360,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	// On veut savoir si notre modif va avoir un impact
 	// par rapport aux donnees contenues dans la base
 	// (qui peuvent etre differentes de celles ayant servi a calculer le ctr)
-	$s = sql_fetsel(array_keys($champs), $spip_table_objet, "$id_table_objet=$id", $serveur);
+	$s = Sql::fetsel(array_keys($champs), $spip_table_objet, "$id_table_objet=$id", $serveur);
 	$intact = true;
 	foreach ($champs as $ch => $val)
 		$intact &= ($s[$ch] == $val);
@@ -380,7 +379,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 		}
 	}
 	if ($ctrq) {
-		$ctrq = sql_fetsel($ctrq, $spip_table_objet, "$id_table_objet=$id", $serveur);
+		$ctrq = Sql::fetsel($ctrq, $spip_table_objet, "$id_table_objet=$id", $serveur);
 		foreach ($ctrh as $key => $m) {
 			if ($m != md5($ctrq[$key])
 			AND $champs[$key] !== $ctrq[$key]) {

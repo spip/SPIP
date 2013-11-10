@@ -1,0 +1,83 @@
+<BOUCLE_env(MESSAGES){id_message}{id_auteur=#SESSION{id_auteur}}>
+[
+	#BOITE_OUVRIR{'','info'}
+	(#AUTORISER{supprimer,message,#ID_MESSAGE}|oui)
+	[(#URL_ACTION_AUTEUR{supprimer_message,#ID_MESSAGE,#URL_ECRIRE{messages}}|icone_horizontale{<:organiseur:icone_supprimer_message:>,[(#TYPE|organiseur_icone_message)],del})]
+	#BOITE_FERMER
+]
+</BOUCLE_env>
+	<BOUCLE_recu(MESSAGES){id_message}{destinataire #SESSION{id_auteur}}>
+	[
+		#BOITE_OUVRIR{'','info'}
+		(#AUTORISER{effacer,messagerecu,#ID_MESSAGE}|oui)
+		[(#URL_ACTION_AUTEUR{effacer_messagerecu,[(#SESSION{id_auteur})-#ID_MESSAGE],#URL_ECRIRE{messages}}|icone_horizontale{<:organiseur:icone_effacer_message:>,[(#TYPE|organiseur_icone_message)],del})]
+		#BOITE_FERMER
+	]
+	</BOUCLE_recu>
+<//B_env>
+	
+<BOUCLE_isrv(MESSAGES){id_message}{statut?}{rv=oui}>
+<div id="loading" style="position:absolute;top:20px;left:350px;padding:5px 30px;display:none;border:1px solid #ddd;background:#eee;z-index:100;"><:organiseur:loading:></div>
+<div id="calendrier"></div>
+<link rel='stylesheet' type='text/css' href='#CHEMIN{lib/fullcalendar/fullcalendar.css}' />
+<link rel='stylesheet' type='text/css' href='#CHEMIN{calendrier.css}' />
+<script type='text/javascript' src='#CHEMIN{lib/fullcalendar/fullcalendar.js}'></script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+
+	// page is now ready, initialize the calendar...
+
+	$('#calendrier').fullCalendar({
+			defaultView: 'agendaDay',
+			year:[(#DATE_HEURE|affdate{Y})],
+			month:[(#DATE_HEURE|affdate{m}|moins{1})],
+			date:[(#DATE_HEURE|affdate{d})],
+			editable: false,
+			events: "[(#URL_ACTION_AUTEUR{quete_calendrier_prive,calendrier}|parametre_url{quoi,rv,&})]",
+			header: {
+				left : '',
+				center: 'prev,next today',
+				right: ''
+			},
+			height: 550,
+			firstDay: 1,
+			monthNames:['<:date_mois_1|attribut_html:>','<:date_mois_2|attribut_html:>','<:date_mois_3|attribut_html:>','<:date_mois_4|attribut_html:>','<:date_mois_5|attribut_html:>','<:date_mois_6|attribut_html:>','<:date_mois_7|attribut_html:>','<:date_mois_8|attribut_html:>','<:date_mois_9|attribut_html:>','<:date_mois_10|attribut_html:>','<:date_mois_11|attribut_html:>','<:date_mois_12|attribut_html:>'],
+			monthNamesShort:['<:date_mois_1_abbr|attribut_html:>','<:date_mois_2_abbr|attribut_html:>','<:date_mois_3_abbr|attribut_html:>','<:date_mois_4_abbr|attribut_html:>','<:date_mois_5_abbr|attribut_html:>','<:date_mois_6_abbr|attribut_html:>','<:date_mois_7_abbr|attribut_html:>','<:date_mois_8_abbr|attribut_html:>','<:date_mois_9_abbr|attribut_html:>','<:date_mois_10_abbr|attribut_html:>','<:date_mois_11_abbr|attribut_html:>','<:date_mois_12_abbr|attribut_html:>'],
+			dayNames:['<:date_jour_1|attribut_html:>','<:date_jour_2|attribut_html:>','<:date_jour_3|attribut_html:>','<:date_jour_4|attribut_html:>','<:date_jour_5|attribut_html:>','<:date_jour_6|attribut_html:>','<:date_jour_7|attribut_html:>'],
+			dayNamesShort:['<:date_jour_1_abbr|attribut_html:>','<:date_jour_2_abbr|attribut_html:>','<:date_jour_3_abbr|attribut_html:>','<:date_jour_4_abbr|attribut_html:>','<:date_jour_5_abbr|attribut_html:>','<:date_jour_6_abbr|attribut_html:>','<:date_jour_7_abbr|attribut_html:>'],
+			buttonText: {
+					today: '<:date_aujourdhui|attribut_html:>',
+					month: '<:organiseur:cal_par_mois|attribut_html:>',
+					day: '<:organiseur:cal_par_jour|attribut_html:>',
+					week: '<:organiseur:cal_par_semaine|attribut_html:>'
+			},
+			weekMode : 'liquid',
+			loading: function(bool) {
+				if (bool) $('#loading').show();
+				else $('#loading').hide();
+			},
+			timeFormat: {
+				// for agendaWeek and agendaDay
+				agenda: "H'h'mm{ - H'h'mm}", // 5h00 - 6h30
+				// for all other views
+				'': "H'h'(mm)" // 19h
+			},
+			axisFormat: "H'h'(mm)",
+			allDayText:'<:organiseur:cal_jour_entier|attribut_html:>',
+			columnFormat: {
+				month: 'ddd',    // Mon
+				week: 'ddd d/M', // Mon 9/7
+				day: 'dddd d/M'  // Monday 9/7
+			},
+			titleFormat: {
+				month: 'MMMM yyyy',                             // September 2009
+				week: "d [ MMM] [ yyyy]{ '&#8212;' d MMM yyyy}", // Sep 7 - 13 2009
+				day: 'dddd d MMM yyyy'                  // Tuesday, Sep 8, 2009
+			},
+			isRTL : [(#LANG_DIR|=={rtl}|?{true,false})]
+	})
+
+});
+</script>
+</BOUCLE_isrv>
+<INCLURE{fond=prive/squelettes/inclure/organiseur-rappels,id_auteur=#SESSION{id_auteur},last=#SESSION{quand}} />

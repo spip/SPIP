@@ -1,0 +1,32 @@
+[(#ID_DOCUMENT|sinon_interdire_acces)]
+[(#AUTORISER{modifier,document,#ID_DOCUMENT}|sinon_interdire_acces)]
+<div class="cadre-formulaire-editer[(#ENV{popin,''}|oui)popin]">
+<div class="entete-formulaire">
+	[(#ENV{popin,''}|non)
+	[(#ENV{redirect}|sinon{#URL_ECRIRE{documents}}|icone_verticale{<:icone_retour:>,document,'',left})]
+	]
+	[<:medias:info_modifier_document:>
+	<h1>(#INFO_TITRE{document,#ID_DOCUMENT}|sinon{#INFO_FICHIER*{document,#ID_DOCUMENT}})</h1>]
+</div>
+<div class="formedit">
+	<div class="ajax"><b class="reloaded"></b>
+	#FORMULAIRE_EDITER_DOCUMENT{#ID_DOCUMENT,#ENV{parent,''},#ENV{redirect,''},#ENV{lier_trad}}
+	</div>
+</div>
+<div class="ajax">
+#FORMULAIRE_ILLUSTRER_DOCUMENT{#ID_DOCUMENT}
+</div>
+</div>
+<script type="text/javascript">
+function reload_chemin(){
+	if (!jQuery('.formedit').find('.ajax>.reloaded:first').length){
+		jQuery('.formedit').find('.ajax').eq(0).prepend('<b class="reloaded"></b>');
+		jQuery('#chemin').find('>:first').ajaxReload();
+	}
+}
+jQuery(function(){
+	if (jQuery('body.document_edit').length)
+		onAjaxLoad(reload_chemin);
+});
+</script>
+#PIPELINE{afficher_contenu_objet,#ARRAY{args,#ARRAY{type,document,id_objet,#ID_DOCUMENT},data,''}}

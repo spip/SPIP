@@ -1,0 +1,16 @@
+<paquet
+	prefix="images"
+	categorie="multimedia"
+	version="1.1.7"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/image_filtre-32.png"
+>	
+
+	<nom>Images</nom>
+	<!-- Filtres de transformation d'image et de couleurs -->
+
+	<auteur>Collectif SPIP</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+</paquet>

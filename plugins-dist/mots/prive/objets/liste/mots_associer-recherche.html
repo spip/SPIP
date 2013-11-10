@@ -1,0 +1,45 @@
+#SET{selected,''}
+#SET{action,ajouter_lien}
+<BOUCLE_remplacer(MOTS){id_groupe}{id_mot IN #ENV{exclus}}{0,1}>[(#UNSEUL|=={oui}|oui)
+	<:mots:info_remplacer_mot{titre=#TITRE}:><br />
+	[(#SET{action,[(#VAL{remplacer_lien}|concat{[(#VAL{91}|chr)],'mot-',#ID_MOT,'-',#OBJET,'-',#ID_OBJET,[(#VAL{93}|chr)]})]})]
+]</BOUCLE_remplacer>
+
+<input type="text" class="text" name="recherche[#ID_GROUPE]" value="[(#ENV*{recherche}|table_valeur{#ID_GROUPE})]" />
+<input type="submit" class="submit" name="recherche[b#ID_GROUPE]" value="<:info_rechercher:>" />
+<input type="hidden" name="debutmota#ID_GROUPE" value='#ENV{debutmota#ID_GROUPE,#VAL{debutmotamota#ID_GROUPE}|_request}' />
+#SET{recherche,#ENV*{recherche}|table_valeur{#ID_GROUPE}}
+[(#GET{recherche}|non|et{#ENV*{recherche}|table_valeur{b#ID_GROUPE}})
+	#SET{recherche,'/./'}
+	<input type="hidden" name="recherche#EVAL{chr(91)}b#ID_GROUPE#EVAL{chr(93)}" value='x' />
+]
+<B_liste_mot>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-associer mots">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_mot_cle,info_nb_mots_cles}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_mot(MOTS){id_groupe}{id_mot !IN #ENV{exclus}}{recherche #GET{recherche}}{tri #ENV{par,titre},#GET{defaut_tri}}{par multi titre}{pagination 10 mota#ID_GROUPE}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>[(#VAL|puce_statut{mot,#ID_MOT,#ID_GROUPE})]</td>
+			<td class='titre principale'>[(#LOGO_MOT|image_reduire{20,20})]<a href="[(#ID_MOT|generer_url_entite{mot})]"
+																																						title="<:info_numero_abbreviation|attribut_html:> #ID_MOT">[(#RANG). ]#TITRE</a></td>
+			<td class='action'><button class="button link" name="#GET{action}[mot-#ID_MOT-#OBJET-#ID_OBJET]" value="+"><:mots:lien_ajouter_mot:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+		</tr>
+	</BOUCLE_liste_mot>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_mot>[(#ENV*{recherche}|table_valeur{#ID_GROUPE}|oui)
+<div class="liste-objets liste-objets-associer mots caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:mots:info_aucun_mot_cle:>}) ]</strong>
+</div>]
+<//B_liste_mot>

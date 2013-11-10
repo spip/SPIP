@@ -58,7 +58,7 @@ function auth_ldap_dist ($login, $pass, $serveur='', $phpauth=false) {
 	$credentials_ldap = array('ldap_dn' => $dn, 'ldap_password' => $pass);
 
 	// Si l'utilisateur figure deja dans la base, y recuperer les infos
-	$r = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='ldap'",'','','','',$serveur);
+	$r = Sql::fetsel("*", "spip_auteurs", "login=" . Sql::quote($login) . " AND source='ldap'",'','','','',$serveur);
 
 	if ($r) return array_merge($r, $credentials_ldap);
 
@@ -72,13 +72,13 @@ function auth_ldap_dist ($login, $pass, $serveur='', $phpauth=false) {
 		$desc['source'] = 'ldap';
 		$desc['pass'] = '';
 
-		$r = sql_insertq('spip_auteurs', $desc,'',$serveur);
+		$r = Sql::insertq('spip_auteurs', $desc,'',$serveur);
 	}				
 
 	if ($r)
 		return array_merge(
 			$credentials_ldap,
-			sql_fetsel("*", "spip_auteurs", "id_auteur=".intval($r),'','','','',$serveur)
+			Sql::fetsel("*", "spip_auteurs", "id_auteur=".intval($r),'','','','',$serveur)
 			);
 
 	// sinon echec

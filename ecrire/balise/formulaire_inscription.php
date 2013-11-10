@@ -12,7 +12,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('base/abstract_sql');
 include_spip('inc/filtres');
 
 // Balise independante du contexte
@@ -23,8 +22,8 @@ include_spip('inc/filtres');
  * @param object $p
  * @return mixed
  */
-function balise_FORMULAIRE_INSCRIPTION ($p) {
-
+function balise_FORMULAIRE_INSCRIPTION ($p)
+{
 	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', array());
 }
 
@@ -39,7 +38,8 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
  * @param array $context_compil
  * @return array|string
  */
-function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
+function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil)
+{
 	list($mode, $id) = $args;
 	include_spip('action/inscrire_auteur');
 	$mode = tester_statut_inscription($mode, $id);

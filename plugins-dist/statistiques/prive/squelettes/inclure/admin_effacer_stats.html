@@ -1,0 +1,12 @@
+[(#AUTORISER{detruire}|oui)
+
+	#BOITE_OUVRIR{#VAL{texte_effacer_statistiques}|_T|wrap{'<h3>'},'notice','titrem'}
+		<p><:statistiques:texte_admin_effacer_stats:></p>
+		<p><strong><:avis_suppression_base:></strong></p>
+		<p><:statistiques:texte_admin_effacer_toutes_stats:></p>
+	#BOITE_PIED
+		[(#BOUTON_ACTION{<:statistiques:bouton_effacer_statistiques:>,#URL_ECRIRE{base_delete_stats}})]
+		[(#BOUTON_ACTION{<:statistiques:bouton_effacer_referers:>,#URL_ECRIRE{base_delete_referers}})]
+	#BOITE_FERMER
+
+]

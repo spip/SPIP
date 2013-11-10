@@ -1,0 +1,19 @@
+<h1 class="grostitre"><:info_messagerie_interne:>[(#VAL{messages}|bouton_spip_rss{#ARRAY{id_auteur,#SESSION{id_auteur}}})]</h1>
+<div class='onglets_simple clearfix'>
+	<ul>
+		<li>[(#URL_ECRIRE{messages,quoi=reception}|lien_ou_expose{<:organiseur:titre_boite_reception:>,#ENV{quoi,reception}|=={reception},ajax})]</li>
+		<li>[(#URL_ECRIRE{messages,quoi=envoi}|lien_ou_expose{<:organiseur:titre_boite_envoi:>,#ENV{quoi,reception}|=={envoi},ajax})]</li>
+		<li>[(#URL_ECRIRE{messages,quoi=rv}|lien_ou_expose{<:organiseur:titre_agenda_rv:>,#ENV{quoi,reception}|=={rv},ajax})]</li>
+	</ul>
+</div>
+<INCLURE{fond=prive/squelettes/inclure/organiseur-#ENV{quoi,reception},id_auteur=#SESSION{id_auteur},env,ajax} />
+
+[(#AUTORISER{envoyermessage,normal}|oui)
+	[(#URL_ECRIRE{message_edit,new=oui}|icone_verticale{<:organiseur:icone_ecrire_nouveau_message:>,message-24.png,new,right})]
+]
+[(#AUTORISER{envoyermessage,pb}|oui)
+	[(#URL_ECRIRE{message_edit,new=oui&typemes=pb}|icone_verticale{<:organiseur:icone_ecrire_nouveau_pensebete:>,pensebete-24.png,new,right})]
+]
+[(#AUTORISER{envoyermessage,affich}|oui)
+	[(#URL_ECRIRE{message_edit,new=oui&typemes=affich}|icone_verticale{<:organiseur:icone_ecrire_nouvelle_annonce:>,annonce-24.png,new,right})]
+]

@@ -1,0 +1,35 @@
+<paquet
+	prefix="stats"
+	categorie="statistique"
+	version="0.4.17"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/statistique-32.png"
+	schema="1.0.0"
+>	
+
+	<nom>Statistiques</nom>
+	<!-- Gestion des statistiques dans SPIP -->
+
+	<auteur>Collectif SPIP</auteur>
+
+	<traduire module="statistiques" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="delete_statistiques" action="" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/stats.php" />
+	<pipeline nom="configurer_liste_metas" inclure="stats_pipelines.php" />
+	<pipeline nom="affichage_entetes_final" inclure="stats_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="stats_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="stats_pipelines.php" />
+	<pipeline nom="formulaire_admin" inclure="stats_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="stats_pipelines.php" />
+	<pipeline nom="autoriser" inclure="stats_autoriser.php" />
+	<pipeline nom="ieconfig_metas" inclure="stats_ieconfig.php" />
+
+	<menu nom="statistiques" titre="statistiques:icone_statistiques_visites" parent="menu_activite" icone="images/statistique-16.png" action="stats_visites" />
+
+	<onglet nom="stats_visites" titre="statistiques:icone_statistiques_visites" parent="statistiques" icone="images/statistique-24.png" action="stats_visites" />
+	<onglet nom="stats_referers" titre="statistiques:titre_liens_entrants" parent="statistiques" icone="images/referers-24.png" action="stats_referers" />
+	<onglet nom="stats_repartition" titre="statistiques:icone_repartition_visites" parent="statistiques" icone="images/repartition-24.png" action="stats_repartition" />
+	<onglet nom="stats_lang" titre="statistiques:onglet_repartition_lang" parent="statistiques" icone="images/langue-24.png" action="stats_lang" />
+</paquet>

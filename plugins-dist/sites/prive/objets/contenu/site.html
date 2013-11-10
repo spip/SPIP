@@ -1,0 +1,14 @@
+<BOUCLE_afficher_contenu(SYNDIC){id_syndic=#ENV{id}}{statut?}>
+<div class="champ contenu_nom_site[ (#NOM_SITE*|strlen|sinon{#URL_SITE*}|?{'',vide})]">
+<div class='label'><:sites:form_prop_nom_site:></div>
+<div dir='#LANG_DIR' class='#EDIT{hyperlien} nom_site'><a href='#URL_SITE'>#NOM_SITE</a></div>
+</div>
+<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+<div class='label'><:info_descriptif:></div>
+<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>[(#DESCRIPTIF|image_reduire{500,0})]</div>
+</div>
+[<div class="champ contenu_notes">
+<div class='label'><:info_notes:></div>
+<div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
+</div>]
+</BOUCLE_afficher_contenu>

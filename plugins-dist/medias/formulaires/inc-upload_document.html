@@ -1,0 +1,147 @@
+#SET{domid,_#ENV{mode}|concat{'_',#ENV{id,new}}}
+#SET{methode,upload}
+[(#ENV{joindre_mediatheque}|oui)#SET{methode,mediatheque}]
+[(#ENV{joindre_distant}|oui)#SET{methode,distant}]
+[(#ENV{joindre_ftp}|oui)#SET{methode,ftp}]
+
+<div id="defaultsubmit#GET{domid}" class="none"></div>
+[
+
+
+(#REM) Formulaire d'upload de fichier
+]<div class='joindre_mode#GET{domid}[(#GET{methode}|=={upload}|non)none-js]' id='joindre_upload#GET{domid}'>
+	<ul>
+		<li class='editer editer_fichier_upload[ (#ENV**{erreurs}|table_valeur{fichier_upload}|oui)erreur]'>
+			<label for='fichier_upload#GET{domid}'><:bouton_upload:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier_upload})</span>
+			]<input class='file multi' type="file" name="fichier_upload[]" value='#ENV{fichier_upload}' id="fichier_upload#GET{domid}" size='11' />
+			<!--editer_fichier_upload-->
+		</li>
+	</ul>
+	<div class='sourceup'>
+		<:medias:bouton_download_depuis:>
+		<:medias:bouton_download_local:>
+		[(#ENV{mediatheque,''}|oui)
+		| <a href='#' onclick="change_methode('#GET{domid}','mediatheque');return false;"><:medias:bouton_download_par_mediatheque:></a>]
+		[(#ENV{proposer_ftp,''}|oui)
+		| <a href='#' onclick="change_methode('#GET{domid}','ftp');return false;"><:medias:bouton_download_par_ftp:></a>]
+		| <a href='#' onclick="change_methode('#GET{domid}','distant');return false;"><:medias:bouton_download_sur_le_web:></a>
+	</div>
+	<p class='boutons'><input class='submit' type="submit" name="joindre_upload" value="<:bouton_upload:>"/></p>
+</div>[
+
+
+
+
+(#REM) Formulaire pour document dans mediatheque
+][(#ENV{mediatheque,''}|oui)
+<div class='joindre_mode#GET{domid}[(#GET{methode}|=={mediatheque}|non)none-js]' id='joindre_mediatheque#GET{domid}'>
+	<ul>
+		<li class='editer editer_refdoc_joindre[ (#ENV**{erreurs}|table_valeur{refdoc_joindre}|oui)erreur]'>
+			<label for='refdoc_joindre#GET{domid}'><:medias:label_refdoc_joindre:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{refdoc_joindre})</span>
+			]<input class='text' type="text" name="refdoc_joindre" value='#ENV{refdoc_joindre}' id="refdoc_joindre#GET{domid}"/>
+			<input class='submit' type="button" name="parcourir" value="<:medias:bouton_parcourir:>"
+				onclick="jQuery.modalboxload('#URL_ECRIRE{popin-choisir_document,var_zajax=contenu&selectfunc=mediaselect#GET{domid}}',{autoResize: true});"
+			/>
+			<!--editer_refdoc_joindre-->
+		</li>
+	</ul>
+	<script type="text/javascript">/*<!\[CDATA\[*/
+	function mediaselect#GET{domid}(id){jQuery.modalboxclose();jQuery("#refdoc_joindre#GET{domid}").attr('value','doc'+id).focus();jQuery('#joindre_mediatheque#GET{domid}>.boutons input').get(0).click();}
+	/*\]\]>*/</script>
+	<div class='sourceup'>
+		<:medias:bouton_download_depuis:>
+			<a href='#' onclick="change_methode('#GET{domid}','upload');return false;"><:medias:bouton_download_local:></a>
+		| <:medias:bouton_download_par_mediatheque:>
+		[(#ENV{proposer_ftp,''}|oui)
+		| <a href='#' onclick="change_methode('#GET{domid}','ftp');return false;"><:medias:bouton_download_par_ftp:></a>]
+		| <a href='#' onclick="change_methode('#GET{domid}','distant');return false;"><:medias:bouton_download_sur_le_web:></a>
+	</div>
+	<p class='boutons'><input class='submit' type="submit" name="joindre_mediatheque" value="<:medias:bouton_attacher_document:>"/></p>
+</div>
+][
+
+
+
+
+(#REM) Formulaire pour upload ftp
+][(#ENV{proposer_ftp,''}|oui)
+<div class='joindre_mode#GET{domid}[(#GET{methode}|=={ftp}|non)none-js]' id='joindre_ftp#GET{domid}'>
+	[
+	<ul>
+		<li class='editer editer_cheminftp[ (#ENV**{erreurs}|table_valeur{cheminftp}|oui)erreur]'>
+			<label for='cheminftp#GET{domid}'>[(#VAL{info_selectionner_fichier}|_T{#ARRAY{upload,#ENV*{_dir_upload_ftp}}})]</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cheminftp})</span>
+			]<select name='cheminftp' id='cheminftp#GET{domid}' size='1'>
+			<option value=''>&gt;&gt;</option>
+			(#ENV*{_options_upload_ftp})
+			</select>
+			<!--editer_cheminftp-->
+		</li>
+	</ul>][(#ENV{_dir_upload_ftp}|et{#ENV{_options_upload_ftp}|non}|oui)
+	<p class="infos">
+	[(#VAL{info_installer_ftp}|_T{#ARRAY{upload,#ENV*{_dir_upload_ftp}}})] #AIDER{ins_upload}
+	</p>
+	]
+	<div class='sourceup'>
+		<:medias:bouton_download_depuis:>
+		<a href='#' onclick="change_methode('#GET{domid}','upload');return false;"><:medias:bouton_download_local:></a>
+		[(#ENV{mediatheque,''}|oui)
+		| <a href='#' onclick="change_methode('#GET{domid}','mediatheque');return false;"><:medias:bouton_download_par_mediatheque:></a>]
+		| <:medias:bouton_download_par_ftp:>
+		| <a href='#' onclick="change_methode('#GET{domid}','distant');return false;"><:medias:bouton_download_sur_le_web:></a>
+	</div>
+	<p class='boutons'>
+		[(#ENV*{_options_upload_ftp}|oui)
+		<input class='submit' type="submit" name="joindre_ftp" value="<:bouton_choisir:>"/>
+		]
+	</p>
+</div>
+][
+
+
+
+
+(#REM) Formulaire pour document distant
+]<div class='joindre_mode#GET{domid}[(#GET{methode}|=={distant}|non)none-js]' id='joindre_distant#GET{domid}'>
+	<ul>
+		<li class='editer editer_url[ (#ENV**{erreurs}|table_valeur{url}|oui)erreur]'>
+			<label for='url#GET{domid}'><:medias:info_referencer_doc_distant:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url})</span>
+			]<input class='text' type="text" name="url" value='#ENV{url}' id="url#GET{domid}"/>
+			<!--editer_url-->
+		</li>
+	</ul>
+	<div class='sourceup'>
+		<:medias:bouton_download_depuis:>
+			<a href='#' onclick="change_methode('#GET{domid}','upload');return false;"><:medias:bouton_download_local:></a>
+		[(#ENV{mediatheque,''}|oui)
+		| <a href='#' onclick="change_methode('#GET{domid}','mediatheque');return false;"><:medias:bouton_download_par_mediatheque:></a>]
+		[(#ENV{proposer_ftp,''}|oui)
+		| <a href='#' onclick="change_methode('#GET{domid}','ftp');return false;"><:medias:bouton_download_par_ftp:></a>]
+		| <:medias:bouton_download_sur_le_web:>
+	</div>
+	<p class='boutons'><input class='submit' type="submit" name="joindre_distant" value="<:bouton_choisir:>"/></p>
+</div>[
+
+
+
+
+(#REM) Formulaire pour deballer un zip
+][<ul><li class='fieldset deballer_zip'>(#ENV**{erreurs}|table_valeur{lister_contenu_archive})</li></ul>]
+
+<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+if (window.jQuery){
+function change_methode(domid,methode){
+	var id = "#joindre_"+methode+domid;
+	if (jQuery(id).is(':hidden')) {
+		jQuery('div.joindre_mode'+domid+':visible').slideUp('fast');
+		jQuery(id).slideDown('fast');
+	}
+	// placer en haut du formulaire les boutons submit par defaut correspondant a la methode active
+	jQuery("#defaultsubmit"+domid).html('').append(jQuery(id).find('.boutons').eq(-1).find('input').clone(true));
+}
+jQuery(function(){change_methode('#GET{domid}','#GET{methode}');});
+}
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>

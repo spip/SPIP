@@ -1,0 +1,34 @@
+[(#AUTORISER{sauvegarder}|sinon_interdire_acces)]
+#SET{fin,#ENV{status}|dump_verifie_sauvegarde_finie}
+[(#GET{fin}|non)
+	<h1 class="grostitre"><:dump:texte_restaurer_base:></h1>
+
+	#BOITE_OUVRIR{'','notice'}
+	#SET{dir_dump,#VAL{'<i>'}|concat{#REM|dump_repertoire|joli_repertoire{},'</i>'}}
+	<p><:dump:texte_restaurer_sauvegarde{dossier=#GET{dir_dump}}:></p>
+	#BOITE_FERMER
+
+	<div class="ajax">
+		#FORMULAIRE_RESTAURER
+	</div>
+][(#GET{fin}|oui)
+
+	#BOITE_OUVRIR{'','success'}
+
+	[(#SET{archive,[(#VAL{'<br /><b>'}|concat{#ENV{status}|dump_nom_sauvegarde|joli_repertoire}|concat{'</b>'})]})]
+
+	<p>
+	<:dump:info_restauration_finie{archive=#GET{archive}}:>
+	<:dump:info_sauvegarde_reussi_03:> <:dump:info_sauvegarde_reussi_04:>
+	</p>
+
+	#BOITE_FERMER
+
+	[#BOITE_OUVRIR{'','error'}
+	
+	(#ENV{status}|dump_afficher_tables_restaurees_erreurs)
+	#BOITE_FERMER
+
+	]
+
+]

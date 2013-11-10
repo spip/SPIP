@@ -15,8 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Retour d'authentification pour les SSO
  */
-function action_auth_dist() {
-	
+function action_auth_dist()
+{
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
@@ -29,7 +29,7 @@ function action_auth_dist() {
 		include_spip('inc/auth');
 		$res = auth_terminer_identifier_login($auth_methode, $login);
 
-		if (is_string($res)){ // Erreur
+		if (is_string($res)) { // Erreur
 			$redirect = _request('redirect');
 			$redirect = parametre_url($redirect,'var_erreur',$res,'&');
 			include_spip('inc/headers');

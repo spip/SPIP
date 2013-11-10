@@ -15,8 +15,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/autoriser');
 
 // http://doc.spip.org/@gerer_deplacements
-function gerer_deplacements($deplacements){
-	foreach(explode("\n",$deplacements) as $dep){
+function gerer_deplacements($deplacements)
+{
+	foreach (explode("\n",$deplacements) as $dep) {
 		$mouvement=explode(":",$dep);
 		list($quoi,$id_quoi) = explode("-",$mouvement[0]);
 		list($cible, $id_cible) =explode("-",$mouvement[1]);
@@ -32,11 +33,11 @@ function reorganiser_article_rubrique($id_article, $id_rubrique)
 {
 	if ($id_rubrique
 	AND autoriser('modifier','rubrique',$id_rubrique)
-	AND autoriser('modifier','article',$id_article)) {
-
+	AND autoriser('modifier','article',$id_article))
+	{
 		include_spip('action/editer_article');
 		include_spip('inc/rubriques');
-		$s = sql_fetsel("statut, id_rubrique", "spip_articles", "id_article=$id_article");
+		$s = Sql::fetsel("statut, id_rubrique", "spip_articles", "id_article=$id_article");
 		editer_article_heritage($id_article,
 					$s['id_rubrique'], 
 					$s['statut'],
@@ -49,16 +50,17 @@ function reorganiser_rubrique_rubrique($id_quoi, $id_cible)
 {
 	if (($id_quoi != $id_cible)
 	AND autoriser('modifier','rubrique',$id_cible)
-	AND autoriser('modifier','rubrique',$id_quoi)) {
+	AND autoriser('modifier','rubrique',$id_quoi))
+	{
 		if (!$id_cible)
 			$id_secteur = $id_quoi;
 		else {
-			$id_secteur = sql_getfetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_cible");
+			$id_secteur = Sql::getfetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_cible");
 		}
 
-		$s = sql_fetsel("statut, id_parent, id_secteur", "spip_rubriques", "id_rubrique=".intval($id_quoi));
+		$s = Sql::fetsel("statut, id_parent, id_secteur", "spip_rubriques", "id_rubrique=".intval($id_quoi));
 
-		sql_updateq('spip_rubriques', array('id_parent' => $id_cible, 'id_secteur'=>$id_secteur),  "id_rubrique=".intval($id_quoi));
+		Sql::updateq('spip_rubriques', array('id_parent' => $id_cible, 'id_secteur'=>$id_secteur),  "id_rubrique=".intval($id_quoi));
 
 		include_spip('inc/rubriques');
 		// propager les secteurs si besoin
@@ -73,8 +75,8 @@ function reorganiser_rubrique_rubrique($id_quoi, $id_cible)
 }
 
 // http://doc.spip.org/@action_reorganiser_dist
-function action_reorganiser_dist(){
-
+function action_reorganiser_dist()
+{
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
 

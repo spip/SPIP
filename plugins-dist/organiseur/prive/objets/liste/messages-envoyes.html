@@ -1,0 +1,49 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_heure,#ENV{date_sens,-1},
+	titre,1,
+	id_article,1,
+	points,-1
+}})
+]
+<B_mess_env>
+#ANCRE_PAGINATION
+<div class="liste-objets messages">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{organiseur:info_1_message_envoye,organiseur:info_nb_messages_envoyes}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='type' scope='col'>[(#TRI{type,<span title="<:organiseur:lien_trier_type|attribut_html:>">#</span>,ajax})]</th>
+			<th class='isrv' scope='col'>[(#CHEMIN_IMAGE{heure-16.png}|balise_img{<:organiseur:info_type_message_rv:>})]</th>
+			<th class='to' scope='col'><:organiseur:info_message_a:></th>
+			<th class='date secondaire' scope='col'>[(#TRI{date_heure,<:date:>,ajax})]</th>
+			<th class='titre principale' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_mess_env(MESSAGES){destinataire?#ENV{destinataire}}{id_auteur?}{type?}{where?}{statut?}{recherche?}{tri #ENV{par,date_heure},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='type'>[(#CHEMIN_IMAGE{#TYPE|organiseur_icone_message{16}}|balise_img{#VAL{organiseur:info_type_message_}|concat{#TYPE}|_T})]</td>
+			<td class='isrv'>[(#RV|=={oui}|oui)[(#CHEMIN_IMAGE{heure-16.png}|balise_img{<:organiseur:info_type_message_rv:>})]]</td>
+			<td class="to"><BOUCLE_d(POUR){tableau #DESTINATAIRES|explode{','}}{si #TYPE|=={normal}}{', '}><BOUCLE_a(AUTEURS){id_auteur=#VALEUR}{tout}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_a>#VALEUR<//B_a></BOUCLE_d></td>
+			<td class='date secondaire'>
+				[(#RV|=={oui}|?{
+					[(#DATE_HEURE|affdate_debut_fin{#DATE_FIN,oui,abbr})]
+				,
+					[(#DATE_HEURE|affdate_jourcourt)]
+				})]
+			</td>
+			<td class='titre principale'>
+				<a
+					href="[(#ID_MESSAGE|generer_url_entite{message})]">#TITRE</a>
+			</td>
+			<td class=''></td>
+		</tr>
+	</BOUCLE_mess_env>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_mess_env>[
+<div class="liste-objets messages caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_mess_env>

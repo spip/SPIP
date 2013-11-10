@@ -37,7 +37,7 @@ function precharger_objet($type, $id_objet, $id_rubrique=0, $lier_trad=0, $champ
 
 	// si l'objet existe deja, on retourne simplement ses valeurs
 	if (is_numeric($id_objet))
-		return sql_fetsel("*", $table, "$_id_objet=$id_objet");
+		return Sql::fetsel("*", $table, "$_id_objet=$id_objet");
 
 	// ici, on demande une creation.
 	// on prerempli certains elements : les champs si traduction,
@@ -71,13 +71,13 @@ function precharger_objet($type, $id_objet, $id_rubrique=0, $lier_trad=0, $champ
 			if ($connect_id_rubrique)
 				$row['id_rubrique'] = $id_rubrique = $connect_id_rubrique[0]; 
 			else {
-				$row_rub = sql_fetsel("id_rubrique", "spip_rubriques", "", "", "id_rubrique DESC", 1);
+				$row_rub = Sql::fetsel("id_rubrique", "spip_rubriques", "", "", "id_rubrique DESC", 1);
 				$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
 			}
 			if (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] )){
 				// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
-				$res = sql_select("id_rubrique", "spip_rubriques", "id_parent=0");
-				while (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] ) && $row_rub = sql_fetch($res)){
+				$res = Sql::select("id_rubrique", "spip_rubriques", "id_parent=0");
+				while (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] ) && $row_rub = Sql::fetch($res)){
 					$row['id_rubrique'] = $row_rub['id_rubrique'];
 				}
 			}
@@ -87,7 +87,7 @@ function precharger_objet($type, $id_objet, $id_rubrique=0, $lier_trad=0, $champ
 	// recuperer le secteur, pour affecter les bons champs extras
 	if ($id_rubrique and $is_secteur) {
 		if (!$row['id_secteur']) {
-			$row_rub = sql_getfetsel("id_secteur", "spip_rubriques", "id_rubrique=" . sql_quote($id_rubrique));
+			$row_rub = Sql::getfetsel("id_secteur", "spip_rubriques", "id_rubrique=" . Sql::quote($id_rubrique));
 			$row['id_secteur'] = $row_rub;
 		}
 	}
@@ -113,7 +113,7 @@ function precharger_traduction_objet($type, $id_objet, $id_rubrique=0, $lier_tra
 	$_id_objet = id_table_objet($table);
 
 	// Recuperer les donnees de l'objet original
-	$row = sql_fetsel("*", $table, "$_id_objet=$lier_trad");
+	$row = Sql::fetsel("*", $table, "$_id_objet=$lier_trad");
 	if ($row) {
 		$row[$champ_titre] = filtrer_entites(_T('info_nouvelle_traduction')).' '.$row[$champ_titre];
 	} else {
@@ -150,11 +150,11 @@ function precharger_traduction_objet($type, $id_objet, $id_rubrique=0, $lier_tra
 					$id_parent = 0;
 				} else {
 					// on cherche une rubrique soeur dans la bonne langue
-					$row_rub = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
+					$row_rub = Sql::fetsel("id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
 					$id_parent = $row_rub['id_parent'];
 				}
 				
-				$row_rub = sql_fetsel("id_rubrique", "spip_rubriques", "lang='".$GLOBALS['spip_lang']."' AND id_parent=$id_parent");
+				$row_rub = Sql::fetsel("id_rubrique", "spip_rubriques", "lang='".$GLOBALS['spip_lang']."' AND id_parent=$id_parent");
 				if ($row_rub)
 					$row['id_rubrique'] = $row_rub['id_rubrique'];	
 			}
