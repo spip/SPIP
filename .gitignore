@@ -33,5 +33,6 @@ local/chargeur
 /mutualisation
 /sites
 /squelettes
+/plugins
 /themes
 tmp/*

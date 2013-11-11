@@ -28,40 +28,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /** Version de l'API SQL */
 define('sql_ABSTRACT_VERSION', 1);
-include_spip('base/connect_sql');
 
 Class Sql
 {
+	protected static $driver = null;
 
-/**
- * Charge le serveur de base de donnees
- * 
- * Fonction principale. Elle charge l'interface au serveur de base de donnees
- * via la fonction spip_connect_version qui etablira la connexion au besoin.
- * Elle retourne la fonction produisant la requete SQL demandee
- * Erreur fatale si la fonctionnalite est absente sauf si le 3e arg <> false
- *
- * @internal Cette fonction de base est appelee par les autres fonctions sql_*
- * @param string $ins_sql
- * 		Instruction de l'API SQL demandee (insertq, update, select...)
- * @param string $serveur
- * 		Nom du connecteur ('' pour celui par defaut a l'installation de SPIP)
- * @param bool $continue
- * 		true pour ne pas generer d'erreur si le serveur SQL ne dispose pas de la fonction demandee
- * @return string|array
- * 		Nom de la fonction a appeler pour l'instruction demandee pour le type de serveur SQL correspondant au fichier de connexion.
- * 		Si l'instruction demandee n'existe pas, retourne la liste de toutes les instructions du serveur SQL avec $continue a true.
- * 
-**/
-public function serveur($ins_sql='', $serveur='', $continue=false)
+public static function connect($host, $port, $login, $pass, $serveur='')
 {
-	static $sql_serveur = array();
-	if (!isset($sql_serveur[$serveur][$ins_sql])) {
-		$f = spip_connect_sql(sql_ABSTRACT_VERSION, $ins_sql, $serveur, $continue);
-		if (!is_string($f) OR !$f) return $f;
-		$sql_serveur[$serveur][$ins_sql] = $f;
-	}
-	return $sql_serveur[$serveur][$ins_sql];
+	self::$driver = new Mysql();
+	
+	$r = self::$driver->connect($host, $port, $login, $pass, $serveur);
+	if ($r===false) self::error($serveur);
+	return $r;
 }
 
 /**
@@ -82,20 +60,12 @@ public function serveur($ins_sql='', $serveur='', $continue=false)
  * @return string|bool
  * 		Retourne le nom du charset si effectivement trouve, sinon false.
 **/
-public function get_charset($charset, $serveur='', $option=true)
+public static function get_charset($charset, $serveur='', $option=true)
 {
-  // le nom http du charset differe parfois du nom SQL utf-8 ==> utf8 etc.
-	$desc = self::serveur('', $serveur, true,true);
-	$desc = $desc[sql_ABSTRACT_VERSION];
-	$c = $desc['charsets'][$charset];
-	if ($c) {
-		if (function_exists($f=@$desc['get_charset'])) 
-			if ($f($c, $serveur, $option!==false)) return $c;
-	}
+	$c = self::$driver->get_charset($chartset, $serveur, $option);
 	spip_log( "SPIP ne connait pas les Charsets disponibles sur le serveur $serveur. Le serveur choisira seul.", _LOG_AVERTISSEMENT);
 	return false;
 }
-
 
 /**
  * Regler le codage de connexion
@@ -118,11 +88,9 @@ public function get_charset($charset, $serveur='', $option=true)
  * @return bool
  * 		Retourne true si elle reussie.
 **/
-public function set_charset($charset,$serveur='', $option=true)
+public static function set_charset($charset, $serveur='', $option=true)
 {
-	$f = self::serveur('set_charset', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	return $f($charset, $serveur, $option!==false);
+	return self::$driver->set_charset($charset, $serveur, $option);
 }
 
 /**
@@ -169,34 +137,24 @@ public function set_charset($charset,$serveur='', $option=true)
  * afin de disposer du texte brut.
  *
 **/
-public function select ($select = array(), $from = array(), $where = array(), $groupby = array(),
+public static function select($select = array(), $from = array(), $where = array(), $groupby = array(),
 	$orderby = array(), $limit = '', $having = array(), $serveur='', $option=true)
 {
-	$f = self::serveur('select', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-
 	$debug = (defined('_VAR_MODE') AND _VAR_MODE == 'debug');
-	if (($option !== false) AND !$debug) {
-		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, is_array($option) ? true : $option);
-	} else {
-		$query = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
-		if (!$option) return $query;
+	$res = self::$driver->select($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, ($option !== false) AND !$debug);
+	if (!$option) return $query;
+	if ($debug) {
 		// le debug, c'est pour ce qui a ete produit par le compilateur
 		if (isset($GLOBALS['debug']['aucasou'])) {
 			list($table, $id,) = $GLOBALS['debug']['aucasou'];
 			$nom = $GLOBALS['debug_objets']['courant'] . $id;
-			$GLOBALS['debug_objets']['requete'][$nom] = $query;
+			$GLOBALS['debug_objets']['requete'][$nom] = $res;
 		}
-		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, true);
+		$res = self::select($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, true);
 	}
 
-	// en cas d'erreur
-	if (!is_string($res)) return $res;
-	// denoncer l'erreur SQL dans sa version brute
-	spip_sql_erreur($serveur);
-	// idem dans sa version squelette (prefixe des tables non substitue)
-	erreur_squelette(array(self::errno($serveur), self::error($serveur), $res), $option);
-	return false;
+	if ($res===false) self::error();
+	return $res;
 }
 
 
@@ -232,10 +190,10 @@ public function select ($select = array(), $from = array(), $where = array(), $g
  * 		ou false en cas d'erreur
  *  
 **/
-public function get_select($select = array(), $from = array(), $where = array(), $groupby = array(),
+public static function get_select($select = array(), $from = array(), $where = array(), $groupby = array(),
 	$orderby = array(), $limit = '', $having = array(), $serveur='')
 {
-	return self::select ($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
+	return self::select($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
 }
 
 
@@ -268,13 +226,11 @@ public function get_select($select = array(), $from = array(), $where = array(),
  * 		ou false en cas d'erreur
  *
 **/
-public function countsel($from = array(), $where = array(), $groupby = array(),
+public static function countsel($from = array(), $where = array(), $groupby = array(),
 	$having = array(), $serveur='', $option=true)
 {
-	$f = self::serveur('countsel', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($from, $where, $groupby, $having, $serveur, $option!==false);
-	if ($r===false) spip_sql_erreur($serveur);
+	$r = self::$driver->countsel($from, $where, $groupby, $having, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
@@ -301,12 +257,10 @@ public function countsel($from = array(), $where = array(), $groupby = array(),
  * 		- false en cas de serveur indiponible ou d'erreur
  * 		Ce retour n'est pas pertinent pour savoir si l'operation est correctement realisee.
 **/
-public function alter($q, $serveur='', $option=true)
+public static function alter($q, $serveur='', $option=true)
 {
-	$f = self::serveur('alter', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($q, $serveur, $option!==false);
-	if ($r===false) spip_sql_erreur($serveur);
+	$r = self::$driver->alter($q, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
@@ -329,11 +283,11 @@ public function alter($q, $serveur='', $option=true)
  * 		Tableau de cles (colonnes SQL ou alias) / valeurs (valeurs dans la colonne de la table ou calculee)
  * 		presentant une ligne de resultat d'une selection 
  */
-public function fetch($res, $serveur='', $option=true)
+public static function fetch($res, $type=MYSQL_ASSOC)
 {
-	$f = self::serveur('fetch', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	return $f($res, NULL, $serveur, $option!==false);
+	$r = self::$driver->fetch($res, null, $serveur, $option);
+	if ($r===false) self::error($serveur);
+	return $r;
 }
 
 
@@ -359,13 +313,10 @@ public function fetch($res, $serveur='', $option=true)
  * 		de cles (colonnes SQL ou alias) / valeurs (valeurs dans la colonne de la table ou calculee)
  * 		presentant une ligne de resultat d'une selection 
  */
-public function fetch_all($res, $serveur='', $option=true)
+public static function fetch_all($res, $serveur='', $option=true)
 {
-	$rows = array();
-	if (!$res) return $rows;
-	$f = self::serveur('fetch', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return array();
-	while ($r = $f($res, NULL, $serveur, $option!==false))
+	$rows = array();	
+	while ($r = self::fetch($q, null))
 		$rows[] = $r;
 	self::free($res, $serveur);
 	return $rows;
@@ -395,12 +346,10 @@ public function fetch_all($res, $serveur='', $option=true)
  * @return bool
  * 		Operation effectuee (true), sinon false.
 **/
-public function seek($res, $row_number, $serveur='', $option=true)
+public static function seek($res, $row_number)
 {
-	$f = self::serveur('seek', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($res, $row_number, $serveur, $option!==false);
-	if ($r===false) spip_sql_erreur($serveur);
+	$r = self::$driver->seek($res, $row_number);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
@@ -425,12 +374,10 @@ public function seek($res, $row_number, $serveur='', $option=true)
  * 		Tableau contenant chaque nom de base de donnees.
  * 		False en cas d'erreur.
 **/
-public function listdbs($serveur='', $option=true)
+public static function listdbs($serveur='', $option=true)
 {
-	$f = self::serveur('listdbs', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($serveur);
-	if ($r===false) spip_sql_erreur($serveur);
+	$r = self::$driver->listdbs($serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
@@ -451,31 +398,33 @@ public function listdbs($serveur='', $option=true)
  * 		True ou nom de la base en cas de success.
  * 		False en cas d'erreur.
 **/
-public function selectdb($nom, $serveur='', $option=true)
+public static function selectdb($nom, $serveur='', $option=true)
 {
-	$f = self::serveur('selectdb', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($nom, $serveur, $option!==false);
-	if ($r===false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->selectdb($nom, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
 // http://doc.spip.org/@sql_count
-public function count($res, $serveur='', $option=true)
+public static function count($res)
 {
-	$f = self::serveur('count', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($res, $serveur, $option!==false);
-	if ($r===false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->count($res);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
 // http://doc.spip.org/@sql_free
-public function free($res, $serveur='', $option=true)
+public static function free($res, $serveur='', $option=true)
 {
-	$f = self::serveur('free', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	return $f($res);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->free($res, $serveur, $option);
+	if ($r===false) self::error($serveur);
+	return $r;
 }
 
 // Cette fonction ne garantit pas une portabilite totale
@@ -483,42 +432,67 @@ public function free($res, $serveur='', $option=true)
 // Elle est fournie pour permettre l'actualisation de vieux codes 
 // par un Sed brutal qui peut donner des resultats provisoirement acceptables
 // http://doc.spip.org/@sql_insert
-public function insert($table, $noms, $valeurs, $desc=array(), $serveur='', $option=true)
+public static function insert($table, $noms, $valeurs, $desc=array(), $serveur='', $option=true)
 {
-	$f = self::serveur('insert', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($table, $noms, $valeurs, $desc, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->insert($table, $noms, $valeurs, $desc, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
 // http://doc.spip.org/@sql_insertq
-public function insertq($table, $couples=array(), $desc=array(), $serveur='', $option=true)
+public static function insertq($table, $couples=array(), $desc=array(), $serveur='', $option=true)
 {
-	$f = self::serveur('insertq', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($table, $couples, $desc, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
-	return $r;
+	if (!$desc) $desc = self::description_table($table, $serveur);
+	if (!$desc) $couples = array();
+	$fields =  isset($desc['field'])?$desc['field']:array();
+
+	foreach ($couples as $champ => $val) {
+		$couples[$champ]= self::cite($val, $fields[$champ]);
+	}
+
+	return self::insert($table,
+		'('.join(',',array_keys($couples)).')',
+		'('.join(',', $couples).')',
+		$desc, $serveur, $option);
 }
 
 // http://doc.spip.org/@sql_insertq_multi
-function insertq_multi($table, $couples=array(), $desc=array(), $serveur='', $option=true)
+public static function insertq_multi($table, $couples=array(), $desc=array(), $serveur='', $option=true)
 {
-	$f = self::serveur('insertq_multi', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($table, $couples, $desc, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
-	return $r;
+	if (!$desc) $desc = self::description_table($table, $serveur);
+	if (!$desc) $tab_couples = array();
+	$fields =  isset($desc['field']) ? $desc['field'] : array();
+	
+	$cles = '(' . join(',',array_keys(reset($tab_couples))) . ')';
+	$valeurs = array();
+	$r = false;
+
+	// Quoter et Inserer par groupes de 100 max pour eviter un debordement de pile
+	foreach ($tab_couples as $couples) {
+		foreach ($couples as $champ => $val) {
+			$couples[$champ]= self::cite($val, $fields[$champ]);
+		}
+		$valeurs[] = '(' .join(',', $couples) . ')';
+		if (count($valeurs)>=100) {
+			$r = self::insert($table, $cles, join(', ', $valeurs), $desc, $serveur, $option);
+			$valeurs = array();
+		}
+	}
+	if (count($valeurs))
+		$r = self::insert($table, $cles, join(', ', $valeurs), $desc, $serveur, $option);
+
+	return $r; // dans le cas d'une table auto_increment, le dernier insert_id
 }
 
-// http://doc.spip.org/@sql_update
-function update($table, $exp, $where='', $desc=array(), $serveur='', $option=true)
+// http://doc.spip.org/@sql_delete
+public static function update($table, $exp, $where='', $desc=array(), $serveur='', $option=true)
 {
-	$f = self::serveur('update', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($table, $exp, $where, $desc, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->update($table, $exp, $where, $desc, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
@@ -526,64 +500,70 @@ function update($table, $exp, $where='', $desc=array(), $serveur='', $option=tru
 // Cette fonction est donc plus utile que la precedente,d'autant qu'elle
 // permet de gerer les differences de representation des constantes.
 // http://doc.spip.org/@sql_updateq
-function updateq($table, $exp, $where='', $desc=array(), $serveur='', $option=true)
+public static function updateq($table, $exp, $where='', $desc=array(), $serveur='', $option=true)
 {
-	$f = self::serveur('updateq', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($table, $exp, $where, $desc, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
-	return $r;
+	if (!$champs) return;
+	if (!$desc) $desc = self::description_table($table, $serveur);
+	if (!$desc) $champs = array(); else $fields =  $desc['field'];
+	$set = array();
+	foreach ($champs as $champ => $val) {
+		$set[] = $champ . '=' . self::cite($val, $fields[$champ]);
+	}
+	return self::query(
+			  self::$driver->calculer_expression('UPDATE', $table, ',')
+			. self::$driver->calculer_expression('SET', $set, ',')
+			. self::$driver->calculer_expression('WHERE', $where),
+			$serveur, $option);
 }
 
 // http://doc.spip.org/@sql_delete
-function delete($table, $where='', $serveur='', $option=true)
+public static function delete($table, $where='', $serveur='', $option=true)
 {
-	$f = self::serveur('delete', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($table, $where, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->delete($table, $where, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
 // http://doc.spip.org/@sql_replace
-function replace($table, $couples, $desc=array(), $serveur='', $option=true)
+public static function replace($table, $couples, $desc=array(), $serveur='', $option=true)
 {
-	$f = self::serveur('replace', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($table, $couples, $desc, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->replace($table, $couples, $desc, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
-
 // http://doc.spip.org/@sql_replace_multi
-function replace_multi($table, $tab_couples, $desc=array(), $serveur='', $option=true)
+public static function replace_multi($table, $tab_couples, $desc=array(), $serveur='', $option=true)
 {
-	$f = self::serveur('replace_multi', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($table, $tab_couples, $desc, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->replace_multi($table, $tab_couples, $desc, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
 // http://doc.spip.org/@sql_drop_table
-function drop_table($table, $exist='', $serveur='', $option=true)
+public static function drop_table($table, $exist='', $serveur='', $option=true)
 {
-	$f = self::serveur('drop_table', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($table, $exist, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->drop_table($table, $exist, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
 // supprimer une vue sql
 // http://doc.spip.org/@sql_drop_view
-function drop_view($table, $exist='', $serveur='', $option=true)
+public static function drop_view($table, $exist='', $serveur='', $option=true)
 {
-	$f = self::serveur('drop_view', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($table, $exist, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->drop_view($table, $exist, $serveur, $option!=false);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
@@ -605,18 +585,19 @@ function drop_view($table, $exist='', $serveur='', $option=true)
  * @return ressource
  *     Ressource à utiliser avec sql_fetch()
 **/
-function showbase($spip=NULL, $serveur='', $option=true)
+public static function showbase($spip=NULL, $serveur='', $option=true)
 {
-	$f = self::serveur('showbase', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-
+	if (!is_object(self::$driver)) return false;
+	
 	// la globale n'est remplie qu'apres l'appel de sql_serveur.
 	if ($spip == NULL) {
 		$connexion = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 		$spip = $connexion['prefixe'] . '\_%';
 	}
 
-	return $f($spip, $serveur, $option!==false);
+	$r = self::$driver->showbase($spip, $serveur, $option);
+	if ($r===false) self::error($serveur);
+	return $r;
 }
 
 /**
@@ -638,20 +619,22 @@ function showbase($spip=NULL, $serveur='', $option=true)
  * @return array
  *     Liste des tables SQL
 **/
-function alltable($spip=NULL, $serveur='', $option=true)
+public static function alltable($spip=NULL, $serveur='', $option=true)
 {
 	$q = self::showbase($spip, $serveur, $option);
 	$r = array();
-	if ($q) while ($t = self::fetch($q, $serveur)) { $r[] = array_shift($t);}
+	if ($q)
+		while ($t = self::fetch($q, $serveur)) {
+			$r[] = array_shift($t);
+		}
 	return $r;
 }
 
 // http://doc.spip.org/@sql_showtable
-function showtable($table, $table_spip = false, $serveur='', $option=true)
+public static function showtable($table, $table_spip=false, $serveur='', $option=true)
 {
-	$f = self::serveur('showtable', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-
+	if (!is_object(self::$driver)) return false;
+	
 	// la globale n'est remplie qu'apres l'appel de sql_serveur.
 	if ($table_spip) {
 		$connexion = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
@@ -659,7 +642,7 @@ function showtable($table, $table_spip = false, $serveur='', $option=true)
 		$vraie_table = preg_replace('/^spip/', $prefixe, $table);
 	} else $vraie_table = $table;
 
-	$f = $f($vraie_table, $serveur, $option!==false);
+	$f = self::$driver->showtable($vraie_table, $serveur, $option);
 	if (!$f) return array();
 	if (isset($GLOBALS['tables_principales'][$table]['join']))
 		$f['join'] = $GLOBALS['tables_principales'][$table]['join'];
@@ -669,21 +652,21 @@ function showtable($table, $table_spip = false, $serveur='', $option=true)
 }
 
 // http://doc.spip.org/@sql_create
-function create($nom, $champs, $cles=array(), $autoinc=false, $temporary=false, $serveur='', $option=true)
+public static function create($nom, $champs, $cles=array(), $autoinc=false, $temporary=false, $serveur='', $option=true)
 {
-	$f = self::serveur('create', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($nom, $champs, $cles, $autoinc, $temporary, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->create($nom, $champs, $cles, $autoinc, $temporary, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
-function create_base($nom, $serveur='', $option=true)
+public function create_base($nom, $serveur='', $option=true)
 {
-	$f = self::serveur('create_base', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($nom, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->create_base($nom, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
@@ -692,21 +675,23 @@ function create_base($nom, $serveur='', $option=true)
 // select_query : une requete select, idealement cree avec $req = sql_select()
 // (en mettant $option du sql_select a false pour recuperer la requete)
 // http://doc.spip.org/@sql_create_view
-function create_view($nom, $select_query, $serveur='', $option=true)
+public static function create_view($nom, $select_query, $serveur='', $option=true)
 {
-	$f = self::serveur('create_view', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($nom, $select_query, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->create_view($nom, $select_query, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
 // http://doc.spip.org/@sql_multi
-function multi($sel, $lang, $serveur='', $option=true)
+public static function multi($sel, $lang, $serveur='', $option=true)
 {
-	$f = self::serveur('multi', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	return $f($sel, $lang);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->multi($sel, $lang, $serveur, $option);
+	if ($r===false) self::error($serveur);
+	return $r;
 }
 
 /**
@@ -719,11 +704,11 @@ function multi($sel, $lang, $serveur='', $option=true)
  *      Description de l'erreur
  *      False si le serveur est indisponible
  */
-function error($serveur='')
+public static function error($serveur='')
 {
-	$f = self::serveur('error', $serveur, 'continue');
-	if (!is_string($f) OR !$f) return false;
-	return $f('query inconnue', $serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	return self::$driver->error($serveur);
 }
 
 /**
@@ -736,40 +721,50 @@ function error($serveur='')
  *      Numéro de l'erreur
  *      False si le serveur est indisponible
  */
-function errno($serveur='')
+public static function errno($serveur='')
 {
-	$f = self::serveur('errno', $serveur, 'continue');
-	if (!is_string($f) OR !$f) return false;
-	return $f($serveur);
+	if (!is_object(self::$driver)) return false;
+	
+	return self::$driver->errno($serveur);
+}
+
+public static function tracer_erreur($serveur='')
+{
+	$connexion = spip_connect($serveur);
+	$e = Sql::errno($serveur);
+	$t = (isset($connexion['type']) ? $connexion['type'] : 'sql');
+	$m = "Erreur $e de $t: " . Sql::error($serveur) . "\n" . $connexion['last'];
+	$f = $t . $serveur;
+	spip_log($m, $f.'.'._LOG_ERREUR);
 }
 
 // http://doc.spip.org/@sql_explain
-function explain($q, $serveur='', $option=true)
+public static function explain($q, $serveur='', $option=true)
 {
-	$f = self::serveur('explain', $serveur,  'continue');
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($q, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+
+	$r = self::$driver->explain($q, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
 // http://doc.spip.org/@sql_optimize
-function optimize($table, $serveur='', $option=true)
+public static function optimize($table, $serveur='', $option=true)
 {
-	$f = self::serveur('optimize', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($table, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+
+	$r = self::$driver->optimize($table, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
 // http://doc.spip.org/@sql_repair
-function repair($table, $serveur='', $option=true)
+public static function repair($table, $serveur='', $option=true)
 {
-	$f = self::serveur('repair', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($table, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+
+	$r = self::$driver->repair($table, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
@@ -777,12 +772,12 @@ function repair($table, $serveur='', $option=true)
 // A n'utiliser qu'en derniere extremite
 
 // http://doc.spip.org/@sql_query
-function query($ins, $serveur='', $option=true)
+public static function query($ins, $serveur='', $option=true)
 {
-	$f = self::serveur('query', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($ins, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+
+	$r = self::$driver->query($ins, $serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
@@ -831,7 +826,7 @@ function query($ins, $serveur='', $option=true)
  * 		}
  *
 **/
-function fetsel($select = array(), $from = array(), $where = array(), $groupby = array(),
+public static function fetsel($select = array(), $from = array(), $where = array(), $groupby = array(),
 	$orderby = array(), $limit = '', $having = array(), $serveur='', $option=true)
 {
 	$q = self::select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
@@ -841,7 +836,6 @@ function fetsel($select = array(), $from = array(), $where = array(), $groupby =
 	self::free($q, $serveur, $option);
 	return $r;
 }
-
 
 /**
  * Retourne le tableau de toutes les lignes d'une selection
@@ -903,7 +897,6 @@ public static function allfetsel($select = array(), $from = array(), $where = ar
 	return self::fetch_all($q, $serveur, $option);
 }
 
-
 /**
  * Retourne un unique champ d'une selection
  * 
@@ -955,8 +948,8 @@ public static function getfetsel($select, $from = array(), $where = array(), $gr
 	}
 	$r = self::fetsel($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
 	if ($option===false) return $r;
-	if (!$r) return NULL;
-	return $r[$id]; 
+	if (!$r) return false;
+	return $r[$id];
 }
 
 /**
@@ -975,8 +968,11 @@ public static function getfetsel($select, $from = array(), $where = array(), $gr
 **/
 public static function version($serveur='', $option=true)
 {
-	$row = self::fetsel("version() AS n", '','','','','','',$serveur);
-	return ($row['n']);
+	if (!is_object(self::$driver)) return false;
+
+	$r = self::$driver->version($serveur, $option);
+	if ($r===false) self::error($serveur);
+	return $r;
 }
 
 /**
@@ -1013,10 +1009,10 @@ public static function version($serveur='', $option=true)
 **/
 public static function preferer_transaction($serveur='', $option=true)
 {
-	$f = self::serveur('preferer_transaction', $serveur,  'continue');
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+
+	$r = self::$driver->preferer_transaction($serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
@@ -1040,10 +1036,10 @@ public static function preferer_transaction($serveur='', $option=true)
 **/
 public static function demarrer_transaction($serveur='', $option=true)
 {
-	$f = self::serveur('demarrer_transaction', $serveur,  'continue');
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+
+	$r = self::$driver->demarrer_transaction($serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
@@ -1067,10 +1063,10 @@ public static function demarrer_transaction($serveur='', $option=true)
 **/
 public static function terminer_transaction($serveur='', $option=true)
 {
-	$f = self::serveur('terminer_transaction', $serveur,  'continue');
-	if (!is_string($f) OR !$f) return false;
-	$r = $f($serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if (!is_object(self::$driver)) return false;
+
+	$r = self::$driver->terminer_transaction($serveur, $option);
+	if ($r===false) self::error($serveur);
 	return $r;
 }
 
@@ -1096,9 +1092,11 @@ public static function terminer_transaction($serveur='', $option=true)
 **/
 public static function hex($val, $serveur='', $option=true)
 {
-	$f = self::serveur('hex', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	return $f($val);
+	if (!is_object(self::$driver)) return false;
+
+	$r = self::$driver->hex($val, $serveur, $option);
+	if ($r===false) self::error($serveur);
+	return $r;
 }
 
 /**
@@ -1121,18 +1119,22 @@ public static function hex($val, $serveur='', $option=true)
  * @return string
  * 		La chaine echappee
 **/
-public static function quote($val, $serveur='', $type='')
+public static function quote($val, $type='', $serveur='')
 {
-	$f = self::serveur('quote', $serveur, true);
-	if (!is_string($f) OR !$f) $f = '_q';
-	return $f($val, $type);
+	if (!is_object(self::$driver)) return false;
+
+	$r = self::$driver->quote($val, $type);
+	if ($r===false) self::error($serveur);
+	return $r;
 }
 
-public static function date_proche($champ, $interval, $unite, $serveur='', $option=true)
+public static function date_proche($champ, $interval, $unite)
 {
-	$f = self::serveur('date_proche', $serveur, true);
-	if (!is_string($f) OR !$f) return false;
-	return $f($champ, $interval, $unite);
+	if (!is_object(self::$driver)) return false;
+	
+	$r = self::$driver->date_proche($champ, $interval, $unite);
+	if ($r===false) self::error($serveur);
+	return $r;
 }
 
 /**
@@ -1165,17 +1167,18 @@ public static function date_proche($champ, $interval, $unite, $serveur='', $opti
 **/
 public static function in($val, $valeurs, $not='', $serveur='', $option=true)
 {
+	if (!is_object(self::$driver)) return false;
+	
 	if (is_array($valeurs)) {
-		$f = self::serveur('quote', $serveur, true);
-		if (!is_string($f) OR !$f) return false;
-		$valeurs = join(',', array_map($f, array_unique($valeurs)));
-	} elseif (isset($valeurs[0]) AND $valeurs[0]===',') $valeurs = substr($valeurs,1);
+		$valeurs = join(',', array_map(array('Sql','quote'), array_unique($valeurs)));
+	} elseif (isset($valeurs[0]) AND $valeurs[0]===',') 
+		$valeurs = substr($valeurs,1);
 	
 	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
-
-	$f = self::serveur('in', $serveur,  $option==='continue' OR $option===false);
-	if (!is_string($f) OR !$f) return false;
-	return $f($val, $valeurs, $not, $serveur, $option!==false);
+	
+	$r = self::$driver->in($val, $valeurs, $not, $serveur, $option);
+	if ($r===false) self::error($serveur);
+	return $r;
 }
 
 // Penser a dire dans la description du serveur 
@@ -1187,7 +1190,9 @@ public static function in_select($in, $select, $from = array(), $where = array()
 {
 	$liste = array(); 
 	$res = self::select($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur); 
-	while ($r = self::fetch($res)) {$liste[] = array_shift($r);}
+	while ($r = self::fetch($res)) {
+		$liste[] = array_shift($r);
+	}
 	self::free($res);
 	return self::in($in, $liste);
 }
@@ -1227,7 +1232,10 @@ public static function skip($res, $pos, $saut, $count, $serveur='', $option=true
 	$seek = $pos + $saut;
 	// si le saut fait depasser le maxi, on libere la resource
 	// et on sort
-	if ($seek>=$count) {self::free($res, $serveur, $option); return $count;}
+	if ($seek>=$count) {
+		self::free($res, $serveur, $option);
+		return $count;
+	}
 
 	if (self::seek($res, $seek))
 		$pos = $seek;
@@ -1237,16 +1245,28 @@ public static function skip($res, $pos, $saut, $count, $serveur='', $option=true
 	return $pos;
 }
 
-// http://doc.spip.org/@sql_test_int
-public static function test_int($type, $serveur='', $option=true)
+public static function test_int($type)
 {
-  return preg_match('/^(TINYINT|SMALLINT|MEDIUMINT|INT|INTEGER|BIGINT)/i',trim($type));
+	if (!is_object(self::$driver)) return false;
+	return self::$driver->test_int($type);
 }
 
-// http://doc.spip.org/@sql_test_date
-public static function test_date($type, $serveur='', $option=true)
+public static function test_date($type)
 {
-  return preg_match('/^(DATE|DATETIME|TIMESTAMP|TIME)/i',trim($type));
+	if (!is_object(self::$driver)) return false;
+	return self::$driver->test_int($type);
+}
+
+public static function cite($val, $type)
+{
+	if (!is_object(self::$driver)) return false;
+	return self::$driver->cite($val, $type);
+}
+
+public static function select_as($args)
+{
+	if (!is_object(self::$driver)) return false;
+	return self::$driver->select_as($args);
 }
 
 /**
@@ -1270,15 +1290,10 @@ public static function test_date($type, $serveur='', $option=true)
  */
 public static function format_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0, $serveur='')
 {
-	$annee = sprintf("%04s", $annee);
-	$mois = sprintf("%02s", $mois);
+	if ($annee == 0) $mois = 0;
+	if ($mois == 0) $jour = 0;
 
-	if ($annee == "0000") $mois = 0;
-	if ($mois == "00") $jour = 0;
-
-	return sprintf("%04u",$annee) . '-' . sprintf("%02u",$mois) . '-'
-		. sprintf("%02u",$jour) . ' ' . sprintf("%02u",$h) . ':'
-		. sprintf("%02u",$m) . ':' . sprintf("%02u",$s);
+	return sprintf('%04u-%02u-%02u %02u:%02u:%02u', $annee, $mois, $jour, $h, $m, $s);
 }
 
 /**

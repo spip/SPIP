@@ -25,7 +25,7 @@ Class Autoload
         if (isset($map[$lname])) {
             require $map[$lname];
 		}
-        if (!class_exists($name,false)) {
+        if (!class_exists($name,false) AND !interface_exists($name,false)) {
 			trigger_error(
 				'Class ' . $name . ' not found in file ' . __FILE__ . 'at line ' . __LINE__,
 				E_USER_ERROR
@@ -58,6 +58,8 @@ Class Autoload
             'validateurxml' => _ROOT_RESTREINT . 'class/ValidateurXmlClass.php',
             'sql' => _ROOT_RESTREINT . 'class/SqlClass.php',
             'sqlite' => _ROOT_RESTREINT . 'class/SqliteClass.php',
+            'isql' => _ROOT_RESTREINT . 'class/ISqlClass.php',
+            'mysql' => _ROOT_RESTREINT . 'class/drivers/MysqlClass.php',
 		);
 	}
 }

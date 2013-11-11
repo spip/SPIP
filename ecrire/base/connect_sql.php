@@ -16,7 +16,6 @@ include_spip('base/objets');
 //
 // Utilitaires indispensables autour des serveurs SQL
 //
-
 // API d'appel aux bases de donnees:
 // on charge le fichier config/$serveur ($serveur='connect' pour le principal)
 // qui est cense initaliser la connexion en appelant spip_connect_db
@@ -82,8 +81,8 @@ function spip_connect($serveur='', $version='')
 	$type = $GLOBALS['db_ok']['type'];
 	$jeu = 'spip_' . $type .'_functions_' . $version;
 	if (!isset($GLOBALS[$jeu])) {
-		if (!find_in_path($type . '_' . $version . '.php', 'req/', true)){
-		  spip_log("spip_connect: serveur $index version '$version' non defini pour '$type'", _LOG_HS);
+		if (!find_in_path($type . '_' . $version . '.php', 'req/', true)) {
+			spip_log("spip_connect: serveur $index version '$version' non defini pour '$type'", _LOG_HS);
 			// ne plus reessayer
 			return $connexions[$index][$version] = array();
 		}
@@ -113,20 +112,9 @@ function spip_connect($serveur='', $version='')
 	}
 	if ($charset != -1) {
 		$f = $GLOBALS[$jeu]['set_charset'];
-		if (function_exists($f))
-			$f($charset, $serveur);
+		$r = Sql::set_charset($charset, $serveur);
 	}
 	return $connexions[$index];
-}
-
-function spip_sql_erreur($serveur='')
-{
-	$connexion = spip_connect($serveur);
-	$e = Sql::errno($serveur);
-	$t = (isset($connexion['type']) ? $connexion['type'] : 'sql');
-	$m = "Erreur $e de $t: " . Sql::error($serveur) . "\n" . $connexion['last'];
-	$f = $t . $serveur;
-	spip_log($m, $f.'.'._LOG_ERREUR);
 }
 
 // Cette fonction ne doit etre appelee qu'a travers la fonction sql_serveur
@@ -135,10 +123,9 @@ function spip_sql_erreur($serveur='')
 // connue seulement des convertisseurs automatiques
 
 // http://doc.spip.org/@spip_connect_sql
-function spip_connect_sql($version, $ins='', $serveur='', $cont=false)
+function spip_connect_sql($version, $ins='', $serveur='', $cont=true)
 {
 	$desc = spip_connect($serveur, $version);
-	if (function_exists($f = @$desc[$version][$ins])) return $f;
 	if ($cont) return $desc;
 	if ($ins)
 		spip_log("Le serveur '$serveur' version $version n'a pas '$ins'", _LOG_ERREUR);
@@ -186,20 +173,22 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 		$db = '';
 
 	if ($f
-		AND @file_exists($f)
-	  AND (time() - @filemtime($f) < _CONNECT_RETRY_DELAY)) {
+	  AND @file_exists($f)
+	  AND (time() - @filemtime($f) < _CONNECT_RETRY_DELAY))
+	{
 		spip_log( "Echec : $f recent. Pas de tentative de connexion", _LOG_HS);
 		return;
 	}
 
 	if (!$prefixe)
-		$prefixe = isset($GLOBALS['table_prefix'])
-		? $GLOBALS['table_prefix'] : $db;
+		$prefixe = isset($GLOBALS['table_prefix']) ? $GLOBALS['table_prefix'] : $db;
+
 	$h = charger_fonction($type, 'req', true);
 	if (!$h) {
 		spip_log( "les requetes $type ne sont pas fournies", _LOG_HS);
 		return;
 	}
+
 	if ($g = $h($host, $port, $login, $pass, $db, $prefixe)) {
 
 		if (!is_array($auth)) {
@@ -211,6 +200,7 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 		$g['type'] = $type;
 		return $db_ok = $g;
 	}
+
 	// En cas d'indisponibilite du serveur, eviter de le bombarder
 	if ($f) {
 		@touch($f);
@@ -239,14 +229,9 @@ function spip_connect_main($connexion)
 		redirige_url_ecrire('upgrade', 'reinstall=oui');
 	}
 
-	if (!($f = $connexion['select'])) return false;
-	// en cas d'erreur select retourne la requette (is_string=true donc)
-	if (!$r = $f('valeur','spip_meta', "nom='charset_sql_connexion'")
-	OR is_string($r))
-		return false;
-	if (!($f = $connexion['fetch'])) return false;
-	$r = $f($r);
-	return ($r['valeur'] ? $r['valeur'] : -1);
+	$res = Sql::select('valeur','spip_meta', "nom='charset_sql_connexion'");
+	$r = Sql::fetch($res);
+	return (@$r['valeur'] ? $r['valeur'] : -1);
 }
 
 // compatibilite
