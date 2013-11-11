@@ -57,9 +57,9 @@ Class Autoload
             'phpthrumb' => _ROOT_RESTREINT . 'class/PhpThrumbClass.php',
             'validateurxml' => _ROOT_RESTREINT . 'class/ValidateurXmlClass.php',
             'sql' => _ROOT_RESTREINT . 'class/SqlClass.php',
-            'sqlite' => _ROOT_RESTREINT . 'class/SqliteClass.php',
             'isql' => _ROOT_RESTREINT . 'class/ISqlClass.php',
             'mysql' => _ROOT_RESTREINT . 'class/drivers/MysqlClass.php',
+            //'sqlite' => _ROOT_RESTREINT . 'class/drivers/SqliteClass.php',
 		);
 	}
 }

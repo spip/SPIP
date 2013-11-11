@@ -35,7 +35,7 @@ define('_SQL_PREFIXE_TABLE', '/([,\s])spip_/S');
 
 Class Mysql implements ISql
 {
-	function connect($host, $port, $login, $pass, $serveur='')
+	public function connect($host, $port, $login, $pass, $serveur='')
 	{	
 		if ($port > 0) $host = "$host:$port";
 		$link = @mysql_connect($host, $login, $pass, true);
@@ -46,7 +46,7 @@ Class Mysql implements ISql
 		return $link;
 	}
 	
-	function get_charset($charset, $serveur='')
+	public function get_charset($charset, $serveur='')
 	{
 		$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 		$connexion['last'] = $strQuery = "SHOW CHARACTER SET"
@@ -55,7 +55,7 @@ Class Mysql implements ISql
 		return $this->fetch($this->query($strQuery), NULL, $serveur);
 	}
 	
-	function set_charset($charset, $serveur='')
+	public function set_charset($charset, $serveur='')
 	{
 		$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 		$connexion['last'] = $strQuery = 'SET NAMES '._q($charset);
@@ -65,61 +65,62 @@ Class Mysql implements ISql
 		return $this->query($strQuery);
 	}
 	
-	function select($select = array(), $from = array(), $where = array(), $groupby = array(),
-		$orderby = array(), $limit = '', $having = array(), $serveur='', $option=true)
+	public function select($select = array(), $from = array(), $where = array(), $groupby = array(),
+		$orderby = array(), $limit = '', $having = array(), $serveur='', $executer=true)
 	{
 		$from = (!is_array($from) ? $from : $this->select_as($from));
 		$strQuery = 
-			  $this->calculer_expression('SELECT', $select, ', ')
-			. $this->calculer_expression('FROM', $from, ', ')
+			  $this->calculer_expression('SELECT', $select, ',')
+			. $this->calculer_expression('FROM', $from, ',')
 			. $this->calculer_expression('WHERE', $where)
 			. $this->calculer_expression('GROUP BY', $groupby, ',')
 			. $this->calculer_expression('HAVING', $having)
-			. $this->calculer_expression('ORDER BY', $orderby, ', ')
-			. $this->calculer_expression('LIMIT', $limit, ', ');
+			. $this->calculer_expression('ORDER BY', $orderby, ',')
+			. $this->calculer_expression('LIMIT', $limit, ',');
 
 		// renvoyer la requete inerte si demandee
-		if (!$option) return $strQuery;
-		$r = $this->query($strQuery, $serveur, $option);
-		return $r;
+		if (!$executer) return $strQuery;
+		return $this->query($strQuery, $serveur);
 	}
 	
-	function countsel($from = array(), $where = array(), $groupby = array(),
+	public function countsel($from = array(), $where = array(), $groupby = array(),
 		$having = array(), $serveur='', $option=true)
 	{
 		$c = empty($groupby) ? '*' : ('DISTINCT ' . (!is_array($groupby) ? $groupby : join(',', $groupby)));
 
 		$res = $this->select("COUNT($c)", $from, $where, '', '', '', $having, $serveur, $option);
-
 		if (!$option) return $res;
+		
 		if (!is_resource($res)) return 0;
 		$c = $this->fetch($res, MYSQL_NUM);
 		$this->free($res);
 		return array_shift($c);
 	}
 
-	function alter($query, $serveur='', $option=true)
+	public function alter($query, $serveur='', $option=true)
 	{
 		// ici on supprime les ` entourant le nom de table pour permettre
 		// la transposition du prefixe, compte tenu que les plugins ont la mauvaise habitude
 		// d'utiliser ceux-ci, copie-colle de phpmyadmin
-		$strQuery = preg_replace(",^TABLE\s*`([^`]*)`,i","TABLE \\1", $query);
-		return $this->query("ALTER ".$strQuery, $serveur, $option); # i.e. que PG se debrouille
+		$strTable = preg_replace(",^TABLE\s*`([^`]*)`,i","TABLE \\1", $query);
+		$strQuery = "ALTER ".$strQuery # i.e. que PG se debrouille
+		if (!$option) return $strQuery;
+		return $this->query($strQuery, $serveur);
 	}
 
-	function fetch($res, $type=MYSQL_ASSOC)
+	public function fetch($res, $type=MYSQL_ASSOC)
 	{
 		if (empty($type)) $type = MYSQL_ASSOC;
 		if ($res) return mysql_fetch_array($res, $type);
 	}
 
-	function seek($res, $row_number)
+	public function seek($res, $row_number)
 	{
 		if ($res) return mysql_data_seek($res, $row_number);
 		return false;
 	}
 
-	function listdbs($serveur='')
+	public function listdbs($serveur='')
 	{
 		$dbs = array();
 		if ($res = $this->query("SHOW DATABASES")) {
@@ -129,7 +130,7 @@ Class Mysql implements ISql
 		return $dbs;
 	}
 
-	function selectdb($nom, $serveur='')
+	public function selectdb($nom, $serveur='')
 	{
 		$ok = mysql_select_db($nom);
 		if (!$ok)
@@ -137,122 +138,131 @@ Class Mysql implements ISql
 		return $ok;
 	}
 
-	function count($res)
+	public function count($res)
 	{
 		if ($res) return mysql_num_rows($res);
 		return false;
 	}
 
-	function free($res, $serveur='')
+	public function free($res, $serveur='')
 	{
-		return (is_resource($res) ? @mysql_free_result($res) : false);
+		return (is_resource($res) ? mysql_free_result($res) : false);
 	}
 
-	function insert($table, $champs, $valeurs, $desc=array(), $serveur='', $option=true)
+	public function insert($table, $champs, $valeurs, $where='', $serveur='', $option=true)
 	{
-		$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
-		$prefixe = $connexion['prefixe'];
-		$link = $connexion['link'];
-		$db = $connexion['db'];
-
-		if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
+		if (empty($champs) OR empty($valeurs)) return false;
 		
+		$table = $this->prefixer($table, $serveur);
 		$query ="INSERT INTO $table $champs VALUES $valeurs";
 		if (!$option) return $query;
-		
-		if (isset($_GET['var_profile'])) {
-			include_spip('public/tracer');
-			$t = trace_query_start();
-		} else
-			$t = 0;
-
-		$connexion['last'] = $query;
-		#spip_log($query, 'mysql.'._LOG_DEBUG);
-		if (mysql_query($query, $link))
-			$r = mysql_insert_id($link);
-		else {
-			if ($e = $this->errno($serveur))	// Log de l'erreur eventuelle
-				$e .= $this->error($query, $serveur); // et du fautif
-		}
-		return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
-
-		// return $r ? $r : (($r===0) ? -1 : 0); pb avec le multi-base.
+		return $this->query($query, $serveur);
 	}
 	
 	// http://doc.spip.org/@sql_update
-	public function update($table, $exp, $where='', $desc=array(), $serveur='', $option=true)
+	public function update($table, $champs, $where='', $serveur='', $option=true)
 	{
 		$set = array();
 		foreach ($champs as $champ => $val)
-			$set[] = $champ . "=$val";
-		if (!empty($set))
-			return $this->query(
-				  $this->calculer_expression('UPDATE', $table, ',')
-				. $this->calculer_expression('SET', $set, ',')
-				. $this->calculer_expression('WHERE', $where), 
-				$serveur, $option);
-		return false;
+			$set[] = $champ . '=' . $val;
+		if (empty($set)) return false;
+		
+		$table = $this->prefixer($table, $serveur);
+		$query =  $this->calculer_expression('UPDATE', $table, ',')
+			. $this->calculer_expression('SET', $set, ',')
+			. $this->calculer_expression('WHERE', $where);
+		if (!$option) return $query;
+		return $this->query($qeury, $serveur);
+	}
+	
+	protected function prefixer($table, $serveur='')
+	{
+		$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
+		$prefixe = $connexion['prefixe'];		
+		if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
+		return $table;
 	}
 	
 	// http://doc.spip.org/@sql_delete
 	public function delete($table, $where='', $serveur='', $option=true)
 	{
-		$res = $this->query(
-				  $this->calculer_expression('DELETE FROM', $table, ',')
-				. $this->calculer_expression('WHERE', $where),
-				$serveur, $option);
-		if (!$option) return $res;
+		$table = $this->prefixer($table, $serveur);
+		$query =  $this->calculer_expression('DELETE FROM', $table, ',')
+			. $this->calculer_expression('WHERE', $where);
+		if (!$option) return $query;
+		$res = $this->query($query, $serveur);
 		if ($res) {
-			$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
+			$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 			$link = $connexion['link'];
+			$this->free($res);
 			return $link ? mysql_affected_rows($link) : mysql_affected_rows();
 		}
-		else
-			return false;
+		return false;
 	}
 
-	function replace($table, $couples, $desc=array(), $serveur='', $option=true)
+	public function replace($table, $couples, $where='', $serveur='', $option=true)
 	{
-		return $this->query("REPLACE $table (" . join(',',	array_keys($couples)) . ')
-			VALUES (' . join(',', array_map('_q', $couples)) . ')',
-			$serveur, $option);
+		if (empty($couples)) return false;
+		
+		$table = $this->prefixer($table, $serveur);
+		$query = "REPLACE $table (" . join(',',	array_keys($couples)) . ')
+			VALUES (' . join(',', array_map('_q', $couples)) . ')';
+		if (!$option) return false;
+		return $this->query($query, $serveur);
 	}
 	
-	function replace_multi($table, $tab_couples, $desc=array(), $serveur='', $option=true)
+	public function replace_multi($table, $tab_couples, $where='', $serveur='', $option=true)
 	{
+		if (empty($couples)) return false;
+		
 		$cles = '(' . join(',',array_keys($tab_couples[0])). ')';
 		$valeurs = array();
 		foreach ($tab_couples as $couples) {
 			$valeurs[] = '(' .join(',',array_map('_q', $couples)) . ')';
 		}
 		$valeurs = join(', ',$valeurs);
-		return $this->query("REPLACE $table $cles VALUES $valeurs", $serveur, $option);
+		$table = $this->prefixer($table, $serveur);
+		$strQuery = "REPLACE $table $cles VALUES $valeurs";
+		if (!$option) return $strQuery;
+		return $this->query($strQuery, $serveur);
 	}
 	
-	function drop_table($table, $exist='', $serveur='', $option=true)
+	public function drop_table($table, $exist='', $serveur='', $option=true)
 	{
+		$table = $this->prefixer($table, $serveur);
 		if ($exist) $exist =" IF EXISTS";
-		return $this->query("DROP TABLE $exist $table", $serveur, $option);
+		$query = "DROP TABLE $exist $table";
+		if (!$option) return $query;
+		return $this->query($query, $serveur);
 	}
 
-	function drop_view($view, $exist='', $serveur='', $option=true)
+	public function drop_view($view, $exist='', $serveur='', $option=true)
 	{
+		$table = $this->prefixer($table, $serveur);
 		if ($exist) $exist = 'IF EXISTS';
-		return $this->query("DROP VIEW $exist $view", $serveur, $option);
+		$query = "DROP VIEW $exist $view";
+		if (!$option) return $query;
+		return $this->query($query, $serveur);
 	}
 
-	function showbase($spip=NULL, $serveur='', $option=true)
+	public function showbase($base, $serveur='', $option=true)
 	{
-		return $this->query("SHOW TABLES LIKE " . _q($match), $serveur, $option);
+		if (empty($base)) return false;
+		if ($exist) $exist = 'IF EXISTS';
+		$query = "SHOW TOTO LIKE " . _q($base);
+		if (!$option) return $query;
+		return $this->query($query, $serveur);
 	}
 
-	function showtable($table, $serveur='', $option=true)
+	public function showtable($table, $serveur='', $option=true)
 	{
-		$s = $this->query("SHOW CREATE TABLE `$table`", $serveur, $option);
-		if (!$s) return '';
-		if (!$option) return $s;
+		if (empty($table)) return false;
+		$table = $this->prefixer($table, $serveur);		
+		$query = "SHOW CREATE TABLE `$table`";
+		if (!$option) return $query;
+		$s = $this->query($query, $serveur);
 
-		list(,$a) = mysql_fetch_array($s ,MYSQL_NUM);
+		list(,$a) = $this->fetch($s, MYSQL_NUM);
 		if (preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r)) {
 			$desc = $r[1];
 			// extraction d'une KEY éventuelle en prenant garde de ne pas
@@ -314,7 +324,7 @@ Class Mysql implements ISql
 		return "";
 	}
 
-	function create($nom, $champs, $cles=array(), $autoinc=false, $temporary=false, $serveur='', $option=true)
+	public function create($nom, $champs, $cles=array(), $autoinc=false, $temporary=false, $serveur='', $option=true)
 	{
 		$query = $keys = $s = $p = '';
 
@@ -363,28 +373,32 @@ Class Mysql implements ISql
 		$q = "CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")".
 		($character_set?" DEFAULT $character_set":"")
 		."\n";
+		if (!$option) return $q;
 		return $this->query($q, $serveur);
 	}
 
-	function create_base($nom, $serveur='', $option=true)
+	public function create_base($nom, $serveur='', $option=true)
 	{
-		return $this->query("CREATE DATABASE `$nom`", $serveur, $option);
+		$query = "CREATE DATABASE `$nom`";
+		if (!$option) return $query;
+		return $this->query($query, $serveur);
 	}
 
-	function create_view($nom, $select_query='', $serveur='', $option=true)
+	public function create_view($nom, $select_query='', $serveur='', $option=true)
 	{
 		if (!$select_query) return false;
 		// vue deja presente
-		if (Sql::showtable($nom, false, $serveur)) {
+		if ($this->showtable($nom, false, $serveur)) {
 			spip_log("Echec creation d'une vue sql ($nom) car celle-ci existe deja (serveur:$serveur)", _LOG_ERREUR);
 			return false;
 		}
 		
 		$query = "CREATE VIEW $nom AS ". $select_query;
-		return $this->query($query, $serveur, $option);
+		if (!$option) return $query;
+		return $this->query($query, $serveur);
 	}
 
-	function multi($sel, $lang, $serveur='', $option=true)
+	public function multi($sel, $lang, $serveur='', $option=true)
 	{
 		$lengthlang = strlen("[$lang]");
 		$posmulti = 'INSTR('.$objet.', \'<multi>\')';
@@ -414,7 +428,7 @@ Class Mysql implements ISql
 		return $retour;
 	}
 
-	function error($serveur='')
+	public function error($serveur='')
 	{
 		$link = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0]['link'];
 		$s = $link ? mysql_error($link) : mysql_error();
@@ -422,19 +436,20 @@ Class Mysql implements ISql
 		return $s;
 	}
 
-	function errno($serveur='')
+	public function errno($serveur='')
 	{
-		$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+		$link = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0]['link'];
 		$s = $link ? mysql_errno($link) : mysql_errno();
 		// 2006 MySQL server has gone away
 		// 2013 Lost connection to MySQL server during query
 		if (in_array($s, array(2006,2013)))
 			define('spip_interdire_cache', true);
-		if ($s) spip_log("Erreur mysql $s", _LOG_ERREUR);
+		if ($s)
+			spip_log("Erreur mysql $s", _LOG_ERREUR);
 		return $s;
 	}
 	
-	function explain($query, $serveur='', $option=true)
+	public function explain($query, $serveur='', $option=true)
 	{
 		if (strpos(ltrim($query), 'SELECT') !== 0) return array();
 		$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
@@ -443,21 +458,28 @@ Class Mysql implements ISql
 		$db = $connexion['db'];
 
 		$query = 'EXPLAIN ' . traite_query($query, $db, $prefixe);
-		$r = $this->query($query, $serveur, $option);
+		if (!$option) return $query;
+		$r = $this->query($query, $serveur);
 		return $this->fetch($r, NULL, $serveur);
 	}
 
-	function optimize($table, $serveur='', $option=true)
+	public function optimize($table, $serveur='', $option=true)
 	{
-		return $this->query("OPTIMIZE TABLE ". $table, $serveur, $option);
+		$table = $this->prefixer($table, $serveur);
+		$query = "OPTIMIZE TABLE `$table`";
+		if (!$option) return $query;
+		return $this->query($query, $serveur);
 	}
 
 	function repair($table, $serveur='', $option=true)
 	{
-		return $this->query("REPAIR TABLE `$table`", $serveur, $option);
+		$table = $this->prefixer($table, $serveur);
+		$query = "REPAIR TABLE `$table`";
+		if (!$option) return $query;
+		return $this->query($query, $serveur);
 	}
 
-	function query($ins, $serveur='', $option=true)
+	public function query($ins, $serveur='', $executer=true)
 	{
 		$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 		$prefixe = $connexion['prefixe'];
@@ -465,9 +487,7 @@ Class Mysql implements ISql
 		$db = $connexion['db'];
 
 		$query = $this->traite_query($ins, $db, $prefixe);
-
-		// renvoyer la requete inerte si demandee
-		if (!$option) return $query;
+		if (!$executer) return $query;
 
 		if (isset($_GET['var_profile'])) {
 			include_spip('public/tracer');
@@ -489,21 +509,24 @@ Class Mysql implements ISql
 
 		$r = $link ? mysql_query($query.$debug, $link) : mysql_query($query.$debug);
 
-		if ($e = $this->errno($serveur))	// Log de l'erreur eventuelle
-			$e .= $this->error($query, $serveur); // et du fautif
+		if ($e = $this->errno($serveur))	  // Log de l'erreur eventuelle
+			$e .= ':'.$this->error($serveur); // et du fautif
 		return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
 	}
 
 	function preferer_transaction($serveur='', $option=true)
 	{
+		return true;
 	}
 
 	function demarrer_transaction($serveur='', $option=true)
 	{
+		return true;
 	}
 
 	function terminer_transaction($serveur='', $option=true)
 	{
+		return true;
 	}
 
 	function hex($val)

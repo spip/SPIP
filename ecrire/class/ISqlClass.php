@@ -3,8 +3,8 @@
 /* *************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *  Copyright (c) 2013                                                     *
+ *  Alain Gandon                                                           *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
@@ -84,7 +84,7 @@ Interface ISql
 
 	function errno($serveur='');
 	
-	function explain($q, $serveur='', $option=true);
+	function explain($query, $serveur='', $option=true);
 
 	function optimize($table, $serveur='', $option=true);
 
