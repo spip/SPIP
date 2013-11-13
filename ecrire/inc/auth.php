@@ -12,7 +12,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('base/abstract_sql');
+
 
 
 
@@ -50,8 +50,8 @@ function inc_auth_dist() {
 		return array('login' => $connect_login,
 			'site' => generer_url_public('', "action=logout&amp;logout=prive"));
 
-	$n = intval(sql_errno());
-	spip_log("Erreur base de donnees $n " . sql_error());
+	$n = intval(Sql::errno());
+	spip_log("Erreur base de donnees $n " . Sql::error());
 	return $n ? $n : 1;
 }
 
@@ -75,7 +75,7 @@ function auth_echec($raison)
 		$raison = redirige_formulaire($raison);
 	} elseif (is_int($raison)) {
 		// erreur SQL a afficher
-		$raison = minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
+		$raison = minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".Sql::errno()." ".Sql::error()."</tt></p>");
 	} elseif (@$raison['statut']) {
 		// un simple visiteur n'a pas acces a l'espace prive
 		spip_log("connexion refusee a " . @$raison['id_auteur']);
@@ -167,14 +167,14 @@ function auth_mode()
 	/*AND $id_auteur>0*/ // reprise lors des restaurations
 	) ?
 	  "id_auteur=$id_auteur" :
-	  (!strlen($connect_login) ? '' : "login=" . sql_quote($connect_login,'','text'));
+	  (!strlen($connect_login) ? '' : "login=" . Sql::quote($connect_login,'','text'));
 
 	if (!$where) return '';
 
 	// Trouver les autres infos dans la table auteurs.
 	// le champ 'quand' est utilise par l'agenda
 
-	return sql_fetsel("*, en_ligne AS quand", "spip_auteurs", "$where AND statut!='5poubelle'");
+	return Sql::fetsel("*, en_ligne AS quand", "spip_auteurs", "$where AND statut!='5poubelle'");
 }
 
 /**
@@ -297,7 +297,7 @@ function auth_trace($row, $date=null)
 		$date = date('Y-m-d H:i:s');
 
 	if (abs(strtotime($date) - $connect_quand)  >= 60) {
-		sql_updateq("spip_auteurs", array("en_ligne" => $date), "id_auteur=" .$row['id_auteur']);
+		Sql::updateq("spip_auteurs", array("en_ligne" => $date), "id_auteur=" .$row['id_auteur']);
 		$row['en_ligne'] = $date;
 	}
 
@@ -381,7 +381,7 @@ function auth_retrouver_login($login, $serveur=''){
 function auth_informer_login($login, $serveur=''){
 	if (!$login
 		OR !$login = auth_retrouver_login($login, $serveur)
-		OR !$row = sql_fetsel('*','spip_auteurs','login='.sql_quote($login,$serveur,'text'),'','','','',$serveur)
+		OR !$row = Sql::fetsel('*','spip_auteurs','login='.Sql::quote($login,$serveur,'text'),'','','','',$serveur)
 		)
 		return array();
 
@@ -469,7 +469,7 @@ function auth_loger($auteur){
 	$p = $GLOBALS['visiteur_session']['prefs'];
 	$p['cnx'] = ($auteur['cookie'] == 'oui') ? 'perma' : '';
 
-	sql_updateq('spip_auteurs',
+	Sql::updateq('spip_auteurs',
 	            array('prefs' => serialize($p)),
 	            "id_auteur=" . $auteur['id_auteur']);
 
@@ -623,7 +623,7 @@ function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=arr
  */
 function lire_php_auth($login, $pw, $serveur=''){
 
-	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login,$serveur,'text'),'','','','',$serveur);
+	$row = Sql::fetsel('*', 'spip_auteurs', 'login=' . Sql::quote($login,$serveur,'text'),'','','','',$serveur);
 
 	if (!$row) {
 		if (spip_connect_ldap($serveur)

@@ -60,11 +60,11 @@ function inc_meta_dist($table='meta')
 function lire_metas($table='meta') {
 
 	if ($result = spip_query("SELECT nom,valeur FROM spip_$table")) {
-		include_spip('base/abstract_sql');
+
 		$GLOBALS[$table] = array();
-		while ($row = sql_fetch($result))
+		while ($row = Sql::fetch($result))
 			$GLOBALS[$table][$row['nom']] = $row['valeur'];
-        sql_free($result);
+        Sql::free($result);
 
 		if (!$GLOBALS[$table]['charset']
 		  OR $GLOBALS[$table]['charset']=='_DEFAULT_CHARSET' // hum, correction d'un bug ayant abime quelques install
@@ -112,7 +112,7 @@ function effacer_meta($nom, $table='meta') {
 	static $touch = array();
 	$antidate = time() - (_META_CACHE_TIME<<4);
 	if (!isset($touch[$table])) {touch_meta($antidate, $table);}
-	sql_delete('spip_' . $table, "nom='$nom'");
+	Sql::delete('spip_' . $table, "nom='$nom'");
 	unset($GLOBALS[$table][$nom]);
 	if (!isset($touch[$table])) {touch_meta($antidate, $table); $touch[$table] = false;}
 }
@@ -122,15 +122,15 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 
 	static $touch = array();
 	if (!$nom) return;
-	include_spip('base/abstract_sql');
-	$res = sql_select("*",'spip_' . $table,"nom=" . sql_quote($nom),'','','','','','continue');
+
+	$res = Sql::select("*",'spip_' . $table,"nom=" . Sql::quote($nom),'','','','','','continue');
 	// table pas encore installee, travailler en php seulement
 	if (!$res) {
 		$GLOBALS[$table][$nom] = $valeur;
 		return;
 	}
-	$row = sql_fetch($res);
-    sql_free($res);
+	$row = Sql::fetch($res);
+    Sql::free($res);
 
 	// ne pas invalider le cache si affectation a l'identique
 	// (tant pis si impt aurait du changer)
@@ -144,9 +144,9 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 	// Gaffe aux tables sans impt (vieilles versions de SPIP notamment)
 	if ($importable AND isset($row['impt'])) $r['impt'] = $importable;
 	if ($row) {
-		sql_updateq('spip_' . $table, $r,"nom=" . sql_quote($nom));
+		Sql::updateq('spip_' . $table, $r,"nom=" . Sql::quote($nom));
 	} else {
-		sql_insertq('spip_' . $table, $r);
+		Sql::insertq('spip_' . $table, $r);
 	}
 	if (!isset($touch[$table])) {touch_meta($antidate, $table); $touch[$table] = false;}
 }
@@ -183,7 +183,7 @@ function supprimer_table_meta($table, $force=false) {
 
 	if ($force OR !sql_countsel("spip_$table")) {
 		unset($GLOBALS[$table]);
-		sql_drop_table("spip_$table");
+		Sql::drop_table("spip_$table");
 		// vider le cache des tables
 		$trouver_table = charger_fonction('trouver_table','base');
 		$trouver_table('');

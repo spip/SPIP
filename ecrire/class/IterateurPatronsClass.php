@@ -19,10 +19,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * fourni dans le fichier iterateurs/xxx.php
  * 
  */
-class IterFactory{
-	public static function create($iterateur, $command, $info=null){
+class IterFactory
+{
+	public static function create($iterateur, $command, $info=null)
+	{
 
-		// cas des SI {si expression} analises tres tot
+		// cas des SI {si expression} analyses tres tot
 		// pour eviter le chargement de tout iterateur
 		if (isset($command['si'])) {
 			foreach ($command['si'] as $si) {
@@ -37,7 +39,10 @@ class IterFactory{
 		// chercher un iterateur PHP existant (par exemple dans SPL)
 		// (il faudrait passer l'argument ->sql_serveur
 		// pour etre certain qu'on est sur un "php:")
-		if (class_exists($iterateur,false)) {
+		if (class_exists($iterateur,false)
+		AND ($interfaces=class_implements($iterateur))
+		AND (!empty($interfaces['Iterateur'])))
+		{
 			$a = isset($command['args']) ? $command['args'] : array() ;
 
 			// permettre de passer un Iterateur directement {args #ITERATEUR} :
@@ -70,6 +75,7 @@ class IterFactory{
 			$class = "Iterateur".$iterateur;
 			$iter = new $class($command, $info);
 		}
+
 		return new IterDecorator($iter, $command, $info);
 	}
 }
@@ -77,7 +83,8 @@ class IterFactory{
 
 
 
-class IterDecorator extends FilterIterator {
+class IterDecorator extends FilterIterator
+{
 	private $iter;
 
 	/**
@@ -119,7 +126,8 @@ class IterDecorator extends FilterIterator {
 	 * Drapeau a activer en cas d'echec
 	 * (select SQL errone, non chargement des DATA, etc)
 	 */
-	public function err() {
+	public function err()
+	{
 		if (method_exists($this->iter, 'err'))
 			return $this->iter->err();
 		if (property_exists($this->iter, 'err'))
@@ -127,7 +135,8 @@ class IterDecorator extends FilterIterator {
 		return false;
 	}
 
-	public function __construct(Iterator $iter, $command, $info){
+	public function __construct(Iterator $iter, $command, $info)
+	{
 		parent::__construct($iter);
 		parent::rewind(); // remettre a la premiere position (bug? connu de FilterIterator)
 		
@@ -158,7 +167,8 @@ class IterDecorator extends FilterIterator {
 	// calcule les elements a retournes par fetch()
 	// enleve les elements inutiles du select()
 	// 
-	private function calculer_select() {
+	private function calculer_select()
+	{
 		if ($select = &$this->command['select']) {
 			foreach($select as $s) {
 				// /!\ $s = '.nom'
@@ -173,7 +183,8 @@ class IterDecorator extends FilterIterator {
 	// recuperer la valeur d'une balise #X
 	// en fonction des methodes 
 	// et proprietes disponibles
-	public function get_select($nom) {
+	public function get_select($nom)
+	{
 		if (is_object($this->iter)
 		AND method_exists($this->iter, $nom)) {
 			try {
@@ -201,7 +212,8 @@ class IterDecorator extends FilterIterator {
 	}
 
 	
-	private function calculer_filtres() {
+	private function calculer_filtres()
+	{
 		
 		// Issu de calculer_select() de public/composer L.519
 		// TODO: externaliser...
@@ -319,7 +331,8 @@ class IterDecorator extends FilterIterator {
 	}
 
 	
-	public function next(){
+	public function next()
+	{
 		$this->pos++;
 		parent::next();
 	}
@@ -328,7 +341,8 @@ class IterDecorator extends FilterIterator {
 	 * revient au depart
 	 * @return void
 	 */
-	public function rewind() {
+	public function rewind()
+	{
 		$this->pos = 0;
 		$this->fetched = 0;
 		parent::rewind();
@@ -391,7 +405,8 @@ class IterDecorator extends FilterIterator {
 	 * @return bool
 	 *   success or fail if not implemented
 	 */
-	public function seek($n=0, $continue=null) {
+	public function seek($n=0, $continue=null)
+	{
 		if ($this->func_filtre OR !method_exists($this->iter, 'seek') OR !$this->iter->seek($n)) {
 			$this->seek_loop($n);
 		}
@@ -404,7 +419,8 @@ class IterDecorator extends FilterIterator {
 	 * aller a la position $n en parcourant
 	 * un par un tous les elements
 	 */
-	private function seek_loop($n) {
+	private function seek_loop($n)
+	{
 		if ($this->pos > $n)
 			$this->rewind();
 
@@ -421,7 +437,8 @@ class IterDecorator extends FilterIterator {
 	 * @param  $max
 	 * @return int
 	 */
-	public function skip($saut, $max=null){
+	public function skip($saut, $max=null)
+	{
 		// pas de saut en arriere autorise pour cette fonction
 		if (($saut=intval($saut))<=0) return $this->pos;
 		$seek = $this->pos + $saut;
@@ -448,7 +465,8 @@ class IterDecorator extends FilterIterator {
 	 *
 	 * @return array|bool
 	 */
-	public function fetch() {
+	public function fetch()
+	{
 		if (method_exists($this->iter, 'fetch')) {
 			return $this->iter->fetch();
 		} else {
@@ -477,12 +495,14 @@ class IterDecorator extends FilterIterator {
 	}
 
 	// retourner la cle pour #CLE
-	public function cle() {
+	public function cle()
+	{
 		return $this->key();
 	}
 	
 	// retourner la valeur pour #VALEUR
-	public function valeur() {
+	public function valeur()
+	{
 		# attention PHP est mechant avec les objets, parfois il ne les
 		# clone pas proprement (directoryiterator sous php 5.2.2)
 		# on se rabat sur la version __toString()
@@ -499,7 +519,8 @@ class IterDecorator extends FilterIterator {
 	 * Accepte-t-on l'entree courante lue ?
 	 * On execute les filtres pour le savoir. 
 	**/
-	public function accept() {
+	public function accept()
+	{
 		if ($f = $this->func_filtre) {
 			return $f($this);
 		}
@@ -510,7 +531,8 @@ class IterDecorator extends FilterIterator {
 	 * liberer la ressource
 	 * @return bool
 	 */
-	public function free() {
+	public function free()
+	{
 		if (method_exists($this->iter, 'free')) {
 			$this->iter->free();
 		}
@@ -523,7 +545,8 @@ class IterDecorator extends FilterIterator {
 	 * pour #TOTAL_BOUCLE
 	 * @return int
 	 */
-	public function count() {
+	public function count()
+	{
 		if (is_null($this->total)) {
 			if (method_exists($this->iter, 'count')
 			AND !$this->func_filtre) {
@@ -545,6 +568,5 @@ class IterDecorator extends FilterIterator {
 	}
 	
 }
-
 
 ?>
