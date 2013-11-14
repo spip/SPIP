@@ -228,16 +228,27 @@ function pipeline($action, $val=null) {
  *
  * Le niveau de log par défaut est la valeur de la constante `_LOG_INFO`
  * 
+ * Les différents niveaux possibles sont :
+ *
+ * - `_LOG_HS` : écrira 'HS' au début de la ligne logguée
+ * - `_LOG_ALERTE_ROUGE` : 'ALERTE'
+ * - `_LOG_CRITIQUE` :  'CRITIQUE'
+ * - `_LOG_ERREUR` : 'ERREUR'
+ * - `_LOG_AVERTISSEMENT` : 'WARNING'
+ * - `_LOG_INFO_IMPORTANTE` : '!INFO'
+ * - `_LOG_INFO` : 'info'
+ * - `_LOG_DEBUG` : 'debug'
+ *
  * @example
  *   ```
  *   spip_log($message)
- *   spip_log($message,'recherche')
- *   spip_log($message,_LOG_DEBUG)
- *   spip_log($message,'recherche.'._LOG_DEBUG)
+ *   spip_log($message, 'recherche')
+ *   spip_log($message, _LOG_DEBUG)
+ *   spip_log($message, 'recherche.'._LOG_DEBUG)
  *   ```
  *
  * @api
- * @link http://doc.spip.org/@spip_log
+ * @link http://programmer.spip.net/spip_log
  * @uses inc_log_dist()
  *
  * @param string $message
@@ -248,7 +259,7 @@ function pipeline($action, $val=null) {
  *     - string indique le type de log
  *     - `string.int` indique les 2 éléments.
  *     Cette dernière notation est controversée mais le 3ème
- *     paramètre est planté pour cause de compat ascendante.
+ *     paramètre est planté pour cause de compatibilité ascendante.
  */
 function spip_log($message=NULL, $name=NULL) {
 	static $pre = array();
