@@ -379,7 +379,7 @@ function plugin_necessite($n, $liste) {
 	$msg = array();
 	foreach($n as $need){
 		$id = strtoupper($need['nom']);
-		if ($r = plugin_controler_necessite($liste, $id, $need['compatibilite'])) {
+		if ($r = plugin_controler_necessite($liste, $id, isset($need['compatibilite']) ? $need['compatibilite'] : '')) {
 			$msg[] = $r;
 		}
 	}

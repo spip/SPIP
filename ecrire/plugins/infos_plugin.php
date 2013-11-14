@@ -76,13 +76,13 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	if (isset($arbre['meta']))
 		$ret['meta'] = trim(spip_xml_aplatit($arbre['meta']));
 
-	$necessite = info_plugin_normalise_necessite($arbre['necessite']);
+	$necessite = info_plugin_normalise_necessite(isset($arbre['necessite'])?$arbre['necessite']:'');
 	$ret['compatibilite'] = isset($necessite['compatible'])?$necessite['compatible']:'';
 	$ret['necessite'] = $necessite['necessite'];
 	$ret['lib'] = $necessite['lib'];
-	$ret['utilise'] = info_plugin_normalise_utilise($arbre['utilise']);
-	$ret['procure'] = info_plugin_normalise_procure($arbre['procure']);
-	$ret['chemin']  = info_plugin_normalise_chemin($arbre['path']);
+	$ret['utilise'] = info_plugin_normalise_utilise(isset($arbre['utilise'])?$arbre['utilise']:'');
+	$ret['procure'] = info_plugin_normalise_procure(isset($arbre['procure'])?$arbre['procure']:'');
+	$ret['chemin']  = info_plugin_normalise_chemin(isset($arbre['path'])?$arbre['path']:'');
 
 	if (isset($arbre['pipeline']))
 		$ret['pipeline'] = $arbre['pipeline'];
@@ -92,7 +92,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	$ret['menu'] = $les_boutons['bouton'];
 	$ret['onglet'] = $les_boutons['onglet'];
 
-	$ret['traduire'] = $arbre['traduire'];
+	$ret['traduire'] = isset($arbre['traduire']) ? $arbre['traduire'] : '';
 		
 	if (isset($arbre['config']))
 		$ret['config'] = spip_xml_aplatit($arbre['config']);
