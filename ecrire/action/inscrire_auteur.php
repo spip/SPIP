@@ -324,8 +324,9 @@ function auteur_verifier_jeton($jeton){
 	// refuser un jeton corrompu
 	if (preg_match(',[^0-9a-f.],i',$jeton))
 		return false;
-
-	$desc = sql_fetsel('*','spip_auteurs',"cookie_oubli=".sql_quote($jeton));
+	
+	// on peut tomber sur un jeton compose uniquement de chiffres, il faut forcer le $type pour sql_quote pour eviter de planter
+	$desc = sql_fetsel('*','spip_auteurs',"cookie_oubli=".sql_quote($jeton, $serveur, 'string'));
 	return $desc;
 }
 
