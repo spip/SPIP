@@ -325,7 +325,7 @@ function auteur_verifier_jeton($jeton){
 	if (preg_match(',[^0-9a-f.],i',$jeton))
 		return false;
 
-	$desc = sql_fetsel('*','spip_auteurs',"cookie_oubli=".sql_quote($jeton));
+	$desc = sql_fetsel('*','spip_auteurs',"cookie_oubli=".sql_quote($jeton, $serveur, 'string'));
 	return $desc;
 }
 
