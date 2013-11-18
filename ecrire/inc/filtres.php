@@ -1314,6 +1314,7 @@ function affdate_base($numdate, $vue, $options = array()) {
 
 	switch ($vue) {
 	case 'saison':
+	case 'saison_annee':
 		$saison = '';
 		if ($mois > 0){
 			$saison = ($options['param'] == 'sud') ? 3 : 1;
@@ -1322,7 +1323,10 @@ function affdate_base($numdate, $vue, $options = array()) {
 			if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = ($options['param'] == 'sud') ? 2 : 4;
 			if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = ($options['param'] == 'sud') ? 3 : 1;
 		}
-		return $saison?_T('date_saison_'.$saison):'';
+		if($vue == 'saison')
+			return $saison?_T('date_saison_'.$saison):'';
+		else
+			return $saison?trim(_T('date_fmt_saison_annee', array('saison'=>_T('date_saison_'.$saison), 'annee'=>$annee))) :'';
 
 	case 'court':
 		if ($avjc) return $annee;
@@ -1446,6 +1450,11 @@ function annee($numdate) {
 function saison($numdate, $hemisphere = 'nord') {
 	if ($hemisphere != 'sud') $hemisphere = 'nord';
 	return affdate_base($numdate, 'saison', $hemisphere);
+}
+
+// http://doc.spip.org/@saison_annee
+function saison_annee($numdate) {
+	return affdate_base($numdate, 'saison_annee');
 }
 
 /**
