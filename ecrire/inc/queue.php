@@ -475,7 +475,7 @@ function queue_set_next_job_time($next) {
 	// permet ausis d'initialiser le nom de fichier a coup sur
 	$curr_next = $_SERVER['REQUEST_TIME'] + queue_sleep_time_to_next_job(true);
 	if (
-			($curr_next<$time AND $next>$time) // le prochain job est dans le futur mais pas la date planifiee actuelle
+			($curr_next<=$time AND $next>$time) // le prochain job est dans le futur mais pas la date planifiee actuelle
 			OR $curr_next>$next // le prochain job est plus tot que la date planifiee actuelle
 		) {
 		if (include_spip('inc/memoization') AND defined('_MEMOIZE_MEMORY') AND _MEMOIZE_MEMORY) {
