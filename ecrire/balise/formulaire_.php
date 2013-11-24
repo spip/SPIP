@@ -40,9 +40,9 @@ function protege_champ($texte){
 			return $texte;
 		if (is_string($texte)
 			AND $texte
-		  AND strpbrk($texte, "&\"'<>")!==false
-		) {
-			$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'),ENT_QUOTES);
+			AND strpbrk($texte, "&\"'<>")!==false
+			) {
+				$texte = htmlspecialchars($texte,ENT_QUOTES);
 		}
 	}
 	return $texte;
