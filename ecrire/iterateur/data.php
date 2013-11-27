@@ -409,7 +409,7 @@ class IterateurDATA implements Iterator {
 
 				// tri par cle
 				if ($r[1] == 'cle'){
-					if (isset($r2) and $r[2])
+					if (isset($r[2]) and $r[2])
 						krsort($this->tableau);
 					else
 						ksort($this->tableau);
