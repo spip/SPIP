@@ -51,7 +51,7 @@ function action_spip_image_effacer_dist($arg) {
 // $source = $_FILES[0]
 // $dest = arton12.xxx
 // http://doc.spip.org/@action_spip_image_ajouter_dist
-function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
+function action_spip_image_ajouter_dist($arg,$sousaction2,$source,$return=false) {
 	global $formats_logos;
 
 	include_spip('inc/documents');
@@ -59,6 +59,7 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 		if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
 		$source = (is_array($_FILES) ? array_pop($_FILES) : "");
 	}
+	$erreur = "";
 	if (!$source)
 		spip_log("spip_image_ajouter : source inconnue");
 	else {
@@ -69,7 +70,7 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 	  		$source = @copy(determine_upload() . $source, $f);
 		else {
 		// Intercepter une erreur a l'envoi
-			if (check_upload_error($source['error']))
+			if ($erreur = check_upload_error($source['error'],"",$return))
 				$source ="";
 			else
 		// analyse le type de l'image (on ne fait pas confiance au nom de
@@ -89,37 +90,42 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 			if (_LOGO_MAX_SIZE > 0
 			AND $poids > _LOGO_MAX_SIZE*1024) {
 				spip_unlink ($f);
-				check_upload_error(6,
-				_T('info_logo_max_poids',
-					array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
-					'actuel' => taille_en_octets($poids))));
+				$erreur = _T('info_logo_max_poids',
+									array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
+									'actuel' => taille_en_octets($poids)));
 			}
 
-			if (_LOGO_MAX_WIDTH * _LOGO_MAX_HEIGHT
+			elseif (_LOGO_MAX_WIDTH * _LOGO_MAX_HEIGHT
 			AND ($size[0] > _LOGO_MAX_WIDTH
 			OR $size[1] > _LOGO_MAX_HEIGHT)) {
 				spip_unlink ($f);
-				check_upload_error(6, 
-				_T('info_logo_max_poids',
-					array(
-					'maxi' =>
-						_T('info_largeur_vignette',
-							array('largeur_vignette' => _LOGO_MAX_WIDTH,
-							'hauteur_vignette' => _LOGO_MAX_HEIGHT)),
-					'actuel' =>
-						_T('info_largeur_vignette',
-							array('largeur_vignette' => $size[0],
-							'hauteur_vignette' => $size[1]))
-				)));
+				$erreur = _T('info_logo_max_poids',
+									array(
+									'maxi' =>
+										_T('info_largeur_vignette',
+											array('largeur_vignette' => _LOGO_MAX_WIDTH,
+											'hauteur_vignette' => _LOGO_MAX_HEIGHT)),
+									'actuel' =>
+										_T('info_largeur_vignette',
+											array('largeur_vignette' => $size[0],
+											'hauteur_vignette' => $size[1]))
+									));
 			}
-			@rename ($f, _DIR_LOGOS . $arg . ".$type");
+			else
+				@rename ($f, _DIR_LOGOS . $arg . ".$type");
 		}
 		else {
 			spip_unlink ($f);
-			check_upload_error(6,_T('info_logo_format_interdit',
-						array('formats' => join(', ', $formats_logos))));
+			$erreur = _T('info_logo_format_interdit',
+									array('formats' => join(', ', $formats_logos)));
 		}
 	
+	}
+	if ($erreur){
+		if ($return)
+			return $erreur;
+		else
+			check_upload_error(6,$erreur);
 	}
 }
 ?>
