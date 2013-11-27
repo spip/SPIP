@@ -207,9 +207,13 @@ if (!class_exists('nanoSha2'))
 					$npad = $npad/$this->bytesString;
 					$length = count($ords);
 					$ords[] = 0x80; // append the "1" bit followed by 7 0's
-					$ords = array_pad($ords,ceil(($length+32/$this->bytesString)/$npad)*$npad-32/$this->bytesString,0);
+					$pad = ceil(($length+32/$this->bytesString)/$npad)*$npad-32/$this->bytesString;
+					$ords = array_pad($ords,$pad,0);
+
+					$pad *= $this->bytesString;
+					$bin = array_pad(array(), $pad>>5, 0);
 					$mask = (1 << $this->bytesString) - 1;
-					for($i = 0; $i < count($ords) * $this->bytesString; $i += $this->bytesString)
+					for($i = 0; $i < $pad ; $i += $this->bytesString)
 						$bin[$i>>5] |= ($ords[$i / $this->bytesString] & $mask) << (24 - $i%32);
 					$bin[] = $length*$this->bytesString;
 					return $bin;
@@ -384,12 +388,12 @@ if (!function_exists('str_split'))
         $split_length = abs($split_length);
 
         if (($split_length == 0) || ($strlen == 0)) {
-            $result = false;
+            return false;
         } elseif ($split_length >= $strlen) {
-            $result[] = $string;
+	    return array($string);
         } else {
             $length = $split_length;
-
+	    $result = array();
             for ($i = 0; $i < $strlen; $i++)
             {
                 $i = (($sign < 0) ? $i + $length : $i);
@@ -401,9 +405,8 @@ if (!function_exists('str_split'))
                           ? ($strlen - ($i + 1))
                           : $split_length;
             }
+	    return $result;
         }
-
-        return $result;
     }
 }
 
