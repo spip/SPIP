@@ -1641,6 +1641,7 @@ function modulo($nb, $mod, $add=0) {
 
 /**
  * Vérifie qu'un nom (d'auteur) ne comporte pas d'autres tags que <multi>
+ * et ceux volontairement spécifiés dans la constante
  *
  * @param string $nom
  *      Nom (signature) proposé
@@ -1652,7 +1653,17 @@ function nom_acceptable($nom) {
 	if (!is_string($nom)) {
 		return false;
 	}
-	$v_nom = str_replace(array('@multi@','@/multi@'), array('<multi>','</multi>'), supprimer_tags(str_replace(array('<multi>','</multi>'), array('@multi@','@/multi@'), $nom)));
+	if (!defined('_TAGS_LOGIN')) define('_TAGS_LOGIN','');
+	$tags_acceptes = array_unique(explode(',', 'multi,' . _TAGS_LOGIN));
+	foreach($tags_acceptes as $tag) {
+		if (strlen($tag)) {
+			$remp1[] = '<'.trim($tag).'>';
+			$remp1[] = '</'.trim($tag).'>';
+			$remp2[] = '\x60'.trim($tag).'\x61';
+			$remp2[] = '\x60/'.trim($tag).'\x61';
+		}
+	}	
+	$v_nom = str_replace($remp2, $remp1, supprimer_tags(str_replace($remp1, $remp2, $nom)));
 	return str_replace('&lt;', '<', $v_nom) == $nom;
 }
 
