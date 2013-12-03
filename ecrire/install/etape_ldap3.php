@@ -25,7 +25,7 @@ function install_etape_ldap3_dist()
 		? _INSTALL_BASE_LDAP
 		: "ou=users, dc=mon-domaine, dc=com";
 
-	echo install_debut_html();
+	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_chemin_acces_1'),info_progression_etape(3,'etape_ldap','install/')),_T('info_chemin_acces_2');
 

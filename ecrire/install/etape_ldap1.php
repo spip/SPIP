@@ -39,7 +39,7 @@ function install_etape_ldap1_dist()
 		? _INSTALL_PASS_LDAP
 		: '';
 
-	echo install_debut_html();
+	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('titre_connexion_ldap'),info_progression_etape(1,'etape_ldap','install/'), _T('entree_informations_connexion_ldap'));
 
