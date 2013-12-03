@@ -1035,7 +1035,7 @@ function spip_pg_cite($v, $t){
 	if(is_null($v)) return 'NULL'; // null php se traduit en NULL SQL
 
 	if (sql_test_date($t)) {
-		if (strpos("0123456789", $v[0]) === false)
+		if ($v AND (strpos("0123456789", $v[0]) === false))
 			return spip_pg_frommysql($v);
 		else {
 			if (strncmp($v,'0000',4)==0)
