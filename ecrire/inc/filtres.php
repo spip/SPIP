@@ -1590,8 +1590,8 @@ function nom_acceptable($nom) {
 	if (!is_string($nom)) {
 		return false;
 	}
-	if (!defined('_TAGS_LOGIN')) define('_TAGS_LOGIN','');
-	$tags_acceptes = array_unique(explode(',', 'multi,' . _TAGS_LOGIN));
+	if (!defined('_TAGS_NOM_AUTEUR')) define('_TAGS_NOM_AUTEUR','');
+	$tags_acceptes = array_unique(explode(',', 'multi,' . _TAGS_NOM_AUTEUR));
 	foreach($tags_acceptes as $tag) {
 		if (strlen($tag)) {
 			$remp1[] = '<'.trim($tag).'>';
