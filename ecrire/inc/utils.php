@@ -513,11 +513,16 @@ function nettoyer_uri($reset = null)
 	return $propre = (preg_replace(',[?&]$,', '', $uri1));
 }
 
-//
-// donner l'URL de base d'un lien vers "soi-meme", modulo
-// les trucs inutiles
-//
-// http://doc.spip.org/@self
+
+/**
+ * Donner l'URL de base d'un lien vers "soi-meme", modulo les trucs inutiles
+ *
+ * @param string $amp
+ *    Style des esperluettes
+ * @param bool $root
+ * @return string
+ *    URL vers soi-même
+**/
 function self($amp = '&amp;', $root = false) {
 	$url = nettoyer_uri();
 	if (!$root
@@ -543,6 +548,7 @@ function self($amp = '&amp;', $root = false) {
 	}
 
 	// eviter les hacks
+	include_spip('inc/filtres_mini');
 	$url = spip_htmlspecialchars($url);
 
 	// &amp; ?
