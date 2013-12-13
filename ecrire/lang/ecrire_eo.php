@@ -1042,15 +1042,7 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 	// U
 	'upload_info_mode_document' => 'Enmeti tiun bildon en la bildteko',
 	'upload_info_mode_image' => 'Eltiri tiun bildon de la bildteko',
-	'utf8_convert_attendez' => 'Atendu kelkajn momentojn kaj refreŝigu tiun paĝon.',
-	'utf8_convert_avertissement' => 'Vi estas konvertonta la enhavon de via datenbazo (artikoloj, fulm-informoj, ktp...) kun la litertiparo <b>@orig@</b> al la litertiparo <b>@charset@</b>.',
-	'utf8_convert_backup' => 'Antaŭe, ne forgesu fari kompletan savkopion de via retejo. Vi devos ankaŭ kontroli, ke viaj skeletoj kaj lingvaj dosieroj kungruas kun @charset@.',
-	'utf8_convert_erreur_deja' => 'Via retejo jam estas je @charset@, estas senutile konverti ĝin...',
 	'utf8_convert_erreur_orig' => 'Eraro : la litertiparo @charset@ ne estas eltenata.',
-	'utf8_convert_termine' => 'Finite !',
-	'utf8_convert_timeout' => '<b>Grava :</b> kaze de servila <i>eltempiĝo</i> bonvolu freŝigi la paĝon ĝis kiam ĝi indikos « finite ».',
-	'utf8_convert_verifier' => 'Vi devas nun malplenigi la staplon, kaj kontroli ke ĉio bonas ĉe la publikaj paĝoj de la retejo. Kaze de grava problemo, savkopio de viaj datenoj estas farita (je la SQL-formato) en la dosierujo @rep@.',
-	'utf8_convertir_votre_site' => 'Konverti vian retejon en utf-8',
 
 	// V
 	'version' => 'Versio :'

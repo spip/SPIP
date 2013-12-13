@@ -976,7 +976,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 
 	// U
 	'upload_info_mode_document' => 'Irudi hau portfolioan ezarri',
-	'utf8_convertir_votre_site' => 'Zure gunean utf-8-era konbertitu',
 
 	// V
 	'version' => 'Bertsioa :'

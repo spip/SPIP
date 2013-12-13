@@ -1007,15 +1007,7 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
 	// U
 	'upload_info_mode_document' => 'Lakaat ar skeudenn-mañ er portofolio',
 	'upload_info_mode_image' => 'Tennañ ar skeudenn-mañ kuit eus ar portofolio',
-	'utf8_convert_attendez' => 'Gortozit un tammig, hag adkargit ar bajenn-mañ',
-	'utf8_convert_avertissement' => 'Emaoc’h war-nes amdreiñ endalc’had ho tiaz titouroù (pennadoù, berrskridoù, h.a.), eus ar strobad arouezennoù <b>@orig@</b> d’an hini <b>@charset@</b>.',
-	'utf8_convert_backup' => 'N’ankouait ket enrollañ ho lec’hienn penn-da-benn a-raok. Dleout a rafec’h ivez gwiriekaat eo kenglotus ho frammoù gant @charset@.',
-	'utf8_convert_erreur_deja' => 'Emañ ho lec’hienn e @charset@ dija, n’eus netra d’ober...',
 	'utf8_convert_erreur_orig' => 'Fazi : n’eo ket skoret ar strobad arouezennoù @charset@',
-	'utf8_convert_termine' => 'Echu eo !',
-	'utf8_convert_timeout' => '<b>Pouezus :</b> ma c’hoarvez un <i>timeout</i> gant ar servijer, adkargit ar bajenn betek ma tiskouezo  « echu ».',
-	'utf8_convert_verifier' => 'Bremañ e rankit goullonderiñ ar grubuilh ha gwiriañ eo mat pep tra war lodenn foran al lec’hienn. Ma c’hoarvez ur gudenn vras, ez eo bet miret ho roadoù (er stumm SQL) er c’havlec’h @rep@.',
-	'utf8_convertir_votre_site' => 'Amdreiñ ho lec’hienn davet uft-8',
 
 	// V
 	'version' => 'Stumm :'

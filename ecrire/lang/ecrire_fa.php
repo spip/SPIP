@@ -968,15 +968,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'upload_info_mode_document' => 'اين تصوير را در پرونده‌ي هنري بگذار',
 	'upload_info_mode_image' => 'اين تصوير را از پرونده‌ي هنري حذف كن',
-	'utf8_convert_attendez' => 'چند لحظه صبر کنید سپس این صفحه را تازه کنید.',
-	'utf8_convert_avertissement' => 'شما آماده ی تبدیل محتوی سایت از نویسه های <b>@orig@</b> به نویسه های <b>@charset@</b> هستید.',
-	'utf8_convert_backup' => 'پیش از هر چیز فراموش نکنید که داده هایتان را ضبط کنید. شما باید همچنین ببینید که اسکلتها و فایلهای زبانتان با @charset@ همخوانی دارد.',
-	'utf8_convert_erreur_deja' => 'سایت شما با @charset@ میباشد تبدیل لازم نیست.',
 	'utf8_convert_erreur_orig' => 'اشتباه: نویسه های @charset@ پذیرفته نمیشود.',
-	'utf8_convert_termine' => 'پایان یافت!',
-	'utf8_convert_timeout' => 'مهم: درصورت <i>timeout</i> سرورها لطفأ صفحه را تا نمایان شدن «پایان» نو کنید.',
-	'utf8_convert_verifier' => 'شما اکنون باید فایل cache را خالی کنید پیشتر مطمئن شوید که در صفحات سایت مشکلی دیده نمیشود. در صورت اشکال ذخیره ی داده هایتان را به صورت (format SQL) در رپرتوار @rep@ مییابید.',
-	'utf8_convertir_votre_site' => 'تبدیل سایتتان به utf-8',
 
 	// V
 	'version' => 'نسخه:'

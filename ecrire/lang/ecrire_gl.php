@@ -999,15 +999,7 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 	// U
 	'upload_info_mode_document' => 'Poñer esta imaxe no portafolio',
 	'upload_info_mode_image' => 'Retirar esta imaxe do portafolio',
-	'utf8_convert_attendez' => 'Agarde un pouco de tempo e recargue esta páxina.',
-	'utf8_convert_avertissement' => 'Vai converter o contido da súa base de datos (artigos, breves, etc) do xogo de carácteres <b>@orig@</b> ao xogo de carácteres <b>@charset@</b>.',
-	'utf8_convert_backup' => 'Non esqueza antes de nada de facer unha salvagarda completa do seu web.  Débese tamén comprobar que os esqueletos e ficheiros de lingua sexan compatibles con @charset@.',
-	'utf8_convert_erreur_deja' => 'O seu web xa está en carácter @charset@, é inútil convertelo...',
 	'utf8_convert_erreur_orig' => 'Erro : o xogo de carácteres @charset@ non está soportado.',
-	'utf8_convert_termine' => 'Rematou!',
-	'utf8_convert_timeout' => '<b>Importante :</b> para o caso de que se produza <i>timeout</i> do servidor, recargue a páxina até que indique  « terminé ».',
-	'utf8_convert_verifier' => 'Agora debe baleirar a memoria temporal (caché), e comprobar que todo vai ben nas páxinas públicas do web. No caso de que haxa problemas graves, unha copia de salvagarda dos seus datos foi realizada (en formato SQL) no cartafol @rep@.',
-	'utf8_convertir_votre_site' => 'Converter o seu web a utf-8',
 
 	// V
 	'version' => 'Versión :'

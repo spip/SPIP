@@ -1047,15 +1047,7 @@ SPIPu vyhľadávať aj na stránkach,
 	// U
 	'upload_info_mode_document' => 'Umiestniť tento obrázok do portfólia',
 	'upload_info_mode_image' => 'Odstrániť tento obrázok z portfólia',
-	'utf8_convert_attendez' => 'Počkajte niekoľko sekúnd a potom znova spustite túto stránku.',
-	'utf8_convert_avertissement' => 'Chystáte sa skontertovať obsah svojej databázy (články, novinky, atď.) zo znakovej sady <b>@orig@</b> do znakovej sady <b>@charset@</b>.',
-	'utf8_convert_backup' => 'Nezabudnite najprv urobiť kompletnú zálohu svojej stránky. Treba tiež skontrolovať, či sú vaše šablóny a jazykové súbory kompatibilné s @charset@.',
-	'utf8_convert_erreur_deja' => 'Vaša stránka je už v @charset@, nemá zmysel ju konvertovať.',
 	'utf8_convert_erreur_orig' => 'Chyba: znaková sada @charset@ nie je podporovaná.',
-	'utf8_convert_termine' => 'Hotovo!',
-	'utf8_convert_timeout' => '<b>Dôležité:</b> Ak server hlási <i>timeout</i> (vypršanie časového limitu), prosím, pokračujte a znova načítajte stránku, až kým sa vám neobjaví správa "Hotovo!".',
-	'utf8_convert_verifier' => 'Teraz treba vyprázdniť cache stránky a potom skontrolovať, či je na verejne prístupnej stránke všetko v poriadku. Pre prípad, že by sa objavil veľký problém, bola v priečinku @rep@ vytvorená záloha pôvodných dát (vo formáte SQL).',
-	'utf8_convertir_votre_site' => 'Konvertovať stránku na utf-8',
 
 	// V
 	'version' => 'Verzia:'

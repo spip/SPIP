@@ -748,10 +748,6 @@ s’avètz bravament modificat lo grafisme o l’estructura dau sit.',
 	'trad_lier' => 'Aquest article es una revirada de l’article numèro:',
 	'trad_new' => 'Escriure una revirada novèla d’aquest article', # MODIF
 
-	// U
-	'utf8_convert_termine' => 'Es acabat !',
-	'utf8_convertir_votre_site' => 'Convertir vòstre sit en utf-8',
-
 	// V
 	'version' => 'Version :'
 );

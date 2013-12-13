@@ -994,15 +994,7 @@ títulos y las descripciones de los artículos. <br />- Un segundo método, much
 	// U
 	'upload_info_mode_document' => 'Dejar esta imagen en el portafolios',
 	'upload_info_mode_image' => 'Retirar esta imagen del portafolios',
-	'utf8_convert_attendez' => 'Espere unos instantes y vuelva a cargar esta página.',
-	'utf8_convert_avertissement' => 'Se prepara para convertir el contenido de su base de datos (artículos, breves, etc) del juego de caracteres <b>@orig@</b> hacia el juego de caracteres <b>@charset@</b>.',
-	'utf8_convert_backup' => 'No se olvides de hacer primero un respaldo completo de su sitio. También conviene verificar que sus esqueletos y archivos de idioma son compatibles @charset@.',
-	'utf8_convert_erreur_deja' => 'Su sitio ya está en @charset@, inútil convertirlo...',
 	'utf8_convert_erreur_orig' => 'Error: el juego de caracteres no está soportado.',
-	'utf8_convert_termine' => '¡Se ha acabado!',
-	'utf8_convert_timeout' => '<b>Importante:</b> en caso de <i>timeout</i> del servidor, vuelve a cargar la página hasta que indique «terminado».',
-	'utf8_convert_verifier' => 'Ahora debe ir a vaciar la cache y verificar que todo funciona bien en las páginas públicas del sitio. En caso de graves problemas, un respaldo de los datos se ha realizado (al formato SQL) en la carpeta @rep@.', # Respaldo de los datos quiere decir copia de seguridad, por si alguien no lo sabe. Se puede decir de las dos maneras.
-	'utf8_convertir_votre_site' => 'Convertir tu sitio en utf-8',
 
 	// V
 	'version' => 'Versión:'

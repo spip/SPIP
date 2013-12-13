@@ -1045,15 +1045,7 @@ a fim de evitar as modificações simultâneas.
 	// U
 	'upload_info_mode_document' => 'Colocar esta imagem no portfolio',
 	'upload_info_mode_image' => 'Remover esta imagem do portfolio',
-	'utf8_convert_attendez' => 'Aguarde uns instantes e recarregue esta página.',
-	'utf8_convert_avertissement' => 'Está prestes a converter o conteúdo da sua base de dados (artigos, notícias, etc.) do conjunto de caracteres <b>@orig@</b> para o conjunto de caracteres <b>@charset@</b>.',
-	'utf8_convert_backup' => 'Não esqueça de primeiro fazer uma cópia de segurança completa do seu sítio. Precisa também de verificar se os seus modelos e ficheiros de idioma são compatíveis com @charset@.',
-	'utf8_convert_erreur_deja' => 'O seu sítio está já em @charset@, é inútil converter.',
 	'utf8_convert_erreur_orig' => 'Erro : o conjunto de caracteres @charset@ não é suportado.',
-	'utf8_convert_termine' => 'Terminou!',
-	'utf8_convert_timeout' => '<b>Importante :</b> Se o servidor indicar <i>timeout</i> , por favor recarregue a página até que ela indique « Terminou! ».',
-	'utf8_convert_verifier' => 'Agora precisa de esvaziar a cache do sítio e depois verificar se está tudo bem nas páginas públicas do sítio. Se ocorrer um problema grave, cria-se uma cópia de segurança dos seus dados originais (em formato SQL) no directório @rep@.',
-	'utf8_convertir_votre_site' => 'Converter o seu sítio em utf-8',
 
 	// V
 	'version' => 'Versão:'

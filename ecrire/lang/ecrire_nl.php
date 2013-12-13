@@ -1024,15 +1024,7 @@ Dit kan handig zijn als je veel pagina’s hebt gewijzigd, de layout of de struc
 	// U
 	'upload_info_mode_document' => 'Dit beeld in portfolio neerzetten',
 	'upload_info_mode_image' => 'Dit beeld van portfolio terugtrekken',
-	'utf8_convert_attendez' => 'Wacht enkele ogenblikken en herlaadt deze pagina.',
-	'utf8_convert_avertissement' => 'U heeft zich klaargemaakt om de inhoud van uw site (artikels, berichten, enz) om te zetten van karakterset <b>@orig@</b> naar karakterset <b>@charset@</b>.',
-	'utf8_convert_backup' => 'Vergeet niet om vooraf uw volledige site te bewaren. U dient ook na te gaan of uw sjablonen en taalbestanden @charset@ compatibel zijn.',
-	'utf8_convert_erreur_deja' => 'Uw site is reeds in @charset@, onnodig om hem om te zetten...',
 	'utf8_convert_erreur_orig' => 'Fout : de karakterset @charset@ wordt niet ondersteund.',
-	'utf8_convert_termine' => 'Opdracht volbracht !',
-	'utf8_convert_timeout' => '<b>Belangrijk :</b> indien de server <i>timeout</i> aangeeft, dien je de pagina te herladen tot ze « volbracht » aangeeft.',
-	'utf8_convert_verifier' => 'Je kan nu de buffer leegmaken en nagaan of alles goed werkt op je publieke site. Als het goed fout gaat, kan je terugvallen op een backup die in SQL formaat in de map @rep@ bewaard werd.',
-	'utf8_convertir_votre_site' => 'Je site omzetten naar utf-8',
 
 	// V
 	'version' => 'Versie :'

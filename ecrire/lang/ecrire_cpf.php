@@ -762,15 +762,7 @@ sak i pé rand out sit inn pé pli lan.',
 	'trad_new' => 'Ekri inn nouvèl tradiksyon lartik-la', # MODIF
 
 	// U
-	'utf8_convert_attendez' => 'Mersi espèr in ti moman pi rocharj lo paj la.',
-	'utf8_convert_avertissement' => 'Ou sava chanje lo kontni out bazdodné (bzartik, tite-nouvèl,etousal) sat lé koméla dan formad karaktèr <b>@orig@</b> pou pass azot dan bann karaktèr<b>@charset@</b>.',
-	'utf8_convert_backup' => 'Oubly pa fè in sovgard byen komplé out sit. Sra nésésèr ou gad byen sak out ban leskelèt ek bann fisyé lang zot lé kopatib ek @charset@. Pangar, si lo sistèm pou swiv bann révizyon lé aktivé, li sra sirman ravajé.',
-	'utf8_convert_erreur_deja' => 'Out sit i anserv déja @charset@, lé pa itil chanje ali...',
 	'utf8_convert_erreur_orig' => 'Larlik : lansanm karaktèr @charset@ li lé pa siporté.',
-	'utf8_convert_termine' => 'Lé finn fini !',
-	'utf8_convert_timeout' => '<b>TANSYON PANGAR :</b> SI out server li gigny in  <i>timeout</i>, ou nora bezwin rocharj out paj zizka èl i afis « finn fino ».',
-	'utf8_convert_verifier' => 'Fok ou sava vid lo kach, epi gad byen tout lé normal sir lo sit piblik. Si ou nénna in larlik, inkièt pa ou, in sovgard out donné la té fin fini (ek lo forma SQL) andan lo répertwar @rep@.',
-	'utf8_convertir_votre_site' => 'Po chanjer out sit ek utf-8',
 
 	// V
 	'version' => 'Vesyon :'

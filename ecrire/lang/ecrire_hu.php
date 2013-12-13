@@ -738,15 +738,7 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 	'trad_new' => 'Írni egy újabb fordítást erről a cikkről', # MODIF
 
 	// U
-	'utf8_convert_attendez' => 'Várjon egy kicsit, majd töltse újra az oldalt.',
-	'utf8_convert_avertissement' => 'Most az adatbázis tartalmát (cikkek, hírek, stb.) készül konvertálni az eredeti <b>@orig@</b> karaktertáblából a <b>@charset@</b> karaktertábla felé.',
-	'utf8_convert_backup' => 'Ne felejtse először teljesen megmenteni a honlapját. Azt is ellenőrizze, hogy a szkiptjei és a nyelvi fájlok is @charset@ kompatibilis. Egyébként a módosítások követése, ha aktivált, károsodni fog.', # MODIF
-	'utf8_convert_erreur_deja' => 'A honlapja használja már a @charset@ karaktertáblát, szóval felesleges konvertálni...',
 	'utf8_convert_erreur_orig' => 'Hiba : a @charset@ karaktertábla nincs támogatva.',
-	'utf8_convert_termine' => 'Befejeződött !',
-	'utf8_convert_timeout' => 'Fontos :</b> szerver <i>időtúllépése</i> esetén töltse újra az oldalt addig, amíg nem írja ki, hogy "befejeződött".',
-	'utf8_convert_verifier' => 'Most ürítse a cache-t, és ellenőrizze, hogy minden rendben van a publikus lapokon. Nagyobb problema esetére egy adatmentés (SQL formátumban) megtörtént a @rep@ n. mappában.',
-	'utf8_convertir_votre_site' => 'utf-8 karaktertáblába konvertálodjon a honlapja',
 
 	// V
 	'version' => 'Verzió :'

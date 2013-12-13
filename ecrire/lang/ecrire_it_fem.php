@@ -877,15 +877,7 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 	// U
 	'upload_info_mode_document' => 'Mettere questa immagine nel portfolio',
 	'upload_info_mode_image' => 'Eliminare questa immagine dal portfolio',
-	'utf8_convert_attendez' => 'Attendi qualche secondo e aggiorna la pagina.',
-	'utf8_convert_avertissement' => 'Stai per convertire il contenuto del proprio database (articoli, brevi, ecc.) dal set di caratteri <b>@orig@</b> al set di caratteri <b>@charset@</b>.',
-	'utf8_convert_backup' => 'Non dimenticare di fare prima un backup completo del sito. Inoltre si deve verificare che i modelli e i file lingua sono compatibili @charset@.',
-	'utf8_convert_erreur_deja' => 'Il tuo sito è già in @charset@, è inutile convertirlo...',
 	'utf8_convert_erreur_orig' => 'Errore: il set di caratteri @charset@ non è supportato.',
-	'utf8_convert_termine' => 'Finito!',
-	'utf8_convert_timeout' => '<b>Importante:</b> in caso di  <i>timeout</i> del server, aggiorna la pagina fino a che non si ottiene il messaggio « finito ».',
-	'utf8_convert_verifier' => 'Ora è necessario svuotale la cache e verificare che non vi siano problemi sulle pagine pubbliche del sito. In caso di problemi gravi è stato effettuato un backup dei dati (in formato SQL) nella cartella @rep@.',
-	'utf8_convertir_votre_site' => 'Convertire il sito in UTF-8',
 
 	// V
 	'version' => 'Versione:'

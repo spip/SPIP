@@ -771,15 +771,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 	'trad_new' => 'Tulis terjemahan baru untuk artikel ini', # MODIF
 
 	// U
-	'utf8_convert_attendez' => 'Tunggu beberapa saat dan perbaharui halaman ini.',
-	'utf8_convert_avertissement' => 'Anda akan mengubah isi database anda (artikel, berita, dll) dari set karakter <b>@orig@</b> ke set karakter <b>@charset@</b>.',
-	'utf8_convert_backup' => 'Jangan lupa membuat backup lengkap situs anda terlebih dahulu. Anda juga perlu memeriksa bahawa templat dan bahasa anda kompatibel dengan @charset@.',
-	'utf8_convert_erreur_deja' => 'Situs anda sudah dalam @charset@, tidak ada yang perlu diubah.',
 	'utf8_convert_erreur_orig' => 'Kesalahan: set karakter @charset@ tidak didukung.',
-	'utf8_convert_termine' => 'Selesai!',
-	'utf8_convert_timeout' => '<b>Penting:</b> Jika server menunjukkan <i>timeout</i>, silakan perbaharui halaman di mana anda memperoleh pesan «Selesai!».',
-	'utf8_convert_verifier' => 'Anda sekarang harus mengosongkan cache situs dan periksa apakah semuanya baik-baik saja di halaman-halaman umum situs. Jika anda mengalami sebuah permasalahan besar, sebuah backup data asli anda (dalam format SQL) telah dibuat di direktori @rep@.',
-	'utf8_convertir_votre_site' => 'Ubah situs anda ke utf-8',
 
 	// V
 	'version' => 'Versi:'
