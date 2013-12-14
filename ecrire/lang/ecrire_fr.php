@@ -765,7 +765,6 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu’un premier ac
 	'texte_choix_table_prefix' => 'Préfixe des tables :',
 	'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d’utiliser les possibilités plus modernes du <i>HTML5</i>.',
 	'texte_compatibilite_html_attention' => 'Il n’y a aucun risque à activer l’option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt; !DOCTYPE html&gt;</code>.',
-	'texte_compresse_ou_non' => '(celui-ci peut être compressé ou non)',
 	'texte_compte_element' => '@count@ élément',
 	'texte_compte_elements' => '@count@ éléments',
 	'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.',
