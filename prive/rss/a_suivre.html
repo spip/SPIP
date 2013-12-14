@@ -25,7 +25,7 @@ $rss['[(#DATE|date_ical)]'] .= '
 	#SET{fond,#VAL{prive/rss/a_suivre-}|concat{#VALEUR{table_objet}}}
 	[(#GET{fond}|trouver_fond|oui)#INCLURE*{fond=#GET{fond}}]
 </BOUCLE_objets>
-sort($rss);
+krsort($rss);
 echo join('',$rss);
 ?>
 </channel>
