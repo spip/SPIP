@@ -896,8 +896,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 	'trad_new' => 'Écrire une nouvelle traduction',
 
 	// U
-	'upload_info_mode_document' => 'Déposer cette image dans le portfolio',
-	'upload_info_mode_image' => 'Retirer cette image du portfolio',
 	'utf8_convert_erreur_orig' => 'Erreur : le jeu de caractères @charset@ n’est pas supporté.',
 
 	// V
