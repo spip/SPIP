@@ -26,32 +26,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_connexion_ldap_echec_2' => 'Turnate à a pàgina di nanzu è verificate l’infurmazioni date. ',
 	'avis_connexion_ldap_echec_3' => 'O sinnò, ùn aduprate micca u supportu LDAP per impurtà utilizatori.',
 	'avis_deplacement_rubrique' => 'Attenti ! Sta rùbbrica cuntene @contient_breves@ dispacciu/i : Sè vo a spiazzate, spuntate puru sta casella da cunfirmà.',
-	'avis_destinataire_obligatoire' => 'Duvite rinsignà un destinatariu prima di mandà stu messagiu.',
 	'avis_erreur_connexion_mysql' => 'Errore di cunnessione SQL',
-	'avis_erreur_version_archive' => '<b>Attenti ! u schedariu @archive@ currisponde 
-		à una versione di SPIP sferente da quella stallata.</b> Puderanu accade grossi prublemi :
-		rìsicu di distruzzione di a vostra basa, gattivi funziunamenti vari di u situ, ecc.
-		Ùn cunfirmate micca sta dumanda d’impurtazione !
-		<p>Per sapè ne di più, andate à vede <a href="@spipnet@">
-		a ducumentazione di SPIP</a>.</p>',
 	'avis_espace_interdit' => '<b>Spaziu interdettu</b><div>Hè digià stallatu SPIP.</div>',
 	'avis_lecture_noms_bases_1' => 'U prugrammu di stallazione ùn hà pussutu leghje i nomi di e base stallate nant’à u servore.',
 	'avis_lecture_noms_bases_2' => 'Sia ùn hè dispunìbule nisuna basa di dati, sia a funzione chì permette d’accede à e base hè
 	stata disattivata per ragioni di sicurezza (stu casu hè abbastanza spartu).',
 	'avis_lecture_noms_bases_3' => 'In u secondu casu, pò accade chì una basa di dati sia aduprèvule cù u vostru nome di login :',
-	'avis_non_acces_message' => 'Ùn avete accessu à stu messagiu.',
 	'avis_non_acces_page' => 'Ùn avete accessu à sta pàgina.',
 	'avis_operation_echec' => 'Hè fiascata l’uperazione.',
 	'avis_operation_impossible' => 'Uperazione impussìbule',
-	'avis_probleme_archive' => 'Prublemu di lettura di u schedariu @archive@',
 	'avis_suppression_base' => 'ATTENTI, dopu cancellati i dati, ùn si ponu più ricuarà',
-	'avis_version_mysql' => 'U vostru servore SQL (@version_mysql@) ùn permette micca a riparazione autumàtica di e tàvule di a basa.',
 
 	// B
 	'bouton_acces_ldap' => 'Aghjunghje l’accessu à LDAP',
 	'bouton_ajouter' => 'Aghjunghje',
-	'bouton_ajouter_participant' => 'AGHJUNGHJE UN UTILIZATORE :',
-	'bouton_annonce' => 'ANNUNCIU',
 	'bouton_annuler' => 'Annullà',
 	'bouton_checkbox_envoi_message' => 'pussibulità di mandà un messagiu',
 	'bouton_checkbox_indiquer_site' => 'rinsignà per forza un situ web',
@@ -60,19 +48,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_demande_publication' => 'Dumandà a pubblicazione di st’artìculu',
 	'bouton_desactive_tout' => 'Tuttu disattivà',
 	'bouton_desinstaller' => 'Disistallà',
-	'bouton_effacer_index' => 'Sguassà l’ìndici',
 	'bouton_effacer_tout' => 'TUTTU sguassà',
-	'bouton_envoi_message_02' => 'MANDÀ UN MESSAGIU',
 	'bouton_envoyer_message' => 'Messagiu definitivu : mandà',
 	'bouton_fermer' => 'Chjode',
 	'bouton_modifier' => 'Mudificà',
-	'bouton_pense_bete' => 'MEMENTU À USU PERSUNALE',
-	'bouton_radio_activer_messagerie' => 'Attivà a messageria interna',
-	'bouton_radio_activer_messagerie_interne' => 'Attivà a messageria interna',
 	'bouton_radio_activer_petition' => 'Attivà a petizione',
 	'bouton_radio_afficher' => 'Vede',
 	'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Cumparisce frà a lista di i scrittori cunnessi',
-	'bouton_radio_desactiver_messagerie' => 'Disattivà la messageria',
 	'bouton_radio_envoi_annonces_adresse' => 'Mandà l’annunci à l’indirizzu :',
 	'bouton_radio_envoi_liste_nouveautes' => 'Mandà a lista di e nuvità',
 	'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ùn cumparisce micca frà a lista di i scrittori cunnessi ',
@@ -86,11 +68,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_tenter_recuperation' => 'Pruvà una riparazione',
 	'bouton_test_proxy' => 'Fà una prova di proxy',
 	'bouton_vider_cache' => 'Sviutà u cache',
-	'bouton_voir_message' => 'Vede u messagiu prima',
 
 	// C
-	'cache_mode_compresse' => 'I schedari di u cache sò arregistrati in modu cumpressu.',
-	'cache_mode_non_compresse' => 'I schedari di u cache sò arregistrati in modu micca cumpressu.',
 	'cache_modifiable_webmestre' => 'Stu paràmetru pò esse mudificatu da u webmaestru di u situ.',
 	'calendrier_synchro' => 'Sè vo usate un prugrammu di almanaccu chì si pò accuppià cù <b>iCal</b>, ne pudete puru apparinà i dati cù l’infurmazioni di stu situ',
 	'config_activer_champs' => 'Attivà i seguenti campi',
@@ -110,7 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_titre_base_sup' => 'Dichjarazione di una basa di dati in soprapiù',
 	'config_titre_base_sup_choix' => 'Sceglie una basa di dati in soprapiù',
 	'connexion_ldap' => 'Cunnessione :',
-	'copier_en_local' => 'Cupià versu u lucale',
 
 	// D
 	'date_mot_heures' => 'ore',
@@ -195,16 +173,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_configuration' => 'Cunfigurazione',
 	'icone_creer_auteur' => 'Creà un novu autore è assucià lu à st’artìculu',
 	'icone_creer_mot_cle' => 'Creà un nuvellu segnu è assucià lu à st’artìculu',
-	'icone_creer_mot_cle_rubrique' => 'Creà un nuvellu segnu è assucià lu à sta rùbbrica',
-	'icone_creer_mot_cle_site' => 'Creà un nuvellu segnu è assucià lu à stu situ',
 	'icone_creer_rubrique_2' => 'Creà una nova rùbbrica',
 	'icone_edition' => 'Edizione',
-	'icone_envoyer_message' => 'Mandà u messagiu',
 	'icone_ma_langue' => 'A mo lingua',
 	'icone_mes_infos' => 'E mo infurmazioni',
 	'icone_mes_preferences' => 'E mo preferenze',
 	'icone_modifier_article' => 'Mudificà l’artìculu',
-	'icone_modifier_message' => 'Mudificà u messagiu',
 	'icone_modifier_rubrique' => 'Mudificà a rùbbrica',
 	'icone_publication' => 'Publicazione',
 	'icone_relancer_signataire' => 'Rilancià u signatariu',
@@ -238,15 +212,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_administrer_rubrique' => 'Pudete puru amministrà sta rùbbrica',
 	'info_adresse' => 'à l’indirizzu :',
 	'info_adresse_url' => 'Indirizzu (URL) di u situ pùbblicu',
-	'info_afficher_visites' => 'Vede e vìsite per :',
 	'info_aide_en_ligne' => 'Aiutu in ligna SPIP',
 	'info_ajout_image' => 'Quand’è vo aghjunghjite imàgini cum’è ducumenti alleati à un artìculu, 
 		SPIP pò creà per voi, in autumàticu, figurette ridotte da l’imàgini inserite. Per esempiu vi permette di creà 
 		in autumàticu una galleria d’imàgini o un portafogliu.',
-	'info_ajout_participant' => 'Hè statu aghjuntu u seguente participante :',
 	'info_ajouter_rubrique' => 'Aghjunghje un’altra rùbbrica da amministrà :',
 	'info_annonce_nouveautes' => 'Annunciu di e nuvità',
-	'info_anterieur' => 'anteriore',
 	'info_article' => 'artìculu',
 	'info_article_2' => 'artìculi',
 	'info_article_a_paraitre' => 'L’artìculi post-datati da pubblicà',
@@ -256,16 +227,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_articles_miens' => 'I mo artìculi',
 	'info_articles_tous' => 'Tutti l’artìculi',
 	'info_articles_trouves' => 'Artìculi trovi',
-	'info_articles_trouves_dans_texte' => 'Artìculi trovi (ricerca in u testu)',
 	'info_attente_validation' => 'I vostri artìculi in attesa di cunvalidazione',
 	'info_aucun_article' => 'Nisun artìculu',
 	'info_aucun_auteur' => 'Nisunu autore',
 	'info_aucun_message' => 'Nisun messagiu',
 	'info_aucun_rubrique' => 'Nisuna rùbrica',
 	'info_aucun_site' => 'Nisun situ',
-	'info_aucun_visiteur' => 'Nisun visitore',
 	'info_aujourdhui' => 'oghje : ',
-	'info_auteur_message' => 'AUTORE DI U MESSAGIU :',
 	'info_auteurs' => 'L’autori',
 	'info_auteurs_par_tri' => 'Autori@partri@',
 	'info_auteurs_trouves' => 'Autori trovi',
@@ -285,10 +253,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_classement_2' => '<sup>o</sup> nant’à @liste@',
 	'info_code_acces' => 'Ùn vi scurdate di i vostri còdici d’accessu !',
 	'info_compatibilite_html' => 'Norma HTML da rispettà',
-	'info_compresseur_gzip' => '<b>N. B. :</b> Arricumandemu di verificà capunanzu sì l’òspite cumpressa digià in autumàticu i script php;. Pè sapè la, 
-		pudete aduprà per esempiu stu serviziu : @testgzip@', # MODIF
-	'info_compresseur_texte' => 'Sì u vostru servore ùn cumpressa micca in autumàticu e pàgine HTML da mandà le à i visitori, pruvate puru à furzà a cumpressione da 
-		sminuì u pesu di e pàgine da scaricà. <b>Attenti</b> : Quessa pò ralentisce assai certi servori.',
 	'info_config_suivi' => 'Sì st’indirizzu currisponde à una mailing-list, rinsignate puru quì sottu l’indirizzu cù chì i participanti di u situ si ponu iscrive. 
 		St’indirizzu pò esse un’URL (per esempiu a pàgina-web d’iscrizzione à a lista), o puru un indirizzu email cù un sugettu specìficu 
 		(per esempiu : <tt>@adresse_suivi@?subject=subscribe</tt>) :',
@@ -316,8 +280,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_date_publication_anterieure' => 'Data di ùltima scrittura :',
 	'info_date_referencement' => 'DATA DI RIFERIMENTU DI STU SITU :',
 	'info_derniere_etape' => 'Fatta !',
-	'info_derniers_articles_publies' => 'I vostr’ùltimi artìculi pubblicati',
-	'info_desactiver_messagerie_personnelle' => 'Pudete puru attivà o disattivà u sistema di messageria persunale pè stu situ.',
 	'info_descriptif' => 'Discrizzione :',
 	'info_desinstaller_plugin' => 'sguassa i dati è disattiveghja u plugin',
 	'info_discussion_cours' => 'Ragiunata in corsu',
@@ -326,7 +288,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_email_envoi_txt' => 'Indettà quì l’indirizzu da aduprà per mandà l’email (da predefinita, l’indirizzu di u destinatariu serà usatu da indirizzu 
 		d’inviu) :',
 	'info_email_webmestre' => 'Indirizzu email di u webmaestru (micca ubbligatoriu)', # MODIF
-	'info_entrer_code_alphabet' => 'Indettà u còdice di u santacroce da aduprà :',
 	'info_envoi_email_automatique' => 'Inviu autumàticu d’email',
 	'info_envoyer_maintenant' => 'Mandà avà',
 	'info_etape_suivante' => 'Passà à a prùssima tappa',
@@ -338,9 +299,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		pubblicazione è cunvalidazione d’artìculi.',
 	'info_fichiers_authent' => 'Schedari d’autentificazione ".htpasswd"',
 	'info_forums_abo_invites' => 'U vostru situ cumporta fori accessìbuli solu à l’abbunati. Per ciò esiste una pàgina d’iscrizzione in u situ pùbblicu.',
-	'info_gauche_admin_effacer' => '<b>Sta pàgina hè accessìbule solu à i rispunsèvuli di u situ.</b><p> 
-		Permette l’accessu à e diverse funzioni di mantenimentu tècnicu. 
-		Certe funzioni richerenu un specìficu prucedimentu d’identificazione, è necessiteghjanu per forza un accessu FTP à u situ.</p>', # MODIF
 	'info_gauche_admin_tech' => '<b>Sta pàgina hè accessìbule solu à i rispunsèvuli di u situ.</b><p> 
 		Certe funzioni richerenu un specìficu prucedimentu d’identificazione, è necessiteghjanu per forza un accessu FTP à u situ.</p>', # MODIF
 	'info_gauche_admin_vider' => '<b>Sta pàgina hè accessìbule solu à i rispunsèvuli di u situ.</b><p> 
@@ -351,21 +309,13 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 		l’autori sguassati da una rumènzula.', # MODIF
 	'info_gauche_messagerie' => 'A messageria vi permette di scambià messagi trà scrittori, di tene vi certi mementi(à usu propriu persunale) 
   o di pubblicà annunci in a pàgina d’accogliu di u spaziu privatu (sè vo site amministratore).',
-	'info_gauche_numero_auteur' => 'AUTORE NÙMERU',
 	'info_gauche_statistiques_referers' => 'sta pàgina dà una lista di i <i>referers</i>, vale à dì i siti chì cuntenenu lee versu u vostru situ. Vale sta 
 		lista solu per eri è oghje , chì Vene sviutata ogni 24 ore.',
 	'info_gauche_visiteurs_enregistres' => 'Truverete quì i visitori arregistrati in u spaziu pùbblicu di u situ (foru pè l’abbunati).',
 	'info_generation_miniatures_images' => 'Creazione di figurette da l’imàgini',
-	'info_gerer_trad' => 'Gestisce e lee di traduzzione?',
 	'info_hebergeur_desactiver_envoi_email' => 'Certi òspiti disattiveghjanu l’inviu autumàticu d’email
 	da i so servori. In stu casu, e seguenti funziunalità di SPIP ùn viaghjeranu più.',
 	'info_hier' => 'eri :',
-	'info_historique_activer' => 'Attivà a guardia di e revisioni',
-	'info_historique_affiche' => 'Vede sta versione',
-	'info_historique_comparaison' => 'paragonu',
-	'info_historique_desactiver' => 'Disattivà a guardia di e revisioni',
-	'info_historique_texte' => 'A gestione di e revisioni permette di tene una vistica di tutte e mudìfiche fatte à un artìculu, mustrendu ne e sferenze frà 
-		e diverse versioni.',
 	'info_identification_publique' => 'A vostra identità pùbblica...',
 	'info_image_process' => 'Sceglite puru u mètudu preferitu per a creazione di e figurette clicchendu nant’à l’imàgine currispundente.',
 	'info_image_process2' => '<b>N.B.</b> <i>S’ella ùn vene nisun’imàgine, vole dì chì a cunfigurazione di u vostru servore ùn permette l’usu di tale 
@@ -387,8 +337,6 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'info_logos' => 'I logo',
 	'info_maximum' => 'màsimu :',
 	'info_meme_rubrique' => 'In a listessa rùbrica',
-	'info_message' => 'Messagiu di u  ',
-	'info_message_efface' => 'MESSAGIU SGUASSATU',
 	'info_message_en_redaction' => 'I vostri messagi in corsu di scrittura',
 	'info_message_technique' => 'Messagiu tècnicu :',
 	'info_messagerie_interne' => 'Sistema di messageria interna',
@@ -402,13 +350,10 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'info_modifier_titre' => 'Mudificà : @titre@',
 	'info_mon_site_spip' => 'U mo situ SPIP',
 	'info_mot_sans_groupe' => '(Segni senza gruppu...)',
-	'info_moteur_recherche' => 'Mutore di ricerca integratu',
 	'info_moyenne' => 'media : ',
-	'info_multi_articles' => 'Attivà u menù di lingua pè l’artìculi ?',
 	'info_multi_cet_article' => 'Lingua di st’artìculu :',
 	'info_multi_langues_choisies' => 'Sceglite puru avanti e lingue disposte à i scrittori di u situ.
 		E lingue digià aduprate in u situ (venenu e prime) ùn ponu esse disattivate.',
-	'info_multi_rubriques' => 'Attivà u menù di lingua pè e rùbbriche ?',
 	'info_multi_secteurs' => '... solu per e rùbriche cullucate à a {ràdica} di u situ ?',
 	'info_nb_articles' => '@nb@ artìculi',
 	'info_nb_auteurs' => '@nb@ autori',
@@ -420,7 +365,6 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'info_nom_destinataire' => 'Nome di u destinatariu',
 	'info_nom_site' => 'Nome di u vostru situ',
 	'info_nombre_articles' => '@nb_articles@ artìculi,',
-	'info_nombre_partcipants' => 'PARTICIPANTI À A RAGIUNATA :',
 	'info_nombre_rubriques' => '@nb_rubriques@ rùbriche,',
 	'info_nombre_sites' => '@nb_sites@ siti, ',
 	'info_non_deplacer' => 'Ùn spiazzà micca...',
@@ -429,19 +373,14 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'info_non_envoi_liste_nouveautes' => 'Ùn mandà micca a lista di e nuvità',
 	'info_non_modifiable' => 'ùn pò esse mudificatu',
 	'info_non_suppression_mot_cle' => 'ùn vogliu micca sguassà segnu.',
-	'info_note_numero' => 'Nota @numero@',
 	'info_notes' => 'Note',
-	'info_nouveaux_message' => 'Nuvelli messagi',
 	'info_nouvel_article' => 'Nuvellu artìculu',
 	'info_nouvelle_traduction' => 'Nuvella traduzzione :',
 	'info_numero_article' => 'ARTÌCULU NÙMERU :',
 	'info_obligatoire_02' => '[Ubbligatoriu]', # MODIF
 	'info_option_accepter_visiteurs' => 'Accettà l’iscrizzione di visitori di u situ pùbblicu',
-	'info_option_faire_suivre' => 'Signalà i novi messagi à l’autori dil’artìculi',
 	'info_option_ne_pas_accepter_visiteurs' => 'Rifiutà l’iscrizzione di i visitori',
 	'info_options_avancees' => 'OPZIONI AVANZATE ',
-	'info_ortho_activer' => 'Attivà a verìfica urtugràfica',
-	'info_ortho_desactiver' => 'Disattivà a verìfica urtugràfica',
 	'info_ou' => 'o... ',
 	'info_page_interdite' => 'Pagina riservata',
 	'info_par_nom' => 'per nome',
@@ -450,21 +389,15 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'info_par_tri' => '’(per @tri@)’',
 	'info_passe_trop_court' => 'Parola secreta troppu corta.', # MODIF
 	'info_passes_identiques' => 'E duie parole secrete ùn sò listesse.',
-	'info_pense_bete_ancien' => 'I vostri mementi vechji', # MODIF
 	'info_plus_cinq_car' => 'più di 5 caràtteri',
 	'info_plus_cinq_car_2' => '(Più di 5 caràtteri)',
 	'info_plus_trois_car' => '(Più di 3 caràtteri)',
 	'info_popularite' => 'pupularità : @popularite@ ; vìsite : @visites@',
-	'info_popularite_4' => 'pupularità : @popularite@ ; vìsite : @visites@',
 	'info_post_scriptum' => 'Post-Scriptum',
 	'info_post_scriptum_2' => 'Post-Scriptum :',
 	'info_pour' => 'per',
-	'info_preview_admin' => 'Solu l’amministratori ponu vede u situ in antìcipu',
-	'info_preview_comite' => 'Tutti i scrittori ponu vede u situ in antìcipu',
-	'info_preview_desactive' => 'A vista in antìcipu di u situ hè propriu disattivata',
 	'info_preview_texte' => 'Hè pussìbule avè una vista in antìcipu di u situ cù tutti l’artìculi è i dispacci "pruposti" per a pubblicazione. Sta pussibulità 
 		deve esse attivata solu pè l’amministratori, à tutti i scrittori o puru disattivata.',
-	'info_principaux_correspondants' => 'I currispundenti principali',
 	'info_procedez_par_etape' => 'avanzà un passu dopu l’altru',
 	'info_procedure_maj_version' => 'Deve esse lanciatu a l’aghjurnamentu pè addattà a basa di dati à a nova versione di SPIP.',
 	'info_proxy_ok' => 'Prova di u proxy riesciuta.',
@@ -479,14 +412,9 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	<blockquote><i>Durante l’iscrizzione, l’utilizatori ricevenu un email in autumàticu
 	chì li furnisce i so còdici d’accessu à u situ privatu. Certi 
 	òspiti disattiveghjanu l’inviu d’email da i so propri servori : in stu casu, vene impussìbule l’iscrizzione autumàtica.', # MODIF
-	'info_question_utilisation_moteur_recherche' => 'vulete aduprà u mutore di ricerca integratu di SPIP ?
-	(disattivu vene acceleratu u funziunamentu di u sistema)',
-	'info_question_vignettes_referer_non' => 'Ùn vede micca a cattura di screnu di i siti d’orìgine di e vìsite',
 	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Ràdica di u situ',
 	'info_recharger_page' => 'Aghjurnate sta pàgina da quì à un minutu.',
-	'info_recherche_auteur_a_affiner' => 'Troppu risultati per "@cherche_auteur@"; precisate puru a ricerca.',
-	'info_recherche_auteur_ok' => 'Parechji scrittori trovi per "@cherche_auteur@" :',
 	'info_recherche_auteur_zero' => 'Nisun risultatu per "@cherche_auteur@".',
 	'info_recommencer' => 'Ricumincià.',
 	'info_redacteur_1' => 'Scrittori',
@@ -503,7 +431,6 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'info_rubriques' => 'Rùbriche',
 	'info_rubriques_02' => 'rùbriche',
 	'info_rubriques_trouvees' => 'Rùbriche trove',
-	'info_rubriques_trouvees_dans_texte' => 'Rùbriche trove (ricerca in u testu)',
 	'info_sans_titre' => 'Senza tìtulu',
 	'info_selection_chemin_acces' => '<b>Sceglite</b> quì sottu u percorsu d’accessu in l’annuariu :',
 	'info_signatures' => 'zifre',
@@ -516,14 +443,12 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'info_sites_lies_mot' => 'I siti riferiti alleati à stu segnu',
 	'info_sites_proxy' => 'Aduprà un proxy',
 	'info_sites_trouves' => 'Siti trovi',
-	'info_sites_trouves_dans_texte' => 'Siti trovi (in u testu)',
 	'info_sous_titre' => 'Sottutìtulu :',
 	'info_statut_administrateur' => 'Amministratore',
 	'info_statut_auteur' => 'Statutu di st’autore :',
 	'info_statut_auteur_2' => 'Eo sò',
 	'info_statut_auteur_a_confirmer' => 'Iscrizzione da cunfirmà',
 	'info_statut_auteur_autre' => 'Altru statutu :',
-	'info_statut_efface' => 'Sguassatu',
 	'info_statut_redacteur' => 'Scrittore',
 	'info_statut_utilisateurs_1' => 'Statutu predefinitu di l’utilizatori impurtati',
 	'info_statut_utilisateurs_2' => 'Sceglite u statutu da attribuisce à e persone presenti in l’annuariu LDAP quandu pè a prima volta si cunnettenu. 
@@ -548,7 +473,6 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'info_tous_articles_en_redaction' => 'Tutti l’artìculi in corsu di scrittura',
 	'info_tous_articles_presents' => 'Tutti l’artìculi pubblicati in sta rùbrica',
 	'info_tous_les' => 'tutti i:',
-	'info_tous_redacteurs' => 'Annunci à tutti i scrittori',
 	'info_tout_site' => 'Tuttu u situ',
 	'info_tout_site2' => 'L’artìculu ùn hè statu traduttu in sta lingua.',
 	'info_tout_site3' => 'L’artìculu hè statu traduttu in sta lingua, ma sò state fatte unepoche di mudìfiche à l’artìculu di riferenza. A traduzzione deve 
@@ -575,7 +499,6 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'info_visiteurs' => 'Visitori',
 	'info_visiteurs_02' => 'Visitori di u situ pùbblicu',
 	'install_adresse_base_hebergeur' => 'Indirizzu di a basa di dati attribuitu da l’òspite',
-	'install_base_ok' => 'A basa di dati @base@ hè stata ricunnisciuta',
 	'install_echec_annonce' => 'A stallazione hà da fiascà o compie cagiunendu à u situ prublemi di funziunamenti ...',
 	'install_extension_mbstring' => 'SPIP ùn funziona micca cù :',
 	'install_extension_php_obligatoire' => 'SPIP esige l’estensione php :',
@@ -609,7 +532,6 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'item_choix_redacteurs' => 'i scrittori',
 	'item_choix_visiteurs' => 'i visitori di u situ pùbblicu',
 	'item_creer_fichiers_authent' => 'Creà i schedari .htpasswd',
-	'item_limiter_recherche' => 'Limità a ricerca à l’infurmazioni cuntenute in u vostru situ',
 	'item_login' => 'Login',
 	'item_messagerie_agenda' => 'Attivà a messageria è l’agenda',
 	'item_mots_cles_association_articles' => 'à l’artìculi',
@@ -620,21 +542,15 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'item_non_activer_messages_avertissement' => 'Nisun messagiu d’avertimentu',
 	'item_non_afficher_calendrier' => 'Ùn pubblicà in l’almanaccu',
 	'item_non_autoriser_documents_joints' => 'Ùn auturizà i ducumenti alleati in l’artìculi',
-	'item_non_autoriser_documents_joints_rubriques' => 'Ùn auturizà i ducumenti alleati in e rùbbriche',
 	'item_non_autoriser_syndication_integrale' => 'Sparghje solu un riassuntu',
-	'item_non_compresseur' => 'Disattivà a cumpressione',
 	'item_non_creer_fichiers_authent' => 'Ùn creà micca sti schedari',
-	'item_non_gerer_statistiques' => 'Ùn gestisce micca e statìstiche',
-	'item_non_limiter_recherche' => 'Allargà e ricerca à u cuntenutu di i siti in sindicazione',
 	'item_non_messagerie_agenda' => 'Disattivà a messageria è l’agenda',
 	'item_non_publier_articles' => 'Ùn pubblicà micca l’àrtìculi prima di a data imposta.',
-	'item_non_utiliser_moteur_recherche' => 'Ùn aduprà micca u mutore di ricerca',
 	'item_nouvel_auteur' => 'Nuvellu autore',
 	'item_nouvelle_rubrique' => 'Nuvella rùbrica',
 	'item_oui' => 'Iè',
 	'item_publier_articles' => 'Pubblicà l’artìculi qualsìasi a data di pubblicazione.',
 	'item_reponse_article' => 'Risposta à l’artìculu ',
-	'item_utiliser_moteur_recherche' => 'Aduprà u mutore di ricerca',
 	'item_version_html_max_html5' => 'Permette HTML5',
 	'item_visiteur' => 'visitore',
 
@@ -643,9 +559,7 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 
 	// L
 	'label_choix_langue' => 'Sceglite a vostra lingua',
-	'lien_ajout_destinataire' => 'Aghjunghje u dstinatariu',
 	'lien_ajouter_auteur' => 'Aghjunghje sy’autore',
-	'lien_ajouter_participant' => 'Aghjunghje un participante',
 	'lien_ajouter_une_rubrique' => 'Aghjunghje sta rùbrica',
 	'lien_email' => 'email',
 	'lien_nom_site' => 'NOME DI U SITU :',
@@ -653,9 +567,7 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'lien_retirer_rubrique' => 'Toglie a rùbrica',
 	'lien_retirer_tous_auteurs' => 'Toglie tutti l’autori',
 	'lien_retirer_toutes_rubriques' => 'Toglie tutte e rùbriche',
-	'lien_retrait_particpant' => 'caccià stu participante',
 	'lien_site' => 'situ',
-	'lien_supprimer_rubrique' => 'sguassà a rùbrica',
 	'lien_tout_deplier' => 'Tuttu spalancà',
 	'lien_tout_replier' => 'Tuttu chjode',
 	'lien_tout_supprimer' => 'Tuttu sguassà',
@@ -793,16 +705,11 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'texte_auteur_messagerie' => 'Stu situ vi pò furnisce in permanenza a lista di i scrittori cunnessi, cusì vi permette 
   di scambià messagi in tempu reale. Pudete puru decide d’ùn cumparisce micca in quella lista (vale à dì 
   chì state invisìbule da l’altri utilizatori).',
-	'texte_auteur_messagerie_1' => 'Stu situ permette u scambiu di messagi è a custituzione di fori di discussione privati trà i participanti di u situ. 
-		Pudete puru decide d’ùn participà micca à issi scambi.',
 	'texte_auteurs' => 'L’AUTORI',
 	'texte_choix_base_1' => 'Sceglite a basa di dati :',
 	'texte_choix_base_2' => 'U servore SQL cuntene parechje base di dati.',
 	'texte_choix_base_3' => '<b>Sceglite</b> quella ch`vi hè stata attribuita da u vostru òspite :',
 	'texte_choix_table_prefix' => 'Prefissu di e tàvule :',
-	'texte_commande_vider_tables_indexation' => 'Aduprà sta cumanda pè sviutà e tàvule d’indizzazione usate da u mutore di ricerca 
-		integratu à SPIP. Cusì vincerebbe spaziu discu.',
-	'texte_compresse_ou_non' => '(pò esse cumpressu o micca)',
 	'texte_compte_element' => '@count@ elementu',
 	'texte_compte_elements' => '@count@ elementi',
 	'texte_conflit_edition_correction' => 'Cuntrullate puru quì sottu e sferenze trà e duie versioni di u testu ; pudete dinù ancu cupià 
@@ -823,7 +730,6 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'texte_descriptif_petition' => 'Discrizzione di a petizione',
 	'texte_descriptif_rapide' => 'Discrizzione corta',
 	'texte_effacer_base' => 'Sguassà a basa di dati SPIP',
-	'texte_effacer_donnees_indexation' => 'Sguassà i dati d’indizzazione',
 	'texte_effacer_statistiques' => 'Sguassà e statìstiche',
 	'texte_en_cours_validation' => 'L’artìculi è i dispacci quì sottu sò pruposti à a pubblicazione. Date puru u vostru parè usendu i fori chì seguitanu
 	ogni artìculu o dispacciu.', # MODIF
@@ -836,32 +742,20 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'texte_introductif_article' => 'Testu d’intruduzzione di l’artìculu',
 	'texte_jeu_caractere' => 'Hè cunsigliatu d’aduprà pè u vostru situ u santacroce universale (<tt>utf-8</tt>) : permette di vede i testi
 		in tutte e lingue è ùn pone più prublemi di cumpatibilità cù i navigatori muderni.',
-	'texte_jeu_caractere_2' => 'Attenti : sta scelta ùn lancia micca a cunversione di i testi digià arregistrati in a basa di dati.',
 	'texte_jeu_caractere_3' => 'U vostru situ hà attualmente u ghjocu di caràtteri :',
 	'texte_jeu_caractere_4' => 'S’ella ùn currisponde à a realità di i vostri dati (per esempiu, per via d’una ricuperazione di a basa di dati), 
 		o <em>sè vo smarrate u situ</em> vulendu principià cù un altru ghjocu di caràtteri, rinsignate puru quì stu nuvellu ghjocu :',
-	'texte_jeu_caractere_conversion' => 'Nota : Pudete puru decide di cunvertisce una volta per tutte tutti i testi di u situ (artìculi, dispacci, fori, ecc.) 
-	in u santacroce <tt>utf-8</tt>, andendu à a <a href="@url@">pàgina di cunversione in utf-8</a>.',
-	'texte_lien_hypertexte' => '(Sì u vostru messagiu si riferisce à un artìculu pubblicatu nant’à u web, o à una pàgina chì furnisce di più infurmazioni, 
-			rinsignate puru quì u so tìtulu è u so indirizzu URL.)',
 	'texte_login_ldap_1' => '(Lascià viotu per un accessu anònimu, o inserisce u percorsu sanu sanu, per esempiu «<tt>uid=paoli, ou=users, 
 	dc=u-mo-duminiu, dc=com</tt> ».)',
 	'texte_login_precaution' => 'Attenti ! Questu hè u login cun chì site cunnessu avà. Aduprate stu furmulariu cù assai cura ...',
-	'texte_message_edit' => 'Attenti ! Stu messagiu pò esse mudificatu da tutti l’amministratori di u situ, è si pò vede da tutti i scrittori.
-			Aduprate puru l’annunci solu per sparghje evenimenti impurtanti ina vita di u situ.',
 	'texte_messagerie_agenda' => 'A messageria permette à i scrittori di u situ di cumunicà frà elli direttamente in u spaziu privatu. 
 			A messageria hè assuciata à un agenda..',
 	'texte_mise_a_niveau_base_1' => 'Avete aghjurnatu u schedariu SPIP. Vi tocca avà à aghjurnà a basa di dati.',
 	'texte_modifier_article' => 'Mudificà l’artìculu :',
-	'texte_moteur_recherche_active' => '<b>Hè attivatu u mutore di ricerca.</b> Aduprà sta cumanda sè vo vulete lancià una rindizzazione veloce (dopu ricuperazione
-	d’una copia di salvezza, per esempiu). Nota bè : i ducumenti mudificati di manera nurmale (cun l’interfaccia di SPIP) sò rindizzati in 
-	autumàticu. Vale à dì chì sta cumanda hè ùtule solu in casi eccezziunali.',
-	'texte_moteur_recherche_non_active' => 'Ùn hè attivatu u mutore di ricerca.',
 	'texte_multilinguisme' => 'Sè vo vulete gestisce artìculi in parechje lingue, con un sistema di navigazione cumplessu, pudete puru aghjunghje un menù
 		di scelta di lingua in l’artìculi è/o in e rùbbriche, secondu cum’ellu hè strutturatu u vostru situ.', # MODIF
 	'texte_multilinguisme_trad' => 'Pudete dinù attivà un sistema di gestione di lee frà e diverse traduzzioni d’un artìculu.', # MODIF
 	'texte_non_compresse' => '<i>micca cumpressu</i> (u vostru servore ùn pussede micca sta funziunalità)',
-	'texte_nouveau_message' => 'Novu messagiu',
 	'texte_nouvelle_version_spip_1' => 'Avete stallatu una nova versione di SPIP.',
 	'texte_nouvelle_version_spip_2' => 'Sta nova versione richere un aghjurnamentu più impurtante chè di règula. Sè vo site u webmaestru di u situ,
 		sguassate puru u schedariu @connect@ è ripigliate a stallazione di modu d’aghjurnà dinù i vostri paràmetri di cunnessione à a basa di dati.<p>
@@ -877,8 +771,6 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'texte_publication_articles_post_dates' => 'Cumu si deve cumpurtà SPIP cù l’artìculi chì anu una data di pubblicazione futura ?',
 	'texte_rappel_selection_champs' => '[Ùn vi scurdate di sceglie bè stu campu]',
 	'texte_recalcul_page' => 'Sè vo vulete ricaricà una sola pàgina, andate piuttostu in u spaziu pùbblicu è cliccate puru nant’à «ricaricà».',
-	'texte_recapitiule_liste_documents' => 'Sta pàgina allistineghja i ducumenti chì stanu in e vostre rùbbriche. Per mudificà l’infurmazioni d’ogni ducumentu, 
-	seguitate a lea versu a relativa pàgina di rùbbrica.',
 	'texte_recuperer_base' => 'Riparà a basa di dati',
 	'texte_reference_mais_redirige' => 'artìculu riferitu in u vostru situ SPIP, ma cun rindirizzamentu versu un’altra URL.',
 	'texte_requetes_echouent' => '<b>Quandu certe richieste SQL fiascanu di manera ripetuta è senza tante ragioni, pò accade ch’ella sia colpa di a basa stessa.</b><p>
@@ -900,7 +792,6 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 		u ricaricamentu di tuttu e pàgine sè vo avete fattu mudìfiche impurtanti nant`à a gràfica o a struttura di u situ.',
 	'texte_sur_titre' => 'Sottutìtulu',
 	'texte_table_ok' => ' : sta tàvula hè OK.',
-	'texte_tables_indexation_vides' => 'Sò viote e tàvule d’indizzazione di u mutore.',
 	'texte_tentative_recuperation' => 'Prova di riparazione',
 	'texte_tenter_reparation' => 'Pruvà una riparazione di a basa di dati',
 	'texte_test_proxy' => 'Per fà una prova di stu proxy, rinsignate quì l’indirizzu di un situ Web da pruvà.',
@@ -910,21 +801,11 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'texte_travail_collaboratif' => 'S’ella accade à spessu chì parechji scrittori travaglinu nant’à listessu artìculu, u sistema pò signalà l’artìculi 
 		«aperti» di pocu, di modu ch’elle ùn sianu fatte parechje mudìfiche à listessu tempu. Sta scelta hè predefinita disattivata per ùn 
 		creà micca messagi d’avertimentu in quantità.',
-	'texte_trop_resultats_auteurs' => 'Troppu risultati per "@cherche_auteur@"; precisate puru a ricerca.',
-	'texte_unpack' => 'scaricà l’ùltima versione',
-	'texte_utilisation_moteur_syndiques' => 'Quand’è vo usate u mutore di ricerca integratu di SPIP, pudete fà ricerche nant’à i siti è l’artìculi sindicati
-		di duie manere sferenti. <br />
-		- A più sèmplice cunsiste à ricircà solu in i tìtuli è e descrizzioni di l’artìculi.<br />
-		- Un altru mètudu, assai più putente, permette à SPIP di ricercà ancu dentr’à u testu di l’artìculi riferiti. 
-		Sè vo riferite un situ, SPIP ferà a ricerca propriu in u testu di stu situ.',
-	'texte_utilisation_moteur_syndiques_2' => 'Stu mètudu forza SPIP à visità di manera regulare i siti riferiti, ciò chì puderà allentà appena di u vostru situ.',
 	'texte_vide' => 'viotu',
 	'texte_vider_cache' => 'Sviutà u cache',
-	'titre_admin_effacer' => 'Mantenimentu tècnicu',
 	'titre_admin_tech' => 'Mantenimentu tècnicu',
 	'titre_admin_vider' => 'Mantenimentu tècnicu',
 	'titre_ajouter_un_auteur' => 'Aghjunghje un autore',
-	'titre_ajouter_une_rubrique' => 'Aghjunghje una rùbrica',
 	'titre_cadre_afficher_article' => 'Vede l’artìculi',
 	'titre_cadre_afficher_traductions' => 'Vede u statu di e traduzzioni per e seguenti lingue :',
 	'titre_cadre_ajouter_auteur' => 'AGHJUNGHJE UN AUTORE : ',
@@ -950,7 +831,6 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'titre_naviguer_dans_le_site' => 'Navigà in u situ ...',
 	'titre_nouvelle_rubrique' => 'Nuvella rùbbrica',
 	'titre_numero_rubrique' => 'RÙBBRICA NÙMERU :',
-	'titre_page_admin_effacer' => 'Mantenimentu tècnicu : sguassà a basa di dati',
 	'titre_page_articles_edit' => 'Mudificà : @titre@',
 	'titre_page_articles_page' => 'L’artìculi',
 	'titre_page_articles_tous' => 'U situ sanu',
@@ -963,22 +843,15 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 	'titre_page_delete_all' => 'sguassamentu tutale senza ritornu',
 	'titre_page_documents_liste' => 'I ducumenti di e rùbbriche',
 	'titre_page_index' => 'U vostru spaziu privatu',
-	'titre_page_message_edit' => 'Scrive un messagiu',
-	'titre_page_messagerie' => 'I vostri messagi',
 	'titre_page_recherche' => 'Risultati di a ricerca @recherche@',
 	'titre_page_statistiques_referers' => 'Statìstiche (lee versu u vostru situ)',
-	'titre_page_statistiques_signatures_jour' => 'Nùmeru di zifre à u ghjornu',
-	'titre_page_statistiques_signatures_mois' => 'Nùmeru di zifre à u mese',
 	'titre_page_upgrade' => 'Aghjurnamentu di SPIP',
 	'titre_publication_articles_post_dates' => 'Pubblicazione di l’artìculi postdatati',
 	'titre_referencer_site' => 'Riferisce u situ :',
-	'titre_rendez_vous' => 'APPUNTAMENTU :',
 	'titre_reparation' => 'Riparazione',
 	'titre_suivi_petition' => 'Guardia di e petizioni',
 	'tls_ldap' => 'Transport Layer Security :',
-	'trad_article_inexistant' => 'Ùn esiste artìculu cù stu nùmeru.',
 	'trad_article_traduction' => 'Tutte e versioni di st’artìculu :',
-	'trad_deja_traduit' => 'Errore : Ùn hè micca pussìbule d’alleà st’artìculu à u nùmeru dumandatu.',
 	'trad_delier' => 'Ùn alleà più st’artìculu à e so traduzzioni', # MODIF
 	'trad_lier' => 'St’artìculu hè una traduzzione di l’artìculu nùmeru :',
 	'trad_new' => 'Scrive una nova traduzzione di l’artìculu', # MODIF

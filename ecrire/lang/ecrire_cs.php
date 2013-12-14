@@ -24,50 +24,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_connexion_ldap_echec_2' => 'Vraťte se na předchozí stránku a zkontrolujte zadané údaje.',
 	'avis_connexion_ldap_echec_3' => 'Případně při importu uživatelů nepoužívejte podporu LDAP.',
 	'avis_deplacement_rubrique' => 'Upozornění! V této sekci je celkem @contient_breves@ vložených novinek: potvrďte jejich přesun zaškrtnutím tohoto políčka.',
-	'avis_destinataire_obligatoire' => 'Před odesláním zprávy musíte vybrat adresáta.',
 	'avis_erreur_connexion_mysql' => 'Chyba připojení SQL', # MODIF
-	'avis_erreur_version_archive' => '<b>Varování! Soubor @archive@ odpovídá jiné verzi
-    systému SPIP, než je ta, kterou máte
-    nainstalovánu.</b> Důsledkem mohou být tyto vážné
-    potíže: zničení databáze,
-    nefunkčnost různých částí webu atd. Neodesílejte
-    tento požadavek na import.<p>Bližší informace
-    viz dokumentace systému SPIP <a href="@spipnet@"></a>.', # MODIF
 	'avis_espace_interdit' => '<b>Zakázaná oblast</b><p>Systém SPIP je již nainstalován.', # MODIF
 	'avis_lecture_noms_bases_1' => 'Instalační program nemůže přečíst názvy nainstalovaných databází.',
 	'avis_lecture_noms_bases_2' => 'Buď není dostupná žádná databáze nebo bylo zveřejňování seznamu databází z bepečnostních důvodů
   vypnuto (to je případ mnoha hostitelů).',
 	'avis_lecture_noms_bases_3' => 'V takovém případě je možné, že bude možno používat databázi, která má stejný název jako je vaše uživatelské jméno:',
-	'avis_non_acces_message' => 'K této zprávě nemáte přístup.',
 	'avis_non_acces_page' => 'K této stránce nemáte přístup.',
 	'avis_operation_echec' => 'Došlo k selhání operace.',
-	'avis_probleme_archive' => 'Chyba při čtení ze souboru @archive@',
 	'avis_suppression_base' => 'VAROVÁNÍ! Odstranění dat je nevratné',
-	'avis_version_mysql' => 'Ve vaší verzi databáze SQL (@version_mysql@) nelze automaticky opravovat databázové tabulky.', # MODIF
 
 	// B
 	'bouton_acces_ldap' => 'Přidat přístup k LDAP >>', # MODIF
 	'bouton_ajouter' => 'Přidat',
-	'bouton_ajouter_participant' => 'PŘIDAT ÚČASTNÍKA:',
-	'bouton_annonce' => 'OZNÁMENÍ',
 	'bouton_checkbox_envoi_message' => 'možnost odeslat zprávu',
 	'bouton_checkbox_indiquer_site' => 'Musíte zadat název webu',
 	'bouton_checkbox_signature_unique_email' => 'pouze jeden podpis na jednu elektronickou adresu',
 	'bouton_checkbox_signature_unique_site' => 'pouze jeden podpis na jeden web',
 	'bouton_demande_publication' => 'Požádat o zveřejnění článku',
 	'bouton_desactive_tout' => 'Vše vypnout',
-	'bouton_effacer_index' => 'Odstranit indexování',
 	'bouton_effacer_tout' => 'Odstranit vše',
-	'bouton_envoi_message_02' => 'ODESLAT ZPRÁVU',
 	'bouton_envoyer_message' => 'Konečná zpráva: odeslat',
 	'bouton_modifier' => 'Změnit',
-	'bouton_pense_bete' => 'INTERNÍ POZNÁMKA',
-	'bouton_radio_activer_messagerie' => 'Zapnout interní systém zpráv',
-	'bouton_radio_activer_messagerie_interne' => 'Zapnout interní systém zpráv',
 	'bouton_radio_activer_petition' => 'Zapnout petici',
 	'bouton_radio_afficher' => 'Zobrazit',
 	'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Zobrazit v seznamu připojených redaktorů',
-	'bouton_radio_desactiver_messagerie' => 'Vypnout systém zpráv',
 	'bouton_radio_envoi_annonces_adresse' => 'Odesílat oznámení na adresu:',
 	'bouton_radio_envoi_liste_nouveautes' => 'Zasílat seznam novinek',
 	'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nezobrazovat v seznamu redaktorů',
@@ -81,11 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_tenter_recuperation' => 'Zkusit opravu',
 	'bouton_test_proxy' => 'Zkusit proxy',
 	'bouton_vider_cache' => 'Vyprázdnit cache',
-	'bouton_voir_message' => 'Zobrazit zprávu před odesláním',
 
 	// C
-	'cache_mode_compresse' => 'Soubory cache jsou uloženy komprimovaně.',
-	'cache_mode_non_compresse' => 'Soubory cache jsou uloženy nekomprimovaně.',
 	'cache_modifiable_webmestre' => 'Tento parametr může měnit správce webu.',
 	'calendrier_synchro' => 'Používáte-li kompatibilní kalendář <b>iCal</b>, můžete jej synchnizovat s údaji na tomto webu.',
 
@@ -156,9 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_auteur' => 'Vytvořit nového autora a spojit ho s tímto článkem',
 	'icone_creer_mot_cle' => 'Zadejte nové klíčové slovo a spojte jej s tímto článkem',
 	'icone_creer_rubrique_2' => 'Vytvořit novou sekci',
-	'icone_envoyer_message' => 'Odeslat zprávu',
 	'icone_modifier_article' => 'Změnit článek',
-	'icone_modifier_message' => 'Změnit zprávu',
 	'icone_modifier_rubrique' => 'Změnit sekci',
 	'icone_retour' => 'Zpět',
 	'icone_retour_article' => 'Zpět k článku',
@@ -182,16 +158,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_administrer_rubrique' => 'Máte právo správy této sekce',
 	'info_adresse' => 'na adrese:',
 	'info_adresse_url' => 'Adresa URL veřejného webu',
-	'info_afficher_visites' => 'Zobrazit návštěvy:',
 	'info_aide_en_ligne' => 'Nápověda online systému SPIP',
 	'info_ajout_image' => 'Přikládáte-li k článku obrázky jako dokumenty,
   systém SPIP umí automaticky vytvořit jejich náhledy
   (miniatury vložených obrázků). To umožňuje automaticky vytvořit např.
   galerii nebo přehled.',
-	'info_ajout_participant' => 'Bude přidán tento účastník:',
 	'info_ajouter_rubrique' => 'Přidat další sekci do správy:',
 	'info_annonce_nouveautes' => 'Oznámení novinek',
-	'info_anterieur' => 'předchozí',
 	'info_article' => 'článek',
 	'info_article_2' => 'články',
 	'info_article_a_paraitre' => 'Články čekající na termín publikování',
@@ -199,10 +172,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_articles_2' => 'Články',
 	'info_articles_auteur' => 'Články tohoto autora',
 	'info_articles_trouves' => 'Nalezené články',
-	'info_articles_trouves_dans_texte' => 'Nalezené články (v textu)',
 	'info_attente_validation' => 'Vaše články čekající na schválení',
 	'info_aujourdhui' => 'dnes:',
-	'info_auteur_message' => 'AUTOR ZPRÁVY:',
 	'info_auteurs' => 'Autoři',
 	'info_auteurs_par_tri' => 'Autoři@partri@',
 	'info_auteurs_trouves' => 'Nalezení autoři',
@@ -218,7 +189,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_classement_1' => 'z @liste@',
 	'info_classement_2' => '<sup>e</sup> z @liste@',
 	'info_code_acces' => 'Nezapomeňte své přístupové kódy!',
-	'info_compresseur_gzip' => 'It is advisable to first check if the service provider systematically compresses PHP scripts. To do this you can, for example, use the following service: @testgzip@', # MODIF
 	'info_config_suivi' => 'Jedná-li se o adresu diskusní skupiny, můžete zde uvést adresu, na které se mohou účastníci webu přihlásit. Může se jednat o adresu URL (například webová stránka pro přihlášení do skupiny) nebo o elektronickou adresu s uvedením specifického předmětu (např.: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => 'Můžete se přihlásit na mailing-list tohoto webu. Potom budete dostávat oznámení o článcích a novinkách připravených k publikování.',
 	'info_confirmer_passe' => 'Potvrdit nové heslo:',
@@ -236,15 +206,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_date_publication_anterieure' => 'Datum poslední úpravy:',
 	'info_date_referencement' => 'Datum vytvoření odkazu na tento web:',
 	'info_derniere_etape' => 'Poslední krok: <b>byl dokončen!', # MODIF
-	'info_derniers_articles_publies' => 'Vaše poslední publikované články.',
-	'info_desactiver_messagerie_personnelle' => 'U tohoto webu můžete zapnout nebo vypnout systém interních zpráv.',
 	'info_descriptif' => 'Popis:',
 	'info_discussion_cours' => 'Probíhající diskuse',
 	'info_ecrire_article' => 'Články můžete psát teprve, když vytvoříte alespoň jednu sekci.',
 	'info_email_envoi' => 'Email pro zprávy (volitelný údaj)',
 	'info_email_envoi_txt' => 'Zde uveďte adresu pro zasílání emailů (standardně se jako tato adresa použije email příjemce):',
 	'info_email_webmestre' => 'Email správce webu (volitelný údaj)', # MODIF
-	'info_entrer_code_alphabet' => 'Zadejte kód znakové sady, která se má používat:',
 	'info_envoi_email_automatique' => 'Automatické zasílání emailů',
 	'info_envoyer_maintenant' => 'Odeslat nyní',
 	'info_etape_suivante' => 'Přejít k dalšímu kroku',
@@ -257,7 +224,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   na webu. ',
 	'info_fichiers_authent' => 'Autentifikační soubor ".htpasswd"',
 	'info_forums_abo_invites' => 'Na vašem webu existují diskusní skupiny vyhrazené přihlášeným účastníkům; návštěvníci se musí tedy zaregistrovat na veřejné části webu.',
-	'info_gauche_admin_effacer' => '<b>Tato stránka je přístupná pouze těm, kdo za web odpovídají.</b><p> Umožňuje přístup k funkcím určeným pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduje FTP přístup k webu.</p>', # MODIF
 	'info_gauche_admin_tech' => '<b>Tato stránka je vyhrazena těm, kdo za web odpovídají.</b><p> Umožňuje přístup k funkcím
 pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduje FTP přístup k webu.</p>', # MODIF
 	'info_gauche_admin_vider' => '<b>Tato stránka je vyhrazena těm, kdo za web odpovídají.</b><p> Umožňuje přístup k funkcím
@@ -267,21 +233,14 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_gauche_auteurs_exterieurs' => 'Externí autoři bez přístupu k webu jsou označeni modrou ikonou;
   odstranění autoři symbolem odpadkového koše.', # MODIF
 	'info_gauche_messagerie' => 'Systém zpráv umožňuje zasílat zprávy mezi redaktory, ukládat interní poznámky a zveřejňovat oznámení na hlavní stánce interní části webu (jste-li správce).',
-	'info_gauche_numero_auteur' => 'ČÍSLO AUTORA',
 	'info_gauche_statistiques_referers' => 'Na této stránce je seznam <i>referencí</i>, to je webů, ze kterých vede odkaz na váš vlastní web. Údaje jsou pouze za včerejšek a dnešek. Seznam se každých 24 hodin vynuluje.',
 	'info_gauche_visiteurs_enregistres' => 'Zde naleznete návštěvníky zaregistrované
  ve veřejné části webu (diskusní skupiny, do kterých je nutno se přihlásit).',
 	'info_generation_miniatures_images' => 'Generování náhledů',
-	'info_gerer_trad' => 'Správa odkazů na překlad?',
 	'info_hebergeur_desactiver_envoi_email' => 'Někteří poskytovatelé prostoru pro web (hostitelé)
   mají vypnuté automatické zasílání emailů ze svých serverů.
   Níže uvedené funkce systému SPIP pak nelze používat.',
 	'info_hier' => 'včera:',
-	'info_historique_activer' => 'Zapnout sledování revizí',
-	'info_historique_affiche' => 'Zobrazit tuto verzi',
-	'info_historique_comparaison' => 'porovnání',
-	'info_historique_desactiver' => 'Vypnout sledování revizí',
-	'info_historique_texte' => 'Sledování revizí umožňuje zachovat historii všech změn obsahu článku a zobrazit změny mezi jeho jednotlivými verzemi.',
 	'info_identification_publique' => 'Vaše veřejná identita...',
 	'info_image_process' => 'Nejlepší metodu tvorby náhledů zvolíte klepnutím na příslušný obrázek.',
 	'info_image_process2' => '<b>Pozn.:</b> <i>Neobjeví-li se žádný obrázek, není hostitelský server vašeho webu nastaven k používání těchto nástrojů. Chcete-li je používat, spojete se s příslušnou technickou podporou a požádejte o rozšíření "GD" nebo "Imagick".</i>', # MODIF
@@ -299,8 +258,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_login_trop_court' => 'Uživatelské jeméno je příliš krátké.',
 	'info_maximum' => 'maximum:',
 	'info_meme_rubrique' => 'Ve stejné sekci',
-	'info_message' => 'Zpráva z',
-	'info_message_efface' => 'ZPRÁVA BYLA ODSTRANĚNA',
 	'info_message_en_redaction' => 'Baše rozpracované zprávy',
 	'info_message_technique' => 'Technická zpráva:',
 	'info_messagerie_interne' => 'Interní systém zpráv',
@@ -314,19 +271,15 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_modifier_titre' => 'Změnit: @titre@',
 	'info_mon_site_spip' => 'Můj web SPIP',
 	'info_mot_sans_groupe' => '(Slova mimo skupinu...)',
-	'info_moteur_recherche' => 'Vestavěný vyhledávač',
 	'info_moyenne' => 'střed / průměr:',
-	'info_multi_articles' => 'Zapnout u článků nabídku jazyků?',
 	'info_multi_cet_article' => 'Jazyk článku:',
 	'info_multi_langues_choisies' => 'Dále zvolte jazyk, který bude k dispozici redaktorům tohoto webu.
   Jazyky, které se již v rámci webu používají (zobrazené na počátku), nelze vypnout.',
-	'info_multi_rubriques' => 'Zapnout nabídku nazyků v sekcích?',
 	'info_multi_secteurs' => '... pouze u sekcí v kořenovém adresáři?',
 	'info_nom' => 'Jméno',
 	'info_nom_destinataire' => 'Jméno příjemce',
 	'info_nom_site' => 'Název webu',
 	'info_nombre_articles' => '@nb_articles@ články,',
-	'info_nombre_partcipants' => 'ÚČASTNÍCI DISKUSE:',
 	'info_nombre_rubriques' => '@nb_rubriques@ sekce,',
 	'info_nombre_sites' => '@nb_sites@ weby,',
 	'info_non_deplacer' => 'Nepřesouvat...',
@@ -335,17 +288,13 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_non_modifiable' => 'nelze změnit',
 	'info_non_suppression_mot_cle' => 'nechci odstanit toto klíčové slovo.',
 	'info_notes' => 'Poznámky',
-	'info_nouveaux_message' => 'Nové zprávy',
 	'info_nouvel_article' => 'Nový článek',
 	'info_nouvelle_traduction' => 'Nový překlad:',
 	'info_numero_article' => 'ČLÁNEK Č.:',
 	'info_obligatoire_02' => '[povinný údaj]', # MODIF
 	'info_option_accepter_visiteurs' => 'Schválit přihlášení návštěvníků veřejného webu',
-	'info_option_faire_suivre' => 'Sledovat zprávy z diskusní skupiny autory článků',
 	'info_option_ne_pas_accepter_visiteurs' => 'Odmítnout přihlášky návštěvníků',
 	'info_options_avancees' => 'ROZŠÍŘENÉ MOŽNOSTI',
-	'info_ortho_activer' => 'Zapnout kontrolu překlepů',
-	'info_ortho_desactiver' => 'Vypnout kontrolu překlepů',
 	'info_ou' => 'nebo...',
 	'info_page_interdite' => 'Zakázaná stránka',
 	'info_par_nom' => 'podle jména',
@@ -354,20 +303,14 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_par_tri' => '’(podle @tri@)’',
 	'info_passe_trop_court' => 'Heslo je příliš krátké.',
 	'info_passes_identiques' => 'Zadaná hesla nesouhlasí.',
-	'info_pense_bete_ancien' => 'Staré interní poznámky', # MODIF
 	'info_plus_cinq_car' => 'vice než 5 znaků',
 	'info_plus_cinq_car_2' => '(Více než 5 znaků)',
 	'info_plus_trois_car' => '(více než 3 znaky)',
 	'info_popularite' => 'oblíbenost: @popularite@; návštěvy: @visites@',
-	'info_popularite_4' => 'oblíbenost: @popularite@; návštěvy: @visites@',
 	'info_post_scriptum' => 'P.S.',
 	'info_post_scriptum_2' => 'P.S.:',
 	'info_pour' => 'pro',
-	'info_preview_admin' => 'Náhled webu je přístupný pouze pro správce ',
-	'info_preview_comite' => 'Náhled webu je přístupný všem redaktorům',
-	'info_preview_desactive' => 'Náhledy jsou zcela vypnuty',
 	'info_preview_texte' => 'Náhled umožňuje zobrazit web tak, jakoby všechny články a novinky (minimálně ve stavu "předloženo") byly zveřejněny. Chcete náhled povolit jen správcům, všem redaktorům nebo jej nechcete povolit nikomu?',
-	'info_principaux_correspondants' => 'Vaši hlavní korespondenti',
 	'info_procedez_par_etape' => 'postupujte krok za krokem',
 	'info_procedure_maj_version' => 'pro úpravu nové verze systému SPIP je třeba spustit aktualizaci
  databáze.',
@@ -384,13 +327,9 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
   Někteří poskytovatelé prostoru pro web odesílání emailů ze svých serverů
   vypínají. Automatické přihlášení je v takovém případě
   nemožné.', # MODIF
-	'info_question_utilisation_moteur_recherche' => 'Chcete používat vyhledávač, který je součástí systému SPIP?
- (je-li vyhledávač vypnut, zrychluje to chod systému.)',
 	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Kořenový adresář webu',
 	'info_recharger_page' => 'Za okamžik zkuste stránku znovu nahrát.',
-	'info_recherche_auteur_a_affiner' => 'Pro "@cherche_auteur@" bylo nalezeno příliš mnoho výsledků. Upřesněte vyhledávací kritéria.',
-	'info_recherche_auteur_ok' => 'Pro "@cherche_auteur@" bylo nalezeno více redaktorů:',
 	'info_recherche_auteur_zero' => 'Pro "@cherche_auteur@" nebyly nalezeny žádné výsledky.',
 	'info_recommencer' => 'Začněte znovu.',
 	'info_redacteur_1' => 'Redaktor',
@@ -407,7 +346,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_rubriques' => 'Sekce',
 	'info_rubriques_02' => 'sekce',
 	'info_rubriques_trouvees' => 'Nalezené sekce',
-	'info_rubriques_trouvees_dans_texte' => 'Nalezené sekce(v textu)',
 	'info_sans_titre' => 'Bez názvu',
 	'info_selection_chemin_acces' => '<b>Zadejte</b> cestu k adresáři:',
 	'info_signatures' => 'podpisy',
@@ -420,13 +358,11 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_sites_lies_mot' => 'Weby, na něž vedou odkazy, a které jsou spojeny s tímto klíčovým slovem',
 	'info_sites_proxy' => 'Používat proxy',
 	'info_sites_trouves' => 'Nalezené weby',
-	'info_sites_trouves_dans_texte' => 'Nalezené weby (v textu)',
 	'info_sous_titre' => 'Dílčí nadpis:',
 	'info_statut_administrateur' => 'Správce',
 	'info_statut_auteur' => 'Statut autora:', # MODIF
 	'info_statut_auteur_a_confirmer' => 'Registrace k potvrzení',
 	'info_statut_auteur_autre' => 'Další status:',
-	'info_statut_efface' => 'Odstraněno',
 	'info_statut_redacteur' => 'Redaktor',
 	'info_statut_utilisateurs_1' => 'Standardní statut importovaných uživatelů',
 	'info_statut_utilisateurs_2' => 'Zadejte statut, který mají osoby uvedené v adresáři LDAP, když se poprvé připojí. Tuto hodnotu můžete u každého jednotlivého autora následně změnit.',
@@ -446,7 +382,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_tous_articles_en_redaction' => 'Všechny rozpracované články',
 	'info_tous_articles_presents' => 'Všechny články publikované v této rubrice.',
 	'info_tous_les' => 'všechny:',
-	'info_tous_redacteurs' => 'Zpráva pro všechny redaktory',
 	'info_tout_site' => 'Celý web',
 	'info_tout_site2' => 'Do tohoto jazyka nebyl článek přeložen.',
 	'info_tout_site3' => 'Článek byl do tohoto jazyka přeložen, ale  referenční článek byl následně změněn. Překlad je proto třeba aktualizovat.',
@@ -487,7 +422,6 @@ ukazuje jejich stav:',
 	'item_choix_redacteurs' => 'redaktoři',
 	'item_choix_visiteurs' => 'návštěvníci veřejného webu',
 	'item_creer_fichiers_authent' => 'Vytvořit soubory .htpasswd',
-	'item_limiter_recherche' => 'Omezit vyhledávání na údaje obsažené na vašem webu',
 	'item_login' => 'Uživatelské jméno',
 	'item_mots_cles_association_articles' => 'k článkům,',
 	'item_mots_cles_association_rubriques' => 'k sekcím',
@@ -497,34 +431,25 @@ ukazuje jejich stav:',
 	'item_non_activer_messages_avertissement' => 'Bez upozornění',
 	'item_non_afficher_calendrier' => 'Nezobrazovat v kalendáři',
 	'item_non_autoriser_documents_joints' => 'Nepovolit dokumenty v článcích',
-	'item_non_autoriser_documents_joints_rubriques' => 'Nepovolit dokumenty v sekcích',
 	'item_non_autoriser_syndication_integrale' => 'Poslat pouze shrnutí',
 	'item_non_creer_fichiers_authent' => 'Nevytvářet tyto soubory',
-	'item_non_gerer_statistiques' => 'Bez správy statistik',
-	'item_non_limiter_recherche' => 'Rozšířit hledání na obsah webů, na něž vedou odkazy',
 	'item_non_publier_articles' => 'Nezveřejňovat články před stanoveným datem.',
-	'item_non_utiliser_moteur_recherche' => 'Nepoužívat vyhledávač',
 	'item_nouvel_auteur' => 'Nový autor',
 	'item_nouvelle_rubrique' => 'Nová sekce',
 	'item_oui' => 'Ano',
 	'item_publier_articles' => 'Zveřejnit články bez ohledu na datum.',
 	'item_reponse_article' => 'Odpověď na článek',
-	'item_utiliser_moteur_recherche' => 'Používat vyhledávač',
 	'item_visiteur' => 'návštěvník',
 
 	// J
 	'jour_non_connu_nc' => 'neuvedeno',
 
 	// L
-	'lien_ajout_destinataire' => 'Přidat příjemce',
 	'lien_ajouter_auteur' => 'Přidat autora',
-	'lien_ajouter_participant' => 'Přidat účastníka',
 	'lien_email' => 'email',
 	'lien_nom_site' => 'NÁZEV WEBU:',
 	'lien_retirer_auteur' => 'Odstanit autora',
-	'lien_retrait_particpant' => 'odstranit účastníka',
 	'lien_site' => 'web',
-	'lien_supprimer_rubrique' => 'zrušit sekci',
 	'lien_tout_deplier' => 'Rozbalit vše',
 	'lien_tout_replier' => 'Sbalit vše',
 	'lien_trier_nom' => 'Třídit podle jména',
@@ -583,15 +508,10 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 	'texte_article_virtuel_reference' => '<b>Virtuální článek:</b> znamená článek, na nějž je na vašem webu SPIP odkaz. Ten je však přesměrován na jinou adresu URL. Chcete-li přesměrování zrušit, odstraňte níže uvedenou adresu URL.',
 	'texte_aucun_resultat_auteur' => 'Vyhledávání"@cherche_auteur@" nepřineslo žádné výsledky',
 	'texte_auteur_messagerie' => 'Na tomto webu lze mít neustále zobrazený seznam připojených redaktorů. To umožňuje přímou výměnu zpráv. Na uvedeném seznamu nemusíte figurovat (pro ostatní uživatele jste "neviditelní").',
-	'texte_auteur_messagerie_1' => 'Na tomto webu je možné zasílání zpráv mezi účastníky a vytváření soukromých diskusních skupin. Těchto skupin a diskusí se nemusíte účastnit.',
 	'texte_auteurs' => 'AUTOŘI',
 	'texte_choix_base_1' => 'Zvolte databázi:',
 	'texte_choix_base_2' => 'Na serveru SQL je několik databází.', # MODIF
 	'texte_choix_base_3' => '<b>Zvolte</b> databázi, která vám byla přidělena poskytovatelem webového prostoru:', # MODIF
-	'texte_commande_vider_tables_indexation' => 'Tento příkaz slouží k vyčištění indexových tabulek, které používá
-   vyhledávač, jenž je součástí systému SPIP. Umožní vám získat více
-   místa na disku.',
-	'texte_compresse_ou_non' => '(může ale nemusí být komprimováno)',
 	'texte_compte_element' => '@count@ prvek',
 	'texte_compte_elements' => '@count@ prvky',
 	'texte_connexion_mysql' => 'Zkontrolujte informace od vašeho poskytovatele webového prostoru: mělo by tam být uvedeno, zda podporuje databázi SQL a přístupové kódy pro připojení k serveru SQL.', # MODIF
@@ -609,7 +529,6 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 	'texte_descriptif_petition' => 'Popis petice',
 	'texte_descriptif_rapide' => 'Stručný popis',
 	'texte_effacer_base' => 'Odstranit databázi SPIP',
-	'texte_effacer_donnees_indexation' => 'Odstranit indexy',
 	'texte_en_cours_validation' => 'Následující články a novinky jsou připraveny k publikaci. Neváhejte připojit svůj názor prostřednictvím diskusního fóra, jež je k nim připojeno.', # MODIF
 	'texte_enrichir_mise_a_jour' => 'Zalamování textu můžete rozšířit pomocí "typografických zkratek".',
 	'texte_fichier_authent' => '<b>Má systém SPIP vytvořit speciální soubory <tt>.htpasswd</tt>
@@ -623,28 +542,17 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 	'texte_informations_personnelles_2' => '(Poznámka: pokud se jedná o opakovanou instalaci a váš přístup je stále funkční, můžete', # MODIF
 	'texte_introductif_article' => '(Úvodní text článku.)',
 	'texte_jeu_caractere' => 'Doporučujeme použít univerzální abecedu Unicode (<tt>utf-8</tt>) pro váš web, která umožňuje zobrazit texty v jakémkoli jazyce. Žádný moderní prohlížeč s Unicode nemá potíže.',
-	'texte_jeu_caractere_2' => 'Toto nastavení nezmění texty, které jsou již uloženy v databázi.',
 	'texte_jeu_caractere_3' => 'Váš web nyní používá tuto znakovou sadu:',
 	'texte_jeu_caractere_4' => 'Pokud toto neodpovídá vaší situaci (například po obnovení dat ze zálohy), nebo <em>pokud konfigurujete tento web</em> a chcete použít jinou znakovou sadu, prosím označte znakovou sadu:',
-	'texte_jeu_caractere_conversion' => 'Můžete se rozhodnout zkonvertovat všechny texty (články, novinky, diskuse, ...) jednou provždy do <tt>UTF-8</tt>. Použijte <a href="@url@">UTF-8 konverzní stránku</a>.',
-	'texte_lien_hypertexte' => '(Jestliže se vaše zpráva vztahuje k nějakému článku na webu nebo jiné stránce s dalšími informacemi, vložte zde její titulek a URL.)',
 	'texte_login_ldap_1' => '(V případě anonymního přístupu ponechte prázdné, případně zadejte kompletní cestu "<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>".)',
 	'texte_login_precaution' => 'Pozor! Pod tímto uživatelským jménem jste právě přihlášeni!
  Tento formulář používejte opatrně...',
-	'texte_message_edit' => 'Pozor! Tuto zprávu může měnit kdokoli ze správců webu. Zobrazuje se všem redaktorům. Oznámení používejte pouze, pokud chcete zveřejnit významné události týkající se činnosti webu.',
 	'texte_mise_a_niveau_base_1' => 'Aktualizovali jste soubory systému SPIP.
  Nyní musíte aktualizovat databázi webu.',
 	'texte_modifier_article' => 'Změnit článek:',
-	'texte_moteur_recherche_active' => '<b>Je zapnut vyhledávač.</b> Tento příkaz slouží k rychlému indexování
-  (např. po obnově ze zálohy).
-  Upozornění: Dokumenty, které byly změněny normálním způsobem
-  (pomocí rozhraní systému SPIP) jsou reindexovány automaticky:
-  Příkaz je tedy vhodné používat pouze výjimečně.',
-	'texte_moteur_recherche_non_active' => 'Vyhledávač je vypnut.',
 	'texte_multilinguisme' => 'Chcete-li správu článků v několika jazycích se složitou navigací, můžete k článkům, resp. sekcím (záleží na organizační struktuře vašeho webu) přidat nabídku pro výběr jazyka.', # MODIF
 	'texte_multilinguisme_trad' => 'Rovněž můžete zapnout systém správy odkazů mezi překlady jednotlivých článků.', # MODIF
 	'texte_non_compresse' => '<i>nekomprimováno</i> (váš server tuto funkci nepodporuje)',
-	'texte_nouveau_message' => 'Nová zpráva',
 	'texte_nouvelle_version_spip_1' => 'Nainstalovali jste novou verzi systému SPIP.',
 	'texte_nouvelle_version_spip_2' => 'Tato verze vyžaduje rozsáhlejší aktualizaci než je obvyklé. Jste-li správcem tohoto webu, odstraňte soubor @connect@ a spusťte instalaci. Tím dojde k aktualizaci parametrů pro připojení k databázi.<p> (Pozn.: Pokud jste parametry pro připojení zapomněli, podívejte se nejprve do souboru @connect@, a teprve poté jej odstraňte...)</p>', # MODIF
 	'texte_operation_echec' => 'Vraťte se na předchozí stránku a zvolte jinou databázi nebo vytvořte novou. Zkontrolujte informace od svého poskytovatele prostoru pro web.',
@@ -663,7 +571,6 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 	'texte_rappel_selection_champs' => '[Nezapomeňte správně zvolit hodnotu v tomto poli.]',
 	'texte_recalcul_page' => 'Chcete-li tuto stránku znovu vygenerovat,
 přejděte raději do veřejné části a použijte tlačítko "znovu vypočítat".',
-	'texte_recapitiule_liste_documents' => 'Na této stránkce je přehled dokumentů umístněných v sekcích. Informace o dokumentech změníte klepnutím na odkaz na stránku příslušné sekce.',
 	'texte_recuperer_base' => 'Opravit databázi',
 	'texte_reference_mais_redirige' => 'Na článek je na vašem webu SPIP odkaz, ale je přesměrován na jinou adresu URL.',
 	'texte_requetes_echouent' => '<b>Pokud některé dotazy SQL neustále
@@ -689,7 +596,6 @@ Tím například vynutíte obnovu všech stránek poté, co provedete významné
 změny grafického uspořádání nebo struktury vašeho webu.',
 	'texte_sur_titre' => 'Podtitul',
 	'texte_table_ok' => ': tato tabulka je v pořádku.',
-	'texte_tables_indexation_vides' => 'Tabulky indexů vyhledávače jsou prázdné.',
 	'texte_tentative_recuperation' => 'Pokus o opravu',
 	'texte_tenter_reparation' => 'Zkusit opravu databáze',
 	'texte_test_proxy' => 'Proxy otestujete zadáním adresy webu,
@@ -702,21 +608,8 @@ změny grafického uspořádání nebo struktury vašeho webu.',
   v poslední době. Tím se předejde souběžným úpravám.
   Tato možnost je standardně vypnuta, aby se předešlo
   zobrazování zbytečných varovných hlášení.',
-	'texte_trop_resultats_auteurs' => 'Pro "@cherche_auteur@" bylo zobrazeno příliš mnoho výsledků. Zpřesněte vyhledávací kritéria.',
-	'texte_unpack' => 'odesílání/stahování poslední verze',
-	'texte_utilisation_moteur_syndiques' => 'Vestavěný prohledávací nástroj systému SPIS,
-    můžete vyhledávat i na syndikovaných webech a v syndikovaných
-    článcích, a to dvěma různými způsoby.    <br />- Nejjednodušší je
-    hledat pouze v názvech a popisech článků. <br />-    Druhý, mnohem účinnější způsob, umožňuje systému SPIP
-    hledat i v textech webů, na které vedou odkazy.
-    Pokud se odkazujete nějaký web, systém SPIP
-    bude vyhledávat v textech tohoto webu.', # MODIF
-	'texte_utilisation_moteur_syndiques_2' => 'Tento způsob vyžaduje, aby systém SPIP
-    pravidelně odkazované weby navštěvoval.
-    To může mírně zpomalit běh vašeho webu.',
 	'texte_vide' => 'vyprázdnit',
 	'texte_vider_cache' => 'Vyprázdnit cache',
-	'titre_admin_effacer' => 'Technická údržba',
 	'titre_admin_tech' => 'Technická údržba',
 	'titre_admin_vider' => 'Technická údržba',
 	'titre_cadre_afficher_article' => 'Zobrazit články',
@@ -736,7 +629,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 	'titre_naviguer_dans_le_site' => 'Procházet webem...',
 	'titre_nouvelle_rubrique' => 'Nová sekce',
 	'titre_numero_rubrique' => 'SEKCE ČÍSLO:',
-	'titre_page_admin_effacer' => 'Technická údržba: odstranění databáze',
 	'titre_page_articles_edit' => 'Změnit: @titre@',
 	'titre_page_articles_page' => 'Články',
 	'titre_page_articles_tous' => 'Celý web',
@@ -749,20 +641,15 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 	'titre_page_delete_all' => 'kompletní a nevratné odstranění',
 	'titre_page_documents_liste' => 'Dokumenty v sekcích',
 	'titre_page_index' => 'Váš privátní prostor',
-	'titre_page_message_edit' => 'Upravit zprávu',
-	'titre_page_messagerie' => 'Váš systém zpráv',
 	'titre_page_recherche' => 'Výsledky vyhledávání @recherche@',
 	'titre_page_statistiques_referers' => 'Statistiky (příchozí odkazy)',
 	'titre_page_upgrade' => 'Aktualizace systému SPIP',
 	'titre_publication_articles_post_dates' => 'Zveřejnění post-datovaných článků',
 	'titre_referencer_site' => 'Zadat odkaz na web:',
-	'titre_rendez_vous' => 'SCHŮZKA:',
 	'titre_reparation' => 'Oprava',
 	'titre_suivi_petition' => 'Sledování peticí',
 	'tls_ldap' => 'Transport Layer Security :',
-	'trad_article_inexistant' => 'Článek tohoto čísla neexistuje.',
 	'trad_article_traduction' => 'Dostupné překlady tohoto článku:',
-	'trad_deja_traduit' => 'Chyba: tento článek není možné propojit s požadovaným číslem',
 	'trad_delier' => 'Tento článek nadále s překlady nespojovat', # MODIF
 	'trad_lier' => 'Toto je překlad článku číslo:',
 	'trad_new' => 'Nově přeložit článek', # MODIF
