@@ -150,7 +150,7 @@ function admin_repair_tables() {
 				AND $msg = join(" ", is_resource($result_repair)?sql_fetch($result_repair):$result_repair) . ' '
 				AND strpos($msg, ' OK ')===FALSE){
 				$class = " class='notice'";
-				$m .= "<br /><tt>".htmlentities($msg)."</tt>\n";
+				$m .= "<br /><tt>".spip_htmlentities($msg)."</tt>\n";
 			}
 			else
 				$m .= " "._T('texte_table_ok');

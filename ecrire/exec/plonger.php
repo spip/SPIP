@@ -36,7 +36,7 @@ function exec_plonger_dist()
 		if (!$do) $do = 'aff';
 
 		$plonger = charger_fonction('plonger', 'inc');
-		$r = $plonger($id, htmlentities($rac), array(), $col, $exclus, $do);
+		$r = $plonger($id, spip_htmlentities($rac), array(), $col, $exclus, $do);
 	} else $r = '';
 
 	ajax_retour($r);
