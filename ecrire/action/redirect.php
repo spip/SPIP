@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -37,12 +37,26 @@ function action_redirect_dist()
 {
 	$type = _request('type');
 	if (!preg_match('/^\w+$/', $type)) return;
+	$id = intval(_request('id'));
+
 	if ($m = _request('var_mode')) {
 		// forcer la mise a jour de l'url de cet objet !
 		if (!defined('_VAR_URLS')) define('_VAR_URLS',true);
-		$m = 'var_mode='.urlencode($m);
 	}
-	$h = generer_url_entite_absolue(intval(_request('id')), $type, $m, '', true);
+
+	$h = generer_url_entite_absolue($id, $type, '', '', true);
+
+	if ($m > '')
+		$h = parametre_url($h, 'var_mode', $m);
+
+	if ($m == 'preview'
+	AND autoriser('previsualiser', $type, $id)
+	AND $aut = $GLOBALS['visiteur_session']['id_auteur'] ) {
+		include_spip('inc/securiser_action');
+		$token = _action_auteur('previsualiser', $aut, null, 'alea_ephemere');
+		$h = parametre_url($h, 'var_previewtoken', "$aut*$token");
+	}
+
 	$status = '302';
 	if (_request('status') AND _request('status')=='301')
 		$status = '301';
