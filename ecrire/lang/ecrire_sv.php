@@ -124,7 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info2' => 'För mer information, tveka inte om att besöka <a href="@spipnet@">SPIP’s dokumentation</a>.', # MODIF
 	'ical_info_calendrier' => 'Du kan använda två kalendrar. En är en sajtkarta med alla publicerade artiklar. Den andra innehåller redaktionella meddelanden och dina senaste privata meddelanden: Den är personlig, tack vare en genererad nyckel som du kan förändra när som helst genom att byta lösenord.',
 	'ical_methode_http' => 'Nerladdning',
-	'ical_methode_webcal' => 'Synkronisering (webcal://)',
+	'ical_methode_webcal' => 'Synkronisering (webcal://)', # MODIF
 	'ical_texte_js' => 'En rad javascript tillåter dig att, väldigt enkelt och på vilken sajt du vill, visa en lista på de senaste artiklarna publicerade på den här sajten.',
 	'ical_texte_prive' => 'Den här kalendern som är personlig, innnehåller dina egna redaktionella händelser på den här sajten (uppgifter, egna möten, inlämnade artiklar och nyheter...).',
 	'ical_texte_public' => 'Den här kalendern låter dig följa den publika aktiviteten på sajten (publicerade artiklar och nyheter).',

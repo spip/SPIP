@@ -148,7 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info2' => 'Evit titouroù ouzhpenn diwar-benn an teknikoù-se, lennit <a href="@spipnet@">teuliadoù skoazell SPIP</a>.',
 	'ical_info_calendrier' => 'Daou zeiziataer a c’hellit ober ganto. An hini kentañ a ziskouez an holl pennadoù bet embannet. War an eil emañ ar c’hemennoù embann hag ho kemennadennoù prevez diwezhañ : a-drugarez d’un alc’hwez hiniennel (a c’hellit cheñch forzh pegoulz o kemm ho ker-tremen) e c’hellit bezañ an hini nemetañ o kaout ar gwir da vont warnañ.',
 	'ical_methode_http' => 'Pellgargañ',
-	'ical_methode_webcal' => 'Sinkronelaat (webcal://)',
+	'ical_methode_webcal' => 'Sinkronelaat (webcal://)', # MODIF
 	'ical_texte_js' => 'A-drugarez d’ul linenn javascript e c’hellit, en un doare aezet, diskouez ar pennadoù diwezhañ embannet war al lec’hienn-mañ, war forzh pe hini eus ho lec’hiennoù.',
 	'ical_texte_prive' => 'An deiziataer hiniennel-mañ a gelaou ac’hanoc’h diwar-benn nevezinti embann prevez al lec’hienn-mañ (labourioù, emgavioù, pennadoù, berrskridoù kinniget,...).',
 	'ical_texte_public' => 'Gant an deiziataer-mañ e c’hellit heuliañ nevezenti foran al lec’hienn (pennadoù ha berrskridoù bet embannet).',

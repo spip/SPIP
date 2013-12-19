@@ -152,7 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info2' => 'Pour plus de renseignements sur toutes ces techniques, n’hésitez pas à consulter <a href="@spipnet@">la documentation de SPIP</a>.',
 	'ical_info_calendrier' => 'Deux calendriers sont à votre disposition. Le premier est un plan du site annonçant tous les articles publiés. Le second contient les annonces éditoriales ainsi que vos derniers messages privés : il vous est réservé grâce à une clé personnelle, que vous pouvez modifier à tout moment en renouvelant votre mot de passe.',
 	'ical_methode_http' => 'Téléchargement',
-	'ical_methode_webcal' => 'Synchronisation (webcal ://)',
+	'ical_methode_webcal' => 'Synchronisation (webcal://)', # MODIF
 	'ical_texte_js' => 'Une ligne de javascript vous permet d’afficher très simplement, sur n’importe quel site vous appartenant, les articles récents publiés sur ce site.',
 	'ical_texte_prive' => 'Ce calendrier, à usage strictement personnel, vous informe de l’activité éditoriale privée de ce site (tâches et rendez-vous personnels, articles et brèves proposés...).',
 	'ical_texte_public' => 'Ce calendrier vous permet de suivre l’activité publique de ce site (articles et brèves publiés).',

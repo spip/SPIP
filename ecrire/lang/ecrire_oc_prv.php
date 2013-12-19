@@ -100,7 +100,7 @@ L’administrator dau sistèma o de la ret vos deu poder fornir
 	'ical_info2' => 'Per tenir mai d’informacions subre aquelei tecnicas, esitetz pas de consultar <a href="@spipnet@">la documentacion d’SPIP</a>.', # MODIF
 	'ical_info_calendrier' => 'I a dos calendiers a la vòstra disposicion. Lo primier es un plan dau sit qu’anóncia totei leis articles publicats. Lo segond conten leis anoncis editoriaus en mai de vòstrei darriers messatges privats: vos es reservat gràcias a una clau personala, que la podètz modificar en tot moment en renovant vòstre mot de santa Clara. ',
 	'ical_methode_http' => 'Telecargament',
-	'ical_methode_webcal' => 'Sincronizacion (webcal://)',
+	'ical_methode_webcal' => 'Sincronizacion (webcal://)', # MODIF
 	'ical_texte_js' => 'Leis articles publicats en aqueu sit se pòdon afichar aisat, dins totei lei sits vòstres, en fasent servir una linha javascript. ',
 	'ical_texte_prive' => 'Aqueu calendier, d’us estrictament personau, vos informa de l’activitat editoriala privada d’aqueu sit (òbras e rendètz-vos personaus, articles e brèvas prepausats...).',
 	'ical_texte_public' => 'Aqueu calendier vos permet de seguir l’activitat publica d’aqueu sit (articles e brèvas publicats).',

@@ -149,7 +149,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'ical_info2' => 'Per tenir més informacions sobre aquestes tècniques, no dubteu a consultar <a href="@spipnet@">la documentació d’SPIP</a>.',
 	'ical_info_calendrier' => 'Hi ha dos calendaris a la vostra disposició. El primer és un mapa del lloc que mostra tots els articles publicats. El segon conté els anuncis editorials a més dels vostres darrers missatges privats: està reservat per vosaltres gràcies a una clau personal, que podeu modificar en tot moment renovant la vostra contrasenya. ',
 	'ical_methode_http' => 'Descàrrega',
-	'ical_methode_webcal' => 'Sincronització (webcal://)',
+	'ical_methode_webcal' => 'Sincronització (webcal://)', # MODIF
 	'ical_texte_js' => 'Els articles publicats en aquest lloc poden ser mostrats fàcilment, en qualsevol lloc vostre, mitjançant una línia de javascript. ',
 	'ical_texte_prive' => 'Aquest calendari, d’ús estrictament personal, us informa de l’activitat editorial privada d’aquest lloc (feines i cites personals, articles i breus proposats...).',
 	'ical_texte_public' => 'Aquest calendari us permet seguir l’activitat pública d’aquest lloc (articles i breus publicats).',

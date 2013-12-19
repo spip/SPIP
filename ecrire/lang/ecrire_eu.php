@@ -151,7 +151,7 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'ical_info2' => 'Teknika guzti hauen buruzko informazio gehiago lortzeko, <a href="@spipnet@">SPIP dokumentazioa</a> kontsulta dezakezu.',
 	'ical_info_calendrier' => 'Bi egutegi dituzu eskura. Lehena gunearen planoa da, bertan argitaratutako artikulu guztiak adierazten direlarik. Bigarrenak iragarki editorialak eta zure azken mezu pribatuak ditu: zuk bakarrik ikus dezakezu gako pertsonal baten bidez, gakoa edozein unean alda dezakezularik zure pasahitza aldatuz.',
 	'ical_methode_http' => 'Deskargatu',
-	'ical_methode_webcal' => 'Sinkronizazioa (webcal://)',
+	'ical_methode_webcal' => 'Sinkronizazioa (webcal://)', # MODIF
 	'ical_texte_js' => 'Gune honetan berriki argitaratutako artikuluak, zure edo edozeinen gunean ikus ditzakezu, Javascript lerro baten bidez.',
 	'ical_texte_prive' => 'Egutegi hau erabat pertsonala da eta gune honen ekintza editorial pribatuen berri ematen du (eginkizunak, hitzordu pertsonalak, artikuluak eta proposatutako berri-laburrak,..)',
 	'ical_texte_public' => 'Egutegi honi eskerleku honetako ekintza publikoen jarraipena egin daiteke (artikuluak eta berri laburrak)',
