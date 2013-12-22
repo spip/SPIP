@@ -152,8 +152,34 @@ function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
 
 // http://doc.spip.org/@autoriser_previsualiser_dist
 function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
-	return strpos($GLOBALS['meta']['preview'], ",". $qui['statut'] .",")
-		!==false;
+
+	// Le visiteur a-t-il un statut prevu par la config ?
+	if (strpos($GLOBALS['meta']['preview'], ",". $qui['statut'] .",")
+	!==false)
+		return true;
+
+	// Sinon, on regarde s'il a un jeton (var_token) et on lui pose
+	// le cas echeant une session contenant l'autorisation
+	// de l'utilisateur ayant produit le jeton
+	if ($token = _request('var_previewtoken')) {
+		include_spip('inc/session');
+		session_set('previewtoken', $token);
+	}
+
+	// A-t-on un token valable ?
+	if (is_array($GLOBALS['visiteur_session'])
+	AND $token = session_get('previewtoken')
+	AND preg_match('/^(\d+)\*(.*)$/', $token, $r)
+	AND $action = 'previsualiser'
+	AND (include_spip('inc/securiser_action'))
+	AND (
+		$r[2] == _action_auteur($action, $r[1], null, 'alea_ephemere')
+	 OR $r[2] == _action_auteur($action, $r[1], null, 'alea_ephemere_ancien')
+	)) {
+		return true;
+	}
+
+	return false;
 }
 
 function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
