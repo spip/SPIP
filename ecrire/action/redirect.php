@@ -39,7 +39,8 @@ function action_redirect_dist()
 	$id = intval(_request('id'));
 
 	if ($m = _request('var_mode')) {
-		$GLOBALS['var_urls'] = true; // forcer la mise a jour de l'url de cet objet !
+		// forcer la mise a jour de l'url de cet objet !
+		if (!defined('_VAR_URLS')) define('_VAR_URLS',true);
 	}
 
 	if (preg_match('/^\w+$/', $type)) {
