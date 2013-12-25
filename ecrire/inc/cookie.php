@@ -30,7 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $value
  *     Valeur à stocker
  * @param int $expire
- *     Durée de vie du cookie en secondes
+ *     Date d'expiration du cookie (timestamp)
  * @param string $path
  *     Chemin sur lequel le cookie sera disponible
  * @param string $domain
