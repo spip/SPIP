@@ -54,7 +54,7 @@ function copier_document($ext, $orig, $source) {
 
 	$orig = preg_replace(',\.\.+,', '.', $orig); // pas de .. dans le nom du doc
 	$dir = creer_repertoire_documents($ext);
-	$dest = preg_replace("/[^._=-\w\d]+/", "_", 
+	$dest = preg_replace("/[^.=\w-]+/", "_",
 			translitteration(preg_replace("/\.([^.]+)$/", "", 
 						      preg_replace("/<[^>]*>/", '', basename($orig)))));
 
