@@ -1,7 +1,7 @@
 /*
  * multilang
  *
- * Copyright (c) 2006-2010 Renato Formato (rformato@gmail.com)
+ * Copyright (c) 2006-2014 Renato Formato (rformato@gmail.com)
  * Licensed under the GPL License:
  *   http://www.gnu.org/licenses/gpl.html
  *
