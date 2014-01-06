@@ -81,30 +81,22 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 			$erreurs['email'] = (($id_auteur==$GLOBALS['visiteur_session']['id_auteur'])?_T('form_email_non_valide'):_T('form_prop_indiquer_email'));
 		}
 
-        # Ne pas autoriser d'avoir deux auteurs avec le même email
-        # cette fonctionalité nécessite que la base soit clean à l'activation : pas de
-        # doublon sur la requête select email,count(*) from spip_auteurs group by email ;
-        if (defined('_INTERDIRE_AUTEUR_MEME_EMAIL') )
-        {
-            #Nouvel auteur
-            if (intval($id_auteur)==0)
-            {
-                #Un auteur existe deja avec cette adresse ?
-                if ( sql_countsel("spip_auteurs", "email=".sql_quote($email)) >0 )
-                {
-                    $erreurs['email'] = _T('erreur_email_deja_existant');
-                }
-            }
-            else
-            {
-                #Un auteur existe deja avec cette adresse ? et n'est pas le user courant.
-                if ( ( sql_countsel("spip_auteurs", "email=".sql_quote($email) >0 ) )  & ($id_auteur!= ($id_auteur_ancien=sql_getfetsel('id_auteur', 'spip_auteurs', "email=".sql_quote($email))) ))
-                {
-                    $erreurs['email'] = _T('erreur_email_deja_existant');
-                }
-            }
-        }
-    }
+		# Ne pas autoriser d'avoir deux auteurs avec le même email
+		# cette fonctionalité nécessite que la base soit clean à l'activation : pas de
+		# doublon sur la requête select email,count(*) from spip_auteurs group by email ;
+		if (defined('_INTERDIRE_AUTEUR_MEME_EMAIL')) {
+			#Nouvel auteur
+			if (intval($id_auteur)==0) {
+				#Un auteur existe deja avec cette adresse ?
+				if (sql_countsel("spip_auteurs", "email=".sql_quote($email)) > 0)
+					$erreurs['email'] = _T('erreur_email_deja_existant');
+			} else {
+				#Un auteur existe deja avec cette adresse ? et n'est pas le user courant.
+				if ((sql_countsel("spip_auteurs", "email=".sql_quote($email)) > 0) AND ($id_auteur!=($id_auteur_ancien=sql_getfetsel('id_auteur', 'spip_auteurs', "email=".sql_quote($email)))))
+					$erreurs['email'] = _T('erreur_email_deja_existant');
+			}
+		}
+	}
 
 	if (preg_match(",^\s*javascript,i", _request('url_site'))) {
 		$erreurs['url_site'] = _T('info_url_site_pas_conforme');
