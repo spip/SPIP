@@ -524,8 +524,19 @@ function queue_affichage_cron(){
 		if(function_exists('fsockopen')){
 			$parts=parse_url($url_cron);
 
-			$fp = @fsockopen($parts['host'],
-		        isset($parts['port'])?$parts['port']:80,
+			switch ($parts['scheme']) {
+				case 'https':
+					$scheme = 'ssl://';
+					$port = 443;
+					break;
+				case 'http':
+				default:
+					$scheme = '';
+					$port = 80;   
+			}
+        
+			$fp = @fsockopen($scheme.$parts['host'],
+		        isset($parts['port'])?$parts['port']:$port,
 		        $errno, $errstr, 1);
 
 			if ($fp) {
