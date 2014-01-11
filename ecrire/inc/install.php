@@ -525,7 +525,7 @@ function install_propager($hidden)
 {
 	$res = '';
 	foreach($hidden as $k) {
-		$v = htmlentities(_request($k));
+		$v = spip_htmlentities(_request($k));
 		$res .= "<input type='hidden' name='$k' value='$v' />";
 	}
 	return $res;
