@@ -48,13 +48,13 @@ function install_etape_ldap3_dist()
 			if (is_array($names)) {
 				for ($j = 0; $j < $names["count"]; $j++) {
 					$n++;
-					$res .= "<li><input name=\"base_ldap\" value=\"".htmlspecialchars($names[$j])."\" type='radio' id='tab$n'";
+					$res .= "<li><input name=\"base_ldap\" value=\"".spip_htmlspecialchars($names[$j])."\" type='radio' id='tab$n'";
 					if (!$checked) {
 						$res .= " checked=\"checked\"";
 						$checked = true;
 					}
 					$res .= " />";
-					$res .= "<label for='tab$n'>".htmlspecialchars($names[$j])."</label></li>\n";
+					$res .= "<label for='tab$n'>".spip_htmlspecialchars($names[$j])."</label></li>\n";
 				}
 			}
 		}

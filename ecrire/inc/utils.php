@@ -45,7 +45,7 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	if (!preg_match(',^\w+$,', $f)){
 		if ($continue) return false; //appel interne, on passe
-		die(htmlspecialchars($nom)." pas autorise");
+		die(spip_htmlspecialchars($nom)." pas autorise");
 	}
 
 	// passer en minuscules (cf les balises de formulaires)
@@ -436,7 +436,7 @@ function self($amp = '&amp;', $root = false) {
 	}
 
 	// eviter les hacks
-	$url = htmlspecialchars($url);
+	$url = spip_htmlspecialchars($url);
 
 	// &amp; ?
 	if ($amp != '&amp;')

@@ -277,9 +277,9 @@ function debusquer_requete($message){
 
 	// Requete erronee
 	$err = "<b>" . _T('avis_erreur_mysql') . " $errno</b><br /><tt>\n"
-		. htmlspecialchars($msg)
+		. spip_htmlspecialchars($msg)
 		. "\n<br /><span style='color: red'><b>"
-		. htmlspecialchars($query)
+		. spip_htmlspecialchars($query)
 		. "</b></span></tt><br />";
 	//. aide('erreur_mysql');
 
@@ -646,7 +646,7 @@ function debusquer_navigation_boucles($boucles, $nom_skel, $self, $nom_source){
 				"</td><td>\n" .
 				$req .
 				"</td><td>\n" .
-				htmlspecialchars($crit) .
+				spip_htmlspecialchars($crit) .
 				"</td></tr>";
 		}
 	}
@@ -681,7 +681,7 @@ function debusquer_source($objet, $affiche){
 				$brut_sql .= "<h3>" . ($num==1 ? $num . " sur " . sql_count($ress_req) : $num) . "</h3>";
 				$brut_sql .= "<p>";
 				foreach ($retours_sql as $key => $val){
-					$brut_sql .= "<strong>" . $key . "</strong> => " . htmlspecialchars(couper($val, 150)) . "<br />\n";
+					$brut_sql .= "<strong>" . $key . "</strong> => " . spip_htmlspecialchars(couper($val, 150)) . "<br />\n";
 				}
 				$brut_sql .= "</p>";
 			}

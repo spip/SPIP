@@ -467,20 +467,20 @@ function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 {
 	return ((defined('_INSTALL_HOST_DB'))
 		? ''
-		: "\n<input type='hidden' name='adresse_db'  value=\"".htmlspecialchars($adresse_db)."\" />"
+		: "\n<input type='hidden' name='adresse_db'  value=\"".spip_htmlspecialchars($adresse_db)."\" />"
 	)
 	. ((defined('_INSTALL_USER_DB'))
 		? ''
-		: "\n<input type='hidden' name='login_db' value=\"".htmlspecialchars($login_db)."\" />"
+		: "\n<input type='hidden' name='login_db' value=\"".spip_htmlspecialchars($login_db)."\" />"
 	)
 	. ((defined('_INSTALL_PASS_DB'))
 		? ''
-		: "\n<input type='hidden' name='pass_db' value=\"".htmlspecialchars($pass_db)."\" />"
+		: "\n<input type='hidden' name='pass_db' value=\"".spip_htmlspecialchars($pass_db)."\" />"
 	)
 
 	. ((defined('_INSTALL_SERVER_DB'))
 		? ''
-		: "\n<input type='hidden' name='server_db' value=\"".htmlspecialchars($server_db)."\" />"
+		: "\n<input type='hidden' name='server_db' value=\"".spip_htmlspecialchars($server_db)."\" />"
 	   );
 }
 
@@ -494,7 +494,7 @@ function install_etape_liste_bases($server_db, $login_db, $disabled=array())
 	if (!$noms) return '';
 
 	foreach ($noms as $nom){
-		$id = htmlspecialchars($nom);
+		$id = spip_htmlspecialchars($nom);
 		$dis = in_array($nom, $disabled) ? " disabled='disabled'" : '';
 		$base = " name=\"choix_db\" value=\""
 		  . $nom
