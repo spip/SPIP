@@ -180,7 +180,7 @@ function fichier_admin($action, $pref='admin_') {
 **/
 function debut_admin($script, $action='', $corps='') {
 
-	if ((!$action) || (!autoriser('chargerftp'))) {
+	if ((!$action) || !(autoriser('webmestre') OR autoriser('chargerftp'))) {
 		include_spip('inc/minipres');
 		return minipres();
 	} else {
