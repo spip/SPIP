@@ -12,8 +12,19 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Diverses taches de maintenance
-// http://doc.spip.org/@genie_maintenance_dist
+/**
+ * Diverses tâches de maintenance
+ * 
+ * - (re)mettre .htaccess avec 'Deny from all' 
+ *   dans les deux répertoires dits inaccessibles par http
+ * - Vérifier qu'aucune table ne s'est crashée
+ *
+ * @uses verifier_htaccess()
+ * @uses verifier_crash_tables()
+ *
+ * @param object $t
+ * @return bool Toujours à true.
+ */
 function genie_maintenance_dist ($t) {
 
 	// (re)mettre .htaccess avec deny from all
@@ -30,7 +41,18 @@ function genie_maintenance_dist ($t) {
 }
 
 
-// http://doc.spip.org/@verifier_crash_tables
+/**
+ * Vérifier si une table a crashé
+ *
+ * Pour cela, on vérifie si on peut se connecter à la base de données.
+ * 
+ * @see message_crash_tables()
+ *
+ * @return bool|array
+ *     Si pas de table de crashée, on retourne `false`.
+ *     Sinon,  retourne un tableau contenant tous les noms
+ *     des tables qui ont crashé.
+ */
 function verifier_crash_tables() {
 	if (spip_connect()) {
 		include_spip('base/serial');
@@ -58,7 +80,18 @@ function verifier_crash_tables() {
 	return false;
 }
 
-// http://doc.spip.org/@message_crash_tables
+/**
+ * Vérifier si une table a crashé et crée un message en conséquence.
+ * 
+ * S'il y a un crash, on affiche un message avec le nom
+ * de la ou des tables qui ont crashé.
+ * On génère un lien vers la page permettant la 
+ * réparation de la base de données.
+ * 
+ * @uses verifier_crash_tables()
+ *
+ * @return string
+ */
 function message_crash_tables() {
 	if ($crash = verifier_crash_tables()) {
 		return 
