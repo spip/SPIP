@@ -19,7 +19,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Créer un mot de passe 
+ * Créer un mot de passe
  *
  * @param int $longueur
  *     Longueur du password créé
@@ -59,7 +59,7 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 /**
  * Créer un identifiant aléatoire
  *
- * @return string Identifiant 
+ * @return string Identifiant
  */
 function creer_uniqid() {
 	static $seeded;
@@ -102,9 +102,9 @@ function renouvelle_alea() {
  * Retourne la clé de sécurité low_sec de l'auteur (la génère si elle n'exite pas)
  * ou la clé de sécurité low_sec du site (si auteur invalide)(la génère si elle
  * n'existe pas).
- * 
+ *
  * @param int $id_auteur
- *     Identifiant de l'auteur 
+ *     Identifiant de l'auteur
  * @return string
  *     Clé de sécurité.
 **/
@@ -125,18 +125,17 @@ function low_sec($id_auteur) {
 	return $low_sec;
 }
 
-// Inclure les arguments significatifs pour le hachage
-// cas particulier du statut pour compatibilite ancien rss/suivi_revisions
+
 /**
  * Inclure les arguments significatifs pour le hachage
  *
  * Cas particulier du statut pour compatibilité ancien rss/suivi_revisions
- * 
+ *
  * @param string $op
  * @param array  $args
  * @param string $lang
  * @param string $mime
- *     Par défaut 'rss'. 
+ *     Par défaut 'rss'.
  * @return string
  */
 function param_low_sec($op, $args=array(), $lang='', $mime='rss')
@@ -164,7 +163,7 @@ function param_low_sec($op, $args=array(), $lang='', $mime='rss')
  * Retourne une clé basée sur le low_sec de l'auteur et l'action demandé
  *
  * @uses low_sec()
- * 
+ *
  * @param int $id_auteur
  *     Identifiant de l'auteur
  * @param string $action
@@ -180,7 +179,7 @@ function afficher_low_sec ($id_auteur, $action='') {
  * Vérifie une clé basée sur le low_sec de l'auteur et l'action demandé
  *
  * @uses afficher_low_sec()
- * 
+ *
  * @param int $id_auteur
  *     Identifiant de l'auteur
  * @param string $cle
@@ -207,7 +206,7 @@ function effacer_low_sec($id_auteur) {
 
 /**
  * Initialiser la globale htsalt si cela n'a pas déjà été fait.
- * 
+ *
  * @return void|bool
  */
 function initialiser_sel() {
@@ -224,7 +223,7 @@ function initialiser_sel() {
  *
  * S'appuie sur la meta `creer_htpasswd` pour savoir s'il faut créer
  * le `.htpasswd`.
- * 
+ *
  * @return null|void
  *     - null si pas de htpasswd à créer, ou si LDAP
  *     - void sinon.
@@ -301,7 +300,7 @@ function verifier_htaccess($rep, $force=false) {
 	}
 	spip_log("Creation de $htaccess " . ($ht ? " reussie" : " manquee"));
 	return $ht;
-}	
+}
 
 
 

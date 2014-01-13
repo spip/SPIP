@@ -28,28 +28,27 @@ function genie_mise_a_jour_dist($t) {
 }
 
 
-// Determiner si une nouvelle version de SPIP est disponible
-// sans demander tout le temps au serveur de versions si leur liste a change'.
 
 define('_VERSIONS_SERVEUR', 'http://files.spip.org/');
 define('_VERSIONS_LISTE', 'archives.xml');
+
 /**
  * Vérifier si une nouvelle version de SPIP est disponible
- * 
+ *
  * Repérer aussi si cette version est une version majeure de SPIP.
- * 
+ *
  * @param string $dir
  * @param string $file
  * @param string $version
  *      La version reçue ici est sous la forme x.y.z
- *      On la transforme par la suite pour avoir des integer ($maj, $min, $rev) 
+ *      On la transforme par la suite pour avoir des integer ($maj, $min, $rev)
  *      et ainsi pouvoir mieux les comparer
- *  
+ *
  * @return string
  */
 function info_maj ($dir, $file, $version){
 	include_spip('inc/plugin');
-	
+
 	list($maj,$min,$rev) = preg_split('/\D+/', $version);
 
 	$nom = _DIR_CACHE_XML . _VERSIONS_LISTE;
@@ -76,13 +75,9 @@ function info_maj ($dir, $file, $version){
 	    '</a>';
 }
 
-// Verifie que la liste $page des versions dans le fichier $nom est a jour
-// Ce fichier rajoute dans ce fichier l'alea ephemere courant;
-// on teste la nouveaute par If-Modified-Since,
-// et seulement quand celui-ci a change' pour limiter les acces HTTP
 /**
  * Vérifie que la liste $page des versions dans le fichier $nom est à jour.
- * 
+ *
  * Ce fichier rajoute dans ce fichier l'aléa éphémère courant;
  * on teste la nouveauté par If-Modified-Since,
  * et seulement quand celui-ci a changé pour limiter les accès HTTP.
