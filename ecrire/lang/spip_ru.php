@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 	'0_langue' => 'Русский [ru]',
 	'0_liste' => 'spip-ru@rezo.net',
-	'0_mainteneur' => '2009-2012 Serge Markitanenko (ss1945@gmail.com).2005-2007 Vitali Zhulkovsky (vzhulkovsky@cmp.com)upd. Maxim Krioukov (krumax@mail.ru)',
+	'0_mainteneur' => '2009-2014 Serge Markitanenko (ss1945@gmail.com).2005-2007 Vitali Zhulkovsky (vzhulkovsky@cmp.com)upd. Maxim Krioukov (krumax@mail.ru)',
 
 	// A
 	'access_interface_graphique' => 'Возврат к полному интерфейсу',
@@ -121,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_periode_abbr' => 'С @dtart@@date_debut@@dtabbr@ по @dtend@@date_fin@@dtabbr@',
 	'date_fmt_periode_from' => 'С',
 	'date_fmt_periode_to' => 'по',
+	'date_fmt_saison_annee' => '@saison@ @annee@',
 	'date_heures' => 'час',
 	'date_hier' => 'вчера',
 	'date_il_y_a' => '@delai@ назад',
@@ -217,14 +218,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dirs_commencer' => 'для того, чтобы начать установку',
 	'dirs_preliminaire' => 'Подготовка: <b>Настройки прав доступа</b>',
 	'dirs_probleme_droits' => 'Проблема в правах доступа',
-	'dirs_repertoires_absents' => '<b>Следующие директории не найдены:<ul>@bad_dirs@.</ul></b>
-  <p>Возможная причина - неправильное положение строчных и прописных букв в названиях директорий.
-  Пожалуйста удостоверьтесь, что регистр букв в именах директорий соответствует тому, что выводится выше; если это не так, переименуйте директории, используя FTP-клиент, чтобы исправить ошибку.
+	'dirs_repertoires_absents' => '<b>Следующие папки не найдены:<ul>@bad_dirs@.</ul></b>
+  <p>Возможная причина - использование строчных и прописных букв в названии папок.
+  Пожалуйста проверьте, что регистр букв в названиях папок соответствует тому, что выводится выше; если это не так, переименуйте папки, используя FTP-клиент, чтобы исправить ошибку.
  </p><p>Как только это сделано, все заработает</p>',
-	'dirs_repertoires_suivants' => '<b>К следующим директориям не правильно прописаны права доступа <ul>@bad_dirs@.</ul></b>
+	'dirs_repertoires_suivants' => '<b>У следующих папок нет прав на запись:
+<ul>@bad_dirs@.</ul></b>
 
-  <p>Для изменений прав доступа воспользуйтесь FTP клиентом.
-  Процедура описана в инструкции по установке.</p>
+  <p>Для изменений прав доступа воспользуйтесь FTP клиентом и задайте права "777" или "ххх-ххх-ххх".
+</p>
 
 ',
 	'double_occurrence' => 'Тег @balise@ встречается дважды',
@@ -234,6 +236,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Отправить при помощи сайта',
 	'erreur' => 'Ошибка',
 	'erreur_balise_non_fermee' => 'последний тэг не закрыт:',
+	'erreur_technique_ajaxform' => 'Непонятная ошибка не дает отправить эту форму. Попробуйте еще раз.',
 	'erreur_technique_enregistrement_champs' => 'Из-за технической ошибки не удалось правильно зарегистрировать поле @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Не удается зарегистрировать из-за технической ошибки.',
 	'erreur_texte' => 'Ошибка(и)',
@@ -249,7 +252,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Вы запросили смену вашего почтового адреса.
 Что бы подтвердить ваш новый адрес перейдите по ссылке:
     @url@
- (В противном случае ваш запрос не будет выполнен):
+ (Если вы этого не сделаете, то адрес не изменится):
 
 ',
 	'form_deja_inscrit' => 'Вы уже зарегистрированы.',
@@ -432,7 +435,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nom_utilisateurs_connectes' => 'Показывать меня в списке пользователей online.',
 	'info_nombre_en_ligne' => 'Сейчас  на сайте:',
 	'info_non_resultat' => 'Ничего не найдено по запросу "@cherche_mot@"',
-	'info_non_utilisation_messagerie' => 'Система приватных сообщений отключена на этом сайте.',
+	'info_non_utilisation_messagerie' => 'Система личных сообщений отключена на этом сайте.',
 	'info_nouveau_message' => 'ПОЛУЧЕНО НОВОЕ СООБЩЕНИЕ',
 	'info_nouveaux_messages' => 'У ВАС @total_messages@ НОВОЕ(ЫХ) СООБЩЕНИЕ(Й):',
 	'info_numero_abbreviation' => '№',
@@ -581,8 +584,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 будет отправленно письмо с дальнейшими инструкциями.',
 	'pass_mail_passcookie' => '(это письмо отправленно автоматически)
 
-Для того, что бы восстановить ваш пароль к сайту
-@nom_site_spip (@adresse_site) 
+Для того, что бы восстановить ваш пароль для входа на сайт @nom_site_spip@ (@adresse_site@) 
 
 перейдите по следующей ссылке: 
     @sendcookie@
@@ -671,6 +673,7 @@ and connect again to the site.
 	'titre_image_auteur_supprime' => 'Автор удален',
 	'titre_image_redacteur' => 'Редактор без доступа',
 	'titre_image_redacteur_02' => 'Редактор',
+	'titre_image_selecteur' => 'Показать список',
 	'titre_image_visiteur' => 'Посетитель',
 	'titre_joindre_document' => 'ПРИЛОЖИТЬ ДОКУМЕНТ',
 	'titre_mots_cles' => 'КЛЮЧИ',
@@ -697,7 +700,7 @@ and connect again to the site.
 	'zbug_distant_interdit' => 'Внешние данные запрещены',
 	'zbug_doublon_table_sans_cle_primaire' => 'Дубликаты записей в таблице, не имеющей простого первичного ключа',
 	'zbug_doublon_table_sans_index' => 'Дубликаты записей в таблице без индекса',
-	'zbug_erreur_boucle_double' => 'Цикл @id@: двойное определение',
+	'zbug_erreur_boucle_double' => 'Цикл @id@ - указан дважды в одном шаблоне',
 	'zbug_erreur_boucle_fermant' => 'Цикл @id@: отсутствует закрывающий тег',
 	'zbug_erreur_boucle_syntaxe' => 'Синтаксическая ошибка в цикле  @id@',
 	'zbug_erreur_compilation' => 'Ошибка компиляции',
@@ -708,7 +711,7 @@ and connect again to the site.
 	'zbug_hors_compilation' => 'Не скомпилировано',
 	'zbug_info_erreur_squelette' => 'Ошибка на сайте',
 	'zbug_inversion_ordre_inexistant' => 'Реверсия несуществующего порядка',
-	'zbug_pagination_sans_critere' => 'Используется тег #PAGINATION но в цикле не указан критерий  {pagination}. Возможно это рекурсивный цикл.',
+	'zbug_pagination_sans_critere' => 'Используется тег #PAGINATION но в цикле не указан критерий  {pagination} или тег используется в рекурсивном цикле.',
 	'zbug_parametres_inclus_incorrects' => 'Неверный включающий параметр: @param@',
 	'zbug_profile' => 'Время вычисления: @time@',
 	'zbug_resultat' => 'результат',
