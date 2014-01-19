@@ -148,7 +148,6 @@ function login_auth_http()
 {
 	if (!$GLOBALS['ignore_auth_http']
 		AND _request('var_erreur')=='cookie' 
-		AND $_COOKIE['spip_session'] != 'test_echec_cookie'
 		AND (!isset($_COOKIE['spip_session']) OR $_COOKIE['spip_session'] != 'test_echec_cookie') 
 		AND (($GLOBALS['flag_sapi_name'] AND preg_match(",apache,i", @php_sapi_name()))
 			OR preg_match(",^Apache.* PHP,", $_SERVER['SERVER_SOFTWARE']))
