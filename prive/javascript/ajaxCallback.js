@@ -242,8 +242,8 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					// les reinjecter dans le dom sous forme de input hidden
 					// pour que le serveur les recoive
 					if (leclk){
-            var n = leclk.name;
-            if (n && !leclk.disabled) {
+            			var n = leclk.name;
+           				if (n && !leclk.disabled) {
 							jQuery(leform).prepend("<input type='hidden' name='"+n+"' value='"+leclk.value+"' />");
 							if (leclk.type == "image") {
 								jQuery(leform).prepend("<input type='hidden' name='"+n+".x' value='"+leform.clk_x+"' />");
