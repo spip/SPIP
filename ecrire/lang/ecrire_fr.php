@@ -212,6 +212,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_administrateurs' => 'Administrateurs',
 	'info_administrer_rubrique' => 'Vous pouvez administrer cette rubrique',
 	'info_adresse' => 'à l’adresse :',
+	'info_adresse_desinscription' => 'Adresse de désinscription :',
 	'info_adresse_url' => 'Adresse (URL) du site public',
 	'info_afficher_par_nb' => 'Afficher par',
 	'info_aide_en_ligne' => 'Aide en ligne SPIP',
