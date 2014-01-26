@@ -76,13 +76,17 @@
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">
 								<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+									onclick="$(this).blur();"
 									onchange="if ($(this).prop('checked')) $('.editer_taille_preview').hide('fast');"
-									[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_choix_non_generation_miniature:></label>
+									[(#ENV{#GET{name}}|=={oui}|non)checked="checked"]
+								/><label for="#GET{name}_non"><:item_choix_non_generation_miniature:></label>
 							</div>
 							<div class="choix">
 								<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+									onclick="$(this).blur();"
 									onchange="if ($(this).prop('checked')) $('.editer_taille_preview').show('fast');"
-									[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_choix_generation_miniature:></label>
+									[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"]
+								/><label for="#GET{name}_oui"><:item_choix_generation_miniature:></label>
 							</div>
 						</li>
 						#SET{name,taille_preview}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
