@@ -354,12 +354,11 @@ function install_select_serveur()
 			$s = $s[1];
 			$v = 'spip_versions_' . $s;
 			if (function_exists($v) AND $v()) {
-			  $titre = _T("install_select_type_$s");
+				$titre = _T("install_select_type_$s");
 				// proposer sqlite3 par defaut si dispo
-				$selected = ($s=='sqlite3'?" selected='selected'":"");
-			  $options[$s] =  "<option value='$s'$selected>"
-			    . ($titre ? $titre : $s)
-			    ."</option>";
+				$checked = ($s=='sqlite3'?" checked='checked'":"");
+				$options[$s] =  "<li><input type='radio' id='$s' value='$s' name='server_db'$checked>"
+					."<label for='$s'>" . ($titre ? $titre : $s)."</label></li>";
 			} else spip_log("$s: portage indisponible");
 		}
 	}
@@ -388,18 +387,20 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 					$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").hide();
 				}
 			});
-			if ($("#sql_serveur_db").length) {
-				if ($("#sql_serveur_db").prop("value").match("sqlite*"))
+			if ($("input[name=server_db][checked]").attr("value").match("sqlite*"))
+				$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").hide();
+			else
+				$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").show();
+			$("input[name=server_db]").each(function(){
+				$(this).bind("change",function(){
+					if ($(this).prop("checked") && $(this).attr("value").match("sqlite*")) {
 						$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").hide();
-					else
+					}
+					if ($(this).prop("checked") && !$(this).attr("value").match("sqlite*")) {
 						$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").show();
-				$("#sql_serveur_db").change(function(){
-					if ($(this).find("option:selected").attr("value").match("sqlite*"))
-						$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").hide();
-					else
-						$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").show();
+					}
 				});
-			}
+			});
 		});')
 
 	. ($server_db
@@ -410,14 +411,14 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 		: ('<fieldset><legend>'
 		   ._T('install_select_type_db')
 		. "</legend>"
-			.'<label for="sql_serveur_db" class="p">'
+			.'<p class="explication">'
 			. _T('install_types_db_connus')
 			// Passer l'avertissement SQLIte en  commentaire, on pourra facilement le supprimer par la suite sans changer les traductions.
 			. "<br /><small>(". _T('install_types_db_connus_avertissement') .')</small>'
-			.'</label>'
-		. "\n<div class='p center'><select name='server_db' id='sql_serveur_db' >\n"
+			.'</p>'
+		. "\n<div class='p'>\n<ul>\n"
 		.   join("\n", install_select_serveur())
-		. "\n</select></div></fieldset>")
+		. "\n</ul>\n</div></fieldset>")
 	)
 	. '<div id="install_adresse_base_hebergeur">'
 	. '<p>'. _T('texte_connexion_mysql').'</p>'
