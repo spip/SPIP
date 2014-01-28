@@ -200,6 +200,7 @@ function traiter_formulaires_dynamiques($get=false){
 			// le dernier format est celui conseille car il permet le pipelinage, en particulier
 			// en y passant l'id de l'objet cree/modifie
 			// si message_erreur est present, on considere que le traitement a echoue
+			$post["message_ok_$form"] = '';			
 			// cas du message texte simple
 			if (!is_array($rev)){
 				$post["message_ok_$form"] = $rev;
