@@ -295,7 +295,7 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 
 	// Si on est connecte, envoyer vers la destination
 	if ($cible AND ($cible!=self())) {
-		if (!headers_sent() AND !$_GET['var_mode']) {
+		if (!headers_sent() AND !isset($_GET['var_mode'])) {
 			include_spip('inc/headers');
 			$res['redirect'] = $cible;
 		} else {
