@@ -990,9 +990,10 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 
 		// on verifie que l'extension choisie est bonne (en principe oui)
 		$gd_formats = explode(',',$GLOBALS['meta']["gd_formats"]);
-		if (!in_array($image['format_dest'],$gd_formats)
-		  OR ($image['format_dest']=='gif' AND !function_exists('ImageGif'))
-		  ) {
+		if (is_array($image)
+		AND ( !in_array($image['format_dest'],$gd_formats)
+			OR ($image['format_dest']=='gif' AND !function_exists('ImageGif'))
+		)) {
 			if ($image['format_source'] == 'jpg')
 				$formats_sortie = array('jpg','png','gif');
 			else // les gif sont passes en png preferentiellement pour etre homogene aux autres filtres images
@@ -1014,10 +1015,10 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 		}
 	}
 
-	if (!$image)
+	if (!is_array($image))
 		$image = _image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}",$format_sortie,$fonction);
 
-	if (!$image OR !$image['largeur'] OR !$image['hauteur']){
+	if (!is_array($image) OR !$image['largeur'] OR !$image['hauteur']){
 		spip_log("image_reduire_src:pas de version locale de $img");
 		// on peut resizer en mode html si on dispose des elements
 		if ($srcw = extraire_attribut($img, 'width')
