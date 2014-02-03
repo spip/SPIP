@@ -212,6 +212,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_administrateurs' => 'Administrátori',
 	'info_administrer_rubrique' => 'Môžete riadiť túto rubriku',
 	'info_adresse' => 'na túto adresu:',
+	'info_adresse_desinscription' => 'Adresa na odhlásenie',
 	'info_adresse_url' => 'URL verejne prístupnej stránky',
 	'info_afficher_par_nb' => 'Zobraziť po',
 	'info_aide_en_ligne' => 'Online pomoc k SPIPu',
