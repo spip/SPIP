@@ -121,7 +121,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_periode_abbr' => 'Del @dtart@@date_debut@@dtabbr@ al @dtend@@date_fin@@dtabbr@',
 	'date_fmt_periode_from' => 'Del',
 	'date_fmt_periode_to' => 'al',
-	'date_fmt_saison_annee' => '@saison@ @annee@',
 	'date_heures' => 'horas',
 	'date_hier' => 'ayer',
 	'date_il_y_a' => 'hace @delai@',
