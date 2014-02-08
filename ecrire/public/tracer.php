@@ -41,6 +41,8 @@ function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 	static $tt = 0, $nb=0;
 	global $tableau_des_temps;
 
+	include_spip('inc/filtres_mini');
+
 	$x = _request('var_mode_objet');
 	if (isset($GLOBALS['debug']['aucasou'])) {
 		list(, $boucle, $serveur, $contexte) = $GLOBALS['debug']['aucasou'];
