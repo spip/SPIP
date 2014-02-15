@@ -44,6 +44,8 @@ function protege_champ($texte){
 			) {
 				$texte = spip_htmlspecialchars($texte,ENT_QUOTES);
 		}
+		elseif(is_bool($texte))
+			$texte = ($texte?'1':'');
 	}
 	return $texte;
 }
