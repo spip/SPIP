@@ -12,6 +12,17 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Retourne les données d'un texte au format CSV
+ *
+ * @param string $t
+ *     Contenu du CSV
+ * @return array
+ *     Tableau des données en 3 index :
+ *     - Liste des noms des colonnes
+ *     - Liste des valeurs de chaque ligne et chaque colonne
+ *     - Titre du tableau (si une seule colonne) 
+**/
 function analyse_csv($t)
 {
 	$virg = substr_count($t, ',');
@@ -83,7 +94,7 @@ function analyse_csv($t)
 	foreach($lignes as &$l) {
 		$l = explode($sep, $l);
 	}
-	return array(explode($sep, $entete), $lignes);
+	return array(explode($sep, $entete), $lignes, $caption);
 }
 
 
