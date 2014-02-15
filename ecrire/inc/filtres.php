@@ -1589,7 +1589,7 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 			}
 		}else{
 			if($dtabbr && $dtstart)
-				$s = $dtstart.spip_ucfirst($s).$dabbr;
+				$s = $dtstart.spip_ucfirst($s).$dtabbr;
 			else
 				$s = spip_ucfirst($s);
 		}
