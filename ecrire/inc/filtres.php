@@ -1308,7 +1308,10 @@ function affdate_base($numdate, $vue, $options = array()) {
 			$jourmois = _T('date_de_mois_'.$mois, array('j'=>$jour, 'nommois'=>$nommois));
 		else
 			$jourmois = $nommois;
-	} else $nommois = '';
+	} else {
+		$nommois = '';
+		$jourmois = '';
+	}
 
 	if ($annee < 0) {
 		$annee = -$annee." "._T('date_avant_jc');
@@ -2014,12 +2017,27 @@ function alterner($i) {
 	return $args[(intval($i)-1)%($num-1)+1];
 }
 
-// recuperer un attribut d'une balise html
-// ($complet demande de retourner $r)
-// la regexp est mortelle : cf. tests/filtres/extraire_attribut.php
-// Si on a passe un tableau de balises, renvoyer un tableau de resultats
-// (dans ce cas l'option $complet n'est pas disponible)
-// http://doc.spip.org/@extraire_attribut
+
+/**
+ * Récupérer un attribut d'une balise HTML
+ *
+ * la regexp est mortelle : cf. `tests/unit/filtres/extraire_attribut.php`
+ * Si on a passé un tableau de balises, renvoyer un tableau de résultats
+ * (dans ce cas l'option `$complet` n'est pas disponible)
+ * 
+ * @param string|array $balise
+ *     Texte ou liste de textes dont on veut extraire des balises
+ * @param string $attribut
+ *     Nom de l'attribut désiré
+ * @param bool $complet
+ *     True pour retourner un tableau avec
+ *     - le texte de la balise
+ *     - l'ensemble des résultats de la regexp ($r)
+ * @return string|array
+ *     - Texte de l'attribut retourné, ou tableau des texte d'attributs
+ *       (si 1er argument tableau)
+ *     - Tableau complet (si 2e argument)
+**/
 function extraire_attribut($balise, $attribut, $complet = false) {
 	if (is_array($balise)) {
 		array_walk($balise,
@@ -2035,7 +2053,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 	.'(?:=\s*("[^"]*"|\'[^\']*\'|[^\'"]\S*))?)()([^>]*>.*),isS',
 
 	$balise, $r)) {
-		if ($r[3][0] == '"' || $r[3][0] == "'") {
+		if (isset($r[3][0]) and ($r[3][0] == '"' || $r[3][0] == "'")) {
 			$r[4] = substr($r[3], 1, -1);
 			$r[3] = $r[3][0];
 		} elseif ($r[3]!=='') {
