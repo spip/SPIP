@@ -1,12 +1,20 @@
 <?php
-/* 
+
+/**
+ * Gestion des verrous NFS
  *
- *
- * function: nfslock
- * original author: Chuck Cranor <chuck@maria.wustl.edu>
- * rewritten by: Alexis Rosen <alexis@panix.com>
- * rewritten by: Cedric Morin <cedric@yterium.com> for php&SPIP
- *
+ * @package SPIP\Core\NFS
+**/
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+include_spip('inc/acces');
+define('_DEFAULT_LOCKTIME',60);
+define('_NAME_LOCK','spip_nfs_lock');
+
+/**
+ * Crée un verrou pour NFS
+ * 
  * (Excerpts from Chuck's notes:
  *   this becomes complex, due to our dear friend, the NFS mounted mail spool.
  *   the netbsd code didn't do this properly, as far as I could tell.
@@ -82,15 +90,14 @@
  *
  * Change comments drastically.
  *
+ * @author Chuck Cranor <chuck@maria.wustl.edu> (original author)
+ * @author Alexis Rosen <alexis@panix.com> (rewritter)
+ * @author Cedric Morin <cedric@yterium.com> (rewritter for php&SPIP)
+ *
+ * @param string $fichier Chemin du fichier
+ * @param int $max_age Age maximum du verrou
+ * @return int|bool Timestamp du verrou, false si erreur
  */
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
-include_spip('inc/acces');
-define('_DEFAULT_LOCKTIME',60);
-define('_NAME_LOCK','spip_nfs_lock');
-
-// http://doc.spip.org/@spip_nfslock
 function spip_nfslock($fichier,$max_age=0) {
 	$tries = 0;
 		
@@ -174,12 +181,9 @@ function spip_nfslock($fichier,$max_age=0) {
 	return false; //(NFSL_LOCKED);
 }
 
-/*
- * function: nfsunlock
- * author: Alexis Rosen <alexis@panix.com>
- *
- * Unlock an nfslock()ed file.
- *
+/**
+ * Unlock an nfslock()ed file
+ * 
  * This can get tricky because the lock may have expired (perhaps even
  * during a process that should be "atomic"). We have to make sure we don't
  * unlock some other process' lock, and return a panic code if we think our
@@ -208,9 +212,15 @@ function spip_nfslock($fichier,$max_age=0) {
  * In practice, a return code of NFSL_LOST or NFSL_STOLEN will virtually never
  * happen unless someone is violating the locking protocol.
  *
+ * @author Alexis Rosen <alexis@panix.com>
+ * @see spip_nfslock
+ *
+ * @param string $fichier Chemin du fichier
+ * @param bool $birth Timestamp de l'heure de création du verrou
+ * @param int $max_age Age maximum du verrou
+ * @param bool $test Mode de test
+ * return bool true si déverrouillé, false sinon
  */
-
-// http://doc.spip.org/@spip_nfsunlock
 function spip_nfsunlock($fichier, $birth, $max_age=0, $test = false) {
 	$id = creer_uniqid();
 	if (!$max_age) $max_age = _DEFAULT_LOCKTIME;
@@ -272,13 +282,8 @@ function spip_nfsunlock($fichier, $birth, $max_age=0, $test = false) {
 }
 
 
-/*
- * function: nfslock_test
- * author: Alexis Rosen <alexis@panix.com>
- *
+/**
  * Test a lock to see if it's still valid.
- *
- * See the comments in nfsunlock() about lost and stolen locks.
  *
  * Args, return codes, and behavior are identical to nfsunlock except
  * that nfslock_test doesn't remove the lock. NFSL_OK means the lock is
@@ -287,9 +292,14 @@ function spip_nfsunlock($fichier, $birth, $max_age=0, $test = false) {
  *
  * The source for this routine is almost identical to nfsunlock(), but it's
  * coded separately to make things as clear as possible.
+ * @author Alexis Rosen <alexis@panix.com>
+ * @see spip_nfsunlock() about lost and stolen locks.
+ *
+ * @param string $fichier Chemin du fichier
+ * @param bool $birth Timestamp de l'heure de création du verrou
+ * @param int $max_age Age maximum du verrou
+ * return bool true si déverrouillé, false sinon
  */
-
-// http://doc.spip.org/@spip_nfslock_test
 function spip_nfslock_test($fichier, $birth, $max_age=0) {
 	return spip_nfsunlock($fichier, $birth, $max_age, true);
 }
