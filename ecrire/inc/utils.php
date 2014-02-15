@@ -1031,7 +1031,7 @@ function _chemin($dir_path=NULL){
 	// Et le(s) dossier(s) des squelettes nommes
 	if (strlen($GLOBALS['dossier_squelettes']))
 		foreach (array_reverse(explode(':', $GLOBALS['dossier_squelettes'])) as $d)
-			array_unshift($path_full, ($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
+			array_unshift($path_full, ((isset($d[0]) and $d[0] == '/') ? '' : _DIR_RACINE) . $d . '/');
 
 	$GLOBALS['path_sig'] = md5(serialize($path_full));
 	return $path_full;
