@@ -101,13 +101,13 @@ function ajouter_session($auteur) {
 
 	// Attention un visiteur peut avoir une session et un id=0,
 	// => ne pas melanger les sessions des differents visiteurs
-	$id_auteur = intval($auteur['id_auteur']);
+	$id_auteur = isset($auteur['id_auteur']) ? intval($auteur['id_auteur']) : 0;
 	if (!isset($_COOKIE['spip_session'])
 	OR !preg_match(',^'.$id_auteur.'_,', $_COOKIE['spip_session']))
 		$_COOKIE['spip_session'] = $id_auteur.'_'.md5(uniqid(rand(),true));
 
 	$fichier_session = fichier_session('alea_ephemere');
-	
+
 	// Si ce n'est pas un inscrit (les inscrits ont toujours des choses en session)
 	// on va vérifier s'il y a vraiment des choses à écrire
 	if (!$id_auteur){
@@ -139,7 +139,7 @@ function ajouter_session($auteur) {
 	if (!isset($auteur['ip_change'])) $auteur['ip_change'] = false;
 
 	if (!isset($auteur['date_session'])) $auteur['date_session'] = time();
-	if (is_string($auteur['prefs']))
+	if (isset($auteur['prefs']) and is_string($auteur['prefs']))
 		$auteur['prefs'] = unserialize($auteur['prefs']);
 
 	if (!ecrire_fichier_session($fichier_session, $auteur)) {
@@ -267,7 +267,7 @@ function session_get($nom) {
 function session_set($nom, $val=null) {
 	// On ajoute la valeur dans la globale
 	$GLOBALS['visiteur_session'][$nom] = $val;
-	
+
 	ajouter_session($GLOBALS['visiteur_session']);
 	actualiser_sessions($GLOBALS['visiteur_session']);
 }
@@ -278,12 +278,10 @@ function session_set($nom, $val=null) {
  * mettre a jour les fichiers de session de l'auteur en question.
  * (auteurs identifies seulement)
  *
- * http://doc.spip.org/@actualiser_sessions
- *
  * @param array $auteur
  */
 function actualiser_sessions($auteur) {
-	if (!$id_auteur = intval($auteur['id_auteur']))
+	if (!isset($auteur['id_auteur']) OR !$id_auteur = intval($auteur['id_auteur']))
 		return;
 
 	// memoriser l'auteur courant (celui qui modifie la fiche)
@@ -403,14 +401,12 @@ function rejouer_session()
 /**
  * On verifie l'IP et le nom du navigateur
  *
- * http://doc.spip.org/@hash_env
- *
  * @return string
  */
 function hash_env() {
   static $res ='';
   if ($res) return $res;
-  return $res = md5($GLOBALS['ip'] . $_SERVER['HTTP_USER_AGENT']);
+  return $res = md5($GLOBALS['ip'] . (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : ''));
 }
 
 ?>

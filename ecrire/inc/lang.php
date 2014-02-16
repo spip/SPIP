@@ -353,10 +353,12 @@ function utiliser_langue_visiteur() {
 		if (changer_langue($l = $GLOBALS['visiteur_session']['lang']))
 			return $l;
 
-	foreach (explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $s)  {
-		if (preg_match('#^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$#i', trim($s), $r)) {
-			if (changer_langue($l=strtolower($r[1])))
-				return $l;
+	if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+		foreach (explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $s)  {
+			if (preg_match('#^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$#i', trim($s), $r)) {
+				if (changer_langue($l=strtolower($r[1])))
+					return $l;
+			}
 		}
 	}
 
