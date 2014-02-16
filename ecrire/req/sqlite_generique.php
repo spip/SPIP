@@ -2144,6 +2144,7 @@ function _sqlite_modifier_table($table, $colonne, $opt = array(), $serveur = '')
 	// copier dans destination (si differente de origine), sinon tmp
 	$table_copie = ($meme_table) ? $table_tmp : $table_destination;
 	$autoinc = (isset($keys['PRIMARY KEY'])
+					AND $keys['PRIMARY KEY']
 					AND stripos($keys['PRIMARY KEY'],',')===false
 					AND stripos($fields[$keys['PRIMARY KEY']],'default')===false);
 
