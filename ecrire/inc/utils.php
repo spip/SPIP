@@ -427,6 +427,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	// lire les variables et agir
 	foreach ($url as $n => $val) {
 		if (preg_match($regexp, urldecode($val), $r)) {
+			$r = array_pad($r, 3, null);
 			if ($v === NULL) {
 				return $r[2]?substr($r[2],1):'';
 			}
@@ -446,16 +447,18 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	// traiter les parametres pas encore trouves
 	if ($v === NULL
 	AND $args = func_get_args()
-	AND count($args)==2)
+	AND count($args)==2) {
 		return $v;
-	elseif ($testv) {
+	} elseif ($testv) {
 		foreach($ajouts as $k => $n) {
-		  if (!is_array($v))
-		    $url[] = $k .'=' . $u;
-		  else {
-		  	$id = (substr($k,-2) == '[]') ? $k : ($k ."[]");
-		    foreach ($v as $w) $url[]= $id .'=' . $w;
-		  }
+			if (!is_array($v))
+				$url[] = $k .'=' . $u;
+			else {
+				$id = (substr($k,-2) == '[]') ? $k : ($k ."[]");
+				foreach ($v as $w) {
+					$url[] = $id .'=' . (is_array($w) ? 'Array' : $w);
+				}
+			}
 		}
 	}
 
