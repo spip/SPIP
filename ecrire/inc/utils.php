@@ -2232,8 +2232,8 @@ function init_var_mode(){
 					// sinon tant pis
 				}
 			}
-			if (!defined('_VAR_MODE')) define('_VAR_MODE',false);
 		}
+		if (!defined('_VAR_MODE')) define('_VAR_MODE',false);
 		$done = true;
 	}
 }
