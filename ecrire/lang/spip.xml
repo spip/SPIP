@@ -69,12 +69,12 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr" total="632" traduits="632" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_fem" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_fem" total="632" traduits="631" relire="0" modifs="1" nouveaux="0" pourcent="99.84">
+	<langue code="fr_fem" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_fem" total="632" traduits="632" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
 		<traducteur nom="denisb" lien="http://trad.spip.net/auteur/denisb" />
 		<traducteur nom="touti" lien="http://trad.spip.net/auteur/touti" />
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_tu" total="632" traduits="631" relire="0" modifs="1" nouveaux="0" pourcent="99.84">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_tu" total="632" traduits="632" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
@@ -124,7 +124,7 @@
 	<langue code="ne" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ne" total="632" traduits="543" relire="0" modifs="27" nouveaux="62" pourcent="85.92">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=nl" total="632" traduits="631" relire="0" modifs="1" nouveaux="0" pourcent="99.84">
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=nl" total="632" traduits="632" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="gerbrand" lien="http://trad.spip.net/auteur/gerbrand" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
