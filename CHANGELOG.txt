@@ -28,7 +28,7 @@ r80163 | b_b       |  (lun. 20 janv. 2014) | Fix de r80130 qui reportait les cha
 r80196 | marcimat  |  (mer. 22 janv. 2014) | Report de r80194 : Ajout des attributs type sur les boutons (relatif à http://core.spip.org/issues/3133) nécessaires à faire fonctionner l'ajout/suppression des liaisions, suite aux évolutions du plugins forms de jquery
 r80225 | b_b       |  (ven. 24 janv. 2014) | oubli malheureux dans r80059
 r80227 | b_b       |  (ven. 24 janv. 2014) | réparer la boulette de r80059
-r80421 | erational@erational.org |  (lun. 03 févr. 2014) | mise à jour de version pour tenir compte des mises à jour de langue (préfixe grenier) et forcer le zip sur files.spip.org à se rafraichir
+r80421 | erational |  (lun. 03 févr. 2014) | mise à jour de version pour tenir compte des mises à jour de langue (préfixe grenier) et forcer le zip sur files.spip.org à se rafraichir
 r80558 | cedric    |  (ven. 07 févr. 2014) | Revert de r80130 qui introduit des incompatibilites (chaines de langue supprimees)svn merge -r80130:80129 .
 r80682 | denisb    |  (ven. 14 févr. 2014) | compresseur/inc/compresseur_minifier.php : si elle est égale à 0, enlever la partie entière des unités décimales  (report de r80681).
 r80724 | cedric    |  (sam. 15 févr. 2014) | Renommer le dossier qui ne contient pas de tests unitaires mais des squelettes de test et debug
@@ -38,9 +38,9 @@ r80764 | eric      |  (dim. 16 févr. 2014) | Oups, oubli d'incrément de versio
 r80782 | cedric    |  (dim. 16 févr. 2014) | PHPDoc
 r80795 | cedric    |  (lun. 17 févr. 2014) | bugfix sur |image_fond_transparent : un if (true) de debug tentait de creer l'image meme si ce n'était pas nécessaire, et du coup la source pouvait être manquante (image intermédiaire non reconstruite car creer=false) ce qui provoquait une erreur squelette
 r80865 | cedric    |  (mar. 18 févr. 2014) | un pipeline pre_echappe_html_propre qui voit passer le texte brut de propre() avant tout echappement htmlLe nommage est verbeux, mais on pourrait etre amené à intégrer un pipeline symétrique dans typo() et cela permetta de les distinguer
-r80916 | severo@rednegra.net |  (mer. 19 févr. 2014) | forum - configuration pour désactiver la prévisualisation des messages.Pas actif, pour l'instant. Par défaut, la prévisualisationdes messages est activée (comportement actuel).
-r80917 | severo@rednegra.net |  (mer. 19 févr. 2014) | oups
-r80918 | severo@rednegra.net |  (mer. 19 févr. 2014) | oups 2 - pas commité au bon endroit.On va commiter dans http://zone.spip.org/trac/spip-zone/log/_core_/plugins/forumpour spip 3.1
+r80916 | severo    |  (mer. 19 févr. 2014) | forum - configuration pour désactiver la prévisualisation des messages.Pas actif, pour l'instant. Par défaut, la prévisualisationdes messages est activée (comportement actuel).
+r80917 | severo    |  (mer. 19 févr. 2014) | oups
+r80918 | severo    |  (mer. 19 févr. 2014) | oups 2 - pas commité au bon endroit.On va commiter dans http://zone.spip.org/trac/spip-zone/log/_core_/plugins/forumpour spip 3.1
 
 SPIP-Core spip-3.0.13 -> spip-3.0.14  19 janvier 2014
 -------------------------------------------------------------
