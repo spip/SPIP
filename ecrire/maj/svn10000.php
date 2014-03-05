@@ -343,6 +343,10 @@ function maj_liens($pivot, $l='') {
 		if (!$desc = $trouver_table($ancienne_table))
 			return;
 
+		// securite pour ne pas perdre de donnees
+		if (!$trouver_table($liens))
+			return;
+
 		$champs = $desc['field'];
 		if (isset($champs['maj'])) unset($champs['maj']);
 		if (isset($champs[$primary])) unset($champs[$primary]);
