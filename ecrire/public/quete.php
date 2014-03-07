@@ -413,7 +413,7 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 				$exposer[$m][$type][$principal] = true;
 				if ($type == 'id_mot'){
 					if (!$parent) {
-						$parent = sql_getfetsel('id_groupe','spip_mots',"id_mot=" . $principal, '','','','',$connect);
+						$parent = sql_getfetsel('id_groupe','spip_mots',"id_mot=" . intval($principal), '','','','',$connect);
 					}
 					if ($parent)
 						$exposer[$m]['id_groupe'][$parent] = true;
