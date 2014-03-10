@@ -10,59 +10,62 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
-/*
- * CVT Multi etapes
- * Module facilitant l'ecriture de formulaires CVT
- * en plusieurs etapes
+/**
+ * CVT Multi étapes
  *
- * #FORMULAIRE_TRUC
+ * Module facilitant l'écriture de formulaires CVT
+ * en plusieurs étapes.
+ *
+ * `#FORMULAIRE_TRUC`
  *
  * Squelette :
- * Chaque etape est representee par un squelette independant qui doit
- * implementer un formulaire autonome pour les saisies de l'etape n
- * formulaires/truc.html pour l'etape 1
- * formulaires/truc_2.html pour l'etape 2
- * formulaires/truc_n.html pour l'etape n
+ * Chaque étape est representée par un squelette indépendant qui doit
+ * implémenter un formulaire autonome pour les saisies de l'étape n :
  *
- * Si un squelette formulaires/truc_n.html manque pour l'etape n
- * c'est formulaires/truc.html qui sera utilise
- * (charge a lui de gerer le cas de cette etape)
+ * - formulaires/truc.html pour l'etape 1
+ * - formulaires/truc_2.html pour l'etape 2
+ * - formulaires/truc_n.html pour l'etape n
+ *
+ * Si un squelette `formulaires/truc_n.html` manque pour l'étape n
+ * c'est `formulaires/truc.html` qui sera utilisé
+ * (charge à lui de gérer le cas de cette étape).
  *
  * Charger :
- * formulaires_truc_charger_dist() :
+ * `formulaires_truc_charger_dist()` :
  *	passer '_etapes' => nombre total d'etapes de saisies (>1 !)
- *  indiquer toutes les valeurs a saisir sur toutes les pages
+ *  indiquer toutes les valeurs à saisir sur toutes les pages
  *  comme si il s'agissait d'un formulaire unique
  *
- * Verifier :
- * le numero d'etape courante est disponible dans $x=_request('_etape'), si necessaire
- * _request() permet d'acceder aux saisies effectuees depuis l'etape 1,
- * comme si les etapes 1 a $x avaient ete saisies en une seule fois
+ * Vérifier :
+ * Le numero d'étape courante est disponible dans `$x=_request('_etape')`, si nécessaire
+ * `_request()` permet d'accéder aux saisies effectuées depuis l'étape 1,
+ * comme si les étapes 1 a `$x` avaient été saisies en une seule fois
  *
- * formulaires_truc_verifier_1_dist() : verifier les saisies de l'etape 1 uniquement
- * formulaires_truc_verifier_2_dist() : verifier les saisies de l'etape 2
- * formulaires_truc_verifier_n_dist() : verifier les saisies de l'etape n
+ * - formulaires_truc_verifier_1_dist() : verifier les saisies de l'etape 1 uniquement
+ * - formulaires_truc_verifier_2_dist() : verifier les saisies de l'etape 2
+ * - formulaires_truc_verifier_n_dist() : verifier les saisies de l'etape n
  *
- * Il est possible d'implementer toutes les verifications dans une fonction unique qui sera alors appelee
- * avec en premier argument le numero de l'etape a verifier
- * formulaires_truc_verifier_etape_dist($etape,...) : verifier les saisies de l'etape $etape uniquement
+ * Il est possible d'implémenter toutes les vérifications dans une fonction unique 
+ * qui sera alors appelée avec en premier argument le numero de l'étape à vérifier
+ * `formulaires_truc_verifier_etape_dist($etape,...)` : vérifier les saisies 
+ * de l'étape `$etape` uniquement.
  *
- * A chaque etape x, les etapes 1 a x sont appelees en verification
- * pour verifier l'absence de regression dans la validation (erreur, tentative de reinjection ...)
- * en cas d'erreur, la saisie retourne a la premiere etape en erreur.
- * en cas de succes, l'etape est incrementee, sauf si c'est la derniere.
- * Dans ce dernier cas on declenche traiter()
+ * À chaque étape x, les étapes 1 a x sont appelées en vérification
+ * pour vérifier l'absence de régression dans la validation (erreur, tentative de réinjection ...)
+ * en cas d'erreur, la saisie retourne à la première étape en erreur.
+ * en cas de succès, l'étape est incrémentée, sauf si c'est la dernière.
+ * Dans ce dernier cas on déclenche `traiter()`.
  *
- * Traiter
- * formulaires_truc_traiter_dist() : ne sera appele que lorsque *toutes*
- * les etapes auront ete saisies sans erreur.
- * La fonction traiter peut donc traiter l'ensemble des saisies comme si il s'agissait d'un formulaire unique
- * dans lequel toutes les donnees auraient ete saisies en une fois
+ * Traiter :
+ * `formulaires_truc_traiter_dist()` : ne sera appelé que lorsque **toutes**
+ * les étapes auront été saisies sans erreur.
  *
- *
+ * La fonction traiter peut donc traiter l'ensemble des saisies comme si il 
+ * s'agissait d'un formulaire unique dans lequel toutes les données auraient 
+ * été saisies en une fois.
  */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Reinjecter dans _request() les valeurs postees
