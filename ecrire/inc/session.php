@@ -10,14 +10,16 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'authentification par sessions
+ * à utiliser pour valider l'accès (bloquant)
+ * ou pour reconnaître un utilisateur (non bloquant)
+ *
+ * @package SPIP\Core\Session
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*
- * Gestion de l'authentification par sessions
- * a utiliser pour valider l'acces (bloquant)
- * ou pour reconnaitre un utilisateur (non bloquant)
- *
- */
 
 $GLOBALS['visiteur_session'] = ''; # globale decrivant l'auteur
 
