@@ -433,7 +433,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='', $env=array()) {
 	$params = array_filter(explode('|', $params));
 	if ($params) {
 		list(,$soustype) = each($params);
-		$soustype = strtolower($soustype);
+		$soustype = strtolower(trim($soustype));
 		if (in_array($soustype,
 		array('left', 'right', 'center', 'ajax'))) {
 			list(,$soustype) = each($params);
