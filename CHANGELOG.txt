@@ -1,3 +1,30 @@
+
+SPIP-Core spip-3.0.15 -> spip-3.0.16  13 mars 2014
+-------------------------------------------------------------
+r21232 | cedric    |  (sam. 22 févr. 2014) | Ferme #3143 : pipelines pre_edition et post_edition dans rubrique_instituer
+r21236 | cedric    |  (dim. 23 févr. 2014) | Report de r21211 : Depuis r14416 les tests simpletest ne fonctionnaient plus car ne récupéraient plus le tableau des erreurs du debusqueur. On permet d'obtenir ces informations (et d'effacer le tableau) via un 3e argument.
+r21237 | denisb    |  (lun. 24 févr. 2014) | ecrire/inc_version.php : "Vingt fois sur le métier remettez votre ouvrage ; Polissez-le sans cesse et le repolissez : Ajoutez quelques fois et souvent effacez. "
+r21238 | denisb    |  (lun. 24 févr. 2014) | ecrire/paquet.xml : vingt-et-un ! (voir commit précédent).
+r21241 | cedric    |  (mar. 04 mars 2014)  | Ferme #3176 : quand  ==  ==  on reste sur le cas par defaut de  ==  (severo)
+r21243 | cedric    |  (mer. 05 mars 2014)  | une securite qui evite de perdre des donnees dans le cas idiot ou la table _liens n'est pas creee
+r21246 | cedric    |  (ven. 07 mars 2014)  | Un echappement manquant dans une requete SQL, c'est mal (Philippe Baumgart et al)
+r21253 | cedric    |  (sam. 08 mars 2014)  | la fonction titre_automatique fait appel à la fonction surchargeable titrer_contenu qui calcul un titre pour un contenu donné.La fonction titrer_contenu peut recevoir le contenu sous forme de tableau, ou utiliser les valeurs du POST
+r21258 | cedric    |  (jeu. 13 mars 2014)  | Report de http://zone.spip.org/trac/spip-zone/changeset/81334 : v 1.1.9 : on est plus radical avec les tentatives d'injection par connect : aucune chance que ce soit une demande licite, on bloque donc le hit, cela evite de generer des cache compile foireux
+
+SPIP-plugins-dist spip-3.0.15 -> spip-3.0.16  13 mars 2014
+-------------------------------------------------------------
+r80997 | cedric    |  (dim. 23 févr. 2014)| Report de r80808 : Mise à jour du lanceur de simpletest
+r80998 | cedric    |  (dim. 23 févr. 2014)| Report de r80752 : Adaptation des tests à la nouvelle version de SimpleTest (et notices php en moins)
+r81069 | cy_altern |  (mer. 26 févr. 2014)| report 81067
+r81101 | cy_altern |  (jeu. 27 févr. 2014)| un GET sans SET: la variable name est dans ENV
+r81208 | cedric    |  (mer. 05 mars 2014) | Report de http://core.spip.org/projects/spip/repository/revisions/21242 : ne pas injecter un largeur="0" et hauteur="0" si c'est une image (distante) dont on ne connait pas les dimensions.(laisser faire le navigateur)
+r81254 | cedric    |  (ven. 07 mars 2014) | bugfix : lorsque le type d'URL était fixé par la globale et non par la meta, le formulaire d'edition ne fonctionnait pas bien (il ne chargeait pas le bon module)
+r81266 | b_b       |  (ven. 07 mars 2014) | report plus que tardif de r65147 qui fixait http://core.spip.org/issues/2827 (vraiment limiter le sujet à 3 caractères min)
+r81273 | eric      |  (sam. 08 mars 2014) | Ajout d'une autorisation générique participer aux forums privés pour un objet quelconque. Cette autorisation permet d'afficher ou non les boutons "poster un message" ou "répondre au message".Par défaut, cette autorisation est toujours vraie.Tout objet peut la surcharger.
+r81321 | cedric    |  (jeu. 13 mars 2014) | Report de r81300 : reparer le if_stri automatique sur les if_str ayant des lettres
+r81322 | cedric    |  (jeu. 13 mars 2014) | Report de r81320 : complement de r81300 : il faut initialiser la regle avant de la rejeter sur le critere if_str/if_stri car il peuvent etre optimise par l'initialisation (un if_str sur une chaine case sensitive est automatiquement transforme en if_stri)
+r81332 | cedric    |  (jeu. 13 mars 2014) | Upgrade de la librairie CSSTidy en v1.5.2
+
 SPIP-Core spip-3.0.14 -> spip-3.0.15  21 février 2014
 -------------------------------------------------------------
 
