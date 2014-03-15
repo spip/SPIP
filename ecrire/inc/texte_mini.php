@@ -215,17 +215,6 @@ $preg='') {
 	if ($no_transform)
 		return $letexte;
 
-	// Gestion du TeX
-	// code mort sauf si on a personalise _PROTEGE_BLOCS sans y mettre <math>
-	// eviter la rupture de compat en branche 3.0
-	// a supprimer en branche 3.1
-	if (strpos($preg ? $preg : _PROTEGE_BLOCS,'code')!==false){
-		if (strpos($letexte, "<math>") !== false) {
-			include_spip('inc/math');
-			$letexte = traiter_math($letexte, $source);
-		}
-	}
-
 	// Echapper le php pour faire joli (ici, c'est pas pour la securite)
 	// seulement si on a echappe les <script>
 	// (derogatoire car on ne peut pas faire passer < ? ... ? >
