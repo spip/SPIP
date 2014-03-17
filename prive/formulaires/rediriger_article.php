@@ -38,6 +38,15 @@ function formulaires_rediriger_article_charger_dist($id_article,$retour=''){
 	return $valeurs;
 }
 
+function formulaires_rediriger_article_verifier_dist($id_article,$retour=''){
+	$erreurs = array();
+
+	if(($redirection = _request('redirection')) == $id_article || $redirection == 'art'.$id_article)
+		$erreurs['redirection'] = 'Vous essayez de rediriger l\'article sur lui-même.';
+
+	return $erreurs;
+}
+
 function formulaires_rediriger_article_traiter_dist($id_article,$retour=''){
 
 	$url = preg_replace(",^\s*https?://$,i", "", rtrim(_request('redirection')));
