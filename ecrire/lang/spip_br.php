@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Kemmañ ar ger-stur-mañ',
 	'admin_modifier_rubrique' => 'Kemmañ ar rubrikenn-mañ',
 	'admin_recalculer' => 'Hizivaat ar bajenn',
+	'afficher_calendrier' => 'kinnig an deiziater', # MODIF
 	'afficher_trad' => 'diskouez an troidigezhioù',
 	'alerte_maj_impossible' => '<b>Diwallit !</b> N’eus ket tu da hizivaat an diaz SQL etrezek ar stumm @version@, marteze abalamour d’ur gudenn aotre evit kemmañ an diaz titouroù. Mar plij kit e darempred gant ho herberc’hier.',
 	'alerte_modif_info_concourante' => 'DIWALLIT : Kemmet eo bet an titour-mañ en ul lec’h all. Setu an talvoud nevez :',
