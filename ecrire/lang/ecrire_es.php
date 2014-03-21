@@ -410,6 +410,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 	'info_redaction_en_cours' => 'EN CURSO DE REDACCIÓN',
 	'info_redirection' => 'Redirección',
 	'info_redirection_activee' => 'La redirección está activada.',
+	'info_redirection_boucle' => 'Usted esta probando redirigir el artículo hacía el mismo.',
 	'info_redirection_desactivee' => 'La redirección se ha suprimido.',
 	'info_refuses' => 'Sus artículos rechazados',
 	'info_reglage_ldap' => 'Opciones: <b>Ajustes de la importación LDAP</b>',
