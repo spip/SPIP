@@ -424,6 +424,7 @@ cez verejne prístupnú stránku? Ak s tým súhlasíte, návštevníci sa bud
 	'info_redaction_en_cours' => 'UPRAVUJE SA',
 	'info_redirection' => 'Presmerovanie',
 	'info_redirection_activee' => 'Presmerovanie je aktivované.',
+	'info_redirection_boucle' => 'Môžete skúsiť presmerovať samotný článok.',
 	'info_redirection_desactivee' => 'Presmerovanie bolo odstránené.',
 	'info_refuses' => 'Vaše zamietnuté články',
 	'info_reglage_ldap' => 'Možnosti: <b>Prispôsobenie importu LDAP</b>',
