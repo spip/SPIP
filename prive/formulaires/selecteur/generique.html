@@ -47,10 +47,13 @@ afficher la selection dans un ul class item_picked
 #SET{objet, #ENV{objet,racine}}
 #SET{id_objet, #ENV{id_objet,0}}
 
-[(#REM) Attention si l'objet passé ne fait pas parti des objets adéquats, on va sur la racine ]
+[(#REM)
+	Si l'objet passé ne fait pas parti des objets adéquats, ou si c'est la racine
+	alors on regarde si on doit forcer la racine sur autre chose, et sinon on retombe sur la racine classique
+]
 [(#GET{objet}|table_objet|in_array{#GET{objets/afficher}}|non)
-	#SET{objet, racine}
-	#SET{id_objet, 0}
+	#SET{objet, #ENV{forcer_racine_objet,racine}}
+	#SET{id_objet, #ENV{forcer_racine_id_objet,0}}
 ]
 
 [(#REM) le container item_picker est ici pour etre voisin de item_picked ------]
