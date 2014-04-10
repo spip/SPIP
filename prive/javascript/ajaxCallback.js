@@ -430,6 +430,9 @@ jQuery.spip.setHistoryState = function(blocfrag){
 		id:blocfrag.attr('id'),
 		href: href
 	};
+	var ajaxid = blocfrag.attr('class').match(/\bajax-id-[\w-]+\b/);
+	if (ajaxid.length)
+		state["ajaxid"] = ajaxid[0];
 	// on remplace la variable qui decrit l'etat courant
 	// initialement vide
 	// -> elle servira a revenir dans l'etat courant
@@ -443,15 +446,21 @@ jQuery.spip.pushHistoryState = function(href, title){
 }
 
 window.onpopstate = function(popState){
-	if (popState.state && popState.state.id){
-		var blocfrag=jQuery('#'+popState.state.id);
-		if (blocfrag.length && popState.state.href) {
+	if (popState.state && popState.state.href){
+		var blocfrag=false;
+		if (popState.state.id){
+			blocfrag=jQuery('#'+popState.state.id);
+		}
+		if ((!blocfrag || !blocfrag.length) && popState.state.ajaxid){
+			blocfrag=jQuery('.ajaxbloc.'+popState.state.ajaxid);
+		}
+		if (blocfrag && blocfrag.length==1) {
 			jQuery.spip.ajaxClick(blocfrag,popState.state.href,{history:false});
 			return true;
 		}
 		// si on revient apres avoir rompu la chaine ajax, on a pu perdre l'id #ghsidxx ajoute en JS
 		// dans ce cas on redirige hors ajax
-		else if(popState.state.href){
+		else {
 			window.location.href = popState.state.href;
 		}
 	}
