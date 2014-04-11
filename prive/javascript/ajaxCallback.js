@@ -486,7 +486,7 @@ jQuery.spip.setHistoryState = function(blocfrag){
 		href: href
 	};
 	var ajaxid = blocfrag.attr('class').match(/\bajax-id-[\w-]+\b/);
-	if (ajaxid.length)
+	if (ajaxid && ajaxid.length)
 		state["ajaxid"] = ajaxid[0];
 	// on remplace la variable qui decrit l'etat courant
 	// initialement vide
