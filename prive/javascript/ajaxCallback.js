@@ -619,13 +619,14 @@ jQuery.spip.makeAjaxUrl = function(href,ajax_env,origin){
  * @param object blocfrag
  * @param object options
  *   callback : fonction appelee apres le rechargement
+ *   href : url to load instead of origin url
  *   args : arguments passes a l'url rechargee (permet une modif du contexte)
  *   history : bool to specify if navigation history is modified by reload or not (false if not provided)
  */
 jQuery.spip.ajaxReload = function(blocfrag, options){
 	var ajax_env = blocfrag.attr('data-ajax-env');
 	if (!ajax_env || ajax_env==undefined) return;
-	var href = blocfrag.attr('data-url') || blocfrag.attr('data-origin');
+	var href = options.href || blocfrag.attr('data-url') || blocfrag.attr('data-origin');
 	if (href && typeof href != undefined){
 		options == options || {};
 		var callback=options.callback || null;
@@ -757,6 +758,7 @@ jQuery.fn.followLink = function(){
  * @param string ajaxid
  * @param object options
  *   callback : callback after reloading
+ *   href : url to load instead of origin url
  *   args : {arg:value,...} to pass tu the url
  *   history : bool to specify if navigation history is modified by reload or not (false if not provided)
  */
