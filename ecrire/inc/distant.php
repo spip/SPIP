@@ -480,7 +480,6 @@ function fichier_copie_locale($source){
 #$a['taille'] = intval
 #$a['extension'] = chaine
 #$a['fichier'] = chaine
-#$a['mime_type'] = chaine
 
 // http://doc.spip.org/@recuperer_infos_distantes
 function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image = true){
@@ -598,8 +597,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 		if (preg_match(',<title>(.*?)</title>,ims', $page, $regs))
 			$a['titre'] = corriger_caracteres(trim($regs[1]));
 		if (!$a['taille']) $a['taille'] = strlen($page); # a peu pres
-	}	
-	$a['mime_type']=$mime_type;
+	}
 
 	return $a;
 }

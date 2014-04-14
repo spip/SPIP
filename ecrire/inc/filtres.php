@@ -470,7 +470,7 @@ function recuperer_numero($texte) {
 	if (preg_match(
 	",^[[:space:]]*([0-9]+)([.)]|".chr(194).'?'.chr(176).")[[:space:]]+,S",
 	$texte, $regs))
-		return strval($regs[1]);
+		return intval($regs[1]);
 	else
 		return '';
 }
