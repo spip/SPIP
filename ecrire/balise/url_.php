@@ -80,7 +80,8 @@ function balise_URL__dist($p) {
 			$code = generer_generer_url($nom, $p);
 			if ($code === NULL) return NULL;
 		}
-		if ($p->etoile) $code = "str_replace('&amp;', '&', $code)";
+		if ($p->etoile)
+			$code = "str_replace('&amp;', '&', $code), false";
 		$p->code = "vider_url($code)";
 		$p->interdire_scripts = false;
 		return $p;
