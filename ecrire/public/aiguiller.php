@@ -19,7 +19,7 @@ function securiser_redirect_action($redirect){
 		$base = rtrim($GLOBALS['meta']['adresse_site'], '/') . '/';
 		// si l'url est une url du site, on la laisse passer sans rien faire
 		// c'est encore le plus simple
-		if (strncmp($redirect, $base, strlen($base)==0))
+		if (strncmp($redirect, $base, strlen($base))==0)
 			return $redirect;
 	}
 	spip_log("redirection vers '$redirect' de '$base' interdit");
