@@ -53,7 +53,7 @@ function enfant_rub($collection,$debut=0,$limite=500){
 
 			changer_typo($row['lang']);
 			$lang_dir = lang_dir($row['lang']);
-			$descriptif=propre($row['descriptif']);
+			$descriptif=image_reduire(propre($row['descriptif']),245,0);
 
 			if ($voir_logo) {
 				if ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on')) {
