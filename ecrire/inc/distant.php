@@ -169,10 +169,19 @@ function prepare_donnees_post($donnees, $boundary = '') {
 			$chaine = '';
 			if (is_array($donnees)) {
 				foreach ($donnees as $cle => $valeur) {
-					$chaine .= "\r\n--$boundary\r\n";
-					$chaine .= "Content-Disposition: form-data; name=\"$cle\"\r\n";
-					$chaine .= "\r\n";
-					$chaine .= $valeur;
+					if (is_array($valeur)) {
+						foreach ($valeur as $val2) {
+							$chaine .= "\r\n--$boundary\r\n";
+							$chaine .= "Content-Disposition: form-data; name=\"{$cle}[]\"\r\n";
+							$chaine .= "\r\n";
+							$chaine .= $val2;
+						}
+					} else {
+						$chaine .= "\r\n--$boundary\r\n";
+						$chaine .= "Content-Disposition: form-data; name=\"$cle\"\r\n";
+						$chaine .= "\r\n";
+						$chaine .= $valeur;
+					}
 				}
 				$chaine .= "\r\n--$boundary\r\n";
 			}
