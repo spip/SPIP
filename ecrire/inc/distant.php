@@ -184,7 +184,7 @@ function prepare_donnees_post($donnees, $boundary = '') {
 				foreach ($donnees as $cle => $valeur) {
 					if (is_array($valeur)) {
 						foreach ($valeur as $val2) {
-							$chaine[] = rawurlencode($cle).'='.rawurlencode($val2);
+							$chaine[] = rawurlencode($cle).'[]='.rawurlencode($val2);
 						}
 					} else {
 						$chaine[] = rawurlencode($cle).'='.rawurlencode($valeur);
