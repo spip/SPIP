@@ -10,16 +10,24 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'aide en ligne de SPIP
+ *
+ * L'aide en ligne de SPIP est disponible sous forme d'articles de www.spip.net
+ * qui ont des repères nommés arttitre, artdesc etc.
+ *
+ * La fonction `inc_aider_dist` reçoit soit ces repères, 
+ * soit le nom du champ de saisie, le nom du squelette le contenant et enfin
+ * l'environnement d'exécution du squelette (inutilisé pour le moment).
+ *
+ * Le tableau global `aider_index` donne ces repères.
+ * 
+ * @package SPIP\Core\Aider
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/filtres');
-
-// L'aide en ligne de SPIP est disponible sous forme d'articles de www.spip.net
-// qui ont des reperes nommes arrtitre, artdesc etc.
-// La fonction inc_aider(_dist) recoit soit ces reperes, 
-// soit le nom du champ de saisie, le nom du squelette le contenant et enfin
-// l'environnement d'execution du squelette (inutilise pour le moment).
-// Le tableau ci-dessous donne le repere correspondant a ces informations.
 
 $GLOBALS['aider_index'] = array(
 	'editer_article.html' => array (
@@ -54,18 +62,20 @@ $GLOBALS['aider_index'] = array(
 
 
 /**
- * Generer un lien d'aide (icone + lien)
+ * Générer un lien d'aide (icône + lien)
  *
+ * @uses aider_icone()
+ * 
  * @param string $aide
- * 		cle d'identification de l'aide souhaitee
+ * 		clé d'identification de l'aide souhaitée
  * @param strink $skel
  * 		Nom du squelette qui appelle ce bouton d'aide
  * @param array $env
  * 		Environnement du squelette
  * @param bool $aide_spip_directe
- * 		false : Le lien genere est relatif a notre site (par defaut)
- * 		true : Le lien est realise sur spip.net/aide/ directement ...
- * @return 
+ * 		false : Le lien généré est relatif à notre site (par défaut)
+ * 		true : Le lien est réalisé sur spip.net/aide/ directement...
+ * @return string
 **/
 function inc_aider_dist($aide='', $skel='', $env=array(), $aide_spip_directe = false) {
 	global $spip_lang, $aider_index;
@@ -91,7 +101,19 @@ function inc_aider_dist($aide='', $skel='', $env=array(), $aide_spip_directe = f
 	
 	return aider_icone($url);
 }
-
+/**
+ * Créer l'icône d'aide
+ * 
+ * @global string $spip_lang
+ * @global string $spip_lang_rtl
+ * 
+ * @param string $url
+ *         URL vers l'aide
+ * @param string $clic
+ *         Contenu de la balise de lien.
+ * @return string
+ *         Icone d'aide
+ */
 function aider_icone($url, $clic= '')
 {
 	global $spip_lang, $spip_lang_rtl;
@@ -109,15 +131,35 @@ function aider_icone($url, $clic= '')
 	. "</a>";
 }
 
-// en hebreu le ? ne doit pas etre inverse
-// http://doc.spip.org/@aide_lang_dir
+/**
+ * Calcul de la direction du texte et la mise en page selon la langue
+ *
+ * En hébreu le ? ne doit pas être inversé.
+ * 
+ * @param string $spip_lang
+ * @param string $spip_lang_rtl
+ * @return string
+ */
 function aide_lang_dir($spip_lang,$spip_lang_rtl) {
 	return ($spip_lang<>'he') ? $spip_lang_rtl : '';
 }
 
-// Les sections d'un fichier aide sont reperees ainsi:
+/**  Les sections d'un fichier aide sont reperées ainsi. */
 define('_SECTIONS_AIDE', ',<h([12])(?:\s+class="spip")?'. '>([^/]+?)(?:/(.+?))?</h\1>,ism');
-
+/**
+ * Création des fichiers de l'aide de SPIP
+ * 
+ * @uses _DIR_AIDE 
+ * @uses _SECTIONS_AIDE
+ * 
+ * @uses copie_locale()
+ * @uses aide_fixe_img()
+ * @uses aide_section()
+ * 
+ * @param string $path
+ * @param array $help_server
+ * @return array
+ */
 function aide_fichier($path, $help_server) {
 
 	$md5 = md5(serialize($help_server));
@@ -196,17 +238,37 @@ function aide_fichier($path, $help_server) {
 	ecrire_fichier ($fichier_aide, $contenu);
 	return array($contenu, time());
 }
-
+/**
+ * Générer l'url des images de l'aide
+ * 
+ * @param  string|array $args
+ *     Arguments à transmettre à l'URL : 
+ *     - string : tel que `arg1=yy&arg2=zz` 
+ *     - array :  tel que `array( arg1 => yy, arg2 => zz )`
+ * @return string
+ *     URL
+ */
 function generer_url_aide_img($args){
 	return generer_url_action('aide_img', $args, false, true);
 }
 
 
-// Les aides non mises a jour ont un vieux Path a remplacer
-// (mais ce serait bien de le faire en SQL une bonne fois)
+/** Les aides non mises à jour ont un vieux Path à remplacer
+ *
+ * @note (mais ce serait bien de le faire en SQL une bonne fois)
+ */
 define('_REPLACE_IMG_PACK', "@(<img([^<>]* +)?\s*src=['\"])img_pack\/@ims");
 
-// Remplacer les URL des images par l'URL du gestionnaire de cache local
+/**
+ * Remplacer les URL des images par l'URL du gestionnaire de cache local
+ * 
+ * @uses _REPLACE_IMG_PACK
+ * @uses _DIR_IMG_PACK
+ *
+ * @param string $contenu
+ * @param string $server
+ * @return string
+ */
 function aide_fixe_img($contenu, $server){
 	$html = "";
 	$re = "@(<img([^<>]* +)?\s*src=['\"])((AIDE|IMG|local)/([-_a-zA-Z0-9]*/?)([^'\"<>]*))@imsS";
@@ -223,10 +285,19 @@ function aide_fixe_img($contenu, $server){
 }
 
 
-// Extraire la seule section demandee,
-// qui commence par son nom entouree d'une balise h2
-// et se termine par la prochaine balise h2 ou h1 ou le /body final.
-
+/**
+ * Extraire une section d'aide
+ *
+ * Extraire la seule section demandée, qui commence par son nom entourée d'une 
+ * balise h2 et se termine par la prochaine balise h2 ou h1 ou le /body final.
+ * 
+ * @param string $aide
+ *            Titre de la section d'aide
+ * @param string $contenu
+ * @param int $prof
+ *            Dans quel hn doit-on mettre le titre de section
+ * @return string
+ */
 function aide_section($aide, $contenu, $prof=2){
 	$maxprof = ($prof >=2) ? "12" : "1";
 	$r = "@<h$prof" . '(?: class="spip")?' . '>\s*' . $aide
