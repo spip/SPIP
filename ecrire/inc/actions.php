@@ -79,7 +79,27 @@ function redirige_action_auteur($action, $arg, $ret, $gra = '', $mode = false, $
 	return generer_action_auteur($action, $arg, $r, $mode, $atts, $public);
 }
 
-// http://doc.spip.org/@redirige_action_post
+/**
+ * Retourne une URL ou un formulaire sécurisé en méthode POST
+ * 
+ * @param string $action
+ *     Nom du fichier/action appelé (dans le répertoire action)
+ * @param string $arg
+ *     Arguments pour l'action sécurisée
+ * @param string $ret
+ *     Adresse de redirection souhaitée à la fin du bon déroulement de l’action
+ * @param string $gra
+ *     Arguments à transmettre, tel que `arg1=yy&arg2=zz`
+ * @param bool|int|string $corps
+ *     - -1 : renvoyer action, arg et hash sous forme de array()
+ *     - true ou false : renvoyer une url, avec `&amp;` (false) ou `&` (true)
+ *     - string : renvoyer un formulaire
+ * @param string|int $att
+ *     - id_auteur pour lequel générer l'action en mode url ou array()
+ *     - attributs du formulaire en mode formulaire
+ * @return array|string
+ *     URL, code HTML du formulaire ou tableau (action, arg, hash)
+ */
 function redirige_action_post($action, $arg, $ret, $gra, $corps, $att = ''){
 	$r = _DIR_RESTREINT.generer_url_ecrire($ret, $gra, false, true);
 	return generer_action_auteur($action, $arg, $r, $corps, $att." method='post'");
