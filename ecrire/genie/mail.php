@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Tâche de fond pour l'envoi des mails de nouveautés
+ *
+ * @package SPIP\Core\Mail
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**

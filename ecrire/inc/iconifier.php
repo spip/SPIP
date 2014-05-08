@@ -10,11 +10,29 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion du formulaire iconifier pour ajouter des logos
+ *
+ * @package SPIP\Core\Logos
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 
-// http://doc.spip.org/@inc_iconifier_dist
+/**
+ * Retourne le formulaire de gestion de logo sur les objets.
+ * 
+ * @param string $objet
+ * @param integer $id
+ * @param string $script
+ * @param bool $visible
+ * @param bool $flag_modif
+ * 
+ * @return string|array
+ *     - Contenu du squelette calculé
+ *     - ou tableau d'information sur le squelette.
+ */
 function inc_iconifier_dist($objet, $id,  $script, $visible=false, $flag_modif=true) {
 	// compat avec anciens appels
 	$objet = objet_type($objet);

@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de la validation XML selon une DTD
+ * 
+ * @package SPIP\Core\Valider_XML
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/presentation');
 include_spip('public/debusquer');
