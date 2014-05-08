@@ -316,9 +316,19 @@ function auth_trace($row, $date=null)
  */
 
 /**
- * Fonction aiguillage, privee
+ * Fonction privée d'aiguillage des fonctions d'authentification
+ *
+ * Charge une fonction d'authentification présente dans un répertoire `auth/`. 
+ * Ainsi, utiliser `auth_administrer('informer_login', array('spip', ...)` appellera 
+ * `auth_spip_informer_login()` de `ecrire/auth/spip.php`.
+ * 
+ * @uses charger_fonction()
+ * 
  * @param string $fonction
+ *        Nom de la fonction d'authentification
  * @param array $args
+ *        Le premier élément du tableau doit être le nom du système d'authentification 
+ *        choisi, tel que `spip` (par défaut) ou encore `ldap`. 
  * @param mixed $defaut
  * @return mixed
  */
@@ -495,16 +505,23 @@ function auth_loger($auteur){
 	return true;
 }
 
-
+/**
+ * Déconnexion de l'auteur
+ * 
+ * @uses action_logout_dist()
+ * return void
+**/
 function auth_deloger(){
 	$logout = charger_fonction('logout','action');
 	$logout();
 }
 
 /**
- * Tester la possibilite de modifier le login d'authentification
- * pour la methode donnee
+ * Tester la possibilité de modifier le login d'authentification
+ * pour la méthode donnée
  *
+ * @uses auth_administrer()
+ * 
  * @param string $auth_methode
  * @param string $serveur
  * @return bool
@@ -545,13 +562,15 @@ function auth_modifier_login($auth_methode, $new_login, $id_auteur, $serveur='')
 }
 
 /**
- * Tester la possibilite de modifier le pass
- * pour la methode donnee
+ * Tester la possibilité de modifier le pass
+ * pour la méthode donnée
+ *
+ * @uses auth_administrer()
  *
  * @param string $auth_methode
  * @param string $serveur
  * @return bool
- *	succes ou echec
+ *	succès ou échec
  */
 function auth_autoriser_modifier_pass($auth_methode, $serveur=''){
 	$args = func_get_args();
@@ -653,8 +672,10 @@ function lire_php_auth($login, $pw, $serveur=''){
 }
 
 /**
- * entete php_auth (est-encore utilise ?)
+ * entête php_auth (est-encore utilisé ?)
  *
+ * @uses minipres()
+ * 
  * @param string $pb
  * @param string $raison
  * @param string $retour
