@@ -31,7 +31,7 @@ include_spip('inc/config');
  *
  * Charsets supportés en natif : voir les tables dans ecrire/charsets/
  * Les autres charsets sont supportés via mbstring()
- * 
+ *
  * @param string $charset
  *     Charset à charger.
  *     Par défaut (AUTO), utilise le charset du site
@@ -50,7 +50,7 @@ function load_charset ($charset = 'AUTO') {
 		$GLOBALS['CHARSET'][$charset] = array();
 		return $charset;
 	}
-	
+
 	// Quelques synonymes
 	if ($charset == '') $charset = 'iso-8859-1';
 	else if ($charset == 'windows-1250') $charset = 'cp1250';
@@ -102,9 +102,9 @@ function init_mb_string() {
  *
  * Celui-ci coupe sur certaines versions la chaine
  * quand un caractère n'appartient pas au charset
- *  
+ *
  * @link http://php.net/manual/fr/function.iconv.php
- * 
+ *
  * @return bool
  *     true si iconv fonctionne correctement
 **/
@@ -129,7 +129,7 @@ function test_iconv() {
  * Test de fonctionnement du support UTF-8 dans PCRE
  *
  * Contournement bug Debian Woody
- * 
+ *
  * @return bool
  *     true si PCRE supporte l'UTF-8 correctement
 **/
@@ -198,7 +198,7 @@ function plage_punct_unicode() {
  *
  * Cf. charsets/iso-8859-1.php (qu'on recopie ici pour aller plus vite)
  * On peut passer un charset cible en parametre pour accelerer le passage iso-8859-1 -> autre charset
- * 
+ *
  * @param string $texte
  *     Le texte à corriger
  * @param string $charset
@@ -211,11 +211,11 @@ function plage_punct_unicode() {
 **/
 function corriger_caracteres_windows($texte, $charset='AUTO', $charset_cible='unicode') {
 	static $trans;
-	
+
 	if (is_array($texte)) {
 		return array_map('corriger_caracteres_windows', $texte);
 	}
-	
+
 	if ($charset=='AUTO') {
 		$charset = lire_config('charset', _DEFAULT_CHARSET);
 	}
@@ -255,7 +255,7 @@ function corriger_caracteres_windows($texte, $charset='AUTO', $charset_cible='un
 			$p.chr(150) => "&#8211;",
 			$p.chr(151) => "&#8212;",
 			$p.chr(152) => "&#732;",
-			$p.chr(153) => "&#8482;", 
+			$p.chr(153) => "&#8482;",
 			$p.chr(154) => "&#353;",
 			$p.chr(155) => "&#8250;",
 			$p.chr(156) => "&#339;",
@@ -277,7 +277,7 @@ function corriger_caracteres_windows($texte, $charset='AUTO', $charset_cible='un
 
 /**
  * Transforme les entités HTML en unicode
- * 
+ *
  * Transforme les &eacute; en &#123;
  *
  * @param string $texte
@@ -302,7 +302,7 @@ function html2unicode($texte, $secure=false) {
 		return str_replace(array_keys($trans),array_values($trans),$texte);
 	else
 		return str_replace(array('&amp;', '&quot;', '&lt;', '&gt;'),array('&', '"', '<', '>'),
-		  str_replace(array_keys($trans),array_values($trans),$texte)			
+		  str_replace(array_keys($trans),array_values($trans),$texte)
 		);
 }
 
@@ -322,7 +322,7 @@ function mathml2unicode($texte) {
 	if (!$trans) {
 		global $CHARSET;
 		load_charset('mathml');
-		
+
 		foreach ($CHARSET['mathml'] as $key => $val)
 			$trans["&$key;"] = $val;
 	}
@@ -335,11 +335,11 @@ function mathml2unicode($texte) {
  * Transforme une chaine en entites unicode &#129;
  *
  * Utilise la librairie mb si elle est présente.
- * 
+ *
  * @internal
  *     Note: l'argument $forcer est obsolete : il visait a ne pas
  *     convertir les accents iso-8859-1
- * 
+ *
  * @param string $texte
  *     Texte à convertir
  * @param string $charset
@@ -410,7 +410,7 @@ function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
  *
  * Attention on ne transforme pas les entites < &#128; car si elles
  * ont ete encodees ainsi c'est a dessein
- * 
+ *
  * @param string $texte
  *     Texte unicode à transformer
  * @param string $charset
@@ -422,7 +422,7 @@ function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 function unicode2charset($texte, $charset='AUTO') {
 	static $CHARSET_REVERSE;
 	static $trans = array();
-	
+
 	if ($charset == 'AUTO') {
 		$charset = lire_config('charset', _DEFAULT_CHARSET);
 	}
@@ -465,7 +465,7 @@ function unicode2charset($texte, $charset='AUTO') {
  * Importer un texte depuis un charset externe vers le charset du site
  *
  * Les caractères non resolus sont transformés en `&#123`;
- * 
+ *
  * @param string $texte
  *     Texte unicode à importer
  * @param string $charset
@@ -505,7 +505,7 @@ function importer_charset($texte, $charset = 'AUTO') {
 
 
 /**
- * Transforme un texte UTF-8 en unicode 
+ * Transforme un texte UTF-8 en unicode
  *
  * Utilise la librairie mb si présente
  * 
@@ -602,7 +602,7 @@ function utf_8_to_unicode($source) {
 }
 
 /**
- * Transforme un texte UTF-32 en unicode 
+ * Transforme un texte UTF-32 en unicode
  *
  * UTF-32 ne sert plus que si on passe par iconv, c'est-a-dire quand
  * mb_string est absente ou ne connait pas notre charset.
@@ -745,7 +745,19 @@ function javascript_to_binary ($texte) {
 }
 
 
-// http://doc.spip.org/@translitteration_rapide
+/**
+ * Substition rapide de chaque graphème selon le charset sélectionné.
+ * 
+ * @uses caractere_utf_8()
+ * 
+ * @global array $CHARSET
+ * @staticvar array $trans
+ * 
+ * @param string $texte
+ * @param string $charset
+ * @param string $complexe
+ * @return string
+ */
 function translitteration_rapide($texte, $charset='AUTO', $complexe='') {
 	static $trans;
 	if ($charset == 'AUTO')
@@ -766,11 +778,22 @@ function translitteration_rapide($texte, $charset='AUTO', $complexe='') {
 	return str_replace(array_keys($trans[$complexe]),array_values($trans[$complexe]),$texte);
 }
 
-//
-// Translitteration charset => ascii (pour l'indexation)
-// Attention les caracteres non reconnus sont renvoyes en utf-8
-//
-// http://doc.spip.org/@translitteration
+/**
+ * Translittération charset => ascii (pour l'indexation)
+ * 
+ * Attention les caractères non reconnus sont renvoyés en utf-8
+ * 
+ * @uses corriger_caracteres()
+ * @uses unicode_to_utf_8()
+ * @uses html2unicode()
+ * @uses charset2unicode()
+ * @uses translitteration_rapide()
+ * 
+ * @param string $texte
+ * @param string $charset
+ * @param string $complexe
+ * @return string
+ */
 function translitteration($texte, $charset='AUTO', $complexe='') {
 	// 0. Supprimer les caracteres illegaux
 	include_spip('inc/filtres');
@@ -782,9 +805,17 @@ function translitteration($texte, $charset='AUTO', $complexe='') {
 	return translitteration_rapide($texte,$charset,$complexe);
 }
 
-// &agrave; est retourne sous la forme "a`" et pas "a"
-// mais si $chiffre=true, on retourne "a8" (vietnamien)
-// http://doc.spip.org/@translitteration_complexe
+/**
+ * Translittération complexe
+ *
+ * `&agrave;` est retourné sous la forme "a`" et pas "a"
+ * mais si `$chiffre=true`, on retourne "a8" (vietnamien)
+ * 
+ * @uses translitteration()
+ * @param string $texte
+ * @param bool $chiffres
+ * @return string
+ */
 function translitteration_complexe($texte, $chiffres=false) {
 	$texte = translitteration($texte,'AUTO','complexe');
 
@@ -792,10 +823,17 @@ function translitteration_complexe($texte, $chiffres=false) {
 		$texte = preg_replace("/[aeiuoyd]['`?~.^+(-]{1,2}/eS",
 			"translitteration_chiffree('\\0')", $texte);
 	}
-	
+
 	return $texte;
 }
-// http://doc.spip.org/@translitteration_chiffree
+/**
+ * Translittération chiffrée
+ * 
+ * Remplace des caractères dans une chaîne par des chiffres
+ * 
+ * @param string $car
+ * @return string
+ */
 function translitteration_chiffree($car) {
 	return strtr($car, "'`?~.^+(-", "123456789");
 }
@@ -1019,7 +1057,7 @@ function spip_ucfirst($c){
 	// Si on n'a pas mb_* on utilise ucfirst
 	if (!init_mb_string())
 		return ucfirst($c);
-	
+
 	$lettre1 = mb_strtoupper(spip_substr($c,0,1));
 	return $lettre1.spip_substr($c,1);
 }
@@ -1037,7 +1075,7 @@ function spip_ucfirst($c){
 function spip_strlen($c) {
 	// On transforme les sauts de ligne pour ne pas compter deux caractères
 	$c = str_replace("\r\n", "\n", $c);
-	
+
 	// Si ce n'est pas utf-8, utiliser strlen
 	if ($GLOBALS['meta']['charset'] != 'utf-8')
 		return strlen($c);
