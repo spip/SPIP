@@ -26,7 +26,7 @@ class Bouton {
   /** @var string L'icone à mettre dans le bouton */
   var $icone;
 
-  /* @var string Le nom de l'entrée d'i18n associé */
+  /** @var string Le nom de l'entrée d'i18n associé */
   var $libelle;
 
   /** @var null|string L'URL de la page (null => ?exec=nom) */
