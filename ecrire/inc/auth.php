@@ -287,8 +287,7 @@ function auth_a_loger()
 }
 
 /**
- * Tracer en base la date de derniere connexion de l'auteur
- * http://doc.spip.org/@auth_trace
+ * Tracer en base la date de dernière connexion de l'auteur
  *
  * @param array $row
  * @param null|string $date
@@ -460,7 +459,16 @@ function auth_url_retour_login($auth_methode, $login, $redirect='', $serveur='')
 	$securiser_action = charger_fonction('securiser_action','inc');
 	return $securiser_action('auth', "$auth_methode/$login", $redirect, true);
 }
-
+/**
+ * Terminer l'action d'authentification d'un auteur
+ * 
+ * @uses auth_administrer()
+ * 
+ * @param string $auth_methode
+ * @param string $login
+ * @param string $serveur
+ * @return mixed
+ */
 function auth_terminer_identifier_login($auth_methode, $login, $serveur=''){
 	$args = func_get_args();
 	$auteur = auth_administrer('terminer_identifier_login',$args);
@@ -640,11 +648,12 @@ function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=arr
 
 
 /**
- *
+ * Vérifier si l'auteur est bien authentifié
+ * 
  * @param string $login
  * @param string $pw
  * @param string $serveur
- * @return array
+ * @return array|bool
  */
 function lire_php_auth($login, $pw, $serveur=''){
 
