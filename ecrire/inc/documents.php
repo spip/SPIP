@@ -10,14 +10,20 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des documents et de leur emplacement sur le serveur
+ * 
+ * @package SPIP\Core\Documents
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * donne le chemin du fichier relatif a _DIR_IMG
- * pour stockage 'tel quel' dans la base de donnees
+ * Donne le chemin du fichier relatif à `_DIR_IMG`
+ * pour stockage 'tel quel' dans la base de données
  *
- * http://doc.spip.org/@set_spip_doc
- *
+ * @uses _DIR_IMG
+ * 
  * @param string $fichier
  * @return string
  */
@@ -29,9 +35,9 @@ function set_spip_doc($fichier) {
 }
 
 /**
- * donne le chemin complet du fichier
- *
- * http://doc.spip.org/@get_spip_doc
+ * Donne le chemin complet du fichier
+ * 
+ * @uses _DIR_IMG
  *
  * @param string $fichier
  * @return bool|string
@@ -56,11 +62,13 @@ function get_spip_doc($fichier) {
 }
 
 /**
- * Creer IMG/pdf/
- *
- * http://doc.spip.org/@creer_repertoire_documents
- *
- * @param  $ext
+ * Créer un sous-répertoire IMG/$ext/ tel que IMG/pdf
+ * 
+ * @uses sous_repertoire()
+ * @uses _DIR_IMG
+ * @uses verifier_htaccess()
+ * 
+ * @param string $ext
  * @return string
  */
 function creer_repertoire_documents($ext) {
@@ -82,9 +90,7 @@ function creer_repertoire_documents($ext) {
 }
 
 /**
- * Efface le repertoire de maniere recursive !
- *
- * http://doc.spip.org/@effacer_repertoire_temporaire
+ * Efface le répertoire de manière récursive !
  *
  * @param string $nom
  */
@@ -103,10 +109,8 @@ function effacer_repertoire_temporaire($nom) {
 
 //
 /**
- * Copier un document $source un dossier IMG/$ext/$orig.$ext
- * en numerotant eventuellement si un du meme nom existe deja
- *
- * http://doc.spip.org/@copier_document
+ * Copier un document `$source` un dossier `IMG/$ext/$orig.$ext`
+ * en numérotant éventuellement si un fichier de même nom existe déjà
  *
  * @param string $ext
  * @param string $orig
@@ -137,10 +141,13 @@ function copier_document($ext, $orig, $source) {
 }
 
 /**
- * Trouver le dossier utilise pour upload un fichier
+ * Trouver le dossier utilisé pour upload un fichier
  *
- * http://doc.spip.org/@determine_upload
- *
+ * @uses autoriser()
+ * @uses _DIR_TRANSFERT
+ * @uses _DIR_TMP
+ * @uses sous_repertoire()
+ * 
  * @param string $type
  * @return bool|string
  */
@@ -165,13 +172,18 @@ function determine_upload($type='') {
 }
 
 /**
- * Deplacer ou copier un fichier
+ * Déplacer ou copier un fichier
  *
- * http://doc.spip.org/@deplacer_fichier_upload
- *
+ * @uses _DIR_RACINE
+ * @uses spip_unlink()
+ * 
  * @param string $source
+ *     Fichier source à copier
  * @param string $dest
+ *     Fichier de destination
  * @param bool $move
+ *     - `true` : on déplace le fichier source vers le fichier de destination
+ *     - `false` : valeur par défaut. On ne fait que copier le fichier source vers la destination.
  * @return bool|mixed|string
  */
 function deplacer_fichier_upload($source, $dest, $move=false) {
@@ -200,11 +212,24 @@ function deplacer_fichier_upload($source, $dest, $move=false) {
 }
 
 
-// Erreurs d'upload
-// renvoie false si pas d'erreur
-// et true si erreur = pas de fichier
-// pour les autres erreurs affiche le message d'erreur et meurt
-// http://doc.spip.org/@check_upload_error
+/**
+ * Erreurs d'upload
+ *
+ * Renvoie `false` si pas d'erreur
+ * et `true` s'il n'y a pas de fichier à uploader.
+ * Pour les autres erreurs, on affiche le message d'erreur et on arrête l'action.
+ * 
+ * @link http://php.net/manual/fr/features.file-upload.errors.php 
+ *     Explication sur les messages d'erreurs de chargement de fichiers.
+ * @uses propre()
+ * @uses minipres()
+ * 
+ * @global string $spip_lang_right
+ * @param integer $error
+ * @param string $msg
+ * @param bool $return
+ * @return boolean|string
+ */
 function check_upload_error($error, $msg='', $return=false) {
 	global $spip_lang_right;
 
