@@ -38,6 +38,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Retourne le tableau des éléments édités en cours après avoir supprimé 
  * les éléments trop vieux (de plus d'une heure) du tableau.
  *
+ * @uses ecrire_tableau_edition()
+ * 
  * @return array
  *     Tableau des éléments édités actuellement, par objet et auteur, du type :
  *     `[ type d'objet ][id_objet][id_auteur][nom de l'auteur] = time()`
@@ -76,6 +78,8 @@ function lire_tableau_edition () {
 
 /**
  * Enregistre la liste des éléments édités
+ *
+ * @uses ecrire_meta()
  *
  * @param array $edition
  *     Tableau des éléments édités actuellement, par objet et auteur, du type :
@@ -118,8 +122,18 @@ function signale_edition ($id, $auteur, $type='article') {
 	ecrire_tableau_edition($edition);
 }
 
-// Qui edite mon objet ?
-// http://doc.spip.org/@qui_edite
+/**
+ * Qui édite mon objet ?
+ * 
+ * @see lire_tableau_edition()
+ * 
+ * @param integer $id
+ *     Identifiant de l'objet
+ * @param string $type
+ *     Type de l'objet
+ * @return array
+ *     Tableau sous la forme `["id_auteur"]["nom de l'auteur"] = time()`
+ */
 function qui_edite ($id, $type='article') {
 
 	$edition = lire_tableau_edition();
@@ -127,7 +141,16 @@ function qui_edite ($id, $type='article') {
 	return $edition ? $edition[$type][$id] : array();
 }
 
-// http://doc.spip.org/@mention_qui_edite
+/**
+ * Afficher les auteurs ayant édités récemment l'objet.
+ * 
+ * @param integer $id
+ *     Identifiant de l'objet 
+ * @param string $type
+ *     Type de l'objet 
+ * @return array
+ *     Liste de tableaux `['nom_auteur_modif' => x|y|z, 'date_diff' => n]`
+ */
 function mention_qui_edite ($id, $type='article') {
 	$modif = qui_edite($id, $type);
 	unset($modif[$GLOBALS['visiteur_session']['id_auteur']]);
@@ -147,8 +170,10 @@ function mention_qui_edite ($id, $type='article') {
 }
 
 /**
- * Quels sont les objets en cours d'edition par X ?
+ * Quels sont les objets en cours d'édition par `$id_auteur` ?
  *
+ * @uses lire_tableau_edition()
+ * 
  * @param int $id_auteur
  *     Identifiant de l'auteur
  * @return array
@@ -173,8 +198,15 @@ function liste_drapeau_edition ($id_auteur) {
 	return $objets_ouverts;
 }
 
-// Quand l'auteur veut liberer tous ses objets (tous types)
-// http://doc.spip.org/@debloquer_tous
+/**
+ * Quand l'auteur veut libérer tous ses objets (tous types)
+ * 
+ * @uses lire_tableau_edition()
+ * @uses ecrire_tableau_edition()
+ * 
+ * @param integer $id_auteur
+ * @return void
+ */
 function debloquer_tous($id_auteur) {
 	$edition = lire_tableau_edition();
 	foreach ($edition as $objet => $data) {
@@ -188,8 +220,20 @@ function debloquer_tous($id_auteur) {
 	}
 }
 
-// quand l'auteur libere un objet precis
-// http://doc.spip.org/@debloquer_edition
+/**
+ * Quand l'auteur libère un objet précis
+ * 
+ * @uses lire_tableau_edition()
+ * @uses ecrire_tableau_edition()
+ * 
+ * @param integer $id_auteur
+ *     Identifiant de l'auteur
+ * @param integer $id_objet
+ *     Identifiant de l'objet édité
+ * @param string $type
+ *     Type de l'objet
+ * @return void
+ */
 function debloquer_edition($id_auteur, $id_objet, $type='article') {
 	$edition = lire_tableau_edition();
 
