@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Analyse de fichiers CSV
+ * 
+ * @package SPIP\Core\CSV
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**

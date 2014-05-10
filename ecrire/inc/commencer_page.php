@@ -161,13 +161,29 @@ function init_body_class() {
 }
 
 
-// http://doc.spip.org/@lien_change_var
+/**
+ * Créer un `<area shape="rect" />`
+ *  
+ * @deprecated since version 2.0.0
+ * @param string $lien
+ * @param string $set
+ * @param string $couleur
+ * @param string $coords
+ * @param string $titre
+ * @param string $mouseOver
+ * @return string
+ */
 function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
 	$lien = parametre_url($lien, $set, $couleur);
 	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=\"$titre\" $mouseOver />";
 }
 
-// http://doc.spip.org/@auteurs_recemment_connectes
+/**
+ * Afficher la liste des auteurs connectés à l'espace privé
+ * 
+ * @param integer $id_auteur
+ * @return string
+ */
 function auteurs_recemment_connectes($id_auteur){
 	return recuperer_fond('prive/objets/liste/auteurs_enligne');
 }
