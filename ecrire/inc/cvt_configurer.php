@@ -10,6 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Les formulaires CVT de configuration.
+ * 
+ * Prendre en compte les `#FORMULAIRE_CONFIGURER_XX` 
+ * dans les squelettes de SPIP
+ * 
+ * @package SPIP\Core\Formulaires\CVT\Configurer
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/config');
@@ -93,12 +102,12 @@ function cvtconf_formulaires_configurer_enregistre($form,$args){
 }
 
 /**
- * Definir la regle de conteneur, en fonction de la presence
- * des
- * _meta_table : nom de la table meta ou stocker (par defaut 'meta')
- * _meta_casier : nom du casier dans lequel serializer (par defaut xx de formulaire_configurer_xx)
- * _meta_prefixe : prefixer les meta (alternative au casier) dans la table des meta (par defaur rien)
- * _meta_stockage : Methode externe de stockage. Aucune n'est fournie par le core.
+ * Définir la règle de conteneur, en fonction de la présence de certaines données
+ * 
+ * - `_meta_table` : nom de la table `spip_metas` ou stocker (par défaut 'meta')
+ * - `_meta_casier` : nom du casier dans lequel sérialiser (par défaut xx de `formulaire_configurer_xx`)
+ * - `_meta_prefixe` : préfixer les `meta` (alternative au casier) dans la table des meta (par defaur rien)
+ * - `_meta_stockage` : Méthode externe de stockage. Aucune n'est fournie par le core.
  *
  * @param string $form
  * @param array $valeurs
