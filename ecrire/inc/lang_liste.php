@@ -154,6 +154,7 @@ $GLOBALS['codes_langues'] = array(
 	'pa' => "Punjabi",
 	'pbb' => 'Nasa Yuwe',
 	'pl' => "polski",
+	'prs' => "&#1583;&#1585;&#1740;", // ISO-639-3 Dari (Afghanistan)
 	'ps' => "&#1662;&#1690;&#1578;&#1608;",
 	'pt' => "Portugu&#234;s",
 	'pt_br' => "Portugu&#234;s do Brasil",
