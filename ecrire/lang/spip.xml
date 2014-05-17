@@ -114,7 +114,8 @@
 		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
-	<langue code="my" url="http://trad.spip.net/tradlang_module/spip?lang_cible=my" total="632" traduits="526" relire="0" modifs="28" nouveaux="78" pourcent="83.23">
+	<langue code="my" url="http://trad.spip.net/tradlang_module/spip?lang_cible=my" total="632" traduits="525" relire="0" modifs="22" nouveaux="85" pourcent="83.07">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="nap" url="http://trad.spip.net/tradlang_module/spip?lang_cible=nap" total="632" traduits="529" relire="3" modifs="29" nouveaux="71" pourcent="83.70">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
