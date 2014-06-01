@@ -443,8 +443,16 @@ function compose_filtres(&$p, $code) {
 			// le filtre est defini sous forme de fonction ou de methode
 			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
 			elseif ($f = chercher_filtre($fonc)) {
-				$code = "$f($code$arglist)";
+				// cas particulier : le filtre |set doit acceder a la $Pile
+				// proto: filtre_set($val, &$Pile, $args...)
+				if (in_array($fonc, array('set', 'setcopy'))) {
+					$code = "$f($code,\$Pile$arglist)";
+				}
+				else {
+					$code = "$f($code$arglist)";
+				}
 			}
+
 			// le filtre n'existe pas,
 			// on le notifie
 			else erreur_squelette(array('zbug_erreur_filtre', array('filtre'=>  texte_script($fonc))), $p);
