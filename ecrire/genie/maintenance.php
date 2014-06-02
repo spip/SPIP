@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des différentes tâches de maintenance
+ *
+ * @package SPIP\Core\Genie\Maintenance
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**

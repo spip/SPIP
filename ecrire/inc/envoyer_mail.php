@@ -20,12 +20,30 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/charsets');
 include_spip('inc/texte');
 
-// http://doc.spip.org/@nettoyer_titre_email
+/**
+ * Nettoyer le titre d'un email
+ *
+ * @uses textebrut()
+ * @uses corriger_typo()
+ *
+ * @param  string $titre
+ * @return string
+ */
 function nettoyer_titre_email($titre) {
 	return str_replace("\n", ' ', textebrut(corriger_typo($titre)));
 }
 
-// http://doc.spip.org/@nettoyer_caracteres_mail
+/**
+ * Utiliser le bon encodage de caractères selon le charset
+ *
+ * Caractères pris en compte : apostrophe, double guillemet,
+ * le tiret cadratin, le tiret demi-cadratin
+ *
+ * @uses filtrer_entites()
+ *
+ * @param string $t
+ * @return string
+ */
 function nettoyer_caracteres_mail($t) {
 
 	$t = filtrer_entites($t);
@@ -145,7 +163,16 @@ function inc_envoyer_mail_dist($destinataire, $sujet, $corps, $from = "", $heade
 
 	return @mail($destinataire, $sujet, $texte, $headers);
 }
-
+/**
+ * Formater correctement l'entête d'un email
+ * 
+ * @param string $headers
+ * @param string $from   
+ * @param string $to     
+ * @param string $texte  
+ * @param string $parts  
+ * @return array
+ */
 function mail_normaliser_headers($headers, $from, $to, $texte, $parts="")
 {
 	$charset = $GLOBALS['meta']['charset'];

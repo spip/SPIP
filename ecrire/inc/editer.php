@@ -267,11 +267,13 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	return $contexte;
 }
 
-//
-// Gestion des textes trop longs (limitation brouteurs)
-// utile pour les textes > 32ko
-
-// http://doc.spip.org/@coupe_trop_long
+/**
+ * Gestion des textes trop longs (limitation brouteurs)
+ * utile pour les textes > 32ko
+ * 
+ * @param  string  $texte
+ * @return array
+ */
 function coupe_trop_long($texte){
 	$aider = charger_fonction('aider', 'inc');
 	if (strlen($texte) > 28*1024) {
@@ -297,7 +299,13 @@ function coupe_trop_long($texte){
 		return (array($texte,''));
 }
 
-// http://doc.spip.org/@editer_texte_recolle
+/**
+ * Formater un `$texte` dans `textarea`
+ *
+ * @param string $texte
+ * @param string $att_text
+ * @return array
+ */
 function editer_texte_recolle($texte, $att_text)
 {
 	if ((strlen($texte)<29*1024)
@@ -337,19 +345,17 @@ function titre_automatique($champ_titre,$champs_contenu,$longueur=null){
 }
 
 /**
- * Determiner un titre automatique,
- * a partir des champs textes de contenu
+ * Déterminer un titre automatique,
+ * à partir des champs textes de contenu
  *
- * Les textes et le titre sont pris dans les champs postés (via _request())
+ * Les textes et le titre sont pris dans les champs postés (via `_request()`)
  * et le titre calculé est de même affecté en tant que champ posté.
  * 
- * @param string $champ_titre
- *     Nom du champ titre
  * @param array $champs_contenu
  *     Liste des champs contenu textuels
  * @param array|null $c
  *   tableau qui contient les valeurs des champs de contenu
- *   si null on utilise les valeurs du POST
+ *   si `null` on utilise les valeurs du POST
  * @param int $longueur
  *     Longueur de coupe du texte
  * @return string
@@ -596,7 +602,14 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	return $conflits;
 }
 
-// http://doc.spip.org/@display_conflit_champ
+/**
+ * Afficher le contenu d'un champ selon sa longueur
+ * soit dans un `textarea`, soit dans un `input`
+ *
+ * @param string $x 
+ *         texte à afficher
+ * @return string
+ */
 function display_conflit_champ($x) {
 	if (strstr($x, "\n") OR strlen($x)>80)
 		return "<textarea style='width:99%; height:10em;'>".entites_html($x)."</textarea>\n";
@@ -604,7 +617,20 @@ function display_conflit_champ($x) {
 		return "<input type='text' size='40' style='width:99%' value=\"".entites_html($x)."\" />\n";
 }
 
-// http://doc.spip.org/@signaler_conflits_edition
+/**
+ * Signaler une erreur entre 2 saisies d'un champ
+ * 
+ * @uses preparer_diff()
+ * @uses propre_diff()
+ * @uses afficher_para_modifies()
+ * @uses afficher_diff()
+ * @uses minipres()
+ * 
+ * @param array $conflits
+ *     Valeur des champs en conflit
+ * @param string $redirect
+ * @return string
+ */
 function signaler_conflits_edition($conflits, $redirect='') {
 	include_spip('inc/minipres');
 	include_spip('inc/revisions');
@@ -675,4 +701,8 @@ function signaler_conflits_edition($conflits, $redirect='') {
 	);
 }
 
-?>
+/**
+ * Fonctions d'aide à l'édition d'objets éditoriaux. 
+ *
+ * @package SPIP\Core\Edition
+**/
