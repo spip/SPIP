@@ -11,10 +11,11 @@
 \***************************************************************************/
 
 /**
- * Fonctions d'aide à l'édition d'objet éditoriaux. 
+ * Fonctions d'aide à l'édition d'objets éditoriaux. 
  *
  * @package SPIP\Core\Edition
 **/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('base/abstract_sql');
 
@@ -701,8 +702,3 @@ function signaler_conflits_edition($conflits, $redirect='') {
 	);
 }
 
-/**
- * Fonctions d'aide à l'édition d'objets éditoriaux. 
- *
- * @package SPIP\Core\Edition
-**/
