@@ -444,7 +444,7 @@ function compose_filtres(&$p, $code) {
 			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
 			elseif ($f = chercher_filtre($fonc)) {
 				// cas particulier : le filtre |set doit acceder a la $Pile
-				// proto: filtre_set($val, &$Pile, $args...)
+				// proto: filtre_set(&$Pile, $val, $args...)
 				if (in_array($fonc, array('set'))) {
 					$code = "$f(\$Pile,$code$arglist)";
 				}
