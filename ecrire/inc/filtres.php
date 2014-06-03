@@ -159,7 +159,7 @@ function filtrer($filtre) {
  *           dans la variable toto et renvoie la valeur
  *
  */
-function filtre_set($val, &$Pile, $key, $continue = null) {
+function filtre_set(&$Pile, $val, $key, $continue = null) {
 	$Pile['vars'][$key] = $val;
 	return $continue ? $val : '';
 }
