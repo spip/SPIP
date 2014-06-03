@@ -64,7 +64,8 @@ function sandbox_composer_filtre($fonc, $code, $arglist, &$p){
 	elseif ($f = chercher_filtre($fonc)) {
 		// cas particulier : le filtre |set doit acceder a la $Pile
 		// proto: filtre_set(&$Pile, $val, $args...)
-		$refs = (new ReflectionFunction($f))->getParameters();
+		$refl = new ReflectionFunction($f);
+		$refs = $refl->getParameters();
 		if (isset($refs[0]) AND $refs[0]->name == 'Pile') {
 			$code = "$f(\$Pile,$code$arglist)";
 		}
