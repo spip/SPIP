@@ -60,10 +60,16 @@ function assembler($fond, $connect='') {
 	}
 
 	// Si requete HEAD ou Last-modified compatible, ignorer le texte
-	// et pas de content-type (pour contrer le bouton admin de inc-public)
 	if ($headers_only) {
+		// Si requete HEAD sur une page non disponible en cache
+		// on envoie un "204 no Content"
+		// ca economise du temps de calcul sans trop induire en erreur
+		if (!$page) $page['status'] = 204;
 		$page['entetes']["Connection"] = "close";
 		$page['texte'] = "";
+		// Ne pas ajouter le bouton admin!
+		$flag_preserver = true;
+
 	} else {
 		// si la page est prise dans le cache
 		if (!$use_cache)  {
