@@ -302,9 +302,16 @@ function recuperer_url($url, $options = array()){
 			// les actions liberticides de l'empire du milieu
 			if (!need_proxy($host)
 			  AND $res = @file_get_contents($url)){
+				$result['length'] = strlen($res);
+				if ($copy){
+					ecrire_fichier($copy,$res);
+					$result['file'] = $copy;
+				}
+				else {
+					$result['page'] = $res;
+				}
 				$res = array(
 					'status' => 200,
-					'page' => $res,
 				);
 			}
 			else
@@ -328,8 +335,6 @@ function recuperer_url($url, $options = array()){
 			$result['last_modified'] = $res['last_modified'];
 		if (isset($res['location']))
 			$result['location'] = $res['location'];
-		if (isset($res['page']))
-			$result['page'] = $res['page'];
 	}
 
 	// on ne veut que les entetes
@@ -344,7 +349,8 @@ function recuperer_url($url, $options = array()){
 	if (preg_match(",\bContent-Encoding: .*gzip,is", $result['headers']))
 		$gz = (_DIR_TMP . md5(uniqid(mt_rand())) . '.tmp.gz');
 
-	if (!$result['page']){
+	// si on a pas deja recuperer le contenu par une methode detournee
+	if (!$result['length']){
 		$res = recuperer_body($handle, $options['taille_max'], $gz ? $gz : $copy);
 		fclose($handle);
 		if ($copy){
@@ -354,6 +360,7 @@ function recuperer_url($url, $options = array()){
 		elseif($res) {
 			$result['page'] = &$res;
 			$result['length'] = strlen($result['page']);
+		}
 	}
 	if (!$result['page'])
 		return $result;
