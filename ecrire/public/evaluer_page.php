@@ -31,16 +31,7 @@ $res = true;
 // Cas d'une page contenant du PHP :
 if ($page['process_ins'] != 'html') {
 
-	/**
-	 * Teste si on a déjà évalué du PHP
-	 * 
-	 * Inclure inc/lang la première fois pour définir spip_lang
-	 * si ça n'a pas encore été fait.
-	 */
-	if (!defined('_EVALUER_PAGE_PHP')) {
-		define('_EVALUER_PAGE_PHP', true);
-		include_spip('inc/lang');
-	}
+	include_spip('inc/lang');
 
 	// restaurer l'etat des notes avant calcul
 	if (isset($page['notes'])
