@@ -53,8 +53,18 @@ if ($page['process_ins'] != 'html') {
 		$page['texte'] = str_replace('<'.'?xml', "<\1?xml", $page['texte']);
 
 	$res = eval('?' . '>' . $page['texte']);
-	$page['texte'] = ob_get_contents();
+	$eval = ob_get_contents();
 	ob_end_clean();
+
+	// erreur d'exécution ?
+	// enregistrer le code pour afficher zbug_erreur_execution_page
+	if (false === $res) {
+		$page['codephp'] = $page['texte'];
+		$page['texte'] = '<!-- erreur -->';
+	}
+	else {
+		$page['texte'] = $eval;
+	}
 
 	$page['process_ins'] = 'html';
 

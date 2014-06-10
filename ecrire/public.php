@@ -149,7 +149,14 @@ if (isset($GLOBALS['_INC_PUBLIC']) AND $GLOBALS['_INC_PUBLIC']) {
 	include _ROOT_RESTREINT."public/evaluer_page.php";
 	envoyer_entetes($page['entetes']);
 	if ($res === false) {
-		$msg = array('zbug_erreur_execution_page');
+		include_spip('inc/autoriser');
+		$err = _T('zbug_erreur_execution_page');
+		if (autoriser('webmestre')) {
+			$err .= "\n<hr />\n"
+				.highlight_string($page['codephp'],true)
+				."\n<hr />\n";
+		}
+		$msg = array($err);
 		erreur_squelette($msg);
 	}
 
