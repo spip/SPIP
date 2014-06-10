@@ -398,7 +398,7 @@ define('CODE_CORPS_BOUCLE', '%s
 	}%s
 	if (defined("_BOUCLE_PROFILER")
 	AND 1000*($timer = (time()+microtime())-$timer) > _BOUCLE_PROFILER)
-		spip_log(intval(1000*$timer)."ms %s","profiler");
+		spip_log(intval(1000*$timer)."ms %s","profiler"._LOG_AVERTISSEMENT);
 	return $t0;'
 );
 
