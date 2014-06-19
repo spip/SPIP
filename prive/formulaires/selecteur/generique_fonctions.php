@@ -87,10 +87,10 @@ function picker_selected($selected, $type=''){
 				$id_objet = intval($captures[2]);
 				
 				// Si on cherche un type et que c'est le bon, on renvoit un tableau que d'identifiants
-				if (is_string($type) AND $type == $objet AND ($id_objet OR $objet=="rubrique")){
+				if (is_string($type) AND $type == $objet AND ($id_objet OR in_array($objet, array('racine', 'rubrique')))){
 					$select[] = $id_objet;
 				}
-				elseif(!$type AND ($id_objet OR $objet=="rubrique")){
+				elseif(!$type AND ($id_objet OR in_array($objet, array('racine', 'rubrique')))){
 					$select[] = array('objet' => $objet, 'id_objet' => $id_objet);
 				}
 			}
