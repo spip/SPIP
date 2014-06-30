@@ -117,8 +117,8 @@ RewriteRule ^[^\.]+(\.html)?$		spip.php [QSA,E=url_propre:$0,L]
 ###
 # Divers
 
-# bloquer les acces aux repertoires .svn/ (SPIP, plugins, squelettes...)
-RewriteRule ^(.*/)?\.svn/ - [F]
+# bloquer les acces aux fichiers caches (.svn, .git, etc)
+RewriteRule /\\..*(/.*|$) - [F]
 
 ###
 # Fichiers "standards" (si absents de la racine)
