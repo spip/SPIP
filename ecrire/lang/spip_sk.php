@@ -688,6 +688,7 @@ a znova sa prihlásiť na stránku.
 	'zbug_champ_hors_motif' => 'Pole @champ@ mimo kontextu @motif@',
 	'zbug_code' => 'kód',
 	'zbug_critere_inconnu' => 'neznáme kritérium @critere@',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} v tabuľke bez je­di­neč­né­ho pri­már­ne­ho kľúča',
 	'zbug_distant_interdit' => 'Externé dáta sú zakázané',
 	'zbug_doublon_table_sans_cle_primaire' => 'V tabuľke, ktorá nemá jednoduchý primárny kľúč, sú duplicitné položky',
 	'zbug_doublon_table_sans_index' => 'Duplicitné údaje v tabuľke bez indexu',
