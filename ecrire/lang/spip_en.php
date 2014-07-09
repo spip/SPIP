@@ -688,6 +688,7 @@ and log in to the site.
 	'zbug_champ_hors_motif' => 'Field @champ@ outside context @motif@',
 	'zbug_code' => 'code',
 	'zbug_critere_inconnu' => 'Unknown criterion @critere@',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} on a table without atomic primary key',
 	'zbug_distant_interdit' => 'External data forbidden',
 	'zbug_doublon_table_sans_cle_primaire' => 'Duplicate entries on a table which does not have a simple primary key',
 	'zbug_doublon_table_sans_index' => 'Duplicate entries on a table without an index',
