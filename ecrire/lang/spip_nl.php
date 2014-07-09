@@ -692,6 +692,7 @@ opnieuw verbinding maken met de site
 	'zbug_champ_hors_motif' => 'Veld @champ@ buiten een context @motif@',
 	'zbug_code' => 'code',
 	'zbug_critere_inconnu' => 'Onbekend criterium @critere@',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} op een tabel zonder atomische primaire sleutel',
 	'zbug_distant_interdit' => 'Extern verboden',
 	'zbug_doublon_table_sans_cle_primaire' => 'Dubbele ingegaan  op een tafel zonder primaire atoomsleutel',
 	'zbug_doublon_table_sans_index' => '"Doublons" op een tafel zonder indexcijfers',
