@@ -1056,7 +1056,7 @@ function balise_INCLURE_dist($p) {
 	} elseif (!isset($_contexte[1])) {
 			$msg = array('zbug_balise_sans_argument', array('balise' => ' INCLURE'));
 			erreur_squelette($msg, $p);
-	} else 		$p->code = '(($c = find_in_path(' . $_contexte[1] . ')) ? spip_file_get_contents($c) : "")';
+	} else 		$p->code = 'charge_scripts(' . $_contexte[1] . ',false)';
 
 	$p->interdire_scripts = false; // la securite est assuree par recuperer_fond
 	return $p;
