@@ -32,7 +32,7 @@
 			</li>
 			[(#REM)
 				Cle PGP
-			] 
+			]
 			<li class="editer editer_pgp[ (#ENV**{erreurs}|table_valeur{pgp}|oui)erreur]">
 				[<label for="pgp">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_cle_pgp:>,<:entree_cle_pgp_2:>})</label>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pgp})</span>
@@ -73,37 +73,37 @@
 					[<legend>(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_identifiants_connexion:>,<:entree_identifiants_connexion_2:>})</legend>]
 					[(#REM) Avertissement en cas de modifs de ses propres donnees ]
 					[(#ENV{config}|table_valeur{edit_login}
-					  |or{#ENV{config}|table_valeur{edit_pass}}
+						|or{#ENV{config}|table_valeur{edit_pass}}
 						|and{#SESSION{id_auteur}|=={#ENV{id_auteur}}}|oui)
 						<div class='notice'><:texte_login_precaution:></div>
 					]
 					<ul>
-					[(#REM) Un redacteur n'a pas le droit de modifier son login ! ]
-					<li class='editer editer_new_login[ (#ENV**{erreurs}|table_valeur{login}|oui)erreur]'>
-						[(#ENV{config}|table_valeur{edit_login}|oui)
-							<label for='new_login'><:item_login:></label>[
-							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{login})</span>
-							]<p class='explication'>(<:info_login_trop_court_car_pluriel{nb=#EVAL{_LOGIN_TROP_COURT}}:>)</p>
-							<input autocomplete="off" type='text' class='text' name='new_login' id='new_login' value="[(#ENV**{new_login})]" />
-						]
-						[(#ENV{config}|table_valeur{edit_login}|non)
-							<label for='login'><:item_login:>
-							</label><p class='explication'>(<:info_non_modifiable:>)</p>
-							<input type='text' class='text' disabled='disabled' name='login' id='login' value="[(#ENV**{login})]" />
-						]
-					</li>
-					[(#ENV{config}|table_valeur{edit_pass}|oui)
-					<li class='editer editer_new_pass[ (#ENV**{erreurs}|table_valeur{new_pass}|oui)erreur]'>
-						<label for='new_pass'><:entree_nouveau_passe:></label>[
-						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass})</span>
-						]<p class='explication'>(<:info_passe_trop_court_car_pluriel{nb=#EVAL{_PASS_LONGUEUR_MINI}}:>)</p>
-						<input type='password' autocomplete="off" class='password' name='new_pass' id='new_pass' value="" />
-					</li>
-					<li class='editer editer_new_pass2'>
-						<label for='new_pass2'><:info_confirmer_passe:></label>[
-						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass2})</span>
-						]<input type='password' autocomplete="off" class='password' name='new_pass2' id='new_pass2' value="" />
-					</li>]
+						[(#REM) Un redacteur n'a pas le droit de modifier son login ! ]
+						<li class='editer editer_new_login[ (#ENV**{erreurs}|table_valeur{login}|oui)erreur]'>
+							[(#ENV{config}|table_valeur{edit_login}|oui)
+								<label for='new_login'><:item_login:></label>[
+								<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{login})</span>
+								]<p class='explication'>(<:info_login_trop_court_car_pluriel{nb=#EVAL{_LOGIN_TROP_COURT}}:>)</p>
+								<input autocomplete="off" type='text' class='text' name='new_login' id='new_login' value="[(#ENV**{new_login})]" />
+							]
+							[(#ENV{config}|table_valeur{edit_login}|non)
+								<label for='login'><:item_login:>
+								</label><p class='explication'>(<:info_non_modifiable:>)</p>
+								<input type='text' class='text' disabled='disabled' name='login' id='login' value="[(#ENV**{login})]" />
+							]
+						</li>
+						[(#ENV{config}|table_valeur{edit_pass}|oui)
+						<li class='editer editer_new_pass[ (#ENV**{erreurs}|table_valeur{new_pass}|oui)erreur]'>
+							<label for='new_pass'><:entree_nouveau_passe:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass})</span>
+							]<p class='explication'>(<:info_passe_trop_court_car_pluriel{nb=#EVAL{_PASS_LONGUEUR_MINI}}:>)</p>
+							<input type='password' autocomplete="off" class='password' name='new_pass' id='new_pass' value="" />
+						</li>
+						<li class='editer editer_new_pass2'>
+							<label for='new_pass2'><:info_confirmer_passe:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass2})</span>
+							]<input type='password' autocomplete="off" class='password' name='new_pass2' id='new_pass2' value="" />
+						</li>]
 					</ul>
 				</fieldset>
 			</li>
