@@ -163,8 +163,8 @@ class IterateurDATA implements Iterator {
 				'ttl' => $ttl
 			),
 			3600 + $ttl);
-			# conserver le cache 1h deplus que la validite demandee,
-			# pour le cas ou le serveur distant ne repond plus
+			# conserver le cache 1h de plus que la validite demandee,
+			# pour le cas ou le serveur distant ne reponde plus
 	}
 
 	/**
@@ -186,7 +186,7 @@ class IterateurDATA implements Iterator {
 			$this->command['sourcemode'] = $this->command['from'][0];
 		}
 
-		// cherchons defferents moyens de creer le tableau de donnees
+		// cherchons differents moyens de creer le tableau de donnees
 		// les commandes connues pour l'iterateur DATA
 		// sont : {tableau #ARRAY} ; {cle=...} ; {valeur=...}
 		
@@ -449,7 +449,7 @@ class IterateurDATA implements Iterator {
 
 
 	/**
-	 * Grouper les resurltats
+	 * Grouper les resultats
 	 * {fusion /x/y/z}
 	 * 
 	**/
@@ -606,7 +606,7 @@ function inc_csv_to_array_dist($u) {
 	foreach ($entete as $k => $v) {
 		if (trim($v) == "") $v = "col".$i ; // reperer des eventuelles cases vides
 		if (is_numeric($v) and $v < 0) $v = "__".$v; // ne pas risquer d'ecraser une cle numerique
-		if (is_numeric($v)) $v = "_".$v; // ne pas risquer d'ecraser une cle numerique		
+		if (is_numeric($v)) $v = "_".$v; // ne pas risquer d'ecraser une cle numerique
 		$v = strtolower(preg_replace(',\W+,', '_', translitteration($v)));
 		foreach ($csv as &$item)
 			$item[$v] = &$item[$k];
