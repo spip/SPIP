@@ -561,9 +561,18 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 		// imagick (php4-imagemagick)
 		if ($process == 'imagick') {
 			$vignette = "$destination.".$format_sortie;
-			$handle = imagick_readimage($image);
-			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_LANCZOS, 0.75);
-			imagick_write($handle, $vignette);
+			if (method_exists('Imagick','readImage')){
+				// php5-imagemagick
+				$imagick = new Imagick();
+				$imagick->readImage($image);
+				$imagick->resizeImage($destWidth, $destHeight, $imagick::FILTER_LANCZOS, 1 );//, IMAGICK_FILTER_LANCZOS, _IMG_IMAGICK_QUALITE / 100);
+				$imagick->writeImage($vignette);
+			} else {
+				// php4-imagemagick
+				$handle = imagick_readimage($image);
+				imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_LANCZOS, _IMG_IMAGICK_QUALITE / 100);
+				imagick_write($handle, $vignette);
+			}
 			if (!@file_exists($vignette)) {
 				spip_log("echec imagick sur $vignette");
 				return;

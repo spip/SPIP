@@ -63,7 +63,7 @@ function configuration_reducteur_dist()
 		$res .= afficher_choix_vignette($p = 'netpbm');
 	}
 
-	if (function_exists('imagick_readimage')) {
+	if (function_exists('imagick_readimage') || method_exists('Imagick','readImage')) {
 		$res .=afficher_choix_vignette('imagick');
 	}
 
