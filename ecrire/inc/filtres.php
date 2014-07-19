@@ -19,6 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/charsets');
 include_spip('inc/filtres_mini');
+include_spip('inc/filtres_selecteur_generique');
 include_spip('base/objets');
 include_spip('public/parametrer'); // charger les fichiers fonctions
 
