@@ -1665,9 +1665,9 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 		$date_fin = affdate($f);
 		if($jour){
 			$nomjour_debut = nom_jour($d,$abbr);
-			$date_debut = _T('date_fmt_jour_periode',array('nomjour'=>$nomjour_debut,'jour' => $date_debut));
+			$date_debut = _T('date_fmt_jour',array('nomjour'=>$nomjour_debut,'jour' => $date_debut));
 			$nomjour_fin = nom_jour($f,$abbr);
-			$date_fin = _T('date_fmt_jour_periode',array('nomjour'=>$nomjour_fin,'jour' => $date_fin));
+			$date_fin = _T('date_fmt_jour',array('nomjour'=>$nomjour_fin,'jour' => $date_fin));
 		}
 		if ($h){
 			$date_debut = _T('date_fmt_jour_heure',array('jour'=>$date_debut,'heure'=>$hd)); 
