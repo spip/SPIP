@@ -42,7 +42,6 @@ function f_jQuery_prive ($texte) {
 			'prive/javascript/jquery.autosave.js',
 			'prive/javascript/jquery.placeholder-label.js',
 			'prive/javascript/ajaxCallback.js',
-			'prive/javascript/jquery.colors.js',
 			'prive/javascript/jquery.cookie.js',
 			'prive/javascript/spip_barre.js',
 		));
