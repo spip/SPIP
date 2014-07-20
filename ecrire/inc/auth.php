@@ -267,10 +267,13 @@ function auth_init_droits($row)
 	auth_trace($row);
 
 	// Administrateurs
-	if ($connect_statut == '0minirezo') {
-		if (is_array($GLOBALS['visiteur_session']['restreint']))
+	if (in_array($connect_statut, explode(',', _STATUT_AUTEUR_RUBRIQUE))) {
+		if (is_array($GLOBALS['visiteur_session']['restreint'])) {
 			$connect_id_rubrique = $GLOBALS['visiteur_session']['restreint'];
-		$connect_toutes_rubriques = !$connect_id_rubrique;
+		}
+		if ($connect_statut == '0minirezo') { 
+			$connect_toutes_rubriques = !$connect_id_rubrique;
+		}
 	}
 	// Pour les redacteurs, inc_version a fait l'initialisation minimale
 
