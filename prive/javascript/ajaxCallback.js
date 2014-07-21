@@ -821,15 +821,21 @@ jQuery.fn.endLoading = function(hard) {
  */
 jQuery.fn.animateRemove = function(callback){
 	if (this.length){
+		var me=this;
 		var color = $("<div class='remove'></div>").css('background-color');
-		$(this).addClass('remove').css({backgroundColor: color}).animate({opacity: "0.0"}, 'fast',function(){
-			$(this).removeClass('remove').css({backgroundColor: ''});
+		var sel=$(this);
+		// if target is a tr, include td childrens cause background color on tr doesn't works in a lot of browsers
+		if (sel.is('tr'))
+			sel = sel.add('>td',sel);
+		sel.addClass('remove').css({backgroundColor: color}).animate({opacity: "0.0"}, 'fast', function(){
+			sel.removeClass('remove').css({backgroundColor: ''});
 			if (callback)
-				callback.apply(this);
+				callback.apply(me);
 		});
 	}
 	return this; // don't break the chain
 }
+
 
 /**
  * animation d'un item que l'on ajoute :
