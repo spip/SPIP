@@ -93,7 +93,7 @@
 	</langue>
 	<langue code="he" url="http://trad.spip.net/tradlang_module/spip?lang_cible=he" total="633" traduits="568" relire="0" modifs="12" nouveaux="53" pourcent="89.73">
 	</langue>
-	<langue code="hr" url="http://trad.spip.net/tradlang_module/spip?lang_cible=hr" total="633" traduits="560" relire="1" modifs="11" nouveaux="61" pourcent="88.47">
+	<langue code="hr" url="http://trad.spip.net/tradlang_module/spip?lang_cible=hr" total="633" traduits="633" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="hu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=hu" total="633" traduits="530" relire="0" modifs="40" nouveaux="63" pourcent="83.73">
