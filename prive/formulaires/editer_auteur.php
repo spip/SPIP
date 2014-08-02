@@ -88,7 +88,7 @@ function auteurs_edit_config($row)
 	$auth_methode = $row['source'];
 	include_spip('inc/auth');
 	include_spip('inc/autoriser');
-	$autoriser = autoriser('modifier','auteur',$row['id_auteur'],null, array('restreintes'=>true));
+	$autoriser = autoriser('modifier','auteur',$row['id_auteur'],null, array('email'=>true));
 	$config['edit_login'] =
 		(auth_autoriser_modifier_login($auth_methode) AND $autoriser);
 	$config['edit_pass'] =
