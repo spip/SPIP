@@ -44,7 +44,8 @@ function parametres_css_prive(){
 	$args['p'] = substr(md5($GLOBALS['meta']['plugin']),0,4);
 	$args['themes'] = implode(',',lister_themes_prives());
 	$args['ltr'] = $GLOBALS['spip_lang_left'];
-	$args['md5b'] = md5_boutons_plugins(); // un md5 des menus : si un menu change il faut maj la css
+	// un md5 des menus : si un menu change il faut maj la css
+	$args['md5b'] = (function_exists('md5_boutons_plugins')?md5_boutons_plugins():'');
 
 	$c = (is_array($visiteur_session)
 		AND is_array($visiteur_session['prefs']))
