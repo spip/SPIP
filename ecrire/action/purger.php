@@ -59,12 +59,16 @@ function action_purger_dist($arg=null)
 		case 'cache':
 			supprime_invalideurs();
 			@spip_unlink(_CACHE_RUBRIQUES);
-			@spip_unlink(_CACHE_PIPELINES);
-			@spip_unlink(_CACHE_PLUGINS_PATH);
-			@spip_unlink(_CACHE_PLUGINS_OPT);
-			@spip_unlink(_CACHE_PLUGINS_FCT);
 			@spip_unlink(_CACHE_CHEMIN);
 			@spip_unlink(_DIR_TMP."plugin_xml_cache.gz");
+			// on ne supprime que _CACHE_PLUGINS_OPT qui declenche la reconstruction des 3
+			// _CACHE_PIPELINES _CACHE_PLUGINS_PATH et _CACHE_PLUGINS_FCT
+			// pour eviter des problemes de concurence
+			// cf http://core.spip.org/issues/2989
+			//@spip_unlink(_CACHE_PIPELINES);
+			//@spip_unlink(_CACHE_PLUGINS_PATH);
+			//@spip_unlink(_CACHE_PLUGINS_FCT);
+			@spip_unlink(_CACHE_PLUGINS_OPT);
 			purger_repertoire(_DIR_CACHE,array('subdir'=>true));
 			purger_repertoire(_DIR_AIDE);
 			purger_repertoire(_DIR_VAR.'cache-css');
