@@ -1589,6 +1589,10 @@ function affdate_heure($numdate) {
  * @param string $date_fin
  * @param string $horaire
  * @param string $forme
+ *   abbr pour afficher le nom du jour en abbrege (Dim. au lieu de Dimanche)
+ *   annee pour forcer l'affichage de l'annee courante
+ *   jour pour forcer l'affichage du nom du jour
+ *   hcal pour pour avoir un markup microformat abbr
  * @return string
  *     Texte de la date
  */
@@ -1627,7 +1631,7 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 			}else{
 				// Le <abbr...>lundi 20 fevrier de 18h00</abbr> a <abbr...>20h00</abbr>
 				if($dtabbr && $dtstart && $dtend)
-					$s = spip_ucfirst(_T('date_fmt_jour_heure_debut_fin_abbr',array('jour'=>$s,'heure_debut'=>$hd,'heure_fin'=>$hf,'dtstart'=>$dtstart,'dtend'=>$dtend,'dtabbr'=>$dtabbr)));
+					$s = _T('date_fmt_jour_heure_debut_fin_abbr',array('jour'=>spip_ucfirst($s),'heure_debut'=>$hd,'heure_fin'=>$hf,'dtstart'=>$dtstart,'dtend'=>$dtend,'dtabbr'=>$dtabbr));
 				// Le lundi 20 fevrier de 18h00 a 20h00
 				else
 					$s = spip_ucfirst(_T('date_fmt_jour_heure_debut_fin',array('jour'=>$s,'heure_debut'=>$hd,'heure_fin'=>$hf)));
@@ -1644,7 +1648,7 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 		if(!$h)
 			$date_debut = jour($d);
 		else
-			$date_debut = $affdate($d);
+			$date_debut = affdate_jourcourt($d,date("Y",$date_fin));
 		$date_fin = $affdate($f);
 		if($jour){
 			$nomjour_debut = nom_jour($d,$abbr);
@@ -1662,8 +1666,8 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 		$s = _T('date_fmt_periode',array('date_debut' => $date_debut,'date_fin'=>$date_fin));
 	}
 	else {
-		$date_debut = affdate($d);
-		$date_fin = affdate($f);
+		$date_debut = affdate_jourcourt($d,date("Y",$date_fin));
+		$date_fin = $affdate($f);
 		if($jour){
 			$nomjour_debut = nom_jour($d,$abbr);
 			$date_debut = _T('date_fmt_jour',array('nomjour'=>$nomjour_debut,'jour' => $date_debut));
