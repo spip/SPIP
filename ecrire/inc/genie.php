@@ -55,7 +55,7 @@ function inc_genie_dist($taches = array()) {
 	include_spip('inc/queue');
 
 	if (_request('exec')=='job_queue')
-		return;
+		return false;
 
 	$force_jobs = array();
 	// l'ancienne facon de lancer une tache cron immediatement
@@ -66,7 +66,7 @@ function inc_genie_dist($taches = array()) {
 	
 	// et on passe la main a la gestion de la queue !
 	// en forcant eventuellement les jobs ajoute a l'instant
-	queue_schedule(count($force_jobs)?$force_jobs:null);
+	return queue_schedule(count($force_jobs)?$force_jobs:null);
 }
 
 //

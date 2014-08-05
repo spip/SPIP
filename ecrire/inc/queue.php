@@ -268,6 +268,7 @@ function queue_start_job($row){
  *
  * @param array $force_jobs
  *   list of id_job to execute when provided
+ * @return null|false
  */
 function queue_schedule($force_jobs = null){
 	$time = time();
@@ -283,6 +284,8 @@ function queue_schedule($force_jobs = null){
 	}
 
 	include_spip('base/abstract_sql');
+	// on ne peut rien faire si pas de connexion SQL
+	if (!spip_connect())  return false;
 
 	if (!defined('_JQ_MAX_JOBS_TIME_TO_EXECUTE')){
 		$max_time = ini_get('max_execution_time')/2;
@@ -343,6 +346,7 @@ function queue_schedule($force_jobs = null){
 	else
 		queue_update_next_job_time();
 
+	return true;
 }
 
 /**
