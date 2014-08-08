@@ -223,6 +223,14 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour='', $op
 		}
 	}
 	
+
+        // Invalider les caches d'un éventuel objet
+        if (isset($objet) and !is_null($objet)) {
+            include_spip('inc/invalideur');
+            suivre_invalideur("id='$objet/$id_objet'");
+        }
+
+
 	if ($retour){
 		include_spip('inc/headers');
 		$res['redirect'] = parametre_url($retour,'var_mode','calcul');
