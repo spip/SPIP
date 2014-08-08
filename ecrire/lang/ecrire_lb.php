@@ -147,7 +147,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info2' => 'Fir méi Informatiounen iwwer dës Technik, kuckt an <a href="@spipnet@">der SPIP-Dokumentatioun</a>.',
 	'ical_info_calendrier' => 'Et ginn zwee Kalenneren. Deen éischten ass e Plang vum Site mat all den Annoncen vun de publizéierten Artikelen. Deen zweeten huet all editorial Annoncen an är läscht privat Messagen: hien ass mat engem perséinleche Schlëssel fir Iech reservéiert, deen dir zu all Moment ännere kënnt wann dir äert Passwuert ännert.',
 	'ical_methode_http' => 'Eroflueden',
-	'ical_methode_webcal' => 'Synchronisatioun (webcal://)', # MODIF
+	'ical_methode_webcal' => 'Synchronisatioun (webcal://)',
 	'ical_texte_js' => 'Eng Javascript-Zeil erlaabt ganz einfach op egal wéi engem anere Siten déi läscht Artikelen vun dësem Site ze weisen.',
 	'ical_texte_prive' => 'Dëse Kalenner, den nëmmen just Iech gehéiert, informéiert Iech iwwert déi editorial Aktivitéiten vun dësem Site (Aufgaben a perséinlech Rendezvous’en, virgeschloen Artikelen a Kuerzmeldungen...).',
 	'ical_texte_public' => 'Dëse Kalenner erlaabt Iech déi ëffentlech Aktivitéit vun dësem Site ze verfollegen (verëffentlecht Artikelen a Kuerzmeldungen).',
