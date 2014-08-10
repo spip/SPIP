@@ -180,16 +180,49 @@ function quete_condition_statut($mstatut,$previsu,$publie, $serveur='', $ignore_
 		return $cond[$key]=($not?"1=1":"'0=1'");
 
 	$liste = explode(',',$liste);
+	$where = array();
 	foreach($liste as $k=>$v) {
+		// filtrage /auteur pour limiter les objets d'un statut (prepa en general)
+		// a ceux de l'auteur identifie
+		if (strpos($v,"/")!==false){
+			$v = explode("/",$v);
+			$filtre = end($v);
+			$v = reset($v);
+			$v = preg_replace(",\W,","",$v);
+			if ($filtre=="auteur"
+				AND isset($GLOBALS['visiteur_session']['id_auteur'])
+				AND intval($GLOBALS['visiteur_session']['id_auteur'])
+				AND (strpos($mstatut,".")!==false)
+			  AND $objet = explode(".",$mstatut)
+				AND $id_table = reset($objet)
+			  AND $objet = objet_type($id_table)){
+				$primary = id_table_objet($objet);
+				$where[] = "($mstatut<>".sql_quote($v)." OR $id_table.$primary IN (".sql_get_select("ssss.id_objet","spip_auteurs_liens AS ssss","ssss.objet=".sql_quote($objet)." AND ssss.id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur']),'','','','',$serveur)."))";
+			}
+			// ignorer ce statut si on ne sait pas comment le filtrer
+			else
+				$v = "";
+		}
 		// securite
 		$liste[$k] = preg_replace(",\W,","",$v);
 	}
+	$liste = array_filter($liste);
   if (count($liste)==1){
-		return $cond[$key] = array(($not?'<>':'='), $mstatut, sql_quote(reset($liste),$serveur));
+		$where[] = array('=', $mstatut, sql_quote(reset($liste),$serveur));
   }
   else {
-	  return $cond[$key] = sql_in($mstatut,$liste,$not,$serveur);
+	  $where[] = sql_in($mstatut,$liste,$not,$serveur);
   }
+
+	while (count($where)>1){
+		$and = array('AND',array_pop($where),array_pop($where));
+		$where[] = $and;
+	}
+	$cond[$key] = reset($where);
+	if ($not)
+		$cond[$key] = array('NOT',$cond[$key]);
+
+	return $cond[$key];
 }
 
 /**
