@@ -490,6 +490,7 @@ prive/objets/editer/rediriger_article.html -text
 prive/objets/editer/traductions.html -text
 prive/objets/infos/article.html -text
 prive/objets/infos/auteur.html -text
+prive/objets/infos/inc-auteur-rubriques.html -text
 prive/objets/infos/objet.html -text
 prive/objets/infos/rubrique.html -text
 prive/objets/liste/articles-memerubrique.html -text

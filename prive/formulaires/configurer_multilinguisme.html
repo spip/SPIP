@@ -85,7 +85,11 @@
 			[<li class="fieldset">
 				<fieldset>
 					<legend><:icone_gestion_langues:></legend>
-					<p><:info_multi_langues_choisies:></p>
+					<p><:info_multi_langues_choisies:>
+						[(#ENV{_nb_langues_selection}|>{10}|oui)
+						\(<a href="#" onclick="jQuery('#langues_proposees').find('input\[type=checkbox\]').attr('checked',false);return false;"><:lien_tout_decocher:></a>\)
+						]
+					</p>
 					(#ENV**{_langues,''})
 					<p><:info_multi_langues_soulignees:></p>
 				</fieldset>
