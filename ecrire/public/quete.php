@@ -162,6 +162,11 @@ function quete_condition_postdates($champ_date, $serveur='', $ignore_previsu=fal
  * @return array
  */
 function quete_condition_statut($mstatut,$previsu,$publie, $serveur='', $ignore_previsu=false){
+	static $cond = array();
+	$key = func_get_args();
+	$key = implode("-",$key);
+	if (isset($cond[$key])) return $cond[$key];
+
 	$liste = $publie;
 	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW AND !$ignore_previsu)
 		$liste = $previsu;
@@ -172,7 +177,7 @@ function quete_condition_statut($mstatut,$previsu,$publie, $serveur='', $ignore_
 	}
 	// '' => ne rien afficher, '!'=> ne rien filtrer
 	if (!strlen($liste))
-		return ($not?"1=1":"'0=1'");
+		return $cond[$key]=($not?"1=1":"'0=1'");
 
 	$liste = explode(',',$liste);
 	foreach($liste as $k=>$v) {
@@ -180,10 +185,10 @@ function quete_condition_statut($mstatut,$previsu,$publie, $serveur='', $ignore_
 		$liste[$k] = preg_replace(",\W,","",$v);
 	}
   if (count($liste)==1){
-		return array(($not?'<>':'='), $mstatut, sql_quote(reset($liste),$serveur));
+		return $cond[$key] = array(($not?'<>':'='), $mstatut, sql_quote(reset($liste),$serveur));
   }
   else {
-	  return sql_in($mstatut,$liste,$not,$serveur);
+	  return $cond[$key] = sql_in($mstatut,$liste,$not,$serveur);
   }
 }
 
