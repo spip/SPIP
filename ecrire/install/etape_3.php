@@ -281,8 +281,8 @@ function install_etape_3_dist()
 	
 	} else { 
 		$res = '';
-		list($adresse_db, $login_db, $pass_db, $sel_db, $server_db)
-		= analyse_fichier_connection(_FILE_CONNECT_TMP);
+		list($adresse_db, $login_db, $pass_db, $sel_db, $server_db) = analyse_fichier_connection(_FILE_CONNECT_TMP);
+		$GLOBALS['connexions'][$server_db] = spip_connect_db($adresse_db, $sel_db, $login_db, $pass_db, $sel_db, $server_db);
 	}
 
 	if (!$res) {
@@ -300,7 +300,7 @@ function install_etape_3_dist()
 		  . (defined('_INSTALL_NAME_DB') ? ''
 		     : "\n<input type='hidden' name='sel_db' value='$sel_db' />");
 
-		$auteur_obligatoire = !sql_countsel('spip_auteurs','','','',$server_db);
+		$auteur_obligatoire = ($ldap_present?0:!sql_countsel('spip_auteurs','','','',$server_db));
 
 		$res =  "<div class='success'><b>"
 		. _T('info_base_installee')
