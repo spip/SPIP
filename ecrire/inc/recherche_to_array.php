@@ -106,10 +106,12 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			foreach ($champs as $champ => $poids) {
 				$champ = explode('.',$champ);
 				$champ = end($champ);
+				// translitteration_rapide uniquement si on est deja en utf-8
+				$value = ($GLOBALS['meta']['charset']=='utf-8' ? translitteration_rapide($t[$champ]) : translitteration($t[$champ]));
 				if ($n =
 					($options['score'] || $options['matches'])
-					? preg_match_all($preg, translitteration_rapide($t[$champ]), $regs, PREG_SET_ORDER)
-					: preg_match($preg, translitteration_rapide($t[$champ]))
+					? preg_match_all($preg, $value, $regs, PREG_SET_ORDER)
+					: preg_match($preg, $value)
 				) {
 					$vu = true;
 
