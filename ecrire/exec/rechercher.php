@@ -1,5 +1,4 @@
 <?php
-
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
@@ -29,15 +28,14 @@ include_spip('inc/texte');
  * @uses exec_rechercher_args() Formate le rendu de la recherche.
  * @uses ajax_retour()
 **/
-function exec_rechercher_dist()
-{
+function exec_rechercher_dist(){
 	$id = intval(_request('id'));
 	$exclus = intval(_request('exclus'));
 	$rac = spip_htmlentities(_request('rac'));
 	$type = _request('type');
-	$do  = _request('do');
+	$do = _request('do');
 	if (preg_match('/^\w*$/', $do))
-	  $r = exec_rechercher_args($id, $type, $exclus, $rac, $do);
+		$r = exec_rechercher_args($id, $type, $exclus, $rac, $do);
 	else $r = '';
 	ajax_retour($r);
 }
@@ -55,65 +53,64 @@ function exec_rechercher_dist()
  * @param string $do
  * @return string
 **/
-function exec_rechercher_args($id, $type, $exclus, $rac, $do)
-{
+function exec_rechercher_args($id, $type, $exclus, $rac, $do){
 	if (!$do) $do = 'aff';
 
 	$where = preg_split(",\s+,", $type);
-	if ($where) {
-		foreach ($where as $k => $v) 
-			$where[$k] = "'%" . substr(str_replace("%","\%", sql_quote($v)),1,-1) . "%'";
+	if ($where){
+		foreach ($where as $k => $v)
+			$where[$k] = "'%" . substr(str_replace("%", "\%", sql_quote($v)), 1, -1) . "%'";
 		$where_titre = ("(titre LIKE " . join(" AND titre LIKE ", $where) . ")");
 		$where_desc = ("(descriptif LIKE " . join(" AND descriptif LIKE ", $where) . ")");
 		$where_id = ("(id_rubrique = " . join(" AND id_rubrique = ", $where) . ")");
-		} else {
+	} else {
 		$where_titre = " 1=2";
 		$where_desc = " 1=2";
 		$where_id = " 1=2";
 	}
 
-	if ($exclus) {
+	if ($exclus){
 		include_spip('inc/rubriques');
 		$where_exclus = " AND " . sql_in('id_rubrique', calcul_branche_in($exclus), 'NOT');
-	} else	$where_exclus = '';
+	} else  $where_exclus = '';
 
 	$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_id$where_exclus");
 
 	$points = $rub = array();
 
-	while ($row = sql_fetch($res)) {
+	while ($row = sql_fetch($res)){
 		$id_rubrique = $row["id_rubrique"];
-		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
+		$rub[$id_rubrique]["titre"] = typo($row["titre"]);
 		$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
-		$points[$id_rubrique] = $points[$id_rubrique] + 3;
+		$points[$id_rubrique] = $points[$id_rubrique]+3;
 	}
 	$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_titre$where_exclus");
 
-	while ($row = sql_fetch($res)) {
+	while ($row = sql_fetch($res)){
 		$id_rubrique = $row["id_rubrique"];
-		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
+		$rub[$id_rubrique]["titre"] = typo($row["titre"]);
 		$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
 		if (isset($points[$id_rubrique]))
-		  $points[$id_rubrique] += 2;
+			$points[$id_rubrique] += 2;
 		else $points[$id_rubrique] = 0;
 	}
 	$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_desc$where_exclus");
 
-	while ($row = sql_fetch($res)) {
+	while ($row = sql_fetch($res)){
 		$id_rubrique = $row["id_rubrique"];
-		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
+		$rub[$id_rubrique]["titre"] = typo($row["titre"]);
 		$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
 		if (isset($points[$id_rubrique]))
-		  $points[$id_rubrique] += 1;
+			$points[$id_rubrique] += 1;
 		else $points[$id_rubrique] = 0;
 	}
 
-	if ($points) {
+	if ($points){
 		arsort($points);
 		$style = " style='background-image: url(" . chemin_image('secteur-12.png') . ")'";
-		foreach($rub as $k => $v) {
+		foreach ($rub as $k => $v){
 			$rub[$k]['atts'] = ($v["id_parent"] ? $style : '')
-			. " class='petite-rubrique'";
+				. " class='petite-rubrique'";
 		}
 	}
 
@@ -138,35 +135,34 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do)
  * @param string $do
  * @return string
 **/
-function proposer_item ($ids, $titles, $rac, $type, $do)
-{
+function proposer_item($ids, $titles, $rac, $type, $do){
 
 	if (!$ids)
 		return "<br /><br /><div style='padding: 5px; color: red;'><b>"
-		.spip_htmlentities($type)
-		."</b> :  "._T('avis_aucun_resultat')."</div>";
+		. spip_htmlentities($type)
+		. "</b> :  " . _T('avis_aucun_resultat') . "</div>";
 
 	$ret = '';
 	$info = generer_url_ecrire('informer', "type=rubrique&rac=$rac&id=");
 
-	$onClick = "aff_selection(this.firstChild.title,'$rac". "_selection','$info', event)";
+	$onClick = "aff_selection(this.firstChild.title,'$rac" . "_selection','$info', event)";
 
 	$ondbClick = "$do(this.firstChild.firstChild.nodeValue,this.firstChild.title,'selection_rubrique', 'id_parent');";
 
-	foreach($ids as $id => $bof) {
-				
+	foreach ($ids as $id => $bof){
+
 		$titre = strtr(str_replace("'", "&#8217;", str_replace('"', "&#34;", textebrut($titles[$id]["titre"]))), "\n\r", "  ");
 
 		$ret .= "<div class='highlight off'\nonclick=\"changerhighlight(this); "
-		. $onClick
-		. "\"\nondblclick=\""
-		. $ondbClick
-		. $onClick
-		. " \"><div"
-		. $titles[$id]["atts"]
-		. " title='$id'>&nbsp; "
-		. $titre
-		. "</div></div>";
+			. $onClick
+			. "\"\nondblclick=\""
+			. $ondbClick
+			. $onClick
+			. " \"><div"
+			. $titles[$id]["atts"]
+			. " title='$id'>&nbsp; "
+			. $titre
+			. "</div></div>";
 	}
 	return $ret;
 }
