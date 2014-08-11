@@ -63,14 +63,24 @@ function liste_des_jointures() {
 }
 
 function expression_recherche($recherche, $options) {
+	// ne calculer qu'une seule fois l'expression par hit
+	// (meme si utilisee dans plusieurs boucles)
+	static $expression = array();
+	$key = serialize(array($recherche, $options['preg_flags']));
+	if (isset($expression[$key]))
+		return $expression[$key];
+
 	$u = $GLOBALS['meta']['pcre_u'];
+	if ($u AND strpos($options['preg_flags'],$u)===false)
+		$options['preg_flags'] .= $u;
 	include_spip('inc/charsets');
-	$recherche = trim(translitteration($recherche));
+	$recherche = trim($recherche);
 
 	$is_preg = false;
 	if (substr($recherche,0,1)=='/' AND substr($recherche,-1,1)=='/'){
 		// c'est une preg
-		$preg = $recherche.$options['preg_flags'];
+		$recherche_trans = translitteration($recherche);
+		$preg = $recherche_trans.$options['preg_flags'];
 		$is_preg = true;
 	}
 	else{
@@ -90,9 +100,10 @@ function expression_recherche($recherche, $options) {
 			// mais on cherche quand même l'expression complète, même si elle
 			// comporte des mots de moins de quatre lettres
 			$recherche = rtrim($recherche.preg_replace(',\s+,'.$u, '|', $recherche_inter), '|');
+			$recherche_trans = translitteration($recherche);
 		}
 
-		$preg = '/'.str_replace('/', '\\/', $recherche).'/' . $options['preg_flags'];
+		$preg = '/'.str_replace('/', '\\/', $recherche_trans).'/' . $options['preg_flags'];
 	}
 
 	// Si la chaine est inactive, on va utiliser LIKE pour aller plus vite
@@ -106,7 +117,8 @@ function expression_recherche($recherche, $options) {
 			array('(',')','?','[', ']', '+', '*', '/'),
 			array('\(','\)','[?]', '\[', '\]', '\+', '\*', '\/'),
 			$recherche);
-		$recherche_mod = $recherche;
+		$recherche_trans = translitteration($recherche);
+		$recherche_mod = $recherche_trans;
 
 		// echapper les % et _
 		$q = str_replace(array('%','_'), array('\%', '\_'), trim($recherche));
@@ -137,7 +149,33 @@ function expression_recherche($recherche, $options) {
 		$q = sql_quote(trim($recherche, '/'));
 	}
 
-	return array($methode, $q, $preg);
+	// tous les caracteres transliterables de $q sont remplaces par un joker
+	// permet de matcher en SQL meme si on est sensible aux accents (SQLite)
+	$q_t = $q;
+	for($i = 0;$i<spip_strlen($q);$i++){
+		$char = spip_substr($q,$i,1);
+		if (!is_ascii($char)
+		  AND $char_t = translitteration($char)
+		  AND $char_t !== $char){
+			$q_t = str_replace($char,$is_preg?".":"_", $q_t);
+		}
+	}
+
+	$q = $q_t;
+
+	// fix : SQLite 3 est sensible aux accents, on jokerise les caracteres
+	// les plus frequents qui peuvent etre accentues
+	// (oui c'est tres dicustable...)
+	if (isset($GLOBALS['connexions'][$options['serveur']?$options['serveur']:0]['type'])
+	  AND strncmp($GLOBALS['connexions'][$options['serveur']?$options['serveur']:0]['type'],'sqlite',6)==0){
+		$q_t = strtr($q,"aeuioc",$is_preg?"......":"______");
+		// si il reste au moins un char significatif...
+		if (preg_match(",[^'%_.],",$q_t))
+			$q = $q_t;
+	}
+
+	var_dump(array($methode, $q, $preg));
+	return $expression[$key] = array($methode, $q, $preg);
 }
 
 
