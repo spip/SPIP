@@ -244,7 +244,10 @@ function _sqlite_func_right ($s, $length) {
 
 // http://doc.spip.org/@_sqlite_func_regexp_match
 function _sqlite_func_regexp_match($cherche, $quoi) {
-	$return = preg_match('%'.$cherche.'%', $quoi);
+	// optimiser un cas tres courant avec les requetes en base
+	if (!$quoi AND !strlen($quoi)) return false;
+	$u = $GLOBALS['meta']['pcre_u'];
+	$return = preg_match('%'.$cherche.'%imsS'.$u, $quoi);
 	#spip_log("regexp_replace : $quoi, $cherche, $remplace, $return",'sqlite.'._LOG_DEBUG);
 	return $return;
 }
