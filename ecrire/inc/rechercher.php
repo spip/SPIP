@@ -174,7 +174,6 @@ function expression_recherche($recherche, $options) {
 			$q = $q_t;
 	}
 
-	var_dump(array($methode, $q, $preg));
 	return $expression[$key] = array($methode, $q, $preg);
 }
 
