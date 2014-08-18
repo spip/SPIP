@@ -34,11 +34,9 @@
 [(#SET{lien,[#(#ENV{foncee}|couleur_foncer{0.25})]})]
 
 body {font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;background-color: #f9f9f9;background-color: #[(#ENV{claire}|couleur_luminance{0.01}|couleur_saturation{0.015})];}
-#bando_identite {font-size: 90%;padding: 1px 0px;background-color: #[(#ENV{foncee}|couleur_eclaircir)];color: #[(#ENV{foncee}|couleur_luminance{0.6})];}
-#bando_identite a,#bando_identite strong {color: #[(#ENV{foncee}|couleur_luminance{0.7})];}
+#bando_identite {letter-spacing: -0.5px}
 #bando_identite a:hover {color: #333;}
-#bando_identite strong:hover {color: #333;}
-#bando_haut ul.deroulant li a {text-decoration: none;color: #666;}
+#bando_haut ul.deroulant li a {color: #666;}
 #bando_haut ul.deroulant li a:hover {color: black;}
 #bando_haut ul.deroulant li ul li {background-color: transparent;}
 #bando_haut ul.deroulant li ul> li:last-child {-webkit-border-bottom-left-radius:5px;-moz-border-radius-bottomleft:5px;border-bottom-left-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-bottomright:5px;border-bottom-right-radius:5px;position:relative;}
@@ -55,7 +53,6 @@ body {font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;b
 /*
 #bando_outils {border-top: 1px solid #999;background-color: #444;background: -webkit-gradient(linear, left top, left bottom, from(#555555), to(#333333));background-image: -webkit-linear-gradient(top, #555555, #333333);background-image: -moz-linear-gradient(top, #555555, #333333);background-image: -ms-linear-gradient(top, #555555, #333333);background-image: -o-linear-gradient(top, #555555, #333333);background-image: linear-gradient(top, #555555, #333333);filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#555555', endColorstr='#333333');}
 */
-#bando_outils {border-bottom: 1px solid #[(#ENV{claire}|couleur_eclaircir)];background-color:#[(#ENV{foncee}|couleur_luminance{0.15})];}
 #bando_outils ul.deroulant {font-size: 0.9em;line-height: 120%;}
 /*
 .navigation_avec_icones #bando_navigation ul.deroulant > li > a {font-size: 90%;}
