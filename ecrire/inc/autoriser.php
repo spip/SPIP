@@ -1092,7 +1092,7 @@ function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_infosperso_onglet_dist($faire,$type,$id,$qui,$opt) {
+function autoriser_infosperso_dist($faire,$type,$id,$qui,$opt) {
 	return true;
 }
 
@@ -1108,7 +1108,7 @@ function autoriser_infosperso_onglet_dist($faire,$type,$id,$qui,$opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_configurerlangage_onglet_dist($faire,$type,$id,$qui,$opt) {
+function autoriser_configurerlangage_dist($faire,$type,$id,$qui,$opt) {
 	return true;
 }
 
@@ -1124,7 +1124,7 @@ function autoriser_configurerlangage_onglet_dist($faire,$type,$id,$qui,$opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_configurerpreferences_onglet_dist($faire,$type,$id,$qui,$opt) {
+function autoriser_configurerpreferences_dist($faire,$type,$id,$qui,$opt) {
 	return true;
 }
 
