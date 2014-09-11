@@ -131,14 +131,6 @@ function controle_forum_boucle($row, $args) {
 	$valeur = $r['valeur'];
 	$pref = $r['pref'];
 
-	if ($documents = sql_allfetsel('doc.id_document, doc.fichier AS fichier', 'spip_documents AS doc LEFT JOIN spip_documents_liens AS lien ON doc.id_document=lien.id_document', 'lien.id_objet='.intval($id_forum)." AND objet='forum'")) {
-		include_spip('inc/documents');
-		foreach ($documents as $k => $t) {
-			$h = generer_url_entite($t['id_document'], 'document');
-			$documents[$k] = "<a href='".$h."'>".basename($t['fichier'])."</a>";
-		}
-	}
-
 	switch($forum_stat) {
 		case 'off':
 		case 'privoff':
@@ -181,7 +173,7 @@ function controle_forum_boucle($row, $args) {
 	  boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur", $forum_ip, 'controle_forum', $args) .
 	  safehtml(lignes_longues($suite)) .
 	  afficher_forum_mots($id_forum) .
-	  join(', ', $documents) .
+	  join(', ', lister_forum_documents($id_forum)) .
 	  "<div class='nettoyeur'></div></div>".
 	  fin_cadre_forum(true);
 }

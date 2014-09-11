@@ -517,6 +517,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	   boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$id_article", $ip,  $script, $argscript))
 	. "<div style='font-weight: normal;'>"
 	. safehtml(justifier(propre($texte)))
+	. join(', ', lister_forum_documents($id_forum))
 	. "</div>\n"
 	. (!$nom_site ? '' :
 	      ((strlen($url_site) > 10) ? "\n<div style='text-align: left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>"
@@ -616,5 +617,21 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 		. "</td>\n";
 	}
 	return $res;
+}
+
+function lister_forum_documents($id_forum, $autoriser=true)
+{
+	if ($documents = sql_allfetsel('D.id_document, D.fichier AS fichier', 'spip_documents AS D LEFT JOIN spip_documents_liens AS L ON D.id_document=L.id_document', "objet='forum' AND L.id_objet=".intval($id_forum))) {
+		include_spip('inc/documents');
+		foreach ($documents as $k => $t) {
+			$texte = basename($t['fichier']);
+			if ($autoriser) {
+				$h = generer_url_entite($t['id_document'], 'document');
+				$texte = "<a href='$h'>$texte</a>";
+			}
+			$documents[$k] = $texte;
+		}
+	}
+	return $documents;
 }
 ?>
