@@ -56,6 +56,9 @@
 	</langue>
 	<langue code="es_co" url="http://trad.spip.net/tradlang_module/public?lang_cible=es_co" total="78" traduits="61" relire="0" modifs="3" nouveaux="14" pourcent="78.21">
 	</langue>
+	<langue code="et" url="http://trad.spip.net/tradlang_module/public?lang_cible=et" total="78" traduits="67" relire="0" modifs="0" nouveaux="11" pourcent="85.90">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
 	<langue code="eu" url="http://trad.spip.net/tradlang_module/public?lang_cible=eu" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="otalazt" lien="http://trad.spip.net/auteur/otalazt" />
 	</langue>
