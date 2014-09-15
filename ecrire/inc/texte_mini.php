@@ -152,21 +152,7 @@ function traiter_echap_script_dist($regs) {
 	return $regs[0];
 }
 
-/**
- * Traiter les blocs <math></math> echappes par echappe_html
- * @param $regs
- * @return string
- */
-function traiter_echap_math_dist($regs) {
-	// Gestion du TeX
-	if (!function_exists('traiter_math'))
-		include_spip('inc/math');
-
-	$t = traiter_math($regs[0], '');
-	return $t;
-}
-
-define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script|math)(\s[^>]*)?>(.*)</\1>,UimsS');
+define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script)(\s[^>]*)?>(.*)</\1>,UimsS');
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc/filtres
