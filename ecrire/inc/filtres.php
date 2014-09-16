@@ -1088,6 +1088,10 @@ function choixsiegal($a1,$a2,$v,$f) {
 function normaliser_date($date, $forcer_jour = false) {
 	$date = vider_date($date);
 	if ($date) {
+		
+		// Gérer correctement les dates au format 16/09/2014
+		$date = str_replace('/', '-', $date);
+		
 		if (preg_match("/^[0-9]{8,10}$/", $date)) {
 			$date = date("Y-m-d H:i:s", $date);
 		}
