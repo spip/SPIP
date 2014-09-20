@@ -189,7 +189,9 @@ jQuery.fn.formulaire_setARIA = function(){
 		// eviter une double execution du js au moment de sa reinsertion dans le DOM par wrap()
 		// cf http://bugs.jquery.com/ticket/7447
 		this.find('script').remove();
-		this.wrap('<div class="ariaformprop" aria-live="assertive" aria-atomic="true"></div>');
+		this.wrap('<div class="ariaformprop" aria-live="polite" aria-atomic="true" aria-relevant="additions"></div>');
+		// dans un formulaire, le screen reader relit tout a chaque saisie d'un caractere si on est en aria-live
+		jQuery('form',this).not('[aria-live]').attr('aria-live','off');
 	}
 	return this;
 }
@@ -695,7 +697,12 @@ jQuery.fn.ajaxbloc = function() {
 		  if (jQuery.spip.ajaxReload(blocfrag,options))
 				// don't trig reload of parent blocks
 				event.stopPropagation();
-	  }).addClass('bind-ajaxReload');
+	  }).addClass('bind-ajaxReload')
+		  .attr('aria-live','polite').attr('aria-atomic','true');
+
+		// dans un formulaire, le screen reader relit tout a chaque saisie d'un caractere si on est en aria-live
+	  // mettre un aria-live="off" sur les forms inclus dans ce bloc aria-live="polite"
+	  jQuery('form',this).not('[aria-live]').attr('aria-live','off');
 
 		jQuery(ajaxbloc_selecteur,this).not('.noajax,.bind-ajax')
 			.click(function(){return jQuery.spip.ajaxClick(blocfrag,this.href,{force:jQuery(this).is('.nocache'),history:!(jQuery(this).is('.nohistory')||jQuery(this).closest('.box_modalbox').length)});})
