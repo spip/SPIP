@@ -23,7 +23,7 @@
 							f.find('span.toggle_box_link[(#ENV{_langue}|oui),span.affiche]').hide('fast');
 							f.find('.boutons,.new_trad,.editer_id_trad').show('fast');
 							f.find('#changer_lang').eq(0).focus();return false;"
-						><:bouton_changer:></a>&#93;</span>
+						><:bouton_changer:><i class="over"> \([(#ENV{_langue}|?{[(#ENV{_objet}|objet_info{texte_langue_objet}|_T)],<:info_traductions:>})]\)</i></a>&#93;</span>
 					[(#ENV{_langue}|oui)
 					[<span class="input[(#ENV{_saisie_en_cours}|non)none-js]">
 					<select name="changer_lang" id="changer_lang">(#INCLURE{fond=formulaires/inc-options-langues,name=changer_lang,default=#ENV**{_langue},herit=#ENV**{langue_parent}})</select>
