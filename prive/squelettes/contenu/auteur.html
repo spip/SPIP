@@ -25,7 +25,8 @@
 ]
 
 <div id="wysiwyg">
-<INCLURE{fond=prive/objets/contenu/auteur,id=#ID_AUTEUR,id_auteur=#ID_AUTEUR,exec=#ENV{exec},wysiwyg=1}>
+	<h2 class="invisible"><:previsualisation:></h2>
+	<INCLURE{fond=prive/objets/contenu/auteur,id=#ID_AUTEUR,id_auteur=#ID_AUTEUR,exec=#ENV{exec},wysiwyg=1}>
 </div>
 
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,auteur,id,#ID_AUTEUR},data,'<div class="nettoyeur"></div>'}}
