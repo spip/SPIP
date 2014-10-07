@@ -675,6 +675,7 @@ a znova sa prihlásiť na stránku.
 	'titre_statistiques' => 'Štatistiky stránok',
 	'titre_titre_document' => 'Názov dokumentu:',
 	'todo' => 'nasleduje',
+	'trad_definir_reference' => 'Vybrať "@titre@" ako referenciu pre preklady',
 	'trad_reference' => '(referencia pre preklady)',
 
 	// Z
