@@ -67,7 +67,7 @@ function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='', $postd
 		elseif (isset($modifs['id_rubrique']))
 			$neuf |= publier_branche_rubrique($modifs['id_rubrique']);
 	}
-	elseif ($modifs['statut']=='publie'){
+	elseif (isset($modifs['statut']) and $modifs['statut']=='publie'){
 		if ($postdate){
 			calculer_prochain_postdate(true);
 			$neuf |= (strtotime($postdate)<=time()); // par securite
