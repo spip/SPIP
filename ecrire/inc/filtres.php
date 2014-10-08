@@ -1005,8 +1005,21 @@ function vider_url($url, $entites = true) {
 	return preg_match($r, $url) ? '': ($entites ? entites_html($url) : $url);
 }
 
-// Extraire une date de n'importe quel champ (a completer...)
-// http://doc.spip.org/@extraire_date
+/**
+ * Extrait une date d'un texte et renvoie le résultat au format de date SQL
+ *
+ * L'année et le mois doivent être numériques. 
+ * Le séparateur entre l'année et le mois peut être un `-`, un `:` ou un texte 
+ * quelconque ne contenant pas de chiffres.
+ *
+ * Les jours ne sont pas pris en compte et le résultat est toujours le 1er du mois. 
+ *
+ * @link http://www.spip.net/5516
+ * @param string $texte
+ *    Texte contenant une date tel que `2008-04`
+ * @return string
+ *    Date au format SQL tel que `2008-04-01`
+**/
 function extraire_date($texte) {
 	// format = 2001-08
 	if (preg_match(",([1-2][0-9]{3})[^0-9]*(1[0-2]|0?[1-9]),",$texte,$regs))
