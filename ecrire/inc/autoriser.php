@@ -855,10 +855,11 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 		}
 	}
 
-	// Un admin complet fait ce qu'elle veut
+	// Un admin complet fait ce qu'il veut
 	// sauf se degrader
-	if ($id == $qui['id_auteur'] && $opt['statut'])
+	if ($id == $qui['id_auteur'] && (isset($opt['statut']) and $opt['statut'])) {
 		return false;
+	}
 	// et toucher au statut webmestre si il ne l'est pas lui meme
 	// ou si les webmestres sont fixes par constante (securite)
 	elseif (isset($opt['webmestre']) AND $opt['webmestre'] AND (defined('_ID_WEBMESTRES') OR !autoriser('webmestre')))
