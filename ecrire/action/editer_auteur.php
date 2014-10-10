@@ -308,7 +308,12 @@ function auteur_instituer($id_auteur, $c, $force_webmestre = false) {
 	if (isset($c['webmestre'])
 	  AND ($force_webmestre OR autoriser('modifier', 'auteur', $id_auteur,null, array('webmestre' => '?'))))
 		$champs['webmestre'] = $c['webmestre']=='oui'?'oui':'non';
-	
+
+	// si statut change et n'est pas 0minirezo, on force webmestre a non
+	if (isset($c['statut']) AND $c['statut']!=='0minirezo'){
+		$champs['webmestre'] = $c['webmestre'] = 'non';
+	}
+
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',
 		array(
