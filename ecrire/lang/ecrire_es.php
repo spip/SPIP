@@ -570,6 +570,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'lien_retirer_tous_auteurs' => 'Quitar todos los autores',
 	'lien_retirer_toutes_rubriques' => 'Retirar todas las secciones',
 	'lien_site' => 'sitio',
+	'lien_tout_decocher' => 'desmarcar todo',
 	'lien_tout_deplier' => 'Desplegar todo',
 	'lien_tout_replier' => 'Replegar todo',
 	'lien_tout_supprimer' => 'Suprimir todo',
