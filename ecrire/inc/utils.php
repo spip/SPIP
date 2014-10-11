@@ -424,12 +424,21 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	$ajouts = array_flip(explode('|',$c));
 	$u = is_array($v) ? $v : rawurlencode($v);
 	$testv = (is_array($v)?count($v):strlen($v));
+	$v_read = null;
 	// lire les variables et agir
 	foreach ($url as $n => $val) {
 		if (preg_match($regexp, urldecode($val), $r)) {
 			$r = array_pad($r, 3, null);
 			if ($v === NULL) {
-				return $r[2]?substr($r[2],1):'';
+				// c'est un tableau, on memorise les valeurs
+				if (substr($r[1],-2)=="[]"){
+					if (!$v_read) $v_read = array();
+					$v_read[] = $r[2]?substr($r[2],1):'';
+				}
+				// c'est un scalaire, on retourne direct
+				else {
+					return $r[2]?substr($r[2],1):'';
+				}
 			}
 			// suppression
 			elseif (!$testv) {
@@ -453,7 +462,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	if ($v === NULL
 	AND $args = func_get_args()
 	AND count($args)==2) {
-		return $v;
+		return $v_read; // rien trouve ou un tableau
 	} elseif ($testv) {
 		foreach($ajouts as $k => $n) {
 			if (!is_array($v))

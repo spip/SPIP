@@ -925,6 +925,7 @@ function parametre_url(url,c,v,sep,force_vide){
 	var ajouts = [];
 	var u = (typeof(v)!=='object')?encodeURIComponent(v):v;
 	var na = [];
+	var v_read = null;
 	// lire les variables et agir
 	for(var n=0;n<args.length;n++){
 		var val = args[n];
@@ -932,7 +933,15 @@ function parametre_url(url,c,v,sep,force_vide){
 		var r=val.match(regexp);
 		if (r && r.length){
 			if (v==null){
-				return (r.length>2 && typeof r[2]!=='undefined')?r[2].substring(1):'';
+				// c'est un tableau, on memorise les valeurs
+				if (r[1].substr(-2) == '[]') {
+					if (!v_read) v_read = [];
+					v_read.push((r.length>2 && typeof r[2]!=='undefined')?r[2].substring(1):'');
+				}
+				// c'est un scalaire, on retourne direct
+				else {
+					return (r.length>2 && typeof r[2]!=='undefined')?r[2].substring(1):'';
+				}
 			}
 			// suppression
 			else if (!v.length) {
@@ -951,7 +960,7 @@ function parametre_url(url,c,v,sep,force_vide){
 			na.push(args[n]);
 	}
 
-	if (v==null) return v; // rien de trouve
+	if (v==null) return v_read; // rien de trouve ou un tableau
 	// traiter les parametres pas encore trouves
 	if (v || v.length || force_vide) {
 		ajouts = "="+ajouts.join("=")+"=";
