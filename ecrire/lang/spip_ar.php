@@ -157,7 +157,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jnum8' => '8',
 	'date_jnum9' => '9',
 	'date_jour_1' => 'الأحد',
-	'date_jour_1_abbr' => 'الأحد',
+	'date_jour_1_abbr' => 'أحد',
 	'date_jour_1_initiale' => 'أحد',
 	'date_jour_2' => 'الاثنين',
 	'date_jour_2_abbr' => 'اثنين',
@@ -675,6 +675,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_statistiques' => 'إحصاءات الموقع',
 	'titre_titre_document' => 'اسم المستند: ',
 	'todo' => 'قريباً',
+	'trad_definir_reference' => 'اختيار "@titre@" كمرجع للترجمات',
 	'trad_reference' => '(مرجع الترجمات)',
 
 	// Z
