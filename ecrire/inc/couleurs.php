@@ -87,12 +87,12 @@ function inc_couleurs_dist($choix=NULL, $ajouter=false)
 		"couleur_lien" => "#666633",
 		"couleur_lien_off" => "#999966"
 		),
-// Rose vieux
+// Rouge
 8 => array (
-		"couleur_foncee" => "#EB68B3",
-		"couleur_claire" => "#E4A7C5",
-		"couleur_lien" => "#8F004D",
-		"couleur_lien_off" => "#BE6B97"
+		"couleur_foncee" => "#DF4543",
+		"couleur_claire" => "#FAACB0",
+		"couleur_lien" => "#D0000A",
+		"couleur_lien_off" => "#D96067"
 		),
 // Violet
 9 => array (
