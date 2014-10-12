@@ -5,7 +5,7 @@ div.time-picker {
   overflow: auto;
   background: #fff;
   border: 1px solid #aaa;
-  z-index: 99998;
+  z-index: 99998; /* 98 */
   margin: 0;
 }
 div.time-picker-12hours {
@@ -24,6 +24,6 @@ div.time-picker li {
   padding: 4px 3px;
 }
 div.time-picker li.selected {
-  background: #0063CE;
+  background: #888; /* #0063CE */
   color: #fff;
 }
