@@ -139,6 +139,15 @@ if ( !jQuery.browser ) {
 	jQuery.browser = browser;
 }
 
+// jQuery.getScript cache par defaut
+jQuery.getScript = function(url,callback){
+	return $.ajax({
+		url: url,
+		dataType: "script",
+		success: callback,
+		cache: true
+	});
+}
 
 /**
  * if not fully visible, scroll the page to position
