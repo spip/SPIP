@@ -2103,7 +2103,7 @@ function spip_initialisation_suite() {
 	// Historiquement la valeur pour imagick semble differente. Si ca n'est pas necessaire, il serait preferable de garder _IMG_QUALITE
         if (!defined('_IMG_IMAGICK_QUALITE')) define('_IMG_IMAGICK_QUALITE', 75); # surcharge pour imagick en PHP
 
-	if (!defined('_COPIE_LOCALE_MAX_SIZE')) define('_COPIE_LOCALE_MAX_SIZE',16777216); // poids en octet
+	if (!defined('_COPIE_LOCALE_MAX_SIZE')) define('_COPIE_LOCALE_MAX_SIZE',33554432); // poids en octet
 
 	// qq chaines standard
 	if (!defined('_ACCESS_FILE_NAME')) define('_ACCESS_FILE_NAME', '.htaccess');
