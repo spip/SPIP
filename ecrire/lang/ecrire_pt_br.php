@@ -777,7 +777,7 @@ Se o problema persistir, contate o seu serviço de hospedagem.</p>',
 	'texte_titre_02' => 'Título:',
 	'texte_titre_obligatoire' => '<b>Título</b> [obrigatório]',
 	'texte_travail_article' => '@nom_auteur_modif@ trabalhou nesta matéria há @date_diff@ minutos',
-	'texte_travail_collaboratif' => 'Se é frequente acontecer de mais de um redator trabalhar em uma mesma matéria, o sistema pode exibir as matérias recentemente «abertas», de modo a evitar modificações concorrentes.Esta opção está desativada por padrão para evitar a exibição de mensagens de aviso intempestivas.',
+	'texte_travail_collaboratif' => 'Se é frequente acontecer de mais de um redator trabalhar em uma mesma matéria, o sistema pode exibir as matérias recentemente "abertas", de modo a evitar modificações concorrentes. Esta opção está desativada por padrão, para evitar a exibição de mensagens de aviso desnecessárias.', # MODIF
 	'texte_vide' => 'vazia',
 	'texte_vider_cache' => 'Esvaziar o cache',
 	'titre_admin_tech' => 'Manutenção técnica',
