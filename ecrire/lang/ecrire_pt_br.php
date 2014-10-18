@@ -737,7 +737,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'texte_enrichir_mise_a_jour' => 'Você pode enriquecer a diagramação do seu texto usando «atalhos tipográficos».',
 	'texte_fichier_authent' => '<b>O SPIP pode criar os arquivos especiais  <tt>.htpasswd</tt> e <tt>.htpasswd-admin</tt> no diretório @dossier@?</b><p>
 Estes arquivos podem servir para restringir o acesso aos autores e administradores em outras áreas do seu site (programas externos de estatísticas, por exemplo).</p><p>
-Se eles não forem úteis, você poderá deixar esta opção com o seu valor padrão (sem criar os arquivos).</p>', # MODIF
+Se eles não forem úteis, você poderá deixar esta opção com o seu valor padrão (sem criar os arquivos).</p>',
 	'texte_informations_personnelles_1' => 'O sistema vai criar agora um acesso personalizado ao site.',
 	'texte_informations_personnelles_2' => '(Nota: trata-se de uma reinstalação, se o seu acesso funciona corretamente, você pode',
 	'texte_introductif_article' => '(Texto introdutório da matéria.)',
@@ -789,7 +789,7 @@ Se o problema persistir, contate o seu serviço de hospedagem.</p>',
 	'texte_titre_02' => 'Título:',
 	'texte_titre_obligatoire' => '<b>Título</b> [obrigatório]',
 	'texte_travail_article' => '@nom_auteur_modif@ trabalhou nesta matéria há @date_diff@ minutos',
-	'texte_travail_collaboratif' => 'Se é frequente acontecer de mais de um redator trabalhar em uma mesma matéria, o sistema pode exibir as matérias recentemente "abertas", de modo a evitar modificações concorrentes. Esta opção está desativada por padrão, para evitar a exibição de mensagens de aviso desnecessárias.', # MODIF
+	'texte_travail_collaboratif' => 'Se é frequente acontecer de mais de um redator trabalhar em uma mesma matéria, o sistema pode exibir as matérias recentemente "abertas", de modo a evitar modificações concorrentes. Esta opção está desativada por padrão, para evitar a exibição de mensagens de aviso desnecessárias.',
 	'texte_vide' => 'vazia',
 	'texte_vider_cache' => 'Esvaziar o cache',
 	'titre_admin_tech' => 'Manutenção técnica',
