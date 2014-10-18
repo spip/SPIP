@@ -147,9 +147,11 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 		include_spip('inc/distant');
 		$fichier = _DIR_RACINE . copie_locale($source);
 		if (!$fichier) return "";
-	}	else {
+	}
+	else {
 		// enlever le timestamp eventuel
-		$source=preg_replace(',[?][0-9]+$,','',$source);
+		if (strpos($source,"?")!==false)
+			$source = preg_replace(',[?][0-9]+$,','',$source);
 		$fichier = $source;
 	}
 
@@ -612,8 +614,8 @@ function image_graver($img){
 	// des traitements auto a la fin d'une serie de filtres
 	$img = pipeline('post_image_filtrer',$img);
 
-	$fichier = extraire_attribut($img, 'src');
-	if (($p=strpos($fichier,'?'))!==FALSE)
+	$fichier_ori = $fichier = extraire_attribut($img, 'src');
+	if (($p=strpos($fichier,'?'))!==false)
 		$fichier=substr($fichier,0,$p);
 	if (strlen($fichier) < 1)
 		$fichier = $img;
@@ -621,7 +623,14 @@ function image_graver($img){
 	if (!@file_exists($fichier))
 		reconstruire_image_intermediaire($fichier);
 	ramasse_miettes($fichier);
-	return $img; // on ne change rien
+
+	// ajouter le timestamp si besoin
+	if (strpos($fichier_ori,"?")===false){
+		// on utilise str_replace pour attraper le onmouseover des logo si besoin
+		$img = str_replace($fichier_ori, timestamp($fichier_ori), $img);
+	}
+
+	return $img;
 }
 
 // Transforme une image a palette indexee (256 couleurs max) en "vraies" couleurs RGB
