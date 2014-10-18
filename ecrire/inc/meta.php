@@ -187,13 +187,15 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 	// cf effacer pour comprendre le double touch
 	$antidate = time() - (_META_CACHE_TIME<<1);
 	if (!isset($touch[$table])) {touch_meta($antidate, $table);}
-	$r = array('nom' => $nom, 'valeur' => $valeur);
+	$r = array('nom' => sql_quote($nom,'','text'), 'valeur' => sql_quote($valeur,'','text'));
 	// Gaffe aux tables sans impt (vieilles versions de SPIP notamment)
-	if ($importable AND isset($row['impt'])) $r['impt'] = $importable;
+	// ici on utilise pas sql_updateq et sql_insertq pour ne pas provoquer trop tot
+	// de lecture des descriptions des tables
+	if ($importable AND isset($row['impt'])) $r['impt'] = sql_quote($importable,'','text');
 	if ($row) {
-		sql_updateq('spip_' . $table, $r,"nom=" . sql_quote($nom));
+		sql_update('spip_' . $table, $r,"nom=" . sql_quote($nom));
 	} else {
-		sql_insertq('spip_' . $table, $r);
+		sql_insert('spip_' . $table, "(".join(',',array_keys($r)).")","(".join(',',array_values($r)).")");
 	}
 	if (!isset($touch[$table])) {touch_meta($antidate, $table); $touch[$table] = false;}
 }
