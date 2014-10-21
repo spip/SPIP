@@ -163,6 +163,21 @@ function spip_mysql_get_charset($charset=array(), $serveur='',$requeter=true){
 
 
 /**
+ * Exécute une requête Mysql (obsolète, ne plus utiliser)
+ * 
+ * @deprecated Utiliser sql_query() ou autres
+ * 
+ * @param string $query    Requête
+ * @param string $serveur  Nom de la connexion
+ * @param bool   $requeter Exécuter la requête, sinon la retourner
+ * @return Resource        Ressource pour fetch()
+**/
+function spip_query_db($query, $serveur='',$requeter=true) {
+	return spip_mysql_query($query, $serveur, $requeter);
+}
+
+
+/**
  * Exécute une requête MySQL, munie d'une trace à la demande
  * 
  * @param string $query    Requête
@@ -191,7 +206,19 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 	} else $t = 0 ;
 
 	$connexion['last'] = $query;
-	$r = mysqli_query($link, $query);
+
+	// ajouter un debug utile dans log/mysql-slow.log ?
+	$debug = '';
+	if (defined('_DEBUG_SLOW_QUERIES') AND _DEBUG_SLOW_QUERIES){
+		if(isset($GLOBALS['debug']['aucasou'])){
+			list(,$id,, $infos) = $GLOBALS['debug']['aucasou'];
+			$debug .= " BOUCLE$id @ ".$infos[0] ." | ";
+		}
+		$debug .= " " . $_SERVER['REQUEST_URI'].' + '.$GLOBALS['ip'];
+		$debug = ' /*'.str_replace('*/','@/',$debug).' */';
+	}
+
+	$r = mysqli_query($link, $query.$debug);
 
 	if ($e = spip_mysql_errno($serveur))	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query, $serveur); // et du fautif
@@ -1385,6 +1412,27 @@ function spip_mysql_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
 }
 
 
+/**
+ * Retourne une expression IN pour le gestionnaire de base de données
+ *
+ * Pour compatibilité. Ne plus utiliser.
+ * 
+ * @deprecated Utiliser sql_in()
+ * 
+ * @param string $val           Nom de la colonne
+ * @param string|array $valeurs Valeurs
+ * @param string $not           NOT pour inverser
+ * @return string               Expression de requête SQL
+ */
+function calcul_mysql_in($val, $valeurs, $not='') {
+	if (is_array($valeurs))
+		$valeurs = join(',', array_map('_q', $valeurs));
+	elseif ($valeurs[0]===',') $valeurs = substr($valeurs,1);
+	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
+	return spip_mysql_in($val, $valeurs, $not);
+}
+
+
 
 /**
  * Renvoie les bons echappements (mais pas sur les fonctions comme NOW())
@@ -1407,6 +1455,64 @@ function spip_mysql_cite($v, $type) {
 			return intval($v);
 	}
 	return  ("'" . addslashes($v) . "'");
+}
+
+
+
+// Ces deux fonctions n'ont pas d'equivalent exact PostGres
+// et ne sont la que pour compatibilite avec les extensions de SPIP < 1.9.3
+
+/**
+ * Poser un verrou SQL local 
+ *
+ * Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
+ *
+ * @deprecated Pas d'équivalence actuellement en dehors de MySQL
+ * @see spip_release_lock()
+ * 
+ * @param string $nom
+ *     Inutilisé. Le nom est calculé en fonction de la connexion principale
+ * @param int $timeout
+ * @return string|bool
+ *     - Nom du verrou si réussite,
+ *     - false sinon
+ */
+function spip_get_lock($nom, $timeout = 0) {
+
+	define('_LOCK_TIME', intval(time()/3600-316982));
+
+	$connexion = &$GLOBALS['connexions'][0];
+	$bd = $connexion['db'];
+	$prefixe = $connexion['prefixe'];
+	$nom = "$bd:$prefixe:$nom" .  _LOCK_TIME;
+
+	$connexion['last'] = $q = "SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n";
+	$q = @sql_fetch(mysql_query($q));
+	if (!$q) spip_log("pas de lock sql pour $nom", _LOG_ERREUR);
+	return $q['n'];
+}
+
+
+/**
+ * Relâcher un verrou SQL local 
+ * 
+ * @deprecated Pas d'équivalence actuellement en dehors de MySQL
+ * @see spip_get_lock()
+ * 
+ * @param string $nom
+ *     Inutilisé. Le nom est calculé en fonction de la connexion principale
+ * @return string|bool
+ *     True si réussite, false sinon.
+ */
+function spip_release_lock($nom) {
+
+	$connexion = &$GLOBALS['connexions'][0];
+	$bd = $connexion['db'];
+	$prefixe = $connexion['prefixe'];
+	$nom = "$bd:$prefixe:$nom" . _LOCK_TIME;
+
+	$connexion['last'] = $q = "SELECT RELEASE_LOCK(" . _q($nom) . ")";
+	@mysql_query($q);
 }
 
 
