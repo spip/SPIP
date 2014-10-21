@@ -699,10 +699,10 @@ function debusquer_source($objet, $affiche){
 	if ($affiche=='resultat'){
 		$legend = $nom;
 		$req = $GLOBALS['debug_objets']['requete'][$objet];
-		if (function_exists('traite_query')){
+		if (function_exists('_mysql_traite_query')){
 			$c = strtolower(_request('connect'));
 			$c = $GLOBALS['connexions'][$c ? $c : 0]['prefixe'];
-			$req = traite_query($req, '', $c);
+			$req = _mysql_traite_query($req, '', $c);
 		}
 		//  permettre le copier/coller facile
 		// $res = ancre_texte($req, array(), true);
