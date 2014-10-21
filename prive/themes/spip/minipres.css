@@ -82,6 +82,8 @@ select { font-size: 120%; }
 .reponse_formulaire,
 .erreur_message { font-weight: bold; color: red; }
 
+.reponse_formulaire.reponse_formulaire_ok {border:2px solid; font-weight: normal; padding: 10px; margin-bottom: 20px; color: #264409; border-color: #C6D880; background-color: #E6EFC2;}
+
 
 /* Habillage (en vrac)
 ---------------------------------------------- */
