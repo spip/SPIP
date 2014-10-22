@@ -50,7 +50,7 @@ function parametres_css_prive(){
 	$c = (is_array($visiteur_session)
 		AND is_array($visiteur_session['prefs']))
 		? $visiteur_session['prefs']['couleur']
-		: 1;
+		: 10;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
 	parse_str($couleurs($c),$c);
