@@ -1566,8 +1566,8 @@ function test_sql_mode_mysql($server_db){
 	$res = sql_select("version() as v",'','','','','','',$server_db);
 	$row = sql_fetch($res,$server_db);
 	if (version_compare($row['v'],'5.0.0','>=')){
-		define('_MYSQL_SET_SQL_MODE',true);
-		return "define('_MYSQL_SET_SQL_MODE',true);\n";
+		defined('_MYSQL_SET_SQL_MODE') || define('_MYSQL_SET_SQL_MODE', true);
+		return "defined('_MYSQL_SET_SQL_MODE') || define('_MYSQL_SET_SQL_MODE',true);\n";
 	}
 	return '';
 }
