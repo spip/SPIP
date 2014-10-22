@@ -209,16 +209,6 @@ function article_inserer($id_rubrique) {
 
 	$id_article = sql_insertq("spip_articles", $champs);
 
-	pipeline('post_insertion',
-		array(
-			'args' => array(
-				'table' => 'spip_articles',
-				'id_objet' => $id_article
-			),
-			'data' => $champs
-		)
-	);
-
 	// controler si le serveur n'a pas renvoye une erreur
 	if ($id_article > 0){
 		$id_auteur = ((is_null(_request('id_auteur')) AND isset($GLOBALS['visiteur_session']['id_auteur']))?
@@ -229,6 +219,16 @@ function article_inserer($id_rubrique) {
 			auteur_associer($id_auteur, array('article'=>$id_article));
 		}
 	}
+
+	pipeline('post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_articles',
+				'id_objet' => $id_article
+			),
+			'data' => $champs
+		)
+	);
 
 	return $id_article;
 }
