@@ -563,6 +563,7 @@ prive/squelettes/hierarchie/auteur.html -text
 prive/squelettes/hierarchie/auteur_edit.html -text
 prive/squelettes/hierarchie/dist.html -text
 prive/squelettes/hierarchie/dist_fonctions.php -text
+prive/squelettes/hierarchie/infos_perso.html -text
 prive/squelettes/inclure/accueil-information.html -text
 prive/squelettes/inclure/admin_vider_cache.html -text
 prive/squelettes/inclure/admin_vider_images.html -text
