@@ -100,6 +100,14 @@
 					<label for='perso_activer_imessage_off'><:bouton_radio_non_apparaitre_liste_redacteurs_connectes:></label>
 				</div>
 			</li>
+			<li class='editer editer_activer_menudev[ (#ENV**{erreurs}|table_valeur{activer_menudev}|oui)erreur]'>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{activer_menudev})</span>]
+				<div class='choix'>
+					<input type="hidden" name="activer_menudev" value="" />
+					<input class='checkbox' type="checkbox" name="activer_menudev" value='oui' [checked="(#ENV{activer_menudev}|=={oui}|?{checked})"] id="activer_menudev"/>
+					<label for="activer_menudev"><:info_activer_menu_developpement:></label>
+				</div>
+			</li>
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
@@ -107,7 +115,7 @@
 	</div></form>
 	<script type="text/javascript">
 		jQuery(document).ready(function(){
-			jQuery('div.formulaire_#FORM form input.radio').bind('change',function(){jQuery(this).parents('form').submit();});
+			jQuery('div.formulaire_#FORM form').find('input.radio, input.checkbox').bind('change',function(){jQuery(this).parents('form').submit();});
 			jQuery('div.formulaire_#FORM .boutons').hide();
 		});
 	</script>

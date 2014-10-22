@@ -38,6 +38,7 @@ function formulaires_configurer_preferences_charger_dist(){
 	$valeurs['display_outils'] = isset($GLOBALS['visiteur_session']['prefs']['display_outils'])?$GLOBALS['visiteur_session']['prefs']['display_outils']:'oui';
 	$valeurs['display'] = (isset($GLOBALS['visiteur_session']['prefs']['display']) AND $GLOBALS['visiteur_session']['prefs']['display']>0)?$GLOBALS['visiteur_session']['prefs']['display']:2;
 	$valeurs['couleur'] = (isset($GLOBALS['visiteur_session']['prefs']['couleur']) AND $GLOBALS['visiteur_session']['prefs']['couleur']>0)?$GLOBALS['visiteur_session']['prefs']['couleur']:1;
+	$valeurs['activer_menudev'] = isset($GLOBALS['visiteur_session']['prefs']['activer_menudev'])?$GLOBALS['visiteur_session']['prefs']['activer_menudev']:'';
 	$valeurs['spip_ecran'] = $GLOBALS['spip_ecran'];
 
 	$couleurs = charger_fonction('couleurs','inc');
@@ -75,6 +76,10 @@ function formulaires_configurer_preferences_traiter_dist(){
 		$GLOBALS['visiteur_session']['prefs']['display_outils'] = $display_outils;
 	}
 
+	if ($menudev = _request('activer_menudev')) {
+		$GLOBALS['visiteur_session']['prefs']['activer_menudev'] = $menudev;
+	}
+
 	if (intval($GLOBALS['visiteur_session']['id_auteur'])){
 		include_spip('action/editer_auteur');
 		$c = array('prefs' => serialize($GLOBALS['visiteur_session']['prefs']));
@@ -91,7 +96,7 @@ function formulaires_configurer_preferences_traiter_dist(){
 		include_spip('inc/cookie');
 		spip_setcookie('spip_ecran', $_COOKIE['spip_ecran'] = $spip_ecran, time() + 365 * 24 * 3600);
 	}
-	
+
 	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
 }
 

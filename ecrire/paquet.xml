@@ -159,6 +159,7 @@
 	<menu nom="configurer_interactions" titre="onglet_interactivite" parent="menu_configuration" icone="images/config-interaction-16.png" />
 	<menu nom="configurer_avancees" titre="onglet_fonctions_avances" parent="menu_configuration" icone="images/configuration-16.png" />
 	<menu nom="admin_plugin" titre="icone_admin_plugin" parent="menu_configuration" position="-1" icone="images/plugin-16.png" />
+	<menu nom="menu_developpement" titre="icone_developpement" icone="images/developpement-48.png" action="navigation" parametres="menu=menu_developpement" />
 	<menu nom="outils_collaboratifs" titre="icone_outils_collaboratifs" />
 	<menu nom="outils_rapides" titre="icone_outil_rapides" />
 	<menu nom="rubrique_creer" titre="icone_creer_rubrique_2" parent="outils_rapides" icone="images/rubrique-new-16.png" action="rubrique_edit" parametres="new=oui&amp;id_parent=@id_rubrique@" />
