@@ -4105,7 +4105,7 @@ function appliquer_traitement_champ($texte,$champ,$table_sql='',$env=array(),$co
 
 	$champ = strtoupper($champ);
 	$traitements = isset($GLOBALS['table_des_traitements'][$champ]) ? $GLOBALS['table_des_traitements'][$champ] : false;
-	if($traitements)
+	if(!$traitements)
 		return $texte;
 
 	$traitement = '';
