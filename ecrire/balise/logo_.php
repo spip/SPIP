@@ -164,8 +164,10 @@ function logo_survol($id_objet, $_id_objet, $type, $align, $fichier, $lien, $p, 
 
 	if ($fichier) return $code;
 
+	// class spip_logos a supprimer ulterieurement (transition douce vers spip_logo)
+	// cf http://core.spip.org/issues/2483
 	$code = "\n((!is_array(\$l = $code)) ? '':\n (" .
-		     '"<img class=\"spip_logos\" alt=\"\"' .
+		     '"<img class=\"spip_logo spip_logos\" alt=\"\"' .
 		    ($align ? " align=\\\"$align\\\"" : '')
 		    . ' src=\"$l[0]\"" . $l[2] .  ($l[1] ? " onmouseover=\"this.src=\'$l[1]\'\" onmouseout=\"this.src=\'$l[0]\'\"" : "") . \' />\'))';
 
