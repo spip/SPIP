@@ -552,11 +552,13 @@ function inc_xml_to_array_dist($u) {
  */
 function inc_yql_to_array_dist($u) {
 	define('_YQL_ENDPOINT', 'http://query.yahooapis.com/v1/public/yql?&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&q=');
-	$v = recuperer_page($url = _YQL_ENDPOINT.urlencode($u).'&format=json');
-	$w = json_decode($v);
-	if (!$w) {
+	$v = recuperer_url($url = _YQL_ENDPOINT.urlencode($u).'&format=json');
+	if (!$v['page']
+	  OR !$w = json_decode($v['page'],true)) {
 		throw new Exception('YQL: r&#233;ponse vide ou mal form&#233;e');
-		return false;
+	}
+	if (isset($w['error'])){
+		throw new Exception($w['error']['description']);
 	}
 	return (array) $w;
 }
