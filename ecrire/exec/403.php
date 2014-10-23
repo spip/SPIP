@@ -19,8 +19,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Un exec d'acces interdit
+ * @param string $message
  */
-function exec_403_dist(){
+function exec_403_dist($message = ""){
 
 	$exec = _request('exec');
 
@@ -28,8 +29,10 @@ function exec_403_dist(){
 	$navigation = "";
 	$extra = "";
 
-	$contenu = "<h1>"._T('info_acces_interdit')."</h1>"
-		. _L("Vous n'avez pas le droit d'acc&eacute;der à la page <b>@exec@</b>.",array('exec'=>_request('exec')));
+	if (!$message)
+		$message = _L("Vous n'avez pas le droit d'acc&eacute;der à la page <b>@exec@</b>.",array('exec'=>_request('exec')));
+
+	$contenu = "<h1 class='grostitre'>"._T('info_acces_interdit')."</h1>" . $message;
 
 	if (_request('var_zajax')) {
 		include_spip('inc/actions');

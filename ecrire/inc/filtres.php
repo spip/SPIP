@@ -4437,51 +4437,53 @@ function filtre_chercher_rubrique_dist($titre,$id_objet, $id_parent, $objet, $id
  * @param bool $ok
  *     Indique si l'on doit rediriger ou pas
  * @param string $url
- *     Adresse vers laquelle rediriger
+ *     Adresse eventuelle vers laquelle rediriger
  * @param int $statut
  *     Statut HTML avec lequel on redirigera
+ * @param string $message
+ *     message d'erreur
  * @return string|void
  *     Chaîne vide si l'accès est autorisé
  */
-function sinon_interdire_acces($ok=false, $url='', $statut=0){
+function sinon_interdire_acces($ok=false, $url='', $statut=0, $message=null){
 	if ($ok) return '';
-	
+
 	// Vider tous les tampons
 	$level = @ob_get_level();
 	while ($level--)
 		@ob_end_clean();
 	
 	include_spip('inc/headers');
-	$statut = intval($statut);
-	
-	// Si aucun argument on essaye de deviner quoi faire par défaut
-	if (!$url and !$statut){
-		// Si on est dans l'espace privé, on génère du 403 Forbidden
-		if (test_espace_prive()){
-			http_status(403);
-			$echec = charger_fonction('403','exec');
-			$echec();
-		}
-		// Sinon dans l'espace public on redirige vers une 404 par défaut, car elle toujours présente normalement
-		else{
-			$statut = 404;
-		}
+
+	// S'il y a une URL, on redirige (si pas de statut, la fonction mettra 302 par défaut)
+	if ($url) redirige_par_entete($url, '', $statut);
+
+	// ecriture simplifiee avec message en 3eme argument (= statut 403)
+	if (!is_numeric($statut) AND is_null($message)){
+		$message = $statut;
+		$statut = 0;
 	}
-	
-	// On suit les directives indiquées dans les deux arguments
-	
-	// S'il y a un statut
-	if ($statut){
+	if (!$message) $message = '';
+	$statut = intval($statut);
+
+		// Si on est dans l'espace privé, on génère du 403 Forbidden par defaut ou du 404
+	if (test_espace_prive()){
+		if (!$statut OR !in_array($statut,array(404,403))) $statut = 403;
+		http_status(403);
+		$echec = charger_fonction('403','exec');
+		$echec($message);
+	}
+	else {
+		// Sinon dans l'espace public on redirige vers une 404 par défaut, car elle toujours présente normalement
+		if (!$statut) $statut = 404;
 		// Dans tous les cas on modifie l'entité avec ce qui est demandé
 		http_status($statut);
 		// Si le statut est une erreur et qu'il n'y a pas de redirection on va chercher le squelette du même nom
-		if ($statut >= 400 and !$url)
-			echo recuperer_fond("$statut");
+		if ($statut >= 400)
+			echo recuperer_fond("$statut",array('erreur'=>$message));
 	}
-	
-	// S'il y a une URL, on redirige (si pas de statut, la fonction mettra 302 par défaut)
-	if ($url) redirige_par_entete($url, '', $statut);
-	
+
+
 	exit;
 }
 
