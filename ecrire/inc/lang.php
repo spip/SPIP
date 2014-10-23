@@ -367,33 +367,6 @@ function utiliser_langue_visiteur() {
 
 
 /**
- * Retourne le répertoire contenant le module de langue indiqué
- * 
- * Note : pourrait en donner une liste... compliqué
- * 
- * @param string $module
- *     Nom du module de lang
- * @param string $lang
- *     Langue du module de langue
- * @return string
- *     Adresse du répertoire contenant le module
- *     Retourne ecrire/lang/ s'il rien ne semble correspondre.
-**/
-function repertoire_lang($module='spip', $lang='fr') {
-	# valeur forcee (par ex.sur spip.net), old style, a faire disparaitre
-	if (defined('_DIR_LANG'))
-		return _DIR_LANG;
-
-	# regarder s'il existe une v.f. qq part
-	if ($f = find_in_path($module.'_'.$lang . '.php', 'lang/'))
-		return dirname($f).'/';
-
-	# sinon, je ne sais trop pas quoi dire...
-	return _DIR_RESTREINT . 'lang/';
-}
-
-
-/**
  * Initialisation des listes de langues
  *
  * Initialise les métas :
@@ -413,20 +386,19 @@ function init_langues() {
 
 	$tout = array();
 	if (!$all_langs) {
-		if ($d = @opendir(repertoire_lang())) {
-			while (($f = readdir($d)) !== false) {
-				if (preg_match(',^spip_([a-z_]+)\.php[3]?$,', $f, $regs))
-					$tout[] = $regs[1];
-			}
-			closedir($d);
-			sort($tout);
-			$tout = join(',', $tout);
-			// Si les langues n'ont pas change, ne rien faire
-			if ($tout != $all_langs) {
-				$GLOBALS['meta']['langues_proposees'] =	$tout;
-				include_spip('inc/meta');
-				ecrire_meta('langues_proposees', $tout);
-			} else $tout = '';
+		// trouver tous les modules lang/spip_xx.php
+		$modules = find_all_in_path("lang/","/spip_([a-z_]+)\.php[3]?$");
+		foreach($modules as $name=>$path){
+			if (preg_match(',^spip_([a-z_]+)\.php[3]?$,', $name, $regs))
+				$tout[] = $regs[1];
+		}
+		sort($tout);
+		$tout = join(',', $tout);
+		// Si les langues n'ont pas change, ne rien faire
+		if ($tout != $all_langs) {
+			$GLOBALS['meta']['langues_proposees'] =	$tout;
+			include_spip('inc/meta');
+			ecrire_meta('langues_proposees', $tout);
 		}
 	}
 	if (!isset($GLOBALS['meta']['langue_site'])) {
