@@ -206,15 +206,13 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour='', $op
 	
 	// sinon supprimer ancien logo puis copier le nouveau
 	else {
-		include_spip('action/iconifier');
-		$ajouter_image = charger_fonction('spip_image_ajouter','action');
 		$sources = formulaire_editer_logo_get_sources();
 		foreach($sources as $etat=>$file) {
 			if ($file and $file['error']==0) {
 				$logo = $chercher_logo($id_objet, $_id_objet, $etat);
 				if ($logo)
 					spip_unlink($logo[0]);
-				if ($err = $ajouter_image($type.$etat.$id_objet," ",$file,true))
+				if ($err = formulaire_editer_logo_importer_image($type.$etat.$id_objet,$file))
 					$res['message_erreur'] = $err;
 				else
 					$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
@@ -251,4 +249,82 @@ function formulaire_editer_logo_get_sources(){
 	}
 	return $sources;
 }
-?>
+
+/**
+ * Recuperer l'image et l'importer pour le logo nomme par $nom
+ * @param string $nom
+ *   nom du logo
+ * @param string|array $source
+ *   source : array si vient de input file, string si fichier de upload
+ * @return string
+ *   erreur eventuelle
+ */
+function formulaire_editer_logo_importer_image($nom, $source){
+	include_spip('inc/documents');
+	$erreur = "";
+
+	if (!$source){
+		spip_log("spip_image_ajouter : source inconnue");
+		$erreur = "source inconnue";
+		return $erreur;
+	}
+
+	$file_tmp = _DIR_LOGOS . $nom . '.tmp';
+
+	$ok = false;
+	// fichier dans upload/
+	if (is_string($source)){
+		$ok = @copy(determine_upload() . $source, $file_tmp);
+	} // Intercepter une erreur a l'envoi
+	elseif (!$erreur = check_upload_error($source['error'], "", true)) {
+		// analyse le type de l'image (on ne fait pas confiance au nom de
+		// fichier envoye par le browser : pour les Macs c'est plus sur)
+		$ok = deplacer_fichier_upload($source['tmp_name'], $file_tmp);
+	}
+
+	if ($erreur){
+		return $erreur;
+	}
+	if (!$ok OR !file_exists($file_tmp)){
+		spip_log($erreur = "probleme de copie pour $file_tmp ");
+		return $erreur;
+	}
+
+	$size = @getimagesize($file_tmp);
+	$type = !$size ? '' : ($size[2]>3 ? '' : $GLOBALS['formats_logos'][$size[2]-1]);
+	if ($type){
+		$poids = filesize($file_tmp);
+
+		if (_LOGO_MAX_SIZE>0
+			AND $poids>_LOGO_MAX_SIZE*1024
+		){
+			spip_unlink($file_tmp);
+			$erreur = _T('info_logo_max_poids',
+				array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
+					'actuel' => taille_en_octets($poids)));
+		} elseif (_LOGO_MAX_WIDTH*_LOGO_MAX_HEIGHT
+			AND ($size[0]>_LOGO_MAX_WIDTH
+				OR $size[1]>_LOGO_MAX_HEIGHT)
+		) {
+			spip_unlink($file_tmp);
+			$erreur = _T('info_logo_max_poids',
+				array(
+					'maxi' =>
+						_T('info_largeur_vignette',
+							array('largeur_vignette' => _LOGO_MAX_WIDTH,
+								'hauteur_vignette' => _LOGO_MAX_HEIGHT)),
+					'actuel' =>
+						_T('info_largeur_vignette',
+							array('largeur_vignette' => $size[0],
+								'hauteur_vignette' => $size[1]))
+				));
+		} else
+			@rename($file_tmp, _DIR_LOGOS . $nom . ".$type");
+	} else {
+		spip_unlink($file_tmp);
+		$erreur = _T('info_logo_format_interdit',
+			array('formats' => join(', ', $GLOBALS['formats_logos'])));
+	}
+
+	return $erreur;
+}
