@@ -303,9 +303,15 @@ function quete_logo($type, $onoff, $id, $id_rubrique, $flag) {
 				// on retourne une url du type IMG/artonXX?timestamp
 				// qui permet de distinguer le changement de logo
 				// et placer un expire sur le dossier IMG/
-				return array ($on[0].($on[4]?"?$on[4]":""),
+				$res = array ($on[0].($on[4]?"?$on[4]":""),
 					($off ? $off[0] . ($off[4]?"?$off[4]":"") : ''),
 					(!$taille ? '' : (" ".$taille[3])));
+				$res['src'] = $res[0];
+				$res['logo_on'] = $res[0];
+				$res['logo_off'] = $res[1];
+				$res['width'] = ($taille?$taille[0]:'');
+				$res['height'] = ($taille?$taille[1]:'');
+				return $res;
 			}
 		}
         else if (defined('_LOGO_RUBRIQUE_DESACTIVER_HERITAGE'))
