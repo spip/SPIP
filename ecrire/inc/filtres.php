@@ -4101,6 +4101,32 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 }
 
 /**
+ * Generer un lien (titre clicable vers url) vers un objet
+ * @param int $id_objet
+ * @param $objet
+ * @param int $longueur
+ * @param null|string $connect
+ * @return string
+ */
+function generer_lien_entite($id_objet, $objet, $longueur=80, $connect=NULL){
+	include_spip('inc/liens');
+	$titre = traiter_raccourci_titre($id_objet, $objet, $connect);
+	// lorsque l'objet n'est plus declare (plugin desactive par exemple)
+	// le raccourcis n'est plus valide
+	$titre = isset($titre['titre']) ? typo($titre['titre']) : '';
+	// on essaye avec generer_info_entite ?
+	if (!strlen($titre) AND !$connect){
+		$titre = generer_info_entite($id_objet, $objet,'titre');
+	}
+	if (!strlen($titre)){
+		$titre = _T('info_sans_titre');
+	}
+	$url = generer_url_entite($id_objet,$objet,'','',$connect);
+	return "<a href='$url' class='$objet'>".couper($titre,$longueur)."</a>";
+}
+
+
+/**
  * Englobe (Wrap) un texte avec des balises
  * 
  * @example
@@ -4220,6 +4246,7 @@ function objet_icone($objet,$taille=24){
 	$balise_img = charger_filtre('balise_img');
 	return $icone?$balise_img($icone,_T(objet_info($objet,'texte_objet'))):'';
 }
+
 
 /**
  * Fonction de secours pour inserer le head_css de facon conditionnelle
