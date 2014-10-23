@@ -35,7 +35,7 @@ table.spip td { vertical-align: top; }
 table.spip td.numeric {text-align:right;}
 
 /* Logos, documents et images */
-img, .spip_logos { margin: 0; padding: 0; border: 0; }
+img, .spip_logo { margin: 0; padding: 0; border: 0; }
 .spip_documents { text-align: center; line-height: normal; }
 .spip_documents p { margin: 0.10em; padding: 0; }
 .spip_documents_center { display: block; clear: both; width: 100%; margin: 1em auto; }
