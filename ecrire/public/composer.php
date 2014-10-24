@@ -480,7 +480,7 @@ function lister_objets_avec_logos ($type) {
 	. ")$/";
 
 	if ($d = @opendir(_DIR_LOGOS)) {
-		while($f = readdir($d)) {
+		while(($f = readdir($d))!==false) {
 			if (preg_match($type, $f, $r))
 				$logos[] = $r[1];
 		}
