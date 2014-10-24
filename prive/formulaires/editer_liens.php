@@ -91,7 +91,7 @@ function formulaires_editer_liens_charger_dist($a,$b,$c,$editable=true){
 	include_spip('inc/autoriser');
 	$editable = ($editable and autoriser('associer'.$table_source, $objet, $id_objet) and autoriser('modifier',$objet,$id_objet));
 	
-	if (!$editable AND !count(objet_trouver_liens(array($objet_lien=>'*'),array(($objet_lien==$objet_source?$objet:$objet_source)=>'*'))))
+	if (!$editable AND !count(objet_trouver_liens(array($objet_lien=>$objet_lien==$objet_source?'*':$id_objet),array(($objet_lien==$objet_source?$objet:$objet_source)=>$objet_lien==$objet_source?$id_objet:'*'))))
 		return false;
 	
 	$valeurs = array(
