@@ -832,18 +832,9 @@ function balise_INTRODUCTION_dist($p) {
 	if (($v = interprete_argument_balise(1,$p))!==NULL) {
 		$longueur = 'intval('.$v.')';
 	} else {
-		switch ($type) {
-			case 'articles':
-				$longueur = '500';
-				break;
-			case 'breves':
-				$longueur = '300';
-				break;
-			case 'rubriques':
-			default:
-				$longueur = '600';
-				break;
-		}
+		$longueur = objet_info($type,'introduction_longueur');
+		if (!$longueur)
+			$longueur = 600;
 	}
 
 	$f = chercher_filtre('introduction');

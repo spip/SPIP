@@ -92,6 +92,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'titre' => 'titre, lang',
 				'date' => 'date',
 				'principale' => 'oui',
+				'introduction_longueur' => '500',
 				'champs_editables' => array('surtitre', 'titre', 'soustitre', 'descriptif','nom_site', 'url_site', 'chapo', 'texte', 'ps','virtuel'),
 				'champs_versionnes' => array('id_rubrique', 'surtitre', 'titre', 'soustitre', 'jointure_auteurs', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps'),
 				'field' => array(
@@ -287,6 +288,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'titre'=>'titre, lang',
 				'date' => 'date',
 				'principale' => 'oui',
+				'introduction_longueur' => '600',
 				'champs_editables' => array('titre', 'texte', 'descriptif', 'extra'),
 				'champs_versionnes' => array('titre', 'descriptif', 'texte'),
 				'field' => array(
