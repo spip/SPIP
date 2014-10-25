@@ -518,6 +518,7 @@ prive/puce_prive.gif -text
 prive/puce_prive_rtl.gif -text
 prive/rss.html -text
 prive/rss/a_suivre.html -text
+prive/rss/a_suivre_fonctions.php -text
 prive/rss/signatures.html -text
 prive/spip_pass.html -text
 prive/spip_style.css -text
