@@ -255,10 +255,12 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
  *     Longueur de l'introduction
  * @param string $connect
  *     Nom du connecteur à la base de données
+ * @param string $suite
+ *     points de suite si on coupe (par defaut _INTRODUCTION_SUITE et sinon &nbsp;(...)
  * @return string
  *     Introduction calculée
 **/
-function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
+function filtre_introduction_dist($descriptif, $texte, $longueur, $connect, $suite=null) {
 	// Si un descriptif est envoye, on l'utilise directement
 	if (strlen($descriptif))
 		return appliquer_traitement_champ($descriptif,'introduction','',array(),$connect);
@@ -307,8 +309,10 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	if ($notes)
 		$notes('','depiler');
 
-	if (!defined('_INTRODUCTION_SUITE')) define('_INTRODUCTION_SUITE', '&nbsp;(...)');
-	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
+	if (is_null($suite)) {
+		$suite = (defined('_INTRODUCTION_SUITE')?_INTRODUCTION_SUITE:'&nbsp;(...)');
+	}
+	$texte = couper($texte, $longueur, $suite);
 	// comme on a coupe il faut repasser la typo (on a perdu les insecables)
 	$texte = typo($texte,true,$connect,array());
 

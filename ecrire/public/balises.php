@@ -829,16 +829,22 @@ function balise_INTRODUCTION_dist($p) {
 	}
 
 	// longueur en parametre, ou valeur par defaut
+	$longueur_defaut = objet_info($type,'introduction_longueur');
+	if (!$longueur_defaut)
+		$longueur_defaut = 600;
+
+	$_suite = 'null';
+	$_longueur = $longueur_defaut;
 	if (($v = interprete_argument_balise(1,$p))!==NULL) {
-		$longueur = 'intval('.$v.')';
-	} else {
-		$longueur = objet_info($type,'introduction_longueur');
-		if (!$longueur)
-			$longueur = 600;
+		$_longueur = 'is_numeric('.$v.')?intval('.$v.'):'.$longueur_defaut;
+		$_suite = '!is_numeric('.$v.')?'.$v.':null';
+	}
+	if (($v2 = interprete_argument_balise(2,$p))!==NULL) {
+		$_suite = $v2;
 	}
 
 	$f = chercher_filtre('introduction');
-	$p->code = "$f($_descriptif, $_texte, $longueur, \$connect)";
+	$p->code = "$f($_descriptif, $_texte, $_longueur, \$connect, $_suite)";
 
 	#$p->interdire_scripts = true;
 	$p->etoile = '*'; // propre est deja fait dans le calcul de l'intro
