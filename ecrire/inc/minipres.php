@@ -136,8 +136,8 @@ function minipres($titre='', $corps="", $options = array()){
 	// compat signature old
 	// minipres($titre='', $corps="", $onload='', $all_inline = false)
 	$args = func_get_args();
-	if (is_string($args[2])){$options = array('onload' => $args[2]);}
-	if ($args[3]){$options['all_inline'] = $args[3];}
+	if (isset($args[2]) AND is_string($args[2])){$options = array('onload' => $args[2]);}
+	if (isset($args[3])) {$options['all_inline'] = $args[3];}
 
 	$options = array_merge(array(
 		'onload' => '',
