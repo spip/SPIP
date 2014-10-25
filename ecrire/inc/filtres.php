@@ -4382,6 +4382,16 @@ function timestamp($fichier){
 }
 
 /**
+ * Supprimer le timestamp d'une url
+ * @param string $url
+ * @return string
+ */
+function supprimer_timestamp($url){
+	if (strpos($url,"?")===false) return $url;
+	return preg_replace(",\?[[:digit:]]+$,","",$url);
+}
+
+/**
  * Nettoyer le titre d'un email
  * 
  * Éviter une erreur lorsqu'on utilise `|nettoyer_titre_email` dans un squelette de mail
