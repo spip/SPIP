@@ -600,9 +600,10 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 		$s = ",";
 	}
 	$temporary = $temporary ? 'TEMPORARY':'';
-	$q = "CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")".
-	($character_set?" DEFAULT $character_set":"")
-	."\n";
+	$q = "CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")"
+		. " ENGINE=MyISAM"
+	  . ($character_set?" DEFAULT $character_set":"")
+	  . "\n";
 	return spip_mysql_query($q, $serveur);
 }
 
