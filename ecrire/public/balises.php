@@ -1948,7 +1948,7 @@ function balise_INCLURE_dist($p) {
 		$_l = 'array(' . join(",\n\t", $_contexte) .')';
 		if ($flag_env) $_l = "array_merge(\$Pile[0],$_l)";
 
-		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',',$_options),"''");
+		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',',$_options),"_request('connect')");
 
 	} elseif (!isset($_contexte[1])) {
 			$msg = array('zbug_balise_sans_argument', array('balise' => ' INCLURE'));
