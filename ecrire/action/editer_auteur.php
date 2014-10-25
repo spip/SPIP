@@ -77,10 +77,11 @@ function action_editer_auteur_dist($arg=null) {
  * 
  * @param string|null $source
  *     D'où provient l'auteur créé ? par défaut 'spip', mais peut être 'ldap' ou autre.
+ * @param array|null $set
  * @return int
  *     Identifiant de l'auteur créé
  */
-function auteur_inserer($source=null) {
+function auteur_inserer($source=null, $set=null) {
 
 	// Ce qu'on va demander comme modifications
 	$champs = array();
@@ -89,6 +90,9 @@ function auteur_inserer($source=null) {
 	$champs['login'] = '';
 	$champs['statut'] = '5poubelle';  // inutilisable tant qu'il n'a pas ete renseigne et institue
 	$champs['webmestre'] = 'non';
+
+	if ($set)
+		$champs = array_merge($champs, $set);
 
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',
