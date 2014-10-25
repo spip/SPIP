@@ -382,7 +382,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		else {
 			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");
 			include_spip('inc/minipres');
-			return minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'));
+			return minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'), array('status'=>503));
 		}
 	}
 

@@ -105,7 +105,7 @@ function admin_verifie_session($script, $anonymous=false) {
 				OR intval($l[2])!=$GLOBALS['visiteur_session']['id_auteur']) {
 				include_spip('inc/minipres');
 				spip_log("refus de lancer $script, priorite a $valeur");
-				return minipres(_T('info_travaux_texte'));
+				return minipres(_T('info_travaux_texte'), '', array('status'=>503));
 			}
 		}
 	}

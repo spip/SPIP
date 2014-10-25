@@ -174,7 +174,7 @@ function spip_connect_sql($version, $ins='', $serveur='', $cont=false) {
 	if ($ins)
 		spip_log("Le serveur '$serveur' version $version n'a pas '$ins'", _LOG_ERREUR);
 	include_spip('inc/minipres');
-	echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'));
+	echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'), array('status'=>503));
 	exit;
 }
 
