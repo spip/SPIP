@@ -87,19 +87,36 @@ function expression_recherche($recherche, $options) {
 		// s'il y a plusieurs mots il faut les chercher tous : oblige REGEXP,
 		// sauf ceux de moins de 4 lettres (on supprime ainsi 'le', 'les', 'un',
 		// 'une', 'des' ...)
-		if (preg_match(",\s+,".$u, $recherche)){
+
+		// attention : plusieurs mots entre guillemets sont a rechercher tels quels
+		$recherche_mod = $recherche;
+		// les expressions entre " " sont un mot a chercher tel quel
+		// -> on remplace les espaces par un \x1 et on enleve les guillemets
+		if (preg_match(',["][^"]+["],Uims',$recherche_mod,$matches)){
+			foreach ($matches as $match){
+				$word = preg_replace(",\s+,Uims","\x1",$match);
+				$word = trim($word,'"');
+				$recherche_mod = str_replace($match,$word,$recherche_mod);
+			}
+		}
+
+		if (preg_match(",\s+,".$u, $recherche_mod)){
 			$is_preg = true;
+
 			$recherche_inter = '|';
-			$recherche_mots = explode(' ', $recherche);
+			$recherche_mots = explode(' ', $recherche_mod);
 			$min_long = defined('_RECHERCHE_MIN_CAR') ? _RECHERCHE_MIN_CAR : 4;
 			foreach ($recherche_mots as $mot) {
 				if (strlen($mot) >= $min_long) {
-					$recherche_inter .= $mot.' ';
+					// echapper les caracteres de regexp qui sont eventuellement dans la recherche
+					$recherche_inter .= preg_quote($mot).' ';
 				}
 			}
+			$recherche_inter = str_replace("\x1",'\s', $recherche_inter);
+
 			// mais on cherche quand même l'expression complète, même si elle
 			// comporte des mots de moins de quatre lettres
-			$recherche = rtrim($recherche.preg_replace(',\s+,'.$u, '|', $recherche_inter), '|');
+			$recherche = rtrim(preg_quote($recherche).preg_replace(',\s+,'.$u, '|', $recherche_inter), '|');
 			$recherche_trans = translitteration($recherche);
 		}
 
@@ -112,25 +129,28 @@ function expression_recherche($recherche, $options) {
 	  OR (@preg_match($preg,'')===FALSE) ) {
 		$methode = 'LIKE';
 		$u = $GLOBALS['meta']['pcre_u'];
-		// eviter les parentheses et autres caractères qui interferent avec pcre par la suite (dans le preg_match_all) s'il y a des reponses
-		$recherche = str_replace(
-			array('(',')','?','[', ']', '+', '*', '/'),
-			array('\(','\)','[?]', '\[', '\]', '\+', '\*', '\/'),
-			$recherche);
-		$recherche_trans = translitteration($recherche);
-		$recherche_mod = $recherche_trans;
 
 		// echapper les % et _
 		$q = str_replace(array('%','_'), array('\%', '\_'), trim($recherche));
+
+		// eviter les parentheses et autres caractères qui interferent avec pcre par la suite (dans le preg_match_all) s'il y a des reponses
+		$recherche = preg_quote($recherche);
+		$recherche_trans = translitteration($recherche);
+		$recherche_mod = $recherche_trans;
+
 		// les expressions entre " " sont un mot a chercher tel quel
 		// -> on remplace les espaces par un _ et on enleve les guillemets
+		// corriger le like dans le $q
 		if (preg_match(',["][^"]+["],Uims',$q,$matches)){
-			foreach($matches as $match){
-				// corriger le like dans le $q
-				$word = preg_replace(",\s+,Uims","_",$match);
-				$word = trim($word,'"');
-				$q = str_replace($match,$word,$q);
-				// corriger la regexp
+			foreach ($matches as $match){
+				$word = preg_replace(",\s+,Uims", "_", $match);
+				$word = trim($word, '"');
+				$q = str_replace($match, $word, $q);
+			}
+		}
+		// corriger la regexp
+		if (preg_match(',["][^"]+["],Uims',$recherche_mod,$matches)){
+			foreach ($matches as $match){
 				$word = preg_replace(",\s+,Uims","[\s]",$match);
 				$word = trim($word,'"');
 				$recherche_mod = str_replace($match,$word,$recherche_mod);
