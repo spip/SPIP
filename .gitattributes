@@ -102,6 +102,7 @@ ecrire/inc/distant.php -text
 ecrire/inc/drapeau_edition.php -text
 ecrire/inc/editer.php -text
 ecrire/inc/envoyer_mail.php -text
+ecrire/inc/exporter_csv.php -text
 ecrire/inc/filtres_boites.php -text
 ecrire/inc/filtres_ecrire.php -text
 ecrire/inc/filtres_images_lib_mini.php -text
@@ -112,6 +113,7 @@ ecrire/inc/filtres_selecteur_generique.php -text
 ecrire/inc/headers.php -text
 ecrire/inc/icone_renommer.php -text
 ecrire/inc/iconifier.php -text
+ecrire/inc/importer_csv.php -text
 ecrire/inc/index.php -text
 ecrire/inc/informer.php -text
 ecrire/inc/install.php -text
