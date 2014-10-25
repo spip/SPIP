@@ -1163,9 +1163,16 @@ function autoriser_configurerpreferences_dist($faire,$type,$id,$qui,$opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_menudeveloppement_menu_dist($faire, $type, $id, $qui, $opt){
+function autoriser_menudeveloppement_menugrandeentree_dist($faire, $type, $id, $qui, $opt){
 	return (isset($GLOBALS['visiteur_session']['prefs']['activer_menudev'])
 		AND $GLOBALS['visiteur_session']['prefs']['activer_menudev']);
+}
+
+/**
+ * Par defaut les grandes entrees sont visibles de tous
+ */
+function autoriser_menugrandeentree_dist($faire, $type, $id, $qui, $opt){
+	return true;
 }
 
 /**
