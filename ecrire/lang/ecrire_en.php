@@ -171,6 +171,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_auteur' => 'Create a new author and associate him/her with this article',
 	'icone_creer_mot_cle' => 'Create a new keyword and link it to this article',
 	'icone_creer_rubrique_2' => 'Create a new section',
+	'icone_developpement' => 'Development',
 	'icone_edition' => 'Edit',
 	'icone_ma_langue' => 'My language',
 	'icone_mes_infos' => 'My details',
@@ -196,6 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_visiteur' => '1 visitor',
 	'info_activer_cookie' => 'You can activate an <b>administration cookie</b>, which allows you
  to switch easily between the public site and the private area.',
+	'info_activer_menu_developpement' => 'Show the Development menu',
 	'info_admin_etre_webmestre' => 'Give me web administrator rights',
 	'info_admin_gere_rubriques' => 'This administrator manages the following sections:',
 	'info_admin_gere_toutes_rubriques' => 'This administrator manages <b>all the sections</b>.',
