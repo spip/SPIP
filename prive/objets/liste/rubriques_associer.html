@@ -32,7 +32,9 @@
 	<BOUCLE_liste_rub(RUBRIQUES){!id_rubrique IN #GET{exclus}}{tout}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)]">
 			<td class='picto'>[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img)]</td>
-			<td class='titre principale'>[(#LOGO_RUBRIQUE|image_reduire{20,26})]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]"
+			<td class='titre principale'>[(#LOGO_RUBRIQUE|image_reduire{20,26})
+				]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]"
+				[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 				title="<:info_numero_abbreviation|attribut_html:> #ID_RUBRIQUE">[(#RANG). ]#TITRE</a></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>#ID_RUBRIQUE</td>

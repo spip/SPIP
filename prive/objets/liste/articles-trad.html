@@ -38,6 +38,7 @@
 							[(#ENV{id_trad}|=={#ID_ARTICLE}|oui)class="on"]
 							dir="#LANG_DIR"
 							lang="#LANG">[(#EXPOSE|?{#TITRE,<a
+							[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 							href="[(#ID_ARTICLE|generer_url_entite{article})]"
 							title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[(#RANG). ]#TITRE</a>})]</span>
 				[(#ENV{id_trad}|=={#ID_ARTICLE}|oui)<:trad_reference:>]
