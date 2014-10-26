@@ -303,7 +303,7 @@ function article_instituer($id_article, $c, $calcul_rub=true) {
 	if (isset($c['id_parent'])
 	AND $id_parent = $c['id_parent']
 	AND $id_parent != $id_rubrique
-	AND (sql_fetsel('1', "spip_rubriques", "id_rubrique=$id_parent"))) {
+	AND (sql_fetsel('1', "spip_rubriques", "id_rubrique=".intval($id_parent)))) {
 		$champs['id_rubrique'] = $id_parent;
 
 		// si l'article etait publie
@@ -399,14 +399,14 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 
 		$langue = $row_rub['lang'];
 		$champs['id_secteur'] = $row_rub['id_secteur'];
-		if (sql_fetsel('1', 'spip_articles', "id_article=$id_article AND langue_choisie<>'oui' AND lang<>" . sql_quote($langue))) {
+		if (sql_fetsel('1', 'spip_articles', "id_article=".intval($id_article)." AND langue_choisie<>'oui' AND lang<>" . sql_quote($langue))) {
 			$champs['lang'] = $langue;
 		}
 	}
 
 	if (!$champs) return;
 
-	sql_updateq('spip_articles', $champs, "id_article=$id_article");
+	sql_updateq('spip_articles', $champs, "id_article=".intval($id_article));
 
 	// Changer le statut des rubriques concernees 
 
