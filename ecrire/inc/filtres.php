@@ -2814,7 +2814,7 @@ function urls_absolues_css($contenu, $source) {
 	$path = suivre_lien(url_absolue($source),'./');
 
 	return preg_replace_callback(
-		",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims",
+		",url\s*\(\s*['\"]?([^'\"/#\s][^:]*)['\"]?\s*\),Uims",
 		create_function('$x',
 			'return "url(\"".suivre_lien("'.$path.'",$x[1])."\")";'
 		), $contenu);
