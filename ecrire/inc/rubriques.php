@@ -261,7 +261,10 @@ function calculer_rubriques_publiees() {
 	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
 		"AND A.date <= ".sql_quote(date('Y-m-d H:i:s')) : '';
 
-	$r = sql_select("R.id_rubrique AS id, max(A.date) AS date_h", "spip_rubriques AS R, spip_articles AS A", "R.id_rubrique = A.id_rubrique AND A.statut='publie' $postdates ", "R.id_rubrique");
+	$r = sql_select(
+		"R.id_rubrique AS id, max(A.date) AS date_h",
+		"spip_rubriques AS R JOIN spip_articles AS A ON R.id_rubrique = A.id_rubrique",
+		"A.date>R.date_tmp AND A.statut='publie' $postdates ", "R.id_rubrique");
 	while ($row = sql_fetch($r))
 		sql_updateq("spip_rubriques", array("statut_tmp" => 'publie', "date_tmp" => $row['date_h']), "id_rubrique=".intval($row['id']));
 
@@ -277,7 +280,10 @@ function calculer_rubriques_publiees() {
 	// on tourne tant que les donnees remontent vers la racine.
 	do {
 		$continuer = false;
-		$r = sql_select("R.id_rubrique AS id, max(A.date_tmp) AS date_h", "spip_rubriques AS R, spip_rubriques AS A", "R.id_rubrique = A.id_parent AND (R.date_tmp < A.date_tmp OR R.statut_tmp<>'publie') AND A.statut_tmp='publie' ", "R.id_rubrique");
+		$r = sql_select(
+			"R.id_rubrique AS id, max(SR.date_tmp) AS date_h",
+			"spip_rubriques AS R JOIN spip_rubriques AS SR ON R.id_rubrique = SR.id_parent",
+			"(SR.date_tmp>R.date_tmp OR R.statut_tmp<>'publie') AND SR.statut_tmp='publie' ", "R.id_rubrique");
 		while ($row = sql_fetch($r)) {
 		  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']),"id_rubrique=".intval($row['id']));
 			$continuer = true;
