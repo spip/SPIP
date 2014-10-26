@@ -102,8 +102,8 @@ function publier_branche_rubrique($id_rubrique)
 {
 	$id_pred = $id_rubrique;
 	while (true) {
-		sql_updateq('spip_rubriques', array('statut'=>'publie', 'date'=>date('Y-m-d H:i:s')), "id_rubrique=$id_rubrique");
-		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques AS R', "R.id_rubrique=$id_rubrique");
+		sql_updateq('spip_rubriques', array('statut'=>'publie', 'date'=>date('Y-m-d H:i:s')), "id_rubrique=".intval($id_rubrique));
+		$id_parent = sql_getfetsel('id_parent', 'spip_rubriques AS R', "R.id_rubrique=".intval($id_rubrique));
 		if (!$id_parent) break;
 		$id_rubrique = $id_parent;
 	} 
@@ -136,7 +136,7 @@ function depublier_branche_rubrique_if($id_rubrique){
 		if (!depublier_rubrique_if($id_pred,$date))
 			return $id_pred != $id_rubrique;
 		// passer au parent si on a depublie
-		$r = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=$id_pred");
+		$r = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=".intval($id_pred));
 		$id_pred = $r['id_parent'];
 	}
 
@@ -167,16 +167,16 @@ function depublier_rubrique_if($id_rubrique,$date=null){
 		return false;
 
 	// verifier qu'elle existe et est bien publiee
-	$r = sql_fetsel('id_rubrique,statut','spip_rubriques',"id_rubrique=$id_rubrique");
+	$r = sql_fetsel('id_rubrique,statut','spip_rubriques',"id_rubrique=".intval($id_rubrique));
 	if (!$r OR $r['statut']!=='publie')
 		return false;
 
 	// On met le nombre de chaque type d'enfants dans un tableau
 	// Le type de l'objet est au pluriel
 	$compte = array(
-		'articles' => sql_countsel("spip_articles",  "id_rubrique=$id_rubrique AND statut='publie'$postdates"),
-		'rubriques' => sql_countsel("spip_rubriques",  "id_parent=$id_rubrique AND statut='publie'"),
-		'documents' => sql_countsel("spip_documents_liens",  "id_objet=$id_rubrique AND objet='rubrique'")
+		'articles' => sql_countsel("spip_articles",  "id_rubrique=".intval($id_rubrique)." AND statut='publie'$postdates"),
+		'rubriques' => sql_countsel("spip_rubriques",  "id_parent=".intval($id_rubrique)." AND statut='publie'"),
+		'documents' => sql_countsel("spip_documents_liens",  "id_objet=".intval($id_rubrique)." AND objet='rubrique'")
 	);
 	
 	// On passe le tableau des comptes dans un pipeline pour que les plugins puissent ajouter (ou retirer) des enfants
@@ -197,7 +197,7 @@ function depublier_rubrique_if($id_rubrique,$date=null){
 		if ($n)
 			return false;
 
-	sql_updateq("spip_rubriques", array("statut" => '0'), "id_rubrique=$id_rubrique");
+	sql_updateq("spip_rubriques", array("statut" => '0'), "id_rubrique=".intval($id_rubrique));
 #		spip_log("depublier_rubrique $id_pred");
 	return true;
 }
@@ -263,7 +263,7 @@ function calculer_rubriques_publiees() {
 
 	$r = sql_select("R.id_rubrique AS id, max(A.date) AS date_h", "spip_rubriques AS R, spip_articles AS A", "R.id_rubrique = A.id_rubrique AND A.statut='publie' $postdates ", "R.id_rubrique");
 	while ($row = sql_fetch($r))
-		sql_updateq("spip_rubriques", array("statut_tmp" => 'publie', "date_tmp" => $row['date_h']), "id_rubrique=".$row['id']);
+		sql_updateq("spip_rubriques", array("statut_tmp" => 'publie', "date_tmp" => $row['date_h']), "id_rubrique=".intval($row['id']));
 
 	// point d'entree pour permettre a des plugins de gerer le statut
 	// autrement (par ex: toute rubrique est publiee des sa creation)
@@ -279,7 +279,7 @@ function calculer_rubriques_publiees() {
 		$continuer = false;
 		$r = sql_select("R.id_rubrique AS id, max(A.date_tmp) AS date_h", "spip_rubriques AS R, spip_rubriques AS A", "R.id_rubrique = A.id_parent AND (R.date_tmp < A.date_tmp OR R.statut_tmp<>'publie') AND A.statut_tmp='publie' ", "R.id_rubrique");
 		while ($row = sql_fetch($r)) {
-		  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']),"id_rubrique=".$row['id']);
+		  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']),"id_rubrique=".intval($row['id']));
 			$continuer = true;
 		}
 	} while ($continuer);
@@ -383,7 +383,7 @@ function propager_les_secteurs()
 	$r = sql_select("A.id_article AS id, R.id_secteur AS secteur", "spip_articles AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
 
 	while ($row = sql_fetch($r)) {
-		sql_update("spip_articles", array("id_secteur" => $row['secteur']), "id_article=".$row['id']);
+		sql_update("spip_articles", array("id_secteur" => $row['secteur']), "id_article=".intval($row['id']));
 	}
 
 	// avertir les plugins qui peuvent faire leur mises a jour egalement
@@ -407,7 +407,7 @@ function calculer_langues_rubriques_etape() {
 	$t = false;
 	while ($row = sql_fetch($s)) {
 		$id_rubrique = $row['id_rubrique'];
-		$t = sql_updateq('spip_rubriques', array('lang' => $row['lang'], 'langue_choisie'=>'non'), "id_rubrique=$id_rubrique");
+		$t = sql_updateq('spip_rubriques', array('lang' => $row['lang'], 'langue_choisie'=>'non'), "id_rubrique=".intval($id_rubrique));
 	}
 
 	return $t;
@@ -438,7 +438,7 @@ function calculer_langues_rubriques() {
 	$s = sql_select("A.id_article AS id_article, R.lang AS lang", "spip_articles AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.langue_choisie != 'oui' AND (length(A.lang)=0 OR length(R.lang)>0) AND R.lang<>A.lang");
 	while ($row = sql_fetch($s)) {
 		$id_article = $row['id_article'];
-		sql_updateq('spip_articles', array("lang"=> $row['lang'], 'langue_choisie'=>'non'), "id_article=$id_article");
+		sql_updateq('spip_articles', array("lang"=> $row['lang'], 'langue_choisie'=>'non'), "id_article=".intval($id_article));
 	}
 
 	if ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
@@ -778,7 +778,7 @@ function creer_rubrique_nommee($titre, $id_parent=0, $serveur='') {
 				$lang = $GLOBALS['meta']['langue_site'];
 			}
 
-			sql_updateq('spip_rubriques', array('id_secteur'=>$id_secteur, "lang"=>$lang), "id_rubrique=$id_rubrique", $desc='', $serveur);
+			sql_updateq('spip_rubriques', array('id_secteur'=>$id_secteur, "lang"=>$lang), "id_rubrique=".intval($id_rubrique), $desc='', $serveur);
 
 			// pour la recursion
 			$id_parent = $id_rubrique;
