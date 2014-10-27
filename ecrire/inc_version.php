@@ -185,7 +185,6 @@ $debut_date_publication = null;
 //
 // On note le numero IP du client dans la variable $ip
 //
-if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 if (isset($_SERVER['REMOTE_ADDR'])) $ip = $_SERVER['REMOTE_ADDR'];
 
 // Pour renforcer la privacy, decommentez la ligne ci-dessous (ou recopiez-la
@@ -347,6 +346,47 @@ if (!defined('SPIP_ERREUR_REPORT')) {
 	define('SPIP_ERREUR_REPORT', E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 }
 error_reporting(SPIP_ERREUR_REPORT);
+
+if (!defined('_REVERSE_PROXY'))
+	/* Permet d’indiquer si l’on se trouve derrière un relai
+	 * inverse (reverse proxy). On passe par un ``define``, sans
+	 * quoi une personne malintentionnée pourrait injecter une
+	 * adresse IP arbitraire dans l’en-tête X-Forwarded-For. */
+	define('_REVERSE_PROXY', false);
+
+if (!define('_REVERSE_PROXY_HEADER'))
+	/* Permet de définir l’en-tête HTTP à utiliser pour récupérer
+	 * l’adresse IP du client lorsque l’on se situe derrière un
+	 * relai inverse.
+	 *
+	 * Le standard de facto est HTTP_X_FORWARDED_FOR. */
+	define('_REVERSE_PROXY_HEADER', 'HTTP_X_FORWARDED_FOR');
+
+if (!define('_REVERSE_PROXY_PROTO_HEADER'))
+	/* Permet de définir l’en-tête HTTP à utiliser pour récupérer
+	 * le protocole utilisé (HTTP/HTTPS) lorsque l’on se situe
+	 * derrière un relai inverse.
+	 *
+	 * Le standard de facto est HTTP_X_FORWARDED_PROTO. */
+	define('_REVERSE_PROXY_PROTO_HEADER', 'HTTP_X_FORWARDED_PROTO');
+
+/* Si on est derrière un relai inverse, on met à jour $ip. */
+if (_REVERSE_PROXY && isset($_SERVER[_REVERSE_PROXY_HEADER])) {
+	/* L’en-tête X-Forwarded-For peut contenir plusieurs adresses
+	 * IP, sous la forme suivante (en fonction du nombre de relais
+	 * traversés) : ``X-Forwarded-For: client, proxy1, proxy2``
+	 *
+	 * La seule source d’information fiable est l’adresse la plus
+	 * à droite, qui correspond au dernier relai traversé. */
+	$ip = trim(end(explode(',', $_SERVER[_REVERSE_PROXY_HEADER])));
+
+	/* Lorsque le serveur frontal est en HTTPS, il indique
+	 * ``https`` au serveur applicatif via l’en-tête
+	 * X-Forwarded-Proto. */
+	if(strcasecmp($_SERVER[_REVERSE_PROXY_PROTO_HEADER], "https") == 0) {
+		$_SERVER['HTTPS'] = "on";
+	}
+}
 
 // Initialisations critiques non surchargeables par les plugins
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
