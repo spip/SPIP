@@ -41,6 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'Erreur SQL',
 	'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
 	'avis_erreur_visiteur' => 'Problème d’accès à l’espace privé',
+	'avis_1_erreur_saisie' => 'Il y a 1 erreur dans dans votre saisie, veuillez vérifier les informations.',
+	'avis_nb_erreurs_saisie' => 'Il y a @nb@ erreurs dans votre saisie, veuillez vérifier les informations.',
 
 	// B
 	'barre_a_accent_grave' => 'Insérer un A accent grave majuscule',
