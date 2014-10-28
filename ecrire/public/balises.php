@@ -2594,6 +2594,7 @@ function balise_TRI_dist($p, $liste='true') {
 
 	$_variable = "((\$s=$_issens)?'sens':'tri').".$boucle->modificateur['tri_nom'];
 	$_url = "parametre_url(self(),$_variable,\$s?$_sens:$_champ)";
+	$_url = "parametre_url($_url,'var_memotri',strncmp(".$boucle->modificateur['tri_nom'].",'session',7)==0?$_variable:'')";
 	$_on = "\$s?(".$boucle->modificateur['tri_sens']."==$_sens".'):('.$boucle->modificateur['tri_champ']."==$_champ)";
 
 	$p->code = "lien_ou_expose($_url,$_libelle,$_on".($_class?",$_class":"").")";

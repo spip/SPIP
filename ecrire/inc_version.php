@@ -419,6 +419,14 @@ OR _request('action') == 'test_dirs')) {
 	// autrement c'est une install ad hoc (spikini...), on sait pas faire
 }
 
+// memoriser un tri sessionne eventuel
+if (isset($_REQUEST['var_memotri'])
+  AND $t = $_REQUEST['var_memotri']
+	AND (strncmp($t,'trisession',10)==0 OR strncmp($t,'senssession',11)==0)){
+	if (!function_exists('session_set'))
+		include_spip('inc/session');
+	session_set($t,_request($t));
+}
 
 /**
  * Header "Composed-By"
