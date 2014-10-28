@@ -368,7 +368,7 @@ function autoriser_changerlangue_dist($faire, $type, $id, $qui, $opt) {
 	$multi_objets = explode(',', lire_config('multi_objets'));
 	$gerer_trad_objets = explode(',', lire_config('gerer_trad_objets'));
 	$table = table_objet_sql($type);
-	if (in_array($table, $multi_objets) or in_array($table, $gerer_trad_objets)) { // affichage du formulaire ssi la configuration l'accepte
+	if (in_array($table, $multi_objets) or in_array($table, $gerer_trad_objets)) { // affichage du formulaire si la configuration l'accepte
 		$multi_secteurs = lire_config('multi_secteurs');
 		$champs = objet_info($type, 'field');
 		if ($multi_secteurs == 'oui' and array_key_exists('id_rubrique', $champs)) { // multilinguisme par secteur et objet rattaché à une rubrique
