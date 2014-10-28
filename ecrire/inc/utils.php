@@ -1540,7 +1540,11 @@ function url_de_base($profondeur=null) {
 	) ? 'https' : 'http';
 	# note : HTTP_HOST contient le :port si necessaire
 	$host = $_SERVER['HTTP_HOST'];
-	if (isset($_SERVER['SERVER_PORT'])
+
+	/* Dans le cas où on est derrière un relai inverse
+         * (_REVERSE_PROXY == true), on ne peut rien déduire sur le
+         * port serveur. */
+	if (!_REVERSE_PROXY AND isset($_SERVER['SERVER_PORT'])
 		AND $port=$_SERVER['SERVER_PORT']
 		AND strpos($host,":")==false){
 		if ($http=="http" AND $port!=80) $host.=":$port";
