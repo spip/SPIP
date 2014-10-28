@@ -1,41 +1,5 @@
-var memo_obj = new Array();
 var url_chargee = new Array();
 var xhr_actifs = {};
-
-function findObj_test_forcer(n, forcer) { 
-	var p,i,x;
-
-	// Voir si on n'a pas deja memorise cet element
-	if (memo_obj[n] && !forcer) {
-		return memo_obj[n];
-	}
-
-	var d = document; 
-	if((p = n.indexOf("?"))>0 && parent.frames.length) {
-		d = parent.frames[n.substring(p+1)].document; 
-		n = n.substring(0,p);
-	}
-	if(!(x = d[n]) && d.all) {
-		x = d.all[n]; 
-	}
-	for (i = 0; !x && i<d.forms.length; i++) {
-		x = d.forms[i][n];
-	}
-	for(i=0; !x && d.layers && i<d.layers.length; i++) x = findObj(n,d.layers[i].document);
-	if(!x && document.getElementById) x = document.getElementById(n); 
-
-	// Memoriser l'element
-	if (!forcer) memo_obj[n] = x;
-	return x;
-}
-
-function findObj(n) { 
-	return findObj_test_forcer(n, false);
-}
-// findObj sans memorisation de l'objet - avec Ajax, les elements se deplacent dans DOM
-function findObj_forcer(n) { 
-	return findObj_test_forcer(n, true);
-}
 
 //
 // Fonctions pour mini_nav
@@ -43,9 +7,10 @@ function findObj_forcer(n) {
 
 function slide_horizontal (couche, slide, align, depart, etape ) {
 
-	var obj = findObj_forcer(couche);
+	var obj = jQuery("#"+couche);
 	
-	if (!obj) return;
+	if (!obj.length) return;
+	obj = obj.get(0);
 	if (!etape) {
 		if (align == 'left') depart = obj.scrollLeft;
 		else depart = obj.firstChild.offsetWidth - obj.scrollLeft;
@@ -70,10 +35,10 @@ function changerhighlight (couche) {
 }
 
 function aff_selection (arg, idom, url, event) {
-	noeud = findObj_forcer(idom);
-	if (noeud) {
-		noeud.style.display = "none";
-		charger_node_url(url+arg, noeud, '','',event);
+	var noeud = jQuery("#"+idom);
+	if (noeud.length) {
+		noeud.hide();
+		charger_node_url(url+arg, noeud.get(0), '','',event);
 	}
 	return false;
 }
@@ -82,14 +47,12 @@ function aff_selection (arg, idom, url, event) {
 
 function aff_selection_titre(titre, id, idom, nid)
 {
-	t = findObj_forcer('titreparent');
-	t.value= titre;
-	t=findObj_forcer(nid);
-	t.value=id;
-	jQuery(t).trigger('change'); // declencher le onchange
-	t=findObj_forcer(idom);
-	t.style.display='none';
-	p = $(t).parents('form');
+	var t = jQuery('#titreparent');
+	var p = t.closest('form');
+	t.attr('value',titre);
+	p.find('#'+nid).attr('value',id);
+	t.trigger('change'); // declencher le onchange
+	p.find("#"+idom).hide('fast');
 	if (p.is('.submit_plongeur')) p.get(p.length-1).submit();
 }
 
@@ -131,9 +94,9 @@ function aff_selection_provisoire(id, racine, url, col, sens,informer,event)
  * @param init
  */
 function onkey_rechercher(valeur, rac, url, img, nid, init) {
-	var Field = findObj_forcer(rac);
+	var Field = jQuery("#"+rac).get(0);
 	if (!valeur.length) {	
-		init = findObj_forcer(init);
+		init = jQuery("#"+init).get(0);
 		if (init && init.href) { charger_node_url(init.href, Field);}
 	} else {	
 	  charger_node_url(url+valeur,
@@ -294,14 +257,16 @@ function AjaxRet(res,status, target, callback) {
 
 function charger_id_url(myUrl, myField, jjscript, event) 
 {
-	var Field = findObj_forcer(myField);
-	if (!Field) return true;
+	var Field = jQuery("#"+myField);
+	if (!Field.length) return true;
 
 	if (!myUrl) {
-		jQuery(Field).empty();
-		retour_id_url(Field, jjscript);
+		Field.empty();
+		retour_id_url(Field.get(0), jjscript);
 		return true; // url vide, c'est un self complet
-	} else  return charger_node_url(myUrl, Field, jjscript, findObj_forcer('img_' + myField), event);
+	}
+	else
+		return charger_node_url(myUrl, Field.get(0), jjscript, jQuery('#'+'img_' + myField).get(0), event);
 }
 
 // La suite
