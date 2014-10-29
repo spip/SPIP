@@ -1015,7 +1015,7 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc = array(), $serveur
 		$nb = spip_sqlite::last_insert_id($serveur);
 	}
 	else
-		$nb = 0;
+		$nb = false;
 
 	$err = spip_sqlite_error($query, $serveur);
 	// cas particulier : ne pas substituer la reponse spip_sqlite_query si on est en profilage

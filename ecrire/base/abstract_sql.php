@@ -566,7 +566,10 @@ function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='', $option
 	$f = sql_serveur('insert', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
 	$r = $f($table, $noms, $valeurs, $desc, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if ($r === false OR $r === null) {
+		spip_sql_erreur($serveur);
+		$r = false;
+	}
 	return $r;
 }
 
@@ -612,7 +615,10 @@ function sql_insertq($table, $couples=array(), $desc=array(), $serveur='', $opti
 	$f = sql_serveur('insertq', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
 	$r = $f($table, $couples, $desc, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if ($r === false OR $r === null) {
+		spip_sql_erreur($serveur);
+		$r = false;
+	}
 	return $r;
 }
 
@@ -652,7 +658,10 @@ function sql_insertq_multi($table, $couples=array(), $desc=array(), $serveur='',
 	$f = sql_serveur('insertq_multi', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
 	$r = $f($table, $couples, $desc, $serveur, $option!==false);
-	if ($r === false) spip_sql_erreur($serveur);
+	if ($r === false OR $r === null) {
+		spip_sql_erreur($serveur);
+		$r = false;
+	}
 	return $r;
 }
 
