@@ -2076,7 +2076,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
  * par les plugins
  *
  */
-function spip_initialisation_suite() {
+function spip_initialisation_suite(){
 	static $too_late = 0;
 	if ($too_late++) return;
 
@@ -2094,27 +2094,27 @@ function spip_initialisation_suite() {
 	#if (!defined('_IMG_MAX_WIDTH')) define('_IMG_MAX_WIDTH', 0); # largeur en pixels
 	#if (!defined('_IMG_MAX_HEIGHT')) define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
 
-	if (!defined('_PASS_LONGUEUR_MINI')) define('_PASS_LONGUEUR_MINI',6);
+	if (!defined('_PASS_LONGUEUR_MINI')) define('_PASS_LONGUEUR_MINI', 6);
 
 
 	// Qualite des images calculees automatiquement. C'est un nombre entre 0 et 100, meme pour imagick (on ramene a 0..1 par la suite)
-        if (!defined('_IMG_QUALITE')) define('_IMG_QUALITE', 85); # valeur par defaut
-        if (!defined('_IMG_GD_QUALITE')) define('_IMG_GD_QUALITE', _IMG_QUALITE); # surcharge pour la lib GD
-        if (!defined('_IMG_CONVERT_QUALITE')) define('_IMG_CONVERT_QUALITE', _IMG_QUALITE); # surcharge pour imagick en ligne de commande
+	if (!defined('_IMG_QUALITE')) define('_IMG_QUALITE', 85); # valeur par defaut
+	if (!defined('_IMG_GD_QUALITE')) define('_IMG_GD_QUALITE', _IMG_QUALITE); # surcharge pour la lib GD
+	if (!defined('_IMG_CONVERT_QUALITE')) define('_IMG_CONVERT_QUALITE', _IMG_QUALITE); # surcharge pour imagick en ligne de commande
 	// Historiquement la valeur pour imagick semble differente. Si ca n'est pas necessaire, il serait preferable de garder _IMG_QUALITE
-        if (!defined('_IMG_IMAGICK_QUALITE')) define('_IMG_IMAGICK_QUALITE', 75); # surcharge pour imagick en PHP
+	if (!defined('_IMG_IMAGICK_QUALITE')) define('_IMG_IMAGICK_QUALITE', 75); # surcharge pour imagick en PHP
 
-	if (!defined('_COPIE_LOCALE_MAX_SIZE')) define('_COPIE_LOCALE_MAX_SIZE',33554432); // poids en octet
+	if (!defined('_COPIE_LOCALE_MAX_SIZE')) define('_COPIE_LOCALE_MAX_SIZE', 33554432); // poids en octet
 
 	// qq chaines standard
 	if (!defined('_ACCESS_FILE_NAME')) define('_ACCESS_FILE_NAME', '.htaccess');
 	if (!defined('_AUTH_USER_FILE')) define('_AUTH_USER_FILE', '.htpasswd');
 	if (!defined('_SPIP_DUMP')) define('_SPIP_DUMP', 'dump@nom_site@@stamp@.xml');
-	if (!defined('_CACHE_RUBRIQUES')) {
+	if (!defined('_CACHE_RUBRIQUES')){
 		/** Fichier cache pour le navigateur de rubrique du bandeau */
-		define('_CACHE_RUBRIQUES', _DIR_TMP.'menu-rubriques-cache.txt');
+		define('_CACHE_RUBRIQUES', _DIR_TMP . 'menu-rubriques-cache.txt');
 	}
-	if (!defined('_CACHE_RUBRIQUES_MAX')) {
+	if (!defined('_CACHE_RUBRIQUES_MAX')){
 		/** Nombre maxi de rubriques enfants affichées pour chaque rubrique du navigateur de rubrique du bandeau */
 		define('_CACHE_RUBRIQUES_MAX', 500);
 	}
@@ -2125,10 +2125,10 @@ function spip_initialisation_suite() {
 		// "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
 		//"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n");
 		//"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>\n");
-	       // "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1 //EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>\n");
-		"<!DOCTYPE html>\n");
+		// "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1 //EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>\n");
+	  "<!DOCTYPE html>\n");
 	if (!defined('_DOCTYPE_AIDE')) define('_DOCTYPE_AIDE',
-	       "<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Frameset//EN' 'http://www.w3.org/TR/1999/REC-html401-19991224/frameset.dtd'>");
+	  "<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Frameset//EN' 'http://www.w3.org/TR/1999/REC-html401-19991224/frameset.dtd'>");
 
 	/** L'adresse de base du site ; on peut mettre '' si la racine est gerée par
 	 * le script de l'espace public, alias index.php */
@@ -2142,21 +2142,21 @@ function spip_initialisation_suite() {
 	// meme pb sur thttpd cf. http://forum.spip.org/fr_184153.html
 
 	if (!defined('_SPIP_ECRIRE_SCRIPT')) define('_SPIP_ECRIRE_SCRIPT', // true ? #decommenter ici et commenter la
-	       preg_match(',IIS|thttpd,',$_SERVER['SERVER_SOFTWARE']) ?
-	       'index.php' : '');
+	  preg_match(',IIS|thttpd,', $_SERVER['SERVER_SOFTWARE']) ?
+		'index.php' : '');
 
 
 	if (!defined('_SPIP_AJAX'))
 		define('_SPIP_AJAX', ((!isset($_COOKIE['spip_accepte_ajax']))
 			? 1
-		       : (($_COOKIE['spip_accepte_ajax'] != -1) ? 1 : 0)));
+			: (($_COOKIE['spip_accepte_ajax']!=-1) ? 1 : 0)));
 
 	// La requete est-elle en ajax ?
 	if (!defined('_AJAX')) define('_AJAX',
 		(isset($_SERVER['HTTP_X_REQUESTED_WITH']) # ajax jQuery
-		OR @$_REQUEST['var_ajax_redir'] # redirection 302 apres ajax jQuery
-		OR @$_REQUEST['var_ajaxcharset'] # compat ascendante pour plugins
-		OR @$_REQUEST['var_ajax'] # forms ajax & inclure ajax de spip
+			OR @$_REQUEST['var_ajax_redir'] # redirection 302 apres ajax jQuery
+				OR @$_REQUEST['var_ajaxcharset'] # compat ascendante pour plugins
+					OR @$_REQUEST['var_ajax'] # forms ajax & inclure ajax de spip
 		)
 		AND !@$_REQUEST['var_noajax'] # horrible exception, car c'est pas parce que la requete est ajax jquery qu'il faut tuer tous les formulaires ajax qu'elle contient
 	);
@@ -2165,32 +2165,32 @@ function spip_initialisation_suite() {
 	# au dela de 5500000 on considere que php n'est pas limite en memoire pour cette operation
 	# les configurations limitees en memoire ont un seuil plutot vers 1MPixel
 	if (!defined('_IMG_GD_MAX_PIXELS')) define('_IMG_GD_MAX_PIXELS',
-		(isset($GLOBALS['meta']['max_taille_vignettes'])&&$GLOBALS['meta']['max_taille_vignettes']<5500000)
-		 ? $GLOBALS['meta']['max_taille_vignettes']
-		 : 0);
+	  (isset($GLOBALS['meta']['max_taille_vignettes']) && $GLOBALS['meta']['max_taille_vignettes']<5500000)
+		? $GLOBALS['meta']['max_taille_vignettes']
+		: 0);
 
-	if (!defined('_MEMORY_LIMIT_MIN')) define('_MEMORY_LIMIT_MIN',10); // en Mo
+	if (!defined('_MEMORY_LIMIT_MIN')) define('_MEMORY_LIMIT_MIN', 16); // en Mo
 	// si on est dans l'espace prive et si le besoin est superieur a 8Mo (qui est vraiment le standard)
 	// on verifie que la memoire est suffisante pour le compactage css+js pour eviter la page blanche
 	// il y aura d'autres problemes et l'utilisateur n'ira pas tres loin, mais ce sera plus comprehensible qu'une page blanche
 	if (test_espace_prive() AND _MEMORY_LIMIT_MIN>8){
 		if ($memory = trim(ini_get('memory_limit'))){
-			$unit = strtolower(substr($memory,strlen($memory/1),1));
-			switch($unit) {
+			$unit = strtolower(substr($memory, strlen($memory/1), 1));
+			switch ($unit) {
 				// Le modifieur 'G' est disponible depuis PHP 5.1.0
 				case 'g': $memory *= 1024;
 				case 'm': $memory *= 1024;
 				case 'k': $memory *= 1024;
 			}
 			if ($memory<_MEMORY_LIMIT_MIN*1024*1024){
-				ini_set('memory_limit',$m=_MEMORY_LIMIT_MIN.'M');
+				ini_set('memory_limit', $m = _MEMORY_LIMIT_MIN . 'M');
 				if (trim(ini_get('memory_limit'))!=$m){
-					if (!defined('_INTERDIRE_COMPACTE_HEAD_ECRIRE')) define('_INTERDIRE_COMPACTE_HEAD_ECRIRE',true); // evite une page blanche car on ne saura pas calculer la css dans ce hit
+					if (!defined('_INTERDIRE_COMPACTE_HEAD_ECRIRE')) define('_INTERDIRE_COMPACTE_HEAD_ECRIRE', true); // evite une page blanche car on ne saura pas calculer la css dans ce hit
 				}
 			}
 		}
 		else
-			if (!defined('_INTERDIRE_COMPACTE_HEAD_ECRIRE')) define('_INTERDIRE_COMPACTE_HEAD_ECRIRE',true); // evite une page blanche car on ne saura pas calculer la css dans ce hit
+			if (!defined('_INTERDIRE_COMPACTE_HEAD_ECRIRE')) define('_INTERDIRE_COMPACTE_HEAD_ECRIRE', true); // evite une page blanche car on ne saura pas calculer la css dans ce hit
 	}
 	// Protocoles a normaliser dans les chaines de langues
 	if (!defined('_PROTOCOLES_STD'))
