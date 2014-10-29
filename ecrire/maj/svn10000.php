@@ -599,3 +599,9 @@ function ranger_cache_gd2(){
 		if (time() >= _TIME_OUT) return;
 	}
 }
+
+
+$GLOBALS['maj'][21742] = array(
+	array('sql_alter',"TABLE spip_articles CHANGE url_site url_site text DEFAULT '' NOT NULL"),
+	array('sql_alter',"TABLE spip_articles CHANGE virtuel virtuel text DEFAULT '' NOT NULL"),
+);
