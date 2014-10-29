@@ -2088,11 +2088,12 @@ function spip_initialisation_suite() {
 	#if (!defined('_LOGO_MAX_WIDTH')) define('_LOGO_MAX_WIDTH', 0); # largeur en pixels
 	#if (!defined('_LOGO_MAX_HEIGHT')) define('_LOGO_MAX_HEIGHT', 0); # hauteur en pixels
 
-	if (!defined('_DOC_MAX_SIZE')) define('_DOC_MAX_SIZE', 0); # poids en ko
+	// la taille maxi des images (0 : pas de limite) (pas de define par defaut, ce n'est pas utile)
+	#if (!defined('_DOC_MAX_SIZE')) define('_DOC_MAX_SIZE', 0); # poids en ko
+	#if (!defined('_IMG_MAX_SIZE')) define('_IMG_MAX_SIZE', 0); # poids en ko
+	#if (!defined('_IMG_MAX_WIDTH')) define('_IMG_MAX_WIDTH', 0); # largeur en pixels
+	#if (!defined('_IMG_MAX_HEIGHT')) define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
 
-	if (!defined('_IMG_MAX_SIZE')) define('_IMG_MAX_SIZE', 0); # poids en ko
-	if (!defined('_IMG_MAX_WIDTH')) define('_IMG_MAX_WIDTH', 0); # largeur en pixels
-	if (!defined('_IMG_MAX_HEIGHT')) define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
 	if (!defined('_PASS_LONGUEUR_MINI')) define('_PASS_LONGUEUR_MINI',6);
 
 
